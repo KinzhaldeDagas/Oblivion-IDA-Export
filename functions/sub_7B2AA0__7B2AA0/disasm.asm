@@ -24,7 +24,7 @@
 0x7B2AF5: lea     ecx, [esp+614h+var_568]; this
 0x7B2AFC: mov     [esp+614h+var_5C4], edi
 0x7B2B00: call    ??0NiStream@@QAE@XZ; NiStream::NiStream(void)
-0x7B2B05: mov     [esp+614h+var_568], offset ??_7BSStream@@6B@; const BSStream::`vftable'
+0x7B2B05: mov     dword ptr [esp+614h+var_568], offset ??_7BSStream@@6B@; const BSStream::`vftable'
 0x7B2B10: mov     [esp+614h+var_DC], ebp
 0x7B2B17: mov     [esp+614h+var_E0], ebp
 0x7B2B1E: mov     eax, [esi+8]
@@ -94,7 +94,7 @@
 0x7B2BF1: cmp     edi, ebp
 0x7B2BF3: jz      short loc_7B2BB0
 0x7B2BF5: push    edi
-0x7B2BF6: push    offset dword_B3FD04
+0x7B2BF6: push    offset stru_B3FD04
 0x7B2BFB: call    NiRTTI_Cast
 0x7B2C00: xor     ebx, ebx
 0x7B2C02: add     esp, 8
@@ -107,12 +107,12 @@
 0x7B2C1D: mov     [esp+614h+var_5E4], ebx
 0x7B2C21: jnz     loc_7B2FE5
 0x7B2C27: push    edi
-0x7B2C28: push    offset dword_B3FCD4
+0x7B2C28: push    offset stru_B3FCD4
 0x7B2C2D: mov     [esp+61Ch+var_5ED], 0
 0x7B2C32: call    NiRTTI_Cast
 0x7B2C37: mov     edi, [edi+0B4h]
 0x7B2C3D: push    edi
-0x7B2C3E: push    offset dword_B3FD2C
+0x7B2C3E: push    offset stru_B3FD2C
 0x7B2C43: call    NiRTTI_Cast
 0x7B2C48: mov     edx, [eax+1Ch]
 0x7B2C4B: movzx   ecx, word ptr [eax+8]
@@ -189,9 +189,9 @@
 0x7B2D2B: push    10h
 0x7B2D2D: push    ebx
 0x7B2D2E: call    sub_401080
-0x7B2D33: mov     [esp+614h+var_5E0], ebx
+0x7B2D33: mov     [esp+614h+destination], ebx
 0x7B2D37: jmp     short loc_7B2D41
-0x7B2D39: mov     [esp+614h+var_5E0], 0
+0x7B2D39: mov     [esp+614h+destination], 0
 0x7B2D41: xor     ecx, ecx
 0x7B2D43: mov     eax, ebp
 0x7B2D45: mov     edx, 8
@@ -240,11 +240,11 @@
 0x7B2DC7: mov     [esp+614h+Size], eax
 0x7B2DCB: mov     eax, [esp+614h+Dst]
 0x7B2DCF: mov     [esp+614h+var_5F4], eax
-0x7B2DD3: mov     eax, [esp+614h+var_5E0]
+0x7B2DD3: mov     eax, [esp+614h+destination]
 0x7B2DD7: mov     [esp+614h+var_5DC], eax
 0x7B2DDB: mov     eax, [esp+614h+var_5AC]
 0x7B2DDF: mov     [esp+614h+var_5C8], ecx
-0x7B2DE3: mov     [esp+614h+var_5A0], edx
+0x7B2DE3: mov     [esp+614h+source], edx
 0x7B2DE7: mov     [esp+614h+var_5D0], ebx
 0x7B2DEB: mov     [esp+614h+var_5D8], eax
 0x7B2DEF: nop
@@ -318,7 +318,7 @@
 0x7B2EF9: fstp    st
 0x7B2EFB: mov     esi, [esp+614h+var_584]
 0x7B2F02: mov     ecx, [esp+614h+var_5C8]
-0x7B2F06: mov     edx, [esp+614h+var_5A0]
+0x7B2F06: mov     edx, [esp+614h+source]
 0x7B2F0A: xor     eax, eax
 0x7B2F0C: cmp     [esp+614h+var_5FC], eax
 0x7B2F10: jle     short loc_7B2F35
@@ -373,7 +373,7 @@
 0x7B2FC4: push    0
 0x7B2FC6: push    1
 0x7B2FC8: push    ecx
-0x7B2FC9: mov     ecx, [esp+630h+var_5E0]
+0x7B2FC9: mov     ecx, [esp+630h+destination]
 0x7B2FCD: push    ecx
 0x7B2FCE: mov     ecx, [esp+634h+Dst]
 0x7B2FD2: push    ecx
@@ -385,7 +385,7 @@
 0x7B2FE0: jmp     loc_7B33E1
 0x7B2FE5: mov     edi, [edi+0B4h]
 0x7B2FEB: push    edi
-0x7B2FEC: push    offset dword_B3FD0C
+0x7B2FEC: push    offset stru_B3FD0C
 0x7B2FF1: mov     [esp+61Ch+var_5ED], 1
 0x7B2FF6: call    NiRTTI_Cast
 0x7B2FFB: mov     edx, [eax+1Ch]
@@ -393,7 +393,7 @@
 0x7B3002: mov     edi, [eax+48h]
 0x7B3005: mov     [esp+61Ch+Src], edx
 0x7B3009: mov     edx, [eax+20h]
-0x7B300C: mov     [esp+61Ch+var_5A0], edx
+0x7B300C: mov     [esp+61Ch+source], edx
 0x7B3010: mov     edx, [eax+24h]
 0x7B3013: mov     [esp+61Ch+var_5A4], edx
 0x7B3017: mov     edx, [eax+28h]
@@ -546,38 +546,37 @@
 0x7B31D1: add     ebx, ebx
 0x7B31D3: sub     eax, ecx
 0x7B31D5: mov     [esp+614h+var_5A8], edi
-0x7B31D9: mov     [esp+614h+var_5E0], edx
+0x7B31D9: mov     [esp+614h+destination], edx
 0x7B31DD: mov     [esp+614h+Dst], ecx
 0x7B31E1: mov     [esp+614h+var_600], eax
 0x7B31E5: jmp     short loc_7B31F0
-0x7B31E7: align 10h
 0x7B31F0: mov     eax, [esp+614h+Src]
 0x7B31F4: mov     ecx, [esp+614h+var_600]
 0x7B31F8: mov     edi, [esp+614h+Dst]
-0x7B31FC: push    ebx; Size
-0x7B31FD: push    eax; Src
+0x7B31FC: push    ebx; byteCount
+0x7B31FD: push    eax; source
 0x7B31FE: add     ecx, edi
-0x7B3200: push    ecx; Dst
-0x7B3201: call    _memcpy
-0x7B3206: mov     edx, [esp+620h+var_5A0]
-0x7B320D: push    ebx; Size
-0x7B320E: push    edx; Src
-0x7B320F: push    edi; Dst
-0x7B3210: call    _memcpy
+0x7B3200: push    ecx; destination
+0x7B3201: call    _memcpy;
+0x7B3206: mov     edx, [esp+620h+source]
+0x7B320D: push    ebx; byteCount
+0x7B320E: push    edx; source
+0x7B320F: push    edi; destination
+0x7B3210: call    _memcpy;
 0x7B3215: mov     eax, [esp+62Ch+Size]
 0x7B3219: mov     ecx, [esp+62Ch+var_5A4]
-0x7B3220: mov     edx, [esp+62Ch+var_5E0]
-0x7B3224: push    eax; Size
-0x7B3225: push    ecx; Src
-0x7B3226: push    edx; Dst
-0x7B3227: call    _memcpy
+0x7B3220: mov     edx, [esp+62Ch+destination]
+0x7B3224: push    eax; byteCount
+0x7B3225: push    ecx; source
+0x7B3226: push    edx; destination
+0x7B3227: call    _memcpy;
 0x7B322C: mov     ecx, [esp+638h+var_5F4]
 0x7B3230: lea     eax, ds:0[esi*8]
-0x7B3237: push    eax; Size
+0x7B3237: push    eax; byteCount
 0x7B3238: mov     eax, [esp+63Ch+var_59C]
-0x7B323F: push    eax; Src
-0x7B3240: push    ecx; Dst
-0x7B3241: call    _memcpy
+0x7B323F: push    eax; source
+0x7B3240: push    ecx; destination
+0x7B3241: call    _memcpy;
 0x7B3246: add     esp, 30h
 0x7B3249: test    esi, esi
 0x7B324B: jle     short loc_7B3261
@@ -637,7 +636,7 @@
 0x7B32FF: mov     [ecx+ebp*2], dx
 0x7B3303: add     ebp, 1
 0x7B3306: mov     ecx, [esp+614h+Size]
-0x7B330A: add     [esp+614h+var_5E0], ecx
+0x7B330A: add     [esp+614h+destination], ecx
 0x7B330E: mov     eax, [esp+614h+var_5FC]
 0x7B3312: movzx   edi, word ptr [esp+614h+var_5E4]
 0x7B3317: add     [esp+614h+Dst], ebx
@@ -711,7 +710,7 @@
 0x7B33F1: push    6
 0x7B33F3: mov     ecx, ebx
 0x7B33F5: mov     byte ptr [esp+618h+var_4], 6
-0x7B33FD: call    NiNode_GetNiPropertyByID
+0x7B33FD: call    NiNode_GetNiPropertyByID;
 0x7B3402: test    eax, eax
 0x7B3404: jz      short loc_7B3424
 0x7B3406: mov     edx, [eax+20h]
@@ -791,7 +790,7 @@
 0x7B34FF: mov     byte ptr [esp+618h+var_4], 6
 0x7B3507: mov     byte ptr [ebp+1Ah], 0
 0x7B350B: mov     [ebp+18h], dx
-0x7B350F: call    NiNode_GetNiPropertyByID
+0x7B350F: call    NiNode_GetNiPropertyByID;
 0x7B3514: mov     [esp+614h+var_600], eax
 0x7B3518: mov     eax, [ebx+0B4h]
 0x7B351E: mov     ecx, [eax+0Ch]
@@ -809,7 +808,7 @@
 0x7B3552: xor     ebx, ebx
 0x7B3554: test    ebp, ebp
 0x7B3556: jz      short loc_7B3585
-0x7B3558: push    offset NiRefObject_objcount; lpAddend
+0x7B3558: push    0B3FD64h; lpAddend
 0x7B355D: mov     dword ptr [ebp+0], offset ??_7NiRefObject@@6B@; const NiRefObject::`vftable'
 0x7B3564: mov     [ebp+4], ebx
 0x7B3567: call    dword ptr ds:0A28078h
@@ -980,7 +979,7 @@
 0x7B3728: test    eax, eax
 0x7B372A: jz      short loc_7B373E
 0x7B372C: lea     esp, [esp+0]
-0x7B3730: cmp     eax, offset dword_B3FD4C
+0x7B3730: cmp     eax, offset stru_B3FD4C
 0x7B3735: jz      short loc_7B3797
 0x7B3737: mov     eax, [eax+4]
 0x7B373A: test    eax, eax
@@ -1036,7 +1035,7 @@
 0x7B37CB: lea     ecx, [esp+614h+var_D8]
 0x7B37D2: push    ebp; _DWORD
 0x7B37D3: push    ecx; _DWORD
-0x7B37D4: call    eax ; dword_B42E8C
+0x7B37D4: call    eax ; unk_B42E8C
 0x7B37D6: add     esp, 8
 0x7B37D9: test    ebp, ebp
 0x7B37DB: mov     byte ptr [esp+614h+var_4], 0
@@ -1067,3 +1066,50 @@
 0x7B3833: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x7B3838: add     esp, 600h
 0x7B383E: retn
+0x9CD930: lea     ecx, [ebp-568h]; this
+0x9CD936: jmp     ??1BSStream@@UAE@XZ; BSStream::~BSStream(void)
+0x9CD93B: lea     ecx, [ebp-5B0h]; slot
+0x9CD941: jmp     NiPointerSlot_Release
+0x9CD946: mov     eax, [ebp-600h]
+0x9CD94C: push    eax
+0x9CD94D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CD952: pop     ecx
+0x9CD953: retn
+0x9CD954: mov     eax, [ebp-5BCh]
+0x9CD95A: push    eax
+0x9CD95B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CD960: pop     ecx
+0x9CD961: retn
+0x9CD962: mov     eax, [ebp-5F8h]
+0x9CD968: push    eax
+0x9CD969: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CD96E: pop     ecx
+0x9CD96F: retn
+0x9CD970: mov     eax, [ebp-5BCh]
+0x9CD976: push    eax
+0x9CD977: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CD97C: pop     ecx
+0x9CD97D: retn
+0x9CD97E: lea     ecx, [ebp-5FCh]; slot
+0x9CD984: jmp     NiPointerSlot_Release
+0x9CD989: mov     eax, [ebp-600h]
+0x9CD98F: push    eax
+0x9CD990: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CD995: pop     ecx
+0x9CD996: retn
+0x9CD997: mov     eax, [ebp-600h]
+0x9CD99D: push    eax
+0x9CD99E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CD9A3: pop     ecx
+0x9CD9A4: retn
+0x9CD9A5: mov     edx, [esp+arg_4]
+0x9CD9A9: lea     eax, [edx-604h]
+0x9CD9AF: mov     ecx, [edx-608h]
+0x9CD9B5: xor     ecx, eax
+0x9CD9B7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CD9BC: add     eax, 10h
+0x9CD9BF: mov     ecx, [edx-4]
+0x9CD9C2: xor     ecx, eax
+0x9CD9C4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CD9C9: mov     eax, offset stru_AF6B5C
+0x9CD9CE: jmp     ___CxxFrameHandler3

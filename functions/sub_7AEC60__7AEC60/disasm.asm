@@ -1,4 +1,4 @@
-0x7AEC60: push    ebx
+0x7AEC60: push    ebx; Reference-counted NiD3DPass pixel-shader setter. Replaces pass+0x44 and AddRefs the new NiD3DPixelShader.
 0x7AEC61: push    esi
 0x7AEC62: mov     ebx, ecx
 0x7AEC64: mov     esi, [ebx+44h]

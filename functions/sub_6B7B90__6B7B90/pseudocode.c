@@ -1,5 +1,5 @@
 // attributes: thunk
-void __thiscall sub_6B7B90(unsigned int **this)
+void __thiscall j_Conversation::Destroy(ConversationView *this)
 {
-  sub_6B7450(this);
+  Conversation::Destroy(this); /*0x6b7b90*/
 }

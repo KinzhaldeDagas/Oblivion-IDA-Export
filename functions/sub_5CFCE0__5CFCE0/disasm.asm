@@ -27,9 +27,9 @@
 0x5CFD25: mov     eax, ds:0B33398h
 0x5CFD2A: mov     ecx, [eax+24h]
 0x5CFD2D: call    sub_6AC3D0
-0x5CFD32: push    0Bh
-0x5CFD34: push    5
-0x5CFD36: call    TESTopic__GEtTopic
+0x5CFD32: push    0Bh; index
+0x5CFD34: push    5; topicType
+0x5CFD36: call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.
 0x5CFD3B: mov     ecx, ds:0B333C4h
 0x5CFD41: mov     edx, [edi]
 0x5CFD43: mov     edx, [edx+0DCh]
@@ -44,10 +44,10 @@
 0x5CFD58: fstp    st
 0x5CFD5A: fld1
 0x5CFD5C: push    ecx
-0x5CFD5D: fstp    [esp+10h+a3]; a3
+0x5CFD5D: fstp    [esp+10h+a3]; value
 0x5CFD60: mov     ecx, ebx; this
-0x5CFD62: push    0FAEh; a2
-0x5CFD67: call    Tile_SetFloat
+0x5CFD62: push    0FAEh; propertyCode
+0x5CFD67: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5CFD6C: push    0; ArgList
 0x5CFD6E: mov     ecx, esi
 0x5CFD70: call    sub_5CEF60

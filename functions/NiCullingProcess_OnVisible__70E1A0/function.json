@@ -1,18 +1,31 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x70E1A0",
+      "0x70E213"
+    ]
+  ],
+  "chunks_sha256": "47be699091aaac8a57e1f0a4a751c1710f2d1e3f80e49e3a64e8801ec572bb4a",
+  "comment_regular": "CULLING audit 2026-09-27 (observed Oblivion behavior): Geometry submission boundary reached by 0x7227A0. With +0x08 array: +0x04 UseAppendVirtual selects vtable+0x0C, otherwise append to {data +0,size +4,capacity +8,growBy +0xC}. Without array: accumulator+0x58 registers geometry; absent accumulator or false low-byte result invokes geometry Render(+0x84). CULLING's rendererForwards observes entry handoffs, not this branch outcome or GPU draws.\n\nCulling.dll decode: NiCullingProcess::OnVisible. With VisibleGeo, appends NiGeometry into the visible array; without VisibleGeo, queues to the active accumulator slot +0x58 or renders directly as fallback.",
+  "comment_repeatable": "MoonSugarEffect decode: NiCullingProcess::OnVisible. With VisibleGeo, appends NiGeometry into array {data,count,capacity,grow}; without VisibleGeo, queues to active accumulator vtable +0x58 or directly renders as fallback.\nDX11 GPU-world migration 2026-09-27, observed in OblivionNew: VisibleGeo nonnull uses AppendVirtual when the flag is set, otherwise grows/appends the geometry pointer array. With no VisibleGeo, accumulator vfunc+58 may accept the geometry; absent accumulator or false low-byte result calls geometry Render immediately. A GPU submission replacement must preserve these routes and opaque EAX behavior; merely omitting OnVisible is not a complete scene-semantics implementation.\n\nMEF LARGE PERF 2026-09-08: Qualified, not promoted: VisibleGeo append grows via732200 by fixed increment when full, but this audit did not establish array lifetime/reuse or recurring per-frame reallocations. Do not claim steady frame churn merely from an append growth branch.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "NiCullingProcess::OnVisible",
   "end_ea": "0x70E213",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "NiCullingProcess::OnVisible",
   "segment": ".text",
   "sha256": "47be699091aaac8a57e1f0a4a751c1710f2d1e3f80e49e3a64e8801ec572bb4a",
   "size": 115,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x70E1A0",
+  "total_chunk_size": 115,
   "type": "const void *__thiscall(NiCullingProcess *this, NiGeometry *a2)",
   "xrefs_from_count": 47,
   "xrefs_to_count": 1

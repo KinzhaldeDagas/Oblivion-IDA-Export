@@ -5,7 +5,7 @@
 0x596BC7: push    edi
 0x596BC8: push    0FAAh
 0x596BCD: call    Tile_GetFloat
-0x596BD2: call    Double_To_SInt32
+0x596BD2: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x596BD7: mov     esi, ds:0B33A98h
 0x596BDD: xor     ebx, ebx
 0x596BDF: xor     edi, edi
@@ -19,7 +19,7 @@
 0x596BF0: jg      short loc_596C09
 0x596BF2: mov     edi, eax
 0x596BF4: mov     ecx, edi
-0x596BF6: call    TESClass_IsPlayable
+0x596BF6: call    TESClass_IsPlayable; TESClass_IsPlayable reads classFlags at +0x60 bit 0.
 0x596BFB: test    al, al
 0x596BFD: jz      short loc_596C02
 0x596BFF: add     ebx, 1

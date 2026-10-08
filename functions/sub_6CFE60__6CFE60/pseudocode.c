@@ -1,5 +1,5 @@
 // attributes: thunk
-int __stdcall sub_6CFE60(int a2)
+char __stdcall j_j_NiTimeController_RegisterStreamables(int a1)
 {
-  return sub_754EA0(a2);
+  return j_NiTimeController_RegisterStreamables(a1);
 }

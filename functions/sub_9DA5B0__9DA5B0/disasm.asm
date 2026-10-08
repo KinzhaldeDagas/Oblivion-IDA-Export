@@ -2,7 +2,7 @@
 0x9DA5B6: push    ecx
 0x9DA5B7: fstp    [esp+4+var_4]; float
 0x9DA5BA: push    offset aFmagicspraymax; "fMagicSprayMaximumDistance"
-0x9DA5BF: mov     ecx, offset fMagicSprayMaximumDistance
+0x9DA5BF: mov     ecx, 0B336B4h
 0x9DA5C4: call    GameSetting_ConstrAndReg_float
 0x9DA5C9: push    offset sub_A17850; void (__cdecl *)()
 0x9DA5CE: call    _atexit

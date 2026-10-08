@@ -1,28 +1,54 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_ACTIVATION_CONTEXT_RUN_LEVEL_INFORMATION",
+  "definition": "struct _ACTIVATION_CONTEXT_RUN_LEVEL_INFORMATION\n{\nDWORD ulFlags;\nACTCTX_REQUESTED_RUN_LEVEL RunLevel;\nDWORD UiAccess;\n}\n",
   "id": 18374686479672046060,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ulFlags",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RunLevel",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "ACTCTX_REQUESTED_RUN_LEVEL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "UiAccess",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     }
   ],
   "name": "_ACTIVATION_CONTEXT_RUN_LEVEL_INFORMATION",
+  "ordinal": 8328,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 12
 }

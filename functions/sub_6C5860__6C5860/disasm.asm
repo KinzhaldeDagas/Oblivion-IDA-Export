@@ -1,4 +1,4 @@
-0x6C5860: push    0FFFFFFFFh
+0x6C5860: push    0FFFFFFFFh; Obtains an inactive __TempBlendSequence__ with enough controlled blocks or allocates one, rebuilds it from the destination/optional source pose, resets it, and registers it with the controller manager. This temporary sequence is manager-owned transition scaffolding.
 0x6C5862: push    offset SEH_6C5860
 0x6C5867: mov     eax, large fs:0
 0x6C586D: push    eax
@@ -38,7 +38,7 @@
 0x6C58C7: lea     edx, [esp+2Ch+var_10]
 0x6C58CB: push    edx
 0x6C58CC: mov     ecx, ebx
-0x6C58CE: call    sub_6C4A10
+0x6C58CE: call    KeyframeManager_RemoveSequence; CustomAnimSupport decode: removes a sequence from the keyframe manager during live sequence pruning/cleanup.
 0x6C58D3: mov     edi, [esp+28h+var_10]
 0x6C58D7: test    edi, edi
 0x6C58D9: jz      short loc_6C58F3
@@ -80,7 +80,7 @@
 0x6C5942: push    ecx
 0x6C5943: mov     ecx, ebx
 0x6C5945: mov     esi, eax
-0x6C5947: call    sub_6C4A10
+0x6C5947: call    KeyframeManager_RemoveSequence; CustomAnimSupport decode: removes a sequence from the keyframe manager during live sequence pruning/cleanup.
 0x6C594C: mov     edi, [esp+28h+var_10]
 0x6C5950: test    edi, edi
 0x6C5952: jz      short loc_6C596C
@@ -103,11 +103,11 @@
 0x6C597B: call    sub_6C9F10
 0x6C5980: mov     ecx, esi
 0x6C5982: call    sub_6C78B0
-0x6C5987: push    0
-0x6C5989: push    0
-0x6C598B: push    esi
-0x6C598C: mov     ecx, ebx
-0x6C598E: call    sub_6C5760
+0x6C5987: push    0; validateControlledBlocks
+0x6C5989: push    0; name
+0x6C598B: push    esi; sequence
+0x6C598C: mov     ecx, ebx; this
+0x6C598E: call    NiControllerManager_AddSequence; Adds a controller sequence to a NiControllerManager: rejects an already-owned sequence, binds manager, optionally validates controlled blocks, stores name mapping/list membership, and balances the temporary reference.
 0x6C5993: mov     eax, esi
 0x6C5995: mov     ecx, dword ptr [esp+28h+var_C]
 0x6C5999: mov     large fs:0, ecx
@@ -144,3 +144,17 @@
 0x6C59F8: mov     ecx, esi
 0x6C59FA: call    eax
 0x6C59FC: jmp     loc_6C596C
+0x9C74A0: mov     eax, [ebp-10h]
+0x9C74A3: push    eax
+0x9C74A4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C74A9: pop     ecx
+0x9C74AA: retn
+0x9C74AB: lea     ecx, [ebp-10h]; slot
+0x9C74AE: jmp     NiPointerSlot_Release
+0x9C74B3: mov     edx, [esp+arg_4]
+0x9C74B7: lea     eax, [edx-18h]
+0x9C74BA: mov     ecx, [edx-1Ch]
+0x9C74BD: xor     ecx, eax
+0x9C74BF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C74C4: mov     eax, offset stru_AEF8FC
+0x9C74C9: jmp     ___CxxFrameHandler3

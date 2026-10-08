@@ -1,4 +1,4 @@
-void *sub_9A23A0()
+NiRTTI *sub_9A23A0()
 {
-  return &unk_BAA890;
+  return &stru_BAA890; /*0x9a23a5*/
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x677C70",
-    "line": "push    ecx",
+    "line": "push    ecx; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.",
     "mnemonic": "push",
     "size": 1
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x677C76",
-    "line": "mov     esi, [esp+8+arg_0]",
+    "line": "mov     esi, [esp+8+outData]",
     "mnemonic": "mov",
     "size": 4
   },

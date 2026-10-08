@@ -1,5 +1,5 @@
-int sub_9F9840()
+int InitSetting_sSkillNameBlock()
 {
-  GameSetting_ConstrAndReg((int *)&unk_B3A0AC, (int)"sSkillNameBlock", (int)"Block");
-  return atexit(sub_A23990);
+  GameSetting_ConstrAndReg(&g_sSkillNameBlock, "sSkillNameBlock", "Block"); /*0x9f984f*/
+  return atexit(sub_A23990); /*0x9f985f*/
 }

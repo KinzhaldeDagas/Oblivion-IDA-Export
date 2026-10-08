@@ -1,1 +1,1 @@
-NiBSplineInterpolator
+struct NiBSplineInterpolator;

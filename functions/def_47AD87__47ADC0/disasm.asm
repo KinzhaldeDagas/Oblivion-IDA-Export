@@ -8,17 +8,17 @@
 0x47ADD5: mov     esi, [esp+arg_20]
 0x47ADD9: test    esi, esi
 0x47ADDB: jz      short loc_47AE46
-0x47ADDD: lea     ecx, [esp+arg_3C]
-0x47ADE1: push    ecx
-0x47ADE2: mov     ecx, esi
-0x47ADE4: call    sub_5221C0
+0x47ADDD: lea     ecx, [esp+outAbsolute]
+0x47ADE1: push    ecx; outAbsolute
+0x47ADE2: mov     ecx, esi; this
+0x47ADE4: call    TESNPC_BuildAbsoluteFaceGenParameters; Builds absolute FaceGen parameters by combining race base with active NPC delta. CORRECTION: bank selection uses base actor value 0x45 (vampirism), zero -> +0x108, nonzero -> +0x168; earlier sex-selected description was incorrect. Null race copies manager default parameters.
 0x47ADE9: mov     ebp, [esp+arg_10]
 0x47ADED: mov     ecx, [esi+0E8h]
 0x47ADF3: push    ebp
 0x47ADF4: push    esi
 0x47ADF5: lea     edx, [esp+8+arg_1C]
 0x47ADF9: push    edx
-0x47ADFA: lea     eax, [esp+0Ch+arg_14]
+0x47ADFA: lea     eax, [esp+0Ch+texture]
 0x47ADFE: push    eax
 0x47ADFF: call    sub_52D2C0
 0x47AE04: test    al, al
@@ -40,26 +40,26 @@
 0x47AE39: call    PrintError
 0x47AE3E: add     esp, 10h
 0x47AE41: jmp     loc_47AFD2
-0x47AE46: mov     ecx, [esp+arg_18]
+0x47AE46: mov     ecx, [esp+arg_18]; this
 0x47AE4A: test    ecx, ecx
 0x47AE4C: jz      short loc_47AE7D
-0x47AE4E: call    sub_700900
-0x47AE53: mov     ecx, [esp+arg_14]
+0x47AE4E: call    NiObject_CloneWithPointerMap; Clones a loaded NiObject with a temporary pointer map and runs clone post-processing; the returned scene object is distinct from its source.
+0x47AE53: mov     ecx, [esp+texture]
 0x47AE57: mov     esi, eax
-0x47AE59: push    ecx
-0x47AE5A: mov     ecx, esi
-0x47AE5C: call    NiTexturingProperty__SetUnk08
+0x47AE59: push    ecx; texture
+0x47AE5A: mov     ecx, esi; this
+0x47AE5C: call    OB_NiTexturingProperty_SetBaseTexture_010201A0
 0x47AE61: push    6
 0x47AE63: lea     edx, [esp+4+arg_18]
 0x47AE67: push    edx
 0x47AE68: mov     ecx, edi
 0x47AE6A: call    sub_708560
-0x47AE6F: lea     ecx, [esp+arg_18]; this
-0x47AE73: call    sub_7016A0
+0x47AE6F: lea     ecx, [esp+arg_18]; slot
+0x47AE73: call    NiPointerSlot_Release
 0x47AE78: jmp     loc_47AFCA
 0x47AE7D: push    4
 0x47AE7F: mov     ecx, edi
-0x47AE81: call    NiNode_GetNiPropertyByID
+0x47AE81: call    NiNode_GetNiPropertyByID;
 0x47AE86: mov     ebp, eax
 0x47AE88: test    ebp, ebp
 0x47AE8A: jz      short loc_47AEB1
@@ -82,7 +82,7 @@
 0x47AEB5: sbb     esi, esi
 0x47AEB7: and     esi, ebp
 0x47AEB9: jz      loc_47AF8F
-0x47AEBF: mov     ecx, [esp+arg_14]
+0x47AEBF: mov     ecx, [esp+texture]
 0x47AEC3: mov     eax, [esi]
 0x47AEC5: mov     edx, [eax+80h]
 0x47AECB: push    ecx
@@ -91,7 +91,7 @@
 0x47AED0: call    edx
 0x47AED2: mov     eax, [esp+8+arg_C]
 0x47AED6: push    eax
-0x47AED7: push    offset dword_B3F95C
+0x47AED7: push    offset stru_B3F95C
 0x47AEDC: call    NiRTTI_Cast
 0x47AEE1: add     esp, 8
 0x47AEE4: xor     ecx, ecx
@@ -99,22 +99,22 @@
 0x47AEE8: jz      short loc_47AEED
 0x47AEEA: mov     ecx, [eax+38h]
 0x47AEED: push    offset a_n; "_n"
-0x47AEF2: push    ecx
-0x47AEF3: lea     ecx, [esp+10h+Src]
-0x47AEFA: push    ecx
-0x47AEFB: call    sub_7B4160
+0x47AEF2: push    ecx; sourcePath
+0x47AEF3: lea     ecx, [esp+10h+outAbsolute.matrices.end+48h]
+0x47AEFA: push    ecx; outPath
+0x47AEFB: call    BuildTextureVariantPath; Builds a sibling texture variant path. Keeps the original extension, truncates the basename at its final underscore after the last separator, appends the requested suffix, and prefixes Data\\ for relative paths.
 0x47AF00: add     esp, 0Ch
-0x47AF03: cmp     [esp+8+Src], 0
+0x47AF03: cmp     byte ptr [esp+8+outAbsolute.matrices.end+48h], 0
 0x47AF0B: jz      short loc_47AF56
-0x47AF0D: push    1; char
-0x47AF0F: push    1; char
-0x47AF11: lea     edx, [esp+10h+Src]
-0x47AF18: push    edx; Src
-0x47AF19: lea     eax, [esp+14h+arg_8]
-0x47AF1D: push    eax; int
-0x47AF1E: call    sub_7B8200
+0x47AF0D: push    1; requireMipmaps
+0x47AF0F: push    1; loadFromCache
+0x47AF11: lea     edx, [esp+10h+outAbsolute.matrices.end+48h]
+0x47AF18: push    edx; path
+0x47AF19: lea     eax, [esp+14h+outTexture]
+0x47AF1D: push    eax; outTexture
+0x47AF1E: call    NiSourceTexture_LoadChecked; Loads/caches a NiSourceTexture by filename and optionally rejects a loaded texture that lacks mipmaps. The first argument is the returned smart-pointer storage.
 0x47AF23: add     esp, 10h
-0x47AF26: mov     eax, [esp+8+arg_8]
+0x47AF26: mov     eax, [esp+8+outTexture]
 0x47AF2A: test    eax, eax
 0x47AF2C: mov     byte ptr [esp+8+arg_1A4], 3
 0x47AF34: jz      short loc_47AF45
@@ -124,9 +124,9 @@
 0x47AF3F: push    0
 0x47AF41: mov     ecx, esi
 0x47AF43: call    eax
-0x47AF45: lea     ecx, [esp+10h+arg_0]; this
+0x47AF45: lea     ecx, [esp+10h+slot]; slot
 0x47AF49: mov     byte ptr [esp+10h+arg_19C], 2
-0x47AF51: call    sub_7016A0
+0x47AF51: call    NiPointerSlot_Release
 0x47AF56: mov     eax, [esp+10h+arg_C]
 0x47AF5A: mov     edx, [esi]
 0x47AF5C: mov     edx, [edx+80h]
@@ -157,14 +157,14 @@
 0x47AFB0: mov     esi, eax
 0x47AFB2: jmp     short loc_47AFB6
 0x47AFB4: xor     esi, esi
-0x47AFB6: mov     ecx, [esp+arg_14]
-0x47AFBA: push    ecx
-0x47AFBB: mov     ecx, esi
+0x47AFB6: mov     ecx, [esp+texture]
+0x47AFBA: push    ecx; texture
+0x47AFBB: mov     ecx, esi; this
 0x47AFBD: mov     [esp+4+arg_1AC], 2
-0x47AFC5: call    NiTexturingProperty__SetUnk08
+0x47AFC5: call    OB_NiTexturingProperty_SetBaseTexture_010201A0
 0x47AFCA: push    esi; a2
 0x47AFCB: mov     ecx, edi; this
-0x47AFCD: call    sub_405680
+0x47AFCD: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x47AFD2: mov     eax, [esp+arg_1C]
 0x47AFD6: test    eax, eax
 0x47AFD8: mov     edi, ds:0A2807Ch
@@ -199,7 +199,7 @@
 0x47B024: push    1
 0x47B026: mov     ecx, esi
 0x47B028: call    eax
-0x47B02A: push    offset sub_43ACE0; void (__thiscall *)(void *)
+0x47B02A: push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)
 0x47B02F: push    4; int
 0x47B031: push    18h; unsigned int
 0x47B033: lea     ecx, [esp+14h+arg_34]

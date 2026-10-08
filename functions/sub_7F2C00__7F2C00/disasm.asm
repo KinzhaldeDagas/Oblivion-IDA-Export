@@ -59,7 +59,7 @@
 0x7F2CCA: lea     ecx, [esp+38h+var_2C]
 0x7F2CCE: fadd    qword ptr ds:0A2F928h
 0x7F2CD4: fstp    dword ptr [esp+38h+var_2C+4]
-0x7F2CD8: call    sub_43F350
+0x7F2CD8: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x7F2CDD: fstp    st
 0x7F2CDF: fld     dword ptr [esi+150h]
 0x7F2CE5: fstp    [esp+38h+arg_0]

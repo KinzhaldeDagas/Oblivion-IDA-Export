@@ -1,4 +1,4 @@
-0x5D7090: push    0FFFFFFFFh
+0x5D7090: push    0FFFFFFFFh; [Controller decode 2026-07-09] Non-player QueryControlState consumer: Wait control 16 closes/cancels Sleep/Wait menu after release gating.
 0x5D7092: push    offset ProcessSleepWaitMenu_SEH
 0x5D7097: mov     eax, large fs:0
 0x5D709D: push    eax
@@ -20,14 +20,14 @@
 0x5D70D8: push    1; a3
 0x5D70DA: push    10h; a2
 0x5D70DC: mov     ecx, esi; this
-0x5D70DE: call    InputGlobals__QueryControlState
+0x5D70DE: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x5D70E3: xor     ebx, ebx
 0x5D70E5: test    eax, eax
 0x5D70E7: jnz     short loc_5D7100
 0x5D70E9: push    ebx; a3
 0x5D70EA: push    10h; a2
 0x5D70EC: mov     ecx, esi; this
-0x5D70EE: call    InputGlobals__QueryControlState
+0x5D70EE: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x5D70F3: test    eax, eax
 0x5D70F5: jnz     short loc_5D7100
 0x5D70F7: mov     byte ptr ds:0B3B729h, 1
@@ -37,7 +37,7 @@
 0x5D7108: push    1; a3
 0x5D710A: push    10h; a2
 0x5D710C: mov     ecx, esi; this
-0x5D710E: call    InputGlobals__QueryControlState
+0x5D710E: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x5D7113: test    eax, eax
 0x5D7115: jz      short loc_5D7145
 0x5D7117: mov     ecx, ds:0B333C4h; this
@@ -123,47 +123,47 @@
 0x5D7235: fld     dword ptr ds:0A6B328h
 0x5D723B: mov     ecx, [esi+28h]; this
 0x5D723E: push    ecx
-0x5D723F: fstp    [esp+34h+a2]; a3
-0x5D7242: push    0FB3h; a2
-0x5D7247: call    Tile_SetFloat
+0x5D723F: fstp    [esp+34h+a2]; value
+0x5D7242: push    0FB3h; propertyCode
+0x5D7247: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D724C: mov     eax, ds:0B333C4h
 0x5D7251: mov     ecx, [eax+590h]
 0x5D7257: mov     [esp+30h+var_20], ecx
 0x5D725B: mov     ecx, [esi+28h]; this
 0x5D725E: fild    [esp+30h+var_20]
 0x5D7262: push    ecx
-0x5D7263: fstp    [esp+34h+a2]; a3
-0x5D7266: push    0FB3h; a2
-0x5D726B: call    Tile_SetFloat
+0x5D7263: fstp    [esp+34h+a2]; value
+0x5D7266: push    0FB3h; propertyCode
+0x5D726B: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D7270: fldz
 0x5D7272: mov     ecx, [esi+28h]; this
 0x5D7275: push    ecx
-0x5D7276: fstp    [esp+34h+a2]; a3
-0x5D7279: push    0FB3h; a2
-0x5D727E: call    Tile_SetFloat
+0x5D7276: fstp    [esp+34h+a2]; value
+0x5D7279: push    0FB3h; propertyCode
+0x5D727E: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D7283: fld1
 0x5D7285: mov     ecx, [esi+44h]; this
 0x5D7288: push    ecx
-0x5D7289: fstp    [esp+34h+a2]; a3
-0x5D728C: push    0FA1h; a2
-0x5D7291: call    Tile_SetFloat
+0x5D7289: fstp    [esp+34h+a2]; value
+0x5D728C: push    0FA1h; propertyCode
+0x5D7291: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D7296: mov     [esp+30h+var_1C], ebx
 0x5D729A: mov     [esp+30h+var_18], bx
 0x5D729F: mov     [esp+30h+var_16], bx
-0x5D72A4: mov     ecx, offset TimeGlobals
+0x5D72A4: mov     ecx, 0B332E0h
 0x5D72A9: mov     [esp+30h+var_4], ebx
 0x5D72AD: call    TimeGlobals_GetGameHour
 0x5D72B2: fstp    [esp+30h+var_20]
 0x5D72B6: fld     [esp+30h+var_20]
 0x5D72BA: fld     st
-0x5D72BC: call    Double_To_SInt32
+0x5D72BC: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5D72C1: movsx   edx, al
 0x5D72C4: mov     [esp+30h+var_20], edx
 0x5D72C8: fild    [esp+30h+var_20]
 0x5D72CC: fsub    st(1), st
 0x5D72CE: fxch    st(1)
 0x5D72D0: fmul    qword ptr ds:0A2FCC8h
-0x5D72D6: call    Double_To_SInt32
+0x5D72D6: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5D72DB: fld1
 0x5D72DD: fcomp   st(1)
 0x5D72DF: mov     [esp+30h+var_21], al
@@ -179,7 +179,7 @@
 0x5D72FA: test    ah, 5
 0x5D72FD: jp      short loc_5D7301
 0x5D72FF: fsub    st, st(1)
-0x5D7301: call    Double_To_SInt32
+0x5D7301: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5D7306: fcompp
 0x5D7308: mov     cl, al
 0x5D730A: fnstsw  ax
@@ -192,7 +192,7 @@
 0x5D7321: movsx   ecx, cl
 0x5D7324: push    eax
 0x5D7325: push    ecx
-0x5D7326: mov     ecx, offset TimeGlobals
+0x5D7326: mov     ecx, 0B332E0h
 0x5D732B: call    TimeGlobals_GetGameDayOfWeekName
 0x5D7330: push    eax; ArgList
 0x5D7331: lea     edx, [esp+40h+var_1C]
@@ -207,8 +207,8 @@
 0x5D7350: call    Tile_SetString
 0x5D7355: lea     ecx, [esp+30h+var_14]
 0x5D7359: push    ecx
-0x5D735A: mov     ecx, offset TimeGlobals
-0x5D735F: call    sub_402E50
+0x5D735A: mov     ecx, 0B332E0h
+0x5D735F: call    TimeGlobals_FormatGameDate; Builds the in-game date string '%s %d, 3E%d' from a month-name table, game day, and game year. Observed in HUD and Sleep/Wait menu.
 0x5D7364: push    eax
 0x5D7365: lea     ecx, [esp+34h+var_1C]
 0x5D7369: mov     byte ptr [esp+34h+var_4], 1
@@ -232,3 +232,14 @@
 0x5D73B2: pop     ebx
 0x5D73B3: add     esp, 24h
 0x5D73B6: retn
+0x9C1CD0: lea     ecx, [ebp-1Ch]; void *
+0x9C1CD3: jmp     BSStringT_Clear
+0x9C1CD8: lea     ecx, [ebp-14h]; void *
+0x9C1CDB: jmp     BSStringT_Clear
+0x9C1CE0: mov     edx, [esp+arg_4]
+0x9C1CE4: lea     eax, [edx-20h]
+0x9C1CE7: mov     ecx, [edx-24h]
+0x9C1CEA: xor     ecx, eax
+0x9C1CEC: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C1CF1: mov     eax, offset stru_AEACD8
+0x9C1CF6: jmp     ___CxxFrameHandler3

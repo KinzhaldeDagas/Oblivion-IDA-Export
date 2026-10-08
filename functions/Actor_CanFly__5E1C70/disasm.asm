@@ -20,4 +20,4 @@
 0x5E1C9A: pop     esi
 0x5E1C9B: mov     ecx, ebx; this
 0x5E1C9D: pop     ebx
-0x5E1C9E: jmp     TESActorBase_CanFly
+0x5E1C9E: jmp     TESActorBase_CanFly; TESActorBase_CanFly: creature base flag 0x20. Actor_FallImpact skips fall damage for can-fly actors; Slowfall/climb discipline should not overwrite natural flying behavior.

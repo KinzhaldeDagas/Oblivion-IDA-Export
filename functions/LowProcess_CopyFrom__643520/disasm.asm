@@ -83,8 +83,8 @@
 0x643601: mov     [edi+4], ecx
 0x643604: mov     edx, [esi+38h]
 0x643607: lea     eax, [esi+70h]
-0x64360A: push    eax
-0x64360B: lea     ecx, [edi+70h]
+0x64360A: push    eax; source
+0x64360B: lea     ecx, [edi+70h]; self
 0x64360E: mov     [edi+38h], edx
 0x643611: call    AVCollection_CopyFrom
 0x643616: fld     dword ptr [esi+88h]

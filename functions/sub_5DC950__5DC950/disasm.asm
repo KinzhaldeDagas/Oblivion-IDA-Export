@@ -29,7 +29,6 @@
 0x5DC9B8: push    ebp
 0x5DC9B9: push    edi
 0x5DC9BA: jmp     short loc_5DC9C4
-0x5DC9BC: align 10h
 0x5DC9C0: mov     eax, [esp+120h+var_10C]
 0x5DC9C4: mov     esi, [eax]
 0x5DC9C6: test    esi, esi
@@ -58,20 +57,20 @@
 0x5DCA17: test    eax, eax
 0x5DCA19: jz      loc_5DCB36
 0x5DCA1F: mov     ecx, [ebx+44h]
-0x5DCA22: push    0
+0x5DCA22: push    0; lastTile
 0x5DCA24: push    offset aStat_faction_t; "stat_faction_template"
-0x5DCA29: push    ecx
-0x5DCA2A: mov     ecx, ebx
-0x5DCA2C: call    Menu_CreateTileFromTemplate
+0x5DCA29: push    ecx; parent
+0x5DCA2A: mov     ecx, ebx; this
+0x5DCA2C: call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.
 0x5DCA31: mov     edi, eax
 0x5DCA33: test    edi, edi
 0x5DCA35: jz      loc_5DCB36
 0x5DCA3B: fild    [esp+120h+var_110]
 0x5DCA3F: push    ecx
 0x5DCA40: mov     ecx, edi; this
-0x5DCA42: fstp    [esp+124h+a2]; a3
-0x5DCA45: push    0FAAh; a2
-0x5DCA4A: call    Tile_SetFloat
+0x5DCA42: fstp    [esp+124h+a2]; value
+0x5DCA45: push    0FAAh; propertyCode
+0x5DCA4A: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5DCA4F: mov     eax, [esi]
 0x5DCA51: add     [esp+120h+var_110], 1
 0x5DCA56: add     eax, 18h
@@ -138,10 +137,10 @@
 0x5DCB17: call    Tile_SetString
 0x5DCB1C: fld     dword ptr ds:0A379B4h
 0x5DCB22: push    ecx
-0x5DCB23: fstp    [esp+124h+a2]; a3
-0x5DCB26: push    0FB3h; a2
+0x5DCB23: fstp    [esp+124h+a2]; value
+0x5DCB26: push    0FB3h; propertyCode
 0x5DCB2B: mov     ecx, edi; this
-0x5DCB2D: call    Tile_SetFloat
+0x5DCB2D: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5DCB32: mov     ebx, [esp+120h+var_108]
 0x5DCB36: cmp     [esp+120h+var_10C], 0
 0x5DCB3B: jnz     loc_5DC9C0

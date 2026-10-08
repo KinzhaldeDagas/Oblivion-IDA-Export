@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7AAA30",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; MoonSugarEffect build 24: EndTargetGroup xref to Lighting30 selector. Calls 0x007FD260 for 0x159+ and 0x156+ special routes after setting up render targets; used only to label selector routes, not as plugin-owned rendering.",
     "mnemonic": "push",
     "size": 2
   },
@@ -373,37 +373,37 @@
   },
   {
     "ea": "0x7AAAEA",
-    "line": "push    ebp",
+    "line": "push    ebp; lightCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7AAAEB",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7AAAED",
-    "line": "push    ebp",
+    "line": "push    ebp; selector",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7AAAEE",
-    "line": "push    ebp",
+    "line": "push    ebp; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7AAAEF",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7AAAF0",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x7AAB08",
-    "line": "call    sub_800B30",
+    "line": "call    sub_800B30; MoonSugarEffect decode: allocates dword_B474AC refraction render target type 0x14 only when requested and not already present.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x7AAB2D",
-    "line": "call    BSRenderedTexture__UseTextureToRender",
+    "line": "call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x7AAB8A",
-    "line": "call    NiRenderer_EndScene",
+    "line": "call    NiRenderer_EndScene; Oblivion EndScene wrapper: drain the complete render-target stack, end the active group, and end the D3D scene only when this wrapper owned SceneState2.",
     "mnemonic": "call",
     "size": 5
   },
@@ -871,7 +871,7 @@
   },
   {
     "ea": "0x7AABE8",
-    "line": "call    BSRenderedTexture__UseTextureToRender",
+    "line": "call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -889,7 +889,7 @@
   },
   {
     "ea": "0x7AABF0",
-    "line": "call    NiRenderer_BeginScene",
+    "line": "call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1182,12 +1182,6 @@
     "size": 2
   },
   {
-    "ea": "0x7AAC9E",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 2
-  },
-  {
     "ea": "0x7AACA0",
     "line": "mov     eax, [esp+78h+var_58]",
     "mnemonic": "mov",
@@ -1249,7 +1243,7 @@
   },
   {
     "ea": "0x7AACC2",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1381,7 +1375,7 @@
   },
   {
     "ea": "0x7AACFC",
-    "line": "call    sub_7D1320",
+    "line": "call    sub_7D1320; MoonSugarEffect decode: native shader-id selector for standard shader property families. Updates program/pass render-state choices and constants for hardcoded IDs before object render.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1471,7 +1465,7 @@
   },
   {
     "ea": "0x7AAD23",
-    "line": "call    sub_7FD260",
+    "line": "call    Lighting30Shader_SelectRenderPass; Oblivion Lighting30 selector activation. Selectors outside 0x15E/0x15F restore the main constant maps, derive row selector-0x12A, rewrite automatic vertex/pixel-constant enable flags from B46988/B46A60, and apply a route render-state group. SimpleShadow selectors 0x14E..0x151 use valid rows and route group 7. Stock one-light selectors 0x177..0x17A are not rejected here: they derive rows 0x4D..0x50 and use the generic route-group-0 path. The later per-geometry resolver is the actual validity gate; every later selector activation deterministically rewrites these flags before its draw.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1651,13 +1645,13 @@
   },
   {
     "ea": "0x7AAD97",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7AAD99",
-    "line": "call    sub_7A9C30",
+    "line": "call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1765,7 +1759,7 @@
   },
   {
     "ea": "0x7AADDC",
-    "line": "call    sub_800B30",
+    "line": "call    sub_800B30; MoonSugarEffect decode: EndTargetGroup path lazily allocates dword_B474AC and renders queued refractive geometry into it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1801,7 +1795,7 @@
   },
   {
     "ea": "0x7AADF4",
-    "line": "call    BSRenderedTexture__UseTextureToRender",
+    "line": "call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1987,7 +1981,7 @@
   },
   {
     "ea": "0x7AAE4A",
-    "line": "call    NiRenderer_EndScene",
+    "line": "call    NiRenderer_EndScene; Oblivion EndScene wrapper: drain the complete render-target stack, end the active group, and end the D3D scene only when this wrapper owned SceneState2.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2167,7 +2161,7 @@
   },
   {
     "ea": "0x7AAEA8",
-    "line": "call    BSRenderedTexture__UseTextureToRender",
+    "line": "call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2203,7 +2197,7 @@
   },
   {
     "ea": "0x7AAEBB",
-    "line": "call    NiRenderer_BeginScene",
+    "line": "call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2520,12 +2514,6 @@
     "size": 2
   },
   {
-    "ea": "0x7AAF79",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x7AAF80",
     "line": "mov     eax, [esp+78h+var_58]",
     "mnemonic": "mov",
@@ -2587,7 +2575,7 @@
   },
   {
     "ea": "0x7AAFA2",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -2725,7 +2713,7 @@
   },
   {
     "ea": "0x7AAFEA",
-    "line": "call    sub_7D1320",
+    "line": "call    sub_7D1320; MoonSugarEffect decode: native shader-id selector for standard shader property families. Updates program/pass render-state choices and constants for hardcoded IDs before object render.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2779,7 +2767,7 @@
   },
   {
     "ea": "0x7AB002",
-    "line": "call    sub_7D1320",
+    "line": "call    sub_7D1320; MoonSugarEffect decode: native shader-id selector for standard shader property families. Updates program/pass render-state choices and constants for hardcoded IDs before object render.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2893,7 +2881,7 @@
   },
   {
     "ea": "0x7AB03A",
-    "line": "call    sub_7FD260",
+    "line": "call    Lighting30Shader_SelectRenderPass; Oblivion Lighting30 selector activation. Selectors outside 0x15E/0x15F restore the main constant maps, derive row selector-0x12A, rewrite automatic vertex/pixel-constant enable flags from B46988/B46A60, and apply a route render-state group. SimpleShadow selectors 0x14E..0x151 use valid rows and route group 7. Stock one-light selectors 0x177..0x17A are not rejected here: they derive rows 0x4D..0x50 and use the generic route-group-0 path. The later per-geometry resolver is the actual validity gate; every later selector activation deterministically rewrites these flags before its draw.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3061,13 +3049,13 @@
   },
   {
     "ea": "0x7AB09F",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7AB0A1",
-    "line": "call    sub_7A9C30",
+    "line": "call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3145,7 +3133,7 @@
   },
   {
     "ea": "0x7AB0CA",
-    "line": "call    GetShaderDefinition",
+    "line": "call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3169,19 +3157,19 @@
   },
   {
     "ea": "0x7AB0D7",
-    "line": "push    esi; a2",
+    "line": "push    esi; renderedTexture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7AB0D8",
-    "line": "mov     ecx, eax; this",
+    "line": "mov     ecx, eax; imageSpaceShader",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7AB0DA",
-    "line": "call    sub_7FA470",
+    "line": "call    BSImageSpaceShader_BindFirstFreeRenderedTexture; Find the first empty rendered-texture slot in a BSImageSpaceShader, replace its strong-owned texture reference, and AddRef the new texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3229,7 +3217,7 @@
   },
   {
     "ea": "0x7AB0F4",
-    "line": "call    NiRenderer_EndScene",
+    "line": "call    NiRenderer_EndScene; Oblivion EndScene wrapper: drain the complete render-target stack, end the active group, and end the D3D scene only when this wrapper owned SceneState2.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3253,7 +3241,7 @@
   },
   {
     "ea": "0x7AB0FF",
-    "line": "call    BSRenderedTexture__UseTextureToRender",
+    "line": "call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3301,13 +3289,13 @@
   },
   {
     "ea": "0x7AB113",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7AB115",
-    "line": "call    sub_7E2400",
+    "line": "call    RenderPass_Destroy; Destroy the members of one RenderPass: clear selector, free the owned light-pointer array, clear byte +0x09 and array pointer. This function does not free the 0x10-byte RenderPass record itself and does not release the raw geometry/light objects.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3319,7 +3307,7 @@
   },
   {
     "ea": "0x7AB11B",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3688,5 +3676,89 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CD190",
+    "line": "lea     ecx, [ebp-4Ch]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD193",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD198",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD19B",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CD19C",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD1A1",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CD1A2",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CD1A3",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CD1A7",
+    "line": "lea     eax, [edx-68h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD1AA",
+    "line": "mov     ecx, [edx-6Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD1AD",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CD1AF",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD1B4",
+    "line": "mov     eax, offset stru_AF655C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD1B9",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

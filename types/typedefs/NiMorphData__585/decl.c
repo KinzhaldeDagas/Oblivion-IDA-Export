@@ -1,1 +1,1 @@
-NiMorphData
+struct NiMorphData;

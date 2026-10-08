@@ -4,10 +4,10 @@ const void *__thiscall sub_55CC10(_BYTE *this, const void *a2)
   const void *result; // eax
   _BYTE v5[36]; // [esp+Ch] [ebp-24h] BYREF
 
-  v3 = *(int (__thiscall **)(_BYTE *, _BYTE *))(*(_DWORD *)this + 0xA4);
-  qmemcpy(this + 0xE0, a2, 0x24u);
-  *(this + 0x107) = 1;
-  result = (const void *)v3(this, v5);
-  qmemcpy(this + 0x30, result, 0x24u);
-  return result;
+  v3 = *(int (__thiscall **)(_BYTE *, _BYTE *))(*(_DWORD *)this + 0xA4); /*0x55cc18*/
+  qmemcpy(this + 0xE0, a2, 0x24u); /*0x55cc2f*/
+  *(this + 0x107) = 1; /*0x55cc38*/
+  result = (const void *)v3(this, v5); /*0x55cc3f*/
+  qmemcpy(this + 0x30, result, 0x24u); /*0x55cc4b*/
+  return result; /*0x55cc4d*/
 }

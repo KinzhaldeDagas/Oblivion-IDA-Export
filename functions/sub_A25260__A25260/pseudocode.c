@@ -1,4 +1,4 @@
 void __cdecl sub_A25260()
 {
-  GameSetting_destr((int *)&unk_B3B748);
+  GameSetting_destr(&dword_B3B744[1]); /*0xa25265*/
 }

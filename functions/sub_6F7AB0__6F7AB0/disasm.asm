@@ -30,19 +30,18 @@
 0x6F7B0E: mov     ecx, 0Fh
 0x6F7B13: xor     eax, eax
 0x6F7B15: cmp     ecx, 10h
-0x6F7B18: mov     byte ptr [esp+48h+Str], 0
-0x6F7B1D: mov     [esp+48h+var_14], ecx
-0x6F7B21: mov     [esp+48h+Str], eax
-0x6F7B25: mov     [esp+48h+var_24], eax
-0x6F7B29: mov     [esp+48h+var_18], 8
+0x6F7B18: mov     byte ptr [esp+48h+var_2C.storage], 0
+0x6F7B1D: mov     [esp+48h+var_2C.capacity], ecx
+0x6F7B21: mov     dword ptr [esp+48h+var_2C.storage], eax
+0x6F7B25: mov     dword ptr [esp+48h+var_2C.storage+4], eax
+0x6F7B29: mov     [esp+48h+var_2C.size], 8
 0x6F7B31: jnb     short loc_6F7B37
-0x6F7B33: lea     eax, [esp+48h+Str]
+0x6F7B33: lea     eax, [esp+48h+var_2C.storage]
 0x6F7B37: mov     byte ptr [eax+8], 0
 0x6F7B3B: mov     [esp+48h+var_4], 0
-0x6F7B43: mov     eax, [esp+48h+Str]
-0x6F7B47: mov     edx, [esp+48h+var_14]
+0x6F7B43: mov     eax, dword ptr [esp+48h+var_2C.storage]
+0x6F7B47: mov     edx, [esp+48h+var_2C.capacity]
 0x6F7B4B: jmp     short loc_6F7B50
-0x6F7B4D: align 10h
 0x6F7B50: cmp     edx, 10h
 0x6F7B53: jb      loc_6F7C57
 0x6F7B59: test    eax, eax
@@ -51,36 +50,36 @@
 0x6F7B5F: cmp     edx, 10h
 0x6F7B62: mov     ecx, eax
 0x6F7B64: jnb     short loc_6F7B6A
-0x6F7B66: lea     ecx, [esp+48h+Str]
+0x6F7B66: lea     ecx, [esp+48h+var_2C.storage]
 0x6F7B6A: cmp     ecx, ebp
 0x6F7B6C: ja      short loc_6F7B83
 0x6F7B6E: cmp     edx, 10h
 0x6F7B71: mov     ecx, eax
 0x6F7B73: jnb     short loc_6F7B79
-0x6F7B75: lea     ecx, [esp+48h+Str]
-0x6F7B79: mov     esi, [esp+48h+var_18]
+0x6F7B75: lea     ecx, [esp+48h+var_2C.storage]
+0x6F7B79: mov     esi, [esp+48h+var_2C.size]
 0x6F7B7D: add     ecx, esi
 0x6F7B7F: cmp     ebp, ecx
 0x6F7B81: jbe     short loc_6F7B90
 0x6F7B83: call    __invalid_parameter_noinfo
-0x6F7B88: mov     edx, [esp+48h+var_14]
-0x6F7B8C: mov     eax, [esp+48h+Str]
+0x6F7B88: mov     edx, [esp+48h+var_2C.capacity]
+0x6F7B8C: mov     eax, dword ptr [esp+48h+var_2C.storage]
 0x6F7B90: lea     ecx, [esp+48h+var_2C]
 0x6F7B94: cmp     ecx, 0FFFFFFFEh
 0x6F7B97: jz      short loc_6F7BBB
 0x6F7B99: cmp     edx, 10h
 0x6F7B9C: mov     ecx, eax
 0x6F7B9E: jnb     short loc_6F7BA4
-0x6F7BA0: lea     ecx, [esp+48h+Str]
-0x6F7BA4: mov     esi, [esp+48h+var_18]
+0x6F7BA0: lea     ecx, [esp+48h+var_2C.storage]
+0x6F7BA4: mov     esi, [esp+48h+var_2C.size]
 0x6F7BA8: add     ecx, esi
 0x6F7BAA: cmp     ebp, ecx
 0x6F7BAC: jb      short loc_6F7BBB
 0x6F7BAE: call    __invalid_parameter_noinfo
-0x6F7BB3: mov     edx, [esp+48h+var_14]
-0x6F7BB7: mov     eax, [esp+48h+Str]
+0x6F7BB3: mov     edx, [esp+48h+var_2C.capacity]
+0x6F7BB7: mov     eax, dword ptr [esp+48h+var_2C.storage]
 0x6F7BBB: cmp     edx, 10h
-0x6F7BBE: mov     edi, [esp+48h+var_18]
+0x6F7BBE: mov     edi, [esp+48h+var_2C.size]
 0x6F7BC2: jb      loc_6F7C60
 0x6F7BC8: test    eax, eax
 0x6F7BCA: mov     esi, eax
@@ -88,28 +87,28 @@
 0x6F7BCE: cmp     edx, 10h
 0x6F7BD1: mov     ecx, eax
 0x6F7BD3: jnb     short loc_6F7BD9
-0x6F7BD5: lea     ecx, [esp+48h+Str]
+0x6F7BD5: lea     ecx, [esp+48h+var_2C.storage]
 0x6F7BD9: cmp     ecx, esi
 0x6F7BDB: ja      short loc_6F7BF6
 0x6F7BDD: cmp     edx, 10h
 0x6F7BE0: mov     ecx, eax
 0x6F7BE2: jnb     short loc_6F7BE8
-0x6F7BE4: lea     ecx, [esp+48h+Str]
-0x6F7BE8: mov     ebx, [esp+48h+var_18]
+0x6F7BE4: lea     ecx, [esp+48h+var_2C.storage]
+0x6F7BE8: mov     ebx, [esp+48h+var_2C.size]
 0x6F7BEC: add     ecx, ebx
 0x6F7BEE: cmp     esi, ecx
 0x6F7BF0: mov     ebx, [esp+48h+var_34]
 0x6F7BF4: jbe     short loc_6F7C03
 0x6F7BF6: call    __invalid_parameter_noinfo
-0x6F7BFB: mov     edx, [esp+48h+var_14]
-0x6F7BFF: mov     eax, [esp+48h+Str]
+0x6F7BFB: mov     edx, [esp+48h+var_2C.capacity]
+0x6F7BFF: mov     eax, dword ptr [esp+48h+var_2C.storage]
 0x6F7C03: lea     ecx, [esp+48h+var_2C]
 0x6F7C07: cmp     ecx, 0FFFFFFFEh
 0x6F7C0A: jz      short loc_6F7C24
 0x6F7C0C: cmp     edx, 10h
 0x6F7C0F: jnb     short loc_6F7C15
-0x6F7C11: lea     eax, [esp+48h+Str]
-0x6F7C15: mov     edx, [esp+48h+var_18]
+0x6F7C11: lea     eax, [esp+48h+var_2C.storage]
+0x6F7C15: mov     edx, [esp+48h+var_2C.size]
 0x6F7C19: add     eax, edx
 0x6F7C1B: cmp     esi, eax
 0x6F7C1D: jb      short loc_6F7C24
@@ -133,14 +132,14 @@
 0x6F7C48: lea     ecx, [esp+48h+var_2C]
 0x6F7C4C: jnz     loc_6F7D9A
 0x6F7C52: jmp     loc_6F7DA7
-0x6F7C57: lea     ebp, [esp+48h+Str]
+0x6F7C57: lea     ebp, [esp+48h+var_2C.storage]
 0x6F7C5B: jmp     loc_6F7B5F
-0x6F7C60: lea     esi, [esp+48h+Str]
+0x6F7C60: lea     esi, [esp+48h+var_2C.storage]
 0x6F7C64: jmp     loc_6F7BCE
 0x6F7C69: mov     byte ptr [ebx+41h], 0
-0x6F7C6D: mov     edx, [esp+48h+var_14]
+0x6F7C6D: mov     edx, [esp+48h+var_2C.capacity]
 0x6F7C71: cmp     edx, 10h
-0x6F7C74: mov     eax, [esp+48h+Str]
+0x6F7C74: mov     eax, dword ptr [esp+48h+var_2C.storage]
 0x6F7C78: jb      loc_6F7D84
 0x6F7C7E: test    eax, eax
 0x6F7C80: mov     esi, eax
@@ -148,34 +147,34 @@
 0x6F7C84: cmp     edx, 10h
 0x6F7C87: mov     ecx, eax
 0x6F7C89: jnb     short loc_6F7C8F
-0x6F7C8B: lea     ecx, [esp+48h+Str]
+0x6F7C8B: lea     ecx, [esp+48h+var_2C.storage]
 0x6F7C8F: cmp     ecx, esi
 0x6F7C91: ja      short loc_6F7CA8
 0x6F7C93: cmp     edx, 10h
 0x6F7C96: mov     ecx, eax
 0x6F7C98: jnb     short loc_6F7C9E
-0x6F7C9A: lea     ecx, [esp+48h+Str]
-0x6F7C9E: mov     edi, [esp+48h+var_18]
+0x6F7C9A: lea     ecx, [esp+48h+var_2C.storage]
+0x6F7C9E: mov     edi, [esp+48h+var_2C.size]
 0x6F7CA2: add     ecx, edi
 0x6F7CA4: cmp     esi, ecx
 0x6F7CA6: jbe     short loc_6F7CB5
 0x6F7CA8: call    __invalid_parameter_noinfo
-0x6F7CAD: mov     edx, [esp+48h+var_14]
-0x6F7CB1: mov     eax, [esp+48h+Str]
+0x6F7CAD: mov     edx, [esp+48h+var_2C.capacity]
+0x6F7CB1: mov     eax, dword ptr [esp+48h+var_2C.storage]
 0x6F7CB5: lea     ecx, [esp+48h+var_2C]
 0x6F7CB9: cmp     ecx, 0FFFFFFFEh
 0x6F7CBC: jz      short loc_6F7CE0
 0x6F7CBE: cmp     edx, 10h
 0x6F7CC1: mov     ecx, eax
 0x6F7CC3: jnb     short loc_6F7CC9
-0x6F7CC5: lea     ecx, [esp+48h+Str]
-0x6F7CC9: mov     edi, [esp+48h+var_18]
+0x6F7CC5: lea     ecx, [esp+48h+var_2C.storage]
+0x6F7CC9: mov     edi, [esp+48h+var_2C.size]
 0x6F7CCD: add     ecx, edi
 0x6F7CCF: cmp     esi, ecx
 0x6F7CD1: jb      short loc_6F7CE0
 0x6F7CD3: call    __invalid_parameter_noinfo
-0x6F7CD8: mov     edx, [esp+48h+var_14]
-0x6F7CDC: mov     eax, [esp+48h+Str]
+0x6F7CD8: mov     edx, [esp+48h+var_2C.capacity]
+0x6F7CDC: mov     eax, dword ptr [esp+48h+var_2C.storage]
 0x6F7CE0: mov     edi, [esp+48h+var_30]
 0x6F7CE4: sub     edi, esi
 0x6F7CE6: jz      short loc_6F7D65
@@ -187,27 +186,27 @@
 0x6F7CF7: cmp     edx, 10h
 0x6F7CFA: mov     ecx, eax
 0x6F7CFC: jnb     short loc_6F7D02
-0x6F7CFE: lea     ecx, [esp+48h+Str]
+0x6F7CFE: lea     ecx, [esp+48h+var_2C.storage]
 0x6F7D02: cmp     ecx, esi
 0x6F7D04: ja      short loc_6F7D1B
 0x6F7D06: cmp     edx, 10h
 0x6F7D09: mov     ecx, eax
 0x6F7D0B: jnb     short loc_6F7D11
-0x6F7D0D: lea     ecx, [esp+48h+Str]
-0x6F7D11: mov     ebp, [esp+48h+var_18]
+0x6F7D0D: lea     ecx, [esp+48h+var_2C.storage]
+0x6F7D11: mov     ebp, [esp+48h+var_2C.size]
 0x6F7D15: add     ecx, ebp
 0x6F7D17: cmp     esi, ecx
 0x6F7D19: jbe     short loc_6F7D28
 0x6F7D1B: call    __invalid_parameter_noinfo
-0x6F7D20: mov     edx, [esp+48h+var_14]
-0x6F7D24: mov     eax, [esp+48h+Str]
+0x6F7D20: mov     edx, [esp+48h+var_2C.capacity]
+0x6F7D24: mov     eax, dword ptr [esp+48h+var_2C.storage]
 0x6F7D28: lea     ecx, [esp+48h+var_2C]
 0x6F7D2C: cmp     ecx, 0FFFFFFFEh
 0x6F7D2F: jz      short loc_6F7D49
 0x6F7D31: cmp     edx, 10h
 0x6F7D34: jnb     short loc_6F7D3A
-0x6F7D36: lea     eax, [esp+48h+Str]
-0x6F7D3A: mov     edx, [esp+48h+var_18]
+0x6F7D36: lea     eax, [esp+48h+var_2C.storage]
+0x6F7D3A: mov     edx, [esp+48h+var_2C.size]
 0x6F7D3E: add     eax, edx
 0x6F7D40: cmp     esi, eax
 0x6F7D42: jb      short loc_6F7D49
@@ -221,8 +220,8 @@
 0x6F7D56: add     esp, 10h
 0x6F7D59: cmp     edi, eax
 0x6F7D5B: jnz     short loc_6F7D96
-0x6F7D5D: mov     edx, [esp+48h+var_14]
-0x6F7D61: mov     eax, [esp+48h+Str]
+0x6F7D5D: mov     edx, [esp+48h+var_2C.capacity]
+0x6F7D61: mov     eax, dword ptr [esp+48h+var_2C.storage]
 0x6F7D65: cmp     byte ptr [ebx+41h], 0
 0x6F7D69: jz      short loc_6F7DA3
 0x6F7D6B: test    edi, edi
@@ -232,16 +231,16 @@
 0x6F7D76: lea     ecx, [esp+50h+var_2C]
 0x6F7D7A: call    sub_6EDAA0
 0x6F7D7F: jmp     loc_6F7B43
-0x6F7D84: lea     esi, [esp+48h+Str]
+0x6F7D84: lea     esi, [esp+48h+var_2C.storage]
 0x6F7D88: jmp     loc_6F7C84
-0x6F7D8D: lea     esi, [esp+48h+Str]
+0x6F7D8D: lea     esi, [esp+48h+var_2C.storage]
 0x6F7D91: jmp     loc_6F7CF7
-0x6F7D96: lea     ecx, [esp+48h+var_2C]
-0x6F7D9A: call    sub_79AB00
+0x6F7D96: lea     ecx, [esp+48h+var_2C]; this
+0x6F7D9A: call    OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
 0x6F7D9F: xor     al, al
 0x6F7DA1: jmp     short loc_6F7DAE
-0x6F7DA3: lea     ecx, [esp+48h+var_2C]
-0x6F7DA7: call    sub_79AB00
+0x6F7DA3: lea     ecx, [esp+48h+var_2C]; this
+0x6F7DA7: call    OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
 0x6F7DAC: mov     al, 1
 0x6F7DAE: mov     ecx, dword ptr [esp+48h+var_C]
 0x6F7DB2: mov     large fs:0, ecx
@@ -255,3 +254,16 @@
 0x6F7DC4: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x6F7DC9: add     esp, 34h
 0x6F7DCC: retn
+0x9C8E20: lea     ecx, [ebp-2Ch]; this
+0x9C8E23: jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
+0x9C8E28: mov     edx, [esp+arg_4]
+0x9C8E2C: lea     eax, [edx-38h]
+0x9C8E2F: mov     ecx, [edx-3Ch]
+0x9C8E32: xor     ecx, eax
+0x9C8E34: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C8E39: add     eax, 10h
+0x9C8E3C: mov     ecx, [edx-4]
+0x9C8E3F: xor     ecx, eax
+0x9C8E41: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C8E46: mov     eax, offset stru_AF1714
+0x9C8E4B: jmp     ___CxxFrameHandler3

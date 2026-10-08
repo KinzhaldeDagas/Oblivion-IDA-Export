@@ -4,7 +4,7 @@
 0x67B323: mov     edi, ecx
 0x67B325: xor     al, al
 0x67B327: xor     ebp, ebp
-0x67B329: cmp     edi, offset ActorProcessManager_ptr.actor64
+0x67B329: cmp     edi, (offset qword_B3BB2C+23Ch)
 0x67B32F: mov     esi, edi
 0x67B331: jnz     short loc_67B353
 0x67B333: xor     edx, edx
@@ -76,7 +76,7 @@
 0x67B3E5: mov     edx, [eax]
 0x67B3E7: push    eax
 0x67B3E8: mov     [edi], edx
-0x67B3EA: call    FormHeapFree
+0x67B3EA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x67B3EF: add     esp, 4
 0x67B3F2: jmp     short loc_67B3FA
 0x67B3F4: mov     dword ptr [edi], 0

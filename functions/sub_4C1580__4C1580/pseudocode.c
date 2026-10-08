@@ -1,4 +1,4 @@
-char *sub_4C1580()
+NiRTTI *sub_4C1580()
 {
-  return dword_B3FD90;
+  return &stru_B3FD90; /*0x4c1585*/
 }

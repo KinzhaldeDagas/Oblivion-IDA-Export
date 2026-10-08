@@ -1,1 +1,5 @@
-_FILE_PIPE_INFORMATION
+struct _FILE_PIPE_INFORMATION
+{
+ULONG ReadMode;
+ULONG CompletionMode;
+};

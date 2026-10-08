@@ -24,9 +24,9 @@
 0x5962F6: mov     esi, eax
 0x5962F8: call    InterfaceManager_GetDepth
 0x5962FD: fstp    [esp+0Ch+arg_0]
-0x596301: mov     ecx, [esi+68h]; TileWindow *
+0x596301: mov     ecx, [esi+68h]; this
 0x596304: push    offset aDataMenusBook_; "Data\\Menus\\book_menu.xml"
-0x596309: call    Menu_LoadXML
+0x596309: call    Tile__ReadFile; Verified: SDK ReadXML entry. Builds named tree under receiver via 0x590330, connects/evaluates traits via 0x58CF40, registers subtemplates with owning Menu, frees build storage, refreshes returned subtree via 0x58FBA0. Returns first created tile. Fallout analogue 0x827E2588; cache/cleanup differs.
 0x59630E: mov     edi, eax
 0x596310: mov     ecx, edi
 0x596312: call    Tile_GetParentMenu
@@ -86,10 +86,10 @@
 0x5963B9: jp      short loc_5963CF
 0x5963BB: fld     [esp+10h+arg_0]
 0x5963BF: push    ecx
-0x5963C0: fstp    [esp+14h+a3]; a3
-0x5963C3: push    0FABh; a2
+0x5963C0: fstp    [esp+14h+a3]; value
+0x5963C3: push    0FABh; propertyCode
 0x5963C8: mov     ecx, edi; this
-0x5963CA: call    Tile_SetFloat
+0x5963CA: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5963CF: mov     ecx, [esp+10h+arg_4]
 0x5963D3: push    ecx
 0x5963D4: push    ebp

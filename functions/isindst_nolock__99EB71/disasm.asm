@@ -29,59 +29,59 @@
 0x99EBAF: jnz     short loc_99EBBD
 0x99EBB1: cmp     edx, dword_B31FDC
 0x99EBB7: jz      loc_99ECAF
-0x99EBBD: cmp     dword_BAA86C, esi
+0x99EBBD: cmp     dword_BA9E10+0A5Ch, esi
 0x99EBC3: jz      loc_99EC81
-0x99EBC9: cmp     TimeZoneInformation.DaylightDate.wYear, si
-0x99EBD0: movzx   eax, TimeZoneInformation.DaylightDate.wMilliseconds
-0x99EBD7: movzx   ecx, TimeZoneInformation.DaylightDate.wHour
+0x99EBC9: cmp     word ptr dword_BA9E10+0A48h, si
+0x99EBD0: movzx   eax, word ptr dword_BA9E10+0A56h
+0x99EBD7: movzx   ecx, word ptr dword_BA9E10+0A50h
 0x99EBDE: push    eax
-0x99EBDF: movzx   eax, TimeZoneInformation.DaylightDate.wSecond
+0x99EBDF: movzx   eax, word ptr dword_BA9E10+0A54h
 0x99EBE6: push    eax
-0x99EBE7: movzx   eax, TimeZoneInformation.DaylightDate.wMinute
+0x99EBE7: movzx   eax, word ptr dword_BA9E10+0A52h
 0x99EBEE: push    eax
 0x99EBEF: jnz     short loc_99EC06
-0x99EBF1: movzx   eax, TimeZoneInformation.DaylightDate.wDayOfWeek
+0x99EBF1: movzx   eax, word ptr dword_BA9E10+0A4Ch
 0x99EBF8: push    esi
 0x99EBF9: push    eax
-0x99EBFA: movzx   eax, TimeZoneInformation.DaylightDate.wDay
+0x99EBFA: movzx   eax, word ptr dword_BA9E10+0A4Eh
 0x99EC01: push    eax
 0x99EC02: push    edx
 0x99EC03: push    ebx
 0x99EC04: jmp     short loc_99EC12
-0x99EC06: movzx   eax, TimeZoneInformation.DaylightDate.wDay
+0x99EC06: movzx   eax, word ptr dword_BA9E10+0A4Eh
 0x99EC0D: push    eax
 0x99EC0E: push    esi
 0x99EC0F: push    esi
 0x99EC10: push    edx
 0x99EC11: push    esi
-0x99EC12: movzx   eax, TimeZoneInformation.DaylightDate.wMonth
+0x99EC12: movzx   eax, word ptr dword_BA9E10+0A4Ah
 0x99EC19: push    ebx
 0x99EC1A: call    _cvtdate
-0x99EC1F: movzx   eax, TimeZoneInformation.StandardDate.wMilliseconds
-0x99EC26: movzx   ecx, TimeZoneInformation.StandardDate.wHour
+0x99EC1F: movzx   eax, word ptr dword_BA9E10+0A02h
+0x99EC26: movzx   ecx, word ptr dword_BA9E10+9FCh
 0x99EC2D: add     esp, 24h
-0x99EC30: cmp     TimeZoneInformation.StandardDate.wYear, si
+0x99EC30: cmp     word ptr dword_BA9E10+9F4h, si
 0x99EC37: push    eax
-0x99EC38: movzx   eax, TimeZoneInformation.StandardDate.wSecond
+0x99EC38: movzx   eax, word ptr dword_BA9E10+0A00h
 0x99EC3F: push    eax
-0x99EC40: movzx   eax, TimeZoneInformation.StandardDate.wMinute
+0x99EC40: movzx   eax, word ptr dword_BA9E10+9FEh
 0x99EC47: push    eax
 0x99EC48: jnz     short loc_99EC61
-0x99EC4A: movzx   eax, TimeZoneInformation.StandardDate.wDayOfWeek
+0x99EC4A: movzx   eax, word ptr dword_BA9E10+9F8h
 0x99EC51: push    esi
 0x99EC52: push    eax
-0x99EC53: movzx   eax, TimeZoneInformation.StandardDate.wDay
+0x99EC53: movzx   eax, word ptr dword_BA9E10+9FAh
 0x99EC5A: push    eax
 0x99EC5B: push    dword ptr [edi+14h]
 0x99EC5E: push    ebx
 0x99EC5F: jmp     short loc_99EC6F
-0x99EC61: movzx   eax, TimeZoneInformation.StandardDate.wDay
+0x99EC61: movzx   eax, word ptr dword_BA9E10+9FAh
 0x99EC68: push    eax
 0x99EC69: push    esi
 0x99EC6A: push    esi
 0x99EC6B: push    dword ptr [edi+14h]
 0x99EC6E: push    esi
-0x99EC6F: movzx   eax, TimeZoneInformation.StandardDate.wMonth
+0x99EC6F: movzx   eax, word ptr dword_BA9E10+9F6h
 0x99EC76: push    esi
 0x99EC77: call    _cvtdate
 0x99EC7C: add     esp, 24h

@@ -2,7 +2,7 @@
 0x9E9866: push    ecx
 0x9E9867: fstp    [esp+4+var_4]; float
 0x9E986A: push    offset aFmarksmanfat_0; "fMarksmanFatigueBurnPerShot"
-0x9E986F: mov     ecx, offset unk_B37020
+0x9E986F: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+348h)
 0x9E9874: call    GameSetting_ConstrAndReg_float
 0x9E9879: push    offset sub_A1E760; void (__cdecl *)()
 0x9E987E: call    _atexit

@@ -1,8 +1,8 @@
-0x780840: push    esi
+0x780840: push    esi; Apply NiPropertyState in stock order; alpha property is propertyState[2] and is applied before the shader pass.
 0x780841: push    edi
-0x780842: mov     edi, [esp+8+arg_0]
+0x780842: mov     edi, [esp+8+propertyState]
 0x780846: mov     esi, ecx
-0x780848: mov     ecx, [edi+28h]
+0x780848: mov     ecx, [edi+28h]; Pass324 runtime crash decode (CD, 2026-07-14 23:14:55): generic NiDX9RenderState::UpdateRenderState dereferenced null state argument (EDI/a2=0) at a2+0x28. Caller 0x0076C9A0 received renderer->propertyState as a5; stack returned through generic geometry draw and VisualEffectShaders. This is outside ShadowSceneLight 0x007D46C0/0x007D59D3 and CE later completed 5853 + 1530 balanced ShadowPasses with the projector hook still installed.
 0x78084B: mov     eax, [esi]
 0x78084D: mov     edx, [eax+24h]
 0x780850: push    ecx
@@ -19,7 +19,7 @@
 0x780867: mov     edx, [eax+8]
 0x78086A: push    ecx
 0x78086B: mov     ecx, esi
-0x78086D: call    edx
+0x78086D: call    edx; Apply propertyState[2] through NiD3DRenderState::ApplyAlphaProperty before the shader pass and texture-stage application.
 0x78086F: mov     ecx, [edi+2Ch]
 0x780872: mov     eax, [esi]
 0x780874: mov     edx, [eax+28h]

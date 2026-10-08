@@ -1,1 +1,1 @@
-std::ios_base
+struct std::ios_base;

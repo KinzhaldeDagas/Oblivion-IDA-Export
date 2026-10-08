@@ -1,10 +1,11 @@
-BSExtraData *__thiscall sub_4211C0(ExtraDataList *this)
+// Returns ExtraSavedMovementData's saved-attached-animation pointer, or null.
+BSExtraData *__thiscall ExtraDataList_GetSavedAttachedAnimation(ExtraDataList *this)
 {
   BSExtraData *ExtraData; // eax
 
-  ExtraData = BaseExtraList_GetExtraData(this, kExtraData_SavedMovementData);
-  if ( ExtraData )
-    return ExtraData[1].members.next;
+  ExtraData = BaseExtraList_GetExtraData(this, kExtraData_SavedMovementData); /*0x4211c2*/
+  if ( ExtraData ) /*0x4211c9*/
+    return ExtraData[1].members.next; /*0x4211cb*/
   else
-    return 0;
+    return 0; /*0x4211cf*/
 }

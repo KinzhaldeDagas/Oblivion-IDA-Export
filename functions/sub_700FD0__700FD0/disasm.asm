@@ -4,8 +4,7 @@
 0x700FD8: push    edi
 0x700FD9: xor     edi, edi
 0x700FDB: jmp     short loc_700FE0
-0x700FDD: align 10h
-0x700FE0: mov     esi, ds:dword_B3F800[edi]
+0x700FE0: mov     esi, dword ptr ds:unk_B3F800[edi]
 0x700FE6: test    esi, esi
 0x700FE8: jz      short loc_70100C
 0x700FEA: lea     eax, [esi+4]
@@ -20,7 +19,7 @@
 0x700FFC: push    1
 0x700FFE: mov     ecx, esi
 0x701000: call    eax
-0x701002: mov     ds:dword_B3F800[edi], 0
+0x701002: mov     dword ptr ds:unk_B3F800[edi], 0
 0x70100C: add     edi, 4
 0x70100F: cmp     edi, 28h ; '('
 0x701012: jb      short loc_700FE0

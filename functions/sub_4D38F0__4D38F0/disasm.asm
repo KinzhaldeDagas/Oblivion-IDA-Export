@@ -13,13 +13,13 @@
 0x4D3914: test    dword ptr [esi+8], 400h
 0x4D391B: jz      short loc_4D3974
 0x4D391D: push    esi; a2
-0x4D391E: mov     ecx, offset stru_B35C80; this
+0x4D391E: mov     ecx, offset unk_B35C80; this
 0x4D3923: call    sub_496EA0
 0x4D3928: push    edi
 0x4D3929: lea     ecx, [esi+48h]
 0x4D392C: call    BSSimpleList_PushFront
 0x4D3931: push    esi; a2
-0x4D3932: mov     ecx, offset stru_B35C80; this
+0x4D3932: mov     ecx, offset unk_B35C80; this
 0x4D3937: call    sub_496F50
 0x4D393C: push    esi
 0x4D393D: lea     ecx, [edi+44h]
@@ -38,14 +38,14 @@
 0x4D3970: pop     esi
 0x4D3971: retn    4
 0x4D3974: mov     ecx, edi; this
-0x4D3976: call    TESObjectREFR_GetParentCell
+0x4D3976: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x4D397B: test    eax, eax
 0x4D397D: jz      short loc_4D3987
-0x4D397F: push    edi
-0x4D3980: mov     ecx, eax
-0x4D3982: call    sub_4CECD0
+0x4D397F: push    edi; reference
+0x4D3980: mov     ecx, eax; this
+0x4D3982: call    TESObjectCELL_RemoveReference; Verified: removes a reference from the cell object list under the cell lock. For persistent cells, clears the reference's ExtraDataList cell pointer and removes it from the owning WorldSpace persistent-reference index (+0x64); for normal cells, clears its parent cell and updates changed state. No write to the separate SubSpace index (+0x60) is present.
 0x4D3987: push    esi; a2
-0x4D3988: mov     ecx, offset stru_B35C80; this
+0x4D3988: mov     ecx, offset unk_B35C80; this
 0x4D398D: call    sub_496EA0
 0x4D3992: push    edi
 0x4D3993: lea     ecx, [esi+48h]
@@ -56,14 +56,14 @@
 0x4D39A4: mov     ecx, edi
 0x4D39A6: call    edx
 0x4D39A8: push    esi; a2
-0x4D39A9: mov     ecx, offset stru_B35C80; this
+0x4D39A9: mov     ecx, offset unk_B35C80; this
 0x4D39AE: call    sub_496F50
 0x4D39B3: mov     eax, [edi+8]
 0x4D39B6: shr     eax, 0Eh
 0x4D39B9: test    al, 1
 0x4D39BB: jnz     short loc_4D39EF
 0x4D39BD: mov     ecx, edi; this
-0x4D39BF: call    TESObjectREFR_IsPersistent?
+0x4D39BF: call    TESObjectREFR_IsPersistent
 0x4D39C4: test    al, al
 0x4D39C6: jnz     short loc_4D39EF
 0x4D39C8: mov     ecx, ds:0BA9DE4h
@@ -76,9 +76,9 @@
 0x4D39E9: push    1
 0x4D39EB: mov     ecx, esi
 0x4D39ED: call    eax
-0x4D39EF: push    0
-0x4D39F1: mov     ecx, edi
-0x4D39F3: call    sub_4D80C0
+0x4D39EF: push    0; useSpellEffectExtraLight
+0x4D39F1: mov     ecx, edi; self
+0x4D39F3: call    TESObjectREFR_RegisterAttachedLightWithShadowScene; This retail reference/cell lifecycle call passes useSpellEffectExtraLight=false; it registers only ordinary ExtraLight.
 0x4D39F8: pop     edi
 0x4D39F9: pop     esi
 0x4D39FA: retn    4

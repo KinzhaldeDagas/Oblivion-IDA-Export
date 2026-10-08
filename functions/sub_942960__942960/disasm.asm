@@ -4,7 +4,6 @@
 0x942967: jl      short locret_94297D
 0x942969: mov     ecx, [ecx]
 0x94296B: jmp     short loc_942970
-0x94296D: align 10h
 0x942970: cmp     dword ptr [ecx], 0FFFFFFFFh
 0x942973: jnz     short locret_94297D
 0x942975: inc     eax

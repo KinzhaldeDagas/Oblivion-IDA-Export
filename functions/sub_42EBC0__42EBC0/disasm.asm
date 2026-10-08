@@ -12,7 +12,7 @@
 0x42EBD9: setnz   al
 0x42EBDC: lea     edx, [ebp+eax*8+0]
 0x42EBE0: add     edx, eax
-0x42EBE2: mov     esi, FirstLoadedArchiveByType[edx*4]
+0x42EBE2: mov     esi, ds:0B338E8h[edx*4]
 0x42EBE9: test    esi, esi
 0x42EBEB: jz      short loc_42EC5A
 0x42EBED: lea     eax, [esi+1A8h]
@@ -31,7 +31,7 @@
 0x42EC17: setnz   al
 0x42EC1A: lea     ecx, [ebp+eax*8+0]
 0x42EC1E: add     ecx, eax
-0x42EC20: mov     esi, FirstLoadedArchiveByType[ecx*4]
+0x42EC20: mov     esi, ds:0B338E8h[ecx*4]
 0x42EC27: test    esi, esi
 0x42EC29: jz      short loc_42EC61
 0x42EC2B: lea     edx, [esi+1A8h]

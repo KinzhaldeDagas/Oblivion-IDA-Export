@@ -17,8 +17,8 @@
 0x5FEFB5: push    ecx
 0x5FEFB6: fstp    [esp+4+arg_4C]
 0x5FEFBA: fld     [esp+4+arg_4C]
-0x5FEFBE: fstp    [esp+4+var_4]; float
-0x5FEFC1: call    Calc_GetCombatDistance
+0x5FEFBE: fstp    [esp+4+baseDistance]; baseDistance
+0x5FEFC1: call    Calc_GetCombatDistance; Converts a base reach/distance value to world combat distance using the Oblivion combat-distance game-setting multiplier.
 0x5FEFC6: add     esp, 4
 0x5FEFC9: jmp     short loc_5FEFDD
 0x5FEFCB: mov     [esp+arg_2C], ebp

@@ -1,4 +1,4 @@
-0x523B10: push    0FFFFFFFFh
+0x523B10: push    0FFFFFFFFh; MEF PERF 2026-10-08: PERF-17 Verified Resize16: allocate fresh header+pointer slots, retain/copy each old used live pointer, destruct old slots and free backing. Capacity0/grow1 dense N-build makes N resizes,N-1 old-block frees,N*(N-1)/2 copied pointers and N*(N-1) copy/discard Interlocked calls. Excludes ordinary insertion/parent operations; runtime size/timing unmeasured.
 0x523B12: push    offset SEH_6C4510
 0x523B17: mov     eax, large fs:0
 0x523B1D: push    eax
@@ -14,7 +14,7 @@
 0x523B2F: mov     large fs:0, eax
 0x523B35: mov     esi, ecx
 0x523B37: movzx   eax, word ptr [esi+8]
-0x523B3B: mov     ebp, [esp+24h+arg_0]
+0x523B3B: mov     ebp, [esp+24h+capacity]
 0x523B3F: cmp     ebp, eax
 0x523B41: jz      loc_523D35
 0x523B47: movzx   eax, word ptr [esi+0Ah]
@@ -23,7 +23,7 @@
 0x523B50: jnb     short loc_523BC7
 0x523B52: cmp     bp, ax
 0x523B55: movzx   ecx, bp
-0x523B58: mov     [esp+24h+arg_0], ecx
+0x523B58: mov     [esp+24h+capacity], ecx
 0x523B5C: jnb     short loc_523BC3
 0x523B5E: mov     edi, edi
 0x523B60: mov     eax, [esi+4]
@@ -51,19 +51,19 @@
 0x523B98: push    1
 0x523B9A: mov     ecx, edi
 0x523B9C: call    eax
-0x523B9E: mov     ecx, [esp+24h+arg_0]
+0x523B9E: mov     ecx, [esp+24h+capacity]
 0x523BA2: mov     dword ptr [ebx], 0
 0x523BA8: add     word ptr [esi+0Ch], 0FFFFh
 0x523BAE: mov     [esp+24h+var_4], 0FFFFFFFFh
 0x523BB6: add     ecx, 1
 0x523BB9: cmp     cx, [esi+0Ah]
-0x523BBD: mov     [esp+24h+arg_0], ecx
+0x523BBD: mov     [esp+24h+capacity], ecx
 0x523BC1: jb      short loc_523B60
 0x523BC3: mov     [esi+0Ah], bp
 0x523BC7: test    ebp, ebp
 0x523BC9: mov     eax, [esi+4]
 0x523BCC: mov     [esp+24h+var_10], eax
-0x523BD0: mov     [esi+8], bp
+0x523BD0: mov     [esi+8], bp; MEF PERF 2026-10-08: PERF-17 optional-reserve hazard: capacity is published HERE before allocation; new pointer (possiblyNULL) published523C3E before copy. Native Resize16 is not a transactional optional-reserve primitive. Allocate/initialize privately, recheck destination after callbacks, publish only success; do not promise recovery from allocator abort/exception.
 0x523BD4: jbe     loc_523D4B
 0x523BDA: movzx   edi, bp
 0x523BDD: xor     ecx, ecx
@@ -81,11 +81,11 @@
 0x523BFB: push    eax; Size
 0x523BFC: call    FormHeapAlloc
 0x523C01: add     esp, 4
-0x523C04: mov     [esp+24h+arg_0], eax
+0x523C04: mov     [esp+24h+capacity], eax
 0x523C08: test    eax, eax
 0x523C0A: mov     [esp+24h+var_4], 1
 0x523C12: jz      short loc_523C2E
-0x523C14: push    offset sub_7016A0; a5
+0x523C14: push    offset NiPointerSlot_Release; a5
 0x523C19: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x523C1E: push    edi; size
 0x523C1F: lea     ebx, [eax+4]
@@ -99,10 +99,9 @@
 0x523C32: cmp     [esi+0Ah], ax
 0x523C36: mov     [esp+24h+var_4], 0FFFFFFFFh
 0x523C3E: mov     [esi+4], ebx
-0x523C41: mov     [esp+24h+arg_0], eax
+0x523C41: mov     [esp+24h+capacity], eax
 0x523C45: jbe     short loc_523CB2
 0x523C47: jmp     short loc_523C50
-0x523C49: align 10h
 0x523C50: mov     ebp, [esi+4]
 0x523C53: mov     ecx, [esp+24h+var_10]
 0x523C57: movzx   edi, ax
@@ -133,16 +132,16 @@
 0x523C95: jz      short loc_523CA1
 0x523C97: add     edi, 4
 0x523C9A: push    edi; lpAddend
-0x523C9B: call    dword ptr ds:0A28078h
-0x523CA1: mov     eax, [esp+24h+arg_0]
+0x523C9B: call    dword ptr ds:0A28078h; MEF PERF 2026-10-08: PERF-17 copy cost: each nonnull old slot copied into zero new slot receives InterlockedIncrement; later vector destruction98124F via7016A0 decrements corresponding old slot. Exact extra2 atomics per copied live pointer under successful stable ownership. This is separate from hole-search probes.
+0x523CA1: mov     eax, [esp+24h+capacity]
 0x523CA5: add     eax, 1
 0x523CA8: cmp     ax, [esi+0Ah]
-0x523CAC: mov     [esp+24h+arg_0], eax
+0x523CAC: mov     [esp+24h+capacity], eax
 0x523CB0: jb      short loc_523C50
 0x523CB2: movzx   ebx, word ptr [esi+0Ah]
 0x523CB6: cmp     bx, [esi+8]
 0x523CBA: jnb     short loc_523D10
-0x523CBC: mov     [esp+24h+arg_0], 0
+0x523CBC: mov     [esp+24h+capacity], 0
 0x523CC4: mov     edx, [esi+4]
 0x523CC7: movzx   ecx, bx
 0x523CCA: mov     edi, [edx+ecx*4]
@@ -172,13 +171,13 @@
 0x523D16: jz      short loc_523D35
 0x523D18: mov     ecx, [eax-4]
 0x523D1B: lea     esi, [eax-4]
-0x523D1E: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x523D1E: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x523D23: push    ecx; int
 0x523D24: push    4; unsigned int
 0x523D26: push    eax; void *
 0x523D27: call    $LN21
 0x523D2C: push    esi
-0x523D2D: call    FormHeapFree
+0x523D2D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x523D32: add     esp, 4
 0x523D35: mov     ecx, [esp+24h+var_C]
 0x523D39: mov     large fs:0, ecx
@@ -191,3 +190,19 @@
 0x523D48: retn    4
 0x523D4B: mov     dword ptr [esi+4], 0
 0x523D52: jmp     short loc_523D14
+0x9D71B0: lea     ecx, [ebp-10h]; slot
+0x9D71B3: jmp     NiPointerSlot_Release
+0x9D71B8: mov     eax, [ebp+4]
+0x9D71BB: push    eax
+0x9D71BC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D71C1: pop     ecx
+0x9D71C2: retn
+0x9D71C3: lea     ecx, [ebp+4]; slot
+0x9D71C6: jmp     NiPointerSlot_Release
+0x9D71CB: mov     edx, [esp+arg_4]
+0x9D71CF: lea     eax, [edx-14h]
+0x9D71D2: mov     ecx, [edx-18h]
+0x9D71D5: xor     ecx, eax
+0x9D71D7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D71DC: mov     eax, offset stru_AFEE44
+0x9D71E1: jmp     ___CxxFrameHandler3

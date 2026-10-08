@@ -1,1 +1,1 @@
-SYSKIND
+typedef tagSYSKIND SYSKIND;

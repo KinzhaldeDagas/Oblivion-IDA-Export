@@ -1,1 +1,1 @@
-NiScreenGeometry
+struct NiScreenGeometry;

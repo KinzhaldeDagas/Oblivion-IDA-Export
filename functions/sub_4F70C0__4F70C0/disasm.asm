@@ -1,7 +1,7 @@
-0x4F70C0: fldz
-0x4F70C2: mov     eax, [esp+arg_4]
+0x4F70C0: fldz; GetInFaction_Eval (index 71 / opcode 0x1047): the Faction parameter (typeID 0x11) is present when TESActorBaseData_GetFactionRank != -1. This returns a membership predicate, not the numeric rank.
+0x4F70C2: mov     eax, [esp+param1]
 0x4F70C6: push    ebx
-0x4F70C7: mov     ebx, [esp+4+arg_C]
+0x4F70C7: mov     ebx, [esp+4+value]
 0x4F70CB: push    esi
 0x4F70CC: fstp    qword ptr [ebx]
 0x4F70CE: push    edi

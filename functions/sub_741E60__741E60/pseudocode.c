@@ -7,13 +7,13 @@ int __userpurge sub_741E60@<eax>(NiRenderer *this@<ecx>, size_t Size)
   size_t v7; // [esp-4h] [ebp-10h]
   int v8; // [esp+8h] [ebp-4h] BYREF
 
-  v2 = Size;
-  LODWORD(v7) = Size;
-  sub_721610(this, v7);
-  v6 = *(_DWORD *)(v2 + 0x21C);
-  v4 = *(int (__cdecl **)(int, size_t *, int, int *, int))(v6 + 4);
-  v8 = 1;
-  result = v4(v6, &Size, 1, &v8, 1);
-  LOBYTE(this->members.propertyState) = (_BYTE)Size != 0;
-  return result;
+  v2 = Size; /*0x741e63*/
+  LODWORD(v7) = Size; /*0x741e67*/
+  sub_721610(this, v7); /*0x741e6a*/
+  v6 = *(_DWORD *)(v2 + 0x21C); /*0x741e83*/
+  v4 = *(int (__cdecl **)(int, size_t *, int, int *, int))(v6 + 4); /*0x741e84*/
+  v8 = 1; /*0x741e87*/
+  result = v4(v6, &Size, 1, &v8, 1); /*0x741e8f*/
+  LOBYTE(this->members.propertyState) = (_BYTE)Size != 0; /*0x741e9d*/
+  return result; /*0x741e99*/
 }

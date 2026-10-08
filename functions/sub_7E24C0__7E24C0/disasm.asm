@@ -1,4 +1,4 @@
-0x7E24C0: push    ebx
+0x7E24C0: push    ebx; Clear all BSShaderProperty-owned RenderPass lists and destroy their embedded pass records; shared shader-property cleanup, not SpeedTree-only.
 0x7E24C1: push    ebp
 0x7E24C2: mov     ebp, ecx
 0x7E24C4: xor     ebx, ebx
@@ -17,11 +17,11 @@
 0x7E24E2: jmp     short loc_7E24E7
 0x7E24E4: mov     [esi+8], ebx
 0x7E24E7: mov     edx, [esi]
-0x7E24E9: mov     edi, [eax+8]
+0x7E24E9: mov     edi, [eax+8]; Capture the property-list node's RenderPass payload before releasing the node.
 0x7E24EC: push    eax
 0x7E24ED: mov     eax, [edx+8]
 0x7E24F0: mov     ecx, esi
-0x7E24F2: call    eax
+0x7E24F2: call    eax; Release only the NiTList node through the list allocator virtual; the payload is destroyed separately below.
 0x7E24F4: add     dword ptr [esi+0Ch], 0FFFFFFFFh
 0x7E24F8: cmp     edi, ebx
 0x7E24FA: jz      short loc_7E251F
@@ -30,12 +30,12 @@
 0x7E2501: mov     [edi+4], bx
 0x7E2505: jz      short loc_7E2510
 0x7E2507: push    eax
-0x7E2508: call    FormHeapFree
+0x7E2508: call    FormHeapFree; Owner cleanup frees this RenderPass's light-pointer array.
 0x7E250D: add     esp, 4
 0x7E2510: push    edi
 0x7E2511: mov     [edi+0Ch], ebx
 0x7E2514: mov     [edi+9], bl
-0x7E2517: call    FormHeapFree
+0x7E2517: call    FormHeapFree; Owner cleanup frees the 0x10-byte RenderPass after destroying its owned array. The same pattern is repeated for all four property pass lists.
 0x7E251C: add     esp, 4
 0x7E251F: cmp     [ebp+34h], ebx
 0x7E2522: jnz     short loc_7E24D3
@@ -65,12 +65,12 @@
 0x7E255E: mov     [edi+4], bx
 0x7E2562: jz      short loc_7E256D
 0x7E2564: push    eax
-0x7E2565: call    FormHeapFree
+0x7E2565: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7E256A: add     esp, 4
 0x7E256D: push    edi
 0x7E256E: mov     [edi+0Ch], ebx
 0x7E2571: mov     [edi+9], bl
-0x7E2574: call    FormHeapFree
+0x7E2574: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7E2579: add     esp, 4
 0x7E257C: cmp     [ebp+44h], ebx
 0x7E257F: jnz     short loc_7E2530
@@ -100,12 +100,12 @@
 0x7E25BE: mov     [edi+4], bx
 0x7E25C2: jz      short loc_7E25CD
 0x7E25C4: push    eax
-0x7E25C5: call    FormHeapFree
+0x7E25C5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7E25CA: add     esp, 4
 0x7E25CD: push    edi
 0x7E25CE: mov     [edi+0Ch], ebx
 0x7E25D1: mov     [edi+9], bl
-0x7E25D4: call    FormHeapFree
+0x7E25D4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7E25D9: add     esp, 4
 0x7E25DC: cmp     [ebp+54h], ebx
 0x7E25DF: jnz     short loc_7E2590
@@ -135,12 +135,12 @@
 0x7E261E: mov     [edi+4], bx
 0x7E2622: jz      short loc_7E262D
 0x7E2624: push    eax
-0x7E2625: call    FormHeapFree
+0x7E2625: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7E262A: add     esp, 4
 0x7E262D: push    edi
 0x7E262E: mov     [edi+0Ch], ebx
 0x7E2631: mov     [edi+9], bl
-0x7E2634: call    FormHeapFree
+0x7E2634: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7E2639: add     esp, 4
 0x7E263C: cmp     [ebp+64h], ebx
 0x7E263F: jnz     short loc_7E25F0

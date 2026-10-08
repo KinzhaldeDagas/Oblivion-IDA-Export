@@ -16,10 +16,10 @@
 0x61FB00: lea     ecx, [esp+24h+var_10]
 0x61FB04: push    ecx
 0x61FB05: mov     ecx, esi
-0x61FB07: call    sub_6135F0
+0x61FB07: call    CombatController_GetCurrentTarget
 0x61FB0C: push    eax
 0x61FB0D: push    edi
-0x61FB0E: call    sub_61DDF0
+0x61FB0E: call    Actor_CalculateAimAnglesToTarget; Computes aim pitch/yaw to target. In ranged weapon/spell modes uses projectile speed/gravity and motion lead; writes pitch through out pointer and returns yaw normalized to roughly [-pi,pi].
 0x61FB13: fstp    [esp+30h+var_14]
 0x61FB17: fld     [esp+30h+var_14]
 0x61FB1B: add     esp, 10h
@@ -58,7 +58,7 @@
 0x61FB7F: add     esp, 14h
 0x61FB82: retn
 0x61FB83: mov     edi, [esi+3Ch]
-0x61FB86: call    sub_6135F0
+0x61FB86: call    CombatController_GetCurrentTarget
 0x61FB8B: mov     edx, [edi]
 0x61FB8D: mov     ebx, eax
 0x61FB8F: mov     eax, [edx+174h]
@@ -84,7 +84,7 @@
 0x61FBCC: fstp    [esp+24h+var_8]
 0x61FBD0: fld     [esp+24h+var_14]
 0x61FBD4: fstp    [esp+24h+var_4]
-0x61FBD8: call    sub_683CB0
+0x61FBD8: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x61FBDD: mov     ecx, [esi+3Ch]
 0x61FBE0: fstp    [esp+24h+var_14]
 0x61FBE4: mov     edx, [ecx]
@@ -107,3 +107,40 @@
 0x61FC1C: pop     esi
 0x61FC1D: add     esp, 14h
 0x61FC20: jmp     loc_615050
+0x615050: push    esi
+0x615051: mov     esi, ecx
+0x615053: cmp     byte ptr [esi+17Dh], 0
+0x61505A: jz      short loc_61507F
+0x61505C: mov     eax, [esi+3Ch]
+0x61505F: mov     ecx, [eax+58h]
+0x615062: mov     edx, [ecx]
+0x615064: mov     eax, [edx+0C4h]
+0x61506A: push    1
+0x61506C: call    eax
+0x61506E: mov     ecx, [esi+3Ch]
+0x615071: push    30h ; '0'
+0x615073: call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.
+0x615078: mov     byte ptr [esi+17Dh], 0
+0x61507F: mov     ecx, [esi+1A8h]
+0x615085: cmp     ecx, ds:0B372F0h
+0x61508B: jge     short loc_6150BD
+0x61508D: mov     edx, [esi+3Ch]
+0x615090: mov     ecx, [edx+58h]
+0x615093: mov     eax, [ecx]
+0x615095: mov     edx, [eax+4CCh]
+0x61509B: push    edi
+0x61509C: call    edx
+0x61509E: mov     ecx, esi
+0x6150A0: mov     edi, eax
+0x6150A2: call    CombatController_GetCurrentTarget
+0x6150A7: cmp     edi, eax
+0x6150A9: pop     edi
+0x6150AA: jnz     short loc_6150BD
+0x6150AC: mov     eax, [esi+3Ch]
+0x6150AF: mov     ecx, [eax+58h]
+0x6150B2: mov     edx, [ecx]
+0x6150B4: mov     eax, [edx+4A4h]
+0x6150BA: pop     esi
+0x6150BB: jmp     eax
+0x6150BD: pop     esi
+0x6150BE: retn

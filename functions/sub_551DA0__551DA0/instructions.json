@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x551DA0",
-    "line": "push    ecx",
+    "line": "push    ecx; Dimension-checked in-place element addition: this += rhs.",
     "mnemonic": "push",
     "size": 1
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x551DAA",
-    "line": "mov     edi, [esp+14h+arg_0]",
+    "line": "mov     edi, [esp+14h+rhs]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x551DBE",
-    "line": "push    249h; int",
+    "line": "push    249h; sourceLine",
     "mnemonic": "push",
     "size": 5
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x551DC8",
-    "line": "call    sub_6ED6D0",
+    "line": "call    FaceGen_ReportAssertionViolation; FaceGen assertion reporter: PrintError(\"FR2 ASSERT violation in %s line %i. Code may crash.\", sourceFile, sourceLine); returns normally. NOT noreturn and NOT a validation barrier.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x551DF6",
-    "line": "mov     [esp+14h+arg_0], eax",
+    "line": "mov     [esp+14h+rhs], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x551E0A",
-    "line": "cmp     esi, [esp+14h+arg_0]",
+    "line": "cmp     esi, [esp+14h+rhs]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x551E16",
-    "line": "mov     [esp+14h+arg_0], eax",
+    "line": "mov     [esp+14h+rhs], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x551E2A",
-    "line": "cmp     ebx, [esp+14h+arg_0]",
+    "line": "cmp     ebx, [esp+14h+rhs]",
     "mnemonic": "cmp",
     "size": 4
   },

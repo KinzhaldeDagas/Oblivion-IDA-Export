@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6D7F60",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; MEF v57 IMPLEMENTED 2026-10-08: v57 array writer proof: NiNode RemoveObjectAt70B07E reaches this slot-removal helper; null assignment releases pointer, decrements occupied at6D7FFA only for nonnull old value, and trims used only for last slot at6D8011. Density decision occurs after these callbacks in insertion, not cached across them.",
     "mnemonic": "push",
     "size": 2
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x6D7F95",
-    "line": "mov     ebx, [esp+28h+arg_4]",
+    "line": "mov     ebx, [esp+28h+incoming]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x6D7FD5",
-    "line": "mov     [esp+28h+arg_4], 0",
+    "line": "mov     [esp+28h+incoming], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -217,19 +217,19 @@
   },
   {
     "ea": "0x6D7FE0",
-    "line": "lea     edx, [esp+28h+arg_4]",
+    "line": "lea     edx, [esp+28h+incoming]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6D7FE4",
-    "line": "push    edx",
+    "line": "push    edx; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6D7FE5",
-    "line": "add     ecx, ebp",
+    "line": "add     ecx, ebp; this",
     "mnemonic": "add",
     "size": 2
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x6D7FEC",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
@@ -502,5 +502,113 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C7BA0",
+    "line": "mov     eax, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C7BA3",
+    "line": "and     eax, 1",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9C7BA6",
+    "line": "jz      locret_9C7BB8",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9C7BAC",
+    "line": "and     dword ptr [ebp-14h], 0FFFFFFFEh",
+    "mnemonic": "and",
+    "size": 4
+  },
+  {
+    "ea": "0x9C7BB0",
+    "line": "mov     ecx, [ebp+4]; slot",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C7BB3",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C7BB8",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C7BB9",
+    "line": "lea     ecx, [ebp-10h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C7BBC",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C7BC1",
+    "line": "lea     ecx, [ebp+8]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C7BC4",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C7BC9",
+    "line": "mov     edx, [esp+incoming]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C7BCD",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C7BD0",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C7BD3",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C7BD5",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C7BDA",
+    "line": "mov     eax, offset stru_AEFF6C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C7BDF",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

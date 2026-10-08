@@ -1,18 +1,31 @@
 {
-  "callees_count": 27,
-  "callers_count": 106,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 12,
+  "callers_count": 239,
+  "chunks": [
+    [
+      "0x450C20",
+      "0x450F04"
+    ]
+  ],
+  "chunks_sha256": "b0b472acb5ee29922191099b00203eed34d942e7ea1bb6173bd08c15e9f5e5ca",
+  "comment_regular": "Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
+  "comment_repeatable": "Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 3,
   "display_name": "TESFile_GetChunkData",
   "end_ea": "0x450F04",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "TESFile_GetChunkData",
   "segment": ".text",
   "sha256": "b0b472acb5ee29922191099b00203eed34d942e7ea1bb6173bd08c15e9f5e5ca",
   "size": 740,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x450C20",
+  "total_chunk_size": 740,
   "type": "char __thiscall(Data *a1, char *Dst, unsigned int a4)",
   "xrefs_from_count": 233,
   "xrefs_to_count": 239

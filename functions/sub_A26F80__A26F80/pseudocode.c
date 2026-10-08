@@ -1,8 +1,8 @@
 void __cdecl sub_A26F80()
 {
-  if ( dword_B429D0 )
-    FormHeapFree((unsigned int)dword_B429D0);
-  dword_B429D0 = 0;
-  dword_B429D4 = 0;
-  dword_B429D8 = 0;
+  if ( stru_B429CC.begin ) /*0xa26f87*/
+    FormHeapFree((unsigned int)stru_B429CC.begin); /*0xa26f8a*/
+  stru_B429CC.begin = 0; /*0xa26f92*/
+  stru_B429CC.end = 0; /*0xa26f9c*/
+  stru_B429CC.capacity = 0; /*0xa26fa6*/
 }

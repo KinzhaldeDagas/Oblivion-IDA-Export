@@ -1,4 +1,4 @@
-0x7606A0: mov     ecx, ds:0B42044h
+0x7606A0: mov     ecx, ds:0B42044h; Acquire a renderer-owned NiD3DPass from the global pass pool and return it with a reference.
 0x7606A6: mov     eax, [ecx+8]
 0x7606A9: test    eax, eax
 0x7606AB: push    esi

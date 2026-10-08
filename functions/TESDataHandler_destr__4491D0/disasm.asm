@@ -19,7 +19,7 @@
 0x44920B: mov     ecx, edi
 0x44920D: call    ContainerExtraData_destr
 0x449212: push    edi
-0x449213: call    FormHeapFree
+0x449213: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x449218: add     esp, 4
 0x44921B: lea     eax, [esi+8C8h]
 0x449221: push    eax
@@ -31,7 +31,7 @@
 0x449230: mov     ecx, edi
 0x449232: call    TESObjectListHead_destr
 0x449237: push    edi
-0x449238: call    FormHeapFree
+0x449238: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x44923D: add     esp, 4
 0x449240: mov     ecx, [esi+0BCh]
 0x449246: test    ecx, ecx
@@ -42,7 +42,7 @@
 0x449250: call    eax
 0x449252: mov     eax, [esi+0CD8h]
 0x449258: push    eax
-0x449259: call    FormHeapFree
+0x449259: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x44925E: mov     ecx, ds:0B362C0h
 0x449264: add     esp, 4
 0x449267: test    ecx, ecx
@@ -50,7 +50,7 @@
 0x44926B: jz      short loc_44927B
 0x44926D: call    sub_5219B0
 0x449272: push    edi
-0x449273: call    FormHeapFree
+0x449273: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x449278: add     esp, 4
 0x44927B: mov     ecx, offset TESForm_FormIDMap
 0x449280: mov     dword ptr ds:0B362C0h, 0
@@ -65,7 +65,7 @@
 0x4492A9: mov     edx, [esi+0C4h]
 0x4492AF: push    edx
 0x4492B0: mov     dword ptr [esi+0C0h], offset ??_7?$NiTLargeArray@PAVTESObjectCELL@@@@6B@; const NiTLargeArray<TESObjectCELL *>::`vftable'
-0x4492BA: call    FormHeapFree
+0x4492BA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4492BF: add     esp, 4
 0x4492C2: mov     ecx, dword ptr [esp+1Ch+var_C]
 0x4492C6: mov     large fs:0, ecx
@@ -74,3 +74,21 @@
 0x4492CF: pop     esi
 0x4492D0: add     esp, 10h
 0x4492D3: retn
+0x9AD940: mov     ecx, [ebp-10h]
+0x9AD943: add     ecx, 0C0h ; 'À'
+0x9AD949: jmp     sub_446D00
+0x9AD94E: push    offset ??1TESSkill@@UAE@XZ; void (__thiscall *)(void *)
+0x9AD953: push    15h; int
+0x9AD955: push    60h ; '`'; unsigned int
+0x9AD957: mov     eax, [ebp-10h]
+0x9AD95A: add     eax, 0D8h ; 'Ø'
+0x9AD95F: push    eax; void *
+0x9AD960: call    $LN21
+0x9AD965: retn
+0x9AD966: mov     edx, [esp+arg_4]
+0x9AD96A: lea     eax, [edx-0Ch]
+0x9AD96D: mov     ecx, [edx-10h]
+0x9AD970: xor     ecx, eax
+0x9AD972: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AD977: mov     eax, offset stru_ADA3F0
+0x9AD97C: jmp     ___CxxFrameHandler3

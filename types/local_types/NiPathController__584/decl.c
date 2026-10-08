@@ -1,1 +1,1 @@
-NiPathController
+struct NiPathController;

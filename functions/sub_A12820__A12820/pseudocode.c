@@ -1,4 +1,4 @@
-BSStringT *sub_A12820()
+NiRTTI *sub_A12820()
 {
-  return sub_70E220(&stru_BA80B0, "bhkStiffSpringConstraint", (int)&stru_BA7D50);
+  return NiRTTI_Constructor(&stru_BA80B0, "bhkStiffSpringConstraint", &MEMORY[0xBA7D50]); /*0xa12834*/
 }

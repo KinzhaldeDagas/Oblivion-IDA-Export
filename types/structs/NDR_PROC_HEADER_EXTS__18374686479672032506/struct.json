@@ -1,40 +1,72 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "NDR_PROC_HEADER_EXTS",
+  "definition": "struct NDR_PROC_HEADER_EXTS\n{\nunsigned __int8 Size;\nINTERPRETER_OPT_FLAGS2 Flags2;\nunsigned __int16 ClientCorrHint;\nunsigned __int16 ServerCorrHint;\nunsigned __int16 NotifyIndex;\n}\n",
   "id": 18374686479672032506,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Size",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 1
+      "size": 1,
+      "type": "unsigned __int8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Flags2",
       "offset": 1,
       "offset_hex": "0x1",
-      "size": 1
+      "size": 1,
+      "type": "INTERPRETER_OPT_FLAGS2"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ClientCorrHint",
       "offset": 2,
       "offset_hex": "0x2",
-      "size": 2
+      "size": 2,
+      "type": "unsigned __int16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ServerCorrHint",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 2
+      "size": 2,
+      "type": "unsigned __int16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "NotifyIndex",
       "offset": 6,
       "offset_hex": "0x6",
-      "size": 2
+      "size": 2,
+      "type": "unsigned __int16"
     }
   ],
   "name": "NDR_PROC_HEADER_EXTS",
+  "ordinal": 3152,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 8
 }

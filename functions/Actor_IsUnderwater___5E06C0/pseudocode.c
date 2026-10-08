@@ -5,13 +5,13 @@ char __thiscall Actor_IsUnderwater__(void *this, int a2, ExtraDataList *a3, floa
   double v7; // [esp+8h] [ebp-8h]
   float v8; // [esp+18h] [ebp+8h]
 
-  if ( !a3 )
-    return 0;
-  v8 = sub_5E0660(this) * a4;
-  v7 = *(float *)(a2 + 8) + v8;
-  WaterHeight = TESObjectCELL_GetWaterHeight(a3);
-  result = 1;
-  if ( WaterHeight <= v7 )
-    return 0;
-  return result;
+  if ( !a3 ) /*0x5e06cd*/
+    return 0; /*0x5e06cd*/
+  v8 = Actor_GetScaledCollisionHeight(this) * a4; /*0x5e06de*/
+  v7 = *(float *)(a2 + 8) + v8; /*0x5e06e9*/
+  WaterHeight = TESObjectCELL_GetWaterHeight(a3); /*0x5e06ed*/
+  result = 1; /*0x5e06f8*/
+  if ( WaterHeight <= v7 ) /*0x5e06fd*/
+    return 0; /*0x5e06ff*/
+  return result; /*0x5e0701*/
 }

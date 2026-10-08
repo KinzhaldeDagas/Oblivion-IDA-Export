@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x7A0FB0",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, [esp+last]; Outer guide-LOD vector destroy-range thunk.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A0FB4",
-    "line": "mov     edx, [esp+arg_0]",
+    "line": "mov     edx, [esp+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,25 +25,25 @@
   },
   {
     "ea": "0x7A0FBA",
-    "line": "mov     ecx, [esp+8+arg_4]",
+    "line": "mov     ecx, [esp+8+last]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A0FBE",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A0FBF",
-    "line": "push    edx",
+    "line": "push    edx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A0FC0",
-    "line": "call    sub_7A0CD0",
+    "line": "call    OB_stVector_stVector_SFrondGuide_DestroyRange_010201A0; Destroys [first,last) guide-LOD levels. Every 16-byte element owns a vector of 0x30 SFrondGuide copies, so each inner guide range is deep-destroyed before its allocation is freed.",
     "mnemonic": "call",
     "size": 5
   },

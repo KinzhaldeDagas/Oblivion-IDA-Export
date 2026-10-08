@@ -1,18 +1,21 @@
-unsigned __int8 __thiscall sub_470CB0(_DWORD *this, int a2)
+// AnimSequenceMultiple vtable +0x14. Produces an 8-bit list index by incrementing AL. Indices >=256 wrap modulo 256; index 254 collides with the save format's 0xFE null marker, and index 255 collides with 0xFF random/missing.
+unsigned __int8 __thiscall AnimSequenceMultiple_GetSelectorForSequence(
+        AnimSequenceMultiple *this,
+        BSAnimGroupSequence *sequence)
 {
-  _DWORD *v2; // ecx
+  NiTList_Entry *head; // ecx
   unsigned __int8 result; // al
 
-  v2 = *(_DWORD **)(*(this + 1) + 4);
-  result = 0;
-  if ( !v2 )
-    return 0xFF;
-  while ( a2 != v2[2] )
+  head = this->sequences->head; /*0x470cb3*/
+  result = 0; /*0x470cb6*/
+  if ( !head ) /*0x470cba*/
+    return 0xFF; /*0x470ccd*/
+  while ( sequence != head->data ) /*0x470cc3*/
   {
-    v2 = (_DWORD *)*v2;
-    ++result;
-    if ( !v2 )
-      return 0xFF;
+    head = head->next; /*0x470cc5*/
+    ++result; /*0x470cc7*/
+    if ( !head ) /*0x470ccb*/
+      return 0xFF; /*0x470ccb*/
   }
-  return result;
+  return result; /*0x470ccf*/
 }

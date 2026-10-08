@@ -1,4 +1,4 @@
-0x4D77D0: push    esi
+0x4D77D0: push    esi; Verified wrapper lookup: follows linked-door references until it finds an ExtraLock wrapper, returning that wrapper or null when the chain ends without lock data.
 0x4D77D1: push    edi
 0x4D77D2: lea     esi, [ecx+44h]
 0x4D77D5: push    31h ; '1'; a2
@@ -12,16 +12,16 @@
 0x4D77EB: mov     esi, eax
 0x4D77ED: test    esi, esi
 0x4D77EF: jz      short loc_4D780C
-0x4D77F1: mov     ecx, esi
-0x4D77F3: call    sub_42B410
+0x4D77F1: mov     ecx, esi; this
+0x4D77F3: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x4D77F8: test    eax, eax
 0x4D77FA: jz      short loc_4D780C
-0x4D77FC: mov     ecx, esi
-0x4D77FE: call    sub_42B410
+0x4D77FC: mov     ecx, esi; this
+0x4D77FE: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x4D7803: pop     edi
-0x4D7804: mov     ecx, eax
+0x4D7804: mov     ecx, eax; doorReference
 0x4D7806: pop     esi
-0x4D7807: jmp     sub_4D77D0
+0x4D7807: jmp     TESObjectREFR_FindLockExtraOnLinkedDoorChain; Verified wrapper lookup: follows linked-door references until it finds an ExtraLock wrapper, returning that wrapper or null when the chain ends without lock data.
 0x4D780C: mov     eax, edi
 0x4D780E: pop     edi
 0x4D780F: pop     esi

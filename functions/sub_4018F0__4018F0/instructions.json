@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4018F0",
-    "line": "push    esi",
+    "line": "push    esi; Merges two adjacent free blocks: unlinks both, increases the first block's size by second+header, fixes trailing/last-block links, then reinserts it.",
     "mnemonic": "push",
     "size": 1
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x401918",
-    "line": "call    sub_401690",
+    "line": "call    MemoryHeap_RemoveFreeEntry; Unlinks a free block from its doubly linked size bin, clears the free flag and links, and updates bin/global free-entry counts.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x401944",
-    "line": "call    sub_401690",
+    "line": "call    MemoryHeap_RemoveFreeEntry; Unlinks a free block from its doubly linked size bin, clears the free flag and links, and updates bin/global free-entry counts.",
     "mnemonic": "call",
     "size": 5
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x401979",
-    "line": "call    sub_4015F0",
+    "line": "call    MemoryHeap_InsertFreeEntry; Marks a block free, appends it to the size-selected doubly linked free list, updates free-list statistics, and records the bin's active count.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x401994",
-    "line": "call    sub_4015F0",
+    "line": "call    MemoryHeap_InsertFreeEntry; Marks a block free, appends it to the size-selected doubly linked free list, updates free-list statistics, and records the bin's active count.",
     "mnemonic": "call",
     "size": 5
   },

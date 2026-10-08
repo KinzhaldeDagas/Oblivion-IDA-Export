@@ -6,14 +6,14 @@
 0x782F3E: mov     edi, [esi+14h]
 0x782F41: mov     [esp+0Ch+var_4], ecx
 0x782F45: jnz     short loc_782F4C
-0x782F47: call    sub_783C70
+0x782F47: call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.
 0x782F4C: and     edi, 0FFh
 0x782F52: cmp     dword ptr ds:0B428D8h[edi*4], 8
 0x782F5A: jz      short loc_782F85
 0x782F5C: cmp     byte ptr ds:0B4295Bh, 0
 0x782F63: mov     edi, [esi+14h]
 0x782F66: jnz     short loc_782F6D
-0x782F68: call    sub_783C70
+0x782F68: call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.
 0x782F6D: and     edi, 0FFh
 0x782F73: cmp     dword ptr ds:0B428D8h[edi*4], 9
 0x782F7B: jz      short loc_782F85
@@ -31,7 +31,6 @@
 0x782F92: jbe     short loc_782FD6
 0x782F94: mov     edi, [esp+14h+arg_C]
 0x782F98: jmp     short loc_782FA0
-0x782F9A: align 10h
 0x782FA0: mov     edx, [esp+14h+arg_10]
 0x782FA4: movzx   edx, word ptr [edx+esi*2]
 0x782FA8: mov     eax, [esp+14h+var_4]

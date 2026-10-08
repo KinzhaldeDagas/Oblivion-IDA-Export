@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x41021B",
-    "line": "mov     eax, OSGlobals",
+    "line": "mov     eax, ds:0B33398h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x410229",
-    "line": "jz      short loc_410252",
+    "line": "jz      short loc_410252; ModernWindowsCompatible decode: Bink open path compares current thread id with OSGlobals+0x10 before using OSGlobals+0x14 as the main thread handle for SuspendThread.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x410238",
-    "line": "mov     edx, OSGlobals",
+    "line": "mov     edx, ds:0B33398h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -535,13 +535,13 @@
   },
   {
     "ea": "0x41028E",
-    "line": "jz      short loc_41029F",
+    "line": "jz      short loc_41029F; ModernWindowsCompatible decode: Bink open path resumes OSGlobals+0x14 after non-main-thread BinkOpen; this verifies the mainThreadHandle consumer for the 0x404A55 patch.",
     "mnemonic": "jz",
     "size": 2
   },
   {
     "ea": "0x410290",
-    "line": "mov     eax, OSGlobals",
+    "line": "mov     eax, ds:0B33398h",
     "mnemonic": "mov",
     "size": 5
   },

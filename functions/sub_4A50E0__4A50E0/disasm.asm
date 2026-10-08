@@ -1,4 +1,4 @@
-0x4A50E0: push    0FFFFFFFFh
+0x4A50E0: push    0FFFFFFFFh; Verified: writes Sound data header + 4-byte RDMD metadata + a packed RDSD array of 12-byte records; record +0 is music type form pointer, +4/+8 Unknown.
 0x4A50E2: push    offset ??0bhkNiTriStripsShape@@QAE@XZ_SEH
 0x4A50E7: mov     eax, large fs:0
 0x4A50ED: push    eax
@@ -13,7 +13,7 @@
 0x4A50FB: lea     eax, [esp+24h+var_C]
 0x4A50FF: mov     large fs:0, eax
 0x4A5105: mov     esi, ecx
-0x4A5107: call    sub_4A3560
+0x4A5107: call    TESRegionData_SaveHeader; Verified: serializes region-data type/override/priority base header into RDAT.
 0x4A510C: mov     eax, [esi]
 0x4A510E: mov     edx, [eax+24h]
 0x4A5111: mov     ecx, esi
@@ -83,9 +83,9 @@
 0x4A51BF: push    edx; Size
 0x4A51C0: push    edi; Src
 0x4A51C1: push    44534452h; int
-0x4A51C6: call    TESForm_PutFormRecordChunkData
+0x4A51C6: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4A51CB: push    edi
-0x4A51CC: call    FormHeapFree
+0x4A51CC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4A51D1: add     esp, 10h
 0x4A51D4: mov     ecx, [esp+24h+var_C]
 0x4A51D8: mov     large fs:0, ecx
@@ -96,3 +96,15 @@
 0x4A51E3: pop     ebx
 0x4A51E4: add     esp, 10h
 0x4A51E7: retn
+0x9CAD70: mov     eax, [ebp-10h]
+0x9CAD73: push    eax
+0x9CAD74: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CAD79: pop     ecx
+0x9CAD7A: retn
+0x9CAD7B: mov     edx, [esp+arg_4]
+0x9CAD7F: lea     eax, [edx-14h]
+0x9CAD82: mov     ecx, [edx-18h]
+0x9CAD85: xor     ecx, eax
+0x9CAD87: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CAD8C: mov     eax, offset stru_AF3390
+0x9CAD91: jmp     ___CxxFrameHandler3

@@ -1,19 +1,36 @@
 {
-  "callees_count": 8,
-  "callers_count": 24,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
+  "callers_count": 35,
+  "chunks": [
+    [
+      "0x8012E0",
+      "0x801373"
+    ],
+    [
+      "0x9D0770",
+      "0x9D07A9"
+    ]
+  ],
+  "chunks_sha256": "093aa21f634c04164f01e9054f3f09db1bf8b3abffe69968080b8a2de9ba35b7",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
+  "comment_repeatable": "\nDX11 lifetime audit 2026-10-01: BSShader+70 is a strong NiD3DPass owner. Destruction decrements the NON-ATOMIC pass counter at +60 and calls 7604D0 on zero before clearing the field. This is not a +4 NiRefObject. Root/object retention does not establish exclusion for pass writers.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
   "display_name": "BSShader::~BSShader(void)",
   "end_ea": "0x801373",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??1BSShader@@UAE@XZ",
   "segment": ".text",
   "sha256": "7f427b8a93fa252732ec63cda41042f00fa90790883b30d3af367ac79cdb3670",
   "size": 147,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x8012E0",
+  "total_chunk_size": 204,
   "type": "void __thiscall(BSShader *__hidden this)",
-  "xrefs_from_count": 51,
+  "xrefs_from_count": 71,
   "xrefs_to_count": 35
 }

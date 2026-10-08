@@ -9,17 +9,17 @@ unsigned int __usercall unknown_libname_58_::unknown_libname_59@<eax>(
 
   if ( a1 == a4 )
   {
-    if ( a4 != (_WORD)a2 && *(_DWORD *)(a3 + 0x10) != a2 )
-      JUMPOUT(0x9869B8);
-    if ( *(_BYTE *)(a3 - 0xC) != (_BYTE)a2 )
-      *(_DWORD *)(*(_DWORD *)(a3 - 0x10) + 0x70) &= ~2u;
-    return 0;
+    if ( a4 != (_WORD)a2 && *(_DWORD *)(a3 + 0x10) != a2 ) /*0x986ac5*/
+      JUMPOUT(0x9869B8); /*0x9869b8*/
+    if ( *(_BYTE *)(a3 - 0xC) != (_BYTE)a2 ) /*0x986ace*/
+      *(_DWORD *)(*(_DWORD *)(a3 - 0x10) + 0x70) &= ~2u; /*0x986ad3*/
+    return 0; /*0x986ad7*/
   }
   else
   {
     result = a1 < a4 ? 1 : 0xFFFFFFFF;
-    if ( *(_BYTE *)(a3 - 0xC) != (_BYTE)a2 )
-      *(_DWORD *)(*(_DWORD *)(a3 - 0x10) + 0x70) &= ~2u;
+    if ( *(_BYTE *)(a3 - 0xC) != (_BYTE)a2 ) /*0x986b1b*/
+      *(_DWORD *)(*(_DWORD *)(a3 - 0x10) + 0x70) &= ~2u; /*0x986b20*/
   }
-  return result;
+  return result; /*0x986add*/
 }

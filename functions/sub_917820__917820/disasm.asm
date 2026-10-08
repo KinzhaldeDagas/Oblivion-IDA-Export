@@ -53,3 +53,12 @@
 0x9178E0: pop     ecx
 0x9178E1: add     esp, 30h
 0x9178E4: retn
+0x9D7BC0: lea     ecx, [ebp-24h]
+0x9D7BC3: jmp     sub_8B44C0
+0x9D7BC8: mov     edx, [esp+arg_4]
+0x9D7BCC: lea     eax, [edx-24h]
+0x9D7BCF: mov     ecx, [edx-28h]
+0x9D7BD2: xor     ecx, eax
+0x9D7BD4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D7BD9: mov     eax, offset stru_AFF704
+0x9D7BDE: jmp     ___CxxFrameHandler3

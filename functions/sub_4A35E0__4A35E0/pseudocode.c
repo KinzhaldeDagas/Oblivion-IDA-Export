@@ -1,15 +1,15 @@
-_DWORD *__thiscall sub_4A35E0(_BYTE *this)
+TESRegionDataGrass *__thiscall TESRegionDataGrass_ctor(TESRegionDataGrass *self)
 {
-  _DWORD *v2; // eax
-  _DWORD *v3; // eax
+  TESRegionGrassObjectList *v2; // eax
+  TESRegionGrassObjectList *v3; // eax
 
-  sub_4A34C0(this);
-  *(_DWORD *)this = &TESRegionDataGrass::`vftable';
-  v2 = (_DWORD *)FormHeapAlloc(0x14u);
-  if ( v2 )
-    v3 = sub_4A5FD0(v2, 1);
+  TESRegionData_InitializeBase(&self->base); /*0x4a360a*/
+  self->base.vtable = (TESRegionDataVtable *)&TESRegionDataGrass::`vftable'; /*0x4a3619*/
+  v2 = (TESRegionGrassObjectList *)FormHeapAlloc(0x14u); /*0x4a361f*/
+  if ( v2 ) /*0x4a3632*/
+    v3 = TESRegionGrassObjectList_ctor(v2, 1u); /*0x4a3638*/
   else
-    v3 = 0;
-  *((_DWORD *)this + 2) = v3;
-  return this;
+    v3 = 0; /*0x4a363f*/
+  self->grassObjects = v3; /*0x4a3641*/
+  return self; /*0x4a3646*/
 }

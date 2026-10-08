@@ -1,4 +1,4 @@
-0x9A56D0: push    ebp
+0x9A56D0: push    ebp; MoonSugarEffect decode: NiD3DSCM_Vertex named/global constant applier. Resolves matrix constants such as World, WorldView, WorldViewProj, skin/bone matrices, texture transforms, light/material vectors, EyeDir, time/sin/cos/tan, and ambient light. World-family constants read NiDX9Renderer+0x940/0x980/0x9C0, so sub_765480 world-matrix updates feed programmable vertex shaders too.
 0x9A56D1: mov     ebp, esp
 0x9A56D3: and     esp, 0FFFFFFF0h
 0x9A56D6: sub     esp, 174h
@@ -679,7 +679,7 @@
 0x9A5F50: mov     ecx, off_B329E4; jumptable 009A5702 cases 82-86
 0x9A5F56: push    ecx
 0x9A5F57: mov     ecx, [ebp+arg_8]
-0x9A5F5A: call    NiObjectNET_GetExtraData
+0x9A5F5A: call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.
 0x9A5F5F: test    eax, eax
 0x9A5F61: jnz     short loc_9A5F6B
 0x9A5F63: mov     [esp+180h+var_164], 80000010h
@@ -736,3 +736,60 @@
 0x9A6039: lea     eax, [esp+180h+var_150]
 0x9A603D: fstp    [esp+180h+var_144]
 0x9A6041: jmp     loc_9A60D3
+0x9A6054: fldz; jumptable 009A5702 case 87
+0x9A6056: mov     eax, [ebp+arg_1C]
+0x9A6059: test    eax, eax
+0x9A605B: fst     [esp+180h+var_160]
+0x9A605F: fst     [esp+180h+var_15C]
+0x9A6063: fstp    [esp+180h+var_158]
+0x9A6067: fld1
+0x9A6069: fstp    [esp+180h+var_154]
+0x9A606D: jz      short loc_9A60CF
+0x9A606F: mov     esi, [eax+0Ch]
+0x9A6072: test    esi, esi
+0x9A6074: jz      short loc_9A60CF
+0x9A6076: mov     eax, [esi+4]
+0x9A6079: mov     esi, [esi]
+0x9A607B: push    eax
+0x9A607C: push    offset stru_B40224
+0x9A6081: call    NiRTTI_Cast
+0x9A6086: add     esp, 8
+0x9A6089: test    eax, eax
+0x9A608B: jz      short loc_9A60CB
+0x9A608D: fld     dword ptr [eax+0DCh]
+0x9A6093: push    ecx
+0x9A6094: lea     ecx, [esp+184h+var_150]
+0x9A6098: fstp    [esp+184h+var_184]; float
+0x9A609B: push    ecx; int
+0x9A609C: lea     ecx, [eax+0E0h]
+0x9A60A2: call    sub_775F60
+0x9A60A7: fld     [esp+180h+var_160]
+0x9A60AB: fadd    [esp+180h+var_150]
+0x9A60AF: fstp    [esp+180h+var_160]
+0x9A60B3: fld     [esp+180h+var_15C]
+0x9A60B7: fadd    [esp+180h+var_14C]
+0x9A60BB: fstp    [esp+180h+var_15C]
+0x9A60BF: fld     [esp+180h+var_158]
+0x9A60C3: fadd    [esp+180h+var_148]
+0x9A60C7: fstp    [esp+180h+var_158]
+0x9A60CB: test    esi, esi
+0x9A60CD: jnz     short loc_9A6076
+0x9A60CF: lea     eax, [esp+180h+var_160]
+0x9A60D3: mov     ecx, [ebp+arg_0]
+0x9A60D6: mov     edx, [ecx]
+0x9A60D8: mov     edx, [edx+28h]
+0x9A60DB: push    0
+0x9A60DD: push    eax
+0x9A60DE: mov     eax, [ebp+arg_4]
+0x9A60E1: push    eax
+0x9A60E2: call    edx
+0x9A60E4: test    al, al
+0x9A60E6: jnz     short def_9A5702; jumptable 009A5702 default case, cases 69-72,78,79
+0x9A60E8: mov     [esp+180h+var_164], 80000050h
+0x9A60F0: mov     eax, [esp+180h+var_164]; jumptable 009A5702 default case, cases 69-72,78,79
+0x9A60F4: pop     edi
+0x9A60F5: pop     esi
+0x9A60F6: pop     ebx
+0x9A60F7: mov     esp, ebp
+0x9A60F9: pop     ebp
+0x9A60FA: retn    2Ch ; ','

@@ -139,13 +139,13 @@
   },
   {
     "ea": "0x6F23F9",
-    "line": "push    esi; char *",
+    "line": "push    esi; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F23FA",
-    "line": "call    sub_78FB60",
+    "line": "call    OB_stVector4_Allocate_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded allocator for vectors with 4-byte elements. Validates count*4 overflow, throws bad_alloc on overflow, and allocates through FormHeapAlloc; FindPairs uses it for vector<bool>'s uint32 backing words.",
     "mnemonic": "call",
     "size": 5
   },

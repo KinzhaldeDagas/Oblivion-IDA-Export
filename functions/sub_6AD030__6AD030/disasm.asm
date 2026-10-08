@@ -13,12 +13,12 @@
 0x6AD05B: push    edi
 0x6AD05C: jnz     loc_6AD2A7
 0x6AD062: mov     ecx, ds:0B333C4h; this
-0x6AD068: call    TESObjectREFR_GetParentCell
+0x6AD068: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6AD06D: mov     edi, eax
 0x6AD06F: test    edi, edi
 0x6AD071: jz      loc_6ADDF5
 0x6AD077: mov     ecx, edi; this
-0x6AD079: call    TESObjectCELL_IsInterior
+0x6AD079: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x6AD07E: test    al, al
 0x6AD080: jnz     short loc_6AD0CB
 0x6AD082: mov     ecx, ds:0B333C4h
@@ -52,7 +52,7 @@
 0x6AD0E3: push    0
 0x6AD0E5: push    0
 0x6AD0E7: mov     ecx, edi
-0x6AD0E9: call    TESObjectCELL_GetMusicType
+0x6AD0E9: call    TESObjectCELL_GetMusicType; Verified: resolves the music type for a cell by using region-data ID 7, virtual sound-type lookup, and a position/cell cache; falls back to worldspace music when no region sound type is selected.
 0x6AD0EE: push    eax
 0x6AD0EF: mov     ecx, esi
 0x6AD0F1: call    sub_6ACD10
@@ -101,7 +101,7 @@
 0x6AD190: lea     eax, [esp+434h+MultiByteStr]
 0x6AD194: push    eax; lpFileName
 0x6AD195: mov     ecx, esi
-0x6AD197: call    sub_6A8E80
+0x6AD197: call    sub_6A8E80; NoCombatMusic research: music type 4 selects Data\Music\Battle\*.mp3.
 0x6AD19C: test    al, al
 0x6AD19E: jz      loc_6ADDEE
 0x6AD1A4: lea     ecx, [esp+430h+MultiByteStr]
@@ -116,7 +116,6 @@
 0x6AD1C5: lea     ecx, [esp+430h+MultiByteStr]
 0x6AD1C9: mov     eax, ebp
 0x6AD1CB: jmp     short loc_6AD1D0
-0x6AD1CD: align 10h
 0x6AD1D0: mov     dl, [eax]
 0x6AD1D2: cmp     dl, [ecx]
 0x6AD1D4: jnz     short loc_6AD1F0
@@ -319,7 +318,7 @@
 0x6AD460: push    0
 0x6AD462: call    TES_GetCurrentCell
 0x6AD467: mov     ecx, eax
-0x6AD469: call    TESObjectCELL_GetMusicType
+0x6AD469: call    TESObjectCELL_GetMusicType; Verified: resolves the music type for a cell by using region-data ID 7, virtual sound-type lookup, and a position/cell cache; falls back to worldspace music when no region sound type is selected.
 0x6AD46E: movzx   ebp, ax
 0x6AD471: jmp     short loc_6AD475
 0x6AD473: xor     ebp, ebp
@@ -327,7 +326,7 @@
 0x6AD476: lea     ecx, [esp+434h+MultiByteStr]
 0x6AD47A: push    ecx; lpFileName
 0x6AD47B: mov     ecx, esi
-0x6AD47D: call    sub_6A8E80
+0x6AD47D: call    sub_6A8E80; NoCombatMusic research: music type 4 selects Data\Music\Battle\*.mp3.
 0x6AD482: test    al, al
 0x6AD484: jz      loc_6AD58E
 0x6AD48A: lea     edx, [esp+430h+MultiByteStr]
@@ -470,12 +469,12 @@
 0x6AD63E: fstp    st
 0x6AD640: jnz     loc_6AD8AA
 0x6AD646: mov     ecx, ds:0B333C4h; this
-0x6AD64C: call    TESObjectREFR_GetParentCell
+0x6AD64C: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6AD651: mov     edi, eax
 0x6AD653: test    edi, edi
 0x6AD655: jz      loc_6AD934
 0x6AD65B: mov     ecx, edi; this
-0x6AD65D: call    TESObjectCELL_IsInterior
+0x6AD65D: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x6AD662: test    al, al
 0x6AD664: jnz     short loc_6AD6AF
 0x6AD666: mov     ecx, ds:0B333C4h
@@ -517,7 +516,7 @@
 0x6AD6E4: mov     ecx, edi
 0x6AD6E6: push    0
 0x6AD6E8: push    0
-0x6AD6EA: call    TESObjectCELL_GetMusicType
+0x6AD6EA: call    TESObjectCELL_GetMusicType; Verified: resolves the music type for a cell by using region-data ID 7, virtual sound-type lookup, and a position/cell cache; falls back to worldspace music when no region sound type is selected.
 0x6AD6EF: push    eax
 0x6AD6F0: mov     ecx, esi
 0x6AD6F2: call    sub_6ACD10
@@ -563,7 +562,7 @@
 0x6AD780: lea     ecx, [esp+434h+MultiByteStr]
 0x6AD784: push    ecx; lpFileName
 0x6AD785: mov     ecx, esi
-0x6AD787: call    sub_6A8E80
+0x6AD787: call    sub_6A8E80; NoCombatMusic research: music type 4 selects Data\Music\Battle\*.mp3.
 0x6AD78C: test    al, al
 0x6AD78E: jz      loc_6AD89E
 0x6AD794: lea     edx, [esp+430h+MultiByteStr]
@@ -578,7 +577,6 @@
 0x6AD7B5: lea     ecx, [esp+430h+MultiByteStr]
 0x6AD7B9: mov     eax, ebp
 0x6AD7BB: jmp     short loc_6AD7C0
-0x6AD7BD: align 10h
 0x6AD7C0: mov     dl, [eax]
 0x6AD7C2: cmp     dl, [ecx]
 0x6AD7C4: jnz     short loc_6AD7E0
@@ -828,7 +826,7 @@
 0x6ADAD9: push    0
 0x6ADADB: call    TES_GetCurrentCell
 0x6ADAE0: mov     ecx, eax
-0x6ADAE2: call    TESObjectCELL_GetMusicType
+0x6ADAE2: call    TESObjectCELL_GetMusicType; Verified: resolves the music type for a cell by using region-data ID 7, virtual sound-type lookup, and a position/cell cache; falls back to worldspace music when no region sound type is selected.
 0x6ADAE7: movzx   ebx, ax
 0x6ADAEA: jmp     short loc_6ADAEE
 0x6ADAEC: xor     ebx, ebx
@@ -836,7 +834,7 @@
 0x6ADAEF: lea     eax, [esp+434h+MultiByteStr]
 0x6ADAF3: push    eax; lpFileName
 0x6ADAF4: mov     ecx, esi
-0x6ADAF6: call    sub_6A8E80
+0x6ADAF6: call    sub_6A8E80; NoCombatMusic research: music type 4 selects Data\Music\Battle\*.mp3.
 0x6ADAFB: test    al, al
 0x6ADAFD: jz      loc_6ADDF5
 0x6ADB03: lea     ecx, [esp+430h+MultiByteStr]
@@ -851,7 +849,6 @@
 0x6ADB25: lea     ecx, [esp+430h+MultiByteStr]
 0x6ADB29: mov     eax, ebp
 0x6ADB2B: jmp     short loc_6ADB30
-0x6ADB2D: align 10h
 0x6ADB30: mov     dl, [eax]
 0x6ADB32: cmp     dl, [ecx]
 0x6ADB34: jnz     short loc_6ADB50
@@ -935,9 +932,9 @@
 0x6ADC29: jz      loc_6ADDF5
 0x6ADC2F: mov     ecx, ds:0B333C4h
 0x6ADC35: push    1
-0x6ADC37: call    PlayerCharacter_IsPlayerInCombat
+0x6ADC37: call    PlayerCharacter_IsPlayerInCombat; NoCombatMusic research: PlayerCharacter_IsPlayerInCombat(player, 1) gate for entering battle music.
 0x6ADC3C: test    al, al
-0x6ADC3E: jz      loc_6ADDF5
+0x6ADC3E: jz      loc_6ADDF5; NoCombatMusic patch site: convert JZ loc_6ADDF5 to unconditional JMP loc_6ADDF5 to skip battle-music transition.
 0x6ADC44: xor     edi, edi
 0x6ADC46: cmp     byte ptr ds:0B16180h, 0
 0x6ADC4D: jz      loc_6ADDF5
@@ -981,7 +978,7 @@
 0x6ADCD6: push    4; __int16
 0x6ADCD8: push    edx; lpFileName
 0x6ADCD9: mov     ecx, esi
-0x6ADCDB: call    sub_6A8E80
+0x6ADCDB: call    sub_6A8E80; NoCombatMusic research: music type 4 selects Data\Music\Battle\*.mp3.
 0x6ADCE0: test    al, al
 0x6ADCE2: jz      loc_6ADDF5
 0x6ADCE8: lea     eax, [esp+430h+MultiByteStr]

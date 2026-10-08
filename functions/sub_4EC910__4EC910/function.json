@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
-  "callers_count": 9,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 10,
+  "chunks": [
+    [
+      "0x4EC910",
+      "0x4EC95D"
+    ]
+  ],
+  "chunks_sha256": "734284632266e250dcc7e44d3d806daf25c4ab491b6b436bbcb922bde0f609f2",
+  "comment_regular": "NiGeometry shader smart-pointer setter: releases the old BSShader, stores the new shader, and AddRefs it when the pointer changes.",
+  "comment_repeatable": "NiGeometry shader smart-pointer setter: releases the old BSShader, stores the new shader, and AddRefs it when the pointer changes.\nDX11 per-object lifetime audit 2026-10-01: NiGeometry has strong +4 NiRef associations at +AC (NiPropertyState), +B4 (geometry data) and +BC (shader). Constructor7227B0 retains incoming data; getter405760 returns/retains the +AC state; updater722B30 replaces +AC with decrement/destroy/assign/increment semantics; shader setter4EC910 does the same at+BC. NiPropertyState vtableA80984 has TEN strong slots from+8 through+2C; destructor731700 decrements each pointee+4 and destroys-on-zero. Ordinary Lighting30 uses slot4 (+18) with property vtableA9576C and shader vtableA930C4. These owner relationships permit separately qualified positive-CAS pins; mutable raw arrays, pooled render-pass nodes, texture-stage objects and COM resources are separate lifetimes and must not be assumed retained by this proof.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4EC910",
+  "display_name": "NiGeometry_SetShader",
   "end_ea": "0x4EC95D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4EC910",
+  "name": "NiGeometry_SetShader",
   "segment": ".text",
   "sha256": "734284632266e250dcc7e44d3d806daf25c4ab491b6b436bbcb922bde0f609f2",
   "size": 77,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4EC910",
-  "type": "void __thiscall(NiGeometry *this, BSShader *a2)",
+  "total_chunk_size": 77,
+  "type": "void __thiscall(NiGeometry *this, BSShader *shader)",
   "xrefs_from_count": 36,
   "xrefs_to_count": 10
 }

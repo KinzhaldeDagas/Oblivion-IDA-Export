@@ -41,7 +41,7 @@
 0x4CCADD: mov     ebp, eax
 0x4CCADF: call    BaseExtraList_AddExtra
 0x4CCAE4: push    ebx; a2
-0x4CCAE5: mov     ecx, offset stru_B35C80; this
+0x4CCAE5: mov     ecx, offset unk_B35C80; this
 0x4CCAEA: call    sub_496EA0
 0x4CCAEF: lea     esi, [ebx+48h]
 0x4CCAF2: test    esi, esi
@@ -67,7 +67,7 @@
 0x4CCB26: cmp     dword ptr [edi+58h], 0
 0x4CCB2A: jz      short loc_4CCB44
 0x4CCB2C: mov     ecx, edi; this
-0x4CCB2E: call    Actor__GetProcessLevel
+0x4CCB2E: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x4CCB33: cmp     eax, 3
 0x4CCB36: jnz     short loc_4CCB44
 0x4CCB38: mov     edx, [edi]
@@ -77,7 +77,7 @@
 0x4CCB44: test    esi, esi
 0x4CCB46: jnz     short loc_4CCAF6
 0x4CCB48: push    ebx; a2
-0x4CCB49: mov     ecx, offset stru_B35C80; this
+0x4CCB49: mov     ecx, offset unk_B35C80; this
 0x4CCB4E: call    sub_496F50
 0x4CCB53: cmp     [esp+28h+var_14], 0
 0x4CCB58: jz      short loc_4CCB7F
@@ -102,3 +102,15 @@
 0x4CCB8E: pop     ebx
 0x4CCB8F: add     esp, 14h
 0x4CCB92: retn    4
+0x9B5200: mov     eax, [ebp-14h]
+0x9B5203: push    eax
+0x9B5204: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B5209: pop     ecx
+0x9B520A: retn
+0x9B520B: mov     edx, [esp+arg_4]
+0x9B520F: lea     eax, [edx-18h]
+0x9B5212: mov     ecx, [edx-1Ch]
+0x9B5215: xor     ecx, eax
+0x9B5217: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B521C: mov     eax, offset stru_AE03C0
+0x9B5221: jmp     ___CxxFrameHandler3

@@ -1,1 +1,1 @@
-BSFogProperty
+struct BSFogProperty;

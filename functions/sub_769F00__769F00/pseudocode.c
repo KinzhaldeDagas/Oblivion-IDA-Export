@@ -1,4 +1,4 @@
-void *sub_769F00()
+NiRTTI *sub_769F00()
 {
-  return &unk_B42168;
+  return &stru_B42168; /*0x769f05*/
 }

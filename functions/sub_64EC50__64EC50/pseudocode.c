@@ -1,92 +1,110 @@
+// 3DTheft decode 2026-05-16: Follow procedure execution reads its target ref from procedure state +0x2C/+0xB and drives movement toward that target's cell/worldspace; no plugin-owned actor/package memory is dereferenced at the later 0x0040DECF crash site.
 char __userpurge sub_64EC50@<al>(
         TESObjectREFR **this@<ecx>,
         double a2@<st1>,
         double a3@<st0>,
-        Actor *a4,
-        int a5,
-        char a6)
+        double a4@<st2>,
+        double a5@<st7>,
+        double a6@<st3>,
+        Actor *a7,
+        int a8,
+        char a9)
 {
-  int v8; // eax
-  int v9; // eax
-  TESPackage *v10; // ebx
-  char *y_low; // ecx
-  char v12; // al
-  int v13; // ecx
-  double v15; // st7
-  TESObjectREFR *v16; // eax
-  int v17; // ebx
-  TESObjectREFR *v18; // ebp
-  TESObjectCELL *ParentCell; // eax
-  int v20; // eax
+  int v12; // eax
+  int v13; // eax
+  TESPackage *v14; // ebx
+  float y; // ecx
+  char v16; // al
+  int v17; // ecx
+  double v19; // st7
+  TESObjectREFR *v20; // eax
+  int v21; // ebx
+  int v22; // ebp
+  UInt32 DwordAtOffset40; // eax
+  int v24; // eax
   TESWorldSpace *WorldSpace; // [esp+4h] [ebp-1Ch]
-  float v22; // [esp+8h] [ebp-18h]
-  float v23; // [esp+Ch] [ebp-14h]
-  TESPackage *v24; // [esp+24h] [ebp+4h]
-  int v25; // [esp+2Ch] [ebp+Ch]
+  float v26; // [esp+8h] [ebp-18h]
+  float v27; // [esp+Ch] [ebp-14h]
+  TESPackage *v28; // [esp+24h] [ebp+4h]
+  int v29; // [esp+2Ch] [ebp+Ch]
 
-  if ( !*(this + 0xB) )
-    ((void (__thiscall *)(TESObjectREFR **, Actor *))LODWORD((*this)[0xF].member.pos[1]))(this, a4);
-  v8 = (int)*(this + 0xB);
-  if ( !v8 || (*(_DWORD *)(v8 + 8) & 0x20) != 0 )
+  if ( !*(this + 0xB) ) /*0x64ec53*/
+    ((void (__thiscall *)(TESObjectREFR **, Actor *))LODWORD((*this)[0xF].member.pos[1]))(this, a7); /*0x64ec67*/
+  v12 = (int)*(this + 0xB); /*0x64ec69*/
+  if ( !v12 || (*(_DWORD *)(v12 + 8) & 0x20) != 0 ) /*0x64ec7c*/
   {
-    if ( !a6 )
-      return 0;
-    ((void (__thiscall *)(TESObjectREFR **, Actor *, int))LODWORD((*this)[4].member.rot.z))(this, a4, 1);
-    return 0;
+    if ( !a9 ) /*0x64ee00*/
+      return 0; /*0x64ed74*/
+    ((void (__thiscall *)(TESObjectREFR **, Actor *, int))LODWORD((*this)[4].member.rot.z))(this, a7, 1); /*0x64ee13*/
+    return 0; /*0x64ee16*/
   }
   else
   {
-    v9 = ((int (__thiscall *)(TESObjectREFR **))LODWORD((*this)[4].member.rot.y))(this);
-    v10 = (TESPackage *)v9;
-    v24 = (TESPackage *)v9;
-    if ( v9 && (*(_BYTE *)(v9 + 0x1E) & 1) != 0 )
+    v13 = ((int (__usercall *)@<eax>(TESObjectREFR **@<ecx>, double@<st0>, double@<st1>, double@<st2>, double@<st3>))LODWORD((*this)[4].member.rot.y))( /*0x64ec8d*/
+            this,
+            a3,
+            a2,
+            a4,
+            a6);
+    v14 = (TESPackage *)v13; /*0x64ec8f*/
+    v28 = (TESPackage *)v13; /*0x64ec93*/
+    if ( v13 && (*(_BYTE *)(v13 + 0x1E) & 1) != 0 ) /*0x64ec9d*/
     {
-      if ( sub_663A60((int)a4) || sub_663A00() >= dword_B36A80 )
-        return 0;
-      sub_5668E0(v10, 0);
+      if ( sub_663A60((int)a7) || sub_663A00() >= (int)stru_B36A80.value ) /*0x64ecc4*/
+        return 0; /*0x64ecc4*/
+      sub_5668E0(v14, 0); /*0x64ecce*/
     }
-    if ( !a4->vtbl->IsInCombat(a4, 1) )
+    if ( !a7->vtbl->IsInCombat(a7, 1) ) /*0x64ecdf*/
     {
-      if ( !*(this + 0xB)
-        || (y_low = (char *)LODWORD((*(this + 2))->member.rot.y)) != 0
-        && sub_569740(y_low) < 2
-        && (a3 = sub_566DC0((TESPackage *)*(this + 2), flt_A30634, a2, a4, 0, flt_A30634), v12) )
+      if ( !*(this + 0xB) /*0x64ed1a*/
+        || (y = (*(this + 2))->member.rot.y, y != 0.0)
+        && sub_569740((char *)LODWORD(y)) < 2
+        && (a3 = sub_566DC0(
+                   (TESPackage *)*(this + 2),
+                   a3,
+                   kTerrainLODQuadRayDirectionZ,
+                   a4,
+                   a7,
+                   0,
+                   kTerrainLODQuadRayDirectionZ),
+            v16) )
       {
-        if ( a6 )
-          ((void (__thiscall *)(TESObjectREFR **, Actor *, int))LODWORD((*this)[4].member.rot.z))(this, a4, 1);
-        if ( sub_5660A0((TESPackage *)*(this + 2)) )
+        if ( a9 ) /*0x64ed21*/
+          ((void (__thiscall *)(TESObjectREFR **, Actor *, int))LODWORD((*this)[4].member.rot.z))(this, a7, 1); /*0x64ed30*/
+        if ( TESPackage_IsRuntimePackage((TESPackage *)*(this + 2)) ) /*0x64ed35*/
         {
-          v13 = (int)*(this + 2);
-          if ( v13 )
-            (*(void (__thiscall **)(int, int))(*(_DWORD *)v13 + 0x10))(v13, 1);
-          *(this + 2) = 0;
-          a4->vtbl->super.super.super.ClearModified((TESForm *)a4, 0x30000);
-          ((void (__thiscall *)(TESObjectREFR **, Actor *, _DWORD))(*this)->member.childCell.GetChildCell)(this, a4, 0);
-          return 0;
+          v17 = (int)*(this + 2); /*0x64ed3e*/
+          if ( v17 ) /*0x64ed43*/
+            (*(void (__thiscall **)(int, int))(*(_DWORD *)v17 + 0x10))(v17, 1); /*0x64ed4c*/
+          *(this + 2) = 0; /*0x64ed4e*/
+          ((void (__usercall *)(Actor *@<ecx>, int, double@<st0>))a7->vtbl->super.super.super.ClearModified)( /*0x64ed61*/
+            a7,
+            0x30000,
+            a3);
+          ((void (__thiscall *)(TESObjectREFR **, Actor *, _DWORD))(*this)->member.childCell.GetChildCell)(this, a7, 0); /*0x64ed6d*/
+          return 0; /*0x64ed6d*/
         }
       }
     }
-    v15 = sub_5677B0(v10, a3, (TESObjectREFR *)a4, 2);
-    v25 = Double_To_SInt32(v15);
-    v16 = *(this + 0xB);
-    if ( !v16 || (double)v25 >= TesObjectREF_GetDistance((TESObjectREFR *)a4, v16, 0) )
-      return 0;
-    v17 = (int)*(this + 0xB);
-    v18 = *this;
-    v23 = flt_A30634;
-    v22 = sub_5677B0(v24, v23, (TESObjectREFR *)a4, 1);
-    WorldSpace = TESObjectREFR_GetWorldSpace(*(this + 0xB));
-    ParentCell = TESObjectREFR_GetParentCell(*(this + 0xB));
-    v20 = (*(int (__thiscall **)(int, TESObjectCELL *, TESWorldSpace *, _DWORD, _DWORD))(*(_DWORD *)v17 + 0x174))(
-            v17,
-            ParentCell,
+    v19 = sub_5677B0(v14, a3, (TESObjectREFR *)a7, 2); /*0x64ed7c*/
+    v29 = Double_To_SInt32(v19); /*0x64ed86*/
+    v20 = *(this + 0xB); /*0x64ed8a*/
+    if ( !v20 || (double)v29 >= TesObjectREF_GetDistance((TESObjectREFR *)a7, v20, 0) ) /*0x64eda6*/
+      return 0; /*0x64eda6*/
+    v21 = (int)*(this + 0xB); /*0x64edae*/
+    v22 = (int)*this; /*0x64edb2*/
+    v27 = kTerrainLODQuadRayDirectionZ; /*0x64edb9*/
+    sub_5677B0(v28, v19, (TESObjectREFR *)a7, 1); /*0x64edbf*/
+    v26 = a5; /*0x64edc8*/
+    WorldSpace = TESObjectREFR_GetWorldSpace(*(this + 0xB)); /*0x64edd3*/
+    DwordAtOffset40 = Shared_GetDwordAtOffset40(*(this + 0xB)); /*0x64edd4*/
+    v24 = (*(int (__thiscall **)(int, UInt32, TESWorldSpace *, _DWORD, _DWORD))(*(_DWORD *)v21 + 0x174))( /*0x64ede4*/
+            v21,
+            DwordAtOffset40,
             WorldSpace,
-            LODWORD(v22),
-            LODWORD(v23));
-    (*(void (__thiscall **)(TESObjectREFR **, Actor *, int))&v18[0xB].member.baseExtraList.members.m_presenceBitfield[4])(
-      this,
-      a4,
-      v20);
-    return 0;
+            LODWORD(v26),
+            LODWORD(v27));
+    (*(void (__thiscall **)(TESObjectREFR **, Actor *, int))(v22 + 0x418))(this, a7, v24); /*0x64edf0*/
+    return 0; /*0x64edf5*/
   }
 }

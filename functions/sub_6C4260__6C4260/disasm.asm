@@ -4,7 +4,7 @@
 0x6C4266: push    edi
 0x6C4267: push    eax
 0x6C4268: mov     esi, ecx
-0x6C426A: call    nullsub_returnvVoid_1arg
+0x6C426A: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x6C426F: mov     ebx, [esi+30h]
 0x6C4272: xor     edi, edi
 0x6C4274: cmp     [esi+46h], di

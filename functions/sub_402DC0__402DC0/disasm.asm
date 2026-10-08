@@ -1,10 +1,10 @@
-0x402DC0: mov     eax, [ecx+4]
+0x402DC0: mov     eax, [ecx+4]; Maps GameMonth 0..11 to a four-season index: 0 for 2..4, 1 for 5..7, 2 for 8..10, 3 for 11/0/1. Used to select seasonal chance data.
 0x402DC3: push    esi
 0x402DC4: xor     esi, esi
 0x402DC6: test    eax, eax
 0x402DC8: jz      short loc_402DE8
 0x402DCA: fld     dword ptr [eax+24h]
-0x402DCD: call    Double_To_SInt32
+0x402DCD: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x402DD2: movsx   eax, al
 0x402DD5: cmp     eax, 0Bh; switch 12 cases
 0x402DD8: ja      short def_402DE1; jumptable 00402DE1 default case

@@ -1,19 +1,32 @@
 {
-  "callees_count": 33,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7ECEC0",
+      "0x7ED15B"
+    ]
+  ],
+  "chunks_sha256": "a570451686f18741d7b279b804cea34ec92c192d63814c603b488e6a56f33917",
+  "comment_regular": "Reorder existing property-side ShadowSceneLight nodes after the receiver bound changes.",
+  "comment_repeatable": "Reorder existing property-side ShadowSceneLight nodes after the receiver bound changes.\n\nMEF PERF 2026-10-07 PASS3: PERF-14 Verified: insertion-sort-style property light reorder restarts at head for each current node, recomputing every compared predecessor score. For N valid nonnull sources with finite stable nondecreasing keys, no splice occurs but comparisons=N*(N-1)/2 and score/sqrt evaluations=N*(N+1)/2. Score evaluation uses two GetLightRef temporaries, i.e. four atomic calls for live nonnull sources. No measured population/FPS claim.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7ECEC0",
+  "display_name": "BSShaderProperty_ReorderShadowLightsForReceiverBound",
   "end_ea": "0x7ED15B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7ECEC0",
+  "name": "BSShaderProperty_ReorderShadowLightsForReceiverBound",
   "segment": ".text",
   "sha256": "a570451686f18741d7b279b804cea34ec92c192d63814c603b488e6a56f33917",
   "size": 667,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7ECEC0",
-  "type": "void __thiscall(_DWORD *this, float *)",
+  "total_chunk_size": 667,
+  "type": "void __thiscall(MEF_PropertyShadowLightListView32 *self, const MEF_ReceiverBound32 *bound)",
   "xrefs_from_count": 259,
   "xrefs_to_count": 1
 }

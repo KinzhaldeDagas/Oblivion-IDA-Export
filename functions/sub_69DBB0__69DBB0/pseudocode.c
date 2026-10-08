@@ -1,18 +1,11 @@
-void *__thiscall sub_69DBB0(int this, int a2, int a3)
+// Verified (Oblivion): base SaveExtraData receives owner ActiveEffect* and target TESObjectREFR*, writes base elapsedSeconds + finished flag, and writes durationSeconds from version 0x72.
+void __thiscall MagicHitEffect_SaveExtraData(
+        MagicHitEffect *this,
+        ActiveEffect *ownerActiveEffect,
+        TESObjectREFR *targetReference)
 {
-  void *result; // eax
-  size_t v5; // [esp-4h] [ebp-8h]
-  size_t v6; // [esp-4h] [ebp-8h]
-  size_t v7; // [esp-4h] [ebp-8h]
-
-  LODWORD(v5) = 4;
-  SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, (void *)(this + 0x20), v5);
-  LODWORD(v6) = 1;
-  result = SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, (void *)(this + 0x24), v6);
-  if ( LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) >= 0x72u )
-  {
-    LODWORD(v7) = 4;
-    return SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, (void *)(this + 8), v7);
-  }
-  return result;
+  SaveLoad_SaveData(g_TESSaveLoadGame, &this->elapsedSeconds, 4u); /*0x69dbbf*/
+  SaveLoad_SaveData(g_TESSaveLoadGame, &this->bFinished, 1u); /*0x69dbd0*/
+  if ( g_TESSaveLoadGame->currentVersion >= 0x72u ) /*0x69dbdf*/
+    SaveLoad_SaveData(g_TESSaveLoadGame, &this->super.durationSeconds, 4u); /*0x69dbe7*/
 }

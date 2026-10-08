@@ -1,9 +1,9 @@
-0x68F08F: movzx   ecx, [esp+arg_C]
-0x68F094: add     ebp, 1
+0x68F08F: movzx   ecx, word ptr [esp+arg_C]
+0x68F094: add     ebp, 1; OBME/OBMEFix fidelity: loop increments active-effect record index in EBP. OBME wrapper increments EBP once more when it consumes its auxiliary conversion record, preserving two-record OBME save layout.
 0x68F097: cmp     ebp, ecx
 0x68F099: jl      short ActiveEffect_Base_LoadAEList?___LoadActiveEffects_Loop
 0x68F09B: mov     ecx, ds:0B33B00h
-0x68F0A1: call    sub_45A170
+0x68F0A1: call    TESSaveLoadGame_UseSaveGameBlocks
 0x68F0A6: test    al, al
 0x68F0A8: jz      ActiveEffect_Base_LoadAEList?___Done
 0x68F0AE: mov     ecx, ds:0B33B00h
@@ -13,10 +13,10 @@
 0x68F0BF: jz      loc_68F167
 0x68F0C5: mov     edx, [edi]
 0x68F0C7: push    edx; a1
-0x68F0C8: call    TESForm_LookupByFormID
+0x68F0C8: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x68F0CD: mov     ebx, [esp+4+arg_14]
 0x68F0D1: mov     ecx, eax
-0x68F0D3: movzx   eax, [esp+4+arg_10]
+0x68F0D3: movzx   eax, word ptr [esp+4+arg_10]
 0x68F0D8: add     eax, ebx
 0x68F0DA: add     esp, 4
 0x68F0DD: cmp     esi, eax
@@ -29,7 +29,7 @@
 0x68F0EC: mov     eax, [edx+0D4h]
 0x68F0F2: call    eax
 0x68F0F4: mov     ecx, [edi]
-0x68F0F6: movzx   edx, [esp+8+arg_10]
+0x68F0F6: movzx   edx, word ptr [esp+8+arg_10]
 0x68F0FB: push    eax
 0x68F0FC: push    ecx
 0x68F0FD: push    39Fh
@@ -54,7 +54,7 @@
 0x68F131: push    edx
 0x68F132: mov     edx, [eax+0D4h]
 0x68F138: call    edx
-0x68F13A: movzx   ecx, [esp+8+arg_10]
+0x68F13A: movzx   ecx, word ptr [esp+8+arg_10]
 0x68F13F: push    eax
 0x68F140: mov     eax, [edi]
 0x68F142: push    eax
@@ -72,7 +72,7 @@
 0x68F162: pop     ebx
 0x68F163: add     esp, 14h
 0x68F166: retn
-0x68F167: movzx   eax, [esp+arg_10]
+0x68F167: movzx   eax, word ptr [esp+arg_10]
 0x68F16C: mov     edi, [esp+arg_14]
 0x68F170: lea     edx, [eax+edi]
 0x68F173: cmp     esi, edx

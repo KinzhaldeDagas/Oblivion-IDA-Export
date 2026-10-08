@@ -1,1 +1,1 @@
-LPTIMECAPS
+typedef timecaps_tag *LPTIMECAPS;

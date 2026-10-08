@@ -1,1 +1,1 @@
-PHIDP_CAPS
+typedef _HIDP_CAPS *PHIDP_CAPS;

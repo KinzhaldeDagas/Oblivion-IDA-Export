@@ -9,35 +9,35 @@ void __thiscall sub_433970(_DWORD *this)
   char v8; // [esp+3Ch] [ebp-14h]
   unsigned int v9; // [esp+4Ch] [ebp-4h]
 
-  do
+  do /*0x433a26*/
   {
-    v4 = 0;
-    v7[2] = 0;
-    v7[4] = 0;
-    v7[5] = 0;
-    v8 = 0;
-    v7[0] = &BSTaskManagerIterator<__int64>::`vftable';
-    v9 = 0;
-    do
+    v4 = 0; /*0x4339a1*/
+    v7[2] = 0; /*0x4339a5*/
+    v7[4] = 0; /*0x4339a9*/
+    v7[5] = 0; /*0x4339ad*/
+    v8 = 0; /*0x4339b1*/
+    v7[0] = &BSTaskManagerIterator<__int64>::`vftable'; /*0x4339b5*/
+    v9 = 0; /*0x4339bd*/
+    do /*0x433a18*/
     {
-      v5 = 0;
-      LOBYTE(v9) = 1;
-      v2 = sub_433760(this, (int)v7, &v6, (int *)&v5, 1);
-      v3 = v5;
-      if ( v2 )
+      v5 = 0; /*0x4339c1*/
+      LOBYTE(v9) = 1; /*0x4339d8*/
+      v2 = sub_433760(this, (int)v7, &v6, (int *)&v5, 1); /*0x4339dd*/
+      v3 = v5; /*0x4339e4*/
+      if ( v2 ) /*0x4339e8*/
       {
-        sub_432130(v5);
-        v4 = 1;
+        IOTask_Cancel(v5); /*0x4339ed*/
+        v4 = 1; /*0x4339f2*/
       }
-      LOBYTE(v9) = 0;
-      if ( v3 )
+      LOBYTE(v9) = 0; /*0x4339f9*/
+      if ( v3 ) /*0x4339fd*/
       {
-        if ( !InterlockedDecrement(v3 + 2) )
-          (**(void (__thiscall ***)(volatile LONG *, int))v3)(v3, 1);
+        if ( !InterlockedDecrement(v3 + 2) ) /*0x433a03*/
+          (**(void (__thiscall ***)(volatile LONG *, int))v3)(v3, 1); /*0x433a11*/
       }
     }
-    while ( (v8 & 2) == 0 );
-    v9 = 0xFFFFFFFF;
+    while ( (v8 & 2) == 0 ); /*0x433a18*/
+    v9 = 0xFFFFFFFF; /*0x433a1e*/
   }
-  while ( v4 );
+  while ( v4 ); /*0x433a26*/
 }

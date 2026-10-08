@@ -1,19 +1,32 @@
 {
-  "callees_count": 14,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x795840",
+      "0x7958C9"
+    ]
+  ],
+  "chunks_sha256": "338e2d12e4f5bf6fee6113cbefffc59d9bf2665368c419eab879e319710f7fcb",
+  "comment_regular": "OBLIVION AUTHORITY (2026-08-30): Checked single-element insertion wrapper for vector<unsigned int>; validates owner/position, delegates to insert-fill, and returns an iterator to the inserted value.",
+  "comment_repeatable": "OBLIVION AUTHORITY (2026-08-30): Checked single-element insertion wrapper for vector<unsigned int>; validates owner/position, delegates to insert-fill, and returns an iterator to the inserted value.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_795840",
+  "display_name": "OB_stVectorUInt32_InsertOne_010201A0",
   "end_ea": "0x7958C9",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_795840",
+  "name": "OB_stVectorUInt32_InsertOne_010201A0",
   "segment": ".text",
   "sha256": "338e2d12e4f5bf6fee6113cbefffc59d9bf2665368c419eab879e319710f7fcb",
   "size": 137,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x795840",
-  "type": "unsigned int **__thiscall(unsigned int *this, unsigned int **, unsigned int *, _DWORD *Src, int *)",
+  "total_chunk_size": 137,
+  "type": "OB_stVector4Iterator_010201A0 *__thiscall(OB_stVectorUInt32_010201A0 *this, OB_stVector4Iterator_010201A0 *result, OB_stVector4Iterator_010201A0 position, const unsigned int *value)",
   "xrefs_from_count": 68,
   "xrefs_to_count": 1
 }

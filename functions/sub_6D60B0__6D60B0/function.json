@@ -1,18 +1,31 @@
 {
-  "callees_count": 17,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6D60B0",
+      "0x6D6230"
+    ]
+  ],
+  "chunks_sha256": "defca735d29423a09ae2a2c39b14182ea419f808c0f2f7bc92e72aa29e4fecde",
+  "comment_regular": "NiTransformInterpolator virtual transform update (+0x4C). Returns cached 0x20-byte transform when time equals +0x08; otherwise evaluates translation, rotation, and scale tracks from data +0x2C, maintaining key cursors at +0x30/+0x32/+0x34, updates cached transform +0x0C, copies it to the caller, and caches time only when the transform is valid.",
+  "comment_repeatable": "NiTransformInterpolator virtual transform update (+0x4C). Returns cached 0x20-byte transform when time equals +0x08; otherwise evaluates translation, rotation, and scale tracks from data +0x2C, maintaining key cursors at +0x30/+0x32/+0x34, updates cached transform +0x0C, copies it to the caller, and caches time only when the transform is valid.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6D60B0",
+  "display_name": "NiTransformInterpolator_Update",
   "end_ea": "0x6D6230",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6D60B0",
+  "name": "NiTransformInterpolator_Update",
   "segment": ".text",
   "sha256": "defca735d29423a09ae2a2c39b14182ea419f808c0f2f7bc92e72aa29e4fecde",
   "size": 384,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6D60B0",
+  "total_chunk_size": 384,
   "type": "bool __thiscall(int this, float, int, void *)",
   "xrefs_from_count": 156,
   "xrefs_to_count": 1

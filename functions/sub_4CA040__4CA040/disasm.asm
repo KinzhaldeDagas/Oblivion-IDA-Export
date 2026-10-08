@@ -67,7 +67,7 @@
 0x4CA0FB: jb      short loc_4CA0EB
 0x4CA0FD: push    ebp
 0x4CA0FE: fstp    st
-0x4CA100: call    FormHeapFree
+0x4CA100: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4CA105: add     esp, 4
 0x4CA108: pop     ebp
 0x4CA109: pop     edi
@@ -75,7 +75,7 @@
 0x4CA10B: retn    4
 0x4CA10E: mov     dword ptr [esi+4], 0
 0x4CA115: push    ebp
-0x4CA116: call    FormHeapFree
+0x4CA116: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4CA11B: add     esp, 4
 0x4CA11E: pop     ebp
 0x4CA11F: pop     edi

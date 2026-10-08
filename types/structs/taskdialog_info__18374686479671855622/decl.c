@@ -1,1 +1,31 @@
-taskdialog_info
+struct taskdialog_info
+{
+HWND hwnd __offset(OFF64|AUTO);
+const TASKDIALOGCONFIG *taskconfig __offset(OFF64|AUTO);
+DWORD last_timer_tick;
+HFONT font __offset(OFF64|AUTO);
+HFONT main_instruction_font __offset(OFF64|AUTO);
+HWND main_icon __offset(OFF64|AUTO);
+HWND main_instruction __offset(OFF64|AUTO);
+HWND content __offset(OFF64|AUTO);
+HWND progress_bar __offset(OFF64|AUTO);
+HWND *radio_buttons __offset(OFF64|AUTO);
+INT radio_button_count;
+HWND *command_links __offset(OFF64|AUTO);
+INT command_link_count;
+HWND expanded_info __offset(OFF64|AUTO);
+HWND expando_button __offset(OFF64|AUTO);
+HWND verification_box __offset(OFF64|AUTO);
+HWND footer_icon __offset(OFF64|AUTO);
+HWND footer_text __offset(OFF64|AUTO);
+HWND *buttons __offset(OFF64|AUTO);
+INT button_count;
+HWND default_button __offset(OFF64|AUTO);
+$C3F3D122BEE45A61D277C1802DC183C8 m;
+INT selected_radio_id;
+BOOL verification_checked;
+BOOL expanded;
+BOOL has_cancel;
+WCHAR_0 *expanded_text __offset(OFF64|AUTO);
+WCHAR_0 *collapsed_text __offset(OFF64|AUTO);
+};

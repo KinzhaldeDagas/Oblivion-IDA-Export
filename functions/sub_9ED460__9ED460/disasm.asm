@@ -2,7 +2,7 @@
 0x9ED466: push    ecx
 0x9ED467: fstp    [esp+4+var_4]; float
 0x9ED46A: push    offset aFsubmergedangu; "fSubmergedAngularDamping"
-0x9ED46F: mov     ecx, offset fSubmergedAngularDamping
+0x9ED46F: mov     ecx, 0B37B00h
 0x9ED474: call    GameSetting_ConstrAndReg_float
 0x9ED479: push    offset sub_A1FD20; void (__cdecl *)()
 0x9ED47E: call    _atexit

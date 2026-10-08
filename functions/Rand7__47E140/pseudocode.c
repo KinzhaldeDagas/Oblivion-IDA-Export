@@ -3,12 +3,12 @@ double Rand7()
   unsigned int v0; // eax
   int v1; // eax
 
-  if ( byte_B069C3 )
+  if ( g_gameCRTRandomNeedsSeed ) /*0x47e141*/
   {
-    v0 = _time64(0);
-    srand(v0);
-    byte_B069C3 = 0;
+    v0 = _time64(0); /*0x47e14c*/
+    srand(v0); /*0x47e152*/
+    g_gameCRTRandomNeedsSeed = 0; /*0x47e15a*/
   }
-  v1 = rand();
-  return (float)(((double)v1 + (double)v1) / dbl_A3D5A8 - dbl_A2F928);
+  v1 = rand(); /*0x47e161*/
+  return (float)(((double)v1 + (double)v1) / dbl_A3D5A8 - dbl_A2F928); /*0x47e181*/
 }

@@ -1,19 +1,32 @@
 {
-  "callees_count": 236,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 103,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 9,
-  "display_name": "sub_4B8A60",
+  "chunks": [
+    [
+      "0x4B8A60",
+      "0x4B94E9"
+    ]
+  ],
+  "chunks_sha256": "8677d6b3d0555147aa98706e2c6e1f9b128e586cefe8d0e25710fe636a496182",
+  "comment_regular": "Probable semantic identity: TESObjectDOOR::Activate. Direct Oblivion evidence: this function is the TESObjectDOOR vtable slot +0xCC target (TESFormVtbl member Unk_33), its typed parameters are TESObjectREFR* doorReference, TESObjectREFR* activatorReference, and UInt32 unk2; the body validates/links the door, checks actor access/locks, plays open/close behavior, and may select a random destination. Fallout independently labels the analogous method Activate and routes FindRandomTeleportTarget/HandlePlayerTeleport through it. Confidence remains Probable because the Oblivion shared slot itself is still named Unk_33.",
+  "comment_repeatable": "Probable semantic identity: TESObjectDOOR::Activate. Direct Oblivion evidence: this function is the TESObjectDOOR vtable slot +0xCC target (TESFormVtbl member Unk_33), its typed parameters are TESObjectREFR* doorReference, TESObjectREFR* activatorReference, and UInt32 unk2; the body validates/links the door, checks actor access/locks, plays open/close behavior, and may select a random destination. Fallout independently labels the analogous method Activate and routes FindRandomTeleportTarget/HandlePlayerTeleport through it. Confidence remains Probable because the Oblivion shared slot itself is still named Unk_33.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 10,
+  "display_name": "TESObjectDOOR_Activate",
   "end_ea": "0x4B94E9",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4B8A60",
+  "name": "TESObjectDOOR_Activate",
   "segment": ".text",
   "sha256": "8677d6b3d0555147aa98706e2c6e1f9b128e586cefe8d0e25710fe636a496182",
   "size": 2697,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4B8A60",
-  "type": "char __userpurge@<al>(TESObjectDOOR *a1@<ecx>, double a2@<st7>, double a3@<st4>, double a4@<st3>, double a5@<st2>, double a6@<st1>, double a7@<st0>, double st2_0@<st5>, double st1_0@<st6>, TESObjectREFR *a10, TESObjectREFR *a11, int a12, int a13, int a14)",
+  "total_chunk_size": 2697,
+  "type": "bool __thiscall(TESObjectDOOR *this, TESObjectREFR *doorReference, TESObjectREFR *activatorReference, UInt32 unk2)",
   "xrefs_from_count": 1041,
   "xrefs_to_count": 1
 }

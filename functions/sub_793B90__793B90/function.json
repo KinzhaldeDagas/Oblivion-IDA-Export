@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x793B90",
+      "0x793BF3"
+    ]
+  ],
+  "chunks_sha256": "b2eb9639d436af4dffc93bf90ebe5da6a8dfdfc7541eb3bb4d22064a3b3b75cc",
+  "comment_regular": "Sets wind strength, recomputes leaf frequency/throw, preserves phase continuity via timeFrequencyShift, and disables external rocking-angle input.\nSpeedTreeOBSE v169 source comparison confirmed8*strength*leafFactors[1] frequency and180*strength*leafFactors[0] throw with continuity shift time*oldFrequency+oldShift-time*newFrequency. Source reference fixture compares unmodified body and both RockMesh overloads; native geometry consumption remains incomplete.",
+  "comment_repeatable": "Sets wind strength, recomputes leaf frequency/throw, preserves phase continuity via timeFrequencyShift, and disables external rocking-angle input.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_793B90",
+  "display_name": "OB_CWindEngine_SetWindStrength_010201A0",
   "end_ea": "0x793BF3",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_793B90",
+  "name": "OB_CWindEngine_SetWindStrength_010201A0",
   "segment": ".text",
   "sha256": "b2eb9639d436af4dffc93bf90ebe5da6a8dfdfc7541eb3bb4d22064a3b3b75cc",
   "size": 99,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x793B90",
-  "type": "double __thiscall(float *this, float, float, float)",
+  "total_chunk_size": 99,
+  "type": "float __thiscall(OB_CWindEngine_010201A0 *this, float newStrength, float oldStrength, float oldTimeShift)",
   "xrefs_from_count": 31,
   "xrefs_to_count": 1
 }

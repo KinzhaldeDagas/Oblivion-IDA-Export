@@ -1,4 +1,4 @@
-0x77A0F0: push    esi
+0x77A0F0: push    esi; MoonSugarEffect decode: NiD3DShader vtable +0x4C pass-loop advance. Ends current pass, advances/refcounts CurrentPass, returns remaining pass count.
 0x77A0F1: mov     esi, ecx
 0x77A0F3: mov     ecx, [esi+3Ch]
 0x77A0F6: test    ecx, ecx
@@ -25,7 +25,7 @@
 0x77A125: jz      short loc_77A132
 0x77A127: add     dword ptr [ecx+60h], 0FFFFFFFFh
 0x77A12B: jnz     short loc_77A132
-0x77A12D: call    sub_7604D0
+0x77A12D: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x77A132: mov     eax, [edi]
 0x77A134: test    eax, eax
 0x77A136: mov     [esi+3Ch], eax

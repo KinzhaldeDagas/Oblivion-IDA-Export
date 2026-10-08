@@ -1,4 +1,4 @@
-0x7693E0: sub     esp, 4Ch
+0x7693E0: sub     esp, 4Ch; Oblivion NiDX9Renderer triangle-geometry submission boundary. Copies world transform/bound, resolves hardware skinning, and routes to the native skinned or non-skinned shader/pass loop that issues the final DX9 draw.
 0x7693E3: push    ebx
 0x7693E4: mov     ebx, ecx
 0x7693E6: cmp     byte ptr [ebx+6F0h], 0
@@ -31,7 +31,7 @@
 0x769443: mov     ecx, ebx
 0x769445: mov     [esp+64h+var_40], edx
 0x769449: mov     [esp+64h+var_3C], eax
-0x76944D: call    sub_768890
+0x76944D: call    sub_768890; MoonSugarEffect decode: hardware/software skinning gate. Considers BuffData, skinData, hardware partition data, renderer flags, mixed vertex processing, and shader interface capability before choosing skinned path.
 0x769452: mov     esi, [esp+5Ch+var_48]
 0x769456: mov     dx, [esi+2Eh]
 0x76945A: mov     edi, [esp+5Ch+var_4C]
@@ -61,7 +61,7 @@
 0x76949A: push    esi; NiGeometryData *
 0x76949B: push    eax; NiGeometryGroup *
 0x76949C: mov     ecx, [ebx+8A0h]
-0x7694A2: call    NiGeometryGroup__AddGeometryDataToGroup
+0x7694A2: call    NiGeometryGroup__AddGeometryDataToGroup; MoonSugarEffect decode: NiGeometryGroup::AddGeometryDataToGroup. For hardware-skinned geometry, adds each partition object when the partition is compatible; for non-skinned geometry it only calls AddObject when BuffData is missing. Existing BuffData returns false, so this is packing/registration ownership rather than draw ownership.
 0x7694A7: cmp     byte ptr [esp+5Ch+a5], 0
 0x7694AC: lea     ecx, [esp+5Ch+var_44]
 0x7694B0: lea     edx, [esp+5Ch+var_34]
@@ -72,7 +72,7 @@
 0x7694B9: push    esi
 0x7694BA: push    ebp
 0x7694BB: mov     ecx, ebx
-0x7694BD: call    sub_767520
+0x7694BD: call    NiDX9Renderer_RenderGeometrySkinned; Oblivion hardware-skinned geometry submission. After preflight and vtable +0x2C pass setup, it processes skin partitions and issues DrawIndexedPrimitive only when vtable +0x48 BeginPassLoop returns nonzero. A zero-pass invalid Lighting30 selector skips all pass and partition draws but still calls vtable +0x44 shader-finish cleanup.
 0x7694C2: pop     edi
 0x7694C3: pop     esi
 0x7694C4: pop     ebp
@@ -87,7 +87,7 @@
 0x7694D3: push    esi
 0x7694D4: push    ebp
 0x7694D5: mov     ecx, ebx
-0x7694D7: call    sub_7672F0
+0x7694D7: call    NiDX9Renderer_RenderGeometryNonSkinned; MoonSugarEffect decode/implementation: direct RenderTriGeometries non-skinned call to sub_7672F0. Plugin patches this 5-byte call with a wrapper that preserves thiscall+retn18 behavior, copies arg4 NiTransform, applies subtle active Moon Sugar rigid object wobble, skips skinned/null/exact NiScreenElements, then calls original 0x007672F0.
 0x7694DC: pop     edi
 0x7694DD: pop     esi
 0x7694DE: pop     ebp

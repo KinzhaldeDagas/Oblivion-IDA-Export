@@ -1,4 +1,4 @@
-0x91F430: push    ebp
+0x91F430: push    ebp; TES4 authoritative shared character-state velocity solver. Input block is eight hkVector4-sized slots: +0x00 response scalar x, +0x10 basis vector A, +0x20 basis vector B, +0x30 solver up/third basis, +0x40 current velocity, +0x50 desired local velocity, +0x60 max local delta x, +0x70 reference/bias velocity. Output writes the solved world/Havok velocity to the second argument.
 0x91F431: mov     ebp, esp
 0x91F433: and     esp, 0FFFFFFF0h
 0x91F436: sub     esp, 78h
@@ -18,7 +18,7 @@
 0x91F461: shufps  xmm0, xmm1, 0C9h ; 'É'
 0x91F465: mulps   xmm0, xmm2
 0x91F468: movaps  xmm2, xmm0
-0x91F46B: subps   xmm2, xmm3
+0x91F46B: subps   xmm2, xmm3; Builds local solver axis0 from cross(input+0x10, input+0x20); exits if this cross product is below the small threshold at 0xA9DD54.
 0x91F46E: movaps  xmm0, xmm2
 0x91F471: mulps   xmm0, xmm2
 0x91F474: movaps  xmm1, xmm0
@@ -74,7 +74,7 @@
 0x91F541: movaps  xmm0, xmm1
 0x91F544: movaps  xmm1, xmmword ptr [esi+30h]
 0x91F548: mulps   xmm0, xmm2
-0x91F54B: subps   xmm0, xmm3
+0x91F54B: subps   xmm0, xmm3; Builds the remaining solver basis from normalized axis0 and input+0x30, producing the matrix used by hkBasis_ProjectVector/TransformVector.
 0x91F54E: movaps  xmm2, xmm1
 0x91F551: shufps  xmm2, xmm1, 0C9h ; 'É'
 0x91F555: movaps  xmm3, xmm0
@@ -98,12 +98,12 @@
 0x91F597: subps   xmm1, xmm0
 0x91F59A: push    edx
 0x91F59B: lea     ecx, [esp+88h+var_70]
-0x91F59F: movaps  [esp+88h+var_70], xmm1
-0x91F5A4: call    sub_88FD90
+0x91F59F: movaps  [esp+88h+var_70], xmm1; Slot +0x40 current velocity is solved relative to slot +0x70 reference/bias velocity before local projection.
+0x91F5A4: call    hkBasis_ProjectVector; Projects current-minus-reference velocity into local basis via 0x88FD90.
 0x91F5A9: fld     dword ptr [esi+60h]
 0x91F5AC: movaps  xmm3, [esp+80h+var_70]
 0x91F5B1: movaps  xmm1, xmmword ptr [esi+50h]
-0x91F5B5: subps   xmm1, xmm3
+0x91F5B5: subps   xmm1, xmm3; Slot +0x50 is desired local velocity; solver computes desired-local minus current-local.
 0x91F5B8: movaps  xmm0, xmm1
 0x91F5BB: mulps   xmm0, xmm1
 0x91F5BE: movaps  xmm2, xmm0
@@ -122,7 +122,7 @@
 0x91F5E8: fnstsw  ax
 0x91F5EA: fstp    st
 0x91F5EC: test    ah, 5
-0x91F5EF: jp      short loc_91F668
+0x91F5EF: jp      short loc_91F668; Slot +0x60.x is max local delta. If the desired delta exceeds the allowed response-scaled delta, the local delta is clamped before applying slot +0x00 response.
 0x91F5F1: fld     dword ptr [esi+60h]
 0x91F5F4: movaps  xmm2, xmm0
 0x91F5F7: fdiv    dword ptr [esi]
@@ -167,12 +167,12 @@
 0x91F68A: addps   xmm3, xmm2
 0x91F68D: push    eax
 0x91F68E: mov     ecx, edi
-0x91F690: movaps  [esp+88h+var_70], xmm3
-0x91F695: call    sub_88FE00
+0x91F690: movaps  [esp+88h+var_70], xmm3; Applies slot +0x00 response scalar to the local delta and adds it to current local velocity.
+0x91F695: call    hkBasis_TransformVector; Transforms solved local velocity back to world/Havok vector via 0x88FE00.
 0x91F69A: movaps  xmm0, xmmword ptr [esi+70h]
 0x91F69E: movaps  xmm1, xmmword ptr [edi]
 0x91F6A1: addps   xmm1, xmm0
-0x91F6A4: movaps  xmmword ptr [edi], xmm1
+0x91F6A4: movaps  xmmword ptr [edi], xmm1; Adds slot +0x70 reference/bias velocity back after transforming solved local velocity to world/Havok space.
 0x91F6A7: pop     edi
 0x91F6A8: pop     esi
 0x91F6A9: mov     esp, ebp

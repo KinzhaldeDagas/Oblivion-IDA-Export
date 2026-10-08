@@ -1,1 +1,4 @@
-Unk5B0
+struct Unk5B0
+{
+float unk[21];
+};

@@ -1,111 +1,116 @@
-int __thiscall Actor_GetDefaultClass(Actor *this)
+// Resolve Oblivion's default/recommended class. If the actor already has a non-sentinel class, return it. Otherwise classify all 21 deferred chargen skill-use totals by TESSkill specialization, normalize the three shares to seven implied major slots, and select/cache a preset class.
+TESClass *__thiscall Player_GetDefaultClassRecommendation(PlayerCharacter *this)
 {
   int i; // esi
-  char *TESSkillByCode; // ecx
+  TESSkill_RecordView *skill; // ecx
   double v4; // st7
-  int v5; // eax
-  int v6; // eax
+  SkillSpecialization specialization; // eax
+  __int32 v6; // eax
   double v7; // st5
   double v8; // st2
-  int v9; // edi
-  int v10; // ebp
+  int combatMajorSlots; // edi
+  int magicMajorSlots; // ebp
   int v11; // ecx
   int v12; // eax
-  int v13; // esi
-  void *v14; // eax
-  void *v15; // edx
-  int result; // eax
-  float v17; // [esp+4h] [ebp-10h]
-  float v18; // [esp+8h] [ebp-Ch]
-  float v19; // [esp+Ch] [ebp-8h]
+  int stealthMajorSlots; // esi
+  TESClass *v14; // eax
+  float v15; // edx
+  TESClass *result; // eax
+  float magicUse; // [esp+4h] [ebp-10h]
+  float combatUse; // [esp+8h] [ebp-Ch]
+  float stealthUse; // [esp+Ch] [ebp-8h]
   float v20; // [esp+10h] [ebp-4h]
   float v21; // [esp+10h] [ebp-4h]
   float v22; // [esp+10h] [ebp-4h]
 
-  if ( (TESForm::ModReferenceList *)iClassCharactergenClass != Actor_GetBaseClass(this)[1].next )
-    return Actor_GetDefaultClass_::Return_CurrentClass();
-  v18 = 0.0;
-  v17 = 0.0;
-  v19 = 0.0;
-  for ( i = 0; i < 0x15; ++i )
+  if ( (TESForm::ModReferenceList *)g_iClassCharactergenClass.value != Actor_GetBaseClass((Actor *)this)[1].next ) /*0x662764*/
+    return (TESClass *)Actor_GetDefaultClass_::Return_CurrentClass((int)this);// A non-sentinel current class is already authoritative; skip recommendation scoring and return that TESClass. /*0x662764*/
+  combatUse = 0.0; /*0x66276d*/
+  magicUse = 0.0; /*0x662772*/
+  stealthUse = 0.0; /*0x662777*/
+  for ( i = 0; i < 0x15; ++i )                  // Scan exactly 21 deferred chargen skill-use floats at PlayerCharacter+0x5B0, one per native TESSkill index. /*0x66277b*/
   {
-    TESSkillByCode = TESDataHandler_GetTESSkillByCode((char *)TESDataHandler, i);
-    v20 = *(float *)(*((_DWORD *)this + 0x16C) + 4 * i);
-    if ( TESSkillByCode )
+    skill = TESDataHandler_GetTESSkillByCode(g_TESDataHandler, i); /*0x662795*/
+    v20 = this->deferredCharGenSkillUsage->progress[i]; /*0x662799*/
+    if ( skill ) /*0x66279d*/
     {
-      v4 = v20;
-      if ( v20 > 0.0 )
+      v4 = v20; /*0x6627a9*/
+      if ( v20 > 0.0 ) /*0x6627ae*/
       {
-        v5 = *((_DWORD *)TESSkillByCode + 0xD);
-        if ( v5 )
+        specialization = skill->data.specialization;// Bucket each positive deferred use value by TESSkill_Data::specialization: 0 Combat, 1 Magic, 2 Stealth. Major membership is unavailable and is not consulted here. /*0x6627b0*/
+        if ( specialization ) /*0x6627b6*/
         {
-          v6 = v5 - 1;
-          if ( v6 )
+          v6 = specialization - 1; /*0x6627b8*/
+          if ( v6 ) /*0x6627bb*/
           {
-            if ( v6 == 1 )
-              v19 = v4 + v19;
+            if ( v6 == 1 ) /*0x6627c0*/
+              stealthUse = v4 + stealthUse; /*0x6627c6*/
           }
           else
           {
-            v17 = v4 + v17;
+            magicUse = v4 + magicUse; /*0x6627d0*/
           }
         }
         else
         {
-          v18 = v4 + v18;
+          combatUse = v4 + combatUse; /*0x6627da*/
         }
       }
     }
   }
-  v7 = dbl_A49318;
-  Double_To_SInt32(v17);
-  v8 = dbl_A2FAA0;
-  v9 = Double_To_SInt32(v17);
-  Double_To_SInt32(v8);
-  v10 = Double_To_SInt32(v8);
-  v11 = Double_To_SInt32(v8);
-  v21 = v17 + v18 + v19;
-  v22 = v19 / v21 * v7;
-  v12 = Double_To_SInt32((double)((v22 - (double)v11 >= v8) + v11));
-  v13 = v12;
-  if ( v9 >= 7 || v10 >= 7 )
-    JUMPOUT(0x662A2D);
-  if ( v12 >= 7 )
-    JUMPOUT(0x662A2C);
-  switch ( v9 )
-  {
-    case 3:
-      if ( v10 != 2 || v12 != 2 )
-        goto Actor_GetDefaultClass___def_662919;
-      v15 = (void *)iClassRogue;
-      goto LABEL_26;
-    case 4:
-      if ( v12 == 2 )
-        v14 = TESDataHandler_LookupTESClassByFormID((void *)iClassScout);
+  v7 = dbl_A49318; /*0x662816*/
+  Double_To_SInt32(magicUse); /*0x662822*/
+  v8 = dbl_A2FAA0; /*0x662831*/
+  combatMajorSlots = Double_To_SInt32(magicUse); /*0x66285e*/
+  Double_To_SInt32(v8); /*0x66286e*/
+  magicMajorSlots = Double_To_SInt32(v8); /*0x6628a0*/
+  v11 = Double_To_SInt32(v8); /*0x6628b3*/
+  v21 = magicUse + combatUse + stealthUse;      // Normalize Combat/Magic/Stealth usage shares to a total of seven slots (the TESClass major count) and round each share to the nearest integer using 0.5. /*0x662802*/
+  v22 = stealthUse / v21 * v7; /*0x6628a4*/
+  v12 = Double_To_SInt32((double)((v22 - (double)v11 >= v8) + v11)); /*0x6628d9*/
+  stealthMajorSlots = v12;                      // Pure 7-slot distributions select the corresponding specialization-pure preset; mixed distributions continue through the native preset-class decision table. /*0x6628e1*/
+  if ( combatMajorSlots >= 7 || magicMajorSlots >= 7 ) /*0x6628f3*/
+    JUMPOUT(0x662A2D); /*0x662a2d*/
+  if ( v12 >= 7 ) /*0x662904*/
+    JUMPOUT(0x662A2C); /*0x662a2c*/
+  switch ( combatMajorSlots ) /*0x662919*/
+  {                                             // Select a preset TESClass from the rounded seven-slot Combat/Magic/Stealth distribution. This is recommendation logic, not construction of a new majorSkills array.
+    case 3: /*0x662919*/
+      if ( magicMajorSlots != 2 || v12 != 2 ) /*0x66295b*/
+        goto Actor_GetDefaultClass___def_662919; /*0x66295b*/
+      v15 = MEMORY[0xB37A58][0x9A]; /*0x66295d*/
+      goto LABEL_26; /*0x66295d*/
+    case 4: /*0x662919*/
+      if ( v12 == 2 ) /*0x662941*/
+        v14 = (TESClass *)TESDataHandler_LookupTESClassByFormID((void *)LODWORD(MEMORY[0xB37A58][0x96])); /*0x662949*/
       else
-        v14 = TESDataHandler_LookupTESClassByFormID((void *)iClassArcher);
-      goto LABEL_27;
-    case 5:
-      if ( v10 == 2 )
+        v14 = (TESClass *)TESDataHandler_LookupTESClassByFormID((void *)LODWORD(MEMORY[0xB37A58][0x98])); /*0x662952*/
+      goto LABEL_27; /*0x662949*/
+    case 5: /*0x662919*/
+      if ( magicMajorSlots == 2 ) /*0x66292b*/
       {
-        v14 = TESDataHandler_LookupTESClassByFormID((void *)iClassCrusader);
+        v14 = (TESClass *)TESDataHandler_LookupTESClassByFormID((void *)LODWORD(MEMORY[0xB37A58][0x94])); /*0x662934*/
       }
       else
       {
-        v15 = (void *)iClassKnight;
+        v15 = MEMORY[0xB37A58][0x84]; /*0x662936*/
 LABEL_26:
-        v14 = TESDataHandler_LookupTESClassByFormID(v15);
+        v14 = (TESClass *)TESDataHandler_LookupTESClassByFormID((void *)LODWORD(v15)); /*0x662963*/
       }
 LABEL_27:
-      *((_DWORD *)this + 0x194) = v14;
-      result = Actor_GetDefaultClass_::def_662919((int)this, v10, v9, v13);
-      break;
-    case 6:
-      v14 = TESDataHandler_LookupTESClassByFormID((void *)iClassBarbarian);
-      goto LABEL_27;
+      this->recommendedClass = v14;             // Cache the selected recommended TESClass at PlayerCharacter+0x650. /*0x66296f*/
+      result = (TESClass *)Actor_GetDefaultClass_::def_662919( /*0x662970*/
+                             (int)this,
+                             magicMajorSlots,
+                             combatMajorSlots,
+                             stealthMajorSlots);
+      break; /*0x662970*/
+    case 6: /*0x662919*/
+      v14 = (TESClass *)TESDataHandler_LookupTESClassByFormID((void *)LODWORD(MEMORY[0xB37A58][0x92])); /*0x662926*/
+      goto LABEL_27; /*0x662926*/
     default:
 Actor_GetDefaultClass___def_662919:
-      JUMPOUT(0x662975);
+      JUMPOUT(0x662975); /*0x662975*/
   }
   return result;
 }

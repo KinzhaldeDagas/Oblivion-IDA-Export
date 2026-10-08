@@ -9,11 +9,11 @@ void __userpurge sub_6608A0(
 {
   int *v8; // [esp+4h] [ebp-4h] BYREF
 
-  if ( !Actor_IsSneaking(a1) )
+  if ( !Actor_IsSneaking(a1) ) /*0x6608a4*/
   {
-    v8 = (int *)(*((int (__thiscall **)(TESObjectREFRVtbl *, _DWORD))a1[1].vtbl->super.super.InitializeComponent + 0xCF))(
+    v8 = (int *)(*((int (__thiscall **)(TESObjectREFRVtbl *, _DWORD))a1[1].vtbl->super.super.InitializeComponent + 0xCF))( /*0x6608c4*/
                   a1[1].vtbl,
                   0);
-    sub_616530(a2, a4, a3, &v8, a1, a5, a6, a7);
+    sub_616530(a2, a4, a3, &v8, a1, a5, a6, a7); /*0x6608d5*/
   }
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x9F8F80",
-    "line": "fld     ds:flt_A43328",
+    "line": "fld     ds:flt_A43328; Verified GameSettingFloat dynamic initializer: registers fTreeWindVariance with default 0.05 and registers its destructor via atexit. Runtime consumer is Unknown; this setting had no code-use xrefs in the current Oblivion IDB search.",
     "mnemonic": "fld",
     "size": 6
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x9F8F8F",
-    "line": "mov     ecx, offset flt_B39E20",
+    "line": "mov     ecx, offset fTreeWindVariance",
     "mnemonic": "mov",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x9F8F99",
-    "line": "push    offset sub_A23590; void (__cdecl *)()",
+    "line": "push    offset GameSetting_fTreeWindVariance_atexit; void (__cdecl *)()",
     "mnemonic": "push",
     "size": 5
   },

@@ -12,8 +12,8 @@
 0x7DE25D: mov     large fs:0, eax
 0x7DE263: mov     esi, ecx
 0x7DE265: mov     [esp+1Ch+var_10], esi
-0x7DE269: call    ??0BSImageSpaceShader@@QAE@XZ; BSImageSpaceShader::BSImageSpaceShader(void)
-0x7DE26E: push    offset sub_7016A0; a5
+0x7DE269: call    ??0BSImageSpaceShader@@QAE@XZ; MoonSugarEffect decode: BSImageSpaceShader base ctor calls BSShader ctor, sets vtable, clears source texture +0x7C and scalar fields +0x80..+0x8C.
+0x7DE26E: push    offset NiPointerSlot_Release; a5
 0x7DE273: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x7DE278: push    8; size
 0x7DE27A: push    4; a2
@@ -23,7 +23,7 @@
 0x7DE285: mov     [esp+30h+var_4], ebx
 0x7DE289: mov     dword ptr [esi], offset ??_7WaterShaderDisplacement@@6B@; const WaterShaderDisplacement::`vftable'
 0x7DE28F: call    ArrayConstructor
-0x7DE294: push    offset sub_7016A0; a5
+0x7DE294: push    offset NiPointerSlot_Release; a5
 0x7DE299: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x7DE29E: push    8; size
 0x7DE2A0: push    4; a2
@@ -74,3 +74,20 @@
 0x7DE382: pop     ebx
 0x7DE383: add     esp, 10h
 0x7DE386: retn
+0x9CF2F0: mov     ecx, [ebp-10h]; this
+0x9CF2F3: jmp     ??1BSImageSpaceShader@@UAE@XZ; MoonSugarEffect decode: BSImageSpaceShader dtor releases source BSRenderedTexture at +0x7C, clears +0x80..+0x8C, then calls BSShader dtor.
+0x9CF2F8: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9CF2FD: push    8; int
+0x9CF2FF: push    4; unsigned int
+0x9CF301: mov     eax, [ebp-10h]
+0x9CF304: add     eax, 0B4h ; '´'
+0x9CF309: push    eax; void *
+0x9CF30A: call    $LN21
+0x9CF30F: retn
+0x9CF310: mov     edx, [esp+arg_4]
+0x9CF314: lea     eax, [edx-0Ch]
+0x9CF317: mov     ecx, [edx-10h]
+0x9CF31A: xor     ecx, eax
+0x9CF31C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CF321: mov     eax, offset stru_AF7FB4
+0x9CF326: jmp     ___CxxFrameHandler3

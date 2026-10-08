@@ -25,7 +25,6 @@
 0x8B3897: jmp     short loc_8B38A0
 0x8B3899: fstp    st
 0x8B389B: jmp     short loc_8B38A0
-0x8B389D: align 10h
 0x8B38A0: cdq
 0x8B38A1: fld     dword ptr [edi]
 0x8B38A3: mov     ebp, 3

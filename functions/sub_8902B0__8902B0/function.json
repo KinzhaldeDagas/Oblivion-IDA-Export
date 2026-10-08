@@ -1,19 +1,36 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_8902B0",
+  "chunks": [
+    [
+      "0x8902B0",
+      "0x890388"
+    ],
+    [
+      "0x9D61A0",
+      "0x9D61D9"
+    ]
+  ],
+  "chunks_sha256": "8e6594aa76cc81fb84b6b6b4b0d2227c8761fd9500a0ad5a83f216a4c6aed5d3",
+  "comment_regular": "TES4 authoritative: high-level controller manifold update wrapper. Builds bhkCharacterPointCollector, calls low-level hkpCharacterProxy_MoveAndUpdateManifold, then cleans stale collector contacts.",
+  "comment_repeatable": "TES4 authoritative: high-level controller manifold update wrapper. Builds bhkCharacterPointCollector, calls low-level hkpCharacterProxy_MoveAndUpdateManifold, then cleans stale collector contacts.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "bhkCharacterController_UpdateCollisionManifold",
   "end_ea": "0x890388",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "sub_8902B0",
+  "name": "bhkCharacterController_UpdateCollisionManifold",
   "segment": ".text",
   "sha256": "2b0c164bb800511efb9f619ae00658a4011320a31a16f9b133e447bb5432e412",
   "size": 216,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x8902B0",
-  "type": "int __thiscall(__m128 **this, int)",
-  "xrefs_from_count": 74,
+  "total_chunk_size": 273,
+  "type": "int __thiscall(__m128 **this, int moveInfo)",
+  "xrefs_from_count": 90,
   "xrefs_to_count": 1
 }

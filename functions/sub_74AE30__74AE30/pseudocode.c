@@ -7,7 +7,7 @@ char __thiscall sub_74AE30(float *this, float a2, NiPoint3 *a3, NiPoint3 *a4)
   unsigned int v8; // esi
   int v9; // eax
   int v10; // edx
-  int v11; // eax
+  NiRTTI *v11; // eax
   double v13; // st7
   float v14; // eax
   int v15; // edx
@@ -48,146 +48,146 @@ char __thiscall sub_74AE30(float *this, float a2, NiPoint3 *a3, NiPoint3 *a4)
   float v50; // [esp+50h] [ebp-8h]
   float v51; // [esp+54h] [ebp-4h]
 
-  v4 = (NiPoint3 *)LODWORD(a2);
-  v5 = 0;
-  v37 = this;
-  v36 = 0;
-  v35 = 0;
-  if ( a2 == 0.0 )
-    return 0;
-  if ( (*(int (__thiscall **)(_DWORD))(*(_DWORD *)LODWORD(a2) + 0x10))(LODWORD(a2)) )
+  v4 = (NiPoint3 *)LODWORD(a2); /*0x74ae35*/
+  v5 = 0; /*0x74ae39*/
+  v37 = this; /*0x74ae3f*/
+  v36 = 0; /*0x74ae43*/
+  v35 = 0; /*0x74ae47*/
+  if ( a2 == 0.0 ) /*0x74ae4b*/
+    return 0; /*0x74ae4b*/
+  if ( (*(int (__thiscall **)(_DWORD))(*(_DWORD *)LODWORD(a2) + 0x10))(LODWORD(a2)) ) /*0x74ae59*/
   {
-    x = v4[0xF].x;
-    a2 = 0.0;
-    v7 = (*(unsigned __int16 (__thiscall **)(float))(*(_DWORD *)LODWORD(x) + 0x5C))(COERCE_FLOAT(LODWORD(x)));
-    v8 = rand() % v7;
-    do
+    x = v4[0xF].x; /*0x74ae63*/
+    a2 = 0.0; /*0x74ae69*/
+    v7 = (*(unsigned __int16 (__thiscall **)(float))(*(_DWORD *)LODWORD(x) + 0x5C))(COERCE_FLOAT(LODWORD(x))); /*0x74ae74*/
+    v8 = rand() % v7; /*0x74ae80*/
+    do /*0x74aec9*/
     {
-      (*(void (__thiscall **)(_DWORD, unsigned int, int *, int *, float *))(*(_DWORD *)LODWORD(v4[0xF].x) + 0x60))(
+      (*(void (__thiscall **)(_DWORD, unsigned int, int *, int *, float *))(*(_DWORD *)LODWORD(v4[0xF].x) + 0x60))( /*0x74ae9d*/
         LODWORD(v4[0xF].x),
         v8,
         &v36,
         &v35,
         &a2);
-      if ( (_WORD)v36 != (_WORD)v35 && (_WORD)v36 != LOWORD(a2) && (_WORD)v35 != LOWORD(a2) )
-        break;
-      if ( ++v8 >= v7 )
-        v8 = 0;
-      ++v5;
+      if ( (_WORD)v36 != (_WORD)v35 && (_WORD)v36 != LOWORD(a2) && (_WORD)v35 != LOWORD(a2) ) /*0x74aeb8*/
+        break; /*0x74aeb8*/
+      if ( ++v8 >= v7 ) /*0x74aebf*/
+        v8 = 0; /*0x74aec1*/
+      ++v5; /*0x74aec3*/
     }
-    while ( v5 < 6 );
-    v9 = rand();
-    if ( v9 % 3 == 1 )
+    while ( v5 < 6 ); /*0x74aec9*/
+    v9 = rand(); /*0x74aecb*/
+    if ( v9 % 3 == 1 ) /*0x74aedb*/
     {
-      v36 = (unsigned __int16)v35;
-      v35 = LOWORD(a2);
-      goto LABEL_20;
+      v36 = (unsigned __int16)v35; /*0x74aefa*/
+      v35 = LOWORD(a2); /*0x74aefe*/
+      goto LABEL_20; /*0x74af02*/
     }
-    if ( v9 % 3 != 2 )
-      goto LABEL_20;
-    v10 = LOWORD(a2);
+    if ( v9 % 3 != 2 ) /*0x74aee0*/
+      goto LABEL_20; /*0x74aee0*/
+    v10 = LOWORD(a2); /*0x74aee6*/
   }
   else
   {
-    v11 = (*(int (__thiscall **)(NiPoint3 *))(LODWORD(v4->x) + 4))(v4);
-    if ( !v11 )
-      return 0;
-    while ( (char *)v11 != dword_B3FCDC )
+    v11 = (NiRTTI *)(*(int (__thiscall **)(NiPoint3 *))(LODWORD(v4->x) + 4))(v4); /*0x74af0f*/
+    if ( !v11 ) /*0x74af13*/
+      return 0; /*0x74af2c*/
+    while ( v11 != &stru_B3FCDC ) /*0x74af1a*/
     {
-      v11 = *(_DWORD *)(v11 + 4);
-      if ( !v11 )
-        return 0;
+      v11 = v11->parent; /*0x74af1c*/
+      if ( !v11 ) /*0x74af21*/
+        return 0; /*0x74af21*/
     }
-    a2 = COERCE_FLOAT(rand());
-    v13 = (double)SLODWORD(a2) / dbl_A3D5A8;
-    LODWORD(a2) = *(unsigned __int16 *)(LODWORD(v4[0xF].x) + 8) - 1;
-    *(float *)&v38 = v13;
-    v38 = (__int64)((double)SLODWORD(a2) * *(float *)&v38);
-    v36 = (unsigned __int16)v38;
-    v10 = (unsigned __int16)(v38 + 1);
+    a2 = COERCE_FLOAT(rand()); /*0x74af34*/
+    v13 = (double)SLODWORD(a2) / dbl_A3D5A8; /*0x74af46*/
+    LODWORD(a2) = *(unsigned __int16 *)(LODWORD(v4[0xF].x) + 8) - 1; /*0x74af4f*/
+    *(float *)&v38 = v13; /*0x74af53*/
+    v38 = (__int64)((double)SLODWORD(a2) * *(float *)&v38); /*0x74af75*/
+    v36 = (unsigned __int16)v38; /*0x74af83*/
+    v10 = (unsigned __int16)(v38 + 1); /*0x74af8b*/
   }
-  v35 = v10;
+  v35 = v10; /*0x74af8e*/
 LABEL_20:
-  v14 = v4[0xF].x;
-  v15 = *(_DWORD *)(LODWORD(v14) + 0x1C);
-  v16 = *(_DWORD *)(LODWORD(v14) + 0x20);
-  if ( !v15 )
-    return 0;
-  v17 = 0xC * (unsigned __int16)v36;
-  v40 = *(float *)(v17 + v15);
-  v41 = *(float *)(v17 + v15 + 4);
-  v42 = *(float *)(v17 + v15 + 8);
-  v18 = 0xC * (unsigned __int16)v35;
-  LODWORD(v38) = *(_DWORD *)(v18 + v15);
-  v19 = *(_DWORD *)(v18 + v15 + 4);
-  v20 = *(float *)(v18 + v15 + 8);
-  HIDWORD(v38) = v19;
-  v21 = a3;
-  v39 = v20;
-  v43 = *(float *)&v38 + v40;
-  v22 = a4;
-  v44 = v41 + *((float *)&v38 + 1);
-  v45 = v42 + v20;
-  v23 = dbl_A2FAA0;
-  v46 = v43 * v23;
-  v24 = v44;
-  a3->x = v46;
-  v47 = v24 * v23;
-  v25 = v45;
-  v21->y = v47;
-  v48 = v25 * v23;
-  v21->z = v48;
-  if ( !*((_DWORD *)v37 + 0x1C) )
+  v14 = v4[0xF].x; /*0x74af92*/
+  v15 = *(_DWORD *)(LODWORD(v14) + 0x1C); /*0x74af98*/
+  v16 = *(_DWORD *)(LODWORD(v14) + 0x20); /*0x74af9d*/
+  if ( !v15 ) /*0x74afa0*/
+    return 0; /*0x74afa0*/
+  v17 = 0xC * (unsigned __int16)v36; /*0x74afac*/
+  v40 = *(float *)(v17 + v15); /*0x74afb1*/
+  v41 = *(float *)(v17 + v15 + 4); /*0x74afb9*/
+  v42 = *(float *)(v17 + v15 + 8); /*0x74afc1*/
+  v18 = 0xC * (unsigned __int16)v35; /*0x74afcf*/
+  LODWORD(v38) = *(_DWORD *)(v18 + v15); /*0x74afd4*/
+  v19 = *(_DWORD *)(v18 + v15 + 4); /*0x74afd8*/
+  v20 = *(float *)(v18 + v15 + 8); /*0x74afe0*/
+  HIDWORD(v38) = v19; /*0x74afe8*/
+  v21 = a3; /*0x74afec*/
+  v39 = v20; /*0x74aff0*/
+  v43 = *(float *)&v38 + v40; /*0x74aff4*/
+  v22 = a4; /*0x74aff8*/
+  v44 = v41 + *((float *)&v38 + 1); /*0x74b004*/
+  v45 = v42 + v20; /*0x74b010*/
+  v23 = dbl_A2FAA0; /*0x74b020*/
+  v46 = v43 * v23; /*0x74b022*/
+  v24 = v44; /*0x74b02a*/
+  a3->x = v46; /*0x74b02e*/
+  v47 = v24 * v23; /*0x74b032*/
+  v25 = v45; /*0x74b03a*/
+  v21->y = v47; /*0x74b03e*/
+  v48 = v25 * v23; /*0x74b043*/
+  v21->z = v48; /*0x74b04b*/
+  if ( !*((_DWORD *)v37 + 0x1C) ) /*0x74b052*/
   {
-    if ( v16 )
+    if ( v16 ) /*0x74b05e*/
     {
-      v46 = *(float *)(v17 + v16);
-      v26 = *(float *)(v17 + v16 + 4);
-      v27 = *(float *)(v17 + v16 + 8);
-      v47 = v26;
-      v43 = *(float *)(v18 + v16);
-      v48 = v27;
-      v28 = *(float *)(v18 + v16 + 4);
-      v29 = *(float *)(v18 + v16 + 8);
-      v49 = v43 + v46;
-      v50 = v26 + v28;
-      v51 = v48 + v29;
-      v43 = v49 * v23;
-      v44 = v50 * v23;
-      v45 = v23 * v51;
-      sub_4BFAA0(&v43);
-      a2 = v22->y * v22->y + v22->x * v22->x + v22->z * v22->z;
-      a2 = sqrt(a2);
-      v30 = a2;
-      v49 = v43 * a2;
-      v31 = v44;
-      v22->x = v49;
-      v50 = v31 * v30;
-      v22->y = v50;
-      v51 = v30 * v45;
-      v22->z = v51;
+      v46 = *(float *)(v17 + v16); /*0x74b067*/
+      v26 = *(float *)(v17 + v16 + 4); /*0x74b06b*/
+      v27 = *(float *)(v17 + v16 + 8); /*0x74b06f*/
+      v47 = v26; /*0x74b073*/
+      v43 = *(float *)(v18 + v16); /*0x74b07a*/
+      v48 = v27; /*0x74b086*/
+      v28 = *(float *)(v18 + v16 + 4); /*0x74b08a*/
+      v29 = *(float *)(v18 + v16 + 8); /*0x74b08e*/
+      v49 = v43 + v46; /*0x74b092*/
+      v50 = v26 + v28; /*0x74b0ab*/
+      v51 = v48 + v29; /*0x74b0b7*/
+      v43 = v49 * v23; /*0x74b0c1*/
+      v44 = v50 * v23; /*0x74b0cb*/
+      v45 = v23 * v51; /*0x74b0d3*/
+      NiPoint3_NormalizeApproximateInPlace(&v43); /*0x74b0d7*/
+      a2 = v22->y * v22->y + v22->x * v22->x + v22->z * v22->z; /*0x74b0f7*/
+      a2 = sqrt(a2); /*0x74b104*/
+      v30 = a2; /*0x74b11c*/
+      v49 = v43 * a2; /*0x74b11e*/
+      v31 = v44; /*0x74b126*/
+      v22->x = v49; /*0x74b12a*/
+      v50 = v31 * v30; /*0x74b12e*/
+      v22->y = v50; /*0x74b136*/
+      v51 = v30 * v45; /*0x74b13d*/
+      v22->z = v51; /*0x74b145*/
     }
   }
-  v32 = v37;
-  if ( *((_DWORD *)v37 + 0x1D) == 4 )
+  v32 = v37; /*0x74b14c*/
+  if ( *((_DWORD *)v37 + 0x1D) == 4 ) /*0x74b154*/
   {
-    a2 = COERCE_FLOAT(rand());
-    a2 = (double)SLODWORD(a2) / dbl_A3D5A8;
-    v49 = *(float *)&v38 - v40;
-    v33 = v41;
-    v50 = *((float *)&v38 + 1) - v41;
-    v51 = v39 - v42;
-    v46 = v49 * a2;
-    v47 = v50 * a2;
-    v48 = a2 * v51;
-    v34 = v42;
-    v49 = v40 + v46;
-    v21->x = v49;
-    v50 = v33 + v47;
-    v21->y = v50;
-    v51 = v34 + v48;
-    v21->z = v51;
+    a2 = COERCE_FLOAT(rand()); /*0x74b15f*/
+    a2 = (double)SLODWORD(a2) / dbl_A3D5A8; /*0x74b16d*/
+    v49 = *(float *)&v38 - v40; /*0x74b17f*/
+    v33 = v41; /*0x74b18f*/
+    v50 = *((float *)&v38 + 1) - v41; /*0x74b191*/
+    v51 = v39 - v42; /*0x74b1a3*/
+    v46 = v49 * a2; /*0x74b1b5*/
+    v47 = v50 * a2; /*0x74b1bf*/
+    v48 = a2 * v51; /*0x74b1c7*/
+    v34 = v42; /*0x74b1d1*/
+    v49 = v40 + v46; /*0x74b1d3*/
+    v21->x = v49; /*0x74b1db*/
+    v50 = v33 + v47; /*0x74b1e1*/
+    v21->y = v50; /*0x74b1e9*/
+    v51 = v34 + v48; /*0x74b1f0*/
+    v21->z = v51; /*0x74b1f8*/
   }
-  sub_74A0A0(v32, v4, v21, v22);
-  return 1;
+  sub_74A0A0(v32, v4, v21, v22); /*0x74b200*/
+  return 1; /*0x74af23*/
 }

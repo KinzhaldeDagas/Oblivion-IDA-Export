@@ -14,11 +14,11 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_InedibleIngredient@
         int a13,
         int a14,
         int a15,
-        float a16,
+        int a16,
         int a17,
         int a18,
         int a19,
-        int a20,
+        __int64 a20,
         int a21,
         int a22,
         int a23,
@@ -32,24 +32,23 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_InedibleIngredient@
         int a31,
         int a32,
         int a33,
-        float a34,
-        int a35,
-        int a36)
+        int a34,
+        int a35)
 {
-  int v36; // ecx
-  int v38; // [esp+24h] [ebp+24h]
-  int v39; // [esp+28h] [ebp+28h]
+  int v35; // ecx
+  int v37; // [esp+24h] [ebp+24h]
+  int v38; // [esp+28h] [ebp+28h]
 
-  *(float *)&v39 = 0.0;
-  *(float *)&v38 = 0.0;
-  v36 = *(_DWORD *)(*(_DWORD *)(*(_DWORD *)(a1 + 0xC) + 0x1C) + 0x58);
-  if ( (v36 & 0x80) != 0 || (v36 & 0x100) != 0 )
-    return MagicCaster_ApplyActiveMagicItem_::EffectLoop_T2InedbibleIngred(
+  *(float *)&v38 = 0.0; /*0x69b323*/
+  *(float *)&v37 = 0.0; /*0x69b327*/
+  v35 = *(_DWORD *)(*(_DWORD *)(*(_DWORD *)(a1 + 0xC) + 0x1C) + 0x58); /*0x69b32b*/
+  if ( (v35 & 0x80) != 0 || (v35 & 0x100) != 0 ) /*0x69b33f*/
+    return MagicCaster_ApplyActiveMagicItem_::EffectLoop_T2InedbibleIngred( /*0x69b335*/
              ebp0,
              a1,
              esi0,
-             (v36 & 0x80) != 0,
-             SBYTE1(v36),
+             (v35 & 0x80) != 0,
+             SBYTE1(v35),
              ebx0,
              a5,
              a6,
@@ -59,8 +58,8 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_InedibleIngredient@
              a10,
              a11,
              a12,
-             v38,
-             v39,
+             *(float *)&v37,
+             *(float *)&v38,
              a15,
              a16,
              a17,
@@ -81,10 +80,9 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_InedibleIngredient@
              a32,
              a33,
              a34,
-             a35,
-             a36);
+             a35);
   else
-    return MagicCaster_ApplyActiveMagicItem_::EffectLoop_T1InedbibleIngred(
+    return MagicCaster_ApplyActiveMagicItem_::EffectLoop_T1InedbibleIngred( /*0x69b340*/
              ebp0,
              a1,
              esi0,
@@ -97,8 +95,8 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_InedibleIngredient@
              a10,
              a11,
              a12,
-             v38,
-             v39,
+             *(float *)&v37,
+             *(float *)&v38,
              a15,
              a16,
              a17,
@@ -119,6 +117,5 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_InedibleIngredient@
              a32,
              a33,
              a34,
-             a35,
-             a36);
+             a35);
 }

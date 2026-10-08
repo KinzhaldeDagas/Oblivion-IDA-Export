@@ -1,4 +1,4 @@
-0x4BEE70: push    esi
+0x4BEE70: push    esi; Verified: inserts default weather FormID 0x15E into the climate list with selectionWeight 100; the Oblivion selector confirms this controls weighted selection.
 0x4BEE71: push    edi
 0x4BEE72: mov     esi, ecx
 0x4BEE74: push    0; a3
@@ -18,15 +18,15 @@
 0x4BEEA6: mov     byte ptr [esi+51h], 2Ah ; '*'
 0x4BEEAA: mov     byte ptr [esi+52h], 6Ch ; 'l'
 0x4BEEAE: mov     byte ptr [esi+53h], 72h ; 'r'
-0x4BEEB2: mov     byte ptr [esi+54h], 0
-0x4BEEB6: mov     byte ptr [esi+55h], 0C3h ; 'Ã'
+0x4BEEB2: mov     byte ptr [esi+54h], 0; Verified: built-in default climate writes byte +0x54 = 0 and +0x55 = 0xC3. Field semantic remains Unknown; Sky reads the low byte for weather-reselection timing.
+0x4BEEB6: mov     byte ptr [esi+55h], 0C3h ; 'Ã'; Verified Oblivion default Climate writes high climate flag byte 0xC3 (moon bits 0x80 and 0x40 enable Masser/Secunda). Fallout default Climate writes 0xFF at the corresponding byte; meaning of remaining bits is Unknown.
 0x4BEEBA: add     esi, 30h ; '0'
 0x4BEEBD: cmp     dword ptr [esi+4], 0
 0x4BEEC1: jz      short loc_4BEED9
 0x4BEEC3: mov     eax, [esi+4]
 0x4BEEC6: mov     edi, [eax+4]
 0x4BEEC9: push    eax
-0x4BEECA: call    FormHeapFree
+0x4BEECA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4BEECF: add     esp, 4
 0x4BEED2: test    edi, edi
 0x4BEED4: mov     [esi+4], edi
@@ -41,7 +41,7 @@
 0x4BEEF5: push    0; int
 0x4BEEF7: push    15Eh; a1
 0x4BEEFC: mov     edi, eax
-0x4BEEFE: call    TESForm_LookupByFormID
+0x4BEEFE: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4BEF03: add     esp, 4
 0x4BEF06: push    eax; void *
 0x4BEF07: call    OblivionDynamicCast
@@ -56,7 +56,7 @@
 0x4BEF24: pop     edi
 0x4BEF25: pop     esi
 0x4BEF26: retn
-0x4BEF27: call    FormHeapFree
+0x4BEF27: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4BEF2C: push    offset aUnableToAddDef; "Unable to add default weather to defaul"...
 0x4BEF31: call    PrintError
 0x4BEF36: add     esp, 8

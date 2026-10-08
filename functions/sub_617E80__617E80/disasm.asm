@@ -2,7 +2,7 @@
 0x617E81: push    esi
 0x617E82: push    edi
 0x617E83: mov     edi, ecx
-0x617E85: call    sub_5660F0
+0x617E85: call    TESPackage_InitLoadGame
 0x617E8A: mov     esi, [edi+40h]
 0x617E8D: xor     ebx, ebx
 0x617E8F: test    esi, esi
@@ -19,7 +19,7 @@
 0x617EB3: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x617EB8: push    0; int
 0x617EBA: push    eax; a1
-0x617EBB: call    TESForm_LookupByFormID
+0x617EBB: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x617EC0: add     esp, 4
 0x617EC3: push    eax; void *
 0x617EC4: call    OblivionDynamicCast
@@ -48,7 +48,7 @@
 0x617EFF: mov     ecx, [eax]
 0x617F01: push    eax
 0x617F02: mov     [esi], ecx
-0x617F04: call    FormHeapFree
+0x617F04: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x617F09: add     esp, 4
 0x617F0C: jmp     short loc_617F21
 0x617F0E: mov     dword ptr [esi], 0
@@ -58,7 +58,7 @@
 0x617F19: call    BSSimpleList_Remove
 0x617F1E: mov     esi, [ebx+4]
 0x617F21: push    ebp
-0x617F22: call    FormHeapFree
+0x617F22: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x617F27: add     esp, 4
 0x617F2A: test    esi, esi
 0x617F2C: jnz     loc_617E98
@@ -71,7 +71,7 @@
 0x617F44: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x617F49: push    0; int
 0x617F4B: push    eax; a1
-0x617F4C: call    TESForm_LookupByFormID
+0x617F4C: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x617F51: add     esp, 4
 0x617F54: push    eax; void *
 0x617F55: call    OblivionDynamicCast

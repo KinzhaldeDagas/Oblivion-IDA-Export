@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x4D2699",
-    "line": "call    nullsub_returnvVoid_1arg",
+    "line": "call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x4D26C5",
-    "line": "call    sub_420B70",
+    "line": "call    ExtraDataList_SetSeenData; Replaces the owned SeenData pointer, destroying the previous object; null removes ExtraSeenData.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,19 +169,19 @@
   },
   {
     "ea": "0x4D26EF",
-    "line": "push    0",
+    "line": "push    0; detachTime",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4D26F1",
-    "line": "lea     ecx, [esi+28h]",
+    "line": "lea     ecx, [esi+28h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x4D26F4",
-    "line": "call    ExtraDataList?_SetDetachTime",
+    "line": "call    ExtraDataList_SetDetachTime; Sets ExtraDetachTime; a zero value removes type 0x10, otherwise updates or creates it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x4D2716",
-    "line": "call    sub_4E5F10",
+    "line": "call    TESPathGrid_ClearModifiedPointFlags; Verified preload reset clears linkedPointsDisabled bit 0x20 on every PathGrid point before applying saved indices.",
     "mnemonic": "call",
     "size": 5
   },

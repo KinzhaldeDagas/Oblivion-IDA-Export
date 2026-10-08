@@ -1,1 +1,1 @@
-BINDPTR
+typedef tagBINDPTR BINDPTR;

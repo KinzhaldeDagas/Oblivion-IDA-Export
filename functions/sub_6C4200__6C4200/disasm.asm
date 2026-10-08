@@ -1,4 +1,4 @@
-0x6C4200: push    esi
+0x6C4200: push    esi; NiControllerManager active-list update. When manager flag bit 3 is set, calls NiControllerSequence_Update(currentTime, apply=1) for every pointer in +0x4C/+0x54. Sequences that finish in state 0 are removed by swapping in the last active-list element.
 0x6C4201: mov     esi, ecx
 0x6C4203: mov     al, [esi+8]
 0x6C4206: shr     al, 3
@@ -16,7 +16,7 @@
 0x6C4222: push    ecx
 0x6C4223: mov     ecx, ebx; int
 0x6C4225: fstp    [esp+14h+var_14]; float
-0x6C4228: call    sub_6CA950
+0x6C4228: call    NiControllerSequence_Update; NiControllerSequence per-frame state machine. State 0 is inactive; 1 samples at full weight; 2 eases in then becomes 1; 3 eases out then deactivates normally; 4 is a transition source and deactivates with transition semantics; 5 is a transition destination that eases in then becomes 1; 6 is a morph source that synchronizes its partner through matching m: keys and becomes state 4. Uses +0x4C/+0x50 as transition interval, +0x48 as time offset, +0x54 as optional forced time, +0x58 as partner sequence, and +0x1C as base weight. When apply is true it commits local time through NiControllerSequence_AdvanceTime and calls NiControllerSequence_UpdateControlledBlocks. IDA correction: contiguous 0x6CAB79-0x6CAC3C was merged from a false def_6CA9B5 function into this body.
 0x6C422D: cmp     dword ptr [ebx+44h], 0
 0x6C4231: jnz     short loc_6C4246
 0x6C4233: add     dword ptr [esi+54h], 0FFFFFFFFh

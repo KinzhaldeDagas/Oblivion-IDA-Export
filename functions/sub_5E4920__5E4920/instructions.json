@@ -121,13 +121,13 @@
   },
   {
     "ea": "0x5E495B",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5E495D",
-    "line": "call    sub_4849C0",
+    "line": "call    EquippedEntryData_GetCharge; Return per-instance ExtraCharge when present; otherwise return the TESEnchantableForm base charge. Returns the sentinel/default when the EntryData form is not enchantable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x5E49BD",
-    "line": "push    eax; int",
+    "line": "push    eax; targetStack",
     "mnemonic": "push",
     "size": 1
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x5E49CE",
-    "line": "push    eax; int",
+    "line": "push    eax; containerChanges",
     "mnemonic": "push",
     "size": 1
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x5E49D0",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -415,13 +415,13 @@
   },
   {
     "ea": "0x5E49DA",
-    "line": "fstp    [esp+1Ch+var_1C]; float",
+    "line": "fstp    [esp+1Ch+newCharge]; newCharge",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5E49DD",
-    "line": "call    sub_488AA0",
+    "line": "call    EquippedEntryData_SetCharge; Set per-instance charge for a specific EntryData stack. Creates ExtraDataList/ExtraCharge as needed, or removes redundant charge data when newCharge exceeds the base maximum. containerChanges identifies the owning inventory; targetStack selects the equipped instance.",
     "mnemonic": "call",
     "size": 5
   },

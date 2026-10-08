@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5AC730",
-    "line": "mov     eax, ds:0B33398h",
+    "line": "mov     eax, ds:0B33398h; LevelUpMenu exit path: commits the selected attributes/player level-up, restores music, marks the menu complete, and closes it.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x5AC77B",
-    "line": "call    sub_5AC6A0",
+    "line": "call    LevelUpMenu_CommitSelectedAttributes; Collects up to three selected LevelUpMenu attribute tiles, maps their group-0 offsets to attribute AVs, and commits them through Player_CommitLevelUp. Missing selections remain 0xFFFFFFFF and are ignored by Player_LevelUpAttribute.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,13 +181,13 @@
   },
   {
     "ea": "0x5AC787",
-    "line": "fstp    [esp+0Ch+a2]; a3",
+    "line": "fstp    [esp+0Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5AC78A",
-    "line": "push    1772h; a2",
+    "line": "push    1772h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x5AC791",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x5AC79A",
-    "line": "jmp     sub_584740",
+    "line": "jmp     Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.",
     "mnemonic": "jmp",
     "size": 5
   },

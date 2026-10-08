@@ -76,3 +76,48 @@
 0x98B8FB: call    ?CatchIt@@YAXPAUEHExceptionRecord@@PAUEHRegistrationNode@@PAU_CONTEXT@@PAXPBU_s_FuncInfo@@PBU_s_HandlerType@@PBU_s_CatchableType@@PBU_s_TryBlockMapEntry@@H1E@Z
 0x98B900: mov     esi, [ebp+8]
 0x98B903: add     esp, 1Ch
+0x98B911: mov     edi, [ebp+18h]
+0x98B914: cmp     byte ptr [ebp+1Ch], 0
+0x98B918: jz      short loc_98B924
+0x98B91A: push    1
+0x98B91C: push    esi
+0x98B91D: call    ___DestructExceptionObject
+0x98B922: pop     ecx
+0x98B923: pop     ecx
+0x98B924: cmp     byte ptr [ebp-1], 0
+0x98B928: jnz     loc_98B9DC
+0x98B92E: mov     eax, [edi]
+0x98B930: and     eax, 1FFFFFFFh
+0x98B935: cmp     eax, 19930521h
+0x98B93A: jb      loc_98B9DC
+0x98B940: mov     edi, [edi+1Ch]
+0x98B943: test    edi, edi
+0x98B945: jz      loc_98B9DC
+0x98B94B: push    esi; struct EHExceptionRecord *
+0x98B94C: call    ?IsInExceptionSpec@@YAEPAUEHExceptionRecord@@PBU_s_ESTypeList@@@Z; IsInExceptionSpec(EHExceptionRecord *,_s_ESTypeList const *)
+0x98B951: test    al, al
+0x98B953: pop     ecx
+0x98B954: jnz     loc_98B9DC
+0x98B95A: call    __getptd
+0x98B95F: call    __getptd
+0x98B964: call    __getptd
+0x98B969: mov     [eax+88h], esi
+0x98B96F: call    __getptd
+0x98B974: cmp     dword ptr [ebp+24h], 0
+0x98B978: mov     ecx, [ebp+10h]
+0x98B97B: mov     [eax+8Ch], ecx
+0x98B981: push    esi; ExceptionRecord
+0x98B982: jnz     short loc_98B989
+0x98B984: push    dword ptr [ebp+0Ch]
+0x98B987: jmp     short loc_98B98C
+0x98B989: push    dword ptr [ebp+24h]; TargetFrame
+0x98B98C: call    unknown_libname_8
+0x98B991: mov     esi, [ebp+18h]
+0x98B994: push    0FFFFFFFFh
+0x98B996: push    esi
+0x98B997: push    dword ptr [ebp+14h]
+0x98B99A: push    dword ptr [ebp+0Ch]
+0x98B99D: call    ___FrameUnwindToState
+0x98B9A2: add     esp, 10h
+0x98B9A5: push    dword ptr [esi+1Ch]
+0x98B9A8: call    unknown_libname_80

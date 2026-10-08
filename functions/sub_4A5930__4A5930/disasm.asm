@@ -1,4 +1,4 @@
-0x4A5930: cmp     dword ptr [ecx+0Ch], 0
+0x4A5930: cmp     dword ptr [ecx+0Ch], 0; Verified: reports data presence when either EntryData's head or tail at WeatherData +8 is non-null.
 0x4A5934: jnz     short loc_4A594B
 0x4A5936: cmp     dword ptr [ecx+8], 0
 0x4A593A: jnz     short loc_4A594B

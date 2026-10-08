@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
-  "callers_count": 17,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 29,
+  "chunks": [
+    [
+      "0x6B7C20",
+      "0x6B7C2D"
+    ]
+  ],
+  "chunks_sha256": "f20eb17a5cdbbd40f94d7f335ba77a81ce69db2c3523b8b842c0a31edff9e939",
+  "comment_regular": "Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.",
+  "comment_repeatable": "Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6B7C20",
+  "display_name": "DialogueListCursor::GetCurrent",
   "end_ea": "0x6B7C2D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6B7C20",
+  "name": "DialogueListCursor::GetCurrent",
   "segment": ".text",
   "sha256": "f20eb17a5cdbbd40f94d7f335ba77a81ce69db2c3523b8b842c0a31edff9e939",
   "size": 13,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6B7C20",
-  "type": "int __thiscall(Unk1C *this)",
+  "total_chunk_size": 13,
+  "type": "void *__thiscall(DialogueListCursorView *this)",
   "xrefs_from_count": 6,
   "xrefs_to_count": 29
 }

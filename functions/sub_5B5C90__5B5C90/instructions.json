@@ -31,19 +31,19 @@
   },
   {
     "ea": "0x5B5CA0",
-    "line": "fstp    [esp+8+a2]; a3",
+    "line": "fstp    [esp+8+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5B5CA3",
-    "line": "push    0FB1h; a2",
+    "line": "push    0FB1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5B5CA8",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x5B5D07",
-    "line": "call    sub_410C40",
+    "line": "call    sub_410C40; MenuPlease: patched call to sub_410C40 so main-menu refresh does not restart Map loop.bik.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x5B5D20",
-    "line": "fstp    [esp+4+a3]; a3",
+    "line": "fstp    [esp+4+a3]; value",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -265,13 +265,13 @@
   },
   {
     "ea": "0x5B5D26",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5B5D2B",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x5B5D47",
-    "line": "fstp    [esp+4+a3]; a3",
+    "line": "fstp    [esp+4+a3]; value",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -325,13 +325,13 @@
   },
   {
     "ea": "0x5B5D4D",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5B5D52",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },

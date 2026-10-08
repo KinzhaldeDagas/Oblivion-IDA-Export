@@ -1,19 +1,36 @@
 {
-  "callees_count": 156,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 67,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_79C540",
+  "chunks": [
+    [
+      "0x79C540",
+      "0x79DA0A"
+    ],
+    [
+      "0x9CC3B0",
+      "0x9CC3F2"
+    ]
+  ],
+  "chunks_sha256": "5121c8ef3efec0f188cdb5cd3eced087b3e45244de98cb4422ba0856e4b348a0",
+  "comment_regular": "\n\n[2026-10-03 material ownership] Verified entry writes guide+28=current indexed vertex counter, guide+2C=2; outer loop is engine bladeCount+2C, inner loop visits guide vertex vector with 0x38-byte stride and emits two vertices per point. Diffuse writers receive guide map byte+18. Thus guide shared range length is spinePoints*2*bladeCount. Fallout BuildBladeVertices 0x8282D938 and RT4.1 FrondEngine.cpp:449 corroborate semantics. Existing decompiler EDI parameter remains unresolved and is not treated as an extra source-level argument.\n\nSource-match: CFrondEngine::BuildBladeVertices. Builds shared highest-LOD blade vertices for each guide/blade, with diffuse texcoords, static/dynamic lighting data, tangents/binormals, wind weights, and length-adjusted T coords.",
+  "comment_repeatable": "Source-match: CFrondEngine::BuildBladeVertices. Builds shared highest-LOD blade vertices for each guide/blade, with diffuse texcoords, static/dynamic lighting data, tangents/binormals, wind weights, and length-adjusted T coords.\n\nVerified 2026-10-03 frond color audit: both blade sides append white RGBA at 0x79D170 and 0x79D3AC, then their normal/tangent/binormal streams. Fallout homolog 0x8282D938 matches. Later RT4.1 static-lighting color generation differs from this native behavior.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 59,
+  "display_name": "OB_CFrondEngine_BuildBladeVertices_010201A0",
   "end_ea": "0x79DA0A",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "sub_79C540",
+  "name": "OB_CFrondEngine_BuildBladeVertices_010201A0",
   "segment": ".text",
   "sha256": "d2f01a1483738a048b58c223215df9b33b6ae2d7ad9421886a42b354cacd20c3",
   "size": 5322,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x79C540",
-  "type": "int __thiscall(char **this, int)",
-  "xrefs_from_count": 1646,
+  "total_chunk_size": 5388,
+  "type": "OB_CIndexedGeometry_010201A0 *__userpurge@<eax>(OB_CIndexedGeometry_010201A0 **this@<ecx>, int@<edi>, OB_stVector16_010201A0 *)",
+  "xrefs_from_count": 1719,
   "xrefs_to_count": 1
 }

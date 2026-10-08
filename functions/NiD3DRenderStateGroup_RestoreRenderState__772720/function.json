@@ -1,18 +1,31 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x772720",
+      "0x77274B"
+    ]
+  ],
+  "chunks_sha256": "954fb200eea0f67e9aa12299ec92dd5f37e2c6beb9e39498b4d047da879aaed9",
+  "comment_regular": "Restore every D3D render-state ID recorded in a NiD3DRenderStateGroup. Walks the group's linked saved-state list and asks the global NiDX9RenderState to restore each ID.",
+  "comment_repeatable": "Restore every D3D render-state ID recorded in a NiD3DRenderStateGroup. Walks the group's linked saved-state list and asks the global NiDX9RenderState to restore each ID.\nDX11 pass lifecycle audit 2026-09-30: vtable A882DC slots+8/+C are ApplyRenderStateAndTextureStages75FD90 and RestoreSavedRenderStates75F9E0. The restore wrapper reads pass+30 and calls772720 when nonnull. 772720 walks group+10 in head-to-tail order and dispatches each recorded state ID to the global manager RestoreRenderState; it is distinct from texture/sampler cleanup. Fresh pass construction must not treat application-only metadata as restoration authority.\nDX11 restore dispatch verified 2026-09-30: each group+10 node sends its state ID through manager vtable+5C. Actual A8A9F4+5C resolves to77B060. Preserve duplicate IDs and forward list order.\nDX11 saved-state implementation 2026-09-30: full byte contracts for75F9E0,772720,77B060 now qualify a separate restore program. It retains forward saved-list IDs including duplicates and reads the single saved register during evaluation without resaving or popping it. Unknown saved words remain unknown. Frame preparation pairs restoration with its exact pass/manager; ordered scheduling and inherited manager/device state authority remain required before traversal omission.\nComparative audit 2026-10-01: Fallout821F7BC0 shares the saved-list head+10/next-node+8 traversal family but has Xenon-specific state-cache/device dispatch. Oblivion delegates each ID through global B427A4 manager virtual RestoreRenderState. Geometry finish performs this shader-level restore after explicit lighting restoration; it is separate from the pass-level group.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "NiD3DRenderStateGroup::RestoreRenderState",
   "end_ea": "0x77274B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "NiD3DRenderStateGroup::RestoreRenderState",
   "segment": ".text",
   "sha256": "954fb200eea0f67e9aa12299ec92dd5f37e2c6beb9e39498b4d047da879aaed9",
   "size": 43,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x772720",
+  "total_chunk_size": 43,
   "type": "void __thiscall(NiD3DRenderStateGroup *this)",
   "xrefs_from_count": 18,
   "xrefs_to_count": 2

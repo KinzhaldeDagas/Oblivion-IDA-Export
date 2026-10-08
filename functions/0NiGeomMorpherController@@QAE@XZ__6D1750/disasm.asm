@@ -22,7 +22,7 @@
 0x6D178A: mov     [esp+20h+var_4], ebx
 0x6D178E: jz      short loc_6D17D1
 0x6D1790: mov     ecx, esi
-0x6D1792: call    sub_6D04E0
+0x6D1792: call    NiInterpController_Construct; Constructs NiInterpController over NiTimeController, installs its vtable, and clears interpolator capability/manager flag 0x20.
 0x6D1797: mov     dword ptr [esi], offset ??_7NiGeomMorpherController@@6B@; const NiGeomMorpherController::`vftable'
 0x6D179D: mov     dword ptr [esi+40h], offset ??_7?$NiTArray@M@@6B@; const NiTArray<float>::`vftable'
 0x6D17A4: mov     [esi+48h], bx
@@ -54,3 +54,29 @@
 0x6D17F8: pop     ebx
 0x6D17F9: add     esp, 10h
 0x6D17FC: retn    4
+0x4BCBC0: mov     eax, [ecx+4]
+0x4BCBC3: push    eax
+0x4BCBC4: mov     dword ptr [ecx], offset ??_7?$NiTArray@M@@6B@; const NiTArray<float>::`vftable'
+0x4BCBCA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x4BCBCF: pop     ecx
+0x4BCBD0: retn
+0x9C7960: mov     eax, [ebp-10h]
+0x9C7963: push    eax
+0x9C7964: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C7969: pop     ecx
+0x9C796A: retn
+0x9C796B: mov     ecx, [ebp-10h]; this
+0x9C796E: jmp     j_??1NiPSysResetOnLoopCtlr@@UAE@XZ; NiPSysResetOnLoopCtlr::~NiPSysResetOnLoopCtlr(void)
+0x9C7973: mov     ecx, [ebp-10h]
+0x9C7976: add     ecx, 40h ; '@'
+0x9C7979: jmp     loc_4BCBC0
+0x9C797E: mov     ecx, [ebp-10h]
+0x9C7981: add     ecx, 50h ; 'P'; slot
+0x9C7984: jmp     NiPointerSlot_Release
+0x9C7989: mov     edx, [esp+arg_4]
+0x9C798D: lea     eax, [edx-10h]
+0x9C7990: mov     ecx, [edx-14h]
+0x9C7993: xor     ecx, eax
+0x9C7995: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C799A: mov     eax, offset stru_AEFD5C
+0x9C799F: jmp     ___CxxFrameHandler3

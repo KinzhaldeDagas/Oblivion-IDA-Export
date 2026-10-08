@@ -1,1 +1,1 @@
-NiPixelData
+struct NiPixelData;

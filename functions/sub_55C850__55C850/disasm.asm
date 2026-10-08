@@ -5,7 +5,6 @@
 0x55C857: mov     ebp, ecx
 0x55C859: xor     edi, edi
 0x55C85B: jmp     short loc_55C860
-0x55C85D: align 10h
 0x55C860: mov     eax, [ebp+0]
 0x55C863: mov     edx, [eax+9Ch]
 0x55C869: mov     ecx, ebp
@@ -39,9 +38,9 @@
 0x55C8AA: jnz     short loc_55C8BF
 0x55C8AC: mov     edx, [esi]
 0x55C8AE: lea     ecx, [esi+4]
-0x55C8B1: push    ecx
-0x55C8B2: push    edx
-0x55C8B3: call    sub_5508F0
+0x55C8B1: push    ecx; vertices
+0x55C8B2: push    edx; geometry
+0x55C8B3: call    NiGeometry_RestoreFaceGenBaseVertices; Copy authored FaceGen base positions into a writable strided vertex stream and mark only the position channel dirty.
 0x55C8B8: add     esp, 8
 0x55C8BB: mov     byte ptr [esi+1Ch], 1
 0x55C8BF: mov     ecx, [esi+10h]

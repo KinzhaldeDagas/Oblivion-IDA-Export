@@ -1,4 +1,4 @@
-0x4030F0: sub     esp, 1Ch
+0x4030F0: sub     esp, 1Ch; [Controller decode 2026-07-09] Sets joystick deadzone through DIPROP_DEADZONE. Oblivion passes a float percent; DirectInput property value is deadzonePercent * 10000.
 0x4030F3: mov     eax, dword ptr [esp+1Ch+whichJoystick]
 0x4030F7: fld     [esp+1Ch+deadzonePercent]
 0x4030FB: mov     ecx, [ecx+eax*4+8]
@@ -23,6 +23,6 @@
 0x40314C: push    edx
 0x40314D: push    5
 0x40314F: push    ecx
-0x403150: call    eax
+0x403150: call    eax; [Controller decode 2026-07-09] SetProperty(DIPROP_DEADZONE=5): dwData = deadzonePercent * 10000.
 0x403152: add     esp, 1Ch
 0x403155: retn    8

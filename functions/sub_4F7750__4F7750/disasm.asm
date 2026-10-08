@@ -1,4 +1,4 @@
-0x4F7750: fldz
+0x4F7750: fldz; GetWeaponAnimType helper: derives script return from actor weapon animation state on the low/high process.
 0x4F7752: push    esi
 0x4F7753: mov     esi, [esp+4+arg_0]
 0x4F7757: test    esi, esi

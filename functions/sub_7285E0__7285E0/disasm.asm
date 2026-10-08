@@ -31,7 +31,7 @@
 0x728639: and     eax, 3Fh
 0x72863C: imul    eax, edx
 0x72863F: lea     esi, [esi+eax*8]
-0x728642: call    nullsub_return0_0arg
+0x728642: call    nullsub_return0_0arg; [Verified] Shared zero-return leaf. BSTempEffectDecal vtable 0xA6822C uses it at +0x54 for GetTypeID 0 and also in other slots; many unrelated vtables reuse this target. Class meaning must be established from the owning vtable and caller.
 0x728647: add     eax, esi
 0x728649: pop     esi
 0x72864A: retn

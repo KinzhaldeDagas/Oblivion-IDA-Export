@@ -1,19 +1,32 @@
 {
-  "callees_count": 13,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x451000",
+      "0x4510A7"
+    ]
+  ],
+  "chunks_sha256": "8843d72d272d46ceb67a8976c17dbfd85fe2aa8054ca7cf2e8b9b028016a9828",
+  "comment_regular": "Destroys every TESFile clone in the thread-ID map, clears and destroys the map, and nulls the owning TESFile's map pointer.",
+  "comment_repeatable": "Destroys every TESFile clone in the thread-ID map, clears and destroys the map, and nulls the owning TESFile's map pointer.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_451000",
+  "display_name": "TESFile_ClearThreadSafeFiles",
   "end_ea": "0x4510A7",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_451000",
+  "name": "TESFile_ClearThreadSafeFiles",
   "segment": ".text",
   "sha256": "8843d72d272d46ceb67a8976c17dbfd85fe2aa8054ca7cf2e8b9b028016a9828",
   "size": 167,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x451000",
-  "type": "void __thiscall(int this)",
+  "total_chunk_size": 167,
+  "type": "void __thiscall(NiTMap_TESCELL **this)",
   "xrefs_from_count": 70,
   "xrefs_to_count": 1
 }

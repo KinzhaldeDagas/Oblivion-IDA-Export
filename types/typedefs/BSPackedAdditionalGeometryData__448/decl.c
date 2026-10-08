@@ -1,1 +1,1 @@
-BSPackedAdditionalGeometryData
+struct BSPackedAdditionalGeometryData;

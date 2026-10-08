@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x53120B",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x531213",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x531227",
-    "line": "call    sub_530C40",
+    "line": "call    TESTopicInfo__GetResponseList; Oblivion lazy INFO response-stream reader. Rebuilds a shared list from the last override TESFile plus TESTopicInfo+0x34 record offset. Recognizes only TRDT and NAM1; NAM2 actor notes are runtime-inert.",
     "mnemonic": "call",
     "size": 5
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x531232",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x53123B",
-    "line": "call    sub_52E100; ?what@runtime_error@@UBEPBDXZ",
+    "line": "call    TESResponse__GetText; ?what@runtime_error@@UBEPBDXZ",
     "mnemonic": "call",
     "size": 5
   },

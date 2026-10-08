@@ -1,448 +1,684 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "MIDL_STUB_MESSAGE",
+  "definition": "typedef _MIDL_STUB_MESSAGE MIDL_STUB_MESSAGE\n",
   "id": 18374686479671829638,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RpcMsg",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "PRPC_MESSAGE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Buffer",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "unsigned __int8 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "BufferStart",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "unsigned __int8 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "BufferEnd",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "unsigned __int8 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "BufferMark",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "unsigned __int8 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "BufferLength",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "MemorySize",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Memory",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "unsigned __int8 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IsClient",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 1
+      "size": 1,
+      "type": "unsigned __int8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Pad",
       "offset": 33,
       "offset_hex": "0x21",
-      "size": 1
+      "size": 1,
+      "type": "unsigned __int8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "uFlags2",
       "offset": 34,
       "offset_hex": "0x22",
-      "size": 2
+      "size": 2,
+      "type": "unsigned __int16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ReuseBuffer",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pAllocAllNodesContext",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "NDR_ALLOC_ALL_NODES_CONTEXT *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pPointerQueueState",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "NDR_POINTER_QUEUE_STATE *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IgnoreEmbeddedPointers",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "PointerBufferMark",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "unsigned __int8 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CorrDespIncrement",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 1
+      "size": 1,
+      "type": "unsigned __int8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "uFlags",
       "offset": 57,
       "offset_hex": "0x39",
-      "size": 1
+      "size": 1,
+      "type": "unsigned __int8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "UniquePtrCount",
       "offset": 58,
-      "offset_hex": "0x3a",
-      "size": 2
+      "offset_hex": "0x3A",
+      "size": 2,
+      "type": "unsigned __int16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "MaxCount",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 8
+      "size": 8,
+      "type": "ULONG_PTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Offset",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ActualCount",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 4
+      "offset_hex": "0x4C",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pfnAllocate",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 4
+      "size": 4,
+      "type": "void *(*)(SIZE_T)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pfnFree",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(void *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "StackTop",
       "offset": 88,
       "offset_hex": "0x58",
-      "size": 4
+      "size": 4,
+      "type": "unsigned __int8 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pPresentedType",
       "offset": 92,
-      "offset_hex": "0x5c",
-      "size": 4
+      "offset_hex": "0x5C",
+      "size": 4,
+      "type": "unsigned __int8 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pTransmitType",
       "offset": 96,
       "offset_hex": "0x60",
-      "size": 4
+      "size": 4,
+      "type": "unsigned __int8 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SavedHandle",
       "offset": 100,
       "offset_hex": "0x64",
-      "size": 4
+      "size": 4,
+      "type": "handle_t"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "StubDesc",
       "offset": 104,
       "offset_hex": "0x68",
-      "size": 4
+      "size": 4,
+      "type": "const _MIDL_STUB_DESC *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "FullPtrXlatTables",
       "offset": 108,
-      "offset_hex": "0x6c",
-      "size": 4
+      "offset_hex": "0x6C",
+      "size": 4,
+      "type": "_FULL_PTR_XLAT_TABLES *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "FullPtrRefId",
       "offset": 112,
       "offset_hex": "0x70",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "PointerLength",
       "offset": 116,
       "offset_hex": "0x74",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fInDontFree",
       "offset": 120,
       "offset_hex": "0x78",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int32 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fDontCallFreeInst",
-      "offset": 120,
+      "offset": 120.125,
       "offset_hex": "0x78",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int32 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fInOnlyParam",
-      "offset": 120,
+      "offset": 120.25,
       "offset_hex": "0x78",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int32 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fHasReturn",
-      "offset": 120,
+      "offset": 120.375,
       "offset_hex": "0x78",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int32 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fHasExtensions",
-      "offset": 120,
+      "offset": 120.5,
       "offset_hex": "0x78",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int32 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fHasNewCorrDesc",
-      "offset": 120,
+      "offset": 120.625,
       "offset_hex": "0x78",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int32 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fIsIn",
-      "offset": 120,
+      "offset": 120.75,
       "offset_hex": "0x78",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int32 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fIsOut",
-      "offset": 120,
+      "offset": 120.875,
       "offset_hex": "0x78",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int32 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fIsOicf",
       "offset": 121,
       "offset_hex": "0x79",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int32 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fBufferValid",
-      "offset": 121,
+      "offset": 121.125,
       "offset_hex": "0x79",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int32 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fHasMemoryValidateCallback",
-      "offset": 121,
+      "offset": 121.25,
       "offset_hex": "0x79",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int32 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fInFree",
-      "offset": 121,
+      "offset": 121.375,
       "offset_hex": "0x79",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int32 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fNeedMCCP",
-      "offset": 121,
+      "offset": 121.5,
       "offset_hex": "0x79",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int32 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fUnused",
-      "offset": 121,
+      "offset": 121.625,
       "offset_hex": "0x79",
-      "size": 0
+      "size": 0.375,
+      "type": "__int32 : 3"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fUnused2",
       "offset": 122,
-      "offset_hex": "0x7a",
-      "size": 2
+      "offset_hex": "0x7A",
+      "size": 2,
+      "type": "__int32 : 16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwDestContext",
       "offset": 124,
-      "offset_hex": "0x7c",
-      "size": 4
+      "offset_hex": "0x7C",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pvDestContext",
       "offset": 128,
       "offset_hex": "0x80",
-      "size": 4
+      "size": 4,
+      "type": "void *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SavedContextHandles",
       "offset": 132,
       "offset_hex": "0x84",
-      "size": 4
+      "size": 4,
+      "type": "NDR_SCONTEXT *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ParamNumber",
       "offset": 136,
       "offset_hex": "0x88",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pRpcChannelBuffer",
       "offset": 140,
-      "offset_hex": "0x8c",
-      "size": 4
+      "offset_hex": "0x8C",
+      "size": 4,
+      "type": "IRpcChannelBuffer *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pArrayInfo",
       "offset": 144,
       "offset_hex": "0x90",
-      "size": 4
+      "size": 4,
+      "type": "PARRAY_INFO"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SizePtrCountArray",
       "offset": 148,
       "offset_hex": "0x94",
-      "size": 4
+      "size": 4,
+      "type": "ULONG *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SizePtrOffsetArray",
       "offset": 152,
       "offset_hex": "0x98",
-      "size": 4
+      "size": 4,
+      "type": "ULONG *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SizePtrLengthArray",
       "offset": 156,
-      "offset_hex": "0x9c",
-      "size": 4
+      "offset_hex": "0x9C",
+      "size": 4,
+      "type": "ULONG *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pArgQueue",
       "offset": 160,
-      "offset_hex": "0xa0",
-      "size": 4
+      "offset_hex": "0xA0",
+      "size": 4,
+      "type": "void *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwStubPhase",
       "offset": 164,
-      "offset_hex": "0xa4",
-      "size": 4
+      "offset_hex": "0xA4",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "LowStackMark",
       "offset": 168,
-      "offset_hex": "0xa8",
-      "size": 4
+      "offset_hex": "0xA8",
+      "size": 4,
+      "type": "void *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pAsyncMsg",
       "offset": 172,
-      "offset_hex": "0xac",
-      "size": 4
+      "offset_hex": "0xAC",
+      "size": 4,
+      "type": "PNDR_ASYNC_MESSAGE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pCorrInfo",
       "offset": 176,
-      "offset_hex": "0xb0",
-      "size": 4
+      "offset_hex": "0xB0",
+      "size": 4,
+      "type": "PNDR_CORRELATION_INFO"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pCorrMemory",
       "offset": 180,
-      "offset_hex": "0xb4",
-      "size": 4
+      "offset_hex": "0xB4",
+      "size": 4,
+      "type": "unsigned __int8 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pMemoryList",
       "offset": 184,
-      "offset_hex": "0xb8",
-      "size": 4
+      "offset_hex": "0xB8",
+      "size": 4,
+      "type": "void *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pCSInfo",
       "offset": 188,
-      "offset_hex": "0xbc",
-      "size": 4
+      "offset_hex": "0xBC",
+      "size": 4,
+      "type": "CS_STUB_INFO *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ConformanceMark",
       "offset": 192,
-      "offset_hex": "0xc0",
-      "size": 4
+      "offset_hex": "0xC0",
+      "size": 4,
+      "type": "unsigned __int8 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "VarianceMark",
       "offset": 196,
-      "offset_hex": "0xc4",
-      "size": 4
+      "offset_hex": "0xC4",
+      "size": 4,
+      "type": "unsigned __int8 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unused",
       "offset": 200,
-      "offset_hex": "0xc8",
-      "size": 8
+      "offset_hex": "0xC8",
+      "size": 8,
+      "type": "INT_PTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pContext",
       "offset": 208,
-      "offset_hex": "0xd0",
-      "size": 4
+      "offset_hex": "0xD0",
+      "size": 4,
+      "type": "_NDR_PROC_CONTEXT *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ContextHandleHash",
       "offset": 212,
-      "offset_hex": "0xd4",
-      "size": 4
+      "offset_hex": "0xD4",
+      "size": 4,
+      "type": "void *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pUserMarshalList",
       "offset": 216,
-      "offset_hex": "0xd8",
-      "size": 4
+      "offset_hex": "0xD8",
+      "size": 4,
+      "type": "void *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Reserved51_3",
       "offset": 224,
-      "offset_hex": "0xe0",
-      "size": 8
+      "offset_hex": "0xE0",
+      "size": 8,
+      "type": "INT_PTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Reserved51_4",
       "offset": 232,
-      "offset_hex": "0xe8",
-      "size": 8
+      "offset_hex": "0xE8",
+      "size": 8,
+      "type": "INT_PTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Reserved51_5",
       "offset": 240,
-      "offset_hex": "0xf0",
-      "size": 8
+      "offset_hex": "0xF0",
+      "size": 8,
+      "type": "INT_PTR"
     }
   ],
   "name": "MIDL_STUB_MESSAGE",
+  "ordinal": 3089,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 248
 }

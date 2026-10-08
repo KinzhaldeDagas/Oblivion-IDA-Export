@@ -1,10 +1,10 @@
-0x959EC0: push    esi
+0x959EC0: push    esi; Verified NiPick context destructor: clears/releases hit records, frees the record-pointer array, and releases its retained root object.
 0x959EC1: mov     esi, ecx
 0x959EC3: call    sub_959CA0
 0x959EC8: mov     eax, [esi+1Ch]
 0x959ECB: push    eax
 0x959ECC: mov     dword ptr [esi+18h], offset ??_7?$NiTArray@PAVRecord@NiPick@@@@6B@; const NiTArray<NiPick::Record *>::`vftable'
-0x959ED3: call    FormHeapFree
+0x959ED3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x959ED8: mov     esi, [esi+14h]
 0x959EDB: add     esp, 4
 0x959EDE: test    esi, esi

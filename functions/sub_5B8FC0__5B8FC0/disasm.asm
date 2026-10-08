@@ -79,17 +79,17 @@
 0x5B90AC: push    edx
 0x5B90AD: push    0FAFh
 0x5B90B2: call    Tile_SetString
-0x5B90B7: mov     ecx, offset TimeGlobals
+0x5B90B7: mov     ecx, 0B332E0h
 0x5B90BC: call    TimeGlobals_GetGameHour
 0x5B90C1: fstp    [esp+38h+arg_0]
 0x5B90C5: fld     [esp+38h+arg_0]
 0x5B90C9: fld     st
-0x5B90CB: call    Double_To_SInt32
+0x5B90CB: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B90D0: mov     esi, eax
 0x5B90D2: mov     [esp+38h+var_28], esi
 0x5B90D6: fisub   [esp+38h+var_28]
 0x5B90DA: fmul    qword ptr ds:0A2FCC8h
-0x5B90E0: call    Double_To_SInt32
+0x5B90E0: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B90E5: cmp     esi, 1
 0x5B90E8: mov     edi, eax
 0x5B90EA: jge     short loc_5B90F3
@@ -99,7 +99,7 @@
 0x5B90F6: jle     short loc_5B90FB
 0x5B90F8: sub     esi, 0Ch
 0x5B90FB: push    ebp
-0x5B90FC: call    FormHeapFree
+0x5B90FC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5B9101: add     esp, 4
 0x5B9104: mov     [esp+38h+var_28], ebp
 0x5B9108: mov     [esp+38h+var_22], bp
@@ -116,8 +116,8 @@
 0x5B9132: mov     ebp, offset aAm; "am"
 0x5B9137: lea     edx, [esp+38h+var_14]
 0x5B913B: push    edx
-0x5B913C: mov     ecx, offset TimeGlobals
-0x5B9141: call    sub_402E50
+0x5B913C: mov     ecx, 0B332E0h
+0x5B9141: call    TimeGlobals_FormatGameDate; Builds the in-game date string '%s %d, 3E%d' from a month-name table, game day, and game year. Observed in HUD and Sleep/Wait menu.
 0x5B9146: mov     eax, [eax]
 0x5B9148: push    ebp
 0x5B9149: push    edi
@@ -131,8 +131,8 @@
 0x5B915D: mov     ebp, offset aAm; "am"
 0x5B9162: lea     edx, [esp+38h+var_14]
 0x5B9166: push    edx
-0x5B9167: mov     ecx, offset TimeGlobals
-0x5B916C: call    sub_402E50
+0x5B9167: mov     ecx, 0B332E0h
+0x5B916C: call    TimeGlobals_FormatGameDate; Builds the in-game date string '%s %d, 3E%d' from a month-name table, game day, and game year. Observed in HUD and Sleep/Wait menu.
 0x5B9171: mov     eax, [eax]
 0x5B9173: push    ebp
 0x5B9174: push    edi
@@ -143,10 +143,10 @@
 0x5B9181: lea     eax, [esp+4Ch+var_28]
 0x5B9185: push    eax; int
 0x5B9186: call    BSStringT_Static_Format
-0x5B918B: mov     ecx, [esp+50h+var_14]
+0x5B918B: mov     ecx, dword ptr [esp+50h+var_14]
 0x5B918F: push    ecx
 0x5B9190: mov     byte ptr [esp+54h+var_4], 1
-0x5B9195: call    FormHeapFree
+0x5B9195: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5B919A: mov     esi, [esp+54h+var_28]
 0x5B919E: mov     edx, [esp+54h+var_20]
 0x5B91A2: mov     ecx, [edx+4]
@@ -155,10 +155,10 @@
 0x5B91A9: push    0FB0h
 0x5B91AE: call    Tile_SetString
 0x5B91B3: push    esi
-0x5B91B4: call    FormHeapFree
+0x5B91B4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5B91B9: mov     eax, [esp+3Ch+var_1C.m_data]
 0x5B91BD: push    eax
-0x5B91BE: call    FormHeapFree
+0x5B91BE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5B91C3: add     esp, 8
 0x5B91C6: mov     ecx, [esp+38h+var_C]
 0x5B91CA: mov     large fs:0, ecx
@@ -168,3 +168,18 @@
 0x5B91D4: pop     ebp
 0x5B91D5: add     esp, 28h
 0x5B91D8: retn    4
+0x9C0C60: lea     ecx, [ebp-1Ch]; void *
+0x9C0C63: jmp     BSStringT_Clear
+0x9C0C68: lea     ecx, [ebp-28h]; void *
+0x9C0C6B: jmp     BSStringT_Clear
+0x9C0C70: lea     ecx, [ebp-14h]; void *
+0x9C0C73: jmp     BSStringT_Clear
+0x9C0C78: lea     ecx, [ebp-14h]; void *
+0x9C0C7B: jmp     BSStringT_Clear
+0x9C0C80: mov     edx, [esp+arg_4]
+0x9C0C84: lea     eax, [edx-28h]
+0x9C0C87: mov     ecx, [edx-2Ch]
+0x9C0C8A: xor     ecx, eax
+0x9C0C8C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C0C91: mov     eax, offset stru_AE9DF8
+0x9C0C96: jmp     ___CxxFrameHandler3

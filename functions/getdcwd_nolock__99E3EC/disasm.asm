@@ -54,8 +54,8 @@
 0x99E476: add     al, 40h ; '@'
 0x99E478: mov     [ebp+FileName], al
 0x99E47B: mov     [ebp+var_3], 3Ah ; ':'
-0x99E47F: mov     [ebp+var_2], 2Eh ; '.'
-0x99E483: mov     [ebp+var_1], bl
+0x99E47F: mov     byte ptr [ebp-2], 2Eh ; '.'
+0x99E483: mov     [ebp-1], bl
 0x99E486: jmp     short loc_99E48F
 0x99E488: mov     [ebp+FileName], 2Eh ; '.'
 0x99E48C: mov     [ebp+var_3], bl

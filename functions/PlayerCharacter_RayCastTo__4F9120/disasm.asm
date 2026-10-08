@@ -52,7 +52,7 @@
 0x4F91D6: mov     ecx, esi
 0x4F91D8: call    edx
 0x4F91DA: push    eax
-0x4F91DB: push    offset dword_B3FAB0
+0x4F91DB: push    offset parent
 0x4F91E0: call    NiRTTI_Cast
 0x4F91E5: push    ebx
 0x4F91E6: push    eax
@@ -67,7 +67,7 @@
 0x4F9204: lea     ecx, [esp+144h+var_F0]; this
 0x4F9208: mov     [esp+144h+a2.x], eax
 0x4F920C: mov     [esp+144h+a2.z], edx
-0x4F9210: call    bhkWorldRayCastData__Init
+0x4F9210: call    bhkWorldRayCastData__Init; TES4 authoritative: bhkWorldRayCastData::Init. Raycast input From at +0x00, To at +0x10, enable/filter at +0x20/+0x24, output hit fraction at +0x44, root collidable at +0x50, extra collector pointers at +0x70/+0x74/+0x78.
 0x4F9215: mov     eax, [esi]
 0x4F9217: mov     edx, [eax+188h]
 0x4F921D: mov     ecx, esi
@@ -77,10 +77,10 @@
 0x4F9225: test    al, al
 0x4F9227: jz      short loc_4F922B
 0x4F9229: mov     edi, esi
-0x4F922B: push    edi; a3
+0x4F922B: push    edi; Player LOS ray uses SpecificItemCollector setup with layer 0x1A and optional self/target filtering; useful pattern but not directly correct for climbing wall probes.
 0x4F922C: push    1Ah; a2
 0x4F922E: lea     ecx, [esp+14Ch+var_70]; this
-0x4F9235: call    sub_535A00
+0x4F9235: call    SpecificItemCollector_InitForRaycast; SpecificItemCollector constructor for raycasts. Initializes collector and, when a TESObjectREFR is supplied, reads its collision filter via 0x65ABE0 and rewrites collision layer matrix row for layer a2 (or 0x1C if a2 < 0x18). LOS uses this, but movement climb probes should avoid unintended global mask churn unless needed.
 0x4F923A: mov     edx, [esi]
 0x4F923C: lea     eax, [esp+144h+var_70]
 0x4F9243: mov     [esp+144h+var_F0.RayHitCollector1], eax
@@ -98,15 +98,15 @@
 0x4F9273: lea     ecx, [esp+148h+var_F0]; this
 0x4F9277: mov     [esp+148h+var_118.y], edx
 0x4F927B: mov     [esp+148h+var_118.z], eax
-0x4F927F: call    bhkWorldRayCastData__SetCastInputFrom
+0x4F927F: call    bhkWorldRayCastData__SetCastInputFrom; TES4 authoritative: bhkWorldRayCastData::SetCastInputFrom; scales world-space NiPoint3 into Havok units using hkFactor and writes ray From.
 0x4F9284: mov     ecx, ds:0B333C4h
 0x4F928A: lea     edx, [esp+144h+var_10C]
 0x4F928E: push    edx
-0x4F928F: call    sub_65ABE0
+0x4F928F: call    MobileObject_GetCollisionFilterInfo; Returns actor/proxy collision filter identity by calling 0x57E270 on MobileObject_GetCharProxy(this). Callers keep high 16 bits and OR in the chosen collision layer.
 0x4F9294: mov     eax, [esp+144h+var_10C]
 0x4F9298: mov     edx, [esi]
 0x4F929A: mov     edx, [edx+15Ch]
-0x4F92A0: and     eax, 0FFFF001Ah
+0x4F92A0: and     eax, 0FFFF001Ah; Player LOS ray uses layer 0x1A; useful contrast only, not the movement climb probe layer.
 0x4F92A5: or      eax, 1Ah
 0x4F92A8: mov     [esp+144h+var_F0.WorldRayCastInput.FilterInfo], eax
 0x4F92AC: lea     eax, [esp+144h+var_FC]
@@ -146,15 +146,15 @@
 0x4F9318: push    eax; a2
 0x4F9319: fstp    [esp+148h+var_118.z]
 0x4F931D: lea     ecx, [esp+148h+var_F0]; this
-0x4F9321: call    bhkWorldRayCastData__SetCastInputTo
+0x4F9321: call    bhkWorldRayCastData__SetCastInputTo; TES4 authoritative: bhkWorldRayCastData::SetCastInputTo; scales world-space NiPoint3 into Havok units, writes ray To, resets sentinel vector at +0x60.
 0x4F9326: lea     ecx, [esp+144h+var_F0]
 0x4F932A: push    ecx; a2
 0x4F932B: mov     ecx, ds:0B333A0h; this
-0x4F9331: call    TES__CastRay
+0x4F9331: call    TES__CastRay; TES::CastRay call for PlayerCharacter_RayCastTo. For climbing, direct bhkWorldRayCastData + TES::CastRay gives hit normal and hit object after the call.
 0x4F9336: cmp     eax, ebx
 0x4F9338: jz      loc_4F93BC
 0x4F933E: push    eax
-0x4F933F: call    sub_4DC270
+0x4F933F: call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.
 0x4F9344: add     esp, 4
 0x4F9347: cmp     eax, esi
 0x4F9349: jz      short loc_4F93BC
@@ -167,7 +167,7 @@
 0x4F9359: push    1; char
 0x4F935B: push    esi; int
 0x4F935C: push    ebx; int
-0x4F935D: call    sub_5F2820
+0x4F935D: call    Actor_LineOfSight; Oblivion actor line-of-sight query used by detection, combat reach, tactical refresh, and ray-cast script paths. Performs cell/world-space and Havok visibility tests and can report the viewed actor segment through the output parameter. Fallout corroborates the Actor::LineOfSight family name only.
 0x4F9362: mov     ecx, [esp+144h+var_120]
 0x4F9366: movzx   eax, al
 0x4F9369: mov     [esp+144h+a2.x], eax
@@ -202,7 +202,7 @@
 0x4F93CC: push    esi; int
 0x4F93CD: push    0; int
 0x4F93CF: mov     ecx, edi; int
-0x4F93D1: call    sub_5F2820
+0x4F93D1: call    Actor_LineOfSight; Oblivion actor line-of-sight query used by detection, combat reach, tactical refresh, and ray-cast script paths. Performs cell/world-space and Havok visibility tests and can report the viewed actor segment through the output parameter. Fallout corroborates the Actor::LineOfSight family name only.
 0x4F93D6: movzx   edx, al
 0x4F93D9: mov     [esp+144h+a2.x], edx
 0x4F93DD: fild    [esp+144h+a2.x]
@@ -229,3 +229,16 @@
 0x4F9422: mov     esp, ebp
 0x4F9424: pop     ebp
 0x4F9425: retn
+0x9B6A90: lea     ecx, [ebp+var_70]; void *
+0x9B6A93: jmp     sub_4F5E90
+0x9B6A98: mov     edx, [esp-4+arg_4]
+0x9B6A9C: lea     eax, [edx-134h]
+0x9B6AA2: mov     ecx, [edx-138h]
+0x9B6AA8: xor     ecx, eax
+0x9B6AAA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B6AAF: add     eax, 0Ch
+0x9B6AB2: mov     ecx, [edx-8]
+0x9B6AB5: xor     ecx, eax
+0x9B6AB7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B6ABC: mov     eax, offset stru_AE184C
+0x9B6AC1: jmp     ___CxxFrameHandler3

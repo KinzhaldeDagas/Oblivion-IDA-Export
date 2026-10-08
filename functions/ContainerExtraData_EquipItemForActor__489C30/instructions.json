@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x489C30",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; UCWUS pipeline note: container equip/inventory reference path is relevant to token persistence and recharge menu movement; current UCWUS bridge leaves recharge shuttling scripted.",
     "mnemonic": "push",
     "size": 2
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x489CD6",
-    "line": "mov     ecx, [esp+2Ch+arg_C]",
+    "line": "mov     ecx, [esp+2Ch+item]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x489DA8",
-    "line": "mov     edi, [esp+2Ch+arg_C]",
+    "line": "mov     edi, [esp+2Ch+item]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -889,19 +889,19 @@
   },
   {
     "ea": "0x489DB2",
-    "line": "push    edi",
+    "line": "push    edi; item",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x489DB3",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x489DB5",
-    "line": "call    sub_446C30",
+    "line": "call    BSSimpleList__Contains; Generic BSSimpleList membership test. Dialogue menu code uses it to avoid duplicate MenuTopics; social AI uses it for the recent-conversation target cooldown list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -997,13 +997,13 @@
   },
   {
     "ea": "0x489DE0",
-    "line": "mov     [esp+2Ch+arg_C], 0",
+    "line": "mov     [esp+2Ch+item], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x489DE8",
-    "line": "mov     ebp, [esp+2Ch+arg_C]",
+    "line": "mov     ebp, [esp+2Ch+item]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1105,7 +1105,7 @@
   },
   {
     "ea": "0x489E1F",
-    "line": "mov     [esp+2Ch+arg_C], eax",
+    "line": "mov     [esp+2Ch+item], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1273,7 +1273,7 @@
   },
   {
     "ea": "0x489E8E",
-    "line": "mov     [esp+2Ch+arg_C], esi",
+    "line": "mov     [esp+2Ch+item], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1321,7 +1321,7 @@
   },
   {
     "ea": "0x489EAD",
-    "line": "mov     [esp+2Ch+arg_C], eax",
+    "line": "mov     [esp+2Ch+item], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1525,7 +1525,7 @@
   },
   {
     "ea": "0x489F1E",
-    "line": "mov     eax, [esp+2Ch+arg_C]",
+    "line": "mov     eax, [esp+2Ch+item]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1597,7 +1597,7 @@
   },
   {
     "ea": "0x489F3F",
-    "line": "mov     eax, [esp+2Ch+arg_C]",
+    "line": "mov     eax, [esp+2Ch+item]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1663,7 +1663,7 @@
   },
   {
     "ea": "0x489F58",
-    "line": "mov     [esp+2Ch+arg_C], eax",
+    "line": "mov     [esp+2Ch+item], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1872,12 +1872,6 @@
     "size": 2
   },
   {
-    "ea": "0x489FBD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x489FC0",
     "line": "cmp     [eax], ebp",
     "mnemonic": "cmp",
@@ -1963,7 +1957,7 @@
   },
   {
     "ea": "0x489FEA",
-    "line": "mov     [esp+2Ch+arg_C], eax",
+    "line": "mov     [esp+2Ch+item], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2263,7 +2257,7 @@
   },
   {
     "ea": "0x48A07C",
-    "line": "call    sub_41F370",
+    "line": "call    ExtraDataList_SetCannotWear; Adds or removes marker extra ExtraCannotWear type 0x47 according to the requested state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2701,7 +2695,7 @@
   },
   {
     "ea": "0x48A168",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2989,7 +2983,7 @@
   },
   {
     "ea": "0x48A1FB",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3007,7 +3001,7 @@
   },
   {
     "ea": "0x48A204",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3025,7 +3019,7 @@
   },
   {
     "ea": "0x48A211",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3049,13 +3043,13 @@
   },
   {
     "ea": "0x48A21D",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48A21F",
-    "line": "call    TESObjectREFR_GetAnimData",
+    "line": "call    TESObjectREFR_GetAnimData; Return active ActorAnimData for an actor reference. For actor/creature refs with process level 0 or 1, return process+0x17C; otherwise tail-call the ExtraAnim lookup on the reference extra list. Exact return type is ActorAnimData*.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3145,19 +3139,19 @@
   },
   {
     "ea": "0x48A257",
-    "line": "push    eax",
+    "line": "push    eax; weapon",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48A258",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48A25A",
-    "line": "call    EquipWeapon",
+    "line": "call    EquipWeapon; Equips the supplied form on this reference. The native ABI has one stack argument: the weapon/form pointer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3223,7 +3217,7 @@
   },
   {
     "ea": "0x48A27C",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3433,7 +3427,7 @@
   },
   {
     "ea": "0x48A2E6",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3451,7 +3445,7 @@
   },
   {
     "ea": "0x48A2EF",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3469,7 +3463,7 @@
   },
   {
     "ea": "0x48A2FC",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3655,7 +3649,7 @@
   },
   {
     "ea": "0x48A35E",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3865,7 +3859,7 @@
   },
   {
     "ea": "0x48A3C8",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3883,7 +3877,7 @@
   },
   {
     "ea": "0x48A3D1",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3901,7 +3895,7 @@
   },
   {
     "ea": "0x48A3DE",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4081,7 +4075,7 @@
   },
   {
     "ea": "0x48A43C",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4297,7 +4291,7 @@
   },
   {
     "ea": "0x48A4AA",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4315,7 +4309,7 @@
   },
   {
     "ea": "0x48A4B3",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4333,7 +4327,7 @@
   },
   {
     "ea": "0x48A4C0",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4405,19 +4399,19 @@
   },
   {
     "ea": "0x48A4E2",
-    "line": "push    ecx",
+    "line": "push    ecx; ammo",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48A4E3",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48A4E5",
-    "line": "call    sub_4E1DF0",
+    "line": "call    TESObjectREFR_RefreshEquippedAmmo3D; Refreshes equipped-AMMO/quiver 3D for a reference. For PlayerCharacter it updates both relevant animation perspectives; then refreshes quiver arrow visibility and actor 3D state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4498,5 +4492,257 @@
     "line": "retn    18h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AFCC0",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFCC3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFCC4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFCC9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFCCA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFCCB",
+    "line": "mov     eax, [ebp+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFCCE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFCCF",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFCD4",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFCD5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFCD6",
+    "line": "mov     eax, [ebp+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFCD9",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFCDA",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFCDF",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFCE0",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFCE1",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFCE4",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFCE5",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFCEA",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFCEB",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFCEC",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFCEF",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFCF0",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFCF5",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFCF6",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFCF7",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFCFA",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFCFB",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFD00",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFD01",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFD02",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFD05",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFD06",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFD0B",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFD0C",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFD0D",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AFD11",
+    "line": "lea     eax, [edx-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFD14",
+    "line": "mov     ecx, [edx-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFD17",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AFD19",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFD1E",
+    "line": "mov     eax, offset stru_ADC16C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFD23",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

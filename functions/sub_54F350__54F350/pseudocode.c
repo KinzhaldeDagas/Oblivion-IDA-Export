@@ -1,33 +1,36 @@
-double __userpurge sub_54F350@<st0>(int a1@<ecx>, double result@<st0>, double a3@<st1>, float *a4)
+double __userpurge sub_54F350@<st0>(int a1@<ecx>, double result@<st0>, double a3@<st1>, double a4@<st2>, float *a5)
 {
-  BSTextureManager *v5; // ebx
+  BSTextureManager *v6; // ebx
   void *data; // esi
-  int v7; // esi
-  float *v8; // eax
+  int v8; // esi
   float *v9; // eax
+  float *v10; // eax
 
-  v5 = (BSTextureManager *)a4;
-  if ( a4 )
+  v6 = (BSTextureManager *)a5; /*0x54f375*/
+  if ( a5 ) /*0x54f37b*/
   {
-    (*(void (__thiscall **)(int))(*(_DWORD *)a1 + 0xC))(a1);
-    if ( a3 >= *(float *)&SrcStr )
+    (*(void (__thiscall **)(int))(*(_DWORD *)a1 + 0xC))(a1); /*0x54f399*/
+    if ( a4 >= *(float *)&SrcStr ) /*0x54f3a6*/
     {
-      if ( !v5->unk00.numItems
-        || (data = v5->unk00.end->data) != 0
+      if ( !v6->unk00.numItems /*0x54f3db*/
+        || (data = v6->unk00.end->data) != 0
         && (*(unsigned __int8 (__thiscall **)(void *))(*(_DWORD *)data + 0x40))(data)
-        && (v7 = (*(int (__usercall **)@<eax>(void *@<ecx>, double@<st0>))(*(_DWORD *)data + 4))(data, result),
-            v7 == (*(int (__thiscall **)(int))(*(_DWORD *)a1 + 4))(a1)) )
+        && (v8 = (*(int (__usercall **)@<eax>(void *@<ecx>, double@<st0>, double@<st1>))(*(_DWORD *)data + 4))(
+                   data,
+                   result,
+                   a3),
+            v8 == (*(int (__thiscall **)(int))(*(_DWORD *)a1 + 4))(a1)) )
       {
-        v8 = (float *)FormHeapAlloc(0x14u);
-        a4 = v8;
-        if ( v8 )
-          v9 = sub_54EAA0(v8, a1);
+        v9 = (float *)FormHeapAlloc(0x14u); /*0x54f3df*/
+        a5 = v9; /*0x54f3e7*/
+        if ( v9 ) /*0x54f3f5*/
+          v10 = sub_54EAA0(v9, a1); /*0x54f3fa*/
         else
-          v9 = 0;
-        a4 = v9;
-        sub_5B1E20(v5, (void **)&a4);
+          v10 = 0; /*0x54f401*/
+        a5 = v10; /*0x54f412*/
+        NiTPointerList__AddTail(v6, (void **)&a5); /*0x54f416*/
       }
     }
   }
-  return result;
+  return result; /*0x54f37f*/
 }

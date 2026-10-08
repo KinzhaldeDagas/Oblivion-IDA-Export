@@ -1,14 +1,14 @@
-void __thiscall sub_7016A0(NiD3DVertexShader *this)
+void __thiscall NiPointerSlot_Release(void **slot)
 {
   NiD3DVertexShader *v1; // esi
 
-  v1 = *(NiD3DVertexShader **)this;
-  if ( *(_DWORD *)this )
+  v1 = (NiD3DVertexShader *)*slot; /*0x7016a1*/
+  if ( *slot ) /*0x7016a1*/
   {
-    if ( !InterlockedDecrement((volatile LONG *)v1 + 1) )
+    if ( !InterlockedDecrement((volatile LONG *)v1 + 1) ) /*0x7016ab*/
     {
-      if ( v1 )
-        (**(void (__thiscall ***)(NiD3DVertexShader *, int))v1)(v1, 1);
+      if ( v1 ) /*0x7016b7*/
+        (**(void (__thiscall ***)(NiD3DVertexShader *, int))v1)(v1, 1); /*0x7016c1*/
     }
   }
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4F4E20",
-    "line": "fldz",
+    "line": "fldz; GetDisposition_Eval (index 76 / opcode 0x104C): for valid actor subject and Actor parameter, returns the subject's disposition toward that target. A global one-pair cache reuses the last result; non-actor inputs leave numeric result 0.",
     "mnemonic": "fldz",
     "size": 2
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x4F4E23",
-    "line": "mov     ebp, [esp+4+arg_C]",
+    "line": "mov     ebp, [esp+4+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x4F4E2C",
-    "line": "mov     edi, [esp+0Ch+arg_0]",
+    "line": "mov     edi, [esp+0Ch+subject]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x4F4E49",
-    "line": "mov     ebx, [esp+10h+arg_4]",
+    "line": "mov     ebx, [esp+10h+target]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -277,13 +277,13 @@
   },
   {
     "ea": "0x4F4E96",
-    "line": "mov     [esp+0Ch+arg_C], eax",
+    "line": "mov     [esp+0Ch+value], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4F4E9A",
-    "line": "fild    [esp+0Ch+arg_C]",
+    "line": "fild    [esp+0Ch+value]",
     "mnemonic": "fild",
     "size": 4
   },

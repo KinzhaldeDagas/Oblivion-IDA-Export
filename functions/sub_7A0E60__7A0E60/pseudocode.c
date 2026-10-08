@@ -1,26 +1,30 @@
-_DWORD *__cdecl sub_7A0E60(_DWORD *a1, _DWORD *a2, _DWORD *a3)
+// Backward ownership move/assignment for overlapping ranges of 16-byte st_vector<SFrondGuide> elements. Swaps the three owned pointer fields while walking from the end.
+OB_stVector_SFrondGuide_010201A0 *__cdecl OB_stVector_stVector_SFrondGuide_MoveAssignRangeBackward_010201A0(
+        OB_stVector_SFrondGuide_010201A0 *first,
+        OB_stVector_SFrondGuide_010201A0 *last,
+        OB_stVector_SFrondGuide_010201A0 *destinationEnd)
 {
-  _DWORD *v3; // ecx
-  _DWORD *result; // eax
-  int v5; // edi
-  int v6; // edx
-  int v7; // edx
-  int v8; // edx
+  OB_stVector_SFrondGuide_010201A0 *v3; // ecx
+  OB_stVector_SFrondGuide_010201A0 *result; // eax
+  OB_SFrondGuide_010201A0 *begin; // edi
+  OB_SFrondGuide_010201A0 *v6; // edx
+  OB_SFrondGuide_010201A0 *end; // edx
+  OB_SFrondGuide_010201A0 *capacityEnd; // edx
 
-  v3 = a2;
-  for ( result = a3; v3 != a1; v3[3] = v8 )
+  v3 = last; /*0x7a0e86*/
+  for ( result = destinationEnd; v3 != first; v3->capacityEnd = capacityEnd ) /*0x7a0e90*/
   {
-    v5 = v3[0xFFFFFFFD];
-    v6 = result[0xFFFFFFFD];
-    v3 += 0xFFFFFFFC;
-    result += 0xFFFFFFFC;
-    result[1] = v5;
-    v3[1] = v6;
-    v7 = result[2];
-    result[2] = v3[2];
-    v3[2] = v7;
-    v8 = result[3];
-    result[3] = v3[3];
+    begin = v3[0xFFFFFFFF].begin; /*0x7a0e92*/
+    v6 = result[0xFFFFFFFF].begin; /*0x7a0e95*/
+    v3 += 0xFFFFFFFF; /*0x7a0e98*/
+    result += 0xFFFFFFFF; /*0x7a0e9b*/
+    result->begin = begin; /*0x7a0ea0*/
+    v3->begin = v6; /*0x7a0ea3*/
+    end = result->end; /*0x7a0ea9*/
+    result->end = v3->end; /*0x7a0eac*/
+    v3->end = end; /*0x7a0eaf*/
+    capacityEnd = result->capacityEnd; /*0x7a0eb5*/
+    result->capacityEnd = v3->capacityEnd; /*0x7a0eb8*/
   }
-  return result;
+  return result; /*0x7a0ec0*/
 }

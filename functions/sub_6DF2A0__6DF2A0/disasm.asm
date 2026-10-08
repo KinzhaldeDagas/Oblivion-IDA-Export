@@ -9,7 +9,7 @@
 0x6DF2B2: mov     esi, ecx
 0x6DF2B4: fld     [esp+20h+arg_0]
 0x6DF2B8: fstp    [esp+20h+var_20]
-0x6DF2BB: call    sub_6EBA60
+0x6DF2BB: call    NiInterpolator_CloneTimeRange; Default range clone: clone through the NiObject pointer map, then invoke the clone's post-clone/collapse virtual. Subclasses override when authored data must be sliced.
 0x6DF2C0: mov     ebp, esi
 0x6DF2C2: mov     [esp+18h+var_4], eax
 0x6DF2C6: lea     ebx, [eax+38h]

@@ -1,18 +1,18 @@
-0x647060: mov     eax, [esp+arg_4]
+0x647060: mov     eax, [esp+owner]
 0x647064: push    ebx
-0x647065: mov     ebx, [esp+4+arg_0]
+0x647065: mov     ebx, [esp+4+changeMask]
 0x647069: push    ebp
 0x64706A: push    esi
 0x64706B: push    edi
-0x64706C: push    eax
-0x64706D: push    ebx
+0x64706C: push    eax; owner
+0x64706D: push    ebx; changeMask
 0x64706E: mov     edi, ecx
-0x647070: call    sub_60D0E0
+0x647070: call    BaseProcess_GetSaveSize
 0x647075: mov     ecx, ds:0B33B00h
 0x64707B: movzx   esi, ax
-0x64707E: mov     [esp+10h+arg_4], esi
+0x64707E: mov     [esp+10h+owner], esi
 0x647082: movzx   ebp, si
-0x647085: call    sub_45A170
+0x647085: call    TESSaveLoadGame_UseSaveGameBlocks
 0x64708A: test    al, al
 0x64708C: jz      short loc_647091
 0x64708E: add     esi, 6
@@ -36,27 +36,27 @@
 0x6470BD: add     esi, 4
 0x6470C0: add     esi, 8
 0x6470C3: test    ebx, 400000h
-0x6470C9: mov     [esp+10h+arg_4], esi
+0x6470C9: mov     [esp+10h+owner], esi
 0x6470CD: jz      short loc_6470EE
-0x6470CF: lea     ecx, [edi+70h]
+0x6470CF: lea     ecx, [edi+70h]; self
 0x6470D2: call    AVCollection_GetSaveSize
 0x6470D7: mov     ecx, ds:0B33B00h
 0x6470DD: mov     di, si
 0x6470E0: add     di, ax
-0x6470E3: mov     word ptr [esp+10h+arg_4], di
-0x6470E8: mov     esi, [esp+10h+arg_4]
+0x6470E3: mov     word ptr [esp+10h+owner], di
+0x6470E8: mov     esi, [esp+10h+owner]
 0x6470EC: jmp     short loc_6470F3
-0x6470EE: mov     di, word ptr [esp+10h+arg_4]
+0x6470EE: mov     di, word ptr [esp+10h+owner]
 0x6470F3: mov     al, [ecx+7Ch]
 0x6470F6: cmp     al, 74h ; 't'
 0x6470F8: jb      short loc_647104
 0x6470FA: add     esi, 4
-0x6470FD: mov     [esp+10h+arg_4], esi
+0x6470FD: mov     [esp+10h+owner], esi
 0x647101: mov     di, si
 0x647104: cmp     al, 76h ; 'v'
 0x647106: jb      short loc_647112
 0x647108: add     esi, 1
-0x64710B: mov     [esp+10h+arg_4], esi
+0x64710B: mov     [esp+10h+owner], esi
 0x64710F: mov     di, si
 0x647112: cmp     byte ptr ds:0B05BACh, 0
 0x647119: jz      short loc_64718E
@@ -65,7 +65,7 @@
 0x647123: jz      short loc_64716E
 0x647125: mov     ecx, [esi]
 0x647127: push    ecx; a1
-0x647128: call    TESForm_LookupByFormID
+0x647128: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x64712D: mov     edx, [esi+5]
 0x647130: add     esp, 4
 0x647133: push    offset a_AiLowprocess_; ".\\AI\\LowProcess.cpp"

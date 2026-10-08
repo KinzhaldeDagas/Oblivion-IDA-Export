@@ -34,13 +34,13 @@
 0x64AC20: call    edx
 0x64AC22: push    eax; int
 0x64AC23: mov     ecx, esi; this
-0x64AC25: call    TESObjectREFR_GetParentCell
+0x64AC25: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x64AC2A: push    eax; int
 0x64AC2B: mov     ecx, esi; this
 0x64AC2D: call    TESObjectREFR_GetWorldSpace
 0x64AC32: push    eax; int
 0x64AC33: mov     ecx, esi
-0x64AC35: call    sub_4D7A20
+0x64AC35: call    TESObjectREFR_SetStartLocation; TESObjectREFR wrapper records package start location from worldspace/cell, position XYZ, and rotZ into ExtraPackageStartLocation.
 0x64AC3A: mov     eax, [ebx]
 0x64AC3C: mov     edx, [eax+188h]
 0x64AC42: push    1

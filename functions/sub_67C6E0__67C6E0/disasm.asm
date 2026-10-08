@@ -10,7 +10,7 @@
 0x67C6FB: call    edx
 0x67C6FD: push    30h ; '0'
 0x67C6FF: mov     ecx, esi
-0x67C701: call    sub_5E05F0
+0x67C701: call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.
 0x67C706: pop     esi
 0x67C707: retn    8
 0x67C70A: fldz
@@ -27,7 +27,7 @@
 0x67C729: push    ebx
 0x67C72A: push    ebp
 0x67C72B: push    0; Seed
-0x67C72D: call    GetRandomLargeInteger?
+0x67C72D: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x67C732: mov     ebp, eax
 0x67C734: mov     eax, [esi+3Ch]
 0x67C737: mov     ebx, [eax+4]
@@ -62,9 +62,9 @@
 0x67C78D: fnstsw  ax
 0x67C78F: test    ah, 1
 0x67C792: jnz     short loc_67C7DA
-0x67C794: push    2
-0x67C796: push    6
-0x67C798: call    TESTopic__GEtTopic
+0x67C794: push    2; index
+0x67C796: push    6; topicType
+0x67C798: call    TESTopic__GetTopic; Hardcoded miscellaneous topic bucket 6 index 2: stock 0000011A / ObserveCombat. This timer/chance ambient SayTopic path is separate from the HELLO conversation-package chain.
 0x67C79D: add     esp, 8
 0x67C7A0: test    eax, eax
 0x67C7A2: jz      short loc_67C7DA
@@ -78,7 +78,7 @@
 0x67C7B6: mov     eax, [edx+1A4h]
 0x67C7BC: push    edi
 0x67C7BD: call    eax
-0x67C7BF: mov     ecx, offset unk_B36920
+0x67C7BF: mov     ecx, (offset flt_B36778+1A8h)
 0x67C7C4: call    GameSetting_GetSafeFloatPointer
 0x67C7C9: fld     dword ptr [eax]
 0x67C7CB: mov     ecx, [esi+3Ch]

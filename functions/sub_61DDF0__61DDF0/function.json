@@ -1,19 +1,32 @@
 {
-  "callees_count": 40,
-  "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 4,
-  "display_name": "sub_61DDF0",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 11,
+  "callers_count": 5,
+  "chunks": [
+    [
+      "0x61DDF0",
+      "0x61E0ED"
+    ]
+  ],
+  "chunks_sha256": "fd912383b659bad00c70fb3885cc2ba4625c480f226cb8cd56b23aa4ca89e276",
+  "comment_regular": "Computes aim pitch/yaw to target. In ranged weapon/spell modes uses projectile speed/gravity and motion lead; writes pitch through out pointer and returns yaw normalized to roughly [-pi,pi].",
+  "comment_repeatable": "Computes aim pitch/yaw to target. In ranged weapon/spell modes uses projectile speed/gravity and motion lead; writes pitch through out pointer and returns yaw normalized to roughly [-pi,pi].",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 7,
+  "display_name": "Actor_CalculateAimAnglesToTarget",
   "end_ea": "0x61E0ED",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_61DDF0",
+  "name": "Actor_CalculateAimAnglesToTarget",
   "segment": ".text",
   "sha256": "fd912383b659bad00c70fb3885cc2ba4625c480f226cb8cd56b23aa4ca89e276",
   "size": 765,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x61DDF0",
-  "type": "double __cdecl(MobileObject *, int, float *, int)",
+  "total_chunk_size": 765,
+  "type": "double __cdecl(TESObjectREFR *, int, float *, int)",
   "xrefs_from_count": 301,
   "xrefs_to_count": 5
 }

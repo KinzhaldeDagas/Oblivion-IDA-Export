@@ -1,4 +1,4 @@
 void __cdecl sub_A22650()
 {
-  GameSetting_destr(&dword_B38F98);
+  GameSetting_destr((int *)&g_gameSetting_sAge); /*0xa22655*/
 }

@@ -28,13 +28,13 @@ char *__thiscall sub_7354B0(char *this, int a2, char *a3)
   NiSurfaceData v30; // [esp+30h] [ebp-50h] BYREF
   int v31; // [esp+7Ch] [ebp-4h]
 
-  InitSurfacEData(&v30);
-  lpCriticalSection = (LPCRITICAL_SECTION)(this + 0x80);
-  EnterCriticalSection((LPCRITICAL_SECTION)this + 4);
-  CurrentThreadId = GetCurrentThreadId();
-  ++*((_DWORD *)this + 0x3F);
-  *((_DWORD *)this + 0x3E) = CurrentThreadId;
-  if ( !(*(unsigned __int8 (__thiscall **)(char *, int, _BYTE *, _BYTE *, NiSurfaceData *, char *, _BYTE *))(*(_DWORD *)this + 0xC))(
+  InitSurfacEData(&v30); /*0x7354dd*/
+  lpCriticalSection = (LPCRITICAL_SECTION)(this + 0x80); /*0x7354e9*/
+  EnterCriticalSection((LPCRITICAL_SECTION)this + 4); /*0x7354ed*/
+  CurrentThreadId = GetCurrentThreadId(); /*0x7354f3*/
+  ++*((_DWORD *)this + 0x3F); /*0x7354f9*/
+  *((_DWORD *)this + 0x3E) = CurrentThreadId; /*0x73551c*/
+  if ( !(*(unsigned __int8 (__thiscall **)(char *, int, _BYTE *, _BYTE *, NiSurfaceData *, char *, _BYTE *))(*(_DWORD *)this + 0xC))( /*0x735528*/
           this,
           a2,
           v29,
@@ -42,45 +42,45 @@ char *__thiscall sub_7354B0(char *this, int a2, char *a3)
           &v30,
           &v23,
           v27) )
-    goto LABEL_2;
-  v7 = *(this + 0x114);
-  v8 = *((unsigned __int16 *)this + 0x87);
-  v9 = v8 * v7;
-  v24 = v9;
-  if ( !v7 )
+    goto LABEL_2; /*0x73552c*/
+  v7 = *(this + 0x114); /*0x735549*/
+  v8 = *((unsigned __int16 *)this + 0x87); /*0x73554f*/
+  v9 = v8 * v7; /*0x735559*/
+  v24 = v9; /*0x73555e*/
+  if ( !v7 ) /*0x735562*/
   {
-    if ( *(this + 0x112) != 4 )
-      goto LABEL_2;
-    v24 = v8 >> 1;
-    v9 = v8 >> 1;
+    if ( *(this + 0x112) != 4 ) /*0x73556b*/
+      goto LABEL_2; /*0x73556b*/
+    v24 = v8 >> 1; /*0x73556f*/
+    v9 = v8 >> 1; /*0x735573*/
   }
-  if ( *(this + 0x101) )
+  if ( *(this + 0x101) ) /*0x735575*/
   {
-    if ( *((unsigned __int16 *)this + 0x82) + (unsigned int)*((unsigned __int16 *)this + 0x83) + 1 < 0x4000 )
+    if ( *((unsigned __int16 *)this + 0x82) + (unsigned int)*((unsigned __int16 *)this + 0x83) + 1 < 0x4000 ) /*0x735596*/
     {
-      sub_734E10((int)this, a2);
-      goto LABEL_12;
+      sub_734E10((int)this, a2); /*0x73559b*/
+      goto LABEL_12; /*0x7355a0*/
     }
 LABEL_2:
-    v5 = (*((_DWORD *)this + 0x3F))-- == 1;
-    if ( v5 )
-      *((_DWORD *)this + 0x3E) = 0;
-    LeaveCriticalSection((LPCRITICAL_SECTION)this + 4);
-    return 0;
+    v5 = (*((_DWORD *)this + 0x3F))-- == 1; /*0x73552e*/
+    if ( v5 ) /*0x735532*/
+      *((_DWORD *)this + 0x3E) = 0; /*0x735534*/
+    LeaveCriticalSection((LPCRITICAL_SECTION)this + 4); /*0x73553c*/
+    return 0; /*0x735544*/
   }
-  if ( *(this + 0x116) )
-    goto LABEL_2;
+  if ( *(this + 0x116) ) /*0x7355a2*/
+    goto LABEL_2; /*0x7355a9*/
 LABEL_12:
-  v10 = a3;
-  if ( !a3
+  v10 = a3; /*0x7355ab*/
+  if ( !a3 /*0x7355e0*/
     || **((_DWORD **)a3 + 0x15) != *((unsigned __int16 *)this + 0x87)
     || **((_DWORD **)a3 + 0x16) != *((unsigned __int16 *)this + 0x88)
     || !sub_71AD40((_DWORD *)a3 + 2, (int)(this + 0x11C)) )
   {
-    v11 = (NiPixelData *)FormHeapAlloc(0x70u);
-    v31 = 0;
-    if ( v11 )
-      v12 = (char *)NiPixelData::NiPixelData(
+    v11 = (NiPixelData *)FormHeapAlloc(0x70u); /*0x7355f4*/
+    v31 = 0; /*0x735605*/
+    if ( v11 ) /*0x73560d*/
+      v12 = (char *)NiPixelData::NiPixelData( /*0x73562c*/
                       v11,
                       *((unsigned __int16 *)this + 0x87),
                       *((unsigned __int16 *)this + 0x88),
@@ -88,73 +88,73 @@ LABEL_12:
                       1u,
                       1);
     else
-      v12 = 0;
-    v31 = 0xFFFFFFFF;
-    a3 = v12;
-    v10 = v12;
+      v12 = 0; /*0x735633*/
+    v31 = 0xFFFFFFFF; /*0x735635*/
+    a3 = v12; /*0x73563d*/
+    v10 = v12; /*0x735644*/
   }
-  if ( *(this + 0x116) )
+  if ( *(this + 0x116) ) /*0x735646*/
   {
-    v13 = (NiObject *)FormHeapAlloc(0x24u);
-    v25 = (int)v13;
-    v31 = 1;
-    if ( v13 )
-      v14 = sub_732750(v13, *(this + 0x115), *((unsigned __int16 *)this + 0x83), *((void **)this + 0x5B));
+    v13 = (NiObject *)FormHeapAlloc(0x24u); /*0x735651*/
+    v25 = (int)v13; /*0x735659*/
+    v31 = 1; /*0x73565f*/
+    if ( v13 ) /*0x735667*/
+      v14 = sub_732750(v13, *(this + 0x115), *((unsigned __int16 *)this + 0x83), *((void **)this + 0x5B)); /*0x735682*/
     else
-      v14 = 0;
-    v31 = 0xFFFFFFFF;
-    sub_71B140(v10, (int)v14);
+      v14 = 0; /*0x735689*/
+    v31 = 0xFFFFFFFF; /*0x73568e*/
+    sub_71B140(v10, (int)v14); /*0x735699*/
   }
-  if ( *((_DWORD *)this + 0x58) < v9 )
+  if ( *((_DWORD *)this + 0x58) < v9 ) /*0x7356a4*/
   {
-    v22 = *((_DWORD *)this + 0x59);
-    *((_DWORD *)this + 0x58) = v9;
-    FormHeapFree(v22);
-    *((_DWORD *)this + 0x59) = FormHeapAlloc(*((_DWORD *)this + 0x58));
+    v22 = *((_DWORD *)this + 0x59); /*0x7356ac*/
+    *((_DWORD *)this + 0x58) = v9; /*0x7356ad*/
+    FormHeapFree(v22); /*0x7356b3*/
+    *((_DWORD *)this + 0x59) = FormHeapAlloc(*((_DWORD *)this + 0x58)); /*0x7356c7*/
   }
-  v15 = *((_DWORD *)v10 + 0x14) + **((_DWORD **)v10 + 0x17);
-  v16 = **((_DWORD **)v10 + 0x15);
-  v17 = v16 * *((_DWORD *)v10 + 0x19);
-  if ( !v17 )
-    v17 = v16 >> 1;
-  if ( *(this + 0x117) )
+  v15 = *((_DWORD *)v10 + 0x14) + **((_DWORD **)v10 + 0x17); /*0x7356d5*/
+  v16 = **((_DWORD **)v10 + 0x15); /*0x7356d8*/
+  v17 = v16 * *((_DWORD *)v10 + 0x19); /*0x7356dd*/
+  if ( !v17 ) /*0x7356e2*/
+    v17 = v16 >> 1; /*0x7356e6*/
+  if ( *(this + 0x117) ) /*0x7356e8*/
   {
-    v15 += v17 * (*((unsigned __int16 *)this + 0x88) - 1);
-    v17 = -v17;
+    v15 += v17 * (*((unsigned __int16 *)this + 0x88) - 1); /*0x7356fe*/
+    v17 = -v17; /*0x735700*/
   }
-  v18 = 0;
-  if ( *(this + 0x118) )
+  v18 = 0; /*0x735702*/
+  if ( *(this + 0x118) ) /*0x735704*/
   {
-    if ( *((_WORD *)this + 0x88) )
+    if ( *((_WORD *)this + 0x88) ) /*0x73570c*/
     {
-      do
+      do /*0x73575d*/
       {
-        sub_734CB0(this, v15, a2, *((char **)this + 0x59), *((_DWORD *)this + 0x58));
-        (*((void (__thiscall **)(char *, _DWORD, int))this + 0x5C))(this, *((_DWORD *)this + 0x59), v15);
-        ++v18;
-        v15 += v17;
+        sub_734CB0(this, a2, *((char **)this + 0x59), *((_DWORD *)this + 0x58)); /*0x735738*/
+        (*((void (__thiscall **)(char *, _DWORD, int))this + 0x5C))(this, *((_DWORD *)this + 0x59), v15); /*0x73574d*/
+        ++v18; /*0x735756*/
+        v15 += v17; /*0x735759*/
       }
-      while ( v18 < *((unsigned __int16 *)this + 0x88) );
+      while ( v18 < *((unsigned __int16 *)this + 0x88) ); /*0x73575d*/
     }
   }
-  else if ( *((_WORD *)this + 0x88) )
+  else if ( *((_WORD *)this + 0x88) ) /*0x735761*/
   {
-    do
+    do /*0x7357bb*/
     {
-      v19 = *(void (__cdecl **)(int, int, unsigned int, int *, int))(a2 + 4);
-      v21 = *((_DWORD *)this + 0x59);
-      v25 = 1;
-      v19(a2, v21, v24, &v25, 1);
-      (*((void (__thiscall **)(char *, _DWORD, int))this + 0x5C))(this, *((_DWORD *)this + 0x59), v15);
-      ++v18;
-      v15 += v17;
+      v19 = *(void (__cdecl **)(int, int, unsigned int, int *, int))(a2 + 4); /*0x735789*/
+      v21 = *((_DWORD *)this + 0x59); /*0x73578c*/
+      v25 = 1; /*0x73578e*/
+      v19(a2, v21, v24, &v25, 1); /*0x735796*/
+      (*((void (__thiscall **)(char *, _DWORD, int))this + 0x5C))(this, *((_DWORD *)this + 0x59), v15); /*0x7357ab*/
+      ++v18; /*0x7357b4*/
+      v15 += v17; /*0x7357b7*/
     }
-    while ( v18 < *((unsigned __int16 *)this + 0x88) );
+    while ( v18 < *((unsigned __int16 *)this + 0x88) ); /*0x7357bb*/
   }
-  v20 = lpCriticalSection;
-  v5 = HIDWORD(lpCriticalSection[3].SpinCount)-- == 1;
-  if ( v5 )
-    LODWORD(v20[3].SpinCount) = 0;
-  LeaveCriticalSection(v20);
-  return a3;
+  v20 = lpCriticalSection; /*0x7357bd*/
+  v5 = HIDWORD(lpCriticalSection[3].SpinCount)-- == 1; /*0x7357c1*/
+  if ( v5 ) /*0x7357c5*/
+    LODWORD(v20[3].SpinCount) = 0; /*0x7357c7*/
+  LeaveCriticalSection(v20); /*0x7357cf*/
+  return a3; /*0x7357dc*/
 }

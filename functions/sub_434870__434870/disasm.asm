@@ -1,4 +1,4 @@
-0x434870: push    ecx
+0x434870: push    ecx; Model-loader map lookup by path/key. Returns the model record from the loader's internal map or 0; used to gate generated KF candidates before they are added to animation lists.
 0x434871: mov     ecx, [ecx+4]
 0x434874: lea     edx, [esp+4+var_4]
 0x434877: push    edx

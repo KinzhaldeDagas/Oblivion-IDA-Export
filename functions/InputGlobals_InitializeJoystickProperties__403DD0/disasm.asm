@@ -1,4 +1,4 @@
-0x403DD0: mov     edx, [esp+arg_0]
+0x403DD0: mov     edx, [esp+arg_0]; [Controller decode 2026-07-09] DirectInput EnumDevices callback for joystick/gamepad devices. Accepts device types 0x14/0x15, copies DIDEVICEINSTANCE, sets g_joystickDIDATAFORMAT, reads DIDEVCAPS, enumerates objects, sets axis range -100..100 and 10 percent deadzone.
 0x403DD4: mov     al, [edx+24h]
 0x403DD7: sub     esp, 18h
 0x403DDA: cmp     al, 14h
@@ -41,7 +41,7 @@
 0x403E3D: call    eax
 0x403E3F: mov     ecx, [esi]
 0x403E41: mov     edx, [ecx+2Ch]
-0x403E44: push    offset JoystickDeviceFormat
+0x403E44: push    offset g_joystickDIDATAFORMAT
 0x403E49: push    esi
 0x403E4A: call    edx
 0x403E4C: mov     eax, [ebx+18F0h]
@@ -73,7 +73,7 @@
 0x403EBA: push    ebp
 0x403EBB: lea     edx, [ebx+ecx*8+18B0h]
 0x403EC2: push    edx
-0x403EC3: push    offset sub_4035D0
+0x403EC3: push    offset InputGlobals__EnumJoystickObjectsCallback
 0x403EC8: push    esi
 0x403EC9: call    eax
 0x403ECB: mov     ecx, [ebx+18F0h]
@@ -92,14 +92,14 @@
 0x403F0E: push    4
 0x403F10: push    eax
 0x403F11: mov     eax, [ecx+18h]
-0x403F14: call    eax
-0x403F16: fld     ds:flt_A2FAAC
+0x403F14: call    eax; [Controller decode 2026-07-09] SetProperty(DIPROP_RANGE=4): joystick axis range normalized to -100..100.
+0x403F16: fld     ds:kFaceEarNormalMatchRadius
 0x403F1C: push    ecx
 0x403F1D: mov     ecx, [ebx+18F0h]
 0x403F23: fstp    [esp+2Ch+deadzonePercent]; deadzonePercent
 0x403F26: push    ecx; whichJoystick
 0x403F27: mov     ecx, ebx; this
-0x403F29: call    InputGlobals__SetJoystickDeadzone
+0x403F29: call    InputGlobals__SetJoystickDeadzone; [Controller decode 2026-07-09] InitializeJoystickProperties: applies 10 percent joystick deadzone via SetJoystickDeadzone(..., 0.1).
 0x403F2E: add     dword ptr [ebx+18F0h], 1
 0x403F35: mov     ebx, [ebx+18F0h]
 0x403F3B: pop     edi

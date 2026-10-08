@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 2,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x467611",
+      "0x46762C"
+    ]
+  ],
+  "chunks_sha256": "eb85937ad4426f9d59abf04c9c3ad8659c89eef201de36a498c27de39a2fe461",
+  "comment_regular": "Oblivion comparison: absent faction always allocates an entry, including rank -1 removal requests; allocation is unchecked.",
+  "comment_repeatable": "Oblivion comparison: absent faction always allocates an entry, including rank -1 removal requests; allocation is unchecked.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "TESActorBaseData_SetFactionRank:::NewFactionEntry",
   "end_ea": "0x46762C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "TESActorBaseData_SetFactionRank:::NewFactionEntry",
   "segment": ".text",
   "sha256": "eb85937ad4426f9d59abf04c9c3ad8659c89eef201de36a498c27de39a2fe461",
   "size": 27,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x467611",
-  "type": "int __userpurge@<eax>(int@<edi>, _DWORD *@<esi>, int, int, int, char)",
+  "total_chunk_size": 27,
+  "type": "void __userpurge(int@<edi>, _DWORD *@<esi>, int, int, int, char)",
   "xrefs_from_count": 11,
   "xrefs_to_count": 2
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4D9100",
-    "line": "sub     esp, 214h",
+    "line": "sub     esp, 214h; TESObjectREFR single-topic speech path. Selects one INFO with ambient conversation rules, immediately runs its result and AddTopicList, then plays only the first decoded response at this reference. Named from observed Oblivion behavior.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x4D9114",
-    "line": "mov     eax, [esp+214h+arg_4]",
+    "line": "mov     eax, [esp+214h+speaker]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -55,19 +55,19 @@
   },
   {
     "ea": "0x4D9123",
-    "line": "push    0",
+    "line": "push    0; conversation",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4D9125",
-    "line": "push    0",
+    "line": "push    0; previousTopic",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4D9127",
-    "line": "push    0",
+    "line": "push    0; target",
     "mnemonic": "push",
     "size": 2
   },
@@ -79,19 +79,19 @@
   },
   {
     "ea": "0x4D912B",
-    "line": "mov     ecx, [esp+228h+arg_0]",
+    "line": "mov     ecx, [esp+228h+arg_0]; this",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x4D9132",
-    "line": "push    eax",
+    "line": "push    eax; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D9133",
-    "line": "call    TESTopic__CreateDialogueInfo",
+    "line": "call    TESTopic__CreateDialogueItem; Selects a matching TESTopicInfo and wraps it as a 0x1C DialogueItem containing response list/cursor, INFO, topic, owner quest, and speaker.",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,31 +157,31 @@
   },
   {
     "ea": "0x4D9153",
-    "line": "push    ebp",
+    "line": "push    ebp; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D9154",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D9156",
-    "line": "call    sub_531470",
+    "line": "call    TESTopicInfo__RunResult; Reference single-topic speech likewise commits selected INFO state before playing the first response.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4D915B",
-    "line": "mov     ecx, ebx; int",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D915D",
-    "line": "call    sub_5308D0",
+    "line": "call    TESTopicInfo__AddTopicList; Adds TESTopicInfo.addedTopics to PlayerCharacter. Pointer-duplicate topics are ignored, each genuinely new topic may show the sTopicAddedText notification outside DialogMenu, and the player's known-topic list is sorted once afterward.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,25 +199,25 @@
   },
   {
     "ea": "0x4D916A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D916C",
-    "line": "call    sub_6B7BA0",
+    "line": "call    DialogueItem__FirstResponse",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4D9171",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D9173",
-    "line": "call    sub_6B7C20",
+    "line": "call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.",
     "mnemonic": "call",
     "size": 5
   },

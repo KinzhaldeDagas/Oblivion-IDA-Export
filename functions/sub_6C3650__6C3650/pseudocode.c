@@ -1,9 +1,10 @@
-unsigned int __thiscall sub_6C3650(int *this, unsigned int *a2)
+// Oblivion NiTransformController binary load. Uses generic single-interpolator controller loading, but for stream versions below 0x0A010068 additionally reads a legacy object link that represents NiTransformData.
+_DWORD *__thiscall NiTransformController_LoadBinary(int *this, unsigned int *a2)
 {
-  unsigned int result; // eax
+  _DWORD *result; // eax
 
-  result = sub_6CE320(this, a2);
-  if ( a2[0x36] < 0xA010068 )
-    return sub_712A20(a2);
-  return result;
+  result = NiSingleInterpController_LoadBinary(this, a2); /*0x6c3656*/
+  if ( a2[0x36] < 0xA010068 ) /*0x6c3665*/
+    return (_DWORD *)sub_712A20(a2); /*0x6c3669*/
+  return result; /*0x6c366e*/
 }

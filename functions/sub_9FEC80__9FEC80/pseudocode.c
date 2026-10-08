@@ -1,4 +1,5 @@
-BSStringT *sub_9FEC80()
+// Verified (Oblivion RTTI): initializes NiRTTI_MagicHitEffect with parent NiRTTI_BSTempEffect.
+NiRTTI *NiRTTI_MagicHitEffect_Initialize()
 {
-  return sub_70E220(&stru_B3C0BC, "MagicHitEffect", (int)&stru_B3A680);
+  return NiRTTI_Constructor((NiRTTI *)&NiRTTI_MagicHitEffect, "MagicHitEffect", &NiRTTI_BSTempEffect); /*0x9fec94*/
 }

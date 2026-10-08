@@ -47,7 +47,7 @@
 0x495036: cmp     eax, 72h ; 'r'
 0x495039: jnz     short loc_49505A
 0x49503B: mov     ecx, esi; this
-0x49503D: call    NiAVObject_InitializePropertyState
+0x49503D: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x495042: mov     ecx, esi
 0x495044: call    NiNode_UpdateDynamicEffectState
 0x495049: fldz
@@ -55,7 +55,7 @@
 0x49504D: push    ecx
 0x49504E: mov     ecx, esi; this
 0x495050: fstp    [esp+5B0h+a2]; a2
-0x495053: call    NiAVObject_UpdateNiAVObject
+0x495053: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x495058: jmp     short loc_494FFC
 0x49505A: cmp     eax, 7Ah ; 'z'
 0x49505D: jnz     short loc_495001
@@ -79,7 +79,6 @@
 0x4950A6: sub     eax, edx
 0x4950A8: add     edi, 0FFFFFFFFh
 0x4950AB: jmp     short loc_4950B0
-0x4950AD: align 10h
 0x4950B0: mov     cl, [edi+1]
 0x4950B3: add     edi, 1
 0x4950B6: test    cl, cl
@@ -110,3 +109,16 @@
 0x495109: mov     [esp+5A8h+var_4], 0FFFFFFFFh
 0x495114: call    ??1NiStream@@UAE@XZ; NiStream::~NiStream(void)
 0x495119: jmp     loc_495001
+0x9B0180: lea     ecx, [ebp-59Ch]; this
+0x9B0186: jmp     ??1NiStream@@UAE@XZ; NiStream::~NiStream(void)
+0x9B018B: mov     edx, [esp+arg_4]
+0x9B018F: lea     eax, [edx-598h]
+0x9B0195: mov     ecx, [edx-59Ch]
+0x9B019B: xor     ecx, eax
+0x9B019D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B01A2: add     eax, 8
+0x9B01A5: mov     ecx, [edx-4]
+0x9B01A8: xor     ecx, eax
+0x9B01AA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B01AF: mov     eax, offset stru_ADC568
+0x9B01B4: jmp     ___CxxFrameHandler3

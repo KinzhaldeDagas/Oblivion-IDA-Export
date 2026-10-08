@@ -1,7 +1,7 @@
-0x568EB0: fld     [esp+arg_8]
+0x568EB0: fld     [esp+arg_8]; RadiantAI: package hour-window test used by central package chooser. Handles start+duration and midnight wrap when testing current game hour.
 0x568EB4: push    esi
 0x568EB5: push    edi
-0x568EB6: call    Double_To_SInt32
+0x568EB6: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x568EBB: mov     ecx, [esp+8+arg_0]
 0x568EBF: mov     esi, eax
 0x568EC1: cmp     esi, ecx
@@ -21,7 +21,7 @@
 0x568EED: cmp     esi, ecx
 0x568EEF: jg      short loc_568F02
 0x568EF1: fsub    qword ptr ds:0A2F920h
-0x568EF7: call    Double_To_SInt32
+0x568EF7: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x568EFC: cmp     esi, eax
 0x568EFE: jge     short loc_568F13
 0x568F00: jmp     short loc_568F04

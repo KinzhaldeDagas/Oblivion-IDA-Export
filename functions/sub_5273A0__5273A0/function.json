@@ -1,19 +1,36 @@
 {
-  "callees_count": 68,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 27,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_5273A0",
+  "chunks": [
+    [
+      "0x5273A0",
+      "0x527859"
+    ],
+    [
+      "0x9B81C0",
+      "0x9B820A"
+    ]
+  ],
+  "chunks_sha256": "20c6dc3147ce912117dc0ed873c3cf56c6f22b2e94ff77ec2af1301cec241efb",
+  "comment_regular": "Native NPC FaceGen randomizer. After independent Gaussian variation of every coefficient, it chooses age [15,65] and relative sex [-2,2] targets in matrix channel 0, then shifts channel 1 by the same delta. Because channels map to independently randomized matrix 0 geometry and matrix 2 texture, their Gaussian control difference survives; independent endpoint clamps can change it further. Prettier Faces restores both control channels to the race-authored projections before this reprojection.",
+  "comment_repeatable": "Native NPC FaceGen randomizer. Three independent 15-bit draws map linearly with preserved endpoints: age 15/40/65, relative sex morph -2/0/+2, and hair length 0/0.5/1 at raw minimum/midpoint/maximum.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "TESNPC_RandomizeFaceGen",
   "end_ea": "0x527859",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_5273A0",
+  "name": "TESNPC_RandomizeFaceGen",
   "segment": ".text",
   "sha256": "e306347d945a32cc476b4538ce55e1f2751c9091416d9dad0baaa0ff664dd790",
   "size": 1209,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5273A0",
-  "type": "void __thiscall(char *this, char, char, char)",
-  "xrefs_from_count": 425,
+  "total_chunk_size": 1283,
+  "type": "void __thiscall(TESNPC *this, bool preserveAge, bool preserveSexMorph, bool preserveHairLength)",
+  "xrefs_from_count": 450,
   "xrefs_to_count": 1
 }

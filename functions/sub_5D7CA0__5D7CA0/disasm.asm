@@ -78,7 +78,7 @@
 0x5D7D9B: mov     ecx, ebp
 0x5D7D9D: xor     ebx, ebx
 0x5D7D9F: call    Tile_GetFloat
-0x5D7DA4: call    Double_To_SInt32
+0x5D7DA4: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5D7DA9: xor     ebp, ebp
 0x5D7DAB: cmp     edi, ebp
 0x5D7DAD: jz      loc_5D811A
@@ -147,7 +147,7 @@
 0x5D7E6C: push    edx
 0x5D7E6D: call    eax
 0x5D7E6F: fmul    dword ptr ds:0B37FE0h
-0x5D7E75: call    Double_To_SInt32
+0x5D7E75: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5D7E7A: mov     ecx, ds:0B333C4h
 0x5D7E80: mov     ebx, eax
 0x5D7E82: call    sub_5E4420
@@ -157,7 +157,7 @@
 0x5D7E91: mov     ecx, [esi+74h]
 0x5D7E94: push    3
 0x5D7E96: add     ecx, 24h ; '$'
-0x5D7E99: call    EffectItemList_GetStrongestItem
+0x5D7E99: call    EffectItemList_GetStrongestItem; this=EffectItemList; args are rangeFilter (0 self,1 touch,2 target,3 any) and requireArea. Returns effective (flag 0x400000 clear) qualifying item with greatest truncated MagickaCostForCaster(item,null).
 0x5D7E9E: mov     edi, eax
 0x5D7EA0: push    0
 0x5D7EA2: mov     ecx, edi
@@ -165,8 +165,8 @@
 0x5D7EA9: push    ecx
 0x5D7EAA: fstp    [esp+30h+var_30]; float
 0x5D7EAD: call    Calc_MagickaMasteryLevel
-0x5D7EB2: push    eax
-0x5D7EB3: call    ActorValue_GetMasterySkill
+0x5D7EB2: push    eax; mastery
+0x5D7EB3: call    ActorValue_GetMinimumSkillForMastery; Return the minimum skill value for a mastery tier: Novice 0, Apprentice 25, Journeyman 50, Expert 75, Master 100.
 0x5D7EB8: mov     ecx, ds:0B333C4h
 0x5D7EBE: mov     ebp, eax
 0x5D7EC0: mov     eax, [ecx]
@@ -199,7 +199,19 @@
 0x5D7F15: mov     ecx, eax
 0x5D7F17: call    sub_491700
 0x5D7F1C: mov     ecx, [esi+74h]
-0x5D7F1F: push    ecx
-0x5D7F20: mov     ecx, ds:0B33A98h
-0x5D7F26: call    TESDataHandler_AddForm
+0x5D7F1F: push    ecx; form
+0x5D7F20: mov     ecx, ds:0B33A98h; self
+0x5D7F26: call    TESDataHandler_AddForm; Verified registration path: switches on TESForm+4 type byte. TESGlobal ctor 4F9604 writes type 4; case 4 pushes the form into TESDataHandler.listGlobals at self+0x74 (self+0x1D pointers) and returns success. Called from TESDataHandler_LoadFormRecord 44E596; this list is consumed by TESSaveLoadGame_LoadGlobalValues.
 0x5D7F2B: mov     edx, [esi+74h]
+0x9C1FE0: mov     eax, [ebp+8]
+0x9C1FE3: push    eax
+0x9C1FE4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C1FE9: pop     ecx
+0x9C1FEA: retn
+0x9C1FEB: mov     edx, [esp+arg_4]
+0x9C1FEF: lea     eax, [edx-18h]
+0x9C1FF2: mov     ecx, [edx-1Ch]
+0x9C1FF5: xor     ecx, eax
+0x9C1FF7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C1FFC: mov     eax, offset stru_AEAF5C
+0x9C2001: jmp     ___CxxFrameHandler3

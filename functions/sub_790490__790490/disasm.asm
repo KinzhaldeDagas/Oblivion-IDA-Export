@@ -1,8 +1,8 @@
-0x790490: mov     eax, [esp+arg_0]
-0x790494: mov     ecx, [esp+arg_4]
+0x790490: mov     eax, [esp+first]; Oblivion binary evidence: initialized fill over [first,last), assigning the same four-byte value to each existing slot and returning last.
+0x790494: mov     ecx, [esp+last]
 0x790498: cmp     eax, ecx
 0x79049A: jz      short locret_7904AD
-0x79049C: mov     edx, [esp+arg_8]
+0x79049C: mov     edx, [esp+value]
 0x7904A0: push    esi
 0x7904A1: mov     esi, [edx]
 0x7904A3: mov     [eax], esi

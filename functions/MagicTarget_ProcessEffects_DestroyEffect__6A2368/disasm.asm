@@ -11,7 +11,7 @@
 0x6A237D: mov     ecx, edi
 0x6A237F: call    edx
 0x6A2381: mov     ecx, eax
-0x6A2383: call    BSSimpleList_Remove
+0x6A2383: call    BSSimpleList_Remove; Verified target-process cleanup: BSSimpleList_Remove unlinks the terminated ActiveEffect node before the target PostRemoveEffect callback and virtual deleting destructor; the loop then advances using the saved predecessor/next node.
 0x6A2388: mov     eax, [edi]
 0x6A238A: mov     edx, [eax+14h]
 0x6A238D: push    esi

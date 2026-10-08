@@ -17,11 +17,11 @@
 0x76CFC8: jz      short loc_76CFD5
 0x76CFCA: add     dword ptr [ecx+60h], 0FFFFFFFFh
 0x76CFCE: jnz     short loc_76CFD5
-0x76CFD0: call    sub_7604D0
+0x76CFD0: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x76CFD5: sub     edi, 1
 0x76CFD8: jns     short loc_76CFC0
 0x76CFDA: push    ebx
-0x76CFDB: call    FormHeapFree
+0x76CFDB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x76CFE0: add     esp, 4
 0x76CFE3: pop     edi
 0x76CFE4: pop     esi

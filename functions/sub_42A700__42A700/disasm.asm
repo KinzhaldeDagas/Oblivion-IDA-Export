@@ -1,4 +1,4 @@
-0x42A700: mov     eax, ecx
+0x42A700: mov     eax, ecx; Constructs ExtraPoison, type 0x48 and supplied AlchemyItem pointer.
 0x42A702: mov     ecx, [esp+arg_0]
 0x42A706: mov     byte ptr [eax+4], 48h ; 'H'
 0x42A70A: mov     dword ptr [eax+8], 0

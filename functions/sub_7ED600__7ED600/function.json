@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 8,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7ED600",
+      "0x7ED637"
+    ]
+  ],
+  "chunks_sha256": "e7dffadb62e32dd23dc0ccd55cce0e9d4c641c4025af8e22411e33341a6c2aec",
+  "comment_regular": "Counts list entries with a non-null ShadowSceneLight, frustumCull != 0xFF, and byte +0xF4 == 0. Unlike GetFirst/NextActiveLight, this counter does not test the backing NiLight AppCulled bit.",
+  "comment_repeatable": "Counts list entries with a non-null ShadowSceneLight, frustumCull != 0xFF, and byte +0xF4 == 0. Unlike GetFirst/NextActiveLight, this counter does not test the backing NiLight AppCulled bit.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7ED600",
+  "display_name": "BSShaderLightingProperty__CountFrustumVisibleEnabledLights",
   "end_ea": "0x7ED637",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7ED600",
+  "name": "BSShaderLightingProperty__CountFrustumVisibleEnabledLights",
   "segment": ".text",
   "sha256": "e7dffadb62e32dd23dc0ccd55cce0e9d4c641c4025af8e22411e33341a6c2aec",
   "size": 55,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7ED600",
-  "type": "int __thiscall(_DWORD *this)",
+  "total_chunk_size": 55,
+  "type": "unsigned int __thiscall(BSShaderLightingProperty *this)",
   "xrefs_from_count": 22,
   "xrefs_to_count": 8
 }

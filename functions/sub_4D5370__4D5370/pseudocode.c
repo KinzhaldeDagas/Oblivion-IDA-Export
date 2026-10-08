@@ -1,138 +1,132 @@
 void sub_4D5370()
 {
   double v0; // st7
-  PlayerCharacter *v1; // eax
-  float v2; // edx
-  float v3; // eax
-  TESObjectREFR *v4; // ecx
-  ExtraDataList *ParentCell; // eax
+  float x; // edx
+  float y; // eax
+  PlayerCharacter *v3; // ecx
+  ExtraDataList *DwordAtOffset40; // eax
   TESWorldSpace *vtbl; // eax
-  signed int v7; // esi
-  signed int v8; // edi
-  double v9; // st7
-  double v10; // st6
-  int *SafeFloatPointer; // eax
-  unsigned int v12; // ebp
-  int *v13; // eax
-  int *v14; // eax
-  int *v15; // eax
-  int v16; // ebx
-  int v17; // eax
+  int v6; // esi
+  int v7; // edi
+  double v8; // st7
+  double v9; // st6
+  float *SafeFloatPointer; // eax
+  unsigned int v11; // ebp
+  float *v12; // eax
+  float *v13; // eax
+  float *v14; // eax
+  int v15; // ebx
+  int v16; // eax
   int i; // esi
-  ExtraDataList *v19; // ecx
+  ExtraDataList *v18; // ecx
+  float v19; // [esp+0h] [ebp-34h]
   float v20; // [esp+0h] [ebp-34h]
-  float v21; // [esp+0h] [ebp-34h]
-  int v22; // [esp+0h] [ebp-34h]
-  TESWorldSpace *v23; // [esp+4h] [ebp-30h]
-  float v24; // [esp+8h] [ebp-2Ch]
-  float v25; // [esp+Ch] [ebp-28h]
-  float v26; // [esp+10h] [ebp-24h]
-  float v27; // [esp+14h] [ebp-20h]
-  float v28; // [esp+18h] [ebp-1Ch] BYREF
-  float v29; // [esp+1Ch] [ebp-18h]
-  float v30; // [esp+20h] [ebp-14h]
-  ExtraDataList *v31; // [esp+24h] [ebp-10h]
-  int CellAtCellCoord; // [esp+28h] [ebp-Ch]
-  int v33; // [esp+2Ch] [ebp-8h]
-  int v34; // [esp+30h] [ebp-4h]
+  int v21; // [esp+0h] [ebp-34h]
+  TESWorldSpace *v22; // [esp+4h] [ebp-30h]
+  float v23; // [esp+8h] [ebp-2Ch]
+  float v24; // [esp+Ch] [ebp-28h]
+  float v25; // [esp+10h] [ebp-24h]
+  float v26; // [esp+14h] [ebp-20h]
+  NiPoint3 v27; // [esp+18h] [ebp-1Ch] BYREF
+  ExtraDataList *v28; // [esp+24h] [ebp-10h]
+  TESObjectCELL *CellAtCellCoord; // [esp+28h] [ebp-Ch]
+  int v30; // [esp+2Ch] [ebp-8h]
+  int v31; // [esp+30h] [ebp-4h]
 
-  if ( (dword_B35E20 & 1) == 0 )
+  if ( (unk_B35E20 & 1) == 0 ) /*0x4d537a*/
   {
-    v0 = flt_A32048;
-    dword_B35E20 |= 1u;
-    flt_B35E14 = v0;
-    flt_B35E18 = v0;
-    flt_B35E1C = v0;
+    v0 = flt_A32048; /*0x4d537c*/
+    unk_B35E20 |= 1u; /*0x4d5382*/
+    other.x = v0; /*0x4d5389*/
+    other.y = v0; /*0x4d538f*/
+    other.z = v0; /*0x4d5395*/
   }
-  v1 = TESDataHandler_g_PlayerRef;
-  if ( TESDataHandler_g_PlayerRef )
+  if ( reference ) /*0x4d539b*/
   {
-    v28 = v1->super.super.super.super.pos[0];
-    v29 = v1->super.super.super.super.pos[1];
-    v30 = v1->super.super.super.super.pos[2];
-    sub_4122F0(&v28);
-    if ( sub_8AA390(&v28, &flt_B35E14) )
+    v27 = *(NiPoint3 *)reference->super.super.super.super.pos; /*0x4d53ae*/
+    sub_4122F0(&v27.x); /*0x4d53c5*/
+    if ( NiPoint3__NotEqual(&v27, &other) ) /*0x4d53d6*/
     {
-      v2 = v28;
-      v3 = v29;
-      flt_B35E1C = v30;
-      v4 = (TESObjectREFR *)TESDataHandler_g_PlayerRef;
-      flt_B35E14 = v2;
-      flt_B35E18 = v3;
-      ParentCell = (ExtraDataList *)TESObjectREFR_GetParentCell(v4);
-      if ( ParentCell )
+      x = v27.x; /*0x4d53e7*/
+      y = v27.y; /*0x4d53eb*/
+      other.z = v27.z; /*0x4d53ef*/
+      v3 = reference; /*0x4d53f5*/
+      other.x = x; /*0x4d53fb*/
+      other.y = y; /*0x4d5401*/
+      DwordAtOffset40 = (ExtraDataList *)Shared_GetDwordAtOffset40(v3); /*0x4d5406*/
+      if ( DwordAtOffset40 ) /*0x4d540d*/
       {
-        if ( (ParentCell[1].members.m_presenceBitfield[8] & 1) != 0 )
+        if ( (DwordAtOffset40[1].members.m_presenceBitfield[8] & 1) != 0 ) /*0x4d5417*/
         {
-          sub_4D2720(ParentCell, &v28);
+          sub_4D2720(DwordAtOffset40, &v27.x); /*0x4d55c7*/
         }
         else
         {
-          v31 = ParentCell;
-          vtbl = (TESWorldSpace *)ParentCell[4].vtbl;
-          CellAtCellCoord = 0;
-          v33 = 0;
-          v34 = 0;
-          v23 = vtbl;
-          if ( vtbl )
+          v28 = DwordAtOffset40; /*0x4d5423*/
+          vtbl = (TESWorldSpace *)DwordAtOffset40[4].vtbl; /*0x4d5427*/
+          CellAtCellCoord = 0; /*0x4d542d*/
+          v30 = 0; /*0x4d5431*/
+          v31 = 0; /*0x4d5435*/
+          v22 = vtbl; /*0x4d5439*/
+          if ( vtbl ) /*0x4d543d*/
           {
-            v7 = (int)v28 >> 0xC;
-            v8 = (int)v29 >> 0xC;
-            v20 = (float)(v7 << 0xC);
-            v9 = v20;
-            v24 = v20;
-            v21 = (float)(v8 << 0xC);
-            v10 = v21;
-            v22 = 0;
-            v26 = v9 + dbl_A37650;
-            v27 = dbl_A37650 + v10;
-            SafeFloatPointer = GameSetting_GetSafeFloatPointer((int *)fSeenDataUpdateRadius);
-            if ( v24 < v28 - *(float *)SafeFloatPointer )
+            v6 = (int)v27.x >> 0xC; /*0x4d5450*/
+            v7 = (int)v27.y >> 0xC; /*0x4d546c*/
+            v19 = (float)(v6 << 0xC); /*0x4d5471*/
+            v8 = v19; /*0x4d5478*/
+            v23 = v19; /*0x4d5480*/
+            v20 = (float)(v7 << 0xC); /*0x4d548d*/
+            v9 = v20; /*0x4d5491*/
+            v21 = 0; /*0x4d5495*/
+            v25 = v8 + dbl_A37650; /*0x4d54a7*/
+            v26 = dbl_A37650 + v9; /*0x4d54ad*/
+            SafeFloatPointer = GameSetting_GetSafeFloatPointer(MEMORY[0xB35C14]); /*0x4d54b1*/
+            if ( v23 < v27.x - *SafeFloatPointer ) /*0x4d54c7*/
             {
-              v13 = GameSetting_GetSafeFloatPointer((int *)fSeenDataUpdateRadius);
-              v12 = v26 <= *(float *)v13 + v28;
+              v12 = GameSetting_GetSafeFloatPointer(MEMORY[0xB35C14]); /*0x4d54d3*/
+              v11 = v25 <= *v12 + v27.x; /*0x4d54eb*/
             }
             else
             {
-              v12 = 0xFFFFFFFF;
+              v11 = 0xFFFFFFFF; /*0x4d54c9*/
             }
-            v14 = GameSetting_GetSafeFloatPointer((int *)fSeenDataUpdateRadius);
-            v25 = v10;
-            if ( v25 < v29 - *(float *)v14 )
+            v13 = GameSetting_GetSafeFloatPointer(MEMORY[0xB35C14]); /*0x4d54f5*/
+            v24 = v9; /*0x4d5499*/
+            if ( v24 < v27.y - *v13 ) /*0x4d550b*/
             {
-              v15 = GameSetting_GetSafeFloatPointer((int *)fSeenDataUpdateRadius);
-              if ( v27 <= *(float *)v15 + v29 )
-                v22 = 1;
+              v14 = GameSetting_GetSafeFloatPointer(MEMORY[0xB35C14]); /*0x4d551c*/
+              if ( v26 <= *v14 + v27.y ) /*0x4d5532*/
+                v21 = 1; /*0x4d5534*/
             }
             else
             {
-              v22 = 0xFFFFFFFF;
+              v21 = 0xFFFFFFFF; /*0x4d550d*/
             }
-            v16 = 1;
-            if ( v12 )
+            v15 = 1; /*0x4d553f*/
+            if ( v11 ) /*0x4d5544*/
             {
-              CellAtCellCoord = TESWorldSpace::GetCellAtCellCoord(v23, v7 + v12, v8);
-              v16 = 2;
+              CellAtCellCoord = TESWorldSpace::GetCellAtCellCoord(v22, v6 + v11, v7); /*0x4d5554*/
+              v15 = 2; /*0x4d5558*/
             }
-            v17 = v22;
-            if ( v22 )
+            v16 = v21; /*0x4d555d*/
+            if ( v21 ) /*0x4d5563*/
             {
-              *(&v31 + v16) = (ExtraDataList *)TESWorldSpace::GetCellAtCellCoord(v23, v7, v8 + v22);
-              v17 = v22;
-              ++v16;
+              *(&v28 + v15) = (ExtraDataList *)TESWorldSpace::GetCellAtCellCoord(v22, v6, v7 + v21); /*0x4d5572*/
+              v16 = v21; /*0x4d5576*/
+              ++v15; /*0x4d557a*/
             }
-            if ( v12 )
+            if ( v11 ) /*0x4d557f*/
             {
-              if ( v17 )
-                *(&v31 + v16) = (ExtraDataList *)TESWorldSpace::GetCellAtCellCoord(v23, v7 + v12, v8 + v17);
+              if ( v16 ) /*0x4d5583*/
+                *(&v28 + v15) = (ExtraDataList *)TESWorldSpace::GetCellAtCellCoord(v22, v6 + v11, v7 + v16); /*0x4d5594*/
             }
           }
-          for ( i = 0; i < 4; ++i )
+          for ( i = 0; i < 4; ++i ) /*0x4d559a*/
           {
-            v19 = *(&v31 + i);
-            if ( !v19 )
-              break;
-            sub_4D2720(v19, &v28);
+            v18 = *(&v28 + i); /*0x4d55a0*/
+            if ( !v18 ) /*0x4d55a6*/
+              break; /*0x4d55a6*/
+            sub_4D2720(v18, &v27.x); /*0x4d55ad*/
           }
         }
       }

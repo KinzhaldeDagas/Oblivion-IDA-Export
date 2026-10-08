@@ -1,4 +1,4 @@
-0x483630: push    ebx
+0x483630: push    ebx; Verified cell-grid lookup first removes stale DistantLOD/tree-batch references for the requested packed cell coordinates, then returns the current GridDistantArray cell slot.
 0x483631: mov     ebx, [esp+4+arg_4]
 0x483635: push    esi
 0x483636: mov     esi, ecx
@@ -11,9 +11,9 @@
 0x483648: add     eax, [esi+10h]
 0x48364B: movzx   ecx, word ptr [eax+0Ch]
 0x48364F: movzx   edx, word ptr [eax+8]
-0x483653: push    ecx
-0x483654: push    edx
-0x483655: call    sub_4EF1D0
+0x483653: push    ecx; group_y
+0x483654: push    edx; group_x
+0x483655: call    TESObjectCELL_PackExteriorGroupLabel; Verified exact key encoding used by the DistantLOD cell model map: packed label = (signed cellX << 16) | unsigned cellY.
 0x48365A: push    eax
 0x48365B: call    sub_7B3A40
 0x483660: mov     eax, [esi]

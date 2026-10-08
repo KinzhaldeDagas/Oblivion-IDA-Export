@@ -86,3 +86,12 @@
 0x6F91B6: pop     ebx
 0x6F91B7: add     esp, 24h
 0x6F91BA: retn
+0x9C9020: lea     ecx, [ebp-1Ch]; this
+0x9C9023: jmp     ??1_Lockit@std@@QAE@XZ; std::_Lockit::~_Lockit(void)
+0x9C9028: mov     edx, [esp+arg_4]
+0x9C902C: lea     eax, [edx-24h]
+0x9C902F: mov     ecx, [edx-28h]
+0x9C9032: xor     ecx, eax
+0x9C9034: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C9039: mov     eax, offset stru_AF195C
+0x9C903E: jmp     ___CxxFrameHandler3

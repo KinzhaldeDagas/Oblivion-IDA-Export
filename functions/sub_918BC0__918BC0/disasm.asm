@@ -18,7 +18,7 @@
 0x918C0E: push    edx
 0x918C0F: lea     ecx, [esp+34h+var_20]
 0x918C13: call    sub_918440
-0x918C18: push    offset unk_A9D238
+0x918C18: push    offset aPc; "PC"
 0x918C1D: call    sub_8B1860
 0x918C22: mov     esi, eax
 0x918C24: add     esp, 4
@@ -29,7 +29,7 @@
 0x918C35: lea     ecx, [esp+34h+var_20]
 0x918C39: call    sub_918420
 0x918C3E: push    esi
-0x918C3F: push    offset unk_A9D238
+0x918C3F: push    offset aPc; "PC"
 0x918C44: lea     ecx, [esp+38h+var_20]
 0x918C48: call    sub_918390
 0x918C4D: mov     eax, [esp+30h+arg_0]

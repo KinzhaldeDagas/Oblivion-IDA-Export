@@ -1,40 +1,72 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "device_0",
+  "definition": "struct device_0\n{\nSP_DEVICE_INTERFACE_DETAIL_DATA_W *detail;\nHANDLE file;\nHANDLE handle;\nRID_DEVICE_INFO info;\nPHIDP_PREPARSED_DATA data;\n}\n",
   "id": 18374686479672043719,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "detail",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "SP_DEVICE_INTERFACE_DETAIL_DATA_W *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "file",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "HANDLE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "handle",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "HANDLE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "info",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 32
+      "offset_hex": "0xC",
+      "size": 32,
+      "type": "RID_DEVICE_INFO"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "data",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "PHIDP_PREPARSED_DATA"
     }
   ],
   "name": "device_0",
+  "ordinal": 7579,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 48
 }

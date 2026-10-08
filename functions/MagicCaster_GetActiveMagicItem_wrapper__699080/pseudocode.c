@@ -1,4 +1,4 @@
 MagicItem *__thiscall MagicCaster_GetActiveMagicItem_wrapper(MagicCaster *this, int a2)
 {
-  return this->vtbl->GetActiveMagicItem(this);
+  return this->vtbl->GetActiveMagicItem(this); /*0x699087*/
 }

@@ -1,4 +1,4 @@
-0x8AC1E0: push    ebp
+0x8AC1E0: push    ebp; TES4 authoritative: resets/initializes low-level hkpCharacterProxy fields from cinfo. cinfo+0x64 is a slope angle in radians; proxy+0xA4 stores cos(cinfo+0x64), used by 0x8AE100 support acceptance.
 0x8AC1E1: mov     ebp, esp
 0x8AC1E3: and     esp, 0FFFFFFF0h
 0x8AC1E6: sub     esp, 14h
@@ -43,7 +43,7 @@
 0x8AC257: fld     dword ptr [edi+64h]
 0x8AC25A: fcos
 0x8AC25C: mov     [esp+20h+var_14], 40400000h
-0x8AC264: fstp    dword ptr [esi+0A4h]
+0x8AC264: fstp    dword ptr [esi+0A4h]; proxy+0xA4 = cos(cinfo+0x64 max slope angle). Support status 1/2 test in 0x8AE100 uses this squared against the support-motion/up relation.
 0x8AC26A: mov     eax, [edi+68h]
 0x8AC26D: mov     [esi+0A8h], eax
 0x8AC273: movaps  xmm0, xmmword ptr [edi+30h]
@@ -84,7 +84,7 @@
 0x8AC2F8: fadd    dword ptr [esi+58h]
 0x8AC2FB: fstp    [esp+24h+var_24]; float
 0x8AC2FE: push    edi; int
-0x8AC2FF: call    sub_8ABAC0
+0x8AC2FF: call    sub_8ABAC0; Low-level position writer: stores target at object+0xA0 and updates Havok transform when shape data exists.
 0x8AC304: mov     eax, [esi+90h]
 0x8AC30A: xor     edi, edi
 0x8AC30C: cmp     eax, ebx
@@ -137,7 +137,7 @@
 0x8AC39C: mov     [eax+4], ebx
 0x8AC39F: mov     ecx, [esi+30h]
 0x8AC3A2: push    1300h
-0x8AC3A7: call    sub_8BC750
+0x8AC3A7: call    sub_8BC750; Insert helper for collision metadata key/value map. If key absent, appends 0x10-byte entry {key, unknown, valueLow, valueHigh}.
 0x8AC3AC: pop     edi
 0x8AC3AD: pop     esi
 0x8AC3AE: pop     ebx

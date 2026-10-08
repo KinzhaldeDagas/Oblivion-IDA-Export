@@ -1,4 +1,4 @@
-void *sub_805060()
+float *sub_805060()
 {
-  return &unk_B475FC;
+  return &OB_ShaderConstantStorage_010201A0[0x5FA]; /*0x805065*/
 }

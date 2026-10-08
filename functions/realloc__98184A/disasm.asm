@@ -53,10 +53,10 @@
 0x9818E4: cmp     eax, esi
 0x9818E6: jb      short loc_9818EA
 0x9818E8: mov     eax, esi
-0x9818EA: push    eax; Size
-0x9818EB: push    ebx; Src
-0x9818EC: push    [ebp+Dst]; Dst
-0x9818EF: call    _memcpy
+0x9818EA: push    eax; byteCount
+0x9818EB: push    ebx; source
+0x9818EC: push    [ebp+Dst]; destination
+0x9818EF: call    _memcpy;
 0x9818F4: push    ebx
 0x9818F5: call    ___sbh_find_block
 0x9818FA: mov     [ebp+var_20], eax
@@ -86,13 +86,52 @@
 0x981938: cmp     eax, esi
 0x98193A: jb      short loc_98193E
 0x98193C: mov     eax, esi
-0x98193E: push    eax; Size
-0x98193F: push    ebx; Src
-0x981940: push    [ebp+Dst]; Dst
-0x981943: call    _memcpy
+0x98193E: push    eax; byteCount
+0x98193F: push    ebx; source
+0x981940: push    [ebp+Dst]; destination
+0x981943: call    _memcpy;
 0x981948: push    ebx
 0x981949: push    [ebp+var_20]
 0x98194C: call    ___sbh_free_block
 0x981951: add     esp, 14h
 0x981954: mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
 0x98195B: call    _realloc___$LN48
+0x981988: mov     esi, [ebp+NewSize]
+0x98198B: mov     ebx, [ebp+Memory]
+0x98198E: push    4
+0x981990: call    __unlock
+0x981995: pop     ecx
+0x981996: retn
+0x9819F0: test    esi, esi
+0x9819F2: jnz     short loc_9819F5
+0x9819F4: inc     esi
+0x9819F5: push    esi; dwBytes
+0x9819F6: push    ebx; lpMem
+0x9819F7: push    0; dwFlags
+0x9819F9: push    dword ptr ds:0BAA2ACh; hHeap
+0x9819FF: call    dword ptr ds:0A2819Ch
+0x981A05: mov     edi, eax
+0x981A07: test    edi, edi
+0x981A09: jnz     short loc_981A61
+0x981A0B: cmp     ds:0BAA5C8h, eax
+0x981A11: jz      short loc_981A47
+0x981A13: push    esi
+0x981A14: call    __callnewh
+0x981A19: pop     ecx
+0x981A1A: test    eax, eax
+0x981A1C: jz      short loc_981A3D
+0x981A1E: cmp     esi, 0FFFFFFE0h
+0x981A21: jbe     short loc_9819F0
+0x981A23: push    esi
+0x981A24: call    __callnewh
+0x981A29: pop     ecx
+0x981A2A: call    __errno
+0x981A2F: mov     dword ptr [eax], 0Ch
+0x981A35: xor     eax, eax
+0x981A37: call    __SEH_epilog4
+0x981A3C: retn
+0x981A3D: call    __errno
+0x981A42: jmp     loc_9819C3
+0x981A47: test    edi, edi
+0x981A49: jnz     short loc_981A61
+0x981A4B: call    __errno

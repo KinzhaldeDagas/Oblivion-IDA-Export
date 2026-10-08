@@ -3,7 +3,7 @@
 0x88A9B6: jz      short locret_88A9E0
 0x88A9B8: mov     eax, [eax+10h]
 0x88A9BB: push    eax
-0x88A9BC: push    offset dword_BA7D84
+0x88A9BC: push    offset stru_BA7D84
 0x88A9C1: call    NiRTTI_Cast
 0x88A9C6: add     esp, 8
 0x88A9C9: test    eax, eax

@@ -1,4 +1,4 @@
-0x88D070: sub     esp, 1Ch
+0x88D070: sub     esp, 1Ch; ODismemberment: bhkBlendCollisionObject traversal entry. Requires bhkBlendCollisionObject or forced flag; queues callback off off_B2E314 with state payload including a2 and a3.
 0x88D073: push    ebx
 0x88D074: push    esi
 0x88D075: mov     esi, [esp+24h+arg_0]

@@ -16,7 +16,7 @@
 0x7E5489: mov     [esp+34h+var_20], esi
 0x7E548D: call    ??0BSShaderProperty@@QAE@XZ; BSShaderProperty::BSShaderProperty(void)
 0x7E5492: fldz
-0x7E5494: mov     dword ptr [esi], offset ??_7ParticleShaderProperty@@6B@; const ParticleShaderProperty::`vftable'
+0x7E5494: mov     dword ptr [esi], offset ??_7ParticleShaderProperty@@6B@; Verified (Oblivion): ParticleShaderProperty constructor installs the vtable whose +0x54 GetSubtype returns 0xE, the exact subtype accepted by NiNode_CreateAttachedParticleShaderProperty.
 0x7E549A: fst     dword ptr [esi+0B8h]
 0x7E54A0: fst     dword ptr [esi+0BCh]
 0x7E54A6: xor     ebp, ebp
@@ -32,12 +32,12 @@
 0x7E54DC: fst     dword ptr [esi+0E0h]
 0x7E54E2: fstp    dword ptr [esi+0E4h]
 0x7E54E8: mov     [esi+10Ch], ebp
-0x7E54EE: push    0Ah
+0x7E54EE: push    0Ah; grow
 0x7E54F0: lea     ebx, [esi+110h]
-0x7E54F6: push    0Ah
-0x7E54F8: mov     ecx, ebx
+0x7E54F6: push    0Ah; capacity
+0x7E54F8: mov     ecx, ebx; this
 0x7E54FA: mov     byte ptr [esp+3Ch+var_4], 1
-0x7E54FF: call    sub_4B2D30
+0x7E54FF: call    OB_NiAVObjectPointerArray_ctor_010201A0
 0x7E5504: mov     edi, [esi+10Ch]
 0x7E550A: cmp     edi, ebp
 0x7E550C: mov     byte ptr [esp+34h+var_4], 2
@@ -112,7 +112,7 @@
 0x7E562B: fstp    [esp+34h+var_10]
 0x7E562F: mov     eax, [esp+34h+var_1C]
 0x7E5633: mov     [esi+0D0h], ecx
-0x7E5639: fstp    dword ptr [esi+124h]
+0x7E5639: fstp    dword ptr [esi+124h]; Verified (Oblivion): targetScaleRatio_124 initializes to 1.0; MagicShaderHitEffect_Update later replaces it with a clamped target visual-size ratio.
 0x7E563F: mov     ecx, [esp+34h+var_18]
 0x7E5643: mov     [esi+0D8h], eax
 0x7E5649: mov     eax, [esp+34h+var_10]
@@ -120,12 +120,12 @@
 0x7E5653: mov     edx, [esp+34h+var_14]
 0x7E5657: mov     [esi+0DCh], ecx
 0x7E565D: mov     [esi+0E0h], edx
-0x7E5663: mov     ecx, ebx
+0x7E5663: mov     ecx, ebx; this
 0x7E5665: mov     [esi+0E4h], eax
-0x7E566B: call    sub_477EF0
+0x7E566B: call    NiTObjectArray_ClearAndRelease; Clears a ref-counted NiT object-pointer array: releases every non-null element, nulls entries, and resets end/count words to zero. At bow release it is invoked on ArrowBone+0xAC, thereby releasing all ArrowBone children including the held Arrow:0 clone.
 0x7E5670: call    sub_7E48E0
 0x7E5675: mov     [esi+120h], ebp
-0x7E567B: call    sub_7E2D60
+0x7E567B: call    ParticleShaderProperty_GetSlotCapacity; Verified (Oblivion): returns the cached slot capacity, initialized to 40 or 120 according to renderer capability, and used to size particleInstanceBuffer_6C and update iteration.
 0x7E5680: xor     ecx, ecx
 0x7E5682: mov     edi, eax
 0x7E5684: mov     edx, 20h ; ' '
@@ -135,7 +135,7 @@
 0x7E5690: or      ecx, eax
 0x7E5692: push    ecx; Size
 0x7E5693: call    FormHeapAlloc
-0x7E5698: mov     [esi+6Ch], eax
+0x7E5698: mov     [esi+6Ch], eax; Verified (Oblivion): ParticleShaderProperty allocates particleInstanceBuffer_6C as slotCapacity * 0x20 bytes and zeroes the buffer; destructor frees the same allocation.
 0x7E569B: shl     edi, 5
 0x7E569E: push    edi
 0x7E569F: push    ebp
@@ -153,3 +153,35 @@
 0x7E56C1: pop     ebx
 0x7E56C2: add     esp, 20h
 0x7E56C5: retn
+0x4B2E30: mov     eax, [ecx+4]
+0x4B2E33: test    eax, eax
+0x4B2E35: mov     dword ptr [ecx], offset ??_7?$NiTArray@V?$NiPointer@VNiAVObject@@@@@@6B@; const NiTArray<NiPointer<NiAVObject>>::`vftable'
+0x4B2E3B: jz      short locret_4B2E5C
+0x4B2E3D: mov     ecx, [eax-4]
+0x4B2E40: push    esi
+0x4B2E41: lea     esi, [eax-4]
+0x4B2E44: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x4B2E49: push    ecx; int
+0x4B2E4A: push    4; unsigned int
+0x4B2E4C: push    eax; void *
+0x4B2E4D: call    $LN21
+0x4B2E52: push    esi
+0x4B2E53: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x4B2E58: add     esp, 4
+0x4B2E5B: pop     esi
+0x4B2E5C: retn
+0x9CF780: mov     ecx, [ebp-20h]; this
+0x9CF783: jmp     ??1BSShaderProperty@@UAE@XZ; BSShaderProperty::~BSShaderProperty(void)
+0x9CF788: mov     ecx, [ebp-20h]
+0x9CF78B: add     ecx, 10Ch; slot
+0x9CF791: jmp     NiPointerSlot_Release
+0x9CF796: mov     ecx, [ebp-20h]
+0x9CF799: add     ecx, 110h
+0x9CF79F: jmp     loc_4B2E30
+0x9CF7A4: mov     edx, [esp+arg_4]
+0x9CF7A8: lea     eax, [edx-24h]
+0x9CF7AB: mov     ecx, [edx-28h]
+0x9CF7AE: xor     ecx, eax
+0x9CF7B0: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CF7B5: mov     eax, offset stru_AF83AC
+0x9CF7BA: jmp     ___CxxFrameHandler3

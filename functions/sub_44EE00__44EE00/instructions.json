@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x44EE3F",
-    "line": "mov     ecx, offset dword_B33AC4",
+    "line": "mov     ecx, offset unk_B33AC4",
     "mnemonic": "mov",
     "size": 5
   },
@@ -253,13 +253,13 @@
   },
   {
     "ea": "0x44EE98",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x44EE9D",
-    "line": "mov     edi, [esp+34h+arg_0]",
+    "line": "mov     edi, dword ptr [esp+34h+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x44EED2",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x44EEFC",
-    "line": "mov     ecx, offset dword_B33AC4; this",
+    "line": "mov     ecx, offset unk_B33AC4; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x44EF4F",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,13 +631,13 @@
   },
   {
     "ea": "0x44EF56",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; linkedDoor",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x44EF58",
-    "line": "call    sub_42B470",
+    "line": "call    TeleportData_GetLinkedDoorWorldspace; Verified: given the linked-door reference slot from TeleportData, resolves its loaded parent cell or child cell and returns that cell's worldspace; returns null when the linked reference or its cell is unavailable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x44EF7E",
-    "line": "call    sub_6899C0",
+    "line": "call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -796,12 +796,6 @@
     "line": "jmp     loc_44F079",
     "mnemonic": "jmp",
     "size": 5
-  },
-  {
-    "ea": "0x44EFA9",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
   },
   {
     "ea": "0x44EFB0",
@@ -907,7 +901,7 @@
   },
   {
     "ea": "0x44EFEA",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -925,13 +919,13 @@
   },
   {
     "ea": "0x44EFF3",
-    "line": "call    sub_42B460",
+    "line": "call    sub_42B460; ExtraTeleport_GetTargetCell-style helper: returns parent cell of ExtraTeleport+0 target ref if present.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x44EFF8",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; linkedDoor",
     "mnemonic": "mov",
     "size": 2
   },
@@ -943,7 +937,7 @@
   },
   {
     "ea": "0x44EFFC",
-    "line": "call    sub_42B470",
+    "line": "call    TeleportData_GetLinkedDoorWorldspace; Verified: given the linked-door reference slot from TeleportData, resolves its loaded parent cell or child cell and returns that cell's worldspace; returns null when the linked reference or its cell is unavailable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -979,7 +973,7 @@
   },
   {
     "ea": "0x44F00B",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1051,37 +1045,37 @@
   },
   {
     "ea": "0x44F029",
-    "line": "lea     eax, [esp+34h+arg_0]",
+    "line": "lea     eax, [esp+34h+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x44F02D",
-    "line": "push    eax",
+    "line": "push    eax; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x44F02E",
-    "line": "push    esi",
+    "line": "push    esi; key",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x44F02F",
-    "line": "mov     ecx, offset dword_B33AC4",
+    "line": "mov     ecx, offset unk_B33AC4; this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x44F034",
-    "line": "mov     byte ptr [esp+3Ch+arg_0], 0",
+    "line": "mov     [esp+3Ch+valueOut], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x44F039",
-    "line": "call    sub_4D6760",
+    "line": "call    NiTMap_TryGetAtByteValue; Verified generic NiTMap lookup helper: hashes the UInt32 key through the map vtable, walks the bucket chain using the map's key comparator, returns false when absent, and on a match writes the low byte of the entry data field to valueOut and returns true. Callers use it for byte/boolean-valued maps, including PlayerCharacter_GetLastSpaceForDoor and cell/worldspace visited or filter maps; this helper does not establish the full map value width.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1099,7 +1093,7 @@
   },
   {
     "ea": "0x44F042",
-    "line": "cmp     byte ptr [esp+34h+arg_0], 0",
+    "line": "cmp     [esp+34h+valueOut], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1231,7 +1225,7 @@
   },
   {
     "ea": "0x44F087",
-    "line": "mov     ecx, offset dword_B33AC4",
+    "line": "mov     ecx, offset unk_B33AC4",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1249,7 +1243,7 @@
   },
   {
     "ea": "0x44F095",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1324,5 +1318,71 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9ADD80",
+    "line": "mov     eax, dword ptr unk_B33AD4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9ADD85",
+    "line": "and     eax, 0FFFFFFFEh",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9ADD88",
+    "line": "mov     dword ptr unk_B33AD4, eax",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9ADD8D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9ADD8E",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9ADD92",
+    "line": "lea     eax, [edx-24h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9ADD95",
+    "line": "mov     ecx, [edx-28h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9ADD98",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9ADD9A",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9ADD9F",
+    "line": "mov     eax, offset stru_ADA6B4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9ADDA4",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

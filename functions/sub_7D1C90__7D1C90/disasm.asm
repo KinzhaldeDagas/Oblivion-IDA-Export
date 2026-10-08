@@ -1,4 +1,4 @@
-0x7D1C90: mov     eax, [esp+arg_4]
+0x7D1C90: mov     eax, [esp+output]; Verified (Oblivion): shared by all four 1x/2x texture-effect pass handlers used from ShadowLight, Skin, and Hair shader setup. Reads TextureEffectData from shaderProperty+0xE0, copies current fill/edge RGBA into ShadowLight shader-map backing, copies U/V offsets and edge exponent, writes the second fVars component as 1.0, then updates separate per-geometry property-state constants.
 0x7D1C94: sub     esp, 20h
 0x7D1C97: test    eax, eax
 0x7D1C99: jz      loc_7D1E9F
@@ -48,7 +48,7 @@
 0x7D1D51: mov     ds:0B44F78h, ecx
 0x7D1D57: mov     ecx, [esp+20h+var_14]
 0x7D1D5B: mov     ds:0B44F84h, ecx
-0x7D1D61: mov     ecx, [esp+20h+arg_0]
+0x7D1D61: mov     ecx, [esp+20h+geometry]; this
 0x7D1D65: test    ecx, ecx
 0x7D1D67: mov     ds:0B44F70h, edx
 0x7D1D6D: mov     edx, [esp+20h+var_1C]
@@ -58,11 +58,11 @@
 0x7D1D80: mov     ds:0B44F80h, eax
 0x7D1D85: jz      loc_7D1E9F
 0x7D1D8B: push    edi
-0x7D1D8C: lea     edx, [esp+24h+arg_4]
-0x7D1D90: push    edx
-0x7D1D91: call    sub_405760
+0x7D1D8C: lea     edx, [esp+24h+output]
+0x7D1D90: push    edx; output
+0x7D1D91: call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.
 0x7D1D96: mov     edi, [eax]
-0x7D1D98: mov     eax, [esp+24h+arg_4]
+0x7D1D98: mov     eax, [esp+24h+output]
 0x7D1D9C: test    eax, eax
 0x7D1D9E: jz      short loc_7D1DC0
 0x7D1DA0: push    esi
@@ -85,17 +85,17 @@
 0x7D1DC5: pop     edi
 0x7D1DC6: jz      loc_7D1E9F
 0x7D1DCC: fld     dword ptr [ecx+2Ch]
-0x7D1DCF: fstp    [esp+20h+arg_0]
+0x7D1DCF: fstp    [esp+20h+geometry]
 0x7D1DD3: fld     dword ptr [ecx+30h]
-0x7D1DD6: fstp    [esp+20h+arg_4]
+0x7D1DD6: fstp    [esp+20h+output]
 0x7D1DDA: fldz
 0x7D1DDC: fld     st
-0x7D1DDE: fld     [esp+20h+arg_4]
+0x7D1DDE: fld     [esp+20h+output]
 0x7D1DE2: fucom   st(1)
 0x7D1DE4: fnstsw  ax
 0x7D1DE6: fstp    st(1)
 0x7D1DE8: test    ah, 44h
-0x7D1DEB: fld     [esp+20h+arg_0]
+0x7D1DEB: fld     [esp+20h+geometry]
 0x7D1DEF: jp      short loc_7D1E00
 0x7D1DF1: fld     st(2)
 0x7D1DF3: fucomp  st(1)

@@ -17,10 +17,10 @@
 0x733500: mov     eax, [edi+28h]
 0x733503: push    eax
 0x733504: mov     [esp+24h+var_4], 1
-0x73350C: call    FormHeapFree
+0x73350C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x733511: mov     eax, [edi+2Ch]
 0x733514: push    eax
-0x733515: call    FormHeapFree
+0x733515: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x73351A: mov     eax, [edi+18h]
 0x73351D: xor     ebx, ebx
 0x73351F: add     esp, 8
@@ -59,3 +59,17 @@
 0x733586: pop     ebx
 0x733587: add     esp, 10h
 0x73358A: retn
+0x7331B0: mov     dword ptr [ecx], offset ??_7NiAccumulator@@6B@; const NiAccumulator::`vftable'
+0x7331B6: jmp     NiRefObject_destr
+0x9CA950: mov     ecx, [ebp-10h]
+0x9CA953: jmp     loc_7331B0
+0x9CA958: mov     ecx, [ebp-10h]
+0x9CA95B: add     ecx, 0Ch
+0x9CA95E: jmp     j_??1?$NiTPointerList@PAVNiGeometry@@@@UAE@XZ; NiTPointerList<NiGeometry *>::~NiTPointerList<NiGeometry *>(void)
+0x9CA963: mov     edx, [esp+arg_4]
+0x9CA967: lea     eax, [edx-10h]
+0x9CA96A: mov     ecx, [edx-14h]
+0x9CA96D: xor     ecx, eax
+0x9CA96F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA974: mov     eax, offset stru_AF2FE0
+0x9CA979: jmp     ___CxxFrameHandler3

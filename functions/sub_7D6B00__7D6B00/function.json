@@ -1,18 +1,31 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7D6B00",
+      "0x7D6B6D"
+    ]
+  ],
+  "chunks_sha256": "2fff4a2e4c0eb37dd6c277594adfe151ade4c221150ba1faa8e4f610c657c659",
+  "comment_regular": "Locked render-target-group end wrapper. Ends the current group, releases the renderer lock, and clears the target-ready state.\n\nLocked target-group end wrapper: run EndUsingRenderTargetGroup, release the renderer lock, and clear IsReady. It does not itself bind another target.",
+  "comment_repeatable": "Locked target-group end wrapper: run EndUsingRenderTargetGroup, release the renderer lock, and clear IsReady. It does not itself bind another target.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7D6B00",
+  "display_name": "NiDX9Renderer_EndRenderTargetGroupLocked",
   "end_ea": "0x7D6B6D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7D6B00",
+  "name": "NiDX9Renderer_EndRenderTargetGroupLocked",
   "segment": ".text",
   "sha256": "2fff4a2e4c0eb37dd6c277594adfe151ade4c221150ba1faa8e4f610c657c659",
   "size": 109,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7D6B00",
+  "total_chunk_size": 109,
   "type": "char __thiscall(NiDX9Renderer *this)",
   "xrefs_from_count": 36,
   "xrefs_to_count": 3

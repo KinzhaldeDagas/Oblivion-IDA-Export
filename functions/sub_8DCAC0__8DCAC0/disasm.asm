@@ -24,7 +24,6 @@
 0x8DCB02: push    edi
 0x8DCB03: js      short loc_8DCB4E
 0x8DCB05: jmp     short loc_8DCB10
-0x8DCB07: align 10h
 0x8DCB10: mov     ecx, [ebx+100h]
 0x8DCB16: cmp     dword ptr [ecx+edx*4], 0
 0x8DCB1A: jnz     short loc_8DCB4B
@@ -51,7 +50,6 @@
 0x8DCB57: test    ecx, ecx
 0x8DCB59: jle     short loc_8DCBD2
 0x8DCB5B: jmp     short loc_8DCB60
-0x8DCB5D: align 10h
 0x8DCB60: mov     edx, [eax+34h]
 0x8DCB63: mov     esi, [edx+ebp*4]
 0x8DCB66: mov     edi, [esi+0A4h]

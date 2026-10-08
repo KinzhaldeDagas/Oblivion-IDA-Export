@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x794F90",
-    "line": "push    esi",
+    "line": "push    esi; OBLIVION AUTHORITY (2026-08-30): Trivial uninitialized_fill_n for unsigned-short storage; writes count copies and returns destination+count.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x794F91",
-    "line": "mov     esi, [esp+4+arg_4]",
+    "line": "mov     esi, [esp+4+count]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x794F98",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+destination]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x794FA2",
-    "line": "mov     edx, [esp+8+arg_8]",
+    "line": "mov     edx, [esp+8+value]",
     "mnemonic": "mov",
     "size": 4
   },

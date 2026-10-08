@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x787060",
-    "line": "mov     ecx, [ecx]",
+    "line": "mov     ecx, [ecx]; CSpeedTreeRT::GetTreeSize thin wrapper. Forwards to CTreeEngine::GetSize at 0x7A2400, reading CTreeEngine+0x4C/+0x50.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x787062",
-    "line": "jmp     sub_7A2400",
+    "line": "jmp     CTreeEngine__GetSize; CTreeEngine::GetSize: returns tree size and variance from CTreeEngine+0x4C/+0x50.",
     "mnemonic": "jmp",
     "size": 5
   }

@@ -1,1 +1,1 @@
-PathMiddleHigh
+struct PathMiddleHigh;

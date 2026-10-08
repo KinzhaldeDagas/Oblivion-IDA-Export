@@ -1,19 +1,36 @@
 {
-  "callees_count": 96,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 38,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x6EFA20",
+      "0x6F000E"
+    ],
+    [
+      "0x9C8620",
+      "0x9C866E"
+    ]
+  ],
+  "chunks_sha256": "bccd4178dabbe4d83e6e0b2a2a5b3985dbed1d519602786c3eeda97f045b0ae2",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 4,
-  "display_name": "sub_6EFA20",
+  "comment_repeatable": "Load FREGT003 texture-morph data. Validate the magic, read the 56-byte descriptor, and materialize two banks of 64-byte RGB basis records. The descriptor supplies image dimensions and independent bank counts.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "BSFaceGenEgtData_LoadFile",
   "end_ea": "0x6F000E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6EFA20",
+  "name": "BSFaceGenEgtData_LoadFile",
   "segment": ".text",
   "sha256": "d3a678e10c660642cae8cc1493fbfa7692e536c1c3039cdfbb39889c0da23668",
   "size": 1518,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6EFA20",
-  "type": "char __cdecl(_DWORD *, _DWORD *, int *, int *)",
-  "xrefs_from_count": 525,
+  "total_chunk_size": 1596,
+  "type": "bool __cdecl(void *sourceString, unsigned int *coordinateMetadata, FaceGenEgtBasisBank *bank0, FaceGenEgtBasisBank *bank1)",
+  "xrefs_from_count": 547,
   "xrefs_to_count": 1
 }

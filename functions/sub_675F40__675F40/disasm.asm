@@ -1,6 +1,6 @@
 0x675F40: push    edi
 0x675F41: add     ecx, 68h ; 'h'; this
-0x675F44: call    sub_7616D0
+0x675F44: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x675F49: mov     edi, eax
 0x675F4B: test    edi, edi
 0x675F4D: jz      short loc_675FB6

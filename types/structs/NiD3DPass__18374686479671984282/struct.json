@@ -1,136 +1,216 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "NiD3DPass",
+  "definition": "struct NiD3DPass\n{\nNiD3DPassVtbl *__vftable;\nchar Name[16];\nUInt32 CurrentStage;\nUInt32 StageCount;\nUInt32 TexturesPerPass;\nNiTArray_NiD3DTextureStage Stages;\nNiD3DRenderStateGroup *RenderStateGroup;\nNiD3DShaderConstantMap *PixelConstantMap;\nchar *PixelShaderProgramFile;\nchar *PixelShaderEntryPoint;\nchar *PixelShaderTarget;\nNiD3DPixelShader *PixelShader;\nNiD3DShaderConstantMap *VertexConstantMap;\nchar *VertexShaderProgramFile;\nchar *VertexShaderEntryPoint;\nchar *VertexShaderTarget;\nNiD3DVertexShader *VertexShader;\nUInt8 SoftwareVP;\nUInt8 RendererOwned;\nUInt8 pad[2];\nUInt32 RefCount; ///< \n                 ///< Verified +60 pass ownership counter; native SetAt/reset/advance/pool acquire use plain ADD/DEC, unlike +4 NiRefObject Interlocked references. Do not use generic NiRef retain/release.\n}\n",
   "id": 18374686479671984282,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "__vftable",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "NiD3DPassVtbl *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Name",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 16
+      "size": 16,
+      "type": "char[16]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CurrentStage",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "StageCount",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "TexturesPerPass",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Stages",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 16
+      "size": 16,
+      "type": "NiTArray_NiD3DTextureStage"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RenderStateGroup",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "NiD3DRenderStateGroup *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "PixelConstantMap",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "NiD3DShaderConstantMap *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "PixelShaderProgramFile",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "char *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "PixelShaderEntryPoint",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "char *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "PixelShaderTarget",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "char *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "PixelShader",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 4
+      "size": 4,
+      "type": "NiD3DPixelShader *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "VertexConstantMap",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 4
+      "size": 4,
+      "type": "NiD3DShaderConstantMap *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "VertexShaderProgramFile",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 4
+      "offset_hex": "0x4C",
+      "size": 4,
+      "type": "char *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "VertexShaderEntryPoint",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 4
+      "size": 4,
+      "type": "char *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "VertexShaderTarget",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 4
+      "size": 4,
+      "type": "char *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "VertexShader",
       "offset": 88,
       "offset_hex": "0x58",
-      "size": 4
+      "size": 4,
+      "type": "NiD3DVertexShader *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SoftwareVP",
       "offset": 92,
-      "offset_hex": "0x5c",
-      "size": 1
+      "offset_hex": "0x5C",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RendererOwned",
       "offset": 93,
-      "offset_hex": "0x5d",
-      "size": 1
+      "offset_hex": "0x5D",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad",
       "offset": 94,
-      "offset_hex": "0x5e",
-      "size": 2
+      "offset_hex": "0x5E",
+      "size": 2,
+      "type": "UInt8[2]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\nVerified +60 pass ownership counter; native SetAt/reset/advance/pool acquire use plain ADD/DEC, unlike +4 NiRefObject Interlocked references. Do not use generic NiRef retain/release.",
       "name": "RefCount",
       "offset": 96,
       "offset_hex": "0x60",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     }
   ],
   "name": "NiD3DPass",
+  "ordinal": 9330,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 100
 }

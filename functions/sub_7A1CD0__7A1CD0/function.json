@@ -1,19 +1,36 @@
 {
-  "callees_count": 126,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 43,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 6,
-  "display_name": "sub_7A1CD0",
+  "chunks": [
+    [
+      "0x7A1CD0",
+      "0x7A23FD"
+    ],
+    [
+      "0x9CC760",
+      "0x9CC79F"
+    ]
+  ],
+  "chunks_sha256": "d54115d3c365af82d9cae44eeed8d2b34ab5580f8cb99a2b3ef9cbe58b79ccb3",
+  "comment_regular": "CFrondEngine::Compute used by CSpeedTreeRT::Compute; builds stock frond indexed geometry before TES4 later deletes unconsumed frond geometry.\n\n[2026-10-03 geometry limits] Verified Compute rejects only vertex total >0xFFFF (frond vertices exceed %d diagnostic), not >0x7FFF. Fallout CFrondEngine::Compute 0x82832380 corroborates the same boundary. Plugin removed its unsupported signed-half-range cap; native vertex count and index slots remain unsigned WORD.\n\n[2026-10-03 material ownership] Builds shared vertices from highest-LOD guide set: engine+18 outer vector, first inner vector contains 0x30-byte guides. Lower LOD index generation reuses these starts. Use LOD0 guides, not the pre-pruning root guide vector, to prove full vertex/material association. Plugin now verifies exact nonoverlapping coverage of the exported coordinate buffer and retains one map byte per vertex through cache/clone/free. Uniform referenced triangle sets use their proven map index for texture lookup; multi-map shape partitioning is still pending.\n\nSpeedTree decode: stock CFrondEngine::Compute. Builds guide LODs, verifies the shared highest-LOD vertex count <= USHRT_MAX, sets frond geometry LOD count, emits either blade or extrusion vertices once, then emits per-LOD strips using compact guides.\n\n[2026-10-03 material acceptance fixtures prepared] SDK AzaliaPatch_LD (blade mode0,4LODs,level2) and SagoPalm_RT (extrusion mode1,4LODs,level1) copied into optional inactive SpeedTreeFrondMaterialTest.esp. Only length-prefixed texture strings changed to isolated available composite DDS paths; reverse substitutions reproduce original SPTs and strict parser preserves geometry settings. Goal: verify blade draws plus normal/self-shadow binding absent in earlier test assets. Preparation is not native generation/render evidence. Manifest: SpeedTreeOBSE/out/frond_material_test_2026-10-03/manifest.json.",
+  "comment_repeatable": "SpeedTree decode: stock CFrondEngine::Compute. Builds guide LODs, verifies the shared highest-LOD vertex count <= USHRT_MAX, sets frond geometry LOD count, emits either blade or extrusion vertices once, then emits per-LOD strips using compact guides.\n\nVerified vertex-builder call graph: 0x7A2016 calls BuildExtrusionVertices 0x79FD10; 0x7A2293 calls BuildBladeVertices 0x79C540. 0x79A450 generates extrusion LOD indices, not shared vertices. Highest-LOD guides supply shared vertices; lower selectors reuse their starts.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 15,
+  "display_name": "OB_CFrondEngine_Compute_010201A0",
   "end_ea": "0x7A23FD",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7A1CD0",
+  "name": "OB_CFrondEngine_Compute_010201A0",
   "segment": ".text",
   "sha256": "48af5bb3bd6bff15c700a701b5a2523d6eb4d726ef78ba43f9aa1ac0e53fc1e3",
   "size": 1837,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A1CD0",
-  "type": "unsigned int __thiscall(_DWORD *this, int, int)",
-  "xrefs_from_count": 724,
+  "total_chunk_size": 1900,
+  "type": "unsigned int __thiscall(OB_CFrondEngine_010201A0 *this, OB_CIndexedGeometry_010201A0 *frondGeometry, int lightingEngine)",
+  "xrefs_from_count": 747,
   "xrefs_to_count": 1
 }

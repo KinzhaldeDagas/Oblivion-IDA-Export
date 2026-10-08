@@ -47,10 +47,10 @@
 0x4F33B3: add     dx, 5
 0x4F33B7: movzx   eax, dx
 0x4F33BA: movsx   ebx, ax
-0x4F33BD: push    ebx; Size
-0x4F33BE: push    esi; Src
-0x4F33BF: push    edi; Dst
-0x4F33C0: call    _memcpy
+0x4F33BD: push    ebx; byteCount
+0x4F33BE: push    esi; source
+0x4F33BF: push    edi; destination
+0x4F33C0: call    _memcpy;
 0x4F33C5: add     esp, 0Ch
 0x4F33C8: add     edi, ebx
 0x4F33CA: add     esi, ebx

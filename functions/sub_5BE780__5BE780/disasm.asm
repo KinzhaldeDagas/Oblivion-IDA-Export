@@ -10,16 +10,16 @@
 0x5BE7A5: fld     dword ptr ds:0B38E68h; jumptable 005BE78C case 3
 0x5BE7AB: retn    4
 0x5BE7AE: mov     ecx, ds:0B333C4h; jumptable 005BE78C case 4
-0x5BE7B4: push    20h ; ' '
-0x5BE7B6: call    Actor_GetSkillMasteryLevel
+0x5BE7B4: push    20h ; ' '; actorValue
+0x5BE7B6: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x5BE7BB: cmp     eax, 3
 0x5BE7BE: jz      short loc_5BE7E1
-0x5BE7C0: mov     ecx, ds:0B333C4h
-0x5BE7C6: push    20h ; ' '
-0x5BE7C8: call    Actor_GetSkillMasteryLevel
+0x5BE7C0: mov     ecx, ds:0B333C4h; this
+0x5BE7C6: push    20h ; ' '; actorValue
+0x5BE7C8: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x5BE7CD: cmp     eax, 4
 0x5BE7D0: jz      short loc_5BE7E1
-0x5BE7D2: mov     ecx, offset fPersuasionReactionHate
+0x5BE7D2: mov     ecx, 0B38E70h
 0x5BE7D7: call    GameSetting_GetSafeFloatPointer
 0x5BE7DC: fld     dword ptr [eax]
 0x5BE7DE: retn    4

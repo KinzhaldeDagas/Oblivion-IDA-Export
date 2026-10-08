@@ -88,7 +88,7 @@
 0x6CA53F: mov     eax, [edi+24h]
 0x6CA542: push    eax; int
 0x6CA543: push    offset aCycletype; "CycleType"
-0x6CA548: call    sub_715910
+0x6CA548: call    NiTimeController_FormatCycleType; Formats NiTimeController cycle type: 0 LOOP, 1 REVERSE, 2 CLAMP.
 0x6CA54D: movzx   ebx, word ptr [esi+0Ah]
 0x6CA551: movzx   ecx, word ptr [esi+8]
 0x6CA555: add     esp, 8

@@ -1,94 +1,153 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "tagPSDW",
+  "definition": "struct tagPSDW\n{\nDWORD lStructSize;\nHWND hwndOwner;\nHGLOBAL hDevMode;\nHGLOBAL hDevNames;\nDWORD Flags;\nPOINT ptPaperSize;\nRECT rtMinMargin;\nRECT rtMargin;\nHINSTANCE hInstance;\nLPARAM_0 lCustData;\nLPPAGESETUPHOOK lpfnPageSetupHook;\nLPPAGEPAINTHOOK lpfnPagePaintHook;\nLPCWSTR lpPageSetupTemplateName;\nHGLOBAL hPageSetupTemplate;\n}\n",
   "id": 18374686479672034002,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lStructSize",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hwndOwner",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hDevMode",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "HGLOBAL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hDevNames",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HGLOBAL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Flags",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ptPaperSize",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 8
+      "size": 8,
+      "type": "POINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "rtMinMargin",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 16
+      "offset_hex": "0x1C",
+      "size": 16,
+      "type": "RECT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "rtMargin",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 16
+      "offset_hex": "0x2C",
+      "size": 16,
+      "type": "RECT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hInstance",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "HINSTANCE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lCustData",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 8
+      "size": 8,
+      "type": "LPARAM_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lpfnPageSetupHook",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 4
+      "size": 4,
+      "type": "LPPAGESETUPHOOK"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lpfnPagePaintHook",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 4
+      "offset_hex": "0x4C",
+      "size": 4,
+      "type": "LPPAGEPAINTHOOK"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lpPageSetupTemplateName",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 4
+      "size": 4,
+      "type": "LPCWSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hPageSetupTemplate",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 4
+      "size": 4,
+      "type": "HGLOBAL"
     }
   ],
   "name": "tagPSDW",
+  "ordinal": 3703,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 88
 }

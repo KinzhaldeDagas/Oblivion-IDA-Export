@@ -1,1 +1,1 @@
-CStdPSFactoryBuffer
+typedef tagCStdPSFactoryBuffer CStdPSFactoryBuffer;

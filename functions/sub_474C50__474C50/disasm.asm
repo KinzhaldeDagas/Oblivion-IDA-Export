@@ -1,4 +1,4 @@
-0x474C50: push    0FFFFFFFFh
+0x474C50: push    0FFFFFFFFh; Initializes the 0x2C-byte AnimIdle runtime holder and starts its KF load. Observed layout: +0x00 phase (0 pending/unavailable, 1 ready, 2 active, 3 terminal), +0x04 completion/action mode, +0x08 KFModel, +0x0C requested slot/type, +0x10 played sequence, +0x24 TESIdleForm, +0x28 actor ref. Builds Meshes\\<TESIdleForm model path>, loads now or queues asynchronously, binds two actor-specific resources, and marks phase 1 when a KFModel is immediately available.
 0x474C52: push    offset SEH_474C50
 0x474C57: mov     eax, large fs:0
 0x474C5D: push    eax
@@ -16,7 +16,7 @@
 0x474C79: mov     [esp+30h+var_1C], esi
 0x474C7D: xor     ebx, ebx
 0x474C7F: mov     [esi+10h], ebx
-0x474C82: push    offset sub_7016A0; a5
+0x474C82: push    offset NiPointerSlot_Release; a5
 0x474C87: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x474C8C: push    2; size
 0x474C8E: lea     ebp, [esi+1Ch]
@@ -43,7 +43,7 @@
 0x474CC7: call    eax
 0x474CC9: mov     [esi+10h], ebx
 0x474CCC: mov     ecx, [esp+30h+arg_4]
-0x474CD0: mov     edx, dword ptr [esp+30h+arg_8]
+0x474CD0: mov     edx, [esp+30h+arg_8]
 0x474CD4: mov     eax, [esp+30h+arg_0]
 0x474CD8: mov     [esi+0Ch], ecx
 0x474CDB: mov     [esi+4], edx
@@ -53,7 +53,7 @@
 0x474CE7: push    ebx
 0x474CE8: push    ecx
 0x474CE9: mov     ecx, ds:0B33A98h
-0x474CEF: call    sub_449040
+0x474CEF: call    sub_449040; CustomAnimSupport evidence: queued idle loader resource resolution helper used before Meshes\<idle-model-path> KF load.
 0x474CF4: mov     [ebp-8], eax
 0x474CF7: mov     edi, [ebp+0]
 0x474CFA: test    edi, edi
@@ -75,7 +75,7 @@
 0x474D24: add     ebp, 4
 0x474D27: cmp     ebx, 2
 0x474D2A: jl      short loc_474CE3
-0x474D2C: mov     ebx, [esp+30h+arg_C]
+0x474D2C: mov     ebx, [esp+30h+actorRef]
 0x474D30: xor     edi, edi
 0x474D32: mov     [esi+28h], ebx
 0x474D35: mov     [esp+30h+var_14], edi
@@ -102,12 +102,12 @@
 0x474D7C: push    esi
 0x474D7D: push    ecx
 0x474D7E: mov     ecx, ds:0B33A1Ch
-0x474D84: call    sub_4383B0
+0x474D84: call    ModelLoader_QueueKFLoad; Queues asynchronous KF model load through the model loader. Queued idle and actor animation setup paths use this for deferred KF availability.
 0x474D89: jmp     short loc_474D9B
 0x474D8B: mov     edx, [esp+30h+var_14]
 0x474D8F: mov     ecx, ds:0B33A1Ch
 0x474D95: push    edx
-0x474D96: call    sub_439FF0
+0x474D96: call    ModelLoader_LoadKFModelNow; Synchronous KF model load path. Queued idle loader and menu/power-attack setup use this when an immediate KFModel is required.
 0x474D9B: cmp     eax, edi
 0x474D9D: mov     [esi+8], eax
 0x474DA0: jz      loc_474E62
@@ -121,12 +121,12 @@
 0x474DBF: lea     ecx, [eax+18h]
 0x474DC2: mov     eax, [ecx]
 0x474DC4: mov     edx, [eax+14h]
-0x474DC7: push    0
-0x474DC9: push    ebx
-0x474DCA: push    0FFFFFFFFh
+0x474DC7: push    0; skeletonRoot
+0x474DC9: push    ebx; actorRef
+0x474DCA: push    0FFFFFFFFh; slot
 0x474DCC: call    edx
-0x474DCE: push    eax
-0x474DCF: call    sub_479450
+0x474DCE: push    eax; modelPath
+0x474DCF: call    Actor_LoadCloneAndAttachModel3D; Loads and clones a model for an actor equipment/add-on slot, binds actor-specific resources, applies the stock attachment transform, attaches through Prn metadata, and initializes render property/dynamic-effect state.
 0x474DD4: mov     edi, [esi]
 0x474DD6: mov     ebp, eax
 0x474DD8: add     esp, 10h
@@ -161,7 +161,7 @@
 0x474E24: mov     ecx, [esi]
 0x474E26: push    eax
 0x474E27: push    ecx
-0x474E28: call    sub_7165B0
+0x474E28: call    sub_7165B0; CustomAnimSupport evidence: queued idle loader controller-manager data attach/bind helper.
 0x474E2D: add     esp, 8
 0x474E30: add     esi, 4
 0x474E33: sub     [esp+30h+arg_0], 1
@@ -178,7 +178,7 @@
 0x474E60: mov     esi, edx
 0x474E62: mov     eax, [esp+30h+var_14]
 0x474E66: push    eax
-0x474E67: call    FormHeapFree
+0x474E67: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x474E6C: add     esp, 4
 0x474E6F: mov     eax, esi
 0x474E71: mov     ecx, dword ptr [esp+30h+var_C]
@@ -190,3 +190,23 @@
 0x474E80: pop     ebx
 0x474E81: add     esp, 1Ch
 0x474E84: retn    14h
+0x9AEE00: mov     ecx, [ebp-1Ch]
+0x9AEE03: add     ecx, 10h; slot
+0x9AEE06: jmp     NiPointerSlot_Release
+0x9AEE0B: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9AEE10: push    2; int
+0x9AEE12: push    4; unsigned int
+0x9AEE14: mov     eax, [ebp-1Ch]
+0x9AEE17: add     eax, 1Ch
+0x9AEE1A: push    eax; void *
+0x9AEE1B: call    $LN21
+0x9AEE20: retn
+0x9AEE21: lea     ecx, [ebp-14h]; void *
+0x9AEE24: jmp     BSStringT_Clear
+0x9AEE29: mov     edx, [esp+arg_4]
+0x9AEE2D: lea     eax, [edx-20h]
+0x9AEE30: mov     ecx, [edx-24h]
+0x9AEE33: xor     ecx, eax
+0x9AEE35: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AEE3A: mov     eax, offset stru_ADB4F0
+0x9AEE3F: jmp     ___CxxFrameHandler3

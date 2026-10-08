@@ -30,3 +30,12 @@
 0x6ED827: pop     esi
 0x6ED828: add     esp, 10h
 0x6ED82B: retn
+0x9C83C0: mov     ecx, [ebp-10h]; this
+0x9C83C3: jmp     ??1FutBinaryFileC@@UAE@XZ; FutBinaryFileC::~FutBinaryFileC(void)
+0x9C83C8: mov     edx, [esp+arg_4]
+0x9C83CC: lea     eax, [edx-8]
+0x9C83CF: mov     ecx, [edx-0Ch]
+0x9C83D2: xor     ecx, eax
+0x9C83D4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C83D9: mov     eax, offset stru_AF0674
+0x9C83DE: jmp     ___CxxFrameHandler3

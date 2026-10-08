@@ -1,0 +1,19 @@
+{
+  "bytes_preview_hex": "",
+  "bytes_sha256": "",
+  "comments": {
+    "regular": "Probable: BSTreeManager_Update writes iCanopyShadowScale.value (converted int->float with negative values offset by a constant) here. Fallout's named BSTreeManager::Update writes the same setting to ShadowLightShader::ShadowProjTransform.w. Oblivion has no direct reader xrefs for this global, so local consumer remains Unknown.",
+    "repeatable": ""
+  },
+  "confidence_scope": "Raw live IDA annotation; bulk synchronization does not independently verify semantic names or comments.",
+  "display_name": "g_CanopyShadowProjectionScale",
+  "ea": "0xB44F04",
+  "evidence_confidence": "Unknown",
+  "kind": "data",
+  "name": "g_CanopyShadowProjectionScale",
+  "segment": ".data",
+  "size": 1,
+  "source_annotation_confidence": "Unknown",
+  "type": "float",
+  "xrefs_to_count": 0
+}

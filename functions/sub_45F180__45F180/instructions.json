@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x45F189",
-    "line": "mov     esi, [esp+0Ch+arg_0]",
+    "line": "mov     esi, [esp+0Ch+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -169,19 +169,19 @@
   },
   {
     "ea": "0x45F1D0",
-    "line": "push    esi",
+    "line": "push    esi; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45F1D1",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x45F1D3",
-    "line": "call    sub_45C7A0",
+    "line": "call    TESSaveLoadGame_DeleteForm",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,13 +217,13 @@
   },
   {
     "ea": "0x45F1DF",
-    "line": "push    ebp",
+    "line": "push    ebp; changeFlags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45F1E0",
-    "line": "push    esi",
+    "line": "push    esi; form",
     "mnemonic": "push",
     "size": 1
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x45F1E3",
-    "line": "call    sub_4535A0",
+    "line": "call    SaveLoad_NormalizeFormChangeFlags; Verified: starts with created-form flag adjustment, then normalizes flags by runtime type/state. For TESObjectREFR it checks inventory/process/package/death/persistence and location; bit31 is set when reference location differs from its starting location. For TESObjectCELL it validates light/terrain-related flags and classifies exterior grid coordinates. Callers include UnloadForm, ResetFormForLoad, save/load consistency passes. Do not assign names to remaining individual bits without further use tracing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,31 +301,31 @@
   },
   {
     "ea": "0x45F208",
-    "line": "push    0",
+    "line": "push    0; mode",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x45F20A",
-    "line": "push    ebx",
+    "line": "push    ebx; changeFlags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45F20B",
-    "line": "push    esi",
+    "line": "push    esi; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45F20C",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x45F20E",
-    "line": "call    TESSaveLoadGame_ResetObject",
+    "line": "call    TESSaveLoadGame_ResetObject; Verified: ResetObject reloads a form’s active override record. Counts override files, casts references/actors, calls UnloadForm-style buffer cleanup where needed, checks parent-cell and process constraints, finds the winning override file, and invokes TESDataHandler_LoadFormRecord under save/load guard. Callers include ResetFormForLoad 45F20E and LoadGame 4665B9.",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x45F234",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x45F243",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x45F267",
-    "line": "mov     byte ptr [esp+10h+arg_0], al",
+    "line": "mov     byte ptr [esp+10h+form], al",
     "mnemonic": "mov",
     "size": 4
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x45F29B",
-    "line": "mov     ecx, [esp+10h+arg_0]",
+    "line": "mov     ecx, [esp+10h+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x45F2AD",
-    "line": "call    sub_45C020",
+    "line": "call    sub_45C020; Verified behavior: post-reset reference/process reconciliation; ensures MobileObject LowProcess allocation, handles actor death state, reattaches references to loaded cells by parent cell or worldspace position, and updates scene/process state. Called by ResetFormForLoad (45F2AD), LoadGame (466610), and cell reset path 4CBFE3. Exact class method name Unknown.",
     "mnemonic": "call",
     "size": 5
   },

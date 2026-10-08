@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x695433",
-    "line": "call    EffectItem_GetArea",
+    "line": "call    EffectItem_GetArea; Effective area: returns 0 for EffectSetting NoArea (0x200) or Self range (0); otherwise raw EffectItem+0x8 area.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x6954BC",
-    "line": "push    offset dword_B258DC",
+    "line": "push    offset stru_B258DC",
     "mnemonic": "push",
     "size": 5
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x69554A",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x69555D",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -757,7 +757,7 @@
   },
   {
     "ea": "0x695583",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -769,7 +769,7 @@
   },
   {
     "ea": "0x69558A",
-    "line": "call    sub_57E270",
+    "line": "call    bhkCharacterProxy_GetCollisionFilterInfo; Reads collision filter info from proxy metadata: proxy+0x364 -> +8 -> +0x14 -> +0x1C. Used to preserve actor identity in raycast filter high 16 bits.",
     "mnemonic": "call",
     "size": 5
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x69559B",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -949,7 +949,7 @@
   },
   {
     "ea": "0x6955EE",
-    "line": "fst     [esp+28h+var_24]; float",
+    "line": "fst     [esp+28h+easeOutTime]; float",
     "mnemonic": "fst",
     "size": 4
   },
@@ -1027,7 +1027,7 @@
   },
   {
     "ea": "0x69560E",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1206,12 +1206,6 @@
     "size": 2
   },
   {
-    "ea": "0x695668",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x695670",
     "line": "cmp     eax, offset stru_B3CAC0",
     "mnemonic": "cmp",
@@ -1351,19 +1345,19 @@
   },
   {
     "ea": "0x6956B3",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6956B5",
-    "line": "fstp    [esp+24h+var_24]; float",
+    "line": "fstp    [esp+24h+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6956B8",
-    "line": "call    sub_4715C0",
+    "line": "call    NiControllerManager_DeactivateAllSequences; Iterates all controller-manager sequence slots and deactivates each sequence with the supplied ease-out time and transition flag zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1375,13 +1369,13 @@
   },
   {
     "ea": "0x6956BF",
-    "line": "push    0; int",
+    "line": "push    0; transition",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6956C1",
-    "line": "push    0; int",
+    "line": "push    0; timeSyncSequence",
     "mnemonic": "push",
     "size": 2
   },
@@ -1393,13 +1387,13 @@
   },
   {
     "ea": "0x6956C6",
-    "line": "fstp    [esp+30h+var_2C]; float",
+    "line": "fstp    [esp+30h+easeInTime]; easeInTime",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6956CA",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1411,25 +1405,25 @@
   },
   {
     "ea": "0x6956CE",
-    "line": "fstp    [esp+30h+var_30]; float",
+    "line": "fstp    [esp+30h+weight]; weight",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6956D1",
-    "line": "push    0; char",
+    "line": "push    0; startOver",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6956D3",
-    "line": "push    0; int",
+    "line": "push    0; priority",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6956D5",
-    "line": "call    sub_6C9BA0",
+    "line": "call    NiControllerSequence_Activate; Native controller-sequence activation state machine. Rejects an already-active sequence, validates optional time-sync compatibility, records activation parameters, and queues the active sequence with its manager.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1507,7 +1501,7 @@
   },
   {
     "ea": "0x695706",
-    "line": "fstp    [esp+24h+var_24]; float",
+    "line": "fstp    [esp+24h+easeOutTime]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1693,7 +1687,7 @@
   },
   {
     "ea": "0x695767",
-    "line": "fstp    [esp+2Ch+var_24]; float",
+    "line": "fstp    [esp+2Ch+easeOutTime]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1735,7 +1729,7 @@
   },
   {
     "ea": "0x695781",
-    "line": "fstp    [esp+2Ch+var_2C]; float",
+    "line": "fstp    [esp+2Ch+easeInTime]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1783,7 +1777,7 @@
   },
   {
     "ea": "0x69579A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

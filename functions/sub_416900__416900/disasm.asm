@@ -1,8 +1,8 @@
-0x416900: mov     ecx, dword_B3350C
+0x416900: mov     ecx, dword ptr unk_B3350C
 0x416906: xor     eax, eax
 0x416908: test    ecx, ecx
 0x41690A: jbe     short loc_41691F
-0x41690C: mov     edx, dword_B33510
+0x41690C: mov     edx, dword ptr unk_B33510
 0x416912: cmp     dword ptr [edx+eax*4], 0
 0x416916: jnz     short loc_41693D
 0x416918: add     eax, 1
@@ -24,16 +24,16 @@
 0x41693D: mov     eax, [edx+eax*4]
 0x416940: jmp     short loc_416921
 0x416942: mov     eax, [esi+4]
-0x416945: mov     edx, EffectSettingCollection
+0x416945: mov     edx, ds:0B33508h
 0x41694B: push    eax
 0x41694C: mov     eax, [edx+4]
-0x41694F: mov     ecx, offset EffectSettingCollection
+0x41694F: mov     ecx, 0B33508h
 0x416954: call    eax
-0x416956: mov     ecx, dword_B3350C
+0x416956: mov     ecx, dword ptr unk_B3350C
 0x41695C: add     eax, 1
 0x41695F: cmp     eax, ecx
 0x416961: jnb     short loc_41697E
-0x416963: mov     edx, dword_B33510
+0x416963: mov     edx, dword ptr unk_B33510
 0x416969: lea     esp, [esp+0]
 0x416970: mov     esi, [edx+eax*4]
 0x416973: test    esi, esi

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x732A30",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified NiLinesData constructor: initializes vertex/color buffers through NiGeometryData, assigns NiLinesData vtable, and either stores supplied line-flag bytes or allocates default alternating endpoint flags.",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,25 +91,25 @@
   },
   {
     "ea": "0x732A5A",
-    "line": "mov     eax, [esp+20h+arg_14]",
+    "line": "mov     eax, dword ptr [esp+20h+arg7]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x732A5E",
-    "line": "mov     ecx, [esp+20h+arg_10]",
+    "line": "mov     ecx, dword ptr [esp+20h+arg6]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x732A62",
-    "line": "mov     edx, [esp+20h+arg_C]",
+    "line": "mov     edx, [esp+20h+arg5]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x732A66",
-    "line": "mov     edi, [esp+20h+arg_0]",
+    "line": "mov     edi, dword ptr [esp+20h+vertexCount]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x732A6B",
-    "line": "mov     eax, [esp+24h+arg_8]",
+    "line": "mov     eax, [esp+24h+colors]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x732A70",
-    "line": "mov     ecx, [esp+28h+arg_4]",
+    "line": "mov     ecx, [esp+28h+vertices]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x732A81",
-    "line": "mov     eax, [esp+20h+arg_18]",
+    "line": "mov     eax, [esp+20h+lineFlags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -382,5 +382,59 @@
     "line": "retn    1Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CA8F0",
+    "line": "mov     ecx, [ebp-10h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA8F3",
+    "line": "jmp     ??1NiGeometryData@@UAE@XZ;",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA8F8",
+    "line": "mov     edx, [esp+vertices]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CA8FC",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA8FF",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA902",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CA904",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA909",
+    "line": "mov     eax, offset stru_AF2F80",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA90E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

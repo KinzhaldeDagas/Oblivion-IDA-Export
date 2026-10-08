@@ -139,7 +139,6 @@
 0x591222: jnz     short loc_591212
 0x591224: xor     eax, eax
 0x591226: jmp     short loc_591230
-0x591228: align 10h
 0x591230: mov     cl, [esp+eax+424h+Str]
 0x591234: mov     [esp+eax+424h+var_20C], cl
 0x59123B: add     eax, 1
@@ -149,7 +148,7 @@
 0x591248: fstp    dword ptr [esp+424h+var_418]
 0x59124C: fld     dword ptr [esp+424h+var_418]
 0x591250: fstp    [esp+424h+var_418]
-0x591254: call    sub_57D7F0
+0x591254: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x591259: fdivr   [esp+424h+var_418]
 0x59125D: lea     esi, [esp+424h+Str]
 0x591261: fstp    dword ptr [esp+424h+var_418]

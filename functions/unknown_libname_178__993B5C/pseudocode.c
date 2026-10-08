@@ -1,4 +1,8 @@
-double unknown_libname_178()
+void unknown_libname_178()
 {
-  return *(double *)&tbyte_B319BA;
+  __asm /*0x993b5c*/
+  {
+    fstp    st
+    fld     tbyte_B319BA
+  }
 }

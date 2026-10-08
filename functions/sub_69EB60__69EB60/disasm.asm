@@ -1,4 +1,4 @@
-0x69EB60: push    esi
+0x69EB60: push    esi; Verified MagicModelHitEffect_Update calls base lifetime/target checks, uses bFinished to stop the SpecialIdle_HitEffect controller sequence, and returns false after the visual is done so ActorProcessManager_UpdateTempEffects can remove it.
 0x69EB61: mov     esi, ecx
 0x69EB63: mov     ecx, [esi+1Ch]
 0x69EB66: test    ecx, ecx
@@ -8,11 +8,11 @@
 0x69EB76: call    edx
 0x69EB78: test    eax, eax
 0x69EB7A: jz      loc_69EC29
-0x69EB80: fld     [esp+4+arg_0]
+0x69EB80: fld     [esp+4+deltaSeconds]
 0x69EB84: push    ecx
-0x69EB85: mov     ecx, esi
-0x69EB87: fstp    [esp+8+var_8]; float
-0x69EB8A: call    sub_69D9A0
+0x69EB85: mov     ecx, esi; this
+0x69EB87: fstp    [esp+8+var_8]; deltaSeconds
+0x69EB8A: call    MagicHitEffect_Update; Verified MagicHitEffect_Update accumulates elapsedSeconds at +0x20, rejects missing/unloaded/flagged targetReference at +0x1C, and sets bFinished (+0x24) when durationSeconds (+0x08) is exceeded. Model and shader overrides use bFinished to end their visuals; the field's broad role is Probable 'finished/expired' state.
 0x69EB8F: test    al, al
 0x69EB91: jz      loc_69EC29
 0x69EB97: cmp     dword ptr [esi+30h], 0
@@ -30,9 +30,9 @@
 0x69EBBA: test    eax, eax
 0x69EBBC: jz      short loc_69EC08
 0x69EBBE: push    offset aSpecialidle_hi; "SpecialIdle_HitEffect"
-0x69EBC3: mov     ecx, eax
-0x69EBC5: call    sub_4715A0
-0x69EBCA: mov     ecx, eax
+0x69EBC3: mov     ecx, eax; this
+0x69EBC5: call    NiControllerManager_FindSequenceByName; Looks up a NiControllerSequence by name in the controller manager name map at +0x58; returns null on miss.
+0x69EBCA: mov     ecx, eax; this
 0x69EBCC: test    ecx, ecx
 0x69EBCE: jz      short loc_69EC08
 0x69EBD0: fld     dword ptr [ecx+34h]
@@ -48,11 +48,11 @@
 0x69EBEB: cmp     byte ptr [esi+24h], 0
 0x69EBEF: jz      short loc_69EC23
 0x69EBF1: fldz
-0x69EBF3: push    0; char
+0x69EBF3: push    0; transition
 0x69EBF5: push    ecx
-0x69EBF6: fstp    [esp+0Ch+var_C]; float
+0x69EBF6: fstp    [esp+0Ch+easeOutTime]; easeOutTime
 0x69EBF9: mov     byte ptr [esi+24h], 1
-0x69EBFD: call    sub_6C9CB0
+0x69EBFD: call    NiControllerSequence_Deactivate; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.
 0x69EC02: fld     dword ptr [esi+20h]
 0x69EC05: fstp    dword ptr [esi+8]
 0x69EC08: cmp     byte ptr [esi+24h], 0

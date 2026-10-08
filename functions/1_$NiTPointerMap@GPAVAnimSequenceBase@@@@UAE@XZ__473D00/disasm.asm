@@ -20,7 +20,7 @@
 0x473D4B: call    NiTMap_Clear
 0x473D50: mov     eax, [esi+8]
 0x473D53: push    eax
-0x473D54: call    FormHeapFree
+0x473D54: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x473D59: add     esp, 4
 0x473D5C: mov     ecx, [esp+18h+var_C]
 0x473D60: mov     large fs:0, ecx
@@ -28,3 +28,12 @@
 0x473D68: pop     esi
 0x473D69: add     esp, 10h
 0x473D6C: retn
+0x9AECF0: mov     ecx, [ebp-10h]
+0x9AECF3: jmp     AnimKeyMap_Destroy; Destroys the UInt16-to-AnimSequenceBase map contents, then frees its bucket array. Does not free the map object itself.
+0x9AECF8: mov     edx, [esp+arg_4]
+0x9AECFC: lea     eax, [edx-8]
+0x9AECFF: mov     ecx, [edx-0Ch]
+0x9AED02: xor     ecx, eax
+0x9AED04: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AED09: mov     eax, offset stru_ADB3E4
+0x9AED0E: jmp     ___CxxFrameHandler3

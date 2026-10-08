@@ -9,7 +9,7 @@
 0x4F8435: test    al, al
 0x4F8437: jz      short loc_4F8479
 0x4F8439: lea     ecx, [esi+44h]
-0x4F843C: call    sub_41E980
+0x4F843C: call    ExtraDataList_GetInvestmentGold; Returns the integer value stored in ExtraInvestmentGold type 0x52, or zero when absent.
 0x4F8441: mov     [esp+4+arg_0], eax
 0x4F8445: fild    [esp+4+arg_0]
 0x4F8449: mov     eax, [esp+4+arg_C]

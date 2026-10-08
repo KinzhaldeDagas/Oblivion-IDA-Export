@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x5308D0",
-    "line": "add     ecx, 28h ; '('",
+    "line": "add     ecx, 28h ; '('; Adds TESTopicInfo.addedTopics to PlayerCharacter. Pointer-duplicate topics are ignored, each genuinely new topic may show the sTopicAddedText notification outside DialogMenu, and the player's known-topic list is sorted once afterward.",
     "mnemonic": "add",
     "size": 3
   },
   {
     "ea": "0x5308D3",
-    "line": "push    ecx; a2",
+    "line": "push    ecx; topics",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x5308DA",
-    "line": "call    sub_66C6A0",
+    "line": "call    PlayerCharacter__AddKnownTopics; INFO.addedTopics always routes to PlayerCharacter::AddKnownTopics. This call still occurs before the INFOGENERAL RunForRumors gate in LoadNextTopicList, so D7 can teach known topics even when its normal result and Goodbye handling are suppressed.",
     "mnemonic": "call",
     "size": 5
   },

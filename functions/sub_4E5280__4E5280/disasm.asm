@@ -1,4 +1,4 @@
-0x4E5280: mov     edx, [ecx+48h]
+0x4E5280: mov     edx, [ecx+48h]; Verified frees every BSSimpleList node and list header stored in TESPathGrid.pointsByCell (+0x44), then clears that NiTPointerMap. Given the key helper's X/Y >> 9 packing, this is a 512-unit spatial bucket map local to this PathGrid, not a one-entry-per-world-cell map.
 0x4E5283: sub     esp, 0Ch
 0x4E5286: push    ebx
 0x4E5287: lea     ebx, [ecx+44h]
@@ -16,19 +16,19 @@
 0x4E52A3: jb      short loc_4E5296
 0x4E52A5: xor     eax, eax
 0x4E52A7: test    eax, eax
-0x4E52A9: mov     [esp+14h+var_8], eax
+0x4E52A9: mov     [esp+14h+position], eax
 0x4E52AD: jz      short loc_4E530D
 0x4E52AF: push    edi
-0x4E52B0: lea     eax, [esp+18h+var_C]
-0x4E52B4: push    eax
-0x4E52B5: lea     ecx, [esp+1Ch+var_4]
-0x4E52B9: push    ecx
-0x4E52BA: lea     edx, [esp+20h+var_8]
-0x4E52BE: push    edx
-0x4E52BF: mov     ecx, ebx
-0x4E52C1: mov     [esp+24h+var_C], 0
-0x4E52C9: call    sub_452600
-0x4E52CE: mov     esi, [esp+18h+var_C]
+0x4E52B0: lea     eax, [esp+18h+valueOut]
+0x4E52B4: push    eax; valueOut
+0x4E52B5: lea     ecx, [esp+1Ch+keyOut]
+0x4E52B9: push    ecx; keyOut
+0x4E52BA: lea     edx, [esp+20h+position]
+0x4E52BE: push    edx; position
+0x4E52BF: mov     ecx, ebx; self
+0x4E52C1: mov     [esp+24h+valueOut], 0
+0x4E52C9: call    NiTMap_U32Pointer_GetNextEntry
+0x4E52CE: mov     esi, [esp+18h+valueOut]
 0x4E52D2: test    esi, esi
 0x4E52D4: jz      short loc_4E5305
 0x4E52D6: cmp     dword ptr [esi+4], 0
@@ -37,16 +37,16 @@
 0x4E52E0: mov     eax, [esi+4]
 0x4E52E3: mov     edi, [eax+4]
 0x4E52E6: push    eax
-0x4E52E7: call    FormHeapFree
+0x4E52E7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4E52EC: add     esp, 4
 0x4E52EF: test    edi, edi
 0x4E52F1: mov     [esi+4], edi
 0x4E52F4: jnz     short loc_4E52E0
 0x4E52F6: push    esi
 0x4E52F7: mov     dword ptr [esi], 0
-0x4E52FD: call    FormHeapFree
+0x4E52FD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4E5302: add     esp, 4
-0x4E5305: cmp     [esp+18h+var_8], 0
+0x4E5305: cmp     [esp+18h+position], 0
 0x4E530A: jnz     short loc_4E52B0
 0x4E530C: pop     edi
 0x4E530D: pop     esi

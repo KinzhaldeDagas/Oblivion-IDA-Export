@@ -1,5 +1,5 @@
 0x40FDA0: push    ecx
-0x40FDA1: mov     eax, hHandle
+0x40FDA1: mov     eax, ds:0B33434h
 0x40FDA6: test    eax, eax
 0x40FDA8: jnz     short loc_40FDAE
 0x40FDAA: xor     al, al

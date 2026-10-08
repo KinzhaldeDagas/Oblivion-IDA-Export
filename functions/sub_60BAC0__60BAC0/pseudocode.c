@@ -1,200 +1,262 @@
-void __thiscall sub_60BAC0(Actor *this, int a2, void (__thiscall **a3)(MagicCaster *this, MagicCaster *this))
+// Handle collision-filter layer/category 1 without a TESObjectREFR target. Builds state-2 world placement data from impact position/normal, records material effects, and applies all retained projectile magic items through the shooter with a null casting target.
+void __thiscall ArrowProjectile_HandleCollisionLayer1Impact(
+        ArrowProjectile *this,
+        const NiPoint3 *impactPosition,
+        const NiPoint3 *impactNormal)
 {
-  MagicCasterVtbl *v4; // eax
-  AVNode *next; // ecx
-  AVEntry *magicka; // edx
+  ArrowProjectile_CollisionData *v4; // eax
+  float unk08C; // ecx
+  float unk090; // edx
   double v7; // st7
   double v8; // st6
   double v9; // rt0
   double v10; // st6
-  MagicCasterVtbl *vtbl; // eax
-  void (__thiscall *v12)(MagicCaster *, MagicCaster *); // edx
+  ArrowProjectile_CollisionData *unk05C; // eax
+  float x; // edx
   double v13; // st7
-  void (__thiscall **p_AddDisease)(MagicCaster *, MagicItemForm *, MagicTarget *, bool); // eax
+  float *v14; // eax
   float y; // ecx
-  double v16; // st7
+  double z; // st7
   double v17; // st7
-  float *p_IsMagicItemUsable; // eax
+  float *v18; // eax
   bhkCharacterProxy *CharProxy; // eax
   char *v20; // eax
-  float *v21; // eax
+  float *LinearVelocityPtr; // eax
   __m128 v22; // xmm0
   double v23; // st6
-  ActorVtbl *v24; // edx
+  MobileObjectVtbl *vtbl; // edx
   NiNode *(__thiscall *GetNiNode)(TESObjectREFR *); // eax
   int v26; // eax
   NiTransform *v27; // eax
-  bool (__thiscall **v28)(MagicCaster *, MagicItem *, float *, UInt32 *, bool); // ecx
+  float *v28; // ecx
   int v29; // edi
-  float *v30; // eax
+  float *unk00; // eax
   double v31; // st5
   double v32; // st6
   double v33; // st7
-  UInt32 v34; // ecx
-  int v35; // eax
-  UInt32 v36; // ecx
-  Actor *unk07C; // eax
+  Actor *shooter; // ecx
+  CombatController *v35; // eax
+  Actor *v36; // ecx
+  EnchantmentItem *arrowEnch; // eax
   TESForm *v38; // eax
-  UInt32 v39; // edx
+  AlchemyItem *poison; // edx
   TESForm *v40; // eax
-  UInt32 v41; // edx
+  EnchantmentItem *bowEnch; // edx
   TESForm *v42; // eax
-  float v43; // [esp+30h] [ebp-38h]
-  float v44; // [esp+30h] [ebp-38h]
-  NiPoint3 v45; // [esp+34h] [ebp-34h] BYREF
-  float v46; // [esp+44h] [ebp-24h]
-  __m128 v47; // [esp+48h] [ebp-20h] BYREF
+  int v43; // [esp+18h] [ebp-50h]
+  int v44; // [esp+1Ch] [ebp-4Ch]
+  int v45; // [esp+20h] [ebp-48h]
+  int v46; // [esp+24h] [ebp-44h]
+  int v47; // [esp+28h] [ebp-40h]
+  int v48; // [esp+2Ch] [ebp-3Ch]
+  float v49; // [esp+30h] [ebp-38h]
+  int v50; // [esp+30h] [ebp-38h]
+  NiPoint3 v51; // [esp+34h] [ebp-34h] BYREF
+  int v52; // [esp+40h] [ebp-28h]
+  float speed; // [esp+44h] [ebp-24h]
+  __m128 v54; // [esp+48h] [ebp-20h] BYREF
 
-  v4 = (MagicCasterVtbl *)FormHeapAlloc(0x54u);
-  next = this->members.avModifiers.avList.next;
-  magicka = this->members.avModifiers.magicka;
-  this->members.magicCaster.vtbl = v4;
-  v47.m128_i32[0] = (__int32)this->members.avModifiers.avList.entry;
-  *(unsigned __int64 *)((char *)v47.m128_u64 + 4) = __PAIR64__((unsigned int)magicka, (unsigned int)next);
-  sub_4BFAA0(v47.m128_f32);
-  v7 = v47.m128_f32[0];
-  v8 = dbl_A2F920;
-  this->members.magicCaster.vtbl->AddAbility = (void (__thiscall *)(MagicCaster *, MagicItemForm *, bool))2;
-  v9 = v8;
-  this->members.magicCaster.vtbl->GetSpellEffectiveness = 0;
-  v47.m128_f32[0] = v7 * v8;
-  v10 = v47.m128_f32[1];
-  this->members.magicCaster.vtbl->AddEffectToSelf = 0;
-  vtbl = this->members.magicCaster.vtbl;
-  v12 = *a3;
-  v47.m128_f32[1] = v10 * v9;
-  vtbl->PlayTargettedCastAnim = v12;
-  v13 = v9 * v47.m128_f32[2];
-  vtbl->PlayCastingAnim = a3[1];
-  vtbl->ApplyMagicItemCost = (void (__thiscall *)(MagicCaster *, MagicItem *, bool))a3[2];
-  v47.m128_f32[2] = v13;
-  p_AddDisease = &this->members.magicCaster.vtbl->AddDisease;
-  v45.x = *(float *)a2 + v47.m128_f32[0];
-  v45.y = *(float *)(a2 + 4) + v47.m128_f32[1];
-  y = v45.y;
-  v16 = *(float *)(a2 + 8);
-  *p_AddDisease = (void (__thiscall *)(MagicCaster *, MagicItemForm *, MagicTarget *, bool))LODWORD(v45.x);
-  v17 = v16 + v47.m128_f32[2];
-  *((float *)p_AddDisease + 1) = y;
-  v45.z = v17;
-  p_AddDisease[2] = (void (__thiscall *)(MagicCaster *, MagicItemForm *, MagicTarget *, bool))LODWORD(v45.z);
-  qmemcpy(&this->members.magicCaster.vtbl->GetActiveMagicItem, &stru_B26AF0[0xA].unk2C, 0x24u);
-  p_IsMagicItemUsable = (float *)&this->members.magicCaster.vtbl->IsMagicItemUsable;
-  *p_IsMagicItemUsable = Vector3_InitValue_;
-  p_IsMagicItemUsable[1] = *(&Vector3_InitValue_ + 1);
-  p_IsMagicItemUsable[2] = dword_B3F9B0;
-  if ( MobileObject_GetCharProxy((MobileObject *)this) )
+  v4 = (ArrowProjectile_CollisionData *)FormHeapAlloc(0x54u); /*0x60bae2*/
+  unk08C = this->unk08C; /*0x60bae7*/
+  unk090 = this->unk090; /*0x60baed*/
+  this->unk05C = v4; /*0x60baf3*/
+  v54.m128_i32[0] = LODWORD(this->unk088); /*0x60bafc*/
+  *(unsigned __int64 *)((char *)v54.m128_u64 + 4) = __PAIR64__(LODWORD(unk090), LODWORD(unk08C)); /*0x60bb05*/
+  NiPoint3_NormalizeApproximateInPlace(v54.m128_f32); /*0x60bb0d*/
+  v7 = v54.m128_f32[0]; /*0x60bb12*/
+  v8 = dbl_A2F920; /*0x60bb19*/
+  LODWORD(this->unk05C->unk00[0]) = 2;          // Collision-filter layer/category 1 impact initializes state 2 with no target reference/node. /*0x60bb1f*/
+  v9 = v8; /*0x60bb2a*/
+  this->unk05C->unk2C[0] = 0.0; /*0x60bb2e*/
+  v54.m128_f32[0] = v7 * v8; /*0x60bb31*/
+  v10 = v54.m128_f32[1]; /*0x60bb38*/
+  this->unk05C->ninode = 0; /*0x60bb3c*/
+  unk05C = this->unk05C; /*0x60bb41*/
+  x = impactNormal->x; /*0x60bb47*/
+  v54.m128_f32[1] = v10 * v9; /*0x60bb49*/
+  unk05C->unk00[4] = x; /*0x60bb4d*/
+  v13 = v9 * v54.m128_f32[2]; /*0x60bb53*/
+  unk05C->unk00[5] = impactNormal->y; /*0x60bb57*/
+  unk05C->unk00[6] = impactNormal->z; /*0x60bb5d*/
+  v54.m128_f32[2] = v13; /*0x60bb60*/
+  v14 = &this->unk05C->unk00[1]; /*0x60bb70*/
+  v51.x = impactPosition->x + v54.m128_f32[0]; /*0x60bb76*/
+  v51.y = impactPosition->y + v54.m128_f32[1]; /*0x60bb85*/
+  y = v51.y; /*0x60bb89*/
+  z = impactPosition->z; /*0x60bb8d*/
+  *v14 = v51.x; /*0x60bb90*/
+  v17 = z + v54.m128_f32[2]; /*0x60bb92*/
+  v14[1] = y; /*0x60bb96*/
+  v51.z = v17; /*0x60bba3*/
+  v14[2] = v51.z; /*0x60bbab*/
+  qmemcpy(&this->unk05C->unk2C[1], &stru_B26AF0[0xA].unk2C, 0x24u); /*0x60bbb4*/
+  v18 = &this->unk05C->unk00[7]; /*0x60bbbf*/
+  *v18 = g_zeroNiPoint3.x; /*0x60bbc2*/
+  v18[1] = g_zeroNiPoint3.y; /*0x60bbca*/
+  v18[2] = g_zeroNiPoint3.z; /*0x60bbd3*/
+  if ( MobileObject_GetCharProxy(&this->super) ) /*0x60bbd8*/
   {
-    CharProxy = MobileObject_GetCharProxy((MobileObject *)this);
-    if ( CharProxy && (v20 = *((char **)CharProxy + 2)) != 0 )
-      v21 = (float *)sub_8AC0A0(v20);
+    CharProxy = MobileObject_GetCharProxy(&this->super); /*0x60bbe7*/
+    if ( CharProxy && (v20 = *((char **)CharProxy + 2)) != 0 ) /*0x60bbf5*/
+      LinearVelocityPtr = (float *)bhkWorldObject_GetLinearVelocityPtr(v20); /*0x60bbf9*/
     else
-      v21 = (float *)&stru_BA7A40;
-    v22 = *(__m128 *)v21;
-    v45.x = *v21;
-    v23 = flt_A7DEB4;
-    v47 = v22;
-    if ( -v23 == v45.x )
+      LinearVelocityPtr = &OB_ShaderConstantStorage_010201A0[0x1870B]; /*0x60bc00*/
+    v22 = *(__m128 *)LinearVelocityPtr; /*0x60bc05*/
+    v51.x = *LinearVelocityPtr; /*0x60bc08*/
+    v23 = flt_A7DEB4; /*0x60bc12*/
+    v54 = v22; /*0x60bc18*/
+    if ( -v23 == v51.x ) /*0x60bc26*/
     {
-      if ( this->vtbl->super.super.GetNiNode(this) )
+      if ( this->super.vtbl->super.GetNiNode(this) ) /*0x60bc32*/
       {
-        v24 = this->vtbl;
-        v46 = *(float *)&this->members.magicTarget.unk04;
-        GetNiNode = v24->super.super.GetNiNode;
-        v45.x = *(float *)&dword_B258DC * v46;
-        v45.y = *(float *)&qword_B258E0 * v46;
-        v45.z = v46 * *((float *)&qword_B258E0 + 1);
-        v26 = (int)GetNiNode((TESObjectREFR *)this);
-        v27 = sub_7101F0((NiTransform *)(v26 + 0x64), (NiTransform *)&v47, &v45);
-        v28 = &this->members.magicCaster.vtbl->IsMagicItemUsable;
-        *v28 = (bool (__thiscall *)(MagicCaster *, MagicItem *, float *, UInt32 *, bool))LODWORD(v27->rot.data[0][0]);
-        v28[1] = (bool (__thiscall *)(MagicCaster *, MagicItem *, float *, UInt32 *, bool))LODWORD(v27->rot.data[0][1]);
-        v28[2] = (bool (__thiscall *)(MagicCaster *, MagicItem *, float *, UInt32 *, bool))LODWORD(v27->rot.data[0][2]);
+        vtbl = this->super.vtbl; /*0x60bc3b*/
+        speed = this->speed; /*0x60bc3d*/
+        GetNiNode = vtbl->super.GetNiNode; /*0x60bc41*/
+        v51.x = stru_B258DC.x * speed; /*0x60bc59*/
+        v51.y = stru_B258DC.y * speed; /*0x60bc65*/
+        v51.z = speed * stru_B258DC.z; /*0x60bc6f*/
+        v26 = (int)GetNiNode((TESObjectREFR *)this); /*0x60bc73*/
+        v27 = sub_7101F0((NiTransform *)(v26 + 0x64), (NiTransform *)&v54, &v51); /*0x60bc82*/
+        v28 = &this->unk05C->unk00[7]; /*0x60bc8c*/
+        *v28 = v27->rot.data[0][0]; /*0x60bc8f*/
+        v28[1] = v27->rot.data[0][1]; /*0x60bc94*/
+        v28[2] = v27->rot.data[0][2]; /*0x60bc9a*/
       }
     }
     else
     {
-      sub_43F3E0((float *)&this->members.magicCaster.vtbl->IsMagicItemUsable, &v47);
+      HavokVector_ToWorldVector(&this->unk05C->unk00[7], &v54); /*0x60bcab*/
     }
   }
-  v29 = sub_440AC0(TES, (float *)a2);
-  switch ( v29 )
+  v29 = sub_440AC0(MEMORY[0xB333A0], &impactPosition->x); /*0x60bcc3*/
+  switch ( v29 ) /*0x60bcd1*/
   {
-    case 0:
-    case 3:
-    case 5:
-    case 0xA:
-    case 0xB:
-    case 0xD:
-    case 0xF:
-    case 0x12:
-    case 0x14:
-    case 0x19:
-    case 0x1A:
-    case 0x1C:
-    case 0x1E:
-      sub_608DA0((MobileObject *)this, a2, (int)a3);
-      break;
+    case 0: /*0x60bcd1*/
+    case 3: /*0x60bcd1*/
+    case 5: /*0x60bcd1*/
+    case 0xA: /*0x60bcd1*/
+    case 0xB: /*0x60bcd1*/
+    case 0xD: /*0x60bcd1*/
+    case 0xF: /*0x60bcd1*/
+    case 0x12: /*0x60bcd1*/
+    case 0x14: /*0x60bcd1*/
+    case 0x19: /*0x60bcd1*/
+    case 0x1A: /*0x60bcd1*/
+    case 0x1C: /*0x60bcd1*/
+    case 0x1E: /*0x60bcd1*/
+      ArrowProjectile_SetFreeImpactState3(&this->super, (int)impactPosition, (int)impactNormal); /*0x60bcdf*/
+      break; /*0x60bcdf*/
     default:
       break;
   }
-  v30 = (float *)this->members.magicCaster.vtbl;
-  this->members.magicCaster.magicNode = (NiNode *)1;
-  v31 = v30[7] * v30[7];
-  v32 = v30[9] * v30[9];
-  v43 = v30[8] * v30[8] + v31 + v32;
-  v44 = sqrt(v43);
-  v33 = v44;
-  sub_609D50(this, v31, v44, v44, *(_DWORD *)a2, *(_DWORD *)(a2 + 4), *(_DWORD *)(a2 + 8), 0, v29);
-  v34 = this->members.unk070[2];
-  if ( v34 )
+  unk00 = this->unk05C->unk00; /*0x60bce4*/
+  this->unk060 = 1; /*0x60bce7*/
+  v31 = unk00[7] * unk00[7]; /*0x60bd14*/
+  v32 = unk00[9] * unk00[9]; /*0x60bd1e*/
+  v49 = unk00[8] * unk00[8] + v31 + v32; /*0x60bd22*/
+  *(float *)&v50 = sqrt(v49); /*0x60bd2f*/
+  v33 = *(float *)&v50; /*0x60bd33*/
+  sub_609D50( /*0x60bd3d*/
+    this,
+    v31,
+    *(float *)&v50,
+    *(float *)&v50,
+    LODWORD(impactPosition->x),
+    LODWORD(impactPosition->y),
+    LODWORD(impactPosition->z),
+    0,
+    v29);
+  shooter = this->shooter; /*0x60bd42*/
+  if ( shooter ) /*0x60bd47*/
   {
-    if ( (*(int (__thiscall **)(UInt32))(*(_DWORD *)v34 + 0x330))(v34) )
+    if ( shooter->vtbl->GetCombatController(shooter) ) /*0x60bd51*/
     {
-      v35 = (*(int (__thiscall **)(UInt32))(*(_DWORD *)this->members.unk070[2] + 0x330))(this->members.unk070[2]);
-      sub_618120(v35, v29, a2, 0.0);
+      v35 = this->shooter->vtbl->GetCombatController(this->shooter); /*0x60bd65*/
+      sub_618120((int)v35, v29, &impactPosition->x, 0.0); /*0x60bd69*/
     }
   }
-  v36 = this->members.unk070[2];
-  if ( v36 )
+  v36 = this->shooter; /*0x60bd6e*/
+  if ( v36 ) /*0x60bd73*/
   {
-    unk07C = this->members.unk07C;
-    if ( unk07C )
+    arrowEnch = this->arrowEnch;                // Layer-1 impact AMMO enchantment path: ArrowProjectile+0x7C, applied through shooter MagicCaster with no reference target. /*0x60bd79*/
+    if ( arrowEnch ) /*0x60bd7e*/
     {
-      (*(void (__thiscall **)(UInt32, TESChildCELLVtbl *))(*(_DWORD *)(v36 + 0x5C) + 0x34))(
-        v36 + 0x5C,
-        &unk07C->members.super.super.childCell);
-      (*(void (__thiscall **)(UInt32, _DWORD))(*(_DWORD *)(this->members.unk070[2] + 0x5C) + 0x3C))(
-        this->members.unk070[2] + 0x5C,
-        0);
-      v38 = this->vtbl->super.super.GetBaseForm(this);
-      MagicCaster_UseActiveMagicItem((_DWORD *)(this->members.unk070[2] + 0x5C), v31, v33, v32, (int)v38);
+      v36->members.magicCaster.vtbl->SetActiveMagicItem( /*0x60bd8d*/
+        &v36->members.magicCaster,
+        (EnchantmentItem *)((char *)arrowEnch + 0x18));
+      this->shooter->members.magicCaster.vtbl->SetCastingTarget(&this->shooter->members.magicCaster, 0); /*0x60bd9d*/
+      v38 = this->super.vtbl->super.GetBaseForm(this); /*0x60bda9*/
+      MagicCaster_UseActiveMagicItem( /*0x60bdb2*/
+        &this->shooter->members.magicCaster.vtbl,
+        v31,
+        v33,
+        v32,
+        (int)v38,
+        v43,
+        v44,
+        v45,
+        v46,
+        v47,
+        v48,
+        v50,
+        SLODWORD(v51.x),
+        SLODWORD(v51.y),
+        SLODWORD(v51.z),
+        v52);                                   // Collision-layer-1 impact applies projectile-held AMMO enchantment through shooter MagicCaster.
     }
-    v39 = this->members.unk080[1];
-    if ( v39 )
+    poison = this->poison;                      // Layer-1 impact poison path: ArrowProjectile+0x84, applied through shooter MagicCaster with no reference target. /*0x60bdb7*/
+    if ( poison ) /*0x60bdbf*/
     {
-      (*(void (__thiscall **)(UInt32, UInt32))(*(_DWORD *)(this->members.unk070[2] + 0x5C) + 0x34))(
-        this->members.unk070[2] + 0x5C,
-        v39 + 0x24);
-      (*(void (__thiscall **)(UInt32, _DWORD))(*(_DWORD *)(this->members.unk070[2] + 0x5C) + 0x3C))(
-        this->members.unk070[2] + 0x5C,
-        0);
-      v40 = this->vtbl->super.super.GetBaseForm(this);
-      MagicCaster_UseActiveMagicItem((_DWORD *)(this->members.unk070[2] + 0x5C), v31, v33, v32, (int)v40);
+      this->shooter->members.magicCaster.vtbl->SetActiveMagicItem( /*0x60bdd0*/
+        &this->shooter->members.magicCaster,
+        (AlchemyItem *)((char *)poison + 0x24));
+      this->shooter->members.magicCaster.vtbl->SetCastingTarget(&this->shooter->members.magicCaster, 0); /*0x60bddf*/
+      v40 = this->super.vtbl->super.GetBaseForm(this); /*0x60bdeb*/
+      MagicCaster_UseActiveMagicItem( /*0x60bdf4*/
+        &this->shooter->members.magicCaster.vtbl,
+        v31,
+        v33,
+        v32,
+        (int)v40,
+        v43,
+        v44,
+        v45,
+        v46,
+        v47,
+        v48,
+        v50,
+        SLODWORD(v51.x),
+        SLODWORD(v51.y),
+        SLODWORD(v51.z),
+        v52);                                   // Collision-layer-1 impact applies projectile-held poison through shooter MagicCaster.
     }
-    v41 = this->members.unk080[0];
-    if ( v41 )
+    bowEnch = this->bowEnch;                    // Layer-1 impact bow enchantment path: ArrowProjectile+0x80, applied through shooter MagicCaster with no reference target. /*0x60bdf9*/
+    if ( bowEnch ) /*0x60be01*/
     {
-      (*(void (__thiscall **)(UInt32, UInt32))(*(_DWORD *)(this->members.unk070[2] + 0x5C) + 0x34))(
-        this->members.unk070[2] + 0x5C,
-        v41 + 0x18);
-      (*(void (__thiscall **)(UInt32, _DWORD))(*(_DWORD *)(this->members.unk070[2] + 0x5C) + 0x3C))(
-        this->members.unk070[2] + 0x5C,
-        0);
-      v42 = this->vtbl->super.super.GetBaseForm(this);
-      MagicCaster_UseActiveMagicItem((_DWORD *)(this->members.unk070[2] + 0x5C), v31, v33, v32, (int)v42);
+      this->shooter->members.magicCaster.vtbl->SetActiveMagicItem( /*0x60be12*/
+        &this->shooter->members.magicCaster,
+        (EnchantmentItem *)((char *)bowEnch + 0x18));
+      this->shooter->members.magicCaster.vtbl->SetCastingTarget(&this->shooter->members.magicCaster, 0); /*0x60be21*/
+      v42 = this->super.vtbl->super.GetBaseForm(this); /*0x60be2d*/
+      MagicCaster_UseActiveMagicItem( /*0x60be36*/
+        &this->shooter->members.magicCaster.vtbl,
+        v31,
+        v33,
+        v32,
+        (int)v42,
+        v43,
+        v44,
+        v45,
+        v46,
+        v47,
+        v48,
+        v50,
+        SLODWORD(v51.x),
+        SLODWORD(v51.y),
+        SLODWORD(v51.z),
+        v52);                                   // Collision-layer-1 impact applies projectile-held bow enchantment through shooter MagicCaster.
     }
   }
-  if ( this->members.unk07C )
-    this->members.magicCaster.magicNode = (NiNode *)3;
+  if ( this->arrowEnch ) /*0x60be3b*/
+    this->unk060 = 3; /*0x60be41*/
 }

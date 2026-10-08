@@ -23,19 +23,19 @@
 0x7F1D26: mov     edx, [eax+9Ch]
 0x7F1D2C: mov     ecx, esi
 0x7F1D2E: call    edx
-0x7F1D30: push    eax
+0x7F1D30: push    eax; stlspData
 0x7F1D31: mov     eax, [esi]
 0x7F1D33: mov     edx, [eax+68h]
 0x7F1D36: mov     ecx, esi
 0x7F1D38: call    edx
-0x7F1D3A: push    eax
+0x7F1D3A: push    eax; stspData
 0x7F1D3B: mov     eax, [esi]
 0x7F1D3D: mov     edx, [eax+98h]
 0x7F1D43: mov     ecx, esi
 0x7F1D45: call    edx
 0x7F1D47: mov     ecx, edi; this
-0x7F1D49: push    eax
-0x7F1D4A: call    ??0SpeedTreeLeafShaderProperty@@QAE@XZ; SpeedTreeLeafShaderProperty::SpeedTreeLeafShaderProperty(void)
+0x7F1D49: push    eax; leafLodIndex
+0x7F1D4A: call    ??0SpeedTreeLeafShaderProperty@@QAE@XZ; SpeedTreeLeafShaderProperty ctor: LightingProperty base with STSPData, then stores STLSPData ref at +0xA8 and leaf LOD index word at +0xAC.
 0x7F1D4F: mov     edi, eax
 0x7F1D51: jmp     short loc_7F1D55
 0x7F1D53: xor     edi, edi
@@ -54,3 +54,15 @@
 0x7F1D7C: pop     esi
 0x7F1D7D: add     esp, 10h
 0x7F1D80: retn
+0x9CA7E0: mov     eax, [ebp-10h]
+0x9CA7E3: push    eax
+0x9CA7E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA7E9: pop     ecx
+0x9CA7EA: retn
+0x9CA7EB: mov     edx, [esp+arg_4]
+0x9CA7EF: lea     eax, [edx-0Ch]
+0x9CA7F2: mov     ecx, [edx-10h]
+0x9CA7F5: xor     ecx, eax
+0x9CA7F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA7FC: mov     eax, offset stru_AF2E8C
+0x9CA801: jmp     ___CxxFrameHandler3

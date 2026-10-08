@@ -1,6 +1,6 @@
-0x59E4E0: push    esi
+0x59E4E0: push    esi; Verified: derives from Menu by constructor call at 0x59E4E3; writes DialogMenu vtable 0xA6B88C at 0x59E4EC. Clears all 14 bound tile pointers at +0x28..+0x5C. See partial OblivionDialogMenuTileBindingsView.
 0x59E4E1: mov     esi, ecx
-0x59E4E3: call    ??0Menu@@QAE@XZ; Menu::Menu(void)
+0x59E4E3: call    ??0Menu@@QAE@XZ; Verified constructor sets ownsTemplates byte+0x1C=1, template list+8/+0xC empty, templateContextTile+0x10=NULL, fadeState+0x24=4. Other fields retain prior names when semantics not established.
 0x59E4E8: fldz
 0x59E4EA: xor     eax, eax
 0x59E4EC: mov     dword ptr [esi], offset ??_7DialogMenu@@6B@; const DialogMenu::`vftable'

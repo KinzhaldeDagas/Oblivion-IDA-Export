@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x67B260",
-    "line": "push    esi",
+    "line": "push    esi; TES4 authoritative helper for inserting a non-player MobileObject into a process-level BSSimpleList. Supports front/back insertion and placement relative to another object; advances the list cursor after insertion.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x67B262",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+object]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x67B274",
-    "line": "cmp     [esp+8+arg_8], 0",
+    "line": "cmp     [esp+8+insertRelative], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x67B27B",
-    "line": "cmp     [esp+8+arg_4], 0",
+    "line": "cmp     [esp+8+append], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x67B283",
-    "line": "call    BSSimpleList_PushFront",
+    "line": "call    BSSimpleList_PushFront; Release/front-insertion path uses BSSimpleList_PushFront. If the list is nonempty and its 8-byte node allocation fails, native code null-dereferences rather than returning an insertion failure.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x67B2CF",
-    "line": "mov     edx, [esp+8+arg_C]",
+    "line": "mov     edx, [esp+8+relativeTo]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x67B2EA",
-    "line": "cmp     [esp+8+arg_4], 0",
+    "line": "cmp     [esp+8+append], 0",
     "mnemonic": "cmp",
     "size": 5
   },

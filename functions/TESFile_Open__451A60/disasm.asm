@@ -67,8 +67,7 @@
 0x451B29: mov     esp, ebp
 0x451B2B: pop     ebp
 0x451B2C: retn
-0x451B2D: align 10h
-0x451B30: mov     eax, [esi+250h]
+0x451B30: mov     eax, [esi+250h]; Oblivion TESFile_Open TES4-header dispatch recognizes only HEDR, MAST, SNAM, master DATA, and CNAM. There are no ONAM/INTV/INCC/OFST or DELE branches in this loop; unhandled header chunks fall through to TESFile_GetNextChunk.
 0x451B36: cmp     eax, 4D414E53h
 0x451B3B: jg      loc_451BDC
 0x451B41: jz      short loc_451BAD
@@ -82,7 +81,7 @@
 0x451B62: push    200h; a4
 0x451B67: push    edi; Dst
 0x451B68: mov     ecx, esi; a1
-0x451B6A: call    TESFile_GetChunkData
+0x451B6A: call    TESFile_GetChunkData; Each CNAM is read into stack storage with maxSize=0x200 then passed to BSStringT_Set(minLength=0). Lengths 1..512 need an embedded NUL; 0 is a no-op; >512 copies 511 bytes and forces NUL. Unterminated <=512-byte input makes C-string assignment dependent on adjacent stack bytes.
 0x451B6F: push    0; a3
 0x451B71: push    edi; a2
 0x451B72: lea     ecx, [esi+404h]; this
@@ -96,19 +95,19 @@
 0x451B90: push    8; a4
 0x451B92: push    edi; Dst
 0x451B93: mov     ecx, esi; a1
-0x451B95: call    TESFile_GetChunkData
+0x451B95: call    TESFile_GetChunkData; Each DATA occurrence allocates 8 bytes, performs TESFile_GetChunkData(maxSize=8), and appends to the separate masterlistSizeInfo list. It is not validated or paired with an immediately previous MAST. Short reads retain unknown heap suffix bytes; >8 copies 7 and forces byte 7 to zero.
 0x451B9A: push    edi
 0x451B9B: lea     ecx, [esi+3E8h]
 0x451BA1: call    BSSimpleList_PushBack
 0x451BA6: xor     edi, edi
 0x451BA8: jmp     loc_451C5F
 0x451BAD: mov     eax, [esi+254h]
-0x451BB3: call    __alloca?
+0x451BB3: call    __alloca?; Each SNAM is read into stack storage with maxSize=0x200 then passed to BSStringT_Set(minLength=0) at 0x451BD0. Lengths 1..512 need an embedded NUL; 0 is a no-op; >512 copies 511 bytes and forces NUL. Unterminated <=512-byte input makes C-string assignment dependent on adjacent stack bytes.
 0x451BB8: mov     edi, esp
 0x451BBA: push    200h; a4
 0x451BBF: push    edi; Dst
 0x451BC0: mov     ecx, esi; a1
-0x451BC2: call    TESFile_GetChunkData
+0x451BC2: call    TESFile_GetChunkData; TES4 SNAM follows the same 0x200 bounded stack-buffer read and C-string setter at 0x451BD0. For 1..512 bytes, determinism requires an embedded NUL; zero size is a no-op; >512 copies 511 then writes terminator.
 0x451BC7: push    0; a3
 0x451BC9: push    edi; a2
 0x451BCA: lea     ecx, [esi+40Ch]; this
@@ -116,7 +115,7 @@
 0x451BD5: xor     edi, edi
 0x451BD7: jmp     loc_451C5F
 0x451BDC: cmp     eax, 52444548h
-0x451BE1: jz      short loc_451C1C
+0x451BE1: jz      short loc_451C1C; Every HEDR occurrence bounded-reads into shared TESFile fields with maxSize=12. Zero is a no-op; short sizes overlay a prefix; >12 copies 11 bytes then zeroes byte 11. Later HEDR therefore replays over constructor/prior state; an exact final chunk replaces all 12 serialized bytes. Then nextFormID is clamped and its owner byte repacked from this->fileIndex at 0x451C36..0x451C59.
 0x451BE3: cmp     eax, 5453414Dh
 0x451BE8: jnz     short loc_451C5F
 0x451BEA: mov     eax, [esi+254h]
@@ -127,7 +126,7 @@
 0x451BFB: push    0; a4
 0x451BFD: push    edi; Dst
 0x451BFE: mov     ecx, esi; a1
-0x451C00: call    TESFile_GetChunkData
+0x451C00: call    TESFile_GetChunkData; MAST allocates currentChunk.length bytes, then TESFile_GetChunkData(maxSize=0) copies the full chunk without a terminator. The pointer is retained in masterList and later compared as a C string in TESFile_BuildLoadedMasterArray at 0x44FD08.
 0x451C05: push    edi
 0x451C06: lea     ecx, [esi+3E0h]
 0x451C0C: call    BSSimpleList_PushBack
@@ -138,9 +137,9 @@
 0x451C1E: lea     ecx, [esi+3D0h]
 0x451C24: push    ecx; Dst
 0x451C25: mov     ecx, esi; a1
-0x451C27: call    TESFile_GetChunkData
+0x451C27: call    TESFile_GetChunkData; TES4 HEDR bounded 12-byte field read. Reader semantics: size 0 does not touch destination; short sizes overlay prefix only; size >12 copies 11 bytes plus forced zero at byte 11. Call is reached for each HEDR in stream order.
 0x451C2C: cmp     dword ptr [esi+3D8h], 7FFh
-0x451C36: ja      short loc_451C42
+0x451C36: ja      short loc_451C42; After each HEDR read, nextFormID is clamped to at least 0x800, then its high byte is repacked from fileIndex. Repeated HEDR chunks therefore replay over the same state, including this per-occurrence clamp.
 0x451C38: mov     dword ptr [esi+3D8h], 800h
 0x451C42: movzx   edx, byte ptr [esi+400h]
 0x451C49: mov     eax, [esi+3D8h]
@@ -149,7 +148,7 @@
 0x451C57: or      edx, eax
 0x451C59: mov     [esi+3D8h], edx
 0x451C5F: mov     ecx, esi
-0x451C61: call    TESFile_GetNextChunk
+0x451C61: call    TESFile_GetNextChunk; After the TES4-header loop, the reader advances through TES4 group records to the first form and rewinds. Header chunks not matched earlier (including ONAM/INTV/INCC/OFST/DELE) were skipped rather than assigned startup metadata.
 0x451C66: test    al, al
 0x451C68: jnz     loc_451B30
 0x451C6E: mov     eax, [esi+244h]

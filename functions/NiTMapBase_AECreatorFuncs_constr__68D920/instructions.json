@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x68D920",
-    "line": "push    esi",
+    "line": "push    esi; Verified base-map construction path for NiTMap_AECreatorFuncs: installs NiTMapBase vtable, clears entries, and frees the old bucket pointer; the derived NiTPointerMap constructor then allocates/zeros 37 buckets and installs its vtable.",
     "mnemonic": "push",
     "size": 1
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x68D932",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

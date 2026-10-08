@@ -1,27 +1,28 @@
-char __thiscall sub_4A6350(_DWORD *this, int a2)
+// Verified: inserts region only when not already present, preserving unique TESRegion membership.
+bool __thiscall TESRegionList_AddUniqueRegion(TESRegionList *self, TESForm *region)
 {
   bool v3; // zf
-  _DWORD *v4; // ecx
-  _DWORD *v5; // eax
+  OblivionRegionListNode *p_regions; // ecx
+  OblivionRegionListNode *v5; // eax
 
-  if ( !a2 )
-    return 0;
-  v3 = this + 1 == 0;
-  v4 = this + 1;
-  v5 = v4;
-  if ( v3 )
+  if ( !region ) /*0x4a6356*/
+    return 0; /*0x4a6358*/
+  v3 = &self->regions == 0; /*0x4a635d*/
+  p_regions = &self->regions; /*0x4a635d*/
+  v5 = p_regions; /*0x4a6360*/
+  if ( v3 ) /*0x4a6362*/
   {
 LABEL_6:
-    BSSimpleList_PushFront(v4, a2);
+    BSSimpleList_PushFront(p_regions, (int)region); /*0x4a636f*/
   }
   else
   {
-    while ( *v5 != a2 )
+    while ( v5->regionForm != region ) /*0x4a6366*/
     {
-      v5 = (_DWORD *)v5[1];
-      if ( !v5 )
-        goto LABEL_6;
+      v5 = v5->next; /*0x4a6368*/
+      if ( !v5 ) /*0x4a636d*/
+        goto LABEL_6; /*0x4a636d*/
     }
   }
-  return 1;
+  return 1; /*0x4a635a*/
 }

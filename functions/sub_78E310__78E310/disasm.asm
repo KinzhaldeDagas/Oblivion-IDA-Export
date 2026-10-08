@@ -1,4 +1,4 @@
-0x78E310: push    ebp
+0x78E310: push    ebp; 2026-05-21 SpeedTreeOBSE core/tail known-family load pass: Oblivion path wrapper reads the complete SPT, calls LoadTree(buffer) at 0x78E39F, then frees the original bytes. Compatibility must trace/copy sidecar payloads before this free, keep the core prefix byte-exact, strip known 23000..75000 sidecars from the supplemental tail, and honor unknown terminal stop boundaries in both orderings.
 0x78E311: mov     ebp, esp
 0x78E313: push    0FFFFFFFFh
 0x78E315: push    offset SEH_78E310
@@ -33,27 +33,27 @@
 0x78E36E: mov     edx, [eax+1Ch]
 0x78E371: mov     ecx, edi
 0x78E373: call    edx
-0x78E375: mov     esi, eax
+0x78E375: mov     esi, eax; fileSizeScratch
 0x78E377: test    esi, esi
 0x78E379: jle     loc_78E427
 0x78E37F: push    esi; Size
 0x78E380: call    FormHeapAlloc
 0x78E385: add     esp, 4
 0x78E388: mov     ebx, eax
-0x78E38A: push    esi
-0x78E38B: push    ebx
-0x78E38C: mov     ecx, edi
-0x78E38E: call    ReadFile??
+0x78E38A: push    esi; byteCount
+0x78E38B: push    ebx; destination
+0x78E38C: mov     ecx, edi; self
+0x78E38E: call    Archive_ReadBytes
 0x78E393: cmp     eax, esi
 0x78E395: mov     dword ptr [ebp+ArgList], eax
 0x78E398: jnz     short loc_78E3D1
-0x78E39A: mov     ecx, [ebp+var_18]
-0x78E39D: push    esi
-0x78E39E: push    ebx
-0x78E39F: call    sub_78DF90
+0x78E39A: mov     ecx, [ebp+var_18]; this
+0x78E39D: push    esi; byteCount
+0x78E39E: push    ebx; block
+0x78E39F: call    CSpeedTreeRT__LoadTreeFromMemory; SpeedTreeOBSE 2026-05-23 runtime path-context recovery: this in-wrapper LoadTree(buffer) call is the authoritative live buffer hook. Current logs showed loads can reach 0x78E310 without hitting Bethesda caller 0x56070C, so the OBSE hook recovers the active path from the 0x78E310 frame ([EBP+8]) before tracing/sanitizing. This remains pre-stock, before wrapper-owned bytes are freed.
 0x78E3A4: push    ebx
-0x78E3A5: mov     [ebp+var_11], al
-0x78E3A8: call    FormHeapFree
+0x78E3A5: mov     [ebp+var_11], al; 2026-05-20 SpeedTreeOBSE hook window after the path wrapper memory-load call. Original bytes are still wrapper-owned only briefly; sidecar data must already be traced/copied. Current compatibility trace keeps stock bytes sanitized, records dynamic family/collision data, and accepts valid high-count known-family sidecars by structure instead of local count caps.
+0x78E3A8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x78E3AD: mov     eax, [edi]
 0x78E3AF: mov     edx, [eax]
 0x78E3B1: add     esp, 4
@@ -81,8 +81,8 @@
 0x78E3E6: push    esi
 0x78E3E7: push    edx; ArgList
 0x78E3E8: push    offset aOnlyReadDOfDFr; "only read %d of %d from %s [%s]"
-0x78E3ED: lea     esi, [ebp+var_60]
-0x78E3F0: call    sub_7A54A0
+0x78E3ED: lea     esi, [ebp+result]; result
+0x78E3F0: call    OB_IdvFormatString_010201A0; Oblivion binary evidence: IdvFormatString. Formats variadic arguments with vsprintf into a 1024-byte stack buffer, constructs the hidden-result 28-byte SSO string, assigns strlen(buffer) bytes, and returns the result pointer in EAX. SpeedTreeRT 4.1 IdvGlobals.h:77-93 corroborates the name and fixed buffer only after observation.
 0x78E3F5: add     esp, 18h
 0x78E3F8: cmp     dword ptr [eax+18h], 10h
 0x78E3FC: mov     byte ptr [ebp+var_4], 1
@@ -106,8 +106,8 @@
 0x78E434: push    eax
 0x78E435: push    ebx; ArgList
 0x78E436: push    offset aFileSeekFailed; "file seek failed on '%s' [%s]"
-0x78E43B: lea     esi, [ebp+var_60]
-0x78E43E: call    sub_7A54A0
+0x78E43B: lea     esi, [ebp+result]; result
+0x78E43E: call    OB_IdvFormatString_010201A0; Oblivion binary evidence: IdvFormatString. Formats variadic arguments with vsprintf into a 1024-byte stack buffer, constructs the hidden-result 28-byte SSO string, assigns strlen(buffer) bytes, and returns the result pointer in EAX. SpeedTreeRT 4.1 IdvGlobals.h:77-93 corroborates the name and fixed buffer only after observation.
 0x78E443: add     esp, 10h
 0x78E446: cmp     dword ptr [eax+18h], 10h
 0x78E44A: mov     byte ptr [ebp+var_4], 2
@@ -132,8 +132,8 @@
 0x78E485: push    eax
 0x78E486: push    ebx; ArgList
 0x78E487: push    offset aFailedToLoadFi; "failed to load file '%s' [%s]"
-0x78E48C: lea     esi, [ebp+var_60]
-0x78E48F: call    sub_7A54A0
+0x78E48C: lea     esi, [ebp+result]; result
+0x78E48F: call    OB_IdvFormatString_010201A0; Oblivion binary evidence: IdvFormatString. Formats variadic arguments with vsprintf into a 1024-byte stack buffer, constructs the hidden-result 28-byte SSO string, assigns strlen(buffer) bytes, and returns the result pointer in EAX. SpeedTreeRT 4.1 IdvGlobals.h:77-93 corroborates the name and fixed buffer only after observation.
 0x78E494: add     esp, 10h
 0x78E497: cmp     dword ptr [eax+18h], 10h
 0x78E49B: mov     byte ptr [ebp+var_4], 3
@@ -157,8 +157,8 @@
 0x78E4D1: call    eax
 0x78E4D3: push    eax; ArgList
 0x78E4D4: push    offset aCspeedtreertLo; "CSpeedTreeRT::Load Tree - %s"
-0x78E4D9: lea     esi, [ebp+var_60]
-0x78E4DC: call    sub_7A54A0
+0x78E4D9: lea     esi, [ebp+result]; result
+0x78E4DC: call    OB_IdvFormatString_010201A0; Oblivion binary evidence: IdvFormatString. Formats variadic arguments with vsprintf into a 1024-byte stack buffer, constructs the hidden-result 28-byte SSO string, assigns strlen(buffer) bytes, and returns the result pointer in EAX. SpeedTreeRT 4.1 IdvGlobals.h:77-93 corroborates the name and fixed buffer only after observation.
 0x78E4E1: add     esp, 8
 0x78E4E4: cmp     dword ptr [eax+18h], 10h
 0x78E4E8: mov     byte ptr [ebp+var_4], 5
@@ -166,17 +166,17 @@
 0x78E4EE: mov     eax, [eax+4]
 0x78E4F1: jmp     short loc_78E4F6
 0x78E4F3: add     eax, 4
-0x78E4F6: push    eax; Src
-0x78E4F7: call    sub_7895E0
+0x78E4F6: push    eax; error
+0x78E4F7: call    CSpeedTreeRT__SetError; Oblivion binary evidence: CSpeedTreeRT static error setter. Assigns the NUL-terminated input into the sole 28-byte global error string at 0xB2B614. After observation, SpeedTreeRT 4.1 SpeedTreeRT.cpp:2671-2677 corroborates SetError and g_strError.
 0x78E4FC: add     esp, 4
-0x78E4FF: lea     ecx, [ebp+var_60]
-0x78E502: call    sub_79AB00
+0x78E4FF: lea     ecx, [ebp+result]; this
+0x78E502: call    OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
 0x78E507: mov     eax, offset loc_78E50D
 0x78E50C: retn
 0x78E50D: jmp     loc_78E3BA
 0x78E512: push    offset aCspeedtreer_20; "CSpeedTreeRT::LoadTree - threw an unkno"...
-0x78E517: lea     esi, [ebp+var_7C]
-0x78E51A: call    sub_7A54A0
+0x78E517: lea     esi, [ebp+var_7C]; result
+0x78E51A: call    OB_IdvFormatString_010201A0; Oblivion binary evidence: IdvFormatString. Formats variadic arguments with vsprintf into a 1024-byte stack buffer, constructs the hidden-result 28-byte SSO string, assigns strlen(buffer) bytes, and returns the result pointer in EAX. SpeedTreeRT 4.1 IdvGlobals.h:77-93 corroborates the name and fixed buffer only after observation.
 0x78E51F: add     esp, 4
 0x78E522: cmp     dword ptr [eax+18h], 10h
 0x78E526: mov     byte ptr [ebp+var_4], 6
@@ -184,10 +184,27 @@
 0x78E52C: mov     eax, [eax+4]
 0x78E52F: jmp     short loc_78E534
 0x78E531: add     eax, 4
-0x78E534: push    eax; Src
-0x78E535: call    sub_7895E0
+0x78E534: push    eax; error
+0x78E535: call    CSpeedTreeRT__SetError; Oblivion binary evidence: CSpeedTreeRT static error setter. Assigns the NUL-terminated input into the sole 28-byte global error string at 0xB2B614. After observation, SpeedTreeRT 4.1 SpeedTreeRT.cpp:2671-2677 corroborates SetError and g_strError.
 0x78E53A: add     esp, 4
-0x78E53D: lea     ecx, [ebp+var_7C]
-0x78E540: call    sub_79AB00
+0x78E53D: lea     ecx, [ebp+var_7C]; this
+0x78E540: call    OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
 0x78E545: mov     eax, offset loc_78E3BA
 0x78E54A: retn
+0x9CBB00: lea     ecx, [ebp+result]; this
+0x9CBB03: jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
+0x9CBB08: lea     ecx, [ebp+result]; this
+0x9CBB0B: jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
+0x9CBB10: lea     ecx, [ebp+result]; this
+0x9CBB13: jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
+0x9CBB18: lea     ecx, [ebp+result]; this
+0x9CBB1B: jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
+0x9CBB20: lea     ecx, [ebp+var_7C]; this
+0x9CBB23: jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
+0x9CBB28: mov     edx, [esp-4+arg_4]
+0x9CBB2C: lea     eax, [edx+0Ch]
+0x9CBB2F: mov     ecx, [edx-80h]
+0x9CBB32: xor     ecx, eax
+0x9CBB34: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CBB39: mov     eax, offset stru_AF4994
+0x9CBB3E: jmp     ___CxxFrameHandler3

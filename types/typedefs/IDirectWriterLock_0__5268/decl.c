@@ -1,1 +1,1 @@
-IDirectWriterLock_0
+typedef IDirectWriterLock IDirectWriterLock_0;

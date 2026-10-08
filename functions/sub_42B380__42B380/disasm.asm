@@ -1,10 +1,10 @@
-0x42B380: push    esi
+0x42B380: push    esi; Map marker writer emits FNAM exactly 1 byte, FULL as known length/strlen + 1 including terminal NUL, and TNAM exactly 2 bytes; caller emits empty XMRK first.
 0x42B381: mov     esi, ecx
 0x42B383: push    1; Size
 0x42B385: lea     eax, [esi+0Ch]
 0x42B388: push    eax; Src
 0x42B389: push    4D414E46h; int
-0x42B38E: call    TESForm_PutFormRecordChunkData
+0x42B38E: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x42B393: movzx   eax, word ptr [esi+8]
 0x42B397: add     esp, 0Ch
 0x42B39A: cmp     ax, 0FFFFh
@@ -31,7 +31,7 @@
 0x42B3D3: add     esi, 0Eh
 0x42B3D6: push    esi; Src
 0x42B3D7: push    4D414E54h; int
-0x42B3DC: call    TESForm_PutFormRecordChunkData
+0x42B3DC: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x42B3E1: add     esp, 18h
 0x42B3E4: pop     esi
 0x42B3E5: retn

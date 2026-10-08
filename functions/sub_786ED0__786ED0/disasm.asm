@@ -1,6 +1,6 @@
-0x786ED0: mov     edx, [esp+arg_4]
+0x786ED0: mov     edx, [esp+transform]; Oblivion 1.2.0.416: transforms a point by the 4x4 stTransform including m[12..14] translation. RT4.1 stVec3::operator*(stTransform) corroborates the row/column terms.
 0x786ED4: fld     dword ptr [edx+10h]
-0x786ED7: mov     eax, [esp+arg_0]
+0x786ED7: mov     eax, [esp+result]
 0x786EDB: fmul    dword ptr [ecx+4]
 0x786EDE: fld     dword ptr [edx]
 0x786EE0: fmul    dword ptr [ecx]

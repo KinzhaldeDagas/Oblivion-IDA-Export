@@ -24,9 +24,9 @@
 0x6C7BE4: mov     ecx, [edi+8]
 0x6C7BE7: test    ecx, ecx
 0x6C7BE9: jz      short loc_6C7BF9
-0x6C7BEB: push    ecx; Str2
-0x6C7BEC: push    eax; Str1
-0x6C7BED: call    __strcmp
+0x6C7BEB: push    ecx; right
+0x6C7BEC: push    eax; left
+0x6C7BED: call    CRT_StricmpLocaleDispatch
 0x6C7BF2: add     esp, 8
 0x6C7BF5: test    eax, eax
 0x6C7BF7: jnz     short loc_6C7BC2
@@ -145,7 +145,6 @@
 0x6C7D37: test    ecx, ecx
 0x6C7D39: jz      short loc_6C7D69
 0x6C7D3B: jmp     short loc_6C7D40
-0x6C7D3D: align 10h
 0x6C7D40: mov     dl, [eax]
 0x6C7D42: cmp     dl, [ecx]
 0x6C7D44: jnz     short loc_6C7D60

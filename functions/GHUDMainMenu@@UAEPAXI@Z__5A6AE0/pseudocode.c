@@ -5,8 +5,8 @@ Menu *__userpurge HUDMainMenu::`scalar deleting destructor'@<eax>(
         double a4@<st0>,
         char a5)
 {
-  HUDMainMenu::~HUDMainMenu(this, a2, a3, a4);
-  if ( (a5 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  HUDMainMenu::~HUDMainMenu(this, a2, a3, a4); /*0x5a6ae3*/
+  if ( (a5 & 1) != 0 ) /*0x5a6aed*/
+    FormHeapFree((unsigned int)this); /*0x5a6af0*/
+  return this; /*0x5a6afa*/
 }

@@ -19,13 +19,22 @@
 0x6A527F: test    ecx, ecx
 0x6A5281: jz      short loc_6A528A
 0x6A5283: push    1
-0x6A5285: call    sub_419F10
+0x6A5285: call    MagicItem_UnloadVFXModels; MagicItem VFX model unload path. Walks spell art and effect-item VFX model references (weapons, armor, NPC/creature models, etc.) and removes them from the queued model loader/cache.
 0x6A528A: mov     ecx, esi; this
 0x6A528C: mov     [esp+18h+var_4], 0FFFFFFFFh
-0x6A5294: call    ??1ActiveEffect@@UAE@XZ; ActiveEffect::~ActiveEffect(void)
+0x6A5294: call    ??1ActiveEffect@@UAE@XZ; Verified ActiveEffect destructor detaches each associated MagicHitEffect by setting bFinished and ownerActiveEffect=null, clears/frees only the HitEffectNode list, and relies on the ActorProcessManager reference added during PostLink to own the BSTempEffect object's later update/removal.
 0x6A5299: mov     ecx, [esp+18h+var_C]
 0x6A529D: mov     large fs:0, ecx
 0x6A52A4: pop     ecx
 0x6A52A5: pop     esi
 0x6A52A6: add     esp, 10h
 0x6A52A9: retn
+0x9C6130: mov     ecx, [ebp-10h]; this
+0x9C6133: jmp     j_??1VampirismEffect@@UAE@XZ; VampirismEffect::~VampirismEffect(void)
+0x9C6138: mov     edx, [esp+arg_4]
+0x9C613C: lea     eax, [edx-8]
+0x9C613F: mov     ecx, [edx-0Ch]
+0x9C6142: xor     ecx, eax
+0x9C6144: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C6149: mov     eax, offset stru_AEE734
+0x9C614E: jmp     ___CxxFrameHandler3

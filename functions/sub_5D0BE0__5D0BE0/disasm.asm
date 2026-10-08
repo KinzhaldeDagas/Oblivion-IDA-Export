@@ -38,8 +38,8 @@
 0x5D0C4E: call    TESHealthForm_GetHealthForForm
 0x5D0C53: mov     [esp+1Ch+var_4], eax
 0x5D0C57: mov     eax, [esi+8]
-0x5D0C5A: push    eax
-0x5D0C5B: call    sub_470520
+0x5D0C5A: push    eax; form
+0x5D0C5B: call    TESForm_GetValue
 0x5D0C60: mov     [esp+20h+var_8], eax
 0x5D0C64: fild    [esp+20h+var_8]
 0x5D0C68: add     esp, 4
@@ -57,14 +57,14 @@
 0x5D0C8F: cmp     edi, 1
 0x5D0C92: jg      short loc_5D0C99
 0x5D0C94: mov     edi, 1
-0x5D0C99: mov     ecx, esi
-0x5D0C9B: call    TESHealthForm_GetHealth
+0x5D0C99: mov     ecx, esi; this
+0x5D0C9B: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x5D0CA0: imul    eax, edi
 0x5D0CA3: add     ebp, eax
 0x5D0CA5: mov     ecx, esi
 0x5D0CA7: call    ContainerEntryExtraData_DestroyDataTable
 0x5D0CAC: push    esi
-0x5D0CAD: call    FormHeapFree
+0x5D0CAD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5D0CB2: add     esp, 4
 0x5D0CB5: test    ebx, ebx
 0x5D0CB7: jnz     loc_5D0C01

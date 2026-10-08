@@ -1,7 +1,7 @@
-double __cdecl sub_67EEC0(char *a1, char *a2)
+double __cdecl sub_67EEC0(TESConnectedPoint *a1, TESConnectedPoint *a2)
 {
-  float *v2; // esi
-  float *v3; // eax
+  NiPoint3 *Position; // esi
+  NiPoint3 *v3; // eax
   float v5; // [esp+4h] [ebp-10h]
   float v6; // [esp+8h] [ebp-Ch]
   float v7; // [esp+Ch] [ebp-8h]
@@ -9,20 +9,20 @@ double __cdecl sub_67EEC0(char *a1, char *a2)
   float v9; // [esp+18h] [ebp+4h]
   float v10; // [esp+18h] [ebp+4h]
 
-  v5 = flt_A32048;
-  if ( a1 )
+  v5 = flt_A32048; /*0x67eece*/
+  if ( a1 ) /*0x67eed4*/
   {
-    if ( a2 )
+    if ( a2 ) /*0x67eedc*/
     {
-      v2 = (float *)sub_4BEF40(a2);
-      v3 = (float *)sub_4BEF40(a1);
-      v6 = *v3 - *v2;
-      v7 = v3[1] - v2[1];
-      v8 = v3[2] - v2[2];
-      v9 = v6 * v6 + v7 * v7 + v8 * v8;
-      v10 = sqrt(v9);
-      return (float)(v10 + v10);
+      Position = PathGraphNode_GetPosition(a2); /*0x67eee6*/
+      v3 = PathGraphNode_GetPosition(a1); /*0x67eee8*/
+      v6 = v3->x - Position->x; /*0x67eef1*/
+      v7 = v3->y - Position->y; /*0x67eefb*/
+      v8 = v3->z - Position->z; /*0x67ef05*/
+      v9 = v6 * v6 + v7 * v7 + v8 * v8; /*0x67ef25*/
+      v10 = sqrt(v9); /*0x67ef32*/
+      return (float)(v10 + v10); /*0x67ef3d*/
     }
   }
-  return v5;
+  return v5; /*0x67ef45*/
 }

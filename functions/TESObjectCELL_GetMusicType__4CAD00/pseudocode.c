@@ -1,24 +1,25 @@
+// Verified: resolves the music type for a cell by using region-data ID 7, virtual sound-type lookup, and a position/cell cache; falls back to worldspace music when no region sound type is selected.
 BSExtraData *__thiscall TESObjectCELL_GetMusicType(TESObjectCELL *this, int a2)
 {
-  float v3; // eax
-  int v4; // ecx
-  int v5; // edx
+  float x; // eax
+  float y; // ecx
+  float z; // edx
   BSExtraData *v6; // esi
   int *v7; // ecx
   TESWorldSpace *worldSpace; // ecx
   char v11; // bl
   CellCoordinates *coords; // eax
-  SInt32 x; // eax
+  SInt32 v13; // eax
   TESCELL_CoordOrLight v14; // eax
-  SInt32 y; // eax
+  SInt32 v15; // eax
   int *v16; // ebp
-  int v17; // eax
+  TESWorldSpace *v17; // eax
   int v18; // ebx
   int v19; // eax
   int v20; // eax
   int v21; // ebp
   int *v22; // esi
-  int v23; // eax
+  TESWorldSpace *v23; // eax
   int v24; // ebx
   int v25; // eax
   int v26; // eax
@@ -27,103 +28,109 @@ BSExtraData *__thiscall TESObjectCELL_GetMusicType(TESObjectCELL *this, int a2)
   int *v29; // [esp+18h] [ebp-4h]
   int v30; // [esp+20h] [ebp+4h]
 
-  sub_496EA0((char *)&stru_B35C80, this);
-  if ( (dword_B35E10 & 1) == 0 )
+  sub_496EA0((char *)&unk_B35C80, this); /*0x4cad0f*/
+  if ( (LOBYTE(g_CachedCellMusicPositionAndInit[2]) & 1) == 0 ) /*0x4cad1b*/
   {
-    v3 = Vector3_InitValue_;
-    v4 = *((_DWORD *)&Vector3_InitValue_ + 1);
-    v5 = LODWORD(dword_B3F9B0);
-    dword_B35E10 |= 1u;
-    *(float *)&qword_B35E04 = v3;
-    HIDWORD(qword_B35E04) = v4;
-    dword_B35E0C = v5;
+    x = g_zeroNiPoint3.x; /*0x4cad1d*/
+    y = g_zeroNiPoint3.y; /*0x4cad22*/
+    z = g_zeroNiPoint3.z; /*0x4cad28*/
+    LODWORD(g_CachedCellMusicPositionAndInit[2]) |= 1u; /*0x4cad2e*/
+    *(float *)&g_CachedCellMusicPositionX = x; /*0x4cad35*/
+    g_CachedCellMusicPositionAndInit[0] = y; /*0x4cad3a*/
+    g_CachedCellMusicPositionAndInit[1] = z; /*0x4cad40*/
   }
-  v6 = sub_41F9C0(&this->members.extraData);
-  if ( v6 || (this->members.flags0 & 1) != 0 )
-    goto LABEL_9;
-  v7 = (int *)sub_41F9B0(&this->members.extraData);
-  v29 = v7;
-  if ( !v7 )
+  v6 = sub_41F9C0(&this->members.extraData); /*0x4cad50*/
+  if ( v6 || (this->members.flags0 & 1) != 0 ) /*0x4cad5a*/
+    goto LABEL_9; /*0x4cad5a*/
+  v7 = (int *)sub_41F9B0(&this->members.extraData); /*0x4cad63*/
+  v29 = v7; /*0x4cad67*/
+  if ( !v7 ) /*0x4cad6b*/
   {
-    if ( (this->members.flags0 & 1) == 0 )
+    if ( (this->members.flags0 & 1) == 0 ) /*0x4cad71*/
     {
-      worldSpace = this->members.worldSpace;
-      if ( worldSpace )
-        v6 = (BSExtraData *)sub_4EF0F0(worldSpace);
+      worldSpace = this->members.worldSpace; /*0x4cad73*/
+      if ( worldSpace ) /*0x4cad78*/
+        v6 = (BSExtraData *)sub_4EF0F0(worldSpace); /*0x4cad7f*/
     }
 LABEL_9:
-    sub_496F50(&stru_B35C80, this);
-    return v6;
+    sub_496F50(&unk_B35C80, this); /*0x4cad81*/
+    return v6; /*0x4cad95*/
   }
   if ( a2
     && ((v11 = this->members.flags0 & 1) != 0 || (coords = this->members.coordOrLight.coords) == 0
-      ? (x = 0)
-      : (x = coords->x),
-        (v30 = x << 0xC, v28 = (x << 0xC) + 0x1000, v11)
+      ? (v13 = 0)
+      : (v13 = coords->x),
+        (v30 = v13 << 0xC, v28 = (v13 << 0xC) + 0x1000, v11)
      || (v14.coords = (CellCoordinates *)this->members.coordOrLight) == 0
-      ? (y = 0)
-      : (y = v14.coords->y),
+      ? (v15 = 0)
+      : (v15 = v14.coords->y),
         (double)v30 <= *(float *)a2
      && (double)v28 >= *(float *)a2
-     && (double)(y << 0xC) <= *(float *)(a2 + 4)
-     && (double)((y << 0xC) + 0x1000) >= *(float *)(a2 + 4)) )
+     && (double)(v15 << 0xC) <= *(float *)(a2 + 4)
+     && (double)((v15 << 0xC) + 0x1000) >= *(float *)(a2 + 4)) )
   {
-    if ( sub_8AA350((float *)a2, (float *)&qword_B35E04) && dword_B09554 != 3 )
+    if ( sub_8AA350((float *)a2, (float *)&g_CachedCellMusicPositionX) && g_CachedCellMusicType != 3 ) /*0x4cae53*/
     {
-      sub_496F50(&stru_B35C80, this);
-      return (BSExtraData *)dword_B09554;
+      sub_496F50(&unk_B35C80, this); /*0x4cae5b*/
+      return (BSExtraData *)g_CachedCellMusicType; /*0x4cae6c*/
     }
-    v16 = *(int **)(TESDataHandler + 0xCD8);
-    v17 = 0;
-    if ( !v11 )
-      v17 = (int)this->members.worldSpace;
-    v18 = *v16;
-    v19 = sub_4A67B0(v29, 7, *(float *)a2, *(float *)(a2 + 4), *(_DWORD *)(a2 + 8), v17);
-    v20 = (*(int (__thiscall **)(int *, int))(v18 + 0x1C))(v16, v19);
-    if ( v20 )
+    v16 = *(int **)&g_TESDataHandler[0xCD8]; /*0x4cae74*/
+    v17 = 0; /*0x4cae7a*/
+    if ( !v11 ) /*0x4cae7e*/
+      v17 = this->members.worldSpace; /*0x4cae80*/
+    v18 = *v16; /*0x4cae88*/
+    v19 = TESRegionList_SelectDataAtWorldPosition( /*0x4caea2*/
+            v29,
+            7,
+            *(float *)a2,
+            *(float *)(a2 + 4),
+            *(_DWORD *)(a2 + 8),
+            (int)v17);
+    v20 = (*(int (__thiscall **)(int *, int))(v18 + 0x1C))(v16, v19); /*0x4caead*/
+    if ( v20 ) /*0x4caeb3*/
     {
-      v21 = (*(int (__thiscall **)(int))(*(_DWORD *)v20 + 0x24))(v20);
-      dword_B09554 = v21;
+      v21 = (*(int (__thiscall **)(int))(*(_DWORD *)v20 + 0x24))(v20); /*0x4caebe*/
+      g_CachedCellMusicType = v21; /*0x4caec0*/
     }
     else
     {
-      v21 = 0;
-      dword_B09554 = 0;
+      v21 = 0; /*0x4caec8*/
+      g_CachedCellMusicType = 0; /*0x4caeca*/
     }
-    LODWORD(qword_B35E04) = *(_DWORD *)a2;
-    HIDWORD(qword_B35E04) = *(_DWORD *)(a2 + 4);
-    dword_B35E0C = *(_DWORD *)(a2 + 8);
-    dword_B35E00 = 0;
+    LODWORD(g_CachedCellMusicPositionX) = *(_DWORD *)a2; /*0x4caed2*/
+    g_CachedCellMusicPositionAndInit[0] = *(float *)(a2 + 4); /*0x4caedb*/
+    g_CachedCellMusicPositionAndInit[1] = *(float *)(a2 + 8); /*0x4caee4*/
+    g_CachedCellMusicCell = 0; /*0x4caee9*/
   }
-  else if ( dword_B35E00 && (TESObjectCELL *)dword_B35E00 == this )
+  else if ( g_CachedCellMusicCell && (TESObjectCELL *)g_CachedCellMusicCell == this ) /*0x4caefc*/
   {
-    v21 = dword_B09554;
+    v21 = g_CachedCellMusicType; /*0x4caefe*/
   }
   else
   {
-    v22 = *(int **)(TESDataHandler + 0xCD8);
-    v23 = 0;
-    if ( (this->members.flags0 & 1) == 0 )
-      v23 = (int)this->members.worldSpace;
-    v24 = *v22;
-    v25 = sub_4A6460(v7, 7, 0, v23);
-    v26 = (*(int (__thiscall **)(int *, int))(v24 + 0x1C))(v22, v25);
-    if ( v26 )
-      v21 = (*(int (__thiscall **)(int))(*(_DWORD *)v26 + 0x24))(v26);
+    v22 = *(int **)&g_TESDataHandler[0xCD8]; /*0x4caf0c*/
+    v23 = 0; /*0x4caf12*/
+    if ( (this->members.flags0 & 1) == 0 ) /*0x4caf18*/
+      v23 = this->members.worldSpace; /*0x4caf1a*/
+    v24 = *v22; /*0x4caf1d*/
+    v25 = TESRegionList_SelectDataForLocation(v7, 7, 0, (int)v23); /*0x4caf24*/
+    v26 = (*(int (__thiscall **)(int *, int))(v24 + 0x1C))(v22, v25); /*0x4caf2f*/
+    if ( v26 ) /*0x4caf33*/
+      v21 = (*(int (__thiscall **)(int))(*(_DWORD *)v26 + 0x24))(v26); /*0x4caf3e*/
     else
-      v21 = 0;
-    dword_B09554 = v21;
-    dword_B35E00 = (int)this;
+      v21 = 0; /*0x4caf42*/
+    g_CachedCellMusicType = v21; /*0x4caf44*/
+    g_CachedCellMusicCell = (int)this; /*0x4caf4a*/
   }
-  if ( !v21 && (this->members.flags0 & 1) == 0 )
+  if ( !v21 && (this->members.flags0 & 1) == 0 ) /*0x4caf58*/
   {
-    v27 = this->members.worldSpace;
-    if ( v27 )
+    v27 = this->members.worldSpace; /*0x4caf5a*/
+    if ( v27 ) /*0x4caf5f*/
     {
-      v21 = sub_4EF0F0(v27);
-      dword_B09554 = v21;
+      v21 = sub_4EF0F0(v27); /*0x4caf66*/
+      g_CachedCellMusicType = v21; /*0x4caf68*/
     }
   }
-  sub_496F50(&stru_B35C80, this);
-  return (BSExtraData *)v21;
+  sub_496F50(&unk_B35C80, this); /*0x4caf74*/
+  return (BSExtraData *)v21; /*0x4cad8e*/
 }

@@ -1,35 +1,35 @@
 void __thiscall DisintegrateArmorEffect_Apply(int this)
 {
-  MagicTarget *v5; // ecx
+  MagicTarget *v2; // ecx
   Actor *ParentActor; // eax
-  TESObjectREFR *v7; // esi
-  int **v8; // eax
+  TESObjectREFR *v4; // esi
+  int **v5; // eax
   char *Name; // eax
-  CHAR *v10; // [esp+8h] [ebp-18h]
-  double v11; // [esp+Ch] [ebp-14h]
+  CHAR *v7; // [esp+8h] [ebp-18h]
+  double v8; // [esp+Ch] [ebp-14h]
 
-  v5 = *(MagicTarget **)(this + 0x20);
-  if ( v5 )
+  v2 = *(MagicTarget **)(this + 0x20); /*0x693654*/
+  if ( v2 ) /*0x693659*/
   {
-    ParentActor = MagicTarget_GetParentActor(v5);
-    v7 = (TESObjectREFR *)ParentActor;
-    if ( ParentActor )
+    ParentActor = MagicTarget_GetParentActor(v2); /*0x69365c*/
+    v4 = (TESObjectREFR *)ParentActor; /*0x693661*/
+    if ( ParentActor ) /*0x693665*/
     {
-      v8 = sub_5E5A00(ParentActor);
-      *(_DWORD *)(this + 0x38) = v8;
-      if ( v8 )
+      v5 = Actor_SelectArmorOrShieldForHitDamage(ParentActor); /*0x693669*/
+      *(_DWORD *)(this + 0x38) = v5; /*0x693670*/
+      if ( v5 ) /*0x693673*/
       {
-        ((void (__thiscall *)(TESObjectREFR *, int **, _DWORD, int))v7->vtbl[1].Unk_47)(
-          v7,
-          v8,
+        ((void (__thiscall *)(TESObjectREFR *, int **, _DWORD, int))v4->vtbl[1].Unk_47)( /*0x693689*/
+          v4,
+          v5,
           *(float *)(this + 0x18),
           1);
-        if ( byte_B3B908 )
+        if ( unk_B3B908 ) /*0x69368b*/
         {
-          v11 = *(float *)(this + 0x18);
-          v10 = sub_488DF0(*(EntryData **)(this + 0x38));
-          Name = TESObjectREFR_GetName(v7);
-          Interface_ConsolePrint("%s's %s takes %0.2f disintegrate armor damage!", Name, v10, v11);
+          v8 = *(float *)(this + 0x18); /*0x6936a5*/
+          v7 = sub_488DF0(*(EntryData **)(this + 0x38)); /*0x6936ad*/
+          Name = TESObjectREFR_GetName(v4); /*0x6936b0*/
+          Interface_ConsolePrint("%s's %s takes %0.2f disintegrate armor damage!", Name, v7, v8); /*0x6936bb*/
         }
       }
     }

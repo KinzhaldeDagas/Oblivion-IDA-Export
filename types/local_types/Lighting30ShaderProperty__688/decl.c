@@ -1,1 +1,1 @@
-Lighting30ShaderProperty
+struct Lighting30ShaderProperty;

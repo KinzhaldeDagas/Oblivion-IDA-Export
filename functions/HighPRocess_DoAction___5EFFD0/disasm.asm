@@ -1,4 +1,4 @@
-0x5EFFD0: push    ebp
+0x5EFFD0: push    ebp; Void Actor action-transition wrapper. Performs transition-specific bow/held-arrow visual cleanup, then commits action and sequence through process vtable +0x2D8. It has no success/result contract; callers/plugins must not consume EAX, so Crossbow's UInt32 HighProcessDoActionFn typedef is incorrect. Meaningful current-action state is HighProcess-only: HighProcess +0x2D0/+0x2D8 read/store +0x1F4/+0x1F8, while MiddleHigh returns None (-1) and its setter is a no-op; Crossbow's process-level-0 action filter therefore matches Oblivion. External Crossbow state-machine contrast: Equip-as-Cocked/first-shot-loaded is plugin policy, repeated action 4 while Reloading can flip state to Cocked and rebuild controller tracking, and interruption/cancellation actions are not modeled, leaving stale Reloading/Cocked phases.
 0x5EFFD1: push    esi
 0x5EFFD2: mov     esi, ecx
 0x5EFFD4: cmp     dword ptr [esi+58h], 0
@@ -10,13 +10,13 @@
 0x5EFFE7: jmp     short loc_5EFFEC
 0x5EFFE9: or      eax, 0FFFFFFFFh
 0x5EFFEC: sub     eax, 3
-0x5EFFEF: mov     ebp, [esp+8+arg_4]
+0x5EFFEF: mov     ebp, [esp+8+sequence]
 0x5EFFF3: jz      loc_5F0092
 0x5EFFF9: sub     eax, 2
 0x5EFFFC: jz      loc_5F00D2
 0x5F0002: sub     eax, 1
 0x5F0005: jnz     loc_5F018E
-0x5F000B: mov     eax, [esp+8+arg_0]
+0x5F000B: mov     eax, dword ptr [esp+8+action]
 0x5F000F: sub     eax, 2
 0x5F0012: jz      short loc_5F0019
 0x5F0014: sub     eax, 4
@@ -24,37 +24,37 @@
 0x5F0019: test    ebp, ebp
 0x5F001B: jz      short loc_5F004B
 0x5F001D: mov     ecx, [ebp+68h]
-0x5F0020: call    TESAnimGroup_GetAnimationGroup
+0x5F0020: call    TESAnimGroup_GetAnimationGroup; TESAnimGroup native group id accessor: byte at TESAnimGroup +0x08.
 0x5F0025: cmp     eax, 1Dh
 0x5F0028: jz      loc_5F018E
 0x5F002E: test    ebp, ebp
 0x5F0030: jz      short loc_5F004B
 0x5F0032: mov     ecx, [ebp+68h]
-0x5F0035: call    TESAnimGroup_GetAnimationGroup
+0x5F0035: call    TESAnimGroup_GetAnimationGroup; TESAnimGroup native group id accessor: byte at TESAnimGroup +0x08.
 0x5F003A: lea     eax, [eax+eax*8]
 0x5F003D: cmp     dword ptr ds:0B102E8h[eax*4], 1
 0x5F0045: jz      loc_5F018E
-0x5F004B: mov     ecx, esi
-0x5F004D: call    TESObjectREFR_GetAnimData
+0x5F004B: mov     ecx, esi; this
+0x5F004D: call    TESObjectREFR_GetAnimData; Return active ActorAnimData for an actor reference. For actor/creature refs with process level 0 or 1, return process+0x17C; otherwise tail-call the ExtraAnim lookup on the reference extra list. Exact return type is ActorAnimData*.
 0x5F0052: test    eax, eax
 0x5F0054: jz      loc_5F018E
 0x5F005A: fldz
 0x5F005C: push    ecx
-0x5F005D: fstp    [esp+0Ch+var_C]; float
-0x5F0060: mov     ecx, eax
-0x5F0062: push    1; int
-0x5F0064: call    sub_470FC0
+0x5F005D: fstp    [esp+0Ch+easeOutTime]; easeOutTime
+0x5F0060: mov     ecx, eax; this
+0x5F0062: push    1; slot
+0x5F0064: call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.
 0x5F0069: mov     ecx, ds:0B333C4h; this
 0x5F006F: cmp     esi, ecx
 0x5F0071: jnz     loc_5F018E
-0x5F0077: push    1; a2
-0x5F0079: call    Player_GetAnimData
+0x5F0077: push    1; firstPerson
+0x5F0079: call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.
 0x5F007E: fldz
 0x5F0080: push    ecx
-0x5F0081: fstp    [esp+0Ch+var_C]; float
-0x5F0084: push    1; int
-0x5F0086: mov     ecx, eax
-0x5F0088: call    sub_470FC0
+0x5F0081: fstp    [esp+0Ch+easeOutTime]; easeOutTime
+0x5F0084: push    1; slot
+0x5F0086: mov     ecx, eax; this
+0x5F0088: call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.
 0x5F008D: jmp     loc_5F018E
 0x5F0092: cmp     dword ptr [esi+58h], 0
 0x5F0096: jz      loc_5F01A7
@@ -81,8 +81,8 @@
 0x5F00E7: call    eax
 0x5F00E9: cmp     eax, 5
 0x5F00EC: jnz     short loc_5F00F5
-0x5F00EE: cmp     [esp+8+arg_0], 3
-0x5F00F3: jnz     short loc_5F011F
+0x5F00EE: cmp     dword ptr [esp+8+action], 3
+0x5F00F3: jnz     short loc_5F011F; Leaving current action 5 (AttackBowArrowAttached) for anything except action 3 enters attached-arrow visual cleanup.
 0x5F00F5: cmp     dword ptr [esi+58h], 0
 0x5F00F9: jz      loc_5F01A7
 0x5F00FF: mov     ecx, [esi+58h]
@@ -91,10 +91,10 @@
 0x5F010A: call    eax
 0x5F010C: cmp     eax, 3
 0x5F010F: jnz     short loc_5F018E
-0x5F0111: cmp     [esp+8+arg_0], 0FFFFFFFFh
+0x5F0111: cmp     dword ptr [esp+8+action], 0FFFFFFFFh
 0x5F0116: jz      short loc_5F018E
-0x5F0118: cmp     [esp+8+arg_0], 2
-0x5F011D: jz      short loc_5F018E
+0x5F0118: cmp     dword ptr [esp+8+action], 2
+0x5F011D: jz      short loc_5F018E; Leaving action 3 (AttackFollowThrough) also performs cleanup unless next action is None (-1) or Attack (2).
 0x5F011F: mov     edx, [esi]
 0x5F0121: mov     eax, [edx+168h]
 0x5F0127: push    ebx
@@ -108,16 +108,16 @@
 0x5F013C: jnz     short loc_5F016A
 0x5F013E: mov     ebx, 2
 0x5F0143: jmp     short loc_5F014B
-0x5F0145: mov     ecx, ds:0B333C4h
+0x5F0145: mov     ecx, ds:0B333C4h; this
 0x5F014B: cmp     esi, ecx
 0x5F014D: jnz     short loc_5F016A
 0x5F014F: cmp     ebx, 1
 0x5F0152: jnz     short loc_5F016A
 0x5F0154: mov     dl, [ecx+588h]
-0x5F015A: mov     byte ptr [esp+10h+arg_4], dl
-0x5F015E: mov     eax, [esp+10h+arg_4]
-0x5F0162: push    eax
-0x5F0163: call    sub_6600D0
+0x5F015A: mov     byte ptr [esp+10h+sequence], dl
+0x5F015E: mov     eax, [esp+10h+sequence]
+0x5F0162: push    eax; firstPerson
+0x5F0163: call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.
 0x5F0168: mov     edi, eax
 0x5F016A: mov     ecx, [esi+58h]
 0x5F016D: mov     edx, [ecx]
@@ -126,8 +126,8 @@
 0x5F0176: call    eax
 0x5F0178: test    eax, eax
 0x5F017A: jz      short loc_5F0187
-0x5F017C: lea     ecx, [eax+0ACh]
-0x5F0182: call    sub_477EF0
+0x5F017C: lea     ecx, [eax+0ACh]; this
+0x5F0182: call    NiTObjectArray_ClearAndRelease; Defensive interruption/post-follow-through cleanup inside Actor_SetCurrentActionWithBowVisualCleanup: clears all children of the perspective-correct cached ArrowBone when action 5 leaves to anything except action 3, or bow action 3 leaves to anything except None/Attack. Normal action-5 -> action-3 Release already cleared the held visual at 0x5FD23A; this is not the ordinary per-release boundary.
 0x5F0187: sub     ebx, 1
 0x5F018A: jnz     short loc_5F0145
 0x5F018C: pop     edi
@@ -136,11 +136,11 @@
 0x5F0192: jz      short loc_5F01A7
 0x5F0194: mov     ecx, [esi+58h]
 0x5F0197: mov     edx, [ecx]
-0x5F0199: mov     eax, [esp+8+arg_0]
+0x5F0199: mov     eax, dword ptr [esp+8+action]
 0x5F019D: mov     edx, [edx+2D8h]
 0x5F01A3: push    ebp
 0x5F01A4: push    eax
-0x5F01A5: call    edx
+0x5F01A5: call    edx; Commit requested current-action ID and associated sequence after transition-specific visual cleanup.
 0x5F01A7: pop     esi
 0x5F01A8: pop     ebp
 0x5F01A9: retn    8

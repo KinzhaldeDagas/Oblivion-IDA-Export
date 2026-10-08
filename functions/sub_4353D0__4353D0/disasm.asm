@@ -42,7 +42,7 @@
 0x435438: mov     edx, [eax+31Ch]
 0x43543E: push    1
 0x435440: call    edx
-0x435442: cmp     ebx, TESDataHandler_g_PlayerRef
+0x435442: cmp     ebx, dword ptr reference
 0x435448: jz      short loc_43546E
 0x43544A: mov     eax, [ebx+0Ch]
 0x43544D: mov     ecx, [edi+24h]

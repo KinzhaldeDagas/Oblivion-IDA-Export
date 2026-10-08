@@ -1,4 +1,4 @@
-0x4F51E0: fldz
+0x4F51E0: fldz; IsIdlePlaying command helper. Looks up target ActorAnimData and returns 1.0 only when ActorAnimData_IsIdleInactive reports false; prints the result in console mode.
 0x4F51E2: mov     ecx, [esp+arg_0]
 0x4F51E6: test    ecx, ecx
 0x4F51E8: push    esi
@@ -11,7 +11,7 @@
 0x4F51FB: test    eax, eax
 0x4F51FD: jz      short loc_4F520E
 0x4F51FF: mov     ecx, eax
-0x4F5201: call    sub_472EA0
+0x4F5201: call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.
 0x4F5206: test    al, al
 0x4F5208: jnz     short loc_4F520E
 0x4F520A: fld1

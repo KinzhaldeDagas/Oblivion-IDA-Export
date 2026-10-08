@@ -13,10 +13,10 @@
 0x4F4C2E: test    al, al
 0x4F4C30: jz      short loc_4F4C4F
 0x4F4C32: push    offset aAlarm; "Alarm"
-0x4F4C37: mov     ecx, esi
-0x4F4C39: call    sub_5E4080
-0x4F4C3E: push    eax; Str1
-0x4F4C3F: call    __strcmp
+0x4F4C37: mov     ecx, esi; this
+0x4F4C39: call    Actor__GetCurrentPackageTypeName; MEF v31 verified GetAlarmed guard site: sub_5E4080 can return null (missing process/state); substitute a nonmatching empty string before vanilla strcmp at 0x4F4C3F.
+0x4F4C3E: push    eax; left
+0x4F4C3F: call    CRT_StricmpLocaleDispatch
 0x4F4C44: add     esp, 8
 0x4F4C47: test    eax, eax
 0x4F4C49: jnz     short loc_4F4C4F

@@ -1,108 +1,101 @@
-void __thiscall sub_67E3D0(char *this, int *a2, void *a3)
+// Verified route-surface consumer follows the graph-node predecessor pointer at +0x0C, emits TeleportData at each connected point's +0x14 position, and transfers water/SubSpace flags to route-node metadata.
+void __thiscall sub_67E3D0(char *this, NiDX92DBufferData **a2, void *a3)
 {
   float *v4; // esi
   float *v5; // eax
-  char *CastingType; // edi
-  char *v7; // eax
-  _BYTE *v8; // eax
-  _BYTE *v9; // esi
+  TESConnectedPoint *CastingType; // edi
+  NiPoint3 *Position; // eax
+  TeleportData *v8; // eax
+  TeleportData *v9; // esi
   Actor *v10; // ecx
   char v11; // al
   char v12; // al
   char v13; // al
-  char *v14; // eax
-  float v15; // edx
+  NiPoint3 *v14; // eax
+  float z; // edx
   float v16; // ecx
   double v17; // st6
-  NiNode *Health; // eax
-  int v19; // [esp+10h] [ebp-30h] BYREF
-  float v20; // [esp+14h] [ebp-2Ch]
+  NiDX92DBufferData *Health; // eax
+  int x_low; // [esp+10h] [ebp-30h] BYREF
+  float y; // [esp+14h] [ebp-2Ch]
   float v21; // [esp+18h] [ebp-28h]
-  float v22; // [esp+1Ch] [ebp-24h] BYREF
-  float v23; // [esp+20h] [ebp-20h]
-  float v24; // [esp+24h] [ebp-1Ch]
-  float v25; // [esp+28h] [ebp-18h] BYREF
-  float v26; // [esp+2Ch] [ebp-14h]
-  float v27; // [esp+30h] [ebp-10h]
-  int v28; // [esp+34h] [ebp-Ch] BYREF
-  float v29; // [esp+38h] [ebp-8h]
-  float v30; // [esp+3Ch] [ebp-4h]
+  NiPoint3 v22; // [esp+1Ch] [ebp-24h] BYREF
+  NiPoint3 v23; // [esp+28h] [ebp-18h] BYREF
+  int v24; // [esp+34h] [ebp-Ch] BYREF
+  float v25; // [esp+38h] [ebp-8h]
+  float v26; // [esp+3Ch] [ebp-4h]
 
-  if ( a2 )
+  if ( a2 ) /*0x67e3dd*/
   {
-    sub_68C6E0(a2);
-    v4 = (float *)(this + 0xC);
-    if ( sub_8AA390((float *)this, (float *)this + 3) )
+    sub_68C6E0(a2); /*0x67e3e6*/
+    v4 = (float *)(this + 0xC); /*0x67e3eb*/
+    if ( NiPoint3__NotEqual((const NiPoint3 *)this, (const NiPoint3 *)this + 1) /*0x67e41d*/
+      && NiPoint3__NotEqual((const NiPoint3 *)this, &stru_B15450)
+      && NiPoint3__NotEqual((const NiPoint3 *)this + 1, &stru_B15450) )
     {
-      if ( sub_8AA390((float *)this, (float *)&dword_B15450) )
+      v5 = (float *)sub_68C280((TeleportData **)a2, (NiPoint3 *)this + 1, 0); /*0x67e430*/
+      sub_68CB40(v5, a3); /*0x67e43c*/
+      if ( *((_DWORD *)this + 7) && (CastingType = *((TESConnectedPoint **)this + 9)) != 0 ) /*0x67e450*/
       {
-        if ( sub_8AA390((float *)this + 3, (float *)&dword_B15450) )
+        do /*0x67e4c7*/
         {
-          v5 = (float *)sub_68C280(a2, (_DWORD *)this + 3, 0);
-          sub_68CB40(v5, a3);
-          if ( *((_DWORD *)this + 7) && (CastingType = *((char **)this + 9)) != 0 )
+          Position = PathGraphNode_GetPosition(CastingType); /*0x67e45a*/
+          v8 = sub_68C280((TeleportData **)a2, Position, 0); /*0x67e462*/
+          v9 = v8; /*0x67e467*/
+          if ( v8 ) /*0x67e46b*/
           {
-            do
+            sub_68CA30(v8, 1); /*0x67e471*/
+            v10 = *((Actor **)this + 0xA); /*0x67e476*/
+            if ( !v10 || !Actor_IsCreature(v10) ) /*0x67e47d*/
             {
-              v7 = sub_4BEF40(CastingType);
-              v8 = sub_68C280(a2, v7, 0);
-              v9 = v8;
-              if ( v8 )
-              {
-                sub_68CA30(v8, 1);
-                v10 = *((Actor **)this + 0xA);
-                if ( !v10 || !Actor_IsCreature(v10) )
-                {
-                  v11 = sub_4E8040((float *)CastingType);
-                  sub_68CA60(v9, v11);
-                }
-                v12 = sub_67ECF0(CastingType);
-                sub_68CA90(v9, v12);
-                v13 = sub_67ED20(CastingType);
-                sub_68CAC0(v9, v13);
-                sub_68CB10(v9, 1);
-              }
-              CastingType = (char *)TESEnchantableForm_GetCastingType(CastingType);
+              v11 = sub_4E8040((float *)CastingType->totalEstimateCost); /*0x67e488*/
+              sub_68CA60(v9, v11); /*0x67e490*/
             }
-            while ( CastingType );
-            v14 = sub_4BEF40(*((char **)this + 9));
-            v4 = (float *)(this + 0xC);
-            v19 = *(int *)v14;
-            v20 = *((float *)v14 + 1);
-            v15 = *((float *)v14 + 2);
+            v12 = GraphNode_IsBelowWaterFlagSet(CastingType); /*0x67e497*/
+            sub_68CA90(v9, v12); /*0x67e49f*/
+            v13 = PathGraphNode_IsUnderwaterCacheSet(CastingType); /*0x67e4a6*/
+            sub_68CAC0(v9, v13); /*0x67e4ae*/
+            sub_68CB10(v9, 1); /*0x67e4b7*/
           }
-          else
-          {
-            v16 = *((float *)this + 1);
-            v15 = *((float *)this + 2);
-            v19 = *(int *)this;
-            v20 = v16;
-          }
-          v21 = v15;
-          sub_68C280(a2, this, 0);
-          if ( !TES->currentInteriorCell )
-          {
-            if ( sub_43F7C0((int *)TES, (float *)&v19, v4, (float *)&v28, 1.0) )
-            {
-              v22 = *v4 - *(float *)&v19;
-              v23 = v4[1] - v20;
-              v24 = 0.0;
-              sub_43F350(&v22);
-              v17 = dbl_A3F3E8;
-              v25 = v22 * v17;
-              v26 = v23 * v17;
-              v27 = v17 * v24;
-              v30 = v21;
-              v22 = *(float *)&v28 - v25;
-              v23 = v29 - v26;
-              v24 = v21 - v27;
-              v25 = *(float *)&v28 + v25;
-              v26 = v26 + v29;
-              v27 = v21 + v27;
-              Health = TESHealthForm_GetHealth((Sky *)a2);
-              sub_68C3A0(a2, &v22, &v25, Health);
-            }
-          }
+          CastingType = (TESConnectedPoint *)TESEnchantableForm_GetCastingType(CastingType); /*0x67e4c3*/
+        }
+        while ( CastingType ); /*0x67e4c7*/
+        v14 = PathGraphNode_GetPosition(*((TESConnectedPoint **)this + 9)); /*0x67e4cc*/
+        v4 = (float *)(this + 0xC); /*0x67e4d3*/
+        x_low = SLODWORD(v14->x); /*0x67e4d7*/
+        y = v14->y; /*0x67e4de*/
+        z = v14->z; /*0x67e4e2*/
+      }
+      else
+      {
+        v16 = *((float *)this + 1); /*0x67e4e9*/
+        z = *((float *)this + 2); /*0x67e4ec*/
+        x_low = *(int *)this; /*0x67e4ef*/
+        y = v16; /*0x67e4f3*/
+      }
+      v21 = z; /*0x67e4fc*/
+      sub_68C280((TeleportData **)a2, (NiPoint3 *)this, 0); /*0x67e500*/
+      if ( !MEMORY[0xB333A0]->currentInteriorCell ) /*0x67e50b*/
+      {
+        if ( sub_43F7C0((int *)MEMORY[0xB333A0], (float *)&x_low, v4, (float *)&v24, 1.0) ) /*0x67e527*/
+        {
+          v22.x = *v4 - *(float *)&x_low; /*0x67e53e*/
+          v22.y = v4[1] - y; /*0x67e549*/
+          v22.z = 0.0; /*0x67e54f*/
+          Vector3_NormalizeInPlace(&v22.x); /*0x67e553*/
+          v17 = dbl_A3F3E8; /*0x67e560*/
+          v23.x = v22.x * v17; /*0x67e56a*/
+          v23.y = v22.y * v17; /*0x67e574*/
+          v23.z = v17 * v22.z; /*0x67e57c*/
+          v26 = v21; /*0x67e584*/
+          v22.x = *(float *)&v24 - v23.x; /*0x67e598*/
+          v22.y = v25 - v23.y; /*0x67e5ac*/
+          v22.z = v21 - v23.z; /*0x67e5bc*/
+          v23.x = *(float *)&v24 + v23.x; /*0x67e5c6*/
+          v23.y = v23.y + v25; /*0x67e5ce*/
+          v23.z = v21 + v23.z; /*0x67e5d4*/
+          Health = (NiDX92DBufferData *)TESHealthForm_GetHealth((TESHealthForm *)a2); /*0x67e5d8*/
+          sub_68C3A0((TeleportData **)a2, &v22, &v23, Health); /*0x67e5ea*/
         }
       }
     }

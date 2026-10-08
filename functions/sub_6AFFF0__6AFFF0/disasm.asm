@@ -1,4 +1,4 @@
-0x6AFFF0: mov     ecx, ds:0B3C0F0h
+0x6AFFF0: mov     ecx, ds:0B3C0F0h; ODismemberment combat decode: block-hit sound router. Chooses WPNBlockHand/Blade/Blunt/Staff/Bow or enchanted hit variants, then routes through the same positioned sound tail as weapon hit audio.
 0x6AFFF6: sub     esp, 18h
 0x6AFFF9: push    esi
 0x6AFFFA: push    edi

@@ -1,18 +1,31 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7FB400",
+      "0x7FB462"
+    ]
+  ],
+  "chunks_sha256": "f35bde7e6072314b4dc4bb3861363c33c1414cc1b0e0ca059e477dd82a50178d",
+  "comment_regular": "Lighting30 vtable +0x30 current-pass wrapper. Performs the native type-0xA property-side reset, then delegates to NiD3DShader_ApplyCurrentPassState so the selected pass render-state group and texture stages reach DX9.\nDX11 GPU-world verification 2026-10-01: vtable +0x30 validates effective property type 0xA then clears property+0x100 (per-draw object-space-source preparation flag) before delegating NiD3DShader_ApplyCurrentPassState. 7FB6F0 tests this byte and sets it to 1 before transforming current eye/light sources. A replacement transaction must preserve both writes/order; source computation alone is not the native flag commit.\nDX11 vertex-source commit audit 2026-10-01: exact A930C4 vtable+30 wrapper clears effective type0A property+100 on each accepted pass. Added partial IDA type OblivionLighting30PropertySourcePrefix with verified ShaderFlags at1C and ObjectSpaceConstantsPrepared at100; this is a prefix, not a reconstructed full class or sizeof claim.\nDX11 source-flag follow-up 2026-10-01: current Lighting30 vtable+40 is nullsub_ret0_20, +44 is76C7D0 (restores lighting/render-state group), and +4C is77A0F0 (ends pass, advances index/refcounted current pass). Inspected ordinary handlers do not reset the property preparation byte. Full callback/code/owner closure remains an enclosing replacement-transaction obligation, not a consequence of the sparse metadata plan alone.\n\nLighting30 vtable +0x30 current-pass wrapper. Performs the native type-0xA property-side reset, then delegates to NiD3DShader_ApplyCurrentPassState so the selected pass render-state group and texture stages reach DX9.",
+  "comment_repeatable": "Lighting30 vtable +0x30 current-pass wrapper. Performs the native type-0xA property-side reset, then delegates to NiD3DShader_ApplyCurrentPassState so the selected pass render-state group and texture stages reach DX9.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7FB400",
+  "display_name": "Lighting30Shader_ApplyCurrentPassState",
   "end_ea": "0x7FB462",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7FB400",
+  "name": "Lighting30Shader_ApplyCurrentPassState",
   "segment": ".text",
   "sha256": "f35bde7e6072314b4dc4bb3861363c33c1414cc1b0e0ca059e477dd82a50178d",
   "size": 98,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7FB400",
+  "total_chunk_size": 98,
   "type": "int __thiscall(NiD3DShader *this, int, int, int, int, int, int, int)",
   "xrefs_from_count": 44,
   "xrefs_to_count": 1

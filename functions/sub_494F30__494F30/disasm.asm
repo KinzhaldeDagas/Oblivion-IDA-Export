@@ -3,7 +3,7 @@
 0x494F33: mov     eax, [esi+1Ch]
 0x494F36: push    edi
 0x494F37: push    eax
-0x494F38: call    FormHeapFree
+0x494F38: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x494F3D: mov     ecx, [esi+0Ch]
 0x494F40: add     esp, 4
 0x494F43: push    0FFFF0000h; lParam

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5E5370",
-    "line": "test    edi, edi",
+    "line": "test    edi, edi; AVU decode: resolves effect-specific resistance AV from effect setting +0x68, excluding -1 and the same AV as the magic-item bucket.",
     "mnemonic": "test",
     "size": 2
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x5E5384",
-    "line": "mov     eax, [edx+68h]",
+    "line": "mov     eax, [edx+68h]; EffectSetting +0x68 supplies a second resistance actor value; it is skipped when absent or identical to the item-level bucket.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x5E539D",
-    "line": "fstp    [esp+4+arg_10]",
+    "line": "fstp    [esp+4+arg_10]; Stores target current float effect-specific resistance into the Calc_MagicTargetResistanceFactor arg_10 slot (entry +0x14).",
     "mnemonic": "fstp",
     "size": 4
   }

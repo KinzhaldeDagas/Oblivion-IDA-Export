@@ -1,19 +1,36 @@
 {
-  "callees_count": 43,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 23,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7A45F0",
+  "chunks": [
+    [
+      "0x7A45F0",
+      "0x7A4943"
+    ],
+    [
+      "0x9CCA80",
+      "0x9CCAB1"
+    ]
+  ],
+  "chunks_sha256": "3db84e6907d2538f4a219c9dcc6d20ead76e36c891e9168701bfb8a49204abea",
+  "comment_regular": "2026-05-19 captured 4.x load pass: compact stock tree compute still has no observed 27000/29000/40000 generation consumer. 40000 root-support compatibility remains sidecar parse/sanitize only until a branch-generation translator/replacement exists.\n\n[2026-10-03 generation context] Root CBranch::Compute callsite7A48F9 and recursive79390F are the only direct code references found to7925B0. Plugin captures CSpeedTreeRT from EBX at caller78CD02 (ECX=this CTreeEngine, one float stack argument; ret4) to obtain one immutable sidecar rules snapshot before recursive generation. Settings absent/invalid/unready preserve the original path; invalid retention is explicitly logged.\n[RT4.1 parity v145 2026-10-07] Stock initializes identity nine-float basis7A4898..7A48BA and calls trunk7925B0 at7A48F9. RT4.1 SourceCode/TreeEngine.cpp138-139 applies RotateZ(treeAngle) before trunk call. v145 root wrapper now supplies authored74002 initial Z basis only at level0; child cluster reset is preserved. Source reference remains read-only. Build/gateway evidence does not establish full RT4.1 parity.\n\nOBLIVION AUTHORITY 2026-08-27: Generated/parsed leaf-LOD gate is parsedLeafLodFlag. Flag 0 allocates explicit leaf-LOD vectors, always runs CBranch::Compute to make leaves, then calls BuildLeafLods. Flag 1 skips allocation and BuildLeafLods because token-7000 data supplied explicit LOD vectors.\nSpeedTreeOBSE v162 VERIFIED: installs weight level from engine+F0 at7A46C3 and round-robin seed from engine+48 at7A4886. No per-tree write to B429C8 in this compute body. Plugin scoped propagation fixes cross-tree state retention; secondary group scheduling is private and does not mutate native round-robin. Full paired wind render path remains UNVERIFIED/incomplete.",
+  "comment_repeatable": "OBLIVION AUTHORITY 2026-08-27: Generated/parsed leaf-LOD gate is parsedLeafLodFlag. Flag 0 allocates explicit leaf-LOD vectors, always runs CBranch::Compute to make leaves, then calls BuildLeafLods. Flag 1 skips allocation and BuildLeafLods because token-7000 data supplied explicit LOD vectors.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "OB_CTreeEngine_Compute_010201A0",
   "end_ea": "0x7A4943",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7A45F0",
+  "name": "OB_CTreeEngine_Compute_010201A0",
   "segment": ".text",
   "sha256": "7890fcfe26b46997b79a5e4b1f99a2db67e0c568f77ceae9ea6fcad24812246f",
   "size": 851,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A45F0",
-  "type": "void __thiscall(_BYTE *this, float)",
-  "xrefs_from_count": 311,
+  "total_chunk_size": 900,
+  "type": "void __thiscall(OB_CTreeEngine_010201A0 *this, float leafSizeIncreaseFactor)",
+  "xrefs_from_count": 330,
   "xrefs_to_count": 1
 }

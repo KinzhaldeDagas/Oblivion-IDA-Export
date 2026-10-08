@@ -1,28 +1,36 @@
-void __thiscall sub_7A8F30(unsigned int *this, int *a2)
+// OBLIVION AUTHORITY (2026-08-30): Pushes one {primaryLeaf, matchedLeaf} SLodEntry into CLeafLodEngine::m_vPairs, using in-place construction or the insert-one growth path.
+void __thiscall OB_stVectorLeafLodEntry_PushBack_010201A0(
+        OB_stVectorLeafLodEntry_010201A0 *this,
+        const OB_CLeafLodEngine_SLodEntry_010201A0 *value)
 {
-  unsigned int v3; // edx
-  unsigned int v4; // ecx
-  _DWORD *v5; // edi
-  char *v6; // edi
-  unsigned int *v7; // [esp+8h] [ebp-8h] BYREF
+  int v2; // ebx
+  OB_CLeafLodEngine_SLodEntry_010201A0 *begin; // edx
+  unsigned int size; // ecx
+  OB_CLeafLodEngine_SLodEntry_010201A0 *end; // edi
+  OB_CLeafLodEngine_SLodEntry_010201A0 *v7; // edi
+  OB_stVectorLeafLodEntryIterator_010201A0 result; // [esp+8h] [ebp-8h] BYREF
 
-  v3 = *(this + 1);
-  if ( v3 )
-    v4 = (int)(*(this + 2) - v3) >> 3;
+  begin = this->begin; /*0x7a8f36*/
+  if ( begin ) /*0x7a8f3c*/
+    size = this->end - begin; /*0x7a8f47*/
   else
-    v4 = 0;
-  if ( v3 && v4 < (int)(*(this + 3) - v3) >> 3 )
+    size = 0; /*0x7a8f3e*/
+  if ( begin && size < this->capacity - begin ) /*0x7a8f58*/
   {
-    v5 = (_DWORD *)*(this + 2);
-    LOBYTE(v7) = 0;
-    sub_7A8720(v5, 1, a2);
-    *(this + 2) = (unsigned int)(v5 + 2);
+    end = this->end; /*0x7a8f62*/
+    LOBYTE(result.owner) = 0; /*0x7a8f65*/
+    OB_LeafLodEntry_UninitializedFillN_010201A0(end, 1u, value); /*0x7a8f75*/
+    this->end = end + 1; /*0x7a8f80*/
   }
   else
   {
-    v6 = (char *)*(this + 2);
-    if ( v3 > (unsigned int)v6 )
-      _invalid_parameter_noinfo();
-    sub_7A8D90(this, &v7, this, v6, a2);
+    v7 = this->end; /*0x7a8f8b*/
+    if ( begin > v7 ) /*0x7a8f90*/
+      _invalid_parameter_noinfo(v2, (int)v7, (int)this); /*0x7a8f92*/
+    OB_stVectorLeafLodEntry_InsertOne_010201A0( /*0x7a8fa5*/
+      this,
+      &result,
+      (OB_stVectorLeafLodEntryIterator_010201A0)__PAIR64__((unsigned int)v7, (unsigned int)this),
+      value);
   }
 }

@@ -1,4 +1,4 @@
 char NiBinaryStream_GetByteSwapHint()
 {
-  return NiBinaryStream_ByteSwapHint;
+  return MEMORY[0xB403C4]; /*0x748255*/
 }

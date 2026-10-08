@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x52ED10",
-    "line": "xor     eax, eax",
+    "line": "xor     eax, eax; Clears only the runtime TESTopic* member of every fixed stock-dialogue registry slot; FormIDs and names remain intact for reconstruction.",
     "mnemonic": "xor",
     "size": 2
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x52ED15",
-    "line": "cmp     ds:dword_B110F4[eax], ecx",
+    "line": "cmp     ds:g_dialogueTopicBucketCounts[eax], ecx",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x52ED20",
-    "line": "mov     esi, ds:off_B111B8[eax]",
+    "line": "mov     esi, ds:g_dialogueTopicBuckets[eax]",
     "mnemonic": "mov",
     "size": 6
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x52ED33",
-    "line": "cmp     ecx, ds:dword_B110F4[eax]",
+    "line": "cmp     ecx, ds:g_dialogueTopicBucketCounts[eax]",
     "mnemonic": "cmp",
     "size": 6
   },

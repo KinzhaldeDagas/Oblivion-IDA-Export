@@ -6,7 +6,7 @@
 0x683C2D: jz      short loc_683C61
 0x683C2F: mov     eax, [esi+34h]
 0x683C32: push    eax
-0x683C33: call    FormHeapFree
+0x683C33: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x683C38: mov     eax, [esi+38h]
 0x683C3B: add     esp, 4
 0x683C3E: test    eax, eax
@@ -16,7 +16,7 @@
 0x683C48: mov     edx, [eax]
 0x683C4A: push    eax
 0x683C4B: mov     [esi+34h], edx
-0x683C4E: call    FormHeapFree
+0x683C4E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x683C53: add     esp, 4
 0x683C56: jmp     short loc_683C23
 0x683C58: mov     dword ptr [esi+34h], 0

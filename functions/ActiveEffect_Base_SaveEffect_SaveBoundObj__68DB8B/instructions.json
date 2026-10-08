@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x68DB90",
-    "line": "mov     [esp+arg_10], edi",
+    "line": "mov     [esp+source], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,37 +31,37 @@
   },
   {
     "ea": "0x68DB99",
-    "line": "mov     [esp+arg_10], edx",
+    "line": "mov     [esp+source], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x68DB9D",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x68DBA3",
-    "line": "push    4",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x68DBA5",
-    "line": "lea     eax, [esp+4+arg_10]",
+    "line": "lea     eax, [esp+4+source]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x68DBA9",
-    "line": "push    eax",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x68DBAA",
-    "line": "call    SaveLoad_SaveFormID",
+    "line": "call    SaveLoad_SaveFormID; Writes an array of FormIDs to the save buffer. When IRef encoding is enabled, each full FormID is first converted to a compact IRef via SaveLoad_FormIDToIRef.",
     "mnemonic": "call",
     "size": 5
   }

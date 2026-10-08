@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x43562F",
-    "line": "mov     ecx, ioManager",
+    "line": "mov     ecx, ds:0B33A10h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x4356EE",
-    "line": "mov     ecx, Addend",
+    "line": "mov     ecx, ds:0B33A20h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x43576C",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -630,14 +630,8 @@
     "size": 2
   },
   {
-    "ea": "0x435779",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x435780",
-    "line": "mov     ecx, ioManager",
+    "line": "mov     ecx, ds:0B33A10h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -655,7 +649,7 @@
   },
   {
     "ea": "0x43578D",
-    "line": "mov     ecx, ioManager",
+    "line": "mov     ecx, ds:0B33A10h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -679,7 +673,7 @@
   },
   {
     "ea": "0x43579B",
-    "line": "mov     eax, ioManager",
+    "line": "mov     eax, ds:0B33A10h",
     "mnemonic": "mov",
     "size": 5
   },

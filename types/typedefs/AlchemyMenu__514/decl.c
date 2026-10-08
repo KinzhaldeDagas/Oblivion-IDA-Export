@@ -1,1 +1,1 @@
-AlchemyMenu
+struct AlchemyMenu;

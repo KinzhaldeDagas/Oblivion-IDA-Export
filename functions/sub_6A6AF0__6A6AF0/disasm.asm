@@ -13,7 +13,7 @@
 0x6A6B0C: test    edi, edi
 0x6A6B0E: jz      loc_6A6C79
 0x6A6B14: mov     ecx, edi; this
-0x6A6B16: call    TESObjectREFR_GetParentCell
+0x6A6B16: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6A6B1B: mov     ecx, edi; this
 0x6A6B1D: mov     esi, eax
 0x6A6B1F: call    sub_4D8B90
@@ -21,8 +21,8 @@
 0x6A6B26: jz      short loc_6A6B3F
 0x6A6B28: test    esi, esi
 0x6A6B2A: jz      loc_6A6C79
-0x6A6B30: mov     ecx, esi
-0x6A6B32: call    sub_4C9820
+0x6A6B30: mov     ecx, esi; this
+0x6A6B32: call    TESObjectCELL_HasFlag80
 0x6A6B37: test    al, al
 0x6A6B39: jz      loc_6A6C79
 0x6A6B3F: mov     eax, ds:0B333A0h
@@ -30,10 +30,10 @@
 0x6A6B47: fld     dword ptr [esi+0D0h]
 0x6A6B4D: mov     ecx, esi
 0x6A6B4F: fstp    [esp+28h+var_4]
-0x6A6B53: call    sub_499140
+0x6A6B53: call    sub_499140; Exterior fog day/night helper: climate sunrise boundary byte (+0x50) cached as normalized time for weather fog interpolation.
 0x6A6B58: mov     ecx, esi
 0x6A6B5A: fstp    [esp+28h+var_8]
-0x6A6B5E: call    sub_499200
+0x6A6B5E: call    sub_499200; Exterior fog day/night helper: climate night boundary byte (+0x53) cached as normalized time for weather fog interpolation.
 0x6A6B63: fstp    [esp+28h+var_C]
 0x6A6B67: mov     eax, [esi+10h]
 0x6A6B6A: fld     qword ptr ds:0A3F398h
@@ -83,13 +83,13 @@
 0x6A6BE9: fstp    st
 0x6A6BEB: mov     ecx, edi; this
 0x6A6BED: mov     [esp+28h+var_18], 0
-0x6A6BF2: call    TESObjectREFR_GetParentCell
+0x6A6BF2: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6A6BF7: movzx   eax, byte ptr [eax+24h]
 0x6A6BFB: shr     eax, 1
 0x6A6BFD: test    al, 1
 0x6A6BFF: jz      short loc_6A6C32
 0x6A6C01: mov     ecx, edi; this
-0x6A6C03: call    TESObjectREFR_GetParentCell
+0x6A6C03: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6A6C08: mov     ecx, eax
 0x6A6C0A: call    TESObjectCELL_GetWaterHeight
 0x6A6C0F: fstp    [esp+28h+var_14]

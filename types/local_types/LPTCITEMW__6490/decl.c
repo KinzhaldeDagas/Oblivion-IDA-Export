@@ -1,1 +1,1 @@
-LPTCITEMW
+typedef tagTCITEMW *LPTCITEMW;

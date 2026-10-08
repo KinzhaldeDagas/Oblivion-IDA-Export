@@ -20,9 +20,9 @@
 0x5B0D69: cmp     dword ptr [eax+44h], 0
 0x5B0D6D: jz      short loc_5B0D88
 0x5B0D6F: mov     eax, ds:0B35ECCh
-0x5B0D74: mov     ecx, ds:0B333C4h
-0x5B0D7A: push    eax
-0x5B0D7B: call    TESObjectREF_GetItemCount
+0x5B0D74: mov     ecx, ds:0B333C4h; this
+0x5B0D7A: push    eax; item
+0x5B0D7B: call    TESObjectREFR_GetItemCount; TESObjectREFR inventory count accessor: returns 0 when the reference has no container or no ContainerChanges; otherwise asks ContainerExtraData_GetItemCount(this, item), which combines base TESContainer count with EntryData.countDelta. Exact ABI is thiscall (TESObjectREFR *this, TESForm *item).
 0x5B0D80: test    eax, eax
 0x5B0D82: jz      loc_5B0E63
 0x5B0D88: mov     ebx, 1
@@ -31,14 +31,14 @@
 0x5B0D99: fld1
 0x5B0D9B: push    ecx
 0x5B0D9C: mov     ecx, [esi+178h]; this
-0x5B0DA2: fstp    [esp+0Ch+a2]; a3
-0x5B0DA5: push    0FAEh; a2
-0x5B0DAA: call    Tile_SetFloat
+0x5B0DA2: fstp    [esp+0Ch+a2]; value
+0x5B0DA5: push    0FAEh; propertyCode
+0x5B0DAA: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B0DAF: mov     ecx, [esi+178h]
 0x5B0DB5: push    0; float
 0x5B0DB7: call    sub_58FBA0
-0x5B0DBC: mov     ecx, [esi+38h]; this
-0x5B0DBF: call    TESObjectREFR_GetOwner
+0x5B0DBC: mov     ecx, [esi+38h]; reference
+0x5B0DBF: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x5B0DC4: test    eax, eax
 0x5B0DC6: jz      short loc_5B0E03
 0x5B0DC8: cmp     byte ptr [esi+17Ch], 0
@@ -46,9 +46,9 @@
 0x5B0DD1: mov     ecx, ds:0B333C4h
 0x5B0DD7: push    edi
 0x5B0DD8: mov     edi, [ecx]
-0x5B0DDA: mov     ecx, [esi+38h]; this
+0x5B0DDA: mov     ecx, [esi+38h]; reference
 0x5B0DDD: push    0FFFFFFFFh
-0x5B0DDF: call    TESObjectREFR_GetOwner
+0x5B0DDF: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x5B0DE4: mov     edx, [esi+38h]
 0x5B0DE7: mov     ecx, ds:0B333C4h
 0x5B0DED: push    eax
@@ -61,7 +61,7 @@
 0x5B0DFD: mov     [esi+17Ch], bl
 0x5B0E03: mov     ecx, esi
 0x5B0E05: mov     ds:0B3B3F5h, bl
-0x5B0E0B: call    sub_5B0260
+0x5B0E0B: call    LockPickMenu_TryAutoAttempt
 0x5B0E10: test    al, al
 0x5B0E12: jnz     short loc_5B0E22
 0x5B0E14: mov     ecx, esi

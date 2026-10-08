@@ -59,3 +59,7 @@
 0x98241E: mov     [ebp+var_1C], eax
 0x982421: mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
 0x982428: call    __fsopen___$LN12_0
+0x982436: push    [ebp+Filename]
+0x982439: call    __unlock_file
+0x98243E: pop     ecx
+0x98243F: retn

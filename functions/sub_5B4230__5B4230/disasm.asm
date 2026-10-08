@@ -1,4 +1,4 @@
-0x5B4230: push    0FFFFFFFFh
+0x5B4230: push    0FFFFFFFFh; AchievementsNative evidence: MagicPopupMenu builder for magic/effect items. Sets root user0=source Y, user1=bottom margin, user3=depth; stores exposed popup X at +0x50 and hidden X at +0x54 (exposed X minus background width).
 0x5B4232: push    offset SEH_5B4230
 0x5B4237: mov     eax, large fs:0
 0x5B423D: push    eax
@@ -40,23 +40,23 @@
 0x5B42BE: jz      loc_5B49DC
 0x5B42C4: fld     [esp+35Ch+arg_8]
 0x5B42CB: push    ecx
-0x5B42CC: fstp    [esp+360h+a2]; a3
-0x5B42CF: push    0FAEh; a2
+0x5B42CC: fstp    [esp+360h+a2]; value
+0x5B42CF: push    0FAEh; propertyCode
 0x5B42D4: mov     ecx, ebx; this
 0x5B42D6: mov     dword ptr [edi+58h], 1
-0x5B42DD: call    Tile_SetFloat
+0x5B42DD: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B42E2: fld     [esp+35Ch+arg_C]
 0x5B42E9: push    ecx
-0x5B42EA: fstp    [esp+360h+a2]; a3
-0x5B42ED: push    0FAFh; a2
+0x5B42EA: fstp    [esp+360h+a2]; value
+0x5B42ED: push    0FAFh; propertyCode
 0x5B42F2: mov     ecx, ebx; this
-0x5B42F4: call    Tile_SetFloat
+0x5B42F4: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B42F9: fld     [esp+35Ch+arg_14]
 0x5B4300: push    ecx
-0x5B4301: fstp    [esp+360h+a2]; a3
-0x5B4304: push    0FB1h; a2
+0x5B4301: fstp    [esp+360h+a2]; value
+0x5B4304: push    0FB1h; propertyCode
 0x5B4309: mov     ecx, ebx; this
-0x5B430B: call    Tile_SetFloat
+0x5B430B: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B4310: fld     [esp+35Ch+arg_4]
 0x5B4317: mov     ecx, [edi+28h]
 0x5B431A: fst     dword ptr [edi+50h]
@@ -79,10 +79,10 @@
 0x5B4360: call    __sprintf
 0x5B4365: fld     dword ptr ds:0A379B4h
 0x5B436B: mov     ecx, [edi+2Ch]; this
-0x5B436E: fstp    [esp+36Ch+a2]; a3
+0x5B436E: fstp    [esp+36Ch+a2]; value
 0x5B4372: add     esp, 0Ch
-0x5B4375: push    0FA1h; a2
-0x5B437A: call    Tile_SetFloat
+0x5B4375: push    0FA1h; propertyCode
+0x5B437A: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B437F: lea     ecx, [esp+35Ch+var_218]
 0x5B4386: push    ecx
 0x5B4387: mov     ecx, [edi+2Ch]
@@ -91,9 +91,9 @@
 0x5B4394: fld     dword ptr ds:0A2FE7Ch
 0x5B439A: mov     ecx, [edi+2Ch]; this
 0x5B439D: push    ecx
-0x5B439E: fstp    [esp+360h+a2]; a3
-0x5B43A1: push    0FB0h; a2
-0x5B43A6: call    Tile_SetFloat
+0x5B439E: fstp    [esp+360h+a2]; value
+0x5B43A1: push    0FB0h; propertyCode
+0x5B43A6: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B43AB: test    ebp, ebp
 0x5B43AD: jz      loc_5B44D1
 0x5B43B3: movsx   edx, byte ptr [ebp+90h]
@@ -122,10 +122,10 @@
 0x5B4410: call    __sprintf
 0x5B4415: fld     dword ptr ds:0A379B4h
 0x5B441B: mov     ecx, [edi+2Ch]; this
-0x5B441E: fstp    [esp+36Ch+a2]; a3
+0x5B441E: fstp    [esp+36Ch+a2]; value
 0x5B4422: add     esp, 0Ch
-0x5B4425: push    0FA1h; a2
-0x5B442A: call    Tile_SetFloat
+0x5B4425: push    0FA1h; propertyCode
+0x5B442A: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B442F: lea     ecx, [esp+35Ch+var_114]
 0x5B4436: push    ecx
 0x5B4437: mov     ecx, [edi+2Ch]
@@ -134,9 +134,9 @@
 0x5B4444: fld     dword ptr ds:0A2FE7Ch
 0x5B444A: mov     ecx, [edi+2Ch]; this
 0x5B444D: push    ecx
-0x5B444E: fstp    [esp+360h+a2]; a3
-0x5B4451: push    0FB0h; a2
-0x5B4456: call    Tile_SetFloat
+0x5B444E: fstp    [esp+360h+a2]; value
+0x5B4451: push    0FB0h; propertyCode
+0x5B4456: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B445B: xor     eax, eax
 0x5B445D: cmp     ebp, eax
 0x5B445F: jz      short loc_5B44D1
@@ -146,7 +146,7 @@
 0x5B446F: mov     ebx, ds:0B38BE8h
 0x5B4475: mov     ecx, ebp
 0x5B4477: mov     [esp+35Ch+var_4], eax
-0x5B447E: call    TESObjectARMO_ISHeavyArmor
+0x5B447E: call    TESObjectARMO_ISHeavyArmor; Medium Armor MagicPopup decode: enchanted-armor label path calls TESObjectARMO_IsHeavyArmor here; plugin captures armor context but preserves native boolean.
 0x5B4483: movzx   edx, al
 0x5B4486: mov     eax, ds:0B084E8h[edx*4]
 0x5B448D: test    eax, eax
@@ -165,7 +165,7 @@
 0x5B44AF: push    ecx
 0x5B44B0: mov     ecx, [edi+2Ch]
 0x5B44B3: push    0FAEh
-0x5B44B8: call    Tile_SetString
+0x5B44B8: call    Tile_SetString; Medium Armor MagicPopup decode: final enchanted-armor Tile_SetString label write; replace Light/Heavy text with Medium only for effective Medium classification.
 0x5B44BD: lea     ecx, [esp+35Ch+var_348]; void *
 0x5B44C1: mov     [esp+35Ch+var_4], 0FFFFFFFFh
 0x5B44CC: call    BSStringT_Clear
@@ -190,3 +190,28 @@
 0x5B4512: jz      loc_5B46DE
 0x5B4518: lea     eax, [edi+ebx*4+2Ch]
 0x5B451C: jmp     short sub_5B4524
+0x9C0990: lea     ecx, [ebp-348h]; void *
+0x9C0996: jmp     BSStringT_Clear
+0x9C099B: lea     ecx, [ebp-33Ch]; void *
+0x9C09A1: jmp     BSStringT_Clear
+0x9C09A6: lea     ecx, [ebp-348h]; void *
+0x9C09AC: jmp     BSStringT_Clear
+0x9C09B1: lea     ecx, [ebp-348h]; void *
+0x9C09B7: jmp     BSStringT_Clear
+0x9C09BC: lea     ecx, [ebp-33Ch]; void *
+0x9C09C2: jmp     BSStringT_Clear
+0x9C09C7: lea     ecx, [ebp-33Ch]; void *
+0x9C09CD: jmp     BSStringT_Clear
+0x9C09D2: lea     ecx, [ebp-32Ch]; void *
+0x9C09D8: jmp     BSStringT_Clear
+0x9C09DD: mov     edx, [esp+arg_4]
+0x9C09E1: lea     eax, [edx-34Ch]
+0x9C09E7: mov     ecx, [edx-350h]
+0x9C09ED: xor     ecx, eax
+0x9C09EF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C09F4: add     eax, 10h
+0x9C09F7: mov     ecx, [edx-4]
+0x9C09FA: xor     ecx, eax
+0x9C09FC: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C0A01: mov     eax, offset stru_AE9B9C
+0x9C0A06: jmp     ___CxxFrameHandler3

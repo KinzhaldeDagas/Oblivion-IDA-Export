@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A7460",
-    "line": "push    ebp",
+    "line": "push    ebp; Oblivion SymGen::Next symmetric rejection sampler. Lazily builds symmetric tables, folds the uniform selector around 0.5, performs the same density rejection test, and restores the selected sign.",
     "mnemonic": "push",
     "size": 1
   },
@@ -55,13 +55,13 @@
   },
   {
     "ea": "0x7A7473",
-    "line": "push    1",
+    "line": "push    1; symmetric",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7A7475",
-    "line": "call    sub_7A71D0",
+    "line": "call    OB_PosGen_Build_010201A0; Oblivion PosGen::Build. Allocates sx/sfx as two 60-float tables, integrates density with 0.01 symmetric or 0.02 positive increments, enforces a 50..59 sample span, and records xi for rejection sampling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x7A747C",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x7A7482",
-    "line": "call    sub_7A6FD0",
+    "line": "call    OB_Random_Next_010201A0; Oblivion Random::Next. Rejects an uninitialized seed, selects Buffer[int(Raw()*128)], replaces that entry with another Raw() result, and returns the prior buffered sample.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x7A74B9",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x7A74C6",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x7A74CC",
-    "line": "call    sub_7A6FD0",
+    "line": "call    OB_Random_Next_010201A0; Oblivion Random::Next. Rejects an uninitialized seed, selects Buffer[int(Raw()*128)], replaces that entry with another Raw() result, and returns the prior buffered sample.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x7A74DF",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x7A74F2",
-    "line": "call    sub_7A6FD0",
+    "line": "call    OB_Random_Next_010201A0; Oblivion Random::Next. Rejects an uninitialized seed, selects Buffer[int(Raw()*128)], replaces that entry with another Raw() result, and returns the prior buffered sample.",
     "mnemonic": "call",
     "size": 5
   },

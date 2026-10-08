@@ -1,26 +1,27 @@
-unsigned __int8 __userpurge sub_78B440@<al>(int this@<ecx>, int a2@<edi>, int a3)
+// CSpeedTreeRT::SetLeafLightingMethod. Before Compute, mirrors lighting method to CLightingEngine leaf method and leaf geometry manual-lighting state.
+void __thiscall CSpeedTreeRT__SetLeafLightingMethod(OB_CSpeedTreeRT_010201A0 *this, int method)
 {
+  int v2; // edi
   bool v3; // zf
-  rsize_t v5; // [esp-4h] [ebp-60h] BYREF
-  char *v6; // [esp+4Ch] [ebp-10h]
-  int v7; // [esp+58h] [ebp-4h]
+  rsize_t v4; // [esp-4h] [ebp-60h] BYREF
+  char *v5; // [esp+4Ch] [ebp-10h]
+  int v6; // [esp+58h] [ebp-4h]
 
-  v6 = (char *)&v5 + 4;
-  v3 = *(_BYTE *)(this + 0x45) == 0;
-  v7 = 0;
-  if ( v3 )
+  v5 = (char *)&v4 + 4; /*0x78b468*/
+  v3 = this->treeComputedFlag == 0; /*0x78b46b*/
+  v6 = 0; /*0x78b46f*/
+  if ( v3 ) /*0x78b476*/
   {
-    *(_DWORD *)(*(_DWORD *)(this + 0xC) + 0x38) = a3;
-    **(_BYTE **)(this + 8) = a3 == 1;
-    return a3 == 1;
+    this->lightingEngine->leafLightingMethod = method; /*0x78b47e*/
+    this->leafGeometry->manualLighting = method == 1; /*0x78b48a*/
   }
   else
   {
-    LODWORD(v5) = 0x45;
-    return (unsigned __int8)sub_414500(
-                              &dword_B2B614,
-                              a2,
-                              "SetLeafLightingMethod() has no effect after Compute() has been called",
-                              v5);
+    LODWORD(v4) = 0x45; /*0x78b4a0*/
+    OB_stString28_AssignBytes_010201A0( /*0x78b4ac*/
+      &OB_g_strError_010201A0,
+      v2,
+      "SetLeafLightingMethod() has no effect after Compute() has been called",
+      v4);
   }
 }

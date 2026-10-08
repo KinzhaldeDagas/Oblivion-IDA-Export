@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x415B1C",
+      "0x415B65"
+    ]
+  ],
+  "chunks_sha256": "b62cc44955660818c3bb40f27bb83b23c573b325ec55a92b42b007e5391623e8",
+  "comment_regular": "Verified (Oblivion): EffectSetting::effectShader (+0x78) resolves through FormID lookup and a TESForm-to-TESEffectShader RTTI cast.",
+  "comment_repeatable": "Verified (Oblivion): EffectSetting::effectShader (+0x78) resolves through FormID lookup and a TESForm-to-TESEffectShader RTTI cast.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
   "display_name": "EffectSetting_LinkForm:::ResolveEffectShader",
   "end_ea": "0x415B65",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "EffectSetting_LinkForm:::ResolveEffectShader",
   "segment": ".text",
   "sha256": "b62cc44955660818c3bb40f27bb83b23c573b325ec55a92b42b007e5391623e8",
   "size": 73,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x415B1C",
-  "type": "int __usercall@<eax>(TESForm *esi0@<esi>, TESForm)",
+  "total_chunk_size": 73,
+  "type": "int __usercall@<eax>(EffectSetting *effectSetting@<esi>)",
   "xrefs_from_count": 33,
   "xrefs_to_count": 2
 }

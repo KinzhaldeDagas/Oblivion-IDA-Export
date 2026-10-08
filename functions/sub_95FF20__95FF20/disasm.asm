@@ -4,7 +4,7 @@
 0x95FF26: push    edi
 0x95FF27: push    ebx
 0x95FF28: mov     edi, ecx
-0x95FF2A: call    nullsub_returnvVoid_1arg
+0x95FF2A: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x95FF2F: lea     eax, [esp+0Ch+arg_0]
 0x95FF33: push    eax
 0x95FF34: push    ebx

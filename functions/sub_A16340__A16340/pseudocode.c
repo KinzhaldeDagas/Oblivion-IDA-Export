@@ -1,4 +1,4 @@
-BSStringT *sub_A16340()
+NiRTTI *sub_A16340()
 {
-  return sub_70E220((BSStringT *)dword_BAA888, "NiRenderTargetGroup", (int)dword_B3F684);
+  return NiRTTI_Constructor(&stru_BAA888, "NiRenderTargetGroup", &stru_B3F684); /*0xa16354*/
 }

@@ -1,1 +1,1 @@
-PropSheetInfo
+typedef tagPropSheetInfo PropSheetInfo;

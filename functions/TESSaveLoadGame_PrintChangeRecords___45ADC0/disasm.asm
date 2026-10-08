@@ -170,7 +170,7 @@
 0x45AFD8: jz      loc_45B151
 0x45AFDE: mov     ecx, [ebx]
 0x45AFE0: push    ecx; a1
-0x45AFE1: call    TESForm_LookupByFormID
+0x45AFE1: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x45AFE6: mov     ebp, eax
 0x45AFE8: movzx   eax, word ptr [ebx+0Ah]
 0x45AFEC: add     esp, 4

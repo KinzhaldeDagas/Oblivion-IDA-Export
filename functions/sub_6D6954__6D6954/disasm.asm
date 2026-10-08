@@ -20,7 +20,7 @@
 0x6D699A: push    esi
 0x6D699B: mov     ecx, ebx
 0x6D699D: mov     [esp+8+arg_18], 0FFFFFFFFh
-0x6D69A5: call    sub_6D6660
+0x6D69A5: call    NiTransformInterpolator_CopyMembers; Oblivion NiTransformInterpolator clone/member copy. Copies base state and cached transform, replaces destination data +0x2C with the source refcounted pointer using balanced decrement/increment, and copies all three 16-bit key cursors.
 0x6D69AA: mov     eax, esi
 0x6D69AC: mov     ecx, [esp+arg_10]
 0x6D69B0: mov     large fs:0, ecx

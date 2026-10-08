@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4BCA90",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, dword ptr [esp+priority]; Verified task constructor for the embedded-record source path: initializes IOTask, sets DistantLODLoaderTask vtable, stores owner map and DistantLODLoaderTaskData, and carries no external .lod path.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,13 +31,13 @@
   },
   {
     "ea": "0x4BCA9D",
-    "line": "mov     ecx, [esp+4+arg_4]",
+    "line": "mov     ecx, [esp+4+ownerMap]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4BCAA1",
-    "line": "mov     edx, [esp+4+arg_8]",
+    "line": "mov     edx, [esp+4+taskData]",
     "mnemonic": "mov",
     "size": 4
   },

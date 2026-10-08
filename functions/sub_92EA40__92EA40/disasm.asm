@@ -23,7 +23,6 @@
 0x92EA7F: jle     loc_92EB41
 0x92EA85: xor     edi, edi
 0x92EA87: jmp     short loc_92EA90
-0x92EA89: align 10h
 0x92EA90: mov     eax, [esi]
 0x92EA92: mov     ecx, [eax+edi]
 0x92EA95: mov     edx, ds:0BA7A40h
@@ -50,7 +49,7 @@
 0x92EAEA: lea     ecx, [esp+74h+var_60]
 0x92EAEE: mov     [esp+74h+var_38], edx
 0x92EAF2: mov     [esp+74h+var_34], 0
-0x92EAFA: call    sub_8D2C20
+0x92EAFA: call    hkMatrix3_MultiplyInPlace; Multiplies a 3x3 basis matrix in place by another basis matrix through 0x8D2AB0.
 0x92EAFF: fld     [esp+70h+var_40]
 0x92EB03: mov     eax, [esi]
 0x92EB05: fld     [esp+70h+var_50]

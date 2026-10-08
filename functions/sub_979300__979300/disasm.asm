@@ -1,7 +1,7 @@
 0x979300: sub     esp, 38h
 0x979303: push    ebx
 0x979304: push    ebp
-0x979305: mov     ebp, [esp+40h+arg_10]
+0x979305: mov     ebp, [esp+40h+pickedObject]
 0x979309: push    esi
 0x97930A: mov     esi, [esp+44h+arg_14]
 0x97930E: push    edi
@@ -21,7 +21,7 @@
 0x97933B: lea     eax, [esp+4Ch+var_34]
 0x97933F: push    eax
 0x979340: mov     eax, [esp+50h+arg_14]
-0x979344: lea     ecx, [esp+50h+arg_10]
+0x979344: lea     ecx, [esp+50h+pickedObject]
 0x979348: push    ecx
 0x979349: mov     ecx, [edi+94h]
 0x97934F: lea     edx, [esp+54h+var_C]
@@ -47,9 +47,9 @@
 0x97938E: add     esp, 4
 0x979391: test    eax, eax
 0x979393: jz      short loc_9793A1
-0x979395: push    ebp
-0x979396: mov     ecx, eax
-0x979398: call    sub_95A2D0
+0x979395: push    ebp; pickedObject
+0x979396: mov     ecx, eax; this
+0x979398: call    NiPickRecord_Initialize; Verified NiPickRecord initialization for the 0x44-byte record: retains the picked object at +0, clears/releases the secondary reference at +4, and zeros tail fields +0x34..+0x40. It does not initialize the intersection point, distance, or +0x28 normal fields; pick paths populate those selectively, so bounds-only records may leave the normal unavailable.
 0x97939D: mov     esi, eax
 0x97939F: jmp     short loc_9793A3
 0x9793A1: xor     esi, esi
@@ -59,7 +59,7 @@
 0x9793AE: mov     [esi+0Ch], eax
 0x9793B1: mov     ecx, [esp+48h+var_4]
 0x9793B5: mov     [esi+10h], ecx
-0x9793B8: fld     [esp+48h+arg_10]
+0x9793B8: fld     [esp+48h+pickedObject]
 0x9793BC: fstp    dword ptr [esi+14h]
 0x9793BF: cmp     byte ptr [ebx+2Dh], 0
 0x9793C3: jz      loc_97947B
@@ -112,7 +112,7 @@
 0x979457: fmulp   st(2), st
 0x979459: fsubrp  st(1), st
 0x97945B: fstp    [esp+48h+var_28]
-0x97945F: call    sub_43F350
+0x97945F: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x979464: mov     edx, [esp+48h+var_30]
 0x979468: fstp    st
 0x97946A: mov     eax, [esp+48h+var_2C]

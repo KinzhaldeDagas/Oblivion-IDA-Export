@@ -5,7 +5,7 @@
 0x98C91E: inc     edi
 0x98C91F: mov     [ebp+var_1C], edi
 0x98C922: xor     ebx, ebx
-0x98C924: cmp     hHeap, ebx
+0x98C924: cmp     dword_BA9E10+49Ch, ebx
 0x98C92A: jnz     short loc_98C944
 0x98C92C: call    __FF_MSGBANNER
 0x98C931: push    1Eh
@@ -57,3 +57,7 @@
 0x98C9B4: pop     ecx
 0x98C9B5: mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
 0x98C9BC: call    __mtinitlocknum___$LN14_5
+0x98C9CA: push    0Ah
+0x98C9CC: call    __unlock
+0x98C9D1: pop     ecx
+0x98C9D2: retn

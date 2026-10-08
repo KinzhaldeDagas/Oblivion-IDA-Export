@@ -1,7 +1,7 @@
 0x6347E0: push    esi
-0x6347E1: push    2
-0x6347E3: push    1
-0x6347E5: call    TESTopic__GEtTopic
+0x6347E1: push    2; index
+0x6347E3: push    1; topicType
+0x6347E5: call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.
 0x6347EA: mov     esi, [esp+0Ch+arg_0]
 0x6347EE: mov     ecx, ds:0B333C4h
 0x6347F4: add     esp, 8
@@ -23,12 +23,12 @@
 0x634820: call    eax
 0x634822: test    eax, eax
 0x634824: jnz     short loc_63484E
-0x634826: mov     ecx, esi
-0x634828: call    sub_5E0380
+0x634826: mov     ecx, esi; this
+0x634828: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x63482D: test    eax, eax
 0x63482F: jz      short loc_63483E
-0x634831: mov     ecx, esi
-0x634833: call    sub_5E0380
+0x634831: mov     ecx, esi; this
+0x634833: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x634838: cmp     byte ptr [eax+20h], 6
 0x63483C: jz      short loc_63484E
 0x63483E: mov     ecx, [esi+58h]

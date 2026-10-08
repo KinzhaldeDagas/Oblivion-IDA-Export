@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x46BB20",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x46BB38",
-    "line": "call    SaveLoad_ResolveFormID",
+    "line": "call    SaveLoad_ResolveFormID; Remaps a serialized FormID's high-byte mod index through TESSaveLoad::modRefIDTable. Dynamic 0xFF IDs pass through; missing/out-of-range mods resolve to zero; low 24-bit object ID is preserved.",
     "mnemonic": "call",
     "size": 5
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x46BB64",
-    "line": "call    TESFile_GetMasterByIndex",
+    "line": "call    TESFile_GetMasterByIndex; Oblivion TESFile_GetMasterByIndex returns masterFiles[slot-1] for a one-based MAST index, bounded by masterCount. FormID owner-byte resolution can therefore select distinct alias slots for duplicate filenames.",
     "mnemonic": "call",
     "size": 5
   },

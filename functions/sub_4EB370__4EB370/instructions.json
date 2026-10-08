@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4EB370",
-    "line": "push    ebx",
+    "line": "push    ebx; Verified quad lookup and terrain pick; Probable auxiliary output role: triangle geometry pick records supply the normalized surface normal at NiPickRecord +0x28..+0x30. Bounds-only fallback records do not explicitly populate that field. The embedded parser remaps the vector and adds it to rounded record positions; the purpose of its 0.97/128 clamp remains Unknown.",
     "mnemonic": "push",
     "size": 1
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x4EB380",
-    "line": "mov     edi, [esp+10h+arg_0]",
+    "line": "mov     edi, [esp+10h+worldPosition]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x4EB38C",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -91,43 +91,43 @@
   },
   {
     "ea": "0x4EB39D",
-    "line": "sub     esi, eax",
+    "line": "sub     esi, eax; Verified world-to-quad X conversion multiplies by kTerrainLODQuadWorldToGridScaleNegX (-1/131072), converts to signed integer, then computes 0xFFFFFFFF minus that result. Preserve this X-axis inversion in the key calculation.",
     "mnemonic": "sub",
     "size": 2
   },
   {
     "ea": "0x4EB39F",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Verified world-to-quad Y conversion multiplies by kTerrainLODQuadWorldToGridScale (+1/131072) and converts to signed integer.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4EB3A4",
-    "line": "push    0",
+    "line": "push    0; createIfMissing",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4EB3A6",
-    "line": "push    eax",
+    "line": "push    eax; quadY",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4EB3A7",
-    "line": "push    esi",
+    "line": "push    esi; quadX",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4EB3A8",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4EB3AA",
-    "line": "call    sub_4EA580",
+    "line": "call    TESWorldSpaceTerrainLODQuadMap_GetOrCreateRoot; Verified quad-root lookup/creation: accepts signed 16-bit quadX/quadY, packs them as (quadX << 16) | uint16(quadY), and optionally allocates/inserts a TESTerrainLODQuadRoot containing quad data, owner map, and coordinates.",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x4EB3B5",
-    "line": "mov     ecx, [ecx]",
+    "line": "mov     ecx, [ecx]; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -175,37 +175,37 @@
   },
   {
     "ea": "0x4EB3BD",
-    "line": "mov     eax, [esp+10h+arg_8]",
+    "line": "mov     eax, [esp+10h+terrainHitPositionOut]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4EB3C1",
-    "line": "mov     edx, [esp+10h+arg_4]",
+    "line": "mov     edx, [esp+10h+hitMetadataOut]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4EB3C5",
-    "line": "push    eax",
+    "line": "push    eax; pickVectorOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4EB3C6",
-    "line": "push    edx",
+    "line": "push    edx; hitPointZOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4EB3C7",
-    "line": "push    edi",
+    "line": "push    edi; worldPosition",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4EB3C8",
-    "line": "call    sub_4EC990",
+    "line": "call    TESTerrainLODQuad_PickSurfacePoint; Verified terrain ray query: uses NiPick against terrainLODNode with a vertical ray from worldPosition.z + 1,000,000 toward -Z. It returns the selected record's hit Z at +0x10 and copies a separate 3-float vector at +0x28..+0x30; the latter's meaning remains Unknown.",
     "mnemonic": "call",
     "size": 5
   },

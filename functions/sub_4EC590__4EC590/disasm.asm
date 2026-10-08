@@ -18,14 +18,14 @@
 0x4EC5CE: test    eax, eax
 0x4EC5D0: jz      short loc_4EC5E5
 0x4EC5D2: push    eax
-0x4EC5D3: call    FormHeapFree
+0x4EC5D3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4EC5D8: add     esp, 4
 0x4EC5DB: mov     dword ptr ds:0B36098h, 0
 0x4EC5E5: mov     eax, ds:0B3609Ch
 0x4EC5EA: test    eax, eax
 0x4EC5EC: jz      short loc_4EC601
 0x4EC5EE: push    eax
-0x4EC5EF: call    FormHeapFree
+0x4EC5EF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4EC5F4: add     esp, 4
 0x4EC5F7: mov     dword ptr ds:0B3609Ch, 0
 0x4EC601: mov     ecx, edi
@@ -39,3 +39,12 @@
 0x4EC623: pop     edi
 0x4EC624: add     esp, 10h
 0x4EC627: retn
+0x9B61C0: mov     ecx, [ebp-10h]
+0x9B61C3: jmp     ??1?$NiTPointerMap@HPAVTESTerrainLODQuadRoot@@@@UAE@XZ; NiTPointerMap<int,TESTerrainLODQuadRoot *>::~NiTPointerMap<int,TESTerrainLODQuadRoot *>(void)
+0x9B61C8: mov     edx, [esp+arg_4]
+0x9B61CC: lea     eax, [edx-8]
+0x9B61CF: mov     ecx, [edx-0Ch]
+0x9B61D2: xor     ecx, eax
+0x9B61D4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B61D9: mov     eax, offset stru_AE10F8
+0x9B61DE: jmp     ___CxxFrameHandler3

@@ -1,7 +1,7 @@
 0x680F30: mov     ecx, [esp+arg_0]; this
 0x680F34: test    ecx, ecx
 0x680F36: jz      short loc_680F4F
-0x680F38: call    MobileObject_GetCharProxy
+0x680F38: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x680F3D: test    eax, eax
 0x680F3F: jz      short loc_680F4F
 0x680F41: mov     eax, [eax+368h]

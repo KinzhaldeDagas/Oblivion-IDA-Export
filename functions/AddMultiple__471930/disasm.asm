@@ -1,4 +1,4 @@
-0x471930: push    esi
+0x471930: push    esi; AnimSequenceMultiple add-sequence method. Inserts a refcounted BSAnimGroupSequence into the multiple-sequence linked list and increments the list count.
 0x471931: push    edi
 0x471932: mov     edi, [esp+8+arg_0]
 0x471936: lea     eax, [edi+4]

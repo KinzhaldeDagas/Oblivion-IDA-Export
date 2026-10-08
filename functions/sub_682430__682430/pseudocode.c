@@ -2,10 +2,10 @@ int sub_682430()
 {
   int result; // eax
 
-  if ( dword_B3BF80 )
+  if ( unk_B3BF80 ) /*0x682430*/
   {
-    result = (**(int (__thiscall ***)(int, int))dword_B3BF80)(dword_B3BF80, 1);
-    dword_B3BF80 = 0;
+    result = (**(int (__thiscall ***)(int, int))unk_B3BF80)(unk_B3BF80, 1); /*0x682440*/
+    unk_B3BF80 = 0; /*0x682442*/
   }
-  return result;
+  return result; /*0x68244c*/
 }

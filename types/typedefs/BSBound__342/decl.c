@@ -1,1 +1,1 @@
-BSBound
+struct BSBound;

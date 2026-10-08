@@ -1,4 +1,4 @@
-0x789430: push    0FFFFFFFFh
+0x789430: push    0FFFFFFFFh; Oblivion IdvNoPath helper: copies the input 28-byte SSO string, scans backward for '/' or '\', and constructs the returned basename string. RT4.1 IdvFilename.h corroborates the algorithm/name.
 0x789432: push    offset SEH_789430
 0x789437: mov     eax, large fs:0
 0x78943D: push    eax
@@ -16,7 +16,7 @@
 0x78945E: lea     eax, [esp+448h+var_C]
 0x789465: mov     large fs:0, eax
 0x78946B: mov     ebx, ecx
-0x78946D: mov     edi, [esp+448h+arg_0]
+0x78946D: mov     edi, [esp+448h+result]
 0x789474: xor     ebp, ebp
 0x789476: cmp     dword ptr [ebx+18h], 10h
 0x78947A: mov     [esp+448h+var_430], edi
@@ -70,7 +70,6 @@
 0x789507: sub     edi, esi
 0x789509: sub     ebp, esi
 0x78950B: jmp     short loc_789510
-0x78950D: align 10h
 0x789510: cmp     esi, [ebx+14h]
 0x789513: jbe     short loc_78951A
 0x789515: call    __invalid_parameter_noinfo
@@ -89,37 +88,36 @@
 0x789540: xor     ebp, ebp
 0x789542: mov     esi, 0Fh
 0x789547: lea     eax, [esp+448h+Src]
-0x78954B: mov     [esp+448h+var_414], esi
-0x78954F: mov     [esp+448h+var_418], ebp
-0x789553: mov     byte ptr [esp+448h+var_428], 0
+0x78954B: mov     [esp+448h+source.capacity], esi
+0x78954F: mov     [esp+448h+source.size], ebp
+0x789553: mov     byte ptr [esp+448h+source.storage], 0
 0x789558: lea     edx, [eax+1]
 0x78955B: jmp     short loc_789560
-0x78955D: align 10h
 0x789560: mov     cl, [eax]
 0x789562: add     eax, 1
 0x789565: test    cl, cl
 0x789567: jnz     short loc_789560
 0x789569: sub     eax, edx
-0x78956B: push    eax; MaxCount
+0x78956B: push    eax; count
 0x78956C: lea     ecx, [esp+44Ch+Src]
-0x789570: push    ecx; Src
-0x789571: lea     ecx, [esp+450h+var_42C]
-0x789575: call    sub_414500
-0x78957A: push    0FFFFFFFFh
-0x78957C: push    ebp
-0x78957D: lea     edx, [esp+450h+var_42C]
+0x789570: push    ecx; source
+0x789571: lea     ecx, [esp+450h+source]; this
+0x789575: call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.
+0x78957A: push    0FFFFFFFFh; count
+0x78957C: push    ebp; offset
+0x78957D: lea     edx, [esp+450h+source]
 0x789581: mov     [edi+18h], esi
 0x789584: mov     [edi+14h], ebp
-0x789587: push    edx
-0x789588: mov     ecx, edi
+0x789587: push    edx; source
+0x789588: mov     ecx, edi; this
 0x78958A: mov     [esp+454h+var_4], ebp
 0x789591: mov     byte ptr [edi+4], 0
-0x789595: call    sub_414420
-0x78959A: cmp     [esp+448h+var_414], 10h
+0x789595: call    OB_stString28_AssignSubstring_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,offset,count). Bounds-checks offset, clamps count to source.size-offset, handles self-assignment by in-place erasure, grows when required, copies the selected bytes, updates size, and writes the terminator.
+0x78959A: cmp     [esp+448h+source.capacity], 10h
 0x78959F: jb      short loc_7895AE
-0x7895A1: mov     eax, [esp+448h+var_428]
+0x7895A1: mov     eax, dword ptr [esp+448h+source.storage]
 0x7895A5: push    eax
-0x7895A6: call    FormHeapFree
+0x7895A6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7895AB: add     esp, 4
 0x7895AE: mov     eax, edi
 0x7895B0: mov     ecx, [esp+448h+var_C]
@@ -134,3 +132,16 @@
 0x7895CC: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x7895D1: add     esp, 434h
 0x7895D7: retn    4
+0x9CB360: lea     ecx, [ebp-42Ch]; this
+0x9CB366: jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
+0x9CB36B: mov     edx, [esp+arg_4]
+0x9CB36F: lea     eax, [edx-438h]
+0x9CB375: mov     ecx, [edx-43Ch]
+0x9CB37B: xor     ecx, eax
+0x9CB37D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CB382: add     eax, 10h
+0x9CB385: mov     ecx, [edx-4]
+0x9CB388: xor     ecx, eax
+0x9CB38A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CB38F: mov     eax, offset stru_AF39C0
+0x9CB394: jmp     ___CxxFrameHandler3

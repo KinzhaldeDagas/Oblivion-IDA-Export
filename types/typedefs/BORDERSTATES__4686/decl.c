@@ -1,1 +1,7 @@
-BORDERSTATES
+enum BORDERSTATES : __int32
+{
+BORDERStateFiller0 = 0x0,
+BSS_FLAT = 0x1,
+BSS_RAISED = 0x2,
+BSS_SUNKEN = 0x3,
+};

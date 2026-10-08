@@ -9,56 +9,56 @@
 0x519F72: push    edx; char
 0x519F73: push    3; int
 0x519F75: lea     ecx, [esi+88h]; int
-0x519F7B: call    TESAttributes_SetAVi
+0x519F7B: call    TESAttributes_SetAVi; TESAttributes_SetAVi: attributes are stored as single bytes in TESAttributes. AVU base-AV guards clamp attributes to 0..configuredLimit before player integer base setters/modifiers reach this storage.
 0x519F80: pop     esi
 0x519F81: retn    8
 0x519F84: mov     eax, dword ptr [esp+4+arg_4]; jumptable 00519F67 case 5
 0x519F88: push    eax; char
 0x519F89: push    5; int
 0x519F8B: lea     ecx, [esi+88h]; int
-0x519F91: call    TESAttributes_SetAVi
+0x519F91: call    TESAttributes_SetAVi; TESAttributes_SetAVi: attributes are stored as single bytes in TESAttributes. AVU base-AV guards clamp attributes to 0..configuredLimit before player integer base setters/modifiers reach this storage.
 0x519F96: pop     esi
 0x519F97: retn    8
 0x519F9A: mov     ecx, dword ptr [esp+4+arg_4]; jumptable 00519F67 case 1
 0x519F9E: push    ecx; char
 0x519F9F: push    1; int
 0x519FA1: lea     ecx, [esi+88h]; int
-0x519FA7: call    TESAttributes_SetAVi
+0x519FA7: call    TESAttributes_SetAVi; TESAttributes_SetAVi: attributes are stored as single bytes in TESAttributes. AVU base-AV guards clamp attributes to 0..configuredLimit before player integer base setters/modifiers reach this storage.
 0x519FAC: pop     esi
 0x519FAD: retn    8
 0x519FB0: mov     edx, dword ptr [esp+4+arg_4]; jumptable 00519F67 case 7
 0x519FB4: push    edx; char
 0x519FB5: push    7; int
 0x519FB7: lea     ecx, [esi+88h]; int
-0x519FBD: call    TESAttributes_SetAVi
+0x519FBD: call    TESAttributes_SetAVi; TESAttributes_SetAVi: attributes are stored as single bytes in TESAttributes. AVU base-AV guards clamp attributes to 0..configuredLimit before player integer base setters/modifiers reach this storage.
 0x519FC2: pop     esi
 0x519FC3: retn    8
 0x519FC6: mov     eax, dword ptr [esp+4+arg_4]; jumptable 00519F67 case 6
 0x519FCA: push    eax; char
 0x519FCB: push    6; int
 0x519FCD: lea     ecx, [esi+88h]; int
-0x519FD3: call    TESAttributes_SetAVi
+0x519FD3: call    TESAttributes_SetAVi; TESAttributes_SetAVi: attributes are stored as single bytes in TESAttributes. AVU base-AV guards clamp attributes to 0..configuredLimit before player integer base setters/modifiers reach this storage.
 0x519FD8: pop     esi
 0x519FD9: retn    8
 0x519FDC: mov     ecx, dword ptr [esp+4+arg_4]; jumptable 00519F67 case 4
 0x519FE0: push    ecx; char
 0x519FE1: push    4; int
 0x519FE3: lea     ecx, [esi+88h]; int
-0x519FE9: call    TESAttributes_SetAVi
+0x519FE9: call    TESAttributes_SetAVi; TESAttributes_SetAVi: attributes are stored as single bytes in TESAttributes. AVU base-AV guards clamp attributes to 0..configuredLimit before player integer base setters/modifiers reach this storage.
 0x519FEE: pop     esi
 0x519FEF: retn    8
 0x519FF2: mov     edx, dword ptr [esp+4+arg_4]; jumptable 00519F67 case 0
 0x519FF6: push    edx; char
 0x519FF7: push    0; int
 0x519FF9: lea     ecx, [esi+88h]; int
-0x519FFF: call    TESAttributes_SetAVi
+0x519FFF: call    TESAttributes_SetAVi; TESAttributes_SetAVi: attributes are stored as single bytes in TESAttributes. AVU base-AV guards clamp attributes to 0..configuredLimit before player integer base setters/modifiers reach this storage.
 0x51A004: pop     esi
 0x51A005: retn    8
 0x51A008: mov     eax, dword ptr [esp+4+arg_4]; jumptable 00519F67 case 2
 0x51A00C: push    eax; char
 0x51A00D: push    2; int
 0x51A00F: lea     ecx, [esi+88h]; int
-0x51A015: call    TESAttributes_SetAVi
+0x51A015: call    TESAttributes_SetAVi; TESAttributes_SetAVi: attributes are stored as single bytes in TESAttributes. AVU base-AV guards clamp attributes to 0..configuredLimit before player integer base setters/modifiers reach this storage.
 0x51A01A: pop     esi
 0x51A01B: retn    8
 0x51A01E: mov     ecx, dword ptr [esp+4+arg_4]; jumptable 00519F67 case 8

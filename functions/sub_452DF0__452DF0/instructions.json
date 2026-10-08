@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x452E0C",
-    "line": "mov     ebx, [esp+0Ch+arg_0]",
+    "line": "mov     ebx, [esp+0Ch+formID]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x452E34",
-    "line": "cmp     [esp+10h+arg_4], 0",
+    "line": "cmp     [esp+10h+force], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x452E56",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

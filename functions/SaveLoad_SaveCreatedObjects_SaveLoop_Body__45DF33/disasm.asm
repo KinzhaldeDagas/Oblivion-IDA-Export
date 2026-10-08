@@ -2,7 +2,7 @@
 0x45DF37: mov     ebp, [ecx]
 0x45DF39: push    ebp; a1
 0x45DF3A: mov     [esp+4+arg_14], ebp
-0x45DF3E: call    TESForm_LookupByFormID
+0x45DF3E: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x45DF43: mov     edi, eax
 0x45DF45: add     esp, 4
 0x45DF48: test    edi, edi

@@ -1,19 +1,36 @@
 {
-  "callees_count": 16,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_6B8CF0",
+  "chunks": [
+    [
+      "0x6B8CF0",
+      "0x6B8DF7"
+    ],
+    [
+      "0x9C6F60",
+      "0x9C6F8E"
+    ]
+  ],
+  "chunks_sha256": "71465360298fe666fcc15999194b60f867a27c43c9edfa9594cef46921fa67c8",
+  "comment_regular": "Builds runtime DialogueResponses from a cloned TESResponse list. Each TESResponse is reconstructed from the authoritative INFO record's 16-byte TRDT followed by NAM1 text. Empty text is skipped; INFOGENERAL/Rumors keeps only the first non-empty response.",
+  "comment_repeatable": "Builds runtime DialogueResponses from a cloned TESResponse list. Each TESResponse is reconstructed from the authoritative INFO record's 16-byte TRDT followed by NAM1 text. Empty text is skipped; INFOGENERAL/Rumors keeps only the first non-empty response.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "MenuTopic::FillResponseList",
   "end_ea": "0x6B8DF7",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6B8CF0",
+  "name": "MenuTopic::FillResponseList",
   "segment": ".text",
   "sha256": "30bfa51b1ec04f2c2a17130aa0233494ac055030ed85f97de6f692b5bb219325",
   "size": 263,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6B8CF0",
-  "type": "void __thiscall(BSStringT *this, TESQuest *a2, TESTopic *a3, TESForm *a4, TESObjectREFR *a5)",
-  "xrefs_from_count": 101,
+  "total_chunk_size": 309,
+  "type": "void __thiscall(MenuTopicView *this, TESQuest *ownerQuest, TESTopic *topic, OblivionTopicInfo *info, TESObjectREFR *speaker)",
+  "xrefs_from_count": 117,
   "xrefs_to_count": 2
 }

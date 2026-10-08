@@ -33,7 +33,7 @@
 0x74EB2A: test    eax, eax
 0x74EB2C: jz      short loc_74EB3E
 0x74EB2E: mov     edi, edi
-0x74EB30: cmp     eax, offset dword_B408C8
+0x74EB30: cmp     eax, offset stru_B408C8
 0x74EB35: jz      short loc_74EB60
 0x74EB37: mov     eax, [eax+4]
 0x74EB3A: test    eax, eax
@@ -45,7 +45,7 @@
 0x74EB47: test    eax, eax
 0x74EB49: jz      loc_74EBCC
 0x74EB4F: nop
-0x74EB50: cmp     eax, offset dword_B40A28
+0x74EB50: cmp     eax, offset stru_B40A28
 0x74EB55: jz      short loc_74EB9A
 0x74EB57: mov     eax, [eax+4]
 0x74EB5A: test    eax, eax

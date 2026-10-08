@@ -1,25 +1,25 @@
 [
   {
     "ea": "0x4ACE30",
-    "line": "cmp     byte ptr [esp+arg_C], 0",
+    "line": "cmp     byte ptr [esp+bFinished], 0; Verified (Oblivion): generic animation helper interpolates from zero through the configured full value to the persistent value across fade-in/full/fade-out intervals; when finished it applies the fade-out interpolation.",
     "mnemonic": "cmp",
     "size": 5
   },
   {
     "ea": "0x4ACE35",
-    "line": "fld     [esp+arg_18]",
+    "line": "fld     [esp+fullTime]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x4ACE39",
-    "line": "fld     [esp+arg_10]",
+    "line": "fld     [esp+fadeInTime]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x4ACE3D",
-    "line": "fld     [esp+arg_8]",
+    "line": "fld     [esp+elapsedSeconds]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x4ACE60",
-    "line": "fld     [esp+arg_14]",
+    "line": "fld     [esp+fadeOutTime]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -133,13 +133,13 @@
   },
   {
     "ea": "0x4ACE75",
-    "line": "fld     [esp+arg_1C]",
+    "line": "fld     [esp+fullValue]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x4ACE79",
-    "line": "fsub    [esp+arg_20]",
+    "line": "fsub    [esp+persistentValue]",
     "mnemonic": "fsub",
     "size": 4
   },
@@ -175,13 +175,13 @@
   },
   {
     "ea": "0x4ACE88",
-    "line": "fstp    [esp+arg_C]",
+    "line": "fstp    [esp+bFinished]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4ACE8C",
-    "line": "fld     [esp+arg_C]",
+    "line": "fld     [esp+bFinished]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -193,13 +193,13 @@
   },
   {
     "ea": "0x4ACE92",
-    "line": "fstp    [esp+arg_C]",
+    "line": "fstp    [esp+bFinished]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4ACE96",
-    "line": "fld     [esp+arg_C]",
+    "line": "fld     [esp+bFinished]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x4ACEA2",
-    "line": "fstp    [esp+arg_C]",
+    "line": "fstp    [esp+bFinished]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x4ACEA8",
-    "line": "fcom    [esp+arg_C]",
+    "line": "fcom    [esp+bFinished]",
     "mnemonic": "fcom",
     "size": 4
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x4ACEB7",
-    "line": "fstp    [esp+arg_C]",
+    "line": "fstp    [esp+bFinished]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x4ACEC3",
-    "line": "fstp    [esp+arg_C]",
+    "line": "fstp    [esp+bFinished]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -325,43 +325,43 @@
   },
   {
     "ea": "0x4ACECB",
-    "line": "fld     [esp+arg_0]",
+    "line": "fld     [esp+currentValue]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x4ACECF",
-    "line": "fld     [esp+arg_C]",
+    "line": "fld     [esp+bFinished]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x4ACED3",
-    "line": "fmul    [esp+arg_4]",
+    "line": "fmul    [esp+deltaSeconds]",
     "mnemonic": "fmul",
     "size": 4
   },
   {
     "ea": "0x4ACED7",
-    "line": "fstp    [esp+arg_C]",
+    "line": "fstp    [esp+bFinished]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4ACEDB",
-    "line": "fsub    [esp+arg_C]",
+    "line": "fsub    [esp+bFinished]",
     "mnemonic": "fsub",
     "size": 4
   },
   {
     "ea": "0x4ACEDF",
-    "line": "fstp    [esp+arg_C]",
+    "line": "fstp    [esp+bFinished]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4ACEE3",
-    "line": "fld     [esp+arg_C]",
+    "line": "fld     [esp+bFinished]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -403,13 +403,13 @@
   },
   {
     "ea": "0x4ACEF4",
-    "line": "fstp    [esp+arg_0]",
+    "line": "fstp    [esp+currentValue]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4ACEF8",
-    "line": "fld     [esp+arg_0]",
+    "line": "fld     [esp+currentValue]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -427,13 +427,13 @@
   },
   {
     "ea": "0x4ACF01",
-    "line": "fstp    [esp+arg_0]",
+    "line": "fstp    [esp+currentValue]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4ACF05",
-    "line": "fld     [esp+arg_0]",
+    "line": "fld     [esp+currentValue]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -481,13 +481,13 @@
   },
   {
     "ea": "0x4ACF19",
-    "line": "fdivr   [esp+arg_4]",
+    "line": "fdivr   [esp+deltaSeconds]",
     "mnemonic": "fdivr",
     "size": 4
   },
   {
     "ea": "0x4ACF1D",
-    "line": "fld     [esp+arg_1C]",
+    "line": "fld     [esp+fullValue]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x4ACF25",
-    "line": "fld     [esp+arg_0]",
+    "line": "fld     [esp+currentValue]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -523,13 +523,13 @@
   },
   {
     "ea": "0x4ACF2D",
-    "line": "fstp    [esp+arg_C]",
+    "line": "fstp    [esp+bFinished]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4ACF31",
-    "line": "fld     [esp+arg_C]",
+    "line": "fld     [esp+bFinished]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -565,13 +565,13 @@
   },
   {
     "ea": "0x4ACF40",
-    "line": "fstp    [esp+arg_0]",
+    "line": "fstp    [esp+currentValue]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4ACF44",
-    "line": "fld     [esp+arg_0]",
+    "line": "fld     [esp+currentValue]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -625,19 +625,19 @@
   },
   {
     "ea": "0x4ACF5A",
-    "line": "fld     [esp+arg_1C]",
+    "line": "fld     [esp+fullValue]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x4ACF5E",
-    "line": "fstp    [esp+arg_0]",
+    "line": "fstp    [esp+currentValue]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4ACF62",
-    "line": "fld     [esp+arg_0]",
+    "line": "fld     [esp+currentValue]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x4ACF6B",
-    "line": "fld     [esp+arg_14]",
+    "line": "fld     [esp+fadeOutTime]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x4ACF7A",
-    "line": "fld     [esp+arg_0]",
+    "line": "fld     [esp+currentValue]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -703,13 +703,13 @@
   },
   {
     "ea": "0x4ACF81",
-    "line": "fld     [esp+8+arg_1C]",
+    "line": "fld     [esp+8+fullValue]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x4ACF85",
-    "line": "fld     [esp+8+arg_20]",
+    "line": "fld     [esp+8+persistentValue]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -733,13 +733,13 @@
   },
   {
     "ea": "0x4ACF8F",
-    "line": "fstp    [esp+8+arg_C]",
+    "line": "fstp    [esp+8+bFinished]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4ACF93",
-    "line": "fld     [esp+8+arg_C]",
+    "line": "fld     [esp+8+bFinished]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -751,19 +751,19 @@
   },
   {
     "ea": "0x4ACF99",
-    "line": "fstp    [esp+8+arg_C]",
+    "line": "fstp    [esp+8+bFinished]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4ACF9D",
-    "line": "fld     [esp+8+arg_C]",
+    "line": "fld     [esp+8+bFinished]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x4ACFA1",
-    "line": "fld     [esp+8+arg_4]",
+    "line": "fld     [esp+8+deltaSeconds]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -799,13 +799,13 @@
   },
   {
     "ea": "0x4ACFAF",
-    "line": "fstp    [esp+8+arg_C]",
+    "line": "fstp    [esp+8+bFinished]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4ACFB3",
-    "line": "fld     [esp+8+arg_C]",
+    "line": "fld     [esp+8+bFinished]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -829,7 +829,7 @@
   },
   {
     "ea": "0x4ACFC3",
-    "line": "fstp    [esp+8+arg_0]",
+    "line": "fstp    [esp+8+currentValue]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -841,7 +841,7 @@
   },
   {
     "ea": "0x4ACFCA",
-    "line": "fld     [esp+arg_0]",
+    "line": "fld     [esp+currentValue]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -859,19 +859,19 @@
   },
   {
     "ea": "0x4ACFD3",
-    "line": "fld     [esp+arg_20]",
+    "line": "fld     [esp+persistentValue]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x4ACFD7",
-    "line": "fstp    [esp+arg_0]",
+    "line": "fstp    [esp+currentValue]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4ACFDB",
-    "line": "fld     [esp+arg_0]",
+    "line": "fld     [esp+currentValue]",
     "mnemonic": "fld",
     "size": 4
   },

@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
-  "callers_count": 19,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 96,
+  "chunks": [
+    [
+      "0x78EB40",
+      "0x78EB68"
+    ]
+  ],
+  "chunks_sha256": "b9c39b658b7494ede5f349e085d24b1a0dbee8f9d3097927fb88481e78e8dff8",
+  "comment_regular": "CTreeFileAccess::ParseToken/ParseInt-style 4-byte read. Bounds-checks cursor against owned buffer, advances cursor by 4, returns little-endian dword.",
+  "comment_repeatable": "CTreeFileAccess::ParseToken/ParseInt-style 4-byte read. Bounds-checks cursor against owned buffer, advances cursor by 4, returns little-endian dword.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_78EB40",
+  "display_name": "OB_CTreeFileAccess_ReadDword_010201A0",
   "end_ea": "0x78EB68",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_78EB40",
+  "name": "OB_CTreeFileAccess_ReadDword_010201A0",
   "segment": ".text",
   "sha256": "b9c39b658b7494ede5f349e085d24b1a0dbee8f9d3097927fb88481e78e8dff8",
   "size": 40,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78EB40",
-  "type": "int __thiscall(unsigned int *this)",
+  "total_chunk_size": 40,
+  "type": "int __thiscall(OB_CTreeFileAccess_010201A0 *this)",
   "xrefs_from_count": 21,
   "xrefs_to_count": 96
 }

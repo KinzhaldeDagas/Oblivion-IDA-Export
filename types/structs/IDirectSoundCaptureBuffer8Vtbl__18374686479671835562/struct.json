@@ -1,94 +1,153 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "IDirectSoundCaptureBuffer8Vtbl",
+  "definition": "struct IDirectSoundCaptureBuffer8Vtbl\n{\nHRESULT_0 (*QueryInterface)(IDirectSoundCaptureBuffer8_0 *, const IID *const, void **) __offset(OFF64|AUTO);\nULONG (*AddRef)(IDirectSoundCaptureBuffer8_0 *) __offset(OFF64|AUTO);\nULONG (*Release)(IDirectSoundCaptureBuffer8_0 *) __offset(OFF64|AUTO);\nHRESULT_0 (*GetCaps)(IDirectSoundCaptureBuffer8_0 *, LPDSCBCAPS) __offset(OFF64|AUTO);\nHRESULT_0 (*GetCurrentPosition)(IDirectSoundCaptureBuffer8_0 *, LPDWORD, LPDWORD) __offset(OFF64|AUTO);\nHRESULT_0 (*GetFormat)(IDirectSoundCaptureBuffer8_0 *, LPWAVEFORMATEX, DWORD, LPDWORD) __offset(OFF64|AUTO);\nHRESULT_0 (*GetStatus)(IDirectSoundCaptureBuffer8_0 *, LPDWORD) __offset(OFF64|AUTO);\nHRESULT_0 (*Initialize)(IDirectSoundCaptureBuffer8_0 *, LPDIRECTSOUNDCAPTURE, LPCDSCBUFFERDESC) __offset(OFF64|AUTO);\nHRESULT_0 (*Lock)(IDirectSoundCaptureBuffer8_0 *, DWORD, DWORD, LPVOID *, LPDWORD, LPVOID *, LPDWORD, DWORD) __offset(OFF64|AUTO);\nHRESULT_0 (*Start)(IDirectSoundCaptureBuffer8_0 *, DWORD) __offset(OFF64|AUTO);\nHRESULT_0 (*Stop)(IDirectSoundCaptureBuffer8_0 *) __offset(OFF64|AUTO);\nHRESULT_0 (*Unlock)(IDirectSoundCaptureBuffer8_0 *, LPVOID, DWORD, LPVOID, DWORD) __offset(OFF64|AUTO);\nHRESULT_0 (*GetObjectInPath)(IDirectSoundCaptureBuffer8_0 *, const GUID *const, DWORD, const GUID *const, LPVOID *) __offset(OFF64|AUTO);\nHRESULT_0 (*GetFXStatus)(IDirectSoundCaptureBuffer8_0 *, DWORD, LPDWORD) __offset(OFF64|AUTO);\n}\n",
   "id": 18374686479671835562,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QueryInterface",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IDirectSoundCaptureBuffer8_0 *, const IID *const, void **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddRef",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(IDirectSoundCaptureBuffer8_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Release",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(IDirectSoundCaptureBuffer8_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetCaps",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IDirectSoundCaptureBuffer8_0 *, LPDSCBCAPS)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetCurrentPosition",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IDirectSoundCaptureBuffer8_0 *, LPDWORD, LPDWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetFormat",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IDirectSoundCaptureBuffer8_0 *, LPWAVEFORMATEX, DWORD, LPDWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetStatus",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IDirectSoundCaptureBuffer8_0 *, LPDWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Initialize",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IDirectSoundCaptureBuffer8_0 *, LPDIRECTSOUNDCAPTURE, LPCDSCBUFFERDESC)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Lock",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IDirectSoundCaptureBuffer8_0 *, DWORD, DWORD, LPVOID *, LPDWORD, LPVOID *, LPDWORD, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Start",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IDirectSoundCaptureBuffer8_0 *, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Stop",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IDirectSoundCaptureBuffer8_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unlock",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IDirectSoundCaptureBuffer8_0 *, LPVOID, DWORD, LPVOID, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetObjectInPath",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IDirectSoundCaptureBuffer8_0 *, const GUID *const, DWORD, const GUID *const, LPVOID *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetFXStatus",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IDirectSoundCaptureBuffer8_0 *, DWORD, LPDWORD)"
     }
   ],
   "name": "IDirectSoundCaptureBuffer8Vtbl",
+  "ordinal": 3915,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 56
 }

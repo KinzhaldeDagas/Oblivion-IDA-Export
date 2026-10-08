@@ -1,1 +1,4 @@
-SERVICE_STATUS_HANDLE__
+struct SERVICE_STATUS_HANDLE__
+{
+int unused;
+};

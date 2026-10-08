@@ -6,7 +6,7 @@
 0x7299AA: push    edi
 0x7299AB: push    esi
 0x7299AC: mov     edi, ecx
-0x7299AE: call    nullsub_returnvVoid_1arg
+0x7299AE: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x7299B3: mov     eax, ds:0B3FE00h
 0x7299B8: push    eax
 0x7299B9: mov     ecx, esi

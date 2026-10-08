@@ -1,19 +1,36 @@
 {
-  "callees_count": 124,
-  "callers_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 39,
+  "callers_count": 7,
+  "chunks": [
+    [
+      "0x58D2F0",
+      "0x58D959"
+    ],
+    [
+      "0x9BF900",
+      "0x9BF926"
+    ]
+  ],
+  "chunks_sha256": "0ce8a0959018926882a3fb70350713eeeb36cd465e19e7916ba2d17605832f83",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_58D2F0",
+  "comment_repeatable": "Verified 2026-10-07: AddPair role promoted from Probable after inspecting full token-history rewrite. Tracks last three template items. Closing a literal trait/action replaces opener with SetTrait0x32 or LiteralAction0x37, transfers payload, removes temporary item. Closing action preceded by0xBBB/0xBBC folds into ReferenceAction0x3C with selector string, source-trait number and operator argument. Name token0xBBA turns tile opener into BeginTile0x28; type999 enters/exits named-template construction. Fallout0x827DF340 follows analogous folds but different command IDs/pooling. Unknown: malformed-input edge coverage and exact behavior for all user-defined tokens.\n\nProbable 2026-10-07: TileTemplate::AddPair role, supported by all seven callers in ParseFile, item construction and lexical normalization, plus Fallout named0x827DF340. Not renamed this pass: full rewrite branches/command semantics remain unexamined. Highest-value next parser target.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 6,
+  "display_name": "Tile::TileTemplate::AddPair",
   "end_ea": "0x58D959",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_58D2F0",
+  "name": "Tile::TileTemplate::AddPair",
   "segment": ".text",
   "sha256": "9198a98432e799185f16937c97c5ca7ed07fdc3c55ca5021984da9fe9b9f5d71",
   "size": 1641,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x58D2F0",
-  "type": "void __thiscall(_DWORD *this, char *, char *Src, int, char)",
-  "xrefs_from_count": 623,
+  "total_chunk_size": 1679,
+  "type": "void __thiscall(OblivionTileTemplate *this, unsigned int command, const char *text, unsigned int sourceLine, bool preserveStrings)",
+  "xrefs_from_count": 637,
   "xrefs_to_count": 7
 }

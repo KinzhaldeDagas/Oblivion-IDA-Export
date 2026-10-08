@@ -1,19 +1,36 @@
 {
-  "callees_count": 4,
-  "callers_count": 20,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_700900",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 22,
+  "chunks": [
+    [
+      "0x700900",
+      "0x700992"
+    ],
+    [
+      "0x9C93E0",
+      "0x9C9403"
+    ]
+  ],
+  "chunks_sha256": "323d8206e550d041f1729e6776f9e1ed1ea205c1a5b02037a72a986599dd9e05",
+  "comment_regular": "Clones a loaded NiObject with a temporary pointer map and runs clone post-processing; the returned scene object is distinct from its source.",
+  "comment_repeatable": "Clones a loaded NiObject with a temporary pointer map and runs clone post-processing; the returned scene object is distinct from its source.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "NiObject_CloneWithPointerMap",
   "end_ea": "0x700992",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_700900",
+  "name": "NiObject_CloneWithPointerMap",
   "segment": ".text",
   "sha256": "cd24886c8a448e4103210f52db11118bbd0ebd95d022de7fc8cc480f857289fe",
   "size": 146,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x700900",
-  "type": "int __thiscall(void *this)",
-  "xrefs_from_count": 55,
+  "total_chunk_size": 181,
+  "type": "NiObject *__thiscall(NiObject *this)",
+  "xrefs_from_count": 66,
   "xrefs_to_count": 22
 }

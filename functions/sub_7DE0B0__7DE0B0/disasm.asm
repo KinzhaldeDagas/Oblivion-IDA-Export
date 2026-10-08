@@ -6,20 +6,20 @@
 0x7DE0BC: cmp     eax, ebx
 0x7DE0BE: jz      short loc_7DE0CC
 0x7DE0C0: mov     ecx, ds:0B42F50h; this
-0x7DE0C6: push    eax; a2
-0x7DE0C7: call    sub_7C1EE0
+0x7DE0C6: push    eax; texture
+0x7DE0C7: call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.
 0x7DE0CC: mov     eax, [esi+100h]
 0x7DE0D2: cmp     eax, ebx
 0x7DE0D4: jz      short loc_7DE0E2
 0x7DE0D6: mov     ecx, ds:0B42F50h; this
-0x7DE0DC: push    eax; a2
-0x7DE0DD: call    sub_7C1EE0
+0x7DE0DC: push    eax; texture
+0x7DE0DD: call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.
 0x7DE0E2: mov     eax, [esi+104h]
 0x7DE0E8: cmp     eax, ebx
 0x7DE0EA: jz      short loc_7DE0F8
 0x7DE0EC: mov     ecx, ds:0B42F50h; this
-0x7DE0F2: push    eax; a2
-0x7DE0F3: call    sub_7C1EE0
+0x7DE0F2: push    eax; texture
+0x7DE0F3: call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.
 0x7DE0F8: push    ebp
 0x7DE0F9: mov     ebp, ds:0A2807Ch
 0x7DE0FF: push    edi

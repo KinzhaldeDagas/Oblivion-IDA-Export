@@ -23,21 +23,21 @@
 0x7BA9B6: jz      short loc_7BA9C8
 0x7BA9B8: add     [ecx+60h], edi
 0x7BA9BB: jnz     short loc_7BA9C2
-0x7BA9BD: call    sub_7604D0
+0x7BA9BD: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x7BA9C2: mov     [esi+0B8h], ebx
 0x7BA9C8: mov     ecx, [esi+0BCh]
 0x7BA9CE: cmp     ecx, ebx
 0x7BA9D0: jz      short loc_7BA9E2
 0x7BA9D2: add     [ecx+60h], edi
 0x7BA9D5: jnz     short loc_7BA9DC
-0x7BA9D7: call    sub_7604D0
+0x7BA9D7: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x7BA9DC: mov     [esi+0BCh], ebx
 0x7BA9E2: mov     ecx, [esi+0C0h]
 0x7BA9E8: cmp     ecx, ebx
 0x7BA9EA: jz      short loc_7BA9FC
 0x7BA9EC: add     [ecx+60h], edi
 0x7BA9EF: jnz     short loc_7BA9F6
-0x7BA9F1: call    sub_7604D0
+0x7BA9F1: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x7BA9F6: mov     [esi+0C0h], ebx
 0x7BA9FC: mov     edi, [esi+0C4h]
 0x7BAA02: cmp     edi, ebx
@@ -141,14 +141,14 @@
 0x7BAAFA: jz      short loc_7BAB0D
 0x7BAAFC: add     dword ptr [ecx+60h], 0FFFFFFFFh
 0x7BAB00: jnz     short loc_7BAB07
-0x7BAB02: call    sub_7604D0
+0x7BAB02: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x7BAB07: mov     [esi+0B4h], ebx
 0x7BAB0D: mov     ecx, [esi+0ACh]
 0x7BAB13: cmp     ecx, ebx
 0x7BAB15: jz      short loc_7BAB28
 0x7BAB17: add     dword ptr [ecx+60h], 0FFFFFFFFh
 0x7BAB1B: jnz     short loc_7BAB22
-0x7BAB1D: call    sub_7604D0
+0x7BAB1D: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x7BAB22: mov     [esi+0ACh], ebx
 0x7BAB28: mov     edi, [esi+7Ch]
 0x7BAB2B: cmp     edi, ebx
@@ -445,42 +445,42 @@
 0x7BADFC: jz      short loc_7BAE08
 0x7BADFE: add     [ecx+60h], edi
 0x7BAE01: jnz     short loc_7BAE08
-0x7BAE03: call    sub_7604D0
+0x7BAE03: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x7BAE08: mov     ecx, [esi+0BCh]
 0x7BAE0E: cmp     ecx, ebx
 0x7BAE10: mov     byte ptr [esp+24h+var_4], 10h
 0x7BAE15: jz      short loc_7BAE21
 0x7BAE17: add     [ecx+60h], edi
 0x7BAE1A: jnz     short loc_7BAE21
-0x7BAE1C: call    sub_7604D0
+0x7BAE1C: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x7BAE21: mov     ecx, [esi+0B8h]
 0x7BAE27: cmp     ecx, ebx
 0x7BAE29: mov     byte ptr [esp+24h+var_4], 0Fh
 0x7BAE2E: jz      short loc_7BAE3A
 0x7BAE30: add     [ecx+60h], edi
 0x7BAE33: jnz     short loc_7BAE3A
-0x7BAE35: call    sub_7604D0
+0x7BAE35: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x7BAE3A: mov     ecx, [esi+0B4h]
 0x7BAE40: cmp     ecx, ebx
 0x7BAE42: mov     byte ptr [esp+24h+var_4], 0Eh
 0x7BAE47: jz      short loc_7BAE53
 0x7BAE49: add     [ecx+60h], edi
 0x7BAE4C: jnz     short loc_7BAE53
-0x7BAE4E: call    sub_7604D0
+0x7BAE4E: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x7BAE53: mov     ecx, [esi+0B0h]
 0x7BAE59: cmp     ecx, ebx
 0x7BAE5B: mov     byte ptr [esp+24h+var_4], 0Dh
 0x7BAE60: jz      short loc_7BAE6C
 0x7BAE62: add     [ecx+60h], edi
 0x7BAE65: jnz     short loc_7BAE6C
-0x7BAE67: call    sub_7604D0
+0x7BAE67: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x7BAE6C: mov     ecx, [esi+0ACh]
 0x7BAE72: cmp     ecx, ebx
 0x7BAE74: mov     byte ptr [esp+24h+var_4], 0Ch
 0x7BAE79: jz      short loc_7BAE85
 0x7BAE7B: add     [ecx+60h], edi
 0x7BAE7E: jnz     short loc_7BAE85
-0x7BAE80: call    sub_7604D0
+0x7BAE80: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x7BAE85: mov     edi, [esi+0A8h]
 0x7BAE8B: cmp     edi, ebx
 0x7BAE8D: mov     byte ptr [esp+24h+var_4], 0Bh
@@ -675,7 +675,7 @@
 0x7BB053: call    eax
 0x7BB055: mov     ecx, esi; this
 0x7BB057: mov     [esp+24h+var_4], 0FFFFFFFFh
-0x7BB05F: call    ??1BSShader@@UAE@XZ; BSShader::~BSShader(void)
+0x7BB05F: call    ??1BSShader@@UAE@XZ;
 0x7BB064: mov     ecx, dword ptr [esp+24h+var_C]
 0x7BB068: mov     large fs:0, ecx
 0x7BB06F: pop     ecx
@@ -685,3 +685,84 @@
 0x7BB073: pop     ebx
 0x7BB074: add     esp, 10h
 0x7BB077: retn
+0x9CDC70: mov     ecx, [ebp-10h]; this
+0x9CDC73: jmp     ??1BSShader@@UAE@XZ;
+0x9CDC78: mov     ecx, [ebp-10h]
+0x9CDC7B: add     ecx, 7Ch ; '|'; slot
+0x9CDC7E: jmp     NiPointerSlot_Release
+0x9CDC83: mov     ecx, [ebp-10h]
+0x9CDC86: add     ecx, 80h ; '€'; slot
+0x9CDC8C: jmp     NiPointerSlot_Release
+0x9CDC91: mov     ecx, [ebp-10h]
+0x9CDC94: add     ecx, 84h ; '„'; slot
+0x9CDC9A: jmp     NiPointerSlot_Release
+0x9CDC9F: mov     ecx, [ebp-10h]
+0x9CDCA2: add     ecx, 88h ; 'ˆ'; slot
+0x9CDCA8: jmp     NiPointerSlot_Release
+0x9CDCAD: mov     ecx, [ebp-10h]
+0x9CDCB0: add     ecx, 8Ch ; 'Œ'; slot
+0x9CDCB6: jmp     NiPointerSlot_Release
+0x9CDCBB: mov     ecx, [ebp-10h]
+0x9CDCBE: add     ecx, 90h; slot
+0x9CDCC4: jmp     NiPointerSlot_Release
+0x9CDCC9: mov     ecx, [ebp-10h]
+0x9CDCCC: add     ecx, 94h ; '”'; slot
+0x9CDCD2: jmp     NiPointerSlot_Release
+0x9CDCD7: mov     ecx, [ebp-10h]
+0x9CDCDA: add     ecx, 98h ; '˜'; slot
+0x9CDCE0: jmp     NiPointerSlot_Release
+0x9CDCE5: mov     ecx, [ebp-10h]
+0x9CDCE8: add     ecx, 9Ch ; 'œ'; slot
+0x9CDCEE: jmp     NiPointerSlot_Release
+0x9CDCF3: mov     ecx, [ebp-10h]
+0x9CDCF6: add     ecx, 0A0h ; ' '; slot
+0x9CDCFC: jmp     NiPointerSlot_Release
+0x9CDD01: mov     ecx, [ebp-10h]
+0x9CDD04: add     ecx, 0A4h ; '¤'; slot
+0x9CDD0A: jmp     NiPointerSlot_Release
+0x9CDD0F: mov     ecx, [ebp-10h]
+0x9CDD12: add     ecx, 0A8h ; '¨'; slot
+0x9CDD18: jmp     NiPointerSlot_Release
+0x9CDD1D: mov     ecx, [ebp-10h]
+0x9CDD20: add     ecx, 0ACh ; '¬'; void *
+0x9CDD26: jmp     sub_4027D0
+0x9CDD2B: mov     ecx, [ebp-10h]
+0x9CDD2E: add     ecx, 0B0h ; '°'; void *
+0x9CDD34: jmp     sub_4027D0
+0x9CDD39: mov     ecx, [ebp-10h]
+0x9CDD3C: add     ecx, 0B4h ; '´'; void *
+0x9CDD42: jmp     sub_4027D0
+0x9CDD47: mov     ecx, [ebp-10h]
+0x9CDD4A: add     ecx, 0B8h ; '¸'; void *
+0x9CDD50: jmp     sub_4027D0
+0x9CDD55: mov     ecx, [ebp-10h]
+0x9CDD58: add     ecx, 0BCh ; '¼'; void *
+0x9CDD5E: jmp     sub_4027D0
+0x9CDD63: mov     ecx, [ebp-10h]
+0x9CDD66: add     ecx, 0C0h ; 'À'; void *
+0x9CDD6C: jmp     sub_4027D0
+0x9CDD71: mov     ecx, [ebp-10h]
+0x9CDD74: add     ecx, 0C4h ; 'Ä'; slot
+0x9CDD7A: jmp     NiPointerSlot_Release
+0x9CDD7F: mov     ecx, [ebp-10h]
+0x9CDD82: add     ecx, 0C8h ; 'È'; slot
+0x9CDD88: jmp     NiPointerSlot_Release
+0x9CDD8D: mov     ecx, [ebp-10h]
+0x9CDD90: add     ecx, 0CCh ; 'Ì'; slot
+0x9CDD96: jmp     NiPointerSlot_Release
+0x9CDD9B: mov     ecx, [ebp-10h]
+0x9CDD9E: add     ecx, 0D0h ; 'Ð'; slot
+0x9CDDA4: jmp     NiPointerSlot_Release
+0x9CDDA9: mov     ecx, [ebp-10h]
+0x9CDDAC: add     ecx, 0D4h ; 'Ô'; slot
+0x9CDDB2: jmp     NiPointerSlot_Release
+0x9CDDB7: mov     ecx, [ebp-10h]
+0x9CDDBA: add     ecx, 0D8h ; 'Ø'; slot
+0x9CDDC0: jmp     NiPointerSlot_Release
+0x9CDDC5: mov     edx, [esp+arg_4]
+0x9CDDC9: lea     eax, [edx-14h]
+0x9CDDCC: mov     ecx, [edx-18h]
+0x9CDDCF: xor     ecx, eax
+0x9CDDD1: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CDDD6: mov     eax, offset stru_AF6DB8
+0x9CDDDB: jmp     ___CxxFrameHandler3

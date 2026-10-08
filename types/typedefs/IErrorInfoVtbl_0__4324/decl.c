@@ -1,1 +1,1 @@
-IErrorInfoVtbl_0
+typedef IErrorInfoVtbl IErrorInfoVtbl_0;

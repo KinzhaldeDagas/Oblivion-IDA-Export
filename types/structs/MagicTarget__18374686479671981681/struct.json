@@ -1,28 +1,54 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "MagicTarget",
+  "definition": "struct MagicTarget\n{\nMagicTargetVtbl *vtbl;\nuint8_t unk04;\nuint8_t pad05[3];\n}\n",
   "id": 18374686479671981681,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "vtbl",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "MagicTargetVtbl *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk04",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 1
+      "size": 1,
+      "type": "uint8_t"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad05",
       "offset": 5,
       "offset_hex": "0x5",
-      "size": 3
+      "size": 3,
+      "type": "uint8_t[3]"
     }
   ],
   "name": "MagicTarget",
+  "ordinal": 730,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 8
 }

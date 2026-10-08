@@ -1,1 +1,1 @@
-CABSTR
+typedef tagCABSTR CABSTR;

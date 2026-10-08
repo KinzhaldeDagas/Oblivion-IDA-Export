@@ -1,19 +1,32 @@
 {
-  "callees_count": 13,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4E5040",
+      "0x4E50DE"
+    ]
+  ],
+  "chunks_sha256": "d44ef918652feefc1980ad95cfd5a55d78a416ebb366caa55d39c9ab907d633e",
+  "comment_regular": "Verified clears TESPathGrid.pointsByReference (+0x34), the map from TESObjectREFR* keys to BSSimpleList<TESPathGridPoint*> values. Frees the list nodes and headers, then calls NiTMap_Clear; it does not destroy referenced forms or point objects. Called only by TESPathGrid_ClearPointsAndReferenceMaps while the pathgrid critical section is held.",
+  "comment_repeatable": "Verified clears TESPathGrid.pointsByReference (+0x34), the map from TESObjectREFR* keys to BSSimpleList<TESPathGridPoint*> values. Frees the list nodes and headers, then calls NiTMap_Clear; it does not destroy referenced forms or point objects. Called only by TESPathGrid_ClearPointsAndReferenceMaps while the pathgrid critical section is held.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4E5040",
+  "display_name": "TESPathGrid_ClearPointsByReference",
   "end_ea": "0x4E50DE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4E5040",
+  "name": "TESPathGrid_ClearPointsByReference",
   "segment": ".text",
   "sha256": "d44ef918652feefc1980ad95cfd5a55d78a416ebb366caa55d39c9ab907d633e",
   "size": 158,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E5040",
-  "type": "int __thiscall(_DWORD *this)",
+  "total_chunk_size": 158,
+  "type": "int __thiscall(TESPathGrid *this)",
   "xrefs_from_count": 69,
   "xrefs_to_count": 1
 }

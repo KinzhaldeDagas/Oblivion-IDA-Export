@@ -8,15 +8,15 @@
 0x61E98D: jz      short loc_61E993
 0x61E98F: mov     bl, 1
 0x61E991: jmp     short loc_61E9A2
-0x61E993: call    sub_6135F0
+0x61E993: call    CombatController_GetCurrentTarget
 0x61E998: mov     edi, eax
 0x61E99A: test    edi, edi
 0x61E99C: jz      loc_61EAD8
 0x61E9A2: mov     ecx, esi
-0x61E9A4: call    sub_6135F0
+0x61E9A4: call    CombatController_GetCurrentTarget
 0x61E9A9: push    eax
 0x61E9AA: mov     ecx, esi
-0x61E9AC: call    sub_613640
+0x61E9AC: call    CombatController_FindTargetInfo; Finds current TargetInfo; nonzero byte +0x08 gates off vanilla tactical target updating. SmartAI treats this engine-owned special-target state as a do-not-reorder guard.
 0x61E9B1: cmp     byte ptr [eax+8], 0
 0x61E9B5: jnz     loc_61EAD1
 0x61E9BB: test    edi, edi
@@ -44,12 +44,12 @@
 0x61E9F0: mov     edx, [eax]
 0x61E9F2: push    eax
 0x61E9F3: mov     [ecx], edx
-0x61E9F5: call    FormHeapFree
+0x61E9F5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x61E9FA: add     esp, 4
 0x61E9FD: jmp     short loc_61EA05
 0x61E9FF: mov     dword ptr [ecx], 0
 0x61EA05: mov     ecx, esi
-0x61EA07: call    sub_6135F0
+0x61EA07: call    CombatController_GetCurrentTarget
 0x61EA0C: cmp     edi, eax
 0x61EA0E: jnz     loc_61EAA3
 0x61EA14: mov     eax, [esi+40h]
@@ -72,22 +72,22 @@
 0x61EA3D: mov     edx, [ecx]
 0x61EA3F: push    ecx
 0x61EA40: mov     [eax], edx
-0x61EA42: call    FormHeapFree
+0x61EA42: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x61EA47: add     esp, 4
 0x61EA4A: jmp     short loc_61EA52
 0x61EA4C: mov     dword ptr [eax], 0
 0x61EA52: mov     ecx, esi
-0x61EA54: call    sub_6135F0
+0x61EA54: call    CombatController_GetCurrentTarget
 0x61EA59: test    eax, eax
 0x61EA5B: jz      short loc_61EA92
 0x61EA5D: mov     ecx, esi
-0x61EA5F: call    sub_6135F0
-0x61EA64: mov     ecx, eax
-0x61EA66: call    Actor_IsSwimming
+0x61EA5F: call    CombatController_GetCurrentTarget
+0x61EA64: mov     ecx, eax; this
+0x61EA66: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x61EA6B: test    al, al
 0x61EA6D: jz      short loc_61EA92
-0x61EA6F: mov     ecx, [esi+3Ch]
-0x61EA72: call    Actor_IsSwimming
+0x61EA6F: mov     ecx, [esi+3Ch]; this
+0x61EA72: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x61EA77: test    al, al
 0x61EA79: jnz     short loc_61EA92
 0x61EA7B: mov     ecx, [esi+3Ch]
@@ -126,7 +126,7 @@
 0x61EACA: jnz     loc_61E9C7
 0x61EAD0: pop     ebp
 0x61EAD1: mov     ecx, esi
-0x61EAD3: call    sub_619C90
+0x61EAD3: call    CombatController_UpdateTargetRetentionAndSort
 0x61EAD8: pop     edi
 0x61EAD9: pop     esi
 0x61EADA: pop     ebx

@@ -16,7 +16,6 @@
 0x75E188: xor     ebx, ebx
 0x75E18A: push    edi
 0x75E18B: jmp     short loc_75E190
-0x75E18D: align 10h
 0x75E190: sub     esi, 14h
 0x75E193: mov     dword ptr [esi], offset ??_7NiPSysUpdateTask@@6B@; const NiPSysUpdateTask::`vftable'
 0x75E199: mov     edi, [esi+0Ch]
@@ -62,7 +61,7 @@
 0x75E200: pop     ebp
 0x75E201: jz      short loc_75E22B
 0x75E203: push    eax
-0x75E204: call    FormHeapFree
+0x75E204: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x75E209: mov     eax, [esp+10h+var_4]
 0x75E20D: add     esp, 4
 0x75E210: pop     esi
@@ -73,7 +72,7 @@
 0x75E21B: test    bl, 1
 0x75E21E: jz      short loc_75E229
 0x75E220: push    esi
-0x75E221: call    FormHeapFree
+0x75E221: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x75E226: add     esp, 4
 0x75E229: mov     eax, esi
 0x75E22B: pop     esi

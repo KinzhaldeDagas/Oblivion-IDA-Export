@@ -18,11 +18,11 @@
 0x78256A: jz      short loc_78258A
 0x78256C: push    esi; Size
 0x78256D: call    FormHeapAlloc
-0x782572: push    esi; Size
-0x782573: push    ebp; Src
-0x782574: push    eax; Dst
+0x782572: push    esi; byteCount
+0x782573: push    ebp; source
+0x782574: push    eax; destination
 0x782575: mov     [edi], eax
-0x782577: call    _memcpy
+0x782577: call    _memcpy;
 0x78257C: add     esp, 10h
 0x78257F: pop     edi
 0x782580: mov     [ebx], esi

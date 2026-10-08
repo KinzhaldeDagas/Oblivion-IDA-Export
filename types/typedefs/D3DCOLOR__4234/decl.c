@@ -1,1 +1,1 @@
-D3DCOLOR
+typedef DWORD D3DCOLOR;

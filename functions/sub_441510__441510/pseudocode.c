@@ -3,44 +3,44 @@ void __usercall sub_441510(int a1@<ecx>, double a2@<st2>, double a3@<st1>, doubl
   int i; // esi
   int v6; // eax
   bool v7; // zf
-  _BYTE **v8; // eax
-  _BYTE *v9; // ecx
+  TESObjectCELL **v8; // eax
+  TESObjectCELL *v9; // ecx
   int j; // esi
-  void **v11; // eax
+  TESObjectCELL **v11; // eax
 
-  for ( i = 0; i < uInteriorCellBuffer; ++i )
+  for ( i = 0; i < uInteriorCellBuffer; ++i ) /*0x441514*/
   {
-    v6 = *(_DWORD *)(a1 + 0x38);
-    v7 = *(_DWORD *)(v6 + 4 * i) == 0;
-    v8 = (_BYTE **)(v6 + 4 * i);
-    if ( !v7 )
+    v6 = *(_DWORD *)(a1 + 0x38); /*0x44151e*/
+    v7 = *(_DWORD *)(v6 + 4 * i) == 0; /*0x441521*/
+    v8 = (TESObjectCELL **)(v6 + 4 * i); /*0x441525*/
+    if ( !v7 ) /*0x441528*/
     {
-      v9 = *v8;
-      if ( *v8 )
+      v9 = *v8; /*0x44152a*/
+      if ( *v8 ) /*0x44152a*/
       {
-        switch ( v9[0x26] )
+        switch ( v9->members.cellProcessLevel ) /*0x44153c*/
         {
-          case 5:
-          case 6:
-            sub_4CB590(v9, a2, a3, a4, 1);
-            break;
+          case 5u: /*0x44153c*/
+          case 6u: /*0x44153c*/
+            sub_4CB590(v9, a2, a3, a4, 1); /*0x441545*/
+            break; /*0x441545*/
           default:
             continue;
         }
       }
     }
   }
-  for ( j = 0; j < uExteriorCellBuffer; ++j )
+  for ( j = 0; j < uExteriorCellBuffer; ++j ) /*0x44154f*/
   {
-    v11 = (void **)(*(_DWORD *)(a1 + 0x3C) + 4 * j);
-    if ( *v11 )
+    v11 = (TESObjectCELL **)(*(_DWORD *)(a1 + 0x3C) + 4 * j); /*0x441560*/
+    if ( *v11 ) /*0x44155c*/
     {
-      switch ( *((_BYTE *)*v11 + 0x26) )
+      switch ( (*v11)->members.cellProcessLevel ) /*0x441577*/
       {
-        case 5:
-        case 6:
-          sub_4CB590(*v11, a2, a3, a4, 1);
-          break;
+        case 5u: /*0x441577*/
+        case 6u: /*0x441577*/
+          sub_4CB590(*v11, a2, a3, a4, 1); /*0x441580*/
+          break; /*0x441580*/
         default:
           continue;
       }

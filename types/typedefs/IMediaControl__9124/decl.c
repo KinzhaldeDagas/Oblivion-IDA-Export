@@ -1,1 +1,4 @@
-IMediaControl
+struct IMediaControl
+{
+IMediaControlVtbl *lpVtbl;
+};

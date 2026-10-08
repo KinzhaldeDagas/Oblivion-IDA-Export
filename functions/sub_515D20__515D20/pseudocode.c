@@ -12,11 +12,11 @@ char __usercall sub_515D20@<al>(
         UInt32 *a3)
 {
   TESObjectCELL *v11; // ebp
-  BSExtraDataVtbl *v12; // eax
+  TESObjectREFR *v12; // eax
   char *v13; // ebx
-  TESWorldSpace *v14; // edi
-  TESObjectREFR **TeleportExtraData; // eax
-  TESObjectREFR **v16; // esi
+  TESWorldSpace *LinkedDoorWorldspace; // edi
+  TeleportData *TeleportData; // eax
+  TESObjectREFR **p_linkedDoor; // esi
   TESObjectCELL *v17; // eax
   int v18; // esi
   char v19; // bl
@@ -25,68 +25,68 @@ char __usercall sub_515D20@<al>(
   unsigned int v23; // [esp+1Ch] [ebp-1Ch] BYREF
   unsigned int v24; // [esp+34h] [ebp-4h]
 
-  v11 = 0;
-  *(_DWORD *)v21 = 0;
-  if ( !Script_ExtractArgs(a1, a5, a3, a4, a7, a8, l, v21) )
-    return 0;
-  if ( !TESDataHandler_g_PlayerRef->vtbl->super.super.super.IsDead((TESObjectREFR *)TESDataHandler_g_PlayerRef, 0) )
+  v11 = 0; /*0x515d6e*/
+  *(_DWORD *)v21 = 0; /*0x515d71*/
+  if ( !Script_ExtractArgs(a1, a5, a3, a4, a7, a8, l, v21) ) /*0x515d7f*/
+    return 0; /*0x515d7f*/
+  if ( !reference->vtbl->super.super.super.IsDead((TESObjectREFR *)reference, 0) ) /*0x515d94*/
   {
-    v12 = sub_4D8E40(TESDataHandler_g_PlayerRef);
-    v13 = (char *)v12;
-    v22 = (char *)v12;
-    if ( v12 )
+    v12 = (TESObjectREFR *)sub_4D8E40(reference); /*0x515da4*/
+    v13 = (char *)v12; /*0x515da9*/
+    v22 = (char *)v12; /*0x515dad*/
+    if ( v12 ) /*0x515db1*/
     {
-      v14 = 0;
-      TeleportExtraData = (TESObjectREFR **)GetTeleportExtraData(v12);
-      v16 = TeleportExtraData;
-      if ( TeleportExtraData )
+      LinkedDoorWorldspace = 0; /*0x515db9*/
+      TeleportData = TESObjectREFR_GetTeleportData(v12); /*0x515dbb*/
+      p_linkedDoor = &TeleportData->linkedDoor; /*0x515dc0*/
+      if ( TeleportData ) /*0x515dc4*/
       {
-        v14 = sub_42B470(TeleportExtraData);
-        if ( !v14 )
+        LinkedDoorWorldspace = TeleportData_GetLinkedDoorWorldspace(&TeleportData->linkedDoor); /*0x515dcd*/
+        if ( !LinkedDoorWorldspace ) /*0x515dd1*/
         {
-          if ( sub_42B460(v16) )
+          if ( sub_42B460(p_linkedDoor) ) /*0x515dd5*/
           {
-            v17 = sub_42B460(v16);
-            if ( TESObjectCELL_IsInterior(v17) )
-              v11 = sub_42B460(v16);
+            v17 = sub_42B460(p_linkedDoor); /*0x515de0*/
+            if ( TESObjectCELL_IsInterior(v17) ) /*0x515de7*/
+              v11 = sub_42B460(p_linkedDoor); /*0x515df7*/
           }
         }
       }
-      sub_4B8420(&v23, 0x25u);
-      v24 = 0;
-      if ( v14 )
+      sub_4B8420(&v23, 0x25u); /*0x515dff*/
+      v24 = 0; /*0x515e06*/
+      if ( LinkedDoorWorldspace ) /*0x515e0e*/
       {
-        sub_4F2770(v14);
+        sub_4F2770(LinkedDoorWorldspace); /*0x515e12*/
       }
-      else if ( v11 )
+      else if ( v11 ) /*0x515e1b*/
       {
-        sub_4CC070(v11, &v23);
+        sub_4CC070(v11, &v23); /*0x515e24*/
       }
-      NiTMap_Clear(&v23);
-      TESDataHandler_g_PlayerRef->vtbl->super.super.super.Unk_46((TESObjectREFR *)TESDataHandler_g_PlayerRef);
-      if ( !*(_DWORD *)v21 )
+      NiTMap_Clear(&v23); /*0x515e2d*/
+      reference->vtbl->super.super.super.Unk_46((TESObjectREFR *)reference); /*0x515e40*/
+      if ( !*(_DWORD *)v21 ) /*0x515e47*/
       {
-        v18 = *((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + TlsIndex);
-        v19 = *(_BYTE *)(v18 + 0x185);
-        *(_BYTE *)(v18 + 0x185) = 0;
-        if ( v14 )
+        v18 = *((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + MEMORY[0xBA9DE4]); /*0x515e58*/
+        v19 = *(_BYTE *)(v18 + 0x185); /*0x515e5b*/
+        *(_BYTE *)(v18 + 0x185) = 0; /*0x515e61*/
+        if ( LinkedDoorWorldspace ) /*0x515e68*/
         {
-          sub_4F2630((int)v14, st5_0, a2, st7_0);
+          sub_4F2630((int)LinkedDoorWorldspace, st5_0, a2, st7_0); /*0x515e6c*/
         }
-        else if ( v11 )
+        else if ( v11 ) /*0x515e75*/
         {
-          sub_4CBE50(v11, st5_0, a2, st7_0, &v23);
+          sub_4CBE50(v11, st5_0, a2, st7_0, &v23); /*0x515e7e*/
         }
-        NiTMap_Clear(&v23);
-        *(_BYTE *)(v18 + 0x185) = v19;
-        v13 = v22;
+        NiTMap_Clear(&v23); /*0x515e87*/
+        *(_BYTE *)(v18 + 0x185) = v19; /*0x515e8c*/
+        v13 = v22; /*0x515e92*/
       }
-      sub_4B7DB0(st5_0, a2, st7_0, v13, 0);
-      ++TESDataHandler_g_PlayerRef->miscStats[0xD];
-      v24 = 0xFFFFFFFF;
-      NiTPointerMap<TESObjectCELL *,bool>::~NiTPointerMap<TESObjectCELL *,bool>(&v23);
-      return 0;
+      sub_4B7DB0(st5_0, a2, st7_0, v13, 0); /*0x515e99*/
+      ++reference->miscStats[0xD]; /*0x515ea3*/
+      v24 = 0xFFFFFFFF; /*0x515eb1*/
+      NiTPointerMap<TESObjectCELL *,bool>::~NiTPointerMap<TESObjectCELL *,bool>(&v23); /*0x515eb9*/
+      return 0; /*0x515ed3*/
     }
   }
-  return 1;
+  return 1; /*0x515ec0*/
 }

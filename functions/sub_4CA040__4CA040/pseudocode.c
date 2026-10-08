@@ -15,52 +15,52 @@ void __thiscall sub_4CA040(unsigned __int16 *this, unsigned int a2)
 
   if ( a2 != *(this + 4) )
   {
-    v3 = *(this + 5);
-    if ( a2 < v3 )
+    v3 = *(this + 5); /*0x4ca054*/
+    if ( a2 < v3 ) /*0x4ca05f*/
     {
-      v4 = a2;
-      if ( (unsigned __int16)a2 < v3 )
+      v4 = a2; /*0x4ca064*/
+      if ( (unsigned __int16)a2 < v3 ) /*0x4ca067*/
       {
-        do
+        do /*0x4ca08b*/
         {
-          v5 = *((_DWORD *)this + 1);
-          v6 = 0.0 == *(float *)(v5 + 4 * v4);
-          v7 = (float *)(v5 + 4 * v4);
-          if ( !v6 )
+          v5 = *((_DWORD *)this + 1); /*0x4ca069*/
+          v6 = 0.0 == *(float *)(v5 + 4 * v4); /*0x4ca06f*/
+          v7 = (float *)(v5 + 4 * v4); /*0x4ca072*/
+          if ( !v6 ) /*0x4ca07a*/
           {
-            *v7 = 0.0;
-            --*(this + 6);
+            *v7 = 0.0; /*0x4ca07c*/
+            --*(this + 6); /*0x4ca07e*/
           }
-          ++v4;
+          ++v4; /*0x4ca084*/
         }
-        while ( v4 < *(this + 5) );
+        while ( v4 < *(this + 5) ); /*0x4ca08b*/
       }
-      *(this + 5) = a2;
+      *(this + 5) = a2; /*0x4ca08d*/
     }
-    v8 = *((_DWORD *)this + 1);
-    *(this + 4) = a2;
+    v8 = *((_DWORD *)this + 1); /*0x4ca096*/
+    *(this + 4) = a2; /*0x4ca099*/
     if ( a2 )
     {
       v9 = FormHeapAlloc((unsigned __int64)(unsigned __int16)a2 >> 0x1E != 0 ? 0xFFFFFFFF : 4 * (unsigned __int16)a2);
-      v10 = 0;
-      v11 = *(this + 5) == 0;
-      *((_DWORD *)this + 1) = v9;
-      if ( !v11 )
+      v10 = 0; /*0x4ca0b8*/
+      v11 = *(this + 5) == 0; /*0x4ca0bd*/
+      *((_DWORD *)this + 1) = v9; /*0x4ca0c1*/
+      if ( !v11 ) /*0x4ca0c4*/
       {
-        do
+        do /*0x4ca0dd*/
         {
-          v12 = 4 * (unsigned __int16)v10++;
-          *(float *)(v12 + *((_DWORD *)this + 1)) = *(float *)(v12 + v8);
+          v12 = 4 * (unsigned __int16)v10++; /*0x4ca0ce*/
+          *(float *)(v12 + *((_DWORD *)this + 1)) = *(float *)(v12 + v8); /*0x4ca0d6*/
         }
-        while ( (unsigned __int16)v10 < *(this + 5) );
+        while ( (unsigned __int16)v10 < *(this + 5) ); /*0x4ca0dd*/
       }
-      for ( i = *(this + 5); (unsigned __int16)i < *(this + 4); *(float *)(*((_DWORD *)this + 1) + 4 * v14) = 0.0 )
-        v14 = (unsigned __int16)i++;
+      for ( i = *(this + 5); (unsigned __int16)i < *(this + 4); *(float *)(*((_DWORD *)this + 1) + 4 * v14) = 0.0 ) /*0x4ca0e7*/
+        v14 = (unsigned __int16)i++; /*0x4ca0ee*/
     }
     else
     {
-      *((_DWORD *)this + 1) = 0;
+      *((_DWORD *)this + 1) = 0; /*0x4ca10e*/
     }
-    FormHeapFree(v8);
+    FormHeapFree(v8); /*0x4ca116*/
   }
 }

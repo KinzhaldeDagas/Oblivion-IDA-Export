@@ -3,7 +3,7 @@
 0x9A2295: push    edi
 0x9A2296: push    esi; a2
 0x9A2297: call    sub_7009A0
-0x9A229C: mov     eax, dword_BAA888
+0x9A229C: mov     eax, stru_BAA888.name
 0x9A22A1: push    eax; ArgList
 0x9A22A2: call    TESOutput_PrintString
 0x9A22A7: movzx   edi, word ptr [esi+0Ah]

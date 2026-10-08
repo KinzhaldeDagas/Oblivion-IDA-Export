@@ -1,1 +1,1 @@
-LPHDITEMW
+typedef _HD_ITEMW *LPHDITEMW;

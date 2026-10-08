@@ -1,1 +1,1 @@
-time_t
+typedef __time64_t time_t;

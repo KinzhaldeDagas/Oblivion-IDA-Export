@@ -1,208 +1,324 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "IDirect3DDevice2Vtbl",
+  "definition": "struct IDirect3DDevice2Vtbl\n{\nHRESULT (__stdcall *QueryInterface)(IDirect3DDevice2 *This, const IID *const riid, LPVOID *ppvObj) __offset(OFF64|AUTO);\nULONG (__stdcall *AddRef)(IDirect3DDevice2 *This) __offset(OFF64|AUTO);\nULONG (__stdcall *Release)(IDirect3DDevice2 *This) __offset(OFF64|AUTO);\nHRESULT (__stdcall *GetCaps)(IDirect3DDevice2 *This, LPD3DDEVICEDESC, LPD3DDEVICEDESC) __offset(OFF64|AUTO);\nHRESULT (__stdcall *SwapTextureHandles)(IDirect3DDevice2 *This, LPDIRECT3DTEXTURE2, LPDIRECT3DTEXTURE2) __offset(OFF64|AUTO);\nHRESULT (__stdcall *GetStats)(IDirect3DDevice2 *This, LPD3DSTATS) __offset(OFF64|AUTO);\nHRESULT (__stdcall *AddViewport)(IDirect3DDevice2 *This, LPDIRECT3DVIEWPORT2) __offset(OFF64|AUTO);\nHRESULT (__stdcall *DeleteViewport)(IDirect3DDevice2 *This, LPDIRECT3DVIEWPORT2) __offset(OFF64|AUTO);\nHRESULT (__stdcall *NextViewport)(IDirect3DDevice2 *This, LPDIRECT3DVIEWPORT2, LPDIRECT3DVIEWPORT2 *, DWORD) __offset(OFF64|AUTO);\nHRESULT (__stdcall *EnumTextureFormats)(IDirect3DDevice2 *This, LPD3DENUMTEXTUREFORMATSCALLBACK, LPVOID) __offset(OFF64|AUTO);\nHRESULT (__stdcall *BeginScene)(IDirect3DDevice2 *This) __offset(OFF64|AUTO);\nHRESULT (__stdcall *EndScene)(IDirect3DDevice2 *This) __offset(OFF64|AUTO);\nHRESULT (__stdcall *GetDirect3D)(IDirect3DDevice2 *This, LPDIRECT3D2 *) __offset(OFF64|AUTO);\nHRESULT (__stdcall *SetCurrentViewport)(IDirect3DDevice2 *This, LPDIRECT3DVIEWPORT2) __offset(OFF64|AUTO);\nHRESULT (__stdcall *GetCurrentViewport)(IDirect3DDevice2 *This, LPDIRECT3DVIEWPORT2 *) __offset(OFF64|AUTO);\nHRESULT (__stdcall *SetRenderTarget)(IDirect3DDevice2 *This, LPDIRECTDRAWSURFACE, DWORD) __offset(OFF64|AUTO);\nHRESULT (__stdcall *GetRenderTarget)(IDirect3DDevice2 *This, LPDIRECTDRAWSURFACE *) __offset(OFF64|AUTO);\nHRESULT (__stdcall *Begin)(IDirect3DDevice2 *This, D3DPRIMITIVETYPE, D3DVERTEXTYPE, DWORD) __offset(OFF64|AUTO);\nHRESULT (__stdcall *BeginIndexed)(IDirect3DDevice2 *This, D3DPRIMITIVETYPE, D3DVERTEXTYPE, LPVOID, DWORD, DWORD) __offset(OFF64|AUTO);\nHRESULT (__stdcall *Vertex)(IDirect3DDevice2 *This, LPVOID) __offset(OFF64|AUTO);\nHRESULT (__stdcall *Index)(IDirect3DDevice2 *This, WORD) __offset(OFF64|AUTO);\nHRESULT (__stdcall *End)(IDirect3DDevice2 *This, DWORD) __offset(OFF64|AUTO);\nHRESULT (__stdcall *GetRenderState)(IDirect3DDevice2 *This, D3DRENDERSTATETYPE, LPDWORD) __offset(OFF64|AUTO);\nHRESULT (__stdcall *SetRenderState)(IDirect3DDevice2 *This, D3DRENDERSTATETYPE, DWORD) __offset(OFF64|AUTO);\nHRESULT (__stdcall *GetLightState)(IDirect3DDevice2 *This, D3DLIGHTSTATETYPE, LPDWORD) __offset(OFF64|AUTO);\nHRESULT (__stdcall *SetLightState)(IDirect3DDevice2 *This, D3DLIGHTSTATETYPE, DWORD) __offset(OFF64|AUTO);\nHRESULT (__stdcall *SetTransform)(IDirect3DDevice2 *This, D3DTRANSFORMSTATETYPE, LPD3DMATRIX) __offset(OFF64|AUTO);\nHRESULT (__stdcall *GetTransform)(IDirect3DDevice2 *This, D3DTRANSFORMSTATETYPE, LPD3DMATRIX) __offset(OFF64|AUTO);\nHRESULT (__stdcall *MultiplyTransform)(IDirect3DDevice2 *This, D3DTRANSFORMSTATETYPE, LPD3DMATRIX) __offset(OFF64|AUTO);\nHRESULT (__stdcall *DrawPrimitive)(IDirect3DDevice2 *This, D3DPRIMITIVETYPE, D3DVERTEXTYPE, LPVOID, DWORD, DWORD) __offset(OFF64|AUTO);\nHRESULT (__stdcall *DrawIndexedPrimitive)(IDirect3DDevice2 *This, D3DPRIMITIVETYPE, D3DVERTEXTYPE, LPVOID, DWORD, LPWORD, DWORD, DWORD) __offset(OFF64|AUTO);\nHRESULT (__stdcall *SetClipStatus)(IDirect3DDevice2 *This, LPD3DCLIPSTATUS) __offset(OFF64|AUTO);\nHRESULT (__stdcall *GetClipStatus)(IDirect3DDevice2 *This, LPD3DCLIPSTATUS) __offset(OFF64|AUTO);\n}\n",
   "id": 18374686479671835303,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QueryInterface",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DDevice2 *This, const IID *const riid, LPVOID *ppvObj)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddRef",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (__stdcall *)(IDirect3DDevice2 *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Release",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (__stdcall *)(IDirect3DDevice2 *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetCaps",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DDevice2 *This, LPD3DDEVICEDESC, LPD3DDEVICEDESC)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SwapTextureHandles",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DDevice2 *This, LPDIRECT3DTEXTURE2, LPDIRECT3DTEXTURE2)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetStats",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DDevice2 *This, LPD3DSTATS)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddViewport",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DDevice2 *This, LPDIRECT3DVIEWPORT2)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DeleteViewport",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DDevice2 *This, LPDIRECT3DVIEWPORT2)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "NextViewport",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DDevice2 *This, LPDIRECT3DVIEWPORT2, LPDIRECT3DVIEWPORT2 *, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "EnumTextureFormats",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DDevice2 *This, LPD3DENUMTEXTUREFORMATSCALLBACK, LPVOID)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "BeginScene",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DDevice2 *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "EndScene",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DDevice2 *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetDirect3D",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DDevice2 *This, LPDIRECT3D2 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetCurrentViewport",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DDevice2 *This, LPDIRECT3DVIEWPORT2)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetCurrentViewport",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DDevice2 *This, LPDIRECT3DVIEWPORT2 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetRenderTarget",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DDevice2 *This, LPDIRECTDRAWSURFACE, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetRenderTarget",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DDevice2 *This, LPDIRECTDRAWSURFACE *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Begin",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DDevice2 *This, D3DPRIMITIVETYPE, D3DVERTEXTYPE, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "BeginIndexed",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DDevice2 *This, D3DPRIMITIVETYPE, D3DVERTEXTYPE, LPVOID, DWORD, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Vertex",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 4
+      "offset_hex": "0x4C",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DDevice2 *This, LPVOID)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Index",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DDevice2 *This, WORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "End",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DDevice2 *This, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetRenderState",
       "offset": 88,
       "offset_hex": "0x58",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DDevice2 *This, D3DRENDERSTATETYPE, LPDWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetRenderState",
       "offset": 92,
-      "offset_hex": "0x5c",
-      "size": 4
+      "offset_hex": "0x5C",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DDevice2 *This, D3DRENDERSTATETYPE, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetLightState",
       "offset": 96,
       "offset_hex": "0x60",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DDevice2 *This, D3DLIGHTSTATETYPE, LPDWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetLightState",
       "offset": 100,
       "offset_hex": "0x64",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DDevice2 *This, D3DLIGHTSTATETYPE, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetTransform",
       "offset": 104,
       "offset_hex": "0x68",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DDevice2 *This, D3DTRANSFORMSTATETYPE, LPD3DMATRIX)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetTransform",
       "offset": 108,
-      "offset_hex": "0x6c",
-      "size": 4
+      "offset_hex": "0x6C",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DDevice2 *This, D3DTRANSFORMSTATETYPE, LPD3DMATRIX)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "MultiplyTransform",
       "offset": 112,
       "offset_hex": "0x70",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DDevice2 *This, D3DTRANSFORMSTATETYPE, LPD3DMATRIX)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DrawPrimitive",
       "offset": 116,
       "offset_hex": "0x74",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DDevice2 *This, D3DPRIMITIVETYPE, D3DVERTEXTYPE, LPVOID, DWORD, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DrawIndexedPrimitive",
       "offset": 120,
       "offset_hex": "0x78",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DDevice2 *This, D3DPRIMITIVETYPE, D3DVERTEXTYPE, LPVOID, DWORD, LPWORD, DWORD, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetClipStatus",
       "offset": 124,
-      "offset_hex": "0x7c",
-      "size": 4
+      "offset_hex": "0x7C",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DDevice2 *This, LPD3DCLIPSTATUS)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetClipStatus",
       "offset": 128,
       "offset_hex": "0x80",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DDevice2 *This, LPD3DCLIPSTATUS)"
     }
   ],
   "name": "IDirect3DDevice2Vtbl",
+  "ordinal": 4260,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 132
 }

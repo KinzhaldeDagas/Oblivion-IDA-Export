@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4DB900",
-    "line": "push    esi",
+    "line": "push    esi; Verified conflict-cleanup helper: clears XOWN, XGLB, and XRNK from the supplied reference and marks mask 0x380; if it has a linked door, clears the same three extras there and marks that reference modified too. TESObjectREFR_CopyFrom calls it when both the copied reference and linked door carry ownership, then logs that conflicting shared data was removed.",
     "mnemonic": "push",
     "size": 1
   },
@@ -25,55 +25,55 @@
   },
   {
     "ea": "0x4DB907",
-    "line": "push    0",
+    "line": "push    0; owner",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4DB909",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DB90B",
-    "line": "call    ExtraDataList__SetOrRemoveExtraOwnership",
+    "line": "call    ExtraDataList__SetOrRemoveExtraOwnership; Verified XOWN mutator: update ExtraOwnership.ownerForm when owner is nonnull; remove the XOWN extra when null; otherwise allocate a 16-byte ExtraOwnership payload and add it to the list. During plugin load the initial dword is a FormID temporarily held in the same union slot; ExtraDataList_ResolveLoadedFormIDs converts it to TESForm*. TESObjectCELL_LinkForm removes direct XOWN, XRNK, and XGLB from an exterior cell when an owner exists.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4DB910",
-    "line": "push    0",
+    "line": "push    0; global",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4DB912",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DB914",
-    "line": "call    sub_423720",
+    "line": "call    ExtraDataList_SetGlobal; Verified XGLB mutator: update the stored TESGlobal* when nonnull; remove the extra when null; otherwise allocate a 16-byte ExtraGlobal payload. During plugin load the stored dword is a FormID temporarily; ExtraDataList_ResolveLoadedFormIDs rebases, looks it up, RTTI-checks TESGlobal, and removes missing/wrong-type entries.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4DB919",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; rank",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4DB91B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DB91D",
-    "line": "call    sub_4237E0",
+    "line": "call    ExtraDataList_SetRank; Verified ExtraRank lifecycle writer: rank -1 removes the payload; every other signed 32-bit value updates or allocates ExtraRank. XRNK loading supplies a bounded 4-byte value into a zero-initialized local, so empty/short chunks become zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,13 +139,13 @@
   },
   {
     "ea": "0x4DB93D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DB93F",
-    "line": "call    sub_42B410",
+    "line": "call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.",
     "mnemonic": "call",
     "size": 5
   },
@@ -163,103 +163,103 @@
   },
   {
     "ea": "0x4DB948",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DB94A",
-    "line": "call    sub_42B410",
+    "line": "call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4DB94F",
-    "line": "push    0",
+    "line": "push    0; owner",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4DB951",
-    "line": "lea     ecx, [eax+44h]",
+    "line": "lea     ecx, [eax+44h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x4DB954",
-    "line": "call    ExtraDataList__SetOrRemoveExtraOwnership",
+    "line": "call    ExtraDataList__SetOrRemoveExtraOwnership; Verified XOWN mutator: update ExtraOwnership.ownerForm when owner is nonnull; remove the XOWN extra when null; otherwise allocate a 16-byte ExtraOwnership payload and add it to the list. During plugin load the initial dword is a FormID temporarily held in the same union slot; ExtraDataList_ResolveLoadedFormIDs converts it to TESForm*. TESObjectCELL_LinkForm removes direct XOWN, XRNK, and XGLB from an exterior cell when an owner exists.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4DB959",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DB95B",
-    "line": "call    sub_42B410",
+    "line": "call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4DB960",
-    "line": "push    0",
+    "line": "push    0; global",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4DB962",
-    "line": "lea     ecx, [eax+44h]",
+    "line": "lea     ecx, [eax+44h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x4DB965",
-    "line": "call    sub_423720",
+    "line": "call    ExtraDataList_SetGlobal; Verified XGLB mutator: update the stored TESGlobal* when nonnull; remove the extra when null; otherwise allocate a 16-byte ExtraGlobal payload. During plugin load the stored dword is a FormID temporarily; ExtraDataList_ResolveLoadedFormIDs rebases, looks it up, RTTI-checks TESGlobal, and removes missing/wrong-type entries.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4DB96A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DB96C",
-    "line": "call    sub_42B410",
+    "line": "call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4DB971",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; rank",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4DB973",
-    "line": "lea     ecx, [eax+44h]",
+    "line": "lea     ecx, [eax+44h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x4DB976",
-    "line": "call    sub_4237E0",
+    "line": "call    ExtraDataList_SetRank; Verified ExtraRank lifecycle writer: rank -1 removes the payload; every other signed 32-bit value updates or allocates ExtraRank. XRNK loading supplies a bounded 4-byte value into a zero-initialized local, so empty/short chunks become zero.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4DB97B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DB97D",
-    "line": "call    sub_42B410",
+    "line": "call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.",
     "mnemonic": "call",
     "size": 5
   },

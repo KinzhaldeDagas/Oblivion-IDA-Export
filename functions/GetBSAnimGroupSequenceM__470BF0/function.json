@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x470BF0",
+      "0x470C3E"
+    ]
+  ],
+  "chunks_sha256": "2c7aa68dc83ca9e84dcdecfc88abe73e3052034be4a16bf2c469463fe07a96b0",
+  "comment_regular": "AnimSequenceMultiple vtable +0x10. Consumes a signed selector byte: 0..127 can select exactly; 0x80..0xFE sign-extend and fail the unsigned count bound, while 0xFF is explicit random. ActorAnimData_LoadState intercepts serialized 0xFE before this virtual, so 0xFE is a null-sequence marker in save files rather than random restore.",
+  "comment_repeatable": "AnimSequenceMultiple vtable +0x10. Consumes a signed selector byte: 0..127 can select exactly; 0x80..0xFE sign-extend and fail the unsigned count bound, while 0xFF is explicit random. ActorAnimData_LoadState intercepts serialized 0xFE before this virtual, so 0xFE is a null-sequence marker in save files rather than random restore.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "GetBSAnimGroupSequenceM",
+  "display_name": "AnimSequenceMultiple_GetSequenceBySelector",
   "end_ea": "0x470C3E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "GetBSAnimGroupSequenceM",
+  "name": "AnimSequenceMultiple_GetSequenceBySelector",
   "segment": ".text",
   "sha256": "2c7aa68dc83ca9e84dcdecfc88abe73e3052034be4a16bf2c469463fe07a96b0",
   "size": 78,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x470BF0",
-  "type": "void *__thiscall(ActorAnimData *this, char)",
+  "total_chunk_size": 78,
+  "type": "BSAnimGroupSequence *__thiscall(AnimSequenceMultiple *this, signed __int8 selector)",
   "xrefs_from_count": 38,
   "xrefs_to_count": 1
 }

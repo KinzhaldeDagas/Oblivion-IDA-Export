@@ -1,4 +1,4 @@
-0x7D1ED0: fld     dword ptr [ecx+0DCh]
+0x7D1ED0: fld     dword ptr [ecx+0DCh]; Update only transition target/timer fields +0xDC/+0xE0. Direct callers are ShadowPass 0x00407868 and duplicate AddShadowCaster refresh 0x007C6CEB.
 0x7D1ED6: fld     [esp+arg_0]
 0x7D1EDA: fld     st
 0x7D1EDC: fucomp  st(2)

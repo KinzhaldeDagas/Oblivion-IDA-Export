@@ -28,7 +28,7 @@
 0x52A5B7: mov     [ebp+var_1C], esi
 0x52A5BA: mov     [ebp+var_18], esi
 0x52A5BD: mov     [ebp+var_20], esi
-0x52A5C0: call    TESFile_InitializeFormFromRecord
+0x52A5C0: call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.
 0x52A5C5: push    esi; a2
 0x52A5C6: mov     ecx, ebx; this
 0x52A5C8: call    TESForm_SetIsLinked
@@ -40,7 +40,6 @@
 0x52A5DC: jz      loc_52A86E
 0x52A5E2: jmp     short loc_52A5F2
 0x52A5E4: jmp     short loc_52A5F0
-0x52A5E6: align 10h
 0x52A5F0: xor     ecx, ecx
 0x52A5F2: cmp     eax, 4D414E43h
 0x52A5F7: jg      loc_52A72A
@@ -59,7 +58,7 @@
 0x52A632: push    eax; Dst
 0x52A633: push    edi; a2
 0x52A634: mov     ecx, ebx; this
-0x52A636: call    TESForm_LoadGenericComponents
+0x52A636: call    TESForm_LoadGenericComponents; Oblivion QUST DATA is two bytes here: TESQuest.questFlags at +0x3C followed by priority at +0x3D.
 0x52A63B: jmp     loc_52A854
 0x52A640: push    14h; Size
 0x52A642: mov     [ebp+var_1C], ecx
@@ -95,20 +94,20 @@
 0x52A6A5: lea     eax, [ebx+30h]
 0x52A6A8: push    edi
 0x52A6A9: push    eax
-0x52A6AA: call    TESFullname_Load
+0x52A6AA: call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.
 0x52A6AF: add     esp, 8
 0x52A6B2: jmp     loc_52A854
 0x52A6B7: xor     eax, eax
 0x52A6B9: push    edi
 0x52A6BA: push    eax
-0x52A6BB: call    TESFullname_Load
+0x52A6BB: call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.
 0x52A6C0: add     esp, 8
 0x52A6C3: jmp     loc_52A854
 0x52A6C8: mov     [ebp+var_24], ecx
 0x52A6CB: lea     ecx, [ebp+var_24]
 0x52A6CE: push    ecx
 0x52A6CF: mov     ecx, edi
-0x52A6D1: call    TESFile_GetChunkData4
+0x52A6D1: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x52A6D6: mov     edx, [ebp+var_24]
 0x52A6D9: push    ebx
 0x52A6DA: lea     ecx, [ebx+18h]
@@ -121,7 +120,7 @@
 0x52A6F7: push    200h; a4
 0x52A6FC: push    esi; Dst
 0x52A6FD: mov     ecx, edi; a1
-0x52A6FF: call    TESFile_GetChunkData
+0x52A6FF: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x52A704: mov     eax, [ebx]
 0x52A706: mov     edx, [eax+0D8h]
 0x52A70C: push    esi
@@ -249,3 +248,28 @@
 0x52A88B: mov     esp, ebp
 0x52A88D: pop     ebp
 0x52A88E: retn    4
+0x9B8440: mov     eax, [ebp+var_20]
+0x9B8443: push    eax
+0x9B8444: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B8449: pop     ecx
+0x9B844A: retn
+0x9B844B: mov     eax, [ebp+var_18]
+0x9B844E: push    eax
+0x9B844F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B8454: pop     ecx
+0x9B8455: retn
+0x9B8456: mov     eax, [ebp+var_1C]
+0x9B8459: push    eax
+0x9B845A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B845F: pop     ecx
+0x9B8460: retn
+0x9B8461: mov     edx, [esp-4+arg_4]
+0x9B8465: lea     eax, [edx+0Ch]
+0x9B8468: mov     ecx, [edx-28h]
+0x9B846B: xor     ecx, eax
+0x9B846D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B8472: mov     ecx, [edx-4]
+0x9B8475: xor     ecx, eax
+0x9B8477: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B847C: mov     eax, offset stru_AE2B1C
+0x9B8481: jmp     ___CxxFrameHandler3

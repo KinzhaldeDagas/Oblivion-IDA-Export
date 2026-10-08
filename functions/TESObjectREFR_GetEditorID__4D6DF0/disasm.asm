@@ -11,7 +11,6 @@
 0x4D6E16: jz      short loc_4D6E2F
 0x4D6E18: lea     edx, [eax+1]
 0x4D6E1B: jmp     short loc_4D6E20
-0x4D6E1D: align 10h
 0x4D6E20: mov     cl, [eax]
 0x4D6E22: add     eax, 1
 0x4D6E25: test    cl, cl

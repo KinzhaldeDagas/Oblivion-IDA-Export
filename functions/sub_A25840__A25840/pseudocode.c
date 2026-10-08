@@ -1,4 +1,4 @@
 void __cdecl sub_A25840()
 {
-  sub_959EC0(word_B3BB4C);
+  NiPickContext_dtor(&qword_B3BB2C[8]); /*0xa25845*/
 }

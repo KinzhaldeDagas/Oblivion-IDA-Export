@@ -5,12 +5,12 @@ int __thiscall sub_712A90(_DWORD *this)
   int v5; // [esp+4h] [ebp-8h] BYREF
   int v6; // [esp+8h] [ebp-4h] BYREF
 
-  v4 = *(this + 0x87);
-  v2 = *(void (__cdecl **)(int, int *, int, int *, int))(v4 + 4);
-  v5 = 4;
-  v2(v4, &v6, 4, &v5, 1);
-  if ( v6 == 0xFFFFFFFF )
-    return 0;
+  v4 = *(this + 0x87); /*0x712aaa*/
+  v2 = *(void (__cdecl **)(int, int *, int, int *, int))(v4 + 4); /*0x712aab*/
+  v5 = 4; /*0x712aae*/
+  v2(v4, &v6, 4, &v5, 1); /*0x712ab6*/
+  if ( v6 == 0xFFFFFFFF ) /*0x712ac2*/
+    return 0; /*0x712ac4*/
   else
-    return *(_DWORD *)(*(this + 0x7C) + 4 * v6);
+    return *(_DWORD *)(*(this + 0x7C) + 4 * v6); /*0x712ad1*/
 }

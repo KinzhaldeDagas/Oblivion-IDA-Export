@@ -27,7 +27,6 @@
 0x730116: cmp     [esi+0Ch], eax
 0x730119: jbe     short loc_730147
 0x73011B: jmp     short loc_730120
-0x73011D: align 10h
 0x730120: mov     ecx, [esi+10h]
 0x730123: fld     dword ptr [ecx+eax*4]
 0x730126: mov     edx, [edi+10h]

@@ -1,4 +1,4 @@
-0x803570: push    esi
+0x803570: push    esi; MoonSugarEffect decode: single image-space shader helper; ensures fullscreen quad, binds shader temporarily, renders it, then releases quad shader binding.
 0x803571: mov     esi, [esp+4+a2]
 0x803575: test    esi, esi
 0x803577: push    edi
@@ -6,10 +6,10 @@
 0x80357A: jz      short loc_8035EE
 0x80357C: cmp     dword ptr [edi+10h], 0
 0x803580: jnz     short loc_803587
-0x803582: call    ImageSpaceShaderList__AssignScreenElements
+0x803582: call    ImageSpaceShaderList__AssignScreenElements; MoonSugarEffect decode: creates native image-space screen quad as one 4-vertex NiScreenElements polygon. Coordinates are x=-1,y=1,w=2,h=-2 and UVs 0..1.
 0x803587: mov     ecx, [edi+10h]; this
-0x80358A: push    esi; a2
-0x80358B: call    sub_4EC910
+0x80358A: push    esi; shader
+0x80358B: call    NiGeometry_SetShader; NiGeometry shader smart-pointer setter: releases the old BSShader, stores the new shader, and AddRefs it when the pointer changes.
 0x803590: mov     ecx, [edi+10h]
 0x803593: mov     eax, [esi]
 0x803595: mov     edx, [eax+18h]

@@ -11,13 +11,12 @@
 0x6762C7: add     ecx, 68h ; 'h'; this
 0x6762CA: mov     [esp+28h+var_14], ebx
 0x6762CE: mov     [eax+5A8h], bl
-0x6762D4: call    sub_7616D0
+0x6762D4: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x6762D9: cmp     eax, ebx
 0x6762DB: mov     [esp+28h+var_18], eax
 0x6762DF: jz      loc_676464
 0x6762E5: mov     edi, [ebp+arg_0]
 0x6762E8: jmp     short loc_6762F4
-0x6762EA: align 10h
 0x6762F0: mov     eax, [esp+28h+var_18]
 0x6762F4: mov     ecx, [eax]
 0x6762F6: cmp     ecx, ebx
@@ -108,7 +107,7 @@
 0x6763FF: mov     ecx, esi
 0x676401: call    eax
 0x676403: mov     ecx, eax
-0x676405: call    sub_6135F0
+0x676405: call    CombatController_GetCurrentTarget
 0x67640A: cmp     eax, edi
 0x67640C: jnz     short loc_676425
 0x67640E: mov     edx, [esi]

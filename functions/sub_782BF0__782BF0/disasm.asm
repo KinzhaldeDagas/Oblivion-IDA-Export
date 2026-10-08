@@ -1,4 +1,4 @@
-0x782BF0: mov     eax, [esp+arg_0]
+0x782BF0: mov     eax, [esp+arg_0]; MoonSugarEffect decode: NiD3DShaderProgram renderer attachment. Stores renderer at +0x20, AddRefs renderer device/resource at +0x1C, and caches renderer state pointer at +0x24.
 0x782BF4: test    eax, eax
 0x782BF6: push    esi
 0x782BF7: mov     esi, ecx

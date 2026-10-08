@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A1660",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Oblivion-authoritative CFrondEngine::BuildGuideLods. Computes total/largest surface area, writes fuzzySurfaceArea at SFrondGuide+0x24, preserves large fronds, invokes the typed descending introsort twice, reinserts retained guides first, and builds per-LOD vectors of 0x30 guide copies. Unlike RT 4.1 source, this executable sorts/moves complete compact SFrondGuide records rather than a vector of SFrondGuide* pointers; no later segment-override/prohibit-reduction field participates.",
     "mnemonic": "push",
     "size": 2
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x7A1774",
-    "line": "lea     ecx, [esp+70h+var_59]",
+    "line": "lea     ecx, [esp+70h+var_59]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -583,13 +583,13 @@
   },
   {
     "ea": "0x7A177A",
-    "line": "fstp    [esp+70h+var_34]",
+    "line": "fstp    dword ptr [esp+70h+sorterState]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A177E",
-    "line": "call    sub_78EAF0",
+    "line": "call    OB_stRandom_ctor_010201A0; Oblivion stRandom constructor. The class has no per-instance generator state; if the shared SIdvRandomImpl state is not initialized, it invokes Reseed(-1).",
     "mnemonic": "call",
     "size": 5
   },
@@ -625,19 +625,19 @@
   },
   {
     "ea": "0x7A1790",
-    "line": "mov     [esp+70h+var_28], ecx",
+    "line": "mov     [esp+70h+savedLargeGuides.begin], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A1794",
-    "line": "mov     [esp+70h+var_24], ecx",
+    "line": "mov     [esp+70h+savedLargeGuides.end], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A1798",
-    "line": "mov     [esp+70h+var_20], ecx",
+    "line": "mov     [esp+70h+savedLargeGuides.capacityEnd], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -997,19 +997,19 @@
   },
   {
     "ea": "0x7A184E",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A184F",
-    "line": "lea     ecx, [esp+74h+var_2C]",
+    "line": "lea     ecx, [esp+74h+savedLargeGuides]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A1853",
-    "line": "call    sub_7A0B50",
+    "line": "call    OB_stVector_SFrondGuide_PushBack_010201A0; Oblivion st_vector<SFrondGuide>::push_back specialization. Placement-deep-copies at end when capacity remains; otherwise delegates to the decoded checked insert-one path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1075,7 +1075,7 @@
   },
   {
     "ea": "0x7A1876",
-    "line": "mov     ecx, [esp+70h+var_34]",
+    "line": "mov     ecx, dword ptr [esp+70h+sorterState]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1105,13 +1105,13 @@
   },
   {
     "ea": "0x7A1887",
-    "line": "mov     byte ptr [esp+74h+var_3C], 0",
+    "line": "mov     byte ptr [esp+74h+guideLodVector], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x7A188C",
-    "line": "mov     eax, [esp+74h+var_3C]",
+    "line": "mov     eax, [esp+74h+guideLodVector]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1129,13 +1129,13 @@
   },
   {
     "ea": "0x7A1892",
-    "line": "push    edi",
+    "line": "push    edi; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A1893",
-    "line": "push    edx",
+    "line": "push    edx; last",
     "mnemonic": "push",
     "size": 1
   },
@@ -1147,13 +1147,13 @@
   },
   {
     "ea": "0x7A1897",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A1898",
-    "line": "call    sub_79B700",
+    "line": "call    OB_SFrondGuide_CopyAssignRangeForward_010201A0; Forward copy-assignment of initialized compact 0x30-byte SFrondGuide records. Deep-assigns each embedded SFrondVertex vector, then copies the eight scalar fields.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1225,7 +1225,7 @@
   },
   {
     "ea": "0x7A18B8",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1345,13 +1345,13 @@
   },
   {
     "ea": "0x7A18FB",
-    "line": "fstp    [esp+78h+var_74]; float",
+    "line": "fstp    [esp+78h+maxValue]; maxValue",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A18FF",
-    "line": "lea     ecx, [esp+78h+var_59]",
+    "line": "lea     ecx, [esp+78h+var_59]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1363,13 +1363,13 @@
   },
   {
     "ea": "0x7A1905",
-    "line": "fstp    [esp+78h+var_78]; float",
+    "line": "fstp    [esp+78h+minValue]; minValue",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7A1908",
-    "line": "call    sub_78EA00",
+    "line": "call    OB_stRandom_GetUniform_010201A0; Oblivion stRandom::GetUniform. Returns minValue + (maxValue - minValue) * SIdvRandomImpl::m_cUniform.Next(). Used throughout spline, branch, frond, tree, leaf-LOD, and seed generation paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1435,7 +1435,7 @@
   },
   {
     "ea": "0x7A192C",
-    "line": "fld     [esp+70h+var_34]",
+    "line": "fld     dword ptr [esp+70h+sorterState]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1597,7 +1597,7 @@
   },
   {
     "ea": "0x7A1981",
-    "line": "mov     byte ptr [esp+70h+var_34], 0",
+    "line": "mov     byte ptr [esp+70h+sorterState], 0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1657,13 +1657,13 @@
   },
   {
     "ea": "0x7A19A3",
-    "line": "mov     ecx, [esp+70h+var_34]",
+    "line": "mov     ecx, dword ptr [esp+70h+sorterState]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A19A7",
-    "line": "push    ecx",
+    "line": "push    ecx; sorterState",
     "mnemonic": "push",
     "size": 1
   },
@@ -1717,37 +1717,37 @@
   },
   {
     "ea": "0x7A19BD",
-    "line": "push    eax",
+    "line": "push    eax; partitionBudget",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A19BE",
-    "line": "push    edi",
+    "line": "push    edi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A19BF",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A19C0",
-    "line": "call    sub_79FA30",
+    "line": "call    OB_CFrondEngine_SortGuidesByFuzzyArea_010201A0; Oblivion CFrondEngine guide introsort used only by BuildGuideLods. Orders full 0x30-byte SFrondGuide records by descending fuzzySurfaceArea: three-way partition while the ideal partition budget remains, insertion sort at <=32 records, and heap fallback on budget exhaustion. RT 4.1 corroborates the descending comparator, but its source sorts SFrondGuide* pointers; the executable moves compact guide records directly.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A19C5",
-    "line": "mov     eax, [esp+80h+var_24]",
+    "line": "mov     eax, [esp+80h+savedLargeGuides.end]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A19C9",
-    "line": "mov     ebx, [esp+80h+var_28]",
+    "line": "mov     ebx, [esp+80h+savedLargeGuides.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1765,7 +1765,7 @@
   },
   {
     "ea": "0x7A19D2",
-    "line": "mov     byte ptr [esp+70h+var_34], 0",
+    "line": "mov     byte ptr [esp+70h+sorterState], 0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1789,13 +1789,13 @@
   },
   {
     "ea": "0x7A19E0",
-    "line": "mov     eax, [esp+70h+var_24]",
+    "line": "mov     eax, [esp+70h+savedLargeGuides.end]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A19E4",
-    "line": "mov     ebx, [esp+70h+var_28]",
+    "line": "mov     ebx, [esp+70h+savedLargeGuides.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1819,13 +1819,13 @@
   },
   {
     "ea": "0x7A19F1",
-    "line": "mov     ecx, [esp+70h+var_34]",
+    "line": "mov     ecx, dword ptr [esp+70h+sorterState]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A19F5",
-    "line": "push    ecx",
+    "line": "push    ecx; sorterState",
     "mnemonic": "push",
     "size": 1
   },
@@ -1879,25 +1879,25 @@
   },
   {
     "ea": "0x7A1A0B",
-    "line": "push    eax",
+    "line": "push    eax; partitionBudget",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A1A0C",
-    "line": "push    edi",
+    "line": "push    edi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A1A0D",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A1A0E",
-    "line": "call    sub_79FA30",
+    "line": "call    OB_CFrondEngine_SortGuidesByFuzzyArea_010201A0; Oblivion CFrondEngine guide introsort used only by BuildGuideLods. Orders full 0x30-byte SFrondGuide records by descending fuzzySurfaceArea: three-way partition while the ideal partition budget remains, insertion sort at <=32 records, and heap fallback on budget exhaustion. RT 4.1 corroborates the descending comparator, but its source sorts SFrondGuide* pointers; the executable moves compact guide records directly.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1927,7 +1927,7 @@
   },
   {
     "ea": "0x7A1A20",
-    "line": "mov     edi, [esp+70h+var_28]",
+    "line": "mov     edi, [esp+70h+savedLargeGuides.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1939,7 +1939,7 @@
   },
   {
     "ea": "0x7A1A26",
-    "line": "mov     ebp, [esp+70h+var_24]",
+    "line": "mov     ebp, [esp+70h+savedLargeGuides.end]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2047,43 +2047,43 @@
   },
   {
     "ea": "0x7A1A59",
-    "line": "push    ebp",
+    "line": "push    ebp; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A1A5A",
-    "line": "push    edi",
+    "line": "push    edi; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A1A5B",
-    "line": "push    esi",
+    "line": "push    esi; expectedOwner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A1A5C",
-    "line": "lea     edx, [esp+7Ch+var_34]",
+    "line": "lea     edx, [esp+7Ch+sorterState]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A1A60",
-    "line": "push    edx",
+    "line": "push    edx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A1A61",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A1A63",
-    "line": "call    sub_7A0A50",
+    "line": "call    OB_stVector_SFrondGuide_InsertOne_010201A0; Checked insert-one wrapper for st_vector<SFrondGuide>. Preserves the iterator index across possible reallocation, delegates to InsertFill(count=1), and returns the 8-byte {owner,current} iterator.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2149,7 +2149,7 @@
   },
   {
     "ea": "0x7A1A90",
-    "line": "mov     [esp+70h+var_3C], ecx",
+    "line": "mov     [esp+70h+guideLodVector], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2251,13 +2251,13 @@
   },
   {
     "ea": "0x7A1AC6",
-    "line": "mov     [esp+70h+var_34], eax",
+    "line": "mov     dword ptr [esp+70h+sorterState], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A1ACA",
-    "line": "fild    [esp+70h+var_34]",
+    "line": "fild    dword ptr [esp+70h+sorterState]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -2281,7 +2281,7 @@
   },
   {
     "ea": "0x7A1AD8",
-    "line": "fstp    [esp+70h+var_34]",
+    "line": "fstp    dword ptr [esp+70h+sorterState]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2317,7 +2317,7 @@
   },
   {
     "ea": "0x7A1AE9",
-    "line": "fmul    [esp+70h+var_34]",
+    "line": "fmul    dword ptr [esp+70h+sorterState]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -2335,7 +2335,7 @@
   },
   {
     "ea": "0x7A1AF3",
-    "line": "mov     [esp+70h+var_18], ebx",
+    "line": "mov     [esp+70h+lodLevelGuides.begin], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2347,7 +2347,7 @@
   },
   {
     "ea": "0x7A1AFB",
-    "line": "mov     [esp+70h+var_14], ebx",
+    "line": "mov     [esp+70h+lodLevelGuides.end], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2359,7 +2359,7 @@
   },
   {
     "ea": "0x7A1B03",
-    "line": "mov     [esp+70h+var_10], ebx",
+    "line": "mov     [esp+70h+lodLevelGuides.capacityEnd], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2743,19 +2743,19 @@
   },
   {
     "ea": "0x7A1BC7",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A1BC8",
-    "line": "lea     ecx, [esp+74h+var_1C]",
+    "line": "lea     ecx, [esp+74h+lodLevelGuides]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A1BCC",
-    "line": "call    sub_7A0B50",
+    "line": "call    OB_stVector_SFrondGuide_PushBack_010201A0; Oblivion st_vector<SFrondGuide>::push_back specialization. Placement-deep-copies at end when capacity remains; otherwise delegates to the decoded checked insert-one path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2779,31 +2779,31 @@
   },
   {
     "ea": "0x7A1BDC",
-    "line": "mov     ecx, [esp+70h+var_3C]",
+    "line": "mov     ecx, [esp+70h+guideLodVector]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A1BE0",
-    "line": "lea     edx, [esp+70h+var_1C]",
+    "line": "lea     edx, [esp+70h+lodLevelGuides]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A1BE4",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A1BE5",
-    "line": "call    sub_7A15D0",
+    "line": "call    OB_stVector_stVector_SFrondGuide_PushBack_010201A0; BuildGuideLods appends the completed temporary st_vector<SFrondGuide> as one deep-copied CFrondEngine+0x18 LOD level. RT 4.1 corroborates m_vGuideLods intent only; its published pointer-vector representation differs from Oblivion's by-value 0x30 guide copies.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A1BEA",
-    "line": "mov     edi, [esp+70h+var_18]",
+    "line": "mov     edi, [esp+70h+lodLevelGuides.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2821,7 +2821,7 @@
   },
   {
     "ea": "0x7A1BF2",
-    "line": "mov     eax, [esp+70h+var_14]",
+    "line": "mov     eax, [esp+70h+lodLevelGuides.end]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2881,7 +2881,7 @@
   },
   {
     "ea": "0x7A1C07",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2935,7 +2935,7 @@
   },
   {
     "ea": "0x7A1C21",
-    "line": "mov     edi, [esp+70h+var_18]",
+    "line": "mov     edi, [esp+70h+lodLevelGuides.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2947,7 +2947,7 @@
   },
   {
     "ea": "0x7A1C26",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2989,19 +2989,19 @@
   },
   {
     "ea": "0x7A1C3E",
-    "line": "mov     [esp+70h+var_18], ebx",
+    "line": "mov     [esp+70h+lodLevelGuides.begin], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A1C42",
-    "line": "mov     [esp+70h+var_14], ebx",
+    "line": "mov     [esp+70h+lodLevelGuides.end], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A1C46",
-    "line": "mov     [esp+70h+var_10], ebx",
+    "line": "mov     [esp+70h+lodLevelGuides.capacityEnd], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3019,13 +3019,13 @@
   },
   {
     "ea": "0x7A1C54",
-    "line": "mov     ebp, [esp+70h+var_24]",
+    "line": "mov     ebp, [esp+70h+savedLargeGuides.end]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A1C58",
-    "line": "mov     edi, [esp+70h+var_28]",
+    "line": "mov     edi, [esp+70h+savedLargeGuides.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3097,7 +3097,7 @@
   },
   {
     "ea": "0x7A1C77",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3151,7 +3151,7 @@
   },
   {
     "ea": "0x7A1C91",
-    "line": "mov     edi, [esp+70h+var_28]",
+    "line": "mov     edi, [esp+70h+savedLargeGuides.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3163,7 +3163,7 @@
   },
   {
     "ea": "0x7A1C96",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3175,25 +3175,25 @@
   },
   {
     "ea": "0x7A1C9E",
-    "line": "lea     ecx, [esp+70h+var_59]; void *",
+    "line": "lea     ecx, [esp+70h+var_59]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A1CA2",
-    "line": "mov     [esp+70h+var_28], ebx",
+    "line": "mov     [esp+70h+savedLargeGuides.begin], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A1CA6",
-    "line": "mov     [esp+70h+var_24], ebx",
+    "line": "mov     [esp+70h+savedLargeGuides.end], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A1CAA",
-    "line": "mov     [esp+70h+var_20], ebx",
+    "line": "mov     [esp+70h+savedLargeGuides.capacityEnd], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3205,7 +3205,7 @@
   },
   {
     "ea": "0x7A1CB6",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3262,5 +3262,83 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CC720",
+    "line": "lea     ecx, [ebp-59h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC723",
+    "line": "jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC728",
+    "line": "lea     ecx, [ebp-2Ch]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC72B",
+    "line": "jmp     OB_stVector_SFrondGuide_Destroy_010201A0; Destroys one st_vector<SFrondGuide>: deep-destroys the initialized 0x30 guide range, frees its allocation, and clears begin/end/capacityEnd.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC730",
+    "line": "lea     ecx, [ebp-1Ch]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC733",
+    "line": "jmp     OB_stVector_SFrondGuide_Destroy_010201A0; Destroys one st_vector<SFrondGuide>: deep-destroys the initialized 0x30 guide range, frees its allocation, and clears begin/end/capacityEnd.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC738",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CC73C",
+    "line": "lea     eax, [edx-60h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC73F",
+    "line": "mov     ecx, [edx-64h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC742",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CC744",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC749",
+    "line": "mov     eax, offset stru_AF5B04",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC74E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

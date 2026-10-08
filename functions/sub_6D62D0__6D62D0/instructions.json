@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6D62D0",
-    "line": "push    ebp",
+    "line": "push    ebp; Oblivion NiTransformInterpolator constant-track collapse. Moves constant translation/rotation/scale into cached transform +0x0C, clears their NiTransformData tracks, and releases data +0x2C if all counts become zero. Multi-key equality collapse is restricted to numeric types 1 and 5; one-key tracks always collapse, while rotation type 4 is not treated as the ordinary one-key quaternion case.",
     "mnemonic": "push",
     "size": 1
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x6D634E",
-    "line": "call    sub_6E1F00",
+    "line": "call    NiTransformData_SetTranslationKeys; Oblivion NiTransformData translation-key ownership setter. Destroys previous keys +0x24 through the destructor table indexed by type +0x14, then installs count +0x0A, pointer +0x24, type +0x14, and table-derived stride +0x1D. Null pointer or zero count clears the channel fields.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x6D635B",
-    "line": "mov     [esp+80h+var_30], edx",
+    "line": "mov     [esp+80h+other.x], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x6D6362",
-    "line": "mov     [esp+80h+var_2C], edx",
+    "line": "mov     [esp+80h+other.y], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x6D6369",
-    "line": "mov     [esp+80h+var_28], edx",
+    "line": "mov     [esp+80h+other.z], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -355,25 +355,25 @@
   },
   {
     "ea": "0x6D6397",
-    "line": "lea     eax, [esp+80h+var_30]",
+    "line": "lea     eax, [esp+80h+other]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6D639B",
-    "line": "push    eax",
+    "line": "push    eax; other",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6D639C",
-    "line": "lea     ecx, [ecx+ebp+4]",
+    "line": "lea     ecx, [ecx+ebp+4]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6D63A0",
-    "line": "call    sub_8AA390",
+    "line": "call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x6D63EB",
-    "line": "call    sub_6E1E90",
+    "line": "call    NiTransformData_SetRotationKeys; Oblivion NiTransformData rotation-key ownership setter. Destroys the previous +0x20 array via the destructor table indexed by type +0x10; type 4 first destroys its three nested scalar-axis tracks. Installs count +8, pointer +0x20, type +0x10, and table-derived stride +0x1C, or clears all four fields for null/zero input.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,13 +649,13 @@
   },
   {
     "ea": "0x6D6421",
-    "line": "call    sub_6E1F00",
+    "line": "call    NiTransformData_SetTranslationKeys; Oblivion NiTransformData translation-key ownership setter. Destroys previous keys +0x24 through the destructor table indexed by type +0x14, then installs count +0x0A, pointer +0x24, type +0x14, and table-derived stride +0x1D. Null pointer or zero count clears the channel fields.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6D6426",
-    "line": "lea     edx, [esp+80h+var_30]",
+    "line": "lea     edx, [esp+80h+other]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -685,7 +685,7 @@
   },
   {
     "ea": "0x6D6433",
-    "line": "mov     [esp+80h+var_30], edx",
+    "line": "mov     [esp+80h+other.x], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x6D643A",
-    "line": "mov     [esp+80h+var_2C], edx",
+    "line": "mov     [esp+80h+other.y], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x6D6441",
-    "line": "mov     [esp+80h+var_28], edx",
+    "line": "mov     [esp+80h+other.z], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -781,7 +781,7 @@
   },
   {
     "ea": "0x6D6467",
-    "line": "fld     [esp+80h+var_28]",
+    "line": "fld     [esp+80h+other.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -793,13 +793,13 @@
   },
   {
     "ea": "0x6D6470",
-    "line": "fld     [esp+80h+var_2C]",
+    "line": "fld     [esp+80h+other.y]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x6D6474",
-    "line": "fld     [esp+80h+var_30]",
+    "line": "fld     [esp+80h+other.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1153,7 +1153,7 @@
   },
   {
     "ea": "0x6D650E",
-    "line": "call    sub_6E1F60",
+    "line": "call    NiTransformData_SetScaleKeys; Oblivion NiTransformData scale-key ownership setter. Destroys previous keys +0x28 through the destructor table indexed by type +0x18, then installs count +0x0C, pointer +0x28, type +0x18, and table-derived stride +0x1E. Null pointer or zero count clears the channel fields.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1225,13 +1225,13 @@
   },
   {
     "ea": "0x6D652B",
-    "line": "call    sub_6E1E90",
+    "line": "call    NiTransformData_SetRotationKeys; Oblivion NiTransformData rotation-key ownership setter. Destroys the previous +0x20 array via the destructor table indexed by type +0x10; type 4 first destroys its three nested scalar-axis tracks. Installs count +8, pointer +0x20, type +0x10, and table-derived stride +0x1C, or clears all four fields for null/zero input.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6D6530",
-    "line": "lea     ecx, [esp+80h+var_30]",
+    "line": "lea     ecx, [esp+80h+other]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1807,7 +1807,7 @@
   },
   {
     "ea": "0x6D6643",
-    "line": "call    sub_6E1F60",
+    "line": "call    NiTransformData_SetScaleKeys; Oblivion NiTransformData scale-key ownership setter. Destroys previous keys +0x28 through the destructor table indexed by type +0x18, then installs count +0x0C, pointer +0x28, type +0x18, and table-derived stride +0x1E. Null pointer or zero count clears the channel fields.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1843,7 +1843,7 @@
   },
   {
     "ea": "0x6D6655",
-    "line": "call    sub_6E1F60",
+    "line": "call    NiTransformData_SetScaleKeys; Oblivion NiTransformData scale-key ownership setter. Destroys previous keys +0x28 through the destructor table indexed by type +0x18, then installs count +0x0C, pointer +0x28, type +0x18, and table-derived stride +0x1E. Null pointer or zero count clears the channel fields.",
     "mnemonic": "call",
     "size": 5
   },

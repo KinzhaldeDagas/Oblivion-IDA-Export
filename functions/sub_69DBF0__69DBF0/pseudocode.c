@@ -1,25 +1,23 @@
-int __thiscall sub_69DBF0(_DWORD *this, int a2, int a3)
+// Verified load callback arguments: ownerActiveEffect is stored at +0x18 and targetReference at +0x1C; it restores elapsedSeconds and bFinished, plus durationSeconds on version 0x72+.
+int __thiscall MagicHitEffect_LoadExtraData(
+        MagicHitEffect *this,
+        ActiveEffect *ownerActiveEffect,
+        TESObjectREFR *targetReference)
 {
   int result; // eax
-  size_t v5; // [esp-4h] [ebp-8h]
-  size_t v6; // [esp-4h] [ebp-8h]
-  size_t v7; // [esp-4h] [ebp-8h]
 
-  LODWORD(v5) = 4;
-  SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, this + 8, v5);
-  LODWORD(v6) = 1;
-  SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, this + 9, v6);
-  if ( LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) < 0x72u )
+  SaveLoad_LoadData(g_TESSaveLoadGame, &this->elapsedSeconds, 4u); /*0x69dbff*/
+  SaveLoad_LoadData(g_TESSaveLoadGame, &this->bFinished, 1u); /*0x69dc10*/
+  if ( g_TESSaveLoadGame->currentVersion < 0x72u ) /*0x69dc1f*/
   {
-    result = a3;
+    result = (int)targetReference; /*0x69dc42*/
   }
   else
   {
-    LODWORD(v7) = 4;
-    SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, this + 2, v7);
-    result = a2;
+    SaveLoad_LoadData(g_TESSaveLoadGame, &this->super.durationSeconds, 4u); /*0x69dc27*/
+    result = (int)ownerActiveEffect; /*0x69dc2c*/
   }
-  *(this + 6) = a2;
-  *(this + 7) = a3;
-  return result;
+  this->ownerActiveEffect = ownerActiveEffect; /*0x69dc34*/
+  this->targetReference = targetReference; /*0x69dc37*/
+  return result; /*0x69dc3a*/
 }

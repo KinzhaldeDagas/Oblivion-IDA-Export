@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x79E220",
-    "line": "mov     ecx, [esp+arg_0]",
+    "line": "mov     ecx, [esp+first]; Selects a robust fuzzySurfaceArea pivot for SFrondGuide partitioning. Small ranges sort first/middle/last; ranges over 40 elements sort multiple evenly spaced triplets before the final three-sample ordering.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x79E225",
-    "line": "mov     edi, [esp+4+arg_8]",
+    "line": "mov     edi, [esp+4+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -175,37 +175,37 @@
   },
   {
     "ea": "0x79E269",
-    "line": "push    edx",
+    "line": "push    edx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E26A",
-    "line": "push    eax",
+    "line": "push    eax; middle",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E26B",
-    "line": "push    ecx",
+    "line": "push    ecx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E26C",
-    "line": "mov     [esp+20h+arg_0], eax",
+    "line": "mov     [esp+20h+first], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79E270",
-    "line": "call    sub_79C0D0",
+    "line": "call    OB_SFrondGuide_SortThreeByFuzzyArea_010201A0; Orders three SFrondGuide samples in descending fuzzySurfaceArea order using full-guide swaps. This is the median/pivot primitive for the guide introsort partitioner.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x79E275",
-    "line": "mov     ebp, [esp+20h+arg_4]",
+    "line": "mov     ebp, [esp+20h+middle]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x79E281",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
@@ -247,19 +247,19 @@
   },
   {
     "ea": "0x79E286",
-    "line": "push    ebp",
+    "line": "push    ebp; middle",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E287",
-    "line": "push    edx",
+    "line": "push    edx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E288",
-    "line": "call    sub_79C0D0",
+    "line": "call    OB_SFrondGuide_SortThreeByFuzzyArea_010201A0; Orders three SFrondGuide samples in descending fuzzySurfaceArea order using full-guide swaps. This is the median/pivot primitive for the guide introsort partitioner.",
     "mnemonic": "call",
     "size": 5
   },
@@ -289,13 +289,13 @@
   },
   {
     "ea": "0x79E296",
-    "line": "push    edi",
+    "line": "push    edi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E297",
-    "line": "push    eax",
+    "line": "push    eax; middle",
     "mnemonic": "push",
     "size": 1
   },
@@ -307,31 +307,31 @@
   },
   {
     "ea": "0x79E29A",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E29B",
-    "line": "mov     [esp+40h+arg_8], eax",
+    "line": "mov     [esp+40h+last], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79E29F",
-    "line": "call    sub_79C0D0",
+    "line": "call    OB_SFrondGuide_SortThreeByFuzzyArea_010201A0; Orders three SFrondGuide samples in descending fuzzySurfaceArea order using full-guide swaps. This is the median/pivot primitive for the guide introsort partitioner.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x79E2A4",
-    "line": "mov     eax, [esp+40h+arg_8]",
+    "line": "mov     eax, [esp+40h+last]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79E2A8",
-    "line": "mov     ecx, [esp+40h+arg_0]",
+    "line": "mov     ecx, [esp+40h+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -343,25 +343,25 @@
   },
   {
     "ea": "0x79E2AD",
-    "line": "push    eax",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E2AE",
-    "line": "push    ebp",
+    "line": "push    ebp; middle",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E2AF",
-    "line": "push    ecx",
+    "line": "push    ecx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E2B0",
-    "line": "call    sub_79C0D0",
+    "line": "call    OB_SFrondGuide_SortThreeByFuzzyArea_010201A0; Orders three SFrondGuide samples in descending fuzzySurfaceArea order using full-guide swaps. This is the median/pivot primitive for the guide introsort partitioner.",
     "mnemonic": "call",
     "size": 5
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x79E2C1",
-    "line": "mov     eax, [esp+4+arg_4]",
+    "line": "mov     eax, [esp+4+middle]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -421,25 +421,25 @@
   },
   {
     "ea": "0x79E2C6",
-    "line": "push    edi",
+    "line": "push    edi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E2C7",
-    "line": "push    eax",
+    "line": "push    eax; middle",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E2C8",
-    "line": "push    ecx",
+    "line": "push    ecx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E2C9",
-    "line": "call    sub_79C0D0",
+    "line": "call    OB_SFrondGuide_SortThreeByFuzzyArea_010201A0; Orders three SFrondGuide samples in descending fuzzySurfaceArea order using full-guide swaps. This is the median/pivot primitive for the guide introsort partitioner.",
     "mnemonic": "call",
     "size": 5
   },

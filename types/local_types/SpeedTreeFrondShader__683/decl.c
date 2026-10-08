@@ -1,1 +1,1 @@
-SpeedTreeFrondShader
+struct SpeedTreeFrondShader;

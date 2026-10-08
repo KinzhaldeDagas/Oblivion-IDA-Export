@@ -1,4 +1,4 @@
-0x5F1590: push    ebp
+0x5F1590: push    ebp; 3DTheft: xrefs ignore this function's return value; use current package/process state after call, not AL/EAX, as the package assignment result.
 0x5F1591: mov     ebp, [esp+4+arg_0]
 0x5F1595: push    esi; int
 0x5F1596: mov     esi, ecx
@@ -16,7 +16,7 @@
 0x5F15BC: cmp     [eax+8], ebp
 0x5F15BF: jz      short loc_5F15C8
 0x5F15C1: mov     ecx, esi; int
-0x5F15C3: call    sub_5EAE70
+0x5F15C3: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x5F15C8: cmp     dword ptr [esi+58h], 0
 0x5F15CC: jz      loc_5F1902
 0x5F15D2: mov     ecx, [esi+58h]
@@ -88,7 +88,7 @@
 0x5F1699: jz      short loc_5F16A4
 0x5F169B: push    1
 0x5F169D: mov     ecx, ebp
-0x5F169F: call    sub_566830
+0x5F169F: call    sub_566830; 3DTheft decode: Actor_AddPackage_ performs the dynamic-marker helper when markDynamic/a4 is true; callers should let this path mark runtime packages instead of forcing packageFlags 0x800 manually.
 0x5F16A4: test    bl, bl
 0x5F16A6: jnz     loc_5F186B
 0x5F16AC: mov     ecx, [esi+58h]
@@ -157,14 +157,14 @@
 0x5F176B: push    0
 0x5F176D: call    eax
 0x5F176F: mov     ecx, [esi+58h]
-0x5F1772: mov     ecx, [ecx+8]
+0x5F1772: mov     ecx, [ecx+8]; self
 0x5F1775: test    ecx, ecx
 0x5F1777: jz      short loc_5F17EC
 0x5F1779: cmp     byte ptr [ebp+20h], 1
 0x5F177D: jz      short loc_5F1785
 0x5F177F: cmp     byte ptr [ecx+20h], 1
 0x5F1783: jz      short loc_5F17EC
-0x5F1785: call    sub_5660A0
+0x5F1785: call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).
 0x5F178A: test    al, al
 0x5F178C: jz      short loc_5F17EC
 0x5F178E: cmp     byte ptr [ebp+20h], 1
@@ -204,13 +204,13 @@
 0x5F17E6: push    1
 0x5F17E8: mov     ecx, edi
 0x5F17EA: call    eax
-0x5F17EC: mov     ecx, [esi+58h]
+0x5F17EC: mov     ecx, [esi+58h]; 3DTheft decode 2026-05-16: Actor_AddPackage_ editor-package path stores v7 into process->editorPackage and resets editorPackProcedure. AddScriptPackage reaches this with setCurrent=0 markDynamic=0.
 0x5F17EF: mov     [ecx+8], ebp
 0x5F17F2: mov     edx, [esi+58h]
 0x5F17F5: push    ebp
 0x5F17F6: mov     ecx, esi
-0x5F17F8: mov     dword ptr [edx+4], 0
-0x5F17FF: call    sub_5E8DE0
+0x5F17F8: mov     dword ptr [edx+4], 0; 3DTheft decode: Actor_AddPackage_ editor-package handoff resets editorPackProcedure to slot 0, not TRAVEL semantics specifically; slot 0 maps through the package procedure row.
+0x5F17FF: call    sub_5E8DE0; 3DTheft: marks actor modified when assigning created package/editor package. For created package refIDs, uses actor modified mask 0x20000, or 0x30000 for types 0x13/0x11.
 0x5F1804: mov     eax, [esi]
 0x5F1806: mov     edx, [eax+164h]
 0x5F180C: mov     ecx, esi
@@ -243,7 +243,7 @@
 0x5F185B: mov     ecx, esi
 0x5F185D: call    edx
 0x5F185F: mov     ecx, eax
-0x5F1861: call    sub_475440
+0x5F1861: call    ActorAnimData_CleanupOrPromoteQueuedIdles; Owns current/queued idle retirement and promotion across ActorAnimData +0xCC/+0xD0/+0xD4/+0xD8. Depending on caller flags, stops a still-active sequence, moves stale holders into the two cleanup slots, destroys them when no slot is available or forced, or promotes queued +0xD0 into current +0xCC.
 0x5F1866: jmp     loc_5F18EB
 0x5F186B: mov     eax, [esi]
 0x5F186D: mov     edx, [eax+380h]
@@ -285,7 +285,7 @@
 0x5F18D1: mov     edx, [ecx]
 0x5F18D3: mov     eax, [edx+17Ch]
 0x5F18D9: push    0
-0x5F18DB: call    eax
+0x5F18DB: call    eax; 3DTheft decode: current-package handoff resets currentPackProcedure to slot 0; SetCurrentPackProcedure clamps slots, not eProcedure enum values.
 0x5F18DD: mov     edx, [esi]
 0x5F18DF: mov     eax, [edx+40h]
 0x5F18E2: push    80000h

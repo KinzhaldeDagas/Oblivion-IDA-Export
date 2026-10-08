@@ -183,10 +183,9 @@
 0x443E80: mov     [ebp+9Ch], ebx
 0x443E86: xor     esi, esi
 0x443E88: jmp     short loc_443E90
-0x443E8A: align 10h
 0x443E90: mov     ecx, ds:dword_B067C0[esi]
 0x443E96: push    ecx; a1
-0x443E97: call    TESForm_LookupByFormID
+0x443E97: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x443E9C: add     esp, 4
 0x443E9F: cmp     eax, ebx
 0x443EA1: jz      short loc_443EE3
@@ -213,7 +212,7 @@
 0x443EDB: push    1
 0x443EDD: push    eax
 0x443EDE: call    QueuedModelLoader_RemoveModel
-0x443EE3: mov     ds:dword_B35E50[esi], ebx
+0x443EE3: mov     dword ptr ds:unk_B35E50[esi], ebx
 0x443EE9: add     esi, 4
 0x443EEC: cmp     esi, 54h ; 'T'
 0x443EEF: jl      short loc_443E90

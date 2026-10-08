@@ -15,13 +15,13 @@
 0x45A3A3: push    edi
 0x45A3A4: jz      short loc_45A3C9
 0x45A3A6: fld     dword ptr [esp+10h+arg_0+4]
-0x45A3AA: call    Double_To_SInt32
+0x45A3AA: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x45A3AF: fld     dword ptr [esp+10h+arg_0]
 0x45A3B3: sar     eax, 0Ch
-0x45A3B6: push    eax; signed int
-0x45A3B7: call    Double_To_SInt32
+0x45A3B6: push    eax; cellY
+0x45A3B7: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x45A3BC: sar     eax, 0Ch
-0x45A3BF: push    eax; signed int
+0x45A3BF: push    eax; cellX
 0x45A3C0: mov     ecx, esi; this
 0x45A3C2: call    TESWorldSpace__GetCellAtCellCoord
 0x45A3C7: jmp     short loc_45A3CD
@@ -37,10 +37,10 @@
 0x45A3E3: mov     bl, 1
 0x45A3E5: mov     ecx, ds:0B333C4h; this
 0x45A3EB: lea     eax, [ebp+0B0h]
-0x45A3F1: push    eax; Str2
+0x45A3F1: push    eax; right
 0x45A3F2: call    TESObjectREFR_GetName
-0x45A3F7: push    eax; Str1
-0x45A3F8: call    __strcmp
+0x45A3F7: push    eax; left
+0x45A3F8: call    CRT_StricmpLocaleDispatch
 0x45A3FD: add     esp, 8
 0x45A400: test    eax, eax
 0x45A402: jz      short loc_45A406
@@ -73,10 +73,10 @@
 0x45A462: pop     esi
 0x45A463: jle     short loc_45A467
 0x45A465: mov     bl, 1
-0x45A467: mov     ecx, offset TimeGlobals
+0x45A467: mov     ecx, 0B332E0h
 0x45A46C: call    TimeGlobals_GetGameHour
 0x45A471: fdiv    qword ptr ds:0A2F920h
-0x45A477: mov     ecx, offset TimeGlobals
+0x45A477: mov     ecx, 0B332E0h
 0x45A47C: fstp    [esp+8+arg_0]
 0x45A480: call    TimeGlobals_GetGameDaysPassed
 0x45A485: test    eax, eax

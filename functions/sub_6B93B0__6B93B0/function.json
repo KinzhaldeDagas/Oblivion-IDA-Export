@@ -1,19 +1,36 @@
 {
-  "callees_count": 23,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 12,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_6B93B0",
+  "chunks": [
+    [
+      "0x6B93B0",
+      "0x6B94DD"
+    ],
+    [
+      "0x9AFB50",
+      "0x9AFB76"
+    ]
+  ],
+  "chunks_sha256": "6206f902f35787de3f05b588bc6979788c0c40671f42ae104c7497d0652b893c",
+  "comment_regular": "OFE player Greeting adapter sites: 59EA74 wraps Initialize to distinguish forcedGreeting != null (must bypass replacement); 6B9419 matching; 6B942B owner quest; 6B9457 MenuTopic constructor. Replacement source topic must accompany selected INFO through owner and response construction. No suppression/no-candidate alteration is needed: failed replacement retains stock native fallback.\n\nPlayer-dialogue initializer. Clears the manager, resolves an optional forced topic or stock GREETING 000000C8, selects its INFO without InfoRefusal substitution, and pushes it as the head seed. A Goodbye GREETING is pre-committed (AddTopicList then RunResult) and returns closePending=true, but DialogMenu still plays its responses before closing.",
+  "comment_repeatable": "Player-dialogue initializer. Clears the manager, resolves an optional forced topic or stock GREETING 000000C8, selects its INFO without InfoRefusal substitution, and pushes it as the head seed. A Goodbye GREETING is pre-committed (AddTopicList then RunResult) and returns closePending=true, but DialogMenu still plays its responses before closing.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "MenuTopicManager::Initialize",
   "end_ea": "0x6B94DD",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6B93B0",
+  "name": "MenuTopicManager::Initialize",
   "segment": ".text",
   "sha256": "6f13ca6ce7c8f1272e0906916c04d41174f1b8164dac520222e42c4b73943d0e",
   "size": 301,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6B93B0",
-  "type": "char __userpurge@<al>(UnkBohBoh *@<ecx>, double@<st1>, double@<st0>, TESObjectREFR *, UnkBohDialogueTopicBoh *)",
-  "xrefs_from_count": 124,
+  "total_chunk_size": 339,
+  "type": "bool __thiscall(MenuTopicManagerView *this, TESObjectREFR *speaker, TESTopic *forcedGreeting)",
+  "xrefs_from_count": 138,
   "xrefs_to_count": 1
 }

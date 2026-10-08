@@ -1,4 +1,4 @@
-0x47D8F0: push    ebx
+0x47D8F0: push    ebx; SpeedTreeOBSE 2026-07-14: normalizes texture palette keys in a fixed 256-byte local buffer. Plugin loader inputs are therefore capped at 255 characters.
 0x47D8F1: mov     ebx, [esp+4+arg_4]
 0x47D8F5: push    esi
 0x47D8F6: mov     esi, [esp+8+Str1]

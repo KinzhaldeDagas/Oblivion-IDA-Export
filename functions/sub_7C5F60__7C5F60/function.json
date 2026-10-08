@@ -1,19 +1,32 @@
 {
-  "callees_count": 15,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7C5F60",
+      "0x7C601A"
+    ]
+  ],
+  "chunks_sha256": "93c3f261c8d7e374b874780400c81ea7a2ce248586de89e0227d5706a3420828",
+  "comment_regular": "Reconcile one ordinary source light against current scene receivers. Projector-mode lights are skipped; culled sources clear associations, visible sources begin/add/remove receiver reconciliation.",
+  "comment_repeatable": "Reconcile one ordinary source light against current scene receivers. Projector-mode lights are skipped; culled sources clear associations, visible sources begin/add/remove receiver reconciliation.\n\nMEF PERF 2026-10-02: PERF 2026-10-02 negative result: visible ordinary source reconciliation visits current scene children and performs receiver side effects; culled source clears associations, projector skips. No proof that reconciliation calls are redundant; a source-lookup optimization must retain this behavior.\nMEF PERF 2026-10-07 PASS2: PERF-13 reachable source reconciliation: nonprojector visible source runs Begin7C5FC3, visits scene children through AddToScene7C5FF9, then stale cleanup7C600E. Culled source takes ClearReceiverAssociations instead. Prior negative finding about suppressing whole reconciliation still holds; optimize searches without suppressing required work.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7C5F60",
+  "display_name": "ShadowSceneNode_ReconcileSourceLightReceivers",
   "end_ea": "0x7C601A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7C5F60",
+  "name": "ShadowSceneNode_ReconcileSourceLightReceivers",
   "segment": ".text",
   "sha256": "93c3f261c8d7e374b874780400c81ea7a2ce248586de89e0227d5706a3420828",
   "size": 186,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7C5F60",
-  "type": "void __thiscall(_DWORD *this, int)",
+  "total_chunk_size": 186,
+  "type": "void __thiscall(ShadowSceneNode_DecodedLayout *self, ShadowSceneLight_DecodedLayout *light)",
   "xrefs_from_count": 83,
   "xrefs_to_count": 4
 }

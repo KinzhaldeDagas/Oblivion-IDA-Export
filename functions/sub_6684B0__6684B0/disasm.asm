@@ -1,4 +1,4 @@
-0x6684B0: push    ebp
+0x6684B0: push    ebp; When bTrackLevelUps is enabled, append an Oblivion-native diagnostic snapshot: player identity/level, exactly seven class major-skill names, then all 21 skill values and skillExp entries, attributes, inventory data, and advancement counters. There is no serialized minor-skill name list.
 0x6684B1: mov     ebp, esp
 0x6684B3: and     esp, 0FFFFFFC0h
 0x6684B6: push    0FFFFFFFFh
@@ -65,7 +65,7 @@
 0x668591: cmp     byte ptr ds:0B34190h, 0
 0x668598: mov     [esp+284h+var_260], eax
 0x66859C: jz      short loc_6685AF
-0x66859E: push    offset byte_B34190
+0x66859E: push    0B34190h
 0x6685A3: push    offset aS_5; "%s\t"
 0x6685A8: lea     eax, [esp+28Ch+var_26C]
 0x6685AC: push    eax
@@ -116,7 +116,7 @@
 0x66862F: mov     ecx, esi
 0x668631: call    edx
 0x668633: mov     ecx, edi
-0x668635: call    Actor_GetBaseClass
+0x668635: call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.
 0x66863A: add     eax, 18h
 0x66863D: mov     eax, [eax+4]
 0x668640: cmp     eax, ebx
@@ -181,13 +181,13 @@
 0x6686ED: push    eax
 0x6686EE: mov     ecx, esi
 0x6686F0: call    edx
-0x6686F2: push    ebx
+0x6686F2: push    ebx; Begin a fixed seven-iteration loop over TESClass::majorSkills[0..6]; append each resolved actor-value name.
 0x6686F3: mov     ecx, edi
-0x6686F5: call    Actor_GetBaseClass
-0x6686FA: mov     ecx, eax
-0x6686FC: call    sub_51BF00
+0x6686F5: call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.
+0x6686FA: mov     ecx, eax; this
+0x6686FC: call    TESClass_GetMajorSkillAV; Fetch one of exactly seven stored class major SkillActorValues. The diagnostic header preserves slot order.
 0x668701: push    eax
-0x668702: call    ActorValue_GetName
+0x668702: call    ActorValue_GetName; Return the localized actor-value display name through g_actorValueNameSettings. Native skills occupy the contiguous SkillActorValue range 0x0C..0x20.
 0x668707: push    eax; ArgList
 0x668708: lea     eax, [esp+28Ch+var_26C]
 0x66870C: push    offset aS_5; "%s\t"
@@ -203,7 +203,7 @@
 0x668728: add     ebx, 1
 0x66872B: cmp     ebx, 7
 0x66872E: jl      short loc_6686F2
-0x668730: mov     ebx, 0Ch
+0x668730: mov     ebx, 0Ch; After the seven major names, enumerate all 21 native SkillActorValues 0x0C..0x20 and append each current value plus raw skillExp.
 0x668735: mov     eax, [edi]
 0x668737: mov     edx, [eax+284h]
 0x66873D: push    ebx
@@ -228,7 +228,7 @@
 0x66876F: ja      short loc_66878A
 0x668771: push    ebx
 0x668772: push    2
-0x668774: call    ActorValue_GetGroupOffsetFromAV
+0x668774: call    ActorValue_GetGroupOffsetFromAV; Oblivion group 2 converts SkillActorValue 0x0C..0x20 to the 0..20 index used by PlayerCharacter::skillExp.
 0x668779: movsx   ecx, al
 0x66877C: add     esp, 8
 0x66877F: fld     dword ptr [edi+ecx*4+130h]
@@ -251,7 +251,7 @@
 0x6687B7: lea     eax, [ebx-0Ch]
 0x6687BA: cmp     eax, 15h
 0x6687BD: jl      loc_668735
-0x6687C3: xor     ebx, ebx
+0x6687C3: xor     ebx, ebx; After all skill values/progress entries, begin the eight primary-attribute snapshot.
 0x6687C5: push    ebx
 0x6687C6: mov     ecx, edi
 0x6687C8: call    Actor_GetBaseCalcAVi
@@ -540,7 +540,7 @@
 0x668AFA: call    edx
 0x668AFC: mov     eax, [esp+284h+var_26C.m_data]
 0x668B00: push    eax
-0x668B01: call    FormHeapFree
+0x668B01: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x668B06: add     esp, 4
 0x668B09: mov     ecx, [esp+284h+var_C]
 0x668B10: mov     large fs:0, ecx
@@ -554,3 +554,21 @@
 0x668B29: mov     esp, ebp
 0x668B2B: pop     ebp
 0x668B2C: retn
+0x9C3EF0: mov     eax, [ebp+var_260]
+0x9C3EF6: push    eax
+0x9C3EF7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C3EFC: pop     ecx
+0x9C3EFD: retn
+0x9C3EFE: lea     ecx, [ebp+var_26C]; void *
+0x9C3F04: jmp     BSStringT_Clear
+0x9C3F09: mov     edx, [esp-4+arg_4]
+0x9C3F0D: lea     eax, [edx-274h]
+0x9C3F13: mov     ecx, [edx-278h]
+0x9C3F19: xor     ecx, eax
+0x9C3F1B: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C3F20: add     eax, 0Ch
+0x9C3F23: mov     ecx, [edx-38h]
+0x9C3F26: xor     ecx, eax
+0x9C3F28: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C3F2D: mov     eax, offset stru_AEC9E0
+0x9C3F32: jmp     ___CxxFrameHandler3

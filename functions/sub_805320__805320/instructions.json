@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x805320",
-    "line": "sub     esp, 2F0h",
+    "line": "sub     esp, 2F0h; BloodOnDeath decode 2026-05-30: GeometryDecalShader program creation. MAXDECALS=\"1\" is a shader-pass define for geometry decal variants, not the gameplay blood spawn/trail count.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x80537A",
-    "line": "mov     [esp+30Ch+var_244], offset aMaxdecals; \"MAXDECALS\"",
+    "line": "mov     [esp+30Ch+var_244], offset aMaxdecals; BloodOnDeath decode: non-skinned geometry-decal VS uses MAXDECALS=1; single-decal shader pass, not a global blood decal cap.",
     "mnemonic": "mov",
     "size": 11
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x8053ED",
-    "line": "call    CreateVertexShader",
+    "line": "call    CreateVertexShader; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.",
     "mnemonic": "call",
     "size": 5
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x80545E",
-    "line": "mov     [esp+308h+var_2DC], offset aMaxdecals; \"MAXDECALS\"",
+    "line": "mov     [esp+308h+var_2DC], offset aMaxdecals; BloodOnDeath decode: skinned geometry-decal VS also uses MAXDECALS=1; more trails require more decal instances/projection calls upstream.",
     "mnemonic": "mov",
     "size": 8
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x8054DC",
-    "line": "call    CreateVertexShader",
+    "line": "call    CreateVertexShader; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.",
     "mnemonic": "call",
     "size": 5
   },
@@ -877,7 +877,7 @@
   },
   {
     "ea": "0x805560",
-    "line": "mov     [esp+30Ch+var_290], offset aMaxdecals; \"MAXDECALS\"",
+    "line": "mov     [esp+30Ch+var_290], offset aMaxdecals; BloodOnDeath decode: geometry-decal PS uses MAXDECALS=1; renderer consumes existing geometry decals rather than emitting blood.",
     "mnemonic": "mov",
     "size": 8
   },
@@ -1021,7 +1021,7 @@
   },
   {
     "ea": "0x8055C6",
-    "line": "call    CreatePixelShader",
+    "line": "call    CreatePixelShader; Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.",
     "mnemonic": "call",
     "size": 5
   },

@@ -7,7 +7,7 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_T1InedbibleIngred@<
         int a6,
         int a7,
         int a8,
-        int a9,
+        char a9,
         int a10,
         int a11,
         int a12,
@@ -31,17 +31,15 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_T1InedbibleIngred@<
         int a30,
         int a31,
         int a32,
-        int a33,
-        int a34,
-        int a35)
+        int a33)
 {
-  float v36; // [esp+0h] [ebp-20h]
-  float v37; // [esp+4h] [ebp-1Ch]
-  float v38; // [esp+10h] [ebp-10h]
-  float v39; // [esp+14h] [ebp-Ch]
-  float v40; // [esp+18h] [ebp-8h]
+  float v34; // [esp+0h] [ebp-20h]
+  float v35; // [esp+4h] [ebp-1Ch]
+  float v36; // [esp+10h] [ebp-10h]
+  float v37; // [esp+14h] [ebp-Ch]
+  float v38; // [esp+18h] [ebp-8h]
 
-  __asm { fst     [esp+10h+var_8]; float }
+  __asm { fst     [esp+10h+var_8]; float } /*0x69b346*/
   __asm { fst     [esp+10h+var_C]; float }
   __asm { fstp    [esp+10h+var_10]; float }
   __asm { fld     [esp+14h+arg_74] }
@@ -51,12 +49,9 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_T1InedbibleIngred@<
     fld     [esp+20h+arg_2C]
     fstp    [esp+20h+var_20]; float
   }
-  Calc_T1PotionStrength(&a14, &a13, v36, v37, 6, 0, v38, v39, v40, 0);
+  Calc_T1PotionStrength(&a14, &a13, v34, v35, 6, 0, v36, v37, v38, 0); /*0x69b374*/
   return MagicCaster_ApplyActiveMagicItem_::EffectLoop_InedbibleIngredFinish(
-           a1,
            a2,
-           a3,
-           ebx0,
            a5,
            a6,
            a7,
@@ -70,22 +65,5 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_T1InedbibleIngred@<
            a15,
            a16,
            a17,
-           a18,
-           a19,
-           a20,
-           a21,
-           a22,
-           a23,
-           a24,
-           a25,
-           a26,
-           a27,
-           a28,
-           a29,
-           a30,
-           a31,
-           a32,
-           a33,
-           a34,
-           a35);
+           a18);
 }

@@ -1,4 +1,4 @@
-0x4FC7A0: push    esi
+0x4FC7A0: push    esi; Deep-copy Script state from another Script: copy the five ScriptInfo dwords, replace compiled data through Script_SetCompiledData, copy variables/references/source text, and mirror linked state. TESTopicInfo::GetResultScript uses this to reset its shared cache from a freshly constructed default Script before scanning the winning INFO record.
 0x4FC7A1: push    edi
 0x4FC7A2: mov     edi, [esp+8+arg_0]
 0x4FC7A6: test    edi, edi
@@ -20,9 +20,9 @@
 0x4FC7DB: push    edx; Src
 0x4FC7DC: push    eax; int
 0x4FC7DD: mov     ecx, esi
-0x4FC7DF: call    sub_4F9DF0
+0x4FC7DF: call    Script_SetCompiledData; Replace Script compiled data: free old pointer at Script+0x30, clear it, set ScriptInfo compiledSize at +0x20, then allocate/zero/copy exactly Size bytes when nonzero. A zero-size call clears compiled storage and size.
 0x4FC7E4: mov     ecx, esi
-0x4FC7E6: call    sub_4FC730
+0x4FC7E6: call    Script_ClearReferenceList; Hot Reload OBSE decode: script ref-list cleanup. Clears executing-script cache if needed, frees each RefVariable name buffer and payload, removes extra list nodes.
 0x4FC7EB: push    esi
 0x4FC7EC: lea     ecx, [esi+40h]
 0x4FC7EF: push    ecx
@@ -31,7 +31,7 @@
 0x4FC7F4: call    sub_4FC040
 0x4FC7F9: add     esp, 0Ch
 0x4FC7FC: mov     ecx, esi
-0x4FC7FE: call    sub_4FC6C0
+0x4FC7FE: call    Script_ClearVariableList; Hot Reload OBSE decode: script variable-list cleanup. Frees each VariableInfo name buffer and payload, removes extra list nodes, leaves script->varList empty.
 0x4FC803: mov     eax, [edi+2Ch]
 0x4FC806: test    eax, eax
 0x4FC808: jz      short loc_4FC814

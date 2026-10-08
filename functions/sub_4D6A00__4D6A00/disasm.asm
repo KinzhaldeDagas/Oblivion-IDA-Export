@@ -17,7 +17,7 @@
 0x4D6A2F: fstp    [esp+30h+var_18]
 0x4D6A33: fld     dword ptr [eax]
 0x4D6A35: fstp    [esp+30h+var_14]
-0x4D6A39: call    sub_4D6830
+0x4D6A39: call    hkQuaternion_Normalize; Normalizes a quaternion/vector with reciprocal sqrt refinement. Used before converting movement input orientation to basis vectors.
 0x4D6A3E: mov     eax, [esi]
 0x4D6A40: mov     edx, [eax+98h]
 0x4D6A46: lea     ecx, [esp+30h+var_20]

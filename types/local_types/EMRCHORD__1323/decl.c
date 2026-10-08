@@ -1,1 +1,1 @@
-EMRCHORD
+typedef EMRARC EMRCHORD;

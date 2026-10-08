@@ -1,19 +1,36 @@
 {
-  "callees_count": 36,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 10,
   "callers_count": 7,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
+  "chunks": [
+    [
+      "0x475B60",
+      "0x475D72"
+    ],
+    [
+      "0x9AEE50",
+      "0x9AEE79"
+    ]
+  ],
+  "chunks_sha256": "bfdb7dfca5c46706ca5205abcbf0544d4600b32c454f0a42dd2d626f04ee4487",
+  "comment_regular": "Destroys ActorAnimData-owned state. Releases current/queued/cleanup idles; deactivates and releases the controller manager; deleting-destructs every +0x9C animation-map entry; frees the +0xB8 pending-KF linked list; clears/destroys the map; and nulls the accumulation node. Confirms map entries and pending-KF nodes are ActorAnimData-owned.",
+  "comment_repeatable": "Destroys ActorAnimData-owned state. Releases current/queued/cleanup idles; deactivates and releases the controller manager; deleting-destructs every +0x9C animation-map entry; frees the +0xB8 pending-KF linked list; clears/destroys the map; and nulls the accumulation node. Confirms map entries and pending-KF nodes are ActorAnimData-owned.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
   "display_name": "DisposeActorAnimData",
   "end_ea": "0x475D72",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "DisposeActorAnimData",
   "segment": ".text",
   "sha256": "92dc84ed50f000846d54889075f590702195b6b671759508a1bca6dd45f13e39",
   "size": 530,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x475B60",
+  "total_chunk_size": 571,
   "type": "int __thiscall(ActorAnimData *this)",
-  "xrefs_from_count": 209,
+  "xrefs_from_count": 221,
   "xrefs_to_count": 7
 }

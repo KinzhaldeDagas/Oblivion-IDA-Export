@@ -11,7 +11,7 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::CheckIsOnTouch@<eax>(
         int a10,
         int a11,
         int a12,
-        float a13,
+        int a13,
         int a14,
         int a15,
         int a16,
@@ -35,10 +35,12 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::CheckIsOnTouch@<eax>(
         char a34)
 {
   int v34; // eax
+  char v35; // al
 
-  v34 = (*(int (__thiscall **)(int))(*(_DWORD *)a2 + 0x30))(a2);
-  if ( !EffectItemList_HasTouchEffect((_DWORD *)(v34 + 0xC)) && BYTE1(a8) == bl0 )
-    return MagicCaster_ApplyActiveMagicItem_::CheckCasterNiNode__(
+  v34 = (*(int (__thiscall **)(int))(*(_DWORD *)a2 + 0x30))(a2); /*0x69afe6*/
+  EffectItemList_HasTouchEffect((_DWORD *)(v34 + 0xC)); /*0x69afed*/
+  if ( !v35 && BYTE1(a8) == bl0 ) /*0x69affa*/
+    return MagicCaster_ApplyActiveMagicItem_::CheckCasterNiNode__( /*0x69affa*/
              bl0,
              a2,
              a4,
@@ -50,7 +52,7 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::CheckIsOnTouch@<eax>(
              a10,
              a11,
              a12,
-             SLODWORD(a13),
+             a13,
              a14,
              a15,
              a16,
@@ -73,7 +75,7 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::CheckIsOnTouch@<eax>(
              a33,
              a34);
   else
-    return MagicCaster_ApplyActiveMagicItem_::GetTouchTarget(
+    return MagicCaster_ApplyActiveMagicItem_::GetTouchTarget( /*0x69affb*/
              a1,
              a2,
              a4,
@@ -92,7 +94,6 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::CheckIsOnTouch@<eax>(
              a17,
              a18,
              a19,
-             SHIDWORD(a19),
              a20,
              a21,
              a22,
@@ -106,5 +107,6 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::CheckIsOnTouch@<eax>(
              a30,
              a31,
              a32,
-             a33);
+             a33,
+             a34);
 }

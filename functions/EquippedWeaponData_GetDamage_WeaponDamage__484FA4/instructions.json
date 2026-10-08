@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x484FB8",
-    "line": "call    Actor_GetFatigueFraction",
+    "line": "call    Actor_GetFatigueFraction; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x484FC4",
-    "line": "cmp     byte ptr [edi+90h], 5",
+    "line": "cmp     byte ptr [edi+90h], 5; Weapon damage calculation selects Agility only for native weapon type Bow (5); other weapon types follow their own governing-attribute path.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -133,13 +133,13 @@
   },
   {
     "ea": "0x484FE6",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x484FE8",
-    "line": "call    TESObjectWEAP_GetWeaponSkillAV",
+    "line": "call    TESObjectWEAP_GetWeaponSkillAV; BladeSkillsRestored schema-4 owner decode: ECX is TESObjectWEAP and ESI is the Actor owner. Call returns at 0x484FED; the paired Calc_WeaponDamage returns at 0x485080. Patch must pass ESI and bind the resolved player/NPC sidecar level to this exact formula pair.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x485061",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x48506B",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x485075",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x48507B",
-    "line": "call    Calc_WeaponDamage",
+    "line": "call    Calc_WeaponDamage; Sidecar decode: Calc_WeaponDamage is actor/weapon agnostic after entry; BladeSkillsRestored substitutes only the skill-level argument after consuming the most recent exact source-return/formula-return token from its bounded per-thread stack. Unmatched or overflowed contexts retain native formula inputs.",
     "mnemonic": "call",
     "size": 5
   },

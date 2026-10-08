@@ -1,1 +1,1 @@
-RaceSexMenu
+struct RaceSexMenu;

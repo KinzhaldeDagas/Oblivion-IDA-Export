@@ -1,5 +1,5 @@
 0x4E3F30: push    ecx
-0x4E3F31: push    ebx
+0x4E3F31: push    ebx; float
 0x4E3F32: mov     ebx, ecx
 0x4E3F34: mov     eax, [ebx+8]
 0x4E3F37: mov     ecx, eax
@@ -44,7 +44,7 @@
 0x4E3FBB: mov     edi, eax
 0x4E3FBD: add     esp, 8
 0x4E3FC0: cmp     edi, ebp
-0x4E3FC2: mov     [esp+10h+var_4], ebp
+0x4E3FC2: mov     [esp+10h+var_4], ebp; float
 0x4E3FC6: jz      short loc_4E4040
 0x4E3FC8: mov     cl, [edi+8]
 0x4E3FCB: shr     cl, 3
@@ -70,11 +70,11 @@
 0x4E3FFF: mov     ecx, ebx
 0x4E4001: call    sub_4E0D90
 0x4E4006: fldz
-0x4E4008: push    0; char
+0x4E4008: push    0; transition
 0x4E400A: push    ecx
-0x4E400B: mov     ecx, esi
-0x4E400D: fstp    [esp+1Ch+var_1C]; float
-0x4E4010: call    sub_6C9CB0
+0x4E400B: mov     ecx, esi; this
+0x4E400D: fstp    [esp+1Ch+easeOutTime]; easeOutTime
+0x4E4010: call    NiControllerSequence_Deactivate; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.
 0x4E4015: mov     eax, [esi+8]
 0x4E4018: push    eax
 0x4E4019: mov     ecx, ebx
@@ -104,12 +104,12 @@
 0x4E405D: jz      short loc_4E407D
 0x4E405F: fld     dword ptr ds:0A30634h
 0x4E4065: sub     esp, 8
-0x4E4068: fstp    [esp+10h+var_C]; float
+0x4E4068: fstp    [esp+10h+explicitTimeOrMinusOne]; explicitTimeOrMinusOne
 0x4E406C: mov     ecx, eax; this
 0x4E406E: fld     dword ptr ds:0B33E9Ch
-0x4E4074: fstp    [esp+10h+var_10]; float
-0x4E4077: push    ebx; int
-0x4E4078: call    sub_476D10
+0x4E4074: fstp    [esp+10h+deltaTime]; deltaTime
+0x4E4077: push    ebx; ownerActor
+0x4E4078: call    ActorAnimData_Update; Oblivion ActorAnimData scheduler with exact native ABI: this in ECX plus three 4-byte stack arguments, retn 0x0C. ownerActor is at [EBP+8]; all surveyed callers pass the owning Actor/Player, but the native body never dereferences it, so an interior hook's use of that value is a caller-derived contract. deltaTime at [EBP+0x0C] advances ActorAnimData time +0x94 and sequence offsets. explicitTimeOrMinusOne at [EBP+0x10] uses -1.0 for normal ticking; any other value drives an explicit-time scene update/early return. The function drains deferred KF models, maintains power/idle state, samples five slots, and advances required-note templates (class 4 terminal index 3; class 7 terminal index 4).
 0x4E407D: pop     ebx
 0x4E407E: pop     ecx
 0x4E407F: retn

@@ -5,7 +5,7 @@
 0x65DB1F: fstp    st(1)
 0x65DB21: test    ah, 41h
 0x65DB24: jnz     short loc_65DB33
-0x65DB26: call    Double_To_SInt32
+0x65DB26: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x65DB2B: mov     edi, eax
 0x65DB2D: mov     [esp+4+arg_10], edi
 0x65DB31: jmp     short Player_MagicCaster_GetCastingEffectiveness___FatigueFactor

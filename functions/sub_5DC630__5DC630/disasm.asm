@@ -1,4 +1,4 @@
-0x5DC630: push    0FFFFFFFFh
+0x5DC630: push    0FFFFFFFFh; Creates exactly 21 native Stats-menu skill rows (AV 0x0C..0x20). Major rows are placed first; every skill absent from majorSkills[7] is placed after the separator as non-major.
 0x5DC632: push    offset SEH_5DC630
 0x5DC637: mov     eax, large fs:0
 0x5DC63D: push    eax
@@ -23,18 +23,18 @@
 0x5DC679: lea     esp, [esp+0]
 0x5DC680: push    esi
 0x5DC681: push    2
-0x5DC683: call    ActorValue_GetAVFromGroupOffset
+0x5DC683: call    ActorValue_GetAVFromGroupOffset; mwMediumArmor: Oblivion group 2 maps skill offset to actor value by adding 0x0C. OpenMW/Morrowind skill index 2 is MediumArmor, but Oblivion offset 2 becomes actor value 0x0E (Blade). Do not pass Morrowind skill indexes directly through this helper.
 0x5DC688: mov     ecx, ds:0B333C4h
 0x5DC68E: add     esp, 8
 0x5DC691: mov     ebp, eax
-0x5DC693: call    Actor_GetBaseClass
+0x5DC693: call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.
 0x5DC698: test    eax, eax
 0x5DC69A: jz      short loc_5DC6B6
 0x5DC69C: mov     ecx, ds:0B333C4h
-0x5DC6A2: push    ebp
-0x5DC6A3: call    Actor_GetBaseClass
-0x5DC6A8: mov     ecx, eax
-0x5DC6AA: call    sub_51C090
+0x5DC6A2: push    ebp; actorValue
+0x5DC6A3: call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.
+0x5DC6A8: mov     ecx, eax; this
+0x5DC6AA: call    TESClass_IsMajorSkillAV; Stats menu counts only native AVs matching majorSkills[7]; every failed match is displayed in the lower non-major section.
 0x5DC6AF: test    al, al
 0x5DC6B1: jz      short loc_5DC6B6
 0x5DC6B3: add     edi, 1
@@ -45,9 +45,9 @@
 0x5DC6C1: mov     [esp+148h+var_134], edi
 0x5DC6C5: fild    [esp+148h+var_134]
 0x5DC6C9: push    ecx
-0x5DC6CA: fstp    [esp+14Ch+a2]; a3
-0x5DC6CD: push    0FB1h; a2
-0x5DC6D2: call    Tile_SetFloat
+0x5DC6CA: fstp    [esp+14Ch+a2]; value
+0x5DC6CD: push    0FB1h; propertyCode
+0x5DC6D2: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5DC6D7: test    edi, edi
 0x5DC6D9: jle     short loc_5DC6E2
 0x5DC6DB: add     edi, 1
@@ -56,7 +56,6 @@
 0x5DC6E5: xor     ebp, ebp
 0x5DC6E7: mov     [esp+148h+var_124], edi
 0x5DC6EB: jmp     short loc_5DC6F8
-0x5DC6ED: align 10h
 0x5DC6F0: mov     edi, [esp+148h+var_124]
 0x5DC6F4: mov     ebx, [esp+148h+var_11C]
 0x5DC6F8: xor     esi, esi
@@ -69,12 +68,12 @@
 0x5DC712: call    BSStringT_Set
 0x5DC717: mov     eax, [esp+148h+var_12C.m_data]
 0x5DC71B: mov     ecx, [ebx+3Ch]
-0x5DC71E: push    esi
-0x5DC71F: push    eax
-0x5DC720: push    ecx
-0x5DC721: mov     ecx, ebx
+0x5DC71E: push    esi; lastTile
+0x5DC71F: push    eax; name
+0x5DC720: push    ecx; parent
+0x5DC721: mov     ecx, ebx; this
 0x5DC723: mov     [esp+154h+var_4], esi
-0x5DC72A: call    Menu_CreateTileFromTemplate
+0x5DC72A: call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.
 0x5DC72F: mov     esi, eax
 0x5DC731: test    esi, esi
 0x5DC733: jz      loc_5DC909
@@ -88,13 +87,13 @@
 0x5DC747: push    ebp
 0x5DC748: push    2
 0x5DC74A: mov     [edi], esi
-0x5DC74C: call    ActorValue_GetAVFromGroupOffset
-0x5DC751: mov     ecx, ds:0B33A98h
+0x5DC74C: call    ActorValue_GetAVFromGroupOffset; mwMediumArmor: Oblivion group 2 maps skill offset to actor value by adding 0x0C. OpenMW/Morrowind skill index 2 is MediumArmor, but Oblivion offset 2 becomes actor value 0x0E (Blade). Do not pass Morrowind skill indexes directly through this helper.
+0x5DC751: mov     ecx, ds:0B33A98h; this
 0x5DC757: add     esp, 8
 0x5DC75A: mov     edi, eax
-0x5DC75C: push    ebp
+0x5DC75C: push    ebp; skillIndex
 0x5DC75D: mov     [esp+14Ch+var_120], edi
-0x5DC761: call    TESDataHandler_GetTESSkillByCode
+0x5DC761: call    TESDataHandler_GetTESSkillByCode; Return one of exactly 21 inline Oblivion TESSkill records. Reject skillIndex > 20; otherwise return TESDataHandler+0xD8+(skillIndex*0x60).
 0x5DC766: add     eax, 20h ; ' '
 0x5DC769: mov     eax, [eax+4]
 0x5DC76C: test    eax, eax
@@ -103,7 +102,6 @@
 0x5DC775: mov     ecx, eax
 0x5DC777: lea     edx, [esp+148h+Str]
 0x5DC77B: jmp     short loc_5DC780
-0x5DC77D: align 10h
 0x5DC780: mov     al, [ecx]
 0x5DC782: mov     [edx], al
 0x5DC784: add     ecx, 1
@@ -125,64 +123,64 @@
 0x5DC7AD: jnz     short loc_5DC7A6
 0x5DC7AF: sub     eax, edx
 0x5DC7B1: add     eax, 1
-0x5DC7B4: push    eax; Size
+0x5DC7B4: push    eax; byteCount
 0x5DC7B5: lea     edx, [ebx+6]
-0x5DC7B8: push    ebx; Src
-0x5DC7B9: push    edx; Dst
-0x5DC7BA: call    _memcpy
+0x5DC7B8: push    ebx; source
+0x5DC7B9: push    edx; destination
+0x5DC7BA: call    _memcpy;
 0x5DC7BF: push    6; Count
 0x5DC7C1: push    offset a_small; "_small"
 0x5DC7C6: push    ebx; Dest
 0x5DC7C7: call    _strncpy
 0x5DC7CC: add     esp, 18h
 0x5DC7CF: mov     ecx, ds:0B333C4h
-0x5DC7D5: call    Actor_GetBaseClass
+0x5DC7D5: call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.
 0x5DC7DA: test    eax, eax
 0x5DC7DC: jz      short loc_5DC806
 0x5DC7DE: mov     ecx, ds:0B333C4h
-0x5DC7E4: push    edi
-0x5DC7E5: call    Actor_GetBaseClass
-0x5DC7EA: mov     ecx, eax
-0x5DC7EC: call    sub_51C090
+0x5DC7E4: push    edi; actorValue
+0x5DC7E5: call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.
+0x5DC7EA: mov     ecx, eax; this
+0x5DC7EC: call    TESClass_IsMajorSkillAV; Place matching majors before the separator and all other native skills after it.
 0x5DC7F1: test    al, al
 0x5DC7F3: jz      short loc_5DC806
 0x5DC7F5: mov     eax, [esp+148h+var_118]
-0x5DC7F9: mov     dword ptr [esp+148h+var_130], eax
+0x5DC7F9: mov     [esp+148h+var_130], eax
 0x5DC7FD: add     eax, 1
 0x5DC800: mov     [esp+148h+var_118], eax
 0x5DC804: jmp     short loc_5DC815
 0x5DC806: mov     eax, [esp+148h+var_134]
-0x5DC80A: mov     dword ptr [esp+148h+var_130], eax
+0x5DC80A: mov     [esp+148h+var_130], eax
 0x5DC80E: add     eax, 1
 0x5DC811: mov     [esp+148h+var_134], eax
 0x5DC815: push    edi
-0x5DC816: call    ActorValue_GetName
+0x5DC816: call    ActorValue_GetName; Return the localized actor-value display name through g_actorValueNameSettings. Native skills occupy the contiguous SkillActorValue range 0x0C..0x20.
 0x5DC81B: add     esp, 4
 0x5DC81E: xor     ebx, ebx
 0x5DC820: push    ebx; a3
 0x5DC821: lea     ecx, [esi+8]; this
 0x5DC824: push    eax; a2
 0x5DC825: call    BSStringT_Set
-0x5DC82A: fild    dword ptr [esp+148h+var_130]
+0x5DC82A: fild    [esp+148h+var_130]
 0x5DC82E: push    ecx
 0x5DC82F: mov     ecx, esi; this
-0x5DC831: fstp    [esp+14Ch+a2]; a3
-0x5DC834: push    0FAAh; a2
-0x5DC839: call    Tile_SetFloat
+0x5DC831: fstp    [esp+14Ch+a2]; value
+0x5DC834: push    0FAAh; propertyCode
+0x5DC839: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5DC83E: mov     ecx, ds:0B333C4h
 0x5DC844: mov     eax, [ecx]
 0x5DC846: mov     edx, [eax+284h]
 0x5DC84C: push    edi; a3
 0x5DC84D: call    edx
-0x5DC84F: mov     dword ptr [esp+148h+var_130], eax
-0x5DC853: fild    dword ptr [esp+148h+var_130]
+0x5DC84F: mov     [esp+148h+var_130], eax
+0x5DC853: fild    [esp+148h+var_130]
 0x5DC857: push    ecx
 0x5DC858: mov     ecx, esi; this
-0x5DC85A: fstp    [esp+14Ch+a2]; a3
-0x5DC85D: push    0FB1h; a2
-0x5DC862: call    Tile_SetFloat
+0x5DC85A: fstp    [esp+14Ch+a2]; value
+0x5DC85D: push    0FB1h; propertyCode
+0x5DC862: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5DC867: push    edi
-0x5DC868: call    ActorValue_GetName
+0x5DC868: call    ActorValue_GetName; Return the localized actor-value display name through g_actorValueNameSettings. Native skills occupy the contiguous SkillActorValue range 0x0C..0x20.
 0x5DC86D: add     esp, 4
 0x5DC870: push    eax
 0x5DC871: push    0FB2h
@@ -196,9 +194,9 @@
 0x5DC88E: fild    [esp+148h+var_120]
 0x5DC892: push    ecx
 0x5DC893: mov     ecx, esi; this
-0x5DC895: fstp    [esp+14Ch+a2]; a3
-0x5DC898: push    0FB4h; a2
-0x5DC89D: call    Tile_SetFloat
+0x5DC895: fstp    [esp+14Ch+a2]; value
+0x5DC898: push    0FB4h; propertyCode
+0x5DC89D: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5DC8A2: mov     ecx, ds:0B333C4h
 0x5DC8A8: push    edi
 0x5DC8A9: call    Actor_GetBaseCalcAVi
@@ -206,16 +204,16 @@
 0x5DC8B2: fild    [esp+148h+var_120]
 0x5DC8B6: push    ecx
 0x5DC8B7: mov     ecx, esi; this
-0x5DC8B9: fstp    [esp+14Ch+a2]; a3
-0x5DC8BC: push    0FB5h; a2
-0x5DC8C1: call    Tile_SetFloat
+0x5DC8B9: fstp    [esp+14Ch+a2]; value
+0x5DC8BC: push    0FB5h; propertyCode
+0x5DC8C1: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5DC8C6: mov     ecx, [esp+148h+var_11C]
 0x5DC8CA: push    edi
-0x5DC8CB: call    sub_5DA1A0
+0x5DC8CB: call    StatsMenu_UpdateAttributesAndSkills; Full refresh (actorValue == -1) scans exactly 21 native Oblivion skills, counts strict TESClass major matches, publishes that count to the Stats XML, and orders major rows before one optional separator and all non-major rows. A targeted refresh updates only the requested native actor value and does not reorder rows.
 0x5DC8D0: mov     ecx, [esp+148h+var_12C.m_data]
 0x5DC8D4: push    ecx; a3
 0x5DC8D5: mov     [esp+14Ch+var_4], 0FFFFFFFFh
-0x5DC8E0: call    FormHeapFree
+0x5DC8E0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5DC8E5: add     [esp+14Ch+var_124], 4
 0x5DC8EA: add     ebp, 1
 0x5DC8ED: add     esp, 4
@@ -229,7 +227,7 @@
 0x5DC90E: call    PrintError
 0x5DC913: mov     edx, [esp+14Ch+var_12C.m_data]
 0x5DC917: push    edx
-0x5DC918: call    FormHeapFree
+0x5DC918: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5DC91D: add     esp, 8
 0x5DC920: mov     ecx, [esp+148h+var_C]
 0x5DC927: mov     large fs:0, ecx
@@ -243,3 +241,16 @@
 0x5DC93C: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x5DC941: add     esp, 134h
 0x5DC947: retn
+0x9C2120: lea     ecx, [ebp-12Ch]; void *
+0x9C2126: jmp     BSStringT_Clear
+0x9C212B: mov     edx, [esp+arg_4]
+0x9C212F: lea     eax, [edx-138h]
+0x9C2135: mov     ecx, [edx-13Ch]
+0x9C213B: xor     ecx, eax
+0x9C213D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C2142: add     eax, 10h
+0x9C2145: mov     ecx, [edx-4]
+0x9C2148: xor     ecx, eax
+0x9C214A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C214F: mov     eax, offset stru_AEB054
+0x9C2154: jmp     ___CxxFrameHandler3

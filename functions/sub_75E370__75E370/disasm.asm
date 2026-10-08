@@ -1,4 +1,4 @@
-0x75E370: push    offset stru_B41D80; lpCriticalSection
+0x75E370: push    offset unk_B41D80; lpCriticalSection
 0x75E375: call    dword ptr ds:0A2806Ch
 0x75E37B: call    dword ptr ds:0A2808Ch
 0x75E381: add     dword ptr ds:0B41DFCh, 1
@@ -12,6 +12,6 @@
 0x75E3A4: sub     dword ptr ds:0B41DFCh, 1
 0x75E3AB: jnz     short loc_75E3B7
 0x75E3AD: mov     dword ptr ds:0B41DF8h, 0
-0x75E3B7: push    offset stru_B41D80; lpCriticalSection
+0x75E3B7: push    offset unk_B41D80; lpCriticalSection
 0x75E3BC: call    dword ptr ds:0A28074h
 0x75E3C2: retn

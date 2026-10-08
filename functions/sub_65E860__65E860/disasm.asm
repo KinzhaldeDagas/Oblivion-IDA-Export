@@ -12,8 +12,8 @@
 0x65E881: test    esi, esi
 0x65E883: jz      short loc_65E8F1
 0x65E885: push    ebx
-0x65E886: mov     ecx, esi
-0x65E888: call    sub_4F0620
+0x65E886: mov     ecx, esi; worldspace
+0x65E888: call    TESWorldSpace_CollectPersistentCellReferences; Verified: climbs the supplied WorldSpace chain to its root, allocates an 8-byte BSSimpleList head, copies refs from root.persistentCell, then copies refs from handler worldspaces whose parentWorldspace equals that root. It does not recurse through arbitrary descendants.
 0x65E88D: mov     ebx, eax
 0x65E88F: test    ebx, ebx
 0x65E891: mov     [esp+14h+var_8], ebx
@@ -36,7 +36,7 @@
 0x65E8BB: lea     ecx, [ebp+73Ch]
 0x65E8C1: call    BSSimpleList_PushFront
 0x65E8C6: jmp     short loc_65E8D0
-0x65E8C8: call    FormHeapFree
+0x65E8C8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x65E8CD: add     esp, 4
 0x65E8D0: mov     ebx, [ebx+4]
 0x65E8D3: test    ebx, ebx
@@ -45,9 +45,9 @@
 0x65E8DB: mov     esi, [esp+18h+var_4]
 0x65E8DF: pop     edi
 0x65E8E0: mov     ecx, ebx
-0x65E8E2: call    BSSimpleList_Clear
+0x65E8E2: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x65E8E7: push    ebx
-0x65E8E8: call    FormHeapFree
+0x65E8E8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x65E8ED: add     esp, 4
 0x65E8F0: pop     ebx
 0x65E8F1: mov     [ebp+744h], esi

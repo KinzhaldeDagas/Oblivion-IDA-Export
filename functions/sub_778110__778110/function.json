@@ -1,18 +1,31 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 6,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x778110",
+      "0x778179"
+    ]
+  ],
+  "chunks_sha256": "f4a58aa96c46f99659fada43976b9febf1e0b40fc4e2747ca383221603141d6c",
+  "comment_regular": "Pass225: Releases NiGeometryBufferData streams, index buffer, stream arrays, and vertex declaration before free.",
+  "comment_repeatable": "Pass225: Releases NiGeometryBufferData streams, index buffer, stream arrays, and vertex declaration before free.\nDX11 authority audit 2026-10-01: Non-deleting cleanup: remaining group ReleaseChip calls; IB+30 Release and IBSize+2C clear; frees VBChip+24 and VertexStride+20 arrays; vertex declaration+0C Release. Caller frees object storage separately. Critical lifetime distinction: buffer+4 is GeometryGroup, NOT NiRefObject refcount. Retaining VB/IB/declaration COM resources does not retain these native CPU metadata allocations. Ordinary removal reaches this after renderer/precache lock interval in 767860.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_778110",
+  "display_name": "NiGeometryBufferData_Destroy",
   "end_ea": "0x778179",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_778110",
+  "name": "NiGeometryBufferData_Destroy",
   "segment": ".text",
   "sha256": "f4a58aa96c46f99659fada43976b9febf1e0b40fc4e2747ca383221603141d6c",
   "size": 105,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x778110",
+  "total_chunk_size": 105,
   "type": "void __thiscall(NiGeometryBufferData *this)",
   "xrefs_from_count": 49,
   "xrefs_to_count": 6

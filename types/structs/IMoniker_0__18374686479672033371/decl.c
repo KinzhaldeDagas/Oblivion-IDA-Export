@@ -1,1 +1,1 @@
-IMoniker_0
+typedef IMoniker IMoniker_0;

@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4B0C30",
+      "0x4B0C63"
+    ]
+  ],
+  "chunks_sha256": "f1a9d4981455699659ecf1b6703cf67d6bed8399ec20f2d40c0ee1ccbfaf2e5d",
+  "comment_regular": "Initialize TESObjectLIGH runtime data. The 0x18-byte DATA payload is object +0x70..+0x87: +0x80 is the falloff exponent and +0x84 is projector FOV. The constructor clears the exponent and sets FOV to 90.0; record load normalizes a zero exponent to 1.0.",
+  "comment_repeatable": "Initialize TESObjectLIGH runtime data. The 0x18-byte DATA payload is +0x70..+0x87; falloffExponent_80 defaults through load normalization, projectorFovDegrees_84 defaults to 90.0, and fade_88 defaults to 1.0 outside DATA.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4B0C30",
+  "display_name": "TESObjectLIGH_InitializeLightData",
   "end_ea": "0x4B0C63",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4B0C30",
+  "name": "TESObjectLIGH_InitializeLightData",
   "segment": ".text",
   "sha256": "f1a9d4981455699659ecf1b6703cf67d6bed8399ec20f2d40c0ee1ccbfaf2e5d",
   "size": 51,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4B0C30",
-  "type": "void __thiscall(int this)",
+  "total_chunk_size": 51,
+  "type": "void __thiscall(TESObjectLIGH_DecodedLayout *self)",
   "xrefs_from_count": 12,
   "xrefs_to_count": 1
 }

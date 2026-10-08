@@ -25,7 +25,7 @@
 0x4D8707: push    eax
 0x4D8708: push    ecx
 0x4D8709: mov     ecx, edi
-0x4D870B: call    ContainerExtraData_EquipItemForActor
+0x4D870B: call    ContainerExtraData_EquipItemForActor; UCWUS pipeline note: container equip/inventory reference path is relevant to token persistence and recharge menu movement; current UCWUS bridge leaves recharge shuttling scripted.
 0x4D8710: pop     edi
 0x4D8711: pop     esi
 0x4D8712: mov     al, 1

@@ -58,7 +58,7 @@
 0x4A6FDA: push    eax; Dst
 0x4A6FDB: mov     ecx, ebp; a1
 0x4A6FDD: mov     [esp+2Ch+a1], eax
-0x4A6FE1: call    TESFile_GetChunkData
+0x4A6FE1: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4A6FE6: test    edi, edi
 0x4A6FE8: mov     dword ptr [esi+24h], 0
 0x4A6FEF: mov     ebx, 1
@@ -119,7 +119,19 @@
 0x4A708A: jnz     loc_4A7000
 0x4A7090: mov     eax, [esp+24h+a1]
 0x4A7094: push    eax
-0x4A7095: call    FormHeapFree
+0x4A7095: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4A709A: add     esp, 4
 0x4A709D: mov     al, bl
 0x4A709F: jmp     loc_4A6FA0
+0x9CAD70: mov     eax, [ebp-10h]
+0x9CAD73: push    eax
+0x9CAD74: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CAD79: pop     ecx
+0x9CAD7A: retn
+0x9CAD7B: mov     edx, [esp+arg_4]
+0x9CAD7F: lea     eax, [edx-14h]
+0x9CAD82: mov     ecx, [edx-18h]
+0x9CAD85: xor     ecx, eax
+0x9CAD87: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CAD8C: mov     eax, offset stru_AF3390
+0x9CAD91: jmp     ___CxxFrameHandler3

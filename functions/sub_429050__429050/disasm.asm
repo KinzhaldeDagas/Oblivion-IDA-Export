@@ -1,5 +1,5 @@
-0x429050: push    ebx
-0x429051: mov     ebx, [esp+4+arg_0]
+0x429050: push    ebx; Verified ExtraGlobal comparison: dynamic-casts the other extra to ExtraGlobal, compares base state, then compares the stored TESGlobal*.
+0x429051: mov     ebx, [esp+4+other]
 0x429055: push    esi
 0x429056: push    edi
 0x429057: push    0; int

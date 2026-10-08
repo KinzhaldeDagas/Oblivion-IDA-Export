@@ -7,7 +7,7 @@
 0x605E93: jnz     short loc_605EA2
 0x605E95: push    1
 0x605E97: push    esi
-0x605E98: mov     ecx, offset ActorProcessManager_ptr
+0x605E98: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x605E9D: call    sub_675740
 0x605EA2: cmp     dword ptr [esi+20h], 0
 0x605EA6: jz      short loc_605EC7
@@ -16,7 +16,7 @@
 0x605EB0: mov     eax, [esi+20h]
 0x605EB3: mov     edi, [eax+4]
 0x605EB6: push    eax
-0x605EB7: call    FormHeapFree
+0x605EB7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x605EBC: add     esp, 4
 0x605EBF: test    edi, edi
 0x605EC1: mov     [esi+20h], edi

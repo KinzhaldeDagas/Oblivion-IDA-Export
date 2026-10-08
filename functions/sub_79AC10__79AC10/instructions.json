@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x79AC10",
-    "line": "push    esi",
+    "line": "push    esi; Oblivion SFrondTexture destructor: releases the 28-byte small-string filename when heap-backed (capacity >= 0x10), then resets string length/capacity; scalar fields need no destruction.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79AC11",
-    "line": "mov     esi, [esp+4+arg_0]",
+    "line": "mov     esi, [esp+4+this]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x79AC1F",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

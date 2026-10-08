@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7C6FF0",
+      "0x7C7021"
+    ]
+  ],
+  "chunks_sha256": "daa4608fedc237986c1935f73799d3bf6b0a9dff500ecb0d3da3ce4b33b23b14",
+  "comment_regular": "Find an existing source light; clear receiver associations when source flag +0x18 bit0 is set, otherwise refresh source-derived state.",
+  "comment_repeatable": "Find an existing source light; clear receiver associations when source flag +0x18 bit0 is set, otherwise refresh source-derived state.\n\nMEF PERF 2026-10-02: PERF-9 caller constraint: lookup result feeds source flag+18 bit0 clear-associations path, otherwise nonnull result reconciles. Preserve native control flow when replacing lookup; no blanket reconcile suppression.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7C6FF0",
+  "display_name": "ShadowSceneNode_UpdateOrClearSourceLight",
   "end_ea": "0x7C7021",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7C6FF0",
+  "name": "ShadowSceneNode_UpdateOrClearSourceLight",
   "segment": ".text",
   "sha256": "daa4608fedc237986c1935f73799d3bf6b0a9dff500ecb0d3da3ce4b33b23b14",
   "size": 49,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7C6FF0",
-  "type": "void __thiscall(_DWORD *this, int)",
+  "total_chunk_size": 49,
+  "type": "void __thiscall(ShadowSceneNode_DecodedLayout *this, _BYTE *backingLight)",
   "xrefs_from_count": 24,
   "xrefs_to_count": 2
 }

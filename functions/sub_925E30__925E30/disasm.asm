@@ -38,3 +38,8 @@
 0x925E97: jmp     short def_925E78
 0x925E99: movzx   eax, byte ptr [esi+3]; jumptable 00925E78 cases 0,2-5
 0x925E9D: add     esi, eax
+0x925EA5: pop     edi; jumptable 00925E78 case 1
+0x925EA6: pop     esi
+0x925EA7: pop     ebp
+0x925EA8: pop     ebx
+0x925EA9: retn

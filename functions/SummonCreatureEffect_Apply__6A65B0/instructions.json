@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6A65B0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Summon creature effect apply path. Peripheral animation/VFX caller that creates summoned actor state and triggers associated visual/animation setup.",
     "mnemonic": "push",
     "size": 2
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x6A6628",
-    "line": "push    edi; float",
+    "line": "push    edi; localPosZ",
     "mnemonic": "push",
     "size": 1
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x6A66D7",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -589,7 +589,7 @@
   },
   {
     "ea": "0x6A66EA",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x6A66F1",
-    "line": "call    sub_441800",
+    "line": "call    sub_441800; ODismemberment authority: loaded cell effect child lookup by quadrant/index; hit particles use index 3 after sub_4C9BE0(ref).",
     "mnemonic": "call",
     "size": 5
   },
@@ -685,7 +685,7 @@
   },
   {
     "ea": "0x6A671F",
-    "line": "push    0; float",
+    "line": "push    0; useCachedClone",
     "mnemonic": "push",
     "size": 2
   },
@@ -703,7 +703,7 @@
   },
   {
     "ea": "0x6A6727",
-    "line": "fstp    [esp+4Ch+var_40]; float",
+    "line": "fstp    [esp+4Ch+scale]; scale",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -817,13 +817,13 @@
   },
   {
     "ea": "0x6A675D",
-    "line": "push    eax; float",
+    "line": "push    eax; modelPath",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A675E",
-    "line": "push    ebp; int",
+    "line": "push    ebp; parentNode",
     "mnemonic": "push",
     "size": 1
   },
@@ -841,31 +841,31 @@
   },
   {
     "ea": "0x6A6762",
-    "line": "fstp    [esp+64h+var_64]; float",
+    "line": "fstp    [esp+64h+durationSeconds]; durationSeconds",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6A6765",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6A676A",
-    "line": "push    eax; int",
+    "line": "push    eax; parentCell",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A676B",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6A676D",
-    "line": "call    sub_5713F0",
+    "line": "call    BSTempEffectParticle_Constructor; Verified: constructs BSTempEffectParticle; parameters include cell, duration, NiNode parent, model path, direction XYZ, local position XYZ, scale, and cached-clone flag. Body-hit caller 0x5EF214 passes direction XYZ and position XYZ; constructor writes position components into the NiAVObject local-transform translation (including stores at root+0x54/+0x58). It applies |scale|, attaches the cloned NIF and starts controllers. Cached-clone choice is controlled by the final bool. All parameters now typed by observed data flow.",
     "mnemonic": "call",
     "size": 5
   },
@@ -907,25 +907,25 @@
   },
   {
     "ea": "0x6A6787",
-    "line": "call    sub_570C00",
+    "line": "call    PlaySpecialIdleOnControllerManager; Summon effect path starts SpecialIdle_SummonEffect on spawned effect object's controller manager via sub_570C00; no actor KFFZ lookup.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6A678C",
-    "line": "push    edi",
+    "line": "push    edi; effect",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A678D",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x6A6792",
-    "line": "call    sub_678D30",
+    "line": "call    ActorProcessManager_RegisterTempEffect; [Verified] ActorProcessManager_RegisterTempEffect increments the effect reference and routes GetTypeID 4-6 into extendedTempEffects (+0x48), all other IDs into activeTempEffects (+0x40). Vtable evidence confirms decals 0/1 and particles 2 use the active list. Fallout divergence: its BGSDecalManager updates distinct simple-decal and emitter collections instead of using this per-actor temp-effect routing; one-to-one equivalence is Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1009,7 +1009,7 @@
   },
   {
     "ea": "0x6A67BF",
-    "line": "call    sub_41A610",
+    "line": "call    MagicItem_LoadVFXModels; MagicItem VFX model preload path. Walks spell art and effect-item VFX model references and asks the model loader to load/cache required art resources.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1018,5 +1018,77 @@
     "line": "mov     byte ptr [esi+61h], 1",
     "mnemonic": "mov",
     "size": 4
+  },
+  {
+    "ea": "0x9C26D0",
+    "line": "mov     eax, [ebp-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C26D3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C26D4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C26D9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C26DA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C26DB",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C26DF",
+    "line": "lea     eax, [edx-28h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C26E2",
+    "line": "mov     ecx, [edx-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C26E5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C26E7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C26EC",
+    "line": "mov     eax, offset stru_AEB550",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C26F1",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

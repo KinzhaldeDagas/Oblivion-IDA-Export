@@ -45,9 +45,9 @@
 0x4D8D06: test    eax, eax
 0x4D8D08: mov     [esp+20h+var_4], edi
 0x4D8D0C: jz      short loc_4D8D1A
-0x4D8D0E: push    esi
-0x4D8D0F: mov     ecx, eax
-0x4D8D11: call    NonActorMagicTarget_constr
+0x4D8D0E: push    esi; parentReference
+0x4D8D0F: mov     ecx, eax; this
+0x4D8D11: call    NonActorMagicTarget_constr; Verified TESObjectREFR_GetMagicTarget lazily creates ExtraData type 0x3A, constructs NonActorMagicTarget with this reference, attaches it to the ExtraDataList, marks the reference modified, and returns the embedded MagicTarget at outer-object +0x0C.
 0x4D8D16: mov     edi, eax
 0x4D8D18: jmp     short loc_4D8D1C
 0x4D8D1A: xor     edi, edi
@@ -80,3 +80,15 @@
 0x4D8D64: pop     ebx
 0x4D8D65: add     esp, 10h
 0x4D8D68: retn
+0x9CA420: mov     eax, [ebp-10h]
+0x9CA423: push    eax
+0x9CA424: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA429: pop     ecx
+0x9CA42A: retn
+0x9CA42B: mov     edx, [esp+arg_4]
+0x9CA42F: lea     eax, [edx-10h]
+0x9CA432: mov     ecx, [edx-14h]
+0x9CA435: xor     ecx, eax
+0x9CA437: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA43C: mov     eax, offset stru_AF2B24
+0x9CA441: jmp     ___CxxFrameHandler3

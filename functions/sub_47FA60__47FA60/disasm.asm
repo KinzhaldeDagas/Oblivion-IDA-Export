@@ -3,10 +3,10 @@
 0x47FA67: test    ecx, ecx
 0x47FA69: push    esi
 0x47FA6A: jz      short loc_47FA81
-0x47FA6C: push    offset dword_BA7B80
+0x47FA6C: push    offset stru_BA7B80
 0x47FA71: lea     eax, [esp+10h+var_8]
 0x47FA75: push    eax
-0x47FA76: call    sub_47F990
+0x47FA76: call    sub_47F990; TES4 authoritative metadata map lookup: map count at +0x48, entries pointer at +0x44, each entry 0x10 bytes: key, unknown, valueLow, valueHigh.
 0x47FA7B: mov     esi, [eax]
 0x47FA7D: test    esi, esi
 0x47FA7F: jnz     short loc_47FA88
@@ -20,7 +20,7 @@
 0x47FA8F: call    eax
 0x47FA91: test    eax, eax
 0x47FA93: jz      short loc_47FAA3
-0x47FA95: cmp     eax, offset dword_BA7D24
+0x47FA95: cmp     eax, 0BA7D24h
 0x47FA9A: jz      short loc_47FAB0
 0x47FA9C: mov     eax, [eax+4]
 0x47FA9F: test    eax, eax

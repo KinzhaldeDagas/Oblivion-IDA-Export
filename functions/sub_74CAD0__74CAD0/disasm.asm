@@ -45,7 +45,7 @@
 0x74CB71: mov     edi, [esp+2Ch+arg_0]
 0x74CB75: mov     ecx, edi
 0x74CB77: fstp    dword ptr [esi+8]
-0x74CB7A: call    sub_53D4B0
+0x74CB7A: call    NiTransform_TransformPoint; ODismemberment: __thiscall NiTransform point transform helper. Plugin hit capture must pass transform in ECX; cdecl here crashes on actor hits.
 0x74CB7F: mov     ecx, [eax]
 0x74CB81: mov     [esi], ecx
 0x74CB83: mov     edx, [eax+4]

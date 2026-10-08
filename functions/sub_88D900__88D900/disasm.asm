@@ -45,19 +45,19 @@
 0x88D98F: fchs
 0x88D991: fstp    [esp+0E4h+var_E4]; float
 0x88D994: push    eax; int
-0x88D995: call    sub_8B1B00
+0x88D995: call    hkQuaternion_SetAxisAngleScaled; Builds a quaternion from an axis vector and scaled angle: vector part = axis*sin(angleScale), w = cos(angleScale). Used by 0x896000 while refreshing movement basis.
 0x88D99A: movaps  xmm0, xmmword ptr [edi]
 0x88D99D: lea     ecx, [esp+0E0h+var_B0]
 0x88D9A1: push    ecx
 0x88D9A2: lea     ecx, [esp+0E4h+var_50]
 0x88D9A9: movaps  [esp+0E4h+var_20], xmm0
-0x88D9B1: call    sub_8B1DD0
+0x88D9B1: call    hkMatrix3_SetFromQuaternion; Converts a quaternion into a 3x3 basis matrix. 0x896000 uses this during per-frame movement basis refresh.
 0x88D9B6: lea     edx, [esi+40h]
 0x88D9B9: push    edx
 0x88D9BA: lea     eax, [esp+0E4h+var_50]
 0x88D9C1: push    eax
 0x88D9C2: lea     ecx, [esp+0E8h+var_60]
-0x88D9C9: call    sub_88FCC0
+0x88D9C9: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x88D9CE: movaps  xmm0, [esp+0E0h+var_60]
 0x88D9D6: movaps  xmm1, xmmword ptr [esi+20h]
 0x88D9DA: addps   xmm1, xmm0
@@ -84,13 +84,13 @@
 0x88DA30: test    edi, edi
 0x88DA32: jz      short loc_88DA4E
 0x88DA34: mov     ecx, esi
-0x88DA36: call    sub_89F570
+0x88DA36: call    bhkRefObject_UpdateHavokObject
 0x88DA3B: lea     eax, [esp+0E0h+var_80]
 0x88DA3F: push    eax
 0x88DA40: mov     ecx, edi
 0x88DA42: call    sub_8CD9D0
 0x88DA47: mov     ecx, esi
-0x88DA49: call    sub_89F570
+0x88DA49: call    bhkRefObject_UpdateHavokObject
 0x88DA4E: mov     edi, [esi+8]
 0x88DA51: test    edi, edi
 0x88DA53: jz      loc_88DB13

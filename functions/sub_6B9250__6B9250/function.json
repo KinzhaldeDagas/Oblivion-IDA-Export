@@ -1,19 +1,32 @@
 {
-  "callees_count": 13,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6B9250",
+      "0x6B92BF"
+    ]
+  ],
+  "chunks_sha256": "995afa3230a508b0bd96f4f21c9edbf945213f69e4d4b981a3c6366081659056",
+  "comment_regular": "OFE ownership verification: direct callers 6B9335 (post-response), 6B93DF (initialize), 6B94F6 (manager destruction). Native skips freeing isInfoGeneral MenuTopics; custom SayOnce/noncached rumor objects need explicit ownership cleanup after their nodes are removed. Never free an actor-owned cached object here.\n\nClearData owns ordinary MenuTopics but deliberately does not destroy isInfoGeneralTopic entries. Those are actor-specific caches owned by ExtraInfoGeneralTopic (0x59).",
+  "comment_repeatable": "ClearData owns ordinary MenuTopics but deliberately does not destroy isInfoGeneralTopic entries. Those are actor-specific caches owned by ExtraInfoGeneralTopic (0x59).",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6B9250",
+  "display_name": "MenuTopicManager::ClearData",
   "end_ea": "0x6B92BF",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6B9250",
+  "name": "MenuTopicManager::ClearData",
   "segment": ".text",
   "sha256": "995afa3230a508b0bd96f4f21c9edbf945213f69e4d4b981a3c6366081659056",
   "size": 111,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6B9250",
-  "type": "void __thiscall(BSSimpleList_VoidPtr **this, char a2)",
+  "total_chunk_size": 111,
+  "type": "void __thiscall(MenuTopicManagerView *this, bool clearAll)",
   "xrefs_from_count": 52,
   "xrefs_to_count": 3
 }

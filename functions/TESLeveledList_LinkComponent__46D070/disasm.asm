@@ -7,7 +7,7 @@
 0x46D07C: jz      short loc_46D08D
 0x46D07E: push    0FFFFFFFFh; a2
 0x46D080: mov     ecx, ebp; this
-0x46D082: call    TESForm_GetOverrideFile
+0x46D082: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x46D087: mov     [esp+0Ch+var_4], eax
 0x46D08B: jmp     short loc_46D095
 0x46D08D: mov     [esp+0Ch+var_4], 0

@@ -1,19 +1,36 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_795D50",
+  "chunks": [
+    [
+      "0x795D50",
+      "0x795DF2"
+    ],
+    [
+      "0x9CBDF0",
+      "0x9CBE1C"
+    ]
+  ],
+  "chunks_sha256": "ead6bfb53d95227e2c8c259d9aab7adcdb32227f2c1f402a49480540b919eb6e",
+  "comment_regular": "OBLIVION AUTHORITY (2026-08-30): Exception-safe uninitialized_fill_n for vector<unsigned short> owners. Deep-copy-constructs count values and normally returns at 0x795DE0; prior noreturn metadata was false.",
+  "comment_repeatable": "OBLIVION AUTHORITY (2026-08-30): Exception-safe uninitialized_fill_n for vector<unsigned short> owners. Deep-copy-constructs count values and normally returns at 0x795DE0; prior noreturn metadata was false.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_stVector_stVectorUShort_UninitializedFillN_010201A0",
   "end_ea": "0x795DF2",
-  "flags": 21521,
+  "evidence_confidence": "Unknown",
+  "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_795D50",
+  "name": "OB_stVector_stVectorUShort_UninitializedFillN_010201A0",
   "segment": ".text",
   "sha256": "4b967f45108ae0f078b6436727c0d3c18471b319c93d94abfe9a5e7f6b60ca61",
   "size": 162,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x795D50",
-  "type": "void __cdecl __noreturn(char *, unsigned int, int)",
-  "xrefs_from_count": 69,
+  "total_chunk_size": 206,
+  "type": "OB_stVectorUShort_010201A0 *__cdecl(OB_stVectorUShort_010201A0 *destination, unsigned int count, const OB_stVectorUShort_010201A0 *value)",
+  "xrefs_from_count": 85,
   "xrefs_to_count": 2
 }

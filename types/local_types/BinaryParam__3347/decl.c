@@ -1,1 +1,1 @@
-BinaryParam
+typedef tagBinaryParam BinaryParam;

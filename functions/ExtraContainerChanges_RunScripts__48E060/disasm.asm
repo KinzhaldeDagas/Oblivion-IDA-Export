@@ -23,7 +23,6 @@
 0x48E09E: mov     [esp+3Ch+var_1C], eax
 0x48E0A2: jz      loc_48E3FE
 0x48E0A8: jmp     short loc_48E0B4
-0x48E0AA: align 10h
 0x48E0B0: mov     eax, [esp+3Ch+var_1C]
 0x48E0B4: cmp     dword ptr [eax+4], 0
 0x48E0B8: jnz     short loc_48E0C3
@@ -54,15 +53,15 @@
 0x48E0FF: test    ebx, ebx
 0x48E101: jle     loc_48E3EB
 0x48E107: mov     eax, [esi+4]
-0x48E10A: mov     ecx, [esp+3Ch+var_18]
+0x48E10A: mov     ecx, [esp+3Ch+var_18]; this
 0x48E10E: xor     ebp, ebp
-0x48E110: push    ebp
-0x48E111: push    1
-0x48E113: push    eax
-0x48E114: call    ContainerExtraData_GetEntryForForm
+0x48E110: push    ebp; referenceFormIDOrZero
+0x48E111: push    1; unusedAlwaysOne
+0x48E113: push    eax; form
+0x48E114: call    ContainerExtraData_GetEntryForForm; Find EntryData for an exact TESForm in ExtraContainerChanges. Native ABI is three stack arguments and retn 0x0C. The middle Boolean is not read; callers conventionally pass true. If referenceFormIDOrZero is nonzero, require an extend-data list whose ExtraReferencePointer target has that form ID; otherwise return the form entry directly.
 0x48E119: mov     edi, eax
 0x48E11B: cmp     edi, ebp
-0x48E11D: mov     [esp+3Ch+var_20], edi
+0x48E11D: mov     [esp+3Ch+entry], edi
 0x48E121: jz      loc_48E1B2
 0x48E127: mov     ecx, edi
 0x48E129: call    sub_484F20
@@ -128,7 +127,7 @@
 0x48E1E4: xor     eax, eax
 0x48E1E6: mov     [esp+3Ch+var_4], 0FFFFFFFFh
 0x48E1EE: mov     edi, eax
-0x48E1F0: mov     [esp+3Ch+var_20], eax
+0x48E1F0: mov     [esp+3Ch+entry], eax
 0x48E1F4: mov     eax, [edi]
 0x48E1F6: cmp     eax, ebp
 0x48E1F8: jnz     short loc_48E21D
@@ -213,7 +212,7 @@
 0x48E2F2: mov     esi, eax
 0x48E2F4: jmp     short loc_48E2F8
 0x48E2F6: xor     esi, esi
-0x48E2F8: mov     eax, [esp+3Ch+var_20]
+0x48E2F8: mov     eax, [esp+3Ch+entry]
 0x48E2FC: mov     edi, [eax]
 0x48E2FE: or      ebx, 0FFFFFFFFh
 0x48E301: test    esi, esi
@@ -289,11 +288,11 @@
 0x48E3CE: jnz     loc_48E2D1
 0x48E3D4: cmp     byte ptr [esp+3Ch+var_28+3], 0
 0x48E3D9: jz      short loc_48E3EB
-0x48E3DB: mov     eax, [esp+3Ch+var_20]
-0x48E3DF: mov     ecx, [esp+3Ch+var_18]
-0x48E3E3: push    1
-0x48E3E5: push    eax
-0x48E3E6: call    ContainerExtraData_AddEntry
+0x48E3DB: mov     eax, [esp+3Ch+entry]
+0x48E3DF: mov     ecx, [esp+3Ch+var_18]; this
+0x48E3E3: push    1; destroyEntryIfMerged
+0x48E3E5: push    eax; entry
+0x48E3E6: call    ContainerExtraData_AddEntry; Merge or append a complete EntryData into ExtraContainerChanges. Native ABI is two stack arguments (entry, destroyEntryIfMerged) and retn 0x08; all 14 callers pass exactly two. If a matching form entry exists, it merges counts/extra-data chains and conditionally destroys the supplied entry; otherwise it appends that entry directly. Return register has no contract.
 0x48E3EB: mov     ecx, [esp+3Ch+var_1C]
 0x48E3EF: mov     eax, [ecx+4]
 0x48E3F2: test    eax, eax
@@ -308,7 +307,7 @@
 0x48E412: mov     eax, [esp+3Ch+var_18]
 0x48E416: mov     eax, [eax]
 0x48E418: test    eax, eax
-0x48E41A: mov     [esp+3Ch+var_20], eax
+0x48E41A: mov     [esp+3Ch+entry], eax
 0x48E41E: jz      loc_48E72A
 0x48E424: mov     eax, [eax+8]
 0x48E427: push    0; int
@@ -324,7 +323,7 @@
 0x48E445: mov     [esp+3Ch+var_24], eax
 0x48E449: jmp     short loc_48E453
 0x48E44B: mov     [esp+3Ch+var_24], 0
-0x48E453: mov     ecx, [esp+3Ch+var_20]
+0x48E453: mov     ecx, [esp+3Ch+entry]
 0x48E457: mov     eax, [ecx+4]
 0x48E45A: cdq
 0x48E45B: mov     ebx, eax
@@ -438,7 +437,7 @@
 0x48E5B2: mov     esi, eax
 0x48E5B4: jmp     short loc_48E5B8
 0x48E5B6: xor     esi, esi
-0x48E5B8: mov     eax, [esp+3Ch+var_20]
+0x48E5B8: mov     eax, [esp+3Ch+entry]
 0x48E5BC: mov     edi, [eax]
 0x48E5BE: or      ebx, 0FFFFFFFFh
 0x48E5C1: test    esi, esi
@@ -513,13 +512,12 @@
 0x48E68D: sub     [esp+3Ch+var_14], 1
 0x48E692: jnz     loc_48E591
 0x48E698: jmp     loc_48E717
-0x48E69D: mov     eax, [esp+3Ch+var_20]
+0x48E69D: mov     eax, [esp+3Ch+entry]
 0x48E6A1: mov     ebp, [eax]
 0x48E6A3: test    ebp, ebp
 0x48E6A5: jz      short loc_48E717
 0x48E6A7: mov     ebx, [esp+3Ch+var_24]
 0x48E6AB: jmp     short loc_48E6B0
-0x48E6AD: align 10h
 0x48E6B0: mov     edi, [ebp+0]
 0x48E6B3: test    edi, edi
 0x48E6B5: jz      short loc_48E717
@@ -570,3 +568,55 @@
 0x48E739: pop     ebx
 0x48E73A: add     esp, 28h
 0x48E73D: retn
+0x9AFDF0: mov     eax, [ebp-14h]
+0x9AFDF3: push    eax
+0x9AFDF4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFDF9: pop     ecx
+0x9AFDFA: retn
+0x9AFDFB: mov     eax, [ebp-14h]
+0x9AFDFE: push    eax
+0x9AFDFF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFE04: pop     ecx
+0x9AFE05: retn
+0x9AFE06: mov     eax, [ebp-14h]
+0x9AFE09: push    eax
+0x9AFE0A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFE0F: pop     ecx
+0x9AFE10: retn
+0x9AFE11: mov     eax, [ebp-10h]
+0x9AFE14: push    eax
+0x9AFE15: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFE1A: pop     ecx
+0x9AFE1B: retn
+0x9AFE1C: mov     eax, [ebp-10h]
+0x9AFE1F: push    eax
+0x9AFE20: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFE25: pop     ecx
+0x9AFE26: retn
+0x9AFE27: mov     eax, [ebp-10h]
+0x9AFE2A: push    eax
+0x9AFE2B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFE30: pop     ecx
+0x9AFE31: retn
+0x9AFE32: mov     eax, [ebp-10h]
+0x9AFE35: push    eax
+0x9AFE36: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFE3B: pop     ecx
+0x9AFE3C: retn
+0x9AFE3D: mov     eax, [ebp-10h]
+0x9AFE40: push    eax
+0x9AFE41: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFE46: pop     ecx
+0x9AFE47: retn
+0x9AFE48: mov     eax, [ebp-10h]
+0x9AFE4B: push    eax
+0x9AFE4C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFE51: pop     ecx
+0x9AFE52: retn
+0x9AFE53: mov     edx, [esp+arg_4]
+0x9AFE57: lea     eax, [edx-2Ch]
+0x9AFE5A: mov     ecx, [edx-30h]
+0x9AFE5D: xor     ecx, eax
+0x9AFE5F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AFE64: mov     eax, offset stru_ADC260
+0x9AFE69: jmp     ___CxxFrameHandler3

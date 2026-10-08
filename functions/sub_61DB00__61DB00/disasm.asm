@@ -12,7 +12,7 @@
 0x61DB14: call    sub_5EFF30
 0x61DB19: push    edi
 0x61DB1A: mov     ecx, esi
-0x61DB1C: call    sub_6162D0
+0x61DB1C: call    CombatController_RemoveTarget
 0x61DB21: mov     eax, [esi+40h]
 0x61DB24: test    eax, eax
 0x61DB26: jz      short loc_61DB52
@@ -30,7 +30,7 @@
 0x61DB42: mov     eax, [eax]
 0x61DB44: push    eax
 0x61DB45: mov     ecx, esi
-0x61DB47: call    sub_6162D0
+0x61DB47: call    CombatController_RemoveTarget
 0x61DB4C: mov     eax, [edi]
 0x61DB4E: test    eax, eax
 0x61DB50: jnz     short loc_61DB42
@@ -80,12 +80,12 @@
 0x61DBCE: fstp    dword ptr [esi+188h]
 0x61DBD4: mov     [esi+70h], ebp
 0x61DBD7: mov     ecx, [esi+3Ch]
-0x61DBDA: call    Actor_IsBlocking
+0x61DBDA: call    Actor_IsBlocking; Actor_IsBlocking: process current-action vfunc +0x2D0 equals 6. Player jump path treats this specially; climb activation should reject or require explicit design override while blocking.
 0x61DBDF: test    al, al
 0x61DBE1: jz      short loc_61DBED
-0x61DBE3: mov     ecx, [esi+3Ch]
-0x61DBE6: push    0; float
-0x61DBE8: call    sub_5F4AE0
+0x61DBE3: mov     ecx, [esi+3Ch]; this
+0x61DBE6: push    0; shouldBlock
+0x61DBE8: call    Actor_UpdateBlockingState; Starts or stops the actor blocking animation/current-action state and mirrors the result to CombatController byte +0x49. Native ABI is Actor in ECX plus one shouldBlock byte.
 0x61DBED: test    bl, bl
 0x61DBEF: jz      loc_61DC76
 0x61DBF5: xor     eax, eax
@@ -131,7 +131,7 @@
 0x61DC72: pop     ebx
 0x61DC73: retn    4
 0x61DC76: mov     ecx, esi
-0x61DC78: call    sub_6135F0
+0x61DC78: call    CombatController_GetCurrentTarget
 0x61DC7D: test    eax, eax
 0x61DC7F: jz      short loc_61DCF8
 0x61DC81: cmp     byte ptr [esi+114h], 0
@@ -146,10 +146,10 @@
 0x61DC9B: mov     byte ptr [esi+114h], 0
 0x61DCA2: mov     edi, [esi+28h]
 0x61DCA5: mov     ecx, esi
-0x61DCA7: call    sub_6135F0
+0x61DCA7: call    CombatController_GetCurrentTarget
 0x61DCAC: push    eax
 0x61DCAD: mov     ecx, edi
-0x61DCAF: call    TeSPackage_TargetData_SetTargetREFR
+0x61DCAF: call    TeSPackage_TargetData_SetTargetREFR; 3DTheft decode: TargetData_SetTargetREFR only writes the reference field when targetType is 0 (reference target). It does not set count.
 0x61DCB4: cmp     [esi+70h], ebp
 0x61DCB7: jz      short loc_61DCC5
 0x61DCB9: fld     dword ptr ds:0A30634h
@@ -159,7 +159,7 @@
 0x61DCCF: jz      short loc_61DCF8
 0x61DCD1: mov     edi, [esi+3Ch]
 0x61DCD4: mov     ecx, esi
-0x61DCD6: call    sub_6135F0
+0x61DCD6: call    CombatController_GetCurrentTarget
 0x61DCDB: mov     ecx, eax; this
 0x61DCDD: call    TESObjectREFR_GetName
 0x61DCE2: push    eax

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x781B10",
-    "line": "sub     esp, 10h",
+    "line": "sub     esp, 10h; MoonSugarEffect decode: assembled/object vertex creator path. Builds 0x38 NiD3DVertexShader with base metadata and creator pointer before storing the D3D handle. Distinct from TES4 CreateVertexShader's simpler non-restoring wrapper.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x781B37",
-    "line": "lea     eax, [esp+1Ch+var_C]",
+    "line": "lea     eax, [esp+1Ch+unused5]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x781B3C",
-    "line": "lea     ecx, [esp+20h+var_8]",
+    "line": "lea     ecx, [esp+20h+unused4]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x781B61",
-    "line": "lea     ecx, [esp+28h+var_10]",
+    "line": "lea     ecx, [esp+28h+bytecode]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -211,19 +211,19 @@
   },
   {
     "ea": "0x781B6D",
-    "line": "mov     [esp+30h+var_10], ebx",
+    "line": "mov     [esp+30h+bytecode], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x781B71",
-    "line": "mov     [esp+30h+var_C], ebx",
+    "line": "mov     [esp+30h+unused5], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x781B75",
-    "line": "mov     [esp+30h+var_8], ebx",
+    "line": "mov     [esp+30h+unused4], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -313,25 +313,25 @@
   },
   {
     "ea": "0x781B94",
-    "line": "mov     ebx, [esp+1Ch+arg_18]",
+    "line": "mov     ebx, [esp+1Ch+unused6]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x781B98",
-    "line": "mov     eax, [esp+1Ch+var_C]",
+    "line": "mov     eax, [esp+1Ch+unused5]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x781B9C",
-    "line": "mov     ecx, [esp+1Ch+var_8]",
+    "line": "mov     ecx, [esp+1Ch+unused4]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x781BA0",
-    "line": "mov     edx, [esp+1Ch+arg_14]",
+    "line": "mov     edx, [esp+1Ch+unused3]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -343,49 +343,49 @@
   },
   {
     "ea": "0x781BA5",
-    "line": "push    ebx",
+    "line": "push    ebx; unused6",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x781BA6",
-    "line": "push    eax",
+    "line": "push    eax; unused5",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x781BA7",
-    "line": "push    ecx",
+    "line": "push    ecx; unused4",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x781BA8",
-    "line": "mov     ecx, [esp+2Ch+var_10]",
+    "line": "mov     ecx, [esp+2Ch+bytecode]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x781BAC",
-    "line": "push    edx",
+    "line": "push    edx; unused3",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x781BAD",
-    "line": "lea     eax, [esp+30h+arg_10]",
+    "line": "lea     eax, [esp+30h+unused2]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x781BB1",
-    "line": "push    eax",
+    "line": "push    eax; unused2",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x781BB2",
-    "line": "push    ecx",
+    "line": "push    ecx; bytecode",
     "mnemonic": "push",
     "size": 1
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x781BB5",
-    "line": "call    sub_783BF0",
+    "line": "call    NiDX9Renderer__CreateVertexShader; Calls IDirect3DDevice9::CreateVertexShader for compiled DWORD bytecode and reports a failed HRESULT.",
     "mnemonic": "call",
     "size": 5
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x781C07",
-    "line": "mov     ecx, [esp+20h+var_10]",
+    "line": "mov     ecx, [esp+20h+bytecode]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x781C30",
-    "line": "mov     eax, [esp+20h+arg_14]",
+    "line": "mov     eax, [esp+20h+unused3]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -751,7 +751,7 @@
   },
   {
     "ea": "0x781C3C",
-    "line": "mov     ecx, [esp+20h+arg_10]",
+    "line": "mov     ecx, [esp+20h+unused2]",
     "mnemonic": "mov",
     "size": 4
   },

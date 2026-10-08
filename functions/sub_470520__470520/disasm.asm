@@ -1,5 +1,5 @@
 0x470520: push    esi
-0x470521: mov     esi, [esp+4+arg_0]
+0x470521: mov     esi, [esp+4+form]
 0x470525: push    0; int
 0x470527: push    offset ??_R0?AVTESValueForm@@@8; struct TypeDescriptor *
 0x47052C: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
@@ -27,7 +27,7 @@
 0x470567: push    0
 0x470569: call    edx
 0x47056B: pop     esi
-0x47056C: jmp     Double_To_SInt32
+0x47056C: jmp     Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x470571: or      eax, 0FFFFFFFFh
 0x470574: pop     esi
 0x470575: retn

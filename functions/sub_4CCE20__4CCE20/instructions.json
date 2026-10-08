@@ -67,13 +67,13 @@
   },
   {
     "ea": "0x4CCE43",
-    "line": "add     ecx, 28h ; '('",
+    "line": "add     ecx, 28h ; '('; this",
     "mnemonic": "add",
     "size": 3
   },
   {
     "ea": "0x4CCE46",
-    "line": "call    sub_420C40",
+    "line": "call    ExtraDataList_GetNorthRotation; Returns ExtraNorthRotation's float payload (type 0x4C), or 0.0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -187,19 +187,19 @@
   },
   {
     "ea": "0x4CCE7D",
-    "line": "lea     ecx, [esp+40h+var_24]",
+    "line": "lea     ecx, [esp+40h+var_24]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4CCE81",
-    "line": "fstp    [esp+40h+var_40]; float",
+    "line": "fstp    [esp+40h+angleZ]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4CCE84",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x4CCE98",
-    "line": "call    sub_710250",
+    "line": "call    NiPoint3_MultiplyMatrix3",
     "mnemonic": "call",
     "size": 5
   },

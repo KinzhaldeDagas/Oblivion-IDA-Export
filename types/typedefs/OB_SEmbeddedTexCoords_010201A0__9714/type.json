@@ -1,0 +1,96 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "OB_SEmbeddedTexCoords_010201A0",
+  "definition": "struct OB_SEmbeddedTexCoords_010201A0\n{\nint leafTexcoordSetCount; ///< Count written by token 10002.\nint leafTexcoordFloatTable; ///< Pointer to count*8 floats.\nint billboardTexcoordSetCount; ///< Count written by token 10003; stock parser does not mirror this into CSpeedTreeRT+0x54.\nint billboardTexcoordFloatTable; ///< Pointer to count*8 floats used by 360/horizontal billboard exports.\nint frondTexcoordSetCount; ///< Count written by token 10004.\nint frondTexcoordFloatTable; ///< Pointer to count*8 floats.\nchar compositeFilenameSmallString[28]; ///< Small-string storage normalized through 0x789430.\nfloat shadowTexcoords8Floats[8]; ///< Inline shadow texcoords; default is (1,1),(0,1),(0,0),(1,0).\n}\n",
+  "kind": "struct",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Count written by token 10002.",
+      "name": "leafTexcoordSetCount",
+      "offset_bits": 0,
+      "offset_bytes": 0,
+      "size_bits": 32,
+      "type": "int"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Pointer to count*8 floats.",
+      "name": "leafTexcoordFloatTable",
+      "offset_bits": 32,
+      "offset_bytes": 4,
+      "size_bits": 32,
+      "type": "int"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Count written by token 10003; stock parser does not mirror this into CSpeedTreeRT+0x54.",
+      "name": "billboardTexcoordSetCount",
+      "offset_bits": 64,
+      "offset_bytes": 8,
+      "size_bits": 32,
+      "type": "int"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Pointer to count*8 floats used by 360/horizontal billboard exports.",
+      "name": "billboardTexcoordFloatTable",
+      "offset_bits": 96,
+      "offset_bytes": 12,
+      "size_bits": 32,
+      "type": "int"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Count written by token 10004.",
+      "name": "frondTexcoordSetCount",
+      "offset_bits": 128,
+      "offset_bytes": 16,
+      "size_bits": 32,
+      "type": "int"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Pointer to count*8 floats.",
+      "name": "frondTexcoordFloatTable",
+      "offset_bits": 160,
+      "offset_bytes": 20,
+      "size_bits": 32,
+      "type": "int"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Small-string storage normalized through 0x789430.",
+      "name": "compositeFilenameSmallString",
+      "offset_bits": 192,
+      "offset_bytes": 24,
+      "size_bits": 224,
+      "type": "char[28]"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Inline shadow texcoords; default is (1,1),(0,1),(0,0),(1,0).",
+      "name": "shadowTexcoords8Floats",
+      "offset_bits": 416,
+      "offset_bytes": 52,
+      "size_bits": 256,
+      "type": "float[8]"
+    }
+  ],
+  "name": "OB_SEmbeddedTexCoords_010201A0",
+  "ordinal": 9714,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 84
+}

@@ -1,18 +1,31 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x77A1F0",
+      "0x77A305"
+    ]
+  ],
+  "chunks_sha256": "07a508aba5d57f82955911d878e1347467acc9a44a17e2bd5cba02bd60418ab4",
+  "comment_regular": "\nDX11 integration audit 2026-10-01: the prepared bucket now joins its ordered four-map six-bank register delta with scalar/resource state and guarded native cache/metadata effects. The map delta must share device/revision/limits/preimage with its captured baseline. This is assembly of proved effects only: does not certify all reachable callbacks, lifetime/pool writer exclusion, native refcount retirement or authorization to suppress this wrapper. 7FB6F0 projected SetClipPlane calls at7FC759/7FC7AB are guarded by selectors14E..151, outside current ordinary12D..146 bucket admission. Its ordinary765480 model call passes pushToDevice=false, so no D3DTS_WORLD write should be added to the handoff. Source globals and normalization side effects still require their separate modeled commits.\n\nObservation timing consequence verified 2026-10-02: the final D3D device draw consumes state after this setup path and its pass-owned/shader-owned map applications. Capturing at the actual owned device draw is a distinct current-time copy, with fresh code/owner/source checks and zero active writers throughout; it must not be represented as revival of a RenderPass-entry epoch. Existing native dispatch/order/bookkeeping obligations are unchanged.\n\nVerified (Oblivion): common NiD3DShader pass setup first invokes the current NiD3DPass bind/apply virtual, then applies this shader object's PixelConstantMap to CurrentPass->PixelShader and VertexConstantMap to CurrentPass->VertexShader. ShadowLightShader's vtable slot +0x38 points here, and its slot +0x88 builds those maps; this closes the map ownership path for its 0x18C..0x18F texture-effect selectors.",
+  "comment_repeatable": "Verified (Oblivion): common NiD3DShader pass setup first invokes the current NiD3DPass bind/apply virtual, then applies this shader object's PixelConstantMap to CurrentPass->PixelShader and VertexConstantMap to CurrentPass->VertexShader. ShadowLightShader's vtable slot +0x38 points here, and its slot +0x88 builds those maps; this closes the map ownership path for its 0x18C..0x18F texture-effect selectors.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "SetupShaderPrograms",
+  "display_name": "NiD3DShader_SetupShaderPrograms",
   "end_ea": "0x77A305",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "SetupShaderPrograms",
+  "name": "NiD3DShader_SetupShaderPrograms",
   "segment": ".text",
   "sha256": "07a508aba5d57f82955911d878e1347467acc9a44a17e2bd5cba02bd60418ab4",
   "size": 277,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x77A1F0",
+  "total_chunk_size": 277,
   "type": "NiObjectNET *__thiscall(NiD3DShader *this, NiObjectNET *, int, int, int, int, int, int, int)",
   "xrefs_from_count": 126,
   "xrefs_to_count": 32

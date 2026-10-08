@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x448F40",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified caller path: ensures the actor's barter ContainerChanges exists, merges the actor and merchant-container changes, then calls TESObjectCELL_AddOwnedReferencesToBarterContainer for the actor's current cell. This anchors the ownership predicate's false faction-ownership argument to barter inventory construction.",
     "mnemonic": "push",
     "size": 2
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x448FDC",
-    "line": "call    sub_420680",
+    "line": "call    ExtraDataList_GetMerchantContainer; Returns the reference stored in ExtraMerchantContainer type 0x44.",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x449010",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -421,25 +421,25 @@
   },
   {
     "ea": "0x44901F",
-    "line": "push    ecx",
+    "line": "push    ecx; containerChanges",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x449020",
-    "line": "push    edi",
+    "line": "push    edi; ownerActor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x449021",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; cell",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x449023",
-    "line": "call    sub_4CB2B0",
+    "line": "call    TESObjectCELL_AddOwnedReferencesToBarterContainer; Verified barter-container sweep: iterates this cell's objectList, skips deleted/disabled refs, and calls TESObjectREFR_IsOwnedBy(reference, ownerActor, useFactionOwnership=false). It excludes the merchant container, copies supported owned item extra lists into new container entries, records the original reference, removes ownership from the copied inventory instance, and delegates owned container refs to ContainerExtraData handling. Fallout's TESObjectCELL::FillBarterContainer performs the analogous cell scan and also calls IsAnOwner(..., false); Fallout wraps the scan in its cell-reference lock, while Oblivion's caller manages its own container-change flow.",
     "mnemonic": "call",
     "size": 5
   },
@@ -496,5 +496,77 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CAD70",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAD73",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CAD74",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CAD79",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CAD7A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CAD7B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CAD7F",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAD82",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAD85",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CAD87",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CAD8C",
+    "line": "mov     eax, offset stru_AF3390",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CAD91",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

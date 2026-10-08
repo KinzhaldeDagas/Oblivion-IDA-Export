@@ -33,7 +33,7 @@
 0x88DB80: push    1
 0x88DB82: push    ebp
 0x88DB83: push    esi
-0x88DB84: call    eax
+0x88DB84: call    eax ; unk_BA7A08
 0x88DB86: add     esp, 0Ch
 0x88DB89: test    al, al
 0x88DB8B: jz      short loc_88DBC8

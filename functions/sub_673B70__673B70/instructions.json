@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x673B70",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; MEF LARGE PERF 2026-09-08: PERF-7 distance comparator calls GetDistance twice per comparison and returns signed-1/0/+1. Both distance results are rounded tofloat locals before x87 comparison. Corrected prior unsigned prototype to signed int. Avoid precomputed/squared-distance replacement without worldspace/sentinel/virtual GetPos and NaN/rounding proof.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x673B78",
-    "line": "mov     ecx, [esp+8+arg_0]",
+    "line": "mov     ecx, [esp+8+left]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x673B90",
-    "line": "mov     ecx, [esp+10h+arg_4]",
+    "line": "mov     ecx, [esp+10h+right]",
     "mnemonic": "mov",
     "size": 4
   },

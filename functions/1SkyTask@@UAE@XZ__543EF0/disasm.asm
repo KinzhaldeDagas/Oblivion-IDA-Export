@@ -57,3 +57,15 @@
 0x543F88: pop     ebx
 0x543F89: add     esp, 10h
 0x543F8C: retn
+0x9BA6F0: mov     ecx, [ebp-10h]; this
+0x9BA6F3: jmp     ??1LipTask@@UAE@XZ; LipTask::~LipTask(void)
+0x9BA6F8: mov     ecx, [ebp-10h]
+0x9BA6FB: add     ecx, 28h ; '('; slot
+0x9BA6FE: jmp     NiPointerSlot_Release
+0x9BA703: mov     edx, [esp+arg_4]
+0x9BA707: lea     eax, [edx-10h]
+0x9BA70A: mov     ecx, [edx-14h]
+0x9BA70D: xor     ecx, eax
+0x9BA70F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BA714: mov     eax, offset stru_AE481C
+0x9BA719: jmp     ___CxxFrameHandler3

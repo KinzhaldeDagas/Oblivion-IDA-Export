@@ -1,1 +1,1 @@
-NLSVERSIONINFO
+typedef _nlsversioninfo NLSVERSIONINFO;

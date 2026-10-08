@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x617255",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x6172FA",
-    "line": "lea     eax, [esp+12Ch+string]",
+    "line": "lea     eax, [esp+128h+string+4]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x617312",
-    "line": "fstp    [esp+128h+duration]; duration",
+    "line": "fstp    dword ptr [esp+124h+var_124]; duration",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x617317",
-    "line": "lea     ecx, [esp+12Ch+string]",
+    "line": "lea     ecx, [esp+128h+string+4]",
     "mnemonic": "lea",
     "size": 4
   },

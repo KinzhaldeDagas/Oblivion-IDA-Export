@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x414685",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; count",
     "mnemonic": "push",
     "size": 2
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x414691",
-    "line": "push    eax",
+    "line": "push    eax; offset",
     "mnemonic": "push",
     "size": 1
   },
@@ -49,19 +49,19 @@
   },
   {
     "ea": "0x414695",
-    "line": "mov     eax, [esp+0Ch+arg_0]",
+    "line": "mov     eax, [esp+0Ch+source]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x414699",
-    "line": "push    eax",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x41469A",
-    "line": "call    sub_414420",
+    "line": "call    OB_stString28_AssignSubstring_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,offset,count). Bounds-checks offset, clamps count to source.size-offset, handles self-assignment by in-place erasure, grows when required, copies the selected bytes, updates size, and writes the terminator.",
     "mnemonic": "call",
     "size": 5
   },

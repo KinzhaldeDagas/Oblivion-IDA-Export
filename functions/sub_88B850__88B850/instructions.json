@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x88B850",
-    "line": "push    ebp",
+    "line": "push    ebp; TES4 authoritative bhkWorld/bhkWorldM raycast implementation. On hit, output normal lives at data+0x30, hitFraction at +0x44, root collidable at +0x50; layer is low 6 bits of filter info at data+0x24.",
     "mnemonic": "push",
     "size": 1
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x88B8AF",
-    "line": "jmp     ds:jpt_88B8AF[eax*4]; switch jump",
+    "line": "jmp     ds:jpt_88B8AF[eax*4]; TES4 authoritative: bhkWorld raycast throttles/counts by input filter layer low 6 bits before running the ray query.",
     "mnemonic": "jmp",
     "size": 7
   },
@@ -1015,7 +1015,7 @@
   },
   {
     "ea": "0x88BAA9",
-    "line": "call    hkWorld__CastRay",
+    "line": "call    hkWorld__CastRay; TES4 authoritative: direct ray path calls hkWorld::CastRay and reports a hit when output root collidable at ray data +0x50 is non-null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1246,5 +1246,107 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x683C10",
+    "line": "mov     dword ptr [ecx], offset ??_7hkBroadPhaseCastCollector@@6B@; const hkBroadPhaseCastCollector::`vftable'",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x683C16",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D5EA0",
+    "line": "lea     ecx, [ebp+var_70]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D5EA3",
+    "line": "jmp     loc_683C10",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D5EA8",
+    "line": "lea     ecx, [ebp+var_70]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D5EAB",
+    "line": "jmp     loc_683C10",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D5EB0",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D5EB4",
+    "line": "lea     eax, [edx-84h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9D5EBA",
+    "line": "mov     ecx, [edx-88h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9D5EC0",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D5EC2",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D5EC7",
+    "line": "add     eax, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9D5ECA",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D5ECD",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D5ECF",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D5ED4",
+    "line": "mov     eax, offset stru_AFDEA0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D5ED9",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

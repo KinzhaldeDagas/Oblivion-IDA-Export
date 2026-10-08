@@ -1,1 +1,1 @@
-LRESULT
+typedef LONG LRESULT;

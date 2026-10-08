@@ -1,0 +1,10 @@
+struct OB_SpeedTreeGeometryOutput_010201A0
+{
+OB_SIndexedGeometryOutput_010201A0 branches;
+OB_SIndexedGeometryOutput_010201A0 fronds;
+OB_SLeafGeometryOutput_010201A0 primaryLeaves;
+OB_SLeafGeometryOutput_010201A0 secondaryLeaves;
+OB_SBillboardGeometryOutput_010201A0 primaryBillboard;
+OB_SBillboardGeometryOutput_010201A0 secondaryBillboard;
+OB_SBillboardGeometryOutput_010201A0 horizontalBillboard;
+};

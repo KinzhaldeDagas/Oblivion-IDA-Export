@@ -1,31 +1,27 @@
-int __thiscall sub_5888E0(_DWORD *this)
+//
+// Verified 2026-10-07: unlinks node from both doubly linked dimensions and zeros four links. Does not free node; callers including Value teardown free separately. No vtable in Oblivion action nodes.
+void __thiscall Tile::ActionNode::Unlink(OblivionTileActionNode *this)
 {
-  _DWORD *v1; // eax
-  _DWORD *v2; // eax
-  int v3; // eax
-  int result; // eax
+  OblivionTileActionNode *i; // eax
+  OblivionTileActionNode *nextAction; // eax
+  OblivionTileActionNode *previousReaction; // eax
+  OblivionTileActionNode *nextReaction; // eax
 
-  v1 = (_DWORD *)*this;
-  if ( *this )
-  {
-    do
-      v1 = (_DWORD *)*v1;
-    while ( v1 );
-  }
-  if ( *this )
-    *(_DWORD *)(*this + 4) = *(this + 1);
-  v2 = (_DWORD *)*(this + 1);
-  if ( v2 )
-    *v2 = *this;
-  v3 = *(this + 4);
-  if ( v3 )
-    *(_DWORD *)(v3 + 0x14) = *(this + 5);
-  result = *(this + 5);
-  if ( result )
-    *(_DWORD *)(result + 0x10) = *(this + 4);
-  *this = 0;
-  *(this + 1) = 0;
-  *(this + 4) = 0;
-  *(this + 5) = 0;
-  return result;
+  for ( i = this->previousAction; i; i = i->previousAction ) /*0x5888e0*/
+    ; /*0x5888e8*/
+  if ( this->previousAction ) /*0x5888ee*/
+    this->previousAction->nextAction = this->nextAction; /*0x5888f8*/
+  nextAction = this->nextAction; /*0x5888fb*/
+  if ( nextAction ) /*0x588900*/
+    nextAction->previousAction = this->previousAction; /*0x588904*/
+  previousReaction = this->previousReaction; /*0x588906*/
+  if ( previousReaction ) /*0x58890b*/
+    previousReaction->nextReaction = this->nextReaction; /*0x588910*/
+  nextReaction = this->nextReaction; /*0x588913*/
+  if ( nextReaction ) /*0x588918*/
+    nextReaction->previousReaction = this->previousReaction; /*0x58891d*/
+  this->previousAction = 0; /*0x588920*/
+  this->nextAction = 0; /*0x588922*/
+  this->previousReaction = 0; /*0x588925*/
+  this->nextReaction = 0; /*0x588928*/
 }

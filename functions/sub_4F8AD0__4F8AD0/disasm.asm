@@ -14,8 +14,8 @@
 0x4F8AF6: jz      short loc_4F8B0C
 0x4F8AF8: test    esi, esi
 0x4F8AFA: jz      short loc_4F8B0C
-0x4F8AFC: lea     ecx, [eax+44h]
-0x4F8AFF: call    ExtraDataList_GetOwner
+0x4F8AFC: lea     ecx, [eax+44h]; this
+0x4F8AFF: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x4F8B04: cmp     eax, esi
 0x4F8B06: jnz     short loc_4F8B0C
 0x4F8B08: fld1

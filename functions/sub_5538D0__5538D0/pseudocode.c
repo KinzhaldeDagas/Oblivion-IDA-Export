@@ -1,12 +1,13 @@
-int sub_5538D0()
+// Returns the FaceGen manager's default head-parameter block at manager+0x08, initializing the manager on demand.
+const FaceGenHeadParameters *__cdecl FaceGenManager_GetDefaultHeadParameters()
 {
-  int v0; // eax
+  char *v0; // eax
 
-  v0 = dword_B39B80;
-  if ( !dword_B39B80 )
+  v0 = (char *)g_faceGenManager; /*0x5538d0*/
+  if ( !g_faceGenManager ) /*0x5538d0*/
   {
-    sub_553550();
-    v0 = dword_B39B80;
+    FaceGenManager_EnsureInitialized(); /*0x5538d9*/
+    v0 = (char *)g_faceGenManager; /*0x5538de*/
   }
-  return v0 + 8;
+  return (const FaceGenHeadParameters *)(v0 + 8); /*0x5538e6*/
 }

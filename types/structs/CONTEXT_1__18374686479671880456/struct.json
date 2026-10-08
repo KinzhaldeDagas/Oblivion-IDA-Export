@@ -1,286 +1,441 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "CONTEXT_1",
+  "definition": "typedef AMD64_CONTEXT_0 CONTEXT_1\n",
   "id": 18374686479671880456,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "P1Home",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "DWORD64"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "P2Home",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 8
+      "size": 8,
+      "type": "DWORD64"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "P3Home",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 8
+      "size": 8,
+      "type": "DWORD64"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "P4Home",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 8
+      "size": 8,
+      "type": "DWORD64"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "P5Home",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 8
+      "size": 8,
+      "type": "DWORD64"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "P6Home",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 8
+      "size": 8,
+      "type": "DWORD64"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ContextFlags",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "MxCsr",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SegCs",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SegDs",
       "offset": 58,
-      "offset_hex": "0x3a",
-      "size": 2
+      "offset_hex": "0x3A",
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SegEs",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 2
+      "offset_hex": "0x3C",
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SegFs",
       "offset": 62,
-      "offset_hex": "0x3e",
-      "size": 2
+      "offset_hex": "0x3E",
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SegGs",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SegSs",
       "offset": 66,
       "offset_hex": "0x42",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "EFlags",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Dr0",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 8
+      "size": 8,
+      "type": "DWORD64"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Dr1",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 8
+      "size": 8,
+      "type": "DWORD64"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Dr2",
       "offset": 88,
       "offset_hex": "0x58",
-      "size": 8
+      "size": 8,
+      "type": "DWORD64"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Dr3",
       "offset": 96,
       "offset_hex": "0x60",
-      "size": 8
+      "size": 8,
+      "type": "DWORD64"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Dr6",
       "offset": 104,
       "offset_hex": "0x68",
-      "size": 8
+      "size": 8,
+      "type": "DWORD64"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Dr7",
       "offset": 112,
       "offset_hex": "0x70",
-      "size": 8
+      "size": 8,
+      "type": "DWORD64"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Rax",
       "offset": 120,
       "offset_hex": "0x78",
-      "size": 8
+      "size": 8,
+      "type": "DWORD64"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Rcx",
       "offset": 128,
       "offset_hex": "0x80",
-      "size": 8
+      "size": 8,
+      "type": "DWORD64"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Rdx",
       "offset": 136,
       "offset_hex": "0x88",
-      "size": 8
+      "size": 8,
+      "type": "DWORD64"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Rbx",
       "offset": 144,
       "offset_hex": "0x90",
-      "size": 8
+      "size": 8,
+      "type": "DWORD64"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Rsp",
       "offset": 152,
       "offset_hex": "0x98",
-      "size": 8
+      "size": 8,
+      "type": "DWORD64"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Rbp",
       "offset": 160,
-      "offset_hex": "0xa0",
-      "size": 8
+      "offset_hex": "0xA0",
+      "size": 8,
+      "type": "DWORD64"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Rsi",
       "offset": 168,
-      "offset_hex": "0xa8",
-      "size": 8
+      "offset_hex": "0xA8",
+      "size": 8,
+      "type": "DWORD64"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Rdi",
       "offset": 176,
-      "offset_hex": "0xb0",
-      "size": 8
+      "offset_hex": "0xB0",
+      "size": 8,
+      "type": "DWORD64"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "R8",
       "offset": 184,
-      "offset_hex": "0xb8",
-      "size": 8
+      "offset_hex": "0xB8",
+      "size": 8,
+      "type": "DWORD64"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "R9",
       "offset": 192,
-      "offset_hex": "0xc0",
-      "size": 8
+      "offset_hex": "0xC0",
+      "size": 8,
+      "type": "DWORD64"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "R10",
       "offset": 200,
-      "offset_hex": "0xc8",
-      "size": 8
+      "offset_hex": "0xC8",
+      "size": 8,
+      "type": "DWORD64"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "R11",
       "offset": 208,
-      "offset_hex": "0xd0",
-      "size": 8
+      "offset_hex": "0xD0",
+      "size": 8,
+      "type": "DWORD64"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "R12",
       "offset": 216,
-      "offset_hex": "0xd8",
-      "size": 8
+      "offset_hex": "0xD8",
+      "size": 8,
+      "type": "DWORD64"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "R13",
       "offset": 224,
-      "offset_hex": "0xe0",
-      "size": 8
+      "offset_hex": "0xE0",
+      "size": 8,
+      "type": "DWORD64"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "R14",
       "offset": 232,
-      "offset_hex": "0xe8",
-      "size": 8
+      "offset_hex": "0xE8",
+      "size": 8,
+      "type": "DWORD64"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "R15",
       "offset": 240,
-      "offset_hex": "0xf0",
-      "size": 8
+      "offset_hex": "0xF0",
+      "size": 8,
+      "type": "DWORD64"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Rip",
       "offset": 248,
-      "offset_hex": "0xf8",
-      "size": 8
+      "offset_hex": "0xF8",
+      "size": 8,
+      "type": "DWORD64"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "u",
       "offset": 256,
       "offset_hex": "0x100",
-      "size": 512
+      "size": 512,
+      "type": "$D353AC82F4AFCCB34B5B0164211DB624"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "VectorRegister",
       "offset": 768,
       "offset_hex": "0x300",
-      "size": 416
+      "size": 416,
+      "type": "M128A[26]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "VectorControl",
       "offset": 1184,
-      "offset_hex": "0x4a0",
-      "size": 8
+      "offset_hex": "0x4A0",
+      "size": 8,
+      "type": "DWORD64"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DebugControl",
       "offset": 1192,
-      "offset_hex": "0x4a8",
-      "size": 8
+      "offset_hex": "0x4A8",
+      "size": 8,
+      "type": "DWORD64"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "LastBranchToRip",
       "offset": 1200,
-      "offset_hex": "0x4b0",
-      "size": 8
+      "offset_hex": "0x4B0",
+      "size": 8,
+      "type": "DWORD64"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "LastBranchFromRip",
       "offset": 1208,
-      "offset_hex": "0x4b8",
-      "size": 8
+      "offset_hex": "0x4B8",
+      "size": 8,
+      "type": "DWORD64"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "LastExceptionToRip",
       "offset": 1216,
-      "offset_hex": "0x4c0",
-      "size": 8
+      "offset_hex": "0x4C0",
+      "size": 8,
+      "type": "DWORD64"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "LastExceptionFromRip",
       "offset": 1224,
-      "offset_hex": "0x4c8",
-      "size": 8
+      "offset_hex": "0x4C8",
+      "size": 8,
+      "type": "DWORD64"
     }
   ],
   "name": "CONTEXT_1",
+  "ordinal": 1814,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 1232
 }

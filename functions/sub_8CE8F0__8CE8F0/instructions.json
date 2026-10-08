@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8CE8F0",
-    "line": "fld     dword ptr ds:0A99DCCh",
+    "line": "fld     dword ptr ds:0A99DCCh; TES4 authoritative: cleans persistent collector/manifold state. Entries marked 1 are removed by swap-with-last; others are marked stale for the next pass.",
     "mnemonic": "fld",
     "size": 6
   },
@@ -88,12 +88,6 @@
     "line": "jmp     short loc_8CE926",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x8CE919",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
   },
   {
     "ea": "0x8CE920",
@@ -241,7 +235,7 @@
   },
   {
     "ea": "0x8CE967",
-    "line": "call    ecx ; dword_BA7A50",
+    "line": "call    ecx ; unk_BA7A50",
     "mnemonic": "call",
     "size": 2
   },
@@ -331,7 +325,7 @@
   },
   {
     "ea": "0x8CE99D",
-    "line": "jnz     loc_8CEA2E",
+    "line": "jnz     loc_8CEA2E; State marker value 1 means remove this persistent contact entry during cleanup.",
     "mnemonic": "jnz",
     "size": 6
   },
@@ -535,7 +529,7 @@
   },
   {
     "ea": "0x8CEA2E",
-    "line": "mov     dword ptr [eax], 1",
+    "line": "mov     dword ptr [eax], 1; Non-removed entries are marked 1 so a later cleanup pass can remove them if not refreshed.",
     "mnemonic": "mov",
     "size": 6
   },

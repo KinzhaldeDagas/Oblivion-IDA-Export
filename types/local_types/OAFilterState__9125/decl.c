@@ -1,1 +1,1 @@
-OAFilterState
+typedef int OAFilterState;

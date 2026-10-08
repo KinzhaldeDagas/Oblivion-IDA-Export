@@ -6,5 +6,5 @@
 0x5FF7B9: fstp    [esp+arg_14]
 0x5FF7BD: fldz
 0x5FF7BF: fstp    [esp+arg_2C]
-0x5FF7C3: jnz     short Actor_AttackHandling___Blocking
+0x5FF7C3: jnz     short Actor_AttackHandling_ApplyBlockArmorDamageAndPostHit
 0x5FF7C5: mov     [esp+arg_1C], edi

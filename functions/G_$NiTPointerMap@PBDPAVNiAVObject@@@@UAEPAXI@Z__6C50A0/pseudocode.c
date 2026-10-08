@@ -2,8 +2,8 @@ unsigned int *__thiscall NiTPointerMap<char const *,NiAVObject *>::`scalar delet
         unsigned int *this,
         char a2)
 {
-  NiTPointerMap<char const *,NiAVObject *>::~NiTPointerMap<char const *,NiAVObject *>(this);
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  NiTPointerMap<char const *,NiAVObject *>::~NiTPointerMap<char const *,NiAVObject *>(this); /*0x6c50a3*/
+  if ( (a2 & 1) != 0 ) /*0x6c50ad*/
+    FormHeapFree((unsigned int)this); /*0x6c50b0*/
+  return this; /*0x6c50ba*/
 }

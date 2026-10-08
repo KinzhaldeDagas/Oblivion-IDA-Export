@@ -4,7 +4,7 @@
 0x546127: jz      short loc_54616C
 0x546129: cmp     byte ptr [esi+24h], 0
 0x54612D: jz      short loc_54616C
-0x54612F: call    InitBSShaderAccumulator
+0x54612F: call    BSShaderAccumulator_GetOrCreateGlobal
 0x546134: test    eax, eax
 0x546136: jz      short loc_54616C
 0x546138: mov     esi, [esi+10h]

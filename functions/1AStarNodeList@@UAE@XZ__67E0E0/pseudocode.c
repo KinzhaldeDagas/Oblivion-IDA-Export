@@ -1,6 +1,6 @@
-void __thiscall AStarNodeList::~AStarNodeList(NiTPointerList__BSImageSpaceShader *this)
+void __thiscall AStarNodeList_dtor(AStarNodeList *this)
 {
-  this->__vftable = (NiTPointerList_BSImageSpaceshaderVtbl *)&NiTPointerListBase<DFALL<AStarNode *>,AStarNode *>::`vftable';
-  NiTPointerList::FreeAllNodes(this);
-  this->__vftable = (NiTPointerList_BSImageSpaceshaderVtbl *)&NiTListBase<DFALL<AStarNode *>,AStarNode *>::`vftable';
+  this->list.vtable = &NiTPointerListBase<DFALL<AStarNode *>,AStarNode *>::`vftable'; /*0x67e108*/
+  NiTPointerList::FreeAllNodes((NiTPointerList__BSImageSpaceShader *)this); /*0x67e116*/
+  this->list.vtable = &NiTListBase<DFALL<AStarNode *>,AStarNode *>::`vftable'; /*0x67e11b*/
 }

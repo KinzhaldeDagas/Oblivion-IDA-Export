@@ -15,9 +15,9 @@
 0x54F4B0: mov     eax, ds:0B11FF0h[esi*4]
 0x54F4B7: test    eax, eax
 0x54F4B9: jz      short loc_54F4CD
-0x54F4BB: push    edi; Str2
-0x54F4BC: push    eax; Str1
-0x54F4BD: call    __strcmp
+0x54F4BB: push    edi; right
+0x54F4BC: push    eax; left
+0x54F4BD: call    CRT_StricmpLocaleDispatch
 0x54F4C2: add     esp, 8
 0x54F4C5: test    eax, eax
 0x54F4C7: jz      loc_54F558
@@ -26,13 +26,12 @@
 0x54F4D3: jl      short loc_54F4B0
 0x54F4D5: xor     esi, esi
 0x54F4D7: jmp     short loc_54F4E0
-0x54F4D9: align 10h
 0x54F4E0: mov     eax, ds:0B12028h[esi*4]
 0x54F4E7: test    eax, eax
 0x54F4E9: jz      short loc_54F4F9
-0x54F4EB: push    edi; Str2
-0x54F4EC: push    eax; Str1
-0x54F4ED: call    __strcmp
+0x54F4EB: push    edi; right
+0x54F4EC: push    eax; left
+0x54F4ED: call    CRT_StricmpLocaleDispatch
 0x54F4F2: add     esp, 8
 0x54F4F5: test    eax, eax
 0x54F4F7: jz      short loc_54F564
@@ -43,9 +42,9 @@
 0x54F503: mov     eax, ds:0B12070h[esi*4]
 0x54F50A: test    eax, eax
 0x54F50C: jz      short loc_54F51C
-0x54F50E: push    edi; Str2
-0x54F50F: push    eax; Str1
-0x54F510: call    __strcmp
+0x54F50E: push    edi; right
+0x54F50F: push    eax; left
+0x54F510: call    CRT_StricmpLocaleDispatch
 0x54F515: add     esp, 8
 0x54F518: test    eax, eax
 0x54F51A: jz      short loc_54F570
@@ -54,13 +53,12 @@
 0x54F522: jl      short loc_54F503
 0x54F524: xor     esi, esi
 0x54F526: jmp     short loc_54F530
-0x54F528: align 10h
 0x54F530: mov     eax, ds:0B12024h[esi*4]
 0x54F537: test    eax, eax
 0x54F539: jz      short loc_54F549
-0x54F53B: push    edi; Str2
-0x54F53C: push    eax; Str1
-0x54F53D: call    __strcmp
+0x54F53B: push    edi; right
+0x54F53C: push    eax; left
+0x54F53D: call    CRT_StricmpLocaleDispatch
 0x54F542: add     esp, 8
 0x54F545: test    eax, eax
 0x54F547: jz      short loc_54F57C

@@ -1,4 +1,4 @@
-char *sub_709C50()
+NiRTTI *sub_709C50()
 {
-  return dword_B3FAA8;
+  return &stru_B3FAA8; /*0x709c55*/
 }

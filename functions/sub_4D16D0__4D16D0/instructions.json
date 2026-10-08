@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4D16D0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified external .lod parser format: each record has a TESBoundObject FormID, count N, then rotationAnglesXYZ (3N floats), positions (3N floats), and scalePercent (N floats). The base-object transform applies rotation components as X, Y, Z radians and scale as abs(floor(scalePercent)/100).",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x4D16FB",
-    "line": "cmp     [esp+3Ch+arg_4], esi",
+    "line": "cmp     [esp+3Ch+outMap], esi",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x4D1709",
-    "line": "mov     ebp, [esp+3Ch+arg_0]",
+    "line": "mov     ebp, [esp+3Ch+bsFile]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x4D17BA",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,13 +649,13 @@
   },
   {
     "ea": "0x4D1807",
-    "line": "jnz     short loc_4D1816",
+    "line": "jnz     short loc_4D1816; Verified DistantLODLoadMode dispatch: TESObjectTREE forms (type 0x1E) are accepted in TreesOnly (1) or AllBoundObjects (4) mode; other modes skip them.",
     "mnemonic": "jnz",
     "size": 2
   },
   {
     "ea": "0x4D1809",
-    "line": "mov     eax, [esp+3Ch+arg_8]",
+    "line": "mov     eax, [esp+3Ch+lodMode]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x4D1810",
-    "line": "jz      short loc_4D1828",
+    "line": "jz      short loc_4D1828; Verified value 4 bypasses both type-specific exclusions and includes all TESBoundObject forms; values 1 and 2 select the TREE and non-TREE channels respectively.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -685,19 +685,19 @@
   },
   {
     "ea": "0x4D1816",
-    "line": "cmp     [esp+3Ch+arg_8], 4",
+    "line": "cmp     [esp+3Ch+lodMode], 4",
     "mnemonic": "cmp",
     "size": 5
   },
   {
     "ea": "0x4D181B",
-    "line": "jz      short loc_4D1828",
+    "line": "jz      short loc_4D1828; Verified DistantLODLoadMode dispatch: non-TREE TESBoundObject forms are accepted in NonTreeBoundObjectsOnly (2) or AllBoundObjects (4) mode.",
     "mnemonic": "jz",
     "size": 2
   },
   {
     "ea": "0x4D181D",
-    "line": "cmp     [esp+3Ch+arg_8], 2",
+    "line": "cmp     [esp+3Ch+lodMode], 2",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -775,13 +775,13 @@
   },
   {
     "ea": "0x4D1850",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D1852",
-    "line": "call    sub_4CC7C0",
+    "line": "call    DistantLODCellObjectData_ctor; Verified DistantLODCellObjectData constructor/layout: three NiTArray<float> subobjects at +0x00/+0x10/+0x20 and recordCount +0x30. The arrays are rotationAnglesXYZ, positions, and scalePercent in that order. Base-object queued transforms apply angles X/Y/Z in radians.",
     "mnemonic": "call",
     "size": 5
   },
@@ -835,7 +835,7 @@
   },
   {
     "ea": "0x4D1873",
-    "line": "call    sub_4CA040",
+    "line": "call    sub_4CA040; Verified: allocates the +0x10 positions array for 3 * recordCount floats.",
     "mnemonic": "call",
     "size": 5
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x4D1882",
-    "line": "call    sub_4CA040",
+    "line": "call    sub_4CA040; Verified: allocates the +0x00 rotationAngles array for 3 * recordCount floats; cleanup dispatch supplies the triples to the base bound-object rotation builder.",
     "mnemonic": "call",
     "size": 5
   },
@@ -889,13 +889,13 @@
   },
   {
     "ea": "0x4D188F",
-    "line": "call    sub_4CA040",
+    "line": "call    sub_4CA040; Verified: allocates the +0x20 scalePercent array for recordCount floats; the base distant-instance callback divides each floored value by 100, then the queued transform applies its absolute value as NiAVObject scale.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4D1894",
-    "line": "mov     ecx, [esp+3Ch+arg_4]; this",
+    "line": "mov     ecx, [esp+3Ch+outMap]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1486,5 +1486,77 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9B5520",
+    "line": "mov     eax, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5523",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5524",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5529",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B552A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B552B",
+    "line": "mov     edx, [esp+outMap]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B552F",
+    "line": "lea     eax, [edx-2Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5532",
+    "line": "mov     ecx, [edx-30h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5535",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B5537",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B553C",
+    "line": "mov     eax, offset stru_AE0620",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5541",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

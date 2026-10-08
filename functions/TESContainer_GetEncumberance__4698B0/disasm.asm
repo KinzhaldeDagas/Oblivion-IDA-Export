@@ -10,7 +10,6 @@
 0x4698C8: jz      short loc_469908
 0x4698CA: push    edi
 0x4698CB: jmp     short loc_4698D0
-0x4698CD: align 10h
 0x4698D0: mov     edi, [esi]
 0x4698D2: mov     eax, [edi+4]
 0x4698D5: mov     ecx, [eax+8]

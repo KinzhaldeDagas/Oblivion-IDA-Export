@@ -1,1 +1,1 @@
-CURRENCYFMTW
+typedef _currencyfmtW CURRENCYFMTW;

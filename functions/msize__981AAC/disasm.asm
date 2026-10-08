@@ -38,3 +38,10 @@
 0x981B12: mov     esi, [ebp+var_1C]
 0x981B15: mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
 0x981B1C: call    __msize___$LN12
+0x981B3E: xor     edi, edi
+0x981B40: mov     ebx, [ebp+Memory]
+0x981B43: mov     esi, [ebp+var_1C]
+0x981B46: push    4
+0x981B48: call    __unlock
+0x981B4D: pop     ecx
+0x981B4E: retn

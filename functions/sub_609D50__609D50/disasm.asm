@@ -11,8 +11,8 @@
 0x609D69: jz      short loc_609DE3
 0x609D6B: cmp     dword ptr [ecx], 1
 0x609D6E: jnz     short loc_609DE3
-0x609D70: push    eax
-0x609D71: call    sub_480340
+0x609D70: push    eax; object
+0x609D71: call    NiAVObject_FindBhkCollisionObjectRecursive; Returns the first bhk collision object found on object or recursively beneath its NiNode children. This is structural traversal, independent of node names.
 0x609D76: add     esp, 4
 0x609D79: test    eax, eax
 0x609D7B: jz      short loc_609DE3

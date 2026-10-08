@@ -216,12 +216,6 @@
     "size": 2
   },
   {
-    "ea": "0x8A4C0F",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 1
-  },
-  {
     "ea": "0x8A4C10",
     "line": "mov     edi, [esp+3Ch+var_24]",
     "mnemonic": "mov",
@@ -241,25 +235,25 @@
   },
   {
     "ea": "0x8A4C18",
-    "line": "lea     edx, [esp+3Ch+var_14]",
+    "line": "lea     edx, [esp+3Ch+outData]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x8A4C1C",
-    "line": "push    edx",
+    "line": "push    edx; outData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8A4C1D",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8A4C1F",
-    "line": "call    sub_677C70",
+    "line": "call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,7 +307,7 @@
   },
   {
     "ea": "0x8A4C3A",
-    "line": "mov     esi, [esp+3Ch+var_14]",
+    "line": "mov     esi, [esp+3Ch+outData]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -427,19 +421,19 @@
   },
   {
     "ea": "0x8A4C6F",
-    "line": "push    ecx",
+    "line": "push    ecx; outData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8A4C70",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8A4C72",
-    "line": "call    sub_677C70",
+    "line": "call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,7 +511,7 @@
   },
   {
     "ea": "0x8A4C92",
-    "line": "cmp     eax, offset stru_BA7D50",
+    "line": "cmp     eax, 0BA7D50h",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1066,5 +1060,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9D6B60",
+    "line": "lea     ecx, [ebp-10h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D6B63",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6B68",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D6B6C",
+    "line": "lea     eax, [edx-2Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D6B6F",
+    "line": "mov     ecx, [edx-30h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D6B72",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D6B74",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6B79",
+    "line": "mov     eax, offset stru_AFE8BC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6B7E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

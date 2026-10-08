@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x548C00",
+      "0x548C46"
+    ]
+  ],
+  "chunks_sha256": "dfd6373cf9a0c3c2366b57f49cca2495918f893c7f1779b2cb816f6cd29b89f1",
+  "comment_regular": "Spell magicka cost uses luck-modified magic skill. AVU replacement must preserve vanilla lower clamp and fractional precision before configurable cap/DR handling.",
+  "comment_repeatable": "Spell magicka cost uses luck-modified magic skill. AVU replacement must preserve vanilla lower clamp and fractional precision before configurable cap/DR handling.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "Calc_SkillModifiedMagickaCost",
   "end_ea": "0x548C46",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "Calc_SkillModifiedMagickaCost",
   "segment": ".text",
   "sha256": "dfd6373cf9a0c3c2366b57f49cca2495918f893c7f1779b2cb816f6cd29b89f1",
   "size": 70,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x548C00",
-  "type": "double __cdecl(float, int, int)",
+  "total_chunk_size": 70,
+  "type": "double __cdecl(float, SInt32 skillValue, SInt32 luckValue)",
   "xrefs_from_count": 20,
   "xrefs_to_count": 2
 }

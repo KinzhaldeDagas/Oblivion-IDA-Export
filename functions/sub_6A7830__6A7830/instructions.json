@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x6A789D",
-    "line": "fstp    [esp+6Ch+var_64]; float",
+    "line": "fstp    [esp+6Ch+rollY]; rollY",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -223,13 +223,13 @@
   },
   {
     "ea": "0x6A78AD",
-    "line": "fstp    [esp+6Ch+var_68]; float",
+    "line": "fstp    [esp+6Ch+pitchX]; pitchX",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6A78B1",
-    "line": "lea     ecx, [esp+6Ch+var_44]",
+    "line": "lea     ecx, [esp+6Ch+var_44]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -241,13 +241,13 @@
   },
   {
     "ea": "0x6A78B9",
-    "line": "fstp    [esp+6Ch+var_6C]; float",
+    "line": "fstp    [esp+6Ch+yawZ]; yawZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6A78BC",
-    "line": "call    sub_7117C0",
+    "line": "call    NiMatrix33_SetEulerZXY; Writes a NiMatrix33 from Euler angles in Z*(X*Y) order: yawZ, pitchX, rollY. All observed callers use the written matrix and ignore incidental EAX.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x6A78D0",
-    "line": "fld     [esp+60h+var_40]",
+    "line": "fld     [esp+60h+var_44.data+4]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x6A78E2",
-    "line": "fld     [esp+60h+var_34]",
+    "line": "fld     [esp+60h+var_44.data+10h]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x6A78EC",
-    "line": "fmul    [esp+60h+var_28]",
+    "line": "fmul    [esp+60h+var_44.data+1Ch]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x6A7984",
-    "line": "push    offset Vector3_InitValue?",
+    "line": "push    offset g_zeroNiPoint3",
     "mnemonic": "push",
     "size": 5
   },

@@ -1,19 +1,32 @@
 {
-  "callees_count": 23,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 11,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4E5B10",
+      "0x4E5CB5"
+    ]
+  ],
+  "chunks_sha256": "d67bd996f97c9a1bd37a8aae0969378edfa5239b3c6c38fb12e117190674622d",
+  "comment_regular": "Verified save path for linked-point state: writes a u16 count followed by u16 PathGrid point indices for each non-null point whose linkedPointsDisabled bit is set; optional save-block framing surrounds this payload.",
+  "comment_repeatable": "Verified save path for linked-point state: writes a u16 count followed by u16 PathGrid point indices for each non-null point whose linkedPointsDisabled bit is set; optional save-block framing surrounds this payload.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 6,
-  "display_name": "sub_4E5B10",
+  "display_name": "TESPathGrid_SaveModifiedForm",
   "end_ea": "0x4E5CB5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4E5B10",
+  "name": "TESPathGrid_SaveModifiedForm",
   "segment": ".text",
   "sha256": "d67bd996f97c9a1bd37a8aae0969378edfa5239b3c6c38fb12e117190674622d",
   "size": 421,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E5B10",
-  "type": "void __thiscall(_DWORD *this)",
+  "total_chunk_size": 421,
+  "type": "void __thiscall(TESPathGrid *this)",
   "xrefs_from_count": 149,
   "xrefs_to_count": 1
 }

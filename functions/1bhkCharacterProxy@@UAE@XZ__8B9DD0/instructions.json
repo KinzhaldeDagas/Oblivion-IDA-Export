@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x8B9E0D",
-    "line": "call    sub_8AC0C0",
+    "line": "call    bhkCollisionWrapper_GetHavokObject; bhk collision wrapper accessor: returns stored low-level Havok object pointer at wrapper+0x30.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x8B9E28",
-    "line": "call    ??1bhkCharacterPointCollector@@UAE@XZ; bhkCharacterPointCollector::~bhkCharacterPointCollector(void)",
+    "line": "call    ??1bhkCharacterPointCollector@@UAE@XZ; TES4 authoritative: bhkCharacterPointCollector destructor releases object refs and dynamic arrays, including 0x30-byte contact storage.",
     "mnemonic": "call",
     "size": 5
   },
@@ -202,5 +202,77 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9D70F0",
+    "line": "mov     ecx, [ebp-10h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D70F3",
+    "line": "jmp     ??1bhkSerializable@@UAE@XZ; bhkSerializable::~bhkSerializable(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D70F8",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D70FB",
+    "line": "add     ecx, 10h; this",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9D70FE",
+    "line": "jmp     ??1bhkCharacterPointCollector@@UAE@XZ; TES4 authoritative: bhkCharacterPointCollector destructor releases object refs and dynamic arrays, including 0x30-byte contact storage.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D7103",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D7107",
+    "line": "lea     eax, [edx-8]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D710A",
+    "line": "mov     ecx, [edx-0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D710D",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D710F",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D7114",
+    "line": "mov     eax, offset stru_AFED84",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D7119",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

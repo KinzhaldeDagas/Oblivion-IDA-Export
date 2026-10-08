@@ -1,1 +1,4 @@
-HTOUCHINPUT__
+struct HTOUCHINPUT__
+{
+int unused;
+};

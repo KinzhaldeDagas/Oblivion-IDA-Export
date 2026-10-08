@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7694F0",
-    "line": "sub     esp, 14h",
+    "line": "sub     esp, 14h; DX10OBSE verified decode: raw D3D DrawIndexedPrimitive/DrawPrimitive dispatch after shader/pass setup. Do not change draw dispatch for texture problems unless logs prove geometry/draw sequencing failure.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x769537",
-    "line": "call    sub_768890",
+    "line": "call    sub_768890; MoonSugarEffect decode: hardware/software skinning gate. Considers BuffData, skinData, hardware partition data, renderer flags, mixed vertex processing, and shader interface capability before choosing skinned path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x76954C",
-    "line": "push    offset NiD3DShaderInterfaceString",
+    "line": "push    0B42858h",
     "mnemonic": "push",
     "size": 5
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x76958A",
-    "line": "mov     ecx, [eax+8]; void *",
+    "line": "mov     ecx, [eax+8]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x7695D0",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },

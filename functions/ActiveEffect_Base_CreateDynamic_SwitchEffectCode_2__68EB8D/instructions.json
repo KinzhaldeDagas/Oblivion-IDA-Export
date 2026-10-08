@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x68EB8D",
-    "line": "sub     eax, 48534946h",
+    "line": "sub     eax, 48534946h; Verified fallback FourCC mappings FISH and LISH to ShieldEffect. Nonmatching codes in this range continue to CheckUseCreature.",
     "mnemonic": "sub",
     "size": 5
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x68EB97",
-    "line": "jnz     ActiveEffect_Base_CreateDynamic___CheckUseCreature",
+    "line": "jnz     ActiveEffect_Base_CreateDynamic___CheckUseCreature; Verified generic effect fallback: EffectSetting flag 0x40000 selects SummonCreatureEffect; otherwise dispatch continues through weapon/value-modifier handling. Other bits remain Unknown.",
     "mnemonic": "jnz",
     "size": 6
   }

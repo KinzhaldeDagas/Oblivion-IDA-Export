@@ -42,7 +42,7 @@
 0x8C4713: push    ecx
 0x8C4714: lea     edx, [esp+44h+var_2C]
 0x8C4718: push    edx
-0x8C4719: call    sub_43F3E0
+0x8C4719: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x8C471E: add     esp, 8
 0x8C4721: push    offset aNormal_0; "Normal"
 0x8C4726: lea     ecx, [esp+44h+var_2C]

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5C9CD0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Prettier Faces 1.20.0 RC1 native-call audit (2026-10-01): character-creation Randomize Face remains TESNPC_RandomizeFaceGen at 0x5C9D4E then RaceSexMenu_RefreshPlayerFace at 0x5C9D55. Plugin core/optional patch-site preflight matched 20 expected E8 targets in OblivionNew; Blockhead-owned age lookup at 0x555457 is conditionally preserved. RC1 adds no new binary hook sites. Static audit/build/zip verification passed, but no in-game RC1 validation yet. Prettier Faces DLL is absent from active OBSE plugins as requested.",
     "mnemonic": "push",
     "size": 2
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x5C9D47",
-    "line": "push    ebx",
+    "line": "push    ebx; preserveHairLength",
     "mnemonic": "push",
     "size": 1
   },
@@ -229,49 +229,49 @@
   },
   {
     "ea": "0x5C9D4A",
-    "line": "push    ebx",
+    "line": "push    ebx; preserveSexMorph",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C9D4B",
-    "line": "push    ebx",
+    "line": "push    ebx; preserveAge",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C9D4C",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5C9D4E",
-    "line": "call    sub_5273A0",
+    "line": "call    TESNPC_RandomizeFaceGen; RaceSexMenu_ExecuteRandomizeFace passes all preserve flags false to TESNPC_RandomizeFaceGen in native executable. PF 1.19.16 only ORs third preserveHairLength flag with opt-in INI setting. Age and sex-morph flags and native refresh remain unchanged. This allows face reroll with current hair length.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5C9D53",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; Pass the active RaceSexMenu as this for the immediately following player-face refresh.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5C9D55",
-    "line": "call    sub_5C91E0",
+    "line": "call    RaceSexMenu_RefreshPlayerFace; Vanilla Randomize Face refreshes the actor head after NPC hairLength mutation, then updates Age/Complexion sliders; no explicit Hair > Length slider update in this function. Compare NPC+0x1CC, menu+0x874, Hair > Length Tile user0 before/after randomize to demonstrate stale UI.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5C9D5A",
-    "line": "push    offset sub_43ACE0; a5",
+    "line": "push    offset FaceGenMatrix_Destruct; a5",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5C9D5F",
-    "line": "push    offset sub_43EB30; a4",
+    "line": "push    offset FaceGenMatrix_Construct; a4",
     "mnemonic": "push",
     "size": 5
   },
@@ -313,13 +313,13 @@
   },
   {
     "ea": "0x5C9D76",
-    "line": "push    ecx",
+    "line": "push    ecx; outAbsolute",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C9D77",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -331,13 +331,13 @@
   },
   {
     "ea": "0x5C9D80",
-    "line": "call    sub_5221C0",
+    "line": "call    TESNPC_BuildAbsoluteFaceGenParameters; Post-randomize UI synchronization begins. Only absolute FaceGen Age and UI-labeled Complexion are rebuilt below; TESNPC::hairLength is omitted.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5C9D85",
-    "line": "push    ebx; int",
+    "line": "push    ebx; matrixChannel",
     "mnemonic": "push",
     "size": 1
   },
@@ -349,19 +349,19 @@
   },
   {
     "ea": "0x5C9D8A",
-    "line": "push    ebx; unsigned __int8 *",
+    "line": "push    ebx; controlIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C9D8B",
-    "line": "push    edx",
+    "line": "push    edx; parameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C9D8C",
-    "line": "call    BSFaceGen_GetAge",
+    "line": "call    FaceGenHeadParameters_GetControlValue; Read post-randomize age from matrix channel 0 (geometry) for the visible slider; matrix channel 1 texture age is not surfaced independently.",
     "mnemonic": "call",
     "size": 5
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x5C9DBF",
-    "line": "fstp    dword ptr [esi+880h]",
+    "line": "fstp    dword ptr [esi+880h]; Synchronizes the age UI slider from rebuilt absolute FaceGen controls: normalizedAge = (age - 15) / 50, mapping [15,65] to [0,1].",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x5C9DCA",
-    "line": "push    eax; a2",
+    "line": "push    eax; categoryName",
     "mnemonic": "push",
     "size": 1
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x5C9E01",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x5C9E0A",
-    "line": "call    sub_5C3440",
+    "line": "call    RaceSexMenu_FindControlTile; Age control lookup may return null when custom Race/Sex XML omits or renames the localized control; native code does not test the result.",
     "mnemonic": "call",
     "size": 5
   },
@@ -613,13 +613,13 @@
   },
   {
     "ea": "0x5C9E22",
-    "line": "fstp    [esp+98h+a2]; a3",
+    "line": "fstp    [esp+98h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5C9E25",
-    "line": "push    0FB1h; a2",
+    "line": "push    0FB1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x5C9E2C",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; First Age Tile_SetFloat call (E8 -> 0x58CEB0). Missing Age Tile produces null and native setter dereferences. PF 1.19.12 guards all three Age calls as a group, independently of native confirmation JMP and category guard ownership.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,13 +649,13 @@
   },
   {
     "ea": "0x5C9E36",
-    "line": "fstp    [esp+98h+a2]; a3",
+    "line": "fstp    [esp+98h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5C9E39",
-    "line": "push    0FB1h; a2",
+    "line": "push    0FB1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x5C9E40",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Second unconditional Age user3 write; assumes the localized control lookup succeeded.",
     "mnemonic": "call",
     "size": 5
   },
@@ -685,13 +685,13 @@
   },
   {
     "ea": "0x5C9E48",
-    "line": "fstp    [esp+98h+a2]; a3",
+    "line": "fstp    [esp+98h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5C9E4B",
-    "line": "push    0FB1h; a2",
+    "line": "push    0FB1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -703,13 +703,13 @@
   },
   {
     "ea": "0x5C9E52",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Third unconditional Age user3 write; assumes the localized control lookup succeeded.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5C9E57",
-    "line": "push    ebx; int",
+    "line": "push    ebx; matrixChannel",
     "mnemonic": "push",
     "size": 1
   },
@@ -721,19 +721,19 @@
   },
   {
     "ea": "0x5C9E5C",
-    "line": "push    1; unsigned __int8 *",
+    "line": "push    1; controlIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5C9E5E",
-    "line": "push    eax",
+    "line": "push    eax; parameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C9E5F",
-    "line": "call    BSFaceGen_GetAge",
+    "line": "call    FaceGenHeadParameters_GetControlValue; Read post-randomize sex morph from matrix channel 0 (geometry) for the UI-labeled Complexion slider; matrix channel 1 texture sex morph is not surfaced independently.",
     "mnemonic": "call",
     "size": 5
   },
@@ -751,13 +751,13 @@
   },
   {
     "ea": "0x5C9E6B",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5C9E6D",
-    "line": "call    sub_522230",
+    "line": "call    TESNPC_GetSexMorphBase; Returns the stock sex-morph base endpoint: +2.0 for female TESNPCs and -2.0 for male TESNPCs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -829,7 +829,7 @@
   },
   {
     "ea": "0x5C9E9E",
-    "line": "fstp    dword ptr [esi+884h]",
+    "line": "fstp    dword ptr [esi+884h]; Synchronizes the sex-morph UI slider: normalized = ((absoluteControl - actorSexBase) + 2) / 4, mapping the randomized delta [-2,2] to [0,1].",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -841,7 +841,7 @@
   },
   {
     "ea": "0x5C9EA9",
-    "line": "push    eax; a2",
+    "line": "push    eax; categoryName",
     "mnemonic": "push",
     "size": 1
   },
@@ -937,7 +937,7 @@
   },
   {
     "ea": "0x5C9EE0",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -949,7 +949,7 @@
   },
   {
     "ea": "0x5C9EE9",
-    "line": "call    sub_5C3440",
+    "line": "call    RaceSexMenu_FindControlTile; Complexion control lookup may return null when custom Race/Sex XML omits or renames the localized control; native code does not test the result.",
     "mnemonic": "call",
     "size": 5
   },
@@ -985,13 +985,13 @@
   },
   {
     "ea": "0x5C9F01",
-    "line": "fstp    [esp+98h+a2]; a3",
+    "line": "fstp    [esp+98h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5C9F04",
-    "line": "push    0FB1h; a2",
+    "line": "push    0FB1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -1003,7 +1003,7 @@
   },
   {
     "ea": "0x5C9F0B",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; First Complexion Tile_SetFloat call (E8 -> 0x58CEB0). Missing Complexion Tile produces null. PF 1.19.12 guards all three Complexion calls as a group after verifying native targets; independent of other optional hook availability.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1021,13 +1021,13 @@
   },
   {
     "ea": "0x5C9F15",
-    "line": "fstp    [esp+98h+a2]; a3",
+    "line": "fstp    [esp+98h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5C9F18",
-    "line": "push    0FB1h; a2",
+    "line": "push    0FB1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -1039,7 +1039,7 @@
   },
   {
     "ea": "0x5C9F1F",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Second unconditional Complexion user3 write; assumes the localized control lookup succeeded.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1057,13 +1057,13 @@
   },
   {
     "ea": "0x5C9F27",
-    "line": "fstp    [esp+98h+a2]; a3",
+    "line": "fstp    [esp+98h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5C9F2A",
-    "line": "push    0FB1h; a2",
+    "line": "push    0FB1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -1075,13 +1075,13 @@
   },
   {
     "ea": "0x5C9F31",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Third unconditional Complexion user3 write; assumes the localized control lookup succeeded.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5C9F36",
-    "line": "push    offset sub_43ACE0; void (__thiscall *)(void *)",
+    "line": "push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)",
     "mnemonic": "push",
     "size": 5
   },
@@ -1174,5 +1174,113 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C1830",
+    "line": "push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1835",
+    "line": "push    4; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9C1837",
+    "line": "push    18h; unsigned int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9C1839",
+    "line": "lea     eax, [ebp-6Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C183C",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C183D",
+    "line": "call    $LN21",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1842",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C1843",
+    "line": "mov     ecx, [ebp-80h]; void *",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C1846",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C184B",
+    "line": "mov     ecx, [ebp-7Ch]; void *",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C184E",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1853",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C1857",
+    "line": "lea     eax, [edx-84h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C185D",
+    "line": "mov     ecx, [edx-88h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C1863",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C1865",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C186A",
+    "line": "mov     eax, offset stru_AEA874",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C186F",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

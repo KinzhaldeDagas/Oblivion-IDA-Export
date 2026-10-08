@@ -2,16 +2,16 @@ ActiveEffect *__thiscall DetectLifeEffect_Clone(int *this)
 {
   ActiveEffect *v2; // edi
 
-  v2 = (ActiveEffect *)FormHeapAlloc(0x3Cu);
-  if ( v2 )
+  v2 = (ActiveEffect *)FormHeapAlloc(0x3Cu); /*0x69316c*/
+  if ( v2 ) /*0x69317f*/
   {
-    ValueModifierEffect_constr(v2, *(this + 9), *(this + 2), *(this + 3));
-    v2->vtbl = (ActiveEffectVtbl *)&DetectLifeEffect::`vftable';
+    ValueModifierEffect_constr(v2, (MagicCaster *)*(this + 9), (MagicItem *)*(this + 2), (EffectItem *)*(this + 3)); /*0x69318f*/
+    v2->vtbl = (ActiveEffectVtbl *)&DetectLifeEffect::`vftable'; /*0x693194*/
   }
   else
   {
-    v2 = 0;
+    v2 = 0; /*0x69319c*/
   }
-  (*(void (__thiscall **)(int *, ActiveEffect *))(*this + 0x2C))(this, v2);
-  return v2;
+  (*(void (__thiscall **)(int *, ActiveEffect *))(*this + 0x2C))(this, v2); /*0x6931ae*/
+  return v2; /*0x6931b2*/
 }

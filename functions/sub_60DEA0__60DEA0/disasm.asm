@@ -1,7 +1,6 @@
 0x60DEA0: mov     ecx, ds:0B3B800h
 0x60DEA6: mov     eax, ds:0B3B804h
 0x60DEAB: jmp     short loc_60DEB0
-0x60DEAD: align 10h
 0x60DEB0: test    eax, eax
 0x60DEB2: jnz     short loc_60DEB8
 0x60DEB4: test    ecx, ecx
@@ -17,7 +16,7 @@
 0x60DED4: mov     edx, [eax]
 0x60DED6: push    eax
 0x60DED7: mov     ds:0B3B800h, edx
-0x60DEDD: call    FormHeapFree
+0x60DEDD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x60DEE2: add     esp, 4
 0x60DEE5: jmp     short sub_60DEA0
 0x60DEE7: xor     ecx, ecx

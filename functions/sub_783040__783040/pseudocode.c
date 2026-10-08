@@ -1,4 +1,14 @@
-bool __thiscall sub_783040(_DWORD **this, int a2, int a3, int a4, int a5)
+// Thin Direct3D9 render-state wrapper for IDirect3DDevice9::SetVertexShaderConstantI (device vtable slot +0x180).
+bool __thiscall NiDX9RenderState__SetVertexShaderConstantI(
+        void *this,
+        unsigned int startRegister,
+        const int *constantData,
+        unsigned int vector4Count,
+        int unused)
 {
-  return (*(int (__stdcall **)(_DWORD, int, int, int))(**(this + 0x3FE) + 0x180))(*(this + 0x3FE), a2, a3, a4) >= 0;
+  return (*(int (__stdcall **)(_DWORD, unsigned int, const int *, unsigned int))(**((_DWORD **)this + 0x3FE) + 0x180))( /*0x783069*/
+           *((_DWORD *)this + 0x3FE),
+           startRegister,
+           constantData,
+           vector4Count) >= 0;
 }

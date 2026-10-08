@@ -3,13 +3,13 @@ char __userpurge MagicCaster_CastMagicItem_::CastDisease@<al>(void *a1@<edi>, in
   int v5; // ebx
   void *v6; // eax
 
-  v5 = *a2;
-  v6 = OblivionDynamicCast(
+  v5 = *a2; /*0x699267*/
+  v6 = OblivionDynamicCast( /*0x69927a*/
          a1,
          0,
          (struct _s_RTTICompleteObjectLocator *)&MagicItem `RTTI Type Descriptor',
          &SpellItem `RTTI Type Descriptor',
          0);
-  (*(void (__thiscall **)(int *, void *))(v5 + 4))(a2, v6);
-  return 1;
+  (*(void (__thiscall **)(int *, void *))(v5 + 4))(a2, v6); /*0x699288*/
+  return 1; /*0x69928f*/
 }

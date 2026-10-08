@@ -1,18 +1,31 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x8F5300",
+      "0x8F5347"
+    ]
+  ],
+  "chunks_sha256": "53df1c71d3db69828879372255cd96a0f8f8ba92e376b8c3b8e856f4a3b9fcec",
+  "comment_regular": "[Collision v144 2026-10-07] Isolated Unicorn execution of actual instructions confirms counts0/1/8 stay inside0x90 bytes;count9 overwrites16-byte canary immediately after allocation. Loop8F5333 copies all a3 elements. No gameplay, allocator or Havok world executed.",
   "comment_repeatable": "",
-  "data_refs_count": 0,
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
   "display_name": "sub_8F5300",
   "end_ea": "0x8F5347",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_8F5300",
   "segment": ".text",
   "sha256": "53df1c71d3db69828879372255cd96a0f8f8ba92e376b8c3b8e856f4a3b9fcec",
   "size": 71,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x8F5300",
+  "total_chunk_size": 71,
   "type": "char *__thiscall(char *this, _OWORD *, int)",
   "xrefs_from_count": 25,
   "xrefs_to_count": 1

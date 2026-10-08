@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x487350",
-    "line": "mov     eax, [ecx]",
+    "line": "mov     eax, [ecx]; Walks ExtraContainerChanges_Data.objList (+0x00), finds the EntryData whose type/form is at +0x08, and adds countDelta to EntryData.countDelta (+0x04). Return-register contents are incidental; both native callers ignore them.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x487359",
-    "line": "mov     esi, [esp+4+arg_0]",
+    "line": "mov     esi, [esp+4+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x487388",
-    "line": "mov     ecx, [esp+4+arg_4]",
+    "line": "mov     ecx, [esp+4+countDelta]",
     "mnemonic": "mov",
     "size": 4
   },

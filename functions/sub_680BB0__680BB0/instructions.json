@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x680BB0",
-    "line": "push    ecx",
+    "line": "push    ecx; Verified: Inserts a search-node index into the single AStarWorldNodeList. Reads that index's fitness from the 0x10-byte transient state table and keeps the list in ascending fitness order (before first >=, otherwise tail). This differs from Fallout's TeleportDoorSearch AStarQueue: Fallout AddNode selects one of 20 buckets from normalized fitness, then sorts within that bucket.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x680BB1",
-    "line": "mov     edx, [esp+4+arg_0]",
+    "line": "mov     edx, [esp+4+node]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x680BC3",
-    "line": "lea     eax, [esp+4+arg_0]",
+    "line": "lea     eax, [esp+4+node]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x680BC8",
-    "line": "call    sub_6AA320",
+    "line": "call    NiTList_AddHead; NiTList AddHead helper. Allocates a node, stores payload at +0x08, installs it as the list head, repairs the previous head/backlink or empty-list tail, and increments count. Repeated per-light calls reverse the source iterator order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x680C30",
-    "line": "lea     eax, [esp+10h+arg_0]",
+    "line": "lea     eax, [esp+10h+node]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x680C35",
-    "line": "call    sub_5B1E20",
+    "line": "call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x680C41",
-    "line": "lea     edx, [esp+10h+arg_0]",
+    "line": "lea     edx, [esp+10h+node]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x680C49",
-    "line": "call    sub_589640",
+    "line": "call    NiTPointerList__InsertBeforePosition",
     "mnemonic": "call",
     "size": 5
   },

@@ -6,8 +6,8 @@
 0x983B05: and     eax, 1F80h
 0x983B0A: cmp     eax, 1F80h
 0x983B0F: jnz     short loc_983B20
-0x983B11: fnstcw  [esp+8+var_8]
-0x983B14: mov     ax, [esp+8+var_8]
+0x983B11: fnstcw  word ptr [esp+8+var_8]
+0x983B14: mov     ax, word ptr [esp+8+var_8]
 0x983B18: and     ax, 7Fh
 0x983B1C: cmp     ax, 7Fh
 0x983B20: lea     esp, [esp+8]

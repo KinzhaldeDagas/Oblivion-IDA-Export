@@ -1,13 +1,13 @@
-int __thiscall BSStringT_StrCmp__(char **this, char *Str2, char a3)
+int __thiscall BSStringT_StrCmp__(const char **this, char *Str2, char a3)
 {
-  char *v3; // eax
+  const char *v3; // eax
 
-  if ( !Str2 )
-    return 2 * (Str2 == 0) - 1;
-  v3 = *this;
-  if ( !*this )
-    return 2 * (Str2 == 0) - 1;
-  if ( a3 )
-    return _strcmp(v3, Str2);
-  return strcmp(v3, Str2);
+  if ( !Str2 ) /*0x412f48*/
+    return 2 * (Str2 == 0) - 1; /*0x412f48*/
+  v3 = *this; /*0x412f4a*/
+  if ( !*this ) /*0x412f4a*/
+    return 2 * (Str2 == 0) - 1; /*0x412f94*/
+  if ( a3 ) /*0x412f55*/
+    return CRT_StricmpLocaleDispatch(v3, Str2); /*0x412f59*/
+  return strcmp(v3, Str2); /*0x412f61*/
 }

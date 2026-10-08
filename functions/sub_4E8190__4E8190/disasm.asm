@@ -1,11 +1,11 @@
-0x4E8190: push    ecx
+0x4E8190: push    ecx; Verified TESPathGridPoint_ClearRenderNode handles the per-point NiNode* at +0x28: clears/releases child objects, removes the node from its parent when attached, releases the returned parent reference, and nulls the field. This is the corrected interpretation of the former unknown28 field.
 0x4E8191: push    esi
 0x4E8192: mov     esi, ecx
 0x4E8194: mov     eax, [esi+28h]
 0x4E8197: test    eax, eax
 0x4E8199: jz      short loc_4E81EF
-0x4E819B: lea     ecx, [eax+0ACh]
-0x4E81A1: call    sub_477EF0
+0x4E819B: lea     ecx, [eax+0ACh]; this
+0x4E81A1: call    NiTObjectArray_ClearAndRelease; Verified here: clear/release the NiNode child-object array at point->renderNode+0xAC. The next block detaches that renderNode from its parent if present, releases the returned reference, and nulls the point field.
 0x4E81A6: mov     eax, [esi+28h]
 0x4E81A9: mov     ecx, [eax+1Ch]
 0x4E81AC: test    ecx, ecx
@@ -16,7 +16,7 @@
 0x4E81B9: lea     eax, [esp+0Ch+var_4]
 0x4E81BD: push    eax
 0x4E81BE: call    edx
-0x4E81C0: mov     eax, dword ptr [esp+8+var_4]
+0x4E81C0: mov     eax, [esp+8+var_4]
 0x4E81C4: test    eax, eax
 0x4E81C6: jz      short loc_4E81E8
 0x4E81C8: push    edi

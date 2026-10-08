@@ -1,1 +1,8 @@
-_MIB_IPNETROW
+struct _MIB_IPNETROW
+{
+DWORD dwIndex;
+DWORD dwPhysAddrLen;
+BYTE bPhysAddr[8];
+DWORD dwAddr;
+$52C412DB72994341DC149740D0EEC21D _anon_0;
+};

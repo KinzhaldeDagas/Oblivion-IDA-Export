@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x508860",
-    "line": "sub     esp, 10h",
+    "line": "sub     esp, 10h; MoonSugarEffect decode: SetImageSpaceGlow command handler. In non-HDR path it calls sub_7B4830 to update native BlurShader globals.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x5088AF",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x508963",
-    "line": "call    sub_7B4830",
+    "line": "call    sub_7B4830; MoonSugarEffect decode: writes BlurShader globals (blend type, pass count, radius, alpha, tex size). Called by WinMain defaults, SetImageSpaceGlow, and SunDamage paths.",
     "mnemonic": "call",
     "size": 5
   },

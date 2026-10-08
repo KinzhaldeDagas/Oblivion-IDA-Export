@@ -11,7 +11,7 @@
 0x77131D: push    edx
 0x77131E: push    0
 0x771320: lea     ecx, [esi+4]
-0x771323: mov     [esp+10h+arg_0], offset nullsub_return0_0arg
+0x771323: mov     [esp+10h+arg_0], offset nullsub_return0_0arg; [Verified] Shared zero-return leaf. BSTempEffectDecal vtable 0xA6822C uses it at +0x54 for GetTypeID 0 and also in other slots; many unrelated vtables reuse this target. Class meaning must be established from the owning vtable and caller.
 0x77132B: call    NiTArray_SetAt; Actually first arg is a generic NiTArray
 0x771330: pop     edi
 0x771331: pop     esi

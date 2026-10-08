@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x796230",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+rgb]; Oblivion CIndexedGeometry::AddVertexColor. Packs four float channels to the engine's uint color format and appends one packed color.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x796235",
-    "line": "push    eax",
+    "line": "push    eax; rgb",
     "mnemonic": "push",
     "size": 1
   },
@@ -25,37 +25,37 @@
   },
   {
     "ea": "0x796238",
-    "line": "call    sub_7944C0",
+    "line": "call    OB_CIndexedGeometry_ColorFloatsToUInt_010201A0; OBLIVION AUTHORITY (2026-08-30): Converts rgb[0..2] with truncation after multiplication by 255.0 and packs the result as 0xFFBBGGRR (RGBA byte order in little-endian memory). This routine performs no local channel clamp.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x79623D",
-    "line": "lea     ecx, [esp+4+arg_0]",
+    "line": "lea     ecx, [esp+4+rgb]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x796241",
-    "line": "push    ecx; int",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x796242",
-    "line": "lea     ecx, [esi+58h]; int",
+    "line": "lea     ecx, [esi+58h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x796245",
-    "line": "mov     [esp+8+arg_0], eax",
+    "line": "mov     [esp+8+rgb], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x796249",
-    "line": "call    sub_795C30",
+    "line": "call    OB_stVectorUInt32_PushBack_010201A0; OBLIVION AUTHORITY (2026-08-30): push_back for vector<unsigned int>; appends directly when capacity remains or uses the checked insert-one path. Its observed caller is CIndexedGeometry vertex-color storage.",
     "mnemonic": "call",
     "size": 5
   },

@@ -11,15 +11,15 @@
 0x424FAA: mov     edi, [esp+0Ch+arg_0]
 0x424FAE: jz      short loc_425009
 0x424FB0: push    offset aExtradatalis_4; lpCriticalSection
-0x424FB5: mov     ecx, offset stru_B33B80
+0x424FB5: mov     ecx, offset unk_B33B80
 0x424FBA: call    NiEnterCriticalSection
 0x424FBF: movzx   eax, byte ptr [esi+0Ch]
-0x424FC3: mov     ecx, SaveLoad_CurrentSavegame
+0x424FC3: mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.
 0x424FC9: push    eax
 0x424FCA: call    sub_45A140
 0x424FCF: mov     ecx, [esi+18h]
 0x424FD2: push    ecx
-0x424FD3: mov     ecx, SaveLoad_CurrentSavegame
+0x424FD3: mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.
 0x424FD9: push    edi
 0x424FDA: call    sub_459370
 0x424FDF: mov     edx, [esi+18h]
@@ -27,10 +27,10 @@
 0x424FE3: mov     ecx, offset FormHeap
 0x424FE8: call    MemoryHeap_Free_checked
 0x424FED: mov     dword ptr [esi+18h], 0
-0x424FF4: mov     eax, SaveLoad_CurrentSavegame
+0x424FF4: mov     eax, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.
 0x424FF9: mov     cl, [eax+71h]
 0x424FFC: mov     [eax+7Ch], cl
-0x424FFF: mov     ecx, offset stru_B33B80; lpCriticalSection
+0x424FFF: mov     ecx, offset unk_B33B80; lpCriticalSection
 0x425004: call    NiLeaveCriticalSection_0
 0x425009: cmp     dword ptr [esi+10h], 0
 0x42500D: jnz     short loc_42502C

@@ -13,7 +13,7 @@
 0x6E3119: test    eax, eax
 0x6E311B: jz      short loc_6E312E
 0x6E311D: lea     ecx, [ecx+0]
-0x6E3120: cmp     eax, offset dword_B3CFBC
+0x6E3120: cmp     eax, offset stru_B3CFBC
 0x6E3125: jz      short loc_6E314C
 0x6E3127: mov     eax, [eax+4]
 0x6E312A: test    eax, eax

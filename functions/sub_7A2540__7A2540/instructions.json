@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A2540",
-    "line": "push    esi",
+    "line": "push    esi; Oblivion stock 16013 flare-seed parser: reads one dword from file and stores it at CTreeEngine+0x54.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x7A2543",
-    "line": "mov     ecx, [esp+4+arg_0]",
+    "line": "mov     ecx, [esp+4+file]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A2547",
-    "line": "call    sub_78EB40",
+    "line": "call    OB_CTreeFileAccess_ReadDword_010201A0; SpeedTreeOBSE 2026-05-25 stock scalar-tail pass: top-level 16013/File_FlareSeed delegates here, reads one dword, and stores it at CTreeEngine+0x54.",
     "mnemonic": "call",
     "size": 5
   },

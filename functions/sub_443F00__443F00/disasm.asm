@@ -59,7 +59,7 @@
 0x443FAA: cmp     eax, esi
 0x443FAC: mov     [esp+2Ch+var_4], 1
 0x443FB4: jz      short loc_443FD3
-0x443FB6: push    offset sub_7016A0; a5
+0x443FB6: push    offset NiPointerSlot_Release; a5
 0x443FBB: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x443FC0: push    5; size
 0x443FC2: lea     esi, [eax+4]
@@ -71,11 +71,10 @@
 0x443FD7: mov     [edi+4], esi
 0x443FDA: xor     ebp, ebp
 0x443FDC: jmp     short loc_443FE8
-0x443FDE: align 10h
 0x443FE0: mov     ebx, [esp+2Ch+a2]
 0x443FE4: mov     edi, [esp+2Ch+var_18]
-0x443FE8: mov     ecx, ebx
-0x443FEA: call    sub_700900
+0x443FE8: mov     ecx, ebx; this
+0x443FEA: call    NiObject_CloneWithPointerMap; Clones a loaded NiObject with a temporary pointer map and runs clone post-processing; the returned scene object is distinct from its source.
 0x443FEF: mov     esi, [edi+4]
 0x443FF2: mov     edi, [esi+ebp]
 0x443FF5: add     esi, ebp
@@ -118,3 +117,20 @@
 0x444052: pop     ebx
 0x444053: add     esp, 18h
 0x444056: retn    4
+0x9AD1E0: mov     eax, [ebp-18h]
+0x9AD1E3: push    eax
+0x9AD1E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AD1E9: pop     ecx
+0x9AD1EA: retn
+0x9AD1EB: mov     eax, [ebp-10h]
+0x9AD1EE: push    eax
+0x9AD1EF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AD1F4: pop     ecx
+0x9AD1F5: retn
+0x9AD1F6: mov     edx, [esp+arg_4]
+0x9AD1FA: lea     eax, [edx-1Ch]
+0x9AD1FD: mov     ecx, [edx-20h]
+0x9AD200: xor     ecx, eax
+0x9AD202: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AD207: mov     eax, offset stru_AD9DC8
+0x9AD20C: jmp     ___CxxFrameHandler3

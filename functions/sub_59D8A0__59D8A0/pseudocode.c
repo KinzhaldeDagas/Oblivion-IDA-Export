@@ -1,14 +1,14 @@
-bool __thiscall sub_59D8A0(_DWORD *this)
+bool __thiscall DialogMenu::ValidateRequiredTiles(OblivionDialogMenuTileBindingsView *this)
 {
-  return *(this + 0xA)
-      && *(this + 0xB)
-      && *(this + 0xD)
-      && *(this + 0xC)
-      && *(this + 0xE)
-      && *(this + 0xF)
-      && *(this + 0x10)
-      && *(this + 0x11)
-      && *(this + 0x12)
-      && *(this + 0x14)
-      && *(this + 0x13);
+  return this->topicPane_id1 /*0x59d8e4*/
+      && this->responseText_id2
+      && this->responseContinue_id4
+      && this->goodbye_id3
+      && this->tile_id5
+      && this->tile_id6
+      && this->persuade_id7
+      && this->tile_id14
+      && this->tile_id15
+      && this->training_id9
+      && this->barter_id8;
 }

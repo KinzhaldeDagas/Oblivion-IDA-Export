@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x574576",
-    "line": "push    eax",
+    "line": "push    eax; byteCount",
     "mnemonic": "push",
     "size": 1
   },
@@ -277,19 +277,19 @@
   },
   {
     "ea": "0x57457A",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x57457B",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x57457D",
-    "line": "call    ReadFile??",
+    "line": "call    Archive_ReadBytes",
     "mnemonic": "call",
     "size": 5
   },
@@ -1765,7 +1765,7 @@
   },
   {
     "ea": "0x57489B",
-    "line": "jle     short loc_5748B6",
+    "line": "jle     short loc_5748B6; Oblivion font format limit: at most 8 .tex atlas textures per .fnt; this is a texture-count limit, not an atlas width/height limit.",
     "mnemonic": "jle",
     "size": 2
   },
@@ -2029,7 +2029,7 @@
   },
   {
     "ea": "0x57492D",
-    "line": "call    ecx",
+    "line": "call    ecx; Reads atlas width and height from the .tex header dynamically.",
     "mnemonic": "call",
     "size": 2
   },
@@ -2131,7 +2131,7 @@
   },
   {
     "ea": "0x574962",
-    "line": "mov     ebp, eax",
+    "line": "mov     ebp, eax; Creates one-level 32-bit NiPixelData at the dimensions read from the .tex file.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -2233,7 +2233,7 @@
   },
   {
     "ea": "0x574999",
-    "line": "call    eax",
+    "line": "call    eax; Reads width*height*4 raw atlas bytes; no fixed atlas dimension observed.",
     "mnemonic": "call",
     "size": 2
   },
@@ -2293,7 +2293,7 @@
   },
   {
     "ea": "0x5749BB",
-    "line": "call    sub_704800",
+    "line": "call    NiTexturingProperty_CreateFromSourceTexture",
     "mnemonic": "call",
     "size": 5
   },
@@ -2335,7 +2335,7 @@
   },
   {
     "ea": "0x5749D5",
-    "line": "call    sub_405900",
+    "line": "call    NiTexturingProperty_SetBaseMapFilterMode; Sets base-map filter mode to 1 (NiTexturingProperty::Map::Bilerp). Font atlases have a single mip level.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2680,5 +2680,131 @@
     "line": "jmp     short loc_574A15",
     "mnemonic": "jmp",
     "size": 2
+  },
+  {
+    "ea": "0x9BE230",
+    "line": "mov     eax, [ebp-41Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9BE236",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BE237",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BE23C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BE23D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BE23E",
+    "line": "mov     eax, [ebp-420h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9BE244",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BE245",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BE24A",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BE24B",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BE24C",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BE250",
+    "line": "lea     eax, [edx-42Ch]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BE256",
+    "line": "mov     ecx, [edx-430h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9BE25C",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BE25E",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BE263",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BE266",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BE269",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BE26B",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BE270",
+    "line": "mov     eax, offset stru_AE7A00",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BE275",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

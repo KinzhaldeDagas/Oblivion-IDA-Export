@@ -1,1 +1,1 @@
-0x7F2060: jmp     sub_7F23A0
+0x7F2060: jmp     OB_BSShaderPPLightingProperty_Vtbl30Thunk_010201A0; SpeedTreeBranchShaderProperty vtable +0x30: branch-local thunk into the inherited PPLighting/Base shader-property diagnostic/map method at 0x7D9890.

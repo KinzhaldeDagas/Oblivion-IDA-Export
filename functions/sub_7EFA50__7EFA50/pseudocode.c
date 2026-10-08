@@ -1,4 +1,4 @@
-char *sub_7EFA50()
+float *sub_7EFA50()
 {
-  return dword_B46720;
+  return &flt_B46638[0x3A]; /*0x7efa55*/
 }

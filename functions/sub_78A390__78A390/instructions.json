@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x78A390",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; Oblivion frond export mirrors the 0x3C branch output layout and independently publishes diffuse UVs, projected-shadow UVs, and one wind weight/index stream.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x78A463",
-    "line": "mov     [ebx+54h], edi",
+    "line": "mov     [ebx+54h], edi; Frond GetGeometry export writes SGeometry output +0x54 pointer slot; not the CSpeedTreeRT+0x54 360 image-count gate.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1171,19 +1171,19 @@
   },
   {
     "ea": "0x78A5E0",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x78A5E2",
-    "line": "fstp    [esp+1Ch+var_1C]; float",
+    "line": "fstp    [esp+1Ch+lod]; lod",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x78A5E5",
-    "line": "call    sub_787C70",
+    "line": "call    CSpeedTreeRT__GetDiscreteFrondLodLevel; Maps normalized/current tree LOD to the Oblivion frond selector count stored on CSpeedTreeRT.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1207,19 +1207,19 @@
   },
   {
     "ea": "0x78A5F3",
-    "line": "mov     ecx, [esi+60h]",
+    "line": "mov     ecx, [esi+60h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x78A5F6",
-    "line": "push    edi",
+    "line": "push    edi; lodLevel",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78A5F7",
-    "line": "call    sub_7886C0",
+    "line": "call    OB_CIndexedGeometry_GetNumStrips_010201A0; Oblivion CIndexedGeometry::GetNumStrips: rejects negative LODs, checked-indexes perLodStrips, and returns the selected inner ushort-vector size. RT4.1 exposes the same accessor contract.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1231,19 +1231,19 @@
   },
   {
     "ea": "0x78A600",
-    "line": "mov     ecx, [esi+60h]",
+    "line": "mov     ecx, [esi+60h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x78A603",
-    "line": "push    edi",
+    "line": "push    edi; lodLevel",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78A604",
-    "line": "call    sub_788720",
+    "line": "call    OB_CIndexedGeometry_GetStripLengths_010201A0; Oblivion CIndexedGeometry::GetStripLengths: validates LOD range and inner vector state, then returns the selected ushort strip-length buffer or null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1255,19 +1255,19 @@
   },
   {
     "ea": "0x78A60C",
-    "line": "mov     ecx, [esi+60h]",
+    "line": "mov     ecx, [esi+60h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x78A60F",
-    "line": "push    edi",
+    "line": "push    edi; lodLevel",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78A610",
-    "line": "call    sub_7945B0",
+    "line": "call    OB_CIndexedGeometry_GetStripsPointer_010201A0; Oblivion CIndexedGeometry::GetStripsPointer. Returns the selected LOD's inner array of ushort strip pointers, or null when no strips are present.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1309,7 +1309,7 @@
   },
   {
     "ea": "0x78A634",
-    "line": "fstp    [esp+18h+var_C]",
+    "line": "fstp    [esp+18h+highAlpha]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1393,7 +1393,7 @@
   },
   {
     "ea": "0x78A666",
-    "line": "push    eax; int",
+    "line": "push    eax; lowLod",
     "mnemonic": "push",
     "size": 1
   },
@@ -1411,13 +1411,13 @@
   },
   {
     "ea": "0x78A66F",
-    "line": "push    ecx; int",
+    "line": "push    ecx; highLod",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78A670",
-    "line": "lea     edx, [esp+20h+var_4]",
+    "line": "lea     edx, [esp+20h+lowAlpha]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1429,7 +1429,7 @@
   },
   {
     "ea": "0x78A678",
-    "line": "push    edx; int",
+    "line": "push    edx; lowAlpha",
     "mnemonic": "push",
     "size": 1
   },
@@ -1441,13 +1441,13 @@
   },
   {
     "ea": "0x78A67D",
-    "line": "lea     eax, [esp+24h+var_C]",
+    "line": "lea     eax, [esp+24h+highAlpha]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x78A681",
-    "line": "push    eax; int",
+    "line": "push    eax; highAlpha",
     "mnemonic": "push",
     "size": 1
   },
@@ -1459,7 +1459,7 @@
   },
   {
     "ea": "0x78A685",
-    "line": "fstp    [esp+38h+var_2C]; float",
+    "line": "fstp    [esp+38h+targetAlpha]; targetAlpha",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1471,7 +1471,7 @@
   },
   {
     "ea": "0x78A68C",
-    "line": "fstp    [esp+38h+var_30]; float",
+    "line": "fstp    [esp+38h+curveExponent]; curveExponent",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1483,7 +1483,7 @@
   },
   {
     "ea": "0x78A693",
-    "line": "fstp    [esp+38h+var_34]; float",
+    "line": "fstp    [esp+38h+transitionFactor]; transitionFactor",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1495,13 +1495,13 @@
   },
   {
     "ea": "0x78A69A",
-    "line": "fstp    [esp+38h+var_38]; float",
+    "line": "fstp    [esp+38h+overlapRadius]; overlapRadius",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x78A69D",
-    "line": "push    edi; int",
+    "line": "push    edi; lodCount",
     "mnemonic": "push",
     "size": 1
   },
@@ -1519,13 +1519,13 @@
   },
   {
     "ea": "0x78A6A3",
-    "line": "fstp    [esp+40h+var_40]; float",
+    "line": "fstp    [esp+40h+lodLevel]; lodLevel",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x78A6A6",
-    "line": "call    sub_787220",
+    "line": "call    CSpeedTreeRT__GetTransitionValues; 2026-05-26 SpeedTreeOBSE: shared stock LOD fade/index resolver. Plugin calls it unmodified for candidate 75002 transition-radius and 75005 transition-factor comparisons; optional writes are limited to caller-side SGeometry+0x38 under explicit INI gates. Not patched.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1567,7 +1567,7 @@
   },
   {
     "ea": "0x78A6BD",
-    "line": "fld     [esp+18h+var_C]",
+    "line": "fld     [esp+18h+highAlpha]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1783,7 +1783,7 @@
   },
   {
     "ea": "0x78A719",
-    "line": "mov     [esp+MaxCount], 44h ; 'D'; MaxCount",
+    "line": "mov     [esp+MaxCount], 44h ; 'D'; count",
     "mnemonic": "mov",
     "size": 8
   },
@@ -1795,13 +1795,13 @@
   },
   {
     "ea": "0x78A729",
-    "line": "mov     ecx, offset dword_B2B614",
+    "line": "mov     ecx, offset OB_g_strError_010201A0; this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x78A72E",
-    "line": "jmp     sub_414500",
+    "line": "jmp     OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
     "mnemonic": "jmp",
     "size": 5
   }

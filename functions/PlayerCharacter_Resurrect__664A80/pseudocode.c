@@ -1,89 +1,88 @@
 void __thiscall PlayerCharacter::Resurrect(PlayerCharacter *This, int a8, int a9, int a10)
 {
-  char v4; // bp
-  double v5; // st5
-  double v6; // st6
-  double v8; // st7
+  double v4; // st5
+  double v5; // st6
+  double v7; // st7
   LowProcess *process; // ecx
+  LowProcess *v9; // eax
   LowProcess *v10; // eax
-  LowProcess *v11; // eax
-  HighProcess *v12; // eax
-  HighProcess *v13; // edi
+  HighProcess *v11; // eax
+  HighProcess *v12; // edi
   void (__thiscall *Copy)(BaseProcess *__hidden, BaseProcess *); // edx
   int ProcessLevel; // eax
-  LowProcess *v16; // ecx
-  int v17; // eax
+  LowProcess *v15; // ecx
+  int v16; // eax
   bhkCharacterProxy *CharProxy; // eax
-  int v19; // edi
-  int v20; // eax
-  UInt32 v21; // eax
-  LowProcess *v22; // [esp+20h] [ebp-20h]
-  HighProcess *v23; // [esp+30h] [ebp-10h] BYREF
-  int v24; // [esp+3Ch] [ebp-4h]
+  int v18; // edi
+  int v19; // eax
+  UInt32 v20; // eax
+  LowProcess *v21; // [esp+20h] [ebp-20h]
+  HighProcess *v22; // [esp+30h] [ebp-10h] BYREF
+  int v23; // [esp+3Ch] [ebp-4h]
 
-  v8 = 0.0;
-  This->stamina = 0.0;
-  This->health = 0.0;
-  This->magicka = 0.0;
-  sub_57A6F0(0xA);
-  sub_57A6F0(8);
-  sub_57A6F0(9);
-  process = This->super.super.super.process;
-  if ( process )
-    ((void (__thiscall *)(LowProcess *, int))process->Destructor)(process, 1);
-  v10 = (LowProcess *)FormHeapAlloc(0x90u);
-  v23 = (HighProcess *)v10;
-  v24 = 0;
-  if ( v10 )
-    v11 = LowProcess::LowProcess(v10);
+  v7 = 0.0; /*0x664aa5*/
+  This->stamina = 0.0; /*0x664aa9*/
+  This->health = 0.0; /*0x664aaf*/
+  This->magicka = 0.0; /*0x664ab5*/
+  UI_UpdateActorValueDisplays(0xAu); /*0x664abb*/
+  UI_UpdateActorValueDisplays(8u); /*0x664ac2*/
+  UI_UpdateActorValueDisplays(9u); /*0x664ac9*/
+  process = This->super.super.super.process; /*0x664ace*/
+  if ( process ) /*0x664ad6*/
+    ((void (__thiscall *)(LowProcess *, int))process->Destructor)(process, 1); /*0x664ade*/
+  v9 = (LowProcess *)FormHeapAlloc(0x90u); /*0x664ae5*/
+  v22 = (HighProcess *)v9; /*0x664aed*/
+  v23 = 0; /*0x664af3*/
+  if ( v9 ) /*0x664afb*/
+    v10 = LowProcess::LowProcess(v9); /*0x664aff*/
   else
-    v11 = 0;
-  This->super.super.super.process = v11;
-  v12 = (HighProcess *)FormHeapAlloc(0x2ECu);
-  v23 = v12;
-  v24 = 1;
-  if ( v12 )
-    v13 = HighProcess::HighProcess(v12);
+    v10 = 0; /*0x664b06*/
+  This->super.super.super.process = v10; /*0x664b15*/
+  v11 = (HighProcess *)FormHeapAlloc(0x2ECu); /*0x664b18*/
+  v22 = v11; /*0x664b20*/
+  v23 = 1; /*0x664b26*/
+  if ( v11 ) /*0x664b2e*/
+    v12 = HighProcess::HighProcess(v11); /*0x664b37*/
   else
-    v13 = 0;
-  Copy = v13->Copy;
-  v22 = This->super.super.super.process;
-  v24 = 0xFFFFFFFF;
-  Copy(v13, v22);
-  ProcessLevel = Actor::GetProcessLevel((Actor *)This);
-  sub_674550(v4, v5, v6, 0.0, (int)This, ProcessLevel);
-  v16 = This->super.super.super.process;
-  if ( v16 )
-    ((void (__thiscall *)(LowProcess *, int))v16->Destructor)(v16, 1);
-  This->super.super.super.process = v13;
-  v17 = Actor::GetProcessLevel((Actor *)This);
-  sub_674550(v4, v5, v6, 0.0, (int)This, v17);
-  This->vtbl->super.super.super.Unk_52((TESObjectREFR *)This);
-  CharProxy = MobileObject_GetCharProxy((MobileObject *)This);
-  if ( CharProxy )
+    v12 = 0; /*0x664b3b*/
+  Copy = v12->Copy; /*0x664b42*/
+  v21 = This->super.super.super.process; /*0x664b45*/
+  v23 = 0xFFFFFFFF; /*0x664b48*/
+  Copy(v12, v21); /*0x664b50*/
+  ProcessLevel = Actor::GetProcessLevel((Actor *)This); /*0x664b54*/
+  sub_674550((int)This, ProcessLevel); /*0x664b60*/
+  v15 = This->super.super.super.process; /*0x664b65*/
+  if ( v15 ) /*0x664b6a*/
+    ((void (__thiscall *)(LowProcess *, int))v15->Destructor)(v15, 1); /*0x664b72*/
+  This->super.super.super.process = v12; /*0x664b76*/
+  v16 = Actor::GetProcessLevel((Actor *)This); /*0x664b79*/
+  sub_674550((int)This, v16); /*0x664b85*/
+  This->vtbl->super.super.super.Unk_52((TESObjectREFR *)This); /*0x664b94*/
+  CharProxy = MobileObject_GetCharProxy((MobileObject *)This); /*0x664b98*/
+  if ( CharProxy ) /*0x664b9f*/
   {
-    sub_57E270(CharProxy, &v23);
-    v19 = (unsigned int)v23 >> 0x10;
-    v20 = FormHeapAlloc(8u);
-    v23 = (HighProcess *)v20;
-    v24 = 2;
-    if ( v20 )
+    bhkCharacterProxy_GetCollisionFilterInfo(CharProxy, &v22); /*0x664ba8*/
+    v18 = (unsigned int)v22 >> 0x10; /*0x664bb3*/
+    v19 = FormHeapAlloc(8u); /*0x664bb6*/
+    v22 = (HighProcess *)v19; /*0x664bbe*/
+    v23 = 2; /*0x664bc4*/
+    if ( v19 ) /*0x664bcc*/
     {
-      v8 = flt_A58E1C;
-      v21 = sub_532BC0(v20, flt_A58E1C, v19);
-      v24 = 0xFFFFFFFF;
-      This->unk1F0 = v21;
+      v7 = flt_A58E1C; /*0x664bce*/
+      v20 = PlayerCameraCollisionPhantomPair_Init(v19, flt_A58E1C, v18); /*0x664bdb*/
+      v23 = 0xFFFFFFFF; /*0x664be0*/
+      This->unk1F0 = v20; /*0x664be8*/
     }
     else
     {
-      v24 = 0xFFFFFFFF;
-      This->unk1F0 = 0;
+      v23 = 0xFFFFFFFF; /*0x664bf2*/
+      This->unk1F0 = 0; /*0x664bfa*/
     }
   }
   else
   {
-    This->unk1F0 = 0;
+    This->unk1F0 = 0; /*0x664c02*/
   }
-  Actor_Resurrect((Actor *)This, 0, 0, 0);
-  sub_4E3490((TESObjectREFR *)This, v5, v6, v8);
+  Actor_Resurrect((Actor *)This, 0, 0, 0); /*0x664c14*/
+  Actor_SetupAnimationData((TESObjectREFR *)This, v4, v5, v7); /*0x664c1b*/
 }

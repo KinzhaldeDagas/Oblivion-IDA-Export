@@ -1,25 +1,21 @@
-char __thiscall sub_6A0430(_DWORD *this, int a2, int a3)
+// Verified (Oblivion): virtual receives owner ActiveEffect* and target TESObjectREFR*. Writes the base hit-effect payload, elapsedVisualSeconds_38 as a float, and for version >=0x37 the weapon-attachment byte, effectCode_2C, and boundObject_30 FormID.
+void __thiscall MagicShaderHitEffect_SaveExtraData(
+        MagicShaderHitEffect *this,
+        ActiveEffect *ownerActiveEffect,
+        TESObjectREFR *targetReference)
 {
-  char result; // al
-  int v5; // esi
-  size_t v6; // [esp-4h] [ebp-8h]
-  size_t v7; // [esp-4h] [ebp-8h]
-  size_t v8; // [esp-4h] [ebp-8h]
+  TESBoundObject *boundObject_30; // esi
 
-  sub_69DBB0((int)this, a2, a3);
-  LODWORD(v6) = 4;
-  result = (unsigned __int8)SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, this + 0xE, v6);
-  if ( LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) >= 0x37u )
+  MagicHitEffect_SaveExtraData(&this->super, ownerActiveEffect, targetReference); /*0x6a043f*/
+  SaveLoad_SaveData(g_TESSaveLoadGame, &this->elapsedVisualSeconds_38, 4u); /*0x6a0450*/
+  if ( g_TESSaveLoadGame->currentVersion >= 0x37u ) /*0x6a045f*/
   {
-    LODWORD(v7) = 1;
-    SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, this + 0xA, v7);
-    LODWORD(v8) = 4;
-    SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, this + 0xB, v8);
-    v5 = *(this + 0xC);
-    a3 = 0;
-    if ( v5 )
-      a3 = *(_DWORD *)(v5 + 0xC);
-    return SaveLoad_SaveFormID(SaveLoad_CurrentSavegame, (int)&a3, 4u);
+    SaveLoad_SaveData(g_TESSaveLoadGame, &this->bWeaponEnchantment_28, 1u); /*0x6a0467*/
+    SaveLoad_SaveData(g_TESSaveLoadGame, &this->effectCode_2C, 4u); /*0x6a0478*/
+    boundObject_30 = this->boundObject_30; /*0x6a047d*/
+    targetReference = 0; /*0x6a0482*/
+    if ( boundObject_30 ) /*0x6a048a*/
+      targetReference = (TESObjectREFR *)boundObject_30->member.super.refID; /*0x6a048f*/
+    SaveLoad_SaveFormID(g_TESSaveLoadGame, (const unsigned int *)&targetReference, 4u); /*0x6a04a0*/
   }
-  return result;
 }

@@ -24,7 +24,7 @@
 0x774501: push    eax
 0x774502: push    esi
 0x774503: push    ecx
-0x774504: call    sub_760860
+0x774504: call    OB_NiDX9SourceTextureData_CopyMipToSurface_010201A0; DX10OBSE resource decode: copies one source mip/slice into a locked D3D9 texture surface, preserving pitch and DXT block row layout.
 0x774509: mov     eax, [esp+20h+arg_4]
 0x77450D: mov     edx, [eax]
 0x77450F: add     esp, 10h
@@ -39,12 +39,12 @@
 0x774522: pop     ebp
 0x774523: pop     ebx
 0x774524: retn    8
-0x774527: push    eax
-0x774528: call    sub_7736F0
+0x774527: push    eax; hresult
+0x774528: call    D3D9_HResultToString; Maps common COM/D3D9 HRESULT values to diagnostic names, including DEVICELOST, DEVICENOTRESET, INVALIDCALL, OUTOFVIDEOMEMORY, and format/state failures.
 0x77452D: push    eax
 0x77452E: push    esi
 0x77452F: push    offset aNidx9sourcec_1; "NiDX9SourceCubeMapData::CopyDataToSurfa"...
-0x774534: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x774534: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x774539: add     esp, 10h
 0x77453C: pop     edi
 0x77453D: pop     esi

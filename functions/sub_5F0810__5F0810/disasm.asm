@@ -17,7 +17,7 @@
 0x5F083C: mov     edx, [eax+380h]
 0x5F0842: xor     edi, edi
 0x5F0844: mov     [esp+48h+var_31], 0
-0x5F0849: mov     [esp+48h+a4], edi
+0x5F0849: mov     dword ptr [esp+48h+a4], edi
 0x5F084D: call    edx
 0x5F084F: mov     esi, eax
 0x5F0851: cmp     esi, edi
@@ -26,15 +26,15 @@
 0x5F0859: cmp     ebp, ds:0B333C4h
 0x5F085F: mov     [esp+48h+var_31], 1
 0x5F0864: jnz     loc_5F0941
-0x5F086A: mov     ecx, esi; this
-0x5F086C: call    TESObjectREFR_GetOwner
+0x5F086A: mov     ecx, esi; reference
+0x5F086C: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x5F0871: test    eax, eax
 0x5F0873: jz      short loc_5F0888
 0x5F0875: mov     eax, ds:0B333C4h
-0x5F087A: push    1
-0x5F087C: push    eax
-0x5F087D: mov     ecx, esi
-0x5F087F: call    TESOBjectREFR_IsOwnedBy
+0x5F087A: push    1; useFactionOwnership
+0x5F087C: push    eax; actorReference
+0x5F087D: mov     ecx, esi; reference
+0x5F087F: call    TESObjectREFR_IsOwnedBy; Verified ownership predicate and flag meaning: resolve the effective owner; accept exact equality with the actor's template/base form. When the owner differs, a nonzero ownership-global value can permit the access. With useFactionOwnership=true, a Faction owner is instead checked against the actor base's faction rank and the reference's effective required rank; callers passing false skip that faction-rank path. Direct callers include many `true` paths and ContainerExtraData_RemoveForm's item-sweep call with false. Fallout's TESObjectREFR::IsAnOwner/DoorLock::IsAnOwner also expose a `useFaction` boolean, but its implementation uses actor faction membership and has different rank/global handling.
 0x5F0884: test    al, al
 0x5F0886: jz      short loc_5F08A3
 0x5F0888: mov     edx, [ebp+0]
@@ -52,15 +52,15 @@
 0x5F08BB: mov     eax, ds:0B333C4h
 0x5F08C0: cmp     [eax+1E0h], edi
 0x5F08C6: jz      short loc_5F08FA
-0x5F08C8: mov     ecx, [eax+1E0h]; this
-0x5F08CE: call    TESObjectREFR_GetOwner
+0x5F08C8: mov     ecx, [eax+1E0h]; reference
+0x5F08CE: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x5F08D3: test    eax, eax
 0x5F08D5: jz      short loc_5F08FA
 0x5F08D7: mov     eax, ds:0B333C4h
-0x5F08DC: mov     ecx, [eax+1E0h]
-0x5F08E2: push    1
-0x5F08E4: push    eax
-0x5F08E5: call    TESOBjectREFR_IsOwnedBy
+0x5F08DC: mov     ecx, [eax+1E0h]; reference
+0x5F08E2: push    1; useFactionOwnership
+0x5F08E4: push    eax; actorReference
+0x5F08E5: call    TESObjectREFR_IsOwnedBy; Verified ownership predicate and flag meaning: resolve the effective owner; accept exact equality with the actor's template/base form. When the owner differs, a nonzero ownership-global value can permit the access. With useFactionOwnership=true, a Faction owner is instead checked against the actor base's faction rank and the reference's effective required rank; callers passing false skip that faction-rank path. Direct callers include many `true` paths and ContainerExtraData_RemoveForm's item-sweep call with false. Fallout's TESObjectREFR::IsAnOwner/DoorLock::IsAnOwner also expose a `useFaction` boolean, but its implementation uses actor faction membership and has different rank/global handling.
 0x5F08EA: test    al, al
 0x5F08EC: jnz     short loc_5F08FA
 0x5F08EE: mov     edx, ds:0B333C4h
@@ -90,40 +90,40 @@
 0x5F0945: mov     ecx, esi; this
 0x5F0947: call    TESObjectREFR_GetWorldSpace
 0x5F094C: mov     [esp+4Ch+var_30], eax
-0x5F0950: lea     ecx, [esp+4Ch+var_24]
-0x5F0954: mov     [esp+4Ch+a4], edi
-0x5F0958: mov     [esp+4Ch+var_28], edi
-0x5F095C: call    sub_68A9F0
+0x5F0950: lea     ecx, [esp+4Ch+var_24]; this
+0x5F0954: mov     dword ptr [esp+4Ch+a4], edi
+0x5F0958: mov     dword ptr [esp+4Ch+a4+4], edi
+0x5F095C: call    PathLow_ctor; Verified PathLow constructor: installs the PathLow vtable at +0, initializes the BSSimpleList at +4/+8 to empty, copies unk_B3A458 to +0x0C, and sets byte +0x10 to 1. +0x0C and byte +0x10 semantics remain Unknown.
 0x5F0961: mov     esi, [esp+4Ch]
 0x5F0965: mov     ecx, esi; this
 0x5F0967: mov     [esp+4Ch+var_8], edi
 0x5F096B: call    TESObjectREFR_GetWorldSpace
-0x5F0970: push    eax
+0x5F0970: push    eax; destinationWorldspace
 0x5F0971: mov     ecx, esi; this
-0x5F0973: call    TESObjectREFR_GetParentCell
-0x5F0978: push    eax; a3
+0x5F0973: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x5F0978: push    eax; destinationCell
 0x5F0979: mov     eax, [esi]
 0x5F097B: mov     edx, [eax+174h]
 0x5F0981: mov     ecx, esi
 0x5F0983: call    edx
-0x5F0985: push    eax; a2
+0x5F0985: push    eax; destinationPosition
 0x5F0986: mov     eax, ds:0B333C4h
-0x5F098B: push    eax
-0x5F098C: lea     ecx, [esp+5Ch+var_24]
-0x5F0990: call    sub_68B030
+0x5F098B: push    eax; sourceRef
+0x5F098C: lea     ecx, [esp+5Ch+var_24]; this
+0x5F0990: call    TravelPath_BuildToDestination; Verified top-level TravelPath build sequence: select the destination's smallest containing interior/exterior SubSpace (fallback to supplied cell/worldspace), call TravelPath_BuildRoute with the source reference and positions, then, on success, augment the route with TESRoad surface samples.
 0x5F0995: lea     ecx, [esp+4Ch+a4]
 0x5F0999: push    ecx; a4
 0x5F099A: lea     ecx, [esp+50h+var_24]
-0x5F099E: call    sub_689BB0
+0x5F099E: call    sub_689BB0; Copies only reference-type TravelPath nodes into an output BSSimpleList. Fast-travel helper uses this to process teleport refs/current-mount path side effects; it intentionally skips the final destination vector node.
 0x5F09A3: mov     edx, [ebp+0]
 0x5F09A6: mov     eax, [edx+174h]
 0x5F09AC: mov     ecx, ebp
 0x5F09AE: call    eax
-0x5F09B0: mov     ecx, ebp
-0x5F09B2: call    sub_4D8AF0
-0x5F09B7: cmp     [esp+4Ch+var_28], edi
+0x5F09B0: mov     ecx, ebp; this
+0x5F09B2: call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.
+0x5F09B7: cmp     dword ptr [esp+4Ch+a4+4], edi
 0x5F09BB: jnz     short loc_5F09C7
-0x5F09BD: cmp     [esp+4Ch+a4], edi
+0x5F09BD: cmp     dword ptr [esp+4Ch+a4], edi
 0x5F09C1: jz      loc_5F0CA1
 0x5F09C7: mov     eax, ds:0B333C4h
 0x5F09CC: cmp     byte ptr [eax+114h], 0
@@ -131,9 +131,9 @@
 0x5F09D5: cmp     ebp, eax
 0x5F09D7: jnz     short loc_5F09E0
 0x5F09D9: mov     byte ptr [eax+114h], 1
-0x5F09E0: cmp     [esp+4Ch+var_28], edi
+0x5F09E0: cmp     dword ptr [esp+4Ch+a4+4], edi
 0x5F09E4: jnz     short loc_5F09F0
-0x5F09E6: cmp     [esp+4Ch+a4], edi
+0x5F09E6: cmp     dword ptr [esp+4Ch+a4], edi
 0x5F09EA: jz      loc_5F0CA1
 0x5F09F0: xor     bl, bl
 0x5F09F2: cmp     [esp+4Ch+var_35], bl
@@ -148,14 +148,14 @@
 0x5F0A0E: jz      loc_5F0D35
 0x5F0A14: mov     esi, [esi]
 0x5F0A16: mov     ecx, esi; this
-0x5F0A18: call    GetTeleportExtraData
+0x5F0A18: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x5F0A1D: mov     edi, eax
-0x5F0A1F: mov     ecx, edi
-0x5F0A21: call    sub_42B410
-0x5F0A26: mov     ecx, eax
-0x5F0A28: call    sub_4D8AF0
+0x5F0A1F: mov     ecx, edi; this
+0x5F0A21: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
+0x5F0A26: mov     ecx, eax; this
+0x5F0A28: call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.
 0x5F0A2D: mov     ecx, edi
-0x5F0A2F: call    sub_6899C0
+0x5F0A2F: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x5F0A34: test    bl, bl
 0x5F0A36: jz      loc_5F0B62
 0x5F0A3C: mov     ecx, esi; this
@@ -188,20 +188,20 @@
 0x5F0A8C: jnz     short loc_5F0AC2
 0x5F0A8E: mov     ecx, esi; this
 0x5F0A90: mov     ds:0B3B778h, esi
-0x5F0A96: call    GetTeleportExtraData
-0x5F0A9B: mov     ecx, eax
-0x5F0A9D: call    sub_42B410
+0x5F0A96: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
+0x5F0A9B: mov     ecx, eax; this
+0x5F0A9D: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x5F0AA2: mov     ecx, eax; this
 0x5F0AA4: mov     ds:0B3B778h, eax
-0x5F0AA9: call    GetTeleportExtraData
+0x5F0AA9: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x5F0AAE: mov     edi, eax
 0x5F0AB0: mov     ecx, edi
-0x5F0AB2: call    sub_42B460
-0x5F0AB7: mov     ecx, edi
+0x5F0AB2: call    sub_42B460; ExtraTeleport_GetTargetCell-style helper: returns parent cell of ExtraTeleport+0 target ref if present.
+0x5F0AB7: mov     ecx, edi; linkedDoor
 0x5F0AB9: mov     esi, eax
-0x5F0ABB: call    sub_42B470
+0x5F0ABB: call    TeleportData_GetLinkedDoorWorldspace; Verified: given the linked-door reference slot from TeleportData, resolves its loaded parent cell or child cell and returns that cell's worldspace; returns null when the linked reference or its cell is unavailable.
 0x5F0AC0: jmp     short loc_5F0AD4
-0x5F0AC2: call    TESObjectREFR_GetParentCell
+0x5F0AC2: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5F0AC7: mov     ecx, ds:0B3B778h; this
 0x5F0ACD: mov     esi, eax
 0x5F0ACF: call    TESObjectREFR_GetWorldSpace
@@ -238,9 +238,9 @@
 0x5F0B3A: mov     eax, ds:0B333C4h
 0x5F0B3F: fld     dword ptr [edx+28h]
 0x5F0B42: push    ecx
-0x5F0B43: mov     ecx, [eax+1E0h]
-0x5F0B49: fstp    [esp+50h+var_50]; float
-0x5F0B4C: call    sub_4D8A10
+0x5F0B43: mov     ecx, [eax+1E0h]; this
+0x5F0B49: fstp    [esp+50h+radians]; radians
+0x5F0B4C: call    TESObjectREFR_SetRotationZ; TES4 authoritative: write reference rotation Z at TESObjectREFR+0x28, then notify the reference through virtual slot +0x40 with change mask 4.
 0x5F0B51: jmp     short loc_5F0BB6
 0x5F0B53: cmp     dword ptr [esp+18h], 0
 0x5F0B58: jnz     loc_5F0C00
@@ -248,8 +248,8 @@
 0x5F0B60: jmp     short loc_5F0B85
 0x5F0B62: cmp     dword ptr [esp+18h], 0
 0x5F0B67: jz      short loc_5F0B7A
-0x5F0B69: mov     ecx, esi
-0x5F0B6B: call    sub_4D8AF0
+0x5F0B69: mov     ecx, esi; this
+0x5F0B6B: call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.
 0x5F0B70: cmp     [esp+4Ch+var_30], eax
 0x5F0B74: jnz     short loc_5F0B7A
 0x5F0B76: mov     bl, 1
@@ -265,9 +265,9 @@
 0x5F0B9B: fld     dword ptr ds:0A32048h
 0x5F0BA1: push    ecx
 0x5F0BA2: mov     ecx, ds:0B333C4h
-0x5F0BA8: fstp    [esp+50h+var_50]; float
-0x5F0BAB: mov     ecx, [ecx+1E0h]
-0x5F0BB1: call    sub_4D89D0
+0x5F0BA8: fstp    [esp+50h+radians]; radians
+0x5F0BAB: mov     ecx, [ecx+1E0h]; this
+0x5F0BB1: call    TESObjectREFR_SetRotationX; TES4 authoritative: write reference rotation X at TESObjectREFR+0x20, then notify the reference through virtual slot +0x40 with change mask 4.
 0x5F0BB6: mov     edx, ds:0B333C4h
 0x5F0BBC: mov     eax, [edx+1E0h]
 0x5F0BC2: push    edi; int
@@ -314,15 +314,15 @@
 0x5F0C46: push    ecx
 0x5F0C47: mov     ecx, ds:0B3B778h
 0x5F0C4D: fld     dword ptr [ecx+28h]
-0x5F0C50: mov     ecx, ebx
-0x5F0C52: fstp    [esp+50h+var_50]; float
-0x5F0C55: call    sub_4D8A10
+0x5F0C50: mov     ecx, ebx; this
+0x5F0C52: fstp    [esp+50h+radians]; radians
+0x5F0C55: call    TESObjectREFR_SetRotationZ; TES4 authoritative: write reference rotation Z at TESObjectREFR+0x28, then notify the reference through virtual slot +0x40 with change mask 4.
 0x5F0C5A: jmp     short loc_5F0C6D
 0x5F0C5C: fld     dword ptr ds:0A32048h
 0x5F0C62: push    ecx
-0x5F0C63: mov     ecx, ebx
-0x5F0C65: fstp    [esp+50h+var_50]; float
-0x5F0C68: call    sub_4D89D0
+0x5F0C63: mov     ecx, ebx; this
+0x5F0C65: fstp    [esp+50h+radians]; radians
+0x5F0C68: call    TESObjectREFR_SetRotationX; TES4 authoritative: write reference rotation X at TESObjectREFR+0x20, then notify the reference through virtual slot +0x40 with change mask 4.
 0x5F0C6D: push    edi; int
 0x5F0C6E: push    esi; int
 0x5F0C6F: push    ebx; Concurrency::details::SchedulerBase *
@@ -345,7 +345,7 @@
 0x5F0CAC: mov     ecx, ebp
 0x5F0CAE: call    sub_5F0410
 0x5F0CB3: mov     ecx, esi; this
-0x5F0CB5: call    TESObjectREFR_GetParentCell
+0x5F0CB5: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5F0CBA: mov     ecx, esi; this
 0x5F0CBC: mov     edi, eax
 0x5F0CBE: call    TESObjectREFR_GetWorldSpace
@@ -375,25 +375,25 @@
 0x5F0D05: jz      short loc_5F0D19
 0x5F0D07: fld     dword ptr [esi+28h]
 0x5F0D0A: push    ecx
-0x5F0D0B: mov     ecx, ebp
-0x5F0D0D: fstp    [esp+50h+var_50]; float
-0x5F0D10: call    sub_4D8A10
+0x5F0D0B: mov     ecx, ebp; this
+0x5F0D0D: fstp    [esp+50h+radians]; radians
+0x5F0D10: call    TESObjectREFR_SetRotationZ; TES4 authoritative: write reference rotation Z at TESObjectREFR+0x28, then notify the reference through virtual slot +0x40 with change mask 4.
 0x5F0D15: fldz
 0x5F0D17: jmp     short loc_5F0D1F
 0x5F0D19: fld     dword ptr ds:0A32048h
 0x5F0D1F: push    ecx
-0x5F0D20: mov     ecx, ebp
-0x5F0D22: fstp    [esp+54h+var_54]; float
-0x5F0D25: call    sub_4D89D0
+0x5F0D20: mov     ecx, ebp; this
+0x5F0D22: fstp    [esp+54h+var_54]; radians
+0x5F0D25: call    TESObjectREFR_SetRotationX; TES4 authoritative: write reference rotation X at TESObjectREFR+0x20, then notify the reference through virtual slot +0x40 with change mask 4.
 0x5F0D2A: push    ebx; int
 0x5F0D2B: push    edi; int
 0x5F0D2C: push    ebp; Concurrency::details::SchedulerBase *
 0x5F0D2D: call    sub_4DD4B0
 0x5F0D32: add     esp, 0Ch
-0x5F0D35: lea     ecx, [esp+54h+a4]
+0x5F0D35: lea     ecx, [esp+54h+a4]; this
 0x5F0D39: mov     [esp+54h+var_10], 0FFFFFFFFh
-0x5F0D41: call    sub_68AA10
-0x5F0D46: mov     ecx, [esp+54h+var_18]
+0x5F0D41: call    PathLow_dtor; Verified PathLow destructor: restores the PathLow vtable and frees/clears owned TravelPathNode records through TravelPath_ClearNodes. This routine does not free the containing object.
+0x5F0D46: mov     ecx, [esp+54h+var_24.unknown0C]
 0x5F0D4A: mov     large fs:0, ecx
 0x5F0D51: pop     ecx
 0x5F0D52: pop     edi
@@ -402,3 +402,12 @@
 0x5F0D55: pop     ebx
 0x5F0D56: add     esp, 34h
 0x5F0D59: retn    14h
+0x9C3D80: lea     ecx, [ebp-20h]; this
+0x9C3D83: jmp     PathLow_dtor; Verified PathLow destructor: restores the PathLow vtable and frees/clears owned TravelPathNode records through TravelPath_ClearNodes. This routine does not free the containing object.
+0x9C3D88: mov     edx, [esp+arg_4]
+0x9C3D8C: lea     eax, [edx-38h]
+0x9C3D8F: mov     ecx, [edx-3Ch]
+0x9C3D92: xor     ecx, eax
+0x9C3D94: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C3D99: mov     eax, offset stru_AEC898
+0x9C3D9E: jmp     ___CxxFrameHandler3

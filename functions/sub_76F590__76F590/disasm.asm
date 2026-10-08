@@ -1,5 +1,5 @@
-0x76F590: sub     esp, 28h
-0x76F593: mov     ax, [esp+28h+arg_0]
+0x76F590: sub     esp, 28h; Per-element vertex declaration pack/copy dispatcher used by PackVertexStream; converts source geometry semantics/types into the declaration's destination layout.
+0x76F593: mov     ax, word ptr [esp+28h+arg_0]
 0x76F598: mov     ecx, [esp+28h+arg_14]
 0x76F59C: mov     edx, [esp+28h+arg_18]
 0x76F5A0: push    ebx
@@ -25,7 +25,7 @@
 0x76F5E1: retn    1Ch
 0x76F5E4: mov     edx, [ebx+8]
 0x76F5E7: mov     eax, [esp+30h+arg_4]
-0x76F5EB: mov     ecx, [eax+34h]
+0x76F5EB: mov     ecx, [eax+34h];
 0x76F5EE: push    esi
 0x76F5EF: lea     esi, [edx+1]; switch 16 cases
 0x76F5F2: cmp     esi, 0Fh
@@ -82,3 +82,66 @@
 0x76F6BF: mov     [esp+38h+var_14], 0Ch; jumptable 0076F659 case 4
 0x76F6C7: mov     [esp+38h+var_10], 10h
 0x76F6CF: mov     [esp+38h+arg_14], edx
+0x76F6DF: test    edi, edi; jumptable 0076F600 case 2
+0x76F6E1: jz      loc_76F607; jumptable 0076F600 case -1
+0x76F6E7: mov     ecx, [edi+10h]
+0x76F6EA: test    ecx, ecx
+0x76F6EC: jz      loc_76F607; jumptable 0076F600 case -1
+0x76F6F2: movzx   eax, word ptr [edi+24h]
+0x76F6F6: add     eax, 0FFFFFFFFh; switch 4 cases
+0x76F6F9: mov     edx, 3
+0x76F6FE: cmp     eax, edx
+0x76F700: ja      short def_76F702
+0x76F702: jmp     ds:jpt_76F702[eax*4]; switch jump
+0x76F709: mov     eax, 1; jumptable 0076F702 case 1
+0x76F70E: mov     [esp+38h+arg_14], 19h
+0x76F716: mov     [esp+38h+var_14], eax
+0x76F71A: mov     [esp+38h+var_10], eax
+0x76F71E: mov     [esp+38h+var_18], ecx
+0x76F722: jmp     loc_76F834
+0x76F727: mov     eax, 2; jumptable 0076F702 case 2
+0x76F72C: mov     [esp+38h+arg_14], 1Ah
+0x76F734: mov     [esp+38h+var_14], eax
+0x76F738: mov     [esp+38h+var_10], eax
+0x76F73C: mov     [esp+38h+var_18], ecx
+0x76F740: jmp     loc_76F834
+0x76F745: mov     [esp+38h+arg_14], 1Bh; jumptable 0076F702 case 3
+0x76F74D: mov     [esp+38h+var_14], edx
+0x76F751: mov     [esp+38h+var_10], edx
+0x76F755: mov     [esp+38h+var_18], ecx
+0x76F759: jmp     loc_76F834
+0x76F75E: mov     eax, 4; jumptable 0076F702 case 4
+0x76F763: mov     [esp+38h+arg_14], 1Ch
+0x76F76B: mov     [esp+38h+var_14], eax
+0x76F76F: mov     [esp+38h+var_10], eax
+0x76F77C: mov     edx, [eax+24h]; jumptable 0076F600 case 4
+0x76F77F: mov     [esp+38h+var_18], edx
+0x76F783: mov     eax, 10h
+0x76F788: mov     [esp+38h+arg_14], 4
+0x76F790: jmp     loc_76F82C
+0x76F795: movzx   ecx, dx; jumptable 0076F600 cases 5-12
+0x76F798: sub     cx, 5
+0x76F79C: push    ecx; a2
+0x76F79D: mov     ecx, eax; this
+0x76F79F: call    sub_7282F0
+0x76F7A4: mov     [esp+38h+var_18], eax
+0x76F7A8: mov     eax, 8
+0x76F7AD: mov     [esp+38h+arg_14], 2
+0x76F7B5: jmp     short loc_76F82C
+0x76F7B7: movzx   ecx, word ptr [eax+8]; jumptable 0076F600 case 14
+0x76F7BB: mov     eax, [eax+20h]
+0x76F7BE: lea     edx, [ecx+ecx*2]
+0x76F7C1: lea     ecx, [eax+edx*4]
+0x76F7C4: mov     [esp+38h+var_18], ecx
+0x76F7C8: mov     eax, 0Ch
+0x76F7CD: mov     [esp+38h+arg_14], 3
+0x76F7D5: jmp     short loc_76F82C
+0x76F7D7: movzx   ecx, word ptr [eax+8]; jumptable 0076F600 case 13
+0x76F7DB: mov     eax, [eax+20h]
+0x76F7DE: lea     edx, [ecx+ecx*2]
+0x76F7E1: lea     ecx, [eax+edx*8]
+0x76F7E4: jmp     short loc_76F7C4
+0x76F890: xor     eax, eax
+0x76F892: pop     ebx
+0x76F893: add     esp, 28h
+0x76F896: retn    1Ch

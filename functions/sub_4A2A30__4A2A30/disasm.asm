@@ -1,4 +1,4 @@
-0x4A2A30: mov     eax, [esp+arg_0]
+0x4A2A30: mov     eax, [esp+form]; Verified control flow: returns 2 for form-type bytes {0x13,0x14,0x15,0x16,0x19,0x1B,0x21,0x22,0x26,0x27,0x28,0x2A}, 3 for {0x23,0x24}, otherwise 1. Probable semantic name TESForm_GetLODMult is supported by the direct queued-tree argument use and Fallout's named TES::GetLODMult; individual type-group meanings are not decoded here.
 0x4A2A34: movzx   eax, byte ptr [eax+4]
 0x4A2A38: add     eax, 0FFFFFFEDh; switch 24 cases
 0x4A2A3B: cmp     eax, 17h

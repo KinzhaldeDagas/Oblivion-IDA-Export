@@ -1,28 +1,54 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "MiddleLowProcess",
+  "definition": "struct __cppobj MiddleLowProcess : LowProcess\n{\nUInt32 unk090;\nAVCollection maxAVModifiers; ///< Verified 2026-10-04: same collection storage type. MiddleLowProcess ctor 0x6586D1 and dtor 0x65872C pass +0x94; max-modifier methods pass allowPositive=1.\n}\n",
   "id": 18374686479671991666,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 144
+      "size": 144,
+      "type": "LowProcess"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk090",
       "offset": 144,
       "offset_hex": "0x90",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified 2026-10-04: same collection storage type. MiddleLowProcess ctor 0x6586D1 and dtor 0x65872C pass +0x94; max-modifier methods pass allowPositive=1.",
       "name": "maxAVModifiers",
       "offset": 148,
       "offset_hex": "0x94",
-      "size": 20
+      "size": 20,
+      "type": "AVCollection"
     }
   ],
   "name": "MiddleLowProcess",
+  "ordinal": 9519,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 168
 }

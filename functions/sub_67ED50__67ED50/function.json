@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x67ED50",
+      "0x67ED65"
+    ]
+  ],
+  "chunks_sha256": "7017f593d4350fae4242d662dc3eeab8f2a3f9012139152a16e058c06b792b8e",
+  "comment_regular": "Verified sets/clears stateFlags bit 0x40. PathGrid graph loading sets it when WorldSpace/Cell SubSpace lookup finds a containing TESSubSpace; actor-aware edge cost adds a penalty when endpoints differ on this bit.",
+  "comment_repeatable": "Verified sets/clears stateFlags bit 0x40. PathGrid graph loading sets it when WorldSpace/Cell SubSpace lookup finds a containing TESSubSpace; actor-aware edge cost adds a penalty when endpoints differ on this bit.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_67ED50",
+  "display_name": "PathGraphNode_SetSubSpaceMembershipFlag",
   "end_ea": "0x67ED65",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_67ED50",
+  "name": "PathGraphNode_SetSubSpaceMembershipFlag",
   "segment": ".text",
   "sha256": "7017f593d4350fae4242d662dc3eeab8f2a3f9012139152a16e058c06b792b8e",
   "size": 21,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x67ED50",
-  "type": "void __thiscall(_BYTE *this, char)",
+  "total_chunk_size": 21,
+  "type": "void __thiscall(void *this, bool value)",
   "xrefs_from_count": 5,
   "xrefs_to_count": 3
 }

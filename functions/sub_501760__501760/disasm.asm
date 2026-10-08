@@ -1,4 +1,4 @@
-0x501760: push    ecx
+0x501760: push    ecx; [Controller decode 2026-07-09] SetSize execute callback. Parses target size and updates actor character-controller target size.
 0x501761: mov     ecx, [esp+4+l]
 0x501765: fldz
 0x501767: mov     edx, [esp+4+arg_10]
@@ -18,7 +18,7 @@
 0x50178C: push    ecx; a3
 0x50178D: push    edx; a2
 0x50178E: push    eax; a1
-0x50178F: call    Script_ExtractArgs
+0x50178F: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x501794: add     esp, 20h
 0x501797: test    al, al
 0x501799: jnz     short loc_50179E
@@ -35,14 +35,14 @@
 0x5017B5: test    eax, eax
 0x5017B7: jz      short loc_5017D3
 0x5017B9: mov     ecx, eax; this
-0x5017BB: call    MobileObject_GetCharProxy
+0x5017BB: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x5017C0: test    eax, eax
 0x5017C2: jz      short loc_5017D3
 0x5017C4: fld     dword ptr [esp+8+var_4]
 0x5017C8: push    ecx
 0x5017C9: mov     ecx, eax
 0x5017CB: fstp    [esp+0Ch+var_C]; float
-0x5017CE: call    sub_894BD0
+0x5017CE: call    bhkCharacterController_SetTargetSize
 0x5017D3: mov     al, 1
 0x5017D5: pop     esi
 0x5017D6: pop     ecx

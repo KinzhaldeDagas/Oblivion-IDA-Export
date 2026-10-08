@@ -1,94 +1,96 @@
-BSExtraDataVtbl *__thiscall sub_68A890(char *this, TESWorldSpace *a2, char a3)
+// Verified: scans TravelPath reference nodes for a reference whose spatial container or WorldSpace matches targetWorldspace. If the reference is a teleport door in another space, it checks the linked door and may return that linked door. continueAfterMatch controls whether scanning continues after a match; the fast-travel script wrapper calls with false to return the first match.
+TESObjectREFR *__thiscall TravelPath_FindReferenceForWorldspace(
+        TravelPath *this,
+        TESWorldSpace *targetWorldspace,
+        char continueAfterMatch)
 {
-  BSExtraDataVtbl *result; // eax
-  char *v4; // ebx
-  _BYTE *v5; // ecx
+  TESObjectREFR *result; // eax
+  BSSimpleList_VoidPtr *p_nodes; // ebx
+  const TravelPathNode *data; // ecx
   bool v6; // zf
-  TESObjectCELL **v7; // eax
-  TESObjectCELL **v8; // edi
-  void *v9; // eax
-  void *v10; // esi
-  TESWorldSpace *v11; // eax
-  TESObjectREFR *v12; // eax
-  ExtraTeleport *TeleportExtraData; // eax
-  BSExtraData *p_super; // edi
-  TESObjectCELL **v15; // eax
-  void *v16; // eax
-  void *v17; // esi
+  TESObjectREFR *Reference; // eax
+  TESObjectREFR *v8; // edi
+  TESForm *SpatialContainerAtPosition; // esi
+  TESWorldSpace *v10; // eax
+  TESObjectREFR *v11; // eax
+  TeleportData *TeleportData; // eax
+  TeleportData *v13; // edi
+  TESObjectREFR *LinkedDoor; // eax
+  TESForm *v15; // esi
   TESWorldSpace *WorldSpace; // eax
-  TESObjectREFR *v19; // eax
-  BSExtraDataVtbl *v20; // [esp+4h] [ebp-4h]
+  TESObjectREFR *v17; // eax
+  TESObjectREFR *v18; // [esp+4h] [ebp-4h]
 
-  result = 0;
-  v4 = this + 4;
-  v20 = 0;
-  if ( this != (char *)0xFFFFFFFC )
+  result = 0; /*0x68a892*/
+  p_nodes = &this->nodes; /*0x68a894*/
+  v18 = 0; /*0x68a899*/
+  if ( this != (TravelPath *)0xFFFFFFFC ) /*0x68a89d*/
   {
-    do
+    do /*0x68a9b8*/
     {
-      v5 = *(_BYTE **)v4;
-      v6 = *(_DWORD *)v4 == 0;
-      v4 = *((char **)v4 + 1);
-      if ( !v6 )
+      data = (const TravelPathNode *)p_nodes->firstNode.data; /*0x68a8b0*/
+      v6 = p_nodes->firstNode.data == 0; /*0x68a8b2*/
+      p_nodes = (BSSimpleList_VoidPtr *)p_nodes->firstNode.next; /*0x68a8b4*/
+      if ( !v6 ) /*0x68a8b7*/
       {
-        v7 = (TESObjectCELL **)sub_68B0F0(v5);
-        v8 = v7;
-        if ( v7 )
+        Reference = TravelPathNode_GetReference(data); /*0x68a8bd*/
+        v8 = Reference; /*0x68a8c2*/
+        if ( Reference ) /*0x68a8c6*/
         {
-          sub_4D8AF0(v7);
-          v10 = v9;
-          v11 = (TESWorldSpace *)OblivionDynamicCast(
-                                   v9,
+          SpatialContainerAtPosition = TESObjectREFR_GetSpatialContainerAtPosition(Reference); /*0x68a8df*/
+          v10 = (TESWorldSpace *)OblivionDynamicCast( /*0x68a8e4*/
+                                   SpatialContainerAtPosition,
                                    0,
                                    (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                                    &TESWorldSpace `RTTI Type Descriptor',
                                    0);
-          if ( (v11
-             || (v12 = (TESObjectREFR *)OblivionDynamicCast(
-                                          v10,
+          if ( (v10 /*0x68a925*/
+             || (v11 = (TESObjectREFR *)OblivionDynamicCast(
+                                          SpatialContainerAtPosition,
                                           0,
                                           (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                                           (struct TypeDescriptor *)&TESObjectREFR `RTTI Type Descriptor',
                                           0)) != 0
-             && (v11 = TESObjectREFR_GetWorldSpace(v12)) != 0)
-            && (!a2 || v11 == a2 || TESWorldSpace_GetParentWorldpsace(v11) == a2) )
+             && (v10 = TESObjectREFR_GetWorldSpace(v11)) != 0)
+            && (!targetWorldspace || v10 == targetWorldspace || Shared_GetPointerAtOffset7C(v10) == targetWorldspace) )
           {
-            v20 = (BSExtraDataVtbl *)v8;
+            v18 = v8; /*0x68a927*/
           }
           else
           {
-            TeleportExtraData = GetTeleportExtraData(v8);
-            p_super = &TeleportExtraData->super;
-            if ( TeleportExtraData )
+            TeleportData = TESObjectREFR_GetTeleportData(v8); /*0x68a92f*/
+            v13 = TeleportData; /*0x68a934*/
+            if ( TeleportData ) /*0x68a938*/
             {
-              v15 = (TESObjectCELL **)sub_42B410(&TeleportExtraData->super);
-              sub_4D8AF0(v15);
-              v17 = v16;
-              WorldSpace = (TESWorldSpace *)OblivionDynamicCast(
-                                              v16,
+              LinkedDoor = TeleportData_GetLinkedDoor(TeleportData); /*0x68a93c*/
+              v15 = TESObjectREFR_GetSpatialContainerAtPosition(LinkedDoor); /*0x68a954*/
+              WorldSpace = (TESWorldSpace *)OblivionDynamicCast( /*0x68a959*/
+                                              v15,
                                               0,
                                               (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                                               &TESWorldSpace `RTTI Type Descriptor',
                                               0);
-              if ( (WorldSpace
-                 || (v19 = (TESObjectREFR *)OblivionDynamicCast(
-                                              v17,
+              if ( (WorldSpace /*0x68a99a*/
+                 || (v17 = (TESObjectREFR *)OblivionDynamicCast(
+                                              v15,
                                               0,
                                               (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                                               (struct TypeDescriptor *)&TESObjectREFR `RTTI Type Descriptor',
                                               0)) != 0
-                 && (WorldSpace = TESObjectREFR_GetWorldSpace(v19)) != 0)
-                && (!a2 || WorldSpace == a2 || TESWorldSpace_GetParentWorldpsace(WorldSpace) == a2) )
+                 && (WorldSpace = TESObjectREFR_GetWorldSpace(v17)) != 0)
+                && (!targetWorldspace
+                 || WorldSpace == targetWorldspace
+                 || Shared_GetPointerAtOffset7C(WorldSpace) == targetWorldspace) )
               {
-                v20 = sub_42B410(p_super);
+                v18 = TeleportData_GetLinkedDoor(v13); /*0x68a9a3*/
               }
             }
           }
         }
       }
-      result = v20;
+      result = v18; /*0x68a9a7*/
     }
-    while ( (!v20 || a3) && v4 );
+    while ( (!v18 || continueAfterMatch) && p_nodes ); /*0x68a9b8*/
   }
-  return result;
+  return result; /*0x68a9c1*/
 }

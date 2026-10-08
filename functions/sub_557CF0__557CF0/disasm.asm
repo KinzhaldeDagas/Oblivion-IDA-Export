@@ -17,7 +17,7 @@
 0x557D13: call    sub_5570D0
 0x557D18: mov     eax, [ebx+4]
 0x557D1B: push    eax
-0x557D1C: call    FormHeapFree
+0x557D1C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x557D21: add     esp, 14h
 0x557D24: mov     [ebx+4], edi
 0x557D27: mov     [ebx+8], edi
@@ -35,7 +35,7 @@
 0x557D48: call    sub_5573D0
 0x557D4D: mov     eax, [ebx+4]
 0x557D50: push    eax
-0x557D51: call    FormHeapFree
+0x557D51: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x557D56: add     esp, 14h
 0x557D59: mov     [ebx+4], edi
 0x557D5C: mov     [ebx+8], edi
@@ -53,7 +53,7 @@
 0x557D77: call    sub_557080
 0x557D7C: mov     eax, [ebx+4]
 0x557D7F: push    eax
-0x557D80: call    FormHeapFree
+0x557D80: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x557D85: add     esp, 14h
 0x557D88: mov     [ebx+4], edi
 0x557D8B: mov     [ebx+8], edi
@@ -71,7 +71,7 @@
 0x557DA6: call    sub_557030
 0x557DAB: mov     eax, [ebx+4]
 0x557DAE: push    eax
-0x557DAF: call    FormHeapFree
+0x557DAF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x557DB4: add     esp, 14h
 0x557DB7: mov     [ebx+4], edi
 0x557DBA: mov     [ebx+8], edi
@@ -80,7 +80,7 @@
 0x557DC3: cmp     eax, edi
 0x557DC5: jz      short loc_557DD0
 0x557DC7: push    eax
-0x557DC8: call    FormHeapFree
+0x557DC8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x557DCD: add     esp, 4
 0x557DD0: mov     [esi+54h], edi
 0x557DD3: mov     [esi+58h], edi
@@ -89,7 +89,7 @@
 0x557DDC: cmp     eax, edi
 0x557DDE: jz      short loc_557DE9
 0x557DE0: push    eax
-0x557DE1: call    FormHeapFree
+0x557DE1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x557DE6: add     esp, 4
 0x557DE9: mov     [esi+44h], edi
 0x557DEC: mov     [esi+48h], edi
@@ -98,7 +98,7 @@
 0x557DF5: cmp     eax, edi
 0x557DF7: jz      short loc_557E02
 0x557DF9: push    eax
-0x557DFA: call    FormHeapFree
+0x557DFA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x557DFF: add     esp, 4
 0x557E02: mov     [esi+34h], edi
 0x557E05: mov     [esi+38h], edi
@@ -107,7 +107,7 @@
 0x557E0E: cmp     eax, edi
 0x557E10: jz      short loc_557E1B
 0x557E12: push    eax
-0x557E13: call    FormHeapFree
+0x557E13: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x557E18: add     esp, 4
 0x557E1B: mov     [esi+24h], edi
 0x557E1E: mov     [esi+28h], edi
@@ -116,7 +116,7 @@
 0x557E27: cmp     eax, edi
 0x557E29: jz      short loc_557E34
 0x557E2B: push    eax
-0x557E2C: call    FormHeapFree
+0x557E2C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x557E31: add     esp, 4
 0x557E34: mov     [esi+14h], edi
 0x557E37: mov     [esi+18h], edi
@@ -125,7 +125,7 @@
 0x557E40: cmp     eax, edi
 0x557E42: jz      short loc_557E4D
 0x557E44: push    eax
-0x557E45: call    FormHeapFree
+0x557E45: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x557E4A: add     esp, 4
 0x557E4D: mov     [esi+4], edi
 0x557E50: mov     [esi+8], edi

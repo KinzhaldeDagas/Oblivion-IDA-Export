@@ -187,7 +187,7 @@
 0x5E90D2: mov     eax, [ebx+4]
 0x5E90D5: mov     esi, [eax+4]
 0x5E90D8: push    eax
-0x5E90D9: call    FormHeapFree
+0x5E90D9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5E90DE: add     esp, 4
 0x5E90E1: test    esi, esi
 0x5E90E3: mov     [ebx+4], esi
@@ -195,7 +195,7 @@
 0x5E90E8: mov     ebp, [esp+1Ch+var_C]
 0x5E90EC: push    ebx
 0x5E90ED: mov     dword ptr [ebx], 0
-0x5E90F3: call    FormHeapFree
+0x5E90F3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5E90F8: mov     esi, [esp+20h+var_4]
 0x5E90FC: add     esp, 4
 0x5E90FF: mov     eax, [esi+4]
@@ -263,14 +263,14 @@
 0x5E91A3: mov     eax, [edi+4]
 0x5E91A6: mov     esi, [eax+4]
 0x5E91A9: push    eax
-0x5E91AA: call    FormHeapFree
+0x5E91AA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5E91AF: add     esp, 4
 0x5E91B2: test    esi, esi
 0x5E91B4: mov     [edi+4], esi
 0x5E91B7: jnz     short loc_5E91A3
 0x5E91B9: push    edi
 0x5E91BA: mov     dword ptr [edi], 0
-0x5E91C0: call    FormHeapFree
+0x5E91C0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5E91C5: mov     eax, [esp+20h+var_8]
 0x5E91C9: add     esp, 4
 0x5E91CC: pop     edi

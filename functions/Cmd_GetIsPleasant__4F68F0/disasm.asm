@@ -4,7 +4,7 @@
 0x4F68FA: test    ecx, ecx
 0x4F68FC: jz      short loc_4F690C
 0x4F68FE: test    byte ptr [ecx+53h], 1
-0x4F6902: jz      short loc_4F690C
+0x4F6902: jz      short loc_4F690C; GetIsPleasant uses TESWeather+0x53 bit 0, blended by Sky+0xD8 weatherPercent against secondWeather.
 0x4F6904: fld     dword ptr [eax+0D8h]
 0x4F690A: jmp     short loc_4F690E
 0x4F690C: fld     st

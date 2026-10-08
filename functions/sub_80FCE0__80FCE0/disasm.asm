@@ -1,4 +1,4 @@
-0x80FCE0: sub     esp, 0A68h
+0x80FCE0: sub     esp, 0A68h; SpeedTreeBranchShader 1x/2x vertex program loader: fills +0x9C..+0xC3 with ten STB1 vs_1_1 programs and, for ShaderPackage>=2, +0xC4..+0x10B with eighteen STB2 vs_2_0 programs.
 0x80FCE6: mov     eax, ds:0B30AACh
 0x80FCEB: xor     eax, esp
 0x80FCED: mov     [esp+0A68h+var_4], eax
@@ -337,7 +337,6 @@
 0x81045E: mov     [esp+0A78h+var_A68], esi
 0x810462: add     edi, 9Ch ; 'œ'
 0x810468: jmp     short loc_810470
-0x81046A: align 10h
 0x810470: mov     eax, [esi]
 0x810472: cmp     eax, ebx
 0x810474: jz      loc_8104FC
@@ -361,7 +360,7 @@
 0x8104B1: lea     ecx, [esp+0A8Ch+FileName]
 0x8104B8: push    ecx; lpFileName
 0x8104B9: mov     ecx, [esp+0A90h+var_A60]
-0x8104BD: call    CreateVertexShader
+0x8104BD: call    CreateVertexShader; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.
 0x8104C2: mov     esi, [edi]
 0x8104C4: mov     ebp, eax
 0x8104C6: cmp     esi, ebp
@@ -440,7 +439,7 @@
 0x8105A0: lea     ecx, [esp+0A8Ch+FileName]
 0x8105A7: push    ecx; lpFileName
 0x8105A8: mov     ecx, [esp+0A90h+var_A60]
-0x8105AC: call    CreateVertexShader
+0x8105AC: call    CreateVertexShader; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.
 0x8105B1: mov     edx, [esp+0A78h+var_A68]
 0x8105B5: mov     esi, [edx]
 0x8105B7: mov     edi, eax

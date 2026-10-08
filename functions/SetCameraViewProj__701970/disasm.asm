@@ -1,4 +1,4 @@
-0x701970: sub     esp, 24h
+0x701970: sub     esp, 24h; MoonSugarEffect build 16: after temporary camera sway is restored, plugin calls SetCameraViewProj(g_Renderer, restoredCamera) to reset renderer camera globals/view/projection/viewport to the original camera state.
 0x701973: mov     eax, [esp+24h+arg_0]
 0x701977: fld     dword ptr [eax+6Ch]
 0x70197A: mov     edx, 1

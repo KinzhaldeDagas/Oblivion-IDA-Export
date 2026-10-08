@@ -16,7 +16,7 @@
 0x4CC9AB: jnz     loc_4CCA3E
 0x4CC9B1: push    edi
 0x4CC9B2: push    esi; a2
-0x4CC9B3: mov     ecx, offset stru_B35C80; this
+0x4CC9B3: mov     ecx, offset unk_B35C80; this
 0x4CC9B8: call    sub_496EA0
 0x4CC9BD: lea     edi, [esi+48h]
 0x4CC9C0: test    edi, edi
@@ -46,15 +46,15 @@
 0x4CC9FF: add     esp, 4
 0x4CCA02: test    al, al
 0x4CCA04: jz      short loc_4CCA27
-0x4CCA06: push    0
-0x4CCA08: push    0
+0x4CCA06: push    0; forceWorn
+0x4CCA08: push    0; unusedArg
 0x4CCA0A: lea     ecx, [esi+44h]
 0x4CCA0D: call    ExtraDataList_GetExtraCount
 0x4CCA12: movsx   edx, ax
-0x4CCA15: push    edx
-0x4CCA16: push    esi
-0x4CCA17: mov     ecx, ebp
-0x4CCA19: call    sub_4DDC40
+0x4CCA15: push    edx; count
+0x4CCA16: push    esi; sourceRef
+0x4CCA17: mov     ecx, ebp; this
+0x4CCA19: call    TESObjectREFR_AddItemFromWorldReference; Add a live world reference to this reference's container by forwarding it to ContainerExtraData_AddItemFromWorldReference. That path derives sourceRef->GetBaseForm() and copies reference instance data; the returned byte is not a verified insertion-success contract and native callers ignore it.
 0x4CCA1E: mov     ecx, esi
 0x4CCA20: call    sub_4D7D80
 0x4CCA25: mov     bl, 1
@@ -63,7 +63,7 @@
 0x4CCA2C: jnz     short loc_4CC9C4
 0x4CCA2E: mov     esi, [esp+14h+var_4]
 0x4CCA32: push    esi; a2
-0x4CCA33: mov     ecx, offset stru_B35C80; this
+0x4CCA33: mov     ecx, offset unk_B35C80; this
 0x4CCA38: call    sub_496F50
 0x4CCA3D: pop     edi
 0x4CCA3E: pop     esi

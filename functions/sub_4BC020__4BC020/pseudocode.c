@@ -1,29 +1,17 @@
-int __cdecl sub_4BC020(int a1)
+void __cdecl sub_4BC020(int a1)
 {
-  int result; // eax
-
-  switch ( a1 )
+  switch ( a1 ) /*0x4bc02b*/
   {
-    case 0:
-      result = dword_B38D98;
-      break;
-    case 1:
-      result = dword_B35B3C;
-      break;
-    case 2:
-      result = dword_B35B4C;
-      break;
-    case 3:
-      result = dword_B35B5C;
-      break;
-    case 4:
-      result = dword_B35B6C;
-      break;
-    case 5:
-      result = def_4BC02B(a1);
-      break;
+    case 0: /*0x4bc02b*/
+    case 1: /*0x4bc02b*/
+    case 2: /*0x4bc02b*/
+    case 3: /*0x4bc02b*/
+    case 4: /*0x4bc02b*/
+      return;
+    case 5: /*0x4bc02b*/
+      def_4BC02B(); /*0x4bc051*/
+      break; /*0x4bc051*/
     default:
-      JUMPOUT(0x4BC055);
+      JUMPOUT(0x4BC055); /*0x4bc055*/
   }
-  return result;
 }

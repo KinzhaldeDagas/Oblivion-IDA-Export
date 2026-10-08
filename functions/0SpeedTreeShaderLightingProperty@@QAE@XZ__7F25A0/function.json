@@ -1,19 +1,36 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "SpeedTreeShaderLightingProperty::SpeedTreeShaderLightingProperty(void)",
+  "chunks": [
+    [
+      "0x7F25A0",
+      "0x7F2679"
+    ],
+    [
+      "0x9CFE80",
+      "0x9CFEBF"
+    ]
+  ],
+  "chunks_sha256": "2db5a6fb8dbef32a2a00c37d0be1789eb681ae92f9c170ca9505f8786e6e1382",
+  "comment_regular": "\n\n[2026-10-03 ownership follow-through] Verified property+A4 takes one reference to supplied STSPData; destructor 0x7F2690 releases it. STSPData destructor 0x7F23D0 frees stream+8 when ushort+C is nonzero. Plugin additional-data block borrows this stream (copyData=false); do not separately retain/free a cached stream pointer.\n\nSpeedTreeShaderLightingProperty ctor: BSShaderLightingProperty base, stores STSPData ref at +0xA4, clears auxiliary ref +0x9C, sets mode/enable dword +0xA0=1.",
+  "comment_repeatable": "SpeedTreeShaderLightingProperty ctor: BSShaderLightingProperty base, stores STSPData ref at +0xA4, clears auxiliary ref +0x9C, sets mode/enable dword +0xA0=1.\n\n[constructor audit] Base chain7EE440->7E27F0->6FFD30->7005D0 allocates nothing. Empty-list cleanup573880 has no nodes. This ctor retains incoming STSP only after base initialization; leaf ctor7F1960 subsequently retains STLSP. With valid supplied objects, no fallible allocation follows those retains. Current plugin additional-data block owns a separate stream copy; the older borrowed-block note is historical.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "OB_SpeedTreeShaderLightingProperty_ctorWithSTSP_010201A0",
   "end_ea": "0x7F2679",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "??0SpeedTreeShaderLightingProperty@@QAE@XZ",
+  "name": "OB_SpeedTreeShaderLightingProperty_ctorWithSTSP_010201A0",
   "segment": ".text",
   "sha256": "bb553847667388924865d017fa91863ca0c5bc3cb17f44abba7634390ae4b3c2",
   "size": 217,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7F25A0",
-  "type": "SpeedTreeShaderLightingProperty *__thiscall(SpeedTreeShaderLightingProperty *this, int)",
-  "xrefs_from_count": 84,
+  "total_chunk_size": 280,
+  "type": "SpeedTreeShaderLightingProperty *__thiscall(SpeedTreeShaderLightingProperty *this, OB_STSPData_010201A0 *data)",
+  "xrefs_from_count": 101,
   "xrefs_to_count": 1
 }

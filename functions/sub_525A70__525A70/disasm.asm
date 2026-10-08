@@ -1,4 +1,4 @@
-0x525A70: push    0FFFFFFFFh
+0x525A70: push    0FFFFFFFFh; Reconcile TESNPC FaceGen nodes with actor skin/animation state. If both cached FaceGen node pointers are absent, this routine calls TESRace_CreateFaceGenNodes and attaches the new biped/skinned pair.
 0x525A72: push    offset SEH_525A70
 0x525A77: mov     eax, large fs:0
 0x525A7D: push    eax
@@ -14,7 +14,7 @@
 0x525A94: mov     large fs:0, eax
 0x525A9A: mov     ebx, ecx
 0x525A9C: mov     [esp+9Ch+var_78], ebx
-0x525AA0: call    sub_553600
+0x525AA0: call    FaceGenManager_GetSingleton
 0x525AA5: test    eax, eax
 0x525AA7: jz      loc_526214
 0x525AAD: mov     esi, [esp+9Ch+arg_4]
@@ -40,9 +40,9 @@
 0x525AF9: mov     edx, [eax+8]
 0x525AFC: call    edx
 0x525AFE: mov     [esp+9Ch+var_7C], eax
-0x525B02: push    edi
-0x525B03: mov     ecx, esi
-0x525B05: call    sub_477EC0
+0x525B02: push    edi; nodeIndex
+0x525B03: mov     ecx, esi; this
+0x525B05: call    ActorSkinInfo_GetCachedNode; Returns ActorSkinInfo cached node at +8+nodeIndex*8. Index 6 is QuiverNode at +0x38, the native Arrow:0 clone source.
 0x525B0A: mov     esi, eax
 0x525B0C: mov     eax, [ebp+0]
 0x525B0F: mov     edx, [eax+164h]
@@ -120,9 +120,9 @@
 0x525C22: test    ebp, ebp
 0x525C24: jbe     loc_525CAE
 0x525C2A: mov     bl, 3
-0x525C2C: mov     ecx, [esp+9Ch+a2]
-0x525C30: push    edi
-0x525C31: call    sub_405790
+0x525C2C: mov     ecx, [esp+9Ch+a2]; this
+0x525C30: push    edi; index
+0x525C31: call    NiNode_GetChildAtIndex
 0x525C36: test    eax, eax
 0x525C38: jz      short loc_525CA3
 0x525C3A: mov     edx, [eax]
@@ -138,7 +138,7 @@
 0x525C56: cmp     [eax], ecx
 0x525C58: jz      short loc_525CA3
 0x525C5A: mov     ecx, [esi+0B4h]
-0x525C60: lea     edx, [esp+9Ch+var_6C]
+0x525C60: lea     edx, [esp+9Ch+slot]
 0x525C64: push    edx
 0x525C65: call    sub_700790
 0x525C6A: mov     eax, [eax]
@@ -146,9 +146,9 @@
 0x525C6D: lea     ecx, [esp+0A0h+var_80]; this
 0x525C71: mov     byte ptr [esp+0A0h+var_4], bl
 0x525C78: call    NiSmartPointer_Set??
-0x525C7D: lea     ecx, [esp+9Ch+var_6C]; this
+0x525C7D: lea     ecx, [esp+9Ch+slot]; slot
 0x525C81: mov     byte ptr [esp+9Ch+var_4], 1
-0x525C89: call    sub_7016A0
+0x525C89: call    NiPointerSlot_Release
 0x525C8E: mov     eax, [esp+9Ch+var_80]
 0x525C92: test    eax, eax
 0x525C94: jz      short loc_525CA3
@@ -205,11 +205,11 @@
 0x525D4C: xor     eax, eax
 0x525D4E: test    ecx, ecx
 0x525D50: mov     [esp+9Ch+var_5C], ecx
-0x525D54: mov     [esp+9Ch+var_6C], eax
+0x525D54: mov     [esp+9Ch+slot], eax
 0x525D58: jbe     loc_525ED3
-0x525D5E: mov     ecx, [esp+9Ch+var_84]
-0x525D62: push    eax
-0x525D63: call    sub_405790
+0x525D5E: mov     ecx, [esp+9Ch+var_84]; this
+0x525D62: push    eax; index
+0x525D63: call    NiNode_GetChildAtIndex
 0x525D68: test    eax, eax
 0x525D6A: jz      loc_525EBE
 0x525D70: mov     edx, [eax]
@@ -231,9 +231,9 @@
 0x525DA2: lea     ecx, [esp+0A0h+var_80]; this
 0x525DA6: mov     byte ptr [esp+0A0h+var_4], 5
 0x525DAE: call    NiSmartPointer_Set??
-0x525DB3: lea     ecx, [esp+9Ch+var_64]; this
+0x525DB3: lea     ecx, [esp+9Ch+var_64]; slot
 0x525DB7: mov     byte ptr [esp+9Ch+var_4], 1
-0x525DBF: call    sub_7016A0
+0x525DBF: call    NiPointerSlot_Release
 0x525DC4: mov     eax, [esp+9Ch+var_80]
 0x525DC8: test    eax, eax
 0x525DCA: jz      short loc_525DD9
@@ -299,9 +299,9 @@
 0x525E86: lea     ecx, [esp+0A0h+var_70]; this
 0x525E8A: mov     byte ptr [esp+0A0h+var_4], 6
 0x525E92: call    NiSmartPointer_Set??
-0x525E97: lea     ecx, [esp+9Ch+var_60]; this
+0x525E97: lea     ecx, [esp+9Ch+var_60]; slot
 0x525E9B: mov     byte ptr [esp+9Ch+var_4], 1
-0x525EA3: call    sub_7016A0
+0x525EA3: call    NiPointerSlot_Release
 0x525EA8: mov     eax, [esp+9Ch+var_70]
 0x525EAC: test    eax, eax
 0x525EAE: jz      short loc_525EBE
@@ -309,10 +309,10 @@
 0x525EB6: push    eax; a2
 0x525EB7: mov     ecx, esi; this
 0x525EB9: call    sub_478300
-0x525EBE: mov     eax, [esp+9Ch+var_6C]
+0x525EBE: mov     eax, [esp+9Ch+slot]
 0x525EC2: add     eax, 1
 0x525EC5: cmp     eax, [esp+9Ch+var_5C]
-0x525EC9: mov     [esp+9Ch+var_6C], eax
+0x525EC9: mov     [esp+9Ch+slot], eax
 0x525ECD: jb      loc_525D5E
 0x525ED3: mov     edx, [esp+9Ch+var_84]
 0x525ED7: cmp     [ebx+1D8h], edx
@@ -336,20 +336,20 @@
 0x525F11: call    eax
 0x525F13: cmp     dword ptr [ebx+1D4h], 0
 0x525F1A: lea     edi, [ebx+1D4h]
-0x525F20: jnz     short loc_525F71
+0x525F20: jnz     short loc_525F71; Both cached TESNPC FaceGen nodes were cleared by RaceSexMenu_RefreshPlayerFace; proceed to native node reconstruction when the race is available.
 0x525F22: cmp     dword ptr [esi], 0
 0x525F25: jnz     short loc_525F71
-0x525F27: mov     ecx, [ebx+0E8h]
+0x525F27: mov     ecx, [ebx+0E8h]; this
 0x525F2D: test    ecx, ecx
 0x525F2F: jz      short loc_525F71
-0x525F31: push    0
-0x525F33: push    0
-0x525F35: push    ebx
+0x525F31: push    0; preferBipedGeometry
+0x525F33: push    0; applyAppearance
+0x525F35: push    ebx; npc
 0x525F36: lea     edx, [esp+0A8h+var_84]
-0x525F3A: push    edx
+0x525F3A: push    edx; outSkinnedNode
 0x525F3B: lea     eax, [esp+0ACh+a2]
-0x525F3F: push    eax
-0x525F40: call    sub_52DED0
+0x525F3F: push    eax; outBipedNode
+0x525F40: call    TESRace_CreateFaceGenNodes; Reconstruct the biped/skinned FaceGen nodes. TESRace_CreateFaceGenNodes reaches BSFaceGen_BuildHeadGeometryNodes and therefore the bFixFaceNormals normal-stitch gate.
 0x525F45: mov     eax, [ebx+0E8h]
 0x525F4B: mov     ecx, [esp+9Ch+a2]
 0x525F4F: movzx   eax, word ptr [eax+2FCh]
@@ -439,7 +439,7 @@
 0x526077: mov     edx, [esp+9Ch+a2]
 0x52607B: push    ecx
 0x52607C: push    edx
-0x52607D: call    sub_7165B0
+0x52607D: call    sub_7165B0; CustomAnimSupport evidence: queued idle loader controller-manager data attach/bind helper.
 0x526082: add     esp, 8
 0x526085: mov     eax, [esp+9Ch+var_84]
 0x526089: test    eax, eax
@@ -498,7 +498,7 @@
 0x52613E: mov     edx, [esp+9Ch+var_84]
 0x526142: push    ecx
 0x526143: push    edx
-0x526144: call    sub_7165B0
+0x526144: call    sub_7165B0; CustomAnimSupport evidence: queued idle loader controller-manager data attach/bind helper.
 0x526149: mov     ecx, [esp+0A4h+var_84]
 0x52614D: mov     eax, [ecx]
 0x52614F: mov     edx, [eax+0C4h]
@@ -536,18 +536,18 @@
 0x5261A0: fstp    [esp+0B4h+var_B4]
 0x5261A3: mov     eax, [edx+78h]
 0x5261A6: call    eax
-0x5261A8: lea     ecx, [esp+9Ch+var_70]; this
+0x5261A8: lea     ecx, [esp+9Ch+var_70]; slot
 0x5261AC: mov     byte ptr [esp+9Ch+var_4], 0
-0x5261B4: call    sub_7016A0
-0x5261B9: lea     ecx, [esp+9Ch+var_80]; this
+0x5261B4: call    NiPointerSlot_Release
+0x5261B9: lea     ecx, [esp+9Ch+var_80]; slot
 0x5261BD: mov     [esp+9Ch+var_4], 0FFFFFFFFh
-0x5261C8: call    sub_7016A0
+0x5261C8: call    NiPointerSlot_Release
 0x5261CD: fldz
 0x5261CF: push    0; a3
 0x5261D1: push    ecx
 0x5261D2: fstp    [esp+0A4h+var_A4]; a2
 0x5261D5: mov     ecx, [esp+0A4h+var_7C]; this
-0x5261D9: call    NiAVObject_UpdateNiAVObject
+0x5261D9: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x5261DE: jmp     short loc_526214
 0x5261E0: mov     eax, [ebx+0Ch]
 0x5261E3: mov     edx, [ebx]
@@ -574,3 +574,24 @@
 0x526226: pop     ebx
 0x526227: add     esp, 88h
 0x52622D: retn    8
+0x9B7F60: lea     ecx, [ebp-80h]; slot
+0x9B7F63: jmp     NiPointerSlot_Release
+0x9B7F68: lea     ecx, [ebp-70h]; slot
+0x9B7F6B: jmp     NiPointerSlot_Release
+0x9B7F70: lea     ecx, [ebp-54h]
+0x9B7F73: jmp     sub_4781A0
+0x9B7F78: lea     ecx, [ebp-6Ch]; slot
+0x9B7F7B: jmp     NiPointerSlot_Release
+0x9B7F80: lea     ecx, [ebp-54h]
+0x9B7F83: jmp     sub_4781A0
+0x9B7F88: lea     ecx, [ebp-64h]; slot
+0x9B7F8B: jmp     NiPointerSlot_Release
+0x9B7F90: lea     ecx, [ebp-60h]; slot
+0x9B7F93: jmp     NiPointerSlot_Release
+0x9B7F98: mov     edx, [esp+arg_4]
+0x9B7F9C: lea     eax, [edx-8Ch]
+0x9B7FA2: mov     ecx, [edx-90h]
+0x9B7FA8: xor     ecx, eax
+0x9B7FAA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B7FAF: mov     eax, offset stru_AE2748
+0x9B7FB4: jmp     ___CxxFrameHandler3

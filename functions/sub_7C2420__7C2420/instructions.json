@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x7C2428",
-    "line": "push    eax; a7",
+    "line": "push    eax; aux",
     "mnemonic": "push",
     "size": 1
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x7C242D",
-    "line": "push    edx; a6",
+    "line": "push    edx; d3dFormat",
     "mnemonic": "push",
     "size": 1
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x7C2432",
-    "line": "push    eax; a5",
+    "line": "push    eax; targetFlags",
     "mnemonic": "push",
     "size": 1
   },
@@ -49,25 +49,25 @@
   },
   {
     "ea": "0x7C2437",
-    "line": "push    eax; a4",
+    "line": "push    eax; height",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C2438",
-    "line": "push    eax; a3",
+    "line": "push    eax; width",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C2439",
-    "line": "push    edx; a2",
+    "line": "push    edx; renderer",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C243A",
-    "line": "call    NiRenderer_GetRenderedSurface",
+    "line": "call    BSTextureManager_GetOrCreateRenderedTexture; Oblivion BSTextureManager cache lookup/allocation. Reuses a matching BSRenderedTexture by size, format, auxiliary value, and flags or creates one, then moves the resource to the in-use list.",
     "mnemonic": "call",
     "size": 5
   },

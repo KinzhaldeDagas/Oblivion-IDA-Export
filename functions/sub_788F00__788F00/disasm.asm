@@ -1,4 +1,4 @@
-0x788F00: sub     esp, 8
+0x788F00: sub     esp, 8; Oblivion CIndexedGeometry cleanup used after branch extraction: clears the float vector at +0xF8 and byte vector at +0x108, observed as primary wind weights and primary wind matrix indices.
 0x788F03: push    ebx
 0x788F04: push    ebp
 0x788F05: push    esi
@@ -13,14 +13,14 @@
 0x788F25: cmp     ebp, [esi+8]
 0x788F28: jbe     short loc_788F2F
 0x788F2A: call    __invalid_parameter_noinfo
-0x788F2F: push    ebx; Src
-0x788F30: push    esi; int
-0x788F31: push    ebp; Dst
-0x788F32: push    esi; int
-0x788F33: lea     eax, [esp+28h+var_8]
-0x788F37: push    eax; int
-0x788F38: mov     ecx, esi
-0x788F3A: call    sub_439050
+0x788F2F: push    ebx; last
+0x788F30: push    esi; last
+0x788F31: push    ebp; first
+0x788F32: push    esi; first
+0x788F33: lea     eax, [esp+28h+result]
+0x788F37: push    eax; result
+0x788F38: mov     ecx, esi; this
+0x788F3A: call    OB_stVector4_EraseRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Checked erase-range core for vectors of trivial 4-byte elements. Validates iterator owners, shifts the suffix with memmove_s, updates end, and returns the resulting iterator; directly clears CIndexedGeometry triangle totals.
 0x788F3F: mov     esi, [edi+110h]
 0x788F45: cmp     [edi+10Ch], esi
 0x788F4B: jbe     short loc_788F52

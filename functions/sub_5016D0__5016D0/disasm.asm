@@ -1,4 +1,4 @@
-0x5016D0: sub     esp, 8
+0x5016D0: sub     esp, 8; SetAV / SetActorValue execute callback. On PlayerCharacter this dispatches to Player_Actor_SetAViBase: direct base-value mutation, UI refresh, and base-change notification; it does not run skill-use or skill-level advancement.
 0x5016D3: mov     edx, [esp+8+l]
 0x5016D7: push    esi
 0x5016D8: mov     esi, [esp+0Ch+a4]
@@ -20,7 +20,7 @@
 0x501700: push    ecx; a1
 0x501701: mov     dword ptr [esp+30h+var_4], 0
 0x501709: mov     [esp+30h+var_8], 0
-0x501711: call    Script_ExtractArgs
+0x501711: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x501716: add     esp, 24h
 0x501719: test    al, al
 0x50171B: jnz     short loc_501722
@@ -43,7 +43,7 @@
 0x50174A: mov     ecx, dword ptr [esp+10h+var_4]
 0x50174E: push    ecx
 0x50174F: mov     ecx, eax
-0x501751: call    edx
+0x501751: call    edx; Player skill SetAV reaches the base setter. requiredSkillExp[21] is rebuilt through Player_OnActorValueBaseChanged, but skillAdv, specialization counts, attribute bonuses, and majorSkillAdvances are not awarded.
 0x501753: mov     al, 1
 0x501755: pop     esi
 0x501756: add     esp, 8

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x507E60",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; MoonSugarEffect decode: SetTargetRefraction command; for actors routes to Actor refraction/transparency, for non-actors toggles NiProperty refraction flags through sub_7D92C0.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x507EB9",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,13 +583,13 @@
   },
   {
     "ea": "0x507F77",
-    "line": "fst     [esp+14h+a5]; a5",
+    "line": "fst     [esp+14h+a5]; period",
     "mnemonic": "fst",
     "size": 3
   },
   {
     "ea": "0x507F7A",
-    "line": "push    0; a4",
+    "line": "push    0; useRefractF",
     "mnemonic": "push",
     "size": 2
   },
@@ -601,25 +601,25 @@
   },
   {
     "ea": "0x507F7D",
-    "line": "fstp    [esp+1Ch+var_1C]; a3",
+    "line": "fstp    [esp+1Ch+power]; power",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x507F80",
-    "line": "push    0; a2",
+    "line": "push    0; enabled",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x507F82",
-    "line": "push    esi; a1",
+    "line": "push    esi; root",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x507F83",
-    "line": "call    sub_7D92C0",
+    "line": "call    NiAVObject_SetShaderRefractionStateRecursive; Recursively set/clear native refraction state on shader-property subtypes 5..10. useRefractF selects passInfo 0x10000 instead of 0x8000; stores power and optional period and invalidates pass caches.",
     "mnemonic": "call",
     "size": 5
   },
@@ -637,13 +637,13 @@
   },
   {
     "ea": "0x507F8D",
-    "line": "fst     [esp+14h+a5]; a5",
+    "line": "fst     [esp+14h+a5]; period",
     "mnemonic": "fst",
     "size": 3
   },
   {
     "ea": "0x507F90",
-    "line": "push    1; a4",
+    "line": "push    1; useRefractF",
     "mnemonic": "push",
     "size": 2
   },
@@ -655,25 +655,25 @@
   },
   {
     "ea": "0x507F93",
-    "line": "fstp    [esp+1Ch+var_1C]; a3",
+    "line": "fstp    [esp+1Ch+power]; power",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x507F96",
-    "line": "push    0; a2",
+    "line": "push    0; enabled",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x507F98",
-    "line": "push    esi; a1",
+    "line": "push    esi; root",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x507F99",
-    "line": "call    sub_7D92C0",
+    "line": "call    NiAVObject_SetShaderRefractionStateRecursive; Recursively set/clear native refraction state on shader-property subtypes 5..10. useRefractF selects passInfo 0x10000 instead of 0x8000; stores power and optional period and invalidates pass caches.",
     "mnemonic": "call",
     "size": 5
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x507FA4",
-    "line": "fstp    [esp+24h+a5]; a5",
+    "line": "fstp    [esp+24h+a5]; period",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x507FAF",
-    "line": "push    0; a4",
+    "line": "push    0; useRefractF",
     "mnemonic": "push",
     "size": 2
   },
@@ -721,25 +721,25 @@
   },
   {
     "ea": "0x507FB2",
-    "line": "fstp    [esp+1Ch+var_1C]; a3",
+    "line": "fstp    [esp+1Ch+power]; power",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x507FB5",
-    "line": "push    eax; a2",
+    "line": "push    eax; enabled",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x507FB6",
-    "line": "push    esi; a1",
+    "line": "push    esi; root",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x507FB7",
-    "line": "call    sub_7D92C0",
+    "line": "call    NiAVObject_SetShaderRefractionStateRecursive; Recursively set/clear native refraction state on shader-property subtypes 5..10. useRefractF selects passInfo 0x10000 instead of 0x8000; stores power and optional period and invalidates pass caches.",
     "mnemonic": "call",
     "size": 5
   },

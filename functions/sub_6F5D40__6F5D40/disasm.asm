@@ -35,9 +35,9 @@
 0x6F5D8C: jnz     short loc_6F5D98
 0x6F5D8E: mov     [esp+8+arg_4], 4
 0x6F5D96: jmp     short loc_6F5DB2
-0x6F5D98: push    1BDh; int
+0x6F5D98: push    1BDh; sourceLine
 0x6F5D9D: push    offset a_Binaryfile_cp; ".\\binaryFile.cpp"
-0x6F5DA2: call    sub_6ED6D0
+0x6F5DA2: call    FaceGen_ReportAssertionViolation; FaceGen assertion reporter: PrintError("FR2 ASSERT violation in %s line %i. Code may crash.", sourceFile, sourceLine); returns normally. NOT noreturn and NOT a validation barrier.
 0x6F5DA7: add     esp, 8
 0x6F5DAA: mov     [esp+8+arg_4], 1
 0x6F5DB2: mov     edx, [esp+8+arg_0]

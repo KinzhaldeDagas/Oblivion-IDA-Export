@@ -53,299 +53,299 @@ void __cdecl DrawGrassPass_(int a1, int arg4, int arg8, float a4, int a5, int a6
   float v57; // [esp+50h] [ebp-14h]
   float v58; // [esp+54h] [ebp-10h]
 
-  if ( !TES->currentInteriorCell )
+  if ( !MEMORY[0xB333A0]->currentInteriorCell ) /*0x4ebdcc*/
   {
-    if ( byte_B09B00 )
+    if ( byte_B09B00 ) /*0x4ebdd7*/
     {
-      if ( byte_B09AE4 )
+      if ( byte_B09AE4 ) /*0x4ebde3*/
       {
-        if ( !byte_B3608D )
-          sub_4EA750();
-        v49 = SettingGrassEndDistance;
-        byte_B43344 = bGrassPointLightening;
-        v50 = SettingGrassStartFadeDistance;
-        if ( v49 > 0.0 )
+        if ( !unk_B3608D ) /*0x4ebdef*/
+          sub_4EA750(); /*0x4ebdf7*/
+        v49 = SettingGrassEndDistance; /*0x4ebe08*/
+        unk_B43344 = bGrassPointLightening; /*0x4ebe0c*/
+        v50 = SettingGrassStartFadeDistance; /*0x4ebe18*/
+        if ( v49 > 0.0 ) /*0x4ebe27*/
         {
-          if ( !dword_B36094 )
+          if ( !unk_B36094 ) /*0x4ebe2d*/
           {
-            ShadowSceneNode = GetShadowSceneNode(0);
-            v8 = (*(int (__thiscall **)(int, const char *))(*(_DWORD *)ShadowSceneNode + 0x58))(
+            ShadowSceneNode = GetShadowSceneNode(0); /*0x4ebe3d*/
+            v8 = (*(int (__thiscall **)(int, const char *))(*(_DWORD *)ShadowSceneNode + 0x58))( /*0x4ebe4e*/
                    ShadowSceneNode,
                    "Grass");
-            dword_B36094 = v8;
-            if ( !v8 )
+            unk_B36094 = v8; /*0x4ebe52*/
+            if ( !v8 ) /*0x4ebe57*/
             {
-              v9 = (NiNode *)FormHeapAlloc(0xDCu);
-              if ( v9 )
-                v10 = (NiObjectNET *)NiNode::NiNode(v9, 0);
+              v9 = (NiNode *)FormHeapAlloc(0xDCu); /*0x4ebe5e*/
+              if ( v9 ) /*0x4ebe74*/
+                v10 = (NiObjectNET *)NiNode::NiNode(v9, 0); /*0x4ebe7a*/
               else
-                v10 = 0;
-              dword_B36094 = (int)v10;
-              NiObjectNET_SetName(v10, "Grass");
-              (*(void (__thiscall **)(int, int, _DWORD))(*(_DWORD *)ShadowSceneNode + 0x84))(
+                v10 = 0; /*0x4ebe81*/
+              unk_B36094 = (int)v10; /*0x4ebe92*/
+              NiObjectNET_SetName(v10, "Grass"); /*0x4ebe97*/
+              (*(void (__thiscall **)(int, int, _DWORD))(*(_DWORD *)ShadowSceneNode + 0x84))( /*0x4ebeae*/
                 ShadowSceneNode,
-                dword_B36094,
+                unk_B36094,
                 0);
             }
           }
-          sub_7C2960(0.0, 0.0, v50, v49);
-          v11 = Double_To_SInt32(*(float *)&a1);
-          a2 = v11;
-          v12 = Double_To_SInt32(*(float *)&a1);
-          v13 = v12;
-          a3 = v12;
-          if ( *(float *)&a1 < 0.0 )
-            a2 = --v11;
-          if ( *(float *)&arg4 < 0.0 )
+          sub_7C2960(0.0, 0.0, v50, v49); /*0x4ebecc*/
+          v11 = Double_To_SInt32(*(float *)&a1); /*0x4ebeef*/
+          a2 = v11; /*0x4ebef3*/
+          v12 = Double_To_SInt32(*(float *)&a1); /*0x4ebef9*/
+          v13 = v12; /*0x4ebf02*/
+          a3 = v12; /*0x4ebf04*/
+          if ( *(float *)&a1 < 0.0 ) /*0x4ebf0f*/
+            a2 = --v11; /*0x4ebf14*/
+          if ( *(float *)&arg4 < 0.0 ) /*0x4ebf1f*/
           {
-            v13 = v12 - 1;
-            a3 = v12 - 1;
+            v13 = v12 - 1; /*0x4ebf21*/
+            a3 = v12 - 1; /*0x4ebf24*/
           }
-          CellFromCoords = TES_GetCellFromCoords(TES, v11, v13);
-          DrawGrass(
+          CellFromCoords = TES_GetCellFromCoords(MEMORY[0xB333A0], v11, v13); /*0x4ebf30*/
+          DrawGrass( /*0x4ebf87*/
             (TESObjectCELL *)CellFromCoords,
-            dword_B36094,
-            a1,
-            arg4,
+            unk_B36094,
+            *(float *)&a1,
+            *(float *)&arg4,
             *(float *)&arg8,
             a4,
             *(float *)&a5,
             a6,
             v50,
-            v49,
+            SLODWORD(v49),
             a7);
-          v57 = *(float *)&a1 - (double)(a2 << 0xC);
-          v54 = a2 - 1;
-          v58 = *(float *)&arg4 - (double)(a3 << 0xC);
-          v15 = TES_GetCellFromCoords(TES, a2 - 1, a3);
-          v41 = (TESObjectCELL *)v15;
-          if ( v15 )
+          v57 = *(float *)&a1 - (double)(a2 << 0xC); /*0x4ebfbb*/
+          v54 = a2 - 1; /*0x4ebfc8*/
+          v58 = *(float *)&arg4 - (double)(a3 << 0xC); /*0x4ebfcc*/
+          v15 = TES_GetCellFromCoords(MEMORY[0xB333A0], a2 - 1, a3); /*0x4ebfd5*/
+          v41 = (TESObjectCELL *)v15; /*0x4ebfd9*/
+          if ( v15 ) /*0x4ebfdd*/
           {
-            if ( v57 - v49 >= dbl_A2FC68 )
+            if ( v57 - v49 >= dbl_A2FC68 ) /*0x4ebff8*/
             {
-              YCoordinate = TESObjectCELL_GetYCoordinate((TESObjectCELL *)v15);
-              XCoordinate = TESObjectCELL_GetXCoordinate(v41);
-              sub_7C3AB0(XCoordinate, YCoordinate);
+              YCoordinate = TESObjectCELL_GetYCoordinate((TESObjectCELL *)v15); /*0x4ec04c*/
+              XCoordinate = TESObjectCELL_GetXCoordinate(v41); /*0x4ec04d*/
+              sub_7C3AB0(XCoordinate, YCoordinate); /*0x4ec053*/
             }
             else
             {
-              DrawGrass(
+              DrawGrass( /*0x4ec037*/
                 (TESObjectCELL *)v15,
-                dword_B36094,
-                a1,
-                arg4,
+                unk_B36094,
+                *(float *)&a1,
+                *(float *)&arg4,
                 *(float *)&arg8,
                 a4,
                 *(float *)&a5,
                 a6,
                 v50,
-                v49,
+                SLODWORD(v49),
                 a7);
             }
           }
-          v56 = a2 + 1;
-          v17 = TES_GetCellFromCoords(TES, a2 + 1, a3);
-          v42 = (TESObjectCELL *)v17;
-          if ( v17 )
+          v56 = a2 + 1; /*0x4ec06e*/
+          v17 = TES_GetCellFromCoords(MEMORY[0xB333A0], a2 + 1, a3); /*0x4ec077*/
+          v42 = (TESObjectCELL *)v17; /*0x4ec07b*/
+          if ( v17 ) /*0x4ec07f*/
           {
-            if ( v57 + v49 <= dbl_A37650 )
+            if ( v57 + v49 <= dbl_A37650 ) /*0x4ec09a*/
             {
-              v34 = TESObjectCELL_GetYCoordinate((TESObjectCELL *)v17);
-              v18 = TESObjectCELL_GetXCoordinate(v42);
-              sub_7C3AB0(v18, v34);
+              v34 = TESObjectCELL_GetYCoordinate((TESObjectCELL *)v17); /*0x4ec0ee*/
+              v18 = TESObjectCELL_GetXCoordinate(v42); /*0x4ec0ef*/
+              sub_7C3AB0(v18, v34); /*0x4ec0f5*/
             }
             else
             {
-              DrawGrass(
+              DrawGrass( /*0x4ec0d9*/
                 (TESObjectCELL *)v17,
-                dword_B36094,
-                a1,
-                arg4,
+                unk_B36094,
+                *(float *)&a1,
+                *(float *)&arg4,
                 *(float *)&arg8,
                 a4,
                 *(float *)&a5,
                 a6,
                 v50,
-                v49,
+                SLODWORD(v49),
                 a7);
             }
           }
-          v55 = a3 - 1;
-          v19 = TES_GetCellFromCoords(TES, a2, a3 - 1);
-          v43 = (TESObjectCELL *)v19;
-          if ( v19 )
+          v55 = a3 - 1; /*0x4ec110*/
+          v19 = TES_GetCellFromCoords(MEMORY[0xB333A0], a2, a3 - 1); /*0x4ec119*/
+          v43 = (TESObjectCELL *)v19; /*0x4ec11d*/
+          if ( v19 ) /*0x4ec121*/
           {
-            if ( v58 - v49 >= dbl_A2FC68 )
+            if ( v58 - v49 >= dbl_A2FC68 ) /*0x4ec13c*/
             {
-              v35 = TESObjectCELL_GetYCoordinate((TESObjectCELL *)v19);
-              v20 = TESObjectCELL_GetXCoordinate(v43);
-              sub_7C3AB0(v20, v35);
+              v35 = TESObjectCELL_GetYCoordinate((TESObjectCELL *)v19); /*0x4ec190*/
+              v20 = TESObjectCELL_GetXCoordinate(v43); /*0x4ec191*/
+              sub_7C3AB0(v20, v35); /*0x4ec197*/
             }
             else
             {
-              DrawGrass(
+              DrawGrass( /*0x4ec17b*/
                 (TESObjectCELL *)v19,
-                dword_B36094,
-                a1,
-                arg4,
+                unk_B36094,
+                *(float *)&a1,
+                *(float *)&arg4,
                 *(float *)&arg8,
                 a4,
                 *(float *)&a5,
                 a6,
                 v50,
-                v49,
+                SLODWORD(v49),
                 a7);
             }
           }
-          a3a = a3 + 1;
-          v21 = TES_GetCellFromCoords(TES, a2, a3a);
-          v44 = (TESObjectCELL *)v21;
-          if ( v21 )
+          a3a = a3 + 1; /*0x4ec1b2*/
+          v21 = TES_GetCellFromCoords(MEMORY[0xB333A0], a2, a3a); /*0x4ec1bb*/
+          v44 = (TESObjectCELL *)v21; /*0x4ec1bf*/
+          if ( v21 ) /*0x4ec1c3*/
           {
-            if ( v58 + v49 <= dbl_A37650 )
+            if ( v58 + v49 <= dbl_A37650 ) /*0x4ec1de*/
             {
-              v36 = TESObjectCELL_GetYCoordinate((TESObjectCELL *)v21);
-              v22 = TESObjectCELL_GetXCoordinate(v44);
-              sub_7C3AB0(v22, v36);
+              v36 = TESObjectCELL_GetYCoordinate((TESObjectCELL *)v21); /*0x4ec232*/
+              v22 = TESObjectCELL_GetXCoordinate(v44); /*0x4ec233*/
+              sub_7C3AB0(v22, v36); /*0x4ec239*/
             }
             else
             {
-              DrawGrass(
+              DrawGrass( /*0x4ec21d*/
                 (TESObjectCELL *)v21,
-                dword_B36094,
-                a1,
-                arg4,
+                unk_B36094,
+                *(float *)&a1,
+                *(float *)&arg4,
                 *(float *)&arg8,
                 a4,
                 *(float *)&a5,
                 a6,
                 v50,
-                v49,
+                SLODWORD(v49),
                 a7);
             }
           }
-          v23 = TES_GetCellFromCoords(TES, v54, v55);
-          v45 = (TESObjectCELL *)v23;
-          if ( v23 )
+          v23 = TES_GetCellFromCoords(MEMORY[0xB333A0], v54, v55); /*0x4ec256*/
+          v45 = (TESObjectCELL *)v23; /*0x4ec25a*/
+          if ( v23 ) /*0x4ec25e*/
           {
-            if ( v57 - v49 >= 0.0 || v58 - v49 >= 0.0 )
+            if ( v57 - v49 >= 0.0 || v58 - v49 >= 0.0 ) /*0x4ec28c*/
             {
-              v37 = TESObjectCELL_GetYCoordinate((TESObjectCELL *)v23);
-              v24 = TESObjectCELL_GetXCoordinate(v45);
-              sub_7C3AB0(v24, v37);
+              v37 = TESObjectCELL_GetYCoordinate((TESObjectCELL *)v23); /*0x4ec2e2*/
+              v24 = TESObjectCELL_GetXCoordinate(v45); /*0x4ec2e3*/
+              sub_7C3AB0(v24, v37); /*0x4ec2e9*/
             }
             else
             {
-              DrawGrass(
+              DrawGrass( /*0x4ec2cb*/
                 (TESObjectCELL *)v23,
-                dword_B36094,
-                a1,
-                arg4,
+                unk_B36094,
+                *(float *)&a1,
+                *(float *)&arg4,
                 *(float *)&arg8,
                 a4,
                 *(float *)&a5,
                 a6,
                 v50,
-                v49,
+                SLODWORD(v49),
                 a7);
             }
           }
-          v25 = TES_GetCellFromCoords(TES, v54, a3a);
-          v46 = (TESObjectCELL *)v25;
-          if ( v25 )
+          v25 = TES_GetCellFromCoords(MEMORY[0xB333A0], v54, a3a); /*0x4ec306*/
+          v46 = (TESObjectCELL *)v25; /*0x4ec30a*/
+          if ( v25 ) /*0x4ec30e*/
           {
-            if ( v57 - v49 >= dbl_A2FC68 || v58 + v49 <= dbl_A37650 )
+            if ( v57 - v49 >= dbl_A2FC68 || v58 + v49 <= dbl_A37650 ) /*0x4ec340*/
             {
-              v38 = TESObjectCELL_GetYCoordinate((TESObjectCELL *)v25);
-              v26 = TESObjectCELL_GetXCoordinate(v46);
-              sub_7C3AB0(v26, v38);
+              v38 = TESObjectCELL_GetYCoordinate((TESObjectCELL *)v25); /*0x4ec394*/
+              v26 = TESObjectCELL_GetXCoordinate(v46); /*0x4ec395*/
+              sub_7C3AB0(v26, v38); /*0x4ec39b*/
             }
             else
             {
-              DrawGrass(
+              DrawGrass( /*0x4ec37f*/
                 (TESObjectCELL *)v25,
-                dword_B36094,
-                a1,
-                arg4,
+                unk_B36094,
+                *(float *)&a1,
+                *(float *)&arg4,
                 *(float *)&arg8,
                 a4,
                 *(float *)&a5,
                 a6,
                 v50,
-                v49,
+                SLODWORD(v49),
                 a7);
             }
           }
-          v27 = TES_GetCellFromCoords(TES, v56, v55);
-          v47 = (TESObjectCELL *)v27;
-          if ( v27 )
+          v27 = TES_GetCellFromCoords(MEMORY[0xB333A0], v56, v55); /*0x4ec3b8*/
+          v47 = (TESObjectCELL *)v27; /*0x4ec3bc*/
+          if ( v27 ) /*0x4ec3c0*/
           {
-            if ( v57 + v49 <= dbl_A37650 || v58 - v49 >= dbl_A2FC68 )
+            if ( v57 + v49 <= dbl_A37650 || v58 - v49 >= dbl_A2FC68 ) /*0x4ec3f2*/
             {
-              v39 = TESObjectCELL_GetYCoordinate((TESObjectCELL *)v27);
-              v28 = TESObjectCELL_GetXCoordinate(v47);
-              sub_7C3AB0(v28, v39);
+              v39 = TESObjectCELL_GetYCoordinate((TESObjectCELL *)v27); /*0x4ec446*/
+              v28 = TESObjectCELL_GetXCoordinate(v47); /*0x4ec447*/
+              sub_7C3AB0(v28, v39); /*0x4ec44d*/
             }
             else
             {
-              DrawGrass(
+              DrawGrass( /*0x4ec431*/
                 (TESObjectCELL *)v27,
-                dword_B36094,
-                a1,
-                arg4,
+                unk_B36094,
+                *(float *)&a1,
+                *(float *)&arg4,
                 *(float *)&arg8,
                 a4,
                 *(float *)&a5,
                 a6,
                 v50,
-                v49,
+                SLODWORD(v49),
                 a7);
             }
           }
-          v29 = TES_GetCellFromCoords(TES, v56, a3a);
-          v48 = (TESObjectCELL *)v29;
-          if ( v29 )
+          v29 = TES_GetCellFromCoords(MEMORY[0xB333A0], v56, a3a); /*0x4ec46a*/
+          v48 = (TESObjectCELL *)v29; /*0x4ec46e*/
+          if ( v29 ) /*0x4ec472*/
           {
-            v30 = dbl_A37650;
-            if ( v30 >= v57 + v49 || v58 + v49 <= v30 )
+            v30 = dbl_A37650; /*0x4ec48e*/
+            if ( v30 >= v57 + v49 || v58 + v49 <= v30 ) /*0x4ec4a4*/
             {
-              v40 = TESObjectCELL_GetYCoordinate((TESObjectCELL *)v29);
-              v31 = TESObjectCELL_GetXCoordinate(v48);
-              sub_7C3AB0(v31, v40);
+              v40 = TESObjectCELL_GetYCoordinate((TESObjectCELL *)v29); /*0x4ec4fa*/
+              v31 = TESObjectCELL_GetXCoordinate(v48); /*0x4ec4fb*/
+              sub_7C3AB0(v31, v40); /*0x4ec501*/
             }
             else
             {
-              DrawGrass(
+              DrawGrass( /*0x4ec4e3*/
                 (TESObjectCELL *)v29,
-                dword_B36094,
-                a1,
-                arg4,
+                unk_B36094,
+                *(float *)&a1,
+                *(float *)&arg4,
                 *(float *)&arg8,
                 a4,
                 *(float *)&a5,
                 a6,
                 v50,
-                v49,
+                SLODWORD(v49),
                 a7);
             }
           }
-          if ( bGrassPointLightening )
+          if ( bGrassPointLightening ) /*0x4ec509*/
           {
-            v32 = 0;
-            if ( byte_B43384 )
+            v32 = 0; /*0x4ec512*/
+            if ( unk_B43384 ) /*0x4ec514*/
             {
-              sub_43F2E0(&stru_B43400);
-              v32 = 1;
+              sub_43F2E0(&unk_B43400); /*0x4ec521*/
+              v32 = 1; /*0x4ec526*/
             }
-            GetShadowSceneNode(0);
-            sub_7C7050(dword_B36094, 0);
-            if ( v32 )
-              sub_43F300(&stru_B43400);
+            GetShadowSceneNode(0); /*0x4ec52a*/
+            sub_7C7050(unk_B36094, 0); /*0x4ec538*/
+            if ( v32 ) /*0x4ec542*/
+              sub_43F300(&unk_B43400); /*0x4ec549*/
           }
-          if ( dword_B36094 )
+          if ( unk_B36094 ) /*0x4ec54e*/
           {
-            NiAVObject_UpdateNiAVObject((NiAVObject *)dword_B36094, 0.0, 0);
-            NiAVObject_InitializePropertyState((NiAVObject *)dword_B36094);
+            NiAVObject_UpdateNiAVObject((NiAVObject *)unk_B36094, 0.0, 0); /*0x4ec560*/
+            NiAVObject_InitializePropertyState((NiAVObject *)unk_B36094); /*0x4ec56b*/
           }
         }
       }

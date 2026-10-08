@@ -22,48 +22,61 @@
 0x6F89F4: test    cl, 4
 0x6F89F7: jz      short loc_6F8A37
 0x6F89F9: push    offset aIos_baseBadbit; "ios_base::badbit set"
-0x6F89FE: lea     ecx, [esp+9Ch+var_6C]
+0x6F89FE: lea     ecx, [esp+9Ch+message]
 0x6F8A02: call    sub_414750
-0x6F8A07: lea     eax, [esp+98h+var_6C]
-0x6F8A0B: push    eax
-0x6F8A0C: lea     ecx, [esp+9Ch+var_94]
+0x6F8A07: lea     eax, [esp+98h+message]
+0x6F8A0B: push    eax; message
+0x6F8A0C: lea     ecx, [esp+9Ch+var_94]; this
 0x6F8A10: mov     [esp+9Ch+var_4], 0
-0x6F8A1B: call    sub_6F7DD0
+0x6F8A1B: call    OB_std_runtime_error_CtorFromString_010201A0; Oblivion runtime_error constructor from the 28-byte SpeedTree small string: constructs std::exception, installs runtime_error vftable, initializes SSO state, and copies the message.
 0x6F8A20: push    offset __TI3?AVfailure@ios_base@std@@; throw info for 'class std::ios_base::failure'
 0x6F8A25: lea     ecx, [esp+9Ch+var_94]
 0x6F8A29: push    ecx
-0x6F8A2A: mov     [esp+0A0h+var_94], offset ??_7failure@ios_base@std@@6B@; const std::ios_base::failure::`vftable'
+0x6F8A2A: mov     dword ptr [esp+0A0h+var_94.exceptionBase], offset ??_7failure@ios_base@std@@6B@; const std::ios_base::failure::`vftable' ...
 0x6F8A32: call    ThrowException??
 0x6F8A37: test    cl, 2
 0x6F8A3A: jz      short loc_6F8A7A
 0x6F8A3C: push    offset aIos_baseFailbi; "ios_base::failbit set"
-0x6F8A41: lea     ecx, [esp+9Ch+var_6C]
+0x6F8A41: lea     ecx, [esp+9Ch+message]
 0x6F8A45: call    sub_414750
-0x6F8A4A: lea     edx, [esp+98h+var_6C]
-0x6F8A4E: push    edx
-0x6F8A4F: lea     ecx, [esp+9Ch+var_94]
+0x6F8A4A: lea     edx, [esp+98h+message]
+0x6F8A4E: push    edx; message
+0x6F8A4F: lea     ecx, [esp+9Ch+var_94]; this
 0x6F8A53: mov     [esp+9Ch+var_4], 1
-0x6F8A5E: call    sub_6F7DD0
+0x6F8A5E: call    OB_std_runtime_error_CtorFromString_010201A0; Oblivion runtime_error constructor from the 28-byte SpeedTree small string: constructs std::exception, installs runtime_error vftable, initializes SSO state, and copies the message.
 0x6F8A63: push    offset __TI3?AVfailure@ios_base@std@@; throw info for 'class std::ios_base::failure'
 0x6F8A68: lea     eax, [esp+9Ch+var_94]
 0x6F8A6C: push    eax
-0x6F8A6D: mov     [esp+0A0h+var_94], offset ??_7failure@ios_base@std@@6B@; const std::ios_base::failure::`vftable'
+0x6F8A6D: mov     dword ptr [esp+0A0h+var_94.exceptionBase], offset ??_7failure@ios_base@std@@6B@; const std::ios_base::failure::`vftable' ...
 0x6F8A75: call    ThrowException??
 0x6F8A7A: push    offset aIos_baseEofbit; "ios_base::eofbit set"
 0x6F8A7F: lea     ecx, [esp+9Ch+var_28]
 0x6F8A83: call    sub_414750
 0x6F8A88: lea     ecx, [esp+98h+var_28]
-0x6F8A8C: push    ecx
-0x6F8A8D: lea     ecx, [esp+9Ch+var_50]
+0x6F8A8C: push    ecx; message
+0x6F8A8D: lea     ecx, [esp+9Ch+var_50]; this
 0x6F8A91: mov     [esp+9Ch+var_4], 2
-0x6F8A9C: call    sub_6F7DD0
+0x6F8A9C: call    OB_std_runtime_error_CtorFromString_010201A0; Oblivion runtime_error constructor from the 28-byte SpeedTree small string: constructs std::exception, installs runtime_error vftable, initializes SSO state, and copies the message.
 0x6F8AA1: push    offset __TI3?AVfailure@ios_base@std@@; throw info for 'class std::ios_base::failure'
 0x6F8AA6: lea     edx, [esp+9Ch+var_50]
 0x6F8AAA: push    edx
-0x6F8AAB: mov     [esp+0A0h+var_50], offset ??_7failure@ios_base@std@@6B@; const std::ios_base::failure::`vftable'
+0x6F8AAB: mov     dword ptr [esp+0A0h+var_50.exceptionBase], offset ??_7failure@ios_base@std@@6B@; const std::ios_base::failure::`vftable' ...
 0x6F8AB3: call    ThrowException??
 0x6F8AB8: mov     ecx, [esp+98h+var_C]
 0x6F8ABF: mov     large fs:0, ecx
 0x6F8AC6: pop     ecx
 0x6F8AC7: add     esp, 94h
 0x6F8ACD: retn    8
+0x9C8FB0: lea     ecx, [ebp-6Ch]; this
+0x9C8FB3: jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
+0x9C8FB8: lea     ecx, [ebp-6Ch]; this
+0x9C8FBB: jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
+0x9C8FC0: lea     ecx, [ebp-28h]; this
+0x9C8FC3: jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
+0x9C8FC8: mov     edx, [esp+arg_4]
+0x9C8FCC: lea     eax, [edx-88h]
+0x9C8FD2: mov     ecx, [edx-8Ch]
+0x9C8FD8: xor     ecx, eax
+0x9C8FDA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C8FDF: mov     eax, offset stru_AF18C8
+0x9C8FE4: jmp     ___CxxFrameHandler3

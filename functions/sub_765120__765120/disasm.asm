@@ -1,4 +1,4 @@
-0x765120: sub     esp, 24h
+0x765120: sub     esp, 24h; Oblivion-authoritative NiDX9Renderer::Copy. Builds full-surface rectangles when either rectangle is null and maps Gamebryo CopyFilterPreference 1/2 to D3DTEXF_POINT/LINEAR (otherwise NONE), then performs IDirect3DDevice9::StretchRect.
 0x765123: push    ebx
 0x765124: xor     ebx, ebx
 0x765126: cmp     [ecx+6F0h], bl
@@ -8,10 +8,10 @@
 0x765134: pop     ebx
 0x765135: add     esp, 24h
 0x765138: retn    14h
-0x76513B: mov     ecx, [esp+28h+arg_4]; void *
+0x76513B: mov     ecx, [esp+28h+destination]; this
 0x76513F: mov     edx, [ecx+10h]
 0x765142: push    ebp
-0x765143: mov     ebp, [esp+2Ch+arg_0]
+0x765143: mov     ebp, [esp+2Ch+source]
 0x765147: mov     eax, [ebp+10h]
 0x76514A: cmp     eax, ebx
 0x76514C: jz      loc_765272
@@ -25,7 +25,7 @@
 0x765164: jz      loc_765254
 0x76516A: cmp     edi, ebx
 0x76516C: jz      loc_765254
-0x765172: mov     eax, [esp+34h+arg_8]
+0x765172: mov     eax, [esp+34h+sourceRect]
 0x765176: cmp     eax, ebx
 0x765178: jz      short loc_765193
 0x76517A: mov     edx, [eax]
@@ -42,7 +42,7 @@
 0x76519D: mov     [esp+34h+var_8], edx
 0x7651A1: mov     [esp+34h+var_C], ebx
 0x7651A5: mov     [esp+34h+var_4], eax
-0x7651A9: mov     eax, [esp+34h+arg_C]
+0x7651A9: mov     eax, [esp+34h+destinationRect]
 0x7651AD: cmp     eax, ebx
 0x7651AF: jz      short loc_7651CE
 0x7651B1: mov     ecx, [eax]
@@ -60,7 +60,7 @@
 0x7651D8: mov     [esp+34h+var_18], eax
 0x7651DC: mov     [esp+34h+var_1C], ebx
 0x7651E0: mov     [esp+34h+var_14], ecx
-0x7651E4: mov     eax, [esp+34h+arg_10]
+0x7651E4: mov     eax, [esp+34h+filterPreference]
 0x7651E8: sub     eax, 1
 0x7651EB: jz      short loc_7651FD
 0x7651ED: sub     eax, 1
@@ -82,14 +82,14 @@
 0x76521A: push    esi
 0x76521B: push    eax
 0x76521C: mov     eax, [ecx+88h]
-0x765222: call    eax
+0x765222: call    eax; General Copy StretchRect commit; the final argument is the translated D3DTEXTUREFILTERTYPE.
 0x765224: cmp     eax, ebx
 0x765226: jge     short loc_765248
-0x765228: push    eax
-0x765229: call    sub_7736F0
+0x765228: push    eax; hresult
+0x765229: call    D3D9_HResultToString; Maps common COM/D3D9 HRESULT values to diagnostic names, including DEVICELOST, DEVICENOTRESET, INVALIDCALL, OUTOFVIDEOMEMORY, and format/state failures.
 0x76522E: push    eax
 0x76522F: push    offset aNidx9render_23; "NiDX9Renderer::Copy> Failed StretchRect"...
-0x765234: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x765234: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x765239: add     esp, 0Ch
 0x76523C: pop     edi
 0x76523D: pop     esi
@@ -107,7 +107,7 @@
 0x765251: retn    14h
 0x765254: push    offset aNullSurfaceFou; "NULL Surface found"
 0x765259: push    offset aNidx9render_24; "NiDX9Renderer::Copy> Failed - %s"
-0x76525E: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x76525E: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x765263: add     esp, 8
 0x765266: pop     edi
 0x765267: pop     esi
@@ -118,7 +118,7 @@
 0x76526F: retn    14h
 0x765272: push    offset aNoRendererdata; "No RendererData found"
 0x765277: push    offset aNidx9render_24; "NiDX9Renderer::Copy> Failed - %s"
-0x76527C: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x76527C: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x765281: add     esp, 8
 0x765284: pop     ebp
 0x765285: xor     al, al

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E65B0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified serialized PGRL chunk processing calls TESPathGrid_AddPointForLinkedReference, populating the reference-to-point index used by runtime enable/disable callbacks. This is separate from modified-form save data, which stores disabled point indices.",
     "mnemonic": "push",
     "size": 2
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x4E6617",
-    "line": "mov     [esp+15Ch+var_13C], ebp",
+    "line": "mov     [esp+15Ch+worldPosition], ebp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x4E6695",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x4E6706",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -625,7 +625,7 @@
   },
   {
     "ea": "0x4E672A",
-    "line": "call    TESForm_ResolveFormID",
+    "line": "call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x4E6745",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -805,25 +805,25 @@
   },
   {
     "ea": "0x4E6786",
-    "line": "push    ecx",
+    "line": "push    ecx; point",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E6787",
-    "line": "push    ebx",
+    "line": "push    ebx; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E6788",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E678A",
-    "line": "call    sub_4E50E0",
+    "line": "call    TESPathGrid_AddPointForLinkedReference; Verified — PGRL loading populates pointsByReference (+0x34): key is a TESObjectREFR* and value is a BSSimpleList of TESPathGridPoint*. Duplicate point pointers are suppressed. Cross-reference from TESPathGrid_LoadSerializedGraphChunks at 0x4E678A.",
     "mnemonic": "call",
     "size": 5
   },
@@ -937,7 +937,7 @@
   },
   {
     "ea": "0x4E67D3",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1459,7 +1459,7 @@
   },
   {
     "ea": "0x4E68E4",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1735,13 +1735,13 @@
   },
   {
     "ea": "0x4E696F",
-    "line": "mov     [esp+164h+var_13C], eax",
+    "line": "mov     [esp+164h+worldPosition], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E6973",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1765,7 +1765,7 @@
   },
   {
     "ea": "0x4E6984",
-    "line": "mov     ebp, [esp+15Ch+var_13C]",
+    "line": "mov     ebp, [esp+15Ch+worldPosition]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1813,13 +1813,13 @@
   },
   {
     "ea": "0x4E69A5",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E69A7",
-    "line": "call    sub_4E7DF0",
+    "line": "call    TESPathGridPoint_ctor; Verified TESPathGridPoint constructor initializes the graph-search prefix, adjacency list and position, sets +0x28 to null, and lazily creates two shared NiAVObject templates. The template references are refcounted and selected by integerized point-Z parity in TESPathGridPoint_RebuildRenderGeometry. Material field correction: the formerly `unknown28` member at +0x28 is a per-point NiNode* renderNode; the render builder writes it and the clear helper removes/releases it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1843,13 +1843,13 @@
   },
   {
     "ea": "0x4E69B2",
-    "line": "push    ebp",
+    "line": "push    ebp; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E69B3",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1867,7 +1867,7 @@
   },
   {
     "ea": "0x4E69C4",
-    "line": "call    sub_4BEF50",
+    "line": "call    PathGraphNode_SetPosition; Verified shared graph-node position setter: writes XYZ into this+0x14; called by both TESRoad and TESPathGrid record loaders.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1939,19 +1939,19 @@
   },
   {
     "ea": "0x4E69E7",
-    "line": "push    1",
+    "line": "push    1; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4E69E9",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E69EB",
-    "line": "call    sub_67ED00",
+    "line": "call    PathGraphNode_SetBelowWaterFlag; Verified sets/clears stateFlags bit 0x08. TESPathGrid_LoadSerializedGraphChunks sets it when point Z is below the cell water height; actor-aware edge scoring treats it as a boundary trait.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1963,7 +1963,7 @@
   },
   {
     "ea": "0x4E69F5",
-    "line": "mov     byte ptr [esp+15Ch+var_134], 0",
+    "line": "mov     [esp+15Ch+value], 0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1975,19 +1975,19 @@
   },
   {
     "ea": "0x4E69FC",
-    "line": "mov     ecx, [esp+15Ch+var_130]",
+    "line": "mov     ecx, [esp+15Ch+var_130]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E6A00",
-    "line": "push    ebp",
+    "line": "push    ebp; worldPosition",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E6A01",
-    "line": "call    sub_4CBBB0",
+    "line": "call    TESObjectCELL_FindSmallestSubSpaceContainingPosition; Verified: locks a cell's object list and returns the smallest-radius TESSubSpace reference containing the query position; this is the interior-cell counterpart to the WorldSpace coordinate-bucket lookup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2011,19 +2011,19 @@
   },
   {
     "ea": "0x4E6A0F",
-    "line": "mov     ecx, [esp+15Ch+var_124]",
+    "line": "mov     ecx, [esp+15Ch+var_124]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E6A13",
-    "line": "push    ebp",
+    "line": "push    ebp; worldPosition",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E6A14",
-    "line": "call    sub_4F0600",
+    "line": "call    TESWorldSpace_FindSmallestSubSpaceContainingPosition; Verified: queries the SubSpace candidate list for the position-derived cell key, then returns the smallest-radius TESSubSpace whose exact scaled local bounds contain the point.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2041,49 +2041,49 @@
   },
   {
     "ea": "0x4E6A1D",
-    "line": "mov     byte ptr [esp+15Ch+var_134], 1",
+    "line": "mov     [esp+15Ch+value], 1",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x4E6A22",
-    "line": "mov     eax, [esp+15Ch+var_134]",
+    "line": "mov     eax, dword ptr [esp+15Ch+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E6A26",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E6A27",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E6A29",
-    "line": "call    sub_67ED50",
+    "line": "call    PathGraphNode_SetSubSpaceMembershipFlag; Verified sets/clears stateFlags bit 0x40. PathGrid graph loading sets it when WorldSpace/Cell SubSpace lookup finds a containing TESSubSpace; actor-aware edge cost adds a penalty when endpoints differ on this bit.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E6A2E",
-    "line": "push    edi",
+    "line": "push    edi; point",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E6A2F",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E6A31",
-    "line": "call    sub_4E5380",
+    "line": "call    TESPathGrid_AddPointToSpatialBucket; Verified insertion into TESPathGrid.pointsByCell (+0x44), which is a per-PathGrid 512-unit X/Y spatial-bucket map despite the legacy member/type spelling. It derives the packed key from the node's NiPoint3, finds or creates a BSSimpleList header, then pushes the point pointer. The graph-chunk loader calls this for each loaded point; FindPointByPositionInCell uses the same key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2101,7 +2101,7 @@
   },
   {
     "ea": "0x4E6A3E",
-    "line": "add     [esp+15Ch+var_138], ecx",
+    "line": "add     [esp+15Ch+var_138], ecx; Accumulate total PGRR slot count from each PGRP point's u8 connection-count field.",
     "mnemonic": "add",
     "size": 4
   },
@@ -2149,7 +2149,7 @@
   },
   {
     "ea": "0x4E6A60",
-    "line": "cmp     eax, 52524750h",
+    "line": "cmp     eax, 52524750h; PGRR branch. It is ignored until a serialized PGRP point buffer exists.",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -2161,7 +2161,7 @@
   },
   {
     "ea": "0x4E6A6B",
-    "line": "cmp     [esp+15Ch+var_13C], 0",
+    "line": "cmp     [esp+15Ch+worldPosition], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -2257,7 +2257,7 @@
   },
   {
     "ea": "0x4E6AA3",
-    "line": "cmp     [ebx+254h], eax",
+    "line": "cmp     [ebx+254h], eax; Require PGRR byte length == 2 * total declared connection slots. On mismatch Oblivion logs an error and does not read chunk bytes into the allocated buffer.",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -2347,7 +2347,7 @@
   },
   {
     "ea": "0x4E6AE1",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2791,7 +2791,7 @@
   },
   {
     "ea": "0x4E6BBE",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2821,7 +2821,7 @@
   },
   {
     "ea": "0x4E6BCF",
-    "line": "mov     edi, [esp+15Ch+var_13C]",
+    "line": "mov     edi, [esp+15Ch+worldPosition]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2887,7 +2887,7 @@
   },
   {
     "ea": "0x4E6BF4",
-    "line": "movzx   eax, word ptr [edx+ebp*2]",
+    "line": "movzx   eax, word ptr [edx+ebp*2]; Read one PGRR neighbor as unsigned u16 (movzx). Serialized 0xFFFF is 65535, not signed -1.",
     "mnemonic": "movzx",
     "size": 4
   },
@@ -2899,7 +2899,7 @@
   },
   {
     "ea": "0x4E6BFC",
-    "line": "jnb     short loc_4E6C21",
+    "line": "jnb     short loc_4E6C21; Unsigned range gate: neighbor_index >= point_count skips insertion. This silently filters 0xFFFF and any other out-of-range index.",
     "mnemonic": "jnb",
     "size": 2
   },
@@ -2935,7 +2935,7 @@
   },
   {
     "ea": "0x4E6C0C",
-    "line": "jz      short loc_4E6C21",
+    "line": "jz      short loc_4E6C21; Skip a valid-range index whose point-array entry is null.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -2947,7 +2947,7 @@
   },
   {
     "ea": "0x4E6C10",
-    "line": "jz      short loc_4E6C21",
+    "line": "jz      short loc_4E6C21; Skip self-edge when target point equals source point.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -2959,13 +2959,13 @@
   },
   {
     "ea": "0x4E6C13",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E6C15",
-    "line": "call    sub_4E7DE0",
+    "line": "call    PathGraphNode_GetConnections; Only an in-range, non-null, non-self target reaches adjacency-list insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2983,13 +2983,13 @@
   },
   {
     "ea": "0x4E6C21",
-    "line": "add     byte ptr [edi], 0FFh",
+    "line": "add     byte ptr [edi], 0FFh; Every serialized PGRR value consumes one source point's declared connection slot, including 0xFFFF/out-of-range/null/self values.",
     "mnemonic": "add",
     "size": 3
   },
   {
     "ea": "0x4E6C24",
-    "line": "add     ebp, 1",
+    "line": "add     ebp, 1; Advance the flat PGRR u16 stream index after every slot, even when no edge was inserted.",
     "mnemonic": "add",
     "size": 3
   },
@@ -3085,7 +3085,7 @@
   },
   {
     "ea": "0x4E6C5A",
-    "line": "mov     edx, [esp+15Ch+var_13C]",
+    "line": "mov     edx, [esp+15Ch+worldPosition]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3097,7 +3097,7 @@
   },
   {
     "ea": "0x4E6C5F",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3115,7 +3115,7 @@
   },
   {
     "ea": "0x4E6C69",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3202,5 +3202,131 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B5DE0",
+    "line": "mov     eax, [ebp-148h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B5DE6",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5DE7",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5DEC",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5DED",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5DEE",
+    "line": "mov     eax, [ebp-11Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B5DF4",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5DF5",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5DFA",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5DFB",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5DFC",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B5E00",
+    "line": "lea     eax, [edx-14Ch]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B5E06",
+    "line": "mov     ecx, [edx-150h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B5E0C",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B5E0E",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5E13",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5E16",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5E19",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B5E1B",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5E20",
+    "line": "mov     eax, offset stru_AE0D88",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5E25",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

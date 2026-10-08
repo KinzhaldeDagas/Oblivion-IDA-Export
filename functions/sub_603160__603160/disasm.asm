@@ -103,7 +103,7 @@
 0x603272: push    1
 0x603274: push    edx
 0x603275: mov     ecx, esi
-0x603277: call    Actor_EquipItem
+0x603277: call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.
 0x60327C: test    ebp, ebp
 0x60327E: jz      short loc_603296
 0x603280: push    0

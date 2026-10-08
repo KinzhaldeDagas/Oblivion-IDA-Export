@@ -1,15 +1,15 @@
-float *sub_6CBCE0()
+NiObject *sub_6CBCE0()
 {
-  float *v0; // esi
-  float *result; // eax
+  NiObject *v0; // esi
+  NiObject *result; // eax
 
-  v0 = (float *)FormHeapAlloc(0x30u);
-  result = 0;
-  if ( v0 )
+  v0 = (NiObject *)FormHeapAlloc(0x30u); /*0x6cbd09*/
+  result = 0; /*0x6cbd12*/
+  if ( v0 ) /*0x6cbd1a*/
   {
-    sub_6CC4E0(v0);
-    *(_DWORD *)v0 = &NiBlendTransformInterpolator::`vftable';
-    return v0;
+    sub_6CC4E0(v0); /*0x6cbd1e*/
+    v0->__vftable = (NiObjectVtbl *)&NiBlendTransformInterpolator::`vftable'; /*0x6cbd23*/
+    return v0; /*0x6cbd29*/
   }
-  return result;
+  return result; /*0x6cbd2b*/
 }

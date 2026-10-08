@@ -14,7 +14,7 @@
 0x6E285B: call    edx
 0x6E285D: test    eax, eax
 0x6E285F: jz      short loc_6E286F
-0x6E2861: cmp     eax, offset dword_B3DCF0
+0x6E2861: cmp     eax, offset stru_B3DCF0
 0x6E2866: jz      short loc_6E28D8
 0x6E2868: mov     eax, [eax+4]
 0x6E286B: test    eax, eax

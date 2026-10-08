@@ -21,11 +21,11 @@
 0x405C72: push    0
 0x405C74: push    offset a3dmenu; "3DMenu"
 0x405C79: mov     ecx, eax; this
-0x405C7B: call    ??0SceneGraph@@QAE@XZ; SceneGraph::SceneGraph(void)
+0x405C7B: call    ??0SceneGraph@@QAE@XZ; MoonSugarEffect decode: SceneGraph constructor creates camera at +0xDC and cullingProcess at +0xE4; world scenegraph uses these in NiRenderer_Render.
 0x405C80: mov     esi, eax
 0x405C82: jmp     short loc_405C86
 0x405C84: xor     esi, esi
-0x405C86: mov     eax, g_Interface3DScenegraph
+0x405C86: mov     eax, ds:0B333D4h
 0x405C8B: cmp     eax, esi
 0x405C8D: mov     [esp+1Ch+var_4], 0FFFFFFFFh
 0x405C95: jz      short loc_405CCD
@@ -45,7 +45,7 @@
 0x405CB5: mov     ecx, edi
 0x405CB7: call    edx
 0x405CB9: test    esi, esi
-0x405CBB: mov     g_Interface3DScenegraph, esi
+0x405CBB: mov     ds:0B333D4h, esi
 0x405CC1: jz      short loc_405CCD
 0x405CC3: add     esi, 4
 0x405CC6: push    esi; lpAddend
@@ -57,3 +57,15 @@
 0x405CDA: pop     esi
 0x405CDB: add     esp, 10h
 0x405CDE: retn
+0x9CA7E0: mov     eax, [ebp-10h]
+0x9CA7E3: push    eax
+0x9CA7E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA7E9: pop     ecx
+0x9CA7EA: retn
+0x9CA7EB: mov     edx, [esp+arg_4]
+0x9CA7EF: lea     eax, [edx-0Ch]
+0x9CA7F2: mov     ecx, [edx-10h]
+0x9CA7F5: xor     ecx, eax
+0x9CA7F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA7FC: mov     eax, offset stru_AF2E8C
+0x9CA801: jmp     ___CxxFrameHandler3

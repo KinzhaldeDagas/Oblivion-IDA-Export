@@ -1,1 +1,1 @@
-IMultiQI_0
+typedef IMultiQI IMultiQI_0;

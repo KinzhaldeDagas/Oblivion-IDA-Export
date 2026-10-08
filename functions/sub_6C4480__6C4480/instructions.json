@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6C4480",
-    "line": "push    esi",
+    "line": "push    esi; Walks the controller manager's active sequence list and deactivates every sequence in native state 4 (transition source) using the caller-supplied ease-out time.",
     "mnemonic": "push",
     "size": 1
   },
@@ -42,12 +42,6 @@
     "size": 2
   },
   {
-    "ea": "0x6C448D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x6C4490",
     "line": "mov     eax, [edi+4Ch]",
     "mnemonic": "mov",
@@ -55,7 +49,7 @@
   },
   {
     "ea": "0x6C4493",
-    "line": "mov     ecx, [eax+esi*4]",
+    "line": "mov     ecx, [eax+esi*4]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -79,7 +73,7 @@
   },
   {
     "ea": "0x6C44A0",
-    "line": "push    0; char",
+    "line": "push    0; transition",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,13 +85,13 @@
   },
   {
     "ea": "0x6C44A3",
-    "line": "fstp    [esp+10h+var_10]; float",
+    "line": "fstp    [esp+10h+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6C44A6",
-    "line": "call    sub_6C9CB0",
+    "line": "call    NiControllerSequence_Deactivate; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.",
     "mnemonic": "call",
     "size": 5
   },

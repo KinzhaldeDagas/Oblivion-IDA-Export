@@ -1,1 +1,25 @@
-FILE_INFO_BY_HANDLE_CLASS
+enum FILE_INFO_BY_HANDLE_CLASS : __int32
+{
+FileBasicInfo = 0x0,
+FileStandardInfo = 0x1,
+FileNameInfo = 0x2,
+FileRenameInfo = 0x3,
+FileDispositionInfo = 0x4,
+FileAllocationInfo = 0x5,
+FileEndOfFileInfo = 0x6,
+FileStreamInfo = 0x7,
+FileCompressionInfo = 0x8,
+FileAttributeTagInfo = 0x9,
+FileIdBothDirectoryInfo = 0xA,
+FileIdBothDirectoryRestartInfo = 0xB,
+FileIoPriorityHintInfo = 0xC,
+FileRemoteProtocolInfo = 0xD,
+FileFullDirectoryInfo = 0xE,
+FileFullDirectoryRestartInfo = 0xF,
+FileStorageInfo = 0x10,
+FileAlignmentInfo = 0x11,
+FileIdInfo = 0x12,
+FileIdExtdDirectoryInfo = 0x13,
+FileIdExtdDirectoryRestartInfo = 0x14,
+MaximumFileInfoByHandlesClass = 0x15,
+};

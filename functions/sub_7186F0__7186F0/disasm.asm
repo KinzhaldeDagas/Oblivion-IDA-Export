@@ -1,4 +1,4 @@
-0x7186F0: push    esi
+0x7186F0: push    esi; Pass223: Clears default NiAlphaProperty global 0x00B3FCE4.
 0x7186F1: mov     esi, ds:0B3FCE4h
 0x7186F7: test    esi, esi
 0x7186F9: jz      short loc_718721

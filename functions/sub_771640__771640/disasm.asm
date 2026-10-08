@@ -1,5 +1,5 @@
-0x771640: sub     esp, 0Ch
-0x771643: mov     eax, [esp+0Ch+arg_0]
+0x771640: sub     esp, 0Ch; Apply native filter preset row [MIN,MAG,MIP] to D3DSAMP_MAGFILTER/MINFILTER/MIPFILTER. SimpleShadow preset 1 = LINEAR/LINEAR/NONE.
+0x771643: mov     eax, [esp+0Ch+filterPreset]
 0x771647: push    esi
 0x771648: push    edi
 0x771649: lea     esi, [eax+eax*2]

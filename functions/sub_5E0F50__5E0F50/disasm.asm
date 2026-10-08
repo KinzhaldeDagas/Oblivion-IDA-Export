@@ -1,4 +1,4 @@
-0x5E0F50: push    ebx
+0x5E0F50: push    ebx; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x5E0F51: push    esi
 0x5E0F52: mov     esi, ecx
 0x5E0F54: mov     eax, [esi]

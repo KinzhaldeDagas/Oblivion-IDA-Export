@@ -1,19 +1,36 @@
 {
-  "callees_count": 48,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 24,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_4D43F0",
+  "chunks": [
+    [
+      "0x4D43F0",
+      "0x4D4786"
+    ],
+    [
+      "0x9B5750",
+      "0x9B5776"
+    ]
+  ],
+  "chunks_sha256": "31e7af55e4fd0169d54844bbea1c438430a0d3146c85b1c40d8731c35d37136f",
+  "comment_regular": "Verified embedded CELL/REFR parser resolves NAME FormIDs to TESForm* keys, skips disabled refs, converts positions through the root terrain-LOD map, and appends position/rotation/scale arrays. The embedded path does not RTTI-cast the NAME result. Probable: the TESForm key is a TESBoundObject because local REFR save writes NAME from baseForm->refID, external .lod loading explicitly RTTI-casts to TESBoundObject, and cleanup dispatches through the bound-object vtable +0x11C. For triangle hits, the second terrain-pick vector is Probable surface-normal data; the 0.97 cap rationale remains Unknown. It returns 0 after accumulation so override/parent searches continue.",
+  "comment_repeatable": "Verified embedded CELL/REFR parser resolves NAME FormIDs to TESForm* keys, skips disabled refs, converts positions through the root terrain-LOD map, and appends position/rotation/scale arrays. The embedded path does not RTTI-cast the NAME result. Probable: the TESForm key is a TESBoundObject because local REFR save writes NAME from baseForm->refID, external .lod loading explicitly RTTI-casts to TESBoundObject, and cleanup dispatches through the bound-object vtable +0x11C. For triangle hits, the second terrain-pick vector is Probable surface-normal data; the 0.97 cap rationale remains Unknown. It returns 0 after accumulation so override/parent searches continue.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 29,
+  "display_name": "TESWorldSpace_ParseCellDistantLODRecords",
   "end_ea": "0x4D4786",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4D43F0",
+  "name": "TESWorldSpace_ParseCellDistantLODRecords",
   "segment": ".text",
   "sha256": "077dd1a81028b5a34b92be16d14a1cf10cd410cb301e7e2784f4fe329a9729a8",
   "size": 918,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4D43F0",
-  "type": "char __cdecl(int, int arg4, int, int, _DWORD *)",
-  "xrefs_from_count": 299,
+  "total_chunk_size": 956,
+  "type": "char __cdecl(Data *file, TESWorldSpace *worldSpace, int cellX, int cellY, DistantLODCellObjectMap *outMap)",
+  "xrefs_from_count": 341,
   "xrefs_to_count": 1
 }

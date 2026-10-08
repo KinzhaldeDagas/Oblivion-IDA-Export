@@ -174,7 +174,6 @@
 0x70F6F1: add     edi, 18h
 0x70F6F4: mov     ebp, ebx
 0x70F6F6: jmp     short loc_70F700
-0x70F6F8: align 10h
 0x70F700: mov     eax, [esi+21Ch]
 0x70F706: push    1
 0x70F708: lea     edx, [esp+30h+var_14]

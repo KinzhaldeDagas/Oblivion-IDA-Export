@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x584390",
-    "line": "push    ecx",
+    "line": "push    ecx; Oblivion ClassMenu step refresh: derives the active step value from tile traits 0xFDB/0xFDC, updates menu state, sets state 8, and refreshes the interface manager.",
     "mnemonic": "push",
     "size": 1
   },
@@ -121,19 +121,19 @@
   },
   {
     "ea": "0x5843CC",
-    "line": "fstp    [esp+0Ch+var_C]; float",
+    "line": "fstp    [esp+0Ch+duration]; duration",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5843CF",
-    "line": "push    esi; int",
+    "line": "push    esi; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5843D0",
-    "line": "call    sub_584300",
+    "line": "call    InterfaceManager__NewTimer; Verified: clears previous timer with same index, allocates 0x14-byte node, assigns opaque index and duration, appends to InterfaceManager timer list at +0x130. Shared by menus and Tile animation objects; not menu-specific. Fallout named analogue 0x824EDBA0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x5843E8",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x5843EE",
-    "line": "jmp     sub_583C30",
+    "line": "jmp     InterfaceManager__UpdateAllTimers; Verified: advances elapsed time and unlinks/frees expired 0x14-byte timer nodes; does not destroy their owner objects. Fallout named analogue 0x824EA970; Fallout additionally adjusts delta during VATS playback.",
     "mnemonic": "jmp",
     "size": 5
   },

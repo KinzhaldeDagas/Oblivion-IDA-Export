@@ -1,4 +1,4 @@
 unsigned int __usercall strcmp_::donene@<eax>(char a1@<cf>)
 {
-  return 0xFFFFFFFE * a1 + 1;
+  return 0xFFFFFFFE * a1 + 1; /*0x98df9b*/
 }

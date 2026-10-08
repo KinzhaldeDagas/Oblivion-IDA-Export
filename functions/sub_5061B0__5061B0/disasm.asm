@@ -21,7 +21,7 @@
 0x5061E9: push    eax; a2
 0x5061EA: push    ecx; a1
 0x5061EB: mov     dword ptr [esp+30h+var_8], 0
-0x5061F3: call    Script_ExtractArgs
+0x5061F3: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x5061F8: add     esp, 24h
 0x5061FB: test    al, al
 0x5061FD: jnz     short loc_506204
@@ -32,10 +32,10 @@
 0x506206: jnz     short loc_50620E
 0x506208: mov     esi, ds:0B333C4h
 0x50620E: mov     edx, dword ptr [esp+0Ch+var_8]
-0x506212: push    edx
-0x506213: push    esi
-0x506214: mov     ecx, offset ActorProcessManager_ptr
-0x506219: call    sub_678E70
+0x506212: push    edx; effectShader
+0x506213: push    esi; targetReference
+0x506214: mov     ecx, (offset qword_B3BB2C+1D4h); this
+0x506219: call    ActorProcessManager_FinishShaderEffectsForTarget; Verified (Oblivion): walks the temp-effect RTTI chain to NiRTTI_MagicShaderHitEffect and marks matching targetReference/TESEffectShader effects finished.
 0x50621E: mov     ecx, esi; this
 0x506220: call    TESObjectREFR_GetName
 0x506225: test    eax, eax

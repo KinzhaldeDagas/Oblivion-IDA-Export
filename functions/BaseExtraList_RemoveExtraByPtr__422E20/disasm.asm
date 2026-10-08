@@ -6,7 +6,7 @@
 0x422E2A: jz      loc_422ECE
 0x422E30: push    ebx
 0x422E31: push    offset aBaseextralistR; lpCriticalSection
-0x422E36: mov     ecx, offset BSExtraDataCS
+0x422E36: mov     ecx, 0B33800h
 0x422E3B: call    NiEnterCriticalSection
 0x422E40: movzx   ebx, byte ptr [esi+4]
 0x422E44: push    ebx
@@ -42,7 +42,7 @@
 0x422E94: shl     dl, cl
 0x422E96: not     dl
 0x422E98: and     [eax+edi+8], dl
-0x422E9C: mov     eax, TlsIndex
+0x422E9C: mov     eax, dword ptr byte_BA9DCC+18h
 0x422EA1: mov     ecx, large fs:2Ch
 0x422EA8: mov     eax, [ecx+eax*4]
 0x422EAB: cmp     edi, [eax+8]
@@ -50,7 +50,7 @@
 0x422EB3: cmp     ebx, 5Ch ; '\'
 0x422EB6: ja      short loc_422EC3
 0x422EB8: mov     dword ptr [eax+ebx*4+10h], 0
-0x422EC3: mov     ecx, offset BSExtraDataCS; lpCriticalSection
+0x422EC3: mov     ecx, 0B33800h; lpCriticalSection
 0x422EC8: call    NiLeaveCriticalSection_0
 0x422ECD: pop     ebx
 0x422ECE: pop     edi

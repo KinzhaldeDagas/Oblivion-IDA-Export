@@ -1,1 +1,4 @@
-IQueryInfo
+struct IQueryInfo
+{
+const IQueryInfoVtbl *lpVtbl;
+};

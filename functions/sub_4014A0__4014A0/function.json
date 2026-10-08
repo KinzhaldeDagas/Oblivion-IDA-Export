@@ -1,18 +1,31 @@
 {
-  "callees_count": 8,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x4014A0",
+      "0x40153C"
+    ]
+  ],
+  "chunks_sha256": "ec1c6f44cb0bcadb9fe77c81773d5211af58daf09b8fd1e8dbcbb7702ef4d6ec",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 4,
-  "display_name": "sub_4014A0",
+  "comment_repeatable": "MEF v57 IMPLEMENTED 2026-10-08: v57 pressure boundary: allocator401830 reaches this dispatcher via40187E; optional arbitrary callbackB02184 invoked401522 after entering recovery critical section. Entry detour invalidates actor/map/light/property optimization state BEFORE callback and replays original Main* load, continues4014A5. Do not restart partially completed native operations after reentry.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 14,
+  "display_name": "MemoryHeap_BeginPressureRecovery",
   "end_ea": "0x40153C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4014A0",
+  "name": "MemoryHeap_BeginPressureRecovery",
   "segment": ".text",
   "sha256": "ec1c6f44cb0bcadb9fe77c81773d5211af58daf09b8fd1e8dbcbb7702ef4d6ec",
   "size": 156,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4014A0",
+  "total_chunk_size": 156,
   "type": "char __cdecl(int)",
   "xrefs_from_count": 70,
   "xrefs_to_count": 1

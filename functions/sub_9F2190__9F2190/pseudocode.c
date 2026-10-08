@@ -1,5 +1,5 @@
 int sub_9F2190()
 {
-  GameSetting_ConstrAndReg(&dword_B38AF0, (int)"sNoWaitUnderWater", (int)"You cannot wait while under water.");
-  return atexit(sub_A21D00);
+  GameSetting_ConstrAndReg(&stru_B38AF0, "sNoWaitUnderWater", "You cannot wait while under water."); /*0x9f219f*/
+  return atexit(sub_A21D00); /*0x9f21af*/
 }

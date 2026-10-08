@@ -18,7 +18,7 @@
 0x660559: push    0
 0x66055B: push    0Ch
 0x66055D: push    esi
-0x66055E: mov     ecx, offset ActorProcessManager_ptr
+0x66055E: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x660563: call    sub_6758E0
 0x660568: test    eax, eax
 0x66056A: jz      short loc_660589

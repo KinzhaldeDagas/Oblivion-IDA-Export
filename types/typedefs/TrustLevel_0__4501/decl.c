@@ -1,1 +1,1 @@
-TrustLevel_0
+typedef TrustLevel TrustLevel_0;

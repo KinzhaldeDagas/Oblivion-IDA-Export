@@ -5,7 +5,7 @@
 0x748601: jz      short loc_74861C
 0x748603: push    offset stru_B407B0; lpFrequency
 0x748608: call    dword ptr ds:0A2815Ch
-0x74860E: push    offset stru_B40790.SpinCount; lpPerformanceCount
+0x74860E: push    offset unk_B407A8; lpPerformanceCount
 0x748613: call    esi ; QueryPerformanceCounter
 0x748615: mov     byte ptr ds:0B27EB2h, 0
 0x74861C: lea     eax, [esp+0Ch+PerformanceCount]

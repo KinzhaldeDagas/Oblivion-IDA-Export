@@ -5,7 +5,7 @@
 0x96F949: push    ecx
 0x96F94A: mov     ecx, [esi+38h]
 0x96F94D: fstp    [esp+3Ch+var_3C]; float
-0x96F950: lea     eax, [esp+3Ch+var_30]
+0x96F950: lea     eax, [esp+3Ch+other]
 0x96F954: push    eax; int
 0x96F955: add     ecx, 20h ; ' '
 0x96F958: call    sub_976A50
@@ -37,14 +37,14 @@
 0x96F9A9: mov     eax, [esp+3Ch+arg_4]
 0x96F9AD: fstp    [esp+3Ch+var_10]
 0x96F9B1: fld     [esp+3Ch+var_18]
-0x96F9B5: fadd    [esp+3Ch+var_30]
-0x96F9B9: fstp    [esp+3Ch+var_30]
-0x96F9BD: fld     [esp+3Ch+var_2C]
+0x96F9B5: fadd    [esp+3Ch+other.x]
+0x96F9B9: fstp    [esp+3Ch+other.x]
+0x96F9BD: fld     [esp+3Ch+other.y]
 0x96F9C1: fadd    [esp+3Ch+var_14]
-0x96F9C5: fstp    [esp+3Ch+var_2C]
-0x96F9C9: fld     [esp+3Ch+var_28]
+0x96F9C5: fstp    [esp+3Ch+other.y]
+0x96F9C9: fld     [esp+3Ch+other.z]
 0x96F9CD: fadd    [esp+3Ch+var_10]
-0x96F9D1: fstp    [esp+3Ch+var_28]
+0x96F9D1: fstp    [esp+3Ch+other.z]
 0x96F9D5: fld     dword ptr [esi+1Ch]
 0x96F9D8: fstp    [esp+3Ch+arg_0]
 0x96F9DC: fld     dword ptr [eax]
@@ -59,31 +59,31 @@
 0x96F9F5: fmul    dword ptr [eax+8]
 0x96F9F8: fstp    [esp+3Ch+var_10]
 0x96F9FC: fld     [esp+3Ch+var_18]
-0x96FA00: fadd    [esp+3Ch+var_24]
-0x96FA04: fstp    [esp+3Ch+var_24]
-0x96FA08: fld     [esp+3Ch+var_20]
+0x96FA00: fadd    [esp+3Ch+var_24.x]
+0x96FA04: fstp    [esp+3Ch+var_24.x]
+0x96FA08: fld     [esp+3Ch+var_24.y]
 0x96FA0C: fadd    [esp+3Ch+var_14]
-0x96FA10: fstp    [esp+3Ch+var_20]
-0x96FA14: fld     [esp+3Ch+var_1C]
+0x96FA10: fstp    [esp+3Ch+var_24.y]
+0x96FA14: fld     [esp+3Ch+var_24.z]
 0x96FA18: fadd    [esp+3Ch+var_10]
-0x96FA1C: fstp    [esp+3Ch+var_1C]
-0x96FA20: fld     [esp+3Ch+var_24]
-0x96FA24: fsub    [esp+3Ch+var_30]
+0x96FA1C: fstp    [esp+3Ch+var_24.z]
+0x96FA20: fld     [esp+3Ch+var_24.x]
+0x96FA24: fsub    [esp+3Ch+other.x]
 0x96FA28: fstp    [esp+3Ch+var_18]
 0x96FA2C: mov     edx, [esp+3Ch+var_18]
-0x96FA30: fld     [esp+3Ch+var_20]
+0x96FA30: fld     [esp+3Ch+var_24.y]
 0x96FA34: mov     [edi], edx
-0x96FA36: fsub    [esp+3Ch+var_2C]
+0x96FA36: fsub    [esp+3Ch+other.y]
 0x96FA3A: fstp    [esp+3Ch+var_14]
 0x96FA3E: mov     eax, [esp+3Ch+var_14]
-0x96FA42: fld     [esp+3Ch+var_1C]
+0x96FA42: fld     [esp+3Ch+var_24.z]
 0x96FA46: mov     [edi+4], eax
-0x96FA49: fsub    [esp+3Ch+var_28]
+0x96FA49: fsub    [esp+3Ch+other.z]
 0x96FA4D: fstp    [esp+3Ch+var_10]
 0x96FA51: mov     ecx, [esp+3Ch+var_10]
 0x96FA55: mov     [edi+8], ecx
 0x96FA58: mov     ecx, edi
-0x96FA5A: call    sub_43F350
+0x96FA5A: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x96FA5F: fstp    st
 0x96FA61: mov     edx, [esi+38h]
 0x96FA64: fld     dword ptr [edx+38h]
@@ -100,32 +100,32 @@
 0x96FA84: fmul    dword ptr [edi+8]
 0x96FA87: fstp    [esp+3Ch+var_10]
 0x96FA8B: fld     [esp+3Ch+var_18]
-0x96FA8F: fadd    [esp+3Ch+var_30]
+0x96FA8F: fadd    [esp+3Ch+other.x]
 0x96FA93: pop     edi
-0x96FA94: fstp    [esp+38h+var_24]
-0x96FA98: mov     eax, [esp+38h+var_24]
+0x96FA94: fstp    [esp+38h+var_24.x]
+0x96FA98: mov     eax, [esp+38h+var_24.x]
 0x96FA9C: fld     [esp+38h+var_14]
 0x96FAA0: mov     [esi+20h], eax
-0x96FAA3: fadd    [esp+38h+var_2C]
-0x96FAA7: fstp    [esp+38h+var_20]
-0x96FAAB: mov     ecx, [esp+38h+var_20]
+0x96FAA3: fadd    [esp+38h+other.y]
+0x96FAA7: fstp    [esp+38h+var_24.y]
+0x96FAAB: mov     ecx, [esp+38h+var_24.y]
 0x96FAAF: fld     [esp+38h+var_10]
 0x96FAB3: mov     [esi+24h], ecx
-0x96FAB6: fadd    [esp+38h+var_28]
-0x96FABA: fstp    [esp+38h+var_1C]
-0x96FABE: mov     edx, [esp+38h+var_1C]
+0x96FAB6: fadd    [esp+38h+other.z]
+0x96FABA: fstp    [esp+38h+var_24.z]
+0x96FABE: mov     edx, [esp+38h+var_24.z]
 0x96FAC2: mov     [esi+28h], edx
 0x96FAC5: pop     esi
 0x96FAC6: add     esp, 34h
 0x96FAC9: retn    8
-0x96FACC: fld     [esp+38h+var_24]
-0x96FAD0: fadd    [esp+38h+var_30]
+0x96FACC: fld     [esp+38h+var_24.x]
+0x96FAD0: fadd    [esp+38h+other.x]
 0x96FAD4: fstp    [esp+38h+var_18]
-0x96FAD8: fld     [esp+38h+var_20]
-0x96FADC: fadd    [esp+38h+var_2C]
+0x96FAD8: fld     [esp+38h+var_24.y]
+0x96FADC: fadd    [esp+38h+other.y]
 0x96FAE0: fstp    [esp+38h+var_14]
-0x96FAE4: fld     [esp+38h+var_1C]
-0x96FAE8: fadd    [esp+38h+var_28]
+0x96FAE4: fld     [esp+38h+var_24.z]
+0x96FAE8: fadd    [esp+38h+other.z]
 0x96FAEC: fstp    [esp+38h+var_10]
 0x96FAF0: fld     [esp+38h+var_18]
 0x96FAF4: fld     qword ptr ds:0A2FAA0h
@@ -136,36 +136,36 @@
 0x96FB06: fld     [esp+38h+var_14]
 0x96FB0A: mov     [esi+20h], eax
 0x96FB0D: fmul    st, st(1)
-0x96FB0F: lea     eax, [esp+38h+var_30]
-0x96FB13: push    eax
+0x96FB0F: lea     eax, [esp+38h+other]
+0x96FB13: push    eax; other
 0x96FB14: fstp    [esp+3Ch+var_8]
 0x96FB18: mov     ecx, [esp+3Ch+var_8]
 0x96FB1C: mov     [esi+24h], ecx
 0x96FB1F: fmul    [esp+3Ch+var_10]
-0x96FB23: lea     ecx, [esp+3Ch+var_24]
+0x96FB23: lea     ecx, [esp+3Ch+var_24]; this
 0x96FB27: fstp    [esp+3Ch+var_4]
 0x96FB2B: mov     edx, [esp+3Ch+var_4]
 0x96FB2F: mov     [esi+28h], edx
-0x96FB32: call    sub_8AA390
+0x96FB32: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x96FB37: test    al, al
 0x96FB39: jz      short loc_96FB84
-0x96FB3B: fld     [esp+38h+var_24]
+0x96FB3B: fld     [esp+38h+var_24.x]
 0x96FB3F: lea     ecx, [esi+2Ch]
-0x96FB42: fsub    [esp+38h+var_30]
+0x96FB42: fsub    [esp+38h+other.x]
 0x96FB46: fstp    [esp+38h+var_C]
 0x96FB4A: mov     edx, [esp+38h+var_C]
-0x96FB4E: fld     [esp+38h+var_20]
+0x96FB4E: fld     [esp+38h+var_24.y]
 0x96FB52: mov     [ecx], edx
-0x96FB54: fsub    [esp+38h+var_2C]
+0x96FB54: fsub    [esp+38h+other.y]
 0x96FB58: fstp    [esp+38h+var_8]
 0x96FB5C: mov     eax, [esp+38h+var_8]
-0x96FB60: fld     [esp+38h+var_1C]
+0x96FB60: fld     [esp+38h+var_24.z]
 0x96FB64: mov     [ecx+4], eax
-0x96FB67: fsub    [esp+38h+var_28]
+0x96FB67: fsub    [esp+38h+other.z]
 0x96FB6B: fstp    [esp+38h+var_4]
 0x96FB6F: mov     edx, [esp+38h+var_4]
 0x96FB73: mov     [ecx+8], edx
-0x96FB76: call    sub_43F350
+0x96FB76: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x96FB7B: fstp    st
 0x96FB7D: pop     esi
 0x96FB7E: add     esp, 34h

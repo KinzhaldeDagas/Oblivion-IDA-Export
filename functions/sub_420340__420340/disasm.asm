@@ -1,4 +1,4 @@
-0x420340: push    3Fh ; '?'; a2
+0x420340: push    3Fh ; '?'; Tests flag bit 0 of ExtraEnableStateParent, the inverse-enable-state flag.
 0x420342: call    BaseExtraList_GetExtraData
 0x420347: test    eax, eax
 0x420349: jz      short loc_420351

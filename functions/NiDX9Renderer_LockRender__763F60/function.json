@@ -1,18 +1,31 @@
 {
-  "callees_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x763F60",
+      "0x763F9B"
+    ]
+  ],
+  "chunks_sha256": "140ba0cdf3c987560f3480bd13d4db78825b2a9a9fba364ce6a1404885878712",
+  "comment_regular": "\nVerified rendering-lock scope for restricted DX11 bucket audit: Win32 CRITICAL_SECTION is renderer+80; curThread at renderer+F8, entryCount at+FC. EnterCriticalSection precedes GetCurrentThreadId/store and native entry-count increment. First entry dispatches renderer vtable+128; authoritative NiDX9Renderer table A88EA4 resolves this to60D0A0 (no-op), as does unlock slot+12C. Existing render-lock ownership is not by itself proof of scene graph lifetime or all native pool/writer exclusion; those must be established separately before enabling bucket replacement.",
+  "comment_repeatable": "\nDX11 bucket owner audit 2026-10-01: protected read receipt for the ordinary BS branch checks actual Win32 CRITICAL_SECTION at renderer+80 (RecursionCount +88, OwningThread +8C), matching wrapper curThread+F8 / entryCount+FC, active state (renderer+200==1 OR +204==1) and ready byte+20C==1. Requires main OSGlobals thread (+10 via B33398), no parallel-update manager B3F940, current renderer B3F928/device+280/accumulator+8, BS vtable A8CC5C with Flush+50=7AE070 and bucket+60=7AC9A0, and enclosing reference count >=2. Only caller return7C7D56 is accepted; 7C7A79 is the alpha-accumulator branch. Renderer lock virtuals A88FCC/A88FD0 are both60D0A0 RET. Exact helper bodies 405710/763F60/763FA0/7D6A80/7D6B00 are now pinned in the renderer code catalog. These observed owner facts DO NOT acquire a geometry/property/pool/reference-writer lease or authorize replacement alone.\nDX11 retirement audit 2026-10-01: native LockRender enters renderer+80 OS critical section, sets cached thread+F8, increments depth+FC and calls virtual+128 only at first depth. A plugin OS-lock borrow must not call engine methods while actual recursion and cached depth differ; restoring the exact OS recursion leaves native cached bookkeeping untouched.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "NiDX9Renderer::LockRender",
   "end_ea": "0x763F9B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "NiDX9Renderer::LockRender",
   "segment": ".text",
   "sha256": "140ba0cdf3c987560f3480bd13d4db78825b2a9a9fba364ce6a1404885878712",
   "size": 59,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x763F60",
+  "total_chunk_size": 59,
   "type": "int __thiscall(NiDX9Renderer *this)",
   "xrefs_from_count": 20,
   "xrefs_to_count": 1

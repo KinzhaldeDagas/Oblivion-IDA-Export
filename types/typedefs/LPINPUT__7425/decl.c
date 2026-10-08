@@ -1,1 +1,1 @@
-LPINPUT
+typedef tagINPUT *LPINPUT;

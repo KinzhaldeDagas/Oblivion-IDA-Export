@@ -1,4 +1,4 @@
-0x7FB6F0: push    ebp
+0x7FB6F0: push    ebp; Set Lighting30 render constants. The render-mode-5 branch consumes current ShadowSceneLight state separately from ordinary material paths.
 0x7FB6F1: mov     ebp, esp
 0x7FB6F3: and     esp, 0FFFFFFF0h
 0x7FB6F6: sub     esp, 264h
@@ -27,7 +27,7 @@
 0x7FB730: and     eax, esi
 0x7FB732: mov     edi, eax
 0x7FB734: test    byte ptr [edi+1Ch], 2
-0x7FB738: mov     [esp+270h+var_230], edx
+0x7FB738: mov     [esp+270h+var_230], edx; Read active RenderPass selector published by BSShaderAccumulator_DrawRenderPass.
 0x7FB73C: setnbe  al
 0x7FB73F: test    al, al
 0x7FB741: mov     [esp+270h+var_249], al
@@ -44,7 +44,7 @@
 0x7FB767: push    0
 0x7FB769: push    ebx
 0x7FB76A: push    esi
-0x7FB76B: call    NiDX9Renderer__CalculateBoneMatrixes
+0x7FB76B: call    NiDX9Renderer__CalculateBoneMatrixes; MoonSugar build 39: CalculateBoneMatrixes owns NiSkinInstance cached bone matrix rebuild and camera-relative skin transforms. Do not mutate for Moon Sugar wobble; hook after native setup instead.
 0x7FB770: mov     eax, [esp+270h+var_23C]
 0x7FB774: mov     ecx, [eax+18h]
 0x7FB777: mov     eax, [ebp+arg_8]
@@ -60,7 +60,7 @@
 0x7FB792: mov     ecx, [eax+14h]
 0x7FB795: push    0
 0x7FB797: push    ebx
-0x7FB798: call    sub_765480
+0x7FB798: call    NiDX9Renderer_SetModelTransform; MoonSugar build 39: common non-skinned transform upload has many shader-family xrefs (generic, water, grass, precipitation, SpeedTree, LOD, GeometryDecal, Lighting30). Do not globally detour for Moon Sugar; use scoped caller/hook windows.
 0x7FB79D: cmp     word ptr ds:0B42EACh, 5
 0x7FB7A5: jnz     short loc_7FB810
 0x7FB7A7: mov     edx, ds:0B42EB8h
@@ -68,7 +68,7 @@
 0x7FB7B0: lea     ecx, [esp+270h+var_234]
 0x7FB7B4: push    ecx
 0x7FB7B5: mov     ecx, [eax]
-0x7FB7B7: call    sub_405AD0
+0x7FB7B7: call    ShadowSceneLight_GetLightRef
 0x7FB7BC: mov     ecx, [eax]
 0x7FB7BE: mov     edi, [esp+270h+var_234]
 0x7FB7C2: fld     dword ptr [ecx+0F8h]
@@ -190,7 +190,7 @@
 0x7FB9EF: lea     edx, [esp+270h+var_200]
 0x7FB9F3: push    edx
 0x7FB9F4: mov     ecx, ebx
-0x7FB9F6: call    sub_718A80
+0x7FB9F6: call    sub_718A80;
 0x7FB9FB: fld     [esp+270h+var_200]
 0x7FB9FF: fld     [esp+270h+var_1D0]
 0x7FBA06: fld     st
@@ -228,14 +228,14 @@
 0x7FBAAB: fstp    [esp+270h+var_F0]
 0x7FBAB2: fld1
 0x7FBAB4: fst     [esp+270h+var_EC]
-0x7FBABB: cmp     byte ptr ds:0B4696Eh, 0
+0x7FBABB: cmp     byte ptr ds:0B4696Eh, 0; B4696E enables writing the mapped matrix group B46D68 (normally VS c10..c13). That group is not always a world matrix; qualify the branch and compare the actual mapped words before regenerating it.
 0x7FBAC2: jz      loc_7FBDA9
 0x7FBAC8: mov     edx, ds:0B42EB8h
 0x7FBACE: mov     eax, [edx+0Ch]
 0x7FBAD1: test    eax, eax
 0x7FBAD3: jz      loc_7FBCA7
 0x7FBAD9: mov     eax, [eax]
-0x7FBADB: cmp     byte ptr [eax+0F5h], 0
+0x7FBADB: cmp     byte ptr [eax+0F5h], 0; ShadowSceneLight +0xF5 selects the special-light shader-matrix branch; zero continues ordinary selector-specific handling.
 0x7FBAE2: jnz     loc_7FBCA7
 0x7FBAE8: mov     eax, [esp+270h+var_230]
 0x7FBAEC: cmp     eax, 147h
@@ -291,7 +291,7 @@
 0x7FBBFC: fld     dword ptr ds:0B3F92Ch
 0x7FBC02: mov     eax, ds:0B42E90h
 0x7FBC07: fadd    [esp+270h+var_1D0]
-0x7FBC0E: add     eax, 0FFFFFEB2h
+0x7FBC0E: add     eax, 0FFFFFEB2h; Recognize the four native shadow selectors 0x14E..0x151.
 0x7FBC13: cmp     eax, 3
 0x7FBC16: fstp    [esp+270h+var_1D0]
 0x7FBC1D: fld     dword ptr ds:0B3F930h
@@ -301,18 +301,18 @@
 0x7FBC37: fadd    [esp+270h+var_1C8]
 0x7FBC3E: fstp    [esp+270h+var_1C8]
 0x7FBC45: ja      short loc_7FBC4E
-0x7FBC47: mov     ecx, [edx+0Ch]
-0x7FBC4A: mov     eax, [ecx]
+0x7FBC47: mov     ecx, [edx+0Ch]; Retail 0x14E..0x151 consumer combines receiver/object transform with the current light matrix.
+0x7FBC4A: mov     eax, [ecx]; Use current ShadowSceneLight projected-shadow transform at light+0x10.
 0x7FBC4C: jmp     short loc_7FBC54
 0x7FBC4E: mov     edx, [edx+0Ch]
-0x7FBC51: mov     eax, [edx+4]
+0x7FBC51: mov     eax, [edx+4]; Projected branch selects light-array slot1 for selectors outside14E..151;14E..151 select slot0. Therefore ordinary-looking register locations alone cannot identify a world transform.
 0x7FBC54: add     eax, 10h
 0x7FBC57: push    eax
 0x7FBC58: lea     eax, [esp+274h+var_200]
 0x7FBC5C: push    eax
 0x7FBC5D: lea     ecx, [esp+278h+var_E0]
 0x7FBC64: push    ecx
-0x7FBC65: call    D3DXMatrixMultiply_0
+0x7FBC65: call    D3DXMatrixMultiply_0; Combine object/camera-relative transform with ShadowSceneLight+0x10.
 0x7FBC6A: lea     edx, [esp+270h+var_1C0]
 0x7FBC71: push    edx
 0x7FBC72: mov     eax, edx
@@ -324,10 +324,10 @@
 0x7FBC8A: call    D3DXMatrixTranspose_0
 0x7FBC8F: mov     ecx, 10h
 0x7FBC94: lea     esi, [esp+270h+var_1C0]
-0x7FBC9B: mov     edi, offset flt_B46D68
-0x7FBCA0: rep movsd
+0x7FBC9B: mov     edi, offset unk_B46D68
+0x7FBCA0: rep movsd; Write ShadowSceneLight projected transform to VS c10..c13; SM3013/14 multiply original POSITION, SM3015/16 multiply the blended skinned position.
 0x7FBCA2: jmp     loc_7FBDA4
-0x7FBCA7: mov     ecx, [esp+270h+var_23C]
+0x7FBCA7: mov     ecx, [esp+270h+var_23C]; World branch of Lighting30 mapped matrix update: copy renderer+940 and transpose into B46D68. Selected when current entry light-array pointer is null, first wrapper+F5 is nonzero, or selector is147..14D. Other enabled cases multiply the object transform by a light projection instead.
 0x7FBCAB: fstp    st
 0x7FBCAD: mov     esi, [ecx+14h]
 0x7FBCB0: lea     edx, [esp+270h+var_1C0]
@@ -380,10 +380,10 @@
 0x7FBDB9: jle     loc_7FC03C
 0x7FBDBF: fld     dword ptr ds:0B46FD8h
 0x7FBDC5: xor     edi, edi
-0x7FBDC7: call    Double_To_SInt32
-0x7FBDCC: fld     dword ptr ds:0B46FDCh
+0x7FBDC7: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
+0x7FBDCC: fld     dword ptr ds:0B46FDCh; OblivionNew: PS c6.y at B46FDC supplies consumed point count (Double_To_SInt32 truncates); PS c6.x at B46FD8 supplies directional prefix. The entry byte count is storage coverage, not necessarily the number of slots consumed. LightData uses B47018+32*slot; LightColor uses B47008+32*slot.
 0x7FBDD2: mov     ebx, eax
-0x7FBDD4: call    Double_To_SInt32
+0x7FBDD4: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x7FBDD9: mov     ecx, [esp+270h+var_230]
 0x7FBDDD: cmp     ecx, 14Eh
 0x7FBDE3: mov     [esp+270h+var_234], eax
@@ -391,7 +391,7 @@
 0x7FBDE9: cmp     ecx, 151h
 0x7FBDEF: jle     loc_7FBEEF
 0x7FBDF5: test    ebx, ebx
-0x7FBDF7: jle     loc_7FBEEF
+0x7FBDF7: jle     loc_7FBEEF; Selectors 0x14E..0x151 skip the ordinary direction-normalization block.
 0x7FBDFD: fstp    st
 0x7FBDFF: mov     esi, offset unk_B47018
 0x7FBE04: fldz
@@ -438,7 +438,7 @@
 0x7FBE96: mov     edx, [esp+270h+var_240]
 0x7FBE9A: lea     ecx, [esp+270h+var_210]
 0x7FBE9E: mov     [esp+270h+var_208], edx
-0x7FBEA2: call    sub_43F350
+0x7FBEA2: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x7FBEA7: fstp    st
 0x7FBEA9: fld     [esp+270h+var_210]
 0x7FBEAD: add     esi, 20h ; ' '
@@ -507,10 +507,10 @@
 0x7FBF9E: cmp     eax, 14Eh
 0x7FBFA3: jz      short loc_7FBFBA
 0x7FBFA5: cmp     eax, 14Fh
-0x7FBFAA: jz      short loc_7FBFBA
+0x7FBFAA: jz      short loc_7FBFBA; Non-skinned 0x14E/0x14F scale LightData.xyz into object space by object scale.
 0x7FBFAC: mov     edx, [ebp+arg_18]
 0x7FBFAF: fstp    st(1)
-0x7FBFB1: fdiv    dword ptr [edx+30h]
+0x7FBFB1: fdiv    dword ptr [edx+30h]; For a rigid caster outside selectors 0x14E/0x14F, divide LightData.w by object scale. This covers mode-5 selector 0x154; skinned 0x155 bypasses the correction.
 0x7FBFB4: fstp    [esp+270h+var_234]
 0x7FBFB8: jmp     short loc_7FBFEC
 0x7FBFBA: mov     eax, [ebp+arg_18]
@@ -819,7 +819,7 @@
 0x7FC50E: call    D3DXMatrixTranspose_0
 0x7FC513: mov     ecx, 10h
 0x7FC518: lea     esi, [esp+270h+var_1C0]
-0x7FC51F: mov     edi, offset unk_B46E78
+0x7FC51F: mov     edi, (offset flt_B46DE8+90h)
 0x7FC524: rep movsd
 0x7FC526: mov     edx, [esp+270h+var_230]
 0x7FC52A: mov     ecx, ds:0B43104h
@@ -827,11 +827,11 @@
 0x7FC536: add     edx, 0FFFFFEB2h
 0x7FC53C: cmp     edx, 3
 0x7FC53F: mov     [esp+270h+var_E8], ebx
-0x7FC546: ja      loc_7FC7B8
+0x7FC546: ja      loc_7FC7B8; Only selectors 0x14E..0x151 commit the six ShadowSceneLight clip planes.
 0x7FC54C: mov     eax, ds:0B42EB8h
 0x7FC551: mov     ecx, [eax+0Ch]
 0x7FC554: mov     eax, [ecx]
-0x7FC556: cmp     byte ptr [eax+214h], 0
+0x7FC556: cmp     byte ptr [eax+214h], 0; ShadowSceneLight+0x214 is the transformed-clip-plane cache-valid byte.
 0x7FC55D: mov     [esp+270h+var_E4], eax
 0x7FC564: jnz     loc_7FC797
 0x7FC56A: mov     edx, [esp+270h+var_23C]
@@ -967,7 +967,7 @@
 0x7FC750: mov     edx, [ecx]
 0x7FC752: mov     eax, [edx+0DCh]
 0x7FC758: push    ecx
-0x7FC759: call    eax
+0x7FC759: call    eax; Commit transformed plane to IDirect3DDevice9::SetClipPlane(index 0..5).
 0x7FC75B: add     edi, 1
 0x7FC75E: add     esi, 10h
 0x7FC761: cmp     edi, 6
@@ -976,7 +976,7 @@
 0x7FC771: lea     edi, [eax+1B4h]
 0x7FC777: mov     ecx, 18h
 0x7FC77C: lea     esi, [esp+270h+var_A0]
-0x7FC783: mov     byte ptr [eax+214h], 1
+0x7FC783: mov     byte ptr [eax+214h], 1; Cache transformed plane at ShadowSceneLight+0x1B4 (six float4 planes).
 0x7FC78A: rep movsd
 0x7FC78C: xor     eax, eax
 0x7FC78E: pop     edi
@@ -985,7 +985,7 @@
 0x7FC791: mov     esp, ebp
 0x7FC793: pop     ebp
 0x7FC794: retn    20h ; ' '
-0x7FC797: lea     edi, [eax+1B4h]
+0x7FC797: lea     edi, [eax+1B4h]; Mark ShadowSceneLight clip-plane cache valid at +0x214.
 0x7FC79D: xor     esi, esi
 0x7FC79F: nop
 0x7FC7A0: mov     ecx, [ebx]

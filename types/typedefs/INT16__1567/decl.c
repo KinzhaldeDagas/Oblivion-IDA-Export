@@ -1,1 +1,1 @@
-INT16
+typedef __int16 INT16;

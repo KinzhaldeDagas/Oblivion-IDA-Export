@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x78EBF0",
-    "line": "push    esi",
+    "line": "push    esi; Oblivion CTreeFileAccess::PeekToken. Bounds-checks byteBufferBegin/cursorOffset/byteBufferEnd, returns the little-endian dword at the current cursor without advancing it. CTreeEngine::Parse uses the result to detect optional token 0x1B58 before consuming it; RT4.1 FileAccess.cpp corroborates PeekToken after this behavior was established.",
     "mnemonic": "push",
     "size": 1
   },

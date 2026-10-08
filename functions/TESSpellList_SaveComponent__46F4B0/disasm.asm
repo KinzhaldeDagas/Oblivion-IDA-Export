@@ -5,7 +5,6 @@
 0x46F4B7: test    esi, esi
 0x46F4B9: jz      short loc_46F4E9
 0x46F4BB: jmp     short loc_46F4C0
-0x46F4BD: align 10h
 0x46F4C0: mov     eax, [esi]
 0x46F4C2: test    eax, eax
 0x46F4C4: jz      short loc_46F4E9

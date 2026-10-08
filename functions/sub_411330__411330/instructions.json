@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x411369",
-    "line": "test    byte ptr dword_B33450, al",
+    "line": "test    byte ptr unk_B33450, al",
     "mnemonic": "test",
     "size": 6
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x411371",
-    "line": "or      dword_B33450, eax",
+    "line": "or      dword ptr unk_B33450, eax",
     "mnemonic": "or",
     "size": 6
   },
@@ -121,13 +121,13 @@
   },
   {
     "ea": "0x41137F",
-    "line": "call    GetFarPlane",
+    "line": "call    GetFarPlane; Fog interior decode: GetFarPlane uses TESObjectCELL::LightingData fogClipDistance (+0x20) for interior mode 1 when available.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x411384",
-    "line": "fstp    flt_B3344C",
+    "line": "fstp    dword ptr unk_B3344C",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x411392",
-    "line": "fld     flt_B33E9C",
+    "line": "fld     dword ptr ds:0B33E9Ch",
     "mnemonic": "fld",
     "size": 6
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x4113D2",
-    "line": "call    GetFarPlane",
+    "line": "call    GetFarPlane; Fog interior decode: GetFarPlane uses TESObjectCELL::LightingData fogClipDistance (+0x20) for interior mode 1 when available.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x4113ED",
-    "line": "fld     flt_B33E9C",
+    "line": "fld     dword ptr ds:0B33E9Ch",
     "mnemonic": "fld",
     "size": 6
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x41144D",
-    "line": "fld     flt_B3344C",
+    "line": "fld     dword ptr unk_B3344C",
     "mnemonic": "fld",
     "size": 6
   },
@@ -589,7 +589,7 @@
   },
   {
     "ea": "0x41147A",
-    "line": "mov     eax, g_worldScenegraph",
+    "line": "mov     eax, g_WorldSceneReceiverRoot; Verified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -637,13 +637,13 @@
   },
   {
     "ea": "0x41149A",
-    "line": "fstp    flt_B3344C",
+    "line": "fstp    dword ptr unk_B3344C",
     "mnemonic": "fstp",
     "size": 6
   },
   {
     "ea": "0x4114A0",
-    "line": "fld     flt_B3344C",
+    "line": "fld     dword ptr unk_B3344C",
     "mnemonic": "fld",
     "size": 6
   },
@@ -778,5 +778,71 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9AACD0",
+    "line": "mov     eax, dword ptr unk_B33450",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AACD5",
+    "line": "and     eax, 0FFFFFFFEh",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9AACD8",
+    "line": "mov     dword ptr unk_B33450, eax",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AACDD",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AACDE",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AACE2",
+    "line": "lea     eax, [edx-30h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AACE5",
+    "line": "mov     ecx, [edx-34h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AACE8",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AACEA",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AACEF",
+    "line": "mov     eax, offset stru_AD7BFC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AACF4",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

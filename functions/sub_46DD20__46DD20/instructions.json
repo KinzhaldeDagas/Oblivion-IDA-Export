@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x46DD20",
-    "line": "cmp     dword ptr [ecx+8], 0",
+    "line": "cmp     dword ptr [ecx+8], 0; MEF PERF 2026-09-07: Verified PERF-2: duplicate lookup visits existing model paths in list order and invokes98262D for each nonnull entry, returning on equality. Comparator is CRT case-insensitive/locale-aware dispatch, despite previous misleading strcmp label. N distinct additions from empty list produce N*(N-1)/2 string comparisons.",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -97,19 +97,19 @@
   },
   {
     "ea": "0x46DD46",
-    "line": "push    edi; Str2",
+    "line": "push    edi; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46DD47",
-    "line": "push    eax; Str1",
+    "line": "push    eax; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46DD48",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },

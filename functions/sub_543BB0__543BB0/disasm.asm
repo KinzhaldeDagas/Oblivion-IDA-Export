@@ -1,9 +1,9 @@
-0x543BB0: push    esi
+0x543BB0: push    esi; Changes Oblivion Sky mode at +0xDC, invoking the appropriate setup/teardown path when crossing between modes 0/1 and 2/3. Fallout was consulted afterward and corroborates Sky::SetMode terminology.
 0x543BB1: mov     esi, ecx
 0x543BB3: mov     eax, [esi+0DCh]
 0x543BB9: test    eax, eax
 0x543BBB: push    edi
-0x543BBC: mov     edi, [esp+8+arg_0]
+0x543BBC: mov     edi, [esp+8+mode]
 0x543BC0: jz      short loc_543BCC
 0x543BC2: cmp     eax, 1
 0x543BC5: jz      short loc_543BCC

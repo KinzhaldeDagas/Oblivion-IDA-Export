@@ -77,3 +77,12 @@
 0x483CC9: pop     ebx
 0x483CCA: add     esp, 1Ch
 0x483CCD: retn    10h
+0x9AF920: lea     ecx, [ebp-1Ch]; void *
+0x9AF923: jmp     sub_483600
+0x9AF928: mov     edx, [esp+arg_4]
+0x9AF92C: lea     eax, [edx-20h]
+0x9AF92F: mov     ecx, [edx-24h]
+0x9AF932: xor     ecx, eax
+0x9AF934: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AF939: mov     eax, offset stru_ADBE50
+0x9AF93E: jmp     ___CxxFrameHandler3

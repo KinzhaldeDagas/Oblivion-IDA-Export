@@ -1,4 +1,8 @@
-int __cdecl sub_79AA40(char *a1, char *a2, int a3)
+// Thin forward-copy trampoline for initialized SFrondVertex ranges; delegates to 0x79A950.
+OB_SFrondVertex_010201A0 *__cdecl OB_SFrondVertex_CopyForwardThunk_010201A0(
+        OB_SFrondVertex_010201A0 *first,
+        OB_SFrondVertex_010201A0 *last,
+        OB_SFrondVertex_010201A0 *destinationFirst)
 {
-  return sub_79A950(a1, a2, a3);
+  return OB_SFrondVertex_CopyForward_010201A0(first, last, destinationFirst); /*0x79aa6a*/
 }

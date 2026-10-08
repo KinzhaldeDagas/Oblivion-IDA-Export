@@ -27,7 +27,7 @@
 0x439620: push    ecx
 0x439621: mov     ecx, ebx; this
 0x439623: fstp    [esp+28h+a2]; a2
-0x439626: call    NiAVObject_UpdateNiAVObject
+0x439626: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x43962B: fld     dword ptr [ebx+2Ch]
 0x43962E: fstp    [esp+20h+var_14]
 0x439632: fld     ds:flt_A37080
@@ -97,10 +97,10 @@
 0x439707: call    sub_4A01B0
 0x43970C: mov     ecx, [esi]
 0x43970E: mov     edx, [ecx+8]
-0x439711: mov     ecx, ModelLoaderPtr
+0x439711: mov     ecx, ds:0B33A1Ch
 0x439717: push    edx
 0x439718: call    sub_438730
-0x43971D: mov     ecx, ModelLoaderPtr
+0x43971D: mov     ecx, ds:0B33A1Ch
 0x439723: mov     eax, [esi]
 0x439725: mov     edx, [edi+20h]
 0x439728: mov     ecx, [ecx]
@@ -112,7 +112,7 @@
 0x439733: call    edx
 0x439735: test    al, al
 0x439737: jnz     short loc_439769
-0x439739: mov     ecx, ModelLoaderPtr
+0x439739: mov     ecx, ds:0B33A1Ch
 0x43973F: mov     eax, [edi+20h]
 0x439742: mov     ecx, [ecx]
 0x439744: lea     ebx, [esp+20h+var_10]

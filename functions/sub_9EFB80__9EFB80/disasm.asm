@@ -2,7 +2,7 @@
 0x9EFB86: push    ecx
 0x9EFB87: fstp    [esp+4+var_4]; float
 0x9EFB8A: push    offset aFabsorbsegment; "fAbsorbSegmentVariance"
-0x9EFB8F: mov     ecx, offset fAbsorbSegmentVariance
+0x9EFB8F: mov     ecx, (offset flt_B37ED0+338h)
 0x9EFB94: call    GameSetting_ConstrAndReg_float
 0x9EFB99: push    offset sub_A20B30; void (__cdecl *)()
 0x9EFB9E: call    _atexit

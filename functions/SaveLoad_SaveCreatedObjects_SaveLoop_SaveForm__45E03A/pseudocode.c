@@ -20,27 +20,27 @@ int __userpurge SaveLoad_SaveCreatedObjects_::SaveLoop_SaveForm@<eax>(
   void (__cdecl *v17)(int, void *, int, int *, int); // ecx
   void *v19; // [esp-10h] [ebp-10h]
 
-  (*(void (__thiscall **)(_BYTE *))(*(_DWORD *)edi0 + 0x24))(edi0);
-  v16 = TESForm_Static_FormRecordSize;
-  if ( (ebx0[6] & 0x200) != 0 )
+  (*(void (__thiscall **)(_BYTE *))(*(_DWORD *)edi0 + 0x24))(edi0); /*0x45e041*/
+  v16 = MEMORY[0xB33C18]; /*0x45e046*/
+  if ( (ebx0[6] & 0x200) != 0 ) /*0x45e052*/
   {
-    ebx0[0x24] += v16;
+    ebx0[0x24] += v16; /*0x45e054*/
   }
   else
   {
-    v19 = TESForm_Static_FormRecordBuffer;
-    v17 = *(void (__cdecl **)(int, void *, int, int *, int))(a16 + 8);
-    a9 = 1;
-    v17(a16, v19, v16, &a9, 1);
+    v19 = MEMORY[0xB33C14]; /*0x45e069*/
+    v17 = *(void (__cdecl **)(int, void *, int, int *, int))(a16 + 8); /*0x45e06e*/
+    a9 = 1; /*0x45e072*/
+    v17(a16, v19, v16, &a9, 1); /*0x45e07a*/
   }
-  if ( ebx0[0x10] )
+  if ( ebx0[0x10] ) /*0x45e07f*/
   {
-    LOBYTE(a14) = edi0[4];
-    a13 = ebp0;
-    HIWORD(a14) = v16;
-    *(_DWORD *)((char *)&a14 + 1) = 0;
-    sub_45AD00(&a13);
+    LOBYTE(a14) = edi0[4]; /*0x45e08e*/
+    a13 = ebp0; /*0x45e092*/
+    HIWORD(a14) = v16; /*0x45e096*/
+    *(_DWORD *)((char *)&a14 + 1) = 0; /*0x45e09b*/
+    sub_45AD00(&a13); /*0x45e0a3*/
   }
-  TESFile_ClearFormRecord();
+  TESFile_ClearFormRecord(); /*0x45e0aa*/
   return SaveLoad_SaveCreatedObjects_::FormLoop_Next(a4, a5, a6, a7, a8);
 }

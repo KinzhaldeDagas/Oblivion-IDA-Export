@@ -9,22 +9,22 @@ double __thiscall sub_8F0430(int *this, __m128 *a2)
   __int128 v9; // [esp+50h] [ebp-20h]
   __int128 v10; // [esp+60h] [ebp-10h]
 
-  v2 = *this;
-  v7 = 0;
-  v8 = 0;
-  v9 = 0;
-  LODWORD(v7) = 0x3F800000;
-  DWORD1(v8) = 0x3F800000;
-  DWORD2(v9) = 0x3F800000;
-  v10 = 0;
-  (*(void (__thiscall **)(int *, __int128 *, _DWORD, __m128 *))(v2 + 0xC))(this, &v7, 0, &v5);
-  v3 = _mm_mul_ps(
+  v2 = *this; /*0x8f0439*/
+  v7 = 0; /*0x8f0449*/
+  v8 = 0; /*0x8f044e*/
+  v9 = 0; /*0x8f0453*/
+  LODWORD(v7) = 0x3F800000; /*0x8f0459*/
+  DWORD1(v8) = 0x3F800000; /*0x8f0461*/
+  DWORD2(v9) = 0x3F800000; /*0x8f0469*/
+  v10 = 0; /*0x8f0471*/
+  (*(void (__thiscall **)(int *, __int128 *, _DWORD, __m128 *))(v2 + 0xC))(this, &v7, 0, &v5); /*0x8f0476*/
+  v3 = _mm_mul_ps( /*0x8f04ca*/
          _mm_add_ps(
            _mm_xor_ps(
              _mm_mul_ps(_mm_shuffle_ps((__m128)0x3F000000u, (__m128)0x3F000000u, 0), _mm_sub_ps(v6, v5)),
              _mm_and_ps(*a2, (__m128)xmmword_A965C0)),
            _mm_mul_ps(_mm_shuffle_ps((__m128)0x3F000000u, (__m128)0x3F000000u, 0), _mm_add_ps(v6, v5))),
          *a2);
-  return (float)(_mm_shuffle_ps(v3, v3, 0xAA).m128_f32[0]
+  return (float)(_mm_shuffle_ps(v3, v3, 0xAA).m128_f32[0] /*0x8f04ef*/
                + (float)(_mm_shuffle_ps(v3, v3, 0x55).m128_f32[0] + v3.m128_f32[0]));
 }

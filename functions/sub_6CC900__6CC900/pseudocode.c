@@ -1,4 +1,5 @@
-void __thiscall sub_6CC900(_BYTE *this)
+// Oblivion: special two-active-item normalization. Combines item+4 base weight with item+0x10 ease weight, accounts for item+0x0C priority, then applies highest-only flag or blend threshold.
+void __thiscall NiBlendInterpolator_NormalizeTwoItems(_BYTE *this)
 {
   unsigned __int8 v2; // cl
   int v3; // edx
@@ -23,108 +24,108 @@ void __thiscall sub_6CC900(_BYTE *this)
   float v22; // [esp+10h] [ebp-4h]
   float v23; // [esp+10h] [ebp-4h]
 
-  v2 = *(this + 0xD);
-  v3 = 0;
-  v4 = 0;
-  v5 = 0;
-  if ( !v2 )
-    return;
-  v6 = *((_DWORD *)this + 5);
-  while ( !*(_DWORD *)(v6 + 0x18 * v5) )
+  v2 = *(this + 0xD); /*0x6cc907*/
+  v3 = 0; /*0x6cc90b*/
+  v4 = 0; /*0x6cc90d*/
+  v5 = 0; /*0x6cc90f*/
+  if ( !v2 ) /*0x6cc913*/
+    return; /*0x6cc913*/
+  v6 = *((_DWORD *)this + 5); /*0x6cc91a*/
+  while ( !*(_DWORD *)(v6 + 0x18 * v5) ) /*0x6cc92c*/
   {
 LABEL_6:
-    if ( ++v5 >= v2 )
-      goto LABEL_9;
+    if ( ++v5 >= v2 ) /*0x6cc939*/
+      goto LABEL_9; /*0x6cc939*/
   }
-  if ( !v3 )
+  if ( !v3 ) /*0x6cc930*/
   {
-    v3 = v6 + 0x18 * v5;
-    goto LABEL_6;
+    v3 = v6 + 0x18 * v5; /*0x6cc932*/
+    goto LABEL_6; /*0x6cc932*/
   }
-  v4 = v6 + 0x18 * v5;
+  v4 = v6 + 0x18 * v5; /*0x6cc943*/
 LABEL_9:
-  if ( v3 && v4 )
+  if ( v3 && v4 ) /*0x6cc951*/
   {
-    v17 = *(float *)(v3 + 4) * *(float *)(v3 + 0x10);
-    v18 = *(float *)(v4 + 4) * *(float *)(v4 + 0x10);
-    v7 = v17;
-    v8 = v18;
-    if ( v17 == 0.0 && 0.0 == v8 )
+    v17 = *(float *)(v3 + 4) * *(float *)(v3 + 0x10); /*0x6cc95d*/
+    v18 = *(float *)(v4 + 4) * *(float *)(v4 + 0x10); /*0x6cc967*/
+    v7 = v17; /*0x6cc977*/
+    v8 = v18; /*0x6cc97c*/
+    if ( v17 == 0.0 && 0.0 == v8 ) /*0x6cc98b*/
     {
-      *(float *)(v3 + 8) = 0.0;
-      *(float *)(v4 + 8) = 0.0;
-      return;
+      *(float *)(v3 + 8) = 0.0; /*0x6cc991*/
+      *(float *)(v4 + 8) = 0.0; /*0x6cc994*/
+      return; /*0x6cc99d*/
     }
-    v9 = *(_BYTE *)(v3 + 0xC);
-    v10 = *(_BYTE *)(v4 + 0xC);
-    if ( v9 <= v10 )
+    v9 = *(_BYTE *)(v3 + 0xC); /*0x6cc99e*/
+    v10 = *(_BYTE *)(v4 + 0xC); /*0x6cc9a3*/
+    if ( v9 <= v10 ) /*0x6cc9a8*/
     {
-      if ( v9 >= v10 )
+      if ( v9 >= v10 ) /*0x6cc9fc*/
       {
-        v23 = 1.0 / (v8 + v7);
-        *(float *)(v3 + 8) = v7 * v23;
-        v13 = 1.0;
-        v14 = v8 * v23;
-        goto LABEL_24;
+        v23 = 1.0 / (v8 + v7); /*0x6cca5f*/
+        *(float *)(v3 + 8) = v7 * v23; /*0x6cca6d*/
+        v13 = 1.0; /*0x6cca70*/
+        v14 = v8 * v23; /*0x6cca72*/
+        goto LABEL_24; /*0x6cca72*/
       }
-      if ( 1.0 != *(float *)(v4 + 0x10) )
+      if ( 1.0 != *(float *)(v4 + 0x10) ) /*0x6cca06*/
       {
-        v21 = 1.0 - *(float *)(v4 + 0x10);
-        v15 = v7 * v21;
-        v22 = 1.0 / (v8 * *(float *)(v4 + 0x10) + v15);
-        *(float *)(v3 + 8) = v15 * v22;
-        v14 = v22 * (v8 * *(float *)(v4 + 0x10));
-        v13 = 1.0;
-        goto LABEL_24;
+        v21 = 1.0 - *(float *)(v4 + 0x10); /*0x6cca26*/
+        v15 = v7 * v21; /*0x6cca2e*/
+        v22 = 1.0 / (v8 * *(float *)(v4 + 0x10) + v15); /*0x6cca39*/
+        *(float *)(v3 + 8) = v15 * v22; /*0x6cca47*/
+        v14 = v22 * (v8 * *(float *)(v4 + 0x10)); /*0x6cca53*/
+        v13 = 1.0; /*0x6cca53*/
+        goto LABEL_24; /*0x6cca55*/
       }
-      v13 = 1.0;
-      goto LABEL_21;
+      v13 = 1.0; /*0x6cca0a*/
+      goto LABEL_21; /*0x6cca0a*/
     }
-    if ( 1.0 == *(float *)(v3 + 0x10) )
+    if ( 1.0 == *(float *)(v3 + 0x10) ) /*0x6cc9b2*/
     {
-      *(float *)(v3 + 8) = 1.0;
-      *(float *)(v4 + 8) = 0.0;
-      return;
+      *(float *)(v3 + 8) = 1.0; /*0x6cc9b8*/
+      *(float *)(v4 + 8) = 0.0; /*0x6cc9bb*/
+      return; /*0x6cc9c4*/
     }
-    v19 = 1.0 - *(float *)(v3 + 0x10);
-    v11 = v7 * *(float *)(v3 + 0x10);
-    v12 = v8 * v19;
-    v20 = 1.0 / (v12 + v11);
-    *(float *)(v3 + 8) = v11 * v20;
-    v13 = 1.0;
-    v14 = v12 * v20;
+    v19 = 1.0 - *(float *)(v3 + 0x10); /*0x6cc9d0*/
+    v11 = v7 * *(float *)(v3 + 0x10); /*0x6cc9d7*/
+    v12 = v8 * v19; /*0x6cc9dd*/
+    v20 = 1.0 / (v12 + v11); /*0x6cc9e5*/
+    *(float *)(v3 + 8) = v11 * v20; /*0x6cc9f3*/
+    v13 = 1.0; /*0x6cc9f6*/
+    v14 = v12 * v20; /*0x6cc9f8*/
 LABEL_24:
-    *(float *)(v4 + 8) = v14;
-    if ( (*(this + 0xC) & 2) != 0 )
+    *(float *)(v4 + 8) = v14; /*0x6cca74*/
+    if ( (*(this + 0xC) & 2) != 0 ) /*0x6cca7b*/
     {
-      if ( *(float *)(v4 + 8) <= (double)*(float *)(v3 + 8) )
+      if ( *(float *)(v4 + 8) <= (double)*(float *)(v3 + 8) ) /*0x6cca8a*/
       {
-        *(float *)(v3 + 8) = v13;
-        *(float *)(v4 + 8) = 0.0;
-        return;
+        *(float *)(v3 + 8) = v13; /*0x6cca8c*/
+        *(float *)(v4 + 8) = 0.0; /*0x6cca8f*/
+        return; /*0x6cca98*/
       }
 LABEL_21:
-      *(float *)(v3 + 8) = 0.0;
-      *(float *)(v4 + 8) = v13;
-      return;
+      *(float *)(v3 + 8) = 0.0; /*0x6cca0c*/
+      *(float *)(v4 + 8) = v13; /*0x6cca11*/
+      return; /*0x6cca1a*/
     }
-    if ( *((float *)this + 7) > 0.0 )
+    if ( *((float *)this + 7) > 0.0 ) /*0x6ccaa3*/
     {
-      v16 = 0;
-      if ( *((float *)this + 7) > (double)*(float *)(v3 + 8) )
+      v16 = 0; /*0x6ccaa8*/
+      if ( *((float *)this + 7) > (double)*(float *)(v3 + 8) ) /*0x6ccab4*/
       {
-        *(float *)(v3 + 8) = 0.0;
-        v16 = 1;
+        *(float *)(v3 + 8) = 0.0; /*0x6ccab6*/
+        v16 = 1; /*0x6ccab9*/
       }
-      if ( *((float *)this + 7) <= (double)*(float *)(v4 + 8) )
+      if ( *((float *)this + 7) <= (double)*(float *)(v4 + 8) ) /*0x6ccac8*/
       {
-        if ( v16 )
-          *(float *)(v4 + 8) = v13;
+        if ( v16 ) /*0x6ccadb*/
+          *(float *)(v4 + 8) = v13; /*0x6ccadd*/
       }
       else
       {
-        *(float *)(v4 + 8) = 0.0;
-        *(float *)(v4 + 8) = v13;
+        *(float *)(v4 + 8) = 0.0; /*0x6ccaca*/
+        *(float *)(v4 + 8) = v13; /*0x6ccacd*/
       }
     }
   }

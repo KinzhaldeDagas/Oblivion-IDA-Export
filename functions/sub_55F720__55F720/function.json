@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x55F720",
+      "0x55F747"
+    ]
+  ],
+  "chunks_sha256": "e78f014cdda8c005c7d5f9f0ede4d6988d8f1c021951c3076dedbe4697a8adad",
+  "comment_regular": "Verified singleton Destroy: invokes BSTreeManager_dtor, frees the 0x28-byte manager and clears the global instance pointer.",
+  "comment_repeatable": "Verified singleton Destroy: invokes BSTreeManager_dtor, frees the 0x28-byte manager and clears the global instance pointer.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_55F720",
+  "display_name": "BSTreeManager_Destroy",
   "end_ea": "0x55F747",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_55F720",
+  "name": "BSTreeManager_Destroy",
   "segment": ".text",
   "sha256": "e78f014cdda8c005c7d5f9f0ede4d6988d8f1c021951c3076dedbe4697a8adad",
   "size": 39,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x55F720",
-  "type": "void()",
+  "total_chunk_size": 39,
+  "type": "void __cdecl()",
   "xrefs_from_count": 14,
   "xrefs_to_count": 1
 }

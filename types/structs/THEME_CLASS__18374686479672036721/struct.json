@@ -1,58 +1,99 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_THEME_CLASS",
+  "definition": "struct _THEME_CLASS\n{\nDWORD signature;\nHMODULE hTheme;\n_THEME_FILE *tf;\nWCHAR_0 szAppName[60];\nWCHAR_0 szClassName[60];\nPTHEME_PARTSTATE partstate;\n_THEME_CLASS *overrides;\n_THEME_CLASS *next;\n}\n",
   "id": 18374686479672036721,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "signature",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hTheme",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "HMODULE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "tf",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "_THEME_FILE *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "szAppName",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 120
+      "offset_hex": "0xC",
+      "size": 120,
+      "type": "WCHAR_0[60]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "szClassName",
       "offset": 132,
       "offset_hex": "0x84",
-      "size": 120
+      "size": 120,
+      "type": "WCHAR_0[60]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "partstate",
       "offset": 252,
-      "offset_hex": "0xfc",
-      "size": 4
+      "offset_hex": "0xFC",
+      "size": 4,
+      "type": "PTHEME_PARTSTATE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "overrides",
       "offset": 256,
       "offset_hex": "0x100",
-      "size": 4
+      "size": 4,
+      "type": "_THEME_CLASS *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "next",
       "offset": 260,
       "offset_hex": "0x104",
-      "size": 4
+      "size": 4,
+      "type": "_THEME_CLASS *"
     }
   ],
   "name": "_THEME_CLASS",
+  "ordinal": 4637,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 264
 }

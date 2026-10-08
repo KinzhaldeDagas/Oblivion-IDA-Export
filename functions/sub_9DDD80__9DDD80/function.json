@@ -1,19 +1,40 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 4,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_9DDD80",
+  "chunks": [
+    [
+      "0x9DDD80",
+      "0x9DDDD4"
+    ],
+    [
+      "0x403BC0",
+      "0x403BD4"
+    ],
+    [
+      "0x9B0DC0",
+      "0x9B0DE4"
+    ]
+  ],
+  "chunks_sha256": "3f6255d1d3043dd004530d7249f27aa89c52bda8e4b0fc134cef74c986c3e107",
+  "comment_regular": "[Verified] Registers bIsHDR in INISettingCollection and schedules its destructor with atexit. The owned setting-name string is \"bDoHighDynamicRange:BlurShaderHDR\".",
+  "comment_repeatable": "[Verified] Registers bIsHDR in INISettingCollection and schedules its destructor with atexit. The owned setting-name string is \"bDoHighDynamicRange:BlurShaderHDR\".",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "Register_INISetting_bIsHDR",
   "end_ea": "0x9DDDD4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_9DDD80",
+  "name": "Register_INISetting_bIsHDR",
   "segment": ".text",
   "sha256": "ebe287a23894a2b23ce89de79d6102129d55422ffa098c52a3b4b40e82bcba68",
   "size": 84,
+  "source_annotation_confidence": "Verified",
   "start_ea": "0x9DDD80",
+  "total_chunk_size": 140,
   "type": "int()",
-  "xrefs_from_count": 27,
+  "xrefs_from_count": 50,
   "xrefs_to_count": 0
 }

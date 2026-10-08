@@ -61,7 +61,7 @@
 0x5EDF92: lea     ecx, [esp+74h+var_5C]
 0x5EDF96: push    ecx
 0x5EDF97: mov     ecx, esi
-0x5EDF99: call    sub_53D4B0
+0x5EDF99: call    NiTransform_TransformPoint; ODismemberment: __thiscall NiTransform point transform helper. Plugin hit capture must pass transform in ECX; cdecl here crashes on actor hits.
 0x5EDF9E: mov     edx, [eax]
 0x5EDFA0: mov     ecx, [eax+4]
 0x5EDFA3: mov     [esp+70h+var_50], edx
@@ -71,12 +71,12 @@
 0x5EDFB2: push    eax; a2
 0x5EDFB3: mov     ecx, edi; this
 0x5EDFB5: mov     [esp+74h+var_48], edx
-0x5EDFB9: call    sub_5E6A40
+0x5EDFB9: call    Actor_GetWeaponTipLocalPointForHit; ODismemberment combat decode: returns a local-space weapon/reach point for hit visuals. Uses actor GetNiNode, equipped weapon combat distance, named weapon node lookup, and native transform helpers. Attack tail passes this as one of Actor_HandleHitVisualEffects' vector inputs.
 0x5EDFBE: push    eax
 0x5EDFBF: lea     ecx, [esp+74h+var_2C]
 0x5EDFC3: push    ecx
 0x5EDFC4: mov     ecx, esi
-0x5EDFC6: call    sub_53D4B0
+0x5EDFC6: call    NiTransform_TransformPoint; ODismemberment: __thiscall NiTransform point transform helper. Plugin hit capture must pass transform in ECX; cdecl here crashes on actor hits.
 0x5EDFCB: mov     edx, [eax]
 0x5EDFCD: mov     ecx, [eax+4]
 0x5EDFD0: mov     [esp+70h+var_5C], edx
@@ -105,7 +105,7 @@
 0x5EE02B: mov     edx, [esp+70h+var_3C]
 0x5EE02F: lea     ecx, [esp+70h+var_50]
 0x5EE033: mov     [esp+70h+var_48], edx
-0x5EE037: call    sub_43F350
+0x5EE037: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x5EE03C: fstp    st
 0x5EE03E: fld     [esp+70h+var_50]
 0x5EE042: lea     eax, [esp+70h+var_1C]
@@ -167,7 +167,7 @@
 0x5EE113: mov     ecx, esi; this
 0x5EE115: mov     [esp+74h+var_4], 0FFFFFFFFh
 0x5EE11D: mov     [eax+18h], dx
-0x5EE121: call    sub_405680
+0x5EE121: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x5EE126: push    1Ch; Size
 0x5EE128: call    FormHeapAlloc
 0x5EE12D: mov     edi, eax
@@ -189,7 +189,7 @@
 0x5EE166: mov     ecx, esi; this
 0x5EE168: mov     [esp+74h+var_4], 0FFFFFFFFh
 0x5EE170: mov     [edi+18h], ax
-0x5EE174: call    sub_405680
+0x5EE174: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x5EE179: fld     dword ptr ds:0B148D4h
 0x5EE17F: push    ecx
 0x5EE180: mov     ecx, ds:0B333A0h
@@ -203,3 +203,20 @@
 0x5EE19C: pop     esi
 0x5EE19D: add     esp, 64h
 0x5EE1A0: retn    0Ch
+0x9C2730: mov     eax, [ebp+8]
+0x9C2733: push    eax
+0x9C2734: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C2739: pop     ecx
+0x9C273A: retn
+0x9C273B: mov     eax, [ebp+8]
+0x9C273E: push    eax
+0x9C273F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C2744: pop     ecx
+0x9C2745: retn
+0x9C2746: mov     edx, [esp+arg_4]
+0x9C274A: lea     eax, [edx-60h]
+0x9C274D: mov     ecx, [edx-64h]
+0x9C2750: xor     ecx, eax
+0x9C2752: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C2757: mov     eax, offset stru_AEB5B0
+0x9C275C: jmp     ___CxxFrameHandler3

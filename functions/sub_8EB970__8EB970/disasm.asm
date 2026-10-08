@@ -1,4 +1,4 @@
-0x8EB970: push    ebp
+0x8EB970: push    ebp; Projects a point/motion against a single active surface plane with tolerance/radius fields from the surface entry.
 0x8EB971: mov     ebp, esp
 0x8EB973: and     esp, 0FFFFFFF0h
 0x8EB976: sub     esp, 20h
@@ -7,7 +7,7 @@
 0x8EB980: movaps  xmm2, xmmword ptr [ecx]
 0x8EB983: mov     edx, [ecx+2Ch]
 0x8EB986: mov     [esp+20h+var_18], eax
-0x8EB98A: mov     eax, [ebp+arg_4]
+0x8EB98A: mov     eax, [ebp+inputPoint]
 0x8EB98D: movaps  xmm0, xmmword ptr [eax]
 0x8EB990: subps   xmm0, xmm4
 0x8EB993: movaps  xmm1, xmm0
@@ -22,7 +22,7 @@
 0x8EB9B3: lea     edx, [esp+20h+var_10]
 0x8EB9B7: movss   dword ptr [edx], xmm5
 0x8EB9BB: fld     [esp+20h+var_10]
-0x8EB9BF: mov     edx, [ebp+arg_0]
+0x8EB9BF: mov     edx, [ebp+solverState]
 0x8EB9C2: fchs
 0x8EB9C4: mov     edx, [edx+38h]
 0x8EB9C7: fstp    [esp+20h+var_4]

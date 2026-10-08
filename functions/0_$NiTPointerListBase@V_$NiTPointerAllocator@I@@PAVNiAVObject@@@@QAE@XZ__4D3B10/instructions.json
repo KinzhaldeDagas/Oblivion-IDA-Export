@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4D3B10",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; [Verified] This Oblivion scene-projection path creates/registers BSTempEffect decal effects after its geometry/raycast work; it is a transient decal path and does not establish population of BSShaderLightingProperty+0x80's DECAL_DATA* list. Fallout contrast: Fallout's AddDecalRef path stores reference/intersection/normal metadata in ExtraDecalRefs (ExtraData type 0x57). Equivalence between these paths: Unknown.",
     "mnemonic": "push",
     "size": 2
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x4D3B4C",
-    "line": "fstp    [esp+60h+var_44]",
+    "line": "fstp    [esp+60h+var_44]; BloodOnDeath decode 2026-05-30: Decal_ProjectToSceneGeometry randomizes decal rotation in [0, 2pi) and decal variant floor(rand[0,4)); these do not increase the number of decals.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x4D3BAB",
-    "line": "jz      loc_4D3C47",
+    "line": "jz      loc_4D3C47; ODismemberment authority: no explicit target reference means project through Havok/cell scene geometry from world position and direction.",
     "mnemonic": "jz",
     "size": 6
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x4D3C3D",
-    "line": "call    sub_4CF1A0",
+    "line": "call    Decal_AttachToGeometryRecursive; ODismemberment authority: explicit target reference path resolves its NiNode and directly recurses into decal attachment.",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,13 +523,13 @@
   },
   {
     "ea": "0x4D3C47",
-    "line": "lea     ecx, [esp+5Ch+arg_C]",
+    "line": "lea     ecx, [esp+5Ch+arg_C]; BloodOnDeath decode 2026-05-26: null explicit-target branch for Decal_ProjectToSceneGeometry. Normalizes direction and performs Havok/scene-geometry ray projection from supplied world position; qword_A46B08 provides 80.0 ray length. This is the faithful floor/geometry path.",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4D3C4B",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x4D3C91",
-    "line": "call    sub_533C40",
+    "line": "call    bhkSphereShapeProbeCollector_InitLayer1C",
     "mnemonic": "call",
     "size": 5
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x4D3CA8",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -757,7 +757,7 @@
   },
   {
     "ea": "0x4D3CCC",
-    "line": "call    sub_5337E0",
+    "line": "call    sub_5337E0; ODismemberment authority: decal projection uses a reusable bhk sphere probe collector against the cell/interior Havok world.",
     "mnemonic": "call",
     "size": 5
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x4D3CE2",
-    "line": "fxch    st(1)",
+    "line": "fxch    st(1); BloodOnDeath v1.1.6: each custom moved-limb trail point still calls the native 80-unit scene projection path, so interpolated corpse/Havok trails stay within the same ray-length constraint.",
     "mnemonic": "fxch",
     "size": 2
   },
@@ -1195,7 +1195,7 @@
   },
   {
     "ea": "0x4D3DF0",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1531,7 +1531,7 @@
   },
   {
     "ea": "0x4D3EDC",
-    "line": "call    sub_533930",
+    "line": "call    sub_533930; BloodOnDeath decode 2026-05-30: null-target scene projection iterates Havok collector hits and attaches to each unique geometry object. More left-behind blood can come from more projection calls, not from selector/rotation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1795,7 +1795,7 @@
   },
   {
     "ea": "0x4D3F64",
-    "line": "call    sub_4CF1A0",
+    "line": "call    Decal_AttachToGeometryRecursive",
     "mnemonic": "call",
     "size": 5
   },
@@ -1927,7 +1927,7 @@
   },
   {
     "ea": "0x4D3FB0",
-    "line": "mov     [esp+5Ch+arg_1C], eax",
+    "line": "mov     [esp+5Ch+arg_1C], eax; BloodOnDeath v1.1.6: additional moved-limb trail points create additional projection calls; this is the reliable way to leave more blood along a dragged path.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2245,7 +2245,7 @@
   },
   {
     "ea": "0x4D405D",
-    "line": "call    sub_4CF1A0",
+    "line": "call    Decal_AttachToGeometryRecursive; BloodOnDeath decode 2026-05-30: after Havok hits, projection also tries loaded cell geometry at the source point.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2419,7 +2419,7 @@
   },
   {
     "ea": "0x4D40E5",
-    "line": "call    sub_440880",
+    "line": "call    sub_440880; BloodOnDeath v1.1.2: projector also samples cell geometry farther along the ray, so outward limb spurts can mark nearby world geometry as well as floor hits.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2593,7 +2593,7 @@
   },
   {
     "ea": "0x4D4147",
-    "line": "call    sub_4CF1A0",
+    "line": "call    Decal_AttachToGeometryRecursive",
     "mnemonic": "call",
     "size": 5
   },
@@ -2743,14 +2743,122 @@
   },
   {
     "ea": "0x4D4197",
-    "line": "add     esp, 48h",
+    "line": "add     esp, 48h; BloodOnDeath decode: function epilogue is add esp,48h; retn 28h, confirming thiscall with 40 bytes of stack args: position vec3, direction vec3, texture, explicit target, selector, alternate geometry.",
     "mnemonic": "add",
     "size": 3
   },
   {
     "ea": "0x4D419A",
-    "line": "retn    28h ; '('",
+    "line": "retn    28h ; '('; BloodOnDeath decode: retn 0x28 confirms thiscall with 40 stack bytes: position vec3, direction vec3, texture, explicit target, selector, alternate geometry.",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x4CA150",
+    "line": "mov     dword ptr [ecx], offset ??_7?$NiTListBase@V?$NiTPointerAllocator@I@@PAVNiAVObject@@@@6B@; const NiTListBase<NiTPointerAllocator<uint>,NiAVObject *>::`vftable'",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x4CA156",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5690",
+    "line": "mov     eax, [ebp+20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5693",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5694",
+    "line": "call    sub_6078C0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5699",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B569A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B569B",
+    "line": "lea     ecx, [ebp-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B569E",
+    "line": "jmp     j_??1?$NiTPointerList@PAVNiAVObject@@@@UAE@XZ; NiTPointerList<NiAVObject *>::~NiTPointerList<NiAVObject *>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B56A3",
+    "line": "lea     ecx, [ebp-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B56A6",
+    "line": "jmp     loc_4CA150",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B56AB",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B56AF",
+    "line": "lea     eax, [edx-4Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B56B2",
+    "line": "mov     ecx, [edx-50h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B56B5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B56B7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B56BC",
+    "line": "mov     eax, offset stru_AE074C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B56C1",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

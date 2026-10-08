@@ -21,7 +21,7 @@
 0x77AE47: test    edi, edi
 0x77AE49: jnz     short loc_77AE6C
 0x77AE4B: push    ebx
-0x77AE4C: push    offset dword_B3F95C
+0x77AE4C: push    offset stru_B3F95C
 0x77AE51: call    NiRTTI_Cast
 0x77AE56: add     esp, 8
 0x77AE59: test    eax, eax
@@ -29,7 +29,7 @@
 0x77AE5D: mov     ecx, [ebp+0Ch]
 0x77AE60: push    ecx
 0x77AE61: push    eax
-0x77AE62: call    sub_761270
+0x77AE62: call    OB_NiDX9SourceTextureData_CreateFromSourceTexture_010201A0; DX10OBSE resource decode: creates/loads NiDX9SourceTextureData for NiSourceTexture, creating a managed IDirect3DTexture9 and uploading source mip texels when rendererData is absent.
 0x77AE67: add     esp, 8
 0x77AE6A: mov     edi, eax
 0x77AE6C: add     dword ptr [esi+7Ch], 0FFFFFFFFh

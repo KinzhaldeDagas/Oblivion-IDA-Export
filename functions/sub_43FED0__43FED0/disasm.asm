@@ -37,12 +37,12 @@
 0x43FF2C: jmp     short loc_43FF10
 0x43FF2E: test    esi, esi
 0x43FF30: jz      short loc_43FF71
-0x43FF32: mov     ecx, esi; this
-0x43FF34: call    TESObjectCELL_GetNiNode?
+0x43FF32: mov     ecx, esi; object
+0x43FF34: call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.
 0x43FF39: test    eax, eax
 0x43FF3B: jz      short loc_43FF44
-0x43FF3D: mov     ecx, esi; this
-0x43FF3F: call    TESObjectCELL_GetNiNode?
+0x43FF3D: mov     ecx, esi; object
+0x43FF3F: call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.
 0x43FF44: mov     ecx, ds:0B051DCh
 0x43FF4A: xor     eax, eax
 0x43FF4C: lea     esp, [esp+0]
@@ -55,7 +55,7 @@
 0x43FF5F: jmp     short loc_43FF50
 0x43FF61: mov     ecx, ds:0B33A98h
 0x43FF67: push    esi; a1
-0x43FF68: call    sub_447BA0
+0x43FF68: call    TESObjectCELL_Deactivate; Verified TESObjectCELL deactivation path. Removes cell temp effects, lowers its process level, invokes cell teardown, clears pathgrid graph/render resources, removes the scene node and inactive cell forms, then for exteriors asks TESWorldSpace_UnloadExteriorCellIfEligible to either preserve or remove the cell. Nine call sites are in world/cell transition and TES destruction paths; inspect xrefs for the full lifecycle context.
 0x43FF6D: mov     byte ptr [edi+69h], 1
 0x43FF71: pop     edi
 0x43FF72: pop     esi

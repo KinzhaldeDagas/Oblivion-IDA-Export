@@ -22,7 +22,7 @@
 0x6B6E97: push    ebx
 0x6B6E98: mov     ebx, [ecx]
 0x6B6E9A: push    0; Seed
-0x6B6E9C: call    GetRandomLargeInteger?
+0x6B6E9C: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x6B6EA1: xor     edx, edx
 0x6B6EA3: div     dword ptr [esi+8]
 0x6B6EA6: mov     eax, [ebx+34h]

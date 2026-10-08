@@ -1,1 +1,1 @@
-CALPWSTR
+typedef tagCALPWSTR CALPWSTR;

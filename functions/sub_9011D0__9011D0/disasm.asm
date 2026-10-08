@@ -184,7 +184,6 @@
 0x901450: mov     [esp+80h+var_60], ecx
 0x901454: mov     [esp+80h+var_58], eax
 0x901458: jmp     short loc_901460
-0x90145A: align 10h
 0x901460: fld     dword ptr [edi+0Ch]
 0x901463: fcomp   [esp+80h+var_50]
 0x901467: fnstsw  ax

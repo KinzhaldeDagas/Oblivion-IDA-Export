@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7976E0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; OBLIVION AUTHORITY (2026-08-30): Resizes vector<vector<unsigned short*>>. Its 4-byte pointer element permits structural reuse of the shared vector<vector<4-byte>> insert helper; the semantic type is fixed by CIndexedGeometry callers.",
     "mnemonic": "push",
     "size": 2
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x797722",
-    "line": "mov     edi, [esp+28h+arg_0]",
+    "line": "mov     edi, [esp+28h+newSize]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -223,13 +223,13 @@
   },
   {
     "ea": "0x797742",
-    "line": "lea     eax, [esp+28h+arg_4]",
+    "line": "lea     eax, [esp+28h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x797746",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -241,31 +241,31 @@
   },
   {
     "ea": "0x797749",
-    "line": "push    edi",
+    "line": "push    edi; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79774A",
-    "line": "push    ebp",
+    "line": "push    ebp; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79774B",
-    "line": "push    esi",
+    "line": "push    esi; expectedOwner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79774C",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79774E",
-    "line": "call    sub_79EBB0",
+    "line": "call    OB_stVector_stVectorFloat_InsertFill_010201A0; OBLIVION AUTHORITY (2026-08-30): Checked insert-fill implementation for vector<vector<float>>. Deep-copies the fill value, reuses capacity or grows by roughly 1.5x, moves existing inner-vector owners with ownership transfer, and preserves exception cleanup. Oblivion call flow establishes the specialization; RT4.1 FrondEngine.cpp lines 768-779 corroborate its m_vRunningLengths resize role.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x797785",
-    "line": "mov     [esp+28h+var_10], ebx",
+    "line": "mov     [esp+28h+result.current], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -415,55 +415,55 @@
   },
   {
     "ea": "0x797795",
-    "line": "push    ebp",
+    "line": "push    ebp; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x797796",
-    "line": "push    esi",
+    "line": "push    esi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x797797",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x797798",
-    "line": "push    esi",
+    "line": "push    esi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x797799",
-    "line": "lea     ecx, [esp+38h+var_14]",
+    "line": "lea     ecx, [esp+38h+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x79779D",
-    "line": "push    ecx",
+    "line": "push    ecx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79779E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7977A0",
-    "line": "call    sub_796790",
+    "line": "call    OB_stVector_stVectorUShortPtr_EraseRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Checked erase-range for vector<vector<unsigned short*>>. Uses the 4-byte inner-vector assignment family, destroys vacated owners, and updates end.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7977A5",
-    "line": "mov     eax, [esp+28h+arg_8]",
+    "line": "mov     eax, [esp+28h+value.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x7977AE",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -550,5 +550,59 @@
     "line": "retn    14h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CC0C0",
+    "line": "lea     ecx, [ebp+8]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC0C3",
+    "line": "jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC0C8",
+    "line": "mov     edx, [esp+value.allocatorState]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CC0CC",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC0CF",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC0D2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CC0D4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC0D9",
+    "line": "mov     eax, offset stru_AF5138",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC0DE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

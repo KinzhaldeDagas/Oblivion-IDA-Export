@@ -1,4 +1,4 @@
-0x42AA70: push    esi
+0x42AA70: push    esi; Adds or increments an Oblivion friend-hit entry keyed by actor: uint16 count at +4 and elapsed timer float at +8.
 0x42AA71: mov     esi, [esp+4+arg_0]
 0x42AA75: push    edi
 0x42AA76: mov     edi, ecx

@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x51C650",
+      "0x51C689"
+    ]
+  ],
+  "chunks_sha256": "ae78b9f31e39f9a1efc43c9536cb245927cd9261010b87938d771fba72a23fab",
+  "comment_regular": "Verified: component vslot +0x40 returns NULL when GetNoBloodSpray is true. Otherwise calls bloodSpray TESModel.GetModelPath(+0x14); NULL/empty falls back to sBloodParticleDefault. TESModel is complete creature +0x11C, component +0xF8; confirmed by constructor 0x51EB80.\n\nVerified TESCreature override for blood-particle virtual +0x40: NoBloodSpray returns NULL; otherwise reads bloodSpray TESModel path and falls back to base sBloodParticleDefault when null or empty.",
+  "comment_repeatable": "Verified TESCreature override for blood-particle virtual +0x40: NoBloodSpray returns NULL; otherwise reads bloodSpray TESModel path and falls back to base sBloodParticleDefault when null or empty.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_51C650",
+  "display_name": "TESCreature_GetBloodParticlePath",
   "end_ea": "0x51C689",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_51C650",
+  "name": "TESCreature_GetBloodParticlePath",
   "segment": ".text",
   "sha256": "ae78b9f31e39f9a1efc43c9536cb245927cd9261010b87938d771fba72a23fab",
   "size": 57,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x51C650",
-  "type": "_BYTE *__thiscall(_DWORD *this)",
+  "total_chunk_size": 57,
+  "type": "const char *__thiscall(TESActorBaseData *__shifted(TESCreature,0x24) self)",
   "xrefs_from_count": 27,
   "xrefs_to_count": 1
 }

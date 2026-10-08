@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6CF630",
-    "line": "sub     esp, 40h",
+    "line": "sub     esp, 40h; Oblivion: single-active-item accumulated-transform path. Prepares the selected item's accumulation state, evaluates/composes its cached transform relative to the item reference, and returns the composed transform when valid.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x6CF66F",
-    "line": "call    sub_6CEE20",
+    "line": "call    NiBlendAccumTransformInterpolator_UpdateSelectedItem; Oblivion: updates the selected accumulation item (+0x0F) at a requested time. On backward/wrapped time it samples the interpolator range endpoints and composes the wrap delta into the per-item 0x68-byte state and blend cache before sampling the requested time.",
     "mnemonic": "call",
     "size": 5
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x6CF67F",
-    "line": "call    sub_6CBC10",
+    "line": "call    NiTransform_IsInvalid; Oblivion 0x20-byte transform invalid test: true only when translation.x, quaternion marker component at +0x10, and scale at +0x1C all equal the invalid float sentinel.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x6CF6F7",
-    "line": "call    sub_6CBC10",
+    "line": "call    NiTransform_IsInvalid; Oblivion 0x20-byte transform invalid test: true only when translation.x, quaternion marker component at +0x10, and scale at +0x1C all equal the invalid float sentinel.",
     "mnemonic": "call",
     "size": 5
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x6CF728",
-    "line": "call    sub_6CBC10",
+    "line": "call    NiTransform_IsInvalid; Oblivion 0x20-byte transform invalid test: true only when translation.x, quaternion marker component at +0x10, and scale at +0x1C all equal the invalid float sentinel.",
     "mnemonic": "call",
     "size": 5
   },

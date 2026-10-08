@@ -2,8 +2,8 @@ NiTransformInterpolator *__thiscall NiTransformInterpolator::`scalar deleting de
         NiTransformInterpolator *this,
         char a2)
 {
-  NiTransformInterpolator::~NiTransformInterpolator(this);
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  NiTransformInterpolator::~NiTransformInterpolator(this); /*0x6d68d3*/
+  if ( (a2 & 1) != 0 ) /*0x6d68dd*/
+    FormHeapFree((unsigned int)this); /*0x6d68e0*/
+  return this; /*0x6d68ea*/
 }

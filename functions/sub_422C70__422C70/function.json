@@ -1,19 +1,36 @@
 {
-  "callees_count": 8,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_422C70",
+  "chunks": [
+    [
+      "0x422C70",
+      "0x422D06"
+    ],
+    [
+      "0x9D62E0",
+      "0x9D6306"
+    ]
+  ],
+  "chunks_sha256": "9d14d663afc5688491d18705523397603f20d9ae1f0309453cc70c94bf53ddc5",
+  "comment_regular": "Create the actor-owned ExtraInfoGeneralTopic (extra type 0x59) or replace its raw MenuTopic pointer. The extra-data destructor owns and frees the stored 0x28-byte MenuTopic object.",
+  "comment_repeatable": "Create the actor-owned ExtraInfoGeneralTopic (extra type 0x59) or replace its raw MenuTopic pointer. The extra-data destructor owns and frees the stored 0x28-byte MenuTopic object.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "ExtraDataList::SetInfoGeneralTopic",
   "end_ea": "0x422D06",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_422C70",
+  "name": "ExtraDataList::SetInfoGeneralTopic",
   "segment": ".text",
   "sha256": "d7211062e81f1676dfb5d750c6f4d59414ded04eae69b93f3212b8bf52e4342a",
   "size": 150,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x422C70",
-  "type": "ExtraInfoGeneralTopic *__thiscall(ExtraDataList *this, UnkBohDialogueTopicBoh *a2)",
-  "xrefs_from_count": 53,
+  "total_chunk_size": 188,
+  "type": "ExtraInfoGeneralTopic *__thiscall(ExtraDataList *this, MenuTopicView *menuTopic)",
+  "xrefs_from_count": 67,
   "xrefs_to_count": 2
 }

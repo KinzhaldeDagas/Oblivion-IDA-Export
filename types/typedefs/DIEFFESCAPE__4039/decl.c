@@ -1,1 +1,9 @@
-DIEFFESCAPE
+struct DIEFFESCAPE
+{
+DWORD dwSize;
+DWORD dwCommand;
+LPVOID lpvInBuffer;
+DWORD cbInBuffer;
+LPVOID lpvOutBuffer;
+DWORD cbOutBuffer;
+};

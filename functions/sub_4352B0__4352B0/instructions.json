@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4352B0",
-    "line": "push    esi",
+    "line": "push    esi; Async queued-KF completion bridge. If the queued task produced a KFModel at +0x28 and task state +0x0C is not cancelled state 6, forwards the model and AnimIdle context at +0x34 to AnimIdle_OnKFLoadComplete, then unregisters the queued task from the model loader.",
     "mnemonic": "push",
     "size": 1
   },
@@ -55,13 +55,13 @@
   },
   {
     "ea": "0x4352C4",
-    "line": "call    sub_477C40",
+    "line": "call    AnimIdle_OnKFLoadComplete; Completes an asynchronous AnimIdle KF load. Stores KFModel at +0x08, binds the two actor-specific resources, holds the model reference, and marks phase 1. Completion mode +0x04 values 2/3 process playable queued state (3 also starts action 0x0B); mode 0 performs install-only; unsupported/no-ActorAnimData paths retain or destroy the holder as observed.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4352C9",
-    "line": "mov     eax, ModelLoaderPtr",
+    "line": "mov     eax, ds:0B33A1Ch",
     "mnemonic": "mov",
     "size": 5
   },

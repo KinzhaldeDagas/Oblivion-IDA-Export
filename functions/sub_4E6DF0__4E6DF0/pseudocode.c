@@ -1,65 +1,70 @@
-char *__cdecl sub_4E6DF0(float *a1, TESWorldSpace *CurrentWorldspace, _DWORD *a3, _DWORD *a4)
+// Verified cross-cell endpoint lookup: compute cellX/cellY by arithmetic-shifting world X/Y by 12, search that WorldSpace's pathgrids, and also test the preceding X and/or Y cell when the point lies exactly on a 4096-unit boundary. Excludes the source PathGrid, returns the matching point, and outputs its owning PathGrid.
+TESPathGridPoint *__cdecl TESPathGrid_FindPointInNeighborCell(
+        const NiPoint3 *position,
+        TESWorldSpace *worldspace,
+        TESPathGrid **outOwningGrid,
+        TESPathGrid *excludedGrid)
 {
   int v4; // eax
-  signed int v5; // ebp
+  int v5; // ebp
   int v6; // ebx
-  signed int v7; // edi
-  _DWORD *CellAtCellCoord; // eax
-  _DWORD *v9; // eax
-  _DWORD *v10; // esi
+  int v7; // edi
+  TESObjectCELL *CellAtCellCoord; // eax
+  TESPathGrid *v9; // eax
+  TESPathGrid *v10; // esi
   int v12; // [esp+4h] [ebp-14h]
   int v13; // [esp+8h] [ebp-10h]
-  signed int v14; // [esp+Ch] [ebp-Ch]
-  signed int v15; // [esp+Ch] [ebp-Ch]
-  int v16; // [esp+10h] [ebp-8h]
+  signed int cellYa; // [esp+Ch] [ebp-Ch]
+  signed int cellY; // [esp+Ch] [ebp-Ch]
+  int y; // [esp+10h] [ebp-8h]
   int v17; // [esp+10h] [ebp-8h]
-  char *v18; // [esp+14h] [ebp-4h]
+  TESPathGridPoint *PointByPositionInCell; // [esp+14h] [ebp-4h]
 
-  v18 = 0;
-  *a3 = 0;
-  if ( !CurrentWorldspace )
-    CurrentWorldspace = TES::GetCurrentWorldspace(TES);
-  v14 = (int)*a1;
-  v16 = (int)a1[1];
-  v13 = v14 % 0x1000 == 0;
-  v12 = v16 % 0x1000 == 0;
-  v4 = v14 >> 0xC;
-  v15 = v16 >> 0xC;
-  v17 = 0;
-  v5 = v4;
-  do
+  PointByPositionInCell = 0; /*0x4e6dfe*/
+  *outOwningGrid = 0; /*0x4e6e02*/
+  if ( !worldspace ) /*0x4e6e04*/
+    worldspace = TES::GetCurrentWorldspace(MEMORY[0xB333A0]); /*0x4e6e11*/
+  cellYa = (int)position->x; /*0x4e6e23*/
+  y = (int)position->y; /*0x4e6e32*/
+  v13 = cellYa % 0x1000 == 0; /*0x4e6e56*/
+  v12 = y % 0x1000 == 0; /*0x4e6e76*/
+  v4 = cellYa >> 0xC; /*0x4e6e81*/
+  cellY = y >> 0xC; /*0x4e6e88*/
+  v17 = 0; /*0x4e6e8c*/
+  v5 = v4; /*0x4e6e98*/
+  do /*0x4e6f14*/
   {
-    v6 = 0;
-    v7 = v15;
-    while ( 1 )
+    v6 = 0; /*0x4e6ea0*/
+    v7 = cellY; /*0x4e6ea8*/
+    while ( 1 ) /*0x4e6eb6*/
     {
-      CellAtCellCoord = (_DWORD *)TESWorldSpace::GetCellAtCellCoord(CurrentWorldspace, v5, v7);
-      if ( CellAtCellCoord )
+      CellAtCellCoord = TESWorldSpace::GetCellAtCellCoord(worldspace, v5, v7); /*0x4e6eb6*/
+      if ( CellAtCellCoord ) /*0x4e6ebd*/
       {
-        v9 = (_DWORD *)sub_4AF170(CellAtCellCoord);
-        v10 = v9;
-        if ( v9 )
+        v9 = (TESPathGrid *)sub_4AF170(CellAtCellCoord); /*0x4e6ec1*/
+        v10 = v9; /*0x4e6ec6*/
+        if ( v9 ) /*0x4e6eca*/
         {
-          if ( v9 != a4 )
+          if ( v9 != excludedGrid ) /*0x4e6ed0*/
           {
-            v18 = sub_4E6D60(v9, a1);
-            if ( v18 )
-              break;
+            PointByPositionInCell = TESPathGrid_FindPointByPositionInCell(v9, position); /*0x4e6ee0*/
+            if ( PointByPositionInCell ) /*0x4e6ee4*/
+              break; /*0x4e6ee4*/
           }
         }
       }
-      ++v6;
-      --v7;
-      if ( v6 > v12 )
-        goto LABEL_12;
+      ++v6; /*0x4e6ee6*/
+      --v7; /*0x4e6ee9*/
+      if ( v6 > v12 ) /*0x4e6ef0*/
+        goto LABEL_12; /*0x4e6ef0*/
     }
-    *a3 = v10;
+    *outOwningGrid = v10; /*0x4e6ef8*/
 LABEL_12:
-    if ( v18 )
-      break;
-    --v5;
-    ++v17;
+    if ( PointByPositionInCell ) /*0x4e6f00*/
+      break; /*0x4e6f00*/
+    --v5; /*0x4e6f09*/
+    ++v17; /*0x4e6f10*/
   }
-  while ( v17 <= v13 );
-  return v18;
+  while ( v17 <= v13 ); /*0x4e6f14*/
+  return PointByPositionInCell; /*0x4e6f1b*/
 }

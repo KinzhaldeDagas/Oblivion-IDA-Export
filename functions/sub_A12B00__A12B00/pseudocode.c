@@ -1,4 +1,4 @@
-BSStringT *sub_A12B00()
+NiRTTI *sub_A12B00()
 {
-  return sub_70E220(&stru_BA8178, "bhkCharControllerShape", (int)dword_BA8150);
+  return NiRTTI_Constructor(&stru_BA8178, "bhkCharControllerShape", &stru_BA8150); /*0xa12b14*/
 }

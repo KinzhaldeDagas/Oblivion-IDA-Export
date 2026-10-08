@@ -32,15 +32,15 @@
 0x5FC71D: mov     edi, [eax]
 0x5FC71F: test    edi, edi
 0x5FC721: jz      short loc_5FC748
-0x5FC723: mov     ecx, edi
-0x5FC725: call    ExtraDataList_GetReferencePointer
+0x5FC723: mov     ecx, edi; this
+0x5FC725: call    ExtraDataList_GetReferencePointer; Return the TESObjectREFR payload from ExtraReferencePointer type 0x22, or null. Provenance only: callers still select EntryData by exact TESForm first.
 0x5FC72A: mov     ebx, eax
 0x5FC72C: test    ebx, ebx
 0x5FC72E: jz      short loc_5FC748
 0x5FC730: mov     edx, [esp+14h+arg_8]
-0x5FC734: push    edx
-0x5FC735: lea     ecx, [ebx+44h]
-0x5FC738: call    ExtraDataList_SetReferencePointer
+0x5FC734: push    edx; reference
+0x5FC735: lea     ecx, [ebx+44h]; this
+0x5FC738: call    ExtraDataList_SetReferencePointer; Set or create ExtraReferencePointer (type 0x22) in one logical function, now merged through 0x41FAF4. This extra preserves persistent-reference provenance inside an already form-keyed inventory entry; it does not override EntryData.type or sourceRef->baseForm and therefore cannot restore a thrown proxy AMMO to its source WEAP.
 0x5FC73D: mov     eax, [ebx]
 0x5FC73F: mov     edx, [eax+40h]
 0x5FC742: push    20h ; ' '
@@ -102,11 +102,11 @@
 0x5FC7CE: push    1
 0x5FC7D0: push    ecx
 0x5FC7D1: mov     ecx, esi
-0x5FC7D3: call    Actor_EquipItem
+0x5FC7D3: call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.
 0x5FC7D8: mov     ecx, edi
 0x5FC7DA: call    ContainerEntryExtraData_DestroyDataTable
 0x5FC7DF: push    edi
-0x5FC7E0: call    FormHeapFree
+0x5FC7E0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5FC7E5: add     esp, 4
 0x5FC7E8: cmp     esi, ds:0B333C4h
 0x5FC7EE: jz      loc_5FC885

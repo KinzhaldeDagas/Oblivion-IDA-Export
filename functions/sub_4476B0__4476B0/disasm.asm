@@ -18,11 +18,11 @@
 0x4476D9: mov     ecx, [esp+10h+Str2]
 0x4476DD: mov     edx, [esi]
 0x4476DF: mov     eax, [edx+0D4h]
-0x4476E5: push    ecx; Str2
+0x4476E5: push    ecx; right
 0x4476E6: mov     ecx, esi
 0x4476E8: call    eax
-0x4476EA: push    eax; Str1
-0x4476EB: call    __strcmp
+0x4476EA: push    eax; left
+0x4476EB: call    CRT_StricmpLocaleDispatch
 0x4476F0: add     esp, 8
 0x4476F3: test    eax, eax
 0x4476F5: jz      short loc_447729

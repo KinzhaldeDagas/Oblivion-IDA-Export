@@ -1,4 +1,4 @@
-BSStringT *sub_A111B0()
+NiRTTI *sub_A111B0()
 {
-  return sub_70E220(&stru_B43350, "TallGrassShaderProperty", (int)dword_B4618C);
+  return NiRTTI_Constructor(&stru_B43350, "TallGrassShaderProperty", (NiRTTI *)&OB_ShaderConstantStorage_010201A0[0xDE]); /*0xa111c4*/
 }

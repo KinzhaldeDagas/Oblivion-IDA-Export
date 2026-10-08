@@ -19,20 +19,20 @@
 0x716559: jz      short loc_71659F
 0x71655B: add     esi, 8
 0x71655E: mov     ecx, esi
-0x716560: call    sub_6A9030
+0x716560: call    NiTMapBase_GetFirstNode
 0x716565: test    eax, eax
 0x716567: mov     [esp+10h+a2], eax
 0x71656B: jz      short loc_71659F
 0x71656D: lea     ecx, [ecx+0]
-0x716570: lea     eax, [esp+10h+var_4]
-0x716574: push    eax
-0x716575: lea     ecx, [esp+14h+var_8]
-0x716579: push    ecx
+0x716570: lea     eax, [esp+10h+valueOut]
+0x716574: push    eax; valueOut
+0x716575: lea     ecx, [esp+14h+keyOut]
+0x716579: push    ecx; keyOut
 0x71657A: lea     edx, [esp+18h+a2]
-0x71657E: push    edx
-0x71657F: mov     ecx, esi
-0x716581: call    sub_452600
-0x716586: mov     ecx, [esp+10h+var_8]
+0x71657E: push    edx; position
+0x71657F: mov     ecx, esi; self
+0x716581: call    NiTMap_U32Pointer_GetNextEntry
+0x716586: mov     ecx, [esp+10h+keyOut]
 0x71658A: mov     eax, [edi]
 0x71658C: mov     edx, [eax+4Ch]
 0x71658F: push    ecx

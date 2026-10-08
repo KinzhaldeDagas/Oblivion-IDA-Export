@@ -1,4 +1,4 @@
-0x41F420: push    0FFFFFFFFh
+0x41F420: push    0FFFFFFFFh; Updates or creates ExtraInvestmentGold type 0x52 with the supplied integer amount.
 0x41F422: push    offset SEH_8C62B0
 0x41F427: mov     eax, large fs:0
 0x41F42D: push    eax
@@ -24,7 +24,7 @@
 0x41F469: mov     ecx, [esp+18h+arg_0]
 0x41F46D: push    ecx
 0x41F46E: mov     ecx, eax
-0x41F470: call    sub_42A070
+0x41F470: call    ExtraInvestmentGold_ctor; Constructs ExtraInvestmentGold, type 0x52 and supplied integer amount.
 0x41F475: jmp     short loc_41F479
 0x41F477: xor     eax, eax
 0x41F479: push    eax; BSExtraData *
@@ -45,3 +45,15 @@
 0x41F4AF: pop     esi
 0x41F4B0: add     esp, 10h
 0x41F4B3: retn    4
+0x9D62E0: mov     eax, [ebp-10h]
+0x9D62E3: push    eax
+0x9D62E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D62E9: pop     ecx
+0x9D62EA: retn
+0x9D62EB: mov     edx, [esp+arg_4]
+0x9D62EF: lea     eax, [edx-8]
+0x9D62F2: mov     ecx, [edx-0Ch]
+0x9D62F5: xor     ecx, eax
+0x9D62F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D62FC: mov     eax, offset stru_AFE21C
+0x9D6301: jmp     ___CxxFrameHandler3

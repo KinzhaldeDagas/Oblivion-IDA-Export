@@ -1,19 +1,92 @@
 {
-  "callees_count": 9,
-  "callers_count": 172,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 275,
+  "chunks": [
+    [
+      "0x9812C0",
+      "0x981323"
+    ],
+    [
+      "0x981324",
+      "0x981343"
+    ],
+    [
+      "0x981344",
+      "0x98134B"
+    ],
+    [
+      "0x9813E8",
+      "0x981432"
+    ],
+    [
+      "0x981444",
+      "0x98144B"
+    ],
+    [
+      "0x98144C",
+      "0x981457"
+    ],
+    [
+      "0x981458",
+      "0x981469"
+    ],
+    [
+      "0x98146C",
+      "0x981483"
+    ],
+    [
+      "0x981484",
+      "0x9814AA"
+    ],
+    [
+      "0x9814AC",
+      "0x9814B5"
+    ],
+    [
+      "0x9814B8",
+      "0x9814D7"
+    ],
+    [
+      "0x9815C7",
+      "0x9815CE"
+    ],
+    [
+      "0x9815E0",
+      "0x9815E7"
+    ],
+    [
+      "0x9815E8",
+      "0x9815F5"
+    ],
+    [
+      "0x9815F8",
+      "0x98160B"
+    ],
+    [
+      "0x98160C",
+      "0x981625"
+    ]
+  ],
+  "chunks_sha256": "08ad606d5b727d36513187d6dede9249effe82fbfb79b82b1ca192c48eea9de5",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
+  "comment_repeatable": "\nOblivion x86 ABI correction 2026-10-01: this routine loads the copy size as one DWORD into ECX at9812C8; caller778306 pushes exactly three DWORD arguments and adds ESP,0Ch. The IDB named size_t currently has size8, which produced a phantom high size word from a saved EDI register. Use explicit unsigned-int byteCount in this verified memcpy prototype; the global typedef was not changed without a wider type audit.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 7,
   "display_name": "_memcpy",
   "end_ea": "0x981323",
+  "evidence_confidence": "Unknown",
   "flags": 21532,
   "has_pseudocode": false,
   "name": "_memcpy",
   "segment": ".text",
   "sha256": "e3b05606b2fc767d9b32a06b69b37ef215cba0bd6748221ddd03c0d78d9e2a16",
   "size": 99,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x9812C0",
-  "type": "void *__cdecl(void *Dst, const void *Src, size_t Size)",
-  "xrefs_from_count": 49,
+  "total_chunk_size": 418,
+  "type": "void *__cdecl(void *destination, const void *source, unsigned int byteCount)",
+  "xrefs_from_count": 181,
   "xrefs_to_count": 275
 }

@@ -1,24 +1,34 @@
-void __cdecl sub_555A00(int a1, int a2, int a3, float a4)
+// Sets one fan-0 control while preserving its paired control. matrixChannel 0 updates matrix 0 geometry and matrixChannel 1 updates matrix 2 texture through authored FanControls bases.
+void __cdecl FaceGenHeadParameters_SetControlValue(
+        FaceGenHeadParameters *parameters,
+        int controlIndex,
+        int matrixChannel,
+        float value)
 {
-  signed int i; // esi
-  double v5; // st7
-  float v6[2]; // [esp+10h] [ebp-8h] BYREF
+  int i; // esi
+  double ControlValue; // st7
+  float targetPair[2]; // [esp+10h] [ebp-8h] BYREF
 
-  for ( i = 0; i < 2; ++i )
+  for ( i = 0; i < 2; ++i ) /*0x555a13*/
   {
-    if ( i == a2 )
+    if ( i == controlIndex ) /*0x555a17*/
     {
-      v5 = a4;
+      ControlValue = value; /*0x555a19*/
     }
     else
     {
-      if ( !dword_B39B80 )
-        sub_553550();
-      v5 = sub_6EDD30((_BYTE *)(dword_B39B80 + 0xC8), 0, i, a3, a1);
+      if ( !g_faceGenManager ) /*0x555a1f*/
+        FaceGenManager_EnsureInitialized(); /*0x555a28*/
+      ControlValue = FaceGenFanControls_GetControlValue( /*0x555a3e*/
+                       (char *)g_faceGenManager + 0xC8,
+                       0,
+                       i,
+                       matrixChannel,
+                       parameters);
     }
-    v6[i] = v5;
+    targetPair[i] = ControlValue; /*0x555a43*/
   }
-  if ( !dword_B39B80 )
-    sub_553550();
-  sub_6EDE10((_BYTE *)(dword_B39B80 + 0xC8), 0, a3, (int)v6, a1);
+  if ( !g_faceGenManager ) /*0x555a4f*/
+    FaceGenManager_EnsureInitialized(); /*0x555a58*/
+  FaceGenFanControls_SetControlPair((char *)g_faceGenManager + 0xC8, 0, matrixChannel, targetPair, parameters);// Set the requested fan-0 control while preserving its paired control in the selected matrix 0/2 channel. /*0x555a72*/
 }

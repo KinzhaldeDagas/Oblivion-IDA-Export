@@ -1,4 +1,4 @@
-0x813960: push    0FFFFFFFFh
+0x813960: push    0FFFFFFFFh; BSCubeMapCamera mode-3 alternate six-face renderer. ShadowPass special-light dispatch uses mode 0, not this image-space path.
 0x813962: push    offset SEH_813960
 0x813967: mov     eax, large fs:0
 0x81396D: push    eax
@@ -53,9 +53,9 @@
 0x813A33: jz      short loc_813A3D
 0x813A35: cmp     ebx, eax
 0x813A37: jnz     loc_8140B0
-0x813A3D: push    ebx
-0x813A3E: mov     ecx, edi
-0x813A40: call    sub_812EF0
+0x813A3D: push    ebx; faceIndex
+0x813A3E: mov     ecx, edi; self
+0x813A40: call    BSCubeMapCamera_OrientFace; Orient the BSCubeMapCamera for one of six cube faces using the native axis vectors at 0x00B258D0..0x00B258F0.
 0x813A45: mov     eax, [edi+140h]
 0x813A4B: test    eax, eax
 0x813A4D: jz      short loc_813A58
@@ -63,13 +63,13 @@
 0x813A53: add     eax, 20h ; ' '
 0x813A56: jmp     short loc_813A67
 0x813A58: xor     esi, esi
-0x813A5A: or      [esp+160h+var_144], 1
+0x813A5A: or      dword ptr [esp+160h+var_144], 1
 0x813A5F: mov     [esp+160h+var_130], esi
 0x813A63: lea     eax, [esp+160h+var_130]
-0x813A67: test    byte ptr [esp+160h+var_144], 1
+0x813A67: test    [esp+160h+var_144], 1
 0x813A6C: mov     ebp, [eax]
 0x813A6E: jz      short loc_813A91
-0x813A70: and     [esp+160h+var_144], 0FFFFFFFEh
+0x813A70: and     dword ptr [esp+160h+var_144], 0FFFFFFFEh
 0x813A75: test    esi, esi
 0x813A77: jz      short loc_813A91
 0x813A79: lea     eax, [esi+4]
@@ -111,10 +111,10 @@
 0x813AD4: jmp     short loc_813ADC
 0x813AD6: mov     ebp, ds:0A28078h
 0x813ADC: mov     ecx, [edi+140h]
-0x813AE2: call    BSRenderedTexture__UseTextureToRender
+0x813AE2: call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.
 0x813AE7: push    eax; a2
 0x813AE8: push    7; a1
-0x813AEA: call    NiRenderer_BeginScene
+0x813AEA: call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.
 0x813AEF: add     esp, 8
 0x813AF2: xor     eax, eax
 0x813AF4: cmp     ebx, 5; switch 6 cases
@@ -122,25 +122,25 @@
 0x813AFD: jmp     ds:jpt_813AFD[ebx*4]; switch jump
 0x813B04: mov     ecx, ds:0B43100h; jumptable 00813AFD case 1
 0x813B0A: push    ecx; a2
-0x813B0B: mov     ecx, offset dword_B474EC; this
+0x813B0B: mov     ecx, (offset flt_B474CC+20h); this
 0x813B10: call    NiSmartPointer_Set??
 0x813B15: mov     eax, 2
 0x813B1A: jmp     short def_813AFD
 0x813B1C: mov     edx, ds:0B43100h; jumptable 00813AFD case 0
 0x813B22: push    edx; a2
-0x813B23: mov     ecx, offset dword_B474EC; this
+0x813B23: mov     ecx, (offset flt_B474CC+20h); this
 0x813B28: call    NiSmartPointer_Set??
 0x813B2D: mov     eax, 1
 0x813B32: jmp     short def_813AFD
 0x813B34: mov     eax, ds:0B43100h; jumptable 00813AFD case 3
 0x813B39: push    eax; a2
-0x813B3A: mov     ecx, offset dword_B474EC; this
+0x813B3A: mov     ecx, (offset flt_B474CC+20h); this
 0x813B3F: call    NiSmartPointer_Set??
 0x813B44: mov     eax, 8
 0x813B49: jmp     short def_813AFD
 0x813B4B: mov     ecx, ds:0B43100h; jumptable 00813AFD case 2
 0x813B51: push    ecx; a2
-0x813B52: mov     ecx, offset dword_B474EC; this
+0x813B52: mov     ecx, (offset flt_B474CC+20h); this
 0x813B57: call    NiSmartPointer_Set??
 0x813B5C: mov     eax, 4
 0x813B61: jmp     short def_813AFD
@@ -148,6 +148,19 @@
 0x813B68: jmp     short def_813AFD
 0x813B6A: mov     edx, ds:0B430E4h; jumptable 00813AFD case 5
 0x813B70: push    edx; a2
-0x813B71: mov     ecx, offset dword_B474EC; this
+0x813B71: mov     ecx, (offset flt_B474CC+20h); this
 0x813B76: call    NiSmartPointer_Set??
 0x813B7B: mov     eax, 10h
+0x9D12D0: lea     ecx, [ebp-140h]; slot
+0x9D12D6: jmp     NiPointerSlot_Release
+0x9D12DB: lea     ecx, [ebp-0A0h]; slot
+0x9D12E1: jmp     NiPointerSlot_Release
+0x9D12E6: lea     ecx, [ebp-9Ch]; this
+0x9D12EC: jmp     ??1BSCullingProcess@@UAE@XZ; Oblivion BSCullingProcess destructor restores its base culling-process state; no separate visible-array allocation is released here.
+0x9D12F1: mov     edx, [esp+arg_4]
+0x9D12F5: lea     eax, [edx-148h]
+0x9D12FB: mov     ecx, [edx-14Ch]
+0x9D1301: xor     ecx, eax
+0x9D1303: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D1308: mov     eax, offset stru_AF99A0
+0x9D130D: jmp     ___CxxFrameHandler3

@@ -1,4 +1,4 @@
-0x64E2B0: add     ecx, 3Ch ; '<'
+0x64E2B0: add     ecx, 3Ch ; '<'; RadiantAI: sorts accepted acquire candidates by entry+0x14 distance ascending after response-code sort.
 0x64E2B3: jz      short locret_64E315
 0x64E2B5: xor     edx, edx
 0x64E2B7: mov     eax, ecx
@@ -18,7 +18,6 @@
 0x64E2D9: push    ebp
 0x64E2DA: push    esi
 0x64E2DB: jmp     short loc_64E2E0
-0x64E2DD: align 10h
 0x64E2E0: test    bl, bl
 0x64E2E2: jz      short loc_64E311
 0x64E2E4: xor     bl, bl

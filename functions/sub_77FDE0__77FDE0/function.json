@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x77FDE0",
+      "0x77FE3C"
+    ]
+  ],
+  "chunks_sha256": "8e2f973fa6126020af9188e734a89c76f8bba616d4a86aa1f886982da7eb9788",
+  "comment_regular": "\nDX11 normalization audit 2026-10-01: actual NiDX9RenderState table A8A9F4 slot+34. Requests RS143 NORMALIZENORMALS with savePrevious=0 when scale<the double atA88D40, scale>the float atA88D38, byteFF4 nonzero or byteFF5 nonzero. Threshold equality does not enable normalization. Manager77B000 native-cache equality can suppress the device write; preserve that behavior. The two flag setters are77B310 and77B330 (table+F4/+FC).\n\nMoonSugarEffect decode: NiDX9RenderState SetNormalization-style helper. Enables D3DRS_NORMALIZENORMALS (0x8F) when transform scale is non-unit or internal normalize flags are set; otherwise disables it.",
+  "comment_repeatable": "MoonSugarEffect decode: NiDX9RenderState SetNormalization-style helper. Enables D3DRS_NORMALIZENORMALS (0x8F) when transform scale is non-unit or internal normalize flags are set; otherwise disables it.\nPrototype correction 2026-10-01: argument is a const NiTransform pointer, not an immediate float. Reads scale at transform+30; verified against body and765480 call site. The original-code tail fixture must provide an owned13-float transform. Return preserves the delegated render-state setter result.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_77FDE0",
+  "display_name": "NiDX9RenderState_SetNormalization",
   "end_ea": "0x77FE3C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_77FDE0",
+  "name": "NiDX9RenderState_SetNormalization",
   "segment": ".text",
   "sha256": "8e2f973fa6126020af9188e734a89c76f8bba616d4a86aa1f886982da7eb9788",
   "size": 92,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x77FDE0",
-  "type": "int __thiscall(_BYTE *this, int)",
+  "total_chunk_size": 92,
+  "type": "int __thiscall(NiDX9RenderState *this, const NiTransform *transform)",
   "xrefs_from_count": 31,
   "xrefs_to_count": 2
 }

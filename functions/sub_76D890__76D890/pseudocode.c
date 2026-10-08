@@ -1,4 +1,4 @@
-void *sub_76D890()
+BSStringT *sub_76D890()
 {
-  return &unk_B4264C;
+  return &stru_B4264C; /*0x76d895*/
 }

@@ -5,7 +5,7 @@
 0x46E608: jz      short loc_46E644
 0x46E60A: lea     ebx, [ebx+0]
 0x46E610: push    eax
-0x46E611: call    FormHeapFree
+0x46E611: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x46E616: mov     eax, [esi+8]
 0x46E619: add     esp, 4
 0x46E61C: test    eax, eax
@@ -15,7 +15,7 @@
 0x46E626: mov     edx, [eax]
 0x46E628: push    eax
 0x46E629: mov     [esi+4], edx
-0x46E62C: call    FormHeapFree
+0x46E62C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x46E631: add     esp, 4
 0x46E634: jmp     short loc_46E63D
 0x46E636: mov     dword ptr [esi+4], 0

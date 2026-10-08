@@ -2,7 +2,7 @@
 0x77C456: mov     eax, ds:0B30AACh
 0x77C45B: xor     eax, esp
 0x77C45D: mov     [esp+10Ch+var_4], eax
-0x77C464: mov     eax, dword ptr [esp+10Ch+ArgList]
+0x77C464: mov     eax, [esp+10Ch+ArgList]
 0x77C46B: push    esi
 0x77C46C: mov     esi, ecx
 0x77C46E: mov     ecx, [esp+110h+arg_4]

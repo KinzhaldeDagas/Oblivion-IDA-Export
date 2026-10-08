@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7D46C0",
-    "line": "push    ebp",
+    "line": "push    ebp; Oblivion per-source shadow-map producer. Binds and clears the pooled R32F texture plus shared compatible depth/stencil, installs the full-map projector viewport, draws mode-5 caster buckets, captures matrices, and ends the target. The texture buffer uses its own level-0 D3D surface and requires no end-of-target copy or resolve.",
     "mnemonic": "push",
     "size": 1
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x7D46F8",
-    "line": "mov     al, [ebx+0F4h]",
+    "line": "mov     al, [ebx+0F4h]; Normal per-source rendering checks +0xF4 together with renderer/shader class >=3 and shadow feature bit 0x10.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x7D471E",
-    "line": "cmp     byte ptr [ebx+120h], 0",
+    "line": "cmp     byte ptr [ebx+120h], 0; Shadow map generation is eligible when the ordinary +0xF4/class/feature gate succeeds or +0x120 overrides that gate; status +0x118 and fade +0xD8 still gate rendering.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x7D4760",
-    "line": "call    BSTextureManager_FetchShadowMap",
+    "line": "call    BSTextureManager__BorrowFrustumShadowTexture; Borrow one BSRenderedTexture from the unused frustum-shadow pool when +0x114 is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x7D4767",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x7D4770",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,13 +295,13 @@
   },
   {
     "ea": "0x7D477C",
-    "line": "lea     ecx, [esp+214h+var_1F8]; this",
+    "line": "lea     ecx, [esp+214h+var_1F8]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7D4780",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,13 +361,13 @@
   },
   {
     "ea": "0x7D479D",
-    "line": "push    eax",
+    "line": "push    eax; shadowMap",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D479E",
-    "line": "call    sub_499310",
+    "line": "call    ShadowSceneLight_SetShadowMap; Publish/strong-own the borrowed shadow texture at ShadowSceneLight+0x114.",
     "mnemonic": "call",
     "size": 5
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x7D47CA",
-    "line": "fstp    [esp+214h+var_1F8]",
+    "line": "fstp    [esp+214h+var_1F8]; Build shadow-camera view ray from exact source world-bound center toward backing projector branch world position.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x7D47F2",
-    "line": "fstp    [esp+214h+var_1B0]",
+    "line": "fstp    [esp+214h+var_1B0.x]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x7D47FA",
-    "line": "fstp    [esp+214h+var_1AC]",
+    "line": "fstp    [esp+214h+var_1B0.y]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -499,13 +499,13 @@
   },
   {
     "ea": "0x7D4802",
-    "line": "fstp    [esp+214h+var_1A8]",
+    "line": "fstp    [esp+214h+var_1B0.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7D4806",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x7D480D",
-    "line": "lea     ecx, [esp+214h+var_1E4]",
+    "line": "lea     ecx, [esp+214h+rhs]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x7D4817",
-    "line": "push    ecx",
+    "line": "push    ecx; rhs",
     "mnemonic": "push",
     "size": 1
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x7D481A",
-    "line": "lea     edx, [esp+218h+var_1CC]",
+    "line": "lea     edx, [esp+218h+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x7D4822",
-    "line": "push    edx",
+    "line": "push    edx; out",
     "mnemonic": "push",
     "size": 1
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x7D4829",
-    "line": "lea     ecx, [esp+21Ch+var_1B0]",
+    "line": "lea     ecx, [esp+21Ch+var_1B0]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x7D4843",
-    "line": "fstp    [esp+21Ch+var_1E4]",
+    "line": "fstp    [esp+21Ch+rhs.x]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x7D484B",
-    "line": "fstp    [esp+21Ch+var_1E0]",
+    "line": "fstp    [esp+21Ch+rhs.y]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -631,19 +631,19 @@
   },
   {
     "ea": "0x7D4853",
-    "line": "fstp    [esp+21Ch+var_1DC]",
+    "line": "fstp    [esp+21Ch+rhs.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7D4857",
-    "line": "call    sub_4BF9E0",
+    "line": "call    NiPoint3__NormalizedCrossProduct; Computes and normalizes the cross product of two NiPoint3 vectors, returning zero for near-degenerate input. ShadowSceneLight uses it to construct an orthonormal shadow-camera basis.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7D485C",
-    "line": "fld     [esp+214h+var_1CC]",
+    "line": "fld     [esp+214h+out.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x7D486A",
-    "line": "fld     [esp+214h+var_1C4]",
+    "line": "fld     [esp+214h+out.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x7D4871",
-    "line": "fld     [esp+214h+var_1C8]",
+    "line": "fld     [esp+214h+out.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -847,19 +847,19 @@
   },
   {
     "ea": "0x7D48C3",
-    "line": "mov     [esp+214h+var_1E4], eax",
+    "line": "mov     [esp+214h+rhs.x], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7D48C7",
-    "line": "mov     [esp+214h+var_1E0], ecx",
+    "line": "mov     [esp+214h+rhs.y], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7D48CB",
-    "line": "mov     [esp+214h+var_1DC], edx",
+    "line": "mov     [esp+214h+rhs.z], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -895,13 +895,13 @@
   },
   {
     "ea": "0x7D48D9",
-    "line": "lea     eax, [esp+214h+var_1CC]",
+    "line": "lea     eax, [esp+214h+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7D48DD",
-    "line": "push    eax",
+    "line": "push    eax; rhs",
     "mnemonic": "push",
     "size": 1
   },
@@ -913,25 +913,25 @@
   },
   {
     "ea": "0x7D48E2",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D48E3",
-    "line": "lea     ecx, [esp+21Ch+var_1B0]",
+    "line": "lea     ecx, [esp+21Ch+var_1B0]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7D48E7",
-    "line": "call    sub_4BF9E0",
+    "line": "call    NiPoint3__NormalizedCrossProduct; Computes and normalizes the cross product of two NiPoint3 vectors, returning zero for near-degenerate input. ShadowSceneLight uses it to construct an orthonormal shadow-camera basis.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7D48EC",
-    "line": "fld     [esp+214h+var_1CC]",
+    "line": "fld     [esp+214h+out.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -955,13 +955,13 @@
   },
   {
     "ea": "0x7D48F8",
-    "line": "mov     [esp+214h+var_1E4], edx",
+    "line": "mov     [esp+214h+rhs.x], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7D48FC",
-    "line": "fld     [esp+214h+var_1C8]",
+    "line": "fld     [esp+214h+out.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -979,7 +979,7 @@
   },
   {
     "ea": "0x7D4905",
-    "line": "mov     [esp+214h+var_1E0], ecx",
+    "line": "mov     [esp+214h+rhs.y], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -997,13 +997,13 @@
   },
   {
     "ea": "0x7D4910",
-    "line": "fld     [esp+214h+var_1C4]",
+    "line": "fld     [esp+214h+out.z]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7D4914",
-    "line": "mov     [esp+214h+var_1DC], edx",
+    "line": "mov     [esp+214h+rhs.z], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1051,7 +1051,7 @@
   },
   {
     "ea": "0x7D4930",
-    "line": "mov     [esp+218h+var_1CC], eax",
+    "line": "mov     [esp+218h+out.x], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1075,7 +1075,7 @@
   },
   {
     "ea": "0x7D4940",
-    "line": "mov     [esp+218h+var_1C8], ecx",
+    "line": "mov     [esp+218h+out.y], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1099,7 +1099,7 @@
   },
   {
     "ea": "0x7D4950",
-    "line": "mov     [esp+218h+var_1C4], edx",
+    "line": "mov     [esp+218h+out.z], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1111,13 +1111,13 @@
   },
   {
     "ea": "0x7D4959",
-    "line": "mov     eax, [ebx+130h]",
+    "line": "mov     eax, [ebx+130h]; Load exact caster/source root +0x130 for map-camera construction.",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x7D495F",
-    "line": "mov     esi, [ebx+100h]",
+    "line": "mov     esi, [ebx+100h]; Load backing projector branch +0x100 for map-camera construction.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1129,13 +1129,13 @@
   },
   {
     "ea": "0x7D496D",
-    "line": "fld     dword ptr [eax+2Ch]",
+    "line": "fld     dword ptr [eax+2Ch]; Read uncapped exact-source world-bound radius for native shadow-camera coverage.",
     "mnemonic": "fld",
     "size": 3
   },
   {
     "ea": "0x7D4970",
-    "line": "fstp    [esp+214h+var_1F0]",
+    "line": "fstp    [esp+214h+var_1F0]; Read uncapped exact-source world-bound radius for the retail lateral-frustum calculation.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1153,7 +1153,7 @@
   },
   {
     "ea": "0x7D497D",
-    "line": "fstp    [esp+214h+var_1E8]",
+    "line": "fstp    [esp+214h+var_1E8]; Compute source-center to backing-branch distance.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1297,7 +1297,7 @@
   },
   {
     "ea": "0x7D49D0",
-    "line": "fld     [esp+214h+var_1F0]",
+    "line": "fld     [esp+214h+var_1F0]; Compute the native projector field of view in degrees as (exact caster radius / source-to-projector distance) * 110.0.",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1315,7 +1315,7 @@
   },
   {
     "ea": "0x7D49DE",
-    "line": "fstp    [esp+214h+var_1F0]",
+    "line": "fstp    [esp+214h+var_1F0]; Native projector FOV in degrees = caster radius / source-to-projector distance * 110.0.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1327,13 +1327,13 @@
   },
   {
     "ea": "0x7D49E6",
-    "line": "fst     dword ptr [ebx+124h]",
+    "line": "fst     dword ptr [ebx+124h]; Store the native projector FOV in degrees at ShadowSceneLight+0x124.",
     "mnemonic": "fst",
     "size": 6
   },
   {
     "ea": "0x7D49EC",
-    "line": "fmul    qword ptr ds:0A2FAA0h",
+    "line": "fmul    qword ptr ds:0A2FAA0h; Convert the stored field of view to its half-angle in radians: FOV * 0.5 * 0.01745327934622765.",
     "mnemonic": "fmul",
     "size": 6
   },
@@ -1345,7 +1345,7 @@
   },
   {
     "ea": "0x7D49F8",
-    "line": "fstp    [esp+214h+var_1F0]",
+    "line": "fstp    [esp+214h+var_1F0]; Continue retail lateral-frustum scale calculation.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1357,13 +1357,13 @@
   },
   {
     "ea": "0x7D4A00",
-    "line": "call    __CItan",
+    "line": "call    __CItan; Apply tan(FOV/2) to obtain the symmetric lateral-frustum extent used by the Oblivion shadow camera.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7D4A05",
-    "line": "fstp    [esp+214h+var_1F0]",
+    "line": "fstp    [esp+214h+var_1F0]; Continue retail lateral-frustum scale calculation.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1417,7 +1417,7 @@
   },
   {
     "ea": "0x7D4A28",
-    "line": "fst     [esp+214h+a2]",
+    "line": "fst     [esp+214h+a2]; Perspective frustum left and bottom are -tan(FOV/2).",
     "mnemonic": "fst",
     "size": 4
   },
@@ -1429,13 +1429,13 @@
   },
   {
     "ea": "0x7D4A33",
-    "line": "fst     [esp+214h+var_198]",
+    "line": "fst     [esp+214h+var_198]; Perspective frustum right and top are +tan(FOV/2).",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x7D4A37",
-    "line": "fst     [esp+214h+var_194]",
+    "line": "fst     [esp+214h+var_194]; Complete symmetric shadow-camera lateral-frustum commit.",
     "mnemonic": "fst",
     "size": 7
   },
@@ -1447,13 +1447,13 @@
   },
   {
     "ea": "0x7D4A40",
-    "line": "fst     [esp+214h+var_18C]",
+    "line": "fst     [esp+214h+var_18C]; Per-source shadow camera near plane is 1.0.",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x7D4A47",
-    "line": "fld     dword ptr [esi+0F8h]",
+    "line": "fld     dword ptr [esi+0F8h]; Read backing point-light range +0xF8 for the shadow-camera far plane.",
     "mnemonic": "fld",
     "size": 6
   },
@@ -1465,7 +1465,7 @@
   },
   {
     "ea": "0x7D4A53",
-    "line": "fstp    [esp+214h+var_188]",
+    "line": "fstp    [esp+214h+var_188]; Per-source shadow camera far plane comes from the observed source/caster state.",
     "mnemonic": "fstp",
     "size": 7
   },
@@ -1537,7 +1537,7 @@
   },
   {
     "ea": "0x7D4A8A",
-    "line": "call    sub_405A80",
+    "line": "call    BSShaderManager_IsShadowMappingReady; [Verified] Returns true only when BSShaderPackageVersion (RendererGlobalState+0xAF) >= 3 and BSShaderFeatureMask (RendererGlobalState+0xA7) contains native shadow-map bit 0x10. The version comparison independently corroborates the selector field read by GetShaderProgramPackageIndex.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1555,7 +1555,7 @@
   },
   {
     "ea": "0x7D4A97",
-    "line": "call    InitBSShaderAccumulator",
+    "line": "call    BSShaderAccumulator_GetOrCreateGlobal",
     "mnemonic": "call",
     "size": 5
   },
@@ -1633,13 +1633,13 @@
   },
   {
     "ea": "0x7D4ACD",
-    "line": "call    NiDX9Renderer__SetShaderAccumulator",
+    "line": "call    NiDX9Renderer__SetShaderAccumulator;",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7D4AD2",
-    "line": "add     ebx, 14Ch",
+    "line": "add     ebx, 14Ch; ShadowSceneLight+0x14C owns the lazily allocated per-source shadow camera.",
     "mnemonic": "add",
     "size": 6
   },
@@ -1837,7 +1837,7 @@
   },
   {
     "ea": "0x7D4B48",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1897,7 +1897,7 @@
   },
   {
     "ea": "0x7D4B71",
-    "line": "call    NiObjectNET_GetExtraData",
+    "line": "call    NiObjectNET_GetExtraData; Native map-render setup performs a second BBX extra-data lookup on exact caster root +0x130.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1921,37 +1921,37 @@
   },
   {
     "ea": "0x7D4B7F",
-    "line": "mov     [esp+214h+var_1B8], eax",
+    "line": "mov     [esp+214h+var_1C0.z], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7D4B83",
-    "line": "fld     [esp+214h+var_1B8]",
+    "line": "fld     [esp+214h+var_1C0.z]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7D4B87",
-    "line": "mov     [esp+214h+var_1BC], edx",
+    "line": "mov     [esp+214h+var_1C0.y], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7D4B8B",
-    "line": "fld     [esp+214h+var_1BC]",
+    "line": "fld     [esp+214h+var_1C0.y]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7D4B8F",
-    "line": "mov     [esp+214h+var_1C0], ecx",
+    "line": "mov     [esp+214h+var_1C0.x], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7D4B93",
-    "line": "fadd    [esp+214h+var_1C0]",
+    "line": "fadd    [esp+214h+var_1C0.x]",
     "mnemonic": "fadd",
     "size": 4
   },
@@ -2101,7 +2101,7 @@
   },
   {
     "ea": "0x7D4BF0",
-    "line": "lea     edx, [esp+214h+var_1E4]",
+    "line": "lea     edx, [esp+214h+rhs]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2209,7 +2209,7 @@
   },
   {
     "ea": "0x7D4C24",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2227,13 +2227,13 @@
   },
   {
     "ea": "0x7D4C2E",
-    "line": "fstp    [esp+214h+var_1C0]",
+    "line": "fstp    [esp+214h+var_1C0.x]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7D4C32",
-    "line": "mov     edx, [esp+214h+var_1C0]",
+    "line": "mov     edx, [esp+214h+var_1C0.x]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2245,13 +2245,13 @@
   },
   {
     "ea": "0x7D4C39",
-    "line": "fstp    [esp+214h+var_1BC]",
+    "line": "fstp    [esp+214h+var_1C0.y]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7D4C3D",
-    "line": "mov     eax, [esp+214h+var_1BC]",
+    "line": "mov     eax, [esp+214h+var_1C0.y]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2263,31 +2263,31 @@
   },
   {
     "ea": "0x7D4C47",
-    "line": "mov     [esp+214h+var_1CC], edx",
+    "line": "mov     [esp+214h+out.x], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7D4C4B",
-    "line": "fstp    [esp+214h+var_1B8]",
+    "line": "fstp    [esp+214h+var_1C0.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7D4C4F",
-    "line": "mov     edx, [esp+214h+var_1B8]",
+    "line": "mov     edx, [esp+214h+var_1C0.z]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7D4C53",
-    "line": "mov     [esp+214h+var_1C8], eax",
+    "line": "mov     [esp+214h+out.y], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7D4C57",
-    "line": "mov     [esp+214h+var_1C4], edx",
+    "line": "mov     [esp+214h+out.z], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2299,13 +2299,13 @@
   },
   {
     "ea": "0x7D4C5E",
-    "line": "fstp    [esp+214h+var_1C0]",
+    "line": "fstp    [esp+214h+var_1C0.x]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7D4C62",
-    "line": "mov     eax, [esp+214h+var_1C0]",
+    "line": "mov     eax, [esp+214h+var_1C0.x]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2317,13 +2317,13 @@
   },
   {
     "ea": "0x7D4C69",
-    "line": "fstp    [esp+214h+var_1BC]",
+    "line": "fstp    [esp+214h+var_1C0.y]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7D4C6D",
-    "line": "mov     edx, [esp+214h+var_1BC]",
+    "line": "mov     edx, [esp+214h+var_1C0.y]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2335,31 +2335,31 @@
   },
   {
     "ea": "0x7D4C77",
-    "line": "mov     [esp+214h+var_1E4], eax",
+    "line": "mov     [esp+214h+rhs.x], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7D4C7B",
-    "line": "fstp    [esp+214h+var_1B8]",
+    "line": "fstp    [esp+214h+var_1C0.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7D4C7F",
-    "line": "mov     eax, [esp+214h+var_1B8]",
+    "line": "mov     eax, [esp+214h+var_1C0.z]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7D4C83",
-    "line": "mov     [esp+214h+var_1DC], eax",
+    "line": "mov     [esp+214h+rhs.z], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7D4C87",
-    "line": "mov     [esp+214h+var_1E0], edx",
+    "line": "mov     [esp+214h+rhs.y], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2371,13 +2371,13 @@
   },
   {
     "ea": "0x7D4C8E",
-    "line": "fstp    [esp+214h+var_1C0]",
+    "line": "fstp    [esp+214h+var_1C0.x]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7D4C92",
-    "line": "mov     edx, [esp+214h+var_1C0]",
+    "line": "mov     edx, [esp+214h+var_1C0.x]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2389,13 +2389,13 @@
   },
   {
     "ea": "0x7D4C99",
-    "line": "fstp    [esp+214h+var_1BC]",
+    "line": "fstp    [esp+214h+var_1C0.y]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7D4C9D",
-    "line": "mov     eax, [esp+214h+var_1BC]",
+    "line": "mov     eax, [esp+214h+var_1C0.y]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2407,7 +2407,7 @@
   },
   {
     "ea": "0x7D4CA4",
-    "line": "mov     [esp+214h+var_1AC], eax",
+    "line": "mov     [esp+214h+var_1B0.y], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2419,7 +2419,7 @@
   },
   {
     "ea": "0x7D4CAE",
-    "line": "fstp    [esp+214h+var_1B8]",
+    "line": "fstp    [esp+214h+var_1C0.z]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2431,13 +2431,13 @@
   },
   {
     "ea": "0x7D4CB9",
-    "line": "mov     [esp+214h+var_1B0], edx",
+    "line": "mov     [esp+214h+var_1B0.x], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7D4CBD",
-    "line": "mov     edx, [esp+214h+var_1B8]",
+    "line": "mov     edx, [esp+214h+var_1C0.z]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2473,13 +2473,13 @@
   },
   {
     "ea": "0x7D4CD4",
-    "line": "mov     [esp+218h+var_1A8], edx",
+    "line": "mov     [esp+218h+var_1B0.z], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7D4CD8",
-    "line": "call    sub_70C230",
+    "line": "call    sub_70C230; Call sphere-fitting helper 0x0070C230 to adjust near/far depth; lateral frustum was already constructed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2569,7 +2569,7 @@
   },
   {
     "ea": "0x7D4D17",
-    "line": "call    sub_717A40",
+    "line": "call    NiFrustumPlanes_SetFromFrustumAndTransform; Build six world-space frustum planes at ShadowSceneLight+0x150 using a temporarily expanded far plane.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2701,7 +2701,7 @@
   },
   {
     "ea": "0x7D4D83",
-    "line": "call    edx",
+    "line": "call    edx; Save renderer clear color before map rendering.",
     "mnemonic": "call",
     "size": 2
   },
@@ -2719,13 +2719,13 @@
   },
   {
     "ea": "0x7D4D8D",
-    "line": "fst     [esp+214h+var_1C0]",
+    "line": "fst     [esp+214h+var_1C0.x]; Begin setting white clear color for the native shadow map.",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x7D4D91",
-    "line": "fst     [esp+214h+var_1BC]",
+    "line": "fst     [esp+214h+var_1C0.y]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -2737,7 +2737,7 @@
   },
   {
     "ea": "0x7D4D99",
-    "line": "fst     [esp+214h+var_1B8]",
+    "line": "fst     [esp+214h+var_1C0.z]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -2767,7 +2767,7 @@
   },
   {
     "ea": "0x7D4DA7",
-    "line": "call    eax",
+    "line": "call    eax; Temporarily set renderer clear color to white (1,1,1,1) for the shadow target clear.",
     "mnemonic": "call",
     "size": 2
   },
@@ -2779,7 +2779,7 @@
   },
   {
     "ea": "0x7D4DAF",
-    "line": "call    BSRenderedTexture__UseTextureToRender",
+    "line": "call    BSRenderedTexture__UseTextureToRender; Resolve the NiRenderTargetGroup owned by ShadowSceneLight+0x114.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2797,7 +2797,7 @@
   },
   {
     "ea": "0x7D4DB7",
-    "line": "call    NiRenderer_BeginScene",
+    "line": "call    NiRenderer_BeginScene; Push/begin the per-source R32F target with engine kClear_ALL (7).",
     "mnemonic": "call",
     "size": 5
   },
@@ -2827,7 +2827,7 @@
   },
   {
     "ea": "0x7D4DCA",
-    "line": "lea     eax, [esp+214h+var_170]",
+    "line": "lea     eax, [esp+214h+var_170]; Restore the renderer clear color immediately after the target was cleared; clear depth/stencil defaults remain 1.0/0.",
     "mnemonic": "lea",
     "size": 7
   },
@@ -2929,7 +2929,7 @@
   },
   {
     "ea": "0x7D4E0A",
-    "line": "lea     edx, [esp+21Ch+var_1CC]",
+    "line": "lea     edx, [esp+21Ch+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2941,7 +2941,7 @@
   },
   {
     "ea": "0x7D4E0F",
-    "line": "lea     edx, [esp+220h+var_1E4]",
+    "line": "lea     edx, [esp+220h+rhs]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2977,7 +2977,7 @@
   },
   {
     "ea": "0x7D4E21",
-    "line": "call    eax",
+    "line": "call    eax; Install the shadow projector camera and normalized full-target viewport. This call authors viewport state only, not scissor state.",
     "mnemonic": "call",
     "size": 2
   },
@@ -3019,31 +3019,31 @@
   },
   {
     "ea": "0x7D4E31",
-    "line": "call    eax",
+    "line": "call    eax; Begin the dedicated accumulator transaction with the per-source shadow camera.",
     "mnemonic": "call",
     "size": 2
   },
   {
     "ea": "0x7D4E33",
-    "line": "push    0",
+    "line": "push    0; visibleArray",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7D4E35",
-    "line": "lea     ecx, [esp+218h+var_A0]",
+    "line": "lea     ecx, [esp+218h+cullingProcess]; self",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x7D4E3C",
-    "line": "mov     byte ptr [esi+21E0h], 1",
+    "line": "mov     byte ptr [esi+21E0h], 1; Set accumulator shadow-production byte +0x21E0 before culling/submission.",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x7D4E43",
-    "line": "call    NiCullingProcess_NiCullingProcess",
+    "line": "call    NiCullingProcess_NiCullingProcess; Oblivion NiCullingProcess constructor: initializes append mode, visible-geometry storage, camera state, and culling-plane state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3061,7 +3061,7 @@
   },
   {
     "ea": "0x7D4E4E",
-    "line": "mov     [esp+214h+var_A0.Camera], ecx",
+    "line": "mov     [esp+214h+cullingProcess.Camera], ecx",
     "mnemonic": "mov",
     "size": 7
   },
@@ -3073,7 +3073,7 @@
   },
   {
     "ea": "0x7D4E56",
-    "line": "lea     ecx, [esp+218h+var_A0]; this",
+    "line": "lea     ecx, [esp+218h+cullingProcess]; this",
     "mnemonic": "lea",
     "size": 7
   },
@@ -3085,7 +3085,7 @@
   },
   {
     "ea": "0x7D4E65",
-    "line": "call    NiCullingProcess__SetFrustum",
+    "line": "call    NiCullingProcess__SetFrustum; Oblivion NiCullingProcess::SetFrustum copies the camera frustum, rebuilds six culling planes, and sets the active-plane mask to 0x3F.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3103,49 +3103,49 @@
   },
   {
     "ea": "0x7D4E72",
-    "line": "push    0",
+    "line": "push    0; visibleArray",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7D4E74",
-    "line": "lea     eax, [esp+218h+var_A0]",
+    "line": "lea     eax, [esp+218h+cullingProcess]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x7D4E7B",
-    "line": "push    eax",
+    "line": "push    eax; cullingProcess",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D4E7C",
-    "line": "push    edi",
+    "line": "push    edi; sceneRoot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D4E7D",
-    "line": "push    ebx",
+    "line": "push    ebx; camera",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D4E7E",
-    "line": "mov     [esp+224h+var_A0.Planes.ActivePlanes], 0",
+    "line": "mov     [esp+224h+cullingProcess.Planes.ActivePlanes], 0; CULLING audit 2026-09-27: pre-call mask zero is temporary. Following CullAndRenderScene -> Process -> SetFrustum overwrites it with 0x3F; not proof of a lasting bypass.",
     "mnemonic": "mov",
     "size": 11
   },
   {
     "ea": "0x7D4E89",
-    "line": "call    sub_70C0B0",
+    "line": "call    NiRenderer_CullAndRenderScene; Cull ShadowSceneLight+0x130 through the shadow camera and submit the visible geometry to the installed accumulator.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7D4E8E",
-    "line": "mov     byte ptr [esi+21E1h], 1",
+    "line": "mov     byte ptr [esi+21E1h], 1; Set accumulator ready byte +0x21E1 only after visible geometry has been queued.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -3175,7 +3175,7 @@
   },
   {
     "ea": "0x7D4E9F",
-    "line": "call    eax",
+    "line": "call    eax; Final accumulator flush: in global mode 5 this draws buckets 6-9 and 0x154-0x155, then clears accumulated passes.",
     "mnemonic": "call",
     "size": 2
   },
@@ -3265,7 +3265,7 @@
   },
   {
     "ea": "0x7D4ED7",
-    "line": "lea     eax, [esp+21Ch+var_1CC]",
+    "line": "lea     eax, [esp+21Ch+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3277,7 +3277,7 @@
   },
   {
     "ea": "0x7D4EDC",
-    "line": "lea     ecx, [esp+220h+var_1E4]",
+    "line": "lea     ecx, [esp+220h+rhs]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3301,7 +3301,7 @@
   },
   {
     "ea": "0x7D4EE6",
-    "line": "push    offset Vector3_InitValue?",
+    "line": "push    offset g_zeroNiPoint3",
     "mnemonic": "push",
     "size": 5
   },
@@ -3373,7 +3373,7 @@
   },
   {
     "ea": "0x7D4F1B",
-    "line": "call    NiRenderer_EndScene",
+    "line": "call    NiRenderer_EndScene; End the per-source target after view/projection matrices were captured. This drains the target stack and does not restore viewport or scissor state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3397,7 +3397,7 @@
   },
   {
     "ea": "0x7D4F27",
-    "line": "call    NiDX9Renderer__SetShaderAccumulator",
+    "line": "call    NiDX9Renderer__SetShaderAccumulator; Restore the renderer's previous shader accumulator.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3445,7 +3445,7 @@
   },
   {
     "ea": "0x7D4F43",
-    "line": "cmp     byte ptr [esi+12Ch], 0",
+    "line": "cmp     byte ptr [esi+12Ch], 0; If +0x12C is set, bind the generated shadow map's inner rendered texture through shader definition 9. Constructor clears this byte and no direct native shadow-range setter is proven.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -3463,19 +3463,19 @@
   },
   {
     "ea": "0x7D4F52",
-    "line": "call    BSRenderedTexture__GetInnerTexture",
+    "line": "call    BSRenderedTexture__GetInnerTexture; Optional +0x12C path obtains the inner texture for immediate shader binding.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7D4F57",
-    "line": "push    eax",
+    "line": "push    eax; renderedTexture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D4F58",
-    "line": "call    sub_7A9CD0",
+    "line": "call    ShaderDefinition9_BindRenderedTexture; Resolve shader definition 9 and bind the supplied NiRenderedTexture through its image-space shader.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3487,13 +3487,13 @@
   },
   {
     "ea": "0x7D4F60",
-    "line": "lea     ecx, [esp+214h+var_A0]; this",
+    "line": "lea     ecx, [esp+214h+cullingProcess]; this",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x7D4F67",
-    "line": "mov     byte ptr [esi+214h], 0",
+    "line": "mov     byte ptr [esi+214h], 0; Invalidate ShadowSceneLight transformed-clip-plane cache (+0x214=0) after producing a new map.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -3505,13 +3505,13 @@
   },
   {
     "ea": "0x7D4F76",
-    "line": "call    ??1BSCullingProcess@@UAE@XZ; BSCullingProcess::~BSCullingProcess(void)",
+    "line": "call    ??1BSCullingProcess@@UAE@XZ; Oblivion BSCullingProcess destructor restores its base culling-process state; no separate visible-array allocation is released here.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7D4F7B",
-    "line": "lea     ecx, [esp+214h+var_1F8]; this",
+    "line": "lea     ecx, [esp+214h+var_1F8]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3523,13 +3523,13 @@
   },
   {
     "ea": "0x7D4F87",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7D4F8C",
-    "line": "lea     ecx, [esp+214h+var_1EC]; this",
+    "line": "lea     ecx, [esp+214h+var_1EC]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3541,7 +3541,7 @@
   },
   {
     "ea": "0x7D4F9B",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -3589,7 +3589,7 @@
   },
   {
     "ea": "0x7D4FB3",
-    "line": "fld     [esp+214h+var_1CC]",
+    "line": "fld     [esp+214h+out.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3613,7 +3613,7 @@
   },
   {
     "ea": "0x7D4FCA",
-    "line": "fld     [esp+214h+var_1E4]",
+    "line": "fld     [esp+214h+rhs.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3637,7 +3637,7 @@
   },
   {
     "ea": "0x7D4FDE",
-    "line": "fld     [esp+214h+var_1B0]",
+    "line": "fld     [esp+214h+var_1B0.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3673,7 +3673,7 @@
   },
   {
     "ea": "0x7D4FFA",
-    "line": "fld     [esp+214h+var_1C8]",
+    "line": "fld     [esp+214h+out.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3685,7 +3685,7 @@
   },
   {
     "ea": "0x7D5005",
-    "line": "fld     [esp+214h+var_1E0]",
+    "line": "fld     [esp+214h+rhs.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3697,7 +3697,7 @@
   },
   {
     "ea": "0x7D5010",
-    "line": "fld     [esp+214h+var_1AC]",
+    "line": "fld     [esp+214h+var_1B0.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3721,7 +3721,7 @@
   },
   {
     "ea": "0x7D5024",
-    "line": "fld     [esp+214h+var_1C4]",
+    "line": "fld     [esp+214h+out.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3733,7 +3733,7 @@
   },
   {
     "ea": "0x7D502F",
-    "line": "fld     [esp+214h+var_1DC]",
+    "line": "fld     [esp+214h+rhs.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3745,7 +3745,7 @@
   },
   {
     "ea": "0x7D503A",
-    "line": "fld     [esp+214h+var_1A8]",
+    "line": "fld     [esp+214h+var_1B0.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3817,7 +3817,7 @@
   },
   {
     "ea": "0x7D5064",
-    "line": "fmul    [esp+214h+var_1C4]",
+    "line": "fmul    [esp+214h+out.z]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -3865,7 +3865,7 @@
   },
   {
     "ea": "0x7D507F",
-    "line": "fmul    [esp+214h+var_1E0]",
+    "line": "fmul    [esp+214h+rhs.y]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -3877,7 +3877,7 @@
   },
   {
     "ea": "0x7D5085",
-    "line": "fmul    [esp+214h+var_1E4]",
+    "line": "fmul    [esp+214h+rhs.x]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -3895,7 +3895,7 @@
   },
   {
     "ea": "0x7D508F",
-    "line": "fmul    [esp+214h+var_1DC]",
+    "line": "fmul    [esp+214h+rhs.z]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -3931,7 +3931,7 @@
   },
   {
     "ea": "0x7D50A6",
-    "line": "fld     [esp+214h+var_1AC]",
+    "line": "fld     [esp+214h+var_1B0.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3943,7 +3943,7 @@
   },
   {
     "ea": "0x7D50AC",
-    "line": "fld     [esp+214h+var_1B0]",
+    "line": "fld     [esp+214h+var_1B0.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3973,7 +3973,7 @@
   },
   {
     "ea": "0x7D50BA",
-    "line": "fmul    [esp+214h+var_1A8]",
+    "line": "fmul    [esp+214h+var_1B0.z]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -4423,7 +4423,7 @@
   },
   {
     "ea": "0x7D51E4",
-    "line": "fmul    [esp+214h+var_1C8]",
+    "line": "fmul    [esp+214h+out.y]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -4453,13 +4453,13 @@
   },
   {
     "ea": "0x7D51FD",
-    "line": "rep movsd",
+    "line": "rep movsd; Publish the shadow view matrix at ShadowSceneLight+0x50.",
     "mnemonic": "movsd",
     "size": 2
   },
   {
     "ea": "0x7D51FF",
-    "line": "fmul    [esp+214h+var_1CC]",
+    "line": "fmul    [esp+214h+out.x]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -4483,7 +4483,7 @@
   },
   {
     "ea": "0x7D520E",
-    "line": "fmul    [esp+214h+var_1C4]",
+    "line": "fmul    [esp+214h+out.z]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -4555,13 +4555,13 @@
   },
   {
     "ea": "0x7D523B",
-    "line": "rep movsd",
+    "line": "rep movsd; Publish the shadow projection matrix at ShadowSceneLight+0x90.",
     "mnemonic": "movsd",
     "size": 2
   },
   {
     "ea": "0x7D523D",
-    "line": "fld     [esp+218h+var_1E0]",
+    "line": "fld     [esp+218h+rhs.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -4573,7 +4573,7 @@
   },
   {
     "ea": "0x7D5243",
-    "line": "fld     [esp+218h+var_1E4]",
+    "line": "fld     [esp+218h+rhs.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -4591,7 +4591,7 @@
   },
   {
     "ea": "0x7D524B",
-    "line": "fld     [esp+218h+var_1DC]",
+    "line": "fld     [esp+218h+rhs.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -4651,7 +4651,7 @@
   },
   {
     "ea": "0x7D526C",
-    "line": "fld     [esp+220h+var_1AC]",
+    "line": "fld     [esp+220h+var_1B0.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -4663,7 +4663,7 @@
   },
   {
     "ea": "0x7D5272",
-    "line": "fmul    [esp+220h+var_1B0]",
+    "line": "fmul    [esp+220h+var_1B0.x]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -4675,7 +4675,7 @@
   },
   {
     "ea": "0x7D5278",
-    "line": "fmul    [esp+220h+var_1A8]",
+    "line": "fmul    [esp+220h+var_1B0.z]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -4711,7 +4711,7 @@
   },
   {
     "ea": "0x7D528E",
-    "line": "call    D3DXMatrixMultiply_0",
+    "line": "call    D3DXMatrixMultiply_0; Multiply the published shadow view and projection matrices.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4735,7 +4735,7 @@
   },
   {
     "ea": "0x7D52A2",
-    "line": "rep movsd",
+    "line": "rep movsd; Publish the combined shadow view-projection matrix at ShadowSceneLight+0x10; Lighting30 consumers use this transform.",
     "mnemonic": "movsd",
     "size": 2
   },
@@ -4819,13 +4819,13 @@
   },
   {
     "ea": "0x7D52CC",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D52CD",
-    "line": "call    BSTextureManager_DiscardShadowMap",
+    "line": "call    BSTextureManager__ReturnFrustumShadowTexture; When the light is no longer eligible, return +0x114 to the frustum-shadow pool and clear ownership.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4978,5 +4978,113 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CEB00",
+    "line": "lea     ecx, [ebp+var_1EC]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CEB06",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEB0B",
+    "line": "lea     ecx, [ebp+var_1F8]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CEB11",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEB16",
+    "line": "mov     eax, [ebp+var_1F4]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9CEB1C",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CEB1D",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEB22",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CEB23",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CEB24",
+    "line": "lea     ecx, [ebp+cullingProcess]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CEB2A",
+    "line": "jmp     ??1BSCullingProcess@@UAE@XZ; Oblivion BSCullingProcess destructor restores its base culling-process state; no separate visible-array allocation is released here.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEB2F",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CEB33",
+    "line": "lea     eax, [edx-204h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CEB39",
+    "line": "mov     ecx, [edx-208h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9CEB3F",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CEB41",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEB46",
+    "line": "mov     eax, offset stru_AF79C8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEB4B",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

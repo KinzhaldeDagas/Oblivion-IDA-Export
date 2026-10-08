@@ -12,3 +12,7 @@
 0x99976D: mov     [ebp+var_1C], edx
 0x999770: mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
 0x999777: call    __ftelli64___$LN7_6
+0x999788: push    [ebp+File]
+0x99978B: call    __unlock_file
+0x999790: pop     ecx
+0x999791: retn

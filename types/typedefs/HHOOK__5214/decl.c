@@ -1,1 +1,1 @@
-HHOOK
+typedef HHOOK__ *HHOOK;

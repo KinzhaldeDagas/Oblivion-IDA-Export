@@ -1,7 +1,8 @@
-BOOL __thiscall sub_787810(_DWORD *this)
+// CTreeFileAccess::EndOfFile-style helper. Returns true when byte-buffer begin is null or cursor offset is at/after end-begin.
+BOOL __thiscall OB_CTreeFileAccess_IsEOF_010201A0(OB_CTreeFileAccess_010201A0 *this)
 {
-  int v1; // edx
+  int byteBufferBegin; // edx
 
-  v1 = *(this + 2);
-  return !v1 || *this >= (unsigned int)(*(this + 3) - v1);
+  byteBufferBegin = this->byteBufferBegin; /*0x787810*/
+  return !byteBufferBegin || this->cursorOffset >= (unsigned int)(this->byteBufferEnd - byteBufferBegin); /*0x78782a*/
 }

@@ -40,7 +40,7 @@
 0x9007F3: mov     ebx, [edi+ebx*4]
 0x9007F6: mov     ecx, [ebx+19Ch]
 0x9007FC: test    ecx, ecx
-0x9007FE: mov     eax, dword ptr [esp+0B0h+var_94]
+0x9007FE: mov     eax, [esp+0B0h+var_94]
 0x900802: mov     [esp+0B0h+var_98], eax
 0x900806: mov     [esp+0B0h+var_80], ebx
 0x90080A: jnz     short loc_900812

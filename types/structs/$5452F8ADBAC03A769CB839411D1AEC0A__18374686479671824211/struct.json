@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "$5452F8ADBAC03A769CB839411D1AEC0A",
+  "definition": "union $5452F8ADBAC03A769CB839411D1AEC0A\n{\nNTSTATUS Status;\nPVOID Pointer __offset(OFF64|AUTO);\n}\n",
   "id": 18374686479671824211,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Status",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "NTSTATUS"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Pointer",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "PVOID"
     }
   ],
   "name": "$5452F8ADBAC03A769CB839411D1AEC0A",
+  "ordinal": 2473,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 4
 }

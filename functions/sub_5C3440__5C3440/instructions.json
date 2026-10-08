@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x5C3466",
-    "line": "mov     edi, [esp+20h+arg_8]",
+    "line": "mov     edi, [esp+20h+controlName.m_data]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x5C346E",
-    "line": "push    edi; unsigned __int8 *",
+    "line": "push    edi; name",
     "mnemonic": "push",
     "size": 1
   },
@@ -175,19 +175,19 @@
   },
   {
     "ea": "0x5C3495",
-    "line": "call    sub_5C3110",
+    "line": "call    RaceSexMenu_GetCategoryTileByName",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5C349A",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5C349C",
-    "line": "call    sub_589930",
+    "line": "call    Tile_FindDescendantByName; Actual RaceSexMenu_FindControlTile call site to Tile_FindDescendantByName (E8 -> 0x589930). Category result in ECX can be null; callee dereferences receiver at 0x589932. PF 1.19.12 conditionally replaces this call with a null-root guard after checking native call bytes; independent of confirmation entry.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,13 +199,13 @@
   },
   {
     "ea": "0x5C34A2",
-    "line": "mov     esi, eax",
+    "line": "mov     esi, eax; Instruction is MOV ESI,EAX after the Tile_FindDescendantByName call. Earlier PF constant erroneously targeted this address as a CALL; correct call is 0x5C349C. Missing category crash arises at callee 0x589932 if root ECX=null.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5C34A4",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x5C34AA",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -280,5 +280,71 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C0FB0",
+    "line": "lea     ecx, [ebp+0Ch]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C0FB3",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C0FB8",
+    "line": "lea     ecx, [ebp+4]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C0FBB",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C0FC0",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C0FC4",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C0FC7",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C0FCA",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C0FCC",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C0FD1",
+    "line": "mov     eax, offset stru_AEA0DC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C0FD6",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

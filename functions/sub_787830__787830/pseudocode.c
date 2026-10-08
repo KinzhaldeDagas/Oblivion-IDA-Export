@@ -1,29 +1,29 @@
-void __thiscall sub_787830(unsigned int *this, unsigned __int16 a2)
+// Oblivion CWindMatrices::Resize. Frees the old global transform array, allocates matrixCount contiguous 0x40-byte stTransform objects, constructs them, then explicitly loads identity into every matrix.
+void __thiscall OB_CWindMatrices_Resize_010201A0(OB_CWindMatrices_010201A0 *this, unsigned __int16 matrixCount)
 {
   int v3; // edi
-  void *v4; // eax
-  unsigned int v5; // ebx
+  OB_stTransform_010201A0 *v4; // eax
+  OB_stTransform_010201A0 *v5; // ebx
   int v6; // ebx
 
-  FormHeapFree(*(this + 1));
-  v3 = a2;
-  *(_WORD *)this = a2;
-  v4 = (void *)FormHeapAlloc((unsigned __int64)a2 >> 0x1A != 0 ? 0xFFFFFFFF : a2 << 6);
-  v5 = (unsigned int)v4;
-  if ( v4 )
-    sub_401080(v4, 0x40, a2, (void *(__thiscall *)(void *))sub_7A66B0);
+  FormHeapFree((unsigned int)this->matrices); /*0x787859*/
+  v3 = matrixCount; /*0x787863*/
+  this->matrixCount = matrixCount; /*0x787866*/
+  v4 = (OB_stTransform_010201A0 *)FormHeapAlloc((unsigned __int64)matrixCount >> 0x1A != 0 ? 0xFFFFFFFF : matrixCount << 6);
+  v5 = v4; /*0x787881*/
+  if ( v4 ) /*0x787894*/
+    sub_401080(v4, 0x40, matrixCount, (void *(__thiscall *)(void *))OB_stTransform_ctor_010201A0); /*0x78789f*/
   else
-    v5 = 0;
-  *(this + 1) = v5;
-  if ( a2 )
+    v5 = 0; /*0x7878a6*/
+  this->matrices = v5; /*0x7878b2*/
+  if ( matrixCount ) /*0x7878b5*/
   {
-    v6 = 0;
-    do
+    v6 = 0; /*0x7878b7*/
+    do /*0x7878d0*/
     {
-      sub_7A6670((float *)(v6 + *(this + 1)));
-      v6 += 0x40;
-      --v3;
+      OB_stTransform_LoadIdentity_010201A0(&this->matrices[v6++]); /*0x7878c5*/
+      --v3; /*0x7878cd*/
     }
-    while ( v3 );
+    while ( v3 ); /*0x7878d0*/
   }
 }

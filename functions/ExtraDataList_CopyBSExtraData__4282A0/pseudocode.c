@@ -1,12 +1,13 @@
+// Verified extra-data copy lifecycle for ownership state: the copy dispatcher handles kExtraData_Ownership, kExtraData_Global, and kExtraData_Rank through their typed setters, creating/updating separate ExtraOwnership, ExtraGlobal, and ExtraRank payloads rather than sharing the source node.
 void __thiscall ExtraDataList_CopyBSExtraData(ExtraDataList *this, BSExtraData *a2)
 {
   ExtraCell3D *v3; // esi
-  TeleportData *v4; // ebx
+  TeleportData *inited; // ebx
   UInt8 type; // cl
   ExtraCell3D *ExtraData; // ebp
   BSExtraData *v7; // eax
   BSExtraData *v8; // eax
-  int v9; // eax
+  ExtraLockData *v9; // eax
   _DWORD *unk001; // esi
   BSExtraData *v11; // eax
   BSExtraData *v12; // eax
@@ -16,239 +17,239 @@ void __thiscall ExtraDataList_CopyBSExtraData(ExtraDataList *this, BSExtraData *
   _DWORD *k; // esi
   UInt32 i; // esi
 
-  v3 = (ExtraCell3D *)a2;
-  v4 = 0;
-  if ( a2 )
+  v3 = (ExtraCell3D *)a2; /*0x4282c6*/
+  inited = 0; /*0x4282ca*/
+  if ( a2 ) /*0x4282ce*/
   {
-    if ( sub_41E340((int)a2) )
+    if ( sub_41E340((int)a2) ) /*0x4282d5*/
     {
-      type = v3->super.type;
-      switch ( type )
+      type = v3->super.type; /*0x4282e2*/
+      switch ( type ) /*0x4282fb*/
       {
-        case kExtraData_Cell3D:
-          ExtraDataList_SetCell3D(this, v3->unk001);
-          break;
-        case kExtraData_WaterHeight:
-          sub_423FF0(this, *(float *)&v3->unk001);
-          break;
-        case kExtraData_CellWaterType:
-          sub_4204E0(this, (BSExtraDataVtbl *)v3->unk001);
-          break;
-        case kExtraData_CellMusicType:
-          sub_4242C0(this, SLOBYTE(v3->unk001));
-          break;
-        case kExtraData_CellClimate:
-          TESObjectCELL_SetInteriorClimate(this, (BSExtraDataVtbl *)v3->unk001);
-          break;
-        case kExtraData_CellCanopyShadowMask:
-          sub_424440(this, (BSExtraDataVtbl *)v3->unk001, (Ni2DBuffer *)v3[1].vtbl, &a2);
-          *(BSExtraDataMembr *)&a2->vtbl = v3[1].super;
-          break;
-        case kExtraData_Script:
-          ExtraDataList_AddScript(this, v3->unk001);
-          ExtraDataList_SetScriptEventList(this, (int)v3[1].vtbl);
-          break;
-        case kExtraData_Action:
-          sub_423DA0(this, LOBYTE(v3->unk001));
-          break;
-        case kExtraData_DistantData:
-          sub_420100(this, (BSExtraDataVtbl **)&v3->unk001);
-          break;
-        case kExtraData_RagDollData:
-          sub_424970(this, (const void **)v3->unk001);
-          break;
-        case kExtraData_Worn:
-          SetWorn(this, 1, 0);
-          break;
-        case kExtraData_WornLeft:
-          SetWorn(this, 1, 1);
-          break;
-        case kExtraData_StartLocation:
-          v13 = (BSExtraDataVtbl *)OblivionDynamicCast(
+        case kExtraData_Cell3D: /*0x4282fb*/
+          ExtraDataList_SetCell3D(this, v3->unk001); /*0x42866a*/
+          break; /*0x42866f*/
+        case kExtraData_WaterHeight: /*0x4282fb*/
+          ExtraDataList_SetWaterHeight(this, *(float *)&v3->unk001); /*0x42867d*/
+          break; /*0x428682*/
+        case kExtraData_CellWaterType: /*0x4282fb*/
+          ExtraDataList_SetWaterType(this, (BSExtraDataVtbl *)v3->unk001); /*0x42868d*/
+          break; /*0x428692*/
+        case kExtraData_CellMusicType: /*0x4282fb*/
+          ExtraDataList_SetCellMusicType(this, SLOBYTE(v3->unk001)); /*0x42869e*/
+          break; /*0x4286a3*/
+        case kExtraData_CellClimate: /*0x4282fb*/
+          TESObjectCELL_SetInteriorClimate(this, (TESClimate *)v3->unk001);// Verified: ExtraDataList copy dispatcher handles kExtraData_CellClimate by reading the climate pointer from ExtraCellClimate payload and invoking TESObjectCELL_SetInteriorClimate to recreate/update the destination extra. /*0x4286d6*/
+          break; /*0x4286db*/
+        case kExtraData_CellCanopyShadowMask: /*0x4282fb*/
+          sub_424440(this, (BSExtraDataVtbl *)v3->unk001, (Ni2DBuffer *)v3[1].vtbl, &a2); /*0x4286b7*/
+          *(BSExtraDataMembr *)&a2->vtbl = v3[1].super; /*0x4286c3*/
+          break; /*0x4286cb*/
+        case kExtraData_Script: /*0x4282fb*/
+          ExtraDataList_AddScript(this, v3->unk001); /*0x4284a1*/
+          ExtraDataList_SetScriptEventList(this, (int)v3[1].vtbl); /*0x4284ac*/
+          break; /*0x4284b1*/
+        case kExtraData_Action: /*0x4282fb*/
+          ExtraDataList_SetActionFlags(this, LOBYTE(v3->unk001)); /*0x42838c*/
+          break; /*0x428391*/
+        case kExtraData_DistantData: /*0x4282fb*/
+          ExtraDataList_SetDistantDataNormal(this, (NiPoint3 *)&v3->unk001); /*0x4285e6*/
+          break; /*0x4285eb*/
+        case kExtraData_RagDollData: /*0x4282fb*/
+          sub_424970(this, (const void **)v3->unk001); /*0x4285d6*/
+          break; /*0x4285db*/
+        case kExtraData_Worn: /*0x4282fb*/
+          SetWorn(this, 1, 0); /*0x4283dc*/
+          break; /*0x4283e1*/
+        case kExtraData_WornLeft: /*0x4282fb*/
+          SetWorn(this, 1, 1); /*0x4283fd*/
+          break; /*0x428402*/
+        case kExtraData_StartLocation: /*0x4282fb*/
+          v13 = (BSExtraDataVtbl *)OblivionDynamicCast( /*0x4285a9*/
                                      (void *)v3->unk001,
                                      0,
                                      (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                                      &TESWorldSpace `RTTI Type Descriptor',
                                      0);
-          v14 = (BSExtraDataVtbl *)OblivionDynamicCast(
+          v14 = (BSExtraDataVtbl *)OblivionDynamicCast( /*0x4285b0*/
                                      (void *)v3->unk001,
                                      0,
                                      (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                                      &TESObjectCELL `RTTI Type Descriptor',
                                      0);
-          sub_41F4C0(this, v13, v14, &v3[1].vtbl, *(float *)&v3[1].unk001);
-          break;
-        case kExtraData_Package:
-          sub_4268B0(
+          ExtraDataList_SetStartLocation(this, v13, v14, &v3[1].vtbl, *(float *)&v3[1].unk001); /*0x4285c6*/
+          break; /*0x4285cb*/
+        case kExtraData_Package: /*0x4282fb*/
+          sub_4268B0( /*0x428708*/
             this,
             (TESPackage *)v3->unk001,
             (int)v3[1].vtbl,
             *(BSExtraData **)&v3[1].super.type,
             (char)v3[1].super.next,
             BYTE1(v3[1].super.next));
-          break;
-        case kExtraData_TresPassPackage:
-          sub_41FBC0(this, (BSExtraDataVtbl *)v3->unk001);
-          break;
-        case kExtraData_RunOncePacks:
-          for ( i = v3->unk001; i; i = *(_DWORD *)(i + 4) )
+          break; /*0x42870d*/
+        case kExtraData_TresPassPackage: /*0x4282fb*/
+          ExtraDataList_SetTrespassPackageExtra(this, (BSExtraDataVtbl *)v3->unk001); /*0x428718*/
+          break; /*0x42871d*/
+        case kExtraData_RunOncePacks: /*0x4282fb*/
+          for ( i = v3->unk001; i; i = *(_DWORD *)(i + 4) ) /*0x428727*/
           {
-            if ( *(_DWORD *)i )
-              sub_41FFC0(this, **(_DWORD **)i, *(_BYTE *)(*(_DWORD *)i + 4));
+            if ( *(_DWORD *)i ) /*0x428730*/
+              ExtraDataList_SetRunOnceExtraPackage(this, **(_DWORD **)i, *(_BYTE *)(*(_DWORD *)i + 4)); /*0x428740*/
           }
-          break;
-        case kExtraData_ReferencePointer:
-          ExtraDataList_SetReferencePointer(this, (TESObjectREFR *)v3->unk001);
-          break;
-        case kExtraData_Follower:
-          for ( j = (int *)v3->unk001; j; j = (int *)j[1] )
+          break; /*0x42874a*/
+        case kExtraData_ReferencePointer: /*0x4282fb*/
+          ExtraDataList_SetReferencePointer(this, (TESObjectREFR *)v3->unk001); /*0x4286e6*/
+          break; /*0x4286eb*/
+        case kExtraData_Follower: /*0x4282fb*/
+          for ( j = (int *)v3->unk001; j; j = (int *)j[1] ) /*0x4285f5*/
           {
-            if ( !*j )
-              break;
-            sub_424C50(this, *j);
+            if ( !*j ) /*0x428600*/
+              break; /*0x428604*/
+            sub_424C50(this, *j); /*0x42860d*/
           }
-          break;
-        case kExtraData_LevCreaModifier:
-          sub_420780(this, (BSExtraDataVtbl *)v3->unk001);
-          break;
-        case kExtraData_OriginalReference:
-        case kExtraData_BoundArmor|kExtraData_WaterHeight:
-          sub_41E710(this, (BSExtraDataVtbl *)v3->unk001);
-          break;
-        case kExtraData_Ownership:
-          ExtraDataList::SetOrRemoveExtraOwnership(this, (TESForm *)v3->unk001);
-          break;
-        case kExtraData_Global:
-          sub_423720(this, (BSExtraDataVtbl *)v3->unk001);
-          break;
-        case kExtraData_Rank:
-          sub_4237E0(this, (BSExtraDataVtbl *)v3->unk001);
-          break;
-        case kExtraData_Count:
-          ExtraDataList_SetExtraCount(this, LOWORD(v3->unk001));
-          break;
-        case kExtraData_Health:
-          ExtraDataList_SetHealthValue(this, COERCE_BSEXTRADATAVTBL_(*(float *)&v3->unk001));
-          break;
-        case kExtraData_Uses:
-          ExtraDataList_SetUses(this, v3->unk001);
-          break;
-        case kExtraData_TimeLeft:
-          sub_41EDF0(this, COERCE_BSEXTRADATAVTBL_(*(float *)&v3->unk001));
-          break;
-        case kExtraData_Charge:
-          sub_41EE90(this, COERCE_BSEXTRADATAVTBL_(*(float *)&v3->unk001));
-          break;
-        case kExtraData_Soul:
-          BaseExtraList_SetSoulLevel(this, v3->unk001);
-          break;
-        case kExtraData_Lock:
-          v9 = FormHeapAlloc(0xCu);
-          if ( v9 )
+          break; /*0x428617*/
+        case kExtraData_LevCreaModifier: /*0x4282fb*/
+          ExtraDataList_SetLevCreaModifier(this, (BSExtraDataVtbl *)v3->unk001); /*0x4287b4*/
+          break; /*0x4287b9*/
+        case kExtraData_OriginalReference: /*0x4282fb*/
+        case kExtraData_BoundArmor|kExtraData_WaterHeight: /*0x4282fb*/
+          ExtraDataList_SetOriginalReferenceExtra(this, (TESObjectREFR *)v3->unk001); /*0x428757*/
+          break; /*0x42875c*/
+        case kExtraData_Ownership: /*0x4282fb*/
+          ExtraDataList::SetOrRemoveExtraOwnership(this, (TESForm *)v3->unk001); /*0x42839c*/
+          break; /*0x4283a1*/
+        case kExtraData_Global: /*0x4282fb*/
+          ExtraDataList_SetGlobal(this, (TESGlobal *)v3->unk001); /*0x4283ac*/
+          break; /*0x4283b1*/
+        case kExtraData_Rank: /*0x4282fb*/
+          ExtraDataList_SetRank(this, v3->unk001); /*0x4283bc*/
+          break; /*0x4283c1*/
+        case kExtraData_Count: /*0x4282fb*/
+          ExtraDataList_SetExtraCount(this, LOWORD(v3->unk001)); /*0x4283cd*/
+          break; /*0x4283d2*/
+        case kExtraData_Health: /*0x4282fb*/
+          ExtraDataList_SetHealthValue(this, COERCE_BSEXTRADATAVTBL_(*(float *)&v3->unk001)); /*0x428449*/
+          break; /*0x42844e*/
+        case kExtraData_Uses: /*0x4282fb*/
+          ExtraDataList_SetUses(this, v3->unk001); /*0x42845a*/
+          break; /*0x42845f*/
+        case kExtraData_TimeLeft: /*0x4282fb*/
+          ExtraDataList_SetTimeLeft(this, COERCE_BSEXTRADATAVTBL_(*(float *)&v3->unk001)); /*0x42846d*/
+          break; /*0x428472*/
+        case kExtraData_Charge: /*0x4282fb*/
+          ExtraDataList_SetCharge(this, COERCE_BSEXTRADATAVTBL_(*(float *)&v3->unk001)); /*0x428480*/
+          break; /*0x428485*/
+        case kExtraData_Soul: /*0x4282fb*/
+          BaseExtraList_SetSoulLevel(this, v3->unk001); /*0x428491*/
+          break; /*0x428496*/
+        case kExtraData_Lock: /*0x4282fb*/
+          v9 = (ExtraLockData *)FormHeapAlloc(0xCu); /*0x4284cb*/
+          if ( v9 ) /*0x4284d5*/
           {
-            *(_BYTE *)v9 = 0;
-            *(_DWORD *)(v9 + 4) = 0;
-            *(_BYTE *)(v9 + 8) = 0;
+            v9->level = 0; /*0x4284d7*/
+            v9->key = 0; /*0x4284d9*/
+            v9->flags = 0; /*0x4284dc*/
           }
           else
           {
-            v9 = 0;
+            v9 = 0; /*0x4284e1*/
           }
-          unk001 = (_DWORD *)v3->unk001;
-          *(_DWORD *)v9 = *unk001;
-          *(_DWORD *)(v9 + 4) = unk001[1];
-          *(_DWORD *)(v9 + 8) = unk001[2];
-          sub_41EAF0(this, v9);
-          break;
-        case kExtraData_Teleport:
-          v11 = (BSExtraData *)FormHeapAlloc(0x1Cu);
-          a2 = v11;
-          if ( v11 )
-            v4 = sub_42B590((TeleportData *)v11);
-          sub_42B4B0(v4, (_DWORD *)v3->unk001);
-          ExtraDataList::SetTeleportData(this, v4);
-          break;
-        case kExtraData_MapMarker:
-          v12 = (BSExtraData *)FormHeapAlloc(0x10u);
-          a2 = v12;
-          if ( v12 )
-            v4 = (TeleportData *)sub_42B3F0(v12);
-          sub_42B2A0(v4, v3->unk001);
-          sub_423590(this, (BSExtraDataVtbl *)v4);
-          break;
-        case kExtraData_LeveledItem:
-          ExtraDataList_AddExtraLeveledItem(this, (BSExtraDataVtbl *)v3->unk001);
-          sub_41FF40(this, (UInt8)v3[1].vtbl);
-          break;
-        case kExtraData_Scale:
-          sub_423A30(this, *(float *)&v3->unk001);
-          break;
-        case kExtraData_Seed:
-          sub_423BD0(this, v3->unk001);
-          break;
-        case kExtraData_EnableStateParent:
-          sub_420280(this, (BSExtraDataVtbl *)v3->unk001);
-          sub_420380(this, (UInt8)v3[1].vtbl);
-          break;
-        case kExtraData_RandomTeleportMarker:
-          sub_4205C0(this, (BSExtraDataVtbl *)v3->unk001);
-          break;
-        case kExtraData_MerchantContainer:
-          sub_4206A0(this, (BSExtraDataVtbl *)v3->unk001);
-          break;
-        case kExtraData_CannotWear:
-          sub_41F370(this, 1);
-          break;
-        case kExtraData_Poison:
-          sub_41EFD0(this, (BSExtraDataVtbl *)v3->unk001);
-          break;
-        case kExtraData_XTarget:
-          sub_420D40(this, (BSExtraDataVtbl *)v3->unk001);
-          break;
-        case kExtraData_FriendHitList:
-          for ( k = (_DWORD *)v3->unk001; k; k = (_DWORD *)k[1] )
+          unk001 = (_DWORD *)v3->unk001; /*0x4284e3*/
+          *(_DWORD *)&v9->level = *unk001; /*0x4284e8*/
+          v9->key = (TESKey *)unk001[1]; /*0x4284ed*/
+          *(_DWORD *)&v9->flags = unk001[2]; /*0x4284f6*/
+          ExtraDataList_SetLock(this, v9);      // Verified ExtraLock copy case in ExtraDataList_CopyBSExtraData: allocates a fresh 12-byte ExtraLockData, copies the level byte, TESKey* pointer, and flags byte from the source payload, then installs the copy via ExtraDataList_SetLock. The key form pointer is shared; payload storage and ExtraLock wrapper are independent. /*0x4284f9*/
+          break; /*0x4284fe*/
+        case kExtraData_Teleport: /*0x4282fb*/
+          v11 = (BSExtraData *)FormHeapAlloc(0x1Cu); /*0x428505*/
+          a2 = v11; /*0x42850d*/
+          if ( v11 ) /*0x42851b*/
+            inited = TeleportData_InitSentinels((TeleportData *)v11); /*0x428524*/
+          sub_42B4B0(inited, (_DWORD *)v3->unk001); /*0x428534*/
+          ExtraDataList::SetTeleportData(this, inited); /*0x42853c*/
+          break; /*0x428541*/
+        case kExtraData_MapMarker: /*0x4282fb*/
+          v12 = (BSExtraData *)FormHeapAlloc(0x10u); /*0x428548*/
+          a2 = v12; /*0x428550*/
+          if ( v12 ) /*0x42855e*/
+            inited = (TeleportData *)MapMarkerData_ctor((MapMarkerData *)v12); /*0x428567*/
+          sub_42B2A0(inited, v3->unk001); /*0x428577*/
+          ExtraDataList_SetMapMarkerData(this, (MapMarkerData *)inited); /*0x42857f*/
+          break; /*0x428584*/
+        case kExtraData_LeveledItem: /*0x4282fb*/
+          ExtraDataList_AddExtraLeveledItem(this, (BSExtraDataVtbl *)v3->unk001); /*0x42842a*/
+          sub_41FF40(this, (UInt8)v3[1].vtbl); /*0x428436*/
+          break; /*0x42843b*/
+        case kExtraData_Scale: /*0x4282fb*/
+          sub_423A30(this, *(float *)&v3->unk001); /*0x4284bf*/
+          break; /*0x4284c4*/
+        case kExtraData_Seed: /*0x4282fb*/
+          ExtraDataList_SetOrRemoveTreeSeed(this, v3->unk001); /*0x42841a*/
+          break; /*0x42841f*/
+        case kExtraData_EnableStateParent: /*0x4282fb*/
+          ExtraDataList_SetEnableStateParent(this, (BSExtraDataVtbl *)v3->unk001); /*0x428767*/
+          ExtraDataList_SetEnableStateFlags(this, (UInt8)v3[1].vtbl); /*0x428773*/
+          break; /*0x428778*/
+        case kExtraData_RandomTeleportMarker: /*0x4282fb*/
+          ExtraDataList_SetRandomTeleportMarker(this, (TESObjectREFR *)v3->unk001); /*0x428780*/
+          break; /*0x428785*/
+        case kExtraData_MerchantContainer: /*0x4282fb*/
+          ExtraDataList_SetMerchantContainer(this, (BSExtraDataVtbl *)v3->unk001); /*0x42878d*/
+          break; /*0x428792*/
+        case kExtraData_CannotWear: /*0x4282fb*/
+          ExtraDataList_SetCannotWear(this, 1); /*0x4287d1*/
+          break; /*0x4287d6*/
+        case kExtraData_Poison: /*0x4282fb*/
+          ExtraDataList_SetPoison(this, (BSExtraDataVtbl *)v3->unk001); /*0x42865a*/
+          break; /*0x42865f*/
+        case kExtraData_XTarget: /*0x4282fb*/
+          ExtraDataList_SetXTarget(this, (BSExtraDataVtbl *)v3->unk001); /*0x4287a7*/
+          break; /*0x4287ac*/
+        case kExtraData_FriendHitList: /*0x4282fb*/
+          for ( k = (_DWORD *)v3->unk001; k; k = (_DWORD *)k[1] ) /*0x428623*/
           {
-            if ( !*k )
-              break;
+            if ( !*k ) /*0x428630*/
+              break; /*0x428632*/
           }
-          break;
-        case kExtraData_HeadingTarget:
-          sub_423970(this, (BSExtraDataVtbl *)v3->unk001);
-          break;
-        case kExtraData_BoundArmor:
-          sub_41F2F0(this);
-          break;
-        case kExtraData_RefractionProperty:
-          ExtraDataList_ToggleRefractionProperty(this, 1, *(float *)&v3->unk001);
-          break;
-        case kExtraData_QuickKey:
-          sub_422BA0(this, v3->unk001);
-          break;
-        case kExtraData_EditorRefMoveData:
-          ExtraData = (ExtraCell3D *)BaseExtraList_GetExtraData(this, kExtraData_EditorRefMoveData);
-          if ( !ExtraData )
+          break; /*0x42863d*/
+        case kExtraData_HeadingTarget: /*0x4282fb*/
+          sub_423970(this, (BSExtraDataVtbl *)v3->unk001); /*0x42864a*/
+          break; /*0x42864f*/
+        case kExtraData_BoundArmor: /*0x4282fb*/
+          ExtraDataList_AddBoundArmor(this); /*0x428409*/
+          break; /*0x42840e*/
+        case kExtraData_RefractionProperty: /*0x4282fb*/
+          ExtraDataList_ToggleRefractionProperty(this, 1, *(float *)&v3->unk001); /*0x4287c6*/
+          break; /*0x4287cb*/
+        case kExtraData_QuickKey: /*0x4282fb*/
+          sub_422BA0(this, v3->unk001); /*0x4283ed*/
+          break; /*0x4283f2*/
+        case kExtraData_EditorRefMoveData: /*0x4282fb*/
+          ExtraData = (ExtraCell3D *)BaseExtraList_GetExtraData(this, kExtraData_EditorRefMoveData); /*0x42830b*/
+          if ( !ExtraData ) /*0x42830f*/
           {
-            v7 = (BSExtraData *)FormHeapAlloc(0x30u);
-            a2 = v7;
-            if ( v7 )
-              v8 = (BSExtraData *)sub_42B090(v7, 0);
+            v7 = (BSExtraData *)FormHeapAlloc(0x30u); /*0x428313*/
+            a2 = v7; /*0x42831b*/
+            if ( v7 ) /*0x428325*/
+              v8 = (BSExtraData *)sub_42B090(v7, 0); /*0x42832a*/
             else
-              v8 = 0;
-            ExtraData = (ExtraCell3D *)v8;
-            BaseExtraList_AddExtra(this, v8);
+              v8 = 0; /*0x428331*/
+            ExtraData = (ExtraCell3D *)v8; /*0x42833e*/
+            BaseExtraList_AddExtra(this, v8); /*0x428340*/
           }
-          ExtraData[2].super = v3[2].super;
-          ExtraData[2].unk001 = v3[2].unk001;
-          ExtraData->unk001 = v3->unk001;
-          ExtraData[1] = v3[1];
-          ExtraData[2].vtbl = v3[2].vtbl;
-          break;
-        case kExtraData_TravelHorse:
-          sub_420860(this, (BSExtraDataVtbl *)v3->unk001);
-          break;
+          ExtraData[2].super = v3[2].super; /*0x428348*/
+          ExtraData[2].unk001 = v3[2].unk001; /*0x428354*/
+          ExtraData->unk001 = v3->unk001; /*0x42835a*/
+          ExtraData[1] = v3[1]; /*0x428360*/
+          ExtraData[2].vtbl = v3[2].vtbl; /*0x42837d*/
+          break; /*0x428380*/
+        case kExtraData_TravelHorse: /*0x4282fb*/
+          ExtraDataList_SetTravelHorse(this, (BSExtraDataVtbl *)v3->unk001); /*0x42879a*/
+          break; /*0x42879f*/
         default:
-          PrintError("No Copy function available for Extra Data type %i.", type);
-          break;
+          PrintError("No Copy function available for Extra Data type %i.", type); /*0x4287e1*/
+          break; /*0x4287e1*/
       }
     }
   }

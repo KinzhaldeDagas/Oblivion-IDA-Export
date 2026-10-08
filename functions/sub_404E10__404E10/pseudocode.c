@@ -1,7 +1,7 @@
 char __thiscall sub_404E10(void *this)
 {
-  if ( this )
-    return *(_BYTE *)this;
-  LOBYTE(dword_B35464) = 0;
-  return 0;
+  if ( this ) /*0x404e12*/
+    return *(_BYTE *)this; /*0x404e14*/
+  LOBYTE(flt_B35464[0]) = 0; /*0x404e1c*/
+  return 0; /*0x404e16*/
 }

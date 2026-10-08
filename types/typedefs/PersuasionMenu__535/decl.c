@@ -1,1 +1,1 @@
-PersuasionMenu
+struct PersuasionMenu;

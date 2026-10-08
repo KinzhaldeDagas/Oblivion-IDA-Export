@@ -1,49 +1,63 @@
-double __userpurge sub_78BBF0@<st0>(float **this@<ecx>, int a2@<edi>, float a3, float a4, float a5)
+// CSpeedTreeRT::SetWindStrength. Accepts nonnegative strength, defaults old strength/time offset from CWindEngine on -1.0 sentinels, updates wind engine, and invalidates CPU-wind branch/frond/leaf caches.
+float __thiscall CSpeedTreeRT__SetWindStrength(
+        OB_CSpeedTreeRT_010201A0 *this,
+        float newStrength,
+        float oldStrength,
+        float frequencyTimeOffset)
 {
+  int v4; // edi
   double v6; // st6
-  int v7; // eax
-  int v8; // eax
-  int v9; // eax
-  int v10; // eax
-  rsize_t v12; // [esp+8h] [ebp-64h] BYREF
-  float v13; // [esp+58h] [ebp-14h]
-  char *v14; // [esp+5Ch] [ebp-10h]
-  int v15; // [esp+68h] [ebp-4h]
-  float v16; // [esp+7Ch] [ebp+10h]
+  int branchWindMethod; // eax
+  OB_CIndexedGeometry_010201A0 *branchGeometry; // eax
+  OB_CIndexedGeometry_010201A0 *frondGeometry; // eax
+  OB_CWindEngine_010201A0 *windEngine; // eax
+  rsize_t oldTimeShift[2]; // [esp+8h] [ebp-64h] BYREF
+  float v14; // [esp+58h] [ebp-14h]
+  char *v15; // [esp+5Ch] [ebp-10h]
+  int v16; // [esp+68h] [ebp-4h]
+  float frequencyTimeOffseta; // [esp+7Ch] [ebp+10h]
 
-  v14 = (char *)&v12 + 4;
-  v13 = 0.0;
-  v15 = 0;
-  if ( a3 < 0.0 )
+  v15 = (char *)oldTimeShift + 4; /*0x78bc18*/
+  v14 = 0.0; /*0x78bc21*/
+  v16 = 0; /*0x78bc24*/
+  if ( newStrength < 0.0 ) /*0x78bc33*/
   {
-    LODWORD(v12) = 0x32;
-    sub_414500(&dword_B2B614, a2, "SetWindStrength() expects new wind strength >= 0.0", v12);
+    LODWORD(oldTimeShift[0]) = 0x32; /*0x78bcde*/
+    OB_stString28_AssignBytes_010201A0( /*0x78bcec*/
+      &OB_g_strError_010201A0,
+      v4,
+      "SetWindStrength() expects new wind strength >= 0.0",
+      oldTimeShift[0]);
   }
   else
   {
-    v6 = flt_A30634;
-    if ( v6 == a4 )
-      a4 = (*(this + 4))[1];
-    if ( v6 == a5 )
-      a5 = **(this + 4);
-    v16 = sub_793B90(*(this + 4), a3, a4, a5);
-    v7 = *((_DWORD *)*(this + 4) + 2);
-    v13 = v16;
-    if ( v7 == 1 )
+    v6 = kTerrainLODQuadRayDirectionZ; /*0x78bc39*/
+    if ( v6 == oldStrength ) /*0x78bc47*/
+      oldStrength = this->windEngine->windStrength; /*0x78bc4f*/
+    if ( v6 == frequencyTimeOffset ) /*0x78bc5a*/
+      frequencyTimeOffset = this->windEngine->timeFrequencyShift; /*0x78bc61*/
+    frequencyTimeOffseta = OB_CWindEngine_SetWindStrength_010201A0( /*0x78bc83*/
+                             this->windEngine,
+                             newStrength,
+                             oldStrength,
+                             frequencyTimeOffset);
+    branchWindMethod = this->windEngine->branchWindMethod; /*0x78bc86*/
+    v14 = frequencyTimeOffseta; /*0x78bc8f*/
+    if ( branchWindMethod == 1 ) /*0x78bc92*/
     {
-      v8 = (int)*(this + 1);
-      if ( v8 )
-        *(_BYTE *)(v8 + 0x12) = 0;
+      branchGeometry = this->branchGeometry; /*0x78bc94*/
+      if ( branchGeometry ) /*0x78bc99*/
+        branchGeometry->valid = 0; /*0x78bc9b*/
     }
-    if ( *((_DWORD *)*(this + 4) + 3) == 1 )
+    if ( this->windEngine->frondWindMethod == 1 ) /*0x78bca5*/
     {
-      v9 = (int)*(this + 0x18);
-      if ( v9 )
-        *(_BYTE *)(v9 + 0x12) = 0;
+      frondGeometry = this->frondGeometry; /*0x78bca7*/
+      if ( frondGeometry ) /*0x78bcac*/
+        frondGeometry->valid = 0; /*0x78bcae*/
     }
-    v10 = (int)*(this + 4);
-    if ( *(_DWORD *)(v10 + 0x10) == 1 || *(_BYTE *)(v10 + 0x14) )
-      sub_7982D0((int)*(this + 2));
+    windEngine = this->windEngine; /*0x78bcb1*/
+    if ( windEngine->leafWindMethod == 1 || windEngine->rockingLeaves ) /*0x78bcba*/
+      OB_CLeafGeometry_Invalidate_010201A0(this->leafGeometry); /*0x78bcc2*/
   }
-  return v13;
+  return v14; /*0x78bcca*/
 }

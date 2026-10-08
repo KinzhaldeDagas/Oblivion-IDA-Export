@@ -11,14 +11,14 @@
 0x74E7E6: mov     ebx, ecx
 0x74E7E8: jz      short loc_74E80E
 0x74E7EA: push    offset aMeshesSkyRainh; "Meshes\\Sky\\RainHeavy.NIF"
-0x74E7EF: push    esi; Str1
-0x74E7F0: call    __strcmp
+0x74E7EF: push    esi; left
+0x74E7F0: call    CRT_StricmpLocaleDispatch
 0x74E7F5: add     esp, 8
 0x74E7F8: test    eax, eax
 0x74E7FA: jz      short loc_74E84A
 0x74E7FC: push    offset aMeshesSkyRainl; "Meshes\\Sky\\RainLight.NIF"
-0x74E801: push    esi; Str1
-0x74E802: call    __strcmp
+0x74E801: push    esi; left
+0x74E802: call    CRT_StricmpLocaleDispatch
 0x74E807: add     esp, 8
 0x74E80A: test    eax, eax
 0x74E80C: jz      short loc_74E84A

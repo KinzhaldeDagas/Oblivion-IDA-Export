@@ -73,13 +73,13 @@
   },
   {
     "ea": "0x5BE7B4",
-    "line": "push    20h ; ' '",
+    "line": "push    20h ; ' '; actorValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5BE7B6",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -97,19 +97,19 @@
   },
   {
     "ea": "0x5BE7C0",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x5BE7C6",
-    "line": "push    20h ; ' '",
+    "line": "push    20h ; ' '; actorValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5BE7C8",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x5BE7D2",
-    "line": "mov     ecx, offset fPersuasionReactionHate",
+    "line": "mov     ecx, 0B38E70h",
     "mnemonic": "mov",
     "size": 5
   },

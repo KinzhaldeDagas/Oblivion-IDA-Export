@@ -1,1 +1,1 @@
-0x6ECB70: jmp     sub_6CE320
+0x6ECB70: jmp     NiSingleInterpController_LoadBinary; Loads NiTimeController state. For stream versions >= 0x0A010068, reads and smart-assigns the serialized interpolator reference at +0x3C; older formats leave concrete controllers to migrate legacy data.

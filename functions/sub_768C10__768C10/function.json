@@ -1,19 +1,32 @@
 {
-  "callees_count": 20,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x768C10",
+      "0x768D57"
+    ]
+  ],
+  "chunks_sha256": "95700238b751ec628663ccab5de8f3acc690b9b6f7d57239e7579294afd27e83",
+  "comment_regular": "Rebuilds NiDX9 renderer texture defaults after device creation/reset, including four default format resources and the small clipper/default source texture. Called during both initial creation and RecreateDevice.",
+  "comment_repeatable": "Rebuilds NiDX9 renderer texture defaults after device creation/reset, including four default format resources and the small clipper/default source texture. Called during both initial creation and RecreateDevice.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_768C10",
+  "display_name": "NiDX9Renderer_InitializeTextureDefaults",
   "end_ea": "0x768D57",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_768C10",
+  "name": "NiDX9Renderer_InitializeTextureDefaults",
   "segment": ".text",
   "sha256": "95700238b751ec628663ccab5de8f3acc690b9b6f7d57239e7579294afd27e83",
   "size": 327,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x768C10",
-  "type": "char __thiscall(NiDX9Renderer *this)",
+  "total_chunk_size": 327,
+  "type": "bool __thiscall(NiDX9Renderer *this)",
   "xrefs_from_count": 140,
   "xrefs_to_count": 2
 }

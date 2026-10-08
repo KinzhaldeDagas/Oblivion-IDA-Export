@@ -1,1 +1,1 @@
-GLintptrARB
+typedef INT_PTR GLintptrARB;

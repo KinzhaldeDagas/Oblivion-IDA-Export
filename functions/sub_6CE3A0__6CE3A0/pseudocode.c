@@ -1,12 +1,13 @@
-bool __thiscall sub_6CE3A0(_DWORD *this, int a2)
+// Equality requires equal NiTimeController base state and null-symmetric interpolator state; two non-null interpolators compare through their virtual IsEqual slot (+0x2C).
+bool __thiscall NiSingleInterpController_IsEqual(NiTriBasedGeomData *this, int a2)
 {
   int v4; // ecx
 
-  if ( !(unsigned __int8)sub_6D0540(a2) )
-    return 0;
-  v4 = *(this + 0xF);
-  if ( v4 )
-    return *(_DWORD *)(a2 + 0x3C)
+  if ( !NiInterpController_IsEqual(this, a2) ) /*0x6ce3a9*/
+    return 0; /*0x6ce3b0*/
+  v4 = *(_DWORD *)&this->members.super.m_bVertexStreamLocked; /*0x6ce3b9*/
+  if ( v4 ) /*0x6ce3be*/
+    return *(_DWORD *)(a2 + 0x3C) /*0x6ce3b6*/
         && (*(unsigned __int8 (__thiscall **)(int, _DWORD))(*(_DWORD *)v4 + 0x2C))(v4, *(_DWORD *)(a2 + 0x3C));
-  return !*(_DWORD *)(a2 + 0x3C);
+  return !*(_DWORD *)(a2 + 0x3C); /*0x6ce3ca*/
 }

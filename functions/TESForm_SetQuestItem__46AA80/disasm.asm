@@ -1,4 +1,4 @@
-0x46AA80: cmp     byte ptr [esp+arg_0], 0
+0x46AA80: cmp     byte ptr [esp+arg_0], 0; TESForm_SetQuestItem: toggles TESForm flags bit 0x400 and marks modified. Confirms quest-item bit used by 0x4D7030.
 0x46AA85: jz      short loc_46AA90
 0x46AA87: or      dword ptr [ecx+8], 400h
 0x46AA8E: jmp     short loc_46AA97

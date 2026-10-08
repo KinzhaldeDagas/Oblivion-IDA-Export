@@ -4,12 +4,12 @@ char sub_507BD0()
   bool v1; // zf
   const char *v2; // eax
 
-  v0 = bGameSetting_MagicTargetDebugMsg__ == 0;
-  bGameSetting_MagicTargetDebugMsg__ = v0;
-  v1 = !v0;
-  v2 = "shown.";
-  if ( v1 )
-    v2 = "hidden.";
-  Interface_ConsolePrint("Magic stats %s", v2);
-  return 1;
+  v0 = MEMORY[0xB3355C] == 0; /*0x507bd7*/
+  MEMORY[0xB3355C] = v0; /*0x507bda*/
+  v1 = !v0; /*0x507bdf*/
+  v2 = "shown."; /*0x507be1*/
+  if ( v1 ) /*0x507be6*/
+    v2 = "hidden."; /*0x507be8*/
+  Interface_ConsolePrint("Magic stats %s", v2); /*0x507bf3*/
+  return 1; /*0x507bfd*/
 }

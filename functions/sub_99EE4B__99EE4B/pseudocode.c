@@ -1,4 +1,4 @@
 int *sub_99EE4B()
 {
-  return &dword_B31FEC;
+  return &dword_B31FEC; /*0x99ee50*/
 }

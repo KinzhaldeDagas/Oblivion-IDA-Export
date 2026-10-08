@@ -12,7 +12,7 @@
 0x5522C8: jb      short loc_5522D6
 0x5522CA: mov     eax, [esi-14h]
 0x5522CD: push    eax
-0x5522CE: call    FormHeapFree
+0x5522CE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5522D3: add     esp, 4
 0x5522D6: mov     dword ptr [esi], 0Fh
 0x5522DC: mov     [esi-4], ebx
@@ -21,7 +21,7 @@
 0x5522E5: cmp     eax, ebx
 0x5522E7: jz      short loc_5522F2
 0x5522E9: push    eax
-0x5522EA: call    FormHeapFree
+0x5522EA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5522EF: add     esp, 4
 0x5522F2: mov     [esi-24h], ebx
 0x5522F5: mov     [esi-20h], ebx

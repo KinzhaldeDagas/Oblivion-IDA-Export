@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7C9110",
-    "line": "push    esi",
+    "line": "push    esi; ShadowLight vtable +0x28 geometry-state preparation. Applies the geometry property-state stencil/cull and wireframe/fill entries. Mode-5 alpha property handling is performed later by ShadowLightShader__SetupRenderPass for selectors 6..9.",
     "mnemonic": "push",
     "size": 1
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x7C9124",
-    "line": "call    eax",
+    "line": "call    eax; Apply NiStencilProperty for ShadowLight; the caster pass disables stencil but preserves property-driven culling.",
     "mnemonic": "call",
     "size": 2
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x7C9132",
-    "line": "call    edx",
+    "line": "call    edx; Apply NiWireframeProperty so ShadowLight caster fill mode follows geometry state.",
     "mnemonic": "call",
     "size": 2
   },

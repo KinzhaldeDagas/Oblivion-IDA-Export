@@ -1,5 +1,5 @@
-0x7158A0: push    ebx
-0x7158A1: mov     ebx, dword ptr [esp+4+ArgList]
+0x7158A0: push    ebx; Formats NiTimeController animation time source: 0 APP_TIME, 1 APP_INIT.
+0x7158A1: mov     ebx, [esp+4+ArgList]
 0x7158A5: push    esi
 0x7158A6: mov     eax, ebx
 0x7158A8: push    edi

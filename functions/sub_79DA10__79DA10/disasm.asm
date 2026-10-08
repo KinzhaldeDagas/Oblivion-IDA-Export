@@ -1,4 +1,4 @@
-0x79DA10: sub     esp, 24h
+0x79DA10: sub     esp, 24h; Source-match: CFrondEngine::BuildProfileVectors. Builds extrusion cross-section profile, mirrored profile side, normals, and tangents from the profile curve and guide radius.
 0x79DA13: fldz
 0x79DA15: push    ebx
 0x79DA16: mov     ebx, [esp+28h+arg_0]
@@ -7,10 +7,10 @@
 0x79DA1C: push    edi
 0x79DA1D: mov     ebp, ecx
 0x79DA1F: push    ecx
-0x79DA20: mov     ecx, [ebp+30h]
-0x79DA23: fstp    [esp+38h+var_38]; float
+0x79DA20: mov     ecx, [ebp+30h]; this
+0x79DA23: fstp    [esp+38h+percent]; percent
 0x79DA26: mov     [esp+38h+var_24], ebp
-0x79DA2A: call    sub_784210
+0x79DA2A: call    OB_stBezierSpline_Evaluate_010201A0; Oblivion compact stBezierSpline Evaluate: requires the 500-entry vector at +0x3C, samples/interpolates its y values, maps normalized output through min@0x00/max@0x04, then adds uniform +/- variance@0x08. This executable field order overrides the differing RT4.1 header declaration order.
 0x79DA2F: fmul    dword ptr [ebx+14h]
 0x79DA32: mov     eax, [ebp+34h]
 0x79DA35: mov     esi, [esp+34h+arg_4]
@@ -22,7 +22,6 @@
 0x79DA45: fldz
 0x79DA47: fstp    [esp+34h+var_C]
 0x79DA4B: jmp     short loc_79DA52
-0x79DA4D: align 10h
 0x79DA50: fld1
 0x79DA52: mov     ecx, edi
 0x79DA54: test    ecx, ecx
@@ -37,7 +36,7 @@
 0x79DA72: fadd    dword ptr ds:0A2FC78h
 0x79DA78: fsub    st, st(2)
 0x79DA7A: push    ecx
-0x79DA7B: mov     ecx, [ebp+30h]
+0x79DA7B: mov     ecx, [ebp+30h]; this
 0x79DA7E: fdivp   st(1), st
 0x79DA80: fsubp   st(1), st
 0x79DA82: fstp    [esp+38h+arg_0]
@@ -46,15 +45,15 @@
 0x79DA8C: fchs
 0x79DA8E: fmul    dword ptr [ebx+14h]
 0x79DA91: fstp    [esp+38h+var_8]
-0x79DA95: fstp    [esp+38h+var_38]; float
-0x79DA98: call    sub_784210
+0x79DA95: fstp    [esp+38h+percent]; percent
+0x79DA98: call    OB_stBezierSpline_Evaluate_010201A0; Oblivion compact stBezierSpline Evaluate: requires the 500-entry vector at +0x3C, samples/interpolates its y values, maps normalized output through min@0x00/max@0x04, then adds uniform +/- variance@0x08. This executable field order overrides the differing RT4.1 header declaration order.
 0x79DA9D: fmul    dword ptr [ebx+14h]
 0x79DAA0: lea     edx, [esp+34h+var_C]
 0x79DAA4: push    edx
 0x79DAA5: mov     ecx, esi
 0x79DAA7: fsub    [esp+38h+var_20]
 0x79DAAB: fstp    [esp+38h+var_4]
-0x79DAAF: call    sub_791630
+0x79DAAF: call    OB_CBranch_childVectorPush_010201A0; Push helper for compact child-reference vector at CBranch+0x08.
 0x79DAB4: mov     eax, [ebp+34h]
 0x79DAB7: add     edi, 1
 0x79DABA: cmp     edi, eax
@@ -95,7 +94,7 @@
 0x79DB1C: mov     ecx, esi
 0x79DB1E: fstp    [esp+38h+var_8]
 0x79DB22: mov     [esp+38h+var_4], eax
-0x79DB26: call    sub_791630
+0x79DB26: call    OB_CBranch_childVectorPush_010201A0; Push helper for compact child-reference vector at CBranch+0x08.
 0x79DB2B: sub     edi, 1
 0x79DB2E: sub     ebx, 0Ch
 0x79DB31: test    edi, edi
@@ -481,7 +480,7 @@
 0x79DFB2: fstp    [esp+38h+var_8]
 0x79DFB6: fmul    [esp+38h+var_4]
 0x79DFBA: fstp    [esp+38h+var_4]
-0x79DFBE: call    sub_791630
+0x79DFBE: call    OB_CBranch_childVectorPush_010201A0; Push helper for compact child-reference vector at CBranch+0x08.
 0x79DFC3: mov     ecx, esi
 0x79DFC5: add     edi, 1
 0x79DFC8: call    sub_6F1080

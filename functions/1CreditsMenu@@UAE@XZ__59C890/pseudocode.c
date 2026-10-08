@@ -2,24 +2,24 @@ void __usercall CreditsMenu::~CreditsMenu(Menu *this@<ecx>, double a2@<st2>, dou
 {
   _DWORD *OpenMenuTile; // eax
   void *ParentMenu; // eax
-  _DWORD *v8; // eax
+  _DWORD *v7; // eax
 
-  this->__vftable = (MenuVtbl *)&CreditsMenu::`vftable';
-  if ( byte_B3B290 )
+  this->__vftable = (MenuVtbl *)&CreditsMenu::`vftable'; /*0x59c8b8*/
+  if ( LOBYTE(dword_B3B0B4[0x77]) ) /*0x59c8be*/
   {
-    OpenMenuTile = (_DWORD *)Menu_GetOpenMenuTile(0x414);
-    if ( OpenMenuTile )
+    OpenMenuTile = (_DWORD *)Menu_GetOpenMenuTile(0x414); /*0x59c8d4*/
+    if ( OpenMenuTile ) /*0x59c8de*/
     {
-      ParentMenu = (void *)Tile_GetParentMenu(OpenMenuTile);
-      v8 = OblivionDynamicCast(
+      ParentMenu = (void *)Tile_GetParentMenu(OpenMenuTile); /*0x59c8f0*/
+      v7 = OblivionDynamicCast( /*0x59c8f6*/
              ParentMenu,
              0,
              (struct _s_RTTICompleteObjectLocator *)&Menu `RTTI Type Descriptor',
              &MainMenu `RTTI Type Descriptor',
              0);
-      if ( v8 )
-        sub_5B5A30(v8);
+      if ( v7 ) /*0x59c900*/
+        sub_5B5A30(v7); /*0x59c904*/
     }
   }
-  Menu::~Menu(this, a2, a3, a4);
+  Menu::~Menu(this, a2, a3, a4); /*0x59c913*/
 }

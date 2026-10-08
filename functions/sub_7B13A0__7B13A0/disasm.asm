@@ -70,7 +70,7 @@
 0x7B1476: mov     edx, [ecx]
 0x7B1478: mov     eax, [edx+18h]
 0x7B147B: push    0
-0x7B147D: push    offset flt_B42D50
+0x7B147D: push    offset unk_B42D50
 0x7B1482: push    4
 0x7B1484: push    4
 0x7B1486: push    offset EmptyString
@@ -91,3 +91,20 @@
 0x7B14B6: pop     esi
 0x7B14B7: add     esp, 10h
 0x7B14BA: retn    4
+0x9D00B0: mov     eax, [ebp-10h]
+0x9D00B3: push    eax
+0x9D00B4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D00B9: pop     ecx
+0x9D00BA: retn
+0x9D00BB: mov     eax, [ebp-10h]
+0x9D00BE: push    eax
+0x9D00BF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D00C4: pop     ecx
+0x9D00C5: retn
+0x9D00C6: mov     edx, [esp+arg_4]
+0x9D00CA: lea     eax, [edx-0Ch]
+0x9D00CD: mov     ecx, [edx-10h]
+0x9D00D0: xor     ecx, eax
+0x9D00D2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D00D7: mov     eax, offset stru_AF8B40
+0x9D00DC: jmp     ___CxxFrameHandler3

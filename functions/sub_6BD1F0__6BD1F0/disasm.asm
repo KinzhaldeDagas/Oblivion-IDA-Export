@@ -58,7 +58,7 @@
 0x6BD283: fstp    [esp+20h+var_20]; float
 0x6BD286: push    esi; int
 0x6BD287: mov     [esp+24h+arg_10], 0
-0x6BD28F: call    sub_6BCF70
+0x6BD28F: call    NiRotKey_EvaluateTrack; Oblivion quaternion rotation key-track evaluator. One key/sentinel time normally returns key quaternion at +4; interpolation type 4 uses its dedicated evaluator even for that case. Otherwise performs cursor-assisted timestamp bracketing, normalized segment-time evaluation through the rotation dispatch table, and writes back the lower-key cursor.
 0x6BD294: add     esp, 1Ch
 0x6BD297: mov     eax, esi
 0x6BD299: pop     esi

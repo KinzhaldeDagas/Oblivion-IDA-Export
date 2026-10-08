@@ -1,4 +1,4 @@
-char sub_4E4980()
+bool sub_4E4980()
 {
-  return byte_B35F84;
+  return g_PathGridDebugRenderingEnabled; /*0x4e4985*/
 }

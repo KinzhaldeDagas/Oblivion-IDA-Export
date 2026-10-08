@@ -1,19 +1,32 @@
 {
-  "callees_count": 40,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 17,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_8EC340",
+  "chunks": [
+    [
+      "0x8EC340",
+      "0x8EC76A"
+    ]
+  ],
+  "chunks_sha256": "154da6beded132e95638ed746556b1f69c835abf38fbfc6c39c32418563ba5b9",
+  "comment_regular": "Recomputes allowed motion from the active surface set. Handles one to four active planes by projecting against plane combinations or marking incompatible surfaces.",
+  "comment_repeatable": "Recomputes allowed motion from the active surface set. Handles one to four active planes by projecting against plane combinations or marking incompatible surfaces.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 8,
+  "display_name": "hkSurfaceConstraintUtil_RecomputeActiveSurfaceMotion",
   "end_ea": "0x8EC76A",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "sub_8EC340",
+  "name": "hkSurfaceConstraintUtil_RecomputeActiveSurfaceMotion",
   "segment": ".text",
   "sha256": "154da6beded132e95638ed746556b1f69c835abf38fbfc6c39c32418563ba5b9",
   "size": 1066,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x8EC340",
-  "type": "void __usercall(int@<eax>)",
-  "xrefs_from_count": 425,
+  "total_chunk_size": 1066,
+  "type": "void __usercall(int solverState@<eax>)",
+  "xrefs_from_count": 432,
   "xrefs_to_count": 1
 }

@@ -1,19 +1,36 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_606860",
+  "chunks": [
+    [
+      "0x606860",
+      "0x6068D0"
+    ],
+    [
+      "0x9C2EA0",
+      "0x9C2EC3"
+    ]
+  ],
+  "chunks_sha256": "cd3a9a64742efc833aaf783f2bcdb16c656bc739a637fbb761bc2adf9edcb313",
+  "comment_regular": "Verified class constructor, not merely Candidate: base TESPackage ctor, AlarmPackage vtable store, allocates8-byte empty CrimeListNode head at complete+3C. Factory463EC0 allocates40-byte complete object for type0F.\n\nRadiantAI: AlarmPackage constructor candidate. Hooked by RadiantAIRestored only for opt-in logging; no behavior change.",
+  "comment_repeatable": "RadiantAI: AlarmPackage constructor candidate. Hooked by RadiantAIRestored only for opt-in logging; no behavior change.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "AlarmPackage_Constructor",
   "end_ea": "0x6068D0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_606860",
+  "name": "AlarmPackage_Constructor",
   "segment": ".text",
   "sha256": "f5a1a58b1964eeba3eab886fecce47b31d3bff3f1dc842c4a53a8164673df910",
   "size": 112,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x606860",
-  "type": "TESPackage *__thiscall(TESPackage *this)",
-  "xrefs_from_count": 37,
+  "total_chunk_size": 147,
+  "type": "AlarmPackage *__thiscall(AlarmPackage *self)",
+  "xrefs_from_count": 48,
   "xrefs_to_count": 1
 }

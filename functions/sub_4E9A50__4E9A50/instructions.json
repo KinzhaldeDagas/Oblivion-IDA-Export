@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E9A50",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified TESRoad graph copy override: RTTI-checks source TESRoad, clears destination graph, copies every point position into newly allocated 0x28-byte nodes, then resolves each source adjacency target by position and appends the corresponding destination node to the destination connection list.",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x4E9A7D",
-    "line": "mov     eax, [esp+30h+arg_0]",
+    "line": "mov     eax, [esp+30h+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -169,13 +169,13 @@
   },
   {
     "ea": "0x4E9AA2",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E9AA4",
-    "line": "call    sub_4E8C20",
+    "line": "call    TESRoad_ClearConnectedPointMap; Verified: TESRoad destructor helper traverses its 37-bucket map of BSSimpleList<TESConnectedPoint*> values, calls the per-entry cleanup routine for each point, frees each list node and list header, clears the map, and zeros TESRoad+0x18. Exact TESConnectedPoint layout/cleanup semantics remain Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x4E9AD2",
-    "line": "mov     [esp+30h+var_1C], eax",
+    "line": "mov     [esp+30h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -301,61 +301,61 @@
   },
   {
     "ea": "0x4E9AE0",
-    "line": "lea     ecx, [esp+30h+arg_0]",
+    "line": "lea     ecx, [esp+30h+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4E9AE4",
-    "line": "push    ecx",
+    "line": "push    ecx; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E9AE5",
-    "line": "lea     edx, [esp+34h+var_10]",
+    "line": "lea     edx, [esp+34h+keyOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4E9AE9",
-    "line": "push    edx",
+    "line": "push    edx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E9AEA",
-    "line": "lea     eax, [esp+38h+var_1C]",
+    "line": "lea     eax, [esp+38h+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4E9AEE",
-    "line": "push    eax",
+    "line": "push    eax; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E9AEF",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E9AF1",
-    "line": "mov     [esp+3Ch+arg_0], ebp",
+    "line": "mov     [esp+3Ch+valueOut], ebp",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E9AF5",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E9AFA",
-    "line": "mov     esi, [esp+30h+arg_0]",
+    "line": "mov     esi, [esp+30h+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x4E9B17",
-    "line": "mov     [esp+30h+arg_0], eax",
+    "line": "mov     [esp+30h+valueOut], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -445,13 +445,13 @@
   },
   {
     "ea": "0x4E9B23",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E9B25",
-    "line": "call    sub_4BEF70",
+    "line": "call    TESConnectedPoint_ctor; Verified: initializes the 0x28-byte point allocation used by ROAD load/copy, zeros its leading 0x14 bytes through sub_67EDC0, initializes its XYZ at +0x14, and zeros the 8-byte connection-list header at +0x20. The meaning of leading bytes +0x00..+0x13 remains Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x4E9B35",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -499,43 +499,43 @@
   },
   {
     "ea": "0x4E9B3F",
-    "line": "call    sub_4BEF40",
+    "line": "call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E9B44",
-    "line": "push    eax",
+    "line": "push    eax; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E9B45",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E9B47",
-    "line": "call    sub_4BEF50",
+    "line": "call    PathGraphNode_SetPosition; Verified shared graph-node position setter: writes XYZ into this+0x14; called by both TESRoad and TESPathGrid record loaders.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E9B4C",
-    "line": "mov     ecx, [esp+30h+var_14]",
+    "line": "mov     ecx, [esp+30h+var_14]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E9B50",
-    "line": "push    edi",
+    "line": "push    edi; point",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E9B51",
-    "line": "call    sub_4E9060",
+    "line": "call    TESRoad_AddConnectedPointIfMissing; Verified: inserts a non-null TESConnectedPoint only if no existing node at that position is found. Buckets the point by packed exterior-cell coordinates (signed X and Y each arithmetic-shifted by 12), creates a BSSimpleList header when absent, pushes the node, and increments the Road node count.",
     "mnemonic": "call",
     "size": 5
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x4E9B5D",
-    "line": "cmp     [esp+30h+var_1C], ebp",
+    "line": "cmp     [esp+30h+position], ebp",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x4E9B92",
-    "line": "mov     [esp+30h+var_1C], eax",
+    "line": "mov     [esp+30h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -703,61 +703,61 @@
   },
   {
     "ea": "0x4E9BA7",
-    "line": "lea     ecx, [esp+30h+arg_0]",
+    "line": "lea     ecx, [esp+30h+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4E9BAB",
-    "line": "push    ecx",
+    "line": "push    ecx; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E9BAC",
-    "line": "lea     edx, [esp+34h+var_10]",
+    "line": "lea     edx, [esp+34h+keyOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4E9BB0",
-    "line": "push    edx",
+    "line": "push    edx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E9BB1",
-    "line": "lea     eax, [esp+38h+var_1C]",
+    "line": "lea     eax, [esp+38h+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4E9BB5",
-    "line": "push    eax",
+    "line": "push    eax; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E9BB6",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E9BB8",
-    "line": "mov     [esp+3Ch+arg_0], ebp",
+    "line": "mov     [esp+3Ch+valueOut], ebp",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E9BBC",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E9BC1",
-    "line": "cmp     [esp+30h+arg_0], ebp",
+    "line": "cmp     [esp+30h+valueOut], ebp",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -769,7 +769,7 @@
   },
   {
     "ea": "0x4E9BCB",
-    "line": "mov     eax, [esp+30h+arg_0]",
+    "line": "mov     eax, [esp+30h+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -805,49 +805,49 @@
   },
   {
     "ea": "0x4E9BDE",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E9BE0",
-    "line": "call    sub_4BEF40",
+    "line": "call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E9BE5",
-    "line": "mov     ecx, [esp+30h+var_14]",
+    "line": "mov     ecx, [esp+30h+var_14]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E9BE9",
-    "line": "push    eax",
+    "line": "push    eax; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E9BEA",
-    "line": "call    sub_4E8D00",
+    "line": "call    TESRoad_FindConnectedPointByPosition; Verified: searches the TESRoad connected-point bucket for the cell containing the requested NiPoint3, compares candidate positions with sub_47D810 using fConstant_2 tolerance, and returns the matching TESConnectedPoint or null.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E9BEF",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E9BF1",
-    "line": "mov     [esp+30h+var_10], eax",
+    "line": "mov     [esp+30h+keyOut], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E9BF5",
-    "line": "call    sub_4E7DE0",
+    "line": "call    PathGraphNode_GetConnections; Verified graph-node connection-list accessor: returns this+0x20. TESPathGrid and TESRoad graph code both traverse this as a BSSimpleList of adjacency pointers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -895,31 +895,31 @@
   },
   {
     "ea": "0x4E9C09",
-    "line": "mov     ecx, [edi]",
+    "line": "mov     ecx, [edi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E9C0B",
-    "line": "call    sub_4BEF40",
+    "line": "call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E9C10",
-    "line": "mov     ecx, [esp+30h+var_14]",
+    "line": "mov     ecx, [esp+30h+var_14]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E9C14",
-    "line": "push    eax",
+    "line": "push    eax; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E9C15",
-    "line": "call    sub_4E8D00",
+    "line": "call    TESRoad_FindConnectedPointByPosition; Verified: searches the TESRoad connected-point bucket for the cell containing the requested NiPoint3, compares candidate positions with sub_47D810 using fConstant_2 tolerance, and returns the matching TESConnectedPoint or null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -943,13 +943,13 @@
   },
   {
     "ea": "0x4E9C20",
-    "line": "mov     ecx, [esp+30h+var_10]",
+    "line": "mov     ecx, [esp+30h+keyOut]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E9C24",
-    "line": "call    sub_4E7DE0",
+    "line": "call    PathGraphNode_GetConnections; Verified graph-node connection-list accessor: returns this+0x20. TESPathGrid and TESRoad graph code both traverse this as a BSSimpleList of adjacency pointers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1111,7 +1111,7 @@
   },
   {
     "ea": "0x4E9C69",
-    "line": "mov     ecx, [esp+30h+arg_0]",
+    "line": "mov     ecx, [esp+30h+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1129,7 +1129,7 @@
   },
   {
     "ea": "0x4E9C72",
-    "line": "mov     [esp+30h+arg_0], eax",
+    "line": "mov     [esp+30h+valueOut], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1141,7 +1141,7 @@
   },
   {
     "ea": "0x4E9C7C",
-    "line": "cmp     [esp+30h+var_1C], ebp",
+    "line": "cmp     [esp+30h+position], ebp",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -1204,5 +1204,77 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B6060",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B6063",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B6064",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B6069",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B606A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B606B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B606F",
+    "line": "lea     eax, [edx-20h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B6072",
+    "line": "mov     ecx, [edx-24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B6075",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B6077",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B607C",
+    "line": "mov     eax, offset stru_AE0FB4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B6081",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

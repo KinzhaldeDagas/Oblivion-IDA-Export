@@ -1,19 +1,36 @@
 {
-  "callees_count": 64,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 33,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
+  "chunks": [
+    [
+      "0x5F5320",
+      "0x5F572D"
+    ],
+    [
+      "0x9C2900",
+      "0x9C2931"
+    ]
+  ],
+  "chunks_sha256": "90535a87727f9c0a6784bc80f65c8c3ab02a32074f1481b84d220584a52a0e31",
+  "comment_regular": "3DTheft decode: Actor flee entry point. Builds/updates a FleePackage for source ref, records previous package state when needed, resolves flee destination, calls Actor_AddPackage_, then asks process to move toward the computed flee point.",
+  "comment_repeatable": "3DTheft decode: Actor flee entry point. Builds/updates a FleePackage for source ref, records previous package state when needed, resolves flee destination, calls Actor_AddPackage_, then asks process to move toward the computed flee point.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
   "display_name": "sub_5F5320",
   "end_ea": "0x5F572D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_5F5320",
   "segment": ".text",
   "sha256": "4158a0d237772e853ef3218acc766f211e641ced4eee748e98d66cf7121ea8f3",
   "size": 1037,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5F5320",
+  "total_chunk_size": 1086,
   "type": "void __userpurge(Actor *@<ecx>, double@<st0>, int, float, char, int, int)",
-  "xrefs_from_count": 405,
+  "xrefs_from_count": 424,
   "xrefs_to_count": 4
 }

@@ -34,7 +34,7 @@
 0x57399D: pop     ebx
 0x57399E: mov     ecx, [edi+38h]
 0x5739A1: push    ecx
-0x5739A2: call    FormHeapFree
+0x5739A2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5739A7: add     esp, 4
 0x5739AA: mov     dword ptr [edi+38h], 0
 0x5739B1: pop     edi

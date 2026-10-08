@@ -1,5 +1,5 @@
-int __fastcall unknown_libname_184(__int16 a1)
+double unknown_libname_184()
 {
-  LOBYTE(a1) = HIBYTE(a1);
-  return unknown_libname_184_::unknown_libname_185(a1);
+  __asm { fstp    st } /*0x993b88*/
+  return unknown_libname_184_::unknown_libname_185();
 }

@@ -6,7 +6,7 @@
 0x68DE42: jz      short loc_68DE87
 0x68DE44: mov     edx, [esi]
 0x68DE46: push    edx; a1
-0x68DE47: call    TESForm_LookupByFormID
+0x68DE47: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x68DE4C: mov     ecx, [esi+5]
 0x68DE4F: mov     edx, [eax]
 0x68DE51: add     esp, 4

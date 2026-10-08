@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x9A2326",
-    "line": "mov     eax, [esp+1Ch+arg_4]",
+    "line": "mov     eax, [esp+1Ch+vertexCapacity]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x9A2355",
-    "line": "mov     eax, [esp+1Ch+arg_8]",
+    "line": "mov     eax, [esp+1Ch+pixelCapacity]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -382,5 +382,59 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D7E10",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D7E13",
+    "line": "jmp     NiExtraData_dtor",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D7E18",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D7E1C",
+    "line": "lea     eax, [edx-0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D7E1F",
+    "line": "mov     ecx, [edx-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D7E22",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D7E24",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D7E29",
+    "line": "mov     eax, offset stru_B002E0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D7E2E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

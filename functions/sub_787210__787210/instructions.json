@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x787210",
-    "line": "mov     ecx, [ecx+8]",
+    "line": "mov     ecx, [ecx+8]; CSpeedTreeRT::FreeLeafLODDataArrays. If leaf geometry exists, delegates to CLeafGeometry::FreeLODDataArrays.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x787217",
-    "line": "jmp     sub_798690",
+    "line": "jmp     OB_CLeafGeometry_FreeLODDataArrays_010201A0; Frees dynamic arrays inside every 0x44-byte leaf LOD record without deleting the record array itself.",
     "mnemonic": "jmp",
     "size": 5
   },

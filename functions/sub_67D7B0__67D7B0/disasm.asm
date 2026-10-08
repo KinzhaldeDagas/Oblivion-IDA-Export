@@ -15,7 +15,6 @@
 0x67D7D7: jnb     short loc_67D819
 0x67D7D9: xor     esi, esi
 0x67D7DB: jmp     short loc_67D7E0
-0x67D7DD: align 10h
 0x67D7E0: cmp     esi, eax
 0x67D7E2: jnb     short loc_67D814
 0x67D7E4: mov     ecx, ds:0B333A0h

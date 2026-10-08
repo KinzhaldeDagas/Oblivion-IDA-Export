@@ -1,4 +1,4 @@
-0x772750: mov     eax, [esp+arg_0]
+0x772750: mov     eax, [esp+entry]
 0x772754: mov     edx, [eax+8]
 0x772757: test    edx, edx
 0x772759: push    esi

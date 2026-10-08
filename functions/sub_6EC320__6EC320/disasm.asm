@@ -1,4 +1,4 @@
-0x6EC320: sub     esp, 8
+0x6EC320: sub     esp, 8; Aggregates active time range across every key channel exposed by the NiKeyBasedInterpolator virtual interface. Uses the first key time and last record time per nonempty channel; returns [0,0] when none exist.
 0x6EC323: fld     dword ptr ds:0A7DEB4h
 0x6EC329: push    ebx
 0x6EC32A: mov     ebx, [esp+0Ch+arg_4]

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7868F0",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; Hinted unique insertion for the spline-cache map. Validates the {owner,node} hint and adjacent key ordering; inserts directly when legal, otherwise falls back to the ordinary unique-insert search.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x7868FD",
-    "line": "mov     eax, [esp+14h+arg_C]",
+    "line": "mov     eax, [esp+14h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,43 +49,43 @@
   },
   {
     "ea": "0x786904",
-    "line": "mov     edi, [esp+14h+arg_0]",
+    "line": "mov     edi, [esp+14h+result]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x786908",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x786909",
-    "line": "push    ecx",
+    "line": "push    ecx; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78690A",
-    "line": "push    1",
+    "line": "push    1; insertLeft",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x78690C",
-    "line": "push    edi",
+    "line": "push    edi; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78690D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x78690F",
-    "line": "call    sub_7859E0",
+    "line": "call    OB_stBezierSplineCacheMap_InsertNodeAndRebalance_010201A0; Links a newly allocated spline-cache node beneath the selected parent, increments map size, performs standard red-black insertion recoloring/rotations, forces the root black, and returns {map,node}.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x786924",
-    "line": "mov     ebp, [esp+18h+arg_4]",
+    "line": "mov     ebp, [esp+18h+hintOwner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x786936",
-    "line": "mov     ebx, [esp+1Ch+arg_8]",
+    "line": "mov     ebx, [esp+1Ch+hintNode]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x78693E",
-    "line": "mov     edi, [esp+1Ch+arg_C]",
+    "line": "mov     edi, [esp+1Ch+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -247,43 +247,43 @@
   },
   {
     "ea": "0x786956",
-    "line": "push    edi",
+    "line": "push    edi; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x786957",
-    "line": "mov     edi, [esp+20h+arg_0]",
+    "line": "mov     edi, [esp+20h+result]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x78695B",
-    "line": "push    ebx",
+    "line": "push    ebx; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78695C",
-    "line": "push    1",
+    "line": "push    1; insertLeft",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x78695E",
-    "line": "push    edi",
+    "line": "push    edi; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78695F",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x786961",
-    "line": "call    sub_7859E0",
+    "line": "call    OB_stBezierSplineCacheMap_InsertNodeAndRebalance_010201A0; Links a newly allocated spline-cache node beneath the selected parent, increments map size, performs standard red-black insertion recoloring/rotations, forces the root black, and returns {map,node}.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x786984",
-    "line": "mov     edi, [esp+1Ch+arg_C]",
+    "line": "mov     edi, [esp+1Ch+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -451,43 +451,43 @@
   },
   {
     "ea": "0x7869AA",
-    "line": "push    edi",
+    "line": "push    edi; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7869AB",
-    "line": "mov     edi, [esp+20h+arg_0]",
+    "line": "mov     edi, [esp+20h+result]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7869AF",
-    "line": "push    eax",
+    "line": "push    eax; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7869B0",
-    "line": "push    0",
+    "line": "push    0; insertLeft",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7869B2",
-    "line": "push    edi",
+    "line": "push    edi; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7869B3",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7869B5",
-    "line": "call    sub_7859E0",
+    "line": "call    OB_stBezierSplineCacheMap_InsertNodeAndRebalance_010201A0; Links a newly allocated spline-cache node beneath the selected parent, increments map size, performs standard red-black insertion recoloring/rotations, forces the root black, and returns {map,node}.",
     "mnemonic": "call",
     "size": 5
   },
@@ -577,31 +577,31 @@
   },
   {
     "ea": "0x7869D6",
-    "line": "lea     ecx, [esp+1Ch+arg_4]",
+    "line": "lea     ecx, [esp+1Ch+hintOwner]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7869DA",
-    "line": "mov     [esp+1Ch+arg_4], ebp",
+    "line": "mov     [esp+1Ch+hintOwner], ebp",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7869DE",
-    "line": "mov     [esp+1Ch+arg_8], ebx",
+    "line": "mov     [esp+1Ch+hintNode], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7869E2",
-    "line": "call    sub_7840B0",
+    "line": "call    OB_stBezierSplineCacheIterator_Decrement_010201A0; Oblivion 1.2.0.416: checked spline-cache iterator pre-decrement using parent/left-subtree traversal and nil-node validation.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7869E7",
-    "line": "mov     ecx, [esp+1Ch+arg_8]",
+    "line": "mov     ecx, [esp+1Ch+hintNode]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x7869FB",
-    "line": "mov     eax, [esp+1Ch+arg_8]",
+    "line": "mov     eax, [esp+1Ch+hintNode]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -667,19 +667,19 @@
   },
   {
     "ea": "0x786A06",
-    "line": "push    edi",
+    "line": "push    edi; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x786A07",
-    "line": "mov     edi, [esp+20h+arg_0]",
+    "line": "mov     edi, [esp+20h+result]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x786A0B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -691,25 +691,25 @@
   },
   {
     "ea": "0x786A0F",
-    "line": "push    eax",
+    "line": "push    eax; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x786A10",
-    "line": "push    0",
+    "line": "push    0; insertLeft",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x786A12",
-    "line": "push    edi",
+    "line": "push    edi; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x786A13",
-    "line": "call    sub_7859E0",
+    "line": "call    OB_stBezierSplineCacheMap_InsertNodeAndRebalance_010201A0; Links a newly allocated spline-cache node beneath the selected parent, increments map size, performs standard red-black insertion recoloring/rotations, forces the root black, and returns {map,node}.",
     "mnemonic": "call",
     "size": 5
   },
@@ -757,25 +757,25 @@
   },
   {
     "ea": "0x786A24",
-    "line": "push    ebx",
+    "line": "push    ebx; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x786A25",
-    "line": "push    1",
+    "line": "push    1; insertLeft",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x786A27",
-    "line": "push    edi",
+    "line": "push    edi; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x786A28",
-    "line": "call    sub_7859E0",
+    "line": "call    OB_stBezierSplineCacheMap_InsertNodeAndRebalance_010201A0; Links a newly allocated spline-cache node beneath the selected parent, increments map size, performs standard red-black insertion recoloring/rotations, forces the root black, and returns {map,node}.",
     "mnemonic": "call",
     "size": 5
   },
@@ -871,37 +871,37 @@
   },
   {
     "ea": "0x786A4C",
-    "line": "lea     ecx, [esp+1Ch+arg_4]",
+    "line": "lea     ecx, [esp+1Ch+hintOwner]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x786A50",
-    "line": "mov     [esp+1Ch+arg_4], ebp",
+    "line": "mov     [esp+1Ch+hintOwner], ebp",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x786A54",
-    "line": "mov     [esp+1Ch+arg_8], ebx",
+    "line": "mov     [esp+1Ch+hintNode], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x786A58",
-    "line": "mov     [esp+1Ch+var_8], eax",
+    "line": "mov     [esp+1Ch+var_C.position.node], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x786A5C",
-    "line": "mov     [esp+1Ch+var_C], esi",
+    "line": "mov     [esp+1Ch+var_C.position.owner], esi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x786A60",
-    "line": "call    sub_7846D0",
+    "line": "call    OB_stBezierSplineCacheIterator_Increment_010201A0; Oblivion-authoritative cache-map iterator preincrement. Descends to the leftmost node of a non-nil right subtree; otherwise climbs parents until leaving a right-child chain. Mutates the {owner,node} iterator in place.",
     "mnemonic": "call",
     "size": 5
   },
@@ -913,19 +913,19 @@
   },
   {
     "ea": "0x786A69",
-    "line": "push    ecx",
+    "line": "push    ecx; other",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x786A6A",
-    "line": "lea     ecx, [esp+20h+arg_4]",
+    "line": "lea     ecx, [esp+20h+hintOwner]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x786A6E",
-    "line": "call    sub_784040",
+    "line": "call    OB_stBezierSplineCacheIterator_Equals_010201A0; Oblivion 1.2.0.416: checked spline-cache iterator equality; rejects null/mismatched owners before comparing node pointers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -937,7 +937,7 @@
   },
   {
     "ea": "0x786A75",
-    "line": "mov     ebp, [esp+1Ch+arg_8]",
+    "line": "mov     ebp, [esp+1Ch+hintNode]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1003,19 +1003,19 @@
   },
   {
     "ea": "0x786A92",
-    "line": "push    edi",
+    "line": "push    edi; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x786A93",
-    "line": "mov     edi, [esp+20h+arg_0]",
+    "line": "mov     edi, [esp+20h+result]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x786A97",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1027,25 +1027,25 @@
   },
   {
     "ea": "0x786A9B",
-    "line": "push    ebx",
+    "line": "push    ebx; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x786A9C",
-    "line": "push    0",
+    "line": "push    0; insertLeft",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x786A9E",
-    "line": "push    edi",
+    "line": "push    edi; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x786A9F",
-    "line": "call    sub_7859E0",
+    "line": "call    OB_stBezierSplineCacheMap_InsertNodeAndRebalance_010201A0; Links a newly allocated spline-cache node beneath the selected parent, increments map size, performs standard red-black insertion recoloring/rotations, forces the root black, and returns {map,node}.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1093,25 +1093,25 @@
   },
   {
     "ea": "0x786AB0",
-    "line": "push    ebp",
+    "line": "push    ebp; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x786AB1",
-    "line": "push    1",
+    "line": "push    1; insertLeft",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x786AB3",
-    "line": "push    edi",
+    "line": "push    edi; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x786AB4",
-    "line": "call    sub_7859E0",
+    "line": "call    OB_stBezierSplineCacheMap_InsertNodeAndRebalance_010201A0; Links a newly allocated spline-cache node beneath the selected parent, increments map size, performs standard red-black insertion recoloring/rotations, forces the root black, and returns {map,node}.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1159,7 +1159,7 @@
   },
   {
     "ea": "0x786AC5",
-    "line": "push    edi",
+    "line": "push    edi; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -1171,19 +1171,19 @@
   },
   {
     "ea": "0x786ACA",
-    "line": "push    ecx",
+    "line": "push    ecx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x786ACB",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x786ACD",
-    "line": "call    sub_785FA0",
+    "line": "call    OB_stBezierSplineCacheMap_InsertUnique_010201A0; Unique insertion for the spline-cache map. Searches by the 28-byte small-string key, inserts and rebalances only when absent, and returns {iterator, inserted}.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1195,7 +1195,7 @@
   },
   {
     "ea": "0x786AD4",
-    "line": "mov     ecx, [esp+1Ch+arg_0]",
+    "line": "mov     ecx, [esp+1Ch+result]",
     "mnemonic": "mov",
     "size": 4
   },

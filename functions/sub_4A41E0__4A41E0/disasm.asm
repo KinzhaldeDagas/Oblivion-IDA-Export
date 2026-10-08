@@ -1,4 +1,4 @@
-0x4A41E0: push    0FFFFFFFFh
+0x4A41E0: push    0FFFFFFFFh; Verified: lazily builds a 64x64 NiPixelData with per-channel random values, wraps it as NiTexturingProperty, holds a refcounted global property, and sets clamp mode.
 0x4A41E2: push    offset SEH_4A41E0
 0x4A41E7: mov     eax, large fs:0
 0x4A41ED: push    eax
@@ -104,7 +104,7 @@
 0x4A4361: jz      short loc_4A436F
 0x4A4363: push    ebx
 0x4A4364: mov     ecx, eax
-0x4A4366: call    sub_704800
+0x4A4366: call    NiTexturingProperty_CreateFromSourceTexture
 0x4A436B: mov     esi, eax
 0x4A436D: jmp     short loc_4A4371
 0x4A436F: xor     esi, esi
@@ -134,9 +134,9 @@
 0x4A43B0: add     esi, 4
 0x4A43B3: push    esi; lpAddend
 0x4A43B4: call    dword ptr ds:0A28078h
-0x4A43BA: mov     ecx, ds:0B35414h
-0x4A43C0: push    0
-0x4A43C2: call    sub_405870
+0x4A43BA: mov     ecx, ds:0B35414h; this
+0x4A43C0: push    0; value
+0x4A43C2: call    OB_NiTexturingProperty_SetClampMode_010201A0; NiTexturingProperty map flag helper: ensures map slot 0 exists and writes arg-derived bits into map Unk04 bits 0xC000. 0x560AC0 calls it with 0 for billboard texture property state.
 0x4A43C7: mov     eax, ds:0B35414h
 0x4A43CC: mov     ecx, dword ptr [esp+28h+var_C]
 0x4A43D0: mov     large fs:0, ecx
@@ -147,3 +147,20 @@
 0x4A43DB: pop     ebx
 0x4A43DC: add     esp, 14h
 0x4A43DF: retn
+0x9B2710: mov     eax, [ebp-10h]
+0x9B2713: push    eax
+0x9B2714: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B2719: pop     ecx
+0x9B271A: retn
+0x9B271B: mov     eax, [ebp-10h]
+0x9B271E: push    eax
+0x9B271F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B2724: pop     ecx
+0x9B2725: retn
+0x9B2726: mov     edx, [esp+arg_4]
+0x9B272A: lea     eax, [edx-18h]
+0x9B272D: mov     ecx, [edx-1Ch]
+0x9B2730: xor     ecx, eax
+0x9B2732: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B2737: mov     eax, offset stru_ADE6C8
+0x9B273C: jmp     ___CxxFrameHandler3

@@ -1,19 +1,40 @@
 {
-  "callees_count": 59,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 25,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 4,
-  "display_name": "sub_553140",
+  "chunks": [
+    [
+      "0x553140",
+      "0x553544"
+    ],
+    [
+      "0x552FF0",
+      "0x553000"
+    ],
+    [
+      "0x9BBF20",
+      "0x9BBFBA"
+    ]
+  ],
+  "chunks_sha256": "be9537cf4a94a6435a5682392da2bd53f3c3b10c742de11ec078bfcb0396a8e0",
+  "comment_regular": "Constructs the 0xDBC-byte FaceGen manager, loads FaceGen\\\\si.ctl, initializes the four parameter basis lists and FanControls at +0xC8, then creates fallback face textures.",
+  "comment_repeatable": "Constructs the 0xDBC-byte FaceGen manager, loads FaceGen\\\\si.ctl, initializes the four parameter basis lists and FanControls at +0xC8, then creates fallback face textures.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 23,
+  "display_name": "FaceGenManager_Construct",
   "end_ea": "0x553544",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_553140",
+  "name": "FaceGenManager_Construct",
   "segment": ".text",
   "sha256": "59e21170aa189a8ea2908a37e5b959e84886d1ffcc14c6ace3ea27c6bb16a641",
   "size": 1028,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x553140",
-  "type": "_DWORD *__thiscall(_DWORD *this)",
-  "xrefs_from_count": 388,
+  "total_chunk_size": 1198,
+  "type": "void *__thiscall(void *this)",
+  "xrefs_from_count": 454,
   "xrefs_to_count": 1
 }

@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7C2CE0",
+      "0x7C2CE7"
+    ]
+  ],
+  "chunks_sha256": "f6b26cb443aaca248e1546e060cb09a24281ed129e2a12aa060e0f4d637f279e",
+  "comment_regular": "Leaf-property virtual +0x9C. Returns shared STLSPData ref at leaf property +0xA8.\n\n[2026-10-02 Fallout comparative pass]\nVerified property virtual +0x9C (0xA92A68): returns retained STLSPData pointer at property+0xA8. Used by SetupPass for scalar offsets +0x0C..+0x1C; typed owner chain restored in this pass.\n\nSpeedTreeLeafShaderProperty STLSPData accessor used as virtual +0x9C; returns property +0xA8.",
+  "comment_repeatable": "SpeedTreeLeafShaderProperty STLSPData accessor used as virtual +0x9C; returns property +0xA8.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "Concurrency::details::SchedulerProxy::GetNumBorrowedCores(void)",
+  "display_name": "OB_SpeedTreeLeafShaderProperty_GetSTLSPData_010201A0",
   "end_ea": "0x7C2CE7",
+  "evidence_confidence": "Unknown",
   "flags": 21572,
   "has_pseudocode": true,
-  "name": "?GetNumBorrowedCores@SchedulerProxy@details@Concurrency@@QBEIXZ",
+  "name": "OB_SpeedTreeLeafShaderProperty_GetSTLSPData_010201A0",
   "segment": ".text",
   "sha256": "f6b26cb443aaca248e1546e060cb09a24281ed129e2a12aa060e0f4d637f279e",
   "size": 7,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7C2CE0",
-  "type": "unsigned int __thiscall(Concurrency::details::SchedulerProxy *__hidden this)",
+  "total_chunk_size": 7,
+  "type": "OB_STLSPData_010201A0 *__thiscall(OB_SpeedTreeLeafShaderProperty_010201A0 *this)",
   "xrefs_from_count": 1,
   "xrefs_to_count": 2
 }

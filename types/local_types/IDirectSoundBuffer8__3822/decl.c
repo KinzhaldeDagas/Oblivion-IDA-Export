@@ -1,1 +1,4 @@
-IDirectSoundBuffer8
+struct IDirectSoundBuffer8
+{
+const IDirectSoundBuffer8Vtbl *lpVtbl;
+};

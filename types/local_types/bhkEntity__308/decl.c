@@ -1,1 +1,1 @@
-bhkEntity
+struct bhkEntity;

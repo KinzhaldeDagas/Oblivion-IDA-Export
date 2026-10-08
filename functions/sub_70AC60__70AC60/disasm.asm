@@ -1,6 +1,6 @@
-0x70AC60: mov     eax, [esp+arg_4]
+0x70AC60: mov     eax, [esp+cloningProcess]
 0x70AC64: push    ebx
-0x70AC65: mov     ebx, [esp+4+arg_0]
+0x70AC65: mov     ebx, [esp+4+destination]
 0x70AC69: push    ebp
 0x70AC6A: push    esi
 0x70AC6B: push    eax
@@ -16,7 +16,7 @@
 0x70AC89: test    ecx, ecx
 0x70AC8B: jz      short loc_70ACD2
 0x70AC8D: mov     edx, [ecx]
-0x70AC8F: mov     eax, [esp+10h+arg_4]
+0x70AC8F: mov     eax, [esp+10h+cloningProcess]
 0x70AC93: mov     edx, [edx+18h]
 0x70AC96: push    eax
 0x70AC97: call    edx
@@ -24,11 +24,11 @@
 0x70AC9B: mov     edx, [edx+90h]
 0x70ACA1: push    eax
 0x70ACA2: push    esi
-0x70ACA3: lea     eax, [esp+18h+arg_0]
+0x70ACA3: lea     eax, [esp+18h+destination]
 0x70ACA7: push    eax
 0x70ACA8: mov     ecx, ebx
 0x70ACAA: call    edx
-0x70ACAC: mov     eax, [esp+10h+arg_0]
+0x70ACAC: mov     eax, [esp+10h+destination]
 0x70ACB0: test    eax, eax
 0x70ACB2: jz      short loc_70ACD2
 0x70ACB4: mov     edi, eax

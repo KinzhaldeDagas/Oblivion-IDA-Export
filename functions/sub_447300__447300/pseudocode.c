@@ -1,24 +1,24 @@
-NiNode *__thiscall sub_447300(Sky **this)
+NiNode *__thiscall sub_447300(TESHealthForm **this)
 {
   NiNode *result; // eax
   NiNode *i; // esi
-  TESForm *v3; // eax
+  TESNPC *v3; // eax
 
-  result = TESHealthForm_GetHealth(*this);
-  for ( i = result; result; i = result )
+  result = (NiNode *)TESHealthForm_GetHealth(*this); /*0x447303*/
+  for ( i = result; result; i = result ) /*0x44730c*/
   {
-    v3 = (TESForm *)OblivionDynamicCast(
-                      i,
-                      0,
-                      (struct _s_RTTICompleteObjectLocator *)&TESObject `RTTI Type Descriptor',
-                      &TESNPC `RTTI Type Descriptor',
-                      0);
-    if ( v3 )
+    v3 = (TESNPC *)OblivionDynamicCast( /*0x44731f*/
+                     i,
+                     0,
+                     (struct _s_RTTICompleteObjectLocator *)&TESObject `RTTI Type Descriptor',
+                     &TESNPC `RTTI Type Descriptor',
+                     0);
+    if ( v3 ) /*0x447329*/
     {
-      if ( ((int)v3[1].member.modlist.data & 0x80) != 0 )
-        sub_5222D0(v3, 0);
+      if ( (v3->member.super.actorBaseData.flags & 0x80) != 0 ) /*0x447334*/
+        TESNPC_RecalculateAutoStats(v3, 0); /*0x44733a*/
     }
-    result = (NiNode *)TESObject_GetNextObject(i);
+    result = (NiNode *)TESObject_GetNextObject(i); /*0x447341*/
   }
-  return result;
+  return result; /*0x44734c*/
 }

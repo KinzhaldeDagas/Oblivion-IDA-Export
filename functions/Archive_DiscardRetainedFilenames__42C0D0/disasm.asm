@@ -6,7 +6,7 @@
 0x42C0E2: test    eax, eax
 0x42C0E4: jz      short loc_42C0EF
 0x42C0E6: push    eax
-0x42C0E7: call    FormHeapFree
+0x42C0E7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x42C0EC: add     esp, 4
 0x42C0EF: cmp     dword ptr [esi+1A4h], 0
 0x42C0F6: mov     dword ptr [esi+1A0h], 0
@@ -17,17 +17,17 @@
 0x42C10A: xor     edi, edi
 0x42C10C: cmp     [esi+164h], edi
 0x42C112: jbe     short loc_42C131
-0x42C114: mov     eax, [esi+1A4h]
+0x42C114: mov     eax, [esi+1A4h]; MEF PLAN 2026-09-07: Revalidated in current authoritative IDB. Filename cleanup iterates exactly owner+164h folderCount slots under nonNULL owner+1A4h and frees every pointer, then frees top array. It does not inspect cached bit20h or track initialized slots. Private builder needsNULL-initialized local slots/explicit initialized count and cannot publish partial arrays; NULL owner pointers make normal failure destruction safe.
 0x42C11A: mov     ecx, [eax+edi*4]
 0x42C11D: push    ecx
-0x42C11E: call    FormHeapFree
+0x42C11E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x42C123: add     edi, 1
 0x42C126: add     esp, 4
 0x42C129: cmp     edi, [esi+164h]
 0x42C12F: jb      short loc_42C114
 0x42C131: mov     edx, [esi+1A4h]
 0x42C137: push    edx
-0x42C138: call    FormHeapFree
+0x42C138: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x42C13D: add     esp, 4
 0x42C140: mov     dword ptr [esi+1A4h], 0
 0x42C14A: pop     edi

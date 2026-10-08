@@ -1,4 +1,4 @@
-0x563D30: mov     eax, [ecx]
+0x563D30: mov     eax, [ecx]; BSTreeNode leaf group visibility toggle. Shows child 1/Leaves when flag is true; hides it when false.
 0x563D32: mov     edx, [eax+0A4h]
 0x563D38: call    edx
 0x563D3A: test    eax, eax

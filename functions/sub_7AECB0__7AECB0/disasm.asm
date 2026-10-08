@@ -1,4 +1,4 @@
-0x7AECB0: push    ebx
+0x7AECB0: push    ebx; Reference-counted NiD3DPass vertex-shader setter. Replaces pass+0x58 and AddRefs the new NiD3DVertexShader.
 0x7AECB1: push    esi
 0x7AECB2: mov     ebx, ecx
 0x7AECB4: mov     esi, [ebx+58h]

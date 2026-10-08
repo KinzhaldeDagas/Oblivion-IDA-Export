@@ -1,4 +1,4 @@
-0x402400: push    esi; dwFreeType
+0x402400: push    esi; Destroys one small allocation pool: releases its 4 KiB pages, removes its registry entry, clears page metadata, frees its table, and deletes its lock.
 0x402401: mov     esi, ecx
 0x402403: mov     eax, [esi+40h]
 0x402406: test    eax, eax
@@ -9,7 +9,7 @@
 0x402412: call    ds:VirtualFree
 0x402418: mov     eax, [esi+100h]
 0x40241E: shr     eax, 2
-0x402421: mov     g_HeapPoolsBySize[eax*4], 0
+0x402421: mov     dword ptr ds:0B33080h[eax*4], 0
 0x40242C: mov     eax, [esi+110h]
 0x402432: mov     ecx, eax
 0x402434: shr     ecx, 18h
@@ -26,7 +26,7 @@
 0x402455: pop     edi
 0x402456: mov     ecx, [esi+108h]
 0x40245C: push    ecx
-0x40245D: call    FormHeapFree
+0x40245D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x402462: add     esp, 4
 0x402465: lea     ecx, [esi+80h]; lpCriticalSection
 0x40246B: pop     esi

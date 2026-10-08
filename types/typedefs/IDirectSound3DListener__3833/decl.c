@@ -1,1 +1,4 @@
-IDirectSound3DListener
+struct IDirectSound3DListener
+{
+const IDirectSound3DListenerVtbl *lpVtbl;
+};

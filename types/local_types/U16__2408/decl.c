@@ -1,1 +1,1 @@
-_U16
+typedef unsigned __int16 _U16;

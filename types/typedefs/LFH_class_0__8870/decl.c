@@ -1,1 +1,1 @@
-LFH_class_0
+typedef LFH_class LFH_class_0;

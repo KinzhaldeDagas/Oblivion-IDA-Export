@@ -1,1 +1,1 @@
-bhkMultiSphereShape
+struct bhkMultiSphereShape;

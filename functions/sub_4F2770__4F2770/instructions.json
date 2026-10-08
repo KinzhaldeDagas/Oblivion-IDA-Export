@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x4F2816",
-    "line": "mov     [esp+3Ch+var_24], eax",
+    "line": "mov     [esp+3Ch+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -337,61 +337,61 @@
   },
   {
     "ea": "0x4F2820",
-    "line": "lea     eax, [esp+3Ch+var_28]",
+    "line": "lea     eax, [esp+3Ch+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4F2824",
-    "line": "push    eax",
+    "line": "push    eax; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F2825",
-    "line": "lea     ecx, [esp+40h+var_20]",
+    "line": "lea     ecx, [esp+40h+keyOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4F2829",
-    "line": "push    ecx",
+    "line": "push    ecx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F282A",
-    "line": "mov     ecx, [edi+30h]",
+    "line": "mov     ecx, [edi+30h]; self",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x4F282D",
-    "line": "lea     edx, [esp+44h+var_24]",
+    "line": "lea     edx, [esp+44h+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4F2831",
-    "line": "push    edx",
+    "line": "push    edx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F2832",
-    "line": "mov     [esp+48h+var_28], ebx",
+    "line": "mov     [esp+48h+valueOut], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4F2836",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4F283B",
-    "line": "mov     ecx, [esp+3Ch+var_28]",
+    "line": "mov     ecx, [esp+3Ch+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x4F2856",
-    "line": "cmp     [esp+3Ch+var_24], ebx",
+    "line": "cmp     [esp+3Ch+position], ebx",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -608,6 +608,60 @@
   {
     "ea": "0x4F28A9",
     "line": "jmp     loc_4F2814",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B6920",
+    "line": "lea     ecx, [ebp-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B6923",
+    "line": "jmp     ??1?$NiTPointerMap@PAVTESObjectCELL@@_N@@UAE@XZ; NiTPointerMap<TESObjectCELL *,bool>::~NiTPointerMap<TESObjectCELL *,bool>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B6928",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B692C",
+    "line": "lea     eax, [edx-2Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B692F",
+    "line": "mov     ecx, [edx-30h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B6932",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B6934",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B6939",
+    "line": "mov     eax, offset stru_AE170C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B693E",
+    "line": "jmp     ___CxxFrameHandler3",
     "mnemonic": "jmp",
     "size": 5
   }

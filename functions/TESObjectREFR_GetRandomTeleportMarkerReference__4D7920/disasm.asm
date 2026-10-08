@@ -1,2 +1,2 @@
-0x4D7920: add     ecx, 44h ; 'D'; this
-0x4D7923: jmp     ExtraDataList__GetRandomTeleportMarker
+0x4D7920: add     ecx, 44h ; 'D'; Verified TESObjectREFR wrapper over ExtraDataList_GetRandomTeleportMarker; this per-reference marker pointer is distinct from the TESObjectDOOR base-form randomTeleport list of eligible space forms.
+0x4D7923: jmp     ExtraDataList__GetRandomTeleportMarker; Verified getter: returns ExtraRandomTeleportMarker.teleportRef from this ExtraDataList, or null if the type-0x43 extra is absent.

@@ -6,7 +6,6 @@
 0x55C907: mov     esi, ecx
 0x55C909: xor     edi, edi
 0x55C90B: jmp     short loc_55C910
-0x55C90D: align 10h
 0x55C910: lea     eax, [edi-8]; switch 9 cases
 0x55C913: cmp     eax, 8
 0x55C916: ja      def_55C923; jumptable 0055C923 default case, cases 12,13
@@ -44,9 +43,9 @@
 0x55C974: add     esp, 10h
 0x55C977: cmp     edi, 8
 0x55C97A: jnz     short loc_55C982
-0x55C97C: fld     dword ptr [esp+1Ch+var_8]
+0x55C97C: fld     [esp+1Ch+var_8]
 0x55C980: jmp     short loc_55C9F6
-0x55C982: fld     dword ptr [esp+1Ch+var_4]
+0x55C982: fld     [esp+1Ch+var_4]
 0x55C986: jmp     short loc_55C9F6
 0x55C988: mov     eax, [esi]; jumptable 0055C923 cases 9,10
 0x55C98A: mov     edx, [eax+9Ch]
@@ -80,7 +79,7 @@
 0x55C9D2: add     esp, 10h
 0x55C9D5: cmp     edi, 9
 0x55C9D8: jnz     short loc_55C982
-0x55C9DA: fld     dword ptr [esp+1Ch+var_8]
+0x55C9DA: fld     [esp+1Ch+var_8]
 0x55C9DE: jmp     short loc_55C9F6
 0x55C9E0: mov     edx, [esi]; jumptable 0055C923 default case, cases 12,13
 0x55C9E2: mov     eax, [edx+9Ch]
@@ -116,9 +115,9 @@
 0x55CA2D: jnz     short loc_55CA42
 0x55CA2F: mov     edx, [ebx]
 0x55CA31: lea     ecx, [ebx+4]
-0x55CA34: push    ecx
-0x55CA35: push    edx
-0x55CA36: call    sub_5508F0
+0x55CA34: push    ecx; vertices
+0x55CA35: push    edx; geometry
+0x55CA36: call    NiGeometry_RestoreFaceGenBaseVertices; Copy authored FaceGen base positions into a writable strided vertex stream and mark only the position channel dirty.
 0x55CA3B: add     esp, 8
 0x55CA3E: mov     byte ptr [ebx+1Ch], 1
 0x55CA42: mov     ecx, [ebx+10h]

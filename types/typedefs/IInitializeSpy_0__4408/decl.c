@@ -1,1 +1,1 @@
-IInitializeSpy_0
+typedef IInitializeSpy IInitializeSpy_0;

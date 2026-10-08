@@ -3,8 +3,8 @@ int __cdecl MagicCaster_GetFromRefID(UInt32 a1)
   TESForm *v1; // eax
   void *v2; // eax
 
-  v1 = TESForm_LookupByFormID(a1);
-  if ( v1
+  v1 = TESForm_LookupByFormID(a1); /*0x6990e5*/
+  if ( v1 /*0x69910a*/
     && (v2 = OblivionDynamicCast(
                v1,
                0,
@@ -12,10 +12,10 @@ int __cdecl MagicCaster_GetFromRefID(UInt32 a1)
                (struct TypeDescriptor *)&TESObjectREFR `RTTI Type Descriptor',
                0)) != 0 )
   {
-    return (*(int (__thiscall **)(void *))(*(_DWORD *)v2 + 0x120))(v2);
+    return (*(int (__thiscall **)(void *))(*(_DWORD *)v2 + 0x120))(v2); /*0x699116*/
   }
   else
   {
-    return MagicCaster_GetFromRefID_::Done();
+    return MagicCaster_GetFromRefID_::Done(); /*0x6990ef*/
   }
 }

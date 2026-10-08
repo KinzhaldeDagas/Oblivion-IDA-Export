@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x525A70",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Reconcile TESNPC FaceGen nodes with actor skin/animation state. If both cached FaceGen node pointers are absent, this routine calls TESRace_CreateFaceGenNodes and attaches the new biped/skinned pair.",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x525AA0",
-    "line": "call    sub_553600",
+    "line": "call    FaceGenManager_GetSingleton",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,19 +253,19 @@
   },
   {
     "ea": "0x525B02",
-    "line": "push    edi",
+    "line": "push    edi; nodeIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x525B03",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x525B05",
-    "line": "call    sub_477EC0",
+    "line": "call    ActorSkinInfo_GetCachedNode; Returns ActorSkinInfo cached node at +8+nodeIndex*8. Index 6 is QuiverNode at +0x38, the native Arrow:0 clone source.",
     "mnemonic": "call",
     "size": 5
   },
@@ -733,19 +733,19 @@
   },
   {
     "ea": "0x525C2C",
-    "line": "mov     ecx, [esp+9Ch+a2]",
+    "line": "mov     ecx, [esp+9Ch+a2]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x525C30",
-    "line": "push    edi",
+    "line": "push    edi; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x525C31",
-    "line": "call    sub_405790",
+    "line": "call    NiNode_GetChildAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -841,7 +841,7 @@
   },
   {
     "ea": "0x525C60",
-    "line": "lea     edx, [esp+9Ch+var_6C]",
+    "line": "lea     edx, [esp+9Ch+slot]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -889,7 +889,7 @@
   },
   {
     "ea": "0x525C7D",
-    "line": "lea     ecx, [esp+9Ch+var_6C]; this",
+    "line": "lea     ecx, [esp+9Ch+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -901,7 +901,7 @@
   },
   {
     "ea": "0x525C89",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -1243,7 +1243,7 @@
   },
   {
     "ea": "0x525D54",
-    "line": "mov     [esp+9Ch+var_6C], eax",
+    "line": "mov     [esp+9Ch+slot], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1255,19 +1255,19 @@
   },
   {
     "ea": "0x525D5E",
-    "line": "mov     ecx, [esp+9Ch+var_84]",
+    "line": "mov     ecx, [esp+9Ch+var_84]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x525D62",
-    "line": "push    eax",
+    "line": "push    eax; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x525D63",
-    "line": "call    sub_405790",
+    "line": "call    NiNode_GetChildAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -1399,7 +1399,7 @@
   },
   {
     "ea": "0x525DB3",
-    "line": "lea     ecx, [esp+9Ch+var_64]; this",
+    "line": "lea     ecx, [esp+9Ch+var_64]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1411,7 +1411,7 @@
   },
   {
     "ea": "0x525DBF",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -1807,7 +1807,7 @@
   },
   {
     "ea": "0x525E97",
-    "line": "lea     ecx, [esp+9Ch+var_60]; this",
+    "line": "lea     ecx, [esp+9Ch+var_60]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1819,7 +1819,7 @@
   },
   {
     "ea": "0x525EA3",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -1867,7 +1867,7 @@
   },
   {
     "ea": "0x525EBE",
-    "line": "mov     eax, [esp+9Ch+var_6C]",
+    "line": "mov     eax, [esp+9Ch+slot]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1885,7 +1885,7 @@
   },
   {
     "ea": "0x525EC9",
-    "line": "mov     [esp+9Ch+var_6C], eax",
+    "line": "mov     [esp+9Ch+slot], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2029,7 +2029,7 @@
   },
   {
     "ea": "0x525F20",
-    "line": "jnz     short loc_525F71",
+    "line": "jnz     short loc_525F71; Both cached TESNPC FaceGen nodes were cleared by RaceSexMenu_RefreshPlayerFace; proceed to native node reconstruction when the race is available.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -2047,7 +2047,7 @@
   },
   {
     "ea": "0x525F27",
-    "line": "mov     ecx, [ebx+0E8h]",
+    "line": "mov     ecx, [ebx+0E8h]; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2065,19 +2065,19 @@
   },
   {
     "ea": "0x525F31",
-    "line": "push    0",
+    "line": "push    0; preferBipedGeometry",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x525F33",
-    "line": "push    0",
+    "line": "push    0; applyAppearance",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x525F35",
-    "line": "push    ebx",
+    "line": "push    ebx; npc",
     "mnemonic": "push",
     "size": 1
   },
@@ -2089,7 +2089,7 @@
   },
   {
     "ea": "0x525F3A",
-    "line": "push    edx",
+    "line": "push    edx; outSkinnedNode",
     "mnemonic": "push",
     "size": 1
   },
@@ -2101,13 +2101,13 @@
   },
   {
     "ea": "0x525F3F",
-    "line": "push    eax",
+    "line": "push    eax; outBipedNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x525F40",
-    "line": "call    sub_52DED0",
+    "line": "call    TESRace_CreateFaceGenNodes; Reconstruct the biped/skinned FaceGen nodes. TESRace_CreateFaceGenNodes reaches BSFaceGen_BuildHeadGeometryNodes and therefore the bFixFaceNormals normal-stitch gate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2647,7 +2647,7 @@
   },
   {
     "ea": "0x52607D",
-    "line": "call    sub_7165B0",
+    "line": "call    sub_7165B0; CustomAnimSupport evidence: queued idle loader controller-manager data attach/bind helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3001,7 +3001,7 @@
   },
   {
     "ea": "0x526144",
-    "line": "call    sub_7165B0",
+    "line": "call    sub_7165B0; CustomAnimSupport evidence: queued idle loader controller-manager data attach/bind helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3229,7 +3229,7 @@
   },
   {
     "ea": "0x5261A8",
-    "line": "lea     ecx, [esp+9Ch+var_70]; this",
+    "line": "lea     ecx, [esp+9Ch+var_70]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3241,13 +3241,13 @@
   },
   {
     "ea": "0x5261B4",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5261B9",
-    "line": "lea     ecx, [esp+9Ch+var_80]; this",
+    "line": "lea     ecx, [esp+9Ch+var_80]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3259,7 +3259,7 @@
   },
   {
     "ea": "0x5261C8",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -3295,7 +3295,7 @@
   },
   {
     "ea": "0x5261D9",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3454,5 +3454,131 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B7F60",
+    "line": "lea     ecx, [ebp-80h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B7F63",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7F68",
+    "line": "lea     ecx, [ebp-70h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B7F6B",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7F70",
+    "line": "lea     ecx, [ebp-54h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B7F73",
+    "line": "jmp     sub_4781A0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7F78",
+    "line": "lea     ecx, [ebp-6Ch]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B7F7B",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7F80",
+    "line": "lea     ecx, [ebp-54h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B7F83",
+    "line": "jmp     sub_4781A0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7F88",
+    "line": "lea     ecx, [ebp-64h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B7F8B",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7F90",
+    "line": "lea     ecx, [ebp-60h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B7F93",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7F98",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B7F9C",
+    "line": "lea     eax, [edx-8Ch]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B7FA2",
+    "line": "mov     ecx, [edx-90h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B7FA8",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B7FAA",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7FAF",
+    "line": "mov     eax, offset stru_AE2748",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7FB4",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

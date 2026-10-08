@@ -1,1 +1,1 @@
-userHMETAFILE
+typedef _userHMETAFILE userHMETAFILE;

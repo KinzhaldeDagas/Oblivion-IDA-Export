@@ -1,1 +1,1 @@
-IRecordInfoVtbl_0
+typedef IRecordInfoVtbl IRecordInfoVtbl_0;

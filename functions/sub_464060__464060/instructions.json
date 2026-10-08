@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x46408A",
-    "line": "call    sub_459570",
+    "line": "call    sub_459570; ContinueFromLastSave fidelity decode: parses vanilla numbered save filename metadata: expects 'Save ' prefix, '-' separator, and 'Playing Time'; extracts save number/display text/time for UI only.",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x46409E",
-    "line": "call    Savegame_Rename",
+    "line": "call    TESSaveLoadGame_ResolveSaveFile",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x4640B4",
-    "line": "call    sub_45DBC0",
+    "line": "call    TESSaveLoadGame_OpenAndValidateSave",
     "mnemonic": "call",
     "size": 5
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x464115",
-    "line": "call    sub_45D5F0",
+    "line": "call    TESSaveLoadGame_ReadSaveHeader",
     "mnemonic": "call",
     "size": 5
   },
@@ -1182,12 +1182,6 @@
     "size": 2
   },
   {
-    "ea": "0x46427D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x464280",
     "line": "mov     dl, [eax]",
     "mnemonic": "mov",
@@ -1426,12 +1420,6 @@
     "line": "jmp     short loc_4642E0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x4642DD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x4642E0",

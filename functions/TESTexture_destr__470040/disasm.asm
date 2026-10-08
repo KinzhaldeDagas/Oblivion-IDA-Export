@@ -3,7 +3,7 @@
 0x470043: mov     dword ptr [esi], offset ??_7TESTexture@@6B@; const TESTexture::`vftable'
 0x470049: mov     eax, [esi+4]
 0x47004C: push    eax
-0x47004D: call    FormHeapFree
+0x47004D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x470052: xor     eax, eax
 0x470054: add     esp, 4
 0x470057: mov     [esi+4], eax

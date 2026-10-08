@@ -1,4 +1,4 @@
-0x616CA0: push    esi
+0x616CA0: push    esi; Applies the CombatController-selected poison item at +0xA4 to the equipped weapon when it has neither poison nor enchantment, removes the consumed poison item, and clears the selection when empty. Private EBP-carried state is preserved in the type.
 0x616CA1: mov     esi, ecx
 0x616CA3: mov     eax, [esi+0A4h]
 0x616CA9: test    eax, eax
@@ -21,8 +21,8 @@
 0x616CD9: xor     edi, edi
 0x616CDB: test    edi, edi
 0x616CDD: jz      loc_616D9E
-0x616CE3: mov     ecx, ebx
-0x616CE5: call    sub_484DF0
+0x616CE3: mov     ecx, ebx; this
+0x616CE5: call    EquippedEntryData_GetPoison; Return the AlchemyItem poison attached to this EntryData's first ExtraDataList stack, or NULL. EntryData layout is extendData@+0, countDelta@+4, type@+8.
 0x616CEA: test    eax, eax
 0x616CEC: jnz     loc_616D9E
 0x616CF2: cmp     [edi+64h], eax
@@ -58,7 +58,7 @@
 0x616D4E: mov     ecx, ebx
 0x616D50: call    sub_484E20
 0x616D55: mov     ecx, [esi+0A4h]
-0x616D5B: call    sub_67F100
+0x616D5B: call    BSSimpleList_PopHeadWithoutPayloadFree; Verified generic BSSimpleList head removal helper: advances the inline first-node header to its successor and frees the detached list node; if there is no successor, clears the head data pointer.
 0x616D60: mov     ecx, [esi+3Ch]
 0x616D63: mov     eax, [ecx]
 0x616D65: mov     edx, [eax+100h]
@@ -77,7 +77,7 @@
 0x616D86: cmp     dword ptr [eax], 0
 0x616D89: jnz     short loc_616D9E
 0x616D8B: push    eax
-0x616D8C: call    FormHeapFree
+0x616D8C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x616D91: add     esp, 4
 0x616D94: mov     dword ptr [esi+0A4h], 0
 0x616D9E: pop     edi

@@ -1,32 +1,25 @@
-unsigned __int8 __thiscall sub_569CF0(char *Src)
+void __thiscall sub_569CF0(char *Src)
 {
-  unsigned __int8 result; // al
+  char v2; // al
   int v3; // esi
-  size_t v4; // [esp-4h] [ebp-Ch]
-  size_t v5; // [esp-4h] [ebp-Ch]
-  size_t v6; // [esp-4h] [ebp-Ch]
-  int v7; // [esp+4h] [ebp-4h] BYREF
+  unsigned int source; // [esp+4h] [ebp-4h] BYREF
 
-  LODWORD(v4) = 1;
-  SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, Src, v4);
-  LODWORD(v5) = 4;
-  SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, Src + 4, v5);
-  result = *Src;
-  if ( *Src >= 0 )
+  SaveLoad_SaveData(g_TESSaveLoadGame, Src, 1u); /*0x569cfd*/
+  SaveLoad_SaveData(g_TESSaveLoadGame, Src + 4, 4u); /*0x569d0e*/
+  v2 = *Src; /*0x569d13*/
+  if ( *Src >= 0 ) /*0x569d17*/
   {
-    if ( (char)result <= 4 )
+    if ( v2 <= 4 ) /*0x569d1b*/
     {
-      v3 = *((_DWORD *)Src + 2);
-      v7 = 0;
-      if ( v3 )
-        v7 = *(_DWORD *)(v3 + 0xC);
-      return SaveLoad_SaveFormID(SaveLoad_CurrentSavegame, (int)&v7, 4u);
+      v3 = *((_DWORD *)Src + 2); /*0x569d35*/
+      source = 0; /*0x569d3a*/
+      if ( v3 ) /*0x569d42*/
+        source = *(_DWORD *)(v3 + 0xC); /*0x569d47*/
+      SaveLoad_SaveFormID(g_TESSaveLoadGame, &source, 4u); /*0x569d58*/
     }
-    else if ( result == 5 )
+    else if ( v2 == 5 ) /*0x569d1f*/
     {
-      LODWORD(v6) = 4;
-      return (unsigned __int8)SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, Src + 8, v6);
+      SaveLoad_SaveData(g_TESSaveLoadGame, Src + 8, 4u); /*0x569d2d*/
     }
   }
-  return result;
 }

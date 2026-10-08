@@ -1,1 +1,1 @@
-IPersistStreamVtbl_0
+typedef IPersistStreamVtbl IPersistStreamVtbl_0;

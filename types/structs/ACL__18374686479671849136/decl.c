@@ -1,1 +1,1 @@
-ACL
+typedef _ACL ACL;

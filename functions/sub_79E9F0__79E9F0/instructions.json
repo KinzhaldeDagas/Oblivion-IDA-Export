@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x79E9F0",
-    "line": "push    ebx",
+    "line": "push    ebx; Insertion-sort cleanup for short SFrondGuide ranges (threshold 32 in the caller). Finds the descending fuzzySurfaceArea insertion point and rotates whole guide ranges to preserve embedded vector ownership.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E9F1",
-    "line": "mov     ebx, [esp+4+arg_0]",
+    "line": "mov     ebx, [esp+4+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x79E9F6",
-    "line": "mov     ebp, [esp+8+arg_4]",
+    "line": "mov     ebp, [esp+8+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -277,25 +277,25 @@
   },
   {
     "ea": "0x79EA56",
-    "line": "push    edi",
+    "line": "push    edi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79EA57",
-    "line": "push    esi",
+    "line": "push    esi; middle",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79EA58",
-    "line": "push    edx",
+    "line": "push    edx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79EA59",
-    "line": "call    sub_79BB20",
+    "line": "call    OB_SFrondGuide_RotateRange_010201A0; Rotates the SFrondGuide range [first,middle) with [middle,last). Uses a greatest-common-divisor cycle decomposition and deep guide movement so embedded vertex-vector ownership remains valid.",
     "mnemonic": "call",
     "size": 5
   },

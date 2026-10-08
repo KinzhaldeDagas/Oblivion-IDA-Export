@@ -47,7 +47,7 @@
 0x49A098: mov     [eax+8], ecx
 0x49A09B: fstp    [esp+1Ch+a2]; a2
 0x49A09E: mov     ecx, [esi+4]; this
-0x49A0A1: call    NiAVObject_UpdateNiAVObject
+0x49A0A1: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x49A0A6: mov     [esi+14h], edi
 0x49A0A9: test    edi, edi
 0x49A0AB: jz      short loc_49A0C6
@@ -63,7 +63,7 @@
 0x49A0C9: mov     esi, [esi+4]
 0x49A0CC: or      word ptr [esi+18h], 1
 0x49A0D1: mov     ecx, ds:0B333C4h; this
-0x49A0D7: call    TESObjectREFR_GetParentCell
+0x49A0D7: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x49A0DC: cmp     eax, edi
 0x49A0DE: jnz     short loc_49A0F5
 0x49A0E0: test    edi, edi

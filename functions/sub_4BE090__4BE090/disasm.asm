@@ -16,10 +16,10 @@
 0x4BE0B9: mov     ebx, [esp+24h+arg_0]
 0x4BE0BD: test    ebx, ebx
 0x4BE0BF: jz      loc_4BE1E0
-0x4BE0C5: mov     edi, [esp+24h+arg_8]
-0x4BE0C9: mov     ebp, [esp+24h+arg_4]
-0x4BE0CD: push    edi; signed int
-0x4BE0CE: push    ebp; signed int
+0x4BE0C5: mov     edi, dword ptr [esp+24h+group_y]
+0x4BE0C9: mov     ebp, [esp+24h+group_x]
+0x4BE0CD: push    edi; cellY
+0x4BE0CE: push    ebp; cellX
 0x4BE0CF: mov     ecx, ebx; this
 0x4BE0D1: call    TESWorldSpace__GetCellAtCellCoord
 0x4BE0D6: mov     esi, eax
@@ -27,7 +27,7 @@
 0x4BE0DA: jz      short loc_4BE115
 0x4BE0DC: mov     ebx, ds:0B333A0h
 0x4BE0E2: mov     ecx, esi; this
-0x4BE0E4: call    TESObjectCELL_IsInterior
+0x4BE0E4: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x4BE0E9: test    al, al
 0x4BE0EB: push    esi; a2
 0x4BE0EC: mov     ecx, ebx; this
@@ -42,10 +42,10 @@
 0x4BE107: call    sub_442740
 0x4BE10C: jmp     loc_4BE1E0
 0x4BE111: mov     ebx, [esp+24h+arg_0]
-0x4BE115: mov     ecx, [esp+24h+var_10]
-0x4BE119: push    edi
-0x4BE11A: push    ebp
-0x4BE11B: call    sub_4BDE80
+0x4BE115: mov     ecx, [esp+24h+var_10]; this
+0x4BE119: push    edi; groupY
+0x4BE11A: push    ebp; groupX
+0x4BE11B: call    DistantLODLoaderTaskMap_HasCellTask; Verified duplicate-cell check: packs exterior coordinates and performs GetAt through map vtable +0x04. Releases the temporary task smart pointer and returns whether that cell already has a DistantLODLoaderTask.
 0x4BE120: test    al, al
 0x4BE122: jnz     loc_4BE1E0
 0x4BE128: push    14h; Size
@@ -75,17 +75,17 @@
 0x4BE16D: lea     eax, [esi+8]
 0x4BE170: push    eax; lpAddend
 0x4BE171: call    dword ptr ds:0A28078h
-0x4BE177: push    edi
-0x4BE178: push    ebp
+0x4BE177: push    edi; group_y
+0x4BE178: push    ebp; group_x
 0x4BE179: mov     [esp+2Ch+var_4], 0
-0x4BE181: call    sub_4EF1D0
+0x4BE181: call    TESObjectCELL_PackExteriorGroupLabel; Verified exact key encoding used by the DistantLOD cell model map: packed label = (signed cellX << 16) | unsigned cellY.
 0x4BE186: add     esp, 8
 0x4BE189: test    esi, esi
 0x4BE18B: push    1
 0x4BE18D: push    ecx
 0x4BE18E: mov     edi, eax
 0x4BE190: mov     eax, esp
-0x4BE192: mov     [esp+2Ch+arg_8], esp
+0x4BE192: mov     dword ptr [esp+2Ch+group_y], esp
 0x4BE196: mov     [eax], esi
 0x4BE198: jz      short loc_4BE1A4
 0x4BE19A: lea     ecx, [esi+8]
@@ -123,3 +123,12 @@
 0x4BE1EF: pop     ebx
 0x4BE1F0: add     esp, 10h
 0x4BE1F3: retn    0Ch
+0x9AC700: lea     ecx, [ebp+4]; void *
+0x9AC703: jmp     sub_4BDDC0
+0x9AC708: mov     edx, [esp+arg_4]
+0x9AC70C: lea     eax, [edx-14h]
+0x9AC70F: mov     ecx, [edx-18h]
+0x9AC712: xor     ecx, eax
+0x9AC714: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AC719: mov     eax, offset stru_AD93CC
+0x9AC71E: jmp     ___CxxFrameHandler3

@@ -203,10 +203,10 @@
 0x7447C8: jz      short loc_7447FF
 0x7447CA: mov     ecx, [eax+10h]
 0x7447CD: mov     edx, [edi+0Ch]
-0x7447D0: push    ebp; Size
-0x7447D1: push    ecx; Src
-0x7447D2: push    edx; Dst
-0x7447D3: call    _memcpy
+0x7447D0: push    ebp; byteCount
+0x7447D1: push    ecx; source
+0x7447D2: push    edx; destination
+0x7447D3: call    _memcpy;
 0x7447D8: mov     eax, [edi+1Ch]
 0x7447DB: add     [edi+0Ch], ebp
 0x7447DE: add     [eax+10h], ebp

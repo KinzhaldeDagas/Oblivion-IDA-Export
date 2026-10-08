@@ -1,4 +1,4 @@
-0x612DE0: push    esi
+0x612DE0: push    esi; Sets CombatController+0x70 active mode (0 H2H, 1 melee weapon, 2 ranged weapon, 3 touch spell, 4 ranged spell, 5 yield, 7 flee, 0xA switch weapon, 0xC leave water) and invalidates desired-distance cache +0x188.
 0x612DE1: mov     esi, [esp+4+arg_0]
 0x612DE5: push    edi
 0x612DE6: mov     edi, ecx

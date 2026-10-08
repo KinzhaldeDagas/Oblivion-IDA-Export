@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x607138",
-    "line": "call    sub_5E6C60",
+    "line": "call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -97,25 +97,25 @@
   },
   {
     "ea": "0x607141",
-    "line": "push    0",
+    "line": "push    0; useBase",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x607143",
-    "line": "push    esi",
+    "line": "push    esi; observer",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x607144",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x607146",
-    "line": "call    sub_605F60",
+    "line": "call    Crime_GetDispositionPenalty",
     "mnemonic": "call",
     "size": 5
   },

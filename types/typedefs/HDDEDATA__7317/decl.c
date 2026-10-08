@@ -1,1 +1,1 @@
-HDDEDATA
+typedef HDDEDATA__ *HDDEDATA;

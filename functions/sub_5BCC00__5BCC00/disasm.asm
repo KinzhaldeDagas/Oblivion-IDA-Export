@@ -33,16 +33,16 @@
 0x5BCC55: call    sub_57EA20
 0x5BCC5A: fld     dword ptr ds:0A379B4h
 0x5BCC60: push    ecx
-0x5BCC61: fstp    [esp+0Ch+a2]; a3
-0x5BCC64: push    0FA1h; a2
+0x5BCC61: fstp    [esp+0Ch+a2]; value
+0x5BCC64: push    0FA1h; propertyCode
 0x5BCC69: mov     ecx, esi; this
-0x5BCC6B: call    Tile_SetFloat
+0x5BCC6B: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5BCC70: fld     dword ptr ds:0A379B4h
 0x5BCC76: push    ecx
-0x5BCC77: fstp    [esp+0Ch+a2]; a3
-0x5BCC7A: push    1772h; a2
+0x5BCC77: fstp    [esp+0Ch+a2]; value
+0x5BCC7A: push    1772h; propertyCode
 0x5BCC7F: mov     ecx, esi; this
-0x5BCC81: call    Tile_SetFloat
+0x5BCC81: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5BCC86: mov     ecx, esi
 0x5BCC88: call    Tile_GetParentMenu
 0x5BCC8D: push    0; float

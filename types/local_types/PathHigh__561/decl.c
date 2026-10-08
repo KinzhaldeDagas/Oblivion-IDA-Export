@@ -1,1 +1,1 @@
-PathHigh
+struct PathHigh;

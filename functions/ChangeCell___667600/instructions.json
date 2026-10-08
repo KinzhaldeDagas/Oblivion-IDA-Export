@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x667638",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x667642",
-    "line": "jz      loc_667BC2",
+    "line": "jz      loc_667BC2; 3DTheft decode: PlayerCharacter::ChangeCell first compares requested newCell with current parent cell; only changed cells enter the body below.",
     "mnemonic": "jz",
     "size": 6
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x66765A",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft hook site: EBX is non-null changed newCell. Mark exact player cell change, then chain to current TESObjectCELL_IsInterior call target.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,13 +247,13 @@
   },
   {
     "ea": "0x667681",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x667683",
-    "line": "call    sub_4CAF90",
+    "line": "call    TESObjectCELL_GetClimate",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x667690",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,13 +301,13 @@
   },
   {
     "ea": "0x667699",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x66769B",
-    "line": "call    sub_4C9820",
+    "line": "call    TESObjectCELL_HasFlag80",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,13 +325,13 @@
   },
   {
     "ea": "0x6676A4",
-    "line": "push    0",
+    "line": "push    0; forceRefresh",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6676A6",
-    "line": "push    esi",
+    "line": "push    esi; climate",
     "mnemonic": "push",
     "size": 1
   },
@@ -343,13 +343,13 @@
   },
   {
     "ea": "0x6676AC",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6676AE",
-    "line": "call    Sky_CreateChildGlobalObjects",
+    "line": "call    Sky_SetClimateAndRefreshChildren; Verified: changed-cell transition obtains destination cell Climate through TESObjectCELL_GetClimate, then calls Sky_SetClimateAndRefreshChildren; this is the runtime bridge from cell/worldspace climate selection into Sky.",
     "mnemonic": "call",
     "size": 5
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x6677AF",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1002,12 +1002,6 @@
     "size": 2
   },
   {
-    "ea": "0x66783A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x667840",
     "line": "mov     edi, [esp+84h+var_70]",
     "mnemonic": "mov",
@@ -1093,19 +1087,19 @@
   },
   {
     "ea": "0x667872",
-    "line": "mov     ecx, [ebx+18h]",
+    "line": "mov     ecx, [ebx+18h]; dataList",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x667875",
-    "line": "push    7",
+    "line": "push    7; dataID",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x667877",
-    "line": "call    sub_4A4460",
+    "line": "call    TESRegion_FindDataByID; Verified: walks TESRegionDataList and returns the element whose virtual GetDataID (+0x0C) equals the requested ID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1417,31 +1411,31 @@
   },
   {
     "ea": "0x66790F",
-    "line": "mov     ecx, [eax+18h]",
+    "line": "mov     ecx, [eax+18h]; dataList",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x667912",
-    "line": "push    3",
+    "line": "push    3; dataID",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x667914",
-    "line": "call    sub_4A4460",
+    "line": "call    TESRegion_FindDataByID; Verified: walks TESRegionDataList and returns the element whose virtual GetDataID (+0x0C) equals the requested ID.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x667919",
-    "line": "mov     ecx, [ebx+18h]",
+    "line": "mov     ecx, [ebx+18h]; dataList",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x66791C",
-    "line": "push    3",
+    "line": "push    3; dataID",
     "mnemonic": "push",
     "size": 2
   },
@@ -1453,7 +1447,7 @@
   },
   {
     "ea": "0x667920",
-    "line": "call    sub_4A4460",
+    "line": "call    TESRegion_FindDataByID; Verified: walks TESRegionDataList and returns the element whose virtual GetDataID (+0x0C) equals the requested ID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2101,7 +2095,7 @@
   },
   {
     "ea": "0x667A93",
-    "line": "call    sub_404C90",
+    "line": "call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2167,19 +2161,19 @@
   },
   {
     "ea": "0x667ABB",
-    "line": "push    4",
+    "line": "push    4; dataID",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x667ABD",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; dataList",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x667ABF",
-    "line": "call    sub_4A4460",
+    "line": "call    TESRegion_FindDataByID; Verified: walks TESRegionDataList and returns the element whose virtual GetDataID (+0x0C) equals the requested ID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2329,7 +2323,7 @@
   },
   {
     "ea": "0x667B13",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2443,7 +2437,7 @@
   },
   {
     "ea": "0x667B5C",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2485,7 +2479,7 @@
   },
   {
     "ea": "0x667B79",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2545,7 +2539,7 @@
   },
   {
     "ea": "0x667B9A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2617,7 +2611,7 @@
   },
   {
     "ea": "0x667BBD",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2674,5 +2668,173 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C3E50",
+    "line": "mov     eax, [ebp+var_60]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3E53",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3E54",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3E59",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3E5A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3E5B",
+    "line": "lea     ecx, [ebp+var_20]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3E5E",
+    "line": "jmp     TESFullName_Initialize",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3E63",
+    "line": "mov     eax, [ebp+var_60]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3E66",
+    "line": "and     eax, 1",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3E69",
+    "line": "jz      locret_9C3E7B",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9C3E6F",
+    "line": "and     [ebp+var_60], 0FFFFFFFEh",
+    "mnemonic": "and",
+    "size": 4
+  },
+  {
+    "ea": "0x9C3E73",
+    "line": "lea     ecx, [ebp+var_2C]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3E76",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3E7B",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3E7C",
+    "line": "mov     eax, [ebp+var_60]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3E7F",
+    "line": "and     eax, 2",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3E82",
+    "line": "jz      locret_9C3E94",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9C3E88",
+    "line": "and     [ebp+var_60], 0FFFFFFFDh",
+    "mnemonic": "and",
+    "size": 4
+  },
+  {
+    "ea": "0x9C3E8C",
+    "line": "lea     ecx, [ebp+var_5C]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3E8F",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3E94",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3E95",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C3E99",
+    "line": "lea     eax, [edx-74h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3E9C",
+    "line": "mov     ecx, [edx-78h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3E9F",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C3EA1",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3EA6",
+    "line": "mov     eax, offset stru_AEC970",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3EAB",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

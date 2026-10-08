@@ -1,4 +1,4 @@
-0x6A34A0: mov     eax, [esp+arg_0]
+0x6A34A0: mov     eax, [esp+target]; Verified shared validity predicate: requires a non-actor MagicTarget and accepts only TESBoundObject base forms that cast to TESObjectDOOR or TESObjectCONT. It occupies slot +0x34 in both OpenEffect_vftable and LockEffect_vftable; Fallout LockEffect has a separately named CheckTarget override.
 0x6A34A4: push    esi
 0x6A34A5: push    0; int
 0x6A34A7: push    offset ??_R0?AVNonActorMagicTarget@@@8; struct TypeDescriptor *

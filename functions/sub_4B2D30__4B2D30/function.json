@@ -1,19 +1,36 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 2,
+  "chunks": [
+    [
+      "0x4B2D30",
+      "0x4B2DF1"
+    ],
+    [
+      "0x9C6200",
+      "0x9C6226"
+    ]
+  ],
+  "chunks_sha256": "fc72eb82d59de999e4b6fc699e91535df676c1f7f626a91cf7c81c06483b8999",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_4B2D30",
+  "comment_repeatable": "[constructor audit] Initializes NiTArray<NiPointer<NiAVObject>>. Capacity0 branch at4B2DD6 writes data=NULL and makes no allocation. Nonzero capacity allocates4+capacity*4 with a count cookie and constructs NiPointer elements; NULL heap result yields data=NULL. Frond group constructor70B780 uses capacity0, so the nonzero allocation branch is not part of that plugin creation path.\nMEF PERF 2026-10-08: PERF-17 layout/init proof: 16-byte strong-pointer array {vtable0,data4,WORD capacity8,usedEndA,occupiedC,growE}. Capacity0 gives dataNULL and zero used/occupied. Nonzero allocates4-byte element-count header plus4*capacity zero-constructed pointer slots. data field corrected to NiAVObject** without changing other layout.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "OB_NiAVObjectPointerArray_ctor_010201A0",
   "end_ea": "0x4B2DF1",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4B2D30",
+  "name": "OB_NiAVObjectPointerArray_ctor_010201A0",
   "segment": ".text",
   "sha256": "844af131a3fa093a3eefd5cac1bf5ff75346d8ae982c72bd9017d11aadf331a3",
   "size": 193,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4B2D30",
-  "type": "_WORD *__thiscall(_WORD *this, unsigned __int16, __int16)",
-  "xrefs_from_count": 75,
+  "total_chunk_size": 231,
+  "type": "void *__thiscall(void *this, unsigned __int16 capacity, unsigned __int16 grow)",
+  "xrefs_from_count": 89,
   "xrefs_to_count": 2
 }

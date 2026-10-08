@@ -22,12 +22,12 @@
 0x61361C: mov     edx, [eax]
 0x61361E: push    eax
 0x61361F: mov     [ecx], edx
-0x613621: call    FormHeapFree
+0x613621: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x613626: add     esp, 4
 0x613629: mov     ecx, esi
 0x61362B: pop     esi
-0x61362C: jmp     sub_6135F0
+0x61362C: jmp     CombatController_GetCurrentTarget
 0x613631: mov     dword ptr [ecx], 0
 0x613637: mov     ecx, esi
 0x613639: pop     esi
-0x61363A: jmp     sub_6135F0
+0x61363A: jmp     CombatController_GetCurrentTarget

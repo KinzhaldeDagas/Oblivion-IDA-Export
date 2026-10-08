@@ -1,76 +1,126 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "DirEntry",
+  "definition": "struct DirEntry\n{\nWCHAR_0 name[32];\nWORD sizeOfNameString;\nBYTE stgType;\nDirRef leftChild;\nDirRef rightChild;\nDirRef dirRootEntry;\nGUID clsid;\nFILETIME ctime;\nFILETIME mtime;\nULONG startingBlock;\n__declspec(align(8)) ULARGE_INTEGER size;\n}\n",
   "id": 18374686479672038512,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "name",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 64
+      "size": 64,
+      "type": "WCHAR_0[32]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "sizeOfNameString",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "stgType",
       "offset": 66,
       "offset_hex": "0x42",
-      "size": 1
+      "size": 1,
+      "type": "BYTE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "leftChild",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 4
+      "size": 4,
+      "type": "DirRef"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "rightChild",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 4
+      "size": 4,
+      "type": "DirRef"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dirRootEntry",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 4
+      "offset_hex": "0x4C",
+      "size": 4,
+      "type": "DirRef"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "clsid",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 16
+      "size": 16,
+      "type": "GUID"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ctime",
       "offset": 96,
       "offset_hex": "0x60",
-      "size": 8
+      "size": 8,
+      "type": "FILETIME"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "mtime",
       "offset": 104,
       "offset_hex": "0x68",
-      "size": 8
+      "size": 8,
+      "type": "FILETIME"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "startingBlock",
       "offset": 112,
       "offset_hex": "0x70",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "size",
       "offset": 120,
       "offset_hex": "0x78",
-      "size": 8
+      "size": 8,
+      "type": "ULARGE_INTEGER"
     }
   ],
   "name": "DirEntry",
+  "ordinal": 5304,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 128
 }

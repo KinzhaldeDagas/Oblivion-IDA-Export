@@ -17,6 +17,6 @@
 0x4523DB: push    ecx
 0x4523DC: fstp    [esp+4+var_4]; float
 0x4523DF: push    edx; int
-0x4523E0: call    sub_57B950
+0x4523E0: call    sub_57B950; Fast-travel UI/progress update helper called once per simulated travel-time step before relocation.
 0x4523E5: add     esp, 8
 0x4523E8: retn    8

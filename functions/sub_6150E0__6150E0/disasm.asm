@@ -3,17 +3,17 @@
 0x6150E6: push    ebx
 0x6150E7: mov     ebx, ecx
 0x6150E9: jnz     short loc_61512E
-0x6150EB: call    sub_6135F0
+0x6150EB: call    CombatController_GetCurrentTarget
 0x6150F0: test    eax, eax
 0x6150F2: jz      short loc_61511E
 0x6150F4: mov     ecx, ebx
-0x6150F6: call    sub_6135F0
-0x6150FB: mov     ecx, eax
-0x6150FD: call    Actor_IsSwimming
+0x6150F6: call    CombatController_GetCurrentTarget
+0x6150FB: mov     ecx, eax; this
+0x6150FD: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x615102: test    al, al
 0x615104: jz      short loc_61511E
-0x615106: mov     ecx, [ebx+3Ch]
-0x615109: call    Actor_IsSwimming
+0x615106: mov     ecx, [ebx+3Ch]; this
+0x615109: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x61510E: test    al, al
 0x615110: jnz     short loc_61511E
 0x615112: mov     ecx, [ebx+3Ch]
@@ -38,7 +38,7 @@
 0x615145: mov     eax, [ecx+4]
 0x615148: mov     ecx, ebx
 0x61514A: mov     [esp+8+arg_0], eax
-0x61514E: call    sub_614290
+0x61514E: call    CombatController_CanReachCurrentTarget; Returns current-target reachability at +0x174, additionally forcing false when a non-water-capable actor cannot fight a swimming target.
 0x615153: test    al, al
 0x615155: jnz     short loc_61517E
 0x615157: fild    [esp+8+arg_0]
@@ -49,7 +49,7 @@
 0x61516A: fstp    [esp+0Ch+var_C]; float
 0x61516D: call    sub_484370
 0x615172: add     esp, 4
-0x615175: call    Double_To_SInt32
+0x615175: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x61517A: mov     [esp+8+arg_0], eax
 0x61517E: cmp     byte ptr [ebx+158h], 0
 0x615185: jnz     short loc_6151AE
@@ -61,7 +61,7 @@
 0x61519A: fstp    [esp+0Ch+var_C]; float
 0x61519D: call    sub_484370
 0x6151A2: add     esp, 4
-0x6151A5: call    Double_To_SInt32
+0x6151A5: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x6151AA: mov     [esp+8+arg_0], eax
 0x6151AE: mov     ecx, [ebx+40h]
 0x6151B1: mov     ecx, [ecx+4]

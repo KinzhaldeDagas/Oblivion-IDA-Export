@@ -1,4 +1,4 @@
-char *sub_708E30()
+NiRTTI *sub_708E30()
 {
-  return dword_B3FA88;
+  return &stru_B3FA88; /*0x708e35*/
 }

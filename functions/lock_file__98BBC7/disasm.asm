@@ -2,7 +2,7 @@
 0x98BBCB: mov     ecx, offset off_B30E28
 0x98BBD0: cmp     eax, ecx
 0x98BBD2: jb      short loc_98BBEB
-0x98BBD4: cmp     eax, offset unk_B31088
+0x98BBD4: cmp     eax, offset stru_B31088
 0x98BBD9: ja      short loc_98BBEB
 0x98BBDB: sub     eax, ecx
 0x98BBDD: sar     eax, 5

@@ -1,1 +1,1 @@
-NiTextureEffect
+struct NiTextureEffect;

@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x6EBA60",
-    "line": "push    esi",
+    "line": "push    esi; Default range clone: clone through the NiObject pointer map, then invoke the clone's post-clone/collapse virtual. Subclasses override when authored data must be sliced.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6EBA61",
-    "line": "call    sub_700900",
+    "line": "call    NiObject_CloneWithPointerMap; Clones a loaded NiObject with a temporary pointer map and runs clone post-processing; the returned scene object is distinct from its source.",
     "mnemonic": "call",
     "size": 5
   },

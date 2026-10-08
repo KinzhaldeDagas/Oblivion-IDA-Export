@@ -1,1 +1,1 @@
-DISPID
+typedef LONG DISPID;

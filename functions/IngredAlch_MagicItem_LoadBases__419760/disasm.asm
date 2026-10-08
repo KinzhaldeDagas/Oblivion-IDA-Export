@@ -14,7 +14,7 @@
 0x41978D: lea     eax, [esp+4+arg_4]
 0x419791: push    eax
 0x419792: mov     [esp+8+arg_4], 0
-0x41979A: call    TESFile_GetChunkData4
+0x41979A: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x41979F: mov     ecx, [esp+4+arg_4]
 0x4197A3: lea     edx, [esi-24h]
 0x4197A6: mov     [esi+44h], ecx
@@ -28,7 +28,7 @@
 0x4197BC: push    0; Dst
 0x4197BE: push    eax; a2
 0x4197BF: lea     ecx, [esi-24h]; this
-0x4197C2: call    TESForm_LoadGenericComponents
+0x4197C2: call    TESForm_LoadGenericComponents; Generic fixed-prefix/component DATA overlay. Copies min(chunk_length,fixed_prefix_size), then updates later components only when their starting offset is below chunk_length; omitted suffix components retain prior in-memory values.
 0x4197C7: pop     esi
 0x4197C8: retn    8
 0x4197CB: cmp     eax, 4E4F4349h

@@ -65,7 +65,7 @@
 0x5E0959: call    edx
 0x5E095B: cmp     esi, ds:0B333C4h
 0x5E0961: jnz     short loc_5E0968
-0x5E0963: call    sub_5C1900
+0x5E0963: call    PlayerCharacter_ReconcileHotkeysAfterInventoryRemoval
 0x5E0968: mov     al, bl
 0x5E096A: pop     ebx
 0x5E096B: pop     edi

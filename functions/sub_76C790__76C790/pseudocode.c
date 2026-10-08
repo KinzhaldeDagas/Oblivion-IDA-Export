@@ -1,4 +1,4 @@
-void *sub_76C790()
+NiRTTI *sub_76C790()
 {
-  return &ImageSpaceShaderRTTI___;
+  return &MEMORY[0xB4257C]; /*0x76c795*/
 }

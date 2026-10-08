@@ -20,7 +20,6 @@
 0x6C4C55: cmp     [ebx+46h], bp
 0x6C4C59: jbe     short loc_6C4C8A
 0x6C4C5B: jmp     short loc_6C4C60
-0x6C4C5D: align 10h
 0x6C4C60: mov     eax, [ebx+40h]
 0x6C4C63: mov     esi, [eax+ebp*4]
 0x6C4C66: test    esi, esi
@@ -134,3 +133,12 @@
 0x6C4D8B: mov     ecx, edi
 0x6C4D8D: call    edx
 0x6C4D8F: jmp     loc_6C4D05
+0x9D6B00: lea     ecx, [ebp-10h]; slot
+0x9D6B03: jmp     NiPointerSlot_Release
+0x9D6B08: mov     edx, [esp+arg_4]
+0x9D6B0C: lea     eax, [edx-1Ch]
+0x9D6B0F: mov     ecx, [edx-20h]
+0x9D6B12: xor     ecx, eax
+0x9D6B14: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D6B19: mov     eax, offset stru_AFE864
+0x9D6B1E: jmp     ___CxxFrameHandler3

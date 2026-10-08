@@ -35,16 +35,16 @@
 0x69BADE: fmul    [esp+2Ch+arg_20]
 0x69BAE2: push    2
 0x69BAE4: fstp    [esp+30h+var_14]
-0x69BAE8: call    EffectItemList_GetStrongestItem
-0x69BAED: mov     edx, [esp+28h+arg_8]
+0x69BAE8: call    EffectItemList_GetStrongestItem; this=EffectItemList; args are rangeFilter (0 self,1 touch,2 target,3 any) and requireArea. Returns effective (flag 0x400000 clear) qualifying item with greatest truncated MagickaCostForCaster(item,null).
+0x69BAED: mov     edx, dword ptr [esp+28h+arg_4+4]
 0x69BAF1: lea     ecx, [esp+28h+var_8]
 0x69BAF5: push    ecx
-0x69BAF6: mov     ecx, [esp+2Ch+arg_C]
+0x69BAF6: mov     ecx, dword ptr [esp+2Ch+arg_C]
 0x69BAFA: sub     esp, 0Ch
 0x69BAFD: mov     esi, eax
 0x69BAFF: mov     eax, esp
 0x69BB01: mov     [eax], edx
-0x69BB03: mov     edx, [esp+38h+arg_10]
+0x69BB03: mov     edx, dword ptr [esp+38h+arg_C+4]
 0x69BB07: mov     [eax+4], ecx
 0x69BB0A: push    2; float
 0x69BB0C: push    ebp; int
@@ -157,12 +157,12 @@
 0x69BC47: push    1
 0x69BC49: lea     ecx, [ebp+0Ch]
 0x69BC4C: mov     byte ptr [esp+30h+arg_0], 1
-0x69BC51: add     edi, 39Ch
+0x69BC51: add     edi, 39Ch; Advance the caster/player vtable pointer to Player_ModExperience (+0x39C) before resolving the target-effect school.
 0x69BC57: call    EffectItemList_GetSchoolAV
 0x69BC5C: mov     ecx, [esp+30h+var_10]
 0x69BC60: mov     edx, [edi]
 0x69BC62: push    eax
-0x69BC63: call    edx
+0x69BC63: call    edx; Eligible target-effect hit: resolved school AV, useValue1, identity scale (0.0).
 0x69BC65: mov     edi, [esp+28h+arg_18]
 0x69BC69: mov     eax, [edi]
 0x69BC6B: mov     edx, [eax+124h]
@@ -181,17 +181,17 @@
 0x69BC94: mov     ecx, [esp+30h+arg_14]
 0x69BC98: lea     edx, [esp+30h+var_8]
 0x69BC9C: push    edx; int
-0x69BC9D: mov     edx, [esp+34h+arg_8]
+0x69BC9D: mov     edx, dword ptr [esp+34h+arg_4+4]
 0x69BCA1: push    ecx; int
-0x69BCA2: mov     ecx, [esp+38h+arg_C]
+0x69BCA2: mov     ecx, dword ptr [esp+38h+arg_C]
 0x69BCA6: push    eax; int
 0x69BCA7: sub     esp, 0Ch
 0x69BCAA: mov     eax, esp
 0x69BCAC: mov     [eax], edx
-0x69BCAE: mov     edx, [esp+48h+arg_10]
+0x69BCAE: mov     edx, dword ptr [esp+48h+arg_C+4]
 0x69BCB2: mov     [eax+4], ecx
 0x69BCB5: mov     [eax+8], edx
-0x69BCB8: mov     eax, [esp+48h+arg_4]
+0x69BCB8: mov     eax, dword ptr [esp+48h+arg_4]
 0x69BCBC: push    eax; int
 0x69BCBD: push    esi; int
 0x69BCBE: push    ebp; int
@@ -225,28 +225,28 @@
 0x69BD11: push    2
 0x69BD13: lea     ecx, [ebp+0Ch]
 0x69BD16: setz    byte ptr [esp+30h+arg_18]
-0x69BD1B: call    EffectItemList_GetStrongestItem
+0x69BD1B: call    EffectItemList_GetStrongestItem; this=EffectItemList; args are rangeFilter (0 self,1 touch,2 target,3 any) and requireArea. Returns effective (flag 0x400000 clear) qualifying item with greatest truncated MagickaCostForCaster(item,null).
 0x69BD20: cmp     byte ptr [esp+28h+arg_18], 0
 0x69BD25: jnz     loc_69BDD2
 0x69BD2B: test    eax, eax
 0x69BD2D: jz      short loc_69BD6F
 0x69BD2F: fld     [esp+28h+arg_24]
-0x69BD33: mov     edx, [esp+28h+arg_4]
+0x69BD33: mov     edx, dword ptr [esp+28h+arg_4]
 0x69BD37: sub     esp, 8
 0x69BD3A: fstp    [esp+30h+var_2C]; float
 0x69BD3E: lea     ecx, [esp+30h+var_8]
 0x69BD42: fld     [esp+30h+arg_20]
-0x69BD46: fstp    [esp+30h+var_30]; float
+0x69BD46: fstp    dword ptr [esp+30h+var_34+4]; float
 0x69BD49: push    ecx; int
-0x69BD4A: mov     ecx, [esp+34h+arg_8]
+0x69BD4A: mov     ecx, dword ptr [esp+34h+arg_4+4]
 0x69BD4E: push    eax; int
 0x69BD4F: push    ebp; int
 0x69BD50: push    edx; int
-0x69BD51: mov     edx, [esp+40h+arg_C]
+0x69BD51: mov     edx, dword ptr [esp+40h+arg_C]
 0x69BD55: sub     esp, 0Ch
 0x69BD58: mov     eax, esp
 0x69BD5A: mov     [eax], ecx
-0x69BD5C: mov     ecx, [esp+4Ch+arg_10]
+0x69BD5C: mov     ecx, dword ptr [esp+4Ch+arg_C+4]
 0x69BD60: mov     [eax+4], edx
 0x69BD63: mov     [eax+8], ecx
 0x69BD66: mov     ecx, ebx
@@ -276,15 +276,15 @@
 0x69BDA3: jz      short loc_69BDD2
 0x69BDA5: mov     ecx, esi
 0x69BDA7: call    EffectItem_MagickaCost
-0x69BDAC: mov     edx, [esp+28h+arg_C]
+0x69BDAC: mov     edx, dword ptr [esp+28h+arg_C]
 0x69BDB0: push    ecx
-0x69BDB1: mov     ecx, [esp+2Ch+arg_8]
+0x69BDB1: mov     ecx, dword ptr [esp+2Ch+arg_4+4]
 0x69BDB5: fstp    [esp+2Ch+var_2C]; float
 0x69BDB8: push    esi; int
 0x69BDB9: sub     esp, 0Ch
 0x69BDBC: mov     eax, esp
 0x69BDBE: mov     [eax], ecx
-0x69BDC0: mov     ecx, [esp+3Ch+arg_10]
+0x69BDC0: mov     ecx, dword ptr [esp+3Ch+arg_C+4]
 0x69BDC4: mov     [eax+4], edx
 0x69BDC7: mov     [eax+8], ecx
 0x69BDCA: push    edi; int
@@ -296,7 +296,7 @@
 0x69BDDA: lea     ebx, [ebx+0]
 0x69BDE0: mov     esi, [eax+4]
 0x69BDE3: push    eax
-0x69BDE4: call    FormHeapFree
+0x69BDE4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x69BDE9: add     esp, 4
 0x69BDEC: test    esi, esi
 0x69BDEE: mov     eax, esi

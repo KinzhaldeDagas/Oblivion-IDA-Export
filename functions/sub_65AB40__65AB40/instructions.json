@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x65AB40",
-    "line": "push    ecx",
+    "line": "push    ecx; TES4 authoritative: actor jump entry. Computes jump height from fJumpHeightMin/Max and proxy +0x310 scalar, then sub_890700 sets state=1 Jumping and jump impulse at +0x31C.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x65AB42",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x65AB75",
-    "line": "call    sub_890700",
+    "line": "call    sub_890700; MorrowindMovements jump correction source: vanilla jump setup writes state 1 Jumping and stores jump-height impulse at proxy+0x31C after hkFactor scaling.",
     "mnemonic": "call",
     "size": 5
   },

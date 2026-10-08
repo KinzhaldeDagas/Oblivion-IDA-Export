@@ -7,7 +7,6 @@
 0x734A1F: mov     eax, [esp+8+arg_4]
 0x734A23: mov     edx, [esp+8+arg_0]
 0x734A27: jmp     short loc_734A30
-0x734A29: align 10h
 0x734A30: movzx   ecx, byte ptr [edx+2]
 0x734A34: mov     [eax], cl
 0x734A36: movzx   ecx, byte ptr [edx+1]

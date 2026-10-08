@@ -22,7 +22,7 @@
 0x901F65: push    ebx
 0x901F66: call    dword ptr [edx+24h]
 0x901F69: movaps  xmm2, xmmword ptr [ebx]
-0x901F6C: movaps  xmm1, [esp+30h+var_18+8]
+0x901F6C: movaps  xmm1, xmmword ptr [esp+30h+var_18+8]
 0x901F71: movaps  xmm0, xmm1
 0x901F74: mulps   xmm0, xmm2
 0x901F77: movaps  xmm2, xmm0

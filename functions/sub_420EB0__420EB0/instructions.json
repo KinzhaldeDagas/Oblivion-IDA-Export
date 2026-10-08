@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x420EB0",
-    "line": "push    4Eh ; 'N'; a2",
+    "line": "push    4Eh ; 'N'; Removes the friend-hit list entry whose actor pointer matches the supplied actor.",
     "mnemonic": "push",
     "size": 2
   },
@@ -40,5 +40,125 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x42AFC0",
+    "line": "mov     ecx, [ecx+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x42AFC3",
+    "line": "mov     eax, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x42AFC5",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x42AFC7",
+    "line": "jz      short locret_42AFE2",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x42AFC9",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x42AFCA",
+    "line": "mov     esi, [esp+4+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x42AFCE",
+    "line": "mov     edi, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x42AFD0",
+    "line": "mov     edx, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x42AFD2",
+    "line": "test    edx, edx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x42AFD4",
+    "line": "jz      short loc_42AFE1",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x42AFD6",
+    "line": "cmp     [edx], esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x42AFD8",
+    "line": "jz      short loc_42AFE5",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x42AFDA",
+    "line": "mov     eax, [eax+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x42AFDD",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x42AFDF",
+    "line": "jnz     short loc_42AFD0",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x42AFE1",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x42AFE2",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x42AFE5",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x42AFE6",
+    "line": "mov     [esp+arg_0], edx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x42AFEA",
+    "line": "jmp     BSSimpleList_Remove",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

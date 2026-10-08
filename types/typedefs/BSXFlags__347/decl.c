@@ -1,1 +1,1 @@
-BSXFlags
+struct BSXFlags;

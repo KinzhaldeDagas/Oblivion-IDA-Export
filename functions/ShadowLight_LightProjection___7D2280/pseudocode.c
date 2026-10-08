@@ -1,4 +1,6 @@
-int __fastcall ShadowLight_LightProjection_(int a1, _DWORD *a2, float a3, int a4, int a5, int a6)
+//
+// [2026-10-03 live caster identification] 14:22 bounds observer confirms first invalid lookup at call17 is Daedroth reference00028F5E/base00028F5D, null BBX, zero restored-frond records/attachments. See comment at7D22D5. Immediate cause is now proven null dereference rather than merely candidate stale pointer. This does not itself define a safe native fallback for missing creature BSBound data.
+int __fastcall ShadowLight_LightProjection_(int a1, _DWORD *a2, _DWORD *a3, int a4, int a5, int a6)
 {
   float v7; // ebx
   NiExtraData *ExtraData; // eax
@@ -32,13 +34,13 @@ int __fastcall ShadowLight_LightProjection_(int a1, _DWORD *a2, float a3, int a4
   void (__thiscall ***v36)(_DWORD, int); // esi
   double v37; // st7
   int v38; // eax
-  int v39; // eax
+  unsigned int v39; // eax
   _DWORD *v40; // eax
   float v41; // ecx
   float v42; // eax
   float v43; // ecx
   float v44; // edx
-  int v45; // eax
+  float v45; // eax
   _DWORD *v46; // eax
   _DWORD *v47; // eax
   _DWORD *v48; // edi
@@ -64,7 +66,7 @@ int __fastcall ShadowLight_LightProjection_(int a1, _DWORD *a2, float a3, int a4
   float v68; // edx
   float v69; // eax
   float v70; // edi
-  int v71; // eax
+  unsigned int v71; // eax
   _DWORD *v72; // eax
   double v73; // st7
   double v74; // st6
@@ -141,403 +143,403 @@ int __fastcall ShadowLight_LightProjection_(int a1, _DWORD *a2, float a3, int a4
   float v145; // [esp+110h] [ebp-10h]
   int v146; // [esp+11Ch] [ebp-4h]
 
-  v107 = *(float *)&a1;
-  v7 = 0.0;
-  v96 = 0.0;
-  ExtraData = NiObjectNET_GetExtraData(*(NiObjectNET **)(a1 + 0x130), (const char *)&off_A7D2CC);
-  v9 = *(float **)(a1 + 0x130);
-  v10 = v9[0x22] + *(float *)&ExtraData[1].__vftable;
-  v112 = *(float *)&ExtraData[2].member.super.m_uiRefCount;
-  v129 = v10;
-  v127 = *(float *)&ExtraData[1].member.super.m_uiRefCount + v9[0x23];
-  v11 = *(float *)&ExtraData[1].member.m_pcName + v9[0x24];
-  v12 = *(float *)&ExtraData[2].__vftable;
-  m_pcName = ExtraData[2].member.m_pcName;
-  v111 = v12;
-  v125 = v11;
-  v113 = *(float *)&m_pcName;
-  if ( v112 >= (double)v12 )
+  v107 = *(float *)&a1; /*0x7d22af*/
+  v7 = 0.0; /*0x7d22b3*/
+  v96 = 0.0; /*0x7d22b5*/
+  ExtraData = NiObjectNET_GetExtraData(*(NiObjectNET **)(a1 + 0x130), (const char *)&off_A7D2CC);// Native projection requests BBX extra data from the exact caster root at +0x130; the following retail path assumes the bound object is present. /*0x7d22c4*/
+  v9 = *(float **)(a1 + 0x130); /*0x7d22c9*/
+  v10 = v9[0x22] + *(float *)&ExtraData[1].__vftable; /*0x7d22d8*/
+  v112 = *(float *)&ExtraData[2].member.super.m_uiRefCount; /*0x7d22db*/
+  v129 = v10; /*0x7d22df*/
+  v127 = *(float *)&ExtraData[1].member.super.m_uiRefCount + v9[0x23]; /*0x7d22ef*/
+  v11 = *(float *)&ExtraData[1].member.m_pcName + v9[0x24]; /*0x7d22f9*/
+  v12 = *(float *)&ExtraData[2].__vftable; /*0x7d22ff*/
+  m_pcName = ExtraData[2].member.m_pcName; /*0x7d2302*/
+  v111 = v12; /*0x7d2305*/
+  v125 = v11; /*0x7d2309*/
+  v113 = *(float *)&m_pcName; /*0x7d2310*/
+  if ( v112 >= (double)v12 ) /*0x7d2323*/
   {
-    *(float *)&v97 = v112;
-    v14 = v12;
-    v15 = v112;
+    *(float *)&v97 = v112; /*0x7d232d*/
+    v14 = v12; /*0x7d2331*/
+    v15 = v112; /*0x7d2331*/
   }
   else
   {
-    v14 = v12;
-    v15 = v112;
-    *(float *)&v97 = v12;
+    v14 = v12; /*0x7d2325*/
+    v15 = v112; /*0x7d2325*/
+    *(float *)&v97 = v12; /*0x7d2327*/
   }
-  if ( v113 >= (double)*(float *)&v97 )
+  if ( v113 >= (double)*(float *)&v97 ) /*0x7d2344*/
   {
-    v14 = v113;
-    goto LABEL_8;
+    v14 = v113; /*0x7d2355*/
+    goto LABEL_8; /*0x7d2355*/
   }
-  if ( v14 > v15 )
+  if ( v14 > v15 ) /*0x7d234f*/
 LABEL_8:
-    v15 = v14;
-  v99 = v15;
-  v16 = 0;
-  v103 = 0;
-  v104 = 0;
-  if ( a3 == 0.0 )
+    v15 = v14; /*0x7d2357*/
+  v99 = v15; /*0x7d2359*/
+  v16 = 0; /*0x7d2364*/
+  v103 = 0; /*0x7d2368*/
+  v104 = 0; /*0x7d236c*/
+  if ( *(float *)&a3 == 0.0 ) /*0x7d2370*/
   {
-    ShadowSceneNode = (_DWORD *)GetShadowSceneNode(0);
-    v19 = sub_7C62D0(ShadowSceneNode, 0);
-    if ( v19 )
+    ShadowSceneNode = (_DWORD *)GetShadowSceneNode(0); /*0x7d238d*/
+    v19 = ShadowSceneLight_GetObjectGeometryAtIndex(ShadowSceneNode, 0); /*0x7d2397*/
+    if ( v19 ) /*0x7d239e*/
     {
-      do
+      do /*0x7d23be*/
       {
-        if ( !*(_BYTE *)(v19 + 0xF4) )
-          ++v16;
-        v20 = (_DWORD *)GetShadowSceneNode(0);
-        v19 = sub_7C62D0(v20, v16);
+        if ( !*(_BYTE *)(v19 + 0xF4) ) /*0x7d23a0*/
+          ++v16; /*0x7d23a8*/
+        v20 = (_DWORD *)GetShadowSceneNode(0); /*0x7d23ad*/
+        v19 = ShadowSceneLight_GetObjectGeometryAtIndex(v20, v16); /*0x7d23b7*/
       }
-      while ( v19 );
-      v104 = v16;
+      while ( v19 ); /*0x7d23be*/
+      v104 = v16; /*0x7d23c0*/
     }
-    v103 = 0;
-    v21 = (_DWORD *)GetShadowSceneNode(0);
-    v17 = (_DWORD *)sub_7C62D0(v21, 0);
+    v103 = 0; /*0x7d23c6*/
+    v21 = (_DWORD *)GetShadowSceneNode(0); /*0x7d23ca*/
+    v17 = (_DWORD *)ShadowSceneLight_GetObjectGeometryAtIndex(v21, 0); /*0x7d23d9*/
   }
   else
   {
-    v17 = sub_7ED1A0((_DWORD *)LODWORD(a3));
-    v16 = (unsigned __int16)sub_7ED5D0((_DWORD *)LODWORD(a3));
-    v104 = v16;
+    v17 = BSShaderLightingProperty__GetFirstActiveNonShadowLight(a3); /*0x7d237b*/
+    v16 = (unsigned __int16)OB_BSShaderProperty_CountPassListEntriesWithMarker_010201A0(a3); /*0x7d2382*/
+    v104 = v16; /*0x7d2385*/
   }
-  if ( v16 >= 0x28 )
+  if ( v16 >= 0x28 ) /*0x7d23de*/
   {
-    v16 = 0x28;
-    v104 = 0x28;
+    v16 = 0x28; /*0x7d23e0*/
+    v104 = 0x28; /*0x7d23e5*/
   }
-  v22 = InterlockedDecrement;
-  v114 = 0.0;
-  *(float *)&v97 = 0.0;
-  if ( v16 > 0 )
+  v22 = InterlockedDecrement; /*0x7d23ed*/
+  v114 = 0.0; /*0x7d23f3*/
+  *(float *)&v97 = 0.0; /*0x7d23f7*/
+  if ( v16 > 0 ) /*0x7d23fb*/
   {
-    do
+    do /*0x7d2727*/
     {
-      if ( v17 )
+      if ( v17 ) /*0x7d2403*/
       {
-        v23 = (float *)*sub_405AD0(v17, &v144);
-        v96 = v23[0x22] - v129;
-        v145 = v23[0x23] - v127;
-        v95 = v23[0x24] - v125;
-        if ( v144 )
+        v23 = (float *)*ShadowSceneLight_GetLightRef(v17, &v144); /*0x7d2418*/
+        v96 = v23[0x22] - v129; /*0x7d2427*/
+        v145 = v23[0x23] - v127; /*0x7d2438*/
+        v95 = v23[0x24] - v125; /*0x7d2455*/
+        if ( v144 ) /*0x7d2459*/
         {
-          v24 = (void (__thiscall ***)(_DWORD, int))v144;
-          if ( !v22((volatile LONG *)(v144 + 4)) )
-            (**v24)(v24, 1);
+          v24 = (void (__thiscall ***)(_DWORD, int))v144; /*0x7d245b*/
+          if ( !v22((volatile LONG *)(v144 + 4)) ) /*0x7d2461*/
+            (**v24)(v24, 1); /*0x7d2473*/
         }
-        v25 = sub_405AD0(v17, &v126);
-        v146 = 0;
-        v96 = v96 * v96 + v145 * v145 + v95 * v95;
-        v95 = sqrt(v96);
-        if ( 1.0 - (v95 - v99) / *(float *)(*v25 + 0xF8) < dbl_A2FC68
-          || (v26 = sub_405AD0(v17, &v118),
+        v25 = ShadowSceneLight_GetLightRef(v17, &v126); /*0x7d247f*/
+        v146 = 0; /*0x7d2491*/
+        v96 = v96 * v96 + v145 * v145 + v95 * v95; /*0x7d24b0*/
+        v95 = sqrt(v96); /*0x7d24c5*/
+        if ( 1.0 - (v95 - v99) / *(float *)(*v25 + 0xF8) < dbl_A2FC68 /*0x7d2547*/
+          || (v26 = ShadowSceneLight_GetLightRef(v17, &v118),
               LOBYTE(v146) = 1,
               LODWORD(v7) |= 1u,
               v95 = sqrt(v96),
               v27 = 1.0,
               1.0 - (v95 - v99) / *(float *)(*v26 + 0xF8) <= 1.0) )
         {
-          v28 = sub_405AD0(v17, &v128);
-          v146 = 2;
-          LODWORD(v7) |= 2u;
-          v95 = sqrt(v96);
-          v29 = 1.0 - (v95 - v99) / *(float *)(*v28 + 0xF8);
-          v30 = v29 > 0.0;
-          v31 = 0.0 == v29;
-          v27 = 0.0;
-          if ( v30 || v31 )
+          v28 = ShadowSceneLight_GetLightRef(v17, &v128); /*0x7d2559*/
+          v146 = 2; /*0x7d2568*/
+          LODWORD(v7) |= 2u; /*0x7d2577*/
+          v95 = sqrt(v96); /*0x7d257f*/
+          v29 = 1.0 - (v95 - v99) / *(float *)(*v28 + 0xF8); /*0x7d259d*/
+          v30 = v29 > 0.0; /*0x7d25a1*/
+          v31 = 0.0 == v29; /*0x7d25a1*/
+          v27 = 0.0; /*0x7d25a5*/
+          if ( v30 || v31 ) /*0x7d25a7*/
           {
-            v32 = sub_405AD0(v17, &v98);
-            LODWORD(v7) |= 4u;
-            v95 = sqrt(v96);
-            v27 = 1.0 - (v95 - v99) / *(float *)(*v32 + 0xF8);
+            v32 = ShadowSceneLight_GetLightRef(v17, &v98); /*0x7d25b5*/
+            LODWORD(v7) |= 4u; /*0x7d25c8*/
+            v95 = sqrt(v96); /*0x7d25d0*/
+            v27 = 1.0 - (v95 - v99) / *(float *)(*v32 + 0xF8); /*0x7d25ee*/
           }
         }
-        v95 = v27;
-        if ( (LOBYTE(v7) & 4) != 0 )
+        v95 = v27; /*0x7d25f3*/
+        if ( (LOBYTE(v7) & 4) != 0 ) /*0x7d25f7*/
         {
-          LODWORD(v7) &= ~4u;
-          v96 = v7;
-          if ( v98 != 0.0 )
+          LODWORD(v7) &= ~4u; /*0x7d25fd*/
+          v96 = v7; /*0x7d2602*/
+          if ( v98 != 0.0 ) /*0x7d2606*/
           {
-            v33 = v98;
-            if ( !v22((volatile LONG *)(LODWORD(v98) + 4)) )
-              (**(void (__thiscall ***)(_DWORD, int))LODWORD(v33))(LODWORD(v33), 1);
+            v33 = v98; /*0x7d2608*/
+            if ( !v22((volatile LONG *)(LODWORD(v98) + 4)) ) /*0x7d260e*/
+              (**(void (__thiscall ***)(_DWORD, int))LODWORD(v33))(LODWORD(v33), 1); /*0x7d2620*/
           }
         }
-        v146 = 1;
-        if ( (LOBYTE(v7) & 2) != 0 )
+        v146 = 1; /*0x7d2625*/
+        if ( (LOBYTE(v7) & 2) != 0 ) /*0x7d2630*/
         {
-          LODWORD(v7) &= ~2u;
-          v96 = v7;
-          if ( v128 )
+          LODWORD(v7) &= ~2u; /*0x7d2639*/
+          v96 = v7; /*0x7d263e*/
+          if ( v128 ) /*0x7d2642*/
           {
-            v34 = (void (__thiscall ***)(_DWORD, int))v128;
-            if ( !v22((volatile LONG *)(v128 + 4)) )
-              (**v34)(v34, 1);
+            v34 = (void (__thiscall ***)(_DWORD, int))v128; /*0x7d2644*/
+            if ( !v22((volatile LONG *)(v128 + 4)) ) /*0x7d264a*/
+              (**v34)(v34, 1); /*0x7d265c*/
           }
         }
-        v146 = 0;
-        if ( (LOBYTE(v7) & 1) != 0 )
+        v146 = 0; /*0x7d2661*/
+        if ( (LOBYTE(v7) & 1) != 0 ) /*0x7d266c*/
         {
-          LODWORD(v7) &= ~1u;
-          if ( v118 )
+          LODWORD(v7) &= ~1u; /*0x7d2672*/
+          if ( v118 ) /*0x7d2677*/
           {
-            v35 = (void (__thiscall ***)(_DWORD, int))v118;
-            if ( !v22((volatile LONG *)(v118 + 4)) )
-              (**v35)(v35, 1);
+            v35 = (void (__thiscall ***)(_DWORD, int))v118; /*0x7d2679*/
+            if ( !v22((volatile LONG *)(v118 + 4)) ) /*0x7d267f*/
+              (**v35)(v35, 1); /*0x7d2691*/
           }
         }
-        v36 = (void (__thiscall ***)(_DWORD, int))v126;
-        v146 = 0xFFFFFFFF;
-        if ( v126 )
+        v36 = (void (__thiscall ***)(_DWORD, int))v126; /*0x7d2693*/
+        v146 = 0xFFFFFFFF; /*0x7d269c*/
+        if ( v126 ) /*0x7d26a7*/
         {
-          if ( !v22((volatile LONG *)(v126 + 4)) )
+          if ( !v22((volatile LONG *)(v126 + 4)) ) /*0x7d26ad*/
           {
-            if ( v36 )
-              (**v36)(v36, 1);
+            if ( v36 ) /*0x7d26b5*/
+              (**v36)(v36, 1); /*0x7d26bf*/
           }
         }
-        v37 = v95;
-        v38 = v97;
-        v16 = v104;
-        *(float *)(4 * v97 + 0xB45CD0) = v95;
-        *(float *)(4 * v38 + 0xB45C30) = v37;
-        v114 = v37 + v114;
+        v37 = v95; /*0x7d26c1*/
+        v38 = v97; /*0x7d26c5*/
+        v16 = v104; /*0x7d26c9*/
+        *(float *)(4 * v97 + 0xB45CD0) = v95; /*0x7d26cd*/
+        *(float *)(4 * v38 + 0xB45C30) = v37; /*0x7d26d4*/
+        v114 = v37 + v114; /*0x7d26df*/
       }
-      if ( a3 == 0.0 )
+      if ( *(float *)&a3 == 0.0 ) /*0x7d26eb*/
       {
-        v93 = ++v103;
-        v40 = (_DWORD *)GetShadowSceneNode(0);
-        v39 = sub_7C62D0(v40, v93);
+        v93 = ++v103; /*0x7d2702*/
+        v40 = (_DWORD *)GetShadowSceneNode(0); /*0x7d2709*/
+        v39 = ShadowSceneLight_GetObjectGeometryAtIndex(v40, v93); /*0x7d2713*/
       }
       else
       {
-        v39 = sub_7ED3B0((_DWORD *)LODWORD(a3));
+        v39 = BSShaderLightingProperty__GetNextActiveNonShadowLight((int ***)a3); /*0x7d26f4*/
       }
-      v17 = (_DWORD *)v39;
-      ++v97;
+      v17 = (_DWORD *)v39; /*0x7d2718*/
+      ++v97; /*0x7d2723*/
     }
-    while ( v97 < v16 );
+    while ( v97 < v16 ); /*0x7d2727*/
   }
-  v41 = Vector3_InitValue_;
-  *(float *)&v97 = 0.0;
-  v42 = dword_B3F9B0;
-  v105 = __PAIR64__(*((_DWORD *)&Vector3_InitValue_ + 1), LODWORD(v41));
-  v43 = *(float *)&dword_B3FA90;
-  v44 = *(float *)&dword_B3FA94;
-  v106 = v42;
-  v45 = dword_B3FA98;
-  v108 = v43;
-  v109 = v44;
-  v110 = *(float *)&v45;
-  if ( a3 == 0.0 )
+  v41 = g_zeroNiPoint3; /*0x7d2737*/
+  *(float *)&v97 = 0.0; /*0x7d273d*/
+  v42 = MEMORY[0xB3F9B0][0]; /*0x7d2747*/
+  v105 = __PAIR64__(LODWORD(MEMORY[0xB3F9AC]), LODWORD(v41)); /*0x7d274c*/
+  v43 = MEMORY[0xB3F9B0][0x38]; /*0x7d2750*/
+  v44 = MEMORY[0xB3F9B0][0x39]; /*0x7d275a*/
+  v106 = v42; /*0x7d2760*/
+  v45 = MEMORY[0xB3F9B0][0x3A]; /*0x7d2764*/
+  v108 = v43; /*0x7d2769*/
+  v109 = v44; /*0x7d276d*/
+  v110 = v45; /*0x7d2771*/
+  if ( *(float *)&a3 == 0.0 ) /*0x7d2775*/
   {
-    v103 = 0;
-    v47 = (_DWORD *)GetShadowSceneNode(0);
-    v46 = (_DWORD *)sub_7C62D0(v47, 0);
-  }
-  else
-  {
-    v46 = sub_7ED1A0((_DWORD *)LODWORD(a3));
-  }
-  v48 = v46;
-  v49 = GetShadowSceneNode(0);
-  v50 = (float *)*sub_405AD0(*(_DWORD **)(v49 + 0x118), &v126);
-  if ( v126 )
-  {
-    v51 = (void (__thiscall ***)(_DWORD, int))v126;
-    if ( !v22((volatile LONG *)(v126 + 4)) )
-      (**v51)(v51, 1);
-  }
-  *(float *)&v136 = -v50[0x42];
-  *((float *)&v136 + 1) = -v50[0x43];
-  v137 = -v50[0x44];
-  sub_43F350((float *)&v136);
-  if ( 0.0 == v114 )
-  {
-    v105 = v136;
-    v52 = v50[0x3B];
-    v53 = v50[0x3C];
-    v106 = v137;
-    v54 = v50[0x3D];
-    v108 = v52;
-    v109 = v53;
-    v110 = v54;
+    v103 = 0; /*0x7d2789*/
+    v47 = (_DWORD *)GetShadowSceneNode(0); /*0x7d2791*/
+    v46 = (_DWORD *)ShadowSceneLight_GetObjectGeometryAtIndex(v47, 0); /*0x7d279b*/
   }
   else
   {
-    for ( i = 0; i < v104; v48 = (_DWORD *)v71 )
+    v46 = BSShaderLightingProperty__GetFirstActiveNonShadowLight(a3); /*0x7d277e*/
+  }
+  v48 = v46; /*0x7d27a2*/
+  v49 = GetShadowSceneNode(0); /*0x7d27a4*/
+  v50 = (float *)*ShadowSceneLight_GetLightRef(*(_DWORD **)(v49 + 0x118), &v126); /*0x7d27bf*/
+  if ( v126 ) /*0x7d27ca*/
+  {
+    v51 = (void (__thiscall ***)(_DWORD, int))v126; /*0x7d27cc*/
+    if ( !v22((volatile LONG *)(v126 + 4)) ) /*0x7d27d2*/
+      (**v51)(v51, 1); /*0x7d27e4*/
+  }
+  *(float *)&v136 = -v50[0x42]; /*0x7d27f5*/
+  *((float *)&v136 + 1) = -v50[0x43]; /*0x7d2804*/
+  v137 = -v50[0x44]; /*0x7d2813*/
+  Vector3_NormalizeInPlace((float *)&v136); /*0x7d281a*/
+  if ( 0.0 == v114 ) /*0x7d282c*/
+  {
+    v105 = v136; /*0x7d2843*/
+    v52 = v50[0x3B]; /*0x7d2847*/
+    v53 = v50[0x3C]; /*0x7d2851*/
+    v106 = v137; /*0x7d2857*/
+    v54 = v50[0x3D]; /*0x7d285b*/
+    v108 = v52; /*0x7d2861*/
+    v109 = v53; /*0x7d2865*/
+    v110 = v54; /*0x7d2869*/
+  }
+  else
+  {
+    for ( i = 0; i < v104; v48 = (_DWORD *)v71 ) /*0x7d2878*/
     {
-      if ( v48 )
+      if ( v48 ) /*0x7d2880*/
       {
-        v96 = *(float *)(4 * i + 0xB45C30) / v114;
-        if ( v96 > 0.0 )
+        v96 = *(float *)(4 * i + 0xB45C30) / v114; /*0x7d2891*/
+        if ( v96 > 0.0 ) /*0x7d28a0*/
         {
-          v56 = sub_405AD0(v48, &v118);
-          *(float *)&v97 = (*(float *)(*v56 + 0xF8) * *(float *)(4 * i + 0xB45C30)
+          v56 = ShadowSceneLight_GetLightRef(v48, &v118); /*0x7d28ad*/
+          *(float *)&v97 = (*(float *)(*v56 + 0xF8) * *(float *)(4 * i + 0xB45C30) /*0x7d28e2*/
                           + (1.0 - *(float *)(4 * i + 0xB45C30)) * dbl_A2FC70)
                          * v96
                          + *(float *)&v97;
-          if ( v118 )
+          if ( v118 ) /*0x7d28e6*/
           {
-            v57 = (void (__thiscall ***)(_DWORD, int))v118;
-            if ( !InterlockedDecrement((volatile LONG *)(v118 + 4)) )
-              (**v57)(v57, 1);
+            v57 = (void (__thiscall ***)(_DWORD, int))v118; /*0x7d28e8*/
+            if ( !InterlockedDecrement((volatile LONG *)(v118 + 4)) ) /*0x7d28ee*/
+              (**v57)(v57, 1); /*0x7d2905*/
           }
-          v58 = (float *)*sub_405AD0(v48, &v128);
-          v59 = v58[0x22];
-          v58 += 0x22;
-          v138 = v59 - v129;
-          v139 = v58[1] - v127;
-          v140 = v58[2] - v125;
-          if ( v128 )
+          v58 = (float *)*ShadowSceneLight_GetLightRef(v48, &v128); /*0x7d2916*/
+          v59 = v58[0x22]; /*0x7d2918*/
+          v58 += 0x22; /*0x7d291e*/
+          v138 = v59 - v129; /*0x7d292a*/
+          v139 = v58[1] - v127; /*0x7d293b*/
+          v140 = v58[2] - v125; /*0x7d2955*/
+          if ( v128 ) /*0x7d295c*/
           {
-            v60 = (void (__thiscall ***)(_DWORD, int))v128;
-            if ( !InterlockedDecrement((volatile LONG *)(v128 + 4)) )
-              (**v60)(v60, 1);
+            v60 = (void (__thiscall ***)(_DWORD, int))v128; /*0x7d295e*/
+            if ( !InterlockedDecrement((volatile LONG *)(v128 + 4)) ) /*0x7d2964*/
+              (**v60)(v60, 1); /*0x7d297b*/
           }
-          sub_43F350(&v138);
-          v98 = 1.0 - *(float *)(4 * i + 0xB45C30);
-          v130 = v98 * *(float *)&v136;
-          v131 = *((float *)&v136 + 1) * v98;
-          v132 = v98 * v137;
-          v98 = *(float *)(4 * i + 0xB45C30);
-          v141 = v98 * v138;
-          v142 = v139 * v98;
-          v143 = v98 * v140;
-          v111 = v141 + v130;
-          v138 = v111;
-          v112 = v142 + v131;
-          v139 = v112;
-          v113 = v143 + v132;
-          v140 = v113;
-          v100 = v111 * v96;
-          v101 = v112 * v96;
-          v102 = v96 * v113;
-          *(float *)&v105 = v100 + *(float *)&v105;
-          *((float *)&v105 + 1) = *((float *)&v105 + 1) + v101;
-          v106 = v102 + v106;
-          v61 = (float **)sub_405AD0(v48, &v95);
-          v62 = v50[0x3C];
-          v63 = 1.0 - *(float *)(4 * i + 0xB45C30);
-          v122 = v50[0x3B];
-          v64 = v50[0x3D];
-          v123 = v62;
-          v124 = v64;
-          v98 = v63;
-          v122 = v122 * v98;
-          v65 = *v61;
-          v66 = v62;
-          v67 = v65[0x3B];
-          v68 = v65[0x3C];
-          v69 = v65[0x3D];
-          v115 = v67;
-          v123 = v66 * v98;
-          v116 = v68;
-          v117 = v69;
-          v124 = v98 * v124;
-          v98 = *(float *)(4 * i + 0xB45C30);
-          v115 = v67 * v98;
-          v116 = v68 * v98;
-          v117 = v98 * v69;
-          v119 = v115 + v122;
-          v120 = v116 + v123;
-          v121 = v117 + v124;
-          v133 = v119 * v96;
-          v134 = v120 * v96;
-          v135 = v96 * v121;
-          v108 = v133 + v108;
-          v109 = v134 + v109;
-          v110 = v135 + v110;
-          if ( v95 != 0.0 )
+          Vector3_NormalizeInPlace(&v138); /*0x7d2984*/
+          v98 = 1.0 - *(float *)(4 * i + 0xB45C30); /*0x7d2996*/
+          v130 = v98 * *(float *)&v136; /*0x7d29a7*/
+          v131 = *((float *)&v136 + 1) * v98; /*0x7d29b7*/
+          v132 = v98 * v137; /*0x7d29c5*/
+          v98 = *(float *)(4 * i + 0xB45C30); /*0x7d29d3*/
+          v141 = v98 * v138; /*0x7d29e4*/
+          v142 = v139 * v98; /*0x7d29f4*/
+          v143 = v98 * v140; /*0x7d2a02*/
+          v111 = v141 + v130; /*0x7d2a17*/
+          v138 = v111; /*0x7d2a26*/
+          v112 = v142 + v131; /*0x7d2a3b*/
+          v139 = v112; /*0x7d2a4a*/
+          v113 = v143 + v132; /*0x7d2a58*/
+          v140 = v113; /*0x7d2a64*/
+          v100 = v111 * v96; /*0x7d2a75*/
+          v101 = v112 * v96; /*0x7d2a7f*/
+          v102 = v96 * v113; /*0x7d2a87*/
+          *(float *)&v105 = v100 + *(float *)&v105; /*0x7d2a93*/
+          *((float *)&v105 + 1) = *((float *)&v105 + 1) + v101; /*0x7d2a9f*/
+          v106 = v102 + v106; /*0x7d2aab*/
+          v61 = (float **)ShadowSceneLight_GetLightRef(v48, &v95); /*0x7d2aaf*/
+          v62 = v50[0x3C]; /*0x7d2ac3*/
+          v63 = 1.0 - *(float *)(4 * i + 0xB45C30); /*0x7d2ac9*/
+          v122 = v50[0x3B]; /*0x7d2acb*/
+          v64 = v50[0x3D]; /*0x7d2ad2*/
+          v123 = v62; /*0x7d2ad8*/
+          v124 = v64; /*0x7d2adf*/
+          v98 = v63; /*0x7d2ae6*/
+          v122 = v122 * v98; /*0x7d2afb*/
+          v65 = *v61; /*0x7d2b02*/
+          v66 = v62; /*0x7d2b04*/
+          v67 = v65[0x3B]; /*0x7d2b0b*/
+          v68 = v65[0x3C]; /*0x7d2b13*/
+          v69 = v65[0x3D]; /*0x7d2b19*/
+          v115 = v67; /*0x7d2b1f*/
+          v123 = v66 * v98; /*0x7d2b23*/
+          v116 = v68; /*0x7d2b2a*/
+          v117 = v69; /*0x7d2b2e*/
+          v124 = v98 * v124; /*0x7d2b39*/
+          v98 = *(float *)(4 * i + 0xB45C30); /*0x7d2b47*/
+          v115 = v67 * v98; /*0x7d2b59*/
+          v116 = v68 * v98; /*0x7d2b6b*/
+          v117 = v98 * v69; /*0x7d2b7b*/
+          v119 = v115 + v122; /*0x7d2b95*/
+          v120 = v116 + v123; /*0x7d2baf*/
+          v121 = v117 + v124; /*0x7d2bcc*/
+          v133 = v119 * v96; /*0x7d2bf5*/
+          v134 = v120 * v96; /*0x7d2c05*/
+          v135 = v96 * v121; /*0x7d2c13*/
+          v108 = v133 + v108; /*0x7d2c25*/
+          v109 = v134 + v109; /*0x7d2c34*/
+          v110 = v135 + v110; /*0x7d2c43*/
+          if ( v95 != 0.0 ) /*0x7d2c47*/
           {
-            v70 = v95;
-            if ( !InterlockedDecrement((volatile LONG *)(LODWORD(v95) + 4)) )
-              (**(void (__thiscall ***)(_DWORD, int))LODWORD(v70))(LODWORD(v70), 1);
+            v70 = v95; /*0x7d2c49*/
+            if ( !InterlockedDecrement((volatile LONG *)(LODWORD(v95) + 4)) ) /*0x7d2c4f*/
+              (**(void (__thiscall ***)(_DWORD, int))LODWORD(v70))(LODWORD(v70), 1); /*0x7d2c65*/
           }
         }
       }
-      if ( a3 == 0.0 )
+      if ( *(float *)&a3 == 0.0 ) /*0x7d2c70*/
       {
-        v94 = ++v103;
-        v72 = (_DWORD *)GetShadowSceneNode(0);
-        v71 = sub_7C62D0(v72, v94);
+        v94 = ++v103; /*0x7d2c80*/
+        v72 = (_DWORD *)GetShadowSceneNode(0); /*0x7d2c87*/
+        v71 = ShadowSceneLight_GetObjectGeometryAtIndex(v72, v94); /*0x7d2c91*/
       }
       else
       {
-        v71 = sub_7ED3B0((_DWORD *)LODWORD(a3));
+        v71 = BSShaderLightingProperty__GetNextActiveNonShadowLight((int ***)a3); /*0x7d2c72*/
       }
-      ++i;
+      ++i; /*0x7d2c96*/
     }
   }
-  sub_43F350((float *)&v105);
-  v73 = v106;
-  v74 = dbl_A31C70;
-  if ( v74 > v106 )
-    v73 = v74;
-  v106 = v73;
-  sub_43F350((float *)&v105);
-  v75 = v107;
-  v76 = *(float *)(*(_DWORD *)(LODWORD(v107) + 0x130) + 0x94) * v99;
-  v77 = dbl_A3B1B8;
-  if ( v77 < v76 )
-    v76 = v77;
-  v78 = (float *)(*(_DWORD *)(LODWORD(v107) + 0x100) + 0x54);
-  v107 = v76 * dbl_A38618;
-  v79 = v107;
-  v100 = *(float *)&v105 * v107;
-  v101 = *((float *)&v105 + 1) * v107;
-  v102 = v107 * v106;
-  v130 = v100 + v129;
-  v80 = v101;
-  *v78 = v130;
-  v131 = v80 + v127;
-  v81 = v102;
-  v78[1] = v131;
-  v132 = v81 + v125;
-  v78[2] = v132;
-  v82 = *(NiAVObject **)(LODWORD(v75) + 0x100);
-  *(float *)&v97 = v79 * dbl_A3F3A0;
-  NiAVObject_UpdateNiAVObject(v82, 0.0, 1);
-  v83 = v109 * dbl_A91270 + v108 * dbl_A91270 + dbl_A91270 * v110;
-  v84 = dbl_A91268;
-  if ( v84 > v83 || v83 <= 1.0 )
+  Vector3_NormalizeInPlace((float *)&v105); /*0x7d2ca9*/
+  v73 = v106; /*0x7d2cb0*/
+  v74 = dbl_A31C70; /*0x7d2cb4*/
+  if ( v74 > v106 ) /*0x7d2cc1*/
+    v73 = v74; /*0x7d2cc3*/
+  v106 = v73; /*0x7d2ccd*/
+  Vector3_NormalizeInPlace((float *)&v105); /*0x7d2cd1*/
+  v75 = v107; /*0x7d2cd8*/
+  v76 = *(float *)(*(_DWORD *)(LODWORD(v107) + 0x130) + 0x94) * v99;// Load source world scale for the BBX maximum-extent calculation. /*0x7d2ce8*/
+  v77 = dbl_A3B1B8;                             // Load the retail maximum projected extent constant 256.0. /*0x7d2cec*/
+  if ( v77 < v76 ) /*0x7d2cf9*/
+    v76 = v77;                                  // Clamp the scaled maximum BBX extent to 256. /*0x7d2cfb*/
+  v78 = (float *)(*(_DWORD *)(LODWORD(v107) + 0x100) + 0x54); /*0x7d2d0d*/
+  v107 = v76 * dbl_A38618;                      // Compute projector offset as capped extent multiplied by 2.5. /*0x7d2d15*/
+  v79 = v107; /*0x7d2d26*/
+  v100 = *(float *)&v105 * v107; /*0x7d2d28*/
+  v101 = *((float *)&v105 + 1) * v107; /*0x7d2d32*/
+  v102 = v107 * v106; /*0x7d2d3c*/
+  v130 = v100 + v129; /*0x7d2d4b*/
+  v80 = v101; /*0x7d2d59*/
+  *v78 = v130;                                  // Commit backing projector branch local X translation; Y/Z follow at 0x007D2D78/0x007D2D91. /*0x7d2d5d*/
+  v131 = v80 + v127; /*0x7d2d66*/
+  v81 = v102; /*0x7d2d74*/
+  v78[1] = v131;                                // Commit backing projector branch local Y translation. /*0x7d2d78*/
+  v132 = v81 + v125; /*0x7d2d83*/
+  v78[2] = v132;                                // Commit backing projector branch local Z translation. /*0x7d2d91*/
+  v82 = *(NiAVObject **)(LODWORD(v75) + 0x100); /*0x7d2d9a*/
+  *(float *)&v97 = v79 * dbl_A3F3A0;            // Compute backing point-light range from projector offset: range = 6 * offset = 15 * capped extent. /*0x7d2da0*/
+  NiAVObject_UpdateNiAVObject(v82, 0.0, 1);     // Update the backing NiAVObject after committing projector translation. /*0x7d2da9*/
+  v83 = v109 * dbl_A91270 + v108 * dbl_A91270 + dbl_A91270 * v110; /*0x7d2dc6*/
+  v84 = dbl_A91268; /*0x7d2dc8*/
+  if ( v84 > v83 || v83 <= 1.0 ) /*0x7d2de8*/
   {
-    if ( v84 > v83 )
-      v83 = v84;
+    if ( v84 > v83 ) /*0x7d2e91*/
+      v83 = v84; /*0x7d2e97*/
   }
   else
   {
-    v83 = 1.0;
+    v83 = 1.0; /*0x7d2dee*/
   }
-  v85 = *(_DWORD *)(LODWORD(v75) + 0x100);
-  v107 = v83;
-  v86 = v107;
-  ++*(_DWORD *)(v85 + 0xB8);
-  v100 = v86;
-  v101 = v86;
-  v87 = v101;
-  *(float *)(v85 + 0xEC) = v100;
-  v102 = v86;
-  v88 = v102;
-  v89 = *(float *)&v97;
-  *(float *)(v85 + 0xF0) = v87;
-  v100 = v89;
-  v90 = v100;
-  *(float *)(v85 + 0xF4) = v88;
-  v101 = 0.0;
-  result = *(_DWORD *)(LODWORD(v75) + 0x100);
-  v102 = 0.0;
-  ++*(_DWORD *)(result + 0xB8);
-  *(float *)(result + 0xF8) = v90;
-  v92 = v102;
-  *(float *)(result + 0xFC) = 0.0;
-  *(float *)(result + 0x100) = v92;
-  return result;
+  v85 = *(_DWORD *)(LODWORD(v75) + 0x100); /*0x7d2df2*/
+  v107 = v83; /*0x7d2df8*/
+  v86 = v107; /*0x7d2dfc*/
+  ++*(_DWORD *)(v85 + 0xB8); /*0x7d2e00*/
+  v100 = v86; /*0x7d2e06*/
+  v101 = v86; /*0x7d2e0e*/
+  v87 = v101; /*0x7d2e12*/
+  *(float *)(v85 + 0xEC) = v100;                // Commit native backing-light attenuation component. /*0x7d2e16*/
+  v102 = v86; /*0x7d2e1c*/
+  v88 = v102; /*0x7d2e20*/
+  v89 = *(float *)&v97; /*0x7d2e24*/
+  *(float *)(v85 + 0xF0) = v87;                 // Commit native backing-light attenuation component. /*0x7d2e28*/
+  v100 = v89; /*0x7d2e2e*/
+  v90 = v100; /*0x7d2e34*/
+  *(float *)(v85 + 0xF4) = v88;                 // Commit native backing-light attenuation component. /*0x7d2e38*/
+  v101 = 0.0; /*0x7d2e3e*/
+  result = *(_DWORD *)(LODWORD(v75) + 0x100); /*0x7d2e42*/
+  v102 = 0.0; /*0x7d2e48*/
+  ++*(_DWORD *)(result + 0xB8); /*0x7d2e50*/
+  *(float *)(result + 0xF8) = v90;              // Commit computed projector range to backing NiPointLight+0xF8. /*0x7d2e56*/
+  v92 = v102; /*0x7d2e5c*/
+  *(float *)(result + 0xFC) = 0.0;              // Zero backing light field +0xFC on the sole normal projection path. /*0x7d2e60*/
+  *(float *)(result + 0x100) = v92;             // Zero backing light field +0x100 on the sole normal projection path. /*0x7d2e66*/
+  return result; /*0x7d2e6c*/
 }

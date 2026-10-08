@@ -17,7 +17,6 @@
 0x932002: mov     [esp+1Ch+var_4], edi
 0x932006: push    ebp
 0x932007: jmp     short loc_932010
-0x932009: align 10h
 0x932010: mov     ax, [edi]
 0x932013: cmp     ax, [esp+20h+arg_C]
 0x932018: jnz     short loc_932024

@@ -1,4 +1,4 @@
-0x800750: sub     esp, 2A4h
+0x800750: sub     esp, 2A4h; MoonSugarEffect decode: Refraction program loader. Uses base.v.hlsl TEX2 and refraction_P20.p.hlsl, storing wrappers with ref-counted replace.
 0x800756: mov     eax, ds:0B30AACh
 0x80075B: xor     eax, esp
 0x80075D: mov     [esp+2A4h+var_4], eax
@@ -51,7 +51,7 @@
 0x800804: lea     eax, [esp+2C8h+FileName]
 0x80080B: push    eax; lpFileName
 0x80080C: mov     ecx, esi
-0x80080E: call    CreateVertexShader
+0x80080E: call    CreateVertexShader; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.
 0x800813: mov     edi, [esi+90h]
 0x800819: mov     ebx, eax
 0x80081B: cmp     edi, ebx
@@ -99,7 +99,7 @@
 0x800897: lea     edx, [esp+2C8h+FileName]
 0x80089E: push    edx; lpFileName
 0x80089F: mov     ecx, esi
-0x8008A1: call    CreatePixelShader
+0x8008A1: call    CreatePixelShader; Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.
 0x8008A6: mov     edi, [esi+94h]
 0x8008AC: mov     ebx, eax
 0x8008AE: cmp     edi, ebx

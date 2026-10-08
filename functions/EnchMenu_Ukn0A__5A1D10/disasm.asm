@@ -21,13 +21,13 @@
 0x5A1D4F: push    0FB5h
 0x5A1D54: mov     ecx, esi
 0x5A1D56: call    Tile_GetFloat
-0x5A1D5B: call    Double_To_SInt32
+0x5A1D5B: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5A1D60: push    1; arg1
 0x5A1D62: push    0; canCreate
 0x5A1D64: mov     dword ptr [esp+20h+var_8], eax
 0x5A1D68: call    InterfaceManager_GetSingleton
 0x5A1D6D: fld     dword ptr [eax+38h]
-0x5A1D70: call    Double_To_SInt32
+0x5A1D70: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5A1D75: mov     ecx, eax
 0x5A1D77: mov     eax, 77777777h
 0x5A1D7C: imul    ecx
@@ -40,15 +40,15 @@
 0x5A1D8E: add     esp, 4
 0x5A1D91: mov     ecx, edi; this
 0x5A1D93: fild    dword ptr [esp+20h]
-0x5A1D97: fstp    [esp+1Ch+a2]; a3
-0x5A1D9A: push    0FB7h; a2
-0x5A1D9F: call    Tile_SetFloat
+0x5A1D97: fstp    [esp+1Ch+a2]; value
+0x5A1D9A: push    0FB7h; propertyCode
+0x5A1D9F: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A1DA4: fldz
 0x5A1DA6: push    ecx
-0x5A1DA7: fstp    [esp+1Ch+a2]; a3
-0x5A1DAA: push    0FB7h; a2
+0x5A1DA7: fstp    [esp+1Ch+a2]; value
+0x5A1DAA: push    0FB7h; propertyCode
 0x5A1DAF: mov     ecx, edi; this
-0x5A1DB1: call    Tile_SetFloat
+0x5A1DB1: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A1DB6: fild    dword ptr [esp+18h+var_8]
 0x5A1DBA: push    0FB5h
 0x5A1DBF: mov     ecx, esi

@@ -2,7 +2,7 @@
 0x42EA61: mov     ebp, esp
 0x42EA63: and     esp, 0FFFFFFF8h
 0x42EA66: sub     esp, 1Ch
-0x42EA69: cmp     ArchiveList, 0
+0x42EA69: cmp     dword ptr ds:0B338E0h, 0
 0x42EA70: push    ebx
 0x42EA71: push    esi
 0x42EA72: push    edi
@@ -47,7 +47,7 @@
 0x42EAE4: push    edx; int
 0x42EAE5: push    edi; FullPath
 0x42EAE6: call    HashFilePAth
-0x42EAEB: mov     esi, ArchiveProvidedLastFile
+0x42EAEB: mov     esi, ds:0B338E4h
 0x42EAF1: add     esp, 0Ch
 0x42EAF4: test    esi, esi
 0x42EAF6: mov     [esp+28h+var_18], esi
@@ -68,7 +68,7 @@
 0x42EB20: call    Archive_ContainsFile
 0x42EB25: test    al, al
 0x42EB27: jnz     short loc_42EB95
-0x42EB29: mov     ebx, ArchiveList
+0x42EB29: mov     ebx, ds:0B338E0h
 0x42EB2F: test    ebx, ebx
 0x42EB31: jz      short loc_42EB86
 0x42EB33: mov     esi, [ebx]
@@ -110,7 +110,7 @@
 0x42EB8B: mov     esp, ebp
 0x42EB8D: pop     ebp
 0x42EB8E: retn
-0x42EB8F: mov     ArchiveProvidedLastFile, esi
+0x42EB8F: mov     ds:0B338E4h, esi
 0x42EB95: pop     edi
 0x42EB96: mov     eax, esi
 0x42EB98: pop     esi

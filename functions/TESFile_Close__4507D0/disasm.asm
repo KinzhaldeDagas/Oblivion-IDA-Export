@@ -19,7 +19,7 @@
 0x450809: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x45080E: add     esp, 20Ch
 0x450814: retn
-0x450815: call    sub_450430
+0x450815: call    TESFile_CloseAllOpenGroups; Closes and frees every currently open group record, repeatedly popping the TESFile group stack until current group is null.
 0x45081A: mov     ecx, [esi+10h]
 0x45081D: cmp     ecx, edi
 0x45081F: jz      short loc_45082C

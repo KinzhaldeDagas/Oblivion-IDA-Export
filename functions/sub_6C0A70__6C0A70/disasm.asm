@@ -11,7 +11,7 @@
 0x6C0AA5: mov     dword ptr ds:0B3D37Ch, offset sub_6C05B0
 0x6C0AAF: mov     dword ptr ds:0B3D2ECh, offset sub_6C0650
 0x6C0AB9: mov     byte ptr ds:0B3D3F1h, 4Ch ; 'L'
-0x6C0AC0: call    sub_6C0820
+0x6C0AC0: call    NiPosKey_RegisterEvaluatorType3; Position type 3 registers NiPosKey_InsertType3Cubic for GuaranteeTimeRange boundary insertion.
 0x6C0AC5: add     esp, 8
 0x6C0AC8: mov     eax, 1
 0x6C0ACD: retn

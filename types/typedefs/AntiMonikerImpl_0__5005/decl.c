@@ -1,1 +1,1 @@
-AntiMonikerImpl_0
+typedef AntiMonikerImpl AntiMonikerImpl_0;

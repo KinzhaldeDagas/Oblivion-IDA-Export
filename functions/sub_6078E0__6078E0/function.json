@@ -1,19 +1,36 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_6078E0",
+  "chunks": [
+    [
+      "0x6078E0",
+      "0x607988"
+    ],
+    [
+      "0x9C2F00",
+      "0x9C2F2E"
+    ]
+  ],
+  "chunks_sha256": "fcd2950d5989fa58e88a7a297cee9533b013e03b1f5009e533d785f453a01514",
+  "comment_regular": "ArrowProjectile constructor/initializer: constructs MobileObject state, installs projectile vtables, allocates HighProcess, clears collision/transfer flags, increments the live-projectile count, and returns this.",
+  "comment_repeatable": "ArrowProjectile constructor/initializer: constructs MobileObject state, installs projectile vtables, allocates HighProcess, clears collision/transfer flags, increments the live-projectile count, and returns this.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "ArrowProjectile_Initialize",
   "end_ea": "0x607988",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6078E0",
+  "name": "ArrowProjectile_Initialize",
   "segment": ".text",
   "sha256": "4604ce6ae851e8829c1f5a2db1313d7a3fae52538acac8cf526308f94e53817c",
   "size": 168,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6078E0",
-  "type": "TESObjectREFR *__thiscall(TESObjectREFR *this)",
-  "xrefs_from_count": 52,
+  "total_chunk_size": 214,
+  "type": "ArrowProjectile *__thiscall(ArrowProjectile *this)",
+  "xrefs_from_count": 68,
   "xrefs_to_count": 1
 }

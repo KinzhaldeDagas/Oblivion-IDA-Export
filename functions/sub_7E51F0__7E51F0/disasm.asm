@@ -1,5 +1,5 @@
-0x7E51F0: sub     esp, 28h
-0x7E51F3: fld     [esp+28h+arg_0]
+0x7E51F0: sub     esp, 28h; Verified (Oblivion): updates the ParticleShaderProperty particleInstanceBuffer_6C using elapsed time, currentParticleLevel_80 and fParticleLifetime_84; it retires expired slots, increments/decrements activeParticleCount_7C, and dispatches new particles by emitterType_70. Each Oblivion record is 0x20 bytes. Fallout's UpdateParticles uses 0x30-byte ParticleData records and different field offsets.
+0x7E51F3: fld     [esp+28h+elapsedSeconds]
 0x7E51F7: push    ebx
 0x7E51F8: push    ebp
 0x7E51F9: mov     ebp, ecx
@@ -12,21 +12,21 @@
 0x7E520D: fstp    [esp+38h+var_20]
 0x7E5211: fld     [esp+38h+var_20]
 0x7E5215: fstp    [esp+38h+var_24]
-0x7E5219: call    sub_7E2D60
+0x7E5219: call    ParticleShaderProperty_GetSlotCapacity; Verified (Oblivion): returns the cached slot capacity, initialized to 40 or 120 according to renderer capability, and used to size particleInstanceBuffer_6C and update iteration.
 0x7E521E: fld     dword ptr [ebp+80h]
 0x7E5224: mov     ebx, eax
 0x7E5226: mov     [esp+38h+var_20], ebx
 0x7E522A: fimul   [esp+38h+var_20]
-0x7E522E: call    Double_To_SInt32
+0x7E522E: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x7E5233: cmp     ebx, eax
 0x7E5235: mov     [esp+38h+var_28], ebx
-0x7E5239: jl      short loc_7E523F
+0x7E5239: jl      short loc_7E523F; Verified (Oblivion): currentParticleLevel_80 multiplied by slotCapacity sets the desired maximum active-particle count.
 0x7E523B: mov     [esp+38h+var_28], eax
 0x7E523F: fld     [esp+38h+var_24]
 0x7E5243: fdiv    dword ptr [ebp+84h]
 0x7E5249: fimul   [esp+38h+var_28]
-0x7E524D: call    Double_To_SInt32
-0x7E5252: cmp     [esp+38h+arg_4], 0
+0x7E524D: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
+0x7E5252: cmp     [esp+38h+applyWorldOffset], 0
 0x7E5257: mov     ecx, ds:0B3F9ACh
 0x7E525D: mov     edx, ds:0B3F9B0h
 0x7E5263: mov     [esp+38h+var_24], eax
@@ -36,11 +36,10 @@
 0x7E5274: mov     [esp+38h+var_10], edx
 0x7E5278: jz      short loc_7E52F7
 0x7E527A: mov     eax, [ebp+120h]
-0x7E5280: mov     eax, [eax+1Ch]
+0x7E5280: mov     eax, [eax+1Ch]; Verified (Oblivion): when applyWorldOffset is enabled, UpdateParticles follows geometry_120's parent/node hierarchy and searches for Bip01 to compute the coordinate offset.
 0x7E5283: test    eax, eax
 0x7E5285: jz      short loc_7E52F7
 0x7E5287: jmp     short loc_7E5290
-0x7E5289: align 10h
 0x7E5290: mov     esi, [eax+8]
 0x7E5293: mov     edi, offset aBip01; "Bip01"
 0x7E5298: mov     ecx, 6
@@ -76,7 +75,7 @@
 0x7E5305: fld     dword ptr ds:0A32048h
 0x7E530B: mov     ebx, 1
 0x7E5310: mov     eax, [ebp+6Ch]
-0x7E5313: fld     [esp+38h+arg_0]
+0x7E5313: fld     [esp+38h+elapsedSeconds]
 0x7E5317: fsub    dword ptr [esi+eax+0Ch]
 0x7E531B: lea     ecx, [esi+eax]
 0x7E531E: fstp    [esp+38h+var_1C]
@@ -90,7 +89,7 @@
 0x7E5338: fcompp
 0x7E533A: fnstsw  ax
 0x7E533C: test    ah, 5
-0x7E533F: jp      loc_7E542C
+0x7E533F: jp      loc_7E542C; Verified (Oblivion): particle slots expire when elapsedSeconds - birthTime exceeds fParticleLifetime_84 scaled by lifetimeRandomFactor_1C.
 0x7E5345: jmp     short loc_7E5349
 0x7E5347: fstp    st
 0x7E5349: fld     dword ptr [ecx]
@@ -113,9 +112,9 @@
 0x7E5381: fst     dword ptr [esi+edx+14h]
 0x7E5385: mov     eax, [ebp+6Ch]
 0x7E5388: fst     dword ptr [esi+eax+18h]
-0x7E538C: add     dword ptr [ebp+7Ch], 0FFFFFFFFh
+0x7E538C: add     dword ptr [ebp+7Ch], 0FFFFFFFFh; Verified (Oblivion): expiring an active particle clears its slot and decrements activeParticleCount_7C.
 0x7E5390: fxch    st(1)
-0x7E5392: cmp     [esp+38h+arg_8], 0
+0x7E5392: cmp     [esp+38h+allowEmission], 0
 0x7E5397: jz      loc_7E542C
 0x7E539D: cmp     [esp+38h+var_24], 0
 0x7E53A2: jle     loc_7E542C
@@ -125,29 +124,29 @@
 0x7E53B1: mov     eax, [ebp+70h]
 0x7E53B4: fstp    st
 0x7E53B6: sub     eax, 0
-0x7E53B9: jz      short loc_7E53DB
+0x7E53B9: jz      short loc_7E53DB; Verified (Oblivion): emitterType_70 value 0 dispatches to GenerateFromGeometry.
 0x7E53BB: sub     eax, ebx
-0x7E53BD: jz      short loc_7E53CF
+0x7E53BD: jz      short loc_7E53CF; Verified (Oblivion): emitterType_70 value 1 dispatches to GenerateFromSkinnedGeometry, which samples NiGeometry with skinData. Fallout labels its homolog GenerateFromCollisionBones; that terminology is a Probable correspondence.
 0x7E53BF: sub     eax, ebx
-0x7E53C1: jnz     short loc_7E53E7
-0x7E53C3: push    edi
+0x7E53C1: jnz     short loc_7E53E7; Verified (Oblivion): emitterType_70 value 2 dispatches to GenerateFromRay.
+0x7E53C3: push    edi; slotIndex
 0x7E53C4: fstp    st
-0x7E53C6: mov     ecx, ebp
-0x7E53C8: call    sub_7E5020
+0x7E53C6: mov     ecx, ebp; this
+0x7E53C8: call    ParticleShaderProperty_GenerateFromRay; Verified (Oblivion): generates a particle along the target node's local ray using rayLength_74, optionally transforms it to world coordinates when bWorldspace_78 is set, and writes the 0x20-byte slot record. This is emitterType_70 value 2, kParticleShaderEmitter_Ray.
 0x7E53CD: jmp     short loc_7E53E5
-0x7E53CF: push    edi
+0x7E53CF: push    edi; slotIndex
 0x7E53D0: fstp    st
-0x7E53D2: mov     ecx, ebp
-0x7E53D4: call    sub_7E4D20
+0x7E53D2: mov     ecx, ebp; this
+0x7E53D4: call    ParticleShaderProperty_GenerateFromSkinnedGeometry; Verified (Oblivion): samples a target geometry with non-null skinData and stores a transformed particle position/direction; this is emitterType_70 value 1, kParticleShaderEmitter_SkinnedGeometry. Fallout calls the analogous mode GenerateFromCollisionBones; correspondence to that exact label is Probable.
 0x7E53D9: jmp     short loc_7E53E5
-0x7E53DB: push    edi
+0x7E53DB: push    edi; slotIndex
 0x7E53DC: fstp    st
-0x7E53DE: mov     ecx, ebp
-0x7E53E0: call    sub_7E4960
+0x7E53DE: mov     ecx, ebp; this
+0x7E53E0: call    ParticleShaderProperty_GenerateFromGeometry; Verified (Oblivion): samples NiGeometryData vertices/normals from a target geometry and writes a new particle instance record at slotIndex. This is emitterType_70 value 0, kParticleShaderEmitter_Geometry.
 0x7E53E5: fldz
 0x7E53E7: sub     [esp+38h+var_24], ebx
-0x7E53EB: add     [ebp+7Ch], ebx
-0x7E53EE: cmp     [esp+38h+arg_4], 0
+0x7E53EB: add     [ebp+7Ch], ebx; Verified (Oblivion): successful emission increments activeParticleCount_7C.
+0x7E53EE: cmp     [esp+38h+applyWorldOffset], 0
 0x7E53F3: jz      short loc_7E5426
 0x7E53F5: mov     edx, [ebp+6Ch]
 0x7E53F8: fld     dword ptr [esi+edx]
@@ -168,10 +167,10 @@
 0x7E542C: add     edi, ebx
 0x7E542E: add     esi, 20h ; ' '
 0x7E5431: cmp     edi, [esp+38h+var_20]
-0x7E5435: jl      loc_7E5310
+0x7E5435: jl      loc_7E5310; Verified (Oblivion): UpdateParticles iterates particle slots with a 0x20-byte stride, unlike Fallout's 0x30-byte ParticleData stride.
 0x7E543B: fstp    st(1)
 0x7E543D: fstp    st
-0x7E543F: fld     [esp+38h+arg_0]
+0x7E543F: fld     [esp+38h+elapsedSeconds]
 0x7E5443: pop     edi
 0x7E5444: pop     esi
 0x7E5445: fstp    dword ptr [ebp+0F8h]

@@ -1,1 +1,1 @@
-COLORREF
+typedef DWORD COLORREF;

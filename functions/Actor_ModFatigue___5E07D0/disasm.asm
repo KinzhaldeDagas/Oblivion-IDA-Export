@@ -1,7 +1,7 @@
-0x5E07D0: push    ecx
+0x5E07D0: push    ecx; Applies only a negative Fatigue delta. Requires the actor AV path, reads Fatigue AV 0x0A, clamps damage so Fatigue cannot fall below zero, then calls the actor DamageAV float virtual. Nonnegative deltas and actors with no positive Fatigue are ignored.
 0x5E07D1: fldz
 0x5E07D3: push    esi
-0x5E07D4: fcomp   [esp+8+arg_0]
+0x5E07D4: fcomp   [esp+8+delta]
 0x5E07D8: mov     esi, ecx
 0x5E07DA: fnstsw  ax
 0x5E07DC: test    ah, 41h
@@ -24,19 +24,19 @@
 0x5E080B: fstp    st(1)
 0x5E080D: test    ah, 41h
 0x5E0810: jnp     short loc_5E0850
-0x5E0812: fld     [esp+8+arg_0]
-0x5E0816: fst     [esp+8+arg_0]
+0x5E0812: fld     [esp+8+delta]
+0x5E0816: fst     [esp+8+delta]
 0x5E081A: fadd    st, st(1)
 0x5E081C: fcomp   qword ptr ds:0A2FC68h
 0x5E0822: fnstsw  ax
 0x5E0824: test    ah, 5
 0x5E0827: jp      short loc_5E0831
 0x5E0829: fchs
-0x5E082B: fstp    [esp+8+arg_0]
+0x5E082B: fstp    [esp+8+delta]
 0x5E082F: jmp     short loc_5E0833
 0x5E0831: fstp    st
 0x5E0833: mov     eax, [esi]
-0x5E0835: fld     [esp+8+arg_0]
+0x5E0835: fld     [esp+8+delta]
 0x5E0839: mov     edx, [eax+2A4h]
 0x5E083F: push    0
 0x5E0841: push    ecx

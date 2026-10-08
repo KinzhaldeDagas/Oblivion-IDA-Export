@@ -1,2 +1,2 @@
-0x51EAE0: sub     ecx, 24h ; '$'
-0x51EAE3: jmp     sub_51C710
+0x51EAE0: sub     ecx, 24h ; '$'; self
+0x51EAE3: jmp     TESCreature_LoadModified

@@ -14,11 +14,11 @@
 0x744207: mov     [esp+14h+var_8], edi
 0x74420B: jb      short loc_744270
 0x74420D: mov     eax, [esi+30h]
-0x744210: push    ebp; Size
+0x744210: push    ebp; byteCount
 0x744211: lea     ecx, [eax+ebp]
-0x744214: push    ecx; Src
-0x744215: push    eax; Dst
-0x744216: call    _memcpy
+0x744214: push    ecx; source
+0x744215: push    eax; destination
+0x744216: call    _memcpy;
 0x74421B: mov     edx, [esi+44h]
 0x74421E: mov     eax, [esi+3Ch]
 0x744221: sub     [esi+68h], ebp
@@ -91,10 +91,10 @@
 0x7442D0: mov     eax, [esp+20h+var_4]
 0x7442D4: add     esp, 0Ch
 0x7442D7: mov     ecx, [edi]
-0x7442D9: push    ebx; Size
-0x7442DA: push    ecx; Src
-0x7442DB: push    eax; Dst
-0x7442DC: call    _memcpy
+0x7442D9: push    ebx; byteCount
+0x7442DA: push    ecx; source
+0x7442DB: push    eax; destination
+0x7442DC: call    _memcpy;
 0x7442E1: add     [edi], ebx
 0x7442E3: add     esp, 0Ch
 0x7442E6: add     [edi+8], ebx

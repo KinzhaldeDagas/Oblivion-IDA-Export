@@ -5,7 +5,7 @@
 0x7603DB: jz      short loc_7603EB
 0x7603DD: call    sub_75E0A0
 0x7603E2: push    esi
-0x7603E3: call    FormHeapFree
+0x7603E3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7603E8: add     esp, 4
 0x7603EB: mov     dword ptr ds:0B42044h, 0
 0x7603F5: pop     esi

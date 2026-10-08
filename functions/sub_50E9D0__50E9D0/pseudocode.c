@@ -12,21 +12,21 @@ bool __cdecl sub_50E9D0(
   bool result; // al
   UInt16 v10[2]; // [esp+0h] [ebp-4h] BYREF
 
-  *(_DWORD *)v10 = v8;
-  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v10);
-  if ( result )
+  *(_DWORD *)v10 = v8; /*0x50e9d0*/
+  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v10); /*0x50e9f8*/
+  if ( result ) /*0x50ea02*/
   {
-    result = 1;
-    if ( *(_DWORD *)v10 )
+    result = 1; /*0x50ea0b*/
+    if ( *(_DWORD *)v10 ) /*0x50ea0d*/
     {
-      byte_B333B8 = 1;
-      byte_BA7A04 = 1;
+      unk_B333B8 = 1; /*0x50ea0f*/
+      unk_BA7A04 = 1; /*0x50ea14*/
     }
     else
     {
-      byte_B333B8 = 0;
-      byte_BA7A04 = 0;
+      unk_B333B8 = 0; /*0x50ea1b*/
+      unk_BA7A04 = 0; /*0x50ea21*/
     }
   }
-  return result;
+  return result; /*0x50ea05*/
 }

@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "$3D97F0066C39DC96D7B9C4815C5CB3BB",
+  "definition": "struct $3D97F0066C39DC96D7B9C4815C5CB3BB\n{\nunsigned __int32 NameOffset : 31;\nunsigned __int32 NameIsString : 1;\n}\n",
   "id": 18374686479672043129,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "NameOffset",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 3
+      "size": 3.875,
+      "type": "unsigned __int32 : 31"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "NameIsString",
-      "offset": 3,
+      "offset": 3.875,
       "offset_hex": "0x3",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int32 : 1"
     }
   ],
   "name": "$3D97F0066C39DC96D7B9C4815C5CB3BB",
+  "ordinal": 7384,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 4
 }

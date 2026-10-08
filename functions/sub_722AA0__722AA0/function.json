@@ -1,18 +1,31 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x722AA0",
+      "0x722B2D"
+    ]
+  ],
+  "chunks_sha256": "348b6257e18bc6dfe404fc91e3996159af59c138cd9ad325d0b4384a90dfa54d",
+  "comment_regular": "CULLING MainWorld goal 2026-09-27: native geometry bound update reads skin pointer at geometry+0xB8. With skin, obtains skin-derived bound via 0x72BB30; without it, uses geometryData+local-bound, then transforms via 0x72A820 to world bound at geometry+0x20. Finite world-bound values alone do not prove update freshness. Do not conflate skinned and ordinary static bound provenance.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "sub_722AA0",
   "end_ea": "0x722B2D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_722AA0",
   "segment": ".text",
   "sha256": "348b6257e18bc6dfe404fc91e3996159af59c138cd9ad325d0b4384a90dfa54d",
   "size": 141,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x722AA0",
+  "total_chunk_size": 141,
   "type": "int __thiscall(NiGeometry *this)",
   "xrefs_from_count": 55,
   "xrefs_to_count": 11

@@ -1,1 +1,1 @@
-LFH_arena_0
+typedef LFH_arena LFH_arena_0;

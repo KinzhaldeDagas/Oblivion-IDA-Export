@@ -5,8 +5,8 @@
 0x5E8907: mov     edi, [eax+8]
 0x5E890A: test    edi, edi
 0x5E890C: jz      loc_5E899F
-0x5E8912: mov     ecx, edi
-0x5E8914: call    sub_567770
+0x5E8912: mov     ecx, edi; this
+0x5E8914: call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.
 0x5E8919: test    al, al
 0x5E891B: jz      short loc_5E8927
 0x5E891D: lea     ecx, [esi+44h]
@@ -26,14 +26,14 @@
 0x5E8945: test    al, al
 0x5E8947: jnz     short loc_5E8967
 0x5E8949: mov     ecx, esi; this
-0x5E894B: call    TESObjectREFR_GetParentCell
+0x5E894B: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5E8950: test    eax, eax
 0x5E8952: jz      short loc_5E899F
-0x5E8954: push    esi
+0x5E8954: push    esi; actor
 0x5E8955: mov     ecx, esi; this
-0x5E8957: call    TESObjectREFR_GetParentCell
-0x5E895C: mov     ecx, eax
-0x5E895E: call    sub_4CAAC0
+0x5E8957: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x5E895C: mov     ecx, eax; cell
+0x5E895E: call    TESObjectCELL_IsOwnedByActor; Verified Oblivion owner predicate: reads the cell's XOWN and XRNK extra data; returns true for an NPC owner matching the actor's base form, or for a faction owner when the actor is an NPC whose faction rank meets the cell's required rank. Player identity is passed into faction-rank evaluation for its special handling. Called by door access/trespass policy and other ownership paths. Fallout has the analogous TESObjectCELL::IsActorBaseCellOwner; it takes TESActorBase* and uses a differently exposed faction-rank path.
 0x5E8963: test    al, al
 0x5E8965: jz      short loc_5E899F
 0x5E8967: mov     edx, [esi]

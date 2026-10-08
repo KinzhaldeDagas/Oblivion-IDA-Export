@@ -10,7 +10,6 @@
 0x91ABB4: test    eax, eax
 0x91ABB6: jle     short loc_91ABDD
 0x91ABB8: jmp     short loc_91ABC0
-0x91ABBA: align 10h
 0x91ABC0: mov     eax, ds:0BA8420h
 0x91ABC5: mov     ecx, [ebx+18h]
 0x91ABC8: mov     edx, [ecx]

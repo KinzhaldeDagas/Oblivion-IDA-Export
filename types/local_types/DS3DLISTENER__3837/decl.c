@@ -1,1 +1,11 @@
-_DS3DLISTENER
+struct _DS3DLISTENER
+{
+DWORD dwSize;
+D3DVECTOR vPosition;
+D3DVECTOR vVelocity;
+D3DVECTOR vOrientFront;
+D3DVECTOR vOrientTop;
+D3DVALUE flDistanceFactor;
+D3DVALUE flRolloffFactor;
+D3DVALUE flDopplerFactor;
+};

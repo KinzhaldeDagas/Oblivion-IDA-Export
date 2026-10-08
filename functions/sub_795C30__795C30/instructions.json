@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x795C30",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; OBLIVION AUTHORITY (2026-08-30): push_back for vector<unsigned int>; appends directly when capacity remains or uses the checked insert-one path. Its observed caller is CIndexedGeometry vertex-color storage.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x795C5C",
-    "line": "mov     ecx, [esp+0Ch+arg_0]",
+    "line": "mov     ecx, [esp+0Ch+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -193,49 +193,49 @@
   },
   {
     "ea": "0x795C7E",
-    "line": "mov     eax, [esp+10h+arg_0]",
+    "line": "mov     eax, [esp+10h+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x795C82",
-    "line": "push    eax; int",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x795C83",
-    "line": "push    edi; Src",
+    "line": "push    edi; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x795C84",
-    "line": "push    esi; int",
+    "line": "push    esi; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x795C85",
-    "line": "lea     ecx, [esp+1Ch+var_8]",
+    "line": "lea     ecx, [esp+1Ch+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x795C89",
-    "line": "push    ecx; int",
+    "line": "push    ecx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x795C8A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x795C8C",
-    "line": "call    sub_795840",
+    "line": "call    OB_stVectorUInt32_InsertOne_010201A0; OBLIVION AUTHORITY (2026-08-30): Checked single-element insertion wrapper for vector<unsigned int>; validates owner/position, delegates to insert-fill, and returns an iterator to the inserted value.",
     "mnemonic": "call",
     "size": 5
   },

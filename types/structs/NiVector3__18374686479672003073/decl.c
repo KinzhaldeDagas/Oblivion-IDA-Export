@@ -1,1 +1,6 @@
-NiVector3
+struct NiVector3
+{
+float x;
+float y;
+float z;
+};

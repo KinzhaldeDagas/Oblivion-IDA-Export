@@ -5,7 +5,7 @@
 0x46D458: test    ecx, ecx
 0x46D45A: jz      short loc_46D46E
 0x46D45C: push    ecx
-0x46D45D: call    FormHeapFree
+0x46D45D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x46D462: add     esp, 4
 0x46D465: mov     dword ptr [esi+4], 0
 0x46D46C: mov     al, 1

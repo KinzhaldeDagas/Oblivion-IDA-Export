@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x4C9565",
-    "line": "lea     ecx, [esp+21Ch+var_108]",
+    "line": "lea     ecx, [esp+21Ch+path]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x4C9572",
-    "line": "call    sub_47D8F0",
+    "line": "call    sub_47D8F0; SpeedTreeOBSE 2026-07-14: normalizes texture palette keys in a fixed 256-byte local buffer. Plugin loader inputs are therefore capped at 255 characters.",
     "mnemonic": "call",
     "size": 5
   },
@@ -127,31 +127,31 @@
   },
   {
     "ea": "0x4C9580",
-    "line": "push    0",
+    "line": "push    0; parent",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4C9582",
-    "line": "push    5",
+    "line": "push    5; priority",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4C9584",
-    "line": "lea     eax, [esp+214h+var_108]",
+    "line": "lea     eax, [esp+214h+path]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x4C958B",
-    "line": "push    eax",
+    "line": "push    eax; path",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4C958C",
-    "line": "call    sub_43B0D0",
+    "line": "call    QueuedTexture_QueueOrAttachPath; Verified neighboring subsystem: landscape texture loading builds Textures\\\\Landscape\\\\<name>, normalizes the path, and uses the same QueuedTexture_QueueOrAttachPath helper with priority 5 and no parent.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,4 +1,4 @@
-0x7DAB80: mov     ecx, ds:0B42F48h
+0x7DAB80: mov     ecx, ds:0B42F48h; [Verified] Maps OblivionBSSMShaderVersion to the selected SDP index. Version 7/BSSM_SV_3_0 maps to package 9 without HDR, or 18/19 with HDR based on FP16ARGB filtering. [Unknown] No native direct store of version 7 was found; SetShaderPackage writes only 0–6. [Candidate cross-build link] Fallout's separately implemented SetShaderVersion also selects BSSM_SV_3_0=7 by default.
 0x7DAB86: add     ecx, 0FFFFFFFFh; switch 7 cases
 0x7DAB89: xor     eax, eax
 0x7DAB8B: cmp     ecx, 6

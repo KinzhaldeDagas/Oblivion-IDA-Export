@@ -1,1 +1,1 @@
-vtable_ptr
+typedef void (*vtable_ptr)(void);

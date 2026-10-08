@@ -1,29 +1,30 @@
-int __thiscall sub_4E4E90(int this, int a2)
+// Verified scans the TESPathGrid point array for pointer identity and returns its u16 array index; returns 0xFFFFFFFF if no point array or no matching point.
+int __thiscall TESPathGrid_GetPointIndex(TESPathGrid *this, TESPathGridPoint *point)
 {
-  int v2; // edi
+  NiTArray_TESPathGridPoint *pointArray; // edi
   int result; // eax
-  int v4; // esi
+  int pointCount; // esi
   int v5; // edx
-  _DWORD *i; // ecx
+  TESPathGridPoint **i; // ecx
 
-  v2 = *(_DWORD *)(this + 0x24);
-  result = 0xFFFFFFFF;
-  if ( v2 )
+  pointArray = this->pointArray; /*0x4e4e91*/
+  result = 0xFFFFFFFF; /*0x4e4e94*/
+  if ( pointArray ) /*0x4e4e99*/
   {
-    if ( a2 )
+    if ( point ) /*0x4e4ea2*/
     {
-      v4 = *(unsigned __int16 *)(this + 0x30);
-      v5 = 0;
-      if ( *(_WORD *)(this + 0x30) )
+      pointCount = this->pointCount; /*0x4e4ea5*/
+      v5 = 0; /*0x4e4ea9*/
+      if ( this->pointCount ) /*0x4e4ea5*/
       {
-        for ( i = *(_DWORD **)(v2 + 4); *i != a2; ++i )
+        for ( i = pointArray->data; *i != point; ++i ) /*0x4e4eaf*/
         {
-          if ( ++v5 >= v4 )
-            return result;
+          if ( ++v5 >= pointCount ) /*0x4e4ebe*/
+            return result; /*0x4e4ebe*/
         }
-        return v5;
+        return v5; /*0x4e4ec6*/
       }
     }
   }
-  return result;
+  return result; /*0x4e4ec2*/
 }

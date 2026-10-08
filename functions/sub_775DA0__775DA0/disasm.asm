@@ -14,7 +14,7 @@
 0x775DBC: mov     ecx, edi
 0x775DBE: call    sub_7756F0
 0x775DC3: push    edi
-0x775DC4: call    FormHeapFree
+0x775DC4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x775DC9: add     esp, 4
 0x775DCC: test    esi, esi
 0x775DCE: jnz     short loc_775DB0
@@ -22,7 +22,7 @@
 0x775DD1: lea     esi, [ebx+134h]
 0x775DD7: mov     ecx, esi
 0x775DD9: mov     dword ptr [esi], offset ??_7?$NiTPointerListBase@V?$NiTPointerAllocator@I@@PAVDisplayFormatInfo@NiDX9DeviceDesc@@@@6B@; const NiTPointerListBase<NiTPointerAllocator<uint>,NiDX9DeviceDesc::DisplayFormatInfo *>::`vftable'
-0x775DDF: call    NiTPointerList__FreeAllNodes
+0x775DDF: call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.
 0x775DE4: mov     dword ptr [esi], offset ??_7?$NiTListBase@V?$NiTPointerAllocator@I@@PAVDisplayFormatInfo@NiDX9DeviceDesc@@@@6B@; const NiTListBase<NiTPointerAllocator<uint>,NiDX9DeviceDesc::DisplayFormatInfo *>::`vftable'
 0x775DEA: pop     esi
 0x775DEB: pop     ebx

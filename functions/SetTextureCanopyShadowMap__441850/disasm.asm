@@ -1,4 +1,4 @@
-0x441850: mov     eax, ds:0B4310Ch
+0x441850: mov     eax, ds:0B4310Ch; Install/own the current canopy shadow-map texture at global 0x00B4310C.
 0x441855: push    edi
 0x441856: mov     edi, [esp+4+arg_0]
 0x44185A: cmp     eax, edi

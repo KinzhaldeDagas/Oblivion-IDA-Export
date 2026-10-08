@@ -1,6 +1,6 @@
-0x794760: push    esi
+0x794760: push    esi; Oblivion CIndexedGeometry::GetVertexTexCoord0. Returns the selected vertex's two-float diffuse UV pair; projected-shadow UVs live in the separate shadowTexcoords stream.
 0x794761: push    edi
-0x794762: mov     edi, [esp+8+arg_0]
+0x794762: mov     edi, [esp+8+vertexIndex]
 0x794766: mov     esi, ecx
 0x794768: mov     ecx, [esi+0BCh]
 0x79476E: add     edi, edi

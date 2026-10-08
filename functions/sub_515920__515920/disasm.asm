@@ -1,4 +1,4 @@
-0x515920: push    0FFFFFFFFh
+0x515920: push    0FFFFFFFFh; Verified via SexChange string 0xA50D84 -> CommandInfo 0xB0BC68 -> execute pointer +0x18. Toggles actor base sex bit at NPC+0x28; component virtual +0x50 receives change mask 0x10. With 3D, detaches both face nodes through parent virtual +0x88 and releases temporary refs. Always clears NPC FaceGen nodes, then process virtual +0x5C(), +0x31C(1), +0x318(actor). Double invocation restores sex bit while repeating invalidation. Not proof of load defect or of immediate texture repair; dynamic process targets remain to be traced.
 0x515922: push    offset SEH_5ACE20
 0x515927: mov     eax, large fs:0
 0x51592D: push    eax
@@ -12,7 +12,7 @@
 0x51593C: push    eax
 0x51593D: lea     eax, [esp+28h+var_C]
 0x515941: mov     large fs:0, eax
-0x515947: mov     edi, [esp+28h+arg_8]
+0x515947: mov     edi, [esp+28h+slot]
 0x51594B: mov     esi, ds:0B333C4h
 0x515951: xor     ebx, ebx
 0x515953: cmp     edi, ebx
@@ -32,8 +32,8 @@
 0x515979: mov     esi, edi
 0x51597B: cmp     esi, ebx
 0x51597D: jz      loc_515ACB
-0x515983: mov     ecx, esi
-0x515985: call    sub_5E32D0
+0x515983: mov     ecx, esi; this
+0x515985: call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.
 0x51598A: test    al, al
 0x51598C: jz      loc_515ACB
 0x515992: mov     eax, [esi]
@@ -47,13 +47,13 @@
 0x5159AA: xor     edi, edi
 0x5159AC: call    edx
 0x5159AE: cmp     eax, ebx
-0x5159B0: mov     [esp+28h+arg_8], ebx
+0x5159B0: mov     [esp+28h+slot], ebx
 0x5159B4: jz      short loc_5159C3
 0x5159B6: mov     edx, [eax]
 0x5159B8: mov     ecx, eax
 0x5159BA: mov     eax, [edx+8]
 0x5159BD: call    eax
-0x5159BF: mov     [esp+28h+arg_8], eax
+0x5159BF: mov     [esp+28h+slot], eax
 0x5159C3: mov     ecx, esi; this
 0x5159C5: call    Actor_IsFemale
 0x5159CA: test    eax, eax
@@ -69,7 +69,7 @@
 0x5159E6: mov     eax, [edx+50h]
 0x5159E9: push    10h
 0x5159EB: call    eax
-0x5159ED: cmp     [esp+28h+arg_8], ebx
+0x5159ED: cmp     [esp+28h+slot], ebx
 0x5159F1: jz      short loc_515A55
 0x5159F3: mov     edx, [esi]
 0x5159F5: mov     eax, [edx+134h]
@@ -84,11 +84,11 @@
 0x515A0B: mov     edx, [ecx]
 0x515A0D: mov     edx, [edx+88h]
 0x515A13: push    eax
-0x515A14: lea     eax, [esp+2Ch+arg_8]
+0x515A14: lea     eax, [esp+2Ch+slot]
 0x515A18: push    eax
 0x515A19: call    edx
-0x515A1B: lea     ecx, [esp+28h+arg_8]; this
-0x515A1F: call    sub_7016A0
+0x515A1B: lea     ecx, [esp+28h+slot]; slot
+0x515A1F: call    NiPointerSlot_Release
 0x515A24: mov     eax, [esi]
 0x515A26: mov     edx, [eax+130h]
 0x515A2C: push    ebx
@@ -105,19 +105,19 @@
 0x515A45: lea     eax, [esp+2Ch+Format]
 0x515A49: push    eax
 0x515A4A: call    edx
-0x515A4C: lea     ecx, [esp+28h+Format]; this
-0x515A50: call    sub_7016A0
-0x515A55: mov     ecx, ebp
-0x515A57: call    sub_405CE0
+0x515A4C: lea     ecx, [esp+28h+Format]; slot
+0x515A50: call    NiPointerSlot_Release
+0x515A55: mov     ecx, ebp; this
+0x515A57: call    TESNPC_ClearFaceGenNodes; SexChange reconstruction boundary: clears NPC cached face nodes (+0x1D4,+0x1D8) after detaching live nodes. Targeted OCO load investigation breakpoint: capture node identities, sex bit, age projections before/after. Candidate repair primitive only; not yet sufficient as standalone post-load correction.
 0x515A5C: mov     ecx, [esi+58h]
 0x515A5F: mov     eax, [ecx]
 0x515A61: mov     edx, [eax+5Ch]
-0x515A64: call    edx
+0x515A64: call    edx; SexChange invokes actor->process vtable+0x5C with no explicit arguments. Record concrete process vtable/target during reproduction; do not assume semantic meaning from Unk_17.
 0x515A66: mov     ecx, [esi+58h]
 0x515A69: mov     eax, [ecx]
 0x515A6B: mov     edx, [eax+31Ch]
 0x515A71: push    1
-0x515A73: call    edx
+0x515A73: call    edx; SexChange invokes actor->process vtable+0x31C with integer 1, then +0x318(actor) at 0x515A81. Exact targets/lifecycle timing require runtime evidence.
 0x515A75: mov     ecx, [esi+58h]
 0x515A78: mov     eax, [ecx]
 0x515A7A: mov     edx, [eax+318h]
@@ -142,7 +142,7 @@
 0x515ABC: push    esi; Format
 0x515ABD: call    Interface_ConsolePrint
 0x515AC2: push    esi
-0x515AC3: call    FormHeapFree
+0x515AC3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x515AC8: add     esp, 1Ch
 0x515ACB: mov     al, 1
 0x515ACD: mov     ecx, dword ptr [esp+28h+var_C]
@@ -154,3 +154,12 @@
 0x515ADC: pop     ebx
 0x515ADD: add     esp, 14h
 0x515AE0: retn
+0x9B5BD0: lea     ecx, [ebp-14h]; void *
+0x9B5BD3: jmp     BSStringT_Clear
+0x9B5BD8: mov     edx, [esp+arg_4]
+0x9B5BDC: lea     eax, [edx-18h]
+0x9B5BDF: mov     ecx, [edx-1Ch]
+0x9B5BE2: xor     ecx, eax
+0x9B5BE4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B5BE9: mov     eax, offset stru_AE0BB4
+0x9B5BEE: jmp     ___CxxFrameHandler3

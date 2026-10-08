@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x4C677B",
-    "line": "mov     ecx, [ecx+20h]; this",
+    "line": "mov     ecx, [ecx+20h]; object",
     "mnemonic": "mov",
     "size": 3
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x4C6792",
-    "line": "call    TESObjectCELL_GetNiNode?",
+    "line": "call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,25 +403,25 @@
   },
   {
     "ea": "0x4C6822",
-    "line": "push    edx",
+    "line": "push    edx; vertices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4C6823",
-    "line": "push    ecx",
+    "line": "push    ecx; vertexCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4C6824",
-    "line": "lea     ecx, [eax+0Ch]",
+    "line": "lea     ecx, [eax+0Ch]; self",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x4C6827",
-    "line": "call    sub_72A0F0",
+    "line": "call    NiSphere_ComputeFromVertices; Local bounding sphere for contiguous NiPoint3 array: midpoint of component minima/maxima; radius=max vertex distance to midpoint; zero-count case clears sphere. Writes sphere only, not NiAVObject world bounds or renderer dirty flags. Prettier Faces invokes after morph on direct CPU vertex data; propagation of world bounds remains a separate runtime verification requirement.",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x4C683B",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1423,13 +1423,13 @@
   },
   {
     "ea": "0x4C6A85",
-    "line": "mov     [esp+98h+var_54], 0",
+    "line": "mov     [esp+98h+slot], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x4C6A8D",
-    "line": "lea     edx, [esp+98h+var_54]",
+    "line": "lea     edx, [esp+98h+slot]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1681,7 +1681,7 @@
   },
   {
     "ea": "0x4C6B1F",
-    "line": "lea     ecx, [esp+98h+var_54]; this",
+    "line": "lea     ecx, [esp+98h+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1693,7 +1693,7 @@
   },
   {
     "ea": "0x4C6B27",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -1723,7 +1723,7 @@
   },
   {
     "ea": "0x4C6B45",
-    "line": "lea     ecx, [esp+98h+var_30]; this",
+    "line": "lea     ecx, [esp+98h+var_30]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1735,7 +1735,7 @@
   },
   {
     "ea": "0x4C6B4D",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -1765,7 +1765,7 @@
   },
   {
     "ea": "0x4C6B6B",
-    "line": "lea     ecx, [esp+98h+var_50]; this",
+    "line": "lea     ecx, [esp+98h+var_50]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1777,7 +1777,7 @@
   },
   {
     "ea": "0x4C6B73",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -1807,7 +1807,7 @@
   },
   {
     "ea": "0x4C6B91",
-    "line": "lea     ecx, [esp+98h+var_2C]; this",
+    "line": "lea     ecx, [esp+98h+var_2C]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1819,7 +1819,7 @@
   },
   {
     "ea": "0x4C6B99",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -1849,7 +1849,7 @@
   },
   {
     "ea": "0x4C6BB7",
-    "line": "lea     ecx, [esp+98h+var_4C]; this",
+    "line": "lea     ecx, [esp+98h+var_4C]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1861,7 +1861,7 @@
   },
   {
     "ea": "0x4C6BBF",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -1891,7 +1891,7 @@
   },
   {
     "ea": "0x4C6BDD",
-    "line": "lea     ecx, [esp+98h+var_28]; this",
+    "line": "lea     ecx, [esp+98h+var_28]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1903,7 +1903,7 @@
   },
   {
     "ea": "0x4C6BE5",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -1933,7 +1933,7 @@
   },
   {
     "ea": "0x4C6C03",
-    "line": "lea     ecx, [esp+98h+var_48]; this",
+    "line": "lea     ecx, [esp+98h+var_48]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1945,7 +1945,7 @@
   },
   {
     "ea": "0x4C6C0B",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -1975,7 +1975,7 @@
   },
   {
     "ea": "0x4C6C29",
-    "line": "lea     ecx, [esp+98h+var_24]; this",
+    "line": "lea     ecx, [esp+98h+var_24]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1987,7 +1987,7 @@
   },
   {
     "ea": "0x4C6C31",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -2017,7 +2017,7 @@
   },
   {
     "ea": "0x4C6C4F",
-    "line": "lea     ecx, [esp+98h+var_44]; this",
+    "line": "lea     ecx, [esp+98h+var_44]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2029,7 +2029,7 @@
   },
   {
     "ea": "0x4C6C57",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -2059,7 +2059,7 @@
   },
   {
     "ea": "0x4C6C75",
-    "line": "lea     ecx, [esp+98h+var_20]; this",
+    "line": "lea     ecx, [esp+98h+var_20]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2071,7 +2071,7 @@
   },
   {
     "ea": "0x4C6C7D",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -2101,7 +2101,7 @@
   },
   {
     "ea": "0x4C6C97",
-    "line": "lea     ecx, [esp+98h+var_40]; this",
+    "line": "lea     ecx, [esp+98h+var_40]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2113,7 +2113,7 @@
   },
   {
     "ea": "0x4C6C9F",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -2143,7 +2143,7 @@
   },
   {
     "ea": "0x4C6CB7",
-    "line": "lea     ecx, [esp+98h+var_1C]; this",
+    "line": "lea     ecx, [esp+98h+var_1C]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2155,7 +2155,7 @@
   },
   {
     "ea": "0x4C6CBF",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -2185,7 +2185,7 @@
   },
   {
     "ea": "0x4C6CD7",
-    "line": "lea     ecx, [esp+98h+var_3C]; this",
+    "line": "lea     ecx, [esp+98h+var_3C]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2197,7 +2197,7 @@
   },
   {
     "ea": "0x4C6CDF",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -2227,7 +2227,7 @@
   },
   {
     "ea": "0x4C6CF7",
-    "line": "lea     ecx, [esp+98h+var_18]; this",
+    "line": "lea     ecx, [esp+98h+var_18]; slot",
     "mnemonic": "lea",
     "size": 7
   },
@@ -2239,7 +2239,7 @@
   },
   {
     "ea": "0x4C6D02",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -2269,7 +2269,7 @@
   },
   {
     "ea": "0x4C6D1A",
-    "line": "lea     ecx, [esp+98h+var_38]; this",
+    "line": "lea     ecx, [esp+98h+var_38]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2281,7 +2281,7 @@
   },
   {
     "ea": "0x4C6D22",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -2311,7 +2311,7 @@
   },
   {
     "ea": "0x4C6D3A",
-    "line": "lea     ecx, [esp+98h+var_14]; this",
+    "line": "lea     ecx, [esp+98h+var_14]; slot",
     "mnemonic": "lea",
     "size": 7
   },
@@ -2323,7 +2323,7 @@
   },
   {
     "ea": "0x4C6D45",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -2359,7 +2359,7 @@
   },
   {
     "ea": "0x4C6D5B",
-    "line": "lea     ecx, [esp+98h+var_34]; this",
+    "line": "lea     ecx, [esp+98h+var_34]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2371,7 +2371,7 @@
   },
   {
     "ea": "0x4C6D63",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -2395,7 +2395,7 @@
   },
   {
     "ea": "0x4C6D78",
-    "line": "lea     ecx, [esp+98h+var_10]; this",
+    "line": "lea     ecx, [esp+98h+var_10]; slot",
     "mnemonic": "lea",
     "size": 7
   },
@@ -2407,7 +2407,7 @@
   },
   {
     "ea": "0x4C6D82",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -3055,7 +3055,7 @@
   },
   {
     "ea": "0x4C6ED5",
-    "line": "call    sub_7E24C0",
+    "line": "call    BSShaderProperty_ClearRenderPassLists; Owner-side cleanup for all four BSShaderProperty RenderPass lists at +0x28/+0x38/+0x48/+0x58. For every node it unlinks the node, releases the node through the list allocator, destroys the payload's owned light array, and frees the 0x10-byte RenderPass. This is the ordinary payload owner; accumulator selector buckets do not perform this destruction.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3103,7 +3103,7 @@
   },
   {
     "ea": "0x4C6EEC",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3139,7 +3139,7 @@
   },
   {
     "ea": "0x4C6F04",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3286,5 +3286,803 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B4B20",
+    "line": "mov     eax, [ebp-84h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4B26",
+    "line": "and     eax, 1",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9B4B29",
+    "line": "jz      locret_9B4B3E",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4B2F",
+    "line": "and     dword ptr [ebp-84h], 0FFFFFFFEh",
+    "mnemonic": "and",
+    "size": 7
+  },
+  {
+    "ea": "0x9B4B36",
+    "line": "lea     ecx, [ebp-10h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B4B39",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4B3E",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B4B3F",
+    "line": "mov     eax, [ebp-84h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4B45",
+    "line": "and     eax, 2",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9B4B48",
+    "line": "jz      locret_9B4B5D",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4B4E",
+    "line": "and     dword ptr [ebp-84h], 0FFFFFFFDh",
+    "mnemonic": "and",
+    "size": 7
+  },
+  {
+    "ea": "0x9B4B55",
+    "line": "lea     ecx, [ebp-34h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B4B58",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4B5D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B4B5E",
+    "line": "mov     eax, [ebp-84h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4B64",
+    "line": "and     eax, 4",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9B4B67",
+    "line": "jz      locret_9B4B7C",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4B6D",
+    "line": "and     dword ptr [ebp-84h], 0FFFFFFFBh",
+    "mnemonic": "and",
+    "size": 7
+  },
+  {
+    "ea": "0x9B4B74",
+    "line": "lea     ecx, [ebp-14h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B4B77",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4B7C",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B4B7D",
+    "line": "mov     eax, [ebp-84h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4B83",
+    "line": "and     eax, 8",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9B4B86",
+    "line": "jz      locret_9B4B9B",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4B8C",
+    "line": "and     dword ptr [ebp-84h], 0FFFFFFF7h",
+    "mnemonic": "and",
+    "size": 7
+  },
+  {
+    "ea": "0x9B4B93",
+    "line": "lea     ecx, [ebp-38h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B4B96",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4B9B",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B4B9C",
+    "line": "mov     eax, [ebp-84h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4BA2",
+    "line": "and     eax, 10h",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9B4BA5",
+    "line": "jz      locret_9B4BBA",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4BAB",
+    "line": "and     dword ptr [ebp-84h], 0FFFFFFEFh",
+    "mnemonic": "and",
+    "size": 7
+  },
+  {
+    "ea": "0x9B4BB2",
+    "line": "lea     ecx, [ebp-18h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B4BB5",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4BBA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B4BBB",
+    "line": "mov     eax, [ebp-84h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4BC1",
+    "line": "and     eax, 20h",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9B4BC4",
+    "line": "jz      locret_9B4BD9",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4BCA",
+    "line": "and     dword ptr [ebp-84h], 0FFFFFFDFh",
+    "mnemonic": "and",
+    "size": 7
+  },
+  {
+    "ea": "0x9B4BD1",
+    "line": "lea     ecx, [ebp-3Ch]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B4BD4",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4BD9",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B4BDA",
+    "line": "mov     eax, [ebp-84h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4BE0",
+    "line": "and     eax, 40h",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9B4BE3",
+    "line": "jz      locret_9B4BF8",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4BE9",
+    "line": "and     dword ptr [ebp-84h], 0FFFFFFBFh",
+    "mnemonic": "and",
+    "size": 7
+  },
+  {
+    "ea": "0x9B4BF0",
+    "line": "lea     ecx, [ebp-1Ch]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B4BF3",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4BF8",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B4BF9",
+    "line": "mov     eax, [ebp-84h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4BFF",
+    "line": "and     eax, 80h",
+    "mnemonic": "and",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4C04",
+    "line": "jz      locret_9B4C1C",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4C0A",
+    "line": "and     dword ptr [ebp-84h], 0FFFFFF7Fh",
+    "mnemonic": "and",
+    "size": 10
+  },
+  {
+    "ea": "0x9B4C14",
+    "line": "lea     ecx, [ebp-40h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B4C17",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4C1C",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B4C1D",
+    "line": "mov     eax, [ebp-84h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4C23",
+    "line": "and     eax, 100h",
+    "mnemonic": "and",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4C28",
+    "line": "jz      locret_9B4C40",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4C2E",
+    "line": "and     dword ptr [ebp-84h], 0FFFFFEFFh",
+    "mnemonic": "and",
+    "size": 10
+  },
+  {
+    "ea": "0x9B4C38",
+    "line": "lea     ecx, [ebp-20h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B4C3B",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4C40",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B4C41",
+    "line": "mov     eax, [ebp-84h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4C47",
+    "line": "and     eax, 200h",
+    "mnemonic": "and",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4C4C",
+    "line": "jz      locret_9B4C64",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4C52",
+    "line": "and     dword ptr [ebp-84h], 0FFFFFDFFh",
+    "mnemonic": "and",
+    "size": 10
+  },
+  {
+    "ea": "0x9B4C5C",
+    "line": "lea     ecx, [ebp-44h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B4C5F",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4C64",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B4C65",
+    "line": "mov     eax, [ebp-84h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4C6B",
+    "line": "and     eax, 400h",
+    "mnemonic": "and",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4C70",
+    "line": "jz      locret_9B4C88",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4C76",
+    "line": "and     dword ptr [ebp-84h], 0FFFFFBFFh",
+    "mnemonic": "and",
+    "size": 10
+  },
+  {
+    "ea": "0x9B4C80",
+    "line": "lea     ecx, [ebp-24h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B4C83",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4C88",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B4C89",
+    "line": "mov     eax, [ebp-84h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4C8F",
+    "line": "and     eax, 800h",
+    "mnemonic": "and",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4C94",
+    "line": "jz      locret_9B4CAC",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4C9A",
+    "line": "and     dword ptr [ebp-84h], 0FFFFF7FFh",
+    "mnemonic": "and",
+    "size": 10
+  },
+  {
+    "ea": "0x9B4CA4",
+    "line": "lea     ecx, [ebp-48h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B4CA7",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4CAC",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B4CAD",
+    "line": "mov     eax, [ebp-84h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4CB3",
+    "line": "and     eax, 1000h",
+    "mnemonic": "and",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4CB8",
+    "line": "jz      locret_9B4CD0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4CBE",
+    "line": "and     dword ptr [ebp-84h], 0FFFFEFFFh",
+    "mnemonic": "and",
+    "size": 10
+  },
+  {
+    "ea": "0x9B4CC8",
+    "line": "lea     ecx, [ebp-28h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B4CCB",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4CD0",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B4CD1",
+    "line": "mov     eax, [ebp-84h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4CD7",
+    "line": "and     eax, 2000h",
+    "mnemonic": "and",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4CDC",
+    "line": "jz      locret_9B4CF4",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4CE2",
+    "line": "and     dword ptr [ebp-84h], 0FFFFDFFFh",
+    "mnemonic": "and",
+    "size": 10
+  },
+  {
+    "ea": "0x9B4CEC",
+    "line": "lea     ecx, [ebp-4Ch]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B4CEF",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4CF4",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B4CF5",
+    "line": "mov     eax, [ebp-84h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4CFB",
+    "line": "and     eax, 4000h",
+    "mnemonic": "and",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4D00",
+    "line": "jz      locret_9B4D18",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4D06",
+    "line": "and     dword ptr [ebp-84h], 0FFFFBFFFh",
+    "mnemonic": "and",
+    "size": 10
+  },
+  {
+    "ea": "0x9B4D10",
+    "line": "lea     ecx, [ebp-2Ch]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B4D13",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4D18",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B4D19",
+    "line": "mov     eax, [ebp-84h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4D1F",
+    "line": "and     eax, 8000h",
+    "mnemonic": "and",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4D24",
+    "line": "jz      locret_9B4D3C",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4D2A",
+    "line": "and     dword ptr [ebp-84h], 0FFFF7FFFh",
+    "mnemonic": "and",
+    "size": 10
+  },
+  {
+    "ea": "0x9B4D34",
+    "line": "lea     ecx, [ebp-50h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B4D37",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4D3C",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B4D3D",
+    "line": "mov     eax, [ebp-84h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4D43",
+    "line": "and     eax, 10000h",
+    "mnemonic": "and",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4D48",
+    "line": "jz      locret_9B4D60",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4D4E",
+    "line": "and     dword ptr [ebp-84h], 0FFFEFFFFh",
+    "mnemonic": "and",
+    "size": 10
+  },
+  {
+    "ea": "0x9B4D58",
+    "line": "lea     ecx, [ebp-30h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B4D5B",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4D60",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B4D61",
+    "line": "mov     eax, [ebp-84h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4D67",
+    "line": "and     eax, 20000h",
+    "mnemonic": "and",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4D6C",
+    "line": "jz      locret_9B4D84",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4D72",
+    "line": "and     dword ptr [ebp-84h], 0FFFDFFFFh",
+    "mnemonic": "and",
+    "size": 10
+  },
+  {
+    "ea": "0x9B4D7C",
+    "line": "lea     ecx, [ebp-54h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B4D7F",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4D84",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B4D85",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B4D89",
+    "line": "lea     eax, [edx-88h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4D8F",
+    "line": "mov     ecx, [edx-8Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4D95",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B4D97",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4D9C",
+    "line": "mov     eax, offset stru_ADFF44",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4DA1",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

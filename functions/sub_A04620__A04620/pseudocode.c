@@ -1,4 +1,4 @@
-BSStringT *sub_A04620()
+NiRTTI *sub_A04620()
 {
-  return sub_70E220(&stru_B3DA40, "NiStringPalette", (int)dword_B3F684);
+  return NiRTTI_Constructor(&stru_B3DA40, "NiStringPalette", &stru_B3F684); /*0xa04634*/
 }

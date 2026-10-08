@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x664970",
-    "line": "push    ebx",
+    "line": "push    ebx; Returns the selected attribute's skill-increase count from the oldest queued eight-byte attribute-bonus bucket. The queue preserves separate bonus sets when multiple player levels are pending.",
     "mnemonic": "push",
     "size": 1
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x6649EE",
-    "line": "mov     ecx, [esp+0Ch+arg_0]",
+    "line": "mov     ecx, [esp+0Ch+attributeAV]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x6649FB",
-    "line": "call    ActorValue_GetGroupOffsetFromAV",
+    "line": "call    ActorValue_GetGroupOffsetFromAV; RealArenaTraining fidelity pass: ActorValue_GetGroupOffsetFromAV(group, actorValue). Player skill-progress code calls this with group 2 before indexing player skillExp/requiredSkillExp.",
     "mnemonic": "call",
     "size": 5
   },

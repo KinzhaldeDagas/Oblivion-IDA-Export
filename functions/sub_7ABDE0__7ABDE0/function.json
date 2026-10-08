@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
-  "callers_count": 5,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 15,
+  "chunks": [
+    [
+      "0x7ABDE0",
+      "0x7ABE30"
+    ]
+  ],
+  "chunks_sha256": "ad0ea5c671f6ae408c8db32c177736a4a1c27f3aa6dda222d91f8c3200c85af2",
+  "comment_regular": "BSTPersistentList tail append. Reuses a local free node or acquires one, stores the caller's payload pointer verbatim at node+0x08, links at tail, and increments count. For accumulator RenderPass buckets this creates a non-owning pointer borrow; it does not copy, retain, or destroy the RenderPass.\n\nMoonSugarEffect decode: BSTPersistentList append helper. Reuses a free node or allocates one, stores payload at node+8, links at tail, increments count.",
+  "comment_repeatable": "BSTPersistentList tail append. Reuses a local free node or acquires one, stores the caller's payload pointer verbatim at node+0x08, links at tail, and increments count. For accumulator RenderPass buckets this creates a non-owning pointer borrow; it does not copy, retain, or destroy the RenderPass.\nDX11 caller distinction 2026-09-30: this helper stores DWORD pointed to by its argument. Accumulator bucket insertion callers pass the address of a RenderPass pointer. FlushPassBucket replay/refraction callers pass a RenderPass pointer itself, so they append its first DWORD, the geometry identity. Do not label all payload uses of this generic list helper as RenderPass ownership.\nVerified typed pointer-list append 2026-09-30: node+8 receives *payloadAddress, not the address of that argument. Therefore bucket builders passing &RenderPass store a RenderPass pointer, while replay append callers passing RenderPass itself store its first DWORD, the geometry pointer. Pop local freeHead first; its successor previous field is intentionally not repaired. Append sets next0/previousTail/payload, links old tail or sets head, increments count and publishes tail. No payload retain/release.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7ABDE0",
+  "display_name": "BSTPersistentList_AppendTailReusingFreeNode",
   "end_ea": "0x7ABE30",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7ABDE0",
+  "name": "BSTPersistentList_AppendTailReusingFreeNode",
   "segment": ".text",
   "sha256": "ad0ea5c671f6ae408c8db32c177736a4a1c27f3aa6dda222d91f8c3200c85af2",
   "size": 80,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7ABDE0",
-  "type": "int *__thiscall(_DWORD *this, int *)",
+  "total_chunk_size": 80,
+  "type": "BSTPersistentListPointerNode *__thiscall(BSTPersistentListPointer *this, void *const *payloadAddress)",
   "xrefs_from_count": 30,
   "xrefs_to_count": 15
 }

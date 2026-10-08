@@ -19,7 +19,7 @@
 0x6AA717: test    [esp+8+arg_0], 1
 0x6AA71C: jz      short loc_6AA727
 0x6AA71E: push    edi
-0x6AA71F: call    FormHeapFree
+0x6AA71F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6AA724: add     esp, 4
 0x6AA727: mov     eax, edi
 0x6AA729: pop     edi

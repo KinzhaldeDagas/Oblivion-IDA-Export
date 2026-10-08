@@ -1,1 +1,1 @@
-NiBoolInterpolator
+struct NiBoolInterpolator;

@@ -1,11 +1,11 @@
-char __thiscall sub_6ECA30(float *this, int a2)
+char __thiscall sub_6ECA30(NiTriBasedGeomData *this, int a2)
 {
   char result; // al
 
-  result = sub_715820(this, a2);
-  if ( result )
-    return (*(unsigned __int8 (__thiscall **)(_DWORD, _DWORD))(**((_DWORD **)this + 0x10) + 0x2C))(
-             *((_DWORD *)this + 0x10),
+  result = NiTimeController_IsEqual(this, a2); /*0x6eca39*/
+  if ( result ) /*0x6eca40*/
+    return (*(unsigned __int8 (__thiscall **)(_DWORD, _DWORD))(**(_DWORD **)&this->members.m_usTriangles + 0x2C))( /*0x6eca58*/
+             *(_DWORD *)&this->members.m_usTriangles,
              *(_DWORD *)(a2 + 0x40)) != 0;
-  return result;
+  return result; /*0x6eca42*/
 }

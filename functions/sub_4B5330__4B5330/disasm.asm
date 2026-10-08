@@ -9,10 +9,10 @@
 0x4B5342: call    TESValueForm_SaveModified
 0x4B5347: test    bl, 4
 0x4B534A: jz      short loc_4B5360
-0x4B534C: mov     ecx, ds:0B33B00h
-0x4B5352: push    1; Size
+0x4B534C: mov     ecx, ds:0B33B00h; self
+0x4B5352: push    1; byteCount
 0x4B5354: add     esi, 89h ; '‰'
-0x4B535A: push    esi; Src
+0x4B535A: push    esi; source
 0x4B535B: call    SaveLoad_SaveData
 0x4B5360: pop     esi
 0x4B5361: pop     ebx

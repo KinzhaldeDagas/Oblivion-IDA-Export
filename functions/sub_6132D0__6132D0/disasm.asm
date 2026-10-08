@@ -1,4 +1,4 @@
-0x6132D0: fld     [esp+arg_0]
+0x6132D0: fld     [esp+arg_0]; Low ballistic-pitch solver. It forms the quadratic in cos^2(theta), selects the larger valid root for the low arc, and returns a signed acos(sqrt(root)); invalid trajectories return the engine fallback angle.
 0x6132D4: fld     st
 0x6132D6: fmul    [esp+arg_C]
 0x6132DA: fmul    st, st(1)

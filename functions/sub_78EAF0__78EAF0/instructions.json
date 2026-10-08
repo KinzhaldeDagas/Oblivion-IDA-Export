@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x78EAF0",
-    "line": "cmp     byte ptr ds:0B42994h, 0",
+    "line": "cmp     byte ptr ds:0B42994h, 0; Oblivion stRandom constructor. The class has no per-instance generator state; if the shared SIdvRandomImpl state is not initialized, it invokes Reseed(-1).",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -25,13 +25,13 @@
   },
   {
     "ea": "0x78EAFC",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; seed",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x78EAFE",
-    "line": "call    sub_78EA30",
+    "line": "call    OB_stRandom_Reseed_010201A0; Oblivion stRandom::Reseed. Seed -1 derives a nonzero fractional seed from time and either 12345 or an existing uniform sample; explicit seeds <=1 clamp to 1 and use Random::SetLong. Marks the shared generator initialized.",
     "mnemonic": "call",
     "size": 5
   },

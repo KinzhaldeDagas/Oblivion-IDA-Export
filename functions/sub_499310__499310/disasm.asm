@@ -1,9 +1,9 @@
-0x499310: push    ebx
+0x499310: push    ebx; Strong-own the supplied frame-local shadow map at ShadowSceneLight+0x114, releasing any previous map reference.
 0x499311: push    esi
 0x499312: mov     ebx, ecx
 0x499314: mov     esi, [ebx+114h]
 0x49931A: push    edi
-0x49931B: mov     edi, [esp+0Ch+arg_0]
+0x49931B: mov     edi, [esp+0Ch+shadowMap]
 0x49931F: cmp     esi, edi
 0x499321: jz      short loc_499357
 0x499323: test    esi, esi

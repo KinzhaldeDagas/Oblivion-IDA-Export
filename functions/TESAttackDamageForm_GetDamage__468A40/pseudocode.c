@@ -1,4 +1,4 @@
 __int16 __thiscall TESAttackDamageForm_GetDamage(_WORD *this)
 {
-  return *(this + 2);
+  return *(this + 2); /*0x468a44*/
 }

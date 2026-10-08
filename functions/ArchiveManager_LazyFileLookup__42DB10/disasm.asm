@@ -1,5 +1,5 @@
 0x42DB10: mov     edx, [esp+arg_0]
-0x42DB14: mov     ecx, FirstLoadedArchiveByType[edx*4]
+0x42DB14: mov     ecx, ds:0B338E8h[edx*4]
 0x42DB1B: xor     eax, eax
 0x42DB1D: test    ecx, ecx
 0x42DB1F: jnz     short loc_42DB2C

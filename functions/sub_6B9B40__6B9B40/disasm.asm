@@ -21,7 +21,7 @@
 0x6B9B7E: push    ecx
 0x6B9B7F: lea     ecx, [edi+10h]
 0x6B9B82: mov     [esp+1Ch+var_4], 0
-0x6B9B8A: call    sub_7C16B0
+0x6B9B8A: call    NiTRefPointerList__AddTail; Generic refcounted NiT pointer-list AddTail helper. Allocates a node, assigns/increments its object pointer, links it after the old tail, and updates head/tail/count.
 0x6B9B8F: test    esi, esi
 0x6B9B91: mov     [esp+18h+var_4], 0FFFFFFFFh
 0x6B9B99: jz      short loc_6B9BB3
@@ -42,3 +42,12 @@
 0x6B9BC0: pop     esi
 0x6B9BC1: add     esp, 0Ch
 0x6B9BC4: retn    4
+0x9C9BA0: lea     ecx, [ebp+4]; slot
+0x9C9BA3: jmp     NiPointerSlot_Release
+0x9C9BA8: mov     edx, [esp+arg_4]
+0x9C9BAC: lea     eax, [edx-8]
+0x9C9BAF: mov     ecx, [edx-0Ch]
+0x9C9BB2: xor     ecx, eax
+0x9C9BB4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C9BB9: mov     eax, offset stru_AF23BC
+0x9C9BBE: jmp     ___CxxFrameHandler3

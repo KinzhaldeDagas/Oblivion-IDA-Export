@@ -1,2 +1,2 @@
-0x780DE0: mov     eax, [ecx+30h]
+0x780DE0: mov     eax, [ecx+30h]; MoonSugarEffect decode: NiD3DVertexShader D3D handle getter. Returns wrapper +0x30 IDirect3DVertexShader9*, which NiD3DPass::sub_75FBA0 passes to NiDX9RenderState::SetVertexShader.
 0x780DE3: retn

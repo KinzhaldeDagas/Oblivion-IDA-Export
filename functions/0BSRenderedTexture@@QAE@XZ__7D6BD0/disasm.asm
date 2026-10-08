@@ -16,11 +16,11 @@
 0x7D6BF9: mov     [esp+28h+var_10], ebx
 0x7D6BFD: mov     ebp, ds:0A28078h
 0x7D6C03: xor     esi, esi
-0x7D6C05: push    offset NiRefObject_objcount; lpAddend
+0x7D6C05: push    0B3FD64h; lpAddend
 0x7D6C0A: mov     dword ptr [ebx], offset ??_7NiRefObject@@6B@; const NiRefObject::`vftable'
 0x7D6C10: mov     [ebx+4], esi
 0x7D6C13: call    ebp ; InterlockedIncrement
-0x7D6C15: push    offset sub_7016A0; a5
+0x7D6C15: push    offset NiPointerSlot_Release; a5
 0x7D6C1A: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x7D6C1F: push    6; size
 0x7D6C21: lea     eax, [ebx+8]
@@ -66,7 +66,7 @@
 0x7D6C8F: call    eax
 0x7D6C91: test    eax, eax
 0x7D6C93: jz      short loc_7D6CA3
-0x7D6C95: cmp     eax, offset unk_BAA880
+0x7D6C95: cmp     eax, offset stru_BAA880
 0x7D6C9A: jz      short loc_7D6CEA
 0x7D6C9C: mov     eax, [eax+4]
 0x7D6C9F: test    eax, eax
@@ -127,7 +127,7 @@
 0x7D6D30: call    eax
 0x7D6D32: test    eax, eax
 0x7D6D34: jz      short loc_7D6D44
-0x7D6D36: cmp     eax, offset unk_BAA880
+0x7D6D36: cmp     eax, offset stru_BAA880
 0x7D6D3B: jz      short loc_7D6DA8
 0x7D6D3D: mov     eax, [eax+4]
 0x7D6D40: test    eax, eax
@@ -135,13 +135,13 @@
 0x7D6D44: mov     ecx, [esp+28h+a3]
 0x7D6D48: mov     edx, ds:0B3F928h
 0x7D6D4E: mov     eax, [esi]
-0x7D6D50: push    ecx; a3
-0x7D6D51: push    edx; a2
+0x7D6D50: push    ecx; depthBuffer
+0x7D6D51: push    edx; renderer
 0x7D6D52: mov     edx, [eax+54h]
 0x7D6D55: mov     ecx, esi
 0x7D6D57: call    edx
-0x7D6D59: push    eax; a1
-0x7D6D5A: call    CreateNewRenderTargetGroupAndDoSomething
+0x7D6D59: push    eax; colorBuffer
+0x7D6D5A: call    NiRenderTargetGroup__CreateWithBuffers; Creates a one-color-target NiRenderTargetGroup, attaches the supplied Ni2DBuffer at slot 0, and optionally attaches a NiDepthStencilBuffer.
 0x7D6D5F: mov     ecx, [esp+34h+var_14]; this
 0x7D6D63: add     esp, 0Ch
 0x7D6D66: push    eax; a2
@@ -173,14 +173,13 @@
 0x7D6DAC: lea     ebx, [esi+44h]
 0x7D6DAF: mov     [esp+28h+arg_8], 6
 0x7D6DB7: jmp     short loc_7D6DC0
-0x7D6DB9: align 10h
 0x7D6DC0: mov     ecx, [esp+28h+a3]
 0x7D6DC4: mov     edx, ds:0B3F928h
 0x7D6DCA: mov     eax, [ebx]
-0x7D6DCC: push    ecx; a3
-0x7D6DCD: push    edx; a2
-0x7D6DCE: push    eax; a1
-0x7D6DCF: call    CreateNewRenderTargetGroupAndDoSomething
+0x7D6DCC: push    ecx; depthBuffer
+0x7D6DCD: push    edx; renderer
+0x7D6DCE: push    eax; colorBuffer
+0x7D6DCF: call    NiRenderTargetGroup__CreateWithBuffers; Creates a one-color-target NiRenderTargetGroup, attaches the supplied Ni2DBuffer at slot 0, and optionally attaches a NiDepthStencilBuffer.
 0x7D6DD4: mov     esi, [ebp+0]
 0x7D6DD7: mov     edi, eax
 0x7D6DD9: add     esp, 0Ch
@@ -220,3 +219,23 @@
 0x7D6E31: pop     ebx
 0x7D6E32: add     esp, 14h
 0x7D6E35: retn    0Ch
+0x9CED00: mov     ecx, [ebp-10h]
+0x9CED03: jmp     NiRefObject_destr
+0x9CED08: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9CED0D: push    6; int
+0x9CED0F: push    4; unsigned int
+0x9CED11: mov     eax, [ebp-10h]
+0x9CED14: add     eax, 8
+0x9CED17: push    eax; void *
+0x9CED18: call    $LN21
+0x9CED1D: retn
+0x9CED1E: mov     ecx, [ebp-10h]
+0x9CED21: add     ecx, 20h ; ' '; slot
+0x9CED24: jmp     NiPointerSlot_Release
+0x9CED29: mov     edx, [esp+a3]
+0x9CED2D: lea     eax, [edx-18h]
+0x9CED30: mov     ecx, [edx-1Ch]
+0x9CED33: xor     ecx, eax
+0x9CED35: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CED3A: mov     eax, offset stru_AF7B54
+0x9CED3F: jmp     ___CxxFrameHandler3

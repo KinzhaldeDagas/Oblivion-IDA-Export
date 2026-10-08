@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x72A0F0",
-    "line": "sub     esp, 24h",
+    "line": "sub     esp, 24h; Local bounding sphere for contiguous NiPoint3 array: midpoint of component minima/maxima; radius=max vertex distance to midpoint; zero-count case clears sphere. Writes sphere only, not NiAVObject world bounds or renderer dirty flags. Prettier Faces invokes after morph on direct CPU vertex data; propagation of world bounds remains a separate runtime verification requirement.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x72A0F4",
-    "line": "mov     ebx, [esp+28h+arg_0]",
+    "line": "mov     ebx, [esp+28h+vertexCount]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x72A128",
-    "line": "mov     edi, [esp+34h+arg_4]",
+    "line": "mov     edi, [esp+34h+vertices]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1410,12 +1410,6 @@
     "size": 2
   },
   {
-    "ea": "0x72A39A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x72A3A0",
     "line": "fld     dword ptr [ecx-8]",
     "mnemonic": "fld",
@@ -1717,7 +1711,7 @@
   },
   {
     "ea": "0x72A430",
-    "line": "xor     esi, esi",
+    "line": "xor     esi, esi; Set sphere center to the midpoint of component-wise vertex minima and maxima.",
     "mnemonic": "xor",
     "size": 2
   },
@@ -1879,7 +1873,7 @@
   },
   {
     "ea": "0x72A490",
-    "line": "fstp    [esp+34h+arg_0]",
+    "line": "fstp    [esp+34h+vertexCount]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2059,19 +2053,19 @@
   },
   {
     "ea": "0x72A4ED",
-    "line": "fstp    [esp+34h+arg_4]",
+    "line": "fstp    [esp+34h+vertices]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x72A4F1",
-    "line": "fld     [esp+34h+arg_4]",
+    "line": "fld     [esp+34h+vertices]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x72A4F5",
-    "line": "fld     [esp+34h+arg_0]",
+    "line": "fld     [esp+34h+vertexCount]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2101,7 +2095,7 @@
   },
   {
     "ea": "0x72A502",
-    "line": "fstp    [esp+34h+arg_0]",
+    "line": "fstp    [esp+34h+vertexCount]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2239,19 +2233,19 @@
   },
   {
     "ea": "0x72A540",
-    "line": "fstp    [esp+34h+arg_4]",
+    "line": "fstp    [esp+34h+vertices]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x72A544",
-    "line": "fld     [esp+34h+arg_4]",
+    "line": "fld     [esp+34h+vertices]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x72A548",
-    "line": "fld     [esp+34h+arg_0]",
+    "line": "fld     [esp+34h+vertexCount]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2281,7 +2275,7 @@
   },
   {
     "ea": "0x72A555",
-    "line": "fstp    [esp+34h+arg_0]",
+    "line": "fstp    [esp+34h+vertexCount]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2419,19 +2413,19 @@
   },
   {
     "ea": "0x72A594",
-    "line": "fstp    [esp+34h+arg_4]",
+    "line": "fstp    [esp+34h+vertices]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x72A598",
-    "line": "fld     [esp+34h+arg_4]",
+    "line": "fld     [esp+34h+vertices]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x72A59C",
-    "line": "fld     [esp+34h+arg_0]",
+    "line": "fld     [esp+34h+vertexCount]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2461,7 +2455,7 @@
   },
   {
     "ea": "0x72A5A9",
-    "line": "fstp    [esp+34h+arg_0]",
+    "line": "fstp    [esp+34h+vertexCount]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2599,19 +2593,19 @@
   },
   {
     "ea": "0x72A5E8",
-    "line": "fstp    [esp+34h+arg_4]",
+    "line": "fstp    [esp+34h+vertices]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x72A5EC",
-    "line": "fld     [esp+34h+arg_4]",
+    "line": "fld     [esp+34h+vertices]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x72A5F0",
-    "line": "fld     [esp+34h+arg_0]",
+    "line": "fld     [esp+34h+vertexCount]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2641,7 +2635,7 @@
   },
   {
     "ea": "0x72A5FD",
-    "line": "fstp    [esp+34h+arg_0]",
+    "line": "fstp    [esp+34h+vertexCount]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2869,19 +2863,19 @@
   },
   {
     "ea": "0x72A665",
-    "line": "fstp    [esp+34h+arg_4]",
+    "line": "fstp    [esp+34h+vertices]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x72A669",
-    "line": "fld     [esp+34h+arg_4]",
+    "line": "fld     [esp+34h+vertices]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x72A66D",
-    "line": "fld     [esp+34h+arg_0]",
+    "line": "fld     [esp+34h+vertexCount]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2911,7 +2905,7 @@
   },
   {
     "ea": "0x72A67A",
-    "line": "fstp    [esp+34h+arg_0]",
+    "line": "fstp    [esp+34h+vertexCount]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2965,7 +2959,7 @@
   },
   {
     "ea": "0x72A690",
-    "line": "fld     [esp+34h+arg_0]",
+    "line": "fld     [esp+34h+vertexCount]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2977,13 +2971,13 @@
   },
   {
     "ea": "0x72A699",
-    "line": "fstp    [esp+34h+arg_0]",
+    "line": "fstp    [esp+34h+vertexCount]; Set radius to the maximum Euclidean distance from the computed center.",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x72A69D",
-    "line": "fld     [esp+34h+arg_0]",
+    "line": "fld     [esp+34h+vertexCount]",
     "mnemonic": "fld",
     "size": 4
   },

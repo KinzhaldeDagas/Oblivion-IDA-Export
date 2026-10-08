@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7641A0",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Initialize NiDX9Renderer state defaults, including clear depth 1.0 and clear stencil 0.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x7641C5",
-    "line": "fstp    dword ptr [esi+5D8h]",
+    "line": "fstp    dword ptr [esi+5D8h]; Native default clear depth = 1.0.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x764247",
-    "line": "mov     [esi+5DCh], ebx",
+    "line": "mov     [esi+5DCh], ebx; Native default clear stencil = 0.",
     "mnemonic": "mov",
     "size": 6
   },

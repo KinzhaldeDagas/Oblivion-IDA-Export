@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7877E0",
+      "0x78780E"
+    ]
+  ],
+  "chunks_sha256": "eba2db2aa1e07f8b92a4496d2074bb63562a008162b5fde3e7e64c66b1ae5cec",
+  "comment_regular": "Oblivion CTreeFileAccess::ParseBool: consumes one byte at cursorOffset, bounds-checks against the owned buffer, advances the cursor, and returns byte != 0. RT4.1 FileAccess.h corroborates the method name.",
+  "comment_repeatable": "Oblivion CTreeFileAccess::ParseBool: consumes one byte at cursorOffset, bounds-checks against the owned buffer, advances the cursor, and returns byte != 0. RT4.1 FileAccess.h corroborates the method name.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7877E0",
+  "display_name": "OB_CTreeFileAccess_ParseBool_010201A0",
   "end_ea": "0x78780E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7877E0",
+  "name": "OB_CTreeFileAccess_ParseBool_010201A0",
   "segment": ".text",
   "sha256": "eba2db2aa1e07f8b92a4496d2074bb63562a008162b5fde3e7e64c66b1ae5cec",
   "size": 46,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7877E0",
-  "type": "BOOL __thiscall(_DWORD *this)",
+  "total_chunk_size": 46,
+  "type": "bool __thiscall(OB_CTreeFileAccess_010201A0 *this)",
   "xrefs_from_count": 23,
   "xrefs_to_count": 1
 }

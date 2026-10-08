@@ -19,9 +19,9 @@
 0x510AC1: call    edx
 0x510AC3: mov     edi, eax
 0x510AC5: xor     esi, esi
-0x510AC7: push    esi
-0x510AC8: mov     ecx, edi
-0x510ACA: call    sub_4706E0
+0x510AC7: push    esi; slotSelector
+0x510AC8: mov     ecx, edi; this
+0x510ACA: call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].
 0x510ACF: test    eax, eax
 0x510AD1: jz      short loc_510AD7
 0x510AD3: fld1
@@ -47,14 +47,14 @@
 0x510B0A: mov     ecx, [esi+0B0h]
 0x510B10: cmp     dword ptr [ecx], 0
 0x510B13: jz      short loc_510B6B
-0x510B15: push    0
-0x510B17: mov     ecx, esi
-0x510B19: call    sub_405790
+0x510B15: push    0; index
+0x510B17: mov     ecx, esi; this
+0x510B19: call    NiNode_GetChildAtIndex
 0x510B1E: cmp     dword ptr [eax+0Ch], 0
 0x510B22: jz      short loc_510B6B
-0x510B24: push    0
-0x510B26: mov     ecx, esi
-0x510B28: call    sub_405790
+0x510B24: push    0; index
+0x510B26: mov     ecx, esi; this
+0x510B28: call    NiNode_GetChildAtIndex
 0x510B2D: mov     eax, [eax+0Ch]
 0x510B30: push    eax
 0x510B31: push    offset stru_B3CAC0

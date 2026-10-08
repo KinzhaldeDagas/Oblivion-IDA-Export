@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x4D2D12",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1177,7 +1177,7 @@
   },
   {
     "ea": "0x4D2F62",
-    "line": "mov     [esp+48h+var_C], esi",
+    "line": "mov     [esp+48h+cellY], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1207,13 +1207,13 @@
   },
   {
     "ea": "0x4D2F76",
-    "line": "push    esi; signed int",
+    "line": "push    esi; cellY",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D2F77",
-    "line": "push    ebp; signed int",
+    "line": "push    ebp; cellX",
     "mnemonic": "push",
     "size": 1
   },
@@ -1261,7 +1261,7 @@
   },
   {
     "ea": "0x4D2F90",
-    "line": "call    sub_420B50",
+    "line": "call    ExtraDataList_GetSeenData; Returns the owned SeenData pointer from ExtraSeenData (type 0x09), or null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1399,13 +1399,13 @@
   },
   {
     "ea": "0x4D2FDC",
-    "line": "push    esi; signed int",
+    "line": "push    esi; cellY",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D2FDD",
-    "line": "push    ebp; signed int",
+    "line": "push    ebp; cellX",
     "mnemonic": "push",
     "size": 1
   },
@@ -1459,7 +1459,7 @@
   },
   {
     "ea": "0x4D2FF7",
-    "line": "call    sub_420B50",
+    "line": "call    ExtraDataList_GetSeenData; Returns the owned SeenData pointer from ExtraSeenData (type 0x09), or null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1699,13 +1699,13 @@
   },
   {
     "ea": "0x4D306E",
-    "line": "mov     ecx, [esp+38h+var_C]",
+    "line": "mov     ecx, [esp+38h+cellY]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4D3072",
-    "line": "push    ecx; signed int",
+    "line": "push    ecx; cellY",
     "mnemonic": "push",
     "size": 1
   },
@@ -1723,7 +1723,7 @@
   },
   {
     "ea": "0x4D307A",
-    "line": "push    edx; signed int",
+    "line": "push    edx; cellX",
     "mnemonic": "push",
     "size": 1
   },
@@ -1765,7 +1765,7 @@
   },
   {
     "ea": "0x4D308B",
-    "line": "call    sub_420B50",
+    "line": "call    ExtraDataList_GetSeenData; Returns the owned SeenData pointer from ExtraSeenData (type 0x09), or null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1987,7 +1987,7 @@
   },
   {
     "ea": "0x4D30F2",
-    "line": "mov     eax, [esp+38h+var_C]",
+    "line": "mov     eax, [esp+38h+cellY]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2005,7 +2005,7 @@
   },
   {
     "ea": "0x4D30FD",
-    "line": "push    eax; signed int",
+    "line": "push    eax; cellY",
     "mnemonic": "push",
     "size": 1
   },
@@ -2017,7 +2017,7 @@
   },
   {
     "ea": "0x4D3101",
-    "line": "push    ebp; signed int",
+    "line": "push    ebp; cellX",
     "mnemonic": "push",
     "size": 1
   },
@@ -2053,7 +2053,7 @@
   },
   {
     "ea": "0x4D3114",
-    "line": "call    sub_420B50",
+    "line": "call    ExtraDataList_GetSeenData; Returns the owned SeenData pointer from ExtraSeenData (type 0x09), or null.",
     "mnemonic": "call",
     "size": 5
   },

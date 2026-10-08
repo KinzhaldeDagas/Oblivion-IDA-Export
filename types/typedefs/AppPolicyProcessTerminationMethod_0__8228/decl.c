@@ -1,1 +1,1 @@
-AppPolicyProcessTerminationMethod_0
+typedef AppPolicyProcessTerminationMethod AppPolicyProcessTerminationMethod_0;

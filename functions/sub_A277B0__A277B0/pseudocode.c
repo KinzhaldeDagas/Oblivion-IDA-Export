@@ -1,4 +1,4 @@
 void __cdecl sub_A277B0()
 {
-  _LN21((char *)dword_B466E0, 4u, 4, (void (__thiscall *)(void *))sub_7016A0);
+  _LN21((char *)&flt_B46638[0x2A], 4u, 4, (void (__thiscall *)(void *))NiPointerSlot_Release); /*0xa277be*/
 }

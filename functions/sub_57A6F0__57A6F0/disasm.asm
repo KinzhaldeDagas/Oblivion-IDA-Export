@@ -1,4 +1,4 @@
-0x57A6F0: push    1; arg1
+0x57A6F0: push    1; MWMediumArmor: native actor-value display refresh used with the configured Heavy/Light bucket before Player_OnActorValueBaseChanged so Medium sidecar level changes refresh armor-derived UI without passing synthetic IDs into native skill arrays.
 0x57A6F2: push    0; canCreate
 0x57A6F4: call    InterfaceManager_GetSingleton
 0x57A6F9: add     esp, 8
@@ -46,7 +46,7 @@
 0x57A78A: jz      short loc_57A794
 0x57A78C: push    esi
 0x57A78D: mov     ecx, eax
-0x57A78F: call    sub_5DA1A0
+0x57A78F: call    StatsMenu_UpdateAttributesAndSkills; Full refresh (actorValue == -1) scans exactly 21 native Oblivion skills, counts strict TESClass major matches, publishes that count to the Stats XML, and orders major rows before one optional separator and all non-major rows. A targeted refresh updates only the requested native actor value and does not reorder rows.
 0x57A794: push    0; int
 0x57A796: push    offset ??_R0?AVHUDMainMenu@@@8; struct TypeDescriptor *
 0x57A79B: push    offset ??_R0?AVMenu@@@8; struct _s_RTTICompleteObjectLocator *

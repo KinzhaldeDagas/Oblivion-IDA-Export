@@ -1,19 +1,32 @@
 {
-  "callees_count": 50,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x79E790",
+      "0x79E9E9"
+    ]
+  ],
+  "chunks_sha256": "68f046b464f2d4c46faf976a713c7c8b3108186e8d39108b6541828083a17255",
+  "comment_regular": "Three-way partition of 0x30-byte SFrondGuide records around a sampled fuzzySurfaceArea pivot, descending. Groups values greater than, equal to, and less than the pivot and returns the lower/upper bounds of the equal partition.",
+  "comment_repeatable": "Three-way partition of 0x30-byte SFrondGuide records around a sampled fuzzySurfaceArea pivot, descending. Groups values greater than, equal to, and less than the pivot and returns the lower/upper bounds of the equal partition.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_79E790",
+  "display_name": "OB_SFrondGuide_PartitionByFuzzyArea_010201A0",
   "end_ea": "0x79E9E9",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_79E790",
+  "name": "OB_SFrondGuide_PartitionByFuzzyArea_010201A0",
   "segment": ".text",
   "sha256": "68f046b464f2d4c46faf976a713c7c8b3108186e8d39108b6541828083a17255",
   "size": 601,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x79E790",
-  "type": "unsigned int *__cdecl(unsigned int *, unsigned int, unsigned int)",
+  "total_chunk_size": 601,
+  "type": "OB_SFrondGuidePartitionBounds_010201A0 *__cdecl(OB_SFrondGuidePartitionBounds_010201A0 *result, OB_SFrondGuide_010201A0 *first, OB_SFrondGuide_010201A0 *last)",
   "xrefs_from_count": 274,
   "xrefs_to_count": 1
 }

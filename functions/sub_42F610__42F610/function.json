@@ -1,18 +1,31 @@
 {
-  "callees_count": 57,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 20,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 26,
-  "display_name": "sub_42F610",
+  "chunks": [
+    [
+      "0x42F610",
+      "0x42FA10"
+    ]
+  ],
+  "chunks_sha256": "13c1d1bef757880e16dfaefbd18a2d813224a966c1afa6abd5058640c63d128d",
+  "comment_regular": "MEF data-streaming pass: archive list builder uses fixed 0x8000 heap buffer and case-sensitive .esp-associated BSA discovery. Decoded as future policy/bounds improvement candidate, not included in narrow compatibility patch.\nVerified aPortable: second independent Plugins.txt reader for ESP-associated BSA discovery. 42F74E supplies user-local root; 42F75A supplies %sPlugins.txt; fopen at 42F772. Must route with activation reader 404B00 to avoid split profiles.",
+  "comment_repeatable": "MEF data-streaming pass: archive list builder uses fixed 0x8000 heap buffer and case-sensitive .esp-associated BSA discovery. Decoded as future policy/bounds improvement candidate, not included in narrow compatibility patch.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 39,
+  "display_name": "ArchiveManager_LoadConfiguredAndPluginArchives",
   "end_ea": "0x42FA10",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_42F610",
+  "name": "ArchiveManager_LoadConfiguredAndPluginArchives",
   "segment": ".text",
   "sha256": "13c1d1bef757880e16dfaefbd18a2d813224a966c1afa6abd5058640c63d128d",
   "size": 1024,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x42F610",
+  "total_chunk_size": 1024,
   "type": "char __usercall@<al>(char@<bpl>, int@<edi>)",
   "xrefs_from_count": 386,
   "xrefs_to_count": 1

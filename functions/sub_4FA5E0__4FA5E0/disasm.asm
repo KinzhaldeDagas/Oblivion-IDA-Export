@@ -34,13 +34,13 @@
 0x4FA640: test    eax, eax
 0x4FA642: jz      short loc_4FA669
 0x4FA644: mov     eax, [ebx+0Ch]
-0x4FA647: push    eax; Str2
+0x4FA647: push    eax; right
 0x4FA648: mov     eax, [ebp+0]
 0x4FA64B: mov     edx, [eax+0D4h]
 0x4FA651: mov     ecx, ebp
 0x4FA653: call    edx
-0x4FA655: push    eax; Str1
-0x4FA656: call    __strcmp
+0x4FA655: push    eax; left
+0x4FA656: call    CRT_StricmpLocaleDispatch
 0x4FA65B: add     esp, 8
 0x4FA65E: test    eax, eax
 0x4FA660: jz      short loc_4FA669
@@ -62,7 +62,6 @@
 0x4FA682: jbe     short loc_4FA6A3
 0x4FA684: mov     edi, [ebp+30h]
 0x4FA687: jmp     short loc_4FA690
-0x4FA689: align 10h
 0x4FA690: mov     dl, [edi+eax]
 0x4FA693: cmp     dl, [eax+esi]
 0x4FA696: jnz     loc_4FA772

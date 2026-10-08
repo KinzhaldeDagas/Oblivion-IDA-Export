@@ -1,64 +1,108 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "RpcPktHdr",
+  "definition": "union RpcPktHdr\n{\nRpcPktCommonHdr common;\nRpcPktRequestHdr request;\nRpcPktResponseHdr response;\nRpcPktFaultHdr fault;\nRpcPktBindHdr bind;\nRpcPktBindAckHdr bind_ack;\nRpcPktBindNAckHdr bind_nack;\nRpcPktHttpHdr http;\nRpcPktAuth3Hdr auth3;\n}\n",
   "id": 18374686479672032204,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "common",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "RpcPktCommonHdr"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "request",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "RpcPktRequestHdr"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "response",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "RpcPktResponseHdr"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fault",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 32
+      "size": 32,
+      "type": "RpcPktFaultHdr"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bind",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 28
+      "size": 28,
+      "type": "RpcPktBindHdr"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bind_ack",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "RpcPktBindAckHdr"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bind_nack",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 21
+      "size": 21,
+      "type": "RpcPktBindNAckHdr"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "http",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 20
+      "size": 20,
+      "type": "RpcPktHttpHdr"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "auth3",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 20
+      "size": 20,
+      "type": "RpcPktAuth3Hdr"
     }
   ],
   "name": "RpcPktHdr",
+  "ordinal": 3065,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 32
 }

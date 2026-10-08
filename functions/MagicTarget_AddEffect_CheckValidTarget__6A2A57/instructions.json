@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6A2A57",
-    "line": "mov     eax, [ebp+0]",
+    "line": "mov     eax, [ebp+0]; OBMEFix verification 2026-05-30: MagicTarget_AddEffect loads ActiveEffect vtable +0x34, pushes MagicTarget (edi), sets ecx=ActiveEffect (ebp), and calls IsTargetValid before insertion.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x6A2A60",
-    "line": "call    edx",
+    "line": "call    edx; Verified target gate call: ECX is the cloned ActiveEffect and the stack argument is the current MagicTarget; dispatches ActiveEffect vtable slot +0x34. LockEffect/OpenEffect route to LockOrOpenEffect_ValidTarget, which RTTI-requires NonActorMagicTarget and a TESObjectDOOR or TESObjectCONT base form. False prevents insertion and destroys the clone.",
     "mnemonic": "call",
     "size": 2
   },

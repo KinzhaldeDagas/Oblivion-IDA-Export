@@ -7,7 +7,7 @@
 0x7584CB: mov     ecx, [esi+20h]
 0x7584CE: mov     edx, ds:0B3D2C8h[ecx*4]
 0x7584D5: push    eax
-0x7584D6: call    edx ; dword_B3D2C8
+0x7584D6: call    edx ; unk_B3D2C8
 0x7584D8: add     esp, 4
 0x7584DB: mov     edi, [esp+8+arg_0]
 0x7584DF: test    edi, edi
@@ -16,7 +16,7 @@
 0x7584E7: test    ecx, ecx
 0x7584E9: jz      short loc_758506
 0x7584EB: mov     eax, [esp+8+arg_8]
-0x7584EF: mov     dl, ds:byte_B3D406[eax]
+0x7584EF: mov     dl, byte ptr ds:unk_B3D406[eax]
 0x7584F5: mov     [esi+1Ch], edi
 0x7584F8: pop     edi
 0x7584F9: mov     [esi+24h], dl

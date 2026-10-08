@@ -1,4 +1,4 @@
-0x646600: sub     esp, 8
+0x646600: sub     esp, 8; RadiantAI: acquire scan callback for sub_62DA10; builds 0x20-byte candidate entries from loose refs, containers, and actor inventories. Initial response codes: 0 direct/world, 1 inventory/container.
 0x646603: push    ebp
 0x646604: push    edi
 0x646605: mov     edi, [esp+10h+arg_0]
@@ -80,7 +80,7 @@
 0x6466CF: jnz     short loc_6466DA
 0x6466D1: test    esi, esi
 0x6466D3: jnz     short loc_6466DA
-0x6466D5: mov     byte ptr [esp+1Ch], 1
+0x6466D5: mov     byte ptr [esp+18h+arg_0], 1
 0x6466DA: mov     eax, [edi]
 0x6466DC: mov     edx, [eax+170h]
 0x6466E2: mov     ecx, edi
@@ -105,7 +105,7 @@
 0x646715: call    eax
 0x646717: test    byte ptr [eax+88h], 2
 0x64671E: jz      short loc_646725
-0x646720: mov     byte ptr [esp+1Ch], 0
+0x646720: mov     byte ptr [esp+18h+arg_0], 0
 0x646725: mov     edx, [edi]
 0x646727: mov     eax, [edx+170h]
 0x64672D: mov     ecx, edi
@@ -140,7 +140,7 @@
 0x64677E: jp      short loc_646784
 0x646780: test    bl, bl
 0x646782: jnz     short loc_6467DE
-0x646784: cmp     byte ptr [esp+20h+var_4], 0
+0x646784: cmp     byte ptr [esp+18h+arg_0], 0
 0x646789: jz      short loc_6467DE
 0x64678B: push    20h ; ' '; Size
 0x64678D: call    FormHeapAlloc
@@ -163,7 +163,7 @@
 0x6467BC: call    ExtraDataList_GetExtraCount
 0x6467C1: movsx   ecx, ax
 0x6467C4: mov     [esi+10h], ecx
-0x6467C7: mov     ecx, [esp+20h+var_10]
+0x6467C7: mov     ecx, [esp+18h+var_8]
 0x6467CB: push    esi
 0x6467CC: add     ecx, 54h ; 'T'
 0x6467CF: mov     dword ptr [esi+1Ch], 0
@@ -187,7 +187,7 @@
 0x64680F: call    ExtraDataList_GetContainerChanges
 0x646814: mov     esi, eax
 0x646816: test    esi, esi
-0x646818: mov     [esp+20h+var_C], esi
+0x646818: mov     [esp+18h+var_4], esi
 0x64681C: jz      loc_646942
 0x646822: mov     ecx, [esi+4]; this
 0x646825: test    ecx, ecx
@@ -202,21 +202,21 @@
 0x646846: jmp     short loc_64684A
 0x646848: xor     eax, eax
 0x64684A: add     eax, 8
-0x64684D: mov     [esp+20h+var_4], eax
+0x64684D: mov     [esp+18h+arg_0], eax
 0x646851: jz      loc_646942
-0x646857: mov     ecx, [esp+20h+var_4]
+0x646857: mov     ecx, [esp+18h+arg_0]
 0x64685B: mov     ebp, [ecx]
 0x64685D: test    ebp, ebp
 0x64685F: jz      loc_646942
 0x646865: mov     edx, [ebp+4]
-0x646868: push    0
-0x64686A: push    1
-0x64686C: push    edx
-0x64686D: mov     ecx, esi
-0x64686F: call    ContainerExtraData_GetEntryForForm
+0x646868: push    0; referenceFormIDOrZero
+0x64686A: push    1; unusedAlwaysOne
+0x64686C: push    edx; form
+0x64686D: mov     ecx, esi; this
+0x64686F: call    ContainerExtraData_GetEntryForForm; Find EntryData for an exact TESForm in ExtraContainerChanges. Native ABI is three stack arguments and retn 0x0C. The middle Boolean is not read; callers conventionally pass true. If referenceFormIDOrZero is nonzero, require an extend-data list whose ExtraReferencePointer target has that form ID; otherwise return the form entry directly.
 0x646874: test    eax, eax
 0x646876: jnz     loc_64692F
-0x64687C: mov     ebx, [esp+28h+var_18]
+0x64687C: mov     ebx, [esp+18h+var_8]
 0x646880: mov     eax, [ebx+6Ch]
 0x646883: test    eax, eax
 0x646885: jz      short loc_646898
@@ -236,11 +236,11 @@
 0x6468A8: jnz     loc_64692F
 0x6468AE: test    eax, eax
 0x6468B0: jnz     short loc_64692F
-0x6468B2: mov     ecx, edi
-0x6468B4: call    sub_4D8AF0
-0x6468B9: mov     ecx, [esp+28h+var_8]
+0x6468B2: mov     ecx, edi; this
+0x6468B4: call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.
+0x6468B9: mov     ecx, [esp+18h+arg_4]; this
 0x6468BD: mov     esi, eax
-0x6468BF: call    sub_4D8AF0
+0x6468BF: call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.
 0x6468C4: cmp     esi, eax
 0x6468C6: jnz     short loc_64692B
 0x6468C8: push    20h ; ' '; Size
@@ -270,18 +270,18 @@
 0x64690B: mov     edx, [ebp+4]
 0x64690E: push    edx; a2
 0x64690F: mov     ecx, eax; this
-0x646911: call    ContainerExtraData_GetItemCount
+0x646911: call    ContainerExtraData_GetItemCount; ContainerChanges item-count logic: start with the base TESContainer count (made absolute), find matching EntryData, then combine countDelta. If the base count and delta are both 0 but an EntryData exists, return 1; the GetItemCount evaluator takes the final absolute value.
 0x646916: mov     [esi+10h], eax
 0x646919: jmp     short loc_646922
 0x64691B: mov     dword ptr [esi+10h], 1
 0x646922: push    esi
 0x646923: lea     ecx, [ebx+54h]
 0x646926: call    BSSimpleList_PushBack
-0x64692B: mov     esi, [esp+28h+var_14]
-0x64692F: mov     eax, [esp+28h+var_C]
+0x64692B: mov     esi, [esp+18h+var_4]
+0x64692F: mov     eax, [esp+18h+arg_0]
 0x646933: mov     eax, [eax+4]
 0x646936: test    eax, eax
-0x646938: mov     [esp+28h+var_C], eax
+0x646938: mov     [esp+18h+arg_0], eax
 0x64693C: jnz     loc_646857
 0x646942: push    0
 0x646944: mov     ecx, edi
@@ -289,8 +289,8 @@
 0x64694B: mov     ebx, eax
 0x64694D: xor     esi, esi
 0x64694F: test    ebx, ebx
-0x646951: mov     [esp+28h+var_14], ebx
-0x646955: mov     [esp+28h+var_C], esi
+0x646951: mov     [esp+18h+var_4], ebx
+0x646955: mov     [esp+18h+arg_0], esi
 0x646959: jle     loc_646A6B
 0x64695F: nop
 0x646960: push    0; a3
@@ -305,7 +305,7 @@
 0x646978: call    ContainerEntryExtraData_HasWorn
 0x64697D: test    al, al
 0x64697F: jnz     loc_646A44
-0x646985: mov     ebx, [esp+28h+var_18]
+0x646985: mov     ebx, [esp+18h+var_8]
 0x646989: mov     eax, [ebx+6Ch]
 0x64698C: test    eax, eax
 0x64698E: jz      short loc_6469A1
@@ -325,11 +325,11 @@
 0x6469B1: jnz     loc_646A44
 0x6469B7: test    eax, eax
 0x6469B9: jnz     loc_646A44
-0x6469BF: mov     ecx, edi
-0x6469C1: call    sub_4D8AF0
-0x6469C6: mov     ecx, [esp+28h+var_8]
+0x6469BF: mov     ecx, edi; this
+0x6469C1: call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.
+0x6469C6: mov     ecx, [esp+18h+arg_4]; this
 0x6469CA: mov     esi, eax
-0x6469CC: call    sub_4D8AF0
+0x6469CC: call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.
 0x6469D1: cmp     esi, eax
 0x6469D3: jnz     short loc_646A44
 0x6469D5: push    20h ; ' '; Size
@@ -359,7 +359,7 @@
 0x646A18: mov     edx, [esi+4]
 0x646A1B: push    edx; a2
 0x646A1C: mov     ecx, eax; this
-0x646A1E: call    ContainerExtraData_GetItemCount
+0x646A1E: call    ContainerExtraData_GetItemCount; ContainerChanges item-count logic: start with the base TESContainer count (made absolute), find matching EntryData, then combine countDelta. If the base count and delta are both 0 but an EntryData exists, return 1; the GetItemCount evaluator takes the final absolute value.
 0x646A23: mov     [esi+10h], eax
 0x646A26: jmp     short loc_646A2F
 0x646A28: mov     dword ptr [esi+10h], 1
@@ -374,13 +374,13 @@
 0x646A44: mov     ecx, ebp
 0x646A46: call    ContainerEntryExtraData_DestroyDataTable
 0x646A4B: push    ebp
-0x646A4C: call    FormHeapFree
-0x646A51: mov     ebx, [esp+2Ch+var_14]
-0x646A55: mov     esi, [esp+2Ch+var_C]
+0x646A4C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x646A51: mov     ebx, [esp+1Ch+var_4]
+0x646A55: mov     esi, [esp+1Ch+arg_0]
 0x646A59: add     esp, 4
 0x646A5C: add     esi, 1
 0x646A5F: cmp     esi, ebx
-0x646A61: mov     [esp+28h+var_C], esi
+0x646A61: mov     [esp+18h+arg_0], esi
 0x646A65: jl      loc_646960
 0x646A6B: pop     esi
 0x646A6C: pop     ebx

@@ -1,1 +1,1 @@
-IOleLink_0
+typedef IOleLink IOleLink_0;

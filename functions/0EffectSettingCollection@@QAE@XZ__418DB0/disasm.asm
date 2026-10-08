@@ -35,7 +35,7 @@
 0x418E19: mov     ecx, esi
 0x418E1B: mov     [esp+18h+var_4], 0
 0x418E23: mov     dword ptr [esi], offset ??_7EffectSettingCollection@@6B@; const EffectSettingCollection::`vftable'
-0x418E29: call    EffectSettingCollection_InitAllEffects
+0x418E29: call    EffectSettingCollection_InitAllEffects; TES4 effect table initialization has Water Breathing/Walking and many magic effects, but no observed Slowfall or Climbing effect in this table. Movement discipline implementation must add behavior outside the vanilla effect state table.
 0x418E2E: mov     eax, esi
 0x418E30: mov     ecx, [esp+18h+var_C]
 0x418E34: mov     large fs:0, ecx
@@ -43,3 +43,12 @@
 0x418E3C: pop     esi
 0x418E3D: add     esp, 10h
 0x418E40: retn
+0x9AB3D0: mov     ecx, [ebp-10h]
+0x9AB3D3: jmp     ??1?$NiTMap@W4EffectID@MagicSystem@@PAVEffectSetting@@@@UAE@XZ; NiTMap<MagicSystem::EffectID,EffectSetting *>::~NiTMap<MagicSystem::EffectID,EffectSetting *>(void)
+0x9AB3D8: mov     edx, [esp+arg_4]
+0x9AB3DC: lea     eax, [edx-8]
+0x9AB3DF: mov     ecx, [edx-0Ch]
+0x9AB3E2: xor     ecx, eax
+0x9AB3E4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AB3E9: mov     eax, offset stru_AD82A8
+0x9AB3EE: jmp     ___CxxFrameHandler3

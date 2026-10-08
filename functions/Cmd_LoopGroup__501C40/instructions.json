@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x501C40",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; LoopGroup command handler. Parses script/console LoopGroup arguments and drives animation group loop state on the target actor.",
     "mnemonic": "sub",
     "size": 3
   },
   {
     "ea": "0x501C43",
-    "line": "push    esi",
+    "line": "push    esi; repeatOrAction",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x501C48",
-    "line": "lea     eax, [esp+10h+var_8]",
+    "line": "lea     eax, [esp+10h+encodedKey]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x501C51",
-    "line": "lea     ecx, [esp+14h+var_C]",
+    "line": "lea     ecx, [esp+14h+playImmediately]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -133,19 +133,19 @@
   },
   {
     "ea": "0x501C76",
-    "line": "mov     [esp+38h+var_C], 0",
+    "line": "mov     [esp+38h+playImmediately], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x501C7E",
-    "line": "mov     [esp+38h+var_8], 0",
+    "line": "mov     [esp+38h+encodedKey], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x501C86",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,13 +235,13 @@
   },
   {
     "ea": "0x501CAB",
-    "line": "mov     eax, [esp+10h+var_C]",
+    "line": "mov     eax, [esp+10h+playImmediately]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x501CAF",
-    "line": "mov     ecx, [esp+10h+var_8]",
+    "line": "mov     ecx, [esp+10h+encodedKey]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x501CB7",
-    "line": "push    eax",
+    "line": "push    eax; playImmediately",
     "mnemonic": "push",
     "size": 1
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x501CBA",
-    "line": "push    ecx",
+    "line": "push    ecx; encodedKey",
     "mnemonic": "push",
     "size": 1
   },
@@ -295,13 +295,13 @@
   },
   {
     "ea": "0x501CC6",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x501CC8",
-    "line": "call    ActorAnimData_PlayAnimGroup",
+    "line": "call    ActorAnimData_PlayAnimGroup; Native group dispatcher. Reads fixed group-table slot (+0x08) and note-template class (+0x0C), normalizing slot aliases 5->0 and 6->3. For note classes 0/1, playImmediately=0 stores only the encoded key at ActorAnimData +0x70[slot] and repeat/action value at +0x7C[slot]; playImmediately=1 clears that queue and plays now. Classes 2..7 play immediately. No queued sequence pointer or path is stored.",
     "mnemonic": "call",
     "size": 5
   },

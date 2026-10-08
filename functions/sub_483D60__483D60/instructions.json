@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x483D60",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified mode routing: WorldSpace mask bit 0x1 is the tree channel and is gated by bDisplayLODTrees; bit 0x2 is the building/object channel and is gated by bDisplayLODBuildings plus the per-cell LOD map. Local state value 4 is an internal combined-update state that can downgrade to 1 or 2; it is not the .cmp LandLOD mask bit.",
     "mnemonic": "push",
     "size": 2
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x483DEA",
-    "line": "cmp     [esp+40h+arg_0], 0",
+    "line": "cmp     [esp+40h+worldspace], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -313,19 +313,19 @@
   },
   {
     "ea": "0x483E27",
-    "line": "push    1",
+    "line": "push    1; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x483E29",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x483E2B",
-    "line": "call    sub_405790",
+    "line": "call    NiNode_GetChildAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x483E42",
-    "line": "mov     ecx, offset dword_B34424; this",
+    "line": "mov     ecx, 0B34424h; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -474,12 +474,6 @@
     "size": 2
   },
   {
-    "ea": "0x483E7A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x483E80",
     "line": "test    eax, eax",
     "mnemonic": "test",
@@ -514,12 +508,6 @@
     "line": "jmp     short loc_483EA0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x483E9A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
   },
   {
     "ea": "0x483EA0",
@@ -829,19 +817,19 @@
   },
   {
     "ea": "0x483F36",
-    "line": "mov     ecx, [esp+40h+arg_0]",
+    "line": "mov     ecx, [esp+40h+worldspace]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x483F3A",
-    "line": "push    1",
+    "line": "push    1; modeBit",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x483F3C",
-    "line": "call    sub_4EF2D0",
+    "line": "call    TESWorldSpace_IsDistantLODModeEnabled; Verified .cmp mode-mask bit meanings from Oblivion consumers: 0x1 enables the tree channel (DistantLOD_UpdateExteriorGrid pairs this with bDisplayLODTrees); 0x2 enables the building/object channel (paired with bDisplayLODBuildings and CellsWithLODObjects); 0x4 enables the LandLOD channel (DistantLOD_UpdateLandLODMap). Default mask 0x7 enables all three.",
     "mnemonic": "call",
     "size": 5
   },
@@ -859,19 +847,19 @@
   },
   {
     "ea": "0x483F45",
-    "line": "mov     ecx, [esp+40h+arg_0]",
+    "line": "mov     ecx, [esp+40h+worldspace]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x483F49",
-    "line": "push    2",
+    "line": "push    2; modeBit",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x483F4B",
-    "line": "call    sub_4EF2D0",
+    "line": "call    TESWorldSpace_IsDistantLODModeEnabled; Verified .cmp mode-mask bit meanings from Oblivion consumers: 0x1 enables the tree channel (DistantLOD_UpdateExteriorGrid pairs this with bDisplayLODTrees); 0x2 enables the building/object channel (paired with bDisplayLODBuildings and CellsWithLODObjects); 0x4 enables the LandLOD channel (DistantLOD_UpdateLandLODMap). Default mask 0x7 enables all three.",
     "mnemonic": "call",
     "size": 5
   },
@@ -889,19 +877,19 @@
   },
   {
     "ea": "0x483F58",
-    "line": "mov     ecx, [esp+40h+arg_0]",
+    "line": "mov     ecx, [esp+40h+worldspace]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x483F5C",
-    "line": "push    1",
+    "line": "push    1; modeBit",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x483F5E",
-    "line": "call    sub_4EF2D0",
+    "line": "call    TESWorldSpace_IsDistantLODModeEnabled; Verified .cmp mode-mask bit meanings from Oblivion consumers: 0x1 enables the tree channel (DistantLOD_UpdateExteriorGrid pairs this with bDisplayLODTrees); 0x2 enables the building/object channel (paired with bDisplayLODBuildings and CellsWithLODObjects); 0x4 enables the LandLOD channel (DistantLOD_UpdateLandLODMap). Default mask 0x7 enables all three.",
     "mnemonic": "call",
     "size": 5
   },
@@ -931,19 +919,19 @@
   },
   {
     "ea": "0x483F70",
-    "line": "mov     ecx, [esp+40h+arg_0]",
+    "line": "mov     ecx, [esp+40h+worldspace]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x483F74",
-    "line": "push    2",
+    "line": "push    2; modeBit",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x483F76",
-    "line": "call    sub_4EF2D0",
+    "line": "call    TESWorldSpace_IsDistantLODModeEnabled; Verified .cmp mode-mask bit meanings from Oblivion consumers: 0x1 enables the tree channel (DistantLOD_UpdateExteriorGrid pairs this with bDisplayLODTrees); 0x2 enables the building/object channel (paired with bDisplayLODBuildings and CellsWithLODObjects); 0x4 enables the LandLOD channel (DistantLOD_UpdateLandLODMap). Default mask 0x7 enables all three.",
     "mnemonic": "call",
     "size": 5
   },
@@ -973,19 +961,19 @@
   },
   {
     "ea": "0x483F88",
-    "line": "mov     ecx, [esp+40h+arg_0]",
+    "line": "mov     ecx, [esp+40h+worldspace]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x483F8C",
-    "line": "push    1",
+    "line": "push    1; modeBit",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x483F8E",
-    "line": "call    sub_4EF2D0",
+    "line": "call    TESWorldSpace_IsDistantLODModeEnabled; Verified .cmp mode-mask bit meanings from Oblivion consumers: 0x1 enables the tree channel (DistantLOD_UpdateExteriorGrid pairs this with bDisplayLODTrees); 0x2 enables the building/object channel (paired with bDisplayLODBuildings and CellsWithLODObjects); 0x4 enables the LandLOD channel (DistantLOD_UpdateLandLODMap). Default mask 0x7 enables all three.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1021,19 +1009,19 @@
   },
   {
     "ea": "0x483FA1",
-    "line": "mov     ecx, [esp+40h+arg_0]",
+    "line": "mov     ecx, [esp+40h+worldspace]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x483FA5",
-    "line": "push    2",
+    "line": "push    2; modeBit",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x483FA7",
-    "line": "call    sub_4EF2D0",
+    "line": "call    TESWorldSpace_IsDistantLODModeEnabled; Verified .cmp mode-mask bit meanings from Oblivion consumers: 0x1 enables the tree channel (DistantLOD_UpdateExteriorGrid pairs this with bDisplayLODTrees); 0x2 enables the building/object channel (paired with bDisplayLODBuildings and CellsWithLODObjects); 0x4 enables the LandLOD channel (DistantLOD_UpdateLandLODMap). Default mask 0x7 enables all three.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1111,19 +1099,19 @@
   },
   {
     "ea": "0x483FD7",
-    "line": "push    eax",
+    "line": "push    eax; group_y",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x483FD8",
-    "line": "push    ecx",
+    "line": "push    ecx; group_x",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x483FD9",
-    "line": "call    sub_4EF1D0",
+    "line": "call    TESObjectCELL_PackExteriorGroupLabel; Verified exact key encoding used by the DistantLOD cell model map: packed label = (signed cellX << 16) | unsigned cellY.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1195,19 +1183,19 @@
   },
   {
     "ea": "0x484005",
-    "line": "push    edx",
+    "line": "push    edx; group_y",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x484006",
-    "line": "push    eax",
+    "line": "push    eax; group_x",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x484007",
-    "line": "call    sub_4EF1D0",
+    "line": "call    TESObjectCELL_PackExteriorGroupLabel; Verified exact key encoding used by the DistantLOD cell model map: packed label = (signed cellX << 16) | unsigned cellY.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1273,25 +1261,25 @@
   },
   {
     "ea": "0x484030",
-    "line": "push    ecx",
+    "line": "push    ecx; cellY",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x484031",
-    "line": "mov     ecx, [esp+44h+arg_0]",
+    "line": "mov     ecx, [esp+44h+worldspace]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x484035",
-    "line": "push    edx",
+    "line": "push    edx; cellX",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x484036",
-    "line": "call    sub_4F0DA0",
+    "line": "call    TESWorldSpace_PassesCellLODFilter; Verified DistantLOD grid update gate: in mode 2 it checks TESWorldSpace_PassesCellLODFilter for the cell before scheduling/updating DistantLOD data; independently consults WorldSpace mode-mask bits via TESWorldSpace_IsDistantLODModeEnabled.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1903,25 +1891,25 @@
   },
   {
     "ea": "0x484179",
-    "line": "push    eax",
+    "line": "push    eax; cellY",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48417A",
-    "line": "push    ecx",
+    "line": "push    ecx; cellX",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48417B",
-    "line": "mov     ecx, [esp+48h+arg_0]",
+    "line": "mov     ecx, [esp+48h+worldspace]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x48417F",
-    "line": "call    sub_4F0DA0",
+    "line": "call    TESWorldSpace_PassesCellLODFilter; Verified cell-LOD filter: if +0xD8 cellLODMapLoaded is set, checks the +0xC8 CellsWithLODObjects map for the packed cell coordinate; otherwise returns true as a permissive fallback.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1963,19 +1951,19 @@
   },
   {
     "ea": "0x484194",
-    "line": "push    ebp",
+    "line": "push    ebp; lodMode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x484195",
-    "line": "push    edi",
+    "line": "push    edi; priorityIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x484196",
-    "line": "push    edx",
+    "line": "push    edx; cellLODBuffer",
     "mnemonic": "push",
     "size": 1
   },
@@ -1987,43 +1975,43 @@
   },
   {
     "ea": "0x48419A",
-    "line": "push    eax",
+    "line": "push    eax; instancedLODNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48419B",
-    "line": "mov     eax, [esp+50h+arg_0]",
+    "line": "mov     eax, [esp+50h+worldspace]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x48419F",
-    "line": "push    ecx",
+    "line": "push    ecx; groupY",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4841A0",
-    "line": "mov     ecx, ds:0B35B8Ch",
+    "line": "mov     ecx, ds:0B35B8Ch; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4841A6",
-    "line": "push    edx",
+    "line": "push    edx; groupX",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4841A7",
-    "line": "push    eax",
+    "line": "push    eax; worldspace",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4841A8",
-    "line": "call    sub_4BD430",
+    "line": "call    DistantLOD_QueueCellLoadTask; Verified update loop queues each eligible exterior-grid cell through g_DistantLODLoaderTasksByCell; duplicate packed-cell tasks are suppressed before registration, then IOManager executes the worker.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2161,7 +2149,7 @@
   },
   {
     "ea": "0x4841FC",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2173,7 +2161,7 @@
   },
   {
     "ea": "0x484207",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2197,7 +2185,7 @@
   },
   {
     "ea": "0x484217",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -2209,7 +2197,7 @@
   },
   {
     "ea": "0x48421D",
-    "line": "push    offset dword_B43484",
+    "line": "push    offset stru_B43484",
     "mnemonic": "push",
     "size": 5
   },
@@ -2257,13 +2245,13 @@
   },
   {
     "ea": "0x484238",
-    "line": "fstp    [esp+40h+arg_0]",
+    "line": "fstp    [esp+40h+worldspace]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x48423C",
-    "line": "fld     [esp+40h+arg_0]",
+    "line": "fld     [esp+40h+worldspace]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2413,7 +2401,7 @@
   },
   {
     "ea": "0x484282",
-    "line": "fstp    [esp+40h+arg_0]",
+    "line": "fstp    [esp+40h+worldspace]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2431,7 +2419,7 @@
   },
   {
     "ea": "0x484290",
-    "line": "fsubr   [esp+40h+arg_0]",
+    "line": "fsubr   [esp+40h+worldspace]",
     "mnemonic": "fsubr",
     "size": 4
   },
@@ -2494,5 +2482,77 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AF950",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF953",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF954",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF959",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF95A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF95B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AF95F",
+    "line": "lea     eax, [edx-30h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF962",
+    "line": "mov     ecx, [edx-34h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF965",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AF967",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF96C",
+    "line": "mov     eax, offset stru_ADBE7C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF971",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

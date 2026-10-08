@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x54658B",
-    "line": "cmp     byte ptr [esp+arg_44], 0",
+    "line": "cmp     byte ptr [esp+arg_44], 0; When the underwater condition is active, scales the relevant light/visibility term by fSneakSwimmingLightMult.",
     "mnemonic": "cmp",
     "size": 5
   },
   {
     "ea": "0x546590",
-    "line": "jz      short Calc_DetectionLevel___CalcSleepBonus",
+    "line": "jz      short Calc_DetectionLevel_ApplySleepBonus; Carries the sleeping-target bonus stage (fSneakSleepBonus) into final aggregation.",
     "mnemonic": "jz",
     "size": 2
   },

@@ -1,4 +1,4 @@
-0x4520F0: push    ebx
+0x4520F0: push    ebx; Returns the root TESFile on the main thread; on worker threads returns the per-thread clone selected by GetCurrentThreadId via TESFile_GetThreadSafeFileForThread.
 0x4520F1: push    edi
 0x4520F2: mov     ebx, ecx
 0x4520F4: mov     eax, [ebx+4]
@@ -12,7 +12,6 @@
 0x452107: test    eax, eax
 0x452109: jz      short loc_45211D
 0x45210B: jmp     short loc_452110
-0x45210D: align 10h
 0x452110: mov     ecx, [eax+4]
 0x452113: test    ecx, ecx
 0x452115: jz      short loc_45211D
@@ -36,7 +35,7 @@
 0x45213C: call    edi ; GetCurrentThreadId
 0x45213E: push    eax
 0x45213F: mov     ecx, ebx
-0x452141: call    sub_451F80
+0x452141: call    TESFile_GetThreadSafeFileForThread; Looks up a TESFile clone by thread ID; if absent, constructs and opens a read-only clone, copies master/index state, assigns the root thread-safe parent, and inserts it into the per-thread map.
 0x452146: pop     edi
 0x452147: pop     ebx
 0x452148: retn

@@ -1,19 +1,36 @@
 {
-  "callees_count": 11,
-  "callers_count": 13,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_4E70B0",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
+  "callers_count": 23,
+  "chunks": [
+    [
+      "0x4E70B0",
+      "0x4E7193"
+    ],
+    [
+      "0x9CA7E0",
+      "0x9CA806"
+    ]
+  ],
+  "chunks_sha256": "61accd2d744f85a0bb6bde50ba6ea53cb1cdd09558491bb527d87bda0221fa4f",
+  "comment_regular": "Verified shared debug property getter/creator, used by PathGrid debug rendering and the registered TestSeenData/TestLocalMap visualization commands, plus other debug-geometry callers. Lazily constructs NiVertexColorProperty, sets its observed render flags, stores the refcounted global g_DebugRenderVertexColorProperty and returns it.",
+  "comment_repeatable": "Verified shared debug property getter/creator, used by PathGrid debug rendering and the registered TestSeenData/TestLocalMap visualization commands, plus other debug-geometry callers. Lazily constructs NiVertexColorProperty, sets its observed render flags, stores the refcounted global g_DebugRenderVertexColorProperty and returns it.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "DebugRender_GetOrCreateVertexColorProperty",
   "end_ea": "0x4E7193",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4E70B0",
+  "name": "DebugRender_GetOrCreateVertexColorProperty",
   "segment": ".text",
   "sha256": "0db5541e1ee4eb22956a4df908183607109481e3140748aa4fb152d1a49d4103",
   "size": 227,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E70B0",
-  "type": "int()",
-  "xrefs_from_count": 80,
+  "total_chunk_size": 265,
+  "type": "NiVertexColorProperty *__cdecl()",
+  "xrefs_from_count": 94,
   "xrefs_to_count": 23
 }

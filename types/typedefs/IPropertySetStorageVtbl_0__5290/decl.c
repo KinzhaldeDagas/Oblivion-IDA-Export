@@ -1,1 +1,1 @@
-IPropertySetStorageVtbl_0
+typedef IPropertySetStorageVtbl IPropertySetStorageVtbl_0;

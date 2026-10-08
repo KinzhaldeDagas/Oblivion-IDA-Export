@@ -1,1 +1,1 @@
-_U32
+typedef unsigned int _U32;

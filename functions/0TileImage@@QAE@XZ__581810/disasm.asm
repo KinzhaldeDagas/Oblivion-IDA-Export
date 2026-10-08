@@ -61,3 +61,15 @@
 0x5818C3: pop     ebx
 0x5818C4: add     esp, 10h
 0x5818C7: retn
+0x9BEBF0: mov     ecx, [ebp-10h]; this
+0x9BEBF3: jmp     ??1Tile@@UAE@XZ; Tile::~Tile(void)
+0x9BEBF8: mov     ecx, [ebp-10h]
+0x9BEBFB: add     ecx, 44h ; 'D'; slot
+0x9BEBFE: jmp     NiPointerSlot_Release
+0x9BEC03: mov     edx, [esp+arg_4]
+0x9BEC07: lea     eax, [edx-10h]
+0x9BEC0A: mov     ecx, [edx-14h]
+0x9BEC0D: xor     ecx, eax
+0x9BEC0F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BEC14: mov     eax, offset stru_AE8288
+0x9BEC19: jmp     ___CxxFrameHandler3

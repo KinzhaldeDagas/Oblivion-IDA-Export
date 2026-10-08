@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x442A30",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; Oblivion TES cell-node visibility controller. Updates the six-bit node mask and applies AppCulled to loaded interior/exterior cell categories. Categories are identified by Oblivion's own console command as Actor, Marker, Land Quad, Water Quad, Static Quad, and Active Quad. ShadowPass temporarily hides Actor (0) and Water Quad (3), then restores their prior mask states. Fallout was consulted only afterward and corroborates the conventional TES::ShowCellNode name.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x442A34",
-    "line": "mov     bl, [esp+10h+arg_4]",
+    "line": "mov     bl, [esp+10h+show]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x442A3E",
-    "line": "mov     ecx, [esp+10h+arg_0]",
+    "line": "mov     ecx, [esp+10h+nodeCategory]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x442AA4",
-    "line": "mov     al, byte ptr [esp+10h+arg_8]",
+    "line": "mov     al, [esp+10h+activeExteriorCellsOnly]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x442AF4",
-    "line": "cmp     [esp+1Ch+arg_0], 5; switch 6 cases",
+    "line": "cmp     [esp+1Ch+nodeCategory], 5; switch 6 cases",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x442AFF",
-    "line": "mov     eax, [esp+1Ch+arg_0]",
+    "line": "mov     eax, [esp+1Ch+nodeCategory]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x442B0C",
-    "line": "call    TESObjectCELL_GetNiNode?",
+    "line": "call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.",
     "mnemonic": "call",
     "size": 5
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x442B1C",
-    "line": "mov     ecx, [esp+1Ch+arg_0]",
+    "line": "mov     ecx, [esp+1Ch+nodeCategory]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x442B39",
-    "line": "cmp     [esp+1Ch+arg_4], 0",
+    "line": "cmp     [esp+1Ch+show], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -534,20 +534,14 @@
     "size": 2
   },
   {
-    "ea": "0x442B5D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x442B60",
-    "line": "mov     ecx, ebx; this",
+    "line": "mov     ecx, ebx; object",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x442B62",
-    "line": "call    TESObjectCELL_GetNiNode?",
+    "line": "call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.",
     "mnemonic": "call",
     "size": 5
   },
@@ -667,7 +661,7 @@
   },
   {
     "ea": "0x442BA2",
-    "line": "cmp     [esp+1Ch+arg_4], 0",
+    "line": "cmp     [esp+1Ch+show], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -751,7 +745,7 @@
   },
   {
     "ea": "0x442BD6",
-    "line": "cmp     byte ptr [esp+1Ch+arg_8], 0",
+    "line": "cmp     [esp+1Ch+activeExteriorCellsOnly], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -763,7 +757,7 @@
   },
   {
     "ea": "0x442BE1",
-    "line": "mov     [esp+1Ch+arg_8], 0",
+    "line": "mov     dword ptr [esp+1Ch+activeExteriorCellsOnly], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -775,7 +769,7 @@
   },
   {
     "ea": "0x442BF0",
-    "line": "mov     eax, [esp+1Ch+arg_8]",
+    "line": "mov     eax, dword ptr [esp+1Ch+activeExteriorCellsOnly]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -823,7 +817,7 @@
   },
   {
     "ea": "0x442C12",
-    "line": "mov     esi, [esp+1Ch+arg_0]",
+    "line": "mov     esi, [esp+1Ch+nodeCategory]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -853,7 +847,7 @@
   },
   {
     "ea": "0x442C28",
-    "line": "call    TESObjectCELL_GetNiNode?",
+    "line": "call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.",
     "mnemonic": "call",
     "size": 5
   },
@@ -925,7 +919,7 @@
   },
   {
     "ea": "0x442C51",
-    "line": "cmp     [esp+1Ch+arg_4], 0",
+    "line": "cmp     [esp+1Ch+show], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -943,7 +937,7 @@
   },
   {
     "ea": "0x442C5D",
-    "line": "add     [esp+1Ch+arg_8], 1",
+    "line": "add     dword ptr [esp+1Ch+activeExteriorCellsOnly], 1",
     "mnemonic": "add",
     "size": 5
   },
@@ -961,7 +955,7 @@
   },
   {
     "ea": "0x442C6A",
-    "line": "add     [esp+1Ch+arg_8], 1",
+    "line": "add     dword ptr [esp+1Ch+activeExteriorCellsOnly], 1",
     "mnemonic": "add",
     "size": 5
   },
@@ -997,13 +991,13 @@
   },
   {
     "ea": "0x442C80",
-    "line": "mov     ecx, ebx; this",
+    "line": "mov     ecx, ebx; object",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x442C82",
-    "line": "call    TESObjectCELL_GetNiNode?",
+    "line": "call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1123,7 +1117,7 @@
   },
   {
     "ea": "0x442CC2",
-    "line": "cmp     [esp+1Ch+arg_4], 0",
+    "line": "cmp     [esp+1Ch+show], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1177,7 +1171,7 @@
   },
   {
     "ea": "0x442CE1",
-    "line": "add     [esp+1Ch+arg_8], 1; jumptable 00442C1F default case, case 3",
+    "line": "add     dword ptr [esp+1Ch+activeExteriorCellsOnly], 1; jumptable 00442C1F default case, case 3",
     "mnemonic": "add",
     "size": 5
   },
@@ -1231,7 +1225,7 @@
   },
   {
     "ea": "0x442D02",
-    "line": "mov     [esp+1Ch+arg_8], edi",
+    "line": "mov     dword ptr [esp+1Ch+activeExteriorCellsOnly], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1291,7 +1285,7 @@
   },
   {
     "ea": "0x442D25",
-    "line": "mov     esi, [esp+1Ch+arg_0]",
+    "line": "mov     esi, [esp+1Ch+nodeCategory]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1321,7 +1315,7 @@
   },
   {
     "ea": "0x442D3B",
-    "line": "call    TESObjectCELL_GetNiNode?",
+    "line": "call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1393,7 +1387,7 @@
   },
   {
     "ea": "0x442D64",
-    "line": "cmp     [esp+1Ch+arg_4], 0",
+    "line": "cmp     [esp+1Ch+show], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1471,13 +1465,13 @@
   },
   {
     "ea": "0x442D97",
-    "line": "mov     ecx, ebx; this",
+    "line": "mov     ecx, ebx; object",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x442D99",
-    "line": "call    TESObjectCELL_GetNiNode?",
+    "line": "call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1597,7 +1591,7 @@
   },
   {
     "ea": "0x442DD9",
-    "line": "cmp     [esp+1Ch+arg_4], 0",
+    "line": "cmp     [esp+1Ch+show], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1651,7 +1645,7 @@
   },
   {
     "ea": "0x442DF8",
-    "line": "mov     edi, [esp+1Ch+arg_8]",
+    "line": "mov     edi, dword ptr [esp+1Ch+activeExteriorCellsOnly]",
     "mnemonic": "mov",
     "size": 4
   },

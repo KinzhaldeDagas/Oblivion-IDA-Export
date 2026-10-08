@@ -4,7 +4,7 @@
 0x4978A6: push    edi; ArgList
 0x4978A7: push    eax
 0x4978A8: mov     byte ptr [esi], 0
-0x4978AB: call    FormHeapFree
+0x4978AB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4978B0: mov     edi, [esp+0Ch+arg_0]
 0x4978B4: add     esp, 4
 0x4978B7: test    edi, edi

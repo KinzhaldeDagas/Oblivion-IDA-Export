@@ -1,4 +1,4 @@
-0x722B30: push    0FFFFFFFFh
+0x722B30: push    0FFFFFFFFh; Pass222: NiGeometry override path; clones incoming NiPropertyState and stores result at NiGeometry +0xAC.
 0x722B32: push    offset SEH_7E5B50
 0x722B37: mov     eax, large fs:0
 0x722B3D: push    eax
@@ -18,7 +18,7 @@
 0x722B5D: lea     ecx, [esp+28h+arg_0]
 0x722B61: push    ecx
 0x722B62: mov     ecx, edi
-0x722B64: call    sub_7077D0
+0x722B64: call    sub_7077D0; Fog property propagation decode: NiGeometry override merges local properties through 0x7077D0; geometry-local fog can override inherited slot +0x0C.
 0x722B69: mov     ebx, eax
 0x722B6B: mov     esi, [edi+0ACh]
 0x722B71: cmp     esi, [ebx]
@@ -41,7 +41,7 @@
 0x722B9D: call    edx
 0x722B9F: mov     eax, [ebx]
 0x722BA1: test    eax, eax
-0x722BA3: mov     [edi+0ACh], eax
+0x722BA3: mov     [edi+0ACh], eax; Fog property propagation decode: stores final NiGeometry +0xAC property state; shader writers read fog from this state's +0x0C slot when present.
 0x722BA9: jz      short loc_722BB5
 0x722BAB: add     eax, 4
 0x722BAE: push    eax; lpAddend
@@ -71,3 +71,12 @@
 0x722BEC: pop     ebx
 0x722BED: add     esp, 0Ch
 0x722BF0: retn    4
+0x9CF800: lea     ecx, [ebp+4]; slot
+0x9CF803: jmp     NiPointerSlot_Release
+0x9CF808: mov     edx, [esp+arg_4]
+0x9CF80C: lea     eax, [edx-10h]
+0x9CF80F: mov     ecx, [edx-14h]
+0x9CF812: xor     ecx, eax
+0x9CF814: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CF819: mov     eax, offset stru_AF8414
+0x9CF81E: jmp     ___CxxFrameHandler3

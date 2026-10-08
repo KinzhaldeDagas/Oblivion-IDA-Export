@@ -1,4 +1,4 @@
-BSStringT *sub_A09900()
+NiRTTI *sub_A09900()
 {
-  return sub_70E220((BSStringT *)dword_B3F554, "BSParentVelocityModifier", (int)dword_B40D08);
+  return NiRTTI_Constructor(&stru_B3F554, "BSParentVelocityModifier", &stru_B40D08); /*0xa09914*/
 }

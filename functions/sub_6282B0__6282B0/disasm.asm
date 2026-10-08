@@ -27,7 +27,7 @@
 0x6282F7: push    0
 0x6282F9: push    1
 0x6282FB: mov     ecx, eax
-0x6282FD: call    sub_475440
+0x6282FD: call    ActorAnimData_CleanupOrPromoteQueuedIdles; Owns current/queued idle retirement and promotion across ActorAnimData +0xCC/+0xD0/+0xD4/+0xD8. Depending on caller flags, stops a still-active sequence, moves stale holders into the two cleanup slots, destroys them when no slot is available or forced, or promotes queued +0xD0 into current +0xCC.
 0x628302: mov     ecx, esi
 0x628304: call    sub_5E12B0
 0x628309: test    eax, eax

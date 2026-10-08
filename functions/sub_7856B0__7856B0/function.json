@@ -1,19 +1,36 @@
 {
-  "callees_count": 20,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7856B0",
+  "chunks": [
+    [
+      "0x7856B0",
+      "0x7857C8"
+    ],
+    [
+      "0x9CB030",
+      "0x9CB053"
+    ]
+  ],
+  "chunks_sha256": "c058d90b9fab8bcc5b1e25d3ed089da7a5e04b73d37995552e7fcbb5751cf666",
+  "comment_regular": "Oblivion 1.2.0.416: vector<stVec>::resize(newSize,value), with the 24-byte value passed by value; grows through insert-fill or shrinks through checked erase.",
+  "comment_repeatable": "Oblivion 1.2.0.416: vector<stVec>::resize(newSize,value), with the 24-byte value passed by value; grows through insert-fill or shrinks through checked erase.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "OB_stVector_stVec_ResizeFill_010201A0",
   "end_ea": "0x7857C8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7856B0",
+  "name": "OB_stVector_stVec_ResizeFill_010201A0",
   "segment": ".text",
   "sha256": "1e450428913ab7ab54c563cd678ace3bf8464f5927a919b2b7a4149d846d4165",
   "size": 280,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7856B0",
-  "type": "void __thiscall(char **this, unsigned int, int, int, int, int, int, int)",
-  "xrefs_from_count": 120,
+  "total_chunk_size": 315,
+  "type": "void __thiscall(OB_stVector_stVec_010201A0 *this, unsigned int newSize, OB_stVec_010201A0 value)",
+  "xrefs_from_count": 134,
   "xrefs_to_count": 1
 }

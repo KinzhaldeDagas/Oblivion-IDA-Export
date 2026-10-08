@@ -17,7 +17,7 @@
 0x437B8A: mov     ecx, [esi+20h]
 0x437B8D: push    edx
 0x437B8E: call    sub_47B7D0
-0x437B93: mov     eax, ModelLoaderPtr
+0x437B93: mov     eax, ds:0B33A1Ch
 0x437B98: mov     ecx, [eax+10h]
 0x437B9B: mov     edx, [ecx]
 0x437B9D: mov     eax, [esi+30h]

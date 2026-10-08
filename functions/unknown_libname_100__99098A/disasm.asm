@@ -1,4 +1,4 @@
-0x99098A: cmp     dword_BA9DDC, 0
+0x99098A: cmp     dword ptr byte_BA9DCC+10h, 0
 0x990991: jnz     short unknown_libname_100___unknown_libname_102
 0x990993: fst     qword ptr [ebp-2D0h]
 0x990999: mov     al, [ebp-90h]

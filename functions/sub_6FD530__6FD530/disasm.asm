@@ -10,7 +10,7 @@
 0x6FD548: lea     eax, [esp+18h+var_C]
 0x6FD54C: mov     large fs:0, eax
 0x6FD552: mov     esi, ecx
-0x6FD554: call    ??0NiTimeController@@QAE@XZ; NiTimeController::NiTimeController(void)
+0x6FD554: call    ??0NiTimeController@@QAE@XZ; Constructs a 0x3C-byte NiTimeController. Persistent authored state: flags +0x08, frequency +0x0C, phase +0x10, low/high key times +0x14/+0x18, target +0x30, next controller +0x34. Initializes runtime start/last/cache values +0x1C..+0x28 to sentinels, update byte +0x2C to 1, and force byte +0x38 to 0.
 0x6FD559: xor     eax, eax
 0x6FD55B: mov     [esi+40h], eax
 0x6FD55E: mov     dword ptr [esi], offset ??_7NiBSBoneLODController@@6B@; const NiBSBoneLODController::`vftable'
@@ -28,3 +28,12 @@
 0x6FD595: pop     esi
 0x6FD596: add     esp, 10h
 0x6FD599: retn
+0x9C80C0: mov     ecx, [ebp-10h]; this
+0x9C80C3: jmp     ??1NiPSysResetOnLoopCtlr@@UAE@XZ; NiPSysResetOnLoopCtlr::~NiPSysResetOnLoopCtlr(void)
+0x9C80C8: mov     edx, [esp+arg_4]
+0x9C80CC: lea     eax, [edx-8]
+0x9C80CF: mov     ecx, [edx-0Ch]
+0x9C80D2: xor     ecx, eax
+0x9C80D4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C80D9: mov     eax, offset stru_AF03BC
+0x9C80DE: jmp     ___CxxFrameHandler3

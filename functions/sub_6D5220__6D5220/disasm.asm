@@ -6,7 +6,7 @@
 0x6D522C: call    edx
 0x6D522E: test    eax, eax
 0x6D5230: jz      short loc_6D5240
-0x6D5232: cmp     eax, offset dword_B3FD5C
+0x6D5232: cmp     eax, offset stru_B3FD5C
 0x6D5237: jz      short loc_6D5243
 0x6D5239: mov     eax, [eax+4]
 0x6D523C: test    eax, eax

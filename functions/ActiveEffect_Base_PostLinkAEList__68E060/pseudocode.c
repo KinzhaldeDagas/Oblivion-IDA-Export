@@ -1,20 +1,27 @@
-int __cdecl ActiveEffect_Base_PostLinkAEList(_DWORD *a1, int a2)
+// Verified post-link entry iterates the target ActiveEffect EffectNode list and dispatches each ActiveEffect virtual +0x1C with the target/reference linkContext. TESObjectREFR_PostLinkModifiedExtraList calls this for a linked NonActorMagicTarget list (null context); actor/player post-link paths pass their reference context.
+int __cdecl ActiveEffect_Base_PostLinkAEList(EffectNode *activeEffectList, TESObjectREFR *linkContext)
 {
-  _DWORD *i; // esi
+  EffectNode *i; // esi
   int result; // eax
-  int v4; // ecx
+  TESObjectREFRVtbl *vtbl; // ecx
 
-  for ( i = a1; i; i = (_DWORD *)i[1] )
+  for ( i = activeEffectList; i; i = i->next ) /*0x68e06c*/
   {
-    if ( !i[1] && !*i )
-      break;
-    result = (*(int (__thiscall **)(_DWORD, int))(*(_DWORD *)*i + 0x1C))(*i, a2);
+    if ( !i->next && !i->data ) /*0x68e076*/
+      break; /*0x68e079*/
+    result = i->data->vtbl->postLink(i->data, linkContext); /*0x68e083*/
   }
-  if ( a2 )
+  if ( linkContext ) /*0x68e08e*/
   {
-    v4 = *(_DWORD *)(a2 + 0x58);
-    if ( v4 )
-      return (*(int (__thiscall **)(int, int, int, int, int))(*(_DWORD *)v4 + 0x42C))(v4, a2, 1, 1, 1);
+    vtbl = linkContext[1].vtbl; /*0x68e090*/
+    if ( vtbl ) /*0x68e095*/
+      return (*((int (__thiscall **)(TESObjectREFRVtbl *, TESObjectREFR *, int, int, int))vtbl->super.super.InitializeComponent /*0x68e0a6*/
+              + 0x10B))(
+               vtbl,
+               linkContext,
+               1,
+               1,
+               1);
   }
-  return result;
+  return result; /*0x68e0a8*/
 }

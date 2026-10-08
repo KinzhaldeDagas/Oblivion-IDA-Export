@@ -27,11 +27,11 @@
 0x639814: jz      short loc_639819
 0x639816: mov     ebp, [esi+2Ch]
 0x639819: lea     ebx, [esi+128h]
-0x63981F: push    ebx
-0x639820: mov     ecx, edi
+0x63981F: push    ebx; pointXYZ
+0x639820: mov     ecx, edi; this
 0x639822: mov     byte ptr [esp+20h+arg_0], 0
-0x639827: call    sub_4D7E30
-0x63982C: call    Double_To_SInt32
+0x639827: call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.
+0x63982C: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x639831: mov     [esp+1Ch+var_4], eax
 0x639835: fild    [esp+1Ch+var_4]
 0x639839: fcomp   dword ptr ds:0A56F84h
@@ -47,7 +47,7 @@
 0x639858: call    TESObjectREFR_GetWorldSpace
 0x63985D: mov     ecx, [esi+2Ch]; this
 0x639860: push    eax
-0x639861: call    TESObjectREFR_GetParentCell
+0x639861: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x639866: mov     ecx, [ebx]
 0x639868: mov     edx, [ebx+4]
 0x63986B: push    eax
@@ -108,7 +108,7 @@
 0x63990B: call    TESObjectREFR_GetWorldSpace
 0x639910: mov     ecx, [esi+120h]; this
 0x639916: push    eax
-0x639917: call    TESObjectREFR_GetParentCell
+0x639917: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x63991C: mov     edx, [ebp+414h]
 0x639922: push    eax
 0x639923: push    ebx

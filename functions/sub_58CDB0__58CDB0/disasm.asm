@@ -4,10 +4,10 @@
 0x58CDB4: mov     edi, [esi]
 0x58CDB6: test    edi, edi
 0x58CDB8: jz      short loc_58CDCA
-0x58CDBA: mov     ecx, edi
-0x58CDBC: call    sub_5852C0
+0x58CDBA: mov     ecx, edi; this
+0x58CDBC: call    Tile__TileTemplate__Destroy; Verified: invokes TileTemplate::Clear, list destructor, then releases template name buffer. Caller frees template object separately.
 0x58CDC1: push    edi
-0x58CDC2: call    FormHeapFree
+0x58CDC2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x58CDC7: add     esp, 4
 0x58CDCA: cmp     byte ptr [esi+10h], 0
 0x58CDCE: mov     dword ptr [esi+0Ch], 0
@@ -20,10 +20,10 @@
 0x58CDE0: mov     ebp, [edi]
 0x58CDE2: test    ebp, ebp
 0x58CDE4: jz      short loc_58CDF6
-0x58CDE6: mov     ecx, ebp
-0x58CDE8: call    sub_5852C0
+0x58CDE6: mov     ecx, ebp; this
+0x58CDE8: call    Tile__TileTemplate__Destroy; Verified: invokes TileTemplate::Clear, list destructor, then releases template name buffer. Caller frees template object separately.
 0x58CDED: push    ebp
-0x58CDEE: call    FormHeapFree
+0x58CDEE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x58CDF3: add     esp, 4
 0x58CDF6: mov     edi, [edi+4]
 0x58CDF9: test    edi, edi
@@ -34,7 +34,7 @@
 0x58CE04: mov     eax, [esi+8]
 0x58CE07: mov     edi, [eax+4]
 0x58CE0A: push    eax
-0x58CE0B: call    FormHeapFree
+0x58CE0B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x58CE10: add     esp, 4
 0x58CE13: test    edi, edi
 0x58CE15: mov     [esi+8], edi

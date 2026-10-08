@@ -35,7 +35,7 @@
 0x519755: add     edi, 4
 0x519758: push    edi; Src
 0x519759: push    43445343h; int
-0x51975E: call    TESForm_PutFormRecordChunkData
+0x51975E: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x519763: mov     esi, [esi+4]
 0x519766: add     esp, 14h
 0x519769: test    esi, esi

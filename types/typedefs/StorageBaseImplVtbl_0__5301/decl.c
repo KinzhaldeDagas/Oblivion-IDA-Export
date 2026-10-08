@@ -1,1 +1,1 @@
-StorageBaseImplVtbl_0
+typedef StorageBaseImplVtbl StorageBaseImplVtbl_0;

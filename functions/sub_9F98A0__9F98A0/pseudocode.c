@@ -1,5 +1,5 @@
-int sub_9F98A0()
+int InitSetting_sSkillNameHeavyArmor()
 {
-  GameSetting_ConstrAndReg((int *)&unk_B3A0C4, (int)"sSkillNameHeavyArmor", (int)"Heavy Armor");
-  return atexit(sub_A239C0);
+  GameSetting_ConstrAndReg(&g_sSkillNameHeavyArmor, "sSkillNameHeavyArmor", "Heavy Armor"); /*0x9f98af*/
+  return atexit(sub_A239C0); /*0x9f98bf*/
 }

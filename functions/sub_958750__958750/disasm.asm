@@ -33,12 +33,12 @@
 0x9587A4: push    3F490FDBh; float
 0x9587A9: push    eax; int
 0x9587AA: lea     ecx, [esp+88h+var_60]
-0x9587AE: call    sub_8B1B00
+0x9587AE: call    hkQuaternion_SetAxisAngleScaled; Builds a quaternion from an axis vector and scaled angle: vector part = axis*sin(angleScale), w = cos(angleScale). Used by 0x896000 while refreshing movement basis.
 0x9587B3: mov     ecx, [ebp+arg_8]
 0x9587B6: push    0BFC90FDBh; float
 0x9587BB: push    ecx; int
 0x9587BC: lea     ecx, [esp+88h+var_50]
-0x9587C0: call    sub_8B1B00
+0x9587C0: call    hkQuaternion_SetAxisAngleScaled; Builds a quaternion from an axis vector and scaled angle: vector part = axis*sin(angleScale), w = cos(angleScale). Used by 0x896000 while refreshing movement basis.
 0x9587C5: fld     dword ptr [esp+80h+var_60+0Ch]
 0x9587C9: fmul    dword ptr [esp+80h+var_60+0Ch]
 0x9587CD: movaps  xmm0, [esp+80h+var_60]

@@ -10,7 +10,7 @@
 0x413C37: push    ebx
 0x413C38: mov     [esp+4+arg_90], ebx
 0x413C3F: mov     [esp+4+arg_18], ebp
-0x413C43: call    FormHeapFree
+0x413C43: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x413C48: mov     [edi], ebx
 0x413C4A: mov     [edi+6], bx
 0x413C4E: mov     [edi+4], bx

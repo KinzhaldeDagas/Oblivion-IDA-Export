@@ -4,7 +4,7 @@
 0x9465A5: push    esi
 0x9465A6: push    edi
 0x9465A7: mov     ebx, ecx
-0x9465A9: push    offset unk_A9C288
+0x9465A9: push    offset dword_A9C288
 0x9465AE: lea     ecx, [esp+44h+var_30]
 0x9465B2: call    sub_90BBA0
 0x9465B7: mov     ecx, [ebx+2Ch]
@@ -42,7 +42,6 @@
 0x946617: jle     short loc_94662D
 0x946619: mov     ecx, [edi]
 0x94661B: jmp     short loc_946620
-0x94661D: align 10h
 0x946620: cmp     [ecx], ebp
 0x946622: jz      short loc_94662D
 0x946624: inc     eax
@@ -141,7 +140,6 @@
 0x946737: jle     short loc_946774
 0x946739: xor     esi, esi
 0x94673B: jmp     short loc_946740
-0x94673D: align 10h
 0x946740: mov     eax, [esp+40h+var_2C]
 0x946744: mov     ecx, [esi+eax+8]
 0x946748: mov     eax, [esi+eax+10h]

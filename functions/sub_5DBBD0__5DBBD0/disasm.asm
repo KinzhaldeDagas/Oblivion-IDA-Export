@@ -1,4 +1,4 @@
-0x5DBBD0: push    0FFFFFFFFh
+0x5DBBD0: push    0FFFFFFFFh; Native StatsMenu mouseover/detail renderer for attributes and the fixed Oblivion skill rows.
 0x5DBBD2: push    offset SEH_5DBBD0
 0x5DBBD7: mov     eax, large fs:0
 0x5DBBDD: push    eax
@@ -15,7 +15,7 @@
 0x5DBBF7: push    eax; a3
 0x5DBBF8: lea     eax, [esp+58h+var_C]
 0x5DBBFC: mov     large fs:0, eax
-0x5DBC02: mov     ebp, dword ptr [esp+58h+arg_0]; char
+0x5DBC02: mov     ebp, [esp+58h+arg_0]; char
 0x5DBC06: cmp     ebp, 22h ; '"'
 0x5DBC09: mov     edi, [esp+58h+arg_4]
 0x5DBC0D: mov     esi, ecx
@@ -28,15 +28,15 @@
 0x5DBC21: call    sub_57DE50
 0x5DBC26: add     esp, 4
 0x5DBC29: mov     ecx, edi
-0x5DBC2B: call    sub_588D90
+0x5DBC2B: call    sub_588D90; AchievementsNative evidence: stock tile depth helper starts with tile depth and adds parent depth for locus ancestors / top menu child; InventoryMenu hover sets focus box depth to this value minus 0.5.
 0x5DBC30: fsub    qword ptr ds:0A2FAA0h
 0x5DBC36: push    ecx
 0x5DBC37: mov     ecx, [esi+54h]; this
 0x5DBC3A: fstp    [esp+5Ch+a3]; a3
 0x5DBC3E: fld     [esp+5Ch+a3]
-0x5DBC42: fstp    [esp+5Ch+a2]; a3
-0x5DBC45: push    0FABh; a2
-0x5DBC4A: call    Tile_SetFloat
+0x5DBC42: fstp    [esp+5Ch+a2]; value
+0x5DBC45: push    0FABh; propertyCode
+0x5DBC4A: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5DBC4F: push    0FCBh
 0x5DBC54: mov     ecx, edi
 0x5DBC56: call    Tile_GetFloat
@@ -45,9 +45,9 @@
 0x5DBC62: mov     ecx, [esi+54h]; this
 0x5DBC65: fstp    [esp+5Ch+a3]; a3
 0x5DBC69: fld     [esp+5Ch+a3]
-0x5DBC6D: fstp    [esp+5Ch+a2]; a3
-0x5DBC70: push    0FCBh; a2
-0x5DBC75: call    Tile_SetFloat
+0x5DBC6D: fstp    [esp+5Ch+a2]; value
+0x5DBC70: push    0FCBh; propertyCode
+0x5DBC75: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5DBC7A: push    0FCAh
 0x5DBC7F: mov     ecx, edi
 0x5DBC81: call    Tile_GetFloat
@@ -56,45 +56,45 @@
 0x5DBC8D: mov     ecx, [esi+54h]; this
 0x5DBC90: fstp    [esp+5Ch+a3]
 0x5DBC94: fld     [esp+5Ch+a3]
-0x5DBC98: fstp    [esp+5Ch+a2]; a3
-0x5DBC9B: push    0FCAh; a2
-0x5DBCA0: call    Tile_SetFloat
+0x5DBC98: fstp    [esp+5Ch+a2]; value
+0x5DBC9B: push    0FCAh; propertyCode
+0x5DBCA0: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5DBCA5: mov     ecx, edi
-0x5DBCA7: call    sub_588C50
+0x5DBCA7: call    sub_588C50; AchievementsNative evidence: stock tile X helper starts with tile x and adds ancestor x only when ancestor locus is nonzero; use for inventory focus/popup coordinate mimic.
 0x5DBCAC: push    ecx
 0x5DBCAD: mov     ecx, [esi+54h]; this
-0x5DBCB0: fstp    [esp+5Ch+a2]; a3
-0x5DBCB3: push    0FADh; a2
-0x5DBCB8: call    Tile_SetFloat
+0x5DBCB0: fstp    [esp+5Ch+a2]; value
+0x5DBCB3: push    0FADh; propertyCode
+0x5DBCB8: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5DBCBD: mov     ecx, edi
-0x5DBCBF: call    sub_588CF0
+0x5DBCBF: call    sub_588CF0; AchievementsNative evidence: stock tile Y helper starts with tile y and adds ancestor y only when ancestor locus is nonzero; inventory hover passes this row Y to popup path.
 0x5DBCC4: fadd    qword ptr ds:0A3D0C0h
 0x5DBCCA: push    ecx
 0x5DBCCB: mov     ecx, [esi+54h]; this
 0x5DBCCE: fstp    [esp+5Ch+a3]
 0x5DBCD2: fld     [esp+5Ch+a3]
-0x5DBCD6: fstp    [esp+5Ch+a2]; a3
-0x5DBCD9: push    0FACh; a2
-0x5DBCDE: call    Tile_SetFloat
+0x5DBCD6: fstp    [esp+5Ch+a2]; value
+0x5DBCD9: push    0FACh; propertyCode
+0x5DBCDE: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5DBCE3: fld     dword ptr ds:0A379B4h
 0x5DBCE9: mov     ecx, [esi+54h]; this
 0x5DBCEC: push    ecx
-0x5DBCED: fstp    [esp+5Ch+a2]; a3
-0x5DBCF0: push    0FA1h; a2
-0x5DBCF5: call    Tile_SetFloat
+0x5DBCED: fstp    [esp+5Ch+a2]; value
+0x5DBCF0: push    0FA1h; propertyCode
+0x5DBCF5: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5DBCFA: cmp     ebp, 18h
 0x5DBCFD: jnz     short loc_5DBD5C
 0x5DBCFF: push    0FAEh
 0x5DBD04: mov     ecx, edi
 0x5DBD06: call    Tile_GetFloat
-0x5DBD0B: call    Double_To_SInt32
+0x5DBD0B: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5DBD10: fld     dword ptr ds:0A379B4h
 0x5DBD16: push    ecx
 0x5DBD17: mov     ecx, [esi+58h]; this
-0x5DBD1A: fstp    [esp+5Ch+a2]; a3
-0x5DBD1D: push    0FB2h; a2
+0x5DBD1A: fstp    [esp+5Ch+a2]; value
+0x5DBD1D: push    0FB2h; propertyCode
 0x5DBD22: mov     edi, eax
-0x5DBD24: call    Tile_SetFloat
+0x5DBD24: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5DBD29: push    edi
 0x5DBD2A: call    ActorValue_GetIcon
 0x5DBD2F: mov     ecx, [esi+58h]
@@ -115,7 +115,7 @@
 0x5DBD65: push    0FAEh
 0x5DBD6A: mov     ecx, edi
 0x5DBD6C: call    Tile_GetFloat
-0x5DBD71: call    Double_To_SInt32
+0x5DBD71: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5DBD76: cmp     eax, 4
 0x5DBD79: jl      loc_5DBE51
 0x5DBD7F: lea     edi, [eax+4]
@@ -150,9 +150,9 @@
 0x5DBDD4: mov     ecx, [esi+58h]; this
 0x5DBDD7: fld1
 0x5DBDD9: push    ecx
-0x5DBDDA: fstp    [esp+5Ch+a2]; a3
-0x5DBDDD: push    0FB2h; a2
-0x5DBDE2: call    Tile_SetFloat
+0x5DBDDA: fstp    [esp+5Ch+a2]; value
+0x5DBDDD: push    0FB2h; propertyCode
+0x5DBDE2: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5DBDE7: push    edi
 0x5DBDE8: call    ActorValue_GetIcon
 0x5DBDED: mov     ecx, [esi+58h]
@@ -180,7 +180,7 @@
 0x5DBE39: push    0FAEh; int
 0x5DBE3E: call    sub_589980
 0x5DBE43: push    ebp
-0x5DBE44: call    FormHeapFree
+0x5DBE44: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5DBE49: add     esp, 4
 0x5DBE4C: jmp     loc_5DC4F8
 0x5DBE51: test    eax, eax
@@ -227,9 +227,9 @@
 0x5DBEEE: mov     ecx, [esi+58h]; this
 0x5DBEF1: fld     dword ptr ds:0A379B4h
 0x5DBEF7: push    ecx
-0x5DBEF8: fstp    [esp+5Ch+a2]; a3
-0x5DBEFB: push    0FB2h; a2
-0x5DBF00: call    Tile_SetFloat
+0x5DBEF8: fstp    [esp+5Ch+a2]; value
+0x5DBEFB: push    0FB2h; propertyCode
+0x5DBF00: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5DBF05: mov     ecx, ds:0B333C4h
 0x5DBF0B: mov     edx, [ecx]
 0x5DBF0D: mov     eax, [edx+268h]
@@ -346,7 +346,7 @@
 0x5DC05D: cmp     eax, 2
 0x5DC060: jnz     loc_5DC2D7
 0x5DC066: mov     ecx, ds:0B333C4h
-0x5DC06C: call    Actor_GetBaseClass
+0x5DC06C: call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.
 0x5DC071: test    eax, eax
 0x5DC073: jz      loc_5DC4F8
 0x5DC079: mov     ecx, ds:0B333C4h; this
@@ -354,7 +354,7 @@
 0x5DC084: cmp     byte ptr [eax], 2Dh ; '-'
 0x5DC087: jz      loc_5DC4F8
 0x5DC08D: mov     ecx, ds:0B333C4h
-0x5DC093: call    Actor_GetBaseClass
+0x5DC093: call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.
 0x5DC098: mov     edx, [eax+24h]
 0x5DC09B: lea     ecx, [eax+24h]
 0x5DC09E: mov     eax, [edx+10h]
@@ -372,15 +372,15 @@
 0x5DC0CD: mov     ecx, [esi+58h]; this
 0x5DC0D0: fld     dword ptr ds:0A379B4h
 0x5DC0D6: push    ecx
-0x5DC0D7: fstp    [esp+5Ch+a2]; a3
-0x5DC0DA: push    0FB2h; a2
-0x5DC0DF: call    Tile_SetFloat
+0x5DC0D7: fstp    [esp+5Ch+a2]; value
+0x5DC0DA: push    0FB2h; propertyCode
+0x5DC0DF: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5DC0E4: mov     [esp+58h+var_40.m_data], 0
 0x5DC0EC: mov     [esp+58h+var_40.m_dataLen], 0
 0x5DC0F3: mov     [esp+58h+var_40.m_bufLen], 0
 0x5DC0FA: mov     ecx, ds:0B333C4h
 0x5DC100: mov     byte ptr [esp+58h+var_4], 5
-0x5DC105: call    Actor_GetBaseClass
+0x5DC105: call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.
 0x5DC10A: mov     ecx, ds:0B37C88h
 0x5DC110: push    ecx
 0x5DC111: mov     ecx, ds:0B33A98h
@@ -393,7 +393,7 @@
 0x5DC12E: test    edi, edi
 0x5DC130: jz      loc_5DC232
 0x5DC136: mov     ecx, edi
-0x5DC138: call    TESClass_IsPlayable
+0x5DC138: call    TESClass_IsPlayable; TESClass_IsPlayable reads classFlags at +0x60 bit 0.
 0x5DC13D: test    al, al
 0x5DC13F: jz      loc_5DC232
 0x5DC145: mov     edi, [edi+30h]
@@ -489,11 +489,11 @@
 0x5DC23F: call    Tile_SetString
 0x5DC244: mov     ecx, ds:0B333C4h
 0x5DC24A: mov     edi, ds:0B383D8h
-0x5DC250: call    Actor_GetBaseClass
+0x5DC250: call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.
 0x5DC255: mov     ecx, eax; this
-0x5DC257: call    TESObjectREFR_GetParentCell
-0x5DC25C: push    eax
-0x5DC25D: call    sub_52E7E0
+0x5DC257: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x5DC25C: push    eax; specialization
+0x5DC25D: call    ActorValue_GetSpecializationName; Oblivion-native specialization display helper: returns the localized name for specialization IDs 0..2 (Combat, Magic, Stealth); invalid IDs return the fallback string.
 0x5DC262: mov     edx, dword ptr [esp+5Ch+var_38]
 0x5DC266: push    eax
 0x5DC267: push    edi
@@ -541,9 +541,9 @@
 0x5DC305: mov     ecx, [esi+58h]; this
 0x5DC308: fld1
 0x5DC30A: push    ecx
-0x5DC30B: fstp    [esp+5Ch+a2]; a3
-0x5DC30E: push    0FB2h; a2
-0x5DC313: call    Tile_SetFloat
+0x5DC30B: fstp    [esp+5Ch+a2]; value
+0x5DC30E: push    0FB2h; propertyCode
+0x5DC313: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5DC318: mov     eax, dword ptr [esp+58h+var_38]
 0x5DC31C: mov     ecx, [esi+58h]
 0x5DC31F: push    eax
@@ -573,26 +573,26 @@
 0x5DC380: push    0FB4h
 0x5DC385: mov     ecx, edi
 0x5DC387: call    Tile_GetFloat
-0x5DC38C: call    Double_To_SInt32
+0x5DC38C: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5DC391: mov     ebp, eax
 0x5DC393: push    ebp
 0x5DC394: push    2
-0x5DC396: call    ActorValue_GetGroupOffsetFromAV
+0x5DC396: call    ActorValue_GetGroupOffsetFromAV; RealArenaTraining fidelity pass: ActorValue_GetGroupOffsetFromAV(group, actorValue). Player skill-progress code calls this with group 2 before indexing player skillExp/requiredSkillExp.
 0x5DC39B: mov     byte ptr [esp+60h+a3], al
 0x5DC39F: mov     ecx, [esp+60h+a3]
 0x5DC3A3: add     esp, 8
-0x5DC3A6: push    ecx
-0x5DC3A7: mov     ecx, ds:0B33A98h
-0x5DC3AD: call    TESDataHandler_GetTESSkillByCode
+0x5DC3A6: push    ecx; skillIndex
+0x5DC3A7: mov     ecx, ds:0B33A98h; this
+0x5DC3AD: call    TESDataHandler_GetTESSkillByCode; Return one of exactly 21 inline Oblivion TESSkill records. Reject skillIndex > 20; otherwise return TESDataHandler+0xD8+(skillIndex*0x60).
 0x5DC3B2: mov     edi, eax
 0x5DC3B4: test    edi, edi
 0x5DC3B6: jz      loc_5DC4C1
 0x5DC3BC: mov     ecx, [esi+58h]; this
 0x5DC3BF: fld     dword ptr ds:0A379B4h
 0x5DC3C5: push    ecx
-0x5DC3C6: fstp    [esp+5Ch+a2]; a3
-0x5DC3C9: push    0FB2h; a2
-0x5DC3CE: call    Tile_SetFloat
+0x5DC3C6: fstp    [esp+5Ch+a2]; value
+0x5DC3C9: push    0FB2h; propertyCode
+0x5DC3CE: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5DC3D3: mov     eax, [edi+24h]
 0x5DC3D6: test    eax, eax
 0x5DC3D8: jnz     short loc_5DC3DF
@@ -607,22 +607,22 @@
 0x5DC3F8: mov     [esp+58h+var_32], ax
 0x5DC3FD: mov     edx, [edi+30h]
 0x5DC400: mov     eax, ds:0B383C8h
-0x5DC405: mov     ecx, ds:0B333C4h
+0x5DC405: mov     ecx, ds:0B333C4h; this
 0x5DC40B: mov     ebx, ds:0B383D0h
-0x5DC411: push    ebp
+0x5DC411: push    ebp; actorValue
 0x5DC412: mov     [esp+5Ch+var_4], 7
 0x5DC41A: mov     [esp+5Ch+a3], edx
 0x5DC41E: mov     [esp+5Ch+var_40.m_data], eax
 0x5DC422: add     edi, 18h
-0x5DC425: call    Actor_GetSkillMasteryLevel
-0x5DC42A: push    eax
-0x5DC42B: call    ActorValue_GetMasteryName
+0x5DC425: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
+0x5DC42A: push    eax; mastery
+0x5DC42B: call    ActorValue_GetMasteryName; Return the localized mastery-tier name for SkillMasteryLevel 0..4.
 0x5DC430: mov     ecx, [esp+5Ch+a3]
 0x5DC434: add     esp, 4
 0x5DC437: push    eax
 0x5DC438: push    ebx; a3
 0x5DC439: push    ecx
-0x5DC43A: call    ActorValue_GetName
+0x5DC43A: call    ActorValue_GetName; Return the localized actor-value display name through g_actorValueNameSettings. Native skills occupy the contiguous SkillActorValue range 0x0C..0x20.
 0x5DC43F: mov     edx, [esp+64h+var_40.m_data]
 0x5DC443: add     esp, 4
 0x5DC446: push    eax
@@ -657,9 +657,9 @@
 0x5DC49F: mov     ecx, [esi+58h]; this
 0x5DC4A2: fild    [esp+58h+a3]
 0x5DC4A6: push    ecx
-0x5DC4A7: fstp    [esp+5Ch+a2]; a3
-0x5DC4AA: push    0FB3h; a2
-0x5DC4AF: call    Tile_SetFloat
+0x5DC4A7: fstp    [esp+5Ch+a2]; value
+0x5DC4AA: push    0FB3h; propertyCode
+0x5DC4AF: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5DC4B4: lea     ecx, [esp+58h+var_38]; void *
 0x5DC4B8: mov     [esp+58h+var_4], edi
 0x5DC4BC: call    BSStringT_Clear
@@ -690,3 +690,30 @@
 0x5DC50E: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x5DC513: add     esp, 44h
 0x5DC516: retn    8
+0x9C20B0: lea     ecx, [ebp-40h]; void *
+0x9C20B3: jmp     BSStringT_Clear
+0x9C20B8: lea     ecx, [ebp-38h]; void *
+0x9C20BB: jmp     BSStringT_Clear
+0x9C20C0: lea     ecx, [ebp-38h]; void *
+0x9C20C3: jmp     BSStringT_Clear
+0x9C20C8: lea     ecx, [ebp-40h]; void *
+0x9C20CB: jmp     BSStringT_Clear
+0x9C20D0: lea     ecx, [ebp-38h]; void *
+0x9C20D3: jmp     BSStringT_Clear
+0x9C20D8: lea     ecx, [ebp-40h]; void *
+0x9C20DB: jmp     BSStringT_Clear
+0x9C20E0: lea     ecx, [ebp-38h]; void *
+0x9C20E3: jmp     BSStringT_Clear
+0x9C20E8: lea     ecx, [ebp-38h]; void *
+0x9C20EB: jmp     BSStringT_Clear
+0x9C20F0: mov     edx, [esp+arg_4]
+0x9C20F4: lea     eax, [edx-48h]
+0x9C20F7: mov     ecx, [edx-4Ch]
+0x9C20FA: xor     ecx, eax
+0x9C20FC: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C2101: add     eax, 10h
+0x9C2104: mov     ecx, [edx-4]
+0x9C2107: xor     ecx, eax
+0x9C2109: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C210E: mov     eax, offset stru_AEAFE8
+0x9C2113: jmp     ___CxxFrameHandler3

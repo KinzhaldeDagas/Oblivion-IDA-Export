@@ -209,7 +209,7 @@
 0x952761: lea     ecx, [eax+10h]
 0x952764: push    ecx
 0x952765: push    eax
-0x952766: push    offset stru_BA7A40
+0x952766: push    offset unk_BA7A40
 0x95276B: call    sub_8D1700
 0x952770: mov     edx, dword ptr [esp+64h+var_20]
 0x952774: mov     eax, dword ptr [esp+64h+var_20+4]

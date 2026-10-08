@@ -1,1 +1,1 @@
-DirRef
+typedef ULONG DirRef;

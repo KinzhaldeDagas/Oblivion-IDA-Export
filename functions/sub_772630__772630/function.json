@@ -1,18 +1,31 @@
 {
-  "callees_count": 3,
-  "callers_count": 55,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 1635,
+  "chunks": [
+    [
+      "0x772630",
+      "0x772683"
+    ]
+  ],
+  "chunks_sha256": "644ec9288c38138886b97577927c6e4bd82bdb9ebb2bec6296e9e51cc70a05d8",
+  "comment_regular": "\n[4.1 layers 2026-10-03] Verified cdecl(outStagePointer), returns same pointer. Acquired pooled stage has one ref at +5C; release to 772560 on zero, NOT NiRefObject virtual destructor.\n\nAcquire a renderer-owned NiD3DTextureStage from the global texture-stage pool and return it with a reference.",
+  "comment_repeatable": "Acquire a renderer-owned NiD3DTextureStage from the global texture-stage pool and return it with a reference.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_772630",
+  "display_name": "NiD3DTextureStagePool_Acquire",
   "end_ea": "0x772683",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_772630",
+  "name": "NiD3DTextureStagePool_Acquire",
   "segment": ".text",
   "sha256": "644ec9288c38138886b97577927c6e4bd82bdb9ebb2bec6296e9e51cc70a05d8",
   "size": 83,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x772630",
+  "total_chunk_size": 83,
   "type": "_DWORD *__cdecl(_DWORD *)",
   "xrefs_from_count": 36,
   "xrefs_to_count": 1635

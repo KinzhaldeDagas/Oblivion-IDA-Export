@@ -28,7 +28,7 @@
 0x57ED6F: push    ebp
 0x57ED70: push    ecx
 0x57ED71: mov     ecx, eax; this
-0x57ED73: call    ??0SceneGraph@@QAE@XZ; SceneGraph::SceneGraph(void)
+0x57ED73: call    ??0SceneGraph@@QAE@XZ; MoonSugarEffect decode: SceneGraph constructor creates camera at +0xDC and cullingProcess at +0xE4; world scenegraph uses these in NiRenderer_Render.
 0x57ED78: jmp     short loc_57ED7C
 0x57ED7A: xor     eax, eax
 0x57ED7C: mov     [esp+50h+var_4], 0FFFFFFFFh
@@ -72,11 +72,11 @@
 0x57EE08: mov     ecx, ebp; this
 0x57EE0A: mov     [esp+54h+var_4], edi
 0x57EE0E: mov     [eax+18h], dx
-0x57EE12: call    sub_405680
+0x57EE12: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x57EE17: mov     eax, [ebx+78h]
 0x57EE1A: push    eax; a2
 0x57EE1B: mov     ecx, ebp; this
-0x57EE1D: call    sub_405680
+0x57EE1D: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x57EE22: cmp     byte ptr [esp+50h+arg_8], 0
 0x57EE27: jnz     loc_57F143
 0x57EE2D: fld     dword ptr [ebx+74h]
@@ -105,7 +105,7 @@
 0x57EE77: push    0B6Dh
 0x57EE7C: push    offset a_InterfaceInte; ".\\Interface\\InterfaceManager.cpp"
 0x57EE81: push    offset EmptyString
-0x57EE86: call    nullsub_return0_0arg
+0x57EE86: call    nullsub_return0_0arg; [Verified] Shared zero-return leaf. BSTempEffectDecal vtable 0xA6822C uses it at +0x54 for GetTypeID 0 and also in other slots; many unrelated vtables reuse this target. Class meaning must be established from the owning vtable and caller.
 0x57EE8B: add     esp, 0Ch
 0x57EE8E: mov     ecx, [ebx+54h]
 0x57EE91: push    offset aInterfacemanag; "InterfaceManager: Main Root"
@@ -189,7 +189,7 @@
 0x57EFAA: mov     ecx, [ebx+54h]; this
 0x57EFAD: push    esi; a2
 0x57EFAE: mov     [esp+54h+var_4], edi
-0x57EFB2: call    sub_405680
+0x57EFB2: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x57EFB7: push    0DCh ; 'Ü'; Size
 0x57EFBC: call    FormHeapAlloc
 0x57EFC1: add     esp, 4
@@ -209,7 +209,7 @@
 0x57EFEC: push    0B7Fh
 0x57EFF1: push    offset a_InterfaceInte; ".\\Interface\\InterfaceManager.cpp"
 0x57EFF6: push    offset EmptyString
-0x57EFFB: call    nullsub_return0_0arg
+0x57EFFB: call    nullsub_return0_0arg; [Verified] Shared zero-return leaf. BSTempEffectDecal vtable 0xA6822C uses it at +0x54 for GetTypeID 0 and also in other slots; many unrelated vtables reuse this target. Class meaning must be established from the owning vtable and caller.
 0x57F000: add     esp, 0Ch
 0x57F003: mov     ecx, [ebx+58h]
 0x57F006: push    offset aInterfaceman_0; "InterfaceManager: Cursor Root"
@@ -293,7 +293,7 @@
 0x57F11F: mov     ecx, [ebx+58h]; this
 0x57F122: push    esi; a2
 0x57F123: mov     [esp+54h+var_4], edi
-0x57F127: call    sub_405680
+0x57F127: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x57F12C: fld     dword ptr [ebx+74h]
 0x57F12F: push    0; int
 0x57F131: push    ecx
@@ -307,7 +307,7 @@
 0x57F14B: push    ecx
 0x57F14C: mov     ecx, ebp; this
 0x57F14E: fstp    [esp+58h+a2]; a2
-0x57F151: call    SetCameraFOV_0
+0x57F151: call    SetCameraFOV_0; MoonSugarEffect decode: SetCameraFOV_0 rebuilds SceneGraph camera frustum, max far/near ratio, camera LODAdjust, and leaves persistent camera state. Avoid for per-frame Moon Sugar wobble.
 0x57F156: mov     eax, ebp
 0x57F158: mov     ecx, [esp+50h+var_C]
 0x57F15C: mov     large fs:0, ecx
@@ -318,3 +318,50 @@
 0x57F167: pop     ebx
 0x57F168: add     esp, 3Ch
 0x57F16B: retn    0Ch
+0x9BEA50: mov     eax, [ebp+4]
+0x9BEA53: push    eax
+0x9BEA54: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BEA59: pop     ecx
+0x9BEA5A: retn
+0x9BEA5B: mov     eax, [ebp+4]
+0x9BEA5E: push    eax
+0x9BEA5F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BEA64: pop     ecx
+0x9BEA65: retn
+0x9BEA66: mov     eax, [ebp+0Ch]
+0x9BEA69: push    eax
+0x9BEA6A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BEA6F: pop     ecx
+0x9BEA70: retn
+0x9BEA71: mov     eax, [ebp+0Ch]
+0x9BEA74: push    eax
+0x9BEA75: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BEA7A: pop     ecx
+0x9BEA7B: retn
+0x9BEA7C: mov     eax, [ebp+0Ch]
+0x9BEA7F: push    eax
+0x9BEA80: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BEA85: pop     ecx
+0x9BEA86: retn
+0x9BEA87: mov     eax, [ebp+0Ch]
+0x9BEA8A: push    eax
+0x9BEA8B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BEA90: pop     ecx
+0x9BEA91: retn
+0x9BEA92: mov     eax, [ebp+0Ch]
+0x9BEA95: push    eax
+0x9BEA96: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BEA9B: pop     ecx
+0x9BEA9C: retn
+0x9BEA9D: mov     eax, [ebp+0Ch]
+0x9BEAA0: push    eax
+0x9BEAA1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BEAA6: pop     ecx
+0x9BEAA7: retn
+0x9BEAA8: mov     edx, [esp+arg_4]
+0x9BEAAC: lea     eax, [edx-40h]
+0x9BEAAF: mov     ecx, [edx-44h]
+0x9BEAB2: xor     ecx, eax
+0x9BEAB4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BEAB9: mov     eax, offset stru_AE8110
+0x9BEABE: jmp     ___CxxFrameHandler3

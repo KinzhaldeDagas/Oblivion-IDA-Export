@@ -1,6 +1,6 @@
 0x6516D0: push    ebx
 0x6516D1: push    esi
-0x6516D2: mov     esi, [esp+8+arg_8]
+0x6516D2: mov     esi, [esp+8+owner]
 0x6516D6: push    edi
 0x6516D7: push    0; int
 0x6516D9: push    offset ??_R0?AVActor@@@8; struct TypeDescriptor *
@@ -10,14 +10,14 @@
 0x6516E6: mov     edi, ecx
 0x6516E8: call    OblivionDynamicCast
 0x6516ED: add     esp, 14h
-0x6516F0: push    esi
-0x6516F1: mov     esi, [esp+10h+arg_0]
+0x6516F0: push    esi; owner
+0x6516F1: mov     esi, [esp+10h+changeMask]
 0x6516F5: mov     ebx, eax
-0x6516F7: mov     eax, [esp+10h+arg_4]
-0x6516FB: push    eax
-0x6516FC: push    esi
-0x6516FD: mov     ecx, edi
-0x6516FF: call    LowProcess_LinkMagicData?
+0x6516F7: mov     eax, [esp+10h+currentFlags]
+0x6516FB: push    eax; currentFlags
+0x6516FC: push    esi; changeMask
+0x6516FD: mov     ecx, edi; self
+0x6516FF: call    LowProcess_InitLoadGame
 0x651704: mov     ecx, [edi+0C0h]
 0x65170A: test    ecx, ecx
 0x65170C: jz      short loc_651720
@@ -34,7 +34,7 @@
 0x651731: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x651736: push    0; int
 0x651738: push    eax; a1
-0x651739: call    TESForm_LookupByFormID
+0x651739: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x65173E: add     esp, 4
 0x651741: push    eax; void *
 0x651742: call    OblivionDynamicCast
@@ -48,7 +48,7 @@
 0x651761: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x651766: push    0; int
 0x651768: push    eax; a1
-0x651769: call    TESForm_LookupByFormID
+0x651769: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x65176E: add     esp, 4
 0x651771: push    eax; void *
 0x651772: call    OblivionDynamicCast

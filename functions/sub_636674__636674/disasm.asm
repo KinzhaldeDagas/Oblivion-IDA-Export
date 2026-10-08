@@ -11,7 +11,7 @@
 0x63668E: call    TESObjectREFR_GetWorldSpace
 0x636693: push    eax
 0x636694: mov     ecx, ebp; this
-0x636696: call    TESObjectREFR_GetParentCell
+0x636696: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x63669B: mov     ecx, [esp+4+arg_1C]
 0x63669F: mov     edx, [esp+4+arg_20]
 0x6366A3: push    eax
@@ -68,7 +68,7 @@
 0x63672A: mov     ebx, [ebx+18h]
 0x63672D: mov     edi, [esi]
 0x63672F: push    ebx
-0x636730: call    sub_673980
+0x636730: call    sub_673980; 3DTheft: returns package procedure row length for procedureArrayIndex. Rows used here include Follow row 7 and Flee row 0x13.
 0x636735: mov     edx, [edi+17Ch]
 0x63673B: add     esp, 4
 0x63673E: sub     eax, 1
@@ -101,12 +101,12 @@
 0x63678E: mov     edx, [eax+174h]
 0x636794: call    edx
 0x636796: push    eax
-0x636797: lea     eax, [esp+1Ch+arg_4]
+0x636797: lea     eax, [esp+1Ch+pointXYZ]
 0x63679B: push    eax
 0x63679C: lea     ecx, [esi+0D4h]
 0x6367A2: call    sub_4121A0
 0x6367A7: mov     ecx, eax
-0x6367A9: call    sub_404C90
+0x6367A9: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x6367AE: fstp    [esp+18h+arg_28]
 0x6367B2: mov     ecx, offset flt_B36A88
 0x6367B7: call    GameSetting_GetSafeFloatPointer
@@ -135,7 +135,7 @@
 0x636802: call    TESObjectREFR_GetWorldSpace
 0x636807: push    eax
 0x636808: mov     ecx, ebp; this
-0x63680A: call    TESObjectREFR_GetParentCell
+0x63680A: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x63680F: mov     ecx, [esp+1Ch+arg_28]
 0x636813: mov     edx, [ecx]
 0x636815: push    eax
@@ -181,7 +181,7 @@
 0x636895: call    edx
 0x636897: cmp     eax, 4
 0x63689A: jz      loc_636956
-0x6368A0: mov     ecx, dword ptr [esp+30h+var_20]
+0x6368A0: mov     ecx, [esp+30h+var_20]
 0x6368A4: test    ecx, ecx
 0x6368A6: jz      short loc_6368B5
 0x6368A8: call    sub_4D74B0
@@ -218,21 +218,21 @@
 0x636905: call    sub_683AA0
 0x63690A: test    al, al
 0x63690C: jz      loc_636867
-0x636912: lea     ecx, [esp+18h+arg_4]
+0x636912: lea     ecx, [esp+18h+pointXYZ]
 0x636916: push    ecx
 0x636917: mov     ecx, ebp
 0x636919: call    sub_625290
-0x63691E: lea     edx, [esp+18h+arg_4]
-0x636922: push    edx
-0x636923: mov     ecx, edi
-0x636925: call    sub_4D7E30
+0x63691E: lea     edx, [esp+18h+pointXYZ]
+0x636922: push    edx; pointXYZ
+0x636923: mov     ecx, edi; this
+0x636925: call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.
 0x63692A: fcomp   dword ptr ds:0A6B324h
 0x636930: fnstsw  ax
 0x636932: test    ah, 41h
 0x636935: jnz     loc_636867
 0x63693B: mov     eax, [edi]
 0x63693D: mov     edx, [eax+1CCh]
-0x636943: lea     ecx, [esp+18h+arg_4]
+0x636943: lea     ecx, [esp+18h+pointXYZ]
 0x636947: push    ecx
 0x636948: mov     ecx, edi
 0x63694A: call    edx

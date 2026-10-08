@@ -1,6 +1,6 @@
 void __cdecl sub_A26DF0()
 {
-  off_B294F0 = &NiTPointerListBase<NiTPointerAllocator<unsigned int>,NiDX9AdditionalDepthStencilBufferData *>::`vftable';
-  NiTPointerList::FreeAllNodes((NiTPointerList__BSImageSpaceShader *)&off_B294F0);
-  off_B294F0 = &NiTListBase<NiTPointerAllocator<unsigned int>,NiDX9AdditionalDepthStencilBufferData *>::`vftable';
+  list = &NiTPointerListBase<NiTPointerAllocator<unsigned int>,NiDX9AdditionalDepthStencilBufferData *>::`vftable'; /*0xa26df5*/
+  NiTPointerList::FreeAllNodes((NiTPointerList__BSImageSpaceShader *)&list); /*0xa26dff*/
+  list = &NiTListBase<NiTPointerAllocator<unsigned int>,NiDX9AdditionalDepthStencilBufferData *>::`vftable'; /*0xa26e04*/
 }

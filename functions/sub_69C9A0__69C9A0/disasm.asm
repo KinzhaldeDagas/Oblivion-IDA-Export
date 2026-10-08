@@ -21,7 +21,7 @@
 0x69C9EB: call    edx
 0x69C9ED: test    eax, eax
 0x69C9EF: jz      short loc_69C9FF
-0x69C9F1: cmp     eax, offset dword_B40864
+0x69C9F1: cmp     eax, offset stru_B40864
 0x69C9F6: jz      short loc_69CA30
 0x69C9F8: mov     eax, [eax+4]
 0x69C9FB: test    eax, eax
@@ -68,7 +68,7 @@
 0x69CA7A: call    edx
 0x69CA7C: test    eax, eax
 0x69CA7E: jz      short loc_69CA8E
-0x69CA80: cmp     eax, offset dword_B40C84
+0x69CA80: cmp     eax, offset stru_B40C84
 0x69CA85: jz      short loc_69CB00
 0x69CA87: mov     eax, [eax+4]
 0x69CA8A: test    eax, eax
@@ -88,7 +88,7 @@
 0x69CAAB: test    eax, eax
 0x69CAAD: jz      short loc_69CABE
 0x69CAAF: nop
-0x69CAB0: cmp     eax, offset dword_B40B50
+0x69CAB0: cmp     eax, offset stru_B40B50
 0x69CAB5: jz      short loc_69CB04
 0x69CAB7: mov     eax, [eax+4]
 0x69CABA: test    eax, eax

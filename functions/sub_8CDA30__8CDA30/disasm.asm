@@ -9,7 +9,6 @@
 0x8CDA43: jle     short loc_8CDA5C
 0x8CDA45: mov     edx, [esi+90h]
 0x8CDA4B: jmp     short loc_8CDA50
-0x8CDA4D: align 10h
 0x8CDA50: cmp     [edx], ebx
 0x8CDA52: jz      short loc_8CDA94
 0x8CDA54: inc     eax

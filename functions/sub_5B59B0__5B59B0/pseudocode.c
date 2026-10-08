@@ -1,34 +1,28 @@
-char __usercall sub_5B59B0@<al>(double a1@<st2>, double a2@<st1>)
+void __cdecl MainMenu_QuitConfirmationCallback()
 {
+  double v0; // st5
+  double v1; // st6
   _DWORD *OpenMenuTile; // esi
-  OSGlobals *ParentMenu; // eax
-  char v5; // bl
+  unsigned __int8 v3; // bl
   int *Singleton; // eax
 
-  OpenMenuTile = (_DWORD *)Menu_GetOpenMenuTile(0x414);
-  LOBYTE(ParentMenu) = sub_578D70();
-  v5 = (char)ParentMenu;
-  if ( OpenMenuTile )
+  OpenMenuTile = (_DWORD *)Menu_GetOpenMenuTile(0x414); /*0x5b59bf*/
+  v3 = InterfaceManager_ConsumeMessageButton(); /*0x5b59c8*/
+  if ( OpenMenuTile ) /*0x5b59ca*/
+    *(_BYTE *)(Tile_GetParentMenu(OpenMenuTile) + 0x4D) = 1; /*0x5b59d3*/
+  if ( v3 == 1 ) /*0x5b59da*/
   {
-    ParentMenu = (OSGlobals *)Tile_GetParentMenu(OpenMenuTile);
-    BYTE1(ParentMenu[1].sound) = 1;
-  }
-  if ( v5 == 1 )
-  {
-    if ( OpenMenuTile )
+    if ( OpenMenuTile ) /*0x5b59de*/
     {
-      Singleton = (int *)InterfaceManager_GetSingleton(0, 1);
-      *(_WORD *)(*(_DWORD *)(Singleton[0x1A] + 0x24) + 0x18) |= 1u;
-      *(_WORD *)(*(_DWORD *)(Singleton[7] + 0x24) + 0x18) |= 1u;
-      MiscPass(Singleton, a1, a2, 0);
+      Singleton = (int *)InterfaceManager_GetSingleton(0, 1); /*0x5b59e8*/
+      *(_WORD *)(*(_DWORD *)(Singleton[0x1A] + 0x24) + 0x18) |= 1u; /*0x5b59f3*/
+      *(_WORD *)(*(_DWORD *)(Singleton[7] + 0x24) + 0x18) |= 1u; /*0x5b59fd*/
+      MiscPass(Singleton, v0, v1, 0); /*0x5b5a08*/
     }
-    ParentMenu = OSGlobals;
-    OSGlobals->quitGame = 1;
+    MEMORY[0xB33398]->quitGame = 1; /*0x5b5a13*/
   }
-  else if ( OpenMenuTile )
+  else if ( OpenMenuTile ) /*0x5b5a1a*/
   {
-    ParentMenu = (OSGlobals *)Tile_GetParentMenu(OpenMenuTile);
-    BYTE1(ParentMenu[1].sound) = 0;
+    *(_BYTE *)(Tile_GetParentMenu(OpenMenuTile) + 0x4D) = 0; /*0x5b5a23*/
   }
-  return (char)ParentMenu;
 }

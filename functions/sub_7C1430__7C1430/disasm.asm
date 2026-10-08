@@ -12,16 +12,16 @@
 0x7C144C: push    eax
 0x7C144D: lea     eax, [esp+2Ch+var_C]
 0x7C1451: mov     large fs:0, eax
-0x7C1457: mov     eax, [esp+2Ch+arg_4]
+0x7C1457: mov     eax, [esp+2Ch+width]
 0x7C145B: xor     ebx, ebx
 0x7C145D: xor     edi, edi
 0x7C145F: cmp     ds:0B42E96h, bl
 0x7C1465: mov     ebp, 2
 0x7C146A: mov     [esp+2Ch+var_10], ebp
 0x7C146E: jz      short loc_7C1476
-0x7C1470: mov     esi, [esp+2Ch+arg_8]
+0x7C1470: mov     esi, [esp+2Ch+height]
 0x7C1474: jmp     short loc_7C1498
-0x7C1476: mov     edx, [esp+2Ch+arg_8]
+0x7C1476: mov     edx, [esp+2Ch+height]
 0x7C147A: cmp     eax, edx
 0x7C147C: jle     short loc_7C1480
 0x7C147E: mov     edx, eax
@@ -33,17 +33,17 @@
 0x7C1492: cmp     eax, edx
 0x7C1494: jl      short loc_7C1490
 0x7C1496: mov     esi, eax
-0x7C1498: mov     edx, [esp+2Ch+arg_C]
+0x7C1498: mov     edx, [esp+2Ch+d3dFormat]
 0x7C149C: test    edx, edx
 0x7C149E: mov     [esp+2Ch+var_18], ebp
 0x7C14A2: mov     [esp+2Ch+var_14], ebp
 0x7C14A6: jz      short loc_7C14B5
 0x7C14A8: mov     byte ptr ds:0B3FF00h, 1
 0x7C14AF: mov     ds:0B2752Ch, edx
-0x7C14B5: mov     edx, [esp+2Ch+arg_14]
+0x7C14B5: mov     edx, dword ptr [esp+2Ch+targetFlags]
 0x7C14B9: mov     ebp, edx
 0x7C14BB: and     ebp, 8
-0x7C14BE: mov     [esp+2Ch+arg_8], ebp
+0x7C14BE: mov     [esp+2Ch+height], ebp
 0x7C14C2: jz      short loc_7C14CA
 0x7C14C4: mov     ds:0B27530h, bl
 0x7C14CA: mov     ebp, edx
@@ -58,7 +58,7 @@
 0x7C14EA: not     cl
 0x7C14EC: and     cl, 1
 0x7C14EF: test    dl, 10h
-0x7C14F2: mov     byte ptr [esp+2Ch+arg_4], cl
+0x7C14F2: mov     byte ptr [esp+2Ch+width], cl
 0x7C14F6: jz      short loc_7C154E
 0x7C14F8: mov     ecx, ds:0B43104h
 0x7C14FE: lea     edx, [esp+2Ch+var_18]
@@ -73,7 +73,7 @@
 0x7C1513: push    24h ; '$'; Size
 0x7C1515: call    FormHeapAlloc
 0x7C151A: add     esp, 4
-0x7C151D: mov     [esp+2Ch+arg_4], eax
+0x7C151D: mov     [esp+2Ch+width], eax
 0x7C1521: test    eax, eax
 0x7C1523: mov     [esp+2Ch+var_4], 0
 0x7C152B: jz      short loc_7C1542
@@ -87,7 +87,7 @@
 0x7C1542: xor     eax, eax
 0x7C1544: mov     [esp+2Ch+var_4], 0FFFFFFFFh
 0x7C154C: jmp     short loc_7C1563
-0x7C154E: mov     edx, [esp+2Ch+arg_4]
+0x7C154E: mov     edx, [esp+2Ch+width]
 0x7C1552: push    edi
 0x7C1553: push    edx
 0x7C1554: lea     ecx, [esp+34h+var_18]
@@ -97,10 +97,10 @@
 0x7C155B: call    sub_7D6F40
 0x7C1560: add     esp, 14h
 0x7C1563: mov     ebx, eax
-0x7C1565: cmp     [esp+2Ch+arg_C], 0
+0x7C1565: cmp     [esp+2Ch+d3dFormat], 0
 0x7C156A: jz      short loc_7C1573
 0x7C156C: mov     byte ptr ds:0B3FF00h, 0
-0x7C1573: cmp     [esp+2Ch+arg_8], 0
+0x7C1573: cmp     [esp+2Ch+height], 0
 0x7C1578: jz      short loc_7C1581
 0x7C157A: mov     byte ptr ds:0B27530h, 1
 0x7C1581: test    ebp, ebp
@@ -113,7 +113,7 @@
 0x7C159A: jz      short loc_7C15A7
 0x7C159C: push    ebx; _DWORD
 0x7C159D: push    offset aUnableToCrea_0; "Unable to create rendered texture"
-0x7C15A2: call    eax ; dword_B42E8C
+0x7C15A2: call    eax ; unk_B42E8C
 0x7C15A4: add     esp, 8
 0x7C15A7: mov     eax, ebx
 0x7C15A9: mov     ecx, [esp+2Ch+var_C]
@@ -125,3 +125,15 @@
 0x7C15B8: pop     ebx
 0x7C15B9: add     esp, 18h
 0x7C15BC: retn    18h
+0x9CE110: mov     eax, [ebp+8]
+0x9CE113: push    eax
+0x9CE114: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CE119: pop     ecx
+0x9CE11A: retn
+0x9CE11B: mov     edx, [esp+width]
+0x9CE11F: lea     eax, [edx-1Ch]
+0x9CE122: mov     ecx, [edx-20h]
+0x9CE125: xor     ecx, eax
+0x9CE127: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CE12C: mov     eax, offset stru_AF7160
+0x9CE131: jmp     ___CxxFrameHandler3

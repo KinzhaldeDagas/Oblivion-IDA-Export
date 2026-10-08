@@ -1,19 +1,40 @@
 {
-  "callees_count": 12,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 7,
+  "chunks": [
+    [
+      "0x439780",
+      "0x439854"
+    ],
+    [
+      "0x437320",
+      "0x43734E"
+    ],
+    [
+      "0x9AC7F0",
+      "0x9AC81E"
+    ]
+  ],
+  "chunks_sha256": "956ad5b9e7552822738fedee37bbdc50af38b51cc297ad0792201171af89b0d2",
+  "comment_regular": "Verified QueuedDistantLOD destruction: releases the Ni2DBuffer at DistantLODQueuedInstanceData+0x1C, frees the 0x20-byte context, releases the task's result/resource pointers, then frees the queued model path.",
+  "comment_repeatable": "Verified QueuedDistantLOD destruction: releases the Ni2DBuffer at DistantLODQueuedInstanceData+0x1C, frees the 0x20-byte context, releases the task's result/resource pointers, then frees the queued model path.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 11,
   "display_name": "QueuedDistantLOD::~QueuedDistantLOD(void)",
   "end_ea": "0x439854",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??1QueuedDistantLOD@@UAE@XZ",
   "segment": ".text",
   "sha256": "425e071913ed49dbf82fd633096485e2cc821c122234f2968da7e3830eb46657",
   "size": 212,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x439780",
+  "total_chunk_size": 304,
   "type": "void __thiscall(QueuedDistantLOD *this)",
-  "xrefs_from_count": 97,
+  "xrefs_from_count": 132,
   "xrefs_to_count": 1
 }

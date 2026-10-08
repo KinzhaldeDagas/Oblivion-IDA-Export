@@ -1,1 +1,1 @@
-0x6D1AE0: jmp     ??1NiPoint3InterpController@@UAE@XZ
+0x6D1AE0: jmp     ??1NiPoint3InterpController@@UAE@XZ; Shared single-interpolator-controller destructor body used by this controller family: releases refcounted interpolator smart pointer +0x3C, deleting at zero references, then destroys the time-controller base. Existing RTTI name reflects another identical controller specialization.

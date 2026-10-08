@@ -1,18 +1,31 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 11,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x715F40",
+      "0x71604D"
+    ]
+  ],
+  "chunks_sha256": "cecbf677a11604415c21e9a86f34ff4b8a99703a419c31d2f58a433982f42b1e",
+  "comment_regular": "Load persistent NiTimeController state: flags +0x08, frequency/phase/key bounds, and target/next links. Legacy migration clears flag bit 0x20 before stream version 0x0A01006D. Runtime time caches and update bytes are constructor state, not serialized.",
+  "comment_repeatable": "Load persistent NiTimeController state: flags +0x08, frequency/phase/key bounds, and target/next links. Legacy migration clears flag bit 0x20 before stream version 0x0A01006D. Runtime time caches and update bytes are constructor state, not serialized.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_715F40",
+  "display_name": "NiTimeController_LoadBinary",
   "end_ea": "0x71604D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_715F40",
+  "name": "NiTimeController_LoadBinary",
   "segment": ".text",
   "sha256": "cecbf677a11604415c21e9a86f34ff4b8a99703a419c31d2f58a433982f42b1e",
   "size": 269,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x715F40",
+  "total_chunk_size": 269,
   "type": "__int16 __thiscall(NiRenderer *this, signed int)",
   "xrefs_from_count": 97,
   "xrefs_to_count": 15

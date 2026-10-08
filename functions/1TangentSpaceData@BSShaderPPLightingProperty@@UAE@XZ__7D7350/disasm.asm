@@ -7,7 +7,7 @@
 0x7D7362: test    eax, eax
 0x7D7364: jz      short loc_7D736F
 0x7D7366: push    eax
-0x7D7367: call    FormHeapFree
+0x7D7367: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7D736C: add     esp, 4
 0x7D736F: cmp     byte ptr [esi+8], 0
 0x7D7373: mov     dword ptr [esi+0Ch], 0
@@ -16,9 +16,9 @@
 0x7D737F: test    eax, eax
 0x7D7381: jz      short loc_7D738C
 0x7D7383: push    eax
-0x7D7384: call    FormHeapFree
+0x7D7384: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7D7389: add     esp, 4
-0x7D738C: push    offset NiRefObject_objcount; lpAddend
+0x7D738C: push    0B3FD64h; lpAddend
 0x7D7391: mov     dword ptr [esi+10h], 0
 0x7D7398: mov     dword ptr [esi], offset ??_7NiRefObject@@6B@; const NiRefObject::`vftable'
 0x7D739E: call    dword ptr ds:0A2807Ch

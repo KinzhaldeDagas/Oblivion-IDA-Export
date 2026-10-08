@@ -1,1 +1,1 @@
-hkCharacterProxyListener
+struct hkCharacterProxyListener;

@@ -1,4 +1,4 @@
-0x51ACF0: mov     eax, [esp+arg_0]
+0x51ACF0: mov     eax, [esp+arg_0]; Resizes TESAnimGroup's parsed text-key event array at +0x24/+0x28. Each record is 0x10 bytes; preserved records are copied, new records initialize time=0, byte/enum=0xFA, float scale=1.0, and sound pointer=null; a zero count frees the array.
 0x51ACF4: push    ebx
 0x51ACF5: push    esi
 0x51ACF6: mov     esi, ecx
@@ -26,11 +26,11 @@
 0x51AD2C: push    edi
 0x51AD2D: call    j_MemoryHeap_Alloc
 0x51AD32: mov     ecx, [esi+28h]
-0x51AD35: push    edi; Size
+0x51AD35: push    edi; byteCount
 0x51AD36: mov     ebp, eax
-0x51AD38: push    ecx; Src
-0x51AD39: push    ebp; Dst
-0x51AD3A: call    _memcpy
+0x51AD38: push    ecx; source
+0x51AD39: push    ebp; destination
+0x51AD3A: call    _memcpy;
 0x51AD3F: mov     eax, [esi+24h]
 0x51AD42: mov     ecx, [esi+28h]
 0x51AD45: add     esp, 0Ch
@@ -46,10 +46,10 @@
 0x51AD61: jbe     short loc_51AD65
 0x51AD63: mov     ecx, edx
 0x51AD65: shl     ecx, 4
-0x51AD68: push    ecx; Size
-0x51AD69: push    ebp; Src
-0x51AD6A: push    eax; Dst
-0x51AD6B: call    _memcpy
+0x51AD68: push    ecx; byteCount
+0x51AD69: push    ebp; source
+0x51AD6A: push    eax; destination
+0x51AD6B: call    _memcpy;
 0x51AD70: add     esp, 0Ch
 0x51AD73: push    ebp; void *
 0x51AD74: mov     ecx, offset FormHeap

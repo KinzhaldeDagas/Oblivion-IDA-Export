@@ -1,4 +1,4 @@
-0x4814C0: call    InitBSShaderAccumulator
+0x4814C0: call    BSShaderAccumulator_GetOrCreateGlobal
 0x4814C5: test    eax, eax
 0x4814C7: jz      locret_481560
 0x4814CD: cmp     dword ptr [eax+2228h], 0
@@ -23,13 +23,13 @@
 0x48150C: push    0
 0x48150E: push    0
 0x481510: push    offset aMeshesTestsphe; "Meshes\\TestSphere.NIF"
-0x481515: call    sub_439EB0
+0x481515: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
 0x48151A: mov     esi, eax
 0x48151C: test    esi, esi
 0x48151E: jz      short loc_48155F
-0x481520: push    0
-0x481522: mov     ecx, esi
-0x481524: call    sub_405790
+0x481520: push    0; index
+0x481522: mov     ecx, esi; this
+0x481524: call    NiNode_GetChildAtIndex
 0x481529: test    eax, eax
 0x48152B: jz      short loc_481557
 0x48152D: lea     ecx, [ecx+0]
@@ -49,6 +49,6 @@
 0x481555: jnz     short loc_481530
 0x481557: mov     ecx, esi
 0x481559: pop     esi
-0x48155A: jmp     NiAVObject_InitializePropertyState
+0x48155A: jmp     NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x48155F: pop     esi
 0x481560: retn

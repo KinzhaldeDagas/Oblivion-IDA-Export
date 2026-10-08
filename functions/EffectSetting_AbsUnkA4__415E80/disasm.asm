@@ -5,7 +5,7 @@
 0x415E8A: fabs
 0x415E8C: fstp    [esp+8+var_4]
 0x415E90: fld     [esp+8+var_4]
-0x415E94: call    Double_To_SInt32
+0x415E94: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x415E99: mov     [esi+0A4h], eax
 0x415E9F: pop     esi
 0x415EA0: pop     ecx

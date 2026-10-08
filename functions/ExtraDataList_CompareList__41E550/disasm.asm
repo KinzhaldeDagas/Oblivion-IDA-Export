@@ -3,7 +3,7 @@
 0x41E552: push    edi
 0x41E553: mov     edi, ecx
 0x41E555: push    offset aExtradatalis_5; lpCriticalSection
-0x41E55A: mov     ecx, offset BSExtraDataCS
+0x41E55A: mov     ecx, 0B33800h
 0x41E55F: call    NiEnterCriticalSection
 0x41E564: mov     ebx, dword ptr [esp+0Ch+a2]
 0x41E568: mov     esi, [ebx+4]
@@ -59,14 +59,14 @@
 0x41E5E6: mov     esi, [esi+8]
 0x41E5E9: test    esi, esi
 0x41E5EB: jnz     short loc_41E5C3
-0x41E5ED: mov     ecx, offset BSExtraDataCS; lpCriticalSection
+0x41E5ED: mov     ecx, 0B33800h; lpCriticalSection
 0x41E5F2: call    NiLeaveCriticalSection_0
 0x41E5F7: pop     edi
 0x41E5F8: pop     esi
 0x41E5F9: xor     al, al
 0x41E5FB: pop     ebx
 0x41E5FC: retn    4
-0x41E5FF: mov     ecx, offset BSExtraDataCS; lpCriticalSection
+0x41E5FF: mov     ecx, 0B33800h; lpCriticalSection
 0x41E604: call    NiLeaveCriticalSection_0
 0x41E609: pop     edi
 0x41E60A: pop     esi

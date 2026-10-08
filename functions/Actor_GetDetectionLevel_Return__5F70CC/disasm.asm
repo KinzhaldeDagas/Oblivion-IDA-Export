@@ -1,4 +1,4 @@
-0x5F70CC: mov     ecx, [esp+arg_10C]
+0x5F70CC: mov     ecx, [esp+arg_10C]; Common Actor_GetDetectionLevelAgainstActor epilogue/stack cleanup tail.
 0x5F70D3: pop     esi
 0x5F70D4: pop     ebp
 0x5F70D5: pop     ebx

@@ -1,4 +1,5 @@
-BSStringT *sub_A11930()
+// Initializes Oblivion NiRTTI_BSShaderLightingProperty with native name 'BSShaderLightingProperty' and parent NiRTTI_BSShaderProperty.
+NiRTTI *__cdecl InitializeRTTI_BSShaderLightingProperty()
 {
-  return sub_70E220((BSStringT *)dword_B4618C, "BSShaderLightingProperty", (int)dword_B46000);
+  return NiRTTI_Constructor(&NiRTTI_BSShaderLightingProperty, "BSShaderLightingProperty", &NiRTTI_BSShaderProperty); /*0xa11944*/
 }

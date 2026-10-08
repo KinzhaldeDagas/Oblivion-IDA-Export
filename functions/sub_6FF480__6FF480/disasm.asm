@@ -1,6 +1,6 @@
 0x6FF480: push    ebx
 0x6FF481: push    esi
-0x6FF482: push    offset stru_B3F600; lpCriticalSection
+0x6FF482: push    offset unk_B3F600; lpCriticalSection
 0x6FF487: mov     esi, ecx
 0x6FF489: call    dword ptr ds:0A2806Ch
 0x6FF48F: call    dword ptr ds:0A2808Ch
@@ -15,7 +15,7 @@
 0x6FF4B8: mov     dword ptr ds:0B3F678h, 0
 0x6FF4C2: pop     esi
 0x6FF4C3: pop     ebx
-0x6FF4C4: mov     [esp+arg_0], offset stru_B3F600
+0x6FF4C4: mov     [esp+arg_0], offset unk_B3F600
 0x6FF4CC: jmp     dword ptr ds:0A28074h
 0x6FF4D2: mov     eax, [esi+10h]
 0x6FF4D5: push    edi
@@ -65,5 +65,5 @@
 0x6FF550: mov     dword ptr ds:0B3F678h, 0
 0x6FF55A: pop     esi
 0x6FF55B: pop     ebx
-0x6FF55C: mov     [esp+arg_0], offset stru_B3F600
+0x6FF55C: mov     [esp+arg_0], offset unk_B3F600
 0x6FF564: jmp     dword ptr ds:0A28074h

@@ -22,7 +22,7 @@
 0x447D49: mov     edx, [eax]
 0x447D4B: push    eax
 0x447D4C: mov     [esi+8B8h], edx
-0x447D52: call    FormHeapFree
+0x447D52: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x447D57: add     esp, 4
 0x447D5A: jmp     short loc_447D11
 0x447D5C: mov     dword ptr [esi+8B8h], 0

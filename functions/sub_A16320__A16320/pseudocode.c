@@ -1,4 +1,4 @@
-BSStringT *sub_A16320()
+NiRTTI *sub_A16320()
 {
-  return sub_70E220(&stru_BAA880, "NiRenderedCubeMap", (int)&stru_B3FF04);
+  return NiRTTI_Constructor(&stru_BAA880, "NiRenderedCubeMap", &stru_B3FF04); /*0xa16334*/
 }

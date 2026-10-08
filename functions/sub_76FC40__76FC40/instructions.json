@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x76FC40",
-    "line": "push    esi",
+    "line": "push    esi; MoonSugarEffect decode: raw declaration element setter. Element record is 0x1C bytes; stream and slot are checked, semantic/type/usage/method fields are stored, declaration dirty byte +0x28 is set, cached D3D declaration +0x30 is released.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x76FC43",
-    "line": "mov     ecx, [esp+4+arg_4]",
+    "line": "mov     ecx, [esp+4+elementIndex]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x76FC52",
-    "line": "mov     eax, [esp+4+arg_0]",
+    "line": "mov     eax, [esp+4+streamIndex]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x76FC5F",
-    "line": "mov     ebx, [esp+8+arg_18]",
+    "line": "mov     ebx, [esp+8+usageIndex]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x76FC64",
-    "line": "mov     ebp, [esp+0Ch+arg_14]",
+    "line": "mov     ebp, [esp+0Ch+usage]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x76FC70",
-    "line": "mov     edx, [esp+10h+arg_10]",
+    "line": "mov     edx, [esp+10h+declarationType]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x76FC7D",
-    "line": "mov     ecx, [esp+10h+arg_C]",
+    "line": "mov     ecx, [esp+10h+sourceDescriptor]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x76FC88",
-    "line": "mov     edi, [esp+10h+arg_1C]",
+    "line": "mov     edi, [esp+10h+method]",
     "mnemonic": "mov",
     "size": 4
   },

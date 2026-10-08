@@ -1,1 +1,1 @@
-DDBLTFX
+typedef _DDBLTFX DDBLTFX;

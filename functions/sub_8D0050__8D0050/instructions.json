@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8D0050",
-    "line": "push    ebp",
+    "line": "push    ebp; Projectile-like character state update. Uses the shared velocity solver only under controller flag 0x100; not a Climbing/actor movement state.",
     "mnemonic": "push",
     "size": 1
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x8D0099",
-    "line": "call    sub_890720",
+    "line": "call    sub_890720; MorrowindMovements: commits pending state at proxy+0x2A0 into hkCharacterContext state slot proxy+0x1EC, then resets pending state to sentinel 0x0B. Use +0x1EC as active state when +0x2A0 is sentinel.",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x8D01C9",
-    "line": "call    sub_91F430",
+    "line": "call    bhkCharacterState_SolveVelocityToTarget; Projectile-like state solver setup: only runs when flag 0x100 is set, basis slots use proxy+0x2C0/+0x2B0/+0x230, desired local velocity comes from proxy+0x290 with vertical preserved only under flag 0x800, maxDelta=500, reference=proxy+0x280.",
     "mnemonic": "call",
     "size": 5
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x8D024C",
-    "line": "call    sub_890970",
+    "line": "call    sub_890970; Transient velocity-add channel: when proxy+0x300 timer is positive, adds timer * proxy+0x2F0 vector to velocity unless gravity-suppress flags 0x1800 are set. Setter not confirmed in current movement slice.",
     "mnemonic": "call",
     "size": 5
   },
@@ -811,7 +811,7 @@
   },
   {
     "ea": "0x8D0270",
-    "line": "call    sub_890720",
+    "line": "call    sub_890720; MorrowindMovements: commits pending state at proxy+0x2A0 into hkCharacterContext state slot proxy+0x1EC, then resets pending state to sentinel 0x0B. Use +0x1EC as active state when +0x2A0 is sentinel.",
     "mnemonic": "call",
     "size": 5
   },

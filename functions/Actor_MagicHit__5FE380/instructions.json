@@ -349,25 +349,25 @@
   },
   {
     "ea": "0x5FE429",
-    "line": "push    eax",
+    "line": "push    eax; casterFilterOrNull",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FE42A",
-    "line": "push    4D524843h",
+    "line": "push    4D524843h; effectCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5FE42F",
-    "line": "lea     ecx, [esi+68h]",
+    "line": "lea     ecx, [esi+68h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x5FE432",
-    "line": "call    sub_6A24B0",
+    "line": "call    MagicTarget_RemoveActiveEffectsByCode; Removes every nonterminated active effect whose effectCode matches. If casterFilterOrNull is nonnull, only effects from that caster are removed; null matches all casters. Native ABI is thiscall with two stack args and void return; prior ESI/ST0/userpurge inputs were decompiler artifacts.",
     "mnemonic": "call",
     "size": 5
   },
@@ -745,25 +745,25 @@
   },
   {
     "ea": "0x5FE4EE",
-    "line": "call    sub_420E00",
+    "line": "call    ExtraDataList_AddFriendHit; Oblivion-specific friend-hit behavior: gets/creates ExtraFriendHitList and increments the hit count for the supplied actor, creating a {actor,count,timer} entry if needed.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5FE4F3",
-    "line": "push    edi",
+    "line": "push    edi; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FE4F4",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FE4F6",
-    "line": "call    sub_420ED0",
+    "line": "call    ExtraDataList_GetFriendHitCount; Returns the per-actor uint16 friend-hit count, or zero. Confirmed by the Oblivion console path '%s has hit %s ... times'.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1063,7 +1063,7 @@
   },
   {
     "ea": "0x5FE58E",
-    "line": "call    sub_420EB0",
+    "line": "call    ExtraDataList_RemoveFriendHit; Removes the friend-hit list entry whose actor pointer matches the supplied actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1225,7 +1225,7 @@
   },
   {
     "ea": "0x5FE5D4",
-    "line": "call    Actor_GetDetectionLevel",
+    "line": "call    Actor_GetDetectionLevelAgainstActor; Oblivion authoritative detection pipeline. Computes this detector's level against a target actor: obtains cached/physical LOS and distance, target light, boot weight, movement/running/sneak/combat/underwater/exterior state, Luck-modified Sneak values, detector Blindness AV 0x2D, target Chameleon AV 0x2E, and target Invisibility AV 0x2F; then calls Calc_DetectionLevel and updates the detector's process entry. Positive means detected. Fallout only corroborates the GetDetectionLevelAgainstActor terminology.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1285,7 +1285,7 @@
   },
   {
     "ea": "0x5FE5ED",
-    "line": "call    Actor_GetDetectionLevel",
+    "line": "call    Actor_GetDetectionLevelAgainstActor; Oblivion authoritative detection pipeline. Computes this detector's level against a target actor: obtains cached/physical LOS and distance, target light, boot weight, movement/running/sneak/combat/underwater/exterior state, Luck-modified Sneak values, detector Blindness AV 0x2D, target Chameleon AV 0x2E, and target Invisibility AV 0x2F; then calls Calc_DetectionLevel and updates the detector's process entry. Positive means detected. Fallout only corroborates the GetDetectionLevelAgainstActor terminology.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1525,7 +1525,7 @@
   },
   {
     "ea": "0x5FE65E",
-    "line": "call    sub_5E6C60",
+    "line": "call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1837,7 +1837,7 @@
   },
   {
     "ea": "0x5FE70A",
-    "line": "call    sub_420E00",
+    "line": "call    ExtraDataList_AddFriendHit; Oblivion-specific friend-hit behavior: gets/creates ExtraFriendHitList and increments the hit count for the supplied actor, creating a {actor,count,timer} entry if needed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1867,19 +1867,19 @@
   },
   {
     "ea": "0x5FE71D",
-    "line": "push    edi",
+    "line": "push    edi; item",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FE71E",
-    "line": "lea     ecx, [ebp+15Ch]",
+    "line": "lea     ecx, [ebp+15Ch]; this",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x5FE724",
-    "line": "call    sub_446C30",
+    "line": "call    BSSimpleList__Contains; Generic BSSimpleList membership test. Dialogue menu code uses it to avoid duplicate MenuTopics; social AI uses it for the recent-conversation target cooldown list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1909,19 +1909,19 @@
   },
   {
     "ea": "0x5FE736",
-    "line": "push    edi",
+    "line": "push    edi; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FE737",
-    "line": "lea     ecx, [esi+44h]",
+    "line": "lea     ecx, [esi+44h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x5FE73A",
-    "line": "call    sub_420ED0",
+    "line": "call    ExtraDataList_GetFriendHitCount; Returns the per-actor uint16 friend-hit count, or zero. Confirmed by the Oblivion console path '%s has hit %s ... times'.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2011,7 +2011,7 @@
   },
   {
     "ea": "0x5FE765",
-    "line": "call    sub_616190",
+    "line": "call    CombatController_TryAddTarget; Allocates 0x14-byte TargetInfo: Actor* +0, priority +4, flags byte +8, incoming health damage +0xC, outgoing fatigue-like damage +0x10.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2569,7 +2569,7 @@
   },
   {
     "ea": "0x5FE882",
-    "line": "call    sub_5E6C60",
+    "line": "call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2677,13 +2677,13 @@
   },
   {
     "ea": "0x5FE8B6",
-    "line": "lea     ecx, [esi+44h]",
+    "line": "lea     ecx, [esi+44h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x5FE8B9",
-    "line": "call    ExtraDataList_GetOwner",
+    "line": "call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2701,25 +2701,25 @@
   },
   {
     "ea": "0x5FE8C2",
-    "line": "push    1",
+    "line": "push    1; useFactionOwnership",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FE8C4",
-    "line": "push    edi",
+    "line": "push    edi; actorReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FE8C5",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; reference",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FE8C7",
-    "line": "call    TESOBjectREFR_IsOwnedBy",
+    "line": "call    TESObjectREFR_IsOwnedBy; Verified ownership predicate and flag meaning: resolve the effective owner; accept exact equality with the actor's template/base form. When the owner differs, a nonzero ownership-global value can permit the access. With useFactionOwnership=true, a Faction owner is instead checked against the actor base's faction rank and the reference's effective required rank; callers passing false skip that faction-rank path. Direct callers include many `true` paths and ContainerExtraData_RemoveForm's item-sweep call with false. Fallout's TESObjectREFR::IsAnOwner/DoorLock::IsAnOwner also expose a `useFaction` boolean, but its implementation uses actor faction membership and has different rank/global handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2743,7 +2743,7 @@
   },
   {
     "ea": "0x5FE8D2",
-    "line": "lea     ecx, [esi+44h]",
+    "line": "lea     ecx, [esi+44h]; this",
     "mnemonic": "lea",
     "size": 3
   },
@@ -2755,7 +2755,7 @@
   },
   {
     "ea": "0x5FE8DB",
-    "line": "call    ExtraDataList_GetOwner",
+    "line": "call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2857,7 +2857,7 @@
   },
   {
     "ea": "0x5FE902",
-    "line": "mov     ecx, offset fCrimeDispAttack",
+    "line": "mov     ecx, offset g_fCrimeDispAttack_Value; Verified crime setting value used by605F60/606140; registration 0x9ebc20 contains matching GMST key. This is value storage, not a complete Setting object declaration.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -3271,7 +3271,7 @@
   },
   {
     "ea": "0x5FE9DF",
-    "line": "mov     ecx, offset dword_B3BDB0",
+    "line": "mov     ecx, (offset qword_B3BB2C+284h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -3463,13 +3463,13 @@
   },
   {
     "ea": "0x5FEA50",
-    "line": "mov     ecx, esi; this",
+    "line": "mov     ecx, esi; reference",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FEA52",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3925,7 +3925,7 @@
   },
   {
     "ea": "0x5FEB2B",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -3955,13 +3955,13 @@
   },
   {
     "ea": "0x5FEB3B",
-    "line": "mov     ecx, esi; this",
+    "line": "mov     ecx, esi; reference",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FEB3D",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3973,7 +3973,7 @@
   },
   {
     "ea": "0x5FEB43",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -4057,7 +4057,7 @@
   },
   {
     "ea": "0x5FEB6E",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4069,7 +4069,7 @@
   },
   {
     "ea": "0x5FEB74",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4147,13 +4147,13 @@
   },
   {
     "ea": "0x5FEB94",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FEB96",
-    "line": "call    ExtraDataList_GetOwner",
+    "line": "call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4183,7 +4183,7 @@
   },
   {
     "ea": "0x5FEBA7",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -4195,7 +4195,7 @@
   },
   {
     "ea": "0x5FEBAF",
-    "line": "call    ExtraDataList_GetOwner",
+    "line": "call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
     "mnemonic": "call",
     "size": 5
   },

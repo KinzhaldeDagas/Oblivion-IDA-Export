@@ -1,4 +1,4 @@
-0x73E050: sub     esp, 8
+0x73E050: sub     esp, 8; Pass225: NiScreenTexture compare checks records and compares +0x14 referenced object.
 0x73E053: push    esi
 0x73E054: push    edi
 0x73E055: mov     edi, [esp+10h+a2]
@@ -32,7 +32,6 @@
 0x73E095: sub     eax, esi
 0x73E097: mov     [esp+18h+var_8], eax
 0x73E09B: jmp     short loc_73E0A0
-0x73E09D: align 10h
 0x73E0A0: mov     cx, [eax+esi]
 0x73E0A4: cmp     cx, [esi]
 0x73E0A7: jz      short loc_73E0EE

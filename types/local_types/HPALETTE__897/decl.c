@@ -1,1 +1,1 @@
-HPALETTE
+typedef HPALETTE__ *HPALETTE;

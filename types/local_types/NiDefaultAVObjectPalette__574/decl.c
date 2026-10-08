@@ -1,1 +1,1 @@
-NiDefaultAVObjectPalette
+struct NiDefaultAVObjectPalette;

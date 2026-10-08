@@ -1,4 +1,4 @@
-0x763FE0: push    ebx
+0x763FE0: push    ebx; DX11 concurrency audit 2026-09-24, OblivionNew verified: enters renderer critical section at this+0x80, records thread at +0xF8 and nesting at +0xFC; on first entry calls vtable+0x128. Then enters precache section at this+0x100, with thread/nesting at +0x178/+0x17C. Lock order is renderer then precache. Inspected NiDX9Renderer vtable A88EA4 has no-op 60D0A0 in +0x128/+0x12C; that does not remove these direct critical-section acquisitions.
 0x763FE1: mov     ebx, ds:0A2806Ch
 0x763FE7: push    ebp
 0x763FE8: push    esi

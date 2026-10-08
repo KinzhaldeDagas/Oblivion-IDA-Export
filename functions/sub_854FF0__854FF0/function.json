@@ -1,19 +1,36 @@
 {
-  "callees_count": 23,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 10,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_854FF0",
+  "chunks": [
+    [
+      "0x854FF0",
+      "0x855161"
+    ],
+    [
+      "0x9D3AF0",
+      "0x9D3B21"
+    ]
+  ],
+  "chunks_sha256": "1a721eb6738c9831e23c73b525e3da1aaa4fdb519b992b13200c2d9431beb015",
+  "comment_regular": "Lighting30 pass-list helper gated by an exact three-component property/global vector mismatch. Marks the associated state dirty and selects 0x19E or 0x19F; count mode only increments the pending pass count.",
+  "comment_repeatable": "Lighting30 pass-list helper gated by an exact three-component property/global vector mismatch. Marks the associated state dirty and selects 0x19E or 0x19F; count mode only increments the pending pass count.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "Lighting30__AppendPassSelector19EOr19F",
   "end_ea": "0x855161",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_854FF0",
+  "name": "Lighting30__AppendPassSelector19EOr19F",
   "segment": ".text",
   "sha256": "729d5d56dc1ef02d0a2bac958b109908cd40abd245f7e7136deaecdfedb12f54",
   "size": 369,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x854FF0",
-  "type": "NiTPointerList_Node_void *__thiscall(_DWORD *this, NiGeometry *, NiTPointerList_Node_void *, int, char, int)",
-  "xrefs_from_count": 140,
+  "total_chunk_size": 418,
+  "type": "NiTPointerList_Node_void *__thiscall(_DWORD *this, NiGeometry *vtable, NiTPointerList_Node_void *, RenderPass_DecodedLayout *, char, int)",
+  "xrefs_from_count": 162,
   "xrefs_to_count": 2
 }

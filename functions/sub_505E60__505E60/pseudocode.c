@@ -13,20 +13,20 @@ bool __cdecl sub_505E60(
   TESForm *v10; // [esp+0h] [ebp-8h] BYREF
   UInt16 v11[2]; // [esp+4h] [ebp-4h] BYREF
 
-  v10 = 0;
-  *(_DWORD *)v11 = 0;
-  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v11, &v10);
-  if ( result )
+  v10 = 0; /*0x505e8f*/
+  *(_DWORD *)v11 = 0; /*0x505e97*/
+  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v11, &v10); /*0x505e9f*/
+  if ( result ) /*0x505ea9*/
   {
-    v9 = v10;
-    if ( !v10 )
+    v9 = v10; /*0x505eaf*/
+    if ( !v10 ) /*0x505eb4*/
     {
-      v9 = TESDataHandler_g_PlayerRef->vtbl->super.super.super.GetBaseForm(TESDataHandler_g_PlayerRef);
-      v10 = v9;
+      v9 = reference->vtbl->super.super.super.GetBaseForm(reference); /*0x505ec4*/
+      v10 = v9; /*0x505ec6*/
     }
-    if ( *(_DWORD *)v11 )
-      sub_4CAA10(*(ExtraDataList **)v11, v9);
-    return 1;
+    if ( *(_DWORD *)v11 ) /*0x505ecf*/
+      sub_4CAA10(*(ExtraDataList **)v11, v9); /*0x505ed2*/
+    return 1; /*0x505ed7*/
   }
-  return result;
+  return result; /*0x505eab*/
 }

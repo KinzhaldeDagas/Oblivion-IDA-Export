@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x521450",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Idle root lookup for actor model path; rejects final candidate when ANAM high bit is set but model path is not .kf.",
     "mnemonic": "push",
     "size": 2
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x5214B9",
-    "line": "call    sub_521370",
+    "line": "call    TESIdleForm_BuildIdleAnimsRoot; Builds IdleAnims lookup root from actor model path: preserves existing IdleAnims prefix or appends IdleAnims to model directory.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x521514",
-    "line": "call    sub_5206B0",
+    "line": "call    TESIdleForm_FindCandidateRecursive; Recursive idle candidate search: a node is a fallback if ANAM high bit is set or model path is .kf; child matches override parent fallback.",
     "mnemonic": "call",
     "size": 5
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x521537",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x521545",
-    "line": "call    sub_520210",
+    "line": "call    TESIdleForm_GetHighBitFlag; TESIdleForm ANAM high bit test: returns ANAM >> 7.",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x521550",
-    "line": "call    sub_520220",
+    "line": "call    TESIdleForm_ModelPathIsKF; TESIdleForm model path extension test: true only when the model path extension is exactly .kf.",
     "mnemonic": "call",
     "size": 5
   },
@@ -610,5 +610,59 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C2A40",
+    "line": "lea     ecx, [ebp-14h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2A43",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2A48",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C2A4C",
+    "line": "lea     eax, [edx-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2A4F",
+    "line": "mov     ecx, [edx-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2A52",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C2A54",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2A59",
+    "line": "mov     eax, offset stru_AEB7F4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2A5E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

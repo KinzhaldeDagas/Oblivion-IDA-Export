@@ -2,7 +2,7 @@
 0x5A6A21: mov     esi, ecx
 0x5A6A23: mov     eax, [esi+4]
 0x5A6A26: push    eax
-0x5A6A27: call    FormHeapFree
+0x5A6A27: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5A6A2C: xor     eax, eax
 0x5A6A2E: add     esp, 4
 0x5A6A31: mov     [esi+4], eax

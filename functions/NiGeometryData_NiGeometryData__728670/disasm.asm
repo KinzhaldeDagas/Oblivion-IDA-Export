@@ -1,4 +1,4 @@
-0x728670: push    0FFFFFFFFh
+0x728670: push    0FFFFFFFFh; [constructor audit] This supplied-data overload assigns input pointers before bound computation at72A0F0; it does not allocate or copy their payloads. NiObject base7005D0 only initializes header/refcount and increments global object count. Allocation failures are handled by caller allocations before this chain; arbitrary unreadable input/global memory faults are a distinct condition.
 0x728672: push    offset SEH_728670
 0x728677: mov     eax, large fs:0
 0x72867D: push    eax
@@ -47,11 +47,11 @@
 0x728711: mov     ecx, [esi+1Ch]
 0x728714: cmp     ecx, ebx
 0x728716: jz      short loc_728725
-0x728718: push    ecx
+0x728718: push    ecx; vertices
 0x728719: movzx   ecx, ax
-0x72871C: push    ecx
-0x72871D: lea     ecx, [esi+0Ch]
-0x728720: call    sub_72A0F0
+0x72871C: push    ecx; vertexCount
+0x72871D: lea     ecx, [esi+0Ch]; self
+0x728720: call    NiSphere_ComputeFromVertices; Compute the initial NiGeometryData local bounding sphere from the constructor's contiguous vertex array.
 0x728725: mov     [esi+38h], ebx
 0x728728: mov     dx, ds:0B27504h
 0x72872F: mov     [esi+0Ah], dx
@@ -65,3 +65,15 @@
 0x728750: pop     ebx
 0x728751: add     esp, 10h
 0x728754: retn    1Ch
+0x9CA540: mov     ecx, [ebp-10h]
+0x9CA543: jmp     NiRefObject_destr
+0x9CA548: mov     ecx, [ebp-10h]
+0x9CA54B: add     ecx, 34h ; '4'; slot
+0x9CA54E: jmp     NiPointerSlot_Release
+0x9CA553: mov     edx, [esp+arg_4]
+0x9CA557: lea     eax, [edx-0Ch]
+0x9CA55A: mov     ecx, [edx-10h]
+0x9CA55D: xor     ecx, eax
+0x9CA55F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA564: mov     eax, offset stru_AF2C3C
+0x9CA569: jmp     ___CxxFrameHandler3

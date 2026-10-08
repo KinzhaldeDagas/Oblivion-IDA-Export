@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x437600",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; Verified Oblivion queued distant callback consumes the copied per-cell context, calls sub_4BA780 to build STBB/NiBillboardNode from the flat billboard DDS, then forwards cell key/node/positions/color values to sub_7B4010. Fallout's corresponding QueuedTreeBillboard::CreateBillboard instead calls TESObjectTREE::BuildDistant3D and DistantLODShaderProperty::AddDistantLOD.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x437609",
-    "line": "mov     ecx, [eax]",
+    "line": "mov     ecx, [eax]; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -37,13 +37,13 @@
   },
   {
     "ea": "0x43760C",
-    "line": "push    1",
+    "line": "push    1; distantPlane",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x43760E",
-    "line": "call    sub_4BA780",
+    "line": "call    sub_4BA780; Verified Oblivion rendering path is a flat billboard DDS attached to STBB NiTriShape and NiBillboardNode. Fallout's QueuedTreeBillboard::CreateBillboard builds the engine's BSTreeModel distant geometry and inserts it through DistantLODShaderProperty::AddDistantLOD; same queued asset workflow, different renderer integration.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x437670",
-    "line": "mov     esi, dword_B34424",
+    "line": "mov     esi, ds:0B34424h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x437680",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x437687",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },

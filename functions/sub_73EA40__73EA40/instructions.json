@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x73EA7D",
-    "line": "call    sub_72A6B0",
+    "line": "call    NiSphere_Merge; Merges a source NiSphere into the destination sphere. Preserves a containing destination, copies a containing source, otherwise computes the minimal enclosing center/radius. NiNode_UpdateDownwardPass uses it to aggregate nonempty child world bounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x73EA90",
-    "line": "lea     ecx, [esp+40h+var_34]",
+    "line": "lea     ecx, [esp+40h+transform]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -187,19 +187,19 @@
   },
   {
     "ea": "0x73EA98",
-    "line": "call    sub_718A80",
+    "line": "call    sub_718A80;",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x73EA9D",
-    "line": "lea     edx, [esp+40h+var_34]",
+    "line": "lea     edx, [esp+40h+transform]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x73EAA1",
-    "line": "push    edx",
+    "line": "push    edx; transform",
     "mnemonic": "push",
     "size": 1
   },
@@ -211,19 +211,19 @@
   },
   {
     "ea": "0x73EAA5",
-    "line": "push    eax",
+    "line": "push    eax; input",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x73EAA6",
-    "line": "lea     ecx, [ebx+8]",
+    "line": "lea     ecx, [ebx+8]; output",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x73EAA9",
-    "line": "call    sub_72A820",
+    "line": "call    NiBound_TransformInto",
     "mnemonic": "call",
     "size": 5
   },

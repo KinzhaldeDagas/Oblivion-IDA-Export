@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4BC290",
+      "0x4BC2D1"
+    ]
+  ],
+  "chunks_sha256": "d915f603ff172c105b2c0a2034562ddd0162bf6ba0097db71f8f236e62751368",
+  "comment_regular": "Verified: reads TESSubSpace dimensions at +0x24/+0x26/+0x28 and multiplies each by 0.5 to return the three local-space half-extents.",
+  "comment_repeatable": "Verified: reads TESSubSpace dimensions at +0x24/+0x26/+0x28 and multiplies each by 0.5 to return the three local-space half-extents.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4BC290",
+  "display_name": "TESSubSpace_GetHalfExtents",
   "end_ea": "0x4BC2D1",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4BC290",
+  "name": "TESSubSpace_GetHalfExtents",
   "segment": ".text",
   "sha256": "d915f603ff172c105b2c0a2034562ddd0162bf6ba0097db71f8f236e62751368",
   "size": 65,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4BC290",
-  "type": "float *__thiscall(unsigned __int16 *this, float *)",
+  "total_chunk_size": 65,
+  "type": "float *__thiscall(TESSubSpace *this, float *outHalfExtents)",
   "xrefs_from_count": 20,
   "xrefs_to_count": 1
 }

@@ -1,19 +1,36 @@
 {
-  "callees_count": 22,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 4,
-  "display_name": "sub_78A740",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x78A740",
+      "0x78A88C"
+    ],
+    [
+      "0x9CB450",
+      "0x9CB47B"
+    ]
+  ],
+  "chunks_sha256": "ddbf0a0d52bef42bb430f4882a28995e175c953792d943560f801f898fc470ac",
+  "comment_regular": "CSpeedTreeRT::GetLeafLodSizeAdjustments. Lazily allocates one float per leaf LOD and fills entry i as 1.0 + leafSizeIncreaseFactor*i. This older Bethesda API is absent from the supplied 4.1 header but is named in Oblivion diagnostics and Fallout symbols.\nSpeedTreeOBSE v169 VERIFIED: size adjustment i=1+leafSizeIncreaseFactor*i, matching RT4.1 LeafGeometry::InitClusters width/height multiplier. New mesh scale consumes the already-published native STSP.w, avoiding a separate guessed LOD formula.",
+  "comment_repeatable": "CSpeedTreeRT::GetLeafLodSizeAdjustments. Lazily allocates one float per leaf LOD and fills entry i as 1.0 + leafSizeIncreaseFactor*i. This older Bethesda API is absent from the supplied 4.1 header but is named in Oblivion diagnostics and Fallout symbols.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "CSpeedTreeRT__GetLeafLodSizeAdjustments",
   "end_ea": "0x78A88C",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_78A740",
+  "name": "CSpeedTreeRT__GetLeafLodSizeAdjustments",
   "segment": ".text",
   "sha256": "131cbe0e90f18fcbdc8b7451ff679be51855e026651057fa0b77968ddd378646",
   "size": 332,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78A740",
-  "type": "int __fastcall(float *)",
-  "xrefs_from_count": 129,
+  "total_chunk_size": 375,
+  "type": "const float *__thiscall(OB_CSpeedTreeRT_010201A0 *this)",
+  "xrefs_from_count": 142,
   "xrefs_to_count": 2
 }

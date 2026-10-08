@@ -1,4 +1,4 @@
-0x548400: fld     dword ptr ds:0B379D8h
+0x548400: fld     dword ptr ds:0B379D8h; AVU decode: Calc_MortarPestleModifiedSkill(mortarQuality, effectiveAlchemy) returns fPotionMortPestleMult * mortarQuality + effectiveAlchemy.
 0x548406: fmul    [esp+arg_0]
 0x54840A: fadd    [esp+arg_4]
 0x54840E: fstp    [esp+arg_0]

@@ -1,1 +1,1 @@
-ExtraTresPassPackage
+struct ExtraTresPassPackage;

@@ -1,24 +1,24 @@
 _DWORD *__thiscall sub_558770(_DWORD *this, char *Src)
 {
-  _DWORD *v3; // edi
-  rsize_t v5; // [esp-4h] [ebp-40h]
-  int v6; // [esp+14h] [ebp-28h] BYREF
-  unsigned int v7; // [esp+18h] [ebp-24h]
-  int v8; // [esp+28h] [ebp-14h]
-  unsigned int v9; // [esp+2Ch] [ebp-10h]
-  int v10; // [esp+38h] [ebp-4h]
+  int *v3; // edi
+  OB_stString28_010201A0 v5; // [esp+14h] [ebp-28h] BYREF
+  int v6; // [esp+38h] [ebp-4h]
 
-  v3 = this + 1;
-  ArrayConstructor(this + 1, 0x10u, 2, (int)sub_6EF4A0, (void (__thiscall *)(void *))sub_558570);
-  v10 = 0;
-  v9 = 0xF;
-  v8 = 0;
-  LOBYTE(v7) = 0;
-  LODWORD(v5) = strlen(Src);
-  sub_414500(&v6, (int)v3, Src, v5);
-  LOBYTE(v10) = 1;
-  sub_6F0A00(&v6, this, v3, this + 5);
-  if ( v9 >= 0x10 )
-    FormHeapFree(v7);
-  return this;
+  v3 = this + 1; /*0x5587aa*/
+  ArrayConstructor( /*0x5587ae*/
+    (char *)this + 4,
+    0x10u,
+    2,
+    (void (__thiscall *)(char *))FaceGenEgtBasisBank_Construct,
+    (void (__thiscall *)(void *))sub_558570);
+  v6 = 0; /*0x5587b9*/
+  v5.capacity = 0xF; /*0x5587c1*/
+  v5.size = 0; /*0x5587c9*/
+  v5.storage.inlineData[0] = 0; /*0x5587d1*/
+  OB_stString28_AssignBytes_010201A0(&v5, Src, strlen(Src)); /*0x5587f1*/
+  LOBYTE(v6) = 1; /*0x558801*/
+  sub_6F0A00(&v5, this, v3, this + 5); /*0x558806*/
+  if ( v5.capacity >= 0x10 ) /*0x558813*/
+    FormHeapFree((unsigned int)v5.storage.heapData); /*0x55881a*/
+  return this; /*0x558824*/
 }

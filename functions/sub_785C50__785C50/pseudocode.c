@@ -1,12 +1,17 @@
-char **__thiscall sub_785C50(char **this, char **a2)
+// stBezierSpline/profile copy helper used when a cached profile already exists.
+OB_stBezierSpline_010201A0 *__thiscall OB_StBezierSpline_CopyFrom_010201A0(
+        OB_stBezierSpline_010201A0 *this,
+        const OB_stBezierSpline_010201A0 *source)
 {
-  *this = *a2;
-  *(this + 1) = a2[1];
-  *(this + 2) = a2[2];
-  sub_785400(this + 3, a2 + 3);
-  sub_785400(this + 7, a2 + 7);
-  sub_785580(this + 0xB, (int)(a2 + 0xB));
-  sub_785400(this + 0xF, a2 + 0xF);
-  sub_785400(this + 0x13, a2 + 0x13);
-  return this;
+  this->minValue = source->minValue; /*0x785c5a*/
+  this->maxValue = source->maxValue; /*0x785c63*/
+  this->variance = source->variance; /*0x785c6c*/
+  OB_stVector_stVec_CopyAssign_010201A0(&this->controlPoints, &source->controlPoints); /*0x785c6f*/
+  OB_stVector_stVec_CopyAssign_010201A0(&this->controlPointTangents, &source->controlPointTangents); /*0x785c7b*/
+  OB_stVectorUInt32_CopyAssign_010201A0( /*0x785c87*/
+    (OB_stVectorUInt32_010201A0 *)&this->controlPointTangentLengths,
+    (const OB_stVectorUInt32_010201A0 *)&source->controlPointTangentLengths);
+  OB_stVector_stVec_CopyAssign_010201A0(&this->evenlySpacedPoints, &source->evenlySpacedPoints); /*0x785c93*/
+  OB_stVector_stVec_CopyAssign_010201A0(&this->splinePoints, &source->splinePoints); /*0x785c9f*/
+  return this; /*0x785ca4*/
 }

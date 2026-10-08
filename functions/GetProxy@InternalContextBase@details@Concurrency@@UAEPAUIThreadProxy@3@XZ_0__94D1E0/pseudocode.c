@@ -1,5 +1,5 @@
 struct Concurrency::IThreadProxy *__thiscall Concurrency::details::InternalContextBase::GetProxy(
         Concurrency::details::InternalContextBase *this)
 {
-  return *((struct Concurrency::IThreadProxy **)this + 0x27);
+  return *((struct Concurrency::IThreadProxy **)this + 0x27); /*0x94d1e6*/
 }

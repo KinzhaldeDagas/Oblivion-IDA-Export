@@ -15,7 +15,7 @@
 0x4374C6: jz      short locret_4374DD
 0x4374C8: cmp     dword ptr [ecx+0Ch], 0
 0x4374CC: jnz     short loc_4374A6
-0x4374CE: mov     eax, ioManager
+0x4374CE: mov     eax, ds:0B33A10h
 0x4374D3: mov     edx, [eax]
 0x4374D5: push    ecx
 0x4374D6: mov     ecx, eax

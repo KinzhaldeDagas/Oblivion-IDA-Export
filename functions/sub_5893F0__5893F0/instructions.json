@@ -42,12 +42,6 @@
     "size": 2
   },
   {
-    "ea": "0x5893FD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x589400",
     "line": "mov     ecx, [esi+8]",
     "mnemonic": "mov",
@@ -133,7 +127,7 @@
   },
   {
     "ea": "0x58941D",
-    "line": "jmp     NiTPointerList__FreeAllNodes",
+    "line": "jmp     NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.",
     "mnemonic": "jmp",
     "size": 5
   }

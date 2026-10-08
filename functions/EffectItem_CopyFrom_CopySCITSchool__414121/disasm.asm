@@ -6,7 +6,7 @@
 0x41412D: mov     eax, [edi+1Ch]
 0x414130: mov     eax, [eax+64h]
 0x414133: mov     ecx, [esi+18h]
-0x414136: fld     ds:flt_A30634
+0x414136: fld     ds:kTerrainLODQuadRayDirectionZ
 0x41413C: cmp     ecx, ebp
 0x41413E: jz      short EffectItem_CopyFrom___CopySCIT_VFX
 0x414140: mov     [ecx+4], eax

@@ -1,18 +1,31 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
-  "callers_count": 17,
-  "comment_regular": "",
+  "callers_count": 34,
+  "chunks": [
+    [
+      "0x710250",
+      "0x7102A3"
+    ]
+  ],
+  "chunks_sha256": "89ce528fddf75e90ce0b97b88cf9e9a6a620562d6fd46df156cb1434fa26de16",
+  "comment_regular": "\nVerified model-transform helper: computes three vector/matrix outputs. X uses m3*y + x*m0 + m6*z; Y uses m1*x + m4*y + m7*z; Z uses m2*x + m5*y + m8*z. The x87 operation order differs by component; preserve float input/intermediate stores and compare against original bytes.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_710250",
+  "display_name": "NiPoint3_MultiplyMatrix3",
   "end_ea": "0x7102A3",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_710250",
+  "name": "NiPoint3_MultiplyMatrix3",
   "segment": ".text",
   "sha256": "89ce528fddf75e90ce0b97b88cf9e9a6a620562d6fd46df156cb1434fa26de16",
   "size": 83,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x710250",
+  "total_chunk_size": 83,
   "type": "float *__cdecl(float *, float *, float *)",
   "xrefs_from_count": 30,
   "xrefs_to_count": 34

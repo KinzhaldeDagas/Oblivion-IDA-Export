@@ -227,23 +227,23 @@
 0x511F10: test    eax, eax
 0x511F12: mov     [esp+34h+var_4], 1
 0x511F1A: jz      short loc_511F32
-0x511F1C: push    ebp
-0x511F1D: push    0
-0x511F1F: push    1
-0x511F21: push    0
-0x511F23: push    esi
-0x511F24: push    edi
-0x511F25: push    6
-0x511F27: mov     ecx, eax
-0x511F29: call    sub_7177E0
+0x511F1C: push    ebp; lineFlags
+0x511F1D: push    0; arg7
+0x511F1F: push    1; arg6
+0x511F21: push    0; arg5
+0x511F23: push    esi; colors
+0x511F24: push    edi; vertices
+0x511F25: push    6; vertexCount
+0x511F27: mov     ecx, eax; this
+0x511F29: call    NiLines_ctorWithGeometryData; Verified NiLines constructor wrapper: create NiGeometryData via NiLinesData_ctor, initialize NiGeometry, then install NiLines vtable.
 0x511F2E: mov     esi, eax
 0x511F30: jmp     short loc_511F34
 0x511F32: xor     esi, esi
 0x511F34: mov     [esp+34h+var_4], 0FFFFFFFFh
-0x511F3C: call    sub_4E70B0
+0x511F3C: call    DebugRender_GetOrCreateVertexColorProperty; Verified shared debug property getter/creator, used by PathGrid debug rendering and the registered TestSeenData/TestLocalMap visualization commands, plus other debug-geometry callers. Lazily constructs NiVertexColorProperty, sets its observed render flags, stores the refcounted global g_DebugRenderVertexColorProperty and returns it.
 0x511F41: push    eax; a2
 0x511F42: mov     ecx, esi; this
-0x511F44: call    sub_405680
+0x511F44: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x511F49: mov     ecx, [esp+34h+arg_8]
 0x511F4D: mov     eax, [ecx]
 0x511F4F: mov     edx, [eax+174h]
@@ -269,3 +269,20 @@
 0x511F8E: pop     ebp
 0x511F8F: add     esp, 24h
 0x511F92: retn
+0x9CDE70: mov     eax, [ebp-20h]
+0x9CDE73: push    eax
+0x9CDE74: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CDE79: pop     ecx
+0x9CDE7A: retn
+0x9CDE7B: mov     eax, [ebp-20h]
+0x9CDE7E: push    eax
+0x9CDE7F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CDE84: pop     ecx
+0x9CDE85: retn
+0x9CDE86: mov     edx, [esp+arg_4]
+0x9CDE8A: lea     eax, [edx-24h]
+0x9CDE8D: mov     ecx, [edx-28h]
+0x9CDE90: xor     ecx, eax
+0x9CDE92: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CDE97: mov     eax, offset stru_AF6F48
+0x9CDE9C: jmp     ___CxxFrameHandler3

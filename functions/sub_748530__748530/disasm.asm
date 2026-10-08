@@ -9,13 +9,13 @@
 0x748544: lea     eax, [eax+eax*2]
 0x748547: add     eax, eax
 0x748549: add     eax, eax
-0x74854B: cmp     ds:byte_B40610[eax], 0
+0x74854B: cmp     byte ptr ds:unk_B40610[eax], 0
 0x748552: jnz     short loc_74855D
 0x748554: cmp     ds:dword_B40614[eax], 0FFFFFFFFh
 0x74855B: jz      short loc_7485AF
 0x74855D: cmp     [esp+4+Format], 0
 0x748562: jz      short loc_7485AF
-0x748564: push    offset stru_B40790; lpCriticalSection
+0x748564: push    offset unk_B40790; lpCriticalSection
 0x748569: call    dword ptr ds:0A2806Ch
 0x74856F: mov     ecx, [esp+4+Format]
 0x748573: lea     eax, [esp+4+ArgList]
@@ -30,11 +30,11 @@
 0x74858F: mov     ecx, ds:0B40608h
 0x748595: test    ecx, ecx
 0x748597: jz      short loc_7485A4
-0x748599: push    offset DstBuf
+0x748599: push    0B40408h
 0x74859E: push    eax
-0x74859F: call    ecx ; dword_B40608
+0x74859F: call    ecx ; unk_B40608
 0x7485A1: add     esp, 8
-0x7485A4: push    offset stru_B40790; lpCriticalSection
+0x7485A4: push    offset unk_B40790; lpCriticalSection
 0x7485A9: call    dword ptr ds:0A28074h
 0x7485AF: mov     eax, esi
 0x7485B1: pop     esi

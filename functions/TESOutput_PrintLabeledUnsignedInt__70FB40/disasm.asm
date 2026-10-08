@@ -1,5 +1,5 @@
 0x70FB40: push    ebx
-0x70FB41: mov     ebx, dword ptr [esp+4+ArgList]
+0x70FB41: mov     ebx, [esp+4+ArgList]
 0x70FB45: push    esi
 0x70FB46: mov     eax, ebx
 0x70FB48: push    edi

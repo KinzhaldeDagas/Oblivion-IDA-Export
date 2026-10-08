@@ -29,14 +29,14 @@
 0x480720: pop     esi
 0x480721: mov     ecx, eax
 0x480723: pop     edi
-0x480724: jmp     sub_452A60
+0x480724: jmp     Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x480729: push    esi
 0x48072A: call    sub_47FB10
 0x48072F: add     esp, 4
 0x480732: test    eax, eax
 0x480734: jz      short loc_480743
 0x480736: mov     ecx, eax
-0x480738: call    sub_452A60
+0x480738: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x48073D: mov     edi, eax
 0x48073F: test    edi, edi
 0x480741: jnz     short loc_480760
@@ -48,7 +48,7 @@
 0x48074E: test    ecx, ecx
 0x480750: jz      short loc_480760
 0x480752: push    0
-0x480754: call    sub_89F6B0
+0x480754: call    sub_89F6B0; Looks up NiObject in proxy/collision metadata map, default key dword_B3FA80 when caller key is null, then NiRTTI_Cast to NiObject. Used by 0x8AFCE0 for root-collidable type 2 hits.
 0x480759: pop     esi
 0x48075A: pop     edi
 0x48075B: retn

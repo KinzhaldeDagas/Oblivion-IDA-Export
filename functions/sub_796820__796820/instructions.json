@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x796820",
-    "line": "push    ecx",
+    "line": "push    ecx; OBLIVION AUTHORITY (2026-08-30): Stdcall adapter for uninitialized copying of vector<unsigned short*> owners. Boundary repaired through ret 0x0C at 0x796846 and noreturn cleared.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x796821",
-    "line": "mov     edx, [esp+4+arg_8]",
+    "line": "mov     edx, [esp+4+destination]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x79682D",
-    "line": "mov     eax, [esp+8+arg_8]",
+    "line": "mov     eax, [esp+8+destination]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x796832",
-    "line": "mov     edx, [esp+0Ch+arg_0]",
+    "line": "mov     edx, [esp+0Ch+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,32 +55,44 @@
   },
   {
     "ea": "0x796837",
-    "line": "mov     ecx, [esp+10h+arg_4]",
+    "line": "mov     ecx, [esp+10h+last]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79683B",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79683C",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79683D",
-    "line": "push    edx",
+    "line": "push    edx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79683E",
-    "line": "call    sub_795B80",
+    "line": "call    OB_stVector_stVectorUShortPtr_UninitializedCopyRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Exception-safe uninitialized copy of inner vector<unsigned short*> owners. Uses the shared 4-byte-element vector copy constructor and normally returns at 0x795C0E; prior noreturn metadata was false.",
     "mnemonic": "call",
     "size": 5
+  },
+  {
+    "ea": "0x796843",
+    "line": "add     esp, 1Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x796846",
+    "line": "retn    0Ch",
+    "mnemonic": "retn",
+    "size": 3
   }
 ]

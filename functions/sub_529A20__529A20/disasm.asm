@@ -5,7 +5,7 @@
 0x529A28: mov     esi, ecx
 0x529A2A: jz      short loc_529A91
 0x529A2C: mov     ecx, ebp
-0x529A2E: call    BSSimpleList_Clear
+0x529A2E: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x529A33: test    byte ptr [esi+3Ch], 2
 0x529A37: jnz     short loc_529A91
 0x529A39: push    ebx
@@ -21,7 +21,7 @@
 0x529A50: push    0
 0x529A52: push    eax
 0x529A53: lea     ecx, [esi+4]
-0x529A56: call    sub_56A950
+0x529A56: call    ConditionList_EvaluateForActor; RadiantAI: TESPackage condition-list wrapper used by central package chooser at 0x569020. Delegates to condition evaluator at 0x56A510 with actor and resolved target form; package selection fails if conditions fail.
 0x529A5B: test    al, al
 0x529A5D: jz      short loc_529A8B
 0x529A5F: mov     ecx, ds:0B333C4h

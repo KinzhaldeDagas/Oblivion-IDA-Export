@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x76A970",
-    "line": "sub     esp, 10h",
+    "line": "sub     esp, 10h; Oblivion-authoritative NiDX9 device reset transaction: releases light/index/vertex buffers and RT slots 1-3; invalidates screen RT groups, rendered textures/cubemaps/dynamic textures, shaders and geometry; runs pre-reset callbacks; Reset()s using the default RT group's saved D3DPRESENT_PARAMETERS; increments ResetCounter; rebuilds targets/textures/defaults/shaders/render state; then runs post-reset callbacks. Any failed phase returns false.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x76A9A3",
-    "line": "call    UnsetRenderTarget",
+    "line": "call    UnsetRenderTarget; Unbinds nonzero MRT slots only when the renderer cache says a surface is active, then clears the corresponding cache entry. Slot 0 is deliberately retained.",
     "mnemonic": "call",
     "size": 5
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x76A9B1",
-    "line": "call    UnsetRenderTarget",
+    "line": "call    UnsetRenderTarget; Unbinds nonzero MRT slots only when the renderer cache says a surface is active, then clears the corresponding cache entry. Slot 0 is deliberately retained.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x76A9BF",
-    "line": "call    UnsetRenderTarget",
+    "line": "call    UnsetRenderTarget; Unbinds nonzero MRT slots only when the renderer cache says a surface is active, then clears the corresponding cache entry. Slot 0 is deliberately retained.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x76A9F2",
-    "line": "mov     [esp+20h+var_10], eax",
+    "line": "mov     [esp+20h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x76AA05",
-    "line": "lea     ecx, [esp+24h+var_4]",
+    "line": "lea     ecx, [esp+24h+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x76AA0A",
-    "line": "lea     edx, [esp+28h+var_10]",
+    "line": "lea     edx, [esp+28h+position]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x76AA50",
-    "line": "cmp     eax, offset unk_B4265C",
+    "line": "cmp     eax, offset stru_B4265C",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x76AA94",
-    "line": "cmp     eax, offset unk_B4263C",
+    "line": "cmp     eax, offset stru_B4263C",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -751,7 +751,7 @@
   },
   {
     "ea": "0x76AAD1",
-    "line": "cmp     [esp+20h+var_10], ebx",
+    "line": "cmp     [esp+20h+position], ebx",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -853,7 +853,7 @@
   },
   {
     "ea": "0x76AB06",
-    "line": "mov     [esp+20h+var_10], eax",
+    "line": "mov     [esp+20h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -871,13 +871,13 @@
   },
   {
     "ea": "0x76AB10",
-    "line": "lea     ecx, [esp+20h+var_4]",
+    "line": "lea     ecx, [esp+20h+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x76AB14",
-    "line": "push    ecx",
+    "line": "push    ecx; valueOut",
     "mnemonic": "push",
     "size": 1
   },
@@ -889,13 +889,13 @@
   },
   {
     "ea": "0x76AB19",
-    "line": "push    edx",
+    "line": "push    edx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76AB1A",
-    "line": "lea     eax, [esp+28h+var_10]",
+    "line": "lea     eax, [esp+28h+position]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -907,19 +907,19 @@
   },
   {
     "ea": "0x76AB24",
-    "line": "push    eax",
+    "line": "push    eax; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76AB25",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x76AB27",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
@@ -985,7 +985,7 @@
   },
   {
     "ea": "0x76AB47",
-    "line": "cmp     [esp+20h+var_10], ebx",
+    "line": "cmp     [esp+20h+position], ebx",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -1081,7 +1081,7 @@
   },
   {
     "ea": "0x76AB77",
-    "line": "mov     [esp+20h+var_10], eax",
+    "line": "mov     [esp+20h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1099,13 +1099,13 @@
   },
   {
     "ea": "0x76AB80",
-    "line": "lea     ecx, [esp+20h+var_4]",
+    "line": "lea     ecx, [esp+20h+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x76AB84",
-    "line": "push    ecx",
+    "line": "push    ecx; valueOut",
     "mnemonic": "push",
     "size": 1
   },
@@ -1117,13 +1117,13 @@
   },
   {
     "ea": "0x76AB89",
-    "line": "push    edx",
+    "line": "push    edx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76AB8A",
-    "line": "lea     eax, [esp+28h+var_10]",
+    "line": "lea     eax, [esp+28h+position]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1135,19 +1135,19 @@
   },
   {
     "ea": "0x76AB94",
-    "line": "push    eax",
+    "line": "push    eax; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76AB95",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x76AB97",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
@@ -1213,7 +1213,7 @@
   },
   {
     "ea": "0x76ABB7",
-    "line": "cmp     [esp+20h+var_10], ebx",
+    "line": "cmp     [esp+20h+position], ebx",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -1309,7 +1309,7 @@
   },
   {
     "ea": "0x76ABE7",
-    "line": "mov     [esp+20h+var_10], eax",
+    "line": "mov     [esp+20h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1333,7 +1333,7 @@
   },
   {
     "ea": "0x76ABF4",
-    "line": "push    ecx",
+    "line": "push    ecx; valueOut",
     "mnemonic": "push",
     "size": 1
   },
@@ -1345,13 +1345,13 @@
   },
   {
     "ea": "0x76ABF9",
-    "line": "push    edx",
+    "line": "push    edx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76ABFA",
-    "line": "lea     eax, [esp+28h+var_10]",
+    "line": "lea     eax, [esp+28h+position]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1363,19 +1363,19 @@
   },
   {
     "ea": "0x76AC04",
-    "line": "push    eax",
+    "line": "push    eax; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76AC05",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x76AC07",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
@@ -1459,7 +1459,7 @@
   },
   {
     "ea": "0x76AC2C",
-    "line": "cmp     [esp+20h+var_10], ebx",
+    "line": "cmp     [esp+20h+position], ebx",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -1471,7 +1471,7 @@
   },
   {
     "ea": "0x76AC32",
-    "line": "call    sub_76DB00",
+    "line": "call    NiDX9ResourceRegistry_ReleaseAll; Global NiDX9 device-resource registry release pass. Under its critical section, invokes virtual slot 0x2C on every registered resource before Reset.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1585,7 +1585,7 @@
   },
   {
     "ea": "0x76AC6B",
-    "line": "mov     [esp+20h+var_4], edi",
+    "line": "mov     [esp+20h+valueOut], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1645,7 +1645,7 @@
   },
   {
     "ea": "0x76AC8A",
-    "line": "call    eax",
+    "line": "call    eax; Pre-reset notification phase. Each registered callback receives phase=1 before IDirect3DDevice9::Reset; a false callback aborts the transaction.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1813,7 +1813,7 @@
   },
   {
     "ea": "0x76ACDE",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1909,7 +1909,7 @@
   },
   {
     "ea": "0x76AD00",
-    "line": "cmp     eax, offset unk_B4265C",
+    "line": "cmp     eax, offset stru_B4265C",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -2011,7 +2011,7 @@
   },
   {
     "ea": "0x76AD2E",
-    "line": "jl      short loc_76ACE6",
+    "line": "jl      short loc_76ACE6; Device-reset commit point: IDirect3DDevice9::Reset(device, saved presentation parameters from default RT-group buffer data). ResetCounter increments only after success.",
     "mnemonic": "jl",
     "size": 2
   },
@@ -2064,12 +2064,6 @@
     "size": 2
   },
   {
-    "ea": "0x76AD4D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x76AD50",
     "line": "cmp     [edx], ebx",
     "mnemonic": "cmp",
@@ -2119,7 +2113,7 @@
   },
   {
     "ea": "0x76AD62",
-    "line": "mov     [esp+20h+var_10], eax",
+    "line": "mov     [esp+20h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2161,7 +2155,7 @@
   },
   {
     "ea": "0x76AD7A",
-    "line": "lea     eax, [esp+28h+var_10]",
+    "line": "lea     eax, [esp+28h+position]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2317,7 +2311,7 @@
   },
   {
     "ea": "0x76ADC0",
-    "line": "cmp     eax, offset unk_B4265C",
+    "line": "cmp     eax, offset stru_B4265C",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -2413,7 +2407,7 @@
   },
   {
     "ea": "0x76ADEC",
-    "line": "mov     edx, [eax+84h]",
+    "line": "mov     edx, [eax+84h];",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2491,7 +2485,7 @@
   },
   {
     "ea": "0x76AE10",
-    "line": "cmp     eax, offset unk_B4263C",
+    "line": "cmp     eax, offset stru_B4263C",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -2647,7 +2641,7 @@
   },
   {
     "ea": "0x76AE50",
-    "line": "cmp     [esp+20h+var_10], ebx",
+    "line": "cmp     [esp+20h+position], ebx",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -2677,7 +2671,7 @@
   },
   {
     "ea": "0x76AE68",
-    "line": "call    sub_768C10",
+    "line": "call    NiDX9Renderer_InitializeTextureDefaults; Rebuilds NiDX9 renderer texture defaults after device creation/reset, including four default format resources and the small clipper/default source texture. Called during both initial creation and RecreateDevice.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2701,7 +2695,7 @@
   },
   {
     "ea": "0x76AE76",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2863,7 +2857,7 @@
   },
   {
     "ea": "0x76AEBD",
-    "line": "mov     [esp+20h+var_10], eax",
+    "line": "mov     [esp+20h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2881,7 +2875,7 @@
   },
   {
     "ea": "0x76AEC7",
-    "line": "push    edx",
+    "line": "push    edx; valueOut",
     "mnemonic": "push",
     "size": 1
   },
@@ -2893,31 +2887,31 @@
   },
   {
     "ea": "0x76AECC",
-    "line": "push    eax",
+    "line": "push    eax; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76AECD",
-    "line": "lea     ecx, [esp+28h+var_10]",
+    "line": "lea     ecx, [esp+28h+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x76AED1",
-    "line": "push    ecx",
+    "line": "push    ecx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76AED2",
-    "line": "lea     ecx, [ebp+8C0h]",
+    "line": "lea     ecx, [ebp+8C0h]; self",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x76AED8",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
@@ -2953,13 +2947,13 @@
   },
   {
     "ea": "0x76AEED",
-    "line": "call    edx",
+    "line": "call    edx; Post-reset resource reconstruction: recreate every tracked NiRenderedTexture renderer-data object; analogous passes follow for rendered cube maps and dynamic textures.",
     "mnemonic": "call",
     "size": 2
   },
   {
     "ea": "0x76AEEF",
-    "line": "cmp     [esp+20h+var_10], ebx",
+    "line": "cmp     [esp+20h+position], ebx",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -3061,7 +3055,7 @@
   },
   {
     "ea": "0x76AF26",
-    "line": "mov     [esp+20h+var_10], eax",
+    "line": "mov     [esp+20h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3085,7 +3079,7 @@
   },
   {
     "ea": "0x76AF34",
-    "line": "push    eax",
+    "line": "push    eax; valueOut",
     "mnemonic": "push",
     "size": 1
   },
@@ -3097,31 +3091,31 @@
   },
   {
     "ea": "0x76AF39",
-    "line": "push    ecx",
+    "line": "push    ecx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76AF3A",
-    "line": "lea     edx, [esp+28h+var_10]",
+    "line": "lea     edx, [esp+28h+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x76AF3E",
-    "line": "push    edx",
+    "line": "push    edx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76AF3F",
-    "line": "lea     ecx, [ebp+8D0h]",
+    "line": "lea     ecx, [ebp+8D0h]; self",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x76AF45",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
@@ -3163,7 +3157,7 @@
   },
   {
     "ea": "0x76AF5C",
-    "line": "cmp     [esp+20h+var_10], ebx",
+    "line": "cmp     [esp+20h+position], ebx",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -3259,7 +3253,7 @@
   },
   {
     "ea": "0x76AF8C",
-    "line": "mov     [esp+20h+var_10], eax",
+    "line": "mov     [esp+20h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3277,7 +3271,7 @@
   },
   {
     "ea": "0x76AF96",
-    "line": "push    eax",
+    "line": "push    eax; valueOut",
     "mnemonic": "push",
     "size": 1
   },
@@ -3289,31 +3283,31 @@
   },
   {
     "ea": "0x76AF9B",
-    "line": "push    ecx",
+    "line": "push    ecx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76AF9C",
-    "line": "lea     edx, [esp+28h+var_10]",
+    "line": "lea     edx, [esp+28h+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x76AFA0",
-    "line": "push    edx",
+    "line": "push    edx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76AFA1",
-    "line": "lea     ecx, [ebp+8E0h]",
+    "line": "lea     ecx, [ebp+8E0h]; self",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x76AFA7",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
@@ -3355,7 +3349,7 @@
   },
   {
     "ea": "0x76AFBE",
-    "line": "cmp     [esp+20h+var_10], ebx",
+    "line": "cmp     [esp+20h+position], ebx",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -3373,13 +3367,13 @@
   },
   {
     "ea": "0x76AFCA",
-    "line": "push    eax",
+    "line": "push    eax; device",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76AFCB",
-    "line": "call    sub_76DB60",
+    "line": "call    NiDX9ResourceRegistry_RecreateAll; Global NiDX9 device-resource registry reconstruction pass. Under its critical section, invokes virtual slot 0x30 on every registered resource with the reset IDirect3DDevice9.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3499,7 +3493,7 @@
   },
   {
     "ea": "0x76B00E",
-    "line": "mov     edi, [esp+20h+var_4]",
+    "line": "mov     edi, [esp+20h+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3526,12 +3520,6 @@
     "line": "jmp     short loc_76B020",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x76B01A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
   },
   {
     "ea": "0x76B020",
@@ -3583,7 +3571,7 @@
   },
   {
     "ea": "0x76B038",
-    "line": "call    eax",
+    "line": "call    eax; Post-reset notification phase. Each registered callback receives phase=0 after renderer resources and state managers are restored; false marks recreation failed.",
     "mnemonic": "call",
     "size": 2
   },
@@ -3709,7 +3697,7 @@
   },
   {
     "ea": "0x76B06F",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },

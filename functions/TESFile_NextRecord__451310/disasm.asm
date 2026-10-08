@@ -6,9 +6,9 @@
 0x451320: jz      short loc_45133B
 0x451322: cmp     eax, ds:0B06138h
 0x451328: jz      short loc_45133B
-0x45132A: mov     eax, [esi+240h]
+0x45132A: mov     eax, [esi+240h]; MEF v19 candidate/fix: byte-checked TESFile_NextRecord length advance. Validate currentRecordOffset + currentRecord.length + 0x14 against fileSize before resuming at 0x451342; invalid data goes to existing stop path 0x451350.
 0x451330: add     eax, 14h
-0x451333: add     [esi+25Ch], eax
+0x451333: add     [esi+25Ch], eax; EngineIssues review: TESFile_NextRecord advances currentRecordOffset by record length + 0x14 without overflow/progress check before comparing to fileSize.
 0x451339: jmp     short loc_451342
 0x45133B: add     dword ptr [esi+25Ch], 14h
 0x451342: mov     eax, [esi+25Ch]

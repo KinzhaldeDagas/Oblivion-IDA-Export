@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x8A514D",
-    "line": "mov     ebp, [esp+34h+arg_0]",
+    "line": "mov     ebp, [esp+34h+outData]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x8A5168",
-    "line": "lea     ecx, [esp+38h+arg_0]",
+    "line": "lea     ecx, [esp+38h+outData]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x8A5182",
-    "line": "mov     [esp+48h+arg_0], 4",
+    "line": "mov     [esp+48h+outData], 4",
     "mnemonic": "mov",
     "size": 8
   },
@@ -229,25 +229,25 @@
   },
   {
     "ea": "0x8A5196",
-    "line": "lea     ecx, [esp+34h+arg_0]",
+    "line": "lea     ecx, [esp+34h+outData]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x8A519A",
-    "line": "push    ecx",
+    "line": "push    ecx; outData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8A519B",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8A519D",
-    "line": "call    sub_677C70",
+    "line": "call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x8A51B9",
-    "line": "mov     esi, [esp+34h+arg_0]",
+    "line": "mov     esi, [esp+34h+outData]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -415,19 +415,19 @@
   },
   {
     "ea": "0x8A51EA",
-    "line": "push    eax",
+    "line": "push    eax; outData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8A51EB",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8A51ED",
-    "line": "call    sub_677C70",
+    "line": "call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -718,5 +718,59 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D6BC0",
+    "line": "lea     ecx, [ebp-18h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D6BC3",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6BC8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D6BCC",
+    "line": "lea     eax, [edx-24h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D6BCF",
+    "line": "mov     ecx, [edx-28h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D6BD2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D6BD4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6BD9",
+    "line": "mov     eax, offset stru_AFE914",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6BDE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

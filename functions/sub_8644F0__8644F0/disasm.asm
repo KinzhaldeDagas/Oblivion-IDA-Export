@@ -1,4 +1,4 @@
-0x8644F0: cmp     word ptr [ecx+0C0h], 0
+0x8644F0: cmp     word ptr [ecx+0C0h], 0; Restores the current world bound from the saved local bound, then invokes the alternate/only-immediate NiTriStrips renderer path when instanceCount != 0.
 0x8644F8: mov     eax, [ecx+0C4h]
 0x8644FE: mov     edx, [ecx+0C8h]
 0x864504: mov     [ecx+20h], eax

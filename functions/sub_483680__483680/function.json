@@ -1,19 +1,32 @@
 {
-  "callees_count": 12,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x483680",
+      "0x483741"
+    ]
+  ],
+  "chunks_sha256": "bc902bf6cc1782449071328d49848a9d0637ba3dcb8a3caab9a4b73b7b542a0f",
+  "comment_regular": "Verified exterior-cell unload: cancels that cell's in-flight DistantLODLoaderTask, removes queued model-usage counts for its packed cell label, releases the cell slot, and clears its coordinates.",
+  "comment_repeatable": "Verified exterior-cell unload: cancels that cell's in-flight DistantLODLoaderTask, removes queued model-usage counts for its packed cell label, releases the cell slot, and clears its coordinates.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_483680",
+  "display_name": "GridDistantArray_UnloadCell",
   "end_ea": "0x483741",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_483680",
+  "name": "GridDistantArray_UnloadCell",
   "segment": ".text",
   "sha256": "bc902bf6cc1782449071328d49848a9d0637ba3dcb8a3caab9a4b73b7b542a0f",
   "size": 193,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x483680",
-  "type": "void __thiscall(_DWORD *this, int, int)",
+  "total_chunk_size": 193,
+  "type": "void __thiscall(GridDistantArray *this, int cellX, int cellY)",
   "xrefs_from_count": 93,
   "xrefs_to_count": 2
 }

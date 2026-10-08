@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
-  "callers_count": 5,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 9,
+  "chunks": [
+    [
+      "0x4A4460",
+      "0x4A449A"
+    ]
+  ],
+  "chunks_sha256": "0fbe342e55cf279811108bec02ac6498b1e062cca00b20c764a95b8e03eb5324",
+  "comment_regular": "Verified: walks TESRegionDataList and returns the element whose virtual GetDataID (+0x0C) equals the requested ID.",
+  "comment_repeatable": "Verified: walks TESRegionDataList and returns the element whose virtual GetDataID (+0x0C) equals the requested ID.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4A4460",
+  "display_name": "TESRegion_FindDataByID",
   "end_ea": "0x4A449A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4A4460",
+  "name": "TESRegion_FindDataByID",
   "segment": ".text",
   "sha256": "0fbe342e55cf279811108bec02ac6498b1e062cca00b20c764a95b8e03eb5324",
   "size": 58,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4A4460",
-  "type": "int __thiscall(int *this, int)",
+  "total_chunk_size": 58,
+  "type": "TESRegionData *__thiscall(TESRegionDataList *dataList, int dataID)",
   "xrefs_from_count": 32,
   "xrefs_to_count": 9
 }

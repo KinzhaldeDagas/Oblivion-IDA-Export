@@ -22,7 +22,7 @@ int __usercall Actor_AttackHandling_::RunOnHitByScript@<eax>(
         int a21,
         float a22)
 {
-  Script_AddEventToExtraScript(a1, a2 + 0x44, 0x80);
+  Script_AddEventToExtraScript(a1, a2 + 0x44, 0x80);// RealArenaTraining: actor melee OnHit event. Args: source attacker=EDI, targetExtra=ESI+0x44, mask=0x80. /*0x5ff630*/
   return Actor_AttackHandling_::ReflectDamage(
            a3,
            a4,

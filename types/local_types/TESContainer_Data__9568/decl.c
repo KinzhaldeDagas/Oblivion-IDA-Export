@@ -1,1 +1,5 @@
-TESContainer_Data
+struct TESContainer_Data
+{
+SInt32 count;
+TESForm *type;
+};

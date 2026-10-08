@@ -1,7 +1,7 @@
 0x9DF2C0: push    offset aMorningStar; "Morning Star"
 0x9DF2C5: push    offset aSmonthmornings; "sMonthMorningStar"
-0x9DF2CA: mov     ecx, offset sMonthMorningStar
-0x9DF2CF: call    GameSetting_ConstrAndReg
+0x9DF2CA: mov     ecx, 0B350ECh; self
+0x9DF2CF: call    GameSetting_ConstrAndReg; Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.
 0x9DF2D4: push    offset sub_A19F20; void (__cdecl *)()
 0x9DF2D9: call    _atexit
 0x9DF2DE: pop     ecx

@@ -9,7 +9,7 @@
 0x65CCD2: test    eax, eax
 0x65CCD4: jz      short loc_65CCE5
 0x65CCD6: push    eax
-0x65CCD7: call    FormHeapFree
+0x65CCD7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x65CCDC: add     esp, 4
 0x65CCDF: mov     dword ptr [esi], 0
 0x65CCE5: lea     esi, [edi+0Ch]
@@ -19,7 +19,7 @@
 0x65CCEE: test    eax, eax
 0x65CCF0: jz      short loc_65CD01
 0x65CCF2: push    eax
-0x65CCF3: call    FormHeapFree
+0x65CCF3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x65CCF8: add     esp, 4
 0x65CCFB: mov     dword ptr [esi], 0
 0x65CD01: pop     edi

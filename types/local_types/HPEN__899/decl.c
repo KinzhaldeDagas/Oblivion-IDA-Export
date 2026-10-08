@@ -1,1 +1,1 @@
-HPEN
+typedef HPEN__ *HPEN;

@@ -115,3 +115,14 @@
 0x897807: pop     ebp
 0x897808: add     esp, 10h
 0x89780B: retn    8
+0x9D6740: lea     ecx, [ebp-10h]; slot
+0x9D6743: jmp     NiPointerSlot_Release
+0x9D6748: lea     ecx, [ebp+8]; slot
+0x9D674B: jmp     NiPointerSlot_Release
+0x9D6750: mov     edx, [esp+arg_4]
+0x9D6754: lea     eax, [edx-10h]
+0x9D6757: mov     ecx, [edx-14h]
+0x9D675A: xor     ecx, eax
+0x9D675C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D6761: mov     eax, offset stru_AFE530
+0x9D6766: jmp     ___CxxFrameHandler3

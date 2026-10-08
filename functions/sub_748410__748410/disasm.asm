@@ -3,7 +3,7 @@
 0x748413: lea     eax, [eax+eax*2]
 0x748416: cmp     byte ptr ds:0B40618h[eax*4], 0
 0x74841E: push    edi; Format
-0x74841F: mov     edi, offset DstBuf
+0x74841F: mov     edi, 0B40408h
 0x748424: mov     esi, 200h
 0x748429: jz      short loc_748463
 0x74842B: call    sub_7485F0
@@ -23,9 +23,9 @@
 0x748457: jnz     short loc_748450
 0x748459: sub     eax, edx
 0x74845B: sub     esi, eax
-0x74845D: lea     edi, DstBuf[eax]
-0x748463: mov     ecx, [esp+8+ArgList]
-0x748467: mov     edx, [esp+8+Format]
+0x74845D: lea     edi, [eax+0B40408h]
+0x748463: mov     ecx, dword ptr [esp+8+Format+4]
+0x748467: mov     edx, dword ptr [esp+8+Format]
 0x74846B: push    ecx; ArgList
 0x74846C: push    edx; MaxCount
 0x74846D: push    esi; MaxCount

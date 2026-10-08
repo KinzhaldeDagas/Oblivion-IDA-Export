@@ -1,1 +1,1 @@
-0x6EC5C0: jmp     sub_6CE3A0
+0x6EC5C0: jmp     NiSingleInterpController_IsEqual; Equality requires equal NiTimeController base state and null-symmetric interpolator state; two non-null interpolators compare through their virtual IsEqual slot (+0x2C).

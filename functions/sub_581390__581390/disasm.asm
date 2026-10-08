@@ -16,7 +16,7 @@
 0x5813BB: or      word ptr [eax+18h], 1
 0x5813C0: lea     ecx, [esp+88h+var_3C]
 0x5813C4: mov     [esp+88h+var_70], 0
-0x5813CC: call    sub_959BC0
+0x5813CC: call    NiPickContext_ctor; Verified NiPick context initializer: initializes the record array, pick flags/root pointers, and default query settings used by TESTerrainLODQuad_PickSurfacePoint.
 0x5813D1: mov     esi, [ebp+0]
 0x5813D4: mov     eax, [esp+88h+var_28]
 0x5813D8: cmp     eax, esi
@@ -114,10 +114,10 @@
 0x5814E2: push    eax
 0x5814E3: lea     ecx, [esp+8Ch+var_58]
 0x5814E7: push    ecx
-0x5814E8: call    Double_To_SInt32
+0x5814E8: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5814ED: fld     [esp+90h+var_74]
 0x5814F1: push    eax
-0x5814F2: call    Double_To_SInt32
+0x5814F2: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5814F7: push    eax
 0x5814F8: mov     ecx, esi
 0x5814FA: call    sub_70D300
@@ -127,7 +127,7 @@
 0x581506: lea     eax, [esp+90h+var_58]
 0x58150A: push    eax
 0x58150B: lea     ecx, [esp+94h+var_3C]
-0x58150F: call    sub_959D60
+0x58150F: call    NiPick_ExecuteAndSort; Verified NiPick query runner: invokes NiPick_ProcessSceneObject over the configured pick root, gathers hit records, sorts by the record distance field, and leaves the nearest record first in the result list.
 0x581514: test    al, al
 0x581516: jz      loc_5817A0
 0x58151C: xor     eax, eax
@@ -135,14 +135,13 @@
 0x581523: jbe     loc_5817A0
 0x581529: jmp     short loc_581534
 0x58152B: jmp     short loc_581530
-0x58152D: align 10h
 0x581530: mov     eax, [esp+88h+var_74]
 0x581534: mov     ecx, [esp+88h+var_20]
 0x581538: mov     edi, [ecx+eax*4]
 0x58153B: mov     esi, [edi]
 0x58153D: add     eax, 1
 0x581540: test    esi, esi
-0x581542: mov     dword ptr [esp+88h+var_68], edi
+0x581542: mov     [esp+88h+var_68], edi
 0x581546: mov     [esp+88h+var_74], eax
 0x58154A: jz      short loc_58157A
 0x58154C: mov     edx, [esi]
@@ -152,7 +151,7 @@
 0x581555: test    eax, eax
 0x581557: jz      short loc_58156E
 0x581559: lea     esp, [esp+0]
-0x581560: cmp     eax, offset dword_B3FAB0
+0x581560: cmp     eax, offset parent
 0x581565: jz      short loc_581585
 0x581567: mov     eax, [eax+4]
 0x58156A: test    eax, eax
@@ -176,7 +175,7 @@
 0x581590: call    eax
 0x581592: test    eax, eax
 0x581594: jz      short loc_5815A4
-0x581596: cmp     eax, offset dword_B3FAB0
+0x581596: cmp     eax, offset parent
 0x58159B: jz      short loc_5815DB
 0x58159D: mov     eax, [eax+4]
 0x5815A0: test    eax, eax
@@ -242,7 +241,7 @@
 0x581661: mov     edx, ecx
 0x581663: mov     eax, [edx]
 0x581665: push    eax
-0x581666: push    offset unk_B352A4
+0x581666: push    0B352A4h
 0x58166B: call    NiRTTI_Cast
 0x581670: add     esp, 8
 0x581673: test    eax, eax
@@ -332,7 +331,7 @@
 0x581780: call    eax
 0x581782: cmp     eax, 387h
 0x581787: jnz     short loc_58179A
-0x581789: mov     ecx, dword ptr [esp+88h+var_68]
+0x581789: mov     ecx, [esp+88h+var_68]
 0x58178D: movzx   eax, word ptr [ecx+18h]
 0x581791: shr     ax, 1
 0x581794: mov     [ebp+7Eh], ax
@@ -342,7 +341,7 @@
 0x5817A3: and     word ptr [eax+18h], 0FFFEh
 0x5817A9: lea     ecx, [esp+88h+var_3C]
 0x5817AD: mov     [esp+88h+var_4], 0FFFFFFFFh
-0x5817B8: call    sub_959EC0
+0x5817B8: call    NiPickContext_dtor; Verified NiPick context destructor: clears/releases hit records, frees the record-pointer array, and releases its retained root object.
 0x5817BD: mov     eax, [esp+88h+var_70]
 0x5817C1: mov     ecx, dword ptr [esp+88h+var_C]
 0x5817C5: mov     large fs:0, ecx
@@ -352,3 +351,12 @@
 0x5817CF: pop     ebp
 0x5817D0: add     esp, 78h
 0x5817D3: retn    4
+0x9BEBC0: lea     ecx, [ebp-3Ch]
+0x9BEBC3: jmp     NiPickContext_dtor; Verified NiPick context destructor: clears/releases hit records, frees the record-pointer array, and releases its retained root object.
+0x9BEBC8: mov     edx, [esp+arg_4]
+0x9BEBCC: lea     eax, [edx-78h]
+0x9BEBCF: mov     ecx, [edx-7Ch]
+0x9BEBD2: xor     ecx, eax
+0x9BEBD4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BEBD9: mov     eax, offset stru_AE8254
+0x9BEBDE: jmp     ___CxxFrameHandler3

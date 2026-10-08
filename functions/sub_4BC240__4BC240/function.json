@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4BC240",
+      "0x4BC28A"
+    ]
+  ],
+  "chunks_sha256": "51fb514d0a6ac9fe715653778ba227d813c30f684fb9d9e301209dae69e9f0d0",
+  "comment_regular": "Verified virtual copy routine returns void (ret 4); RTTI-casts the source TESForm to TESSubSpace, copies inherited TESForm components and then copies the three dimension fields.",
+  "comment_repeatable": "Verified virtual copy routine returns void (ret 4); RTTI-casts the source TESForm to TESSubSpace, copies inherited TESForm components and then copies the three dimension fields.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_4BC240",
+  "display_name": "TESSubSpace_CopyComponentsFrom",
   "end_ea": "0x4BC28A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4BC240",
+  "name": "TESSubSpace_CopyComponentsFrom",
   "segment": ".text",
   "sha256": "51fb514d0a6ac9fe715653778ba227d813c30f684fb9d9e301209dae69e9f0d0",
   "size": 74,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4BC240",
-  "type": "TESForm *__thiscall(TESForm *this, void *)",
+  "total_chunk_size": 74,
+  "type": "void __thiscall(TESSubSpace *this, TESForm *source)",
   "xrefs_from_count": 30,
   "xrefs_to_count": 1
 }

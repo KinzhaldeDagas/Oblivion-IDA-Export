@@ -1,4 +1,4 @@
-0x47DF80: mov     eax, [esp+Seed]
+0x47DF80: mov     eax, [esp+Seed]; Engine RNG: optional explicit seed, otherwise lazy seed with time64 once, then returns rand().
 0x47DF84: test    eax, eax
 0x47DF86: jz      short loc_47DF9D
 0x47DF88: push    eax; Seed
@@ -6,7 +6,7 @@
 0x47DF8E: add     esp, 4
 0x47DF91: mov     byte ptr ds:0B069C3h, 0
 0x47DF98: jmp     _rand
-0x47DF9D: cmp     byte ptr ds:0B069C3h, 0
+0x47DF9D: cmp     byte ptr ds:0B069C3h, 0; Game RNG consults only g_gameCRTRandomNeedsSeed; it cannot observe FaceGen's separate srand call despite sharing the same CRT state.
 0x47DFA4: jz      short loc_47DFBD
 0x47DFA6: push    0; Time
 0x47DFA8: call    __time64

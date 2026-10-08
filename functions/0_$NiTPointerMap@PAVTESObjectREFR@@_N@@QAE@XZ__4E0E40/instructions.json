@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x4E0EC3",
-    "line": "call    sub_420260",
+    "line": "call    ExtraDataList_GetEnableStateParent; Returns the parent TESObjectREFR stored in ExtraEnableStateParent type 0x3F.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x4E0EFB",
-    "line": "call    sub_420260",
+    "line": "call    ExtraDataList_GetEnableStateParent; Returns the parent TESObjectREFR stored in ExtraEnableStateParent type 0x3F.",
     "mnemonic": "call",
     "size": 5
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x4E0F04",
-    "line": "call    sub_420260",
+    "line": "call    ExtraDataList_GetEnableStateParent; Returns the parent TESObjectREFR stored in ExtraEnableStateParent type 0x3F.",
     "mnemonic": "call",
     "size": 5
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x4E0F1A",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x4E0F33",
-    "line": "mov     [esp+30h+var_1D], bl",
+    "line": "mov     [esp+30h+valueOut], bl",
     "mnemonic": "mov",
     "size": 4
   },
@@ -481,31 +481,31 @@
   },
   {
     "ea": "0x4E0F39",
-    "line": "lea     ecx, [esp+30h+var_1D]",
+    "line": "lea     ecx, [esp+30h+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4E0F3D",
-    "line": "push    ecx",
+    "line": "push    ecx; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E0F3E",
-    "line": "push    esi",
+    "line": "push    esi; key",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E0F3F",
-    "line": "lea     ecx, [esp+38h+var_1C]",
+    "line": "lea     ecx, [esp+38h+var_1C]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4E0F43",
-    "line": "call    sub_4D6760",
+    "line": "call    NiTMap_TryGetAtByteValue; Verified generic NiTMap lookup helper: hashes the UInt32 key through the map vtable, walks the bucket chain using the map's key comparator, returns false when absent, and on a match writes the low byte of the entry data field to valueOut and returns true. Callers use it for byte/boolean-valued maps, including PlayerCharacter_GetLastSpaceForDoor and cell/worldspace visited or filter maps; this helper does not establish the full map value width.",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x4E0F4C",
-    "line": "cmp     [esp+30h+var_1D], bl",
+    "line": "cmp     [esp+30h+valueOut], bl",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -604,5 +604,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9B5B20",
+    "line": "lea     ecx, [ebp-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5B23",
+    "line": "jmp     ??1?$NiTPointerMap@PAVTESObjectREFR@@_N@@UAE@XZ; NiTPointerMap<TESObjectREFR *,bool>::~NiTPointerMap<TESObjectREFR *,bool>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5B28",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B5B2C",
+    "line": "lea     eax, [edx-20h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5B2F",
+    "line": "mov     ecx, [edx-24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5B32",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B5B34",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5B39",
+    "line": "mov     eax, offset stru_AE0B20",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5B3E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

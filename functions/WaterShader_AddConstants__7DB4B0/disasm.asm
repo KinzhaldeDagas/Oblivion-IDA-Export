@@ -1,4 +1,4 @@
-0x7DB4B0: push    0FFFFFFFFh
+0x7DB4B0: push    0FFFFFFFFh; Pass230: WaterShader::AddConstants declares WaterSM3 FogParam ps c9 at 0x00B45E74 and FogColor ps c10 at 0x00B45E84.
 0x7DB4B2: push    offset SEH_803C90
 0x7DB4B7: mov     eax, large fs:0
 0x7DB4BD: push    eax
@@ -35,7 +35,7 @@
 0x7DB51D: mov     edx, [ecx]
 0x7DB51F: mov     eax, [edx+18h]
 0x7DB522: push    0
-0x7DB524: push    offset flt_B45E64
+0x7DB524: push    (offset OB_ShaderConstantStorage_010201A0+50h)
 0x7DB529: push    4
 0x7DB52B: push    10h
 0x7DB52D: push    offset EmptyString
@@ -49,7 +49,7 @@
 0x7DB546: mov     edx, [ecx]
 0x7DB548: mov     eax, [edx+18h]
 0x7DB54B: push    0
-0x7DB54D: push    offset dword_B45DD4
+0x7DB54D: push    offset flt_B45DD4
 0x7DB552: push    4
 0x7DB554: push    10h
 0x7DB556: push    offset EmptyString
@@ -63,7 +63,7 @@
 0x7DB56F: mov     edx, [ecx]
 0x7DB571: mov     eax, [edx+18h]
 0x7DB574: push    0
-0x7DB576: push    offset flt_B45DF4
+0x7DB576: push    offset unk_B45DF4
 0x7DB57B: push    4
 0x7DB57D: push    10h
 0x7DB57F: push    offset EmptyString
@@ -77,7 +77,7 @@
 0x7DB598: mov     edx, [ecx]
 0x7DB59A: mov     eax, [edx+18h]
 0x7DB59D: push    0
-0x7DB59F: push    offset flt_B45E04
+0x7DB59F: push    offset unk_B45E04
 0x7DB5A4: push    4
 0x7DB5A6: push    10h
 0x7DB5A8: push    offset EmptyString
@@ -91,7 +91,7 @@
 0x7DB5C1: mov     edx, [ecx]
 0x7DB5C3: mov     eax, [edx+18h]
 0x7DB5C6: push    0
-0x7DB5C8: push    offset dword_B45EC4
+0x7DB5C8: push    (offset OB_ShaderConstantStorage_010201A0+0B0h)
 0x7DB5CD: push    4
 0x7DB5CF: push    10h
 0x7DB5D1: push    offset EmptyString
@@ -104,7 +104,7 @@
 0x7DB5E8: mov     ecx, [esi]
 0x7DB5EA: mov     edx, [ecx]
 0x7DB5EC: push    0
-0x7DB5EE: push    offset dword_B45E14
+0x7DB5EE: push    offset OB_ShaderConstantStorage_010201A0
 0x7DB5F3: push    4
 0x7DB5F5: push    10h
 0x7DB5F7: push    offset EmptyString
@@ -119,7 +119,7 @@
 0x7DB613: mov     edx, [ecx]
 0x7DB615: mov     eax, [edx+18h]
 0x7DB618: push    0
-0x7DB61A: push    offset dword_B45E24
+0x7DB61A: push    (offset OB_ShaderConstantStorage_010201A0+10h)
 0x7DB61F: push    4
 0x7DB621: push    10h
 0x7DB623: push    offset EmptyString
@@ -133,7 +133,7 @@
 0x7DB63C: mov     edx, [ecx]
 0x7DB63E: mov     eax, [edx+18h]
 0x7DB641: push    0
-0x7DB643: push    offset dword_B45E34
+0x7DB643: push    (offset OB_ShaderConstantStorage_010201A0+20h)
 0x7DB648: push    4
 0x7DB64A: push    10h
 0x7DB64C: push    offset EmptyString
@@ -147,7 +147,7 @@
 0x7DB665: mov     edx, [ecx]
 0x7DB667: mov     eax, [edx+18h]
 0x7DB66A: push    0
-0x7DB66C: push    offset flt_B45E44
+0x7DB66C: push    (offset OB_ShaderConstantStorage_010201A0+30h)
 0x7DB671: push    4
 0x7DB673: push    10h
 0x7DB675: push    offset EmptyString
@@ -161,7 +161,7 @@
 0x7DB68E: mov     edx, [ecx]
 0x7DB690: mov     eax, [edx+18h]
 0x7DB693: push    0
-0x7DB695: push    offset dword_B45E74
+0x7DB695: push    (offset OB_ShaderConstantStorage_010201A0+60h)
 0x7DB69A: push    4
 0x7DB69C: push    10h
 0x7DB69E: push    offset EmptyString
@@ -170,12 +170,12 @@
 0x7DB6A7: push    0
 0x7DB6A9: push    10000007h
 0x7DB6AE: push    offset aFogparam; "FogParam"
-0x7DB6B3: call    eax
+0x7DB6B3: call    eax; Fog constant-map decode: WaterShader pixel map declares FogParam at ps c9 from B45E14[0x18] / B45E74; writer is WaterShader fog consumer 0x7DCBD0.
 0x7DB6B5: mov     ecx, [esi]
 0x7DB6B7: mov     edx, [ecx]
 0x7DB6B9: mov     eax, [edx+18h]
 0x7DB6BC: push    0
-0x7DB6BE: push    offset dword_B45E84
+0x7DB6BE: push    (offset OB_ShaderConstantStorage_010201A0+70h)
 0x7DB6C3: push    4
 0x7DB6C5: push    10h
 0x7DB6C7: push    offset EmptyString
@@ -184,11 +184,11 @@
 0x7DB6D0: push    0
 0x7DB6D2: push    10000007h
 0x7DB6D7: push    offset aFogcolor; "FogColor"
-0x7DB6DC: call    eax
+0x7DB6DC: call    eax; Fog constant-map decode: WaterShader pixel map declares FogColor at ps c10 from B45E14[0x1C] / B45E84; writer is WaterShader fog consumer 0x7DCBD0.
 0x7DB6DE: mov     ecx, [esi]
 0x7DB6E0: mov     edx, [ecx]
 0x7DB6E2: push    0
-0x7DB6E4: push    offset flt_B45E94
+0x7DB6E4: push    (offset OB_ShaderConstantStorage_010201A0+80h)
 0x7DB6E9: mov     eax, [edx+18h]
 0x7DB6EC: push    4
 0x7DB6EE: push    10h
@@ -203,7 +203,7 @@
 0x7DB709: mov     edx, [ecx]
 0x7DB70B: mov     eax, [edx+18h]
 0x7DB70E: push    0
-0x7DB710: push    offset flt_B45EB4
+0x7DB710: push    (offset OB_ShaderConstantStorage_010201A0+0A0h)
 0x7DB715: push    4
 0x7DB717: push    10h
 0x7DB719: push    offset EmptyString
@@ -259,7 +259,7 @@
 0x7DB7B5: mov     edx, [ecx]
 0x7DB7B7: mov     eax, [edx+18h]
 0x7DB7BA: push    0
-0x7DB7BC: push    offset flt_B45EA4
+0x7DB7BC: push    (offset OB_ShaderConstantStorage_010201A0+90h)
 0x7DB7C1: push    4
 0x7DB7C3: push    10h
 0x7DB7C5: push    offset EmptyString
@@ -273,7 +273,7 @@
 0x7DB7DE: mov     edx, [ecx]
 0x7DB7E0: mov     eax, [edx+18h]
 0x7DB7E3: push    0
-0x7DB7E5: push    offset flt_B45ED4
+0x7DB7E5: push    (offset OB_ShaderConstantStorage_010201A0+0C0h)
 0x7DB7EA: push    4
 0x7DB7EC: push    10h
 0x7DB7EE: push    offset EmptyString
@@ -287,7 +287,7 @@
 0x7DB807: mov     edx, [ecx]
 0x7DB809: mov     eax, [edx+18h]
 0x7DB80C: push    0
-0x7DB80E: push    offset dword_B45EE4
+0x7DB80E: push    (offset OB_ShaderConstantStorage_010201A0+0D0h)
 0x7DB813: push    4
 0x7DB815: push    10h
 0x7DB817: push    offset EmptyString
@@ -304,3 +304,20 @@
 0x7DB83B: pop     esi
 0x7DB83C: add     esp, 10h
 0x7DB83F: retn
+0x9D00B0: mov     eax, [ebp-10h]
+0x9D00B3: push    eax
+0x9D00B4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D00B9: pop     ecx
+0x9D00BA: retn
+0x9D00BB: mov     eax, [ebp-10h]
+0x9D00BE: push    eax
+0x9D00BF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D00C4: pop     ecx
+0x9D00C5: retn
+0x9D00C6: mov     edx, [esp+arg_4]
+0x9D00CA: lea     eax, [edx-0Ch]
+0x9D00CD: mov     ecx, [edx-10h]
+0x9D00D0: xor     ecx, eax
+0x9D00D2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D00D7: mov     eax, offset stru_AF8B40
+0x9D00DC: jmp     ___CxxFrameHandler3

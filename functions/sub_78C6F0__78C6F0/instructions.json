@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x78C6F0",
-    "line": "push    ebp",
+    "line": "push    ebp; SpeedTreeOBSE 2026-05-31 leaf-mesh family gap pass: GetGeometry leaf bit 0x04 reaches stock leaf-card export only; 4.1 mesh leaves would require CLeafGeometry SMesh output not present in Oblivion's fixed-card consumer.",
     "mnemonic": "push",
     "size": 1
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x78C71D",
-    "line": "mov     ebx, [ebp+arg_4]",
+    "line": "mov     ebx, [ebp+geometryFlags]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -139,19 +139,19 @@
   },
   {
     "ea": "0x78C732",
-    "line": "push    eax; MaxCount",
+    "line": "push    eax; lodLevel",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78C733",
-    "line": "push    edi; Src",
+    "line": "push    edi; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78C734",
-    "line": "call    sub_789FE0",
+    "line": "call    CSpeedTreeRT__GetBranchGeometry; Oblivion branch export is authoritative: publishes the legacy single wind stream plus distinct diffuse and projected-shadow UV streams into a 0x3C indexed-geometry output block.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,31 +169,31 @@
   },
   {
     "ea": "0x78C73E",
-    "line": "mov     ecx, [ebp+arg_C]",
+    "line": "mov     ecx, dword ptr [ebp+lodLevel]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x78C741",
-    "line": "push    ecx; MaxCount",
+    "line": "push    ecx; lodLevel",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78C742",
-    "line": "push    edi; Src",
+    "line": "push    edi; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78C743",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x78C745",
-    "line": "call    sub_78A390",
+    "line": "call    CSpeedTreeRT__GetFrondGeometry; SpeedTreeOBSE 2026-05-30: C:\\src\\Fronds reference layer instruments this GetFrondGeometry export callsite under the frond restoration opt-in.",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,31 +211,31 @@
   },
   {
     "ea": "0x78C74F",
-    "line": "mov     edx, [ebp+arg_10]",
+    "line": "mov     edx, [ebp+leafLod]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x78C752",
-    "line": "push    edx",
+    "line": "push    edx; lodLevel",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78C753",
-    "line": "push    edi",
+    "line": "push    edi; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78C754",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x78C756",
-    "line": "call    sub_788120",
+    "line": "call    CSpeedTreeRT__GetLeafGeometry; Leaf dispatcher forwards the caller's leafLod unchanged to OB_CSpeedTreeRT_ExportLeafGeometry. Stock 0x562744 and plugin fallback both pass explicit 0..lodCount-1 indices.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x78C75E",
-    "line": "jz      loc_78C84B",
+    "line": "jz      loc_78C84B; 2026-05-21 360 gap pass: GetGeometry billboard bit 0x08 branch exists but current stock callsites still pass only 0x01 or 0x04.",
     "mnemonic": "jz",
     "size": 6
   },
@@ -271,31 +271,31 @@
   },
   {
     "ea": "0x78C771",
-    "line": "jnz     loc_78C843",
+    "line": "jnz     loc_78C843; 2026-05-21 360 gap pass: billboard branch chooses simple billboard if 360 flag +0x6C is false or caller flag 0x10 requests simple output.",
     "mnemonic": "jnz",
     "size": 6
   },
   {
     "ea": "0x78C777",
-    "line": "push    ebx",
+    "line": "push    ebx; flags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78C778",
-    "line": "push    edi",
+    "line": "push    edi; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78C779",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x78C77B",
-    "line": "call    sub_7887A0",
+    "line": "call    CSpeedTreeRT__Get360BillboardGeometry; 2026-05-21 360 gap pass: 360 export is reachable only through GetGeometry bit 0x08 and +0x6C true; no current stock caller requests this branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,13 +397,13 @@
   },
   {
     "ea": "0x78C7A9",
-    "line": "lea     esi, [ebp+var_30]",
+    "line": "lea     esi, [ebp+result]; result",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x78C7AC",
-    "line": "call    sub_7A54A0",
+    "line": "call    OB_IdvFormatString_010201A0; Oblivion binary evidence: IdvFormatString. Formats variadic arguments with vsprintf into a 1024-byte stack buffer, constructs the hidden-result 28-byte SSO string, assigns strlen(buffer) bytes, and returns the result pointer in EAX. SpeedTreeRT 4.1 IdvGlobals.h:77-93 corroborates the name and fixed buffer only after observation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,13 +451,13 @@
   },
   {
     "ea": "0x78C7C6",
-    "line": "push    eax; Src",
+    "line": "push    eax; error",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78C7C7",
-    "line": "call    sub_7895E0",
+    "line": "call    CSpeedTreeRT__SetError; Oblivion binary evidence: CSpeedTreeRT static error setter. Assigns the NUL-terminated input into the sole 28-byte global error string at 0xB2B614. After observation, SpeedTreeRT 4.1 SpeedTreeRT.cpp:2671-2677 corroborates SetError and g_strError.",
     "mnemonic": "call",
     "size": 5
   },
@@ -469,13 +469,13 @@
   },
   {
     "ea": "0x78C7CF",
-    "line": "lea     ecx, [ebp+var_30]",
+    "line": "lea     ecx, [ebp+result]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x78C7D2",
-    "line": "call    sub_79AB00",
+    "line": "call    OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -559,13 +559,13 @@
   },
   {
     "ea": "0x78C7FB",
-    "line": "lea     esi, [ebp+var_4C]",
+    "line": "lea     esi, [ebp+var_4C]; result",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x78C7FE",
-    "line": "call    sub_7A54A0",
+    "line": "call    OB_IdvFormatString_010201A0; Oblivion binary evidence: IdvFormatString. Formats variadic arguments with vsprintf into a 1024-byte stack buffer, constructs the hidden-result 28-byte SSO string, assigns strlen(buffer) bytes, and returns the result pointer in EAX. SpeedTreeRT 4.1 IdvGlobals.h:77-93 corroborates the name and fixed buffer only after observation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -613,13 +613,13 @@
   },
   {
     "ea": "0x78C818",
-    "line": "push    eax; Src",
+    "line": "push    eax; error",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78C819",
-    "line": "call    sub_7895E0",
+    "line": "call    CSpeedTreeRT__SetError; Oblivion binary evidence: CSpeedTreeRT static error setter. Assigns the NUL-terminated input into the sole 28-byte global error string at 0xB2B614. After observation, SpeedTreeRT 4.1 SpeedTreeRT.cpp:2671-2677 corroborates SetError and g_strError.",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,13 +631,13 @@
   },
   {
     "ea": "0x78C821",
-    "line": "lea     ecx, [ebp+var_4C]",
+    "line": "lea     ecx, [ebp+var_4C]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x78C824",
-    "line": "call    sub_79AB00",
+    "line": "call    OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -709,19 +709,19 @@
   },
   {
     "ea": "0x78C843",
-    "line": "push    edi",
+    "line": "push    edi; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78C844",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x78C846",
-    "line": "call    sub_788430",
+    "line": "call    CSpeedTreeRT__GetSimpleBillboardGeometry; 2026-05-21 360 gap pass: simple billboard fallback behind GetGeometry bit 0x08; stock TES4 tree builders use separate STBB paths and do not call this dispatcher branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -778,5 +778,71 @@
     "line": "retn    14h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CB860",
+    "line": "lea     ecx, [ebp+result]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB863",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB868",
+    "line": "lea     ecx, [ebp+var_4C]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB86B",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB870",
+    "line": "mov     edx, [esp-4+geometryFlags]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CB874",
+    "line": "lea     eax, [edx+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB877",
+    "line": "mov     ecx, [edx-50h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB87A",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CB87C",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB881",
+    "line": "mov     eax, offset stru_AF450C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB886",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

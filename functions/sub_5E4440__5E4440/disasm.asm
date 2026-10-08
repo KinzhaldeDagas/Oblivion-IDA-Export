@@ -21,7 +21,7 @@
 0x5E4473: push    0
 0x5E4475: push    edi
 0x5E4476: call    edx
-0x5E4478: call    sub_5C1900
+0x5E4478: call    PlayerCharacter_ReconcileHotkeysAfterInventoryRemoval
 0x5E447D: mov     edi, [edi+64h]
 0x5E4480: test    edi, edi
 0x5E4482: jz      short loc_5E4489

@@ -28,6 +28,6 @@
 0x57A925: fnstsw  ax
 0x57A927: test    ah, 44h
 0x57A92A: jp      short loc_57A931
-0x57A92C: jmp     sub_599EE0
+0x57A92C: jmp     ContainerMenu_Create
 0x57A931: xor     eax, eax
 0x57A933: retn

@@ -1,28 +1,20 @@
-void *__thiscall SummonCreatureEffect_Save(_DWORD *this, int a2)
+void *__thiscall SummonCreatureEffect_Save(_DWORD *this, unsigned int source)
 {
   int v3; // eax
   void *result; // eax
-  size_t v5; // [esp-4h] [ebp-8h]
-  size_t v6; // [esp-4h] [ebp-8h]
-  size_t v7; // [esp-4h] [ebp-8h]
-  size_t v8; // [esp-4h] [ebp-8h]
 
-  AssociatedItemEffect_Save(a2);
-  v3 = *(this + 0xF);
-  a2 = 0;
-  if ( v3 )
-    a2 = *(_DWORD *)(v3 + 0xC);
-  SaveLoad_SaveFormID(SaveLoad_CurrentSavegame, (int)&a2, 4u);
-  LODWORD(v5) = 1;
-  result = SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, this + 0x10, v5);
-  if ( !*(this + 0xF) )
+  AssociatedItemEffect_Save(source); /*0x6a5468*/
+  v3 = *(this + 0xF); /*0x6a546d*/
+  source = 0; /*0x6a5472*/
+  if ( v3 ) /*0x6a547a*/
+    source = *(_DWORD *)(v3 + 0xC); /*0x6a547f*/
+  SaveLoad_SaveFormID(g_TESSaveLoadGame, &source, 4u); /*0x6a5490*/
+  result = SaveLoad_SaveData(g_TESSaveLoadGame, this + 0x10, 1u); /*0x6a54a1*/
+  if ( !*(this + 0xF) ) /*0x6a54a6*/
   {
-    LODWORD(v6) = 4;
-    SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, this + 0x11, v6);
-    LODWORD(v7) = 0xC;
-    SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, this + 0x12, v7);
-    LODWORD(v8) = 0xC;
-    return SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, this + 0x15, v8);
+    SaveLoad_SaveData(g_TESSaveLoadGame, this + 0x11, 4u); /*0x6a54b8*/
+    SaveLoad_SaveData(g_TESSaveLoadGame, this + 0x12, 0xCu); /*0x6a54c9*/
+    return SaveLoad_SaveData(g_TESSaveLoadGame, this + 0x15, 0xCu); /*0x6a54da*/
   }
-  return result;
+  return result; /*0x6a54df*/
 }

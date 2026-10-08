@@ -50,12 +50,12 @@
 0x52164F: call    BSStringT_Set
 0x521654: push    1
 0x521656: mov     ecx, esi
-0x521658: call    sub_452910
+0x521658: call    NiTLargeArray_Resize32
 0x52165D: push    1; int
 0x52165F: mov     dword ptr [esi+14h], 1
 0x521666: mov     ecx, ds:0B33A1Ch
 0x52166C: push    edi; char *
-0x52166D: call    sub_435830
+0x52166D: call    BuildKFListForModelDirectory; Builds a KF path list for a model directory. Feeds ModelLoader KF discovery used by actor animation setup and generated attack/idle lists.
 0x521672: push    esi
 0x521673: push    edi
 0x521674: mov     ecx, ebp
@@ -70,3 +70,15 @@
 0x52168E: pop     ebp
 0x52168F: add     esp, 0Ch
 0x521692: retn    4
+0x9C8290: mov     eax, [ebp+4]
+0x9C8293: push    eax
+0x9C8294: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C8299: pop     ecx
+0x9C829A: retn
+0x9C829B: mov     edx, [esp+arg_4]
+0x9C829F: lea     eax, [edx-0Ch]
+0x9C82A2: mov     ecx, [edx-10h]
+0x9C82A5: xor     ecx, eax
+0x9C82A7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C82AC: mov     eax, offset stru_AF0554
+0x9C82B1: jmp     ___CxxFrameHandler3

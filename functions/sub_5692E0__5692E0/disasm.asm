@@ -21,11 +21,11 @@
 0x569310: mov     edx, [eax+3Ch]
 0x569313: call    edx
 0x569315: fld     [esp+2Ch+arg_C]
-0x569319: mov     ecx, offset TimeGlobals
+0x569319: mov     ecx, 0B332E0h
 0x56931E: fstp    [esp+2Ch+arg_C]
 0x569322: call    TimeGlobals_GetGameDay
 0x569327: movsx   eax, al
-0x56932A: mov     ecx, offset TimeGlobals
+0x56932A: mov     ecx, 0B332E0h
 0x56932F: mov     [esp+2Ch+var_8], eax
 0x569333: call    TimeGlobals_GetGameMonth
 0x569338: test    ebx, ebx
@@ -34,9 +34,9 @@
 0x569344: jmp     short loc_56934E
 0x569346: mov     edi, [esp+2Ch+var_14]
 0x56934A: mov     esi, [esp+2Ch+arg_0]
-0x56934E: mov     ecx, esi
+0x56934E: mov     ecx, esi; this
 0x569350: mov     [esp+2Ch+var_18], edi
-0x569354: call    sub_5E0380
+0x569354: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x569359: cmp     dword ptr [edi+4], 0
 0x56935D: mov     [esp+2Ch+var_C], eax
 0x569361: jnz     short loc_569370
@@ -65,7 +65,7 @@
 0x5693A6: mov     al, [esi+1]
 0x5693A9: cmp     al, 0FFh
 0x5693AB: jz      short loc_5693BE
-0x5693AD: mov     ecx, offset TimeGlobals
+0x5693AD: mov     ecx, 0B332E0h
 0x5693B2: movsx   ebp, al
 0x5693B5: call    TimeGlobals_GetGameDayOfWeek
 0x5693BA: cmp     ebp, eax
@@ -96,7 +96,7 @@
 0x5693FB: cmp     dword ptr [edi+18h], 0FFFFFFFFh
 0x5693FF: jnz     short loc_569408
 0x569401: mov     ecx, edi
-0x569403: call    sub_5672A0
+0x569403: call    sub_5672A0; 3DTheft decode: TESPackage procedure-array resolver is a mutator. It writes TESPackage+0x18/procedureArrayIndex directly; callers should not use EAX as the row result.
 0x569408: push    edi
 0x569409: mov     ecx, esi
 0x56940B: call    BSSimpleList_PushBack
@@ -136,12 +136,12 @@
 0x569480: mov     ecx, [esp+2Ch+var_4]
 0x569484: cmp     [esp+2Ch+var_1C], ecx
 0x569488: jnz     short loc_5694A8
-0x56948A: mov     ecx, offset TimeGlobals
+0x56948A: mov     ecx, 0B332E0h
 0x56948F: call    TimeGlobals_GetGameHour
-0x569494: call    Double_To_SInt32
+0x569494: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x569499: fld     [esp+2Ch+arg_C]
 0x56949D: mov     esi, eax
-0x56949F: call    Double_To_SInt32
+0x56949F: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5694A4: cmp     eax, esi
 0x5694A6: jge     short loc_5694B0
 0x5694A8: test    ebx, ebx
@@ -164,7 +164,6 @@
 0x5694D7: jz      short loc_56952B
 0x5694D9: jmp     short loc_5694E4
 0x5694DB: jmp     short loc_5694E0
-0x5694DD: align 10h
 0x5694E0: mov     al, byte ptr [esp+2Ch+arg_0]
 0x5694E4: test    al, al
 0x5694E6: jz      short loc_56952B

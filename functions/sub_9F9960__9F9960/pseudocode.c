@@ -1,5 +1,5 @@
-int sub_9F9960()
+int InitSetting_sSkillNameMysticism()
 {
-  GameSetting_ConstrAndReg((int *)&unk_B3A0F4, (int)"sSkillNameMysticism", (int)"Mysticism");
-  return atexit(sub_A23A20);
+  GameSetting_ConstrAndReg(&g_sSkillNameMysticism, "sSkillNameMysticism", "Mysticism"); /*0x9f996f*/
+  return atexit(sub_A23A20); /*0x9f997f*/
 }

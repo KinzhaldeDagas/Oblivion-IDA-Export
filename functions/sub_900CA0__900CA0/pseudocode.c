@@ -14,7 +14,7 @@ int __cdecl sub_900CA0(int **a1, int **a2, __m128 *a3, int a4, int *a5)
   _DWORD *v16; // eax
   int v17; // ecx
   int v18; // edx
-  __m128 *v19; // eax
+  int *v19; // eax
   __m128 v20; // xmm3
   __m128 v21; // xmm5
   int v22; // edx
@@ -67,135 +67,138 @@ int __cdecl sub_900CA0(int **a1, int **a2, __m128 *a3, int a4, int *a5)
   __int32 v70; // [esp+F8h] [ebp-1Ch]
   _QWORD v71[3]; // [esp+FCh] [ebp-18h]
 
-  ThreadLocalStoragePointer = NtCurrentTeb()->ThreadLocalStoragePointer;
-  v6 = ThreadLocalStoragePointer[TlsIndex];
-  if ( *(_DWORD *)(v6 + 0x1A4) < *(_DWORD *)(v6 + 0x1A8) )
+  ThreadLocalStoragePointer = NtCurrentTeb()->ThreadLocalStoragePointer; /*0x900cb4*/
+  v6 = ThreadLocalStoragePointer[MEMORY[0xBA9DE4]]; /*0x900cbb*/
+  if ( *(_DWORD *)(v6 + 0x1A4) < *(_DWORD *)(v6 + 0x1A8) ) /*0x900ccb*/
   {
-    v7 = ThreadLocalStoragePointer[TlsIndex];
-    v8 = *(_DWORD **)(v6 + 0x1A4);
-    *v8 = "LtHeightField";
-    v8[3] = "ClosestPoints";
-    v9 = __rdtsc();
-    v8[1] = v9;
-    *(_DWORD *)(v7 + 0x1A4) = v8 + 4;
+    v7 = ThreadLocalStoragePointer[MEMORY[0xBA9DE4]]; /*0x900ccd*/
+    v8 = *(_DWORD **)(v6 + 0x1A4); /*0x900ccf*/
+    *v8 = "LtHeightField"; /*0x900cd5*/
+    v8[3] = "ClosestPoints"; /*0x900cdb*/
+    v9 = __rdtsc(); /*0x900ce2*/
+    v8[1] = v9; /*0x900cec*/
+    *(_DWORD *)(v7 + 0x1A4) = v8 + 4; /*0x900cf2*/
   }
-  if ( a5 )
-    sub_900770(a1, (int)a2, (int)a3, a5);
-  v10 = ThreadLocalStoragePointer[TlsIndex];
-  if ( *(_DWORD *)(v10 + 0x1A4) < *(_DWORD *)(v10 + 0x1A8) )
+  if ( a5 ) /*0x900d03*/
+    sub_900770(a1, (int)a2, (int)a3, a5); /*0x900d0c*/
+  v10 = ThreadLocalStoragePointer[MEMORY[0xBA9DE4]]; /*0x900d1a*/
+  if ( *(_DWORD *)(v10 + 0x1A4) < *(_DWORD *)(v10 + 0x1A8) ) /*0x900d29*/
   {
-    v11 = ThreadLocalStoragePointer[TlsIndex];
-    v12 = *(_DWORD **)(v10 + 0x1A4);
-    *v12 = "StGetSpheres";
-    v13 = __rdtsc();
-    v12[1] = v13;
-    *(_DWORD *)(v11 + 0x1A4) = v12 + 3;
+    v11 = ThreadLocalStoragePointer[MEMORY[0xBA9DE4]]; /*0x900d2b*/
+    v12 = *(_DWORD **)(v10 + 0x1A4); /*0x900d2d*/
+    *v12 = "StGetSpheres"; /*0x900d33*/
+    v13 = __rdtsc(); /*0x900d39*/
+    v12[1] = v13; /*0x900d43*/
+    *(_DWORD *)(v11 + 0x1A4) = v12 + 3; /*0x900d49*/
   }
-  v14 = (__m128 *)a2[2];
-  v15 = *a1;
-  v49 = (__m128 *)a1[2];
-  v53 = *a2;
-  sub_8B1FF0(v56, v14, v49);
-  (*(void (__thiscall **)(int *, int *))(*v15 + 0x1C))(v15, &v51);
-  v52 = *((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + TlsIndex);
-  v16 = *(_DWORD **)(v52 + 0x19C);
-  v55 = v51;
-  if ( !v16 )
-    v16 = (_DWORD *)dword_BA7D9C;
-  v17 = v16[8];
-  v18 = 0x10 * (v51 + 1);
-  if ( (unsigned int)(v17 + v18) > v16[0xB] )
+  v14 = (__m128 *)a2[2]; /*0x900d54*/
+  v15 = *a1; /*0x900d57*/
+  v49 = (__m128 *)a1[2]; /*0x900d59*/
+  v53 = *a2; /*0x900d5a*/
+  sub_8B1FF0(v56, v14, v49); /*0x900d63*/
+  (*(void (__thiscall **)(int *, int *))(*v15 + 0x1C))(v15, &v51); /*0x900d71*/
+  v52 = *((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + MEMORY[0xBA9DE4]); /*0x900d87*/
+  v16 = *(_DWORD **)(v52 + 0x19C); /*0x900d8b*/
+  v55 = v51; /*0x900d93*/
+  if ( !v16 ) /*0x900d97*/
+    v16 = (_DWORD *)unk_BA7D9C; /*0x900d99*/
+  v17 = v16[8]; /*0x900da1*/
+  v18 = 0x10 * (v51 + 1); /*0x900da7*/
+  if ( (unsigned int)(v17 + v18) > v16[0xB] ) /*0x900db0*/
   {
-    v50 = (*(int (__thiscall **)(_DWORD *, int))(*v16 + 0xC))(v16, v18);
+    v50 = (*(int (__thiscall **)(_DWORD *, int))(*v16 + 0xC))(v16, v18); /*0x900dc3*/
   }
   else
   {
-    v16[8] = v17 + v18;
-    v50 = v17;
+    v16[8] = v17 + v18; /*0x900db2*/
+    v50 = v17; /*0x900db5*/
   }
-  v19 = (__m128 *)a2[2];
-  v20 = v19[2];
-  v21 = v19[1];
-  v22 = *v15;
-  v23 = _mm_shuffle_ps(v20, v20, 0x44);
-  v24 = _mm_shuffle_ps(*v19, v21, 0x44);
-  *(__m128 *)&v71[1] = _mm_add_ps(
+  v19 = a2[2]; /*0x900dc7*/
+  v20 = *((__m128 *)v19 + 2); /*0x900dca*/
+  v21 = *((__m128 *)v19 + 1); /*0x900dd1*/
+  v22 = *v15; /*0x900de0*/
+  v23 = _mm_shuffle_ps(v20, v20, 0x44); /*0x900de5*/
+  v24 = _mm_shuffle_ps(*(__m128 *)v19, v21, 0x44); /*0x900def*/
+  *(__m128 *)&v71[1] = _mm_add_ps( /*0x900e34*/
                          _mm_add_ps(
                            _mm_mul_ps(_mm_shuffle_ps(v24, v23, 0x88), _mm_shuffle_ps(a3[1], a3[1], 0)),
                            _mm_mul_ps(_mm_shuffle_ps(v24, v23, 0xDD), _mm_shuffle_ps(a3[1], a3[1], 0x55))),
                          _mm_mul_ps(
-                           _mm_shuffle_ps(_mm_shuffle_ps(*v19, v21, 0xEE), _mm_shuffle_ps(v20, v20, 0xEE), 0x88),
+                           _mm_shuffle_ps(
+                             _mm_shuffle_ps(*(__m128 *)v19, v21, 0xEE),
+                             _mm_shuffle_ps(v20, v20, 0xEE),
+                             0x88),
                            _mm_shuffle_ps(a3[1], a3[1], 0xAA)));
-  v25 = (__m128 *)(*(int (__thiscall **)(int *, int))(v22 + 0x20))(v15, v50);
-  v26 = *((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + TlsIndex);
-  if ( *(_DWORD *)(v26 + 0x1A4) < *(_DWORD *)(v26 + 0x1A8) )
+  v25 = (__m128 *)(*(int (__thiscall **)(int *, int))(v22 + 0x20))(v15, v50); /*0x900e4c*/
+  v26 = *((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + MEMORY[0xBA9DE4]); /*0x900e4e*/
+  if ( *(_DWORD *)(v26 + 0x1A4) < *(_DWORD *)(v26 + 0x1A8) ) /*0x900e5d*/
   {
-    v27 = *(_DWORD **)(v52 + 0x1A4);
-    *v27 = "StCastSpheres";
-    v28 = __rdtsc();
-    v54 = v28;
-    HIDWORD(v28) = v52;
-    v27[1] = v28;
-    *(_DWORD *)(HIDWORD(v28) + 0x1A4) = v27 + 3;
+    v27 = *(_DWORD **)(v52 + 0x1A4); /*0x900e63*/
+    *v27 = "StCastSpheres"; /*0x900e69*/
+    v28 = __rdtsc(); /*0x900e6f*/
+    v54 = v28; /*0x900e71*/
+    HIDWORD(v28) = v52; /*0x900e79*/
+    v27[1] = v28; /*0x900e7d*/
+    *(_DWORD *)(HIDWORD(v28) + 0x1A4) = v27 + 3; /*0x900e83*/
   }
-  v29 = a3[1].m128_i32[0];
-  v70 = a3[2].m128_i32[0];
-  v30 = a3[1].m128_i32[1];
-  v60 = v29;
-  v31 = a3[1].m128_i32[2];
-  v61 = v30;
-  v32 = a3[1].m128_i32[3];
-  v33 = v55;
-  v62 = v31;
-  v63 = v32;
-  v67 = 0;
-  v68 = 0;
-  v57[1] = 0x3F800000;
-  v57[0] = &off_A9BA78;
-  v64 = a1;
-  v65 = a4;
-  if ( v55 > 0 )
+  v29 = a3[1].m128_i32[0]; /*0x900e8f*/
+  v70 = a3[2].m128_i32[0]; /*0x900e91*/
+  v30 = a3[1].m128_i32[1]; /*0x900e98*/
+  v60 = v29; /*0x900e9b*/
+  v31 = a3[1].m128_i32[2]; /*0x900ea2*/
+  v61 = v30; /*0x900ea5*/
+  v32 = a3[1].m128_i32[3]; /*0x900eac*/
+  v33 = v55; /*0x900eaf*/
+  v62 = v31; /*0x900eb7*/
+  v63 = v32; /*0x900ec1*/
+  v67 = 0; /*0x900ecb*/
+  v68 = 0; /*0x900ed2*/
+  v57[1] = 0x3F800000; /*0x900ed9*/
+  v57[0] = &off_A9BA78; /*0x900ee1*/
+  v64 = a1; /*0x900ee9*/
+  v65 = a4; /*0x900ef0*/
+  if ( v55 > 0 ) /*0x900ef7*/
   {
-    do
+    do /*0x900fb7*/
     {
-      v34 = _mm_shuffle_ps(*v25, *v25, 0xAA);
-      v35 = _mm_shuffle_ps(*v25, *v25, 0);
-      v36 = _mm_shuffle_ps(*v25, *v25, 0x55);
-      v69 = v25->m128_i32[3];
-      v37 = a1[2];
-      v66[0] = _mm_add_ps(
+      v34 = _mm_shuffle_ps(*v25, *v25, 0xAA); /*0x900f19*/
+      v35 = _mm_shuffle_ps(*v25, *v25, 0); /*0x900f23*/
+      v36 = _mm_shuffle_ps(*v25, *v25, 0x55); /*0x900f27*/
+      v69 = v25->m128_i32[3]; /*0x900f3e*/
+      v37 = a1[2]; /*0x900f45*/
+      v66[0] = _mm_add_ps( /*0x900f58*/
                  _mm_add_ps(_mm_mul_ps(v56[0], v35), _mm_mul_ps(v56[1], v36)),
                  _mm_add_ps(_mm_mul_ps(v56[2], v34), v56[3]));
-      v66[1] = _mm_add_ps(v66[0], *(__m128 *)&v71[1]);
-      v38 = _mm_mul_ps(*((__m128 *)v37 + 2), v34);
-      v39 = *(__m128 *)v37;
-      v40 = _mm_add_ps(v38, *((__m128 *)v37 + 3));
-      v41 = *((__m128 *)v37 + 1);
-      v42 = *v53;
-      v59 = v69;
-      v58 = _mm_add_ps(_mm_add_ps(_mm_mul_ps(v39, v35), _mm_mul_ps(v41, v36)), v40);
-      (*(void (__thiscall **)(int *, __m128 *, int **, _DWORD *))(v42 + 0x20))(v53, v66, a2, v57);
-      ++v25;
-      --v33;
+      v66[1] = _mm_add_ps(v66[0], *(__m128 *)&v71[1]); /*0x900f68*/
+      v38 = _mm_mul_ps(*((__m128 *)v37 + 2), v34); /*0x900f78*/
+      v39 = *(__m128 *)v37; /*0x900f7b*/
+      v40 = _mm_add_ps(v38, *((__m128 *)v37 + 3)); /*0x900f7e*/
+      v41 = *((__m128 *)v37 + 1); /*0x900f81*/
+      v42 = *v53; /*0x900f85*/
+      v59 = v69; /*0x900f87*/
+      v58 = _mm_add_ps(_mm_add_ps(_mm_mul_ps(v39, v35), _mm_mul_ps(v41, v36)), v40); /*0x900fa8*/
+      (*(void (__thiscall **)(int *, __m128 *, int **, _DWORD *))(v42 + 0x20))(v53, v66, a2, v57); /*0x900fb0*/
+      ++v25; /*0x900fb3*/
+      --v33; /*0x900fb6*/
     }
-    while ( v33 );
+    while ( v33 ); /*0x900fb7*/
   }
-  v43 = *(_DWORD **)(v52 + 0x19C);
-  if ( !v43 )
-    v43 = (_DWORD *)dword_BA7D9C;
-  v44 = v50 == v43[0xA];
-  v43[8] = v50;
-  if ( v44 )
-    (*(void (__thiscall **)(_DWORD *, int))(*v43 + 0x10))(v43, v50);
-  LODWORD(v45) = *((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + TlsIndex);
-  if ( *(_DWORD *)(v45 + 0x1A4) < *(_DWORD *)(v45 + 0x1A8) )
+  v43 = *(_DWORD **)(v52 + 0x19C); /*0x900fc1*/
+  if ( !v43 ) /*0x900fc9*/
+    v43 = (_DWORD *)unk_BA7D9C; /*0x900fcb*/
+  v44 = v50 == v43[0xA]; /*0x900fd4*/
+  v43[8] = v50; /*0x900fd7*/
+  if ( v44 ) /*0x900fda*/
+    (*(void (__thiscall **)(_DWORD *, int))(*v43 + 0x10))(v43, v50); /*0x900fe1*/
+  LODWORD(v45) = *((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + MEMORY[0xBA9DE4]); /*0x900ff1*/
+  if ( *(_DWORD *)(v45 + 0x1A4) < *(_DWORD *)(v45 + 0x1A8) ) /*0x901000*/
   {
-    v46 = v52;
-    v47 = *(_DWORD **)(v52 + 0x1A4);
-    *v47 = "lt";
-    v45 = __rdtsc();
-    v47[1] = v45;
-    *(_DWORD *)(v46 + 0x1A4) = v47 + 3;
+    v46 = v52; /*0x901002*/
+    v47 = *(_DWORD **)(v52 + 0x1A4); /*0x901006*/
+    *v47 = "lt"; /*0x90100c*/
+    v45 = __rdtsc(); /*0x901012*/
+    v47[1] = v45; /*0x90101c*/
+    *(_DWORD *)(v46 + 0x1A4) = v47 + 3; /*0x901022*/
   }
-  return v45;
+  return v45; /*0x901028*/
 }

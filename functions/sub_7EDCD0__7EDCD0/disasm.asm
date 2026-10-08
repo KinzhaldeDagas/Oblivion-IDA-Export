@@ -1,4 +1,4 @@
-0x7EDCD0: mov     ecx, [esp+arg_0]
+0x7EDCD0: mov     ecx, [esp+lightSlot]; Lighting30 type-0x1B light decode. Point/special flavor writes light world position to LightData.xyz and underlying NiLight+0xF8 range/control to .w.
 0x7EDCD4: sub     esp, 38h
 0x7EDCD7: cmp     ecx, 14h
 0x7EDCDA: push    ebx
@@ -18,9 +18,9 @@
 0x7EDD02: mov     edx, ds:0B25AD8h
 0x7EDD08: mov     [eax+8], edx
 0x7EDD0B: mov     edx, ds:0B25ADCh
-0x7EDD11: push    ecx
+0x7EDD11: push    ecx; lightSlot
 0x7EDD12: mov     [eax+0Ch], edx
-0x7EDD15: call    sub_7FAB00
+0x7EDD15: call    Lighting30Shader_WriteLightColorConstant; Lighting30 per-light pixel constant writer. For lightSlot 0..19 writes four floats to ConstantGroup global slot 0x47D+8*slot, mapping slot 0 to pixel c9 (LightColor), slot 1 to c11, and so on.
 0x7EDD1A: add     esp, 14h
 0x7EDD1D: pop     edi
 0x7EDD1E: pop     esi
@@ -31,7 +31,7 @@
 0x7EDD25: lea     eax, [esp+48h+var_34]
 0x7EDD29: push    eax
 0x7EDD2A: mov     ecx, ebp
-0x7EDD2C: call    sub_405AD0
+0x7EDD2C: call    ShadowSceneLight_GetLightRef
 0x7EDD31: mov     esi, [eax]
 0x7EDD33: mov     eax, [esp+48h+var_34]
 0x7EDD37: test    eax, eax
@@ -46,10 +46,10 @@
 0x7EDD4D: jz      short loc_7EDD59
 0x7EDD4F: mov     edx, [edi]
 0x7EDD51: mov     eax, [edx]
-0x7EDD53: push    1
+0x7EDD53: push    1; w
 0x7EDD55: mov     ecx, edi
 0x7EDD57: call    eax
-0x7EDD59: mov     bl, [ebp+0FCh]
+0x7EDD59: mov     bl, [ebp+0FCh]; OblivionNew: ShadowSceneLight+0xFC is the Lighting30 emitter flavor selector. Nonzero emits underlying NiLight world position (+0x88) and radius/control (+0xF8); zero emits normalized direction (+0x108). Getter405AD0 copies +0x100 directly; +0xF4 is a separate wrapper byte, not a selector in this getter. Exact NiPointLight backing alone does not prove point emission.
 0x7EDD5F: fld     [esp+48h+arg_8]
 0x7EDD63: test    bl, bl
 0x7EDD65: jnz     loc_7EDF0D
@@ -63,7 +63,7 @@
 0x7EDD87: lea     ecx, [esp+48h+var_1C]
 0x7EDD8B: mov     [esp+48h+var_18], edx
 0x7EDD8F: mov     [esp+48h+var_14], eax
-0x7EDD93: call    sub_43F350
+0x7EDD93: call    Vector3_NormalizeInPlace; Lighting30 first normalizes the raw world directional vector here with43F350 before writing LightData. Later7FB6F0 negates it, applies inverse-world normal transform, D3DX normalization and43F350 normalization. GPU source publication must preserve this initial normalization too.
 0x7EDD98: fstp    st
 0x7EDD9A: fld     [esp+48h+var_1C]
 0x7EDD9E: sub     esp, 10h
@@ -83,16 +83,16 @@
 0x7EDDCE: mov     [eax+8], ecx
 0x7EDDD1: mov     edx, [esp+58h+var_20]
 0x7EDDD5: mov     [eax+0Ch], edx
-0x7EDDD8: mov     eax, [esp+58h+arg_0]
-0x7EDDDC: push    eax
-0x7EDDDD: call    sub_7FAAD0
+0x7EDDD8: mov     eax, [esp+58h+lightSlot]
+0x7EDDDC: push    eax; lightSlot
+0x7EDDDD: call    Lighting30Shader_WriteLightDataConstant; Directional flavor writes normalized light direction and w=1 to LightData.
 0x7EDDE2: fld     [esp+5Ch+arg_8]
 0x7EDDE6: add     esp, 14h
-0x7EDDE9: cmp     byte ptr ds:0B42EA7h, 0
+0x7EDDE9: cmp     byte ptr ds:0B42EA7h, 0; Ambient write gate: B42EA7==0 admits the directional-emitter ambient path. Otherwise RTTI test is NiAmbientLight (B40224, initialized atA0A830), not NiDirectionalLight. World-sun ambient profile must not assume this gated path always writes c0.
 0x7EDDF0: jz      short loc_7EDE0E
-0x7EDDF2: push    esi
+0x7EDDF2: push    esi; w
 0x7EDDF3: fstp    st
-0x7EDDF5: push    offset dword_B40224
+0x7EDDF5: push    offset stru_B40224; z
 0x7EDDFA: call    NiRTTI__IsObjectOfRTTIType
 0x7EDDFF: add     esp, 8
 0x7EDE02: test    al, al
@@ -147,7 +147,7 @@
 0x7EDEB9: fxch    st(1)
 0x7EDEBB: faddp   st(3), st
 0x7EDEBD: fxch    st(2)
-0x7EDEBF: fstp    [esp+48h+var_30]
+0x7EDEBF: fstp    [esp+48h+var_30]; Instruction-traced ambient floor metric is float(.33 + r*.33 + g*.34 + b), after ambient RGB times effective light dimmer; it is not ordinary weighted luminance. If floor>0 and metric>0, scale max(1,floor/metric) multiplies each RGB+.1; metric<=0 yields floor RGB. Property dimmer applies afterward. Constants A924F0/A924F8/A2FC80 hold double representations of float .33/.34/.1.
 0x7EDEC3: fld     [esp+48h+var_30]
 0x7EDEC7: fcom    st(4)
 0x7EDEC9: fnstsw  ax
@@ -202,9 +202,9 @@
 0x7EDF89: mov     edx, [esp+58h+var_4]
 0x7EDF8D: mov     [eax+8], ecx
 0x7EDF90: mov     [eax+0Ch], edx
-0x7EDF93: mov     eax, [esp+58h+arg_0]
-0x7EDF97: push    eax
-0x7EDF98: call    sub_7FAAD0
+0x7EDF93: mov     eax, [esp+58h+lightSlot]
+0x7EDF97: push    eax; lightSlot
+0x7EDF98: call    Lighting30Shader_WriteLightDataConstant; Point/special type-0x1B flavor writes light world position to LightData.xyz and underlying NiLight+0xF8 range/control to LightData.w.
 0x7EDF9D: add     esp, 14h
 0x7EDFA0: jmp     loc_7EE053
 0x7EDFA5: fld     dword ptr ds:0B46924h
@@ -261,14 +261,14 @@
 0x7EE040: fstp    [esp+58h+var_4]
 0x7EE044: mov     edx, [esp+58h+var_4]
 0x7EE048: mov     [eax+0Ch], edx
-0x7EE04B: call    sub_7FAB30
+0x7EE04B: call    Lighting30Shader_WritePixelConstantC0; Lighting30 pixel ConstantGroup c0 writer (global slots 0x459..0x45C).
 0x7EE050: add     esp, 10h
 0x7EE053: fld     [esp+48h+arg_8]
 0x7EE057: fld     dword ptr [esi+0DCh]
 0x7EE05D: mov     cl, ds:0B43070h
 0x7EE063: test    cl, cl
 0x7EE065: fstp    [esp+48h+var_38]
-0x7EE069: fld     [esp+48h+var_38]
+0x7EE069: fld     [esp+48h+var_38]; LightColor: if byte B43070 is zero, clamp underlying NiLight+DC dimmer only when >1.0 (A2F928 is double1.0). Preserve lower/signed values. RGB multiplication stages store float intermediates.
 0x7EE06D: jnz     short loc_7EE088
 0x7EE06F: fcom    qword ptr ds:0A2F928h
 0x7EE075: fnstsw  ax
@@ -309,7 +309,7 @@
 0x7EE0F4: fmul    st, st(1)
 0x7EE0F6: fstp    [esp+48h+var_24]
 0x7EE0FA: fld     dword ptr [ebp+0D4h]
-0x7EE100: fstp    [esp+48h+var_30]
+0x7EE100: fstp    [esp+48h+var_30]; LightColor RGB order: backing+EC diffuse * effective light dimmer, then local shader property+94 dimmer, then wrapper+D4 strength. Alpha/w is wrapper+D8, without these RGB scales.
 0x7EE104: fld     [esp+48h+var_30]
 0x7EE108: fld     st
 0x7EE10A: fmul    [esp+48h+var_2C]
@@ -325,7 +325,7 @@
 0x7EE12A: fnstsw  ax
 0x7EE12C: test    ah, 41h
 0x7EE12F: jnz     short loc_7EE172
-0x7EE131: mov     eax, ds:0B3FA90h
+0x7EE131: mov     eax, ds:0B3FA90h; For point emitter (+FC nonzero) with propertyDimmer<1, overwrite RGB with direct globals B3FA90/B3FA94/B3FA98. For directional emitter with B43070 nonzero and B43074 zero, multiply final RGB by B42F4C instead.
 0x7EE136: mov     ecx, ds:0B3FA94h
 0x7EE13C: mov     edx, ds:0B3FA98h
 0x7EE142: mov     [esp+48h+var_2C], eax
@@ -340,7 +340,7 @@
 0x7EE15F: fld     dword ptr ds:0B42F4Ch
 0x7EE165: push    ecx
 0x7EE166: lea     ecx, [esp+4Ch+var_2C]
-0x7EE16A: fstp    [esp+4Ch+var_4C]; float
+0x7EE16A: fstp    [esp+4Ch+w]; w
 0x7EE16D: call    NiPoint3__MutliplyByValue
 0x7EE172: fld     [esp+48h+var_2C]
 0x7EE176: sub     esp, 10h
@@ -360,9 +360,9 @@
 0x7EE1AA: mov     edx, [esp+58h+var_4]
 0x7EE1AE: mov     [eax+8], ecx
 0x7EE1B1: mov     [eax+0Ch], edx
-0x7EE1B4: mov     eax, [esp+58h+arg_0]
-0x7EE1B8: push    eax
-0x7EE1B9: call    sub_7FAB00
+0x7EE1B4: mov     eax, [esp+58h+lightSlot]
+0x7EE1B8: push    eax; lightSlot
+0x7EE1B9: call    Lighting30Shader_WriteLightColorConstant; Write LightColor from underlying light RGB, dimmer/property factors, and ShadowSceneLight+0xD8 alpha/strength.
 0x7EE1BE: add     esp, 14h
 0x7EE1C1: pop     edi
 0x7EE1C2: pop     esi

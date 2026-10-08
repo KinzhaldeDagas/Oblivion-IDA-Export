@@ -1,28 +1,54 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "$9DE94AE655916AB43489A1596F68C68B",
+  "definition": "union $9DE94AE655916AB43489A1596F68C68B\n{\nRAWMOUSE_0 mouse;\nRAWKEYBOARD keyboard;\nRAWHID hid;\n}\n",
   "id": 18374686479671861650,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "mouse",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "RAWMOUSE_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "keyboard",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "RAWKEYBOARD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hid",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 12
+      "size": 12,
+      "type": "RAWHID"
     }
   ],
   "name": "$9DE94AE655916AB43489A1596F68C68B",
+  "ordinal": 7428,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 24
 }

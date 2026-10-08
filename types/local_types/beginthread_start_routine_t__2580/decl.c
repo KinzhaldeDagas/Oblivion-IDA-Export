@@ -1,1 +1,1 @@
-_beginthread_start_routine_t
+typedef void (*_beginthread_start_routine_t)(void *);

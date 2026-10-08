@@ -22,7 +22,7 @@
 0x503845: mov     dword ptr [esp+34h+var_8], 0
 0x50384D: mov     [esp+34h+var_C], 0
 0x503855: mov     [esp+34h+var_4], 0
-0x50385D: call    Script_ExtractArgs
+0x50385D: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x503862: add     esp, 28h
 0x503865: test    al, al
 0x503867: jnz     short loc_50386D

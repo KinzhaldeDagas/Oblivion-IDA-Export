@@ -2,7 +2,7 @@
 0x9EAA36: push    ecx
 0x9EAA37: fstp    [esp+4+var_4]; float
 0x9EAA3A: push    offset aFperksneakat_8; "fPerkSneakAttackMarksmanMasterMult"
-0x9EAA3F: mov     ecx, offset fPerkSneakAttackMarksmanMasterMult
+0x9EAA3F: mov     ecx, (offset flt_B37328+58h)
 0x9EAA44: call    GameSetting_ConstrAndReg_float
 0x9EAA49: push    offset sub_A1EE20; void (__cdecl *)()
 0x9EAA4E: call    _atexit

@@ -30,7 +30,7 @@
 0x4E5516: call    edx
 0x4E5518: pop     esi
 0x4E5519: mov     ecx, ds:0B35F88h; this
-0x4E551F: call    NiAVObject_InitializePropertyState
+0x4E551F: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x4E5524: mov     ecx, ds:0B35F88h
 0x4E552A: call    NiNode_UpdateDynamicEffectState
 0x4E552F: fldz
@@ -38,6 +38,6 @@
 0x4E5533: push    ecx
 0x4E5534: mov     ecx, ds:0B35F88h; this
 0x4E553A: fstp    [esp+0Ch+a2]; a2
-0x4E553D: call    NiAVObject_UpdateNiAVObject
+0x4E553D: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x4E5542: pop     ecx
 0x4E5543: retn

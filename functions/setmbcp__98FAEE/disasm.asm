@@ -55,17 +55,17 @@
 0x98FBA9: pop     ecx
 0x98FBAA: and     [ebp+ms_exc.registration.TryLevel], 0
 0x98FBAE: mov     eax, [ebx+4]
-0x98FBB1: mov     dword_BAA614, eax
+0x98FBB1: mov     dword_BA9E10+804h, eax
 0x98FBB6: mov     eax, [ebx+8]
-0x98FBB9: mov     dword_BAA618, eax
+0x98FBB9: mov     dword_BA9E10+808h, eax
 0x98FBBE: mov     eax, [ebx+0Ch]
-0x98FBC1: mov     dword_BAA61C, eax
+0x98FBC1: mov     dword_BA9E10+80Ch, eax
 0x98FBC6: xor     eax, eax
 0x98FBC8: mov     [ebp+var_1C], eax
 0x98FBCB: cmp     eax, 5
 0x98FBCE: jge     short loc_98FBE0
 0x98FBD0: mov     cx, [ebx+eax*2+10h]
-0x98FBD5: mov     word_BAA608[eax*2], cx
+0x98FBD5: mov     word ptr dword_BA9E10+7F8h[eax*2], cx
 0x98FBDD: inc     eax
 0x98FBDE: jmp     short loc_98FBC8
 0x98FBE0: xor     eax, eax
@@ -104,3 +104,14 @@
 0x98FC51: call    __unlock
 0x98FC56: pop     ecx
 0x98FC57: retn
+0x98FC5A: cmp     eax, 0FFFFFFFFh
+0x98FC5D: jnz     short __setmbcp___$LN28_2
+0x98FC5F: cmp     ebx, offset dword_B31390
+0x98FC65: jz      short loc_98FC6E
+0x98FC67: push    ebx; Memory
+0x98FC68: call    _free
+0x98FC6D: pop     ecx
+0x98FC6E: call    __errno
+0x98FC73: mov     dword ptr [eax], 16h
+0x98FC79: jmp     short __setmbcp___$LN28_2
+0x98FC7B: and     [ebp+var_20], 0

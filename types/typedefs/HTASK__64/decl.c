@@ -1,1 +1,1 @@
-HTASK
+typedef HTASK__ *HTASK;

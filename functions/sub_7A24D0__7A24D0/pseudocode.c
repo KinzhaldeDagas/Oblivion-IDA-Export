@@ -1,5 +1,6 @@
-void __thiscall sub_7A24D0(float *this, float a2, float a3)
+// CTreeEngine::SetLodLimits: stores caller near/far limits at CTreeEngine+0x44/+0x40.
+void __thiscall CTreeEngine__SetLodLimits(OB_CTreeEngine_010201A0 *this, float nearDistance, float farDistance)
 {
-  *(this + 0x11) = a2;
-  *(this + 0x10) = a3;
+  this->treeNearLodDistance = nearDistance; /*0x7a24d4*/
+  this->treeFarLodDistance = farDistance; /*0x7a24db*/
 }

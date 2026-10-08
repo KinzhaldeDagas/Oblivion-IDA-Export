@@ -26,7 +26,7 @@ void __stdcall sub_57EA20(NiObject *a1, float arg4, float a3)
   long double v27; // st4
   unsigned int m_uiRefCount_high; // eax
   unsigned int v29; // esi
-  NiNode *v30; // eax
+  NiObject *v30; // eax
   float v31; // [esp+0h] [ebp-1Ch]
   float a2; // [esp+4h] [ebp-18h]
   float v34; // [esp+24h] [ebp+8h]
@@ -35,130 +35,130 @@ void __stdcall sub_57EA20(NiObject *a1, float arg4, float a3)
 
   if ( a1 )
   {
-    v4 = a1->__vftable->Unk_02(a1);
-    NiPropertyByID = NiNode_GetNiPropertyByID((NiNode *)a1, 2);
-    v6 = sub_588E60((int)v4);
-    if ( !v6 )
+    v4 = a1->__vftable->Unk_02(a1); /*0x57ea42*/
+    NiPropertyByID = NiNode_GetNiPropertyByID((NiNode *)a1, 2); /*0x57ea4a*/
+    v6 = sub_588E60((int)v4); /*0x57ea51*/
+    if ( !v6 ) /*0x57ea58*/
     {
-      if ( v4 )
-        v6 = sub_588E60(v4[3].members.m_uiRefCount);
+      if ( v4 ) /*0x57ea5c*/
+        v6 = sub_588E60(v4[3].members.m_uiRefCount); /*0x57ea6a*/
     }
-    if ( v6 )
+    if ( v6 ) /*0x57ea76*/
     {
-      if ( fConstant_2 == Tile_GetFloat(v6, 0xFA9) )
+      if ( fConstant_2 == Tile_GetFloat(v6, 0xFA9) ) /*0x57ea97*/
       {
-        v34 = fabs(arg4);
-        if ( v34 >= 1.0 )
-          Tile_SetFloat(v6, (_DWORD *)0xFA1, fConstant_2);
+        v34 = fabs(arg4); /*0x57eaa2*/
+        if ( v34 >= 1.0 ) /*0x57eab5*/
+          Tile_SetFloat(v6, 0xFA1u, fConstant_2); /*0x57ead8*/
         else
-          Tile_SetFloat(v6, (_DWORD *)0xFA1, 1.0);
-        return;
+          Tile_SetFloat(v6, 0xFA1u, 1.0); /*0x57eac1*/
+        return; /*0x57eacb*/
       }
-      a3 = Tile_GetFloat(v6, 0xFA7) / dbl_A3DDD8;
+      a3 = Tile_GetFloat(v6, 0xFA7) / dbl_A3DDD8; /*0x57eaf9*/
     }
-    v7 = NiRTTI_Cast((BSStringT *)dword_B3FCD4, a1);
-    v8 = a3;
-    v9 = arg4;
-    v10 = v7;
+    v7 = NiRTTI_Cast((BSStringT *)&stru_B3FCD4, a1); /*0x57eb03*/
+    v8 = a3; /*0x57eb08*/
+    v9 = arg4; /*0x57eb0c*/
+    v10 = v7; /*0x57eb10*/
     if ( v7 && (m_uiRefCount = v7[0x16].members.m_uiRefCount, (v12 = *(_DWORD *)(m_uiRefCount + 0x24)) != 0) )
     {
-      v13 = *(unsigned __int16 *)(m_uiRefCount + 8);
+      v13 = *(unsigned __int16 *)(m_uiRefCount + 8); /*0x57eb2e*/
       if ( v13 )
       {
-        v14 = (float *)(v12 + 0xC);
-        v15 = v13;
-        v35 = fabs(v9);
-        v16 = dbl_A68FE0;
-        v17 = 0.0;
-        v18 = v35;
+        v14 = (float *)(v12 + 0xC); /*0x57eb38*/
+        v15 = v13; /*0x57eb3d*/
+        v35 = fabs(v9); /*0x57eb3f*/
+        v16 = dbl_A68FE0; /*0x57eb43*/
+        v17 = 0.0; /*0x57eb49*/
+        v18 = v35; /*0x57eb4d*/
         while ( 1 )
         {
           if ( v18 >= v16 )
           {
-            v23 = v8 * v9;
+            v23 = v8 * v9; /*0x57eb66*/
             v24 = v8 * v9 >= v8 ? a3 : v23;
-            if ( v24 >= 0.0 )
+            if ( v24 >= 0.0 ) /*0x57eb7e*/
             {
-              if ( v23 >= v8 )
-                v23 = a3;
+              if ( v23 >= v8 ) /*0x57eb8d*/
+                v23 = a3; /*0x57eb91*/
             }
             else
             {
-              v23 = 0.0;
+              v23 = 0.0; /*0x57eb82*/
             }
-            *v14 = v23;
-            v25 = v18;
-            v21 = v17;
-            v22 = v25;
+            *v14 = v23; /*0x57eb93*/
+            v25 = v18; /*0x57eb95*/
+            v21 = v17; /*0x57eb95*/
+            v22 = v25; /*0x57eb95*/
           }
           else
           {
-            v20 = v18;
-            v21 = v17;
-            v22 = v20;
-            *v14 = v21;
+            v20 = v18; /*0x57eb5e*/
+            v21 = v17; /*0x57eb5e*/
+            v22 = v20; /*0x57eb5e*/
+            *v14 = v21; /*0x57eb60*/
           }
-          v14 += 4;
-          if ( !--v15 )
-            break;
-          v19 = v21;
-          v18 = v22;
-          v17 = v19;
+          v14 += 4; /*0x57eb97*/
+          if ( !--v15 ) /*0x57eb9d*/
+            break; /*0x57eb9d*/
+          v19 = v21; /*0x57eb53*/
+          v18 = v22; /*0x57eb53*/
+          v17 = v19; /*0x57eb53*/
         }
       }
-      *(_WORD *)(v10[0x16].members.m_uiRefCount + 0x2E) |= 4u;
+      *(_WORD *)(v10[0x16].members.m_uiRefCount + 0x2E) |= 4u; /*0x57ebad*/
     }
-    else if ( NiPropertyByID )
+    else if ( NiPropertyByID ) /*0x57ebb6*/
     {
-      v36 = fabs(v9);
-      if ( v36 >= dbl_A68FE0 )
+      v36 = fabs(v9); /*0x57ebbc*/
+      if ( v36 >= dbl_A68FE0 ) /*0x57ebcf*/
       {
-        v26 = v8 * v9;
-        if ( v8 * v9 >= v8 )
-          v27 = a3;
+        v26 = v8 * v9; /*0x57ebda*/
+        if ( v8 * v9 >= v8 ) /*0x57ebe3*/
+          v27 = a3; /*0x57ebe9*/
         else
-          v27 = v26;
-        if ( v27 >= 0.0 )
+          v27 = v26; /*0x57ebe5*/
+        if ( v27 >= 0.0 ) /*0x57ebf6*/
         {
-          if ( v26 >= v8 )
-            v26 = a3;
+          if ( v26 >= v8 ) /*0x57ec05*/
+            v26 = a3; /*0x57ec09*/
         }
         else
         {
-          v26 = 0.0;
+          v26 = 0.0; /*0x57ebf8*/
         }
-        *(float *)&NiPropertyByID[3].members.m_pcName = v26;
+        *(float *)&NiPropertyByID[3].members.m_pcName = v26; /*0x57ec0b*/
       }
       else
       {
-        *(float *)&NiPropertyByID[3].members.m_pcName = 0.0;
+        *(float *)&NiPropertyByID[3].members.m_pcName = 0.0; /*0x57ebd3*/
       }
-      ++NiPropertyByID[3].members.m_controller;
+      ++NiPropertyByID[3].members.m_controller; /*0x57ec0e*/
     }
     if ( v4 )
     {
-      if ( v6 )
+      if ( v6 ) /*0x57ec18*/
       {
-        if ( Tile_GetFloat(v6, 0xFA8) == flt_A68FD8 )
-          return;
-        v8 = a3;
-        v9 = arg4;
+        if ( Tile_GetFloat(v6, 0xFA8) == flt_A68FD8 ) /*0x57ec35*/
+          return; /*0x57ec35*/
+        v8 = a3; /*0x57ec37*/
+        v9 = arg4; /*0x57ec3b*/
       }
-      m_uiRefCount_high = HIWORD(v4[0x16].members.m_uiRefCount);
-      v29 = 0;
+      m_uiRefCount_high = HIWORD(v4[0x16].members.m_uiRefCount); /*0x57ec3f*/
+      v29 = 0; /*0x57ec46*/
       if ( HIWORD(v4[0x16].members.m_uiRefCount) )
       {
         while ( 1 )
         {
-          v30 = m_uiRefCount_high > v29 ? *((NiNode **)&v4[0x16].__vftable->super.Destructor + v29) : 0;
-          a2 = v8;
-          v31 = v9;
-          sub_57EA20(v30, v31, a2);
-          m_uiRefCount_high = HIWORD(v4[0x16].members.m_uiRefCount);
-          if ( ++v29 >= m_uiRefCount_high )
-            break;
-          v8 = a3;
-          v9 = arg4;
+          v30 = m_uiRefCount_high > v29 ? *((NiObject **)&v4[0x16].__vftable->super.Destructor + v29) : 0;
+          a2 = v8; /*0x57ec82*/
+          v31 = v9; /*0x57ec86*/
+          sub_57EA20(v30, v31, a2); /*0x57ec8a*/
+          m_uiRefCount_high = HIWORD(v4[0x16].members.m_uiRefCount); /*0x57ec8f*/
+          if ( ++v29 >= m_uiRefCount_high ) /*0x57ec9b*/
+            break; /*0x57ec9b*/
+          v8 = a3; /*0x57ec60*/
+          v9 = arg4; /*0x57ec64*/
         }
       }
     }

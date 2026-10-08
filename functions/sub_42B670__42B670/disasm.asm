@@ -1,4 +1,4 @@
-0x42B670: sub     esp, 1Ch
+0x42B670: sub     esp, 1Ch; XTEL loader: verifies current type, zero-initializes 28-byte scratch every call, bounded-read max 28, then copies all seven dwords to TeleportData. Empty therefore clears all; short is prefix+zero; oversized is 27 bytes plus forced final zero; repeats replace rather than prefix-overlay prior data.
 0x42B673: push    esi
 0x42B674: push    edi
 0x42B675: mov     edi, [esp+24h+a1]
@@ -21,7 +21,7 @@
 0x42B6AD: lea     eax, [esp+28h+Dst]
 0x42B6B1: push    eax; Dst
 0x42B6B2: mov     ecx, edi; a1
-0x42B6B4: call    TESFile_GetChunkData
+0x42B6B4: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x42B6B9: mov     ecx, dword ptr [esp+24h+Dst]
 0x42B6BD: mov     edx, [esp+24h+var_18]
 0x42B6C1: mov     eax, [esp+24h+var_14]

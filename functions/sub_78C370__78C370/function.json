@@ -1,19 +1,36 @@
 {
-  "callees_count": 16,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 4,
-  "display_name": "sub_78C370",
+  "chunks": [
+    [
+      "0x78C370",
+      "0x78C4CB"
+    ],
+    [
+      "0x9CB800",
+      "0x9CB82B"
+    ]
+  ],
+  "chunks_sha256": "f420afe555e330aefc22e908954f59817d662040371d435c1bcf8bfded9fac83",
+  "comment_regular": "Computes static leaf lighting when lighting engine style at +0x38 requests it.\n[RT4.1 parity v147 2026-10-08] Exact preparation boundary78CD53 after native InitTables and before method test: bytes8B530C8B4238, EBX=tree, replay lighting=tree+0C then method=lighting+38, resume78CD59. CTreeEngine leafLOD vectors at+D4; count low word+C0. Tree bounds pointer tree+40 has minXYZ,maxXYZ used for center. v147 builds owned four-corner colors at this boundary for captured static intent but does not publish colors to renderer. Ref comparison1234 checks, gateway and196 patch transaction checks passed; live UNVERIFIED.\n\nCSpeedTreeRT::ComputeLeafStaticLighting per local 4.1: compute tree center from bounds and pass leaves/LOD count to lighting engine.",
+  "comment_repeatable": "CSpeedTreeRT::ComputeLeafStaticLighting per local 4.1: compute tree center from bounds and pass leaves/LOD count to lighting engine.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 31,
+  "display_name": "CSpeedTreeRT__ComputeLeafStaticLighting",
   "end_ea": "0x78C4CB",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_78C370",
+  "name": "CSpeedTreeRT__ComputeLeafStaticLighting",
   "segment": ".text",
   "sha256": "ff99fc91d19931179ecd3446de6481ae63199bdc9863f5d0e20757696ebbeee6",
   "size": 347,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78C370",
-  "type": "void __thiscall(int *this)",
-  "xrefs_from_count": 132,
+  "total_chunk_size": 390,
+  "type": "void __thiscall(OB_CSpeedTreeRT_010201A0 *this)",
+  "xrefs_from_count": 171,
   "xrefs_to_count": 1
 }

@@ -2,8 +2,8 @@
 0x4F83D2: push    esi
 0x4F83D3: mov     esi, [esp+4+arg_C]
 0x4F83D7: fstp    qword ptr [esi]
-0x4F83D9: mov     ecx, ds:0B333C4h
-0x4F83DF: call    Actor_GetDefaultClass
+0x4F83D9: mov     ecx, ds:0B333C4h; this
+0x4F83DF: call    Player_GetDefaultClassRecommendation; Resolve Oblivion's default/recommended class. If the actor already has a non-sentinel class, return it. Otherwise classify all 21 deferred chargen skill-use totals by TESSkill specialization, normalize the three shares to seven implied major slots, and select/cache a preset class.
 0x4F83E4: mov     edx, [esp+4+arg_4]
 0x4F83E8: xor     ecx, ecx
 0x4F83EA: test    edx, edx

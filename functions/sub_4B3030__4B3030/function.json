@@ -1,19 +1,32 @@
 {
-  "callees_count": 20,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 11,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4B3030",
+      "0x4B31CA"
+    ]
+  ],
+  "chunks_sha256": "38b7935d56f7df5fd0cd1ae2fcfe895002869ca5da28bf2a223d58b6c6de7246",
+  "comment_regular": "Verified Oblivion base-object distant-instance record carries position XYZ, rotationAnglesXYZ, scalePercent, and a cellLODBuffer; the queued task builds NiAVObject transform as BaseRotation * RxTransposed * Ry * Rz and applies abs(floor(scalePercent)/100). Fallout's inspected DistantLODShaderProperty::AddDistantLOD feeds DistantLODGroup::DistantLODInstanceData with position XYZ plus one fScaleColor float and no rotation-angle array. This is a renderer/layout divergence, not an offset match.",
+  "comment_repeatable": "Verified Oblivion base-object distant-instance record carries position XYZ, rotationAnglesXYZ, scalePercent, and a cellLODBuffer; the queued task builds NiAVObject transform as BaseRotation * RxTransposed * Ry * Rz and applies abs(floor(scalePercent)/100). Fallout's inspected DistantLODShaderProperty::AddDistantLOD feeds DistantLODGroup::DistantLODInstanceData with position XYZ plus one fScaleColor float and no rotation-angle array. This is a renderer/layout divergence, not an offset match.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4B3030",
+  "display_name": "TESBoundObject_UpdateDistantLODInstances",
   "end_ea": "0x4B31CA",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "sub_4B3030",
+  "name": "TESBoundObject_UpdateDistantLODInstances",
   "segment": ".text",
   "sha256": "38b7935d56f7df5fd0cd1ae2fcfe895002869ca5da28bf2a223d58b6c6de7246",
   "size": 410,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4B3030",
-  "type": "void __thiscall(char *this, int, float *, int, unsigned int, int, int, int, Ni2DBuffer *)",
+  "total_chunk_size": 410,
+  "type": "void __thiscall(TESBoundObject *this, NiPoint3 *positions, NiPoint3 *rotationAnglesXYZ, float *scalePercent, unsigned int recordCount, unsigned int cellChunk, unsigned int packedCellLabel, NiNode *instancedLODNode, Ni2DBuffer *cellLODBuffer)",
   "xrefs_from_count": 142,
   "xrefs_to_count": 32
 }

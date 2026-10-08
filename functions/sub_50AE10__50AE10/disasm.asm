@@ -20,7 +20,7 @@
 0x50AE40: push    ecx; a1
 0x50AE41: mov     dword ptr [esp+30h+var_8], 0
 0x50AE49: mov     [esp+30h+var_4], 0
-0x50AE51: call    Script_ExtractArgs
+0x50AE51: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x50AE56: add     esp, 24h
 0x50AE59: test    al, al
 0x50AE5B: jnz     short loc_50AE62
@@ -80,8 +80,8 @@
 0x50AF04: mov     eax, [esi+58h]
 0x50AF07: cmp     dword ptr [eax+8], 0
 0x50AF0B: jz      short loc_50AF55
-0x50AF0D: mov     ecx, [eax+8]
-0x50AF10: call    sub_5660A0
+0x50AF0D: mov     ecx, [eax+8]; self
+0x50AF10: call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).
 0x50AF15: test    al, al
 0x50AF17: jnz     short loc_50AF55
 0x50AF19: push    ebx
@@ -110,11 +110,11 @@
 0x50AF54: pop     ebx
 0x50AF55: push    1; a4
 0x50AF57: push    0; a3
-0x50AF59: mov     ecx, edi
-0x50AF5B: call    sub_5E0380
+0x50AF59: mov     ecx, edi; this
+0x50AF5B: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x50AF60: push    eax; a2
 0x50AF61: mov     ecx, esi; this
-0x50AF63: call    Actor_AddPackage?
+0x50AF63: call    Actor_AddPackage?; 3DTheft: xrefs ignore this function's return value; use current package/process state after call, not AL/EAX, as the package assignment result.
 0x50AF68: mov     esi, [esi+58h]
 0x50AF6B: mov     edx, [esi]
 0x50AF6D: mov     eax, dword ptr [esp+10h+var_8]

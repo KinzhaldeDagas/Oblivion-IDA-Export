@@ -1,4 +1,4 @@
-0x7C1360: push    ecx
+0x7C1360: push    ecx; Oblivion-authoritative: returns the current shadow depth-stencil buffer when it is at least ShadowSurfaceRes square; otherwise lazily creates a shared square buffer using the configured shadow depth format.
 0x7C1361: mov     eax, [ecx+40h]
 0x7C1364: test    eax, eax
 0x7C1366: mov     edx, ds:0B2C994h
@@ -19,27 +19,27 @@
 0x7C1395: push    ebp
 0x7C1396: push    edx; a1
 0x7C1397: call    CreateSurfaceData
-0x7C139C: mov     ebx, eax
+0x7C139C: mov     ebx, eax; Create pixel/surface description data for the R32F shadow render-target format.
 0x7C139E: mov     eax, [esi]
 0x7C13A0: mov     edx, [eax+98h]
 0x7C13A6: add     esp, 4
 0x7C13A9: push    ebx
 0x7C13AA: mov     ecx, esi
-0x7C13AC: call    edx
+0x7C13AC: call    edx; Request a compatible shared depth/stencil surface description; the DX9 selector ranks supported formats toward 24 depth bits and 8 stencil bits.
 0x7C13AE: mov     ebp, eax
 0x7C13B0: push    ebp
 0x7C13B1: push    esi
 0x7C13B2: push    edi
 0x7C13B3: push    edi
-0x7C13B4: call    sub_70BC70
+0x7C13B4: call    sub_70BC70; Create the shared ShadowSurfaceRes-square depth/stencil buffer from the selected compatible format.
 0x7C13B9: mov     ecx, [esp+24h+var_4]; this
 0x7C13BD: add     esp, 10h
 0x7C13C0: push    eax; a2
 0x7C13C1: call    NiSmartPointer_Set??
 0x7C13C6: push    ebp
-0x7C13C7: call    FormHeapFree
+0x7C13C7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7C13CC: push    ebx
-0x7C13CD: call    FormHeapFree
+0x7C13CD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7C13D2: mov     eax, [esp+1Ch+var_4]
 0x7C13D6: add     esp, 8
 0x7C13D9: pop     ebp

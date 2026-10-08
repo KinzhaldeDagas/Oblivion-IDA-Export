@@ -1,1 +1,1 @@
-BroadcastParm_0
+typedef BroadcastParm BroadcastParm_0;

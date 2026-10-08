@@ -9,16 +9,16 @@
 0x4F076A: push    esi
 0x4F076B: push    edi
 0x4F076C: xor     esi, esi
-0x4F076E: call    Double_To_SInt32
+0x4F076E: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4F0773: fld     dword ptr [ebx+4]
 0x4F0776: mov     edi, eax
 0x4F0778: sar     edi, 0Ch
-0x4F077B: call    Double_To_SInt32
+0x4F077B: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4F0780: mov     ecx, [esp+24h+var_C]; this
 0x4F0784: mov     ebp, eax
 0x4F0786: sar     ebp, 0Ch
-0x4F0789: push    ebp; signed int
-0x4F078A: push    edi; signed int
+0x4F0789: push    ebp; cellY
+0x4F078A: push    edi; cellX
 0x4F078B: call    TESWorldSpace__GetCellAtCellCoord
 0x4F0790: test    eax, eax
 0x4F0792: jz      short loc_4F07C3
@@ -138,7 +138,6 @@
 0x4F0910: test    esi, esi
 0x4F0912: jle     loc_4F0A48
 0x4F0918: jmp     short loc_4F0920
-0x4F091A: align 10h
 0x4F0920: cmp     edi, 7FFFh
 0x4F0926: jg      loc_4F0A1B
 0x4F092C: cmp     ebp, 7FFFh
@@ -228,7 +227,6 @@
 0x4F0A4A: mov     [esp+24h+var_4], 0
 0x4F0A52: jle     loc_4F0BB7
 0x4F0A58: jmp     short loc_4F0A60
-0x4F0A5A: align 10h
 0x4F0A60: cmp     edi, 7FFFh
 0x4F0A66: jg      loc_4F0B7A
 0x4F0A6C: cmp     ebp, 7FFFh
@@ -338,7 +336,6 @@
 0x4F0BB9: mov     [esp+24h+var_4], 0
 0x4F0BC1: jle     loc_4F0D1F
 0x4F0BC7: jmp     short loc_4F0BD0
-0x4F0BC9: align 10h
 0x4F0BD0: cmp     edi, 7FFFh
 0x4F0BD6: jg      loc_4F0CE6
 0x4F0BDC: cmp     ebp, 7FFFh

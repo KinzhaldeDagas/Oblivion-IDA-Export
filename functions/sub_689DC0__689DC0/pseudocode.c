@@ -1,81 +1,70 @@
-void __thiscall sub_689DC0(char *this, TESObjectCELL **a2)
+// Verified post-A* road augmentation. It walks TravelPath nodes, switches to the linked door's WorldSpace and TeleportData marker position on teleport transitions, then asks that world's TESRoad to add surface-derived position nodes for applicable segments. TravelPath_ComputeDistance subsequently sums the added node segments, so road data changes the measured travel distance; this is route measurement/surface sampling, not the A* route search.
+void __thiscall TravelPath_AddRoadSegmentsForPath(TravelPath *this, TESObjectREFR *sourceRef)
 {
-  void *v3; // eax
-  TESObjectCELL *v4; // esi
-  int v5; // eax
-  char *v6; // edi
-  char *v7; // ebx
-  _BYTE *v8; // ebp
-  _BYTE *v9; // eax
-  TESObjectREFR **TeleportExtraData; // eax
-  char *v11; // ebx
-  char *v12; // eax
-  int **v13; // eax
-  int *NiNode; // eax
-  int **v15; // [esp-Ch] [ebp-24h]
-  char *v16; // [esp+8h] [ebp-10h]
-  int *v17; // [esp+Ch] [ebp-Ch] BYREF
-  int v18; // [esp+10h] [ebp-8h]
-  int v19; // [esp+14h] [ebp-4h]
-  float **v20; // [esp+1Ch] [ebp+4h]
+  TESForm *SpatialContainerAtPosition; // eax
+  TESWorldSpace *v4; // esi
+  BSSimpleList_VoidPtr *p_nodes; // edi
+  BSSimpleList_VoidPtr *v6; // ebx
+  const TravelPathNode *v7; // ebp
+  TESObjectREFR *Reference; // eax
+  TeleportData *TeleportData; // eax
+  char *v10; // ebx
+  TESRoad *worldspaceRoad; // eax
+  NiPoint3 *Position; // [esp-Ch] [ebp-24h]
+  BSSimpleList_VoidPtr *pathNodes; // [esp+8h] [ebp-10h]
+  NiPoint3 worldPosition; // [esp+Ch] [ebp-Ch] BYREF
+  Actor *data; // [esp+1Ch] [ebp+4h]
 
-  if ( a2 )
+  if ( sourceRef )
   {
-    if ( !Actor_IsCreature((Actor *)a2) )
+    if ( !Actor_IsCreature((Actor *)sourceRef) )
     {
-      sub_4D8AF0(a2);
-      v4 = (TESObjectCELL *)OblivionDynamicCast(
-                              v3,
+      SpatialContainerAtPosition = TESObjectREFR_GetSpatialContainerAtPosition(sourceRef); /*0x689df3*/
+      v4 = (TESWorldSpace *)OblivionDynamicCast( /*0x689dfe*/
+                              SpatialContainerAtPosition,
                               0,
                               (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                               &TESWorldSpace `RTTI Type Descriptor',
                               0);
-      v5 = ((int (__thiscall *)(TESObjectCELL **))(*a2)[4].members.super.modlist.next)(a2);
-      v17 = *(int **)v5;
-      v6 = this + 4;
-      v18 = *(_DWORD *)(v5 + 4);
-      v7 = 0;
-      v19 = *(_DWORD *)(v5 + 8);
-      v16 = v6;
-      while ( v6 )
+      worldPosition = *(NiPoint3 *)sourceRef->vtbl->GetPos(sourceRef); /*0x689e11*/
+      p_nodes = &this->nodes; /*0x689e18*/
+      v6 = 0; /*0x689e22*/
+      pathNodes = p_nodes; /*0x689e2a*/
+      while ( p_nodes )
       {
-        if ( !*((_DWORD *)v6 + 1) && !*(_DWORD *)v6 )
-          break;
-        v20 = *(float ***)v6;
-        v8 = v7 ? *(_BYTE **)v7 : 0;
-        if ( v8 )
+        if ( !p_nodes->firstNode.next && !p_nodes->firstNode.data ) /*0x689e3b*/
+          break; /*0x689e3e*/
+        data = (Actor *)p_nodes->firstNode.data; /*0x689e48*/
+        v7 = v6 ? (const TravelPathNode *)v6->firstNode.data : 0;
+        if ( v7 ) /*0x689e56*/
         {
-          v9 = (_BYTE *)sub_68B0F0(v8);
-          if ( v9 )
+          Reference = TravelPathNode_GetReference(v7); /*0x689e5a*/
+          if ( Reference ) /*0x689e61*/
           {
-            TeleportExtraData = (TESObjectREFR **)GetTeleportExtraData(v9);
-            v11 = (char *)TeleportExtraData;
-            if ( TeleportExtraData )
+            TeleportData = TESObjectREFR_GetTeleportData(Reference); /*0x689e65*/
+            v10 = (char *)TeleportData; /*0x689e6a*/
+            if ( TeleportData ) /*0x689e6e*/
             {
-              v4 = (TESObjectCELL *)sub_42B470(TeleportExtraData);
-              v12 = sub_6899C0(v11);
-              v17 = *(int **)v12;
-              v18 = *((_DWORD *)v12 + 1);
-              v19 = *((_DWORD *)v12 + 2);
-              if ( v4 )
+              v4 = sub_42B470(&TeleportData->linkedDoor); /*0x689e79*/
+              worldPosition = *(NiPoint3 *)EmbeddedList_GetHead(v10); /*0x689e84*/
+              if ( v4 ) /*0x689e96*/
               {
-                if ( sub_4F0600(v4, (float *)&v17) )
-                  v4 = 0;
+                if ( TESWorldSpace_FindSmallestSubSpaceContainingPosition(v4, &worldPosition.x) ) /*0x689e9f*/
+                  v4 = 0; /*0x689ea8*/
               }
             }
           }
         }
-        v7 = v6;
-        v6 = *((char **)v6 + 1);
-        if ( v4 )
+        v6 = p_nodes; /*0x689eac*/
+        p_nodes = (BSSimpleList_VoidPtr *)p_nodes->firstNode.next; /*0x689eae*/
+        if ( v4 ) /*0x689eb1*/
         {
-          if ( TESObjectCELL_GetNiNode_(v4) )
+          if ( GetObjectPointerAt_054(v4) ) /*0x689eb5*/
           {
-            sub_68B110(v20);
-            v15 = v13;
-            NiNode = (int *)TESObjectCELL_GetNiNode_(v4);
-            sub_4E97F0(NiNode, v16, (int)v8, &v17, v15);
-            v4 = 0;
+            Position = TravelPathNode_GetPosition((const TravelPathNode *)data); /*0x689ecb*/
+            worldspaceRoad = (TESRoad *)GetObjectPointerAt_054(v4); /*0x689ed5*/
+            TESRoad_AddTravelSurfaceSegment(worldspaceRoad, pathNodes, (int)v7, &worldPosition, Position); /*0x689edc*/
+            v4 = 0; /*0x689ee1*/
           }
         }
       }

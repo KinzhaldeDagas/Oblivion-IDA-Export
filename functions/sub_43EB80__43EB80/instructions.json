@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x43EC36",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -361,13 +361,13 @@
   },
   {
     "ea": "0x43EC50",
-    "line": "push    edi",
+    "line": "push    edi; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x43EC51",
-    "line": "call    sub_405790",
+    "line": "call    NiNode_GetChildAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x43EC9D",
-    "line": "lea     ecx, [esp+0DCh+var_B8]",
+    "line": "lea     ecx, [esp+0DCh+slot]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -559,13 +559,13 @@
   },
   {
     "ea": "0x43ECB6",
-    "line": "lea     ecx, [esp+0D8h+var_B8]; this",
+    "line": "lea     ecx, [esp+0D8h+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x43ECBA",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x43ECC7",
-    "line": "mov     ecx, [ebp+2Ch]",
+    "line": "mov     ecx, [ebp+2Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -613,13 +613,13 @@
   },
   {
     "ea": "0x43ECE0",
-    "line": "push    ebx",
+    "line": "push    ebx; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x43ECE1",
-    "line": "call    sub_405790",
+    "line": "call    NiNode_GetChildAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -781,13 +781,13 @@
   },
   {
     "ea": "0x43ED50",
-    "line": "push    offset sub_43ACE0; a5",
+    "line": "push    offset FaceGenMatrix_Destruct; a5",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x43ED55",
-    "line": "push    offset sub_43EB30; a4",
+    "line": "push    offset FaceGenMatrix_Construct; a4",
     "mnemonic": "push",
     "size": 5
   },
@@ -883,7 +883,7 @@
   },
   {
     "ea": "0x43ED91",
-    "line": "lea     ecx, [esp+0D8h+var_BC]; this",
+    "line": "lea     ecx, [esp+0D8h+var_BC]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -895,7 +895,7 @@
   },
   {
     "ea": "0x43ED9D",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -943,19 +943,19 @@
   },
   {
     "ea": "0x43EDB7",
-    "line": "push    eax",
+    "line": "push    eax; outAbsolute",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x43EDB8",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x43EDBA",
-    "line": "call    sub_5221C0",
+    "line": "call    TESNPC_BuildAbsoluteFaceGenParameters; Builds absolute FaceGen parameters by combining race base with active NPC delta. CORRECTION: bank selection uses base actor value 0x45 (vampirism), zero -> +0x108, nonzero -> +0x168; earlier sex-selected description was incorrect. Null race copies manager default parameters.",
     "mnemonic": "call",
     "size": 5
   },
@@ -967,7 +967,7 @@
   },
   {
     "ea": "0x43EDC4",
-    "line": "mov     ecx, offset stru_B39C80",
+    "line": "mov     ecx, offset unk_B39C80",
     "mnemonic": "mov",
     "size": 5
   },
@@ -997,7 +997,7 @@
   },
   {
     "ea": "0x43EDD9",
-    "line": "push    0; int",
+    "line": "push    0; basePositions",
     "mnemonic": "push",
     "size": 2
   },
@@ -1009,13 +1009,13 @@
   },
   {
     "ea": "0x43EDDC",
-    "line": "fstp    [esp+0E0h+var_E0]; float",
+    "line": "fstp    [esp+0E0h+morphScale]; morphScale",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x43EDDF",
-    "line": "push    esi; int",
+    "line": "push    esi; geometry",
     "mnemonic": "push",
     "size": 1
   },
@@ -1027,19 +1027,19 @@
   },
   {
     "ea": "0x43EDE4",
-    "line": "push    ecx; int",
+    "line": "push    ecx; parameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x43EDE5",
-    "line": "mov     ecx, [esp+0E8h+var_C4]",
+    "line": "mov     ecx, [esp+0E8h+var_C4]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x43EDE9",
-    "line": "call    sub_558840",
+    "line": "call    BSFaceGenModel_ApplyEGMMorph; Native EGM lock defects, statically verified: early failures after stream acquisition can return false without unlock; failed acquisition can still continue via cached base-vertex branch then success unlocks preexisting stream. Preconditions matter; runtime/shipped-asset reachability not established. IDA range +0x944 matches deployed EXE hash 33bcefd2c3f77a074957c9a8a22b445211c7ee83f533fcf8f6cfca843cd4bde0. PF guards source versions 1.19.11, but local PF DLL removed 2026-10-01 at user request. OCO LoadGame root cause remains unresolved.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1069,37 +1069,37 @@
   },
   {
     "ea": "0x43EDF9",
-    "line": "lea     ecx, [esp+0DCh+var_B4]",
+    "line": "lea     ecx, [esp+0DCh+right]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x43EDFD",
-    "line": "fstp    [esp+0DCh+var_DC]; float",
+    "line": "fstp    [esp+0DCh+angleY]; angleY",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x43EE00",
-    "line": "call    sub_70FD80",
+    "line": "call    NiMatrix33_InitRotationY; Verified matrix coefficients make this a Y-axis rotation: Y stays fixed; only the X/Z submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x43EE05",
-    "line": "lea     edx, [esp+0D8h+var_B4]",
+    "line": "lea     edx, [esp+0D8h+right]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x43EE09",
-    "line": "push    edx",
+    "line": "push    edx; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x43EE0A",
-    "line": "lea     eax, [esp+0DCh+var_30]",
+    "line": "lea     eax, [esp+0DCh+out]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -1111,19 +1111,19 @@
   },
   {
     "ea": "0x43EE14",
-    "line": "push    eax",
+    "line": "push    eax; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x43EE15",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x43EE17",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1147,7 +1147,7 @@
   },
   {
     "ea": "0x43EE25",
-    "line": "mov     ecx, offset stru_B39C80; lpCriticalSection",
+    "line": "mov     ecx, offset unk_B39C80; lpCriticalSection",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1159,7 +1159,7 @@
   },
   {
     "ea": "0x43EE2F",
-    "line": "lea     ecx, [esp+0D8h+lpCriticalSection]; this",
+    "line": "lea     ecx, [esp+0D8h+lpCriticalSection]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1171,13 +1171,13 @@
   },
   {
     "ea": "0x43EE3B",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x43EE40",
-    "line": "push    offset sub_43ACE0; void (__thiscall *)(void *)",
+    "line": "push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)",
     "mnemonic": "push",
     "size": 5
   },
@@ -1267,7 +1267,7 @@
   },
   {
     "ea": "0x43EE7B",
-    "line": "call    sub_4BD750",
+    "line": "call    DistantLODLoaderTask_SubmitToIOManager; Verified submission callback (+0x08 vtable): retains the DistantLODLoaderTask and inserts it into IOManager.taskQueue via sub_43A5F0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1336,5 +1336,101 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9ACF50",
+    "line": "push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x9ACF55",
+    "line": "push    4; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9ACF57",
+    "line": "push    18h; unsigned int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9ACF59",
+    "line": "lea     eax, [ebp-90h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9ACF5F",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9ACF60",
+    "line": "call    $LN21",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9ACF65",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9ACF66",
+    "line": "lea     ecx, [ebp-0C0h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9ACF6C",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9ACF71",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9ACF75",
+    "line": "lea     eax, [edx-0C8h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9ACF7B",
+    "line": "mov     ecx, [edx-0CCh]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9ACF81",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9ACF83",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9ACF88",
+    "line": "mov     eax, offset stru_AD9BAC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9ACF8D",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

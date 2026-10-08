@@ -1,4 +1,4 @@
-0x5F3C30: push    esi
+0x5F3C30: push    esi; ODismemberment combat decode: block stagger perk chance helper using shield/weapon/hand-to-hand state, mastery gate, and iPerkBlockStaggerChance.
 0x5F3C31: mov     esi, ecx
 0x5F3C33: mov     ecx, [esi+58h]
 0x5F3C36: mov     eax, [ecx]
@@ -17,8 +17,8 @@
 0x5F3C59: push    11h
 0x5F3C5B: mov     ecx, esi
 0x5F3C5D: call    Actor_GetBaseCalcAVi
-0x5F3C62: push    eax
-0x5F3C63: call    Calc_MasteryFromSkill
+0x5F3C62: push    eax; skillValue
+0x5F3C63: call    Calc_MasteryFromSkill; Map a base skill value to Oblivion's five mastery tiers using iSkillApprenticeMin=25, iSkillJourneymanMin=50, iSkillExpertMin=75, and iSkillMasterMin=100.
 0x5F3C68: add     esp, 4
 0x5F3C6B: cmp     eax, 3
 0x5F3C6E: jge     short loc_5F3C9E
@@ -28,8 +28,8 @@
 0x5F3C74: push    0Fh
 0x5F3C76: mov     ecx, esi
 0x5F3C78: call    Actor_GetBaseCalcAVi
-0x5F3C7D: push    eax
-0x5F3C7E: call    Calc_MasteryFromSkill
+0x5F3C7D: push    eax; skillValue
+0x5F3C7E: call    Calc_MasteryFromSkill; Map a base skill value to Oblivion's five mastery tiers using iSkillApprenticeMin=25, iSkillJourneymanMin=50, iSkillExpertMin=75, and iSkillMasterMin=100.
 0x5F3C83: add     esp, 4
 0x5F3C86: cmp     eax, 3
 0x5F3C89: jl      short loc_5F3C70
@@ -41,7 +41,7 @@
 0x5F3C9A: test    eax, eax
 0x5F3C9C: jz      short loc_5F3C70
 0x5F3C9E: push    0; Seed
-0x5F3CA0: call    GetRandomLargeInteger?
+0x5F3CA0: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x5F3CA5: cdq
 0x5F3CA6: mov     ecx, 64h ; 'd'
 0x5F3CAB: idiv    ecx

@@ -1,7 +1,7 @@
-0x650D20: push    ebp
+0x650D20: push    ebp; Rebuilds weapon and ammunition 3D for actorRef from this MiddleHighProcess's equipped data. Native ABI is ECX process plus one actorRef stack argument.
 0x650D21: push    esi
 0x650D22: push    edi
-0x650D23: mov     edi, [esp+0Ch+arg_0]
+0x650D23: mov     edi, [esp+0Ch+actorRef]
 0x650D27: push    0; int
 0x650D29: push    offset ??_R0?AVActor@@@8; struct TypeDescriptor *
 0x650D2E: push    offset ??_R0?AVMobileObject@@@8; struct _s_RTTICompleteObjectLocator *
@@ -50,7 +50,7 @@
 0x650DAC: mov     edx, [ebp+10Ch]
 0x650DB2: push    eax
 0x650DB3: mov     ecx, esi
-0x650DB5: call    edx
+0x650DB5: call    edx; Full equipment-3D rebuild captures equipped slot 0x0C (AMMO) from ContainerChanges into process equipped-ammo data.
 0x650DB7: mov     ebp, [esi]
 0x650DB9: push    0
 0x650DBB: push    0Dh
@@ -75,18 +75,18 @@
 0x650DF4: test    eax, eax
 0x650DF6: jz      short loc_650E03
 0x650DF8: mov     eax, [eax+8]
-0x650DFB: push    eax
-0x650DFC: mov     ecx, edi
-0x650DFE: call    EquipWeapon
-0x650E03: mov     ecx, edi
-0x650E05: call    sub_4DCCF0
+0x650DFB: push    eax; weapon
+0x650DFC: mov     ecx, edi; this
+0x650DFE: call    EquipWeapon; Equips the supplied form on this reference. The native ABI has one stack argument: the weapon/form pointer.
+0x650E03: mov     ecx, edi; this
+0x650E05: call    TESObjectREFR_ClearEquippedAmmo3D; Full equipment-3D rebuild explicitly clears existing equipped AMMO/quiver 3D before reconstructing equipment presentation. This is not a per-shot release path.
 0x650E0A: mov     eax, [esi+0ECh]
 0x650E10: test    eax, eax
 0x650E12: jz      short loc_650E1F
 0x650E14: mov     ecx, [eax+8]
-0x650E17: push    ecx
-0x650E18: mov     ecx, edi
-0x650E1A: call    sub_4E1DF0
+0x650E17: push    ecx; ammo
+0x650E18: mov     ecx, edi; this
+0x650E1A: call    TESObjectREFR_RefreshEquippedAmmo3D; Refreshes equipped-AMMO/quiver 3D for a reference. For PlayerCharacter it updates both relevant animation perspectives; then refreshes quiver arrow visibility and actor 3D state.
 0x650E1F: push    0
 0x650E21: mov     ecx, edi
 0x650E23: call    sub_4DC8F0
@@ -157,7 +157,7 @@
 0x650EDD: mov     ecx, esi
 0x650EDF: call    ContainerEntryExtraData_DestroyDataTable
 0x650EE4: push    esi
-0x650EE5: call    FormHeapFree
+0x650EE5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x650EEA: add     esp, 4
 0x650EED: push    0
 0x650EEF: mov     ecx, edi
@@ -172,7 +172,7 @@
 0x650F07: mov     ecx, ebp
 0x650F09: call    ContainerEntryExtraData_DestroyDataTable
 0x650F0E: push    ebp
-0x650F0F: call    FormHeapFree
+0x650F0F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x650F14: add     esp, 4
 0x650F17: mov     ecx, edi
 0x650F19: call    sub_4DD000
@@ -185,7 +185,7 @@
 0x650F2D: mov     ecx, ebx
 0x650F2F: call    ContainerEntryExtraData_DestroyDataTable
 0x650F34: push    ebx
-0x650F35: call    FormHeapFree
+0x650F35: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x650F3A: add     esp, 4
 0x650F3D: pop     ebx
 0x650F3E: pop     edi

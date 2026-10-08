@@ -133,7 +133,7 @@
 0x4DF9C8: lea     ebp, [esi+44h]
 0x4DF9CB: push    esi
 0x4DF9CC: mov     ecx, ebp
-0x4DF9CE: call    ExtraDataList_Link?
+0x4DF9CE: call    ExtraDataList_ResolveLoadedFormIDs; Verified post-load owner resolution: ExtraOwnership (type 0x27/XOWN) treats its stored dword as a FormID, rebases it with TESForm_ResolveFormID, resolves via TESForm_LookupByFormID, and replaces the slot with TESForm*. Missing owners remove the extra. ExtraGlobal (type 0x28/XGLB) follows the same path with a TESGlobal RTTI cast; missing/wrong-type globals remove their extra. ExtraRank (0x29/XRNK) is an inline signed value and is not FormID-linked.
 0x4DF9D3: mov     eax, [esi]
 0x4DF9D5: mov     edx, [eax+170h]
 0x4DF9DB: mov     ecx, esi
@@ -147,7 +147,7 @@
 0x4DF9EF: cmp     byte ptr [eax+4], 18h
 0x4DF9F3: jnz     short loc_4DFA1E
 0x4DF9F5: push    esi
-0x4DF9F6: call    TESObjectREFR__AddToLowPathWorld
+0x4DF9F6: call    TESObjectREFR__AddToLowPathWorld; Verified `LinkDoors` creates reciprocal TeleportData and calls this hook once for a1. The resulting single AStarWorldNode stores both door refs and both spatial forms; its map entries make it reachable from either endpoint space.
 0x4DF9FB: mov     eax, [esi]
 0x4DF9FD: mov     edx, [eax+170h]
 0x4DFA03: add     esp, 4
@@ -183,10 +183,10 @@
 0x4DFA5B: jz      short loc_4DFABD
 0x4DFA5D: push    2; newDeadState
 0x4DFA5F: mov     ecx, esi; this
-0x4DFA61: call    Actor_HandleDeathSTate????
+0x4DFA61: call    Actor_HandleDeathState
 0x4DFA66: push    3
 0x4DFA68: push    esi
-0x4DFA69: mov     ecx, offset ActorProcessManager_ptr
+0x4DFA69: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x4DFA6E: call    sub_674550
 0x4DFA73: jmp     short loc_4DFABD
 0x4DFA75: mov     eax, [esi]
@@ -221,7 +221,7 @@
 0x4DFAD2: test    al, 1
 0x4DFAD4: jz      short loc_4DFB49
 0x4DFAD6: mov     ecx, ebp
-0x4DFAD8: call    sub_420260
+0x4DFAD8: call    ExtraDataList_GetEnableStateParent; Returns the parent TESObjectREFR stored in ExtraEnableStateParent type 0x3F.
 0x4DFADD: mov     edi, eax
 0x4DFADF: test    edi, edi
 0x4DFAE1: jz      short loc_4DFB49
@@ -236,7 +236,7 @@
 0x4DFB03: push    0
 0x4DFB05: call    sub_45A530
 0x4DFB0A: mov     ecx, ebp
-0x4DFB0C: call    sub_420340
+0x4DFB0C: call    ExtraDataList_IsEnableStateInverse; Tests flag bit 0 of ExtraEnableStateParent, the inverse-enable-state flag.
 0x4DFB11: test    al, al
 0x4DFB13: jz      short loc_4DFB25
 0x4DFB15: mov     eax, [edi+8]
@@ -248,9 +248,9 @@
 0x4DFB25: mov     ecx, [edi+8]
 0x4DFB28: shr     ecx, 0Bh
 0x4DFB2B: and     ecx, 0FFFFFF01h
-0x4DFB31: push    ecx; a2
+0x4DFB31: push    ecx; disabled
 0x4DFB32: mov     ecx, esi; this
-0x4DFB34: call    TESForm_SetEnabled?
+0x4DFB34: call    TESForm_SetDisabledFlag; Verified Oblivion setter: the bool parameter sets or clears TESFormMembr.flags bit 0x800. TESObjectREFR_LinkModifiedForm propagates this bit through ExtraEnableStateParent and the enable-state activation routine clears it. CalcLowPathToPoint independently appends '-Disabled' when this bit is set. Fallout's mangled TESForm::SetDisabled directly writes the same 0x800 mask; this is a cross-check, not the basis of the Oblivion interpretation.
 0x4DFB39: mov     edx, [esp+40h+var_C]
 0x4DFB3D: mov     ecx, ds:0B33B00h
 0x4DFB43: push    edx
@@ -269,7 +269,7 @@
 0x4DFB76: mov     ecx, [esi+40h]; this
 0x4DFB79: test    ecx, ecx
 0x4DFB7B: jz      short loc_4DFBF3
-0x4DFB7D: call    TESObjectCELL_IsInterior
+0x4DFB7D: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x4DFB82: test    al, al
 0x4DFB84: jz      short loc_4DFBF3
 0x4DFB86: mov     edx, [esi]

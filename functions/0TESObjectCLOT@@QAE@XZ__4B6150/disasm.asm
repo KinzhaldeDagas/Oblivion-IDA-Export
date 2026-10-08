@@ -59,3 +59,24 @@
 0x4B622B: pop     ebx
 0x4B622C: add     esp, 10h
 0x4B622F: retn
+0x9B3A30: mov     ecx, [ebp-10h]
+0x9B3A33: jmp     TESObject_destr
+0x9B3A38: mov     ecx, [ebp-10h]
+0x9B3A3B: add     ecx, 24h ; '$'
+0x9B3A3E: jmp     TESFullName_Initialize
+0x9B3A43: mov     ecx, [ebp-10h]
+0x9B3A46: add     ecx, 4Ch ; 'L'
+0x9B3A49: jmp     TESValueForm_destr
+0x9B3A4E: mov     ecx, [ebp-10h]
+0x9B3A51: add     ecx, 54h ; 'T'
+0x9B3A54: jmp     TESWeightForm_destr
+0x9B3A59: mov     ecx, [ebp-10h]
+0x9B3A5C: add     ecx, 5Ch ; '\'
+0x9B3A5F: jmp     TESBipedModelForm_destr
+0x9B3A64: mov     edx, [esp+arg_4]
+0x9B3A68: lea     eax, [edx-14h]
+0x9B3A6B: mov     ecx, [edx-18h]
+0x9B3A6E: xor     ecx, eax
+0x9B3A70: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B3A75: mov     eax, offset stru_ADF42C
+0x9B3A7A: jmp     ___CxxFrameHandler3

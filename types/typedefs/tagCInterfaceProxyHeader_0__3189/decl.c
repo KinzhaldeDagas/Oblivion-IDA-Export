@@ -1,1 +1,5 @@
-tagCInterfaceProxyHeader_0
+struct tagCInterfaceProxyHeader_0
+{
+const void *pStublessProxyInfo;
+const IID *piid;
+};

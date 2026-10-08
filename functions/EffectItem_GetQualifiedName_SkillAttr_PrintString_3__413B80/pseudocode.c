@@ -6,6 +6,6 @@ int __userpurge EffectItem_GetQualifiedName_SkillAttr_::PrintString_3@<eax>(
 {
   const char *Name; // eax
 
-  Name = (const char *)ActorValue_GetName(*(_DWORD *)(a1 + 0x14));
-  return _sprintf(a3, "%s %s", a2, Name);
+  Name = (const char *)ActorValue_GetName(*(_DWORD *)(a1 + 0x14)); /*0x413b84*/
+  return _sprintf(a3, "%s %s", a2, Name); /*0x413ba1*/
 }

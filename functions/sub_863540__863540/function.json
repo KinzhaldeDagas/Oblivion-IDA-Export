@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x863540",
+      "0x8635D2"
+    ]
+  ],
+  "chunks_sha256": "ec6e7b067103aa70ccc9462960fa8af71fe5f5c1653813478e0f8863ed92ecbe",
+  "comment_regular": "Copies the inherited BSShaderPPLightingProperty state into the clone destination, then copies Lighting30's four floats at +0xF0..+0xFC and refcount-assigns the derived texture/object at +0x104.",
+  "comment_repeatable": "Copies the inherited BSShaderPPLightingProperty state into the clone destination, then copies Lighting30's four floats at +0xF0..+0xFC and refcount-assigns the derived texture/object at +0x104.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_863540",
+  "display_name": "Lighting30ShaderProperty__CopyToMembers",
   "end_ea": "0x8635D2",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_863540",
+  "name": "Lighting30ShaderProperty__CopyToMembers",
   "segment": ".text",
   "sha256": "ec6e7b067103aa70ccc9462960fa8af71fe5f5c1653813478e0f8863ed92ecbe",
   "size": 146,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x863540",
-  "type": "LONG __thiscall(_WORD *this, _DWORD *, int)",
+  "total_chunk_size": 146,
+  "type": "void __thiscall(Lighting30ShaderProperty *this, Lighting30ShaderProperty *destination, int cloningProcess)",
   "xrefs_from_count": 50,
   "xrefs_to_count": 1
 }

@@ -1,1 +1,1 @@
-IEnumMonikerVtbl_0
+typedef IEnumMonikerVtbl IEnumMonikerVtbl_0;

@@ -1,7 +1,7 @@
 0x438020: mov     eax, dword ptr [esp+a2]
 0x438024: push    esi
 0x438025: push    edi
-0x438026: mov     edi, TESDataHandler_g_PlayerRef
+0x438026: mov     edi, dword ptr reference
 0x43802C: push    eax; a2
 0x43802D: mov     esi, ecx
 0x43802F: call    sub_436500

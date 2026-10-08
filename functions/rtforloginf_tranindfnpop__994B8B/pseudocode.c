@@ -1,5 +1,5 @@
 // attributes: thunk
-int __usercall rtforloginf_::tranindfnpop@<eax>(int a1@<ebp>)
+void __usercall rtforloginf_::tranindfnpop(int a1@<ebp>)
 {
-  return negYTOX_::unknown_libname_130(a1);
+  negYTOX_::unknown_libname_130(a1); /*0x994b8b*/
 }

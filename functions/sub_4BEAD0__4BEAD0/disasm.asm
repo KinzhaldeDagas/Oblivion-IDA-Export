@@ -29,7 +29,6 @@
 0x4BEB10: lea     esi, [ebx+38h]
 0x4BEB13: mov     [esp+10h+arg_0], eax
 0x4BEB17: jmp     short loc_4BEB24
-0x4BEB19: align 10h
 0x4BEB20: mov     eax, [esp+10h+arg_0]
 0x4BEB24: mov     edx, [esi]
 0x4BEB26: add     eax, esi

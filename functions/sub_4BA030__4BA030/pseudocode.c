@@ -1,21 +1,24 @@
-unsigned __int8 __thiscall sub_4BA030(int this, int a2)
+// Verified: scans the uint32 seed array at +0x4C with uint16 count +0x52; returns byte index on match or 0xFF for empty/missing values. TESObjectREFR_SetTreeSeedByValue uses 0xFF to remove the per-reference seed extra.
+unsigned __int8 __thiscall TESObjectTREE_GetIndexForSeed(
+        TESObjectTREE_OblivionLayout_080_NiTArrayVerified *this,
+        unsigned int seed)
 {
-  unsigned int v2; // esi
+  unsigned int seedCount; // esi
   unsigned __int8 result; // al
   int v4; // edx
-  _DWORD *i; // ecx
+  unsigned int *i; // ecx
 
-  v2 = *(unsigned __int16 *)(this + 0x52);
-  result = 0xFF;
-  v4 = 0;
-  if ( *(_WORD *)(this + 0x52) )
+  seedCount = this->seedCount; /*0x4ba031*/
+  result = 0xFF; /*0x4ba035*/
+  v4 = 0; /*0x4ba037*/
+  if ( this->seedCount ) /*0x4ba031*/
   {
-    for ( i = *(_DWORD **)(this + 0x4C); *i != a2; ++i )
+    for ( i = this->seedValues; *i != seed; ++i ) /*0x4ba03d*/
     {
-      if ( ++v4 >= v2 )
-        return result;
+      if ( ++v4 >= seedCount ) /*0x4ba051*/
+        return result; /*0x4ba051*/
     }
-    return v4;
+    return v4; /*0x4ba058*/
   }
-  return result;
+  return result; /*0x4ba054*/
 }

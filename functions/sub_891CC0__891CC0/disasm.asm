@@ -167,7 +167,6 @@
 0x891F34: mov     esp, ebp
 0x891F36: pop     ebp
 0x891F37: retn    4
-0x891F3A: align 10h
 0x891F40: fldz
 0x891F42: mov     eax, [esp+3F0h+var_3B8]
 0x891F46: test    eax, eax
@@ -199,7 +198,7 @@
 0x891FA2: add     eax, 70h ; 'p'
 0x891FA5: push    eax
 0x891FA6: mov     ecx, ebx
-0x891FA8: call    sub_88FCC0
+0x891FA8: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x891FAD: fld     dword ptr [edi+248h]
 0x891FB3: movaps  xmm1, [esp+3F0h+var_340]
 0x891FBB: mov     eax, esi
@@ -516,7 +515,7 @@
 0x892443: lea     eax, [esp+3F4h+var_310]
 0x89244A: push    eax
 0x89244B: lea     ecx, [esp+3F8h+var_390]
-0x89244F: call    sub_88FE00
+0x89244F: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x892454: movaps  xmm1, [esp+3F0h+var_390]
 0x892459: movaps  xmm0, xmmword ptr ds:0A372D0h
 0x892460: subps   xmm1, [esp+3F0h+var_3A0]

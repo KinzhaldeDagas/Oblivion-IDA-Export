@@ -3,7 +3,7 @@
 0x53BBC2: push    edi
 0x53BBC3: push    3
 0x53BBC5: mov     ebp, ecx
-0x53BBC7: call    nullsub_returnTrue_0arg
+0x53BBC7: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x53BBCC: add     esp, 4
 0x53BBCF: xor     edi, edi
 0x53BBD1: mov     esi, [ebp+edi*4+10h]
@@ -26,7 +26,7 @@
 0x53BC01: test    ecx, ecx
 0x53BC03: jz      short loc_53BC4B
 0x53BC05: push    4
-0x53BC07: call    NiNode_GetNiPropertyByID
+0x53BC07: call    NiNode_GetNiPropertyByID;
 0x53BC0C: mov     esi, eax
 0x53BC0E: test    esi, esi
 0x53BC10: jz      short loc_53BC4B
@@ -37,7 +37,7 @@
 0x53BC1B: test    eax, eax
 0x53BC1D: jz      short loc_53BC2E
 0x53BC1F: nop
-0x53BC20: cmp     eax, offset dword_B4335C
+0x53BC20: cmp     eax, offset stru_B4335C
 0x53BC25: jz      short loc_53BC70
 0x53BC27: mov     eax, [eax+4]
 0x53BC2A: test    eax, eax
@@ -50,7 +50,7 @@
 0x53BC38: jz      short loc_53BC4B
 0x53BC3A: push    0; a2
 0x53BC3C: mov     ecx, esi; this
-0x53BC3E: call    sub_802890
+0x53BC3E: call    sub_802890; MoonSugarEffect decode: stores source BSRenderedTexture in BSImageSpaceShader +0x7C with refcounting; render pass then samples this as primary scene texture.
 0x53BC43: fldz
 0x53BC45: fstp    dword ptr [esi+80h]
 0x53BC4B: lea     eax, [edi+1]
@@ -61,7 +61,7 @@
 0x53BC59: cmp     edi, 2
 0x53BC5C: jl      loc_53BBD1
 0x53BC62: push    2
-0x53BC64: call    nullsub_returnTrue_0arg
+0x53BC64: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x53BC69: add     esp, 4
 0x53BC6C: pop     edi
 0x53BC6D: pop     esi

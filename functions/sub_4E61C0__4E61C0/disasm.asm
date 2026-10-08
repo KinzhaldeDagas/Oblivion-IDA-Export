@@ -1,4 +1,4 @@
-0x4E61C0: sub     esp, 14h
+0x4E61C0: sub     esp, 14h; Verified PathGrid PGRI writer emits PGRIRecords rows verbatim (16 bytes). The nearest-point query establishes low-u16 pointIndex and NiPoint3 at +4; only the upper halfword remains Unknown.
 0x4E61C3: push    esi
 0x4E61C4: mov     esi, ecx
 0x4E61C6: mov     ecx, [esi+24h]
@@ -22,7 +22,7 @@
 0x4E6200: push    eax; Src
 0x4E6201: push    41544144h; int
 0x4E6206: mov     word ptr [esp+30h+Src], dx
-0x4E620B: call    TESForm_PutFormRecordChunkData
+0x4E620B: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4E6210: movzx   eax, word ptr [esp+30h+Src]
 0x4E6215: xor     ecx, ecx
 0x4E6217: mov     edx, 10h
@@ -43,9 +43,9 @@
 0x4E6248: mov     ecx, [eax+24h]
 0x4E624B: mov     edx, [ecx+4]
 0x4E624E: mov     ebp, [edx+edi*4]
-0x4E6251: mov     ecx, ebp
+0x4E6251: mov     ecx, ebp; this
 0x4E6253: xor     ebx, ebx
-0x4E6255: call    sub_4E7DE0
+0x4E6255: call    PathGraphNode_GetConnections; Verified graph-node connection-list accessor: returns this+0x20. TESPathGrid and TESRoad graph code both traverse this as a BSSimpleList of adjacency pointers.
 0x4E625A: test    eax, eax
 0x4E625C: jz      short loc_4E626F
 0x4E625E: mov     edi, edi
@@ -57,9 +57,9 @@
 0x4E626D: jnz     short loc_4E6260
 0x4E626F: movzx   eax, bl
 0x4E6272: add     [esp+24h+var_C], eax
-0x4E6276: mov     ecx, ebp
+0x4E6276: mov     ecx, ebp; this
 0x4E6278: mov     [esi+0Ch], bl
-0x4E627B: call    sub_4BEF40
+0x4E627B: call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.
 0x4E6280: mov     ecx, [eax]
 0x4E6282: mov     [esi], ecx
 0x4E6284: mov     edx, [eax+4]
@@ -78,9 +78,9 @@
 0x4E62AC: push    edx; Size
 0x4E62AD: push    esi; Src
 0x4E62AE: push    50524750h; int
-0x4E62B3: call    TESForm_PutFormRecordChunkData
+0x4E62B3: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4E62B8: push    esi
-0x4E62B9: call    FormHeapFree
+0x4E62B9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4E62BE: mov     esi, [esp+34h+var_C]
 0x4E62C2: add     esp, 10h
 0x4E62C5: test    esi, esi
@@ -105,8 +105,8 @@
 0x4E6301: mov     ecx, [esp+24h+var_10]
 0x4E6305: mov     edx, [ecx+24h]
 0x4E6308: mov     ecx, [edx+4]
-0x4E630B: mov     ecx, [ecx+eax*4]
-0x4E630E: call    sub_4E7DE0
+0x4E630B: mov     ecx, [ecx+eax*4]; this
+0x4E630E: call    PathGraphNode_GetConnections; Verified graph-node connection-list accessor: returns this+0x20. TESPathGrid and TESRoad graph code both traverse this as a BSSimpleList of adjacency pointers.
 0x4E6313: test    eax, eax
 0x4E6315: jz      short loc_4E637E
 0x4E6317: cmp     dword ptr [eax+4], 0
@@ -159,9 +159,9 @@
 0x4E63A1: push    edx; Size
 0x4E63A2: push    edi; Src
 0x4E63A3: push    52524750h; int
-0x4E63A8: call    TESForm_PutFormRecordChunkData
+0x4E63A8: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4E63AD: push    edi
-0x4E63AE: call    FormHeapFree
+0x4E63AE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4E63B3: add     esp, 10h
 0x4E63B6: mov     esi, [esp+24h+var_10]
 0x4E63BA: xor     edi, edi
@@ -203,7 +203,7 @@
 0x4E6419: push    ebx; Size
 0x4E641A: push    ebp; Src
 0x4E641B: push    49524750h; int
-0x4E6420: call    TESForm_PutFormRecordChunkData
+0x4E6420: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4E6425: add     esp, 0Ch
 0x4E6428: push    ebp; void *
 0x4E6429: mov     ecx, offset FormHeap
@@ -323,7 +323,7 @@
 0x4E656C: push    eax; Size
 0x4E656D: push    edi; Src
 0x4E656E: push    4C524750h; int
-0x4E6573: call    TESForm_PutFormRecordChunkData
+0x4E6573: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4E6578: add     esp, 0Ch
 0x4E657B: push    edi; void *
 0x4E657C: mov     ecx, offset FormHeap
@@ -333,7 +333,7 @@
 0x4E658C: jnz     loc_4E6463
 0x4E6592: mov     ecx, [esp+24h+var_10]; this
 0x4E6596: call    TESForm_FinalizeFormRecord
-0x4E659B: call    sub_46B370
+0x4E659B: call    TESForm_CompressSaveBuffer; Compresses the global TESForm record buffer with zlib when payload exists and FORM flag 0x40000 is clear. Rebuilds the record with compressed flag, original payload size, and deflated data.
 0x4E65A0: pop     ebp
 0x4E65A1: pop     ebx
 0x4E65A2: pop     edi

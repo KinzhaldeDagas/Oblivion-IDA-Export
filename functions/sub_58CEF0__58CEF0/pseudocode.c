@@ -1,7 +1,7 @@
-int __thiscall sub_58CEF0(_DWORD *this, _DWORD *a2, int a3, int a4)
+OblivionTileActionNode *__thiscall sub_58CEF0(Tile *this, _DWORD *trait, int a3, int a4)
 {
-  float *PropertyByCode; // eax
+  OblivionTileValueView *Value; // eax
 
-  PropertyByCode = (float *)Tile_GetPropertyByCode_(this, a2);
-  return sub_58CB70(PropertyByCode, a3, a4);
+  Value = Tile::GetOrCreateValue(this, (unsigned int)trait); /*0x58ceff*/
+  return sub_58CB70(Value, a3, a4); /*0x58cf0b*/
 }

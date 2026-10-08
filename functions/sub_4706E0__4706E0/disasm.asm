@@ -1,4 +1,4 @@
-0x4706E0: mov     edx, [esp+arg_0]
+0x4706E0: mov     edx, [esp+slotSelector]; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].
 0x4706E4: mov     eax, edx
 0x4706E6: sub     eax, 5
 0x4706E9: jz      short loc_4706FF

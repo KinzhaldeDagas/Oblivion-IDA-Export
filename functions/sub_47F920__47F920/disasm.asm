@@ -1,4 +1,4 @@
-0x47F920: push    esi
+0x47F920: push    esi; Constructs a 0x1C NiAlphaProperty over NiObjectNET: installs NiAlphaProperty vtable, initializes flags to 0x00EC and threshold byte to 0.
 0x47F921: mov     esi, ecx
 0x47F923: call    ??0NiObjectNET@@QAE@XZ; NiObjectNET::NiObjectNET(void)
 0x47F928: mov     dword ptr [esi], offset ??_7NiAlphaProperty@@6B@; const NiAlphaProperty::`vftable'

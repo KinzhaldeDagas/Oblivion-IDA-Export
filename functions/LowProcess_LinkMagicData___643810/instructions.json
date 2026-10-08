@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x643810",
-    "line": "mov     eax, [esp+arg_8]",
+    "line": "mov     eax, [esp+owner]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x643814",
-    "line": "mov     edx, [esp+arg_0]",
+    "line": "mov     edx, [esp+changeMask]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,37 +25,37 @@
   },
   {
     "ea": "0x64381B",
-    "line": "mov     ecx, [esp+4+arg_4]",
+    "line": "mov     ecx, [esp+4+currentFlags]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x64381F",
-    "line": "push    eax",
+    "line": "push    eax; owner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x643820",
-    "line": "push    ecx",
+    "line": "push    ecx; currentFlags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x643821",
-    "line": "push    edx",
+    "line": "push    edx; changeMask",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x643822",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x643824",
-    "line": "call    sub_60D780",
+    "line": "call    BaseProcess_InitLoadGame",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x64383F",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x643876",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },

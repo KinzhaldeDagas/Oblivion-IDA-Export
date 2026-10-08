@@ -1,1 +1,1 @@
-TYPEATTR
+typedef tagTYPEATTR TYPEATTR;

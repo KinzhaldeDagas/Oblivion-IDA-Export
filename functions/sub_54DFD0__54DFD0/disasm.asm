@@ -46,7 +46,7 @@
 0x54E048: sub     ebx, edx
 0x54E04A: cmp     ebx, edi
 0x54E04C: jnb     short loc_54E053
-0x54E04E: call    sub_790B90
+0x54E04E: call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error("vector<T> too long") and throws; used by multiple element specializations after max_size checks.
 0x54E053: test    ecx, ecx
 0x54E055: jnz     short loc_54E05B
 0x54E057: xor     edx, edx
@@ -135,7 +135,7 @@
 0x54E11E: test    ecx, ecx
 0x54E120: jz      short loc_54E12B
 0x54E122: push    ecx
-0x54E123: call    FormHeapFree
+0x54E123: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x54E128: add     esp, 4
 0x54E12B: mov     ecx, [ebp+arg_8]
 0x54E12E: add     ecx, ebx
@@ -155,7 +155,7 @@
 0x54E14F: retn    10h
 0x54E152: mov     edx, [ebp+var_14]
 0x54E155: push    edx
-0x54E156: call    FormHeapFree
+0x54E156: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x54E15B: add     esp, 4
 0x54E15E: push    0
 0x54E160: push    0
@@ -241,3 +241,10 @@
 0x54E221: mov     esp, ebp
 0x54E223: pop     ebp
 0x54E224: retn    10h
+0x9BBA60: mov     edx, [esp-4+arg_4]
+0x9BBA64: lea     eax, [edx+0Ch]
+0x9BBA67: mov     ecx, [edx-28h]
+0x9BBA6A: xor     ecx, eax
+0x9BBA6C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BBA71: mov     eax, offset stru_AE5784
+0x9BBA76: jmp     ___CxxFrameHandler3

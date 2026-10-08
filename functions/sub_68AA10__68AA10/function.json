@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
-  "callers_count": 11,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 22,
+  "chunks": [
+    [
+      "0x68AA10",
+      "0x68AA1B"
+    ]
+  ],
+  "chunks_sha256": "39228cbaa032c984438db9222f82490be135fe9c6888302a43029536d08218fa",
+  "comment_regular": "Verified PathLow destructor: restores the PathLow vtable and frees/clears owned TravelPathNode records through TravelPath_ClearNodes. This routine does not free the containing object.",
+  "comment_repeatable": "Verified PathLow destructor: restores the PathLow vtable and frees/clears owned TravelPathNode records through TravelPath_ClearNodes. This routine does not free the containing object.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_68AA10",
+  "display_name": "PathLow_dtor",
   "end_ea": "0x68AA1B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_68AA10",
+  "name": "PathLow_dtor",
   "segment": ".text",
   "sha256": "39228cbaa032c984438db9222f82490be135fe9c6888302a43029536d08218fa",
   "size": 11,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x68AA10",
-  "type": "void __thiscall(int *this)",
+  "total_chunk_size": 11,
+  "type": "void __thiscall(TravelPath *this)",
   "xrefs_from_count": 3,
   "xrefs_to_count": 22
 }

@@ -23,7 +23,7 @@
 0x915267: push    ecx
 0x915268: push    edx
 0x915269: lea     ecx, [esp+38h+var_20]
-0x91526D: call    sub_88FE00
+0x91526D: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x915272: mov     eax, [esi]
 0x915274: lea     ecx, [esp+30h+var_20]
 0x915278: push    ecx

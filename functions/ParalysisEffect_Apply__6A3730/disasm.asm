@@ -8,8 +8,8 @@
 0x6A3740: mov     esi, eax
 0x6A3742: test    esi, esi
 0x6A3744: jz      short loc_6A3762
-0x6A3746: mov     ecx, esi
-0x6A3748: call    sub_5EF930
+0x6A3746: mov     ecx, esi; this
+0x6A3748: call    Actor__StopDialoguePlayback; Stops an Actor's current dialogue/audio/lip playback and associated animation state. Used before starting/replacing dialogue, on menu close, death/paralysis, and DialoguePackage active-speaker cleanup.
 0x6A374D: mov     eax, [esi]
 0x6A374F: mov     edx, [eax+1A0h]
 0x6A3755: mov     ecx, esi

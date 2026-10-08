@@ -1,4 +1,4 @@
-0x4BC1E0: sub     esp, 10h
+0x4BC1E0: sub     esp, 10h; Verified record-save virtual (vtable +0x24): this is ECX, save flag is BPL, return is EAX. Writes a 12-byte DNAM payload containing the three UInt16 dimensions converted to floats, then finalizes the record.
 0x4BC1E3: push    esi
 0x4BC1E4: mov     esi, ecx
 0x4BC1E6: call    TESForm_InitializeFormRecord
@@ -18,7 +18,7 @@
 0x4BC21B: fstp    [esp+20h+var_8]
 0x4BC21F: fild    [esp+20h+var_10]
 0x4BC223: fstp    [esp+20h+var_4]
-0x4BC227: call    TESForm_PutFormRecordChunkData
+0x4BC227: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4BC22C: add     esp, 0Ch
 0x4BC22F: mov     ecx, esi; this
 0x4BC231: call    TESForm_FinalizeFormRecord

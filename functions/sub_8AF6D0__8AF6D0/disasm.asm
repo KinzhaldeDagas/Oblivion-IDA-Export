@@ -26,7 +26,6 @@
 0x8AF717: test    edx, edx
 0x8AF719: jz      short loc_8AF729
 0x8AF71B: jmp     short loc_8AF720
-0x8AF71D: align 10h
 0x8AF720: mov     ecx, edx
 0x8AF722: mov     edx, [ecx+0Ch]
 0x8AF725: test    edx, edx

@@ -34,3 +34,12 @@
 0x4A839A: pop     ebx
 0x4A839B: add     esp, 10h
 0x4A839E: retn    4
+0x9B2990: mov     ecx, [ebp-10h]
+0x9B2993: jmp     SettingCollection_destr
+0x9B2998: mov     edx, [esp+arg_4]
+0x9B299C: lea     eax, [edx-10h]
+0x9B299F: mov     ecx, [edx-14h]
+0x9B29A2: xor     ecx, eax
+0x9B29A4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B29A9: mov     eax, offset stru_ADE90C
+0x9B29AE: jmp     ___CxxFrameHandler3

@@ -74,280 +74,280 @@ void __thiscall sub_7BFD90(HDRShader *this)
   NiD3DPixelShader *v73; // edi
   NiD3DPixelShader **v74; // esi
 
-  v2 = this->Vertex[3];
-  v3 = this->passes[0];
-  VertexShader = v3->VertexShader;
-  p_VertexShader = &v3->VertexShader;
-  if ( VertexShader != v2 )
+  v2 = this->Vertex[3]; /*0x7bfd95*/
+  v3 = this->passes[0]; /*0x7bfd9c*/
+  VertexShader = v3->VertexShader; /*0x7bfda2*/
+  p_VertexShader = &v3->VertexShader; /*0x7bfda5*/
+  if ( VertexShader != v2 ) /*0x7bfdaa*/
   {
-    if ( VertexShader )
+    if ( VertexShader ) /*0x7bfdae*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)VertexShader + 1) )
-        (**(void (__thiscall ***)(NiD3DVertexShader *, int))VertexShader)(VertexShader, 1);
+      if ( !InterlockedDecrement((volatile LONG *)VertexShader + 1) ) /*0x7bfdb4*/
+        (**(void (__thiscall ***)(NiD3DVertexShader *, int))VertexShader)(VertexShader, 1); /*0x7bfdca*/
     }
-    *p_VertexShader = v2;
-    if ( v2 )
-      InterlockedIncrement((volatile LONG *)v2 + 1);
+    *p_VertexShader = v2; /*0x7bfdce*/
+    if ( v2 ) /*0x7bfdd0*/
+      InterlockedIncrement((volatile LONG *)v2 + 1); /*0x7bfdd6*/
   }
-  v6 = this->passes[0];
-  v7 = this->Pixel[3];
-  PixelShader = v6->PixelShader;
-  p_PixelShader = &v6->PixelShader;
-  if ( PixelShader != v7 )
+  v6 = this->passes[0]; /*0x7bfddc*/
+  v7 = this->Pixel[3]; /*0x7bfde2*/
+  PixelShader = v6->PixelShader; /*0x7bfde8*/
+  p_PixelShader = &v6->PixelShader; /*0x7bfdeb*/
+  if ( PixelShader != v7 ) /*0x7bfdf0*/
   {
-    if ( PixelShader )
+    if ( PixelShader ) /*0x7bfdf4*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)PixelShader + 1) )
-        (**(void (__thiscall ***)(NiD3DPixelShader *, int))PixelShader)(PixelShader, 1);
+      if ( !InterlockedDecrement((volatile LONG *)PixelShader + 1) ) /*0x7bfdfa*/
+        (**(void (__thiscall ***)(NiD3DPixelShader *, int))PixelShader)(PixelShader, 1); /*0x7bfe10*/
     }
-    *p_PixelShader = v7;
-    if ( v7 )
-      InterlockedIncrement((volatile LONG *)v7 + 1);
+    *p_PixelShader = v7; /*0x7bfe14*/
+    if ( v7 ) /*0x7bfe16*/
+      InterlockedIncrement((volatile LONG *)v7 + 1); /*0x7bfe1c*/
   }
-  v10 = this->passes[1];
-  v11 = this->Vertex[2];
-  v12 = v10->VertexShader;
-  v13 = &v10->VertexShader;
-  if ( v12 != v11 )
+  v10 = this->passes[1]; /*0x7bfe22*/
+  v11 = this->Vertex[2]; /*0x7bfe28*/
+  v12 = v10->VertexShader; /*0x7bfe2e*/
+  v13 = &v10->VertexShader; /*0x7bfe31*/
+  if ( v12 != v11 ) /*0x7bfe36*/
   {
-    if ( v12 )
+    if ( v12 ) /*0x7bfe3a*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)v12 + 1) )
-        (**(void (__thiscall ***)(NiD3DVertexShader *, int))v12)(v12, 1);
+      if ( !InterlockedDecrement((volatile LONG *)v12 + 1) ) /*0x7bfe40*/
+        (**(void (__thiscall ***)(NiD3DVertexShader *, int))v12)(v12, 1); /*0x7bfe56*/
     }
-    *v13 = v11;
-    if ( v11 )
-      InterlockedIncrement((volatile LONG *)v11 + 1);
+    *v13 = v11; /*0x7bfe5a*/
+    if ( v11 ) /*0x7bfe5c*/
+      InterlockedIncrement((volatile LONG *)v11 + 1); /*0x7bfe62*/
   }
-  v14 = this->passes[1];
-  v15 = this->Pixel[2];
-  v16 = v14->PixelShader;
-  v17 = &v14->PixelShader;
-  if ( v16 != v15 )
+  v14 = this->passes[1]; /*0x7bfe68*/
+  v15 = this->Pixel[2]; /*0x7bfe6e*/
+  v16 = v14->PixelShader; /*0x7bfe74*/
+  v17 = &v14->PixelShader; /*0x7bfe77*/
+  if ( v16 != v15 ) /*0x7bfe7c*/
   {
-    if ( v16 )
+    if ( v16 ) /*0x7bfe80*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)v16 + 1) )
-        (**(void (__thiscall ***)(NiD3DPixelShader *, int))v16)(v16, 1);
+      if ( !InterlockedDecrement((volatile LONG *)v16 + 1) ) /*0x7bfe86*/
+        (**(void (__thiscall ***)(NiD3DPixelShader *, int))v16)(v16, 1); /*0x7bfe9c*/
     }
-    *v17 = v15;
-    if ( v15 )
-      InterlockedIncrement((volatile LONG *)v15 + 1);
+    *v17 = v15; /*0x7bfea0*/
+    if ( v15 ) /*0x7bfea2*/
+      InterlockedIncrement((volatile LONG *)v15 + 1); /*0x7bfea8*/
   }
-  v18 = this->passes[2];
-  v19 = this->Vertex[2];
-  v20 = v18->VertexShader;
-  v21 = &v18->VertexShader;
-  if ( v20 != v19 )
+  v18 = this->passes[2]; /*0x7bfeae*/
+  v19 = this->Vertex[2]; /*0x7bfeb4*/
+  v20 = v18->VertexShader; /*0x7bfeba*/
+  v21 = &v18->VertexShader; /*0x7bfebd*/
+  if ( v20 != v19 ) /*0x7bfec2*/
   {
-    if ( v20 )
+    if ( v20 ) /*0x7bfec6*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)v20 + 1) )
-        (**(void (__thiscall ***)(NiD3DVertexShader *, int))v20)(v20, 1);
+      if ( !InterlockedDecrement((volatile LONG *)v20 + 1) ) /*0x7bfecc*/
+        (**(void (__thiscall ***)(NiD3DVertexShader *, int))v20)(v20, 1); /*0x7bfee2*/
     }
-    *v21 = v19;
-    if ( v19 )
-      InterlockedIncrement((volatile LONG *)v19 + 1);
+    *v21 = v19; /*0x7bfee6*/
+    if ( v19 ) /*0x7bfee8*/
+      InterlockedIncrement((volatile LONG *)v19 + 1); /*0x7bfeee*/
   }
-  v22 = this->passes[2];
-  v23 = this->Pixel[2];
-  v24 = v22->PixelShader;
-  v25 = &v22->PixelShader;
-  if ( v24 != v23 )
+  v22 = this->passes[2]; /*0x7bfef4*/
+  v23 = this->Pixel[2]; /*0x7bfefa*/
+  v24 = v22->PixelShader; /*0x7bff00*/
+  v25 = &v22->PixelShader; /*0x7bff03*/
+  if ( v24 != v23 ) /*0x7bff08*/
   {
-    if ( v24 )
+    if ( v24 ) /*0x7bff0c*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)v24 + 1) )
-        (**(void (__thiscall ***)(NiD3DPixelShader *, int))v24)(v24, 1);
+      if ( !InterlockedDecrement((volatile LONG *)v24 + 1) ) /*0x7bff12*/
+        (**(void (__thiscall ***)(NiD3DPixelShader *, int))v24)(v24, 1); /*0x7bff28*/
     }
-    *v25 = v23;
-    if ( v23 )
-      InterlockedIncrement((volatile LONG *)v23 + 1);
+    *v25 = v23; /*0x7bff2c*/
+    if ( v23 ) /*0x7bff2e*/
+      InterlockedIncrement((volatile LONG *)v23 + 1); /*0x7bff34*/
   }
-  v26 = this->passes[3];
-  v27 = this->Vertex[0];
-  v28 = v26->VertexShader;
-  v29 = &v26->VertexShader;
-  if ( v28 != v27 )
+  v26 = this->passes[3]; /*0x7bff3a*/
+  v27 = this->Vertex[0]; /*0x7bff40*/
+  v28 = v26->VertexShader; /*0x7bff46*/
+  v29 = &v26->VertexShader; /*0x7bff49*/
+  if ( v28 != v27 ) /*0x7bff4e*/
   {
-    if ( v28 )
+    if ( v28 ) /*0x7bff52*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)v28 + 1) )
-        (**(void (__thiscall ***)(NiD3DVertexShader *, int))v28)(v28, 1);
+      if ( !InterlockedDecrement((volatile LONG *)v28 + 1) ) /*0x7bff58*/
+        (**(void (__thiscall ***)(NiD3DVertexShader *, int))v28)(v28, 1); /*0x7bff6e*/
     }
-    *v29 = v27;
-    if ( v27 )
-      InterlockedIncrement((volatile LONG *)v27 + 1);
+    *v29 = v27; /*0x7bff72*/
+    if ( v27 ) /*0x7bff74*/
+      InterlockedIncrement((volatile LONG *)v27 + 1); /*0x7bff7a*/
   }
-  v30 = this->passes[3];
-  v31 = this->Pixel[0];
-  v32 = v30->PixelShader;
-  v33 = &v30->PixelShader;
-  if ( v32 != v31 )
+  v30 = this->passes[3]; /*0x7bff80*/
+  v31 = this->Pixel[0]; /*0x7bff86*/
+  v32 = v30->PixelShader; /*0x7bff8c*/
+  v33 = &v30->PixelShader; /*0x7bff8f*/
+  if ( v32 != v31 ) /*0x7bff94*/
   {
-    if ( v32 )
+    if ( v32 ) /*0x7bff98*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)v32 + 1) )
-        (**(void (__thiscall ***)(NiD3DPixelShader *, int))v32)(v32, 1);
+      if ( !InterlockedDecrement((volatile LONG *)v32 + 1) ) /*0x7bff9e*/
+        (**(void (__thiscall ***)(NiD3DPixelShader *, int))v32)(v32, 1); /*0x7bffb4*/
     }
-    *v33 = v31;
-    if ( v31 )
-      InterlockedIncrement((volatile LONG *)v31 + 1);
+    *v33 = v31; /*0x7bffb8*/
+    if ( v31 ) /*0x7bffba*/
+      InterlockedIncrement((volatile LONG *)v31 + 1); /*0x7bffc0*/
   }
-  v34 = this->passes[7];
-  if ( v34 )
+  v34 = this->passes[7]; /*0x7bffc6*/
+  if ( v34 ) /*0x7bffce*/
   {
-    sub_7AECB0(v34, this->Vertex[3]);
-    sub_7AEC60(&this->passes[7]->__vftable, this->Pixel[3]);
+    NiD3DPass_SetVertexShader(v34, this->Vertex[3]); /*0x7bffd7*/
+    NiD3DPass_SetPixelShader(&this->passes[7]->__vftable, this->Pixel[3]); /*0x7bffe9*/
   }
-  v35 = this->passes[8];
-  v36 = this->Vertex[3];
-  v37 = v35->VertexShader;
-  v38 = &v35->VertexShader;
-  if ( v37 != v36 )
+  v35 = this->passes[8]; /*0x7bffee*/
+  v36 = this->Vertex[3]; /*0x7bfff4*/
+  v37 = v35->VertexShader; /*0x7bfffa*/
+  v38 = &v35->VertexShader; /*0x7bfffd*/
+  if ( v37 != v36 ) /*0x7c0002*/
   {
-    if ( v37 )
+    if ( v37 ) /*0x7c0006*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)v37 + 1) )
-        (**(void (__thiscall ***)(NiD3DVertexShader *, int))v37)(v37, 1);
+      if ( !InterlockedDecrement((volatile LONG *)v37 + 1) ) /*0x7c000c*/
+        (**(void (__thiscall ***)(NiD3DVertexShader *, int))v37)(v37, 1); /*0x7c0022*/
     }
-    *v38 = v36;
-    if ( v36 )
-      InterlockedIncrement((volatile LONG *)v36 + 1);
+    *v38 = v36; /*0x7c0026*/
+    if ( v36 ) /*0x7c0028*/
+      InterlockedIncrement((volatile LONG *)v36 + 1); /*0x7c002e*/
   }
-  v39 = this->passes[8];
-  v40 = this->Pixel[3];
-  v41 = v39->PixelShader;
-  v42 = &v39->PixelShader;
-  if ( v41 != v40 )
+  v39 = this->passes[8]; /*0x7c0034*/
+  v40 = this->Pixel[3]; /*0x7c003a*/
+  v41 = v39->PixelShader; /*0x7c0040*/
+  v42 = &v39->PixelShader; /*0x7c0043*/
+  if ( v41 != v40 ) /*0x7c0048*/
   {
-    if ( v41 )
+    if ( v41 ) /*0x7c004c*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)v41 + 1) )
-        (**(void (__thiscall ***)(NiD3DPixelShader *, int))v41)(v41, 1);
+      if ( !InterlockedDecrement((volatile LONG *)v41 + 1) ) /*0x7c0052*/
+        (**(void (__thiscall ***)(NiD3DPixelShader *, int))v41)(v41, 1); /*0x7c0068*/
     }
-    *v42 = v40;
-    if ( v40 )
-      InterlockedIncrement((volatile LONG *)v40 + 1);
+    *v42 = v40; /*0x7c006c*/
+    if ( v40 ) /*0x7c006e*/
+      InterlockedIncrement((volatile LONG *)v40 + 1); /*0x7c0074*/
   }
-  v43 = this->passes[9];
-  v44 = this->Vertex[4];
-  v45 = v43->VertexShader;
-  v46 = &v43->VertexShader;
-  if ( v45 != v44 )
+  v43 = this->passes[9]; /*0x7c007a*/
+  v44 = this->Vertex[4]; /*0x7c0080*/
+  v45 = v43->VertexShader; /*0x7c0086*/
+  v46 = &v43->VertexShader; /*0x7c0089*/
+  if ( v45 != v44 ) /*0x7c008e*/
   {
-    if ( v45 )
+    if ( v45 ) /*0x7c0092*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)v45 + 1) )
-        (**(void (__thiscall ***)(NiD3DVertexShader *, int))v45)(v45, 1);
+      if ( !InterlockedDecrement((volatile LONG *)v45 + 1) ) /*0x7c0098*/
+        (**(void (__thiscall ***)(NiD3DVertexShader *, int))v45)(v45, 1); /*0x7c00ae*/
     }
-    *v46 = v44;
-    if ( v44 )
-      InterlockedIncrement((volatile LONG *)v44 + 1);
+    *v46 = v44; /*0x7c00b2*/
+    if ( v44 ) /*0x7c00b4*/
+      InterlockedIncrement((volatile LONG *)v44 + 1); /*0x7c00ba*/
   }
-  v47 = this->passes[9];
-  v48 = this->Pixel[4];
-  v49 = v47->PixelShader;
-  v50 = &v47->PixelShader;
-  if ( v49 != v48 )
+  v47 = this->passes[9]; /*0x7c00c0*/
+  v48 = this->Pixel[4]; /*0x7c00c6*/
+  v49 = v47->PixelShader; /*0x7c00cc*/
+  v50 = &v47->PixelShader; /*0x7c00cf*/
+  if ( v49 != v48 ) /*0x7c00d4*/
   {
-    if ( v49 )
+    if ( v49 ) /*0x7c00d8*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)v49 + 1) )
-        (**(void (__thiscall ***)(NiD3DPixelShader *, int))v49)(v49, 1);
+      if ( !InterlockedDecrement((volatile LONG *)v49 + 1) ) /*0x7c00de*/
+        (**(void (__thiscall ***)(NiD3DPixelShader *, int))v49)(v49, 1); /*0x7c00f4*/
     }
-    *v50 = v48;
-    if ( v48 )
-      InterlockedIncrement((volatile LONG *)v48 + 1);
+    *v50 = v48; /*0x7c00f8*/
+    if ( v48 ) /*0x7c00fa*/
+      InterlockedIncrement((volatile LONG *)v48 + 1); /*0x7c0100*/
   }
-  v51 = this->passes[0xA];
-  v52 = this->Vertex[5];
-  v53 = v51->VertexShader;
-  v54 = &v51->VertexShader;
-  if ( v53 != v52 )
+  v51 = this->passes[0xA]; /*0x7c0106*/
+  v52 = this->Vertex[5]; /*0x7c010c*/
+  v53 = v51->VertexShader; /*0x7c0112*/
+  v54 = &v51->VertexShader; /*0x7c0115*/
+  if ( v53 != v52 ) /*0x7c011a*/
   {
-    if ( v53 )
+    if ( v53 ) /*0x7c011e*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)v53 + 1) )
-        (**(void (__thiscall ***)(NiD3DVertexShader *, int))v53)(v53, 1);
+      if ( !InterlockedDecrement((volatile LONG *)v53 + 1) ) /*0x7c0124*/
+        (**(void (__thiscall ***)(NiD3DVertexShader *, int))v53)(v53, 1); /*0x7c013a*/
     }
-    *v54 = v52;
-    if ( v52 )
-      InterlockedIncrement((volatile LONG *)v52 + 1);
+    *v54 = v52; /*0x7c013e*/
+    if ( v52 ) /*0x7c0140*/
+      InterlockedIncrement((volatile LONG *)v52 + 1); /*0x7c0146*/
   }
-  v55 = this->passes[0xA];
-  v56 = this->Pixel[5];
-  v57 = v55->PixelShader;
-  v58 = &v55->PixelShader;
-  if ( v57 != v56 )
+  v55 = this->passes[0xA]; /*0x7c014c*/
+  v56 = this->Pixel[5]; /*0x7c0152*/
+  v57 = v55->PixelShader; /*0x7c0158*/
+  v58 = &v55->PixelShader; /*0x7c015b*/
+  if ( v57 != v56 ) /*0x7c0160*/
   {
-    if ( v57 )
+    if ( v57 ) /*0x7c0164*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)v57 + 1) )
-        (**(void (__thiscall ***)(NiD3DPixelShader *, int))v57)(v57, 1);
+      if ( !InterlockedDecrement((volatile LONG *)v57 + 1) ) /*0x7c016a*/
+        (**(void (__thiscall ***)(NiD3DPixelShader *, int))v57)(v57, 1); /*0x7c0180*/
     }
-    *v58 = v56;
-    if ( v56 )
-      InterlockedIncrement((volatile LONG *)v56 + 1);
+    *v58 = v56; /*0x7c0184*/
+    if ( v56 ) /*0x7c0186*/
+      InterlockedIncrement((volatile LONG *)v56 + 1); /*0x7c018c*/
   }
-  v59 = this->passes[0xB];
-  v60 = this->Vertex[6];
-  v61 = v59->VertexShader;
-  v62 = &v59->VertexShader;
-  if ( v61 != v60 )
+  v59 = this->passes[0xB]; /*0x7c0192*/
+  v60 = this->Vertex[6]; /*0x7c0198*/
+  v61 = v59->VertexShader; /*0x7c019e*/
+  v62 = &v59->VertexShader; /*0x7c01a1*/
+  if ( v61 != v60 ) /*0x7c01a6*/
   {
-    if ( v61 )
+    if ( v61 ) /*0x7c01aa*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)v61 + 1) )
-        (**(void (__thiscall ***)(NiD3DVertexShader *, int))v61)(v61, 1);
+      if ( !InterlockedDecrement((volatile LONG *)v61 + 1) ) /*0x7c01b0*/
+        (**(void (__thiscall ***)(NiD3DVertexShader *, int))v61)(v61, 1); /*0x7c01c6*/
     }
-    *v62 = v60;
-    if ( v60 )
-      InterlockedIncrement((volatile LONG *)v60 + 1);
+    *v62 = v60; /*0x7c01ca*/
+    if ( v60 ) /*0x7c01cc*/
+      InterlockedIncrement((volatile LONG *)v60 + 1); /*0x7c01d2*/
   }
-  v63 = this->passes[0xB];
-  v64 = this->Pixel[6];
-  v65 = v63->PixelShader;
-  v66 = &v63->PixelShader;
-  if ( v65 != v64 )
+  v63 = this->passes[0xB]; /*0x7c01d8*/
+  v64 = this->Pixel[6]; /*0x7c01de*/
+  v65 = v63->PixelShader; /*0x7c01e4*/
+  v66 = &v63->PixelShader; /*0x7c01e7*/
+  if ( v65 != v64 ) /*0x7c01ec*/
   {
-    if ( v65 )
+    if ( v65 ) /*0x7c01f0*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)v65 + 1) )
-        (**(void (__thiscall ***)(NiD3DPixelShader *, int))v65)(v65, 1);
+      if ( !InterlockedDecrement((volatile LONG *)v65 + 1) ) /*0x7c01f6*/
+        (**(void (__thiscall ***)(NiD3DPixelShader *, int))v65)(v65, 1); /*0x7c020c*/
     }
-    *v66 = v64;
-    if ( v64 )
-      InterlockedIncrement((volatile LONG *)v64 + 1);
+    *v66 = v64; /*0x7c0210*/
+    if ( v64 ) /*0x7c0212*/
+      InterlockedIncrement((volatile LONG *)v64 + 1); /*0x7c0218*/
   }
-  v67 = this->passes[0xC];
-  v68 = this->Vertex[7];
-  v69 = v67->VertexShader;
-  v70 = &v67->VertexShader;
-  if ( v69 != v68 )
+  v67 = this->passes[0xC]; /*0x7c021e*/
+  v68 = this->Vertex[7]; /*0x7c0224*/
+  v69 = v67->VertexShader; /*0x7c022a*/
+  v70 = &v67->VertexShader; /*0x7c022d*/
+  if ( v69 != v68 ) /*0x7c0232*/
   {
-    if ( v69 )
+    if ( v69 ) /*0x7c0236*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)v69 + 1) )
-        (**(void (__thiscall ***)(NiD3DVertexShader *, int))v69)(v69, 1);
+      if ( !InterlockedDecrement((volatile LONG *)v69 + 1) ) /*0x7c023c*/
+        (**(void (__thiscall ***)(NiD3DVertexShader *, int))v69)(v69, 1); /*0x7c0252*/
     }
-    *v70 = v68;
-    if ( v68 )
-      InterlockedIncrement((volatile LONG *)v68 + 1);
+    *v70 = v68; /*0x7c0256*/
+    if ( v68 ) /*0x7c0258*/
+      InterlockedIncrement((volatile LONG *)v68 + 1); /*0x7c025e*/
   }
-  v71 = this->Pixel[7];
-  v72 = this->passes[0xC];
-  v73 = v72->PixelShader;
-  v74 = &v72->PixelShader;
-  if ( v73 != v71 )
+  v71 = this->Pixel[7]; /*0x7c0264*/
+  v72 = this->passes[0xC]; /*0x7c026a*/
+  v73 = v72->PixelShader; /*0x7c0270*/
+  v74 = &v72->PixelShader; /*0x7c0273*/
+  if ( v73 != v71 ) /*0x7c0278*/
   {
-    if ( v73 )
+    if ( v73 ) /*0x7c027c*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)v73 + 1) )
-        (**(void (__thiscall ***)(NiD3DPixelShader *, int))v73)(v73, 1);
+      if ( !InterlockedDecrement((volatile LONG *)v73 + 1) ) /*0x7c0282*/
+        (**(void (__thiscall ***)(NiD3DPixelShader *, int))v73)(v73, 1); /*0x7c0298*/
     }
-    *v74 = v71;
-    if ( v71 )
-      InterlockedIncrement((volatile LONG *)v71 + 1);
+    *v74 = v71; /*0x7c029c*/
+    if ( v71 ) /*0x7c029e*/
+      InterlockedIncrement((volatile LONG *)v71 + 1); /*0x7c02a4*/
   }
 }

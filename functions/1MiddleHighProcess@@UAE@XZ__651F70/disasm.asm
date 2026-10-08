@@ -14,7 +14,7 @@
 0x651F8F: mov     large fs:0, eax
 0x651F95: mov     esi, ecx
 0x651F97: mov     [esp+24h+var_10], esi
-0x651F9B: mov     dword ptr [esi], offset ??_7MiddleHighProcess@@6B@; const MiddleHighProcess::`vftable'
+0x651F9B: mov     dword ptr [esi], offset ??_7MiddleHighProcess@@6B@; Verified persistence family:3F0 size,3F4 save,3F8 load,404 revert; base/low/middle-low bodies decoded and MobileObject dispatch confirmed. Probable:3FC InitLoadGame and400 FinishInitLoadGame; derived middle-high/high overrides remain only family-mapped, not fully decoded.
 0x651FA1: mov     edi, [esi+174h]
 0x651FA7: xor     ebx, ebx
 0x651FA9: cmp     edi, ebx
@@ -31,10 +31,10 @@
 0x651FC6: cmp     edi, ebx
 0x651FC8: jnz     short loc_651FB5
 0x651FCA: mov     ecx, [esi+174h]
-0x651FD0: call    BSSimpleList_Clear
+0x651FD0: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x651FD5: mov     eax, [esi+174h]
 0x651FDB: push    eax
-0x651FDC: call    FormHeapFree
+0x651FDC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x651FE1: add     esp, 4
 0x651FE4: mov     edi, [esi+0E4h]
 0x651FEA: cmp     edi, ebx
@@ -42,7 +42,7 @@
 0x651FEE: mov     ecx, edi
 0x651FF0: call    ContainerEntryExtraData_DestroyDataTable
 0x651FF5: push    edi
-0x651FF6: call    FormHeapFree
+0x651FF6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x651FFB: add     esp, 4
 0x651FFE: mov     edi, [esi+0E8h]
 0x652004: cmp     edi, ebx
@@ -50,7 +50,7 @@
 0x652008: mov     ecx, edi
 0x65200A: call    ContainerEntryExtraData_DestroyDataTable
 0x65200F: push    edi
-0x652010: call    FormHeapFree
+0x652010: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x652015: add     esp, 4
 0x652018: mov     edi, [esi+0ECh]
 0x65201E: cmp     edi, ebx
@@ -58,7 +58,7 @@
 0x652022: mov     ecx, edi
 0x652024: call    ContainerEntryExtraData_DestroyDataTable
 0x652029: push    edi
-0x65202A: call    FormHeapFree
+0x65202A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x65202F: add     esp, 4
 0x652032: mov     edi, [esi+0F0h]
 0x652038: cmp     edi, ebx
@@ -66,7 +66,7 @@
 0x65203C: mov     ecx, edi
 0x65203E: call    ContainerEntryExtraData_DestroyDataTable
 0x652043: push    edi
-0x652044: call    FormHeapFree
+0x652044: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x652049: add     esp, 4
 0x65204C: mov     ebp, ds:0A2807Ch
 0x652052: mov     [esi+0E4h], ebx
@@ -96,9 +96,9 @@
 0x6520A5: test    al, al
 0x6520A7: mov     ecx, [esi+0C0h]
 0x6520AD: jz      short loc_6520BD
-0x6520AF: push    ecx
-0x6520B0: mov     ecx, ds:0B33B00h
-0x6520B6: call    sub_45C7A0
+0x6520AF: push    ecx; form
+0x6520B0: mov     ecx, ds:0B33B00h; self
+0x6520B6: call    TESSaveLoadGame_DeleteForm
 0x6520BB: jmp     short loc_6520CA
 0x6520BD: cmp     ecx, ebx
 0x6520BF: jz      short loc_6520CA
@@ -111,14 +111,14 @@
 0x6520D6: jnz     short loc_6520DC
 0x6520D8: cmp     [ecx], ebx
 0x6520DA: jz      short loc_6520E1
-0x6520DC: call    BSSimpleList_Clear
+0x6520DC: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x6520E1: mov     edi, [esi+17Ch]
 0x6520E7: cmp     edi, ebx
 0x6520E9: jz      short loc_6520FB
 0x6520EB: mov     ecx, edi; this
-0x6520ED: call    DisposeActorAnimData
+0x6520ED: call    DisposeActorAnimData; Destroys ActorAnimData-owned state. Releases current/queued/cleanup idles; deactivates and releases the controller manager; deleting-destructs every +0x9C animation-map entry; frees the +0xB8 pending-KF linked list; clears/destroys the map; and nulls the accumulation node. Confirms map entries and pending-KF nodes are ActorAnimData-owned.
 0x6520F2: push    edi
-0x6520F3: call    FormHeapFree
+0x6520F3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6520F8: add     esp, 4
 0x6520FB: mov     [esi+17Ch], ebx
 0x652101: mov     edi, [esi+184h]
@@ -142,7 +142,7 @@
 0x652131: mov     eax, [esi+0B4h]
 0x652137: mov     edi, [eax+4]
 0x65213A: push    eax
-0x65213B: call    FormHeapFree
+0x65213B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x652140: add     esp, 4
 0x652143: cmp     edi, ebx
 0x652145: mov     [esi+0B4h], edi
@@ -164,10 +164,10 @@
 0x652177: cmp     edi, ebx
 0x652179: jnz     short loc_652160
 0x65217B: mov     ecx, [esi+170h]
-0x652181: call    BSSimpleList_Clear
+0x652181: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x652186: mov     eax, [esi+170h]
 0x65218C: push    eax
-0x65218D: call    FormHeapFree
+0x65218D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x652192: add     esp, 4
 0x652195: mov     [esi+170h], ebx
 0x65219B: mov     edi, [esi+184h]
@@ -214,3 +214,18 @@
 0x652206: pop     ebx
 0x652207: add     esp, 10h
 0x65220A: retn
+0x9C3B00: mov     ecx, [ebp-10h]; this
+0x9C3B03: jmp     ??1MiddleLowProcess@@UAE@XZ; MiddleLowProcess::~MiddleLowProcess(void)
+0x9C3B08: mov     ecx, [ebp-10h]
+0x9C3B0B: add     ecx, 118h; slot
+0x9C3B11: jmp     NiPointerSlot_Release
+0x9C3B16: mov     ecx, [ebp-10h]
+0x9C3B19: add     ecx, 184h; slot
+0x9C3B1F: jmp     NiPointerSlot_Release
+0x9C3B24: mov     edx, [esp+arg_4]
+0x9C3B28: lea     eax, [edx-14h]
+0x9C3B2B: mov     ecx, [edx-18h]
+0x9C3B2E: xor     ecx, eax
+0x9C3B30: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C3B35: mov     eax, offset stru_AEC678
+0x9C3B3A: jmp     ___CxxFrameHandler3

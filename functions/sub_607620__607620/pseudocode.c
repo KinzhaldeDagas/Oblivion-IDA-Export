@@ -1,29 +1,29 @@
-char __usercall sub_607620@<al>(_DWORD *a1@<ecx>, char a2@<bpl>, double a3@<st2>, double a4@<st1>, double a5@<st0>)
+char __thiscall sub_607620(MobileObject *this)
 {
-  int v6; // ecx
-  int v7; // eax
-  MiddleHighProcess *v8; // eax
-  MiddleHighProcess *v9; // edi
-  void (__thiscall ***v10)(_DWORD, int); // ecx
+  LowProcess *process; // ecx
+  int v3; // eax
+  MiddleHighProcess *v4; // eax
+  MiddleHighProcess *v5; // edi
+  LowProcess *v6; // ecx
 
-  v6 = a1[0x16];
-  if ( !v6 || (*(int (__thiscall **)(int))(*(_DWORD *)v6 + 8))(v6) != 1 )
+  process = this->process; /*0x607645*/
+  if ( !process || process->GetProcessLevel(process) != 1 ) /*0x607656*/
   {
-    v7 = (*(int (__thiscall **)(_DWORD))(*(_DWORD *)a1[0x16] + 8))(a1[0x16]);
-    sub_674550(a2, a3, a4, a5, (int)a1, v7);
-    v8 = (MiddleHighProcess *)FormHeapAlloc(0x18Cu);
-    if ( v8 )
-      v9 = MiddleHighProcess::MiddleHighProcess(v8);
+    v3 = this->process->GetProcessLevel(this->process); /*0x607664*/
+    sub_674550((int)this, v3); /*0x60766d*/
+    v4 = (MiddleHighProcess *)FormHeapAlloc(0x18Cu); /*0x607677*/
+    if ( v4 ) /*0x60768d*/
+      v5 = MiddleHighProcess::MiddleHighProcess(v4); /*0x607696*/
     else
-      v9 = 0;
-    v9->Copy(v9, (BaseProcess *)a1[0x16]);
-    v10 = (void (__thiscall ***)(_DWORD, int))a1[0x16];
-    if ( v10 )
-      (**v10)(v10, 1);
-    a1[0x16] = v9;
-    sub_673A90((int)a1, 1, 0, 0, 0);
-    (*(void (__thiscall **)(_DWORD *, _DWORD))(*a1 + 0x178))(a1, 0);
-    (*(void (__thiscall **)(_DWORD))(*(_DWORD *)a1[0x16] + 0x4C))(a1[0x16]);
+      v5 = 0; /*0x60769a*/
+    v5->Copy(v5, this->process); /*0x6076af*/
+    v6 = this->process; /*0x6076b1*/
+    if ( v6 ) /*0x6076b6*/
+      ((void (__thiscall *)(LowProcess *, int))v6->Destructor)(v6, 1); /*0x6076be*/
+    this->process = v5; /*0x6076ce*/
+    ActorProcessManager_AddMobileObject((ActorProcessManager *)&qword_B3BB2C[0x75], this, 1, 0, 0, 0); /*0x6076d1*/
+    ((void (__thiscall *)(MobileObject *, _DWORD))this->vtbl->super.Unk_5E)(this, 0); /*0x6076e2*/
+    this->process->Unk_13(this->process); /*0x6076ec*/
   }
-  return 1;
+  return 1; /*0x6076f0*/
 }

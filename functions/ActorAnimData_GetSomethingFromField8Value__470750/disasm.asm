@@ -1,4 +1,4 @@
-0x470750: mov     edx, [esp+arg_0]
+0x470750: mov     edx, [esp+slot]; Reads the per-slot action/state dword at ActorAnimData +0x48 + 4*normalizedSlot. Native aliases slot 5 to slot 0 and slot 6 to slot 3.
 0x470754: mov     eax, edx
 0x470756: sub     eax, 5
 0x470759: jz      short loc_47076C

@@ -1,13 +1,14 @@
-void __cdecl sub_794FC0(_DWORD *a1, _DWORD *a2)
+// OBLIVION AUTHORITY (2026-08-30): Destroys each 0x10-byte vector owner in [first,last), freeing its owned buffer and clearing the pointer triplet.
+void __cdecl OB_stVector4_DestroyRange_010201A0(OB_stVector4_010201A0 *first, OB_stVector4_010201A0 *last)
 {
-  _DWORD *i; // esi
+  OB_stVector4_010201A0 *i; // esi
 
-  for ( i = a1; i != a2; i += 4 )
+  for ( i = first; i != last; ++i ) /*0x794fcc*/
   {
-    if ( i[1] )
-      FormHeapFree(i[1]);
-    i[1] = 0;
-    i[2] = 0;
-    i[3] = 0;
+    if ( i->begin ) /*0x794fd1*/
+      FormHeapFree((unsigned int)i->begin); /*0x794fd9*/
+    i->begin = 0; /*0x794fe1*/
+    i->end = 0; /*0x794fe4*/
+    i->capacity = 0; /*0x794fe7*/
   }
 }

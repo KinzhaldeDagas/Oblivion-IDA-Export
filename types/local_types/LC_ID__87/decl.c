@@ -1,1 +1,1 @@
-LC_ID
+typedef tagLC_ID LC_ID;

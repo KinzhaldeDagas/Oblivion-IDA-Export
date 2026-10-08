@@ -1,9 +1,9 @@
 _DWORD *sub_A14220()
 {
-  return sub_90D190(
-           dword_BA87F4,
+  return sub_90D190( /*0xa1424a*/
+           unk_BA87F4,
            (int)"hkRagdollConstraintData",
-           (int)dword_BA8620,
+           (int)unk_BA8620,
            0x90,
            0,
            0,

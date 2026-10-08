@@ -1,36 +1,32 @@
-int sub_7A6D30()
+// Oblivion Random::SetLong. Stores the supplied integer seed and fills the complete 128-float shuffle buffer by repeated Park-Miller Raw steps.
+void __cdecl OB_Random_SetLong_010201A0(int seed)
 {
-  double v0; // st6
-  float *v1; // esi
-  double v2; // st7
-  int v3; // eax
-  int v4; // ecx
-  int result; // eax
-  int v6; // ecx
-  double v7; // st6
-  int v8; // [esp+4h] [ebp+4h]
-  float v9; // [esp+4h] [ebp+4h]
+  double v1; // st6
+  float *v2; // esi
+  double v3; // st7
+  int v4; // eax
+  int v5; // ecx
+  double v6; // st6
+  int seeda; // [esp+4h] [ebp+4h]
+  float seedb; // [esp+4h] [ebp+4h]
 
-  v0 = dbl_A89C50;
-  v1 = flt_B42A90;
-  while ( 1 )
+  v1 = dbl_A89C50; /*0x7a6d35*/
+  v2 = OB_Random_Buffer_010201A0; /*0x7a6d3b*/
+  while ( 1 ) /*0x7a6d44*/
   {
-    v2 = v0;
-    v3 = Double_To_SInt32(v0);
-    v4 = 0x41A7 * v3;
-    result = 0x7FFFFFFF * (v3 / 0x1F31D);
-    v6 = v4 - result;
-    v8 = v6;
-    if ( v6 <= 0 )
-      v8 = v6 + 0x7FFFFFFF;
-    v7 = (double)v8;
-    ++v1;
-    v9 = v7;
-    v1[0xFFFFFFFF] = v9 * v2;
-    if ( (int)v1 >= (int)&dbl_B42C90 )
-      break;
-    v0 = v2;
+    v3 = v1; /*0x7a6d44*/
+    v4 = Double_To_SInt32(v1); /*0x7a6d46*/
+    v5 = 0x41A7 * v4 - 0x7FFFFFFF * (v4 / 0x1F31D); /*0x7a6d6c*/
+    seeda = v5; /*0x7a6d70*/
+    if ( v5 <= 0 ) /*0x7a6d74*/
+      seeda = v5 + 0x7FFFFFFF; /*0x7a6d7c*/
+    v6 = (double)seeda; /*0x7a6d80*/
+    ++v2; /*0x7a6d84*/
+    seedb = v6; /*0x7a6d8d*/
+    v2[0xFFFFFFFF] = seedb * v3; /*0x7a6d97*/
+    if ( (int)v2 >= (int)&OB_Random_seed_010201A0 ) /*0x7a6d9a*/
+      break; /*0x7a6d9a*/
+    v1 = v3; /*0x7a6d42*/
   }
-  dbl_B42C90 = v7;
-  return result;
+  OB_Random_seed_010201A0 = v6; /*0x7a6d9f*/
 }

@@ -1,14 +1,14 @@
-0x7830C0: push    ebx
-0x7830C1: mov     ebx, [esp+4+arg_4]
+0x7830C0: push    ebx; DirectX10OBSE authority: Oblivion NiD3DVertexShader constant setter. Dispatches typed constant entries to D3D SetVertexShaderConstantB/I/F via vtable +0x188/+0x180/+0x178; bridge hooks setters and now seeds active native VS constants after create/reset.
+0x7830C1: mov     ebx, [esp+4+sourceOverride]
 0x7830C5: test    ebx, ebx
 0x7830C7: push    ebp
 0x7830C8: push    esi
 0x7830C9: push    edi
-0x7830CA: mov     edi, [esp+10h+arg_0]
+0x7830CA: mov     edi, [esp+10h+entry]
 0x7830CE: mov     ebp, ecx
 0x7830D0: jnz     short loc_7830D5
 0x7830D2: mov     ebx, [edi+30h]
-0x7830D5: mov     esi, [esp+10h+arg_8]
+0x7830D5: mov     esi, [esp+10h+countOverride]
 0x7830D9: test    esi, esi
 0x7830DB: jnz     short loc_7830E9
 0x7830DD: mov     esi, [edi+20h]
@@ -17,10 +17,10 @@
 0x7830E4: mov     esi, 1
 0x7830E9: cmp     byte ptr ds:0B4295Bh, 0
 0x7830F0: mov     eax, [edi+14h]
-0x7830F3: mov     [esp+10h+arg_4], eax
+0x7830F3: mov     [esp+10h+sourceOverride], eax
 0x7830F7: jnz     short loc_783102
-0x7830F9: call    sub_783C70
-0x7830FE: mov     eax, [esp+10h+arg_4]
+0x7830F9: call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.
+0x7830FE: mov     eax, [esp+10h+sourceOverride]
 0x783102: mov     edi, [edi+1Ch]
 0x783105: mov     ebp, [ebp+24h]
 0x783108: and     eax, 0FFh

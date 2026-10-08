@@ -156,7 +156,7 @@
 0x846A50: jp      loc_846C32
 0x846A56: fstp    st(2)
 0x846A58: fstp    st
-0x846A5A: cmp     byte ptr [esp+48h+arg_10], 0
+0x846A5A: cmp     byte ptr [esp+48h+value], 0
 0x846A5F: fstp    [esp+48h+arg_C]
 0x846A63: fld     dword ptr ds:0B4312Ch
 0x846A69: mov     ecx, ds:0B4312Ch
@@ -249,21 +249,21 @@
 0x846BDB: jz      short loc_846C1C
 0x846BDD: mov     ebx, 1
 0x846BE2: add     [esi+60h], ebx
-0x846BE5: mov     [esp+48h+arg_10], esi
+0x846BE5: mov     [esp+48h+value], esi
 0x846BE9: mov     edi, [esp+48h+var_34]
 0x846BED: mov     ecx, [edi+38h]
-0x846BF0: lea     eax, [esp+48h+arg_10]
-0x846BF4: push    eax
-0x846BF5: push    ecx
-0x846BF6: lea     ecx, [edi+40h]
+0x846BF0: lea     eax, [esp+48h+value]
+0x846BF4: push    eax; value
+0x846BF5: push    ecx; index
+0x846BF6: lea     ecx, [edi+40h]; this
 0x846BF9: mov     [esp+50h+var_4], 0
-0x846C01: call    sub_76CE40
+0x846C01: call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.
 0x846C06: or      eax, 0FFFFFFFFh
 0x846C09: add     [esi+60h], eax
 0x846C0C: mov     [esp+48h+var_4], eax
 0x846C10: jnz     short loc_846C19
 0x846C12: mov     ecx, esi
-0x846C14: call    sub_7604D0
+0x846C14: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x846C19: add     [edi+38h], ebx
 0x846C1C: mov     ecx, [esp+48h+var_C]
 0x846C20: mov     large fs:0, ecx
@@ -281,3 +281,12 @@
 0x846C3B: jnz     loc_846A58
 0x846C41: fstp    st(1)
 0x846C43: jmp     loc_846A5A
+0x9D32D0: lea     ecx, [ebp+14h]; void *
+0x9D32D3: jmp     sub_4027D0
+0x9D32D8: mov     edx, [esp+arg_4]
+0x9D32DC: lea     eax, [edx-38h]
+0x9D32DF: mov     ecx, [edx-3Ch]
+0x9D32E2: xor     ecx, eax
+0x9D32E4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D32E9: mov     eax, offset stru_AFB710
+0x9D32EE: jmp     ___CxxFrameHandler3

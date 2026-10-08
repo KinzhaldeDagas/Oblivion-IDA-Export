@@ -2,7 +2,7 @@
 0x9E5C26: push    ecx
 0x9E5C27: fstp    [esp+4+var_4]; float
 0x9E5C2A: push    offset aFmasseranglefa; "fMasserAngleFadeStart"
-0x9E5C2F: mov     ecx, offset fMasserAngleFadeStart
+0x9E5C2F: mov     ecx, 0B365C8h
 0x9E5C34: call    GameSetting_ConstrAndReg_float
 0x9E5C39: push    offset sub_A1D260; void (__cdecl *)()
 0x9E5C3E: call    _atexit

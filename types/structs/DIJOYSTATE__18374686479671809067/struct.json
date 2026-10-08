@@ -1,64 +1,108 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "DIJOYSTATE",
+  "definition": "struct DIJOYSTATE\n{\nLONG lX; ///< [Controller decode 2026-07-09] Axis selector 1.\nLONG lY; ///< [Controller decode 2026-07-09] Axis selector 2.\nLONG lZ; ///< [Controller decode 2026-07-09] Axis selector 3.\nLONG lRx; ///< [Controller decode 2026-07-09] Axis selector 4.\nLONG lRy; ///< [Controller decode 2026-07-09] Axis selector 5.\nLONG lRz; ///< [Controller decode 2026-07-09] Axis selector 6.\nLONG rglSlider[2]; ///< [Controller decode 2026-07-09] Two sliders accepted by g_joystickDIDATAFORMAT; not used by stock player axis settings observed so far.\nDWORD rgdwPOV[4]; ///< [Controller decode 2026-07-09] Four DirectInput POV angles; neutral is 0xFFFF/0xFFFFFFFF.\nBYTE rgbButtons[32]; ///< [Controller decode 2026-07-09] 32 button bytes; high bit set means pressed.\n}\n",
   "id": 18374686479671809067,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "[Controller decode 2026-07-09] Axis selector 1.",
       "name": "lX",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "[Controller decode 2026-07-09] Axis selector 2.",
       "name": "lY",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "[Controller decode 2026-07-09] Axis selector 3.",
       "name": "lZ",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "[Controller decode 2026-07-09] Axis selector 4.",
       "name": "lRx",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "[Controller decode 2026-07-09] Axis selector 5.",
       "name": "lRy",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "[Controller decode 2026-07-09] Axis selector 6.",
       "name": "lRz",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "[Controller decode 2026-07-09] Two sliders accepted by g_joystickDIDATAFORMAT; not used by stock player axis settings observed so far.",
       "name": "rglSlider",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 8
+      "size": 8,
+      "type": "LONG[2]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "[Controller decode 2026-07-09] Four DirectInput POV angles; neutral is 0xFFFF/0xFFFFFFFF.",
       "name": "rgdwPOV",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 16
+      "size": 16,
+      "type": "DWORD[4]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "[Controller decode 2026-07-09] 32 button bytes; high bit set means pressed.",
       "name": "rgbButtons",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 32
+      "size": 32,
+      "type": "BYTE[32]"
     }
   ],
   "name": "DIJOYSTATE",
+  "ordinal": 747,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 80
 }

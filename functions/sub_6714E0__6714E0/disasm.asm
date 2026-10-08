@@ -1,4 +1,4 @@
-0x6714E0: push    ebp
+0x6714E0: push    ebp; Queued-move processor called from Player_OnInput. It may call PlayerCharacter_ProcessQueuedWorldspaceMove only when global/player/worldspace gates pass; a call-site wrapper at 0x672F08 should run its pending encounter logic after calling this original function.
 0x6714E1: mov     ebp, esp
 0x6714E3: and     esp, 0FFFFFFF8h
 0x6714E6: sub     esp, 10h
@@ -74,7 +74,7 @@
 0x6715C0: jb      short loc_671563
 0x6715C2: push    0; float
 0x6715C4: mov     ecx, edi; this
-0x6715C6: call    sub_66FF10
+0x6715C6: call    PlayerCharacter_ProcessQueuedWorldspaceMove; Queued worldspace move processor. It consumes PlayerCharacter queued position/worldspace fields at +0x720/+0x72C for queued moves, separate from the synchronous world-map fast-travel relocation at 0x66FAFA.
 0x6715CB: pop     edi
 0x6715CC: pop     esi
 0x6715CD: pop     ebp
@@ -91,7 +91,7 @@
 0x6715E5: jz      short loc_6715A8
 0x6715E7: push    0; float
 0x6715E9: mov     ecx, edi; int
-0x6715EB: call    sub_66FF10
+0x6715EB: call    PlayerCharacter_ProcessQueuedWorldspaceMove; Queued worldspace move processor. It consumes PlayerCharacter queued position/worldspace fields at +0x720/+0x72C for queued moves, separate from the synchronous world-map fast-travel relocation at 0x66FAFA.
 0x6715F0: pop     edi
 0x6715F1: pop     esi
 0x6715F2: pop     ebp

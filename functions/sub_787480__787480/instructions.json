@@ -97,13 +97,13 @@
   },
   {
     "ea": "0x7874AE",
-    "line": "lea     ecx, [esp+38h+var_18]",
+    "line": "lea     ecx, [esp+38h+var_18]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7874B2",
-    "line": "fstp    [esp+38h+var_18]",
+    "line": "fstp    [esp+38h+var_18.x]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x7874B9",
-    "line": "fstp    [esp+38h+var_14]",
+    "line": "fstp    [esp+38h+var_18.y]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x7874C0",
-    "line": "fstp    [esp+38h+var_10]",
+    "line": "fstp    [esp+38h+var_18.z]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x7874C7",
-    "line": "fstp    [esp+38h+var_24]",
+    "line": "fstp    [esp+38h+other.x]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x7874CE",
-    "line": "fstp    [esp+38h+var_20]",
+    "line": "fstp    [esp+38h+other.y]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -163,25 +163,25 @@
   },
   {
     "ea": "0x7874D5",
-    "line": "lea     eax, [esp+38h+var_24]",
+    "line": "lea     eax, [esp+38h+other]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7874D9",
-    "line": "push    eax",
+    "line": "push    eax; other",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7874DA",
-    "line": "fstp    [esp+3Ch+var_1C]",
+    "line": "fstp    [esp+3Ch+other.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7874DE",
-    "line": "call    sub_786E50",
+    "line": "call    OB_stVec3_DistanceApprox_010201A0; Oblivion 1.2.0.416: stVec3 distance using squared component deltas followed by the IEEE bit approximation (bits>>1)+0x1FC00000. RT4.1 stVec3::Distance and _idv_sqrt1 corroborate the exact formula.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,13 +223,13 @@
   },
   {
     "ea": "0x7874F6",
-    "line": "fld     [esp+38h+var_24]",
+    "line": "fld     [esp+38h+other.x]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7874FA",
-    "line": "fadd    [esp+38h+var_18]",
+    "line": "fadd    [esp+38h+var_18.x]",
     "mnemonic": "fadd",
     "size": 4
   },
@@ -241,13 +241,13 @@
   },
   {
     "ea": "0x787502",
-    "line": "fld     [esp+38h+var_14]",
+    "line": "fld     [esp+38h+var_18.y]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x787506",
-    "line": "fadd    [esp+38h+var_20]",
+    "line": "fadd    [esp+38h+other.y]",
     "mnemonic": "fadd",
     "size": 4
   },
@@ -259,13 +259,13 @@
   },
   {
     "ea": "0x78750E",
-    "line": "fld     [esp+38h+var_1C]",
+    "line": "fld     [esp+38h+other.z]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x787512",
-    "line": "fadd    [esp+38h+var_10]",
+    "line": "fadd    [esp+38h+var_18.z]",
     "mnemonic": "fadd",
     "size": 4
   },
@@ -289,13 +289,13 @@
   },
   {
     "ea": "0x787520",
-    "line": "fstp    [esp+38h+var_24]",
+    "line": "fstp    [esp+38h+other.x]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x787524",
-    "line": "mov     ebp, [esp+38h+var_24]",
+    "line": "mov     ebp, [esp+38h+other.x]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -313,13 +313,13 @@
   },
   {
     "ea": "0x78752E",
-    "line": "fstp    [esp+38h+var_20]",
+    "line": "fstp    [esp+38h+other.y]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x787532",
-    "line": "mov     ecx, [esp+38h+var_20]",
+    "line": "mov     ecx, [esp+38h+other.y]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -331,13 +331,13 @@
   },
   {
     "ea": "0x78753A",
-    "line": "fstp    [esp+38h+var_1C]",
+    "line": "fstp    [esp+38h+other.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x78753E",
-    "line": "mov     edx, [esp+38h+var_1C]",
+    "line": "mov     edx, [esp+38h+other.z]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x78754B",
-    "line": "push    eax; int",
+    "line": "push    eax; shadowCoordRemap",
     "mnemonic": "push",
     "size": 1
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x787551",
-    "line": "fstp    [esp+4Ch+var_40]; float",
+    "line": "fstp    [esp+4Ch+radius]; radius",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -397,13 +397,13 @@
   },
   {
     "ea": "0x78755A",
-    "line": "push    ebx; int",
+    "line": "push    ebx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78755B",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x787560",
-    "line": "call    sub_7A51C0",
+    "line": "call    OB_CProjectedShadow_ComputeTexCoords_010201A0; Oblivion projected-shadow UV generator. Projects each indexed vertex along parsed right/up axes, optionally applies the six-float remap, and appends the resulting pair to CIndexedGeometry::shadowTexcoords.",
     "mnemonic": "call",
     "size": 5
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x78756E",
-    "line": "push    0; int",
+    "line": "push    0; shadowCoordRemap",
     "mnemonic": "push",
     "size": 2
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x787575",
-    "line": "fstp    [esp+4Ch+var_40]; float",
+    "line": "fstp    [esp+4Ch+radius]; radius",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -481,13 +481,13 @@
   },
   {
     "ea": "0x78757E",
-    "line": "push    ebx; int",
+    "line": "push    ebx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78757F",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -499,13 +499,13 @@
   },
   {
     "ea": "0x787584",
-    "line": "call    sub_7A51C0",
+    "line": "call    OB_CProjectedShadow_ComputeTexCoords_010201A0; Oblivion projected-shadow UV generator. Projects each indexed vertex along parsed right/up axes, optionally applies the six-float remap, and appends the resulting pair to CIndexedGeometry::shadowTexcoords.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x787589",
-    "line": "push    0; int",
+    "line": "push    0; shadowCoordRemap",
     "mnemonic": "push",
     "size": 2
   },
@@ -517,13 +517,13 @@
   },
   {
     "ea": "0x78758F",
-    "line": "mov     ecx, [esp+3Ch+var_20]",
+    "line": "mov     ecx, [esp+3Ch+other.y]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x787593",
-    "line": "mov     edx, [esp+3Ch+var_1C]",
+    "line": "mov     edx, [esp+3Ch+other.z]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x78759C",
-    "line": "fstp    [esp+4Ch+var_40]; float",
+    "line": "fstp    [esp+4Ch+radius]; radius",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x7875A5",
-    "line": "mov     ecx, [esi+50h]",
+    "line": "mov     ecx, [esi+50h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -577,13 +577,13 @@
   },
   {
     "ea": "0x7875AE",
-    "line": "push    eax; int",
+    "line": "push    eax; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7875AF",
-    "line": "call    sub_7A51C0",
+    "line": "call    OB_CProjectedShadow_ComputeTexCoords_010201A0; Oblivion projected-shadow UV generator. Projects each indexed vertex along parsed right/up axes, optionally applies the six-float remap, and appends the resulting pair to CIndexedGeometry::shadowTexcoords.",
     "mnemonic": "call",
     "size": 5
   },

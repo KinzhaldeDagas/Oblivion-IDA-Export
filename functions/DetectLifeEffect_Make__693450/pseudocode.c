@@ -1,15 +1,15 @@
-ActiveEffect *__cdecl DetectLifeEffect_Make(int a1, int a2, int a3)
+ActiveEffect *__cdecl DetectLifeEffect_Make(MagicCaster *caster, MagicItem *magicItem, EffectItem *effectItem)
 {
   ActiveEffect *v3; // esi
   ActiveEffect *result; // eax
 
-  v3 = (ActiveEffect *)FormHeapAlloc(0x3Cu);
-  result = 0;
-  if ( v3 )
+  v3 = (ActiveEffect *)FormHeapAlloc(0x3Cu); /*0x693479*/
+  result = 0; /*0x693482*/
+  if ( v3 ) /*0x69348a*/
   {
-    ValueModifierEffect_constr(v3, a1, a2, a3);
-    v3->vtbl = (ActiveEffectVtbl *)&DetectLifeEffect::`vftable';
-    return v3;
+    ValueModifierEffect_constr(v3, caster, magicItem, effectItem); /*0x69349d*/
+    v3->vtbl = (ActiveEffectVtbl *)&DetectLifeEffect::`vftable'; /*0x6934a2*/
+    return v3; /*0x6934a8*/
   }
-  return result;
+  return result; /*0x6934aa*/
 }

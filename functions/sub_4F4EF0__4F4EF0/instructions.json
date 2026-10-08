@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4F4EF0",
-    "line": "push    ecx",
+    "line": "push    ecx; Oblivion GetRandomPercent_Eval draws Game_RandomLargeInteger(0) % 100, returning 0..99 per evaluation. Fallout's analogous condition callback (x4y6:0x823B70B0) uses BSRandom::UnsignedInt(100); both yield percent values, but the RNG source/reduction differs. This remains independent of TESTopicInfo.Random selection.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x4F4EF3",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x4F4F14",
-    "line": "mov     ecx, [esp+8+arg_C]",
+    "line": "mov     ecx, [esp+8+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x4F4F1B",
-    "line": "fild    [esp+4+var_4]",
+    "line": "fild    [esp+4+var_4]; Vanilla GetRandomPercent uses Game_RandomLargeInteger(0) % 100, yielding integer percent values 0..99.",
     "mnemonic": "fild",
     "size": 3
   },

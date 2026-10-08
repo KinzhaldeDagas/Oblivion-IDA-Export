@@ -31,7 +31,7 @@
 0x575BB3: mov     [esp+4DCh+var_498], ebx
 0x575BB7: mov     [esp+4DCh+var_48C], ebx
 0x575BBB: mov     [esp+4DCh+var_4BC], ebx
-0x575BBF: call    Double_To_SInt32
+0x575BBF: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x575BC4: mov     [esp+4DCh+var_4C0], eax
 0x575BC8: movzx   eax, word ptr [ebp+4]
 0x575BCC: cmp     ax, 0FFFFh
@@ -136,7 +136,7 @@
 0x575CFD: lea     edx, [esp+4E4h+var_484]
 0x575D01: push    edx
 0x575D02: mov     edx, [eax+4]
-0x575D05: mov     ecx, offset dword_B35574
+0x575D05: mov     ecx, offset g_GameSettingsByName
 0x575D0A: xor     ebp, ebp
 0x575D0C: call    edx
 0x575D0E: mov     ecx, ds:0B3557Ch
@@ -144,14 +144,13 @@
 0x575D17: test    esi, esi
 0x575D19: jz      short loc_575D48
 0x575D1B: jmp     short loc_575D20
-0x575D1D: align 10h
 0x575D20: mov     edx, [esi+4]
 0x575D23: push    edx
 0x575D24: mov     edx, ds:0B35574h
 0x575D2A: lea     eax, [esp+4ECh+var_488]
 0x575D2E: push    eax
 0x575D2F: mov     eax, [edx+8]
-0x575D32: mov     ecx, offset dword_B35574
+0x575D32: mov     ecx, offset g_GameSettingsByName
 0x575D37: call    eax
 0x575D39: test    al, al
 0x575D3B: jnz     short loc_575D45
@@ -171,7 +170,6 @@
 0x575D64: jnz     short loc_575DB9
 0x575D66: xor     esi, esi
 0x575D68: jmp     short loc_575D70
-0x575D6A: align 10h
 0x575D70: mov     eax, ds:0B399D0h[esi*4]
 0x575D77: test    eax, eax
 0x575D79: jz      short loc_575D7F
@@ -226,7 +224,6 @@
 0x575E05: jbe     short loc_575E28
 0x575E07: mov     ebp, [esp+4F0h+var_4DC]
 0x575E0B: jmp     short loc_575E10
-0x575E0D: align 10h
 0x575E10: mov     cl, [esp+eax+4F0h+var_410]
 0x575E17: mov     [edi+ebp], cl
 0x575E1A: add     eax, 1
@@ -265,7 +262,6 @@
 0x575E87: mov     eax, edi
 0x575E89: sub     edx, edi
 0x575E8B: jmp     short loc_575E90
-0x575E8D: align 10h
 0x575E90: mov     cl, [eax]
 0x575E92: mov     [edx+eax], cl
 0x575E95: add     eax, 1
@@ -281,7 +277,6 @@
 0x575EB7: mov     [esp+4F0h+var_4D8], 6
 0x575EBF: mov     [esp+4F0h+Src], 3
 0x575EC7: jmp     short loc_575ED0
-0x575EC9: align 10h
 0x575ED0: mov     eax, [esp+4F0h+var_4AC]
 0x575ED4: mov     ecx, [esp+4F0h+var_49C]
 0x575ED8: mov     al, [eax+ecx]
@@ -314,7 +309,7 @@
 0x575F31: fld     dword ptr [ecx]
 0x575F33: fiadd   [esp+4F0h+var_4A8]
 0x575F37: fiadd   [esp+4F0h+var_4CC]
-0x575F3B: call    Double_To_SInt32
+0x575F3B: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x575F40: mov     ecx, [esp+1Ch]
 0x575F44: push    ebx
 0x575F45: add     ecx, 20h ; ' '

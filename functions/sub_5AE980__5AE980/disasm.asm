@@ -1,4 +1,4 @@
-0x5AE980: sub     esp, 130h
+0x5AE980: sub     esp, 130h; Destroys and rebuilds LoadgameMenu rows. CharacterSpecificSaves v4 uses it for deferred character opening and Back, with focus cleared first; each enumeration recomputes exact-name counts and ordering.
 0x5AE986: mov     eax, ds:0B30AACh
 0x5AE98B: xor     eax, esp
 0x5AE98D: mov     [esp+130h+var_4], eax
@@ -24,11 +24,11 @@
 0x5AE9BA: jnz     short loc_5AE9A4
 0x5AE9BC: mov     ecx, [ebx+48h]
 0x5AE9BF: add     ecx, 30h ; '0'
-0x5AE9C2: call    NiTPointerList__FreeAllNodes
+0x5AE9C2: call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.
 0x5AE9C7: mov     ecx, ds:0B33B00h
 0x5AE9CD: call    sub_459400
 0x5AE9D2: mov     ecx, ds:0B33B00h
-0x5AE9D8: call    sub_45D450
+0x5AE9D8: call    TESSaveLoadGame_EnumerateSaveFiles; CharacterSpecificSaves v4 hook: after native enumeration, overview reorders only saveFile payloads A-Z by exact character name (newest first within name); detail filters exact name and deterministically sorts newest-first.
 0x5AE9DD: mov     ecx, ds:0B33B00h
 0x5AE9E3: mov     esi, [ecx+6Ch]
 0x5AE9E6: xor     edi, edi
@@ -51,9 +51,8 @@
 0x5AEA0B: lea     edx, [esp+14Ch+var_130]
 0x5AEA0F: push    edx
 0x5AEA10: mov     ecx, ebx
-0x5AEA12: call    sub_5AE6D0
+0x5AEA12: call    LoadgameMenu_AddSaveRow; CharacterSpecificSaves v9 wraps native row creation after overview compaction. It changes user3 to Name (N) and centers only the overview label while preserving user0 listindex, user2 save name, installed fonts, focus boxes, scrolling, and preview behavior.
 0x5AEA17: jmp     short loc_5AEA3F
-0x5AEA19: align 10h
 0x5AEA20: mov     eax, [esi]
 0x5AEA22: test    eax, eax
 0x5AEA24: jz      short loc_5AEA3F
@@ -63,7 +62,7 @@
 0x5AEA29: lea     eax, [esp+14Ch+var_130]
 0x5AEA2D: push    eax
 0x5AEA2E: mov     ecx, ebx
-0x5AEA30: call    sub_5AE6D0
+0x5AEA30: call    LoadgameMenu_AddSaveRow; CharacterSpecificSaves v4 AddSaveRow hook emits one overview row per exact character name and labels it Name (total save count); duplicate name saves are suppressed as rows but retained for the detail view.
 0x5AEA35: mov     esi, [esi+4]
 0x5AEA38: add     edi, 1
 0x5AEA3B: test    esi, esi

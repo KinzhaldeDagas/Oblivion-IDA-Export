@@ -1,4 +1,5 @@
-char __stdcall sub_470B50(int a1, float a2)
+// BSAnimGroupSequence deactivation wrapper. Delegates to NiControllerSequence_Deactivate with the secondary stop flag forced to zero.
+char __stdcall BSAnimGroupSequence_Deactivate(BSAnimGroupSequence *sequence, float easeOutTime)
 {
-  return sub_6C9CB0(a1, a2, 0);
+  return NiControllerSequence_Deactivate((int)sequence, easeOutTime, 0); /*0x470b63*/
 }

@@ -1,4 +1,5 @@
-void __usercall sub_478DB0(char *this@<ecx>, char a2@<bpl>, double a3@<st2>, double a4@<st1>, double a5@<st0>)
+// Clears ActorSkinInfo ammo form/model/3D state at +0x10C/+0x110/+0x114.
+void __thiscall ActorSkinInfo_ClearAmmoSlot(ActorSkinInfo *this)
 {
-  sub_478780(this, a2, a3, a4, a5, (int)(this + 0x10C), 1, 0);
+  ActorSkinInfo_ClearOrReplaceEquipmentSlot(this, (ActorSkinInfoEquipmentSlot *)&this->AmmoForm, 1, 0); /*0x478dbb*/
 }

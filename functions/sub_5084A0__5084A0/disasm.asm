@@ -1,6 +1,6 @@
 0x5084A0: sub     esp, 8
 0x5084A3: mov     edx, [esp+8+l]
-0x5084A7: lea     eax, [esp+8+var_8]
+0x5084A7: lea     eax, [esp+8+cellY]
 0x5084AA: push    eax
 0x5084AB: mov     eax, [esp+0Ch+arg_10]
 0x5084AF: lea     ecx, [esp+0Ch+ArgList]
@@ -18,8 +18,8 @@
 0x5084CD: push    ecx; a2
 0x5084CE: push    edx; a1
 0x5084CF: mov     dword ptr [esp+2Ch+ArgList], 0
-0x5084D7: mov     [esp+2Ch+var_8], 0
-0x5084DF: call    Script_ExtractArgs
+0x5084D7: mov     [esp+2Ch+cellY], 0
+0x5084DF: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x5084E4: add     esp, 24h
 0x5084E7: test    al, al
 0x5084E9: jnz     short loc_5084EF
@@ -47,26 +47,26 @@
 0x508529: test    ecx, ecx
 0x50852B: jz      short loc_508532
 0x50852D: call    sub_4BD980
-0x508532: mov     ecx, [esp+0Ch+var_8]
+0x508532: mov     ecx, [esp+0Ch+cellY]
 0x508536: mov     edx, dword ptr [esp+0Ch+ArgList]
 0x50853A: push    esi
-0x50853B: push    ecx; signed int
-0x50853C: push    edx; signed int
+0x50853B: push    ecx; cellY
+0x50853C: push    edx; cellX
 0x50853D: mov     ecx, edi; this
 0x50853F: call    TESWorldSpace__GetCellAtCellCoord
 0x508544: mov     esi, eax
 0x508546: test    esi, esi
 0x508548: jnz     short loc_50857E
-0x50854A: mov     eax, [esp+10h+var_8]
+0x50854A: mov     eax, [esp+10h+cellY]
 0x50854E: mov     ecx, dword ptr [esp+10h+ArgList]
 0x508552: push    eax; int
 0x508553: push    ecx; ArgList
 0x508554: mov     ecx, edi
-0x508556: call    sub_4F1630
+0x508556: call    TESWorldSpace_LoadExteriorCellAtCoord; Verified: exterior-cell loader checks cellMap first, searches master files using cellOffsetsArray fast path or GRUP/CELL fallback, creates a missing TESObjectCELL, post-fixes it, then attaches worldspace-indexed references.
 0x50855B: mov     esi, eax
 0x50855D: test    esi, esi
 0x50855F: jnz     short loc_50857E
-0x508561: mov     edx, [esp+10h+var_8]
+0x508561: mov     edx, [esp+10h+cellY]
 0x508565: mov     eax, dword ptr [esp+10h+ArgList]
 0x508569: mov     ecx, ds:0B33A98h
 0x50856F: push    edi

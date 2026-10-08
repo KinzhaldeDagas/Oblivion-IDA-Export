@@ -1,1 +1,1 @@
-TransactedSnapshotImpl_0
+typedef TransactedSnapshotImpl TransactedSnapshotImpl_0;

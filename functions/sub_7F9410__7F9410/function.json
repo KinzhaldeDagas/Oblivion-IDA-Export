@@ -1,19 +1,36 @@
 {
-  "callees_count": 64,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 21,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7F9410",
+  "chunks": [
+    [
+      "0x7F9410",
+      "0x7F9B3A"
+    ],
+    [
+      "0x9D03B0",
+      "0x9D0409"
+    ]
+  ],
+  "chunks_sha256": "da54808bdbb95fe19a479553978cddb8fff1e87c35c01b9bc7abfc58df100fd4",
+  "comment_regular": "ABI: void __thiscall(batchScratch in ECX, renderPassList on stack, shaderIndex on stack); single epilogue uses retn 8. The only Oblivion caller is 0x7AE6DD and ignores EAX.",
+  "comment_repeatable": "ABI: void __thiscall(batchScratch in ECX, renderPassList on stack, shaderIndex on stack); single epilogue uses retn 8. The only Oblivion caller is 0x7AE6DD and ignores EAX.\n\n2026-10-08 retained-wrapper update: static installed SpeedTree file SHA440f09fd08bdfac22e49f00b23d2efe193ef8110e36b5de6efa7f9c5f0933c58 has the exact same55-byte wrapper as prior known build, now RVA85320 with NT108/timestamp6AC7034C/image1C4000; no relocation entry in those55bytes and INT3 follows. It calls this function with incomingECX/list/selector intact, then reads native renderer[B3F928]/device+280 and if nonnull calls owned device slot69 with sampler0/type8/value0 beforeRET8. Oblivion disassembly reconfirms sole caller7AE6DD, selector195, native bias write7F94D0, only valid-path reset7F9B1C and bypass via empty cleanup to7F9B1E. Extra outer reset is observable and must remain; current-profile normalization only concerns comparison copies, not suppression. Fallout related batch/list machinery8221DFE8/828ACED8/828ACDD0 has different architecture/pass enums1EC/1ED; no direct bias-reset wrapper homolog verified. Evidence stage-local-normalizer-current-owner; new profile source is not yet validated.\n\n2026-10-08 current retained-wrapper VALIDATION update: Release and focused synthetic/raw-DLL invocation passed (526 synthetic cumulative;86139 total incl28308 PE relocation records). Current installed SpeedTree SHA440f09fd...3c58/RVA85320/NT108/time6AC7034C/size1C4000 matches all55 body bytes with no wrapper relocation. File was not loaded/executed; native context/page/owner callbacks were simulated. Actual owner-preparation source now uses the same exact matcher, but live pinning/capture remains unverified. Native7F9410 plus the observable sampler0/type8/value0 reset still execute; no suppression authority or FPS claim. Evidence stage-local-normalizer-current-owner/result.md/test.log.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_DrawLODTreePassList_WithMipBias_010201A0",
   "end_ea": "0x7F9B3A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7F9410",
+  "name": "OB_DrawLODTreePassList_WithMipBias_010201A0",
   "segment": ".text",
   "sha256": "8a6ef6b58024817478521b6e66e93baae0ab41ace8e5553e6e0113a5faa9ae86",
   "size": 1834,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7F9410",
-  "type": "void __thiscall(int *this, _DWORD *, int)",
-  "xrefs_from_count": 656,
+  "total_chunk_size": 1923,
+  "type": "void __thiscall(void *batchScratch, void *renderPassList, unsigned int shaderIndex)",
+  "xrefs_from_count": 679,
   "xrefs_to_count": 1
 }

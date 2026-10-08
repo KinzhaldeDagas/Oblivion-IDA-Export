@@ -1,4 +1,4 @@
-0x5411D0: push    0FFFFFFFFh
+0x5411D0: push    0FFFFFFFFh; Pass231/241: Sky setup constructs Atmosphere and calls Atmosphere::Initialize with sky root and B333E4 fog property.
 0x5411D2: push    offset SEH_5411D0
 0x5411D7: mov     eax, large fs:0
 0x5411DD: push    eax
@@ -122,7 +122,7 @@
 0x541327: mov     ecx, eax
 0x541329: mov     eax, [edx+10h]
 0x54132C: mov     [esp+2Ch+var_4], ebp
-0x541330: call    eax
+0x541330: call    eax; Fog property decode: Sky setup calls Atmosphere::Initialize(skyRoot, B333E4), binding the active global fog property to the Atmosphere object.
 0x541332: mov     ecx, [esi+24h]
 0x541335: test    ecx, ecx
 0x541337: jz      short loc_541341
@@ -307,7 +307,7 @@
 0x541558: mov     ebp, 8
 0x54155D: push    esi; a2
 0x54155E: mov     [esp+28h+var_4], ebp
-0x541562: call    sub_405680
+0x541562: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x541567: mov     ebx, ds:0A2807Ch
 0x54156D: lea     ecx, [esi+4]
 0x541570: push    ecx; lpAddend
@@ -348,7 +348,7 @@
 0x5415DF: push    esi; a2
 0x5415E0: mov     ecx, edi; this
 0x5415E2: mov     [esp+28h+var_4], 0Ah
-0x5415EA: call    sub_405680
+0x5415EA: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x5415EF: lea     eax, [esi+4]
 0x5415F2: push    eax; lpAddend
 0x5415F3: call    ebx ; InterlockedDecrement
@@ -373,3 +373,59 @@
 0x541629: pop     ebx
 0x54162A: add     esp, 10h
 0x54162D: retn    8
+0x9BA550: mov     eax, [ebp+4]
+0x9BA553: push    eax
+0x9BA554: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BA559: pop     ecx
+0x9BA55A: retn
+0x9BA55B: mov     eax, [ebp+4]
+0x9BA55E: push    eax
+0x9BA55F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BA564: pop     ecx
+0x9BA565: retn
+0x9BA566: mov     eax, [ebp+4]
+0x9BA569: push    eax
+0x9BA56A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BA56F: pop     ecx
+0x9BA570: retn
+0x9BA571: mov     eax, [ebp+4]
+0x9BA574: push    eax
+0x9BA575: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BA57A: pop     ecx
+0x9BA57B: retn
+0x9BA57C: mov     eax, [ebp+4]
+0x9BA57F: push    eax
+0x9BA580: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BA585: pop     ecx
+0x9BA586: retn
+0x9BA587: mov     eax, [ebp+4]
+0x9BA58A: push    eax
+0x9BA58B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BA590: pop     ecx
+0x9BA591: retn
+0x9BA592: mov     eax, [ebp+4]
+0x9BA595: push    eax
+0x9BA596: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BA59B: pop     ecx
+0x9BA59C: retn
+0x9BA59D: mov     eax, [ebp+4]
+0x9BA5A0: push    eax
+0x9BA5A1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BA5A6: pop     ecx
+0x9BA5A7: retn
+0x9BA5A8: lea     ecx, [ebp+4]; slot
+0x9BA5AB: jmp     NiPointerSlot_Release
+0x9BA5B0: mov     eax, [ebp+4]
+0x9BA5B3: push    eax
+0x9BA5B4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BA5B9: pop     ecx
+0x9BA5BA: retn
+0x9BA5BB: lea     ecx, [ebp+4]; slot
+0x9BA5BE: jmp     NiPointerSlot_Release
+0x9BA5C3: mov     edx, [esp+arg_4]
+0x9BA5C7: lea     eax, [edx-14h]
+0x9BA5CA: mov     ecx, [edx-18h]
+0x9BA5CD: xor     ecx, eax
+0x9BA5CF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BA5D4: mov     eax, offset stru_AE469C
+0x9BA5D9: jmp     ___CxxFrameHandler3

@@ -1,1 +1,1 @@
-HBRUSH
+typedef HBRUSH__ *HBRUSH;

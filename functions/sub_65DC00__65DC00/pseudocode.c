@@ -8,5 +8,5 @@ int __usercall sub_65DC00@<eax>(
         double a7@<st1>,
         double a8@<st0>)
 {
-  return sub_5AEA60(a1, a2, a3, a4, a5, a6, a7, a8, 1);
+  return LoadgameMenu_Open(a1, a2, a3, a4, a5, a6, a7, a8, 1); /*0x65dc08*/
 }

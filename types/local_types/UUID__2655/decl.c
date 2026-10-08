@@ -1,1 +1,1 @@
-UUID
+typedef GUID UUID;

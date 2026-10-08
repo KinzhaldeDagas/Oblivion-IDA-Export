@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x44F3D0",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; Verified TESDataHandler_LoadFiles behavior: when activeFileState.retainActiveFile is nonzero, reopens the retained TESFile and rebuilds its loaded-master array before completing the file load. The flag's writer remains Unknown.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x44F4AE",
-    "line": "call    TESFile_BuildLoadedMasterArray",
+    "line": "call    TESFile_BuildLoadedMasterArray; MEF PERF 2026-09-08: PERF-5 actual loading caller: TESDataHandler_LoadFiles iterates loaded TESFiles, opens each then resolves its masters using DataHandler+8C8 candidate list. Repeated master resolution is a startup/resource-loading cost; not an established per-frame bottleneck.",
     "mnemonic": "call",
     "size": 5
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x44F4D6",
-    "line": "call    TESFile_GetMasterByIndex",
+    "line": "call    TESFile_GetMasterByIndex; Oblivion TESFile_GetMasterByIndex returns masterFiles[slot-1] for a one-based MAST index, bounded by masterCount. FormID owner-byte resolution can therefore select distinct alias slots for duplicate filenames.",
     "mnemonic": "call",
     "size": 5
   },
@@ -652,12 +652,6 @@
     "line": "jmp     short loc_44F550",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x44F548",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
   },
   {
     "ea": "0x44F550",
@@ -1686,12 +1680,6 @@
     "size": 2
   },
   {
-    "ea": "0x44F7AD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x44F7B0",
     "line": "mov     ecx, [edi]",
     "mnemonic": "mov",
@@ -2316,12 +2304,6 @@
     "size": 2
   },
   {
-    "ea": "0x44F8AD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x44F8B0",
     "line": "mov     ecx, [edi]",
     "mnemonic": "mov",
@@ -2491,13 +2473,13 @@
   },
   {
     "ea": "0x44F8F4",
-    "line": "push    0",
+    "line": "push    0; topics",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x44F8F6",
-    "line": "call    sub_52F6D0",
+    "line": "call    SortTopicListByDisplayName; Case-insensitive bubble sort of a TESTopic list by TESFullName display text. A null argument sorts DataHandler's master topic list; player additions pass the known-topic list explicitly.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2509,7 +2491,7 @@
   },
   {
     "ea": "0x44F8FE",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2611,13 +2593,13 @@
   },
   {
     "ea": "0x44F928",
-    "line": "push    0",
+    "line": "push    0; questOrNull",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x44F92A",
-    "line": "call    sub_52FAE0",
+    "line": "call    SortTopicQuestInfoEntriesForQuest; After form loading, sorts TESTopic quest-entry buckets by QUST priority before dialogue selection begins.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2629,13 +2611,13 @@
   },
   {
     "ea": "0x44F932",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x44F934",
-    "line": "call    TESHealthForm_GetHealth",
+    "line": "call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2754,12 +2736,6 @@
     "size": 2
   },
   {
-    "ea": "0x44F96D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x44F970",
     "line": "cmp     dword ptr [edi+8], 0",
     "mnemonic": "cmp",
@@ -2868,14 +2844,8 @@
     "size": 2
   },
   {
-    "ea": "0x44F99D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x44F9A0",
-    "line": "mov     ecx, [edi]",
+    "line": "mov     ecx, [edi]; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -2893,7 +2863,7 @@
   },
   {
     "ea": "0x44F9A6",
-    "line": "call    sub_4EF290",
+    "line": "call    TESWorldSpace_IndexPersistentCellSubSpaces; Verified SubSpace index build pass: during TESDataHandler_LoadFiles, after form loading and prior to returning to the initialization caller, iterates worldspaceList and builds each +0x60 index from its persistent cell. This is the observed full-load reconstruction path; no post-CreateDuplicateForm rebuild call is established.",
     "mnemonic": "call",
     "size": 5
   },

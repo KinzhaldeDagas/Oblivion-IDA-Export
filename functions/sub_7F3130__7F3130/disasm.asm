@@ -9,7 +9,6 @@
 0x7F3142: mov     [esp+10h+arg_0], eax
 0x7F3146: mov     ebx, 1
 0x7F314B: jmp     short loc_7F3150
-0x7F314D: align 10h
 0x7F3150: add     [esi+88h], ebx
 0x7F3156: mov     eax, [esi+88h]
 0x7F315C: mov     ecx, [esi+14Ch]

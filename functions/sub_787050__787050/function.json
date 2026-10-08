@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x787050",
+      "0x78705C"
+    ]
+  ],
+  "chunks_sha256": "589dfbe3c409c0e95ecf3a68a27e3ed433496dae4359fe3bc360e9ada7d7d97f",
+  "comment_regular": "CSpeedTreeRT::InstanceOf. Oblivion returns instanceData->parent for instances and NULL for base trees; this matches the later Fallout symbol and 4.1 API contract.",
+  "comment_repeatable": "CSpeedTreeRT::InstanceOf. Oblivion returns instanceData->parent for instances and NULL for base trees; this matches the later Fallout symbol and 4.1 API contract.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_787050",
+  "display_name": "CSpeedTreeRT__InstanceOf",
   "end_ea": "0x78705C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_787050",
+  "name": "CSpeedTreeRT__InstanceOf",
   "segment": ".text",
   "sha256": "589dfbe3c409c0e95ecf3a68a27e3ed433496dae4359fe3bc360e9ada7d7d97f",
   "size": 12,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x787050",
-  "type": "int __thiscall(_DWORD *this)",
+  "total_chunk_size": 12,
+  "type": "const OB_CSpeedTreeRT_010201A0 *__thiscall(OB_CSpeedTreeRT_010201A0 *this)",
   "xrefs_from_count": 6,
   "xrefs_to_count": 2
 }

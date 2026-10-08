@@ -1,9 +1,9 @@
-0x7F0100: sub     esp, 34h
+0x7F0100: sub     esp, 34h; Transforms the global directional light vector into object space and writes leaf c11; optional point-light position becomes c12. Does not touch texture or alpha.
 0x7F0103: fld     dword ptr ds:0B465A8h
 0x7F0109: push    esi
-0x7F010A: mov     esi, [esp+38h+arg_4]
+0x7F010A: mov     esi, [esp+38h+inverseWorld]
 0x7F010E: fchs
-0x7F0110: fstp    [esp+38h+var_34]
+0x7F0110: fstp    [esp+38h+var_34]; Leaf c11 source is the negated shared slot-0 vector. Reset supplies nonzero +X fallback; this function transforms and normalizes it into object space each draw.
 0x7F0114: push    esi
 0x7F0115: fld     dword ptr ds:0B465ACh
 0x7F011B: lea     eax, [esp+3Ch+var_34]
@@ -25,7 +25,7 @@
 0x7F014F: fstp    [esp+38h+var_1C]
 0x7F0153: mov     ecx, [esp+38h+var_1C]
 0x7F0157: fld     [esp+38h+var_30]
-0x7F015B: mov     ds:0B46738h, ecx
+0x7F015B: mov     ds:0B46738h, ecx; Write leaf object-space directional-light constant c11.xyz. Normals/card data can suppress directional diffuse via NdotL, but cannot suppress a nonzero ambient c5 term.
 0x7F0161: fstp    [esp+38h+var_18]
 0x7F0165: mov     edx, [esp+38h+var_18]
 0x7F0169: fld     [esp+38h+var_2C]
@@ -37,8 +37,8 @@
 0x7F0182: fstp    [esp+38h+var_10]
 0x7F0186: mov     ecx, [esp+38h+var_10]
 0x7F018A: mov     ds:0B46744h, ecx
-0x7F0190: mov     ecx, [esp+38h+arg_0]
-0x7F0194: call    sub_7ED5D0
+0x7F0190: mov     ecx, [esp+38h+leafProperty]; this
+0x7F0194: call    OB_BSShaderProperty_CountPassListEntriesWithMarker_010201A0; OBLIVION AUTHORITY (2026-08-24): Generic pass-list marker counter used by the SpeedTree leaf program selector. Walks property+0x70 entries and counts nonnull shader objects whose word at +0x118 is not 0x00FF. It does not test ShadowSceneLight disabled byte +0xF4. Result selects point-light shader program bit; it is not a leaf layer/card/LOD index.
 0x7F0199: test    ax, ax
 0x7F019C: jbe     short loc_7F01FA
 0x7F019E: fld     dword ptr ds:0B46538h
@@ -60,7 +60,7 @@
 0x7F01E0: fld     [esp+38h+var_14]
 0x7F01E4: fstp    dword ptr ds:0B46750h
 0x7F01EA: fld     dword ptr ds:0B465B8h
-0x7F01F0: fdiv    [esp+38h+arg_8]
+0x7F01F0: fdiv    [esp+38h+objectScale]
 0x7F01F4: fstp    dword ptr ds:0B46754h
 0x7F01FA: pop     esi
 0x7F01FB: add     esp, 34h

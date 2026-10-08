@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x564E30",
-    "line": "push    ebp",
+    "line": "push    ebp; BSTreeNode runtime collision/contact update path: throttled by 0x563F90, queries collision pairs, applies impulses/events for actors/contacting refs.",
     "mnemonic": "push",
     "size": 1
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x564E8F",
-    "line": "call    sub_563F90",
+    "line": "call    sub_563F90; BSTreeNode update throttle helper: schedules updates by global update group interval and returns whether work should run this frame/time.",
     "mnemonic": "call",
     "size": 5
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x564EC8",
-    "line": "mov     ecx, [esi+0Ch]",
+    "line": "mov     ecx, [esi+0Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x564ED0",
-    "line": "call    sub_7875C0",
+    "line": "call    CSpeedTreeRT__GetUserData; Oblivion CSpeedTreeRT::GetUserData: returns the char pointer stored at CSpeedTreeRT+0x68. RT4.1 confirms the public const-char getter name after the binary field access was established.",
     "mnemonic": "call",
     "size": 5
   },
@@ -492,12 +492,6 @@
     "size": 2
   },
   {
-    "ea": "0x564F6D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x564F70",
     "line": "mov     ecx, [esp+274h+var_1B0]",
     "mnemonic": "mov",
@@ -643,7 +637,7 @@
   },
   {
     "ea": "0x564FBD",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1009,7 +1003,7 @@
   },
   {
     "ea": "0x5650D9",
-    "line": "call    sub_8AC0A0",
+    "line": "call    bhkWorldObject_GetLinearVelocityPtr; TES4 authoritative: returns pointer to bhk collision object's velocity vector at object+0x10. 0x896000 copies this into proxy +0x2E0 before state update.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1033,7 +1027,7 @@
   },
   {
     "ea": "0x5650E7",
-    "line": "call    sub_43F3E0",
+    "line": "call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1051,7 +1045,7 @@
   },
   {
     "ea": "0x5650F6",
-    "line": "call    sub_404C90",
+    "line": "call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1105,7 +1099,7 @@
   },
   {
     "ea": "0x56511C",
-    "line": "call    sub_43F3E0",
+    "line": "call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1213,7 +1207,7 @@
   },
   {
     "ea": "0x565161",
-    "line": "call    Rand3",
+    "line": "call    Game_RandomIntBelow; Engine RNG upper-bound helper: returns max*rand()/0x7FFF after lazy time seed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1441,7 +1435,7 @@
   },
   {
     "ea": "0x5651FD",
-    "line": "call    Rand2",
+    "line": "call    Game_RandomIntInRange; Engine RNG range helper: returns min + (max-min)*rand()/0x7FFF after lazy time seed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1873,7 +1867,7 @@
   },
   {
     "ea": "0x56532A",
-    "line": "call    Rand3",
+    "line": "call    Game_RandomIntBelow; Engine RNG upper-bound helper: returns max*rand()/0x7FFF after lazy time seed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2383,7 +2377,7 @@
   },
   {
     "ea": "0x565480",
-    "line": "call    sub_43F3E0",
+    "line": "call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).",
     "mnemonic": "call",
     "size": 5
   },
@@ -2590,5 +2584,83 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9BD580",
+    "line": "lea     ecx, [ebp+var_1B8]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BD586",
+    "line": "jmp     ??1hkAllCdBodyPairCollector@@UAE@XZ; hkAllCdBodyPairCollector::~hkAllCdBodyPairCollector(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD58B",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BD58F",
+    "line": "lea     eax, [edx-264h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BD595",
+    "line": "mov     ecx, [edx-268h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9BD59B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BD59D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD5A2",
+    "line": "add     eax, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD5A5",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD5A8",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BD5AA",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD5AF",
+    "line": "mov     eax, offset stru_AE6F24",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD5B4",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

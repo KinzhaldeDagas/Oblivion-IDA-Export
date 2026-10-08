@@ -3,7 +3,7 @@ void __usercall _free_locale_::_LN12_4(_DWORD *a1@<esi>)
 {
   void *v1; // [esp-4h] [ebp-8h]
 
-  *a1 = 0xBAADF00D;
-  a1[1] = 0xBAADF00D;
-  free(v1);
+  *a1 = 0xBAADF00D; /*0x98a2fa*/
+  a1[1] = 0xBAADF00D; /*0x98a2fc*/
+  free(v1); /*0x98a300*/
 }

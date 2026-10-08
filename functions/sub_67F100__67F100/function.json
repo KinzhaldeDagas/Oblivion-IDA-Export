@@ -1,18 +1,31 @@
 {
-  "callees_count": 2,
-  "callers_count": 11,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 12,
+  "chunks": [
+    [
+      "0x67F100",
+      "0x67F122"
+    ]
+  ],
+  "chunks_sha256": "2a1e4a683c0ac035b664a4b773a0a30a95c420c80d9630f903f339ce1707b30e",
+  "comment_regular": "Verified generic BSSimpleList head removal helper: advances the inline first-node header to its successor and frees the detached list node; if there is no successor, clears the head data pointer.",
+  "comment_repeatable": "Verified generic BSSimpleList head removal helper: advances the inline first-node header to its successor and frees the detached list node; if there is no successor, clears the head data pointer.\n\nMEF SAVE AUDIT 2026-10-08: PERF-18 head removal refinement: helper frees/promotes the successor node or clears inline payload; it does NOT free tuple payload. Caller464A59 frees that separately after restore. Named PopHeadWithoutPayloadFree. Do not detach all matching tuples before callbacks without proof.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_67F100",
+  "display_name": "BSSimpleList_PopHeadWithoutPayloadFree",
   "end_ea": "0x67F122",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_67F100",
+  "name": "BSSimpleList_PopHeadWithoutPayloadFree",
   "segment": ".text",
   "sha256": "2a1e4a683c0ac035b664a4b773a0a30a95c420c80d9630f903f339ce1707b30e",
   "size": 34,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x67F100",
+  "total_chunk_size": 34,
   "type": "void __thiscall(_DWORD *this)",
   "xrefs_from_count": 13,
   "xrefs_to_count": 12

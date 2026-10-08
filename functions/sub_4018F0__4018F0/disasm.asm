@@ -1,4 +1,4 @@
-0x4018F0: push    esi
+0x4018F0: push    esi; Merges two adjacent free blocks: unlinks both, increases the first block's size by second+header, fixes trailing/last-block links, then reinserts it.
 0x4018F1: push    edi
 0x4018F2: mov     edi, [esp+8+arg_0]
 0x4018F6: mov     eax, [edi+4]
@@ -14,7 +14,7 @@
 0x401913: lea     eax, [edx+eax*8]
 0x401916: push    edi
 0x401917: push    eax
-0x401918: call    sub_401690
+0x401918: call    MemoryHeap_RemoveFreeEntry; Unlinks a free block from its doubly linked size bin, clears the free flag and links, and updates bin/global free-entry counts.
 0x40191D: mov     esi, [esp+8+arg_4]
 0x401921: mov     eax, [esi+4]
 0x401924: and     eax, 0FFFFFFFh
@@ -30,7 +30,7 @@
 0x401941: push    ebx
 0x401942: push    esi
 0x401943: push    eax
-0x401944: call    sub_401690
+0x401944: call    MemoryHeap_RemoveFreeEntry; Unlinks a free block from its doubly linked size bin, clears the free flag and links, and updates bin/global free-entry counts.
 0x401949: mov     eax, [edi+4]
 0x40194C: mov     edx, [esi+4]
 0x40194F: mov     ebx, eax
@@ -46,7 +46,7 @@
 0x401971: add     dword ptr [ecx+1Ch], 0FFFFFFFFh
 0x401975: push    edi
 0x401976: mov     [ecx+24h], edi
-0x401979: call    sub_4015F0
+0x401979: call    MemoryHeap_InsertFreeEntry; Marks a block free, appends it to the size-selected doubly linked free list, updates free-list statistics, and records the bin's active count.
 0x40197E: pop     edi
 0x40197F: pop     esi
 0x401980: retn    8
@@ -55,7 +55,7 @@
 0x40198B: mov     [eax+esi+8], edi
 0x40198F: add     dword ptr [ecx+1Ch], 0FFFFFFFFh
 0x401993: push    edi
-0x401994: call    sub_4015F0
+0x401994: call    MemoryHeap_InsertFreeEntry; Marks a block free, appends it to the size-selected doubly linked free list, updates free-list statistics, and records the bin's active count.
 0x401999: pop     edi
 0x40199A: pop     esi
 0x40199B: retn    8

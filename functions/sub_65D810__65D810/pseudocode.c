@@ -1,5 +1,6 @@
-char __cdecl sub_65D810(char a1)
+// Sets and returns g_godModeEnabled (0x00B3BB06).
+bool __cdecl SetGodMode(bool enabled)
 {
-  g_GodMode = a1;
-  return a1;
+  g_godModeEnabled = enabled; /*0x65d814*/
+  return enabled; /*0x65d819*/
 }

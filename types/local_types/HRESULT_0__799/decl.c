@@ -1,1 +1,1 @@
-HRESULT_0
+typedef LONG HRESULT_0;

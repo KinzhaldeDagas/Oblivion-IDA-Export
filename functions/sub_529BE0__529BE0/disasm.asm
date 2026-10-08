@@ -13,7 +13,7 @@
 0x529BFD: movzx   eax, di
 0x529C00: mov     [esp+14h+arg_0], esi
 0x529C04: mov     [esp+14h+var_4], eax
-0x529C08: call    sub_45A170
+0x529C08: call    TESSaveLoadGame_UseSaveGameBlocks
 0x529C0D: test    al, al
 0x529C0F: jz      short loc_529C1B
 0x529C11: add     esi, 6
@@ -64,7 +64,7 @@
 0x529CA0: jz      short loc_529CEE
 0x529CA2: mov     edx, [esi]
 0x529CA4: push    edx; a1
-0x529CA5: call    TESForm_LookupByFormID
+0x529CA5: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x529CAA: mov     ecx, [esi+5]
 0x529CAD: mov     edx, [eax]
 0x529CAF: add     esp, 4

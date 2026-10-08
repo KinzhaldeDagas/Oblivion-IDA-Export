@@ -1,4 +1,4 @@
-BSStringT *sub_A09B00()
+NiRTTI *sub_A09B00()
 {
-  return sub_70E220((BSStringT *)dword_B3F978, "NiVertexColorProperty", (int)dword_B3F68C);
+  return NiRTTI_Constructor(&stru_B3F978, "NiVertexColorProperty", &stru_B3F68C); /*0xa09b14*/
 }

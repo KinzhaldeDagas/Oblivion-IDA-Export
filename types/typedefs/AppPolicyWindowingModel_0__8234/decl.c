@@ -1,1 +1,1 @@
-AppPolicyWindowingModel_0
+typedef AppPolicyWindowingModel AppPolicyWindowingModel_0;

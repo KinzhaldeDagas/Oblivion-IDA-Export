@@ -1,1 +1,1 @@
-HDESK
+typedef HDESK__ *HDESK;

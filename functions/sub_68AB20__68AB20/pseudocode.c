@@ -1,24 +1,37 @@
-char __thiscall sub_68AB20(int *this, int a2, _DWORD *a3, int a4, _DWORD *a5, int a6)
+// Verified TravelPath orchestration: clears existing node records; calls TravelPath_FindLowLevelRoute; copies returned kind-0 reference nodes into the TravelPath list; runs the teleport-loop pruning pass; and appends a kind-1 owned position node for the destination only when the A* search succeeded.
+char __thiscall TravelPath_BuildRoute(
+        TravelPath *this,
+        TESForm *sourceSpace,
+        void *sourceRouteContext,
+        TESForm *destinationSpace,
+        const NiPoint3 *destinationPosition,
+        TESObjectREFR *sourceRef)
 {
   char v7; // bl
-  int v9[2]; // [esp+Ch] [ebp-8h] BYREF
+  BSSimpleList_VoidPtr sourceNodes; // [esp+Ch] [ebp-8h] BYREF
 
-  v7 = 0;
-  sub_689A00(this);
-  if ( a2 )
+  v7 = 0; /*0x68ab28*/
+  TravelPath_ClearNodes(this); /*0x68ab2a*/
+  if ( sourceSpace ) /*0x68ab3b*/
   {
-    if ( a4 )
+    if ( destinationSpace ) /*0x68ab43*/
     {
-      v9[0] = 0;
-      v9[1] = 0;
-      v7 = sub_680110(a2, a3, a4, a5, v9, a6);
-      if ( v7 )
-        sub_689A60(this, v9);
-      BSSimpleList_Clear(v9);
+      sourceNodes.firstNode.data = 0; /*0x68ab45*/
+      sourceNodes.firstNode.next = 0; /*0x68ab49*/
+      v7 = TravelPath_FindLowLevelRoute( /*0x68ab64*/
+             *(float *)&sourceSpace,
+             (float *)sourceRouteContext,
+             *(float *)&destinationSpace,
+             &destinationPosition->x,
+             &sourceNodes,
+             *(float *)&sourceRef);
+      if ( v7 ) /*0x68ab6b*/
+        TravelPath_CopyRouteNodes(this, &sourceNodes); /*0x68ab74*/
+      BSSimpleList_Clear(&sourceNodes); /*0x68ab7d*/
     }
   }
-  sub_689C60(this);
-  if ( v7 )
-    sub_68A280(this, a5);
-  return v7;
+  TravelPath_PruneTeleportRouteLoop(this); /*0x68ab84*/
+  if ( v7 ) /*0x68ab8b*/
+    TravelPath_AppendDestinationPosition(this, destinationPosition); /*0x68ab90*/
+  return v7; /*0x68ab95*/
 }

@@ -22,16 +22,16 @@
 0x57FDFF: mov     ecx, [esi+84h]
 0x57FE05: test    ecx, ecx
 0x57FE07: jnz     short loc_57FE55
-0x57FE09: mov     ecx, [esi+68h]; TileWindow *
+0x57FE09: mov     ecx, [esi+68h]; this
 0x57FE0C: push    offset aDataMenusMainS; "Data\\Menus\\Main\\safe_zone.xml"
-0x57FE11: call    Menu_LoadXML
+0x57FE11: call    Tile__ReadFile; Verified: SDK ReadXML entry. Builds named tree under receiver via 0x590330, connects/evaluates traits via 0x58CF40, registers subtemplates with owning Menu, frees build storage, refreshes returned subtree via 0x58FBA0. Returns first created tile. Fallout analogue 0x827E2588; cache/cleanup differs.
 0x57FE16: fld     dword ptr ds:0A379B4h
 0x57FE1C: push    ecx
-0x57FE1D: fstp    [esp+8+a2]; a3
-0x57FE20: push    0FA1h; a2
+0x57FE1D: fstp    [esp+8+a2]; value
+0x57FE20: push    0FA1h; propertyCode
 0x57FE25: mov     ecx, eax; this
 0x57FE27: mov     [esi+84h], eax
-0x57FE2D: call    Tile_SetFloat
+0x57FE2D: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x57FE32: fldz
 0x57FE34: mov     eax, [esi+84h]
 0x57FE3A: mov     ecx, [eax+24h]

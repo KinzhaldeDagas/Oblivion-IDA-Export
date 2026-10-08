@@ -1,6 +1,6 @@
-0x658550: push    ebx
+0x658550: push    ebx; Replaces HighProcess equippedWeaponData, derives staff/bow flags from TESObjectWEAP weapon type, rebuilds equipment attachment-node caches for active player perspectives, or clears those caches when equipment is absent.
 0x658551: push    ebp
-0x658552: mov     ebp, [esp+8+arg_0]
+0x658552: mov     ebp, [esp+8+entry]
 0x658556: push    esi
 0x658557: mov     esi, ecx
 0x658559: push    edi
@@ -13,7 +13,7 @@
 0x65856A: mov     ecx, edi
 0x65856C: call    ContainerEntryExtraData_DestroyDataTable
 0x658571: push    edi
-0x658572: call    FormHeapFree
+0x658572: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x658577: add     esp, 4
 0x65857A: cmp     ebp, ebx
 0x65857C: mov     [esi+0E4h], ebp
@@ -43,28 +43,28 @@
 0x6585D7: push    ecx
 0x6585D8: push    eax
 0x6585D9: jmp     short loc_6585E1
-0x6585DB: mov     ecx, [esp+10h+arg_4]
-0x6585DF: push    ecx
-0x6585E0: push    ebx
-0x6585E1: mov     ecx, esi
-0x6585E3: call    sub_6541A0
+0x6585DB: mov     ecx, [esp+10h+rootNode]
+0x6585DF: push    ecx; rootNode
+0x6585E0: push    ebx; skinInstance
+0x6585E1: mov     ecx, esi; this
+0x6585E3: call    MiddleHighProcess_CacheEquipmentAttachmentNodes; Refreshes the equipment attachment cache for the selected skeleton context: either first-person globals or MiddleHighProcess fields (+0xFC Weapon, +0x100 Torch, +0x104 Bip01 L ForearmTwist, +0x108 BackWeapon/SideWeapon selected by native WEAP type, +0x10C Quiver). It pre-clears the matching ArrowBone cache for separate population. The Boolean result is not general cache success; it is NiNode_RemoveScbChildAlongFadeNodeChain(cached Weapon), meaning whether literal Scb was removed.
 0x6585E8: mov     ecx, ds:0B333C4h; this
-0x6585EE: push    ebx; a2
-0x6585EF: call    Player_GetAnimData
+0x6585EE: push    ebx; firstPerson
+0x6585EF: call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.
 0x6585F4: cmp     [esi+17Ch], eax
 0x6585FA: jnz     short loc_658628
 0x6585FC: mov     ecx, ds:0B333C4h; this
-0x658602: push    1; a2
-0x658604: call    Player_GetAnimData
+0x658602: push    1; firstPerson
+0x658604: call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.
 0x658609: mov     ecx, ds:0B333C4h; this
 0x65860F: mov     edi, [eax+4]
-0x658612: push    1; a2
-0x658614: call    Player_GetAnimData
+0x658612: push    1; firstPerson
+0x658614: call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.
 0x658619: mov     edx, [eax+98h]
-0x65861F: push    edi
-0x658620: push    edx
-0x658621: mov     ecx, esi
-0x658623: call    sub_6541A0
+0x65861F: push    edi; rootNode
+0x658620: push    edx; skinInstance
+0x658621: mov     ecx, esi; this
+0x658623: call    MiddleHighProcess_CacheEquipmentAttachmentNodes; Refreshes the equipment attachment cache for the selected skeleton context: either first-person globals or MiddleHighProcess fields (+0xFC Weapon, +0x100 Torch, +0x104 Bip01 L ForearmTwist, +0x108 BackWeapon/SideWeapon selected by native WEAP type, +0x10C Quiver). It pre-clears the matching ArrowBone cache for separate population. The Boolean result is not general cache success; it is NiNode_RemoveScbChildAlongFadeNodeChain(cached Weapon), meaning whether literal Scb was removed.
 0x658628: mov     al, 1
 0x65862A: pop     edi
 0x65862B: pop     esi

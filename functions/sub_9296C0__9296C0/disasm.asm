@@ -29,7 +29,7 @@
 0x92970C: push    eax
 0x92970D: push    ecx
 0x92970E: lea     ecx, [esp+28h+var_10]
-0x929712: call    sub_88FCC0
+0x929712: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x929717: movaps  xmm0, [esp+20h+var_10]
 0x92971C: movaps  xmm1, xmmword ptr [esi]
 0x92971F: mov     ecx, [esp+20h+var_14]

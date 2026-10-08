@@ -11,7 +11,7 @@
 0x5193F6: mov     edi, ecx
 0x5193F8: push    edi
 0x5193F9: mov     ecx, ebx
-0x5193FB: call    TESFile_InitializeFormFromRecord
+0x5193FB: call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.
 0x519400: mov     ecx, ebx
 0x519402: call    TESFile_GetChunkType
 0x519407: cmp     eax, 4C4C5546h
@@ -27,7 +27,7 @@
 0x51942F: push    200h; a4
 0x519434: push    esi; Dst
 0x519435: mov     ecx, ebx; a1
-0x519437: call    TESFile_GetChunkData
+0x519437: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x51943C: mov     eax, [edi]
 0x51943E: mov     edx, [eax+0D8h]
 0x519444: push    esi
@@ -51,12 +51,12 @@
 0x51946A: lea     eax, [edi+18h]
 0x51946D: push    ebx
 0x51946E: push    eax
-0x51946F: call    TESFullname_Load
+0x51946F: call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.
 0x519474: jmp     short loc_5194C1
 0x519476: xor     eax, eax
 0x519478: push    ebx
 0x519479: push    eax
-0x51947A: call    TESFullname_Load
+0x51947A: call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.
 0x51947F: jmp     short loc_5194C1
 0x519481: cmp     eax, 4E4F4349h
 0x519486: jz      short loc_5194AF
@@ -66,7 +66,7 @@
 0x519492: push    eax
 0x519493: mov     ecx, ebx
 0x519495: mov     [ebp+var_8], 0
-0x51949C: call    TESFile_GetChunkData4
+0x51949C: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x5194A1: mov     ecx, [ebp+var_8]
 0x5194A4: push    ecx
 0x5194A5: lea     ecx, [edi+38h]

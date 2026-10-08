@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x4E55B8",
-    "line": "mov     ecx, [ecx+esi*4]",
+    "line": "mov     ecx, [ecx+esi*4]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x4E55BF",
-    "line": "call    sub_67EDA0",
+    "line": "call    GraphNode_ResetTransientSearchState; Verified resets graph-node scratch state: clears F/G/H at +0/+4/+8, predecessor at +0x0C, and masks flags at +0x10 with 0x68, preserving bits 0x08/0x20/0x40 while clearing the other transient bits.",
     "mnemonic": "call",
     "size": 5
   },

@@ -3,22 +3,22 @@ void __userpurge sub_5F3140(
         double a2@<st0>,
         double st5_0@<st2>,
         double st6_0@<st1>,
-        unsigned __int16 *a5,
+        unsigned __int16 *form,
         ExtraDataList *a6,
         ExtraDataList **a7,
         char a8,
         ExtraDataList *a9)
 {
-  int v10; // eax
+  ActorSkinInfo *SkinInfoByPerspective; // eax
   unsigned __int16 *v11; // edi
   int ***ContainerExtraDataForRef; // esi
   int *v13; // eax
   ExtraDataList ***EquippedInstance; // eax
-  int v15; // ecx
+  TESForm *RingSlot7Form; // ecx
   ExtraDataList *v16; // edx
   ExtraDataList **v17; // eax
   int v18; // esi
-  void **v19; // ebx
+  void **p_unk04C; // ebx
   _BYTE *v20; // edi
   unsigned __int16 *v21; // eax
   ExtraDataList *****ContainerChanges; // eax
@@ -32,204 +32,200 @@ void __userpurge sub_5F3140(
   bool v30; // bl
   int v31; // eax
   _DWORD *v32; // eax
-  int *v33; // eax
-  int *v34; // esi
-  char v35; // bl
-  _DWORD *v36; // eax
-  int *v37; // eax
-  _DWORD *v38; // eax
-  int v39; // eax
-  int v40; // esi
-  bool v41; // bl
-  int v42; // eax
-  unsigned __int16 *v43; // ecx
-  float *v44; // eax
-  int v45; // eax
-  _DWORD *v46; // eax
-  int v47; // eax
+  EntryData *EntryForForm; // esi
+  char v34; // bl
+  _DWORD *v35; // eax
+  EntryData *v36; // eax
+  tListVoid *v37; // eax
+  int v38; // eax
+  int v39; // esi
+  bool v40; // bl
+  int v41; // eax
+  unsigned __int16 *v42; // ecx
+  float *v43; // eax
+  int v44; // eax
+  _DWORD *v45; // eax
+  int v46; // eax
   TESObjectREFRVtbl *vtbl; // edi
-  int v49; // [esp+10h] [ebp-44h]
-  int v50; // [esp+14h] [ebp-40h]
-  int v51; // [esp+1Ch] [ebp-38h]
-  int v52; // [esp+20h] [ebp-34h]
-  float v53; // [esp+20h] [ebp-34h]
-  int v54; // [esp+28h] [ebp-2Ch]
-  char v55; // [esp+2Fh] [ebp-25h]
-  int v56; // [esp+30h] [ebp-24h]
-  char v57; // [esp+34h] [ebp-20h]
-  int v58; // [esp+38h] [ebp-1Ch]
-  float *v59; // [esp+38h] [ebp-1Ch]
-  int v60; // [esp+3Ch] [ebp-18h]
-  unsigned __int16 *v61; // [esp+40h] [ebp-14h]
-  ExtraContainerChanges_Data *v62; // [esp+40h] [ebp-14h]
-  int v63; // [esp+44h] [ebp-10h]
-  unsigned int v64; // [esp+4Ch] [ebp-8h]
-  signed int v65; // [esp+50h] [ebp-4h]
-  TESForm *retaddr; // [esp+54h] [ebp+0h]
+  ExtraRefractionProperty *RefractionPropertyExtra; // eax
+  float v49; // [esp+18h] [ebp-3Ch]
+  char v50; // [esp+33h] [ebp-21h]
+  bool v51; // [esp+33h] [ebp-21h]
+  char v52; // [esp+33h] [ebp-21h]
+  int v53; // [esp+34h] [ebp-20h]
+  ActorSkinInfo *v54; // [esp+38h] [ebp-1Ch]
+  int v55; // [esp+3Ch] [ebp-18h]
+  ExtraDataList **v56; // [esp+3Ch] [ebp-18h]
+  unsigned __int16 *v57; // [esp+40h] [ebp-14h]
+  int v58; // [esp+44h] [ebp-10h]
+  ExtraContainerChanges_Data *v59; // [esp+44h] [ebp-10h]
 
-  if ( a1 == (TESObjectREFR *)TESDataHandler_g_PlayerRef )
-    v10 = sub_6600D0(TESDataHandler_g_PlayerRef, 0);
+  if ( a1 == (TESObjectREFR *)reference ) /*0x5f3171*/
+    SkinInfoByPerspective = Actor_GetSkinInfoByPerspective((Actor *)reference, 0); /*0x5f3175*/
   else
-    v10 = ((int (__usercall *)@<eax>(TESObjectREFR *@<ecx>, double@<st0>, double@<st1>, double@<st2>))a1->vtbl->Unk_5A)(
-            a1,
-            a2,
-            st6_0,
-            st5_0);
-  v58 = v10;
-  v11 = (unsigned __int16 *)sub_4691B0((TESObjectARMO *)a5);
-  v61 = v11;
-  if ( a1->vtbl->GetBaseForm(a1) )
-    ((int (__thiscall *)(TESObjectREFR *))a1->vtbl->IsActor)(a1);
-  ContainerExtraDataForRef = (int ***)ContainerExtraData_GetContainerExtraDataForRef(a1);
-  v57 = 0;
-  HIBYTE(v56) = 0;
-  if ( !v11 )
-    goto LABEL_44;
-  if ( TESBipedModelForm_CoversSlot(v11, 7, 0) || TESBipedModelForm_CoversSlot(v11, 6, 0) )
+    SkinInfoByPerspective = a1->vtbl->GetActiveSkinInfo(a1); /*0x5f3187*/
+  v54 = SkinInfoByPerspective; /*0x5f3189*/
+  v11 = (unsigned __int16 *)sub_4691B0((TESObjectARMO *)form); /*0x5f319a*/
+  v57 = v11; /*0x5f31a7*/
+  if ( a1->vtbl->GetBaseForm(a1) ) /*0x5f31ab*/
+    ((int (__thiscall *)(TESObjectREFR *))a1->vtbl->IsActor)(a1); /*0x5f31be*/
+  ContainerExtraDataForRef = (int ***)ContainerExtraData_GetContainerExtraDataForRef(a1); /*0x5f31d7*/
+  LOBYTE(v53) = 0; /*0x5f31d9*/
+  v50 = 0; /*0x5f31de*/
+  if ( !v11 ) /*0x5f31e3*/
+    goto LABEL_49; /*0x5f31e3*/
+  if ( TESBipedModelForm_CoversSlot(v11, 7, 0) || TESBipedModelForm_CoversSlot(v11, 6, 0) ) /*0x5f3202*/
   {
-    if ( TESBipedModelForm_CoversSlot(v11, 7, 0) )
-      v57 = 1;
-    HIBYTE(v56) = sub_485F10(ContainerExtraDataForRef, 0) != 0;
-    v13 = sub_485F10(ContainerExtraDataForRef, 1);
-    if ( HIBYTE(v56) )
+    if ( TESBipedModelForm_CoversSlot(v11, 7, 0) ) /*0x5f3215*/
+      LOBYTE(v53) = 1; /*0x5f321e*/
+    v51 = sub_485F10(ContainerExtraDataForRef, 0) != 0; /*0x5f3235*/
+    v13 = sub_485F10(ContainerExtraDataForRef, 1); /*0x5f3240*/
+    if ( v51 && v13 ) /*0x5f3255*/
     {
-      if ( v13 )
+      if ( v54 ) /*0x5f325c*/
       {
-        if ( v58 )
+        if ( (_BYTE)v53 ) /*0x5f326b*/
         {
-          if ( v57 )
-          {
-            EquippedInstance = (ExtraDataList ***)ContainerExtraData_GetEquippedInstance(
-                                                    (ExtraDataList *****)ContainerExtraDataForRef,
-                                                    7,
-                                                    0);
-            v15 = *(_DWORD *)(v58 + 0xBC);
-          }
-          else
-          {
-            EquippedInstance = (ExtraDataList ***)ContainerExtraData_GetEquippedInstance(
-                                                    (ExtraDataList *****)ContainerExtraDataForRef,
-                                                    6,
-                                                    0);
-            v15 = *(_DWORD *)(v58 + 0xAC);
-          }
-          v16 = 0;
-          if ( EquippedInstance )
-          {
-            v17 = *EquippedInstance;
-            if ( v17 )
-              v16 = *v17;
-          }
-          if ( v15 )
-            a2 = Actor_UnequipItem((PlayerCharacter *)a1, a2, st5_0, st6_0, v15, 1, v16, v57, 0, 1);
+          EquippedInstance = (ExtraDataList ***)ContainerExtraData_GetEquippedInstance( /*0x5f326f*/
+                                                  (ExtraDataList *****)ContainerExtraDataForRef,
+                                                  7,
+                                                  0);
+          RingSlot7Form = v54->RingSlot7Form; /*0x5f3278*/
         }
+        else
+        {
+          EquippedInstance = (ExtraDataList ***)ContainerExtraData_GetEquippedInstance( /*0x5f3282*/
+                                                  (ExtraDataList *****)ContainerExtraDataForRef,
+                                                  6,
+                                                  0);
+          RingSlot7Form = v54->RingSlot6Form; /*0x5f328b*/
+        }
+        v16 = 0; /*0x5f3291*/
+        if ( EquippedInstance ) /*0x5f3295*/
+        {
+          v17 = *EquippedInstance; /*0x5f3297*/
+          if ( v17 ) /*0x5f329b*/
+            v16 = *v17; /*0x5f329d*/
+        }
+        if ( RingSlot7Form ) /*0x5f32a1*/
+          a2 = Actor_UnequipItem((Actor *)a1, a2, st5_0, st6_0, (__int16)RingSlot7Form, 1, v16, v53, 0, 1); /*0x5f32b6*/
       }
     }
-    goto LABEL_44;
-  }
-  if ( !v58 )
-    goto LABEL_44;
-  v18 = 0;
-  v60 = 0;
-  do
-  {
-    if ( TESBipedModelForm_CoversSlot(v61, v18, 0) )
+    else if ( (_BYTE)v53 && v13 ) /*0x5f32ca*/
     {
-      v19 = (void **)(v58 + 0x4C);
-      v63 = 0x10;
-      do
+      LOBYTE(v53) = 0; /*0x5f32cc*/
+    }
+    else if ( v51 && !(_BYTE)v53 ) /*0x5f32e0*/
+    {
+      LOBYTE(v53) = 1; /*0x5f32e6*/
+    }
+    goto LABEL_49; /*0x5f32bb*/
+  }
+  if ( !v54 ) /*0x5f32f5*/
+    goto LABEL_49; /*0x5f32f5*/
+  v18 = 0; /*0x5f32fb*/
+  v55 = 0; /*0x5f32fd*/
+  do /*0x5f33dd*/
+  {
+    if ( TESBipedModelForm_CoversSlot(v57, v18, 0) ) /*0x5f3308*/
+    {
+      p_unk04C = (void **)&v54->unk04C; /*0x5f3319*/
+      v58 = 0x10; /*0x5f331c*/
+      do /*0x5f33cd*/
       {
-        v20 = *v19;
-        v21 = (unsigned __int16 *)OblivionDynamicCast(
-                                    *v19,
+        v20 = *p_unk04C; /*0x5f3324*/
+        v21 = (unsigned __int16 *)OblivionDynamicCast( /*0x5f3335*/
+                                    *p_unk04C,
                                     0,
                                     (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                                     &TESBipedModelForm `RTTI Type Descriptor',
                                     0);
-        if ( v21 )
+        if ( v21 ) /*0x5f333f*/
         {
-          if ( TESBipedModelForm_CoversSlot(v21, v18, 0) && v20[4] != 9 )
+          if ( TESBipedModelForm_CoversSlot(v21, v18, 0) && v20[4] != 9 ) /*0x5f3357*/
           {
-            ContainerChanges = (ExtraDataList *****)ExtraDataList_GetContainerChanges(&a1->member.baseExtraList);
-            v23 = ContainerExtraData_GetEquippedInstance(ContainerChanges, v60, 0);
-            v25 = v23;
-            v26 = 0;
-            if ( v23 )
+            ContainerChanges = (ExtraDataList *****)ExtraDataList_GetContainerChanges(&a1->member.baseExtraList); /*0x5f3363*/
+            v23 = ContainerExtraData_GetEquippedInstance(ContainerChanges, v55, 0); /*0x5f336a*/
+            v25 = v23; /*0x5f336f*/
+            v26 = 0; /*0x5f3371*/
+            if ( v23 ) /*0x5f3375*/
             {
-              v27 = (_BYTE **)*v23;
-              if ( *v25 )
+              v27 = (_BYTE **)*v23; /*0x5f3377*/
+              if ( *v25 ) /*0x5f3377*/
               {
-                if ( *v27 )
+                if ( *v27 ) /*0x5f337d*/
                 {
-                  if ( sub_41DF40(*v27) )
-                    HIBYTE(v56) = 1;
-                  v26 = *(ExtraDataList **)*v25;
+                  if ( sub_41DF40(*v27) ) /*0x5f3383*/
+                    v50 = 1; /*0x5f338c*/
+                  v26 = *(ExtraDataList **)*v25; /*0x5f3393*/
                 }
               }
             }
-            if ( !HIBYTE(v56) )
-              a2 = Actor_UnequipItem((PlayerCharacter *)a1, a2, st5_0, st6_0, (char)v20, 1, v26, 0, 0, 1);
-            if ( v25 )
+            if ( !v50 ) /*0x5f339a*/
+              a2 = Actor_UnequipItem((Actor *)a1, a2, st5_0, st6_0, (__int16)v20, 1, v26, 0, 0, 1); /*0x5f33a8*/
+            if ( v25 ) /*0x5f33af*/
             {
-              ContainerEntryExtraData_DestroyDataTable(v25, v24);
-              FormHeapFree((unsigned int)v25);
+              ContainerEntryExtraData_DestroyDataTable(v25, v24); /*0x5f33b3*/
+              FormHeapFree((unsigned int)v25); /*0x5f33b9*/
             }
           }
         }
-        v18 = v60;
-        v19 += 4;
-        --v63;
+        v18 = v55; /*0x5f33c1*/
+        p_unk04C += 4; /*0x5f33c5*/
+        --v58; /*0x5f33c8*/
       }
-      while ( v63 );
+      while ( v58 ); /*0x5f33cd*/
     }
-    v60 = ++v18;
+    v55 = ++v18; /*0x5f33d9*/
   }
-  while ( v18 < 0x10 );
-  if ( !HIBYTE(v56) || sub_45A500(SaveLoad_CurrentSavegame) )
+  while ( v18 < 0x10 ); /*0x5f33dd*/
+  if ( !v50 || sub_45A500(g_TESSaveLoadGame) ) /*0x5f33f0*/
   {
-LABEL_44:
-    if ( a1[1].vtbl )
+LABEL_49:
+    if ( a1[1].vtbl ) /*0x5f33fd*/
     {
-      v28 = a5;
-      switch ( *((_BYTE *)a5 + 4) )
+      v28 = form; /*0x5f3407*/
+      switch ( *((_BYTE *)form + 4) ) /*0x5f3422*/
       {
-        case 0x14:
-          if ( !TESBipedModelForm_CoversSlot(v61, 0xD, 0) )
-            goto LABEL_83;
-          v39 = (*((int (__thiscall **)(TESObjectREFRVtbl *, _DWORD))a1[1].vtbl->super.super.InitializeComponent + 0x3E))(
+        case 0x14: /*0x5f3422*/
+          if ( !TESBipedModelForm_CoversSlot(v57, 0xD, 0) ) /*0x5f3695*/
+            goto LABEL_88; /*0x5f3695*/
+          v38 = (*((int (__thiscall **)(TESObjectREFRVtbl *, _DWORD))a1[1].vtbl->super.super.InitializeComponent + 0x3E))( /*0x5f36ab*/
                   a1[1].vtbl,
                   0);
-          v40 = v39;
-          if ( !v39 )
-            goto LABEL_83;
-          v41 = 0;
-          if ( *(unsigned __int16 **)(v39 + 8) != a5 )
+          v39 = v38; /*0x5f36ad*/
+          if ( !v38 ) /*0x5f36b1*/
+            goto LABEL_88; /*0x5f36b1*/
+          v40 = 0; /*0x5f36b3*/
+          if ( *(unsigned __int16 **)(v38 + 8) != form ) /*0x5f36b8*/
           {
-            if ( *(_DWORD *)v39 )
+            if ( *(_DWORD *)v38 ) /*0x5f36ba*/
             {
-              if ( **(_DWORD **)v39 )
-                v41 = sub_41DF40(**(_BYTE ***)v39) != 0;
+              if ( **(_DWORD **)v38 ) /*0x5f36c0*/
+                v40 = sub_41DF40(**(_BYTE ***)v38) != 0; /*0x5f36d1*/
             }
           }
-          a2 = Actor_UnequipItem(
-                 (PlayerCharacter *)a1,
+          a2 = Actor_UnequipItem( /*0x5f36e6*/
+                 (Actor *)a1,
                  a2,
                  st5_0,
                  st6_0,
-                 *(_DWORD *)(v40 + 8),
+                 *(_DWORD *)(v39 + 8),
                  1,
-                 (ExtraDataList *)**(_DWORD **)v40,
+                 (ExtraDataList *)**(_DWORD **)v39,
                  0,
                  0,
                  1);
-          if ( !v41 || sub_45A500(SaveLoad_CurrentSavegame) )
-            goto LABEL_83;
-          return;
-        case 0x1A:
-          v31 = (*((int (__thiscall **)(TESObjectREFRVtbl *))a1[1].vtbl->super.super.InitializeComponent + 0x3C))(a1[1].vtbl);
-          if ( v31 )
-            a2 = Actor_UnequipItem(
-                   (PlayerCharacter *)a1,
+          if ( !v40 || sub_45A500(g_TESSaveLoadGame) ) /*0x5f36f9*/
+            goto LABEL_88; /*0x5f3700*/
+          return; /*0x5f3700*/
+        case 0x1A: /*0x5f3422*/
+          v31 = (*((int (__thiscall **)(TESObjectREFRVtbl *, _DWORD))a1[1].vtbl->super.super.InitializeComponent + 0x3C))( /*0x5f3517*/
+                  a1[1].vtbl,
+                  0);
+          if ( v31 ) /*0x5f351b*/
+            a2 = Actor_UnequipItem( /*0x5f3530*/
+                   (Actor *)a1,
                    a2,
                    st5_0,
                    st6_0,
@@ -239,170 +235,183 @@ LABEL_44:
                    0,
                    0,
                    1);
-          if ( a1 != (TESObjectREFR *)TESDataHandler_g_PlayerRef )
-            goto LABEL_83;
-          if ( a6 && BaseExtraList_GetExtraData(a6, kExtraData_TimeLeft) || *((int *)a5 + 0x1C) < 0 )
-            break;
-          v62 = ExtraDataList_GetContainerChanges(&a1->member.baseExtraList);
-          if ( !a6 )
+          if ( a1 != (TESObjectREFR *)reference ) /*0x5f353b*/
+            goto LABEL_88; /*0x5f353b*/
+          if ( a7 && BaseExtraList_GetExtraData((ExtraDataList *)a7, kExtraData_TimeLeft) || *((int *)form + 0x1C) < 0 ) /*0x5f355e*/
+            break; /*0x5f355e*/
+          v59 = ExtraDataList_GetContainerChanges(&a1->member.baseExtraList); /*0x5f356e*/
+          if ( !a7 ) /*0x5f3572*/
           {
-            v32 = (_DWORD *)FormHeapAlloc(0x14u);
-            if ( v32 )
-              v59 = (float *)ExtraDataList_constr(v32);
+            v32 = (_DWORD *)FormHeapAlloc(0x14u); /*0x5f357a*/
+            if ( v32 ) /*0x5f358e*/
+              v56 = (ExtraDataList **)ExtraDataList_constr(v32); /*0x5f3597*/
             else
-              v59 = 0;
-            v64 = 0xFFFFFFFF;
-            ContainerExtraData_GetEntryForForm(v62, (int)retaddr, 1, 0);
-            v34 = v33;
-            v35 = 0;
-            if ( !v33 )
+              v56 = 0; /*0x5f359d*/
+            a7 = v56; /*0x5f35ad*/
+            EntryForForm = ContainerExtraData_GetEntryForForm(v59, (TESForm *)form, 1, 0); /*0x5f35c3*/
+            v34 = 0; /*0x5f35c5*/
+            if ( !EntryForForm ) /*0x5f35c9*/
             {
-              v36 = (_DWORD *)FormHeapAlloc(0xCu);
-              if ( v36 )
-                v37 = ContainerEntryExtraData_constr(v36, (int)retaddr, 1);
+              v35 = (_DWORD *)FormHeapAlloc(0xCu); /*0x5f35cd*/
+              if ( v35 ) /*0x5f35e3*/
+                v36 = (EntryData *)ContainerEntryExtraData_constr(v35, (int)form, 1); /*0x5f35ea*/
               else
-                v37 = 0;
-              v34 = v37;
-              v35 = 1;
+                v36 = 0; /*0x5f35f1*/
+              EntryForForm = v36; /*0x5f35fb*/
+              v34 = 1; /*0x5f35fd*/
             }
-            if ( !*v34 )
+            if ( !EntryForForm->extendData ) /*0x5f35ff*/
             {
-              v38 = (_DWORD *)FormHeapAlloc(8u);
-              if ( v38 )
+              v37 = (tListVoid *)FormHeapAlloc(8u); /*0x5f3606*/
+              if ( v37 ) /*0x5f3610*/
               {
-                *v38 = 0;
-                v38[1] = 0;
+                v37->node.data = 0; /*0x5f3612*/
+                v37->node.next = 0; /*0x5f3618*/
               }
               else
               {
-                v38 = 0;
+                v37 = 0; /*0x5f3621*/
               }
-              *v34 = (int)v38;
+              EntryForForm->extendData = v37; /*0x5f3623*/
             }
-            BSSimpleList_PushFront((_DWORD *)*v34, v56);
-            if ( v35 )
-              ContainerExtraData_AddEntry(v59, v34, 1, v49, v50, 0, v51, v52);
+            BSSimpleList_PushFront(&EntryForForm->extendData->node.data, (int)v56); /*0x5f362c*/
+            if ( v34 ) /*0x5f3633*/
+              ContainerExtraData_AddEntry(v59, EntryForForm, 1); /*0x5f363c*/
           }
-          a2 = (double)(int)a7[0x1C];
-          v53 = a2;
-          sub_41EDF0(a9, (BSExtraDataVtbl *)LODWORD(v53));
-          goto LABEL_83;
-        case 0x21:
-          v29 = (ExtraDataList ***)(*((int (__thiscall **)(TESObjectREFRVtbl *, _DWORD))a1[1].vtbl->super.super.InitializeComponent
+          a2 = (double)*((int *)form + 0x1C); /*0x5f3645*/
+          v49 = a2; /*0x5f364d*/
+          ExtraDataList_SetTimeLeft((ExtraDataList *)a7, (BSExtraDataVtbl *)LODWORD(v49)); /*0x5f3650*/
+          goto LABEL_88; /*0x5f3650*/
+        case 0x21: /*0x5f3422*/
+          v29 = (ExtraDataList ***)(*((int (__thiscall **)(TESObjectREFRVtbl *, _DWORD))a1[1].vtbl->super.super.InitializeComponent /*0x5f3438*/
                                     + 0x3B))(
                                      a1[1].vtbl,
                                      0);
-          if ( !v29 )
-            goto LABEL_55;
-          v55 = (*((int (__thiscall **)(TESObjectREFRVtbl *))a1[1].vtbl->super.super.InitializeComponent + 0x4E))(a1[1].vtbl);
-          v30 = 0;
-          if ( v29[2] != (ExtraDataList **)a5 )
+          if ( !v29 ) /*0x5f343c*/
+            goto LABEL_60; /*0x5f343c*/
+          v52 = (*((int (__thiscall **)(TESObjectREFRVtbl *))a1[1].vtbl->super.super.InitializeComponent + 0x4E))(a1[1].vtbl); /*0x5f344b*/
+          v30 = 0; /*0x5f3451*/
+          if ( v29[2] != (ExtraDataList **)form ) /*0x5f3456*/
           {
-            if ( *v29 )
+            if ( *v29 ) /*0x5f3458*/
             {
-              if ( **v29 )
-                v30 = sub_41DF40(**v29) != 0;
+              if ( **v29 ) /*0x5f345e*/
+                v30 = sub_41DF40(**v29) != 0; /*0x5f346f*/
             }
           }
-          a2 = Actor_UnequipItem((PlayerCharacter *)a1, a2, st5_0, st6_0, (char)v29[2], 1, **v29, 0, 0, 1);
-          if ( v30 && !sub_45A500(SaveLoad_CurrentSavegame) )
-            return;
-          if ( v55 )
-            sub_5E13D0(a1, 0);
-LABEL_55:
-          if ( !(*((int (__thiscall **)(TESObjectREFRVtbl *, int))a1[1].vtbl->super.super.InitializeComponent + 0x3C))(
+          a2 = Actor_UnequipItem((Actor *)a1, a2, st5_0, st6_0, (__int16)v29[2], 1, **v29, 0, 0, 1); /*0x5f3484*/
+          if ( v30 && !sub_45A500(g_TESSaveLoadGame) ) /*0x5f349a*/
+            return; /*0x5f349a*/
+          if ( v52 ) /*0x5f34a5*/
+            sub_5E13D0(a1, 0); /*0x5f34ab*/
+LABEL_60:
+          if ( !(*((int (__thiscall **)(TESObjectREFRVtbl *, int))a1[1].vtbl->super.super.InitializeComponent + 0x3C))( /*0x5f34f4*/
                   a1[1].vtbl,
                   1)
             || !(*((unsigned __int8 (__thiscall **)(TESObjectREFRVtbl *))a1[1].vtbl->super.super.InitializeComponent
                  + 0xC1))(a1[1].vtbl)
-            || *((_BYTE *)a5 + 0x90) != 5
+            || *((_BYTE *)form + 0x90) != 5
             && !(*((int (__thiscall **)(TESObjectREFRVtbl *, _DWORD))a1[1].vtbl->super.super.InitializeComponent + 0x3E))(
                   a1[1].vtbl,
                   0) )
           {
-            goto LABEL_83;
+            goto LABEL_88; /*0x5f34f8*/
           }
-          UnequipLight(a1, st5_0, st6_0, a2);
-          break;
-        case 0x22:
-          v42 = (*((int (__thiscall **)(TESObjectREFRVtbl *, int))a1[1].vtbl->super.super.InitializeComponent + 0x3D))(
+          UnequipLight(a1); /*0x5f3500*/
+          break; /*0x5f3505*/
+        case 0x22: /*0x5f3422*/
+          v41 = (*((int (__thiscall **)(TESObjectREFRVtbl *, int))a1[1].vtbl->super.super.InitializeComponent + 0x3D))( /*0x5f371a*/
                   a1[1].vtbl,
                   1);
-          if ( !v42 )
-            goto LABEL_83;
-          v43 = *(unsigned __int16 **)(v42 + 8);
-          if ( v43 == a5 )
-            goto LABEL_83;
-          a2 = Actor_UnequipItem(
-                 (PlayerCharacter *)a1,
+          if ( !v41 ) /*0x5f371e*/
+            goto LABEL_88; /*0x5f371e*/
+          v42 = *(unsigned __int16 **)(v41 + 8); /*0x5f3724*/
+          if ( v42 == form ) /*0x5f3729*/
+            goto LABEL_88; /*0x5f3729*/
+          a2 = Actor_UnequipItem( /*0x5f373f*/
+                 (Actor *)a1,
                  a2,
                  st5_0,
                  st6_0,
-                 (char)v43,
+                 (__int16)v42,
                  1,
-                 (ExtraDataList *)**(_DWORD **)v42,
+                 (ExtraDataList *)**(_DWORD **)v41,
                  0,
                  0,
                  1);
-          break;
+          break; /*0x5f3744*/
         default:
-          goto LABEL_83;
+          goto LABEL_88;
       }
     }
     else
     {
-LABEL_83:
-      v28 = (unsigned __int16 *)v64;
+LABEL_88:
+      v28 = form; /*0x5f3655*/
     }
-    if ( a1->vtbl->GetBaseForm(a1) )
-      ((int (__thiscall *)(TESObjectREFR *))a1->vtbl->IsActor)(a1);
-    v44 = (float *)ContainerExtraData_GetContainerExtraDataForRef(a1);
-    ContainerExtraData_EquipItemForActor(v44, st5_0, st6_0, a2, (TESForm *)v28, v65, (int)a1, retaddr, v54, (char)a5);
-    v45 = *((unsigned __int8 *)v28 + 4);
-    if ( v45 == 0x14 )
+    if ( a1->vtbl->GetBaseForm(a1) ) /*0x5f3664*/
+      ((int (__thiscall *)(TESObjectREFR *))a1->vtbl->IsActor)(a1); /*0x5f367b*/
+    v43 = (float *)ContainerExtraData_GetContainerExtraDataForRef(a1); /*0x5f374d*/
+    ContainerExtraData_EquipItemForActor( /*0x5f376d*/
+      v43,
+      st5_0,
+      st6_0,
+      a2,
+      (TESForm *)v28,
+      (signed int)a6,
+      a1,
+      (TESForm *)a7,
+      v53,
+      a8);
+    v44 = *((unsigned __int8 *)v28 + 4); /*0x5f3772*/
+    if ( v44 == 0x14 ) /*0x5f3779*/
     {
-      if ( !TESBipedModelForm_CoversSlot(v28 + 0x32, 0xD, 0) )
+      if ( !TESBipedModelForm_CoversSlot(v28 + 0x32, 0xD, 0) ) /*0x5f3795*/
       {
-LABEL_104:
-        v46 = OblivionDynamicCast(
+LABEL_109:
+        v45 = OblivionDynamicCast( /*0x5f37a1*/
                 v28,
                 0,
                 (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                 &TESEnchantableForm `RTTI Type Descriptor',
                 0);
-        if ( v46 )
-          v47 = v46[1];
+        if ( v45 ) /*0x5f37ba*/
+          v46 = v45[1]; /*0x5f37bc*/
         else
-          v47 = 0;
-        if ( v47 )
+          v46 = 0; /*0x5f37c1*/
+        if ( v46 ) /*0x5f37c5*/
         {
-          sub_41A610((char *)(v47 + 0x18), 0);
-          if ( a1 == (TESObjectREFR *)TESDataHandler_g_PlayerRef )
-            sub_662DA0(TESDataHandler_g_PlayerRef);
+          MagicItem_LoadVFXModels((char *)(v46 + 0x18), 0); /*0x5f37cc*/
+          if ( a1 == (TESObjectREFR *)reference ) /*0x5f37d9*/
+            sub_662DA0(reference); /*0x5f37db*/
         }
-        if ( ImageSpaceEffectEnabled )
+        if ( OB_RendererGlobalState_010201A0.pad_00D[0x98] ) /*0x5f37e0*/
         {
-          if ( enableRefraction )
+          if ( OB_ShaderPassControl_010201A0.refractionPassEnabled ) /*0x5f37e9*/
           {
-            if ( ShaderPackage >= 2 && a1 != (TESObjectREFR *)0xFFFFFFBC )
+            if ( *(int *)OB_RendererGlobalState_010201A0.shaderPackageVersion_le >= 2 /*0x5f3800*/
+              && a1 != (TESObjectREFR *)0xFFFFFFBC )
             {
-              if ( ExtraDataList::GetRefractionProperty(&a1->member.baseExtraList) )
+              if ( ExtraDataList_GetRefractionPropertyExtra(&a1->member.baseExtraList) ) /*0x5f3804*/
               {
-                vtbl = a1->vtbl;
-                ExtraDataList::GetRefractionProperty(&a1->member.baseExtraList);
-                ((void (__cdecl *)(int))vtbl[1].super.Unk_32)(1);
+                vtbl = a1->vtbl; /*0x5f380d*/
+                RefractionPropertyExtra = ExtraDataList_GetRefractionPropertyExtra(&a1->member.baseExtraList); /*0x5f3812*/
+                ((void (__thiscall *)(TESObjectREFR *, int, _DWORD))vtbl[1].super.Unk_32)( /*0x5f3828*/
+                  a1,
+                  1,
+                  RefractionPropertyExtra->refractionAmount);
               }
             }
           }
         }
-        return;
+        return; /*0x5f3828*/
       }
     }
-    else if ( v45 != 0x1A && v45 != 0x21 )
+    else if ( v44 != 0x1A && v44 != 0x21 ) /*0x5f3783*/
     {
-      goto LABEL_104;
+      goto LABEL_109; /*0x5f3783*/
     }
-    HideEquipment(a1, st5_0, st6_0, a2, (int)v28, 0);
-    goto LABEL_104;
+    HideEquipment(a1, st5_0, st6_0, a2, (int)v28, 0); /*0x5f379c*/
+    goto LABEL_109; /*0x5f379c*/
   }
 }

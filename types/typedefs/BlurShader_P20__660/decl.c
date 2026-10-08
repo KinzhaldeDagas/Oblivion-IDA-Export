@@ -1,1 +1,1 @@
-BlurShader_P20
+struct BlurShader_P20;

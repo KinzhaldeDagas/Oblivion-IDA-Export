@@ -2,15 +2,18 @@
   "bytes_preview_hex": "",
   "bytes_sha256": "",
   "comments": {
-    "regular": "",
+    "regular": "[Verified] bIsHDR is registered in INISettingCollection with setting name pointed to by bIsHDRSettingName: \"bDoHighDynamicRange:BlurShaderHDR\". The IDB's initial data byte is 1; startup initialization writes the active HDR-mode result to RendererGlobalState+0x1D7 only when this setting, bDoImageSpaceEffect, and the FP16ARGB blend capability are true. Fallout's Renderer::bHighDynamicRange similarly feeds its HDR manager flag; [Probable] these are conceptual counterparts, with different setting schemas.",
     "repeatable": ""
   },
+  "confidence_scope": "Raw live IDA annotation; bulk synchronization does not independently verify semantic names or comments.",
   "display_name": "bIsHDR",
   "ea": "0xB06DE4",
+  "evidence_confidence": "Unknown",
   "kind": "data",
   "name": "bIsHDR",
   "segment": ".data",
   "size": 1,
-  "type": "char",
+  "source_annotation_confidence": "Verified",
+  "type": "bool",
   "xrefs_to_count": 3
 }

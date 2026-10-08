@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x79B2F0",
-    "line": "push    esi",
+    "line": "push    esi; OBLIVION AUTHORITY (2026-08-30): Compiler-folded copy assignment for a 0x10-byte vector owner with four-byte elements. Handles self-assignment, empty source, capacity reuse, initialized/uninitialized tails, and reallocation.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x79B2F2",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+source]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x79B315",
-    "line": "call    sub_784A70",
+    "line": "call    OB_stVector4_Clear_010201A0; OBLIVION AUTHORITY (2026-08-30): clear() wrapper for a trivial 4-byte-element vector; validates begin/end and erases the full range while retaining capacity.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,25 +199,25 @@
   },
   {
     "ea": "0x79B33A",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B33B",
-    "line": "push    ebp; int",
+    "line": "push    ebp; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B33C",
-    "line": "push    ebx; Src",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B33D",
-    "line": "call    sub_790420",
+    "line": "call    OB_stVector4_CopyRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Copies the half-open range of trivial 4-byte elements into initialized destination storage and returns destination plus the element count.",
     "mnemonic": "call",
     "size": 5
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x79B3A0",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -493,19 +493,19 @@
   },
   {
     "ea": "0x79B3A4",
-    "line": "push    ebx; int",
+    "line": "push    ebx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B3A5",
-    "line": "push    edx; Src",
+    "line": "push    edx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B3A6",
-    "line": "call    sub_790420",
+    "line": "call    OB_stVector4_CopyRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Copies the half-open range of trivial 4-byte elements into initialized destination storage and returns destination plus the element count.",
     "mnemonic": "call",
     "size": 5
   },
@@ -529,19 +529,19 @@
   },
   {
     "ea": "0x79B3B4",
-    "line": "push    edx; Dst",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B3B5",
-    "line": "push    eax; int",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B3B6",
-    "line": "push    ebx; Src",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x79B3B9",
-    "line": "call    sub_7A25C0",
+    "line": "call    OB_stVector4_UninitializedCopyRange_010201A0",
     "mnemonic": "call",
     "size": 5
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x79B3CF",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -679,19 +679,19 @@
   },
   {
     "ea": "0x79B3EA",
-    "line": "push    eax; char *",
+    "line": "push    eax; capacity",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B3EB",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79B3ED",
-    "line": "call    sub_790E40",
+    "line": "call    OB_stVector4_AllocateCapacity_010201A0; Resets an OB_stVector4 pointer triplet and allocates capacity for exactly the requested number of 4-byte elements while leaving end==begin. Returns false for zero capacity; OB_stVector4_CopyAssign uses it after freeing insufficient storage.",
     "mnemonic": "call",
     "size": 5
   },
@@ -727,19 +727,19 @@
   },
   {
     "ea": "0x79B3FF",
-    "line": "push    ecx; Dst",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B400",
-    "line": "push    edx; int",
+    "line": "push    edx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B401",
-    "line": "push    eax; Src",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -751,7 +751,7 @@
   },
   {
     "ea": "0x79B404",
-    "line": "call    sub_7A25C0",
+    "line": "call    OB_stVector4_UninitializedCopyRange_010201A0",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,31 +1,32 @@
-void **__thiscall sub_4DB830(_BYTE *this)
+// Verified effective ownership-rank lookup order: this reference's XRNK, then linked door XRNK, then parent cell's required rank; missing rank defaults to zero. Fallout's TESObjectREFR::GetOwnershipRank inserts EncounterZone owner-rank between linked-door and parent-cell checks; Oblivion has no encounter-zone branch here.
+SInt32 __thiscall TESObjectREFR_GetOwnershipRank(TESObjectREFR *reference)
 {
-  ExtraDataList *v2; // esi
-  void **result; // eax
-  BSExtraData *Teleport; // eax
-  BSExtraData *v5; // esi
-  BSExtraDataVtbl *v6; // eax
-  ExtraDataList *v7; // ecx
+  ExtraDataList *p_baseExtraList; // esi
+  SInt32 result; // eax
+  TeleportData *Teleport; // eax
+  TeleportData *v5; // esi
+  TESObjectREFR *LinkedDoor; // eax
+  TESObjectCELL *parentCell; // ecx
 
-  v2 = (ExtraDataList *)(this + 0x44);
-  result = (void **)sub_41E7F0((ExtraDataList *)(this + 0x44));
-  if ( result == (void **)0xFFFFFFFF )
+  p_baseExtraList = &reference->member.baseExtraList; /*0x4db834*/
+  result = ExtraDataList_GetRank(&reference->member.baseExtraList); /*0x4db839*/
+  if ( result == 0xFFFFFFFF ) /*0x4db841*/
   {
-    Teleport = (BSExtraData *)ExtraDataList_GetTeleport(v2);
-    v5 = Teleport;
-    if ( !Teleport
-      || !sub_42B410(Teleport)
-      || (v6 = sub_42B410(v5),
-          result = (void **)sub_41E7F0((ExtraDataList *)&v6[8].CompareTo),
-          result == (void **)0xFFFFFFFF) )
+    Teleport = ExtraDataList_GetTeleport(p_baseExtraList); /*0x4db845*/
+    v5 = Teleport; /*0x4db84a*/
+    if ( !Teleport /*0x4db86d*/
+      || !TeleportData_GetLinkedDoor(Teleport)
+      || (LinkedDoor = TeleportData_GetLinkedDoor(v5),
+          result = ExtraDataList_GetRank(&LinkedDoor->member.baseExtraList),
+          result == 0xFFFFFFFF) )
     {
-      v7 = *((ExtraDataList **)this + 0x10);
-      if ( !v7 )
-        return 0;
-      result = (void **)sub_4CA990(v7);
-      if ( result == (void **)0xFFFFFFFF )
-        return 0;
+      parentCell = reference->member.parentCell; /*0x4db86f*/
+      if ( !parentCell ) /*0x4db874*/
+        return 0; /*0x4db874*/
+      result = TESObjectCELL_GetRequiredOwnerFactionRank(parentCell); /*0x4db876*/
+      if ( result == 0xFFFFFFFF ) /*0x4db87e*/
+        return 0; /*0x4db880*/
     }
   }
-  return result;
+  return result; /*0x4db882*/
 }

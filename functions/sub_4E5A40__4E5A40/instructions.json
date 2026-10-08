@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E5A40",
-    "line": "push    ebx",
+    "line": "push    ebx; Verified modified-form size: 2-byte disabled-point count, plus 2 bytes for each non-null point with linkedPointsDisabled set; adds 6 bytes when save-game block framing is enabled.",
     "mnemonic": "push",
     "size": 1
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x4E5A4D",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x4E5A73",
-    "line": "mov     ecx, [eax+esi*4]",
+    "line": "mov     ecx, [eax+esi*4]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x4E5A7A",
-    "line": "call    sub_67ED70",
+    "line": "call    PathGraphNode_IsLinkedPointsDisabled; Verified returns PathGrid point flag 0x20, which is the linked-points-disabled state: SetLinkedPointsEnabled stores the inverse of its enabled argument, save/load persists flagged indices, searches skip flagged nodes, and renderer marks them wireframe.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x4E5AB0",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },

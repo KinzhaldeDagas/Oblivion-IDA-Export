@@ -10,10 +10,10 @@
 0x6B7463: mov     edi, [esi]
 0x6B7465: test    edi, edi
 0x6B7467: jz      short loc_6B7479
-0x6B7469: mov     ecx, edi
-0x6B746B: call    sub_6B81D0
+0x6B7469: mov     ecx, edi; this
+0x6B746B: call    DialogueItem__Destroy
 0x6B7470: push    edi
-0x6B7471: call    FormHeapFree
+0x6B7471: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6B7476: add     esp, 4
 0x6B7479: mov     eax, [esi+4]
 0x6B747C: test    eax, eax
@@ -23,7 +23,7 @@
 0x6B7486: mov     edx, [eax]
 0x6B7488: push    eax
 0x6B7489: mov     [esi], edx
-0x6B748B: call    FormHeapFree
+0x6B748B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6B7490: add     esp, 4
 0x6B7493: jmp     short loc_6B7458
 0x6B7495: mov     dword ptr [esi], 0

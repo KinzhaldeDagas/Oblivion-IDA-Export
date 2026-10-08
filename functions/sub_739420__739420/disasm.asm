@@ -1,10 +1,10 @@
-0x739420: push    ebx
+0x739420: push    ebx; Pass227: NiScreenSpaceCamera object-map/reference traversal. Walks +0x124 polygons and +0x134 textures, calling child vtable +0x38; not rendering.
 0x739421: mov     ebx, [esp+4+arg_0]
 0x739425: push    esi
 0x739426: push    edi
 0x739427: push    ebx
 0x739428: mov     esi, ecx
-0x73942A: call    sub_707AB0
+0x73942A: call    sub_707AB0; Pass227: Base object-map/reference collection called before NiScreenSpaceCamera child array traversal.
 0x73942F: xor     edi, edi
 0x739431: cmp     [esi+12Eh], di
 0x739438: jbe     short loc_739463

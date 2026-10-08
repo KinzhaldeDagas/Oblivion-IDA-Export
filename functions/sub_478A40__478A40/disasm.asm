@@ -16,7 +16,7 @@
 0x478A74: mov     large fs:0, eax
 0x478A7A: mov     esi, ecx
 0x478A7C: push    offset unk_A2F830; lpCriticalSection
-0x478A81: mov     ecx, offset stru_B33E00
+0x478A81: mov     ecx, offset unk_B33E00
 0x478A86: call    NiEnterCriticalSection
 0x478A8B: mov     ecx, [esi+60h]
 0x478A8E: xor     ebx, ebx
@@ -74,12 +74,12 @@
 0x478B2C: push    edx
 0x478B2D: mov     esi, eax
 0x478B2F: mov     [esp+148h+var_4], 0FFFFFFFFh
-0x478B3A: call    FormHeapFree
+0x478B3A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x478B3F: add     esp, 1Ch
 0x478B42: mov     [esp+12Ch+var_11C], ebx
 0x478B46: mov     word ptr [esp+12Ch+var_118+2], bx
 0x478B4B: mov     word ptr [esp+12Ch+var_118], bx
-0x478B50: mov     ecx, offset stru_B33E00; lpCriticalSection
+0x478B50: mov     ecx, offset unk_B33E00; lpCriticalSection
 0x478B55: call    NiLeaveCriticalSection_0
 0x478B5A: mov     eax, esi
 0x478B5C: mov     ecx, dword ptr [esp+12Ch+var_C]
@@ -93,3 +93,16 @@
 0x478B77: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x478B7C: add     esp, 11Ch
 0x478B82: retn
+0x9AF070: lea     ecx, [ebp-11Ch]; void *
+0x9AF076: jmp     BSStringT_Clear
+0x9AF07B: mov     edx, [esp+arg_4]
+0x9AF07F: lea     eax, [edx-11Ch]
+0x9AF085: mov     ecx, [edx-120h]
+0x9AF08B: xor     ecx, eax
+0x9AF08D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AF092: add     eax, 0Ch
+0x9AF095: mov     ecx, [edx-4]
+0x9AF098: xor     ecx, eax
+0x9AF09A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AF09F: mov     eax, offset stru_ADB708
+0x9AF0A4: jmp     ___CxxFrameHandler3

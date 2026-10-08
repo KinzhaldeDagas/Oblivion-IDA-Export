@@ -1,7 +1,12 @@
-int __usercall MagicItemForm_LoadForm_::LoadFullName@<eax>(int a1@<edi>, TESFullName *a2@<esi>)
+void __usercall MagicItemForm_LoadForm_::LoadFullName(
+        int a1@<edi>,
+        TESFullName *a2@<esi>,
+        int a3@<ebx>,
+        int a4@<ebp>,
+        int a5)
 {
-  Data *v3; // [esp+0h] [ebp-4h]
+  Data *v5; // [esp+0h] [ebp-4h]
 
-  TESFullname_Load(a1 != 0 ? a2 : 0, v3);
-  return MagicItemForm_LoadForm_::LoadBaseData_();
+  TESFullname_Load(a1 != 0 ? a2 : 0, v5);
+  MagicItemForm_LoadForm_::LoadBaseData_(a3, a4, a1, (int)a2, a5); /*0x41b33e*/
 }

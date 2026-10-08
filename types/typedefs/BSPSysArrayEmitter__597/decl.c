@@ -1,1 +1,1 @@
-BSPSysArrayEmitter
+struct BSPSysArrayEmitter;

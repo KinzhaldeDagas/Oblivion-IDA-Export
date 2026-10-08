@@ -1,11 +1,11 @@
-0x6806B0: push    edi
+0x6806B0: push    edi; Verified state slot 0x04 marks an allocated table slot. The next-free cursor is a 16-bit index; 0xFFFF is reserved as exhausted/unavailable. Capacity starts at 500 and grows by 100, capped at 65535 entries.
 0x6806B1: movzx   edi, word ptr ds:0B3BF08h
 0x6806B8: cmp     di, 0FFFFh
 0x6806BD: jnb     loc_680755
 0x6806C3: cmp     dword ptr ds:0B3BF00h, 0
 0x6806CA: jnz     short loc_6806D9
-0x6806CC: push    1F4h
-0x6806D1: call    sub_680620
+0x6806CC: push    1F4h; newCapacity
+0x6806D1: call    TravelPath_ResizeSearchStateTable; Verified reallocation helper: grows the table to the requested capacity, allocates and zeroes capacity*0x10 bytes, copies old entries, frees the old allocation, and records the new capacity.
 0x6806D6: add     esp, 4
 0x6806D9: mov     edx, ds:0B3BF00h
 0x6806DF: movzx   eax, di
@@ -37,8 +37,8 @@
 0x680733: cmp     eax, 0FFFFh
 0x680738: jle     short loc_68073F
 0x68073A: mov     eax, 0FFFFh
-0x68073F: push    eax
-0x680740: call    sub_680620
+0x68073F: push    eax; newCapacity
+0x680740: call    TravelPath_ResizeSearchStateTable; Verified reallocation helper: grows the table to the requested capacity, allocates and zeroes capacity*0x10 bytes, copies old entries, frees the old allocation, and records the new capacity.
 0x680745: add     esp, 4
 0x680748: mov     ds:0B3BF08h, si
 0x68074F: pop     esi

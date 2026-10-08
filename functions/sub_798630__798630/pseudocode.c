@@ -1,25 +1,32 @@
-void __thiscall sub_798630(int this, _DWORD *a2, unsigned __int16 a3, int a4, int a5, int a6)
+// Oblivion CLeafGeometry::SmallUpdate. After validating backing arrays, copies the stable first 0x3C bytes of one LOD record into the public leaf output and sets active/discreteLodLevel. Camera and size arguments are intentionally unused in this path.
+void __thiscall OB_CLeafGeometry_SmallUpdate_010201A0(
+        OB_CLeafGeometry_010201A0 *this,
+        OB_SLeafGeometryOutput_010201A0 *outLeaf,
+        unsigned __int16 lodLevel,
+        float cameraAzimuthDegrees,
+        float cameraPitchDegrees,
+        float leafSizeIncreaseFactor)
 {
-  int v6; // edx
+  OB_SLodGeometry_010201A0 *lodGeometryRecords; // edx
 
-  v6 = *(_DWORD *)(this + 0x2C);
-  if ( v6 )
+  lodGeometryRecords = this->lodGeometryRecords; /*0x798630*/
+  if ( lodGeometryRecords ) /*0x798635*/
   {
-    if ( a3 < *(_WORD *)(this + 0x28) )
+    if ( lodLevel < this->leafLodCount ) /*0x798640*/
     {
-      if ( *(_DWORD *)(this + 0x10) )
+      if ( this->perLodLeafCardVertexTables ) /*0x798642*/
       {
-        if ( *(_DWORD *)(this + 0x24) )
+        if ( this->leafTextureOrigins ) /*0x798648*/
         {
-          if ( *(_DWORD *)(this + 0x20) )
+          if ( this->leafTextureDimensions ) /*0x79864e*/
           {
-            if ( *(_DWORD *)(this + 4) )
+            if ( this->windEngine ) /*0x798654*/
             {
-              if ( *(_DWORD *)(this + 0xC) )
+              if ( this->timeOffsets ) /*0x79865a*/
               {
-                qmemcpy(a2, (const void *)(v6 + 0x44 * a3), 0x3Cu);
-                *(_BYTE *)a2 = 1;
-                a2[2] = a3;
+                qmemcpy(outLeaf, &lodGeometryRecords[lodLevel], sizeof(OB_SLeafGeometryOutput_010201A0)); /*0x79867a*/
+                outLeaf->active = 1; /*0x79867d*/
+                outLeaf->discreteLodLevel = lodLevel; /*0x798680*/
               }
             }
           }

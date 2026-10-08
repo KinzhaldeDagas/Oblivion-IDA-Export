@@ -1,4 +1,4 @@
-0x7A8660: mov     ecx, [esp+arg_0]
+0x7A8660: mov     ecx, [esp+arg_0]; OBLIVION AUTHORITY (2026-08-30): Allocates count*8 bytes from the FormHeap for CLeafLodEngine::SLodEntry storage; each entry is {primaryLeaf, matchedLeaf}.
 0x7A8664: sub     esp, 0Ch
 0x7A8667: test    ecx, ecx
 0x7A8669: ja      short loc_7A8681

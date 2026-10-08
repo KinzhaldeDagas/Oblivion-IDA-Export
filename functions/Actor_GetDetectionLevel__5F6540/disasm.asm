@@ -1,4 +1,4 @@
-0x5F6540: sub     esp, 108h
+0x5F6540: sub     esp, 108h; Oblivion authoritative detection pipeline. Computes this detector's level against a target actor: obtains cached/physical LOS and distance, target light, boot weight, movement/running/sneak/combat/underwater/exterior state, Luck-modified Sneak values, detector Blindness AV 0x2D, target Chameleon AV 0x2E, and target Invisibility AV 0x2F; then calls Calc_DetectionLevel and updates the detector's process entry. Positive means detected. Fallout only corroborates the GetDetectionLevelAgainstActor terminology.
 0x5F6546: mov     eax, ds:0B30AACh
 0x5F654B: xor     eax, esp
 0x5F654D: mov     [esp+108h+var_4], eax
@@ -7,11 +7,11 @@
 0x5F6556: mov     ebp, [esp+110h+arg_4]
 0x5F655D: mov     ebx, ecx
 0x5F655F: cmp     dword ptr [ebx+58h], 0
-0x5F6563: push    esi
+0x5F6563: push    esi; luckValue
 0x5F6564: mov     esi, [esp+114h+arg_8]
 0x5F656B: jnz     short loc_5F6574
 0x5F656D: xor     eax, eax
-0x5F656F: jmp     Actor_GetDetectionLevel___Return
+0x5F656F: jmp     Actor_GetDetectionLevelAgainstActor_Epilogue; Common Actor_GetDetectionLevelAgainstActor epilogue/stack cleanup tail.
 0x5F6574: mov     byte ptr [esi], 0
 0x5F6577: mov     ecx, [ebx+58h]
 0x5F657A: mov     eax, [ecx]
@@ -32,11 +32,11 @@
 0x5F65A8: mov     ecx, ebp
 0x5F65AA: call    edx
 0x5F65AC: test    eax, eax
-0x5F65AE: jz      Actor_GetDetectionLevel___Return_Neg1
+0x5F65AE: jz      Actor_GetDetectionLevelAgainstActor_ReturnNegativeOne; Shared tail for invalid/unrendered targets: returns detection level -1 through the common Oblivion epilogue.
 0x5F65B4: cmp     byte ptr [esp+114h+arg_4], 0
 0x5F65BC: jnz     short loc_5F65C8
 0x5F65BE: cmp     [esp+114h+var_FC], edi
-0x5F65C2: jnz     Actor_GetDetectionLevel___ReturnDetectionLevel
+0x5F65C2: jnz     Actor_GetDetectionLevelAgainstActor_ReturnResult; Shared tail that forwards the computed Oblivion detection level to the common epilogue.
 0x5F65C8: push    0
 0x5F65CA: push    ebp
 0x5F65CB: mov     ecx, ebx
@@ -49,7 +49,7 @@
 0x5F65E8: push    0
 0x5F65EA: push    ebp
 0x5F65EB: call    edx
-0x5F65ED: call    Double_To_SInt32
+0x5F65ED: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5F65F2: mov     [esp+114h+var_F0], eax
 0x5F65F6: mov     eax, [ebx]
 0x5F65F8: mov     edx, [eax+288h]
@@ -62,7 +62,7 @@
 0x5F660F: jnz     short loc_5F6631
 0x5F6611: fild    [esp+114h+var_F0]
 0x5F6615: fmul    dword ptr ds:0B37A50h
-0x5F661B: call    Double_To_SInt32
+0x5F661B: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5F6620: cmp     eax, 64h ; 'd'
 0x5F6623: mov     [esp+114h+var_F0], eax
 0x5F6627: jle     short loc_5F6631
@@ -75,7 +75,7 @@
 0x5F663B: push    1; int
 0x5F663D: mov     ecx, ebx; int
 0x5F663F: mov     [esp+128h+var_F4], 3
-0x5F6647: call    sub_5F2820
+0x5F6647: call    Actor_LineOfSight; Oblivion actor line-of-sight query used by detection, combat reach, tactical refresh, and ray-cast script paths. Performs cell/world-space and Havok visibility tests and can report the viewed actor segment through the output parameter. Fallout corroborates the Actor::LineOfSight family name only.
 0x5F664C: mov     edx, [ebx]
 0x5F664E: mov     byte ptr [esp+114h+var_E8], al
 0x5F6652: mov     eax, [edx+330h]
@@ -88,7 +88,7 @@
 0x5F6668: mov     ecx, ebx
 0x5F666A: call    eax
 0x5F666C: mov     ecx, eax
-0x5F666E: call    sub_6135F0
+0x5F666E: call    CombatController_GetCurrentTarget
 0x5F6673: cmp     eax, ebp
 0x5F6675: jnz     short loc_5F668F
 0x5F6677: mov     ecx, [esp+114h+var_F4]
@@ -102,17 +102,17 @@
 0x5F668F: mov     cl, byte ptr [esp+114h+var_E8]
 0x5F6693: mov     [esi], cl
 0x5F6695: mov     ecx, ebp
-0x5F6697: call    sub_5F3B50
+0x5F6697: call    Actor_GetBootWeight; Oblivion boot-noise input. Returns a default of 5 in complex-scene mode; suppresses boot weight for qualifying sneaking mastery/process state; otherwise reads weight from the relevant base form or the equipped footwear instance. Fallout corroborates the GetBootWeight label only.
 0x5F669C: mov     ecx, ebp
 0x5F669E: mov     [esp+114h+var_DC], eax
-0x5F66A2: call    Actor_IsSneaking
+0x5F66A2: call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.
 0x5F66A7: test    al, al
 0x5F66A9: jz      short loc_5F66CA
 0x5F66AB: push    1Fh
 0x5F66AD: mov     ecx, ebp
 0x5F66AF: call    Actor_GetBaseCalcAVi
-0x5F66B4: push    eax
-0x5F66B5: call    Calc_MasteryFromSkill
+0x5F66B4: push    eax; skillValue
+0x5F66B5: call    Calc_MasteryFromSkill; Map a base skill value to Oblivion's five mastery tiers using iSkillApprenticeMin=25, iSkillJourneymanMin=50, iSkillExpertMin=75, and iSkillMasterMin=100.
 0x5F66BA: add     esp, 4
 0x5F66BD: cmp     eax, 2
 0x5F66C0: jl      short loc_5F66CA
@@ -124,39 +124,39 @@
 0x5F66D5: mov     eax, [edx+2C0h]
 0x5F66DB: call    eax
 0x5F66DD: test    al, 0Fh
-0x5F66DF: mov     [esp+114h+var_E4], 1
+0x5F66DF: mov     byte ptr [esp+114h+var_E4], 1
 0x5F66E4: jnz     short loc_5F66EB
-0x5F66E6: mov     [esp+114h+var_E4], 0
+0x5F66E6: mov     byte ptr [esp+114h+var_E4], 0
 0x5F66EB: mov     ecx, [ebp+58h]
 0x5F66EE: mov     edx, [ecx]
 0x5F66F0: mov     eax, [edx+2C0h]
-0x5F66F6: mov     [esp+114h+var_EC], 0
+0x5F66F6: mov     byte ptr [esp+114h+var_EC], 0
 0x5F66FB: call    eax
 0x5F66FD: test    ax, 200h
 0x5F6701: jz      short loc_5F6708
-0x5F6703: mov     [esp+114h+var_EC], 1
+0x5F6703: mov     byte ptr [esp+114h+var_EC], 1
 0x5F6708: mov     ecx, ebp
-0x5F670A: call    Actor_IsSneaking
+0x5F670A: call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.
 0x5F670F: test    al, al
 0x5F6711: jz      short loc_5F6734
 0x5F6713: push    1Fh
 0x5F6715: mov     ecx, ebp
 0x5F6717: call    Actor_GetBaseCalcAVi
-0x5F671C: push    eax
-0x5F671D: call    Calc_MasteryFromSkill
+0x5F671C: push    eax; skillValue
+0x5F671D: call    Calc_MasteryFromSkill; Map a base skill value to Oblivion's five mastery tiers using iSkillApprenticeMin=25, iSkillJourneymanMin=50, iSkillExpertMin=75, and iSkillMasterMin=100.
 0x5F6722: add     esp, 4
 0x5F6725: cmp     eax, 3
 0x5F6728: jl      short loc_5F6734
-0x5F672A: mov     [esp+114h+var_E4], 0
-0x5F672F: mov     [esp+114h+var_EC], 0
+0x5F672A: mov     byte ptr [esp+114h+var_E4], 0
+0x5F672F: mov     byte ptr [esp+114h+var_EC], 0
 0x5F6734: mov     ecx, ebp
-0x5F6736: call    Actor_IsSneaking
+0x5F6736: call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.
 0x5F673B: fld     dword ptr ds:0A6E688h
 0x5F6741: push    ecx
 0x5F6742: mov     ecx, ebx; this
 0x5F6744: fstp    [esp+118h+var_118]; float
 0x5F6747: mov     byte ptr [esp+118h+var_D8], al
-0x5F674B: call    TESObjectREFR_GetParentCell
+0x5F674B: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5F6750: mov     edx, [ebx]
 0x5F6752: push    eax; int
 0x5F6753: mov     eax, [edx+174h]
@@ -181,13 +181,13 @@
 0x5F6798: jz      short loc_5F679F
 0x5F679A: mov     byte ptr [esp+114h+var_D8], 0
 0x5F679F: mov     ecx, ebp; this
-0x5F67A1: call    TESObjectREFR_GetParentCell
+0x5F67A1: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5F67A6: test    eax, eax
 0x5F67A8: jz      short loc_5F67C1
 0x5F67AA: mov     ecx, ebp; this
-0x5F67AC: call    TESObjectREFR_GetParentCell
+0x5F67AC: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5F67B1: mov     ecx, eax; this
-0x5F67B3: call    TESObjectCELL_IsInterior
+0x5F67B3: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x5F67B8: test    al, al
 0x5F67BA: setz    cl
 0x5F67BD: mov     byte ptr [esp+114h+var_F8], cl
@@ -196,41 +196,41 @@
 0x5F67C9: push    7
 0x5F67CB: mov     ecx, ebx
 0x5F67CD: call    eax
-0x5F67CF: call    Double_To_SInt32
+0x5F67CF: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5F67D4: mov     edx, [ebx]
 0x5F67D6: push    eax
 0x5F67D7: mov     eax, [edx+288h]
 0x5F67DD: push    1Fh
 0x5F67DF: mov     ecx, ebx
 0x5F67E1: call    eax
-0x5F67E3: call    Double_To_SInt32
-0x5F67E8: push    eax
-0x5F67E9: call    Calc_LuckModifiedSkill
+0x5F67E3: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
+0x5F67E8: push    eax; skillValue
+0x5F67E9: call    Calc_LuckModifiedSkill; AVU hook site: detector Sneak. Oblivion has just rounded detector Luck and Sneak via Double_To_SInt32 and calls Calc_LuckModifiedSkill(skill, luck); the original post-call Double_To_SInt32 remains.
 0x5F67EE: add     esp, 8
-0x5F67F1: call    Double_To_SInt32
+0x5F67F1: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5F67F6: mov     edx, [ebp+0]
 0x5F67F9: mov     esi, eax
 0x5F67FB: mov     eax, [edx+288h]
-0x5F6801: push    7
+0x5F6801: push    7; luckValue
 0x5F6803: mov     ecx, ebp
 0x5F6805: mov     [esp+114h+var_D0], esi
 0x5F6809: call    eax
-0x5F680B: call    Double_To_SInt32
+0x5F680B: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5F6810: mov     edx, [ebp+0]
 0x5F6813: push    eax
 0x5F6814: mov     eax, [edx+288h]
 0x5F681A: push    1Fh
 0x5F681C: mov     ecx, ebp
 0x5F681E: call    eax
-0x5F6820: call    Double_To_SInt32
-0x5F6825: push    eax
-0x5F6826: call    Calc_LuckModifiedSkill
+0x5F6820: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
+0x5F6825: push    eax; skillValue
+0x5F6826: call    Calc_LuckModifiedSkill; AVU hook site: target Sneak. Oblivion has just rounded target Luck and Sneak via Double_To_SInt32 and calls Calc_LuckModifiedSkill(skill, luck); the original post-call Double_To_SInt32 remains.
 0x5F682B: add     esp, 8
-0x5F682E: call    Double_To_SInt32
+0x5F682E: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5F6833: mov     edx, [ebp+0]
 0x5F6836: mov     edi, eax
 0x5F6838: mov     eax, [edx+284h]
-0x5F683E: push    2Fh ; '/'
+0x5F683E: push    2Fh ; '/'; Target Invisibility AV 0x2F check. If current integer invisibility is positive, Oblivion skips normal detection, stores chameleon/invis marker 100, and forces detection result -100.
 0x5F6840: mov     ecx, ebp
 0x5F6842: mov     [esp+114h+var_FC], edi
 0x5F6846: call    eax
@@ -239,7 +239,7 @@
 0x5F684C: mov     [esp+114h+var_CC], 64h ; 'd'
 0x5F6854: mov     [esp+114h+var_FC], 0FFFFFF9Ch
 0x5F685C: jmp     loc_5F68E7
-0x5F6861: mov     edx, [ebp+0]
+0x5F6861: mov     edx, [ebp+0]; AVU hook site: target Chameleon. Vanilla reads current integer AV 0x2E, stores it as the detection invisibility/chameleon parameter, and forces result -100 when value >= 100.
 0x5F6864: mov     eax, [edx+284h]
 0x5F686A: push    2Eh ; '.'
 0x5F686C: mov     ecx, ebp
@@ -254,7 +254,7 @@
 0x5F688B: push    ecx
 0x5F688C: mov     ecx, [esp+118h+var_D0]
 0x5F6890: push    edx
-0x5F6891: mov     edx, dword ptr [esp+11Ch+var_EC]
+0x5F6891: mov     edx, [esp+11Ch+var_EC]
 0x5F6895: push    ecx
 0x5F6896: mov     ecx, [esp+120h+arg_10]
 0x5F689D: push    edx
@@ -262,7 +262,7 @@
 0x5F68A5: push    ecx
 0x5F68A6: mov     ecx, [esp+128h+var_D8]
 0x5F68AA: push    edx
-0x5F68AB: mov     edx, dword ptr [esp+12Ch+var_E4]
+0x5F68AB: mov     edx, [esp+12Ch+var_E4]
 0x5F68AF: push    ecx
 0x5F68B0: mov     ecx, [esp+130h+var_DC]
 0x5F68B4: push    edx
@@ -271,7 +271,7 @@
 0x5F68BA: push    eax
 0x5F68BB: mov     eax, [ebx]
 0x5F68BD: push    edx
-0x5F68BE: mov     edx, [eax+284h]
+0x5F68BE: mov     edx, [eax+284h]; AVU hook site: detector Blindness. Vanilla reads current integer AV 0x2D and passes it into Calc_DetectionLevel.
 0x5F68C4: push    2Dh ; '-'
 0x5F68C6: mov     ecx, ebx
 0x5F68C8: call    edx
@@ -283,7 +283,7 @@
 0x5F68D8: push    eax
 0x5F68D9: push    edi
 0x5F68DA: push    esi
-0x5F68DB: call    Calc_DetectionLevel
+0x5F68DB: call    Calc_DetectionLevel; Entry to Oblivion's staged detection formula. Inputs include detector/target Sneak, LOS, distance, Blindness, target light, Chameleon/Invisibility, boot weight, movement, combat/attack, running, underwater/sleep, and exterior state.
 0x5F68E0: add     esp, 40h
 0x5F68E3: mov     [esp+114h+var_FC], eax
 0x5F68E7: fld     [esp+114h+var_E0]
@@ -296,7 +296,7 @@
 0x5F68FD: mov     eax, [edx+35Ch]
 0x5F6903: call    eax
 0x5F6905: fiadd   [esp+114h+var_FC]
-0x5F6909: call    Double_To_SInt32
+0x5F6909: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5F690E: mov     [esp+114h+var_FC], eax
 0x5F6912: cmp     byte ptr [esp+114h+arg_4], 0
 0x5F691A: jz      short loc_5F6926
@@ -319,14 +319,14 @@
 0x5F694F: push    ebp
 0x5F6950: call    eax
 0x5F6952: cmp     byte ptr ds:0B3BD9Ah, 0
-0x5F6959: jz      Actor_GetDetectionLevel___ReturnDetectionLevel
+0x5F6959: jz      Actor_GetDetectionLevelAgainstActor_ReturnResult; Shared tail that forwards the computed Oblivion detection level to the common epilogue.
 0x5F695F: mov     eax, ds:0B3BD9Ch
 0x5F6964: test    eax, eax
 0x5F6966: jnz     short loc_5F6970
 0x5F6968: cmp     ebp, ds:0B333C4h
 0x5F696E: jz      short loc_5F6978
 0x5F6970: cmp     eax, ebp
-0x5F6972: jnz     Actor_GetDetectionLevel___ReturnDetectionLevel
+0x5F6972: jnz     Actor_GetDetectionLevelAgainstActor_ReturnResult; Shared tail that forwards the computed Oblivion detection level to the common epilogue.
 0x5F6978: mov     ecx, ds:0B333B4h
 0x5F697E: test    ecx, ecx
 0x5F6980: mov     [esp+114h+var_F8], 0
@@ -344,13 +344,13 @@
 0x5F69B0: mov     ecx, [eax+esi*4]
 0x5F69B3: call    sub_404FB0
 0x5F69B8: fadd    qword ptr ds:0A30E48h
-0x5F69BE: call    Double_To_SInt32
+0x5F69BE: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5F69C3: mov     ecx, [esp+114h+var_F8]; this
 0x5F69C7: cmp     ecx, ebx
 0x5F69C9: mov     esi, eax
 0x5F69CB: lea     edi, [esi+0Ah]
 0x5F69CE: mov     [esp+114h+var_104], edi
-0x5F69D2: jnz     Actor_GetDetectionLevel___ReturnDetectionLevel
+0x5F69D2: jnz     Actor_GetDetectionLevelAgainstActor_ReturnResult; Shared tail that forwards the computed Oblivion detection level to the common epilogue.
 0x5F69D8: fild    [esp+114h+var_104]
 0x5F69DC: push    0FFFFFFFFh; int
 0x5F69DE: mov     edx, 500h
@@ -494,7 +494,7 @@
 0x5F6BC3: mov     edx, [eax+284h]
 0x5F6BC9: add     esp, 14h
 0x5F6BCC: add     edi, esi
-0x5F6BCE: push    2Dh ; '-'
+0x5F6BCE: push    2Dh ; '-'; AVU hook site: detection debug text only. Vanilla rereads detector Blindness AV 0x2D for the debug line; AVU keeps this display consistent with its optional Blindness DR.
 0x5F6BD0: mov     ecx, ebx
 0x5F6BD2: mov     [esp+118h+var_104], edi
 0x5F6BD6: call    edx
@@ -522,7 +522,7 @@
 0x5F6C22: fstp    [esp+120h+var_120]; float
 0x5F6C25: push    edx; int
 0x5F6C26: call    InterfaceMgr_DebugTextLine
-0x5F6C2B: mov     eax, dword ptr [esp+124h+var_EC]
+0x5F6C2B: mov     eax, [esp+124h+var_EC]
 0x5F6C2F: add     esp, 14h
 0x5F6C32: add     edi, esi
 0x5F6C34: push    eax
@@ -861,4 +861,4 @@
 0x5F70B4: push    ecx; int
 0x5F70B5: call    InterfaceMgr_DebugTextLine
 0x5F70BA: add     esp, 14h
-0x5F70BD: jmp     short Actor_GetDetectionLevel___ReturnDetectionLevel
+0x5F70BD: jmp     short Actor_GetDetectionLevelAgainstActor_ReturnResult; Shared tail that forwards the computed Oblivion detection level to the common epilogue.

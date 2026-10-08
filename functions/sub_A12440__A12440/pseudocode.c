@@ -1,4 +1,4 @@
-BSStringT *sub_A12440()
+NiRTTI *sub_A12440()
 {
-  return sub_70E220((BSStringT *)dword_BA7F54, "bhkConvexShape", (int)dword_BA7F48);
+  return NiRTTI_Constructor(&stru_BA7F54, "bhkConvexShape", &stru_BA7F48); /*0xa12454*/
 }

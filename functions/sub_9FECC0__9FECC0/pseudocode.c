@@ -1,4 +1,8 @@
-BSStringT *sub_9FECC0()
+// Verified (Oblivion RTTI): initializes NiRTTI_MagicShaderHitEffect with parent NiRTTI_MagicHitEffect.
+NiRTTI *NiRTTI_MagicShaderHitEffect_Initialize()
 {
-  return sub_70E220(&stru_B3C0D4, "MagicShaderHitEffect", (int)&stru_B3C0BC);
+  return NiRTTI_Constructor( /*0x9fecd4*/
+           (NiRTTI *)&NiRTTI_MagicShaderHitEffect,
+           "MagicShaderHitEffect",
+           (NiRTTI *)&NiRTTI_MagicHitEffect);
 }

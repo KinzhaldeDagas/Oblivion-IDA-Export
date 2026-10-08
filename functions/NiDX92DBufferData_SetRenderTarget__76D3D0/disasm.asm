@@ -1,4 +1,4 @@
-0x76D3D0: push    edi
+0x76D3D0: push    edi; D3D9 color-target state cache. Binds Surface only when it differs from the cached surface for this MRT slot; successful SetRenderTarget updates g_D3D9BoundRenderTargetSurfaces[slot].
 0x76D3D1: mov     edi, ecx
 0x76D3D3: mov     eax, [edi+0Ch]
 0x76D3D6: test    eax, eax

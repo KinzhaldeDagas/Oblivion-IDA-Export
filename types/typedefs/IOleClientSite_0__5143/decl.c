@@ -1,1 +1,1 @@
-IOleClientSite_0
+typedef IOleClientSite IOleClientSite_0;

@@ -35,7 +35,6 @@
 0x8B11C5: or      ecx, [edi+eax*8+4]
 0x8B11C9: jz      short loc_8B1202
 0x8B11CB: jmp     short loc_8B11D0
-0x8B11CD: align 10h
 0x8B11D0: mov     ecx, [edi+eax*8]
 0x8B11D3: cmp     ecx, dword ptr [esp+18h+arg_0]
 0x8B11D7: jnz     short loc_8B11E5

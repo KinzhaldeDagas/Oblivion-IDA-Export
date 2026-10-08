@@ -1,4 +1,4 @@
-0x9EAFB0: fld     ds:flt_A57FB8
+0x9EAFB0: fld     ds:flt_A57FB8; Registers fJumpFallVelocityMin default 600.0 at flt_B37470, but no observed xref from 0x890740 fall-timer accumulation. Do not assume this setting drives +0x320 without another observed use.
 0x9EAFB6: push    ecx
 0x9EAFB7: fstp    [esp+4+var_4]; float
 0x9EAFBA: push    offset aFjumpfallveloc; "fJumpFallVelocityMin"

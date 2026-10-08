@@ -1,9 +1,9 @@
 0x6F82F0: sub     esp, 8
-0x6F82F3: mov     eax, [esp+8+arg_C]
+0x6F82F3: mov     eax, dword ptr [esp+8+arg_C]
 0x6F82F7: push    esi
 0x6F82F8: mov     esi, ecx
 0x6F82FA: cmp     dword ptr [esi+4Ch], 0
-0x6F82FE: mov     ecx, [esp+0Ch+arg_10]
+0x6F82FE: mov     ecx, dword ptr [esp+0Ch+arg_C+4]
 0x6F8302: mov     dword ptr [esp+0Ch+Pos], eax
 0x6F8306: mov     dword ptr [esp+0Ch+Pos+4], ecx
 0x6F830A: jz      loc_6F83B3

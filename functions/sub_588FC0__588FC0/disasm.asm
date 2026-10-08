@@ -2,10 +2,10 @@
 0x588FC6: mov     eax, ds:0B30AACh
 0x588FCB: xor     eax, esp
 0x588FCD: mov     [esp+104h+var_4], eax
-0x588FD4: mov     edx, [esp+104h+arg_4]
+0x588FD4: mov     edx, [esp+104h+parameter]
 0x588FDB: push    ebx
 0x588FDC: push    edi
-0x588FDD: mov     edi, [esp+10Ch+arg_0]
+0x588FDD: mov     edi, [esp+10Ch+text]
 0x588FE4: xor     ebx, ebx
 0x588FE6: cmp     edi, ebx
 0x588FE8: jz      short loc_589064

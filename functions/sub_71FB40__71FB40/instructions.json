@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x71FB40",
-    "line": "mov     eax, [esp+arg_1C]",
+    "line": "mov     eax, [esp+arg_1C]; [2026-10-03 constructor ownership audit] Complete construction chain 71FB40->732D70->728670->7005D0 performs no allocation. NiGeometryData adopts caller vertex/normal/color/UV pointers and reads positions for bounds; this routine adopts ushort indices at+48 and writes DWORD 3*triangleCount at+44. No owned input is freed in this constructor chain. 347-check native-byte fixture verified exact x86 call ABI, pointers, optional-null fields and 0x58 write extent for3/32768/65535 vertices and1/65535 triangles. Bounds computation was redirected; no constructor-fault injection or destructor execution claimed.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -151,19 +151,19 @@
   },
   {
     "ea": "0x71FB82",
-    "line": "mov     [esi+4Ch], eax",
+    "line": "mov     [esi+4Ch], eax; Initialize the optional shared-normal entry array pointer to null.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x71FB85",
-    "line": "mov     [esi+50h], ax",
+    "line": "mov     [esi+50h], ax; Initialize the shared-normal entry-array length to zero.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x71FB89",
-    "line": "mov     [esi+54h], eax",
+    "line": "mov     [esi+54h], eax; Initialize the shared-normal index-pool block list to null.",
     "mnemonic": "mov",
     "size": 3
   },

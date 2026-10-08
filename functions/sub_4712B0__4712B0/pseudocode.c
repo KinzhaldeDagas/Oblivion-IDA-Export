@@ -1,14 +1,15 @@
-int __thiscall sub_4712B0(_DWORD *this)
+// Counts pending KFModel installs represented by the ActorAnimData +0xB4 head and +0xB8 linked continuation. The debug animation-state command prints this as Anims Loading.
+unsigned int __thiscall ActorAnimData_GetPendingKFModelCount(ActorAnimData *this)
 {
-  int result; // eax
-  _DWORD *v2; // ecx
+  unsigned int result; // eax
+  void **p_modelB4; // ecx
 
-  result = 0;
-  v2 = this + 0x2D;
-  if ( v2[1] || *v2 )
+  result = 0; /*0x4712b0*/
+  p_modelB4 = &this->modelB4; /*0x4712b2*/
+  if ( p_modelB4[1] || *p_modelB4 ) /*0x4712bd*/
   {
-    for ( ; v2; ++result )
-      v2 = (_DWORD *)v2[1];
+    for ( ; p_modelB4; ++result ) /*0x4712c3*/
+      p_modelB4 = (void **)p_modelB4[1]; /*0x4712c5*/
   }
-  return result;
+  return result; /*0x4712cf*/
 }

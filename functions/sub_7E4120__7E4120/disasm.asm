@@ -1,4 +1,4 @@
-0x7E4120: push    0FFFFFFFFh
+0x7E4120: push    0FFFFFFFFh; Verified (Oblivion): lazily creates and caches a NiTriShape template with particle geometry data; NiNode_CreateAttachedParticleShaderProperty clones this template before asking BSShaderManager_AssignShadersRecursive to assign shader properties.
 0x7E4122: push    offset SEH_7E4120
 0x7E4127: mov     eax, large fs:0
 0x7E412D: push    eax
@@ -185,7 +185,7 @@
 0x7E4379: push    edx
 0x7E437A: push    esi
 0x7E437B: mov     ecx, eax
-0x7E437D: call    sub_71FB40
+0x7E437D: call    NiTriShapeData_ConstructWithData; Construct NiTriShapeData around supplied geometry and triangle data; shared-normal storage starts empty.
 0x7E4382: mov     ebx, eax
 0x7E4384: jmp     short loc_7E4388
 0x7E4386: xor     ebx, ebx
@@ -206,24 +206,24 @@
 0x7E43BB: push    1
 0x7E43BD: mov     ecx, edi
 0x7E43BF: mov     [esp+90h+var_4], ebp
-0x7E43C6: call    sub_7263B0
+0x7E43C6: call    OB_NiAdditionalGeometryData_SetDataBlockCount_010201A0
 0x7E43CB: lea     eax, ds:0[esi*4]
-0x7E43D2: push    1; char
-0x7E43D4: push    eax; Src
+0x7E43D2: push    1; copyData
+0x7E43D4: push    eax; byteCount
 0x7E43D5: call    sub_7E48E0
-0x7E43DA: push    eax; char
-0x7E43DB: push    0; int
-0x7E43DD: mov     ecx, edi
-0x7E43DF: call    sub_7260B0
-0x7E43E4: push    4
-0x7E43E6: push    4
-0x7E43E8: push    esi
-0x7E43E9: push    1
-0x7E43EB: push    0
-0x7E43ED: push    0
-0x7E43EF: push    0
-0x7E43F1: mov     ecx, edi
-0x7E43F3: call    sub_7262A0
+0x7E43DA: push    eax; data
+0x7E43DB: push    0; blockIndex
+0x7E43DD: mov     ecx, edi; this
+0x7E43DF: call    OB_NiAdditionalGeometryData_SetDataBlock_010201A0
+0x7E43E4: push    4; stride
+0x7E43E6: push    4; elementSize
+0x7E43E8: push    esi; vertexCount
+0x7E43E9: push    1; type
+0x7E43EB: push    0; blockOffset
+0x7E43ED: push    0; blockIndex
+0x7E43EF: push    0; streamIndex
+0x7E43F1: mov     ecx, edi; this
+0x7E43F3: call    OB_NiAdditionalGeometryData_SetDataStream_010201A0
 0x7E43F8: push    edi
 0x7E43F9: mov     ecx, ebx
 0x7E43FB: call    sub_6C61E0
@@ -234,9 +234,9 @@
 0x7E4411: test    eax, eax
 0x7E4413: mov     [esp+8Ch+var_4], 2
 0x7E441E: jz      short loc_7E442C
-0x7E4420: push    ebx; a2
+0x7E4420: push    ebx; data
 0x7E4421: mov     ecx, eax; this
-0x7E4423: call    NiTriShape_NiTriShape
+0x7E4423: call    OB_NiTriShape_ctorWithData_010201A0
 0x7E4428: mov     esi, eax
 0x7E442A: jmp     short loc_7E442E
 0x7E442C: xor     esi, esi
@@ -286,3 +286,25 @@
 0x7E44B7: pop     ebx
 0x7E44B8: add     esp, 78h
 0x7E44BB: retn
+0x9CF740: mov     eax, [ebp-68h]
+0x9CF743: push    eax
+0x9CF744: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CF749: pop     ecx
+0x9CF74A: retn
+0x9CF74B: mov     eax, [ebp-64h]
+0x9CF74E: push    eax
+0x9CF74F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CF754: pop     ecx
+0x9CF755: retn
+0x9CF756: mov     eax, [ebp-64h]
+0x9CF759: push    eax
+0x9CF75A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CF75F: pop     ecx
+0x9CF760: retn
+0x9CF761: mov     edx, [esp+arg_4]
+0x9CF765: lea     eax, [edx-7Ch]
+0x9CF768: mov     ecx, [edx-80h]
+0x9CF76B: xor     ecx, eax
+0x9CF76D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CF772: mov     eax, offset stru_AF8370
+0x9CF777: jmp     ___CxxFrameHandler3

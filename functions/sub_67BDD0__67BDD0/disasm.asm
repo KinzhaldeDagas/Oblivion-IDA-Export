@@ -20,7 +20,7 @@
 0x67BE01: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x67BE06: push    0; int
 0x67BE08: push    eax; a1
-0x67BE09: call    TESForm_LookupByFormID
+0x67BE09: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x67BE0E: add     esp, 4
 0x67BE11: push    eax; void *
 0x67BE12: call    OblivionDynamicCast
@@ -38,15 +38,15 @@
 0x67BE32: mov     edx, [eax]
 0x67BE34: push    eax
 0x67BE35: mov     [esi], edx
-0x67BE37: call    FormHeapFree
+0x67BE37: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x67BE3C: add     esp, 4
 0x67BE3F: push    edi
-0x67BE40: call    FormHeapFree
+0x67BE40: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x67BE45: add     esp, 4
 0x67BE48: jmp     short loc_67BE76
 0x67BE4A: push    edi
 0x67BE4B: mov     dword ptr [esi], 0
-0x67BE51: call    FormHeapFree
+0x67BE51: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x67BE56: add     esp, 4
 0x67BE59: jmp     short loc_67BE76
 0x67BE5B: push    edi
@@ -54,7 +54,7 @@
 0x67BE5E: call    BSSimpleList_Remove
 0x67BE63: mov     esi, [ebx+4]
 0x67BE66: push    edi
-0x67BE67: call    FormHeapFree
+0x67BE67: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x67BE6C: add     esp, 4
 0x67BE6F: jmp     short loc_67BE76
 0x67BE71: mov     ebx, esi
@@ -70,7 +70,7 @@
 0x67BE8D: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x67BE92: push    0; int
 0x67BE94: push    eax; a1
-0x67BE95: call    TESForm_LookupByFormID
+0x67BE95: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x67BE9A: add     esp, 4
 0x67BE9D: push    eax; void *
 0x67BE9E: call    OblivionDynamicCast

@@ -39,7 +39,7 @@
 0x88E156: push    0
 0x88E158: push    ebp
 0x88E159: push    edi
-0x88E15A: call    eax ; dword_BA7A08
+0x88E15A: call    eax ; unk_BA7A08
 0x88E15C: add     esp, 0Ch
 0x88E15F: test    al, al
 0x88E161: jz      short loc_88E1BD

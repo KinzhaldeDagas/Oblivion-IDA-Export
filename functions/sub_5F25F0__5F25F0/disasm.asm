@@ -1,4 +1,4 @@
-0x5F25F0: push    ecx
+0x5F25F0: push    ecx; Fast-travel loop player AV update: magicka regeneration/active magic adjustment over travel time.
 0x5F25F1: push    esi
 0x5F25F2: mov     esi, ecx
 0x5F25F4: mov     eax, [esi+5Ch]
@@ -41,7 +41,7 @@
 0x5F2667: fstp    [esp+0Ch+arg_0]
 0x5F266B: fld     [esp+0Ch+arg_0]
 0x5F266F: fld     st
-0x5F2671: call    Double_To_SInt32
+0x5F2671: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5F2676: mov     [esp+0Ch+arg_0], eax
 0x5F267A: fild    [esp+0Ch+arg_0]
 0x5F267E: fstp    [esp+0Ch+arg_0]

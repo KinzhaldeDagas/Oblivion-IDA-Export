@@ -32,7 +32,7 @@
 0x50B11B: push    ecx; a3
 0x50B11C: push    edx; a2
 0x50B11D: push    eax; a1
-0x50B11E: call    Script_ExtractArgs
+0x50B11E: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x50B123: add     esp, 34h
 0x50B126: test    al, al
 0x50B128: jnz     short loc_50B12E
@@ -74,7 +74,7 @@
 0x50B17F: fstp    st
 0x50B181: cmp     byte ptr ds:0B43074h, 0
 0x50B188: fld     [esp+18h+var_8]
-0x50B18C: fstp    dword ptr ds:0B42EA8h
+0x50B18C: fstp    dword ptr ds:0B42EA8h; SetHDRParam command writes fTreeDimmer directly with no clamp. Its local default is 0, so a successful omitted/zero argument can set c10 to zero and remove directional diffuse (ambient remains).
 0x50B192: fld     [esp+18h+var_4]
 0x50B196: fstp    dword ptr ds:0B42F44h
 0x50B19C: jz      short loc_50B1D2

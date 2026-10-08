@@ -1,4 +1,4 @@
-0x7394A0: push    0FFFFFFFFh
+0x7394A0: push    0FFFFFFFFh; Pass227: Constructs NiTArray<NiPointer<NiScreenTexture>> for NiScreenSpaceCamera +0x134.
 0x7394A2: push    offset SEH_8094D0
 0x7394A7: mov     eax, large fs:0
 0x7394AD: push    eax
@@ -42,7 +42,7 @@
 0x73951A: cmp     eax, ebp
 0x73951C: mov     [esp+20h+var_4], ebp
 0x739520: jz      short loc_73953F
-0x739522: push    offset sub_7016A0; a5
+0x739522: push    offset NiPointerSlot_Release; a5
 0x739527: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x73952C: push    esi; size
 0x73952D: lea     ebx, [eax+4]
@@ -66,3 +66,15 @@
 0x73955A: pop     ebx
 0x73955B: add     esp, 0Ch
 0x73955E: retn    8
+0x9C6200: mov     eax, [ebp+4]
+0x9C6203: push    eax
+0x9C6204: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C6209: pop     ecx
+0x9C620A: retn
+0x9C620B: mov     edx, [esp+arg_4]
+0x9C620F: lea     eax, [edx-10h]
+0x9C6212: mov     ecx, [edx-14h]
+0x9C6215: xor     ecx, eax
+0x9C6217: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C621C: mov     eax, offset stru_AEE7E8
+0x9C6221: jmp     ___CxxFrameHandler3

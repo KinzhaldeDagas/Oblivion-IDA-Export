@@ -1,1 +1,1 @@
-PSecBufferDesc
+typedef _SecBufferDesc *PSecBufferDesc;

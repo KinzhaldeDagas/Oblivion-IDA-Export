@@ -33,7 +33,7 @@
 0x46F154: push    eax; Size
 0x46F155: push    ecx; Src
 0x46F156: push    4D414E46h; int
-0x46F15B: call    TESForm_PutFormRecordChunkData
+0x46F15B: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x46F160: add     esp, 0Ch
 0x46F163: pop     esi
 0x46F164: retn

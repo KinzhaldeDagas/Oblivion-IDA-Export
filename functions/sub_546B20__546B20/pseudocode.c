@@ -1,30 +1,31 @@
-double __cdecl sub_546B20(float a1, float a2)
+// Returns a uniformly distributed floating value between the two inputs, accepting either input order.
+float __cdecl RandomFloatBetween(float value1, float value2)
 {
   double v2; // st7
   double v3; // st6
   double v4; // st7
-  double result; // st7
-  float v7; // [esp+Ch] [ebp+8h]
-  float v8; // [esp+Ch] [ebp+8h]
+  double v5; // st7
+  float value2b; // [esp+Ch] [ebp+8h]
+  float value2a; // [esp+Ch] [ebp+8h]
 
-  v2 = a1;
-  if ( a2 <= (double)a1 )
+  v2 = value1; /*0x546b21*/
+  if ( value2 <= (double)value1 ) /*0x546b30*/
   {
-    a1 = a2;
-    v3 = v2;
-    v4 = a2;
+    value1 = value2; /*0x546b3a*/
+    v3 = v2; /*0x546b3e*/
+    v4 = value2; /*0x546b3e*/
   }
   else
   {
-    v3 = a1;
-    v4 = a2;
+    v3 = value1; /*0x546b32*/
+    v4 = value2; /*0x546b32*/
   }
-  if ( v3 > v4 )
-    v4 = v3;
-  v7 = v4;
-  result = a1;
-  v8 = v7 - a1;
-  if ( v8 > 0.0 )
-    return (float)((double)GetRandomLargeInteger_(0) / dbl_A3D5A8 * v8 + a1);
-  return result;
+  if ( v3 > v4 ) /*0x546b47*/
+    v4 = v3; /*0x546b49*/
+  value2b = v4; /*0x546b4f*/
+  v5 = value1; /*0x546b5f*/
+  value2a = value2b - value1; /*0x546b61*/
+  if ( value2a > 0.0 ) /*0x546b70*/
+    return (double)Game_RandomLargeInteger(0) / dbl_A3D5A8 * value2a + value1; /*0x546b98*/
+  return v5; /*0x546b9d*/
 }

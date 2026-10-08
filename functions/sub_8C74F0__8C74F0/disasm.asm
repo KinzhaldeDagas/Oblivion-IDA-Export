@@ -404,9 +404,8 @@
 0x8C7B1E: jle     loc_8C7BEE
 0x8C7B24: lea     edi, [eax+8]
 0x8C7B27: jmp     short loc_8C7B34
-0x8C7B29: align 10h
 0x8C7B30: mov     esi, [esp+324h+a2]
-0x8C7B34: mov     [esp+324h+var_2F8], ebx
+0x8C7B34: mov     [esp+324h+slot], ebx
 0x8C7B38: mov     [esp+324h+var_2F4], ebx
 0x8C7B3C: mov     eax, [esi+21Ch]
 0x8C7B42: push    1
@@ -437,12 +436,12 @@
 0x8C7B93: push    ecx
 0x8C7B94: mov     ecx, edi
 0x8C7B96: call    sub_8C69C0
-0x8C7B9B: lea     edx, [esp+324h+var_2F8]
+0x8C7B9B: lea     edx, [esp+324h+slot]
 0x8C7B9F: push    edx
 0x8C7BA0: push    esi
 0x8C7BA1: mov     ecx, edi
 0x8C7BA3: call    sub_8C68D0
-0x8C7BA8: mov     eax, [esp+324h+var_2F8]
+0x8C7BA8: mov     eax, [esp+324h+slot]
 0x8C7BAC: cmp     eax, ebx
 0x8C7BAE: mov     [esp+324h+var_4], 0FFFFFFFFh
 0x8C7BB9: jz      short loc_8C7BD9
@@ -476,3 +475,20 @@
 0x8C7C0E: mov     esp, ebp
 0x8C7C10: pop     ebp
 0x8C7C11: retn    4
+0x9D7870: lea     ecx, [ebp+var_224]
+0x9D7876: jmp     sub_8BC000
+0x9D787B: lea     ecx, [ebp+var_2F0]
+0x9D7881: jmp     sub_8C6E80
+0x9D7886: lea     ecx, [ebp+slot]; slot
+0x9D788C: jmp     NiPointerSlot_Release
+0x9D7891: mov     edx, [esp-4+arg_4]
+0x9D7895: lea     eax, [edx-314h]
+0x9D789B: mov     ecx, [edx-318h]
+0x9D78A1: xor     ecx, eax
+0x9D78A3: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D78A8: add     eax, 0Ch
+0x9D78AB: mov     ecx, [edx-8]
+0x9D78AE: xor     ecx, eax
+0x9D78B0: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D78B5: mov     eax, offset stru_AFF418
+0x9D78BA: jmp     ___CxxFrameHandler3

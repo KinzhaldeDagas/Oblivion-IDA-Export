@@ -1,1 +1,1 @@
-IObjContext_0
+typedef IObjContext IObjContext_0;

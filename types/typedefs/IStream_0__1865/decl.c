@@ -1,1 +1,1 @@
-IStream_0
+typedef IStream IStream_0;

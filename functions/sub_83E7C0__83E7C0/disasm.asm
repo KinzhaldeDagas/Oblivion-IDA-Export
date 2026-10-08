@@ -12,7 +12,7 @@
 0x83E7DA: lea     eax, [esp+20h+var_C]
 0x83E7DE: mov     large fs:0, eax
 0x83E7E4: mov     esi, ecx
-0x83E7E6: mov     ebx, [esp+20h+arg_8]
+0x83E7E6: mov     ebx, [esp+20h+value]
 0x83E7EA: mov     eax, [ebx+10h]
 0x83E7ED: mov     edi, ds:0B45854h
 0x83E7F3: push    eax
@@ -37,7 +37,7 @@
 0x83E825: mov     eax, [edx+88h]
 0x83E82B: push    0
 0x83E82D: mov     ecx, ebx
-0x83E82F: mov     [esp+24h+arg_8], ebp
+0x83E82F: mov     [esp+24h+value], ebp
 0x83E833: call    eax
 0x83E835: mov     ebp, [ebp+4]
 0x83E838: cmp     ebp, eax
@@ -59,13 +59,13 @@
 0x83E85F: call    eax
 0x83E861: mov     eax, [esp+20h+arg_0]
 0x83E865: test    eax, eax
-0x83E867: mov     ecx, [esp+20h+arg_8]
+0x83E867: mov     ecx, [esp+20h+value]
 0x83E86B: mov     [ecx+4], eax
 0x83E86E: jz      short loc_83E87A
 0x83E870: add     eax, 4
 0x83E873: push    eax; lpAddend
 0x83E874: call    dword ptr ds:0A28078h
-0x83E87A: mov     edx, [esp+20h+arg_8]
+0x83E87A: mov     edx, [esp+20h+value]
 0x83E87E: push    ebx
 0x83E87F: push    edx
 0x83E880: mov     ecx, esi
@@ -75,7 +75,7 @@
 0x83E88D: push    0
 0x83E88F: push    ebx
 0x83E890: mov     ecx, esi
-0x83E892: mov     [esp+28h+arg_8], ebp
+0x83E892: mov     [esp+28h+value], ebp
 0x83E896: call    sub_848FD0
 0x83E89B: mov     ebp, [ebp+4]
 0x83E89E: cmp     ebp, eax
@@ -97,13 +97,13 @@
 0x83E8C5: call    eax
 0x83E8C7: mov     eax, [esp+20h+arg_0]
 0x83E8CB: test    eax, eax
-0x83E8CD: mov     ecx, [esp+20h+arg_8]
+0x83E8CD: mov     ecx, [esp+20h+value]
 0x83E8D1: mov     [ecx+4], eax
 0x83E8D4: jz      short loc_83E8E0
 0x83E8D6: add     eax, 4
 0x83E8D9: push    eax; lpAddend
 0x83E8DA: call    dword ptr ds:0A28078h
-0x83E8E0: mov     edx, [esp+20h+arg_8]
+0x83E8E0: mov     edx, [esp+20h+value]
 0x83E8E4: push    ebx
 0x83E8E5: push    edx
 0x83E8E6: mov     ecx, esi
@@ -114,7 +114,7 @@
 0x83E8F5: mov     eax, [edx+90h]
 0x83E8FB: push    0
 0x83E8FD: mov     ecx, ebx
-0x83E8FF: mov     [esp+24h+arg_8], ebp
+0x83E8FF: mov     [esp+24h+value], ebp
 0x83E903: call    eax
 0x83E905: mov     ebp, [ebp+4]
 0x83E908: cmp     ebp, eax
@@ -136,33 +136,33 @@
 0x83E92F: call    eax
 0x83E931: mov     eax, [esp+20h+arg_0]
 0x83E935: test    eax, eax
-0x83E937: mov     ecx, [esp+20h+arg_8]
+0x83E937: mov     ecx, [esp+20h+value]
 0x83E93B: mov     [ecx+4], eax
 0x83E93E: jz      short loc_83E94A
 0x83E940: add     eax, 4
 0x83E943: push    eax; lpAddend
 0x83E944: call    dword ptr ds:0A28078h
-0x83E94A: mov     edx, [esp+20h+arg_8]
+0x83E94A: mov     edx, [esp+20h+value]
 0x83E94E: push    ebx
 0x83E94F: push    edx
 0x83E950: mov     ecx, esi
 0x83E952: call    sub_848FA0
 0x83E957: mov     ebx, 1
 0x83E95C: add     [edi+60h], ebx
-0x83E95F: mov     [esp+20h+arg_8], edi
+0x83E95F: mov     [esp+20h+value], edi
 0x83E963: mov     ecx, [esi+38h]
-0x83E966: lea     eax, [esp+20h+arg_8]
-0x83E96A: push    eax
-0x83E96B: push    ecx
-0x83E96C: lea     ecx, [esi+40h]
+0x83E966: lea     eax, [esp+20h+value]
+0x83E96A: push    eax; value
+0x83E96B: push    ecx; index
+0x83E96C: lea     ecx, [esi+40h]; this
 0x83E96F: mov     [esp+28h+var_4], 0
-0x83E977: call    sub_76CE40
+0x83E977: call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.
 0x83E97C: or      eax, 0FFFFFFFFh
 0x83E97F: add     [edi+60h], eax
 0x83E982: mov     [esp+20h+var_4], eax
 0x83E986: jnz     short loc_83E98F
 0x83E988: mov     ecx, edi
-0x83E98A: call    sub_7604D0
+0x83E98A: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x83E98F: add     [esi+38h], ebx
 0x83E992: mov     ecx, [esp+20h+var_C]
 0x83E996: mov     large fs:0, ecx
@@ -173,3 +173,12 @@
 0x83E9A1: pop     ebx
 0x83E9A2: add     esp, 0Ch
 0x83E9A5: retn    10h
+0x9D3210: lea     ecx, [ebp+0Ch]; void *
+0x9D3213: jmp     sub_4027D0
+0x9D3218: mov     edx, [esp+arg_4]
+0x9D321C: lea     eax, [edx-10h]
+0x9D321F: mov     ecx, [edx-14h]
+0x9D3222: xor     ecx, eax
+0x9D3224: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D3229: mov     eax, offset stru_AFB660
+0x9D322E: jmp     ___CxxFrameHandler3

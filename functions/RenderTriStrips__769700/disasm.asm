@@ -1,4 +1,4 @@
-0x769700: sub     esp, 24h
+0x769700: sub     esp, 24h; DeferredRendering implementation: TriStrips draw path confirms shader interface setup occurs before final D3D draw. Current deferred resolve stays EndScene-only and opt-in.
 0x769703: push    ebp
 0x769704: mov     ebp, ecx
 0x769706: cmp     byte ptr [ebp+6F0h], 0
@@ -26,12 +26,12 @@
 0x769751: mov     ecx, ebp
 0x769753: mov     [esp+3Ch+var_8], edx
 0x769757: mov     [esp+3Ch+var_4], eax
-0x76975B: call    sub_768890
+0x76975B: call    sub_768890; MoonSugarEffect decode: hardware/software skinning gate. Considers BuffData, skinData, hardware partition data, renderer flags, mixed vertex processing, and shader interface capability before choosing skinned path.
 0x769760: mov     ecx, [esi+0B4h]
 0x769766: mov     esi, [esi+0BCh]
 0x76976C: mov     edi, [ecx+38h]
 0x76976F: push    esi
-0x769770: push    offset NiD3DShaderInterfaceString
+0x769770: push    0B42858h
 0x769775: mov     byte ptr [esp+3Ch+arg_0], al
 0x769779: call    NiRTTI_Cast
 0x76977E: mov     esi, eax
@@ -57,7 +57,7 @@
 0x7697CC: jz      loc_7698B3
 0x7697D2: mov     ecx, [esp+34h+var_20]
 0x7697D6: mov     eax, [ecx+0Ch]
-0x7697D9: mov     ecx, [eax+8]; void *
+0x7697D9: mov     ecx, [eax+8]; this
 0x7697DC: mov     eax, [eax+0Ch]
 0x7697DF: xor     edx, edx
 0x7697E1: cmp     [eax+22h], dx
@@ -76,7 +76,7 @@
 0x769813: jbe     short loc_769825
 0x769815: push    eax
 0x769816: push    offset aDrawskinnedpri; "DrawSkinnedPrimitive> Cannot render par"...
-0x76981B: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x76981B: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x769820: add     esp, 8
 0x769823: jmp     short loc_769889
 0x769825: mov     ebx, [edx+8]

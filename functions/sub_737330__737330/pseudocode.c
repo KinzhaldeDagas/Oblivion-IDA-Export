@@ -1,18 +1,18 @@
 void __thiscall sub_737330(
-        char *this,
+        _RTL_CRITICAL_SECTION_0 *this,
         int a2,
         int a3,
         int a4,
         int a5,
         int a6,
-        char a7,
+        int a7,
         int a8,
         int a9,
         int a10,
         char a11,
         char a12,
         int a13,
-        char a14,
+        int a14,
         int a15,
         int a16,
         int a17,
@@ -38,11 +38,11 @@ void __thiscall sub_737330(
 {
   NiSurfaceData v37; // [esp+34h] [ebp-50h] BYREF
 
-  InitSurfacEData(&v37);
-  ((void (__cdecl *)(char *))EnterCriticalSection)(this + 0x80);
-  sub_737373(
+  InitSurfacEData(&v37); /*0x73735d*/
+  ((void (__cdecl *)(_RTL_CRITICAL_SECTION_0 *))EnterCriticalSection)(this + 4); /*0x73736d*/
+  sub_737373( /*0x73736e*/
     (int)this,
-    (struct _RTL_CRITICAL_SECTION *)(this + 0x80),
+    this + 4,
     a2,
     a3,
     a4,

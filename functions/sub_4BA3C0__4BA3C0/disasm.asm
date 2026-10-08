@@ -1,4 +1,4 @@
-0x4BA3C0: push    0FFFFFFFFh
+0x4BA3C0: push    0FFFFFFFFh; Verified Oblivion geometry use: reads float at TESObjectTREE+0x7C, defaults local height to 1400 when <=0, uses half that value as horizontal half-width, and full value as vertical extent. Fallout's directly named BillboardSize.y uses the same 1400 fallback and square-plane construction. This supports (Probable) +0x7C = BillboardSize.y; +0x78 is paired as BillboardSize.x via identical 200 threshold predicate.
 0x4BA3C2: push    offset SEH_4BA3C0
 0x4BA3C7: mov     eax, large fs:0
 0x4BA3CD: push    eax
@@ -34,7 +34,7 @@
 0x4BA41E: fld     dword ptr ds:0A451D0h
 0x4BA424: fstp    [esp+34h+var_1C]
 0x4BA428: fld     [esp+34h+var_1C]
-0x4BA42C: cmp     byte ptr [esp+34h+arg_4], bl
+0x4BA42C: cmp     [esp+34h+distantPlane], bl
 0x4BA430: fld     qword ptr ds:0A2FAA0h
 0x4BA436: fmul    st, st(1)
 0x4BA438: fstp    [esp+34h+var_20]
@@ -174,7 +174,7 @@
 0x4BA5F6: call    FormHeapAlloc
 0x4BA5FB: mov     esi, eax
 0x4BA5FD: add     esp, 0Ch
-0x4BA600: mov     [esp+34h+arg_4], esi
+0x4BA600: mov     dword ptr [esp+34h+distantPlane], esi
 0x4BA604: cmp     esi, ebx
 0x4BA606: mov     [esp+34h+var_4], ebx
 0x4BA60A: jz      short loc_4BA61D
@@ -254,7 +254,7 @@
 0x4BA70F: mov     [ebx+0Ah], ax
 0x4BA713: call    FormHeapAlloc
 0x4BA718: add     esp, 8
-0x4BA71B: mov     [esp+34h+arg_4], eax
+0x4BA71B: mov     dword ptr [esp+34h+distantPlane], eax
 0x4BA71F: test    eax, eax
 0x4BA721: mov     [esp+34h+var_4], 1
 0x4BA729: jz      short loc_4BA745
@@ -269,11 +269,11 @@
 0x4BA739: push    ecx
 0x4BA73A: push    4
 0x4BA73C: mov     ecx, eax
-0x4BA73E: call    sub_71FB40
+0x4BA73E: call    NiTriShapeData_ConstructWithData; Construct NiTriShapeData around supplied geometry and triangle data; shared-normal storage starts empty.
 0x4BA743: jmp     short loc_4BA747
 0x4BA745: xor     eax, eax
 0x4BA747: test    eax, eax
-0x4BA749: mov     esi, [esp+34h+arg_0]
+0x4BA749: mov     esi, [esp+34h+outData]
 0x4BA74D: mov     [esi], eax
 0x4BA74F: jz      short loc_4BA75B
 0x4BA751: add     eax, 4
@@ -289,3 +289,20 @@
 0x4BA76C: pop     ebx
 0x4BA76D: add     esp, 20h
 0x4BA770: retn    8
+0x9B3E70: mov     eax, [ebp+8]
+0x9B3E73: push    eax
+0x9B3E74: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B3E79: pop     ecx
+0x9B3E7A: retn
+0x9B3E7B: mov     eax, [ebp+8]
+0x9B3E7E: push    eax
+0x9B3E7F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B3E84: pop     ecx
+0x9B3E85: retn
+0x9B3E86: mov     edx, dword ptr [esp+distantPlane]
+0x9B3E8A: lea     eax, [edx-24h]
+0x9B3E8D: mov     ecx, [edx-28h]
+0x9B3E90: xor     ecx, eax
+0x9B3E92: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B3E97: mov     eax, offset stru_ADF708
+0x9B3E9C: jmp     ___CxxFrameHandler3

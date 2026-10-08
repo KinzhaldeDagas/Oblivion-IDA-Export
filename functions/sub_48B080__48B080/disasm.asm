@@ -62,7 +62,7 @@
 0x48B152: test    esi, esi
 0x48B154: lea     eax, [esi+20h]
 0x48B157: jnz     short loc_48B15E
-0x48B159: mov     eax, offset Vector3_InitValue?
+0x48B159: mov     eax, offset g_zeroNiPoint3
 0x48B15E: mov     ecx, [eax]
 0x48B160: mov     edx, [eax+4]
 0x48B163: mov     eax, [eax+8]
@@ -75,7 +75,7 @@
 0x48B179: call    TESObjectREFR_GetWorldSpace
 0x48B17E: push    eax
 0x48B17F: mov     ecx, esi; this
-0x48B181: call    TESObjectREFR_GetParentCell
+0x48B181: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x48B186: mov     ecx, [esp+60h+arg_4]
 0x48B18A: push    eax
 0x48B18B: lea     edx, [esp+64h+var_30]
@@ -84,7 +84,7 @@
 0x48B194: push    eax
 0x48B195: push    ecx
 0x48B196: mov     ecx, ds:0B33A98h
-0x48B19C: call    TESDataHandler_PlaceObjectRef
+0x48B19C: call    TESDataHandler_PlaceObjectRef; Verified object-reference placement helper accepts an interior cell or exterior WorldSpace and sets/reuses a reference base form. New reference attachment proceeds through cell lifecycle methods; this helper itself does not write the WorldSpace SubSpace index.
 0x48B1A1: mov     esi, eax
 0x48B1A3: mov     eax, [esp+58h+arg_8]
 0x48B1A7: cmp     eax, 1

@@ -79,13 +79,13 @@
   },
   {
     "ea": "0x458EEF",
-    "line": "push    0; a2",
+    "line": "push    0; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x458EF1",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -97,13 +97,13 @@
   },
   {
     "ea": "0x458EF8",
-    "line": "push    1; a2",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x458EFA",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x458FA9",
-    "line": "call    sub_475590",
+    "line": "call    ActorAnimData_LoadState; ActorAnimData load-state routine. Active slots restore from encoded key plus one selector byte. Selector 0xFE is intercepted as the null-sequence marker; all other selectors enter the common map-entry selector virtual and then consume or skip the timing block according to restore success.",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x458FDF",
-    "line": "mov     ecx, [esp+1Ch+arg_4]",
+    "line": "mov     ecx, [esp+1Ch+arg_4]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -559,13 +559,13 @@
   },
   {
     "ea": "0x458FE8",
-    "line": "push    edx",
+    "line": "push    edx; slotSelector",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x458FE9",
-    "line": "call    sub_4706E0",
+    "line": "call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].",
     "mnemonic": "call",
     "size": 5
   },

@@ -3,7 +3,7 @@
 0x6D0992: mov     edi, [esp+8+arg_0]
 0x6D0996: push    edi
 0x6D0997: mov     esi, ecx
-0x6D0999: call    sub_6D0540
+0x6D0999: call    NiInterpController_IsEqual; NiInterpController equality thunk delegates to NiTimeController_IsEqual.
 0x6D099E: test    al, al
 0x6D09A0: jnz     short loc_6D09A9
 0x6D09A2: pop     edi
@@ -34,7 +34,6 @@
 0x6D09D2: pop     esi
 0x6D09D3: retn    4
 0x6D09D6: jmp     short loc_6D09E0
-0x6D09D8: align 10h
 0x6D09E0: mov     edi, [esp+10h+arg_0]
 0x6D09E4: mov     edx, [edi]
 0x6D09E6: mov     eax, [edx+80h]

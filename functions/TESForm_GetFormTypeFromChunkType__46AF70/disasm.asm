@@ -10,7 +10,7 @@
 0x46AF92: jz      short loc_46AFA5
 0x46AF94: add     ecx, 0Ch
 0x46AF97: add     eax, 1
-0x46AF9A: cmp     ecx, offset dword_B06144
+0x46AF9A: cmp     ecx, offset TESForm_FormIDMap.buckets
 0x46AFA0: jl      short TESForm_GetFormTypeFromChunkType___LookupChunkType
 0x46AFA2: xor     eax, eax
 0x46AFA4: retn

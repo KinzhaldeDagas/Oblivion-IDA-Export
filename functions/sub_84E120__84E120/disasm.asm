@@ -59,9 +59,9 @@
 0x84E1C2: mov     eax, [edx+78h]
 0x84E1C5: mov     ecx, esi
 0x84E1C7: call    eax
-0x84E1C9: push    eax
-0x84E1CA: mov     ecx, ebp
-0x84E1CC: call    sub_7715E0
+0x84E1C9: push    eax; preset
+0x84E1CA: mov     ecx, ebp; this
+0x84E1CC: call    NiD3DTextureStage_ApplyAddressModePreset; Apply one native address-preset row to a NiD3DTextureStage: D3DSAMP_ADDRESSU (1) and D3DSAMP_ADDRESSV (2). Lighting30 SimpleShadow uses preset 0 = CLAMP/CLAMP.
 0x84E1D1: mov     ecx, [esp+28h+var_14]
 0x84E1D5: mov     edx, [ecx+24h]
 0x84E1D8: mov     eax, [esi]
@@ -114,9 +114,9 @@
 0x84E25B: mov     eax, [edx+78h]
 0x84E25E: mov     ecx, esi
 0x84E260: call    eax
-0x84E262: push    eax
-0x84E263: mov     ecx, ebp
-0x84E265: call    sub_7715E0
+0x84E262: push    eax; preset
+0x84E263: mov     ecx, ebp; this
+0x84E265: call    NiD3DTextureStage_ApplyAddressModePreset; Apply one native address-preset row to a NiD3DTextureStage: D3DSAMP_ADDRESSU (1) and D3DSAMP_ADDRESSV (2). Lighting30 SimpleShadow uses preset 0 = CLAMP/CLAMP.
 0x84E26A: mov     ecx, [esp+28h+var_14]
 0x84E26E: mov     edx, [ecx+24h]
 0x84E271: mov     eax, [esi]
@@ -157,9 +157,9 @@
 0x84E2CB: mov     eax, [edx+78h]
 0x84E2CE: mov     ecx, esi
 0x84E2D0: call    eax
-0x84E2D2: push    eax
-0x84E2D3: mov     ecx, ebx
-0x84E2D5: call    sub_7715E0
+0x84E2D2: push    eax; preset
+0x84E2D3: mov     ecx, ebx; this
+0x84E2D5: call    NiD3DTextureStage_ApplyAddressModePreset; Apply one native address-preset row to a NiD3DTextureStage: D3DSAMP_ADDRESSU (1) and D3DSAMP_ADDRESSV (2). Lighting30 SimpleShadow uses preset 0 = CLAMP/CLAMP.
 0x84E2DA: mov     ebx, [esp+28h+var_14]
 0x84E2DE: mov     ecx, [ebx+24h]
 0x84E2E1: mov     edi, [ecx+0Ch]
@@ -216,26 +216,26 @@
 0x84E372: mov     eax, [edx+78h]
 0x84E375: mov     ecx, esi
 0x84E377: call    eax
-0x84E379: push    eax
-0x84E37A: mov     ecx, edi
-0x84E37C: call    sub_7715E0
+0x84E379: push    eax; preset
+0x84E37A: mov     ecx, edi; this
+0x84E37C: call    NiD3DTextureStage_ApplyAddressModePreset; Apply one native address-preset row to a NiD3DTextureStage: D3DSAMP_ADDRESSU (1) and D3DSAMP_ADDRESSV (2). Lighting30 SimpleShadow uses preset 0 = CLAMP/CLAMP.
 0x84E381: mov     edi, 1
 0x84E386: add     [ebx+60h], edi
 0x84E389: mov     [esp+28h+arg_8], ebx
 0x84E38D: mov     esi, [esp+28h+var_10]
 0x84E391: mov     edx, [esi+38h]
 0x84E394: lea     ecx, [esp+28h+arg_8]
-0x84E398: push    ecx
-0x84E399: push    edx
-0x84E39A: lea     ecx, [esi+40h]
+0x84E398: push    ecx; value
+0x84E399: push    edx; index
+0x84E39A: lea     ecx, [esi+40h]; this
 0x84E39D: mov     [esp+30h+var_4], 0
-0x84E3A5: call    sub_76CE40
+0x84E3A5: call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.
 0x84E3AA: or      eax, 0FFFFFFFFh
 0x84E3AD: add     [ebx+60h], eax
 0x84E3B0: mov     [esp+28h+var_4], eax
 0x84E3B4: jnz     short loc_84E3BD
 0x84E3B6: mov     ecx, ebx
-0x84E3B8: call    sub_7604D0
+0x84E3B8: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x84E3BD: add     [esi+38h], edi
 0x84E3C0: mov     ecx, [esp+28h+var_C]
 0x84E3C4: mov     large fs:0, ecx
@@ -246,3 +246,12 @@
 0x84E3CF: pop     ebx
 0x84E3D0: add     esp, 14h
 0x84E3D3: retn    10h
+0x9D33C0: lea     ecx, [ebp+0Ch]; void *
+0x9D33C3: jmp     sub_4027D0
+0x9D33C8: mov     edx, [esp+arg_4]
+0x9D33CC: lea     eax, [edx-18h]
+0x9D33CF: mov     ecx, [edx-1Ch]
+0x9D33D2: xor     ecx, eax
+0x9D33D4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D33D9: mov     eax, offset stru_AFB7EC
+0x9D33DE: jmp     ___CxxFrameHandler3

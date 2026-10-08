@@ -4,7 +4,7 @@
 0x6C7AD5: mov     esi, [esp+10h+arg_0]
 0x6C7AD9: push    esi
 0x6C7ADA: mov     ebp, ecx
-0x6C7ADC: call    nullsub_returnvVoid_1arg
+0x6C7ADC: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x6C7AE1: cmp     dword ptr [esi+0D8h], 0A010068h
 0x6C7AEB: mov     ecx, esi
 0x6C7AED: jnb     loc_6C7B8F
@@ -21,7 +21,6 @@
 0x6C7B12: mov     [esp+18h+var_8], eax
 0x6C7B16: jmp     short loc_6C7B24
 0x6C7B18: jmp     short loc_6C7B20
-0x6C7B1A: align 10h
 0x6C7B20: mov     esi, [esp+18h+arg_0]
 0x6C7B24: mov     ecx, esi
 0x6C7B26: call    sub_7124A0

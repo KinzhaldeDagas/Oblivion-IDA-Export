@@ -1,4 +1,4 @@
-0x43F350: push    ecx
+0x43F350: push    ecx; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x43F351: push    esi
 0x43F352: mov     esi, ecx
 0x43F354: fld     dword ptr [esi+4]
@@ -12,7 +12,7 @@
 0x43F366: faddp   st(2), st
 0x43F368: fmul    st, st
 0x43F36A: faddp   st(1), st
-0x43F36C: fstp    [esp+8+var_4]
+0x43F36C: fstp    [esp+8+var_4]; Native normalization stores squared length, sqrt length and reciprocal as float. Squared sum order is y*y + x*x + z*z; epsilon A372CC has bits358637BD (1e-6f). At/below epsilon the output vector is zero.
 0x43F370: fld     [esp+8+var_4]
 0x43F374: call    __CIsqrt
 0x43F379: fstp    [esp+8+var_4]

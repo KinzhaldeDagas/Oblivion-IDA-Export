@@ -1,4 +1,4 @@
-0x502350: fldz
+0x502350: fldz; ScriptEffectElapsedSeconds command execute callback: returns eventList->m_scriptEffectInfo +4 as a float when present, otherwise 0.0.
 0x502352: mov     eax, [esp+arg_14]
 0x502356: test    eax, eax
 0x502358: mov     ecx, [esp+arg_18]

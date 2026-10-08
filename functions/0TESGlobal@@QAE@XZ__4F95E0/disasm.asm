@@ -3,7 +3,7 @@
 0x4F95E3: call    TESForm_constr
 0x4F95E8: fldz
 0x4F95EA: xor     eax, eax
-0x4F95EC: mov     dword ptr [esi], offset ??_7TESGlobal@@6B@; const TESGlobal::`vftable'
+0x4F95EC: mov     dword ptr [esi], offset ??_7TESGlobal@@6B@; Verified 78-slot TESGlobal vtable (312 bytes); key form-record slots are LoadFormRecord at +0x1C and SaveFormRecord at +0x24.
 0x4F95F2: mov     [esi+18h], eax
 0x4F95F5: mov     [esi+1Ch], ax
 0x4F95F9: mov     [esi+1Eh], ax

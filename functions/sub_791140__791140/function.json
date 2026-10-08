@@ -1,19 +1,36 @@
 {
-  "callees_count": 36,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 16,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_791140",
+  "chunks": [
+    [
+      "0x791140",
+      "0x791409"
+    ],
+    [
+      "0x9CBC30",
+      "0x9CBC4B"
+    ]
+  ],
+  "chunks_sha256": "ad348f56a3d403d3166ef8be7468880028a8973875904a95d81e2bad093c00d0",
+  "comment_regular": "Fixed-stride 0x18 vector insert/fill machinery for OB_CBranchFlareEntry records. Handles overlap, capacity growth, reallocation, and count copies; the observed wrapper at 0x791510 always requests count=1.",
+  "comment_repeatable": "Fixed-stride 0x18 vector insert/fill machinery for OB_CBranchFlareEntry records. Handles overlap, capacity growth, reallocation, and count copies; the observed wrapper at 0x791510 always requests count=1.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_stVectorBranchFlareEntry_InsertFill_010201A0",
   "end_ea": "0x791409",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_791140",
+  "name": "OB_stVectorBranchFlareEntry_InsertFill_010201A0",
   "segment": ".text",
   "sha256": "d53585d6773ef071be8bb1c4cdde8b02dc3ffe7656c3cbd7a318742d8907560a",
   "size": 713,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x791140",
-  "type": "unsigned int __thiscall(unsigned int *this, int, char *, unsigned int, int *)",
-  "xrefs_from_count": 306,
+  "total_chunk_size": 740,
+  "type": "unsigned int __thiscall(OB_stVector16_010201A0 *this, int iteratorOwner, OB_CBranchFlareEntry_010201A0 *position, unsigned int count, const OB_CBranchFlareEntry_010201A0 *value)",
+  "xrefs_from_count": 315,
   "xrefs_to_count": 1
 }

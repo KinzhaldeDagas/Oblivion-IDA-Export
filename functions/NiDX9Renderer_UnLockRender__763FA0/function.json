@@ -1,18 +1,31 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x763FA0",
+      "0x763FD5"
+    ]
+  ],
+  "chunks_sha256": "0aa0ea1b389c136871940db9e6c844cfcabce46962b211e23de257d7b45f86e6",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "\nDX11 retirement audit 2026-10-01: restricted bucket pass references can retire before the bucket callback returns, while its actual renderer owner remains live. At Present, independently verify/borrow the OS critical section; callback location alone does not prove this lock. Last-reference pass cleanup is a distinct7604D0 native pool operation, not a generic +4 NiRef decrement.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "NiDX9Renderer::UnLockRender",
   "end_ea": "0x763FD5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "NiDX9Renderer::UnLockRender",
   "segment": ".text",
   "sha256": "0aa0ea1b389c136871940db9e6c844cfcabce46962b211e23de257d7b45f86e6",
   "size": 53,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x763FA0",
+  "total_chunk_size": 53,
   "type": "void __thiscall(NiDX9Renderer *this)",
   "xrefs_from_count": 16,
   "xrefs_to_count": 1

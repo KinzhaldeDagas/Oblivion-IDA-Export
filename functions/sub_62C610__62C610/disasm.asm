@@ -105,7 +105,7 @@
 0x62C74A: mov     ebx, eax
 0x62C74C: mov     ecx, [esp+50h+var_38]
 0x62C750: mov     ecx, [ecx+28h]
-0x62C753: call    sub_452A60
+0x62C753: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x62C758: mov     [esp+50h+arg_0], eax
 0x62C75C: fild    [esp+50h+arg_0]
 0x62C760: fstp    [esp+50h+arg_0]
@@ -178,14 +178,14 @@
 0x62C82B: test    cl, 1
 0x62C82E: jnz     loc_62CA4A
 0x62C834: mov     ecx, edi
-0x62C836: call    sub_5E05B0
+0x62C836: call    sub_5E05B0; Checks process movement flags low nibble via vfunc +0x2C0. Player input uses this alongside swimming/sneaking skill progression; useful as a broad movement-mode guard.
 0x62C83B: test    al, al
 0x62C83D: jz      short loc_62C8A6
 0x62C83F: lea     ecx, [esp+50h+var_18]
-0x62C843: call    sub_404C90
+0x62C843: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x62C848: fstp    [esp+50h+var_38]
 0x62C84C: lea     ecx, [esp+50h+var_30]
-0x62C850: call    sub_404C90
+0x62C850: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x62C855: fld     [esp+50h+var_38]
 0x62C859: fcom    st(1)
 0x62C85B: fnstsw  ax
@@ -312,7 +312,7 @@
 0x62C99E: call    sub_4121A0
 0x62C9A3: lea     ecx, [esp+50h+var_18]
 0x62C9A7: push    ecx
-0x62C9A8: call    sub_683CB0
+0x62C9A8: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x62C9AD: fstp    [esp+54h+var_3C]
 0x62C9B1: fldz
 0x62C9B3: add     esp, 4
@@ -360,7 +360,7 @@
 0x62CA34: retn    4
 0x62CA37: push    30h ; '0'
 0x62CA39: mov     ecx, ebp
-0x62CA3B: call    sub_5E05F0
+0x62CA3B: call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.
 0x62CA40: pop     edi
 0x62CA41: pop     esi
 0x62CA42: pop     ebp

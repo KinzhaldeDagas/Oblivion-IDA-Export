@@ -45,10 +45,10 @@
 0x5853A0: mov     ebp, [edi]
 0x5853A2: cmp     ebp, ebx
 0x5853A4: jz      short loc_5853B6
-0x5853A6: mov     ecx, ebp
-0x5853A8: call    sub_5852C0
+0x5853A6: mov     ecx, ebp; this
+0x5853A8: call    Tile__TileTemplate__Destroy; Verified: invokes TileTemplate::Clear, list destructor, then releases template name buffer. Caller frees template object separately.
 0x5853AD: push    ebp
-0x5853AE: call    FormHeapFree
+0x5853AE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5853B3: add     esp, 4
 0x5853B6: mov     edi, [edi+4]
 0x5853B9: cmp     edi, ebx
@@ -59,7 +59,7 @@
 0x5853C3: mov     eax, [esi+0Ch]
 0x5853C6: mov     edi, [eax+4]
 0x5853C9: push    eax
-0x5853CA: call    FormHeapFree
+0x5853CA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5853CF: add     esp, 4
 0x5853D2: cmp     edi, ebx
 0x5853D4: mov     [esi+0Ch], edi

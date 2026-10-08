@@ -1,4 +1,4 @@
-0x669690: push    0FFFFFFFFh
+0x669690: push    0FFFFFFFFh; Adds one topic to PlayerCharacter.knownTopics. Duplicate suppression is by exact TESTopic pointer; successful new entries are pushed to the head, optional notification is suppressed when DialogMenu is active, and optional immediate sorting is case-insensitive by display name.
 0x669692: push    offset SEH_596FE0
 0x669697: mov     eax, large fs:0
 0x66969D: push    eax
@@ -32,19 +32,19 @@
 0x6696E5: cmp     ecx, ebx
 0x6696E7: jz      short loc_6696F4
 0x6696E9: cmp     ecx, esi
-0x6696EB: jz      short loc_6696C0
+0x6696EB: jz      short loc_6696C0; Known-topic duplicate test compares TESTopic pointer identity only. Same display text/editor ID in another TESTopic object is not treated as the same known topic.
 0x6696ED: mov     eax, [eax+4]
 0x6696F0: cmp     eax, ebx
 0x6696F2: jnz     short loc_6696E3
 0x6696F4: push    esi
 0x6696F5: mov     ecx, edi
-0x6696F7: call    BSSimpleList_PushFront
+0x6696F7: call    BSSimpleList_PushFront; A new known topic is pushed to the list head before any sorting. Batch AddKnownTopics defers sorting until its loop completes.
 0x6696FC: cmp     [esp+24h+a7], bl
 0x669700: jz      short loc_66976D
-0x669702: call    sub_578FE0
+0x669702: call    sub_578FE0; When notifyPlayer is requested, suppress the 'New topic: <name>' message while DialogMenu (menu ID 0x3F1) is topmost; the topic is still learned.
 0x669707: cmp     eax, 3F1h
 0x66970C: jz      short loc_66976D
-0x66970E: mov     [esp+24h+string], ebx
+0x66970E: mov     [esp+24h+string], ebx; The 'New topic' notification is skipped while menu ID 0x3F1 (DialogMenu) is topmost, but AddKnownTopic still inserts the topic.
 0x669712: mov     [esp+24h+var_10], bx
 0x669717: mov     [esp+24h+var_E], bx
 0x66971C: mov     eax, [esi+1Ch]
@@ -69,12 +69,12 @@
 0x669757: call    GameUI_QueueMessage
 0x66975C: push    esi
 0x66975D: mov     [esp+38h+var_4], 0FFFFFFFFh
-0x669765: call    FormHeapFree
+0x669765: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x66976A: add     esp, 14h
 0x66976D: cmp     [esp+24h+a6], bl
-0x669771: jz      short loc_66977C
-0x669773: push    edi
-0x669774: call    sub_52F6D0
+0x669771: jz      short loc_66977C; When requested, sort the player's known-topic list case-insensitively by topic display name after insertion.
+0x669773: push    edi; topics
+0x669774: call    SortTopicListByDisplayName; Case-insensitive bubble sort of a TESTopic list by TESFullName display text. A null argument sorts DataHandler's master topic list; player additions pass the known-topic list explicitly.
 0x669779: add     esp, 4
 0x66977C: mov     al, 1
 0x66977E: mov     ecx, [esp+24h+var_C]
@@ -85,3 +85,12 @@
 0x66978C: pop     ebx
 0x66978D: add     esp, 14h
 0x669790: retn    0Ch
+0x9B7140: lea     ecx, [ebp-14h]; void *
+0x9B7143: jmp     BSStringT_Clear
+0x9B7148: mov     edx, [esp+arg_4]
+0x9B714C: lea     eax, [edx-14h]
+0x9B714F: mov     ecx, [edx-18h]
+0x9B7152: xor     ecx, eax
+0x9B7154: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B7159: mov     eax, offset stru_AE1DB4
+0x9B715E: jmp     ___CxxFrameHandler3

@@ -1,6 +1,6 @@
-0x498FE0: mov     edx, [esp+arg_4]
+0x498FE0: mov     edx, [esp+other]
 0x498FE4: fld     dword ptr [edx+8]
-0x498FE7: mov     eax, [esp+arg_0]
+0x498FE7: mov     eax, [esp+out]
 0x498FEB: fmul    dword ptr [ecx+4]
 0x498FEE: fld     dword ptr [edx+4]
 0x498FF1: fmul    dword ptr [ecx+8]

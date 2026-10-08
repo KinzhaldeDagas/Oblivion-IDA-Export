@@ -31,9 +31,9 @@
 0x5303A7: cmp     dword ptr [edi+0Ch], 7
 0x5303AB: jnz     short loc_5303C4
 0x5303AD: mov     eax, [edi+8]
-0x5303B0: push    eax
-0x5303B1: mov     ecx, esi
-0x5303B3: call    sub_46AF50
+0x5303B0: push    eax; candidate_form_id
+0x5303B1: mov     ecx, esi; this
+0x5303B3: call    TESForm_FormIDMatchesObjectID24; Compares only the low 24-bit object-ID portions of this form's FormID and a serialized group label; load-order/master byte is intentionally ignored.
 0x5303B8: test    al, al
 0x5303BA: jz      short loc_5303C4
 0x5303BC: pop     esi

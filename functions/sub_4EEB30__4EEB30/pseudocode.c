@@ -1,43 +1,44 @@
-void __userpurge sub_4EEB30(signed int a1@<ecx>, int a2@<esi>, int a3)
+// Verified: serializes each Oblivion weather entry as TESWeather FormID plus uint32 selectionWeight at +4; shared by climate WLS(T) and region RDWT.
+void __userpurge OblivionTESWeatherList_SaveChunk(signed int a1@<ecx>, int a2@<esi>, int a3)
 {
-  signed int v4; // edi
-  unsigned int v5; // eax
-  __int64 v6; // rax
-  _DWORD *v7; // esi
-  int v8; // ecx
-  _DWORD *v9; // eax
-  size_t v10; // [esp-8h] [ebp-Ch]
+  signed int v3; // edi
+  unsigned int v4; // eax
+  __int64 v5; // rax
+  _DWORD *v6; // esi
+  int v7; // ecx
+  _DWORD *v8; // eax
+  size_t v9; // [esp-8h] [ebp-Ch]
 
-  v4 = a1;
-  v5 = 0;
-  if ( a1 )
+  v3 = a1; /*0x4eeb31*/
+  v4 = 0; /*0x4eeb33*/
+  if ( a1 ) /*0x4eeb37*/
   {
-    do
+    do /*0x4eeb4d*/
     {
-      if ( *(_DWORD *)a1 )
-        ++v5;
-      a1 = *(_DWORD *)(a1 + 4);
+      if ( *(_DWORD *)a1 ) /*0x4eeb40*/
+        ++v4; /*0x4eeb45*/
+      a1 = *(_DWORD *)(a1 + 4); /*0x4eeb48*/
     }
-    while ( a1 );
-    if ( v5 )
+    while ( a1 ); /*0x4eeb4d*/
+    if ( v4 ) /*0x4eeb51*/
     {
-      v6 = 8LL * v5;
-      LOBYTE(a1) = HIDWORD(v6) != 0;
-      HIDWORD(v10) = a2;
-      v7 = (_DWORD *)FormHeapAlloc(v6 | -a1);
-      v8 = 0;
-      v9 = (_DWORD *)v4;
-      do
+      v5 = 8LL * v4; /*0x4eeb58*/
+      LOBYTE(a1) = HIDWORD(v5) != 0; /*0x4eeb5a*/
+      HIDWORD(v9) = a2; /*0x4eeb5d*/
+      v6 = (_DWORD *)FormHeapAlloc(v5 | -a1); /*0x4eeb6b*/
+      v7 = 0; /*0x4eeb6d*/
+      v8 = (_DWORD *)v3; /*0x4eeb6f*/
+      do /*0x4eeb8c*/
       {
-        v7[2 * v8] = *(_DWORD *)(*(_DWORD *)*v9 + 0xC);
-        v7[2 * v8 + 1] = *(_DWORD *)(*v9 + 4);
-        v9 = (_DWORD *)v9[1];
-        ++v8;
+        v6[2 * v7] = *(_DWORD *)(*(_DWORD *)*v8 + 0xC); /*0x4eeb78*/
+        v6[2 * v7 + 1] = *(_DWORD *)(*v8 + 4); /*0x4eeb80*/
+        v8 = (_DWORD *)v8[1]; /*0x4eeb84*/
+        ++v7; /*0x4eeb87*/
       }
-      while ( v9 );
-      LODWORD(v10) = 8 * v8;
-      TESForm_PutFormRecordChunkData(a3, v7, v10);
-      FormHeapFree((unsigned int)v7);
+      while ( v8 ); /*0x4eeb8c*/
+      LODWORD(v9) = 8 * v7; /*0x4eeb99*/
+      TESForm_PutFormRecordChunkData(a3, v6, v9); /*0x4eeb9c*/
+      FormHeapFree((unsigned int)v6); /*0x4eeba2*/
     }
   }
 }

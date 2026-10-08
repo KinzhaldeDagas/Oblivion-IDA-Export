@@ -1,18 +1,21 @@
-_DWORD *__cdecl sub_79AC40(int a1, int a2)
+// Oblivion SFrondTexture copy constructor: deep-copies the 28-byte filename string and copies aspectRatio, sizeScale, minAngleOffset, and maxAngleOffset. The 0x2C layout is established by executable accesses; RT 4.1 FrondEngine.h corroborates the member names.
+OB_SFrondTexture_010201A0 *__cdecl OB_SFrondTexture_CopyCtor_010201A0(
+        OB_SFrondTexture_010201A0 *this,
+        const OB_SFrondTexture_010201A0 *source)
 {
-  _DWORD *result; // eax
+  OB_SFrondTexture_010201A0 *result; // eax
 
-  result = 0;
-  if ( a1 )
+  result = 0; /*0x79ac6f*/
+  if ( this ) /*0x79ac77*/
   {
-    *(_DWORD *)(a1 + 0x18) = 0xF;
-    *(_DWORD *)(a1 + 0x14) = 0;
-    *(_BYTE *)(a1 + 4) = 0;
-    result = sub_414420(a1, (_DWORD *)a2, 0, 0xFFFFFFFF);
-    *(float *)(a1 + 0x1C) = *(float *)(a2 + 0x1C);
-    *(float *)(a1 + 0x20) = *(float *)(a2 + 0x20);
-    *(float *)(a1 + 0x24) = *(float *)(a2 + 0x24);
-    *(float *)(a1 + 0x28) = *(float *)(a2 + 0x28);
+    this->filename.capacity = 0xF; /*0x79ac80*/
+    this->filename.size = 0; /*0x79ac87*/
+    this->filename.storage.inlineData[0] = 0; /*0x79ac8d*/
+    result = (OB_SFrondTexture_010201A0 *)OB_stString28_AssignSubstring_010201A0((int)this, source, 0, 0xFFFFFFFF); /*0x79ac90*/
+    this->aspectRatio = source->aspectRatio; /*0x79ac98*/
+    this->sizeScale = source->sizeScale; /*0x79ac9e*/
+    this->minAngleOffset = source->minAngleOffset; /*0x79aca4*/
+    this->maxAngleOffset = source->maxAngleOffset; /*0x79acaa*/
   }
-  return result;
+  return result; /*0x79acad*/
 }

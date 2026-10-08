@@ -1,19 +1,36 @@
 {
-  "callees_count": 16,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7A0D40",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x7A0D40",
+      "0x7A0E54"
+    ],
+    [
+      "0x9CC5C0",
+      "0x9CC5F4"
+    ]
+  ],
+  "chunks_sha256": "5cb9299e61295ea415d8485d55c4980882ea224ddebbac0c4886635d50b2b18b",
+  "comment_regular": "Exception-safe uninitialized ownership move for guide-LOD level vectors. Constructs an empty destination element, swaps its begin/end/capacity with the source, and advances at 0x10-byte stride; unwind destroys constructed destinations.",
+  "comment_repeatable": "Exception-safe uninitialized ownership move for guide-LOD level vectors. Constructs an empty destination element, swaps its begin/end/capacity with the source, and advances at 0x10-byte stride; unwind destroys constructed destinations.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 8,
+  "display_name": "OB_stVector_stVector_SFrondGuide_UninitializedMove_010201A0",
   "end_ea": "0x7A0E54",
-  "flags": 21521,
+  "evidence_confidence": "Unknown",
+  "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_7A0D40",
+  "name": "OB_stVector_stVector_SFrondGuide_UninitializedMove_010201A0",
   "segment": ".text",
   "sha256": "133ddf6ba80256b3803cd51051cd7cea4c9dd3d34806b1f77972b833f47ed1c6",
   "size": 276,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A0D40",
-  "type": "void __cdecl __noreturn(_DWORD *, _DWORD *, _DWORD *)",
-  "xrefs_from_count": 116,
+  "total_chunk_size": 328,
+  "type": "OB_stVector_SFrondGuide_010201A0 *__cdecl(OB_stVector_SFrondGuide_010201A0 *first, OB_stVector_SFrondGuide_010201A0 *last, OB_stVector_SFrondGuide_010201A0 *destinationFirst)",
+  "xrefs_from_count": 141,
   "xrefs_to_count": 3
 }

@@ -1,4 +1,4 @@
-0x6E1F60: push    ebx
+0x6E1F60: push    ebx; Oblivion NiTransformData scale-key ownership setter. Destroys previous keys +0x28 through the destructor table indexed by type +0x18, then installs count +0x0C, pointer +0x28, type +0x18, and table-derived stride +0x1E. Null pointer or zero count clears the channel fields.
 0x6E1F61: push    esi
 0x6E1F62: mov     esi, ecx
 0x6E1F64: mov     eax, [esi+28h]
@@ -8,7 +8,7 @@
 0x6E1F6D: mov     ecx, [esi+18h]
 0x6E1F70: mov     edx, ds:0B3D2C8h[ecx*4]
 0x6E1F77: push    eax
-0x6E1F78: call    edx ; dword_B3D2C8
+0x6E1F78: call    edx ; unk_B3D2C8
 0x6E1F7A: add     esp, 4
 0x6E1F7D: mov     ecx, [esp+8+arg_0]
 0x6E1F81: cmp     ecx, ebx

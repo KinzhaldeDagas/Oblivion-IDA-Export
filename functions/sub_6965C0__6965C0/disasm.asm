@@ -28,7 +28,7 @@
 0x6965FD: xor     edi, edi
 0x6965FF: xor     esi, esi
 0x696601: mov     ecx, ebx; this
-0x696603: call    MobileObject_GetCharProxy
+0x696603: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x696608: test    esi, esi
 0x69660A: mov     ecx, eax
 0x69660C: jz      loc_696751
@@ -67,7 +67,7 @@
 0x696695: lea     edx, [esp+58h+var_30]
 0x696699: push    edx
 0x69669A: mov     [esp+5Ch+var_40], eax
-0x69669E: call    sub_5E1500
+0x69669E: call    sub_5E1500; TES4 authoritative: reads proxy position via 0x891440 and converts Havok units back to TES/world units via 0x43F3E0.
 0x6966A3: fld     [esp+58h+var_30]
 0x6966A7: fsub    [esp+58h+var_48]
 0x6966AB: lea     ecx, [esp+58h+var_3C]
@@ -82,7 +82,7 @@
 0x6966CD: fstp    [esp+58h+var_4C]
 0x6966D1: fld     [esp+58h+var_4C]
 0x6966D5: fstp    [esp+58h+var_4C]
-0x6966D9: call    sub_404C90
+0x6966D9: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x6966DE: fld     [esp+58h+var_4C]
 0x6966E2: fxch    st(1)
 0x6966E4: call    sub_98598A
@@ -112,7 +112,7 @@
 0x696739: push    ecx
 0x69673A: fstp    [esp+60h+a2]; a2
 0x69673D: mov     ecx, [ebx+88h]; this
-0x696743: call    NiAVObject_UpdateNiAVObject
+0x696743: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x696748: pop     edi
 0x696749: pop     esi
 0x69674A: xor     al, al

@@ -1,4 +1,4 @@
-0x643E30: push    0FFFFFFFFh
+0x643E30: push    0FFFFFFFFh; 3DTheft decode: generated create-follow helper assigns a temporary Follow package to the actor resolved from the procedure target and targets the current owning actor. It confirms dynamic Follow bookkeeping (explicit ExtraFollower link + Actor_AddPackage setCurrent=0 markDynamic=1), but is not the correct package shape for making a spawned thief follow the player.
 0x643E32: push    offset ??0bhkNiTriStripsShape@@QAE@XZ_SEH
 0x643E37: mov     eax, large fs:0
 0x643E3D: push    eax
@@ -65,27 +65,27 @@
 0x643EF3: mov     edx, [ecx+24h]
 0x643EF6: push    edx
 0x643EF7: mov     ecx, esi
-0x643EF9: call    TESPackage_SetLocation
+0x643EF9: call    TESPackage_SetLocation; 3DTheft decode: generated Follow package copies the current procedure/package location before target rewrite.
 0x643EFE: mov     eax, [edi+8]
 0x643F01: mov     ecx, [eax+28h]
 0x643F04: push    ecx
 0x643F05: mov     ecx, esi
-0x643F07: call    TESPackage_SetTarget
+0x643F07: call    TESPackage_SetTarget; 3DTheft decode: TESPackage_SetTarget allocates package->target when needed, copies a 0x0C TargetData record, and leaves later callers to set target type/ref/count fields.
 0x643F0C: mov     ecx, [esi+28h]
 0x643F0F: push    0
-0x643F11: mov     dword ptr [esi+18h], 6
-0x643F18: call    TESPackage_TargetData_SetType
+0x643F11: mov     dword ptr [esi+18h], 6; 3DTheft decode: generated Follow package forces procedure row 6 (WAIT, FOLLOW, DONE), not resolver row 7.
+0x643F18: call    TESPackage_TargetData_SetType; 3DTheft decode: generated Follow package sets target type to reference after TESPackage_SetTarget copies target data.
 0x643F1D: mov     ecx, [esi+28h]
 0x643F20: push    ebx
-0x643F21: call    TeSPackage_TargetData_SetTargetREFR
+0x643F21: call    TeSPackage_TargetData_SetTargetREFR; 3DTheft decode: generated Follow package writes the actor reference through TargetData_SetTargetREFR; count remains whatever the constructor/copy path set.
 0x643F26: mov     edi, [esp+24h+arg_4]
 0x643F2A: mov     ecx, [edi+28h]
 0x643F2D: mov     ebx, [esi+28h]
-0x643F30: call    sub_452A60
+0x643F30: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x643F35: push    eax
 0x643F36: mov     ecx, ebx
 0x643F38: call    TESAIForm_SetServiceFlags
-0x643F3D: mov     edx, [edi+1Ch]
+0x643F3D: mov     edx, [edi+1Ch]; 3DTheft decode: generated Follow package copies selected movement flags from the source package after target setup.
 0x643F40: shr     edx, 13h
 0x643F43: test    dl, 1
 0x643F46: jz      short loc_643F51
@@ -124,8 +124,8 @@
 0x643FC5: mov     edx, [ecx]
 0x643FC7: mov     eax, [edx+20h]
 0x643FCA: call    eax
-0x643FCC: mov     ecx, ebp
-0x643FCE: call    sub_5E0380
+0x643FCC: mov     ecx, ebp; this
+0x643FCE: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x643FD3: test    eax, eax
 0x643FD5: jz      short loc_64401E
 0x643FD7: mov     edi, [ebp+58h]
@@ -149,20 +149,20 @@
 0x644009: mov     ecx, edi
 0x64400B: call    eax
 0x64400D: push    eax
-0x64400E: mov     ecx, ebp
-0x644010: call    sub_5E0380
+0x64400E: mov     ecx, ebp; this
+0x644010: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x644015: push    eax
 0x644016: lea     ecx, [ebp+44h]
 0x644019: call    sub_4268B0
 0x64401E: mov     ecx, [esp+24h+arg_0]
 0x644022: push    ebp
 0x644023: add     ecx, 44h ; 'D'
-0x644026: call    sub_424C50
+0x644026: call    sub_424C50; 3DTheft decode: Add/link ExtraFollower entry on target ExtraDataList; creates ExtraFollower if absent and pushes follower actor pointer if not already listed.
 0x64402B: push    1; a4
 0x64402D: push    0; a3
 0x64402F: push    esi; a2
 0x644030: mov     ecx, ebp; this
-0x644032: call    Actor_AddPackage?
+0x644032: call    Actor_AddPackage?; 3DTheft: xrefs ignore this function's return value; use current package/process state after call, not AL/EAX, as the package assignment result.
 0x644037: mov     ecx, [esp+24h+var_C]
 0x64403B: mov     large fs:0, ecx
 0x644042: pop     ecx
@@ -172,3 +172,15 @@
 0x644046: pop     ebx
 0x644047: add     esp, 10h
 0x64404A: retn    0Ch
+0x9CAD70: mov     eax, [ebp-10h]
+0x9CAD73: push    eax
+0x9CAD74: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CAD79: pop     ecx
+0x9CAD7A: retn
+0x9CAD7B: mov     edx, [esp+arg_4]
+0x9CAD7F: lea     eax, [edx-14h]
+0x9CAD82: mov     ecx, [edx-18h]
+0x9CAD85: xor     ecx, eax
+0x9CAD87: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CAD8C: mov     eax, offset stru_AF3390
+0x9CAD91: jmp     ___CxxFrameHandler3

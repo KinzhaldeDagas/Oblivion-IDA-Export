@@ -1,1 +1,1 @@
-CIEXYZ
+typedef tagCIEXYZ CIEXYZ;

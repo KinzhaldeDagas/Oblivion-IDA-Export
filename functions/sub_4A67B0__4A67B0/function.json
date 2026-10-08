@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 2,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4A67B0",
+      "0x4A67EC"
+    ]
+  ],
+  "chunks_sha256": "00a5720fa8371d369e01aa212e6c602c3f5fbc87279de736daebb88c6975ba62",
+  "comment_regular": "Verified: converts world XYZ input to a 2D point and delegates region-data selection for that location.",
+  "comment_repeatable": "Verified: converts world XYZ input to a 2D point and delegates region-data selection for that location.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4A67B0",
+  "display_name": "TESRegionList_SelectDataAtWorldPosition",
   "end_ea": "0x4A67EC",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4A67B0",
+  "name": "TESRegionList_SelectDataAtWorldPosition",
   "segment": ".text",
   "sha256": "00a5720fa8371d369e01aa212e6c602c3f5fbc87279de736daebb88c6975ba62",
   "size": 60,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4A67B0",
-  "type": "int __thiscall(int *this, int, float, float, int, int)",
+  "total_chunk_size": 60,
+  "type": "TESRegionData *__thiscall(TESRegionList *this, int dataID, float worldX, float worldY, float worldZ, TESWorldSpace *worldspace)",
   "xrefs_from_count": 21,
   "xrefs_to_count": 3
 }

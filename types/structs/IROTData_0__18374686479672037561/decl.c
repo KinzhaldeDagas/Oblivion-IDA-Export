@@ -1,1 +1,1 @@
-IROTData_0
+typedef IROTData IROTData_0;

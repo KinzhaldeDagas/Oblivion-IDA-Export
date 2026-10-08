@@ -1,5 +1,5 @@
 0xA270A0: push    esi
-0xA270A1: mov     esi, RenderWindowNiNode
+0xA270A1: mov     esi, ds:0B42CF4h
 0xA270A7: test    esi, esi
 0xA270A9: jz      short loc_A270C7
 0xA270AB: lea     eax, [esi+4]

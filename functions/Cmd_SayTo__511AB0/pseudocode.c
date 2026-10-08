@@ -9,7 +9,7 @@ bool __cdecl Cmd_SayTo(
         UInt32 *a3)
 {
   bool result; // al
-  int v9; // ebp
+  float v9; // ebp
   Actor *v10; // esi
   LowProcess *process; // ecx
   LowProcess *v12; // ecx
@@ -19,53 +19,53 @@ bool __cdecl Cmd_SayTo(
   int v16; // [esp+10h] [ebp-8h] BYREF
   BOOL v17; // [esp+14h] [ebp-4h]
 
-  *a7 = 0.0;
-  *(_DWORD *)v14 = 0;
-  v15 = 0;
-  v16 = 0;
-  LOBYTE(v17) = 0;
-  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v14, &v15, &v16);
-  if ( result )
+  *a7 = 0.0; /*0x511aba*/
+  *(_DWORD *)v14 = 0; /*0x511af1*/
+  v15 = 0; /*0x511af5*/
+  v16 = 0; /*0x511af9*/
+  LOBYTE(v17) = 0; /*0x511afd*/
+  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v14, &v15, &v16); /*0x511b01*/
+  if ( result ) /*0x511b0b*/
   {
-    if ( v16 > 0 )
-      LOBYTE(v17) = 1;
-    v9 = dword_B36798;
-    dword_B36798 = 0x7FFFFFFF;
-    v10 = (Actor *)OblivionDynamicCast(
+    if ( v16 > 0 ) /*0x511b17*/
+      LOBYTE(v17) = 1; /*0x511b19*/
+    v9 = flt_B36778[8]; /*0x511b1f*/
+    flt_B36778[8] = NAN; /*0x511b33*/
+    v10 = (Actor *)OblivionDynamicCast( /*0x511b42*/
                      a4,
                      0,
                      (struct _s_RTTICompleteObjectLocator *)&TESObjectREFR `RTTI Type Descriptor',
                      &Actor `RTTI Type Descriptor',
                      0);
-    if ( v10 && *(_DWORD *)v14 )
+    if ( v10 && *(_DWORD *)v14 ) /*0x511b55*/
     {
-      process = v10->members.super.process;
-      if ( process )
+      process = v10->members.super.process; /*0x511b5b*/
+      if ( process ) /*0x511b60*/
       {
-        process->Unk_127(process);
-        ((void (__thiscall *)(LowProcess *, _DWORD))v10->members.super.process->Unk_120)(
+        process->Unk_127(process); /*0x511b6e*/
+        ((void (__thiscall *)(LowProcess *, _DWORD))v10->members.super.process->Unk_120)( /*0x511b80*/
           v10->members.super.process,
           *(_DWORD *)v14);
-        v12 = v10->members.super.process;
-        v10->members.unk0E4 = *(Actor **)v14;
-        v12->SayTopic(v12, v10, v15, v17, 0, 0);
-        v13 = OblivionDynamicCast(
+        v12 = v10->members.super.process; /*0x511b86*/
+        v10->members.unk0E4 = *(Actor **)v14; /*0x511b8a*/
+        v12->SayTopic(v12, v10, v15, v17, 0, 0); /*0x511ba4*/
+        v13 = OblivionDynamicCast( /*0x511bb6*/
                 v10->members.super.process,
                 0,
                 (struct _s_RTTICompleteObjectLocator *)&BaseProcess `RTTI Type Descriptor',
                 &HighProcess `RTTI Type Descriptor',
                 0);
-        if ( v13 )
+        if ( v13 ) /*0x511bc0*/
         {
-          *a7 = ((double (__thiscall *)(void *))*(_DWORD *)(*(_DWORD *)v13 + 0x208))(v13);
-          dword_B36798 = v9;
-          return 1;
+          *a7 = ((double (__thiscall *)(void *))*(_DWORD *)(*(_DWORD *)v13 + 0x208))(v13); /*0x511bd3*/
+          flt_B36778[8] = v9; /*0x511bd5*/
+          return 1; /*0x511be3*/
         }
       }
     }
-    else if ( a4 )
+    else if ( a4 ) /*0x511be6*/
     {
-      ((void (__thiscall *)(TESObjectREFR *, TESTopic *, _DWORD, _DWORD, _DWORD, int))a4->vtbl->Unk_37)(
+      ((void (__thiscall *)(TESObjectREFR *, TESTopic *, _DWORD, _DWORD, _DWORD, int))a4->vtbl->Unk_37)( /*0x511bfc*/
         a4,
         v15,
         *(_DWORD *)v14,
@@ -73,8 +73,8 @@ bool __cdecl Cmd_SayTo(
         0,
         1);
     }
-    dword_B36798 = v9;
-    return 1;
+    flt_B36778[8] = v9; /*0x511c01*/
+    return 1; /*0x511c09*/
   }
-  return result;
+  return result; /*0x511b0d*/
 }

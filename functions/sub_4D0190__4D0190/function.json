@@ -1,19 +1,36 @@
 {
-  "callees_count": 79,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 35,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 4,
+  "chunks": [
+    [
+      "0x4D0190",
+      "0x4D06B5"
+    ],
+    [
+      "0x9B53C0",
+      "0x9B542C"
+    ]
+  ],
+  "chunks_sha256": "b1f5f192b35eba9dd6083a4351f4cb86fcfb2613ee1f4af4cbb549f738cff59f",
+  "comment_regular": "CULLING audit 2026-09-27 (observed Oblivion behavior): Focused callsite decode: constructs a temporary process with null VisibleGeo at 0x4D0388. Calls 0x4D040B and 0x4D04A8 render ShadowSceneNode through supplied camera into pushed render targets. Root identity alone must not authorize main-view culling; this route has separate process ownership.\n\nMoonSugarEffect decode: canopy/shadow offscreen path constructs culling process with null VisibleGeo and renders through sub_70C0B0 into StartUsingRenderTarget targets, so it uses accumulator-direct culling.",
+  "comment_repeatable": "MoonSugarEffect decode: canopy/shadow offscreen path constructs culling process with null VisibleGeo and renders through sub_70C0B0 into StartUsingRenderTarget targets, so it uses accumulator-direct culling.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
   "display_name": "sub_4D0190",
   "end_ea": "0x4D06B5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_4D0190",
   "segment": ".text",
   "sha256": "d465b8ca6f66b141bc14c29da642734f23f530971dcfb0c93e25c0d9b5babff0",
   "size": 1317,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4D0190",
+  "total_chunk_size": 1425,
   "type": "int *__stdcall(int *, NiCamera *)",
-  "xrefs_from_count": 462,
+  "xrefs_from_count": 486,
   "xrefs_to_count": 2
 }

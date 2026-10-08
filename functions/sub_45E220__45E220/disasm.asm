@@ -14,7 +14,7 @@
 0x45E24A: test    bl, dl
 0x45E24C: push    edi
 0x45E24D: mov     edi, [esp+128h+arg_0]
-0x45E254: mov     [esp+128h+var_114], ecx
+0x45E254: mov     [esp+128h+var_114], ecx; MEF SAVE AUDIT 2026-10-08: PERF-19 format proof: SaveIDArrays serializes numeric array used count+C and exactly that many DWORDs in existing order; analogous worldspace count read45E2D5. Spare capacity is not serialized here. Do not change IDs/order/first index while changing capacity policy.
 0x45E258: jz      short loc_45E263
 0x45E25A: add     dword ptr [esi+90h], 4
 0x45E261: jmp     short loc_45E27D
@@ -38,7 +38,7 @@
 0x45E28E: mov     edx, [ecx+ebp*4]
 0x45E291: shr     eax, 9
 0x45E294: test    bl, al
-0x45E296: mov     [esp+128h+var_110], edx
+0x45E296: mov     [esp+128h+var_110], edx; MEF PERF 2026-09-08: PERF-3 serialization invariant: SaveLoad_SaveIDArrays writes owner+74h entries in numeric index order after writing used-size. Worldspace array+78h follows. Sorting/reordering array to accelerate lookup would change saved IRefs; only an auxiliary lookup structure can preserve this format.
 0x45E29A: jz      short loc_45E2A5
 0x45E29C: add     dword ptr [esi+90h], 4
 0x45E2A3: jmp     short loc_45E2BF

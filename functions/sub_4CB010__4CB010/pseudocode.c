@@ -1,6 +1,6 @@
-void __userpurge sub_4CB010(void *this@<ecx>, double st5_0@<st2>, double a3@<st1>, double a4@<st0>, char a5)
+void __thiscall sub_4CB010(void *this, char a2)
 {
-  sub_496EA0((char *)&stru_B35C80, (TESObjectCELL *)this);
-  sub_6786A0(&ActorProcessManager_ptr, st5_0, a3, a4, (int *)this + 0x12, a5);
-  sub_496F50(&stru_B35C80, (TESObjectCELL *)this);
+  sub_496EA0((char *)&unk_B35C80, (TESObjectCELL *)this); /*0x4cb019*/
+  sub_6786A0(&qword_B3BB2C[0x75], (int *)this + 0x12, a2); /*0x4cb02c*/
+  sub_496F50(&unk_B35C80, (TESObjectCELL *)this); /*0x4cb037*/
 }

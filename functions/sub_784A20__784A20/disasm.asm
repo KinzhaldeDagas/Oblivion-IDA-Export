@@ -1,4 +1,4 @@
-0x784A20: push    ebx
+0x784A20: push    ebx; Oblivion 1.2.0.416: destroys all 0x18-byte elements, frees backing storage, and nulls begin/end/capacity.
 0x784A21: mov     ebx, ecx
 0x784A23: push    esi
 0x784A24: mov     esi, [ebx+4]
@@ -8,14 +8,14 @@
 0x784A2C: mov     edi, [ebx+8]
 0x784A2F: cmp     esi, edi
 0x784A31: jz      short loc_784A41
-0x784A33: mov     ecx, esi; void *
-0x784A35: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x784A33: mov     ecx, esi; this
+0x784A35: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x784A3A: add     esi, 18h
 0x784A3D: cmp     esi, edi
 0x784A3F: jnz     short loc_784A33
 0x784A41: mov     eax, [ebx+4]
 0x784A44: push    eax
-0x784A45: call    FormHeapFree
+0x784A45: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x784A4A: add     esp, 4
 0x784A4D: pop     edi
 0x784A4E: pop     esi

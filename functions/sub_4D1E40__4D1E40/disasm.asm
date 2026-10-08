@@ -24,7 +24,7 @@
 0x4D1E82: mov     edx, [edi+0B0h]
 0x4D1E88: mov     eax, [edx+esi*4]
 0x4D1E8B: push    eax
-0x4D1E8C: call    sub_4DC270
+0x4D1E8C: call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.
 0x4D1E91: add     esp, 4
 0x4D1E94: test    eax, eax
 0x4D1E96: jz      short loc_4D1EA5

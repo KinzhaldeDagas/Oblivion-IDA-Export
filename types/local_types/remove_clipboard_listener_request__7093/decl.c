@@ -1,1 +1,5 @@
-remove_clipboard_listener_request
+struct remove_clipboard_listener_request
+{
+request_header __header;
+user_handle_t window;
+};

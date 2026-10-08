@@ -9,7 +9,7 @@
 0x980B24: jz      short loc_980B35
 0x980B26: mov     edi, [eax]
 0x980B28: push    eax
-0x980B29: call    FormHeapFree
+0x980B29: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x980B2E: test    edi, edi
 0x980B30: pop     ecx
 0x980B31: mov     eax, edi
@@ -20,7 +20,7 @@
 0x980B3E: jz      short loc_980B4F
 0x980B40: mov     edi, [eax]
 0x980B42: push    eax
-0x980B43: call    FormHeapFree
+0x980B43: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x980B48: test    edi, edi
 0x980B4A: pop     ecx
 0x980B4B: mov     eax, edi

@@ -1,19 +1,32 @@
 {
-  "callees_count": 35,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_4E6F30",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 16,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x4E6F30",
+      "0x4E70AA"
+    ]
+  ],
+  "chunks_sha256": "b0f5db2b54510cd0941ee660dfc07c5a2cedc85378b82b0b2755b038702814f9",
+  "comment_regular": "Verified deferred PGRI resolver. For each PGRI row, low u16 is a local point-array index and XYZ at +4 locates the remote point; it adds reciprocal adjacency if absent and emits the reciprocal request on the remote grid. Out-of-range local indices are removed. Caller is TESPathGrid_LoadOrResolveGraph.",
+  "comment_repeatable": "Verified deferred PGRI resolver. For each PGRI row, low u16 is a local point-array index and XYZ at +4 locates the remote point; it adds reciprocal adjacency if absent and emits the reciprocal request on the remote grid. Out-of-range local indices are removed. Caller is TESPathGrid_LoadOrResolveGraph.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "TESPathGrid_ResolveCrossCellLinks",
   "end_ea": "0x4E70AA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4E6F30",
+  "name": "TESPathGrid_ResolveCrossCellLinks",
   "segment": ".text",
   "sha256": "b0f5db2b54510cd0941ee660dfc07c5a2cedc85378b82b0b2755b038702814f9",
   "size": 378,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E6F30",
-  "type": "void __thiscall(int *this)",
+  "total_chunk_size": 378,
+  "type": "void __thiscall(TESPathGrid *this)",
   "xrefs_from_count": 155,
   "xrefs_to_count": 2
 }

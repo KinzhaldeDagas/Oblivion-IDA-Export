@@ -12,7 +12,7 @@
 0x4245A2: mov     esi, ecx
 0x4245A4: mov     eax, [esi+0Ch]
 0x4245A7: push    eax
-0x4245A8: call    FormHeapFree
+0x4245A8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4245AD: add     esp, 4
 0x4245B0: xor     eax, eax
 0x4245B2: mov     [esi+0Ch], eax
@@ -25,3 +25,12 @@
 0x4245CF: pop     esi
 0x4245D0: add     esp, 10h
 0x4245D3: retn
+0x9ABA50: mov     ecx, [ebp-10h]; this
+0x9ABA53: jmp     ??1BSExtraData@@UAE@XZ; BSExtraData::~BSExtraData(void)
+0x9ABA58: mov     edx, [esp+arg_4]
+0x9ABA5C: lea     eax, [edx-8]
+0x9ABA5F: mov     ecx, [edx-0Ch]
+0x9ABA62: xor     ecx, eax
+0x9ABA64: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9ABA69: mov     eax, offset stru_AD8848
+0x9ABA6E: jmp     ___CxxFrameHandler3

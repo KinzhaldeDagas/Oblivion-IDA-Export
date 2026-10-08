@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x514C05",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -901,7 +901,7 @@
   },
   {
     "ea": "0x514D70",
-    "line": "mov     ecx, [esp+224h+var_204]",
+    "line": "mov     ecx, [esp+224h+var_204]; PlaceAtMe random-placement setup stores candidate 0 at the requested center, then uses Game_RandomLargeInteger to seed angular offsets for eight more candidates around a 100-unit ring, stepping by pi/4.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -925,7 +925,7 @@
   },
   {
     "ea": "0x514D7D",
-    "line": "mov     [esp+228h+var_130], ecx",
+    "line": "mov     [esp+228h+var_130], ecx; 3DTheft decode: non-leveled PlaceAtMe candidate 0 is the requested center point copied from the caller/offset position.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -943,7 +943,7 @@
   },
   {
     "ea": "0x514D92",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1039,7 +1039,7 @@
   },
   {
     "ea": "0x514DDC",
-    "line": "mov     [esp+224h+l], 8",
+    "line": "mov     [esp+224h+l], 8; 3DTheft decode: PlaceAtMe builds eight additional 100-unit ring candidates around candidate 0; these are only reached as the per-ref candidate index advances.",
     "mnemonic": "mov",
     "size": 8
   },
@@ -1315,7 +1315,7 @@
   },
   {
     "ea": "0x514EA5",
-    "line": "jnz     loc_514FBF",
+    "line": "jnz     loc_514FBF; 3DTheft decode 2026-05-14: Cmd_PlaceAtMe checks base form type 0x25 (LVLC/TESLevCreature) before normal PlaceObjectRef. LVLC is resolved first, not passed directly to PlaceObjectRef.",
     "mnemonic": "jnz",
     "size": 6
   },
@@ -1363,7 +1363,7 @@
   },
   {
     "ea": "0x514EC7",
-    "line": "push    edx",
+    "line": "push    edx; int",
     "mnemonic": "push",
     "size": 1
   },
@@ -1393,7 +1393,7 @@
   },
   {
     "ea": "0x514ED8",
-    "line": "call    TESLeveledList_CalcLeveledForm",
+    "line": "call    TESLeveledList_CalcLeveledForm; 3DTheft decode 2026-05-14: PlaceAtMe resolves TESLevCreature.leveledList at player Actor_GetLevel into a temporary TESContainer before spawning concrete forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1429,7 +1429,7 @@
   },
   {
     "ea": "0x514EEC",
-    "line": "lea     eax, [esp+224h+var_1AC]",
+    "line": "lea     eax, [esp+228h+var_1B0]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1453,13 +1453,13 @@
   },
   {
     "ea": "0x514EF8",
-    "line": "lea     eax, [esp+224h+var_1A4]",
+    "line": "lea     eax, [esp+228h+var_1A8]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x514EFF",
-    "line": "mov     [esp+224h+a3], eax",
+    "line": "mov     [esp+228h+var_1FC], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1471,7 +1471,7 @@
   },
   {
     "ea": "0x514F05",
-    "line": "mov     eax, [esp+224h+a3]",
+    "line": "mov     eax, [esp+22Ch+var_200]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1513,7 +1513,7 @@
   },
   {
     "ea": "0x514F1A",
-    "line": "mov     [esp+224h+l], edi",
+    "line": "mov     [esp+228h+var_20C], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1555,7 +1555,7 @@
   },
   {
     "ea": "0x514F30",
-    "line": "push    esi",
+    "line": "push    esi; PlaceAtMe call setup: push existingRef=0, worldspace, parentCell, rot[3], pos[3], baseForm; ECX=*g_dataHandler; call TESDataHandler_PlaceObjectRef.",
     "mnemonic": "push",
     "size": 1
   },
@@ -1585,7 +1585,7 @@
   },
   {
     "ea": "0x514F3B",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1603,7 +1603,7 @@
   },
   {
     "ea": "0x514F44",
-    "line": "lea     ecx, [esp+230h+var_160]",
+    "line": "lea     ecx, [esp+234h+var_164]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -1621,7 +1621,7 @@
   },
   {
     "ea": "0x514F52",
-    "line": "lea     edx, [esp+234h+var_204]",
+    "line": "lea     edx, [esp+238h+l]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1639,7 +1639,7 @@
   },
   {
     "ea": "0x514F58",
-    "line": "call    TESDataHandler_PlaceObjectRef",
+    "line": "call    TESDataHandler_PlaceObjectRef; PlaceAtMe leveled-list branch calls TESDataHandler::PlaceObjectRef using the calling ref's current parent cell and worldspace.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1657,7 +1657,7 @@
   },
   {
     "ea": "0x514F61",
-    "line": "mov     [esp+224h+var_1D0], esi",
+    "line": "mov     [esp+228h+var_1D4], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1669,7 +1669,7 @@
   },
   {
     "ea": "0x514F67",
-    "line": "mov     ecx, [esp+224h+var_1E0]; this",
+    "line": "mov     ecx, [esp+228h+var_1E4]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1681,7 +1681,7 @@
   },
   {
     "ea": "0x514F6D",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1729,7 +1729,7 @@
   },
   {
     "ea": "0x514F86",
-    "line": "mov     edi, [esp+224h+l]",
+    "line": "mov     edi, [esp+22Ch+var_210]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1759,7 +1759,7 @@
   },
   {
     "ea": "0x514F93",
-    "line": "mov     eax, [esp+224h+a3]",
+    "line": "mov     eax, [esp+22Ch+var_200]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1777,7 +1777,7 @@
   },
   {
     "ea": "0x514F9C",
-    "line": "mov     [esp+224h+a3], eax",
+    "line": "mov     [esp+22Ch+var_200], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1789,13 +1789,13 @@
   },
   {
     "ea": "0x514FA6",
-    "line": "lea     ecx, [esp+224h+var_1AC]",
+    "line": "lea     ecx, [esp+22Ch+var_1B4]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x514FAA",
-    "line": "mov     [esp+224h+var_4], 0FFFFFFFFh",
+    "line": "mov     [esp+22Ch+var_C], 0FFFFFFFFh",
     "mnemonic": "mov",
     "size": 11
   },
@@ -1837,7 +1837,7 @@
   },
   {
     "ea": "0x514FCF",
-    "line": "mov     eax, [ebx]",
+    "line": "mov     eax, [ebx]; 3DTheft decode: direct non-leveled spawn loop starts with candidate index 0, so count=1 uses the requested center point.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1855,7 +1855,7 @@
   },
   {
     "ea": "0x514FDA",
-    "line": "fstp    [esp+224h+a2.WorldRayCastOutput.HitFraction]",
+    "line": "fstp    [esp+224h+a2.WorldRayCastOutput.HitFraction]; 3DTheft decode: PlaceAtMe initializes bhkWorldRayCastData output hitFraction=1.0 before spawn placement raycast.",
     "mnemonic": "fstp",
     "size": 7
   },
@@ -1909,7 +1909,7 @@
   },
   {
     "ea": "0x515015",
-    "line": "mov     [esp+224h+a2.WorldRayCastInput.FilterInfo], 3001Bh",
+    "line": "mov     [esp+224h+a2.WorldRayCastInput.FilterInfo], 3001Bh; 3DTheft decode: PlaceAtMe raycast uses filterInfo 0x3001B and shape collection filter disabled.",
     "mnemonic": "mov",
     "size": 11
   },
@@ -2425,7 +2425,7 @@
   },
   {
     "ea": "0x515172",
-    "line": "call    TES__CastRay",
+    "line": "call    TES__CastRay; 3DTheft decode: single PlaceAtMe spawn casts from caller position +64 GU to target +64 GU using TES::CastRay at 0x446A10.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2557,7 +2557,7 @@
   },
   {
     "ea": "0x5151C4",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2581,7 +2581,7 @@
   },
   {
     "ea": "0x5151D0",
-    "line": "call    sub_46D5C0",
+    "line": "call    sub_46D5C0; 3DTheft decode: on ray hit, PlaceAtMe backs target position away by model radius helper 0x46D5C0 before PlaceObjectRef.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2869,7 +2869,7 @@
   },
   {
     "ea": "0x51528B",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2923,13 +2923,13 @@
   },
   {
     "ea": "0x5152A9",
-    "line": "call    TESDataHandler_PlaceObjectRef",
+    "line": "call    TESDataHandler_PlaceObjectRef; 3DTheft decode: direct non-leveled PlaceAtMe call to TESDataHandler::PlaceObjectRef; branch returns without MoveToGroundLevel.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5152AE",
-    "line": "cmp     eax, esi",
+    "line": "cmp     eax, esi; 3DTheft decode: direct PlaceAtMe only checks PlaceObjectRef return for null after call; no post-placement distance validation before success/count advance.",
     "mnemonic": "cmp",
     "size": 2
   },
@@ -2941,7 +2941,7 @@
   },
   {
     "ea": "0x5152B4",
-    "line": "jz      loc_514C11",
+    "line": "jz      loc_514C11; 3DTheft decode: null returned ref is the direct non-leveled PlaceAtMe failure path.",
     "mnemonic": "jz",
     "size": 6
   },
@@ -3001,7 +3001,7 @@
   },
   {
     "ea": "0x5152D9",
-    "line": "mov     eax, [esp+224h+var_1D0]",
+    "line": "mov     eax, dword ptr [esp+22Ch+var_1D8]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3013,7 +3013,7 @@
   },
   {
     "ea": "0x5152DF",
-    "line": "mov     [esp+224h+var_18C], esi",
+    "line": "mov     dword ptr [esp+22Ch+var_198+4], esi",
     "mnemonic": "mov",
     "size": 7
   },
@@ -3025,7 +3025,7 @@
   },
   {
     "ea": "0x5152E8",
-    "line": "mov     ecx, [esp+224h+var_164]",
+    "line": "mov     ecx, dword ptr [esp+22Ch+var_170+4]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -3043,7 +3043,7 @@
   },
   {
     "ea": "0x5152F3",
-    "line": "lea     edx, [esp+228h+var_18C]",
+    "line": "lea     edx, [esp+230h+var_198+4]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -3055,7 +3055,7 @@
   },
   {
     "ea": "0x5152FB",
-    "line": "mov     [esp+22Ch+var_18C], eax",
+    "line": "mov     dword ptr [esp+234h+var_198+4], eax",
     "mnemonic": "mov",
     "size": 7
   },
@@ -3148,5 +3148,83 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9B71A0",
+    "line": "lea     ecx, [ebp+var_1AC]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B71A6",
+    "line": "jmp     TESContainer_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B71AB",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B71AF",
+    "line": "lea     eax, [edx-214h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B71B5",
+    "line": "mov     ecx, [edx-218h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B71BB",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B71BD",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B71C2",
+    "line": "add     eax, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B71C5",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B71C8",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B71CA",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B71CF",
+    "line": "mov     eax, offset stru_AE1E14",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B71D4",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

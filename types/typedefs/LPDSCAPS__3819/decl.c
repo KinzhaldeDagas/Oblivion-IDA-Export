@@ -1,1 +1,1 @@
-LPDSCAPS
+typedef _DSCAPS *LPDSCAPS;

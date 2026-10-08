@@ -1,28 +1,54 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "NDR_LGFARRAY_FORMAT",
+  "definition": "struct __unaligned __declspec(align(2)) NDR_LGFARRAY_FORMAT\n{\nunsigned __int8 type;\nunsigned __int8 alignment;\nULONG total_size;\n}\n",
   "id": 18374686479672032436,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "type",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 1
+      "size": 1,
+      "type": "unsigned __int8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "alignment",
       "offset": 1,
       "offset_hex": "0x1",
-      "size": 1
+      "size": 1,
+      "type": "unsigned __int8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "total_size",
       "offset": 2,
       "offset_hex": "0x2",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     }
   ],
   "name": "NDR_LGFARRAY_FORMAT",
+  "ordinal": 3128,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 6
 }

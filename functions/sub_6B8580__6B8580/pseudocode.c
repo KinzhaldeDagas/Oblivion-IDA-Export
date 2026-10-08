@@ -1,11 +1,11 @@
-BOOL __thiscall sub_6B8580(_DWORD *this)
+bool __thiscall MenuTopic::NextResponse(MenuTopicView *this)
 {
-  int v1; // eax
-  _DWORD *v2; // ecx
+  DialogueResponseNode *currentResponseNode; // eax
+  DialogueResponseNode *v2; // ecx
 
-  v1 = *(this + 7);
-  if ( v1 )
-    *(this + 7) = *(_DWORD *)(v1 + 4);
-  v2 = (_DWORD *)*(this + 7);
-  return v2 && *v2;
+  currentResponseNode = this->currentResponseNode; /*0x6b8580*/
+  if ( currentResponseNode ) /*0x6b8585*/
+    this->currentResponseNode = currentResponseNode->next; /*0x6b858a*/
+  v2 = this->currentResponseNode; /*0x6b858d*/
+  return v2 && v2->item; /*0x6b859e*/
 }

@@ -1,1 +1,1 @@
-NiControllerSequence
+struct NiControllerSequence;

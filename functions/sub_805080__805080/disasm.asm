@@ -1,4 +1,4 @@
-0x805080: push    0FFFFFFFFh
+0x805080: push    0FFFFFFFFh; BloodOnDeath decode 2026-05-30: GeometryDecalShader constant-map setup. Decal Count/DecalCount are per-pass shader constants, not active temp-effect counts.
 0x805082: push    offset SEH_803C90
 0x805087: mov     eax, large fs:0
 0x80508D: push    eax
@@ -35,7 +35,7 @@
 0x8050ED: mov     edx, [ecx]
 0x8050EF: mov     eax, [edx+18h]
 0x8050F2: push    0
-0x8050F4: push    offset dword_B46198
+0x8050F4: push    offset flt_B46198
 0x8050F9: push    4
 0x8050FB: push    10h
 0x8050FD: push    offset EmptyString
@@ -49,7 +49,7 @@
 0x805116: mov     edx, [ecx]
 0x805118: mov     eax, [edx+18h]
 0x80511B: push    0
-0x80511D: push    offset flt_B4615C
+0x80511D: push    offset unk_B4615C
 0x805122: push    4
 0x805124: push    10h
 0x805126: push    offset EmptyString
@@ -58,7 +58,7 @@
 0x80512F: push    0
 0x805131: push    10000007h
 0x805136: push    offset aDecalCount; "Decal Count"
-0x80513B: call    eax
+0x80513B: call    eax; BloodOnDeath decode: pixel-shader "Decal Count" constant; not the actor-hit/trail emitter loop bound.
 0x80513D: cmp     dword ptr [edi+30h], 0
 0x805141: lea     esi, [edi+30h]
 0x805144: jnz     loc_805286
@@ -121,7 +121,7 @@
 0x8051F6: mov     edx, [ecx]
 0x8051F8: mov     eax, [edx+18h]
 0x8051FB: push    0
-0x8051FD: push    offset flt_B4615C
+0x8051FD: push    offset unk_B4615C
 0x805202: push    4
 0x805204: push    10h
 0x805206: push    offset EmptyString
@@ -130,7 +130,7 @@
 0x80520F: push    0
 0x805211: push    10000007h
 0x805216: push    offset aDecalcount; "DecalCount"
-0x80521B: call    eax
+0x80521B: call    eax; BloodOnDeath decode: vertex-shader "DecalCount" constant paired with per-pass decal state.
 0x80521D: mov     ecx, [esi]
 0x80521F: mov     edx, [ecx]
 0x805221: mov     eax, [edx+18h]
@@ -157,7 +157,7 @@
 0x80525F: mov     edx, [ecx]
 0x805261: push    0
 0x805263: mov     eax, [edx+18h]
-0x805266: push    offset flt_B46218
+0x805266: push    offset unk_B46218
 0x80526B: push    4
 0x80526D: push    10h
 0x80526F: push    offset EmptyString
@@ -166,7 +166,7 @@
 0x805278: push    0
 0x80527A: push    10000007h
 0x80527F: push    offset aDecalFade; "decal fade"
-0x805284: call    eax
+0x805284: call    eax; BloodOnDeath decode: "decal fade" consumes temp-effect fade progress; longer BSTempEffect duration leaves decals visible longer.
 0x805286: mov     ecx, dword ptr [esp+1Ch+var_C]
 0x80528A: mov     large fs:0, ecx
 0x805291: pop     ecx
@@ -174,3 +174,20 @@
 0x805293: pop     esi
 0x805294: add     esp, 10h
 0x805297: retn
+0x9D00B0: mov     eax, [ebp-10h]
+0x9D00B3: push    eax
+0x9D00B4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D00B9: pop     ecx
+0x9D00BA: retn
+0x9D00BB: mov     eax, [ebp-10h]
+0x9D00BE: push    eax
+0x9D00BF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D00C4: pop     ecx
+0x9D00C5: retn
+0x9D00C6: mov     edx, [esp+arg_4]
+0x9D00CA: lea     eax, [edx-0Ch]
+0x9D00CD: mov     ecx, [edx-10h]
+0x9D00D0: xor     ecx, eax
+0x9D00D2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D00D7: mov     eax, offset stru_AF8B40
+0x9D00DC: jmp     ___CxxFrameHandler3

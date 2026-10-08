@@ -1,1 +1,10 @@
-_NT_TIB_0
+struct _NT_TIB_0
+{
+_EXCEPTION_REGISTRATION_RECORD *ExceptionList;
+PVOID StackBase;
+PVOID StackLimit;
+PVOID SubSystemTib;
+$741DF647BD671D15B64E7453D7128F03 u;
+PVOID ArbitraryUserPointer;
+_NT_TIB_0 *Self;
+};

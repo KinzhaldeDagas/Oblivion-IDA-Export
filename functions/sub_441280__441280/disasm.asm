@@ -4,16 +4,16 @@
 0x441285: push    edi
 0x441286: mov     edi, ecx
 0x441288: mov     ecx, ds:0B33B00h
-0x44128E: mov     [esp+20h+var_14], 0
+0x44128E: mov     [esp+20h+destination], 0
 0x441296: xor     ebx, ebx
-0x441298: call    sub_45A170
+0x441298: call    TESSaveLoadGame_UseSaveGameBlocks
 0x44129D: test    al, al
 0x44129F: jz      loc_44133E
-0x4412A5: mov     ecx, ds:0B33B00h
-0x4412AB: push    4; Size
+0x4412A5: mov     ecx, ds:0B33B00h; self
+0x4412AB: push    4; byteCount
 0x4412AD: lea     eax, [esp+24h+Dst]
-0x4412B1: push    eax; Dst
-0x4412B2: call    SaveLoad_LoadData
+0x4412B1: push    eax; destination
+0x4412B2: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x4412B7: cmp     [esp+20h+Dst], 4B4F4C42h
 0x4412BF: jz      short loc_441329
 0x4412C1: mov     eax, ds:0B33B00h
@@ -22,7 +22,7 @@
 0x4412CE: jz      short loc_44130D
 0x4412D0: mov     ecx, [esi]
 0x4412D2: push    ecx; a1
-0x4412D3: call    TESForm_LookupByFormID
+0x4412D3: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4412D8: mov     edx, [esi+5]
 0x4412DB: movzx   ecx, byte ptr [esi+9]
 0x4412DF: add     esp, 4
@@ -48,32 +48,32 @@
 0x44131C: push    offset aLoadgameBuff_0; "LoadGame Buffer error: Block Header is "...
 0x441321: call    PrintError
 0x441326: add     esp, 10h
-0x441329: mov     ecx, ds:0B33B00h
+0x441329: mov     ecx, ds:0B33B00h; self
 0x44132F: mov     ebx, [ecx+14h]
-0x441332: push    2; Size
-0x441334: lea     eax, [esp+24h+var_14]
-0x441338: push    eax; Dst
-0x441339: call    SaveLoad_LoadData
-0x44133E: mov     ecx, ds:0B33B00h
+0x441332: push    2; byteCount
+0x441334: lea     eax, [esp+24h+destination]
+0x441338: push    eax; destination
+0x441339: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
+0x44133E: mov     ecx, ds:0B33B00h; self
 0x441344: cmp     byte ptr [ecx+7Ch], 14h
 0x441348: jb      loc_4413CE
-0x44134E: push    4; Size
+0x44134E: push    4; byteCount
 0x441350: lea     edx, [esp+24h+a1]
-0x441354: push    edx; Dst
-0x441355: call    SaveLoad_LoadData
+0x441354: push    edx; destination
+0x441355: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x44135A: xor     esi, esi
 0x44135C: cmp     [esp+20h+a1], esi
 0x441360: jbe     short loc_4413C8
-0x441362: mov     ecx, ds:0B33B00h
-0x441368: push    4; Size
+0x441362: mov     ecx, ds:0B33B00h; self
+0x441368: push    4; byteCount
 0x44136A: lea     eax, [esp+24h+var_8]
-0x44136E: push    eax; Dst
-0x44136F: call    SaveLoad_LoadFormID
-0x441374: push    2; Size
+0x44136E: push    eax; destination
+0x44136F: call    SaveLoad_LoadFormID; EnginePatch v2: byte-checked SaveLoad_LoadFormID hook. Bounded save-buffer copy, then preserves original iref-to-formID translation behavior.
+0x441374: push    2; byteCount
 0x441376: lea     ecx, [esp+2Ch+Dst]
-0x44137A: push    ecx; Dst
-0x44137B: mov     ecx, ds:0B33B00h
-0x441381: call    SaveLoad_LoadData
+0x44137A: push    ecx; destination
+0x44137B: mov     ecx, ds:0B33B00h; self
+0x441381: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x441386: mov     eax, [esp+28h+a1]
 0x44138A: test    eax, eax
 0x44138C: jz      short loc_4413BF
@@ -82,7 +82,7 @@
 0x441395: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x44139A: push    0; int
 0x44139C: push    eax; a1
-0x44139D: call    TESForm_LookupByFormID
+0x44139D: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4413A2: add     esp, 4
 0x4413A5: push    eax; void *
 0x4413A6: call    OblivionDynamicCast
@@ -97,14 +97,14 @@
 0x4413BF: add     esi, 1
 0x4413C2: cmp     esi, [esp+28h+var_18]
 0x4413C6: jb      short loc_441362
-0x4413C8: mov     ecx, ds:0B33B00h
+0x4413C8: mov     ecx, ds:0B33B00h; self
 0x4413CE: cmp     byte ptr [ecx+7Ch], 32h ; '2'
 0x4413D2: jb      short loc_4413E6
-0x4413D4: push    4; Size
-0x4413D6: push    offset flt_B33A30; Dst
-0x4413DB: call    SaveLoad_LoadData
+0x4413D4: push    4; byteCount
+0x4413D6: push    offset source; destination
+0x4413DB: call    SaveLoad_LoadData; ModernWindowsCompatible patch site: load-game reads saved global animation timer flt_B33A30; patch calls SaveLoad_LoadData then resets overlarge positive timer to 0 before scene controllers use it.
 0x4413E0: mov     ecx, ds:0B33B00h
-0x4413E6: call    sub_45A170
+0x4413E6: call    TESSaveLoadGame_UseSaveGameBlocks
 0x4413EB: test    al, al
 0x4413ED: jz      loc_4414FE
 0x4413F3: mov     ecx, ds:0B33B00h
@@ -114,8 +114,8 @@
 0x441404: jz      loc_4414A7
 0x44140A: mov     eax, [edi]
 0x44140C: push    eax; a1
-0x44140D: call    TESForm_LookupByFormID
-0x441412: movzx   edx, [esp+2Ch+var_1C]
+0x44140D: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
+0x441412: movzx   edx, word ptr [esp+2Ch+var_1C]
 0x441417: mov     ecx, eax
 0x441419: lea     eax, [edx+ebx]
 0x44141C: add     esp, 4
@@ -128,7 +128,7 @@
 0x44142D: push    edx
 0x44142E: mov     edx, [eax+0D4h]
 0x441434: call    edx
-0x441436: movzx   ecx, [esp+30h+var_1C]
+0x441436: movzx   ecx, word ptr [esp+30h+var_1C]
 0x44143B: push    eax
 0x44143C: mov     eax, [edi]
 0x44143E: push    eax
@@ -154,7 +154,7 @@
 0x441473: mov     eax, [edx+0D4h]
 0x441479: call    eax
 0x44147B: mov     ecx, [edi]
-0x44147D: movzx   edx, [esp+30h+var_1C]
+0x44147D: movzx   edx, word ptr [esp+30h+var_1C]
 0x441482: push    eax
 0x441483: push    ecx
 0x441484: push    16E4h
@@ -170,7 +170,7 @@
 0x4414A2: pop     ebx
 0x4414A3: add     esp, 14h
 0x4414A6: retn
-0x4414A7: movzx   eax, [esp+28h+var_1C]
+0x4414A7: movzx   eax, word ptr [esp+28h+var_1C]
 0x4414AC: lea     edx, [eax+ebx]
 0x4414AF: cmp     esi, edx
 0x4414B1: jbe     short loc_4414DB

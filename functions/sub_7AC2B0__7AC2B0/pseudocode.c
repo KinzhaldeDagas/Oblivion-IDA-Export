@@ -1,4 +1,4 @@
-_DWORD *sub_7AC2B0()
+NiRTTI *sub_7AC2B0()
 {
-  return dword_B42CEC;
+  return &stru_B42CEC; /*0x7ac2b5*/
 }

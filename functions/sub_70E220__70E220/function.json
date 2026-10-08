@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
   "callers_count": 404,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x70E220",
+      "0x70E232"
+    ]
+  ],
+  "chunks_sha256": "0d4641e22a94bf3e3d952540cba846c6865d42df80cd139af0ea42c5333f9379",
+  "comment_regular": "Constructs one Oblivion NiRTTI descriptor: writes the class-name pointer at +0 and parent NiRTTI pointer at +4, then returns this. This is the native NiRTTI constructor used by the SpeedTree shader-property RTTI initializers decoded in Pass 368.",
+  "comment_repeatable": "Constructs one Oblivion NiRTTI descriptor: writes the class-name pointer at +0 and parent NiRTTI pointer at +4, then returns this. This is the native NiRTTI constructor used by the SpeedTree shader-property RTTI initializers decoded in Pass 368.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_70E220",
+  "display_name": "NiRTTI_Constructor",
   "end_ea": "0x70E232",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_70E220",
+  "name": "NiRTTI_Constructor",
   "segment": ".text",
   "sha256": "0d4641e22a94bf3e3d952540cba846c6865d42df80cd139af0ea42c5333f9379",
   "size": 18,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x70E220",
-  "type": "BSStringT *__thiscall(BSStringT *this, char *, int)",
+  "total_chunk_size": 18,
+  "type": "NiRTTI *__thiscall(NiRTTI *this, const char *name, NiRTTI *parent)",
   "xrefs_from_count": 5,
   "xrefs_to_count": 404
 }

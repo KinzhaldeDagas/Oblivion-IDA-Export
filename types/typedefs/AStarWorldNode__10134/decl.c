@@ -1,0 +1,1 @@
+typedef TravelPathSpaceDoorLink AStarWorldNode;

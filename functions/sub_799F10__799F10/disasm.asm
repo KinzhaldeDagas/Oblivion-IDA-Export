@@ -1,4 +1,4 @@
-0x799F10: mov     eax, [ecx+4]
+0x799F10: mov     eax, [ecx+4]; Oblivion-authoritative size query for the compact SFrondGuide vector. Computes (end-begin)/0x30; returns zero when begin is null.
 0x799F13: test    eax, eax
 0x799F15: jnz     short loc_799F18
 0x799F17: retn

@@ -1,4 +1,4 @@
-0x6D7F60: push    0FFFFFFFFh
+0x6D7F60: push    0FFFFFFFFh; MEF v57 IMPLEMENTED 2026-10-08: v57 array writer proof: NiNode RemoveObjectAt70B07E reaches this slot-removal helper; null assignment releases pointer, decrements occupied at6D7FFA only for nonnull old value, and trims used only for last slot at6D8011. Density decision occurs after these callbacks in insertion, not cached across them.
 0x6D7F62: push    offset SEH_6D7F60
 0x6D7F67: mov     eax, large fs:0
 0x6D7F6D: push    eax
@@ -15,7 +15,7 @@
 0x6D7F87: mov     edi, ecx
 0x6D7F89: mov     [esp+28h+var_14], 0
 0x6D7F91: movzx   eax, word ptr [edi+0Ah]
-0x6D7F95: mov     ebx, [esp+28h+arg_4]
+0x6D7F95: mov     ebx, [esp+28h+incoming]
 0x6D7F99: cmp     ebx, eax
 0x6D7F9B: jb      short loc_6D7FAC
 0x6D7F9D: mov     eax, [esp+28h+arg_0]
@@ -32,13 +32,13 @@
 0x6D7FC6: push    ecx; lpAddend
 0x6D7FC7: call    dword ptr ds:0A28078h
 0x6D7FCD: mov     [esp+28h+var_4], 1
-0x6D7FD5: mov     [esp+28h+arg_4], 0
+0x6D7FD5: mov     [esp+28h+incoming], 0
 0x6D7FDD: mov     ecx, [edi+4]
-0x6D7FE0: lea     edx, [esp+28h+arg_4]
-0x6D7FE4: push    edx
-0x6D7FE5: add     ecx, ebp
+0x6D7FE0: lea     edx, [esp+28h+incoming]
+0x6D7FE4: push    edx; incoming
+0x6D7FE5: add     ecx, ebp; this
 0x6D7FE7: mov     byte ptr [esp+2Ch+var_4], 2
-0x6D7FEC: call    sub_55E2A0
+0x6D7FEC: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
 0x6D7FF1: test    esi, esi
 0x6D7FF3: setnz   al
 0x6D7FF6: test    al, al
@@ -82,3 +82,21 @@
 0x6D8063: pop     ebx
 0x6D8064: add     esp, 14h
 0x6D8067: retn    8
+0x9C7BA0: mov     eax, [ebp-14h]
+0x9C7BA3: and     eax, 1
+0x9C7BA6: jz      locret_9C7BB8
+0x9C7BAC: and     dword ptr [ebp-14h], 0FFFFFFFEh
+0x9C7BB0: mov     ecx, [ebp+4]; slot
+0x9C7BB3: jmp     NiPointerSlot_Release
+0x9C7BB8: retn
+0x9C7BB9: lea     ecx, [ebp-10h]; slot
+0x9C7BBC: jmp     NiPointerSlot_Release
+0x9C7BC1: lea     ecx, [ebp+8]; slot
+0x9C7BC4: jmp     NiPointerSlot_Release
+0x9C7BC9: mov     edx, [esp+incoming]
+0x9C7BCD: lea     eax, [edx-18h]
+0x9C7BD0: mov     ecx, [edx-1Ch]
+0x9C7BD3: xor     ecx, eax
+0x9C7BD5: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C7BDA: mov     eax, offset stru_AEFF6C
+0x9C7BDF: jmp     ___CxxFrameHandler3

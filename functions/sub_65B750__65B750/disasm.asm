@@ -33,15 +33,15 @@
 0x65B7B4: cmp     eax, 1
 0x65B7B7: jnz     loc_65BA60
 0x65B7BD: mov     ecx, esi; this
-0x65B7BF: call    TESObjectREFR_GetParentCell
+0x65B7BF: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x65B7C4: test    eax, eax
 0x65B7C6: jz      short loc_65B7E6
 0x65B7C8: mov     ecx, esi; this
-0x65B7CA: call    TESObjectREFR_GetParentCell
+0x65B7CA: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x65B7CF: cmp     byte ptr [eax+26h], 6
 0x65B7D3: jz      short loc_65B7E6
 0x65B7D5: mov     ecx, esi; this
-0x65B7D7: call    TESObjectREFR_GetParentCell
+0x65B7D7: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x65B7DC: cmp     byte ptr [eax+26h], 5
 0x65B7E0: jnz     loc_65BA60
 0x65B7E6: push    0; int
@@ -49,13 +49,13 @@
 0x65B7ED: push    offset ??_R0?AVMobileObject@@@8; struct _s_RTTICompleteObjectLocator *
 0x65B7F2: push    0; int
 0x65B7F4: push    esi; void *
-0x65B7F5: call    OblivionDynamicCast
+0x65B7F5: call    OblivionDynamicCast; TES4 authoritative actor validation pattern: OblivionDynamicCast from MobileObject RTTI to Actor RTTI before actor-specific setup.
 0x65B7FA: mov     edi, eax
 0x65B7FC: add     esp, 14h
 0x65B7FF: test    edi, edi
 0x65B801: jz      short loc_65B823
 0x65B803: mov     ecx, edi; this
-0x65B805: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x65B805: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x65B80A: cmp     eax, 2
 0x65B80D: jz      short loc_65B81C
 0x65B80F: push    0FFFFFFFFh
@@ -67,13 +67,13 @@
 0x65B821: jmp     short loc_65B828
 0x65B823: mov     [esp+0F4h+var_D5], 0
 0x65B828: mov     ecx, esi; this
-0x65B82A: call    MobileObject_GetCharProxy
-0x65B82F: mov     ebx, eax
+0x65B82A: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
+0x65B82F: mov     ebx, eax; Actor controller creation first checks existing MobileObject_GetCharProxy(this). If absent it allocates bhkCharacterController and stores it into process vfunc +0x190 at 0x65B92F.
 0x65B831: test    ebx, ebx
 0x65B833: jnz     loc_65B9C7
 0x65B839: push    1
 0x65B83B: lea     ecx, [esp+0F8h+var_D0]
-0x65B83F: call    sub_890C00
+0x65B83F: call    sub_890C00; TES4 authoritative: initializes shared bhk character state table. Slots observed: 0=OnGround, 1=Jumping, 2=InAir, 4=Flying, 5=Swimming, 6=Projectile. No Climbing state is constructed here.
 0x65B844: fld     dword ptr [esi+2Ch]
 0x65B847: fld     qword ptr ds:0A39088h
 0x65B84D: mov     eax, [esi+3Ch]
@@ -142,11 +142,11 @@
 0x65B924: mov     ecx, [esi+58h]
 0x65B927: mov     eax, [ecx]
 0x65B929: mov     edx, [eax+190h]
-0x65B92F: call    edx
+0x65B92F: call    edx; Process vfunc +0x190 receives the newly allocated bhkCharacterController smart pointer; this is where actor process stores the char proxy before 0x3E8 owner metadata is added.
 0x65B931: push    esi
 0x65B932: push    3E8h
 0x65B937: mov     ecx, edi
-0x65B939: call    sub_8910F0
+0x65B939: call    sub_8910F0; TES4 authoritative: actor controller setup stores this MobileObject under proxy metadata key 0x3E8. This key is not actor-proof by itself because other object setup paths also use it.
 0x65B93E: mov     eax, [esi]
 0x65B940: mov     edx, [eax+0ECh]
 0x65B946: mov     ecx, esi
@@ -162,7 +162,7 @@
 0x65B977: mov     ecx, [esi+58h]
 0x65B97A: mov     eax, [ecx]
 0x65B97C: mov     edx, [eax+36Ch]
-0x65B982: call    edx
+0x65B982: call    edx; TES4 authoritative: process GetSitSleepState (+0x36C) controls the proxy-side special flag setup; any nonzero sit/sleep state enters this path.
 0x65B984: test    eax, eax
 0x65B986: jz      short loc_65B9B3
 0x65B988: mov     eax, [esi]
@@ -173,10 +173,10 @@
 0x65B999: fstp    [esp+0F8h+var_F8]
 0x65B99C: call    edx
 0x65B99E: mov     ecx, esi; this
-0x65B9A0: call    MobileObject_GetCharProxy
+0x65B9A0: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x65B9A5: test    eax, eax
 0x65B9A7: jz      short loc_65B9B3
-0x65B9A9: or      dword ptr [eax+1F4h], 800h
+0x65B9A9: or      dword ptr [eax+1F4h], 800h; TES4 authoritative: sets proxy +0x1F4 bit 0x800 for sit/sleep special controller handling. This is not Actor_IsSwimming's process movement flag bit 0x800.
 0x65B9B3: lea     ecx, [esp+0F4h+var_D0]
 0x65B9B7: mov     [esp+0F4h+var_4], 0FFFFFFFFh
 0x65B9C2: call    sub_890F70
@@ -184,7 +184,7 @@
 0x65B9CD: test    ecx, ecx
 0x65B9CF: jz      short loc_65B9DA
 0x65B9D1: push    0
-0x65B9D3: call    sub_89F6B0
+0x65B9D3: call    sub_89F6B0; Looks up NiObject in proxy/collision metadata map, default key dword_B3FA80 when caller key is null, then NiRTTI_Cast to NiObject. Used by 0x8AFCE0 for root-collidable type 2 hits.
 0x65B9D8: jmp     short loc_65B9DC
 0x65B9DA: xor     eax, eax
 0x65B9DC: mov     edx, [esi+3Ch]
@@ -198,12 +198,12 @@
 0x65B9F3: push    edx
 0x65B9F4: call    sub_89F650
 0x65B9F9: mov     ecx, esi; this
-0x65B9FB: call    TESObjectREFR_GetParentCell
+0x65B9FB: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x65BA00: mov     edi, eax
 0x65BA02: test    edi, edi
 0x65BA04: jz      short loc_65BA38
 0x65BA06: mov     ecx, edi; this
-0x65BA08: call    TESObjectCELL_IsInterior
+0x65BA08: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x65BA0D: test    al, al
 0x65BA0F: jz      short loc_65BA1B
 0x65BA11: lea     ecx, [edi+28h]
@@ -226,7 +226,7 @@
 0x65BA45: push    1; a3
 0x65BA47: push    6; a2
 0x65BA49: push    eax; a1
-0x65BA4A: call    sub_88D070
+0x65BA4A: call    sub_88D070; ODismemberment: bhkBlendCollisionObject traversal entry. Requires bhkBlendCollisionObject or forced flag; queues callback off off_B2E314 with state payload including a2 and a3.
 0x65BA4F: add     esp, 10h
 0x65BA52: mov     edx, [esi]
 0x65BA54: mov     eax, [edx+178h]
@@ -245,3 +245,21 @@
 0x65BA80: mov     esp, ebp
 0x65BA82: pop     ebp
 0x65BA83: retn
+0x9C3C40: lea     ecx, [ebp+var_D0]
+0x9C3C46: jmp     sub_890F70
+0x9C3C4B: mov     eax, [ebp+a1]
+0x9C3C51: push    eax
+0x9C3C52: call    sub_6078C0
+0x9C3C57: pop     ecx
+0x9C3C58: retn
+0x9C3C59: mov     edx, [esp-4+arg_4]
+0x9C3C5D: lea     eax, [edx-0E4h]
+0x9C3C63: mov     ecx, [edx-0E8h]
+0x9C3C69: xor     ecx, eax
+0x9C3C6B: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C3C70: add     eax, 0Ch
+0x9C3C73: mov     ecx, [edx-8]
+0x9C3C76: xor     ecx, eax
+0x9C3C78: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C3C7D: mov     eax, offset stru_AEC790
+0x9C3C82: jmp     ___CxxFrameHandler3

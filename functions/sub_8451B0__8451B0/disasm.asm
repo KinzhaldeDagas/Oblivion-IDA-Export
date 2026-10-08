@@ -25,7 +25,7 @@
 0x8451F5: cmp     byte ptr ds:0B42CE3h, 0
 0x8451FC: fsub    dword ptr ds:0B3F92Ch
 0x845202: mov     eax, ds:0B43114h
-0x845207: mov     ecx, [esp+38h+arg_C]
+0x845207: mov     ecx, [esp+38h+value]; self
 0x84520B: fstp    [esp+38h+arg_0]
 0x84520F: fld     dword ptr [ebx+24h]
 0x845212: fsub    dword ptr ds:0B3F930h
@@ -44,7 +44,7 @@
 0x84524D: fld     dword ptr [ecx+0A4h]
 0x845253: fmul    dword ptr ds:0B464A4h
 0x845259: fstp    dword ptr ds:0B464A4h
-0x84525F: call    sub_7ED1A0
+0x84525F: call    BSShaderLightingProperty__GetFirstActiveNonShadowLight; MEF PERF 2026-10-07 PASS4: Performance negative result: this GetFirst call and8452A5 are mutually exclusive branches selected by B42CE3. They are not two sequential scans in one execution; no duplicate-call elimination proposed.
 0x845264: test    eax, eax
 0x845266: jz      short loc_845275
 0x845268: cmp     byte ptr [eax+0FCh], 0
@@ -58,7 +58,7 @@
 0x845298: mov     ds:0B464B0h, eax
 0x84529D: mov     ds:0B464B4h, ecx
 0x8452A3: jmp     short loc_8452F6
-0x8452A5: call    sub_7ED1A0
+0x8452A5: call    BSShaderLightingProperty__GetFirstActiveNonShadowLight; Begins Oblivion BSShaderLightingProperty non-shadow-light iteration. Skips lights with frustum-cull value 0xFF or a disabled backing NiLight flag and stores the next list cursor in the property.
 0x8452AA: test    eax, eax
 0x8452AC: jz      short loc_8452B7
 0x8452AE: cmp     byte ptr [eax+0FCh], 0
@@ -77,7 +77,7 @@
 0x8452E6: mov     edx, [esp+38h+var_10]
 0x8452EA: mov     ds:0B464B0h, ecx
 0x8452F0: mov     ds:0B464B4h, edx
-0x8452F6: mov     ecx, [esp+38h+arg_C]
+0x8452F6: mov     ecx, [esp+38h+value]
 0x8452FA: mov     eax, [edi+24h]
 0x8452FD: mov     ebp, [eax]
 0x8452FF: push    0
@@ -109,7 +109,7 @@
 0x84533F: add     eax, 4
 0x845342: push    eax; lpAddend
 0x845343: call    dword ptr ds:0A28078h
-0x845349: mov     eax, [esp+38h+arg_C]
+0x845349: mov     eax, [esp+38h+value]
 0x84534D: push    eax
 0x84534E: push    ebp
 0x84534F: mov     ecx, esi
@@ -143,20 +143,20 @@
 0x845396: call    dword ptr ds:0A28078h
 0x84539C: mov     ebx, 1
 0x8453A1: add     [edi+60h], ebx
-0x8453A4: mov     [esp+38h+arg_C], edi
+0x8453A4: mov     [esp+38h+value], edi
 0x8453A8: mov     ecx, [esi+38h]
-0x8453AB: lea     eax, [esp+38h+arg_C]
-0x8453AF: push    eax
-0x8453B0: push    ecx
-0x8453B1: lea     ecx, [esi+40h]
+0x8453AB: lea     eax, [esp+38h+value]
+0x8453AF: push    eax; value
+0x8453B0: push    ecx; index
+0x8453B1: lea     ecx, [esi+40h]; this
 0x8453B4: mov     [esp+40h+var_4], 0
-0x8453BC: call    sub_76CE40
+0x8453BC: call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.
 0x8453C1: or      eax, 0FFFFFFFFh
 0x8453C4: add     [edi+60h], eax
 0x8453C7: mov     [esp+38h+var_4], eax
 0x8453CB: jnz     short loc_8453D4
 0x8453CD: mov     ecx, edi
-0x8453CF: call    sub_7604D0
+0x8453CF: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x8453D4: add     [esi+38h], ebx
 0x8453D7: mov     ecx, [esp+38h+var_C]
 0x8453DB: mov     large fs:0, ecx
@@ -167,3 +167,12 @@
 0x8453E6: pop     ebx
 0x8453E7: add     esp, 24h
 0x8453EA: retn    10h
+0x9D3240: lea     ecx, [ebp+10h]; void *
+0x9D3243: jmp     sub_4027D0
+0x9D3248: mov     edx, [esp+arg_4]
+0x9D324C: lea     eax, [edx-28h]
+0x9D324F: mov     ecx, [edx-2Ch]
+0x9D3252: xor     ecx, eax
+0x9D3254: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D3259: mov     eax, offset stru_AFB68C
+0x9D325E: jmp     ___CxxFrameHandler3

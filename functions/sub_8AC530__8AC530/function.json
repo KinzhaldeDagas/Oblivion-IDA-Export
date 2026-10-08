@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x8AC530",
+      "0x8AC63D"
+    ]
+  ],
+  "chunks_sha256": "b6ef4213cb26285a46f16889b38a018c9458510b276fbf382e3da5cddaaefd85",
+  "comment_regular": "TES4 authoritative: after a new cast hit, computes remaining time/move fraction from the first collector hit and blends the cast endpoint toward the hit point.",
+  "comment_repeatable": "TES4 authoritative: after a new cast hit, computes remaining time/move fraction from the first collector hit and blends the cast endpoint toward the hit point.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_8AC530",
+  "display_name": "hkpCharacterProxy_ComputeCastMoveFraction",
   "end_ea": "0x8AC63D",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "sub_8AC530",
+  "name": "hkpCharacterProxy_ComputeCastMoveFraction",
   "segment": ".text",
   "sha256": "b6ef4213cb26285a46f16889b38a018c9458510b276fbf382e3da5cddaaefd85",
   "size": 269,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x8AC530",
-  "type": "double __thiscall(float *this, __m128 *, int, __m128 *, __m128 *)",
+  "total_chunk_size": 269,
+  "type": "double __thiscall(float *this, __m128 *moveVec, int collector, __m128 *targetPos, __m128 *currentPos)",
   "xrefs_from_count": 79,
   "xrefs_to_count": 1
 }

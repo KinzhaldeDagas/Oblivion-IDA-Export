@@ -29,7 +29,7 @@
 0x497872: push    1; a3
 0x497874: push    1; a2
 0x497876: push    esi; a1
-0x497877: call    sub_88D070
+0x497877: call    sub_88D070; ODismemberment: bhkBlendCollisionObject traversal entry. Requires bhkBlendCollisionObject or forced flag; queues callback off off_B2E314 with state payload including a2 and a3.
 0x49787C: add     esp, 10h
 0x49787F: pop     esi
 0x497880: movzx   ecx, byte ptr [edi]

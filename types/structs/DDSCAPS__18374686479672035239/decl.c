@@ -1,1 +1,1 @@
-DDSCAPS
+typedef _DDSCAPS DDSCAPS;

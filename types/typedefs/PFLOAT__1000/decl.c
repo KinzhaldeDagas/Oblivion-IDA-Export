@@ -1,1 +1,1 @@
-PFLOAT
+typedef float *PFLOAT;

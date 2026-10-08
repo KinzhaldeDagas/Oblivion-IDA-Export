@@ -1,6 +1,7 @@
-_BYTE *__thiscall sub_68B0C0(_BYTE *this)
+// Verified TravelPathNode_Init sets payload +0 to null and kind +4 to 0xFF (uninitialized sentinel); the three bytes at +5..+7 are not written.
+TravelPathNode *__thiscall TravelPathNode_Init(TravelPathNode *this)
 {
-  *(_DWORD *)this = 0;
-  *(this + 4) = 0xFF;
-  return this;
+  this->payload = 0; /*0x68b0c2*/
+  this->type = 0xFF; /*0x68b0c8*/
+  return this; /*0x68b0cc*/
 }

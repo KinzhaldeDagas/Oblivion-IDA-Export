@@ -22,7 +22,7 @@
 0x8B9083: add     eax, 10h
 0x8B9086: push    eax
 0x8B9087: lea     ecx, [esp+38h+var_20]
-0x8B908B: call    sub_88FE00
+0x8B908B: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x8B9090: movaps  xmm0, xmmword ptr [edi]
 0x8B9093: movaps  xmm1, [esp+30h+var_20]
 0x8B9098: subps   xmm0, xmm1

@@ -13,7 +13,7 @@
 0x890677: mov     ecx, [ebx+8]
 0x89067A: test    ecx, ecx
 0x89067C: jz      short loc_8906E6
-0x89067E: call    sub_8AC0C0
+0x89067E: call    bhkCollisionWrapper_GetHavokObject; bhk collision wrapper accessor: returns stored low-level Havok object pointer at wrapper+0x30.
 0x890683: mov     esi, eax
 0x890685: test    esi, esi
 0x890687: jz      short loc_8906E6
@@ -29,7 +29,7 @@
 0x89069E: test    ecx, ecx
 0x8906A0: mov     edi, [esi+8]
 0x8906A3: jz      short loc_8906AA
-0x8906A5: call    sub_8AC070
+0x8906A5: call    bhkCollisionWrapper_GetPositionPtr; Returns low-level Havok object position pointer: *(wrapper+0x30 + 0x1C) + 0x30.
 0x8906AA: test    edi, edi
 0x8906AC: jz      short loc_8906B6
 0x8906AE: push    esi

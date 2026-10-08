@@ -1,19 +1,36 @@
 {
-  "callees_count": 5,
-  "callers_count": 8,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 9,
+  "chunks": [
+    [
+      "0x6C3A40",
+      "0x6C3AB5"
+    ],
+    [
+      "0x9C7230",
+      "0x9C7253"
+    ]
+  ],
+  "chunks_sha256": "705a2ac258bee1ba80138eca80fad348da394e166dc095fd3929128b05269c17",
+  "comment_regular": "Shared single-interpolator-controller destructor body used by this controller family: releases refcounted interpolator smart pointer +0x3C, deleting at zero references, then destroys the time-controller base. Existing RTTI name reflects another identical controller specialization.",
+  "comment_repeatable": "Shared single-interpolator-controller destructor body used by this controller family: releases refcounted interpolator smart pointer +0x3C, deleting at zero references, then destroys the time-controller base. Existing RTTI name reflects another identical controller specialization.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
   "display_name": "NiPoint3InterpController::~NiPoint3InterpController(void)",
   "end_ea": "0x6C3AB5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??1NiPoint3InterpController@@UAE@XZ",
   "segment": ".text",
   "sha256": "dae7779608dbcfec799e6682ca4db3a824168dd23d8ad56dda5d54dd25275574",
   "size": 117,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6C3A40",
+  "total_chunk_size": 152,
   "type": "void __thiscall(NiPoint3InterpController *this)",
-  "xrefs_from_count": 44,
+  "xrefs_from_count": 55,
   "xrefs_to_count": 9
 }

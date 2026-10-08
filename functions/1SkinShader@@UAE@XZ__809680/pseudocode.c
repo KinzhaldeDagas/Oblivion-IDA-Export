@@ -4,64 +4,64 @@ void __thiscall SkinShader::~SkinShader(BSShader *this)
   int v3; // ebx
   BSShaderVtbl *vftable; // esi
   char *v5; // ebp
-  int *v6; // edi
+  char *v6; // edi
   int v7; // ebx
   int v8; // esi
   NiD3DPass **v9; // esi
   NiD3DPass *v10; // ecx
 
-  this->__vftable = (BSShaderVtbl *)&SkinShader::`vftable';
-  v2 = (BSShader *)((char *)this + 0x9C);
-  v3 = 0x14;
-  do
+  this->__vftable = (BSShaderVtbl *)&SkinShader::`vftable'; /*0x8096ab*/
+  v2 = (BSShader *)((char *)this + 0x9C); /*0x8096ba*/
+  v3 = 0x14; /*0x8096c0*/
+  do /*0x8096f3*/
   {
-    vftable = v2->__vftable;
-    if ( v2->__vftable )
+    vftable = v2->__vftable; /*0x8096c5*/
+    if ( v2->__vftable ) /*0x8096c5*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)&vftable->super.super.super.GetType) )
+      if ( !InterlockedDecrement((volatile LONG *)&vftable->super.super.super.GetType) ) /*0x8096cf*/
       {
-        if ( vftable )
-          (*(void (__thiscall **)(BSShaderVtbl *, int))vftable->super.super.super.super.Destructor)(vftable, 1);
+        if ( vftable ) /*0x8096db*/
+          (*(void (__thiscall **)(BSShaderVtbl *, int))vftable->super.super.super.super.Destructor)(vftable, 1); /*0x8096e5*/
       }
-      v2->__vftable = 0;
+      v2->__vftable = 0; /*0x8096e7*/
     }
-    v2 = (BSShader *)((char *)v2 + 4);
-    --v3;
+    v2 = (BSShader *)((char *)v2 + 4); /*0x8096ed*/
+    --v3; /*0x8096f0*/
   }
-  while ( v3 );
-  v5 = (char *)this + 0xEC;
-  v6 = (int *)v5;
-  v7 = 0xA;
-  do
+  while ( v3 ); /*0x8096f3*/
+  v5 = (char *)this + 0xEC; /*0x8096f5*/
+  v6 = v5; /*0x8096fb*/
+  v7 = 0xA; /*0x8096fd*/
+  do /*0x809730*/
   {
-    v8 = *v6;
-    if ( *v6 )
+    v8 = *(_DWORD *)v6; /*0x809702*/
+    if ( *(_DWORD *)v6 ) /*0x809702*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)(v8 + 4)) )
+      if ( !InterlockedDecrement((volatile LONG *)(v8 + 4)) ) /*0x80970c*/
       {
-        if ( v8 )
-          (**(void (__thiscall ***)(int, int))v8)(v8, 1);
+        if ( v8 ) /*0x809718*/
+          (**(void (__thiscall ***)(int, int))v8)(v8, 1); /*0x809722*/
       }
-      *v6 = 0;
+      *(_DWORD *)v6 = 0; /*0x809724*/
     }
-    ++v6;
-    --v7;
+    v6 += 4; /*0x80972a*/
+    --v7; /*0x80972d*/
   }
-  while ( v7 );
-  v9 = (NiD3DPass **)dword_B47718;
-  do
+  while ( v7 ); /*0x809730*/
+  v9 = (NiD3DPass **)unk_B47718; /*0x809732*/
+  do /*0x80975f*/
   {
-    v10 = *v9;
-    if ( *v9 )
+    v10 = *v9; /*0x809740*/
+    if ( *v9 ) /*0x809740*/
     {
-      if ( v10->RefCount-- == 1 )
-        sub_7604D0(v10);
-      *v9 = 0;
+      if ( v10->RefCount-- == 1 ) /*0x809746*/
+        NiD3DPass_ReleaseToPool(v10); /*0x80974b*/
+      *v9 = 0; /*0x809750*/
     }
-    ++v9;
+    ++v9; /*0x809756*/
   }
-  while ( (int)v9 < (int)&unk_B47768 );
-  _LN21(v5, 4u, 0xA, (void (__thiscall *)(void *))sub_7016A0);
-  _LN21((char *)this + 0x9C, 4u, 0x14, (void (__thiscall *)(void *))sub_7016A0);
-  ShadowLightShader::~ShadowLightShader(this);
+  while ( (int)v9 < (int)&stru_B47768 ); /*0x80975f*/
+  _LN21(v5, 4u, 0xA, (void (__thiscall *)(void *))NiPointerSlot_Release); /*0x809770*/
+  _LN21((char *)this + 0x9C, 4u, 0x14, (void (__thiscall *)(void *))NiPointerSlot_Release); /*0x80978d*/
+  ShadowLightShader::~ShadowLightShader(this); /*0x80979a*/
 }

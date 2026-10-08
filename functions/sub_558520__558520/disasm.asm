@@ -25,8 +25,8 @@
 0x558555: test    eax, eax
 0x558557: jz      short loc_55852A
 0x558559: mov     edx, [edx]
-0x55855B: push    edx; Src
-0x55855C: call    sub_557C80
+0x55855B: push    edx; path
+0x55855C: call    BSFaceGenEgtData_CreateFromFile; Allocate and construct a BSFaceGen EGT data object from the named asset.
 0x558561: mov     ecx, [edi+0Ch]
 0x558564: add     esp, 4
 0x558567: mov     [ecx+8], eax

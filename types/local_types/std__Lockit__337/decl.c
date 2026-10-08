@@ -1,1 +1,1 @@
-std::_Lockit
+struct std::_Lockit;

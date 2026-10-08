@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x769960",
-    "line": "push    ecx",
+    "line": "push    ecx; MoonSugarEffect decode: batch/prepack geometry entry builder. Chooses/caches shader interface, runs skinning gate, registers geometry with dynamic/unshared geometry group, then appends 0x10 queue nodes {NiGeometry*, skinPartitionOr0, BuffDataOrPartitionBuffer, next} using dword_B42164 free list and renderer head/tail fields. Not an isolated object-mask draw API.",
     "mnemonic": "push",
     "size": 1
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x76998D",
-    "line": "push    offset NiD3DShaderInterfaceString",
+    "line": "push    0B42858h",
     "mnemonic": "push",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x7699D2",
-    "line": "call    sub_768890",
+    "line": "call    sub_768890; MoonSugarEffect decode: hardware/software skinning gate. Considers BuffData, skinData, hardware partition data, renderer flags, mixed vertex processing, and shader interface capability before choosing skinned path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x769A1D",
-    "line": "call    NiGeometryGroup__AddGeometryDataToGroup",
+    "line": "call    NiGeometryGroup__AddGeometryDataToGroup; MoonSugarEffect decode: NiGeometryGroup::AddGeometryDataToGroup. For hardware-skinned geometry, adds each partition object when the partition is compatible; for non-skinned geometry it only calls AddObject when BuffData is missing. Existing BuffData returns false, so this is packing/registration ownership rather than draw ownership.",
     "mnemonic": "call",
     "size": 5
   },

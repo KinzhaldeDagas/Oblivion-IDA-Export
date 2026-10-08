@@ -1,1 +1,1 @@
-HICON
+typedef HICON__ *HICON;

@@ -1,4 +1,4 @@
-0x802760: push    0FFFFFFFFh
+0x802760: push    0FFFFFFFFh; MoonSugarEffect decode: BSImageSpaceShader dtor releases source BSRenderedTexture at +0x7C, clears +0x80..+0x8C, then calls BSShader dtor.
 0x802762: push    offset ??1BSImageSpaceShader@@UAE@XZ_SEH
 0x802767: mov     eax, large fs:0
 0x80276D: push    eax
@@ -55,7 +55,7 @@
 0x8027FF: call    eax
 0x802801: mov     ecx, esi; this
 0x802803: mov     [esp+20h+var_4], 0FFFFFFFFh
-0x80280B: call    ??1BSShader@@UAE@XZ; BSShader::~BSShader(void)
+0x80280B: call    ??1BSShader@@UAE@XZ;
 0x802810: mov     ecx, [esp+20h+var_C]
 0x802814: mov     large fs:0, ecx
 0x80281B: pop     ecx
@@ -64,3 +64,15 @@
 0x80281E: pop     ebp
 0x80281F: add     esp, 10h
 0x802822: retn
+0x9D07E0: mov     ecx, [ebp-10h]; this
+0x9D07E3: jmp     ??1BSShader@@UAE@XZ;
+0x9D07E8: mov     ecx, [ebp-10h]
+0x9D07EB: add     ecx, 7Ch ; '|'; slot
+0x9D07EE: jmp     NiPointerSlot_Release
+0x9D07F3: mov     edx, [esp+arg_4]
+0x9D07F7: lea     eax, [edx-10h]
+0x9D07FA: mov     ecx, [edx-14h]
+0x9D07FD: xor     ecx, eax
+0x9D07FF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D0804: mov     eax, offset stru_AF90FC
+0x9D0809: jmp     ___CxxFrameHandler3

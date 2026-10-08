@@ -154,7 +154,7 @@
 0x8827AF: call    eax
 0x8827B1: mov     ecx, esi; this
 0x8827B3: mov     [esp+24h+var_4], 0FFFFFFFFh
-0x8827BB: call    ??1BSShaderPPLightingProperty@@UAE@XZ; BSShaderPPLightingProperty::~BSShaderPPLightingProperty(void)
+0x8827BB: call    ??1BSShaderPPLightingProperty@@UAE@XZ; Verified (Oblivion): BSShaderPPLightingProperty destructor releases and clears the reference-counted pointer at this+0xE0 (DWORD index 0x38), matching TextureEffectProperty_SetData and the viewer's "spTexEffectData" label. Fallout's CopyToMembers copies a NiPointer<BSShaderPPLightingProperty::TextureEffectData> at +0xE0; equivalent Oblivion clone retention is Probable but its mirror has not yet been located.
 0x8827C0: mov     ecx, dword ptr [esp+24h+var_C]
 0x8827C4: mov     large fs:0, ecx
 0x8827CB: pop     ecx
@@ -164,3 +164,24 @@
 0x8827CF: pop     ebx
 0x8827D0: add     esp, 10h
 0x8827D3: retn
+0x9D5760: mov     ecx, [ebp-10h]; this
+0x9D5763: jmp     ??1BSShaderPPLightingProperty@@UAE@XZ; Verified (Oblivion): BSShaderPPLightingProperty destructor releases and clears the reference-counted pointer at this+0xE0 (DWORD index 0x38), matching TextureEffectProperty_SetData and the viewer's "spTexEffectData" label. Fallout's CopyToMembers copies a NiPointer<BSShaderPPLightingProperty::TextureEffectData> at +0xE0; equivalent Oblivion clone retention is Probable but its mirror has not yet been located.
+0x9D5768: mov     ecx, [ebp-10h]
+0x9D576B: add     ecx, 0F0h ; 'ð'; slot
+0x9D5771: jmp     NiPointerSlot_Release
+0x9D5776: mov     ecx, [ebp-10h]
+0x9D5779: add     ecx, 0F4h ; 'ô'; slot
+0x9D577F: jmp     NiPointerSlot_Release
+0x9D5784: mov     ecx, [ebp-10h]
+0x9D5787: add     ecx, 168h; slot
+0x9D578D: jmp     NiPointerSlot_Release
+0x9D5792: mov     ecx, [ebp-10h]
+0x9D5795: add     ecx, 16Ch; slot
+0x9D579B: jmp     NiPointerSlot_Release
+0x9D57A0: mov     edx, [esp+arg_4]
+0x9D57A4: lea     eax, [edx-14h]
+0x9D57A7: mov     ecx, [edx-18h]
+0x9D57AA: xor     ecx, eax
+0x9D57AC: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D57B1: mov     eax, offset stru_AFD7AC
+0x9D57B6: jmp     ___CxxFrameHandler3

@@ -10,7 +10,7 @@
 0x76DC62: mov     dword ptr [esi+0Ch], 0
 0x76DC69: mov     eax, [esi+10h]
 0x76DC6C: push    eax
-0x76DC6D: call    FormHeapFree
+0x76DC6D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x76DC72: mov     eax, [esi+4Ch]
 0x76DC75: add     esp, 4
 0x76DC78: test    eax, eax

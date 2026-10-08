@@ -1,18 +1,31 @@
 {
-  "callees_count": 9,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x49F5F0",
+      "0x49F6B2"
+    ]
+  ],
+  "chunks_sha256": "f1e4a58126e5c5749855b584bca2978f6301e68a09ba776620b619d8bab41bc1",
+  "comment_regular": "Restores BSAnimGroupSequence timing/state, rebases local time against load clock, resets +0x4C/+0x50 sentinels, and resamples native active states 1..3.",
+  "comment_repeatable": "Restores BSAnimGroupSequence timing/state, rebases local time against load clock, resets +0x4C/+0x50 sentinels, and resamples native active states 1..3.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_49F5F0",
+  "display_name": "BSAnimGroupSequence_LoadState",
   "end_ea": "0x49F6B2",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_49F5F0",
+  "name": "BSAnimGroupSequence_LoadState",
   "segment": ".text",
   "sha256": "f1e4a58126e5c5749855b584bca2978f6301e68a09ba776620b619d8bab41bc1",
   "size": 194,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x49F5F0",
+  "total_chunk_size": 194,
   "type": "void __thiscall(float *this, float)",
   "xrefs_from_count": 71,
   "xrefs_to_count": 4

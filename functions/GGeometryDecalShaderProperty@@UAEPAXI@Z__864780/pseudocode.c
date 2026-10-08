@@ -1,10 +1,10 @@
-GeometryDecalShaderProperty *__thiscall GeometryDecalShaderProperty::`scalar deleting destructor'(
-        GeometryDecalShaderProperty *this,
+BSShaderLightingPropertyLayout_t *__thiscall GeometryDecalShaderProperty::`scalar deleting destructor'(
+        BSShaderLightingPropertyLayout_t *this,
         char a2)
 {
-  *(_DWORD *)this = &GeometryDecalShaderProperty::`vftable';
-  BSShaderLightingProperty::~BSShaderLightingProperty(this);
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  this->base.vtbl = &GeometryDecalShaderProperty::`vftable'; /*0x864783*/
+  BSShaderLightingProperty::~BSShaderLightingProperty(this); /*0x864789*/
+  if ( (a2 & 1) != 0 ) /*0x864793*/
+    FormHeapFree((unsigned int)this); /*0x864796*/
+  return this; /*0x8647a0*/
 }

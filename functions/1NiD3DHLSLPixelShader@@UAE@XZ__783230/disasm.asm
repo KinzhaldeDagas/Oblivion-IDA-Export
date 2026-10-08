@@ -3,10 +3,10 @@
 0x783233: mov     eax, [esi+2Ch]
 0x783236: push    eax
 0x783237: mov     dword ptr [esi], offset ??_7NiD3DHLSLPixelShader@@6B@; const NiD3DHLSLPixelShader::`vftable'
-0x78323D: call    FormHeapFree
+0x78323D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x783242: mov     ecx, [esi+30h]
 0x783245: push    ecx
-0x783246: call    FormHeapFree
+0x783246: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x78324B: mov     eax, [esi+34h]
 0x78324E: add     esp, 8
 0x783251: test    eax, eax

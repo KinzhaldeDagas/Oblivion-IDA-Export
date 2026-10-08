@@ -1,97 +1,105 @@
-char __thiscall sub_772CD0(_DWORD *this, int a2, int a3, unsigned __int8 a4)
+// Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
+// DX11 refresh verification: updates existing state value in place; when save-list category differs, removes/reinserts at opposite list head. Never append a refreshed bias write blindly after the captured program: preserve existing unique non-saving node position or reject ambiguous ordering.
+// DX11 state-group audit 2026-10-01: existing entry updates value in place; a save-category change unlinks and inserts the same node at the destination head. Removal helpers clear links, including when destination is empty. Absent ID consumes entry pool B427AC (growing via772A80 if empty); group/node allocation is a separate lifecycle requirement. Ordinary168/175/195 all request no-save, so only first updates can alter links; later calls only change values. Under exclusive observer/writer ownership, final metadata can coalesce to last accepted bias values while per-draw DX11 programs keep each occurrence value.
+// DX11 pool audit 2026-10-01: missing entries use the same first/last pool pop from B427AC, then overwrite all16 bytes of node state/value/next/previous before linking at list head. Old free-node links may be stale and must not be traversed. Available-stock adoption can be modeled as guarded CPU stores only under exclusive pool writer/observer ownership; growth remains separate.
+char __thiscall NiD3DRenderStateGroup_SetRenderState(
+        OblivionRenderStateGroupPrefix *this,
+        unsigned int state,
+        unsigned int a3,
+        unsigned __int8 a4)
 {
-  _DWORD *v5; // edi
-  _DWORD *v6; // eax
+  OblivionRenderStateEntry *RenderStateEntry; // edi
+  OblivionRenderStateEntry *NoSaveHead08; // eax
   bool v7; // zf
   unsigned int *v8; // ecx
-  _DWORD *v9; // edi
-  _DWORD **v10; // ebp
+  unsigned int *p_FreeCount08; // edi
+  OblivionRenderStatePoolPrefix *v10; // ebp
   _DWORD *v11; // ebx
-  _DWORD *v12; // ecx
-  int v13; // ecx
-  int v14; // ecx
-  char v16; // [esp+Fh] [ebp-1h] BYREF
+  void **FreeObjects00; // ecx
+  OblivionRenderStateEntry *SavedHead10; // ecx
+  OblivionRenderStateEntry *v14; // ecx
+  unsigned __int8 savePrevious; // [esp+Fh] [ebp-1h] BYREF
 
-  v16 = 0;
-  v5 = sub_7727D0(this, a2, &v16);
-  if ( v5 )
+  savePrevious = 0; /*0x772ce2*/
+  RenderStateEntry = NiD3DRenderStateGroup_FindRenderStateEntry(this, state, &savePrevious); /*0x772cec*/
+  if ( RenderStateEntry ) /*0x772cf2*/
   {
-    LOBYTE(v6) = v16;
-    v7 = v16 == (char)a4;
-    v5[1] = a3;
-    if ( !v7 )
+    LOBYTE(NoSaveHead08) = savePrevious; /*0x772cf4*/
+    v7 = savePrevious == a4; /*0x772cf8*/
+    RenderStateEntry->Value04 = a3; /*0x772d00*/
+    if ( !v7 ) /*0x772d03*/
     {
-      if ( (_BYTE)v6 )
+      if ( (_BYTE)NoSaveHead08 ) /*0x772d0e*/
       {
-        sub_772790(this, (int)v5);
-        v6 = (_DWORD *)*(this + 2);
-        if ( v6 )
+        NiD3DRenderStateGroup_RemoveSavedEntry(this, RenderStateEntry); /*0x772d10*/
+        NoSaveHead08 = this->NoSaveHead08; /*0x772d15*/
+        if ( NoSaveHead08 ) /*0x772d1a*/
         {
-          v6[3] = v5;
-          v6 = (_DWORD *)*(this + 2);
-          v5[2] = v6;
+          NoSaveHead08->Previous0C = RenderStateEntry; /*0x772d1c*/
+          NoSaveHead08 = this->NoSaveHead08; /*0x772d1f*/
+          RenderStateEntry->Next08 = NoSaveHead08; /*0x772d22*/
         }
-        v5[3] = 0;
-        ++*(this + 1);
-        *(this + 2) = v5;
+        RenderStateEntry->Previous0C = 0; /*0x772d25*/
+        ++this->NoSaveCount04; /*0x772d28*/
+        this->NoSaveHead08 = RenderStateEntry; /*0x772d2c*/
       }
       else
       {
-        sub_772750(this, (int)v5);
-        v6 = (_DWORD *)*(this + 4);
-        if ( v6 )
+        NiD3DRenderStateGroup_RemoveNoSaveEntry(this, RenderStateEntry); /*0x772d36*/
+        NoSaveHead08 = this->SavedHead10; /*0x772d3b*/
+        if ( NoSaveHead08 ) /*0x772d40*/
         {
-          v6[3] = v5;
-          v5[2] = *(this + 4);
+          NoSaveHead08->Previous0C = RenderStateEntry; /*0x772d42*/
+          RenderStateEntry->Next08 = this->SavedHead10; /*0x772d48*/
         }
-        v5[3] = 0;
-        ++*(this + 3);
-        *(this + 4) = v5;
+        RenderStateEntry->Previous0C = 0; /*0x772d4b*/
+        ++this->SavedCount0C; /*0x772d4e*/
+        this->SavedHead10 = RenderStateEntry; /*0x772d52*/
       }
     }
   }
   else
   {
-    v8 = (unsigned int *)dword_B427AC;
-    v9 = (_DWORD *)(dword_B427AC + 8);
-    v10 = (_DWORD **)dword_B427AC;
-    if ( !*v9 )
+    v8 = (unsigned int *)NiD3DRenderStateGroup_EntryPool; /*0x772d5c*/
+    p_FreeCount08 = &NiD3DRenderStateGroup_EntryPool->FreeCount08; /*0x772d65*/
+    v10 = NiD3DRenderStateGroup_EntryPool; /*0x772d69*/
+    if ( !*p_FreeCount08 ) /*0x772d62*/
     {
-      v11 = v8 + 3;
-      sub_772A80(v8, v8[3]);
-      *v11 *= 2;
+      v11 = v8 + 3; /*0x772d70*/
+      sub_772A80(v8, v8[3]); /*0x772d74*/
+      *v11 *= 2; /*0x772d7d*/
     }
-    v12 = *v10;
-    v6 = (_DWORD *)**v10;
-    *v12 = v12[--*v9];
-    v6[2] = 0;
-    v6[3] = 0;
-    *v6 = a2;
-    v6[1] = a3;
-    if ( a4 )
+    FreeObjects00 = v10->FreeObjects00; /*0x772d81*/
+    NoSaveHead08 = (OblivionRenderStateEntry *)*v10->FreeObjects00; /*0x772d84*/
+    *FreeObjects00 = FreeObjects00[--*p_FreeCount08]; /*0x772d93*/
+    NoSaveHead08->Next08 = 0; /*0x772d9d*/
+    NoSaveHead08->Previous0C = 0; /*0x772da0*/
+    NoSaveHead08->State00 = state; /*0x772da3*/
+    NoSaveHead08->Value04 = a3; /*0x772da5*/
+    if ( a4 ) /*0x772da9*/
     {
-      v13 = *(this + 4);
-      if ( v13 )
+      SavedHead10 = this->SavedHead10; /*0x772dab*/
+      if ( SavedHead10 ) /*0x772db0*/
       {
-        *(_DWORD *)(v13 + 0xC) = v6;
-        v6[2] = *(this + 4);
+        SavedHead10->Previous0C = NoSaveHead08; /*0x772db2*/
+        NoSaveHead08->Next08 = this->SavedHead10; /*0x772db8*/
       }
-      v6[3] = 0;
-      ++*(this + 3);
-      *(this + 4) = v6;
+      NoSaveHead08->Previous0C = 0; /*0x772dbb*/
+      ++this->SavedCount0C; /*0x772dbe*/
+      this->SavedHead10 = NoSaveHead08; /*0x772dc3*/
     }
     else
     {
-      v14 = *(this + 2);
-      if ( v14 )
+      v14 = this->NoSaveHead08; /*0x772dcc*/
+      if ( v14 ) /*0x772dd1*/
       {
-        *(_DWORD *)(v14 + 0xC) = v6;
-        v6[2] = *(this + 2);
+        v14->Previous0C = NoSaveHead08; /*0x772dd3*/
+        NoSaveHead08->Next08 = this->NoSaveHead08; /*0x772dd9*/
       }
-      v6[3] = 0;
-      ++*(this + 1);
-      *(this + 2) = v6;
+      NoSaveHead08->Previous0C = 0; /*0x772ddc*/
+      ++this->NoSaveCount04; /*0x772ddf*/
+      this->NoSaveHead08 = NoSaveHead08; /*0x772de3*/
     }
   }
-  return (char)v6;
+  return (char)NoSaveHead08; /*0x772d2f*/
 }

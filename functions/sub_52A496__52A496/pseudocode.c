@@ -1,13 +1,10 @@
-int __userpurge sub_52A496@<eax>(int a1@<ebx>, _DWORD *a2@<ebp>, int a3)
+void __userpurge sub_52A496(char *a1@<ebx>, char **a2@<ebp>, int a3@<esi>, int a4)
 {
-  int v3; // eax
+  char *v4; // eax
 
-  v3 = *a2;
-  if ( *a2 == a1 )
-    return sub_52A4D6(a3);
-  *(_BYTE *)(v3 + 1) = a1;
-  if ( v3 + 4 == a1 )
-    return sub_52A4D6(a3);
+  v4 = *a2; /*0x52a496*/
+  if ( *a2 == a1 || (v4[1] = (char)a1, v4 + 4 == a1) ) /*0x52a4a5*/
+    sub_52A4D6((int)a1, (int)a2, a3, a4); /*0x52a49b*/
   else
-    return sub_52A4A7(a1, (int *)(v3 + 4), a3);
+    sub_52A4A7(a1, (_DWORD *)v4 + 1, a4); /*0x52a4a6*/
 }

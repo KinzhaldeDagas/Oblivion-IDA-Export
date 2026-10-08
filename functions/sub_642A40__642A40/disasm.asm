@@ -3,7 +3,7 @@
 0x642A45: push    esi
 0x642A46: push    ebx
 0x642A47: mov     esi, ecx
-0x642A49: call    sub_4392E0
+0x642A49: call    QueuedTreeModel_ReleaseBuildResources
 0x642A4E: test    bl, bl
 0x642A50: jnz     short loc_642A65
 0x642A52: mov     ecx, [esi+30h]

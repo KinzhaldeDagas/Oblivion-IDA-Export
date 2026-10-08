@@ -1,14 +1,20 @@
-_DWORD *__thiscall sub_796890(int *this)
+// OBLIVION AUTHORITY (2026-08-30): clear() for vector<vector<unsigned short*>>, implemented as checked erase(begin,end) while retaining outer capacity.
+void __thiscall OB_stVector_stVectorUShortPtr_Clear_010201A0(OB_stVector_stVectorUShortPtr_010201A0 *this)
 {
-  unsigned int v2; // ebx
-  unsigned int v3; // edi
-  int v5; // [esp+Ch] [ebp-8h] BYREF
+  int v1; // edi
+  OB_stVectorUShortPtr_010201A0 *end; // ebx
+  OB_stVectorUShortPtr_010201A0 *begin; // edi
+  OB_stVector_stVectorUShortPtrIterator_010201A0 result; // [esp+Ch] [ebp-8h] BYREF
 
-  v2 = *(this + 2);
-  if ( *(this + 1) > v2 )
-    _invalid_parameter_noinfo();
-  v3 = *(this + 1);
-  if ( v3 > *(this + 2) )
-    _invalid_parameter_noinfo();
-  return sub_796790(this, &v5, (int)this, v3, (int)this, v2);
+  end = this->end; /*0x796897*/
+  if ( this->begin > end ) /*0x79689e*/
+    _invalid_parameter_noinfo((int)end, v1, (int)this); /*0x7968a0*/
+  begin = this->begin; /*0x7968a5*/
+  if ( begin > this->end ) /*0x7968ab*/
+    _invalid_parameter_noinfo((int)end, (int)begin, (int)this); /*0x7968ad*/
+  OB_stVector_stVectorUShortPtr_EraseRange_010201A0( /*0x7968bd*/
+    this,
+    &result,
+    (OB_stVector_stVectorUShortPtrIterator_010201A0)__PAIR64__((unsigned int)begin, (unsigned int)this),
+    (OB_stVector_stVectorUShortPtrIterator_010201A0)__PAIR64__((unsigned int)end, (unsigned int)this));
 }

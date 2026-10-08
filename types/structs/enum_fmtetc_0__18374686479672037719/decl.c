@@ -1,1 +1,1 @@
-enum_fmtetc_0
+typedef enum_fmtetc enum_fmtetc_0;

@@ -245,7 +245,6 @@
 0x7664C1: mov     [esp+arg_C], eax
 0x7664C5: or      ebx, 0FFFFFFFFh
 0x7664C8: jmp     short loc_7664D0
-0x7664CA: align 10h
 0x7664D0: mov     ecx, [esp+arg_28]
 0x7664D4: fld     dword ptr [ecx]
 0x7664D6: mov     edx, [esp+arg_24]
@@ -388,7 +387,7 @@
 0x76669C: mov     ecx, [ebx+8]
 0x76669F: push    ecx
 0x7666A0: mov     ecx, [ebp+8B0h]
-0x7666A6: call    sub_776D80
+0x7666A6: call    sub_776D80; MoonSugarEffect decode: vertex-buffer-manager unlock/staging helper. Copies the staging buffer back to the locked D3D buffer, clears lock bookkeeping, leaves the critical section, then calls the vertex buffer Unlock vtable slot.
 0x7666AB: mov     esi, [esp+arg_E8]
 0x7666B2: mov     ecx, [ebp+0A94h]
 0x7666B8: mov     edx, [ecx]
@@ -453,7 +452,6 @@
 0x76675F: test    edi, edi
 0x766761: jz      loc_76683F
 0x766767: jmp     short loc_766770
-0x766769: align 10h
 0x766770: mov     ecx, [ebp+0A94h]
 0x766776: mov     edx, [ecx]
 0x766778: mov     edx, [edx+30h]

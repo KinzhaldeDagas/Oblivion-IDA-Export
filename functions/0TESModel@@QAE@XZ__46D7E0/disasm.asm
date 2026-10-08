@@ -20,7 +20,7 @@
 0x46D81B: mov     [esi+14h], ebx
 0x46D81E: mov     eax, [esi+4]
 0x46D821: push    eax
-0x46D822: call    FormHeapFree
+0x46D822: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x46D827: fldz
 0x46D829: mov     [esi+4], ebx
 0x46D82C: mov     [esi+0Ah], bx
@@ -35,3 +35,16 @@
 0x46D849: pop     ebx
 0x46D84A: add     esp, 10h
 0x46D84D: retn
+0x9AEB20: mov     ecx, [ebp-10h]
+0x9AEB23: add     ecx, 4; void *
+0x9AEB26: jmp     BSStringT_Clear
+0x9AEB2B: mov     ecx, [ebp-10h]
+0x9AEB2E: add     ecx, 10h
+0x9AEB31: jmp     sub_46D480
+0x9AEB36: mov     edx, [esp+arg_4]
+0x9AEB3A: lea     eax, [edx-0Ch]
+0x9AEB3D: mov     ecx, [edx-10h]
+0x9AEB40: xor     ecx, eax
+0x9AEB42: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AEB47: mov     eax, offset stru_ADB240
+0x9AEB4C: jmp     ___CxxFrameHandler3

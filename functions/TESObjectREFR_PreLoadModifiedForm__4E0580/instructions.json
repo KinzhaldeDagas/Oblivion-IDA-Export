@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x4E0589",
-    "line": "call    nullsub_returnvVoid_1arg",
+    "line": "call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x4E066D",
-    "line": "call    sub_425650",
+    "line": "call    sub_425650; Verified conditional ExtraTeleport cleanup branch: when the matching cleanup flag is present and the reference is not in the protected state, it removes low-path world indexing when the door-link reference-ID ordering condition holds, then removes the ExtraTeleport entry.",
     "mnemonic": "call",
     "size": 5
   },
@@ -619,13 +619,13 @@
   },
   {
     "ea": "0x4E06AC",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E06AE",
-    "line": "call    sub_4DCCF0",
+    "line": "call    TESObjectREFR_ClearEquippedAmmo3D; Clears this reference's equipped-ammunition 3D and related actor-animation ammo slot state. No explicit stack arguments.",
     "mnemonic": "call",
     "size": 5
   },
@@ -811,19 +811,19 @@
   },
   {
     "ea": "0x4E0714",
-    "line": "push    8",
+    "line": "push    8; mask",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4E0716",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E0718",
-    "line": "call    sub_41F830",
+    "line": "call    ExtraDataList_TestActionFlagBits; Test ExtraAction flag mask. Missing ExtraAction behaves as default flags byte 1. REFR save calls with 0x08 to decide whether to emit ONAM.",
     "mnemonic": "call",
     "size": 5
   },
@@ -835,13 +835,13 @@
   },
   {
     "ea": "0x4E071F",
-    "line": "push    8",
+    "line": "push    8; mask",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4E0721",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -853,7 +853,7 @@
   },
   {
     "ea": "0x4E0725",
-    "line": "call    sub_423E50",
+    "line": "call    ExtraDataList_ClearActionFlagBits",
     "mnemonic": "call",
     "size": 5
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x4E072C",
-    "line": "call    sub_423DF0",
+    "line": "call    ExtraDataList_SetActionFlagBits; OR action flag mask into existing byte (default byte 1 when absent), creating state as needed. ONAM calls this with 0x08.",
     "mnemonic": "call",
     "size": 5
   },
@@ -913,19 +913,19 @@
   },
   {
     "ea": "0x4E074A",
-    "line": "push    8",
+    "line": "push    8; mask",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4E074C",
-    "line": "lea     ecx, [esi+44h]",
+    "line": "lea     ecx, [esi+44h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x4E074F",
-    "line": "call    sub_41F830",
+    "line": "call    ExtraDataList_TestActionFlagBits; Test ExtraAction flag mask. Missing ExtraAction behaves as default flags byte 1. REFR save calls with 0x08 to decide whether to emit ONAM.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1045,7 +1045,7 @@
   },
   {
     "ea": "0x4E078D",
-    "line": "call    sub_41FFA0",
+    "line": "call    ExtraDataList_GetRagDollData; Returns the ragdoll payload stored in ExtraRagDollData, or null.",
     "mnemonic": "call",
     "size": 5
   },

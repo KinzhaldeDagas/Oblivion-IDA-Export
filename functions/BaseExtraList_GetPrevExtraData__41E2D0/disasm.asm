@@ -22,7 +22,7 @@
 0x41E304: pop     ebx
 0x41E305: retn    4
 0x41E308: push    offset aBaseextralis_0; lpCriticalSection
-0x41E30D: mov     ecx, offset BSExtraDataCS
+0x41E30D: mov     ecx, 0B33800h
 0x41E312: call    NiEnterCriticalSection
 0x41E317: mov     eax, [esi+4]
 0x41E31A: xor     esi, esi
@@ -34,7 +34,7 @@
 0x41E327: mov     eax, [eax+8]
 0x41E32A: test    eax, eax
 0x41E32C: jnz     short loc_41E320
-0x41E32E: mov     ecx, offset BSExtraDataCS; lpCriticalSection
+0x41E32E: mov     ecx, 0B33800h; lpCriticalSection
 0x41E333: call    NiLeaveCriticalSection_0
 0x41E338: mov     eax, esi
 0x41E33A: pop     esi

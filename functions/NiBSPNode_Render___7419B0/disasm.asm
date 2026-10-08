@@ -32,12 +32,12 @@
 0x741A0B: jz      short loc_741A15
 0x741A0D: push    ebp; a2
 0x741A0E: mov     ecx, edi; this
-0x741A10: call    NiAVObject_Render
+0x741A10: call    NiAVObject_Render; Retail visibility dispatch honors NiAVObject AppCulled flag bit 0 before OnVisible traversal.
 0x741A15: test    esi, esi
 0x741A17: jz      short loc_741A43
 0x741A19: mov     ecx, esi; this
 0x741A1B: push    ebp; a2
-0x741A1C: call    NiAVObject_Render
+0x741A1C: call    NiAVObject_Render; Retail visibility dispatch honors NiAVObject AppCulled flag bit 0 before OnVisible traversal.
 0x741A21: pop     edi
 0x741A22: pop     esi
 0x741A23: pop     ebp
@@ -48,12 +48,12 @@
 0x741A2D: jz      short loc_741A37
 0x741A2F: push    ebp; a2
 0x741A30: mov     ecx, esi; this
-0x741A32: call    NiAVObject_Render
+0x741A32: call    NiAVObject_Render; Retail visibility dispatch honors NiAVObject AppCulled flag bit 0 before OnVisible traversal.
 0x741A37: test    edi, edi
 0x741A39: jz      short loc_741A43
 0x741A3B: mov     ecx, edi; this
 0x741A3D: push    ebp; a2
-0x741A3E: call    NiAVObject_Render
+0x741A3E: call    NiAVObject_Render; Retail visibility dispatch honors NiAVObject AppCulled flag bit 0 before OnVisible traversal.
 0x741A43: pop     edi
 0x741A44: pop     esi
 0x741A45: pop     ebp

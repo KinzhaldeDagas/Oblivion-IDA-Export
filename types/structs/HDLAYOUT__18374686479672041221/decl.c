@@ -1,1 +1,1 @@
-HDLAYOUT
+typedef _HD_LAYOUT HDLAYOUT;

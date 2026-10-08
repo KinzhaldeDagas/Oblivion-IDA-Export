@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_44D810",
+  "chunks": [
+    [
+      "0x44D810",
+      "0x44D880"
+    ]
+  ],
+  "chunks_sha256": "29fccc718d518c5d54f2eb8a0a83b1781aac123ae8f32902fa5dd11122558528",
+  "comment_regular": "Acquire one zeroed 12-byte NiTList node from Oblivion's synchronized global node pool, replenishing the pool when empty. This allocates list-node storage only; it does not allocate or retain a list payload.",
+  "comment_repeatable": "Acquire one zeroed 12-byte NiTList node from Oblivion's synchronized global node pool, replenishing the pool when empty. This allocates list-node storage only; it does not allocate or retain a list payload.\nVerified pool globals from x86 operands 2026-09-30: free head B33EAC; critical section B33F00; lock owner B33F78; lock depth B33F7C. Acquire pops the global chain and zeroes all three DWORDs of the 12-byte node. Refill44D770 is invoked if empty. These addresses reside inside an existing broad BSS array in this IDB; preserve that item and use these annotations rather than splitting/replacing it merely to add labels.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "NiTListNodePool_Acquire",
   "end_ea": "0x44D880",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_44D810",
+  "name": "NiTListNodePool_Acquire",
   "segment": ".text",
   "sha256": "29fccc718d518c5d54f2eb8a0a83b1781aac123ae8f32902fa5dd11122558528",
   "size": 112,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x44D810",
-  "type": "int *()",
+  "total_chunk_size": 112,
+  "type": "BSTPersistentListPointerNode *__cdecl()",
   "xrefs_from_count": 28,
   "xrefs_to_count": 2
 }

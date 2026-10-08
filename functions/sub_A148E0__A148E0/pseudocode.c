@@ -1,9 +1,9 @@
 _DWORD *sub_A148E0()
 {
-  return sub_90D190(
-           dword_BA8D04,
+  return sub_90D190( /*0xa14907*/
+           unk_BA8D04,
            (int)"hkPositionConstraintMotor",
-           (int)&unk_BA95A8,
+           (int)unk_BA95A8,
            0x1C,
            0,
            0,

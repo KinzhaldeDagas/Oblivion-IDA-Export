@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x794E50",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, [esp+last]; OBLIVION AUTHORITY (2026-08-30): Overlap-safe backward copy for unsigned-short elements; computes destinationEnd-(last-first), memmoves the source range there, and returns the new destination start.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x794E5D",
-    "line": "mov     esi, [esp+4+arg_8]",
+    "line": "mov     esi, [esp+4+destinationEnd]",
     "mnemonic": "mov",
     "size": 4
   },

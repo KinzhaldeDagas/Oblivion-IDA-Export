@@ -4,31 +4,31 @@ SceneGraph *InterfaceMenuScenegraph_Create()
   SceneGraph *v1; // esi
   int (__thiscall ***v2)(_DWORD, int); // edi
 
-  result = (SceneGraph *)FormHeapAlloc(0xF0u);
-  if ( result )
+  result = (SceneGraph *)FormHeapAlloc(0xF0u); /*0x405ba8*/
+  if ( result ) /*0x405bbe*/
   {
-    result = SceneGraph::SceneGraph(result, "Menu", 1u, 0);
-    v1 = result;
+    result = SceneGraph::SceneGraph(result, "Menu", 1u, 0); /*0x405bcb*/
+    v1 = result; /*0x405bd0*/
   }
   else
   {
-    v1 = 0;
+    v1 = 0; /*0x405bd4*/
   }
-  v2 = (int (__thiscall ***)(_DWORD, int))g_InterfaceScenegraph;
-  if ( (SceneGraph *)g_InterfaceScenegraph != v1 )
+  v2 = (int (__thiscall ***)(_DWORD, int))MEMORY[0xB333D0]; /*0x405bd6*/
+  if ( (SceneGraph *)MEMORY[0xB333D0] != v1 ) /*0x405be6*/
   {
-    if ( g_InterfaceScenegraph )
+    if ( MEMORY[0xB333D0] ) /*0x405bea*/
     {
-      result = (SceneGraph *)InterlockedDecrement((volatile LONG *)(g_InterfaceScenegraph + 4));
-      if ( !result )
+      result = (SceneGraph *)InterlockedDecrement((volatile LONG *)(MEMORY[0xB333D0] + 4)); /*0x405bf0*/
+      if ( !result ) /*0x405bf8*/
       {
-        if ( v2 )
-          result = (SceneGraph *)(**v2)(v2, 1);
+        if ( v2 ) /*0x405bfc*/
+          result = (SceneGraph *)(**v2)(v2, 1); /*0x405c06*/
       }
     }
-    g_InterfaceScenegraph = (int)v1;
-    if ( v1 )
-      return (SceneGraph *)InterlockedIncrement((volatile LONG *)&v1->super);
+    MEMORY[0xB333D0] = (int)v1; /*0x405c0a*/
+    if ( v1 ) /*0x405c10*/
+      return (SceneGraph *)InterlockedIncrement((volatile LONG *)&v1->super); /*0x405c16*/
   }
-  return result;
+  return result; /*0x405c1c*/
 }

@@ -1,1 +1,1 @@
-HWAVE
+typedef HWAVE__ *HWAVE;

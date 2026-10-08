@@ -1,4 +1,4 @@
-0x55E720: push    0FFFFFFFFh
+0x55E720: push    0FFFFFFFFh; Verified local RTTI and constructor call: constructs LockFreeMap<TESObjectREFR*,BSTreeNode*> with arguments (2,37,12), used by BSTreeManager at +0x24.
 0x55E722: push    offset SEH_68C280
 0x55E727: mov     eax, large fs:0
 0x55E72D: push    eax
@@ -11,7 +11,7 @@
 0x55E739: lea     eax, [esp+1Ch+var_C]
 0x55E73D: mov     large fs:0, eax
 0x55E743: mov     esi, ecx
-0x55E745: mov     ebp, [esp+1Ch+arg_4]
+0x55E745: mov     ebp, [esp+1Ch+bucketCount]
 0x55E749: xor     ecx, ecx
 0x55E74B: mov     eax, ebp
 0x55E74D: mov     edx, 4
@@ -26,7 +26,7 @@
 0x55E76C: call    FormHeapAlloc
 0x55E771: mov     edi, eax
 0x55E773: add     esp, 4
-0x55E776: mov     [esp+1Ch+arg_4], edi
+0x55E776: mov     [esp+1Ch+bucketCount], edi
 0x55E77A: test    edi, edi
 0x55E77C: mov     [esp+1Ch+var_4], 0
 0x55E784: jz      short loc_55E796
@@ -50,12 +50,12 @@
 0x55E7BA: push    ecx; Size
 0x55E7BB: call    FormHeapAlloc
 0x55E7C0: mov     [esi+4], eax
-0x55E7C3: mov     eax, [esp+20h+arg_8]
+0x55E7C3: mov     eax, [esp+20h+entrySize]
 0x55E7C7: push    10h; Size
 0x55E7C9: mov     [esi+10h], eax
 0x55E7CC: call    FormHeapAlloc
 0x55E7D1: add     esp, 8
-0x55E7D4: mov     [esp+1Ch+arg_4], eax
+0x55E7D4: mov     [esp+1Ch+bucketCount], eax
 0x55E7D8: test    eax, eax
 0x55E7DA: mov     [esp+1Ch+var_4], 1
 0x55E7E2: jz      short loc_55E7EE
@@ -74,3 +74,20 @@
 0x55E803: pop     ebp
 0x55E804: add     esp, 0Ch
 0x55E807: retn    0Ch
+0x9B44A0: mov     eax, [ebp+8]
+0x9B44A3: push    eax
+0x9B44A4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B44A9: pop     ecx
+0x9B44AA: retn
+0x9B44AB: mov     eax, [ebp+8]
+0x9B44AE: push    eax
+0x9B44AF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B44B4: pop     ecx
+0x9B44B5: retn
+0x9B44B6: mov     edx, [esp+arg_4]
+0x9B44BA: lea     eax, [edx-0Ch]
+0x9B44BD: mov     ecx, [edx-10h]
+0x9B44C0: xor     ecx, eax
+0x9B44C2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B44C7: mov     eax, offset stru_ADFB6C
+0x9B44CC: jmp     ___CxxFrameHandler3

@@ -11,28 +11,27 @@
 0x74DC33: call    sub_7124D0
 0x74DC38: mov     ebx, eax
 0x74DC3A: lea     ebp, [esi+18h]
-0x74DC3D: push    ebx
-0x74DC3E: mov     ecx, ebp
-0x74DC40: call    sub_523B10
+0x74DC3D: push    ebx; capacity
+0x74DC3E: mov     ecx, ebp; self
+0x74DC40: call    NiTObjectArray_Resize16
 0x74DC45: xor     edi, edi
 0x74DC47: test    ebx, ebx
 0x74DC49: jbe     short loc_74DC9D
 0x74DC4B: jmp     short loc_74DC50
-0x74DC4D: align 10h
 0x74DC50: mov     ecx, [esp+14h+arg_0]
 0x74DC54: call    sub_7124A0
 0x74DC59: mov     esi, eax
 0x74DC5B: test    esi, esi
-0x74DC5D: mov     [esp+14h+var_4], esi
+0x74DC5D: mov     [esp+14h+element], esi
 0x74DC61: jz      short loc_74DC6D
 0x74DC63: lea     eax, [esi+4]
 0x74DC66: push    eax; lpAddend
 0x74DC67: call    dword ptr ds:0A28078h
-0x74DC6D: lea     ecx, [esp+14h+var_4]
-0x74DC71: push    ecx
-0x74DC72: push    edi
-0x74DC73: mov     ecx, ebp
-0x74DC75: call    sub_4B34E0
+0x74DC6D: lea     ecx, [esp+14h+element]
+0x74DC71: push    ecx; element
+0x74DC72: push    edi; index
+0x74DC73: mov     ecx, ebp; self
+0x74DC75: call    NiTObjectArray_SetAt
 0x74DC7A: test    esi, esi
 0x74DC7C: jz      short loc_74DC96
 0x74DC7E: lea     edx, [esi+4]

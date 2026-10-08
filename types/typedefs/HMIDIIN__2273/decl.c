@@ -1,1 +1,1 @@
-HMIDIIN
+typedef HMIDIIN__ *HMIDIIN;

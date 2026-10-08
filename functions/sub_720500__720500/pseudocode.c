@@ -1,4 +1,4 @@
-char *sub_720500()
+NiRTTI *sub_720500()
 {
-  return dword_B3FD34;
+  return &stru_B3FD34; /*0x720505*/
 }

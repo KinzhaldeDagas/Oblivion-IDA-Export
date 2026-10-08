@@ -1,1 +1,1 @@
-IChannelHookVtbl_0
+typedef IChannelHookVtbl IChannelHookVtbl_0;

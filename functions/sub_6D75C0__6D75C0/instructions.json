@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6D75C0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Deep clone of text keys. Copies count, allocates count 0x08-byte records, copies each float time, and duplicates each owned text string; refuses the specialized copy when runtime type is not exactly NiTextKeyExtraData.",
     "mnemonic": "push",
     "size": 2
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x6D760F",
-    "line": "cmp     eax, offset dword_B3DA08",
+    "line": "cmp     eax, offset stru_B3DA08",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -313,13 +313,13 @@
   },
   {
     "ea": "0x6D7655",
-    "line": "push    offset sub_6EC6B0; a5",
+    "line": "push    offset NiTextKey_Destroy; a5",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x6D765A",
-    "line": "push    offset sub_6D73E0; a4",
+    "line": "push    offset NiTextKey_Construct; a4",
     "mnemonic": "push",
     "size": 5
   },
@@ -544,5 +544,77 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AFB50",
+    "line": "mov     eax, [ebp+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFB53",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFB54",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFB59",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFB5A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFB5B",
+    "line": "mov     edx, [esp+referenceFormIDOrZero]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AFB5F",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFB62",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFB65",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AFB67",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFB6C",
+    "line": "mov     eax, offset stru_ADC04C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFB71",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

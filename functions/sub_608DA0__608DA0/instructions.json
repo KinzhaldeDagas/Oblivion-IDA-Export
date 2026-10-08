@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x608DA0",
-    "line": "push    ebp",
+    "line": "push    ebp; Convert to free-impact state 3 without changing TESObjectREFR.baseForm or attaching source-WEAP identity.",
     "mnemonic": "push",
     "size": 1
   },
@@ -97,19 +97,19 @@
   },
   {
     "ea": "0x608DC5",
-    "line": "push    offset Vector3_InitValue?",
+    "line": "push    offset g_zeroNiPoint3; other",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x608DCA",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x608DCC",
-    "line": "call    sub_8AA390",
+    "line": "call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,19 +169,19 @@
   },
   {
     "ea": "0x608DE9",
-    "line": "push    offset Vector3_InitValue?",
+    "line": "push    offset g_zeroNiPoint3; other",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x608DEE",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x608DF0",
-    "line": "call    sub_8AA390",
+    "line": "call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x608E12",
-    "line": "mov     dword ptr [edx], 3",
+    "line": "mov     dword ptr [edx], 3; Convert an existing collision record to state 3 using supplied world impact point/normal; target reference is not required.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x608E40",
-    "line": "mov     dword ptr [eax], 3",
+    "line": "mov     dword ptr [eax], 3; Create state 3 record for a free/unattached impact, storing point, normal, transform and velocity.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x608EBD",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x608ECC",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x608EDE",
-    "line": "call    sub_8AC0A0",
+    "line": "call    bhkWorldObject_GetLinearVelocityPtr; TES4 authoritative: returns pointer to bhk collision object's velocity vector at object+0x10. 0x896000 copies this into proxy +0x2E0 before state update.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x608EE5",
-    "line": "mov     eax, offset stru_BA7A40",
+    "line": "mov     eax, offset unk_BA7A40",
     "mnemonic": "mov",
     "size": 5
   },
@@ -973,7 +973,7 @@
   },
   {
     "ea": "0x608F90",
-    "line": "call    sub_43F3E0",
+    "line": "call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1003,7 +1003,7 @@
   },
   {
     "ea": "0x608F9E",
-    "line": "mov     dword ptr [ebx+60h], 1",
+    "line": "mov     dword ptr [ebx+60h], 1; Creating free-impact collision data sets ArrowProjectile lifecycle +0x60 to state 1 (pending collision-state resolution). CollisionData discriminator is independently set to 3.",
     "mnemonic": "mov",
     "size": 7
   },

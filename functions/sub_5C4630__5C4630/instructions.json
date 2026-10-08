@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x5C4663",
-    "line": "push    ebx",
+    "line": "push    ebx; lastTile",
     "mnemonic": "push",
     "size": 1
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x5C466D",
-    "line": "mov     eax, [esp+34h+arg_0]",
+    "line": "mov     eax, [esp+34h+parent]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x5C4676",
-    "line": "push    eax",
+    "line": "push    eax; parent",
     "mnemonic": "push",
     "size": 1
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x5C467B",
-    "line": "call    Menu_CreateTileFromTemplate",
+    "line": "call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,25 +313,25 @@
   },
   {
     "ea": "0x5C46D5",
-    "line": "fstp    [esp+34h+var_34]; a3",
+    "line": "fstp    [esp+34h+var_34]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5C46D8",
-    "line": "push    0FA8h; a2",
+    "line": "push    0FA8h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5C46DD",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5C46E2",
-    "line": "mov     ecx, [esp+30h+arg_0]",
+    "line": "mov     ecx, [esp+30h+parent]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -367,31 +367,31 @@
   },
   {
     "ea": "0x5C46F9",
-    "line": "fstp    [esp+34h+arg_0]",
+    "line": "fstp    [esp+34h+parent]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x5C46FD",
-    "line": "fld     [esp+34h+arg_0]",
+    "line": "fld     [esp+34h+parent]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x5C4701",
-    "line": "fstp    [esp+34h+var_34]; a3",
+    "line": "fstp    [esp+34h+var_34]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5C4704",
-    "line": "push    0FAAh; a2",
+    "line": "push    0FAAh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5C4709",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -409,13 +409,13 @@
   },
   {
     "ea": "0x5C4711",
-    "line": "fstp    [esp+34h+var_34]; a3",
+    "line": "fstp    [esp+34h+var_34]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5C4714",
-    "line": "push    0FAFh; a2",
+    "line": "push    0FAFh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x5C471B",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -487,13 +487,13 @@
   },
   {
     "ea": "0x5C473C",
-    "line": "fstp    [esp+34h+var_34]; a3",
+    "line": "fstp    [esp+34h+var_34]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5C473F",
-    "line": "push    0FB1h; a2",
+    "line": "push    0FB1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x5C4746",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,13 +523,13 @@
   },
   {
     "ea": "0x5C474E",
-    "line": "fstp    [esp+34h+var_34]; a3",
+    "line": "fstp    [esp+34h+var_34]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5C4751",
-    "line": "push    0FB1h; a2",
+    "line": "push    0FB1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x5C4758",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -559,13 +559,13 @@
   },
   {
     "ea": "0x5C4760",
-    "line": "fstp    [esp+34h+var_34]; a3",
+    "line": "fstp    [esp+34h+var_34]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5C4763",
-    "line": "push    0FB1h; a2",
+    "line": "push    0FB1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x5C476A",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -595,13 +595,13 @@
   },
   {
     "ea": "0x5C4772",
-    "line": "fstp    [esp+34h+var_34]; a3",
+    "line": "fstp    [esp+34h+var_34]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5C4775",
-    "line": "push    0FB2h; a2",
+    "line": "push    0FB2h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x5C477C",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,13 +631,13 @@
   },
   {
     "ea": "0x5C4784",
-    "line": "fstp    [esp+34h+var_34]; a3",
+    "line": "fstp    [esp+34h+var_34]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5C4787",
-    "line": "push    0FB3h; a2",
+    "line": "push    0FB3h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x5C478E",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -703,13 +703,13 @@
   },
   {
     "ea": "0x5C47B1",
-    "line": "fstp    [esp+34h+var_34]; a3",
+    "line": "fstp    [esp+34h+var_34]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5C47B4",
-    "line": "push    0FF0h; a2",
+    "line": "push    0FF0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x5C47BB",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -751,7 +751,7 @@
   },
   {
     "ea": "0x5C47D0",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x5C47D6",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -832,5 +832,71 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C1120",
+    "line": "lea     ecx, [ebp+8]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C1123",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1128",
+    "line": "lea     ecx, [ebp-14h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C112B",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1130",
+    "line": "mov     edx, [esp+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C1134",
+    "line": "lea     eax, [edx-20h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C1137",
+    "line": "mov     ecx, [edx-24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C113A",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C113C",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1141",
+    "line": "mov     eax, offset stru_AEA24C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1146",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -8,11 +8,11 @@
 0x5E11B3: push    eax
 0x5E11B4: mov     eax, [esi]
 0x5E11B6: mov     edx, [eax+284h]
-0x5E11BC: push    1Dh
+0x5E11BC: push    1Dh; luckValue
 0x5E11BE: mov     ecx, esi
 0x5E11C0: call    edx
-0x5E11C2: push    eax
-0x5E11C3: call    Calc_LuckModifiedSkill
+0x5E11C2: push    eax; skillValue
+0x5E11C3: call    Calc_LuckModifiedSkill; Compute Luck-adjusted effective skill as skill + iActorLuckSkillBase + Luck*fActorLuckSkillMult, then clamp to 0..100. Defaults simplify to skill + (Luck-50)*0.4.
 0x5E11C8: fstp    dword ptr [esp+10h]
 0x5E11CC: mov     eax, [esi]
 0x5E11CE: mov     edx, [eax+224h]
@@ -22,7 +22,7 @@
 0x5E11DA: call    edx
 0x5E11DC: fld     [esp+4+targetNpc]
 0x5E11E0: push    eax; disposition
-0x5E11E1: call    Double_To_SInt32
+0x5E11E1: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5E11E6: push    eax; merchantileLuckLevelArg
 0x5E11E7: call    calcMultiplierFromMerchantLevelDispo
 0x5E11EC: add     esp, 8

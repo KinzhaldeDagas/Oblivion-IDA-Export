@@ -40,7 +40,7 @@
 0x6BEB3B: push    ecx
 0x6BEB3C: push    edx
 0x6BEB3D: push    ebx
-0x6BEB3E: call    eax ; dword_B3D5C0
+0x6BEB3E: call    eax ; unk_B3D5C0
 0x6BEB40: add     esp, 20h
 0x6BEB43: add     esi, ebp
 0x6BEB45: sub     [esp+14h+arg_4], 1

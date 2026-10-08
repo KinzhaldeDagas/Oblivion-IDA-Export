@@ -1,1 +1,1 @@
-RECT
+typedef tagRECT RECT;

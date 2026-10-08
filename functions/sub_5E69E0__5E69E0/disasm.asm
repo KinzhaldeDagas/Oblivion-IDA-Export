@@ -11,7 +11,6 @@
 0x5E69F7: test    esi, esi
 0x5E69F9: jz      short loc_5E6A30
 0x5E69FB: jmp     short loc_5E6A00
-0x5E69FD: align 10h
 0x5E6A00: xor     ecx, ecx
 0x5E6A02: test    esi, esi
 0x5E6A04: mov     eax, esi

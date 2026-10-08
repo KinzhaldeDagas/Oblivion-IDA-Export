@@ -1,5 +1,5 @@
 int sub_9F9B00()
 {
-  GameSetting_ConstrAndReg((int *)&sVirtueNameBounty, (int)"sVirtueNameBounty", (int)"Bounty");
-  return atexit(sub_A23AF0);
+  GameSetting_ConstrAndReg(&MEMORY[0xB3A15C], "sVirtueNameBounty", "Bounty"); /*0x9f9b0f*/
+  return atexit(sub_A23AF0); /*0x9f9b1f*/
 }

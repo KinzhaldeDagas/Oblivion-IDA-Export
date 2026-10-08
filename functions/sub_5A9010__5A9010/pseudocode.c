@@ -1,18 +1,21 @@
-void sub_5A9010()
+double sub_5A9010()
 {
   Tile *OpenMenuTile; // eax
-  Tile *v4; // esi
-  int ParentMenu; // edi
+  Tile *v1; // esi
+  _DWORD *ParentMenu; // edi
+  double result; // st7
 
-  OpenMenuTile = (Tile *)Menu_GetOpenMenuTile(0x3F2);
-  v4 = OpenMenuTile;
-  if ( OpenMenuTile )
+  OpenMenuTile = (Tile *)Menu_GetOpenMenuTile(0x3F2); /*0x5a9016*/
+  v1 = OpenMenuTile; /*0x5a901b*/
+  if ( OpenMenuTile ) /*0x5a9022*/
   {
-    ParentMenu = Tile_GetParentMenu(OpenMenuTile);
-    if ( ParentMenu )
+    ParentMenu = (_DWORD *)Tile_GetParentMenu(OpenMenuTile); /*0x5a902c*/
+    if ( ParentMenu ) /*0x5a9030*/
     {
-      Tile_SetFloat(v4, (_DWORD *)0xFA1, fConstant_2);
-      sub_584390(ParentMenu);
+      result = fConstant_2; /*0x5a9032*/
+      Tile_SetFloat(v1, 0xFA1u, fConstant_2); /*0x5a9043*/
+      Menu::StartFadeIn(ParentMenu); /*0x5a904c*/
     }
   }
+  return result; /*0x5a904b*/
 }

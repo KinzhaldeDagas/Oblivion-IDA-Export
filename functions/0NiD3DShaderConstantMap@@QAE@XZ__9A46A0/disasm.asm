@@ -3,7 +3,7 @@
 0x9A46A2: push    edi
 0x9A46A3: mov     esi, ecx
 0x9A46A5: xor     ebx, ebx
-0x9A46A7: push    offset NiRefObject_objcount; lpAddend
+0x9A46A7: push    0B3FD64h; lpAddend
 0x9A46AC: mov     dword ptr [esi], offset ??_7NiRefObject@@6B@; const NiRefObject::`vftable'
 0x9A46B2: mov     [esi+4], ebx
 0x9A46B5: call    ds:InterlockedIncrement
@@ -26,7 +26,7 @@
 0x9A46F9: mov     [esi+28h], ebx
 0x9A46FC: mov     [esi+2Ch], ebx
 0x9A46FF: mov     [esi+30h], ebx
-0x9A4702: call    sub_9A8BD0
+0x9A4702: call    sub_9A8BD0; MoonSugarEffect decode: constant-map renderer binding. Stores renderer, AddRefs IDirect3DDevice9 at renderer+0x280, and caches renderer state at +0x8AC.
 0x9A4707: mov     ecx, edi
 0x9A4709: call    sub_9A4310
 0x9A470E: pop     edi

@@ -1,1 +1,1 @@
-BlurShader
+struct BlurShader;

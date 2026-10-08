@@ -1,6 +1,6 @@
-0x95D540: sub     esp, 18h
+0x95D540: sub     esp, 18h; Verified scene-object pick dispatcher: rejects invalid/filtered candidates, delegates NiGeometryData to NiPick_ProcessGeometryIntersection, and has a separate bounds/RTTI fallback that writes hit point and distance but does not explicitly populate the normal field.
 0x95D543: push    esi
-0x95D544: mov     esi, [esp+1Ch+arg_C]
+0x95D544: mov     esi, [esp+1Ch+pickedObject]
 0x95D548: test    esi, esi
 0x95D54A: jnz     short loc_95D553
 0x95D54C: xor     al, al
@@ -66,7 +66,7 @@
 0x95D5D1: push    eax
 0x95D5D2: push    edi
 0x95D5D3: push    ebp
-0x95D5D4: call    sub_95C530
+0x95D5D4: call    NiPick_ProcessGeometryIntersection; Verified geometry-hit path: computes intersection point/distance and fills the 0x44-byte NiPickRecord. When requested, its +0x28 vector is either a normalized triangle face normal (NiPoint3_CrossProduct of edge vectors) or an interpolated vertex normal; no-normal cases write zero.
 0x95D5D9: add     esp, 10h
 0x95D5DC: pop     edi
 0x95D5DD: pop     ebp
@@ -77,7 +77,7 @@
 0x95D5E4: cmp     byte ptr ds:0BA9A6Ch, 0
 0x95D5EB: jz      loc_95D6AD
 0x95D5F1: push    esi
-0x95D5F2: push    offset dword_B4021C
+0x95D5F2: push    offset stru_B4021C
 0x95D5F7: call    NiRTTI__IsObjectOfRTTIType
 0x95D5FC: add     esp, 8
 0x95D5FF: test    al, al
@@ -100,9 +100,9 @@
 0x95D638: add     esp, 4
 0x95D63B: test    eax, eax
 0x95D63D: jz      short loc_95D64B
-0x95D63F: push    esi
-0x95D640: mov     ecx, eax
-0x95D642: call    sub_95A2D0
+0x95D63F: push    esi; pickedObject
+0x95D640: mov     ecx, eax; this
+0x95D642: call    NiPickRecord_Initialize; Verified NiPickRecord initialization for the 0x44-byte record: retains the picked object at +0, clears/releases the secondary reference at +4, and zeros tail fields +0x34..+0x40. It does not initialize the intersection point, distance, or +0x28 normal fields; pick paths populate those selectively, so bounds-only records may leave the normal unavailable.
 0x95D647: mov     esi, eax
 0x95D649: jmp     short loc_95D64D
 0x95D64B: xor     esi, esi
@@ -111,10 +111,10 @@
 0x95D652: mov     ecx, ebx
 0x95D654: call    sub_95A360
 0x95D659: lea     ecx, [esp+28h+var_18]
-0x95D65D: call    sub_404C90
-0x95D662: fstp    [esp+28h+arg_C]
-0x95D666: fld     [esp+28h+arg_C]
-0x95D66A: fst     dword ptr [esi+14h]
+0x95D65D: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
+0x95D662: fstp    [esp+28h+pickedObject]
+0x95D666: fld     [esp+28h+pickedObject]
+0x95D66A: fst     dword ptr [esi+14h]; Verified bounds-only pick path stores hit distance at NiPickRecord +0x14 and intersection XYZ at +0x08..+0x10; it does not explicitly populate the geometry surface-normal field.
 0x95D66D: cmp     dword ptr [ebx+8], 1
 0x95D671: jnz     short loc_95D6AB
 0x95D673: push    ecx

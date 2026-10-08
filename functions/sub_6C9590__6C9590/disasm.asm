@@ -179,8 +179,8 @@
 0x6C9785: cmp     byte ptr [esp+3Ch+arg_0], 0
 0x6C978A: jnz     loc_6C9B16
 0x6C9790: push    offset aBip01; "Bip01"
-0x6C9795: push    esi; Str1
-0x6C9796: call    __strcmp
+0x6C9795: push    esi; left
+0x6C9796: call    CRT_StricmpLocaleDispatch
 0x6C979B: add     esp, 8
 0x6C979E: test    eax, eax
 0x6C97A0: jnz     short loc_6C97C0
@@ -320,7 +320,7 @@
 0x6C991F: jnz     short loc_6C9940
 0x6C9921: push    esi
 0x6C9922: mov     ecx, ebp
-0x6C9924: call    sub_6FFE90
+0x6C9924: call    NiObjectNET_RemoveController; Removes a specific NiTimeController from NiObjectNET's refcounted controller chain, relinking predecessor/head and clearing the removed controller's next link with balanced temporary references.
 0x6C9929: mov     ecx, [edi+40h]
 0x6C992C: mov     edx, [ecx+34h]
 0x6C992F: push    edx
@@ -396,24 +396,24 @@
 0x6C99F2: mov     ecx, esi
 0x6C99F4: call    eax
 0x6C99F6: push    eax
-0x6C99F7: push    offset dword_B3CC5C
+0x6C99F7: push    offset stru_B3CC5C
 0x6C99FC: call    NiRTTI_Cast
 0x6C9A01: mov     ecx, [esp+44h+var_20]
 0x6C9A05: mov     edx, [esp+44h+var_28]
 0x6C9A09: add     esp, 8
 0x6C9A0C: cmp     [edx+60h], ecx
 0x6C9A0F: mov     edi, eax
-0x6C9A11: mov     [esp+3Ch+var_14], 0
+0x6C9A11: mov     byte ptr [esp+3Ch+var_14], 0
 0x6C9A16: jnz     short loc_6C9A28
 0x6C9A18: mov     eax, edx
 0x6C9A1A: mov     ecx, [eax+40h]
 0x6C9A1D: cmp     byte ptr [ecx+6Ch], 0
 0x6C9A21: jz      short loc_6C9A28
-0x6C9A23: mov     [esp+3Ch+var_14], 1
+0x6C9A23: mov     byte ptr [esp+3Ch+var_14], 1
 0x6C9A28: test    edi, edi
 0x6C9A2A: jnz     loc_6C9AF5
 0x6C9A30: fldz
-0x6C9A32: mov     eax, dword ptr [esp+3Ch+var_14]
+0x6C9A32: mov     eax, [esp+3Ch+var_14]
 0x6C9A36: mov     edx, [esi]
 0x6C9A38: mov     edx, [edx+98h]
 0x6C9A3E: push    2

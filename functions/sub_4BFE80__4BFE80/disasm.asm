@@ -2,9 +2,9 @@
 0x4BFE81: push    esi
 0x4BFE82: push    edi
 0x4BFE83: mov     edi, ecx
-0x4BFE85: call    InitBSShaderAccumulator
-0x4BFE8A: mov     ecx, eax
-0x4BFE8C: call    sub_7AB6F0
+0x4BFE85: call    BSShaderAccumulator_GetOrCreateGlobal
+0x4BFE8A: mov     ecx, eax; this
+0x4BFE8C: call    BSShaderAccumulator_ClearAccumulatedPasses; Reset transient BSShaderAccumulator storage. Iterates all 0x1A3 selector buckets at this+0x104 with stride 0x14, releases old free nodes, and moves active nodes to local free chains without destroying borrowed RenderPass payloads. Mode-5 flush uses this after drawing only buckets 6..9 and 0x154..0x155, so every other queued selector, including 0x177..0x17A, is discarded without draw. Separate accumulator-owned special pass lists later in this function explicitly call RenderPass_Destroy plus FormHeapFree.
 0x4BFE91: xor     ebx, ebx
 0x4BFE93: cmp     bl, 4
 0x4BFE96: jnb     short loc_4BFEB1

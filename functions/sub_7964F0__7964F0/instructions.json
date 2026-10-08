@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7964F0",
-    "line": "push    esi",
+    "line": "push    esi; Legacy TexCoord1 writer: appends projected-shadow S/T to the dedicated shadowTexcoords vector and applies the same global T-flip policy.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x7964F2",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+shadowST]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,25 +25,25 @@
   },
   {
     "ea": "0x7964FC",
-    "line": "push    edi; int",
+    "line": "push    edi; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7964FD",
-    "line": "mov     ecx, esi; int",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7964FF",
-    "line": "call    sub_785F30",
+    "line": "call    OB_stVector_float_PushBack_010201A0; Oblivion compact float-vector push_back. Appends a 4-byte float in place when capacity remains; otherwise delegates to the reallocation/insertion path. Shared by spline tangent lengths and indexed-geometry float streams.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x796504",
-    "line": "call    sub_787680",
+    "line": "call    CSpeedTreeRT__GetTextureFlip; CSpeedTreeRT::GetTextureFlip: returns the single global bool at 0xB4297D. Oblivion startup sets it true at 0x55EBB7.",
     "mnemonic": "call",
     "size": 5
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x79650B",
-    "line": "mov     ecx, esi; int",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x796512",
-    "line": "lea     eax, [esp+8+arg_0]",
+    "line": "lea     eax, [esp+8+shadowST]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -85,19 +85,19 @@
   },
   {
     "ea": "0x796518",
-    "line": "push    eax; int",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x796519",
-    "line": "fstp    [esp+0Ch+arg_0]",
+    "line": "fstp    [esp+0Ch+shadowST]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x79651D",
-    "line": "call    sub_785F30",
+    "line": "call    OB_stVector_float_PushBack_010201A0; Oblivion compact float-vector push_back. Appends a 4-byte float in place when capacity remains; otherwise delegates to the reallocation/insertion path. Shared by spline tangent lengths and indexed-geometry float streams.",
     "mnemonic": "call",
     "size": 5
   },
@@ -127,13 +127,13 @@
   },
   {
     "ea": "0x79652A",
-    "line": "push    edi; int",
+    "line": "push    edi; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79652B",
-    "line": "call    sub_785F30",
+    "line": "call    OB_stVector_float_PushBack_010201A0; Oblivion compact float-vector push_back. Appends a 4-byte float in place when capacity remains; otherwise delegates to the reallocation/insertion path. Shared by spline tangent lengths and indexed-geometry float streams.",
     "mnemonic": "call",
     "size": 5
   },

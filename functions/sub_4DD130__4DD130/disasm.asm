@@ -13,7 +13,7 @@
 0x4DD14C: jmp     short loc_4DD150
 0x4DD14E: xor     edi, edi
 0x4DD150: mov     esi, [edi]
-0x4DD152: mov     ebx, [esp+10h+arg_0]
+0x4DD152: mov     ebx, [esp+10h+backingLight]
 0x4DD156: cmp     esi, ebx
 0x4DD158: jz      short loc_4DD18A
 0x4DD15A: test    esi, esi
@@ -37,10 +37,10 @@
 0x4DD183: push    ebx; lpAddend
 0x4DD184: call    dword ptr ds:0A28078h
 0x4DD18A: fld1
-0x4DD18C: push    edi
-0x4DD18D: lea     ecx, [ebp+44h]
-0x4DD190: fstp    dword ptr [edi+4]
-0x4DD193: call    sub_428CC0
+0x4DD18C: push    edi; payload
+0x4DD18D: lea     ecx, [ebp+44h]; self
+0x4DD190: fstp    dword ptr [edi+4]; Initialize ordinary ExtraLight payload targetDimmer_04 to 1.0, matching the spell-effect payload constructor.
+0x4DD193: call    ExtraDataList_SetExtraLightPayload; Replace or create kExtraData_Light (type 0x30) with the shared {strong NiLight*, target dimmer} payload. Existing payload ownership is released before replacement.
 0x4DD198: pop     edi
 0x4DD199: pop     esi
 0x4DD19A: pop     ebp

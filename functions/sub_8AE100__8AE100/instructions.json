@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8AE100",
-    "line": "push    ebp",
+    "line": "push    ebp; TES4 authoritative: character support check. Builds support/contact candidates, classifies support against up direction/slope tolerance, and writes support status/normal data to output block.",
     "mnemonic": "push",
     "size": 1
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x8AE137",
-    "line": "mov     dword ptr [ecx], offset aTtchecksupport; \"TtcheckSupport\"",
+    "line": "mov     dword ptr [ecx], offset aTtchecksupport; Profiler label 'TtcheckSupport'; confirms this routine is the controller support-ground classification pass.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x8AE159",
-    "line": "call    sub_8AD070",
+    "line": "call    hkpCharacterProxy_CollectSupportContacts; TES4 authoritative: collects support contacts for 0x8AE100. Temporarily offsets the low-level collision object by wrapper vertical adjustment (+0x58 + +0x5C), calls object vfunc +0x34 and then all-contact collection, then restores the old value.",
     "mnemonic": "call",
     "size": 5
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x8AE212",
-    "line": "call    sub_8AC3C0",
+    "line": "call    hkpCharacterProxy_ProjectManifoldContactToSurfaceConstraint; TES4 authoritative: converts a 0x40-byte manifold/contact surface into a support surface constraint when its dot against the up/support basis is between 0.01 and the proxy slope limit.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1711,7 +1711,7 @@
   },
   {
     "ea": "0x8AE4B9",
-    "line": "call    sub_8EC790",
+    "line": "call    hkSurfaceConstraintUtil_CalcSupportMotion; Runs active-surface solver over projected support constraints; result is used only for support status 0/1/2 classification, not a mantle snap.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1741,7 +1741,7 @@
   },
   {
     "ea": "0x8AE4D1",
-    "line": "movaps  xmmword ptr [edx+20h], xmm0",
+    "line": "movaps  xmmword ptr [edx+20h], xmm0; Initializes output support vectors: out+0x20 and out+0x10 start as zero before support classification.",
     "mnemonic": "movaps",
     "size": 4
   },
@@ -1753,7 +1753,7 @@
   },
   {
     "ea": "0x8AE4D9",
-    "line": "movaps  xmm3, xmmword ptr [eax]",
+    "line": "movaps  xmm3, xmmword ptr [eax]; Begin support-motion classification: a2 is the up/support basis vector passed by the controller; v104 is the surface-constraint solver output.",
     "mnemonic": "movaps",
     "size": 3
   },
@@ -1825,7 +1825,7 @@
   },
   {
     "ea": "0x8AE50B",
-    "line": "jz      loc_8AE74D",
+    "line": "jz      loc_8AE74D; If the support-motion vector is effectively unchanged from the up vector (all xyz deltas <= 0.001), no usable support is reported.",
     "mnemonic": "jz",
     "size": 6
   },
@@ -1915,7 +1915,7 @@
   },
   {
     "ea": "0x8AE544",
-    "line": "jnp     loc_8AE608",
+    "line": "jnp     loc_8AE608; If the support-motion vector length squared is below 0.001, treat support as accepted status 2 without slope rejection.",
     "mnemonic": "jnp",
     "size": 6
   },
@@ -1927,7 +1927,7 @@
   },
   {
     "ea": "0x8AE54D",
-    "line": "fld     dword ptr [esi+0A4h]",
+    "line": "fld     dword ptr [esi+0A4h]; Loads proxy+0xA4 max-slope cosine, computed as cos(cinfo+0x64) by 0x8AC1E0.",
     "mnemonic": "fld",
     "size": 6
   },
@@ -2185,13 +2185,13 @@
   },
   {
     "ea": "0x8AE5FE",
-    "line": "jnz     short loc_8AE608",
+    "line": "jnz     short loc_8AE608; Support status slope decision: accepts status 2 when cos(maxSlope)^2 <= 1 - dot(normalizedSupportMotion, up)^2; otherwise status 1. Equivalent to support-motion tilt staying within the configured max slope relation.",
     "mnemonic": "jnz",
     "size": 2
   },
   {
     "ea": "0x8AE600",
-    "line": "mov     dword ptr [edx], 1",
+    "line": "mov     dword ptr [edx], 1; Support status 1: contact/support motion exists but fails the max-slope acceptance test.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2203,7 +2203,7 @@
   },
   {
     "ea": "0x8AE608",
-    "line": "mov     dword ptr [edx], 2",
+    "line": "mov     dword ptr [edx], 2; Support status 2: accepted support/ground result. 0x896000 can turn this into flag 0x100 when byte +0x250 is clear.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2263,7 +2263,7 @@
   },
   {
     "ea": "0x8AE635",
-    "line": "cmp     byte ptr [ebx+ecx], 0",
+    "line": "cmp     byte ptr [ebx+ecx], 0; Per-contact accumulation loop only considers contacts marked usable by the support solver.",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -2377,7 +2377,7 @@
   },
   {
     "ea": "0x8AE677",
-    "line": "jp      short loc_8AE69B",
+    "line": "jp      short loc_8AE69B; Only contacts whose normal has dot(contactNormal, up) < -0.08 are accumulated into output support normal/point. Havok contact normal orientation is opposite the controller up for supporting contacts.",
     "mnemonic": "jp",
     "size": 2
   },
@@ -2401,7 +2401,7 @@
   },
   {
     "ea": "0x8AE684",
-    "line": "movaps  xmmword ptr [edx+10h], xmm0",
+    "line": "movaps  xmmword ptr [edx+10h], xmm0; Accumulates support normal into out+0x10 for accepted support candidates.",
     "mnemonic": "movaps",
     "size": 4
   },
@@ -2431,7 +2431,7 @@
   },
   {
     "ea": "0x8AE693",
-    "line": "movaps  xmmword ptr [edx+20h], xmm1",
+    "line": "movaps  xmmword ptr [edx+20h], xmm1; Accumulates support point/vector into out+0x20 for accepted support candidates.",
     "mnemonic": "movaps",
     "size": 4
   },
@@ -2653,7 +2653,7 @@
   },
   {
     "ea": "0x8AE72B",
-    "line": "movaps  xmmword ptr [edx+10h], xmm2",
+    "line": "movaps  xmmword ptr [edx+10h], xmm2; Normalizes accumulated support normal at out+0x10.",
     "mnemonic": "movaps",
     "size": 4
   },
@@ -2695,7 +2695,7 @@
   },
   {
     "ea": "0x8AE747",
-    "line": "movaps  xmmword ptr [edx+20h], xmm2",
+    "line": "movaps  xmmword ptr [edx+20h], xmm2; Averages accumulated support point/vector at out+0x20 by accepted contact count.",
     "mnemonic": "movaps",
     "size": 4
   },
@@ -2707,7 +2707,7 @@
   },
   {
     "ea": "0x8AE74D",
-    "line": "mov     dword ptr [edx], 0",
+    "line": "mov     dword ptr [edx], 0; Writes support status 0: no usable support contact.",
     "mnemonic": "mov",
     "size": 6
   },

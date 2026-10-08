@@ -4,7 +4,7 @@
 0x6E7743: mov     edi, [esp+0Ch+arg_0]
 0x6E7747: push    edi
 0x6E7748: mov     esi, ecx
-0x6E774A: call    nullsub_returnvVoid_1arg
+0x6E774A: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x6E774F: mov     eax, [edi+220h]
 0x6E7755: mov     edx, [eax+8]
 0x6E7758: push    1

@@ -1,1 +1,9 @@
-tagVARDESC
+struct tagVARDESC
+{
+MEMBERID memid;
+LPOLESTR lpstrSchema;
+$18F4E8380DA2B72FA6B79859CAC0BE6F u;
+ELEMDESC elemdescVar;
+WORD wVarFlags;
+VARKIND varkind;
+};

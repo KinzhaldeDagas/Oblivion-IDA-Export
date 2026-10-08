@@ -40,7 +40,7 @@
 0x491D56: mov     eax, esi
 0x491D58: push    0; int
 0x491D5A: push    eax; void *
-0x491D5B: mov     [esp+68h+var_38], esi
+0x491D5B: mov     [esp+68h+form], esi
 0x491D5F: call    OblivionDynamicCast
 0x491D64: push    esi
 0x491D65: mov     edi, eax
@@ -56,12 +56,12 @@
 0x491D85: call    TESBipedModelForm_IsPlayable
 0x491D8A: test    al, al
 0x491D8C: jz      loc_49254D
-0x491D92: mov     ecx, [esp+54h+var_38]
-0x491D96: push    0
-0x491D98: push    1
-0x491D9A: push    ecx
-0x491D9B: mov     ecx, [esp+60h+var_3C]
-0x491D9F: call    ContainerExtraData_GetEntryForForm
+0x491D92: mov     ecx, [esp+54h+form]
+0x491D96: push    0; referenceFormIDOrZero
+0x491D98: push    1; unusedAlwaysOne
+0x491D9A: push    ecx; form
+0x491D9B: mov     ecx, [esp+60h+var_3C]; this
+0x491D9F: call    ContainerExtraData_GetEntryForForm; Find EntryData for an exact TESForm in ExtraContainerChanges. Native ABI is three stack arguments and retn 0x0C. The middle Boolean is not read; callers conventionally pass true. If referenceFormIDOrZero is nonzero, require an extend-data list whose ExtraReferencePointer target has that form ID; otherwise return the form entry directly.
 0x491DA4: mov     ebx, eax
 0x491DA6: test    ebx, ebx
 0x491DA8: mov     [esp+54h+var_40], ebx
@@ -132,7 +132,7 @@
 0x491E73: test    edi, edi
 0x491E75: mov     ebx, [esp+54h+var_40]
 0x491E79: jnz     loc_491DE0
-0x491E7F: mov     edx, [esp+54h+var_38]
+0x491E7F: mov     edx, [esp+54h+form]
 0x491E83: push    edx
 0x491E84: call    sub_469980
 0x491E89: add     esp, 4
@@ -156,7 +156,7 @@
 0x491EB8: mov     ecx, [eax]
 0x491EBA: push    eax
 0x491EBB: mov     [esi], ecx
-0x491EBD: call    FormHeapFree
+0x491EBD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x491EC2: add     esp, 4
 0x491EC5: jmp     short loc_491ECD
 0x491EC7: mov     dword ptr [esi], 0
@@ -200,7 +200,7 @@
 0x491F43: mov     edx, [eax]
 0x491F45: push    eax
 0x491F46: mov     [edi], edx
-0x491F48: call    FormHeapFree
+0x491F48: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x491F4D: add     esp, 4
 0x491F50: jmp     short loc_491F58
 0x491F52: mov     dword ptr [edi], 0
@@ -268,7 +268,7 @@
 0x49201E: test    esi, esi
 0x492020: mov     dword ptr [esp+54h+var_34], esi
 0x492024: jnz     loc_491F00
-0x49202A: mov     ecx, [esp+54h+var_38]
+0x49202A: mov     ecx, [esp+54h+form]
 0x49202E: push    0; int
 0x492030: push    offset ??_R0?AVTESScriptableForm@@@8; struct TypeDescriptor *
 0x492035: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
@@ -429,7 +429,7 @@
 0x492237: jmp     short loc_492242
 0x492239: mov     ecx, [esp+54h+var_3C]
 0x49223D: call    ExtraContainerChanges_RunScripts
-0x492242: mov     ecx, [esp+54h+var_38]
+0x492242: mov     ecx, [esp+54h+form]
 0x492246: cmp     byte ptr [ecx+4], 22h ; '"'
 0x49224A: jnz     loc_4923D7
 0x492250: mov     edx, [esp+54h+var_3C]
@@ -519,7 +519,7 @@
 0x492347: mov     ecx, esi
 0x492349: call    SetWorn
 0x49234E: mov     ecx, [ebp+0]
-0x492351: call    BSSimpleList_Clear
+0x492351: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x492356: mov     ecx, [ebp+0]
 0x492359: push    esi
 0x49235A: call    BSSimpleList_PushFront
@@ -608,7 +608,7 @@
 0x492450: mov     ecx, [eax]
 0x492452: push    eax
 0x492453: mov     [ebp+0], ecx
-0x492456: call    FormHeapFree
+0x492456: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x49245B: add     esp, 4
 0x49245E: jmp     short loc_492467
 0x492460: mov     dword ptr [ebp+0], 0
@@ -660,7 +660,7 @@
 0x4924E4: jz      short loc_4924F9
 0x4924E6: mov     eax, [edi]
 0x4924E8: push    eax
-0x4924E9: call    FormHeapFree
+0x4924E9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4924EE: add     esp, 4
 0x4924F1: mov     dword ptr [edi], 0
 0x4924F7: jmp     short loc_4924FB
@@ -676,7 +676,7 @@
 0x492511: cmp     eax, 1
 0x492514: jnb     short loc_49252E
 0x492516: mov     ecx, ebp
-0x492518: call    sub_67F100
+0x492518: call    BSSimpleList_PopHeadWithoutPayloadFree; Verified generic BSSimpleList head removal helper: advances the inline first-node header to its successor and frees the detached list node; if there is no successor, clears the head data pointer.
 0x49251D: mov     esi, [edi]
 0x49251F: mov     ecx, esi
 0x492521: call    BSSimpleList_IsEmpty
@@ -689,9 +689,9 @@
 0x492533: jnz     short loc_492505
 0x492535: jmp     short loc_49254D
 0x492537: mov     ecx, ebp
-0x492539: call    BSSimpleList_Clear
+0x492539: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x49253E: push    ebp
-0x49253F: call    FormHeapFree
+0x49253F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x492544: add     esp, 4
 0x492547: mov     dword ptr [edi], 0
 0x49254D: mov     ecx, dword ptr [esp+54h+var_34+4]
@@ -809,10 +809,9 @@
 0x4926A8: test    esi, esi
 0x4926AA: mov     ecx, [ebp+8]
 0x4926AD: mov     dword ptr [esp+54h+var_24+4], eax
-0x4926B1: mov     [esp+54h+var_38], ecx
+0x4926B1: mov     [esp+54h+form], ecx
 0x4926B5: jz      loc_492890
 0x4926BB: jmp     short loc_4926C0
-0x4926BD: align 10h
 0x4926C0: mov     edi, [esi]
 0x4926C2: test    edi, edi
 0x4926C4: jz      loc_492890
@@ -863,7 +862,7 @@
 0x49275F: mov     ecx, [eax]
 0x492761: push    eax
 0x492762: mov     [edi], ecx
-0x492764: call    FormHeapFree
+0x492764: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x492769: add     esp, 4
 0x49276C: jmp     short loc_492774
 0x49276E: mov     dword ptr [edi], 0
@@ -1030,7 +1029,6 @@
 0x492977: test    esi, esi
 0x492979: jz      short loc_492998
 0x49297B: jmp     short loc_492980
-0x49297D: align 10h
 0x492980: mov     edi, [esi]
 0x492982: test    edi, edi
 0x492984: jz      short loc_492998
@@ -1162,7 +1160,7 @@
 0x492AFC: jmp     short loc_492B07
 0x492AFE: mov     ecx, [esp+54h+var_3C]
 0x492B02: call    ExtraContainerChanges_RunScripts
-0x492B07: mov     eax, [esp+54h+var_38]
+0x492B07: mov     eax, [esp+54h+form]
 0x492B0B: cmp     byte ptr [eax+4], 22h ; '"'
 0x492B0F: jnz     loc_492C0A
 0x492B15: mov     esi, [esp+54h+var_3C]
@@ -1272,7 +1270,7 @@
 0x492C2C: mov     esi, [esi+4]
 0x492C2F: test    esi, esi
 0x492C31: jnz     short loc_492C14
-0x492C33: mov     edx, [esp+54h+var_38]
+0x492C33: mov     edx, [esp+54h+form]
 0x492C37: push    edx
 0x492C38: call    sub_469980
 0x492C3D: add     esp, 4
@@ -1298,7 +1296,7 @@
 0x492C73: mov     ecx, [eax]
 0x492C75: push    eax
 0x492C76: mov     [esi], ecx
-0x492C78: call    FormHeapFree
+0x492C78: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x492C7D: add     esp, 4
 0x492C80: jmp     short loc_492C88
 0x492C82: mov     dword ptr [esi], 0
@@ -1351,7 +1349,7 @@
 0x492D0F: mov     ecx, [eax]
 0x492D11: push    eax
 0x492D12: mov     [edi], ecx
-0x492D14: call    FormHeapFree
+0x492D14: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x492D19: add     esp, 4
 0x492D1C: jmp     short loc_492D24
 0x492D1E: mov     dword ptr [edi], 0
@@ -1402,7 +1400,7 @@
 0x492D9A: jnz     short loc_492DB1
 0x492D9C: mov     ecx, [ebp+0]
 0x492D9F: push    ecx
-0x492DA0: call    FormHeapFree
+0x492DA0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x492DA5: add     esp, 4
 0x492DA8: mov     dword ptr [ebp+0], 0
 0x492DAF: jmp     short loc_492DB4
@@ -1424,7 +1422,7 @@
 0x492DDD: mov     ecx, [eax]
 0x492DDF: push    eax
 0x492DE0: mov     [edi], ecx
-0x492DE2: call    FormHeapFree
+0x492DE2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x492DE7: add     esp, 4
 0x492DEA: jmp     short loc_492DF2
 0x492DEC: mov     dword ptr [edi], 0
@@ -1444,14 +1442,14 @@
 0x492E13: mov     eax, [edi+4]
 0x492E16: mov     esi, [eax+4]
 0x492E19: push    eax
-0x492E1A: call    FormHeapFree
+0x492E1A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x492E1F: add     esp, 4
 0x492E22: test    esi, esi
 0x492E24: mov     [edi+4], esi
 0x492E27: jnz     short loc_492E13
 0x492E29: push    edi
 0x492E2A: mov     dword ptr [edi], 0
-0x492E30: call    FormHeapFree
+0x492E30: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x492E35: add     esp, 4
 0x492E38: mov     dword ptr [ebp+0], 0
 0x492E3F: mov     edx, dword ptr [esp+54h+a2]
@@ -1469,3 +1467,60 @@
 0x492E62: mov     esp, ebp
 0x492E64: pop     ebp
 0x492E65: retn
+0x9AFFC0: mov     eax, [ebp-1Ch]
+0x9AFFC3: push    eax
+0x9AFFC4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFFC9: pop     ecx
+0x9AFFCA: retn
+0x9AFFCB: mov     eax, [ebp-1Ch]
+0x9AFFCE: push    eax
+0x9AFFCF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFFD4: pop     ecx
+0x9AFFD5: retn
+0x9AFFD6: mov     eax, [ebp-1Ch]
+0x9AFFD9: push    eax
+0x9AFFDA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFFDF: pop     ecx
+0x9AFFE0: retn
+0x9AFFE1: mov     eax, [ebp-1Ch]
+0x9AFFE4: push    eax
+0x9AFFE5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFFEA: pop     ecx
+0x9AFFEB: retn
+0x9AFFEC: mov     eax, [ebp-1Ch]
+0x9AFFEF: push    eax
+0x9AFFF0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFFF5: pop     ecx
+0x9AFFF6: retn
+0x9AFFF7: mov     eax, [ebp-24h]
+0x9AFFFA: push    eax
+0x9AFFFB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B0000: pop     ecx
+0x9B0001: retn
+0x9B0002: mov     eax, [ebp-24h]
+0x9B0005: push    eax
+0x9B0006: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B000B: pop     ecx
+0x9B000C: retn
+0x9B000D: mov     eax, [ebp-18h]
+0x9B0010: push    eax
+0x9B0011: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B0016: pop     ecx
+0x9B0017: retn
+0x9B0018: mov     eax, [ebp-18h]
+0x9B001B: push    eax
+0x9B001C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B0021: pop     ecx
+0x9B0022: retn
+0x9B0023: mov     eax, [ebp-18h]
+0x9B0026: push    eax
+0x9B0027: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B002C: pop     ecx
+0x9B002D: retn
+0x9B002E: mov     edx, [esp-4+arg_4]
+0x9B0032: lea     eax, [edx-44h]
+0x9B0035: mov     ecx, [edx-48h]
+0x9B0038: xor     ecx, eax
+0x9B003A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B003F: mov     eax, offset stru_ADC3DC
+0x9B0044: jmp     ___CxxFrameHandler3

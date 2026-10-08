@@ -17,9 +17,9 @@
 0x4B20FB: mov     ebx, ecx
 0x4B20FD: xor     esi, esi
 0x4B20FF: mov     [ebp+var_14], esi
-0x4B2102: mov     [ebp+var_20], esi
+0x4B2102: mov     [ebp+slot], esi
 0x4B2105: mov     eax, [ebx]
-0x4B2107: mov     edi, [ebp+arg_0]
+0x4B2107: mov     edi, [ebp+reference]
 0x4B210A: mov     edx, [eax+110h]
 0x4B2110: push    edi
 0x4B2111: mov     [ebp+var_4], esi
@@ -39,7 +39,6 @@
 0x4B2146: jz      short loc_4B215D
 0x4B2148: lea     edx, [eax+1]
 0x4B214B: jmp     short loc_4B2150
-0x4B214D: align 10h
 0x4B2150: mov     cl, [eax]
 0x4B2152: add     eax, 1
 0x4B2155: test    cl, cl
@@ -94,8 +93,8 @@
 0x4B21D6: mov     ecx, edi
 0x4B21D8: call    eax
 0x4B21DA: fstp    [ebp+var_1C]
-0x4B21DD: lea     ecx, [ebp+var_3C]
-0x4B21E0: call    sub_478B90
+0x4B21DD: lea     ecx, [ebp+var_3C]; this
+0x4B21E0: call    OB_NiCloningProcess_ctor
 0x4B21E5: fld     [ebp+var_1C]
 0x4B21E8: fst     [ebp+var_24]
 0x4B21EB: fst     [ebp+var_28]
@@ -146,15 +145,15 @@
 0x4B2266: push    ecx
 0x4B2267: mov     ecx, [ebp+var_14]; this
 0x4B226A: fstp    [esp+78h+a2]; a2
-0x4B226D: call    NiAVObject_UpdateNiAVObject
-0x4B2272: mov     edi, [ebp+arg_0]
+0x4B226D: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
+0x4B2272: mov     edi, [ebp+reference]
 0x4B2275: mov     esi, [ebp+var_14]
-0x4B2278: push    esi
-0x4B2279: push    edi
-0x4B227A: mov     ecx, ebx
-0x4B227C: call    sub_4B1600
+0x4B2278: push    esi; referenceRoot
+0x4B2279: push    edi; reference
+0x4B227A: mov     ecx, ebx; self
+0x4B227C: call    TESObjectLIGH_ConfigureReferencePointLight; Create/find and configure the NiPointLight attached to a TESObjectLIGH reference. lightFlags_7C bit 0x20 ('Off by default') suppresses the normal non-actor path; bit 0x04 ('Negative') negates RGB. The routine registers the source with ShadowSceneNode and seeds attenuation/dimmer, but does not read editor bits 0x200/0x400 and does not admit shadow casters.
 0x4B2281: mov     ecx, esi; this
-0x4B2283: call    NiAVObject_InitializePropertyState
+0x4B2283: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x4B2288: mov     ecx, [ebp+var_3C]
 0x4B228B: test    ecx, ecx
 0x4B228D: mov     byte ptr [ebp+var_4], 0
@@ -186,3 +185,17 @@
 0x4B22CB: mov     esp, ebp
 0x4B22CD: pop     ebp
 0x4B22CE: retn    4
+0x9B3090: lea     ecx, [ebp+slot]; slot
+0x9B3093: jmp     NiPointerSlot_Release
+0x9B3098: lea     ecx, [ebp+var_3C]
+0x9B309B: jmp     sub_4781A0
+0x9B30A0: mov     edx, [esp-4+arg_4]
+0x9B30A4: lea     eax, [edx+0Ch]
+0x9B30A7: mov     ecx, [edx-64h]
+0x9B30AA: xor     ecx, eax
+0x9B30AC: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B30B1: mov     ecx, [edx-4]
+0x9B30B4: xor     ecx, eax
+0x9B30B6: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B30BB: mov     eax, offset stru_ADEE18
+0x9B30C0: jmp     ___CxxFrameHandler3

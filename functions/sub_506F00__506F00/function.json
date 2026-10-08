@@ -1,18 +1,31 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x506F00",
+      "0x506FCA"
+    ]
+  ],
+  "chunks_sha256": "74eda1a4185f4a48ea1ee28f63d3400d2915b1c96aa6855b19461b15a5284c9b",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "MEF LARGE PERF 2026-09-08: PERF-8 actual pointer-array sorter uses gaps h=3*h+1, reducing h/=3, with gapped insertion comparisons. It is Shell sort, not the suspected cubic linked-list indexed sort. Keep this exact sorter to preserve tie behavior and comparator call sequence while removing node reconstruction.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_506F00",
+  "display_name": "PointerArray_ShellSort",
   "end_ea": "0x506FCA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_506F00",
+  "name": "PointerArray_ShellSort",
   "segment": ".text",
   "sha256": "74eda1a4185f4a48ea1ee28f63d3400d2915b1c96aa6855b19461b15a5284c9b",
   "size": 202,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x506F00",
+  "total_chunk_size": 202,
   "type": "int __stdcall(_DWORD *, int (__cdecl *)(int, _DWORD), int)",
   "xrefs_from_count": 83,
   "xrefs_to_count": 1

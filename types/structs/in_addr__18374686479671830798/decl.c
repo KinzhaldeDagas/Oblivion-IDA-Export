@@ -1,1 +1,4 @@
-in_addr
+struct in_addr
+{
+$602C0C2E3A017EB5283DBA882439A60A S_un;
+};

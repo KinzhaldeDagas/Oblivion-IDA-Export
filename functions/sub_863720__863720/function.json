@@ -1,19 +1,36 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_863720",
+  "chunks": [
+    [
+      "0x863720",
+      "0x8637C4"
+    ],
+    [
+      "0x9CA7E0",
+      "0x9CA806"
+    ]
+  ],
+  "chunks_sha256": "6d4203253b9b4b8cae7cb461374eedb470bb87840916e5434f6f73a3f53ad2f3",
+  "comment_regular": "Oblivion virtual clone constructor for Lighting30ShaderProperty. Allocates exactly 0x108 bytes, runs the BSShaderPPLightingProperty base constructor, stores exact vptr A9576C, zeroes the derived fields, then copies clone members. This is the second live-object creation route and preserves the exact class vptr.\n\nAllocates a 0x108-byte Lighting30ShaderProperty, initializes its BSShaderPPLightingProperty base and derived fields, then copies clone state from the source property.",
+  "comment_repeatable": "Oblivion virtual clone constructor for Lighting30ShaderProperty. Allocates exactly 0x108 bytes, runs the BSShaderPPLightingProperty base constructor, stores exact vptr A9576C, zeroes the derived fields, then copies clone members. This is the second live-object creation route and preserves the exact class vptr.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "Lighting30ShaderProperty_CreateClone",
   "end_ea": "0x8637C4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_863720",
+  "name": "Lighting30ShaderProperty_CreateClone",
   "segment": ".text",
   "sha256": "614394e5025da2e63ac6a175fc802c41c7db7af6520f15e721bc2313d9c9ea82",
   "size": 164,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x863720",
-  "type": "BSShaderPPLightingProperty *__thiscall(_WORD *this, int)",
-  "xrefs_from_count": 51,
+  "total_chunk_size": 202,
+  "type": "Lighting30ShaderProperty *__thiscall(Lighting30ShaderProperty *this, int cloningProcess)",
+  "xrefs_from_count": 65,
   "xrefs_to_count": 1
 }

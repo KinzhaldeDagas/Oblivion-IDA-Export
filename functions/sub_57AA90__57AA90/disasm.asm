@@ -28,5 +28,5 @@
 0x57AAE5: fnstsw  ax
 0x57AAE7: test    ah, 44h
 0x57AAEA: jp      short locret_57AAF1
-0x57AAEC: jmp     sub_5982A0
+0x57AAEC: jmp     sub_5982A0; Container-menu close/resolution handler. When the opened container is an actor and the pickpocket state applies, it awards Sneak useValue1 before the native detection/crime comparison.
 0x57AAF1: retn

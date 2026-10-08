@@ -17,7 +17,7 @@
 0x5E20FD: fstp    [esp+4+arg_10]
 0x5E2101: fld     [esp+4+arg_10]
 0x5E2105: fiadd   dword ptr [edi]
-0x5E2107: call    Double_To_SInt32
+0x5E2107: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5E210C: mov     [edi], eax
 0x5E210E: pop     edi
 0x5E210F: pop     esi
@@ -30,7 +30,7 @@
 0x5E211F: test    ah, 5
 0x5E2122: jp      short loc_5E217F
 0x5E2124: fxch    st(1)
-0x5E2126: call    Double_To_SInt32
+0x5E2126: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5E212B: sub     eax, 64h ; 'd'
 0x5E212E: mov     [esp+4+arg_10], eax
 0x5E2132: fild    [esp+4+arg_10]
@@ -44,7 +44,7 @@
 0x5E2149: fstp    [esp+4+arg_10]
 0x5E214D: fld     [esp+4+arg_10]
 0x5E2151: fiadd   dword ptr [edi]
-0x5E2153: call    Double_To_SInt32
+0x5E2153: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5E2158: mov     [edi], eax
 0x5E215A: pop     edi
 0x5E215B: pop     esi
@@ -57,7 +57,7 @@
 0x5E2167: fstp    [esp+4+arg_10]
 0x5E216B: fld     [esp+4+arg_10]
 0x5E216F: fiadd   dword ptr [edi]
-0x5E2171: call    Double_To_SInt32
+0x5E2171: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5E2176: mov     [edi], eax
 0x5E2178: pop     edi
 0x5E2179: pop     esi
@@ -66,7 +66,7 @@
 0x5E217C: retn    8
 0x5E217F: fstp    st(1)
 0x5E2181: fiadd   dword ptr [edi]
-0x5E2183: call    Double_To_SInt32
+0x5E2183: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5E2188: mov     [edi], eax
 0x5E218A: pop     edi
 0x5E218B: pop     esi

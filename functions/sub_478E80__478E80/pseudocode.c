@@ -1,10 +1,9 @@
-void __userpurge sub_478E80(
-        char *this@<ecx>,
-        char bp0@<bpl>,
-        double a3@<st2>,
-        double a4@<st1>,
-        double a5@<st0>,
-        char a6)
+// Clear one ActorSkinInfo ring equipment slot: secondSlot=false selects biped slot 6 at +0xAC, true selects biped slot 7 at +0xBC. Exact left/right polarity is not proven.
+void __thiscall ActorSkinInfo_ClearRingSlot(ActorSkinInfo *this, bool secondSlot)
 {
-  sub_478780(this, bp0, a3, a4, a5, (int)(this + 0x10 * (a6 != 0) + 0xAC), 1, 0);
+  ActorSkinInfo_ClearOrReplaceEquipmentSlot( /*0x478e98*/
+    this,
+    (ActorSkinInfoEquipmentSlot *)(&this->RingSlot6Form + 4 * secondSlot),
+    1,
+    0);
 }

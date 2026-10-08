@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x6F89FE",
-    "line": "lea     ecx, [esp+9Ch+var_6C]",
+    "line": "lea     ecx, [esp+9Ch+message]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -157,19 +157,19 @@
   },
   {
     "ea": "0x6F8A07",
-    "line": "lea     eax, [esp+98h+var_6C]",
+    "line": "lea     eax, [esp+98h+message]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6F8A0B",
-    "line": "push    eax",
+    "line": "push    eax; message",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F8A0C",
-    "line": "lea     ecx, [esp+9Ch+var_94]",
+    "line": "lea     ecx, [esp+9Ch+var_94]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x6F8A1B",
-    "line": "call    sub_6F7DD0",
+    "line": "call    OB_std_runtime_error_CtorFromString_010201A0; Oblivion runtime_error constructor from the 28-byte SpeedTree small string: constructs std::exception, installs runtime_error vftable, initializes SSO state, and copies the message.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x6F8A2A",
-    "line": "mov     [esp+0A0h+var_94], offset ??_7failure@ios_base@std@@6B@; const std::ios_base::failure::`vftable'",
+    "line": "mov     dword ptr [esp+0A0h+var_94.exceptionBase], offset ??_7failure@ios_base@std@@6B@; const std::ios_base::failure::`vftable' ...",
     "mnemonic": "mov",
     "size": 8
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x6F8A41",
-    "line": "lea     ecx, [esp+9Ch+var_6C]",
+    "line": "lea     ecx, [esp+9Ch+message]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -247,19 +247,19 @@
   },
   {
     "ea": "0x6F8A4A",
-    "line": "lea     edx, [esp+98h+var_6C]",
+    "line": "lea     edx, [esp+98h+message]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6F8A4E",
-    "line": "push    edx",
+    "line": "push    edx; message",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F8A4F",
-    "line": "lea     ecx, [esp+9Ch+var_94]",
+    "line": "lea     ecx, [esp+9Ch+var_94]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x6F8A5E",
-    "line": "call    sub_6F7DD0",
+    "line": "call    OB_std_runtime_error_CtorFromString_010201A0; Oblivion runtime_error constructor from the 28-byte SpeedTree small string: constructs std::exception, installs runtime_error vftable, initializes SSO state, and copies the message.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x6F8A6D",
-    "line": "mov     [esp+0A0h+var_94], offset ??_7failure@ios_base@std@@6B@; const std::ios_base::failure::`vftable'",
+    "line": "mov     dword ptr [esp+0A0h+var_94.exceptionBase], offset ??_7failure@ios_base@std@@6B@; const std::ios_base::failure::`vftable' ...",
     "mnemonic": "mov",
     "size": 8
   },
@@ -331,13 +331,13 @@
   },
   {
     "ea": "0x6F8A8C",
-    "line": "push    ecx",
+    "line": "push    ecx; message",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F8A8D",
-    "line": "lea     ecx, [esp+9Ch+var_50]",
+    "line": "lea     ecx, [esp+9Ch+var_50]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x6F8A9C",
-    "line": "call    sub_6F7DD0",
+    "line": "call    OB_std_runtime_error_CtorFromString_010201A0; Oblivion runtime_error constructor from the 28-byte SpeedTree small string: constructs std::exception, installs runtime_error vftable, initializes SSO state, and copies the message.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x6F8AAB",
-    "line": "mov     [esp+0A0h+var_50], offset ??_7failure@ios_base@std@@6B@; const std::ios_base::failure::`vftable'",
+    "line": "mov     dword ptr [esp+0A0h+var_50.exceptionBase], offset ??_7failure@ios_base@std@@6B@; const std::ios_base::failure::`vftable' ...",
     "mnemonic": "mov",
     "size": 8
   },
@@ -412,5 +412,83 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C8FB0",
+    "line": "lea     ecx, [ebp-6Ch]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C8FB3",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8FB8",
+    "line": "lea     ecx, [ebp-6Ch]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C8FBB",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8FC0",
+    "line": "lea     ecx, [ebp-28h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C8FC3",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8FC8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C8FCC",
+    "line": "lea     eax, [edx-88h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C8FD2",
+    "line": "mov     ecx, [edx-8Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C8FD8",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C8FDA",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8FDF",
+    "line": "mov     eax, offset stru_AF18C8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8FE4",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

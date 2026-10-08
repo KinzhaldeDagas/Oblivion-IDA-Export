@@ -1,19 +1,36 @@
 {
-  "callees_count": 8,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7F1DB0",
+  "chunks": [
+    [
+      "0x7F1DB0",
+      "0x7F1E60"
+    ],
+    [
+      "0x9CA420",
+      "0x9CA446"
+    ]
+  ],
+  "chunks_sha256": "abe056a14166360493e3926cfba6ad12b5a76760ef9ca28ed2fa50ee86d5c582",
+  "comment_regular": "Leaf shader-property stream builder. Emits one 0x10-stride STSP stream with four components per vertex.\n\n[2026-10-03 owned-stream correction] Verified same one-stream ABI as Fallout CreateRendererSpecificProperty 0x828CE150: virtual +6C supplies STSPData+8 and +70 supplies ushort count +C through retained property+A4. One 16-byte/4-component stream, copyData=false. The plugin no longer needs a 128-entry auxiliary property cache; native leaf fallback is layout-compatible, not a different declaration. Current adapter reads owner metadata each request and rejects invalid/overflowing spans before allocation. Native lifetime remains governed by the retained STSPData.\n\n[v150 leaf normal map audit] Verified native leaf AdditionalGeometryData has one FLOAT4 STSP stream (stride10, descriptor0), no T/B streams. RT4.1 SourceCode/LeafGeometry.cpp702-729 exports four corner N/T/B vectors for dynamic leaves. Normal-mapped card support must carry these into a compatible native declaration; v150 does not yet change this native method.\n\n[v151 normal-card integration] Property vtable slotA92A60 (+94) is wrapped only for plugin-tagged normal STSP owners. Ordinary owners still call original method. Tagged owners hold three planar FLOAT4 streams: native wind/selector, tangent/normal-enable, binormal. Native property clones retain that STSP and continue using the same global property vtable, so future stream rebuilds must preserve all three streams. Plugin-owned input blocks are copied into AdditionalGeometryData; clone/game execution UNVERIFIED.\n\nBuild leaf auxiliary input stream: one float4 per vertex, stride 0x10. Stock builder field z contains integer LeafBase selector plus packed-green fractional dimmer.\nSpeedTreeOBSE v167 integration: existing A92A60 stream-builder hook recognizes the new paired leaf owner. It creates four owned float4 AGD streams: unchanged native STSP0, optional normal bases1/2, and pair3. Prefix stream+8/count+C remains compatible with native leaf consumers and owned publication.",
+  "comment_repeatable": "Build leaf auxiliary input stream: one float4 per vertex, stride 0x10. Stock builder field z contains integer LeafBase selector plus packed-green fractional dimmer.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_SpeedTreeLeafShaderProperty_BuildInputStreams_010201A0",
   "end_ea": "0x7F1E60",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7F1DB0",
+  "name": "OB_SpeedTreeLeafShaderProperty_BuildInputStreams_010201A0",
   "segment": ".text",
   "sha256": "ecda036284e791939388e1844716222181eb7cd32f09d5bf5ff7a0400a2b9375",
   "size": 176,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7F1DB0",
-  "type": "unsigned __int16 *__thiscall(void *this, int)",
-  "xrefs_from_count": 72,
+  "total_chunk_size": 214,
+  "type": "unsigned __int16 *__thiscall(OB_SpeedTreeLeafShaderProperty_010201A0 *this, int geometryData)",
+  "xrefs_from_count": 86,
   "xrefs_to_count": 1
 }

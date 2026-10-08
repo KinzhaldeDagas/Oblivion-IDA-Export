@@ -1,19 +1,32 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x658BC0",
+      "0x658CA1"
+    ]
+  ],
+  "chunks_sha256": "2d4a3d3a31b346c36cc94e0b1ec8cc9d032635d55846f7cea621d35da0d39519",
+  "comment_regular": "Verified 2026-10-04: MiddleLowProcess size role from Oblivion process vtable slot +0x3F0, parent call chain and matching serialization/reset behavior. ECX receiver and RET8 establish stack arity; owner is MobileObject (dispatch 65A835 for Revert). \nVerified: size = LowProcess size + optional6-byte BLOK envelope +4 bytes for member+0x90 + AVCollection size when mask0x100000. Matches save/load. Unknown semantic name of +0x90 word; retain unk090.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 4,
-  "display_name": "sub_658BC0",
+  "display_name": "MiddleLowProcess_GetSaveSize",
   "end_ea": "0x658CA1",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_658BC0",
+  "name": "MiddleLowProcess_GetSaveSize",
   "segment": ".text",
   "sha256": "2d4a3d3a31b346c36cc94e0b1ec8cc9d032635d55846f7cea621d35da0d39519",
   "size": 225,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x658BC0",
-  "type": "unsigned __int16 __thiscall(_DWORD *this, int, int)",
+  "total_chunk_size": 225,
+  "type": "unsigned __int16 __thiscall(MiddleLowProcess *self, ProcessSaveChangeMask changeMask, MobileObject *owner)",
   "xrefs_from_count": 88,
   "xrefs_to_count": 2
 }

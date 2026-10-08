@@ -25,3 +25,12 @@
 0x71A59A: pop     esi
 0x71A59B: add     esp, 10h
 0x71A59E: retn
+0x9C9F10: mov     ecx, [ebp-10h]; this
+0x9C9F13: jmp     ??1NiDynamicEffect@@UAE@XZ; NiDynamicEffect::~NiDynamicEffect(void)
+0x9C9F18: mov     edx, [esp+arg_4]
+0x9C9F1C: lea     eax, [edx-8]
+0x9C9F1F: mov     ecx, [edx-0Ch]
+0x9C9F22: xor     ecx, eax
+0x9C9F24: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C9F29: mov     eax, offset stru_AF26E0
+0x9C9F2E: jmp     ___CxxFrameHandler3

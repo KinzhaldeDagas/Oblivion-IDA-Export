@@ -1,1 +1,1 @@
-NiScreenTexture
+struct NiScreenTexture;

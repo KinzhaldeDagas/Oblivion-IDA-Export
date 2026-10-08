@@ -15,7 +15,7 @@
 0x781387: push    ebx
 0x781388: mov     ebx, [esp+0Ch+arg_18]
 0x78138C: push    ebp
-0x78138D: mov     ebp, dword ptr [esp+10h+ArgList]
+0x78138D: mov     ebp, [esp+10h+ArgList]
 0x781391: push    ebx
 0x781392: lea     ebx, [esp+14h+arg_14]
 0x781396: push    ebx
@@ -76,7 +76,7 @@
 0x781417: call    sub_738460
 0x78141C: add     esp, 10h
 0x78141F: push    esi
-0x781420: call    FormHeapFree
+0x781420: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x781425: mov     eax, [esp+14h+arg_10]
 0x781429: add     esp, 4
 0x78142C: test    eax, eax
@@ -107,11 +107,11 @@
 0x781462: add     esp, 4
 0x781465: push    eax
 0x781466: call    edx
-0x781468: push    edi; Size
-0x781469: push    eax; Src
+0x781468: push    edi; byteCount
+0x781469: push    eax; source
 0x78146A: mov     eax, [esi]
-0x78146C: push    eax; Dst
-0x78146D: call    _memcpy
+0x78146C: push    eax; destination
+0x78146D: call    _memcpy;
 0x781472: mov     eax, [esp+1Ch+arg_10]
 0x781476: mov     ecx, [eax]
 0x781478: mov     edx, [ecx+8]

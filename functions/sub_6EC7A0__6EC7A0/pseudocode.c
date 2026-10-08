@@ -1,5 +1,5 @@
-int __thiscall sub_6EC7A0(int *this, unsigned int *a2)
+int __thiscall sub_6EC7A0(NiRenderer *this, unsigned int *a2)
 {
-  sub_715F40(this, (signed int)a2);
-  return sub_712A20(a2);
+  NiTimeController_LoadBinary(this, (signed int)a2); /*0x6ec7a6*/
+  return sub_712A20(a2); /*0x6ec7b2*/
 }

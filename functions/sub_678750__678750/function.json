@@ -1,19 +1,32 @@
 {
-  "callees_count": 108,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 43,
   "callers_count": 5,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x678750",
+      "0x678D25"
+    ]
+  ],
+  "chunks_sha256": "c34f95edfbed3e186bba6ae8c85cf3af3abf942202ceeb3ccaa197e1eef03212",
+  "comment_regular": "BunkFix: furniture activation/sit-sleep handoff. For Sleep package, revalidates candidate furniture refs, picks first unused marker via sub_4D73F0, resolves marker transform via sub_4DB9D0, then calls SetSleepState. This is after the actor has already reached/activated the furniture ref.",
+  "comment_repeatable": "BunkFix: furniture activation/sit-sleep handoff. For Sleep package, revalidates candidate furniture refs, picks first unused marker via sub_4D73F0, resolves marker transform via sub_4DB9D0, then calls SetSleepState. This is after the actor has already reached/activated the furniture ref.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "sub_678750",
   "end_ea": "0x678D25",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_678750",
   "segment": ".text",
   "sha256": "c34f95edfbed3e186bba6ae8c85cf3af3abf942202ceeb3ccaa197e1eef03212",
   "size": 1493,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x678750",
-  "type": "void __usercall(int@<ecx>, int@<ebx>, TESObjectREFR *@<ebp>, MobileObject *@<edi>, int@<esi>, double@<st2>, double@<st1>, double@<st0>)",
+  "total_chunk_size": 1493,
+  "type": "void __usercall(int@<ecx>, unsigned int@<ebx>, TESObjectREFR *@<ebp>, MobileObject *@<edi>, int@<esi>, double@<st2>, double@<st1>, double@<st0>)",
   "xrefs_from_count": 569,
   "xrefs_to_count": 5
 }

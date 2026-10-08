@@ -1,0 +1,662 @@
+[
+  {
+    "ea": "0x7A84A0",
+    "line": "push    0FFFFFFFFh; Recovered unrecognized Oblivion function boundary. SIdvWindInfo::Parse reads local tokens 5000..5006 until EndWindInfo: direction, branch oscillation, branch factors, and enabled are consumed/discarded; leafOscillation, leafFactors, and strength are stored. The 4.1 source/Fallout supply the historical name only after the local switch and field stores were observed.",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x7A84A2",
+    "line": "push    offset SEH_7A84A0",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x7A84A7",
+    "line": "mov     eax, large fs:0",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x7A84AD",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7A84AE",
+    "line": "sub     esp, 80h",
+    "mnemonic": "sub",
+    "size": 6
+  },
+  {
+    "ea": "0x7A84B4",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7A84B5",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7A84B6",
+    "line": "mov     eax, ds:0B30AACh",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x7A84BB",
+    "line": "xor     eax, esp",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x7A84BD",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7A84BE",
+    "line": "lea     eax, [esp+98h+var_C]",
+    "mnemonic": "lea",
+    "size": 7
+  },
+  {
+    "ea": "0x7A84C5",
+    "line": "mov     large fs:0, eax",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x7A84CB",
+    "line": "mov     edi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7A84CD",
+    "line": "mov     esi, [esp+98h+file]",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x7A84D4",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7A84D6",
+    "line": "call    OB_CTreeFileAccess_ReadDword_010201A0; CTreeFileAccess::ParseToken/ParseInt-style 4-byte read. Bounds-checks cursor against owned buffer, advances cursor by 4, returns little-endian dword.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7A84DB",
+    "line": "jmp     short loc_7A84E0",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x7A84E0",
+    "line": "add     eax, 0FFFFEC78h; switch 7 cases",
+    "mnemonic": "add",
+    "size": 5
+  },
+  {
+    "ea": "0x7A84E5",
+    "line": "cmp     eax, 6",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x7A84E8",
+    "line": "ja      def_7A84EE; jumptable 007A84EE default case",
+    "mnemonic": "ja",
+    "size": 6
+  },
+  {
+    "ea": "0x7A84EE",
+    "line": "jmp     ds:jpt_7A84EE[eax*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x7A84F5",
+    "line": "lea     eax, [esp+98h+outVec3]; jumptable 007A84EE case 5000",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x7A84F9",
+    "line": "push    eax; outVec3",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7A84FA",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7A84FC",
+    "line": "call    OB_CTreeFileAccess_ReadVec3_010201A0; CTreeFileAccess vector3 float reader. Reads three 4-byte floats into caller buffer.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7A8501",
+    "line": "jmp     loc_7A8587",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x7A8506",
+    "line": "lea     ecx, [esp+98h+var_80]; jumptable 007A84EE case 5001",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x7A850A",
+    "line": "push    ecx; outVec3",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7A850B",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7A850D",
+    "line": "call    OB_CTreeFileAccess_ReadVec3_010201A0; CTreeFileAccess vector3 float reader. Reads three 4-byte floats into caller buffer.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7A8512",
+    "line": "jmp     short loc_7A8587",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x7A8514",
+    "line": "lea     edx, [esp+98h+var_74]; jumptable 007A84EE case 5002",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x7A8518",
+    "line": "push    edx; outVec3",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7A8519",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7A851B",
+    "line": "call    OB_CTreeFileAccess_ReadVec3_010201A0; CTreeFileAccess vector3 float reader. Reads three 4-byte floats into caller buffer.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7A8520",
+    "line": "mov     ecx, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7A8522",
+    "line": "mov     [edi+0Ch], ecx",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7A8525",
+    "line": "mov     edx, [eax+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7A8528",
+    "line": "mov     [edi+10h], edx",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7A852B",
+    "line": "mov     eax, [eax+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7A852E",
+    "line": "mov     [edi+14h], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7A8531",
+    "line": "jmp     short loc_7A8587",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x7A8533",
+    "line": "lea     ecx, [esp+98h+var_68]; jumptable 007A84EE case 5003",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x7A8537",
+    "line": "push    ecx; outVec3",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7A8538",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7A853A",
+    "line": "call    OB_CTreeFileAccess_ReadVec3_010201A0; CTreeFileAccess vector3 float reader. Reads three 4-byte floats into caller buffer.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7A853F",
+    "line": "jmp     short loc_7A8587",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x7A8541",
+    "line": "lea     edx, [esp+98h+var_5C]; jumptable 007A84EE case 5004",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x7A8545",
+    "line": "push    edx; outVec3",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7A8546",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7A8548",
+    "line": "call    OB_CTreeFileAccess_ReadVec3_010201A0; CTreeFileAccess vector3 float reader. Reads three 4-byte floats into caller buffer.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7A854D",
+    "line": "mov     ecx, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7A854F",
+    "line": "mov     [edi], ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7A8551",
+    "line": "mov     edx, [eax+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7A8554",
+    "line": "mov     [edi+4], edx",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7A8557",
+    "line": "mov     eax, [eax+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7A855A",
+    "line": "mov     [edi+8], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7A855D",
+    "line": "jmp     short loc_7A8587",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x7A855F",
+    "line": "mov     ecx, esi; jumptable 007A84EE case 5005",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7A8561",
+    "line": "call    OB_CTreeFileAccess_ReadFloat_010201A0; CTreeFileAccess::ParseFloat. Bounds-checks cursor, advances by 4, returns little-endian float.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7A8566",
+    "line": "fstp    dword ptr [edi+18h]",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x7A8569",
+    "line": "jmp     short loc_7A8587",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x7A856B",
+    "line": "mov     ecx, [esi]; jumptable 007A84EE case 5006",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7A856D",
+    "line": "lea     edx, [ecx+1]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x7A8570",
+    "line": "mov     [esi], edx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7A8572",
+    "line": "mov     edx, [esi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7A8575",
+    "line": "test    edx, edx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x7A8577",
+    "line": "jz      short loc_7A8582",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x7A8579",
+    "line": "mov     eax, [esi+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7A857C",
+    "line": "sub     eax, edx",
+    "mnemonic": "sub",
+    "size": 2
+  },
+  {
+    "ea": "0x7A857E",
+    "line": "cmp     ecx, eax",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x7A8580",
+    "line": "jb      short loc_7A8587",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x7A8582",
+    "line": "call    __invalid_parameter_noinfo",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7A8587",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7A8589",
+    "line": "call    OB_CTreeFileAccess_ReadDword_010201A0; CTreeFileAccess::ParseToken/ParseInt-style 4-byte read. Bounds-checks cursor against owned buffer, advances cursor by 4, returns little-endian dword.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7A858E",
+    "line": "cmp     eax, 3F4h",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x7A8593",
+    "line": "jnz     loc_7A84E0",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x7A8599",
+    "line": "mov     ecx, [esp+98h+var_C]",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x7A85A0",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x7A85A7",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7A85A8",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7A85A9",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7A85AA",
+    "line": "add     esp, 8Ch",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x7A85B0",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x7A85B3",
+    "line": "push    22h ; '\"'; jumptable 007A84EE default case",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x7A85B5",
+    "line": "push    offset aMalformedGen_2; \"malformed general wind information\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x7A85BA",
+    "line": "lea     ecx, [esp+0A0h+details]; this",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x7A85BE",
+    "line": "mov     [esp+0A0h+details.capacity], 0Fh",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x7A85C6",
+    "line": "mov     [esp+0A0h+details.size], 0",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x7A85CE",
+    "line": "mov     byte ptr [esp+0A0h+details.storage], 0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x7A85D3",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7A85D8",
+    "line": "push    0; appendSystemError",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x7A85DA",
+    "line": "lea     eax, [esp+9Ch+details]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x7A85DE",
+    "line": "push    eax; details",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7A85DF",
+    "line": "lea     ecx, [esp+0A0h+var_34]; this",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x7A85E3",
+    "line": "mov     [esp+0A0h+var_4], 0",
+    "mnemonic": "mov",
+    "size": 11
+  },
+  {
+    "ea": "0x7A85EE",
+    "line": "call    OB_IdvFileError_Ctor_010201A0; Oblivion IdvFileError constructor: builds details + ' [' + optional strerror(errno) + ']', constructs the binary runtime_error base, then installs IdvFileError vftable. RT4.1 corroborates the message expression but its st_string inheritance is not used for this older binary layout.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7A85F3",
+    "line": "push    offset __TI3?AVIdvFileError@@; throw info for 'class IdvFileError'",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x7A85F8",
+    "line": "lea     ecx, [esp+9Ch+var_34]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x7A85FC",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7A85FD",
+    "line": "call    ThrowException??",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCE90",
+    "line": "lea     ecx, [ebp-50h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCE93",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCE98",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CCE9C",
+    "line": "lea     eax, [edx-88h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CCEA2",
+    "line": "mov     ecx, [edx-8Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9CCEA8",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CCEAA",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCEAF",
+    "line": "mov     eax, offset stru_AF6270",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCEB4",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
+  }
+]

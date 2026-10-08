@@ -1,19 +1,32 @@
 {
-  "callees_count": 81,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 21,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x5EA800",
+      "0x5EACFF"
+    ]
+  ],
+  "chunks_sha256": "b6058b72604e9a45521437039ec6cd2b761b798424edaa09aa4dff91b2542a60",
+  "comment_regular": "3DTheft pass 166 crash decode: returns clamped SInt32 in EAX. Hybrid ABI uses ECX=this, entry [ESP+4]=with Actor, entry [ESP+8]=withBase TESForm; every exit is RET 4, so caller must discard the residual withBase dword.",
+  "comment_repeatable": "3DTheft pass 166 crash decode: returns clamped SInt32 in EAX. Hybrid ABI uses ECX=this, entry [ESP+4]=with Actor, entry [ESP+8]=withBase TESForm; every exit is RET 4, so caller must discard the residual withBase dword.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
   "display_name": "Actor_GetDisposition",
   "end_ea": "0x5EACFF",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "Actor_GetDisposition",
   "segment": ".text",
   "sha256": "b6058b72604e9a45521437039ec6cd2b761b798424edaa09aa4dff91b2542a60",
   "size": 1279,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5EA800",
-  "type": "double __thiscall(Actor *this, Actor *a2, TESForm *a3)",
+  "total_chunk_size": 1279,
+  "type": "int __usercall@<eax>(Actor *actor@<ecx>, Actor *with@<^0.4>, TESForm *withBase@<^4.4>)",
   "xrefs_from_count": 522,
   "xrefs_to_count": 4
 }

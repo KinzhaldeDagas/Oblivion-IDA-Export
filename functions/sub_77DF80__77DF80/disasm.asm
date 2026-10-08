@@ -10,7 +10,7 @@
 0x77DF98: test    eax, eax
 0x77DF9A: jz      short loc_77DFA5
 0x77DF9C: mov     ecx, eax
-0x77DF9E: call    NiGeometryBufferData__NiGeometryBufferData
+0x77DF9E: call    NiGeometryBufferData__NiGeometryBufferData; Pass225: NiGeometryBufferData constructor for 0x50-byte screen-texture buffer cache.
 0x77DFA3: jmp     short loc_77DFA7
 0x77DFA5: xor     eax, eax
 0x77DFA7: mov     dword ptr [eax+38h], 4
@@ -18,7 +18,7 @@
 0x77DFB1: push    eax
 0x77DFB2: mov     ecx, edi
 0x77DFB4: mov     dword ptr [eax], 1400000h
-0x77DFBA: call    sub_782910
+0x77DFBA: call    sub_782910; Pass225: Links NiGeometryBufferData to owning geometry group; increments group refcount and writes buffer+0x04.
 0x77DFBF: mov     word ptr [esi+18h], 0FFFFh
 0x77DFC5: pop     edi
 0x77DFC6: pop     esi

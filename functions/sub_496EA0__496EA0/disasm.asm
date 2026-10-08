@@ -8,7 +8,6 @@
 0x496EAD: mov     bl, 1
 0x496EAF: lea     ebp, [esi+80h]
 0x496EB5: jmp     short loc_496EC0
-0x496EB7: align 10h
 0x496EC0: push    offset unk_A2F830; lpCriticalSection
 0x496EC5: mov     ecx, ebp
 0x496EC7: call    NiEnterCriticalSection

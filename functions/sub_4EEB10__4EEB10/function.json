@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4EEB10",
+      "0x4EEB2B"
+    ]
+  ],
+  "chunks_sha256": "b83821ceb7c04e7f1450107fac7200c54eb63b049b2a6120ff5b2afa2567ee84",
+  "comment_regular": "Verified: sorts entries ascending by selectionWeight. The same field is consumed by Oblivion's weighted random weather selector.",
+  "comment_repeatable": "Verified: sorts entries ascending by selectionWeight. The same field is consumed by Oblivion's weighted random weather selector.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4EEB10",
+  "display_name": "OblivionTESWeatherList_CompareSelectionWeight",
   "end_ea": "0x4EEB2B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4EEB10",
+  "name": "OblivionTESWeatherList_CompareSelectionWeight",
   "segment": ".text",
   "sha256": "b83821ceb7c04e7f1450107fac7200c54eb63b049b2a6120ff5b2afa2567ee84",
   "size": 27,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4EEB10",
-  "type": "unsigned int __cdecl(int, int)",
+  "total_chunk_size": 27,
+  "type": "int __cdecl(OblivionTESWeatherWeightEntry *left, OblivionTESWeatherWeightEntry *right)",
   "xrefs_from_count": 10,
   "xrefs_to_count": 1
 }

@@ -13,9 +13,9 @@ int __cdecl __crtCompareStringA(
   int v10; // [esp+8h] [ebp-8h]
   char v11; // [esp+Ch] [ebp-4h]
 
-  _LocaleUpdate::_LocaleUpdate((_LocaleUpdate *)v9, a1);
-  result = unknown_libname_201((int)v9, a4, a2, a3, a5, a6, a7, a8);
-  if ( v11 )
-    *(_DWORD *)(v10 + 0x70) &= ~2u;
-  return result;
+  _LocaleUpdate::_LocaleUpdate((_LocaleUpdate *)v9, a1); /*0x9a1589*/
+  result = unknown_libname_201((int)v9, a4, a2, a3, a5, a6, a7, a8); /*0x9a15a6*/
+  if ( v11 ) /*0x9a15b2*/
+    *(_DWORD *)(v10 + 0x70) &= ~2u; /*0x9a15b7*/
+  return result; /*0x9a15bb*/
 }

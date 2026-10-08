@@ -1,4 +1,4 @@
-0x4B7900: push    esi
+0x4B7900: push    esi; Verified clears TESObjectDOOR.randomTeleport: frees each allocated successor node, then clears the inline first-space pointer. Called before copying door data.
 0x4B7901: mov     esi, ecx
 0x4B7903: cmp     dword ptr [esi+6Ch], 0
 0x4B7907: jz      short loc_4B7927
@@ -7,7 +7,7 @@
 0x4B7910: mov     eax, [esi+6Ch]
 0x4B7913: mov     edi, [eax+4]
 0x4B7916: push    eax
-0x4B7917: call    FormHeapFree
+0x4B7917: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4B791C: add     esp, 4
 0x4B791F: test    edi, edi
 0x4B7921: mov     [esi+6Ch], edi

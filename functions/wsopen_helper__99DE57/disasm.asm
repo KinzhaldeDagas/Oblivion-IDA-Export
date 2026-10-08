@@ -66,7 +66,7 @@
 0x99DF03: sar     ecx, 5
 0x99DF06: and     eax, 1Fh
 0x99DF09: imul    eax, 28h ; '('
-0x99DF0C: mov     ecx, dword_BAAAC0[ecx*4]
+0x99DF0C: mov     ecx, dword ptr unk_BAAAC0[ecx*4]
 0x99DF13: lea     eax, [ecx+eax+4]
 0x99DF17: and     byte ptr [eax], 0FEh
 0x99DF1A: push    dword ptr [edi]

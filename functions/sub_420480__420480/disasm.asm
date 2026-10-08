@@ -1,4 +1,4 @@
-0x420480: push    esi
+0x420480: push    esi; Returns the embedded reference list in ExtraDroppedItemList type 0x42.
 0x420481: push    42h ; 'B'; a2
 0x420483: xor     esi, esi
 0x420485: call    BaseExtraList_GetExtraData

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x715540",
-    "line": "or      word ptr [ecx+8], 8",
+    "line": "or      word ptr [ecx+8], 8; Activates controller flag bit 3, invalidates last application time +0x20, and for APP_INIT timing (bit 0) seeds start time +0x1C from the supplied application time.",
     "mnemonic": "or",
     "size": 5
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x715558",
-    "line": "fld     [esp+arg_0]",
+    "line": "fld     [esp+applicationTime]",
     "mnemonic": "fld",
     "size": 4
   },

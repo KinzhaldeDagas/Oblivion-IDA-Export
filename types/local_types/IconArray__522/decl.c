@@ -1,1 +1,1 @@
-IconArray
+struct IconArray;

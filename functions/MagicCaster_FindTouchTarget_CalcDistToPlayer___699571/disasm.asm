@@ -2,11 +2,11 @@
 0x699577: fld     dword ptr ds:0A32048h
 0x69957D: mov     edx, [esp+a2]
 0x699581: fstp    [esp+arg_C]
-0x699585: push    0; a4
-0x699587: push    ecx; a3
-0x699588: push    edx; a2
+0x699585: push    0; useActorProjection
+0x699587: push    ecx; to
+0x699588: push    edx; from
 0x699589: mov     [esp+0Ch+arg_10], 0
-0x699591: call    TESObjectREFR_GetDistanceBetween?
+0x699591: call    TESObjectREFR_GetSurfaceDistance; Three-argument cdecl routine: returns float surface distance from 'from' to 'to'. All 24 callers push exactly from, to, and useActorProjection then reclaim 0x0C. The prior EDI register argument, fourth stack byte, and double return were analysis pollution.
 0x699596: fld     [esp+0Ch+arg_18]
 0x69959A: fcompp
 0x69959C: add     esp, 0Ch
@@ -15,18 +15,18 @@
 0x6995A4: jnz     short loc_6995F0
 0x6995A6: test    ebp, ebp
 0x6995A8: fld     dword ptr ds:0A32048h
-0x6995AE: fstp    [esp+arg_14]
+0x6995AE: fstp    [esp+outAngleDegrees]
 0x6995B2: jz      short loc_6995CD
 0x6995B4: mov     ecx, ds:0B333C4h
-0x6995BA: lea     eax, [esp+arg_14]
-0x6995BE: push    eax
-0x6995BF: push    ecx
-0x6995C0: push    ebp
-0x6995C1: call    sub_6131D0
+0x6995BA: lea     eax, [esp+outAngleDegrees]
+0x6995BE: push    eax; outAngleDegrees
+0x6995BF: push    ecx; target
+0x6995C0: push    ebp; actor
+0x6995C1: call    Actor_IsFacingReferenceWithinCombatAngle; Computes the absolute XY heading difference from actor to target, normalizes across the 360-degree boundary, optionally returns degrees, and tests it against the combat-facing threshold game setting.
 0x6995C6: add     esp, 0Ch
 0x6995C9: test    al, al
 0x6995CB: jz      short loc_6995F0
-0x6995CD: fld     [esp+arg_14]
+0x6995CD: fld     [esp+outAngleDegrees]
 0x6995D1: fcom    qword ptr ds:0A3A5B0h
 0x6995D7: fnstsw  ax
 0x6995D9: test    ah, 41h
@@ -37,10 +37,10 @@
 0x6995EC: jmp     short loc_6995F0
 0x6995EE: fstp    st
 0x6995F0: push    0; a2
-0x6995F2: mov     ecx, offset ActorProcessManager_ptr; this
-0x6995F7: call    sub_673A50
+0x6995F2: mov     ecx, (offset qword_B3BB2C+1D4h); this
+0x6995F7: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x6995FC: mov     ecx, eax; this
-0x6995FE: call    sub_7616D0
+0x6995FE: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x699603: mov     ebx, eax
 0x699605: test    ebx, ebx
 0x699607: jz      loc_69973A
@@ -79,12 +79,12 @@
 0x69966A: call    edx
 0x69966C: test    eax, eax
 0x69966E: jz      short loc_6996CB
-0x699670: mov     eax, [esp+8+arg_4]
-0x699674: push    0; a4
-0x699676: push    esi; a3
-0x699677: push    eax; a2
-0x699678: call    TESObjectREFR_GetDistanceBetween?
-0x69967D: fld     [esp+14h+arg_14]
+0x699670: mov     eax, [esp+8+from]
+0x699674: push    0; useActorProjection
+0x699676: push    esi; to
+0x699677: push    eax; from
+0x699678: call    TESObjectREFR_GetSurfaceDistance; Three-argument cdecl routine: returns float surface distance from 'from' to 'to'. All 24 callers push exactly from, to, and useActorProjection then reclaim 0x0C. The prior EDI register argument, fourth stack byte, and double return were analysis pollution.
+0x69967D: fld     [esp+14h+outAngleDegrees]
 0x699681: fcompp
 0x699683: add     esp, 0Ch
 0x699686: fnstsw  ax
@@ -95,10 +95,10 @@
 0x699695: fstp    [esp+8+arg_10]
 0x699699: jz      short loc_6996AE
 0x69969B: lea     ecx, [esp+8+arg_10]
-0x69969F: push    ecx
-0x6996A0: push    esi
-0x6996A1: push    ebp
-0x6996A2: call    sub_6131D0
+0x69969F: push    ecx; outAngleDegrees
+0x6996A0: push    esi; target
+0x6996A1: push    ebp; actor
+0x6996A2: call    Actor_IsFacingReferenceWithinCombatAngle; Computes the absolute XY heading difference from actor to target, normalizes across the 360-degree boundary, optionally returns degrees, and tests it against the combat-facing threshold game setting.
 0x6996A7: add     esp, 0Ch
 0x6996AA: test    al, al
 0x6996AC: jz      short loc_6996CB

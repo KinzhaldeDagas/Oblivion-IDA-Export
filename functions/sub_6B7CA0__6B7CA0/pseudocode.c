@@ -1,26 +1,26 @@
-int __thiscall sub_6B7CA0(_DWORD *this, __int16 a2)
+DialogueResponse *__thiscall DialogueItem::GetDialogueResponseByIndex(DialogueItemView *this, SInt16 index)
 {
-  _DWORD *v2; // eax
+  DialogueItemView *v2; // eax
   __int16 v3; // dx
-  int v4; // ecx
+  DialogueResponseNode *nextResponseNode; // ecx
 
-  v2 = this;
-  v3 = 0;
-  if ( this )
+  v2 = this; /*0x6b7ca0*/
+  v3 = 0; /*0x6b7ca2*/
+  if ( this ) /*0x6b7ca7*/
   {
-    do
+    do /*0x6b7cb0*/
     {
-      v4 = v2[1];
-      if ( !v4 && !*v2 )
-        break;
-      if ( v3 == a2 )
-        return *v2;
-      v2 = (_DWORD *)v2[1];
-      ++v3;
+      nextResponseNode = v2->nextResponseNode; /*0x6b7cb0*/
+      if ( !nextResponseNode && !v2->firstResponse ) /*0x6b7cb7*/
+        break; /*0x6b7cb7*/
+      if ( v3 == index ) /*0x6b7cbe*/
+        return v2->firstResponse; /*0x6b7cdc*/
+      v2 = (DialogueItemView *)v2->nextResponseNode; /*0x6b7cc0*/
+      ++v3; /*0x6b7cc2*/
     }
-    while ( v4 );
+    while ( nextResponseNode ); /*0x6b7cb0*/
   }
-  PrintError(
+  PrintError( /*0x6b7cc9*/
     "When trying to get a dialogue response by its index, the index was larger than the size of the dialogue responses list.");
-  return 0;
+  return 0; /*0x6b7cd8*/
 }

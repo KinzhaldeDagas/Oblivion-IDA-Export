@@ -1,19 +1,36 @@
 {
-  "callees_count": 86,
-  "callers_count": 5,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_67D820",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 42,
+  "callers_count": 7,
+  "chunks": [
+    [
+      "0x67D820",
+      "0x67DD63"
+    ],
+    [
+      "0x9C4A20",
+      "0x9C4A51"
+    ]
+  ],
+  "chunks_sha256": "c1b0d328254e7e170dcdf955c7154a3654727e53c1468d7e0f6825b0a38a3184",
+  "comment_regular": "Verified actor-aware PathGrid point selection. For a placed reference, builds a temporary graph node at the requested position, attaches below-water and SubSpace flags, and asks that cell's PathGrid for the best reachable candidate. For exterior coordinates, searches the loaded cell grid; when the position is in the active world's loaded neighborhood, compares actor-aware candidates from the containing and adjacent cell PathGrids. It may reduce cost for candidates with the extra reachability result; exact meaning of that mode remains Candidate.",
+  "comment_repeatable": "Verified actor-aware PathGrid point selection. For a placed reference, builds a temporary graph node at the requested position, attaches below-water and SubSpace flags, and asks that cell's PathGrid for the best reachable candidate. For exterior coordinates, searches the loaded cell grid; when the position is in the active world's loaded neighborhood, compares actor-aware candidates from the containing and adjacent cell PathGrids. It may reduce cost for candidates with the extra reachability result; exact meaning of that mode remains Candidate.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "TESPathGrid_FindNearestReachablePointForActor",
   "end_ea": "0x67DD63",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_67D820",
+  "name": "TESPathGrid_FindNearestReachablePointForActor",
   "segment": ".text",
   "sha256": "a0bd54e51cc1ffe7798fd4804ca223669f2b01ded4c5fda419e5da057478184f",
   "size": 1347,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x67D820",
-  "type": "char *__cdecl(float *, TESObjectREFR *, char, char **)",
-  "xrefs_from_count": 477,
+  "total_chunk_size": 1396,
+  "type": "TESPathGridPoint *__cdecl(const NiPoint3 *position, TESObjectREFR *actor, bool pathMode, BSSimpleList_VoidPtr *excludedPoints)",
+  "xrefs_from_count": 490,
   "xrefs_to_count": 7
 }

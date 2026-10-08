@@ -1,1 +1,1 @@
-hkCharControllerShape
+struct hkCharControllerShape;

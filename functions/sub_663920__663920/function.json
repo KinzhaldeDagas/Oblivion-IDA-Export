@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x663920",
+      "0x663971"
+    ]
+  ],
+  "chunks_sha256": "be84848010f5d8a9455ee37e61b53f81296bf3c95073c7de3595f1d623e1df9f",
+  "comment_regular": "For the actor's currently equipped AMMO, removes all matching transferred ArrowProjectile references (+0x95 transfer marker) by calling cleanup with INT_MAX and immediate-destroy flags.",
+  "comment_repeatable": "For the actor's currently equipped AMMO, removes all matching transferred ArrowProjectile references (+0x95 transfer marker) by calling cleanup with INT_MAX and immediate-destroy flags.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_663920",
+  "display_name": "Actor_CleanupTransferredArrowProjectilesForEquippedAmmo",
   "end_ea": "0x663971",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_663920",
+  "name": "Actor_CleanupTransferredArrowProjectilesForEquippedAmmo",
   "segment": ".text",
   "sha256": "be84848010f5d8a9455ee37e61b53f81296bf3c95073c7de3595f1d623e1df9f",
   "size": 81,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x663920",
-  "type": "void __thiscall(_DWORD *this)",
+  "total_chunk_size": 81,
+  "type": "void __thiscall(Actor *this)",
   "xrefs_from_count": 37,
   "xrefs_to_count": 1
 }

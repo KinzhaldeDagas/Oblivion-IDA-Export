@@ -1,4 +1,4 @@
-0x5E4080: mov     eax, [ecx+58h]
+0x5E4080: mov     eax, [ecx+58h]; Returns TESPackageNames[currentPackage->members.type] when Actor.process and process.currentPackage exist; otherwise null.
 0x5E4083: test    eax, eax
 0x5E4085: jz      short loc_5E409A
 0x5E4087: mov     eax, [eax+8]

@@ -1,7 +1,7 @@
-0x65DA60: push    ecx
+0x65DA60: push    ecx; Player override of vtable +0x1E0. Returns base rotation.z plus PlayerCharacter+0x61C, with one wrap by 2*pi (0xA3D5B0 = 6.283185...) into the expected angular interval. Native ABI return is float.
 0x65DA61: push    esi
 0x65DA62: mov     esi, ecx
-0x65DA64: call    MobileObject_GetZRotation
+0x65DA64: call    MobileObject_GetZRotation; Actor/MobileObject vtable +0x1E0 base implementation. Returns the single-precision reference rotation Z field at +0x28; the prior double return type was an x87 decompiler artifact.
 0x65DA69: fstp    [esp+8+var_4]
 0x65DA6D: fld     dword ptr [esi+61Ch]
 0x65DA73: pop     esi

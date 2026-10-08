@@ -1,19 +1,25 @@
-Unk1C *__thiscall TESTopic::CreateDialogueInfo(TESTopic *this, Actor *a3, TESObjectREFR *a4, int a6, _DWORD *a7)
+// Selects a matching TESTopicInfo and wraps it as a 0x1C DialogueItem containing response list/cursor, INFO, topic, owner quest, and speaker.
+DialogueItemView *__thiscall TESTopic::CreateDialogueItem(
+        TESTopic *this,
+        Actor *speaker,
+        TESObjectREFR *target,
+        TESTopic *previousTopic,
+        ConversationView *conversation)
 {
-  TESForm *v6; // edi
+  OblivionTopicInfo *v6; // edi
   Unk1C *v7; // ebx
-  Unk1C *result; // eax
-  TESQuest *v9; // eax
+  DialogueItemView *result; // eax
+  TESQuest *OwnerQuest; // eax
 
-  v6 = (TESForm *)sub_52F010(this, &a7, a3, a4, 1, a6, a7);
-  if ( !v6 )
-    return 0;
-  v7 = (Unk1C *)FormHeapAlloc(0x1Cu);
-  result = 0;
-  if ( v7 )
+  v6 = TESTopic::SelectInfoForSpeaker(this, (bool *)&conversation, speaker, target, 1, previousTopic, conversation);// Ambient CreateDialogueItem uses conversation rules. It deliberately reuses the already-pushed conversation argument slot as the ignored lowDispositionFailure scratch output; ambient selection never consumes that fallback. /*0x52f7d8*/
+  if ( !v6 ) /*0x52f7dc*/
+    return 0; /*0x52f80d*/
+  v7 = (Unk1C *)FormHeapAlloc(0x1Cu); /*0x52f7e5*/
+  result = 0; /*0x52f7ee*/
+  if ( v7 ) /*0x52f7f6*/
   {
-    v9 = sub_52F570(this, (int)v6);
-    return sub_6B80D0(v7, v9, this, v6, (TESObjectREFR *)a3);
+    OwnerQuest = TESTopic::GetOwnerQuest(this, v6); /*0x52f7fe*/
+    return DialogueItem::DialogueItem((DialogueItemView *)v7, OwnerQuest, this, v6, (TESObjectREFR *)speaker); /*0x52f806*/
   }
-  return result;
+  return result; /*0x52f80f*/
 }

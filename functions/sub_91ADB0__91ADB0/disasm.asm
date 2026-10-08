@@ -124,7 +124,7 @@
 0x91AF41: lea     eax, [edi+20h]
 0x91AF44: push    eax
 0x91AF45: lea     ecx, [esp+2E4h+var_294+4]
-0x91AF49: call    sub_8B1DD0
+0x91AF49: call    hkMatrix3_SetFromQuaternion; Converts a quaternion into a 3x3 basis matrix. 0x896000 uses this during per-frame movement basis refresh.
 0x91AF4E: movaps  xmm0, xmmword ptr [edi+40h]
 0x91AF52: movaps  xmm2, [esp+2E0h+anonymous_0]
 0x91AF57: movaps  xmm3, xmmword ptr [esp+2E0h+var_284+4]
@@ -149,7 +149,7 @@
 0x91AF97: push    edx
 0x91AF98: lea     ecx, [esp+94h]
 0x91AF9F: movaps  [esp+2E4h+anonymous_1], xmm1
-0x91AFA7: call    sub_8B1DD0
+0x91AFA7: call    hkMatrix3_SetFromQuaternion; Converts a quaternion into a 3x3 basis matrix. 0x896000 uses this during per-frame movement basis refresh.
 0x91AFAC: movaps  xmm0, xmmword ptr [edi+40h]
 0x91AFB0: movaps  xmm2, [esp+2E0h+anonymous_2]
 0x91AFB8: movaps  xmm3, xmmword ptr [esp+2E0h+var_244+4]

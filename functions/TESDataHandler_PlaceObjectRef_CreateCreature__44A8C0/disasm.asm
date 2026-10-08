@@ -1,4 +1,4 @@
-0x44A8C0: push    108h; Size
+0x44A8C0: push    108h; PlaceObjectRef Creature allocation branch: base form type 0x24 allocates 0x108 bytes and calls Creature_constr.
 0x44A8C5: call    FormHeapAlloc
 0x44A8CA: add     esp, 4
 0x44A8CD: mov     [esp+arg_54], eax

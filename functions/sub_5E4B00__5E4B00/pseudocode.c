@@ -1,194 +1,199 @@
-void __thiscall sub_5E4B00(Actor *this)
+void __usercall sub_5E4B00(Actor *this@<ecx>, double a2@<st0>)
 {
-  int v2; // edi
-  int v3; // ebx
-  int *v4; // ebp
-  int v5; // edi
-  int v6; // ebx
-  _DWORD *v7; // eax
-  int v8; // ecx
-  int v9; // ebx
-  int v10; // eax
-  int v11; // edi
-  int v12; // edi
-  int v13; // ebx
-  int v14; // ebx
-  int v15; // edi
-  _DWORD *v16; // eax
-  int v17; // ecx
-  int v18; // eax
-  int *v19; // ebx
-  int v20; // eax
-  int v21; // edi
-  int v22; // eax
-  int v23; // eax
-  int v24; // eax
-  int *v25; // ebx
-  int v26; // eax
-  int v27; // edi
+  TESForm *v3; // edi
+  TESForm *v4; // ebx
+  TESForm::ModReferenceList *p_modlist; // ebp
+  TESForm *v6; // edi
+  TESForm *v7; // ebx
+  TESForm::ModReferenceList *v8; // eax
+  int v9; // ecx
+  int v10; // ebx
+  Data *data; // eax
+  UInt32 *p_unkFile018; // edi
+  TESForm *v13; // edi
+  TESForm *v14; // ebx
+  TESForm *v15; // ebx
+  TESForm *v16; // edi
+  TESForm::ModReferenceList *v17; // eax
+  int v18; // ecx
+  int v19; // eax
+  int *v20; // ebx
+  int v21; // eax
+  int v22; // edi
+  TESForm *v23; // eax
+  TESForm *v24; // eax
+  Data *v25; // eax
+  char *v26; // ebx
+  int v27; // eax
+  int v28; // edi
   ExtraDataList *****ContainerExtraDataForRef; // ebp
   unsigned int i; // ebx
   unsigned int *EquippedInstance; // eax
-  unsigned int *v31; // edi
-  _DWORD *v32; // eax
-  int v33; // edx
-  _DWORD *v34; // [esp+10h] [ebp-4h]
+  unsigned int *v32; // edi
+  _DWORD *v33; // eax
+  int v34; // edx
+  TESForm::ModReferenceList *v35; // [esp+10h] [ebp-4h]
 
-  v2 = 0;
-  v3 = (int)this->vtbl->super.super.GetBaseForm((TESObjectREFR *)this);
-  if ( v3 )
+  v3 = 0; /*0x5e4b0f*/
+  v4 = this->vtbl->super.super.GetBaseForm(this); /*0x5e4b13*/
+  if ( v4 ) /*0x5e4b17*/
   {
-    if ( this->vtbl->super.super.IsActor((TESObjectREFR *)this) )
-      v2 = v3;
+    if ( this->vtbl->super.super.IsActor((TESObjectREFR *)this) ) /*0x5e4b23*/
+      v3 = v4; /*0x5e4b29*/
   }
-  v4 = (int *)(v2 + 0x58);
-  v5 = 0;
-  v6 = (int)this->vtbl->super.super.GetBaseForm((TESObjectREFR *)this);
-  if ( v6 )
+  p_modlist = &v3[3].member.modlist; /*0x5e4b33*/
+  v6 = 0; /*0x5e4b38*/
+  v7 = this->vtbl->super.super.GetBaseForm(this); /*0x5e4b3c*/
+  if ( v7 ) /*0x5e4b40*/
   {
-    if ( this->vtbl->super.super.IsActor((TESObjectREFR *)this) )
-      v5 = v6;
+    if ( this->vtbl->super.super.IsActor((TESObjectREFR *)this) ) /*0x5e4b4c*/
+      v6 = v7; /*0x5e4b52*/
   }
-  v7 = (_DWORD *)(v5 + 0x58);
-  v8 = 0;
-  v34 = (_DWORD *)(v5 + 0x58);
-  if ( v5 != 0xFFFFFFA8 )
+  v8 = &v6[3].member.modlist; /*0x5e4b54*/
+  v9 = 0; /*0x5e4b57*/
+  v35 = &v6[3].member.modlist; /*0x5e4b5b*/
+  if ( v6 != (TESForm *)0xFFFFFFA8 ) /*0x5e4b5f*/
   {
-    do
+    do /*0x5e4b6e*/
     {
-      if ( *v7 )
-        ++v8;
-      v7 = (_DWORD *)v7[1];
+      if ( v8->data ) /*0x5e4b61*/
+        ++v9; /*0x5e4b66*/
+      v8 = v8->next; /*0x5e4b69*/
     }
-    while ( v7 );
+    while ( v8 ); /*0x5e4b6e*/
   }
-  v9 = v8;
-  while ( v4 )
+  v10 = v9; /*0x5e4b72*/
+  while ( p_modlist ) /*0x5e4b74*/
   {
-    v10 = *v4;
-    if ( *v4 )
+    data = p_modlist->data; /*0x5e4b80*/
+    if ( p_modlist->data ) /*0x5e4b80*/
     {
-      v11 = v10 + 0x18;
-      if ( (*(int (__thiscall **)(int))(*(_DWORD *)(v10 + 0x18) + 0x18))(v10 + 0x18) == 4
-        || (*(int (__thiscall **)(int))(*(_DWORD *)v11 + 0x18))(v11) == 1 )
+      p_unkFile018 = &data->unkFile018; /*0x5e4b87*/
+      if ( (*(int (__thiscall **)(UInt32 *))(data->unkFile018 + 0x18))(&data->unkFile018) == 4 /*0x5e4ba4*/
+        || (*(int (__thiscall **)(UInt32 *))(*p_unkFile018 + 0x18))(p_unkFile018) == 1 )
       {
-        MagicTarget_RemoveEffects();
+        MagicTarget_RemoveEffects(); /*0x5e4bae*/
       }
     }
-    if ( BSSimpleList_Count(v34) == v9 )
+    if ( BSSimpleList_Count(v35) == v10 ) /*0x5e4bbe*/
     {
-      v4 = (int *)v4[1];
+      p_modlist = p_modlist->next; /*0x5e4c2b*/
     }
     else
     {
-      v12 = 0;
-      v13 = (int)this->vtbl->super.super.GetBaseForm((TESObjectREFR *)this);
-      if ( v13 )
+      v13 = 0; /*0x5e4bca*/
+      v14 = this->vtbl->super.super.GetBaseForm(this); /*0x5e4bce*/
+      if ( v14 ) /*0x5e4bd2*/
       {
-        if ( this->vtbl->super.super.IsActor((TESObjectREFR *)this) )
-          v12 = v13;
+        if ( this->vtbl->super.super.IsActor((TESObjectREFR *)this) ) /*0x5e4bde*/
+          v13 = v14; /*0x5e4be4*/
       }
-      v4 = (int *)(v12 + 0x58);
-      v14 = 0;
-      v15 = (int)this->vtbl->super.super.GetBaseForm((TESObjectREFR *)this);
-      if ( v15 )
+      p_modlist = &v13[3].member.modlist; /*0x5e4bf0*/
+      v15 = 0; /*0x5e4bf3*/
+      v16 = this->vtbl->super.super.GetBaseForm(this); /*0x5e4bf7*/
+      if ( v16 ) /*0x5e4bfb*/
       {
-        if ( this->vtbl->super.super.IsActor((TESObjectREFR *)this) )
-          v14 = v15;
+        if ( this->vtbl->super.super.IsActor((TESObjectREFR *)this) ) /*0x5e4c07*/
+          v15 = v16; /*0x5e4c0d*/
       }
-      v16 = (_DWORD *)(v14 + 0x58);
-      v17 = 0;
-      if ( v14 != 0xFFFFFFA8 )
+      v17 = &v15[3].member.modlist; /*0x5e4c0f*/
+      v18 = 0; /*0x5e4c12*/
+      if ( v15 != (TESForm *)0xFFFFFFA8 ) /*0x5e4c16*/
       {
-        do
+        do /*0x5e4c25*/
         {
-          if ( *v16 )
-            ++v17;
-          v16 = (_DWORD *)v16[1];
+          if ( v17->data ) /*0x5e4c18*/
+            ++v18; /*0x5e4c1d*/
+          v17 = v17->next; /*0x5e4c20*/
         }
-        while ( v16 );
+        while ( v17 ); /*0x5e4c25*/
       }
-      v9 = v17;
+      v10 = v18; /*0x5e4c27*/
     }
   }
-  if ( ((int (__thiscall *)(Actor *))this->vtbl->Unk_9A)(this) )
+  if ( ((int (__thiscall *)(Actor *))this->vtbl->Unk_9A)(this) ) /*0x5e4c40*/
   {
-    v18 = ((int (__thiscall *)(Actor *))this->vtbl->Unk_9A)(this);
-    v19 = (int *)(v18 + 0x3C);
-    if ( v18 != 0xFFFFFFC4 )
+    v19 = ((int (__thiscall *)(Actor *))this->vtbl->Unk_9A)(this); /*0x5e4c50*/
+    v20 = (int *)(v19 + 0x3C); /*0x5e4c54*/
+    if ( v19 != 0xFFFFFFC4 ) /*0x5e4c57*/
     {
-      do
+      do /*0x5e4c97*/
       {
-        v20 = *v19;
-        if ( *v19 )
+        v21 = *v20; /*0x5e4c60*/
+        if ( *v20 ) /*0x5e4c60*/
         {
-          v21 = v20 + 0x18;
-          if ( (*(int (__thiscall **)(int))(*(_DWORD *)(v20 + 0x18) + 0x18))(v20 + 0x18) == 4
-            || (*(int (__thiscall **)(int))(*(_DWORD *)v21 + 0x18))(v21) == 1 )
+          v22 = v21 + 0x18; /*0x5e4c66*/
+          if ( (*(int (__thiscall **)(int))(*(_DWORD *)(v21 + 0x18) + 0x18))(v21 + 0x18) == 4 /*0x5e4c83*/
+            || (*(int (__thiscall **)(int))(*(_DWORD *)v22 + 0x18))(v22) == 1 )
           {
-            MagicTarget_RemoveEffects();
+            MagicTarget_RemoveEffects(); /*0x5e4c8d*/
           }
         }
-        v19 = (int *)v19[1];
+        v20 = (int *)v20[1]; /*0x5e4c92*/
       }
-      while ( v19 );
+      while ( v20 ); /*0x5e4c97*/
     }
   }
-  if ( Actor_IsNPC(this) )
+  if ( Actor_IsNPC(this) ) /*0x5e4c9b*/
   {
-    v22 = (int)this->vtbl->super.super.GetBaseForm((TESObjectREFR *)this);
-    if ( v22 )
+    v23 = this->vtbl->super.super.GetBaseForm(this); /*0x5e4cb2*/
+    if ( v23 ) /*0x5e4cb6*/
     {
-      if ( *(_DWORD *)(v22 + 0xE8) )
+      if ( v23[9].member.modlist.data ) /*0x5e4cb8*/
       {
-        if ( Actor_IsNPC(this) && (v23 = (int)this->vtbl->super.super.GetBaseForm((TESObjectREFR *)this)) != 0 )
-          v24 = *(_DWORD *)(v23 + 0xE8);
+        if ( Actor_IsNPC(this) && (v24 = this->vtbl->super.super.GetBaseForm(this)) != 0 ) /*0x5e4cda*/
+          v25 = v24[9].member.modlist.data; /*0x5e4cdc*/
         else
-          v24 = 0;
-        v25 = (int *)(v24 + 0x30);
-        if ( v24 != 0xFFFFFFD0 )
+          v25 = 0; /*0x5e4ce4*/
+        v26 = &v25->name[0x14]; /*0x5e4ce6*/
+        if ( v25 != (Data *)0xFFFFFFD0 ) /*0x5e4ceb*/
         {
-          do
+          do /*0x5e4d27*/
           {
-            v26 = *v25;
-            if ( *v25 )
+            v27 = *(_DWORD *)v26; /*0x5e4cf0*/
+            if ( *(_DWORD *)v26 ) /*0x5e4cf0*/
             {
-              v27 = v26 + 0x18;
-              if ( (*(int (__thiscall **)(int))(*(_DWORD *)(v26 + 0x18) + 0x18))(v26 + 0x18) == 4
-                || (*(int (__thiscall **)(int))(*(_DWORD *)v27 + 0x18))(v27) == 1 )
+              v28 = v27 + 0x18; /*0x5e4cf6*/
+              if ( (*(int (__thiscall **)(int))(*(_DWORD *)(v27 + 0x18) + 0x18))(v27 + 0x18) == 4 /*0x5e4d13*/
+                || (*(int (__thiscall **)(int))(*(_DWORD *)v28 + 0x18))(v28) == 1 )
               {
-                MagicTarget_RemoveEffects();
+                MagicTarget_RemoveEffects(); /*0x5e4d1d*/
               }
             }
-            v25 = (int *)v25[1];
+            v26 = *((char **)v26 + 1); /*0x5e4d22*/
           }
-          while ( v25 );
+          while ( v26 ); /*0x5e4d27*/
         }
       }
     }
   }
-  if ( this->vtbl->super.super.GetBaseForm((TESObjectREFR *)this) )
-    ((int (__thiscall *)(Actor *))this->vtbl->super.super.IsActor)(this);
-  ContainerExtraDataForRef = (ExtraDataList *****)ContainerExtraData_GetContainerExtraDataForRef((TESObjectREFR *)this);
-  for ( i = 0; i < 0xA; ++i )
+  if ( this->vtbl->super.super.GetBaseForm(this) ) /*0x5e4d33*/
+    ((int (__thiscall *)(Actor *))this->vtbl->super.super.IsActor)(this); /*0x5e4d45*/
+  ContainerExtraDataForRef = (ExtraDataList *****)ContainerExtraData_GetContainerExtraDataForRef((TESObjectREFR *)this); /*0x5e4d5c*/
+  for ( i = 0; i < 0xA; ++i ) /*0x5e4d5e*/
   {
-    EquippedInstance = ContainerExtraData_GetEquippedInstance(ContainerExtraDataForRef, dword_B1489C[i], 0);
-    v31 = EquippedInstance;
-    if ( EquippedInstance )
+    EquippedInstance = ContainerExtraData_GetEquippedInstance(ContainerExtraDataForRef, dword_B1489C[i], 0); /*0x5e4d6b*/
+    v32 = EquippedInstance; /*0x5e4d70*/
+    if ( EquippedInstance ) /*0x5e4d74*/
     {
-      v32 = OblivionDynamicCast(
+      v33 = OblivionDynamicCast( /*0x5e4d88*/
               (void *)EquippedInstance[2],
               0,
               (struct _s_RTTICompleteObjectLocator *)&TESBoundObject `RTTI Type Descriptor',
               &TESEnchantableForm `RTTI Type Descriptor',
               0);
-      if ( v32 )
+      if ( v33 ) /*0x5e4d92*/
       {
-        if ( v32[1] )
-          MagicTarget_RemoveBoundObj(v31[2], 0);
+        if ( v33[1] ) /*0x5e4d94*/
+          a2 = MagicTarget_RemoveBoundObj( /*0x5e4da3*/
+                 (int)&this->members.magicTarget,
+                 (char)ContainerExtraDataForRef,
+                 a2,
+                 (TESBoundObject *)v32[2],
+                 0);
       }
-      ContainerEntryExtraData_DestroyDataTable(v31, v33);
-      FormHeapFree((unsigned int)v31);
+      ContainerEntryExtraData_DestroyDataTable(v32, v34); /*0x5e4daa*/
+      FormHeapFree((unsigned int)v32); /*0x5e4db0*/
     }
   }
 }

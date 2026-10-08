@@ -1,20 +1,22 @@
-void __userpurge Player_LevelUpAttribute_(int *a1@<ecx>, int edi0@<edi>, unsigned int a2)
+// Applies one selected level-up attribute: current base plus the multiplier derived from the oldest bucket's skill-increase count, clamped to 100. Invalid/sentinel attribute AVs are ignored.
+void __thiscall Player_LevelUpAttribute(PlayerCharacter *this, unsigned int attributeAV)
 {
+  int v2; // edi
   int BaseCalcAVi; // edi
-  signed int v9; // eax
-  int v10; // edi
+  int AttributeBonusSkillIncreaseCount; // eax
+  int v6; // edi
   TESForm *ActorBaseForm; // eax
 
-  if ( a2 <= 7 )
+  if ( attributeAV <= 7 ) /*0x66844b*/
   {
-    BaseCalcAVi = Actor_GetBaseCalcAVi(a1, (int)a1, edi0, a2, a2);
-    v9 = sub_664970(a1, a2);
-    v10 = sub_5480A0(v9) + BaseCalcAVi;
-    if ( v10 > 0x64 )
-      v10 = 0x64;
-    ActorBaseForm = Actor_GetActorBaseForm((Actor *)a1, 0);
-    ((void (__thiscall *)(TESForm *, unsigned int, int))ActorBaseForm->vtbl[1].Unk_16)(ActorBaseForm, a2, v10);
-    sub_57A6F0(a2);
-    sub_5E2670((PlayerCharacter *)a1, a2, 1);
+    BaseCalcAVi = Actor_GetBaseCalcAVi((int *)this, (int)this, v2, attributeAV, attributeAV); /*0x668457*/
+    AttributeBonusSkillIncreaseCount = Player_GetAttributeBonusSkillIncreaseCount(this, attributeAV); /*0x668459*/
+    v6 = LevelUp_GetAttributeMultiplierFromCount(AttributeBonusSkillIncreaseCount) + BaseCalcAVi; /*0x668464*/
+    if ( v6 > 0x64 )                            // Clamp the computed final attribute value to Oblivion's native cap of 100 before writing the actor-base value. /*0x66846c*/
+      v6 = 0x64; /*0x66846e*/
+    ActorBaseForm = Actor_GetActorBaseForm((Actor *)this, 0); /*0x668477*/
+    ((void (__thiscall *)(TESForm *, unsigned int, int))ActorBaseForm->vtbl[1].Unk_16)(ActorBaseForm, attributeAV, v6); /*0x668488*/
+    UI_UpdateActorValueDisplays(attributeAV); /*0x66848b*/
+    Player_OnActorValueBaseChanged(this, attributeAV, 1); /*0x668498*/
   }
 }

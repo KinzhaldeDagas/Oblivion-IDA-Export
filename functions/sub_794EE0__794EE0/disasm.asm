@@ -1,11 +1,11 @@
-0x794EE0: push    ebp
-0x794EE1: mov     ebp, [esp+4+arg_4]
+0x794EE0: push    ebp; OBLIVION AUTHORITY (2026-08-30): Checked vector<unsigned short>::erase(first,last). Validates both iterator owners, shifts the suffix by 2-byte elements, updates end, and returns the resulting checked iterator.
+0x794EE1: mov     ebp, [esp+4+firstOwner]
 0x794EE5: test    ebp, ebp
 0x794EE7: push    esi
 0x794EE8: push    edi
 0x794EE9: mov     edi, ecx
 0x794EEB: jz      short loc_794EF3
-0x794EED: cmp     ebp, [esp+0Ch+arg_C]
+0x794EED: cmp     ebp, [esp+0Ch+lastOwner]
 0x794EF1: jz      short loc_794EF8
 0x794EF3: call    __invalid_parameter_noinfo
 0x794EF8: mov     esi, [esp+0Ch+Dst]
@@ -28,7 +28,7 @@
 0x794F1F: add     esp, 10h
 0x794F22: mov     [edi+8], ebx
 0x794F25: pop     ebx
-0x794F26: mov     eax, [esp+0Ch+arg_0]
+0x794F26: mov     eax, [esp+0Ch+result]
 0x794F2A: pop     edi
 0x794F2B: mov     [eax+4], esi
 0x794F2E: pop     esi

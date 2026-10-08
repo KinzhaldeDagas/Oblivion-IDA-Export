@@ -17,7 +17,7 @@
 0x52D2F5: mov     large fs:0, eax
 0x52D2FB: mov     eax, [esp+1B0h+arg_4]
 0x52D302: mov     ebp, [esp+1B0h+arg_0]
-0x52D309: mov     [esp+1B0h+var_174], ecx
+0x52D309: mov     [esp+1B0h+outTexture], ecx
 0x52D30D: mov     ecx, [esp+1B0h+arg_8]
 0x52D314: mov     [esp+1B0h+var_17C], ecx
 0x52D318: mov     ecx, [esp+1B0h+arg_C]
@@ -39,9 +39,9 @@
 0x52D34F: mov     [esp+1B0h+var_190], ebx
 0x52D353: mov     [esp+1B0h+var_4], ebx
 0x52D35A: mov     [esp+1B0h+var_194], ebx
-0x52D35E: mov     [esp+1B0h+var_18C], ebx
-0x52D362: push    offset sub_43ACE0; a5
-0x52D367: push    offset sub_43EB30; a4
+0x52D35E: mov     [esp+1B0h+slot], ebx
+0x52D362: push    offset FaceGenMatrix_Destruct; a5
+0x52D367: push    offset FaceGenMatrix_Construct; a4
 0x52D36C: push    4; size
 0x52D36E: push    18h; a2
 0x52D370: lea     edx, [esp+1C0h+a1]
@@ -109,7 +109,7 @@
 0x52D42F: jmp     short loc_52D437
 0x52D431: mov     [esp+1B0h+var_188], ebx
 0x52D435: mov     eax, ebx
-0x52D437: mov     edi, [esp+1B0h+var_174]
+0x52D437: mov     edi, [esp+1B0h+outTexture]
 0x52D43B: lea     ecx, [esi+eax*4]
 0x52D43E: lea     esi, [eax+ecx]
 0x52D441: lea     edx, [esi+esi*2+8Ah]
@@ -131,14 +131,14 @@
 0x52D472: jnz     short loc_52D4A8
 0x52D474: mov     eax, [esp+1B0h+var_19C]
 0x52D478: push    eax
-0x52D479: call    FormHeapFree
+0x52D479: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x52D47E: push    ebx
 0x52D47F: mov     [esp+1B8h+var_19C], ebx
 0x52D483: mov     word ptr [esp+1B8h+var_198+2], bx
 0x52D488: mov     word ptr [esp+1B8h+var_198], bx
-0x52D48D: call    FormHeapFree
+0x52D48D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x52D492: add     esp, 8
-0x52D495: push    offset sub_43ACE0
+0x52D495: push    offset FaceGenMatrix_Destruct; Destroys a FaceGenMatrix by freeing the coefficient allocation at +0x0C, then clears begin/end/capacity-end.
 0x52D49A: push    4
 0x52D49C: push    18h
 0x52D49E: lea     ecx, [esp+1BCh+a1]
@@ -157,19 +157,19 @@
 0x52D4C9: call    BSStringT_Static_Format
 0x52D4CE: mov     esi, dword ptr [esp+1BCh+ArgList]
 0x52D4D2: add     esp, 0Ch
-0x52D4D5: push    ebx; char
-0x52D4D6: push    ebx; char
-0x52D4D7: push    esi; ArgList
-0x52D4D8: lea     ecx, [esp+1BCh+var_174]
-0x52D4DC: push    ecx; int
+0x52D4D5: push    ebx; searchArchives
+0x52D4D6: push    ebx; allowMissing
+0x52D4D7: push    esi; path
+0x52D4D8: lea     ecx, [esp+1BCh+outTexture]
+0x52D4DC: push    ecx; outTexture
 0x52D4DD: mov     ecx, ds:0B333A0h
-0x52D4E3: call    sub_442890
+0x52D4E3: call    OB_TES_LoadOrFindSourceTexture_010201A0; TES texture cache/load helper: checks the global texture map, optionally verifies file existence via FileFinder, loads NiSourceTexture by filename, caches it, and returns a refcounted texture pointer.
 0x52D4E8: mov     eax, [eax]
 0x52D4EA: push    eax; a2
 0x52D4EB: mov     ecx, ebp; this
 0x52D4ED: mov     byte ptr [esp+1B4h+var_4], 6
 0x52D4F5: call    NiSmartPointer_Set??
-0x52D4FA: mov     eax, [esp+1B0h+var_174]
+0x52D4FA: mov     eax, [esp+1B0h+outTexture]
 0x52D4FE: cmp     eax, ebx
 0x52D500: mov     byte ptr [esp+1B0h+var_4], 5
 0x52D508: jz      short loc_52D528
@@ -190,29 +190,29 @@
 0x52D52B: jnz     short loc_52D5A3
 0x52D52D: mov     ecx, [esp+1B0h+var_19C]
 0x52D531: push    ecx
-0x52D532: call    FormHeapFree
+0x52D532: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x52D537: push    esi
 0x52D538: mov     [esp+1B8h+var_19C], ebx
 0x52D53C: mov     word ptr [esp+1B8h+var_198+2], bx
 0x52D541: mov     word ptr [esp+1B8h+var_198], bx
-0x52D546: call    FormHeapFree
+0x52D546: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x52D54B: add     esp, 8
-0x52D54E: push    offset sub_43ACE0; void (__thiscall *)(void *)
+0x52D54E: push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)
 0x52D553: push    4; int
 0x52D555: push    18h; unsigned int
 0x52D557: lea     edx, [esp+1BCh+a1]
 0x52D55B: push    edx; void *
 0x52D55C: mov     byte ptr [esp+1C0h+var_4], 2
 0x52D564: call    $LN21
-0x52D569: lea     ecx, [esp+1B0h+var_18C]; this
+0x52D569: lea     ecx, [esp+1B0h+slot]; slot
 0x52D56D: mov     byte ptr [esp+1B0h+var_4], 1
-0x52D575: call    sub_7016A0
-0x52D57A: lea     ecx, [esp+1B0h+var_194]; this
+0x52D575: call    NiPointerSlot_Release
+0x52D57A: lea     ecx, [esp+1B0h+var_194]; slot
 0x52D57E: mov     byte ptr [esp+1B0h+var_4], bl
-0x52D585: call    sub_7016A0
-0x52D58A: lea     ecx, [esp+1B0h+var_190]; this
+0x52D585: call    NiPointerSlot_Release
+0x52D58A: lea     ecx, [esp+1B0h+var_190]; slot
 0x52D58E: mov     [esp+1B0h+var_4], 0FFFFFFFFh
-0x52D599: call    sub_7016A0
+0x52D599: call    NiPointerSlot_Release
 0x52D59E: jmp     loc_52D7CE
 0x52D5A3: cmp     ds:0B10D3Ch, bl
 0x52D5A9: jz      loc_52D71C
@@ -253,7 +253,7 @@
 0x52D62A: lea     ecx, [esp+1B0h+ArgList]; void *
 0x52D62E: mov     byte ptr [esp+1B0h+var_4], 3
 0x52D636: call    BSStringT_Clear
-0x52D63B: push    offset sub_43ACE0
+0x52D63B: push    offset FaceGenMatrix_Destruct; Destroys a FaceGenMatrix by freeing the coefficient allocation at +0x0C, then clears begin/end/capacity-end.
 0x52D640: push    4
 0x52D642: push    18h
 0x52D644: lea     ecx, [esp+1BCh+a1]
@@ -299,10 +299,10 @@
 0x52D6B4: add     esp, 18h
 0x52D6B7: cmp     edi, ebx
 0x52D6B9: jz      loc_52D619
-0x52D6BF: mov     ecx, [esp+1B0h+var_17C]
+0x52D6BF: mov     ecx, [esp+1B0h+var_17C]; this
 0x52D6C3: lea     edx, [esp+1B0h+a1]
-0x52D6C7: push    edx
-0x52D6C8: call    sub_5221C0
+0x52D6C7: push    edx; outAbsolute
+0x52D6C8: call    TESNPC_BuildAbsoluteFaceGenParameters; Builds absolute FaceGen parameters by combining race base with active NPC delta. CORRECTION: bank selection uses base actor value 0x45 (vampirism), zero -> +0x108, nonzero -> +0x168; earlier sex-selected description was incorrect. Null race copies manager default parameters.
 0x52D6CD: xor     esi, esi
 0x52D6CF: call    GetOpenedMenuCode
 0x52D6D4: cmp     eax, 40Ch
@@ -313,13 +313,13 @@
 0x52D6E2: and     ebp, 0FFFFFFFBh
 0x52D6E5: add     ebp, 0Ah
 0x52D6E8: mov     esi, ebp
-0x52D6EA: push    esi
+0x52D6EA: push    esi; maxBasisShapes
 0x52D6EB: mov     esi, [esp+1B4h+var_178]
-0x52D6EF: push    esi
+0x52D6EF: push    esi; outTexture
 0x52D6F0: lea     eax, [esp+1B8h+a1]
-0x52D6F4: push    eax
-0x52D6F5: mov     ecx, edi
-0x52D6F7: call    sub_557E60
+0x52D6F4: push    eax; parameters
+0x52D6F5: mov     ecx, edi; this
+0x52D6F7: call    BSFaceGenModel_GenerateMorphTexture; Generate a body-part EGT morph texture. Character creation deliberately requests only 5 or 10 bases here; other body paths use the 30-basis zero default.
 0x52D6FC: mov     eax, [esi]
 0x52D6FE: cmp     eax, ebx
 0x52D700: jz      loc_52D619
@@ -336,34 +336,34 @@
 0x52D72D: lea     ecx, [esp+1B0h+ArgList]; void *
 0x52D731: mov     byte ptr [esp+1B0h+var_4], 3
 0x52D739: call    BSStringT_Clear
-0x52D73E: push    offset sub_43ACE0; void (__thiscall *)(void *)
+0x52D73E: push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)
 0x52D743: push    4; int
 0x52D745: push    18h; unsigned int
 0x52D747: lea     eax, [esp+1BCh+a1]
 0x52D74B: push    eax; void *
 0x52D74C: mov     byte ptr [esp+1C0h+var_4], 2
 0x52D754: call    $LN21
-0x52D759: lea     ecx, [esp+1B0h+var_18C]; this
+0x52D759: lea     ecx, [esp+1B0h+slot]; slot
 0x52D75D: mov     byte ptr [esp+1B0h+var_4], 1
-0x52D765: call    sub_7016A0
-0x52D76A: lea     ecx, [esp+1B0h+var_194]; this
+0x52D765: call    NiPointerSlot_Release
+0x52D76A: lea     ecx, [esp+1B0h+var_194]; slot
 0x52D76E: mov     byte ptr [esp+1B0h+var_4], bl
-0x52D775: call    sub_7016A0
-0x52D77A: lea     ecx, [esp+1B0h+var_190]; this
+0x52D775: call    NiPointerSlot_Release
+0x52D77A: lea     ecx, [esp+1B0h+var_190]; slot
 0x52D77E: mov     [esp+1B0h+var_4], 0FFFFFFFFh
-0x52D789: call    sub_7016A0
+0x52D789: call    NiPointerSlot_Release
 0x52D78E: mov     al, 1
 0x52D790: jmp     short loc_52D7D0
 0x52D792: mov     ecx, [esp+1B0h+var_19C]
 0x52D796: push    ecx
-0x52D797: call    FormHeapFree
+0x52D797: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x52D79C: push    ebx
 0x52D79D: mov     [esp+1B8h+var_19C], ebx
 0x52D7A1: mov     word ptr [esp+1B8h+var_198+2], bx
 0x52D7A6: mov     word ptr [esp+1B8h+var_198], bx
-0x52D7AB: call    FormHeapFree
+0x52D7AB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x52D7B0: add     esp, 8
-0x52D7B3: push    offset sub_43ACE0; void (__thiscall *)(void *)
+0x52D7B3: push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)
 0x52D7B8: push    4; int
 0x52D7BA: push    18h; unsigned int
 0x52D7BC: lea     edx, [esp+1BCh+a1]
@@ -383,3 +383,33 @@
 0x52D7EC: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x52D7F1: add     esp, 19Ch
 0x52D7F7: retn    10h
+0x9B8810: lea     ecx, [ebp-190h]; slot
+0x9B8816: jmp     NiPointerSlot_Release
+0x9B881B: lea     ecx, [ebp-194h]; slot
+0x9B8821: jmp     NiPointerSlot_Release
+0x9B8826: lea     ecx, [ebp-18Ch]; slot
+0x9B882C: jmp     NiPointerSlot_Release
+0x9B8831: push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)
+0x9B8836: push    4; int
+0x9B8838: push    18h; unsigned int
+0x9B883A: lea     eax, [ebp-170h]
+0x9B8840: push    eax; void *
+0x9B8841: call    $LN21
+0x9B8846: retn
+0x9B8847: lea     ecx, [ebp-184h]; void *
+0x9B884D: jmp     BSStringT_Clear
+0x9B8852: lea     ecx, [ebp-19Ch]; void *
+0x9B8858: jmp     BSStringT_Clear
+0x9B885D: lea     ecx, [ebp-174h]; slot
+0x9B8863: jmp     NiPointerSlot_Release
+0x9B8868: mov     edx, [esp+arg_4]
+0x9B886C: lea     eax, [edx-1A0h]
+0x9B8872: mov     ecx, [edx-1A4h]
+0x9B8878: xor     ecx, eax
+0x9B887A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B887F: add     eax, 10h
+0x9B8882: mov     ecx, [edx-4]
+0x9B8885: xor     ecx, eax
+0x9B8887: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B888C: mov     eax, offset stru_AE2D40
+0x9B8891: jmp     ___CxxFrameHandler3

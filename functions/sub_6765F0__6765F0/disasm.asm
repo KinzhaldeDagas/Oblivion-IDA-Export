@@ -85,27 +85,27 @@
 0x676710: call    TESPackage_LocationData_SetReference
 0x676715: push    edi
 0x676716: mov     ecx, esi
-0x676718: call    TESPackage_SetLocation
+0x676718: call    TESPackage_SetLocation; 3DTheft decode: TESPackage_SetLocation allocates package->location when needed and copies a 0x0C LocationData record; null source clears location data.
 0x67671D: test    edi, edi
 0x67671F: jz      short loc_676731
 0x676721: mov     ecx, edi
 0x676723: call    TESPackage_LocationData_destr
 0x676728: push    edi
-0x676729: call    FormHeapFree
+0x676729: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x67672E: add     esp, 4
 0x676731: mov     ecx, esi
-0x676733: call    sub_5672A0
+0x676733: call    sub_5672A0; 3DTheft decode: TESPackage procedure-array resolver is a mutator. It writes TESPackage+0x18/procedureArrayIndex directly; callers should not use EAX as the row result.
 0x676738: mov     ecx, ds:0B333C4h
 0x67673E: mov     ecx, [ecx+1E0h]; this
 0x676744: push    1; a4
 0x676746: push    1; a3
 0x676748: push    esi; a2
-0x676749: call    Actor_AddPackage?
+0x676749: call    Actor_AddPackage?; 3DTheft: xrefs ignore this function's return value; use current package/process state after call, not AL/EAX, as the package assignment result.
 0x67674E: jmp     short loc_67677D
 0x676750: cmp     [ecx+1E0h], esi
 0x676756: jz      short loc_67677D
 0x676758: mov     ecx, [ecx+1E0h]; int
-0x67675E: call    sub_5EAE70
+0x67675E: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x676763: mov     edx, ds:0B333C4h
 0x676769: mov     eax, [edx+1E0h]
 0x67676F: mov     ecx, [eax+58h]
@@ -129,15 +129,14 @@
 0x676798: jmp     short loc_67679C
 0x67679A: push    3; a2
 0x67679C: mov     ecx, esi; this
-0x67679E: call    sub_673A50
+0x67679E: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x6767A3: mov     ecx, eax; this
-0x6767A5: call    sub_7616D0
+0x6767A5: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x6767AA: mov     edi, eax
 0x6767AC: test    edi, edi
 0x6767AE: mov     [esp+38h+var_1C], edi
 0x6767B2: jz      loc_67688F
 0x6767B8: jmp     short loc_6767C0
-0x6767BA: align 10h
 0x6767C0: mov     ecx, [edi]
 0x6767C2: test    ecx, ecx
 0x6767C4: jz      loc_67688F
@@ -166,7 +165,7 @@
 0x676807: mov     ecx, esi; Concurrency::details::SchedulerBase *
 0x676809: call    sub_5E7C30
 0x67680E: mov     ecx, esi; this
-0x676810: call    Actor__GetProcessLevel
+0x676810: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x676815: cmp     eax, ebx
 0x676817: jz      short loc_676883
 0x676819: mov     edi, [esp+38h+var_1C]
@@ -185,18 +184,18 @@
 0x67683F: mov     ecx, [esp+38h+arg_4]; this
 0x676843: test    ecx, ecx
 0x676845: jz      short loc_676883
-0x676847: call    GetTeleportExtraData
-0x67684C: mov     ecx, eax
-0x67684E: call    sub_42B410
+0x676847: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
+0x67684C: mov     ecx, eax; this
+0x67684E: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x676853: mov     ecx, eax; this
-0x676855: call    GetTeleportExtraData
+0x676855: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x67685A: test    eax, eax
 0x67685C: jz      short loc_676883
 0x67685E: mov     ecx, eax
-0x676860: call    sub_6899C0
-0x676865: push    eax
-0x676866: mov     ecx, esi
-0x676868: call    sub_4D7E30
+0x676860: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
+0x676865: push    eax; pointXYZ
+0x676866: mov     ecx, esi; this
+0x676868: call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.
 0x67686D: fcomp   qword ptr ds:0A37478h
 0x676873: fnstsw  ax
 0x676875: test    ah, 5
@@ -219,3 +218,20 @@
 0x6768AA: pop     ebx
 0x6768AB: add     esp, 24h
 0x6768AE: retn    0Ch
+0x9C47E0: mov     eax, [ebp-1Ch]
+0x9C47E3: push    eax
+0x9C47E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C47E9: pop     ecx
+0x9C47EA: retn
+0x9C47EB: mov     eax, [ebp-1Ch]
+0x9C47EE: push    eax
+0x9C47EF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C47F4: pop     ecx
+0x9C47F5: retn
+0x9C47F6: mov     edx, [esp+arg_4]
+0x9C47FA: lea     eax, [edx-28h]
+0x9C47FD: mov     ecx, [edx-2Ch]
+0x9C4800: xor     ecx, eax
+0x9C4802: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C4807: mov     eax, offset stru_AED160
+0x9C480C: jmp     ___CxxFrameHandler3

@@ -7,5 +7,5 @@
 0x95D849: mov     ds:0BA9A78h, edx
 0x95D84F: mov     eax, [eax+8]
 0x95D852: mov     ds:0BA9A7Ch, eax
-0x95D857: mov     eax, offset dword_BA9A70
+0x95D857: mov     eax, offset flt_BA9A70
 0x95D85C: retn

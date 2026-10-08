@@ -1,1 +1,1 @@
-StatsMenu
+struct StatsMenu;

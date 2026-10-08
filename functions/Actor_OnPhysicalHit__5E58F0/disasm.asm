@@ -1,4 +1,4 @@
-0x5E58F0: fld     [esp+arg_0]
+0x5E58F0: fld     [esp+arg_0]; ODismemberment: Actor_OnPhysicalHit authoritative ABI. Args are (float fatigueLikeDamage, float healthDamage, Actor* attacker); second float is applied to Health AV 8, first is difficulty-adjusted and applied to Fatigue AV 0x0A, return is IsDead.
 0x5E58F4: push    esi
 0x5E58F5: push    edi
 0x5E58F6: fchs
@@ -24,7 +24,7 @@
 0x5E592B: mov     ecx, edi
 0x5E592D: call    edx
 0x5E592F: mov     ecx, eax
-0x5E5931: call    sub_613640
+0x5E5931: call    CombatController_FindTargetInfo; Attacker TargetInfo+0x10 accumulates difficulty-adjusted fatigue-like physical pressure dealt to this victim; SmartAI v0.7 reads it as bounded engagement momentum.
 0x5E5936: test    eax, eax
 0x5E5938: jz      short loc_5E5944
 0x5E593A: fld     dword ptr [eax+10h]
@@ -42,7 +42,7 @@
 0x5E595D: mov     ecx, esi
 0x5E595F: call    edx
 0x5E5961: mov     ecx, eax
-0x5E5963: call    sub_613640
+0x5E5963: call    CombatController_FindTargetInfo; Find victim's TargetInfo for attacker; +0x0C accumulates positive health damage received from this attacker.
 0x5E5968: test    eax, eax
 0x5E596A: jz      short loc_5E597E
 0x5E596C: fld     dword ptr [eax+0Ch]
@@ -65,7 +65,7 @@
 0x5E5998: push    ecx
 0x5E5999: fstp    [esp+0Ch+var_C]
 0x5E599C: push    8
-0x5E599E: mov     ecx, esi
+0x5E599E: mov     ecx, esi; ODismemberment: Actor_OnPhysicalHit applies the second float argument to Health AV 8 through DamageAV_F.
 0x5E59A0: call    edx
 0x5E59A2: jmp     short loc_5E59A6
 0x5E59A4: fstp    st
@@ -83,7 +83,7 @@
 0x5E59C2: push    ecx
 0x5E59C3: fstp    [esp+0Ch+var_C]
 0x5E59C6: push    0Ah
-0x5E59C8: mov     ecx, esi
+0x5E59C8: mov     ecx, esi; ODismemberment: Actor_OnPhysicalHit applies the first/difficulty-adjusted float argument to Fatigue AV 0x0A, then returns IsDead.
 0x5E59CA: call    edx
 0x5E59CC: mov     eax, [esi]
 0x5E59CE: mov     edx, [eax+198h]

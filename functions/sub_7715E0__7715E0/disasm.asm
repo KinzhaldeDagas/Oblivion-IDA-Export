@@ -1,6 +1,6 @@
-0x7715E0: sub     esp, 8
+0x7715E0: sub     esp, 8; Apply native address preset row [U,V] to D3DSAMP_ADDRESSU/ADDRESSV. SimpleShadow preset 0 = CLAMP/CLAMP.
 0x7715E3: push    esi
-0x7715E4: mov     esi, [esp+0Ch+arg_0]
+0x7715E4: mov     esi, [esp+0Ch+preset]
 0x7715E8: mov     eax, ds:0B42130h[esi*8]
 0x7715EF: push    edi
 0x7715F0: push    0

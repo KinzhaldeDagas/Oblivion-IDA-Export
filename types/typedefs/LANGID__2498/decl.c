@@ -1,1 +1,1 @@
-LANGID
+typedef WORD LANGID;

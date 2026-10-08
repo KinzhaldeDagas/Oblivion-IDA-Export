@@ -7,7 +7,7 @@
   },
   {
     "ea": "0x45C4F3",
-    "line": "mov     ecx, [esp+20h+arg_4]",
+    "line": "mov     ecx, [esp+20h+data]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x45C50F",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x45C55E",
-    "line": "mov     [esp+30h+arg_4], ecx",
+    "line": "mov     [esp+30h+data], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x45C572",
-    "line": "mov     [esp+30h+arg_4], ecx",
+    "line": "mov     [esp+30h+data], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x45C585",
-    "line": "call    TESForm_GetOverrideFile",
+    "line": "call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x45C58C",
-    "line": "call    sub_4520F0",
+    "line": "call    TESFile_GetThreadSafeFile; Returns the root TESFile on the main thread; on worker threads returns the per-thread clone selected by GetCurrentThreadId via TESFile_GetThreadSafeFileForThread.",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x45C5B7",
-    "line": "call    TESFile_GetRecordType",
+    "line": "call    TESFile_GetRecordType; MEF v32 changed-reference cell override hook. Vanilla allocates a new reference on every matching override and overwrites ESI; MEF allocates once, then reloads later overrides into the existing ESI form.",
     "mnemonic": "call",
     "size": 5
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x45C5C8",
-    "line": "call    TESDataHandler_LoadForm",
+    "line": "call    TESDataHandler_LoadForm; TESDataHandler_LoadForm supports override reuse: invokes virtual TESForm::LoadForm on the supplied existing object and updates master/active-file flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x45C5D3",
-    "line": "cmp     ebx, [esp+30h+arg_4]",
+    "line": "cmp     ebx, [esp+30h+data]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x45C632",
-    "line": "mov     eax, [esp+30h+arg_4]",
+    "line": "mov     eax, [esp+30h+data]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -739,13 +739,13 @@
   },
   {
     "ea": "0x45C641",
-    "line": "fistp   [esp+30h+arg_4]",
+    "line": "fistp   [esp+30h+data]",
     "mnemonic": "fistp",
     "size": 4
   },
   {
     "ea": "0x45C645",
-    "line": "mov     ebp, [esp+30h+arg_4]",
+    "line": "mov     ebp, [esp+30h+data]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -775,13 +775,13 @@
   },
   {
     "ea": "0x45C657",
-    "line": "fistp   [esp+30h+arg_4]",
+    "line": "fistp   [esp+30h+data]",
     "mnemonic": "fistp",
     "size": 4
   },
   {
     "ea": "0x45C65B",
-    "line": "mov     eax, [esp+30h+arg_4]",
+    "line": "mov     eax, [esp+30h+data]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -835,7 +835,7 @@
   },
   {
     "ea": "0x45C677",
-    "line": "call    TESForm_GetOverrideFile",
+    "line": "call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.",
     "mnemonic": "call",
     "size": 5
   },
@@ -847,7 +847,7 @@
   },
   {
     "ea": "0x45C67E",
-    "line": "call    sub_4520F0",
+    "line": "call    TESFile_GetThreadSafeFile; Returns the root TESFile on the main thread; on worker threads returns the per-thread clone selected by GetCurrentThreadId via TESFile_GetThreadSafeFileForThread.",
     "mnemonic": "call",
     "size": 5
   },
@@ -955,7 +955,7 @@
   },
   {
     "ea": "0x45C6AD",
-    "line": "call    TESFile_GetRecordType",
+    "line": "call    TESFile_GetRecordType; MEF v32 changed-reference worldspace override hook; same allocate-once/reuse contract as 0x45C5B7.",
     "mnemonic": "call",
     "size": 5
   },
@@ -997,7 +997,7 @@
   },
   {
     "ea": "0x45C6BE",
-    "line": "call    TESDataHandler_LoadForm",
+    "line": "call    TESDataHandler_LoadForm; TESDataHandler_LoadForm supports override reuse: invokes virtual TESForm::LoadForm on the supplied existing object and updates master/active-file flags.",
     "mnemonic": "call",
     "size": 5
   },

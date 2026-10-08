@@ -1,4 +1,4 @@
-0x4A5460: push    esi
+0x4A5460: push    esi; Verified: merges only data ID 7 Sound records, applies override/priority selection, and invokes Sound virtual +0x24 to obtain the selected music type.
 0x4A5461: push    edi
 0x4A5462: mov     edi, [esp+8+arg_0]
 0x4A5466: test    edi, edi

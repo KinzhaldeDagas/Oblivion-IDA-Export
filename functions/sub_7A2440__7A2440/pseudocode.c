@@ -1,4 +1,5 @@
-double __thiscall sub_7A2440(float *this)
+// CTreeEngine::ComputeLod-style helper. Computes LOD from global camera position against tree position and near/far LOD limits at +0x44/+0x40, clamps to [0,1], stores at +0x14.
+float __thiscall CTreeEngine__ComputeLod(OB_CTreeEngine_010201A0 *this)
 {
   double v1; // st4
   double v2; // st6
@@ -9,29 +10,32 @@ double __thiscall sub_7A2440(float *this)
   double v7; // st7
   bool v9; // c0
   bool v10; // c3
-  int v11; // [esp+0h] [ebp-4h]
-  float v12; // [esp+0h] [ebp-4h]
+  int v12; // [esp+0h] [ebp-4h]
+  float v13; // [esp+0h] [ebp-4h]
 
-  v1 = *(this + 1) - *(float *)&dword_B429AC;
-  v2 = v1 * v1;
-  v3 = *(this + 2) - *(float *)&dword_B429B0;
-  v4 = v2;
-  v5 = *(this + 3) - *(float *)&dword_B429B4;
-  *(float *)&v11 = v3 * v3 + v4 + v5 * v5;
-  v12 = 1.0 - (COERCE_FLOAT((v11 >> 1) + 0x1FC00000) - *(this + 0x11)) / (*(this + 0x10) - *(this + 0x11));
-  v6 = v12;
-  *(this + 5) = v12;
-  if ( v12 > 1.0 )
+  v1 = this->treePosition.x - CSpeedTreeRT__s_cameraPosition[0]; /*0x7a245c*/
+  v2 = v1 * v1; /*0x7a245e*/
+  v3 = this->treePosition.y - CSpeedTreeRT__s_cameraPosition[1]; /*0x7a2460*/
+  v4 = v2; /*0x7a2464*/
+  v5 = this->treePosition.z - CSpeedTreeRT__s_cameraPosition[2]; /*0x7a2464*/
+  *(float *)&v12 = v3 * v3 + v4 + v5 * v5; /*0x7a246c*/
+  v13 = 1.0 /*0x7a248e*/
+      - (COERCE_FLOAT((v12 >> 1) + 0x1FC00000) - this->treeNearLodDistance)
+      / (this->treeFarLodDistance - this->treeNearLodDistance);
+  v6 = v13; /*0x7a2491*/
+  this->currentLod = v13; /*0x7a2494*/
+  if ( v13 <= 1.0 ) /*0x7a24a0*/
   {
-    v7 = 1.0;
-LABEL_3:
-    *(this + 5) = v7;
-    return *(this + 5);
+    v9 = v6 > 0.0; /*0x7a24b0*/
+    v10 = 0.0 == v6; /*0x7a24b0*/
+    v7 = 0.0; /*0x7a24b4*/
+    if ( v9 || v10 ) /*0x7a24b6*/
+      return this->currentLod; /*0x7a24bd*/
   }
-  v9 = v6 > 0.0;
-  v10 = 0.0 == v6;
-  v7 = 0.0;
-  if ( !v9 && !v10 )
-    goto LABEL_3;
-  return *(this + 5);
+  else
+  {
+    v7 = 1.0; /*0x7a24a2*/
+  }
+  this->currentLod = v7; /*0x7a24a4*/
+  return this->currentLod; /*0x7a24ab*/
 }

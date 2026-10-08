@@ -1,1 +1,1 @@
-IInternetSecurityMgrSite_0
+typedef IInternetSecurityMgrSite IInternetSecurityMgrSite_0;

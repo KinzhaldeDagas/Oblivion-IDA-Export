@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x4299E0",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+numericLockMagnitude]; Verified numeric lock magnitude to LOCK_LEVEL mapper. Thresholds are iLockLevelMaxVeryEasy, iLockLevelMaxEasy, iLockLevelMaxAverage, iLockLevelMaxHard, and iLockLevelMaxVeryHard; outputs 0..5 map through LockLevelNames to VeryEasy, Easy, Average, Hard, VeryHard, Impossible. Fallout independently uses the matching LOCK_LEVEL names, but this mapping is directly established by Oblivion code and data.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4299E4",
-    "line": "cmp     eax, iLockLevelMaxVeryEasy",
+    "line": "cmp     eax, ds:0B338B8h",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x4299EF",
-    "line": "cmp     eax, iLockLevelMaxEasy",
+    "line": "cmp     eax, ds:0B338C0h",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x4299FD",
-    "line": "cmp     eax, iLockLevelMaxAverage",
+    "line": "cmp     eax, ds:0B338C8h",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x429A0B",
-    "line": "cmp     eax, iLockLevelMaxHard",
+    "line": "cmp     eax, ds:0B338D0h",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x429A1B",
-    "line": "cmp     eax, iLockLevelMaxVeryHard",
+    "line": "cmp     eax, ds:0B338D8h",
     "mnemonic": "cmp",
     "size": 6
   },

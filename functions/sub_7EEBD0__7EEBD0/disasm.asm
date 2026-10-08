@@ -6,7 +6,7 @@
 0x7EEBE1: mov     ecx, [ebx+14h]
 0x7EEBE4: push    0
 0x7EEBE6: push    esi
-0x7EEBE7: call    sub_765480
+0x7EEBE7: call    NiDX9Renderer_SetModelTransform; MoonSugar build 39: common non-skinned transform upload has many shader-family xrefs (generic, water, grass, precipitation, SpeedTree, LOD, GeometryDecal, Lighting30). Do not globally detour for Moon Sugar; use scoped caller/hook windows.
 0x7EEBEC: fldz
 0x7EEBEE: fst     [esp+9Ch+var_3C]
 0x7EEBF2: lea     eax, [esp+9Ch+var_34]
@@ -28,7 +28,7 @@
 0x7EEC2B: fst     [esp+0A0h+var_4C]
 0x7EEC2F: fst     [esp+0A0h+var_60]
 0x7EEC33: fstp    [esp+0A0h+var_74]
-0x7EEC37: call    sub_718A80
+0x7EEC37: call    sub_718A80;
 0x7EEC3C: fld     [esp+9Ch+var_34]
 0x7EEC40: fld     [esp+9Ch+var_4]
 0x7EEC47: mov     ecx, ds:0B46658h
@@ -139,7 +139,7 @@
 0x7EEDD0: lea     ecx, [esp+9Ch+var_78]
 0x7EEDD4: push    ecx
 0x7EEDD5: mov     ecx, [eax+118h]
-0x7EEDDB: call    sub_405AD0
+0x7EEDDB: call    ShadowSceneLight_GetLightRef
 0x7EEDE0: mov     esi, [eax]
 0x7EEDE2: mov     eax, [esp+9Ch+var_78]
 0x7EEDE6: test    eax, eax

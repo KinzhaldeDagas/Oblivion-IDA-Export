@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x428E90",
-    "line": "mov     eax, [ecx+0Ch]",
+    "line": "mov     eax, [ecx+0Ch]; Verified: clears only ExtraLockData.flags bit 0x01 (Locked), preserving bit 0x02. OpenEffect uses this after its lock-category test; this preserves LockEffect's bit-0x02 ownership marker.",
     "mnemonic": "mov",
     "size": 3
   },

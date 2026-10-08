@@ -1,4 +1,4 @@
-int __usercall _CIlog10_pentium4@<eax>(unsigned __int64 a1@<st0>)
+int __thiscall _CIlog10_pentium4(void *this)
 {
-  return start_17(a1, HIDWORD(a1));
+  return start_17(this); /*0x997106*/
 }

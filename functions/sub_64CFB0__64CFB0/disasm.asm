@@ -128,7 +128,7 @@
 0x64D10F: call    sub_4121A0
 0x64D114: lea     ecx, [esp+2Ch+var_C]
 0x64D118: push    ecx
-0x64D119: call    sub_683CB0
+0x64D119: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x64D11E: fstp    [esp+30h+arg_C]
 0x64D122: fldz
 0x64D124: add     esp, 4
@@ -171,7 +171,7 @@
 0x64D19E: jmp     short loc_64D1A9
 0x64D1A0: push    30h ; '0'
 0x64D1A2: mov     ecx, edi
-0x64D1A4: call    sub_5E05F0
+0x64D1A4: call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.
 0x64D1A9: test    ebp, ebp
 0x64D1AB: jz      loc_64D313
 0x64D1B1: mov     eax, [esi+2Ch]
@@ -204,7 +204,7 @@
 0x64D205: cmp     dword ptr [esp+2Ch+var_14], 0
 0x64D20A: jz      loc_64D2AA
 0x64D210: mov     ecx, edi; this
-0x64D212: call    sub_5E6C60
+0x64D212: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x64D217: test    al, al
 0x64D219: jz      short loc_64D281
 0x64D21B: mov     eax, [ebp+4Ch]
@@ -225,10 +225,10 @@
 0x64D23C: pop     esi
 0x64D23D: add     esp, 1Ch
 0x64D240: retn    10h
-0x64D243: push    eax
-0x64D244: push    2
-0x64D246: mov     ecx, offset ActorProcessManager_ptr
-0x64D24B: call    sub_675BB0
+0x64D243: push    eax; number
+0x64D244: push    2; category
+0x64D246: mov     ecx, (offset qword_B3BB2C+1D4h); self
+0x64D24B: call    ActorProcessManager_FindCrimeByNumber
 0x64D250: test    eax, eax
 0x64D252: jz      loc_64D51B
 0x64D258: cmp     byte ptr [eax+2Ch], 0
@@ -396,7 +396,7 @@
 0x64D423: mov     ecx, ds:0B333C4h
 0x64D429: push    ecx
 0x64D42A: push    0Ch
-0x64D42C: mov     ecx, offset dword_B3BDB0
+0x64D42C: mov     ecx, (offset qword_B3BB2C+284h)
 0x64D431: call    sub_67CF50
 0x64D436: mov     esi, eax
 0x64D438: test    esi, esi
@@ -414,11 +414,11 @@
 0x64D454: jnz     short loc_64D440
 0x64D456: jmp     short loc_64D45F
 0x64D458: mov     ecx, edi; int
-0x64D45A: call    sub_5EAE70
+0x64D45A: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x64D45F: mov     ecx, ebx
-0x64D461: call    BSSimpleList_Clear
+0x64D461: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x64D466: push    ebx
-0x64D467: call    FormHeapFree
+0x64D467: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x64D46C: add     esp, 4
 0x64D46F: pop     ebp
 0x64D470: pop     ebx
@@ -445,7 +445,7 @@
 0x64D4A9: mov     eax, [edx+250h]
 0x64D4AF: mov     ecx, ebx
 0x64D4B1: call    eax
-0x64D4B3: call    Double_To_SInt32
+0x64D4B3: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x64D4B8: push    eax
 0x64D4B9: push    edi
 0x64D4BA: mov     ecx, ebx

@@ -1,15 +1,15 @@
-0x4BC4A0: push    ecx
+0x4BC4A0: push    ecx; Verified: scans SubSpace reference candidates, keeps only references whose local scaled bounds contain the query, and returns the containing reference with the smallest base-form bound radius (+0x2C). This is smallest-volume/radius selection, not nearest reference-center selection.
 0x4BC4A1: fld     dword ptr ds:0A32048h
 0x4BC4A7: push    ebp
 0x4BC4A8: push    edi
 0x4BC4A9: fstp    [esp+0Ch+var_4]
-0x4BC4AD: mov     edi, [esp+0Ch+arg_4]
+0x4BC4AD: mov     edi, [esp+0Ch+candidateList]
 0x4BC4B1: xor     ebp, ebp
 0x4BC4B3: test    edi, edi
 0x4BC4B5: jz      short loc_4BC526
 0x4BC4B7: push    ebx
-0x4BC4B8: mov     ebx, [esp+10h+arg_0]
-0x4BC4BC: push    esi
+0x4BC4B8: mov     ebx, [esp+10h+worldPosition]
+0x4BC4BC: push    esi; searchScale
 0x4BC4BD: lea     ecx, [ecx+0]
 0x4BC4C0: mov     esi, [edi]
 0x4BC4C2: test    esi, esi
@@ -26,9 +26,9 @@
 0x4BC4E0: call    edx
 0x4BC4E2: cmp     byte ptr [eax+4], 29h ; ')'
 0x4BC4E6: jnz     short loc_4BC51D
-0x4BC4E8: push    esi
-0x4BC4E9: push    ebx
-0x4BC4EA: call    sub_4BC2E0
+0x4BC4E8: push    esi; candidate
+0x4BC4E9: push    ebx; worldPosition
+0x4BC4EA: call    TESSubSpace_ContainsPosition; Verified: tests whether a world position lies inside a placed TESSubSpace. Requires base form kFormType_SubSpace (0x29) and reference flag 0x20 clear; first applies bound-radius broadphase (+0x2C times reference scale), transforms the query into local space, then tests all three scaled half-extents.
 0x4BC4EF: add     esp, 8
 0x4BC4F2: test    al, al
 0x4BC4F4: jz      short loc_4BC51D

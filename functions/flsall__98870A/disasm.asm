@@ -12,7 +12,7 @@
 0x98872B: mov     [ebp+var_20], esi
 0x98872E: cmp     esi, dword_BABC00
 0x988734: jge     loc_9887BD
-0x98873A: mov     eax, dword_BAABE4
+0x98873A: mov     eax, dword ptr unk_BAABE4
 0x98873F: lea     eax, [eax+esi*4]
 0x988742: cmp     [eax], edi
 0x988744: jz      short _flsall___$LN25
@@ -27,7 +27,7 @@
 0x988757: xor     edx, edx
 0x988759: inc     edx
 0x98875A: mov     [ebp+ms_exc.registration.TryLevel], edx
-0x98875D: mov     eax, dword_BAABE4
+0x98875D: mov     eax, dword ptr unk_BAABE4
 0x988762: mov     eax, [eax+esi*4]
 0x988765: mov     ecx, [eax+0Ch]
 0x988768: test    cl, 83h
@@ -53,3 +53,18 @@
 0x988799: or      [ebp+var_24], eax
 0x98879C: mov     [ebp+ms_exc.registration.TryLevel], edi
 0x98879F: call    _flsall___$LN24_0
+0x9887A7: xor     edi, edi
+0x9887A9: mov     esi, [ebp+var_20]
+0x9887AC: mov     eax, dword ptr unk_BAABE4
+0x9887B1: push    dword ptr [eax+esi*4]
+0x9887B4: push    esi
+0x9887B5: call    __unlock_file2
+0x9887BA: pop     ecx
+0x9887BB: pop     ecx
+0x9887BC: retn
+0x9887BD: mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
+0x9887C4: call    _flsall___$LN20_0
+0x9887DB: push    1
+0x9887DD: call    __unlock
+0x9887E2: pop     ecx
+0x9887E3: retn

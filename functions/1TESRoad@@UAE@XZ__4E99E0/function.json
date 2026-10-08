@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 4,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "TESRoad::~TESRoad(void)",
+  "chunks": [
+    [
+      "0x4E99E0",
+      "0x4E9A48"
+    ],
+    [
+      "0x9B6030",
+      "0x9B605E"
+    ]
+  ],
+  "chunks_sha256": "9e9e28046bc5b7730b9deb05aa1fc327983977b151692ae5f106dacf29e1e9c7",
+  "comment_regular": "Verified TESRoad destructor calls TESRoad_ClearConnectedPointMap, destroys the connected-point map at +0x1C, then runs TESForm destruction. TESWorldSpace owns/releases the TESRoad pointer at WorldSpace+0x54.",
+  "comment_repeatable": "Verified TESRoad destructor calls TESRoad_ClearConnectedPointMap, destroys the connected-point map at +0x1C, then runs TESForm destruction. TESWorldSpace owns/releases the TESRoad pointer at WorldSpace+0x54.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "TESRoad_dtor",
   "end_ea": "0x4E9A48",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "??1TESRoad@@UAE@XZ",
+  "name": "TESRoad_dtor",
   "segment": ".text",
   "sha256": "e92e15f2d09827bda698eaf5753b9c018263832d907fa3ec9cba8609939c754a",
   "size": 104,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E99E0",
+  "total_chunk_size": 150,
   "type": "void __thiscall(TESRoad *__hidden this)",
-  "xrefs_from_count": 32,
+  "xrefs_from_count": 46,
   "xrefs_to_count": 1
 }

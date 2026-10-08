@@ -1,214 +1,239 @@
-int __thiscall sub_52F010(TESTopic *this, _BYTE *a2, Actor *a3, TESObjectREFR *a4, int a5, int a6, _DWORD *a7)
+// OFE topic routing verified: call adapters must retain native selector, including quest priority/order, continued quest+INFO condition grouping, speaker/target context, Random/RandomEnd and conversation reuse. A custom replacement is eligible only when returned INFO is nonnull AND lowDispositionFailure is false; otherwise invoke original stock matching path unchanged.
+OblivionTopicInfo *__thiscall TESTopic::SelectInfoForSpeaker(
+        TESTopic *this,
+        bool *lowDispositionFailure,
+        Actor *speaker,
+        TESObjectREFR *target,
+        bool useConversationRules,
+        TESTopic *previousTopic,
+        ConversationView *conversation)
 {
   TESTopic *v7; // ebp
   unsigned int v8; // ecx
-  int result; // eax
+  OblivionTopicInfo *result; // eax
   tListTopic *v10; // eax
-  tListTopic *v11; // ecx
-  QuestInfoData **p_firstEntry; // eax
+  BSSimpleList_VoidPtr *v11; // ecx
+  QuestInfoEntry *p_questInfoEntries; // eax
   int topicType; // ecx
-  int *v14; // edi
+  QuestInfoData *data; // edi
   int v15; // ebp
   int v16; // esi
-  int *v17; // eax
-  int *v18; // ecx
-  int v19; // eax
-  _DWORD *v20; // eax
-  _DWORD *v21; // edx
-  _DWORD *v22; // eax
-  tListTopic *next; // eax
+  TESTopic **v17; // eax
+  TESTopic **v18; // ecx
+  TESTopic *v19; // eax
+  ConversationView *v20; // eax
+  ConversationView *nextItemNode; // edx
+  DialogueItemView *firstItem; // eax
+  BSSimpleList_VoidPtr *v23; // eax
   unsigned int i; // esi
   unsigned int v25; // edx
-  int *v26; // ecx
+  BSSimpleList_VoidPtr *v26; // ecx
   int v27; // edi
   int v28; // edx
   char v29; // [esp+Ah] [ebp-12h]
-  char v30; // [esp+Bh] [ebp-11h] BYREF
+  bool lowDispositionFailurea; // [esp+Bh] [ebp-11h] BYREF
   TESTopic *v31; // [esp+Ch] [ebp-10h]
-  QuestInfoData **v32; // [esp+10h] [ebp-Ch]
-  int v33; // [esp+14h] [ebp-8h]
-  unsigned int v34; // [esp+18h] [ebp-4h]
+  QuestInfoEntry *next; // [esp+10h] [ebp-Ch]
+  OblivionTopicInfo *v33; // [esp+14h] [ebp-8h]
+  unsigned int firstFreeEntry; // [esp+18h] [ebp-4h]
 
-  v7 = this;
-  *a2 = 0;
-  v8 = (unsigned int)this->super.flags >> 5;
-  v31 = v7;
-  if ( (v8 & 1) != 0 )
-    return 0;
-  if ( dword_B36510 )
+  v7 = this; /*0x52f01b*/
+  *lowDispositionFailure = 0; /*0x52f01d*/
+  v8 = (unsigned int)this->super.flags >> 5; /*0x52f022*/
+  v31 = v7; /*0x52f028*/
+  if ( (v8 & 1) != 0 ) /*0x52f02c*/
+    return 0; /*0x52f035*/
+  if ( g_dialogueRandomInfoCandidates ) /*0x52f038*/
   {
-    BSSimpleList_Clear(dword_B36510);
+    BSSimpleList_Clear(g_dialogueRandomInfoCandidates); /*0x52f042*/
   }
   else
   {
-    v10 = (tListTopic *)FormHeapAlloc(8u);
-    if ( v10 )
+    v10 = (tListTopic *)FormHeapAlloc(8u); /*0x52f04b*/
+    if ( v10 ) /*0x52f055*/
     {
-      v10->node.data = 0;
-      v10->node.next = 0;
+      v10->node.data = 0; /*0x52f057*/
+      v10->node.next = 0; /*0x52f059*/
     }
     else
     {
-      v10 = 0;
+      v10 = 0; /*0x52f05e*/
     }
-    dword_B36510 = v10;
+    g_dialogueRandomInfoCandidates = (BSSimpleList_VoidPtr *)v10; /*0x52f060*/
   }
-  v11 = dword_B36510;
-  p_firstEntry = &v7->firstEntry;
-  v29 = 0;
-  v33 = 0;
-  if ( v7 == (TESTopic *)0xFFFFFFD8 )
-    goto LABEL_10;
-  while ( 1 )
+  v11 = g_dialogueRandomInfoCandidates; /*0x52f065*/
+  p_questInfoEntries = &v7->questInfoEntries; /*0x52f06b*/
+  v29 = 0; /*0x52f072*/
+  v33 = 0; /*0x52f076*/
+  if ( v7 == (TESTopic *)0xFFFFFFD8 ) /*0x52f07a*/
+    goto LABEL_10; /*0x52f07a*/
+  while ( 1 ) /*0x52f114*/
   {
-    v14 = (int *)*p_firstEntry;
-    if ( !*p_firstEntry || v29 )
-      break;
-    v32 = (QuestInfoData **)p_firstEntry[1];
-    if ( v14 )
+    data = p_questInfoEntries->data;            // QuestInfoEntry traversal is already sorted by descending QUST priority. Selection therefore exhausts higher-priority quest INFO arrays before lower-priority quests; equal-priority bucket order remains stable. /*0x52f114*/
+    if ( !p_questInfoEntries->data || v29 ) /*0x52f122*/
+      break; /*0x52f122*/
+    next = p_questInfoEntries->next; /*0x52f12d*/
+    if ( data ) /*0x52f131*/
     {
-      if ( *v14 )
-      {
-        if ( (*(_BYTE *)(*v14 + 0x3C) & 1) != 0 )
+      if ( data->parentQuest ) /*0x52f137*/
+      {                                         // Only a running quest bucket participates in INFO selection: TESQuest.questFlags bit 0x01. In authored QUST DATA the Construction Set labels this same bit 'Start Game Enabled'.
+        if ( (data->parentQuest->questFlags & 1) != 0 ) /*0x52f145*/
         {
-          v15 = 0;
-          v34 = v14[4];
-          if ( v34 )
+          v15 = 0; /*0x52f14e*/
+          firstFreeEntry = data->infoList.firstFreeEntry; /*0x52f152*/
+          if ( firstFreeEntry ) /*0x52f156*/
           {
-            while ( 1 )
+            while ( 1 ) /*0x52f163*/
             {
-              v16 = *(_DWORD *)(v14[2] + 4 * v15);
-              v30 = 0;
-              if ( !v16 || !sub_530830(v16, &v30, *v14, a3, a4) )
-                goto LABEL_55;
-              *a2 = 0;
-              if ( !(_BYTE)a5 )
-                goto LABEL_48;
-              v17 = *(int **)(v16 + 0x30);
-              if ( !v17 )
-                goto LABEL_38;
-              if ( a6 )
+              v16 = (int)data->infoList.data[v15]; /*0x52f163*/
+              lowDispositionFailurea = 0; /*0x52f168*/
+              if ( !v16 /*0x52f186*/
+                || !TESTopicInfo::EvaluateConditions(
+                      (OblivionTopicInfo *)v16,
+                      &lowDispositionFailurea,
+                      data->parentQuest,
+                      speaker,
+                      target) )                 // Evaluate quest conditions followed by INFO conditions for this speaker/target. SayOnce is rejected here when the INFO-global spoken byte is already set.
               {
-                while ( 1 )
+                goto LABEL_55; /*0x52f18d*/
+              }
+              *lowDispositionFailure = 0; /*0x52f19b*/
+              if ( !useConversationRules ) /*0x52f19d*/
+                goto LABEL_48; /*0x52f19d*/
+              v17 = *(TESTopic ***)(v16 + 0x30); /*0x52f1a3*/
+              if ( !v17 ) /*0x52f1a8*/
+                goto LABEL_38; /*0x52f1a8*/
+              if ( previousTopic ) /*0x52f1b0*/
+              {
+                while ( 1 ) /*0x52f1b2*/
                 {
-                  v18 = (int *)v17[1];
-                  if ( !v18 && !*v17 )
-                    goto LABEL_55;
-                  v19 = *v17;
-                  if ( v19 == a6 || *(_DWORD *)(v19 + 0xC) == 0xD3 )
-                    goto LABEL_38;
-                  v17 = v18;
-                  if ( !v18 )
-                    goto LABEL_55;
+                  v18 = (TESTopic **)v17[1]; /*0x52f1b2*/
+                  if ( !v18 && !*v17 ) /*0x52f1b9*/
+                    goto LABEL_55; /*0x52f1bb*/
+                  v19 = *v17; /*0x52f1c1*/
+                  if ( v19 == previousTopic || v19->super.refID == 0xD3 ) /*0x52f1ce*/
+                    goto LABEL_38;              // Conversation link acceptance: the candidate linked topic may equal previousTopic or be stock 000000D3 / ANY, which acts as the wildcard continuation root. /*0x52f1ce*/
+                  v17 = v18; /*0x52f1d0*/
+                  if ( !v18 ) /*0x52f1d4*/
+                    goto LABEL_55; /*0x52f1d4*/
                 }
               }
-              if ( BSSimpleList_IsEmpty(*(BSSimpleList_VoidPtr **)(v16 + 0x30))
-                || a4 == (TESObjectREFR *)TESDataHandler_g_PlayerRef )
-              {
+              if ( BSSimpleList_IsEmpty(*(BSSimpleList_VoidPtr **)(v16 + 0x30)) || target == (TESObjectREFR *)reference )// For normal NPC-to-NPC random conversation, previousTopic=null plus nonempty INFO.linkedFrom rejects this candidate. The target==Player exception applies only to this first-item/no-previous-topic branch. /*0x52f1ef*/
+              {                                 // TESTopicInfo::RandomEnd (0x20): stop scanning later INFO candidates after this match.
 LABEL_38:
-                if ( (*(_BYTE *)(v16 + 0x25) & 0x20) != 0 )
-                  v29 = 1;
-                v20 = a7;
-                if ( a7 )
+                if ( (*(_BYTE *)(v16 + 0x25) & 0x20) != 0 ) /*0x52f1ff*/
+                  v29 = 1;                      // Latch RandomEnd before checking whether this INFO duplicates an earlier conversation item. The stop flag is not cleared if the later exact-INFO or same quest/topic reuse test rejects the candidate. /*0x52f201*/
+                v20 = conversation; /*0x52f206*/
+                if ( conversation ) /*0x52f20c*/
                 {
-                  do
+                  do /*0x52f210*/
                   {
-                    v21 = (_DWORD *)v20[1];
-                    if ( !v21 && !*v20 )
-                      break;
-                    v22 = (_DWORD *)*v20;
-                    if ( v22[3] == v16
-                      || (*(_BYTE *)(*v14 + 0x3C) & 4) == 0 && v22[5] == *v14 && (TESTopic *)v22[4] == v31 )
+                    nextItemNode = (ConversationView *)v20->nextItemNode; /*0x52f210*/
+                    if ( !nextItemNode && !v20->firstItem ) /*0x52f217*/
+                      break; /*0x52f217*/
+                    firstItem = v20->firstItem; /*0x52f21b*/
+                    if ( firstItem->info == (OblivionTopicInfo *)v16 /*0x52f236*/
+                      || (data->parentQuest->questFlags & 4) == 0
+                      && firstItem->ownerQuest == data->parentQuest
+                      && firstItem->topic == v31 )
                     {
-                      goto LABEL_55;
+                      goto LABEL_55;            // Same owner quest/topic reuse rejection also preserves an already-latched RandomEnd stop. QUST Allow repeated conversation topics bypasses only this same-topic test, never exact-INFO reuse. /*0x52f236*/
                     }
-                    v20 = v21;
+                    v20 = nextItemNode; /*0x52f238*/
                   }
-                  while ( v21 );
+                  while ( nextItemNode ); /*0x52f210*/
                 }
 LABEL_48:
-                if ( (*(_BYTE *)(v16 + 0x25) & 0x20) != 0 )
-                  v29 = 1;
-                v11 = dword_B36510;
-                if ( !dword_B36510->node.next && !v11->node.data && (*(_BYTE *)(v16 + 0x25) & 2) == 0 )
-                  return v16;
-                if ( (*(_BYTE *)(v16 + 0x25) & 2) == 0 )
+                if ( (*(_BYTE *)(v16 + 0x25) & 0x20) != 0 ) /*0x52f24a*/
+                  v29 = 1; /*0x52f24c*/
+                v11 = g_dialogueRandomInfoCandidates; /*0x52f251*/
+                if ( !g_dialogueRandomInfoCandidates->firstNode.next /*0x52f267*/
+                  && !v11->firstNode.data
+                  && (*(_BYTE *)(v16 + 0x25) & 2) == 0 )// TESTopicInfo::Random (0x02): non-random eligible INFO returns immediately when no random candidates exist; random INFOs are accumulated.
                 {
-                  v29 = 1;
-                  break;
+                  return (OblivionTopicInfo *)v16; /*0x52f2c8*/
                 }
-                BSSimpleList_PushFront(v11, v16);
+                if ( (*(_BYTE *)(v16 + 0x25) & 2) == 0 )// An eligible non-Random INFO terminates further scanning. If Random candidates were already accumulated, the non-Random INFO is a boundary and is not itself selected. /*0x52f26d*/
+                {
+                  v29 = 1; /*0x52f2b8*/
+                  break; /*0x52f2bd*/
+                }
+                BSSimpleList_PushFront(v11, v16); /*0x52f270*/
               }
 LABEL_55:
-              if ( !(_BYTE)a5 )
+              if ( !useConversationRules && lowDispositionFailurea ) /*0x52f27f*/
               {
-                if ( v30 )
-                {
-                  v33 = v16;
-                  *a2 = 1;
-                }
+                v33 = (OblivionTopicInfo *)v16; // Player/menu-only fallback: retain this condition-failed INFO when its failed condition was GetDisposition with > or >=. The last such candidate wins if no normal or Random match exists. /*0x52f285*/
+                *lowDispositionFailure = 1; /*0x52f289*/
               }
-              if ( !v29 && ++v15 < v34 )
-                continue;
-              v11 = dword_B36510;
-              break;
+              if ( !v29 && ++v15 < firstFreeEntry ) /*0x52f299*/
+                continue; /*0x52f299*/
+              v11 = g_dialogueRandomInfoCandidates; /*0x52f29f*/
+              break; /*0x52f29f*/
             }
           }
         }
       }
     }
-    v7 = v31;
-    if ( !v32 )
-      break;
-    p_firstEntry = v32;
+    v7 = v31; /*0x52f2a5*/
+    if ( !next ) /*0x52f2ad*/
+      break; /*0x52f2ad*/
+    p_questInfoEntries = next; /*0x52f110*/
   }
 LABEL_10:
-  if ( v11->node.next || v11->node.data )
+  if ( v11->firstNode.next || v11->firstNode.data ) /*0x52f089*/
   {
-    next = v11;
-    for ( i = 0; next; next = (tListTopic *)next->node.next )
+    v23 = v11; /*0x52f2d9*/
+    for ( i = 0; v23; v23 = (BSSimpleList_VoidPtr *)v23->firstNode.next ) /*0x52f2df*/
     {
-      if ( next->node.data )
-        ++i;
+      if ( v23->firstNode.data ) /*0x52f2e1*/
+        ++i; /*0x52f2e5*/
     }
-    v25 = GetRandomLargeInteger_(0) % i;
-    v26 = (int *)dword_B36510;
-    v27 = 0;
-    result = 0;
-    v28 = v25 + 1;
-    if ( v28 > 0 )
+    v25 = Game_RandomLargeInteger(0) % i;       // Uniform selection from the eligible Random (0x02) INFO candidate list. /*0x52f2f7*/
+    v26 = g_dialogueRandomInfoCandidates; /*0x52f2f9*/
+    v27 = 0; /*0x52f302*/
+    result = 0; /*0x52f304*/
+    v28 = v25 + 1; /*0x52f306*/
+    if ( v28 > 0 ) /*0x52f30b*/
     {
-      do
+      do /*0x52f324*/
       {
-        if ( !v26 )
-          break;
-        if ( *v26 )
+        if ( !v26 ) /*0x52f312*/
+          break; /*0x52f312*/
+        if ( v26->firstNode.data ) /*0x52f314*/
         {
-          result = *v26;
-          ++v27;
+          result = (OblivionTopicInfo *)v26->firstNode.data; /*0x52f31a*/
+          ++v27; /*0x52f31c*/
         }
-        v26 = (int *)v26[1];
+        v26 = (BSSimpleList_VoidPtr *)v26->firstNode.next; /*0x52f321*/
       }
-      while ( v27 < v28 );
+      while ( v27 < v28 ); /*0x52f324*/
     }
   }
-  else if ( (_BYTE)a5 )
+  else if ( useConversationRules ) /*0x52f097*/
   {
-    result = 0;
-    if ( TESDataHandler_g_PlayerRef->isInSEWorld )
+    result = 0; /*0x52f0a3*/
+    if ( reference->isInSEWorld )               // Shivering Isles fallback for ambient selection only: if no match while the player is in the SE world, temporarily retry base-world conditions for dialogue types Combat(2), Persuasion(3), Detection(4), or Miscellaneous(6), then restore the world flag. /*0x52f0a5*/
     {
-      topicType = (char)v7->topicType;
-      if ( topicType >= 2 && (topicType <= 4 || topicType == 6) )
+      topicType = (char)v7->topicType; /*0x52f0b1*/
+      if ( topicType >= 2 && (topicType <= 4 || topicType == 6) ) /*0x52f0c6*/
       {
-        TESDataHandler_g_PlayerRef->isInSEWorld = 0;
-        result = sub_52F010(v7, a2, a3, a4, a5, a6, a7);
-        TESDataHandler_g_PlayerRef->isInSEWorld = 1;
+        reference->isInSEWorld = 0; /*0x52f0e8*/
+        result = TESTopic::SelectInfoForSpeaker( /*0x52f0ee*/
+                   v7,
+                   lowDispositionFailure,
+                   speaker,
+                   target,
+                   useConversationRules,
+                   previousTopic,
+                   conversation);
+        reference->isInSEWorld = 1; /*0x52f0fc*/
       }
     }
   }
   else
   {
-    return v33;
+    return v33; /*0x52f2cb*/
   }
-  return result;
+  return result; /*0x52f02e*/
 }

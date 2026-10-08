@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x45D450",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; ContinueFromLastSave fidelity decode: enumerates GameSaveRoot+SaveSubdir+*.ess, constructs SaveGameFile objects (BSFile + vtable + flag byte), inserts into SaveLoad+0x6C list via BSSimpleList_InsertSorted comparator 0x459450.",
     "mnemonic": "push",
     "size": 2
   },
@@ -187,13 +187,13 @@
   },
   {
     "ea": "0x45D4B0",
-    "line": "mov     [edi+6Ch], eax",
+    "line": "mov     [edi+6Ch], eax; TESSaveLoadGame+0x6C owns the 8-byte BSSimpleList head of SaveGameFile objects.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x45D4B3",
-    "line": "push    offset word_B3F280; lpString2",
+    "line": "push    offset unk_B3F280; lpString2",
     "mnemonic": "push",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x45D52C",
-    "line": "push    offset word_B3F280",
+    "line": "push    offset unk_B3F280",
     "mnemonic": "push",
     "size": 5
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x45D577",
-    "line": "mov     dword ptr [esi], offset ??_7SaveGameFile@@6B@; const SaveGameFile::`vftable'",
+    "line": "mov     dword ptr [esi], offset ??_7SaveGameFile@@6B@; SaveGameFile is BSFile-derived; path buffer begins at +0x3C and timestamp cache begins at +0x154.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x45D58A",
-    "line": "push    offset sub_459450",
+    "line": "push    offset sub_459450; ContinueFromLastSave fidelity decode: SaveGameFile sorted-list comparator. Caches ftLastWriteTime at SaveGameFile+0x158/+0x15C and returns newest file first; vanilla Continue therefore means newest write time, not highest Save number.",
     "mnemonic": "push",
     "size": 5
   },
@@ -670,5 +670,101 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9AE380",
+    "line": "mov     eax, [ebp-35Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9AE386",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE387",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE38C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE38D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE38E",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AE392",
+    "line": "lea     eax, [edx-360h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9AE398",
+    "line": "mov     ecx, [edx-364h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9AE39E",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AE3A0",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE3A5",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE3A8",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE3AB",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AE3AD",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE3B2",
+    "line": "mov     eax, offset stru_ADAC08",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE3B7",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

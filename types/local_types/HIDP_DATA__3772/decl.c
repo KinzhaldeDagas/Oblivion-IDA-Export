@@ -1,1 +1,1 @@
-HIDP_DATA
+typedef _HIDP_DATA HIDP_DATA;

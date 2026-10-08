@@ -2,13 +2,13 @@
 0x776A31: push    ebp
 0x776A32: push    esi
 0x776A33: push    edi
-0x776A34: mov     edi, [esp+10h+arg_0]
+0x776A34: mov     edi, [esp+10h+data]
 0x776A38: mov     ebp, [edi+104h]
 0x776A3E: test    ebp, ebp
-0x776A40: lea     eax, [esp+10h+arg_0]
+0x776A40: lea     eax, [esp+10h+data]
 0x776A44: push    eax
 0x776A45: mov     esi, ecx
-0x776A47: mov     [esp+14h+arg_0], ebp
+0x776A47: mov     [esp+14h+data], ebp
 0x776A4B: push    edi
 0x776A4C: jz      short loc_776AB6
 0x776A4E: call    NiTMap_GetAt
@@ -24,11 +24,11 @@
 0x776A68: mov     ecx, esi
 0x776A6A: mov     byte ptr [ebp+71h], 0
 0x776A6E: call    NiTMap_RemoveAt
-0x776A73: lea     ecx, [esp+10h+arg_0]
-0x776A77: push    ecx
-0x776A78: lea     ecx, [esi+10h]
-0x776A7B: mov     [esp+14h+arg_0], edi
-0x776A7F: call    sub_776690
+0x776A73: lea     ecx, [esp+10h+data]
+0x776A77: push    ecx; data
+0x776A78: lea     ecx, [esi+10h]; list
+0x776A7B: mov     [esp+14h+data], edi
+0x776A7F: call    NiTPointerList_RemoveByData; [Verified] Generic NiTPointerList remove-by-data helper. Scans node payloads for the supplied pointer, then delegates removal of the matching node to NiTPointerList_RemoveNode. The decal-list path calls it with the DECAL_DATA* payload address.
 0x776A84: mov     dword ptr [edi+104h], 0
 0x776A8E: mov     ecx, [ebp+6Ch]
 0x776A91: mov     eax, ecx
@@ -39,7 +39,7 @@
 0x776AA0: push    ebp
 0x776AA1: not     edx
 0x776AA3: and     [esi+eax*4+40h], edx
-0x776AA7: call    FormHeapFree
+0x776AA7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x776AAC: add     esp, 4
 0x776AAF: pop     edi
 0x776AB0: pop     esi
@@ -53,11 +53,11 @@
 0x776AC0: mov     ecx, esi
 0x776AC2: call    NiTMap_RemoveAt
 0x776AC7: lea     ecx, [esp+10h+var_4]
-0x776ACB: push    ecx
-0x776ACC: lea     ecx, [esi+10h]
+0x776ACB: push    ecx; data
+0x776ACC: lea     ecx, [esi+10h]; list
 0x776ACF: mov     [esp+14h+var_4], edi
-0x776AD3: call    sub_776690
-0x776AD8: mov     edx, [esp+10h+arg_0]
+0x776AD3: call    NiTPointerList_RemoveByData; [Verified] Generic NiTPointerList remove-by-data helper. Scans node payloads for the supplied pointer, then delegates removal of the matching node to NiTPointerList_RemoveNode. The decal-list path calls it with the DECAL_DATA* payload address.
+0x776AD8: mov     edx, [esp+10h+data]
 0x776ADC: mov     dword ptr [edi+104h], 0
 0x776AE6: mov     ecx, [edx+6Ch]
 0x776AE9: mov     eax, ecx

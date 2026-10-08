@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x5084A7",
-    "line": "lea     eax, [esp+8+var_8]",
+    "line": "lea     eax, [esp+8+cellY]",
     "mnemonic": "lea",
     "size": 3
   },
@@ -121,13 +121,13 @@
   },
   {
     "ea": "0x5084D7",
-    "line": "mov     [esp+2Ch+var_8], 0",
+    "line": "mov     [esp+2Ch+cellY], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x5084DF",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x508532",
-    "line": "mov     ecx, [esp+0Ch+var_8]",
+    "line": "mov     ecx, [esp+0Ch+cellY]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -313,13 +313,13 @@
   },
   {
     "ea": "0x50853B",
-    "line": "push    ecx; signed int",
+    "line": "push    ecx; cellY",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50853C",
-    "line": "push    edx; signed int",
+    "line": "push    edx; cellX",
     "mnemonic": "push",
     "size": 1
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x50854A",
-    "line": "mov     eax, [esp+10h+var_8]",
+    "line": "mov     eax, [esp+10h+cellY]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x508556",
-    "line": "call    sub_4F1630",
+    "line": "call    TESWorldSpace_LoadExteriorCellAtCoord; Verified: exterior-cell loader checks cellMap first, searches master files using cellOffsetsArray fast path or GRUP/CELL fallback, creates a missing TESObjectCELL, post-fixes it, then attaches worldspace-indexed references.",
     "mnemonic": "call",
     "size": 5
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x508561",
-    "line": "mov     edx, [esp+10h+var_8]",
+    "line": "mov     edx, [esp+10h+cellY]",
     "mnemonic": "mov",
     "size": 4
   },

@@ -23,11 +23,11 @@
 0x8122DE: call    ShaderDefinition__Init
 0x8122E3: mov     esi, eax
 0x8122E5: mov     eax, ds:0B43104h
-0x8122EA: push    1; StreamCount
-0x8122EC: push    4; a2
-0x8122EE: push    eax; a1
+0x8122EA: push    1; streamCount
+0x8122EC: push    4; elementCount
+0x8122EE: push    eax; renderer
 0x8122EF: mov     [esp+2Ch+var_4], 0FFFFFFFFh
-0x8122F7: call    CreateDX9ShaderDeclaration
+0x8122F7: call    CreateDX9ShaderDeclaration; Oblivion NiDX9 declaration factory. Allocates a 0x38-byte NiDX9ShaderDeclaration and initializes elementCount internal element records for each streamCount stream.
 0x8122FC: mov     edi, [esi]
 0x8122FE: mov     ebx, eax
 0x812300: add     esp, 0Ch
@@ -102,7 +102,7 @@
 0x81239B: test    eax, eax
 0x81239D: jz      short loc_8123AE
 0x81239F: nop
-0x8123A0: cmp     eax, offset dword_B3F684
+0x8123A0: cmp     eax, offset stru_B3F684
 0x8123A5: jz      short loc_8123E1
 0x8123A7: mov     eax, [eax+4]
 0x8123AA: test    eax, eax
@@ -176,3 +176,20 @@
 0x812464: pop     ebx
 0x812465: add     esp, 10h
 0x812468: retn
+0x9D0CA0: mov     eax, [ebp-10h]
+0x9D0CA3: push    eax
+0x9D0CA4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D0CA9: pop     ecx
+0x9D0CAA: retn
+0x9D0CAB: mov     eax, [ebp-10h]
+0x9D0CAE: push    eax
+0x9D0CAF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D0CB4: pop     ecx
+0x9D0CB5: retn
+0x9D0CB6: mov     edx, [esp+arg_4]
+0x9D0CBA: lea     eax, [edx-10h]
+0x9D0CBD: mov     ecx, [edx-14h]
+0x9D0CC0: xor     ecx, eax
+0x9D0CC2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D0CC7: mov     eax, offset stru_AF94E0
+0x9D0CCC: jmp     ___CxxFrameHandler3

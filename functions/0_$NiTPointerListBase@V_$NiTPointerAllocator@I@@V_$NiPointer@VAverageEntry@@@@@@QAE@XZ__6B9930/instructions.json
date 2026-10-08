@@ -283,25 +283,25 @@
   },
   {
     "ea": "0x6B99B0",
-    "line": "mov     [esp+38h+var_10], edi",
+    "line": "mov     [esp+38h+self.count], edi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6B99B4",
-    "line": "mov     [esp+38h+var_18], edi",
+    "line": "mov     [esp+38h+self.head], edi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6B99B8",
-    "line": "mov     [esp+38h+var_14], edi",
+    "line": "mov     [esp+38h+self.tail], edi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6B99BC",
-    "line": "mov     [esp+38h+var_1C], offset ??_7?$NiTPointerList@V?$NiPointer@VAverageEntry@@@@@@6B@; const NiTPointerList<NiPointer<AverageEntry>>::`vftable'",
+    "line": "mov     [esp+38h+self.vtable], offset ??_7?$NiTPointerList@V?$NiPointer@VAverageEntry@@@@@@6B@; const NiTPointerList<NiPointer<AverageEntry>>::`vftable' ...",
     "mnemonic": "mov",
     "size": 8
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x6B99D5",
-    "line": "mov     [esp+38h+var_20], esi",
+    "line": "mov     [esp+38h+payload], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -373,19 +373,19 @@
   },
   {
     "ea": "0x6B99E5",
-    "line": "lea     ecx, [esp+38h+var_20]",
+    "line": "lea     ecx, [esp+38h+payload]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6B99E9",
-    "line": "push    ecx",
+    "line": "push    ecx; payload",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B99EA",
-    "line": "lea     ecx, [esp+3Ch+var_1C]",
+    "line": "lea     ecx, [esp+3Ch+self]; self",
     "mnemonic": "lea",
     "size": 4
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x6B99F3",
-    "line": "call    sub_749800",
+    "line": "call    NiTRefPointerList__AddHead; Pass221: Refcounted NiTPointerList head-insert helper; node+0x08 owns the payload reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x6B9A21",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x6B9A52",
-    "line": "mov     esi, [esp+38h+var_18]",
+    "line": "mov     esi, [esp+38h+self.head]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x6B9A6A",
-    "line": "mov     [esp+38h+var_20], esi",
+    "line": "mov     [esp+38h+payload], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -697,19 +697,19 @@
   },
   {
     "ea": "0x6B9A7A",
-    "line": "lea     edx, [esp+38h+var_20]",
+    "line": "lea     edx, [esp+38h+payload]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6B9A7E",
-    "line": "push    edx",
+    "line": "push    edx; payload",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B9A7F",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x6B9A86",
-    "line": "call    sub_749800",
+    "line": "call    NiTRefPointerList__AddHead; Pass221: Refcounted NiTPointerList head-insert helper; node+0x08 owns the payload reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -823,13 +823,13 @@
   },
   {
     "ea": "0x6B9AB3",
-    "line": "mov     esi, [esp+38h+var_18]",
+    "line": "mov     esi, [esp+38h+self.head]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6B9AB7",
-    "line": "mov     [esp+38h+var_1C], offset ??_7?$NiTPointerListBase@V?$NiTPointerAllocator@I@@V?$NiPointer@VAverageEntry@@@@@@6B@; const NiTPointerListBase<NiTPointerAllocator<uint>,NiPointer<AverageEntry>>::`vftable'",
+    "line": "mov     [esp+38h+self.vtable], offset ??_7?$NiTPointerListBase@V?$NiTPointerAllocator@I@@V?$NiPointer@VAverageEntry@@@@@@6B@; const NiTPointerListBase<NiTPointerAllocator<uint>,NiPointer<AverageEntry>>::`vftable' ...",
     "mnemonic": "mov",
     "size": 8
   },
@@ -853,7 +853,7 @@
   },
   {
     "ea": "0x6B9ACB",
-    "line": "mov     edx, [esp+38h+var_1C]",
+    "line": "mov     edx, [esp+38h+self.vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -883,7 +883,7 @@
   },
   {
     "ea": "0x6B9AD7",
-    "line": "lea     ecx, [esp+3Ch+var_1C]",
+    "line": "lea     ecx, [esp+3Ch+self]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -913,19 +913,19 @@
   },
   {
     "ea": "0x6B9AE5",
-    "line": "mov     [esp+38h+var_10], ebx",
+    "line": "mov     [esp+38h+self.count], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6B9AE9",
-    "line": "mov     [esp+38h+var_18], ebx",
+    "line": "mov     [esp+38h+self.head], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6B9AED",
-    "line": "mov     [esp+38h+var_14], ebx",
+    "line": "mov     [esp+38h+self.tail], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -937,7 +937,7 @@
   },
   {
     "ea": "0x6B9AF9",
-    "line": "mov     [esp+38h+var_1C], offset ??_7?$NiTListBase@V?$NiTPointerAllocator@I@@V?$NiPointer@VAverageEntry@@@@@@6B@; const NiTListBase<NiTPointerAllocator<uint>,NiPointer<AverageEntry>>::`vftable'",
+    "line": "mov     [esp+38h+self.vtable], offset ??_7?$NiTListBase@V?$NiTPointerAllocator@I@@V?$NiPointer@VAverageEntry@@@@@@6B@; const NiTListBase<NiTPointerAllocator<uint>,NiPointer<AverageEntry>>::`vftable' ...",
     "mnemonic": "mov",
     "size": 8
   },
@@ -1060,5 +1060,107 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x6B95E0",
+    "line": "mov     dword ptr [ecx], offset ??_7?$NiTListBase@V?$NiTPointerAllocator@I@@V?$NiPointer@VAverageEntry@@@@@@6B@; const NiTListBase<NiTPointerAllocator<uint>,NiPointer<AverageEntry>>::`vftable'",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x6B95E6",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C7090",
+    "line": "lea     ecx, [ebp-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C7093",
+    "line": "jmp     j_??1?$NiTPointerList@V?$NiPointer@VAverageEntry@@@@@@UAE@XZ; NiTPointerList<NiPointer<AverageEntry>>::~NiTPointerList<NiPointer<AverageEntry>>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C7098",
+    "line": "lea     ecx, [ebp-20h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C709B",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C70A0",
+    "line": "lea     ecx, [ebp-20h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C70A3",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C70A8",
+    "line": "lea     ecx, [ebp-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C70AB",
+    "line": "jmp     loc_6B95E0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C70B0",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C70B4",
+    "line": "lea     eax, [edx-28h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C70B7",
+    "line": "mov     ecx, [edx-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C70BA",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C70BC",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C70C1",
+    "line": "mov     eax, offset stru_AEF514",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C70C6",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

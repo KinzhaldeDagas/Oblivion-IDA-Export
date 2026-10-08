@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x4DE190",
-    "line": "call    ContainerExtraData_GetItemCount",
+    "line": "call    ContainerExtraData_GetItemCount; ContainerChanges item-count logic: start with the base TESContainer count (made absolute), find matching EntryData, then combine countDelta. If the base count and delta are both 0 but an EntryData exists, return 1; the GetItemCount evaluator takes the final absolute value.",
     "mnemonic": "call",
     "size": 5
   },

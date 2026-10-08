@@ -1,1 +1,1 @@
-cxx_type_info
+typedef __cxx_type_info cxx_type_info;

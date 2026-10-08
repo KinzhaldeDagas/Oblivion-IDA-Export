@@ -49,13 +49,13 @@
 0x584598: push    0
 0x58459A: push    0
 0x58459C: push    0
-0x58459E: call    sub_4891C0
+0x58459E: call    Player_CalcInventoryEntryRating
 0x5845A3: fstp    [esp+10h+var_8]
 0x5845A7: mov     ecx, [esp+10h+arg_4]
 0x5845AB: push    0
 0x5845AD: push    0
 0x5845AF: push    0
-0x5845B1: call    sub_4891C0
+0x5845B1: call    Player_CalcInventoryEntryRating
 0x5845B6: fsubr   [esp+10h+var_8]
 0x5845BA: jmp     short loc_5845E6
 0x5845BC: mov     ecx, [esp+10h+arg_0]; jumptable 00584518 case 4

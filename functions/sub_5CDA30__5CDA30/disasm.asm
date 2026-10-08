@@ -24,8 +24,8 @@
 0x5CDA75: mov     [esp+3Ch+var_14], esp
 0x5CDA79: mov     [esp+3Ch+var_18], eax
 0x5CDA7D: mov     eax, ds:0B38F78h
-0x5CDA82: push    ebx; a3
-0x5CDA83: push    eax; a2
+0x5CDA82: push    ebx; controlName
+0x5CDA83: push    eax; categoryName
 0x5CDA84: mov     [ecx], ebx
 0x5CDA86: mov     [ecx+4], bx
 0x5CDA8A: mov     [ecx+6], bx
@@ -42,12 +42,12 @@
 0x5CDAAD: mov     [ecx+6], bx
 0x5CDAB1: call    BSStringT_Set
 0x5CDAB6: or      ebp, 0FFFFFFFFh
-0x5CDAB9: mov     ecx, esi
+0x5CDAB9: mov     ecx, esi; this
 0x5CDABB: mov     [esp+44h+var_4], ebp
-0x5CDABF: call    sub_5C3440
+0x5CDABF: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5CDAC4: mov     ecx, eax
 0x5CDAC6: call    Tile_GetFloat
-0x5CDACB: call    Double_To_SInt32
+0x5CDACB: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5CDAD0: mov     ecx, ds:0B33A98h
 0x5CDAD6: add     ecx, 44h ; 'D'
 0x5CDAD9: cmp     ecx, ebx
@@ -78,7 +78,7 @@
 0x5CDB21: mov     ecx, esp; this
 0x5CDB23: mov     [esp+40h+var_10], esp
 0x5CDB27: push    ebx; a3
-0x5CDB28: push    eax; a2
+0x5CDB28: push    eax; categoryName
 0x5CDB29: mov     [ecx], ebx
 0x5CDB2B: mov     [ecx+4], bx
 0x5CDB2F: mov     [ecx+6], bx
@@ -94,9 +94,9 @@
 0x5CDB52: mov     [ecx+4], bx
 0x5CDB56: mov     [ecx+6], bx
 0x5CDB5A: call    BSStringT_Set
-0x5CDB5F: mov     ecx, esi
+0x5CDB5F: mov     ecx, esi; this
 0x5CDB61: mov     [esp+48h+var_4], ebp
-0x5CDB65: call    sub_5C3440
+0x5CDB65: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5CDB6A: mov     ecx, eax
 0x5CDB6C: call    Tile_SetString
 0x5CDB71: mov     eax, ds:0B38FB0h
@@ -106,7 +106,7 @@
 0x5CDB83: mov     ecx, esp; this
 0x5CDB85: mov     [esp+40h+var_10], esp
 0x5CDB89: push    ebx; a3
-0x5CDB8A: push    eax; a2
+0x5CDB8A: push    eax; categoryName
 0x5CDB8B: mov     [ecx], ebx
 0x5CDB8D: mov     [ecx+4], bx
 0x5CDB91: mov     [ecx+6], bx
@@ -122,9 +122,9 @@
 0x5CDBB7: push    eax; a2
 0x5CDBB8: mov     [ecx+6], bx
 0x5CDBBC: call    BSStringT_Set
-0x5CDBC1: mov     ecx, esi
+0x5CDBC1: mov     ecx, esi; this
 0x5CDBC3: mov     [esp+48h+var_4], ebp
-0x5CDBC7: call    sub_5C3440
+0x5CDBC7: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5CDBCC: mov     ecx, eax
 0x5CDBCE: call    Tile_SetString
 0x5CDBD3: push    ebx
@@ -175,7 +175,7 @@
 0x5CDC76: mov     ecx, esp; this
 0x5CDC78: mov     [esp+40h+var_10], esp
 0x5CDC7C: push    ebx; a3
-0x5CDC7D: push    eax; a2
+0x5CDC7D: push    eax; categoryName
 0x5CDC7E: mov     [ecx], ebx
 0x5CDC80: mov     [ecx+4], bx
 0x5CDC84: mov     [ecx+6], bx
@@ -191,9 +191,9 @@
 0x5CDCA7: mov     [ecx+4], bx
 0x5CDCAB: mov     [ecx+6], bx
 0x5CDCAF: call    BSStringT_Set
-0x5CDCB4: mov     ecx, esi
+0x5CDCB4: mov     ecx, esi; this
 0x5CDCB6: mov     [esp+48h+var_4], ebp
-0x5CDCBA: call    sub_5C3440
+0x5CDCBA: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5CDCBF: mov     ecx, eax
 0x5CDCC1: call    Tile_SetString
 0x5CDCC6: mov     eax, [edi+1Ch]
@@ -207,7 +207,7 @@
 0x5CDCE0: mov     ecx, esp; this
 0x5CDCE2: mov     [esp+40h+var_10], esp
 0x5CDCE6: push    ebx; a3
-0x5CDCE7: push    eax; a2
+0x5CDCE7: push    eax; categoryName
 0x5CDCE8: mov     [ecx], ebx
 0x5CDCEA: mov     [ecx+4], bx
 0x5CDCEE: mov     [ecx+6], bx
@@ -223,9 +223,9 @@
 0x5CDD11: mov     [ecx+4], bx
 0x5CDD15: mov     [ecx+6], bx
 0x5CDD19: call    BSStringT_Set
-0x5CDD1E: mov     ecx, esi
+0x5CDD1E: mov     ecx, esi; this
 0x5CDD20: mov     [esp+48h+var_4], ebp
-0x5CDD24: call    sub_5C3440
+0x5CDD24: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5CDD29: mov     ecx, eax
 0x5CDD2B: call    Tile_SetString
 0x5CDD30: mov     ecx, ds:0B333C4h
@@ -260,7 +260,7 @@
 0x5CDD93: mov     ecx, esp; this
 0x5CDD95: mov     [esp+40h+var_10], esp
 0x5CDD99: push    ebx; a3
-0x5CDD9A: push    eax; a2
+0x5CDD9A: push    eax; categoryName
 0x5CDD9B: mov     [ecx], ebx
 0x5CDD9D: mov     [ecx+4], bx
 0x5CDDA1: mov     [ecx+6], bx
@@ -276,9 +276,9 @@
 0x5CDDC4: mov     [ecx+4], bx
 0x5CDDC8: mov     [ecx+6], bx
 0x5CDDCC: call    BSStringT_Set
-0x5CDDD1: mov     ecx, esi
+0x5CDDD1: mov     ecx, esi; this
 0x5CDDD3: mov     [esp+48h+var_4], ebp
-0x5CDDD7: call    sub_5C3440
+0x5CDDD7: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5CDDDC: mov     ecx, eax
 0x5CDDDE: call    Tile_SetString
 0x5CDDE3: mov     ecx, [esp+30h+var_18]
@@ -314,9 +314,9 @@
 0x5CDE51: mov     edx, [edx+18h]
 0x5CDE54: push    eax
 0x5CDE55: call    edx
-0x5CDE57: mov     ecx, ds:0B333C4h
+0x5CDE57: mov     ecx, ds:0B333C4h; this
 0x5CDE5D: mov     byte ptr ds:0B33D80h, 1
-0x5CDE64: call    MobileObject_GenerateNiNode
+0x5CDE64: call    MobileObject_GenerateNiNode; MobileObject GenerateNiNode override. Calls TESObjectREFR_GenerateNiNode, forwards matching model extra data to the process when present, conditionally registers the result as a shadow caster, and returns NiNode*. Native ABI has no stack/x87 inputs.
 0x5CDE69: mov     edi, eax
 0x5CDE6B: mov     eax, [ebp+0]
 0x5CDE6E: mov     edx, [eax+84h]
@@ -347,9 +347,9 @@
 0x5CDEC6: call    eax
 0x5CDEC8: jmp     short loc_5CDECF
 0x5CDECA: call    UpdatePlayerHead
-0x5CDECF: push    ebx
-0x5CDED0: mov     ecx, esi
-0x5CDED2: call    sub_5C7BA0
+0x5CDECF: push    ebx; rebuildLists
+0x5CDED0: mov     ecx, esi; this
+0x5CDED2: call    RaceSexMenu_SynchronizeControlsFromPlayer; Broad RaceSexMenu state-to-UI synchronization used after Reset Face. Rebuilds localized controls from current player race/sex/head state; suitable native boundary for restoring a captured FaceGen candidate before UI refresh.
 0x5CDED7: mov     ecx, [esp+30h+var_C]
 0x5CDEDB: mov     large fs:0, ecx
 0x5CDEE2: pop     ecx
@@ -359,3 +359,24 @@
 0x5CDEE6: pop     ebx
 0x5CDEE7: add     esp, 1Ch
 0x5CDEEA: retn
+0x9C1B60: mov     ecx, [ebp-14h]; void *
+0x9C1B63: jmp     BSStringT_Clear
+0x9C1B68: mov     ecx, [ebp-10h]; void *
+0x9C1B6B: jmp     BSStringT_Clear
+0x9C1B70: mov     ecx, [ebp-10h]; void *
+0x9C1B73: jmp     BSStringT_Clear
+0x9C1B78: mov     ecx, [ebp-10h]; void *
+0x9C1B7B: jmp     BSStringT_Clear
+0x9C1B80: mov     ecx, [ebp-10h]; void *
+0x9C1B83: jmp     BSStringT_Clear
+0x9C1B88: mov     ecx, [ebp-10h]; void *
+0x9C1B8B: jmp     BSStringT_Clear
+0x9C1B90: mov     ecx, [ebp-10h]; void *
+0x9C1B93: jmp     BSStringT_Clear
+0x9C1B98: mov     edx, [esp+arg_4]
+0x9C1B9C: lea     eax, [edx-20h]
+0x9C1B9F: mov     ecx, [edx-24h]
+0x9C1BA2: xor     ecx, eax
+0x9C1BA4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C1BA9: mov     eax, offset stru_AEAB78
+0x9C1BAE: jmp     ___CxxFrameHandler3

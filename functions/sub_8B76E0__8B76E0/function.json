@@ -1,19 +1,36 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x8B76E0",
+      "0x8B7794"
+    ],
+    [
+      "0x9D6EE0",
+      "0x9D6F06"
+    ]
+  ],
+  "chunks_sha256": "24eb699beb276054a0ed0fe8cd45985d8fc91b56e1fae768259036f530060049",
+  "comment_regular": "[Collision v144 2026-10-07] Allocator requests0x90 at8B771F;8F5300 receives cinfo pointer+4 and count+8 with no bound. Payload begins+0x10, capacity8 packed16-byte spheres. Evidence: out/collision_full_v144/native_capacity_oracle.json.",
   "comment_repeatable": "",
-  "data_refs_count": 0,
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
   "display_name": "sub_8B76E0",
   "end_ea": "0x8B7794",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_8B76E0",
   "segment": ".text",
   "sha256": "2d0fe27698cdcc79ca396955dd2dce9edff238696f2d9c944f23e27becefaa9a",
   "size": 180,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x8B76E0",
+  "total_chunk_size": 218,
   "type": "void __thiscall(void *this, int)",
-  "xrefs_from_count": 66,
+  "xrefs_from_count": 80,
   "xrefs_to_count": 2
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0xA19470",
-    "line": "push    offset bIsHDR",
+    "line": "push    offset bIsHDR; [Verified] Removes bIsHDR from the setting list and frees its owned name string when the string has heap-owned marker 0x53.",
     "mnemonic": "push",
     "size": 5
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0xA1947F",
-    "line": "mov     eax, off_B06DE8; \"bDoHighDynamicRange:BlurShaderHDR\"",
+    "line": "mov     eax, bIsHDRSettingName",
     "mnemonic": "mov",
     "size": 5
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0xA1948E",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

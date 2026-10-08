@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x4AC823",
-    "line": "call    ??1TESEffectShader@@UAE@XZ; TESEffectShader::~TESEffectShader(void)",
+    "line": "call    ??1TESEffectShader@@UAE@XZ; Verified (Oblivion): destructor destroys embedded TESTexture members at +0x104 and +0xF8 before the TESForm base destructor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x4AC830",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

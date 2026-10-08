@@ -62,7 +62,7 @@
 0x42D8FA: add     esp, 1Ch
 0x42D8FD: test    eax, eax
 0x42D8FF: jz      loc_42D9E2
-0x42D905: cmp     ArchiveInvalidatedDirPAths, ebp
+0x42D905: cmp     ds:0B33934h, ebp
 0x42D90B: jnz     short loc_42D974
 0x42D90D: push    10h; Size
 0x42D90F: call    FormHeapAlloc
@@ -91,7 +91,7 @@
 0x42D95F: jmp     short loc_42D963
 0x42D961: xor     esi, esi
 0x42D963: mov     [esp+130h+var_4], 0FFFFFFFFh
-0x42D96E: mov     ArchiveInvalidatedDirPAths, esi
+0x42D96E: mov     ds:0B33934h, esi
 0x42D974: cmp     [esp+130h+Str], 5Ch ; '\'
 0x42D979: lea     esi, [esp+130h+Str]
 0x42D97D: jnz     short loc_42D983
@@ -109,7 +109,7 @@
 0x42D9A0: call    BSHash_constr
 0x42D9A5: jmp     short loc_42D9A9
 0x42D9A7: xor     eax, eax
-0x42D9A9: mov     ecx, ArchiveInvalidatedDirPAths
+0x42D9A9: mov     ecx, ds:0B33934h
 0x42D9AF: movzx   esi, word ptr [ecx+0Ah]
 0x42D9B3: mov     [esp+130h+var_11C], eax
 0x42D9B7: movzx   eax, word ptr [ecx+8]
@@ -124,7 +124,7 @@
 0x42D9D8: lea     eax, [esp+130h+var_11C]
 0x42D9DC: push    eax
 0x42D9DD: jmp     loc_42DAB7
-0x42D9E2: cmp     ArchiveInvalidateFilenames, ebp
+0x42D9E2: cmp     ds:0B33930h, ebp
 0x42D9E8: jnz     short loc_42DA55
 0x42D9EA: push    10h; Size
 0x42D9EC: call    FormHeapAlloc
@@ -153,7 +153,7 @@
 0x42DA40: jmp     short loc_42DA44
 0x42DA42: xor     esi, esi
 0x42DA44: mov     [esp+130h+var_4], 0FFFFFFFFh
-0x42DA4F: mov     ArchiveInvalidateFilenames, esi
+0x42DA4F: mov     ds:0B33930h, esi
 0x42DA55: push    8; Size
 0x42DA57: call    FormHeapAlloc
 0x42DA5C: add     esp, 4
@@ -168,7 +168,7 @@
 0x42DA7A: call    BSHash_constr
 0x42DA7F: jmp     short loc_42DA83
 0x42DA81: xor     eax, eax
-0x42DA83: mov     ecx, ArchiveInvalidateFilenames
+0x42DA83: mov     ecx, ds:0B33930h
 0x42DA89: movzx   esi, word ptr [ecx+0Ah]
 0x42DA8D: movzx   edx, word ptr [ecx+8]
 0x42DA91: cmp     esi, edx
@@ -212,3 +212,34 @@
 0x42DB02: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x42DB07: add     esp, 11Ch
 0x42DB0D: retn
+0x9ABB40: mov     eax, [ebp-11Ch]
+0x9ABB46: push    eax
+0x9ABB47: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ABB4C: pop     ecx
+0x9ABB4D: retn
+0x9ABB4E: mov     eax, [ebp-11Ch]
+0x9ABB54: push    eax
+0x9ABB55: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ABB5A: pop     ecx
+0x9ABB5B: retn
+0x9ABB5C: mov     eax, [ebp-11Ch]
+0x9ABB62: push    eax
+0x9ABB63: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ABB68: pop     ecx
+0x9ABB69: retn
+0x9ABB6A: mov     eax, [ebp-11Ch]
+0x9ABB70: push    eax
+0x9ABB71: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ABB76: pop     ecx
+0x9ABB77: retn
+0x9ABB78: mov     edx, [esp+arg_4]
+0x9ABB7C: lea     eax, [edx-120h]
+0x9ABB82: mov     ecx, [edx-124h]
+0x9ABB88: xor     ecx, eax
+0x9ABB8A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9ABB8F: add     eax, 10h
+0x9ABB92: mov     ecx, [edx-4]
+0x9ABB95: xor     ecx, eax
+0x9ABB97: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9ABB9C: mov     eax, offset stru_AD893C
+0x9ABBA1: jmp     ___CxxFrameHandler3

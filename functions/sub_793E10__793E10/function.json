@@ -1,19 +1,32 @@
 {
-  "callees_count": 52,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 13,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_793E10",
+  "chunks": [
+    [
+      "0x793E10",
+      "0x79433E"
+    ]
+  ],
+  "chunks_sha256": "3a4abdaacec82a0fed029df3bc95b846f5b39af0f084fac2d5ed7e404c824847",
+  "comment_regular": "Oblivion leaf static lighting: one normal and one packed color per billboard leaf; the later four-corner SpeedTree path is not present.\n[RT4.1 parity v146 2026-10-07] Native processes one normal and packed color per leaf. Reference LightingEngine.cpp222-325 processes all four corners; SetColor defaults applyDimming=true in reference versus native false at7942CA. Reference shadow stage uses dominant light from the final corner. This path is NOT implemented by v146 dynamic normal smoothing; remains required for full parity.\n[RT4.1 parity v147 2026-10-08] Lighting layout verified: leaf method+38, material+3C (13 floats), adjustment+70, style+74. Enabled lights B42A18 (8 bytes), attributes B2B7D0 (8x16 floats). New portable evaluator matches original reference lighting/SetColor/shadow excerpts in1234 checks, including clamp BEFORE dimming and final-corner dominant light shared by all shadow colors. Prepared-color cache is not an operational RGB renderer. Static mesh input rejected until its un-hung basis is captured.\n\nOBLIVION AUTHORITY 2026-08-27: Static leaf color processing runs only when leafLightingMethod==1 (static) and staticLightingStyle!=0. Style bit0/value1 (USE_LIGHT_SOURCES) computes material/light RGB and SetColor(false); style bit1/value2 (SIMULATE_SHADOWS) runs AdjustStaticLighting, which SetColor(true) and reapplies colorScaleByte. Value3 would execute both in order.",
+  "comment_repeatable": "OBLIVION AUTHORITY 2026-08-27: Static leaf color processing runs only when leafLightingMethod==1 (static) and staticLightingStyle!=0. Style bit0/value1 (USE_LIGHT_SOURCES) computes material/light RGB and SetColor(false); style bit1/value2 (SIMULATE_SHADOWS) runs AdjustStaticLighting, which SetColor(true) and reapplies colorScaleByte. Value3 would execute both in order.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 11,
+  "display_name": "OB_CLightingEngine_ComputeLeafStaticLighting_010201A0",
   "end_ea": "0x79433E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_793E10",
+  "name": "OB_CLightingEngine_ComputeLeafStaticLighting_010201A0",
   "segment": ".text",
   "sha256": "3a4abdaacec82a0fed029df3bc95b846f5b39af0f084fac2d5ed7e404c824847",
   "size": 1326,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x793E10",
-  "type": "void __fastcall(int, int, int, int, int)",
-  "xrefs_from_count": 437,
+  "total_chunk_size": 1326,
+  "type": "void __thiscall(OB_CLightingEngine_010201A0 *this, const OB_stVec3_010201A0 *treeCenter, OB_stVectorBillboardLeafPtr_010201A0 *leafLods, int numLeafLods)",
+  "xrefs_from_count": 445,
   "xrefs_to_count": 1
 }

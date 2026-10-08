@@ -1,4 +1,4 @@
-0x59F640: sub     esp, 8
+0x59F640: sub     esp, 8; DialogMenu::DoIdle. Oblivion-owned timing: speechState +0x80 moves 2 -> 3 after the post-line delay at +0x84; state 3 waits for the speaker HighProcess speech/lip object to finish or disappear, then state 4 calls AdvanceTopicResponse. Fallout is used only to corroborate the DoIdle name after this Oblivion state machine was observed.
 0x59F643: push    esi
 0x59F644: mov     esi, ecx
 0x59F646: mov     eax, [esi+60h]
@@ -42,7 +42,7 @@
 0x59F6C4: jz      short loc_59F6F4
 0x59F6C6: push    0FB0h
 0x59F6CB: call    Tile_GetFloat
-0x59F6D0: call    Double_To_SInt32
+0x59F6D0: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x59F6D5: test    eax, eax
 0x59F6D7: push    ecx
 0x59F6D8: mov     ecx, [esi+48h]; this
@@ -50,9 +50,9 @@
 0x59F6DD: fld1
 0x59F6DF: jmp     short loc_59F6E7
 0x59F6E1: fld     dword ptr ds:0A379B4h
-0x59F6E7: fstp    [esp+14h+a3]; a3
-0x59F6EA: push    0FA1h; a2
-0x59F6EF: call    Tile_SetFloat
+0x59F6E7: fstp    [esp+14h+a3]; value
+0x59F6EA: push    0FA1h; propertyCode
+0x59F6EF: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59F6F4: test    edi, edi
 0x59F6F6: jz      short loc_59F711
 0x59F6F8: cmp     byte ptr ds:0B3B298h, 0
@@ -177,8 +177,8 @@
 0x59F889: push    0
 0x59F88B: mov     ecx, edi
 0x59F88D: call    eax
-0x59F88F: mov     ecx, eax
-0x59F891: call    sub_6B7260
+0x59F88F: mov     ecx, eax; this
+0x59F891: call    SoundHandle__IsPlaying; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.
 0x59F896: test    al, al
 0x59F898: jnz     short loc_59F8B2
 0x59F89A: mov     ecx, offset unk_B36B00
@@ -219,7 +219,7 @@
 0x59F922: mov     ecx, esi
 0x59F924: pop     esi
 0x59F925: add     esp, 8
-0x59F928: jmp     sub_59EB90
+0x59F928: jmp     DialogMenu__AdvanceTopicResponse; Response-completion boundary: only after DoIdle observes completed speech does it call AdvanceTopicResponse, which starts the next response or, after the final response, processes the selected TESTopicInfo and rebuilds the TOPIC list.
 0x59F92D: cmp     eax, 2
 0x59F930: jnz     short loc_59F961
 0x59F932: fld     dword ptr [esi+84h]

@@ -1,19 +1,32 @@
 {
-  "callees_count": 13,
-  "callers_count": 15,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
+  "callers_count": 19,
+  "chunks": [
+    [
+      "0x477B60",
+      "0x477C24"
+    ]
+  ],
+  "chunks_sha256": "d912025bff3bdd19f1ba961a18210369d41110d89b1381bfde2f8a3eb24cb634",
+  "comment_regular": "Native group dispatcher. Reads fixed group-table slot (+0x08) and note-template class (+0x0C), normalizing slot aliases 5->0 and 6->3. For note classes 0/1, playImmediately=0 stores only the encoded key at ActorAnimData +0x70[slot] and repeat/action value at +0x7C[slot]; playImmediately=1 clears that queue and plays now. Classes 2..7 play immediately. No queued sequence pointer or path is stored.",
+  "comment_repeatable": "Native group dispatcher. Reads fixed group-table slot (+0x08) and note-template class (+0x0C), normalizing slot aliases 5->0 and 6->3. For note classes 0/1, playImmediately=0 stores only the encoded key at ActorAnimData +0x70[slot] and repeat/action value at +0x7C[slot]; playImmediately=1 clears that queue and plays now. Classes 2..7 play immediately. No queued sequence pointer or path is stored.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
   "display_name": "ActorAnimData_PlayAnimGroup",
   "end_ea": "0x477C24",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "ActorAnimData_PlayAnimGroup",
   "segment": ".text",
   "sha256": "d912025bff3bdd19f1ba961a18210369d41110d89b1381bfde2f8a3eb24cb634",
   "size": 196,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x477B60",
-  "type": "void __thiscall(int this, _DWORD *, int, int)",
+  "total_chunk_size": 196,
+  "type": "void __thiscall(ActorAnimData *this, unsigned int encodedKey, unsigned int playImmediately, int repeatOrAction)",
   "xrefs_from_count": 78,
   "xrefs_to_count": 19
 }

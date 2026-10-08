@@ -111,7 +111,7 @@
 0x602BA6: call    sub_5EF9B0
 0x602BAB: mov     ecx, esi; this
 0x602BAD: mov     ebx, eax
-0x602BAF: call    MobileObject_GetCharProxy
+0x602BAF: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x602BB4: test    ebx, ebx
 0x602BB6: jz      loc_602C80
 0x602BBC: test    eax, eax
@@ -120,7 +120,7 @@
 0x602BC3: test    eax, eax
 0x602BC5: jz      short loc_602BD0
 0x602BC7: mov     ecx, eax
-0x602BC9: call    sub_8AC0C0
+0x602BC9: call    bhkCollisionWrapper_GetHavokObject; bhk collision wrapper accessor: returns stored low-level Havok object pointer at wrapper+0x30.
 0x602BCE: jmp     short loc_602BD2
 0x602BD0: xor     eax, eax
 0x602BD2: mov     eax, [eax+8]
@@ -129,14 +129,14 @@
 0x602BD9: cmp     dword ptr [eax+2B0h], 0
 0x602BE0: jnz     short loc_602C2D
 0x602BE2: mov     ecx, esi; this
-0x602BE4: call    TESObjectREFR_GetParentCell
+0x602BE4: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x602BE9: test    eax, eax
 0x602BEB: jz      short loc_602C2D
 0x602BED: mov     ecx, esi; this
-0x602BEF: call    TESObjectREFR_GetParentCell
+0x602BEF: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x602BF4: mov     edi, eax
 0x602BF6: mov     ecx, edi; this
-0x602BF8: call    TESObjectCELL_IsInterior
+0x602BF8: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x602BFD: test    al, al
 0x602BFF: jz      short loc_602C0B
 0x602C01: lea     ecx, [edi+28h]
@@ -148,7 +148,7 @@
 0x602C14: mov     eax, [ebx+10h]
 0x602C17: push    eax
 0x602C18: mov     ecx, esi; this
-0x602C1A: call    TESObjectREFR_GetParentCell
+0x602C1A: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x602C1F: mov     ecx, eax
 0x602C21: call    sub_4440C0
 0x602C26: mov     ecx, eax
@@ -194,11 +194,11 @@
 0x602C99: jz      loc_602DBA
 0x602C9F: mov     eax, [edi]
 0x602CA1: mov     edx, [eax+30h]
-0x602CA4: push    0
+0x602CA4: push    0; effectIndex
 0x602CA6: mov     ecx, edi
 0x602CA8: call    edx
-0x602CAA: mov     ecx, eax
-0x602CAC: call    MagicItem_GetFXEffect
+0x602CAA: mov     ecx, eax; magicItem
+0x602CAC: call    MagicItem_GetFXEffect; Verified (Oblivion): MagicItem_GetFXEffect returns the effect's EffectSetting pointer; MagicShaderHitEffect constructors/PostLink dereference its +0x78 EffectSetting::effectShader field.
 0x602CB1: mov     ebx, eax
 0x602CB3: test    ebx, ebx
 0x602CB5: jz      loc_602DBA
@@ -208,7 +208,6 @@
 0x602CC5: mov     eax, [ebx+1Ch]
 0x602CC8: lea     edx, [eax+1]
 0x602CCB: jmp     short loc_602CD0
-0x602CCD: align 10h
 0x602CD0: mov     cl, [eax]
 0x602CD2: add     eax, 1
 0x602CD5: test    cl, cl
@@ -227,11 +226,11 @@
 0x602CFB: jnz     short loc_602D18
 0x602CFD: cmp     byte ptr [ecx+588h], 0
 0x602D04: jz      short loc_602D0F
-0x602D06: push    0; a2
-0x602D08: call    Player_GetAnimData
+0x602D06: push    0; firstPerson
+0x602D08: call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.
 0x602D0D: jmp     short loc_602D24
-0x602D0F: push    1; a2
-0x602D11: call    Player_GetAnimData
+0x602D0F: push    1; firstPerson
+0x602D11: call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.
 0x602D16: jmp     short loc_602D24
 0x602D18: mov     eax, [esi]
 0x602D1A: mov     edx, [eax+164h]
@@ -298,11 +297,11 @@
 0x602DD8: call    eax
 0x602DDA: cmp     eax, 5
 0x602DDD: jz      loc_602EBF
-0x602DE3: mov     ecx, ds:0B333C4h
+0x602DE3: mov     ecx, ds:0B333C4h; this
 0x602DE9: cmp     esi, ecx
 0x602DEB: jnz     short loc_602DF6
-0x602DED: push    0
-0x602DEF: call    sub_6600D0
+0x602DED: push    0; firstPerson
+0x602DEF: call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.
 0x602DF4: jmp     short loc_602E02
 0x602DF6: mov     edx, [esi]
 0x602DF8: mov     eax, [edx+168h]
@@ -318,18 +317,18 @@
 0x602E22: mov     eax, [edx+164h]
 0x602E28: mov     ecx, esi
 0x602E2A: call    eax
-0x602E2C: mov     ecx, ds:0B333C4h
+0x602E2C: mov     ecx, ds:0B333C4h; this
 0x602E32: cmp     esi, ecx
 0x602E34: mov     ebx, eax
 0x602E36: jnz     short loc_602E59
 0x602E38: cmp     [esp+2Ch+arg_4], 1
 0x602E3D: jnz     short loc_602E59
-0x602E3F: push    1
-0x602E41: call    sub_6600D0
+0x602E3F: push    1; firstPerson
+0x602E41: call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.
 0x602E46: mov     ecx, ds:0B333C4h; this
-0x602E4C: push    1; a2
+0x602E4C: push    1; firstPerson
 0x602E4E: mov     [esp+30h+arg_0], eax
-0x602E52: call    Player_GetAnimData
+0x602E52: call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.
 0x602E57: mov     ebx, eax
 0x602E59: mov     ecx, [esi+58h]
 0x602E5C: mov     edx, [ecx]
@@ -359,8 +358,8 @@
 0x602EA2: add     edi, 1
 0x602EA5: cmp     eax, edi
 0x602EA7: ja      short loc_602E8A
-0x602EA9: lea     ecx, [ebp+0ACh]
-0x602EAF: call    sub_477EF0
+0x602EA9: lea     ecx, [ebp+0ACh]; this
+0x602EAF: call    NiTObjectArray_ClearAndRelease; Clears a ref-counted NiT object-pointer array: releases every non-null element, nulls entries, and resets end/count words to zero. At bow release it is invoked on ArrowBone+0xAC, thereby releasing all ArrowBone children including the held Arrow:0 clone.
 0x602EB4: sub     [esp+2Ch+arg_4], 1
 0x602EB9: jnz     loc_602E20
 0x602EBF: cmp     dword ptr [esi+3Ch], 0
@@ -373,11 +372,11 @@
 0x602EDC: call    eax
 0x602EDE: cmp     eax, 5
 0x602EE1: jnz     loc_60305F
-0x602EE7: mov     ecx, ds:0B333C4h
+0x602EE7: mov     ecx, ds:0B333C4h; this
 0x602EED: cmp     esi, ecx
 0x602EEF: jnz     short loc_602EFA
-0x602EF1: push    0
-0x602EF3: call    sub_6600D0
+0x602EF1: push    0; firstPerson
+0x602EF3: call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.
 0x602EF8: jmp     short loc_602F06
 0x602EFA: mov     edx, [esi]
 0x602EFC: mov     eax, [edx+168h]
@@ -390,13 +389,13 @@
 0x602F1A: jnz     short loc_602F46
 0x602F1C: mov     [esp+2Ch+arg_4], 2
 0x602F24: jmp     short loc_602F2C
-0x602F26: mov     ecx, ds:0B333C4h
+0x602F26: mov     ecx, ds:0B333C4h; this
 0x602F2C: cmp     esi, ecx
 0x602F2E: jnz     short loc_602F46
 0x602F30: cmp     [esp+2Ch+arg_4], 1
 0x602F35: jnz     short loc_602F46
-0x602F37: push    1
-0x602F39: call    sub_6600D0
+0x602F37: push    1; firstPerson
+0x602F39: call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.
 0x602F3E: mov     ebx, eax
 0x602F40: mov     [esp+2Ch+arg_0], ebx
 0x602F44: jmp     short loc_602F4A
@@ -425,11 +424,11 @@
 0x602F88: mov     ebx, eax
 0x602F8A: test    ebx, ebx
 0x602F8C: jz      short loc_602FB8
-0x602F8E: mov     ecx, ebx
-0x602F90: call    sub_700900
-0x602F95: lea     ecx, [ebp+0ACh]
+0x602F8E: mov     ecx, ebx; this
+0x602F90: call    NiObject_CloneWithPointerMap; Clones a loaded NiObject with a temporary pointer map and runs clone post-processing; the returned scene object is distinct from its source.
+0x602F95: lea     ecx, [ebp+0ACh]; this
 0x602F9B: mov     [esp+2Ch+var_18], eax
-0x602F9F: call    sub_477EF0
+0x602F9F: call    NiTObjectArray_ClearAndRelease; Clears a ref-counted NiT object-pointer array: releases every non-null element, nulls entries, and resets end/count words to zero. At bow release it is invoked on ArrowBone+0xAC, thereby releasing all ArrowBone children including the held Arrow:0 clone.
 0x602FA4: mov     edx, [ebp+0]
 0x602FA7: mov     eax, [esp+2Ch+var_18]
 0x602FAB: mov     edx, [edx+84h]
@@ -439,7 +438,7 @@
 0x602FB6: call    edx
 0x602FB8: cmp     esi, ds:0B333C4h
 0x602FBE: jnz     loc_603054
-0x602FC4: call    GetGodMode
+0x602FC4: call    GetGodMode; Returns g_godModeEnabled (0x00B3BB06).
 0x602FC9: test    al, al
 0x602FCB: jnz     loc_603054
 0x602FD1: mov     ecx, [esi+58h]
@@ -449,9 +448,9 @@
 0x602FE1: push    ebp
 0x602FE2: call    edx
 0x602FE4: mov     eax, [eax+8]
-0x602FE7: push    eax
-0x602FE8: mov     ecx, esi
-0x602FEA: call    TESObjectREF_GetItemCount
+0x602FE7: push    eax; item
+0x602FE8: mov     ecx, esi; this
+0x602FEA: call    TESObjectREFR_GetItemCount; TESObjectREFR inventory count accessor: returns 0 when the reference has no container or no ContainerChanges; otherwise asks ContainerExtraData_GetItemCount(this, item), which combines base TESContainer count with EntryData.countDelta. Exact ABI is thiscall (TESObjectREFR *this, TESForm *item).
 0x602FEF: cmp     eax, ebp
 0x602FF1: jnz     short loc_602FF9
 0x602FF3: mov     edi, ebx
@@ -558,13 +557,13 @@
 0x603122: call    eax
 0x603124: test    eax, eax
 0x603126: jz      short loc_60313C
-0x603128: push    3
-0x60312A: mov     ecx, eax
-0x60312C: call    sub_470D00
+0x603128: push    3; encodedKey
+0x60312A: mov     ecx, eax; this
+0x60312C: call    ActorAnimData_HasAnimKey; Returns whether ActorAnimData +0x9C contains an entry for the encoded animation key. Presence test only; it does not select or play a sequence.
 0x603131: test    al, al
 0x603133: jnz     short loc_60313C
 0x603135: mov     ecx, esi; int
-0x603137: call    sub_4E3490
+0x603137: call    Actor_SetupAnimationData; CustomAnimSupport decode: actor animation setup creates ActorAnimData, loads default animation data, then for living NPC/CREA actors calls 0x476080 to load actor-base KFFZ entries from <model-dir>\SpecialAnims.
 0x60313C: mov     ecx, dword ptr [esp+2Ch+var_C]
 0x603140: mov     large fs:0, ecx
 0x603147: pop     ecx
@@ -574,3 +573,17 @@
 0x60314B: pop     ebx
 0x60314C: add     esp, 18h
 0x60314F: retn    8
+0x9C2C00: mov     eax, [ebp+8]
+0x9C2C03: push    eax
+0x9C2C04: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C2C09: pop     ecx
+0x9C2C0A: retn
+0x9C2C0B: lea     ecx, [ebp-14h]; void *
+0x9C2C0E: jmp     BSStringT_Clear
+0x9C2C13: mov     edx, [esp+arg_4]
+0x9C2C17: lea     eax, [edx-1Ch]
+0x9C2C1A: mov     ecx, [edx-20h]
+0x9C2C1D: xor     ecx, eax
+0x9C2C1F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C2C24: mov     eax, offset stru_AEB97C
+0x9C2C29: jmp     ___CxxFrameHandler3

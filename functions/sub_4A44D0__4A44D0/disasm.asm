@@ -40,7 +40,6 @@
 0x4A4537: mov     ebx, eax
 0x4A4539: mov     edi, esi
 0x4A453B: jmp     short loc_4A4540
-0x4A453D: align 10h
 0x4A4540: mov     ecx, [edi]
 0x4A4542: test    ecx, ecx
 0x4A4544: jz      short loc_4A4551
@@ -69,7 +68,6 @@
 0x4A4577: mov     ebx, eax
 0x4A4579: mov     edi, esi
 0x4A457B: jmp     short loc_4A4580
-0x4A457D: align 10h
 0x4A4580: mov     ecx, [edi]
 0x4A4582: test    ecx, ecx
 0x4A4584: jz      short loc_4A4591

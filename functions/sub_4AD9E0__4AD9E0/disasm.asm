@@ -1,6 +1,6 @@
-0x4AD9E0: push    ebp
+0x4AD9E0: push    ebp; Verified (Oblivion): recursively applies TextureEffectData to scene nodes whose property ID 4 returns shader-property subtype 5..10 from vtable slot +0x54. Direct vtable bodies identify accepted values: 5 BSShaderPPLightingProperty and SpeedTreeShaderPPLightingProperty; 6 HairShaderProperty; 7 SpeedTreeBranchShaderProperty; 9 SpeedTreeLeafShaderProperty; 10 Lighting30ShaderProperty. The current exhaustive 17-entry BSShaderProperty-family vtable census has no subtype 8 mapping (Unknown). Data.cFlags bit 0x20 additionally restricts candidates to property ID 2 name "skin". Fallout StartTextureShader instead queries property ID 3 and accepts subtype IDs 8..12; these numeric IDs are version-specific.
 0x4AD9E1: push    edi
-0x4AD9E2: mov     edi, [esp+8+arg_0]
+0x4AD9E2: mov     edi, [esp+8+sceneNode]
 0x4AD9E6: test    edi, edi
 0x4AD9E8: mov     ebp, ecx
 0x4AD9EA: jz      loc_4ADABE
@@ -14,7 +14,7 @@
 0x4AD9FD: mov     ecx, edi
 0x4AD9FF: jz      short loc_4ADA76
 0x4ADA01: push    4
-0x4ADA03: call    NiNode_GetNiPropertyByID
+0x4ADA03: call    NiNode_GetNiPropertyByID;
 0x4ADA08: mov     esi, eax
 0x4ADA0A: test    esi, esi
 0x4ADA0C: jz      short loc_4ADA31
@@ -42,19 +42,19 @@
 0x4ADA41: jz      short loc_4ADA63
 0x4ADA43: push    2
 0x4ADA45: mov     ecx, edi
-0x4ADA47: call    NiNode_GetNiPropertyByID
+0x4ADA47: call    NiNode_GetNiPropertyByID;
 0x4ADA4C: mov     esi, [eax+8]
 0x4ADA4F: test    esi, esi
 0x4ADA51: jz      short loc_4ADA63
 0x4ADA53: mov     edi, offset aSkin; "skin"
 0x4ADA58: mov     ecx, 5
 0x4ADA5D: xor     eax, eax
-0x4ADA5F: repe cmpsb
+0x4ADA5F: repe cmpsb; Verified (Oblivion): Data.cFlags bit 0x20 changes recursive attachment filtering: when set, only property ID 2 names equal to the literal "skin" receive the texture-effect data; when clear, that name filter is bypassed. The flag's practical meaning is skin-only texture-effect attachment.
 0x4ADA61: jnz     short loc_4ADABC
-0x4ADA63: mov     ecx, [esp+10h+arg_4]
-0x4ADA67: push    ecx
-0x4ADA68: mov     ecx, ebx
-0x4ADA6A: call    sub_7D7A70
+0x4ADA63: mov     ecx, [esp+10h+data]
+0x4ADA67: push    ecx; data
+0x4ADA68: mov     ecx, ebx; textureEffectProperty
+0x4ADA6A: call    TextureEffectProperty_SetData; Verified (Oblivion): replaces the TextureEffectData pointer at +0xE0 on the supplied NiProperty-derived shader property, with Interlocked release/addref handling, then clears a 32-bit state at +0x24. BSShaderPPLightingProperty constructor/destructor and viewer export independently confirm +0xE0 is its spTexEffectData ownership slot. Direct callers select property ID 4 subtypes 5..10: PP-lighting/SpeedTree PP (5), Hair (6), SpeedTree Branch (7), SpeedTree Leaf (9), and Lighting30 (10); subtype 8 remains Unknown.
 0x4ADA6F: pop     esi
 0x4ADA70: pop     ebx
 0x4ADA71: pop     edi
@@ -71,16 +71,16 @@
 0x4ADA8C: test    eax, eax
 0x4ADA8E: jbe     short loc_4ADABC
 0x4ADA90: cmp     eax, esi
-0x4ADA92: mov     ebx, [esp+10h+arg_4]
+0x4ADA92: mov     ebx, [esp+10h+data]
 0x4ADA96: ja      short loc_4ADA9C
 0x4ADA98: xor     eax, eax
 0x4ADA9A: jmp     short loc_4ADAA5
 0x4ADA9C: mov     ecx, [edi+0B0h]
 0x4ADAA2: mov     eax, [ecx+esi*4]
-0x4ADAA5: push    ebx
-0x4ADAA6: push    eax
-0x4ADAA7: mov     ecx, ebp
-0x4ADAA9: call    sub_4AD9E0
+0x4ADAA5: push    ebx; data
+0x4ADAA6: push    eax; sceneRoot
+0x4ADAA7: mov     ecx, ebp; this
+0x4ADAA9: call    TESEffectShader_ApplyTextureEffectToScenegraph; Verified (Oblivion): recursively applies TextureEffectData to scene nodes whose property ID 4 returns shader-property subtype 5..10 from vtable slot +0x54. Direct vtable bodies identify accepted values: 5 BSShaderPPLightingProperty and SpeedTreeShaderPPLightingProperty; 6 HairShaderProperty; 7 SpeedTreeBranchShaderProperty; 9 SpeedTreeLeafShaderProperty; 10 Lighting30ShaderProperty. The current exhaustive 17-entry BSShaderProperty-family vtable census has no subtype 8 mapping (Unknown). Data.cFlags bit 0x20 additionally restricts candidates to property ID 2 name "skin". Fallout StartTextureShader instead queries property ID 3 and accepts subtype IDs 8..12; these numeric IDs are version-specific.
 0x4ADAAE: movzx   eax, word ptr [edi+0B6h]
 0x4ADAB5: add     esi, 1
 0x4ADAB8: cmp     eax, esi

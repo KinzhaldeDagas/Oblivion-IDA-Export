@@ -9,8 +9,8 @@ int __usercall EffectItemList_GetStrongestItem_::EffectsLoop@<eax>(
         int a8,
         char a9)
 {
-  if ( this )
-    return EffectItemList_GetStrongestItem_::LoopBody(0xFFFFFFFF, a2, a3, a4, a5, a6, a7, a8, a9);
+  if ( this ) /*0x4152e5*/
+    return EffectItemList_GetStrongestItem_::LoopBody(0xFFFFFFFF, a2, a3, a4, a5, a6, a7, a8, a9); /*0x4152ea*/
   else
-    return EffectItemList_GetStrongestItem_::Return(a3, a4);
+    return EffectItemList_GetStrongestItem_::Return(a3, a4); /*0x4152e5*/
 }

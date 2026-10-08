@@ -25,11 +25,11 @@
 0x74D7CD: call    ebp ; InterlockedIncrement
 0x74D7CF: movzx   ecx, word ptr [edi+0Ah]
 0x74D7D3: mov     edx, [edi+4]
-0x74D7D6: lea     eax, [esp+14h+var_4]
-0x74D7DA: push    eax
-0x74D7DB: lea     ecx, [edx+ecx*4]
-0x74D7DE: mov     [esp+18h+var_4], 0
-0x74D7E6: call    sub_55E2A0
+0x74D7D6: lea     eax, [esp+14h+incoming]
+0x74D7DA: push    eax; incoming
+0x74D7DB: lea     ecx, [edx+ecx*4]; this
+0x74D7DE: mov     [esp+18h+incoming], 0
+0x74D7E6: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
 0x74D7EB: test    esi, esi
 0x74D7ED: setnz   al
 0x74D7F0: test    al, al

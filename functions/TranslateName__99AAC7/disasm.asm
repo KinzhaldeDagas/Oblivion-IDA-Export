@@ -18,10 +18,10 @@
 0x99AAE5: mov     eax, [ebp+arg_0]
 0x99AAE8: sar     esi, 1
 0x99AAEA: lea     edi, [eax+esi*8]
-0x99AAED: push    dword ptr [edi]; Str2
+0x99AAED: push    dword ptr [edi]; right
 0x99AAEF: mov     eax, [ebp+arg_8]
-0x99AAF2: push    dword ptr [eax]; Str1
-0x99AAF4: call    __strcmp
+0x99AAF2: push    dword ptr [eax]; left
+0x99AAF4: call    CRT_StricmpLocaleDispatch
 0x99AAF9: test    eax, eax
 0x99AAFB: pop     ecx
 0x99AAFC: pop     ecx

@@ -1,7 +1,7 @@
 0x432860: call    sub_4322B0
 0x432865: test    al, al
 0x432867: jz      short locret_43288A
-0x432869: mov     eax, ModelLoaderPtr
+0x432869: mov     eax, ds:0B33A1Ch
 0x43286E: push    esi
 0x43286F: mov     esi, [eax+18h]
 0x432872: push    edi

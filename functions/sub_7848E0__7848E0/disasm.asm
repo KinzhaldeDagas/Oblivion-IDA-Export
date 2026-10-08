@@ -1,8 +1,8 @@
-0x7848E0: mov     edx, [esp+arg_4]
+0x7848E0: mov     edx, [esp+count]; Oblivion 1.2.0.416: placement/uninitialized fill of count six-dword records; returns the advanced destination.
 0x7848E4: test    edx, edx
 0x7848E6: jbe     short locret_784922
-0x7848E8: mov     ecx, [esp+arg_8]
-0x7848EC: mov     eax, [esp+arg_0]
+0x7848E8: mov     ecx, [esp+value]
+0x7848EC: mov     eax, [esp+destination]
 0x7848F0: push    esi
 0x7848F1: test    eax, eax
 0x7848F3: jz      short loc_784917

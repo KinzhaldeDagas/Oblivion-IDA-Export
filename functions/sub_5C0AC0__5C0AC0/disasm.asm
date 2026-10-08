@@ -17,15 +17,15 @@
 0x5C0AEC: call    sub_57DE50
 0x5C0AF1: fld     dword ptr ds:0A6B1F0h
 0x5C0AF7: mov     ecx, [esi+34h]; this
-0x5C0AFA: fstp    [esp+8+a2]; a3
-0x5C0AFD: push    0FB7h; a2
-0x5C0B02: call    Tile_SetFloat
+0x5C0AFA: fstp    [esp+8+a2]; value
+0x5C0AFD: push    0FB7h; propertyCode
+0x5C0B02: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5C0B07: fldz
 0x5C0B09: push    ecx
-0x5C0B0A: fstp    [esp+8+a2]; a3
+0x5C0B0A: fstp    [esp+8+a2]; value
 0x5C0B0D: mov     ecx, [esi+34h]; this
-0x5C0B10: push    0FB7h; a2
-0x5C0B15: call    Tile_SetFloat
+0x5C0B10: push    0FB7h; propertyCode
+0x5C0B15: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5C0B1A: mov     al, 1
 0x5C0B1C: pop     esi
 0x5C0B1D: retn    8

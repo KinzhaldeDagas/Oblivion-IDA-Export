@@ -1,6 +1,6 @@
-0x630090: push    esi
+0x630090: push    esi; Pushes a non-null Actor into HighProcess.recentSocialTargets. If the inline head is occupied, moves the old head into a newly allocated 8-byte node before replacing it.
 0x630091: push    edi
-0x630092: mov     edi, [esp+8+arg_0]
+0x630092: mov     edi, [esp+8+target]
 0x630096: test    edi, edi
 0x630098: mov     esi, ecx
 0x63009A: jz      short loc_6300DB

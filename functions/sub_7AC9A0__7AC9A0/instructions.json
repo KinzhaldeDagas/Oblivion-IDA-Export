@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x7AC9A0",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; MoonSugarEffect decode: BSShaderAccumulator flush for one shader/pass bucket. Normalizes some IDs, refreshes native shader constants, sorts the bucket, then emits RenderPass nodes through sub_7A9820 or native special list dispatch.",
     "mnemonic": "sub",
     "size": 3
   },
   {
     "ea": "0x7AC9A3",
-    "line": "cmp     byte ptr ds:0B42CE8h, 0",
+    "line": "cmp     byte ptr ds:0B42CE8h, 0; Water-reflection bucket-flush gate. When active, remap the material activation/draw selector but continue indexing the accumulator list by the original passBucket.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x7AC9AE",
-    "line": "mov     edi, [esp+1Ch+arg_0]",
+    "line": "mov     edi, [esp+1Ch+passBucket]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x7AC9BB",
-    "line": "cmp     edi, 49h ; 'I'",
+    "line": "cmp     edi, 49h ; 'I'; During water reflection, selector 0x49 activates/draws as 0x48 while its nodes remain in original bucket 0x49.",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x7AC9C7",
-    "line": "cmp     edi, 16Fh",
+    "line": "cmp     edi, 16Fh; During water reflection, selector 0x16F activates/draws as 0x16E while its nodes remain in original bucket 0x16F.",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x7AC9D6",
-    "line": "call    GetShaderDefinition",
+    "line": "call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x7AC9E8",
-    "line": "mov     [esp+20h+arg_0], eax",
+    "line": "mov     [esp+20h+passBucket], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -163,13 +163,13 @@
   },
   {
     "ea": "0x7AC9F5",
-    "line": "cmp     dword ptr [ebx+114h], 0",
+    "line": "cmp     dword ptr [ebx+114h], 0; Test bucket count at (this+0x104+0x14*passBucket)+0x10; an empty filtered bucket returns without shader activation or draw.",
     "mnemonic": "cmp",
     "size": 7
   },
   {
     "ea": "0x7AC9FC",
-    "line": "jbe     loc_7ACF2B",
+    "line": "jbe     BSShaderAccumulator_FlushPassBucketReturn",
     "mnemonic": "jbe",
     "size": 6
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x7ACA41",
-    "line": "mov     ecx, [esp+1Ch+arg_4]",
+    "line": "mov     ecx, [esp+1Ch+specialMode]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x7ACA4B",
-    "line": "call    sub_7D1320",
+    "line": "call    sub_7D1320; MoonSugarEffect decode: native shader-id selector for standard shader property families. Updates program/pass render-state choices and constants for hardcoded IDs before object render.",
     "mnemonic": "call",
     "size": 5
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x7ACA88",
-    "line": "mov     ecx, [esp+1Ch+arg_4]",
+    "line": "mov     ecx, [esp+1Ch+specialMode]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x7ACA92",
-    "line": "call    sub_7FD260",
+    "line": "call    Lighting30Shader_SelectRenderPass; Oblivion Lighting30 selector activation. Selectors outside 0x15E/0x15F restore the main constant maps, derive row selector-0x12A, rewrite automatic vertex/pixel-constant enable flags from B46988/B46A60, and apply a route render-state group. SimpleShadow selectors 0x14E..0x151 use valid rows and route group 7. Stock one-light selectors 0x177..0x17A are not rejected here: they derive rows 0x4D..0x50 and use the generic route-group-0 path. The later per-geometry resolver is the actual validity gate; every later selector activation deterministically rewrites these flags before its draw.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1009,7 +1009,7 @@
   },
   {
     "ea": "0x7ACC40",
-    "line": "mov     eax, [esp+1Ch+arg_0]",
+    "line": "mov     eax, [esp+1Ch+passBucket]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1033,19 +1033,19 @@
   },
   {
     "ea": "0x7ACC4F",
-    "line": "push    offset sub_7AA390",
+    "line": "push    offset RenderPassNode_CompareGeometryDataAddressAscending; compare",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x7ACC54",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7ACC56",
-    "line": "call    sub_7AA550",
+    "line": "call    BSTPersistentRenderPassList_StableMergeSort; MEF PERF 2026-10-07 PASS5: PERF-15 alternate callers: FlushPassBucket sort sites7ACC56/7ACC95/7ACCCB/7ACCFD/7ACD2F all pass geometry-data comparator7AA390, under optimized selector/type branches. They do NOT sort by selector just because each bucket has one selector. Equal selectors alone do not justify skipping those sorts.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1069,7 +1069,7 @@
   },
   {
     "ea": "0x7ACC64",
-    "line": "call    sub_7F86C0",
+    "line": "call    sub_7F86C0; Pass205: Object-batch render path calls shader virtual +0x2C with NiPropertyState returned by sub_405760(geometry).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1123,7 +1123,7 @@
   },
   {
     "ea": "0x7ACC7F",
-    "line": "mov     eax, [esp+1Ch+arg_0]",
+    "line": "mov     eax, [esp+1Ch+passBucket]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1147,19 +1147,19 @@
   },
   {
     "ea": "0x7ACC8E",
-    "line": "push    offset sub_7AA390",
+    "line": "push    offset RenderPassNode_CompareGeometryDataAddressAscending; compare",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x7ACC93",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7ACC95",
-    "line": "call    sub_7AA550",
+    "line": "call    BSTPersistentRenderPassList_StableMergeSort",
     "mnemonic": "call",
     "size": 5
   },
@@ -1183,7 +1183,7 @@
   },
   {
     "ea": "0x7ACCA6",
-    "line": "call    sub_7F8DB0",
+    "line": "call    sub_7F8DB0; Pass205: Object-batch render path calls shader virtual +0x2C with NiPropertyState returned by sub_405760(geometry).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1225,7 +1225,7 @@
   },
   {
     "ea": "0x7ACCB5",
-    "line": "mov     eax, [esp+1Ch+arg_0]",
+    "line": "mov     eax, [esp+1Ch+passBucket]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1249,19 +1249,19 @@
   },
   {
     "ea": "0x7ACCC4",
-    "line": "push    offset sub_7AA390",
+    "line": "push    offset RenderPassNode_CompareGeometryDataAddressAscending; compare",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x7ACCC9",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7ACCCB",
-    "line": "call    sub_7AA550",
+    "line": "call    BSTPersistentRenderPassList_StableMergeSort",
     "mnemonic": "call",
     "size": 5
   },
@@ -1285,7 +1285,7 @@
   },
   {
     "ea": "0x7ACCD8",
-    "line": "call    sub_7F7EE0",
+    "line": "call    sub_7F7EE0; Pass205: Object-batch render path calls shader virtual +0x2C with NiPropertyState returned by sub_405760(geometry).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1327,7 +1327,7 @@
   },
   {
     "ea": "0x7ACCE7",
-    "line": "mov     eax, [esp+1Ch+arg_0]",
+    "line": "mov     eax, [esp+1Ch+passBucket]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1351,19 +1351,19 @@
   },
   {
     "ea": "0x7ACCF6",
-    "line": "push    offset sub_7AA390",
+    "line": "push    offset RenderPassNode_CompareGeometryDataAddressAscending; compare",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x7ACCFB",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7ACCFD",
-    "line": "call    sub_7AA550",
+    "line": "call    BSTPersistentRenderPassList_StableMergeSort",
     "mnemonic": "call",
     "size": 5
   },
@@ -1387,7 +1387,7 @@
   },
   {
     "ea": "0x7ACD0A",
-    "line": "call    sub_7F7680",
+    "line": "call    sub_7F7680; Special TallGrass selector-0x197 submission path; distinct from generic RenderPass draw at 0x007A9820.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1429,7 +1429,7 @@
   },
   {
     "ea": "0x7ACD19",
-    "line": "mov     eax, [esp+1Ch+arg_0]",
+    "line": "mov     eax, [esp+1Ch+passBucket]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1453,19 +1453,19 @@
   },
   {
     "ea": "0x7ACD28",
-    "line": "push    offset sub_7AA390",
+    "line": "push    offset RenderPassNode_CompareGeometryDataAddressAscending; compare",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x7ACD2D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7ACD2F",
-    "line": "call    sub_7AA550",
+    "line": "call    BSTPersistentRenderPassList_StableMergeSort",
     "mnemonic": "call",
     "size": 5
   },
@@ -1537,7 +1537,7 @@
   },
   {
     "ea": "0x7ACD52",
-    "line": "mov     eax, [ebx+108h]",
+    "line": "mov     eax, [ebx+108h]; Load the selector bucket head node; its +0x08 payload is drawn first and its +0x00 link begins the remaining head-to-tail walk.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1561,7 +1561,7 @@
   },
   {
     "ea": "0x7ACD60",
-    "line": "mov     [esp+1Ch+arg_4], eax",
+    "line": "mov     [esp+1Ch+specialMode], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1711,19 +1711,19 @@
   },
   {
     "ea": "0x7ACDAB",
-    "line": "push    esi",
+    "line": "push    esi; payloadAddress",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7ACDAC",
-    "line": "add     ecx, 2200h",
+    "line": "add     ecx, 2200h; this",
     "mnemonic": "add",
     "size": 6
   },
   {
     "ea": "0x7ACDB2",
-    "line": "call    sub_7ABDE0",
+    "line": "call    BSTPersistentList_AppendTailReusingFreeNode; BSTPersistentList tail append. Reuses a local free node or acquires one, stores the caller's payload pointer verbatim at node+0x08, links at tail, and increments count. For accumulator RenderPass buckets this creates a non-owning pointer borrow; it does not copy, retain, or destroy the RenderPass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1777,31 +1777,31 @@
   },
   {
     "ea": "0x7ACDD4",
-    "line": "push    esi",
+    "line": "push    esi; payloadAddress",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7ACDD5",
-    "line": "lea     ecx, [ebp+2214h]",
+    "line": "lea     ecx, [ebp+2214h]; this",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x7ACDDB",
-    "line": "call    sub_7ABDE0",
+    "line": "call    BSTPersistentList_AppendTailReusingFreeNode; BSTPersistentList tail append. Reuses a local free node or acquires one, stores the caller's payload pointer verbatim at node+0x08, links at tail, and increments count. For accumulator RenderPass buckets this creates a non-owning pointer borrow; it does not copy, retain, or destroy the RenderPass.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7ACDE0",
-    "line": "push    edi; float",
+    "line": "push    edi; selector",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7ACDE1",
-    "line": "push    esi; int",
+    "line": "push    esi; entry",
     "mnemonic": "push",
     "size": 1
   },
@@ -1813,7 +1813,7 @@
   },
   {
     "ea": "0x7ACDE4",
-    "line": "call    sub_7A9820",
+    "line": "call    BSShaderAccumulator_DrawRenderPass; Generic first-node submission for ordinary selector buckets, including 0x177..0x17A; uses the activation selector already selected for this bucket.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1861,7 +1861,7 @@
   },
   {
     "ea": "0x7ACE02",
-    "line": "movzx   ecx, ax; void *",
+    "line": "movzx   ecx, ax; this",
     "mnemonic": "movzx",
     "size": 3
   },
@@ -1921,7 +1921,7 @@
   },
   {
     "ea": "0x7ACE22",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1933,7 +1933,7 @@
   },
   {
     "ea": "0x7ACE2A",
-    "line": "cmp     [esp+1Ch+arg_4], 0",
+    "line": "cmp     [esp+1Ch+specialMode], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1945,7 +1945,7 @@
   },
   {
     "ea": "0x7ACE33",
-    "line": "jz      loc_7ACEFF",
+    "line": "jz      loc_7ACEFF; Continue through successive bucket nodes in stored next-link order.",
     "mnemonic": "jz",
     "size": 6
   },
@@ -1963,7 +1963,7 @@
   },
   {
     "ea": "0x7ACE47",
-    "line": "mov     ecx, [esp+1Ch+arg_4]",
+    "line": "mov     ecx, [esp+1Ch+specialMode]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1987,7 +1987,7 @@
   },
   {
     "ea": "0x7ACE53",
-    "line": "mov     [esp+1Ch+arg_4], edx",
+    "line": "mov     [esp+1Ch+specialMode], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2125,19 +2125,19 @@
   },
   {
     "ea": "0x7ACE97",
-    "line": "push    ebp",
+    "line": "push    ebp; payloadAddress",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7ACE98",
-    "line": "lea     ecx, [ebx+2200h]",
+    "line": "lea     ecx, [ebx+2200h]; this",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x7ACE9E",
-    "line": "call    sub_7ABDE0",
+    "line": "call    BSTPersistentList_AppendTailReusingFreeNode; BSTPersistentList tail append. Reuses a local free node or acquires one, stores the caller's payload pointer verbatim at node+0x08, links at tail, and increments count. For accumulator RenderPass buckets this creates a non-owning pointer borrow; it does not copy, retain, or destroy the RenderPass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2185,31 +2185,31 @@
   },
   {
     "ea": "0x7ACEBC",
-    "line": "push    ebp",
+    "line": "push    ebp; payloadAddress",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7ACEBD",
-    "line": "lea     ecx, [ebx+2214h]",
+    "line": "lea     ecx, [ebx+2214h]; this",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x7ACEC3",
-    "line": "call    sub_7ABDE0",
+    "line": "call    BSTPersistentList_AppendTailReusingFreeNode; BSTPersistentList tail append. Reuses a local free node or acquires one, stores the caller's payload pointer verbatim at node+0x08, links at tail, and increments count. For accumulator RenderPass buckets this creates a non-owning pointer borrow; it does not copy, retain, or destroy the RenderPass.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7ACEC8",
-    "line": "push    edi; float",
+    "line": "push    edi; selector",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7ACEC9",
-    "line": "push    ebp; int",
+    "line": "push    ebp; entry",
     "mnemonic": "push",
     "size": 1
   },
@@ -2221,7 +2221,7 @@
   },
   {
     "ea": "0x7ACECC",
-    "line": "call    sub_7A9820",
+    "line": "call    BSShaderAccumulator_DrawRenderPass; Generic subsequent-node submission for the same selector bucket, including 0x177..0x17A.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2281,7 +2281,7 @@
   },
   {
     "ea": "0x7ACEF4",
-    "line": "cmp     [esp+1Ch+arg_4], 0",
+    "line": "cmp     [esp+1Ch+specialMode], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -2293,19 +2293,19 @@
   },
   {
     "ea": "0x7ACEFF",
-    "line": "cmp     byte ptr ds:0B42CDAh, 0",
+    "line": "cmp     byte ptr ds:0B42CDAh, 0; When FreezeRenderAccumulation is set, skip bucket-node recycling and retain the active borrowed RenderPass nodes for replay.",
     "mnemonic": "cmp",
     "size": 7
   },
   {
     "ea": "0x7ACF06",
-    "line": "jnz     short loc_7ACF2B",
+    "line": "jnz     short BSShaderAccumulator_FlushPassBucketReturn",
     "mnemonic": "jnz",
     "size": 2
   },
   {
     "ea": "0x7ACF08",
-    "line": "mov     eax, [esp+1Ch+arg_0]",
+    "line": "mov     eax, [esp+1Ch+passBucket]; Non-frozen cleanup address for the original passBucket. Release the prior free chain, move active nodes to the bucket free chain, then clear head/tail/count.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2323,13 +2323,13 @@
   },
   {
     "ea": "0x7ACF13",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7ACF15",
-    "line": "call    sub_7A9C30",
+    "line": "call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Non-frozen flush first returns the bucket's old free-node chain to the global pool; it does not destroy RenderPass payloads.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2341,7 +2341,7 @@
   },
   {
     "ea": "0x7ACF1D",
-    "line": "mov     [esi+0Ch], eax",
+    "line": "mov     [esi+0Ch], eax; Move the just-flushed active nodes to this bucket's free list, then clear head/tail/count. Borrowed RenderPass payloads remain property-owned.",
     "mnemonic": "mov",
     "size": 3
   },

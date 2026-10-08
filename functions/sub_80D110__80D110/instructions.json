@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x80D110",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Hair render-pass consumer. Switch handles only 0xE0, 0xE1, and 0x18C..0x18F; refraction 0x160..0x162 and high 0x177..0x17A all map to the reset-and-return default and queue no concrete Hair pass.",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x80D13D",
-    "line": "mov     eax, [ebp+0]",
+    "line": "mov     eax, [ebp+0]; Hair SetupRenderPass first invokes vtable +0x80 = NiD3DShader_ResetPassQueue before inspecting the selector. Any unhandled selector therefore leaves PassCount zero.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x80D172",
-    "line": "call    GetShaderDefinition",
+    "line": "call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x80D191",
-    "line": "mov     edx, [esp+5Ch+arg_4]",
+    "line": "mov     edx, [esp+5Ch+arg3]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x80D196",
-    "line": "mov     eax, [esp+60h+arg_0]",
+    "line": "mov     eax, [esp+60h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x80D19F",
-    "line": "call    sub_7C9F30",
+    "line": "call    ShadowLightShader__SetupRenderPass; Base ShadowLight consumer includes concrete cases for refraction selectors 0x160, 0x161, and 0x162, as well as inherited high selectors 0x177..0x179. Selector-only filtering would remove valid ordinary PP-lighting work.",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x80D209",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -463,19 +463,19 @@
   },
   {
     "ea": "0x80D210",
-    "line": "push    offset dword_B3FA90",
+    "line": "push    offset stru_B3FA90; other",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x80D215",
-    "line": "lea     ecx, [eax+0F8h]",
+    "line": "lea     ecx, [eax+0F8h]; this",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x80D21B",
-    "line": "call    sub_8AA390",
+    "line": "call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x80D2DF",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -811,7 +811,7 @@
   },
   {
     "ea": "0x80D2F0",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -835,7 +835,7 @@
   },
   {
     "ea": "0x80D2FD",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -871,7 +871,7 @@
   },
   {
     "ea": "0x80D30E",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -895,7 +895,7 @@
   },
   {
     "ea": "0x80D31B",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -931,7 +931,7 @@
   },
   {
     "ea": "0x80D32C",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -955,7 +955,7 @@
   },
   {
     "ea": "0x80D339",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -991,7 +991,7 @@
   },
   {
     "ea": "0x80D34A",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1015,7 +1015,7 @@
   },
   {
     "ea": "0x80D357",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1063,7 +1063,7 @@
   },
   {
     "ea": "0x80D36D",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1099,7 +1099,7 @@
   },
   {
     "ea": "0x80D37E",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1297,7 +1297,7 @@
   },
   {
     "ea": "0x80D426",
-    "line": "cmp     [esp+50h+arg_4], 0",
+    "line": "cmp     [esp+50h+arg3], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1351,7 +1351,7 @@
   },
   {
     "ea": "0x80D448",
-    "line": "add     eax, 0FFFFFF20h; switch 176 cases",
+    "line": "add     eax, 0FFFFFF20h; Hair's complete selector switch normalizes selector-0xE0 and covers through 0x18F. Concrete cases are only 0xE0, 0xE1, and 0x18C..0x18F; all other in-range values map to default.",
     "mnemonic": "add",
     "size": 5
   },
@@ -1363,7 +1363,7 @@
   },
   {
     "ea": "0x80D452",
-    "line": "ja      def_80D45F; jumptable 0080D45F default case, cases 226-395",
+    "line": "ja      def_80D45F; Hair default consumes neither refraction 0x160..0x162 nor high 0x177..0x17A. Stock Hair can produce the refraction family through its flagged fallback, but cannot produce the high family.",
     "mnemonic": "ja",
     "size": 6
   },
@@ -1375,7 +1375,7 @@
   },
   {
     "ea": "0x80D45F",
-    "line": "jmp     ds:jpt_80D45F[eax*4]; switch jump",
+    "line": "jmp     ds:jpt_80D45F[eax*4]; Hair selector dispatch. Table entries for 0x177, 0x178, 0x179, and 0x17A all map to def_80D45F at 0x80D84E; there is no ShadowLightShader base fallback.",
     "mnemonic": "jmp",
     "size": 7
   },
@@ -1387,55 +1387,55 @@
   },
   {
     "ea": "0x80D46A",
-    "line": "mov     edx, [esp+50h+arg_4]",
+    "line": "mov     edx, [esp+50h+arg3]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x80D46E",
-    "line": "mov     eax, [esp+50h+arg_0]",
+    "line": "mov     eax, [esp+50h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x80D472",
-    "line": "push    edi",
+    "line": "push    edi; shaderProperty",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x80D473",
-    "line": "push    ecx",
+    "line": "push    ecx; arg4",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x80D474",
-    "line": "push    edx",
+    "line": "push    edx; arg3",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x80D475",
-    "line": "push    eax",
+    "line": "push    eax; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x80D476",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x80D478",
-    "line": "call    sub_851CA0",
+    "line": "call    NiD3DPassArray_AddTextureEffectPass1x; Verified (Oblivion): shared by ShadowLight, Skin, and Hair setup for selector 0x18C. It binds TextureEffectData's texture and render-state fields into the pass template; the active shader's owned pixel/vertex constant maps are then applied by NiD3DShader_SetupShaderPrograms. ShadowLight's vtable owner is confirmed to build/apply maps from the texture-effect globals.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x80D47D",
-    "line": "jmp     def_80D45F; jumptable 0080D45F default case, cases 226-395",
+    "line": "jmp     def_80D45F; Hair default consumes neither refraction 0x160..0x162 nor high 0x177..0x17A. Stock Hair can produce the refraction family through its flagged fallback, but cannot produce the high family.",
     "mnemonic": "jmp",
     "size": 5
   },
@@ -1447,55 +1447,55 @@
   },
   {
     "ea": "0x80D486",
-    "line": "mov     edx, [esp+50h+arg_4]",
+    "line": "mov     edx, [esp+50h+arg3]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x80D48A",
-    "line": "mov     eax, [esp+50h+arg_0]",
+    "line": "mov     eax, [esp+50h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x80D48E",
-    "line": "push    edi",
+    "line": "push    edi; shaderProperty",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x80D48F",
-    "line": "push    ecx",
+    "line": "push    ecx; arg4",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x80D490",
-    "line": "push    edx",
+    "line": "push    edx; arg3",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x80D491",
-    "line": "push    eax",
+    "line": "push    eax; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x80D492",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x80D494",
-    "line": "call    sub_851E70",
+    "line": "call    NiD3DPassArray_AddTextureEffectPass1xS; Verified (Oblivion): shared by ShadowLight, Skin, and Hair setup for selector 0x18D. It binds the same effect-data fields as 0x18C; the active shader's owned pixel/vertex maps are applied afterward by NiD3DShader_SetupShaderPrograms. The selector is passInfo bit 0x02-dependent.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x80D499",
-    "line": "jmp     def_80D45F; jumptable 0080D45F default case, cases 226-395",
+    "line": "jmp     def_80D45F; Hair default consumes neither refraction 0x160..0x162 nor high 0x177..0x17A. Stock Hair can produce the refraction family through its flagged fallback, but cannot produce the high family.",
     "mnemonic": "jmp",
     "size": 5
   },
@@ -1507,55 +1507,55 @@
   },
   {
     "ea": "0x80D4A2",
-    "line": "mov     edx, [esp+50h+arg_4]",
+    "line": "mov     edx, [esp+50h+arg3]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x80D4A6",
-    "line": "mov     eax, [esp+50h+arg_0]",
+    "line": "mov     eax, [esp+50h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x80D4AA",
-    "line": "push    edi",
+    "line": "push    edi; shaderProperty",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x80D4AB",
-    "line": "push    ecx",
+    "line": "push    ecx; arg4",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x80D4AC",
-    "line": "push    edx",
+    "line": "push    edx; arg3",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x80D4AD",
-    "line": "push    eax",
+    "line": "push    eax; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x80D4AE",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x80D4B0",
-    "line": "call    sub_848950",
+    "line": "call    NiD3DPassArray_AddTextureEffectPass2x; Verified (Oblivion): shared by ShadowLight, Skin, and Hair setup for selector 0x18E. It binds the effect texture and render-state fields; NiD3DShader_SetupShaderPrograms applies the active shader's owned fill/rim/fVars/U/V maps afterward.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x80D4B5",
-    "line": "jmp     def_80D45F; jumptable 0080D45F default case, cases 226-395",
+    "line": "jmp     def_80D45F; Hair default consumes neither refraction 0x160..0x162 nor high 0x177..0x17A. Stock Hair can produce the refraction family through its flagged fallback, but cannot produce the high family.",
     "mnemonic": "jmp",
     "size": 5
   },
@@ -1567,55 +1567,55 @@
   },
   {
     "ea": "0x80D4BE",
-    "line": "mov     edx, [esp+50h+arg_4]",
+    "line": "mov     edx, [esp+50h+arg3]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x80D4C2",
-    "line": "mov     eax, [esp+50h+arg_0]",
+    "line": "mov     eax, [esp+50h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x80D4C6",
-    "line": "push    edi",
+    "line": "push    edi; shaderProperty",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x80D4C7",
-    "line": "push    ecx",
+    "line": "push    ecx; arg4",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x80D4C8",
-    "line": "push    edx",
+    "line": "push    edx; arg3",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x80D4C9",
-    "line": "push    eax",
+    "line": "push    eax; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x80D4CA",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x80D4CC",
-    "line": "call    sub_848AD0",
+    "line": "call    NiD3DPassArray_AddTextureEffectPass2xS; Verified (Oblivion): shared by ShadowLight, Skin, and Hair setup for selector 0x18F. It binds the same effect data and uses the active shader's owned texture-effect maps through NiD3DShader_SetupShaderPrograms.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x80D4D1",
-    "line": "jmp     def_80D45F; jumptable 0080D45F default case, cases 226-395",
+    "line": "jmp     def_80D45F; Hair default consumes neither refraction 0x160..0x162 nor high 0x177..0x17A. Stock Hair can produce the refraction family through its flagged fallback, but cannot produce the high family.",
     "mnemonic": "jmp",
     "size": 5
   },
@@ -1699,7 +1699,7 @@
   },
   {
     "ea": "0x80D4FF",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
@@ -1711,7 +1711,7 @@
   },
   {
     "ea": "0x80D502",
-    "line": "call    sub_76C910",
+    "line": "call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1789,13 +1789,13 @@
   },
   {
     "ea": "0x80D52B",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x80D52C",
-    "line": "call    sub_76C910",
+    "line": "call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1849,13 +1849,13 @@
   },
   {
     "ea": "0x80D54D",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x80D54E",
-    "line": "call    sub_76C910",
+    "line": "call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1909,7 +1909,7 @@
   },
   {
     "ea": "0x80D56E",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
@@ -1921,7 +1921,7 @@
   },
   {
     "ea": "0x80D571",
-    "line": "call    sub_76C910",
+    "line": "call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1987,7 +1987,7 @@
   },
   {
     "ea": "0x80D597",
-    "line": "push    edi; a2",
+    "line": "push    edi; texture",
     "mnemonic": "push",
     "size": 1
   },
@@ -1999,247 +1999,247 @@
   },
   {
     "ea": "0x80D59A",
-    "line": "call    sub_76C910",
+    "line": "call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x80D59F",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x80D5A1",
-    "line": "push    0",
+    "line": "push    0; restore",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D5A3",
-    "line": "push    0",
+    "line": "push    0; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D5A5",
-    "line": "push    1Ch",
+    "line": "push    1Ch; state",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D5A7",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x80D5AC",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x80D5AE",
-    "line": "push    0",
+    "line": "push    0; restore",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D5B0",
-    "line": "push    7",
+    "line": "push    7; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D5B2",
-    "line": "push    0A8h ; '¨'",
+    "line": "push    0A8h ; '¨'; state",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x80D5B7",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x80D5BC",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x80D5BE",
-    "line": "push    0",
+    "line": "push    0; restore",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D5C0",
-    "line": "push    1",
+    "line": "push    1; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D5C2",
-    "line": "push    1Bh",
+    "line": "push    1Bh; state",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D5C4",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x80D5C9",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x80D5CB",
-    "line": "push    0",
+    "line": "push    0; restore",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D5CD",
-    "line": "push    5",
+    "line": "push    5; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D5CF",
-    "line": "push    13h",
+    "line": "push    13h; state",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D5D1",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x80D5D6",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x80D5D8",
-    "line": "push    0",
+    "line": "push    0; restore",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D5DA",
-    "line": "push    6",
+    "line": "push    6; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D5DC",
-    "line": "push    14h",
+    "line": "push    14h; state",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D5DE",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x80D5E3",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x80D5E5",
-    "line": "push    0",
+    "line": "push    0; restore",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D5E7",
-    "line": "push    1",
+    "line": "push    1; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D5E9",
-    "line": "push    7",
+    "line": "push    7; state",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D5EB",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x80D5F0",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x80D5F2",
-    "line": "push    0",
+    "line": "push    0; restore",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D5F4",
-    "line": "push    4",
+    "line": "push    4; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D5F6",
-    "line": "push    17h",
+    "line": "push    17h; state",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D5F8",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x80D5FD",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x80D5FF",
-    "line": "push    0",
+    "line": "push    0; restore",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D601",
-    "line": "push    1",
+    "line": "push    1; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D603",
-    "line": "push    0Eh",
+    "line": "push    0Eh; state",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D605",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2269,7 +2269,7 @@
   },
   {
     "ea": "0x80D613",
-    "line": "call    sub_7AECB0",
+    "line": "call    NiD3DPass_SetVertexShader; Reference-counted NiD3DPass vertex-shader setter. Replaces pass+0x58 and AddRefs the new NiD3DVertexShader.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2323,13 +2323,13 @@
   },
   {
     "ea": "0x80D630",
-    "line": "push    eax; a2",
+    "line": "push    eax; shader",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x80D631",
-    "line": "call    sub_7AEC60",
+    "line": "call    NiD3DPass_SetPixelShader; Reference-counted NiD3DPass pixel-shader setter. Replaces pass+0x44 and AddRefs the new NiD3DPixelShader.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2443,7 +2443,7 @@
   },
   {
     "ea": "0x80D66D",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
@@ -2455,7 +2455,7 @@
   },
   {
     "ea": "0x80D670",
-    "line": "call    sub_76C910",
+    "line": "call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2533,13 +2533,13 @@
   },
   {
     "ea": "0x80D699",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x80D69A",
-    "line": "call    sub_76C910",
+    "line": "call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2593,13 +2593,13 @@
   },
   {
     "ea": "0x80D6BB",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x80D6BC",
-    "line": "call    sub_76C910",
+    "line": "call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2653,7 +2653,7 @@
   },
   {
     "ea": "0x80D6DC",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
@@ -2665,7 +2665,7 @@
   },
   {
     "ea": "0x80D6DF",
-    "line": "call    sub_76C910",
+    "line": "call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2731,7 +2731,7 @@
   },
   {
     "ea": "0x80D705",
-    "line": "push    edi; a2",
+    "line": "push    edi; texture",
     "mnemonic": "push",
     "size": 1
   },
@@ -2743,247 +2743,247 @@
   },
   {
     "ea": "0x80D708",
-    "line": "call    sub_76C910",
+    "line": "call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x80D70D",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x80D70F",
-    "line": "push    0",
+    "line": "push    0; restore",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D711",
-    "line": "push    0",
+    "line": "push    0; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D713",
-    "line": "push    1Ch",
+    "line": "push    1Ch; state",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D715",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x80D71A",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x80D71C",
-    "line": "push    0",
+    "line": "push    0; restore",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D71E",
-    "line": "push    7",
+    "line": "push    7; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D720",
-    "line": "push    0A8h ; '¨'",
+    "line": "push    0A8h ; '¨'; state",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x80D725",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x80D72A",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x80D72C",
-    "line": "push    0",
+    "line": "push    0; restore",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D72E",
-    "line": "push    1",
+    "line": "push    1; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D730",
-    "line": "push    1Bh",
+    "line": "push    1Bh; state",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D732",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x80D737",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x80D739",
-    "line": "push    0",
+    "line": "push    0; restore",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D73B",
-    "line": "push    5",
+    "line": "push    5; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D73D",
-    "line": "push    13h",
+    "line": "push    13h; state",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D73F",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x80D744",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x80D746",
-    "line": "push    0",
+    "line": "push    0; restore",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D748",
-    "line": "push    6",
+    "line": "push    6; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D74A",
-    "line": "push    14h",
+    "line": "push    14h; state",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D74C",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x80D751",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x80D753",
-    "line": "push    0",
+    "line": "push    0; restore",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D755",
-    "line": "push    1",
+    "line": "push    1; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D757",
-    "line": "push    7",
+    "line": "push    7; state",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D759",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x80D75E",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x80D760",
-    "line": "push    0",
+    "line": "push    0; restore",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D762",
-    "line": "push    4",
+    "line": "push    4; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D764",
-    "line": "push    17h",
+    "line": "push    17h; state",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D766",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x80D76B",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x80D76D",
-    "line": "push    0",
+    "line": "push    0; restore",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D76F",
-    "line": "push    1",
+    "line": "push    1; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D771",
-    "line": "push    0Eh",
+    "line": "push    0Eh; state",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80D773",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3067,13 +3067,13 @@
   },
   {
     "ea": "0x80D7A4",
-    "line": "push    eax; a2",
+    "line": "push    eax; shader",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x80D7A5",
-    "line": "call    sub_7AEC60",
+    "line": "call    NiD3DPass_SetPixelShader; Reference-counted NiD3DPass pixel-shader setter. Replaces pass+0x44 and AddRefs the new NiD3DPixelShader.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3235,13 +3235,13 @@
   },
   {
     "ea": "0x80D7FD",
-    "line": "push    eax; a2",
+    "line": "push    eax; shader",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x80D7FE",
-    "line": "call    sub_7AEC60",
+    "line": "call    NiD3DPass_SetPixelShader; Reference-counted NiD3DPass pixel-shader setter. Replaces pass+0x44 and AddRefs the new NiD3DPixelShader.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3301,13 +3301,13 @@
   },
   {
     "ea": "0x80D81D",
-    "line": "call    sub_7AECB0",
+    "line": "call    NiD3DPass_SetVertexShader; Reference-counted NiD3DPass vertex-shader setter. Replaces pass+0x58 and AddRefs the new NiD3DVertexShader.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x80D822",
-    "line": "push    esi",
+    "line": "push    esi; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -3325,19 +3325,19 @@
   },
   {
     "ea": "0x80D82A",
-    "line": "push    eax",
+    "line": "push    eax; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x80D82B",
-    "line": "lea     ecx, [esi+40h]",
+    "line": "lea     ecx, [esi+40h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x80D82E",
-    "line": "call    sub_76CE40",
+    "line": "call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3367,7 +3367,7 @@
   },
   {
     "ea": "0x80D840",
-    "line": "jz      short def_80D45F; jumptable 0080D45F default case, cases 226-395",
+    "line": "jz      short def_80D45F; Hair default consumes neither refraction 0x160..0x162 nor high 0x177..0x17A. Stock Hair can produce the refraction family through its flagged fallback, but cannot produce the high family.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -3379,7 +3379,7 @@
   },
   {
     "ea": "0x80D845",
-    "line": "jnz     short def_80D45F; jumptable 0080D45F default case, cases 226-395",
+    "line": "jnz     short def_80D45F; Hair default consumes neither refraction 0x160..0x162 nor high 0x177..0x17A. Stock Hair can produce the refraction family through its flagged fallback, but cannot produce the high family.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -3391,13 +3391,13 @@
   },
   {
     "ea": "0x80D849",
-    "line": "call    sub_772560",
+    "line": "call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x80D84E",
-    "line": "xor     eax, eax; jumptable 0080D45F default case, cases 226-395",
+    "line": "xor     eax, eax; Hair default returns 0 after pass-queue reset. Stock flagged fallback records 0x160..0x162 therefore queue no Hair pass. High selectors 0x177..0x17A also default if presented, but the Hair producer graph cannot create them.",
     "mnemonic": "xor",
     "size": 2
   },
@@ -3454,5 +3454,113 @@
     "line": "retn    1Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x75FA70",
+    "line": "mov     ecx, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x75FA72",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x75FA74",
+    "line": "jz      short locret_75FA81",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x75FA76",
+    "line": "add     dword ptr [ecx+5Ch], 0FFFFFFFFh",
+    "mnemonic": "add",
+    "size": 4
+  },
+  {
+    "ea": "0x75FA7A",
+    "line": "jnz     short locret_75FA81",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x75FA7C",
+    "line": "jmp     sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x75FA81",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D0EC0",
+    "line": "lea     ecx, [ebp+10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0EC3",
+    "line": "jmp     loc_75FA70",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0EC8",
+    "line": "lea     ecx, [ebp+10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0ECB",
+    "line": "jmp     loc_75FA70",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0ED0",
+    "line": "mov     edx, [esp+arg3]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D0ED4",
+    "line": "lea     eax, [edx-40h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0ED7",
+    "line": "mov     ecx, [edx-44h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0EDA",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D0EDC",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0EE1",
+    "line": "mov     eax, offset stru_AF9670",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0EE6",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

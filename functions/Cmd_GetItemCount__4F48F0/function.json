@@ -1,19 +1,32 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4F48F0",
+      "0x4F4977"
+    ]
+  ],
+  "chunks_sha256": "c8a3795fa2938ececabe97de72b939cc1c320f63af6e76631492898fae04cd76",
+  "comment_regular": "GetItemCount_Eval (index 47 / opcode 0x102F), used 54 times in vanilla core dialogue. Requires a valid item form, a container subject, and ContainerChanges data; returns abs(base TESContainer count plus EntryData.countDelta). If no ContainerChanges data exists it returns 0. Fallout's analogue x4y6:0x823BCE90 also has a special form-type-85 leveled-list expansion loop; this Oblivion handler performs only a single lookup for the supplied ObjectID.",
+  "comment_repeatable": "GetItemCount_Eval (index 47 / opcode 0x102F), used 54 times in vanilla core dialogue. Requires a valid item form, a container subject, and ContainerChanges data; returns abs(base TESContainer count plus EntryData.countDelta). If no ContainerChanges data exists it returns 0. Fallout's analogue x4y6:0x823BCE90 also has a special form-type-85 leveled-list expansion loop; this Oblivion handler performs only a single lookup for the supplied ObjectID.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "Cmd_GetItemCount",
+  "display_name": "GetItemCount_Eval",
   "end_ea": "0x4F4977",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "Cmd_GetItemCount",
+  "name": "GetItemCount_Eval",
   "segment": ".text",
   "sha256": "c8a3795fa2938ececabe97de72b939cc1c320f63af6e76631492898fae04cd76",
   "size": 135,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4F48F0",
-  "type": "char __cdecl(TESObjectREFR *a1, TESForm *a2, int a3, double *a4)",
+  "total_chunk_size": 135,
+  "type": "char __cdecl(TESObjectREFR *subject, TESForm *objectID, TESForm *param2, double *value)",
   "xrefs_from_count": 65,
-  "xrefs_to_count": 3
+  "xrefs_to_count": 2
 }

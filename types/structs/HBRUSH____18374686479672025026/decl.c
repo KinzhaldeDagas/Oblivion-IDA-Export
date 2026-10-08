@@ -1,1 +1,4 @@
-HBRUSH__
+struct HBRUSH__
+{
+int unused;
+};

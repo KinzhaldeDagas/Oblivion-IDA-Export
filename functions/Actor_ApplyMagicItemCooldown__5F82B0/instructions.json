@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x5F82D3",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x5F82DA",
-    "line": "call    sub_4029D0",
+    "line": "call    TimeGlobals_GetTimeScale; Returns TimeGlobals field +5 TESGlobal value (time scale). Observed callers use it for magic cooldown and fast-travel time calculations.",
     "mnemonic": "call",
     "size": 5
   },

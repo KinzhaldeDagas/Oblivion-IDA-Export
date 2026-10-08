@@ -1,268 +1,414 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "DirectSoundDevice_0",
+  "definition": "typedef DirectSoundDevice DirectSoundDevice_0\n",
   "id": 18374686479671932081,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ref",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "guid",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 16
+      "size": 16,
+      "type": "GUID"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "drvcaps",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 96
+      "size": 96,
+      "type": "DSCAPS"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "priolevel",
       "offset": 116,
       "offset_hex": "0x74",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "sleeptime",
       "offset": 120,
       "offset_hex": "0x78",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pwfx",
       "offset": 124,
-      "offset_hex": "0x7c",
-      "size": 4
+      "offset_hex": "0x7C",
+      "size": 4,
+      "type": "PWAVEFORMATEX"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "primary_pwfx",
       "offset": 128,
       "offset_hex": "0x80",
-      "size": 4
+      "size": 4,
+      "type": "PWAVEFORMATEX"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "buffer",
       "offset": 132,
       "offset_hex": "0x84",
-      "size": 4
+      "size": 4,
+      "type": "LPBYTE_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "writelead",
       "offset": 136,
       "offset_hex": "0x88",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "buflen",
       "offset": 140,
-      "offset_hex": "0x8c",
-      "size": 4
+      "offset_hex": "0x8C",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ac_frames",
       "offset": 144,
       "offset_hex": "0x90",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "frag_frames",
       "offset": 148,
       "offset_hex": "0x94",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "playpos",
       "offset": 152,
       "offset_hex": "0x98",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad",
       "offset": 156,
-      "offset_hex": "0x9c",
-      "size": 4
+      "offset_hex": "0x9C",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "stopped",
       "offset": 160,
-      "offset_hex": "0xa0",
-      "size": 4
+      "offset_hex": "0xA0",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nrofbuffers",
       "offset": 164,
-      "offset_hex": "0xa4",
-      "size": 4
+      "offset_hex": "0xA4",
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "buffers",
       "offset": 168,
-      "offset_hex": "0xa8",
-      "size": 4
+      "offset_hex": "0xA8",
+      "size": 4,
+      "type": "IDirectSoundBufferImpl_0 **"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "buffer_list_lock",
       "offset": 172,
-      "offset_hex": "0xac",
-      "size": 4
+      "offset_hex": "0xAC",
+      "size": 4,
+      "type": "SRWLOCK"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "mixlock",
       "offset": 176,
-      "offset_hex": "0xb0",
-      "size": 32
+      "offset_hex": "0xB0",
+      "size": 32,
+      "type": "CRITICAL_SECTION"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "primary",
       "offset": 208,
-      "offset_hex": "0xd0",
-      "size": 4
+      "offset_hex": "0xD0",
+      "size": 4,
+      "type": "IDirectSoundBufferImpl_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "speaker_config",
       "offset": 212,
-      "offset_hex": "0xd4",
-      "size": 4
+      "offset_hex": "0xD4",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "speaker_angles",
       "offset": 216,
-      "offset_hex": "0xd8",
-      "size": 24
+      "offset_hex": "0xD8",
+      "size": 24,
+      "type": "float[6]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "speaker_num",
       "offset": 240,
-      "offset_hex": "0xf0",
-      "size": 24
+      "offset_hex": "0xF0",
+      "size": 24,
+      "type": "int[6]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "num_speakers",
       "offset": 264,
       "offset_hex": "0x108",
-      "size": 4
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lfe_channel",
       "offset": 268,
-      "offset_hex": "0x10c",
-      "size": 4
+      "offset_hex": "0x10C",
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "tmp_buffer",
       "offset": 272,
       "offset_hex": "0x110",
-      "size": 4
+      "size": 4,
+      "type": "float *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cp_buffer",
       "offset": 276,
       "offset_hex": "0x114",
-      "size": 4
+      "size": 4,
+      "type": "float *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dsp_buffer",
       "offset": 280,
       "offset_hex": "0x118",
-      "size": 4
+      "size": 4,
+      "type": "float *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "tmp_buffer_len",
       "offset": 284,
-      "offset_hex": "0x11c",
-      "size": 4
+      "offset_hex": "0x11C",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cp_buffer_len",
       "offset": 288,
       "offset_hex": "0x120",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dsp_buffer_len",
       "offset": 292,
       "offset_hex": "0x124",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "volpan",
       "offset": 296,
       "offset_hex": "0x128",
-      "size": 32
+      "size": 32,
+      "type": "DSVOLUMEPAN"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "normfunction",
       "offset": 328,
       "offset_hex": "0x148",
-      "size": 4
+      "size": 4,
+      "type": "normfunc"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "eax",
       "offset": 332,
-      "offset_hex": "0x14c",
-      "size": 124
+      "offset_hex": "0x14C",
+      "size": 124,
+      "type": "eax_info"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ds3dl",
       "offset": 456,
-      "offset_hex": "0x1c8",
-      "size": 64
+      "offset_hex": "0x1C8",
+      "size": 64,
+      "type": "DS3DLISTENER"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ds3dl_need_recalc",
       "offset": 520,
       "offset_hex": "0x208",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "mmdevice",
       "offset": 524,
-      "offset_hex": "0x20c",
-      "size": 4
+      "offset_hex": "0x20C",
+      "size": 4,
+      "type": "IMMDevice_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "client",
       "offset": 528,
       "offset_hex": "0x210",
-      "size": 4
+      "size": 4,
+      "type": "IAudioClient_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "volume",
       "offset": 532,
       "offset_hex": "0x214",
-      "size": 4
+      "size": 4,
+      "type": "IAudioStreamVolume_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "render",
       "offset": 536,
       "offset_hex": "0x218",
-      "size": 4
+      "size": 4,
+      "type": "IAudioRenderClient_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "sleepev",
       "offset": 540,
-      "offset_hex": "0x21c",
-      "size": 4
+      "offset_hex": "0x21C",
+      "size": 4,
+      "type": "HANDLE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "thread",
       "offset": 544,
       "offset_hex": "0x220",
-      "size": 4
+      "size": 4,
+      "type": "HANDLE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "entry",
       "offset": 548,
       "offset_hex": "0x224",
-      "size": 8
+      "size": 8,
+      "type": "list"
     }
   ],
   "name": "DirectSoundDevice_0",
+  "ordinal": 3884,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 560
 }

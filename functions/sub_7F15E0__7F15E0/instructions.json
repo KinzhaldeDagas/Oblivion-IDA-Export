@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7F15E0",
-    "line": "sub     esp, 80h",
+    "line": "sub     esp, 80h; Per-draw transform slot updates object-space lighting and billboard axes before leaf pass setup. A correct bound texture can therefore render RGB-black if stock lighting/dimmer/fog constants yield zero, independently of atlas RGB.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x7F15F8",
-    "line": "call    sub_765480",
+    "line": "call    NiDX9Renderer_SetModelTransform; MoonSugar build 39: common non-skinned transform upload has many shader-family xrefs (generic, water, grass, precipitation, SpeedTree, LOD, GeometryDecal, Lighting30). Do not globally detour for Moon Sugar; use scoped caller/hook windows.",
     "mnemonic": "call",
     "size": 5
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x7F160D",
-    "line": "lea     ecx, [esp+94h+var_40]",
+    "line": "lea     ecx, [esp+94h+inverseWorld]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -433,13 +433,13 @@
   },
   {
     "ea": "0x7F16BB",
-    "line": "fstp    [esp+90h+var_90]; float",
+    "line": "fstp    [esp+90h+objectScale]; objectScale",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7F16BE",
-    "line": "lea     edx, [esp+90h+var_40]",
+    "line": "lea     edx, [esp+90h+inverseWorld]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x7F16C4",
-    "line": "push    edx; int",
+    "line": "push    edx; inverseWorld",
     "mnemonic": "push",
     "size": 1
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x7F16C7",
-    "line": "push    eax; int",
+    "line": "push    eax; leafProperty",
     "mnemonic": "push",
     "size": 1
   },
@@ -475,13 +475,13 @@
   },
   {
     "ea": "0x7F16CA",
-    "line": "call    sub_7F0100",
+    "line": "call    OB_SpeedTreeLeafShader_UpdateObjectSpaceLightConstants_010201A0; Per-draw transform setup rebuilds leaf c11 (and optional point c12) before leaf pass setup/draw; c11 is not merely consumed stale on the normal path.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7F16CF",
-    "line": "call    sub_7F1170",
+    "line": "call    OB_SpeedTreeLeafShader_UpdateBillboardAxes_010201A0; Leaf shader global leafData updater: copies camera/right/up style vectors from dword_B43124 into B46758..B46774.",
     "mnemonic": "call",
     "size": 5
   },

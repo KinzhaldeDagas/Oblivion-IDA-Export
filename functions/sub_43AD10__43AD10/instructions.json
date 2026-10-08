@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x43AD10",
-    "line": "push    ecx",
+    "line": "push    ecx; QueuedDistantLOD load-complete path: loads queued model, applies transform/context through 0x435060, then enqueues completion on IO manager queue.",
     "mnemonic": "push",
     "size": 1
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x43AD15",
-    "line": "call    sub_439400",
+    "line": "call    QueuedTexture_LoadModelStream; Queued texture/model stream loader. Checks model-loader cache for the requested path, otherwise opens archive/loose file data and builds the stream-backed object.",
     "mnemonic": "call",
     "size": 5
   },
@@ -55,31 +55,31 @@
   },
   {
     "ea": "0x43AD24",
-    "line": "push    ecx",
+    "line": "push    ecx; instanceData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x43AD25",
-    "line": "push    eax",
+    "line": "push    eax; loadedModelRoot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x43AD26",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x43AD28",
-    "line": "call    sub_435060",
+    "line": "call    QueuedDistantLOD_ApplyTransform; Verified queued distant-model transform: writes position at NiAVObject+0x54, abs(scale) at +0x60, and builds rotation from rotationAnglesXYZ using X, then Y, then Z axis matrices. NiMatrix33_Multiply is row-major left*right; composition is BaseRotation * RxTransposed(angleX) * Ry(angleY) * Rz(angleZ). The resulting 3x3 matrix is stored at NiAVObject+0x30.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x43AD2D",
-    "line": "mov     edi, ioManager",
+    "line": "mov     edi, ds:0B33A10h",
     "mnemonic": "mov",
     "size": 6
   },

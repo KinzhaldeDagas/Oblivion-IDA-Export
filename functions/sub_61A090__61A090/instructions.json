@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x61A21F",
-    "line": "fld     [esp+18Ch+var_168]",
+    "line": "fld     [esp+18Ch+outMaximumDistance]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1723,7 +1723,7 @@
   },
   {
     "ea": "0x61A456",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2185,7 +2185,7 @@
   },
   {
     "ea": "0x61A55B",
-    "line": "call    sub_615980",
+    "line": "call    CombatController_GetCachedTargetSurfaceDistance; Returns CombatController cached target surface distance at +0x184, computing it once when negative. The inherited EDI low-byte input belongs to this private compiler ABI and is deliberately retained.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2347,55 +2347,55 @@
   },
   {
     "ea": "0x61A5B1",
-    "line": "lea     eax, [esp+184h+var_168]",
+    "line": "lea     eax, [esp+184h+outMaximumDistance]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x61A5B5",
-    "line": "fst     [esp+184h+var_164]",
+    "line": "fst     [esp+184h+outOptimalDistance]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x61A5B9",
-    "line": "push    eax",
+    "line": "push    eax; outMaximumDistance",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x61A5BA",
-    "line": "fstp    [esp+188h+var_168]",
+    "line": "fstp    [esp+188h+outMaximumDistance]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x61A5BE",
-    "line": "lea     ecx, [esp+188h+var_164]",
+    "line": "lea     ecx, [esp+188h+outOptimalDistance]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x61A5C2",
-    "line": "push    ecx",
+    "line": "push    ecx; outOptimalDistance",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x61A5C3",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x61A5C5",
-    "line": "call    sub_6142D0",
+    "line": "call    CombatController_GetRangedDistanceBounds; Combines projectile/spell bounds with TESCombatStyle optimal/max range multipliers (SDK +0x6C/+0x70).",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x61A5CA",
-    "line": "fld     [esp+184h+var_168]",
+    "line": "fld     [esp+184h+outMaximumDistance]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2419,7 +2419,7 @@
   },
   {
     "ea": "0x61A5D9",
-    "line": "fld     [esp+194h+var_164]",
+    "line": "fld     [esp+194h+outOptimalDistance]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2461,7 +2461,7 @@
   },
   {
     "ea": "0x61A5F0",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -2473,7 +2473,7 @@
   },
   {
     "ea": "0x61A5F4",
-    "line": "call    sub_615520",
+    "line": "call    CombatController_GetDesiredCombatDistance; Caches desired combat distance based on active combat mode and ranged/melee data.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3127,7 +3127,7 @@
   },
   {
     "ea": "0x61A755",
-    "line": "mov     [esp+190h+var_164], ecx",
+    "line": "mov     [esp+190h+outOptimalDistance], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3181,7 +3181,7 @@
   },
   {
     "ea": "0x61A783",
-    "line": "mov     al, byte ptr [esp+184h+var_164]; jumptable 0061A77C case 2",
+    "line": "mov     al, byte ptr [esp+184h+outOptimalDistance]; jumptable 0061A77C case 2",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3319,13 +3319,13 @@
   },
   {
     "ea": "0x61A7D3",
-    "line": "fstp    [esp+194h+var_168]",
+    "line": "fstp    [esp+194h+outMaximumDistance]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x61A7D7",
-    "line": "fld     [esp+194h+var_168]",
+    "line": "fld     [esp+194h+outMaximumDistance]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3409,13 +3409,13 @@
   },
   {
     "ea": "0x61A80F",
-    "line": "fstp    [esp+194h+var_168]",
+    "line": "fstp    [esp+194h+outMaximumDistance]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x61A813",
-    "line": "fld     [esp+194h+var_168]",
+    "line": "fld     [esp+194h+outMaximumDistance]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3493,13 +3493,13 @@
   },
   {
     "ea": "0x61A84A",
-    "line": "fstp    [esp+194h+var_168]",
+    "line": "fstp    [esp+194h+outMaximumDistance]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x61A84E",
-    "line": "fld     [esp+194h+var_168]",
+    "line": "fld     [esp+194h+outMaximumDistance]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3565,13 +3565,13 @@
   },
   {
     "ea": "0x61A877",
-    "line": "fstp    [esp+184h+var_168]",
+    "line": "fstp    [esp+184h+outMaximumDistance]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x61A87B",
-    "line": "call    sub_452A60",
+    "line": "call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3625,7 +3625,7 @@
   },
   {
     "ea": "0x61A89D",
-    "line": "fld     [esp+19Ch+var_168]",
+    "line": "fld     [esp+19Ch+outMaximumDistance]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3679,7 +3679,7 @@
   },
   {
     "ea": "0x61A8BB",
-    "line": "call    sub_5E0F50",
+    "line": "call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3943,7 +3943,7 @@
   },
   {
     "ea": "0x61A95B",
-    "line": "test    byte ptr [esp+184h+var_164], 1",
+    "line": "test    byte ptr [esp+184h+outOptimalDistance], 1",
     "mnemonic": "test",
     "size": 5
   },
@@ -6613,7 +6613,7 @@
   },
   {
     "ea": "0x61AEEF",
-    "line": "call    sub_614290",
+    "line": "call    CombatController_CanReachCurrentTarget; Returns current-target reachability at +0x174, additionally forcing false when a non-water-capable actor cannot fight a swimming target.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7093,7 +7093,7 @@
   },
   {
     "ea": "0x61B00F",
-    "line": "mov     [esp+184h+var_164], offset aY_0; \"Y\"",
+    "line": "mov     [esp+184h+outOptimalDistance], offset aY_0; \"Y\"",
     "mnemonic": "mov",
     "size": 8
   },
@@ -7105,7 +7105,7 @@
   },
   {
     "ea": "0x61B019",
-    "line": "mov     [esp+184h+var_164], offset aN; \"N\"",
+    "line": "mov     [esp+184h+outOptimalDistance], offset aN; \"N\"",
     "mnemonic": "mov",
     "size": 8
   },
@@ -7195,7 +7195,7 @@
   },
   {
     "ea": "0x61B04B",
-    "line": "mov     edx, [esp+188h+var_164]",
+    "line": "mov     edx, [esp+188h+outOptimalDistance]",
     "mnemonic": "mov",
     "size": 4
   },

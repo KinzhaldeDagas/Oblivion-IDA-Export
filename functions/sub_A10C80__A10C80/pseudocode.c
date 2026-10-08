@@ -1,5 +1,5 @@
 int sub_A10C80()
 {
-  sub_7A7560(flt_B42998);
-  return atexit(sub_A26F20);
+  OB_Normal_ctor_010201A0(&stru_B42998); /*0xa10c85*/
+  return atexit(sub_A26F20); /*0xa10c95*/
 }

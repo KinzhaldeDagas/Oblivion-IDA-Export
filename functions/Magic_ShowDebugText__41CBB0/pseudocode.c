@@ -4,27 +4,144 @@ int __usercall Magic_ShowDebugText@<eax>(
         TESObjectREFR *a3,
         int a4,
         signed int *a5,
-        int *a6)
+        int *a6,
+        int a7,
+        int a8,
+        int a9,
+        int a10,
+        int a11,
+        int a12,
+        int a13,
+        int a14,
+        int a15,
+        int a16,
+        int a17,
+        int a18,
+        int a19,
+        int a20,
+        int a21,
+        int a22,
+        int a23,
+        int a24,
+        int a25,
+        int a26,
+        int a27,
+        int a28,
+        int a29,
+        int a30,
+        int a31,
+        int a32,
+        int a33,
+        int a34,
+        int a35,
+        int a36,
+        int a37,
+        int a38,
+        int a39,
+        int a40,
+        int a41,
+        int a42,
+        int a43,
+        int a44,
+        int a45,
+        int a46,
+        int a47,
+        int a48,
+        int a49,
+        int a50,
+        int a51,
+        int a52,
+        int a53,
+        int a54,
+        int a55,
+        int a56,
+        int a57,
+        int a58)
 {
-  int v7; // ebx
-  double v8; // st5
-  double v9; // st6
+  int v58; // ebx
+  double v59; // st5
+  int v60; // ebx
+  double v61; // st6
   char *Name; // eax
-  float v12; // [esp+0h] [ebp-250h]
-  float v13; // [esp+0h] [ebp-250h]
-  float v14; // [esp+4h] [ebp-24Ch]
-  float v15; // [esp+4h] [ebp-24Ch]
+  float v64; // [esp+0h] [ebp-250h]
+  float v65; // [esp+0h] [ebp-250h]
+  float v66; // [esp+4h] [ebp-24Ch]
+  float v67; // [esp+4h] [ebp-24Ch]
   int savedregs; // [esp+250h] [ebp+0h] BYREF
 
-  v7 = *a5;
-  v14 = (float)*a5;
-  v8 = (double)iDebugTextLeftRightOffset;
-  v12 = v8;
-  InterfaceMgr_DebugTextLine((char)&savedregs, v8, a1, a2, (int)"MAGIC INFO", v12, v14, 1, 0xFFFFFFFF);
-  v15 = (float)(a4 + v7);
-  v9 = (double)iDebugTextLeftRightOffset;
-  v13 = v9;
-  Name = TESObjectREFR_GetName(a3);
-  InterfaceMgr_DebugTextLine((char)&savedregs, v8, v9, a2, (int)Name, v13, v15, 1, 0xFFFFFFFF);
-  return Magic_ShowDebugText_::Check_MagicCaster(a2);
+  v58 = *a5; /*0x41cbd1*/
+  v66 = (float)*a5; /*0x41cbed*/
+  v59 = (double)iDebugTextLeftRightOffset; /*0x41cbf1*/
+  v64 = v59; /*0x41cbff*/
+  InterfaceMgr_DebugTextLine((char)&savedregs, v59, a1, a2, "MAGIC INFO", v64, v66, 1, 0xFFFFFFFF); /*0x41cc07*/
+  v60 = a4 + v58; /*0x41cc12*/
+  v67 = (float)v60; /*0x41cc25*/
+  v61 = (double)iDebugTextLeftRightOffset; /*0x41cc29*/
+  v65 = v61; /*0x41cc2f*/
+  Name = TESObjectREFR_GetName(a3); /*0x41cc32*/
+  InterfaceMgr_DebugTextLine((char)&savedregs, v59, v61, a2, Name, v65, v67, 1, 0xFFFFFFFF); /*0x41cc38*/
+  return Magic_ShowDebugText_::Check_MagicCaster(
+           v60,
+           (int)&savedregs,
+           a3,
+           a4,
+           v59,
+           v61,
+           a2,
+           (int)a3,
+           a4,
+           (int)a5,
+           (int)a6,
+           a7,
+           a8,
+           a9,
+           a10,
+           a11,
+           a12,
+           a13,
+           a14,
+           a15,
+           a16,
+           a17,
+           a18,
+           a19,
+           a20,
+           a21,
+           a22,
+           a23,
+           a24,
+           a25,
+           a26,
+           a27,
+           a28,
+           a29,
+           a30,
+           a31,
+           a32,
+           a33,
+           a34,
+           a35,
+           a36,
+           a37,
+           a38,
+           a39,
+           a40,
+           a41,
+           a42,
+           a43,
+           a44,
+           a45,
+           a46,
+           a47,
+           a48,
+           a49,
+           a50,
+           a51,
+           a52,
+           a53,
+           a54,
+           a55,
+           a56,
+           a57,
+           a58);
 }

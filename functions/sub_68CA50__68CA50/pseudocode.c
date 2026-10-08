@@ -1,4 +1,4 @@
 bool __thiscall sub_68CA50(_BYTE *this)
 {
-  return (*this & 2) != 0;
+  return (*this & 2) != 0; /*0x68ca57*/
 }

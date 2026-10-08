@@ -80,9 +80,9 @@
 0x5ADA7C: mov     ecx, ebx; this
 0x5ADA7E: fstp    [esp+1Ch+var_4]
 0x5ADA82: fld     [esp+1Ch+var_4]
-0x5ADA86: fstp    [esp+1Ch+a2]; a3
-0x5ADA89: push    0FB1h; a2
-0x5ADA8E: call    Tile_SetFloat
+0x5ADA86: fstp    [esp+1Ch+a2]; value
+0x5ADA89: push    0FB1h; propertyCode
+0x5ADA8E: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5ADA93: fld     [esp+18h+var_4]
 0x5ADA97: fcomp   qword ptr ds:0A6C4C8h
 0x5ADA9D: fnstsw  ax
@@ -112,7 +112,7 @@
 0x5ADAE5: call    InterfaceManager_GetSingleton
 0x5ADAEA: add     esp, 8
 0x5ADAED: mov     ecx, eax
-0x5ADAEF: call    sub_583F40
+0x5ADAEF: call    InterfaceManager__UpdateMenuFades; Verified: reads GetTimerPercent and Menu fade state +0x24. State 2 completion sets state 4; if root trait 0x1772==2, destroys MenuTopicManager for DialogMenu at 0x584230 then invokes root tile deleting destructor at 0x584255. Otherwise hides root. State 8 completion sets state 1. This is the normal deferred destruction path, separate from StartFadeOut.
 0x5ADAF4: push    0
 0x5ADAF6: call    sub_579260
 0x5ADAFB: add     esp, 4
@@ -130,10 +130,10 @@
 0x5ADB27: pop     esi
 0x5ADB28: pop     ebp
 0x5ADB29: jnz     short loc_5ADB3A
-0x5ADB2B: mov     ecx, ds:0B33398h; void *
+0x5ADB2B: mov     ecx, ds:0B33398h; this
 0x5ADB31: pop     ebx
 0x5ADB32: add     esp, 8
-0x5ADB35: jmp     ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x5ADB35: jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x5ADB3A: pop     ebx
 0x5ADB3B: add     esp, 8
 0x5ADB3E: retn

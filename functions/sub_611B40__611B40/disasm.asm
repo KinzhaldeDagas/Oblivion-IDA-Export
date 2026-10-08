@@ -34,7 +34,7 @@
 0x611B95: mov     ecx, esi
 0x611B97: call    edx
 0x611B99: mov     ecx, esi; this
-0x611B9B: call    sub_5E6C60
+0x611B9B: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x611BA0: test    al, al
 0x611BA2: jz      short loc_611BC7
 0x611BA4: mov     eax, ds:0B333C4h

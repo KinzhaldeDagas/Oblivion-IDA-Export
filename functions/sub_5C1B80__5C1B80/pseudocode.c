@@ -1,82 +1,109 @@
-void __usercall sub_5C1B80(double st5_0@<st2>, double st6_0@<st1>, double st7_0@<st0>, int a4)
+void __usercall sub_5C1B80(
+        double st5_0@<st2>,
+        double st6_0@<st1>,
+        double st7_0@<st0>,
+        int a4@<ebx>,
+        int a5@<ebp>,
+        int a6@<edi>,
+        int a7@<esi>,
+        double a8@<st7>,
+        double a9@<st6>,
+        double a10@<st5>,
+        double a11@<st4>,
+        int a12)
 {
   _DWORD *OpenMenuTile; // eax
-  int ParentMenu; // eax
-  Tile **v8; // esi
-  double v9; // st7
-  int v10; // ebp
-  int *v11; // ebx
-  Tile **v12; // edi
-  TESForm *v13; // esi
-  const char *v14; // eax
-  CHAR *v15; // eax
+  Tile **ParentMenu; // eax
+  Tile **v14; // esi
+  double v15; // st7
+  int v16; // ebp
+  int *v17; // ebx
+  Tile **v18; // edi
+  TESForm *v19; // esi
+  _DWORD *v20; // eax
+  const char *v21; // eax
+  CHAR *v22; // eax
   float a2; // [esp+0h] [ebp-120h]
   float a2a; // [esp+0h] [ebp-120h]
+  int v25; // [esp+4h] [ebp-11Ch]
+  int v26; // [esp+8h] [ebp-118h]
+  int v27; // [esp+Ch] [ebp-114h]
+  int v28; // [esp+10h] [ebp-110h]
+  char v29; // [esp+14h] [ebp-10Ch]
   char a3[260]; // [esp+18h] [ebp-108h] BYREF
 
-  sub_5C1900();
-  OpenMenuTile = (_DWORD *)Menu_GetOpenMenuTile(0x416);
-  if ( OpenMenuTile || (sub_5C1290(st5_0, st6_0, st7_0), (OpenMenuTile = (_DWORD *)Menu_GetOpenMenuTile(0x416)) != 0) )
+  PlayerCharacter_ReconcileHotkeysAfterInventoryRemoval(); /*0x5c1b94*/
+  OpenMenuTile = (_DWORD *)Menu_GetOpenMenuTile(0x416); /*0x5c1b9e*/
+  if ( OpenMenuTile /*0x5c1bbe*/
+    || (sub_5C1290(st5_0, st6_0, st7_0, a8, a9, a10, a11), (OpenMenuTile = (_DWORD *)Menu_GetOpenMenuTile(0x416)) != 0) )
   {
-    ParentMenu = Tile_GetParentMenu(OpenMenuTile);
-    v8 = (Tile **)ParentMenu;
-    if ( ParentMenu && *(_DWORD *)(ParentMenu + 0x24) == 2 || *(_DWORD *)(ParentMenu + 0x24) == 4 )
-      sub_584390(ParentMenu);
-    a2 = flt_A40098;
-    byte_B3B43D = 1;
-    Tile_SetFloat(v8[0xA], (_DWORD *)0xFA7, a2);
-    if ( a4 >= 0 )
+    v28 = a4; /*0x5c1bc4*/
+    v27 = a5; /*0x5c1bc5*/
+    v26 = a7; /*0x5c1bc6*/
+    v25 = a6; /*0x5c1bc7*/
+    ParentMenu = (Tile **)Tile_GetParentMenu(OpenMenuTile); /*0x5c1bca*/
+    v14 = ParentMenu; /*0x5c1bcf*/
+    if ( ParentMenu && ParentMenu[9] == (Tile *)2 || ParentMenu[9] == (Tile *)4 ) /*0x5c1bdf*/
+      Menu::StartFadeIn(ParentMenu); /*0x5c1be3*/
+    a2 = flt_A40098; /*0x5c1bef*/
+    unk_B3B43D = 1; /*0x5c1bf2*/
+    Tile_SetFloat(v14[0xA], 0xFA7u, a2); /*0x5c1c01*/
+    if ( a12 >= 0 ) /*0x5c1c0f*/
     {
-      a2a = (float)(a4 + 1);
-      Tile_SetFloat(v8[0xB], (_DWORD *)0xFAE, a2a);
+      v29 = a12 + 1; /*0x5c1c14*/
+      a2a = (float)(a12 + 1); /*0x5c1c20*/
+      Tile_SetFloat(v14[0xB], 0xFAEu, a2a); /*0x5c1c28*/
     }
-    Tile_SetFloat(v8[0xB], (_DWORD *)0xFA1, fConstant_2);
-    Tile_SetFloat(v8[0xB], (_DWORD *)0xFB0, 1.0);
-    v9 = fConstant_2;
-    Tile_SetFloat(v8[0xB], (_DWORD *)0xFB1, fConstant_2);
-    sub_58FBA0((int)v8[0xB], st5_0, st6_0, v9, 0);
-    v10 = 0;
-    v11 = dword_B3B444;
-    v12 = v8 + 0xC;
-    do
+    Tile_SetFloat(v14[0xB], 0xFA1u, fConstant_2); /*0x5c1c3f*/
+    Tile_SetFloat(v14[0xB], 0xFB0u, 1.0); /*0x5c1c52*/
+    v15 = fConstant_2; /*0x5c1c57*/
+    Tile_SetFloat(v14[0xB], 0xFB1u, fConstant_2); /*0x5c1c69*/
+    sub_58FBA0((int)v14[0xB], st5_0, st6_0, v15, 0); /*0x5c1c73*/
+    v16 = 0; /*0x5c1c78*/
+    v17 = unk_B3B444; /*0x5c1c7a*/
+    v18 = v14 + 0xC; /*0x5c1c7f*/
+    do /*0x5c1dab*/
     {
-      if ( v11[2] )
+      if ( v17[2] ) /*0x5c1c82*/
       {
-        v13 = *(TESForm **)(*v11 + 8);
-        if ( OblivionDynamicCast(
-               v13,
-               0,
-               (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-               &SpellItem `RTTI Type Descriptor',
-               0) )
+        v19 = *(TESForm **)(*v17 + 8); /*0x5c1c8e*/
+        v20 = OblivionDynamicCast( /*0x5c1ca0*/
+                v19,
+                0,
+                (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                &SpellItem `RTTI Type Descriptor',
+                0);
+        if ( v20 ) /*0x5c1caa*/
         {
-          v14 = *(const char **)(*(_DWORD *)(EffectItemList_GetStrongestItem(3, 0) + 0x1C) + 0x48);
-          if ( !v14 )
-            v14 = EmptyString;
-          _sprintf(a3, "%s\\%s\\%s", "Menus", "Icons", v14);
+          v21 = *(const char **)(*(_DWORD *)(EffectItemList_GetStrongestItem(v20 + 9, 3, 0, v25, v26, v27, v28, v29) /*0x5c1cbe*/
+                                           + 0x1C)
+                               + 0x48);
+          if ( !v21 ) /*0x5c1cc3*/
+            v21 = EmptyString; /*0x5c1cc5*/
+          _sprintf(a3, "%s\\%s\\%s", "Menus", "Icons", v21); /*0x5c1cdf*/
         }
         else
         {
-          v15 = sub_5C0C50(v13);
-          _sprintf(a3, "%s\\%s\\%s", "Menus", "Icons", v15);
+          v22 = sub_5C0C50(v19); /*0x5c1cea*/
+          _sprintf(a3, "%s\\%s\\%s", "Menus", "Icons", v22); /*0x5c1d04*/
         }
-        Tile_SetString(*v12, (_DWORD *)0xFE6, a3);
-        if ( v10 == a4 )
-          sub_5C16E0(v10, v13, 0, 1);
-        Tile_SetFloat(*v12, (_DWORD *)0xFA7, flt_A40098);
-        Tile_SetFloat(*v12, (_DWORD *)0xFA1, fConstant_2);
+        Tile_SetString(*v18, (_DWORD *)0xFE6, a3); /*0x5c1d18*/
+        if ( v16 == a12 ) /*0x5c1d24*/
+          sub_5C16E0(st6_0, v19, 0, 1); /*0x5c1d2b*/
+        Tile_SetFloat(*v18, 0xFA7u, flt_A40098); /*0x5c1d44*/
+        Tile_SetFloat(*v18, 0xFA1u, fConstant_2); /*0x5c1d5a*/
       }
       else
       {
-        Tile_SetFloat(*v12, (_DWORD *)0xFA7, 0.0);
-        Tile_SetFloat(*v12, (_DWORD *)0xFA1, 1.0);
-        if ( v10 == sub_5C1100() )
-          sub_5C16E0(v10, 0, 0, 1);
+        Tile_SetFloat(*v18, 0xFA7u, 0.0); /*0x5c1d6e*/
+        Tile_SetFloat(*v18, 0xFA1u, 1.0); /*0x5c1d80*/
+        if ( v16 == sub_5C1100() ) /*0x5c1d8c*/
+          sub_5C16E0(st6_0, 0, 0, 1); /*0x5c1d94*/
       }
-      v11 += 4;
-      ++v10;
-      ++v12;
+      v17 += 4; /*0x5c1d9c*/
+      ++v16; /*0x5c1d9f*/
+      ++v18; /*0x5c1da2*/
     }
-    while ( (int)v11 < (int)&dword_B3B4C4 );
+    while ( (int)v17 < (int)&unk_B3B4C4 ); /*0x5c1dab*/
   }
 }

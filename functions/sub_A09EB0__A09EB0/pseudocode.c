@@ -1,4 +1,4 @@
-BSStringT *sub_A09EB0()
+NiRTTI *sub_A09EB0()
 {
-  return sub_70E220((BSStringT *)dword_B3FCFC, "NiDirectionalLight", (int)dword_B3FD14);
+  return NiRTTI_Constructor(&stru_B3FCFC, "NiDirectionalLight", &stru_B3FD14); /*0xa09ec4*/
 }

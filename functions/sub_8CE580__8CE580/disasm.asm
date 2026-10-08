@@ -28,7 +28,6 @@
 0x8CE5C6: cmp     esi, 0FFFFFFFFh
 0x8CE5C9: jz      short loc_8CE626
 0x8CE5CB: jmp     short loc_8CE5D0
-0x8CE5CD: align 10h
 0x8CE5D0: test    bl, bl
 0x8CE5D2: jz      short loc_8CE626
 0x8CE5D4: test    edi, edi

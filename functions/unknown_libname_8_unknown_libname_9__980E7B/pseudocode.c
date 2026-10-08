@@ -3,8 +3,8 @@ unsigned int __userpurge unknown_libname_8_::unknown_libname_9@<eax>(int a1@<ebp
 {
   unsigned int result; // eax
 
-  result = *(_DWORD *)(*(_DWORD *)(a1 + 0xC) + 4) & 0xFFFFFFFD;
-  *(_DWORD *)(*(_DWORD *)(a1 + 0xC) + 4) = result;
-  **(_DWORD **)(a1 - 4) = NtCurrentTeb()->Tib.ExceptionList;
-  return result;
+  result = *(_DWORD *)(*(_DWORD *)(a1 + 0xC) + 4) & 0xFFFFFFFD; /*0x980e81*/
+  *(_DWORD *)(*(_DWORD *)(a1 + 0xC) + 4) = result; /*0x980e87*/
+  **(_DWORD **)(a1 - 4) = NtCurrentTeb()->Tib.ExceptionList; /*0x980e94*/
+  return result; /*0x980ea1*/
 }

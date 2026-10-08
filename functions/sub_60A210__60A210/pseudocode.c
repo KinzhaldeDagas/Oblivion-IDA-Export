@@ -1,7 +1,8 @@
-_DWORD *__userpurge sub_60A210@<eax>(_DWORD *a1@<ecx>, double a2@<st2>, double a3@<st1>, double a4@<st0>, char a5)
+// ArrowProjectile scalar deleting destructor. Runs the complete destructor and frees this when deleteFlags bit 0 is set.
+ArrowProjectile *__thiscall ArrowProjectile_ScalarDeletingDestructor(ArrowProjectile *this, unsigned int deleteFlags)
 {
-  sub_608B60(a1, a2, a3, a4);
-  if ( (a5 & 1) != 0 )
-    FormHeapFree((unsigned int)a1);
-  return a1;
+  ArrowProjectile_Destroy(this); /*0x60a213*/
+  if ( (deleteFlags & 1) != 0 ) /*0x60a21d*/
+    FormHeapFree((unsigned int)this); /*0x60a220*/
+  return this; /*0x60a22a*/
 }

@@ -4,7 +4,7 @@
 0x468D65: lea     eax, [esi+4]
 0x468D68: push    eax; Src
 0x468D69: push    54444D42h; int
-0x468D6E: call    TESForm_PutFormRecordChunkData
+0x468D6E: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x468D73: add     esp, 0Ch
 0x468D76: push    54444F4Dh
 0x468D7B: push    42444F4Dh

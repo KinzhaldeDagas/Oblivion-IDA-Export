@@ -1,18 +1,31 @@
 {
-  "callees_count": 13,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6CF780",
+      "0x6CF85F"
+    ]
+  ],
+  "chunks_sha256": "c7c55c67b420cda5daf55450a53eb0b4f15581b73b0cd2698cc6d885854bffa7",
+  "comment_regular": "NiBlendAccumTransformInterpolator virtual transform update (+0x4C). One item uses the accumulation fast path. With multiple items, normalizes blend state, updates each nonzero-weight 0x18-byte item using either caller time or its per-item time +0x14, then evaluates the accumulated transform. Caches requested time at +0x08.",
+  "comment_repeatable": "NiBlendAccumTransformInterpolator virtual transform update (+0x4C). One item uses the accumulation fast path. With multiple items, normalizes blend state, updates each nonzero-weight 0x18-byte item using either caller time or its per-item time +0x14, then evaluates the accumulated transform. Caches requested time at +0x08.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6CF780",
+  "display_name": "NiBlendAccumTransformInterpolator_Update",
   "end_ea": "0x6CF85F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6CF780",
+  "name": "NiBlendAccumTransformInterpolator_Update",
   "segment": ".text",
   "sha256": "c7c55c67b420cda5daf55450a53eb0b4f15581b73b0cd2698cc6d885854bffa7",
   "size": 223,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6CF780",
+  "total_chunk_size": 223,
   "type": "char __thiscall(float *this, float, int, float *)",
   "xrefs_from_count": 94,
   "xrefs_to_count": 1

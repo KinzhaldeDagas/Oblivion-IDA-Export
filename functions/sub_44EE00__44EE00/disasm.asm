@@ -18,7 +18,7 @@
 0x44EE34: or      dword ptr ds:0B33AD4h, 1
 0x44EE3B: xor     ebx, ebx
 0x44EE3D: push    25h ; '%'
-0x44EE3F: mov     ecx, offset dword_B33AC4
+0x44EE3F: mov     ecx, offset unk_B33AC4
 0x44EE44: mov     [esp+38h+var_4], ebx
 0x44EE48: call    ??0?$NiTPointerMap@PAVTESForm@@_N@@QAE@XZ; NiTPointerMap<TESForm *,bool>::NiTPointerMap<TESForm *,bool>(void)
 0x44EE4D: push    offset sub_A18360; void (__cdecl *)()
@@ -40,8 +40,8 @@
 0x44EE90: mov     ecx, [esp+34h+arg_8]
 0x44EE94: cmp     ecx, ebx
 0x44EE96: jz      short loc_44EE9D
-0x44EE98: call    BSSimpleList_Clear
-0x44EE9D: mov     edi, [esp+34h+arg_0]
+0x44EE98: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
+0x44EE9D: mov     edi, dword ptr [esp+34h+valueOut]
 0x44EEA1: push    ebx; int
 0x44EEA2: push    offset ??_R0?AVTESWorldSpace@@@8; struct TypeDescriptor *
 0x44EEA7: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
@@ -60,7 +60,7 @@
 0x44EECC: cmp     esi, ebx
 0x44EECE: jz      short loc_44EEDB
 0x44EED0: mov     ecx, esi; this
-0x44EED2: call    TESObjectCELL_IsInterior
+0x44EED2: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x44EED7: test    al, al
 0x44EED9: jnz     short loc_44EEF2
 0x44EEDB: cmp     ebp, ebx
@@ -72,7 +72,7 @@
 0x44EEF2: add     dword ptr ds:0B33AC0h, 1
 0x44EEF9: push    1; a3
 0x44EEFB: push    edi; a2
-0x44EEFC: mov     ecx, offset dword_B33AC4; this
+0x44EEFC: mov     ecx, offset unk_B33AC4; this
 0x44EF01: call    NiTMap_SetAt
 0x44EF06: cmp     esi, ebx
 0x44EF08: mov     [esp+34h+var_14], ebx
@@ -101,10 +101,10 @@
 0x44EF49: test    al, 1
 0x44EF4B: jnz     short loc_44EF6E
 0x44EF4D: mov     ecx, ebp; this
-0x44EF4F: call    GetTeleportExtraData
+0x44EF4F: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x44EF54: mov     edi, eax
-0x44EF56: mov     ecx, edi
-0x44EF58: call    sub_42B470
+0x44EF56: mov     ecx, edi; linkedDoor
+0x44EF58: call    TeleportData_GetLinkedDoorWorldspace; Verified: given the linked-door reference slot from TeleportData, resolves its loaded parent cell or child cell and returns that cell's worldspace; returns null when the linked reference or its cell is unavailable.
 0x44EF5D: mov     esi, eax
 0x44EF5F: test    esi, esi
 0x44EF61: jz      short loc_44EF6E
@@ -118,7 +118,7 @@
 0x44EF76: jmp     short loc_44EFB4
 0x44EF78: mov     ecx, edi
 0x44EF7A: mov     [esp+34h+var_20], esi
-0x44EF7E: call    sub_6899C0
+0x44EF7E: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x44EF83: mov     edx, [eax]
 0x44EF85: mov     ecx, [esp+34h+arg_4]
 0x44EF89: mov     [ecx], edx
@@ -131,7 +131,6 @@
 0x44EF9D: jz      loc_44F07E
 0x44EFA3: push    ebp
 0x44EFA4: jmp     loc_44F079
-0x44EFA9: align 10h
 0x44EFB0: mov     eax, [esp+34h+var_1C]
 0x44EFB4: cmp     [esp+34h+var_20], 0
 0x44EFB9: jnz     loc_44F07E
@@ -149,19 +148,19 @@
 0x44EFE4: test    al, 1
 0x44EFE6: jnz     short loc_44F065
 0x44EFE8: mov     ecx, ebx; this
-0x44EFEA: call    GetTeleportExtraData
+0x44EFEA: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x44EFEF: mov     esi, eax
 0x44EFF1: mov     ecx, esi
-0x44EFF3: call    sub_42B460
-0x44EFF8: mov     ecx, esi
+0x44EFF3: call    sub_42B460; ExtraTeleport_GetTargetCell-style helper: returns parent cell of ExtraTeleport+0 target ref if present.
+0x44EFF8: mov     ecx, esi; linkedDoor
 0x44EFFA: mov     edi, eax
-0x44EFFC: call    sub_42B470
+0x44EFFC: call    TeleportData_GetLinkedDoorWorldspace; Verified: given the linked-door reference slot from TeleportData, resolves its loaded parent cell or child cell and returns that cell's worldspace; returns null when the linked reference or its cell is unavailable.
 0x44F001: xor     esi, esi
 0x44F003: test    edi, edi
 0x44F005: mov     ebp, eax
 0x44F007: jz      short loc_44F018
 0x44F009: mov     ecx, edi; this
-0x44F00B: call    TESObjectCELL_IsInterior
+0x44F00B: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x44F010: test    al, al
 0x44F012: jz      short loc_44F018
 0x44F014: mov     esi, edi
@@ -173,15 +172,15 @@
 0x44F023: test    al, al
 0x44F025: jz      short loc_44F029
 0x44F027: mov     esi, ebp
-0x44F029: lea     eax, [esp+34h+arg_0]
-0x44F02D: push    eax
-0x44F02E: push    esi
-0x44F02F: mov     ecx, offset dword_B33AC4
-0x44F034: mov     byte ptr [esp+3Ch+arg_0], 0
-0x44F039: call    sub_4D6760
+0x44F029: lea     eax, [esp+34h+valueOut]
+0x44F02D: push    eax; valueOut
+0x44F02E: push    esi; key
+0x44F02F: mov     ecx, offset unk_B33AC4; this
+0x44F034: mov     [esp+3Ch+valueOut], 0
+0x44F039: call    NiTMap_TryGetAtByteValue; Verified generic NiTMap lookup helper: hashes the UInt32 key through the map vtable, walks the bucket chain using the map's key comparator, returns false when absent, and on a match writes the low byte of the entry data field to valueOut and returns true. Callers use it for byte/boolean-valued maps, including PlayerCharacter_GetLastSpaceForDoor and cell/worldspace visited or filter maps; this helper does not establish the full map value width.
 0x44F03E: test    al, al
 0x44F040: jz      short loc_44F049
-0x44F042: cmp     byte ptr [esp+34h+arg_0], 0
+0x44F042: cmp     [esp+34h+valueOut], 0
 0x44F047: jnz     short loc_44F065
 0x44F049: mov     edi, [esp+34h+arg_8]
 0x44F04D: mov     ecx, [esp+34h+arg_4]
@@ -203,10 +202,10 @@
 0x44F079: call    BSSimpleList_PushFront
 0x44F07E: sub     dword ptr ds:0B33AC0h, 1
 0x44F085: jnz     short loc_44F091
-0x44F087: mov     ecx, offset dword_B33AC4
+0x44F087: mov     ecx, offset unk_B33AC4
 0x44F08C: call    NiTMap_Clear
 0x44F091: lea     ecx, [esp+34h+var_14]
-0x44F095: call    BSSimpleList_Clear
+0x44F095: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x44F09A: mov     eax, [esp+34h+var_20]
 0x44F09E: jmp     short loc_44F0A2
 0x44F0A0: xor     eax, eax
@@ -219,3 +218,14 @@
 0x44F0B1: pop     ebx
 0x44F0B2: add     esp, 20h
 0x44F0B5: retn    0Ch
+0x9ADD80: mov     eax, dword ptr unk_B33AD4
+0x9ADD85: and     eax, 0FFFFFFFEh
+0x9ADD88: mov     dword ptr unk_B33AD4, eax
+0x9ADD8D: retn
+0x9ADD8E: mov     edx, [esp+arg_4]
+0x9ADD92: lea     eax, [edx-24h]
+0x9ADD95: mov     ecx, [edx-28h]
+0x9ADD98: xor     ecx, eax
+0x9ADD9A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9ADD9F: mov     eax, offset stru_ADA6B4
+0x9ADDA4: jmp     ___CxxFrameHandler3

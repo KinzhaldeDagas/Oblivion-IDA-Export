@@ -1,4 +1,4 @@
-0x579970: push    ebp
+0x579970: push    ebp; [Controller decode 2026-07-09] Non-player QueryControlState consumer: Attack control 4 released dispatches MessageMenu cursor click/release.
 0x579971: push    1; arg1
 0x579973: xor     ebp, ebp
 0x579975: push    ebp; canCreate
@@ -25,7 +25,7 @@
 0x5799B4: mov     ecx, [eax+20h]; this
 0x5799B7: push    2; a3
 0x5799B9: push    4; a2
-0x5799BB: call    InputGlobals__QueryControlState
+0x5799BB: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x5799C0: push    ebp
 0x5799C1: push    1; arg1
 0x5799C3: push    ebp; canCreate
@@ -66,7 +66,7 @@
 0x579A2E: push    0FA8h
 0x579A33: mov     ecx, esi
 0x579A35: call    Tile_GetFloat
-0x579A3A: call    Double_To_SInt32
+0x579A3A: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x579A3F: mov     edx, [ebx+0Ch]
 0x579A42: push    eax
 0x579A43: mov     ecx, edi
@@ -97,7 +97,7 @@
 0x579A85: push    ecx
 0x579A86: push    0FA8h
 0x579A8B: call    Tile_GetFloat
-0x579A90: call    Double_To_SInt32
+0x579A90: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x579A95: mov     ecx, ds:0B3A6DCh
 0x579A9B: push    eax
 0x579A9C: mov     eax, [ebx+14h]
@@ -109,7 +109,7 @@
 0x579AA8: push    0FA8h
 0x579AAD: mov     ecx, esi
 0x579AAF: call    Tile_GetFloat
-0x579AB4: call    Double_To_SInt32
+0x579AB4: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x579AB9: mov     edx, [ebx+10h]
 0x579ABC: push    eax
 0x579ABD: mov     ecx, edi

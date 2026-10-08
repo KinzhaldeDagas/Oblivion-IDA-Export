@@ -4,7 +4,7 @@
 0x752D83: mov     edi, [esp+0Ch+arg0]
 0x752D87: push    edi; arg0
 0x752D88: mov     esi, ecx
-0x752D8A: call    sub_700750
+0x752D8A: call    sub_700750; Pass227: NiScreenTexture vtable +0x38 map insertion helper; inserts object into map context, not a draw call.
 0x752D8F: mov     ecx, [edi]
 0x752D91: lea     eax, [esp+0Ch+arg0]
 0x752D95: push    eax

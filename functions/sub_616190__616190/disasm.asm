@@ -1,4 +1,4 @@
-0x616190: sub     esp, 0Ch
+0x616190: sub     esp, 0Ch; Allocates 0x14-byte TargetInfo: Actor* +0, priority +4, flags byte +8, incoming health damage +0xC, outgoing fatigue-like damage +0x10.
 0x616193: push    esi
 0x616194: push    edi
 0x616195: mov     edi, [esp+14h+arg_0]
@@ -56,15 +56,15 @@
 0x616241: mov     [esi+4Bh], al
 0x616244: mov     [esi+4Ch], al
 0x616247: push    14h; Size
-0x616249: call    FormHeapAlloc
+0x616249: call    FormHeapAlloc; Allocates a fresh 0x14-byte TargetInfo from FormHeap; address reuse makes pointer-only sidecar identity unsafe.
 0x61624E: fld     [esp+1Ch+arg_C]
-0x616252: mov     ecx, dword ptr [esp+1Ch+arg_4]
+0x616252: mov     ecx, [esp+1Ch+arg_4]
 0x616256: fstp    dword ptr [eax+0Ch]
 0x616259: mov     dl, byte ptr [esp+1Ch+arg_8]
 0x61625D: fld     [esp+1Ch+arg_10]
 0x616261: add     esp, 4
 0x616264: fstp    dword ptr [eax+10h]
-0x616267: push    offset sub_614190
+0x616267: push    offset CombatTargetInfo_ComparePriorityDescending
 0x61626C: mov     [eax+4], ecx
 0x61626F: mov     [eax], edi
 0x616271: mov     [eax+8], dl
@@ -85,7 +85,7 @@
 0x61629F: mov     edx, [ecx]
 0x6162A1: mov     ecx, [esi+28h]
 0x6162A4: push    edx
-0x6162A5: call    TeSPackage_TargetData_SetTargetREFR
+0x6162A5: call    TeSPackage_TargetData_SetTargetREFR; 3DTheft decode: TargetData_SetTargetREFR only writes the reference field when targetType is 0 (reference target). It does not set count.
 0x6162AA: mov     ecx, [esi+3Ch]
 0x6162AD: mov     eax, [ecx]
 0x6162AF: mov     edx, [eax+330h]
@@ -94,7 +94,7 @@
 0x6162B9: jz      short loc_6162C4
 0x6162BB: push    1
 0x6162BD: mov     ecx, esi
-0x6162BF: call    sub_624030
+0x6162BF: call    CombatController_RefreshTacticalState; Refreshes detection/allies tactical state; allied controllers in active modes 2 (ranged weapon) and 4 (ranged spell) are counted as ranged roles.
 0x6162C4: pop     ebp
 0x6162C5: pop     edi
 0x6162C6: pop     esi

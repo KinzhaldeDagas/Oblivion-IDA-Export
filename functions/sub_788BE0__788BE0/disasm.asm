@@ -1,4 +1,4 @@
-0x788BE0: sub     esp, 18h
+0x788BE0: sub     esp, 18h; Transforms compact SpeedTree collision records: transforms position by 4x4 matrix and scales radius/height/box dimensions by axis scale. No rotation storage is touched.
 0x788BE3: push    ebx
 0x788BE4: push    ebp
 0x788BE5: push    esi
@@ -8,7 +8,7 @@
 0x788BEC: cmp     esi, [edi+8]
 0x788BEF: jbe     short loc_788BF6
 0x788BF1: call    __invalid_parameter_noinfo
-0x788BF6: mov     ebx, [esp+28h+arg_0]
+0x788BF6: mov     ebx, [esp+28h+transform4x4]
 0x788BFA: lea     ebx, [ebx+0]
 0x788C00: mov     ebp, [edi+8]
 0x788C03: cmp     [edi+4], ebp

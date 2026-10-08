@@ -1,5 +1,5 @@
-int sub_9F9980()
+int InitSetting_sSkillNameRestoration()
 {
-  GameSetting_ConstrAndReg((int *)&unk_B3A0FC, (int)"sSkillNameRestoration", (int)"Restoration");
-  return atexit(sub_A23A30);
+  GameSetting_ConstrAndReg(&g_sSkillNameRestoration, "sSkillNameRestoration", "Restoration"); /*0x9f998f*/
+  return atexit(sub_A23A30); /*0x9f999f*/
 }

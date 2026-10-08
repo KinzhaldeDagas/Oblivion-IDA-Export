@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x526CB0",
+      "0x526CB8"
+    ]
+  ],
+  "chunks_sha256": "bf4c596e702e11777f40d652d1d16e7a95c371b3bdceb05d80142a7ee864ed8a",
+  "comment_regular": "Verified: subtracts 0x24 from ECX; tail-forwards component serialization dispatch to full TESNPC object. Companion size/save/load bodies prove skill-array and combat-style payloads.\n\nself",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_526CB0",
+  "display_name": "TESNPC_LoadModified_ActorBaseDataThunk",
   "end_ea": "0x526CB8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_526CB0",
+  "name": "TESNPC_LoadModified_ActorBaseDataThunk",
   "segment": ".text",
   "sha256": "bf4c596e702e11777f40d652d1d16e7a95c371b3bdceb05d80142a7ee864ed8a",
   "size": 8,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x526CB0",
-  "type": "int __stdcall(void *, size_t)",
+  "total_chunk_size": 8,
+  "type": "void __thiscall(TESActorBaseData *__shifted(TESNPC,0x24) self, ActorBaseSaveChangeMask changeMask, unsigned int currentFlags)",
   "xrefs_from_count": 2,
   "xrefs_to_count": 1
 }

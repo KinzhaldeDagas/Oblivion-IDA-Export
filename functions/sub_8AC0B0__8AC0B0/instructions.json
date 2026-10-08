@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8AC0B0",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+arg_0]; TES4 authoritative: writes proxy velocity vector back into bhk collision object+0x10. Climbing/Slowfall velocity edits must happen before these calls or must write both proxy+0x2E0 and object+0x10 after the fact.",
     "mnemonic": "mov",
     "size": 4
   },

@@ -82,3 +82,12 @@
 0x89FB62: pop     ebx
 0x89FB63: add     esp, 3Ch
 0x89FB66: retn    4
+0x9D6880: lea     ecx, [ebp-3Ch]
+0x9D6883: jmp     sub_8A5090
+0x9D6888: mov     edx, [esp+arg_4]
+0x9D688C: lea     eax, [edx-3Ch]
+0x9D688F: mov     ecx, [edx-40h]
+0x9D6892: xor     ecx, eax
+0x9D6894: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D6899: mov     eax, offset stru_AFE644
+0x9D689E: jmp     ___CxxFrameHandler3

@@ -402,12 +402,6 @@
     "size": 2
   },
   {
-    "ea": "0x43D0ED",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x43D0F0",
     "line": "mov     cl, [eax+1]",
     "mnemonic": "mov",
@@ -673,7 +667,7 @@
   },
   {
     "ea": "0x43D176",
-    "line": "call    sub_431970",
+    "line": "call    ModelLoader_BuildFileListWildcard; Decoded animation/model-loader helper. Builds a BSSimpleList of file paths for an input path that may contain wildcards; merges loose-file FindFirstFile results when archive invalidation is enabled, then asks archive/file systems to append matches. Used by KF/model discovery, not a CustomAnim override registry.",
     "mnemonic": "call",
     "size": 5
   },
@@ -745,7 +739,7 @@
   },
   {
     "ea": "0x43D198",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -823,7 +817,7 @@
   },
   {
     "ea": "0x43D1C9",
-    "line": "call    sub_431970",
+    "line": "call    ModelLoader_BuildFileListWildcard; Decoded animation/model-loader helper. Builds a BSSimpleList of file paths for an input path that may contain wildcards; merges loose-file FindFirstFile results when archive invalidation is enabled, then asks archive/file systems to append matches. Used by KF/model discovery, not a CustomAnim override registry.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1111,7 +1105,7 @@
   },
   {
     "ea": "0x43D258",
-    "line": "call    sub_435830",
+    "line": "call    BuildKFListForModelDirectory; Builds a KF path list for a model directory. Feeds ModelLoader KF discovery used by actor animation setup and generated attack/idle lists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1177,7 +1171,7 @@
   },
   {
     "ea": "0x43D276",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1255,7 +1249,7 @@
   },
   {
     "ea": "0x43D29F",
-    "line": "call    TESAnimation_HasAnimations",
+    "line": "call    TESAnimation_HasAnimations; TESAnimation has any entries: returns embedded list first data pointer nonzero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1339,7 +1333,7 @@
   },
   {
     "ea": "0x43D2C7",
-    "line": "call    sub_6899C0",
+    "line": "call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1855,7 +1849,7 @@
   },
   {
     "ea": "0x43D3C2",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

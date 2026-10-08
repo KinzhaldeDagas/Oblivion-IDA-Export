@@ -1,64 +1,108 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_FILE_ALL_INFORMATION",
+  "definition": "struct _FILE_ALL_INFORMATION\n{\nFILE_BASIC_INFORMATION_0 BasicInformation;\nFILE_STANDARD_INFORMATION_0 StandardInformation;\nFILE_INTERNAL_INFORMATION InternalInformation;\nFILE_EA_INFORMATION EaInformation;\nFILE_ACCESS_INFORMATION AccessInformation;\nFILE_POSITION_INFORMATION PositionInformation;\nFILE_MODE_INFORMATION ModeInformation;\nFILE_ALIGNMENT_INFORMATION AlignmentInformation;\nFILE_NAME_INFORMATION NameInformation;\n}\n",
   "id": 18374686479672045419,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "BasicInformation",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 40
+      "size": 40,
+      "type": "FILE_BASIC_INFORMATION_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "StandardInformation",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 24
+      "size": 24,
+      "type": "FILE_STANDARD_INFORMATION_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "InternalInformation",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 8
+      "size": 8,
+      "type": "FILE_INTERNAL_INFORMATION"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "EaInformation",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 4
+      "size": 4,
+      "type": "FILE_EA_INFORMATION"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AccessInformation",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 4
+      "offset_hex": "0x4C",
+      "size": 4,
+      "type": "FILE_ACCESS_INFORMATION"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "PositionInformation",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 8
+      "size": 8,
+      "type": "FILE_POSITION_INFORMATION"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ModeInformation",
       "offset": 88,
       "offset_hex": "0x58",
-      "size": 4
+      "size": 4,
+      "type": "FILE_MODE_INFORMATION"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AlignmentInformation",
       "offset": 92,
-      "offset_hex": "0x5c",
-      "size": 4
+      "offset_hex": "0x5C",
+      "size": 4,
+      "type": "FILE_ALIGNMENT_INFORMATION"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "NameInformation",
       "offset": 96,
       "offset_hex": "0x60",
-      "size": 8
+      "size": 8,
+      "type": "FILE_NAME_INFORMATION"
     }
   ],
   "name": "_FILE_ALL_INFORMATION",
+  "ordinal": 8101,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 104
 }

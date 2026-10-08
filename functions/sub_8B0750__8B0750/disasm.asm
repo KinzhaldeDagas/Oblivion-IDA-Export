@@ -127,3 +127,25 @@
 0x8B08D8: mov     esp, ebp
 0x8B08DA: pop     ebp
 0x8B08DB: retn    4
+0x9D6DD0: mov     eax, [ebp+var_20]
+0x9D6DD3: push    eax
+0x9D6DD4: call    sub_8C9290
+0x9D6DD9: pop     ecx
+0x9D6DDA: retn
+0x9D6DDB: mov     eax, [ebp+var_20]
+0x9D6DDE: push    eax
+0x9D6DDF: call    sub_8C9290
+0x9D6DE4: pop     ecx
+0x9D6DE5: retn
+0x9D6DE6: mov     eax, [ebp+var_20]
+0x9D6DE9: push    eax
+0x9D6DEA: call    sub_8C9290
+0x9D6DEF: pop     ecx
+0x9D6DF0: retn
+0x9D6DF1: mov     edx, [esp-4+arg_4]
+0x9D6DF5: lea     eax, [edx-24h]
+0x9D6DF8: mov     ecx, [edx-28h]
+0x9D6DFB: xor     ecx, eax
+0x9D6DFD: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D6E02: mov     eax, offset stru_AFEAD8
+0x9D6E07: jmp     ___CxxFrameHandler3

@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x658940",
+      "0x65896B"
+    ]
+  ],
+  "chunks_sha256": "3a37945c57c37b874203490f88502f0354ac4f7e9d51508cc4c56efebb40865d",
+  "comment_regular": "Verified local behavior: after 0x6478E0, mask0x100000 clears maxAVModifiers +0x94. Candidate: process preload/reset phase; enclosing virtual lifecycle not established in this pass, so function name retained.\nVerified 2026-10-04: MiddleLowProcess revert role from Oblivion process vtable slot +0x404, parent call chain and matching serialization/reset behavior. ECX receiver and RET8 establish stack arity; owner is MobileObject (dispatch 65A835 for Revert). \nVerified role upgrade from Candidate: MiddleLowProcess_Revert at vslot404 called by parent-chain dispatch; clears maxAVModifiers +0x94 under mask0x100000 after LowProcess_Revert. Size658BC0/save658CB0/load658DF0 consume the same collection mask. Previous preload/reset uncertainty superseded for role, not all global reset policy.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_658940",
+  "display_name": "MiddleLowProcess_Revert",
   "end_ea": "0x65896B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_658940",
+  "name": "MiddleLowProcess_Revert",
   "segment": ".text",
   "sha256": "3a37945c57c37b874203490f88502f0354ac4f7e9d51508cc4c56efebb40865d",
   "size": 43,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x658940",
-  "type": "TESForm::ModReferenceList *__thiscall(float *this, int, int)",
+  "total_chunk_size": 43,
+  "type": "void __thiscall(MiddleLowProcess *self, ProcessSaveChangeMask changeMask, MobileObject *owner)",
   "xrefs_from_count": 17,
   "xrefs_to_count": 2
 }

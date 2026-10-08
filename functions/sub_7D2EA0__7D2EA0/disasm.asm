@@ -1,4 +1,4 @@
-0x7D2EA0: sub     esp, 1Ch
+0x7D2EA0: sub     esp, 1Ch; Receiver eligibility: test geometry bound against active projector planes when +0x14C is present, otherwise source-to-bound surface range.
 0x7D2EA3: push    ebx
 0x7D2EA4: push    esi
 0x7D2EA5: mov     esi, [esp+24h+arg_4]
@@ -14,7 +14,7 @@
 0x7D2EBB: mov     edx, [eax+4]
 0x7D2EBE: mov     ecx, esi
 0x7D2EC0: call    edx
-0x7D2EC2: cmp     eax, offset dword_B3FCFC
+0x7D2EC2: cmp     eax, offset stru_B3FCFC
 0x7D2EC7: jnz     short loc_7D2ED3
 0x7D2EC9: pop     esi
 0x7D2ECA: mov     al, 1
@@ -25,28 +25,27 @@
 0x7D2EDA: mov     eax, [esp+24h+arg_0]
 0x7D2EDE: mov     ecx, [eax+20h]
 0x7D2EE1: mov     edx, [eax+24h]
-0x7D2EE4: mov     [esp+24h+var_10.Center.x], ecx
+0x7D2EE4: mov     [esp+24h+self.Center.x], ecx
 0x7D2EE8: mov     ecx, [eax+28h]
-0x7D2EEB: mov     [esp+24h+var_10.Center.y], edx
+0x7D2EEB: mov     [esp+24h+self.Center.y], edx
 0x7D2EEF: mov     edx, [eax+2Ch]
 0x7D2EF2: mov     byte ptr [esp+24h+arg_4], 1
-0x7D2EF7: mov     [esp+24h+var_10.Center.z], ecx
-0x7D2EFB: mov     [esp+24h+var_10.Radius], edx
+0x7D2EF7: mov     [esp+24h+self.Center.z], ecx
+0x7D2EFB: mov     [esp+24h+self.Radius], edx
 0x7D2EFF: jz      short loc_7D2F5D
 0x7D2F01: push    ebp
 0x7D2F02: push    edi
 0x7D2F03: xor     edi, edi
 0x7D2F05: lea     ebp, [ebx+150h]
 0x7D2F0B: jmp     short loc_7D2F10
-0x7D2F0D: align 10h
 0x7D2F10: mov     esi, 1
 0x7D2F15: mov     ecx, edi
 0x7D2F17: shl     esi, cl
 0x7D2F19: test    [ebx+1B0h], esi
 0x7D2F1F: jz      short loc_7D2F44
-0x7D2F21: push    ebp; a2
-0x7D2F22: lea     ecx, [esp+30h+var_10]; this
-0x7D2F26: call    sub_47DA70
+0x7D2F21: push    ebp; plane
+0x7D2F22: lea     ecx, [esp+30h+self]; self
+0x7D2F26: call    NiBound_ClassifyAgainstPlane
 0x7D2F2B: cmp     eax, 2
 0x7D2F2E: jnz     short loc_7D2F37
 0x7D2F30: mov     byte ptr [esp+2Ch+arg_4], 0
@@ -67,13 +66,13 @@
 0x7D2F57: add     esp, 1Ch
 0x7D2F5A: retn    8
 0x7D2F5D: fld     dword ptr [esi+88h]
-0x7D2F63: fsub    [esp+24h+var_10.Center.x]
+0x7D2F63: fsub    [esp+24h+self.Center.x]
 0x7D2F67: fstp    [esp+24h+var_1C]
 0x7D2F6B: fld     dword ptr [esi+8Ch]
-0x7D2F71: fsub    [esp+24h+var_10.Center.y]
+0x7D2F71: fsub    [esp+24h+self.Center.y]
 0x7D2F75: fstp    [esp+24h+var_18]
 0x7D2F79: fld     dword ptr [esi+90h]
-0x7D2F7F: fsub    [esp+24h+var_10.Center.z]
+0x7D2F7F: fsub    [esp+24h+self.Center.z]
 0x7D2F83: fstp    [esp+24h+var_14]
 0x7D2F87: fld     [esp+24h+var_18]
 0x7D2F8B: fld     [esp+24h+var_1C]
@@ -92,7 +91,7 @@
 0x7D2FB0: fstp    [esp+24h+arg_0]
 0x7D2FB4: fld     [esp+24h+arg_0]
 0x7D2FB8: mov     byte ptr [esp+24h+arg_4], 1
-0x7D2FBD: fsub    [esp+24h+var_10.Radius]
+0x7D2FBD: fsub    [esp+24h+self.Radius]
 0x7D2FC1: fstp    [esp+24h+arg_0]
 0x7D2FC5: fld     [esp+24h+arg_0]
 0x7D2FC9: fld     dword ptr [esi+0F8h]

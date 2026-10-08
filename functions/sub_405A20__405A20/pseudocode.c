@@ -1,4 +1,4 @@
-char *sub_405A20()
+NiRTTI *sub_405A20()
 {
-  return dword_B3F990;
+  return &stru_B3F990; /*0x405a25*/
 }

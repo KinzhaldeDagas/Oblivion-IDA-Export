@@ -1,100 +1,117 @@
-_DWORD *__thiscall sub_799530(_DWORD *this, int a2, char *Src, unsigned int a4, _DWORD *a5)
+// vector<float>::insert(position,count,value) implementation. Snapshots *value for alias safety, enforces max_size 0x3FFFFFFF, reuses capacity with overlap-aware moves/fills, or reallocates using the shipped approximately-1.5x growth policy.
+void __thiscall OB_stVectorFloat_InsertFill_010201A0(
+        OB_stVectorFloat_010201A0 *this,
+        OB_stVectorFloat_010201A0 *positionOwner,
+        float *position,
+        unsigned int count,
+        const float *value)
 {
-  _DWORD *result; // eax
-  int v7; // ecx
-  unsigned int v8; // edi
-  int v10; // eax
-  int v11; // eax
-  unsigned int v12; // edi
-  int v13; // eax
-  int v14; // edi
-  _DWORD *v15; // ebp
-  float *v16; // eax
-  float *v17; // eax
-  int v18; // eax
-  int v19; // ecx
-  unsigned int v20; // ebx
-  _BYTE *v21; // ebp
-  int v22; // eax
-  bool v23; // cf
-  int v24; // ebx
-  int v25; // [esp+14h] [ebp+Ch]
+  float *begin; // ecx
+  unsigned int capacityCount; // edi
+  int sizeForLimitCheck; // eax
+  int currentSize; // eax
+  unsigned int newCapacity; // edi
+  int sizeForGrowthCheck; // eax
+  int sizeForMinimumCapacity; // edi
+  unsigned int *newStorage; // ebp
+  float *prefixCopyEnd; // eax
+  float *insertedRangeEnd; // eax
+  float *oldBegin; // eax
+  int oldSize; // ecx
+  unsigned int newSize; // ebx
+  float *end; // ebp
+  unsigned int insertBytes; // eax
+  bool suffixShorterThanInsert; // cf
+  const unsigned int *tailCopyBegin; // ebx
+  unsigned int insertByteCount; // [esp+14h] [ebp+Ch]
 
-  result = a5;
-  a5 = *(_DWORD **)a5;
-  v7 = *(this + 1);
-  if ( v7 )
-    v8 = (*(this + 3) - v7) >> 2;
+  value = *(const float **)value; /*0x799538*/
+  begin = this->begin; /*0x79953e*/
+  if ( begin ) /*0x799544*/
+    capacityCount = this->capacity - begin; /*0x79954f*/
   else
-    v8 = 0;
-  if ( a4 )
+    capacityCount = 0; /*0x799546*/
+  if ( count ) /*0x799558*/
   {
-    if ( v7 )
-      v10 = (*(this + 2) - v7) >> 2;
+    if ( begin ) /*0x799560*/
+      sizeForLimitCheck = this->end - begin; /*0x79956b*/
     else
-      v10 = 0;
-    if ( 0x3FFFFFFF - v10 < a4 )
-      sub_790B90(v8);
-    if ( v7 )
-      v11 = (*(this + 2) - v7) >> 2;
+      sizeForLimitCheck = 0; /*0x799562*/
+    if ( 0x3FFFFFFF - sizeForLimitCheck < count ) /*0x799577*/
+      OB_stVector_ThrowLengthError_010201A0(capacityCount); /*0x799579*/
+    if ( begin ) /*0x799580*/
+      currentSize = this->end - begin; /*0x79958b*/
     else
-      v11 = 0;
-    if ( v8 >= a4 + v11 )
+      currentSize = 0; /*0x799582*/
+    if ( capacityCount >= count + currentSize ) /*0x799593*/
     {
-      v21 = (_BYTE *)*(this + 2);
-      v22 = 4 * a4;
-      v23 = (v21 - Src) >> 2 < a4;
-      v25 = 4 * a4;
-      if ( v23 )
+      end = this->end; /*0x79964d*/
+      insertBytes = 4 * count; /*0x79965b*/
+      suffixShorterThanInsert = end - position < count; /*0x799662*/
+      insertByteCount = 4 * count; /*0x799664*/
+      if ( suffixShorterThanInsert ) /*0x79966a*/
       {
-        sub_7A25C0(Src, (int)v21, &Src[v22]);
-        sub_784B30((float *)*(this + 2), a4 - ((*(this + 2) - (int)Src) >> 2), (float *)&a5);
-        *(this + 2) += v25;
-        return (_DWORD *)sub_523AF0((int)Src, *(this + 2) - v25, (float *)&a5);
+        OB_stVector4_UninitializedCopyRange_010201A0( /*0x799671*/
+          (const unsigned int *)position,
+          (const unsigned int *)end,
+          (unsigned int *)&position[insertBytes / 4]);
+        OB_stVectorFloat_UninitializedFillN_010201A0(this->end, count - (this->end - position), (const float *)&value); /*0x79968b*/
+        this->end = (float *)((char *)this->end + insertByteCount); /*0x799694*/
+        OB_stVectorFloat_CopyFillRange_010201A0( /*0x7996a3*/
+          position,
+          &this->end[insertByteCount / 0xFFFFFFFC],
+          (const float *)&value);
       }
       else
       {
-        v24 = (int)&v21[-v22];
-        *(this + 2) = sub_7A25C0(&v21[-v22], (int)v21, v21);
-        sub_5254A0(Src, v24, (int)v21);
-        return (_DWORD *)sub_523AF0((int)Src, (int)&Src[v25], (float *)&a5);
+        tailCopyBegin = (const unsigned int *)&end[insertBytes / 0xFFFFFFFC]; /*0x7996b5*/
+        this->end = (float *)OB_stVector4_UninitializedCopyRange_010201A0( /*0x7996c1*/
+                               (const unsigned int *)&end[insertBytes / 0xFFFFFFFC],
+                               (const unsigned int *)end,
+                               (unsigned int *)end);
+        OB_stVector4_CopyBackwardRange_010201A0((const unsigned int *)position, tailCopyBegin, (unsigned int *)end); /*0x7996c4*/
+        OB_stVectorFloat_CopyFillRange_010201A0(position, &position[insertByteCount / 4], (const float *)&value); /*0x7996d6*/
       }
     }
     else
     {
-      if ( 0x3FFFFFFF - (v8 >> 1) >= v8 )
-        v12 = (v8 >> 1) + v8;
+      if ( 0x3FFFFFFF - (capacityCount >> 1) >= capacityCount ) /*0x7995a6*/
+        newCapacity = (capacityCount >> 1) + capacityCount; /*0x7995ac*/
       else
-        v12 = 0;
-      if ( v7 )
-        v13 = (*(this + 2) - v7) >> 2;
+        newCapacity = 0; /*0x7995a8*/
+      if ( begin ) /*0x7995b0*/
+        sizeForGrowthCheck = this->end - begin; /*0x7995bb*/
       else
-        v13 = 0;
-      if ( v12 < a4 + v13 )
+        sizeForGrowthCheck = 0; /*0x7995b2*/
+      if ( newCapacity < count + sizeForGrowthCheck ) /*0x7995c2*/
       {
-        if ( v7 )
-          v14 = (*(this + 2) - v7) >> 2;
+        if ( begin ) /*0x7995c6*/
+          sizeForMinimumCapacity = this->end - begin; /*0x7995d1*/
         else
-          v14 = 0;
-        v12 = a4 + v14;
+          sizeForMinimumCapacity = 0; /*0x7995c8*/
+        newCapacity = count + sizeForMinimumCapacity; /*0x7995d4*/
       }
-      v15 = sub_78FB60((char *)v12);
-      v16 = (float *)sub_7A25C0((void *)*(this + 1), (int)Src, v15);
-      v17 = sub_784B30(v16, a4, (float *)&a5);
-      sub_7A25C0(Src, *(this + 2), v17);
-      v18 = *(this + 1);
-      if ( v18 )
-        v19 = (*(this + 2) - v18) >> 2;
+      newStorage = OB_stVector4_Allocate_010201A0(newCapacity); /*0x7995e4*/
+      prefixCopyEnd = (float *)OB_stVector4_UninitializedCopyRange_010201A0( /*0x7995ef*/
+                                 (const unsigned int *)this->begin,
+                                 (const unsigned int *)position,
+                                 newStorage);
+      insertedRangeEnd = OB_stVectorFloat_UninitializedFillN_010201A0(prefixCopyEnd, count, (const float *)&value); /*0x7995fd*/
+      OB_stVector4_UninitializedCopyRange_010201A0( /*0x79960e*/
+        (const unsigned int *)position,
+        (const unsigned int *)this->end,
+        (unsigned int *)insertedRangeEnd);
+      oldBegin = this->begin; /*0x799613*/
+      if ( oldBegin ) /*0x799618*/
+        oldSize = this->end - oldBegin; /*0x799623*/
       else
-        v19 = 0;
-      v20 = v19 + a4;
-      if ( v18 )
-        FormHeapFree(*(this + 1));
-      result = &v15[v20];
-      *(this + 1) = v15;
-      *(this + 3) = &v15[v12];
-      *(this + 2) = result;
+        oldSize = 0; /*0x79961a*/
+      newSize = oldSize + count; /*0x799626*/
+      if ( oldBegin ) /*0x79962a*/
+        FormHeapFree((unsigned int)this->begin); /*0x79962d*/
+      this->begin = (float *)newStorage; /*0x79963d*/
+      this->capacity = (float *)&newStorage[newCapacity]; /*0x799642*/
+      this->end = (float *)&newStorage[newSize]; /*0x799645*/
     }
   }
-  return result;
 }

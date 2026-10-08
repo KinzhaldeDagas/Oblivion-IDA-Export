@@ -1,5 +1,5 @@
 int sub_9F7430()
 {
-  GameSetting_ConstrAndReg(&dword_B39280, (int)"sEyesocketsbruised", (int)"Eye sockets bruised/bright");
-  return atexit(sub_A22C20);
+  GameSetting_ConstrAndReg(&stru_B39280, "sEyesocketsbruised", "Eye sockets bruised/bright"); /*0x9f743f*/
+  return atexit(sub_A22C20); /*0x9f744f*/
 }

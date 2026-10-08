@@ -1,9 +1,9 @@
-0x487350: mov     eax, [ecx]
+0x487350: mov     eax, [ecx]; Walks ExtraContainerChanges_Data.objList (+0x00), finds the EntryData whose type/form is at +0x08, and adds countDelta to EntryData.countDelta (+0x04). Return-register contents are incidental; both native callers ignore them.
 0x487352: test    eax, eax
 0x487354: mov     dl, 1
 0x487356: jz      short locret_487390
 0x487358: push    esi
-0x487359: mov     esi, [esp+4+arg_0]
+0x487359: mov     esi, [esp+4+form]
 0x48735D: lea     ecx, [ecx+0]
 0x487360: test    dl, dl
 0x487362: jz      short loc_48737E
@@ -24,7 +24,7 @@
 0x487382: mov     eax, [eax]
 0x487384: test    eax, eax
 0x487386: jz      short loc_48738F
-0x487388: mov     ecx, [esp+4+arg_4]
+0x487388: mov     ecx, [esp+4+countDelta]
 0x48738C: add     [eax+4], ecx
 0x48738F: pop     esi
 0x487390: retn    8

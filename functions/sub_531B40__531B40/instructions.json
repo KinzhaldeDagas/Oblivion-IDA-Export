@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x531C0C",
-    "line": "call    sub_530620",
+    "line": "call    TESTopicInfo_ClearSharedResponseCache",
     "mnemonic": "call",
     "size": 5
   },
@@ -445,13 +445,13 @@
   },
   {
     "ea": "0x531C15",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x531C17",
-    "line": "call    sub_530C40",
+    "line": "call    TESTopicInfo__GetResponseList; Oblivion lazy INFO response-stream reader. Rebuilds a shared list from the last override TESFile plus TESTopicInfo+0x34 record offset. Recognizes only TRDT and NAM1; NAM2 actor notes are runtime-inert.",
     "mnemonic": "call",
     "size": 5
   },
@@ -553,13 +553,13 @@
   },
   {
     "ea": "0x531C51",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x531C53",
-    "line": "call    sub_52E150",
+    "line": "call    TESResponse__TESResponse; TESResponse defaults before TRDT overlay: DWORD0=0, DWORD4=50, DWORD8=0, byte12=0; bytes13..15 are not explicitly initialized. Response text starts empty.",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,13 +583,13 @@
   },
   {
     "ea": "0x531C5E",
-    "line": "push    esi",
+    "line": "push    esi; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x531C5F",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -601,19 +601,19 @@
   },
   {
     "ea": "0x531C69",
-    "line": "call    sub_52E110",
+    "line": "call    TESResponse__CopyFrom; Copy the complete 16-byte TRDT payload and deep-copy responseText into the destination TESResponse. This is the ownership boundary between the global shared INFO response cache and each caller's temporary list.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x531C6E",
-    "line": "mov     ecx, [esp+2Ch+var_18]",
+    "line": "mov     ecx, [esp+2Ch+var_18]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x531C72",
-    "line": "call    sub_530C40",
+    "line": "call    TESTopicInfo__GetResponseList; Oblivion lazy INFO response-stream reader. Rebuilds a shared list from the last override TESFile plus TESTopicInfo+0x34 record offset. Recognizes only TRDT and NAM1; NAM2 actor notes are runtime-inert.",
     "mnemonic": "call",
     "size": 5
   },
@@ -793,13 +793,13 @@
   },
   {
     "ea": "0x531CC3",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x531CC5",
-    "line": "call    sub_531290",
+    "line": "call    TESTopicInfo__GetResultScript; Oblivion lazy INFO result-script loader. For a newly requested INFO, initializes a fresh shared temporary Script, opens the winning override record saved by the main INFO loader, and replays its entire chunk stream. Recognized result-script tags are SCHR, SCDA, and SCRO only. SCHD, SCTX, SLSD, SCVR, and SCRV are ignored. Repeated SCHR prefix-overlays ScriptInfo, repeated SCDA replaces compiled storage/size, and every SCRO appends in stream order. No inherited base-script state is reconstructed for a partial override.",
     "mnemonic": "call",
     "size": 5
   },
@@ -811,13 +811,13 @@
   },
   {
     "ea": "0x531CCB",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x531CCD",
-    "line": "call    sub_531290",
+    "line": "call    TESTopicInfo__GetResultScript; Oblivion lazy INFO result-script loader. For a newly requested INFO, initializes a fresh shared temporary Script, opens the winning override record saved by the main INFO loader, and replays its entire chunk stream. Recognized result-script tags are SCHR, SCDA, and SCRO only. SCHD, SCTX, SLSD, SCVR, and SCRV are ignored. Repeated SCHR prefix-overlays ScriptInfo, repeated SCDA replaces compiled storage/size, and every SCRO appends in stream order. No inherited base-script state is reconstructed for a partial override.",
     "mnemonic": "call",
     "size": 5
   },
@@ -829,7 +829,7 @@
   },
   {
     "ea": "0x531CD4",
-    "line": "call    sub_4FC7A0",
+    "line": "call    Script_CopyFrom; Deep-copy Script state from another Script: copy the five ScriptInfo dwords, replace compiled data through Script_SetCompiledData, copy variables/references/source text, and mirror linked state. TESTopicInfo::GetResultScript uses this to reset its shared cache from a freshly constructed default Script before scanning the winning INFO record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -994,5 +994,77 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B8CE0",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B8CE3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B8CE4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8CE9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B8CEA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B8CEB",
+    "line": "mov     edx, [esp+a2]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B8CEF",
+    "line": "lea     eax, [edx-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B8CF2",
+    "line": "mov     ecx, [edx-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B8CF5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B8CF7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8CFC",
+    "line": "mov     eax, offset stru_AE3140",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8D01",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -15,7 +15,7 @@
 0x4A602D: mov     edx, [eax]
 0x4A602F: push    eax
 0x4A6030: mov     [esi+4], edx
-0x4A6033: call    FormHeapFree
+0x4A6033: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4A6038: add     esp, 4
 0x4A603B: jmp     short loc_4A6040
 0x4A603D: mov     [esi+4], ebx

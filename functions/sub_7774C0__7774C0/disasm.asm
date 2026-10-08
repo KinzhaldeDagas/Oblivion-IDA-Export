@@ -1,4 +1,4 @@
-0x7774C0: sub     esp, 168h
+0x7774C0: sub     esp, 168h; MoonSugarEffect decode: fallback skinned vertex packer. Uses skin partition remap/weights/bone data, refreshes VB chips if stale/too small, writes packed partition vertices, and unlocks owned VB.
 0x7774C6: mov     eax, ds:0B30AACh
 0x7774CB: xor     eax, esp
 0x7774CD: mov     [esp+168h+var_4], eax
@@ -20,7 +20,7 @@
 0x77750F: mov     [esp+174h+var_120], edx
 0x777513: mov     edx, [esi+24h]
 0x777516: push    edi
-0x777517: mov     [esp+178h+var_138], ecx
+0x777517: mov     [esp+178h+self], ecx
 0x77751B: mov     [esp+178h+var_128], esi
 0x77751F: mov     [esp+178h+var_130], eax
 0x777523: mov     [esp+178h+var_134], edx
@@ -51,12 +51,12 @@
 0x777571: push    ebx
 0x777572: push    esi
 0x777573: mov     [esp+19Ch+var_13C], ebp
-0x777577: call    sub_776DD0
+0x777577: call    sub_776DD0; MoonSugarEffect decode: fallback non-declaration vertex layout calculator. Builds FVF-like flags, stride, and offsets: position is 12 bytes; optional skin weights/indices, normals, color, and UV sets are appended, with UV count clamped by dword_B28CB0.
 0x77757C: mov     ecx, [esp+178h+ArgList]
 0x777580: mov     edi, [ebx+28h]
 0x777583: push    ecx
 0x777584: mov     ecx, edi
-0x777586: call    sub_7780A0
+0x777586: call    sub_7780A0; MoonSugarEffect decode: NiGeometryBufferData SetFVF-style input ownership. Stores FVF and releases any cached IDirect3DVertexDeclaration9, so callers switch the buffer to fixed-function input mode.
 0x77758B: cmp     dword ptr [edi+1Ch], 0
 0x77758F: jbe     short loc_77759A
 0x777591: mov     edx, [edi+20h]
@@ -97,10 +97,10 @@
 0x777605: mov     eax, [esp+178h+var_158]
 0x777609: mov     [esp+178h+var_158], eax
 0x77760D: jmp     short loc_77764E
-0x77760F: mov     ecx, [esp+178h+var_138]
+0x77760F: mov     ecx, [esp+178h+self]
 0x777613: push    0
 0x777615: push    edi
-0x777616: call    NiGeometryBufferData__RefreshVBChips
+0x777616: call    NiGeometryBufferData__RefreshVBChips; MoonSugarEffect decode: NiGeometryBufferData::RefreshVBChips. Releases the existing geometry-group chip for this stream, creates a replacement chip through NiGeometryGroup, and stores it in VBChip[stream] if stream is in range. This is allocation/lifetime ownership, not a safe mask-pass getter.
 0x77761B: test    al, al
 0x77761D: jnz     short loc_777626
 0x77761F: xor     eax, eax
@@ -118,12 +118,12 @@
 0x777651: mov     edx, [eax+14h]
 0x777654: mov     esi, [eax+0Ch]
 0x777657: mov     eax, [eax+8]
-0x77765A: push    ecx; int
-0x77765B: mov     ecx, [esp+17Ch+var_138]
-0x77765F: push    edx; Size
-0x777660: push    esi; int
-0x777661: push    eax; int
-0x777662: call    sub_776C90
+0x77765A: push    ecx; flags
+0x77765B: mov     ecx, [esp+17Ch+self]; self
+0x77765F: push    edx; byteCount
+0x777660: push    esi; offsetBytes
+0x777661: push    eax; buffer
+0x777662: call    NiDX9VertexBufferManager_LockToStaging; MoonSugarEffect decode: VB lock helper. Locks D3D VB, caches original bytes in a staging buffer, and returns a writable pointer; unlock is handled by packers when they own the lock.
 0x777667: mov     [esp+178h+var_144], eax
 0x77766B: mov     edx, [esp+178h+var_168]
 0x77766F: mov     eax, [esp+178h+var_144]
@@ -189,7 +189,6 @@
 0x777744: cmp     edx, ebx
 0x777746: jnb     short loc_777763
 0x777748: jmp     short loc_777750
-0x77774A: align 10h
 0x777750: fld     [esp+178h+var_168]
 0x777754: add     edx, 1
 0x777757: cmp     edx, ebx
@@ -263,7 +262,6 @@
 0x777832: test    esi, esi
 0x777834: jbe     short loc_777867
 0x777836: jmp     short loc_777840
-0x777838: align 10h
 0x777840: movzx   ecx, word ptr [ebp+edx*2+0]
 0x777845: lea     ecx, [ecx+ecx*2]
 0x777848: mov     ebx, [edi+ecx*4]
@@ -290,7 +288,6 @@
 0x777892: test    eax, eax
 0x777894: jbe     loc_777956
 0x77789A: jmp     short loc_7778A4
-0x77789C: align 10h
 0x7778A0: mov     edi, [esp+178h+var_134]
 0x7778A4: movzx   eax, word ptr [ebp+ecx*2+0]
 0x7778A9: shl     eax, 4
@@ -374,16 +371,16 @@
 0x7779C8: jb      short loc_777980
 0x7779CA: cmp     [esp+178h+var_159], 0
 0x7779CF: jz      short loc_777A1E
-0x7779D1: mov     esi, [esp+178h+var_138]
+0x7779D1: mov     esi, [esp+178h+self]
 0x7779D5: mov     ecx, [esi+4Ch]
 0x7779D8: mov     eax, [esp+178h+var_158]
 0x7779DC: mov     edx, [esi+40h]
 0x7779DF: mov     edi, [eax+8]
 0x7779E2: mov     eax, [esi+48h]
-0x7779E5: push    ecx; Size
-0x7779E6: push    edx; Src
-0x7779E7: push    eax; Dst
-0x7779E8: call    _memcpy
+0x7779E5: push    ecx; byteCount
+0x7779E6: push    edx; source
+0x7779E7: push    eax; destination
+0x7779E8: call    _memcpy;
 0x7779ED: xor     ecx, ecx
 0x7779EF: lea     eax, [esi+80h]
 0x7779F5: add     esp, 0Ch

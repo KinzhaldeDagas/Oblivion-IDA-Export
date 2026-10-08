@@ -62,15 +62,15 @@
 0x7E5DEC: mov     eax, [edi+158h]
 0x7E5DF2: push    eax
 0x7E5DF3: mov     dword ptr [edi+15Ch], 0
-0x7E5DFD: call    FormHeapFree
+0x7E5DFD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7E5E02: add     esp, 4
-0x7E5E05: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x7E5E05: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x7E5E0A: push    9; int
 0x7E5E0C: push    4; unsigned int
 0x7E5E0E: push    ebx; void *
 0x7E5E0F: mov     byte ptr [esp+38h+var_4], 2
 0x7E5E14: call    $LN21
-0x7E5E19: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x7E5E19: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x7E5E1E: push    28h ; '('; int
 0x7E5E20: push    4; unsigned int
 0x7E5E22: lea     eax, [edi+94h]
@@ -86,7 +86,7 @@
 0x7E5E45: call    $LN21
 0x7E5E4A: mov     ecx, edi; this
 0x7E5E4C: mov     [esp+28h+var_4], 0FFFFFFFFh
-0x7E5E54: call    ??1BSShader@@UAE@XZ; BSShader::~BSShader(void)
+0x7E5E54: call    ??1BSShader@@UAE@XZ;
 0x7E5E59: mov     ecx, [esp+28h+var_C]
 0x7E5E5D: mov     large fs:0, ecx
 0x7E5E64: pop     ecx
@@ -96,3 +96,36 @@
 0x7E5E68: pop     ebx
 0x7E5E69: add     esp, 14h
 0x7E5E6C: retn
+0x9CF830: mov     ecx, [ebp-10h]; this
+0x9CF833: jmp     ??1BSShader@@UAE@XZ;
+0x9CF838: push    offset sub_4027D0; void (__thiscall *)(void *)
+0x9CF83D: push    3; int
+0x9CF83F: push    4; unsigned int
+0x9CF841: mov     eax, [ebp-10h]
+0x9CF844: add     eax, 7Ch ; '|'
+0x9CF847: push    eax; void *
+0x9CF848: call    $LN21
+0x9CF84D: retn
+0x9CF84E: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9CF853: push    28h ; '('; int
+0x9CF855: push    4; unsigned int
+0x9CF857: mov     eax, [ebp-10h]
+0x9CF85A: add     eax, 94h ; '”'
+0x9CF85F: push    eax; void *
+0x9CF860: call    $LN21
+0x9CF865: retn
+0x9CF866: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9CF86B: push    9; int
+0x9CF86D: push    4; unsigned int
+0x9CF86F: mov     eax, [ebp-10h]
+0x9CF872: add     eax, 134h
+0x9CF877: push    eax; void *
+0x9CF878: call    $LN21
+0x9CF87D: retn
+0x9CF87E: mov     edx, [esp+arg_4]
+0x9CF882: lea     eax, [edx-18h]
+0x9CF885: mov     ecx, [edx-1Ch]
+0x9CF888: xor     ecx, eax
+0x9CF88A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CF88F: mov     eax, offset stru_AF8458
+0x9CF894: jmp     ___CxxFrameHandler3

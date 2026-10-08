@@ -1,1 +1,1 @@
-IViewObject2_0
+typedef IViewObject2 IViewObject2_0;

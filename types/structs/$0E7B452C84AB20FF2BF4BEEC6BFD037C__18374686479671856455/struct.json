@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "$0E7B452C84AB20FF2BF4BEEC6BFD037C",
+  "definition": "union $0E7B452C84AB20FF2BF4BEEC6BFD037C\n{\ngeneric_request req;\ngeneric_reply reply;\n}\n",
   "id": 18374686479671856455,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "req",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 64
+      "size": 64,
+      "type": "generic_request"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 64
+      "size": 64,
+      "type": "generic_reply"
     }
   ],
   "name": "$0E7B452C84AB20FF2BF4BEEC6BFD037C",
+  "ordinal": 7261,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 64
 }

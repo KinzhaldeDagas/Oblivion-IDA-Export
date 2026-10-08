@@ -1,1 +1,1 @@
-COMMPROP
+typedef tagCOMMPROP COMMPROP;

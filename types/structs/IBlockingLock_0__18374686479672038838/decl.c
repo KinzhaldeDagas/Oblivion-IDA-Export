@@ -1,1 +1,1 @@
-IBlockingLock_0
+typedef IBlockingLock IBlockingLock_0;

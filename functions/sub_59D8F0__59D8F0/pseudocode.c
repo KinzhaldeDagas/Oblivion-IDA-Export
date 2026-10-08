@@ -1,52 +1,48 @@
-int __thiscall sub_59D8F0(_DWORD *this, int a2, int a3)
+void __thiscall DialogMenu::AttachTileByID(OblivionDialogMenuTileBindingsView *this, unsigned int tileID, Tile *tile)
 {
-  int result; // eax
-
-  result = a2;
-  switch ( a2 )
+  switch ( tileID ) /*0x59d8f7*/
   {
-    case 1:
-      *(this + 0xA) = a3;
-      return a3;
-    case 2:
-      *(this + 0xB) = a3;
+    case 1u: /*0x59d8f7*/
+      this->topicPane_id1 = tile; /*0x59d8fd*/
       break;
-    case 3:
-      *(this + 0xC) = a3;
-      return a3;
-    case 4:
-      *(this + 0xD) = a3;
+    case 2u: /*0x59d8f7*/
+      this->responseText_id2 = tile; /*0x59d90c*/
       break;
-    case 5:
-      *(this + 0xE) = a3;
-      return a3;
-    case 6:
-      *(this + 0xF) = a3;
+    case 3u: /*0x59d8f7*/
+      this->goodbye_id3 = tile; /*0x59d91b*/
       break;
-    case 7:
-      *(this + 0x10) = a3;
-      return a3;
-    case 0xE:
-      *(this + 0x11) = a3;
+    case 4u: /*0x59d8f7*/
+      this->responseContinue_id4 = tile; /*0x59d92a*/
       break;
-    case 0xF:
-      *(this + 0x12) = a3;
-      return a3;
-    case 8:
-      *(this + 0x13) = a3;
+    case 5u: /*0x59d8f7*/
+      this->tile_id5 = tile; /*0x59d939*/
       break;
-    case 9:
-      *(this + 0x14) = a3;
-      return a3;
-    case 0xC:
-      *(this + 0x16) = a3;
+    case 6u: /*0x59d8f7*/
+      this->tile_id6 = tile; /*0x59d948*/
       break;
-    case 0xD:
-      *(this + 0x15) = a3;
-      return a3;
-    case 0x10:
-      *(this + 0x17) = a3;
+    case 7u: /*0x59d8f7*/
+      this->persuade_id7 = tile; /*0x59d957*/
+      break;
+    case 0xEu: /*0x59d8f7*/
+      this->tile_id14 = tile; /*0x59d966*/
+      break;
+    case 0xFu: /*0x59d8f7*/
+      this->tile_id15 = tile; /*0x59d975*/
+      break;
+    case 8u: /*0x59d8f7*/
+      this->barter_id8 = tile; /*0x59d984*/
+      break;
+    case 9u: /*0x59d8f7*/
+      this->training_id9 = tile; /*0x59d993*/
+      break;
+    case 0xCu: /*0x59d8f7*/
+      this->repair_id12 = tile; /*0x59d9a2*/
+      break;
+    case 0xDu: /*0x59d8f7*/
+      this->recharge_id13 = tile; /*0x59d9b1*/
+      break;
+    case 0x10u: /*0x59d8f7*/
+      this->spellBuy_id16 = tile; /*0x59d9c0*/
       break;
   }
-  return result;
 }

@@ -45,7 +45,7 @@
 0x90C0B8: mov     ecx, [edx+eax*4]
 0x90C0BB: mov     [esp+38h+var_28], ecx
 0x90C0BF: xor     edi, edi
-0x90C0C1: call    sub_88D370
+0x90C0C1: call    hkCharacterContext_GetStateId; hkCharacterContext state id accessor used by controller update; proxy+0x1E0 context stores current state id at +0x0C.
 0x90C0C6: test    eax, eax
 0x90C0C8: jle     short loc_90C0FB
 0x90C0CA: lea     ebx, [ebx+0]
@@ -64,7 +64,7 @@
 0x90C0E9: mov     [esp+38h+arg_0], ebx
 0x90C0ED: mov     ecx, [esp+38h+var_28]
 0x90C0F1: inc     edi
-0x90C0F2: call    sub_88D370
+0x90C0F2: call    hkCharacterContext_GetStateId; hkCharacterContext state id accessor used by controller update; proxy+0x1E0 context stores current state id at +0x0C.
 0x90C0F7: cmp     edi, eax
 0x90C0F9: jl      short loc_90C0D0
 0x90C0FB: mov     ecx, [esp+38h+var_28]

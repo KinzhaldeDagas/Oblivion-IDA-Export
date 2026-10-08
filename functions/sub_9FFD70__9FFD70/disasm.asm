@@ -6,6 +6,6 @@
 0x9FFD82: fadd    st, st
 0x9FFD84: fld1
 0x9FFD86: fdivrp  st(1), st
-0x9FFD88: fstp    flt_B3C194
+0x9FFD88: fstp    dword_B3C180+14h
 0x9FFD8E: pop     ecx
 0x9FFD8F: retn

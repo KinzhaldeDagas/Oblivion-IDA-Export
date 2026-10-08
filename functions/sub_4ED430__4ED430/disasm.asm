@@ -1,47 +1,47 @@
-0x4ED430: sub     esp, 8
+0x4ED430: sub     esp, 8; Verified per-frame terrain-quad state machine: outside maximumLODQuadDistance advances detach/unload; in range, Unloaded/Loading quads without geometry request a NIF, LoadedDetached/UnloadPending quads attach under LandLOD and become Attached, while Attached quads are stable. State meanings for 1..5 are written in TerrainLODQuadState_Oblivion; values 0 and 6 are Unknown.
 0x4ED433: push    esi
 0x4ED434: push    edi
-0x4ED435: mov     edi, [esp+10h+arg_0]
+0x4ED435: mov     edi, [esp+10h+landLODParent]
 0x4ED439: test    edi, edi
 0x4ED43B: mov     esi, ecx
 0x4ED43D: jz      short loc_4ED4B2
 0x4ED43F: mov     eax, [esi]
 0x4ED441: movsx   ecx, word ptr [eax+8]
 0x4ED445: shl     ecx, 11h
-0x4ED448: mov     [esp+10h+arg_0], ecx
-0x4ED44C: mov     ecx, [esp+10h+arg_8]
-0x4ED450: fild    [esp+10h+arg_0]
-0x4ED454: fstp    dword ptr [esi+18h]
+0x4ED448: mov     [esp+10h+landLODParent], ecx
+0x4ED44C: mov     ecx, [esp+10h+viewX]
+0x4ED450: fild    [esp+10h+landLODParent]
+0x4ED454: fstp    dword ptr [esi+18h]; Verified world origin: quadOriginX = signed quadX << 17, matching kTerrainLODQuadWorldSize = 131072 world units.
 0x4ED457: movsx   edx, word ptr [eax+0Ah]
-0x4ED45B: mov     eax, [esp+10h+arg_C]
+0x4ED45B: mov     eax, [esp+10h+viewY]
 0x4ED45F: shl     edx, 11h
-0x4ED462: mov     [esp+10h+arg_0], edx
-0x4ED466: push    eax; float
-0x4ED467: push    ecx; float
-0x4ED468: fild    [esp+18h+arg_0]
+0x4ED462: mov     [esp+10h+landLODParent], edx
+0x4ED466: push    eax; pointY
+0x4ED467: push    ecx; pointX
+0x4ED468: fild    [esp+18h+landLODParent]
 0x4ED46C: push    ecx
 0x4ED46D: mov     ecx, esi
-0x4ED46F: fstp    [esp+1Ch+arg_0]
-0x4ED473: fld     [esp+1Ch+arg_0]
+0x4ED46F: fstp    [esp+1Ch+landLODParent]; Verified world origin: quadOriginY = signed quadY << 17, matching kTerrainLODQuadWorldSize = 131072 world units.
+0x4ED473: fld     [esp+1Ch+landLODParent]
 0x4ED477: fst     dword ptr [esi+1Ch]
 0x4ED47A: fld     dword ptr [esi+18h]
-0x4ED47D: fstp    [esp+1Ch+var_8]
-0x4ED481: mov     eax, [esp+1Ch+var_8]
-0x4ED485: fstp    [esp+1Ch+var_4]
-0x4ED489: mov     edx, [esp+1Ch+var_4]
+0x4ED47D: fstp    [esp+1Ch+quadOriginX]
+0x4ED481: mov     eax, [esp+1Ch+quadOriginX]
+0x4ED485: fstp    [esp+1Ch+quadOriginY]
+0x4ED489: mov     edx, [esp+1Ch+quadOriginY]
 0x4ED48D: fld     dword ptr ds:0A47B20h
-0x4ED493: fstp    [esp+1Ch+var_1C]; float
-0x4ED496: push    edx; float
-0x4ED497: push    eax; float
-0x4ED498: call    sub_4EC870
-0x4ED49D: fld     [esp+10h+arg_4]
+0x4ED493: fstp    [esp+1Ch+quadWidth]; quadWidth
+0x4ED496: push    edx; quadOriginY
+0x4ED497: push    eax; quadOriginX
+0x4ED498: call    TESTerrainLODQuad_DistanceToXYBounds; Verified geometric distance helper computes 2D Euclidean distance from a point to the axis-aligned square [quadOriginX,quadOriginX+quadWidth] x [quadOriginY,quadOriginY+quadWidth].
+0x4ED49D: fld     [esp+10h+maximumLODQuadDistance]
 0x4ED4A1: fcompp
 0x4ED4A3: fnstsw  ax
 0x4ED4A5: test    ah, 5
 0x4ED4A8: jp      short loc_4ED4BC
-0x4ED4AA: push    edi
-0x4ED4AB: mov     ecx, esi
-0x4ED4AD: call    sub_4ECAE0
+0x4ED4AA: push    edi; landLODParent
+0x4ED4AB: mov     ecx, esi; this
+0x4ED4AD: call    TESTerrainLODQuad_AdvanceUnloadState; Verified recursive unload state machine: Attached(3)->LoadedDetached(2) removes the terrain node; LoadedDetached(2)->UnloadPending(4); the next unload pass releases the mesh and reaches Unloaded(5). The same transition recurses over four child pointers at +0x30..+0x3C.
 0x4ED4B2: pop     edi
 0x4ED4B3: xor     eax, eax
 0x4ED4B5: pop     esi
@@ -56,8 +56,8 @@
 0x4ED4CC: jnz     short loc_4ED51A
 0x4ED4CE: cmp     dword ptr [esi+2Ch], 0
 0x4ED4D2: jnz     short loc_4ED51A
-0x4ED4D4: mov     ecx, esi
-0x4ED4D6: call    sub_4ED320
+0x4ED4D4: mov     ecx, esi; this
+0x4ED4D6: call    TESTerrainLODQuad_BuildMesh; Verified BuildMesh scheduling: allocates a TerrainLODQuadLoadTask with priority 3 and the current quad-data context; passes the worldspace filename key and quad tile coordinates, then queues the task.
 0x4ED4DB: test    al, al
 0x4ED4DD: jnz     short loc_4ED4F8
 0x4ED4DF: mov     eax, [esi]
@@ -77,7 +77,7 @@
 0x4ED508: fld     dword ptr [esi+1Ch]
 0x4ED50B: fstp    [esp+1Ch+var_18]; float
 0x4ED50F: fld     dword ptr [esi+18h]
-0x4ED512: fstp    [esp+1Ch+var_1C]; float
+0x4ED512: fstp    [esp+1Ch+quadWidth]; float
 0x4ED515: call    sub_404CF0
 0x4ED51A: mov     eax, [esi+8]
 0x4ED51D: cmp     eax, 2
@@ -91,7 +91,7 @@
 0x4ED534: push    ecx
 0x4ED535: mov     ecx, edi
 0x4ED537: call    edx
-0x4ED539: mov     dword ptr [esi+8], 3
+0x4ED539: mov     dword ptr [esi+8], 3; Verified attach transition: attaches terrainLODNode to the LandLOD parent and changes quad state to Attached (3).
 0x4ED540: mov     ecx, ds:0B333A0h
 0x4ED546: call    sub_43FCD0
 0x4ED54B: mov     eax, [esi+24h]

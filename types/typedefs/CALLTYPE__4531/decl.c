@@ -1,1 +1,1 @@
-CALLTYPE
+typedef tagCALLTYPE CALLTYPE;

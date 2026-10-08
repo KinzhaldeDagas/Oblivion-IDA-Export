@@ -6,13 +6,13 @@
 0x9FE61E: mov     dword ptr [eax], 0
 0x9FE624: mov     dword ptr [eax+4], 0
 0x9FE62B: push    offset sub_A25DB0; void (__cdecl *)()
-0x9FE630: mov     dword_B3BDB0, eax
+0x9FE630: mov     dword ptr qword_B3BB2C+284h, eax
 0x9FE635: call    _atexit
 0x9FE63A: pop     ecx
 0x9FE63B: retn
 0x9FE63C: xor     eax, eax
 0x9FE63E: push    offset sub_A25DB0; void (__cdecl *)()
-0x9FE643: mov     dword_B3BDB0, eax
+0x9FE643: mov     dword ptr qword_B3BB2C+284h, eax
 0x9FE648: call    _atexit
 0x9FE64D: pop     ecx
 0x9FE64E: retn

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7857D0",
-    "line": "push    ecx",
+    "line": "push    ecx; Oblivion 1.2.0.416: vector<stVec>::insert(position,value) wrapper returning a checked iterator. IDA boundary repaired from 0x7857D0..0x785843 plus false 0x785850 tail to the real 0x7857D0..0x785880 function; false FUNC_NORET cleared.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x7857D3",
-    "line": "mov     ebp, [esp+0Ch+arg_8]",
+    "line": "mov     ebp, [esp+0Ch+position.current]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x7857FC",
-    "line": "mov     ebx, [esp+14h+arg_4]",
+    "line": "mov     ebx, [esp+14h+position.owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x78580D",
-    "line": "mov     ebx, [esp+14h+arg_4]",
+    "line": "mov     ebx, [esp+14h+position.owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -241,19 +241,19 @@
   },
   {
     "ea": "0x785833",
-    "line": "mov     ecx, [esp+14h+arg_C]",
+    "line": "mov     ecx, [esp+14h+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x785837",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x785838",
-    "line": "push    1",
+    "line": "push    1; count",
     "mnemonic": "push",
     "size": 2
   },
@@ -265,20 +265,146 @@
   },
   {
     "ea": "0x78583B",
-    "line": "push    ebx",
+    "line": "push    ebx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78583C",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x78583E",
-    "line": "call    sub_785050",
+    "line": "call    OB_stVector_stVec_InsertFill_010201A0; Oblivion 1.2.0.416: vector<stVec>::insert(position,count,value); preserves aliasing with a local 24-byte copy, uses 1.5x growth, and handles in-place or reallocated insertion. False FUNC_NORET cleared.",
     "mnemonic": "call",
     "size": 5
+  },
+  {
+    "ea": "0x785843",
+    "line": "mov     ebx, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x785846",
+    "line": "cmp     ebx, [esi+8]",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x785849",
+    "line": "jbe     short loc_785850",
+    "mnemonic": "jbe",
+    "size": 2
+  },
+  {
+    "ea": "0x78584B",
+    "line": "call    __invalid_parameter_noinfo",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x785850",
+    "line": "lea     edx, [edi+edi*2]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x785853",
+    "line": "lea     edi, [ebx+edx*8]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x785856",
+    "line": "cmp     edi, [esi+8]",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x785859",
+    "line": "mov     [esp+14h+position.current], ebx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x78585D",
+    "line": "ja      short loc_785864",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x78585F",
+    "line": "cmp     edi, [esi+4]",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x785862",
+    "line": "jnb     short loc_785869",
+    "mnemonic": "jnb",
+    "size": 2
+  },
+  {
+    "ea": "0x785864",
+    "line": "call    __invalid_parameter_noinfo",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x785869",
+    "line": "mov     eax, [esp+14h+result]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x78586D",
+    "line": "mov     [eax+4], edi",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x785870",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x785871",
+    "line": "mov     [eax], esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x785873",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x785874",
+    "line": "pop     ebp",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x785875",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x785876",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x785877",
+    "line": "retn    10h",
+    "mnemonic": "retn",
+    "size": 3
   }
 ]

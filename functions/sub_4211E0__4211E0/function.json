@@ -1,19 +1,36 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_4211E0",
+  "chunks": [
+    [
+      "0x4211E0",
+      "0x4212B9"
+    ],
+    [
+      "0x9CA7E0",
+      "0x9CA806"
+    ]
+  ],
+  "chunks_sha256": "6a805cb05090d3d1798a6092b72588411ddd1485d8e2f0980dc1b3aaa172183b",
+  "comment_regular": "Gets/creates Oblivion ExtraSavedMovementData and stores its saved-Havok-data pointer; runtime diagnostic confirms the field purpose.",
+  "comment_repeatable": "Gets/creates Oblivion ExtraSavedMovementData and stores its saved-Havok-data pointer; runtime diagnostic confirms the field purpose.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "ExtraDataList_SetSavedHavokData",
   "end_ea": "0x4212B9",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4211E0",
+  "name": "ExtraDataList_SetSavedHavokData",
   "segment": ".text",
   "sha256": "57cefe5af8dcaca9a65d7b49d68232131c09abcd09a04d56e96108a17b5a9156",
   "size": 217,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4211E0",
+  "total_chunk_size": 255,
   "type": "TESSaveLoad *__thiscall(ExtraDataList *this, BSExtraDataVtbl *)",
-  "xrefs_from_count": 81,
+  "xrefs_from_count": 95,
   "xrefs_to_count": 3
 }

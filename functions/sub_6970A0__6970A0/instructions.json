@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6970A0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Magic projectile hit/area-effect path. Handles target hit effects, spawns SpecialIdle_AreaEffect for area spells, plays impact sound, and binds effect visuals to actor/player perspective state.",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x6970C9",
-    "line": "mov     ebp, [esp+3Ch+arg_10]",
+    "line": "mov     ebp, [esp+3Ch+unknownChildTag]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -181,13 +181,13 @@
   },
   {
     "ea": "0x6970F6",
-    "line": "fstp    [esp+3Ch+arg_10]",
+    "line": "fstp    [esp+3Ch+unknownChildTag]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6970FA",
-    "line": "fld     [esp+3Ch+arg_10]",
+    "line": "fld     [esp+3Ch+unknownChildTag]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x697104",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x69710F",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x69712E",
-    "line": "lea     eax, [esp+3Ch+arg_10]",
+    "line": "lea     eax, [esp+3Ch+unknownChildTag]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x697135",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,13 +301,13 @@
   },
   {
     "ea": "0x69713C",
-    "line": "call    sub_57E270",
+    "line": "call    bhkCharacterProxy_GetCollisionFilterInfo; Reads collision filter info from proxy metadata: proxy+0x364 -> +8 -> +0x14 -> +0x1C. Used to preserve actor identity in raycast filter high 16 bits.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x697141",
-    "line": "mov     edi, [esp+3Ch+arg_10]",
+    "line": "mov     edi, [esp+3Ch+unknownChildTag]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x69714D",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x69718F",
-    "line": "push    offset dword_B258DC",
+    "line": "push    offset stru_B258DC",
     "mnemonic": "push",
     "size": 5
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x6971A1",
-    "line": "mov     edx, [esp+3Ch+arg_C]",
+    "line": "mov     edx, [esp+3Ch+parentNode]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -799,7 +799,7 @@
   },
   {
     "ea": "0x69724B",
-    "line": "fstp    [esp+3Ch+arg_C]",
+    "line": "fstp    [esp+3Ch+parentNode]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x697257",
-    "line": "fstp    [esp+3Ch+arg_10]",
+    "line": "fstp    [esp+3Ch+unknownChildTag]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -841,13 +841,13 @@
   },
   {
     "ea": "0x697267",
-    "line": "fld     [esp+3Ch+arg_10]",
+    "line": "fld     [esp+3Ch+unknownChildTag]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x69726B",
-    "line": "fld     [esp+3Ch+arg_C]",
+    "line": "fld     [esp+3Ch+parentNode]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -907,13 +907,13 @@
   },
   {
     "ea": "0x697283",
-    "line": "fstp    [esp+3Ch+arg_10]",
+    "line": "fstp    [esp+3Ch+unknownChildTag]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x697287",
-    "line": "fld     [esp+3Ch+arg_10]",
+    "line": "fld     [esp+3Ch+unknownChildTag]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -925,13 +925,13 @@
   },
   {
     "ea": "0x697290",
-    "line": "fstp    [esp+3Ch+arg_10]",
+    "line": "fstp    [esp+3Ch+unknownChildTag]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x697294",
-    "line": "fld     [esp+3Ch+arg_10]",
+    "line": "fld     [esp+3Ch+unknownChildTag]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -943,7 +943,7 @@
   },
   {
     "ea": "0x69729B",
-    "line": "fstp    [esp+3Ch+arg_10]",
+    "line": "fstp    [esp+3Ch+unknownChildTag]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -967,13 +967,13 @@
   },
   {
     "ea": "0x6972A7",
-    "line": "fstp    [esp+4Ch+var_44]; float",
+    "line": "fstp    [esp+4Ch+scale]; float",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6972AB",
-    "line": "fld     [esp+4Ch+arg_10]",
+    "line": "fld     [esp+4Ch+unknownChildTag]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1075,25 +1075,25 @@
   },
   {
     "ea": "0x6972E5",
-    "line": "fstp    [esp+44h+var_44]; float",
+    "line": "fstp    [esp+44h+scale]; float",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6972E8",
-    "line": "push    0; float",
+    "line": "push    0; localPosZ",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6972EA",
-    "line": "push    ebp; int",
+    "line": "push    ebp; localPosY",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6972EB",
-    "line": "push    esi; int",
+    "line": "push    esi; localPosX",
     "mnemonic": "push",
     "size": 1
   },
@@ -1147,7 +1147,7 @@
   },
   {
     "ea": "0x697301",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1231,7 +1231,7 @@
   },
   {
     "ea": "0x697331",
-    "line": "call    EffectItem_GetArea",
+    "line": "call    EffectItem_GetArea; Effective area: returns 0 for EffectSetting NoArea (0x200) or Self range (0); otherwise raw EffectItem+0x8 area.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1273,13 +1273,13 @@
   },
   {
     "ea": "0x697346",
-    "line": "mov     [esp+3Ch+arg_10], eax",
+    "line": "mov     [esp+3Ch+unknownChildTag], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x69734A",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1321,7 +1321,7 @@
   },
   {
     "ea": "0x69735D",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1333,7 +1333,7 @@
   },
   {
     "ea": "0x697364",
-    "line": "call    sub_441800",
+    "line": "call    sub_441800; ODismemberment authority: loaded cell effect child lookup by quadrant/index; hit particles use index 3 after sub_4C9BE0(ref).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1345,7 +1345,7 @@
   },
   {
     "ea": "0x69736B",
-    "line": "mov     [esp+3Ch+arg_C], eax",
+    "line": "mov     [esp+3Ch+parentNode], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1405,7 +1405,7 @@
   },
   {
     "ea": "0x697389",
-    "line": "push    offset dword_B258DC",
+    "line": "push    offset stru_B258DC",
     "mnemonic": "push",
     "size": 5
   },
@@ -1441,7 +1441,7 @@
   },
   {
     "ea": "0x69739D",
-    "line": "mov     eax, offset dword_B258DC",
+    "line": "mov     eax, offset stru_B258DC",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1537,7 +1537,7 @@
   },
   {
     "ea": "0x6973D4",
-    "line": "push    0; float",
+    "line": "push    0; useCachedClone",
     "mnemonic": "push",
     "size": 2
   },
@@ -1549,7 +1549,7 @@
   },
   {
     "ea": "0x6973D9",
-    "line": "fstp    [esp+50h+var_44]; float",
+    "line": "fstp    [esp+50h+scale]; scale",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1597,7 +1597,7 @@
   },
   {
     "ea": "0x6973F5",
-    "line": "mov     ecx, [esp+50h+arg_C]",
+    "line": "mov     ecx, [esp+50h+parentNode]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1633,19 +1633,19 @@
   },
   {
     "ea": "0x697406",
-    "line": "mov     eax, [esp+5Ch+arg_10]",
+    "line": "mov     eax, [esp+5Ch+unknownChildTag]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x69740A",
-    "line": "push    eax; float",
+    "line": "push    eax; modelPath",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x69740B",
-    "line": "push    ecx; int",
+    "line": "push    ecx; parentNode",
     "mnemonic": "push",
     "size": 1
   },
@@ -1663,31 +1663,31 @@
   },
   {
     "ea": "0x69740F",
-    "line": "fstp    [esp+68h+var_68]; float",
+    "line": "fstp    [esp+68h+durationSeconds]; durationSeconds",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x697412",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x697417",
-    "line": "push    eax; int",
+    "line": "push    eax; parentCell",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x697418",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x69741A",
-    "line": "call    sub_5713F0",
+    "line": "call    BSTempEffectParticle_Constructor; Verified: constructs BSTempEffectParticle; parameters include cell, duration, NiNode parent, model path, direction XYZ, local position XYZ, scale, and cached-clone flag. Body-hit caller 0x5EF214 passes direction XYZ and position XYZ; constructor writes position components into the NiAVObject local-transform translation (including stores at root+0x54/+0x58). It applies |scale|, attaches the cloned NIF and starts controllers. Cached-clone choice is controlled by the final bool. All parameters now typed by observed data flow.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1711,13 +1711,13 @@
   },
   {
     "ea": "0x697425",
-    "line": "push    edi",
+    "line": "push    edi; effect",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x697426",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); self",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1729,7 +1729,7 @@
   },
   {
     "ea": "0x697433",
-    "line": "call    sub_678D30",
+    "line": "call    ActorProcessManager_RegisterTempEffect; [Verified] ActorProcessManager_RegisterTempEffect increments the effect reference and routes GetTypeID 4-6 into extendedTempEffects (+0x48), all other IDs into activeTempEffects (+0x40). Vtable evidence confirms decals 0/1 and particles 2 use the active list. Fallout divergence: its BGSDecalManager updates distinct simple-decal and emitter collections instead of using this per-actor temp-effect routing; one-to-one equivalence is Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1747,7 +1747,7 @@
   },
   {
     "ea": "0x69743F",
-    "line": "call    sub_570C00",
+    "line": "call    PlaySpecialIdleOnControllerManager; Area effect path starts SpecialIdle_AreaEffect on spawned effect object's controller manager via sub_570C00; no actor KFFZ lookup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1945,7 +1945,7 @@
   },
   {
     "ea": "0x6974AE",
-    "line": "fstp    [esp+48h+var_44]; float",
+    "line": "fstp    [esp+48h+scale]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2011,7 +2011,7 @@
   },
   {
     "ea": "0x6974D1",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2074,5 +2074,77 @@
     "line": "retn    18h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C5A70",
+    "line": "mov     eax, [ebp-28h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5A73",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C5A74",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5A79",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C5A7A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C5A7B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C5A7F",
+    "line": "lea     eax, [edx-2Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5A82",
+    "line": "mov     ecx, [edx-30h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5A85",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C5A87",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5A8C",
+    "line": "mov     eax, offset stru_AEE1A4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5A91",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

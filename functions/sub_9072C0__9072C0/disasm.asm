@@ -503,7 +503,6 @@
 0x9078E1: cmp     [esp+4A0h+var_494], eax
 0x9078E5: jz      loc_9079D4
 0x9078EB: jmp     short loc_9078F0
-0x9078ED: align 10h
 0x9078F0: mov     edi, [esp+4A0h+var_494]
 0x9078F4: mov     esi, [edi]
 0x9078F6: mov     ecx, [esp+4A0h+var_230]

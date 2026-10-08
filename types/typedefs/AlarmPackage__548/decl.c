@@ -1,1 +1,5 @@
-AlarmPackage
+struct AlarmPackage
+{
+TESPackage base;
+CrimeListNode *crimes;
+};

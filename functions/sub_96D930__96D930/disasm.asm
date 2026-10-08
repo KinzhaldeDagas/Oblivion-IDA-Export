@@ -1,5 +1,5 @@
 0x96D930: push    ebx
-0x96D931: mov     ebx, dword ptr [esp+4+ArgList]
+0x96D931: mov     ebx, [esp+4+ArgList]
 0x96D935: push    esi
 0x96D936: mov     eax, ebx
 0x96D938: push    edi

@@ -1,126 +1,133 @@
-unsigned int __userpurge sub_7952B0@<eax>(
-        _DWORD *this@<ecx>,
-        int a2@<ebx>,
-        int a3@<edi>,
-        int a4,
-        _WORD *Src,
-        unsigned int a6,
-        int a7)
+// OBLIVION AUTHORITY (2026-08-30): vector<unsigned short> insert-fill core. Uses 2-byte element arithmetic, overlap-safe moves, and 1.5x growth.
+void __thiscall OB_stVectorUShort_InsertFill_010201A0(
+        OB_stVectorUShort_010201A0 *this,
+        OB_stVectorUShortIterator_010201A0 position,
+        unsigned int count,
+        const unsigned __int16 *value)
 {
-  int v8; // edx
-  unsigned int result; // eax
+  int v4; // ebx
+  int v5; // edi
+  unsigned __int16 *begin; // edx
+  unsigned int v8; // eax
+  int v10; // ecx
   int v11; // ecx
-  int v12; // ecx
-  unsigned int v13; // eax
-  int v14; // ecx
+  unsigned int v12; // eax
+  int v13; // ecx
+  int v14; // eax
   int v15; // eax
-  int v16; // eax
-  unsigned int v17; // ecx
-  char *v18; // edi
-  int v19; // eax
-  _WORD *v20; // eax
-  int v21; // ecx
-  int v22; // ecx
-  int v23; // eax
-  unsigned int v24; // ebp
-  _BYTE *v25; // ebx
-  int v26; // eax
-  bool v27; // cf
-  int v28; // ebp
-  rsize_t v29; // [esp-14h] [ebp-20h]
-  rsize_t v30; // [esp-8h] [ebp-14h]
-  int v31; // [esp+8h] [ebp-4h]
-  char *v32; // [esp+18h] [ebp+Ch]
-  int v33; // [esp+18h] [ebp+Ch]
+  unsigned __int16 *v16; // ecx
+  char *v17; // edi
+  int v18; // eax
+  unsigned __int16 *v19; // eax
+  int v20; // ecx
+  unsigned __int16 *v21; // ecx
+  int v22; // eax
+  unsigned int v23; // ebp
+  unsigned __int16 *end; // ebx
+  unsigned int v25; // eax
+  bool v26; // cf
+  const unsigned __int16 *v27; // ebp
+  rsize_t v28; // [esp-14h] [ebp-20h]
+  rsize_t v29; // [esp-8h] [ebp-14h]
+  int v30; // [esp+8h] [ebp-4h]
+  unsigned __int16 *valuea; // [esp+18h] [ebp+Ch]
+  char *valueb; // [esp+18h] [ebp+Ch]
 
-  v8 = *(this + 1);
-  a7 = *(unsigned __int16 *)a7;
-  if ( v8 )
-    result = (*(this + 3) - v8) >> 1;
+  begin = this->begin; /*0x7952bc*/
+  value = (const unsigned __int16 *)*value; /*0x7952c1*/
+  if ( begin ) /*0x7952c5*/
+    v8 = this->capacityEnd - begin; /*0x7952d0*/
   else
-    result = 0;
-  if ( a6 )
+    v8 = 0; /*0x7952c7*/
+  if ( count ) /*0x7952d8*/
   {
-    if ( v8 )
-      v11 = (*(this + 2) - v8) >> 1;
+    if ( begin ) /*0x7952e0*/
+      v10 = this->end - begin; /*0x7952eb*/
     else
-      v11 = 0;
-    HIDWORD(v30) = a3;
-    if ( 0xFFFFFFFF - v11 < a6 )
-      sub_790B90(0xFFFFFFFF - v11);
-    if ( v8 )
-      v12 = (*(this + 2) - v8) >> 1;
+      v10 = 0; /*0x7952e2*/
+    HIDWORD(v29) = v5; /*0x7952ed*/
+    if ( 0xFFFFFFFF - v10 < count ) /*0x7952f5*/
+      OB_stVector_ThrowLengthError_010201A0(0xFFFFFFFF - v10); /*0x7952f7*/
+    if ( begin ) /*0x7952fe*/
+      v11 = this->end - begin; /*0x795309*/
     else
-      v12 = 0;
-    LODWORD(v30) = a2;
-    if ( result >= a6 + v12 )
+      v11 = 0; /*0x795300*/
+    LODWORD(v29) = v4; /*0x79530f*/
+    if ( v8 >= count + v11 ) /*0x795310*/
     {
-      v25 = (_BYTE *)*(this + 2);
-      v26 = 2 * a6;
-      v27 = (v25 - (_BYTE *)Src) >> 1 < a6;
-      v33 = 2 * a6;
-      if ( v27 )
+      end = this->end; /*0x7953e9*/
+      v25 = 2 * count; /*0x7953f6*/
+      v26 = end - position.current < count; /*0x7953fa*/
+      valueb = (char *)(2 * count); /*0x7953fc*/
+      if ( v26 ) /*0x795402*/
       {
-        sub_794E80(Src, (int)v25, &Src[v26 / 2u]);
-        sub_794F90((_WORD *)*(this + 2), a6 - ((*(this + 2) - (int)Src) >> 1), &a7);
-        *(this + 2) += v33;
-        return (unsigned int)sub_794E30(Src, (_WORD *)(*(this + 2) - v33), &a7);
+        OB_stVectorUShort_UninitializedCopyRange_010201A0(position.current, end, &position.current[v25 / 2]); /*0x795409*/
+        OB_stVectorUShort_UninitializedFillN_010201A0( /*0x795422*/
+          this->end,
+          count - (this->end - position.current),
+          (const unsigned __int16 *)&value);
+        this->end = (unsigned __int16 *)((char *)this->end + (unsigned int)valueb); /*0x79542b*/
+        OB_stVectorUShort_CopyFillRange_010201A0( /*0x79543a*/
+          position.current,
+          (unsigned __int16 *)((char *)this->end - valueb),
+          (const unsigned __int16 *)&value);
       }
       else
       {
-        v28 = (int)&v25[-v26];
-        *(this + 2) = sub_794E80(&v25[-v26], (int)v25, v25);
-        sub_794E50(Src, v28, (int)v25);
-        return (unsigned int)sub_794E30(Src, &Src[v33 / 2u], &a7);
+        v27 = &end[v25 / 0xFFFFFFFE]; /*0x79544d*/
+        this->end = OB_stVectorUShort_UninitializedCopyRange_010201A0(&end[v25 / 0xFFFFFFFE], end, end); /*0x795459*/
+        OB_stVectorUShort_CopyBackwardRange_010201A0(position.current, v27, end); /*0x79545c*/
+        OB_stVectorUShort_CopyFillRange_010201A0( /*0x79546e*/
+          position.current,
+          (unsigned __int16 *)((char *)position.current + (unsigned int)valueb),
+          (const unsigned __int16 *)&value);
       }
     }
     else
     {
-      if ( 0xFFFFFFFF - (result >> 1) >= result )
-        v13 = (result >> 1) + result;
+      if ( 0xFFFFFFFF - (v8 >> 1) >= v8 ) /*0x795321*/
+        v12 = (v8 >> 1) + v8; /*0x795327*/
       else
-        v13 = 0;
-      if ( v8 )
-        v14 = (*(this + 2) - v8) >> 1;
+        v12 = 0; /*0x795323*/
+      if ( begin ) /*0x79532b*/
+        v13 = this->end - begin; /*0x795336*/
       else
-        v14 = 0;
-      if ( v13 < a6 + v14 )
+        v13 = 0; /*0x79532d*/
+      if ( v12 < count + v13 ) /*0x79533c*/
       {
-        if ( v8 )
-          v15 = (*(this + 2) - v8) >> 1;
+        if ( begin ) /*0x795340*/
+          v14 = this->end - begin; /*0x79534b*/
         else
-          v15 = 0;
-        v13 = a6 + v15;
+          v14 = 0; /*0x795342*/
+        v12 = count + v14; /*0x79534d*/
       }
-      v31 = 2 * v13;
-      v16 = FormHeapAlloc(2 * v13);
-      v17 = *(this + 1);
-      v18 = (char *)v16;
-      v19 = 2 * ((int)((int)Src - v17) >> 1);
-      v32 = &v18[v19];
-      if ( (int)((int)Src - v17) >> 1 )
-        memmove_s(v18, __PAIR64__(v17, v19), (const void *)v19, v30);
-      v20 = sub_794F90(v32, a6, &a7);
-      v21 = (*(this + 2) - (int)Src) >> 1;
-      if ( v21 )
+      v30 = 2 * v12; /*0x795352*/
+      v15 = FormHeapAlloc(2 * v12); /*0x795356*/
+      v16 = this->begin; /*0x79535f*/
+      v17 = (char *)v15; /*0x795362*/
+      v18 = 2 * (position.current - v16); /*0x79536d*/
+      valuea = (unsigned __int16 *)&v17[v18]; /*0x795373*/
+      if ( position.current - v16 ) /*0x79536b*/
+        memmove_s(v17, __PAIR64__((unsigned int)v16, v18), (const void *)v18, v29); /*0x79537d*/
+      v19 = OB_stVectorUShort_UninitializedFillN_010201A0(valuea, count, (const unsigned __int16 *)&value); /*0x795392*/
+      v20 = this->end - position.current; /*0x79539c*/
+      if ( v20 ) /*0x79539e*/
       {
-        HIDWORD(v29) = Src;
-        LODWORD(v29) = 2 * v21;
-        memmove_s(v20, v29, (const void *)v29, v30);
+        HIDWORD(v28) = position.current; /*0x7953a3*/
+        LODWORD(v28) = 2 * v20; /*0x7953a4*/
+        memmove_s(v19, v28, (const void *)v28, v29); /*0x7953a6*/
       }
-      v22 = *(this + 1);
-      if ( v22 )
-        v23 = (*(this + 2) - v22) >> 1;
+      v21 = this->begin; /*0x7953ae*/
+      if ( v21 ) /*0x7953b3*/
+        v22 = this->end - v21; /*0x7953be*/
       else
-        v23 = 0;
-      v24 = v23 + a6;
-      if ( v22 )
-        FormHeapFree(*(this + 1));
-      result = (unsigned int)&v18[2 * v24];
-      *(this + 1) = v18;
-      *(this + 3) = &v18[v31];
-      *(this + 2) = result;
+        v22 = 0; /*0x7953b5*/
+      v23 = v22 + count; /*0x7953c0*/
+      if ( v21 ) /*0x7953c4*/
+        FormHeapFree((unsigned int)this->begin); /*0x7953c7*/
+      this->begin = (unsigned __int16 *)v17; /*0x7953d9*/
+      this->capacityEnd = (unsigned __int16 *)&v17[v30]; /*0x7953dd*/
+      this->end = (unsigned __int16 *)&v17[2 * v23]; /*0x7953e0*/
     }
   }
-  return result;
 }

@@ -1,4 +1,4 @@
-0x7C6230: sub     esp, 8
+0x7C6230: sub     esp, 8; Search the native ShadowSceneNode full-light list for a ShadowSceneLight whose backing NiLight identity matches the supplied source.
 0x7C6233: push    ebx
 0x7C6234: push    ebp
 0x7C6235: xor     ebx, ebx
@@ -16,8 +16,8 @@
 0x7C6253: lea     eax, [esp+18h+var_4]
 0x7C6257: push    eax
 0x7C6258: mov     ecx, ebp
-0x7C625A: call    sub_405AD0
-0x7C625F: mov     ecx, [esp+18h+arg_0]
+0x7C625A: call    ShadowSceneLight_GetLightRef
+0x7C625F: mov     ecx, [esp+18h+backingLight]
 0x7C6263: or      ebx, 1
 0x7C6266: cmp     [eax], ecx
 0x7C6268: mov     [esp+18h+var_5], 1

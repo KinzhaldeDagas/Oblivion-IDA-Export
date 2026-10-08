@@ -1,4 +1,4 @@
-0x500130: mov     eax, [esp+arg_C]
+0x500130: mov     eax, [esp+arg_C]; TES4 authoritative parser exception used by MessageBox and EssentialDeathReload. Handles message-style variable argument bytecode, not needed for fixed-param OBSE movement commands.
 0x500134: mov     ecx, [esp+arg_8]
 0x500138: mov     edx, [esp+arg_4]
 0x50013C: push    1

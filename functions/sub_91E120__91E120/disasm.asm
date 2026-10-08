@@ -149,7 +149,7 @@
 0x91E32A: mov     esi, [esi+10h]
 0x91E32D: push    1
 0x91E32F: push    1
-0x91E331: call    sub_88D370
+0x91E331: call    hkCharacterContext_GetStateId; hkCharacterContext state id accessor used by controller update; proxy+0x1E0 context stores current state id at +0x0C.
 0x91E336: push    eax
 0x91E337: push    edi
 0x91E338: push    esi

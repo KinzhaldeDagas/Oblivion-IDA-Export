@@ -1,4 +1,4 @@
-0x527C90: push    0FFFFFFFFh
+0x527C90: push    0FFFFFFFFh; Constructs a 0xC4 FaceGenRenderState. The first 0x60 bytes are FaceGenHeadParameters; appearance assets and four 0x10-byte pointer arrays follow.
 0x527C92: push    offset FaceGenHeadParameters_Ctor_SEH
 0x527C97: mov     eax, large fs:0
 0x527C9D: push    eax
@@ -12,8 +12,8 @@
 0x527CAA: lea     eax, [esp+20h+var_C]
 0x527CAE: mov     large fs:0, eax
 0x527CB4: mov     esi, ecx
-0x527CB6: push    offset sub_43ACE0; a5
-0x527CBB: push    offset sub_43EB30; a4
+0x527CB6: push    offset FaceGenMatrix_Destruct; a5
+0x527CBB: push    offset FaceGenMatrix_Construct; a4
 0x527CC0: push    4; size
 0x527CC2: push    18h; a2
 0x527CC4: push    esi; a1
@@ -66,7 +66,6 @@
 0x527DAE: cmp     [esi+8Eh], ax
 0x527DB5: jbe     short loc_527DD7
 0x527DB7: jmp     short loc_527DC0
-0x527DB9: align 10h
 0x527DC0: mov     ebx, [esi+88h]
 0x527DC6: movzx   edi, cx
 0x527DC9: add     ecx, edx
@@ -97,3 +96,44 @@
 0x527E35: pop     ebx
 0x527E36: add     esp, 10h
 0x527E39: retn
+0x431320: mov     eax, [ecx+4]
+0x431323: push    eax
+0x431324: mov     dword ptr [ecx], offset ??_7?$NiTArray@PBD@@6B@; const NiTArray<char const *>::`vftable'
+0x43132A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x43132F: pop     ecx
+0x431330: retn
+0x521CB0: mov     eax, [ecx+4]
+0x521CB3: push    eax
+0x521CB4: mov     dword ptr [ecx], offset ??_7?$NiTArray@PAVTESModel@@@@6B@; const NiTArray<TESModel *>::`vftable'
+0x521CBA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x521CBF: pop     ecx
+0x521CC0: retn
+0x521CD0: mov     eax, [ecx+4]
+0x521CD3: push    eax
+0x521CD4: mov     dword ptr [ecx], offset ??_7?$NiTArray@PAVTESTexture@@@@6B@; const NiTArray<TESTexture *>::`vftable'
+0x521CDA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x521CDF: pop     ecx
+0x521CE0: retn
+0x9B8270: push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)
+0x9B8275: push    4; int
+0x9B8277: push    18h; unsigned int
+0x9B8279: mov     eax, [ebp-10h]
+0x9B827C: push    eax; void *
+0x9B827D: call    $LN21
+0x9B8282: retn
+0x9B8283: mov     ecx, [ebp-10h]
+0x9B8286: add     ecx, 74h ; 't'
+0x9B8289: jmp     loc_521CB0
+0x9B828E: mov     ecx, [ebp-10h]
+0x9B8291: add     ecx, 84h ; '„'
+0x9B8297: jmp     loc_521CD0
+0x9B829C: mov     ecx, [ebp-10h]
+0x9B829F: add     ecx, 94h ; '”'
+0x9B82A5: jmp     loc_431320
+0x9B82AA: mov     edx, [esp+arg_4]
+0x9B82AE: lea     eax, [edx-10h]
+0x9B82B1: mov     ecx, [edx-14h]
+0x9B82B4: xor     ecx, eax
+0x9B82B6: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B82BB: mov     eax, offset stru_AE2988
+0x9B82C0: jmp     ___CxxFrameHandler3

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6648D0",
-    "line": "push    esi",
+    "line": "push    esi; Increment the current eight-byte governing-attribute bonus bucket for AttributeActorValue 0..7. Both major and non-major skill increases invoke this before any major-only rollover logic.",
     "mnemonic": "push",
     "size": 1
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x664943",
-    "line": "mov     eax, [esp+4+arg_0]",
+    "line": "mov     eax, [esp+4+governingAttribute]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x66494F",
-    "line": "call    ActorValue_GetGroupOffsetFromAV",
+    "line": "call    ActorValue_GetGroupOffsetFromAV; RealArenaTraining fidelity pass: ActorValue_GetGroupOffsetFromAV(group, actorValue). Player skill-progress code calls this with group 2 before indexing player skillExp/requiredSkillExp.",
     "mnemonic": "call",
     "size": 5
   },

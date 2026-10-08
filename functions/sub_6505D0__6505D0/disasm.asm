@@ -1,4 +1,4 @@
-0x6505D0: push    esi
+0x6505D0: push    esi; BunkFix: furniture scan predicate. Rejects disabled/deleted/blocked refs, wrong cell, and refs owned by someone other than scanning actor; accepts TESFurniture categories through sub_4AE590/sub_4AE5A0.
 0x6505D1: mov     esi, [esp+4+arg_0]
 0x6505D5: test    esi, esi
 0x6505D7: jz      loc_6506B1
@@ -15,12 +15,12 @@
 0x6505FF: test    al, 1
 0x650601: jnz     loc_6506B1
 0x650607: push    edi
-0x650608: mov     edi, [esp+8+arg_4]
+0x650608: mov     edi, [esp+8+actorReference]
 0x65060C: test    edi, edi
 0x65060E: jz      loc_6506AC
-0x650614: push    esi
-0x650615: mov     ecx, offset unk_B3BA9C
-0x65061A: call    sub_446C30
+0x650614: push    esi; item
+0x650615: mov     ecx, offset stru_B3BA9C; this
+0x65061A: call    BSSimpleList__Contains; Generic BSSimpleList membership test. Dialogue menu code uses it to avoid duplicate MenuTopics; social AI uses it for the recent-conversation target cooldown list.
 0x65061F: test    al, al
 0x650621: jnz     loc_6506AC
 0x650627: mov     ecx, esi
@@ -31,22 +31,22 @@
 0x650634: call    sub_4DB9A0
 0x650639: test    al, al
 0x65063B: jz      short loc_6506AC
-0x65063D: mov     ecx, esi; this
-0x65063F: call    TESObjectREFR_GetOwner
+0x65063D: mov     ecx, esi; reference
+0x65063F: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x650644: test    eax, eax
 0x650646: jz      short loc_650656
-0x650648: push    1
-0x65064A: push    edi
-0x65064B: mov     ecx, esi
-0x65064D: call    TESOBjectREFR_IsOwnedBy
+0x650648: push    1; useFactionOwnership
+0x65064A: push    edi; actorReference
+0x65064B: mov     ecx, esi; reference
+0x65064D: call    TESObjectREFR_IsOwnedBy; RadiantAI: furniture/reference scan predicate rejects owned refs unless owned by the scanning actor; separate from food acquire list builder.
 0x650652: test    al, al
 0x650654: jz      short loc_6506AC
 0x650656: push    ebx
-0x650657: mov     ecx, esi
-0x650659: call    sub_4D8AF0
-0x65065E: mov     ecx, edi
+0x650657: mov     ecx, esi; this
+0x650659: call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.
+0x65065E: mov     ecx, edi; this
 0x650660: mov     ebx, eax
-0x650662: call    sub_4D8AF0
+0x650662: call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.
 0x650667: cmp     ebx, eax
 0x650669: pop     ebx
 0x65066A: jnz     short loc_6506AC
@@ -68,7 +68,7 @@
 0x65069D: test    al, al
 0x65069F: jz      short loc_6506AC
 0x6506A1: push    esi
-0x6506A2: mov     ecx, offset unk_B3BA9C
+0x6506A2: mov     ecx, offset stru_B3BA9C
 0x6506A7: call    BSSimpleList_PushFront
 0x6506AC: pop     edi
 0x6506AD: xor     al, al

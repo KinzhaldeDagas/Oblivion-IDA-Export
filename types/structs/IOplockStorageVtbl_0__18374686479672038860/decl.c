@@ -1,1 +1,1 @@
-IOplockStorageVtbl_0
+typedef IOplockStorageVtbl IOplockStorageVtbl_0;

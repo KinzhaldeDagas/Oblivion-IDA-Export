@@ -1,4 +1,4 @@
-0x6005F0: push    ebp
+0x6005F0: push    ebp; ODismemberment: candidate future death/kill integration point after visual/state pipeline is stable.
 0x6005F1: mov     ebp, esp
 0x6005F3: and     esp, 0FFFFFFF0h
 0x6005F6: sub     esp, 134h
@@ -17,9 +17,9 @@
 0x600620: call    eax
 0x600622: test    al, al
 0x600624: jnz     loc_60108B
-0x60062A: mov     ecx, esi
+0x60062A: mov     ecx, esi; this
 0x60062C: mov     [esi+80h], al
-0x600632: call    sub_5EF930
+0x600632: call    Actor__StopDialoguePlayback; Stops an Actor's current dialogue/audio/lip playback and associated animation state. Used before starting/replacing dialogue, on menu close, death/paralysis, and DialoguePackage active-speaker cleanup.
 0x600637: mov     eax, ds:0B333C4h
 0x60063C: cmp     esi, [eax+1E0h]
 0x600642: jnz     short loc_60064E
@@ -54,7 +54,7 @@
 0x6006AA: call    sub_424770
 0x6006AF: mov     edx, [esi+58h]
 0x6006B2: mov     ebx, [edx]
-0x6006B4: mov     ecx, offset fEssentialDeathTime
+0x6006B4: mov     ecx, 0B37D08h
 0x6006B9: call    GameSetting_GetSafeFloatPointer
 0x6006BE: fld     dword ptr [eax]
 0x6006C0: mov     eax, [ebx+0A0h]
@@ -68,7 +68,7 @@
 0x6006D9: mov     ecx, esi
 0x6006DB: call    eax
 0x6006DD: mov     ecx, esi; int
-0x6006DF: call    sub_5EAE70
+0x6006DF: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x6006E4: mov     ecx, [esi+58h]
 0x6006E7: test    ecx, ecx
 0x6006E9: jz      short loc_60071E
@@ -108,13 +108,13 @@
 0x600748: call    MagicCaster_InitializeCasting???
 0x60074D: push    6; newDeadState
 0x60074F: mov     ecx, esi; this
-0x600751: call    Actor_HandleDeathSTate????
+0x600751: call    Actor_HandleDeathState
 0x600756: push    8
 0x600758: mov     ecx, esi
 0x60075A: call    Actor_GetBaseCalcAVi
 0x60075F: mov     [esp+140h+var_114], eax
 0x600763: fild    [esp+140h+var_114]
-0x600767: mov     ecx, offset flt_B37D10
+0x600767: mov     ecx, offset unk_B37D10
 0x60076C: fstp    [esp+140h+var_114]
 0x600770: call    GameSetting_GetSafeFloatPointer
 0x600775: fld     dword ptr [eax]
@@ -221,8 +221,8 @@
 0x6008AA: call    Actor_IsNPC
 0x6008AF: test    al, al
 0x6008B1: jnz     short loc_6008BE
-0x6008B3: mov     ecx, esi; this
-0x6008B5: call    TESObjectREFR_GetOwner
+0x6008B3: mov     ecx, esi; reference
+0x6008B5: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x6008BA: test    eax, eax
 0x6008BC: jz      short loc_600901
 0x6008BE: test    edi, edi
@@ -242,7 +242,7 @@
 0x6008E2: mov     byte ptr [esi+80h], 0
 0x6008E9: jmp     short loc_600901
 0x6008EB: push    esi
-0x6008EC: mov     ecx, offset dword_B3BDB0
+0x6008EC: mov     ecx, (offset qword_B3BB2C+284h)
 0x6008F1: call    sub_67CB50
 0x6008F6: test    al, al
 0x6008F8: setz    cl
@@ -313,14 +313,14 @@
 0x6009C5: call    sub_5F0410
 0x6009CA: lea     ecx, [esi+5Ch]
 0x6009CD: call    MagicCaster_InitializeCasting???
-0x6009D2: push    0
-0x6009D4: push    0
-0x6009D6: push    20h ; ' '
-0x6009D8: mov     ecx, esi
-0x6009DA: call    Actor_LoadAnimGroup?
+0x6009D2: push    0; forceWeaponPrefix
+0x6009D4: push    0; weaponEntryDataArg
+0x6009D6: push    20h ; ' '; groupID
+0x6009D8: mov     ecx, esi; this
+0x6009DA: call    Actor_LoadAnimGroup_; Builds an initial encoded key from live actor movement/weapon state and requested fixed group ID, then returns ActorAnimData_ResolveAnimKeyFallback's concrete playable key or sentinel 0x00FF when no ActorAnimData exists.
 0x6009DF: movzx   ebx, ax
 0x6009E2: push    ebx
-0x6009E3: call    sub_51AA00
+0x6009E3: call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.
 0x6009E8: add     esp, 4
 0x6009EB: cmp     eax, 20h ; ' '
 0x6009EE: jnz     short loc_600A16
@@ -328,11 +328,11 @@
 0x6009F2: mov     eax, [edx+164h]
 0x6009F8: mov     ecx, esi
 0x6009FA: call    eax
-0x6009FC: push    0FFFFFFFFh
-0x6009FE: push    1
-0x600A00: push    ebx
-0x600A01: mov     ecx, eax
-0x600A03: call    ActorAnimData_PlayAnimGroup
+0x6009FC: push    0FFFFFFFFh; repeatOrAction
+0x6009FE: push    1; playImmediately
+0x600A00: push    ebx; encodedKey
+0x600A01: mov     ecx, eax; this
+0x600A03: call    ActorAnimData_PlayAnimGroup; Native group dispatcher. Reads fixed group-table slot (+0x08) and note-template class (+0x0C), normalizing slot aliases 5->0 and 6->3. For note classes 0/1, playImmediately=0 stores only the encoded key at ActorAnimData +0x70[slot] and repeat/action value at +0x7C[slot]; playImmediately=1 clears that queue and plays now. Classes 2..7 play immediately. No queued sequence pointer or path is stored.
 0x600A08: mov     ecx, [esi+58h]
 0x600A0B: mov     edx, [ecx]
 0x600A0D: mov     eax, [edx+194h]
@@ -384,7 +384,7 @@
 0x600AA3: jz      short loc_600AB0
 0x600AA5: push    8
 0x600AA7: mov     ecx, eax
-0x600AA9: call    sub_51CEC0
+0x600AA9: call    TESCreature_SelectSoundForAnimEnum; TESCreature sound selector: walks inherited creature data, chooses a sound entry by category index and probability.
 0x600AAE: jmp     short loc_600AB2
 0x600AB0: xor     eax, eax
 0x600AB2: test    eax, eax
@@ -432,7 +432,7 @@
 0x600B38: mov     ecx, edi; this
 0x600B3A: call    sub_6B73E0
 0x600B3F: push    edi
-0x600B40: call    FormHeapFree
+0x600B40: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x600B45: add     esp, 4
 0x600B48: jmp     short loc_600B5D
 0x600B4A: mov     edx, [esi]
@@ -444,7 +444,7 @@
 0x600B5B: call    edx
 0x600B5D: push    1; newDeadState
 0x600B5F: mov     ecx, esi; this
-0x600B61: call    Actor_HandleDeathSTate????
+0x600B61: call    Actor_HandleDeathState; BloodOnDeath death hook: chains Actor_HandleDeathState, then queues corpse blood on the first nonzero death transition. Emission is deferred to the frame hook; each cycle lasts fLeakSeconds (default 8s) and completed cycles do not restart unless death/corpse-hit queues a new cycle.
 0x600B66: cmp     esi, ds:0B333C4h
 0x600B6C: mov     eax, ds:0B33398h
 0x600B71: mov     ebx, [eax+24h]
@@ -507,7 +507,7 @@
 0x600C13: call    eax
 0x600C15: mov     ebx, [esi+58h]
 0x600C18: mov     edi, [ebx]
-0x600C1A: mov     ecx, offset TimeGlobals
+0x600C1A: mov     ecx, 0B332E0h
 0x600C1F: add     edi, 4F4h
 0x600C25: call    TimeGlobals_GetGameDaysPassed
 0x600C2A: test    eax, eax
@@ -516,7 +516,7 @@
 0x600C34: jge     short loc_600C3C
 0x600C36: fadd    dword ptr ds:0A2FC78h
 0x600C3C: fmul    qword ptr ds:0A2F920h
-0x600C42: mov     ecx, offset TimeGlobals
+0x600C42: mov     ecx, 0B332E0h
 0x600C47: fstp    [esp+140h+var_128]
 0x600C4B: call    TimeGlobals_GetGameHour
 0x600C50: fadd    [esp+140h+var_128]
@@ -566,24 +566,24 @@
 0x600CC8: jz      short loc_600CD2
 0x600CCA: lea     ecx, [esi+44h]; this
 0x600CCD: call    sub_4246F0
-0x600CD2: mov     ebx, [esi+3Ch]
+0x600CD2: mov     ebx, [esi+3Ch]; ODismemberment: after Actor_HandleDeathState(actor,1), Actor_Kill uses actor+0x3C as the root NiNode for post-death Havok/ragdoll work. This is the authoritative pre-ragdoll visual window used by the plugin.
 0x600CD5: mov     ecx, esi; this
-0x600CD7: call    MobileObject_GetCharProxy
+0x600CD7: call    MobileObject_GetCharProxy; ODismemberment: reads the MobileObject character proxy before post-death Havok processing; if present, its bhk world-object velocity is sampled and converted from Havok units.
 0x600CDC: test    eax, eax
 0x600CDE: jz      short loc_600D07
 0x600CE0: mov     ecx, esi; this
-0x600CE2: call    MobileObject_GetCharProxy
+0x600CE2: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x600CE7: test    eax, eax
 0x600CE9: jz      short loc_600D07
 0x600CEB: mov     eax, [eax+8]
 0x600CEE: test    eax, eax
 0x600CF0: jz      short loc_600D07
 0x600CF2: mov     ecx, eax
-0x600CF4: call    sub_8AC0A0
+0x600CF4: call    bhkWorldObject_GetLinearVelocityPtr; ODismemberment: bhkWorldObject_GetLinearVelocityPtr returns object+0x10. Actor_Kill converts this vector with HavokVector_ToWorldVector before later collision processing.
 0x600CF9: push    eax
 0x600CFA: lea     eax, [esp+144h+var_128]
 0x600CFE: push    eax
-0x600CFF: call    sub_43F3E0
+0x600CFF: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x600D04: add     esp, 8
 0x600D07: cmp     esi, ds:0B333C4h
 0x600D0D: mov     ecx, esi
@@ -627,18 +627,18 @@
 0x600D8A: call    eax
 0x600D8C: test    al, al
 0x600D8E: jz      loc_600E89
-0x600D94: push    0
+0x600D94: push    0; ODismemberment: recursive collision-object helper toggles bhkConstraint objects under actor root before death impulse work. Arg0 here means the remove/disable path observed in sub_8A53E0.
 0x600D96: push    ebx
-0x600D97: call    sub_8A5580
+0x600D97: call    sub_8A5580; ODismemberment: recursively walks NiAVObject children and dispatches the bhkConstraint attach/remove helpers on each bhkCollisionObject-backed node.
 0x600D9C: mov     edx, [esi]
 0x600D9E: mov     eax, [edx+1E0h]
 0x600DA4: add     esp, 8
 0x600DA7: mov     ecx, esi
 0x600DA9: call    eax
 0x600DAB: push    ecx
-0x600DAC: lea     ecx, [esp+144h+var_104]
-0x600DB0: fstp    [esp+144h+duration]; float
-0x600DB3: call    NiMatrix33_InitRotationTransform
+0x600DAC: lea     ecx, [esp+144h+var_104]; this
+0x600DB0: fstp    [esp+144h+duration]; angleZ
+0x600DB3: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x600DB8: fldz
 0x600DBA: fst     dword ptr [esp+140h+var_128]
 0x600DBE: lea     ecx, [esp+140h+var_128]
@@ -663,8 +663,8 @@
 0x600DFD: call    sub_4529E0
 0x600E02: lea     eax, [esp+148h+var_E0]
 0x600E06: push    eax
-0x600E07: push    ebx
-0x600E08: call    sub_536660
+0x600E07: push    ebx; ODismemberment: recursive helper applies a transformed vector to bhk collision objects through bhkRefObject_UpdateHavokObject and a Havok vfunc +0x54.
+0x600E08: call    sub_536660; ODismemberment: recursively walks NiAVObject children and pushes a translated vector into each bhkCollisionObject-backed Havok object via sub_4D6AF0.
 0x600E0D: add     esp, 10h
 0x600E10: jmp     short loc_600E89
 0x600E12: mov     edx, [esi]
@@ -672,9 +672,9 @@
 0x600E1A: mov     ecx, esi
 0x600E1C: call    eax
 0x600E1E: push    ecx
-0x600E1F: lea     ecx, [esp+144h+var_104]
-0x600E23: fstp    [esp+144h+duration]; float
-0x600E26: call    NiMatrix33_InitRotationTransform
+0x600E1F: lea     ecx, [esp+144h+var_104]; this
+0x600E23: fstp    [esp+144h+duration]; angleZ
+0x600E26: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x600E2B: fldz
 0x600E2D: fst     dword ptr [esp+140h+var_128]
 0x600E31: lea     ecx, [esp+140h+var_128]
@@ -696,7 +696,7 @@
 0x600E62: push    6; a2
 0x600E64: push    ebx; a1
 0x600E65: mov     [esp+150h+var_120], eax
-0x600E69: call    sub_88D070
+0x600E69: call    sub_88D070; ODismemberment: calls bhkBlendCollisionObject traversal helper with blend state 6 and enabled flag; this requires existing bhkBlendCollisionObject data on the Ni tree.
 0x600E6E: fldz
 0x600E70: add     esp, 10h
 0x600E73: push    0; int
@@ -706,7 +706,7 @@
 0x600E7B: lea     ecx, [esp+14Ch+var_128]
 0x600E7F: push    ecx; int
 0x600E80: push    ebx; int
-0x600E81: call    sub_8AB440
+0x600E81: call    sub_8AB440; ODismemberment: recursive death impulse/force path. It creates or updates bhkBlendController/bhkForceController and applies force to collision/blend objects already present under the actor root.
 0x600E86: add     esp, 14h
 0x600E89: mov     edx, ds:0B3B914h
 0x600E8F: cmp     edx, ds:0B148E4h
@@ -726,7 +726,7 @@
 0x600EB8: test    eax, eax
 0x600EBA: jnz     short loc_600F03
 0x600EBC: push    eax; Seed
-0x600EBD: call    GetRandomLargeInteger?
+0x600EBD: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x600EC2: cdq
 0x600EC3: mov     ecx, 64h ; 'd'
 0x600EC8: idiv    ecx
@@ -750,12 +750,12 @@
 0x600F03: cmp     dword ptr [esi+58h], 0
 0x600F07: jz      short loc_600F4F
 0x600F09: mov     ecx, esi; int
-0x600F0B: call    sub_5EAE70
+0x600F0B: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x600F10: mov     ecx, [esi+58h]
-0x600F13: mov     ecx, [ecx+8]
+0x600F13: mov     ecx, [ecx+8]; self
 0x600F16: test    ecx, ecx
 0x600F18: jz      short loc_600F36
-0x600F1A: call    sub_5660A0
+0x600F1A: call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).
 0x600F1F: test    al, al
 0x600F21: jz      short loc_600F36
 0x600F23: mov     edx, [esi+58h]

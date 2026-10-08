@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5F9620",
-    "line": "push    ebp",
+    "line": "push    ebp; Probable name: Actor_ProcessAttackReachProbe. This routine is called from Actor_ProcessAction's two reach/attack branches and from Actor_AttackHandling::DetermineTarget; it returns a byte and contains target/static-hit probing, impact-particle registration, and conditional attack/script follow-up. The two floating x87 inputs are visible in DetermineTarget's caller, but their semantic roles and Actor_ProcessAction's input values remain Unknown.",
     "mnemonic": "push",
     "size": 1
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x5F9667",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x5F9674",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x5F9687",
-    "line": "mov     [esp+0C4h+var_9C], eax",
+    "line": "mov     [esp+0C4h+modelPath], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x5F9697",
-    "line": "mov     [esp+0C4h+var_9C], ebx",
+    "line": "mov     [esp+0C4h+modelPath], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x5F96EB",
-    "line": "call    sub_535510",
+    "line": "call    bhkSphereShapeProbeCollector_GetWorldFromPhantom",
     "mnemonic": "call",
     "size": 5
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x5F970C",
-    "line": "call    sub_5354C0",
+    "line": "call    bhkSphereShapeProbeCollector_GetPhantomTransform",
     "mnemonic": "call",
     "size": 5
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x5F9718",
-    "line": "call    sub_65ABE0",
+    "line": "call    MobileObject_GetCollisionFilterInfo; Returns actor/proxy collision filter identity by calling 0x57E270 on MobileObject_GetCharProxy(this). Callers keep high 16 bits and OR in the chosen collision layer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x5F972C",
-    "line": "call    sub_535460",
+    "line": "call    bhkSphereShapeProbeCollector_SetCollisionIdentityHigh16",
     "mnemonic": "call",
     "size": 5
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x5F9736",
-    "line": "fstp    [esp+0C8h+var_C8]; float",
+    "line": "fstp    [esp+0C8h+damageOffset]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x5F9745",
-    "line": "call    sub_535540",
+    "line": "call    bhkSphereShapeProbeCollector_CastAlongVector",
     "mnemonic": "call",
     "size": 5
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x5F9768",
-    "line": "call    sub_4DC270",
+    "line": "call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.",
     "mnemonic": "call",
     "size": 5
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x5F9772",
-    "line": "mov     [esp+0C4h+var_94], eax",
+    "line": "mov     [esp+0C4h+self], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x5F977A",
-    "line": "mov     [esp+0C4h+var_94], edi",
+    "line": "mov     [esp+0C4h+self], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -811,7 +811,7 @@
   },
   {
     "ea": "0x5F97CD",
-    "line": "call    sub_53D4B0",
+    "line": "call    NiTransform_TransformPoint; ODismemberment: __thiscall NiTransform point transform helper. Plugin hit capture must pass transform in ECX; cdecl here crashes on actor hits.",
     "mnemonic": "call",
     "size": 5
   },
@@ -871,7 +871,7 @@
   },
   {
     "ea": "0x5F97F0",
-    "line": "call    sub_5E6A40",
+    "line": "call    Actor_GetWeaponTipLocalPointForHit; ODismemberment combat decode: returns a local-space weapon/reach point for hit visuals. Uses actor GetNiNode, equipped weapon combat distance, named weapon node lookup, and native transform helpers. Attack tail passes this as one of Actor_HandleHitVisualEffects' vector inputs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -883,7 +883,7 @@
   },
   {
     "ea": "0x5F97F6",
-    "line": "lea     edx, [esp+0C8h+var_48]",
+    "line": "lea     edx, [esp+0C8h+unknownChildName]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -901,7 +901,7 @@
   },
   {
     "ea": "0x5F9800",
-    "line": "call    sub_53D4B0",
+    "line": "call    NiTransform_TransformPoint; ODismemberment: __thiscall NiTransform point transform helper. Plugin hit capture must pass transform in ECX; cdecl here crashes on actor hits.",
     "mnemonic": "call",
     "size": 5
   },
@@ -961,7 +961,7 @@
   },
   {
     "ea": "0x5F9825",
-    "line": "fstp    [esp+0C4h+var_A8]",
+    "line": "fstp    [esp+0C4h+materialId]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1003,7 +1003,7 @@
   },
   {
     "ea": "0x5F9841",
-    "line": "fld     [esp+0C4h+var_A8]",
+    "line": "fld     [esp+0C4h+materialId]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1039,7 +1039,7 @@
   },
   {
     "ea": "0x5F9859",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1081,7 +1081,7 @@
   },
   {
     "ea": "0x5F986D",
-    "line": "call    sub_43F3E0",
+    "line": "call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1309,7 +1309,7 @@
   },
   {
     "ea": "0x5F98DD",
-    "line": "mov     [esp+0C8h+var_A8], 0",
+    "line": "mov     [esp+0C8h+materialId], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -1411,7 +1411,7 @@
   },
   {
     "ea": "0x5F9919",
-    "line": "mov     [esp+0C4h+var_A8], ecx",
+    "line": "mov     [esp+0C4h+materialId], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1489,13 +1489,13 @@
   },
   {
     "ea": "0x5F993C",
-    "line": "mov     [esp+0C4h+var_A8], eax",
+    "line": "mov     [esp+0C4h+materialId], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5F9940",
-    "line": "mov     ecx, offset unk_B37138",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+460h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1519,7 +1519,7 @@
   },
   {
     "ea": "0x5F994F",
-    "line": "fstp    [esp+0CCh+var_C8]; float",
+    "line": "fstp    [esp+0CCh+damageOffset]; b",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1531,13 +1531,13 @@
   },
   {
     "ea": "0x5F9957",
-    "line": "fstp    [esp+0CCh+var_CC]; float",
+    "line": "fstp    [esp+0CCh+a]; a",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5F995A",
-    "line": "call    sub_4AC760",
+    "line": "call    Float_Min; Returns min(a,b) as a single-precision float. Native callers push two floats, clean 8 bytes, and consume ST0 as float; prior double return was an x87 decompiler artifact.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1555,7 +1555,7 @@
   },
   {
     "ea": "0x5F9966",
-    "line": "mov     ecx, offset unk_B37130",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+458h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1747,7 +1747,7 @@
   },
   {
     "ea": "0x5F99DA",
-    "line": "mov     ecx, offset unk_B37140",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+468h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1801,7 +1801,7 @@
   },
   {
     "ea": "0x5F99F7",
-    "line": "mov     ecx, offset unk_B37140",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+468h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1849,7 +1849,7 @@
   },
   {
     "ea": "0x5F9A14",
-    "line": "fstp    [esp+0C8h+var_C8]; float",
+    "line": "fstp    [esp+0C8h+damageOffset]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1909,7 +1909,7 @@
   },
   {
     "ea": "0x5F9A34",
-    "line": "mov     ecx, offset unk_B37148",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+470h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1939,7 +1939,7 @@
   },
   {
     "ea": "0x5F9A45",
-    "line": "fstp    [esp+0C8h+var_C8]; float",
+    "line": "fstp    [esp+0C8h+damageOffset]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1981,7 +1981,7 @@
   },
   {
     "ea": "0x5F9A5F",
-    "line": "mov     ecx, [esp+0CCh+var_9C]",
+    "line": "mov     ecx, [esp+0CCh+modelPath]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2077,7 +2077,7 @@
   },
   {
     "ea": "0x5F9A8E",
-    "line": "mov     ecx, [esp+0C4h+var_9C]",
+    "line": "mov     ecx, [esp+0C4h+modelPath]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2101,7 +2101,7 @@
   },
   {
     "ea": "0x5F9A99",
-    "line": "mov     eax, [esp+0C4h+var_A8]",
+    "line": "mov     eax, [esp+0C4h+materialId]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2113,7 +2113,7 @@
   },
   {
     "ea": "0x5F9AA1",
-    "line": "mov     edx, [esp+0C4h+var_94]",
+    "line": "mov     edx, [esp+0C4h+self]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2287,19 +2287,19 @@
   },
   {
     "ea": "0x5F9AFD",
-    "line": "lea     ecx, [esp+0CCh+var_48]",
+    "line": "lea     ecx, [esp+0CCh+unknownChildName]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x5F9B04",
-    "line": "fstp    [esp+0CCh+var_CC]; float",
+    "line": "fstp    [esp+0CCh+a]; float",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5F9B07",
-    "line": "push    ecx; int",
+    "line": "push    ecx; localPosZ",
     "mnemonic": "push",
     "size": 1
   },
@@ -2341,7 +2341,7 @@
   },
   {
     "ea": "0x5F9B1E",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2401,7 +2401,7 @@
   },
   {
     "ea": "0x5F9B3B",
-    "line": "mov     edi, [esp+0C4h+var_94]",
+    "line": "mov     edi, [esp+0C4h+self]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2455,13 +2455,13 @@
   },
   {
     "ea": "0x5F9B53",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F9B55",
-    "line": "call    sub_5E1BF0",
+    "line": "call    Actor_GetBloodParticlePath; Verified: actor/creature hit-target branch obtains the target actor's blood-particle path after target validity/health checks; the other branch selects a static impact-material particle.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2479,7 +2479,7 @@
   },
   {
     "ea": "0x5F9B62",
-    "line": "mov     [esp+0C4h+var_9C], ecx",
+    "line": "mov     [esp+0C4h+modelPath], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2491,19 +2491,19 @@
   },
   {
     "ea": "0x5F9B68",
-    "line": "mov     edx, [esp+0C4h+var_A8]",
+    "line": "mov     edx, [esp+0C4h+materialId]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5F9B6C",
-    "line": "push    edx",
+    "line": "push    edx; materialId",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F9B6D",
-    "line": "call    sub_5361B0",
+    "line": "call    ImpactMaterial_GetHitParticlePath; Verified: non-actor static impact branch obtains its particle path from ImpactMaterial_GetHitParticlePath(material ID), then shares particle construction/registration with actor hits.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2515,13 +2515,13 @@
   },
   {
     "ea": "0x5F9B75",
-    "line": "mov     [esp+0C4h+var_9C], eax",
+    "line": "mov     [esp+0C4h+modelPath], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5F9B79",
-    "line": "cmp     [esp+0C4h+var_9C], 0",
+    "line": "cmp     [esp+0C4h+modelPath], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -2539,7 +2539,7 @@
   },
   {
     "ea": "0x5F9B86",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2581,7 +2581,7 @@
   },
   {
     "ea": "0x5F9B99",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2593,7 +2593,7 @@
   },
   {
     "ea": "0x5F9BA0",
-    "line": "call    sub_441800",
+    "line": "call    sub_441800; ODismemberment authority: loaded cell effect child lookup by quadrant/index; hit particles use index 3 after sub_4C9BE0(ref).",
     "mnemonic": "call",
     "size": 5
   },
@@ -2677,7 +2677,7 @@
   },
   {
     "ea": "0x5F9BCE",
-    "line": "push    1; float",
+    "line": "push    1; useCachedClone",
     "mnemonic": "push",
     "size": 2
   },
@@ -2689,7 +2689,7 @@
   },
   {
     "ea": "0x5F9BD3",
-    "line": "fstp    [esp+0D8h+var_CC]; float",
+    "line": "fstp    [esp+0D8h+a]; scale",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2779,19 +2779,19 @@
   },
   {
     "ea": "0x5F9C04",
-    "line": "mov     eax, [esp+0E4h+var_9C]",
+    "line": "mov     eax, [esp+0E4h+modelPath]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5F9C08",
-    "line": "push    eax; float",
+    "line": "push    eax; modelPath",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F9C09",
-    "line": "push    ebx; int",
+    "line": "push    ebx; parentNode",
     "mnemonic": "push",
     "size": 1
   },
@@ -2809,43 +2809,43 @@
   },
   {
     "ea": "0x5F9C0D",
-    "line": "fstp    [esp+0F0h+var_F0]; float",
+    "line": "fstp    [esp+0F0h+durationSeconds]; durationSeconds",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5F9C10",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5F9C15",
-    "line": "push    eax; int",
+    "line": "push    eax; parentCell",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F9C16",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F9C18",
-    "line": "call    sub_5713F0",
+    "line": "call    BSTempEffectParticle_Constructor; Verified: Actor_ProcessAttackReachProbe passes normalized hit direction, the computed three-component particle local position, scale 1.0 and cached-clone true to BSTempEffectParticle_Constructor. Local-position components share the same constructor ABI as body-hit particles.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5F9C1D",
-    "line": "push    eax",
+    "line": "push    eax; effect",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F9C1E",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); self",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2857,7 +2857,7 @@
   },
   {
     "ea": "0x5F9C2E",
-    "line": "call    sub_678D30",
+    "line": "call    ActorProcessManager_RegisterTempEffect; [Verified] ActorProcessManager_RegisterTempEffect increments the effect reference and routes GetTypeID 4-6 into extendedTempEffects (+0x48), all other IDs into activeTempEffects (+0x40). Vtable evidence confirms decals 0/1 and particles 2 use the active list. Fallout divergence: its BGSDecalManager updates distinct simple-decal and emitter collections instead of using this per-actor temp-effect routing; one-to-one equivalence is Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3199,7 +3199,7 @@
   },
   {
     "ea": "0x5F9CE0",
-    "line": "fstp    [esp+0C4h+var_A8]",
+    "line": "fstp    [esp+0C4h+materialId]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -3223,31 +3223,31 @@
   },
   {
     "ea": "0x5F9CE9",
-    "line": "fstp    [esp+0C8h+var_C8]",
+    "line": "fstp    [esp+0C8h+damageOffset]; damageOffset",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5F9CEC",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F9CEE",
-    "line": "push    esi",
+    "line": "push    esi; owner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F9CEF",
-    "line": "call    EquippedWeaponData_GetDamage",
+    "line": "call    EquippedWeaponData_GetDamage; TES4 authoritative call ABI: EntryData in ECX, Actor* owner as first stack argument, float damageOffset as second; returns damage through ST0 and ends with retn 8. This type is required to keep ArrowProjectile constructor stack analysis correct.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5F9CF4",
-    "line": "fstp    [esp+0C4h+var_A8]",
+    "line": "fstp    [esp+0C4h+materialId]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -3319,7 +3319,7 @@
   },
   {
     "ea": "0x5F9D19",
-    "line": "fstp    [esp+0C4h+var_A8]",
+    "line": "fstp    [esp+0C4h+materialId]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -3337,7 +3337,7 @@
   },
   {
     "ea": "0x5F9D21",
-    "line": "lea     eax, [esp+0C4h+var_9C]",
+    "line": "lea     eax, [esp+0C4h+modelPath]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3355,7 +3355,7 @@
   },
   {
     "ea": "0x5F9D2C",
-    "line": "lea     ecx, [esp+0C8h+var_A8]",
+    "line": "lea     ecx, [esp+0C8h+materialId]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3391,7 +3391,7 @@
   },
   {
     "ea": "0x5F9D38",
-    "line": "call    Actor_GetFatigueFraction",
+    "line": "call    Actor_GetFatigueFraction; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3415,7 +3415,7 @@
   },
   {
     "ea": "0x5F9D46",
-    "line": "fstp    [esp+0C8h+var_C8]; int",
+    "line": "fstp    [esp+0C8h+damageOffset]; int",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -3595,13 +3595,13 @@
   },
   {
     "ea": "0x5F9D8D",
-    "line": "mov     ecx, [esp+0C4h+var_94]",
+    "line": "mov     ecx, [esp+0C4h+self]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5F9D91",
-    "line": "call    sub_5E5A00",
+    "line": "call    Actor_SelectArmorOrShieldForHitDamage; ODismemberment combat decode: selects a random equipped armor/shield/container entry for durability damage using iArmorDamage* chances, falling back to equipped weapon entry if no armor entry is chosen.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3655,13 +3655,13 @@
   },
   {
     "ea": "0x5F9DAA",
-    "line": "fld     [esp+0D0h+var_A8]",
+    "line": "fld     [esp+0D0h+materialId]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x5F9DAE",
-    "line": "mov     edx, [esp+0D0h+var_94]",
+    "line": "mov     edx, [esp+0D0h+self]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3745,7 +3745,7 @@
   },
   {
     "ea": "0x5F9DD3",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3763,7 +3763,7 @@
   },
   {
     "ea": "0x5F9DDD",
-    "line": "mov     eax, [esp+0D0h+var_94]",
+    "line": "mov     eax, [esp+0D0h+self]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3805,7 +3805,7 @@
   },
   {
     "ea": "0x5F9DEE",
-    "line": "fld     [esp+0E4h+var_A8]",
+    "line": "fld     [esp+0E4h+materialId]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3835,7 +3835,7 @@
   },
   {
     "ea": "0x5F9DFE",
-    "line": "mov     edi, [esp+0C4h+var_94]",
+    "line": "mov     edi, [esp+0C4h+self]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3877,7 +3877,7 @@
   },
   {
     "ea": "0x5F9E15",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4051,7 +4051,7 @@
   },
   {
     "ea": "0x5F9E62",
-    "line": "call    Script_AddEventToExtraScript",
+    "line": "call    Script_AddEventToExtraScript; RealArenaTraining: player static reach probe event. Args: source/ref=EDI, targetExtra=EDI+0x44, mask=0x10000000. Used for arena bag/doll melee props after player and crosshair/ref checks.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4081,7 +4081,7 @@
   },
   {
     "ea": "0x5F9E75",
-    "line": "call    sub_5354C0",
+    "line": "call    bhkSphereShapeProbeCollector_GetPhantomTransform",
     "mnemonic": "call",
     "size": 5
   },
@@ -4162,5 +4162,101 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C2AB0",
+    "line": "mov     eax, [ebp+var_A4]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C2AB6",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C2AB7",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2ABC",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C2ABD",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C2ABE",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C2AC2",
+    "line": "lea     eax, [edx-0B4h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C2AC8",
+    "line": "mov     ecx, [edx-0B8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C2ACE",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C2AD0",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2AD5",
+    "line": "add     eax, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2AD8",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2ADB",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C2ADD",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2AE2",
+    "line": "mov     eax, offset stru_AEB85C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2AE7",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -16,10 +16,10 @@
 0x58596B: test    edi, edi
 0x58596D: mov     [esp+1Ch+var_4], 1
 0x585975: jz      short loc_585987
-0x585977: mov     ecx, edi; void *
-0x585979: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x585977: mov     ecx, edi; this
+0x585979: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x58597E: push    edi
-0x58597F: call    FormHeapFree
+0x58597F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x585984: add     esp, 4
 0x585987: lea     ecx, [esi+14h]
 0x58598A: mov     byte ptr [esp+1Ch+var_4], 0
@@ -34,3 +34,16 @@
 0x5859B1: pop     esi
 0x5859B2: add     esp, 10h
 0x5859B5: retn
+0x9BF1E0: mov     ecx, [ebp-10h]
+0x9BF1E3: add     ecx, 4
+0x9BF1E6: jmp     j_??1?$NiTList@V?$BSStringT@D@@@@UAE@XZ; NiTList<BSStringT<char>>::~NiTList<BSStringT<char>>(void)
+0x9BF1EB: mov     ecx, [ebp-10h]
+0x9BF1EE: add     ecx, 14h
+0x9BF1F1: jmp     j_??1?$NiTList@V?$BSStringT@D@@@@UAE@XZ; NiTList<BSStringT<char>>::~NiTList<BSStringT<char>>(void)
+0x9BF1F6: mov     edx, [esp+arg_4]
+0x9BF1FA: lea     eax, [edx-0Ch]
+0x9BF1FD: mov     ecx, [edx-10h]
+0x9BF200: xor     ecx, eax
+0x9BF202: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BF207: mov     eax, offset stru_AE8800
+0x9BF20C: jmp     ___CxxFrameHandler3

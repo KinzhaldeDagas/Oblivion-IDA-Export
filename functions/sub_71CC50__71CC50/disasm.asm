@@ -39,7 +39,6 @@
 0x71CCE3: mov     [esp+244h+var_210], ecx
 0x71CCE7: lea     eax, [ebp+1]
 0x71CCEA: jmp     short loc_71CCF4
-0x71CCEC: align 10h
 0x71CCF0: mov     esi, [esp+244h+var_214]
 0x71CCF4: mov     ecx, [esp+244h+var_210]
 0x71CCF8: movzx   ebx, byte ptr [eax+1]
@@ -181,7 +180,6 @@
 0x71CEF3: jbe     short loc_71CF16
 0x71CEF5: mov     edx, esi
 0x71CEF7: jmp     short loc_71CF00
-0x71CEF9: align 10h
 0x71CF00: movzx   ebx, byte ptr [ecx]
 0x71CF03: mov     bx, [esp+ebx*2+244h+var_204]
 0x71CF08: mov     [eax], bx

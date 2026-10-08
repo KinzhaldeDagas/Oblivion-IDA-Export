@@ -1,17 +1,17 @@
-int __userpurge sub_61EAE0@<eax>(int a1@<ecx>, int a2@<ebx>, TESObjectREFR *a3)
+void __userpurge sub_61EAE0(int a1@<ecx>, int a2@<ebx>, TESObjectREFR *a3)
 {
-  _DWORD *v4; // eax
+  Actor *CurrentTarget; // eax
 
-  if ( a3 == (TESObjectREFR *)sub_6135F0(a1)
-    && (!sub_6135F0(a1)
-     || (v4 = (_DWORD *)sub_6135F0(a1), !Actor_IsSwimming(v4))
-     || Actor_IsSwimming(*(_DWORD **)(a1 + 0x3C))
+  if ( a3 == (TESObjectREFR *)CombatController_GetCurrentTarget(a1) /*0x61eb1d*/
+    && (!CombatController_GetCurrentTarget(a1)
+     || (CurrentTarget = (Actor *)CombatController_GetCurrentTarget(a1), !Actor_IsSwimming(CurrentTarget))
+     || Actor_IsSwimming(*(Actor **)(a1 + 0x3C))
      || Actor_CanFightInWater(*(void **)(a1 + 0x3C))) )
   {
-    return sub_619D40(a1, a2, a3, *(_BYTE *)(a1 + 0x174) == 0, 1);
+    sub_619D40(a1, a2, a3, *(_BYTE *)(a1 + 0x174) == 0, 1); /*0x61eb54*/
   }
   else
   {
-    return sub_619D40(a1, a2, a3, 1, 1);
+    sub_619D40(a1, a2, a3, 1, 1); /*0x61eb68*/
   }
 }

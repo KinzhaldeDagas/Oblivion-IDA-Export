@@ -1,28 +1,54 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "D3DKMT_QUERYSTATISTICS_NODE_INFORMATION",
+  "definition": "typedef _D3DKMT_QUERYSTATISTICS_NODE_INFORMATION D3DKMT_QUERYSTATISTICS_NODE_INFORMATION\n",
   "id": 18374686479672026843,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GlobalInformation",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 272
+      "size": 272,
+      "type": "D3DKMT_QUERYSTATISTICS_PROCESS_NODE_INFORMATION"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SystemInformation",
       "offset": 272,
       "offset_hex": "0x110",
-      "size": 272
+      "size": 272,
+      "type": "D3DKMT_QUERYSTATISTICS_PROCESS_NODE_INFORMATION"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Reserved",
       "offset": 544,
       "offset_hex": "0x220",
-      "size": 64
+      "size": 64,
+      "type": "ULONG64[8]"
     }
   ],
   "name": "D3DKMT_QUERYSTATISTICS_NODE_INFORMATION",
+  "ordinal": 1250,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 608
 }

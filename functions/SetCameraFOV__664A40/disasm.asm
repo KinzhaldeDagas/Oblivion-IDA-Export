@@ -1,4 +1,4 @@
-0x664A40: fld     [esp+arg_0]
+0x664A40: fld     [esp+arg_0]; MoonSugarEffect decode: PlayerCharacter SetCameraFOV wrapper writes worldFoV, calls SetCameraFOV_0, then updates particle shader FOV data.
 0x664A44: push    esi
 0x664A45: mov     esi, ecx
 0x664A47: push    0; a3
@@ -6,7 +6,7 @@
 0x664A4F: push    ecx
 0x664A50: mov     ecx, ds:0B333CCh; this
 0x664A56: fstp    [esp+0Ch+a2]; a2
-0x664A59: call    SetCameraFOV_0
+0x664A59: call    SetCameraFOV_0; MoonSugarEffect decode: SetCameraFOV_0 rebuilds SceneGraph camera frustum, max far/near ratio, camera LODAdjust, and leaves persistent camera state. Avoid for per-frame Moon Sugar wobble.
 0x664A5E: fld     [esp+4+arg_0]
 0x664A62: push    ecx
 0x664A63: fstp    [esp+8+var_8]; float

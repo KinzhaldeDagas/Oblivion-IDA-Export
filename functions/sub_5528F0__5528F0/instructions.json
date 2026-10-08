@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5528F0",
-    "line": "push    ecx",
+    "line": "push    ecx; Deep-copies all four FaceGen matrices, preserving dimensions and engine ownership of destination coefficient buffers.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x5528F2",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+source]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x5528FE",
-    "line": "mov     eax, [esp+8+arg_4]",
+    "line": "mov     eax, [esp+8+destination]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x552918",
-    "line": "mov     [esp+14h+arg_0], 2",
+    "line": "mov     [esp+14h+source], 2",
     "mnemonic": "mov",
     "size": 8
   },
@@ -193,25 +193,25 @@
   },
   {
     "ea": "0x552946",
-    "line": "call    sub_527160",
+    "line": "call    FaceGenFloatVector_ResizeFill; Vector resize: retain existing prefix, erase surplus elements when shrinking, fill only newly inserted elements when growing. Equal size does not overwrite coefficients. Matrix dimension products must already be valid; no recovery from rows*columns overflow.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x55294B",
-    "line": "push    edi",
+    "line": "push    edi; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x55294C",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x55294E",
-    "line": "call    sub_5520E0",
+    "line": "call    FaceGenMatrix_Assign; Deep matrix assignment. Copies rows/columns, resizes coefficient storage, then copies rows*columns floats.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x55296F",
-    "line": "call    sub_527160",
+    "line": "call    FaceGenFloatVector_ResizeFill; Vector resize: retain existing prefix, erase surplus elements when shrinking, fill only newly inserted elements when growing. Equal size does not overwrite coefficients. Matrix dimension products must already be valid; no recovery from rows*columns overflow.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x55297F",
-    "line": "sub     [esp+14h+arg_0], 1",
+    "line": "sub     [esp+14h+source], 1",
     "mnemonic": "sub",
     "size": 5
   },

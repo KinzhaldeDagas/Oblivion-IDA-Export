@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8AC640",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; TES4 authoritative: searches existing manifold entries for a candidate 0x30-byte contact with match error < 0.1; returns index or 0xFFFFFFFF.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x8AC656",
-    "line": "mov     [esp+14h+var_8], 3DCCCCCDh",
+    "line": "mov     [esp+14h+var_8], 3DCCCCCDh; Contact-match threshold is 0.1; entries above this are treated as new contacts.",
     "mnemonic": "mov",
     "size": 8
   },
@@ -85,31 +85,31 @@
   },
   {
     "ea": "0x8AC664",
-    "line": "mov     eax, [esp+18h+arg_0]",
+    "line": "mov     eax, [esp+18h+candidate]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x8AC668",
-    "line": "push    edi",
+    "line": "push    edi; manifoldEntry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8AC669",
-    "line": "push    eax",
+    "line": "push    eax; candidate",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8AC66A",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8AC66C",
-    "line": "call    sub_8ABF70",
+    "line": "call    hkpCharacterProxy_ComputeContactMatchError; TES4 authoritative: computes contact-match error from normal difference, contact plane/fraction difference, and resolved collidable-space point difference.",
     "mnemonic": "call",
     "size": 5
   },

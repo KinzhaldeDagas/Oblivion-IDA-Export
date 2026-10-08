@@ -1,1 +1,4 @@
-HACMOBJ__
+struct HACMOBJ__
+{
+int unused;
+};

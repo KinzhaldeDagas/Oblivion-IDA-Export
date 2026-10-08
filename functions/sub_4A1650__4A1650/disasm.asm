@@ -30,15 +30,15 @@
 0x4A16B3: mov     ecx, [edi+0E0h]
 0x4A16B9: mov     [esi+0E0h], ecx
 0x4A16BF: mov     edx, [edi+0E4h]
-0x4A16C5: mov     ecx, [esp+1Ch+arg_0]
+0x4A16C5: mov     ecx, [esp+1Ch+cloningProcess]
 0x4A16C9: mov     [esi+0E4h], edx
 0x4A16CF: mov     eax, [edi+0E8h]
-0x4A16D5: push    ecx
-0x4A16D6: push    esi
-0x4A16D7: mov     ecx, edi
+0x4A16D5: push    ecx; cloningProcess
+0x4A16D6: push    esi; destination
+0x4A16D7: mov     ecx, edi; this
 0x4A16D9: mov     [esp+24h+var_4], 0FFFFFFFFh
 0x4A16E1: mov     [esi+0E8h], eax
-0x4A16E7: call    sub_70AC60
+0x4A16E7: call    OB_NiNode_CopyMembersForClone
 0x4A16EC: mov     eax, esi
 0x4A16EE: mov     ecx, [esp+1Ch+var_C]
 0x4A16F2: mov     large fs:0, ecx
@@ -47,3 +47,15 @@
 0x4A16FB: pop     esi
 0x4A16FC: add     esp, 10h
 0x4A16FF: retn    4
+0x9CA7E0: mov     eax, [ebp-10h]
+0x9CA7E3: push    eax
+0x9CA7E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA7E9: pop     ecx
+0x9CA7EA: retn
+0x9CA7EB: mov     edx, [esp+arg_4]
+0x9CA7EF: lea     eax, [edx-0Ch]
+0x9CA7F2: mov     ecx, [edx-10h]
+0x9CA7F5: xor     ecx, eax
+0x9CA7F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA7FC: mov     eax, offset stru_AF2E8C
+0x9CA801: jmp     ___CxxFrameHandler3

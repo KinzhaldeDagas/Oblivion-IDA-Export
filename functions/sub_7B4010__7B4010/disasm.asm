@@ -68,7 +68,7 @@
 0x7B40E6: lea     ecx, [esp+24h+arg_18]
 0x7B40EA: push    ecx
 0x7B40EB: push    eax
-0x7B40EC: mov     ecx, offset off_B2C33C
+0x7B40EC: mov     ecx, offset stru_B2C33C
 0x7B40F1: mov     [esp+2Ch+arg_18], edi
 0x7B40F5: call    NiTMap_GetAt
 0x7B40FA: mov     esi, [esp+24h+arg_18]
@@ -86,7 +86,7 @@
 0x7B4119: lea     ecx, [esp+24h+arg_4]
 0x7B411D: push    ecx
 0x7B411E: lea     ecx, [esi+20h]
-0x7B4121: call    sub_5B1E20
+0x7B4121: call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.
 0x7B4126: pop     edi
 0x7B4127: pop     esi
 0x7B4128: pop     ebp
@@ -98,7 +98,7 @@
 0x7B4132: lea     ecx, [esp+24h+arg_4]
 0x7B4136: push    ecx
 0x7B4137: lea     ecx, [esi+20h]
-0x7B413A: call    sub_5B1E20
+0x7B413A: call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.
 0x7B413F: pop     edi
 0x7B4140: pop     esi
 0x7B4141: pop     ebp

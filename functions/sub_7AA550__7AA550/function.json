@@ -1,19 +1,32 @@
 {
-  "callees_count": 20,
-  "callers_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 8,
+  "chunks": [
+    [
+      "0x7AA550",
+      "0x7AA655"
+    ]
+  ],
+  "chunks_sha256": "2d0923e89bb432e6ce62022c42c1bb542150fe83e4ac92c3f31b47aa3bd4669e",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "MEF PERF 2026-10-07 PASS5: PERF-15 Verified avoidable ordered-list work: stable bottom-up merge sort, run width starts1 and doubles until one merge group. No already-ordered probe. For sorted/equal-key N=2^k>=2, k rounds emit N*k nodes and perform N*k/2 comparator calls. Proposed adjacent-order check can use N-1 comparisons and skip relinking under stable valid inputs; actual batch sizes/time unmeasured.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7AA550",
+  "display_name": "BSTPersistentRenderPassList_StableMergeSort",
   "end_ea": "0x7AA655",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7AA550",
+  "name": "BSTPersistentRenderPassList_StableMergeSort",
   "segment": ".text",
   "sha256": "2d0923e89bb432e6ce62022c42c1bb542150fe83e4ac92c3f31b47aa3bd4669e",
   "size": 261,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7AA550",
-  "type": "int __thiscall(_DWORD *this, int (__cdecl *)(_DWORD *, _DWORD *))",
+  "total_chunk_size": 261,
+  "type": "int __thiscall(BSTPersistentListPointer *self, int (__cdecl *compare)(RenderPass_DecodedLayout **left, RenderPass_DecodedLayout **right))",
   "xrefs_from_count": 113,
   "xrefs_to_count": 8
 }

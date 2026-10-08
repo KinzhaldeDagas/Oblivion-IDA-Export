@@ -1,1 +1,1 @@
-HUDReticle
+struct HUDReticle;

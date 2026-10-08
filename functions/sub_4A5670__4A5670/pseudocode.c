@@ -1,8 +1,11 @@
-_DWORD *__thiscall sub_4A5670(_BYTE *this, int a2)
+// Verified: copy/merge constructor copies TESRegionData base fields and EntryData list from source Weather data; this is not the RDWT parser.
+TESRegionDataWeather *__thiscall TESRegionDataWeather_CopyFrom(
+        TESRegionDataWeather *this,
+        TESRegionDataWeather *source)
 {
-  sub_4A34E0(this, (_BYTE *)a2);
-  *(_DWORD *)this = &TESRegionDataWeather::`vftable';
-  sub_4EED50((_DWORD *)this + 2);
-  sub_4EED80((_DWORD *)this + 2, (_DWORD *)(a2 + 8), 0);
-  return this;
+  sub_4A34E0(this, source); /*0x4a569f*/
+  this->base.vtable = (TESRegionDataVtable *)&TESRegionDataWeather::`vftable'; /*0x4a56b1*/
+  sub_4EED50((unsigned int *)&this->weatherList); /*0x4a56b7*/
+  OblivionTESWeatherList_CopyEntries(&this->weatherList, &source->weatherList, 0); /*0x4a56c9*/
+  return this; /*0x4a56d0*/
 }

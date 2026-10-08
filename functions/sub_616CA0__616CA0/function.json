@@ -1,18 +1,31 @@
 {
-  "callees_count": 20,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x616CA0",
+      "0x616DA2"
+    ]
+  ],
+  "chunks_sha256": "f68325839ad9d9b383581f98dd24ba8fd7e4e6004c971d0184ba849223df745c",
+  "comment_regular": "Applies the CombatController-selected poison item at +0xA4 to the equipped weapon when it has neither poison nor enchantment, removes the consumed poison item, and clears the selection when empty. Private EBP-carried state is preserved in the type.",
+  "comment_repeatable": "Applies the CombatController-selected poison item at +0xA4 to the equipped weapon when it has neither poison nor enchantment, removes the consumed poison item, and clears the selection when empty. Private EBP-carried state is preserved in the type.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_616CA0",
+  "display_name": "CombatController_ApplySelectedPoisonToWeapon",
   "end_ea": "0x616DA2",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_616CA0",
+  "name": "CombatController_ApplySelectedPoisonToWeapon",
   "segment": ".text",
   "sha256": "f68325839ad9d9b383581f98dd24ba8fd7e4e6004c971d0184ba849223df745c",
   "size": 258,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x616CA0",
+  "total_chunk_size": 258,
   "type": "void __usercall(int@<ecx>, char@<bpl>, double@<st2>, double@<st1>, double@<st0>)",
   "xrefs_from_count": 104,
   "xrefs_to_count": 2

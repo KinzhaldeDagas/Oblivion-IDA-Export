@@ -4,5 +4,5 @@
 0xA13BFF: push    0F0h ; 'ð'
 0xA13C04: call    sub_8AEB80
 0xA13C09: add     esp, 10h
-0xA13C0C: mov     dword_BA8440, eax
+0xA13C0C: mov     dword ptr unk_BA8440, eax
 0xA13C11: retn

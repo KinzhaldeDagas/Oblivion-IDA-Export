@@ -4,7 +4,7 @@
 0x65DEA9: call    NiTMap_Clear
 0x65DEAE: mov     eax, [esi+8]
 0x65DEB1: push    eax
-0x65DEB2: call    FormHeapFree
+0x65DEB2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x65DEB7: add     esp, 4
 0x65DEBA: pop     esi
 0x65DEBB: retn

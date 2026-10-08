@@ -1,25 +1,33 @@
+// Exception-safe uninitialized_fill_n for compact SFrondGuide records. Placement-copy-constructs count values; unwind cleanup destroys the constructed prefix before rethrowing.
 // positive sp value has been detected, the output may be wrong!
-void __cdecl __noreturn sub_79E190(_DWORD *a1, int a2, int a3)
+OB_SFrondGuide_010201A0 *__cdecl OB_SFrondGuide_UninitializedFillN_010201A0(
+        OB_SFrondGuide_010201A0 *destination,
+        unsigned int count,
+        const OB_SFrondGuide_010201A0 *value)
 {
-  int v3; // edi
-  _DWORD *i; // esi
-  int v6; // [esp-4h] [ebp-28h] BYREF
-  _DWORD *v7; // [esp+10h] [ebp-14h]
-  int *v8; // [esp+14h] [ebp-10h]
-  int v9; // [esp+20h] [ebp-4h]
+  OB_SFrondGuide_010201A0 *v3; // edi
+  OB_SFrondGuide_010201A0 *v5; // esi
+  int v7; // [esp-4h] [ebp-28h] BYREF
+  OB_stVector16_010201A0 *p_vertexVector; // [esp+10h] [ebp-14h]
+  int *v9; // [esp+14h] [ebp-10h]
+  int v10; // [esp+20h] [ebp-4h]
 
-  v8 = &v6;
-  v3 = (int)a1;
-  v7 = a1;
-  v9 = 0;
-  while ( a2 )
+  v9 = &v7; /*0x79e1b8*/
+  v3 = destination; /*0x79e1bb*/
+  p_vertexVector = &destination->vertexVector; /*0x79e1c4*/
+  v10 = 0; /*0x79e1c7*/
+  while ( count ) /*0x79e1d2*/
   {
-    sub_79B7D0(v3, a3);
-    --a2;
-    v3 += 0x30;
-    a1 = (_DWORD *)v3;
+    OB_SFrondGuide_PlacementCopyConstruct_010201A0(v3, value); /*0x79e1d6*/
+    --count; /*0x79e1de*/
+    destination = ++v3; /*0x79e1e4*/
   }
-  for ( i = v7; i != a1; i += 0xC )
-    sub_79BFF0(i);
-  ThrowException__(0, 0);
+  v5 = (OB_SFrondGuide_010201A0 *)p_vertexVector; /*0x79e1e9*/
+  if ( p_vertexVector != (OB_stVector16_010201A0 *)destination ) /*0x79e1f1*/
+  {
+    do /*0x79e203*/
+      OB_stVector4_DestroyStdcall_010201A0(v5++); /*0x79e1f9*/
+    while ( v5 != destination ); /*0x79e203*/
+  }
+  ThrowException__(0, 0); /*0x79e209*/
 }

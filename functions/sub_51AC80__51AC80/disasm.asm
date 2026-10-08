@@ -1,4 +1,4 @@
-0x51AC80: mov     eax, [esp+arg_0]
+0x51AC80: mov     eax, [esp+arg_0]; Returns true when the encoded key is not group 0xFF and the fixed Oblivion group record's note-template class is 4, 5, 6, or 7. Those classes cover AttackLeft/Right, power attacks, BlockAttack, AttackBow, and cast groups. This is a fixed-table classifier, not dynamic group registration.
 0x51AC84: cmp     ax, 0FFh
 0x51AC88: jnz     short loc_51AC8D
 0x51AC8A: xor     al, al

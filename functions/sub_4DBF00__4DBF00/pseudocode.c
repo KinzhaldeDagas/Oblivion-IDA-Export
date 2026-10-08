@@ -1,11 +1,11 @@
-char __thiscall sub_4DBF00(_DWORD *this, TESChildCELL *a2)
+char __thiscall sub_4DBF00(_DWORD *this, TESObjectREFR *a2)
 {
   char result; // al
 
-  if ( !a2 )
-    return (unsigned __int8)sub_4205C0((ExtraDataList *)(this + 0x11), (BSExtraDataVtbl *)a2);
-  result = TESObjectREFR_IsPersistent_((TESObjectREFR *)a2);
-  if ( result )
-    return (unsigned __int8)sub_4205C0((ExtraDataList *)(this + 0x11), (BSExtraDataVtbl *)a2);
-  return result;
+  if ( !a2 ) /*0x4dbf0a*/
+    return (unsigned __int8)ExtraDataList_SetRandomTeleportMarker((ExtraDataList *)(this + 0x11), a2); /*0x4dbf0a*/
+  result = TESObjectREFR_IsPersistent(a2); /*0x4dbf0e*/
+  if ( result ) /*0x4dbf15*/
+    return (unsigned __int8)ExtraDataList_SetRandomTeleportMarker((ExtraDataList *)(this + 0x11), a2); /*0x4dbf1b*/
+  return result; /*0x4dbf20*/
 }

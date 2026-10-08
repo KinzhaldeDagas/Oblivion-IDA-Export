@@ -1,1 +1,1 @@
-IFillLockBytes_0
+typedef IFillLockBytes IFillLockBytes_0;

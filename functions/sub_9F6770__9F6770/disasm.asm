@@ -1,7 +1,7 @@
 0x9F6770: push    offset aPlayer_0; "player"
 0x9F6775: push    offset aSplayer; "sPlayer"
-0x9F677A: mov     ecx, offset unk_B38F50
-0x9F677F: call    GameSetting_ConstrAndReg
+0x9F677A: mov     ecx, offset stru_B38F50; self
+0x9F677F: call    GameSetting_ConstrAndReg; Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.
 0x9F6784: push    offset sub_A225C0; void (__cdecl *)()
 0x9F6789: call    _atexit
 0x9F678E: pop     ecx

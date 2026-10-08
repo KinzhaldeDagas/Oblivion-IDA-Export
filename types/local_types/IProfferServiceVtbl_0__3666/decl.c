@@ -1,1 +1,1 @@
-IProfferServiceVtbl_0
+typedef IProfferServiceVtbl IProfferServiceVtbl_0;

@@ -1,19 +1,36 @@
 {
-  "callees_count": 101,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 5,
-  "display_name": "sub_557E60",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 38,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x557E60",
+      "0x55851F"
+    ],
+    [
+      "0x9BC6E0",
+      "0x9BC716"
+    ]
+  ],
+  "chunks_sha256": "4041a88d389d598a55ce6cf23d9ceff2f2dd7cfe2bde92412fc6e0d78f1b88a6",
+  "comment_regular": "Negative compatibility finding: nonzero maxBasisShapes is clamped to FaceGenEgtBasisBank_GetCount before basis iteration; zero selects min(bankCount,30). Thus PF requesting 50 during randomized refresh does not alone overrun a smaller EGT bank. Precheck separately errors if model basis records exceed matrix 2/3 rows. No bound bug from the raised limit proven.",
+  "comment_repeatable": "Negative compatibility finding: nonzero maxBasisShapes is clamped to FaceGenEgtBasisBank_GetCount before basis iteration; zero selects min(bankCount,30). Thus PF requesting 50 during randomized refresh does not alone overrun a smaller EGT bank. Precheck separately errors if model basis records exceed matrix 2/3 rows. No bound bug from the raised limit proven.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 7,
+  "display_name": "BSFaceGenModel_GenerateMorphTexture",
   "end_ea": "0x55851F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_557E60",
+  "name": "BSFaceGenModel_GenerateMorphTexture",
   "segment": ".text",
   "sha256": "5475221d0e10904d40ad8e4adf7a9164c90ceeefdacaccb874f673e4444e1929",
   "size": 1727,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x557E60",
-  "type": "char __thiscall(char *this, int, int *, unsigned int)",
-  "xrefs_from_count": 647,
+  "total_chunk_size": 1781,
+  "type": "bool __thiscall(void *this, const FaceGenHeadParameters *parameters, NiTexture **outTexture, unsigned int maxBasisShapes)",
+  "xrefs_from_count": 665,
   "xrefs_to_count": 3
 }

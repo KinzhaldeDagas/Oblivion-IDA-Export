@@ -1,19 +1,36 @@
 {
-  "callees_count": 21,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7C71B0",
+  "chunks": [
+    [
+      "0x7C71B0",
+      "0x7C7336"
+    ],
+    [
+      "0x9CE770",
+      "0x9CE793"
+    ]
+  ],
+  "chunks_sha256": "9290de1cfd4011c9a9d7d89ee716e89cb4984301d5d471ea9afb5a014b5cbb06",
+  "comment_regular": "Reorder the full light list using ShadowSceneLight_ComputeCameraRelativeScore and cached score +0xD0.\nMEF v56 finite nonincreasing-prefix fast path preserves special/per-light native Score calls and float stores. Native x87 greater predicate; nonfinite/order violation/nested TLS epoch disables fast path for remainder. Native cold held-reference/remove/reinsert sequence unchanged. Unsupported list ownership uses original prolog trampoline. No true-sort or light-selection change.",
+  "comment_repeatable": "Reorder the full light list using ShadowSceneLight_ComputeCameraRelativeScore and cached score +0xD0.\n\nMEF LARGE PERF 2026-09-08: Verified PERF-6: full-light pass computes special+118 light then each+E8 list light score, but scans head-to-current prefix for each node. With N distinct live lights in finite nonincreasing/equal score order, comparisons=N*(N-1)/2 and temp-reference Interlocked calls=N*(N-1), even when no reinsert occurs. This is an eligible visibility-pass cost; actual light counts/pass frequency and FPS were not measured.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "ShadowSceneNode_ReorderFullLightsByCameraScore",
   "end_ea": "0x7C7336",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7C71B0",
+  "name": "ShadowSceneNode_ReorderFullLightsByCameraScore",
   "segment": ".text",
   "sha256": "d6fe2d45d42b2f5420da924b20778ecee49b09d6a3f9c227d7eebe9d6f3595ea",
   "size": 390,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7C71B0",
+  "total_chunk_size": 425,
   "type": "void __thiscall(_DWORD *this, float *)",
-  "xrefs_from_count": 150,
+  "xrefs_from_count": 161,
   "xrefs_to_count": 1
 }

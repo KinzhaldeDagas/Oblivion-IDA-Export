@@ -1,4 +1,5 @@
-void __usercall sub_5AC6A0(int a1@<ecx>, double a2@<st2>, double a3@<st1>, double a4@<st0>)
+// Collects up to three selected LevelUpMenu attribute tiles, maps their group-0 offsets to attribute AVs, and commits them through Player_CommitLevelUp. Missing selections remain 0xFFFFFFFF and are ignored by Player_LevelUpAttribute.
+void __usercall LevelUpMenu_CommitSelectedAttributes(int a1@<ecx>, double a2@<st0>)
 {
   _DWORD *v4; // edi
   unsigned int v5; // ebp
@@ -8,32 +9,32 @@ void __usercall sub_5AC6A0(int a1@<ecx>, double a2@<st2>, double a3@<st1>, doubl
   int AVFromGroupOffset; // eax
   unsigned int v10; // [esp+Ch] [ebp-4h]
 
-  v4 = *(_DWORD **)(*(_DWORD *)(a1 + 0x28) + 0x34);
-  v5 = 0xFFFFFFFF;
-  v6 = 0xFFFFFFFF;
-  v10 = 0xFFFFFFFF;
-  while ( v4 )
+  v4 = *(_DWORD **)(*(_DWORD *)(a1 + 0x28) + 0x34); /*0x5ac6a7*/
+  v5 = 0xFFFFFFFF; /*0x5ac6aa*/
+  v6 = 0xFFFFFFFF; /*0x5ac6af*/
+  v10 = 0xFFFFFFFF; /*0x5ac6b1*/
+  while ( v4 ) /*0x5ac6b5*/
   {
-    v7 = (_DWORD *)v4[2];
-    v4 = (_DWORD *)*v4;
-    if ( Tile_GetFloat(v7, 0xFAE) == fConstant_2 )
+    v7 = (_DWORD *)v4[2]; /*0x5ac6b8*/
+    v4 = (_DWORD *)*v4; /*0x5ac6be*/
+    if ( Tile_GetFloat(v7, 0xFAE) == fConstant_2 ) /*0x5ac6d7*/
     {
-      Tile_GetFloat(v7, 0xFAA);
-      v8 = Double_To_SInt32(a4);
-      AVFromGroupOffset = ActorValue_GetAVFromGroupOffset(0, v8);
-      if ( v6 == 0xFFFFFFFF )
+      Tile_GetFloat(v7, 0xFAA); /*0x5ac6e0*/
+      v8 = Double_To_SInt32(a2); /*0x5ac6e5*/
+      AVFromGroupOffset = ActorValue_GetAVFromGroupOffset(0, v8); /*0x5ac6ed*/
+      if ( v6 == 0xFFFFFFFF ) /*0x5ac6f8*/
       {
-        v6 = AVFromGroupOffset;
+        v6 = AVFromGroupOffset; /*0x5ac6fa*/
       }
-      else if ( v10 == 0xFFFFFFFF )
+      else if ( v10 == 0xFFFFFFFF ) /*0x5ac703*/
       {
-        v10 = AVFromGroupOffset;
+        v10 = AVFromGroupOffset; /*0x5ac705*/
       }
-      else if ( v5 == 0xFFFFFFFF )
+      else if ( v5 == 0xFFFFFFFF ) /*0x5ac70e*/
       {
-        v5 = AVFromGroupOffset;
+        v5 = AVFromGroupOffset; /*0x5ac710*/
       }
     }
   }
-  sub_66C3E0((int *)TESDataHandler_g_PlayerRef, v6, v5, (int)v4, a2, a3, a4, v6, v10, v5);
+  Player_CommitLevelUp(reference, v6, v10, v5); /*0x5ac724*/
 }

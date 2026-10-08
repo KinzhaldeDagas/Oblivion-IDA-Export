@@ -1,1 +1,4 @@
-HMIDI__
+struct HMIDI__
+{
+int unused;
+};

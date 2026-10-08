@@ -1,1 +1,1 @@
-HUSKEY
+typedef HANDLE HUSKEY;

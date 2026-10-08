@@ -1,15 +1,15 @@
-0x423DA0: push    ebx
+0x423DA0: push    ebx; Replace ExtraAction flag byte. Default value 1 removes/omits the extra only when its companion action-state dword is zero; otherwise retain/update. This is the XACT consumer.
 0x423DA1: push    esi
 0x423DA2: push    13h; a2
 0x423DA4: mov     esi, ecx
 0x423DA6: call    BaseExtraList_GetExtraData
 0x423DAB: test    eax, eax
-0x423DAD: mov     ebx, [esp+8+arg_0]
+0x423DAD: mov     ebx, [esp+8+flags]
 0x423DB1: jnz     short loc_423DCB
 0x423DB3: cmp     ebx, 1
 0x423DB6: jz      short loc_423DC6
 0x423DB8: mov     ecx, esi
-0x423DBA: call    sub_41EB90
+0x423DBA: call    ExtraDataList_GetOrCreateAction; Returns existing ExtraAction type 0x13, or creates one with default action flag byte 1 and null action reference.
 0x423DBF: test    eax, eax
 0x423DC1: jz      short loc_423DC6
 0x423DC3: mov     [eax+0Ch], bl

@@ -12,7 +12,7 @@
 0x8BE87B: jz      short loc_8BE882
 0x8BE87D: add     eax, 20h ; ' '
 0x8BE880: jmp     short loc_8BE887
-0x8BE882: mov     eax, offset stru_BA7A40
+0x8BE882: mov     eax, offset unk_BA7A40
 0x8BE887: push    eax
 0x8BE888: lea     ecx, [edi+10h]
 0x8BE88B: call    sub_47DCD0

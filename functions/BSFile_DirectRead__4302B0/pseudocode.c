@@ -1,23 +1,16 @@
-unsigned int __userpurge BSFile_DirectRead@<eax>(
-        _DWORD *this@<ecx>,
-        FILE *a2@<ebp>,
-        int a3@<edi>,
-        char *Dst,
-        size_t Count)
+unsigned int __thiscall BSFile_DirectRead(void *self, void *destination, unsigned int byteCount)
 {
   unsigned int result; // eax
-  size_t v7; // [esp-4h] [ebp-18h]
 
-  if ( (dword_B33A00 & 1) == 0 )
+  if ( (unk_B33A00 & 1) == 0 ) /*0x4302de*/
   {
-    dword_B33A00 |= 1u;
-    NiInitalizeCriticalSection((LPCRITICAL_SECTION)&stru_B33980);
-    atexit(sub_A17B60);
+    unk_B33A00 |= 1u; /*0x4302e0*/
+    NiInitalizeCriticalSection((LPCRITICAL_SECTION)&unk_B33980); /*0x4302f3*/
+    atexit(sub_A17B60); /*0x4302fd*/
   }
-  if ( !*(this + 7) )
-    (*(void (__thiscall **)(_DWORD *, _DWORD, _DWORD))(*this + 0x18))(this, 0, 0);
-  LODWORD(v7) = Count;
-  result = NiFile_DirectRead((int)this, a2, a3, Dst, v7);
-  *(this + 0x52) += result;
-  return result;
+  if ( !*((_DWORD *)self + 7) ) /*0x43030d*/
+    (*(void (__thiscall **)(void *, _DWORD, _DWORD))(*(_DWORD *)self + 0x18))(self, 0, 0); /*0x43031e*/
+  result = NiFile_DirectRead(self, destination, byteCount); /*0x43032c*/
+  *((_DWORD *)self + 0x52) += result; /*0x430331*/
+  return result; /*0x430337*/
 }

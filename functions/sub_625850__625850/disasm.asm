@@ -32,9 +32,9 @@
 0x62589C: call    edx
 0x62589E: test    eax, eax
 0x6258A0: jz      short loc_6258B5
-0x6258A2: push    0
-0x6258A4: mov     ecx, eax
-0x6258A6: call    sub_405790
+0x6258A2: push    0; index
+0x6258A4: mov     ecx, eax; this
+0x6258A6: call    NiNode_GetChildAtIndex
 0x6258AB: push    eax
 0x6258AC: mov     ecx, edi
 0x6258AE: call    sub_625850

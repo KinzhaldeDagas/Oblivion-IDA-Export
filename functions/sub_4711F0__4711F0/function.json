@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 5,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4711F0",
+      "0x471208"
+    ]
+  ],
+  "chunks_sha256": "7fc3fe0eed2e40e7036357aafb6d0fd5c325eb6c7d5251985c3c1039bf1d8cd1",
+  "comment_regular": "Returns true when ActorAnimData current idle (+0xCC) exists and its phase field is 1. Furniture/action callers use this as the loaded/ready gate immediately before StartQueuedIdleAction.",
+  "comment_repeatable": "Returns true when ActorAnimData current idle (+0xCC) exists and its phase field is 1. Furniture/action callers use this as the loaded/ready gate immediately before StartQueuedIdleAction.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4711F0",
+  "display_name": "ActorAnimData_IsCurrentIdleReady",
   "end_ea": "0x471208",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4711F0",
+  "name": "ActorAnimData_IsCurrentIdleReady",
   "segment": ".text",
   "sha256": "7fc3fe0eed2e40e7036357aafb6d0fd5c325eb6c7d5251985c3c1039bf1d8cd1",
   "size": 24,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4711F0",
-  "type": "bool __thiscall(_DWORD *this)",
+  "total_chunk_size": 24,
+  "type": "bool __thiscall(ActorAnimData *this)",
   "xrefs_from_count": 9,
   "xrefs_to_count": 5
 }

@@ -1,1 +1,1 @@
-HGDIOBJ
+typedef HANDLE HGDIOBJ;

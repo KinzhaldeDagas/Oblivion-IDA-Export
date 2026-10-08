@@ -1,5 +1,5 @@
 0xA166A0: push    esi
-0xA166A1: mov     esi, ScreenElementsRoot?
+0xA166A1: mov     esi, ds:0B333ECh
 0xA166A7: test    esi, esi
 0xA166A9: jz      short loc_A166C7
 0xA166AB: lea     eax, [esi+4]

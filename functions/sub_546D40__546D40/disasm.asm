@@ -1,11 +1,11 @@
 0x546D40: sub     esp, 0Ch
-0x546D43: mov     eax, [esp+0Ch+arg_8]
-0x546D47: mov     ecx, [esp+0Ch+arg_4]
+0x546D43: mov     eax, [esp+0Ch+luckValue]
+0x546D47: mov     ecx, [esp+0Ch+skillValue]
 0x546D4B: push    ebx
 0x546D4C: push    esi
-0x546D4D: push    eax
-0x546D4E: push    ecx
-0x546D4F: call    Calc_LuckModifiedSkill
+0x546D4D: push    eax; luckValue
+0x546D4E: push    ecx; skillValue
+0x546D4F: call    Calc_LuckModifiedSkill; Compute Luck-adjusted effective skill as skill + iActorLuckSkillBase + Luck*fActorLuckSkillMult, then clamp to 0..100. Defaults simplify to skill + (Luck-50)*0.4.
 0x546D54: fdiv    qword ptr ds:0A309F0h
 0x546D5A: mov     esi, [esp+1Ch+arg_0]
 0x546D5E: mov     edx, [esi]

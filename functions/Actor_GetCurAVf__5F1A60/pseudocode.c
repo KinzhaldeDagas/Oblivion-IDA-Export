@@ -5,19 +5,24 @@ double __userpurge Actor_GetCurAVf@<st0>(int *a1@<ecx>, int a2@<ebx>, int a3@<ed
   int v8; // edi
   int v9; // ebx
 
-  v6 = a1[0x16];
-  if ( !v6 )
-    return (double)Actor_GetBaseCalcAVi(a1, a2, a3, (int)a1, a5);
-  v7 = *a1;
-  if ( a5 == 9 )
-    return Actor_GetCurAVf_::GetMagickaMult(v7, a1, result, COERCE_FLOAT(9));
-  v8 = 0;
-  v9 = (*(int (__stdcall **)(int, int))(v7 + 0x170))(a3, a2);
-  if ( v9 )
+  v6 = a1[0x16]; /*0x5f1a64*/
+  if ( !v6 ) /*0x5f1a69*/
+    return (double)Actor_GetBaseCalcAVi(a1, a2, a3, (int)a1, a5); /*0x5f1b38*/
+  v7 = *a1; /*0x5f1a74*/
+  if ( a5 == 9 ) /*0x5f1a78*/
   {
-    if ( (*(unsigned __int8 (__thiscall **)(int *))(*a1 + 0x190))(a1) )
-      v8 = v9;
+    Actor_GetCurAVf_::GetMagickaMult(v7, a1, COERCE_FLOAT(9)); /*0x5f1a79*/
   }
-  (*(void (__thiscall **)(int, int))(*(_DWORD *)v6 + 0x26C))(v6, v8);
-  return result;
+  else
+  {
+    v8 = 0; /*0x5f1af3*/
+    v9 = (*(int (__userpurge **)@<eax>(int, int, double@<st0>))(v7 + 0x170))(a3, a2, result); /*0x5f1af7*/
+    if ( v9 ) /*0x5f1afb*/
+    {
+      if ( (*(unsigned __int8 (__thiscall **)(int *))(*a1 + 0x190))(a1) ) /*0x5f1b07*/
+        v8 = v9; /*0x5f1b0d*/
+    }
+    (*(void (__thiscall **)(int, int))(*(_DWORD *)v6 + 0x26C))(v6, v8); /*0x5f1b21*/
+  }
+  return result; /*0x5f1b25*/
 }

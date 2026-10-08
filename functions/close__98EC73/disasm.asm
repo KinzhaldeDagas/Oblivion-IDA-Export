@@ -13,7 +13,7 @@
 0x98ECA2: xor     edi, edi
 0x98ECA4: cmp     eax, edi
 0x98ECA6: jl      short loc_98ECB0
-0x98ECA8: cmp     eax, uNumber
+0x98ECA8: cmp     eax, ds:0BAAAA0h
 0x98ECAE: jb      short loc_98ECD1
 0x98ECB0: call    ___doserrno
 0x98ECB5: mov     [eax], edi
@@ -54,3 +54,7 @@
 0x98ED1D: or      [ebp+var_1C], 0FFFFFFFFh
 0x98ED21: mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
 0x98ED28: call    __close___$LN14_6
+0x98ED36: push    [ebp+arg_0]
+0x98ED39: call    __unlock_fhandle
+0x98ED3E: pop     ecx
+0x98ED3F: retn

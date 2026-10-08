@@ -1,9 +1,9 @@
-0x790350: mov     ecx, [esp+arg_4]
+0x790350: mov     ecx, [esp+middle]; Orders three CBranch pointers using the float at CBranch+0x2C (fuzzyBranchVolume), implementing the descending-volume comparator used by the branch LOD sort.
 0x790354: mov     edx, [ecx]
 0x790356: fld     dword ptr [edx+2Ch]
 0x790359: push    esi
 0x79035A: push    edi
-0x79035B: mov     edi, [esp+8+arg_0]
+0x79035B: mov     edi, [esp+8+first]
 0x79035F: mov     esi, [edi]
 0x790361: fld     dword ptr [esi+2Ch]
 0x790364: fcompp
@@ -14,7 +14,7 @@
 0x79036F: mov     [edi], edx
 0x790371: mov     esi, [ecx]
 0x790373: push    ebx
-0x790374: mov     ebx, [esp+0Ch+arg_8]
+0x790374: mov     ebx, [esp+0Ch+last]
 0x790378: mov     edx, [ebx]
 0x79037A: fld     dword ptr [edx+2Ch]
 0x79037D: fld     dword ptr [esi+2Ch]

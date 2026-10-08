@@ -1,7 +1,7 @@
-int **__thiscall std::streambuf::`scalar deleting destructor'(int **this, char a2)
+LPCRITICAL_SECTION *__thiscall std::streambuf::`scalar deleting destructor'(LPCRITICAL_SECTION *this, char a2)
 {
-  std::streambuf::~streambuf<char,std::char_traits<char>>(this);
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  std::streambuf::~streambuf<char,std::char_traits<char>>(this); /*0x6f7133*/
+  if ( (a2 & 1) != 0 ) /*0x6f713d*/
+    FormHeapFree((unsigned int)this); /*0x6f7140*/
+  return this; /*0x6f714a*/
 }

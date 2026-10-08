@@ -1,19 +1,32 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4F4B10",
+      "0x4F4B70"
+    ]
+  ],
+  "chunks_sha256": "77edb4b1b3822ddd06464ff484b0388d3a7acfb2f812e3dd148bb83e56611228",
+  "comment_regular": "Shared GetTalkedToPC callback backs GetTalkedToPC and GetTalkedToPCParam; the vanilla-master scan found 540 condition rows for the former. The former requires a subject and has no params; the Param variant permits no subject and declares an Actor param.",
+  "comment_repeatable": "Shared GetTalkedToPC callback backs GetTalkedToPC and GetTalkedToPCParam; the vanilla-master scan found 540 condition rows for the former. The former requires a subject and has no params; the Param variant permits no subject and declares an Actor param.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_4F4B10",
+  "display_name": "GetTalkedToPC_Eval",
   "end_ea": "0x4F4B70",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4F4B10",
+  "name": "GetTalkedToPC_Eval",
   "segment": ".text",
   "sha256": "77edb4b1b3822ddd06464ff484b0388d3a7acfb2f812e3dd148bb83e56611228",
   "size": 96,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4F4B10",
+  "total_chunk_size": 96,
   "type": "char __cdecl(int, int, int, double *)",
   "xrefs_from_count": 44,
-  "xrefs_to_count": 3
+  "xrefs_to_count": 2
 }

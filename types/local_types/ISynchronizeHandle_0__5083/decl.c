@@ -1,1 +1,1 @@
-ISynchronizeHandle_0
+typedef ISynchronizeHandle ISynchronizeHandle_0;

@@ -4,7 +4,7 @@
 0x682646: test    edi, edi
 0x682648: mov     esi, ecx
 0x68264A: jz      short loc_6826BF
-0x68264C: mov     ecx, offset stru_B3C000
+0x68264C: mov     ecx, offset unk_B3C000
 0x682651: call    sub_49F470
 0x682656: lea     eax, [esp+8+arg_0]
 0x68265A: push    eax
@@ -38,7 +38,7 @@
 0x6826AC: mov     [eax+18h], edx
 0x6826AF: mov     ecx, [ecx+8]
 0x6826B2: mov     [eax+1Ch], ecx
-0x6826B5: mov     ecx, offset stru_B3C000
+0x6826B5: mov     ecx, offset unk_B3C000
 0x6826BA: call    j_NiLeaveCriticalSection_0
 0x6826BF: pop     edi
 0x6826C0: pop     esi

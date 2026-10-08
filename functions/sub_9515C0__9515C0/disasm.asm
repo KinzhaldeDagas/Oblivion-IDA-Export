@@ -28,7 +28,6 @@
 0x951615: jmp     short loc_951620
 0x951617: mov     eax, [esp+90h+var_6C]
 0x95161B: jmp     short loc_951620
-0x95161D: align 10h
 0x951620: mov     ecx, [esp+90h+var_70]
 0x951624: and     eax, 3FFFFFFFh
 0x951629: cmp     ecx, eax

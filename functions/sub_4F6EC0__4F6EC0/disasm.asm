@@ -1,4 +1,4 @@
-0x4F6EC0: fldz
+0x4F6EC0: fldz; GetIsClass_Eval (index 68 / opcode 0x1044): requires the subject BaseForm to be TESNPC (form type 0x23), then pointer-compares NPC class at +0x104 with the Class parameter (typeID 0x10). Result is numeric 1 or 0.
 0x4F6EC2: push    ebx
 0x4F6EC3: mov     ebx, [esp+4+arg_C]
 0x4F6EC7: fstp    qword ptr [ebx]

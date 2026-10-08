@@ -1,1 +1,1 @@
-hkNormalTriangleShape
+struct hkNormalTriangleShape;

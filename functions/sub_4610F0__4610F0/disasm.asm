@@ -1,4 +1,4 @@
-0x4610F0: sub     esp, 1Ch
+0x4610F0: sub     esp, 1Ch; Builds embedded ESS screenshot NiSourceTexture and formatted name/level/location/days/date. Optional playtime output is HH:MM:SS.
 0x4610F3: push    ebx
 0x4610F4: mov     bl, [esp+20h+arg_24]
 0x4610F8: test    bl, bl
@@ -11,7 +11,7 @@
 0x461105: push    2
 0x461107: push    0
 0x461109: push    edi
-0x46110A: call    Savegame_Rename
+0x46110A: call    TESSaveLoadGame_ResolveSaveFile
 0x46110F: mov     ebp, eax
 0x461111: mov     [esp+2Ch+var_1C], ebp
 0x461115: jmp     short loc_46111D
@@ -24,7 +24,7 @@
 0x461127: push    0
 0x461129: push    ebp
 0x46112A: mov     ecx, esi
-0x46112C: call    sub_45DBC0
+0x46112C: call    TESSaveLoadGame_OpenAndValidateSave
 0x461131: test    eax, eax
 0x461133: jnz     short loc_4611AE
 0x461135: mov     eax, [esp+2Ch+arg_4]
@@ -94,7 +94,7 @@
 0x4611DD: push    edi; int
 0x4611DE: mov     ecx, esi
 0x4611E0: mov     [esp+54h+arg_0], 0
-0x4611E8: call    sub_45D5F0
+0x4611E8: call    TESSaveLoadGame_ReadSaveHeader
 0x4611ED: mov     ebx, eax
 0x4611EF: mov     eax, [esp+2Ch+arg_C]
 0x4611F3: test    eax, eax

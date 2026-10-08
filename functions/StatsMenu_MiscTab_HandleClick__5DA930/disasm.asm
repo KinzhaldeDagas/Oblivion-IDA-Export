@@ -7,14 +7,14 @@
 0x5DA939: mov     ecx, [esi+50h]
 0x5DA93C: push    0FB5h
 0x5DA941: call    Tile_GetFloat
-0x5DA946: call    Double_To_SInt32
+0x5DA946: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5DA94B: mov     ecx, [esi+4Ch]
 0x5DA94E: mov     [esp+44h+var_28], eax
 0x5DA952: call    sub_5893F0
 0x5DA957: mov     edi, ds:0B383E8h
 0x5DA95D: xor     ebp, ebp
 0x5DA95F: push    ebp
-0x5DA960: mov     ecx, offset TimeGlobals
+0x5DA960: mov     ecx, 0B332E0h
 0x5DA965: call    TimeGlobals_GetGameDaysPassed
 0x5DA96A: push    eax
 0x5DA96B: push    edi
@@ -28,13 +28,13 @@
 0x5DA97D: push    eax
 0x5DA97E: mov     [esp+54h+var_34], edi
 0x5DA982: xor     ebx, ebx
-0x5DA984: mov     [esp+54h+var_1C], ebp
-0x5DA988: mov     [esp+54h+var_18], ebp
+0x5DA984: mov     dword ptr [esp+54h+var_1C], ebp
+0x5DA988: mov     dword ptr [esp+54h+var_1C+4], ebp
 0x5DA98C: call    sub_52A8A0
 0x5DA991: add     esp, 10h
-0x5DA994: cmp     [esp+44h+var_18], ebp
+0x5DA994: cmp     dword ptr [esp+44h+var_1C+4], ebp
 0x5DA998: jnz     short loc_5DA9A0
-0x5DA99A: cmp     [esp+44h+var_1C], ebp
+0x5DA99A: cmp     dword ptr [esp+44h+var_1C], ebp
 0x5DA99E: jz      short loc_5DA9B2
 0x5DA9A0: lea     eax, [esp+44h+var_1C]
 0x5DA9A4: mov     eax, [eax+4]
@@ -48,11 +48,11 @@
 0x5DA9BA: push    ebp
 0x5DA9BB: push    ecx
 0x5DA9BC: call    sub_52A8A0
-0x5DA9C1: mov     ecx, [esp+54h+var_18]
+0x5DA9C1: mov     ecx, dword ptr [esp+54h+var_1C+4]
 0x5DA9C5: add     esp, 10h
 0x5DA9C8: cmp     ecx, ebp
 0x5DA9CA: jnz     short loc_5DA9D2
-0x5DA9CC: cmp     [esp+44h+var_1C], ebp
+0x5DA9CC: cmp     dword ptr [esp+44h+var_1C], ebp
 0x5DA9D0: jz      short loc_5DA9FE
 0x5DA9D2: lea     eax, [esp+44h+var_1C]
 0x5DA9D6: mov     eax, [eax+4]
@@ -63,11 +63,11 @@
 0x5DA9E2: jz      short loc_5DA9FE
 0x5DA9E4: mov     edi, [ecx+4]
 0x5DA9E7: push    ecx
-0x5DA9E8: call    FormHeapFree
+0x5DA9E8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5DA9ED: add     esp, 4
 0x5DA9F0: cmp     edi, ebp
 0x5DA9F2: mov     ecx, edi
-0x5DA9F4: mov     [esp+44h+var_18], ecx
+0x5DA9F4: mov     dword ptr [esp+44h+var_1C+4], ecx
 0x5DA9F8: jnz     short loc_5DA9E4
 0x5DA9FA: mov     edi, [esp+44h+var_34]
 0x5DA9FE: mov     edx, ds:0B38540h
@@ -75,7 +75,7 @@
 0x5DAA06: push    edi
 0x5DAA07: push    edx
 0x5DAA08: mov     ecx, esi
-0x5DAA0A: mov     [esp+50h+var_1C], ebp
+0x5DAA0A: mov     dword ptr [esp+50h+var_1C], ebp
 0x5DAA0E: call    sub_5DA8C0
 0x5DAA13: mov     eax, ds:0B38548h
 0x5DAA18: push    2

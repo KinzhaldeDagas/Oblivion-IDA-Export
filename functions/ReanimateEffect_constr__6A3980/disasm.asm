@@ -8,7 +8,7 @@
 0x6A3993: push    ecx
 0x6A3994: push    edx
 0x6A3995: mov     ecx, esi; this
-0x6A3997: call    ??0ActiveEffect@@QAE@XZ; ActiveEffect::ActiveEffect(void)
+0x6A3997: call    ActiveEffect_Ctor; Verified Oblivion ActiveEffect is 0x38 bytes and stores HitEffectNode* at +0x34 after TESBoundObject* at +0x30. Fallout ActiveEffect is 0x48 bytes and stores BSSimpleList<MagicHitEffect*> at +0x40 after a 12-byte PersistentSound handle and pSource at +0x3C; Fallout also has pDisplacementSpell at +0x44. Do not copy Fallout offsets into Oblivion.
 0x6A399C: fldz
 0x6A399E: fst     dword ptr [esi+40h]
 0x6A39A1: xor     eax, eax

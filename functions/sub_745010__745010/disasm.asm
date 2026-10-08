@@ -323,7 +323,6 @@
 0x7453C4: mov     eax, esi
 0x7453C6: sub     eax, edx
 0x7453C8: jmp     short loc_7453D0
-0x7453CA: align 10h
 0x7453D0: movzx   ecx, byte ptr [eax+1]
 0x7453D4: add     eax, 1
 0x7453D7: mov     [esi+1], cl

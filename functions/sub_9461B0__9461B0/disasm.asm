@@ -10,7 +10,7 @@
 0x9461C4: call    sub_9181B0
 0x9461C9: mov     ecx, [esi+0Ch]
 0x9461CC: push    0
-0x9461CE: push    offset dword_BA8788
+0x9461CE: push    offset unk_BA8788
 0x9461D3: call    sub_918460
 0x9461D8: mov     ecx, [esi+0Ch]
 0x9461DB: xor     eax, eax

@@ -25,7 +25,7 @@
 0x412341: fistp   [esp+18h+arg_0]
 0x412345: fild    [esp+18h+arg_0]
 0x412349: fdiv    flt_B03174
-0x41234F: call    Double_To_SInt32
+0x41234F: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x412354: shl     edi, 0Ch
 0x412357: mov     [esp+18h+arg_0], edi
 0x41235B: fild    [esp+18h+arg_0]
@@ -41,7 +41,7 @@
 0x412384: fld     st
 0x412386: fdivp   st(2), st
 0x412388: fxch    st(1)
-0x41238A: call    Double_To_SInt32
+0x41238A: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x41238F: fimul   [esp+18h+var_4]
 0x412393: mov     [esp+18h+arg_0], eax
 0x412397: pop     edi

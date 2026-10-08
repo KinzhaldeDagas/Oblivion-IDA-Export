@@ -14,3 +14,7 @@
 0x999858: mov     [ebp+var_1C], eax
 0x99985B: mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
 0x999862: call    __fseeki64___$LN7_7
+0x999870: push    [ebp+File]
+0x999873: call    __unlock_file
+0x999878: pop     ecx
+0x999879: retn

@@ -1,82 +1,135 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "emf_in_wmf_comment",
+  "definition": "struct __declspec(align(2)) emf_in_wmf_comment\n{\nDWORD magic;\nWORD unk04;\nWORD unk06;\nWORD unk08;\nWORD unk0a;\nWORD checksum;\n__unaligned __declspec(align(1)) DWORD unk0e;\n__unaligned __declspec(align(1)) DWORD num_chunks;\n__unaligned __declspec(align(1)) DWORD chunk_size;\n__unaligned __declspec(align(1)) DWORD remaining_size;\n__unaligned __declspec(align(1)) DWORD emf_size;\nBYTE emf_data[1];\n}\n",
   "id": 18374686479672027376,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "magic",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk04",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk06",
       "offset": 6,
       "offset_hex": "0x6",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk08",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk0a",
       "offset": 10,
-      "offset_hex": "0xa",
-      "size": 2
+      "offset_hex": "0xA",
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "checksum",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 2
+      "offset_hex": "0xC",
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk0e",
       "offset": 14,
-      "offset_hex": "0xe",
-      "size": 4
+      "offset_hex": "0xE",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "num_chunks",
       "offset": 18,
       "offset_hex": "0x12",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "chunk_size",
       "offset": 22,
       "offset_hex": "0x16",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "remaining_size",
       "offset": 26,
-      "offset_hex": "0x1a",
-      "size": 4
+      "offset_hex": "0x1A",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "emf_size",
       "offset": 30,
-      "offset_hex": "0x1e",
-      "size": 4
+      "offset_hex": "0x1E",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "emf_data",
       "offset": 34,
       "offset_hex": "0x22",
-      "size": 1
+      "size": 1,
+      "type": "BYTE[1]"
     }
   ],
   "name": "emf_in_wmf_comment",
+  "ordinal": 1418,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 36
 }

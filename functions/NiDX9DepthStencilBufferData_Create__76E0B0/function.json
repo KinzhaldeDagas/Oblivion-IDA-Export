@@ -1,19 +1,32 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x76E0B0",
+      "0x76E191"
+    ]
+  ],
+  "chunks_sha256": "b722b7ef861d18343300a3f3a7d04b9c232ab9f26a3375e9d52304334cd8869d",
+  "comment_regular": "Creates NiDX9ImplicitDepthStencilBufferData around IDirect3DDevice9::GetDepthStencilSurface. Reads the surface description, creates or attaches the parent Ni2DBuffer, and records the surface in the renderer's depth/stencil binding cache.",
+  "comment_repeatable": "Creates NiDX9ImplicitDepthStencilBufferData around IDirect3DDevice9::GetDepthStencilSurface. Reads the surface description, creates or attaches the parent Ni2DBuffer, and records the surface in the renderer's depth/stencil binding cache.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 3,
-  "display_name": "NiDX9DepthStencilBufferData_Create",
+  "display_name": "NiDX9ImplicitDepthStencilBufferData::Create",
   "end_ea": "0x76E191",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "NiDX9DepthStencilBufferData_Create",
+  "name": "NiDX9ImplicitDepthStencilBufferData::Create",
   "segment": ".text",
   "sha256": "b722b7ef861d18343300a3f3a7d04b9c232ab9f26a3375e9d52304334cd8869d",
   "size": 225,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x76E0B0",
-  "type": "NiDX9TextureBufferData *__cdecl(int arg0, Ni2DBuffer **)",
+  "total_chunk_size": 225,
+  "type": "void *__cdecl(IDirect3DDevice9 *device, Ni2DBuffer **parentBuffer)",
   "xrefs_from_count": 103,
   "xrefs_to_count": 1
 }

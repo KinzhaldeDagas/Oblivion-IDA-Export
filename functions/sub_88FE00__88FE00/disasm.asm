@@ -1,4 +1,4 @@
-0x88FE00: push    ebp
+0x88FE00: push    ebp; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x88FE01: mov     ebp, esp
 0x88FE03: mov     eax, [ebp+arg_4]
 0x88FE06: movaps  xmm0, xmmword ptr [eax]

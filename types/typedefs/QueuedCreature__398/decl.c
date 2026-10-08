@@ -1,1 +1,1 @@
-QueuedCreature
+struct QueuedCreature;

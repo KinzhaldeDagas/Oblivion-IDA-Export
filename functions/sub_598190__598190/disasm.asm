@@ -8,9 +8,9 @@
 0x5981A5: jz      short locret_5981CD
 0x5981A7: fld1
 0x5981A9: push    ecx
-0x5981AA: fstp    [esp+4+a2]; a3
-0x5981AD: push    0FA1h; a2
-0x5981B2: call    Tile_SetFloat
+0x5981AA: fstp    [esp+4+a2]; value
+0x5981AD: push    0FA1h; propertyCode
+0x5981B2: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5981B7: push    1; arg1
 0x5981B9: push    0; canCreate
 0x5981BB: call    InterfaceManager_GetSingleton

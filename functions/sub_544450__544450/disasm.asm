@@ -1,6 +1,6 @@
-0x544450: or      eax, offset byte_B3668C
+0x544450: or      eax, offset unk_B3668C
 0x544455: add     ecx, ebx
-0x544457: adc     eax, offset dword_B36680
+0x544457: adc     eax, offset stru_B36680
 0x54445C: fst     dword ptr ds:0B36684h
 0x544462: fstp    dword ptr ds:0B36688h
 0x544468: jmp     short loc_54446C
@@ -9,7 +9,7 @@
 0x544470: push    ecx
 0x544471: fstp    [esp+4+var_4]
 0x544474: push    ebx
-0x544475: call    nullsub_returnVoid_2arg
+0x544475: call    nullsub_returnVoid_2arg; nullsub_returnVoid_2arg; used by Low/MiddleLow movement/package setter slots and MiddleHigh movement flag setter slot.
 0x54447A: mov     eax, [ebx+0DCh]
 0x544480: cmp     eax, 3
 0x544483: jz      short loc_54448E
@@ -27,16 +27,16 @@
 0x5444A4: add     esp, 18h
 0x5444A7: retn    8
 0x5444AA: mov     ecx, ebx
-0x5444AC: call    sub_4991C0
+0x5444AC: call    sub_4991C0; Exterior fog day/night helper: climate sunset boundary byte (+0x52) cached as normalized time for weather fog interpolation.
 0x5444B1: fstp    [esp+arg_28]
 0x5444B5: mov     ecx, ebx
-0x5444B7: call    sub_53FC90
+0x5444B7: call    sub_53FC90; Exterior fog day/night helper: computes adjusted sunset/night blend end from climate night plus transition padding.
 0x5444BC: fstp    [esp+arg_24]
 0x5444C0: mov     ecx, ebx
-0x5444C2: call    sub_499180
+0x5444C2: call    sub_499180; Exterior fog day/night helper: climate day boundary byte (+0x51) cached as normalized time for weather fog interpolation.
 0x5444C7: fstp    [esp+arg_8]
 0x5444CB: mov     ecx, ebx
-0x5444CD: call    sub_53FC10
+0x5444CD: call    sub_53FC10; Exterior fog day/night helper: computes adjusted sunrise blend start from climate sunrise minus transition padding.
 0x5444D2: fstp    [esp+arg_C]
 0x5444D6: fld     [esp+arg_24]
 0x5444DA: fld     st
@@ -119,11 +119,11 @@
 0x54459A: mov     eax, [ebx+88h]
 0x5445A0: mov     edx, [ebx+84h]
 0x5445A6: mov     ecx, [ebx+8Ch]
-0x5445AC: mov     [esp+arg_18], eax
+0x5445AC: mov     [esp+other.y], eax
 0x5445B0: mov     eax, [edi+8]
 0x5445B3: cmp     eax, ebp
-0x5445B5: mov     [esp+arg_14], edx
-0x5445B9: mov     [esp+arg_1C], ecx
+0x5445B5: mov     [esp+other.x], edx
+0x5445B9: mov     [esp+other.z], ecx
 0x5445BD: jz      short loc_5445CC
 0x5445BF: movzx   edx, word ptr [eax+0B8h]
 0x5445C6: mov     [esp+arg_24], edx
@@ -133,7 +133,6 @@
 0x5445D4: jbe     loc_544684
 0x5445DA: push    esi
 0x5445DB: jmp     short loc_5445E0
-0x5445DD: align 10h
 0x5445E0: mov     eax, [edi+8]
 0x5445E3: movzx   ecx, word ptr [eax+0B6h]
 0x5445EA: cmp     ecx, ebp
@@ -150,12 +149,12 @@
 0x54460A: jz      short loc_544676
 0x54460C: push    4
 0x54460E: mov     ecx, esi
-0x544610: call    NiNode_GetNiPropertyByID
+0x544610: call    NiNode_GetNiPropertyByID;
 0x544615: test    eax, eax
 0x544617: jz      short loc_544676
 0x544619: push    4
 0x54461B: mov     ecx, esi
-0x54461D: call    NiNode_GetNiPropertyByID
+0x54461D: call    NiNode_GetNiPropertyByID;
 0x544622: mov     edx, [eax]
 0x544624: mov     ecx, eax
 0x544626: mov     eax, [edx+54h]
@@ -168,21 +167,21 @@
 0x544637: jz      short loc_544676
 0x544639: push    4
 0x54463B: mov     ecx, esi
-0x54463D: call    NiNode_GetNiPropertyByID
+0x54463D: call    NiNode_GetNiPropertyByID;
 0x544642: mov     esi, eax
 0x544644: test    esi, esi
 0x544646: jz      short loc_544676
-0x544648: lea     edx, [esp+4+arg_14]
-0x54464C: push    edx
-0x54464D: mov     ecx, offset dword_B36680
-0x544652: call    sub_8AA390
+0x544648: lea     edx, [esp+4+other]
+0x54464C: push    edx; other
+0x54464D: mov     ecx, offset stru_B36680; this
+0x544652: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x544657: test    al, al
 0x544659: jz      short loc_544670
-0x54465B: fld     [esp+4+arg_14]
+0x54465B: fld     [esp+4+other.x]
 0x54465F: fstp    dword ptr [esi+6Ch]
-0x544662: fld     [esp+4+arg_18]
+0x544662: fld     [esp+4+other.y]
 0x544666: fstp    dword ptr [esi+70h]
-0x544669: fld     [esp+4+arg_1C]
+0x544669: fld     [esp+4+other.z]
 0x54466D: fstp    dword ptr [esi+74h]
 0x544670: fld     dword ptr [edi+0Ch]
 0x544673: fstp    dword ptr [esi+78h]
@@ -190,14 +189,14 @@
 0x544679: cmp     ebp, [esp+4+arg_24]
 0x54467D: jb      loc_5445E0
 0x544683: pop     esi
-0x544684: mov     eax, [esp+arg_14]
-0x544688: mov     ecx, [esp+arg_18]
-0x54468C: mov     edx, [esp+arg_1C]
+0x544684: mov     eax, [esp+other.x]
+0x544688: mov     ecx, [esp+other.y]
+0x54468C: mov     edx, [esp+other.z]
 0x544690: mov     ds:0B36684h, ecx
 0x544696: mov     ds:0B36680h, eax
 0x54469B: mov     ds:0B36688h, edx
 0x5446A1: fld     dword ptr [ebx+0D0h]
-0x5446A7: mov     ecx, offset TimeGlobals
+0x5446A7: mov     ecx, 0B332E0h
 0x5446AC: fstp    [esp+arg_24]
 0x5446B0: call    TimeGlobals_GetGameDaysPassed
 0x5446B5: test    eax, eax
@@ -206,27 +205,27 @@
 0x5446BF: jge     short loc_5446C7
 0x5446C1: fadd    dword ptr ds:0A2FC78h
 0x5446C7: fld     [esp+arg_24]
-0x5446CB: lea     ecx, [esp+arg_14]
+0x5446CB: lea     ecx, [esp+other]
 0x5446CF: fdiv    qword ptr ds:0A2F920h
 0x5446D5: faddp   st(1), st
 0x5446D7: fstp    [esp+arg_24]
 0x5446DB: fld     dword ptr ds:0B36698h
-0x5446E1: fstp    [esp+arg_14]
+0x5446E1: fstp    [esp+other.x]
 0x5446E5: fld     dword ptr ds:0B366A0h
-0x5446EB: fstp    [esp+arg_18]
+0x5446EB: fstp    [esp+other.y]
 0x5446EF: fld     dword ptr ds:0B366A8h
-0x5446F5: fstp    [esp+arg_1C]
-0x5446F9: call    sub_43F350
+0x5446F5: fstp    [esp+other.z]
+0x5446F9: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x5446FE: mov     edi, [edi+8]
 0x544701: fstp    st
 0x544703: test    edi, edi
 0x544705: jz      short loc_544769
-0x544707: fld     [esp+arg_1C]
+0x544707: fld     [esp+other.z]
 0x54470B: sub     esp, 0Ch
 0x54470E: fstp    [esp+0Ch+var_4]; float
-0x544712: fld     [esp+0Ch+arg_18]
+0x544712: fld     [esp+0Ch+other.y]
 0x544716: fstp    [esp+0Ch+var_8]; float
-0x54471A: fld     [esp+0Ch+arg_14]
+0x54471A: fld     [esp+0Ch+other.x]
 0x54471E: fstp    [esp+0Ch+var_C]; float
 0x544721: fld     [esp+0Ch+arg_24]
 0x544725: fld     dword ptr ds:0B36690h

@@ -1,6 +1,6 @@
-0x790930: mov     eax, [esp+arg_4]
+0x790930: mov     eax, [esp+end]; Insertion-sorts a short CBranch pointer range by fuzzyBranchVolume. Finds the insertion point and rotates [point,current,current+1) through the dedicated pointer-range helper.
 0x790934: push    ebp
-0x790935: mov     ebp, [esp+4+arg_0]
+0x790935: mov     ebp, [esp+4+begin]
 0x790939: cmp     ebp, eax
 0x79093B: jz      loc_7909BF
 0x790941: push    esi
@@ -48,14 +48,14 @@
 0x79099F: jz      short loc_7909B0
 0x7909A1: push    0
 0x7909A3: push    0
-0x7909A5: push    ebx
-0x7909A6: push    esi
-0x7909A7: push    edx
-0x7909A8: call    sub_78FC20
+0x7909A5: push    ebx; last
+0x7909A6: push    esi; middle
+0x7909A7: push    edx; first
+0x7909A8: call    OB_BranchPtrVector_RotateRange_010201A0; Rotates the 4-byte CBranch-pointer range [first,last) around middle using gcd-cycle moves. Oblivion's fuzzy-volume insertion-sort helper uses it to move an insertion range without allocating.
 0x7909AD: add     esp, 14h
 0x7909B0: add     esi, 4
 0x7909B3: add     ebx, 4
-0x7909B6: cmp     esi, [esp+10h+arg_4]
+0x7909B6: cmp     esi, [esp+10h+end]
 0x7909BA: jnz     short loc_790950
 0x7909BC: pop     edi
 0x7909BD: pop     ebx

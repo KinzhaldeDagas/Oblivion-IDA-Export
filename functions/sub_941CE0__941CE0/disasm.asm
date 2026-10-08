@@ -20,7 +20,6 @@
 0x941D14: test    eax, eax
 0x941D16: jle     short loc_941D49
 0x941D18: jmp     short loc_941D20
-0x941D1A: align 10h
 0x941D20: mov     edx, [esp+10h+arg_4]
 0x941D24: mov     eax, [esp+10h+arg_0]
 0x941D28: push    ebp; int

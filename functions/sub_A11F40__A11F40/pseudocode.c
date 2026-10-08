@@ -1,4 +1,4 @@
-BSStringT *sub_A11F40()
+NiRTTI *sub_A11F40()
 {
-  return sub_70E220((BSStringT *)&unk_B47820, "BSCubeMapCamera", (int)dword_B3FAB0);
+  return NiRTTI_Constructor(&stru_B47820, "BSCubeMapCamera", &parent); /*0xa11f54*/
 }

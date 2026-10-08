@@ -1,1 +1,1 @@
-WINE_MLD
+typedef tagWINE_MLD WINE_MLD;

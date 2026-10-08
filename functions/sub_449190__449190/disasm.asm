@@ -1,4 +1,4 @@
-0x449190: movzx   eax, word ptr [ecx+8]
+0x449190: movzx   eax, word ptr [ecx+8]; Bethesda compact string length helper. If inline length marker is 0xFFFF, strlen(heap string); otherwise returns the 16-bit stored length. Used here to gate optional TESObjectTREE leaf texture.
 0x449194: cmp     ax, 0FFFFh
 0x449198: jnz     short loc_4491AC
 0x44919A: mov     eax, [ecx+4]

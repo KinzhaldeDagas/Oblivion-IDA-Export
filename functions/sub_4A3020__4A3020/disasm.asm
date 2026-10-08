@@ -1,11 +1,11 @@
 0x4A3020: sub     esp, 0Ch
-0x4A3023: mov     ecx, ds:0B33B00h
+0x4A3023: mov     ecx, ds:0B33B00h; self
 0x4A3029: push    ebx
-0x4A302A: push    2; Size
+0x4A302A: push    2; byteCount
 0x4A302C: lea     eax, [esp+14h+Src]
 0x4A3030: mov     [esp+14h+Src], 0
 0x4A3038: mov     ebx, [ecx+14h]
-0x4A303B: push    eax; Src
+0x4A303B: push    eax; source
 0x4A303C: call    SaveLoad_SaveData
 0x4A3041: mov     ecx, ds:0B33A98h
 0x4A3047: mov     eax, [ecx+0BCh]
@@ -23,21 +23,21 @@
 0x4A306E: fldz
 0x4A3070: test    eax, eax
 0x4A3072: fstp    [esp+14h+var_4]
-0x4A3076: mov     [esp+14h+var_8], 0
+0x4A3076: mov     [esp+14h+source], 0
 0x4A307E: jz      short loc_4A308E
 0x4A3080: mov     edx, [eax+0Ch]
-0x4A3083: mov     [esp+14h+var_8], edx
+0x4A3083: mov     [esp+14h+source], edx
 0x4A3087: fld     dword ptr [eax+28h]
 0x4A308A: fstp    [esp+14h+var_4]
-0x4A308E: mov     ecx, ds:0B33B00h
-0x4A3094: push    4
-0x4A3096: lea     eax, [esp+18h+var_8]
-0x4A309A: push    eax
-0x4A309B: call    SaveLoad_SaveFormID
-0x4A30A0: push    4; Size
+0x4A308E: mov     ecx, ds:0B33B00h; self
+0x4A3094: push    4; byteCount
+0x4A3096: lea     eax, [esp+18h+source]
+0x4A309A: push    eax; source
+0x4A309B: call    SaveLoad_SaveFormID; Writes an array of FormIDs to the save buffer. When IRef encoding is enabled, each full FormID is first converted to a compact IRef via SaveLoad_FormIDToIRef.
+0x4A30A0: push    4; byteCount
 0x4A30A2: lea     ecx, [esp+18h+var_4]
-0x4A30A6: push    ecx; Src
-0x4A30A7: mov     ecx, ds:0B33B00h
+0x4A30A6: push    ecx; source
+0x4A30A7: mov     ecx, ds:0B33B00h; self
 0x4A30AD: call    SaveLoad_SaveData
 0x4A30B2: add     [esp+14h+Src], 1
 0x4A30B7: mov     esi, [esi+4]

@@ -1,0 +1,36 @@
+{
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 30,
+  "callers_count": 1,
+  "chunks": [
+    [
+      "0x7898D0",
+      "0x789D25"
+    ],
+    [
+      "0x9CB4B0",
+      "0x9CB507"
+    ]
+  ],
+  "chunks_sha256": "de92c1534bd1bee46114985d1d44558f444754d06f2d1a096108c32c95db0a96",
+  "comment_regular": "CSpeedTreeRT::ParseTextureCoordInfo (top-level token 10000). Allocates the 0x54 embedded-texcoord object; parses branch/leaf/frond 8-float coordinate tables, composite texture filename, and horizontal/360 billboard flags through terminator 10001. Leaf V coordinates honor the global texture-flip flag.",
+  "comment_repeatable": "CSpeedTreeRT::ParseTextureCoordInfo (top-level token 10000). Allocates the 0x54 embedded-texcoord object; parses branch/leaf/frond 8-float coordinate tables, composite texture filename, and horizontal/360 billboard flags through terminator 10001. Leaf V coordinates honor the global texture-flip flag.\n\n[2026-10-04 Ponytail atlas analysis] Token10005 string is passed through IdvNoPath at789B85 before storing RT+4C composite filename. Therefore native GetTextures loses authoring directory identity. Installed PonytailPalm.spt authors Mojave_Desert/CompositeLeafMap.tga; multiple regional source atlases share this basename. Planned resolver must retain pre-strip path or use explicit model-scoped binding; a global basename alias is ambiguous.\n[v109 atlas identity] Every10000 family allocates/replaces the embedded object and initializes its filename empty. Retention must clear earlier filename on a new10000 even if that block omits10005. Later20000/20002 modifies the current object. Earlier analysis correctly identified path stripping but wrongly implied Ponytail itself used10005; its actual filename is supplemental20002.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 23,
+  "display_name": "CSpeedTreeRT__ParseTextureCoordInfo",
+  "end_ea": "0x789D25",
+  "evidence_confidence": "Unknown",
+  "flags": 21504,
+  "has_pseudocode": true,
+  "name": "CSpeedTreeRT__ParseTextureCoordInfo",
+  "segment": ".text",
+  "sha256": "c0fb43224d72625ed80b4d7e7d2d03f8f71bbe1991a380c1280ab20e3ecd713c",
+  "size": 1109,
+  "source_annotation_confidence": "Unknown",
+  "start_ea": "0x7898D0",
+  "total_chunk_size": 1196,
+  "type": "void __thiscall(OB_CSpeedTreeRT_010201A0 *this, OB_CTreeFileAccess_010201A0 *file)",
+  "xrefs_from_count": 429,
+  "xrefs_to_count": 1
+}

@@ -29,7 +29,7 @@
 0x43C860: call    __allshr
 0x43C865: movzx   ecx, al
 0x43C868: push    ecx
-0x43C869: mov     ecx, ModelLoaderPtr
+0x43C869: mov     ecx, ds:0B33A1Ch
 0x43C86F: push    edi
 0x43C870: lea     edx, [esp+30h+var_4]
 0x43C874: push    edx
@@ -56,7 +56,7 @@
 0x43C8A4: pop     edi
 0x43C8A5: pop     ebp
 0x43C8A6: pop     ebx
-0x43C8A7: mov     ecx, ioManager
+0x43C8A7: mov     ecx, ds:0B33A10h
 0x43C8AD: mov     eax, [ecx]
 0x43C8AF: mov     edx, [eax+3Ch]
 0x43C8B2: push    esi

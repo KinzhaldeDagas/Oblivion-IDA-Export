@@ -1,56 +1,68 @@
-_DWORD *__thiscall sub_79FB80(_DWORD *this, _DWORD *a2)
+// Deep copy assignment for st_vector<SFrondGuide>. Reuses initialized elements/capacity where possible, destroys surplus guides, or frees and buys exact capacity before exception-safe copy construction.
+OB_stVector_SFrondGuide_010201A0 *__thiscall OB_stVector_SFrondGuide_CopyAssign_010201A0(
+        OB_stVector_SFrondGuide_010201A0 *this,
+        const OB_stVector_SFrondGuide_010201A0 *source)
 {
-  int v3; // eax
+  OB_SFrondGuide_010201A0 *begin; // eax
   unsigned int v4; // ecx
-  _DWORD *v6; // ebx
+  OB_SFrondGuide_010201A0 *v6; // ebx
   unsigned int v7; // eax
-  _DWORD *v8; // eax
-  int v9; // eax
+  OB_SFrondGuide_010201A0 *v8; // eax
+  OB_SFrondGuide_010201A0 *v9; // eax
   unsigned int v10; // eax
-  int v11; // edi
-  int v12; // eax
+  const OB_SFrondGuide_010201A0 *v11; // edi
+  unsigned int v12; // eax
 
-  if ( this == a2 )
-    return this;
-  v3 = a2[1];
-  if ( !v3 || (v4 = (a2[2] - v3) / 0x30) == 0 )
+  if ( this == source ) /*0x79fb8a*/
+    return this; /*0x79fd02*/
+  begin = source->begin; /*0x79fb90*/
+  if ( !begin || (v4 = source->end - begin) == 0 ) /*0x79fbb0*/
   {
-    sub_79F630(this);
-    return this;
+    OB_stVector_SFrondGuide_Clear_010201A0((OB_stVector16_010201A0 *)this); /*0x79fbb4*/
+    return this; /*0x79fbbe*/
   }
-  v6 = (_DWORD *)*(this + 1);
-  if ( v6 )
-    v7 = (*(this + 2) - (int)v6) / 0x30;
+  v6 = this->begin; /*0x79fbc2*/
+  if ( v6 ) /*0x79fbc7*/
+    v7 = this->end - v6; /*0x79fbe1*/
   else
-    v7 = 0;
-  if ( v4 > v7 )
+    v7 = 0; /*0x79fbc9*/
+  if ( v4 > v7 ) /*0x79fbe5*/
   {
-    if ( v6 )
-      v10 = (*(this + 3) - (int)v6) / 0x30;
+    if ( v6 ) /*0x79fc62*/
+      v10 = this->capacityEnd - v6; /*0x79fc7c*/
     else
-      v10 = 0;
-    if ( v4 <= v10 )
+      v10 = 0; /*0x79fc64*/
+    if ( v4 <= v10 ) /*0x79fc80*/
     {
-      v11 = a2[1] + 0x30 * sub_799F10(this);
-      sub_79E0C0(a2[1], v11, (int)v6);
-      sub_79EA70(this, v11, a2[2], (_DWORD *)*(this + 2));
+      v11 = &source->begin[OB_stVector_SFrondGuide_Size_010201A0((const OB_stVector16_010201A0 *)this)]; /*0x79fc92*/
+      OB_SFrondGuide_CopyAssignRangeForwardCheckedThunk_010201A0(source->begin, v11, v6); /*0x79fc97*/
+      this->end = OB_stVector_SFrondGuide_UninitializedCopyThunk_010201A0( /*0x79fcb0*/
+                    (OB_stVector16_010201A0 *)this,
+                    v11,
+                    source->end,
+                    this->end);
+      return this; /*0x79fcb8*/
     }
-    if ( v6 )
+    if ( v6 ) /*0x79fcbd*/
     {
-      sub_79EAA0(v6, (_DWORD *)*(this + 2));
-      FormHeapFree(*(this + 1));
+      OB_SFrondGuide_DestroyRangeThunk_010201A0(v6, this->end); /*0x79fcc6*/
+      FormHeapFree((unsigned int)this->begin); /*0x79fccf*/
     }
-    v12 = sub_799F10(a2);
-    if ( sub_79AD20(this, v12) )
-      sub_79EA70(this, a2[1], a2[2], (_DWORD *)*(this + 1));
-    return this;
+    v12 = OB_stVector_SFrondGuide_Size_010201A0((const OB_stVector16_010201A0 *)source); /*0x79fcd9*/
+    if ( OB_stVector_SFrondGuide_Buy_010201A0((OB_stVector16_010201A0 *)this, v12) ) /*0x79fce1*/
+      this->end = OB_stVector_SFrondGuide_UninitializedCopyThunk_010201A0( /*0x79fcfd*/
+                    (OB_stVector16_010201A0 *)this,
+                    source->begin,
+                    source->end,
+                    this->begin);
+    return this; /*0x79fcfd*/
   }
-  v8 = (_DWORD *)sub_79BE80(a2[1], a2[2], (int)v6);
-  sub_79E150(v8, (_DWORD *)*(this + 2));
-  v9 = a2[1];
-  if ( v9 )
-    *(this + 2) = *(this + 1) + 0x30 * ((a2[2] - v9) / 0x30);
+  v8 = OB_SFrondGuide_CopyAssignRangeForwardThunk_010201A0(source->begin, source->end, v6); /*0x79fc01*/
+  OB_SFrondGuide_DestroyRange_010201A0(v8, this->end); /*0x79fc11*/
+  v9 = source->begin; /*0x79fc16*/
+  if ( v9 ) /*0x79fc1e*/
+    this->end = &this->begin[source->end - v9]; /*0x79fc55*/
   else
-    *(this + 2) = *(this + 1);
-  return this;
+    this->end = this->begin; /*0x79fc2a*/
+  return this; /*0x79fbbc*/
 }

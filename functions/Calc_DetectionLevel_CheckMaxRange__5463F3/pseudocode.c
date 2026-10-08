@@ -1,5 +1,6 @@
+// Rejects targets beyond fSneakMaxDistance; exterior targets scale that limit by fSneakExteriorDistanceMult. The attack/forced-detection path bypasses the range rejection.
 // positive sp value has been detected, the output may be wrong!
-int __cdecl Calc_DetectionLevel_::CheckMaxRange(
+int __cdecl Calc_DetectionLevel_CheckMaxRange(
         int a1,
         int a2,
         float a3,
@@ -7,7 +8,7 @@ int __cdecl Calc_DetectionLevel_::CheckMaxRange(
         int a5,
         int a6,
         int a7,
-        int a8,
+        float a8,
         int a9,
         int a10,
         int a11,
@@ -22,11 +23,11 @@ int __cdecl Calc_DetectionLevel_::CheckMaxRange(
 {
   float v20; // [esp-10h] [ebp-10h]
 
-  v20 = fSneakMaxDistance;
-  if ( (_BYTE)a16 )
-    v20 = fSneakExteriorDistanceMult * v20;
-  if ( *(float *)&a4 <= (double)v20 || (_BYTE)a11 )
-    return Calc_DetectionLevel_::CalcDistFactor(
+  v20 = MEMORY[0xB36708]; /*0x5463fe*/
+  if ( (_BYTE)a16 ) /*0x546401*/
+    v20 = MEMORY[0xB36748] * v20; /*0x54640c*/
+  if ( *(float *)&a4 <= (double)v20 || (_BYTE)a11 ) /*0x546425*/
+    return Calc_DetectionLevel_ApplyDistanceFactor( /*0x546421*/
              a1,
              a2,
              a3,
@@ -47,5 +48,5 @@ int __cdecl Calc_DetectionLevel_::CheckMaxRange(
              a18,
              a19);
   else
-    return 0;
+    return 0; /*0x546429*/
 }

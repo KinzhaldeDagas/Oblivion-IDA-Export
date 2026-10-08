@@ -1,6 +1,6 @@
-void __thiscall sub_88EA60(bhkNiCollisionObject *this)
+void __thiscall sub_88EA60(Ni2DBuffer **this)
 {
-  *(_DWORD *)this = &bhkBlendCollisionObject::`vftable';
-  --dword_BA7A1C;
-  bhkNiCollisionObject::~bhkNiCollisionObject(this);
+  *this = (Ni2DBuffer *)&bhkBlendCollisionObject::`vftable'; /*0x88ea60*/
+  --unk_BA7A1C; /*0x88ea66*/
+  bhkNiCollisionObject::~bhkNiCollisionObject(this); /*0x88ea6d*/
 }

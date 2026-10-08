@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x728AB0",
-    "line": "push    edi",
+    "line": "push    edi; Returns false immediately for an already-locked stream. Otherwise records bool argument at +0x3D and sets locked byte +0x3C. Additional-data branch: true argument invokes sub_7261D0 at acquisition; false invokes sub_726190 and later sub_7261D0 on unlock. Do not infer operation semantics from old writeAccess label alone.",
     "mnemonic": "push",
     "size": 1
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x728AC0",
-    "line": "mov     bl, byte ptr [esp+8+arg_0]",
+    "line": "mov     bl, [esp+8+writeAccess]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x728AF4",
-    "line": "lea     eax, [esp+0Ch+arg_0]",
+    "line": "lea     eax, [esp+0Ch+writeAccess]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x728AFB",
-    "line": "mov     [esp+14h+arg_0], 0",
+    "line": "mov     dword ptr [esp+14h+writeAccess], 0",
     "mnemonic": "mov",
     "size": 8
   },

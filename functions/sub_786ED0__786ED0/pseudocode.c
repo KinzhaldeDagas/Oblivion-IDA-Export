@@ -1,7 +1,11 @@
-float *__thiscall sub_786ED0(float *this, float *a2, float *a3)
+// Oblivion 1.2.0.416: transforms a point by the 4x4 stTransform including m[12..14] translation. RT4.1 stVec3::operator*(stTransform) corroborates the row/column terms.
+OB_stVec3_010201A0 *__thiscall OB_stVec3_TransformPoint_010201A0(
+        const OB_stVec3_010201A0 *this,
+        OB_stVec3_010201A0 *result,
+        const OB_stTransform_010201A0 *transform)
 {
-  *a2 = a3[4] * *(this + 1) + *a3 * *this + a3[8] * *(this + 2) + a3[0xC];
-  a2[1] = a3[1] * *this + a3[5] * *(this + 1) + a3[9] * *(this + 2) + a3[0xD];
-  a2[2] = a3[2] * *this + a3[6] * *(this + 1) + a3[0xA] * *(this + 2) + a3[0xE];
-  return a2;
+  result->x = transform->m[4] * this->y + transform->m[0] * this->x + transform->m[8] * this->z + transform->m[0xC]; /*0x786eef*/
+  result->y = transform->m[1] * this->x + transform->m[5] * this->y + transform->m[9] * this->z + transform->m[0xD]; /*0x786f09*/
+  result->z = transform->m[2] * this->x + transform->m[6] * this->y + transform->m[0xA] * this->z + transform->m[0xE]; /*0x786f24*/
+  return result; /*0x786f27*/
 }

@@ -25,7 +25,7 @@
 0x413173: push    esi; Dst
 0x413174: mov     ecx, ebx; a1
 0x413176: mov     [esi+14h], eax
-0x413179: call    TESFile_GetChunkData
+0x413179: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x41317E: mov     eax, [esi]
 0x413180: push    eax
 0x413181: call    EffectSettingCollection_LookupByCode
@@ -87,7 +87,7 @@
 0x413237: lea     eax, [ebp+Dst]
 0x41323A: push    eax; Dst
 0x41323B: mov     ecx, ebx; a1
-0x41323D: call    TESFile_GetChunkData
+0x41323D: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x413242: mov     ecx, [esi+18h]
 0x413245: mov     edx, [ebp+var_10]
 0x413248: mov     [ecx+4], edx
@@ -103,7 +103,7 @@
 0x413265: mov     eax, [esi+18h]
 0x413268: push    ebx; a2
 0x413269: push    eax; a1
-0x41326A: call    TESForm_ResolveFormID
+0x41326A: call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.
 0x41326F: mov     ecx, [esi+18h]
 0x413272: mov     eax, [ecx+10h]
 0x413275: add     esp, 8
@@ -137,7 +137,7 @@
 0x4132C8: push    0; a4
 0x4132CA: push    edi; Dst
 0x4132CB: mov     ecx, ebx; a1
-0x4132CD: call    TESFile_GetChunkData
+0x4132CD: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4132D2: mov     ecx, [esi+18h]
 0x4132D5: push    0; a3
 0x4132D7: push    edi; a2

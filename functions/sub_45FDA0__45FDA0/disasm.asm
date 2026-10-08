@@ -73,7 +73,7 @@
 0x45FE87: push    eax
 0x45FE88: mov     eax, [esi+4]
 0x45FE8B: push    eax
-0x45FE8C: call    edx
+0x45FE8C: call    edx; MEF SAVE PERF PASS2 2026-10-08: PERF-20 order constraint: first queue pass calls form virtual+58 in array order, restoring each record's saveVersion before dispatch. Player handled separately45FE22; native second phase later calls virtual+5C and frees each record4602EC. Reserve/growth optimization must preserve pointer order, duplicates, callback phases, player scheduling and exact record ownership; do not replace these two passes with interleaved callbacks.
 0x45FE8E: cmp     byte ptr [esp+44h+var_34+3], 0
 0x45FE93: jz      short loc_45FED4
 0x45FE95: mov     eax, [esi]
@@ -88,7 +88,7 @@
 0x45FEB0: test    esi, esi
 0x45FEB2: jz      short loc_45FED4
 0x45FEB4: mov     ecx, esi; this
-0x45FEB6: call    TESObjectREFR_GetParentCell
+0x45FEB6: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x45FEBB: test    eax, eax
 0x45FEBD: jnz     short loc_45FED4
 0x45FEBF: mov     ecx, esi; this
@@ -155,7 +155,7 @@
 0x45FF81: jnz     short loc_45FF86
 0x45FF83: or      dword ptr [edi], 4
 0x45FF86: mov     ecx, esi; this
-0x45FF88: call    TESObjectREFR_GetParentCell
+0x45FF88: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x45FF8D: test    eax, eax
 0x45FF8F: jnz     loc_460071
 0x45FF95: mov     ecx, esi; this
@@ -170,10 +170,10 @@
 0x45FFB3: add     esp, 0Ch
 0x45FFB6: push    0; int
 0x45FFB8: push    offset ??_R0?AVTESObjectCELL@@@8; struct TypeDescriptor *
-0x45FFBD: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
-0x45FFC2: push    0; int
+0x45FFBD: push    offset ??_R0?AVTESForm@@@8; a2
+0x45FFC2: push    0; a1
 0x45FFC4: push    eax; a1
-0x45FFC5: call    TESForm_LookupByFormID
+0x45FFC5: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x45FFCA: add     esp, 4
 0x45FFCD: push    eax; void *
 0x45FFCE: call    OblivionDynamicCast
@@ -222,9 +222,9 @@
 0x46005E: call    sub_4DD4B0
 0x460063: add     esp, 0Ch
 0x460066: jmp     short loc_460071
-0x460068: push    1; a2
+0x460068: push    1; disabled
 0x46006A: mov     ecx, esi; this
-0x46006C: call    TESForm_SetEnabled?
+0x46006C: call    TESForm_SetDisabledFlag; Verified Oblivion setter: the bool parameter sets or clears TESFormMembr.flags bit 0x800. TESObjectREFR_LinkModifiedForm propagates this bit through ExtraEnableStateParent and the enable-state activation routine clears it. CalcLowPathToPoint independently appends '-Disabled' when this bit is set. Fallout's mangled TESForm::SetDisabled directly writes the same 0x800 mask; this is a cross-check, not the basis of the Oblivion interpretation.
 0x460071: mov     edx, [esp+44h+var_2C]
 0x460075: mov     eax, [edx+4]
 0x460078: test    eax, eax
@@ -236,14 +236,14 @@
 0x46008C: lea     esp, [esp+0]
 0x460090: mov     esi, [eax+4]
 0x460093: push    eax
-0x460094: call    FormHeapFree
+0x460094: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x460099: add     esp, 4
 0x46009C: test    esi, esi
 0x46009E: mov     eax, esi
 0x4600A0: jnz     short loc_460090
-0x4600A2: mov     ecx, offset ActorProcessManager_ptr
-0x4600A7: call    sub_677240
-0x4600AC: mov     ecx, offset dword_B3BDB0
+0x4600A2: mov     ecx, (offset qword_B3BB2C+1D4h); self
+0x4600A7: call    ActorProcessManager_InitLoadedCrimes
+0x4600AC: mov     ecx, (offset qword_B3BB2C+284h)
 0x4600B1: call    sub_67C230
 0x4600B6: mov     ebx, [esp+44h+arg_0]
 0x4600BA: mov     esi, [esp+44h+arg_4]
@@ -254,7 +254,7 @@
 0x4600D1: test    esi, esi
 0x4600D3: jz      loc_4603CD
 0x4600D9: mov     ecx, esi; this
-0x4600DB: call    TESObjectCELL_IsInterior
+0x4600DB: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x4600E0: test    al, al
 0x4600E2: jz      loc_4603C2
 0x4600E8: lea     ecx, [esi+28h]
@@ -270,9 +270,9 @@
 0x460107: call    sub_889E00
 0x46010C: mov     ecx, ds:0B333A0h
 0x460112: call    sub_4416F0
-0x460117: mov     ecx, ds:0B333C4h
-0x46011D: push    0
-0x46011F: call    PlayerCharacter_GetPlayerNode
+0x460117: mov     ecx, ds:0B333C4h; this
+0x46011D: push    0; firstPerson
+0x46011F: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x460124: test    eax, eax
 0x460126: jnz     short loc_46013B
 0x460128: mov     ecx, ds:0B333C4h
@@ -319,7 +319,7 @@
 0x4601C1: mov     ecx, ds:0B333A0h; this
 0x4601C7: lea     edx, [esp+48h+a2]
 0x4601CB: fstp    [esp+48h+var_4]
-0x4601CF: push    edx; a2
+0x4601CF: push    edx; a3
 0x4601D0: mov     dword ptr [esp+4Ch+var_20+4], eax
 0x4601D4: call    GetTerrainHeight
 0x4601D9: fld1
@@ -345,21 +345,21 @@
 0x460223: mov     ecx, [esp+60h+a2]
 0x460227: mov     edx, dword ptr [esp+60h+var_20]
 0x46022B: add     esp, 1Ch
-0x46022E: push    0
+0x46022E: push    0; a4
 0x460230: sub     esp, 0Ch
 0x460233: mov     eax, esp
 0x460235: mov     [eax], ecx
 0x460237: mov     ecx, dword ptr [esp+54h+var_20+4]
 0x46023B: mov     [eax+4], edx
 0x46023E: mov     [eax+8], ecx
-0x460241: call    sub_4EA6E0
+0x460241: call    DistantLOD_UpdateLandLODAtPosition; Verified position-triggered LandLOD refresh wrapper: resolves current WorldSpace, climbs parentWorldspace to the root, obtains root terrainLODQuadRoots via TESWorldSpace_GetRootTerrainLODQuadMap, and delegates to DistantLOD_UpdateLandLODMap.
 0x460246: add     esp, 10h
 0x460249: mov     byte ptr ds:0B2CBC0h, 1
 0x460250: mov     esi, [esp+44h+arg_4]
 0x460254: test    esi, esi
 0x460256: jz      short loc_460287
 0x460258: mov     ecx, ds:0B333C4h; this
-0x46025E: call    TESObjectREFR_GetParentCell
+0x46025E: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x460263: test    eax, eax
 0x460265: jz      short loc_460272
 0x460267: mov     ecx, ds:0B333C4h; this
@@ -380,7 +380,6 @@
 0x460294: test    ebp, ebp
 0x460296: jbe     short loc_4602FB
 0x460298: jmp     short loc_4602A0
-0x46029A: align 10h
 0x4602A0: mov     ecx, [esp+44h+arg_0]
 0x4602A4: mov     edx, [ecx+4]
 0x4602A7: mov     esi, [edx+edi*4]
@@ -404,12 +403,12 @@
 0x4602DA: push    eax
 0x4602DB: mov     eax, [esi+4]
 0x4602DE: push    eax
-0x4602DF: call    edx
+0x4602DF: call    edx; MEF SAVE PERF PASS2 2026-10-08: PERF-20 second queue pass: calls form virtual+5C with record loadFlags/previousFlags, restores manager version and frees16-byte record4602EC. Array backing storage remains owned by caller for supplied LoadGame local queue (freed466A31). Manager+1C fallback queue has distinct cleanup4602FF..460337; do not conflate their lifetimes.
 0x4602E1: mov     eax, [esp+44h+var_30]
 0x4602E5: mov     cl, [eax+71h]
 0x4602E8: push    esi
 0x4602E9: mov     [eax+7Ch], cl
-0x4602EC: call    FormHeapFree
+0x4602EC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4602F1: add     esp, 4
 0x4602F4: add     edi, 1
 0x4602F7: cmp     edi, ebp
@@ -446,7 +445,7 @@
 0x46034E: test    esi, esi
 0x460350: jz      loc_4603DC
 0x460356: mov     ecx, esi; this
-0x460358: call    TESObjectCELL_IsInterior
+0x460358: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x46035D: test    al, al
 0x46035F: jz      short loc_4603D4
 0x460361: lea     ecx, [esi+28h]

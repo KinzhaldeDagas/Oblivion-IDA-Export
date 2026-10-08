@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x677A90",
-    "line": "push    ecx",
+    "line": "push    ecx; MEF LARGE PERF 2026-09-08: PERF-7 population: LoadGame466918 calls rebuild, which frees candidate nodes, empties embeddedhead+60, walks process-list+68 and admits nearby actor references with duplicate checks. Only this direct rebuild caller was found. Large post-load lists can precede trimming; no assertion of continual per-frame rebuild.",
     "mnemonic": "push",
     "size": 1
   },
@@ -42,12 +42,6 @@
     "size": 2
   },
   {
-    "ea": "0x677A9D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x677AA0",
     "line": "mov     eax, [esi+64h]",
     "mnemonic": "mov",
@@ -67,7 +61,7 @@
   },
   {
     "ea": "0x677AA7",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,7 +103,7 @@
   },
   {
     "ea": "0x677AC0",
-    "line": "call    sub_7616D0",
+    "line": "call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,7 +193,7 @@
   },
   {
     "ea": "0x677AE9",
-    "line": "jz      short loc_677AED",
+    "line": "jz      short loc_677AED; MEF PERF 2026-10-02: PERF-10 semantic constraint: failed vcall predicate leaves EDI unchanged, so the prior accepted reference can be processed again. Preserve this carried reference and all predicate/distance calls; deleting duplicate checks or resetting EDI per iteration changes stock behavior.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -295,7 +289,7 @@
   },
   {
     "ea": "0x677B17",
-    "line": "mov     eax, offset ActorProcessManager_ptr.highActors",
+    "line": "mov     eax, (offset qword_B3BB2C+234h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -307,7 +301,7 @@
   },
   {
     "ea": "0x677B20",
-    "line": "cmp     [eax], edi",
+    "line": "cmp     [eax], edi; MEF LARGE PERF 2026-09-08: PERF-7 secondary load cost: each accepted nearby actor is checked by a linear pointer-equality scan of the growing candidate list before PushFront677B31. Normal distinct accepted actors yield quadratic duplicate checking. Do not remove this check without proving all producer/duplicate semantics; it prevents repeated carried or duplicate references.",
     "mnemonic": "cmp",
     "size": 2
   },
@@ -331,7 +325,7 @@
   },
   {
     "ea": "0x677B29",
-    "line": "jnz     short loc_677B20",
+    "line": "jnz     short loc_677B20; MEF LARGE PERF 2026-09-08: PERF-7 secondary load cost: each accepted nearby actor is checked by a linear pointer-equality scan of the growing candidate list before PushFront677B31. Normal distinct accepted actors yield quadratic duplicate checking. Do not remove this check without proving all producer/duplicate semantics; it prevents repeated carried or duplicate references.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -343,13 +337,13 @@
   },
   {
     "ea": "0x677B2C",
-    "line": "mov     ecx, offset ActorProcessManager_ptr.highActors",
+    "line": "mov     ecx, (offset qword_B3BB2C+234h)",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x677B31",
-    "line": "call    BSSimpleList_PushFront",
+    "line": "call    BSSimpleList_PushFront; MEF PERF 2026-10-02: PERF-10 ownership: native446CB0 PushFront moves old embedded-head payload into an allocated node; no AddRef is performed. Keep native admission order and allocation semantics. Publish membership only after successful native insertion. Native allocation failure is not converted into silent actor loss.",
     "mnemonic": "call",
     "size": 5
   },

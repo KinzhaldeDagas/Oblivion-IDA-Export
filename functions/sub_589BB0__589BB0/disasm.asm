@@ -51,24 +51,24 @@
 0x589C2A: mov     [eax+4], edi
 0x589C2D: mov     [eax+10h], edi
 0x589C30: mov     [eax+14h], edi
-0x589C33: call    FormHeapFree
+0x589C33: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x589C38: add     esp, 4
 0x589C3B: mov     eax, [esi+10h]
 0x589C3E: cmp     [eax+4], edi
 0x589C41: jnz     short loc_589BE0
-0x589C43: mov     ecx, [esi+10h]
+0x589C43: mov     ecx, [esi+10h]; this
 0x589C46: cmp     ecx, edi
 0x589C48: jz      short loc_589C58
-0x589C4A: call    sub_5888E0
+0x589C4A: call    Tile__ActionNode__Unlink;
 0x589C4F: push    ecx
-0x589C50: call    FormHeapFree
+0x589C50: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x589C55: add     esp, 4
 0x589C58: mov     ecx, [esi+14h]
 0x589C5B: mov     [esi+10h], edi
 0x589C5E: cmp     [ecx+14h], edi
 0x589C61: jz      short loc_589CC6
 0x589C63: mov     edx, [esi+14h]
-0x589C66: mov     eax, [edx+14h]
+0x589C66: mov     eax, [edx+14h]; Verified: incoming reaction action is removed from destination action chain (prev/next) and source reaction chain (+0x10/+0x14), then freed. No selector-based rebinding to a later same-name replacement is performed here.
 0x589C69: cmp     eax, edi
 0x589C6B: jz      short loc_589CBE
 0x589C6D: mov     ecx, [eax]
@@ -102,22 +102,22 @@
 0x589CAD: mov     [eax+4], edi
 0x589CB0: mov     [eax+10h], edi
 0x589CB3: mov     [eax+14h], edi
-0x589CB6: call    FormHeapFree
+0x589CB6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x589CBB: add     esp, 4
 0x589CBE: mov     eax, [esi+14h]
 0x589CC1: cmp     [eax+14h], edi
 0x589CC4: jnz     short loc_589C63
-0x589CC6: mov     ecx, [esi+14h]
+0x589CC6: mov     ecx, [esi+14h]; this
 0x589CC9: cmp     ecx, edi
 0x589CCB: jz      short loc_589CDB
-0x589CCD: call    sub_5888E0
+0x589CCD: call    Tile__ActionNode__Unlink;
 0x589CD2: push    ecx
-0x589CD3: call    FormHeapFree
+0x589CD3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x589CD8: add     esp, 4
 0x589CDB: mov     [esi+14h], edi
 0x589CDE: mov     eax, [esi+8]
 0x589CE1: push    eax
-0x589CE2: call    FormHeapFree
+0x589CE2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x589CE7: fldz
 0x589CE9: mov     [esi+8], edi
 0x589CEC: mov     [esi+0Eh], di
@@ -126,7 +126,7 @@
 0x589CF7: mov     [esi], edi
 0x589CF9: mov     ecx, [esi+8]
 0x589CFC: push    ecx
-0x589CFD: call    FormHeapFree
+0x589CFD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x589D02: add     esp, 8
 0x589D05: mov     [esi+8], edi
 0x589D08: mov     [esi+0Eh], di
@@ -138,3 +138,13 @@
 0x589D1D: pop     esi
 0x589D1E: add     esp, 10h
 0x589D21: retn
+0x9BF770: mov     ecx, [ebp-10h]
+0x9BF773: add     ecx, 8; void *
+0x9BF776: jmp     BSStringT_Clear
+0x9BF77B: mov     edx, [esp+arg_4]
+0x9BF77F: lea     eax, [edx-0Ch]
+0x9BF782: mov     ecx, [edx-10h]
+0x9BF785: xor     ecx, eax
+0x9BF787: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BF78C: mov     eax, offset stru_AE8C78
+0x9BF791: jmp     ___CxxFrameHandler3

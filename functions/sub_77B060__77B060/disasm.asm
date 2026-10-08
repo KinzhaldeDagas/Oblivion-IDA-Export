@@ -1,4 +1,4 @@
-0x77B060: mov     eax, [esp+arg_0]
+0x77B060: mov     eax, [esp+state]
 0x77B064: mov     edx, [ecx]
 0x77B066: push    esi
 0x77B067: mov     esi, [ecx+eax*8+124h]

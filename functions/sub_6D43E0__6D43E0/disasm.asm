@@ -12,7 +12,7 @@
 0x6D4401: call    edx
 0x6D4403: test    eax, eax
 0x6D4405: jz      short loc_6D4422
-0x6D4407: cmp     eax, offset dword_B3F584
+0x6D4407: cmp     eax, offset stru_B3F584
 0x6D440C: jz      short loc_6D4418
 0x6D440E: mov     eax, [eax+4]
 0x6D4411: test    eax, eax

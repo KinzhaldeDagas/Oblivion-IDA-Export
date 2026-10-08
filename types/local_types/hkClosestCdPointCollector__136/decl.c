@@ -1,1 +1,1 @@
-hkClosestCdPointCollector
+struct hkClosestCdPointCollector;

@@ -1,4 +1,4 @@
-0x715990: push    0FFFFFFFFh
+0x715990: push    0FFFFFFFFh; Constructs a 0x3C-byte NiTimeController. Persistent authored state: flags +0x08, frequency +0x0C, phase +0x10, low/high key times +0x14/+0x18, target +0x30, next controller +0x34. Initializes runtime start/last/cache values +0x1C..+0x28 to sentinels, update byte +0x2C to 1, and force byte +0x38 to 0.
 0x715992: push    offset ??1NiPSysResetOnLoopCtlr@@UAE@XZ_SEH
 0x715997: mov     eax, large fs:0
 0x71599D: push    eax
@@ -67,3 +67,15 @@
 0x715A5B: pop     ebx
 0x715A5C: add     esp, 10h
 0x715A5F: retn
+0x9C9EB0: mov     ecx, [ebp-10h]
+0x9C9EB3: jmp     NiRefObject_destr
+0x9C9EB8: mov     ecx, [ebp-10h]
+0x9C9EBB: add     ecx, 34h ; '4'; slot
+0x9C9EBE: jmp     NiPointerSlot_Release
+0x9C9EC3: mov     edx, [esp+arg_4]
+0x9C9EC7: lea     eax, [edx-10h]
+0x9C9ECA: mov     ecx, [edx-14h]
+0x9C9ECD: xor     ecx, eax
+0x9C9ECF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C9ED4: mov     eax, offset stru_AF2654
+0x9C9ED9: jmp     ___CxxFrameHandler3

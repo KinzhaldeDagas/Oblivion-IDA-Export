@@ -636,7 +636,6 @@
 0x90E425: mov     ebx, [esp+100h+var_D0]
 0x90E429: xor     ecx, ecx
 0x90E42B: jmp     short loc_90E430
-0x90E42D: align 10h
 0x90E430: mov     ebp, [edx+8]
 0x90E433: cmp     [ecx+ebp+10h], ebx
 0x90E437: jnz     short loc_90E44F
@@ -656,7 +655,6 @@
 0x90E46A: jle     loc_90E52A
 0x90E470: mov     [esp+100h+var_E4], 0
 0x90E478: jmp     short loc_90E480
-0x90E47A: align 10h
 0x90E480: mov     ecx, [esp+100h+var_E0]
 0x90E484: mov     ebp, [ecx+8]
 0x90E487: mov     ecx, [esp+100h+var_E4]
@@ -762,7 +760,6 @@
 0x90E5B1: mov     [esp+100h+var_C4], 80000020h
 0x90E5B9: xor     ecx, ecx
 0x90E5BB: jmp     short loc_90E5C0
-0x90E5BD: align 10h
 0x90E5C0: mov     edx, [esp+100h+var_CC]
 0x90E5C4: mov     byte ptr [ecx+edx], 0FFh
 0x90E5C8: inc     ecx

@@ -1,1 +1,1 @@
-CHARRANGE
+typedef _charrange CHARRANGE;

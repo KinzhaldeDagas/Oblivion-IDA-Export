@@ -6,8 +6,8 @@
 0x985849: and     eax, 1F80h
 0x98584E: cmp     eax, 1F80h
 0x985853: jnz     short loc_985864
-0x985855: fnstcw  [esp+8+var_8]
-0x985858: mov     ax, [esp+8+var_8]
+0x985855: fnstcw  word ptr [esp+8+var_8]
+0x985858: mov     ax, word ptr [esp+8+var_8]
 0x98585C: and     ax, 7Fh
 0x985860: cmp     ax, 7Fh
 0x985864: lea     esp, [esp+8]

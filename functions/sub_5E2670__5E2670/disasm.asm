@@ -1,4 +1,4 @@
-0x5E2670: mov     eax, [esp+arg_0]
+0x5E2670: mov     eax, [esp+actorValue]; Handles player base actor-value changes. For native skill AVs, optional UI refresh also recalculates required experience for all 21 skills; major/non-major membership affects the recomputed requirement through TESClass_IsMajorSkillAV.
 0x5E2674: push    esi
 0x5E2675: mov     esi, ecx
 0x5E2677: lea     ecx, [eax-0Ch]
@@ -18,9 +18,9 @@
 0x5E269E: mov     eax, [edx+2C0h]
 0x5E26A4: mov     ecx, esi
 0x5E26A6: call    eax
-0x5E26A8: mov     ecx, ds:0B333C4h
+0x5E26A8: mov     ecx, ds:0B333C4h; this
 0x5E26AE: cmp     esi, ecx
 0x5E26B0: jnz     short sub_5E26BE
-0x5E26B2: cmp     [esp+4+arg_4], 0
+0x5E26B2: cmp     [esp+4+updatePlayerUI], 0
 0x5E26B7: jz      short sub_5E26BE
-0x5E26B9: call    sub_6670C0
+0x5E26B9: call    Player_RecalculateAllRequiredSkillExperience; A player skill base-value mutation with updatePlayerUI set rebuilds all 21 requiredSkillExp entries, not only the changed skill.

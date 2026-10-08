@@ -1,252 +1,235 @@
-void *__thiscall sub_7B7250(void *this)
+// [Verified] Static-initialization target called with unk_B430D8 by InitializeRendererShaderStateGlobals. Resets renderer/shader state, clears pass-control bytes +1/+2, sets +3=1, resets shader version to 0, and releases cached renderer objects. [Unknown] The owning C++ class for unk_B430D8 is not identified.
+void *__thiscall RendererShaderState_ResetGlobals(void *this)
 {
-  int v2; // eax
+  float v2; // eax
   bool v3; // zf
   LONG (__stdcall *v4)(volatile LONG *); // edi
-  void (__thiscall ***v5)(_DWORD, int); // esi
-  int v6; // esi
+  float v5; // esi
+  float v6; // esi
   int v7; // esi
-  int v8; // esi
+  float v8; // esi
   int v9; // esi
-  int v10; // esi
+  float v10; // esi
   int v11; // esi
   int v12; // esi
   int v13; // esi
-  int v14; // esi
+  float v14; // esi
   int v15; // esi
-  int v16; // esi
+  float v16; // esi
   int v17; // esi
   BSShaderAccumulator *v18; // esi
   int v19; // esi
   int v20; // esi
   float v22; // [esp+38h] [ebp-14h]
 
-  dword_B42EC0[0] = 0;
-  dword_B42EC4 = 0;
-  dword_B42EC8 = 0;
-  dword_B42ECC = 0;
-  dword_B42ED0 = 0;
-  dword_B42ED4 = 0;
-  dword_B42ED8 = 0;
-  dword_B42EDC = 0;
-  dword_B42EE0 = 0;
-  dword_B42EE4 = 0;
-  dword_B42EE8 = 0;
-  dword_B42EEC = 0;
-  dword_B42EF0 = 0;
-  dword_B42EF4 = 0;
-  dword_B42EF8 = 0;
-  dword_B42EFC = 0;
-  dword_B42F00 = 0;
-  dword_B42F04 = 0;
-  dword_B42F08 = 0;
-  dword_B42F0C = 0;
-  dword_B42F10 = 0;
-  dword_B42F14 = 0;
-  dword_B42F18 = 0;
-  dword_B42F1C = 0;
-  dword_B42F20 = 0;
-  dword_B42F24 = 0;
-  dword_B42F28 = 0;
-  dword_B42F2C = 0;
-  v2 = dword_B430EC;
-  v3 = dword_B430EC == 0;
-  v4 = InterlockedDecrement;
-  FullPath[0] = 0;
-  CacheOrNullString = 0;
-  byte_B42F3F = 1;
-  dword_B42E90 = 0xFFFFFFFF;
-  dword_B42EB8 = 0;
-  byte_B42EA7 = 1;
-  byte_B42E85 = 0;
-  dword_B42F40 = 0x2F;
-  dword_B42D70 = (int)j_j_NiFile_GetNiFile;
-  dword_B42D78 = 0;
-  dword_B42EB4 = 0;
-  byte_B42E95 = 1;
-  byte_B42F31 = 0;
-  byte_B42E94 = 0;
-  byte_B42E86 = 0;
-  dword_B42EBC = 0;
-  ShaderPackage = 0;
-  ShaderPackageMax = 0;
-  byte_B42E87 = 1;
-  byte_B42F33 = 0;
-  if ( !v3 )
+  *(_DWORD *)&OB_RendererGlobalState_010201A0[0x27] = 0; /*0x7b725a*/
+  *(_DWORD *)&OB_RendererGlobalState_010201A0[0x2B] = 0; /*0x7b725f*/
+  *(_DWORD *)&OB_RendererGlobalState_010201A0[0x2F] = 0; /*0x7b7264*/
+  *(_DWORD *)&OB_RendererGlobalState_010201A0[0x33] = 0; /*0x7b7269*/
+  *(_DWORD *)&OB_RendererGlobalState_010201A0[0x37] = 0; /*0x7b726e*/
+  *(_DWORD *)&OB_RendererGlobalState_010201A0[0x3B] = 0; /*0x7b7273*/
+  *(_DWORD *)&OB_RendererGlobalState_010201A0[0x3F] = 0; /*0x7b7278*/
+  *(_DWORD *)&OB_RendererGlobalState_010201A0[0x43] = 0; /*0x7b727d*/
+  *(_DWORD *)&OB_RendererGlobalState_010201A0[0x47] = 0; /*0x7b7282*/
+  *(_DWORD *)&OB_RendererGlobalState_010201A0[0x4B] = 0; /*0x7b7287*/
+  *(_DWORD *)&OB_RendererGlobalState_010201A0[0x4F] = 0; /*0x7b728c*/
+  *(_DWORD *)&OB_RendererGlobalState_010201A0[0x53] = 0; /*0x7b7291*/
+  *(_DWORD *)&OB_RendererGlobalState_010201A0[0x57] = 0; /*0x7b7296*/
+  *(_DWORD *)&OB_RendererGlobalState_010201A0[0x5B] = 0; /*0x7b729b*/
+  *(_DWORD *)&OB_RendererGlobalState_010201A0[0x5F] = 0; /*0x7b72a0*/
+  *(_DWORD *)&OB_RendererGlobalState_010201A0[0x63] = 0; /*0x7b72a5*/
+  *(_DWORD *)&OB_RendererGlobalState_010201A0[0x67] = 0; /*0x7b72aa*/
+  *(_DWORD *)&OB_RendererGlobalState_010201A0[0x6B] = 0; /*0x7b72af*/
+  *(_DWORD *)&OB_RendererGlobalState_010201A0[0x6F] = 0; /*0x7b72b4*/
+  *(_DWORD *)&OB_RendererGlobalState_010201A0[0x73] = 0; /*0x7b72b9*/
+  *(_DWORD *)&OB_RendererGlobalState_010201A0[0x77] = 0; /*0x7b72be*/
+  *(_DWORD *)&OB_RendererGlobalState_010201A0[0x7B] = 0; /*0x7b72c3*/
+  *(_DWORD *)&OB_RendererGlobalState_010201A0[0x7F] = 0; /*0x7b72c8*/
+  *(_DWORD *)&OB_RendererGlobalState_010201A0[0x83] = 0; /*0x7b72cd*/
+  *(_DWORD *)&OB_RendererGlobalState_010201A0[0x87] = 0; /*0x7b72d2*/
+  *(_DWORD *)&OB_RendererGlobalState_010201A0[0x8B] = 0; /*0x7b72d7*/
+  *(_DWORD *)&OB_RendererGlobalState_010201A0[0x8F] = 0; /*0x7b72dc*/
+  *(_DWORD *)&OB_RendererGlobalState_010201A0[0x93] = 0; /*0x7b72e1*/
+  v2 = flt_B430DC[4]; /*0x7b72e6*/
+  v3 = LODWORD(flt_B430DC[4]) == 0; /*0x7b72eb*/
+  v4 = InterlockedDecrement; /*0x7b72ed*/
+  OB_RendererGlobalState_010201A0[0xCF] = 0; /*0x7b72f3*/
+  MEMORY[0xB42D80] = 0; /*0x7b72f9*/
+  OB_RendererGlobalState_010201A0[0xA6] = 1; /*0x7b72ff*/
+  unk_B42E90 = NAN; /*0x7b7306*/
+  *(_DWORD *)&OB_RendererGlobalState_010201A0[0x1F] = 0; /*0x7b7310*/
+  OB_RendererGlobalState_010201A0[0xE] = 1; /*0x7b7316*/
+  OB_ShaderPassControl_010201A0[1] = 0;         // [Verified] RendererShaderState_ResetGlobals clears OB_ShaderPassControl+1. /*0x7b731d*/
+  *(_DWORD *)&OB_RendererGlobalState_010201A0[0xA7] = 0x2F; /*0x7b7323*/
+  unk_B42D70 = (int)j_j_NiFile_GetNiFile; /*0x7b732d*/
+  unk_B42D78 = 0; /*0x7b7337*/
+  *(_DWORD *)&OB_RendererGlobalState_010201A0[0x1B] = 0; /*0x7b733d*/
+  unk_B42E95 = 1; /*0x7b7343*/
+  OB_RendererGlobalState_010201A0[0x98] = 0; /*0x7b734a*/
+  unk_B42E94 = 0; /*0x7b7350*/
+  OB_ShaderPassControl_010201A0[2] = 0;         // [Verified] RendererShaderState_ResetGlobals clears bFullBrightLighting before renderer startup reloads its INI value. /*0x7b7356*/
+  *(_DWORD *)&OB_RendererGlobalState_010201A0[0x23] = 0; /*0x7b735c*/
+  *(_DWORD *)&OB_RendererGlobalState_010201A0[0xAF] = 0; /*0x7b7362*/
+  MEMORY[0xB42D74] = 0; /*0x7b7368*/
+  OB_ShaderPassControl_010201A0[3] = 1;         // [Verified] RendererShaderState_ResetGlobals initializes OB_ShaderPassControl+3 to one; the byte's meaning and consumers are Unknown. /*0x7b736e*/
+  OB_RendererGlobalState_010201A0[0x9A] = 0; /*0x7b7375*/
+  if ( !v3 ) /*0x7b737b*/
   {
-    v5 = (void (__thiscall ***)(_DWORD, int))v2;
-    if ( !v4((volatile LONG *)(v2 + 4)) )
-    {
-      if ( v5 )
-        (**v5)(v5, 1);
-    }
-    dword_B430EC = 0;
+    v5 = v2; /*0x7b737d*/
+    if ( !v4((volatile LONG *)(LODWORD(v2) + 4)) && v5 != 0.0 ) /*0x7b738b*/
+      (**(void (__thiscall ***)(_DWORD, int))LODWORD(v5))(LODWORD(v5), 1); /*0x7b7395*/
+    flt_B430DC[4] = 0.0; /*0x7b7397*/
   }
-  v6 = dword_B430DC;
-  if ( dword_B430DC )
+  v6 = flt_B430DC[0]; /*0x7b739d*/
+  if ( LODWORD(flt_B430DC[0]) ) /*0x7b739d*/
   {
-    if ( !v4((volatile LONG *)(v6 + 4)) )
-    {
-      if ( v6 )
-        (**(void (__thiscall ***)(int, int))v6)(v6, 1);
-    }
-    dword_B430DC = 0;
+    if ( !v4((volatile LONG *)(LODWORD(v6) + 4)) && v6 != 0.0 ) /*0x7b73b3*/
+      (**(void (__thiscall ***)(float, int))LODWORD(v6))(COERCE_FLOAT(LODWORD(v6)), 1); /*0x7b73bd*/
+    flt_B430DC[0] = 0.0; /*0x7b73bf*/
   }
-  v7 = dword_B430F0;
-  if ( dword_B430F0 )
+  v7 = unk_B430F0; /*0x7b73c5*/
+  if ( unk_B430F0 ) /*0x7b73c5*/
   {
-    if ( !v4((volatile LONG *)(v7 + 4)) )
+    if ( !v4((volatile LONG *)(v7 + 4)) ) /*0x7b73d3*/
     {
-      if ( v7 )
-        (**(void (__thiscall ***)(int, int))v7)(v7, 1);
+      if ( v7 ) /*0x7b73db*/
+        (**(void (__thiscall ***)(int, int))v7)(v7, 1); /*0x7b73e5*/
     }
-    dword_B430F0 = 0;
+    unk_B430F0 = 0; /*0x7b73e7*/
   }
-  v8 = dword_B430E0;
-  if ( dword_B430E0 )
+  v8 = flt_B430DC[1]; /*0x7b73ed*/
+  if ( LODWORD(flt_B430DC[1]) ) /*0x7b73ed*/
   {
-    if ( !v4((volatile LONG *)(v8 + 4)) )
-    {
-      if ( v8 )
-        (**(void (__thiscall ***)(int, int))v8)(v8, 1);
-    }
-    dword_B430E0 = 0;
+    if ( !v4((volatile LONG *)(LODWORD(v8) + 4)) && v8 != 0.0 ) /*0x7b7403*/
+      (**(void (__thiscall ***)(float, int))LODWORD(v8))(COERCE_FLOAT(LODWORD(v8)), 1); /*0x7b740d*/
+    flt_B430DC[1] = 0.0; /*0x7b740f*/
   }
-  v9 = dword_B43100;
-  if ( dword_B43100 )
+  v9 = unk_B43100; /*0x7b7415*/
+  if ( unk_B43100 ) /*0x7b7415*/
   {
-    if ( !v4((volatile LONG *)(v9 + 4)) )
+    if ( !v4((volatile LONG *)(v9 + 4)) ) /*0x7b7423*/
     {
-      if ( v9 )
-        (**(void (__thiscall ***)(int, int))v9)(v9, 1);
+      if ( v9 ) /*0x7b742b*/
+        (**(void (__thiscall ***)(int, int))v9)(v9, 1); /*0x7b7435*/
     }
-    dword_B43100 = 0;
+    unk_B43100 = 0; /*0x7b7437*/
   }
-  v10 = dword_B430E4;
-  if ( dword_B430E4 )
+  v10 = flt_B430DC[2]; /*0x7b743d*/
+  if ( LODWORD(flt_B430DC[2]) ) /*0x7b743d*/
   {
-    if ( !v4((volatile LONG *)(v10 + 4)) )
-    {
-      if ( v10 )
-        (**(void (__thiscall ***)(int, int))v10)(v10, 1);
-    }
-    dword_B430E4 = 0;
+    if ( !v4((volatile LONG *)(LODWORD(v10) + 4)) && v10 != 0.0 ) /*0x7b7453*/
+      (**(void (__thiscall ***)(float, int))LODWORD(v10))(COERCE_FLOAT(LODWORD(v10)), 1); /*0x7b745d*/
+    flt_B430DC[2] = 0.0; /*0x7b745f*/
   }
-  v11 = dword_B4311C;
-  if ( dword_B4311C )
+  v11 = unk_B4311C; /*0x7b7465*/
+  if ( unk_B4311C ) /*0x7b7465*/
   {
-    if ( !v4((volatile LONG *)(v11 + 4)) )
+    if ( !v4((volatile LONG *)(v11 + 4)) ) /*0x7b7473*/
     {
-      if ( v11 )
-        (**(void (__thiscall ***)(int, int))v11)(v11, 1);
+      if ( v11 ) /*0x7b747b*/
+        (**(void (__thiscall ***)(int, int))v11)(v11, 1); /*0x7b7485*/
     }
-    dword_B4311C = 0;
+    unk_B4311C = 0; /*0x7b7487*/
   }
-  v12 = dword_B43120;
-  if ( dword_B43120 )
+  v12 = unk_B43120; /*0x7b748d*/
+  if ( unk_B43120 ) /*0x7b748d*/
   {
-    if ( !v4((volatile LONG *)(v12 + 4)) )
+    if ( !v4((volatile LONG *)(v12 + 4)) ) /*0x7b749b*/
     {
-      if ( v12 )
-        (**(void (__thiscall ***)(int, int))v12)(v12, 1);
+      if ( v12 ) /*0x7b74a3*/
+        (**(void (__thiscall ***)(int, int))v12)(v12, 1); /*0x7b74ad*/
     }
-    dword_B43120 = 0;
+    unk_B43120 = 0; /*0x7b74af*/
   }
-  v13 = dword_B430F8;
-  if ( dword_B430F8 )
+  v13 = unk_B430F8; /*0x7b74b5*/
+  if ( unk_B430F8 ) /*0x7b74b5*/
   {
-    if ( !v4((volatile LONG *)(v13 + 4)) )
+    if ( !v4((volatile LONG *)(v13 + 4)) ) /*0x7b74c3*/
     {
-      if ( v13 )
-        (**(void (__thiscall ***)(int, int))v13)(v13, 1);
+      if ( v13 ) /*0x7b74cb*/
+        (**(void (__thiscall ***)(int, int))v13)(v13, 1); /*0x7b74d5*/
     }
-    dword_B430F8 = 0;
+    unk_B430F8 = 0; /*0x7b74d7*/
   }
-  v14 = dword_B43110;
-  if ( dword_B43110 )
+  v14 = flt_B43110[0]; /*0x7b74dd*/
+  if ( LODWORD(flt_B43110[0]) ) /*0x7b74dd*/
   {
-    if ( !v4((volatile LONG *)(v14 + 4)) )
-    {
-      if ( v14 )
-        (**(void (__thiscall ***)(int, int))v14)(v14, 1);
-    }
-    dword_B43110 = 0;
+    if ( !v4((volatile LONG *)(LODWORD(v14) + 4)) && v14 != 0.0 ) /*0x7b74f3*/
+      (**(void (__thiscall ***)(float, int))LODWORD(v14))(COERCE_FLOAT(LODWORD(v14)), 1); /*0x7b74fd*/
+    flt_B43110[0] = 0.0; /*0x7b74ff*/
   }
-  v15 = dword_B430D4;
-  if ( dword_B430D4 )
+  v15 = unk_B430D4; /*0x7b7505*/
+  if ( unk_B430D4 ) /*0x7b7505*/
   {
-    if ( !v4((volatile LONG *)(v15 + 4)) )
+    if ( !v4((volatile LONG *)(v15 + 4)) ) /*0x7b7513*/
     {
-      if ( v15 )
-        (**(void (__thiscall ***)(int, int))v15)(v15, 1);
+      if ( v15 ) /*0x7b751b*/
+        (**(void (__thiscall ***)(int, int))v15)(v15, 1); /*0x7b7525*/
     }
-    dword_B430D4 = 0;
+    unk_B430D4 = 0; /*0x7b7527*/
   }
-  v16 = dword_B43114;
-  if ( dword_B43114 )
+  v16 = flt_B43110[1]; /*0x7b752d*/
+  if ( LODWORD(flt_B43110[1]) ) /*0x7b752d*/
   {
-    if ( !v4((volatile LONG *)(v16 + 4)) )
-    {
-      if ( v16 )
-        (**(void (__thiscall ***)(int, int))v16)(v16, 1);
-    }
-    dword_B43114 = 0;
+    if ( !v4((volatile LONG *)(LODWORD(v16) + 4)) && v16 != 0.0 ) /*0x7b7543*/
+      (**(void (__thiscall ***)(float, int))LODWORD(v16))(COERCE_FLOAT(LODWORD(v16)), 1); /*0x7b754d*/
+    flt_B43110[1] = 0.0; /*0x7b754f*/
   }
-  v17 = dword_B430F4;
-  if ( dword_B430F4 )
+  v17 = unk_B430F4; /*0x7b7555*/
+  if ( unk_B430F4 ) /*0x7b7555*/
   {
-    if ( !v4((volatile LONG *)(v17 + 4)) )
+    if ( !v4((volatile LONG *)(v17 + 4)) ) /*0x7b7563*/
     {
-      if ( v17 )
-        (**(void (__thiscall ***)(int, int))v17)(v17, 1);
+      if ( v17 ) /*0x7b756b*/
+        (**(void (__thiscall ***)(int, int))v17)(v17, 1); /*0x7b7575*/
     }
-    dword_B430F4 = 0;
+    unk_B430F4 = 0; /*0x7b7577*/
   }
-  v18 = dword_B430FC;
-  v3 = dword_B430FC == 0;
-  dword_B42F38 = 0;
-  dword_B42F34 = 0;
-  byte_B42F30 = 0;
-  byte_B42F3C = 0;
-  ImageSpaceEffectEnabled = 0;
-  dword_B42F60 = 0;
-  if ( !v3 )
+  v18 = unk_B430FC; /*0x7b757d*/
+  v3 = unk_B430FC == 0; /*0x7b7583*/
+  *(_DWORD *)&OB_RendererGlobalState_010201A0[0x9F] = 0; /*0x7b7585*/
+  *(_DWORD *)&OB_RendererGlobalState_010201A0[0x9B] = 0; /*0x7b758b*/
+  OB_RendererGlobalState_010201A0[0x97] = 0; /*0x7b7591*/
+  OB_RendererGlobalState_010201A0[0xA3] = 0; /*0x7b7597*/
+  OB_RendererGlobalState_010201A0[0xA5] = 0; /*0x7b759d*/
+  *(_DWORD *)&OB_RendererGlobalState_010201A0[0xC7] = 0; /*0x7b75a3*/
+  if ( !v3 ) /*0x7b75a9*/
   {
-    if ( !v4((volatile LONG *)v18 + 1) )
+    if ( !v4((volatile LONG *)v18 + 1) ) /*0x7b75af*/
     {
-      if ( v18 )
-        (**(void (__thiscall ***)(BSShaderAccumulator *, int))v18)(v18, 1);
+      if ( v18 ) /*0x7b75b7*/
+        (**(void (__thiscall ***)(BSShaderAccumulator *, int))v18)(v18, 1); /*0x7b75c1*/
     }
-    dword_B430FC = 0;
+    unk_B430FC = 0; /*0x7b75c3*/
   }
-  v22 = g_DialogueFov_;
-  OcclusionCullngBool = 0;
-  UpdateParticleShaderFOVData(v22);
-  v19 = dword_B43128;
-  v3 = dword_B43128 == 0;
-  byte_B42F32 = 0;
-  byte_B42EA6 = 0;
-  if ( !v3 )
+  v22 = g_DialogueFov_; /*0x7b75d0*/
+  MEMORY[0xB42E97] = 0; /*0x7b75d3*/
+  UpdateParticleShaderFOVData(v22); /*0x7b75d9*/
+  v19 = unk_B43128; /*0x7b75de*/
+  v3 = unk_B43128 == 0; /*0x7b75e7*/
+  OB_RendererGlobalState_010201A0[0x99] = 0; /*0x7b75e9*/
+  OB_RendererGlobalState_010201A0[0xD] = 0; /*0x7b75ef*/
+  if ( !v3 ) /*0x7b75f5*/
   {
-    if ( !v4((volatile LONG *)(v19 + 4)) )
+    if ( !v4((volatile LONG *)(v19 + 4)) ) /*0x7b75fb*/
     {
-      if ( v19 )
-        (**(void (__thiscall ***)(int, int))v19)(v19, 1);
+      if ( v19 ) /*0x7b7603*/
+        (**(void (__thiscall ***)(int, int))v19)(v19, 1); /*0x7b760d*/
     }
-    dword_B43128 = 0;
+    unk_B43128 = 0; /*0x7b760f*/
   }
-  v20 = dword_B43124;
-  v3 = dword_B43124 == 0;
-  enableRefraction = 0;
-  if ( !v3 )
+  v20 = unk_B43124; /*0x7b7615*/
+  v3 = unk_B43124 == 0; /*0x7b761b*/
+  OB_ShaderPassControl_010201A0[0] = 0; /*0x7b761d*/
+  if ( !v3 ) /*0x7b7623*/
   {
-    if ( !v4((volatile LONG *)(v20 + 4)) )
+    if ( !v4((volatile LONG *)(v20 + 4)) ) /*0x7b7629*/
     {
-      if ( v20 )
-        (**(void (__thiscall ***)(int, int))v20)(v20, 1);
+      if ( v20 ) /*0x7b7631*/
+        (**(void (__thiscall ***)(int, int))v20)(v20, 1); /*0x7b763b*/
     }
-    dword_B43124 = 0;
+    unk_B43124 = 0; /*0x7b763d*/
   }
-  UsePS3Shaders = 0;
-  return this;
+  OB_RendererGlobalState_010201A0[0xC] = 0; /*0x7b7648*/
+  return this; /*0x7b7643*/
 }

@@ -17,19 +17,19 @@
 0x46E00E: mov     eax, [edi+254h]
 0x46E014: push    ebx
 0x46E015: push    eax; Size
-0x46E016: call    FormHeapAlloc
+0x46E016: call    FormHeapAlloc; MEF v57 IMPLEMENTED 2026-10-08: PERF-2 supersedes old v55/v56 allocation-hook target with PerfAMAllocateNifzPatch: retains actual size and buffer across nested allocation callbacks. Coupled read46E027 and batch46E02C use captured initialized extent plus two sentinels; do not trust a post-callback changed TESFile chunk size. Exactly one native free at46E055.
 0x46E01B: add     esp, 4
 0x46E01E: mov     ebx, eax
 0x46E020: push    0; a4
 0x46E022: push    ebx; Dst
 0x46E023: mov     ecx, edi; a1
 0x46E025: mov     esi, ebx
-0x46E027: call    TESFile_GetChunkData
-0x46E02C: cmp     byte ptr [ebx], 0
+0x46E027: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
+0x46E02C: cmp     byte ptr [ebx], 0; MEF PERF 2026-09-07: Proposed PERF-2 bulk-loader boundary5bytes803B007424; EBXtemp buffer, EBPmodel component, EDI TESFile. Source advertised length is[EDI+254h]; v55 allocates two trailing zero sentinels at46E016. Bulk optimization must preserve first-empty-string termination, valid order and caller-owned free46E055/56, and seal initialized input extent; sentinels are not complete-read proof. No ready-made unsafe jump or source-pointer ownership transfer.
 0x46E02F: jz      short loc_46E055
 0x46E031: push    esi
 0x46E032: mov     ecx, ebp
-0x46E034: call    sub_46DD70
+0x46E034: call    TESModelList_AddUniqueModelPath; MEF PERF 2026-09-07: PERF-2 direct producer: NIFZ loader calls AddUniqueModelPath once per nonempty encoded string, then scans input length again and advances46E04F. Empty string terminates the list. This is a resource-loading path via TESCreature_LoadForm51E17F, not established as a per-frame FPS bottleneck.
 0x46E039: mov     eax, esi
 0x46E03B: lea     edx, [eax+1]
 0x46E03E: mov     edi, edi
@@ -42,7 +42,7 @@
 0x46E04F: lea     esi, [esi+eax+1]
 0x46E053: jnz     short loc_46E031
 0x46E055: push    ebx
-0x46E056: call    FormHeapFree
+0x46E056: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x46E05B: add     esp, 4
 0x46E05E: pop     ebx
 0x46E05F: pop     esi

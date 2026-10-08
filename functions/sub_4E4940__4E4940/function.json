@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 2,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4E4940",
+      "0x4E4966"
+    ]
+  ],
+  "chunks_sha256": "37a957e76e1b3fbc0c891358529a3b90e2110fce4ee7220c732d3ed9e110a766",
+  "comment_regular": "Verified PathGrid clone override: delegates to TESForm_Clone then RTTI-casts the duplicate to TESPathGrid. No graph-copy/rebuild is performed in this tiny override; subsequent graph population is handled by normal form loading.",
+  "comment_repeatable": "Verified PathGrid clone override: delegates to TESForm_Clone then RTTI-casts the duplicate to TESPathGrid. No graph-copy/rebuild is performed in this tiny override; subsequent graph population is handled by normal form loading.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_4E4940",
+  "display_name": "TESPathGrid_CreateDuplicateForm",
   "end_ea": "0x4E4966",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4E4940",
+  "name": "TESPathGrid_CreateDuplicateForm",
   "segment": ".text",
   "sha256": "37a957e76e1b3fbc0c891358529a3b90e2110fce4ee7220c732d3ed9e110a766",
   "size": 38,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E4940",
-  "type": "void *__thiscall(TESForm *this, int, void *cloneMap)",
+  "total_chunk_size": 38,
+  "type": "TESPathGrid *__thiscall(TESPathGrid *this, int cloneFlags, void *cloneMap)",
   "xrefs_from_count": 15,
   "xrefs_to_count": 1
 }

@@ -21,7 +21,7 @@
 0x5B8818: mov     ecx, ds:0B333C4h; this
 0x5B881E: push    edx; int
 0x5B881F: mov     [esp+0A0h+var_7C], eax; a3
-0x5B8823: call    TESObjectREFR_GetParentCell
+0x5B8823: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5B8828: mov     ecx, eax
 0x5B882A: call    sub_4CCE20
 0x5B882F: mov     eax, ds:0B06A2Ch
@@ -44,7 +44,7 @@
 0x5B8866: mov     ecx, ds:0B333C4h; this
 0x5B886C: push    edx; int
 0x5B886D: mov     [esp+0A0h+var_64], eax
-0x5B8871: call    TESObjectREFR_GetParentCell
+0x5B8871: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5B8876: mov     ecx, eax
 0x5B8878: call    sub_4CCE20
 0x5B887D: mov     ecx, ds:0B333C4h; this
@@ -171,11 +171,11 @@
 0x5B8A2D: test    ebx, ebx
 0x5B8A2F: jnz     short loc_5B8A4D
 0x5B8A31: mov     ecx, [edi+68h]
-0x5B8A34: push    0
+0x5B8A34: push    0; lastTile
 0x5B8A36: push    offset aMap_local_icon; "map_local_icon"
-0x5B8A3B: push    ecx
-0x5B8A3C: mov     ecx, edi
-0x5B8A3E: call    Menu_CreateTileFromTemplate
+0x5B8A3B: push    ecx; parent
+0x5B8A3C: mov     ecx, edi; this
+0x5B8A3E: call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.
 0x5B8A43: mov     ebx, eax
 0x5B8A45: test    ebx, ebx
 0x5B8A47: jz      loc_5B8CDD
@@ -192,7 +192,6 @@
 0x5B8A70: mov     [esp+94h+a3], esi
 0x5B8A74: jbe     short loc_5B8ACF
 0x5B8A76: jmp     short loc_5B8A80
-0x5B8A78: align 10h
 0x5B8A80: movzx   edx, word ptr [ebp+0B6h]
 0x5B8A87: cmp     edx, esi
 0x5B8A89: ja      short loc_5B8A8F
@@ -201,7 +200,7 @@
 0x5B8A8F: mov     eax, [ebp+0B0h]
 0x5B8A95: mov     eax, [eax+esi*4]
 0x5B8A98: push    eax
-0x5B8A99: push    offset dword_B3FCD4
+0x5B8A99: push    offset stru_B3FCD4
 0x5B8A9E: call    NiRTTI_Cast
 0x5B8AA3: add     esp, 8
 0x5B8AA6: test    eax, eax
@@ -280,22 +279,22 @@
 0x5B8B85: call    BSStringT_Set
 0x5B8B8A: fld     dword ptr ds:0A379B4h
 0x5B8B90: push    ecx
-0x5B8B91: fstp    [esp+98h+a2]; a3
-0x5B8B94: push    0FAEh; a2
+0x5B8B91: fstp    [esp+98h+a2]; value
+0x5B8B94: push    0FAEh; propertyCode
 0x5B8B99: mov     ecx, ebx; this
-0x5B8B9B: call    Tile_SetFloat
+0x5B8B9B: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B8BA0: fld     [esp+94h+var_54]
 0x5B8BA4: push    ecx
-0x5B8BA5: fstp    [esp+98h+a2]; a3
-0x5B8BA8: push    0FAFh; a2
+0x5B8BA5: fstp    [esp+98h+a2]; value
+0x5B8BA8: push    0FAFh; propertyCode
 0x5B8BAD: mov     ecx, ebx; this
-0x5B8BAF: call    Tile_SetFloat
+0x5B8BAF: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B8BB4: fld     [esp+94h+a3]
 0x5B8BB8: push    ecx
-0x5B8BB9: fstp    [esp+98h+a2]; a3
-0x5B8BBC: push    0FB0h; a2
+0x5B8BB9: fstp    [esp+98h+a2]; value
+0x5B8BBC: push    0FB0h; propertyCode
 0x5B8BC1: mov     ecx, ebx; this
-0x5B8BC3: call    Tile_SetFloat
+0x5B8BC3: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B8BC8: push    esi
 0x5B8BC9: push    0FB2h
 0x5B8BCE: mov     ecx, ebx
@@ -303,9 +302,9 @@
 0x5B8BD5: fild    [esp+94h+arg_C]
 0x5B8BDC: push    ecx
 0x5B8BDD: mov     ecx, ebx; this
-0x5B8BDF: fstp    [esp+98h+a2]; a3
-0x5B8BE2: push    0FB3h; a2
-0x5B8BE7: call    Tile_SetFloat
+0x5B8BDF: fstp    [esp+98h+a2]; value
+0x5B8BE2: push    0FB3h; propertyCode
+0x5B8BE7: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B8BEC: xor     ecx, ecx
 0x5B8BEE: cmp     [esp+94h+arg_10], cl
 0x5B8BF5: setnz   cl
@@ -314,15 +313,15 @@
 0x5B8BFF: fild    [esp+94h+var_7C]
 0x5B8C03: push    ecx
 0x5B8C04: mov     ecx, ebx; this
-0x5B8C06: fstp    [esp+98h+a2]; a3
-0x5B8C09: push    0FB4h; a2
-0x5B8C0E: call    Tile_SetFloat
+0x5B8C06: fstp    [esp+98h+a2]; value
+0x5B8C09: push    0FB4h; propertyCode
+0x5B8C0E: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B8C13: fild    [esp+94h+arg_14]
 0x5B8C1A: push    ecx
 0x5B8C1B: mov     ecx, ebx; this
-0x5B8C1D: fstp    [esp+98h+a2]; a3
-0x5B8C20: push    0FB5h; a2
-0x5B8C25: call    Tile_SetFloat
+0x5B8C1D: fstp    [esp+98h+a2]; value
+0x5B8C20: push    0FB5h; propertyCode
+0x5B8C25: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B8C2A: xor     edx, edx
 0x5B8C2C: cmp     [esp+94h+arg_18], dl
 0x5B8C33: push    ecx
@@ -331,15 +330,15 @@
 0x5B8C39: add     edx, 1
 0x5B8C3C: mov     [esp+98h+var_7C], edx
 0x5B8C40: fild    [esp+98h+var_7C]
-0x5B8C44: fstp    [esp+98h+a2]; a3
-0x5B8C47: push    0FB6h; a2
-0x5B8C4C: call    Tile_SetFloat
+0x5B8C44: fstp    [esp+98h+a2]; value
+0x5B8C47: push    0FB6h; propertyCode
+0x5B8C4C: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B8C51: fild    [esp+94h+arg_1C]
 0x5B8C58: push    ecx
 0x5B8C59: mov     ecx, ebx; this
-0x5B8C5B: fstp    [esp+98h+a2]; a3
-0x5B8C5E: push    0FA7h; a2
-0x5B8C63: call    Tile_SetFloat
+0x5B8C5B: fstp    [esp+98h+a2]; value
+0x5B8C5E: push    0FA7h; propertyCode
+0x5B8C63: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B8C68: xor     eax, eax
 0x5B8C6A: cmp     [esp+94h+arg_20], al
 0x5B8C71: push    ecx
@@ -348,9 +347,9 @@
 0x5B8C77: add     eax, 1
 0x5B8C7A: mov     [esp+98h+var_7C], eax
 0x5B8C7E: fild    [esp+98h+var_7C]
-0x5B8C82: fstp    [esp+98h+a2]; a3
-0x5B8C85: push    0FB8h; a2
-0x5B8C8A: call    Tile_SetFloat
+0x5B8C82: fstp    [esp+98h+a2]; value
+0x5B8C85: push    0FB8h; propertyCode
+0x5B8C8A: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B8C8F: xor     ecx, ecx
 0x5B8C91: cmp     [esp+94h+arg_24], cl
 0x5B8C98: setnz   cl
@@ -359,9 +358,9 @@
 0x5B8CA2: fild    [esp+94h+var_7C]
 0x5B8CA6: push    ecx
 0x5B8CA7: mov     ecx, ebx; this
-0x5B8CA9: fstp    [esp+98h+a2]; a3
-0x5B8CAC: push    0FB9h; a2
-0x5B8CB1: call    Tile_SetFloat
+0x5B8CA9: fstp    [esp+98h+a2]; value
+0x5B8CAC: push    0FB9h; propertyCode
+0x5B8CB1: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B8CB6: xor     edx, edx
 0x5B8CB8: cmp     [esp+94h+arg_28], dl
 0x5B8CBF: push    ecx
@@ -370,9 +369,9 @@
 0x5B8CC5: add     edx, 1
 0x5B8CC8: mov     [esp+98h+var_7C], edx
 0x5B8CCC: fild    [esp+98h+var_7C]
-0x5B8CD0: fstp    [esp+98h+a2]; a3
-0x5B8CD3: push    0FBAh; a2
-0x5B8CD8: call    Tile_SetFloat
+0x5B8CD0: fstp    [esp+98h+a2]; value
+0x5B8CD3: push    0FBAh; propertyCode
+0x5B8CD8: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B8CDD: mov     eax, ebx
 0x5B8CDF: jmp     short loc_5B8CE3
 0x5B8CE1: xor     eax, eax

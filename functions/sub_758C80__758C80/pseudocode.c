@@ -1,19 +1,19 @@
-float *__thiscall sub_758C80(const char **this, _DWORD **a2)
+NiObject *__thiscall sub_758C80(const char **this, _DWORD **a2)
 {
   NiObject *v3; // eax
-  float *v4; // esi
+  NiObject *v4; // esi
 
-  v3 = (NiObject *)FormHeapAlloc(0x34u);
-  if ( v3 )
-    v4 = (float *)sub_758910(v3);
+  v3 = (NiObject *)FormHeapAlloc(0x34u); /*0x758c86*/
+  if ( v3 ) /*0x758c90*/
+    v4 = sub_758910(v3); /*0x758c99*/
   else
-    v4 = 0;
-  sub_752C40(this, (int)v4, a2);
-  *((_DWORD *)v4 + 7) = *(this + 7);
-  *((_DWORD *)v4 + 8) = *(this + 8);
-  *((_DWORD *)v4 + 9) = *(this + 9);
-  v4[0xA] = *((float *)this + 0xA);
-  v4[0xB] = *((float *)this + 0xB);
-  v4[0xC] = *((float *)this + 0xC);
-  return v4;
+    v4 = 0; /*0x758c9d*/
+  sub_752C40(this, (int)v4, a2); /*0x758ca7*/
+  v4[3].members.m_uiRefCount = (UInt32)*(this + 7); /*0x758caf*/
+  v4[4].__vftable = (NiObjectVtbl *)*(this + 8); /*0x758cb5*/
+  v4[4].members.m_uiRefCount = (UInt32)*(this + 9); /*0x758cbb*/
+  v4[5].__vftable = *((NiObjectVtbl **)this + 0xA); /*0x758cc1*/
+  v4[5].members.m_uiRefCount = *((UInt32 *)this + 0xB); /*0x758cc9*/
+  v4[6].__vftable = *((NiObjectVtbl **)this + 0xC); /*0x758cd0*/
+  return v4; /*0x758cd3*/
 }

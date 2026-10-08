@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x479C40",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Oblivion equipped-AMMO 3D path on ActorSkinInfo. Clears/rebuilds AmmoForm/AmmoModel/AmmoObject at +0x10C/+0x110/+0x114, attaches through native Prn handling, and caches the loaded 3D.",
     "mnemonic": "push",
     "size": 2
   },
@@ -133,13 +133,13 @@
   },
   {
     "ea": "0x479C85",
-    "line": "push    ebp",
+    "line": "push    ebp; newModelData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x479C86",
-    "line": "push    1",
+    "line": "push    1; replaceMetadata",
     "mnemonic": "push",
     "size": 2
   },
@@ -151,13 +151,13 @@
   },
   {
     "ea": "0x479C8E",
-    "line": "push    ebx",
+    "line": "push    ebx; slot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x479C8F",
-    "line": "call    sub_478780",
+    "line": "call    ActorSkinInfo_ClearOrReplaceEquipmentSlot; ActorSkinInfo equipment-slot teardown/replacement. Slot is exactly {TESForm*, TESModel*, NiAVObject*}; native code removes loaded 3D from shadow/parent ownership, releases loader/scene state, clears object3D, and optionally replaces form/model metadata. Known slots include rings, amulet, WEAP, AMMO, shield, and light. External Crossbow contrast after this native ownership behavior: retained raw controller/target pointers are invalidated when the owning WeaponObject graph is torn down; pointer equality alone is not a lifetime or generation check. Current removal/reset erases tracking without restoring original controller timing state, and target mismatch leaves null-controller tombstones instead of generation-validating/rescanning.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,31 +175,31 @@
   },
   {
     "ea": "0x479C9A",
-    "line": "push    ebp",
+    "line": "push    ebp; newModelData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x479C9B",
-    "line": "push    1",
+    "line": "push    1; replaceMetadata",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x479C9D",
-    "line": "push    ebx",
+    "line": "push    ebx; slot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x479C9E",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x479CA0",
-    "line": "call    sub_478780",
+    "line": "call    ActorSkinInfo_ClearOrReplaceEquipmentSlot; ActorSkinInfo equipment-slot teardown/replacement. Slot is exactly {TESForm*, TESModel*, NiAVObject*}; native code removes loaded 3D from shadow/parent ownership, releases loader/scene state, clears object3D, and optionally replaces form/model metadata. Known slots include rings, amulet, WEAP, AMMO, shield, and light. External Crossbow contrast after this native ownership behavior: retained raw controller/target pointers are invalidated when the owning WeaponObject graph is torn down; pointer equality alone is not a lifetime or generation check. Current removal/reset erases tracking without restoring original controller timing state, and target mismatch leaves null-controller tombstones instead of generation-validating/rescanning.",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,19 +283,19 @@
   },
   {
     "ea": "0x479CD6",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x479CDC",
-    "line": "push    eax",
+    "line": "push    eax; firstPerson",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x479CDD",
-    "line": "call    PlayerCharacter_GetPlayerNode",
+    "line": "call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x479CE4",
-    "line": "push    eax",
+    "line": "push    eax; skeletonRoot",
     "mnemonic": "push",
     "size": 1
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x479CEB",
-    "line": "push    eax",
+    "line": "push    eax; actorRef",
     "mnemonic": "push",
     "size": 1
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x479CEF",
-    "line": "push    0Ch",
+    "line": "push    0Ch; slot",
     "mnemonic": "push",
     "size": 2
   },
@@ -349,13 +349,13 @@
   },
   {
     "ea": "0x479CF5",
-    "line": "push    eax",
+    "line": "push    eax; modelPath",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x479CF6",
-    "line": "call    sub_479450",
+    "line": "call    Actor_LoadCloneAndAttachModel3D; Player-perspective equipped AMMO/quiver model uses stock attachment/add-on slot 0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,13 +475,13 @@
   },
   {
     "ea": "0x479D38",
-    "line": "call    sub_439EB0",
+    "line": "call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x479D3D",
-    "line": "lea     ecx, [esp+48h+var_28]",
+    "line": "lea     ecx, [esp+48h+var_28]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x479D43",
-    "line": "call    sub_478B90",
+    "line": "call    OB_NiCloningProcess_ctor",
     "mnemonic": "call",
     "size": 5
   },
@@ -685,7 +685,7 @@
   },
   {
     "ea": "0x479DAA",
-    "line": "call    NiObjectNET_GetExtraData",
+    "line": "call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.",
     "mnemonic": "call",
     "size": 5
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x479DD6",
-    "line": "push    offset dword_B35288",
+    "line": "push    0B35288h",
     "mnemonic": "push",
     "size": 5
   },
@@ -955,43 +955,43 @@
   },
   {
     "ea": "0x479E3D",
-    "line": "push    0",
+    "line": "push    0; unusedTrailing",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x479E3F",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; modelType",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x479E41",
-    "line": "push    0",
+    "line": "push    0; unusedContext",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x479E43",
-    "line": "push    ebx",
+    "line": "push    ebx; sourceModelRoot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x479E44",
-    "line": "push    ebp",
+    "line": "push    ebp; modelRoot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x479E45",
-    "line": "push    esi",
+    "line": "push    esi; skeletonRoot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x479E46",
-    "line": "call    sub_479140",
+    "line": "call    AttachModelUsingPrnExtraData; Non-player equipped AMMO/quiver model attaches through the same Prn scene-graph contract as weapon models.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1183,7 +1183,7 @@
   },
   {
     "ea": "0x479E9F",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1537,7 +1537,7 @@
   },
   {
     "ea": "0x479F58",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1600,5 +1600,83 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AF170",
+    "line": "lea     ecx, [ebp-28h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF173",
+    "line": "jmp     sub_4781A0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF178",
+    "line": "lea     ecx, [ebp+4]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF17B",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF180",
+    "line": "lea     ecx, [ebp-30h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF183",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF188",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AF18C",
+    "line": "lea     eax, [edx-38h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF18F",
+    "line": "mov     ecx, [edx-3Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF192",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AF194",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF199",
+    "line": "mov     eax, offset stru_ADB7F0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF19E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

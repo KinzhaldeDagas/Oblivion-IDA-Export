@@ -1,4 +1,4 @@
-0x5672A0: sub     esp, 108h
+0x5672A0: sub     esp, 108h; 3DTheft decode: TESPackage procedure-array resolver is a mutator. It writes TESPackage+0x18/procedureArrayIndex directly; callers should not use EAX as the row result.
 0x5672A6: mov     eax, ds:0B30AACh
 0x5672AB: xor     eax, esp
 0x5672AD: mov     [esp+108h+var_4], eax
@@ -10,7 +10,7 @@
 0x5672BF: cmp     eax, 20h; switch 33 cases
 0x5672C2: ja      def_5672C8; jumptable 005672C8 default case, cases 13,16,20,27
 0x5672C8: jmp     ds:jpt_5672C8[eax*4]; switch jump
-0x5672CF: mov     dword ptr [esi+18h], 1; jumptable 005672C8 case 5
+0x5672CF: mov     dword ptr [esi+18h], 1; 3DTheft decode: example resolver case writes procedureArrayIndex directly to package+0x18.
 0x5672D6: jmp     loc_567606
 0x5672DB: mov     dword ptr [esi+18h], 0; jumptable 005672C8 case 6
 0x5672E2: jmp     loc_567606
@@ -91,9 +91,9 @@
 0x5673FB: jmp     loc_567606
 0x567400: mov     dword ptr [esi+18h], 3; jumptable 005673CF default case, cases 19-22,25-27,29,33,34
 0x567407: jmp     loc_567606
-0x56740C: mov     dword ptr [esi+18h], 5; jumptable 005672C8 case 3
+0x56740C: mov     dword ptr [esi+18h], 5; RadiantAI: package type Eat sets procedureArrayIndex=5, whose dispatch row is 0,5,1,44. This makes sub_62DA10 the live Eat-package action boundary.
 0x567413: jmp     loc_567606
-0x567418: mov     dword ptr [esi+18h], 4; jumptable 005672C8 case 4
+0x567418: mov     dword ptr [esi+18h], 4; RadiantAI: package type Sleep sets procedureArrayIndex=4, dispatch row 0,4,1,44. Action 4/sub_62D750 is tied to Sleep packages, despite procedure string table naming action 4 PROCEDURE_EAT.
 0x56741F: jmp     loc_567606
 0x567424: mov     ecx, [esi+28h]; jumptable 005672C8 case 1
 0x567427: test    ecx, ecx
@@ -109,7 +109,7 @@
 0x567447: call    sub_569E80
 0x56744C: test    eax, eax
 0x56744E: jz      def_5672C8; jumptable 005672C8 default case, cases 13,16,20,27
-0x567454: mov     dword ptr [esi+18h], 7
+0x567454: mov     dword ptr [esi+18h], 7; 3DTheft decode 2026-05-16: direct Follow package with any non-null target data resolves procedureArrayIndex=7.
 0x56745B: jmp     loc_567606
 0x567460: mov     ecx, [esi+28h]; jumptable 005672C8 case 2
 0x567463: test    ecx, ecx
@@ -213,7 +213,7 @@
 0x5675FA: mov     dword ptr [esi+18h], 27h ; '''; jumptable 005672C8 case 32
 0x567601: jmp     short loc_567606
 0x567603: mov     [esi+18h], edi; jumptable 005672C8 default case, cases 13,16,20,27
-0x567606: cmp     [esi+18h], edi
+0x567606: cmp     [esi+18h], edi; 3DTheft decode: resolver exit after package+0x18 has been written; EAX is incidental from branch calculations, not a stable return value.
 0x567609: jnz     short loc_567634
 0x56760B: mov     edx, [esi]
 0x56760D: mov     eax, [edx+0D4h]

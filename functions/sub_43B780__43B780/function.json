@@ -1,19 +1,36 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_43B780",
+  "chunks": [
+    [
+      "0x43B780",
+      "0x43B83B"
+    ],
+    [
+      "0x9ACAF0",
+      "0x9ACB2F"
+    ]
+  ],
+  "chunks_sha256": "d3115d5c5bc031e40030dab5dfd6cb2aab4f35266f63d0c6f4fe9a15a2c685d6",
+  "comment_regular": "QueuedTreeModel allocation wrapper. Allocates 0x40-byte entry, calls 0x4376A0, attaches queued children, then schedules via vtable slot +0x20.",
+  "comment_repeatable": "QueuedTreeModel allocation wrapper. Allocates 0x40-byte entry, calls 0x4376A0, attaches queued children, then schedules via vtable slot +0x20.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
+  "display_name": "QueuedTreeModel_CreateAndQueue",
   "end_ea": "0x43B83B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_43B780",
+  "name": "QueuedTreeModel_CreateAndQueue",
   "segment": ".text",
   "sha256": "826a774e575876f4e4ac05e9fd455d8b5a07a51dd66b4a769e7877748784593b",
   "size": 187,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x43B780",
-  "type": "_DWORD **__stdcall(_DWORD **, int, int, unsigned __int8, volatile LONG *, int)",
-  "xrefs_from_count": 64,
+  "total_chunk_size": 250,
+  "type": "QueuedTreeModel_OblivionLayout **__stdcall(QueuedTreeModel_OblivionLayout **outTask, TESObjectREFR *reference, TESObjectTREE_OblivionLayout_080_NiTArrayVerified *tree, unsigned __int8 priority, IOTask *parent, int unknownArg)",
+  "xrefs_from_count": 85,
   "xrefs_to_count": 1
 }

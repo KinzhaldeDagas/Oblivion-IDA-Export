@@ -1,1 +1,1 @@
-PROPID
+typedef ULONG PROPID;

@@ -7,7 +7,7 @@
 0x5AD710: mov     eax, [esi+50h]
 0x5AD713: mov     edi, [eax+4]
 0x5AD716: push    eax
-0x5AD717: call    FormHeapFree
+0x5AD717: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5AD71C: add     esp, 4
 0x5AD71F: test    edi, edi
 0x5AD721: mov     [esi+50h], edi

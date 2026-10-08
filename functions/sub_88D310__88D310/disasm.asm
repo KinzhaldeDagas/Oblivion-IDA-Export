@@ -1,4 +1,4 @@
-0x88D310: mov     edx, [esp+arg_4]
+0x88D310: mov     edx, [esp+arg_4]; hkCharacterContext init stores state manager pointer and initial state id; 0x88D370 later returns +0x0C.
 0x88D314: mov     eax, ecx
 0x88D316: mov     ecx, [esp+arg_0]
 0x88D31A: mov     word ptr [eax+6], 1

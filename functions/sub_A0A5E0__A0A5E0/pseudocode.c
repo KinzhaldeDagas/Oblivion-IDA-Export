@@ -1,4 +1,4 @@
-BSStringT *sub_A0A5E0()
+NiRTTI *sub_A0A5E0()
 {
-  return sub_70E220((BSStringT *)dword_B40190, "NiSpotLight", (int)dword_B3FD80);
+  return NiRTTI_Constructor(&stru_B40190, "NiSpotLight", &stru_B3FD80); /*0xa0a5f4*/
 }

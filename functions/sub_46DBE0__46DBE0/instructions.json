@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x46DBE0",
-    "line": "push    ecx",
+    "line": "push    ecx; MEF v57 IMPLEMENTED 2026-10-08: Verified serializer: builds concatenated NUL-terminated path strings plus final empty sentinel, writes chunk through TESForm_PutFormRecordChunkData, frees private buffer. No list mutation. userpurge ABI remains unresolved; descriptive name only, no signature invented.",
     "mnemonic": "push",
     "size": 1
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x46DC85",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x46DC8B",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,4 +1,4 @@
-0x7A8FC0: push    0FFFFFFFFh
+0x7A8FC0: push    0FFFFFFFFh; OBLIVION AUTHORITY (2026-08-24): Builds a lower explicit leaf LOD from selected source-leaf pairs. Clones the first leaf, averages pair positions, decodes and averages their packed RGB, then calls CBillboardLeaf::SetColor with applyDimming=false. This avoids applying colorScaleByte a second time.
 0x7A8FC2: push    offset SEH_7A8FC0
 0x7A8FC7: mov     eax, large fs:0
 0x7A8FCD: push    eax
@@ -19,13 +19,13 @@
 0x7A8FF6: mov     edi, 1
 0x7A8FFB: jnz     short loc_7A901E
 0x7A8FFD: or      ds:0B42CA4h, edi
-0x7A9003: mov     ecx, offset unk_B42CA0
+0x7A9003: mov     ecx, offset stru_B42CA0; this
 0x7A9008: mov     [esp+74h+var_4], edi
-0x7A900C: call    sub_78EAF0
+0x7A900C: call    OB_stRandom_ctor_010201A0; Oblivion stRandom constructor. The class has no per-instance generator state; if the shared SIdvRandomImpl state is not initialized, it invokes Reseed(-1).
 0x7A9011: push    offset sub_A27070; void (__cdecl *)()
 0x7A9016: call    _atexit
 0x7A901B: add     esp, 4
-0x7A901E: mov     ebx, [esp+74h+arg_0]
+0x7A901E: mov     ebx, [esp+74h+result]
 0x7A9022: mov     [ebx+4], esi
 0x7A9025: mov     [ebx+8], esi
 0x7A9028: mov     [ebx+0Ch], esi
@@ -43,21 +43,21 @@
 0x7A904F: jz      loc_7A9221
 0x7A9055: fld1
 0x7A9057: sub     esp, 8
-0x7A905A: fstp    [esp+7Ch+var_78]; float
-0x7A905E: mov     ecx, offset unk_B42CA0
+0x7A905A: fstp    [esp+7Ch+maxValue]; maxValue
+0x7A905E: mov     ecx, offset stru_B42CA0; this
 0x7A9063: fldz
-0x7A9065: fstp    [esp+7Ch+var_7C]; float
-0x7A9068: call    sub_78EA00
+0x7A9065: fstp    [esp+7Ch+minValue]; minValue
+0x7A9068: call    OB_stRandom_GetUniform_010201A0; Oblivion stRandom::GetUniform. Returns minValue + (maxValue - minValue) * SIdvRandomImpl::m_cUniform.Next(). Used throughout spline, branch, frond, tree, leaf-LOD, and seed generation paths.
 0x7A906D: fld     dword ptr [ebp+14h]
 0x7A9070: fcompp
 0x7A9072: fnstsw  ax
 0x7A9074: test    ah, 5
-0x7A9077: jp      loc_7A920F
+0x7A9077: jp      loc_7A920F; BuildNewLeaves emits this pair only when randomUniform(0,1) > leafReductionPercentage; retention/removal is independent of texture index and color.
 0x7A907D: cmp     edi, [ebp+8]
 0x7A9080: jb      short loc_7A9087
 0x7A9082: call    __invalid_parameter_noinfo
-0x7A9087: mov     ecx, [edi]
-0x7A9089: call    sub_7A7E50
+0x7A9087: mov     ecx, [edi]; this
+0x7A9089: call    OB_CBillboardLeaf_Clone_010201A0; For each retained pair, clones the primary/first leaf. Full copy preserves its raw textureIndexByte (including mirror bit), colorScaleByte, normal, wind, and other metadata; the match's identity fields are not adopted.
 0x7A908E: cmp     edi, [ebp+8]
 0x7A9091: mov     [esp+74h+var_60], eax
 0x7A9095: jb      short loc_7A909C
@@ -99,7 +99,7 @@
 0x7A910C: mov     ebx, [ebp+18h]
 0x7A910F: mov     eax, [ebx+14h]
 0x7A9112: add     ebx, 10h
-0x7A9115: shr     esi, 1
+0x7A9115: shr     esi, 1; Uses only the cloned primary leaf's raw textureIndexByte>>1 to select SIdvLeafTexture origin/size for position adjustment. The matching leaf's texture record is ignored.
 0x7A9117: test    eax, eax
 0x7A9119: jz      short loc_7A9135
 0x7A911B: mov     ecx, [ebx+8]
@@ -140,44 +140,44 @@
 0x7A918A: cmp     edi, [ebp+8]
 0x7A918D: jb      short loc_7A9194
 0x7A918F: call    __invalid_parameter_noinfo
-0x7A9194: lea     ecx, [esp+74h+var_24]
-0x7A9198: push    ecx
-0x7A9199: mov     ecx, [edi+4]
-0x7A919C: call    sub_7A7EC0
-0x7A91A1: mov     ecx, [edi]
-0x7A91A3: lea     edx, [esp+74h+var_18]
-0x7A91A7: push    edx
-0x7A91A8: mov     esi, eax
-0x7A91AA: call    sub_7A7EC0
+0x7A9194: lea     ecx, [esp+74h+outRgb]
+0x7A9198: push    ecx; outColor
+0x7A9199: mov     ecx, [edi+4]; this
+0x7A919C: call    OB_CBillboardLeaf_GetColor_010201A0; OBLIVION AUTHORITY (2026-08-24): First GetColor call decodes the second source leaf's packed +0x14 RGB bytes to floats in [0,1].
+0x7A91A1: mov     ecx, [edi]; this
+0x7A91A3: lea     edx, [esp+74h+outColor]
+0x7A91A7: push    edx; outColor
+0x7A91A8: mov     esi, eax; OBLIVION AUTHORITY (2026-08-24): Preserve pointer returned by first GetColor call; the actual second GetColor call follows at 0x7A91AA.
+0x7A91AA: call    OB_CBillboardLeaf_GetColor_010201A0; OBLIVION AUTHORITY (2026-08-24): Second GetColor call decodes the first source leaf; 0x7A91AF..0x7A91F4 averages all three channels by exact 0.5 before SetColor(false).
 0x7A91AF: fld     dword ptr [eax]
 0x7A91B1: fadd    dword ptr [esi]
-0x7A91B3: push    0
-0x7A91B5: mov     ecx, ebx
+0x7A91B3: push    0; applyDimming
+0x7A91B5: mov     ecx, ebx; this
 0x7A91B7: fstp    [esp+78h+var_3C]
 0x7A91BB: fld     dword ptr [esi+4]
 0x7A91BE: fadd    dword ptr [eax+4]
 0x7A91C1: fstp    [esp+78h+var_38]
 0x7A91C5: fld     dword ptr [esi+8]
 0x7A91C8: fadd    dword ptr [eax+8]
-0x7A91CB: lea     eax, [esp+78h+var_30]
-0x7A91CF: push    eax
+0x7A91CB: lea     eax, [esp+78h+rgb]
+0x7A91CF: push    eax; color
 0x7A91D0: fstp    [esp+7Ch+var_34]
 0x7A91D4: fld     [esp+7Ch+var_3C]
 0x7A91D8: fld     qword ptr ds:0A2FAA0h
 0x7A91DE: fmul    st(1), st
 0x7A91E0: fxch    st(1)
-0x7A91E2: fstp    [esp+7Ch+var_30]
+0x7A91E2: fstp    [esp+7Ch+rgb]
 0x7A91E6: fld     [esp+7Ch+var_38]
 0x7A91EA: fmul    st, st(1)
 0x7A91EC: fstp    [esp+7Ch+var_2C]
 0x7A91F0: fmul    [esp+7Ch+var_34]
 0x7A91F4: fstp    [esp+7Ch+var_28]
-0x7A91F8: call    sub_7A7F10
+0x7A91F8: call    OB_CBillboardLeaf_SetColor_010201A0; [RT4.1 parity v147 2026-10-08] Hooked exact E813EDFFFF call to7A7F10 SetColor. For active retained28000 generation context, wrapper changes applyDimming totrue to match SourceCode/LeafLod.cpp BuildNewLeaves default SetColor argument. Other calls retain incoming flag. End-to-end LOD appearance remains UNVERIFIED.
 0x7A91FD: lea     ecx, [esp+74h+var_60]
-0x7A9201: push    ecx
-0x7A9202: mov     ecx, [esp+78h+arg_0]
-0x7A9206: call    sub_791770
-0x7A920B: mov     ebx, [esp+74h+arg_0]
+0x7A9201: push    ecx; value
+0x7A9202: mov     ecx, [esp+78h+result]; this
+0x7A9206: call    OB_stVector4_PushBack_010201A0; Pushes one 4-byte value into an OB_stVector4. Writes directly at end when capacity remains, otherwise calls the checked insert-one helper. Oblivion uses it for CBranch pointers and other pointer-sized SpeedTree lists.
+0x7A920B: mov     ebx, [esp+74h+result]
 0x7A920F: cmp     edi, [ebp+8]
 0x7A9212: jb      short loc_7A9219
 0x7A9214: call    __invalid_parameter_noinfo
@@ -193,3 +193,21 @@
 0x7A9232: pop     ebx
 0x7A9233: add     esp, 60h
 0x7A9236: retn    4
+0x9CCEE0: mov     eax, dword ptr unk_B42CA4
+0x9CCEE5: and     eax, 0FFFFFFFEh
+0x9CCEE8: mov     dword ptr unk_B42CA4, eax
+0x9CCEED: retn
+0x9CCEEE: mov     eax, [ebp-5Ch]
+0x9CCEF1: and     eax, 1
+0x9CCEF4: jz      locret_9CCF06
+0x9CCEFA: and     dword ptr [ebp-5Ch], 0FFFFFFFEh
+0x9CCEFE: mov     ecx, [ebp+4]; this
+0x9CCF01: jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.
+0x9CCF06: retn
+0x9CCF07: mov     edx, [esp+arg_4]
+0x9CCF0B: lea     eax, [edx-64h]
+0x9CCF0E: mov     ecx, [edx-68h]
+0x9CCF11: xor     ecx, eax
+0x9CCF13: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CCF18: mov     eax, offset stru_AF6330
+0x9CCF1D: jmp     ___CxxFrameHandler3

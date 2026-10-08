@@ -1,4 +1,4 @@
-BSStringT *sub_A0A200()
+NiRTTI *sub_A0A200()
 {
-  return sub_70E220(&stru_B3FF2C, "NiSkinData", (int)dword_B3F684);
+  return NiRTTI_Constructor(&stru_B3FF2C, "NiSkinData", &stru_B3F684); /*0xa0a214*/
 }

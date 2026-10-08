@@ -12,11 +12,11 @@
 0x64F91D: push    ebp
 0x64F91E: mov     ebp, 1
 0x64F923: jz      short loc_64F938
-0x64F925: call    sub_452A60
+0x64F925: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x64F92A: test    eax, eax
 0x64F92C: jz      short loc_64F938
 0x64F92E: mov     ecx, [ebx+28h]
-0x64F931: call    sub_452A60
+0x64F931: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x64F936: mov     ebp, eax
 0x64F938: cmp     byte ptr [ebx+20h], 0
 0x64F93C: push    edi
@@ -71,8 +71,8 @@
 0x64F9CA: push    edi
 0x64F9CB: mov     ecx, esi
 0x64F9CD: call    eax
-0x64F9CF: mov     ecx, edi
-0x64F9D1: call    sub_5E32D0
+0x64F9CF: mov     ecx, edi; this
+0x64F9D1: call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.
 0x64F9D6: mov     edx, [edi]
 0x64F9D8: test    al, al
 0x64F9DA: mov     eax, [edx+170h]
@@ -212,7 +212,7 @@
 0x64FB49: push    edi
 0x64FB4A: call    eax
 0x64FB4C: mov     ecx, edi; this
-0x64FB4E: call    Actor__GetProcessLevel
+0x64FB4E: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x64FB53: cmp     eax, 1
 0x64FB56: jnz     loc_64FBDE
 0x64FB5C: mov     ecx, edi

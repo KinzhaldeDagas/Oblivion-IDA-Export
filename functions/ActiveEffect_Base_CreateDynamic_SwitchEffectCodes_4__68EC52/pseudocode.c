@@ -1,3 +1,4 @@
+// Verified ABSK/ABAT selector: when the decoded boolean is true it allocates AbsorbEffect; otherwise it continues to CheckUseCreature.
 // attributes: thunk
 int __usercall ActiveEffect_Base_CreateDynamic_::SwitchEffectCodes_4@<eax>(
         int a1@<esi>,
@@ -30,8 +31,8 @@ int __usercall ActiveEffect_Base_CreateDynamic_::SwitchEffectCodes_4@<eax>(
         int a28,
         int a29)
 {
-  if ( a3 )
-    return ActiveEffect_Base_CreateDynamic_::Alloc_Absorb(
+  if ( a3 ) /*0x68ec52*/
+    return ActiveEffect_Base_CreateDynamic_::Alloc_Absorb( /*0x68ec52*/
              a4,
              a5,
              a6,
@@ -58,7 +59,7 @@ int __usercall ActiveEffect_Base_CreateDynamic_::SwitchEffectCodes_4@<eax>(
              a27,
              a28);
   else
-    return ActiveEffect_Base_CreateDynamic_::CheckUseCreature(
+    return ActiveEffect_Base_CreateDynamic_::CheckUseCreature( /*0x68ec53*/
              a1,
              ecx0,
              a4,

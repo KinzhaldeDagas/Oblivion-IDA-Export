@@ -1,1 +1,13 @@
-tagWNDCLASSA
+struct tagWNDCLASSA
+{
+UINT style;
+WNDPROC lpfnWndProc;
+int cbClsExtra;
+int cbWndExtra;
+HINSTANCE hInstance;
+HICON hIcon;
+HCURSOR hCursor;
+HBRUSH hbrBackground;
+LPCSTR lpszMenuName;
+LPCSTR lpszClassName;
+};

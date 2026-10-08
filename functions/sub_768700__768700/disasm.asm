@@ -1,4 +1,4 @@
-0x768700: push    esi
+0x768700: push    esi; Creates renderer data only when NiTexture::rendererData is absent, then records the NiRenderedTexture -> NiDX9RenderedTextureData association in the renderer's tracked map for reset-time reconstruction.
 0x768701: push    edi
 0x768702: mov     edi, [esp+8+a2]
 0x768706: cmp     dword ptr [edi+24h], 0
@@ -6,7 +6,7 @@
 0x76870C: jnz     short loc_768730
 0x76870E: push    esi
 0x76870F: push    edi
-0x768710: call    sub_761920
+0x768710: call    NiDX9RenderedTextureData_Create; Oblivion-authoritative NiDX9RenderedTextureData::Create. Allocates renderer data, calls CreateSurf, attaches it to NiRenderedTexture, QueryInterfaces the level-0 resource as IDirect3DTexture9, and wraps its surface in NiDX9TextureBufferData; all failures release partial resources.
 0x768715: add     esp, 8
 0x768718: test    eax, eax
 0x76871A: jnz     short loc_768723

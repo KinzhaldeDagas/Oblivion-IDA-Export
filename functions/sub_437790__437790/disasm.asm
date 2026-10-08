@@ -13,7 +13,7 @@
 0x4377B0: test    al, al
 0x4377B2: jz      short loc_4377CD
 0x4377B4: mov     ecx, [esi+20h]
-0x4377B7: call    MagicItem_LoadVFX??
+0x4377B7: call    MagicItem_ResolveLoadedVFXModels; MagicItem VFX resolve/apply path. Ensures referenced spell art and effect-item models are loaded, reports missing spell art, and applies cached model handles to effect settings.
 0x4377BC: mov     eax, [esi+8]
 0x4377BF: test    eax, eax
 0x4377C1: jnz     short loc_4377CD

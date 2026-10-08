@@ -1,1 +1,1 @@
-IOleAdviseHolderVtbl_0
+typedef IOleAdviseHolderVtbl IOleAdviseHolderVtbl_0;

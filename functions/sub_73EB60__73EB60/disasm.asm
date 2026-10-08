@@ -7,8 +7,8 @@
 0x73EB71: mov     edx, [esp+arg_0]
 0x73EB75: add     edx, 64h ; 'd'
 0x73EB78: lea     eax, [ecx+8]
-0x73EB7B: push    edx
-0x73EB7C: push    eax
-0x73EB7D: add     ecx, 18h
-0x73EB80: call    sub_72A820
+0x73EB7B: push    edx; transform
+0x73EB7C: push    eax; input
+0x73EB7D: add     ecx, 18h; output
+0x73EB80: call    NiBound_TransformInto
 0x73EB85: retn    4

@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x65A334",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x65A348",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x65A360",
-    "line": "fstp    dword ptr [esi+318h]",
+    "line": "fstp    dword ptr [esi+318h]; TES4 authoritative: cell change refreshes proxy+0x318 as parent cell water height converted to Havok units.",
     "mnemonic": "fstp",
     "size": 6
   },

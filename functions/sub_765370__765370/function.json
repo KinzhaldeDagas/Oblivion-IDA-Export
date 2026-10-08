@@ -1,18 +1,31 @@
 {
-  "callees_count": 20,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
+  "chunks": [
+    [
+      "0x765370",
+      "0x76547F"
+    ]
+  ],
+  "chunks_sha256": "4723d073656c6a7716891dd88af78c150ad47911a54d357bf2b120e8d68ce0a9",
+  "comment_regular": "\n[Leaf RGB v148 2026-10-08] Keep flags read from NiGeometryData+30: bit1 retains vertex+1C,bit2 normal+20,bit4 color+24,bit8 UV+28,bit10 triangle indices. Native leaf builder writes11. v148 ORs0F after publishing colors, retaining the CPU streams for later instances/reset without changing index retention.",
+  "comment_repeatable": "\nDX11 production binding audit 2026-10-01: this data mutation/destruction site uses NativeBindPositionObserver in the installed routing, NOT NativeActorWriteObservers generic prelude. Its cache invalidation fanout must therefore notify GPU-world GeometryData dependencies directly. The renderer now does this through ActorBindInvalidated before Original, followed by a short poseMetadataGate barrier outside observer/store/ledger locks. That barrier protects an in-progress CPU capture/commit from mutation/free. SetData/destructor adapters still tail-jump after the prelude: a zero ActiveEntries count is NOT proof of native completion or independent lifetime acquisition. Unknown foreign tails remain subject to the existing conservative lifetime policy.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
   "display_name": "sub_765370",
   "end_ea": "0x76547F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_765370",
   "segment": ".text",
   "sha256": "4723d073656c6a7716891dd88af78c150ad47911a54d357bf2b120e8d68ce0a9",
   "size": 271,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x765370",
+  "total_chunk_size": 271,
   "type": "void __stdcall(int, int, int)",
   "xrefs_from_count": 122,
   "xrefs_to_count": 1

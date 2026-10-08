@@ -1,4 +1,4 @@
-0x4ACB20: push    0FFFFFFFFh
+0x4ACB20: push    0FFFFFFFFh; Verified (Oblivion): sole caller is MagicShaderHitEffect_InitializeVisual. Allocates and constructs the 0x6C-byte TextureEffectData object, converts packed fill/edge RGB and alpha into the two color groups at +0x2C/+0x3C, copies edge exponent and four texture blend/Z-test parameters, and retains the source texture. Probable: boundDiameter_58 is twice the supplied NiAVObject bound radius; Oblivion directly stores 2*(visualObject+0x2C), and Fallout explicitly doubles worldBound.radius. Data.cFlags bit 0x10 shifts the edge RGB group into [-1,0]. Fallout's 0x74-byte object adds a block-out texture and alpha-test state.
 0x4ACB22: push    offset SEH_6FB0D0
 0x4ACB27: mov     eax, large fs:0
 0x4ACB2D: push    eax
@@ -22,7 +22,7 @@
 0x4ACB5B: mov     [esp+44h+var_4], esi
 0x4ACB5F: jz      short loc_4ACB6A
 0x4ACB61: mov     ecx, eax; this
-0x4ACB63: call    ??0TextureEffectData@BSShaderPPLightingProperty@@QAE@XZ; BSShaderPPLightingProperty::TextureEffectData::TextureEffectData(void)
+0x4ACB63: call    ??0TextureEffectData@BSShaderPPLightingProperty@@QAE@XZ; Verified (Oblivion): constructor zeroes the four OblivionColorA groups from +0x0C through +0x48 and the U/V offsets, edge exponent and bound diameter; it initializes blend/Z-test parameters to 2,1,1,3. The 0x6C allocation and this field sequence define OblivionTextureEffectData.
 0x4ACB68: mov     esi, eax
 0x4ACB6A: mov     ebp, [esi+8]
 0x4ACB6D: test    ebp, ebp
@@ -134,8 +134,8 @@
 0x4ACCDF: mov     [esi+3Ch], ecx
 0x4ACCE2: mov     ecx, [esp+44h+var_20]
 0x4ACCE6: mov     [esi+40h], edx
-0x4ACCE9: mov     edx, [esp+44h+arg_0]
-0x4ACCED: mov     ebp, [esp+44h+arg_4]
+0x4ACCE9: mov     edx, [esp+44h+visualObject]
+0x4ACCED: mov     ebp, [esp+44h+sourceTexture]
 0x4ACCF1: mov     [esi+44h], eax
 0x4ACCF4: mov     [esi+48h], ecx
 0x4ACCF7: fld     dword ptr [edi+4Ch]
@@ -176,7 +176,7 @@
 0x4ACD4F: call    dword ptr ds:0A28078h
 0x4ACD55: test    byte ptr [edi+18h], 10h
 0x4ACD59: mov     eax, esi
-0x4ACD5B: jz      short loc_4ACD77
+0x4ACD5B: jz      short loc_4ACD77; Verified (Oblivion): TESEffectShader::Data.cFlags bit 0x10 subtracts 1.0 from all three normalized edge-color channels stored at TextureEffectData+0x3C/+0x40/+0x44 after CreateTextureEffectData initializes them from packed bytes divided by 255. This shifts them from [0,1] into [-1,0]. Fallout's CreateTextureShaderData performs the same three subtractions.
 0x4ACD5D: fld     dword ptr [esi+3Ch]
 0x4ACD60: fld1
 0x4ACD62: fsub    st(1), st
@@ -196,3 +196,15 @@
 0x4ACD86: pop     ebx
 0x4ACD87: add     esp, 30h
 0x4ACD8A: retn    8
+0x9C95E0: mov     eax, [ebp-30h]
+0x9C95E3: push    eax
+0x9C95E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C95E9: pop     ecx
+0x9C95EA: retn
+0x9C95EB: mov     edx, [esp+sourceTexture]
+0x9C95EF: lea     eax, [edx-34h]
+0x9C95F2: mov     ecx, [edx-38h]
+0x9C95F5: xor     ecx, eax
+0x9C95F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C95FC: mov     eax, offset stru_AF1EA4
+0x9C9601: jmp     ___CxxFrameHandler3

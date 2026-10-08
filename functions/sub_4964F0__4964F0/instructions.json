@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x496670",
-    "line": "cmp     eax, offset dword_B3FACC",
+    "line": "cmp     eax, offset stru_B3FACC",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x496690",
-    "line": "cmp     eax, offset dword_B3FD14",
+    "line": "cmp     eax, offset stru_B3FD14",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -2023,7 +2023,7 @@
   },
   {
     "ea": "0x49694E",
-    "line": "call    sub_4DC270",
+    "line": "call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2310,14 +2310,8 @@
     "size": 2
   },
   {
-    "ea": "0x4969D8",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x4969E0",
-    "line": "cmp     eax, offset dword_B3CD7C",
+    "line": "cmp     eax, offset stru_B3CD7C",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -2832,12 +2826,6 @@
     "size": 2
   },
   {
-    "ea": "0x496AFD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x496B00",
     "line": "mov     ecx, [esi+4]",
     "mnemonic": "mov",
@@ -3344,6 +3332,102 @@
   {
     "ea": "0x496BFB",
     "line": "jmp     loc_4969F4",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B0300",
+    "line": "mov     eax, [ebp-2D4h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B0306",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B0307",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B030C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B030D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B030E",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B0312",
+    "line": "lea     eax, [edx-2E4h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B0318",
+    "line": "mov     ecx, [edx-2E8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B031E",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B0320",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B0325",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B0328",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B032B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B032D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B0332",
+    "line": "mov     eax, offset stru_ADC678",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B0337",
+    "line": "jmp     ___CxxFrameHandler3",
     "mnemonic": "jmp",
     "size": 5
   }

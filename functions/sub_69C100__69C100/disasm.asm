@@ -7,7 +7,7 @@
 0x69C116: mov     ecx, [eax+8]
 0x69C119: push    eax
 0x69C11A: mov     [esi+94h], ecx
-0x69C120: call    FormHeapFree
+0x69C120: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x69C125: add     esp, 4
 0x69C128: cmp     dword ptr [esi+94h], 0
 0x69C12F: jnz     short loc_69C110

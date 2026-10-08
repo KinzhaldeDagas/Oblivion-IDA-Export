@@ -1,7 +1,7 @@
 0x4CCC50: push    ebx
 0x4CCC51: mov     ebx, ecx
 0x4CCC53: push    ebx; a2
-0x4CCC54: mov     ecx, offset stru_B35C80; this
+0x4CCC54: mov     ecx, offset unk_B35C80; this
 0x4CCC59: call    sub_496EA0
 0x4CCC5E: cmp     byte ptr [ebx+26h], 6
 0x4CCC62: jnz     short loc_4CCCB0
@@ -36,7 +36,7 @@
 0x4CCCAE: pop     esi
 0x4CCCAF: pop     edi
 0x4CCCB0: push    ebx; a2
-0x4CCCB1: mov     ecx, offset stru_B35C80; this
+0x4CCCB1: mov     ecx, offset unk_B35C80; this
 0x4CCCB6: call    sub_496F50
 0x4CCCBB: pop     ebx
 0x4CCCBC: retn

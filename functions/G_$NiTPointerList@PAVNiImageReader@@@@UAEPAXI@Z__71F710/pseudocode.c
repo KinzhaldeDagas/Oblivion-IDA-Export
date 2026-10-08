@@ -2,8 +2,8 @@ NiTPointerList__BSImageSpaceShader *__thiscall NiTPointerList<NiImageReader *>::
         NiTPointerList__BSImageSpaceShader *this,
         char a2)
 {
-  NiTPointerList<NiImageReader *>::~NiTPointerList<NiImageReader *>(this);
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  NiTPointerList<NiImageReader *>::~NiTPointerList<NiImageReader *>(this); /*0x71f713*/
+  if ( (a2 & 1) != 0 ) /*0x71f71d*/
+    FormHeapFree((unsigned int)this); /*0x71f720*/
+  return this; /*0x71f72a*/
 }

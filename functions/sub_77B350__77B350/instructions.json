@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x77B350",
-    "line": "cmp     byte ptr [esp+arg_4], 0",
+    "line": "cmp     [esp+savePrevious], 0; MoonSugarEffect decode: NiDX9RenderState SetVertexShader cache. Caches current shader at +0xFE0, optional previous at +0xFE4, and only calls D3D SetVertexShader when value changes.",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x77B363",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+shader]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x77B37D",
-    "line": "mov     [esp+arg_4], eax",
+    "line": "mov     dword ptr [esp+savePrevious], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x77B387",
-    "line": "mov     [esp+arg_0], ecx",
+    "line": "mov     [esp+shader], ecx",
     "mnemonic": "mov",
     "size": 4
   },

@@ -1,1 +1,1 @@
-IDirectSound3DBufferVtbl_0
+typedef IDirectSound3DBufferVtbl IDirectSound3DBufferVtbl_0;

@@ -9,57 +9,57 @@ int __thiscall sub_6B9D10(unsigned int *this, int a2)
   unsigned int v9; // eax
   BSStringT *v10; // eax
   BSStringT *v11; // eax
-  BSStringT *v12; // esi
+  unsigned int *v12; // esi
   _DWORD *i; // ecx
 
-  v3 = a2;
-  result = *(_DWORD *)(a2 + 0x38);
-  *(this + 9) += result;
-  v5 = 0;
+  v3 = a2; /*0x6b9d37*/
+  result = *(_DWORD *)(a2 + 0x38); /*0x6b9d3b*/
+  *(this + 9) += result; /*0x6b9d3e*/
+  v5 = 0; /*0x6b9d41*/
   if ( *(_DWORD *)(a2 + 0x30) )
   {
     while ( 1 )
     {
-      v6 = *(_DWORD **)(v3 + 0x28);
-      if ( v5 )
+      v6 = *(_DWORD **)(v3 + 0x28); /*0x6b9d54*/
+      if ( v5 ) /*0x6b9d57*/
       {
-        v7 = v5;
-        do
+        v7 = v5; /*0x6b9d59*/
+        do /*0x6b9d6d*/
         {
-          if ( v6 )
-            v6 = (_DWORD *)*v6;
+          if ( v6 ) /*0x6b9d62*/
+            v6 = (_DWORD *)*v6; /*0x6b9d64*/
           else
-            v6 = 0;
-          --v7;
+            v6 = 0; /*0x6b9d68*/
+          --v7; /*0x6b9d6a*/
         }
-        while ( v7 );
+        while ( v7 ); /*0x6b9d6d*/
       }
-      v8 = v6[2];
-      v9 = sub_6B96F0(this, *(const char **)(v8 + 0xC));
+      v8 = v6[2]; /*0x6b9d6f*/
+      v9 = sub_6B96F0(this, *(const char **)(v8 + 0xC)); /*0x6b9d78*/
       if ( v9 == 0xFFFFFFFF )
       {
-        v10 = (BSStringT *)FormHeapAlloc(0x28u);
+        v10 = (BSStringT *)FormHeapAlloc(0x28u); /*0x6b9d84*/
         v11 = v10 ? sub_6B9BD0(v10, *(char **)(v8 + 0xC), (int)this) : 0;
-        v12 = v11;
-        sub_6B9B40(this, (int)v11);
+        v12 = (unsigned int *)v11; /*0x6b9db7*/
+        sub_6B9B40(this, (int)v11); /*0x6b9db9*/
       }
       else
       {
-        for ( i = (_DWORD *)*(this + 5); v9; --v9 )
+        for ( i = (_DWORD *)*(this + 5); v9; --v9 ) /*0x6b9dc5*/
         {
-          if ( i )
-            i = (_DWORD *)*i;
+          if ( i ) /*0x6b9dc9*/
+            i = (_DWORD *)*i; /*0x6b9dcb*/
           else
-            i = 0;
+            i = 0; /*0x6b9dcf*/
         }
-        v12 = (BSStringT *)i[2];
+        v12 = (unsigned int *)i[2]; /*0x6b9dd6*/
       }
-      sub_6B9D10(v12, v8);
-      result = a2;
-      if ( (unsigned int)++v5 >= *(_DWORD *)(a2 + 0x30) )
-        break;
-      v3 = a2;
+      sub_6B9D10(v12, v8); /*0x6b9ddc*/
+      result = a2; /*0x6b9de1*/
+      if ( (unsigned int)++v5 >= *(_DWORD *)(a2 + 0x30) ) /*0x6b9deb*/
+        break; /*0x6b9deb*/
+      v3 = a2; /*0x6b9d50*/
     }
   }
-  return result;
+  return result; /*0x6b9df1*/
 }

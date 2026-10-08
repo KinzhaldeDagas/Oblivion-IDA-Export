@@ -1,4 +1,4 @@
-BSStringT *sub_A127A0()
+NiRTTI *sub_A127A0()
 {
-  return sub_70E220((BSStringT *)dword_BA8080, "bhkMotorAction", (int)dword_BA7D10);
+  return NiRTTI_Constructor(&stru_BA8080, "bhkMotorAction", &stru_BA7D10); /*0xa127b4*/
 }

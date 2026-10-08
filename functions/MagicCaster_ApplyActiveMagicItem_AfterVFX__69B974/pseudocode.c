@@ -1,7 +1,7 @@
 int __userpurge MagicCaster_ApplyActiveMagicItem_::AfterVFX@<eax>(
         _DWORD *a1@<esi>,
-        int a2,
-        int a3,
+        double a2@<st2>,
+        double a3@<st1>,
         int a4,
         int a5,
         int a6,
@@ -29,21 +29,21 @@ int __userpurge MagicCaster_ApplyActiveMagicItem_::AfterVFX@<eax>(
         int a28,
         int a29,
         int a30,
-        int a31)
+        int a31,
+        int a32,
+        int a33)
 {
-  int v31; // eax
+  int v33; // eax
 
-  BSSimpleList_Clear(&a19);
-  v31 = (*(int (__thiscall **)(_DWORD *))(*a1 + 0x30))(a1);
-  if ( !EffectItemList_HasOnTarget(v31 + 0xC) )
-    return MagicCaster_ApplyActiveMagicItem_::ModCasterExperience(
+  BSSimpleList_Clear(&a21); /*0x69b978*/
+  v33 = (*(int (__thiscall **)(_DWORD *))(*a1 + 0x30))(a1); /*0x69b984*/
+  if ( !EffectItemList_HasOnTarget(v33 + 0xC) ) /*0x69b98b*/
+    return MagicCaster_ApplyActiveMagicItem_::ModCasterExperience( /*0x69b992*/
              a1,
-             a2,
-             a3,
              a4,
              a5,
              a6,
-             (_DWORD *)a7,
+             a7,
              a8,
              a9,
              a10,
@@ -67,12 +67,12 @@ int __userpurge MagicCaster_ApplyActiveMagicItem_::AfterVFX@<eax>(
              a28,
              a29,
              a30,
-             a31);
-  MagicCaster_CreateMagicProj__(a1);
+             a31,
+             a32,
+             a33);
+  MagicCaster_CreateMagicProj__((TESObjectCELL **)a1, a2, a3); /*0x69b996*/
   return MagicCaster_ApplyActiveMagicItem_::UnkCleanup_(
            a1,
-           a2,
-           a3,
            a4,
            a5,
            a6,
@@ -100,5 +100,7 @@ int __userpurge MagicCaster_ApplyActiveMagicItem_::AfterVFX@<eax>(
            a28,
            a29,
            a30,
-           a31);
+           a31,
+           a32,
+           a33);
 }

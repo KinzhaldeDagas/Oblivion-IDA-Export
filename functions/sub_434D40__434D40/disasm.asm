@@ -1,4 +1,4 @@
-0x434D40: mov     eax, 32D0h
+0x434D40: mov     eax, 32D0h; Generic queued file description formatter. Uses +0x20 path string, +0x24 archive/file entry offset/size, and +0x1C child list.
 0x434D45: call    __alloca_probe
 0x434D4A: mov     eax, ___security_cookie
 0x434D4F: xor     eax, esp

@@ -9,7 +9,6 @@
 0x8FF073: mov     di, [esp+8+arg_8]
 0x8FF078: lea     edx, [esi+6]
 0x8FF07B: jmp     short loc_8FF080
-0x8FF07D: align 10h
 0x8FF080: cmp     [edx], di
 0x8FF083: jz      short loc_8FF090
 0x8FF085: inc     eax

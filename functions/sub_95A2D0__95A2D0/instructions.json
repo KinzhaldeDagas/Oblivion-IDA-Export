@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x95A2D0",
-    "line": "fldz",
+    "line": "fldz; Verified NiPickRecord initialization for the 0x44-byte record: retains the picked object at +0, clears/releases the secondary reference at +4, and zeros tail fields +0x34..+0x40. It does not initialize the intersection point, distance, or +0x28 normal fields; pick paths populate those selectively, so bounds-only records may leave the normal unavailable.",
     "mnemonic": "fldz",
     "size": 2
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x95A2D3",
-    "line": "mov     ebx, [esp+4+arg_0]",
+    "line": "mov     ebx, [esp+4+pickedObject]",
     "mnemonic": "mov",
     "size": 4
   },

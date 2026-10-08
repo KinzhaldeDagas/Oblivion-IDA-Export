@@ -1,19 +1,32 @@
 {
-  "callees_count": 15,
-  "callers_count": 13,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
+  "callers_count": 18,
+  "chunks": [
+    [
+      "0x68B030",
+      "0x68B0B9"
+    ]
+  ],
+  "chunks_sha256": "83acf533c345825222da90ce0098243cb936344ce3eb8d7ecfa244bac47b8f21",
+  "comment_regular": "Verified top-level TravelPath build sequence: select the destination's smallest containing interior/exterior SubSpace (fallback to supplied cell/worldspace), call TravelPath_BuildRoute with the source reference and positions, then, on success, augment the route with TESRoad surface samples.",
+  "comment_repeatable": "Verified top-level TravelPath build sequence: select the destination's smallest containing interior/exterior SubSpace (fallback to supplied cell/worldspace), call TravelPath_BuildRoute with the source reference and positions, then, on success, augment the route with TESRoad surface samples.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_68B030",
+  "display_name": "TravelPath_BuildToDestination",
   "end_ea": "0x68B0B9",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_68B030",
+  "name": "TravelPath_BuildToDestination",
   "segment": ".text",
   "sha256": "83acf533c345825222da90ce0098243cb936344ce3eb8d7ecfa244bac47b8f21",
   "size": 137,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x68B030",
-  "type": "void __thiscall(char *this, TESObjectCELL **, float *, TESObjectCELL *, TESObjectCELL *)",
+  "total_chunk_size": 137,
+  "type": "void __thiscall(TravelPath *this, TESObjectREFR *sourceRef, const NiPoint3 *destinationPosition, TESObjectCELL *destinationCell, TESWorldSpace *destinationWorldspace)",
   "xrefs_from_count": 74,
   "xrefs_to_count": 18
 }

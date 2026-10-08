@@ -1,4 +1,4 @@
-0x7A73A0: push    ebp
+0x7A73A0: push    ebp; Oblivion PosGen::Next positive rejection sampler. Lazily builds nonsymmetric tables, interpolates one sx interval, tests against sfx and the virtual Density function, and returns an accepted nonnegative sample.
 0x7A73A1: mov     ebp, esp
 0x7A73A3: and     esp, 0FFFFFFF8h
 0x7A73A6: sub     esp, 10h
@@ -7,26 +7,26 @@
 0x7A73AC: cmp     byte ptr [esi+10h], 0
 0x7A73B0: push    edi
 0x7A73B1: jz      short loc_7A73C0
-0x7A73B3: push    0
-0x7A73B5: call    sub_7A71D0
+0x7A73B3: push    0; symmetric
+0x7A73B5: call    OB_PosGen_Build_010201A0; Oblivion PosGen::Build. Allocates sx/sfx as two 60-float tables, integrates density with 0.01 symmetric or 0.02 positive increments, enforces a 50..59 sample span, and records xi for rejection sampling.
 0x7A73BA: lea     ebx, [ebx+0]
-0x7A73C0: mov     ecx, esi
-0x7A73C2: call    sub_7A6FD0
+0x7A73C0: mov     ecx, esi; this
+0x7A73C2: call    OB_Random_Next_010201A0; Oblivion Random::Next. Rejects an uninitialized seed, selects Buffer[int(Raw()*128)], replaces that entry with another Raw() result, and returns the prior buffered sample.
 0x7A73C7: fstp    [esp+18h+var_C]
 0x7A73CB: fld     [esp+18h+var_C]
 0x7A73CF: fmul    dword ptr [esi+4]
-0x7A73D2: call    Double_To_SInt32
+0x7A73D2: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x7A73D7: mov     edi, eax
 0x7A73D9: mov     eax, [esi+8]
 0x7A73DC: fld     dword ptr [eax+edi*4]
-0x7A73DF: mov     ecx, esi
+0x7A73DF: mov     ecx, esi; this
 0x7A73E1: fstp    [esp+18h+var_C]
-0x7A73E5: call    sub_7A6FD0
+0x7A73E5: call    OB_Random_Next_010201A0; Oblivion Random::Next. Rejects an uninitialized seed, selects Buffer[int(Raw()*128)], replaces that entry with another Raw() result, and returns the prior buffered sample.
 0x7A73EA: mov     ecx, [esi+8]
 0x7A73ED: fld     dword ptr [ecx+edi*4+4]
 0x7A73F1: mov     edx, [esi+0Ch]
 0x7A73F4: fld     [esp+18h+var_C]
-0x7A73F8: mov     ecx, esi
+0x7A73F8: mov     ecx, esi; this
 0x7A73FA: fld     st
 0x7A73FC: lea     edi, [edx+edi*4]
 0x7A73FF: fsubp   st(2), st
@@ -34,7 +34,7 @@
 0x7A7403: fmulp   st(1), st
 0x7A7405: faddp   st(1), st
 0x7A7407: fstp    [esp+18h+var_C]
-0x7A740B: call    sub_7A6FD0
+0x7A740B: call    OB_Random_Next_010201A0; Oblivion Random::Next. Rejects an uninitialized seed, selects Buffer[int(Raw()*128)], replaces that entry with another Raw() result, and returns the prior buffered sample.
 0x7A7410: fmul    dword ptr [edi]
 0x7A7412: fstp    [esp+18h+var_C+4]
 0x7A7416: fld     [esp+18h+var_C+4]

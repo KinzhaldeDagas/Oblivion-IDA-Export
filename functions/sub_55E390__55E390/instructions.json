@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x55E390",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; Verified cache maintenance: with unusedModelsOnly=true removes tree-form/seed model entries whose model is null or only map-owned; false releases and clears every model cache entry. Called during TES destruction and BSTreeManager destruction.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -19,13 +19,13 @@
   },
   {
     "ea": "0x55E39C",
-    "line": "push    0",
+    "line": "push    0; recreate",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x55E39E",
-    "line": "call    sub_55F750",
+    "line": "call    BSTreeManager_Create; Verified singleton Create(recreate): optionally destroys/frees an existing BSTreeManager, allocates 0x28 bytes, runs BSTreeManager_ctor, and stores the instance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x55E3BA",
-    "line": "mov     ecx, offset stru_B39E80",
+    "line": "mov     ecx, offset g_BSTreeManager_TreeCriticalSection",
     "mnemonic": "mov",
     "size": 5
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x55E3C4",
-    "line": "cmp     [esp+10h+arg_0], 0",
+    "line": "cmp     [esp+10h+unusedModelsOnly], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -109,13 +109,13 @@
   },
   {
     "ea": "0x55E3D9",
-    "line": "push    esi",
+    "line": "push    esi; recreate",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x55E3DA",
-    "line": "call    sub_55F750",
+    "line": "call    BSTreeManager_Create; Verified singleton Create(recreate): optionally destroys/frees an existing BSTreeManager, allocates 0x28 bytes, runs BSTreeManager_ctor, and stores the instance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x55E3EA",
-    "line": "call    sub_6A9030",
+    "line": "call    NiTMapBase_GetFirstNode",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x55E3F1",
-    "line": "mov     [esp+10h+var_C], eax",
+    "line": "mov     [esp+10h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -187,13 +187,13 @@
   },
   {
     "ea": "0x55E404",
-    "line": "push    esi",
+    "line": "push    esi; recreate",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x55E405",
-    "line": "call    sub_55F750",
+    "line": "call    BSTreeManager_Create; Verified singleton Create(recreate): optionally destroys/frees an existing BSTreeManager, allocates 0x28 bytes, runs BSTreeManager_ctor, and stores the instance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,19 +211,19 @@
   },
   {
     "ea": "0x55E413",
-    "line": "lea     ecx, [esp+14h+var_8]",
+    "line": "lea     ecx, [esp+14h+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x55E417",
-    "line": "push    ecx",
+    "line": "push    ecx; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x55E418",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -235,31 +235,31 @@
   },
   {
     "ea": "0x55E41E",
-    "line": "push    edx",
+    "line": "push    edx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x55E41F",
-    "line": "lea     eax, [esp+1Ch+var_C]",
+    "line": "lea     eax, [esp+1Ch+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x55E423",
-    "line": "push    eax",
+    "line": "push    eax; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x55E424",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x55E429",
-    "line": "mov     esi, [esp+14h+var_8]",
+    "line": "mov     esi, [esp+14h+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x55E470",
-    "line": "push    offset sub_7016A0; void (__thiscall *)(void *)",
+    "line": "push    offset NiPointerSlot_Release; void (__thiscall *)(void *)",
     "mnemonic": "push",
     "size": 5
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x55E482",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x55E491",
-    "line": "mov     [esp+14h+var_8], 0",
+    "line": "mov     [esp+14h+valueOut], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -481,13 +481,13 @@
   },
   {
     "ea": "0x55E49B",
-    "line": "push    0",
+    "line": "push    0; recreate",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x55E49D",
-    "line": "call    sub_55F750",
+    "line": "call    BSTreeManager_Create; Verified singleton Create(recreate): optionally destroys/frees an existing BSTreeManager, allocates 0x28 bytes, runs BSTreeManager_ctor, and stores the instance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -547,13 +547,13 @@
   },
   {
     "ea": "0x55E4C0",
-    "line": "push    esi",
+    "line": "push    esi; recreate",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x55E4C1",
-    "line": "call    sub_55F750",
+    "line": "call    BSTreeManager_Create; Verified singleton Create(recreate): optionally destroys/frees an existing BSTreeManager, allocates 0x28 bytes, runs BSTreeManager_ctor, and stores the instance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x55E4F1",
-    "line": "mov     [esp+14h+var_C], eax",
+    "line": "mov     [esp+14h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x55E4FA",
-    "line": "mov     [esp+14h+var_C], eax",
+    "line": "mov     [esp+14h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x55E506",
-    "line": "cmp     [esp+14h+var_C], 0",
+    "line": "cmp     [esp+14h+position], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -727,13 +727,13 @@
   },
   {
     "ea": "0x55E516",
-    "line": "push    esi",
+    "line": "push    esi; recreate",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x55E517",
-    "line": "call    sub_55F750",
+    "line": "call    BSTreeManager_Create; Verified singleton Create(recreate): optionally destroys/frees an existing BSTreeManager, allocates 0x28 bytes, runs BSTreeManager_ctor, and stores the instance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -787,13 +787,13 @@
   },
   {
     "ea": "0x55E53F",
-    "line": "push    0",
+    "line": "push    0; recreate",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x55E541",
-    "line": "call    sub_55F750",
+    "line": "call    BSTreeManager_Create; Verified singleton Create(recreate): optionally destroys/frees an existing BSTreeManager, allocates 0x28 bytes, runs BSTreeManager_ctor, and stores the instance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -835,13 +835,13 @@
   },
   {
     "ea": "0x55E55F",
-    "line": "push    0",
+    "line": "push    0; recreate",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x55E561",
-    "line": "call    sub_55F750",
+    "line": "call    BSTreeManager_Create; Verified singleton Create(recreate): optionally destroys/frees an existing BSTreeManager, allocates 0x28 bytes, runs BSTreeManager_ctor, and stores the instance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x55E571",
-    "line": "call    sub_6A9030",
+    "line": "call    NiTMapBase_GetFirstNode",
     "mnemonic": "call",
     "size": 5
   },
@@ -877,7 +877,7 @@
   },
   {
     "ea": "0x55E578",
-    "line": "mov     [esp+10h+var_8], eax",
+    "line": "mov     [esp+10h+valueOut], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -907,13 +907,13 @@
   },
   {
     "ea": "0x55E589",
-    "line": "push    0",
+    "line": "push    0; recreate",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x55E58B",
-    "line": "call    sub_55F750",
+    "line": "call    BSTreeManager_Create; Verified singleton Create(recreate): optionally destroys/frees an existing BSTreeManager, allocates 0x28 bytes, runs BSTreeManager_ctor, and stores the instance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -931,7 +931,7 @@
   },
   {
     "ea": "0x55E597",
-    "line": "push    eax",
+    "line": "push    eax; valueOut",
     "mnemonic": "push",
     "size": 1
   },
@@ -943,37 +943,37 @@
   },
   {
     "ea": "0x55E59D",
-    "line": "lea     ecx, [esp+14h+var_C]",
+    "line": "lea     ecx, [esp+14h+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x55E5A1",
-    "line": "push    ecx",
+    "line": "push    ecx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x55E5A2",
-    "line": "mov     ecx, [eax]",
+    "line": "mov     ecx, [eax]; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x55E5A4",
-    "line": "lea     edx, [esp+18h+var_8]",
+    "line": "lea     edx, [esp+18h+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x55E5A8",
-    "line": "push    edx",
+    "line": "push    edx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x55E5A9",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
@@ -1009,7 +1009,7 @@
   },
   {
     "ea": "0x55E5BC",
-    "line": "push    offset sub_7016A0; void (__thiscall *)(void *)",
+    "line": "push    offset NiPointerSlot_Release; void (__thiscall *)(void *)",
     "mnemonic": "push",
     "size": 5
   },
@@ -1045,7 +1045,7 @@
   },
   {
     "ea": "0x55E5CB",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1057,7 +1057,7 @@
   },
   {
     "ea": "0x55E5D3",
-    "line": "cmp     [esp+10h+var_8], 0",
+    "line": "cmp     [esp+10h+valueOut], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1081,13 +1081,13 @@
   },
   {
     "ea": "0x55E5E3",
-    "line": "push    0",
+    "line": "push    0; recreate",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x55E5E5",
-    "line": "call    sub_55F750",
+    "line": "call    BSTreeManager_Create; Verified singleton Create(recreate): optionally destroys/frees an existing BSTreeManager, allocates 0x28 bytes, runs BSTreeManager_ctor, and stores the instance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1129,13 +1129,13 @@
   },
   {
     "ea": "0x55E603",
-    "line": "push    0",
+    "line": "push    0; recreate",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x55E605",
-    "line": "call    sub_55F750",
+    "line": "call    BSTreeManager_Create; Verified singleton Create(recreate): optionally destroys/frees an existing BSTreeManager, allocates 0x28 bytes, runs BSTreeManager_ctor, and stores the instance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1207,13 +1207,13 @@
   },
   {
     "ea": "0x55E629",
-    "line": "push    0",
+    "line": "push    0; recreate",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x55E62B",
-    "line": "call    sub_55F750",
+    "line": "call    BSTreeManager_Create; Verified singleton Create(recreate): optionally destroys/frees an existing BSTreeManager, allocates 0x28 bytes, runs BSTreeManager_ctor, and stores the instance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1237,7 +1237,7 @@
   },
   {
     "ea": "0x55E63F",
-    "line": "mov     ecx, offset stru_B39E80; lpCriticalSection",
+    "line": "mov     ecx, offset g_BSTreeManager_TreeCriticalSection; lpCriticalSection",
     "mnemonic": "mov",
     "size": 5
   },

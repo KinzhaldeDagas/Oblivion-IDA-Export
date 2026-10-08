@@ -1,19 +1,32 @@
 {
-  "callees_count": 14,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4E7FB0",
+      "0x4E803A"
+    ]
+  ],
+  "chunks_sha256": "c8dc0cf5cc305a7d3d5a7e919edf6308cdf7debf0e21ff9c178487ca96881a50",
+  "comment_regular": "Verified removes reciprocal PathGrid adjacency at a neighbor position: searches this point's connection list by each neighbor's NiPoint3 within fConstant_2 tolerance, removes this point from that neighbor's list, then removes/frees the local connection entry.",
+  "comment_repeatable": "Verified removes reciprocal PathGrid adjacency at a neighbor position: searches this point's connection list by each neighbor's NiPoint3 within fConstant_2 tolerance, removes this point from that neighbor's list, then removes/frees the local connection entry.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4E7FB0",
+  "display_name": "TESPathGridPoint_RemoveNeighborAtPosition",
   "end_ea": "0x4E803A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4E7FB0",
+  "name": "TESPathGridPoint_RemoveNeighborAtPosition",
   "segment": ".text",
   "sha256": "c8dc0cf5cc305a7d3d5a7e919edf6308cdf7debf0e21ff9c178487ca96881a50",
   "size": 138,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E7FB0",
-  "type": "void __thiscall(int *this, float *)",
+  "total_chunk_size": 138,
+  "type": "void __thiscall(TESPathGridPoint *this, const NiPoint3 *position)",
   "xrefs_from_count": 68,
   "xrefs_to_count": 1
 }

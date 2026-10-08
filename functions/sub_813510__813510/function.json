@@ -1,19 +1,36 @@
 {
-  "callees_count": 23,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 13,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_813510",
-  "end_ea": "0x8136B5",
+  "chunks": [
+    [
+      "0x813510",
+      "0x813939"
+    ],
+    [
+      "0x9D1280",
+      "0x9D12C2"
+    ]
+  ],
+  "chunks_sha256": "7c14f9a7690dade39b8c274d2a566d23e9fe6806c80164bf0abff87a08692819",
+  "comment_regular": "CULLING audit 2026-09-27 (observed Oblivion behavior): Focused cubemap route: temporary base process with null VisibleGeo is constructed at 0x813795; selected face camera and alternate root+0x148 pass through 0x70C0B0 at 0x8137C5. Not the live world process. Preserve face-specific visibility and accumulator lifetime.\n\nMode-0 BSCubeMapCamera renderer. Iterates all six faces, selects the per-face surface, skips faces masked by ShadowSceneLight+0x118, and in render mode 5 draws the current light's category/object list.",
+  "comment_repeatable": "Mode-0 BSCubeMapCamera renderer. Iterates all six faces, selects the per-face surface, skips faces masked by ShadowSceneLight+0x118, and in render mode 5 draws the current light's category/object list.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 6,
+  "display_name": "BSCubeMapCamera_RenderMode0_ShadowObjectListFaces",
+  "end_ea": "0x813939",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_813510",
+  "name": "BSCubeMapCamera_RenderMode0_ShadowObjectListFaces",
   "segment": ".text",
-  "sha256": "2351e4f4f6b5c00bd9160bf356f9139828b038cd20a36316bfbfaaa09ab243a4",
-  "size": 421,
+  "sha256": "2181ed1e95ecb450db6e7137f0cb56a5c7dd1a4a17932fc99dbf44314babe509",
+  "size": 1065,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x813510",
-  "type": "int __thiscall(int this)",
-  "xrefs_from_count": 150,
+  "total_chunk_size": 1131,
+  "type": "int __thiscall(BSCubeMapCamera_ShadowLayout *self)",
+  "xrefs_from_count": 405,
   "xrefs_to_count": 1
 }

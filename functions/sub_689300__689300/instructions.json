@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x689342",
-    "line": "mov     ebp, [esp+258h+arg_4]",
+    "line": "mov     ebp, [esp+258h+end]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x689352",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x68936E",
-    "line": "mov     eax, [esp+258h+arg_8]",
+    "line": "mov     eax, [esp+258h+extraCost]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x68947D",
-    "line": "lea     ecx, [esp+258h+var_244]",
+    "line": "lea     ecx, [esp+258h+segmentQuery]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x689486",
-    "line": "mov     eax, [esp+258h+arg_8]",
+    "line": "mov     eax, [esp+258h+extraCost]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -685,19 +685,19 @@
   },
   {
     "ea": "0x689490",
-    "line": "push    eax; float",
+    "line": "push    eax; extraCost",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x689491",
-    "line": "push    esi; int",
+    "line": "push    esi; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x689492",
-    "line": "push    ebp; int",
+    "line": "push    ebp; end",
     "mnemonic": "push",
     "size": 1
   },
@@ -709,13 +709,13 @@
   },
   {
     "ea": "0x689496",
-    "line": "push    ecx; int",
+    "line": "push    ecx; start",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x689497",
-    "line": "lea     ecx, [esp+268h+var_244]",
+    "line": "lea     ecx, [esp+268h+segmentQuery]; segmentQuery",
     "mnemonic": "lea",
     "size": 4
   },
@@ -733,7 +733,7 @@
   },
   {
     "ea": "0x6894AA",
-    "line": "call    sub_67EB60",
+    "line": "call    ConnectedPointGraph_CanTraverseSegment; Verified shared graph route test used from actor package, combat, PathGrid selection, and fast-travel surface construction. It accepts a valid direct segment; if straight-segment validation fails, it invokes actor-aware connected-point A*.",
     "mnemonic": "call",
     "size": 5
   },
@@ -757,7 +757,7 @@
   },
   {
     "ea": "0x6894B4",
-    "line": "lea     ecx, [esp+260h+var_244]",
+    "line": "lea     ecx, [esp+260h+segmentQuery]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -769,7 +769,7 @@
   },
   {
     "ea": "0x6894BA",
-    "line": "call    sub_67E3D0",
+    "line": "call    sub_67E3D0; Verified route-surface consumer follows the graph-node predecessor pointer at +0x0C, emits TeleportData at each connected point's +0x14 position, and transfers water/SubSpace flags to route-node metadata.",
     "mnemonic": "call",
     "size": 5
   },
@@ -811,13 +811,13 @@
   },
   {
     "ea": "0x6894CE",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6894D0",
-    "line": "call    TESHealthForm_GetHealth",
+    "line": "call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.",
     "mnemonic": "call",
     "size": 5
   },
@@ -883,13 +883,13 @@
   },
   {
     "ea": "0x6894F1",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6894F3",
-    "line": "call    sub_42B410",
+    "line": "call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1129,7 +1129,7 @@
   },
   {
     "ea": "0x689560",
-    "line": "lea     ecx, [esp+258h+var_244]; void *",
+    "line": "lea     ecx, [esp+258h+segmentQuery]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1141,7 +1141,7 @@
   },
   {
     "ea": "0x68956F",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1183,7 +1183,7 @@
   },
   {
     "ea": "0x689587",
-    "line": "lea     ecx, [esp+258h+var_244]; void *",
+    "line": "lea     ecx, [esp+258h+segmentQuery]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1195,7 +1195,7 @@
   },
   {
     "ea": "0x689596",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1282,5 +1282,83 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C5120",
+    "line": "lea     ecx, [ebp-244h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C5126",
+    "line": "jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C512B",
+    "line": "mov     edx, [esp+end]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C512F",
+    "line": "lea     eax, [edx-248h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C5135",
+    "line": "mov     ecx, [edx-24Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C513B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C513D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5142",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5145",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5148",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C514A",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C514F",
+    "line": "mov     eax, offset stru_AED954",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5154",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x79BE50",
+      "0x79BE76"
+    ]
+  ],
+  "chunks_sha256": "462ef4a966cbcd7a4490c548312e67f48242e334072ff183dbf00ae521f3d18e",
+  "comment_regular": "OBLIVION AUTHORITY (2026-08-30): Assigns the same vector<float> value into every initialized element in [first,last), advancing by one 0x10-byte vector owner per iteration.",
+  "comment_repeatable": "OBLIVION AUTHORITY (2026-08-30): Assigns the same vector<float> value into every initialized element in [first,last), advancing by one 0x10-byte vector owner per iteration.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_79BE50",
+  "display_name": "OB_stVectorFloat_CopyAssignFillRange_010201A0",
   "end_ea": "0x79BE76",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_79BE50",
+  "name": "OB_stVectorFloat_CopyAssignFillRange_010201A0",
   "segment": ".text",
   "sha256": "462ef4a966cbcd7a4490c548312e67f48242e334072ff183dbf00ae521f3d18e",
   "size": 38,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x79BE50",
-  "type": "_DWORD *__cdecl(_DWORD *, _DWORD *, int)",
+  "total_chunk_size": 38,
+  "type": "OB_stVectorFloat_010201A0 *__cdecl(OB_stVectorFloat_010201A0 *first, OB_stVectorFloat_010201A0 *last, const OB_stVectorFloat_010201A0 *value)",
   "xrefs_from_count": 20,
   "xrefs_to_count": 2
 }

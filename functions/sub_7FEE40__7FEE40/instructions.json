@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7FEE40",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, [esp+output]; Fog render consumer decode: Lighting30 TexEffect alternate payload writer; called from 0x7FF4A0 selectors 0x15E..0x15F and writes alternate FogColor/FogParam constants B46B78/B46B88.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x7FEE4F",
-    "line": "mov     eax, [eax+0E0h]",
+    "line": "mov     eax, [eax+0E0h]; Fog decode: reads shaderProperty+0xE0 TexEffectData for the alternate TexEffect constant payload.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x7FEE5C",
-    "line": "mov     ds:0B46B48h, ecx",
+    "line": "mov     ds:0B46B48h, ecx; Fog decode: writes TexEffect Fill Color vector to B45E14[0x34D..0x350] / B46B48.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x7FEE80",
-    "line": "mov     ds:0B46B58h, ecx",
+    "line": "mov     ds:0B46B58h, ecx; Fog decode: writes TexEffect Rim Color vector to B45E14[0x351..0x354] / B46B58.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x7FEEA4",
-    "line": "fstp    dword ptr ds:0B46B3Ch",
+    "line": "fstp    dword ptr ds:0B46B3Ch; Fog decode: writes TexEffect U/V offsets into B45E14[0x34A..0x34B].",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x7FEEB6",
-    "line": "fstp    dword ptr ds:0B46B68h",
+    "line": "fstp    dword ptr ds:0B46B68h; Fog decode: writes TexEffect fVars constant B45E14[0x355] / B46B68.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x7FEEF0",
-    "line": "mov     ds:0B46B78h, eax",
+    "line": "mov     ds:0B46B78h, eax; Fog decode: clears alternate TexEffect FogColor constant B46B78 before property-state fog override.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x7FEF01",
-    "line": "mov     ds:0B46B88h, ecx",
+    "line": "mov     ds:0B46B88h, ecx; Fog decode: clears alternate TexEffect FogParam constant B46B88 before property-state fog override.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x7FEF11",
-    "line": "mov     ecx, [esp+20h+arg_0]",
+    "line": "mov     ecx, [esp+20h+arg_0]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -361,31 +361,31 @@
   },
   {
     "ea": "0x7FEF3C",
-    "line": "lea     edx, [esp+24h+arg_4]",
+    "line": "lea     edx, [esp+24h+output]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7FEF40",
-    "line": "push    edx",
+    "line": "push    edx; output",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7FEF41",
-    "line": "call    sub_405760",
+    "line": "call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7FEF46",
-    "line": "mov     edi, [eax]",
+    "line": "mov     edi, [eax]; Fog decode: obtains NiGeometry+0xAC NiPropertyState via sub_405760 before reading fog property slot.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7FEF48",
-    "line": "mov     eax, [esp+24h+arg_4]",
+    "line": "mov     eax, [esp+24h+output]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x7FEF70",
-    "line": "mov     ecx, [edi+0Ch]",
+    "line": "mov     ecx, [edi+0Ch]; Fog render consumer decode: TexEffect alternate path reads NiPropertyState+0x0C fog property slot.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x7FEF7F",
-    "line": "fstp    [esp+20h+arg_0]",
+    "line": "fstp    [esp+20h+arg_0]; Fog render consumer decode: TexEffect reads BSFogProperty+0x2C fogStart.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x7FEF86",
-    "line": "fstp    [esp+20h+arg_4]",
+    "line": "fstp    [esp+20h+output]; Fog render consumer decode: TexEffect reads BSFogProperty+0x30 fogEnd.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x7FEF8E",
-    "line": "fld     [esp+20h+arg_4]",
+    "line": "fld     [esp+20h+output]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x7FEFE2",
-    "line": "mov     ds:0B46B88h, ecx",
+    "line": "mov     ds:0B46B88h, ecx; Fog render consumer decode: TexEffect alternate FogParam B46B88 = (fogEnd, fogEnd - fogStart, 1, 0).",
     "mnemonic": "mov",
     "size": 6
   },
@@ -805,7 +805,7 @@
   },
   {
     "ea": "0x7FF024",
-    "line": "mov     ds:0B46B78h, edx",
+    "line": "mov     ds:0B46B78h, edx; Fog render consumer decode: TexEffect alternate FogColor B46B78 = (fog.r, fog.g, fog.b, 0).",
     "mnemonic": "mov",
     "size": 6
   },

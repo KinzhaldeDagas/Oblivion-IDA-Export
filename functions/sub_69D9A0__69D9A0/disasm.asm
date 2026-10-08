@@ -1,4 +1,4 @@
-0x69D9A0: fld     [esp+arg_0]
+0x69D9A0: fld     [esp+deltaSeconds]; Verified MagicHitEffect_Update accumulates elapsedSeconds at +0x20, rejects missing/unloaded/flagged targetReference at +0x1C, and sets bFinished (+0x24) when durationSeconds (+0x08) is exceeded. Model and shader overrides use bFinished to end their visuals; the field's broad role is Probable 'finished/expired' state.
 0x69D9A4: push    esi
 0x69D9A5: mov     esi, ecx
 0x69D9A7: fadd    dword ptr [esi+20h]

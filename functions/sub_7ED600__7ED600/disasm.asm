@@ -1,4 +1,4 @@
-0x7ED600: mov     ecx, [ecx+70h]
+0x7ED600: mov     ecx, [ecx+70h]; Counts list entries with a non-null ShadowSceneLight, frustumCull != 0xFF, and byte +0xF4 == 0. Unlike GetFirst/NextActiveLight, this counter does not test the backing NiLight AppCulled bit.
 0x7ED603: xor     eax, eax
 0x7ED605: test    ecx, ecx
 0x7ED607: jz      short locret_7ED636

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6CEF80",
-    "line": "sub     esp, 0E0h",
+    "line": "sub     esp, 0E0h; Oblivion: updates one accumulation item's 0x68-byte state (cached time, current transform, accumulated delta/reference state). Evaluates virtual +0x4C and handles forward time versus backward/wrap time using the interpolator range from virtual +0x80.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x6CEFD2",
-    "line": "call    sub_6CBC10",
+    "line": "call    NiTransform_IsInvalid; Oblivion 0x20-byte transform invalid test: true only when translation.x, quaternion marker component at +0x10, and scale at +0x1C all equal the invalid float sentinel.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2131,7 +2131,7 @@
   },
   {
     "ea": "0x6CF427",
-    "line": "push    offset Vector3_InitValue?",
+    "line": "push    offset g_zeroNiPoint3",
     "mnemonic": "push",
     "size": 5
   },

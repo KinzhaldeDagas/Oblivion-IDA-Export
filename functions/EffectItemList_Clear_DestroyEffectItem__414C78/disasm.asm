@@ -4,7 +4,7 @@
 0x414C7F: mov     ecx, edi
 0x414C81: call    EffectItem_destr
 0x414C86: push    edi
-0x414C87: call    FormHeapFree
+0x414C87: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x414C8C: mov     eax, [esi+8]
 0x414C8F: add     esp, 4
 0x414C92: test    eax, eax

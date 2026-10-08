@@ -1,5 +1,5 @@
 // attributes: thunk
-int __stdcall sub_6E0760(int a1)
+_DWORD *__thiscall j_j_NiSingleInterpController_LoadBinary(int *this, _DWORD *a2)
 {
-  return sub_6ECB70(a1);
+  return j_NiSingleInterpController_LoadBinary(this, a2);
 }

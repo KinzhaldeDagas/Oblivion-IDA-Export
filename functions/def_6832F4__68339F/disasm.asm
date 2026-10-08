@@ -3,7 +3,7 @@
 0x6833A4: jz      short loc_6833D7
 0x6833A6: cmp     byte ptr [ecx+20h], 1
 0x6833AA: jnz     short loc_6833D7
-0x6833AC: call    sub_5660A0
+0x6833AC: call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).
 0x6833B1: test    al, al
 0x6833B3: jnz     short loc_6833D7
 0x6833B5: mov     eax, [esi+8]

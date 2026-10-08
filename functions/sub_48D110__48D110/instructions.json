@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x48D161",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x48D169",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x48D171",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -322,12 +322,6 @@
     "line": "jmp     short loc_48D1A0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x48D19D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x48D1A0",
@@ -433,7 +427,7 @@
   },
   {
     "ea": "0x48D1D2",
-    "line": "mov     [esp+24h+var_C], esi",
+    "line": "mov     [esp+24h+form], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -589,13 +583,13 @@
   },
   {
     "ea": "0x48D212",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48D214",
-    "line": "call    ExtraDataList_GetOwner",
+    "line": "call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -613,13 +607,13 @@
   },
   {
     "ea": "0x48D21D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48D21F",
-    "line": "call    ExtraDataList_GetOwner",
+    "line": "call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -703,7 +697,7 @@
   },
   {
     "ea": "0x48D241",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -721,7 +715,7 @@
   },
   {
     "ea": "0x48D247",
-    "line": "call    ExtraDataList_GetOwner",
+    "line": "call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -799,13 +793,13 @@
   },
   {
     "ea": "0x48D266",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48D268",
-    "line": "call    ExtraDataList_GetOwner",
+    "line": "call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -823,13 +817,13 @@
   },
   {
     "ea": "0x48D271",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48D273",
-    "line": "call    ExtraDataList_GetOwner",
+    "line": "call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -937,7 +931,7 @@
   },
   {
     "ea": "0x48D2A8",
-    "line": "cmp     [esp+24h+var_C], ebx",
+    "line": "cmp     [esp+24h+form], ebx",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -967,7 +961,7 @@
   },
   {
     "ea": "0x48D2C1",
-    "line": "mov     esi, [esp+24h+var_C]",
+    "line": "mov     esi, [esp+24h+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1075,13 +1069,13 @@
   },
   {
     "ea": "0x48D2FE",
-    "line": "push    esi",
+    "line": "push    esi; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48D2FF",
-    "line": "call    sub_470520",
+    "line": "call    TESForm_GetValue",
     "mnemonic": "call",
     "size": 5
   },
@@ -1189,7 +1183,7 @@
   },
   {
     "ea": "0x48D338",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1207,7 +1201,7 @@
   },
   {
     "ea": "0x48D340",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1225,7 +1219,7 @@
   },
   {
     "ea": "0x48D348",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1303,7 +1297,7 @@
   },
   {
     "ea": "0x48D36C",
-    "line": "mov     ecx, [esp+24h+var_C]",
+    "line": "mov     ecx, [esp+24h+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1387,7 +1381,7 @@
   },
   {
     "ea": "0x48D394",
-    "line": "mov     esi, [esp+24h+var_C]",
+    "line": "mov     esi, [esp+24h+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1429,7 +1423,7 @@
   },
   {
     "ea": "0x48D3A6",
-    "line": "mov     esi, [esp+24h+var_C]",
+    "line": "mov     esi, [esp+24h+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1471,13 +1465,13 @@
   },
   {
     "ea": "0x48D3BB",
-    "line": "push    esi",
+    "line": "push    esi; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48D3BC",
-    "line": "call    sub_470520",
+    "line": "call    TESForm_GetValue",
     "mnemonic": "call",
     "size": 5
   },
@@ -1585,7 +1579,7 @@
   },
   {
     "ea": "0x48D3F1",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1603,7 +1597,7 @@
   },
   {
     "ea": "0x48D3F9",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1621,7 +1615,7 @@
   },
   {
     "ea": "0x48D401",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1777,7 +1771,7 @@
   },
   {
     "ea": "0x48D451",
-    "line": "mov     [esp+24h+var_C], esi",
+    "line": "mov     [esp+24h+form], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1792,12 +1786,6 @@
     "line": "jmp     short loc_48D464",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x48D45D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x48D460",
@@ -1945,13 +1933,13 @@
   },
   {
     "ea": "0x48D4A5",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48D4A7",
-    "line": "call    ExtraDataList_GetOwner",
+    "line": "call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1969,13 +1957,13 @@
   },
   {
     "ea": "0x48D4B0",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48D4B2",
-    "line": "call    ExtraDataList_GetOwner",
+    "line": "call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2029,13 +2017,13 @@
   },
   {
     "ea": "0x48D4C7",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48D4C9",
-    "line": "call    ExtraDataList_GetOwner",
+    "line": "call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2053,13 +2041,13 @@
   },
   {
     "ea": "0x48D4D2",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48D4D4",
-    "line": "call    ExtraDataList_GetOwner",
+    "line": "call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2304,12 +2292,6 @@
     "size": 2
   },
   {
-    "ea": "0x48D55D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x48D560",
     "line": "mov     edi, [ebp+0]",
     "mnemonic": "mov",
@@ -2335,13 +2317,13 @@
   },
   {
     "ea": "0x48D56F",
-    "line": "push    edx",
+    "line": "push    edx; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48D570",
-    "line": "call    sub_470520",
+    "line": "call    TESForm_GetValue",
     "mnemonic": "call",
     "size": 5
   },
@@ -2449,7 +2431,7 @@
   },
   {
     "ea": "0x48D5A5",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2467,7 +2449,7 @@
   },
   {
     "ea": "0x48D5AD",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2485,7 +2467,7 @@
   },
   {
     "ea": "0x48D5B5",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2719,13 +2701,13 @@
   },
   {
     "ea": "0x48D620",
-    "line": "push    ebp",
+    "line": "push    ebp; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48D621",
-    "line": "call    sub_470520",
+    "line": "call    TESForm_GetValue",
     "mnemonic": "call",
     "size": 5
   },
@@ -2833,7 +2815,7 @@
   },
   {
     "ea": "0x48D656",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2851,7 +2833,7 @@
   },
   {
     "ea": "0x48D65E",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2869,7 +2851,7 @@
   },
   {
     "ea": "0x48D666",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2977,7 +2959,7 @@
   },
   {
     "ea": "0x48D69A",
-    "line": "mov     eax, [esp+24h+var_C]",
+    "line": "mov     eax, [esp+24h+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2995,7 +2977,7 @@
   },
   {
     "ea": "0x48D6A3",
-    "line": "mov     [esp+24h+var_C], esi",
+    "line": "mov     [esp+24h+form], esi",
     "mnemonic": "mov",
     "size": 4
   },

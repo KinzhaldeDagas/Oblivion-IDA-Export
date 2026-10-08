@@ -1,5 +1,5 @@
-0x45E180: push    ebx
-0x45E181: mov     ebx, [esp+4+arg_0]
+0x45E180: push    ebx; MEF v56 implementation: separate worldspace first-index cache atowner+78h, preserving original index bits consumed throughAX. Unlike numeric lookup, FF-prefixed worldspace IDs are not passthrough. Separate tables avoid evicting/rebuilding the large numeric index on interleaved worldspace queries.
+0x45E181: mov     ebx, [esp+4+formID]
 0x45E185: push    esi
 0x45E186: mov     esi, [ecx+78h]
 0x45E189: mov     ecx, [esi+0Ch]
@@ -21,7 +21,7 @@
 0x45E1AE: add     eax, edi
 0x45E1B0: push    eax
 0x45E1B1: mov     ecx, esi
-0x45E1B3: call    sub_452910
+0x45E1B3: call    NiTLargeArray_Resize32; MEF SAVE AUDIT 2026-10-08: PERF-19 worldspace append growth: full array grows used+growth, ctor5/grow1. Caller46077C/4607B9 stores AX16; return prototype corrected to unsigned short without widening format. Geometric capacity must preserve first-index/zero/order and serialized low16 results.
 0x45E1B8: cmp     edi, [esi+0Ch]
 0x45E1BB: jb      short loc_45E1DA
 0x45E1BD: test    ebx, ebx

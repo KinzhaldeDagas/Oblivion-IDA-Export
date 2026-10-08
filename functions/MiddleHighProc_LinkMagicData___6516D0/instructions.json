@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x6516D2",
-    "line": "mov     esi, [esp+8+arg_8]",
+    "line": "mov     esi, [esp+8+owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -73,13 +73,13 @@
   },
   {
     "ea": "0x6516F0",
-    "line": "push    esi",
+    "line": "push    esi; owner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6516F1",
-    "line": "mov     esi, [esp+10h+arg_0]",
+    "line": "mov     esi, [esp+10h+changeMask]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -91,31 +91,31 @@
   },
   {
     "ea": "0x6516F7",
-    "line": "mov     eax, [esp+10h+arg_4]",
+    "line": "mov     eax, [esp+10h+currentFlags]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6516FB",
-    "line": "push    eax",
+    "line": "push    eax; currentFlags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6516FC",
-    "line": "push    esi",
+    "line": "push    esi; changeMask",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6516FD",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6516FF",
-    "line": "call    LowProcess_LinkMagicData?",
+    "line": "call    LowProcess_InitLoadGame",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x651739",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x651769",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },

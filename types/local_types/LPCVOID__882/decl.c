@@ -1,1 +1,1 @@
-LPCVOID
+typedef const void *LPCVOID;

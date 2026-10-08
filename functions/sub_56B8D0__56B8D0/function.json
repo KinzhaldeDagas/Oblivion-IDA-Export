@@ -1,10 +1,18 @@
 {
   "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
   "callers_count": 0,
+  "chunks": [
+    [
+      "0x56B8D0",
+      "0x56B920"
+    ]
+  ],
   "chunks_sha256": "4290a436032ce41eb2c0be15f3f7ea7d28224971a9721967cf6c93090deaf7be",
   "comment_regular": "[Verified] BSTECreateTask vtable +0x4C Run. A nonnull taskController_0C is invoked through virtual +0x4C only while bNiParallelWaitFallback_0B3F944 is clear. That normal execution path releases/clears the controller. With fallback set, Run skips both invocation and that local release; its final vtable +0x54 ReturnToPool dispatch releases/clears any remaining reference and returns the task to the pool.",
   "comment_repeatable": "[Verified] BSTECreateTask vtable +0x4C Run. A nonnull taskController_0C is invoked through virtual +0x4C only while bNiParallelWaitFallback_0B3F944 is clear. That normal execution path releases/clears the controller. With fallback set, Run skips both invocation and that local release; its final vtable +0x54 ReturnToPool dispatch releases/clears any remaining reference and returns the task to the pool.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "BSTECreateTask_Run",
   "end_ea": "0x56B920",
@@ -15,6 +23,7 @@
   "segment": ".text",
   "sha256": "4290a436032ce41eb2c0be15f3f7ea7d28224971a9721967cf6c93090deaf7be",
   "size": 80,
+  "source_annotation_confidence": "Verified",
   "start_ea": "0x56B8D0",
   "total_chunk_size": 80,
   "type": "int __thiscall(BSTECreateTask_Layout_t *this)",

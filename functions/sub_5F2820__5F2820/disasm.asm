@@ -1,4 +1,4 @@
-0x5F2820: push    ebp
+0x5F2820: push    ebp; Oblivion actor line-of-sight query used by detection, combat reach, tactical refresh, and ray-cast script paths. Performs cell/world-space and Havok visibility tests and can report the viewed actor segment through the output parameter. Fallout corroborates the Actor::LineOfSight family name only.
 0x5F2821: mov     ebp, esp
 0x5F2823: and     esp, 0FFFFFFF0h
 0x5F2826: push    0FFFFFFFFh
@@ -47,10 +47,10 @@
 0x5F28B9: test    al, al
 0x5F28BB: jnz     loc_5F2E48
 0x5F28C1: fld     dword ptr ds:0B33E9Ch
-0x5F28C7: mov     eax, [esi+58h]
+0x5F28C7: mov     eax, [esi+58h]; MEF v30 line-of-sight proof: EAX is loaded directly from Actor/ESI +0x58 immediately before the guarded fld [eax+0x10] at 0x005F28D4.
 0x5F28CA: mov     edi, ds:0B14904h
 0x5F28D0: fstp    [esp+1B4h+var_198]
-0x5F28D4: fld     dword ptr [eax+10h]
+0x5F28D4: fld     dword ptr [eax+10h]; MEF v30 verified ActorWithoutProcessCTD site: EAX is process-derived and fld [eax+0x10] is null-sensitive. Hook owns fld/add window, null routes to existing false epilogue 0x005F2E48, non-null resumes 0x005F28DA.
 0x5F28D7: add     edi, 0FFFFFFFBh
 0x5F28DA: fld     [esp+1B4h+var_198]
 0x5F28DE: fld     st
@@ -59,7 +59,7 @@
 0x5F28E4: fstp    dword ptr [eax+10h]
 0x5F28E7: fld1
 0x5F28E9: fdivrp  st(1), st
-0x5F28EB: call    Double_To_SInt32
+0x5F28EB: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5F28F0: cmp     eax, 14h
 0x5F28F3: jge     short loc_5F28FB
 0x5F28F5: mov     edi, ds:0B148FCh
@@ -114,7 +114,7 @@
 0x5F299D: call    sub_4121A0
 0x5F29A2: lea     ecx, [esp+1B4h+var_120+4]
 0x5F29A9: push    ecx
-0x5F29AA: call    sub_683CB0
+0x5F29AA: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x5F29AF: fstp    [esp+1B8h+var_198]
 0x5F29B3: fld     [esp+1B8h+var_198]
 0x5F29B7: add     esp, 4
@@ -145,7 +145,7 @@
 0x5F2A0F: mov     al, 1
 0x5F2A11: jmp     loc_5F2E4A
 0x5F2A16: mov     ecx, esi; this
-0x5F2A18: call    TESObjectREFR_GetParentCell
+0x5F2A18: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5F2A1D: test    eax, eax
 0x5F2A1F: mov     [esp+1B4h+var_194], eax
 0x5F2A23: jz      loc_5F2E48
@@ -160,12 +160,12 @@
 0x5F2A44: jz      short loc_5F2A4D
 0x5F2A46: call    sub_5E40C0
 0x5F2A4B: jmp     short loc_5F2A58
-0x5F2A4D: call    sub_5E0660
-0x5F2A52: fmul    qword ptr ds:0A31C70h
+0x5F2A4D: call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.
+0x5F2A52: fmul    qword ptr ds:0A31C70h; LOS probe uses 0.5 * actor vertical extent as source height when not using special player eye height.
 0x5F2A58: fadd    [esp+1B4h+var_17C]
 0x5F2A5C: mov     ecx, [esp+1B4h+var_194]; this
 0x5F2A60: fstp    [esp+1B4h+var_17C]
-0x5F2A64: call    TESObjectCELL_IsInterior
+0x5F2A64: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x5F2A69: test    al, al
 0x5F2A6B: jnz     short loc_5F2A98
 0x5F2A6D: mov     ecx, [esp+1B4h+var_194]; this
@@ -188,7 +188,7 @@
 0x5F2AAA: test    al, al
 0x5F2AAC: jz      loc_5F2E42
 0x5F2AB2: lea     ecx, [esp+1B4h+var_F0]
-0x5F2AB9: call    bhkWorldRayCastData__Init
+0x5F2AB9: call    bhkWorldRayCastData__Init; TES4 authoritative: bhkWorldRayCastData::Init. Raycast input From at +0x00, To at +0x10, enable/filter at +0x20/+0x24, output hit fraction at +0x44, root collidable at +0x50, extra collector pointers at +0x70/+0x74/+0x78.
 0x5F2ABE: mov     eax, [ebx]
 0x5F2AC0: mov     edx, [eax+188h]
 0x5F2AC6: mov     ecx, ebx
@@ -200,7 +200,7 @@
 0x5F2ADA: push    ebx; a3
 0x5F2ADB: push    1Ah; a2
 0x5F2ADD: lea     ecx, [esp+1BCh+var_70]; this
-0x5F2AE4: call    sub_535A00
+0x5F2AE4: call    SpecificItemCollector_InitForRaycast; SpecificItemCollector constructor for raycasts. Initializes collector and, when a TESObjectREFR is supplied, reads its collision filter via 0x65ABE0 and rewrites collision layer matrix row for layer a2 (or 0x1C if a2 < 0x18). LOS uses this, but movement climb probes should avoid unintended global mask churn unless needed.
 0x5F2AE9: mov     ebx, [edi]
 0x5F2AEB: mov     edx, [edi+4]
 0x5F2AEE: mov     edi, [edi+8]
@@ -215,18 +215,18 @@
 0x5F2B1B: mov     [esp+1B8h+a2.x], ebx
 0x5F2B1F: mov     [esp+1B8h+a2.y], edx
 0x5F2B23: mov     [esp+1B8h+a2.z], edi
-0x5F2B27: call    bhkWorldRayCastData__SetCastInputFrom
+0x5F2B27: call    bhkWorldRayCastData__SetCastInputFrom; TES4 authoritative: bhkWorldRayCastData::SetCastInputFrom; scales world-space NiPoint3 into Havok units using hkFactor and writes ray From.
 0x5F2B2C: lea     ecx, [esp+1B4h+var_16C]
 0x5F2B30: push    ecx
 0x5F2B31: mov     ecx, esi
-0x5F2B33: call    sub_65ABE0
+0x5F2B33: call    MobileObject_GetCollisionFilterInfo; Returns actor/proxy collision filter identity by calling 0x57E270 on MobileObject_GetCharProxy(this). Callers keep high 16 bits and OR in the chosen collision layer.
 0x5F2B38: mov     edx, [esp+1B4h+var_16C]
 0x5F2B3C: mov     ecx, [esp+1B4h+var_188]
 0x5F2B40: mov     eax, [ecx]
 0x5F2B42: mov     eax, [eax+15Ch]
 0x5F2B48: and     edx, 0FFFF001Ah
 0x5F2B4E: or      edx, 1Ah
-0x5F2B51: mov     [esp+1B4h+var_F0.WorldRayCastInput.FilterInfo], edx
+0x5F2B51: mov     [esp+1B4h+var_F0.WorldRayCastInput.FilterInfo], edx; Combat LOS filter uses (caster collision identity high 16 bits) | layer 0x1A after 0x65ABE0. Confirms high16 identity preservation pattern outside PlayerCharacter_RayCastTo.
 0x5F2B58: lea     edx, [esp+1B4h+var_15C]
 0x5F2B5C: push    edx
 0x5F2B5D: call    eax
@@ -251,7 +251,7 @@
 0x5F2BAE: fstp    [esp+1B4h+var_14C]
 0x5F2BB2: fld     dword ptr ds:0A41304h
 0x5F2BB8: fstp    [esp+1B4h+var_148]
-0x5F2BBC: call    TESObjectREFR_GetParentCell
+0x5F2BBC: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5F2BC1: test    eax, eax
 0x5F2BC3: jz      loc_5F2E42
 0x5F2BC9: mov     ecx, eax
@@ -374,8 +374,8 @@
 0x5F2D67: test    eax, eax
 0x5F2D69: jz      short loc_5F2D7B
 0x5F2D6B: mov     eax, [eax+70h]
-0x5F2D6E: push    eax
-0x5F2D6F: call    sub_612690
+0x5F2D6E: push    eax; mode
+0x5F2D6F: call    CombatMode_IsRangedWeaponMode; Returns true only for native combat modes 2 and 4, the two ranged-weapon modes used by the distance and attack-option logic.
 0x5F2D74: add     esp, 4
 0x5F2D77: test    al, al
 0x5F2D79: jnz     short loc_5F2D9F
@@ -388,8 +388,8 @@
 0x5F2D8B: test    eax, eax
 0x5F2D8D: jz      short loc_5F2DA4
 0x5F2D8F: mov     eax, [eax+70h]
-0x5F2D92: push    eax
-0x5F2D93: call    sub_612690
+0x5F2D92: push    eax; mode
+0x5F2D93: call    CombatMode_IsRangedWeaponMode; Returns true only for native combat modes 2 and 4, the two ranged-weapon modes used by the distance and attack-option logic.
 0x5F2D98: add     esp, 4
 0x5F2D9B: test    al, al
 0x5F2D9D: jz      short loc_5F2DA4
@@ -405,16 +405,16 @@
 0x5F2DBD: lea     ecx, [esp+1B8h+var_F0]; this
 0x5F2DC4: fadd    [esp+1B8h+var_160]
 0x5F2DC8: fstp    [esp+1B8h+a2.z]
-0x5F2DCC: call    bhkWorldRayCastData__SetCastInputTo
+0x5F2DCC: call    bhkWorldRayCastData__SetCastInputTo; LOS contrast: probes target at 0.75/0.5/0.25 height offsets; useful for height pattern, not movement layer behavior.
 0x5F2DD1: add     dword ptr ds:0B333BCh, 1
 0x5F2DD8: lea     ecx, [esp+1B4h+var_F0]
 0x5F2DDF: push    ecx; a2
 0x5F2DE0: mov     ecx, ds:0B333A0h; this
-0x5F2DE6: call    TES__CastRay
+0x5F2DE6: call    TES__CastRay; Combat LOS raycast. It accepts no hit or a hit resolving via 0x4DC270 to the intended target; otherwise obstruction remains. Useful pattern for climb: ray hit object can be mapped to TES ref for self/actor rejection.
 0x5F2DEB: test    eax, eax
 0x5F2DED: jz      short loc_5F2E07
 0x5F2DEF: push    eax
-0x5F2DF0: call    sub_4DC270
+0x5F2DF0: call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.
 0x5F2DF5: add     esp, 4
 0x5F2DF8: cmp     eax, [esp+1B4h+var_188]
 0x5F2DFC: jz      short loc_5F2E07
@@ -456,3 +456,16 @@
 0x5F2E6A: mov     esp, ebp
 0x5F2E6C: pop     ebp
 0x5F2E6D: retn    14h
+0x9C2880: lea     ecx, [ebp+var_70]; void *
+0x9C2883: jmp     sub_4F5E90
+0x9C2888: mov     edx, [esp-4+a3]
+0x9C288C: lea     eax, [edx-1A4h]
+0x9C2892: mov     ecx, [edx-1A8h]
+0x9C2898: xor     ecx, eax
+0x9C289A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C289F: add     eax, 0Ch
+0x9C28A2: mov     ecx, [edx-8]
+0x9C28A5: xor     ecx, eax
+0x9C28A7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C28AC: mov     eax, offset stru_AEB688
+0x9C28B1: jmp     ___CxxFrameHandler3

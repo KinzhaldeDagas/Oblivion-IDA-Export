@@ -1,19 +1,32 @@
 {
-  "callees_count": 24,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6B92C0",
+      "0x6B93A8"
+    ]
+  ],
+  "chunks_sha256": "3bf36e58c3283a61c1f46d20d29f9904e18a2a6502dac80190bdef69c8a16d36",
+  "comment_regular": "OFE verified lifecycle call 6B9335 -> ClearData; 6B938C -> FillTopicList. RunForRumors behavior is keyed by MenuTopic.isInfoGeneral, not custom topic EditorID. Results continue through original native code.\n\nPlayer-menu post-response transition. AddTopicList is unconditional for a processed INFO. Only INFOGENERAL/D7 without RunForRumors skips Goodbye handling and RunResult; INFOGENERAL always rebuilds from player known topics instead of following INFO links. The 0x40 flag has no effect on ordinary topics.",
+  "comment_repeatable": "Player-menu post-response transition. AddTopicList is unconditional for a processed INFO. Only INFOGENERAL/D7 without RunForRumors skips Goodbye handling and RunResult; INFOGENERAL always rebuilds from player known topics instead of following INFO links. The 0x40 flag has no effect on ordinary topics.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6B92C0",
+  "display_name": "MenuTopicManager::LoadNextTopicList",
   "end_ea": "0x6B93A8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6B92C0",
+  "name": "MenuTopicManager::LoadNextTopicList",
   "segment": ".text",
   "sha256": "3bf36e58c3283a61c1f46d20d29f9904e18a2a6502dac80190bdef69c8a16d36",
   "size": 232,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6B92C0",
-  "type": "char __userpurge@<al>(UnkBohBoh *a1@<ecx>, double a2@<st1>, double a3@<st0>, char a4, char a5)",
+  "total_chunk_size": 232,
+  "type": "bool __thiscall(MenuTopicManagerView *this, bool processCurrentInfo, bool clearAll)",
   "xrefs_from_count": 112,
   "xrefs_to_count": 2
 }

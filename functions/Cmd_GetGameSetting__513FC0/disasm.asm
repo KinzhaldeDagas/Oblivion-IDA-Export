@@ -1,4 +1,4 @@
-0x513FC0: sub     esp, 20Ch
+0x513FC0: sub     esp, 20Ch; Verified function body: Cmd_GetGameSetting parses a key and looks up g_GameSettingsByName, formatting string settings for output. Candidate availability only: no direct reference to this function or its "GetGameSetting" string was found in the inspected command table, so do not claim it is registered/reachable as a console command.
 0x513FC6: mov     eax, ds:0B30AACh
 0x513FCB: xor     eax, esp
 0x513FCD: mov     [esp+20Ch+var_4], eax
@@ -29,7 +29,7 @@
 0x51402D: push    edx; a3
 0x51402E: push    ecx; a2
 0x51402F: push    eax; a1
-0x514030: call    Script_ExtractArgs
+0x514030: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x514035: add     esp, 20h
 0x514038: test    al, al
 0x51403A: jz      loc_5140E7
@@ -37,11 +37,11 @@
 0x514044: push    eax
 0x514045: lea     ecx, [esp+220h+var_204]
 0x514049: push    ecx
-0x51404A: mov     ecx, offset dword_B35574
+0x51404A: mov     ecx, offset g_GameSettingsByName
 0x51404F: mov     [esp+224h+l], 0
 0x514057: call    NiTMap_GetAt
 0x51405C: mov     esi, [esp+21Ch+l]
-0x514060: test    esi, esi
+0x514060: test    esi, esi; MorrowindDialogueText: Cmd_GetGameSetting reads dword_B35574 setting map; string settings are printed via setting value pointer.
 0x514062: jz      short loc_5140D1
 0x514064: mov     edx, [esi+4]
 0x514067: push    edx

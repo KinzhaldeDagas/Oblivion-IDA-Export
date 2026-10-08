@@ -1,4 +1,4 @@
-0x7C6310: push    0FFFFFFFFh
+0x7C6310: push    0FFFFFFFFh; Oblivion mode-3 cube-face path: own target type 0x18, position the cube camera at the source, render one face or all faces, and preserve the source cull bit.
 0x7C6312: push    offset SEH_6D7780
 0x7C6317: mov     eax, large fs:0
 0x7C631D: push    eax
@@ -14,12 +14,12 @@
 0x7C6331: mov     large fs:0, eax
 0x7C6337: mov     edi, ecx
 0x7C6339: mov     [esp+28h+var_10], edi
-0x7C633D: mov     ebx, [esp+28h+arg_0]
+0x7C633D: mov     ebx, [esp+28h+source]
 0x7C6341: mov     al, [ebx+18h]
 0x7C6344: and     word ptr [ebx+18h], 0FFFEh
 0x7C634A: and     al, 1
 0x7C634C: lea     esi, [edi+124h]
-0x7C6352: mov     byte ptr [esp+28h+arg_0], al
+0x7C6352: mov     byte ptr [esp+28h+source], al
 0x7C6356: mov     eax, [esi]
 0x7C6358: test    eax, eax
 0x7C635A: jnz     short loc_7C6396
@@ -32,7 +32,7 @@
 0x7C6377: jz      short loc_7C6384
 0x7C6379: push    3
 0x7C637B: mov     ecx, eax; this
-0x7C637D: call    ??0BSCubeMapCamera@@QAE@XZ; BSCubeMapCamera::BSCubeMapCamera(void)
+0x7C637D: call    ??0BSCubeMapCamera@@QAE@XZ; BSCubeMapCamera constructor: initializes mode +0x124, six face references +0x128..+0x13C, render/scene fields, cube frustum, and image-space shader list +0x14C.
 0x7C6382: jmp     short loc_7C6386
 0x7C6384: xor     eax, eax
 0x7C6386: push    eax; a2
@@ -40,7 +40,7 @@
 0x7C6389: mov     [esp+2Ch+var_4], 0FFFFFFFFh
 0x7C6391: call    NiSmartPointer_Set??
 0x7C6396: mov     eax, [esi]
-0x7C6398: mov     dword ptr [eax+124h], 3
+0x7C6398: mov     dword ptr [eax+124h], 3; Select BSCubeMapCamera render mode 3. This is distinct from mode 0 used by special shadow object-list rendering.
 0x7C63A2: mov     eax, [esi]
 0x7C63A4: mov     ecx, [ebx+88h]
 0x7C63AA: add     eax, 54h ; 'T'
@@ -52,18 +52,18 @@
 0x7C63C1: mov     eax, [edi+120h]
 0x7C63C7: test    eax, eax
 0x7C63C9: jz      short loc_7C63E2
-0x7C63CB: cmp     [esp+28h+arg_8], 0
+0x7C63CB: cmp     [esp+28h+releasePreviousTarget], 0
 0x7C63D0: jz      short loc_7C643D
 0x7C63D2: test    eax, eax
 0x7C63D4: jz      short loc_7C63E2
 0x7C63D6: mov     ecx, ds:0B42F50h; this
-0x7C63DC: push    eax; a2
-0x7C63DD: call    sub_7C1EE0
+0x7C63DC: push    eax; texture
+0x7C63DD: call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.
 0x7C63E2: mov     edx, ds:0B43104h
 0x7C63E8: mov     ecx, ds:0B42F50h; this
 0x7C63EE: push    18h; a3
 0x7C63F0: push    edx; a2
-0x7C63F1: call    BSTextureManager_GetDefaultRenderTarget
+0x7C63F1: call    BSTextureManager_GetDefaultRenderTarget; Oblivion default rendered-target acquisition. Resolves dimensions, D3D format, auxiliary value, and flags for the target type, then obtains a matching cached or newly created BSRenderedTexture.
 0x7C63F6: mov     ebp, [edi+120h]
 0x7C63FC: cmp     ebp, eax
 0x7C63FE: mov     [esp+28h+var_14], eax
@@ -84,7 +84,7 @@
 0x7C6423: call    eax
 0x7C6425: mov     eax, [esp+28h+var_14]
 0x7C6429: test    eax, eax
-0x7C642B: mov     [edi+120h], eax
+0x7C642B: mov     [edi+120h], eax; Strong-own default rendered-target type 0x18 at ShadowSceneNode+0x120.
 0x7C6431: jz      short loc_7C643D
 0x7C6433: add     eax, 4
 0x7C6436: push    eax; lpAddend
@@ -140,14 +140,14 @@
 0x7C64C3: push    ecx; lpAddend
 0x7C64C4: mov     [ebp+0], ebx
 0x7C64C7: call    dword ptr ds:0A28078h
-0x7C64CD: cmp     [esp+28h+arg_8], 0
+0x7C64CD: cmp     [esp+28h+releasePreviousTarget], 0
 0x7C64D2: mov     ebp, [esp+28h+var_10]
 0x7C64D6: jz      short loc_7C64DD
 0x7C64D8: or      eax, 0FFFFFFFFh
 0x7C64DB: jmp     short loc_7C64EC
-0x7C64DD: mov     eax, [ebp+128h]
+0x7C64DD: mov     eax, [ebp+128h]; Use ShadowSceneNode+0x128 as the current mode-3 cube face index when rendering incrementally.
 0x7C64E3: lea     edx, [eax+1]
-0x7C64E6: mov     [ebp+128h], edx
+0x7C64E6: mov     [ebp+128h], edx; Advance the persistent cube-face index; the function resets it after six faces.
 0x7C64EC: mov     ecx, [esi]
 0x7C64EE: mov     edx, [ecx]
 0x7C64F0: push    eax
@@ -171,7 +171,7 @@
 0x7C6523: mov     ecx, edi
 0x7C6525: call    eax
 0x7C6527: mov     dword ptr [esi], 0
-0x7C652D: cmp     byte ptr [esp+28h+arg_0], 0
+0x7C652D: cmp     byte ptr [esp+28h+source], 0
 0x7C6532: jz      short loc_7C653B
 0x7C6534: or      word ptr [ebx+18h], 1
 0x7C6539: jmp     short loc_7C6541
@@ -180,7 +180,7 @@
 0x7C6548: jge     short loc_7C654E
 0x7C654A: xor     al, al
 0x7C654C: jmp     short loc_7C655A
-0x7C654E: mov     dword ptr [ebp+128h], 0
+0x7C654E: mov     dword ptr [ebp+128h], 0; After six incremental faces, reset ShadowSceneNode+0x128 to face zero.
 0x7C6558: mov     al, 1
 0x7C655A: mov     ecx, dword ptr [esp+28h+var_C]
 0x7C655E: mov     large fs:0, ecx
@@ -191,3 +191,15 @@
 0x7C6569: pop     ebx
 0x7C656A: add     esp, 14h
 0x7C656D: retn    0Ch
+0x9B5200: mov     eax, [ebp-14h]
+0x9B5203: push    eax
+0x9B5204: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B5209: pop     ecx
+0x9B520A: retn
+0x9B520B: mov     edx, [esp+arg_4]
+0x9B520F: lea     eax, [edx-18h]
+0x9B5212: mov     ecx, [edx-1Ch]
+0x9B5215: xor     ecx, eax
+0x9B5217: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B521C: mov     eax, offset stru_AE03C0
+0x9B5221: jmp     ___CxxFrameHandler3

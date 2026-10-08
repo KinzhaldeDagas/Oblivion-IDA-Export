@@ -1,4 +1,4 @@
-0x7630E0: cmp     dword ptr [ecx+8ACh], 0
+0x7630E0: cmp     dword ptr [ecx+8ACh], 0; MoonSugarEffect decode: pixel shader handle release helper. Clears current pixel shader on renderer state, Releases IDirect3DPixelShader9, then stores null on the wrapper.
 0x7630E7: jz      short loc_7630FA
 0x7630E9: mov     ecx, [ecx+8ACh]
 0x7630EF: mov     eax, [ecx]

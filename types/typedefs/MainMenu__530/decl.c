@@ -1,1 +1,1 @@
-MainMenu
+struct MainMenu;

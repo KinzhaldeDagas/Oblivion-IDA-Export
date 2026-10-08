@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x42B590",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; TeleportData constructor initializes linkedDoor=NULL and all six transform floats to FLT_MAX sentinels. Any XTEL immediately replaces them from a fresh zeroed scratch in TeleportData_LoadXTEL.",
     "mnemonic": "sub",
     "size": 3
   },

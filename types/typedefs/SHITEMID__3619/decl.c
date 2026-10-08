@@ -1,1 +1,1 @@
-SHITEMID
+typedef __WIDL_shtypes_generated_name_0000000B SHITEMID;

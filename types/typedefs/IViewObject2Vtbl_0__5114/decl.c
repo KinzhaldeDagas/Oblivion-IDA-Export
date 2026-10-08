@@ -1,1 +1,1 @@
-IViewObject2Vtbl_0
+typedef IViewObject2Vtbl IViewObject2Vtbl_0;

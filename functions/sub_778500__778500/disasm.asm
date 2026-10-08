@@ -1,12 +1,12 @@
 0x778500: sub     esp, 18h
 0x778503: cmp     dword ptr [ecx+8], 0
-0x778507: mov     [esp+18h+var_18], ecx
+0x778507: mov     [esp+18h+self], ecx
 0x77850A: jnz     short loc_778514
 0x77850C: xor     eax, eax
 0x77850E: add     esp, 18h
 0x778511: retn    14h
 0x778514: push    ebx
-0x778515: mov     ebx, [esp+1Ch+arg_0]
+0x778515: mov     ebx, [esp+1Ch+byteLength]
 0x778519: test    ebx, ebx
 0x77851B: jz      short loc_778524
 0x77851D: cmp     [esp+1Ch+arg_4], 0
@@ -16,14 +16,14 @@
 0x778527: add     esp, 18h
 0x77852A: retn    14h
 0x77852D: push    ebp
-0x77852E: mov     ebp, [esp+20h+arg_C]
+0x77852E: mov     ebp, [esp+20h+usage]
 0x778532: push    esi
 0x778533: mov     esi, [ecx+14h]
 0x778536: test    esi, esi
 0x778538: lea     eax, ds:4[ebx*4]
 0x77853F: push    edi
-0x778540: mov     edi, [esp+28h+arg_10]
-0x778544: mov     [esp+28h+arg_0], eax
+0x778540: mov     edi, [esp+28h+pool]
+0x778544: mov     [esp+28h+byteLength], eax
 0x778548: jz      loc_778645
 0x77854E: mov     ecx, [esi]
 0x778550: xor     eax, eax
@@ -48,13 +48,13 @@
 0x778599: cmp     [esp+28h+var_8], edi
 0x77859D: jnz     loc_778639
 0x7785A3: mov     ecx, [esp+28h+var_4]
-0x7785A7: cmp     ecx, [esp+28h+arg_0]
+0x7785A7: cmp     ecx, [esp+28h+byteLength]
 0x7785AB: jb      loc_778639
 0x7785B1: mov     edi, esi
-0x7785B3: mov     edx, [esp+28h+arg_0]
+0x7785B3: mov     edx, [esp+28h+byteLength]
 0x7785B7: mov     esi, [esp+28h+arg_8]
 0x7785BB: push    0
-0x7785BD: lea     ecx, [esp+2Ch+arg_10]
+0x7785BD: lea     ecx, [esp+2Ch+pool]
 0x7785C1: push    ecx
 0x7785C2: push    edx
 0x7785C3: mov     dword ptr [esi], 0
@@ -62,7 +62,7 @@
 0x7785CB: mov     eax, [eax+2Ch]
 0x7785CE: push    0
 0x7785D0: push    edi
-0x7785D1: mov     [esp+3Ch+arg_10], 0
+0x7785D1: mov     [esp+3Ch+pool], 0
 0x7785D9: call    eax
 0x7785DB: test    eax, eax
 0x7785DD: jl      loc_778678
@@ -100,19 +100,19 @@
 0x77863B: mov     eax, [edx+8]
 0x77863E: push    esi
 0x77863F: call    eax
-0x778641: mov     ecx, [esp+28h+var_18]
-0x778645: mov     edx, [esp+28h+arg_0]
-0x778649: push    0
-0x77864B: push    edi
-0x77864C: push    65h ; 'e'
-0x77864E: push    ebp
-0x77864F: push    edx
-0x778650: call    sub_778180
+0x778641: mov     ecx, [esp+28h+self]; self
+0x778645: mov     edx, [esp+28h+byteLength]
+0x778649: push    0; description
+0x77864B: push    edi; pool
+0x77864C: push    65h ; 'e'; format
+0x77864E: push    ebp; usage
+0x77864F: push    edx; byteLength
+0x778650: call    NiDX9IndexBufferManager_CreateIndexBuffer
 0x778655: mov     edi, eax
 0x778657: test    edi, edi
 0x778659: jnz     loc_7785B3
 0x77865F: push    offset aNidx9indexbu_3; "NiDX9IndexBufferManager::ResizeTempLine"...
-0x778664: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x778664: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x778669: add     esp, 4
 0x77866C: pop     edi
 0x77866D: pop     esi
@@ -122,7 +122,7 @@
 0x778672: add     esp, 18h
 0x778675: retn    14h
 0x778678: push    offset aNidx9indexbu_1; "NiDX9IndexBufferManager::PackBuffer> Fa"...
-0x77867D: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x77867D: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x778682: mov     edx, [edi]
 0x778684: mov     eax, [edx+30h]
 0x778687: add     esp, 4
@@ -133,8 +133,8 @@
 0x778692: push    edi
 0x778693: call    edx
 0x778695: xor     edi, edi
-0x778697: mov     eax, [esp+28h+var_18]
-0x77869B: mov     ecx, [esp+28h+arg_0]
+0x778697: mov     eax, [esp+28h+self]
+0x77869B: mov     ecx, [esp+28h+byteLength]
 0x77869F: mov     [eax+14h], edi
 0x7786A2: mov     [eax+18h], ecx
 0x7786A5: mov     eax, edi

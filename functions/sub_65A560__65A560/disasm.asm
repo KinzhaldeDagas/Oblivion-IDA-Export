@@ -65,7 +65,7 @@
 0x65A623: push    eax
 0x65A624: mov     [esp+24h+var_10], edx
 0x65A628: mov     [esp+24h+var_14], ecx
-0x65A62C: call    sub_683CB0
+0x65A62C: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x65A631: fstp    [esp+24h+arg_0]
 0x65A635: mov     edx, [edi]
 0x65A637: fld     [esp+24h+arg_0]

@@ -1,1 +1,1 @@
-IRunnableObjectVtbl_0
+typedef IRunnableObjectVtbl IRunnableObjectVtbl_0;

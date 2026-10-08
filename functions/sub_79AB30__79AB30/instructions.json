@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x79AB30",
-    "line": "push    ecx",
+    "line": "push    ecx; Checked uninitialized_fill_n wrapper for SFrondVertex. Constructs count copies and returns destination+count.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79AB31",
-    "line": "mov     edx, [esp+4+arg_8]",
+    "line": "mov     edx, [esp+4+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x79AB36",
-    "line": "mov     esi, [esp+8+arg_4]",
+    "line": "mov     esi, [esp+8+count]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,67 +31,67 @@
   },
   {
     "ea": "0x79AB3B",
-    "line": "mov     edi, [esp+0Ch+arg_0]",
+    "line": "mov     edi, [esp+0Ch+destination]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79AB3F",
-    "line": "mov     byte ptr [esp+0Ch+var_4], 0",
+    "line": "mov     byte ptr [esp+0Ch+debugCookie], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x79AB44",
-    "line": "mov     eax, [esp+0Ch+var_4]",
+    "line": "mov     eax, [esp+0Ch+debugCookie]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79AB48",
-    "line": "push    eax",
+    "line": "push    eax; debugCookie",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79AB49",
-    "line": "mov     eax, [esp+10h+arg_8]",
+    "line": "mov     eax, [esp+10h+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79AB4D",
-    "line": "push    edx",
+    "line": "push    edx; debugValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79AB4E",
-    "line": "push    ecx",
+    "line": "push    ecx; debugOwner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79AB4F",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79AB50",
-    "line": "push    esi",
+    "line": "push    esi; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79AB51",
-    "line": "push    edi",
+    "line": "push    edi; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79AB52",
-    "line": "call    sub_79AA10",
+    "line": "call    OB_SFrondVertex_UninitializedFillN_010201A0; Low-level uninitialized_fill_n for trivial 0x38-byte SFrondVertex records. Oblivion call sites pass three effective operands plus three checked-iterator/debug operands that this body does not consume.",
     "mnemonic": "call",
     "size": 5
   },

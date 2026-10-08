@@ -1,19 +1,36 @@
 {
-  "callees_count": 58,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "NiTMap<uint,VertexDist>::NiTMap<uint,VertexDist>(void)",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 26,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x481920",
+      "0x481DB9"
+    ],
+    [
+      "0x9AF630",
+      "0x9AF65C"
+    ]
+  ],
+  "chunks_sha256": "2f4d74b01fa770ce7a312cce1791eb67b2460aafeeb12dfb7774b0293ba75610",
+  "comment_regular": "Copy normalized normals from nearest source vertices to targets in common geometry space. The internal VertexDist map is keyed by source index and retains only a primary plus one coincident secondary target (distance epsilon 0.001); third and later coincident targets are dropped. FaceGen uses this for Face-to-Ears and body-skin seam repair.\n\nNative nearest-normal stitch stores primary and optional secondary target per source, copies normalized source normal, optionally displaces vertices, and marks target dirty flags |=3. Prettier Faces extends coincident shared-normal groups afterward. 1.19.8 code audit: reject nonfinite squared distances and nonfinite copied normals before group propagation; old distance>epsilon test accepted NaN. This is a plugin guard correction; malformed-asset occurrence in game has not been demonstrated.",
+  "comment_repeatable": "Native nearest-normal stitch stores primary and optional secondary target per source, copies normalized source normal, optionally displaces vertices, and marks target dirty flags |=3. Prettier Faces extends coincident shared-normal groups afterward. 1.19.8 code audit: reject nonfinite squared distances and nonfinite copied normals before group propagation; old distance>epsilon test accepted NaN. This is a plugin guard correction; malformed-asset occurrence in game has not been demonstrated.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "NiGeometry_CopyNearestVertexNormals",
   "end_ea": "0x481DB9",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "??0?$NiTMap@IUVertexDist@@@@QAE@XZ",
+  "name": "NiGeometry_CopyNearestVertexNormals",
   "segment": ".text",
   "sha256": "f3cf7031c5c228b91db1564871a8e3f0ad6b5afd1d9bdecab18d28fbfe882e29",
   "size": 1177,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x481920",
-  "type": "char __cdecl(int, int, float, int, char)",
-  "xrefs_from_count": 394,
+  "total_chunk_size": 1221,
+  "type": "bool __cdecl(NiGeometry *sourceGeometry, NiGeometry *targetGeometry, float maxDistance, int unused, bool offsetVerticesAlongNormals)",
+  "xrefs_from_count": 405,
   "xrefs_to_count": 3
 }

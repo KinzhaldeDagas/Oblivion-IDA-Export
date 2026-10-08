@@ -135,7 +135,7 @@
 0x69062B: mov     ecx, edi
 0x69062D: call    ContainerEntryExtraData_DestroyDataTable
 0x690632: push    edi
-0x690633: call    FormHeapFree
+0x690633: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x690638: add     esp, 4
 0x69063B: lea     edi, [esi+40h]
 0x69063E: mov     ebx, 10h
@@ -159,20 +159,20 @@
 0x69066C: mov     ecx, ebp
 0x69066E: call    ContainerEntryExtraData_DestroyDataTable
 0x690673: push    ebp
-0x690674: call    FormHeapFree
+0x690674: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x690679: add     esp, 4
 0x69067C: add     edi, 4
 0x69067F: sub     ebx, 1
 0x690682: jnz     short loc_690643
 0x690684: cmp     byte ptr [esi+85h], 0
 0x69068B: jz      short loc_690703
-0x69068D: mov     ecx, [esi+8]
+0x69068D: mov     ecx, [esi+8]; magicItem
 0x690690: test    ecx, ecx
 0x690692: jz      short loc_690703
 0x690694: cmp     dword ptr [esi+0Ch], 0
 0x690698: jz      short loc_690703
-0x69069A: push    0
-0x69069C: call    MagicItem_GetFXEffect
+0x69069A: push    0; effectIndex
+0x69069C: call    MagicItem_GetFXEffect; Verified (Oblivion): MagicItem_GetFXEffect returns the effect's EffectSetting pointer; MagicShaderHitEffect constructors/PostLink dereference its +0x78 EffectSetting::effectShader field.
 0x6906A1: mov     ecx, [esi+8]
 0x6906A4: mov     edi, eax
 0x6906A6: mov     eax, [esi+0Ch]
@@ -180,7 +180,7 @@
 0x6906AC: push    0
 0x6906AE: push    eax
 0x6906AF: add     ecx, 0Ch
-0x6906B2: call    EffectItemList_GetStrongestItem
+0x6906B2: call    EffectItemList_GetStrongestItem; this=EffectItemList; args are rangeFilter (0 self,1 touch,2 target,3 any) and requireArea. Returns effective (flag 0x400000 clear) qualifying item with greatest truncated MagickaCostForCaster(item,null).
 0x6906B7: movzx   ecx, word ptr [edi+20h]
 0x6906BB: cmp     cx, 0FFFFh
 0x6906C0: jnz     short loc_6906D5
@@ -209,7 +209,7 @@
 0x6906FC: mov     byte ptr [esi+85h], 0
 0x690703: mov     ecx, esi; this
 0x690705: mov     [esp+24h+var_4], 0FFFFFFFFh
-0x69070D: call    ??1ActiveEffect@@UAE@XZ; ActiveEffect::~ActiveEffect(void)
+0x69070D: call    ??1ActiveEffect@@UAE@XZ; Verified ActiveEffect destructor detaches each associated MagicHitEffect by setting bFinished and ownerActiveEffect=null, clears/frees only the HitEffectNode list, and relies on the ActorProcessManager reference added during PostLink to own the BSTempEffect object's later update/removal.
 0x690712: mov     ecx, dword ptr [esp+24h+var_C]
 0x690716: mov     large fs:0, ecx
 0x69071D: pop     ecx
@@ -219,3 +219,12 @@
 0x690721: pop     ebx
 0x690722: add     esp, 10h
 0x690725: retn
+0x9C56A0: mov     ecx, [ebp-10h]; this
+0x9C56A3: jmp     j_??1VampirismEffect@@UAE@XZ; VampirismEffect::~VampirismEffect(void)
+0x9C56A8: mov     edx, [esp+arg_4]
+0x9C56AC: lea     eax, [edx-14h]
+0x9C56AF: mov     ecx, [edx-18h]
+0x9C56B2: xor     ecx, eax
+0x9C56B4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C56B9: mov     eax, offset stru_AEDE50
+0x9C56BE: jmp     ___CxxFrameHandler3

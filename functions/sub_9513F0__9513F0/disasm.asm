@@ -24,7 +24,7 @@
 0x951423: setnz   cl
 0x951426: xor     edx, edx
 0x951428: cmp     ebx, edx
-0x95142A: mov     [esp+30h+var_1D+1], edx
+0x95142A: mov     dword ptr [esp+30h+var_1D+1], edx
 0x95142E: mov     [esp+30h+var_4], ebx
 0x951432: jle     loc_951578
 0x951438: movaps  xmm1, xmmword ptr ds:0A372D0h
@@ -53,8 +53,7 @@
 0x95147F: jle     loc_95153E
 0x951485: xor     edi, edi
 0x951487: jmp     short loc_951490
-0x951489: align 10h
-0x951490: cmp     esi, [esp+30h+var_1D+1]
+0x951490: cmp     esi, dword ptr [esp+30h+var_1D+1]
 0x951494: jz      loc_951532
 0x95149A: test    al, al
 0x95149C: jz      loc_951528
@@ -126,11 +125,11 @@
 0x95155A: mov     cl, 1
 0x95155C: jmp     short loc_951560
 0x95155E: xor     cl, cl
-0x951560: mov     eax, [esp+30h+var_1D+1]
+0x951560: mov     eax, dword ptr [esp+30h+var_1D+1]
 0x951564: inc     eax
 0x951565: add     edx, 20h ; ' '
 0x951568: cmp     eax, ebx
-0x95156A: mov     [esp+30h+var_1D+1], eax
+0x95156A: mov     dword ptr [esp+30h+var_1D+1], eax
 0x95156E: mov     [esp+30h+var_C], edx
 0x951572: jl      loc_951443
 0x951578: mov     edx, [ebp+arg_C]

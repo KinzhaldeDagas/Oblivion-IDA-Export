@@ -1,1 +1,1 @@
-0x6CE1C0: jmp     sub_754E90
+0x6CE1C0: jmp     j_NiTimeController_LinkObject; NiSingleInterpController link slot delegates to NiTimeController link processing. Concrete legacy controllers may perform additional versioned link migration after this returns.

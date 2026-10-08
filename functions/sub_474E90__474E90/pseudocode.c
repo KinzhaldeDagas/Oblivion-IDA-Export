@@ -1,95 +1,77 @@
-void __userpurge sub_474E90(
-        Ni2DBuffer **Dst@<ecx>,
-        double st5_0@<st2>,
-        double st6_0@<st1>,
-        double a4@<st0>,
-        float a5,
-        AnimSequenceSingle *a6)
+// Reconnects a loaded AnimIdle KF/sequence to ActorAnimData, restores nested sequence state, and preserves the idle phase needed by queued-idle processing.
+void __thiscall AnimIdle_RestoreLoadedKFState(Ni2DBuffer **Dst, float a2, AnimSequenceSingle *a3)
 {
-  int v7; // eax
-  AnimSequenceSingle *v8; // edi
-  Ni2DBuffer *v9; // eax
-  _DWORD *v10; // ebp
+  Ni2DBuffer *v7; // eax
+  ActorAnimData *v8; // edi
+  int v9; // eax
+  _DWORD *animsMap; // ebp
   int AnimationGroup; // eax
-  int v12; // eax
-  Ni2DBuffer *v13; // eax
+  BSAnimGroupSequence *v12; // eax
+  BSAnimGroupSequence *v13; // eax
   _DWORD *v14; // edi
   int v15; // eax
   float *v16; // esi
-  unsigned __int16 v17; // ax
-  int v18; // [esp-4h] [ebp-1Ch]
-  int v19; // [esp+0h] [ebp-18h]
-  size_t v20; // [esp+4h] [ebp-14h]
-  size_t v21; // [esp+4h] [ebp-14h]
-  size_t v22; // [esp+4h] [ebp-14h]
-  size_t v23; // [esp+4h] [ebp-14h]
-  size_t v24; // [esp+4h] [ebp-14h]
-  float v25; // [esp+4h] [ebp-14h]
+  unsigned __int16 SaveStateSize; // ax
+  unsigned int v18; // [esp-4h] [ebp-1Ch]
+  Ni2DBuffer *v19; // [esp+0h] [ebp-18h]
   char Dsta; // [esp+13h] [ebp-5h] BYREF
-  int v27; // [esp+14h] [ebp-4h] BYREF
+  int destination; // [esp+14h] [ebp-4h] BYREF
 
-  LODWORD(v20) = 4;
-  SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, Dst, v20);
-  LODWORD(v21) = 4;
-  SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, Dst + 1, v21);
-  LODWORD(v22) = 4;
-  SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, Dst + 3, v22);
-  LODWORD(v23) = 1;
-  SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &Dsta, v23);
-  if ( Dsta )
+  SaveLoad_LoadData(g_TESSaveLoadGame, Dst, 4u); /*0x474ea0*/
+  SaveLoad_LoadData(g_TESSaveLoadGame, Dst + 1, 4u); /*0x474eb1*/
+  SaveLoad_LoadData(g_TESSaveLoadGame, Dst + 3, 4u); /*0x474ec2*/
+  SaveLoad_LoadData(g_TESSaveLoadGame, &Dsta, 1u); /*0x474ed4*/
+  if ( Dsta ) /*0x474ede*/
   {
-    LODWORD(v24) = 1;
-    SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v27, v24);
-    v7 = (int)Dst[2];
-    if ( !v7 )
-      goto LABEL_13;
-    v8 = a6;
-    if ( !(unsigned __int8)AnimSequenceSingle::AnimSequenceSingle(a6, v7, 0) )
-      goto LABEL_13;
-    v9 = *Dst;
-    if ( *Dst == (Ni2DBuffer *)2 )
+    SaveLoad_LoadData(g_TESSaveLoadGame, &destination, 1u); /*0x474ef1*/
+    v7 = Dst[2]; /*0x474ef6*/
+    if ( !v7 ) /*0x474efb*/
+      goto LABEL_13; /*0x474efb*/
+    v8 = (ActorAnimData *)a3; /*0x474f02*/
+    if ( !ActorAnimData_InstallKFModel(a3, (int)v7, 0) ) /*0x474f0b*/
+      goto LABEL_13; /*0x474f12*/
+    v9 = (int)*Dst; /*0x474f18*/
+    if ( *Dst == (Ni2DBuffer *)2 ) /*0x474f1d*/
     {
-      v10 = *((_DWORD **)v8 + 0x27);
-      AnimationGroup = TESAnimGroup_GetAnimationGroup((TESAnimGroup *)Dst[2]->members.width);
-      if ( !sub_470960(v10, AnimationGroup, &a6) )
-        goto LABEL_13;
-      *((_BYTE *)v8 + 0xC4) = 1;
-      v19 = (int)Dst[3];
-      v18 = TESAnimGroup_GetAnimationGroup((TESAnimGroup *)Dst[2]->members.width);
-      v12 = (*(int (__thiscall **)(AnimSequenceSingle *, int))(*(_DWORD *)a6 + 0x10))(a6, v27);
-      v13 = (Ni2DBuffer *)sub_474530(v8, v12, *(float *)&v18, v19);
+      animsMap = v8->animsMap; /*0x474f26*/
+      AnimationGroup = TESAnimGroup_GetAnimationGroup((TESAnimGroup *)Dst[2]->members.width); /*0x474f31*/
+      if ( !ActorAnimData_FindAnimMapEntry(animsMap, AnimationGroup, &a3) ) /*0x474f41*/
+        goto LABEL_13; /*0x474f41*/
+      v8->unkC4 = 1; /*0x474f43*/
+      v19 = Dst[3]; /*0x474f52*/
+      v18 = TESAnimGroup_GetAnimationGroup((TESAnimGroup *)Dst[2]->members.width); /*0x474f60*/
+      v12 = (BSAnimGroupSequence *)(*((int (__thiscall **)(AnimSequenceSingle *, int))a3->vtbl + 4))(a3, destination); /*0x474f67*/
+      v13 = ActorAnimData_PlaySequence(v8, v12, v18, (int)v19); /*0x474f6c*/
     }
     else
     {
-      if ( !v9 )
+      if ( !v9 ) /*0x474f75*/
       {
-        *Dst = (Ni2DBuffer *)1;
-        goto LABEL_13;
+        *Dst = (Ni2DBuffer *)1; /*0x474f77*/
+        goto LABEL_13; /*0x474f7d*/
       }
-      if ( v9 != (Ni2DBuffer *)3 )
-        goto LABEL_13;
-      v14 = *((_DWORD **)v8 + 0x27);
-      v15 = TESAnimGroup_GetAnimationGroup((TESAnimGroup *)Dst[2]->members.width);
-      if ( !sub_470960(v14, v15, &a6) )
-        goto LABEL_13;
-      v13 = (Ni2DBuffer *)(*(int (__thiscall **)(AnimSequenceSingle *, int))(*(_DWORD *)a6 + 0x10))(a6, v27);
+      if ( v9 != 3 ) /*0x474f82*/
+        goto LABEL_13; /*0x474f82*/
+      v14 = v8->animsMap; /*0x474f8a*/
+      v15 = TESAnimGroup_GetAnimationGroup((TESAnimGroup *)Dst[2]->members.width); /*0x474f95*/
+      if ( !ActorAnimData_FindAnimMapEntry(v14, v15, &a3) ) /*0x474f9d*/
+        goto LABEL_13; /*0x474fa4*/
+      v13 = (BSAnimGroupSequence *)(*((int (__thiscall **)(AnimSequenceSingle *, int))a3->vtbl + 4))(a3, destination); /*0x474fb4*/
     }
-    NiSmartPointer_Set__(Dst + 4, v13);
+    NiSmartPointer_Set__(Dst + 4, (Ni2DBuffer *)v13); /*0x474fba*/
 LABEL_13:
-    v16 = (float *)Dst[4];
-    if ( v16 )
+    v16 = (float *)Dst[4]; /*0x474fc0*/
+    if ( v16 ) /*0x474fc5*/
     {
-      __asm { fld     [esp+10h+arg_0] }
-      __asm { fstp    dword ptr [esp+14h+var_14]; float }
-      sub_49F5F0(v16, v25);
+      BSAnimGroupSequence_LoadState(v16, a2); /*0x474fd1*/
     }
     else
     {
-      v17 = sub_49F550();
-      SaveLoad_AdvanceBufferOffset(SaveLoad_CurrentSavegame, v17);
+      SaveStateSize = BSAnimGroupSequence_GetSaveStateSize(); /*0x474fde*/
+      SaveLoad_AdvanceBufferOffset(g_TESSaveLoadGame, SaveStateSize); /*0x474fed*/
     }
-    return;
+    return; /*0x474fdb*/
   }
-  if ( !*Dst && LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) >= 0x4Cu )
-    *Dst = (Ni2DBuffer *)1;
+  if ( !*Dst && g_TESSaveLoadGame->currentVersion >= 0x4Cu ) /*0x475009*/
+    *Dst = (Ni2DBuffer *)1; /*0x47500b*/
 }

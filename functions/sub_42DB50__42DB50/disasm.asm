@@ -1,4 +1,4 @@
-0x42DB50: push    0FFFFFFFFh
+0x42DB50: push    0FFFFFFFFh; MEF PERF 2026-09-07: Verified caller ties PERF-1 to real enumeration: enters archive+200h lock42DB8C, loops files in increasing v28, requests names42DD1C for accepted candidates, unlocks42DDCD. Same-extension valid candidates with no exclusions can all match. Proposed full scoped enumeration replacement must preserve seven cdecl args, returned caller-owned filter array, hash filters, result order and every lock/SEH exit.
 0x42DB52: push    offset SEH_49E280
 0x42DB57: mov     eax, large fs:0
 0x42DB5D: push    eax
@@ -106,7 +106,7 @@
 0x42DCAA: jnz     loc_42DDA6
 0x42DCB0: mov     ebx, [esp+3Ch+arg_4]
 0x42DCB4: test    ebx, ebx
-0x42DCB6: jz      short loc_42DD0E
+0x42DCB6: jz      short loc_42DD0E; MEF v57 IMPLEMENTED 2026-10-08: PERF-1 v57 emit bridge: acquire/copy filename plus prefix privately before engine allocations; checked output string/node publication retains PushFront order and existing filters. No-offset cursor amortizes skipped names/folders; reads require exact one-byte progress and table bounds. Optional index/cursor state never becomes engine-owned metadata.
 0x42DCB8: mov     eax, [esi]
 0x42DCBA: mov     ecx, [esi+4]
 0x42DCBD: xor     edx, edx
@@ -136,12 +136,12 @@
 0x42DD06: test    eax, eax
 0x42DD08: jnz     short loc_42DCC7
 0x42DD0A: mov     ebp, [esp+3Ch+var_1C]
-0x42DD0E: mov     edx, [esp+3Ch+var_28]
+0x42DD0E: mov     edx, [esp+3Ch+var_28]; MEF v57 IMPLEMENTED 2026-10-08: PERF-1 v57 emit bridge: acquire/copy filename plus prefix privately before engine allocations; checked output string/node publication retains PushFront order and existing filters. No-offset cursor amortizes skipped names/folders; reads require exact one-byte progress and table bounds. Optional index/cursor state never becomes engine-owned metadata.
 0x42DD12: mov     eax, [esp+3Ch+var_20]
 0x42DD16: mov     ecx, [esp+3Ch+arg_0]
 0x42DD1A: push    edx
 0x42DD1B: push    eax
-0x42DD1C: call    sub_42CC00
+0x42DD1C: call    Archive_GetFileNameByFolderAndIndex; MEF PERF 2026-09-07: PERF-1 increasing-index getter call: pushes file index then folder index, ECXarchive; file counter advances42DDAE..42DDC1. Full matching folder in no-offset mode yields quadratic prefix rereads under archive lock. Prefer local monotonic cursor for this enumeration, not a globally cached raw stream position.
 0x42DD21: mov     edi, [esp+3Ch+arg_18]
 0x42DD25: mov     ebx, eax
 0x42DD27: mov     eax, edi
@@ -194,7 +194,7 @@
 0x42DD98: rep movsb
 0x42DD9A: mov     ecx, [esp+3Ch+arg_14]
 0x42DD9E: push    eax
-0x42DD9F: call    BSSimpleList_PushFront
+0x42DD9F: call    BSSimpleList_PushFront; MEF PERF 2026-09-07: Rejected performance hypothesis: output insertion here is BSSimpleList_PushFront446CB0, not PushBack. Its success path inserts at the embedded head without traversing the list. Result insertion itself is O(1) per accepted file; preserve current reversed/prepended order when optimizing name retrieval.
 0x42DDA4: jmp     short loc_42DDAE
 0x42DDA6: jl      short loc_42DDC7
 0x42DDA8: jmp     short loc_42DDAE
@@ -218,3 +218,15 @@
 0x42DDE5: pop     ebx
 0x42DDE6: add     esp, 28h
 0x42DDE9: retn
+0x9B1C00: mov     eax, [ebp-1Ch]
+0x9B1C03: push    eax
+0x9B1C04: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B1C09: pop     ecx
+0x9B1C0A: retn
+0x9B1C0B: mov     edx, [esp+arg_4]
+0x9B1C0F: lea     eax, [edx-2Ch]
+0x9B1C12: mov     ecx, [edx-30h]
+0x9B1C15: xor     ecx, eax
+0x9B1C17: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B1C1C: mov     eax, offset stru_ADDCD4
+0x9B1C21: jmp     ___CxxFrameHandler3

@@ -1,19 +1,40 @@
 {
-  "callees_count": 2334,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1591,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_820C00",
+  "chunks": [
+    [
+      "0x820C00",
+      "0x82827F"
+    ],
+    [
+      "0x75FA70",
+      "0x75FA82"
+    ],
+    [
+      "0x9D1A90",
+      "0x9D23E4"
+    ]
+  ],
+  "chunks_sha256": "cbb70797759657ff9fe9b52cc87ead38fd1d5558d0b608abdc1bc9fa8a128975",
+  "comment_regular": "Oblivion ShadowLight pass-pool initializer. Mode-5 pool[6..9] each owns one stage configured for texcoord 0, wrap addressing, linear MAG/MIN/MIP filtering, and disabled fixed-function color/alpha ops. All four disable alpha blending and stencil, enable Z test/write with LESS_EQUAL, and differ only in alpha-test enable: pools 6/8 off, 7/9 on. Opaque shaders ignore the unbound stage.",
+  "comment_repeatable": "Oblivion ShadowLight pass-pool initializer. Mode-5 pool[6..9] each owns one stage configured for texcoord 0, wrap addressing, linear MAG/MIN/MIP filtering, and disabled fixed-function color/alpha ops. All four disable alpha blending and stencil, enable Z test/write with LESS_EQUAL, and differ only in alpha-test enable: pools 6/8 off, 7/9 on. Opaque shaders ignore the unbound stage.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 22,
+  "display_name": "ShadowLightShader_InitializePassPool",
   "end_ea": "0x82827F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_820C00",
+  "name": "ShadowLightShader_InitializePassPool",
   "segment": ".text",
   "sha256": "9a829dbd41b196b1c887c94b711f1844bedf48a731892fc45a4aca47a8605fee",
   "size": 30335,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x820C00",
+  "total_chunk_size": 32741,
   "type": "void()",
-  "xrefs_from_count": 11342,
+  "xrefs_from_count": 11803,
   "xrefs_to_count": 2
 }

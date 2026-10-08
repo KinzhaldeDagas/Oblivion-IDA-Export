@@ -35,38 +35,38 @@ unsigned int __usercall sub_736C63@<eax>(
   unsigned __int8 v31; // [esp-2h] [ebp-2h]
   unsigned __int8 v32; // [esp-1h] [ebp-1h]
 
-  v19 = ((_BYTE)a1 << v20) | (a4 >> a3) | (a1 >> a2);
-  v8 = v31;
-  v9 = (v27 & a5) >> v29;
-  for ( i = 0; v8 >= v17; i = (v9 | i) << v17 )
-    v8 -= v17;
-  v11 = ((_BYTE)v9 << v22) | (i >> v17) | (v9 >> (v21 - v8));
-  result = (v28 & a5) >> v30;
-  v13 = 0;
-  if ( a8 > v32 )
+  v19 = ((_BYTE)a1 << v20) | (a4 >> a3) | (a1 >> a2); /*0x736c8f*/
+  v8 = v31; /*0x736c93*/
+  v9 = (v27 & a5) >> v29; /*0x736c97*/
+  for ( i = 0; v8 >= v17; i = (v9 | i) << v17 ) /*0x736c9d*/
+    v8 -= v17; /*0x736ca5*/
+  v11 = ((_BYTE)v9 << v22) | (i >> v17) | (v9 >> (v21 - v8)); /*0x736ce1*/
+  result = (v28 & a5) >> v30; /*0x736ce3*/
+  v13 = 0; /*0x736ce5*/
+  if ( a8 > v32 ) /*0x736ce9*/
   {
-    v14 = v32;
+    v14 = v32; /*0x736d02*/
   }
   else
   {
-    v14 = v32;
-    do
+    v14 = v32; /*0x736cee*/
+    do /*0x736cfe*/
     {
-      v14 -= a8;
-      v13 = (result | v13) << a8;
+      v14 -= a8; /*0x736cf0*/
+      v13 = (result | v13) << a8; /*0x736cf8*/
     }
-    while ( v14 >= a8 );
+    while ( v14 >= a8 ); /*0x736cfe*/
   }
-  *a6 = v18;
-  a6[1] = v19;
-  v15 = a6 + 1;
-  v15[1] = v11;
-  v16 = result >> (v25 - v14);
-  LOBYTE(result) = (_BYTE)result << v26;
-  v15[2] = result | (v13 >> a8) | v16;
-  if ( v23 != 1 )
-    JUMPOUT(0x736BD0);
-  if ( v24 != 1 )
-    JUMPOUT(0x736B50);
-  return result;
+  *a6 = v18; /*0x736d09*/
+  a6[1] = v19; /*0x736d15*/
+  v15 = a6 + 1; /*0x736d1c*/
+  v15[1] = v11; /*0x736d1f*/
+  v16 = result >> (v25 - v14); /*0x736d29*/
+  LOBYTE(result) = (_BYTE)result << v26; /*0x736d38*/
+  v15[2] = result | (v13 >> a8) | v16; /*0x736d45*/
+  if ( v23 != 1 ) /*0x736d4f*/
+    JUMPOUT(0x736BD0); /*0x736bd0*/
+  if ( v24 != 1 ) /*0x736d5e*/
+    JUMPOUT(0x736B50); /*0x736b50*/
+  return result; /*0x736d6b*/
 }

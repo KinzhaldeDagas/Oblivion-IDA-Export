@@ -3,7 +3,7 @@
 0x72F292: mov     edi, [esp+8+arg_0]
 0x72F296: push    edi
 0x72F297: mov     esi, ecx
-0x72F299: call    nullsub_returnvVoid_1arg
+0x72F299: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x72F29E: mov     eax, [edi+0D8h]
 0x72F2A4: cmp     eax, 4000001h
 0x72F2A9: jb      short loc_72F2C2

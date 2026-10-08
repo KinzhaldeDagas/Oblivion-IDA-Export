@@ -1,1 +1,5 @@
-NiMultiTargetTransformController
+struct NiMultiTargetTransformController
+{
+NiMultiTargetTransformControllerVtbl *__vftable;
+NiMultiTargetTransformControllerMembr members;
+};

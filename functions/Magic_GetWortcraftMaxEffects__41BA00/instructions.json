@@ -1,19 +1,19 @@
 [
   {
     "ea": "0x41BA00",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+skillValue]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x41BA04",
-    "line": "push    eax",
+    "line": "push    eax; skillValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x41BA05",
-    "line": "call    Calc_MasteryFromSkill",
+    "line": "call    Calc_MasteryFromSkill; Map a base skill value to Oblivion's five mastery tiers using iSkillApprenticeMin=25, iSkillJourneymanMin=50, iSkillExpertMin=75, and iSkillMasterMin=100.",
     "mnemonic": "call",
     "size": 5
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x41BA1C",
-    "line": "mov     eax, iWortcraftMaxEffectsApprentice; jumptable 0041BA15 case 1",
+    "line": "mov     eax, ds:0B336D4h; jumptable 0041BA15 case 1",
     "mnemonic": "mov",
     "size": 5
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x41BA22",
-    "line": "mov     eax, iWortcraftMaxEffectsJourneyman; jumptable 0041BA15 case 2",
+    "line": "mov     eax, ds:0B336DCh; jumptable 0041BA15 case 2",
     "mnemonic": "mov",
     "size": 5
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x41BA28",
-    "line": "mov     eax, iWortcraftMaxEffectsExpert; jumptable 0041BA15 case 3",
+    "line": "mov     eax, ds:0B336E4h; jumptable 0041BA15 case 3",
     "mnemonic": "mov",
     "size": 5
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x41BA2E",
-    "line": "mov     eax, iWortcraftMaxEffectsMaster; jumptable 0041BA15 case 4",
+    "line": "mov     eax, ds:0B336ECh; jumptable 0041BA15 case 4",
     "mnemonic": "mov",
     "size": 5
   },

@@ -1,4 +1,4 @@
 void __stdcall nullsub_27(int a1, int a2, int a3, int a4)
 {
-  ;
+  ; /*0x8f7cc0*/
 }

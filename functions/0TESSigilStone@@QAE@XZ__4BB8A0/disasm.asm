@@ -43,3 +43,15 @@
 0x4BB947: pop     ebx
 0x4BB948: add     esp, 10h
 0x4BB94B: retn
+0x9B4150: mov     ecx, [ebp-10h]; this
+0x9B4153: jmp     ??1TESObjectMISC@@UAE@XZ; TESObjectMISC::~TESObjectMISC(void)
+0x9B4158: mov     ecx, [ebp-10h]
+0x9B415B: add     ecx, 70h ; 'p'
+0x9B415E: jmp     TESUsesForm_destr
+0x9B4163: mov     edx, [esp+arg_4]
+0x9B4167: lea     eax, [edx-10h]
+0x9B416A: mov     ecx, [edx-14h]
+0x9B416D: xor     ecx, eax
+0x9B416F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B4174: mov     eax, offset stru_ADF894
+0x9B4179: jmp     ___CxxFrameHandler3

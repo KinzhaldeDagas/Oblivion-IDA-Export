@@ -1,4 +1,4 @@
-0x68EAFD: mov     edx, [esp+arg_5C]
+0x68EAFD: mov     edx, [esp+arg_5C]; Verified (Oblivion): invokes the ActiveEffectFactory returned by the effect-code map and passes the original caster, MagicItem and EffectItem.
 0x68EB01: mov     ecx, [esp+arg_58]
 0x68EB05: push    esi
 0x68EB06: push    edx

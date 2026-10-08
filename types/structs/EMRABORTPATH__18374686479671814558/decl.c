@@ -1,1 +1,4 @@
-EMRABORTPATH
+struct EMRABORTPATH
+{
+EMR emr;
+};

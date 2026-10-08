@@ -1,1 +1,1 @@
-IPropertySetStorage_0
+typedef IPropertySetStorage IPropertySetStorage_0;

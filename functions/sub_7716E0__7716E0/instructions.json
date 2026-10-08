@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7716E0",
-    "line": "cmp     [esp+arg_0], 0",
+    "line": "cmp     [esp+needsNPOTFallback], 0; Conditional NPOT fallback: on the relevant renderer capability path, replace ADDRESSU/V with CLAMP and clear legacy wrap states.",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x77172C",
-    "line": "call    eax",
+    "line": "call    eax; NPOT fallback can replace authored ADDRESSU=WRAP with D3DTADDRESS_CLAMP(3), subject to renderer capability flags.",
     "mnemonic": "call",
     "size": 2
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x771745",
-    "line": "call    edx",
+    "line": "call    edx; NPOT fallback can replace authored ADDRESSV=WRAP with D3DTADDRESS_CLAMP(3), subject to renderer capability flags.",
     "mnemonic": "call",
     "size": 2
   },

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E3490",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; CustomAnimSupport decode: actor animation setup creates ActorAnimData, loads default animation data, then for living NPC/CREA actors calls 0x476080 to load actor-base KFFZ entries from <model-dir>\\SpecialAnims.",
     "mnemonic": "push",
     "size": 2
   },
@@ -49,25 +49,25 @@
   },
   {
     "ea": "0x4E34B2",
-    "line": "push    ebx",
+    "line": "push    ebx; float",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E34B3",
-    "line": "push    ebp",
+    "line": "push    ebp; float",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E34B4",
-    "line": "push    esi",
+    "line": "push    esi; float",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E34B5",
-    "line": "push    edi",
+    "line": "push    edi; float",
     "mnemonic": "push",
     "size": 1
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x4E34BD",
-    "line": "push    eax",
+    "line": "push    eax; float",
     "mnemonic": "push",
     "size": 1
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x4E34FA",
-    "line": "mov     [esp+244h+var_21C], ebx",
+    "line": "mov     [esp+244h+var_21C], ebx; float",
     "mnemonic": "mov",
     "size": 4
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x4E3528",
-    "line": "mov     [esp+240h+var_228], esi",
+    "line": "mov     [esp+240h+var_228], esi; float",
     "mnemonic": "mov",
     "size": 4
   },
@@ -595,19 +595,19 @@
   },
   {
     "ea": "0x4E35D7",
-    "line": "push    0",
+    "line": "push    0; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4E35D9",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E35DB",
-    "line": "call    sub_405790",
+    "line": "call    NiNode_GetChildAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,19 +655,19 @@
   },
   {
     "ea": "0x4E35F9",
-    "line": "push    0",
+    "line": "push    0; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4E35FB",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E35FD",
-    "line": "call    sub_405790",
+    "line": "call    NiNode_GetChildAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -925,7 +925,7 @@
   },
   {
     "ea": "0x4E3691",
-    "line": "call    sub_420FD0",
+    "line": "call    ExtraDataList_GetLastFinishedSequence; Returns the pointer payload of ExtraLastFinishedSequence (type 0x4A), or null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1099,19 +1099,19 @@
   },
   {
     "ea": "0x4E36F1",
-    "line": "push    ecx",
+    "line": "push    ecx; name",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E36F2",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E36F4",
-    "line": "call    sub_4715A0",
+    "line": "call    NiControllerManager_FindSequenceByName; Looks up a NiControllerSequence by name in the controller manager name map at +0x58; returns null on miss.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1123,13 +1123,13 @@
   },
   {
     "ea": "0x4E36FF",
-    "line": "push    edx",
+    "line": "push    edx; name",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E3700",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1141,7 +1141,7 @@
   },
   {
     "ea": "0x4E3704",
-    "line": "call    sub_4715A0",
+    "line": "call    NiControllerManager_FindSequenceByName; Looks up a NiControllerSequence by name in the controller manager name map at +0x58; returns null on miss.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1207,19 +1207,19 @@
   },
   {
     "ea": "0x4E3726",
-    "line": "fstp    dword ptr [esp+244h+var_244]; float",
+    "line": "fstp    dword ptr [esp+244h+var_244]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4E3729",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E372B",
-    "line": "call    sub_4715C0",
+    "line": "call    NiControllerManager_DeactivateAllSequences; Iterates all controller-manager sequence slots and deactivates each sequence with the supplied ease-out time and transition flag zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1243,7 +1243,7 @@
   },
   {
     "ea": "0x4E3737",
-    "line": "push    ebx; int",
+    "line": "push    ebx; timeSyncSequence",
     "mnemonic": "push",
     "size": 1
   },
@@ -1255,7 +1255,7 @@
   },
   {
     "ea": "0x4E373B",
-    "line": "fstp    [esp+24Ch+a2]; float",
+    "line": "fstp    [esp+24Ch+a2]; easeInTime",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1273,31 +1273,31 @@
   },
   {
     "ea": "0x4E3743",
-    "line": "fstp    [esp+24Ch+var_24C]; float",
+    "line": "fstp    [esp+24Ch+weight]; weight",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4E3746",
-    "line": "push    ebx; int",
+    "line": "push    ebx; startOver",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E3747",
-    "line": "push    ebx; int",
+    "line": "push    ebx; priority",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E3748",
-    "line": "push    edi; int",
+    "line": "push    edi; sequence",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E3749",
-    "line": "call    sub_470B20",
+    "line": "call    BSAnimGroupSequence_Activate; BSAnimGroupSequence activation wrapper. Delegates to NiControllerSequence_Activate with the final transition flag forced to zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1351,7 +1351,7 @@
   },
   {
     "ea": "0x4E3766",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1369,19 +1369,19 @@
   },
   {
     "ea": "0x4E376E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E3770",
-    "line": "fstp    dword ptr [esp+244h+var_244]; float",
+    "line": "fstp    dword ptr [esp+244h+var_244]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4E3773",
-    "line": "call    sub_4715C0",
+    "line": "call    NiControllerManager_DeactivateAllSequences; Iterates all controller-manager sequence slots and deactivates each sequence with the supplied ease-out time and transition flag zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1417,7 +1417,7 @@
   },
   {
     "ea": "0x4E378B",
-    "line": "push    0; int",
+    "line": "push    0; timeSyncSequence",
     "mnemonic": "push",
     "size": 2
   },
@@ -1429,7 +1429,7 @@
   },
   {
     "ea": "0x4E3790",
-    "line": "fstp    [esp+24Ch+a2]; float",
+    "line": "fstp    [esp+24Ch+a2]; easeInTime",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1447,31 +1447,31 @@
   },
   {
     "ea": "0x4E3798",
-    "line": "fstp    [esp+24Ch+var_24C]; float",
+    "line": "fstp    [esp+24Ch+weight]; weight",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4E379B",
-    "line": "push    0; int",
+    "line": "push    0; startOver",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4E379D",
-    "line": "push    0; int",
+    "line": "push    0; priority",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4E379F",
-    "line": "push    edi; int",
+    "line": "push    edi; sequence",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E37A0",
-    "line": "call    sub_470B20",
+    "line": "call    BSAnimGroupSequence_Activate; BSAnimGroupSequence activation wrapper. Delegates to NiControllerSequence_Activate with the final transition flag forced to zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1561,7 +1561,7 @@
   },
   {
     "ea": "0x4E37D3",
-    "line": "push    0; int",
+    "line": "push    0; timeSyncSequence",
     "mnemonic": "push",
     "size": 2
   },
@@ -1573,7 +1573,7 @@
   },
   {
     "ea": "0x4E37D8",
-    "line": "fstp    [esp+24Ch+a2]; float",
+    "line": "fstp    [esp+24Ch+a2]; easeInTime",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1591,31 +1591,31 @@
   },
   {
     "ea": "0x4E37E0",
-    "line": "fstp    [esp+24Ch+var_24C]; float",
+    "line": "fstp    [esp+24Ch+weight]; weight",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4E37E3",
-    "line": "push    0; int",
+    "line": "push    0; startOver",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4E37E5",
-    "line": "push    0; int",
+    "line": "push    0; priority",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4E37E7",
-    "line": "push    ebx; int",
+    "line": "push    ebx; sequence",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E37E8",
-    "line": "call    sub_470B20",
+    "line": "call    BSAnimGroupSequence_Activate; BSAnimGroupSequence activation wrapper. Delegates to NiControllerSequence_Activate with the final transition flag forced to zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1747,7 +1747,7 @@
   },
   {
     "ea": "0x4E3835",
-    "line": "call    NewActorAnimData",
+    "line": "call    NewActorAnimData; Allocates and initializes ActorAnimData. Creates the +0x9C 0x65-bucket UInt16 animation-key map; nulls manager/root/accumulation, active-slot, pending-KF, and sequence pointers; initializes current/queued keys to 0xFFFF:0xFFFF, action arrays to -1, update state +0x90 to 0xFF, and blend scales +0xBC/+0xC0 to 1.0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2011,7 +2011,7 @@
   },
   {
     "ea": "0x4E38C5",
-    "line": "call    sub_435830",
+    "line": "call    BuildKFListForModelDirectory; Builds a KF path list for a model directory. Feeds ModelLoader KF discovery used by actor animation setup and generated attack/idle lists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2053,7 +2053,7 @@
   },
   {
     "ea": "0x4E38E6",
-    "line": "mov     [esp+240h+var_214], dx",
+    "line": "mov     word ptr [esp+240h+var_214], dx",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2491,7 +2491,7 @@
   },
   {
     "ea": "0x4E39CA",
-    "line": "call    sub_434850",
+    "line": "call    ModelLoader_BuildFileListWithArchives; Thin wrapper over ModelLoader_BuildFileListWildcard with archive lookup enabled. Power-attack/KF discovery uses this to enumerate candidate model paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2611,7 +2611,7 @@
   },
   {
     "ea": "0x4E3A0F",
-    "line": "call    sub_434850",
+    "line": "call    ModelLoader_BuildFileListWithArchives; Thin wrapper over ModelLoader_BuildFileListWildcard with archive lookup enabled. Power-attack/KF discovery uses this to enumerate candidate model paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2653,7 +2653,7 @@
   },
   {
     "ea": "0x4E3A21",
-    "line": "call    Menu_PickIdles??",
+    "line": "call    Menu_PickIdles; Menu_PickIdles loader. Loads candidate idle KF paths from a list, filters power attacks for menu/player contexts, installs valid sequences, and initializes the selected idle sequence on the target node.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2785,7 +2785,7 @@
   },
   {
     "ea": "0x4E3A68",
-    "line": "call    TESAnimation_HasAnimations",
+    "line": "call    TESAnimation_HasAnimations; TESAnimation has any entries: returns embedded list first data pointer nonzero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2917,7 +2917,7 @@
   },
   {
     "ea": "0x4E3AAB",
-    "line": "push    edx",
+    "line": "push    edx; modelDirectory",
     "mnemonic": "push",
     "size": 1
   },
@@ -2935,25 +2935,25 @@
   },
   {
     "ea": "0x4E3AB1",
-    "line": "call    sub_6899C0",
+    "line": "call    EmbeddedList_GetHead; Creature special anim load: get TESAnimation list head and load entries from <model dir>\\SpecialAnims.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E3AB6",
-    "line": "push    eax",
+    "line": "push    eax; kffzEntries",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E3AB7",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E3AB9",
-    "line": "call    sub_476080",
+    "line": "call    ActorAnimData_LoadKFFZSpecialAnims; Creature branch: the first of exactly two direct ActorAnimData_LoadKFFZSpecialAnims call sites; reached only for a living creature after default animation setup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3055,7 +3055,7 @@
   },
   {
     "ea": "0x4E3AFE",
-    "line": "call    NewActorAnimData",
+    "line": "call    NewActorAnimData; Allocates and initializes ActorAnimData. Creates the +0x9C 0x65-bucket UInt16 animation-key map; nulls manager/root/accumulation, active-slot, pending-KF, and sequence pointers; initializes current/queued keys to 0xFFFF:0xFFFF, action arrays to -1, update state +0x90 to 0xFF, and blend scales +0xBC/+0xC0 to 1.0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3109,7 +3109,7 @@
   },
   {
     "ea": "0x4E3B1F",
-    "line": "mov     [esp+240h+var_224], eax",
+    "line": "mov     [esp+240h+var_224], eax; float",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3151,7 +3151,7 @@
   },
   {
     "ea": "0x4E3B30",
-    "line": "mov     [esp+240h+var_220], ebx",
+    "line": "mov     [esp+240h+var_220], ebx; float",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3325,7 +3325,7 @@
   },
   {
     "ea": "0x4E3B94",
-    "line": "call    sub_435830",
+    "line": "call    BuildKFListForModelDirectory; Builds a KF path list for a model directory. Feeds ModelLoader KF discovery used by actor animation setup and generated attack/idle lists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3355,7 +3355,7 @@
   },
   {
     "ea": "0x4E3BAC",
-    "line": "mov     dword ptr [esp+240h+Str], eax",
+    "line": "mov     dword ptr [esp+240h+Str], eax; float",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3367,7 +3367,7 @@
   },
   {
     "ea": "0x4E3BB4",
-    "line": "mov     [esp+240h+var_214], cx",
+    "line": "mov     word ptr [esp+240h+var_214], cx; float",
     "mnemonic": "mov",
     "size": 5
   },
@@ -3550,12 +3550,6 @@
     "line": "jmp     short loc_4E3C20",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x4E3C1D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x4E3C20",
@@ -3811,7 +3805,7 @@
   },
   {
     "ea": "0x4E3C9A",
-    "line": "call    sub_434850",
+    "line": "call    ModelLoader_BuildFileListWithArchives; Thin wrapper over ModelLoader_BuildFileListWildcard with archive lookup enabled. Power-attack/KF discovery uses this to enumerate candidate model paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3931,7 +3925,7 @@
   },
   {
     "ea": "0x4E3CDF",
-    "line": "call    sub_434850",
+    "line": "call    ModelLoader_BuildFileListWithArchives; Thin wrapper over ModelLoader_BuildFileListWildcard with archive lookup enabled. Power-attack/KF discovery uses this to enumerate candidate model paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3967,7 +3961,7 @@
   },
   {
     "ea": "0x4E3CEF",
-    "line": "call    Menu_PickIdles??",
+    "line": "call    Menu_PickIdles; Menu_PickIdles loader. Loads candidate idle KF paths from a list, filters power attacks for menu/player contexts, installs valid sequences, and initializes the selected idle sequence on the target node.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4099,7 +4093,7 @@
   },
   {
     "ea": "0x4E3D36",
-    "line": "call    TESAnimation_HasAnimations",
+    "line": "call    TESAnimation_HasAnimations; TESAnimation has any entries: returns embedded list first data pointer nonzero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4141,7 +4135,7 @@
   },
   {
     "ea": "0x4E3D50",
-    "line": "lea     edx, [esp+240h+var_114]",
+    "line": "lea     edx, [esp+240h+modelDirectory]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -4183,7 +4177,7 @@
   },
   {
     "ea": "0x4E3D65",
-    "line": "lea     ecx, [esp+240h+var_114]",
+    "line": "lea     ecx, [esp+240h+modelDirectory]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -4225,13 +4219,13 @@
   },
   {
     "ea": "0x4E3D7B",
-    "line": "lea     edx, [esp+240h+var_114]",
+    "line": "lea     edx, [esp+240h+modelDirectory]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x4E3D82",
-    "line": "push    edx",
+    "line": "push    edx; modelDirectory",
     "mnemonic": "push",
     "size": 1
   },
@@ -4249,25 +4243,25 @@
   },
   {
     "ea": "0x4E3D88",
-    "line": "call    sub_6899C0",
+    "line": "call    EmbeddedList_GetHead; NPC special anim load: get TESAnimation list head and load entries from <model dir>\\SpecialAnims.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E3D8D",
-    "line": "mov     ecx, [esp+244h+var_224]",
+    "line": "mov     ecx, [esp+244h+var_224]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E3D91",
-    "line": "push    eax",
+    "line": "push    eax; kffzEntries",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E3D92",
-    "line": "call    sub_476080",
+    "line": "call    ActorAnimData_LoadKFFZSpecialAnims; NPC/player actor-base branch: the second of exactly two direct ActorAnimData_LoadKFFZSpecialAnims call sites; loads the base model KFFZ list, not PlayerCharacter::firstPersonAnimData.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4357,7 +4351,7 @@
   },
   {
     "ea": "0x4E3DC0",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -4375,13 +4369,13 @@
   },
   {
     "ea": "0x4E3DCA",
-    "line": "push    1",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4E3DCC",
-    "line": "call    sub_6600D0",
+    "line": "call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4429,7 +4423,7 @@
   },
   {
     "ea": "0x4E3DE5",
-    "line": "push    1; a2",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
@@ -4441,7 +4435,7 @@
   },
   {
     "ea": "0x4E3DED",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4525,7 +4519,7 @@
   },
   {
     "ea": "0x4E3E0E",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -4537,7 +4531,7 @@
   },
   {
     "ea": "0x4E3E16",
-    "line": "call    TESObjectREFR_GetAnimData",
+    "line": "call    TESObjectREFR_GetAnimData; Return active ActorAnimData for an actor reference. For actor/creature refs with process level 0 or 1, return process+0x17C; otherwise tail-call the ExtraAnim lookup on the reference extra list. Exact return type is ActorAnimData*.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4621,7 +4615,7 @@
   },
   {
     "ea": "0x4E3E3C",
-    "line": "fstp    dword ptr [esp+248h+var_244]; float",
+    "line": "fstp    dword ptr [esp+248h+var_244]; explicitTimeOrMinusOne",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -4633,19 +4627,19 @@
   },
   {
     "ea": "0x4E3E42",
-    "line": "fstp    [esp+248h+a2]; float",
+    "line": "fstp    [esp+248h+a2]; deltaTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4E3E45",
-    "line": "push    ebp; int",
+    "line": "push    ebp; ownerActor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E3E46",
-    "line": "call    sub_476D10",
+    "line": "call    ActorAnimData_Update; Oblivion ActorAnimData scheduler with exact native ABI: this in ECX plus three 4-byte stack arguments, retn 0x0C. ownerActor is at [EBP+8]; all surveyed callers pass the owning Actor/Player, but the native body never dereferences it, so an interior hook's use of that value is a caller-derived contract. deltaTime at [EBP+0x0C] advances ActorAnimData time +0x94 and sequence offsets. explicitTimeOrMinusOne at [EBP+0x10] uses -1.0 for normal ticking; any other value drives an explicit-time scene update/early return. The function drains deferred KF models, maintains power/idle state, samples five slots, and advances required-note templates (class 4 terminal index 3; class 7 terminal index 4).",
     "mnemonic": "call",
     "size": 5
   },
@@ -4873,7 +4867,7 @@
   },
   {
     "ea": "0x4E3EAE",
-    "line": "push    1; a2",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
@@ -4885,7 +4879,7 @@
   },
   {
     "ea": "0x4E3EB6",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4921,7 +4915,7 @@
   },
   {
     "ea": "0x4E3EC6",
-    "line": "push    offset dword_B3CD7C",
+    "line": "push    offset stru_B3CD7C",
     "mnemonic": "push",
     "size": 5
   },
@@ -4963,7 +4957,7 @@
   },
   {
     "ea": "0x4E3EDE",
-    "line": "call    sub_41E620",
+    "line": "call    ExtraDataList_GetAnimation; Returns ExtraAnim (type 0x34). Confirmed by Actor_SetupAnimationData consumer and ExtraDataList_SetAnimation ownership behavior.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5023,7 +5017,7 @@
   },
   {
     "ea": "0x4E3EFA",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5110,5 +5104,131 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9B5C40",
+    "line": "mov     eax, [ebp-21Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B5C46",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5C47",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5C4C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5C4D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5C4E",
+    "line": "mov     eax, [ebp-220h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B5C54",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5C55",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5C5A",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5C5B",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5C5C",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B5C60",
+    "line": "lea     eax, [edx-230h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B5C66",
+    "line": "mov     ecx, [edx-234h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B5C6C",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B5C6E",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5C73",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5C76",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5C79",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B5C7B",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5C80",
+    "line": "mov     eax, offset stru_AE0C24",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5C85",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

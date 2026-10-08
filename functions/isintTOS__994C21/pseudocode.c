@@ -1,13 +1,18 @@
-int __usercall isintTOS@<eax>(double a1@<st0>)
+void __usercall isintTOS(double a1@<st0>)
 {
-  _ST6 = a1;
-  __asm { frndint }
-  if ( _ST6 != a1 )
-    return isintTOS_::notanint();
-  _ST5 = a1 * dbl_B31D02;
-  __asm { frndint }
-  if ( _ST5 == a1 * dbl_B31D02 )
-    return isintTOS_::evenint();
+  _ST6 = a1; /*0x994c21*/
+  __asm { frndint } /*0x994c23*/
+  if ( _ST6 == a1 ) /*0x994c2b*/
+  {
+    _ST5 = a1 * dbl_B31D02; /*0x994c35*/
+    __asm { frndint } /*0x994c37*/
+    if ( _ST5 == a1 * dbl_B31D02 ) /*0x994c3f*/
+      isintTOS_::evenint(); /*0x994c3f*/
+    else
+      isintTOS_::_isintTOSret(); /*0x994c42*/
+  }
   else
-    return isintTOS_::_isintTOSret();
+  {
+    isintTOS_::notanint(); /*0x994c2b*/
+  }
 }

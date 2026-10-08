@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x762110",
-    "line": "push    esi; MaxCount",
+    "line": "push    esi; Initialize Oblivion DX9 device state/capabilities and runtime sampler preset tables. Preset values are written at 0x7622D6..0x76236C; image defaults remain -1.",
     "mnemonic": "push",
     "size": 1
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x76213B",
-    "line": "push    offset byte_B3F828; Dst",
+    "line": "push    offset unk_B3F828; Dst",
     "mnemonic": "push",
     "size": 5
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x76214A",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x7622D6",
-    "line": "mov     eax, 3",
+    "line": "mov     eax, 3; Begin runtime sampler preset initialization. D3DTADDRESS_CLAMP=3; D3DTADDRESS_WRAP=1.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x7622F1",
-    "line": "mov     eax, 2",
+    "line": "mov     eax, 2; Initialize native filter rows. D3DTEXF_NONE=0, D3DTEXF_POINT=1, D3DTEXF_LINEAR=2.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -901,7 +901,7 @@
   },
   {
     "ea": "0x7623AA",
-    "line": "push    offset byte_B3F828; Dst",
+    "line": "push    offset unk_B3F828; Dst",
     "mnemonic": "push",
     "size": 5
   },
@@ -919,7 +919,7 @@
   },
   {
     "ea": "0x7623B9",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },

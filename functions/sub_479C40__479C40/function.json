@@ -1,19 +1,36 @@
 {
-  "callees_count": 53,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 26,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_479C40",
+  "chunks": [
+    [
+      "0x479C40",
+      "0x479F76"
+    ],
+    [
+      "0x9AF170",
+      "0x9AF1A3"
+    ]
+  ],
+  "chunks_sha256": "74dfd731938440cac2276edea405c0fe58273530c95d2f43f91e50116d23a01e",
+  "comment_regular": "Oblivion equipped-AMMO 3D path on ActorSkinInfo. Clears/rebuilds AmmoForm/AmmoModel/AmmoObject at +0x10C/+0x110/+0x114, attaches through native Prn handling, and caches the loaded 3D.",
+  "comment_repeatable": "Oblivion equipped-AMMO 3D path on ActorSkinInfo. Clears/rebuilds AmmoForm/AmmoModel/AmmoObject at +0x10C/+0x110/+0x114, attaches through native Prn handling, and caches the loaded 3D.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 7,
+  "display_name": "ActorSkinInfo_SetEquippedAmmo3D",
   "end_ea": "0x479F76",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_479C40",
+  "name": "ActorSkinInfo_SetEquippedAmmo3D",
   "segment": ".text",
   "sha256": "1293b7f267f0eee81a208d3f4265d8461aaa12a35386b3495c49820f1d40e2a9",
   "size": 822,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x479C40",
-  "type": "void __userpurge(char *this@<ecx>, double st5_0@<st2>, double@<st1>, double@<st0>, UInt32)",
-  "xrefs_from_count": 320,
+  "total_chunk_size": 873,
+  "type": "void __thiscall(ActorSkinInfo *this, TESForm *ammo)",
+  "xrefs_from_count": 335,
   "xrefs_to_count": 1
 }

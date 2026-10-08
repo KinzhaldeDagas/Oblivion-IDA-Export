@@ -1,27 +1,27 @@
 0x4120D0: push    esi
 0x4120D1: mov     esi, ecx
-0x4120D3: mov     ecx, SaveLoad_CurrentSavegame
-0x4120D9: push    20h ; ' '; Size
+0x4120D3: mov     ecx, g_TESSaveLoadGame; self
+0x4120D9: push    20h ; ' '; byteCount
 0x4120DB: lea     eax, [esi+4]
-0x4120DE: push    eax; Dst
-0x4120DF: call    SaveLoad_LoadData
+0x4120DE: push    eax; destination
+0x4120DF: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x4120E4: cmp     word ptr [esp+4+Dst], 0FFFFh
 0x4120EB: jnz     short loc_4120FF
-0x4120ED: push    2; Size
+0x4120ED: push    2; byteCount
 0x4120EF: lea     ecx, [esp+8+Dst]
-0x4120F3: push    ecx; Dst
-0x4120F4: mov     ecx, SaveLoad_CurrentSavegame
-0x4120FA: call    SaveLoad_LoadData
-0x4120FF: mov     ecx, SaveLoad_CurrentSavegame
-0x412105: push    1; Size
+0x4120F3: push    ecx; destination
+0x4120F4: mov     ecx, g_TESSaveLoadGame; self
+0x4120FA: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
+0x4120FF: mov     ecx, g_TESSaveLoadGame; self
+0x412105: push    1; byteCount
 0x412107: lea     edx, [esi+24h]
-0x41210A: push    edx; Dst
-0x41210B: call    SaveLoad_LoadData
-0x412110: mov     ecx, SaveLoad_CurrentSavegame
-0x412116: push    1; Size
+0x41210A: push    edx; destination
+0x41210B: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
+0x412110: mov     ecx, g_TESSaveLoadGame; self
+0x412116: push    1; byteCount
 0x412118: lea     eax, [esi+25h]
-0x41211B: push    eax; Dst
-0x41211C: call    SaveLoad_LoadData
+0x41211B: push    eax; destination
+0x41211C: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x412121: mov     eax, [esp+4+Dst]
 0x412125: add     eax, 0FFFFh
 0x41212A: test    ax, ax

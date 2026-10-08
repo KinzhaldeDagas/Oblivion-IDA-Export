@@ -683,7 +683,7 @@
 0x44B5C5: mov     [esp+0C8h+var_4], 0Ch
 0x44B5D0: jz      short loc_44B5DD
 0x44B5D2: mov     ecx, eax; this
-0x44B5D4: call    ??0TESWorldSpace@@QAE@XZ; TESWorldSpace::TESWorldSpace(void)
+0x44B5D4: call    ??0TESWorldSpace@@QAE@XZ; Verified: TESWorldSpace constructor initializes road (+0x54) to null. In this Oblivion build, the field is a TESRoad* owned by WorldSpace: the destructor releases it, CreateDuplicateForm clones it and verifies the clone's TESRoad RTTI, and TESRoad grouping code uses the reciprocal owner pointer. The adjacent +0x4C and +0x50 fields remain Unknown. Fallout's TESWorldSpace has a different layout and no TESRoad-named type or function was found in the available name/type searches; no Fallout homolog is claimed.
 0x44B5D9: mov     esi, eax
 0x44B5DB: jmp     short loc_44B5DF
 0x44B5DD: xor     esi, esi
@@ -1027,7 +1027,7 @@
 0x44BA7C: mov     [esp+0C8h+var_4], 12h
 0x44BA87: jz      short loc_44BA92
 0x44BA89: mov     ecx, eax; this
-0x44BA8B: call    ??0TESObjectDOOR@@QAE@XZ; TESObjectDOOR::TESObjectDOOR(void)
+0x44BA8B: call    ??0TESObjectDOOR@@QAE@XZ; Verified constructor initializes TESObjectDOORMembr.randomTeleport's inline BSSimpleList head (+0x68/+0x6C in TESObjectDOOR) to empty and doorFlags to zero; installs TESObjectDOOR and base-component vtables.
 0x44BA90: jmp     short loc_44BA94
 0x44BA92: xor     eax, eax
 0x44BA94: push    1; a3
@@ -1694,7 +1694,6 @@
 0x44C4B8: mov     [esp+0C8h+var_10], offset aFurniturema_18; "FurnitureMarker20"
 0x44C4C3: mov     [esp+0C8h+var_B4], ebx
 0x44C4C7: jmp     short loc_44C4D0
-0x44C4C9: align 10h
 0x44C4D0: mov     eax, [esp+0C8h+var_B4]
 0x44C4D4: mov     ebp, [esp+eax+0C8h+a2]
 0x44C4D8: cmp     ebp, ebx
@@ -1761,7 +1760,7 @@
 0x44C595: cmp     eax, 50h ; 'P'
 0x44C598: mov     [esp+0C8h+var_B4], eax
 0x44C59C: jl      loc_44C4D0
-0x44C5A2: call    sub_52FE90
+0x44C5A2: call    InitializeStockDialogueTopics; TESDataHandler built-in-object creation initializes the complete fixed stock-dialogue registry before normal dialogue use, guaranteeing GREETING/HELLO/ANY/GOODBYE/INFO GENERAL and the remaining stock topics exist by fixed FormID.
 0x44C5A7: mov     edx, ds:0B0613Ch
 0x44C5AD: mov     eax, [edx+4]
 0x44C5B0: push    35h ; '5'
@@ -2313,7 +2312,6 @@
 0x44CC84: cmp     esi, ebx
 0x44CC86: jz      short loc_44CCBD
 0x44CC88: jmp     short loc_44CC90
-0x44CC8A: align 10h
 0x44CC90: mov     edx, [esi+4]
 0x44CC93: mov     eax, ds:0B0613Ch
 0x44CC98: push    edx
@@ -2337,7 +2335,7 @@
 0x44CCCD: mov     [esp+0C8h+var_4], 26h ; '&'
 0x44CCD8: jz      short loc_44CCE5
 0x44CCDA: mov     ecx, eax; this
-0x44CCDC: call    ??0TESClimate@@QAE@XZ; TESClimate::TESClimate(void)
+0x44CCDC: call    TESClimate_ctor; Verified: constructs Climate FormType 0x2E, list at +0x30, two textures at +0x38, six initialized bytes at +0x50..+0x55; total layout is 0x58.
 0x44CCE1: mov     esi, eax
 0x44CCE3: jmp     short loc_44CCE7
 0x44CCE5: xor     esi, esi
@@ -2351,8 +2349,8 @@
 0x44CD04: push    offset aDefaultclimate; "DefaultClimate"
 0x44CD09: mov     ecx, esi
 0x44CD0B: call    edx
-0x44CD0D: mov     ecx, esi
-0x44CD0F: call    sub_4BEE70
+0x44CD0D: mov     ecx, esi; this
+0x44CD0F: call    TESClimate_MakeDefault; Verified: inserts default weather FormID 0x15E into the climate list with selectionWeight 100; the Oblivion selector confirms this controls weighted selection.
 0x44CD14: cmp     [edi+14h], ebx
 0x44CD17: jz      short loc_44CD3C
 0x44CD19: push    8; Size
@@ -2369,11 +2367,11 @@
 0x44CD36: mov     [eax+4], edx
 0x44CD39: mov     [edi+18h], eax
 0x44CD3C: mov     [edi+14h], esi
-0x44CD3F: push    1
-0x44CD41: push    ebx
+0x44CD3F: push    1; forceRefresh
+0x44CD41: push    ebx; climate
 0x44CD42: call    Sky_CreateOrGetGlobalObject
-0x44CD47: mov     ecx, eax
-0x44CD49: call    Sky_CreateChildGlobalObjects
+0x44CD47: mov     ecx, eax; this
+0x44CD49: call    Sky_SetClimateAndRefreshChildren; Verified initialization path: after TESDataHandler_CreateBuiltinObjects registers the default Climate in climateList +0x14, it calls Sky_CreateOrGetGlobalObject then Sky_SetClimateAndRefreshChildren(defaultClimate, forceRefresh=1).
 0x44CD4E: call    Magic_ConstructGlobalData
 0x44CD53: call    TESSound_CreateGlobalSounds
 0x44CD58: mov     ecx, dword ptr [esp+0C8h+var_C]
@@ -2385,3 +2383,205 @@
 0x44CD6A: pop     ebx
 0x44CD6B: add     esp, 0B4h
 0x44CD71: retn
+0x9ADA20: mov     eax, [ebp-0B4h]
+0x9ADA26: push    eax
+0x9ADA27: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADA2C: pop     ecx
+0x9ADA2D: retn
+0x9ADA2E: mov     eax, [ebp-0B4h]
+0x9ADA34: push    eax
+0x9ADA35: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADA3A: pop     ecx
+0x9ADA3B: retn
+0x9ADA3C: mov     eax, [ebp-0B4h]
+0x9ADA42: push    eax
+0x9ADA43: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADA48: pop     ecx
+0x9ADA49: retn
+0x9ADA4A: mov     eax, [ebp-0B4h]
+0x9ADA50: push    eax
+0x9ADA51: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADA56: pop     ecx
+0x9ADA57: retn
+0x9ADA58: mov     eax, [ebp-0B4h]
+0x9ADA5E: push    eax
+0x9ADA5F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADA64: pop     ecx
+0x9ADA65: retn
+0x9ADA66: mov     eax, [ebp-0B4h]
+0x9ADA6C: push    eax
+0x9ADA6D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADA72: pop     ecx
+0x9ADA73: retn
+0x9ADA74: mov     eax, [ebp-0B4h]
+0x9ADA7A: push    eax
+0x9ADA7B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADA80: pop     ecx
+0x9ADA81: retn
+0x9ADA82: mov     eax, [ebp-0B4h]
+0x9ADA88: push    eax
+0x9ADA89: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADA8E: pop     ecx
+0x9ADA8F: retn
+0x9ADA90: mov     eax, [ebp-0B4h]
+0x9ADA96: push    eax
+0x9ADA97: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADA9C: pop     ecx
+0x9ADA9D: retn
+0x9ADA9E: mov     eax, [ebp-0B4h]
+0x9ADAA4: push    eax
+0x9ADAA5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADAAA: pop     ecx
+0x9ADAAB: retn
+0x9ADAAC: mov     eax, [ebp-0B4h]
+0x9ADAB2: push    eax
+0x9ADAB3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADAB8: pop     ecx
+0x9ADAB9: retn
+0x9ADABA: mov     eax, [ebp-0B4h]
+0x9ADAC0: push    eax
+0x9ADAC1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADAC6: pop     ecx
+0x9ADAC7: retn
+0x9ADAC8: mov     eax, [ebp-0B4h]
+0x9ADACE: push    eax
+0x9ADACF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADAD4: pop     ecx
+0x9ADAD5: retn
+0x9ADAD6: mov     eax, [ebp-0B4h]
+0x9ADADC: push    eax
+0x9ADADD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADAE2: pop     ecx
+0x9ADAE3: retn
+0x9ADAE4: mov     eax, [ebp-0B4h]
+0x9ADAEA: push    eax
+0x9ADAEB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADAF0: pop     ecx
+0x9ADAF1: retn
+0x9ADAF2: mov     eax, [ebp-0B4h]
+0x9ADAF8: push    eax
+0x9ADAF9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADAFE: pop     ecx
+0x9ADAFF: retn
+0x9ADB00: mov     eax, [ebp-0B4h]
+0x9ADB06: push    eax
+0x9ADB07: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADB0C: pop     ecx
+0x9ADB0D: retn
+0x9ADB0E: mov     eax, [ebp-0B4h]
+0x9ADB14: push    eax
+0x9ADB15: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADB1A: pop     ecx
+0x9ADB1B: retn
+0x9ADB1C: mov     eax, [ebp-0B4h]
+0x9ADB22: push    eax
+0x9ADB23: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADB28: pop     ecx
+0x9ADB29: retn
+0x9ADB2A: mov     eax, [ebp-0B4h]
+0x9ADB30: push    eax
+0x9ADB31: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADB36: pop     ecx
+0x9ADB37: retn
+0x9ADB38: mov     eax, [ebp-0B4h]
+0x9ADB3E: push    eax
+0x9ADB3F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADB44: pop     ecx
+0x9ADB45: retn
+0x9ADB46: mov     eax, [ebp-0B4h]
+0x9ADB4C: push    eax
+0x9ADB4D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADB52: pop     ecx
+0x9ADB53: retn
+0x9ADB54: mov     eax, [ebp-0B4h]
+0x9ADB5A: push    eax
+0x9ADB5B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADB60: pop     ecx
+0x9ADB61: retn
+0x9ADB62: mov     eax, [ebp-0B4h]
+0x9ADB68: push    eax
+0x9ADB69: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADB6E: pop     ecx
+0x9ADB6F: retn
+0x9ADB70: mov     eax, [ebp-0B4h]
+0x9ADB76: push    eax
+0x9ADB77: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADB7C: pop     ecx
+0x9ADB7D: retn
+0x9ADB7E: mov     eax, [ebp-0B4h]
+0x9ADB84: push    eax
+0x9ADB85: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADB8A: pop     ecx
+0x9ADB8B: retn
+0x9ADB8C: mov     eax, [ebp-0B4h]
+0x9ADB92: push    eax
+0x9ADB93: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADB98: pop     ecx
+0x9ADB99: retn
+0x9ADB9A: mov     eax, [ebp-0B4h]
+0x9ADBA0: push    eax
+0x9ADBA1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADBA6: pop     ecx
+0x9ADBA7: retn
+0x9ADBA8: mov     eax, [ebp-0B4h]
+0x9ADBAE: push    eax
+0x9ADBAF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADBB4: pop     ecx
+0x9ADBB5: retn
+0x9ADBB6: mov     eax, [ebp-0B0h]
+0x9ADBBC: push    eax
+0x9ADBBD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADBC2: pop     ecx
+0x9ADBC3: retn
+0x9ADBC4: mov     eax, [ebp-0B0h]
+0x9ADBCA: push    eax
+0x9ADBCB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADBD0: pop     ecx
+0x9ADBD1: retn
+0x9ADBD2: mov     eax, [ebp-0B0h]
+0x9ADBD8: push    eax
+0x9ADBD9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADBDE: pop     ecx
+0x9ADBDF: retn
+0x9ADBE0: mov     eax, [ebp-0B0h]
+0x9ADBE6: push    eax
+0x9ADBE7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADBEC: pop     ecx
+0x9ADBED: retn
+0x9ADBEE: mov     eax, [ebp-0B0h]
+0x9ADBF4: push    eax
+0x9ADBF5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADBFA: pop     ecx
+0x9ADBFB: retn
+0x9ADBFC: mov     eax, [ebp-0B0h]
+0x9ADC02: push    eax
+0x9ADC03: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADC08: pop     ecx
+0x9ADC09: retn
+0x9ADC0A: mov     eax, [ebp-0B0h]
+0x9ADC10: push    eax
+0x9ADC11: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADC16: pop     ecx
+0x9ADC17: retn
+0x9ADC18: mov     eax, [ebp-0B0h]
+0x9ADC1E: push    eax
+0x9ADC1F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADC24: pop     ecx
+0x9ADC25: retn
+0x9ADC26: mov     eax, [ebp-0B0h]
+0x9ADC2C: push    eax
+0x9ADC2D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADC32: pop     ecx
+0x9ADC33: retn
+0x9ADC34: mov     eax, [ebp-0B0h]
+0x9ADC3A: push    eax
+0x9ADC3B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADC40: pop     ecx
+0x9ADC41: retn
+0x9ADC42: mov     edx, [esp+arg_4]
+0x9ADC46: lea     eax, [edx-0B8h]
+0x9ADC4C: mov     ecx, [edx-0BCh]
+0x9ADC52: xor     ecx, eax
+0x9ADC54: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9ADC59: mov     eax, offset stru_ADA484
+0x9ADC5E: jmp     ___CxxFrameHandler3

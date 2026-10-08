@@ -20,7 +20,7 @@
 0x9016D0: lea     eax, [esp+18h+var_8]
 0x9016D4: push    eax
 0x9016D5: call    dword ptr [edx+1Ch]
-0x9016D8: mov     eax, dword ptr [esp+18h+var_8]
+0x9016D8: mov     eax, [esp+18h+var_8]
 0x9016DC: mov     ebx, [esi+4]
 0x9016DF: cmp     eax, ebx
 0x9016E1: mov     edi, eax

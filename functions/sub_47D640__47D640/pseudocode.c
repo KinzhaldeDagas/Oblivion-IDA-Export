@@ -2,119 +2,119 @@ signed int __cdecl sub_47D640(char a1)
 {
   signed int result; // eax
 
-  switch ( a1 )
+  switch ( a1 ) /*0x47d658*/
   {
-    case 0xA:
-      result = 0x1A;
-      break;
-    case 0xE:
-      result = 0x1B;
-      break;
-    case 0xF:
-      result = 0x12;
-      break;
-    case 0x10:
-      result = 0x11;
-      break;
-    case 0x12:
-      result = 0;
-      break;
-    case 0x13:
-      result = 1;
-      break;
-    case 0x14:
-      result = 2;
-      break;
-    case 0x15:
-      result = 3;
-      break;
-    case 0x16:
-      result = 4;
-      break;
-    case 0x17:
-      result = 5;
-      break;
-    case 0x18:
-      result = 6;
-      break;
-    case 0x19:
-      result = 7;
-      break;
-    case 0x1A:
-      result = 8;
-      break;
-    case 0x1B:
-      result = 9;
-      break;
-    case 0x1C:
-      result = 0xA;
-      break;
-    case 0x1D:
-      result = 0xB;
-      break;
-    case 0x1E:
-      result = 0xC;
-      break;
-    case 0x1F:
-      result = 0x18;
-      break;
-    case 0x20:
-      result = 0x19;
-      break;
-    case 0x21:
-      result = 0xD;
-      break;
-    case 0x22:
-      result = 0x17;
-      break;
-    case 0x23:
-      result = 0xE;
-      break;
-    case 0x24:
-      result = 0xF;
-      break;
-    case 0x25:
-      result = 0x10;
-      break;
-    case 0x26:
-      result = 0x16;
-      break;
-    case 0x27:
-      result = 0x15;
-      break;
-    case 0x28:
-      result = 0x13;
-      break;
-    case 0x29:
-      result = 0x21;
-      break;
-    case 0x2A:
-      result = 0x23;
-      break;
-    case 0x2B:
-      result = 0x14;
-      break;
-    case 0x3E:
-      result = 0x1C;
-      break;
-    case 0x3F:
-      result = 0x1D;
-      break;
-    case 0x40:
-      result = 0x1E;
-      break;
-    case 0x41:
-      result = 0x1F;
-      break;
-    case 0x42:
-      result = 0x20;
-      break;
-    case 0x43:
-      result = 0x22;
-      break;
+    case 0xA: /*0x47d658*/
+      result = 0x1A; /*0x47d6f2*/
+      break; /*0x47d6f7*/
+    case 0xE: /*0x47d658*/
+      result = 0x1B; /*0x47d6ec*/
+      break; /*0x47d6f1*/
+    case 0xF: /*0x47d658*/
+      result = 0x12; /*0x47d6da*/
+      break; /*0x47d6df*/
+    case 0x10: /*0x47d658*/
+      result = 0x11; /*0x47d6d4*/
+      break; /*0x47d6d9*/
+    case 0x12: /*0x47d658*/
+      result = 0; /*0x47d65f*/
+      break; /*0x47d661*/
+    case 0x13: /*0x47d658*/
+      result = 1; /*0x47d662*/
+      break; /*0x47d667*/
+    case 0x14: /*0x47d658*/
+      result = 2; /*0x47d668*/
+      break; /*0x47d66d*/
+    case 0x15: /*0x47d658*/
+      result = 3; /*0x47d66e*/
+      break; /*0x47d673*/
+    case 0x16: /*0x47d658*/
+      result = 4; /*0x47d674*/
+      break; /*0x47d679*/
+    case 0x17: /*0x47d658*/
+      result = 5; /*0x47d67a*/
+      break; /*0x47d67f*/
+    case 0x18: /*0x47d658*/
+      result = 6; /*0x47d680*/
+      break; /*0x47d685*/
+    case 0x19: /*0x47d658*/
+      result = 7; /*0x47d686*/
+      break; /*0x47d68b*/
+    case 0x1A: /*0x47d658*/
+      result = 8; /*0x47d68c*/
+      break; /*0x47d691*/
+    case 0x1B: /*0x47d658*/
+      result = 9; /*0x47d692*/
+      break; /*0x47d697*/
+    case 0x1C: /*0x47d658*/
+      result = 0xA; /*0x47d6a4*/
+      break; /*0x47d6a9*/
+    case 0x1D: /*0x47d658*/
+      result = 0xB; /*0x47d6aa*/
+      break; /*0x47d6af*/
+    case 0x1E: /*0x47d658*/
+      result = 0xC; /*0x47d6b0*/
+      break; /*0x47d6b5*/
+    case 0x1F: /*0x47d658*/
+      result = 0x18; /*0x47d6fe*/
+      break; /*0x47d703*/
+    case 0x20: /*0x47d658*/
+      result = 0x19; /*0x47d6f8*/
+      break; /*0x47d6fd*/
+    case 0x21: /*0x47d658*/
+      result = 0xD; /*0x47d6b6*/
+      break; /*0x47d6bb*/
+    case 0x22: /*0x47d658*/
+      result = 0x17; /*0x47d6bc*/
+      break; /*0x47d6c1*/
+    case 0x23: /*0x47d658*/
+      result = 0xE; /*0x47d6c2*/
+      break; /*0x47d6c7*/
+    case 0x24: /*0x47d658*/
+      result = 0xF; /*0x47d6c8*/
+      break; /*0x47d6cd*/
+    case 0x25: /*0x47d658*/
+      result = 0x10; /*0x47d6ce*/
+      break; /*0x47d6d3*/
+    case 0x26: /*0x47d658*/
+      result = 0x16; /*0x47d698*/
+      break; /*0x47d69d*/
+    case 0x27: /*0x47d658*/
+      result = 0x15; /*0x47d69e*/
+      break; /*0x47d6a3*/
+    case 0x28: /*0x47d658*/
+      result = 0x13; /*0x47d6e0*/
+      break; /*0x47d6e5*/
+    case 0x29: /*0x47d658*/
+      result = 0x21; /*0x47d722*/
+      break; /*0x47d727*/
+    case 0x2A: /*0x47d658*/
+      result = 0x23; /*0x47d72e*/
+      break; /*0x47d733*/
+    case 0x2B: /*0x47d658*/
+      result = 0x14; /*0x47d6e6*/
+      break; /*0x47d6eb*/
+    case 0x3E: /*0x47d658*/
+      result = 0x1C; /*0x47d704*/
+      break; /*0x47d709*/
+    case 0x3F: /*0x47d658*/
+      result = 0x1D; /*0x47d70a*/
+      break; /*0x47d70f*/
+    case 0x40: /*0x47d658*/
+      result = 0x1E; /*0x47d710*/
+      break; /*0x47d715*/
+    case 0x41: /*0x47d658*/
+      result = 0x1F; /*0x47d716*/
+      break; /*0x47d71b*/
+    case 0x42: /*0x47d658*/
+      result = 0x20; /*0x47d71c*/
+      break; /*0x47d721*/
+    case 0x43: /*0x47d658*/
+      result = 0x22; /*0x47d728*/
+      break; /*0x47d72d*/
     default:
-      result = 0xFFFFFFFF;
-      break;
+      result = 0xFFFFFFFF; /*0x47d734*/
+      break; /*0x47d734*/
   }
-  return result;
+  return result; /*0x47d661*/
 }

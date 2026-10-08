@@ -3,7 +3,7 @@
 0x436FD3: mov     eax, [esi+20h]
 0x436FD6: push    eax
 0x436FD7: mov     dword ptr [esi], offset ??_7QueuedFileEntry@@6B@; const QueuedFileEntry::`vftable'
-0x436FDD: call    FormHeapFree
+0x436FDD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x436FE2: add     esp, 4
 0x436FE5: mov     ecx, esi; this
 0x436FE7: pop     esi

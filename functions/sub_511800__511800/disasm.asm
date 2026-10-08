@@ -2,7 +2,7 @@
 0x511803: mov     edx, [esp+8+l]
 0x511807: fldz
 0x511809: push    esi
-0x51180A: mov     esi, dword ptr [esp+0Ch+arg_18]
+0x51180A: mov     esi, [esp+0Ch+arg_18]
 0x51180E: lea     eax, [esp+0Ch+var_8]
 0x511812: fstp    qword ptr [esi]
 0x511814: push    eax
@@ -21,16 +21,16 @@
 0x511836: push    eax; a3
 0x511837: push    ecx; a2
 0x511838: push    edx; a1
-0x511839: mov     dword ptr [esp+30h+arg_18], 0
+0x511839: mov     [esp+30h+arg_18], 0
 0x511841: mov     [esp+30h+var_8], 0
-0x511849: call    Script_ExtractArgs
+0x511849: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x51184E: add     esp, 24h
 0x511851: test    al, al
 0x511853: jnz     short loc_51185A
 0x511855: pop     esi
 0x511856: add     esp, 8
 0x511859: retn
-0x51185A: mov     ecx, dword ptr [esp+0Ch+arg_18]
+0x51185A: mov     ecx, [esp+0Ch+arg_18]
 0x51185E: test    ecx, ecx
 0x511860: jz      short loc_51187E
 0x511862: mov     eax, [esp+0Ch+var_8]
@@ -38,7 +38,7 @@
 0x511868: jz      short loc_51187E
 0x51186A: push    eax
 0x51186B: call    sub_51F0B0
-0x511870: mov     ecx, dword ptr [esp+0Ch+arg_18]
+0x511870: mov     ecx, [esp+0Ch+arg_18]
 0x511874: mov     [esp+0Ch+var_4], eax
 0x511878: fild    [esp+0Ch+var_4]
 0x51187C: fstp    qword ptr [esi]

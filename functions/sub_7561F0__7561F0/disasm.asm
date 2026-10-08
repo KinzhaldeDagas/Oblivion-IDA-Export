@@ -36,7 +36,7 @@
 0x756257: mov     [ebx+40h], eax
 0x75625A: mov     eax, [esp+10h+arg_30]
 0x75625E: mov     [ebx+48h], edx
-0x756261: push    offset Vector3_InitValue?; int
+0x756261: push    offset g_zeroNiPoint3; int
 0x756266: lea     ecx, [ebx+58h]
 0x756269: mov     dword ptr [ebx], offset ??_7NiPSysPlanarCollider@@6B@; const NiPSysPlanarCollider::`vftable'
 0x75626F: mov     [ebx+4Ch], eax

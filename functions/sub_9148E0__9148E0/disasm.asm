@@ -16,17 +16,17 @@
 0x914908: push    edi
 0x914909: lea     ecx, [esp+58h+var_20]
 0x91490D: movaps  [esp+58h+var_10], xmm0
-0x914912: call    sub_88FCC0
+0x914912: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x914917: lea     ecx, [esi+20h]
 0x91491A: push    ecx
 0x91491B: push    edi
 0x91491C: lea     ecx, [esp+58h+var_30]
-0x914920: call    sub_88FCC0
+0x914920: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x914925: add     esi, 30h ; '0'
 0x914928: push    esi
 0x914929: push    edi
 0x91492A: lea     ecx, [esp+58h+var_40]
-0x91492E: call    sub_88FCC0
+0x91492E: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x914933: movaps  xmm0, [esp+50h+var_20]
 0x914938: movaps  xmm1, [esp+50h+var_40]
 0x91493D: movaps  xmm2, [esp+50h+var_30]

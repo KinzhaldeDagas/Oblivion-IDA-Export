@@ -1,1 +1,1 @@
-IAdviseSink_0
+typedef IAdviseSink IAdviseSink_0;

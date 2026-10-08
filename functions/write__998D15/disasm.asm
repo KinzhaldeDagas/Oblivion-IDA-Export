@@ -13,7 +13,7 @@
 0x998D44: xor     edi, edi
 0x998D46: cmp     eax, edi
 0x998D48: jl      short loc_998D52
-0x998D4A: cmp     eax, uNumber
+0x998D4A: cmp     eax, ds:0BAAAA0h
 0x998D50: jb      short loc_998D73
 0x998D52: call    ___doserrno
 0x998D57: mov     [eax], edi

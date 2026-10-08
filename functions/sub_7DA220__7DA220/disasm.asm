@@ -1,4 +1,4 @@
-0x7DA220: push    0FFFFFFFFh
+0x7DA220: push    0FFFFFFFFh; Shared PP-lighting geometry/material setup. Oblivion parses NiProperty ID 2 name tokens here: exact 'Refract' sets passInfo 0x8000; exact 'RefractF' sets 0x10000, invalidates the cached pass key, enables refraction state, and clears conflicting alpha flag 1. Shared wrapper ownership proves Lighting30 and Hair inherit this parser.
 0x7DA222: push    offset SEH_7DA220
 0x7DA227: mov     eax, large fs:0
 0x7DA22D: push    eax
@@ -15,15 +15,15 @@
 0x7DA24D: push    eax
 0x7DA24E: lea     eax, [esp+420h+var_C]
 0x7DA255: mov     large fs:0, eax
-0x7DA25B: mov     ebp, [esp+420h+arg_0]
-0x7DA262: lea     eax, [esp+420h+var_3FC]
+0x7DA25B: mov     ebp, [esp+420h+geometry]
+0x7DA262: lea     eax, [esp+420h+output]
 0x7DA266: mov     esi, ecx
-0x7DA268: push    eax
-0x7DA269: mov     ecx, ebp
+0x7DA268: push    eax; output
+0x7DA269: mov     ecx, ebp; this
 0x7DA26B: mov     [esp+424h+var_404], ebp
-0x7DA26F: call    sub_405760
+0x7DA26F: call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.
 0x7DA274: mov     ebx, [eax]
-0x7DA276: mov     eax, [esp+420h+var_3FC]
+0x7DA276: mov     eax, [esp+420h+output]
 0x7DA27A: test    eax, eax
 0x7DA27C: mov     [esp+420h+var_40C], ebx
 0x7DA280: jz      short loc_7DA2A0
@@ -43,11 +43,11 @@
 0x7DA2A0: test    ebx, ebx
 0x7DA2A2: jnz     short loc_7DA2E3
 0x7DA2A4: mov     ecx, ebp; this
-0x7DA2A6: call    NiAVObject_InitializePropertyState
+0x7DA2A6: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x7DA2AB: lea     ecx, [esp+420h+var_400]
-0x7DA2AF: push    ecx
-0x7DA2B0: mov     ecx, ebp
-0x7DA2B2: call    sub_405760
+0x7DA2AF: push    ecx; output
+0x7DA2B0: mov     ecx, ebp; this
+0x7DA2B2: call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.
 0x7DA2B7: mov     edx, [eax]
 0x7DA2B9: mov     eax, [esp+420h+var_400]
 0x7DA2BD: test    eax, eax
@@ -81,7 +81,7 @@
 0x7DA30B: call    edx
 0x7DA30D: test    eax, eax
 0x7DA30F: jz      short loc_7DA31F
-0x7DA311: cmp     eax, offset dword_B3FD98
+0x7DA311: cmp     eax, offset stru_B3FD98
 0x7DA316: jz      short loc_7DA359
 0x7DA318: mov     eax, [eax+4]
 0x7DA31B: test    eax, eax
@@ -100,8 +100,8 @@
 0x7DA341: push    eax
 0x7DA342: mov     ecx, ebp
 0x7DA344: call    sub_708560
-0x7DA349: lea     ecx, [esp+420h+var_400]; this
-0x7DA34D: call    sub_7016A0
+0x7DA349: lea     ecx, [esp+420h+var_400]; slot
+0x7DA34D: call    NiPointerSlot_Release
 0x7DA352: xor     al, al
 0x7DA354: jmp     loc_7DAACC
 0x7DA359: cmp     dword ptr [esi+0D4h], 0
@@ -207,14 +207,14 @@
 0x7DA4A4: lea     edx, [esp+420h+var_3F8]
 0x7DA4A8: push    0; _DWORD
 0x7DA4AA: push    edx; _DWORD
-0x7DA4AB: call    eax ; dword_B42E8C
+0x7DA4AB: call    eax ; unk_B42E8C
 0x7DA4AD: add     esp, 8
 0x7DA4B0: mov     eax, [esp+420h+var_40C]
 0x7DA4B4: mov     ecx, [eax+20h]
 0x7DA4B7: mov     [esp+420h+var_408], ecx
 0x7DA4BB: push    2
 0x7DA4BD: mov     ecx, ebp
-0x7DA4BF: call    NiNode_GetNiPropertyByID
+0x7DA4BF: call    NiNode_GetNiPropertyByID;
 0x7DA4C4: mov     edi, eax
 0x7DA4C6: test    edi, edi
 0x7DA4C8: jz      loc_7DA748
@@ -223,14 +223,14 @@
 0x7DA4D3: cmp     ebp, ebx
 0x7DA4D5: jz      loc_7DA748
 0x7DA4DB: push    offset aRightEye; "right eye"
-0x7DA4E0: push    ebp; Str1
-0x7DA4E1: call    __strcmp
+0x7DA4E0: push    ebp; left
+0x7DA4E1: call    CRT_StricmpLocaleDispatch
 0x7DA4E6: add     esp, 8
 0x7DA4E9: test    eax, eax
 0x7DA4EB: jz      short loc_7DA4FF
 0x7DA4ED: push    offset aLeftEye; "left eye"
-0x7DA4F2: push    ebp; Str1
-0x7DA4F3: call    __strcmp
+0x7DA4F2: push    ebp; left
+0x7DA4F3: call    CRT_StricmpLocaleDispatch
 0x7DA4F8: add     esp, 8
 0x7DA4FB: test    eax, eax
 0x7DA4FD: jnz     short loc_7DA516
@@ -241,8 +241,8 @@
 0x7DA50E: mov     [esi+24h], ebx
 0x7DA511: jmp     loc_7DA748
 0x7DA516: push    offset aEnvmap2; "envmap2"
-0x7DA51B: push    ebp; Str1
-0x7DA51C: call    __strcmp
+0x7DA51B: push    ebp; left
+0x7DA51C: call    CRT_StricmpLocaleDispatch
 0x7DA521: add     esp, 8
 0x7DA524: test    eax, eax
 0x7DA526: jnz     short loc_7DA537
@@ -252,7 +252,7 @@
 0x7DA537: push    7; MaxCount
 0x7DA539: push    offset aRefract; "refract"
 0x7DA53E: push    ebp; Str1
-0x7DA53F: call    __strnicmp
+0x7DA53F: call    __strnicmp; Enter Oblivion's native Refract/RefractF material-name token parser.
 0x7DA544: add     esp, 0Ch
 0x7DA547: test    eax, eax
 0x7DA549: jnz     loc_7DA60E
@@ -284,13 +284,13 @@
 0x7DA591: cmp     edi, ebx
 0x7DA593: jz      short loc_7DA600
 0x7DA595: push    offset aRefract_0; "Refract"
-0x7DA59A: push    edi; Str1
-0x7DA59B: call    __strcmp
+0x7DA59A: push    edi; left
+0x7DA59B: call    CRT_StricmpLocaleDispatch
 0x7DA5A0: test    eax, eax
 0x7DA5A2: push    offset aRefractf; "RefractF"
-0x7DA5A7: push    edi; Str1
+0x7DA5A7: push    edi; left
 0x7DA5A8: setz    bl
-0x7DA5AB: call    __strcmp
+0x7DA5AB: call    CRT_StricmpLocaleDispatch
 0x7DA5B0: add     esp, 10h
 0x7DA5B3: test    eax, eax
 0x7DA5B5: setz    al
@@ -298,23 +298,23 @@
 0x7DA5BA: jnz     short loc_7DA5C9
 0x7DA5BC: test    al, al
 0x7DA5BE: jz      short loc_7DA600
-0x7DA5C0: or      dword ptr [esi+1Ch], 10000h
+0x7DA5C0: or      dword ptr [esi+1Ch], 10000h; Exact 'RefractF' token selects the periodic/fire refraction flag path.
 0x7DA5C7: jmp     short loc_7DA5DD
 0x7DA5C9: test    al, al
 0x7DA5CB: jz      short loc_7DA5D6
-0x7DA5CD: or      dword ptr [esi+1Ch], 10000h
+0x7DA5CD: or      dword ptr [esi+1Ch], 10000h; Set BSShaderProperty passInfo bit 0x10000 = RefractF.
 0x7DA5D4: jmp     short loc_7DA5DD
-0x7DA5D6: or      dword ptr [esi+1Ch], 8000h
+0x7DA5D6: or      dword ptr [esi+1Ch], 8000h; Set BSShaderProperty passInfo bit 0x8000 = Refract.
 0x7DA5DD: mov     ecx, [esp+420h+var_404]
 0x7DA5E1: push    0
 0x7DA5E3: mov     dword ptr [esi+24h], 0
 0x7DA5EA: mov     byte ptr [esi+0E4h], 1
-0x7DA5F1: call    NiNode_GetNiPropertyByID
+0x7DA5F1: call    NiNode_GetNiPropertyByID;
 0x7DA5F6: test    eax, eax
 0x7DA5F8: jz      short loc_7DA600
 0x7DA5FA: and     word ptr [eax+18h], 0FFFEh
 0x7DA600: push    ebp
-0x7DA601: call    FormHeapFree
+0x7DA601: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7DA606: add     esp, 4
 0x7DA609: jmp     loc_7DA748
 0x7DA60E: push    8; MaxCount
@@ -330,7 +330,7 @@
 0x7DA633: push    ebp
 0x7DA634: mov     ecx, ebx
 0x7DA636: mov     [esi+24h], ebp
-0x7DA639: call    NiNode_GetNiPropertyByID
+0x7DA639: call    NiNode_GetNiPropertyByID;
 0x7DA63E: mov     edi, eax
 0x7DA640: cmp     edi, ebp
 0x7DA642: jnz     short loc_7DA6A2
@@ -341,23 +341,23 @@
 0x7DA652: cmp     eax, ebp
 0x7DA654: mov     [esp+420h+var_4], ebp
 0x7DA65B: jz      short loc_7DA682
-0x7DA65D: mov     ecx, eax
-0x7DA65F: call    sub_47F920
+0x7DA65D: mov     ecx, eax; this
+0x7DA65F: call    NiAlphaProperty_ctor; Constructs a 0x1C NiAlphaProperty over NiObjectNET: installs NiAlphaProperty vtable, initializes flags to 0x00EC and threshold byte to 0.
 0x7DA664: and     word ptr [eax+18h], 0FFFEh
 0x7DA66A: push    eax; a2
 0x7DA66B: mov     ecx, ebx; this
 0x7DA66D: mov     [esp+424h+var_4], 0FFFFFFFFh
-0x7DA678: call    sub_405680
+0x7DA678: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x7DA67D: jmp     loc_7DA748
 0x7DA682: xor     eax, eax
 0x7DA684: and     word ptr [eax+18h], 0FFFEh
 0x7DA68A: push    eax; a2
 0x7DA68B: mov     ecx, ebx; this
 0x7DA68D: mov     [esp+424h+var_4], 0FFFFFFFFh
-0x7DA698: call    sub_405680
+0x7DA698: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x7DA69D: jmp     loc_7DA748
-0x7DA6A2: mov     ecx, edi
-0x7DA6A4: call    sub_700900
+0x7DA6A2: mov     ecx, edi; this
+0x7DA6A4: call    NiObject_CloneWithPointerMap; Clones a loaded NiObject with a temporary pointer map and runs clone post-processing; the returned scene object is distinct from its source.
 0x7DA6A9: push    edi
 0x7DA6AA: mov     ecx, ebx
 0x7DA6AC: mov     ebp, eax
@@ -365,7 +365,7 @@
 0x7DA6B3: mov     eax, ebp
 0x7DA6B5: push    eax; a2
 0x7DA6B6: mov     ecx, ebx; this
-0x7DA6B8: call    sub_405680
+0x7DA6B8: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x7DA6BD: jmp     loc_7DA748
 0x7DA6C2: push    0Ah; MaxCount
 0x7DA6C4: push    offset aHidesecret; "HideSecret"
@@ -399,7 +399,7 @@
 0x7DA721: or      dword ptr [esi+1Ch], 40001h
 0x7DA728: push    ebx
 0x7DA729: mov     [esi+24h], ebx
-0x7DA72C: call    NiNode_GetNiPropertyByID
+0x7DA72C: call    NiNode_GetNiPropertyByID;
 0x7DA731: cmp     eax, ebx
 0x7DA733: jz      short loc_7DA748
 0x7DA735: cmp     dword ptr ds:0B42F48h, 5
@@ -513,12 +513,12 @@
 0x7DA88B: test    eax, eax
 0x7DA88D: jz      loc_7DA920
 0x7DA893: push    eax
-0x7DA894: push    offset dword_B3F95C
+0x7DA894: push    offset stru_B3F95C
 0x7DA899: call    NiRTTI_Cast
 0x7DA89E: mov     edx, [esi+0BCh]
 0x7DA8A4: mov     ebx, eax
 0x7DA8A6: mov     eax, [edx+4]
-0x7DA8A9: mov     ecx, [eax+24h]
+0x7DA8A9: mov     ecx, [eax+24h]; Checks referenced texture runtime GetLevelCount() and clears the slot if <=1. This validation belongs to the 0x7DA220 branch/PPLighting method, not the leaf property override.
 0x7DA8AC: add     esp, 8
 0x7DA8AF: test    ecx, ecx
 0x7DA8B1: jz      short loc_7DA920
@@ -559,7 +559,7 @@
 0x7DA914: push    1
 0x7DA916: mov     ecx, ebp
 0x7DA918: call    eax
-0x7DA91A: mov     dword ptr [ebx], 0
+0x7DA91A: mov     dword ptr [ebx], 0; Clears the offending texture reference after the <=1-level validation failure.
 0x7DA920: mov     ecx, [esp+420h+var_408]
 0x7DA924: mov     edx, [ecx+20h]
 0x7DA927: mov     eax, [edx]
@@ -573,7 +573,7 @@
 0x7DA93E: jz      short loc_7DA955
 0x7DA940: mov     edi, [edi+8]
 0x7DA943: push    edi
-0x7DA944: push    offset dword_B3F95C
+0x7DA944: push    offset stru_B3F95C
 0x7DA949: call    NiRTTI_Cast
 0x7DA94E: add     esp, 8
 0x7DA951: mov     [esp+420h+var_40C], eax
@@ -604,7 +604,7 @@
 0x7DA997: mov     ecx, [esi+0BCh]
 0x7DA99D: mov     eax, [ecx]
 0x7DA99F: push    eax
-0x7DA9A0: push    offset dword_B3F95C
+0x7DA9A0: push    offset stru_B3F95C
 0x7DA9A5: call    NiRTTI_Cast
 0x7DA9AA: mov     edx, [esi+0BCh]
 0x7DA9B0: mov     edi, eax
@@ -672,7 +672,7 @@
 0x7DAA57: xor     ebx, ebx
 0x7DAA59: push    ebx
 0x7DAA5A: mov     ecx, edi
-0x7DAA5C: call    NiNode_GetNiPropertyByID
+0x7DAA5C: call    NiNode_GetNiPropertyByID;
 0x7DAA61: cmp     eax, ebx
 0x7DAA63: jz      short loc_7DAA72
 0x7DAA65: test    byte ptr [eax+18h], 1
@@ -694,7 +694,7 @@
 0x7DAA92: call    sub_6C61E0
 0x7DAA97: push    6
 0x7DAA99: mov     ecx, edi
-0x7DAA9B: call    NiNode_GetNiPropertyByID
+0x7DAA9B: call    NiNode_GetNiPropertyByID;
 0x7DAAA0: cmp     eax, ebx
 0x7DAAA2: jz      short loc_7DAAAC
 0x7DAAA4: push    eax
@@ -704,7 +704,7 @@
 0x7DAAB2: jnz     short loc_7DAABB
 0x7DAAB4: mov     eax, [esi+1Ch]
 0x7DAAB7: test    al, 2
-0x7DAAB9: jbe     short loc_7DAAC1
+0x7DAAB9: jbe     short loc_7DAAC1; Verified (Oblivion): SetupGeometry sets BSShaderProperty::passInfo bit 0x02 when the NiAVObject has a non-null m_controller (or the bit was already set), otherwise clears it. ShadowLight pass construction forwards this bit to choose selector 0x18C versus 0x18D. Probable: BSSM_TEXEFFECT_S is the controller/animated-geometry variant; the suffix's exact expansion remains Unknown.
 0x7DAABB: or      dword ptr [esi+1Ch], 2
 0x7DAABF: jmp     short loc_7DAAC7
 0x7DAAC1: and     eax, 0FFFFFFFDh
@@ -723,3 +723,19 @@
 0x7DAAE8: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x7DAAED: add     esp, 40Ch
 0x7DAAF3: retn    4
+0x9CEF50: mov     eax, [ebp-400h]
+0x9CEF56: push    eax
+0x9CEF57: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CEF5C: pop     ecx
+0x9CEF5D: retn
+0x9CEF5E: mov     edx, [esp+arg_4]
+0x9CEF62: lea     eax, [edx-410h]
+0x9CEF68: mov     ecx, [edx-414h]
+0x9CEF6E: xor     ecx, eax
+0x9CEF70: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CEF75: add     eax, 10h
+0x9CEF78: mov     ecx, [edx-4]
+0x9CEF7B: xor     ecx, eax
+0x9CEF7D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CEF82: mov     eax, offset stru_AF7D18
+0x9CEF87: jmp     ___CxxFrameHandler3

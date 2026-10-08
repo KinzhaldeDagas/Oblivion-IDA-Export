@@ -29,7 +29,6 @@
 0x8DC3D0: mov     eax, edx
 0x8DC3D2: jge     short loc_8DC3FA
 0x8DC3D4: jmp     short loc_8DC3E0
-0x8DC3D6: align 10h
 0x8DC3E0: mov     ecx, [esi+0D0h]
 0x8DC3E6: mov     edi, [ecx+eax*4+4]
 0x8DC3EA: lea     ecx, [ecx+eax*4]

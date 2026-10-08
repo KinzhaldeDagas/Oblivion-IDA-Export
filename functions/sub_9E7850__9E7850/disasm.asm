@@ -2,7 +2,7 @@
 0x9E7856: push    ecx
 0x9E7857: fstp    [esp+4+var_4]; float
 0x9E785A: push    offset aFaipursuedista; "fAIPursueDistanceLineOfSight"
-0x9E785F: mov     ecx, offset unk_B36A90
+0x9E785F: mov     ecx, (offset flt_B36A88+8)
 0x9E7864: call    GameSetting_ConstrAndReg_float
 0x9E7869: push    offset sub_A1DC40; void (__cdecl *)()
 0x9E786E: call    _atexit

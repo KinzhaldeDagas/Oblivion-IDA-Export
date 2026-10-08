@@ -1,6 +1,6 @@
 0x410B00: push    ebx
 0x410B01: push    esi
-0x410B02: mov     esi, ObjectPtr
+0x410B02: mov     esi, ds:0B33428h
 0x410B08: xor     ebx, ebx
 0x410B0A: cmp     esi, ebx
 0x410B0C: jz      short loc_410B5B
@@ -28,14 +28,14 @@
 0x410B44: mov     [esi+10h], ebx
 0x410B47: mov     [esi+20h], ebx
 0x410B4A: mov     [esi+24h], bl
-0x410B4D: call    FormHeapFree
+0x410B4D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x410B52: add     esp, 4
-0x410B55: mov     ObjectPtr, ebx
-0x410B5B: mov     eax, dword_B3342C
+0x410B55: mov     ds:0B33428h, ebx
+0x410B5B: mov     eax, dword ptr unk_B3342C
 0x410B60: cmp     eax, ebx
 0x410B62: jz      short loc_410B79
-0x410B64: mov     ObjectPtr, eax
-0x410B69: mov     dword_B3342C, ebx
+0x410B64: mov     ds:0B33428h, eax
+0x410B69: mov     dword ptr unk_B3342C, ebx
 0x410B6F: mov     eax, [eax]
 0x410B71: push    ebx
 0x410B72: push    eax

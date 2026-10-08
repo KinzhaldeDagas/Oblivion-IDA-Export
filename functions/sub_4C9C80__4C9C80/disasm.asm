@@ -9,7 +9,7 @@
 0x4C9C96: call    unknown_libname_14
 0x4C9C9B: fstp    [esp+8+arg_0]
 0x4C9C9F: fld     [esp+8+arg_0]
-0x4C9CA3: call    Double_To_SInt32
+0x4C9CA3: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4C9CA8: cdq
 0x4C9CA9: xor     eax, edx
 0x4C9CAB: sub     eax, edx
@@ -21,7 +21,7 @@
 0x4C9CC2: call    unknown_libname_14
 0x4C9CC7: fstp    [esp+8+arg_0]
 0x4C9CCB: fld     [esp+8+arg_0]
-0x4C9CCF: call    Double_To_SInt32
+0x4C9CCF: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4C9CD4: cdq
 0x4C9CD5: xor     eax, edx
 0x4C9CD7: sub     eax, edx

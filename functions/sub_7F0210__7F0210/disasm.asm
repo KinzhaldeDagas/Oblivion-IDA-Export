@@ -1,4 +1,4 @@
-0x7F0210: fld     [esp+arg_0]
+0x7F0210: fld     [esp+arg_0]; Updates global SpeedTree leaf wind scalar constants: RockPArams, RsutleParams, and accumulative phase/scalar globals flt_B4672C/flt_B46730.
 0x7F0214: fstp    dword ptr ds:0B46778h
 0x7F021A: fld     [esp+arg_4]
 0x7F021E: fstp    dword ptr ds:0B46788h

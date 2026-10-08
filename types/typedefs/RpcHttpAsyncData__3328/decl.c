@@ -1,1 +1,1 @@
-RpcHttpAsyncData
+typedef _RpcHttpAsyncData RpcHttpAsyncData;

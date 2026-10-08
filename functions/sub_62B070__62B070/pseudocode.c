@@ -1,19 +1,19 @@
-void __userpurge sub_62B070(int a1@<ecx>, int a2@<ebp>, Concurrency::details::SchedulerBase *a3, int a4)
+void __userpurge sub_62B070(int a1@<ecx>, int a2@<ebp>, Actor *a3, int a4)
 {
   int v5; // esi
   int (__thiscall *v6)(int); // edx
-  Actor *ExtraXTarget; // edi
+  Actor *XTarget; // edi
   _DWORD *v8; // ecx
-  _DWORD *v9; // eax
-  int FXEffect; // eax
-  double v11; // st7
+  void *v9; // eax
+  EffectSetting *FXEffect; // eax
+  double projSpeed; // st7
   ActorVtbl *vtbl; // eax
   float *(__thiscall *GetPos)(TESObjectREFR *); // edx
   float *v14; // eax
   float v15; // edx
   float v16; // ecx
   float v17; // eax
-  int v19; // edx
+  ActorVtbl *v19; // edx
   int v20; // eax
   float v21; // ecx
   float v22; // edx
@@ -46,106 +46,102 @@ void __userpurge sub_62B070(int a1@<ecx>, int a2@<ebp>, Concurrency::details::Sc
   float v50; // [esp+58h] [ebp+4h]
   float v51; // [esp+58h] [ebp+4h]
 
-  v5 = (*(int (__thiscall **)(int))(*(_DWORD *)a1 + 0x184))(a1);
-  v6 = *(int (__thiscall **)(int))(*(_DWORD *)a1 + 0x3B8);
-  v35 = v5;
-  ExtraXTarget = (Actor *)v6(a1);
-  if ( ExtraXTarget || (v8 = *(_DWORD **)(v5 + 0x24)) != 0 && (ExtraXTarget = (Actor *)sub_5697E0(v8)) != 0 )
+  v5 = (*(int (__thiscall **)(int))(*(_DWORD *)a1 + 0x184))(a1); /*0x62b082*/
+  v6 = *(int (__thiscall **)(int))(*(_DWORD *)a1 + 0x3B8); /*0x62b086*/
+  v35 = v5; /*0x62b08e*/
+  XTarget = (Actor *)v6(a1); /*0x62b094*/
+  if ( XTarget || (v8 = *(_DWORD **)(v5 + 0x24)) != 0 && (XTarget = (Actor *)sub_5697E0(v8)) != 0 ) /*0x62b0ae*/
   {
-    if ( ExtraXTarget->vtbl->super.super.GetBaseForm((TESObjectREFR *)ExtraXTarget) == (TESForm *)TESDataHandler_g_XMarkerHeading )
-      ExtraXTarget = (Actor *)ExtraDataList::GetExtraXTarget(&ExtraXTarget->members.super.super.baseExtraList);
-    if ( ExtraXTarget )
+    if ( XTarget->vtbl->super.super.GetBaseForm((TESObjectREFR *)XTarget) == (TESForm *)MEMORY[0xB35EB0] ) /*0x62b0c6*/
+      XTarget = (Actor *)ExtraDataList_GetXTarget(&XTarget->members.super.super.baseExtraList); /*0x62b0d0*/
+    if ( XTarget ) /*0x62b0d4*/
     {
-      v9 = (_DWORD *)(*(int (__thiscall **)(int))(*(_DWORD *)a1 + 0x2A8))(a1);
-      if ( v9 && (FXEffect = MagicItem_GetFXEffect(v9, 2)) != 0 )
-        v11 = *(float *)(FXEffect + 0x74);
+      v9 = (void *)(*(int (__thiscall **)(int))(*(_DWORD *)a1 + 0x2A8))(a1); /*0x62b0e4*/
+      if ( v9 && (FXEffect = MagicItem_GetFXEffect(v9, 2u)) != 0 ) /*0x62b0f5*/
+        projSpeed = FXEffect->projSpeed; /*0x62b0f7*/
       else
-        v11 = 1.0;
-      vtbl = ExtraXTarget->vtbl;
-      *(float *)&v33 = v11;
-      GetPos = vtbl->super.super.GetPos;
-      *(float *)&v33 = *(float *)&v33 * flt_B37EE8;
-      v14 = GetPos((TESObjectREFR *)ExtraXTarget);
-      v15 = v14[1];
-      v16 = *v14;
-      v17 = v14[2];
-      v40 = v15;
-      v19 = *(_DWORD *)a3;
-      v39 = v16;
-      v41 = v17;
-      v20 = (*(int (__thiscall **)(Concurrency::details::SchedulerBase *))(v19 + 0x174))(a3);
-      v21 = *(float *)v20;
-      v22 = *(float *)(v20 + 4);
-      v23 = *(float *)(v20 + 8);
-      v36 = v21;
-      v37 = v22;
-      v38 = sub_5E0660(a3) * dbl_A31C70 + v23;
-      v42 = v39 - v36;
-      v43 = v40 - v37;
-      v44 = v41 - v38;
-      v45 = v43 * v43 + v42 * v42 + 0.0 * 0.0;
-      v46 = sqrt(v45);
-      v34 = sub_6132D0(v46, v44, *(float *)&v33, 0.0);
-      sub_613410(v46, v34, *(float *)&v33);
-      ExtraXTarget->vtbl->super.super.GetPos((TESObjectREFR *)ExtraXTarget);
-      v47 = -v34;
-      v48 = v47 - sub_4A9720((Actor *)a3);
-      v24 = v48;
-      if ( v48 != 0.0 )
+        projSpeed = 1.0; /*0x62b0fc*/
+      vtbl = XTarget->vtbl; /*0x62b0fe*/
+      *(float *)&v33 = projSpeed; /*0x62b100*/
+      GetPos = vtbl->super.super.GetPos; /*0x62b108*/
+      *(float *)&v33 = *(float *)&v33 * flt_B37ED0[6]; /*0x62b116*/
+      v14 = GetPos((TESObjectREFR *)XTarget); /*0x62b11a*/
+      v15 = v14[1]; /*0x62b11c*/
+      v16 = *v14; /*0x62b11f*/
+      v17 = v14[2]; /*0x62b121*/
+      v40 = v15; /*0x62b128*/
+      v19 = a3->vtbl; /*0x62b12c*/
+      v39 = v16; /*0x62b12e*/
+      v41 = v17; /*0x62b132*/
+      v20 = (int)v19->super.super.GetPos((TESObjectREFR *)a3); /*0x62b13e*/
+      v21 = *(float *)v20; /*0x62b140*/
+      v22 = *(float *)(v20 + 4); /*0x62b142*/
+      v23 = *(float *)(v20 + 8); /*0x62b145*/
+      v36 = v21; /*0x62b148*/
+      v37 = v22; /*0x62b14e*/
+      v38 = Actor_GetScaledCollisionHeight(a3) * dbl_A31C70 + v23; /*0x62b165*/
+      v42 = v39 - v36; /*0x62b171*/
+      v43 = v40 - v37; /*0x62b17d*/
+      v44 = v41 - v38; /*0x62b189*/
+      v45 = v43 * v43 + v42 * v42 + 0.0 * 0.0; /*0x62b1a3*/
+      v46 = sqrt(v45); /*0x62b1b0*/
+      v34 = Combat_CalculateBallisticPitch(v46, v44, *(float *)&v33, 0.0); /*0x62b1e1*/
+      sub_613410(v46, v34, *(float *)&v33); /*0x62b1ff*/
+      XTarget->vtbl->super.super.GetPos((TESObjectREFR *)XTarget); /*0x62b213*/
+      v47 = -v34; /*0x62b21d*/
+      v48 = v47 - Actor_GetAimPitch(a3); /*0x62b22a*/
+      v24 = v48; /*0x62b238*/
+      if ( v48 != 0.0 ) /*0x62b23d*/
       {
-        if ( v24 > dbl_A491E0 )
+        if ( v24 > dbl_A491E0 ) /*0x62b24a*/
         {
-          if ( v24 > dbl_A3D5B8 )
-            v48 = v24 + dbl_A3D5B0;
+          if ( v24 > dbl_A3D5B8 ) /*0x62b263*/
+            v48 = v24 + dbl_A3D5B0; /*0x62b26b*/
         }
         else
         {
-          v48 = dbl_A3D5B0 - v24;
+          v48 = dbl_A3D5B0 - v24; /*0x62b252*/
         }
       }
-      v49 = sub_4A9720((Actor *)a3) + v48;
-      sub_65A650((TESObjectREFR *)a3, v49);
-      if ( !(*(int (__thiscall **)(_DWORD))(**((_DWORD **)a3 + 0x16) + 0x36C))(*((_DWORD *)a3 + 0x16)) )
+      v49 = Actor_GetAimPitch(a3) + v48; /*0x62b281*/
+      sub_65A650((TESObjectREFR *)a3, v49); /*0x62b28c*/
+      if ( !((int (__thiscall *)(LowProcess *))a3->members.super.process->GetSitSleepState)(a3->members.super.process) ) /*0x62b29c*/
       {
-        v25 = (float *)(*(int (__thiscall **)(Concurrency::details::SchedulerBase *))(*(_DWORD *)a3 + 0x174))(a3);
-        v26 = ExtraXTarget->vtbl->super.super.GetPos((TESObjectREFR *)ExtraXTarget);
-        v50 = v26[1] - v25[1];
-        v34 = v26[2] - v25[2];
-        v42 = *v26 - *v25;
-        v43 = v50;
-        v44 = v34;
-        v51 = sub_683CB0(&v42);
-        *(float *)&v33 = 0.0;
-        sub_683D80((int)a3, v51, (int)&v33);
-        v34 = fabs(v51);
-        v27 = v34;
-        v34 = (double)iActorKeepTurnDegree * dbl_A31C78;
-        if ( v34 >= v27 )
+        v25 = a3->vtbl->super.super.GetPos((TESObjectREFR *)a3); /*0x62b2b5*/
+        v26 = XTarget->vtbl->super.super.GetPos((TESObjectREFR *)XTarget); /*0x62b2bf*/
+        v50 = v26[1] - v25[1]; /*0x62b2cc*/
+        v34 = v26[2] - v25[2]; /*0x62b2d6*/
+        v42 = *v26 - *v25; /*0x62b2df*/
+        v43 = v50; /*0x62b2e7*/
+        v44 = v34; /*0x62b2ef*/
+        v51 = Vector3_CalculateHeadingRadiansXY(&v42); /*0x62b2f8*/
+        *(float *)&v33 = 0.0; /*0x62b306*/
+        sub_683D80((int)a3, v51, (float *)&v33); /*0x62b313*/
+        v34 = fabs(v51); /*0x62b325*/
+        v27 = v34; /*0x62b329*/
+        v34 = (double)(int)MEMORY[0xB36C18].value * dbl_A31C78; /*0x62b339*/
+        if ( v34 >= v27 ) /*0x62b348*/
         {
-          sub_5E05F0((Actor *)a3, 0x30);
-          (*(void (__thiscall **)(int, Concurrency::details::SchedulerBase *, int, int))(*(_DWORD *)a1 + 0x188))(
-            a1,
-            a3,
-            1,
-            a2);
-          if ( ExtraXTarget->vtbl->super.super.IsActor((TESObjectREFR *)ExtraXTarget) && ExtraXTarget != (Actor *)a3 )
-            sub_5F8000(ExtraXTarget);
-          (*(void (__thiscall **)(Concurrency::details::SchedulerBase *, int))(*(_DWORD *)a3 + 0x1E8))(a3, a4);
-          v28.form = sub_569E70(*(TargetData **)(v35 + 0x28)).form;
-          v29 = OblivionDynamicCast(
+          sub_5E05F0(a3, 0x30); /*0x62b36b*/
+          (*(void (__thiscall **)(int, Actor *, int, int))(*(_DWORD *)a1 + 0x188))(a1, a3, 1, a2); /*0x62b37d*/
+          if ( XTarget->vtbl->super.super.IsActor((TESObjectREFR *)XTarget) && XTarget != a3 ) /*0x62b391*/
+            sub_5F8000(XTarget); /*0x62b395*/
+          ((void (__thiscall *)(Actor *, int))a3->vtbl->super.Unk_7A)(a3, a4); /*0x62b3ac*/
+          v28.form = sub_569E70(*(TargetData **)(v35 + 0x28)).form; /*0x62b3c3*/
+          v29 = OblivionDynamicCast( /*0x62b3d0*/
                   v28.form,
                   0,
                   (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                   &MagicItem `RTTI Type Descriptor',
                   0);
-          v30 = (_DWORD *)(*(int (__thiscall **)(Concurrency::details::SchedulerBase *))(*(_DWORD *)a3 + 0x120))(a3);
-          v31 = (int)ExtraXTarget->vtbl->super.super.GetMagicTarget((TESObjectREFR *)ExtraXTarget);
-          MagicCaster_CastMagicItem(v30, (int)v29, v31, 0);
-          sub_5F25F0((PlayerCharacter *)a3, (int)v29, (int)ExtraXTarget, flt_A34A80, 0.0);
+          v30 = (_DWORD *)((int (__thiscall *)(Actor *))a3->vtbl->super.super.Unk_48)(a3); /*0x62b3e1*/
+          v31 = (int)XTarget->vtbl->super.super.GetMagicTarget((TESObjectREFR *)XTarget); /*0x62b3eb*/
+          MagicCaster_CastMagicItem(v30, (int)v29, v31, 0); /*0x62b3f3*/
+          sub_5F25F0((PlayerCharacter *)a3, (int)v29, (int)XTarget, SLODWORD(flt_A34A80), 0); /*0x62b406*/
         }
         else
         {
-          sub_685530((Actor *)a3, v51, 1);
+          sub_685530(a3, v51, 1); /*0x62b355*/
         }
       }
     }

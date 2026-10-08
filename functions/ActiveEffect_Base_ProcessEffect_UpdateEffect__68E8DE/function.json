@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x68E8DE",
+      "0x68E8EF"
+    ]
+  ],
+  "chunks_sha256": "bf7433ed99a9384b8fd64a4a2aa77e895dab748cdf2cdd01024e70fe19aecfd2",
+  "comment_regular": "Verified periodic update dispatch: when this effect's update condition is met, ActiveEffect_Base_ProcessEffect calls vtable +0x08 with elapsed-time data. LockEffect/OpenEffect use the shared null implementation at this slot, so their lock changes occur through Apply (+0x38), not the periodic update override.",
+  "comment_repeatable": "Verified periodic update dispatch: when this effect's update condition is met, ActiveEffect_Base_ProcessEffect calls vtable +0x08 with elapsed-time data. LockEffect/OpenEffect use the shared null implementation at this slot, so their lock changes occur through Apply (+0x38), not the periodic update override.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "ActiveEffect_Base_ProcessEffect:::UpdateEffect",
   "end_ea": "0x68E8EF",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "ActiveEffect_Base_ProcessEffect:::UpdateEffect",
   "segment": ".text",
   "sha256": "bf7433ed99a9384b8fd64a4a2aa77e895dab748cdf2cdd01024e70fe19aecfd2",
   "size": 17,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x68E8DE",
-  "type": "int __usercall@<eax>(int@<esi>, int, float)",
+  "total_chunk_size": 17,
+  "type": "int __usercall@<eax>(_BYTE *@<esi>, int, float)",
   "xrefs_from_count": 7,
   "xrefs_to_count": 4
 }

@@ -17,7 +17,7 @@
 0x50924E: mov     edx, [edx+0F8h]
 0x509254: mov     ecx, 9
 0x509259: mov     esi, (offset stru_B26AF0.unk2C+2A8h)
-0x50925E: lea     edi, [esp+88h+var_6C]
+0x50925E: lea     edi, [esp+88h+right]
 0x509262: rep movsd
 0x509264: mov     ecx, ds:0B3F9A8h
 0x50926A: sub     esp, 0Ch
@@ -37,20 +37,20 @@
 0x509296: call    edx
 0x509298: fld     dword ptr [eax]
 0x50929A: push    ecx
-0x50929B: lea     ecx, [esp+8Ch+var_48]
-0x50929F: fstp    [esp+8Ch+var_8C]; float
-0x5092A2: call    NiMatrix33_InitRotationTransposedTransform???
-0x5092A7: lea     eax, [esp+88h+var_6C]
-0x5092AB: push    eax
-0x5092AC: lea     ecx, [esp+8Ch+var_24]
-0x5092B0: push    ecx
-0x5092B1: lea     ecx, [esp+90h+var_48]
-0x5092B5: call    NiMAtrix33_Multiply
+0x50929B: lea     ecx, [esp+8Ch+var_48]; this
+0x50929F: fstp    [esp+8Ch+angleX]; angleX
+0x5092A2: call    NiMatrix33_InitRotationXTransposed; Verified matrix coefficients make this an X-axis rotation in the engine's transposed convention: X stays fixed; only the Y/Z submatrix contains sin/cos.
+0x5092A7: lea     eax, [esp+88h+right]
+0x5092AB: push    eax; right
+0x5092AC: lea     ecx, [esp+8Ch+out]
+0x5092B0: push    ecx; out
+0x5092B1: lea     ecx, [esp+90h+var_48]; this
+0x5092B5: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x5092BA: mov     edx, [ebx]
 0x5092BC: mov     edx, [edx+0F0h]
 0x5092C2: mov     esi, eax
 0x5092C4: mov     ecx, 9
-0x5092C9: lea     edi, [esp+88h+var_6C]
+0x5092C9: lea     edi, [esp+88h+right]
 0x5092CD: lea     eax, [esp+88h+var_78]
 0x5092D1: rep movsd
 0x5092D3: push    eax
@@ -58,20 +58,20 @@
 0x5092D6: call    edx
 0x5092D8: push    ecx
 0x5092D9: fld     dword ptr [eax+4]
-0x5092DC: lea     ecx, [esp+8Ch+var_48]
-0x5092E0: fstp    [esp+8Ch+var_8C]; float
-0x5092E3: call    sub_70FD80
-0x5092E8: lea     eax, [esp+88h+var_6C]
-0x5092EC: push    eax
-0x5092ED: lea     ecx, [esp+8Ch+var_24]
-0x5092F1: push    ecx
-0x5092F2: lea     ecx, [esp+90h+var_48]
-0x5092F6: call    NiMAtrix33_Multiply
+0x5092DC: lea     ecx, [esp+8Ch+var_48]; this
+0x5092E0: fstp    [esp+8Ch+angleX]; angleY
+0x5092E3: call    NiMatrix33_InitRotationY; Verified matrix coefficients make this a Y-axis rotation: Y stays fixed; only the X/Z submatrix contains sin/cos.
+0x5092E8: lea     eax, [esp+88h+right]
+0x5092EC: push    eax; right
+0x5092ED: lea     ecx, [esp+8Ch+out]
+0x5092F1: push    ecx; out
+0x5092F2: lea     ecx, [esp+90h+var_48]; this
+0x5092F6: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x5092FB: mov     edx, [ebx]
 0x5092FD: mov     edx, [edx+0F0h]
 0x509303: mov     esi, eax
 0x509305: mov     ecx, 9
-0x50930A: lea     edi, [esp+88h+var_6C]
+0x50930A: lea     edi, [esp+88h+right]
 0x50930E: lea     eax, [esp+88h+var_78]
 0x509312: rep movsd
 0x509314: push    eax
@@ -79,19 +79,19 @@
 0x509317: call    edx
 0x509319: push    ecx
 0x50931A: fld     dword ptr [eax+8]
-0x50931D: lea     ecx, [esp+8Ch+var_48]
-0x509321: fstp    [esp+8Ch+var_8C]; float
-0x509324: call    NiMatrix33_InitRotationTransform
-0x509329: lea     eax, [esp+88h+var_6C]
-0x50932D: push    eax
-0x50932E: lea     ecx, [esp+8Ch+var_24]
-0x509332: push    ecx
-0x509333: lea     ecx, [esp+90h+var_48]
-0x509337: call    NiMAtrix33_Multiply
+0x50931D: lea     ecx, [esp+8Ch+var_48]; this
+0x509321: fstp    [esp+8Ch+angleX]; angleZ
+0x509324: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
+0x509329: lea     eax, [esp+88h+right]
+0x50932D: push    eax; right
+0x50932E: lea     ecx, [esp+8Ch+out]
+0x509332: push    ecx; out
+0x509333: lea     ecx, [esp+90h+var_48]; this
+0x509337: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x50933C: mov     edx, [ebx]
 0x50933E: mov     esi, eax
 0x509340: mov     ecx, 9
-0x509345: lea     edi, [esp+88h+var_6C]
+0x509345: lea     edi, [esp+88h+right]
 0x509349: rep movsd
 0x50934B: lea     eax, [esp+88h+var_78]
 0x50934F: mov     edx, [edx+0F4h]
@@ -106,7 +106,7 @@
 0x509368: mov     [ebp+5Ch], eax
 0x50936B: lea     edi, [ebp+30h]
 0x50936E: mov     ecx, 9
-0x509373: lea     esi, [esp+88h+var_6C]
+0x509373: lea     esi, [esp+88h+right]
 0x509377: rep movsd
 0x509379: mov     edx, [ebx]
 0x50937B: mov     eax, [edx+164h]
@@ -119,7 +119,7 @@
 0x50938C: push    ecx
 0x50938D: fstp    [esp+90h+a2+4]; a2
 0x509390: mov     ecx, ebp; this
-0x509392: call    NiAVObject_UpdateNiAVObject
+0x509392: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x509397: pop     edi
 0x509398: pop     esi
 0x509399: pop     ebp

@@ -1,39 +1,40 @@
-unsigned __int16 __usercall sub_6806B0@<ax>(int a1@<esi>)
+// Verified state slot 0x04 marks an allocated table slot. The next-free cursor is a 16-bit index; 0xFFFF is reserved as exhausted/unavailable. Capacity starts at 500 and grows by 100, capped at 65535 entries.
+unsigned __int16 __cdecl TravelPath_AllocateSearchStateSlot()
 {
-  unsigned __int16 v1; // di
-  int v2; // esi
-  int v3; // eax
-  _BYTE *v4; // ecx
-  unsigned __int16 v5; // ax
+  unsigned __int16 nextFreeStateIndex; // di
+  int stateCapacity; // esi
+  int v2; // eax
+  unsigned __int8 *p_flags; // ecx
+  unsigned __int16 v4; // ax
 
-  v1 = word_B3BF08;
-  if ( word_B3BF08 == (__int16)0xFFFF )
-    return 0xFFFF;
-  if ( !dword_B3BF00 )
-    sub_680620(a1, 0x1F4u);
-  *((_BYTE *)dword_B3BF00 + 0x10 * v1 + 0xC) |= 4u;
-  v2 = (unsigned __int16)word_B3BF04;
-  v3 = v1 + 1;
-  if ( v3 < v2 )
+  nextFreeStateIndex = MEMORY[0xB3BE00].nextFreeStateIndex; /*0x6806b1*/
+  if ( MEMORY[0xB3BE00].nextFreeStateIndex == 0xFFFF ) /*0x6806bd*/
+    return 0xFFFF; /*0x680755*/
+  if ( !MEMORY[0xB3BE00].states ) /*0x6806c3*/
+    TravelPath_ResizeSearchStateTable(0x1F4u); /*0x6806d1*/
+  MEMORY[0xB3BE00].states[nextFreeStateIndex].flags |= 4u; /*0x6806e7*/
+  stateCapacity = MEMORY[0xB3BE00].stateCapacity; /*0x6806f1*/
+  v2 = nextFreeStateIndex + 1; /*0x6806f8*/
+  if ( v2 < stateCapacity ) /*0x6806fd*/
   {
-    v4 = (char *)dword_B3BF00 + 0x10 * v3 + 0xC;
-    while ( (*v4 & 4) != 0 )
+    p_flags = &MEMORY[0xB3BE00].states[v2].flags; /*0x68070a*/
+    while ( (*p_flags & 4) != 0 ) /*0x680713*/
     {
-      ++v3;
-      v4 += 0x10;
-      if ( v3 >= v2 )
-        goto LABEL_10;
+      ++v2; /*0x680715*/
+      p_flags += 0x10; /*0x680718*/
+      if ( v2 >= stateCapacity ) /*0x68071d*/
+        goto LABEL_10; /*0x68071d*/
     }
-    word_B3BF08 = v3;
+    MEMORY[0xB3BE00].nextFreeStateIndex = v2; /*0x680721*/
   }
 LABEL_10:
-  if ( word_B3BF08 == v1 )
+  if ( MEMORY[0xB3BE00].nextFreeStateIndex == nextFreeStateIndex ) /*0x68072e*/
   {
-    v5 = v2 + 0x64;
-    if ( v2 + 0x64 > 0xFFFF )
-      v5 = 0xFFFF;
-    sub_680620(v2, v5);
-    word_B3BF08 = v2;
+    v4 = stateCapacity + 0x64; /*0x680730*/
+    if ( stateCapacity + 0x64 > 0xFFFF ) /*0x680738*/
+      v4 = 0xFFFF; /*0x68073a*/
+    TravelPath_ResizeSearchStateTable(v4); /*0x680740*/
+    MEMORY[0xB3BE00].nextFreeStateIndex = stateCapacity; /*0x680748*/
   }
-  return v1;
+  return nextFreeStateIndex; /*0x680753*/
 }

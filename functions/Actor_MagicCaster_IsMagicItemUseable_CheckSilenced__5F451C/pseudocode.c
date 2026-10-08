@@ -14,7 +14,7 @@ int __usercall Actor_MagicCaster_IsMagicItemUseable_::CheckSilenced@<eax>(
         int a13,
         int a14)
 {
-  BYTE2(a7) = (*(int (__thiscall **)(int, int))(*(_DWORD *)(a1 - 0x5C) + 0x284))(a1 - 0x5C, 0x31) > 0;
+  BYTE2(a7) = (*(int (__thiscall **)(int, int))(*(_DWORD *)(a1 - 0x5C) + 0x284))(a1 - 0x5C, 0x31) > 0; /*0x5f4530*/
   return Actor_MagicCaster_IsMagicItemUseable_::CheckTargetedWhileSwimming(
            a1,
            ebp0,

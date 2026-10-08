@@ -1,4 +1,4 @@
-0x4D3B10: push    0FFFFFFFFh
+0x4D3B10: push    0FFFFFFFFh; [Verified] This Oblivion scene-projection path creates/registers BSTempEffect decal effects after its geometry/raycast work; it is a transient decal path and does not establish population of BSShaderLightingProperty+0x80's DECAL_DATA* list. Fallout contrast: Fallout's AddDecalRef path stores reference/intersection/normal metadata in ExtraDecalRefs (ExtraData type 0x57). Equivalence between these paths: Unknown.
 0x4D3B12: push    offset ??0?$NiTPointerListBase@V?$NiTPointerAllocator@I@@PAVNiAVObject@@@@QAE@XZ_SEH
 0x4D3B17: mov     eax, large fs:0
 0x4D3B1D: push    eax
@@ -18,7 +18,7 @@
 0x4D3B43: push    ecx
 0x4D3B44: fstp    dword ptr [esp+60h+var_64+4]; float
 0x4D3B47: call    Rand5
-0x4D3B4C: fstp    [esp+60h+var_44]
+0x4D3B4C: fstp    [esp+60h+var_44]; BloodOnDeath decode 2026-05-30: Decal_ProjectToSceneGeometry randomizes decal rotation in [0, 2pi) and decal variant floor(rand[0,4)); these do not increase the number of decals.
 0x4D3B50: fld     dword ptr ds:0A46B10h
 0x4D3B56: fstp    dword ptr [esp+60h+var_64+4]; float
 0x4D3B59: call    Rand5
@@ -42,7 +42,7 @@
 0x4D3B9F: mov     al, byte ptr [esp+5Ch+var_40]
 0x4D3BA3: mov     byte ptr [esp+5Ch+var_40], al
 0x4D3BA7: fldcw   word ptr [esp+5Ch+var_48]
-0x4D3BAB: jz      loc_4D3C47
+0x4D3BAB: jz      loc_4D3C47; ODismemberment authority: no explicit target reference means project through Havok/cell scene geometry from world position and direction.
 0x4D3BB1: mov     edx, [ecx]
 0x4D3BB3: mov     eax, [edx+154h]
 0x4D3BB9: call    eax
@@ -83,10 +83,10 @@
 0x4D3C35: mov     [eax+4], ecx
 0x4D3C38: mov     ecx, esi
 0x4D3C3A: mov     [eax+8], edx
-0x4D3C3D: call    sub_4CF1A0
+0x4D3C3D: call    Decal_AttachToGeometryRecursive; ODismemberment authority: explicit target reference path resolves its NiNode and directly recurses into decal attachment.
 0x4D3C42: jmp     loc_4D4187
-0x4D3C47: lea     ecx, [esp+5Ch+arg_C]
-0x4D3C4B: call    sub_43F350
+0x4D3C47: lea     ecx, [esp+5Ch+arg_C]; BloodOnDeath decode 2026-05-26: null explicit-target branch for Decal_ProjectToSceneGeometry. Normalizes direction and performs Havok/scene-geometry ray projection from supplied world position; qword_A46B08 provides 80.0 ray length. This is the faithful floor/geometry path.
+0x4D3C4B: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x4D3C50: fstp    st
 0x4D3C52: cmp     ds:0B35C08h, edi
 0x4D3C58: jnz     short loc_4D3CA3
@@ -108,13 +108,13 @@
 0x4D3C88: mov     ecx, eax
 0x4D3C8A: fstp    dword ptr [esp+64h+var_64]; float
 0x4D3C8D: mov     [esp+64h+var_4], edi
-0x4D3C91: call    sub_533C40
+0x4D3C91: call    bhkSphereShapeProbeCollector_InitLayer1C
 0x4D3C96: mov     [esp+5Ch+var_4], 0FFFFFFFFh
 0x4D3C9E: mov     ds:0B35C08h, eax
 0x4D3CA3: push    edi
 0x4D3CA4: push    8
 0x4D3CA6: push    1Ch
-0x4D3CA8: call    sub_8A7F20
+0x4D3CA8: call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.
 0x4D3CAD: add     esp, 0Ch
 0x4D3CB0: test    byte ptr [esi+24h], 1
 0x4D3CB4: jz      short loc_4D3CC0
@@ -124,13 +124,13 @@
 0x4D3CC0: mov     eax, ds:0B35C24h
 0x4D3CC5: mov     ecx, ds:0B35C08h
 0x4D3CCB: push    eax
-0x4D3CCC: call    sub_5337E0
+0x4D3CCC: call    sub_5337E0; ODismemberment authority: decal projection uses a reusable bhk sphere probe collector against the cell/interior Havok world.
 0x4D3CD1: fld     [esp+5Ch+arg_C]
 0x4D3CD5: fld     qword ptr ds:0A46B08h
 0x4D3CDB: push    ecx
 0x4D3CDC: fmul    st(1), st
 0x4D3CDE: lea     eax, [esp+60h+var_34]
-0x4D3CE2: fxch    st(1)
+0x4D3CE2: fxch    st(1); BloodOnDeath v1.1.6: each custom moved-limb trail point still calls the native 80-unit scene projection path, so interpolated corpse/Havok trails stay within the same ray-length constraint.
 0x4D3CE4: lea     ecx, [esp+60h+arg_0]
 0x4D3CE8: fstp    [esp+60h+arg_1C]
 0x4D3CEF: fld     [esp+60h+arg_10]
@@ -197,7 +197,7 @@
 0x4D3DE4: fstp    [esp+5Ch+var_30]
 0x4D3DE8: fld     [esp+5Ch+var_48]
 0x4D3DEC: fstp    [esp+5Ch+var_2C]
-0x4D3DF0: call    sub_43F350
+0x4D3DF0: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x4D3DF5: fstp    st
 0x4D3DF7: mov     edx, [esp+5Ch+var_34]
 0x4D3DFB: fld     [esp+5Ch+var_34]
@@ -253,7 +253,7 @@
 0x4D3ED1: mov     ecx, [esp+5Ch+arg_1C]
 0x4D3ED5: push    ecx
 0x4D3ED6: mov     ecx, ds:0B35C08h
-0x4D3EDC: call    sub_533930
+0x4D3EDC: call    sub_533930; BloodOnDeath decode 2026-05-30: null-target scene projection iterates Havok collector hits and attaches to each unique geometry object. More left-behind blood can come from more projection calls, not from selector/rotation.
 0x4D3EE1: mov     edi, [esp+5Ch+var_18]
 0x4D3EE5: test    edi, edi
 0x4D3EE7: mov     esi, eax
@@ -297,7 +297,7 @@
 0x4D3F5A: mov     [eax+4], ecx
 0x4D3F5D: mov     ecx, [esp+8Ch+var_3C]
 0x4D3F61: mov     [eax+8], edx
-0x4D3F64: call    sub_4CF1A0
+0x4D3F64: call    Decal_AttachToGeometryRecursive
 0x4D3F69: mov     eax, [esp+5Ch+var_1C]
 0x4D3F6D: mov     edx, [eax+4]
 0x4D3F70: lea     ecx, [esp+5Ch+var_1C]
@@ -319,7 +319,7 @@
 0x4D3FA5: mov     eax, [esp+5Ch+arg_1C]
 0x4D3FA9: add     eax, 1
 0x4D3FAC: cmp     eax, [esp+5Ch+var_48]
-0x4D3FB0: mov     [esp+5Ch+arg_1C], eax
+0x4D3FB0: mov     [esp+5Ch+arg_1C], eax; BloodOnDeath v1.1.6: additional moved-limb trail points create additional projection calls; this is the reliable way to leave more blood along a dragged path.
 0x4D3FB4: jl      loc_4D3ED1
 0x4D3FBA: xor     eax, eax
 0x4D3FBC: cmp     edi, eax
@@ -372,7 +372,7 @@
 0x4D4053: mov     [eax+4], ecx
 0x4D4056: mov     ecx, [esp+8Ch+var_3C]
 0x4D405A: mov     [eax+8], edx
-0x4D405D: call    sub_4CF1A0
+0x4D405D: call    Decal_AttachToGeometryRecursive; BloodOnDeath decode 2026-05-30: after Havok hits, projection also tries loaded cell geometry at the source point.
 0x4D4062: fld     [esp+5Ch+arg_C]
 0x4D4066: fld     qword ptr ds:0A3F428h
 0x4D406C: mov     ecx, ds:0B333A0h
@@ -401,7 +401,7 @@
 0x4D40D6: fstp    [esp+60h+var_24]
 0x4D40DA: fld     [esp+60h+arg_1C]
 0x4D40E1: fstp    [esp+60h+var_20]
-0x4D40E5: call    sub_440880
+0x4D40E5: call    sub_440880; BloodOnDeath v1.1.2: projector also samples cell geometry farther along the ray, so outward limb spurts can mark nearby world geometry as well as floor hits.
 0x4D40EA: cmp     esi, eax
 0x4D40EC: jz      short loc_4D414C
 0x4D40EE: fld     [esp+5Ch+var_44]
@@ -430,7 +430,7 @@
 0x4D413D: mov     [eax+4], edx
 0x4D4140: mov     [eax+8], ecx
 0x4D4143: mov     ecx, [esp+8Ch+var_3C]
-0x4D4147: call    sub_4CF1A0
+0x4D4147: call    Decal_AttachToGeometryRecursive
 0x4D414C: mov     ecx, ds:0B35C08h
 0x4D4152: push    0
 0x4D4154: call    sub_5337E0
@@ -455,5 +455,23 @@
 0x4D4194: pop     esi
 0x4D4195: pop     ebp
 0x4D4196: pop     ebx
-0x4D4197: add     esp, 48h
-0x4D419A: retn    28h ; '('
+0x4D4197: add     esp, 48h; BloodOnDeath decode: function epilogue is add esp,48h; retn 28h, confirming thiscall with 40 bytes of stack args: position vec3, direction vec3, texture, explicit target, selector, alternate geometry.
+0x4D419A: retn    28h ; '('; BloodOnDeath decode: retn 0x28 confirms thiscall with 40 stack bytes: position vec3, direction vec3, texture, explicit target, selector, alternate geometry.
+0x4CA150: mov     dword ptr [ecx], offset ??_7?$NiTListBase@V?$NiTPointerAllocator@I@@PAVNiAVObject@@@@6B@; const NiTListBase<NiTPointerAllocator<uint>,NiAVObject *>::`vftable'
+0x4CA156: retn
+0x9B5690: mov     eax, [ebp+20h]
+0x9B5693: push    eax
+0x9B5694: call    sub_6078C0
+0x9B5699: pop     ecx
+0x9B569A: retn
+0x9B569B: lea     ecx, [ebp-1Ch]
+0x9B569E: jmp     j_??1?$NiTPointerList@PAVNiAVObject@@@@UAE@XZ; NiTPointerList<NiAVObject *>::~NiTPointerList<NiAVObject *>(void)
+0x9B56A3: lea     ecx, [ebp-1Ch]
+0x9B56A6: jmp     loc_4CA150
+0x9B56AB: mov     edx, [esp+arg_4]
+0x9B56AF: lea     eax, [edx-4Ch]
+0x9B56B2: mov     ecx, [edx-50h]
+0x9B56B5: xor     ecx, eax
+0x9B56B7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B56BC: mov     eax, offset stru_AE074C
+0x9B56C1: jmp     ___CxxFrameHandler3

@@ -1,4 +1,4 @@
-int __usercall ActiveEffect_Base_CreateDynamic_::Wrapup@<eax>(
+void __usercall ActiveEffect_Base_CreateDynamic_::Wrapup(
         int a1@<eax>,
         int a2,
         int a3,
@@ -27,26 +27,7 @@ int __usercall ActiveEffect_Base_CreateDynamic_::Wrapup@<eax>(
         int a26,
         int a27)
 {
-  if ( a1 )
-    *(_DWORD *)(a1 + 0x30) = a27;
-  return ActiveEffect_Base_CreateDynamic_::Epilogue(
-           a2,
-           a3,
-           a4,
-           a5,
-           a6,
-           a7,
-           a8,
-           a9,
-           a10,
-           a11,
-           a12,
-           a13,
-           a14,
-           a15,
-           a16,
-           a17,
-           a18,
-           a19,
-           a20);
+  if ( a1 ) /*0x68ed7c*/
+    *(_DWORD *)(a1 + 0x30) = a27; /*0x68ed82*/
+  ActiveEffect_Base_CreateDynamic_::Epilogue(); /*0x68ed7c*/
 }

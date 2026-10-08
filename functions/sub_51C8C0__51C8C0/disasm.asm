@@ -3,7 +3,7 @@
 0x51C8CB: xor     eax, esp
 0x51C8CD: mov     [esp+108h+var_4], eax
 0x51C8D4: push    ebx
-0x51C8D5: mov     ebx, [esp+10Ch+arg_0]
+0x51C8D5: mov     ebx, [esp+10Ch+reference]
 0x51C8DC: push    esi
 0x51C8DD: push    edi
 0x51C8DE: mov     edi, ecx
@@ -48,9 +48,9 @@
 0x51C954: mov     esi, [esi+4]
 0x51C957: test    esi, esi
 0x51C959: jnz     short loc_51C8F0
-0x51C95B: push    ebx
-0x51C95C: mov     ecx, edi
-0x51C95E: call    sub_4B3210
+0x51C95B: push    ebx; reference
+0x51C95C: mov     ecx, edi; this
+0x51C95E: call    TESBoundObject_ReleaseReferenceModel; Verified: releases model-loader usage for a bound object/reference. For scaled refs, removes the scale-specific key and may also remove the base key depending on load state.
 0x51C963: mov     ecx, [esp+114h+var_4]
 0x51C96A: pop     edi
 0x51C96B: pop     esi

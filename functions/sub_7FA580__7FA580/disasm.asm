@@ -12,7 +12,7 @@
 0x7FA59C: lea     eax, [esp+28h+var_C]
 0x7FA5A0: mov     large fs:0, eax
 0x7FA5A6: mov     esi, ecx
-0x7FA5A8: call    sub_8025F0
+0x7FA5A8: call    sub_8025F0; Generic BSShader initialization used by SpeedTreeFrondShader vtable +0x84: sets renderer, invokes setup/check virtuals, and allocates one pass slot through sub_76CCA0.
 0x7FA5AD: push    0C0h ; 'À'; Size
 0x7FA5B2: mov     [esp+2Ch+var_15], al
 0x7FA5B6: call    FormHeapAlloc
@@ -96,7 +96,7 @@
 0x7FA6AB: fld     dword ptr ds:0A30634h
 0x7FA6B1: fstp    [esp+38h+a3]; a3
 0x7FA6B4: push    0; a2
-0x7FA6B6: call    sub_702EC0
+0x7FA6B6: call    sub_702EC0; MoonSugarEffect decode: sets 4-vertex screen polygon positions. For image-space quad arguments resolve to (-1,1), (-1,-1), (1,-1), (1,1), z=0.
 0x7FA6BB: mov     eax, [esi+0BCh]
 0x7FA6C1: mov     ecx, [eax+0B4h]; this
 0x7FA6C7: call    sub_703050
@@ -111,15 +111,15 @@
 0x7FA6EB: fstp    [esp+38h+a3]; a4
 0x7FA6EE: push    0; a3
 0x7FA6F0: push    0; a2
-0x7FA6F2: call    sub_702FC0
+0x7FA6F2: call    sub_702FC0; MoonSugarEffect decode: sets 4-vertex screen polygon UVs for one texture set. Image-space quad uses UV rectangle 0,0 to 1,1.
 0x7FA6F7: mov     ecx, [esi+0BCh]; this
-0x7FA6FD: call    NiAVObject_InitializePropertyState
+0x7FA6FD: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x7FA702: fldz
 0x7FA704: push    1; a3
 0x7FA706: push    ecx
 0x7FA707: mov     ecx, [esi+0BCh]; this
 0x7FA70D: fstp    [esp+30h+a5]; a2
-0x7FA710: call    NiAVObject_UpdateNiAVObject
+0x7FA710: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x7FA715: mov     al, [esp+28h+var_15]
 0x7FA719: mov     ecx, dword ptr [esp+28h+var_C]
 0x7FA71D: mov     large fs:0, ecx
@@ -129,3 +129,20 @@
 0x7FA727: pop     ebp
 0x7FA728: add     esp, 18h
 0x7FA72B: retn
+0x9D0480: mov     eax, [ebp-14h]
+0x9D0483: push    eax
+0x9D0484: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D0489: pop     ecx
+0x9D048A: retn
+0x9D048B: mov     eax, [ebp-10h]
+0x9D048E: push    eax
+0x9D048F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D0494: pop     ecx
+0x9D0495: retn
+0x9D0496: mov     edx, [esp+arg_4]
+0x9D049A: lea     eax, [edx-18h]
+0x9D049D: mov     ecx, [edx-1Ch]
+0x9D04A0: xor     ecx, eax
+0x9D04A2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D04A7: mov     eax, offset stru_AF8E68
+0x9D04AC: jmp     ___CxxFrameHandler3

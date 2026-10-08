@@ -20,7 +20,7 @@
 0x654CA6: mov     edi, [esi+3Ch]
 0x654CA9: push    0
 0x654CAB: push    edi
-0x654CAC: call    sub_8A5580
+0x654CAC: call    sub_8A5580; ODismemberment: recursively walks NiAVObject children and dispatches the bhkConstraint attach/remove helpers on each bhkCollisionObject-backed node.
 0x654CB1: fld1
 0x654CB3: add     esp, 4
 0x654CB6: fstp    [esp+10h+var_10]; float

@@ -1,4 +1,4 @@
-0x765480: sub     esp, 30h
+0x765480: sub     esp, 30h; MoonSugar build 39: common non-skinned transform upload has many shader-family xrefs (generic, water, grass, precipitation, SpeedTree, LOD, GeometryDecal, Lighting30). Do not globally detour for Moon Sugar; use scoped caller/hook windows.
 0x765483: push    ebx
 0x765484: push    esi
 0x765485: push    edi
@@ -12,7 +12,7 @@
 0x765497: lea     ebx, [esi+940h]
 0x76549D: push    edi; int
 0x76549E: push    ebx; int
-0x76549F: call    sub_761AE0
+0x76549F: call    sub_761AE0; MoonSugarEffect decode: builds a camera-relative D3D world matrix from NiTransform using column/row layout used for non-skinned world constants; translation subtracts CameraWorldTranslate/flt_B3F930/flt_B3F934.
 0x7654A4: add     esp, 10h
 0x7654A7: cmp     [esp+3Ch+arg_4], 0
 0x7654AC: jz      short loc_7654C5
@@ -34,14 +34,14 @@
 0x7654DB: fstp    [esp+40h+var_40]; float
 0x7654DE: push    eax; int
 0x7654DF: mov     ecx, edi
-0x7654E1: call    sub_710190
+0x7654E1: call    NiMatrix3_ScaleTo
 0x7654E6: lea     ecx, [esp+3Ch+var_24]
 0x7654EA: push    ecx
 0x7654EB: lea     edx, [esi+628h]
 0x7654F1: push    edx
 0x7654F2: lea     eax, [esp+44h+var_30]
 0x7654F6: push    eax
-0x7654F7: call    sub_710250
+0x7654F7: call    NiPoint3_MultiplyMatrix3
 0x7654FC: mov     ecx, [eax]
 0x7654FE: mov     [esi+640h], ecx
 0x765504: mov     edx, [eax+4]
@@ -54,7 +54,7 @@
 0x765521: push    edx
 0x765522: lea     eax, [esp+50h+var_30]
 0x765526: push    eax
-0x765527: call    sub_710250
+0x765527: call    NiPoint3_MultiplyMatrix3
 0x76552C: mov     ecx, [eax]
 0x76552E: mov     [esi+64Ch], ecx
 0x765534: mov     edx, [eax+4]

@@ -1,40 +1,72 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "mciSendStringW::$5340B399E12AF4E20A22D7C12241AFEF",
+  "definition": "union mciSendStringW::$5340B399E12AF4E20A22D7C12241AFEF\n{\nMCI_GENERIC_PARMS generic;\nMCI_OPEN_PARMSW open;\nMCI_SOUND_PARMSW sound;\nMCI_SYSINFO_PARMSW sysinfo;\nDWORD dw[16];\n}\n",
   "id": 18374686479671821952,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "generic",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "MCI_GENERIC_PARMS"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "open",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "MCI_OPEN_PARMSW"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "sound",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "MCI_SOUND_PARMSW"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "sysinfo",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "MCI_SYSINFO_PARMSW"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dw",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 64
+      "size": 64,
+      "type": "DWORD[16]"
     }
   ],
   "name": "mciSendStringW::$5340B399E12AF4E20A22D7C12241AFEF",
+  "ordinal": 2086,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 64
 }

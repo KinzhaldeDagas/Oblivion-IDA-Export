@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x787100",
-    "line": "mov     eax, [ecx]",
+    "line": "mov     eax, [ecx]; CSpeedTreeRT::SetLeafDimmingScalar. Writes CTreeEngine+0x88 when the engine exists.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -19,13 +19,13 @@
   },
   {
     "ea": "0x787106",
-    "line": "fld     [esp+arg_0]",
+    "line": "fld     [esp+value]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x78710A",
-    "line": "fstp    dword ptr [eax+88h]",
+    "line": "fstp    dword ptr [eax+88h]; CSpeedTreeRT::SetLeafDimmingScalar direct store: treeEngine+0x88, which is OB_CTreeEngine::leafInfo.dimmingScalar. No quantization is performed here.",
     "mnemonic": "fstp",
     "size": 6
   },

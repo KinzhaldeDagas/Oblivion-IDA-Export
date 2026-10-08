@@ -16,7 +16,7 @@
 0x7E3D7D: jnz     short loc_7E3DE2
 0x7E3D7F: lea     eax, [esp+1Ch+var_10]
 0x7E3D83: push    eax
-0x7E3D84: call    sub_7606A0
+0x7E3D84: call    NiD3DPassPool_Acquire; Acquire a renderer-owned NiD3DPass from the global pass pool and return it with a reference.
 0x7E3D89: add     esp, 4
 0x7E3D8C: mov     esi, eax
 0x7E3D8E: mov     ecx, [edi+84h]; this
@@ -27,7 +27,7 @@
 0x7E3DA2: jz      short loc_7E3DAF
 0x7E3DA4: add     dword ptr [ecx+60h], 0FFFFFFFFh
 0x7E3DA8: jnz     short loc_7E3DAF
-0x7E3DAA: call    sub_7604D0
+0x7E3DAA: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x7E3DAF: mov     eax, [esi]
 0x7E3DB1: test    eax, eax
 0x7E3DB3: mov     [edi+84h], eax
@@ -42,7 +42,7 @@
 0x7E3DD5: add     eax, 60h ; '`'
 0x7E3DD8: cmp     dword ptr [eax], 0
 0x7E3DDB: jnz     short loc_7E3DE2
-0x7E3DDD: call    sub_7604D0
+0x7E3DDD: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x7E3DE2: mov     ecx, edi
 0x7E3DE4: call    sub_7E3730
 0x7E3DE9: mov     al, 1
@@ -53,3 +53,12 @@
 0x7E3DF8: pop     esi
 0x7E3DF9: add     esp, 10h
 0x7E3DFC: retn
+0x9D1130: lea     ecx, [ebp-10h]; void *
+0x9D1133: jmp     sub_4027D0
+0x9D1138: mov     edx, [esp+arg_4]
+0x9D113C: lea     eax, [edx-0Ch]
+0x9D113F: mov     ecx, [edx-10h]
+0x9D1142: xor     ecx, eax
+0x9D1144: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D1149: mov     eax, offset stru_AF984C
+0x9D114E: jmp     ___CxxFrameHandler3

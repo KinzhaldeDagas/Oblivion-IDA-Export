@@ -1,4 +1,4 @@
-0x864430: mov     eax, [esp+arg_0]
+0x864430: mov     eax, [esp+arg_0]; Constructs Oblivion TallGrassTriStrips from NiTriStripsData and installs the TallGrassTriStrips vtable.
 0x864434: push    esi
 0x864435: push    eax
 0x864436: mov     esi, ecx

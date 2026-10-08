@@ -1,70 +1,57 @@
-void __thiscall sub_696920(char *this, int a2, int a3)
+void __thiscall sub_696920(TESForm *this, int a2, int a3)
 {
   int v4; // eax
-  int v5; // edi
+  _DWORD *v5; // edi
   float *v6; // eax
   _DWORD *v7; // eax
-  size_t v8; // [esp-14h] [ebp-24h]
-  size_t v9; // [esp-Ch] [ebp-1Ch]
-  size_t v10; // [esp-Ch] [ebp-1Ch]
-  size_t v11; // [esp-4h] [ebp-14h] BYREF
-  int v12; // [esp+4h] [ebp-Ch]
-  int v13; // [esp+8h] [ebp-8h]
-  int v14; // [esp+Ch] [ebp-4h] BYREF
+  unsigned int v8[2]; // [esp+0h] [ebp-10h] BYREF
+  unsigned int destination; // [esp+Ch] [ebp-4h] BYREF
 
-  (*(void (__thiscall **)(char *))(*(_DWORD *)this + 0x148))(this);
-  sub_69F800(this, a2, a3);
-  LODWORD(v11) = 4;
-  SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, this + 0x80, v11);
-  LODWORD(v11) = 4;
-  TESForm_LoadDataFromCurrentSaveGame((TESForm *)(this + 0x5C), v11);
-  v4 = FormHeapAlloc(0x24u);
-  if ( v4 )
+  this->vtbl[1].DoPostFixup(this); /*0x69692f*/
+  sub_69F800(this, a2, a3); /*0x69693d*/
+  SaveLoad_LoadData(g_TESSaveLoadGame, (char *)this + 0x80, 4u); /*0x696951*/
+  TESForm_LoadDataFromCurrentSaveGame(this, (char *)this + 0x5C, 4u); /*0x69695e*/
+  v4 = FormHeapAlloc(0x24u); /*0x696965*/
+  if ( v4 ) /*0x69696f*/
   {
-    *(_DWORD *)(v4 + 0x20) = 0;
-    v5 = v4;
+    *(_DWORD *)(v4 + 0x20) = 0; /*0x696971*/
+    v5 = (_DWORD *)v4; /*0x696978*/
   }
   else
   {
-    v5 = 0;
+    v5 = 0; /*0x69697c*/
   }
-  if ( LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) >= 0x30u )
+  if ( g_TESSaveLoadGame->currentVersion >= 0x30u ) /*0x696988*/
   {
-    LODWORD(v11) = 0xC;
-    TESForm_LoadDataFromCurrentSaveGame((TESForm *)v5, v11);
-    LODWORD(v11) = 0x10;
-    SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, (void *)(v5 + 0xC), v11);
-    LODWORD(v11) = 4;
-    TESForm_LoadDataFromCurrentSaveGame((TESForm *)(v5 + 0x1C), v11);
+    TESForm_LoadDataFromCurrentSaveGame(this, v5, 0xCu); /*0x69698f*/
+    SaveLoad_LoadData(g_TESSaveLoadGame, v5 + 3, 0x10u); /*0x6969a0*/
+    TESForm_LoadDataFromCurrentSaveGame(this, v5 + 7, 4u); /*0x6969ad*/
   }
-  if ( LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) < 0x30u )
+  if ( g_TESSaveLoadGame->currentVersion < 0x30u ) /*0x6969bc*/
   {
-    v6 = TESDataHandler_g_PlayerRef->vtbl->super.super.super.GetPos(TESDataHandler_g_PlayerRef);
-    *(float *)v5 = *v6;
-    *(float *)(v5 + 4) = v6[1];
-    *(float *)(v5 + 8) = v6[2];
-    *(_DWORD *)(v5 + 0xC) = dword_B27110;
-    *(_DWORD *)(v5 + 0x10) = dword_B27114;
-    *(_DWORD *)(v5 + 0x14) = dword_B27118;
-    *(_DWORD *)(v5 + 0x18) = dword_B2711C;
+    v6 = reference->vtbl->super.super.super.GetPos(reference); /*0x6969cc*/
+    *v5 = *(_DWORD *)v6; /*0x6969d0*/
+    v5[1] = *((_DWORD *)v6 + 1); /*0x6969d5*/
+    v5[2] = *((_DWORD *)v6 + 2); /*0x6969db*/
+    v5[3] = dword_B27110; /*0x6969e4*/
+    v5[4] = dword_B27114; /*0x6969ed*/
+    v5[5] = dword_B27118; /*0x6969f5*/
+    v5[6] = dword_B2711C; /*0x6969fe*/
   }
-  LODWORD(v11) = 4;
-  TESForm_LoadFormIDFromCurrentSaveGame((TESForm *)&v14, v11, v12, v13, v14);
-  LODWORD(v9) = 2;
-  *((_DWORD *)this + 0x26) = v12;
-  TESForm_LoadDataFromCurrentSaveGame((TESForm *)((char *)&v11 + 4), v9);
-  if ( WORD2(v11) )
+  TESForm_LoadFormIDFromCurrentSaveGame(this, &destination, 4u); /*0x696a0a*/
+  *((_DWORD *)this + 0x26) = v8[1]; /*0x696a1c*/
+  TESForm_LoadDataFromCurrentSaveGame(this, v8, 2u); /*0x696a22*/
+  if ( LOWORD(v8[0]) )
   {
-    v7 = (_DWORD *)FormHeapAlloc((unsigned __int64)((unsigned int)WORD2(v11) + 1) >> 0x1E != 0 ? 0xFFFFFFFF : 4 * (WORD2(v11) + 1));
-    *(_DWORD *)(v5 + 0x20) = v7;
-    *v7 = WORD2(v11);
-    LODWORD(v10) = 4 * WORD2(v11);
-    TESForm_LoadFormIDFromCurrentSaveGame((TESForm *)(*(_DWORD *)(v5 + 0x20) + 4), v10, v11, SHIDWORD(v11), v12);
+    v7 = (_DWORD *)FormHeapAlloc(
+                     (unsigned __int64)((unsigned int)LOWORD(v8[0]) + 1) >> 0x1E != 0
+                   ? 0xFFFFFFFF
+                   : 4 * (LOWORD(v8[0]) + 1));
+    v5[8] = v7; /*0x696a4d*/
+    *v7 = LOWORD(v8[0]); /*0x696a55*/
+    TESForm_LoadFormIDFromCurrentSaveGame(this, (unsigned int *)(v5[8] + 4), 4 * LOWORD(v8[0])); /*0x696a6d*/
   }
-  *((_DWORD *)this + 0x21) = v5;
-  if ( LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) >= 0x71u )
-  {
-    LODWORD(v8) = 4;
-    TESForm_LoadDataFromCurrentSaveGame((TESForm *)(this + 0xA0), v8);
-  }
+  *((_DWORD *)this + 0x21) = v5; /*0x696a72*/
+  if ( g_TESSaveLoadGame->currentVersion >= 0x71u ) /*0x696a82*/
+    TESForm_LoadDataFromCurrentSaveGame(this, (char *)this + 0xA0, 4u); /*0x696a8f*/
 }

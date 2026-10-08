@@ -1,64 +1,108 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_TIME_DYNAMIC_ZONE_INFORMATION",
+  "definition": "struct __declspec(align(4)) _TIME_DYNAMIC_ZONE_INFORMATION\n{\nLONG Bias;\nWCHAR_0 StandardName[32];\nSYSTEMTIME StandardDate;\nLONG StandardBias;\nWCHAR_0 DaylightName[32];\nSYSTEMTIME DaylightDate;\nLONG DaylightBias;\nWCHAR_0 TimeZoneKeyName[128];\nBOOLEAN DynamicDaylightTimeDisabled;\n}\n",
   "id": 18374686479672045611,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Bias",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "StandardName",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 64
+      "size": 64,
+      "type": "WCHAR_0[32]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "StandardDate",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 16
+      "size": 16,
+      "type": "SYSTEMTIME"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "StandardBias",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DaylightName",
       "offset": 88,
       "offset_hex": "0x58",
-      "size": 64
+      "size": 64,
+      "type": "WCHAR_0[32]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DaylightDate",
       "offset": 152,
       "offset_hex": "0x98",
-      "size": 16
+      "size": 16,
+      "type": "SYSTEMTIME"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DaylightBias",
       "offset": 168,
-      "offset_hex": "0xa8",
-      "size": 4
+      "offset_hex": "0xA8",
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "TimeZoneKeyName",
       "offset": 172,
-      "offset_hex": "0xac",
-      "size": 256
+      "offset_hex": "0xAC",
+      "size": 256,
+      "type": "WCHAR_0[128]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DynamicDaylightTimeDisabled",
       "offset": 428,
-      "offset_hex": "0x1ac",
-      "size": 1
+      "offset_hex": "0x1AC",
+      "size": 1,
+      "type": "BOOLEAN"
     }
   ],
   "name": "_TIME_DYNAMIC_ZONE_INFORMATION",
+  "ordinal": 8163,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 432
 }

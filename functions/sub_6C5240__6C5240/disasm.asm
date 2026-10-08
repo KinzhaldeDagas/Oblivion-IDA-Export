@@ -22,7 +22,6 @@
 0x6C5276: jl      short loc_6C52A6
 0x6C5278: mov     ebp, [edi+4]
 0x6C527B: jmp     short loc_6C5280
-0x6C527D: align 10h
 0x6C5280: movsx   ecx, ax
 0x6C5283: cmp     dword ptr [ebp+ecx*4+0], 0
 0x6C5288: setz    cl

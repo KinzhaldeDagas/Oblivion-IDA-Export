@@ -21,16 +21,16 @@
 0x68ABE6: mov     edi, ecx
 0x68ABE8: mov     [esp+134h+var_11D], 0
 0x68ABED: jz      loc_68ADA8
-0x68ABF3: mov     ecx, [edi+4]
+0x68ABF3: mov     ecx, [edi+4]; this
 0x68ABF6: cmp     ecx, ebx
 0x68ABF8: lea     ebp, [edi+4]
 0x68ABFB: jz      loc_68AD46
-0x68AC01: call    sub_68B0F0
+0x68AC01: call    TravelPathNode_GetReference; Verified returns payload as TESObjectREFR* only when kind==0 (reference node); returns null for position nodes or other kinds.
 0x68AC06: cmp     eax, ebx
 0x68AC08: mov     [esp+134h+var_11C], eax
 0x68AC0C: jz      loc_68AD46
 0x68AC12: mov     ecx, eax; this
-0x68AC14: call    GetTeleportExtraData
+0x68AC14: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x68AC19: test    eax, eax
 0x68AC1B: jz      loc_68AD46
 0x68AC21: mov     eax, [edi]
@@ -52,8 +52,8 @@
 0x68AC4F: cmp     eax, ebx
 0x68AC51: mov     [esp+134h+var_4], ebx
 0x68AC58: jz      short loc_68AC63
-0x68AC5A: mov     ecx, eax
-0x68AC5C: call    sub_68B0C0
+0x68AC5A: mov     ecx, eax; this
+0x68AC5C: call    TravelPathNode_Init; Verified TravelPathNode_Init sets payload +0 to null and kind +4 to 0xFF (uninitialized sentinel); the three bytes at +5..+7 are not written.
 0x68AC61: mov     ebx, eax
 0x68AC63: mov     eax, [ebp+0]
 0x68AC66: push    eax
@@ -62,8 +62,8 @@
 0x68AC74: call    sub_68B240
 0x68AC79: mov     ecx, edi
 0x68AC7B: call    sub_689C10
-0x68AC80: mov     ecx, esi
-0x68AC82: call    sub_4D8AF0
+0x68AC80: mov     ecx, esi; this
+0x68AC82: call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.
 0x68AC87: mov     ecx, [esp+134h+var_11C]
 0x68AC8B: push    1
 0x68AC8D: push    0
@@ -73,8 +73,8 @@
 0x68AC94: call    ActivateRef
 0x68AC99: test    al, al
 0x68AC9B: jz      short loc_68ACA8
-0x68AC9D: mov     ecx, esi
-0x68AC9F: call    sub_4D8AF0
+0x68AC9D: mov     ecx, esi; this
+0x68AC9F: call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.
 0x68ACA4: cmp     eax, edi
 0x68ACA6: jnz     short loc_68ACD7
 0x68ACA8: mov     eax, [esi+58h]
@@ -116,10 +116,10 @@
 0x68AD12: call    eax
 0x68AD14: test    ebx, ebx
 0x68AD16: jz      loc_68ADA8
-0x68AD1C: mov     ecx, ebx
-0x68AD1E: call    sub_68B1C0
+0x68AD1C: mov     ecx, ebx; this
+0x68AD1E: call    TravelPathNode_FreeOwnedPosition; Verified frees only the owned position payload when kind==1; it does not free the TravelPathNode record itself and does not release reference-kind payloads.
 0x68AD23: push    ebx
-0x68AD24: call    FormHeapFree
+0x68AD24: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x68AD29: add     esp, 4
 0x68AD2C: jmp     short loc_68ADA8
 0x68AD2E: push    ebx
@@ -141,13 +141,13 @@
 0x68AD5A: mov     edx, [ecx]
 0x68AD5C: mov     eax, [edx+2C0h]
 0x68AD62: call    eax
-0x68AD64: mov     ecx, [ebp+0]
+0x68AD64: mov     ecx, [ebp+0]; this
 0x68AD67: test    ecx, ecx
 0x68AD69: movzx   ebx, ax
 0x68AD6C: jz      short loc_68AD75
-0x68AD6E: call    sub_68B110
+0x68AD6E: call    TravelPathNode_GetPosition; Verified TravelPathNode_GetPosition returns a stored NiPoint3* for kind 1; for kind 0, returns reference GetPos unless the ref has TeleportData, in which case it returns the linked door's TeleportData xyz marker. Null payloads and unrecognized kinds return g_zeroNiPoint3.
 0x68AD73: jmp     short loc_68AD7A
-0x68AD75: mov     eax, offset Vector3_InitValue?
+0x68AD75: mov     eax, offset g_zeroNiPoint3
 0x68AD7A: mov     edx, [edi]
 0x68AD7C: push    0
 0x68AD7E: push    eax
@@ -199,3 +199,19 @@
 0x68AE0B: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x68AE10: add     esp, 120h
 0x68AE16: retn    4
+0x9C52B0: mov     eax, [ebp-118h]
+0x9C52B6: push    eax
+0x9C52B7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C52BC: pop     ecx
+0x9C52BD: retn
+0x9C52BE: mov     edx, [esp+arg_4]
+0x9C52C2: lea     eax, [edx-124h]
+0x9C52C8: mov     ecx, [edx-128h]
+0x9C52CE: xor     ecx, eax
+0x9C52D0: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C52D5: add     eax, 10h
+0x9C52D8: mov     ecx, [edx-4]
+0x9C52DB: xor     ecx, eax
+0x9C52DD: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C52E2: mov     eax, offset stru_AEDABC
+0x9C52E7: jmp     ___CxxFrameHandler3

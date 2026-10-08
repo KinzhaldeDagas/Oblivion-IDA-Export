@@ -1,1 +1,1 @@
-POINTF
+typedef tagPOINTF POINTF;

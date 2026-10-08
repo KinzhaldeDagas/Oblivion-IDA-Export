@@ -1,19 +1,32 @@
 {
-  "callees_count": 25,
-  "callers_count": 5,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 16,
+  "callers_count": 11,
+  "chunks": [
+    [
+      "0x51A120",
+      "0x51A37A"
+    ]
+  ],
+  "chunks_sha256": "5e8afeccbfd0ab9f59f83030215d5636804e4e79c1ab0dfef1f5d3f566caa6d9",
+  "comment_regular": "Return the base actor's floating equipment desirability/rating for the supplied item. Native return type is float, not double. External ThrowingWeapon damage-doubling/ranged-multiplier and mode 1->2 conversion remain plugin policy; they are not behavior performed by this native evaluator.",
+  "comment_repeatable": "Return the base actor's floating equipment desirability/rating for the supplied item. Native return type is float, not double. External ThrowingWeapon damage-doubling/ranged-multiplier and mode 1->2 conversion remain plugin policy; they are not behavior performed by this native evaluator.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 10,
   "display_name": "TESActorBase_GetEquippableItemRating",
   "end_ea": "0x51A37A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "TESActorBase_GetEquippableItemRating",
   "segment": ".text",
   "sha256": "5e8afeccbfd0ab9f59f83030215d5636804e4e79c1ab0dfef1f5d3f566caa6d9",
   "size": 602,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x51A120",
-  "type": "double __thiscall(int *this, unsigned __int8 *)",
+  "total_chunk_size": 602,
+  "type": "float __thiscall(TESActorBase *this, TESForm *item)",
   "xrefs_from_count": 230,
   "xrefs_to_count": 11
 }

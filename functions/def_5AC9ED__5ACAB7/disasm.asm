@@ -9,7 +9,7 @@
 0x5ACAD0: push    0FB0h
 0x5ACAD5: call    Tile_SetString
 0x5ACADA: push    esi
-0x5ACADB: call    FormHeapFree
+0x5ACADB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5ACAE0: add     esp, 4
 0x5ACAE3: mov     ecx, [esp+arg_14]
 0x5ACAE7: mov     large fs:0, ecx

@@ -1,1 +1,4 @@
-IDirect3DVertexDeclaration9
+struct IDirect3DVertexDeclaration9
+{
+IDirect3DVertexDeclaration9Vtbl *lpVtbl;
+};

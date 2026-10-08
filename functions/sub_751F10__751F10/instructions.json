@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x751FE9",
-    "line": "call    sub_53D4B0",
+    "line": "call    NiTransform_TransformPoint; ODismemberment: __thiscall NiTransform point transform helper. Plugin hit capture must pass transform in ECX; cdecl here crashes on actor hits.",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x752040",
-    "line": "lea     ecx, [esp+20Ch+var_D4]",
+    "line": "lea     ecx, [esp+20Ch+out]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x75204F",
-    "line": "call    sub_718A80",
+    "line": "call    sub_718A80;",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,13 +523,13 @@
   },
   {
     "ea": "0x75205E",
-    "line": "lea     ecx, [esp+214h+var_D4]",
+    "line": "lea     ecx, [esp+214h+out]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x752065",
-    "line": "call    sub_53D4B0",
+    "line": "call    NiTransform_TransformPoint; ODismemberment: __thiscall NiTransform point transform helper. Plugin hit capture must pass transform in ECX; cdecl here crashes on actor hits.",
     "mnemonic": "call",
     "size": 5
   },
@@ -589,7 +589,7 @@
   },
   {
     "ea": "0x752084",
-    "line": "lea     ecx, [esp+214h+var_D4]",
+    "line": "lea     ecx, [esp+214h+out]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -1879,7 +1879,7 @@
   },
   {
     "ea": "0x7523A4",
-    "line": "call    sub_710190",
+    "line": "call    NiMatrix3_ScaleTo",
     "mnemonic": "call",
     "size": 5
   },
@@ -1915,31 +1915,31 @@
   },
   {
     "ea": "0x7523BE",
-    "line": "push    eax",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7523BF",
-    "line": "lea     eax, [esp+218h+var_D4]",
+    "line": "lea     eax, [esp+218h+out]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x7523C6",
-    "line": "push    eax",
+    "line": "push    eax; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7523C7",
-    "line": "lea     ecx, [esp+21Ch+var_12C]",
+    "line": "lea     ecx, [esp+21Ch+var_12C]; this",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x7523CE",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1951,7 +1951,7 @@
   },
   {
     "ea": "0x7523D5",
-    "line": "call    sub_710190",
+    "line": "call    NiMatrix3_ScaleTo",
     "mnemonic": "call",
     "size": 5
   },
@@ -2083,7 +2083,7 @@
   },
   {
     "ea": "0x752427",
-    "line": "lea     eax, [esp+210h+var_D4]",
+    "line": "lea     eax, [esp+210h+out]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -2197,7 +2197,7 @@
   },
   {
     "ea": "0x75245E",
-    "line": "call    sub_710190",
+    "line": "call    NiMatrix3_ScaleTo",
     "mnemonic": "call",
     "size": 5
   },
@@ -2233,7 +2233,7 @@
   },
   {
     "ea": "0x752478",
-    "line": "push    eax",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
@@ -2245,19 +2245,19 @@
   },
   {
     "ea": "0x752480",
-    "line": "push    edx",
+    "line": "push    edx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x752481",
-    "line": "lea     ecx, [esp+21Ch+var_12C]",
+    "line": "lea     ecx, [esp+21Ch+var_12C]; this",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x752488",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2269,7 +2269,7 @@
   },
   {
     "ea": "0x75248F",
-    "line": "call    sub_710190",
+    "line": "call    NiMatrix3_ScaleTo",
     "mnemonic": "call",
     "size": 5
   },
@@ -2557,7 +2557,7 @@
   },
   {
     "ea": "0x75253D",
-    "line": "call    sub_710190",
+    "line": "call    NiMatrix3_ScaleTo",
     "mnemonic": "call",
     "size": 5
   },

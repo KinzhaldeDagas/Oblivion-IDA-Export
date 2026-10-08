@@ -13,7 +13,7 @@
 0x89396D: lea     eax, [esp+0Ch+var_4]
 0x893971: push    eax
 0x893972: call    edx
-0x893974: mov     eax, dword ptr [esp+8+var_4]
+0x893974: mov     eax, [esp+8+var_4]
 0x893978: test    eax, eax
 0x89397A: jz      short loc_89399C
 0x89397C: push    esi

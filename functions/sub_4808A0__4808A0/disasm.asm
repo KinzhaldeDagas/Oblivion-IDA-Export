@@ -12,7 +12,7 @@
 0x4808B6: test    eax, eax
 0x4808B8: jz      short loc_4808CE
 0x4808BA: lea     ebx, [ebx+0]
-0x4808C0: cmp     eax, offset dword_B40864
+0x4808C0: cmp     eax, offset stru_B40864
 0x4808C5: jz      short loc_4808F3
 0x4808C7: mov     eax, [eax+4]
 0x4808CA: test    eax, eax

@@ -16,27 +16,27 @@ void __userpurge sub_445DF0(
   bool v13; // zf
   TESWorldSpace **v14; // eax
   int v15; // ecx
-  _DWORD *v16; // ecx
-  TESWorldSpace **v17; // eax
+  TESDataHandler *v16; // ecx
+  OblivionTESFormListNode *p_worldspaceList; // eax
   clock_t v18; // eax
   int v20; // eax
   int v21; // eax
   int v22; // ebx
   int v23; // eax
   const char *v24; // eax
-  TESForm *v25; // eax
+  TESForm *ExteriorCellAtCoord; // eax
   TESForm *v26; // esi
   int v27; // ebx
   int v28; // eax
   int v29; // ebx
   int v30; // eax
   int v31; // eax
-  float v32; // eax
-  float v33; // edx
-  int v34; // eax
+  float x; // eax
+  float z; // edx
+  TESObjectREFR *v34; // eax
   int v35; // eax
   TESObjectLAND *v36; // eax
-  NiNode *NiNode; // eax
+  void *ObjectPointerAt_054; // eax
   int v39; // ebp
   UInt32 *p_unk78; // edi
   TES *v41; // ebx
@@ -120,30 +120,30 @@ void __userpurge sub_445DF0(
   int v119; // [esp+ECh] [ebp-68h]
   int v120; // [esp+F0h] [ebp-64h]
 
-  v12 = a1;
-  v81 = a1;
-  if ( a11 == 4 || a11 == 5 )
-    byte_B33A8C = 1;
-  if ( a11 == 0xFFFFFFFF )
+  v12 = a1; /*0x445e11*/
+  v81 = a1; /*0x445e14*/
+  if ( a11 == 4 || a11 == 5 ) /*0x445e1d*/
+    unk_B33A8C = 1; /*0x445e1f*/
+  if ( a11 == 0xFFFFFFFF ) /*0x445e29*/
   {
-    a1->unk51 = 0;
-    bDisableWarning_MESSAGES = 0;
+    a1->unk51 = 0; /*0x445f47*/
+    bDisableWarning_MESSAGES = 0; /*0x445f4b*/
   }
   else
   {
-    _EDI = 0;
-    if ( !a11 )
-      goto LABEL_31;
-    v13 = byte_B33A8C == 0;
-    a1->unk51 = 1;
-    dword_B33A88 = a11;
-    bDisableWarning_MESSAGES = 1;
-    if ( v13 )
+    _EDI = 0; /*0x445e2f*/
+    if ( !a11 ) /*0x445e33*/
+      goto LABEL_31; /*0x445e33*/
+    v13 = unk_B33A8C == 0; /*0x445e39*/
+    a1->unk51 = 1; /*0x445e40*/
+    unk_B33A88 = a11; /*0x445e44*/
+    bDisableWarning_MESSAGES = 1; /*0x445e4a*/
+    if ( v13 ) /*0x445e51*/
     {
-      DeleteFileA("TestAllCells.xls");
-      PrintError("\r\n\r\n**************** Base Object Models ****************");
-      sub_44E720(
-        TESDataHandler,
+      DeleteFileA("TestAllCells.xls"); /*0x445e58*/
+      PrintError("\r\n\r\n**************** Base Object Models ****************"); /*0x445e63*/
+      sub_44E720( /*0x445e72*/
+        (int)g_TESDataHandler,
         a11,
         a8,
         a9,
@@ -204,190 +204,196 @@ void __userpurge sub_445DF0(
         v118,
         v119,
         v120);
-      PrintError("\r\n\r\n**************** Base Object Icons/Textures ****************");
-      sub_44CF80();
-      byte_B33A8C = 1;
+      PrintError("\r\n\r\n**************** Base Object Icons/Textures ****************"); /*0x445e7c*/
+      sub_44CF80(); /*0x445e8a*/
+      unk_B33A8C = 1; /*0x445e8f*/
     }
-    v14 = (TESWorldSpace **)dword_B33A84;
-    v15 = dword_B33A80;
-    if ( (a11 == 1 || a11 == 4 || a11 == 5) && !v14 && !v15 )
+    v14 = (TESWorldSpace **)unk_B33A84; /*0x445e99*/
+    v15 = unk_B33A80; /*0x445e9e*/
+    if ( (a11 == 1 || a11 == 4 || a11 == 5) && !v14 && !v15 ) /*0x445eb6*/
     {
-      v16 = (_DWORD *)TESDataHandler;
-      v17 = (TESWorldSpace **)(TESDataHandler + 0xC);
-      goto LABEL_14;
+      v16 = g_TESDataHandler; /*0x445eb8*/
+      p_worldspaceList = &g_TESDataHandler->worldspaceList; /*0x445ebe*/
+      goto LABEL_14; /*0x445ebe*/
     }
-    if ( a11 == 3 )
+    if ( a11 == 3 ) /*0x445ed2*/
     {
-      v16 = (_DWORD *)TESDataHandler;
-      if ( v14 && *v14 == v12->currentWorldSpace )
-        goto LABEL_15;
-      v17 = (TESWorldSpace **)(v16 + 3);
-      dword_B33A84 = (int)(v16 + 3);
-      if ( v16 == (_DWORD *)0xFFFFFFF4 )
-        goto LABEL_31;
-      while ( !*v17 || *v17 != v12->currentWorldSpace )
+      v16 = g_TESDataHandler; /*0x445ed6*/
+      if ( v14 && *v14 == v12->currentWorldSpace ) /*0x445ee3*/
+        goto LABEL_15; /*0x445ee3*/
+      p_worldspaceList = &v16->worldspaceList; /*0x445ee5*/
+      unk_B33A84 = (int)&v16->worldspaceList; /*0x445eea*/
+      if ( v16 == (TESDataHandler *)0xFFFFFFF4 ) /*0x445eef*/
+        goto LABEL_31; /*0x445eef*/
+      while ( !p_worldspaceList->item || p_worldspaceList->item != (TESForm *)v12->currentWorldSpace ) /*0x445efa*/
       {
-        v17 = (TESWorldSpace **)v17[1];
-        if ( !v17 )
+        p_worldspaceList = p_worldspaceList->next; /*0x445efc*/
+        if ( !p_worldspaceList ) /*0x445f01*/
         {
-          dword_B33A84 = 0;
-          goto LABEL_31;
+          unk_B33A84 = 0; /*0x445f03*/
+          goto LABEL_31; /*0x445f08*/
         }
       }
 LABEL_14:
-      dword_B33A84 = (int)v17;
+      unk_B33A84 = (int)p_worldspaceList; /*0x445ec1*/
 LABEL_15:
-      byte_B33A7C = 1;
+      unk_B33A7C = 1; /*0x445ec6*/
 LABEL_29:
-      sub_447580(v16);
-      dword_B33A80 = (int)Actor::GetTemplateForm((Actor *)TESDataHandler);
-      dword_B33A78 = 0;
-      goto LABEL_31;
+      sub_447580(v16); /*0x445f2a*/
+      unk_B33A80 = (int)Actor::GetTemplateForm((Actor *)g_TESDataHandler); /*0x445f3a*/
+      unk_B33A78 = 0; /*0x445f3f*/
+      goto LABEL_31; /*0x445f45*/
     }
-    if ( a11 == 2 )
+    if ( a11 == 2 ) /*0x445f0d*/
     {
-      if ( v14 )
+      if ( v14 ) /*0x445f11*/
       {
-        dword_B33A84 = 0;
-        byte_B33A7C = 0;
+        unk_B33A84 = 0; /*0x445f13*/
+        unk_B33A7C = 0; /*0x445f19*/
       }
-      if ( !v15 )
+      if ( !v15 ) /*0x445f22*/
       {
-        v16 = (_DWORD *)TESDataHandler;
-        goto LABEL_29;
+        v16 = g_TESDataHandler; /*0x445f24*/
+        goto LABEL_29; /*0x445f24*/
       }
     }
   }
 LABEL_31:
   if ( v12->unk51 )
   {
-    v18 = clock();
-    v13 = byte_B33A7C == 0;
-    v80 = v18;
-    if ( !v13 )
+    v18 = clock(); /*0x445f5c*/
+    v13 = unk_B33A7C == 0; /*0x445f61*/
+    v80 = v18; /*0x445f68*/
+    if ( !v13 ) /*0x445f6c*/
     {
-      if ( dword_B33A84 )
+      if ( unk_B33A84 ) /*0x445f72*/
       {
-        sub_4431F0(v12, a8, (char)v12, a9, a10, *(TESWorldSpace **)dword_B33A84);
-        _ESI = v12->currentWorldSpace;
-        __asm { fld     dword ptr [esi+98h] }
-        v20 = Double_To_SInt32(a10);
-        __asm { fld     dword ptr [esi+9Ch] }
-        _EDI = v20 >> 0xC;
-        *(_DWORD *)dword_B33A74 = v20 >> 0xC;
-        v21 = Double_To_SInt32(a10);
-        __asm
+        sub_4431F0(v12, a8, a9, a10, *(TESWorldSpace **)unk_B33A84); /*0x445f84*/
+        _ESI = v12->currentWorldSpace; /*0x445f89*/
+        __asm { fld     dword ptr [esi+98h] } /*0x445f8c*/
+        v20 = Double_To_SInt32(a10); /*0x445f92*/
+        __asm { fld     dword ptr [esi+9Ch] } /*0x445f97*/
+        _EDI = v20 >> 0xC; /*0x445f9f*/
+        *(_DWORD *)unk_B33A74 = v20 >> 0xC; /*0x445fa2*/
+        v21 = Double_To_SInt32(a10); /*0x445fa8*/
+        __asm /*0x445fad*/
         {
           fld     dword ptr [esi+0A0h]
           fstp    [esp+13Ch+var_12C]
         }
         __asm { fld     dword ptr [esi+0A4h] }
-        v22 = v21 >> 0xC;
-        __asm { fstp    [esp+13Ch+var_128] }
-        dword_B33A70 = v21 >> 0xC;
-        __asm { fld     [esp+13Ch+var_128] }
+        v22 = v21 >> 0xC; /*0x445fbf*/
+        __asm { fstp    [esp+13Ch+var_128] } /*0x445fc2*/
+        unk_B33A70 = v21 >> 0xC; /*0x445fc6*/
+        __asm { fld     [esp+13Ch+var_128] } /*0x445fcc*/
         __asm { fld     [esp+13Ch+var_12C] }
-        v67 = Double_To_SInt32(a10) >> 0xC;
-        v23 = Double_To_SInt32(a10);
-        v24 = (const char *)((int (__thiscall *)(TESWorldSpace *, int, int, int, int))_ESI->vtbl->GetEditorName)(
+        v67 = Double_To_SInt32(a10) >> 0xC; /*0x445fdc*/
+        v23 = Double_To_SInt32(a10); /*0x445fdd*/
+        v24 = (const char *)((int (__thiscall *)(TESWorldSpace *, int, int, int, int))_ESI->vtbl->GetEditorName)( /*0x445ff2*/
                               _ESI,
                               _EDI,
                               v22,
                               v23 >> 0xC,
                               v67);
-        PrintError("\r\n\r\n**************** %s (%d,%d) - (%d,%d) ****************", v24, v56, v60, v64, v68);
+        PrintError("\r\n\r\n**************** %s (%d,%d) - (%d,%d) ****************", v24, v56, v60, v64, v68); /*0x445ffa*/
       }
-      byte_B33A7C = 0;
+      unk_B33A7C = 0; /*0x446002*/
     }
-    if ( dword_B33A84 )
+    if ( unk_B33A84 ) /*0x446009*/
     {
-      v25 = sub_4F1630(v12->currentWorldSpace, a8, a9, a10, *(_DWORD *)dword_B33A74, dword_B33A70);
-      v26 = v25;
-      if ( v25 )
-        sub_43FED0(v12, a8, a9, a10, (TESObjectCELL *)v25);
-      _EDI = (int)v12->currentWorldSpace;
-      __asm { fld     dword ptr [edi+0A4h] }
-      v27 = dword_B33A70 + 1;
-      dword_B33A70 = v27;
-      if ( v27 > Double_To_SInt32(a10) >> 0xC )
+      ExteriorCellAtCoord = TESWorldSpace_LoadExteriorCellAtCoord( /*0x446027*/
+                              v12->currentWorldSpace,
+                              a8,
+                              a9,
+                              a10,
+                              *(_DWORD *)unk_B33A74,
+                              unk_B33A70);
+      v26 = ExteriorCellAtCoord; /*0x44602c*/
+      if ( ExteriorCellAtCoord ) /*0x446030*/
+        sub_43FED0(v12, a8, a9, a10, (TESObjectCELL *)ExteriorCellAtCoord); /*0x446035*/
+      _EDI = (int)v12->currentWorldSpace; /*0x446040*/
+      __asm { fld     dword ptr [edi+0A4h] } /*0x446043*/
+      v27 = unk_B33A70 + 1; /*0x446049*/
+      unk_B33A70 = v27; /*0x44604c*/
+      if ( v27 > Double_To_SInt32(a10) >> 0xC ) /*0x44605c*/
       {
-        __asm { fld     dword ptr [edi+9Ch] }
-        v28 = Double_To_SInt32(a10);
-        __asm { fld     dword ptr [edi+0A0h] }
-        v29 = *(_DWORD *)dword_B33A74 + 1;
-        dword_B33A70 = v28 >> 0xC;
-        *(_DWORD *)dword_B33A74 = v29;
-        if ( v29 > Double_To_SInt32(a10) >> 0xC )
+        __asm { fld     dword ptr [edi+9Ch] } /*0x446062*/
+        v28 = Double_To_SInt32(a10); /*0x446068*/
+        __asm { fld     dword ptr [edi+0A0h] } /*0x44606d*/
+        v29 = *(_DWORD *)unk_B33A74 + 1; /*0x44607c*/
+        unk_B33A70 = v28 >> 0xC; /*0x44607f*/
+        *(_DWORD *)unk_B33A74 = v29; /*0x446084*/
+        if ( v29 > Double_To_SInt32(a10) >> 0xC ) /*0x446094*/
         {
-          v30 = *(_DWORD *)(dword_B33A84 + 4);
-          dword_B33A84 = v30;
-          if ( v30 )
-            byte_B33A7C = 1;
+          v30 = *(_DWORD *)(unk_B33A84 + 4); /*0x44609b*/
+          unk_B33A84 = v30; /*0x4460a0*/
+          if ( v30 ) /*0x4460a5*/
+            unk_B33A7C = 1; /*0x4460a7*/
         }
       }
     }
     else
     {
-      if ( !dword_B33A78 )
-        PrintError("\r\n\r\n**************** Interiors ****************");
-      v31 = sub_447560((_DWORD *)TESDataHandler, dword_B33A78);
-      ++dword_B33A78;
-      v26 = (TESForm *)v31;
+      if ( !unk_B33A78 ) /*0x4460b0*/
+        PrintError("\r\n\r\n**************** Interiors ****************"); /*0x4460be*/
+      v31 = sub_447560(g_TESDataHandler, unk_B33A78); /*0x4460d3*/
+      ++unk_B33A78; /*0x4460d8*/
+      v26 = (TESForm *)v31; /*0x4460df*/
     }
     if ( v26 )
     {
       if ( (v26->member.flags & 0x20) == 0 )
       {
-        if ( sub_4CBA50(v26) )
+        if ( sub_4CBA50((TESObjectCELL *)v26) )
         {
-          __asm { fld     dword ptr ds:0A31C80h }
+          __asm { fld     dword ptr ds:0A31C80h } /*0x446107*/
           __asm { fstp    [esp+140h+var_140]; float }
-          sub_4029E0(&TimeGlobals, v69);
-          v32 = Vector3_InitValue_;
-          v33 = dword_B3F9B0;
-          *((float *)&v78 + 1) = *(&Vector3_InitValue_ + 1);
-          *(float *)&v78 = v32;
-          *(float *)&v79 = v33;
-          if ( !TESObjectCELL_IsInterior((TESObjectCELL *)v26) )
+          TimeGlobals_AdvanceGameTime(&MEMORY[0xB332E0], v69); /*0x446116*/
+          x = g_zeroNiPoint3.x; /*0x446121*/
+          z = g_zeroNiPoint3.z; /*0x446126*/
+          HIDWORD(v78) = LODWORD(g_zeroNiPoint3.y); /*0x44612c*/
+          *(float *)&v78 = x; /*0x446132*/
+          *(float *)&v79 = z; /*0x446136*/
+          if ( !TESObjectCELL_IsInterior((TESObjectCELL *)v26) ) /*0x44613a*/
           {
-            v76 = TESObjectCELL_GetXCoordinate((TESObjectCELL *)v26) << 0xC;
-            __asm { fild    [esp+13Ch+var_12C] }
+            v76 = TESObjectCELL_GetXCoordinate((TESObjectCELL *)v26) << 0xC; /*0x44614d*/
+            __asm { fild    [esp+13Ch+var_12C] } /*0x446151*/
             __asm
             {
               fadd    qword ptr ds:0A30F70h
               fstp    [esp+13Ch+var_110]
             }
-            v76 = TESObjectCELL_GetYCoordinate((TESObjectCELL *)v26) << 0xC;
-            __asm { fild    [esp+13Ch+var_12C] }
-            LODWORD(v78) = v82;
-            __asm
+            v76 = TESObjectCELL_GetYCoordinate((TESObjectCELL *)v26) << 0xC; /*0x446169*/
+            __asm { fild    [esp+13Ch+var_12C] } /*0x44616d*/
+            LODWORD(v78) = v82; /*0x446175*/
+            __asm /*0x446179*/
             {
               fadd    qword ptr ds:0A30F70h
               fstp    [esp+13Ch+var_10C]
             }
             __asm { fldz }
-            HIDWORD(v78) = v83;
-            __asm { fstp    [esp+13Ch+var_108] }
-            v79 = v84;
+            HIDWORD(v78) = v83; /*0x446189*/
+            __asm { fstp    [esp+13Ch+var_108] } /*0x44618d*/
+            v79 = v84; /*0x446195*/
           }
-          if ( TESObjectCELL_IsInterior((TESObjectCELL *)v26) )
+          if ( TESObjectCELL_IsInterior((TESObjectCELL *)v26) ) /*0x44619b*/
           {
-            sub_4D4310((TESObjectCELL *)v26);
-            v34 = sub_4CBB20(v26, 0x1C, 1);
-            if ( v34 || (v34 = sub_4CBA50(v26)) != 0 )
+            sub_4D4310((TESObjectCELL *)v26, a8, a9, a10); /*0x4461a6*/
+            v34 = sub_4CBB20((TESObjectCELL *)v26, 0x1C, 1); /*0x4461b1*/
+            if ( v34 || (v34 = sub_4CBA50((TESObjectCELL *)v26)) != 0 ) /*0x4461c3*/
             {
-              v35 = (*(int (__thiscall **)(int))(*(_DWORD *)v34 + 0x174))(v34);
-              v78 = *(_QWORD *)v35;
-              v79 = *(void *(__thiscall **)(NiAVObject *))(v35 + 8);
+              v35 = (int)v34->vtbl->GetPos(v34); /*0x4461cf*/
+              v78 = *(_QWORD *)v35; /*0x4461d3*/
+              v79 = *(void *(__thiscall **)(NiAVObject *))(v35 + 8); /*0x4461e1*/
             }
-            sub_4455E0((unsigned int)v12, a10, a7, a8, a9, a3, a6, a4, a5, _EDI, (TESObjectREFR *)v26, (float *)&v78);
+            sub_4455E0((unsigned int)v12, a10, a7, a8, a9, a3, a6, a4, a5, _EDI, (TESObjectREFR *)v26, (float *)&v78); /*0x4461ed*/
           }
           else
           {
-            if ( v12->currentInteriorCell )
-              sub_445A10((unsigned int)v12, _EDI, a7, a8, a9, a10, a3, a6, a4, a5, (float *)&v78);
+            if ( v12->currentInteriorCell ) /*0x4461f4*/
+              sub_445A10((unsigned int)v12, _EDI, a7, a8, a9, a10, a3, a6, a4, a5, (float *)&v78); /*0x446201*/
             else
-              a10 = sub_444FB0(
+              a10 = sub_444FB0( /*0x446238*/
                       (unsigned int)v12,
                       (TESObjectREFR *)v12,
                       a10,
@@ -400,9 +406,9 @@ LABEL_31:
                       a5,
                       (float *)&v78,
                       0);
-            v36 = sub_4CE3C0((TESObjectCELL *)v26);
-            sub_4C5B50(v36, (float *)&v78, (float *)&v76);
-            __asm
+            v36 = sub_4CE3C0((TESObjectCELL *)v26); /*0x446212*/
+            sub_4C5B50(v36, (float *)&v78, (float *)&v76); /*0x446219*/
+            __asm /*0x44621e*/
             {
               fldz
               fld     [esp+13Ch+var_12C]
@@ -410,13 +416,13 @@ LABEL_31:
               fnstsw  ax
               fstp    st(1)
             }
-            if ( (_AX & 0x100) != 0 )
-              __asm { fstp    st }
+            if ( (_AX & 0x100) != 0 ) /*0x44622d*/
+              __asm { fstp    st } /*0x44623f*/
             else
-              __asm { fstp    [esp+13Ch+var_11C] }
+              __asm { fstp    [esp+13Ch+var_11C] } /*0x44622f*/
           }
-          sub_66EAF0(
-            (int *)TESDataHandler_g_PlayerRef,
+          PlayerCharacter_ChangeCellAndPosition( /*0x446279*/
+            (TESObjectREFR *)reference,
             a10,
             a7,
             a8,
@@ -428,63 +434,63 @@ LABEL_31:
             (void (__thiscall *)(NiAVObject *, NiMatrix33 *, NiPoint3 *, bool))v78,
             (NiAVObject *(__thiscall *)(NiAVObject *, const char *))HIDWORD(v78),
             v79,
-            LODWORD(TESDataHandler_g_PlayerRef->super.super.super.super.rot.x),
-            LODWORD(TESDataHandler_g_PlayerRef->super.super.super.super.rot.y),
-            LODWORD(TESDataHandler_g_PlayerRef->super.super.super.super.rot.z),
+            LODWORD(reference->super.super.super.super.rot.x),
+            LODWORD(reference->super.super.super.super.rot.y),
+            LODWORD(reference->super.super.super.super.rot.z),
             (TESObjectCELL *)v26,
             0);
-          sub_434020(ioManager, a8, a9, a10, 5);
-          v80 = clock() - v80;
-          __asm { fild    [esp+140h+var_118] }
+          sub_434020(MEMORY[0xB33A10], a8, a9, a10, 5); /*0x446286*/
+          v80 = clock() - v80; /*0x446296*/
+          __asm { fild    [esp+140h+var_118] } /*0x44629a*/
           __asm
           {
             fdiv    qword ptr ds:0A2FC70h
             fstp    [esp+140h+var_128]
           }
-          NiNode = TESObjectCELL_GetNiNode_((TESObjectCELL *)v26);
-          v39 = sub_4A2BA0((int)NiNode, 0);
-          p_unk78 = &TES->unk78;
-          v41 = TES;
-          if ( TES->unk7C )
+          ObjectPointerAt_054 = GetObjectPointerAt_054(v26); /*0x4462aa*/
+          v39 = sub_4A2BA0((int)ObjectPointerAt_054, 0); /*0x4462b5*/
+          p_unk78 = &MEMORY[0xB333A0]->unk78; /*0x4462bc*/
+          v41 = MEMORY[0xB333A0]; /*0x4462c6*/
+          if ( MEMORY[0xB333A0]->unk7C ) /*0x4462c2*/
           {
-            do
+            do /*0x4462ec*/
             {
-              v70 = p_unk78[1];
-              v80 = *(_DWORD *)(v70 + 4);
-              FormHeapFree(v70);
-              v13 = v80 == 0;
-              p_unk78[1] = v80;
+              v70 = p_unk78[1]; /*0x4462d6*/
+              v80 = *(_DWORD *)(v70 + 4); /*0x4462d7*/
+              FormHeapFree(v70); /*0x4462db*/
+              v13 = v80 == 0; /*0x4462e7*/
+              p_unk78[1] = v80; /*0x4462e9*/
             }
-            while ( !v13 );
+            while ( !v13 ); /*0x4462ec*/
           }
-          *p_unk78 = 0;
-          if ( v41->currentInteriorCell )
-            sub_4425D0(v41);
-          sound = OSGlobals->sound;
-          if ( sound )
-            sub_6AC210(sound);
-          sub_43FFF0(v41, a8, a9, a10, 1, 0);
-          sub_43FE30(v41, a8, a9, a10, 1);
-          v41->unkA8 = 1;
-          sub_43FC20(TES, 0);
-          OSGlobals_PurgeModels(1);
-          sub_43FC20(TES, 0);
+          *p_unk78 = 0; /*0x4462ee*/
+          if ( v41->currentInteriorCell ) /*0x4462f4*/
+            sub_4425D0(v41); /*0x4462fc*/
+          sound = MEMORY[0xB33398]->sound; /*0x446306*/
+          if ( sound ) /*0x44630b*/
+            sub_6AC210(sound); /*0x44630d*/
+          sub_43FFF0(v41, a8, a9, a10, 1, 0); /*0x446318*/
+          sub_43FE30(v41, a8, a9, a10, 1); /*0x446321*/
+          v41->unkA8 = 1; /*0x446326*/
+          sub_43FC20(MEMORY[0xB333A0], 0); /*0x446335*/
+          OSGlobals_PurgeModels(1); /*0x446342*/
+          sub_43FC20(MEMORY[0xB333A0], 0); /*0x44634f*/
           if ( TESObjectCELL_IsInterior((TESObjectCELL *)v26) )
           {
-            v43 = sub_4CB730((char *)v26);
-            __asm { fld     [esp+13Ch+var_128] }
+            v43 = sub_4CB730((TESObjectCELL *)v26); /*0x446361*/
+            __asm { fld     [esp+13Ch+var_128] } /*0x446366*/
             __asm { fstp    [esp+148h+var_148] }
-            v44 = (const char *)((int (__thiscall *)(TESForm *, int, _DWORD, _DWORD, int))v26->vtbl->GetEditorName)(
+            v44 = (const char *)((int (__thiscall *)(TESForm *, int, _DWORD, _DWORD, int))v26->vtbl->GetEditorName)( /*0x44637c*/
                                   v26,
                                   v39,
                                   LODWORD(v61),
                                   HIDWORD(v61),
                                   v43);
             PrintError("Cell \"%s\" (Interior) Verts: %d Time: %.1f Lights: %d", v44, v57, v62, v71);
-            v45 = sub_4CB730((char *)v26);
-            __asm { fld     [esp+148h+var_128] }
+            v45 = sub_4CB730((TESObjectCELL *)v26); /*0x446394*/
+            __asm { fld     [esp+148h+var_128] } /*0x446399*/
             __asm { fstp    [esp+154h+var_154] }
-            ((void (__thiscall *)(TESForm *, int, _DWORD, _DWORD, int, _DWORD, _DWORD, _DWORD))v26->vtbl->GetEditorName)(
+            ((void (__thiscall *)(TESForm *, int, _DWORD, _DWORD, int, _DWORD, _DWORD, _DWORD))v26->vtbl->GetEditorName)( /*0x4463af*/
               v26,
               v39,
               LODWORD(v53),
@@ -496,12 +502,12 @@ LABEL_31:
           }
           else
           {
-            __asm { fld     [esp+13Ch+var_128] }
-            ++dword_B33A6C;
-            __asm { fstp    [esp+144h+var_148+4] }
-            YCoordinate = TESObjectCELL_GetYCoordinate((TESObjectCELL *)v26);
-            XCoordinate = TESObjectCELL_GetXCoordinate((TESObjectCELL *)v26);
-            v47 = (const char *)((int (__thiscall *)(TESForm *, int, int, int, _DWORD, _DWORD))v26->vtbl->GetEditorName)(
+            __asm { fld     [esp+13Ch+var_128] } /*0x4463c9*/
+            ++unk_B33A6C; /*0x4463cd*/
+            __asm { fstp    [esp+144h+var_148+4] } /*0x4463d7*/
+            YCoordinate = TESObjectCELL_GetYCoordinate((TESObjectCELL *)v26); /*0x4463e0*/
+            XCoordinate = TESObjectCELL_GetXCoordinate((TESObjectCELL *)v26); /*0x4463e3*/
+            v47 = (const char *)((int (__thiscall *)(TESForm *, int, int, int, _DWORD, _DWORD))v26->vtbl->GetEditorName)( /*0x4463f3*/
                                   v26,
                                   XCoordinate,
                                   YCoordinate,
@@ -509,11 +515,11 @@ LABEL_31:
                                   LODWORD(v65),
                                   HIDWORD(v65));
             PrintError("Cell \"%s\" (%d, %d) Verts: %d Time: %.1f", v47, v54, v59, v63, v66);
-            __asm { fld     [esp+158h+var_128] }
+            __asm { fld     [esp+158h+var_128] } /*0x446400*/
             __asm { fstp    [esp+150h+var_154+4] }
-            v52 = TESObjectCELL_GetYCoordinate((TESObjectCELL *)v26);
-            v48 = TESObjectCELL_GetXCoordinate((TESObjectCELL *)v26);
-            ((void (__thiscall *)(TESForm *, int, int, int, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD))v26->vtbl->GetEditorName)(
+            v52 = TESObjectCELL_GetYCoordinate((TESObjectCELL *)v26); /*0x44641b*/
+            v48 = TESObjectCELL_GetXCoordinate((TESObjectCELL *)v26); /*0x44641e*/
+            ((void (__thiscall *)(TESForm *, int, int, int, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD))v26->vtbl->GetEditorName)( /*0x44642e*/
               v26,
               v48,
               v52,
@@ -524,27 +530,37 @@ LABEL_31:
               0,
               0);
           }
-          nullsub_return0_0arg();
-          if ( dword_B33A88 == 4 || dword_B33A88 == 5 )
-            sub_466BE0((int)SaveLoad_CurrentSavegame, a3, a4, a5, a6, a7, a8, a9, a10, dword_B33A88);
-          v12 = v81;
+          nullsub_return0_0arg(); /*0x4463bc*/
+          if ( unk_B33A88 == 4 || unk_B33A88 == 5 ) /*0x446450*/
+            sub_466BE0( /*0x446459*/
+              (NiTMap<unsigned int,NiTSimpleList<ExpiredCellData *> *> *)g_TESSaveLoadGame,
+              a3,
+              a4,
+              a5,
+              a6,
+              a7,
+              a8,
+              a9,
+              a10,
+              unk_B33A88);
+          v12 = v81; /*0x44645e*/
         }
       }
     }
-    if ( dword_B33A78 >= (unsigned int)dword_B33A80 )
+    if ( unk_B33A78 >= (unsigned int)unk_B33A80 ) /*0x44646e*/
     {
-      v12->unk51 = 0;
-      v49 = bhkWorldM;
-      v13 = bhkWorldM == 0;
-      dword_B33A80 = 0;
-      bDisableWarning_MESSAGES = 0;
-      if ( !v13 )
+      v12->unk51 = 0; /*0x446470*/
+      v49 = MEMORY[0xB35C24]; /*0x446474*/
+      v13 = MEMORY[0xB35C24] == 0; /*0x44647a*/
+      unk_B33A80 = 0; /*0x44647c*/
+      bDisableWarning_MESSAGES = 0; /*0x446486*/
+      if ( !v13 ) /*0x44648d*/
       {
-        v50 = (_DWORD *)(*(int (__thiscall **)(int))(*(_DWORD *)v49 + 0x58))(v49);
-        v51 = sub_8991C0(v50);
-        _sprintf((char *)OutputString, "RBs = %d, Phantoms = %d\r\n", *((_DWORD *)v51 + 3), *((_DWORD *)v51 + 0xC));
-        OutputDebugStringA((LPCSTR)OutputString);
-        DebugBreak();
+        v50 = (_DWORD *)(*(int (__thiscall **)(int))(*(_DWORD *)v49 + 0x58))(v49); /*0x446494*/
+        v51 = sub_8991C0(v50); /*0x446498*/
+        _sprintf((char *)OutputString, "RBs = %d, Phantoms = %d\r\n", *((_DWORD *)v51 + 3), *((_DWORD *)v51 + 0xC)); /*0x4464af*/
+        OutputDebugStringA((LPCSTR)OutputString); /*0x4464bc*/
+        DebugBreak(); /*0x4464c2*/
       }
     }
   }

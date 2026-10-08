@@ -45,7 +45,6 @@
 0x534DEF: jle     short loc_534E28
 0x534DF1: mov     ebp, [esp+0B4h+arg_4]
 0x534DF8: jmp     short loc_534E00
-0x534DFA: align 10h
 0x534E00: mov     eax, [ebx+8]
 0x534E03: mov     ecx, [eax+esi*8]
 0x534E06: mov     edi, [eax+esi*8+4]

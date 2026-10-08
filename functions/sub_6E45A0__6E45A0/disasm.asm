@@ -33,7 +33,7 @@
 0x6E45EF: add     edx, eax
 0x6E45F1: push    ecx
 0x6E45F2: push    edx
-0x6E45F3: call    ebp ; dword_B3D4E8
+0x6E45F3: call    ebp ; unk_B3D4E8
 0x6E45F5: add     esp, 8
 0x6E45F8: test    al, al
 0x6E45FA: jz      short loc_6E460D

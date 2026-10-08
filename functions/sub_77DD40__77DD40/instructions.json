@@ -37,25 +37,25 @@
   },
   {
     "ea": "0x77DD4D",
-    "line": "push    esi",
+    "line": "push    esi; buffer",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x77DD4E",
-    "line": "call    sub_782930",
+    "line": "call    NiGeometryGroup_RemoveBufferData; Pass225: Unlinks NiGeometryBufferData from owning group; decrements group refcount and clears buffer+0x04.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x77DD53",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x77DD55",
-    "line": "call    sub_778110",
+    "line": "call    NiGeometryBufferData_Destroy; Pass225: Releases NiGeometryBufferData streams, index buffer, stream arrays, and vertex declaration before free.",
     "mnemonic": "call",
     "size": 5
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x77DD5B",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

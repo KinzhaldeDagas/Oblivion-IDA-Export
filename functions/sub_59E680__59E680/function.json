@@ -1,19 +1,36 @@
 {
-  "callees_count": 58,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 40,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_59E680",
+  "chunks": [
+    [
+      "0x59E680",
+      "0x59EA07"
+    ],
+    [
+      "0x9C0120",
+      "0x9C014B"
+    ]
+  ],
+  "chunks_sha256": "b5640443a8cef1cfcf0877cb1a76c74ce5d12fd7fb9f46b155461687d4614f61",
+  "comment_regular": "Builds player topic-choice tiles by starting at MenuTopicManager::FirstTopic(skipGreeting=true), deliberately omitting the GREETING/current spoken head entry. Each rendered tile receives a zero-based choice index; the manager cursor is restored with FirstTopic(false) afterward.",
+  "comment_repeatable": "Builds player topic-choice tiles by starting at MenuTopicManager::FirstTopic(skipGreeting=true), deliberately omitting the GREETING/current spoken head entry. Each rendered tile receives a zero-based choice index; the manager cursor is restored with FirstTopic(false) afterward.\n\nVerified (Silt Strider pass): return AL=1 after DialogMenu::Close on closePending (+0x88); AL=0 after normal list construction. Post-build hooks must distinguish this close path before touching menu tiles. Fallout 0x8252FDD0 LoadTopicsList is a structural analogue, but uses ListBox and void return; do not transfer its ABI.\nFollow-up: direct native xrefs remain only 0x59EA53,0x59EA84,0x59ED29. Recursive XML Value evaluation at 0x58BEE0 is established, but a concrete recursive LoadTopicsList path has not been established. Do not promote global scratch-pointer reentrancy risk to a demonstrated failure.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 18,
+  "display_name": "DialogMenu::LoadTopicsList",
   "end_ea": "0x59EA07",
+  "evidence_confidence": "Unknown",
   "flags": 22528,
   "has_pseudocode": true,
-  "name": "sub_59E680",
+  "name": "DialogMenu::LoadTopicsList",
   "segment": ".text",
   "sha256": "eff158d6aedec598c71ea53e0deeff9f1447ca2bfb0030fa21c51fd1011247ed",
   "size": 903,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x59E680",
-  "type": "char __usercall@<al>(int@<ecx>, int@<esi>, double@<st2>, double@<st1>)",
-  "xrefs_from_count": 353,
+  "total_chunk_size": 946,
+  "type": "bool __thiscall(DialogMenu *this)",
+  "xrefs_from_count": 366,
   "xrefs_to_count": 3
 }

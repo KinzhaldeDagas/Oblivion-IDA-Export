@@ -1,19 +1,36 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "CreateNewRenderTargetGroup",
+  "chunks": [
+    [
+      "0x9A2130",
+      "0x9A21CE"
+    ],
+    [
+      "0x9D7DB0",
+      "0x9D7DD6"
+    ]
+  ],
+  "chunks_sha256": "bc95e1f8edb1296a9edd7cf75d0ddb2cfede3f34ac4a14c5662eac2251de56f4",
+  "comment_regular": "Creates an empty NiRenderTargetGroup with a requested color-target count. Rejects null renderer, counts above renderer capability, and counts above Oblivion's hard MRT limit of four.",
+  "comment_repeatable": "Creates an empty NiRenderTargetGroup with a requested color-target count. Rejects null renderer, counts above renderer capability, and counts above Oblivion's hard MRT limit of four.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "NiRenderTargetGroup::Create",
   "end_ea": "0x9A21CE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "CreateNewRenderTargetGroup",
+  "name": "NiRenderTargetGroup::Create",
   "segment": ".text",
   "sha256": "aaac46a091938b0a58f8e134ffee68934f004878442c0c9a2546e141ec17acff",
   "size": 158,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x9A2130",
-  "type": "NiRenderTargetGroup *__cdecl(UInt32 maxTargets, NiRenderer *)",
-  "xrefs_from_count": 57,
+  "total_chunk_size": 196,
+  "type": "NiRenderTargetGroup *__cdecl(unsigned int targetCount, NiRenderer *renderer)",
+  "xrefs_from_count": 71,
   "xrefs_to_count": 1
 }

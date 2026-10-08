@@ -1,7 +1,7 @@
 0x9F1FD0: push    offset aYouCannotEqu_0; "You cannot equip this enchanted item ri"...
 0x9F1FD5: push    offset aScannotequipwo; "sCanNotEquipWornEnchantment"
-0x9F1FDA: mov     ecx, offset dword_B38A80
-0x9F1FDF: call    GameSetting_ConstrAndReg
+0x9F1FDA: mov     ecx, offset stru_B38A80; self
+0x9F1FDF: call    GameSetting_ConstrAndReg; Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.
 0x9F1FE4: push    offset sub_A21C20; void (__cdecl *)()
 0x9F1FE9: call    _atexit
 0x9F1FEE: pop     ecx

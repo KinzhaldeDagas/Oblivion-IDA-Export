@@ -1,4 +1,4 @@
-0x5463F3: cmp     [esp+arg_4C], 0
+0x5463F3: cmp     [esp+arg_4C], 0; Rejects targets beyond fSneakMaxDistance; exterior targets scale that limit by fSneakExteriorDistanceMult. The attack/forced-detection path bypasses the range rejection.
 0x5463F8: fld     dword ptr ds:0B36708h
 0x5463FE: fstp    dword ptr [esp+0]
 0x546401: jz      short loc_54640F
@@ -6,14 +6,14 @@
 0x546409: fmul    dword ptr [esp+0]
 0x54640C: fstp    dword ptr [esp+0]
 0x54640F: fld     dword ptr [esp+0]
-0x546412: mov     cl, [esp+arg_38]
+0x546412: mov     cl, byte ptr [esp+arg_38]
 0x546416: fld     [esp+arg_1C]
 0x54641A: fcom    st(1)
 0x54641C: fnstsw  ax
 0x54641E: test    ah, 41h
-0x546421: jnz     short Calc_DetectionLevel___CalcDistFactor
+0x546421: jnz     short Calc_DetectionLevel_ApplyDistanceFactor; Builds the normalized distance contribution from current distance and maximum detection range, then passes it through the remaining factors.
 0x546423: test    cl, cl
-0x546425: jnz     short Calc_DetectionLevel___CalcDistFactor
+0x546425: jnz     short Calc_DetectionLevel_ApplyDistanceFactor; Builds the normalized distance contribution from current distance and maximum detection range, then passes it through the remaining factors.
 0x546427: fstp    st(1)
 0x546429: xor     eax, eax
 0x54642B: fstp    st

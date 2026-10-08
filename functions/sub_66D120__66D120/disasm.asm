@@ -37,7 +37,7 @@
 0x66D194: test    edi, edi
 0x66D196: jz      loc_66D8FB
 0x66D19C: mov     ecx, edi; this
-0x66D19E: call    TESObjectREFR_GetParentCell
+0x66D19E: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x66D1A3: test    eax, eax
 0x66D1A5: jz      loc_66D8FB
 0x66D1AB: mov     eax, [edi]
@@ -101,10 +101,10 @@
 0x66D269: mov     ecx, esi
 0x66D26B: call    sub_5F11F0
 0x66D270: mov     ecx, edi; this
-0x66D272: call    TESObjectREFR_GetParentCell
+0x66D272: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x66D277: mov     edi, eax
 0x66D279: mov     ecx, edi; this
-0x66D27B: call    TESObjectCELL_IsInterior
+0x66D27B: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x66D280: test    al, al
 0x66D282: jz      short loc_66D290
 0x66D284: lea     ecx, [edi+28h]
@@ -145,7 +145,7 @@
 0x66D321: fstp    [esp+184h+var_158]
 0x66D325: fld     [esp+184h+var_16C]
 0x66D329: fstp    [esp+184h+var_154]
-0x66D32D: call    sub_404C90
+0x66D32D: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x66D332: fstp    dword ptr [esi+584h]
 0x66D338: lea     ecx, [esp+184h+var_F8+8]
 0x66D33F: push    ecx
@@ -159,11 +159,11 @@
 0x66D35A: xor     eax, eax
 0x66D35C: jmp     loc_66D5C0
 0x66D361: lea     ecx, [esp+184h+var_A0]
-0x66D368: call    bhkWorldRayCastData__Init
+0x66D368: call    bhkWorldRayCastData__Init; TES4 authoritative: bhkWorldRayCastData::Init. Raycast input From at +0x00, To at +0x10, enable/filter at +0x20/+0x24, output hit fraction at +0x44, root collidable at +0x50, extra collector pointers at +0x70/+0x74/+0x78.
 0x66D36D: lea     edx, [esp+184h+var_16C]
 0x66D371: push    edx
 0x66D372: mov     ecx, esi
-0x66D374: call    sub_65ABE0
+0x66D374: call    MobileObject_GetCollisionFilterInfo; Returns actor/proxy collision filter identity by calling 0x57E270 on MobileObject_GetCharProxy(this). Callers keep high 16 bits and OR in the chosen collision layer.
 0x66D379: movzx   eax, word ptr [eax+2]
 0x66D37D: shl     eax, 10h
 0x66D380: or      eax, 19h
@@ -171,7 +171,7 @@
 0x66D38A: lea     eax, [esp+184h+var_148]
 0x66D38E: push    eax
 0x66D38F: lea     ecx, [esp+188h+var_A0]
-0x66D396: call    bhkWorldRayCastData__SetCastInputFrom
+0x66D396: call    bhkWorldRayCastData__SetCastInputFrom; TES4 authoritative: bhkWorldRayCastData::SetCastInputFrom; scales world-space NiPoint3 into Havok units using hkFactor and writes ray From.
 0x66D39B: lea     ecx, [esp+184h+var_15C]
 0x66D39F: fld     dword ptr [esi+584h]
 0x66D3A5: push    ecx
@@ -194,7 +194,7 @@
 0x66D3E1: fstp    [esp+188h+var_158]
 0x66D3E5: fld     [esp+188h+var_164]
 0x66D3E9: fstp    [esp+188h+var_154]
-0x66D3ED: call    sub_663FF0
+0x66D3ED: call    sub_663FF0; bhkWorldRayCastData::SetCastDirectionVector. Converts a world-space direction vector by hkFactor and writes data+0x60. Used by actor movement probes for downward ground snapping instead of an absolute To point.
 0x66D3F2: mov     edx, [edi]
 0x66D3F4: mov     edx, [edx+88h]
 0x66D3FA: lea     eax, [esp+184h+var_A0]
@@ -204,7 +204,7 @@
 0x66D406: test    al, al
 0x66D408: jz      loc_66D4BC
 0x66D40E: lea     ecx, [esp+184h+var_A0]
-0x66D415: call    sub_889CD0
+0x66D415: call    bhkWorldRayCastData_GetHitInfoIfTyped; Raycast data -> low-level hit info helper from root collidable + internal offset; used to inspect collision layer in TES::CastRay.
 0x66D41A: test    eax, eax
 0x66D41C: jz      loc_66D4BC
 0x66D422: fld     [esp+184h+var_5C]
@@ -252,7 +252,7 @@
 0x66D4C8: call    sub_47DCD0
 0x66D4CD: cmp     byte ptr [esp+184h+var_168+3], 0
 0x66D4D2: jz      short loc_66D540
-0x66D4D4: push    offset dword_B258E8
+0x66D4D4: push    offset rhs
 0x66D4D9: lea     edx, [esp+188h+var_15C]
 0x66D4DD: push    edx
 0x66D4DE: lea     ecx, [ebx+64h]
@@ -286,7 +286,7 @@
 0x66D560: push    eax
 0x66D561: lea     eax, [esp+188h+var_15C]
 0x66D565: push    eax
-0x66D566: call    sub_43F3E0
+0x66D566: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x66D56B: fld     [esp+18Ch+var_15C]
 0x66D56F: fsub    [esp+18Ch+var_148]
 0x66D573: add     esp, 8
@@ -304,7 +304,7 @@
 0x66D5A2: fstp    [esp+184h+var_158]
 0x66D5A6: fld     [esp+184h+var_164]
 0x66D5AA: fstp    [esp+184h+var_154]
-0x66D5AE: call    sub_404C90
+0x66D5AE: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x66D5B3: fstp    dword ptr [esi+584h]
 0x66D5B9: mov     ecx, [esp+184h+var_150]
 0x66D5BD: mov     eax, [ecx+8]
@@ -326,11 +326,11 @@
 0x66D5EF: cmp     eax, 6
 0x66D5F2: jz      loc_66D8D3
 0x66D5F8: mov     ecx, esi; this
-0x66D5FA: call    MobileObject_GetCharProxy
+0x66D5FA: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x66D5FF: test    eax, eax
 0x66D601: jz      short loc_66D649
-0x66D603: mov     ecx, eax
-0x66D605: call    sub_8913C0
+0x66D603: mov     ecx, eax; this
+0x66D605: call    bhkCharacterController_GetRadius; Controller radius helper. Returns shape radius from proxy+0x374 object when available, else proxy+0x3A0/E8 default. MobileObject::Move converts this from Havok to world with 0xA372E0.
 0x66D60A: fstp    [esp+184h+var_16C]
 0x66D60E: fld     [esp+184h+var_16C]
 0x66D612: fmul    qword ptr ds:0A372E0h
@@ -352,34 +352,34 @@
 0x66D650: jnz     loc_66D6F1
 0x66D656: cmp     byte ptr [esp+184h+var_168+3], 0
 0x66D65B: jz      short loc_66D6A7
-0x66D65D: mov     ecx, offset fMagicTelekinesisComplexSpringDamping
+0x66D65D: mov     ecx, (offset flt_B37ED0+1A0h)
 0x66D662: call    GameSetting_GetSafeFloatPointer
 0x66D667: fld     dword ptr [eax]
-0x66D669: mov     ecx, offset fMagicTelekinesisComplexSpringElasticit
+0x66D669: mov     ecx, (offset flt_B37ED0+1A8h)
 0x66D66E: fstp    [esp+184h+var_100]
 0x66D675: call    GameSetting_GetSafeFloatPointer
 0x66D67A: fld     dword ptr [eax]
-0x66D67C: mov     ecx, offset fMagicTelekinesisComplexObjectDamping
+0x66D67C: mov     ecx, (offset flt_B37ED0+1B0h)
 0x66D681: fstp    [esp+184h+var_FC]
 0x66D688: call    GameSetting_GetSafeFloatPointer
 0x66D68D: fld     dword ptr [eax]
-0x66D68F: mov     ecx, offset fMagicTelekinesisComplexMaxForce
+0x66D68F: mov     ecx, (offset flt_B37ED0+1B8h)
 0x66D694: fstp    dword ptr [esp+184h+var_F8+4]
 0x66D69B: call    GameSetting_GetSafeFloatPointer
 0x66D6A0: fld     dword ptr [eax]
 0x66D6A2: jmp     loc_66D7C5
-0x66D6A7: mov     ecx, offset fMagicTelekinesisSpringDamping
+0x66D6A7: mov     ecx, (offset flt_B37ED0+180h)
 0x66D6AC: call    GameSetting_GetSafeFloatPointer
 0x66D6B1: fld     dword ptr [eax]
-0x66D6B3: mov     ecx, offset fMagicTelekinesisSpringElasticity
+0x66D6B3: mov     ecx, (offset flt_B37ED0+188h)
 0x66D6B8: fstp    [esp+184h+var_100]
 0x66D6BF: call    GameSetting_GetSafeFloatPointer
 0x66D6C4: fld     dword ptr [eax]
-0x66D6C6: mov     ecx, offset fMagicTelekinesisObjectDamping
+0x66D6C6: mov     ecx, (offset flt_B37ED0+190h)
 0x66D6CB: fstp    [esp+184h+var_FC]
 0x66D6D2: call    GameSetting_GetSafeFloatPointer
 0x66D6D7: fld     dword ptr [eax]
-0x66D6D9: mov     ecx, offset fMagicTelekinesisMaxForce
+0x66D6D9: mov     ecx, (offset flt_B37ED0+198h)
 0x66D6DE: fstp    dword ptr [esp+184h+var_F8+4]
 0x66D6E5: call    GameSetting_GetSafeFloatPointer
 0x66D6EA: fld     dword ptr [eax]
@@ -465,13 +465,13 @@
 0x66D80C: lea     ecx, [esp+190h+var_120]
 0x66D810: call    sub_47F950
 0x66D815: mov     ecx, eax
-0x66D817: call    sub_88FD90
+0x66D817: call    hkBasis_ProjectVector; TES4 authoritative: basis projection helper, computes local components from basis columns and source vector without translation.
 0x66D81C: lea     eax, [esp+184h+var_B0]
 0x66D823: push    eax
 0x66D824: lea     ecx, [esp+188h+var_120]
 0x66D828: call    sub_47DCD0
 0x66D82D: mov     ecx, [esi+578h]; this
-0x66D833: call    TESObjectREFR_GetParentCell
+0x66D833: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x66D838: mov     ecx, eax
 0x66D83A: call    sub_4440C0
 0x66D83F: test    eax, eax
@@ -502,7 +502,7 @@
 0x66D894: mov     edi, [ebx]
 0x66D896: mov     ecx, [esi+578h]; this
 0x66D89C: add     edi, 5Ch ; '\'
-0x66D89F: call    TESObjectREFR_GetParentCell
+0x66D89F: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x66D8A4: mov     ecx, eax
 0x66D8A6: call    sub_4440C0
 0x66D8AB: mov     edx, [edi]
@@ -510,7 +510,7 @@
 0x66D8AE: mov     ecx, ebx
 0x66D8B0: call    edx
 0x66D8B2: mov     ecx, [esi+578h]; this
-0x66D8B8: call    TESObjectREFR_GetParentCell
+0x66D8B8: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x66D8BD: mov     ecx, eax
 0x66D8BF: call    sub_4440C0
 0x66D8C4: test    eax, eax
@@ -542,3 +542,19 @@
 0x66D91B: mov     esp, ebp
 0x66D91D: pop     ebp
 0x66D91E: retn    0Ch
+0x9C4170: mov     eax, [ebp+var_16C]
+0x9C4176: push    eax
+0x9C4177: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C417C: pop     ecx
+0x9C417D: retn
+0x9C417E: mov     edx, [esp-4+arg_4]
+0x9C4182: lea     eax, [edx-174h]
+0x9C4188: mov     ecx, [edx-178h]
+0x9C418E: xor     ecx, eax
+0x9C4190: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C4195: add     eax, 0Ch
+0x9C4198: mov     ecx, [edx-8]
+0x9C419B: xor     ecx, eax
+0x9C419D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C41A2: mov     eax, offset stru_AECBA8
+0x9C41A7: jmp     ___CxxFrameHandler3

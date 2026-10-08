@@ -1,19 +1,32 @@
 {
-  "callees_count": 63,
-  "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "NiRenderer_GetRenderedSurface",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
+  "callers_count": 12,
+  "chunks": [
+    [
+      "0x7C1B50",
+      "0x7C1E35"
+    ]
+  ],
+  "chunks_sha256": "08e32a4adb599d8276b177e5ab346a4e4155565ef09ed0a09ae58b04d99b234f",
+  "comment_regular": "Oblivion BSTextureManager cache lookup/allocation. Reuses a matching BSRenderedTexture by size, format, auxiliary value, and flags or creates one, then moves the resource to the in-use list.\n\nDX10OBSE resource decode: BSTextureManager rendered-surface cache reuses or allocates BSRenderedTexture wrappers by size/format/depth/usage, moving them to the in-use list.",
+  "comment_repeatable": "Oblivion BSTextureManager cache lookup/allocation. Reuses a matching BSRenderedTexture by size, format, auxiliary value, and flags or creates one, then moves the resource to the in-use list.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "BSTextureManager_GetOrCreateRenderedTexture",
   "end_ea": "0x7C1E35",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "NiRenderer_GetRenderedSurface",
+  "name": "BSTextureManager_GetOrCreateRenderedTexture",
   "segment": ".text",
   "sha256": "08e32a4adb599d8276b177e5ab346a4e4155565ef09ed0a09ae58b04d99b234f",
   "size": 741,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7C1B50",
-  "type": "int __thiscall(BSTextureManager *this, NiTPointerList_Node_void *a2, int a3, int a4, unsigned int a5, int a6, int a7)",
+  "total_chunk_size": 741,
+  "type": "BSRenderedTexture *__thiscall(BSTextureManager *this, NiDX9Renderer *renderer, int width, int height, unsigned int targetFlags, int d3dFormat, int aux)",
   "xrefs_from_count": 300,
   "xrefs_to_count": 12
 }

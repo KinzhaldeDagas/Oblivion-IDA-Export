@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4826F0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Retail canopy shadow-map pass; separate from per-source ShadowSceneLight mode-5 maps.",
     "mnemonic": "push",
     "size": 2
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x48275F",
-    "line": "cmp     byte ptr ds:0B06CBCh, 0",
+    "line": "cmp     byte ptr ds:0B06CBCh, 0; Native ShadowCanopyPass exits unless bDoCanopyShadowPass (B06CBC) is enabled; canopy texture ownership remains native.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x48278F",
-    "line": "mov     byte ptr ds:0B06A28h, 0",
+    "line": "mov     byte ptr ds:0B06A28h, 0; Clear the pending canopy shadow-map latch after canopy pass work.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1500,12 +1500,6 @@
     "size": 2
   },
   {
-    "ea": "0x482A7F",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 1
-  },
-  {
     "ea": "0x482A80",
     "line": "fstp    st",
     "mnemonic": "fstp",
@@ -1657,7 +1651,7 @@
   },
   {
     "ea": "0x482AC7",
-    "line": "lea     ecx, [esp+13Ch+var_E4]",
+    "line": "lea     ecx, [esp+13Ch+texture]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1675,7 +1669,7 @@
   },
   {
     "ea": "0x482ACE",
-    "line": "call    sub_4CAFF0",
+    "line": "call    sub_4CAFF0; Retrieve the cell canopy-shadow mask.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1687,7 +1681,7 @@
   },
   {
     "ea": "0x482AD5",
-    "line": "mov     eax, [esp+138h+var_E4]",
+    "line": "mov     eax, [esp+138h+texture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1801,7 +1795,7 @@
   },
   {
     "ea": "0x482B04",
-    "line": "mov     eax, [esp+138h+var_E4]",
+    "line": "mov     eax, [esp+138h+texture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1921,7 +1915,7 @@
   },
   {
     "ea": "0x482B4C",
-    "line": "mov     ecx, [esp+138h+var_E4]",
+    "line": "mov     ecx, [esp+138h+texture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1933,37 +1927,37 @@
   },
   {
     "ea": "0x482B54",
-    "line": "push    ecx",
+    "line": "push    ecx; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x482B55",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x482B57",
-    "line": "call    NiTexturingProperty__SetUnk08",
+    "line": "call    OB_NiTexturingProperty_SetBaseTexture_010201A0",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x482B5C",
-    "line": "push    ebx",
+    "line": "push    ebx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x482B5D",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x482B5F",
-    "line": "call    sub_405870",
+    "line": "call    OB_NiTexturingProperty_SetClampMode_010201A0; NiTexturingProperty map flag helper: ensures map slot 0 exists and writes arg-derived bits into map Unk04 bits 0xC000. 0x560AC0 calls it with 0 for billboard texture property state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1993,7 +1987,7 @@
   },
   {
     "ea": "0x482B70",
-    "line": "call    sub_4A41E0",
+    "line": "call    TESRegion_CreateFallbackCanopyShadowTexture; Verified: lazily builds a 64x64 NiPixelData with per-channel random values, wraps it as NiTexturingProperty, holds a refcounted global property, and sets clamp mode.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2425,7 +2419,7 @@
   },
   {
     "ea": "0x482C42",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2599,7 +2593,7 @@
   },
   {
     "ea": "0x482CA7",
-    "line": "call    sub_4A41E0",
+    "line": "call    TESRegion_CreateFallbackCanopyShadowTexture; Verified: lazily builds a 64x64 NiPixelData with per-channel random values, wraps it as NiTexturingProperty, holds a refcounted global property, and sets clamp mode.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2653,7 +2647,7 @@
   },
   {
     "ea": "0x482CBD",
-    "line": "call    SetTextureCanopyShadowMap",
+    "line": "call    SetTextureCanopyShadowMap; Install/own the current canopy shadow-map texture at global 0x00B4310C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3433,19 +3427,19 @@
   },
   {
     "ea": "0x482E6B",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x482E70",
-    "line": "push    offset dword_B258DC",
+    "line": "push    offset stru_B258DC",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x482E75",
-    "line": "push    offset Vector3_InitValue?",
+    "line": "push    offset g_zeroNiPoint3",
     "mnemonic": "push",
     "size": 5
   },
@@ -3493,7 +3487,7 @@
   },
   {
     "ea": "0x482E8A",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3529,7 +3523,7 @@
   },
   {
     "ea": "0x482E98",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4063,7 +4057,7 @@
   },
   {
     "ea": "0x483025",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4177,7 +4171,7 @@
   },
   {
     "ea": "0x483070",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4273,7 +4267,7 @@
   },
   {
     "ea": "0x4830AD",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4327,7 +4321,7 @@
   },
   {
     "ea": "0x4830CC",
-    "line": "call    BSTextureManager_GetDefaultRenderTarget",
+    "line": "call    BSTextureManager_GetDefaultRenderTarget; Oblivion default rendered-target acquisition. Resolves dimensions, D3D format, auxiliary value, and flags for the target type, then obtains a matching cached or newly created BSRenderedTexture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4435,7 +4429,7 @@
   },
   {
     "ea": "0x48310A",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4471,7 +4465,7 @@
   },
   {
     "ea": "0x48311B",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4507,7 +4501,7 @@
   },
   {
     "ea": "0x48312A",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4543,25 +4537,25 @@
   },
   {
     "ea": "0x483139",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x48313E",
-    "line": "call    InitBSShaderAccumulator",
+    "line": "call    BSShaderAccumulator_GetOrCreateGlobal",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x483143",
-    "line": "push    0",
+    "line": "push    0; visibleArray",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x483145",
-    "line": "lea     ecx, [esp+13Ch+var_9C]",
+    "line": "lea     ecx, [esp+13Ch+cullingProcess]; self",
     "mnemonic": "lea",
     "size": 7
   },
@@ -4573,7 +4567,7 @@
   },
   {
     "ea": "0x483153",
-    "line": "call    NiCullingProcess_NiCullingProcess",
+    "line": "call    NiCullingProcess_NiCullingProcess; Oblivion NiCullingProcess constructor: initializes append mode, visible-geometry storage, camera state, and culling-plane state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4591,7 +4585,7 @@
   },
   {
     "ea": "0x483162",
-    "line": "call    BSRenderedTexture__UseTextureToRender",
+    "line": "call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4609,7 +4603,7 @@
   },
   {
     "ea": "0x48316A",
-    "line": "call    NiRenderer_BeginScene",
+    "line": "call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4621,37 +4615,37 @@
   },
   {
     "ea": "0x483173",
-    "line": "push    0",
+    "line": "push    0; visibleArray",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x483175",
-    "line": "lea     eax, [esp+144h+var_9C]",
+    "line": "lea     eax, [esp+144h+cullingProcess]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x48317C",
-    "line": "push    eax",
+    "line": "push    eax; cullingProcess",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48317D",
-    "line": "push    ecx",
+    "line": "push    ecx; sceneRoot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48317E",
-    "line": "push    ebx",
+    "line": "push    ebx; camera",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48317F",
-    "line": "call    sub_70C0B0",
+    "line": "call    NiRenderer_CullAndRenderScene; Renderer camera-cull-submit boundary. Installs camera matrices, culls the scene root into the visible array, then submits that visible array through the current renderer accumulator.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4663,7 +4657,7 @@
   },
   {
     "ea": "0x483187",
-    "line": "call    NiRenderer_EndScene",
+    "line": "call    NiRenderer_EndScene; Oblivion EndScene wrapper: drain the complete render-target stack, end the active group, and end the D3D scene only when this wrapper owned SceneState2.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4687,7 +4681,7 @@
   },
   {
     "ea": "0x483194",
-    "line": "call    SetTextureCanopyShadowMap",
+    "line": "call    SetTextureCanopyShadowMap; Install/own the current canopy shadow-map texture at global 0x00B4310C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4699,7 +4693,7 @@
   },
   {
     "ea": "0x48319C",
-    "line": "call    InitBSShaderAccumulator",
+    "line": "call    BSShaderAccumulator_GetOrCreateGlobal",
     "mnemonic": "call",
     "size": 5
   },
@@ -4747,7 +4741,7 @@
   },
   {
     "ea": "0x4831BA",
-    "line": "lea     ecx, [esp+138h+var_9C]; this",
+    "line": "lea     ecx, [esp+138h+cullingProcess]; this",
     "mnemonic": "lea",
     "size": 7
   },
@@ -4759,7 +4753,7 @@
   },
   {
     "ea": "0x4831C9",
-    "line": "call    ??1BSCullingProcess@@UAE@XZ; BSCullingProcess::~BSCullingProcess(void)",
+    "line": "call    ??1BSCullingProcess@@UAE@XZ; Oblivion BSCullingProcess destructor restores its base culling-process state; no separate visible-array allocation is released here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5500,5 +5494,443 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9AF720",
+    "line": "lea     ecx, [ebp-108h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9AF726",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF72B",
+    "line": "lea     ecx, [ebp-110h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9AF731",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF736",
+    "line": "lea     ecx, [ebp-0DCh]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9AF73C",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF741",
+    "line": "lea     ecx, [ebp-0F4h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9AF747",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF74C",
+    "line": "lea     ecx, [ebp-0F0h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9AF752",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF757",
+    "line": "lea     ecx, [ebp-0D8h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9AF75D",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF762",
+    "line": "lea     ecx, [ebp-0D4h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9AF768",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF76D",
+    "line": "mov     eax, [ebp-104h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9AF773",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF774",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF779",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF77A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF77B",
+    "line": "mov     eax, [ebp-0E8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9AF781",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF782",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF787",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF788",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF789",
+    "line": "mov     eax, [ebp-120h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9AF78F",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF790",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF795",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF796",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF797",
+    "line": "mov     eax, [ebp-120h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9AF79D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF79E",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF7A3",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF7A4",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF7A5",
+    "line": "mov     eax, [ebp-120h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9AF7AB",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF7AC",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF7B1",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF7B2",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF7B3",
+    "line": "mov     eax, [ebp-120h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9AF7B9",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF7BA",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF7BF",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF7C0",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF7C1",
+    "line": "mov     eax, [ebp-120h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9AF7C7",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF7C8",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF7CD",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF7CE",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF7CF",
+    "line": "mov     eax, [ebp-120h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9AF7D5",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF7D6",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF7DB",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF7DC",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF7DD",
+    "line": "mov     eax, [ebp-120h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9AF7E3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF7E4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF7E9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF7EA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF7EB",
+    "line": "mov     eax, [ebp-120h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9AF7F1",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF7F2",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF7F7",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF7F8",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF7F9",
+    "line": "lea     ecx, [ebp-9Ch]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9AF7FF",
+    "line": "jmp     ??1BSCullingProcess@@UAE@XZ; Oblivion BSCullingProcess destructor restores its base culling-process state; no separate visible-array allocation is released here.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF804",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AF808",
+    "line": "lea     eax, [edx-128h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9AF80E",
+    "line": "mov     ecx, [edx-12Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9AF814",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AF816",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF81B",
+    "line": "mov     eax, offset stru_ADBCA0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF820",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A5C00",
-    "line": "push    ebp",
+    "line": "push    ebp; Complete leaf-texture vector fill insertion: snapshots an aliasing value, checks max 0x030C30C3 elements, reuses capacity with overlap-safe movement or reallocates at max(1.5x capacity,size+count), and deep-copies filenames.",
     "mnemonic": "push",
     "size": 1
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x7A5C2E",
-    "line": "mov     eax, [ebp+arg_C]",
+    "line": "mov     eax, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -115,13 +115,13 @@
   },
   {
     "ea": "0x7A5C33",
-    "line": "push    eax",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5C34",
-    "line": "lea     ecx, [ebp+var_68]",
+    "line": "lea     ecx, [ebp+var_68]; this",
     "mnemonic": "lea",
     "size": 3
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x7A5C3A",
-    "line": "call    sub_7A2850",
+    "line": "call    OB_SIdvLeafTexture_CopyCtor_010201A0; Deep copy-constructs one compact 0x54 SIdvLeafTexture, including initialization and assignment of its owned 28-byte small string.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x7A5C61",
-    "line": "mov     ebx, [ebp+arg_8]",
+    "line": "mov     ebx, [ebp+count]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x7A5C95",
-    "line": "call    sub_790B90",
+    "line": "call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error(\"vector<T> too long\") and throws; used by multiple element specializations after max_size checks.",
     "mnemonic": "call",
     "size": 5
   },
@@ -571,13 +571,13 @@
   },
   {
     "ea": "0x7A5CFB",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A5CFD",
-    "line": "call    sub_7876A0",
+    "line": "call    OB_stVector_SIdvLeafTexture_Size_010201A0; Oblivion checked-vector size helper for 0x54-byte SIdvLeafTexture records: returns (end-begin)/0x54 or zero for null storage.",
     "mnemonic": "call",
     "size": 5
   },
@@ -601,13 +601,13 @@
   },
   {
     "ea": "0x7A5D08",
-    "line": "push    edi; char *",
+    "line": "push    edi; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5D09",
-    "line": "call    sub_7A2560",
+    "line": "call    OB_stVector_SIdvLeafTexture_Allocate_010201A0; Oblivion leaf-texture vector allocator: rejects count*0x54 overflow, then allocates exactly count 0x54-byte records through FormHeap.",
     "mnemonic": "call",
     "size": 5
   },
@@ -619,13 +619,13 @@
   },
   {
     "ea": "0x7A5D11",
-    "line": "mov     byte ptr [ebp+var_6C], 0",
+    "line": "mov     byte ptr [ebp+destinationEnd], 0",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A5D15",
-    "line": "mov     edx, [ebp+var_6C]",
+    "line": "mov     edx, [ebp+destinationEnd]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x7A5D19",
-    "line": "mov     edx, [ebp+var_6C]",
+    "line": "mov     edx, [ebp+destinationEnd]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -655,37 +655,37 @@
   },
   {
     "ea": "0x7A5D1E",
-    "line": "push    eax",
+    "line": "push    eax; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5D1F",
-    "line": "mov     [ebp+var_78], eax",
+    "line": "mov     [ebp+first], eax",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A5D22",
-    "line": "mov     [ebp+var_74], eax",
+    "line": "mov     [ebp+last], eax",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A5D25",
-    "line": "mov     eax, [ebp+arg_4]",
+    "line": "mov     eax, [ebp+position]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A5D28",
-    "line": "push    eax",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5D29",
-    "line": "push    ecx",
+    "line": "push    ecx; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x7A5D2E",
-    "line": "call    sub_7A3BD0",
+    "line": "call    OB_SIdvLeafTexture_UninitializedCopy_010201A0; Reallocation path deep-copies prefix, inserted values, and suffix into new storage before destroying/freeing the old range.",
     "mnemonic": "call",
     "size": 5
   },
@@ -715,19 +715,19 @@
   },
   {
     "ea": "0x7A5D39",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5D3A",
-    "line": "push    ebx",
+    "line": "push    ebx; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5D3B",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -739,13 +739,13 @@
   },
   {
     "ea": "0x7A5D3E",
-    "line": "mov     [ebp+var_74], eax",
+    "line": "mov     [ebp+last], eax",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A5D41",
-    "line": "call    sub_7A5AA0",
+    "line": "call    OB_stVector_SIdvLeafTexture_UninitializedFillNThunk_010201A0; Typed uninitialized-fill wrapper returning destination+count. Its former noreturn boundary omitted the real arithmetic epilogue.",
     "mnemonic": "call",
     "size": 5
   },
@@ -757,13 +757,13 @@
   },
   {
     "ea": "0x7A5D49",
-    "line": "mov     byte ptr [ebp+var_6C], 0",
+    "line": "mov     byte ptr [ebp+destinationEnd], 0",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A5D4D",
-    "line": "mov     edx, [ebp+var_6C]",
+    "line": "mov     edx, [ebp+destinationEnd]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x7A5D51",
-    "line": "mov     edx, [ebp+var_6C]",
+    "line": "mov     edx, [ebp+destinationEnd]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -793,37 +793,37 @@
   },
   {
     "ea": "0x7A5D56",
-    "line": "push    eax",
+    "line": "push    eax; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5D57",
-    "line": "mov     [ebp+var_74], eax",
+    "line": "mov     [ebp+last], eax",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A5D5A",
-    "line": "mov     eax, [ebp+arg_4]",
+    "line": "mov     eax, [ebp+position]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A5D5D",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5D5E",
-    "line": "push    eax",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5D5F",
-    "line": "call    sub_7A3BD0",
+    "line": "call    OB_SIdvLeafTexture_UninitializedCopy_010201A0; Exception-safe uninitialized deep copy of 0x54-byte SIdvLeafTexture records. Normal completion returns destination end; the separate SEH landing path destroys the constructed prefix and rethrows.",
     "mnemonic": "call",
     "size": 5
   },
@@ -931,7 +931,7 @@
   },
   {
     "ea": "0x7A5D8E",
-    "line": "mov     edx, [ebp+var_6C]",
+    "line": "mov     edx, [ebp+destinationEnd]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -955,19 +955,19 @@
   },
   {
     "ea": "0x7A5D96",
-    "line": "push    eax",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5D97",
-    "line": "push    ecx",
+    "line": "push    ecx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5D98",
-    "line": "call    sub_7A36B0",
+    "line": "call    OB_SIdvLeafTexture_DestroyRange_010201A0; Destroys [first,last) compact SIdvLeafTexture records at 0x54 stride, releasing each owned filename.",
     "mnemonic": "call",
     "size": 5
   },
@@ -985,7 +985,7 @@
   },
   {
     "ea": "0x7A5DA1",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -997,7 +997,7 @@
   },
   {
     "ea": "0x7A5DA9",
-    "line": "mov     eax, [ebp+var_78]",
+    "line": "mov     eax, [ebp+first]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1051,13 +1051,13 @@
   },
   {
     "ea": "0x7A5DC4",
-    "line": "mov     edx, [ebp+var_74]",
+    "line": "mov     edx, [ebp+last]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A5DC7",
-    "line": "mov     esi, [ebp+var_78]",
+    "line": "mov     esi, [ebp+first]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1069,19 +1069,19 @@
   },
   {
     "ea": "0x7A5DCD",
-    "line": "push    edx",
+    "line": "push    edx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5DCE",
-    "line": "push    esi",
+    "line": "push    esi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5DCF",
-    "line": "call    sub_7A45A0",
+    "line": "call    OB_stVector_SIdvLeafTexture_DestroyRangeThunk_010201A0; Typed vector wrapper for destruction of an initialized SIdvLeafTexture range.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1093,7 +1093,7 @@
   },
   {
     "ea": "0x7A5DD5",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1123,13 +1123,13 @@
   },
   {
     "ea": "0x7A5DE6",
-    "line": "mov     ecx, [esi+8]",
+    "line": "mov     ecx, [esi+8]; In-capacity insertion path handles both tail>=count and tail<count with uninitialized construction plus overlap-safe assignment.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A5DE9",
-    "line": "mov     edi, [ebp+arg_4]",
+    "line": "mov     edi, [ebp+position]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1189,7 +1189,7 @@
   },
   {
     "ea": "0x7A5E03",
-    "line": "mov     [ebp+var_6C], ecx",
+    "line": "mov     [ebp+destinationEnd], ecx",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1213,7 +1213,7 @@
   },
   {
     "ea": "0x7A5E11",
-    "line": "mov     [ebp+var_6C], eax",
+    "line": "mov     [ebp+destinationEnd], eax",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1225,19 +1225,19 @@
   },
   {
     "ea": "0x7A5E16",
-    "line": "push    eax",
+    "line": "push    eax; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5E17",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5E18",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -1249,7 +1249,7 @@
   },
   {
     "ea": "0x7A5E1B",
-    "line": "call    sub_7A4BF0",
+    "line": "call    OB_stVector_SIdvLeafTexture_UninitializedCopyThunk_010201A0; Typed uninitialized-copy wrapper. The executable continues after the call and returns the constructed destination end; its former noreturn boundary was false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1267,7 +1267,7 @@
   },
   {
     "ea": "0x7A5E26",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -1327,13 +1327,13 @@
   },
   {
     "ea": "0x7A5E3E",
-    "line": "push    ebx",
+    "line": "push    ebx; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5E3F",
-    "line": "push    ecx",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -1351,13 +1351,13 @@
   },
   {
     "ea": "0x7A5E46",
-    "line": "call    sub_7A5AA0",
+    "line": "call    OB_stVector_SIdvLeafTexture_UninitializedFillNThunk_010201A0; Typed uninitialized-fill wrapper returning destination+count. Its former noreturn boundary omitted the real arithmetic epilogue.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A5E4B",
-    "line": "mov     eax, [ebp+var_6C]",
+    "line": "mov     eax, [ebp+destinationEnd]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1381,7 +1381,7 @@
   },
   {
     "ea": "0x7A5E57",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -1393,13 +1393,13 @@
   },
   {
     "ea": "0x7A5E5A",
-    "line": "push    esi",
+    "line": "push    esi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5E5B",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -1411,7 +1411,7 @@
   },
   {
     "ea": "0x7A5E63",
-    "line": "call    sub_7A5970",
+    "line": "call    OB_SIdvLeafTexture_CopyAssignFillRange_010201A0; Deep-copy assigns one SIdvLeafTexture value across an existing 0x54-stride range.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1429,7 +1429,7 @@
   },
   {
     "ea": "0x7A5E6D",
-    "line": "mov     eax, [ebp+arg_8]",
+    "line": "mov     eax, [ebp+count]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1459,13 +1459,13 @@
   },
   {
     "ea": "0x7A5E7B",
-    "line": "push    edx",
+    "line": "push    edx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5E7C",
-    "line": "mov     edx, [ebp+arg_4]",
+    "line": "mov     edx, [ebp+position]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1477,13 +1477,13 @@
   },
   {
     "ea": "0x7A5E81",
-    "line": "push    eax",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5E82",
-    "line": "call    sub_7A45A0",
+    "line": "call    OB_stVector_SIdvLeafTexture_DestroyRangeThunk_010201A0; Typed vector wrapper for destruction of an initialized SIdvLeafTexture range.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1513,7 +1513,7 @@
   },
   {
     "ea": "0x7A5E93",
-    "line": "push    ecx",
+    "line": "push    ecx; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
@@ -1531,13 +1531,13 @@
   },
   {
     "ea": "0x7A5E98",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5E99",
-    "line": "push    eax",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -1555,7 +1555,7 @@
   },
   {
     "ea": "0x7A5E9F",
-    "line": "call    sub_7A4BF0",
+    "line": "call    OB_stVector_SIdvLeafTexture_UninitializedCopyThunk_010201A0; Typed uninitialized-copy wrapper. The executable continues after the call and returns the constructed destination end; its former noreturn boundary was false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1573,31 +1573,31 @@
   },
   {
     "ea": "0x7A5EAA",
-    "line": "mov     eax, [ebp+var_6C]",
+    "line": "mov     eax, [ebp+destinationEnd]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A5EAD",
-    "line": "push    eax",
+    "line": "push    eax; destinationEnd",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5EAE",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5EAF",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5EB0",
-    "line": "call    sub_7A5AE0",
+    "line": "call    OB_stVector_SIdvLeafTexture_CopyAssignRangeBackwardThunk_010201A0; Typed wrapper for backward SIdvLeafTexture copy assignment.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1609,7 +1609,7 @@
   },
   {
     "ea": "0x7A5EB8",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -1621,19 +1621,19 @@
   },
   {
     "ea": "0x7A5EBB",
-    "line": "push    ebx",
+    "line": "push    ebx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5EBC",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5EBD",
-    "line": "call    sub_7A5970",
+    "line": "call    OB_SIdvLeafTexture_CopyAssignFillRange_010201A0; Deep-copy assigns one SIdvLeafTexture value across an existing 0x54-stride range.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1645,7 +1645,7 @@
   },
   {
     "ea": "0x7A5EC5",
-    "line": "cmp     [ebp+var_3C], 10h",
+    "line": "cmp     [ebp+var_68.filename.capacity], 10h",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -1657,7 +1657,7 @@
   },
   {
     "ea": "0x7A5ECB",
-    "line": "mov     eax, [ebp+var_50]",
+    "line": "mov     eax, dword ptr [ebp+var_68.filename.storage]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1669,7 +1669,7 @@
   },
   {
     "ea": "0x7A5ECF",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1750,5 +1750,161 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x7A25F0",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7A25F1",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7A25F3",
+    "line": "cmp     dword ptr [esi+2Ch], 10h",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x7A25F7",
+    "line": "jb      short loc_7A2605",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x7A25F9",
+    "line": "mov     eax, [esi+18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7A25FC",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7A25FD",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7A2602",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x7A2605",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x7A2607",
+    "line": "mov     dword ptr [esi+2Ch], 0Fh",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x7A260E",
+    "line": "mov     [esi+28h], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7A2611",
+    "line": "mov     [esi+18h], al",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7A2614",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7A2615",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CCC10",
+    "line": "lea     ecx, [ebp+var_68]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCC13",
+    "line": "jmp     loc_7A25F0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCC18",
+    "line": "mov     edx, [esp-4+position]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CCC1C",
+    "line": "lea     eax, [edx+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCC1F",
+    "line": "mov     ecx, [edx-7Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCC22",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CCC24",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCC29",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCC2C",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CCC2E",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCC33",
+    "line": "mov     eax, offset stru_AF5FD4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCC38",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

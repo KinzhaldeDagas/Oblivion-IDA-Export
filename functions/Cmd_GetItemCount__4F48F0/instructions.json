@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4F48F0",
-    "line": "fldz",
+    "line": "fldz; GetItemCount_Eval (index 47 / opcode 0x102F), used 54 times in vanilla core dialogue. Requires a valid item form, a container subject, and ContainerChanges data; returns abs(base TESContainer count plus EntryData.countDelta). If no ContainerChanges data exists it returns 0. Fallout's analogue x4y6:0x823BCE90 also has a special form-type-85 leveled-list expansion loop; this Oblivion handler performs only a single lookup for the supplied ObjectID.",
     "mnemonic": "fldz",
     "size": 2
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x4F48F3",
-    "line": "mov     ebx, [esp+4+arg_C]",
+    "line": "mov     ebx, [esp+4+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x4F48FA",
-    "line": "mov     esi, [esp+8+arg_4]",
+    "line": "mov     esi, [esp+8+objectID]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x4F493F",
-    "line": "call    ContainerExtraData_GetItemCount",
+    "line": "call    ContainerExtraData_GetItemCount; ContainerChanges item-count logic: start with the base TESContainer count (made absolute), find matching EntryData, then combine countDelta. If the base count and delta are both 0 but an EntryData exists, return 1; the GetItemCount evaluator takes the final absolute value.",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,13 +229,13 @@
   },
   {
     "ea": "0x4F4949",
-    "line": "mov     [esp+0Ch+arg_C], eax",
+    "line": "mov     [esp+0Ch+value], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4F494D",
-    "line": "fild    [esp+0Ch+arg_C]",
+    "line": "fild    [esp+0Ch+value]",
     "mnemonic": "fild",
     "size": 4
   },

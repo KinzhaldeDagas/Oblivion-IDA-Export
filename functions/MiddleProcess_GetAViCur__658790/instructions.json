@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x658795",
-    "line": "mov     edi, [esp+10h+arg_4]",
+    "line": "mov     edi, [esp+10h+actorValue]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,13 +31,13 @@
   },
   {
     "ea": "0x65879B",
-    "line": "push    edi",
+    "line": "push    edi; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x65879C",
-    "line": "lea     ecx, [esi+94h]",
+    "line": "lea     ecx, [esi+94h]; self",
     "mnemonic": "lea",
     "size": 6
   },
@@ -97,13 +97,13 @@
   },
   {
     "ea": "0x6587BD",
-    "line": "mov     [esp+10h+arg_4], eax",
+    "line": "mov     [esp+10h+actorValue], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6587C1",
-    "line": "fild    [esp+10h+arg_4]",
+    "line": "fild    [esp+10h+actorValue]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x6587C9",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,1 +1,1 @@
-wgl_context
+struct wgl_context;

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5FF1FC",
-    "line": "mov     edx, [edi]",
+    "line": "mov     edx, [edi]; Oblivion sneak-attack decision. Creatures are excluded as attackers; the attacker must be sneaking; victim detection <= 0 permits the bonus unless combat-awareness logic forces failure. Successful attacks use the attacker's Sneak mastery plus weapon type to select the multiplier, set the Master-tier flag when applicable, show the player message, and pass the multiplier into damage calculation.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x5FF200",
-    "line": "mov     eax, [edx+170h]",
+    "line": "mov     eax, [edx+170h]; Oblivion sneak-attack decision. Creatures are excluded as attackers; the attacker must be sneaking; victim detection <= 0 permits the bonus unless combat-awareness logic forces failure. Successful attacks use the attacker's Sneak mastery plus weapon type to select the multiplier, set the Master-tier flag when applicable, show the player message, and pass the multiplier into damage calculation.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x5FF21F",
-    "line": "call    Actor_IsSneaking",
+    "line": "call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,37 +277,37 @@
   },
   {
     "ea": "0x5FF292",
-    "line": "push    eax",
+    "line": "push    eax; weaponType",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FF293",
-    "line": "push    1Fh",
+    "line": "push    1Fh; actorValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FF295",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FF297",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5FF29C",
-    "line": "push    eax",
+    "line": "push    eax; masteryLevel",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FF29D",
-    "line": "call    Calc_SneakAttackMultiplier",
+    "line": "call    Calc_SneakAttackDamageMultiplier; Returns the Oblivion sneak-attack damage multiplier. Weapon types -1, 0, and 2 use the melee mastery settings; type 5 uses Marksman mastery settings; unsupported types remain 1.0. Mastery indices 0..4 select Novice through Master game settings.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,19 +355,19 @@
   },
   {
     "ea": "0x5FF2B6",
-    "line": "push    1Fh",
+    "line": "push    1Fh; actorValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FF2B8",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FF2BA",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x5FF2DC",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },

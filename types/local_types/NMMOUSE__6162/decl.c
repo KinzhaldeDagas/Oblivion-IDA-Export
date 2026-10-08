@@ -1,1 +1,1 @@
-NMMOUSE
+typedef tagNMMOUSE NMMOUSE;

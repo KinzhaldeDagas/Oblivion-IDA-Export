@@ -1,6 +1,6 @@
-0x5FBEC0: push    ebx
+0x5FBEC0: push    ebx; Adds count of item to an Actor, optionally carrying an existing ExtraDataList ownership instance.
 0x5FBEC1: push    ebp
-0x5FBEC2: mov     ebp, [esp+8+arg_4]
+0x5FBEC2: mov     ebp, [esp+8+extraList]
 0x5FBEC6: test    ebp, ebp
 0x5FBEC8: push    esi
 0x5FBEC9: push    edi
@@ -12,22 +12,22 @@
 0x5FBEDC: mov     eax, [ecx]
 0x5FBEDE: mov     edx, [eax+170h]
 0x5FBEE4: call    edx
-0x5FBEE6: mov     ecx, ebp
+0x5FBEE6: mov     ecx, ebp; this
 0x5FBEE8: mov     edi, eax
-0x5FBEEA: call    ExtraDataList_GetOwner
+0x5FBEEA: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x5FBEEF: cmp     eax, edi
 0x5FBEF1: jnz     short loc_5FBEFA
 0x5FBEF3: mov     ecx, ebp
 0x5FBEF5: call    ExtraDataList_RemoveOwner
-0x5FBEFA: mov     ecx, ebp
-0x5FBEFC: call    ExtraDataList_GetReferencePointer
+0x5FBEFA: mov     ecx, ebp; this
+0x5FBEFC: call    ExtraDataList_GetReferencePointer; Return the TESObjectREFR payload from ExtraReferencePointer type 0x22, or null. Provenance only: callers still select EntryData by exact TESForm first.
 0x5FBF01: mov     edi, eax
 0x5FBF03: test    edi, edi
 0x5FBF05: jz      loc_5FBF97
 0x5FBF0B: mov     ebx, [edi+0Ch]
-0x5FBF0E: push    esi
-0x5FBF0F: lea     ecx, [edi+44h]
-0x5FBF12: call    ExtraDataList_SetReferencePointer
+0x5FBF0E: push    esi; reference
+0x5FBF0F: lea     ecx, [edi+44h]; this
+0x5FBF12: call    ExtraDataList_SetReferencePointer; Set or create ExtraReferencePointer (type 0x22) in one logical function, now merged through 0x41FAF4. This extra preserves persistent-reference provenance inside an already form-keyed inventory entry; it does not override EntryData.type or sourceRef->baseForm and therefore cannot restore a thrown proxy AMMO to its source WEAP.
 0x5FBF17: mov     eax, [edi]
 0x5FBF19: mov     edx, [eax+40h]
 0x5FBF1C: push    20h ; ' '
@@ -35,11 +35,11 @@
 0x5FBF20: call    edx
 0x5FBF22: push    esi
 0x5FBF23: push    ebx
-0x5FBF24: mov     ecx, offset ActorProcessManager_ptr
+0x5FBF24: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x5FBF29: call    sub_674E40
 0x5FBF2E: mov     ebx, eax
 0x5FBF30: test    ebx, ebx
-0x5FBF32: mov     [esp+10h+arg_4], ebx
+0x5FBF32: mov     [esp+10h+extraList], ebx
 0x5FBF36: jz      short loc_5FBF97
 0x5FBF38: mov     edi, [ebx]
 0x5FBF3A: test    edi, edi
@@ -70,19 +70,19 @@
 0x5FBF7A: mov     ebx, [ebx+4]
 0x5FBF7D: test    ebx, ebx
 0x5FBF7F: jnz     short loc_5FBF38
-0x5FBF81: mov     ecx, [esp+10h+arg_4]
-0x5FBF85: call    BSSimpleList_Clear
-0x5FBF8A: mov     eax, [esp+10h+arg_4]
+0x5FBF81: mov     ecx, [esp+10h+extraList]
+0x5FBF85: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
+0x5FBF8A: mov     eax, [esp+10h+extraList]
 0x5FBF8E: push    eax
-0x5FBF8F: call    FormHeapFree
+0x5FBF8F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5FBF94: add     esp, 4
-0x5FBF97: mov     ecx, [esp+10h+arg_8]
-0x5FBF9B: mov     edi, [esp+10h+arg_0]
-0x5FBF9F: push    ecx
-0x5FBFA0: push    ebp
-0x5FBFA1: push    edi
-0x5FBFA2: mov     ecx, esi
-0x5FBFA4: call    TESObjectREFR_AddItem_Abbrev
+0x5FBF97: mov     ecx, [esp+10h+count]
+0x5FBF9B: mov     edi, [esp+10h+item]
+0x5FBF9F: push    ecx; count
+0x5FBFA0: push    ebp; extraList
+0x5FBFA1: push    edi; item
+0x5FBFA2: mov     ecx, esi; this
+0x5FBFA4: call    TESObjectREFR_AddItem_Abbrev; Short TESObjectREFR AddItem wrapper: emits the inventory event and delegates item, ExtraDataList, and count to ContainerExtraData_AddItem.
 0x5FBFA9: mov     edx, [esi]
 0x5FBFAB: mov     eax, [edx+170h]
 0x5FBFB1: mov     ecx, esi
@@ -112,7 +112,7 @@
 0x5FC001: push    1
 0x5FC003: push    ecx
 0x5FC004: mov     ecx, esi
-0x5FC006: call    Actor_EquipItem
+0x5FC006: call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.
 0x5FC00B: mov     edx, [esi]
 0x5FC00D: mov     eax, [edx+334h]
 0x5FC013: push    1
@@ -135,9 +135,9 @@
 0x5FC040: mov     ebx, [esi+58h]
 0x5FC043: mov     edi, [ebx]
 0x5FC045: push    esi
-0x5FC046: mov     ecx, esi
+0x5FC046: mov     ecx, esi; this
 0x5FC048: add     edi, 150h
-0x5FC04E: call    TESObjectREFR_GetAnimData
+0x5FC04E: call    TESObjectREFR_GetAnimData; Return active ActorAnimData for an actor reference. For actor/creature refs with process level 0 or 1, return process+0x17C; otherwise tail-call the ExtraAnim lookup on the reference extra list. Exact return type is ActorAnimData*.
 0x5FC053: mov     edx, [esi]
 0x5FC055: push    eax
 0x5FC056: mov     eax, [edx+168h]
@@ -153,7 +153,7 @@
 0x5FC06F: mov     ecx, ebp
 0x5FC071: call    ContainerEntryExtraData_DestroyDataTable
 0x5FC076: push    ebp
-0x5FC077: call    FormHeapFree
+0x5FC077: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5FC07C: add     esp, 4
 0x5FC07F: pop     edi
 0x5FC080: pop     esi

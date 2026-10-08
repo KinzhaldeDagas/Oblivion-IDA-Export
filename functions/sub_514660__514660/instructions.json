@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x514660",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Signature anchor for StartCombat command entry: 83 EC 08 8B 4C 24 20 8B 54 24 1C 56 8B 74 24 18.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x514693",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x514718",
-    "line": "call    sub_5E6B40",
+    "line": "call    Actor_IsInDialogueProcedure; 3DTheft 2026-05-17: returns true when the actor's current package type is 0x12 (Dialogue). AddScriptPackage uses this as a pre-handoff gate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x51475F",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x514780",
-    "line": "call    sub_5E6C60",
+    "line": "call    Actor_IsGuardClass; 3DTheft decode 2026-05-14: StartCombat command computes nonGuardFlag from Actor_IsGuardClass. Plugin passes nonGuardFlag=1 for spawned thief encounter actors.",
     "mnemonic": "call",
     "size": 5
   },
@@ -961,7 +961,7 @@
   },
   {
     "ea": "0x514826",
-    "line": "call    edx",
+    "line": "call    edx; 3DTheft decode 2026-05-14: StartCombat command calls actor process vfunc +0x228 with actor,target,1,0,0,nonGuardFlag,0,1,0,1. Plugin uses this ABI for catch-up combat.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1057,7 +1057,7 @@
   },
   {
     "ea": "0x514853",
-    "line": "mov     ecx, [edi]",
+    "line": "mov     ecx, [edi]; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1093,13 +1093,13 @@
   },
   {
     "ea": "0x514863",
-    "line": "push    ebp",
+    "line": "push    ebp; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x514864",
-    "line": "call    sub_60D020",
+    "line": "call    Shared_SetDwordAtOffset04; Identical-code-folded setter shared by unrelated engine classes: writes value to *(int *)(this+4) and returns value. In EntryData call sites, +0x04 is the canonical signed countDelta; shader/process vtable users give the same bytes unrelated meanings. Do not assign a globally EntryData-specific prototype.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1147,7 +1147,7 @@
   },
   {
     "ea": "0x514880",
-    "line": "mov     ecx, [edi]",
+    "line": "mov     ecx, [edi]; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1213,13 +1213,13 @@
   },
   {
     "ea": "0x514898",
-    "line": "push    ebp",
+    "line": "push    ebp; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x514899",
-    "line": "call    sub_60D020",
+    "line": "call    Shared_SetDwordAtOffset04; Identical-code-folded setter shared by unrelated engine classes: writes value to *(int *)(this+4) and returns value. In EntryData call sites, +0x04 is the canonical signed countDelta; shader/process vtable users give the same bytes unrelated meanings. Do not assign a globally EntryData-specific prototype.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1255,13 +1255,13 @@
   },
   {
     "ea": "0x5148AD",
-    "line": "push    offset sub_614190",
+    "line": "push    offset CombatTargetInfo_ComparePriorityDescending",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5148B2",
-    "line": "call    sub_5B27A0",
+    "line": "call    BSSimpleList_SortViaArrayAndRebuild",
     "mnemonic": "call",
     "size": 5
   },
@@ -1351,7 +1351,7 @@
   },
   {
     "ea": "0x5148E0",
-    "line": "call    edx",
+    "line": "call    edx; Guard-only followup after StartCombat package creation: process vfunc +0x22C called with actor,target. Non-guard encounter actors do not need this path.",
     "mnemonic": "call",
     "size": 2
   },

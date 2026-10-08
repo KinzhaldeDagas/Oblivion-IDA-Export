@@ -1,4 +1,4 @@
 void __cdecl sub_A27070()
 {
-  TESTexture::ClearComponentReferences(&unk_B42CA0);
+  Shared_NoOpVirtual_60D0A0(&stru_B42CA0); /*0xa27075*/
 }

@@ -40,12 +40,12 @@
 0x5D0EE1: call    BSStringT_Set
 0x5D0EE6: mov     eax, [esp+134h+var_118.m_data]
 0x5D0EEA: mov     ecx, [edi+44h]
-0x5D0EED: push    ebx
-0x5D0EEE: push    eax
-0x5D0EEF: push    ecx
-0x5D0EF0: mov     ecx, edi
+0x5D0EED: push    ebx; lastTile
+0x5D0EEE: push    eax; name
+0x5D0EEF: push    ecx; parent
+0x5D0EF0: mov     ecx, edi; this
 0x5D0EF2: mov     byte ptr [esp+140h+var_4], 1
-0x5D0EFA: call    Menu_CreateTileFromTemplate
+0x5D0EFA: call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.
 0x5D0EFF: mov     esi, eax
 0x5D0F01: cmp     esi, ebx
 0x5D0F03: jz      loc_5D0FAE
@@ -82,28 +82,28 @@
 0x5D0F66: fild    [esp+134h+arg_8]
 0x5D0F6D: push    ecx
 0x5D0F6E: mov     ecx, esi; this
-0x5D0F70: fstp    [esp+138h+var_138]; a3
-0x5D0F73: push    0FB7h; a2
-0x5D0F78: call    Tile_SetFloat
+0x5D0F70: fstp    [esp+138h+var_138]; value
+0x5D0F73: push    0FB7h; propertyCode
+0x5D0F78: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D0F7D: fild    [esp+134h+arg_C]
 0x5D0F84: push    ecx
 0x5D0F85: mov     ecx, esi; this
-0x5D0F87: fstp    [esp+138h+var_138]; a3
-0x5D0F8A: push    0FAAh; a2
-0x5D0F8F: call    Tile_SetFloat
+0x5D0F87: fstp    [esp+138h+var_138]; value
+0x5D0F8A: push    0FAAh; propertyCode
+0x5D0F8F: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D0F94: fild    [esp+134h+arg_10]
 0x5D0F9B: push    ecx
 0x5D0F9C: mov     ecx, esi; this
-0x5D0F9E: fstp    [esp+138h+var_138]; a3
-0x5D0FA1: push    0FA8h; a2
-0x5D0FA6: call    Tile_SetFloat
+0x5D0F9E: fstp    [esp+138h+var_138]; value
+0x5D0FA1: push    0FA8h; propertyCode
+0x5D0FA6: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D0FAB: mov     [edi+10h], esi
 0x5D0FAE: mov     ecx, [esp+134h+var_118.m_data]
 0x5D0FB2: push    ecx
-0x5D0FB3: call    FormHeapFree
+0x5D0FB3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5D0FB8: mov     edx, [esp+138h+var_120.m_data]
 0x5D0FBC: push    edx
-0x5D0FBD: call    FormHeapFree
+0x5D0FBD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5D0FC2: add     esp, 8
 0x5D0FC5: mov     eax, esi
 0x5D0FC7: mov     ecx, [esp+134h+var_C]
@@ -118,3 +118,18 @@
 0x5D0FE3: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x5D0FE8: add     esp, 120h
 0x5D0FEE: retn    14h
+0x9BFEF0: lea     ecx, [ebp-120h]; void *
+0x9BFEF6: jmp     BSStringT_Clear
+0x9BFEFB: lea     ecx, [ebp-118h]; void *
+0x9BFF01: jmp     BSStringT_Clear
+0x9BFF06: mov     edx, [esp+arg_4]
+0x9BFF0A: lea     eax, [edx-124h]
+0x9BFF10: mov     ecx, [edx-128h]
+0x9BFF16: xor     ecx, eax
+0x9BFF18: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BFF1D: add     eax, 10h
+0x9BFF20: mov     ecx, [edx-4]
+0x9BFF23: xor     ecx, eax
+0x9BFF25: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BFF2A: mov     eax, offset stru_AE92BC
+0x9BFF2F: jmp     ___CxxFrameHandler3

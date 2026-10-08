@@ -24,3 +24,12 @@
 0x8BDC4D: pop     esi
 0x8BDC4E: add     esp, 10h
 0x8BDC51: retn
+0x9D7300: mov     ecx, [ebp-10h]; this
+0x9D7303: jmp     ??1bhkBinaryAction@@UAE@XZ; bhkBinaryAction::~bhkBinaryAction(void)
+0x9D7308: mov     edx, [esp+arg_4]
+0x9D730C: lea     eax, [edx-8]
+0x9D730F: mov     ecx, [edx-0Ch]
+0x9D7312: xor     ecx, eax
+0x9D7314: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D7319: mov     eax, offset stru_AFEF64
+0x9D731E: jmp     ___CxxFrameHandler3

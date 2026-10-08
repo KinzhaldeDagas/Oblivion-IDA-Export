@@ -1,1 +1,37 @@
-InterfaceManager
+struct InterfaceManager
+{
+SceneGraph *unk000;
+SceneGraph *unk004;
+UInt32 unk008[4];
+void *unk018;
+Tile *cursor;
+UInt32 unk020[12];
+bool debugTextOn;
+UInt8 unk051[3];
+NiNode *unk054[4];
+NiNode *unk064;
+Tile *menuRoot;
+Tile *strings;
+NiNode *unk070;
+UInt32 unk074;
+void *unk078;
+UInt32 unk07C;
+Tile *hudReticule;
+UInt32 unk084;
+Tile *altActiveTile;
+UInt32 unk08C;
+UInt32 unk090;
+UInt32 unk094;
+Tile *activeTile;
+Menu *activeMenu;
+UInt32 unk0A0;
+UInt32 unk0A4;
+UInt32 unk0A8;
+UInt32 unk0AC;
+UInt8 msgBoxButtonPressed;
+UInt8 unk0B1[3];
+void (__cdecl *pendingMessageCallback)();
+UInt32 unk0B8;
+TESObjectREFR *debugSelection;
+UInt32 unk0C0[29];
+};

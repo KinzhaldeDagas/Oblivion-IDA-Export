@@ -1,19 +1,32 @@
 {
-  "callees_count": 13,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4E5280",
+      "0x4E531E"
+    ]
+  ],
+  "chunks_sha256": "5c88cbd805780a6b1906dc22ebc0fb7dae53747c2dbb36fabc3260a61a2cba4f",
+  "comment_regular": "Verified frees every BSSimpleList node and list header stored in TESPathGrid.pointsByCell (+0x44), then clears that NiTPointerMap. Given the key helper's X/Y >> 9 packing, this is a 512-unit spatial bucket map local to this PathGrid, not a one-entry-per-world-cell map.",
+  "comment_repeatable": "Verified frees every BSSimpleList node and list header stored in TESPathGrid.pointsByCell (+0x44), then clears that NiTPointerMap. Given the key helper's X/Y >> 9 packing, this is a 512-unit spatial bucket map local to this PathGrid, not a one-entry-per-world-cell map.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4E5280",
+  "display_name": "TESPathGrid_ClearSpatialBucketMap",
   "end_ea": "0x4E531E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4E5280",
+  "name": "TESPathGrid_ClearSpatialBucketMap",
   "segment": ".text",
   "sha256": "5c88cbd805780a6b1906dc22ebc0fb7dae53747c2dbb36fabc3260a61a2cba4f",
   "size": 158,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E5280",
-  "type": "int __thiscall(_DWORD *this)",
+  "total_chunk_size": 158,
+  "type": "int __thiscall(TESPathGrid *this)",
   "xrefs_from_count": 69,
   "xrefs_to_count": 4
 }

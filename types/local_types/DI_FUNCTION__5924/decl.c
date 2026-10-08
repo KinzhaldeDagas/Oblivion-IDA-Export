@@ -1,1 +1,1 @@
-DI_FUNCTION
+typedef UINT DI_FUNCTION;

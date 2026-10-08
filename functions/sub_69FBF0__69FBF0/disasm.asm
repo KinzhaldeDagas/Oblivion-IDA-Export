@@ -22,12 +22,12 @@
 0x69FC35: push    edi
 0x69FC36: push    edi
 0x69FC37: push    eax
-0x69FC38: call    sub_439EB0
+0x69FC38: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
 0x69FC3D: mov     esi, eax
 0x69FC3F: test    esi, esi
 0x69FC41: jz      loc_69FD03
-0x69FC47: lea     ecx, [esp+38h+var_28]
-0x69FC4B: call    sub_478B90
+0x69FC47: lea     ecx, [esp+38h+var_28]; this
+0x69FC4B: call    OB_NiCloningProcess_ctor
 0x69FC50: fld1
 0x69FC52: fst     [esp+38h+var_10]
 0x69FC56: fst     [esp+38h+var_14]
@@ -60,7 +60,7 @@
 0x69FCB6: jz      short loc_69FCBF
 0x69FCB8: mov     dword ptr [ebp+1Ch], 0
 0x69FCBF: mov     ecx, ebp; this
-0x69FCC1: call    NiAVObject_InitializePropertyState
+0x69FCC1: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x69FCC6: mov     ecx, [esp+38h+var_28]
 0x69FCCA: test    ecx, ecx
 0x69FCCC: mov     [esp+38h+var_4], 0FFFFFFFFh
@@ -94,3 +94,12 @@
 0x69FD13: pop     ebp
 0x69FD14: add     esp, 28h
 0x69FD17: retn
+0x9C5E30: lea     ecx, [ebp-28h]
+0x9C5E33: jmp     sub_4781A0
+0x9C5E38: mov     edx, [esp+arg_4]
+0x9C5E3C: lea     eax, [edx-28h]
+0x9C5E3F: mov     ecx, [edx-2Ch]
+0x9C5E42: xor     ecx, eax
+0x9C5E44: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5E49: mov     eax, offset stru_AEE4E8
+0x9C5E4E: jmp     ___CxxFrameHandler3

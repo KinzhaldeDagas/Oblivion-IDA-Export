@@ -1,4 +1,4 @@
-0x508980: sub     esp, 20h
+0x508980: sub     esp, 20h; SetSTBBColorConstants console command handler: stores one UInt16/word-like value plus three floats into globals B2C728..B2C734 for STBB color constants. This is flat STBB shader state, not SpeedTreeRT 360 selection.
 0x508983: lea     eax, [esp+20h+var_14]
 0x508987: push    eax
 0x508988: lea     ecx, [esp+24h+var_18]
@@ -21,7 +21,7 @@
 0x5089B7: push    edx; a3
 0x5089B8: push    eax; a2
 0x5089B9: push    ecx; a1
-0x5089BA: call    Script_ExtractArgs
+0x5089BA: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x5089BF: add     esp, 2Ch
 0x5089C2: test    al, al
 0x5089C4: jnz     short loc_5089CA

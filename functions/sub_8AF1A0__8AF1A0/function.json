@@ -1,19 +1,36 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_8AF1A0",
+  "chunks": [
+    [
+      "0x8AF1A0",
+      "0x8AF269"
+    ],
+    [
+      "0x9D7280",
+      "0x9D72B3"
+    ]
+  ],
+  "chunks_sha256": "cb70121b00b19320c53cadca88d809272416d895ff1f9f66c244177bcea07f02",
+  "comment_regular": "2026-05-18 73000 consumer decode: bhkSimpleShapePhantom setup consumes cinfo +0x04 shape pointer and cinfo +0x20 4x4 phantom transform. Treetop collision leaves this phantom transform identity; sidecar rotations should normally use per-shape transform/endpoints before this final wrapper.",
+  "comment_repeatable": "2026-05-18 73000 consumer decode: bhkSimpleShapePhantom setup consumes cinfo +0x04 shape pointer and cinfo +0x20 4x4 phantom transform. Treetop collision leaves this phantom transform identity; sidecar rotations should normally use per-shape transform/endpoints before this final wrapper.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "bhkSimpleShapePhantom_CreateHavokObjectFromCinfo",
   "end_ea": "0x8AF269",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "sub_8AF1A0",
+  "name": "bhkSimpleShapePhantom_CreateHavokObjectFromCinfo",
   "segment": ".text",
   "sha256": "59be98f0d674803d1bc6e5a218d4e8cbc8ec23e94222531e029ccd7449b7768b",
   "size": 201,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x8AF1A0",
+  "total_chunk_size": 252,
   "type": "void __thiscall(void *this, int)",
-  "xrefs_from_count": 75,
+  "xrefs_from_count": 94,
   "xrefs_to_count": 2
 }

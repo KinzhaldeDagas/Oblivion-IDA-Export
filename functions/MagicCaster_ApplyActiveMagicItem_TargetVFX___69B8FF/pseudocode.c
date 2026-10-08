@@ -1,4 +1,4 @@
-int __usercall MagicCaster_ApplyActiveMagicItem_::TargetVFX_@<eax>(
+int __userpurge MagicCaster_ApplyActiveMagicItem_::TargetVFX_@<eax>(
         unsigned int a1@<ebx>,
         unsigned int a2@<ebp>,
         _DWORD *a3@<esi>,
@@ -35,29 +35,30 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::TargetVFX_@<eax>(
         int a34,
         int a35)
 {
-  int v36; // eax
+  int v35; // eax
+  double v36; // st7
   __int128 v38; // [esp-10h] [ebp-14h]
   float v39; // [esp+0h] [ebp-4h]
 
-  if ( a13 )
+  if ( a13 ) /*0x69b904*/
   {
-    if ( (*(unsigned __int8 (__usercall **)@<al>(int@<ecx>, double@<st0>, double@<st1>))(*(_DWORD *)a13 + 0x190))(
+    if ( (*(unsigned __int8 (__usercall **)@<al>(int@<ecx>, double@<st0>, double@<st1>))(*(_DWORD *)a13 + 0x190))( /*0x69b912*/
            a13,
            a4,
            a5) )
     {
-      if ( a20 )
+      if ( a20 ) /*0x69b91e*/
       {
-        if ( (*(_DWORD *)(*(_DWORD *)(a20 + 0x1C) + 0x58) & 0x20000000) != 0 )
+        if ( (*(_DWORD *)(*(_DWORD *)(a20 + 0x1C) + 0x58) & 0x20000000) != 0 ) /*0x69b92c*/
         {
-          v36 = (*(int (__thiscall **)(_DWORD *))(*a3 + 0x30))(a3);
-          if ( sub_699EB0((MagicCaster *)a3, a13 + 0x68, v36) )
+          v35 = (*(int (__thiscall **)(_DWORD *))(*a3 + 0x30))(a3); /*0x69b935*/
+          if ( sub_699EB0((MagicCaster *)a3, a13 + 0x68, v35) ) /*0x69b942*/
           {
-            EffectItem_MagickaCost((float *)a20);
-            v39 = a4;
-            *(_QWORD *)&v38 = __PAIR64__(a1, a2);
-            *((_QWORD *)&v38 + 1) = __PAIR64__(a20, a30);
-            sub_699900((int)a3, a1, a4, (Actor *)a13, v38, v39);
+            v36 = EffectItem_MagickaCost((float *)a20); /*0x69b94d*/
+            v39 = v36; /*0x69b95b*/
+            *(_QWORD *)&v38 = __PAIR64__(a1, a2); /*0x69b964*/
+            *((_QWORD *)&v38 + 1) = __PAIR64__(a20, a30); /*0x69b969*/
+            sub_699900((int)a3, a1, v36, (TESObjectREFR *)a13, v38, v39); /*0x69b96f*/
           }
         }
       }

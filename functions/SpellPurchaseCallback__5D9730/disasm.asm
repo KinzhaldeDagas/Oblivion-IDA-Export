@@ -19,7 +19,7 @@
 0x5D9762: jz      loc_5D9880
 0x5D9768: cmp     [esi+54h], edi
 0x5D976B: jz      loc_5D9880
-0x5D9771: call    sub_578D70
+0x5D9771: call    InterfaceManager_ConsumeMessageButton
 0x5D9776: cmp     al, 1
 0x5D9778: jnz     loc_5D987A
 0x5D977E: cmp     dword ptr [esi+58h], 1
@@ -33,9 +33,9 @@
 0x5D9796: mov     ecx, ds:0B33398h
 0x5D979C: mov     ecx, [ecx+24h]
 0x5D979F: call    sub_6AC3D0
-0x5D97A4: push    2
-0x5D97A6: push    5
-0x5D97A8: call    TESTopic__GEtTopic
+0x5D97A4: push    2; index
+0x5D97A6: push    5; topicType
+0x5D97A8: call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.
 0x5D97AD: mov     ecx, [esi+50h]
 0x5D97B0: mov     esi, ds:0B333C4h
 0x5D97B6: mov     edx, [ecx]
@@ -103,7 +103,7 @@
 0x5D9869: fstp    [esp+14h+var_14]
 0x5D986C: push    edi
 0x5D986D: push    1Dh
-0x5D986F: call    edx
+0x5D986F: call    edx; Spell purchase: Mercantile (0x1D), useValue0, scale = trunc(PlayerCharacter+0x11C / 100).
 0x5D9871: pop     ebp
 0x5D9872: pop     edi
 0x5D9873: mov     byte ptr [esi+5Ch], 1

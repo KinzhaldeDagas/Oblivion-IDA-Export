@@ -4,7 +4,7 @@
 0x4FA1E4: mov     ecx, ds:0B33B00h
 0x4FA1EA: push    edi
 0x4FA1EB: xor     edi, edi
-0x4FA1ED: call    sub_45A170
+0x4FA1ED: call    TESSaveLoadGame_UseSaveGameBlocks
 0x4FA1F2: test    al, al
 0x4FA1F4: jz      short loc_4FA1FB
 0x4FA1F6: mov     edi, 6

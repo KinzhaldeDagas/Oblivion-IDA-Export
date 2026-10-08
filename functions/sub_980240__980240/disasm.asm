@@ -8,7 +8,7 @@
 0x980254: fstp    [esp+10h+var_8]
 0x980258: fld     dword ptr [esi+74h]
 0x98025B: fstp    [esp+10h+var_4]
-0x98025F: call    sub_43F350
+0x98025F: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x980264: fstp    st
 0x980266: fld     [esp+10h+var_C]
 0x98026A: fld     qword ptr ds:0A68FE0h
@@ -125,7 +125,7 @@
 0x980397: fmulp   st(1), st
 0x980399: fdivr   [esp+10h+arg_4]
 0x98039D: fstp    dword ptr [ecx+8]
-0x9803A0: call    sub_43F350
+0x9803A0: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x9803A5: fstp    st
 0x9803A7: pop     esi
 0x9803A8: add     esp, 0Ch

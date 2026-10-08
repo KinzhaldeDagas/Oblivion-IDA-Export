@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x4CB6C5",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x4CB6F5",
-    "line": "call    sub_41E650",
+    "line": "call    ExtraDataList_GetLight; Returns the REFR_LIGHT payload from ExtraLight type 0x30; heavily used by TESObjectREF lighting and equipped-light paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,13 +145,13 @@
   },
   {
     "ea": "0x4CB6FE",
-    "line": "push    0",
+    "line": "push    0; optionalContext",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4CB700",
-    "line": "push    eax",
+    "line": "push    eax; payload",
     "mnemonic": "push",
     "size": 1
   },
@@ -181,13 +181,13 @@
   },
   {
     "ea": "0x4CB70D",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4CB70F",
-    "line": "call    sub_4B22E0",
+    "line": "call    TESObjectLIGH_UpdateAttachedLightPayload; Per-cell TESObjectLIGH source update only; optionalContext=null and no ShadowSceneNodeAddShadowCaster call occurs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x4CB71A",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },

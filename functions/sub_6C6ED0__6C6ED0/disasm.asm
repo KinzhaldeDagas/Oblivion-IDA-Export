@@ -25,7 +25,6 @@
 0x6C6F1B: mov     [esp+24h+var_4], ecx
 0x6C6F1F: mov     [esp+24h+var_14], ecx
 0x6C6F23: jmp     short loc_6C6F30
-0x6C6F25: align 10h
 0x6C6F30: mov     ecx, ds:0B241C8h
 0x6C6F36: mov     eax, [esp+24h+var_14]
 0x6C6F3A: mov     edx, ds:0B241C4h
@@ -46,7 +45,6 @@
 0x6C6F67: mov     ecx, [edi]
 0x6C6F69: mov     eax, ebp
 0x6C6F6B: jmp     short loc_6C6F70
-0x6C6F6D: align 10h
 0x6C6F70: mov     dl, [eax]
 0x6C6F72: cmp     dl, [ecx]
 0x6C6F74: jnz     short loc_6C6F90
@@ -107,7 +105,6 @@
 0x6C7014: mov     byte ptr [esp+24h+arg_0], 1
 0x6C7019: xor     edi, edi
 0x6C701B: jmp     short loc_6C7020
-0x6C701D: align 10h
 0x6C7020: mov     ecx, [esi]
 0x6C7022: mov     eax, ebp
 0x6C7024: mov     dl, [eax]

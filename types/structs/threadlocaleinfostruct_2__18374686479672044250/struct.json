@@ -1,124 +1,198 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "threadlocaleinfostruct_2",
+  "definition": "struct threadlocaleinfostruct_2\n{\nunsigned __int16 *pctype;\nint mb_cur_max;\nunsigned int lc_codepage;\nint refcount;\nunsigned int lc_collate_cp;\n__msvcrt_ulong lc_handle[6];\nLC_ID lc_id[6];\n$238EC6E89C201C18342553C2BCCF70A5 lc_category[6];\nint lc_clike;\nint *lconv_intl_refcount;\nint *lconv_num_refcount;\nint *lconv_mon_refcount;\nlconv *lconv;\nint *ctype1_refcount;\nunsigned __int16 *ctype1;\nconst unsigned __int8 *pclmap;\nconst unsigned __int8 *pcumap;\n__lc_time_data_1 *lc_time_curr;\nwchar_t *lc_name[6];\n}\n",
   "id": 18374686479672044250,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pctype",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "unsigned __int16 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "mb_cur_max",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lc_codepage",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "unsigned int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "refcount",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lc_collate_cp",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "unsigned int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lc_handle",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 24
+      "size": 24,
+      "type": "__msvcrt_ulong[6]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lc_id",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 36
+      "offset_hex": "0x2C",
+      "size": 36,
+      "type": "LC_ID[6]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lc_category",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 96
+      "size": 96,
+      "type": "$238EC6E89C201C18342553C2BCCF70A5[6]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lc_clike",
       "offset": 176,
-      "offset_hex": "0xb0",
-      "size": 4
+      "offset_hex": "0xB0",
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lconv_intl_refcount",
       "offset": 180,
-      "offset_hex": "0xb4",
-      "size": 4
+      "offset_hex": "0xB4",
+      "size": 4,
+      "type": "int *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lconv_num_refcount",
       "offset": 184,
-      "offset_hex": "0xb8",
-      "size": 4
+      "offset_hex": "0xB8",
+      "size": 4,
+      "type": "int *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lconv_mon_refcount",
       "offset": 188,
-      "offset_hex": "0xbc",
-      "size": 4
+      "offset_hex": "0xBC",
+      "size": 4,
+      "type": "int *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lconv",
       "offset": 192,
-      "offset_hex": "0xc0",
-      "size": 4
+      "offset_hex": "0xC0",
+      "size": 4,
+      "type": "lconv *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ctype1_refcount",
       "offset": 196,
-      "offset_hex": "0xc4",
-      "size": 4
+      "offset_hex": "0xC4",
+      "size": 4,
+      "type": "int *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ctype1",
       "offset": 200,
-      "offset_hex": "0xc8",
-      "size": 4
+      "offset_hex": "0xC8",
+      "size": 4,
+      "type": "unsigned __int16 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pclmap",
       "offset": 204,
-      "offset_hex": "0xcc",
-      "size": 4
+      "offset_hex": "0xCC",
+      "size": 4,
+      "type": "const unsigned __int8 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pcumap",
       "offset": 208,
-      "offset_hex": "0xd0",
-      "size": 4
+      "offset_hex": "0xD0",
+      "size": 4,
+      "type": "const unsigned __int8 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lc_time_curr",
       "offset": 212,
-      "offset_hex": "0xd4",
-      "size": 4
+      "offset_hex": "0xD4",
+      "size": 4,
+      "type": "__lc_time_data_1 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lc_name",
       "offset": 216,
-      "offset_hex": "0xd8",
-      "size": 24
+      "offset_hex": "0xD8",
+      "size": 24,
+      "type": "wchar_t *[6]"
     }
   ],
   "name": "threadlocaleinfostruct_2",
+  "ordinal": 7760,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 240
 }

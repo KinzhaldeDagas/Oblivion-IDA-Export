@@ -47,8 +47,8 @@
 0x6121EB: push    0; a2
 0x6121ED: mov     ecx, esi; this
 0x6121EF: call    TESObjectREFR_Set3D
-0x6121F4: mov     ecx, esi
-0x6121F6: call    sub_6116D0
+0x6121F4: mov     ecx, esi; this
+0x6121F6: call    Character__CleanupCurrentPackage; Character current-package cleanup. DialoguePackage receives special two-participant cleanup: stop active playback, detach both actors, restore saved ExtraPackage state where present, reset procedure state, and destroy the one shared dynamic package/owned Conversation.
 0x6121FB: mov     ecx, esi; int
 0x6121FD: mov     [esp+18h+var_4], 0FFFFFFFFh
 0x612205: call    sub_5F13D0
@@ -58,3 +58,12 @@
 0x612216: pop     esi
 0x612217: add     esp, 10h
 0x61221A: retn
+0x9C32A0: mov     ecx, [ebp-10h]; int
+0x9C32A3: jmp     sub_5F13D0
+0x9C32A8: mov     edx, [esp+arg_4]
+0x9C32AC: lea     eax, [edx-8]
+0x9C32AF: mov     ecx, [edx-0Ch]
+0x9C32B2: xor     ecx, eax
+0x9C32B4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C32B9: mov     eax, offset stru_AEBED8
+0x9C32BE: jmp     ___CxxFrameHandler3

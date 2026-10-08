@@ -1,1 +1,1 @@
-IPersistStream_0
+typedef IPersistStream IPersistStream_0;

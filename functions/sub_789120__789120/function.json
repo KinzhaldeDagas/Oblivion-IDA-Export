@@ -1,19 +1,36 @@
 {
-  "callees_count": 4,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_789120",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
+  "callers_count": 5,
+  "chunks": [
+    [
+      "0x789120",
+      "0x78918C"
+    ],
+    [
+      "0x9CB2B0",
+      "0x9CB2D3"
+    ]
+  ],
+  "chunks_sha256": "2ace82752e533a287e66d7fadf6f66bdc4a0e49602c378d53c4afa101b8b96d5",
+  "comment_regular": "Oblivion 28-byte SSO copy constructor for a by-value temporary: initializes destination, copies the source substring, and releases heap-backed source storage. Used after ParseString.",
+  "comment_repeatable": "Oblivion 28-byte SSO copy constructor for a by-value temporary: initializes destination, copies the source substring, and releases heap-backed source storage. Used after ParseString.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 6,
+  "display_name": "OB_stString28_CopyCtorConsumeTemporary_010201A0",
   "end_ea": "0x78918C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_789120",
+  "name": "OB_stString28_CopyCtorConsumeTemporary_010201A0",
   "segment": ".text",
   "sha256": "7a183bc3ad83423bf748578138c1a7e422360be6e85f674ff2780a5de876fea5",
   "size": 108,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x789120",
-  "type": "int __thiscall(int this, int, unsigned int, int, int, int, int, unsigned int)",
-  "xrefs_from_count": 37,
+  "total_chunk_size": 143,
+  "type": "OB_stString28_010201A0 *__thiscall(OB_stString28_010201A0 *this, OB_stString28_010201A0 source)",
+  "xrefs_from_count": 53,
   "xrefs_to_count": 5
 }

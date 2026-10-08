@@ -21,9 +21,9 @@
 0x5B5BB3: jnp     loc_5B5C7D
 0x5B5BB9: push    ecx
 0x5B5BBA: mov     ecx, [esi+28h]; this
-0x5B5BBD: fstp    [esp+0Ch+a2]; a3
-0x5B5BC0: push    0FA1h; a2
-0x5B5BC5: call    Tile_SetFloat
+0x5B5BBD: fstp    [esp+0Ch+a2]; value
+0x5B5BC0: push    0FA1h; propertyCode
+0x5B5BC5: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B5BCA: push    1; arg1
 0x5B5BCC: push    0; canCreate
 0x5B5BCE: call    InterfaceManager_GetSingleton
@@ -39,10 +39,10 @@
 0x5B5BF4: jge     short loc_5B5BFC
 0x5B5BF6: fadd    dword ptr ds:0A2FC78h
 0x5B5BFC: mov     ecx, [esi+28h]; this
-0x5B5BFF: fstp    [esp+18h+a2]; a3
+0x5B5BFF: fstp    [esp+18h+a2]; value
 0x5B5C03: add     esp, 0Ch
-0x5B5C06: push    0FF0h; a2
-0x5B5C0B: call    Tile_SetFloat
+0x5B5C06: push    0FF0h; propertyCode
+0x5B5C0B: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B5C10: fld1
 0x5B5C12: push    ecx
 0x5B5C13: jmp     short loc_5B5C6A
@@ -54,9 +54,9 @@
 0x5B5C20: jnp     short loc_5B5C7D
 0x5B5C22: push    ecx
 0x5B5C23: mov     ecx, [esi+28h]; this
-0x5B5C26: fstp    [esp+0Ch+a2]; a3
-0x5B5C29: push    0FA1h; a2
-0x5B5C2E: call    Tile_SetFloat
+0x5B5C26: fstp    [esp+0Ch+a2]; value
+0x5B5C29: push    0FA1h; propertyCode
+0x5B5C2E: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B5C33: push    1; arg1
 0x5B5C35: push    0; canCreate
 0x5B5C37: call    InterfaceManager_GetSingleton
@@ -72,9 +72,9 @@
 0x5B5C61: fadd    dword ptr ds:0A2FC78h
 0x5B5C67: add     esp, 0Ch
 0x5B5C6A: mov     ecx, [esi+30h]; this
-0x5B5C6D: fstp    [esp+0Ch+a2]; a3
-0x5B5C70: push    0FF0h; a2
-0x5B5C75: call    Tile_SetFloat
+0x5B5C6D: fstp    [esp+0Ch+a2]; value
+0x5B5C70: push    0FF0h; propertyCode
+0x5B5C75: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B5C7A: pop     esi
 0x5B5C7B: pop     ecx
 0x5B5C7C: retn

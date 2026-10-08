@@ -1,4 +1,4 @@
-BSStringT *sub_A0A520()
+NiRTTI *sub_A0A520()
 {
-  return sub_70E220((BSStringT *)dword_B40138, "NiScreenSpaceCamera", (int)dword_B3FACC);
+  return NiRTTI_Constructor(&stru_B40138, "NiScreenSpaceCamera", &stru_B3FACC); /*0xa0a534*/
 }

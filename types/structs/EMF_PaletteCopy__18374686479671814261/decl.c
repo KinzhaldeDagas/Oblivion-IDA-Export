@@ -1,1 +1,1 @@
-EMF_PaletteCopy
+typedef tagEMF_PaletteCopy EMF_PaletteCopy;

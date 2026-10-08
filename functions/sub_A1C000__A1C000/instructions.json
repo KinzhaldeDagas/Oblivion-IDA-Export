@@ -1,13 +1,13 @@
 [
   {
     "ea": "0xA1C000",
-    "line": "mov     ecx, offset stru_B36100; lpCriticalSection",
+    "line": "mov     ecx, offset g_TESWorldSpaceReferenceIndexLock; lpCriticalSection",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0xA1C005",
-    "line": "jmp     NiDeleteCriticalSection",
+    "line": "jmp     NiDeleteCriticalSection; Verified: atexit cleanup for g_TESWorldSpaceReferenceIndexLock.",
     "mnemonic": "jmp",
     "size": 5
   }

@@ -1,19 +1,36 @@
 {
-  "callees_count": 11,
-  "callers_count": 5,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_4237E0",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
+  "callers_count": 6,
+  "chunks": [
+    [
+      "0x4237E0",
+      "0x4238A0"
+    ],
+    [
+      "0x9C3090",
+      "0x9C30B6"
+    ]
+  ],
+  "chunks_sha256": "be2489ce3473babc378f39e01cbfa5890534d24897ec26db2105782b96c16f27",
+  "comment_regular": "Verified ExtraRank lifecycle writer: rank -1 removes the payload; every other signed 32-bit value updates or allocates ExtraRank. XRNK loading supplies a bounded 4-byte value into a zero-initialized local, so empty/short chunks become zero.",
+  "comment_repeatable": "Verified ExtraRank lifecycle writer: rank -1 removes the payload; every other signed 32-bit value updates or allocates ExtraRank. XRNK loading supplies a bounded 4-byte value into a zero-initialized local, so empty/short chunks become zero.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "ExtraDataList_SetRank",
   "end_ea": "0x4238A0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4237E0",
+  "name": "ExtraDataList_SetRank",
   "segment": ".text",
   "sha256": "304226ceb27b8f7a5f402c8ad01348853d22145760408e4e192753d67295d2b0",
   "size": 192,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4237E0",
-  "type": "void __thiscall(ExtraDataList *this, BSExtraDataVtbl *)",
-  "xrefs_from_count": 72,
+  "total_chunk_size": 230,
+  "type": "void __thiscall(ExtraDataList *this, SInt32 rank)",
+  "xrefs_from_count": 86,
   "xrefs_to_count": 6
 }

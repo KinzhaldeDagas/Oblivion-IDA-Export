@@ -3,7 +3,7 @@
 0x436503: push    edi
 0x436504: xor     edi, edi
 0x436506: mov     dword ptr [esi], offset ??_7?$BSTask@_J@@6B@; const BSTask<__int64>::`vftable'
-0x43650C: push    offset Addend; lpAddend
+0x43650C: push    0B33A20h; lpAddend
 0x436511: mov     [esi+8], edi
 0x436514: mov     [esi+0Ch], edi
 0x436517: mov     [esi+10h], edi

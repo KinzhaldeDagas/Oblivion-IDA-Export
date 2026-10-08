@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x42F50C",
-    "line": "mov     ecx, OBSE_g_FileFinder",
+    "line": "mov     ecx, ds:0B33A04h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -313,25 +313,25 @@
   },
   {
     "ea": "0x42F585",
-    "line": "jz      short loc_42F5DF",
+    "line": "jz      short loc_42F5DF; MEF IMPLEMENTED v55 2026-09-07: Registration helper branches here only if archive remains private. Existing virtual deleting-destructor flag1 and NULL factory result are retained; category cache caller sees failure. No new failure after node publication. Native synthetic factory frame tests dispatch deleting destructor exactly once on rejected registration.",
     "mnemonic": "jz",
     "size": 2
   },
   {
     "ea": "0x42F587",
-    "line": "test    byte ptr [esi+194h], 1",
+    "line": "test    byte ptr [esi+194h], 1; MEF PLAN 2026-09-07: Revalidated in current authoritative IDB. Sole direct constructor caller ArchiveManager_LoadArchive rejects owner+194h bit1 here, before global archive-list insertion. Failure goes42F5DF and invokes scalar deleting destructor with flag1. Thus constructor may return an invalid but destructible object; no new factory failure hook is required.",
     "mnemonic": "test",
     "size": 7
   },
   {
     "ea": "0x42F58E",
-    "line": "jnz     short loc_42F5DF",
+    "line": "jnz     short loc_42F5DF; MEF IMPLEMENTED v55 2026-09-07: Registration helper branches here only if archive remains private. Existing virtual deleting-destructor flag1 and NULL factory result are retained; category cache caller sees failure. No new failure after node publication. Native synthetic factory frame tests dispatch deleting destructor exactly once on rejected registration.",
     "mnemonic": "jnz",
     "size": 2
   },
   {
     "ea": "0x42F590",
-    "line": "mov     ecx, ArchiveList",
+    "line": "mov     ecx, ds:0B338E0h; MEF PLAN 2026-09-07: Proposed separate factory registration helper at this6-byte load B338E0. ESI=valid privately owned Archive; constructor/validity checks finished, no pending args. Checked registration success resumes42F5C7, failure must leave archive unpublished then42F5DF deleting-destructor path. Prepare required list storage before publishing; preserve existing head/tail/order and recheck live list after allocator recovery. No generic PushBack contract change.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x42F59C",
-    "line": "call    FormHeapAlloc",
+    "line": "call    FormHeapAlloc; MEF PLAN 2026-09-07: New factory OOM path: failed8-byte global list head allocation becomesECX0 at42F5B9, stored B338E0 at42F5BB, then validESI archive passed toPushBack42F5C2. PushBack immediately dereferences[ECX+4] at67B1E9. This is separate from cached filename construction and v54 archive master-list text buffer guards.",
     "mnemonic": "call",
     "size": 5
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x42F5BB",
-    "line": "mov     ArchiveList, ecx",
+    "line": "mov     ds:0B338E0h, ecx",
     "mnemonic": "mov",
     "size": 6
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x42F5C2",
-    "line": "call    BSSimpleList_PushBack",
+    "line": "call    BSSimpleList_PushBack; MEF PLAN 2026-09-07: Factory ignores PushBack result. Nonempty-list node allocation OOM causes no insertion, yet42F5DB returns archive as success. Sole recorded caller42F95F then may publish that unregistered archive into B338E8 category cache. A checked registration helper must report failure and destroy only still-unpublished archive via42F5DF.",
     "mnemonic": "call",
     "size": 5
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x42F5DF",
-    "line": "mov     eax, [esi]",
+    "line": "mov     eax, [esi]; MEF PLAN 2026-09-07: Revalidated in current authoritative IDB. Factory invalid-object cleanup: virtual slot0 called with deletion flag1;42E000 calls Archive::~Archive42CA60 then FormHeapFree(this). Factory returnsNULL afterward. This owns final object destruction for private cached-build failure; the builder must not itself delete/archive-free ESI.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -550,5 +550,101 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9ABC20",
+    "line": "mov     eax, [ebp-118h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9ABC26",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9ABC27",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9ABC2C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9ABC2D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9ABC2E",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9ABC32",
+    "line": "lea     eax, [edx-110h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9ABC38",
+    "line": "mov     ecx, [edx-114h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9ABC3E",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9ABC40",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9ABC45",
+    "line": "add     eax, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9ABC48",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9ABC4B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9ABC4D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9ABC52",
+    "line": "mov     eax, offset stru_AD89AC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9ABC57",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

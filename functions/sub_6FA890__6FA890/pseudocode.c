@@ -1,8 +1,8 @@
-unsigned int *__thiscall sub_6FA890(unsigned int *this, unsigned int a2)
+NiObject *__thiscall sub_6FA890(NiObject *this, unsigned int a2)
 {
-  sub_721350(this);
-  *(this + 3) = a2;
-  *this = (unsigned int)&BSXFlags::`vftable';
-  sub_721440(this, dword_A7D0EC);
-  return this;
+  sub_721350(this); /*0x6fa8b8*/
+  *((_DWORD *)this + 3) = a2; /*0x6fa8c1*/
+  this->__vftable = (NiObjectVtbl *)&BSXFlags::`vftable'; /*0x6fa8d3*/
+  sub_721440((unsigned int *)this, dword_A7D0EC); /*0x6fa8d9*/
+  return this; /*0x6fa8e0*/
 }

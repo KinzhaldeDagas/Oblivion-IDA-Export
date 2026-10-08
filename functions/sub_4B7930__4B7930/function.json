@@ -1,19 +1,32 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4B7930",
+      "0x4B7979"
+    ]
+  ],
+  "chunks_sha256": "10c35c7b9b02fd62e8f0b3a7bf84ebcab63d20792c7e96952f872e313b0af176",
+  "comment_regular": "Verified spatial-form predicate: false for null; true for form type 0x35 (TESWorldSpace); for form type 0x30 it RTTI-casts to TESObjectCELL and returns true only for interior cells; false otherwise. Probable domain role: accept only spaces allowed as random teleport destinations.",
+  "comment_repeatable": "Verified spatial-form predicate: false for null; true for form type 0x35 (TESWorldSpace); for form type 0x30 it RTTI-casts to TESObjectCELL and returns true only for interior cells; false otherwise. Probable domain role: accept only spaces allowed as random teleport destinations.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_4B7930",
+  "display_name": "TESForm_IsInteriorCellOrWorldSpace",
   "end_ea": "0x4B7979",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4B7930",
+  "name": "TESForm_IsInteriorCellOrWorldSpace",
   "segment": ".text",
   "sha256": "10c35c7b9b02fd62e8f0b3a7bf84ebcab63d20792c7e96952f872e313b0af176",
   "size": 73,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4B7930",
-  "type": "bool __cdecl(unsigned __int8 *)",
+  "total_chunk_size": 73,
+  "type": "bool __cdecl(TESForm *space)",
   "xrefs_from_count": 37,
   "xrefs_to_count": 1
 }

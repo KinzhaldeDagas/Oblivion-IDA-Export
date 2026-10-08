@@ -32,23 +32,23 @@ int __userpurge def_574B56@<eax>(
   int v29; // [esp-Ch] [ebp-Ch]
   int v30; // [esp-4h] [ebp-4h]
 
-  v10 = 7 * a1;
-  v11 = *(_DWORD *)(a3 + 0x38);
-  v12 = v11 + 8 * v10 + 0x128;
-  v13 = Double_To_SInt32(*(float *)(v11 + 8 * v10 + 0x158) + *(float *)(v11 + 8 * v10 + 0x14C)) + a2;
-  v28 = v13;
-  if ( v25 == a4 )
-    v29 = v13;
+  v10 = 7 * a1; /*0x574b6d*/
+  v11 = *(_DWORD *)(a3 + 0x38); /*0x574b6f*/
+  v12 = v11 + 8 * v10 + 0x128; /*0x574b72*/
+  v13 = Double_To_SInt32(*(float *)(v11 + 8 * v10 + 0x158) + *(float *)(v11 + 8 * v10 + 0x14C)) + a2; /*0x574b84*/
+  v28 = v13; /*0x574b8a*/
+  if ( v25 == a4 ) /*0x574b8e*/
+    v29 = v13; /*0x574b90*/
   if ( v13 > *a7 )
   {
     if ( v25 )
     {
       a5->m_data[a5->m_data != 0 ? v25 : 0] = a10;
-      v24 = Double_To_SInt32((double)v24 + **(float **)(v27 + 0x38));
-      if ( v23 <= v29 )
-        v23 = v29;
-      ++a6;
-      v13 -= v29;
+      v24 = Double_To_SInt32((double)v24 + **(float **)(v27 + 0x38)); /*0x574bcb*/
+      if ( v23 <= v29 ) /*0x574bd7*/
+        v23 = v29; /*0x574bd9*/
+      ++a6; /*0x574bdd*/
+      v13 -= v29; /*0x574bea*/
     }
     else
     {
@@ -56,62 +56,62 @@ int __userpurge def_574B56@<eax>(
       {
         if ( BSStringT_GetLen(a5) + 1 < (unsigned __int16)a5->m_bufLen )
         {
-          BSStringT_Append(a5, "\n");
-          m_data = a5->m_data;
-          v16 = BSStringT_GetLen(a5) - 1;
+          BSStringT_Append(a5, "\n"); /*0x574c4b*/
+          m_data = a5->m_data; /*0x574c50*/
+          v16 = BSStringT_GetLen(a5) - 1; /*0x574c59*/
         }
         else
         {
-          BSStringT_Append(a5, "\n\n");
-          v14 = a5->m_data;
+          BSStringT_Append(a5, "\n\n"); /*0x574c1b*/
+          v14 = a5->m_data; /*0x574c20*/
           a5->m_data[v14 != 0 ? BSStringT_GetLen(a5) - 1 : 0] = 0;
-          m_data = a5->m_data;
-          v16 = BSStringT_GetLen(a5) - 2;
+          m_data = a5->m_data; /*0x574c38*/
+          v16 = BSStringT_GetLen(a5) - 2; /*0x574c41*/
         }
         a5->m_data[m_data != 0 ? v16 : 0] = 0;
-        v13 = v28;
+        v13 = v28; /*0x574c68*/
       }
-      v17 = v26 + 2;
+      v17 = v26 + 2; /*0x574c70*/
       if ( v26 + 2 > a4 )
       {
         do
         {
           v18 = a5->m_data[a5->m_data != 0 ? v17 - 2 : 0];
           v19 = a5->m_data != 0 ? v17-- : 0;
-          a5->m_data[v19] = v18;
+          a5->m_data[v19] = v18; /*0x574c94*/
         }
         while ( v17 > a4 );
-        v13 = v28;
+        v13 = v28; /*0x574c99*/
       }
       a5->m_data[a5->m_data != 0 ? a4 - 1 : 0] = 0x2D;
       a5->m_data[a5->m_data != 0 ? a4 : 0] = a10;
-      v24 = Double_To_SInt32((double)v24 + **(float **)(v27 + 0x38));
-      v20 = Double_To_SInt32(*(float *)(v12 + 0x30) + *(float *)(v12 + 0x24));
-      if ( v23 <= v13 - v20 )
-        v23 = v13 - v20;
-      v13 = 0;
-      ++a6;
+      v24 = Double_To_SInt32((double)v24 + **(float **)(v27 + 0x38)); /*0x574cd7*/
+      v20 = Double_To_SInt32(*(float *)(v12 + 0x30) + *(float *)(v12 + 0x24)); /*0x574cdb*/
+      if ( v23 <= v13 - v20 ) /*0x574ce8*/
+        v23 = v13 - v20; /*0x574cea*/
+      v13 = 0; /*0x574cee*/
+      ++a6; /*0x574cf0*/
     }
   }
   if ( v30 > 0 && a6 >= v30 )
   {
     for ( i = a5->m_data; i[i != 0 ? a4 : 0] != a10; --a4 )
-      ;
+      ; /*0x574d70*/
     i[i != 0 ? a4 : 0] = 0;
-    v24 = Double_To_SInt32((double)v24 - **(float **)(v27 + 0x38));
+    v24 = Double_To_SInt32((double)v24 - **(float **)(v27 + 0x38)); /*0x574d9e*/
   }
-  else if ( ++a4 < v26 )
+  else if ( ++a4 < v26 ) /*0x574d55*/
   {
-    JUMPOUT(0x574B10);
+    JUMPOUT(0x574B10); /*0x574b10*/
   }
-  if ( *a5->m_data )
+  if ( *a5->m_data ) /*0x574da4*/
   {
-    if ( a4 >= v26 )
-      ++a6;
+    if ( a4 >= v26 ) /*0x574dad*/
+      ++a6; /*0x574daf*/
   }
-  if ( v23 <= v13 )
-    v23 = v13;
-  *a7 = v23;
-  *a8 = v24;
-  return a6;
+  if ( v23 <= v13 ) /*0x574db8*/
+    v23 = v13; /*0x574dba*/
+  *a7 = v23; /*0x574dcb*/
+  *a8 = v24; /*0x574dd7*/
+  return a6; /*0x574ddd*/
 }

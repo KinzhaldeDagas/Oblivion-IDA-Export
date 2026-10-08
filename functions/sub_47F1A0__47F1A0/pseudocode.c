@@ -1,67 +1,68 @@
-NiAVObject *__cdecl sub_47F1A0(float a1, _DWORD *a2)
+// Verified generic NiLines square-outline factory: four XY-plane corner vertices from the supplied half-extent, one repeated color, and four enabled line flags; returns NiLines geometry.
+NiAVObject *__cdecl NiLines_CreateSquareOutline(float halfExtent, const NiColorAlpha *color)
 {
-  float *v2; // esi
-  void *v3; // eax
-  int v4; // edi
-  int v5; // ebx
+  NiPoint3 *v2; // esi
+  NiColorAlpha *v3; // eax
+  NiColorAlpha *v4; // edi
+  NiColorAlpha *v5; // ebx
   double v6; // st7
   int v7; // edi
   int v8; // edx
-  _DWORD *v9; // eax
+  NiColorAlpha *v9; // eax
   NiAVObject *v10; // eax
   float v12; // [esp+18h] [ebp-18h]
   float v13; // [esp+18h] [ebp-18h]
   float v14; // [esp+1Ch] [ebp-14h]
   float v15; // [esp+1Ch] [ebp-14h]
-  float v16; // [esp+34h] [ebp+4h]
+  float halfExtenta; // [esp+34h] [ebp+4h]
 
-  v2 = (float *)FormHeapAlloc(0x30u);
-  v3 = (void *)FormHeapAlloc(0x40u);
-  v4 = (int)v3;
-  if ( v3 )
+  v2 = (NiPoint3 *)FormHeapAlloc(0x30u); /*0x47f1d0*/
+  v3 = (NiColorAlpha *)FormHeapAlloc(0x40u); /*0x47f1d2*/
+  v4 = v3; /*0x47f1d7*/
+  if ( v3 ) /*0x47f1ea*/
   {
-    sub_401080(v3, 0x10, 4, (void *(__thiscall *)(void *))sub_47EA50);
-    v5 = v4;
+    sub_401080(v3, 0x10, 4, (void *(__thiscall *)(void *))sub_47EA50); /*0x47f1f6*/
+    v5 = v4; /*0x47f1fb*/
   }
   else
   {
-    v5 = 0;
+    v5 = 0; /*0x47f1ff*/
   }
-  v6 = a1;
-  v7 = FormHeapAlloc(4u);
-  v16 = -a1;
-  *v2 = v16;
-  v2[1] = v16;
-  v2[2] = 0.0;
-  v14 = v6;
-  v2[3] = v16;
-  v2[4] = v14;
-  v12 = v6;
-  v2[5] = 0.0;
-  v15 = v6;
-  v2[6] = v12;
-  v13 = v6;
-  v2[7] = v15;
-  v2[8] = 0.0;
-  v2[9] = v13;
-  v2[0xA] = v16;
-  v2[0xB] = 0.0;
-  v8 = 0;
-  v9 = (_DWORD *)v5;
-  do
+  v6 = halfExtent; /*0x47f210*/
+  v7 = FormHeapAlloc(4u); /*0x47f216*/
+  halfExtenta = -halfExtent; /*0x47f21d*/
+  v2->x = halfExtenta; /*0x47f237*/
+  v2->y = halfExtenta; /*0x47f23d*/
+  v2->z = 0.0; /*0x47f24a*/
+  v14 = v6; /*0x47f253*/
+  v2[1].x = halfExtenta; /*0x47f257*/
+  v2[1].y = v14; /*0x47f264*/
+  v12 = v6; /*0x47f26d*/
+  v2[1].z = 0.0; /*0x47f271*/
+  v15 = v6; /*0x47f278*/
+  v2[2].x = v12; /*0x47f286*/
+  v13 = v6; /*0x47f28f*/
+  v2[2].y = v15; /*0x47f293*/
+  v2[2].z = 0.0; /*0x47f2a0*/
+  v2[3].x = v13; /*0x47f2a7*/
+  v2[3].y = halfExtenta; /*0x47f2b2*/
+  v2[3].z = 0.0; /*0x47f2b9*/
+  v8 = 0; /*0x47f2bc*/
+  v9 = v5; /*0x47f2be*/
+  do /*0x47f2e3*/
   {
-    *v9 = *a2;
-    v9[1] = a2[1];
-    v9[2] = a2[2];
-    v9[3] = a2[3];
-    *(_BYTE *)(v8 + v7) = 1;
-    ++v8;
-    v9 += 4;
+    *(_DWORD *)v9 = *(_DWORD *)color; /*0x47f2c2*/
+    *((_DWORD *)v9 + 1) = *((_DWORD *)color + 1); /*0x47f2c7*/
+    *((_DWORD *)v9 + 2) = *((_DWORD *)color + 2); /*0x47f2cd*/
+    *((_DWORD *)v9 + 3) = *((_DWORD *)color + 3); /*0x47f2d3*/
+    *(_BYTE *)(v8 + v7) = 1; /*0x47f2d6*/
+    ++v8; /*0x47f2da*/
+    v9 = (NiColorAlpha *)((char *)v9 + 0x10); /*0x47f2dd*/
   }
-  while ( v8 < 4 );
-  v10 = (NiAVObject *)FormHeapAlloc(0xC0u);
-  if ( v10 )
-    return sub_7177E0(v10, 4u, (int)v2, v5, 0, 0, 0, v7);
+  while ( v8 < 4 ); /*0x47f2e3*/
+  v10 = (NiAVObject *)FormHeapAlloc(0xC0u); /*0x47f2ea*/
+  if ( v10 ) /*0x47f300*/
+    return NiLines_ctorWithGeometryData(v10, 4u, v2, v5, 0, 0, 0, v7); /*0x47f30f*/
   else
-    return 0;
+    return 0; /*0x47f328*/
 }

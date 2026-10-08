@@ -1,14 +1,15 @@
-void __cdecl sub_7A8720(_DWORD *a1, int a2, _DWORD *a3)
+// OBLIVION AUTHORITY (2026-08-30): Placement-fills count uninitialized 8-byte SLodEntry slots from one source pair.
+void __cdecl OB_LeafLodEntry_UninitializedFillN_010201A0(
+        OB_CLeafLodEngine_SLodEntry_010201A0 *destination,
+        unsigned int count,
+        const OB_CLeafLodEngine_SLodEntry_010201A0 *value)
 {
-  int i; // ecx
+  unsigned int i; // ecx
 
-  for ( i = a2; i; a1 += 2 )
+  for ( i = count; i; ++destination ) /*0x7a8726*/
   {
-    if ( a1 )
-    {
-      *a1 = *a3;
-      a1[1] = a3[1];
-    }
-    --i;
+    if ( destination ) /*0x7a8733*/
+      *destination = *value; /*0x7a8737*/
+    --i; /*0x7a873f*/
   }
 }

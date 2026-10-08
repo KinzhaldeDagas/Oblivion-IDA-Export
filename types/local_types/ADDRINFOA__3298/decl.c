@@ -1,1 +1,1 @@
-ADDRINFOA
+typedef addrinfo ADDRINFOA;

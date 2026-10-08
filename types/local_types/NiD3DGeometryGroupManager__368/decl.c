@@ -1,1 +1,1 @@
-NiD3DGeometryGroupManager
+struct NiD3DGeometryGroupManager;

@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x4E1CFF",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -307,13 +307,13 @@
   },
   {
     "ea": "0x4E1D13",
-    "line": "push    edx",
+    "line": "push    edx; firstPerson",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E1D14",
-    "line": "call    sub_6600D0",
+    "line": "call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.",
     "mnemonic": "call",
     "size": 5
   },
@@ -415,19 +415,19 @@
   },
   {
     "ea": "0x4E1D42",
-    "line": "push    ebp",
+    "line": "push    ebp; skeletonRoot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E1D43",
-    "line": "push    esi",
+    "line": "push    esi; actorRef",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E1D44",
-    "line": "push    0Eh",
+    "line": "push    0Eh; slot",
     "mnemonic": "push",
     "size": 2
   },
@@ -451,13 +451,13 @@
   },
   {
     "ea": "0x4E1D4E",
-    "line": "push    eax",
+    "line": "push    eax; modelPath",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E1D4F",
-    "line": "call    sub_479450",
+    "line": "call    Actor_LoadCloneAndAttachModel3D; Loads and clones a model for an actor equipment/add-on slot, binds actor-specific resources, applies the stock attachment transform, attaches through Prn metadata, and initializes render property/dynamic-effect state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -730,5 +730,59 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B5BD0",
+    "line": "lea     ecx, [ebp-14h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5BD3",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5BD8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B5BDC",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5BDF",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5BE2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B5BE4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5BE9",
+    "line": "mov     eax, offset stru_AE0BB4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5BEE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

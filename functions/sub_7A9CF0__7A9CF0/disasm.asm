@@ -89,7 +89,7 @@
 0x7A9DE1: push    eax
 0x7A9DE2: mov     [edi+21E4h], bx
 0x7A9DE9: mov     [edi+21E6h], bx
-0x7A9DF0: call    FormHeapFree
+0x7A9DF0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7A9DF5: add     esp, 4
 0x7A9DF8: mov     [edi+21E8h], ebx
 0x7A9DFE: pop     edi

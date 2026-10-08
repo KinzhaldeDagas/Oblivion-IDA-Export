@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x447440",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+formID]; Looks up a form by runtime FormID and dynamic-casts TESForm to TESTopic. Used here only for the HELLO and GOODBYE conversation roots.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x447448",
-    "line": "lea     ecx, [esp+arg_0]",
+    "line": "lea     ecx, [esp+formID]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x447453",
-    "line": "mov     [esp+8+arg_0], 0",
+    "line": "mov     [esp+8+formID], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x447464",
-    "line": "and     eax, [esp+arg_0]",
+    "line": "and     eax, [esp+formID]",
     "mnemonic": "and",
     "size": 4
   },

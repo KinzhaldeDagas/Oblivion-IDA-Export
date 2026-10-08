@@ -1,28 +1,28 @@
 char __thiscall sub_6638A0(int *this)
 {
-  BSExtraDataVtbl *v2; // eax
+  BSExtraDataVtbl *Light; // eax
   int *v3; // edi
   void (__thiscall *Destructor)(BSExtraData *); // eax
 
-  v2 = sub_41E650((ExtraDataList *)(this + 0x11));
-  v3 = (int *)v2;
-  if ( v2 )
+  Light = ExtraDataList_GetLight((ExtraDataList *)(this + 0x11)); /*0x6638a7*/
+  v3 = (int *)Light; /*0x6638ac*/
+  if ( Light ) /*0x6638b0*/
   {
-    Destructor = v2->Destructor;
-    if ( *v3 == *(this + 0x1E6) && (*(_BYTE *)(*(this + 0x174) + 0x18) & 1) != 0 )
+    Destructor = Light->Destructor; /*0x6638b2*/
+    if ( *v3 == *(this + 0x1E6) && (*(_BYTE *)(*(this + 0x174) + 0x18) & 1) != 0 ) /*0x6638cd*/
     {
-      sub_55E2A0(v3, this + 0x1E7);
-      LOBYTE(v2) = sub_5E3FC0(this);
+      OB_NiSmartPointer_Assign_010201A0(v3, this + 0x1E7); /*0x6638d8*/
+      LOBYTE(Light) = sub_5E3FC0(this); /*0x6638e2*/
     }
     else
     {
-      if ( Destructor == (void (__thiscall *)(BSExtraData *))*(this + 0x1E7)
+      if ( Destructor == (void (__thiscall *)(BSExtraData *))*(this + 0x1E7) /*0x6638fa*/
         && (TESObjectREFR::GetNiNode((TESObjectREFR *)this)->members.super.m_flags & 1) != 0 )
       {
-        sub_55E2A0(v3, this + 0x1E6);
+        OB_NiSmartPointer_Assign_010201A0(v3, this + 0x1E6); /*0x6638ff*/
       }
-      LOBYTE(v2) = sub_5E3FC0(this);
+      LOBYTE(Light) = sub_5E3FC0(this); /*0x663909*/
     }
   }
-  return (char)v2;
+  return (char)Light; /*0x6638de*/
 }

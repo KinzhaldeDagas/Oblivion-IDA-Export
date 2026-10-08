@@ -1,19 +1,40 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_4376A0",
+  "chunks": [
+    [
+      "0x4376A0",
+      "0x437760"
+    ],
+    [
+      "0x435A90",
+      "0x435AA1"
+    ],
+    [
+      "0x9AC4C0",
+      "0x9AC4EE"
+    ]
+  ],
+  "chunks_sha256": "049dd5cbe46b6702f33e0066b77ee554d1eb2897c74c541d362f130a78b8a428",
+  "comment_regular": "Verified 0x40-byte QueuedTreeModel constructor layout: +0x2C TESModel component, +0x30 lodMultiplier, +0x34 task flags, +0x38 TESObjectREFR, and +0x3C TESObjectTREE. Bytes +0x35..+0x37 remain Unknown.",
+  "comment_repeatable": "Verified 0x40-byte QueuedTreeModel constructor layout: +0x2C TESModel component, +0x30 lodMultiplier, +0x34 task flags, +0x38 TESObjectREFR, and +0x3C TESObjectTREE. Bytes +0x35..+0x37 remain Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 6,
+  "display_name": "QueuedTreeModel_ctor",
   "end_ea": "0x437760",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4376A0",
+  "name": "QueuedTreeModel_ctor",
   "segment": ".text",
   "sha256": "ccd14841b0a116e6c8db8c8ea0f6e868675ed79d64ea869d254db079ce6d823d",
   "size": 192,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4376A0",
-  "type": "_DWORD *__thiscall(_DWORD *this, int, int, unsigned __int8, int)",
-  "xrefs_from_count": 74,
+  "total_chunk_size": 255,
+  "type": "QueuedTreeModel_OblivionLayout *__thiscall(QueuedTreeModel_OblivionLayout *this, TESObjectREFR *reference, TESObjectTREE_OblivionLayout_080_NiTArrayVerified *tree, unsigned __int8 priority, int lodMultiplier)",
+  "xrefs_from_count": 97,
   "xrefs_to_count": 1
 }

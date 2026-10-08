@@ -1,18 +1,18 @@
-_WORD *sub_71FD30()
+NiObject *sub_71FD30()
 {
-  _WORD *v0; // eax
-  _WORD *v1; // esi
+  NiObject *v0; // eax
+  NiObject *v1; // esi
 
-  v0 = (_WORD *)FormHeapAlloc(0x58u);
-  v1 = v0;
-  if ( !v0 )
-    return 0;
-  sub_732DD0(v0);
-  *(_DWORD *)v1 = &NiTriShapeData::`vftable';
-  *((_DWORD *)v1 + 0x11) = 0;
-  *((_DWORD *)v1 + 0x12) = 0;
-  *((_DWORD *)v1 + 0x13) = 0;
-  v1[0x28] = 0;
-  *((_DWORD *)v1 + 0x15) = 0;
-  return v1;
+  v0 = (NiObject *)FormHeapAlloc(0x58u); /*0x71fd55*/
+  v1 = v0; /*0x71fd5a*/
+  if ( !v0 ) /*0x71fd6b*/
+    return 0; /*0x71fd9e*/
+  sub_732DD0(v0); /*0x71fd6f*/
+  v1->__vftable = (NiObjectVtbl *)&NiTriShapeData::`vftable'; /*0x71fd74*/
+  v1[8].members.m_uiRefCount = 0; /*0x71fd7a*/
+  v1[9].__vftable = 0; /*0x71fd7d*/
+  v1[9].members.m_uiRefCount = 0; /*0x71fd80*/
+  LOWORD(v1[0xA].__vftable) = 0; /*0x71fd83*/
+  v1[0xA].members.m_uiRefCount = 0; /*0x71fd87*/
+  return v1; /*0x71fd8c*/
 }

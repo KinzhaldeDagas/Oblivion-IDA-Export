@@ -8,16 +8,16 @@ int __usercall _cfltcvt_l@<eax>(
         int a7,
         struct localeinfo_struct *a8)
 {
-  switch ( a5 )
+  switch ( a5 ) /*0x9906d6*/
   {
-    case 'e':
-    case 'E':
-      return _cftoe_l(a2, a3, a4, a6, a7, a8);
-    case 'f':
-      return _cftof_l(a2, a3, a4, a6, a8);
-    case 'a':
-    case 'A':
-      return _cftoa_l(a1, a2, a3, a4, a6, a7, a8);
+    case 'e': /*0x9906d6*/
+    case 'E': /*0x9906d6*/
+      return _cftoe_l((int *)a2, a3, a4, a6, a7, a8); /*0x990744*/
+    case 'f': /*0x9906d6*/
+      return _cftof_l((int *)a2, a3, a4, a6, a8); /*0x9906ec*/
+    case 'a': /*0x9906d6*/
+    case 'A': /*0x9906d6*/
+      return _cftoa_l(a1, a2, a3, a4, a6, a7, a8); /*0x99072b*/
   }
-  return _cftog_l(a2, a3, a4, a6, a7, a8);
+  return _cftog_l((int *)a2, a3, a4, a6, a7, a8); /*0x9906f4*/
 }

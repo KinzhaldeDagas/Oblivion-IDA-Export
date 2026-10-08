@@ -92,3 +92,12 @@
 0x44287A: pop     ebx
 0x44287B: add     esp, 10h
 0x44287E: retn    8
+0x9AEFA0: lea     ecx, [ebp+4]; slot
+0x9AEFA3: jmp     NiPointerSlot_Release
+0x9AEFA8: mov     edx, [esp+arg_4]
+0x9AEFAC: lea     eax, [edx-14h]
+0x9AEFAF: mov     ecx, [edx-18h]
+0x9AEFB2: xor     ecx, eax
+0x9AEFB4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AEFB9: mov     eax, offset stru_ADB650
+0x9AEFBE: jmp     ___CxxFrameHandler3

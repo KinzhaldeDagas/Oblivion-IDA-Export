@@ -4,7 +4,6 @@
 0x6FE346: mov     eax, edi
 0x6FE348: lea     edx, [eax+1]
 0x6FE34B: jmp     short loc_6FE350
-0x6FE34D: align 10h
 0x6FE350: mov     cl, [eax]
 0x6FE352: add     eax, 1
 0x6FE355: test    cl, cl

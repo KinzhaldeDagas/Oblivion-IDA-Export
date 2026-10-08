@@ -6,18 +6,18 @@ void __userpurge sub_4DCF90(
         int a5@<ebp>,
         int a6)
 {
-  int v7; // eax
+  ActorSkinInfo *SkinInfoByPerspective; // eax
 
-  if ( this->member.niNode )
+  if ( this->member.niNode ) /*0x4dcf93*/
   {
-    v7 = ((int (__thiscall *)(TESObjectREFR *))this->vtbl->Unk_5A)(this);
-    if ( this == (TESObjectREFR *)TESDataHandler_g_PlayerRef )
-      v7 = sub_6600D0(TESDataHandler_g_PlayerRef, 0);
-    if ( v7 )
-      sub_47B9A0(v7, st5_0, a3, a4, a6);
+    SkinInfoByPerspective = this->vtbl->GetActiveSkinInfo(this); /*0x4dcfa1*/
+    if ( this == (TESObjectREFR *)reference ) /*0x4dcfab*/
+      SkinInfoByPerspective = Actor_GetSkinInfoByPerspective((Actor *)reference, 0); /*0x4dcfaf*/
+    if ( SkinInfoByPerspective ) /*0x4dcfb6*/
+      sub_47B9A0((unsigned int)SkinInfoByPerspective, st5_0, a3, a4, a6); /*0x4dcfbf*/
     else
-      PrintError("Creatures are not allowed to wear amulets.");
-    if ( this->vtbl->IsActor(this) )
-      sub_5EA1A0((int)this, a5, (_DWORD *)this->member.niNode);
+      PrintError("Creatures are not allowed to wear amulets."); /*0x4dcfcb*/
+    if ( this->vtbl->IsActor(this) ) /*0x4dcfdd*/
+      sub_5EA1A0((int)this, a5, (_DWORD *)this->member.niNode); /*0x4dcfe9*/
   }
 }

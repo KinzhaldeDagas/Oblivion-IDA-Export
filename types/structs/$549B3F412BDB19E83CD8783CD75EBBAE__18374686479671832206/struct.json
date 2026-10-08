@@ -1,274 +1,423 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "$549B3F412BDB19E83CD8783CD75EBBAE",
+  "definition": "union $549B3F412BDB19E83CD8783CD75EBBAE\n{\nchar cVal;\nUSHORT uiVal;\nULONG ulVal;\nINT intVal;\nUINT uintVal;\nBYTE bVal;\nSHORT iVal;\nLONG lVal;\nFLOAT fltVal;\nDOUBLE dblVal;\nVARIANT_BOOL boolVal;\nSCODE scode;\nDATE date;\nBSTR bstrVal __offset(OFF64|AUTO);\nCY cyVal;\nIUnknown_0 *punkVal __offset(OFF64|AUTO);\nIDispatch_0 *pdispVal __offset(OFF64|AUTO);\nSAFEARRAY *parray __offset(OFF64|AUTO);\nLONGLONG llVal;\nULONGLONG ullVal;\nchar *pcVal __offset(OFF64|AUTO);\nUSHORT *puiVal __offset(OFF64|AUTO);\nULONG *pulVal __offset(OFF64|AUTO);\nINT *pintVal __offset(OFF64|AUTO);\nUINT *puintVal __offset(OFF64|AUTO);\nBYTE *pbVal __offset(OFF64|AUTO);\nSHORT *piVal __offset(OFF64|AUTO);\nLONG *plVal __offset(OFF64|AUTO);\nFLOAT *pfltVal __offset(OFF64|AUTO);\nDOUBLE *pdblVal __offset(OFF64|AUTO);\nVARIANT_BOOL *pboolVal __offset(OFF64|AUTO);\nSCODE *pscode __offset(OFF64|AUTO);\nDATE *pdate __offset(OFF64|AUTO);\nBSTR *pbstrVal __offset(OFF64|AUTO);\nVARIANT *pvarVal __offset(OFF64|AUTO);\nPVOID byref __offset(OFF64|AUTO);\nCY *pcyVal __offset(OFF64|AUTO);\nDECIMAL *pdecVal __offset(OFF64|AUTO);\nIUnknown_0 **ppunkVal __offset(OFF64|AUTO);\nIDispatch_0 **ppdispVal __offset(OFF64|AUTO);\nSAFEARRAY **pparray __offset(OFF64|AUTO);\nLONGLONG *pllVal __offset(OFF64|AUTO);\nULONGLONG *pullVal __offset(OFF64|AUTO);\n__tagBRECORD brecVal;\n}\n",
   "id": 18374686479671832206,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cVal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 1
+      "size": 1,
+      "type": "char"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "uiVal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 2
+      "size": 2,
+      "type": "USHORT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ulVal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "intVal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "uintVal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bVal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 1
+      "size": 1,
+      "type": "BYTE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "iVal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 2
+      "size": 2,
+      "type": "SHORT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lVal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fltVal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "FLOAT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dblVal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "DOUBLE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "boolVal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 2
+      "size": 2,
+      "type": "VARIANT_BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "scode",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "SCODE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "date",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "DATE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bstrVal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "BSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cyVal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "CY"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "punkVal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "IUnknown_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pdispVal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "IDispatch_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "parray",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "SAFEARRAY *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "llVal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "LONGLONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ullVal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "ULONGLONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pcVal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "char *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "puiVal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "USHORT *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pulVal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "ULONG *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pintVal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "INT *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "puintVal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "UINT *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pbVal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "BYTE *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "piVal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "SHORT *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "plVal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "LONG *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pfltVal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "FLOAT *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pdblVal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DOUBLE *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pboolVal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "VARIANT_BOOL *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pscode",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "SCODE *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pdate",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DATE *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pbstrVal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "BSTR *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pvarVal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "VARIANT *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "byref",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "PVOID"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pcyVal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "CY *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pdecVal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DECIMAL *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ppunkVal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "IUnknown_0 **"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ppdispVal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "IDispatch_0 **"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pparray",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "SAFEARRAY **"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pllVal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "LONGLONG *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pullVal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "ULONGLONG *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "brecVal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "__tagBRECORD"
     }
   ],
   "name": "$549B3F412BDB19E83CD8783CD75EBBAE",
+  "ordinal": 1925,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 8
 }

@@ -3,8 +3,8 @@
 0x4CCE05: fldz
 0x4CCE07: fstp    [esp+4+var_4]
 0x4CCE0A: jz      short loc_4CCE17
-0x4CCE0C: add     ecx, 28h ; '('
-0x4CCE0F: call    sub_420C40
+0x4CCE0C: add     ecx, 28h ; '('; this
+0x4CCE0F: call    ExtraDataList_GetNorthRotation; Returns ExtraNorthRotation's float payload (type 0x4C), or 0.0.
 0x4CCE14: fstp    [esp+4+var_4]
 0x4CCE17: fld     [esp+4+var_4]
 0x4CCE1A: pop     ecx

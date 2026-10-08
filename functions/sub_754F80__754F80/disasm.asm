@@ -2,7 +2,7 @@
 0x754F81: mov     esi, [esp+4+arg_0]
 0x754F85: push    edi
 0x754F86: push    esi
-0x754F87: call    sub_716140
+0x754F87: call    NiTimeController_GetViewerStrings; Viewer output confirms flags: bit 0 anim type APP_TIME/APP_INIT, bits 1..2 cycle LOOP/REVERSE/CLAMP, bit 3 Active, bit 4 Play Backwards; also reports frequency, phase, key range, runtime start/last time, and target.
 0x754F8C: mov     eax, ds:0B40F30h
 0x754F91: push    eax; ArgList
 0x754F92: call    TESOutput_PrintString

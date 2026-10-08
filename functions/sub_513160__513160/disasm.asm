@@ -10,7 +10,7 @@
 0x513175: test    eax, eax
 0x513177: jz      short loc_51318E
 0x513179: lea     esp, [esp+0]
-0x513180: cmp     eax, offset dword_BA7D84
+0x513180: cmp     eax, offset stru_BA7D84
 0x513185: jz      short loc_5131DD
 0x513187: mov     eax, [eax+4]
 0x51318A: test    eax, eax

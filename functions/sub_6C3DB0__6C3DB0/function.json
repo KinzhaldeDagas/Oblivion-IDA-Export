@@ -1,19 +1,36 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_6C3DB0",
+  "chunks": [
+    [
+      "0x6C3DB0",
+      "0x6C3E49"
+    ],
+    [
+      "0x9C3090",
+      "0x9C30B6"
+    ]
+  ],
+  "chunks_sha256": "7788e0b626f3dd54dd52fa8f768cc25c1701c88896130a893392455e0080af4d",
+  "comment_regular": "Oblivion NiTransformController link phase. Runs generic controller linking; for stream versions below 0x0A010068 resolves the legacy NiTransformData link, constructs a 0x38-byte NiTransformInterpolator around it, assigns smart pointer +0x3C, then invokes interpolator virtual +0x7C to collapse constant tracks.",
+  "comment_repeatable": "Oblivion NiTransformController link phase. Runs generic controller linking; for stream versions below 0x0A010068 resolves the legacy NiTransformData link, constructs a 0x38-byte NiTransformInterpolator around it, assigns smart pointer +0x3C, then invokes interpolator virtual +0x7C to collapse constant tracks.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "NiTransformController_LinkObject",
   "end_ea": "0x6C3E49",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6C3DB0",
+  "name": "NiTransformController_LinkObject",
   "segment": ".text",
   "sha256": "3a43e88bb86344c7ffb0565a13c559abdc9d63bcbe27775cef122409f3a19e6a",
   "size": 153,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6C3DB0",
+  "total_chunk_size": 191,
   "type": "int __thiscall(Ni2DBuffer **this, _DWORD *)",
-  "xrefs_from_count": 55,
+  "xrefs_from_count": 69,
   "xrefs_to_count": 1
 }

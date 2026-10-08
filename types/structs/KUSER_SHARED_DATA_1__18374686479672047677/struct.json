@@ -1,454 +1,693 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_KUSER_SHARED_DATA_1",
+  "definition": "struct _KUSER_SHARED_DATA_1\n{\nULONG TickCountLowDeprecated;\nULONG TickCountMultiplier;\nvolatile KSYSTEM_TIME InterruptTime;\nvolatile KSYSTEM_TIME SystemTime;\nvolatile KSYSTEM_TIME TimeZoneBias;\nUSHORT ImageNumberLow;\nUSHORT ImageNumberHigh;\nWCHAR_0 NtSystemRoot[260];\nULONG MaxStackTraceDepth;\nULONG CryptoExponent;\nULONG TimeZoneId;\nULONG LargePageMinimum;\nULONG AitSamplingValue;\nULONG AppCompatFlag;\nULONGLONG RNGSeedVersion;\nULONG GlobalValidationRunLevel;\nvolatile ULONG TimeZoneBiasStamp;\nULONG NtBuildNumber;\nNT_PRODUCT_TYPE NtProductType;\nBOOLEAN ProductTypeIsValid;\nUSHORT NativeProcessorArchitecture;\nULONG NtMajorVersion;\nULONG NtMinorVersion;\nBOOLEAN ProcessorFeatures[64];\nULONG Reserved1;\nULONG Reserved3;\nvolatile ULONG TimeSlip;\nALTERNATIVE_ARCHITECTURE_TYPE AlternativeArchitecture;\nULONG BootId;\nLARGE_INTEGER_1 SystemExpirationDate;\nULONG SuiteMask;\nBOOLEAN KdDebuggerEnabled;\nUCHAR NXSupportPolicy;\nUSHORT CyclesPerYield;\nvolatile ULONG ActiveConsoleId;\nvolatile ULONG DismountCount;\nULONG ComPlusPackage;\nULONG LastSystemRITEventTickCount;\nULONG NumberOfPhysicalPages;\nBOOLEAN SafeBootMode;\nUCHAR VirtualizationFlags;\n$4423D4037A46AA95D42D71CF77D74EBD u2;\nULONG DataFlagsPad[1];\nULONGLONG TestRetInstruction;\nLONGLONG QpcFrequency;\nULONG SystemCall;\n$8700B3B66186D13976F442AC4A1D5444 UserCetAvailableEnvironments;\nULONGLONG SystemCallPad[2];\n$88A45587C1EE8A7D1C36875B498285E9 u;\nULONG Cookie;\nULONG CookiePad[1];\nLONGLONG ConsoleSessionForegroundProcessId;\nULONGLONG TimeUpdateLock;\nULONGLONG BaselineSystemTimeQpc;\nULONGLONG BaselineInterruptTimeQpc;\nULONGLONG QpcSystemTimeIncrement;\nULONGLONG QpcInterruptTimeIncrement;\nUCHAR QpcSystemTimeIncrementShift;\nUCHAR QpcInterruptTimeIncrementShift;\nUSHORT UnparkedProcessorCount;\nULONG EnclaveFeatureMask[4];\nULONG TelemetryCoverageRound;\nUSHORT UserModeGlobalLogger[16];\nULONG ImageFileExecutionOptions;\nULONG LangGenerationCount;\nULONG ActiveProcessorAffinity;\n__declspec(align(8)) volatile ULONGLONG InterruptTimeBias;\nvolatile ULONGLONG QpcBias;\nULONG ActiveProcessorCount;\nvolatile UCHAR ActiveGroupCount;\n$F21B2B4977A6C6268A6D973A0BFBD3AF u3;\nLARGE_INTEGER_1 TimeZoneBiasEffectiveStart;\nLARGE_INTEGER_1 TimeZoneBiasEffectiveEnd;\nXSTATE_CONFIGURATION XState;\n}\n",
   "id": 18374686479672047677,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "TickCountLowDeprecated",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "TickCountMultiplier",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "InterruptTime",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 12
+      "size": 12,
+      "type": "volatile KSYSTEM_TIME"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SystemTime",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 12
+      "size": 12,
+      "type": "volatile KSYSTEM_TIME"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "TimeZoneBias",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 12
+      "size": 12,
+      "type": "volatile KSYSTEM_TIME"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ImageNumberLow",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 2
+      "offset_hex": "0x2C",
+      "size": 2,
+      "type": "USHORT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ImageNumberHigh",
       "offset": 46,
-      "offset_hex": "0x2e",
-      "size": 2
+      "offset_hex": "0x2E",
+      "size": 2,
+      "type": "USHORT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "NtSystemRoot",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 520
+      "size": 520,
+      "type": "WCHAR_0[260]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "MaxStackTraceDepth",
       "offset": 568,
       "offset_hex": "0x238",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CryptoExponent",
       "offset": 572,
-      "offset_hex": "0x23c",
-      "size": 4
+      "offset_hex": "0x23C",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "TimeZoneId",
       "offset": 576,
       "offset_hex": "0x240",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "LargePageMinimum",
       "offset": 580,
       "offset_hex": "0x244",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AitSamplingValue",
       "offset": 584,
       "offset_hex": "0x248",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AppCompatFlag",
       "offset": 588,
-      "offset_hex": "0x24c",
-      "size": 4
+      "offset_hex": "0x24C",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RNGSeedVersion",
       "offset": 592,
       "offset_hex": "0x250",
-      "size": 8
+      "size": 8,
+      "type": "ULONGLONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GlobalValidationRunLevel",
       "offset": 600,
       "offset_hex": "0x258",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "TimeZoneBiasStamp",
       "offset": 604,
-      "offset_hex": "0x25c",
-      "size": 4
+      "offset_hex": "0x25C",
+      "size": 4,
+      "type": "volatile ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "NtBuildNumber",
       "offset": 608,
       "offset_hex": "0x260",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "NtProductType",
       "offset": 612,
       "offset_hex": "0x264",
-      "size": 4
+      "size": 4,
+      "type": "NT_PRODUCT_TYPE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ProductTypeIsValid",
       "offset": 616,
       "offset_hex": "0x268",
-      "size": 1
+      "size": 1,
+      "type": "BOOLEAN"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "NativeProcessorArchitecture",
       "offset": 618,
-      "offset_hex": "0x26a",
-      "size": 2
+      "offset_hex": "0x26A",
+      "size": 2,
+      "type": "USHORT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "NtMajorVersion",
       "offset": 620,
-      "offset_hex": "0x26c",
-      "size": 4
+      "offset_hex": "0x26C",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "NtMinorVersion",
       "offset": 624,
       "offset_hex": "0x270",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ProcessorFeatures",
       "offset": 628,
       "offset_hex": "0x274",
-      "size": 64
+      "size": 64,
+      "type": "BOOLEAN[64]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Reserved1",
       "offset": 692,
-      "offset_hex": "0x2b4",
-      "size": 4
+      "offset_hex": "0x2B4",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Reserved3",
       "offset": 696,
-      "offset_hex": "0x2b8",
-      "size": 4
+      "offset_hex": "0x2B8",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "TimeSlip",
       "offset": 700,
-      "offset_hex": "0x2bc",
-      "size": 4
+      "offset_hex": "0x2BC",
+      "size": 4,
+      "type": "volatile ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AlternativeArchitecture",
       "offset": 704,
-      "offset_hex": "0x2c0",
-      "size": 4
+      "offset_hex": "0x2C0",
+      "size": 4,
+      "type": "ALTERNATIVE_ARCHITECTURE_TYPE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "BootId",
       "offset": 708,
-      "offset_hex": "0x2c4",
-      "size": 4
+      "offset_hex": "0x2C4",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SystemExpirationDate",
       "offset": 712,
-      "offset_hex": "0x2c8",
-      "size": 8
+      "offset_hex": "0x2C8",
+      "size": 8,
+      "type": "LARGE_INTEGER_1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SuiteMask",
       "offset": 720,
-      "offset_hex": "0x2d0",
-      "size": 4
+      "offset_hex": "0x2D0",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "KdDebuggerEnabled",
       "offset": 724,
-      "offset_hex": "0x2d4",
-      "size": 1
+      "offset_hex": "0x2D4",
+      "size": 1,
+      "type": "BOOLEAN"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "NXSupportPolicy",
       "offset": 725,
-      "offset_hex": "0x2d5",
-      "size": 1
+      "offset_hex": "0x2D5",
+      "size": 1,
+      "type": "UCHAR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CyclesPerYield",
       "offset": 726,
-      "offset_hex": "0x2d6",
-      "size": 2
+      "offset_hex": "0x2D6",
+      "size": 2,
+      "type": "USHORT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ActiveConsoleId",
       "offset": 728,
-      "offset_hex": "0x2d8",
-      "size": 4
+      "offset_hex": "0x2D8",
+      "size": 4,
+      "type": "volatile ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DismountCount",
       "offset": 732,
-      "offset_hex": "0x2dc",
-      "size": 4
+      "offset_hex": "0x2DC",
+      "size": 4,
+      "type": "volatile ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ComPlusPackage",
       "offset": 736,
-      "offset_hex": "0x2e0",
-      "size": 4
+      "offset_hex": "0x2E0",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "LastSystemRITEventTickCount",
       "offset": 740,
-      "offset_hex": "0x2e4",
-      "size": 4
+      "offset_hex": "0x2E4",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "NumberOfPhysicalPages",
       "offset": 744,
-      "offset_hex": "0x2e8",
-      "size": 4
+      "offset_hex": "0x2E8",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SafeBootMode",
       "offset": 748,
-      "offset_hex": "0x2ec",
-      "size": 1
+      "offset_hex": "0x2EC",
+      "size": 1,
+      "type": "BOOLEAN"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "VirtualizationFlags",
       "offset": 749,
-      "offset_hex": "0x2ed",
-      "size": 1
+      "offset_hex": "0x2ED",
+      "size": 1,
+      "type": "UCHAR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "u2",
       "offset": 752,
-      "offset_hex": "0x2f0",
-      "size": 4
+      "offset_hex": "0x2F0",
+      "size": 4,
+      "type": "$4423D4037A46AA95D42D71CF77D74EBD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DataFlagsPad",
       "offset": 756,
-      "offset_hex": "0x2f4",
-      "size": 4
+      "offset_hex": "0x2F4",
+      "size": 4,
+      "type": "ULONG[1]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "TestRetInstruction",
       "offset": 760,
-      "offset_hex": "0x2f8",
-      "size": 8
+      "offset_hex": "0x2F8",
+      "size": 8,
+      "type": "ULONGLONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QpcFrequency",
       "offset": 768,
       "offset_hex": "0x300",
-      "size": 8
+      "size": 8,
+      "type": "LONGLONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SystemCall",
       "offset": 776,
       "offset_hex": "0x308",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "UserCetAvailableEnvironments",
       "offset": 780,
-      "offset_hex": "0x30c",
-      "size": 4
+      "offset_hex": "0x30C",
+      "size": 4,
+      "type": "$8700B3B66186D13976F442AC4A1D5444"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SystemCallPad",
       "offset": 784,
       "offset_hex": "0x310",
-      "size": 16
+      "size": 16,
+      "type": "ULONGLONG[2]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "u",
       "offset": 800,
       "offset_hex": "0x320",
-      "size": 16
+      "size": 16,
+      "type": "$88A45587C1EE8A7D1C36875B498285E9"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Cookie",
       "offset": 816,
       "offset_hex": "0x330",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CookiePad",
       "offset": 820,
       "offset_hex": "0x334",
-      "size": 4
+      "size": 4,
+      "type": "ULONG[1]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ConsoleSessionForegroundProcessId",
       "offset": 824,
       "offset_hex": "0x338",
-      "size": 8
+      "size": 8,
+      "type": "LONGLONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "TimeUpdateLock",
       "offset": 832,
       "offset_hex": "0x340",
-      "size": 8
+      "size": 8,
+      "type": "ULONGLONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "BaselineSystemTimeQpc",
       "offset": 840,
       "offset_hex": "0x348",
-      "size": 8
+      "size": 8,
+      "type": "ULONGLONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "BaselineInterruptTimeQpc",
       "offset": 848,
       "offset_hex": "0x350",
-      "size": 8
+      "size": 8,
+      "type": "ULONGLONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QpcSystemTimeIncrement",
       "offset": 856,
       "offset_hex": "0x358",
-      "size": 8
+      "size": 8,
+      "type": "ULONGLONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QpcInterruptTimeIncrement",
       "offset": 864,
       "offset_hex": "0x360",
-      "size": 8
+      "size": 8,
+      "type": "ULONGLONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QpcSystemTimeIncrementShift",
       "offset": 872,
       "offset_hex": "0x368",
-      "size": 1
+      "size": 1,
+      "type": "UCHAR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QpcInterruptTimeIncrementShift",
       "offset": 873,
       "offset_hex": "0x369",
-      "size": 1
+      "size": 1,
+      "type": "UCHAR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "UnparkedProcessorCount",
       "offset": 874,
-      "offset_hex": "0x36a",
-      "size": 2
+      "offset_hex": "0x36A",
+      "size": 2,
+      "type": "USHORT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "EnclaveFeatureMask",
       "offset": 876,
-      "offset_hex": "0x36c",
-      "size": 16
+      "offset_hex": "0x36C",
+      "size": 16,
+      "type": "ULONG[4]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "TelemetryCoverageRound",
       "offset": 892,
-      "offset_hex": "0x37c",
-      "size": 4
+      "offset_hex": "0x37C",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "UserModeGlobalLogger",
       "offset": 896,
       "offset_hex": "0x380",
-      "size": 32
+      "size": 32,
+      "type": "USHORT[16]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ImageFileExecutionOptions",
       "offset": 928,
-      "offset_hex": "0x3a0",
-      "size": 4
+      "offset_hex": "0x3A0",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "LangGenerationCount",
       "offset": 932,
-      "offset_hex": "0x3a4",
-      "size": 4
+      "offset_hex": "0x3A4",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ActiveProcessorAffinity",
       "offset": 936,
-      "offset_hex": "0x3a8",
-      "size": 4
+      "offset_hex": "0x3A8",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "InterruptTimeBias",
       "offset": 944,
-      "offset_hex": "0x3b0",
-      "size": 8
+      "offset_hex": "0x3B0",
+      "size": 8,
+      "type": "volatile ULONGLONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QpcBias",
       "offset": 952,
-      "offset_hex": "0x3b8",
-      "size": 8
+      "offset_hex": "0x3B8",
+      "size": 8,
+      "type": "volatile ULONGLONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ActiveProcessorCount",
       "offset": 960,
-      "offset_hex": "0x3c0",
-      "size": 4
+      "offset_hex": "0x3C0",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ActiveGroupCount",
       "offset": 964,
-      "offset_hex": "0x3c4",
-      "size": 1
+      "offset_hex": "0x3C4",
+      "size": 1,
+      "type": "volatile UCHAR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "u3",
       "offset": 966,
-      "offset_hex": "0x3c6",
-      "size": 2
+      "offset_hex": "0x3C6",
+      "size": 2,
+      "type": "$F21B2B4977A6C6268A6D973A0BFBD3AF"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "TimeZoneBiasEffectiveStart",
       "offset": 968,
-      "offset_hex": "0x3c8",
-      "size": 8
+      "offset_hex": "0x3C8",
+      "size": 8,
+      "type": "LARGE_INTEGER_1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "TimeZoneBiasEffectiveEnd",
       "offset": 976,
-      "offset_hex": "0x3d0",
-      "size": 8
+      "offset_hex": "0x3D0",
+      "size": 8,
+      "type": "LARGE_INTEGER_1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "XState",
       "offset": 984,
-      "offset_hex": "0x3d8",
-      "size": 824
+      "offset_hex": "0x3D8",
+      "size": 824,
+      "type": "XSTATE_CONFIGURATION"
     }
   ],
   "name": "_KUSER_SHARED_DATA_1",
+  "ordinal": 8842,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 1808
 }

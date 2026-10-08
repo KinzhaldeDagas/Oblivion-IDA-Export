@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x675884",
-    "line": "call    sub_7616D0",
+    "line": "call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,25 +151,25 @@
   },
   {
     "ea": "0x6758BD",
-    "line": "fst     [esp+10h+var_C]; int",
+    "line": "fst     [esp+10h+arg1]; arg1",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x6758C1",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6758C3",
-    "line": "fstp    [esp+10h+var_10]; float",
+    "line": "fstp    [esp+10h+arg0]; arg0",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6758C6",
-    "line": "call    Actor_ProcessAction",
+    "line": "call    Actor_ProcessAction; Per-actor native action state machine. Advances required-note phases, handles AttackBow nock/hold/release lifecycle, constructs ArrowProjectile on release, and dispatches post-shot AMMO consumption.",
     "mnemonic": "call",
     "size": 5
   },

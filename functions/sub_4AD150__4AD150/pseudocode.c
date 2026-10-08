@@ -3,23 +3,23 @@ bool __thiscall sub_4AD150(TESForm *this, void *a2)
   TESForm *v3; // eax
   TESForm *v4; // esi
   bool result; // al
-  float *v6; // eax
-  float *v7; // eax
+  const NiPoint3 *v6; // eax
+  const NiPoint3 *v7; // eax
   unsigned __int8 v8; // al
   unsigned __int8 vtbl; // cl
-  float *v10; // [esp-4h] [ebp-24h]
-  float *v11; // [esp-4h] [ebp-24h]
+  const NiPoint3 *v10; // [esp-4h] [ebp-24h]
+  const NiPoint3 *v11; // [esp-4h] [ebp-24h]
   _DWORD v12[3]; // [esp+8h] [ebp-18h] BYREF
   _DWORD v13[3]; // [esp+14h] [ebp-Ch] BYREF
 
-  v3 = (TESForm *)OblivionDynamicCast(
+  v3 = (TESForm *)OblivionDynamicCast( /*0x4ad16a*/
                     a2,
                     0,
                     (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                     &TESEffectShader `RTTI Type Descriptor',
                     0);
-  v4 = v3;
-  result = !v3
+  v4 = v3; /*0x4ad16f*/
+  result = !v3 /*0x4ad626*/
         || TESForm_CompareAllComponentsTo(this, v3)
         || (*(unsigned __int8 (__thiscall **)(char *, TESForm::FormFlags *))(*((_DWORD *)this + 0x3E) + 0xC))(
              (char *)this + 0xF8,
@@ -63,9 +63,13 @@ bool __thiscall sub_4AD150(TESForm *this, void *a2)
         || *(float *)&v4[6].member.modlist.data != *((float *)this + 0x28)
         || *(float *)&v4[6].member.modlist.next != *((float *)this + 0x29)
         || *(float *)&v4[7].vtbl != *((float *)this + 0x2A)
-        || (v10 = (float *)sub_4AC7C0(v4, v12), v6 = (float *)sub_4AC7C0(this, v13), sub_8AA390(v6, v10))
+        || (v10 = (const NiPoint3 *)sub_4AC7C0(v4, v12),
+            v6 = (const NiPoint3 *)sub_4AC7C0(this, v13),
+            NiPoint3__NotEqual(v6, v10))
         || *(float *)&v4[7].vtbl != *((float *)this + 0x2A)
-        || (v11 = (float *)sub_4AC7F0(v4, v13), v7 = (float *)sub_4AC7F0(this, v12), sub_8AA390(v7, v11))
+        || (v11 = (const NiPoint3 *)sub_4AC7F0(v4, v13),
+            v7 = (const NiPoint3 *)sub_4AC7F0(this, v12),
+            NiPoint3__NotEqual(v7, v11))
         || *(float *)&v4[8].member.type != *((float *)this + 0x31)
         || *(float *)&v4[8].member.flags != *((float *)this + 0x32)
         || *(float *)&v4[8].member.refID != *((float *)this + 0x33)
@@ -83,5 +87,5 @@ bool __thiscall sub_4AD150(TESForm *this, void *a2)
         || ((vtbl ^ v8) & 8) != 0
         || ((vtbl ^ v8) & 0x10) != 0
         || ((vtbl ^ v8) & 0x20) != 0;
-  return result;
+  return result; /*0x4ad178*/
 }

@@ -1,1 +1,1 @@
-bhkAvoidBox
+struct bhkAvoidBox;

@@ -44,7 +44,7 @@
 0x47CB7F: call    eax
 0x47CB81: test    eax, eax
 0x47CB83: jz      short loc_47CB93
-0x47CB85: cmp     eax, offset unk_BA7A14
+0x47CB85: cmp     eax, offset stru_BA7A14
 0x47CB8A: jz      short loc_47CBC8
 0x47CB8C: mov     eax, [eax+4]
 0x47CB8F: test    eax, eax

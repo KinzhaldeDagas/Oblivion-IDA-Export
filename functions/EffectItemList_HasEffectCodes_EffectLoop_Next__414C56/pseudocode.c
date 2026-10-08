@@ -11,9 +11,9 @@ int __usercall EffectItemList_HasEffectCodes_::EffectLoop_Next@<eax>(
 {
   int v9; // ecx
 
-  v9 = *(_DWORD *)(a1 + 8);
-  if ( v9 && v9 != 4 )
-    return EffectItemList_HasEffectCodes_::EffectLoop(v9 - 4, a2, a3, a4, a5, a6, a7, a8, a9);
+  v9 = *(_DWORD *)(a1 + 8); /*0x414c56*/
+  if ( v9 && v9 != 4 ) /*0x414c62*/
+    return EffectItemList_HasEffectCodes_::EffectLoop(v9 - 4, a2, a3, a4, a5, a6, a7, a8, a9); /*0x414c62*/
   else
-    return EffectItemList_HasEffectCodes_::Done_();
+    return EffectItemList_HasEffectCodes_::Done_(); /*0x414c63*/
 }

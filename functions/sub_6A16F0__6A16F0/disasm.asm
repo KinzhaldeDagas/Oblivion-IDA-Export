@@ -1,4 +1,4 @@
-0x6A16F0: push    0FFFFFFFFh
+0x6A16F0: push    0FFFFFFFFh; Verified MagicShaderHitEffect InitializeVisual builds shader/texture state, restores target attachment, and returns false when required target or resources are unavailable.
 0x6A16F2: push    offset SEH_6A16F0
 0x6A16F7: mov     eax, large fs:0
 0x6A16FD: push    eax
@@ -38,20 +38,20 @@
 0x6A1762: fld     dword ptr ds:0A2FE7Ch
 0x6A1768: fstp    dword ptr [ebp+38h]
 0x6A176B: fldz
-0x6A176D: mov     ecx, ds:0B333C4h
+0x6A176D: mov     ecx, ds:0B333C4h; this
 0x6A1773: cmp     [ebp+1Ch], ecx
 0x6A1776: fstp    [esp+150h+var_12C]
 0x6A177A: mov     [esp+150h+var_13A], 0
 0x6A177F: mov     [esp+150h+var_139], 0
 0x6A1784: mov     [esp+150h+var_13B], 0
 0x6A1789: jnz     short loc_6A17C7
-0x6A178B: push    edi
-0x6A178C: call    PlayerCharacter_GetPlayerNode
+0x6A178B: push    edi; firstPerson
+0x6A178C: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x6A1791: test    eax, eax
 0x6A1793: jz      short loc_6A17C7
-0x6A1795: mov     ecx, ds:0B333C4h
-0x6A179B: push    edi
-0x6A179C: call    PlayerCharacter_GetPlayerNode
+0x6A1795: mov     ecx, ds:0B333C4h; this
+0x6A179B: push    edi; firstPerson
+0x6A179C: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x6A17A1: fldz
 0x6A17A3: fcomp   dword ptr [ebp+20h]
 0x6A17A6: mov     cl, [eax+18h]
@@ -64,10 +64,10 @@
 0x6A17B8: mov     [esp+150h+var_13B], 1
 0x6A17BD: jnz     short loc_6A17C4
 0x6A17BF: mov     [esp+150h+var_13B], 0
-0x6A17C4: mov     [ebp+44h], cl
-0x6A17C7: lea     ecx, [esp+150h+var_134]
+0x6A17C4: mov     [ebp+44h], cl; Verified (Oblivion): field +0x44 is written from the player's node-perspective state and read during shader-effect initialization to restore perspective-dependent visual state. Its exact enum values remain Unknown.
+0x6A17C7: lea     ecx, [esp+150h+secondaryNode]
 0x6A17CB: push    ecx
-0x6A17CC: lea     edx, [esp+154h+var_130]
+0x6A17CC: lea     edx, [esp+154h+visualObject]
 0x6A17D0: push    edx
 0x6A17D1: lea     eax, [esp+158h+var_12C]
 0x6A17D5: push    eax
@@ -76,12 +76,12 @@
 0x6A17DB: lea     edx, [esp+160h+var_139]
 0x6A17DF: push    edx
 0x6A17E0: mov     ecx, ebp
-0x6A17E2: mov     [esp+164h+var_130], edi
-0x6A17E6: mov     [esp+164h+var_134], edi
-0x6A17EA: call    sub_6A0D90
-0x6A17EF: cmp     [esp+150h+var_130], edi
+0x6A17E2: mov     [esp+164h+visualObject], edi
+0x6A17E6: mov     [esp+164h+secondaryNode], edi
+0x6A17EA: call    MagicShaderHitEffect_ResolveVisualAttachmentTargets; Verified (Oblivion): helper resolves target visual attachment nodes from target actor/player skin, perspective state, effect code, and weapon/torch context; writes two selected visual-node outputs plus geometry/perspective state. Renamed from sub_6A0D90.
+0x6A17EF: cmp     [esp+150h+visualObject], edi
 0x6A17F3: jz      loc_6A1C6C
-0x6A17F9: cmp     [esp+150h+var_134], edi
+0x6A17F9: cmp     [esp+150h+secondaryNode], edi
 0x6A17FD: jz      loc_6A1C6C
 0x6A1803: mov     eax, [ebp+34h]
 0x6A1806: cmp     eax, edi
@@ -113,7 +113,7 @@
 0x6A185F: sub     esp, 0Ch
 0x6A1862: mov     [esp+15Ch+var_118], eax
 0x6A1866: fld     [esp+15Ch+var_118]
-0x6A186A: fstp    [esp+15Ch+var_154]; float
+0x6A186A: fstp    [esp+15Ch+elapsedSeconds]; float
 0x6A186E: mov     [esp+15Ch+var_11C], edx
 0x6A1872: fld     [esp+15Ch+var_11C]
 0x6A1876: mov     [esp+15Ch+var_120], ecx
@@ -125,7 +125,7 @@
 0x6A188C: fld1
 0x6A188E: push    ecx
 0x6A188F: mov     ecx, esi
-0x6A1891: fstp    [esp+154h+var_154]; float
+0x6A1891: fstp    [esp+154h+elapsedSeconds]; float
 0x6A1894: call    sub_6B7280
 0x6A1899: push    1
 0x6A189B: mov     ecx, esi
@@ -139,7 +139,7 @@
 0x6A18B0: mov     ecx, esi; this
 0x6A18B2: call    sub_6B73E0
 0x6A18B7: push    esi
-0x6A18B8: call    FormHeapFree
+0x6A18B8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6A18BD: add     esp, 4
 0x6A18C0: cmp     byte ptr [ebp+28h], 0
 0x6A18C4: mov     bl, 1
@@ -172,18 +172,18 @@
 0x6A1913: jnz     loc_6A1B3D
 0x6A1919: test    bl, bl
 0x6A191B: jz      loc_6A1B3D
-0x6A1921: mov     ecx, [ebp+34h]
-0x6A1924: push    8
-0x6A1926: call    sub_4AC730
+0x6A1921: mov     ecx, [ebp+34h]; this
+0x6A1924: push    8; mask
+0x6A1926: call    TESEffectShader_HasFlagBits; Verified (Oblivion): TESEffectShader::Data.cFlags & 0x08 joins the particle shader property cleanup/detach branch in MagicShaderHitEffect_InitializeVisual; when clear, this function creates/configures a ParticleShaderProperty. Confidence applies to the behavior, not to any broader meaning of the flag.
 0x6A192B: test    al, al
 0x6A192D: jnz     loc_6A1B3D
-0x6A1933: cmp     [ebp+40h], edi
+0x6A1933: cmp     [ebp+40h], edi; Verified (Oblivion): shader field +0x40 is a refcounted NiNode allocated by NiNode::NiNode, attached/updated during visual setup, detached and released during teardown.
 0x6A1936: lea     ebx, [ebp+40h]
 0x6A1939: jnz     short loc_6A1995
 0x6A193B: push    0DCh ; 'Ü'; Size
 0x6A1940: call    FormHeapAlloc
 0x6A1945: add     esp, 4
-0x6A1948: mov     [esp+150h+var_124], eax
+0x6A1948: mov     [esp+150h+outTexture], eax
 0x6A194C: cmp     eax, edi
 0x6A194E: mov     [esp+150h+var_4], edi
 0x6A1955: jz      short loc_6A1961
@@ -208,12 +208,12 @@
 0x6A1995: cmp     [ebp+3Ch], edi
 0x6A1998: lea     esi, [ebp+3Ch]
 0x6A199B: jnz     loc_6A1A64
-0x6A19A1: mov     [esp+150h+var_138], edi
+0x6A19A1: mov     [esp+150h+sourceTexture], edi
 0x6A19A5: mov     edi, [ebp+34h]
 0x6A19A8: add     edi, 104h
-0x6A19AE: mov     ecx, edi
+0x6A19AE: mov     ecx, edi; compactString
 0x6A19B0: mov     [esp+150h+var_4], 1
-0x6A19BB: call    sub_449190
+0x6A19BB: call    OB_CompactString_Length_010201A0; Bethesda compact string length helper. If inline length marker is 0xFFFF, strlen(heap string); otherwise returns the 16-bit stored length. Used here to gate optional TESObjectTREE leaf texture.
 0x6A19C0: test    eax, eax
 0x6A19C2: jbe     loc_6A1A4E
 0x6A19C8: mov     edi, [edi+4]
@@ -228,38 +228,38 @@
 0x6A19E5: push    edx
 0x6A19E6: call    __sprintf
 0x6A19EB: add     esp, 10h
-0x6A19EE: push    0; char
-0x6A19F0: push    0; char
+0x6A19EE: push    0; searchArchives
+0x6A19F0: push    0; allowMissing
 0x6A19F2: lea     eax, [esp+158h+ArgList]
-0x6A19F6: push    eax; ArgList
-0x6A19F7: lea     ecx, [esp+15Ch+var_128]
-0x6A19FB: push    ecx; int
+0x6A19F6: push    eax; path
+0x6A19F7: lea     ecx, [esp+15Ch+slot]
+0x6A19FB: push    ecx; outTexture
 0x6A19FC: mov     ecx, ds:0B333A0h
-0x6A1A02: call    sub_442890
-0x6A1A07: push    eax
-0x6A1A08: lea     ecx, [esp+154h+var_138]
+0x6A1A02: call    OB_TES_LoadOrFindSourceTexture_010201A0; TES texture cache/load helper: checks the global texture map, optionally verifies file existence via FileFinder, loads NiSourceTexture by filename, caches it, and returns a refcounted texture pointer.
+0x6A1A07: push    eax; incoming
+0x6A1A08: lea     ecx, [esp+154h+sourceTexture]; this
 0x6A1A0C: mov     byte ptr [esp+154h+var_4], 2
-0x6A1A14: call    sub_55E2A0
-0x6A1A19: lea     ecx, [esp+150h+var_128]; this
+0x6A1A14: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
+0x6A1A19: lea     ecx, [esp+150h+slot]; slot
 0x6A1A1D: mov     byte ptr [esp+150h+var_4], 1
-0x6A1A25: call    sub_7016A0
+0x6A1A25: call    NiPointerSlot_Release
 0x6A1A2A: fld     dword ptr [ebp+38h]
-0x6A1A2D: mov     edx, [esp+150h+var_138]
+0x6A1A2D: mov     edx, [esp+150h+sourceTexture]
 0x6A1A31: mov     eax, [ebx]
 0x6A1A33: push    ecx
-0x6A1A34: mov     ecx, [esp+154h+var_134]
-0x6A1A38: fstp    [esp+154h+var_154]; float
-0x6A1A3B: push    edx; int
-0x6A1A3C: push    ecx; int
-0x6A1A3D: mov     ecx, [ebp+34h]
-0x6A1A40: push    eax; int
-0x6A1A41: call    sub_4AD990
+0x6A1A34: mov     ecx, [esp+154h+secondaryNode]
+0x6A1A38: fstp    [esp+154h+elapsedSeconds]; elapsedSeconds
+0x6A1A3B: push    edx; sourceTexture
+0x6A1A3C: push    ecx; secondaryNode
+0x6A1A3D: mov     ecx, [ebp+34h]; this
+0x6A1A40: push    eax; targetNode
+0x6A1A41: call    TESEffectShader_CreateVisualProperty; Verified (Oblivion): returned object is ParticleShaderProperty* (subtype ID 0xE), retained as a single pointer at +0x3C. Fallout stores a BSSimpleArray<NiPointer<ParticleShaderProperty>> at +0x38 instead; do not transfer the Fallout layout.
 0x6A1A46: push    eax; a2
 0x6A1A47: mov     ecx, esi; this
-0x6A1A49: call    NiSmartPointer_Set??
-0x6A1A4E: lea     ecx, [esp+150h+var_138]; this
+0x6A1A49: call    NiSmartPointer_Set??; Verified (Oblivion): the return from TESEffectShader_CreateVisualProperty is a ParticleShaderProperty*, held in shaderProperty_3C at +0x3C with its own reference-counted lifetime.
+0x6A1A4E: lea     ecx, [esp+150h+sourceTexture]; slot
 0x6A1A52: mov     [esp+150h+var_4], 0FFFFFFFFh
-0x6A1A5D: call    sub_7016A0
+0x6A1A5D: call    NiPointerSlot_Release
 0x6A1A62: xor     edi, edi
 0x6A1A64: mov     eax, [esi]
 0x6A1A66: cmp     eax, edi
@@ -300,34 +300,34 @@
 0x6A1AD6: jmp     short loc_6A1AE1
 0x6A1AD8: mov     eax, [esi]
 0x6A1ADA: mov     dword ptr [eax+70h], 1
-0x6A1AE1: mov     edx, [esp+150h+var_134]
+0x6A1AE1: mov     edx, [esp+150h+secondaryNode]
 0x6A1AE5: mov     ecx, [esi]
 0x6A1AE7: push    edx
 0x6A1AE8: call    sub_7E5C30
 0x6A1AED: cmp     [esp+150h+var_13B], 0
 0x6A1AF2: jz      short loc_6A1B31
-0x6A1AF4: mov     ecx, [esi]
+0x6A1AF4: mov     ecx, [esi]; this
 0x6A1AF6: fldz
 0x6A1AF8: push    ecx
-0x6A1AF9: fstp    [esp+154h+var_154]; float
-0x6A1AFC: call    sub_7E4800
+0x6A1AF9: fstp    [esp+154h+elapsedSeconds]; newTime
+0x6A1AFC: call    ParticleShaderProperty_ResetParticleStateAtTime; Verified (Oblivion): resets every 0x20-byte particle slot to the inactive sentinel, seeds per-slot lifetime factors from fParticleLifetime_84/fParticleLifeVar_88, sets activeParticleCount_7C to zero, and initializes simulationTime_F8 to newTime. Fallout's RewindTimer instead shifts birth times of already active particles; the lifecycle behavior diverges.
 0x6A1B01: fld     dword ptr [ebp+38h]
 0x6A1B04: fsub    qword ptr ds:0A76540h
-0x6A1B0A: mov     ecx, [esi]
-0x6A1B0C: push    1; char
-0x6A1B0E: push    edi; char
+0x6A1B0A: mov     ecx, [esi]; this
+0x6A1B0C: push    1; allowEmission
+0x6A1B0E: push    edi; applyWorldOffset
 0x6A1B0F: push    ecx
-0x6A1B10: fstp    [esp+15Ch+var_128]
-0x6A1B14: fld     [esp+15Ch+var_128]
-0x6A1B18: fstp    [esp+15Ch+var_15C]; float
-0x6A1B1B: call    sub_7E51F0
-0x6A1B20: mov     ecx, [esi]
+0x6A1B10: fstp    [esp+15Ch+slot]
+0x6A1B14: fld     [esp+15Ch+slot]
+0x6A1B18: fstp    [esp+15Ch+var_15C]; elapsedSeconds
+0x6A1B1B: call    ParticleShaderProperty_UpdateParticles; Verified (Oblivion): updates the ParticleShaderProperty particleInstanceBuffer_6C using elapsed time, currentParticleLevel_80 and fParticleLifetime_84; it retires expired slots, increments/decrements activeParticleCount_7C, and dispatches new particles by emitterType_70. Each Oblivion record is 0x20 bytes. Fallout's UpdateParticles uses 0x30-byte ParticleData records and different field offsets.
+0x6A1B20: mov     ecx, [esi]; this
 0x6A1B22: fld     dword ptr [ebp+38h]
-0x6A1B25: push    1; char
-0x6A1B27: push    edi; char
+0x6A1B25: push    1; allowEmission
+0x6A1B27: push    edi; applyWorldOffset
 0x6A1B28: push    ecx
-0x6A1B29: fstp    [esp+15Ch+var_15C]; float
-0x6A1B2C: call    sub_7E51F0
+0x6A1B29: fstp    [esp+15Ch+var_15C]; elapsedSeconds
+0x6A1B2C: call    ParticleShaderProperty_UpdateParticles; Verified (Oblivion): updates the ParticleShaderProperty particleInstanceBuffer_6C using elapsed time, currentParticleLevel_80 and fParticleLifetime_84; it retires expired slots, increments/decrements activeParticleCount_7C, and dispatches new particles by emitterType_70. Each Oblivion record is 0x20 bytes. Fallout's UpdateParticles uses 0x30-byte ParticleData records and different field offsets.
 0x6A1B31: mov     eax, [ebp+0]
 0x6A1B34: mov     edx, [eax+70h]
 0x6A1B37: mov     ecx, ebp
@@ -341,35 +341,35 @@
 0x6A1B4A: cmp     eax, edi
 0x6A1B4C: lea     ebx, [ebp+40h]
 0x6A1B4F: jz      short loc_6A1B77
-0x6A1B51: push    ecx
+0x6A1B51: push    ecx; property
 0x6A1B52: mov     ecx, [ebp+34h]
-0x6A1B55: push    eax
-0x6A1B56: call    sub_4AC740
+0x6A1B55: push    eax; rootNode
+0x6A1B56: call    NiProperty_DetachFromActorScenegraphs; Verified (Oblivion): removes the exact ParticleShaderProperty instance from the attached actor scenegraph before releasing the retained reference.
 0x6A1B5B: push    edi; a2
 0x6A1B5C: mov     ecx, esi; this
 0x6A1B5E: call    NiSmartPointer_Set??
-0x6A1B63: mov     ecx, [ebx]
+0x6A1B63: mov     ecx, [ebx]; this
 0x6A1B65: cmp     ecx, edi
 0x6A1B67: jz      short loc_6A1B6F
-0x6A1B69: push    edi
-0x6A1B6A: call    sub_7074B0
+0x6A1B69: push    edi; newParent
+0x6A1B6A: call    NiAVObject_SetParentAndDetachFromOld; Sets NiAVObject parent at +0x1C. If already parented, first asks the old parent to remove this child, then installs the new parent. Used by NiNode child insertion/replacement.
 0x6A1B6F: push    edi; a2
 0x6A1B70: mov     ecx, ebx; this
 0x6A1B72: call    NiSmartPointer_Set??
-0x6A1B77: mov     ecx, [ebp+34h]
-0x6A1B7A: push    1
-0x6A1B7C: call    sub_4AC730
+0x6A1B77: mov     ecx, [ebp+34h]; this
+0x6A1B7A: push    1; mask
+0x6A1B7C: call    TESEffectShader_HasFlagBits; Verified (Oblivion): if TESEffectShader::Data.cFlags & 0x01 is clear, MagicShaderHitEffect_InitializeVisual creates/retains BSShaderPPLightingProperty::TextureEffectData and calls the texture-effect setup path; when set, that path is skipped. This is independent of the particle-property path selected by bit 0x08.
 0x6A1B81: test    al, al
 0x6A1B83: jnz     loc_6A1C5F
 0x6A1B89: cmp     dword ptr [ebp+48h], 0
 0x6A1B8D: lea     edi, [ebp+48h]
 0x6A1B90: jnz     loc_6A1C4D
-0x6A1B96: mov     [esp+150h+var_138], 0
+0x6A1B96: mov     [esp+150h+sourceTexture], 0
 0x6A1B9E: mov     ebx, [ebp+34h]
 0x6A1BA1: add     ebx, 0F8h ; 'ø'
-0x6A1BA7: mov     ecx, ebx
+0x6A1BA7: mov     ecx, ebx; compactString
 0x6A1BA9: mov     [esp+150h+var_4], 3
-0x6A1BB4: call    sub_449190
+0x6A1BB4: call    OB_CompactString_Length_010201A0; Bethesda compact string length helper. If inline length marker is 0xFFFF, strlen(heap string); otherwise returns the 16-bit stored length. Used here to gate optional TESObjectTREE leaf texture.
 0x6A1BB9: test    eax, eax
 0x6A1BBB: jbe     short loc_6A1C1F
 0x6A1BBD: mov     ebx, [ebx+4]
@@ -384,39 +384,39 @@
 0x6A1BDA: push    eax
 0x6A1BDB: call    __sprintf
 0x6A1BE0: add     esp, 10h
-0x6A1BE3: push    0; char
-0x6A1BE5: push    0; char
+0x6A1BE3: push    0; searchArchives
+0x6A1BE5: push    0; allowMissing
 0x6A1BE7: lea     ecx, [esp+158h+ArgList]
-0x6A1BEB: push    ecx; ArgList
+0x6A1BEB: push    ecx; path
 0x6A1BEC: mov     ecx, ds:0B333A0h
-0x6A1BF2: lea     edx, [esp+15Ch+var_124]
-0x6A1BF6: push    edx; int
-0x6A1BF7: call    sub_442890
-0x6A1BFC: push    eax
-0x6A1BFD: lea     ecx, [esp+154h+var_138]
+0x6A1BF2: lea     edx, [esp+15Ch+outTexture]
+0x6A1BF6: push    edx; outTexture
+0x6A1BF7: call    OB_TES_LoadOrFindSourceTexture_010201A0; TES texture cache/load helper: checks the global texture map, optionally verifies file existence via FileFinder, loads NiSourceTexture by filename, caches it, and returns a refcounted texture pointer.
+0x6A1BFC: push    eax; incoming
+0x6A1BFD: lea     ecx, [esp+154h+sourceTexture]; this
 0x6A1C01: mov     byte ptr [esp+154h+var_4], 4
-0x6A1C09: call    sub_55E2A0
-0x6A1C0E: lea     ecx, [esp+150h+var_124]; this
+0x6A1C09: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
+0x6A1C0E: lea     ecx, [esp+150h+outTexture]; slot
 0x6A1C12: mov     byte ptr [esp+150h+var_4], 3
-0x6A1C1A: call    sub_7016A0
-0x6A1C1F: mov     eax, [esp+150h+var_138]
-0x6A1C23: mov     ecx, [esp+150h+var_130]
-0x6A1C27: push    eax
-0x6A1C28: push    ecx
-0x6A1C29: mov     ecx, [ebp+34h]
-0x6A1C2C: call    sub_4ACB20
+0x6A1C1A: call    NiPointerSlot_Release
+0x6A1C1F: mov     eax, [esp+150h+sourceTexture]
+0x6A1C23: mov     ecx, [esp+150h+visualObject]
+0x6A1C27: push    eax; sourceTexture
+0x6A1C28: push    ecx; visualObject
+0x6A1C29: mov     ecx, [ebp+34h]; this
+0x6A1C2C: call    TESEffectShader_CreateTextureEffectData; Verified (Oblivion): creates a TextureEffectData object from this shader, the resolved visual object, and the loaded fill texture, then retains it in MagicShaderHitEffect::textureEffectData_48. The creator's 0x6C allocation and data initialization are directly visible at TESEffectShader_CreateTextureEffectData.
 0x6A1C31: push    eax; a2
 0x6A1C32: mov     ecx, edi; this
-0x6A1C34: call    NiSmartPointer_Set??
-0x6A1C39: lea     ecx, [esp+150h+var_138]; this
+0x6A1C34: call    NiSmartPointer_Set??; Verified (Oblivion): shader field +0x48 receives a refcounted texture-effect object and is used by update/detach paths. Exact class identity remains Candidate.
+0x6A1C39: lea     ecx, [esp+150h+sourceTexture]; slot
 0x6A1C3D: mov     [esp+150h+var_4], 0FFFFFFFFh
-0x6A1C48: call    sub_7016A0
+0x6A1C48: call    NiPointerSlot_Release
 0x6A1C4D: mov     edx, [edi]
-0x6A1C4F: mov     eax, [esp+150h+var_130]
-0x6A1C53: mov     ecx, [ebp+34h]
-0x6A1C56: push    edx
-0x6A1C57: push    eax
-0x6A1C58: call    sub_4AD9E0
+0x6A1C4F: mov     eax, [esp+150h+visualObject]
+0x6A1C53: mov     ecx, [ebp+34h]; this
+0x6A1C56: push    edx; data
+0x6A1C57: push    eax; sceneRoot
+0x6A1C58: call    TESEffectShader_ApplyTextureEffectToScenegraph; Verified (Oblivion): applies the retained texture-effect data recursively to the resolved scenegraph after creation/reuse; the Data.cFlags bit 0x20 skin-name filter is enforced inside TESEffectShader_ApplyTextureEffectToScenegraph.
 0x6A1C5D: xor     edi, edi
 0x6A1C5F: cmp     [esi], edi
 0x6A1C61: jnz     short loc_6A1C68
@@ -437,3 +437,27 @@
 0x6A1C8A: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x6A1C8F: add     esp, 13Ch
 0x6A1C95: retn
+0x9C5F90: mov     eax, [ebp-124h]
+0x9C5F96: push    eax
+0x9C5F97: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C5F9C: pop     ecx
+0x9C5F9D: retn
+0x9C5F9E: lea     ecx, [ebp-138h]; slot
+0x9C5FA4: jmp     NiPointerSlot_Release
+0x9C5FA9: lea     ecx, [ebp-128h]; slot
+0x9C5FAF: jmp     NiPointerSlot_Release
+0x9C5FB4: lea     ecx, [ebp-138h]; slot
+0x9C5FBA: jmp     NiPointerSlot_Release
+0x9C5FBF: lea     ecx, [ebp-124h]; slot
+0x9C5FC5: jmp     NiPointerSlot_Release
+0x9C5FCA: mov     edx, [esp+arg_4]
+0x9C5FCE: lea     eax, [edx-140h]
+0x9C5FD4: mov     ecx, [edx-144h]
+0x9C5FDA: xor     ecx, eax
+0x9C5FDC: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5FE1: add     eax, 10h
+0x9C5FE4: mov     ecx, [edx-4]
+0x9C5FE7: xor     ecx, eax
+0x9C5FE9: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5FEE: mov     eax, offset stru_AEE5EC
+0x9C5FF3: jmp     ___CxxFrameHandler3

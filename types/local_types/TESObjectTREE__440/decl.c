@@ -1,1 +1,1 @@
-TESObjectTREE
+struct TESObjectTREE;

@@ -10,7 +10,7 @@
 0x49D1B4: push    edi
 0x49D1B5: push    eax
 0x49D1B6: mov     [esi+34h], bl
-0x49D1B9: call    FormHeapFree
+0x49D1B9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x49D1BE: add     esp, 4
 0x49D1C1: mov     ecx, esi
 0x49D1C3: call    sub_49CA50
@@ -27,7 +27,7 @@
 0x49D1E5: lea     eax, [esp+18h+var_4]
 0x49D1E9: push    eax
 0x49D1EA: call    edx
-0x49D1EC: mov     eax, dword ptr [esp+14h+var_4]
+0x49D1EC: mov     eax, [esp+14h+var_4]
 0x49D1F0: cmp     eax, ebx
 0x49D1F2: jz      short loc_49D20E
 0x49D1F4: mov     edi, eax

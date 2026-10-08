@@ -185,10 +185,10 @@
 0x939E65: shufps  xmm7, xmm0, 0AAh ; 'ª'
 0x939E69: movaps  xmm0, xmm7
 0x939E6C: addss   xmm0, xmm3
-0x939E70: movaps  [esp+100h+var_80], xmm0
+0x939E70: movaps  xmmword ptr [esp+100h+var_80], xmm0
 0x939E78: rsqrtss xmm3, xmm0
-0x939E7C: movss   dword ptr [esp+100h+var_80], xmm3
-0x939E85: movaps  xmm3, [esp+100h+var_80]
+0x939E7C: movss   [esp+100h+var_80], xmm3
+0x939E85: movaps  xmm3, xmmword ptr [esp+100h+var_80]
 0x939E8D: mulss   xmm0, xmm3
 0x939E91: mulss   xmm0, xmm3
 0x939E95: mov     [esp+100h+var_4C], 40400000h
@@ -352,7 +352,7 @@
 0x93A101: add     ecx, esi
 0x93A103: movaps  [esp+100h+var_40], xmm5
 0x93A10B: add     ebx, esi
-0x93A10D: movaps  [esp+100h+var_80], xmm4
+0x93A10D: movaps  xmmword ptr [esp+100h+var_80], xmm4
 0x93A115: add     edx, esi
 0x93A117: movaps  [esp+100h+var_D0], xmm2
 0x93A11C: movaps  xmm0, xmm3
@@ -434,7 +434,7 @@
 0x93A22A: divss   xmm0, xmm4
 0x93A22E: shufps  xmm0, xmm0, 0
 0x93A232: subps   xmm2, xmm0
-0x93A235: mulps   xmm2, [esp+100h+var_80]
+0x93A235: mulps   xmm2, xmmword ptr [esp+100h+var_80]
 0x93A23D: movaps  xmm3, xmm0
 0x93A240: mulps   xmm3, [esp+100h+var_40]
 0x93A248: movaps  [esp+100h+var_C0], xmm1
@@ -488,10 +488,10 @@
 0x93A300: shufps  xmm6, xmm0, 0AAh ; 'ª'
 0x93A304: movaps  xmm0, xmm6
 0x93A307: addss   xmm0, xmm3
-0x93A30B: movaps  [esp+100h+var_80], xmm0
+0x93A30B: movaps  xmmword ptr [esp+100h+var_80], xmm0
 0x93A313: rsqrtss xmm3, xmm0
-0x93A317: movss   dword ptr [esp+100h+var_80], xmm3
-0x93A320: movaps  xmm3, [esp+100h+var_80]
+0x93A317: movss   [esp+100h+var_80], xmm3
+0x93A320: movaps  xmm3, xmmword ptr [esp+100h+var_80]
 0x93A328: mulss   xmm0, xmm3
 0x93A32C: mulss   xmm0, xmm3
 0x93A330: mov     [esp+100h+var_64], 40400000h

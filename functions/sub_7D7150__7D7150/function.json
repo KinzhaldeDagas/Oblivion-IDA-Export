@@ -1,18 +1,31 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7D7150",
+      "0x7D71BB"
+    ]
+  ],
+  "chunks_sha256": "5c162f0e5b6614be57a0a6142245f8a6fa950ff4537f3d9e9b796589261aef1e",
+  "comment_regular": "Drain and release every render-target stack entry, then end the active group. This path does not rebind a previous/default target or restore viewport/scissor state.",
+  "comment_repeatable": "Drain and release every render-target stack entry, then end the active group. This path does not rebind a previous/default target or restore viewport/scissor state.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_7D7150",
+  "display_name": "NiRenderer_DrainRenderTargetGroupStack",
   "end_ea": "0x7D71BB",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7D7150",
+  "name": "NiRenderer_DrainRenderTargetGroupStack",
   "segment": ".text",
   "sha256": "5c162f0e5b6614be57a0a6142245f8a6fa950ff4537f3d9e9b796589261aef1e",
   "size": 107,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7D7150",
+  "total_chunk_size": 107,
   "type": "char()",
   "xrefs_from_count": 43,
   "xrefs_to_count": 2

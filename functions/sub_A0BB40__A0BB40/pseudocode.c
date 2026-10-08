@@ -1,4 +1,4 @@
-BSStringT *sub_A0BB40()
+NiRTTI *sub_A0BB40()
 {
-  return sub_70E220((BSStringT *)dword_B40C3C, "NiPSysGravityModifier", (int)dword_B40D08);
+  return NiRTTI_Constructor(&stru_B40C3C, "NiPSysGravityModifier", &stru_B40D08); /*0xa0bb54*/
 }

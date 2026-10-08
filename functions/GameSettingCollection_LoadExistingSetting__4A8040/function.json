@@ -1,18 +1,31 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4A8040",
+      "0x4A8090"
+    ]
+  ],
+  "chunks_sha256": "784cec1d4ddb19301f365cb09c301ddb1dc8b259c16aaf52ada263b057bfb506",
+  "comment_regular": "Verified generic name-keyed collection dispatch: looks up the setting object in the collection map by string key and calls LoadSetting virtual +0x10 when present, then advances to the next setting record.",
+  "comment_repeatable": "Verified generic name-keyed collection dispatch: looks up the setting object in the collection map by string key and calls LoadSetting virtual +0x10 when present, then advances to the next setting record.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "GameSettingCollection_LoadExistingSetting",
   "end_ea": "0x4A8090",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "GameSettingCollection_LoadExistingSetting",
   "segment": ".text",
   "sha256": "784cec1d4ddb19301f365cb09c301ddb1dc8b259c16aaf52ada263b057bfb506",
   "size": 80,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4A8040",
+  "total_chunk_size": 80,
   "type": "char __thiscall(_BYTE *this, int, int)",
   "xrefs_from_count": 32,
   "xrefs_to_count": 1

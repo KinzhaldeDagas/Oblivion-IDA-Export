@@ -1,13 +1,13 @@
-char __usercall Cmd_ShowClassMenu@<al>(char a1@<bpl>, char a2@<dil>, double a3@<st2>, double a4@<st1>, double a5@<st0>)
+char __usercall Cmd_ShowClassMenu@<al>(char a1@<bpl>, double a2@<st2>, double a3@<st1>)
 {
   _BYTE *BaseClass; // esi
 
-  if ( TESDataHandler_g_PlayerRef )
+  if ( reference ) /*0x505810*/
   {
-    BaseClass = (_BYTE *)Actor_GetBaseClass((Actor *)TESDataHandler_g_PlayerRef);
-    if ( !TESClass_IsPlayable(BaseClass) )
-      BaseClass = (_BYTE *)Actor_GetDefaultClass(TESDataHandler_g_PlayerRef);
-    sub_57AA20(a1, a2, a3, a4, a5, (int)BaseClass);
+    BaseClass = Actor_GetBaseClass((Actor *)reference); /*0x505820*/
+    if ( !TESClass_IsPlayable(BaseClass) ) /*0x505824*/
+      BaseClass = Player_GetDefaultClassRecommendation(reference); /*0x505838*/
+    sub_57AA20(a1, a2, a3, (int)BaseClass); /*0x50583b*/
   }
-  return 1;
+  return 1; /*0x505846*/
 }

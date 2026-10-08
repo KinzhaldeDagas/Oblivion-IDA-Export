@@ -1,118 +1,189 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "IDocHostUIHandlerVtbl_0",
+  "definition": "typedef IDocHostUIHandlerVtbl IDocHostUIHandlerVtbl_0\n",
   "id": 18374686479672034021,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QueryInterface",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IDocHostUIHandler_0 *, const IID *const, void **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddRef",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(IDocHostUIHandler_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Release",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(IDocHostUIHandler_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ShowContextMenu",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IDocHostUIHandler_0 *, DWORD, POINT *, IUnknown_0 *, IDispatch_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetHostInfo",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IDocHostUIHandler_0 *, DOCHOSTUIINFO *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ShowUI",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IDocHostUIHandler_0 *, DWORD, IOleInPlaceActiveObject_0 *, IOleCommandTarget_0 *, IOleInPlaceFrame_0 *, IOleInPlaceUIWindow_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "HideUI",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IDocHostUIHandler_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "UpdateUI",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IDocHostUIHandler_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "EnableModeless",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IDocHostUIHandler_0 *, BOOL)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "OnDocWindowActivate",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IDocHostUIHandler_0 *, BOOL)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "OnFrameWindowActivate",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IDocHostUIHandler_0 *, BOOL)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ResizeBorder",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IDocHostUIHandler_0 *, LPCRECT, IOleInPlaceUIWindow_0 *, BOOL)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "TranslateAccelerator",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IDocHostUIHandler_0 *, LPMSG, const GUID *, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetOptionKeyPath",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IDocHostUIHandler_0 *, LPOLESTR *, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetDropTarget",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IDocHostUIHandler_0 *, IDropTarget_0 *, IDropTarget_0 **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetExternal",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IDocHostUIHandler_0 *, IDispatch_0 **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "TranslateUrl",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IDocHostUIHandler_0 *, DWORD, OLECHAR *, OLECHAR **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "FilterDataObject",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IDocHostUIHandler_0 *, IDataObject_0 *, IDataObject_0 **)"
     }
   ],
   "name": "IDocHostUIHandlerVtbl_0",
+  "ordinal": 3707,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 72
 }

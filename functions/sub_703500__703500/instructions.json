@@ -25,13 +25,13 @@
   },
   {
     "ea": "0x703504",
-    "line": "mov     edi, [esp+10h+arg_0]",
+    "line": "mov     edi, [esp+10h+stream]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x703508",
-    "line": "push    edi",
+    "line": "push    edi; stream",
     "mnemonic": "push",
     "size": 1
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x70350B",
-    "line": "call    sub_71FEC0",
+    "line": "call    NiTriShapeData_Load; Load NiTriShapeData triangle indices and its serialized shared-normal table. The table is an array of 8-byte {UInt16 count, UInt16* indices} entries backed by linked index-pool blocks.",
     "mnemonic": "call",
     "size": 5
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x70351B",
-    "line": "lea     ecx, [esp+14h+arg_0]",
+    "line": "lea     ecx, [esp+14h+stream]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x70352B",
-    "line": "mov     [esp+24h+arg_0], ebx",
+    "line": "mov     [esp+24h+stream], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x70356B",
-    "line": "lea     ecx, [esp+30h+arg_0]",
+    "line": "lea     ecx, [esp+30h+stream]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x703589",
-    "line": "mov     [esp+40h+arg_0], 8",
+    "line": "mov     [esp+40h+stream], 8",
     "mnemonic": "mov",
     "size": 8
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x70359B",
-    "line": "lea     ecx, [esp+44h+arg_0]",
+    "line": "lea     ecx, [esp+44h+stream]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x7035AD",
-    "line": "mov     [esp+54h+arg_0], ebx",
+    "line": "mov     [esp+54h+stream], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x7035BE",
-    "line": "lea     ecx, [esp+14h+arg_0]",
+    "line": "lea     ecx, [esp+14h+stream]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x7035CC",
-    "line": "mov     [esp+24h+arg_0], ebx",
+    "line": "mov     [esp+24h+stream], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x7035D8",
-    "line": "mov     [esp+24h+arg_0], ebx",
+    "line": "mov     [esp+24h+stream], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x7035DE",
-    "line": "lea     ecx, [esp+28h+arg_0]",
+    "line": "lea     ecx, [esp+28h+stream]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x7035F6",
-    "line": "lea     ecx, [esp+3Ch+arg_0]",
+    "line": "lea     ecx, [esp+3Ch+stream]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x703604",
-    "line": "mov     [esp+4Ch+arg_0], ebx",
+    "line": "mov     [esp+4Ch+stream], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x703612",
-    "line": "lea     ecx, [esp+50h+arg_0]",
+    "line": "lea     ecx, [esp+50h+stream]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x703620",
-    "line": "mov     [esp+60h+arg_0], ebx",
+    "line": "mov     [esp+60h+stream], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x703631",
-    "line": "lea     ecx, [esp+14h+arg_0]",
+    "line": "lea     ecx, [esp+14h+stream]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x70363F",
-    "line": "mov     [esp+24h+arg_0], ebx",
+    "line": "mov     [esp+24h+stream], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -751,7 +751,7 @@
   },
   {
     "ea": "0x703650",
-    "line": "lea     ecx, [esp+28h+arg_0]",
+    "line": "lea     ecx, [esp+28h+stream]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -787,7 +787,7 @@
   },
   {
     "ea": "0x70365B",
-    "line": "mov     [esp+38h+arg_0], ebx",
+    "line": "mov     [esp+38h+stream], ebx",
     "mnemonic": "mov",
     "size": 4
   },

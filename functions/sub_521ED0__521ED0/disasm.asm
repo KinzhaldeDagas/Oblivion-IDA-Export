@@ -84,9 +84,9 @@
 0x522015: lea     eax, [edi+168h]
 0x52201B: jnz     short loc_522023
 0x52201D: lea     eax, [edi+108h]
-0x522023: push    esi
-0x522024: push    eax
-0x522025: call    sub_5528F0
+0x522023: push    esi; destination
+0x522024: push    eax; source
+0x522025: call    FaceGenHeadParameters_Copy; Deep-copies all four FaceGen matrices, preserving dimensions and engine ownership of destination coefficient buffers.
 0x52202A: add     esp, 8
 0x52202D: pop     edi
 0x52202E: pop     esi

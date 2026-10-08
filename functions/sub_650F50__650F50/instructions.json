@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x650F52",
-    "line": "mov     ebx, [esp+8+arg_4]",
+    "line": "mov     ebx, [esp+8+owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x650F6F",
-    "line": "mov     ebp, [esp+28h+arg_0]",
+    "line": "mov     ebp, [esp+28h+changeMask]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -91,19 +91,19 @@
   },
   {
     "ea": "0x650F76",
-    "line": "push    ebx",
+    "line": "push    ebx; owner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x650F77",
-    "line": "push    ebp",
+    "line": "push    ebp; changeMask",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x650F78",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x650F7E",
-    "line": "call    sub_658BC0",
+    "line": "call    MiddleLowProcess_GetSaveSize",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,19 +139,19 @@
   },
   {
     "ea": "0x650F8F",
-    "line": "mov     [esp+14h+arg_4], edi",
+    "line": "mov     [esp+14h+owner], edi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x650F93",
-    "line": "mov     [esp+14h+arg_0], eax",
+    "line": "mov     [esp+14h+changeMask], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x650F97",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x650FCF",
-    "line": "mov     [esp+14h+arg_4], edi",
+    "line": "mov     [esp+14h+owner], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -295,13 +295,13 @@
   },
   {
     "ea": "0x650FE9",
-    "line": "add     word ptr [esp+14h+arg_4], ax",
+    "line": "add     word ptr [esp+14h+owner], ax",
     "mnemonic": "add",
     "size": 5
   },
   {
     "ea": "0x650FEE",
-    "line": "mov     edi, [esp+14h+arg_4]",
+    "line": "mov     edi, [esp+14h+owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x650FFB",
-    "line": "mov     [esp+14h+arg_4], edi",
+    "line": "mov     [esp+14h+owner], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x651009",
-    "line": "call    sub_473BF0",
+    "line": "call    Actor_GetAnimationSaveStateSize; Returns the serialized actor-animation block size including its 2-byte length prefix. Null animation data or actors excluded by virtual predicate +0x198 serialize only the zero-length prefix.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x651011",
-    "line": "add     word ptr [esp+14h+arg_4], ax",
+    "line": "add     word ptr [esp+14h+owner], ax",
     "mnemonic": "add",
     "size": 5
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x651034",
-    "line": "add     word ptr [esp+1Ch+arg_4], ax",
+    "line": "add     word ptr [esp+1Ch+owner], ax",
     "mnemonic": "add",
     "size": 5
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x651046",
-    "line": "add     [esp+14h+arg_4], ebp",
+    "line": "add     [esp+14h+owner], ebp",
     "mnemonic": "add",
     "size": 4
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x65104F",
-    "line": "add     [esp+14h+arg_4], 2",
+    "line": "add     [esp+14h+owner], 2",
     "mnemonic": "add",
     "size": 5
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x651059",
-    "line": "mov     ebx, [esp+14h+arg_4]",
+    "line": "mov     ebx, [esp+14h+owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x651081",
-    "line": "mov     [esp+14h+arg_4], ecx",
+    "line": "mov     [esp+14h+owner], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x65108A",
-    "line": "add     [esp+14h+arg_4], ebp",
+    "line": "add     [esp+14h+owner], ebp",
     "mnemonic": "add",
     "size": 4
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x651093",
-    "line": "add     [esp+14h+arg_4], 4",
+    "line": "add     [esp+14h+owner], 4",
     "mnemonic": "add",
     "size": 5
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x6510B2",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -715,13 +715,13 @@
   },
   {
     "ea": "0x6510D6",
-    "line": "mov     si, word ptr [esp+20h+arg_4]",
+    "line": "mov     si, word ptr [esp+20h+owner]",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x6510DB",
-    "line": "movzx   edx, word ptr [esp+20h+arg_0]",
+    "line": "movzx   edx, word ptr [esp+20h+changeMask]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -817,13 +817,13 @@
   },
   {
     "ea": "0x651100",
-    "line": "mov     si, word ptr [esp+14h+arg_4]",
+    "line": "mov     si, word ptr [esp+14h+owner]",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x651105",
-    "line": "movzx   ecx, word ptr [esp+14h+arg_0]",
+    "line": "movzx   ecx, word ptr [esp+14h+changeMask]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -919,7 +919,7 @@
   },
   {
     "ea": "0x651132",
-    "line": "mov     ax, word ptr [esp+14h+arg_4]",
+    "line": "mov     ax, word ptr [esp+14h+owner]",
     "mnemonic": "mov",
     "size": 5
   },

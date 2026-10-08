@@ -1,13 +1,13 @@
-0x45E3D0: sub     esp, 118h
+0x45E3D0: sub     esp, 118h; MEF v56 load wrapper preserves native body/return and suspends auxiliary ID caches during clear/remap/population. Finally invalidates and releases suspension. Existing count/read/required-allocation error behavior is not relabeled as a new bool-abort protocol; caller465C28 remains unchanged.
 0x45E3D6: mov     eax, ds:0B30AACh
 0x45E3DB: xor     eax, esp
 0x45E3DD: mov     [esp+118h+var_4], eax
 0x45E3E4: push    ebx
-0x45E3E5: mov     ebx, [esp+11Ch+arg_0]
+0x45E3E5: mov     ebx, [esp+11Ch+file]
 0x45E3EC: push    ebp
 0x45E3ED: push    esi
 0x45E3EE: mov     ebp, ecx
-0x45E3F0: mov     eax, [ebp+74h]
+0x45E3F0: mov     eax, [ebp+74h]; MEF PERF 2026-09-08: PERF-3/PERF-4 load begins by clearing both ID arrays and resetting used/nonzero counts, while retaining capacity. It repopulates all slots from file after load-order remapping. An auxiliary FormID index must invalidate/rebuild across this load; duplicate or zero remaps preserve first-index semantics.
 0x45E3F3: push    edi
 0x45E3F4: xor     edi, edi
 0x45E3F6: xor     ecx, ecx
@@ -42,8 +42,8 @@
 0x45E444: push    ecx
 0x45E445: push    ebx
 0x45E446: mov     [esp+13Ch+var_118], 1
-0x45E44E: call    edx
-0x45E450: add     esp, 14h
+0x45E44E: call    edx; MEF PERF 2026-09-08: Verified PERF-4 count-known loading: file callback reads the Numeric ID array count before entering the item loop; total resides at main-body[ESP+1Ch]. Current code nevertheless grows by fixed step at45E4CD rather than reserving total capacity. Callback completion/remaining-file validation must be sealed before trusting this count for preallocation.
+0x45E450: add     esp, 14h; MEF v56 numeric prefix observer preserves displaced ADDESP14/CMP and records only EAX==4 complete count reads from native BSFile read mode. Context is keyed by native frame; a new numeric prefix invalidates stale contexts for that reused frame. Source extent is queried without seeking via native CRT descriptor layout +GetFileSizeEx.
 0x45E453: cmp     [esp+128h+var_10C], edi
 0x45E457: jbe     loc_45E524
 0x45E45D: lea     ecx, [ecx+0]
@@ -67,17 +67,17 @@
 0x45E48F: cmp     al, 0FFh
 0x45E491: jz      short loc_45E4B7
 0x45E493: cmp     al, [ebp+48h]
-0x45E496: jnb     short loc_45E4B3
+0x45E496: jnb     short loc_45E4B3; MEF PERF 2026-09-08: PERF-3 equality/lifetime constraint: invalid/missing load-order mappings become zero in the ID-array loader. Different serialized IDs can map to the same value; a rebuilt side index must preserve the first occurrence exactly, including zero, and must not silently compact the array.
 0x45E498: movzx   eax, al
 0x45E49B: mov     dl, [eax+edx]
 0x45E49E: cmp     dl, 0FFh
-0x45E4A1: jz      short loc_45E4B3
+0x45E4A1: jz      short loc_45E4B3; MEF PERF 2026-09-08: PERF-3 equality/lifetime constraint: invalid/missing load-order mappings become zero in the ID-array loader. Different serialized IDs can map to the same value; a rebuilt side index must preserve the first occurrence exactly, including zero, and must not silently compact the array.
 0x45E4A3: movzx   eax, dl
 0x45E4A6: shl     eax, 18h
 0x45E4A9: and     ecx, 0FFFFFFh
 0x45E4AF: add     eax, ecx
 0x45E4B1: jmp     short loc_45E4B9
-0x45E4B3: xor     eax, eax
+0x45E4B3: xor     eax, eax; MEF PERF 2026-09-08: PERF-3 equality/lifetime constraint: invalid/missing load-order mappings become zero in the ID-array loader. Different serialized IDs can map to the same value; a rebuilt side index must preserve the first occurrence exactly, including zero, and must not silently compact the array.
 0x45E4B5: jmp     short loc_45E4B9
 0x45E4B7: mov     eax, ecx
 0x45E4B9: mov     esi, [ebp+74h]
@@ -88,7 +88,7 @@
 0x45E4C8: add     ecx, edi
 0x45E4CA: push    ecx
 0x45E4CB: mov     ecx, esi
-0x45E4CD: call    sub_452910
+0x45E4CD: call    NiTLargeArray_Resize32; MEF v56 reserve CALL bridge reads total atcalleeESP+24h and originalrequestESP+4, preserves registers withPUSHAD/POPAD, RET4. Verifies position=start+4*(index+1), count/extent and rounded-capacity arithmetic. Large buffer allocated/copied/zeroed privately, then published after snapshot/generation recheck. Refusal invokes original requested resize, never returns too-small capacity as success.
 0x45E4D2: cmp     edi, [esi+0Ch]
 0x45E4D5: jb      short loc_45E4EA
 0x45E4D7: lea     edx, [edi+1]
@@ -123,8 +123,8 @@
 0x45E534: push    edx
 0x45E535: push    ebx
 0x45E536: mov     [esp+13Ch+var_114], 1
-0x45E53E: call    eax
-0x45E540: xor     edi, edi
+0x45E53E: call    eax; MEF PERF 2026-09-08: PERF-4 second count is read before the worldspace item loop (main-body[ESP+18h]); default growth1 still triggers repeated prefix copies45E5BD. No need to speculate a total count from loop progress; require a fully initialized validated count and checked4*count before reserve.
+0x45E540: xor     edi, edi; MEF v56 worldspace prefix observer preserves XOR EDI,EDI/ADDESP14 and captures the independently read count. Source proof requires native BSFile/430050 callback, open FILE, exact4-byte prefix and sufficient physical file extent. Malformed/unknown bounds disable optional bulk reservation.
 0x45E542: add     esp, 14h
 0x45E545: cmp     [esp+128h+var_110], edi
 0x45E549: jbe     loc_45E614
@@ -170,7 +170,7 @@
 0x45E5B8: add     ecx, edi
 0x45E5BA: push    ecx
 0x45E5BB: mov     ecx, esi
-0x45E5BD: call    sub_452910
+0x45E5BD: call    NiTLargeArray_Resize32; MEF v56 worldspace reserve bridge uses totalcalleeESP+20h and same checked-reserve protocol as numeric. First growth can reserve final original-step-rounded capacity once. Source/callback/allocation refusal uses the original requested resize; no new silent LoadGame abort/status.
 0x45E5C2: cmp     edi, [esi+0Ch]
 0x45E5C5: jb      short loc_45E5DA
 0x45E5C7: lea     edx, [edi+1]

@@ -1,19 +1,36 @@
 {
-  "callees_count": 16,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 4,
-  "display_name": "sub_78BD80",
+  "chunks": [
+    [
+      "0x78BD80",
+      "0x78BE6B"
+    ],
+    [
+      "0x9CB710",
+      "0x9CB73B"
+    ]
+  ],
+  "chunks_sha256": "5b508922530d8a89b6c03bc5ead7158769fa60ac7b57e3ddd3c15f1a6a52755c",
+  "comment_regular": "Static CSpeedTreeRT::SetNumWindMatrices. Forwards the requested count as an unsigned 16-bit value to the global wind-matrix container; SDK exception scaffolding surrounds the call.",
+  "comment_repeatable": "Static CSpeedTreeRT::SetNumWindMatrices. Forwards the requested count as an unsigned 16-bit value to the global wind-matrix container; SDK exception scaffolding surrounds the call.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 6,
+  "display_name": "CSpeedTreeRT__SetNumWindMatrices",
   "end_ea": "0x78BE6B",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_78BD80",
+  "name": "CSpeedTreeRT__SetNumWindMatrices",
   "segment": ".text",
   "sha256": "1e673cb1599551049d3e0503b7b8b20dac36695cc62dddb33f5fb4f4661af0f6",
   "size": 235,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78BD80",
-  "type": "void __cdecl(unsigned __int16)",
-  "xrefs_from_count": 95,
+  "total_chunk_size": 278,
+  "type": "void __cdecl(int matrixCount)",
+  "xrefs_from_count": 108,
   "xrefs_to_count": 1
 }

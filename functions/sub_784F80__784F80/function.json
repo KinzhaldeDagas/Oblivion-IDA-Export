@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x784F80",
+      "0x784F99"
+    ]
+  ],
+  "chunks_sha256": "fb90ae8252d18ceb8c3085a77befee4d24b55683a3c8e457e6510ec067b35391",
+  "comment_regular": "Oblivion 1.2.0.416: std::out_of_range copy constructor. Copies the std::logic_error base through 0x414900, then installs the out_of_range vftable; both observed objects retain the same 0x28-byte layout.",
+  "comment_repeatable": "Oblivion 1.2.0.416: std::out_of_range copy constructor. Copies the std::logic_error base through 0x414900, then installs the out_of_range vftable; both observed objects retain the same 0x28-byte layout.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_784F80",
+  "display_name": "OB_std_out_of_range_CopyCtor_010201A0",
   "end_ea": "0x784F99",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_784F80",
+  "name": "OB_std_out_of_range_CopyCtor_010201A0",
   "segment": ".text",
   "sha256": "fb90ae8252d18ceb8c3085a77befee4d24b55683a3c8e457e6510ec067b35391",
   "size": 25,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x784F80",
-  "type": "std::exception *__thiscall(std::exception *this, struct std::exception *)",
+  "total_chunk_size": 25,
+  "type": "OB_std_out_of_range_010201A0 *__thiscall(OB_std_out_of_range_010201A0 *this, const OB_std_out_of_range_010201A0 *other)",
   "xrefs_from_count": 10,
   "xrefs_to_count": 1
 }

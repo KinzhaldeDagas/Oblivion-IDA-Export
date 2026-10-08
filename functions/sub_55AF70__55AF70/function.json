@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
+  "chunks": [
+    [
+      "0x55AF70",
+      "0x55AFB5"
+    ]
+  ],
+  "chunks_sha256": "15512286757e495c5789d2defb15a63a6c3cb54f6a73b6490d5af10c50161a66",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "Validate the locked vertex stream, vertex count, and nonnegative length, then delegate position deformation to the owned hair-morph array.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_55AF70",
+  "display_name": "BSFaceGenMorphDataHair_ApplyLengthToVertices",
   "end_ea": "0x55AFB5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_55AF70",
+  "name": "BSFaceGenMorphDataHair_ApplyLengthToVertices",
   "segment": ".text",
   "sha256": "15512286757e495c5789d2defb15a63a6c3cb54f6a73b6490d5af10c50161a66",
   "size": 69,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x55AF70",
-  "type": "void __thiscall(_DWORD **this, _DWORD *, int, float)",
+  "total_chunk_size": 69,
+  "type": "void __thiscall(BSFaceGenMorphDataHair *self, NiStridedVertexStream *vertices, unsigned int vertexCount, float hairLength)",
   "xrefs_from_count": 32,
   "xrefs_to_count": 1
 }

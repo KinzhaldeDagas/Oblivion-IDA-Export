@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x69DA13",
-    "line": "mov     edi, [esp+arg_1C]",
+    "line": "mov     edi, [esp+arg_1C]; Verified (Oblivion): model-hit factory skips when ActiveEffect aeFlags bit 0x4 is set or the global guard is nonzero; allocates 0x38 bytes, uses the target's parent reference and owner ActiveEffect, invokes the virtual initializer, registers successful effects with ActorProcessManager, then chains the shader factory. Failed model initialization is destroyed before shader fallback.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x69DA21",
-    "line": "jnz     MagicHitEffect?_BuildHitVFXList___PlayShaderHitEffect",
+    "line": "jnz     MagicHitEffect?_BuildHitVFXList___PlayShaderHitEffect; Verified (Oblivion): shader-hit factory skips when aeFlags bit 0x2 is set; otherwise allocates 0x4C bytes, constructs from target parent reference and ActiveEffect, invokes the virtual initializer, destroys failures, and registers successes with ActorProcessManager. It also pushes each successful shader object onto the returned BSSimpleList; this list and the manager therefore hold separate references/roles.",
     "mnemonic": "jnz",
     "size": 6
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x69DA2E",
-    "line": "jnz     short MagicHitEffect?_BuildHitVFXList___PlayShaderHitEffect",
+    "line": "jnz     short MagicHitEffect?_BuildHitVFXList___PlayShaderHitEffect; Verified (Oblivion): shader-hit factory skips when aeFlags bit 0x2 is set; otherwise allocates 0x4C bytes, constructs from target parent reference and ActiveEffect, invokes the virtual initializer, destroys failures, and registers successes with ActorProcessManager. It also pushes each successful shader object onto the returned BSSimpleList; this list and the manager therefore hold separate references/roles.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x69DA37",
-    "line": "mov     esi, eax",
+    "line": "mov     esi, eax; Verified (Oblivion): model-hit factory allocates exactly sizeof(MagicModelHitEffect) = 0x38 bytes. It suppresses model creation when the shared render-state byte at B333B8 is nonzero; that global is also referenced by ShadowPass/frame code and remains Unknown.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -205,19 +205,19 @@
   },
   {
     "ea": "0x69DA76",
-    "line": "push    esi",
+    "line": "push    esi; effect",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x69DA77",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x69DA7C",
-    "line": "call    sub_678D30",
+    "line": "call    ActorProcessManager_RegisterTempEffect; [Verified] ActorProcessManager_RegisterTempEffect increments the effect reference and routes GetTypeID 4-6 into extendedTempEffects (+0x48), all other IDs into activeTempEffects (+0x40). Vtable evidence confirms decals 0/1 and particles 2 use the active list. Fallout divergence: its BGSDecalManager updates distinct simple-decal and emitter collections instead of using this per-actor temp-effect routing; one-to-one equivalence is Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x69DA9A",
-    "line": "jmp     short MagicHitEffect?_BuildHitVFXList___PlayShaderHitEffect",
+    "line": "jmp     short MagicHitEffect?_BuildHitVFXList___PlayShaderHitEffect; Verified (Oblivion): shader-hit factory skips when aeFlags bit 0x2 is set; otherwise allocates 0x4C bytes, constructs from target parent reference and ActiveEffect, invokes the virtual initializer, destroys failures, and registers successes with ActorProcessManager. It also pushes each successful shader object onto the returned BSSimpleList; this list and the manager therefore hold separate references/roles.",
     "mnemonic": "jmp",
     "size": 2
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x69DAA0",
-    "line": "jmp     short MagicHitEffect?_BuildHitVFXList___PlayShaderHitEffect",
+    "line": "jmp     short MagicHitEffect?_BuildHitVFXList___PlayShaderHitEffect; Verified (Oblivion): shader-hit factory skips when aeFlags bit 0x2 is set; otherwise allocates 0x4C bytes, constructs from target parent reference and ActiveEffect, invokes the virtual initializer, destroys failures, and registers successes with ActorProcessManager. It also pushes each successful shader object onto the returned BSSimpleList; this list and the manager therefore hold separate references/roles.",
     "mnemonic": "jmp",
     "size": 2
   },

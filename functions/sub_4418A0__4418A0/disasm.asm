@@ -7,7 +7,7 @@
 0x4418B0: mov     eax, [esi+84h]
 0x4418B6: mov     edi, [eax+4]
 0x4418B9: push    eax
-0x4418BA: call    FormHeapFree
+0x4418BA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4418BF: add     esp, 4
 0x4418C2: test    edi, edi
 0x4418C4: mov     [esi+84h], edi

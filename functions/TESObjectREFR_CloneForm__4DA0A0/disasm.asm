@@ -105,7 +105,7 @@
 0x4DA1CB: push    ecx; cloneMap
 0x4DA1CC: push    0; a2
 0x4DA1CE: mov     ecx, ebx; this
-0x4DA1D0: call    TESForm_Clone
+0x4DA1D0: call    TESForm_Clone; Verified ordinary form-clone path: allocates via TESForm_CreateDynamic, invokes the destination CopyFrom virtual, restores EditorID and records the cloneMap entry. This does not dispatch CreateDuplicateForm; WorldSpace's deep cell/persistent-cell clone is a separate +0x38 virtual path.
 0x4DA1D5: push    eax; void *
 0x4DA1D6: call    OblivionDynamicCast
 0x4DA1DB: add     esp, 14h
@@ -159,14 +159,14 @@
 0x4DA25E: test    esi, esi
 0x4DA260: jz      short loc_4DA28A
 0x4DA262: mov     ecx, esi; this
-0x4DA264: call    TESForm_GetQuestItem
+0x4DA264: call    TESForm_GetQuestItem; TESForm_GetQuestItem: returns TESForm flags bit 0x400. Plugin IsStealableForm uses this, so quest items are skipped before RemoveItem.
 0x4DA269: test    al, al
 0x4DA26B: jz      short loc_4DA28A
 0x4DA26D: mov     ecx, esi; this
 0x4DA26F: call    TESObjectCELL_GetWorldSpace
-0x4DA274: push    edi
-0x4DA275: mov     ecx, eax
-0x4DA277: call    sub_4F03D0
+0x4DA274: push    edi; reference
+0x4DA275: mov     ecx, eax; this
+0x4DA277: call    TESWorldSpace_RemovePersistentCellReference; Verified: WorldSpace wrapper that removes a reference from its persistentCell via TESObjectCELL_RemoveReference; this removes it from the +0x64 persistent-reference index when applicable. It does not touch the separate SubSpace spatial index at +0x60.
 0x4DA27C: mov     eax, [edi]
 0x4DA27E: mov     edx, [eax+90h]
 0x4DA284: push    1

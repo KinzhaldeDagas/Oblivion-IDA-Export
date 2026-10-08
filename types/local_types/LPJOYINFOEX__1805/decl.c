@@ -1,1 +1,1 @@
-LPJOYINFOEX
+typedef joyinfoex_tag *LPJOYINFOEX;

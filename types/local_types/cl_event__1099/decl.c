@@ -1,1 +1,1 @@
-_cl_event
+struct _cl_event;

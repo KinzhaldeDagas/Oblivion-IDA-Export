@@ -21,21 +21,21 @@
 0x6F3B86: mov     ecx, [eax]
 0x6F3B88: mov     [ebp+var_40], ecx
 0x6F3B8B: mov     ecx, [eax+8]
-0x6F3B8E: push    0FFFFFFFFh
+0x6F3B8E: push    0FFFFFFFFh; count
 0x6F3B90: mov     [ebp+var_3C], edx
 0x6F3B93: mov     edx, [eax+0Ch]
 0x6F3B96: xor     edi, edi
-0x6F3B98: push    edi
+0x6F3B98: push    edi; offset
 0x6F3B99: add     eax, 10h
 0x6F3B9C: mov     [ebp+var_38], ecx
-0x6F3B9F: push    eax
-0x6F3BA0: lea     ecx, [ebp+var_30]
+0x6F3B9F: push    eax; source
+0x6F3BA0: lea     ecx, [ebp+var_30]; this
 0x6F3BA3: mov     [ebp+var_48], esi
 0x6F3BA6: mov     [ebp+var_34], edx
-0x6F3BA9: mov     [ebp+var_18], 0Fh
-0x6F3BB0: mov     [ebp+var_1C], edi
-0x6F3BB3: mov     byte ptr [ebp+var_2C], 0
-0x6F3BB7: call    sub_414420
+0x6F3BA9: mov     [ebp+var_30.capacity], 0Fh
+0x6F3BB0: mov     [ebp+var_30.size], edi
+0x6F3BB3: mov     byte ptr [ebp+var_30.storage], 0
+0x6F3BB7: call    OB_stString28_AssignSubstring_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,offset,count). Bounds-checks offset, clamps count to source.size-offset, handles self-assignment by in-place erasure, grows when required, copies the selected bytes, updates size, and writes the terminator.
 0x6F3BBC: mov     ecx, [esi+4]
 0x6F3BBF: cmp     ecx, edi
 0x6F3BC1: mov     [ebp+var_4], edi
@@ -67,7 +67,7 @@
 0x6F3C0A: sub     edx, eax
 0x6F3C0C: cmp     edx, ebx
 0x6F3C0E: jnb     short loc_6F3C15
-0x6F3C10: call    sub_790B90
+0x6F3C10: call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error("vector<T> too long") and throws; used by multiple element specializations after max_size checks.
 0x6F3C15: test    ecx, ecx
 0x6F3C17: jnz     short loc_6F3C1D
 0x6F3C19: xor     eax, eax
@@ -176,7 +176,7 @@
 0x6F3D13: call    sub_557080
 0x6F3D18: mov     ecx, [esi+4]
 0x6F3D1B: push    ecx
-0x6F3D1C: call    FormHeapFree
+0x6F3D1C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F3D21: add     esp, 14h
 0x6F3D24: mov     eax, [ebp+var_50]
 0x6F3D27: imul    edi, 2Ch ; ','
@@ -194,7 +194,7 @@
 0x6F3D49: push    esi
 0x6F3D4A: call    sub_557700
 0x6F3D4F: push    esi
-0x6F3D50: call    FormHeapFree
+0x6F3D50: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F3D55: add     esp, 4
 0x6F3D58: push    0
 0x6F3D5A: push    0
@@ -286,11 +286,11 @@
 0x6F3E37: push    edi
 0x6F3E38: call    sub_6F24A0
 0x6F3E3D: add     esp, 18h
-0x6F3E40: cmp     [ebp+var_18], 10h
+0x6F3E40: cmp     [ebp+var_30.capacity], 10h
 0x6F3E44: jb      short loc_6F3E52
-0x6F3E46: mov     eax, [ebp+var_2C]
+0x6F3E46: mov     eax, dword ptr [ebp+var_30.storage]
 0x6F3E49: push    eax
-0x6F3E4A: call    FormHeapFree
+0x6F3E4A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F3E4F: add     esp, 4
 0x6F3E52: mov     ecx, [ebp+var_C]
 0x6F3E55: mov     large fs:0, ecx
@@ -304,3 +304,29 @@
 0x6F3E6A: mov     esp, ebp
 0x6F3E6C: pop     ebp
 0x6F3E6D: retn    10h
+0x556D90: push    esi
+0x556D91: mov     esi, ecx
+0x556D93: cmp     dword ptr [esi+28h], 10h
+0x556D97: jb      short loc_556DA5
+0x556D99: mov     eax, [esi+14h]
+0x556D9C: push    eax
+0x556D9D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x556DA2: add     esp, 4
+0x556DA5: xor     eax, eax
+0x556DA7: mov     dword ptr [esi+28h], 0Fh
+0x556DAE: mov     [esi+24h], eax
+0x556DB1: mov     [esi+14h], al
+0x556DB4: pop     esi
+0x556DB5: retn
+0x9C89C0: lea     ecx, [ebp+var_40]
+0x9C89C3: jmp     loc_556D90
+0x9C89C8: mov     edx, [esp-4+arg_4]
+0x9C89CC: lea     eax, [edx+0Ch]
+0x9C89CF: mov     ecx, [edx-54h]
+0x9C89D2: xor     ecx, eax
+0x9C89D4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C89D9: mov     ecx, [edx-8]
+0x9C89DC: xor     ecx, eax
+0x9C89DE: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C89E3: mov     eax, offset stru_AF121C
+0x9C89E8: jmp     ___CxxFrameHandler3

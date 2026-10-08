@@ -1,48 +1,48 @@
-0x6807F0: push    ecx
+0x6807F0: push    ecx; Verified Oblivion route costs: after the access-policy check, a successful TESObjectDOOR_CheckActorAccess with mustLockpickOut=1 adds fPathMustLockpickPenalty (plus zero-valued dbl_A2FC68); a failed check adds fPathImpassableDoorPenalty. Separately, if either endpoint has minimal-use flag and ignore-min-use is false, adds fPathMinimalUseDoorPenalty. Fallout's search uses fixed 409600 penalties for its policy/minimal-use branches, so the numeric behavior differs.
 0x6807F1: fldz
 0x6807F3: push    esi
 0x6807F4: push    edi
 0x6807F5: fstp    [esp+0Ch+var_4]
 0x6807F9: mov     esi, ecx
-0x6807FB: call    sub_67F0A0
+0x6807FB: call    TravelPath_GetIgnoreLocks; Verified: reads policy byte 0 at qword_B3BB2C[0xBA]. CalcLowPathToPoint's first boolean argument is saved/restored through this accessor. TravelPath_ComputeDoorTransitionPenalty skips its lock/access penalty branch when this flag is true.
 0x680800: test    al, al
-0x680802: mov     edi, [esp+0Ch+arg_0]
+0x680802: mov     edi, [esp+0Ch+candidateReference]
 0x680806: jnz     short loc_68086A
 0x680808: test    edi, edi
 0x68080A: jz      short loc_68086A
 0x68080C: mov     eax, [esi+4]
 0x68080F: test    eax, eax
 0x680811: jz      short loc_68086A
-0x680813: push    1
-0x680815: push    0
-0x680817: push    edi
-0x680818: push    eax
-0x680819: call    sub_4B72C0
+0x680813: push    1; bypassPolicyWhenNoEffectiveLock
+0x680815: push    0; unknownPolicyFlag0
+0x680817: push    edi; actor
+0x680818: push    eax; doorReference
+0x680819: call    TESObjectDOOR_CheckActorAccessPolicy; Verified policy byte 1 behavior: when GetEffectiveDoorLock returns null, bypassPolicyWhenNoEffectiveLock=true returns accessible immediately; false continues through ownership, guard, trespass, and linked-cell checks. Current Oblivion callers: TravelPath_ComputeDoorTransitionPenalty passes (unknownPolicyFlag0=0, bypassPolicyWhenNoEffectiveLock=1), while IsOffLimitToThePlayer passes (0,0). unknownPolicyFlag0 is zero at all identified callers and remains Unknown. Fallout has analogous DoorLock policy methods, but the parameter meaning here is established from Oblivion control flow.
 0x68081E: add     esp, 10h
 0x680821: test    al, al
 0x680823: jnz     short loc_68086A
 0x680825: mov     ecx, [esi+4]
-0x680828: mov     byte ptr [esp+0Ch+arg_0], al
-0x68082C: lea     eax, [esp+0Ch+arg_0]
-0x680830: push    eax
-0x680831: push    edi
-0x680832: push    ecx
-0x680833: call    sub_4B7490
+0x680828: mov     byte ptr [esp+0Ch+candidateReference], al
+0x68082C: lea     eax, [esp+0Ch+candidateReference]
+0x680830: push    eax; mustLockpickOut
+0x680831: push    edi; actor
+0x680832: push    ecx; doorReference
+0x680833: call    TESObjectDOOR_CheckActorAccess; Verified door access helper: handles linked-cell ownership, door ownership, guards, trespass, effective ExtraLockData, TESKey inventory, and lockpick tools. In the trespass branch, an interior linked cell passes the cell check when TESObjectCELL_HasPublicFlag20 (flags0 bit 0x20) is set. If no key matches, Lockpick/Skeleton Key with effective level <100 sets mustLockpickOut=1.
 0x680838: add     esp, 0Ch
 0x68083B: test    al, al
 0x68083D: jnz     short loc_68084D
-0x68083F: mov     ecx, offset unk_B3A430
+0x68083F: mov     ecx, offset fPathImpassableDoorPenalty
 0x680844: call    GameSetting_GetSafeFloatPointer
 0x680849: fld     dword ptr [eax]
 0x68084B: jmp     short loc_680866
-0x68084D: cmp     byte ptr [esp+0Ch+arg_0], 0
+0x68084D: cmp     byte ptr [esp+0Ch+candidateReference], 0
 0x680852: jz      short loc_68086A
-0x680854: mov     ecx, offset unk_B3A438
+0x680854: mov     ecx, offset fPathMustLockpickPenalty
 0x680859: call    GameSetting_GetSafeFloatPointer
 0x68085E: fld     dword ptr [eax]
 0x680860: fadd    qword ptr ds:0A2FC68h
 0x680866: fstp    [esp+0Ch+var_4]
-0x68086A: call    sub_67F0C0
+0x68086A: call    TravelPath_GetIgnoreMinUse; Verified: reads policy byte 1 at qword_B3BB2C[0xBA]. When false, TravelPath_ComputeDoorTransitionPenalty may add the extra cost for a door whose TESObjectDOOR_HasMinUseFlag is set.
 0x68086F: test    al, al
 0x680871: jnz     loc_68091B
 0x680877: test    edi, edi
@@ -85,13 +85,13 @@
 0x6808EC: mov     eax, [edx+170h]
 0x6808F2: call    eax
 0x6808F4: mov     edi, eax
-0x6808F6: mov     ecx, ebp
-0x6808F8: call    sub_4B6D10
+0x6808F6: mov     ecx, ebp; this
+0x6808F8: call    TESObjectDOOR_HasMinUseFlag; Verified: tests bit 0x08 at TESObjectDOOR +0x64. CalcLowPathToPoint prints the suffix '-MinUse' when this helper succeeds; travel search adds a penalty for either endpoint door carrying the bit unless ignore-min-use is enabled.
 0x6808FD: test    al, al
 0x6808FF: pop     ebp
 0x680900: jnz     short loc_68090D
-0x680902: mov     ecx, edi
-0x680904: call    sub_4B6D10
+0x680902: mov     ecx, edi; this
+0x680904: call    TESObjectDOOR_HasMinUseFlag; Verified: tests bit 0x08 at TESObjectDOOR +0x64. CalcLowPathToPoint prints the suffix '-MinUse' when this helper succeeds; travel search adds a penalty for either endpoint door carrying the bit unless ignore-min-use is enabled.
 0x680909: test    al, al
 0x68090B: jz      short loc_68091B
 0x68090D: fld     dword ptr ds:0B3A440h

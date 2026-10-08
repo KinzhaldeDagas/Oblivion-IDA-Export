@@ -54,9 +54,9 @@
 0x5BE664: fild    [esp+0Ch+arg_0]
 0x5BE668: push    ecx
 0x5BE669: mov     ecx, [esi+0A4h]; this
-0x5BE66F: fstp    [esp+10h+a2]; a3
-0x5BE672: push    0FAEh; a2
-0x5BE677: call    Tile_SetFloat
+0x5BE66F: fstp    [esp+10h+a2]; value
+0x5BE672: push    0FAEh; propertyCode
+0x5BE677: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5BE67C: add     edi, 14h; jumptable 005BE612 default case, cases 26-49,51-74,76-99
 0x5BE67F: sub     ebx, 1
 0x5BE682: jnz     loc_5BE600

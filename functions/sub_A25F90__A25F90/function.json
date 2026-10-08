@@ -1,18 +1,31 @@
 {
-  "callees_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0xA25F90",
+      "0xA25F9A"
+    ]
+  ],
+  "chunks_sha256": "01b1c9d6c42ae4d05543f0556d1db7fc5b61bf3b74bde1b39b5a765003457b7a",
+  "comment_regular": "Verified atexit cleanup: calls ActiveEffectCreatorMap_Destroy on NiTMap_AECreatorFuncs, releasing the map bucket allocation at process shutdown.",
+  "comment_repeatable": "Verified atexit cleanup: calls ActiveEffectCreatorMap_Destroy on NiTMap_AECreatorFuncs, releasing the map bucket allocation at process shutdown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_A25F90",
+  "display_name": "ActiveEffectCreatorMap_AtexitCleanup",
   "end_ea": "0xA25F9A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_A25F90",
+  "name": "ActiveEffectCreatorMap_AtexitCleanup",
   "segment": ".text",
   "sha256": "01b1c9d6c42ae4d05543f0556d1db7fc5b61bf3b74bde1b39b5a765003457b7a",
   "size": 10,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0xA25F90",
+  "total_chunk_size": 10,
   "type": "void __cdecl()",
   "xrefs_from_count": 3,
   "xrefs_to_count": 1

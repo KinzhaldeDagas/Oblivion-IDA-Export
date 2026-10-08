@@ -1,4 +1,4 @@
-void *sub_6FAB70()
+NiRTTI *sub_6FAB70()
 {
-  return &unk_B3F48C;
+  return &stru_B3F48C; /*0x6fab75*/
 }

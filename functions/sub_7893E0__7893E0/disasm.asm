@@ -1,11 +1,11 @@
-0x7893E0: push    esi
+0x7893E0: push    esi; Oblivion std::runtime_error scalar-deleting destructor: performs runtime_error/std::exception teardown and frees this through FormHeap when deleteFlags bit 0 is set.
 0x7893E1: mov     esi, ecx
 0x7893E3: mov     dword ptr [esi], offset ??_7runtime_error@std@@6B@; const std::runtime_error::`vftable'
 0x7893E9: cmp     dword ptr [esi+24h], 10h
 0x7893ED: jb      short loc_7893FB
 0x7893EF: mov     eax, [esi+10h]
 0x7893F2: push    eax
-0x7893F3: call    FormHeapFree
+0x7893F3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7893F8: add     esp, 4
 0x7893FB: xor     eax, eax
 0x7893FD: mov     dword ptr [esi+24h], 0Fh
@@ -16,7 +16,7 @@
 0x789411: test    [esp+4+arg_0], 1
 0x789416: jz      short loc_789421
 0x789418: push    esi
-0x789419: call    FormHeapFree
+0x789419: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x78941E: add     esp, 4
 0x789421: mov     eax, esi
 0x789423: pop     esi

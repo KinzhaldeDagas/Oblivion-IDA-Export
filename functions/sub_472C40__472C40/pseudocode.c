@@ -1,37 +1,28 @@
-void *__thiscall sub_472C40(float **Src, float a2, _DWORD *a3)
+// Writes one AnimIdle slot state: presence/state metadata, idle form reference, optional loaded sequence marker, and nested BSAnimGroupSequence state.
+void *__thiscall AnimIdle_SaveSlotState(float **Src, float a2, _DWORD *a3)
 {
   void *result; // eax
   int v5; // eax
   _DWORD *v6; // edi
   int AnimationGroup; // eax
-  size_t v8; // [esp+4h] [ebp-Ch]
-  size_t v9; // [esp+4h] [ebp-Ch]
-  size_t v10; // [esp+4h] [ebp-Ch]
-  size_t v11; // [esp+4h] [ebp-Ch]
-  size_t v12; // [esp+4h] [ebp-Ch]
   bool Srca; // [esp+Eh] [ebp-2h] BYREF
-  char v14; // [esp+Fh] [ebp-1h] BYREF
+  char source; // [esp+Fh] [ebp-1h] BYREF
 
-  LODWORD(v8) = 4;
-  SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, Src, v8);
-  LODWORD(v9) = 4;
-  SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, Src + 1, v9);
-  LODWORD(v10) = 4;
-  SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, Src + 3, v10);
-  Srca = *(Src + 4) != 0;
-  LODWORD(v11) = 1;
-  result = SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, &Srca, v11);
-  if ( Srca )
+  SaveLoad_SaveData(g_TESSaveLoadGame, Src, 4u); /*0x472c4d*/
+  SaveLoad_SaveData(g_TESSaveLoadGame, Src + 1, 4u); /*0x472c5e*/
+  SaveLoad_SaveData(g_TESSaveLoadGame, Src + 3, 4u); /*0x472c6f*/
+  Srca = *(Src + 4) != 0; /*0x472c7f*/
+  result = SaveLoad_SaveData(g_TESSaveLoadGame, &Srca, 1u); /*0x472c91*/
+  if ( Srca ) /*0x472c9b*/
   {
-    v5 = (int)*(Src + 2);
-    v14 = 0xFF;
-    v6 = (_DWORD *)a3[0x27];
-    AnimationGroup = TESAnimGroup_GetAnimationGroup(*(TESAnimGroup **)(v5 + 8));
-    if ( sub_470960(v6, AnimationGroup, &a3) )
-      v14 = (*(int (__thiscall **)(_DWORD *, _DWORD))(*a3 + 0x14))(a3, *(Src + 4));
-    LODWORD(v12) = 1;
-    SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, &v14, v12);
-    return sub_49F570(*(Src + 4), a2);
+    v5 = (int)*(Src + 2); /*0x472c9d*/
+    source = 0xFF; /*0x472ca4*/
+    v6 = (_DWORD *)a3[0x27]; /*0x472cad*/
+    AnimationGroup = TESAnimGroup_GetAnimationGroup(*(TESAnimGroup **)(v5 + 8)); /*0x472cb8*/
+    if ( ActorAnimData_FindAnimMapEntry(v6, AnimationGroup, &a3) ) /*0x472cc0*/
+      source = (*(int (__thiscall **)(_DWORD *, _DWORD))(*a3 + 0x14))(a3, *(Src + 4)); /*0x472cd9*/
+    SaveLoad_SaveData(g_TESSaveLoadGame, &source, 1u); /*0x472cea*/
+    return BSAnimGroupSequence_SaveState(*(Src + 4), a2); /*0x472cfa*/
   }
-  return result;
+  return result; /*0x472cff*/
 }

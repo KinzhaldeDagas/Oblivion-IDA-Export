@@ -16,7 +16,7 @@
 0x9A0B4F: pop     eax
 0x9A0B50: pop     esi
 0x9A0B51: retn
-0x9A0B52: mov     ecx, dword_BAA878
+0x9A0B52: mov     ecx, dword_BA9E10+0A68h
 0x9A0B58: mov     [eax], ecx
 0x9A0B5A: xor     eax, eax
 0x9A0B5C: pop     esi

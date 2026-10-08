@@ -1,1 +1,1 @@
-IPersist_0
+typedef IPersist IPersist_0;

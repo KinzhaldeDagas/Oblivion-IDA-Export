@@ -51,8 +51,8 @@
 0x5F04A2: cmp     edi, ecx
 0x5F04A4: mov     [esp+14h+var_4], eax
 0x5F04A8: jnz     short loc_5F04B5
-0x5F04AA: push    0; a2
-0x5F04AC: call    Player_GetAnimData
+0x5F04AA: push    0; firstPerson
+0x5F04AC: call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.
 0x5F04B1: mov     [esp+14h+var_4], eax
 0x5F04B5: mov     eax, [esi]
 0x5F04B7: mov     edx, [eax+38Ch]
@@ -128,7 +128,7 @@
 0x5F058C: jmp     short loc_5F0593
 0x5F058E: mov     edi, [ebx+3Ch]
 0x5F0591: mov     ecx, ebx; this
-0x5F0593: call    MobileObject_GetCharProxy
+0x5F0593: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x5F0598: mov     ecx, ds:0B2EB3Ch
 0x5F059E: add     ecx, 1
 0x5F05A1: and     ecx, 0FFFFh

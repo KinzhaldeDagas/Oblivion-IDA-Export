@@ -33,102 +33,102 @@ char __thiscall sub_892D90(__m128 *this)
   __m128 v33; // [esp+98h] [ebp-60h] BYREF
   __m128 v34[4]; // [esp+A8h] [ebp-50h] BYREF
 
-  v2 = *((_DWORD **)this + 0xD9);
-  if ( v2 )
-    v21 = v2[2];
+  v2 = *((_DWORD **)this + 0xD9); /*0x892daf*/
+  if ( v2 ) /*0x892db7*/
+    v21 = v2[2]; /*0x892dbc*/
   else
-    v21 = 0;
-  v24 = *((float *)this + 0xCF) * dbl_A3C770;
-  v19 = sub_8913C0(this->m128_f32) + dbl_A967E8;
-  v25.m128_f32[0] = 0.0;
-  v25.m128_f32[1] = v19;
-  v25.m128_f32[2] = 0.0;
-  v25.m128_f32[3] = 0.0;
-  sub_6848D0(v2, v34);
-  sub_88FE00(&v25, v34, &v25);
-  sub_891440(this, &v30);
-  v3 = v21;
-  v4 = 0;
-  v33 = _mm_add_ps(v30, v25);
-  v20 = 0;
-  if ( *(int *)(v21 + 0x124) <= 0 )
-    return 0;
-  while ( 1 )
+    v21 = 0; /*0x892dc2*/
+  v24 = *((float *)this + 0xCF) * dbl_A3C770; /*0x892dd6*/
+  v19 = bhkCharacterController_GetRadius(this->m128_f32) + dbl_A967E8; /*0x892def*/
+  v25.m128_f32[0] = 0.0; /*0x892df5*/
+  v25.m128_f32[1] = v19; /*0x892dfd*/
+  v25.m128_f32[2] = 0.0; /*0x892e01*/
+  v25.m128_f32[3] = 0.0; /*0x892e05*/
+  bhkRefObject_CopyHavokObjectTransform(v2, v34); /*0x892e09*/
+  hkBasis_TransformVector(&v25, v34, &v25); /*0x892e1d*/
+  bhkCharacterController_ReadRelativePosition(this, &v30); /*0x892e29*/
+  v3 = v21; /*0x892e38*/
+  v4 = 0; /*0x892e3c*/
+  v33 = _mm_add_ps(v30, v25); /*0x892e41*/
+  v20 = 0; /*0x892e4f*/
+  if ( *(int *)(v21 + 0x124) <= 0 ) /*0x892e53*/
+    return 0; /*0x892fe6*/
+  while ( 1 ) /*0x892e66*/
   {
-    v5 = *(int ***)(*(_DWORD *)(v3 + 0x120) + 4 * v4);
-    if ( v5 )
+    v5 = *(int ***)(*(_DWORD *)(v3 + 0x120) + 4 * v4); /*0x892e66*/
+    if ( v5 ) /*0x892e6b*/
     {
-      switch ( (unsigned int)v5[7] & 0x3F )
+      switch ( (unsigned int)v5[7] & 0x3F ) /*0x892e86*/
       {
-        case 4u:
-        case 5u:
-        case 6u:
-        case 7u:
-        case 8u:
-        case 0xAu:
-        case 0xBu:
-        case 0xCu:
-        case 0x10u:
-        case 0x11u:
-        case 0x14u:
+        case 4u: /*0x892e86*/
+        case 5u: /*0x892e86*/
+        case 6u: /*0x892e86*/
+        case 7u: /*0x892e86*/
+        case 8u: /*0x892e86*/
+        case 0xAu: /*0x892e86*/
+        case 0xBu: /*0x892e86*/
+        case 0xCu: /*0x892e86*/
+        case 0x10u: /*0x892e86*/
+        case 0x11u: /*0x892e86*/
+        case 0x14u: /*0x892e86*/
           goto LABEL_19;
         default:
-          v6 = *v5;
-          v7 = (*(int (__thiscall **)(int *))(**v5 + 8))(*v5);
-          if ( v7 != 3 && v7 != 9 && v7 != 0x18 )
-            goto LABEL_19;
-          v8 = (__m128 *)v5[2];
-          v32 = 1.0;
-          v9 = 0;
-          v28 = 0;
-          v29 = 0;
-          sub_88FD10(&v26, v8, &v30);
-          sub_88FD10(&v27, (__m128 *)v5[2], &v33);
-          v10 = 1.0;
-          v18 = 0;
-          break;
+          v6 = *v5; /*0x892e8d*/
+          v7 = (*(int (__thiscall **)(int *))(**v5 + 8))(*v5); /*0x892e96*/
+          if ( v7 != 3 && v7 != 9 && v7 != 0x18 ) /*0x892ea5*/
+            goto LABEL_19; /*0x892ea5*/
+          v8 = (__m128 *)v5[2]; /*0x892eab*/
+          v32 = 1.0; /*0x892eb4*/
+          v9 = 0; /*0x892ebc*/
+          v28 = 0; /*0x892ec3*/
+          v29 = 0; /*0x892ec7*/
+          sub_88FD10(&v26, v8, &v30); /*0x892ecb*/
+          sub_88FD10(&v27, (__m128 *)v5[2], &v33); /*0x892ee0*/
+          v10 = 1.0; /*0x892ee5*/
+          v18 = 0; /*0x892ee7*/
+          break; /*0x892ee7*/
       }
-      while ( 1 )
+      while ( 1 ) /*0x892eec*/
       {
-        v11 = *v6;
-        v32 = v10;
-        v12 = *(void (__thiscall **)(int *, char *, __m128 *, _BYTE *))(v11 + 0x14);
-        v26.m128_f32[2] = v26.m128_f32[2] + v24;
-        v27.m128_f32[2] = v24 + v27.m128_f32[2];
-        v12(v6, &v22, &v26, v31);
-        v10 = 1.0;
-        if ( v32 < 1.0 )
-          break;
-        if ( (unsigned int)++v9 >= 3 )
-          goto LABEL_15;
+        v11 = *v6; /*0x892eec*/
+        v32 = v10; /*0x892eee*/
+        v12 = *(void (__thiscall **)(int *, char *, __m128 *, _BYTE *))(v11 + 0x14); /*0x892ef9*/
+        v26.m128_f32[2] = v26.m128_f32[2] + v24; /*0x892f14*/
+        v27.m128_f32[2] = v24 + v27.m128_f32[2]; /*0x892f1f*/
+        v12(v6, &v22, &v26, v31); /*0x892f23*/
+        v10 = 1.0; /*0x892f25*/
+        if ( v32 < 1.0 ) /*0x892f33*/
+          break; /*0x892f33*/
+        if ( (unsigned int)++v9 >= 3 ) /*0x892f3b*/
+          goto LABEL_15; /*0x892f3b*/
       }
-      v18 = 1;
+      v18 = 1; /*0x892f3f*/
 LABEL_15:
-      sub_88FD10(&v26, (__m128 *)v5[2], &v33);
-      sub_88FD10(&v27, (__m128 *)v5[2], &v30);
-      if ( !v18 )
-        break;
+      sub_88FD10(&v26, (__m128 *)v5[2], &v33); /*0x892f56*/
+      sub_88FD10(&v27, (__m128 *)v5[2], &v30); /*0x892f68*/
+      if ( !v18 ) /*0x892f72*/
+        break; /*0x892f72*/
     }
 LABEL_19:
-    v3 = v21;
-    v4 = ++v20;
-    if ( v20 >= *(_DWORD *)(v21 + 0x124) )
-      return 0;
+    v3 = v21; /*0x892fcb*/
+    v4 = ++v20; /*0x892fd3*/
+    if ( v20 >= *(_DWORD *)(v21 + 0x124) ) /*0x892fe0*/
+      return 0; /*0x892fe0*/
   }
-  v13 = 1.0;
-  v14 = 0;
-  while ( 1 )
+  v13 = 1.0; /*0x892f74*/
+  v14 = 0; /*0x892f76*/
+  while ( 1 ) /*0x892f78*/
   {
-    v15 = *v6;
-    v32 = v13;
-    v16 = *(void (__thiscall **)(int *, char *, __m128 *, _BYTE *))(v15 + 0x14);
-    v26.m128_f32[2] = v26.m128_f32[2] + v24;
-    v27.m128_f32[2] = v24 + v27.m128_f32[2];
-    v16(v6, &v23, &v26, v31);
-    v13 = 1.0;
-    if ( v32 < 1.0 )
-      return 1;
-    if ( (unsigned int)++v14 >= 3 )
-      goto LABEL_19;
+    v15 = *v6; /*0x892f78*/
+    v32 = v13; /*0x892f7a*/
+    v16 = *(void (__thiscall **)(int *, char *, __m128 *, _BYTE *))(v15 + 0x14); /*0x892f85*/
+    v26.m128_f32[2] = v26.m128_f32[2] + v24; /*0x892fa0*/
+    v27.m128_f32[2] = v24 + v27.m128_f32[2]; /*0x892fab*/
+    v16(v6, &v23, &v26, v31); /*0x892faf*/
+    v13 = 1.0; /*0x892fb1*/
+    if ( v32 < 1.0 ) /*0x892fbf*/
+      return 1; /*0x892fe8*/
+    if ( (unsigned int)++v14 >= 3 ) /*0x892fc7*/
+      goto LABEL_19; /*0x892fc7*/
   }
 }

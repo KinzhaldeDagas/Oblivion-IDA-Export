@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x799320",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; SpeedTree decode: CLeafGeometry::Init. Imports SIdvLeafInfo leaf tables, rocking group count, texture dimensions/origins, allocates vertex-program table (rockingGroups * textureCount * 0x80 bytes), then builds compact per-LOD leaf records.",
     "mnemonic": "push",
     "size": 2
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x799346",
-    "line": "mov     esi, [esp+20h+arg_8]",
+    "line": "mov     esi, [esp+20h+leafInfo]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x7993A5",
-    "line": "mov     [esp+20h+arg_8], ebx",
+    "line": "mov     [esp+20h+leafInfo], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x7993B5",
-    "line": "push    offset sub_786E40",
+    "line": "push    offset OB_stVec3_ctor_zero_010201A0; SpeedTree decode: stVec3 zero constructor used for CLeafGeometry dimension/origin arrays.",
     "mnemonic": "push",
     "size": 5
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x7993F3",
-    "line": "mov     [esp+20h+arg_8], ebx",
+    "line": "mov     [esp+20h+leafInfo], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x799403",
-    "line": "push    offset sub_786E40",
+    "line": "push    offset OB_stVec3_ctor_zero_010201A0; SpeedTree decode: stVec3 zero constructor used for CLeafGeometry dimension/origin arrays.",
     "mnemonic": "push",
     "size": 5
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x79942E",
-    "line": "mov     [esp+20h+arg_8], ebp",
+    "line": "mov     [esp+20h+leafInfo], ebp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x799466",
-    "line": "add     eax, [esp+20h+arg_8]",
+    "line": "add     eax, [esp+20h+leafInfo]",
     "mnemonic": "add",
     "size": 4
   },
@@ -781,13 +781,13 @@
   },
   {
     "ea": "0x7994A4",
-    "line": "add     eax, [esp+20h+arg_8]",
+    "line": "add     eax, [esp+20h+leafInfo]",
     "mnemonic": "add",
     "size": 4
   },
   {
     "ea": "0x7994A8",
-    "line": "add     [esp+20h+arg_8], 0Ch",
+    "line": "add     [esp+20h+leafInfo], 0Ch",
     "mnemonic": "add",
     "size": 5
   },
@@ -937,7 +937,7 @@
   },
   {
     "ea": "0x7994F7",
-    "line": "mov     ecx, [esp+24h+arg_0]",
+    "line": "mov     ecx, dword ptr [esp+24h+leafLodCount]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -955,7 +955,7 @@
   },
   {
     "ea": "0x799501",
-    "line": "mov     eax, [esp+20h+arg_4]",
+    "line": "mov     eax, [esp+20h+allLeaves]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -979,7 +979,7 @@
   },
   {
     "ea": "0x799509",
-    "line": "call    sub_798CC0",
+    "line": "call    OB_CLeafGeometry_InitLods_010201A0; OBLIVION AUTHORITY (2026-08-24): True CLeafGeometry::InitLods entry (range 0x798CC0..0x799318). Iterates every explicit leaf LOD and copies each CBillboardLeaf+0x14 packed color into that LOD's SLodGeometry+0x24 packedColors array.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1036,5 +1036,107 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AFC20",
+    "line": "mov     eax, [ebp+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFC23",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFC24",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFC29",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFC2A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFC2B",
+    "line": "mov     eax, [ebp+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFC2E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFC2F",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFC34",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFC35",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFC36",
+    "line": "mov     edx, [esp+containerChanges]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AFC3A",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFC3D",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFC40",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AFC42",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFC47",
+    "line": "mov     eax, offset stru_ADC10C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFC4C",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -16,7 +16,7 @@
 0x4F84A2: mov     edi, [esp+8+arg_C]
 0x4F84A6: fstp    qword ptr [edi]
 0x4F84A8: jz      short loc_4F84EA
-0x4F84AA: mov     ecx, [esi+58h]
+0x4F84AA: mov     ecx, [esi+58h]; MEF v30 verified ActorWithoutProcessCTD site: Actor +0x58 immediate vtable dereference in torch query. Null supplies EAX=0 to existing test at 0x004F84B9; non-null resumes 0x004F84AF.
 0x4F84AD: mov     eax, [ecx]
 0x4F84AF: mov     edx, [eax+0F0h]
 0x4F84B5: push    1

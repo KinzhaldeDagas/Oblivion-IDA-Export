@@ -46,7 +46,7 @@
 0x440EF0: mov     ecx, esi
 0x440EF2: call    NiNode_UpdateDynamicEffectState
 0x440EF7: mov     ecx, esi; this
-0x440EF9: call    NiAVObject_InitializePropertyState
+0x440EF9: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x440EFE: mov     ecx, dword ptr [esp+1Ch+var_C]
 0x440F02: mov     large fs:0, ecx
 0x440F09: pop     ecx
@@ -55,3 +55,15 @@
 0x440F0C: pop     ebx
 0x440F0D: add     esp, 0Ch
 0x440F10: retn    8
+0x9C8290: mov     eax, [ebp+4]
+0x9C8293: push    eax
+0x9C8294: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C8299: pop     ecx
+0x9C829A: retn
+0x9C829B: mov     edx, [esp+arg_4]
+0x9C829F: lea     eax, [edx-0Ch]
+0x9C82A2: mov     ecx, [edx-10h]
+0x9C82A5: xor     ecx, eax
+0x9C82A7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C82AC: mov     eax, offset stru_AF0554
+0x9C82B1: jmp     ___CxxFrameHandler3

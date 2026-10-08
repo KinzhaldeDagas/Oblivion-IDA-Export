@@ -1,19 +1,19 @@
 [
   {
     "ea": "0x79E750",
-    "line": "push    ecx",
+    "line": "push    ecx; OBLIVION AUTHORITY (2026-08-30): Adapter for backward ownership-moving of inner vector<float> elements.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E751",
-    "line": "mov     ecx, [esp+4+arg_8]",
+    "line": "mov     ecx, [esp+4+destinationEnd]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79E755",
-    "line": "mov     edx, [esp+4+arg_8]",
+    "line": "mov     edx, [esp+4+destinationEnd]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x79E75A",
-    "line": "mov     ebx, [esp+8+arg_0]",
+    "line": "mov     ebx, [esp+8+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x79E75F",
-    "line": "mov     esi, [esp+0Ch+arg_4]",
+    "line": "mov     esi, [esp+0Ch+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x79E764",
-    "line": "mov     edi, [esp+10h+arg_8]",
+    "line": "mov     edi, [esp+10h+destinationEnd]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -85,25 +85,25 @@
   },
   {
     "ea": "0x79E774",
-    "line": "push    edi",
+    "line": "push    edi; destinationEnd",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E775",
-    "line": "push    esi",
+    "line": "push    esi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E776",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E777",
-    "line": "call    sub_79C080",
+    "line": "call    OB_stVector_stVectorFloat_MoveAssignRangeBackward_010201A0; OBLIVION AUTHORITY (2026-08-30): Backward move-assignment for inner vector<float> owners. Transfers ownership by swapping begin/end/capacity fields from the source tail into the destination tail and returns the new destination start.",
     "mnemonic": "call",
     "size": 5
   },

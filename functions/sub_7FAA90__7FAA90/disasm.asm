@@ -1,4 +1,4 @@
-0x7FAA90: push    esi
+0x7FAA90: push    esi; Shared BSShader lifecycle thunk: invokes the concrete shader's LoadVertexShaders and LoadPixelShaders virtuals in that order. Later Fallout symbols corroborate the method term only; this behavior is established from Oblivion vtables.
 0x7FAA91: mov     esi, ecx
 0x7FAA93: mov     eax, [esi]
 0x7FAA95: mov     edx, [eax+0ACh]

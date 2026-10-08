@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 3,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x589F20",
+      "0x589F91"
+    ],
+    [
+      "0x9BF7D0",
+      "0x9BF7FE"
+    ]
+  ],
+  "chunks_sha256": "e7a295bf19187bc340cc311ac8627090c299c2d5f14ed122ca4e31e50aea3bc5",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_589F20",
+  "comment_repeatable": "Verified: initializes0x10 trait entry ID and copied BSStringT name; caller AddUserTrait initializes lookupHits=0. Passed name is BSStringT by value (buffer freed after copy). Counter is incremented by successful forward lookups; ownership/refcount semantics are Unknown and are not assumed.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "Tile::TraitEntry::Initialize",
   "end_ea": "0x589F91",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_589F20",
+  "name": "Tile::TraitEntry::Initialize",
   "segment": ".text",
   "sha256": "475a5d24f2c6769927c45fe945e24556f0033b723b29105cb34ad53f8cc71719",
   "size": 113,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x589F20",
-  "type": "BSStringT *__thiscall(BSStringT *this, char *arg0, char *, int)",
-  "xrefs_from_count": 40,
+  "total_chunk_size": 159,
+  "type": "OblivionTileTraitEntry *__thiscall(OblivionTileTraitEntry *this, unsigned int id, BSStringT name)",
+  "xrefs_from_count": 54,
   "xrefs_to_count": 1
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E5280",
-    "line": "mov     edx, [ecx+48h]",
+    "line": "mov     edx, [ecx+48h]; Verified frees every BSSimpleList node and list header stored in TESPathGrid.pointsByCell (+0x44), then clears that NiTPointerMap. Given the key helper's X/Y >> 9 packing, this is a 512-unit spatial bucket map local to this PathGrid, not a one-entry-per-world-cell map.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x4E52A9",
-    "line": "mov     [esp+14h+var_8], eax",
+    "line": "mov     [esp+14h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -127,61 +127,61 @@
   },
   {
     "ea": "0x4E52B0",
-    "line": "lea     eax, [esp+18h+var_C]",
+    "line": "lea     eax, [esp+18h+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4E52B4",
-    "line": "push    eax",
+    "line": "push    eax; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E52B5",
-    "line": "lea     ecx, [esp+1Ch+var_4]",
+    "line": "lea     ecx, [esp+1Ch+keyOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4E52B9",
-    "line": "push    ecx",
+    "line": "push    ecx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E52BA",
-    "line": "lea     edx, [esp+20h+var_8]",
+    "line": "lea     edx, [esp+20h+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4E52BE",
-    "line": "push    edx",
+    "line": "push    edx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E52BF",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E52C1",
-    "line": "mov     [esp+24h+var_C], 0",
+    "line": "mov     [esp+24h+valueOut], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x4E52C9",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E52CE",
-    "line": "mov     esi, [esp+18h+var_C]",
+    "line": "mov     esi, [esp+18h+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x4E52E7",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x4E52FD",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x4E5305",
-    "line": "cmp     [esp+18h+var_8], 0",
+    "line": "cmp     [esp+18h+position], 0",
     "mnemonic": "cmp",
     "size": 5
   },

@@ -14,7 +14,7 @@
 0x763588: jnz     short loc_763596
 0x76358A: push    ebx
 0x76358B: push    eax
-0x76358C: call    sub_761270
+0x76358C: call    OB_NiDX9SourceTextureData_CreateFromSourceTexture_010201A0; DX10OBSE resource decode: creates/loads NiDX9SourceTextureData for NiSourceTexture, creating a managed IDirect3DTexture9 and uploading source mip texels when rendererData is absent.
 0x763591: add     esp, 8
 0x763594: mov     edi, eax
 0x763596: add     dword ptr [esi+7Ch], 0FFFFFFFFh

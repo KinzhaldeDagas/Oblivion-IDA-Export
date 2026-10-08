@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x613780",
-    "line": "push    esi",
+    "line": "push    esi; Returns the combat actor's weapon-skill level as an integer. Actor paths read the relevant actor value; creature fallback converts its floating calculation to SInt32 before returning EAX.",
     "mnemonic": "push",
     "size": 1
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x6137AB",
-    "line": "call    sub_612D60",
+    "line": "call    CombatController_GetEquippedWeaponForm",
     "mnemonic": "call",
     "size": 5
   },
@@ -163,19 +163,19 @@
   },
   {
     "ea": "0x6137C2",
-    "line": "call    sub_612D60",
+    "line": "call    CombatController_GetEquippedWeaponForm",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6137C7",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6137C9",
-    "line": "call    TESObjectWEAP_GetWeaponSkillAV",
+    "line": "call    TESObjectWEAP_GetWeaponSkillAV; Sidecar hook boundary: replace player-facing combat score with the effective exclusive Blade/Spear sidecar level while preserving the native weapon AV return elsewhere.",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x613800",
-    "line": "jmp     Double_To_SInt32",
+    "line": "jmp     Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "jmp",
     "size": 5
   },

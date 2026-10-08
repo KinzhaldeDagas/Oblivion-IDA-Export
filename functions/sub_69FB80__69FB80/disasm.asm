@@ -1,6 +1,6 @@
 0x69FB80: push    esi
 0x69FB81: mov     esi, ecx
-0x69FB83: call    MobileObject_GetCharProxy
+0x69FB83: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x69FB88: mov     ecx, eax
 0x69FB8A: test    ecx, ecx
 0x69FB8C: jz      short loc_69FBBD

@@ -1,18 +1,31 @@
 {
-  "callees_count": 32,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7FB470",
+      "0x7FB6E1"
+    ]
+  ],
+  "chunks_sha256": "749010a1ac414c54c47eb1b18299caca539ce5a21201a51fd384262068d097b9",
+  "comment_regular": "Lighting30 vtable +0x28 geometry-state preparation. In render mode 5 it applies NiAlphaProperty test enable bit 0x200, test-function bits 10..12, and reference byte +0x1A; disables alpha blending; uses GREATER/ref 128 for blend-only fallback; then applies native stencil/cull and wireframe/fill properties.",
+  "comment_repeatable": "Lighting30 vtable +0x28 geometry-state preparation. In render mode 5 it applies NiAlphaProperty test enable bit 0x200, test-function bits 10..12, and reference byte +0x1A; disables alpha blending; uses GREATER/ref 128 for blend-only fallback; then applies native stencil/cull and wireframe/fill properties.\nDX11 ordinary profile verified 2026-09-30: selectors12D..146 outside mode5 use alpha property slot+08 and shader property slot+18. Alpha-test enabled iff alpha flags200 and (shader flags800 clear or shader opacity+20<1). Blend enabled iff alpha flags1 and (opacity<1 or shader flags100 set). If neither enabled (including null alpha), write RS15=0 then27=0 only. Otherwise write RS27, optional19/20 from manager+20 selector table, RS15, optional25 from manager+4C and RS24 reference byte alpha+1A. Then ALWAYS stencil/cull property via manager+20 from propertyState+1C, then wire property via manager+24 from propertyState+28. No Z-buffer/shade/material property dispatch here. Special selector/mode5 branches require separate recipes.\nDX11 finish audit 2026-10-01: this Lighting30 preparation override performs alpha/stencil/fill state work and returns0; unlike generic76C9A0 it does not copy current D3DRS_LIGHTING into shader+60. Geometry finish must consume the actual stored shader+60 value, not infer it from the current device lighting register.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7FB470",
+  "display_name": "Lighting30Shader_PrepareGeometryRenderState",
   "end_ea": "0x7FB6E1",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7FB470",
+  "name": "Lighting30Shader_PrepareGeometryRenderState",
   "segment": ".text",
   "sha256": "749010a1ac414c54c47eb1b18299caca539ce5a21201a51fd384262068d097b9",
   "size": 625,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7FB470",
+  "total_chunk_size": 625,
   "type": "int __thiscall(_DWORD **this, int, int, int, _DWORD *, int, int, int)",
   "xrefs_from_count": 259,
   "xrefs_to_count": 1

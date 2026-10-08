@@ -1,19 +1,32 @@
 {
-  "callees_count": 201,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 42,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4492E0",
+      "0x449D1F"
+    ]
+  ],
+  "chunks_sha256": "1ca8d04bad09f5a0843d7587024cd56f5f381a9ff60d88d6b54c0f57e2a2c87a",
+  "comment_regular": "Verified reader of activeFileState.retainActiveFile (+0xCD1): when zero, cleanup destroys and clears the stored active TESFile; when set, that file is retained. The only direct writer located so far is constructor initialization to zero; runtime setter remains Unknown.",
+  "comment_repeatable": "Verified reader of activeFileState.retainActiveFile (+0xCD1): when zero, cleanup destroys and clears the stored active TESFile; when set, that file is retained. The only direct writer located so far is constructor initialization to zero; runtime setter remains Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 5,
   "display_name": "TESDataHandler_Clear",
   "end_ea": "0x449D1F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "TESDataHandler_Clear",
   "segment": ".text",
   "sha256": "1ca8d04bad09f5a0843d7587024cd56f5f381a9ff60d88d6b54c0f57e2a2c87a",
   "size": 2623,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4492E0",
-  "type": "signed int __thiscall(_BYTE *this)",
+  "total_chunk_size": 2623,
+  "type": "int __thiscall(TESDataHandler *self)",
   "xrefs_from_count": 1055,
   "xrefs_to_count": 2
 }

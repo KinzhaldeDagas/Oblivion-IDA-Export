@@ -1,19 +1,32 @@
 {
-  "callees_count": 23,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_9A8E30",
+  "chunks": [
+    [
+      "0x9A8E30",
+      "0x9A903D"
+    ]
+  ],
+  "chunks_sha256": "16a7b3389ab2a77d01f40b47804746ea7b21ada839ce9f72ffdee6b09196d80c",
+  "comment_regular": "\nDX11 material consumption audit 2026-10-01: current register values must be sampled AFTER all map applications for each native occurrence, not from the final bucket state or earlier captured shader words. 77A1F0 orders pass maps before shader maps; repeated payload occurrences can have different effective inherited/overwritten constants. Numeric setters change only their supplied spans, so a complete current device baseline plus a fully resolved ordered stream legitimately retains untouched registers. Shader-read packing is a renderer-side operation and is not native writer coverage.\n\nSpeedTreeOBSE v156: confirmed mapped entry Extra=2 calls Device.SetPixelShaderConstantF directly at9A8F2D using entry+30 and register/count+1C/+20 on each application. 9A8C40 assigns Extra2 for this native pixel-map float4 type and preserves external source pointer when final copy flag is0. CPU source restoration after upload does not restore/revert the already uploaded device constants.\n\nSpeedTreeOBSE v157: Extra1 mapped entry path at9A8EF7 invokes Device.SetVertexShaderConstantF directly from entry+30; leaf source-bank RGB scaling can be restored after native setup returns while the uploaded device constants remain scaled. W and other constant groups are preserved. This is inspected upload behavior, not a claim of game-tested scalar hooks.\n\nPass228: NiD3DShaderConstantMap application path; uses D3D shader constant setter slots, not NiRenderer RenderScreenTexture.",
+  "comment_repeatable": "Pass228: NiD3DShaderConstantMap application path; uses D3D shader constant setter slots, not NiRenderer RenderScreenTexture.\nDX11 GPU-world provenance (2026-09-27): iterate map entries in stored order; a nonnull entry with byte+8 false ENDS this map application rather than skipping that entry. Entry+1C is numeric destination register, +20 count. UINT_MAX destination with null +24 is skipped; handle-based destinations otherwise need separate qualification. Pass-owned maps execute before shader-owned maps (75FBA0 then77A1F0), so later overlapping writers supersede earlier matrix semantics.\nVerified comparative family 2026-09-30: corresponds in role to Fallout NiD3DShaderConstantMap::SetShaderConstants 82225AB0. Oblivion stored entry order remains authoritative: application stops at the first nonnull disabled entry. Pair with the local SortByEnabled at9A97B0 before reusing a captured last-writer constant recipe. Fallout has an additional defined-entry array and a different signature; no offsets or parameter types were transplanted.\nVerified numeric-routing update 2026-09-30: entry writes LastShaderProgram at map+20 directly from the program argument before walking entries. This is a borrowed pointer assignment, not a NiPointer swap and not a requirement that the previous binding already match. Kind10000000 with target+18 equal1/2 calls VS/PS float setters respectively, regardless of containing map class. Preserve passPS->passVS->shaderPS->shaderVS ordering and first-disabled termination. Current decoded map sequences may rebuild final writers without copying old constant words; this alone is not permission to omit the rest of geometry rendering.\nFinal-bank sequencing 2026-10-01: normal typed mapped helpers9A4AC0/9A27A0 convert source through9A92E0 then invoke VS+28 or PS+30 numeric setter with countOverride=0. They return0,1 or80000050h. Direct kind10000000 target1/2 bypasses conversion/type dispatch and writes VS/PS float with raw entry+20 count, including zero. The ordered stream must include writes unused by the current shader and carry effects from earlier passes that later maps do not overwrite. Native application continues after writer error, while first disabled nonnull entry terminates the map; neither behavior can be copied from Xenon blindly.\nGPU mapped writer capture 2026-10-01: keep numeric mapped writer descriptors in original map/entry order even when float-only matrix provenance marks int/BOOL entries absent. Typed paths require initialized dispatch byte B4295B and the observed B428D8 class word; direct target1/2 float paths bypass type lookup/conversion and keep raw count including zero. Current source byte generation feeds the six-bank ordered handoff; automatic/other writers still need their own producers.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "NiD3DShaderConstantMap_SetShaderConstants",
   "end_ea": "0x9A903D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_9A8E30",
+  "name": "NiD3DShaderConstantMap_SetShaderConstants",
   "segment": ".text",
   "sha256": "16a7b3389ab2a77d01f40b47804746ea7b21ada839ce9f72ffdee6b09196d80c",
   "size": 525,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x9A8E30",
-  "type": "BOOL __thiscall(unsigned __int16 *this, int, NiObjectNET *, int, int, int, int, int, int, int, int, int)",
+  "total_chunk_size": 525,
+  "type": "BOOL __thiscall(NiD3DShaderConstantMap *this, NiD3DShaderProgram *shaderProgram, NiObjectNET *geometry, int a4, int a5, int a6, int a7, int a8, int a9, int a10, int a11, int a12)",
   "xrefs_from_count": 208,
   "xrefs_to_count": 3
 }

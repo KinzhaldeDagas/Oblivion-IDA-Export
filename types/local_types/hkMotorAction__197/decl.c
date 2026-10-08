@@ -1,1 +1,1 @@
-hkMotorAction
+struct hkMotorAction;

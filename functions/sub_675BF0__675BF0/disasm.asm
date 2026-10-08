@@ -1,4 +1,4 @@
-0x675BF0: mov     eax, [esp+arg_8]
+0x675BF0: mov     eax, [esp+category]
 0x675BF4: cmp     eax, 6
 0x675BF7: ja      short loc_675C32
 0x675BF9: mov     ecx, [ecx+eax*4+28h]
@@ -6,9 +6,9 @@
 0x675BFF: test    ecx, ecx
 0x675C01: jz      short locret_675C34
 0x675C03: push    esi
-0x675C04: mov     esi, [esp+4+arg_0]
+0x675C04: mov     esi, [esp+4+criminal]
 0x675C08: push    edi
-0x675C09: mov     edi, [esp+8+arg_4]
+0x675C09: mov     edi, [esp+8+target]
 0x675C0D: lea     ecx, [ecx+0]
 0x675C10: mov     edx, [ecx]
 0x675C12: test    edx, edx

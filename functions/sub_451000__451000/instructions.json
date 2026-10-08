@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x451000",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; Destroys every TESFile clone in the thread-ID map, clears and destroys the map, and nulls the owning TESFile's map pointer.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x451037",
-    "line": "mov     [esp+14h+var_8], eax",
+    "line": "mov     [esp+14h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -145,61 +145,61 @@
   },
   {
     "ea": "0x451040",
-    "line": "lea     eax, [esp+14h+var_C]",
+    "line": "lea     eax, [esp+14h+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x451044",
-    "line": "push    eax",
+    "line": "push    eax; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x451045",
-    "line": "lea     ecx, [esp+18h+var_4]",
+    "line": "lea     ecx, [esp+18h+keyOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x451049",
-    "line": "push    ecx",
+    "line": "push    ecx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45104A",
-    "line": "mov     ecx, [edi+8]",
+    "line": "mov     ecx, [edi+8]; self",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x45104D",
-    "line": "lea     edx, [esp+1Ch+var_8]",
+    "line": "lea     edx, [esp+1Ch+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x451051",
-    "line": "push    edx",
+    "line": "push    edx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x451052",
-    "line": "mov     [esp+20h+var_C], 0",
+    "line": "mov     [esp+20h+valueOut], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x45105A",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x45105F",
-    "line": "mov     esi, [esp+14h+var_C]",
+    "line": "mov     esi, [esp+14h+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x45106F",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x451077",
-    "line": "cmp     [esp+14h+var_8], 0",
+    "line": "cmp     [esp+14h+position], 0",
     "mnemonic": "cmp",
     "size": 5
   },

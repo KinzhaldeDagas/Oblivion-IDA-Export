@@ -1,4 +1,4 @@
-0x4057B0: push    0FFFFFFFFh
+0x4057B0: push    0FFFFFFFFh; Verified 2026-10-03: SetBaseTexture owns one texture ref via map[0]+8. Array storage is property+0x20. A missing map allocates 0x10 then stores it at slot 0; null allocation is followed by unchecked dereference at 0x40581D. Fallout named homolog 0x823E3F48 confirms semantic identity. Setter EAX is incidental; public contract is void.
 0x4057B2: push    offset ??0bhkBallAndSocketConstraint@@QAE@XZ_SEH
 0x4057B7: mov     eax, large fs:0
 0x4057BD: push    eax
@@ -67,3 +67,15 @@
 0x405867: pop     ebx
 0x405868: add     esp, 10h
 0x40586B: retn    4
+0x9CA420: mov     eax, [ebp-10h]
+0x9CA423: push    eax
+0x9CA424: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA429: pop     ecx
+0x9CA42A: retn
+0x9CA42B: mov     edx, [esp+arg_4]
+0x9CA42F: lea     eax, [edx-10h]
+0x9CA432: mov     ecx, [edx-14h]
+0x9CA435: xor     ecx, eax
+0x9CA437: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA43C: mov     eax, offset stru_AF2B24
+0x9CA441: jmp     ___CxxFrameHandler3

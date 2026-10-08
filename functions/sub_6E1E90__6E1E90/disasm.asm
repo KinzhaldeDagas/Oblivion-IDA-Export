@@ -1,4 +1,4 @@
-0x6E1E90: push    ebx
+0x6E1E90: push    ebx; Oblivion NiTransformData rotation-key ownership setter. Destroys the previous +0x20 array via the destructor table indexed by type +0x10; type 4 first destroys its three nested scalar-axis tracks. Installs count +8, pointer +0x20, type +0x10, and table-derived stride +0x1C, or clears all four fields for null/zero input.
 0x6E1E91: push    esi
 0x6E1E92: mov     esi, ecx
 0x6E1E94: push    edi
@@ -9,11 +9,11 @@
 0x6E1E9E: cmp     dword ptr [esi+10h], 4
 0x6E1EA2: jnz     short loc_6E1EAB
 0x6E1EA4: mov     ecx, edi
-0x6E1EA6: call    sub_6BE490
+0x6E1EA6: call    NiEulerRotKey_DestroyAxisTracks; Oblivion rotation type-4 nested cleanup. Iterates exactly three scalar-axis subtracks in the outer rotation record, destroys each nonnull axis key array through its numeric-type destructor, then clears that axis pointer, count, and type fields.
 0x6E1EAB: mov     eax, [esi+10h]
 0x6E1EAE: mov     ecx, ds:0B3D2F8h[eax*4]
 0x6E1EB5: push    edi
-0x6E1EB6: call    ecx ; dword_B3D2F8
+0x6E1EB6: call    ecx ; unk_B3D2F8
 0x6E1EB8: add     esp, 4
 0x6E1EBB: mov     ecx, [esp+0Ch+arg_0]
 0x6E1EBF: cmp     ecx, ebx

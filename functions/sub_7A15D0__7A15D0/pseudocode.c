@@ -1,27 +1,31 @@
-void __thiscall __noreturn sub_7A15D0(unsigned int *this, int a2)
+// push_back specialization for CFrondEngine guide-LOD levels. Deep-copies a complete st_vector<SFrondGuide> into CFrondEngine+0x18, using direct construction or checked insert-one.
+void __thiscall OB_stVector_stVector_SFrondGuide_PushBack_010201A0(
+        OB_stVector_stVector_SFrondGuide_010201A0 *this,
+        const OB_stVector_SFrondGuide_010201A0 *value)
 {
-  unsigned int v3; // edx
-  unsigned int v4; // ecx
-  char *v5; // edi
-  char *v6; // edi
-  int v7; // [esp+8h] [ebp-8h] BYREF
+  OB_stVector_SFrondGuide_010201A0 *begin; // edx
+  unsigned int sizeCount; // ecx
+  OB_stVector_SFrondGuide_010201A0 *end; // edi
+  OB_stVector_SFrondGuide_010201A0 *endForInsert; // edi
+  OB_stVectorIterator_stVector_SFrondGuide_010201A0 result; // [esp+8h] [ebp-8h] BYREF
 
-  v3 = *(this + 1);
-  if ( v3 )
-    v4 = (int)(*(this + 2) - v3) >> 4;
+  begin = this->begin; /*0x7a15d6*/
+  if ( begin ) /*0x7a15dc*/
+    sizeCount = this->end - begin; /*0x7a15e7*/
   else
-    v4 = 0;
-  if ( v3 )
+    sizeCount = 0; /*0x7a15de*/
+  if ( begin && sizeCount < this->capacityEnd - begin ) /*0x7a15f8*/
   {
-    if ( v4 < (int)(*(this + 3) - v3) >> 4 )
-    {
-      v5 = (char *)*(this + 2);
-      LOBYTE(v7) = 0;
-      sub_7A0C20(v5, 1u, a2);
-    }
+    end = this->end; /*0x7a1602*/
+    LOBYTE(result.owner) = 0; /*0x7a1605*/
+    OB_stVector_stVector_SFrondGuide_UninitializedFillN_010201A0(end, 1u, value); /*0x7a1615*/
+    this->end = end + 1; /*0x7a1620*/
   }
-  v6 = (char *)*(this + 2);
-  if ( v3 > (unsigned int)v6 )
-    _invalid_parameter_noinfo();
-  sub_7A1320(this, (int)&v7, this, v6, a2);
+  else
+  {
+    endForInsert = this->end; /*0x7a162b*/
+    if ( begin > endForInsert ) /*0x7a1630*/
+      _invalid_parameter_noinfo(); /*0x7a1632*/
+    OB_stVector_stVector_SFrondGuide_InsertOne_010201A0(this, &result, this, endForInsert, value); /*0x7a1645*/
+  }
 }

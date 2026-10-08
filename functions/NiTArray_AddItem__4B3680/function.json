@@ -1,19 +1,32 @@
 {
-  "callees_count": 13,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 5,
+  "chunks": [
+    [
+      "0x4B3680",
+      "0x4B3744"
+    ]
+  ],
+  "chunks_sha256": "fe3868d702697875f9252996e1ae787a939dbf32dc84e92869f79643f3c85f96",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "Verified AddFirstEmpty ownership: inserts into a free slot and increments the child reference at 0x4B3730, or grows/appends via 0x523B10/0x4B34E0. Thus an outer caller that catches a later fault cannot assume child refcount remains zero. Frond publication retains its own pin and respects array ownership.\nMEF PERF 2026-10-08: PERF-16 Verified AddFirstEmpty for strong-pointer array: rejects null element withFFFFFFFF; scans from index0 through WORD usedEnd+A for first null even when occupiedCount+C==usedEnd. N successful nonnull dense insertions fromempty cost N*(N-1)/2 slot probes, excluding growth/copy/parent-detach work. Preserve first-hole order for sparse arrays.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "NiTArray_AddItem",
+  "display_name": "NiTObjectArray_AddFirstEmpty",
   "end_ea": "0x4B3744",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "NiTArray_AddItem",
+  "name": "NiTObjectArray_AddFirstEmpty",
   "segment": ".text",
   "sha256": "fe3868d702697875f9252996e1ae787a939dbf32dc84e92869f79643f3c85f96",
   "size": 196,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4B3680",
-  "type": "unsigned int __thiscall(int this, LONG *)",
+  "total_chunk_size": 196,
+  "type": "unsigned int __thiscall(MEF_RefPointerArray16 *self, void **element)",
   "xrefs_from_count": 90,
   "xrefs_to_count": 5
 }

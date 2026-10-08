@@ -8,13 +8,13 @@
 0x57D211: mov     eax, esi
 0x57D213: mov     esi, [esi+10h]
 0x57D216: push    eax
-0x57D217: call    FormHeapFree
+0x57D217: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x57D21C: add     esp, 4
 0x57D21F: test    esi, esi
 0x57D221: jnz     short loc_57D211
 0x57D223: mov     ecx, [edi+130h]
 0x57D229: push    ecx
-0x57D22A: call    FormHeapFree
+0x57D22A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x57D22F: add     esp, 4
 0x57D232: mov     dword ptr [edi+130h], 0
 0x57D23C: pop     edi

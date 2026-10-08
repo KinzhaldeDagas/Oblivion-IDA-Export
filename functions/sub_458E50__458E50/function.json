@@ -1,18 +1,31 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x458E50",
+      "0x458EC7"
+    ]
+  ],
+  "chunks_sha256": "8bf95b0b691c00e2c419773a06bf815236fb273e0b2c1232d872e46fcdb24231",
+  "comment_regular": "MEF v27 verification: raw blob helper consumes UInt16 payload from SaveLoad+0x14. Guarded null-key/null-map replacements must discard the payload before skipping map insertion to preserve stream alignment.",
+  "comment_repeatable": "MEF v27 verification: raw blob helper consumes UInt16 payload from SaveLoad+0x14. Guarded null-key/null-map replacements must discard the payload before skipping map insertion to preserve stream alignment.\n\nMEF PERF 2026-10-02 PASS2: Verified animation blob queue uses owner+54. Existing FormID lookup changes key to0 on a hit, then allocates UInt16-length-prefixed payload, advances cursor+14 and SetAt. Native distinct-key misses may traverse the same chain twice (GetAt then SetAt); v56 TryStoreRawSaveBlobMap fuses that search but retains collision-chain growth. Preserve key0 policy.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_458E50",
+  "display_name": "SaveLoad_QueueAnimationBlob",
   "end_ea": "0x458EC7",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_458E50",
+  "name": "SaveLoad_QueueAnimationBlob",
   "segment": ".text",
   "sha256": "8bf95b0b691c00e2c419773a06bf815236fb273e0b2c1232d872e46fcdb24231",
   "size": 119,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x458E50",
+  "total_chunk_size": 119,
   "type": "int __thiscall(_DWORD *this, int, unsigned __int16)",
   "xrefs_from_count": 51,
   "xrefs_to_count": 1

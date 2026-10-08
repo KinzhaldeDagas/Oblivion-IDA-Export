@@ -13,16 +13,16 @@
 0x69D8E4: mov     [esp+18h+var_10], esi
 0x69D8E8: fldz
 0x69D8EA: push    ecx
-0x69D8EB: fstp    [esp+1Ch+var_1C]; float
-0x69D8EE: push    0; int
-0x69D8F0: call    BSTempEff_constr
+0x69D8EB: fstp    [esp+1Ch+durationSeconds]; durationSeconds
+0x69D8EE: push    0; parentCell
+0x69D8F0: call    BSTempEffect_Constructor; Verified BSTempEffect constructor: initializes NiObject base, stores duration at +0x08 and parent cell at +0x0C, zeros elapsed at +0x10, sets initializeCallbackDone (+0x14) false, and installs BSTempEffect vtable.
 0x69D8F5: mov     ecx, [esp+18h+arg_0]; this
 0x69D8F9: test    ecx, ecx
 0x69D8FB: mov     [esp+18h+var_4], 0
 0x69D903: mov     dword ptr [esi], offset ??_7MagicHitEffect@@6B@; const MagicHitEffect::`vftable'
 0x69D909: mov     [esi+1Ch], ecx
 0x69D90C: jz      short loc_69D916
-0x69D90E: call    TESObjectREFR_GetParentCell
+0x69D90E: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x69D913: mov     [esi+0Ch], eax
 0x69D916: fldz
 0x69D918: mov     eax, [esp+18h+arg_4]
@@ -38,3 +38,12 @@
 0x69D93D: pop     esi
 0x69D93E: add     esp, 10h
 0x69D941: retn    8
+0x9C5C70: mov     ecx, [ebp-10h]; self
+0x9C5C73: jmp     BSTempEffect_Destructor; Verified BSTempEffect destructor: resets duration, elapsed, parent cell and initializeCallbackDone (+0x14), restores base vtable, then invokes NiRefObject destructor.
+0x9C5C78: mov     edx, [esp+arg_4]
+0x9C5C7C: lea     eax, [edx-8]
+0x9C5C7F: mov     ecx, [edx-0Ch]
+0x9C5C82: xor     ecx, eax
+0x9C5C84: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5C89: mov     eax, offset stru_AEE338
+0x9C5C8E: jmp     ___CxxFrameHandler3

@@ -1,10 +1,10 @@
 0x601790: sub     esp, 20h
-0x601793: push    ebx
-0x601794: push    esi
+0x601793: push    ebx; float
+0x601794: push    esi; float
 0x601795: mov     esi, ecx
 0x601797: mov     eax, [esi]
 0x601799: mov     edx, [eax+174h]
-0x60179F: push    edi
+0x60179F: push    edi; float
 0x6017A0: call    edx
 0x6017A2: mov     ecx, ds:0B333C4h
 0x6017A8: mov     edi, eax
@@ -21,14 +21,14 @@
 0x6017CA: lea     eax, [esp+2Ch+var_C]
 0x6017CE: fsub    dword ptr [edi]
 0x6017D0: push    eax
-0x6017D1: fstp    [esp+30h+var_C]
+0x6017D1: fstp    [esp+30h+var_C]; float
 0x6017D5: fld     [esp+30h+var_14]
-0x6017D9: fstp    [esp+30h+var_8]
+0x6017D9: fstp    [esp+30h+var_8]; float
 0x6017DD: fld     [esp+30h+var_18]
-0x6017E1: fstp    [esp+30h+var_4]
-0x6017E5: call    sub_683CB0
+0x6017E1: fstp    [esp+30h+var_4]; float
+0x6017E5: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x6017EA: mov     edx, [esi]
-0x6017EC: fstp    [esp+30h+var_18]
+0x6017EC: fstp    [esp+30h+var_18]; float
 0x6017F0: mov     eax, [edx+164h]
 0x6017F6: add     esp, 4
 0x6017F9: mov     ecx, esi
@@ -37,12 +37,12 @@
 0x601800: mov     ebx, eax
 0x601802: mov     eax, [ecx+8]
 0x601805: test    eax, eax
-0x601807: mov     [esp+2Ch+var_14], ebx
+0x601807: mov     [esp+2Ch+var_14], ebx; float
 0x60180B: mov     [esp+2Ch+var_1C], 0
 0x601813: jz      short loc_60181F
 0x601815: cmp     byte ptr [eax+20h], 12h
 0x601819: jnz     short loc_60181F
-0x60181B: mov     [esp+2Ch+var_1C], eax
+0x60181B: mov     [esp+2Ch+var_1C], eax; float
 0x60181F: test    ebx, ebx
 0x601821: mov     [esp+2Ch+var_1D], 0
 0x601826: jz      loc_601B6E
@@ -54,7 +54,7 @@
 0x60183C: fstp    [esp+2Ch+var_10]
 0x601840: fld     [esp+2Ch+var_10]
 0x601844: fabs
-0x601846: fstp    [esp+2Ch+var_10]
+0x601846: fstp    [esp+2Ch+var_10]; float
 0x60184A: fld     [esp+2Ch+var_10]
 0x60184E: fcomp   dword ptr ds:0A2FAA8h
 0x601854: fnstsw  ax
@@ -69,7 +69,7 @@
 0x60186B: fld     [esp+2Ch+var_18]
 0x60186F: push    1; char
 0x601871: push    ecx
-0x601872: fstp    [esp+34h+var_34]; float
+0x601872: fstp    [esp+34h+arg0]; float
 0x601875: push    esi; Concurrency::details::SchedulerBase *
 0x601876: call    sub_685530
 0x60187B: add     esp, 0Ch
@@ -116,19 +116,19 @@
 0x6018EC: push    eax
 0x6018ED: mov     ecx, esi
 0x6018EF: call    Actor__InitDialogue
-0x6018F4: fstp    [esp+2Ch+arg_4]
+0x6018F4: fstp    [esp+2Ch+arg_4]; float
 0x6018F8: mov     ecx, [esi+58h]
 0x6018FB: fld     [esp+2Ch+arg_4]
 0x6018FF: mov     edx, [ecx]
 0x601901: mov     eax, [edx+20Ch]
 0x601907: push    ecx
-0x601908: fstp    [esp+30h+var_30]
+0x601908: fstp    [esp+30h+arg1]
 0x60190B: call    eax
 0x60190D: push    0
 0x60190F: push    1
 0x601911: mov     ecx, ebx
 0x601913: mov     [esp+34h+var_1E], 1
-0x601918: call    sub_475440
+0x601918: call    ActorAnimData_CleanupOrPromoteQueuedIdles; Owns current/queued idle retirement and promotion across ActorAnimData +0xCC/+0xD0/+0xD4/+0xD8. Depending on caller flags, stops a still-active sequence, moves stale holders into the two cleanup slots, destroys them when no slot is available or forced, or promotes queued +0xD0 into current +0xCC.
 0x60191D: cmp     dword ptr [esi+58h], 0
 0x601921: jz      short loc_601930
 0x601923: mov     ecx, [esi+58h]
@@ -137,18 +137,18 @@
 0x60192E: call    eax
 0x601930: fld1
 0x601932: sub     esp, 8
-0x601935: fst     [esp+34h+var_30]; int
-0x601939: mov     ecx, esi
-0x60193B: fstp    [esp+34h+var_34]; float
-0x60193E: call    Actor_ProcessAction
+0x601935: fst     [esp+34h+arg1]; arg1
+0x601939: mov     ecx, esi; this
+0x60193B: fstp    [esp+34h+arg0]; arg0
+0x60193E: call    Actor_ProcessAction; Per-actor native action state machine. Advances required-note phases, handles AttackBow nock/hold/release lifecycle, constructs ArrowProjectile on release, and dispatches post-shot AMMO consumption.
 0x601943: fld     dword ptr ds:0A30634h
 0x601949: sub     esp, 8
-0x60194C: fstp    [esp+34h+var_30]; float
+0x60194C: fstp    [esp+34h+arg1]; explicitTimeOrMinusOne
 0x601950: fld     dword ptr ds:0B33E9Ch
 0x601956: mov     ecx, ebx; this
-0x601958: fstp    [esp+34h+var_34]; float
-0x60195B: push    esi; int
-0x60195C: call    sub_476D10
+0x601958: fstp    [esp+34h+arg0]; deltaTime
+0x60195B: push    esi; ownerActor
+0x60195C: call    ActorAnimData_Update; CustomAnimSupport evidence: observed ActorAnimData update caller; supports broad scheduler classification.
 0x601961: mov     ecx, [esi+58h]
 0x601964: test    ecx, ecx
 0x601966: jz      loc_601AE2
@@ -170,8 +170,8 @@
 0x601994: test    ebx, ebx
 0x601996: push    ebp
 0x601997: jz      loc_601A45
-0x60199D: mov     ecx, ebx
-0x60199F: call    sub_6B7260
+0x60199D: mov     ecx, ebx; this
+0x60199F: call    SoundHandle__IsPlaying; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.
 0x6019A4: test    al, al
 0x6019A6: jz      loc_601A45
 0x6019AC: test    edi, edi
@@ -233,7 +233,7 @@
 0x601A6A: push    ebx
 0x601A6B: push    1
 0x601A6D: mov     [eax+48h], ebx
-0x601A70: call    sub_475440
+0x601A70: call    ActorAnimData_CleanupOrPromoteQueuedIdles; Owns current/queued idle retirement and promotion across ActorAnimData +0xCC/+0xD0/+0xD4/+0xD8. Depending on caller flags, stops a still-active sequence, moves stale holders into the two cleanup slots, destroys them when no slot is available or forced, or promotes queued +0xD0 into current +0xCC.
 0x601A75: test    edi, edi
 0x601A77: jz      short loc_601AE1
 0x601A79: mov     eax, [esi+70h]
@@ -265,12 +265,12 @@
 0x601ABF: jnz     short loc_601AE1
 0x601AC1: fld     dword ptr [esi+74h]
 0x601AC4: push    ecx
-0x601AC5: fstp    [esp+34h+var_34]
+0x601AC5: fstp    [esp+34h+arg0]
 0x601AC8: push    0Ch
 0x601ACA: jmp     short loc_601AD5
 0x601ACC: fld     dword ptr [esi+74h]
 0x601ACF: push    ecx
-0x601AD0: fstp    [esp+34h+var_34]
+0x601AD0: fstp    [esp+34h+arg0]
 0x601AD3: push    8
 0x601AD5: mov     edx, [edi]
 0x601AD7: mov     eax, [edx+0C8h]
@@ -287,7 +287,7 @@
 0x601AFA: mov     eax, [edx+228h]
 0x601B00: push    ecx
 0x601B01: mov     ecx, esi
-0x601B03: fstp    [esp+30h+var_30]
+0x601B03: fstp    [esp+30h+arg1]
 0x601B06: call    eax
 0x601B08: cmp     [esp+2Ch+var_1E], 0
 0x601B0D: jz      short loc_601B1A
@@ -306,7 +306,7 @@
 0x601B32: cmp     byte ptr [eax+20h], 12h
 0x601B36: jnz     short loc_601B50
 0x601B38: mov     ecx, [esp+2Ch+var_14]
-0x601B3C: call    sub_472EA0
+0x601B3C: call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.
 0x601B41: test    al, al
 0x601B43: jz      short loc_601B50
 0x601B45: mov     ecx, [esi+58h]
@@ -315,11 +315,11 @@
 0x601B4D: push    esi
 0x601B4E: call    eax
 0x601B50: mov     ecx, esi; this
-0x601B52: call    TESObjectREFR_GetParentCell
+0x601B52: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x601B57: test    eax, eax
 0x601B59: jz      short loc_601B62
-0x601B5B: mov     ecx, eax
-0x601B5D: call    sub_4CB6C0
+0x601B5B: mov     ecx, eax; self
+0x601B5D: call    TESObjectCELL_UpdateAttachedReferenceLights; Walk this cell object list, select references whose base form type is TESObjectLIGH, retrieve ordinary ExtraLight type 0x30, and update its attached NiLight payload. This is a source-light animation/update enumerator, not a static/reference shadow-caster admission loop.
 0x601B62: mov     edx, [esi]
 0x601B64: mov     eax, [edx+0FCh]
 0x601B6A: mov     ecx, esi

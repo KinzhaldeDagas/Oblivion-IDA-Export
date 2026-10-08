@@ -22,15 +22,15 @@
 0x92B936: mov     [esp+50h+var_34], eax
 0x92B93A: jle     loc_92BA8C
 0x92B940: mov     [esp+50h+var_30], eax
-0x92B944: cmp     eax, [ebp+arg_8]
+0x92B944: cmp     eax, dword ptr [ebp+arg_8]
 0x92B947: jz      loc_92BA73
-0x92B94D: mov     ecx, [ebp+arg_C]
+0x92B94D: mov     ecx, dword ptr [ebp+arg_8+4]
 0x92B950: cmp     eax, ecx
 0x92B952: jz      loc_92BA73
 0x92B958: lea     edx, [esp+50h+var_20]
 0x92B95C: push    edx
 0x92B95D: push    eax
-0x92B95E: mov     eax, [ebp+arg_8]
+0x92B95E: mov     eax, dword ptr [ebp+arg_8]
 0x92B961: push    ecx
 0x92B962: push    eax
 0x92B963: push    ebx

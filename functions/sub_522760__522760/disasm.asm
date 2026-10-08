@@ -12,6 +12,6 @@
 0x522786: push    eax; char
 0x522787: push    6; int
 0x522789: lea     ecx, [esi+88h]; int
-0x52278F: call    TESAttributes_SetAVi
+0x52278F: call    TESAttributes_SetAVi; TESAttributes_SetAVi: attributes are stored as single bytes in TESAttributes. AVU base-AV guards clamp attributes to 0..configuredLimit before player integer base setters/modifiers reach this storage.
 0x522794: pop     esi
 0x522795: retn

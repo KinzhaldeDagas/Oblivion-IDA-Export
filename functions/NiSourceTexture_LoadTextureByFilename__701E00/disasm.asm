@@ -1,4 +1,4 @@
-0x701E00: push    0FFFFFFFFh
+0x701E00: push    0FFFFFFFFh; SpeedTreeOBSE 2026-07-14: generic NiSourceTexture creation preserves default pixel/alpha/mipmap preferences. Suitable for authored DDS/TGA composite candidates resolved through engine resources.
 0x701E02: push    offset ??0bhkBallAndSocketConstraint@@QAE@XZ_SEH
 0x701E07: mov     eax, large fs:0
 0x701E0D: push    eax
@@ -50,7 +50,7 @@
 0x701E8C: call    _strcpy_s
 0x701E91: mov     edx, [esi+34h]
 0x701E94: push    edx
-0x701E95: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x701E95: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x701E9A: mov     eax, [esi+34h]
 0x701E9D: push    eax; Src
 0x701E9E: call    sub_71B090
@@ -87,3 +87,15 @@
 0x701EEE: pop     ebx
 0x701EEF: add     esp, 10h
 0x701EF2: retn
+0x9CA420: mov     eax, [ebp-10h]
+0x9CA423: push    eax
+0x9CA424: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA429: pop     ecx
+0x9CA42A: retn
+0x9CA42B: mov     edx, [esp+arg_4]
+0x9CA42F: lea     eax, [edx-10h]
+0x9CA432: mov     ecx, [edx-14h]
+0x9CA435: xor     ecx, eax
+0x9CA437: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA43C: mov     eax, offset stru_AF2B24
+0x9CA441: jmp     ___CxxFrameHandler3

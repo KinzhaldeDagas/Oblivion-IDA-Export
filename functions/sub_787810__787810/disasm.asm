@@ -1,4 +1,4 @@
-0x787810: mov     edx, [ecx+8]
+0x787810: mov     edx, [ecx+8]; CTreeFileAccess::EndOfFile-style helper. Returns true when byte-buffer begin is null or cursor offset is at/after end-begin.
 0x787813: test    edx, edx
 0x787815: jnz     short loc_787821
 0x787817: xor     eax, eax

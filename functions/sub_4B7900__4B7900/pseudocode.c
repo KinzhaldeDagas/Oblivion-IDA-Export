@@ -1,16 +1,17 @@
-void __thiscall sub_4B7900(unsigned int *this)
+// Verified clears TESObjectDOOR.randomTeleport: frees each allocated successor node, then clears the inline first-space pointer. Called before copying door data.
+void __thiscall TESObjectDOOR_ClearRandomTeleportSpaceList(TESObjectDOOR *this)
 {
-  unsigned int v2; // edi
+  struct TESObjectDOOR_RandomTeleportSpaceNode *next; // edi
 
-  if ( *(this + 0x1B) )
+  if ( this->super.randomTeleport.next ) /*0x4b7903*/
   {
-    do
+    do /*0x4b7924*/
     {
-      v2 = *(_DWORD *)(*(this + 0x1B) + 4);
-      FormHeapFree(*(this + 0x1B));
-      *(this + 0x1B) = v2;
+      next = this->super.randomTeleport.next->next; /*0x4b7913*/
+      FormHeapFree((unsigned int)this->super.randomTeleport.next); /*0x4b7917*/
+      this->super.randomTeleport.next = next; /*0x4b7921*/
     }
-    while ( v2 );
+    while ( next ); /*0x4b7924*/
   }
-  *(this + 0x1A) = 0;
+  this->super.randomTeleport.space = 0; /*0x4b7927*/
 }

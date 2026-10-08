@@ -1,4 +1,4 @@
-0x8041B0: sub     esp, 390h
+0x8041B0: sub     esp, 390h; MoonSugarEffect decode: Copy program loader. Loads copy.v/copy.p plus MASK variants and stores wrappers with ref-counted replace.
 0x8041B6: mov     eax, ds:0B30AACh
 0x8041BB: xor     eax, esp
 0x8041BD: mov     [esp+390h+var_4], eax
@@ -51,14 +51,14 @@
 0x80426A: lea     ecx, [esp+3A4h+var_20C]
 0x804271: push    0; int
 0x804273: push    ecx; int
-0x804274: call    sub_7B47E0
+0x804274: call    BSShaderManager_GetVertexShaderTargetName
 0x804279: push    eax; int
 0x80427A: add     esi, 4
 0x80427D: push    esi; int
 0x80427E: lea     edx, [esp+3B4h+FileName]
 0x804285: push    edx; lpFileName
 0x804286: mov     ecx, edi
-0x804288: call    CreateVertexShader
+0x804288: call    CreateVertexShader; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.
 0x80428D: mov     esi, [ebp+0]
 0x804290: mov     edi, eax
 0x804292: cmp     esi, edi
@@ -144,7 +144,7 @@
 0x8043B6: lea     eax, [esp+3A8h+var_20C]
 0x8043BD: push    eax; int
 0x8043BE: push    edi
-0x8043BF: call    sub_7B4780
+0x8043BF: call    BSShaderManager_GetPixelShaderTargetName
 0x8043C4: add     esp, 4
 0x8043C7: push    eax; Str1
 0x8043C8: add     esi, 4
@@ -152,7 +152,7 @@
 0x8043CC: lea     ecx, [esp+3B4h+FileName]
 0x8043D3: push    ecx; lpFileName
 0x8043D4: mov     ecx, [esp+3B8h+var_38C]
-0x8043D8: call    CreatePixelShader
+0x8043D8: call    CreatePixelShader; Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.
 0x8043DD: mov     esi, [ebp+0]
 0x8043E0: mov     edi, eax
 0x8043E2: cmp     esi, edi
@@ -187,7 +187,6 @@
 0x804431: jmp     loc_8044ED
 0x804436: mov     [esp+3A0h+var_390], esi
 0x80443A: jmp     short loc_804442
-0x80443C: align 10h
 0x804440: xor     edi, edi
 0x804442: mov     eax, [esi]
 0x804444: cmp     eax, edi
@@ -207,7 +206,7 @@
 0x804472: lea     eax, [esp+3A8h+var_20C]
 0x804479: push    eax; int
 0x80447A: push    edi
-0x80447B: call    sub_7B4780
+0x80447B: call    BSShaderManager_GetPixelShaderTargetName
 0x804480: add     esp, 4
 0x804483: push    eax; Str1
 0x804484: add     esi, 4
@@ -215,7 +214,7 @@
 0x804488: lea     ecx, [esp+3B4h+FileName]
 0x80448F: push    ecx; lpFileName
 0x804490: mov     ecx, [esp+3B8h+var_38C]
-0x804494: call    CreatePixelShader
+0x804494: call    CreatePixelShader; Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.
 0x804499: mov     esi, [ebp+0]
 0x80449C: mov     edi, eax
 0x80449E: cmp     esi, edi

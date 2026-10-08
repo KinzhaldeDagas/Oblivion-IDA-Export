@@ -1,1 +1,1 @@
-IDispatch_0
+typedef IDispatch IDispatch_0;

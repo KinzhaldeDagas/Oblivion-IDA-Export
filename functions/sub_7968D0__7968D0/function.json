@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x7968D0",
+      "0x796907"
+    ]
+  ],
+  "chunks_sha256": "9d295751c3a49e85894892d65422c28e0a9fdb4b4fcf1fb62b58bfec75e3d606",
+  "comment_regular": "OBLIVION AUTHORITY (2026-08-30): Stdcall uninitialized_fill_n adapter for vector<unsigned short> owners. Boundary repaired through its pointer-result epilogue and ret 0x0C at 0x796904.",
+  "comment_repeatable": "OBLIVION AUTHORITY (2026-08-30): Stdcall uninitialized_fill_n adapter for vector<unsigned short> owners. Boundary repaired through its pointer-result epilogue and ret 0x0C at 0x796904.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7968D0",
-  "end_ea": "0x7968F7",
-  "flags": 21505,
+  "display_name": "OB_stVector_stVectorUShort_UninitializedFillNThunk_010201A0",
+  "end_ea": "0x796907",
+  "evidence_confidence": "Unknown",
+  "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7968D0",
+  "name": "OB_stVector_stVectorUShort_UninitializedFillNThunk_010201A0",
   "segment": ".text",
-  "sha256": "077151f9b5b7a162f0f68be392979c57ac424868f19955b8eb2c74eea95af520",
-  "size": 39,
+  "sha256": "9d295751c3a49e85894892d65422c28e0a9fdb4b4fcf1fb62b58bfec75e3d606",
+  "size": 55,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7968D0",
-  "type": "void __stdcall __noreturn(char *, unsigned int, int)",
-  "xrefs_from_count": 16,
+  "total_chunk_size": 55,
+  "type": "OB_stVectorUShort_010201A0 *__stdcall(OB_stVectorUShort_010201A0 *destination, unsigned int count, const OB_stVectorUShort_010201A0 *value)",
+  "xrefs_from_count": 24,
   "xrefs_to_count": 2
 }

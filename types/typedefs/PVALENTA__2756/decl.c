@@ -1,1 +1,1 @@
-PVALENTA
+typedef value_entA *PVALENTA;

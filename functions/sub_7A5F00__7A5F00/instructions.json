@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A5F00",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Leaf-texture vector resize with a by-value default record: fill-inserts when growing, erases/destroys the excess tail when shrinking, then releases the by-value filename copy.",
     "mnemonic": "push",
     "size": 2
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x7A5F50",
-    "line": "mov     ebx, [esp+28h+arg_0]",
+    "line": "mov     ebx, [esp+28h+newSize]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -283,13 +283,13 @@
   },
   {
     "ea": "0x7A5F7E",
-    "line": "lea     eax, [esp+28h+arg_4]",
+    "line": "lea     eax, [esp+28h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A5F82",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -301,31 +301,31 @@
   },
   {
     "ea": "0x7A5F85",
-    "line": "push    ebx",
+    "line": "push    ebx; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5F86",
-    "line": "push    ebp",
+    "line": "push    ebp; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5F87",
-    "line": "push    esi",
+    "line": "push    esi; expectedOwner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5F88",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A5F8A",
-    "line": "call    sub_7A5C00",
+    "line": "call    OB_stVector_SIdvLeafTexture_InsertFill_010201A0; Complete leaf-texture vector fill insertion: snapshots an aliasing value, checks max 0x030C30C3 elements, reuses capacity with overlap-safe movement or reallocates at max(1.5x capacity,size+count), and deep-copies filenames.",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x7A5FCF",
-    "line": "mov     [esp+28h+var_10], ebp",
+    "line": "mov     [esp+28h+result.current], ebp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -505,55 +505,55 @@
   },
   {
     "ea": "0x7A5FDF",
-    "line": "push    edi",
+    "line": "push    edi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5FE0",
-    "line": "push    esi",
+    "line": "push    esi; lastOwner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5FE1",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5FE2",
-    "line": "push    esi",
+    "line": "push    esi; firstOwner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5FE3",
-    "line": "lea     ecx, [esp+38h+var_14]",
+    "line": "lea     ecx, [esp+38h+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A5FE7",
-    "line": "push    ecx",
+    "line": "push    ecx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5FE8",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A5FEA",
-    "line": "call    sub_7A4B80",
+    "line": "call    OB_stVector_SIdvLeafTexture_EraseRange_010201A0; Checked leaf-texture vector erase: shifts the tail by deep assignment, destroys the vacated suffix, updates end, and returns {owner,current}.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A5FEF",
-    "line": "cmp     [esp+28h+arg_30], 10h",
+    "line": "cmp     [esp+28h+value.filename.capacity], 10h",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x7A5FF6",
-    "line": "mov     edx, [esp+28h+arg_1C]",
+    "line": "mov     edx, dword ptr [esp+28h+value.filename.storage]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x7A5FFB",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -640,5 +640,143 @@
     "line": "retn    58h ; 'X'",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x7A25F0",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7A25F1",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7A25F3",
+    "line": "cmp     dword ptr [esi+2Ch], 10h",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x7A25F7",
+    "line": "jb      short loc_7A2605",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x7A25F9",
+    "line": "mov     eax, [esi+18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7A25FC",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7A25FD",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7A2602",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x7A2605",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x7A2607",
+    "line": "mov     dword ptr [esi+2Ch], 0Fh",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x7A260E",
+    "line": "mov     [esi+28h], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7A2611",
+    "line": "mov     [esi+18h], al",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7A2614",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7A2615",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CCC40",
+    "line": "lea     ecx, [ebp+8]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCC43",
+    "line": "jmp     loc_7A25F0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCC48",
+    "line": "mov     edx, dword ptr [esp+value.blossomFlag]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CCC4C",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCC4F",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCC52",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CCC54",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCC59",
+    "line": "mov     eax, offset stru_AF6050",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCC5E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

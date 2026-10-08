@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x423DA0",
-    "line": "push    ebx",
+    "line": "push    ebx; Replace ExtraAction flag byte. Default value 1 removes/omits the extra only when its companion action-state dword is zero; otherwise retain/update. This is the XACT consumer.",
     "mnemonic": "push",
     "size": 1
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x423DAD",
-    "line": "mov     ebx, [esp+8+arg_0]",
+    "line": "mov     ebx, [esp+8+flags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x423DBA",
-    "line": "call    sub_41EB90",
+    "line": "call    ExtraDataList_GetOrCreateAction; Returns existing ExtraAction type 0x13, or creates one with default action flag byte 1 and null action reference.",
     "mnemonic": "call",
     "size": 5
   },

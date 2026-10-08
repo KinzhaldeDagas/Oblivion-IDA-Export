@@ -1,1 +1,1 @@
-bhkBreakableConstraint
+struct bhkBreakableConstraint;

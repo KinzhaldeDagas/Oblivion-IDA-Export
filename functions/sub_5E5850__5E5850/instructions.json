@@ -67,37 +67,37 @@
   },
   {
     "ea": "0x5E5869",
-    "line": "mov     edi, [esp+0Ch+arg_0]",
+    "line": "mov     edi, [esp+0Ch+groupID]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5E586D",
-    "line": "push    0",
+    "line": "push    0; forceWeaponPrefix",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5E586F",
-    "line": "push    0",
+    "line": "push    0; weaponEntryDataArg",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5E5871",
-    "line": "push    edi",
+    "line": "push    edi; groupID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5E5872",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5E5874",
-    "line": "call    Actor_LoadAnimGroup?",
+    "line": "call    Actor_LoadAnimGroup_; Builds an initial encoded key from live actor movement/weapon state and requested fixed group ID, then returns ActorAnimData_ResolveAnimKeyFallback's concrete playable key or sentinel 0x00FF when no ActorAnimData exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -115,31 +115,31 @@
   },
   {
     "ea": "0x5E587E",
-    "line": "push    0",
+    "line": "push    0; forceWeaponPrefix",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5E5880",
-    "line": "push    0",
+    "line": "push    0; weaponEntryDataArg",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5E5882",
-    "line": "push    edi",
+    "line": "push    edi; groupID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5E5883",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5E5885",
-    "line": "call    Actor_LoadAnimGroup?",
+    "line": "call    Actor_LoadAnimGroup_; Builds an initial encoded key from live actor movement/weapon state and requested fixed group ID, then returns ActorAnimData_ResolveAnimKeyFallback's concrete playable key or sentinel 0x00FF when no ActorAnimData exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x5E5899",
-    "line": "call    sub_4729B0",
+    "line": "call    ActorAnimData_GetAnimGroupForKey; Resolves an encoded animation key through the ActorAnimData map at +0x9C, selects the entry's sequence, and returns its TESAnimGroup pointer from sequence +0x68; returns null when the key is absent.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,19 +199,19 @@
   },
   {
     "ea": "0x5E58A2",
-    "line": "push    1; ArgList",
+    "line": "push    1; noteIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5E58A4",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5E58A6",
-    "line": "call    sub_51AE20",
+    "line": "call    TESAnimGroup_GetRequiredNoteTime; Returns a 32-bit required-note time from TESAnimGroup +0x10 by zero-based note index after validating count, storage, and QNaN. Invalid entries report an error and return 0.0f.",
     "mnemonic": "call",
     "size": 5
   },

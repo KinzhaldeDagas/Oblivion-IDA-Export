@@ -255,7 +255,6 @@
 0x954173: test    eax, eax
 0x954175: jle     loc_954000; jumptable 00953F05 cases 1-19,21,24
 0x95417B: jmp     short loc_954180
-0x95417D: align 10h
 0x954180: mov     ecx, [esp+254h+var_240]
 0x954184: push    esi
 0x954185: call    sub_953130
@@ -322,7 +321,6 @@
 0x954242: jmp     short loc_954250
 0x954244: mov     eax, [esp+254h+var_23C]
 0x954248: jmp     short loc_954250
-0x95424A: align 10h
 0x954250: movzx   ebp, byte ptr [ebx+0Ch]
 0x954254: mov     ecx, [edi]
 0x954256: imul    ebp, eax
@@ -342,7 +340,7 @@
 0x95427B: mov     edx, [eax+ecx*8+4]
 0x95427F: movzx   eax, byte ptr [ebx+0Ch]
 0x954283: mov     ecx, [esp+254h+var_244]
-0x954287: push    offset dword_BA8788
+0x954287: push    offset unk_BA8788
 0x95428C: add     eax, ebp
 0x95428E: add     eax, ecx
 0x954290: push    edx
@@ -394,7 +392,7 @@
 0x95431C: jz      loc_954000; jumptable 00953F05 cases 1-19,21,24
 0x954322: mov     eax, [edi]
 0x954324: movzx   ecx, word ptr [ebp+12h]
-0x954328: push    offset dword_BA8788
+0x954328: push    offset unk_BA8788
 0x95432D: push    eax
 0x95432E: add     ecx, [esp+25Ch+arg_10]
 0x954335: push    ecx
@@ -442,7 +440,6 @@
 0x9543B3: test    eax, eax
 0x9543B5: jle     loc_954000; jumptable 00953F05 cases 1-19,21,24
 0x9543BB: jmp     short loc_9543C0
-0x9543BD: align 10h
 0x9543C0: mov     ecx, [esp+254h+var_240]
 0x9543C4: push    esi
 0x9543C5: call    sub_953130
@@ -559,7 +556,7 @@
 0x95453A: movzx   eax, byte ptr [ebx+0Ch]
 0x95453E: imul    eax, [esp+254h+var_23C]
 0x954543: movzx   ecx, word ptr [ebp+12h]
-0x954547: push    offset dword_BA8788
+0x954547: push    offset unk_BA8788
 0x95454C: push    esi
 0x95454D: add     eax, [esp+25Ch+arg_10]
 0x954554: add     ecx, eax

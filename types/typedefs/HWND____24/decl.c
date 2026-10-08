@@ -1,1 +1,4 @@
-HWND__
+struct HWND__
+{
+int unused;
+};

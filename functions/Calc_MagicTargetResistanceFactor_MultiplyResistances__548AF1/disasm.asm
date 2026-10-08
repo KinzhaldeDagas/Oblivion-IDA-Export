@@ -1,4 +1,4 @@
-0x548AF1: fxch    st(2)
+0x548AF1: fxch    st(2); Resistance combine path: converts both percentages to fractions and combines them as independent resist factors after both <100 checks pass.
 0x548AF3: fdiv    st, st(1)
 0x548AF5: fstp    dword ptr [esp+0]
 0x548AF8: fdivp   st(1), st
@@ -14,7 +14,7 @@
 0x548B11: fxch    st(2)
 0x548B13: faddp   st(1), st
 0x548B15: fsubp   st(1), st
-0x548B17: fstp    [esp+arg_10]
+0x548B17: fstp    [esp+arg_10]; Final vanilla exposure factor is (1 - magicItemResistance/100) * (1 - effectSpecificResistance/100); either channel >= 100 returns 0.
 0x548B1B: fld     [esp+arg_10]
 0x548B1F: pop     ecx
 0x548B20: retn

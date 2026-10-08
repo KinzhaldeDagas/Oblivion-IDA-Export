@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x663920",
-    "line": "cmp     dword ptr ds:0B3B7D0h, 0",
+    "line": "cmp     dword ptr ds:0B3B7D0h, 0; For the actor's currently equipped AMMO, removes all matching transferred ArrowProjectile references (+0x95 transfer marker) by calling cleanup with INT_MAX and immediate-destroy flags.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -139,37 +139,37 @@
   },
   {
     "ea": "0x66395B",
-    "line": "push    1",
+    "line": "push    1; requireInventoryTransfer",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x66395D",
-    "line": "push    1",
+    "line": "push    1; destroyImmediately",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x66395F",
-    "line": "push    edi",
+    "line": "push    edi; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x663960",
-    "line": "push    7FFFFFFFh",
+    "line": "push    7FFFFFFFh; maximumMatches",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x663965",
-    "line": "push    eax",
+    "line": "push    eax; baseForm",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x663966",
-    "line": "call    sub_607F90",
+    "line": "call    ArrowProjectile_CleanupMatchingByBaseAndTarget; Remove all matching +0x95 transferred projectile refs for this actor and currently equipped AMMO form; max count is INT_MAX, immediate-destroy mode enabled.",
     "mnemonic": "call",
     "size": 5
   },

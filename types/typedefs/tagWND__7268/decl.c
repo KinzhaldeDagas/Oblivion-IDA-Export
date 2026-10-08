@@ -1,1 +1,36 @@
-tagWND
+struct __declspec(align(8)) tagWND
+{
+user_object obj;
+HWND parent;
+HWND owner;
+tagCLASS *class;
+dce *dce;
+WNDPROC_0 winproc;
+DWORD tid;
+HINSTANCE hInstance;
+RECT client_rect;
+RECT window_rect;
+RECT visible_rect;
+RECT normal_rect;
+POINT min_pos;
+POINT max_pos;
+LPWSTR text;
+void *pScroll;
+DWORD dwStyle;
+DWORD dwExStyle;
+UINT_PTR_0 wIDmenu;
+DWORD helpContext;
+UINT flags;
+HMENU hSysMenu;
+HICON hIcon;
+HICON hIconSmall;
+HICON hIconSmall2;
+UINT dpi;
+DPI_AWARENESS_0 dpi_awareness;
+window_surface *surface;
+tagDIALOGINFO *dlgInfo;
+int pixel_format;
+int cbWndExtra;
+DWORD_PTR userdata;
+DWORD wExtra[1];
+};

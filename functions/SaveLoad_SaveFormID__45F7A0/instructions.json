@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x45F7A0",
-    "line": "mov     eax, ds:0B33398h",
+    "line": "mov     eax, ds:0B33398h; Writes an array of FormIDs to the save buffer. When IRef encoding is enabled, each full FormID is first converted to a compact IRef via SaveLoad_FormIDToIRef.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x45F7DA",
-    "line": "mov     ebx, [esp+0Ch+arg_4]",
+    "line": "mov     ebx, [esp+0Ch+byteCount]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x45F7E9",
-    "line": "mov     ebp, [esp+10h+arg_0]",
+    "line": "mov     ebp, [esp+10h+source]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -187,19 +187,19 @@
   },
   {
     "ea": "0x45F7FA",
-    "line": "push    ecx",
+    "line": "push    ecx; formID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45F7FB",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x45F7FD",
-    "line": "call    SaveLoad_IRefToFormID?",
+    "line": "call    SaveLoad_FormIDToIRef; MEF PERF 2026-09-08: PERF-3 concrete producer: SaveLoad_SaveFormID loops over byteLength>>2 input DWORDs and, when owner+7Dh enables IRef encoding, calls45E0D0 for each. Converted index is written to the save buffer and cursor advances4; lookup ordering is serialized behavior.",
     "mnemonic": "call",
     "size": 5
   },

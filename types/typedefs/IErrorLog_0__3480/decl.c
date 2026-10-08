@@ -1,1 +1,1 @@
-IErrorLog_0
+typedef IErrorLog IErrorLog_0;

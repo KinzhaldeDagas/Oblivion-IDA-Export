@@ -14,14 +14,14 @@
 0x411357: cmp     byte_B03144, 0
 0x41135E: jz      loc_4114CE
 0x411364: mov     eax, 1
-0x411369: test    byte ptr dword_B33450, al
+0x411369: test    byte ptr unk_B33450, al
 0x41136F: jnz     short loc_411392
-0x411371: or      dword_B33450, eax
+0x411371: or      dword ptr unk_B33450, eax
 0x411377: mov     [esp+40h+var_4], 0
-0x41137F: call    GetFarPlane
-0x411384: fstp    flt_B3344C
+0x41137F: call    GetFarPlane; Fog interior decode: GetFarPlane uses TESObjectCELL::LightingData fogClipDistance (+0x20) for interior mode 1 when available.
+0x411384: fstp    dword ptr unk_B3344C
 0x41138A: mov     [esp+40h+var_4], 0FFFFFFFFh
-0x411392: fld     flt_B33E9C
+0x411392: fld     dword ptr ds:0B33E9Ch
 0x411398: fstp    [esp+40h+var_34]
 0x41139C: fld     [esp+40h+var_34]
 0x4113A0: fild    dword_B0314C
@@ -42,13 +42,13 @@
 0x4113CC: fstp    st(1)
 0x4113CE: fstp    st
 0x4113D0: mov     ecx, esi; this
-0x4113D2: call    GetFarPlane
+0x4113D2: call    GetFarPlane; Fog interior decode: GetFarPlane uses TESObjectCELL::LightingData fogClipDistance (+0x20) for interior mode 1 when available.
 0x4113D7: fstp    [esp+40h+var_2C]
 0x4113DB: fild    dword_B0315C
 0x4113E1: fstp    [esp+40h+var_30]
 0x4113E5: fld     [esp+40h+var_30]
 0x4113E9: fst     [esp+40h+var_30]
-0x4113ED: fld     flt_B33E9C
+0x4113ED: fld     dword ptr ds:0B33E9Ch
 0x4113F3: fld     st
 0x4113F5: fld1
 0x4113F7: fdivrp  st(1), st
@@ -82,7 +82,7 @@
 0x411445: fstp    st(2)
 0x411447: fstp    st(1)
 0x411449: fld     [esp+40h+var_30]
-0x41144D: fld     flt_B3344C
+0x41144D: fld     dword ptr unk_B3344C
 0x411453: fld     st
 0x411455: fsubp   st(2), st
 0x411457: fxch    st(1)
@@ -96,7 +96,7 @@
 0x411473: fnstsw  ax
 0x411475: test    ah, 41h
 0x411478: jnz     short loc_4114C8
-0x41147A: mov     eax, g_worldScenegraph
+0x41147A: mov     eax, g_WorldSceneReceiverRoot; Verified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.
 0x41147F: fmulp   st(2), st
 0x411481: mov     eax, [eax+0DCh]
 0x411487: lea     esi, [eax+0ECh]
@@ -104,8 +104,8 @@
 0x41148F: mov     ecx, 7
 0x411494: lea     edi, [esp+40h+a2]
 0x411498: rep movsd
-0x41149A: fstp    flt_B3344C
-0x4114A0: fld     flt_B3344C
+0x41149A: fstp    dword ptr unk_B3344C
+0x4114A0: fld     dword ptr unk_B3344C
 0x4114A6: fstp    [esp+40h+var_14]
 0x4114AA: lea     ecx, [esp+40h+a2]
 0x4114AE: push    ecx; a2
@@ -128,3 +128,14 @@
 0x4114DB: pop     esi
 0x4114DC: add     esp, 34h
 0x4114DF: retn
+0x9AACD0: mov     eax, dword ptr unk_B33450
+0x9AACD5: and     eax, 0FFFFFFFEh
+0x9AACD8: mov     dword ptr unk_B33450, eax
+0x9AACDD: retn
+0x9AACDE: mov     edx, [esp+arg_4]
+0x9AACE2: lea     eax, [edx-30h]
+0x9AACE5: mov     ecx, [edx-34h]
+0x9AACE8: xor     ecx, eax
+0x9AACEA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AACEF: mov     eax, offset stru_AD7BFC
+0x9AACF4: jmp     ___CxxFrameHandler3

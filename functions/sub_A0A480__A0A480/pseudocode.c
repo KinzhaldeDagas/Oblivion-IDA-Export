@@ -1,4 +1,4 @@
-BSStringT *sub_A0A480()
+NiRTTI *sub_A0A480()
 {
-  return sub_70E220(&stru_B40124, "NiShader", 0);
+  return NiRTTI_Constructor(&stru_B40124, "NiShader", 0); /*0xa0a491*/
 }

@@ -1,1 +1,1 @@
-LPMARSHAL
+typedef IMarshal_0 *LPMARSHAL;

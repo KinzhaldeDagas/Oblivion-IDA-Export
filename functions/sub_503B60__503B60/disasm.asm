@@ -16,18 +16,18 @@
 0x503B86: push    eax; a2
 0x503B87: push    ecx; a1
 0x503B88: mov     dword ptr [esp+24h+var_4], 0
-0x503B90: call    Script_ExtractArgs
+0x503B90: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x503B95: add     esp, 20h
 0x503B98: test    al, al
 0x503B9A: jnz     short loc_503B9E
 0x503B9C: pop     ecx
 0x503B9D: retn
 0x503B9E: mov     edx, dword ptr [esp+4+var_4]
-0x503BA1: mov     ecx, ds:0B333C4h; a1
-0x503BA7: push    0; a7
-0x503BA9: push    1; a6
-0x503BAB: push    edx; a5
-0x503BAC: call    sub_669690
+0x503BA1: mov     ecx, ds:0B333C4h; this
+0x503BA7: push    0; notifyPlayer
+0x503BA9: push    1; sortImmediately
+0x503BAB: push    edx; topic
+0x503BAC: call    PlayerCharacter__AddKnownTopic; Adds one topic to PlayerCharacter.knownTopics. Duplicate suppression is by exact TESTopic pointer; successful new entries are pushed to the head, optional notification is suppressed when DialogMenu is active, and optional immediate sorting is case-insensitive by display name.
 0x503BB1: mov     al, 1
 0x503BB3: pop     ecx
 0x503BB4: retn

@@ -1,1 +1,1 @@
-HEVENT
+typedef unsigned int HEVENT;

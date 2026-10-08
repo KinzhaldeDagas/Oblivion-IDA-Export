@@ -118,7 +118,6 @@
 0x451755: lea     ecx, [esp+3ACh+FindFileData]
 0x451759: mov     edx, edi
 0x45175B: jmp     short loc_451760
-0x45175D: align 10h
 0x451760: mov     esi, [edx]
 0x451762: cmp     esi, [ecx]
 0x451764: jnz     short loc_451778
@@ -222,3 +221,19 @@
 0x45189C: call    TESFile_JumpToBOF
 0x4518A1: mov     al, 1
 0x4518A3: jmp     loc_45170A
+0x9AE0F0: mov     eax, [ebp-398h]
+0x9AE0F6: push    eax
+0x9AE0F7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AE0FC: pop     ecx
+0x9AE0FD: retn
+0x9AE0FE: mov     edx, [esp+arg_4]
+0x9AE102: lea     eax, [edx-39Ch]
+0x9AE108: mov     ecx, [edx-3A0h]
+0x9AE10E: xor     ecx, eax
+0x9AE110: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AE115: add     eax, 10h
+0x9AE118: mov     ecx, [edx-4]
+0x9AE11B: xor     ecx, eax
+0x9AE11D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AE122: mov     eax, offset stru_ADA9D4
+0x9AE127: jmp     ___CxxFrameHandler3

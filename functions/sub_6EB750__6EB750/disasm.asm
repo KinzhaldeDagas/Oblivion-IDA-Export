@@ -20,7 +20,7 @@
 0x6EB781: test    cl, cl
 0x6EB783: jbe     short loc_6EB7A5
 0x6EB785: mov     ecx, esi
-0x6EB787: call    sub_6CD0F0
+0x6EB787: call    NiBlendInterpolator_RecomputeNormalizedWeights; Oblivion: when blend flag bit 2 marks weights dirty, recomputes item+8 normalized weights across 0x18-byte records. Handles one/two/many active items, priority groups, base*ease weights, optional threshold/renormalization, and highest-only flag bit 1.
 0x6EB78C: fld     [esp+4+arg_0]
 0x6EB790: mov     edx, [esp+4+arg_8]
 0x6EB794: mov     eax, [esp+4+arg_4]

@@ -16,15 +16,15 @@
 0x59750F: add     esp, 14h
 0x597512: test    esi, esi
 0x597514: jz      short loc_597539
-0x597516: call    sub_578D70
+0x597516: call    InterfaceManager_ConsumeMessageButton
 0x59751B: cmp     al, 1
 0x59751D: jnz     short loc_597526
-0x59751F: mov     ecx, esi
-0x597521: call    sub_5973F0
+0x59751F: mov     ecx, esi; this
+0x597521: call    ClassMenu_CommitCustomClass
 0x597526: mov     dword ptr [esi+58h], 0
 0x59752D: mov     byte ptr [esi+54h], 0
 0x597531: mov     ecx, esi; int
 0x597533: pop     esi
-0x597534: jmp     sub_584390
+0x597534: jmp     Menu__StartFadeIn; Oblivion ClassMenu step refresh: derives the active step value from tile traits 0xFDB/0xFDC, updates menu state, sets state 8, and refreshes the interface manager.
 0x597539: pop     esi
 0x59753A: retn

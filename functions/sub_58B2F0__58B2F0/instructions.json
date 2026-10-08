@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x58B2F8",
-    "line": "mov     esi, [esp+8+arg_0]",
+    "line": "mov     esi, [esp+8+trait]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x58B443",
-    "line": "jz      loc_58B51E",
+    "line": "jz      loc_58B51E; Verified: visible/other visibility trait update sets Tile dirty flag 4 at +0x2C. This branch does not clear InterfaceManager focus. Render cull flag is applied by 0x58E870 later.",
     "mnemonic": "jz",
     "size": 6
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x58B44F",
-    "line": "jz      loc_58B51E",
+    "line": "jz      loc_58B51E; Verified: visible/other visibility trait update sets Tile dirty flag 4 at +0x2C. This branch does not clear InterfaceManager focus. Render cull flag is applied by 0x58E870 later.",
     "mnemonic": "jz",
     "size": 6
   },
@@ -943,7 +943,7 @@
   },
   {
     "ea": "0x58B4F6",
-    "line": "fld     [esp+0Ch+arg_4]",
+    "line": "fld     [esp+0Ch+value]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -961,7 +961,7 @@
   },
   {
     "ea": "0x58B4FD",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -985,7 +985,7 @@
   },
   {
     "ea": "0x58B508",
-    "line": "call    eax",
+    "line": "call    eax; Verified ID registration: changed/evaluated ID trait reaches owning Menu::AttachTileByID through vtable +4. For DialogMenu, 0x59D8F0 binds only recognized vanilla IDs; custom48 ignored. Reusing a vanilla ID can overwrite corresponding bound tile pointer.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1057,7 +1057,7 @@
   },
   {
     "ea": "0x58B51E",
-    "line": "or      dword ptr [edi+2Ch], 4",
+    "line": "or      dword ptr [edi+2Ch], 4; Verified: visible/other visibility trait update sets Tile dirty flag 4 at +0x2C. This branch does not clear InterfaceManager focus. Render cull flag is applied by 0x58E870 later.",
     "mnemonic": "or",
     "size": 4
   },
@@ -1195,7 +1195,7 @@
   },
   {
     "ea": "0x58B565",
-    "line": "fld     [esp+0Ch+arg_4]",
+    "line": "fld     [esp+0Ch+value]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1207,7 +1207,7 @@
   },
   {
     "ea": "0x58B56B",
-    "line": "fstp    [esp+0Ch+arg_4]",
+    "line": "fstp    [esp+0Ch+value]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1339,7 +1339,7 @@
   },
   {
     "ea": "0x58B5A4",
-    "line": "fstp    [esp+0Ch+arg_0]",
+    "line": "fstp    [esp+0Ch+trait]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1351,7 +1351,7 @@
   },
   {
     "ea": "0x58B5AA",
-    "line": "fcomp   [esp+0Ch+arg_0]",
+    "line": "fcomp   [esp+0Ch+trait]",
     "mnemonic": "fcomp",
     "size": 4
   },
@@ -1447,25 +1447,25 @@
   },
   {
     "ea": "0x58B5D4",
-    "line": "fst     [esp+0Ch+arg_0]",
+    "line": "fst     [esp+0Ch+trait]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x58B5D8",
-    "line": "fld     [esp+0Ch+arg_0]",
+    "line": "fld     [esp+0Ch+trait]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x58B5DC",
-    "line": "fadd    [esp+0Ch+arg_4]",
+    "line": "fadd    [esp+0Ch+value]",
     "mnemonic": "fadd",
     "size": 4
   },
   {
     "ea": "0x58B5E0",
-    "line": "fstp    [esp+0Ch+arg_4]",
+    "line": "fstp    [esp+0Ch+value]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1621,7 +1621,7 @@
   },
   {
     "ea": "0x58B61F",
-    "line": "fld     [esp+0Ch+arg_4]",
+    "line": "fld     [esp+0Ch+value]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1657,7 +1657,7 @@
   },
   {
     "ea": "0x58B62F",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1681,7 +1681,7 @@
   },
   {
     "ea": "0x58B63C",
-    "line": "fstp    [esp+0Ch+arg_0]",
+    "line": "fstp    [esp+0Ch+trait]",
     "mnemonic": "fstp",
     "size": 4
   },

@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x49CC23",
-    "line": "cmp     eax, offset dword_B35ACC",
+    "line": "cmp     eax, offset stru_B35ACC",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -445,19 +445,19 @@
   },
   {
     "ea": "0x49CCB8",
-    "line": "push    edx; a2",
+    "line": "push    edx; plane",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x49CCB9",
-    "line": "lea     ecx, [ebx+20h]; this",
+    "line": "lea     ecx, [ebx+20h]; self",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x49CCBC",
-    "line": "call    sub_47DA70",
+    "line": "call    NiBound_ClassifyAgainstPlane",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,19 +475,19 @@
   },
   {
     "ea": "0x49CCC6",
-    "line": "push    ebx; a2",
+    "line": "push    ebx; object",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x49CCC7",
-    "line": "mov     ecx, ebp; this",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x49CCC9",
-    "line": "call    NiCullingProcess_Culling?",
+    "line": "call    NiCullingProcess_CullBoundAndDispatch; Oblivion NiCullingProcess process-cull entry for native scene traversal.",
     "mnemonic": "call",
     "size": 5
   },

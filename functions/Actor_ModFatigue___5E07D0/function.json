@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
-  "callers_count": 6,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 7,
+  "chunks": [
+    [
+      "0x5E07D0",
+      "0x5E0857"
+    ]
+  ],
+  "chunks_sha256": "4ff9ea268dbeb383aff04c80a8591d323209c9fb2aa82c037529d1b6d39be906",
+  "comment_regular": "Applies only a negative Fatigue delta. Requires the actor AV path, reads Fatigue AV 0x0A, clamps damage so Fatigue cannot fall below zero, then calls the actor DamageAV float virtual. Nonnegative deltas and actors with no positive Fatigue are ignored.",
+  "comment_repeatable": "Applies only a negative Fatigue delta. Requires the actor AV path, reads Fatigue AV 0x0A, clamps damage so Fatigue cannot fall below zero, then calls the actor DamageAV float virtual. Nonnegative deltas and actors with no positive Fatigue are ignored.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "Actor_ModFatigue?",
+  "display_name": "Actor_ApplyNegativeFatigueDeltaClamped",
   "end_ea": "0x5E0857",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "Actor_ModFatigue?",
+  "name": "Actor_ApplyNegativeFatigueDeltaClamped",
   "segment": ".text",
   "sha256": "4ff9ea268dbeb383aff04c80a8591d323209c9fb2aa82c037529d1b6d39be906",
   "size": 135,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5E07D0",
-  "type": "void __thiscall(void *this, float)",
+  "total_chunk_size": 135,
+  "type": "void __thiscall(Actor *this, float delta)",
   "xrefs_from_count": 55,
   "xrefs_to_count": 7
 }

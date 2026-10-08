@@ -1,19 +1,36 @@
 {
-  "callees_count": 15,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_4ED320",
+  "chunks": [
+    [
+      "0x4ED320",
+      "0x4ED42E"
+    ],
+    [
+      "0x9CA420",
+      "0x9CA446"
+    ]
+  ],
+  "chunks_sha256": "b437ffa9aacb61a681643beb3c5cd1601c6ccdb07a52eb7e82c6f754fba5ed72",
+  "comment_regular": "Verified BuildMesh scheduling: allocates a TerrainLODQuadLoadTask with priority 3 and the current quad-data context; passes the worldspace filename key and quad tile coordinates, then queues the task.",
+  "comment_repeatable": "Verified BuildMesh scheduling: allocates a TerrainLODQuadLoadTask with priority 3 and the current quad-data context; passes the worldspace filename key and quad tile coordinates, then queues the task.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "TESTerrainLODQuad_BuildMesh",
   "end_ea": "0x4ED42E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4ED320",
+  "name": "TESTerrainLODQuad_BuildMesh",
   "segment": ".text",
   "sha256": "ddbaccb416b8a1ea4a6d38f91fdb260a8ff4ee36183bba83bc923c94b63557a8",
   "size": 270,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4ED320",
-  "type": "char __thiscall(int *this)",
-  "xrefs_from_count": 109,
+  "total_chunk_size": 308,
+  "type": "char __thiscall(TESTerrainLODQuad_OblivionComplete_060 *this)",
+  "xrefs_from_count": 123,
   "xrefs_to_count": 1
 }

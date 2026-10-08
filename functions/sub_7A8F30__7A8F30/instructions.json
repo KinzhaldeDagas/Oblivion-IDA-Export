@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A8F30",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; OBLIVION AUTHORITY (2026-08-30): Pushes one {primaryLeaf, matchedLeaf} SLodEntry into CLeafLodEngine::m_vPairs, using in-place construction or the insert-one growth path.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -115,13 +115,13 @@
   },
   {
     "ea": "0x7A8F5A",
-    "line": "mov     ecx, [esp+10h+arg_0]",
+    "line": "mov     ecx, [esp+10h+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A8F5E",
-    "line": "mov     edx, [esp+10h+arg_0]",
+    "line": "mov     edx, [esp+10h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -133,13 +133,13 @@
   },
   {
     "ea": "0x7A8F65",
-    "line": "mov     byte ptr [esp+10h+var_8], 0",
+    "line": "mov     byte ptr [esp+10h+result.owner], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x7A8F6A",
-    "line": "mov     eax, [esp+10h+var_8]",
+    "line": "mov     eax, [esp+10h+result.owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -163,25 +163,25 @@
   },
   {
     "ea": "0x7A8F71",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A8F72",
-    "line": "push    1",
+    "line": "push    1; count",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7A8F74",
-    "line": "push    edi",
+    "line": "push    edi; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A8F75",
-    "line": "call    sub_7A8720",
+    "line": "call    OB_LeafLodEntry_UninitializedFillN_010201A0; OBLIVION AUTHORITY (2026-08-30): Placement-fills count uninitialized 8-byte SLodEntry slots from one source pair.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,13 +253,13 @@
   },
   {
     "ea": "0x7A8F97",
-    "line": "mov     eax, [esp+10h+arg_0]",
+    "line": "mov     eax, [esp+10h+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A8F9B",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -271,31 +271,31 @@
   },
   {
     "ea": "0x7A8F9D",
-    "line": "push    esi",
+    "line": "push    esi; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A8F9E",
-    "line": "lea     ecx, [esp+1Ch+var_8]",
+    "line": "lea     ecx, [esp+1Ch+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A8FA2",
-    "line": "push    ecx",
+    "line": "push    ecx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A8FA3",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A8FA5",
-    "line": "call    sub_7A8D90",
+    "line": "call    OB_stVectorLeafLodEntry_InsertOne_010201A0; OBLIVION AUTHORITY (2026-08-30): Inserts one SLodEntry at a debug vector iterator and returns the relocated iterator.",
     "mnemonic": "call",
     "size": 5
   },

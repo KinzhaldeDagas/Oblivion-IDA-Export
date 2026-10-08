@@ -1,5 +1,5 @@
 // attributes: thunk
-int __cdecl j_CRT_strcmp(char *a1, char *a2)
+int __cdecl j_CRT_strcmp(const char *left, const char *right)
 {
-  return _strcmp(a1, a2);
+  return CRT_StricmpLocaleDispatch(left, right);
 }

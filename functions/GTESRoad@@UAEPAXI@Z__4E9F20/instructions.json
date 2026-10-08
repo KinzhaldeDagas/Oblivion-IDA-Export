@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x4E9F23",
-    "line": "call    ??1TESRoad@@UAE@XZ; TESRoad::~TESRoad(void)",
+    "line": "call    TESRoad_dtor; Verified TESRoad destructor calls TESRoad_ClearConnectedPointMap, destroys the connected-point map at +0x1C, then runs TESForm destruction. TESWorldSpace owns/releases the TESRoad pointer at WorldSpace+0x54.",
     "mnemonic": "call",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x4E9F30",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

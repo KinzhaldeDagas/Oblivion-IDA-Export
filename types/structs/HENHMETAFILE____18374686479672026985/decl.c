@@ -1,1 +1,4 @@
-HENHMETAFILE__
+struct HENHMETAFILE__
+{
+int unused;
+};

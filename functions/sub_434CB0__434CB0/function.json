@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 10,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x434CB0",
+      "0x434D37"
+    ]
+  ],
+  "chunks_sha256": "d30abce4c8ce0eadef4c1b400d2c1b91e5a2735f3cdaf481e043984e12a8523d",
+  "comment_regular": "QueuedFileEntry archive lookup helper. Hashes copied path at +0x20 and stores resolved archive/file entry pointer at +0x24.",
+  "comment_repeatable": "QueuedFileEntry archive lookup helper. Hashes copied path at +0x20 and stores resolved archive/file entry pointer at +0x24.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
   "display_name": "sub_434CB0",
   "end_ea": "0x434D37",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_434CB0",
   "segment": ".text",
   "sha256": "d30abce4c8ce0eadef4c1b400d2c1b91e5a2735f3cdaf481e043984e12a8523d",
   "size": 135,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x434CB0",
-  "type": "char *__thiscall(int **this, int, char)",
+  "total_chunk_size": 135,
+  "type": "char *__thiscall(char **this, int, char)",
   "xrefs_from_count": 49,
   "xrefs_to_count": 10
 }

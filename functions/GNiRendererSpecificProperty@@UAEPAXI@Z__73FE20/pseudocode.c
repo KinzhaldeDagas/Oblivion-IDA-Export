@@ -2,9 +2,9 @@ NiRendererSpecificProperty *__thiscall NiRendererSpecificProperty::`scalar delet
         NiRendererSpecificProperty *this,
         char a2)
 {
-  *(_DWORD *)this = &NiRendererSpecificProperty::`vftable';
-  NiDitherProperty::~NiDitherProperty(this);
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  *(_DWORD *)this = &NiRendererSpecificProperty::`vftable'; /*0x73fe23*/
+  NiDitherProperty::~NiDitherProperty(this); /*0x73fe29*/
+  if ( (a2 & 1) != 0 ) /*0x73fe33*/
+    FormHeapFree((unsigned int)this); /*0x73fe36*/
+  return this; /*0x73fe40*/
 }

@@ -1,1 +1,1 @@
-PSecHandle
+typedef _SecHandle *PSecHandle;

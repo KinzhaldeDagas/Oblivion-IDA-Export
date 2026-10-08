@@ -1,8 +1,9 @@
-float *__thiscall sub_5E6A40(Actor *this, float *a2)
+// ODismemberment combat decode: returns a local-space weapon/reach point for hit visuals. Uses actor GetNiNode, equipped weapon combat distance, named weapon node lookup, and native transform helpers. Attack tail passes this as one of Actor_HandleHitVisualEffects' vector inputs.
+float *__thiscall Actor_GetWeaponTipLocalPointForHit(Actor *this, float *a2)
 {
   NiNode *v3; // edi
-  int v5; // edx
-  float v6; // ecx
+  float y; // edx
+  float z; // ecx
   EntryData *v7; // eax
   double CombatDistance; // st7
   int v9; // esi
@@ -11,37 +12,37 @@ float *__thiscall sub_5E6A40(Actor *this, float *a2)
   float v12; // [esp+10h] [ebp-84h]
   float v13[3]; // [esp+14h] [ebp-80h] BYREF
   NiPoint3 v14; // [esp+20h] [ebp-74h] BYREF
-  NiTransform v15; // [esp+2Ch] [ebp-68h] BYREF
-  NiTransform v16; // [esp+60h] [ebp-34h] BYREF
+  NiTransform parent; // [esp+2Ch] [ebp-68h] BYREF
+  NiTransform out; // [esp+60h] [ebp-34h] BYREF
 
-  v3 = this->vtbl->super.super.GetNiNode(this);
+  v3 = this->vtbl->super.super.GetNiNode(this); /*0x5e6a54*/
   if ( v3
     && ((v7 = this->members.super.process->GetEquippedWeaponData(this->members.super.process, 1)) == 0
       ? (CombatDistance = 0.0)
       : (CombatDistance = Calc_GetCombatDistance(*(float *)&v7->type[6].member.flags)),
         (v9 = NiObjectNET_LookupObjectByName(v3, off_B0655C[0])) != 0) )
   {
-    sub_718A80((float *)&v3->members.super.m_worldTransform, (float *)&v15);
-    sub_53D7A0(&v15, &v16, (NiTransform *)(v9 + 0x64));
-    v14.x = 0.0;
-    v12 = CombatDistance;
-    v14.y = v12;
-    v14.z = 0.0;
-    sub_53D4B0(&v16, v13, &v14);
-    v10 = v13[1];
-    *a2 = v13[0];
-    v11 = v13[2];
-    a2[1] = v10;
-    a2[2] = v11;
-    return a2;
+    sub_718A80((float *)&v3->members.super.m_worldTransform, &parent); /*0x5e6adc*/
+    NiTransform_Compose(&parent, &out, (const NiTransform *)(v9 + 0x64)); /*0x5e6aee*/
+    v14.x = 0.0; /*0x5e6af5*/
+    v12 = CombatDistance; /*0x5e6ac0*/
+    v14.y = v12; /*0x5e6b02*/
+    v14.z = 0.0; /*0x5e6b0f*/
+    NiTransform_TransformPoint(&out, v13, &v14); /*0x5e6b13*/
+    v10 = v13[1]; /*0x5e6b23*/
+    *a2 = v13[0]; /*0x5e6b27*/
+    v11 = v13[2]; /*0x5e6b29*/
+    a2[1] = v10; /*0x5e6b2e*/
+    a2[2] = v11; /*0x5e6b31*/
+    return a2; /*0x5e6b18*/
   }
   else
   {
-    v5 = *((_DWORD *)&Vector3_InitValue_ + 1);
-    *a2 = Vector3_InitValue_;
-    v6 = dword_B3F9B0;
-    *((_DWORD *)a2 + 1) = v5;
-    a2[2] = v6;
-    return a2;
+    y = g_zeroNiPoint3.y; /*0x5e6a67*/
+    *a2 = g_zeroNiPoint3.x; /*0x5e6a6d*/
+    z = g_zeroNiPoint3.z; /*0x5e6a6f*/
+    a2[1] = y; /*0x5e6a76*/
+    a2[2] = z; /*0x5e6a79*/
+    return a2; /*0x5e6a5a*/
   }
 }

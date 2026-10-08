@@ -9,7 +9,7 @@
 0x67BED0: mov     eax, [esi+4]
 0x67BED3: mov     edi, [eax+4]
 0x67BED6: push    eax
-0x67BED7: call    FormHeapFree
+0x67BED7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x67BEDC: add     esp, 4
 0x67BEDF: test    edi, edi
 0x67BEE1: mov     [esi+4], edi
@@ -18,7 +18,7 @@
 0x67BEE7: mov     dword ptr [esi], 0
 0x67BEED: mov     eax, [ebx]
 0x67BEEF: push    eax
-0x67BEF0: call    FormHeapFree
+0x67BEF0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x67BEF5: add     esp, 4
 0x67BEF8: pop     esi
 0x67BEF9: pop     ebx

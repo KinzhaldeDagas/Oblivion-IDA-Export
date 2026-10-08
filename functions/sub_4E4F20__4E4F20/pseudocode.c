@@ -1,28 +1,29 @@
-void __thiscall sub_4E4F20(_DWORD *this)
+// Verified PGRI teardown: for each record, read its local point index, get the local TESPathGridPoint, then remove the connection to the remote point position stored at record+4; finally the PGRI list records are freed by TESPathGrid_ClearPGRIRecords.
+void __thiscall TESPathGrid_RemovePGRICrossCellConnections(TESPathGrid *this)
 {
-  unsigned __int16 **v2; // esi
+  BSSimpleList_VoidPtr *p_PGRIRecords; // esi
   unsigned __int16 v3; // ax
-  int *v4; // ecx
+  TESPathGridPoint *v4; // ecx
 
-  if ( *(this + 9) )
+  if ( this->pointArray ) /*0x4e4f23*/
   {
-    v2 = (unsigned __int16 **)(this + 0xA);
-    if ( this != (_DWORD *)0xFFFFFFD8 )
+    p_PGRIRecords = &this->PGRIRecords; /*0x4e4f2a*/
+    if ( this != (TESPathGrid *)0xFFFFFFD8 ) /*0x4e4f2f*/
     {
-      do
+      do /*0x4e4f65*/
       {
-        if ( !v2[1] && !*v2 )
-          break;
-        v3 = **v2;
-        if ( v3 < *((_WORD *)this + 0x18) )
+        if ( !p_PGRIRecords->firstNode.next && !p_PGRIRecords->firstNode.data ) /*0x4e4f37*/
+          break; /*0x4e4f3a*/
+        v3 = *(_WORD *)p_PGRIRecords->firstNode.data; /*0x4e4f3e*/
+        if ( v3 < this->pointCount ) /*0x4e4f45*/
         {
-          v4 = *(int **)(*(_DWORD *)(*(this + 9) + 4) + 4 * v3);
-          if ( v4 )
-            sub_4E7FB0(v4, (int)(*v2 + 2));
+          v4 = this->pointArray->data[v3]; /*0x4e4f50*/
+          if ( v4 ) /*0x4e4f55*/
+            TESPathGridPoint_RemoveNeighborAtPosition(v4, (const NiPoint3 *)((char *)p_PGRIRecords->firstNode.data + 4)); /*0x4e4f5b*/
         }
-        v2 = (unsigned __int16 **)v2[1];
+        p_PGRIRecords = (BSSimpleList_VoidPtr *)p_PGRIRecords->firstNode.next; /*0x4e4f60*/
       }
-      while ( v2 );
+      while ( p_PGRIRecords ); /*0x4e4f65*/
     }
   }
 }

@@ -12,7 +12,6 @@
 0x57D002: mov     edi, [esp+14h+arg_0]
 0x57D006: mov     ebp, 3E9h
 0x57D00B: jmp     short loc_57D014
-0x57D00D: align 10h
 0x57D010: mov     esi, [esp+14h+var_4]
 0x57D014: test    al, al
 0x57D016: jnz     loc_57D0A9

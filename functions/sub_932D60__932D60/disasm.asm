@@ -137,7 +137,6 @@
 0x932F01: jnz     short loc_932EC0
 0x932F03: mov     byte ptr [esp+854h+var_844], 1
 0x932F08: jmp     short loc_932F10
-0x932F0A: align 10h
 0x932F10: mov     eax, [esp+854h+arg_C]
 0x932F17: mov     ecx, [esp+854h+arg_4]
 0x932F1E: lea     edx, [esp+854h+var_820]

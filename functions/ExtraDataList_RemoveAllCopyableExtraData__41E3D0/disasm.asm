@@ -3,7 +3,7 @@
 0x41E3D2: push    edi
 0x41E3D3: mov     edi, ecx
 0x41E3D5: push    offset aExtradatalistR; lpCriticalSection
-0x41E3DA: mov     ecx, offset BSExtraDataCS
+0x41E3DA: mov     ecx, 0B33800h
 0x41E3DF: call    NiEnterCriticalSection
 0x41E3E4: mov     esi, [edi+4]
 0x41E3E7: xor     ebp, ebp
@@ -39,7 +39,7 @@
 0x41E429: push    edi
 0x41E42A: call    sub_41DE50
 0x41E42F: add     esp, 4
-0x41E432: mov     ecx, offset BSExtraDataCS; lpCriticalSection
+0x41E432: mov     ecx, 0B33800h; lpCriticalSection
 0x41E437: call    NiLeaveCriticalSection_0
 0x41E43C: pop     edi
 0x41E43D: pop     esi

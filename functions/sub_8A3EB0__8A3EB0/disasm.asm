@@ -12,7 +12,7 @@
 0x8A3ECC: mov     esi, [ebp+arg_0]
 0x8A3ECF: test    esi, esi
 0x8A3ED1: push    edi
-0x8A3ED2: mov     dword ptr [esp+40h+var_24], esi
+0x8A3ED2: mov     [esp+40h+var_24], esi
 0x8A3ED6: mov     [esp+40h+var_28], eax
 0x8A3EDA: jz      loc_8A3FDA
 0x8A3EE0: mov     edx, [esi]
@@ -42,7 +42,7 @@
 0x8A3F23: add     esp, 0Ch
 0x8A3F26: cmp     eax, esi
 0x8A3F28: ja      short loc_8A3F04
-0x8A3F2A: mov     esi, dword ptr [esp+40h+var_24]
+0x8A3F2A: mov     esi, [esp+40h+var_24]
 0x8A3F2E: mov     esi, [esi+0A8h]
 0x8A3F34: test    esi, esi
 0x8A3F36: jz      loc_8A3FDA
@@ -53,7 +53,7 @@
 0x8A3F45: test    eax, eax
 0x8A3F47: jz      short loc_8A3F62
 0x8A3F49: lea     esp, [esp+0]
-0x8A3F50: cmp     eax, offset dword_BA7D24
+0x8A3F50: cmp     eax, 0BA7D24h
 0x8A3F55: jz      loc_8A3FEC
 0x8A3F5B: mov     eax, [eax+4]
 0x8A3F5E: test    eax, eax
@@ -66,7 +66,7 @@
 0x8A3F6C: mov     esi, [eax+10h]
 0x8A3F6F: mov     ecx, esi
 0x8A3F71: call    sub_535AC0
-0x8A3F76: fstp    dword ptr [esp+40h+var_24]
+0x8A3F76: fstp    [esp+40h+var_24]
 0x8A3F7A: mov     eax, [esi]
 0x8A3F7C: mov     edx, [eax+0A8h]
 0x8A3F82: lea     ecx, [esp+40h+var_24+4]
@@ -76,7 +76,7 @@
 0x8A3F8B: mov     eax, [esp+40h+var_28]
 0x8A3F8F: fld     dword ptr [eax]
 0x8A3F91: xorps   xmm0, xmm0
-0x8A3F94: fld     dword ptr [esp+40h+var_24]
+0x8A3F94: fld     [esp+40h+var_24]
 0x8A3F98: fld     st
 0x8A3F9A: faddp   st(2), st
 0x8A3F9C: fxch    st(1)
@@ -92,7 +92,7 @@
 0x8A3FC2: shufps  xmm0, xmm0, 0
 0x8A3FC6: subps   xmm1, xmm0
 0x8A3FC9: mulps   xmm1, xmm2
-0x8A3FCC: movaps  xmm2, [esp+40h+var_24+4]
+0x8A3FCC: movaps  xmm2, xmmword ptr [esp+40h+var_24+4]
 0x8A3FD1: mulps   xmm2, xmm0
 0x8A3FD4: addps   xmm1, xmm2
 0x8A3FD7: movaps  xmmword ptr [ebx], xmm1

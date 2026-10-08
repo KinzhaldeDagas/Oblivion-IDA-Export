@@ -23,7 +23,7 @@
 0x6A6E1B: call    edx
 0x6A6E1D: mov     edi, eax
 0x6A6E1F: mov     ecx, edi; this
-0x6A6E21: call    TESObjectREFR_GetParentCell
+0x6A6E21: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6A6E26: mov     ecx, edi; this
 0x6A6E28: mov     ebx, eax
 0x6A6E2A: call    sub_4D8B90
@@ -31,8 +31,8 @@
 0x6A6E31: jz      loc_6A6F54
 0x6A6E37: test    ebx, ebx
 0x6A6E39: jz      short loc_6A6E4A
-0x6A6E3B: mov     ecx, ebx
-0x6A6E3D: call    sub_4C9820
+0x6A6E3B: mov     ecx, ebx; this
+0x6A6E3D: call    TESObjectCELL_HasFlag80
 0x6A6E42: test    al, al
 0x6A6E44: jnz     loc_6A6F54
 0x6A6E4A: push    0
@@ -40,7 +40,7 @@
 0x6A6E4E: call    sub_6A6920
 0x6A6E53: cmp     edi, ds:0B333C4h
 0x6A6E59: jnz     SunDamageEffect_Update___Done_
-0x6A6E5F: mov     ecx, offset fMagicSunDamagePainInitialDelay
+0x6A6E5F: mov     ecx, (offset flt_B37ED0+108h)
 0x6A6E64: call    GameSetting_GetSafeFloatPointer
 0x6A6E69: fld     dword ptr [eax]
 0x6A6E6B: fstp    dword ptr ds:0B15EB0h
@@ -50,7 +50,7 @@
 0x6A6E78: test    ah, 5
 0x6A6E7B: jp      SunDamageEffect_Update___Done_
 0x6A6E81: fld     dword ptr [esi+38h]
-0x6A6E84: mov     ecx, offset fMagicSunDamageScreenGlowRateDown
+0x6A6E84: mov     ecx, (offset flt_B37ED0+0F8h)
 0x6A6E89: fstp    [esp+18h+var_8]
 0x6A6E8D: call    GameSetting_GetSafeFloatPointer
 0x6A6E92: fld     dword ptr [eax]
@@ -99,10 +99,10 @@
 0x6A6F30: fld     [esp+28h+arg_0]
 0x6A6F34: fstp    [esp+28h+var_24]; float
 0x6A6F38: fld     dword ptr ds:0B06D4Ch
-0x6A6F3E: fstp    [esp+28h+var_28]; float
+0x6A6F3E: fstp    [esp+28h+b]; float
 0x6A6F41: push    ecx; int
 0x6A6F42: push    edx; int
-0x6A6F43: call    sub_7B4830
+0x6A6F43: call    sub_7B4830; MoonSugarEffect decode: writes BlurShader globals (blend type, pass count, radius, alpha, tex size). Called by WinMain defaults, SetImageSpaceGlow, and SunDamage paths.
 0x6A6F48: add     esp, 18h
 0x6A6F4B: pop     edi
 0x6A6F4C: pop     ebx
@@ -156,13 +156,13 @@
 0x6A6FE4: push    1
 0x6A6FE6: push    1
 0x6A6FE8: call    Actor_PlayPainFX
-0x6A6FED: mov     ecx, offset fMagicSunDamagePainTimer
+0x6A6FED: mov     ecx, (offset flt_B37ED0+100h)
 0x6A6FF2: jmp     short loc_6A7006
 0x6A6FF4: fcomp   qword ptr ds:0A3A5B0h
 0x6A6FFA: fnstsw  ax
 0x6A6FFC: test    ah, 44h
 0x6A6FFF: jp      short loc_6A7013
-0x6A7001: mov     ecx, offset fMagicSunDamagePainInitialDelay
+0x6A7001: mov     ecx, (offset flt_B37ED0+108h)
 0x6A7006: call    GameSetting_GetSafeFloatPointer
 0x6A700B: fld     dword ptr [eax]
 0x6A700D: fstp    dword ptr ds:0B15EB0h
@@ -178,9 +178,9 @@
 0x6A7034: test    ecx, ecx
 0x6A7036: jz      short loc_6A704B
 0x6A7038: sub     esp, 8
-0x6A703B: fstp    [esp+2Ch+var_28]; float
+0x6A703B: fstp    [esp+2Ch+b]; float
 0x6A703F: fld1
-0x6A7041: fstp    [esp+2Ch+var_2C]; float
+0x6A7041: fstp    [esp+2Ch+a]; float
 0x6A7044: push    5; int
 0x6A7046: call    sub_499100
 0x6A704B: mov     ecx, [edi+14h]
@@ -193,9 +193,9 @@
 0x6A705D: fld     dword ptr [edi+0D8h]
 0x6A7063: fstp    dword ptr [esp+2Ch+var_14]
 0x6A7067: fldz
-0x6A7069: fstp    [esp+2Ch+var_28]; float
+0x6A7069: fstp    [esp+2Ch+b]; float
 0x6A706D: fld1
-0x6A706F: fstp    [esp+2Ch+var_2C]; float
+0x6A706F: fstp    [esp+2Ch+a]; float
 0x6A7072: push    5; int
 0x6A7074: call    sub_499100
 0x6A7079: fld     dword ptr [esp+24h+var_14]
@@ -223,7 +223,7 @@
 0x6A70BA: fstp    st(1)
 0x6A70BC: test    ah, 41h
 0x6A70BF: jnz     loc_6A716E
-0x6A70C5: mov     ecx, offset fMagicSunDamageScreenGlowRateUp
+0x6A70C5: mov     ecx, (offset flt_B37ED0+0F0h)
 0x6A70CA: fstp    st
 0x6A70CC: call    GameSetting_GetSafeFloatPointer
 0x6A70D1: fld     dword ptr [esp+24h+var_8]
@@ -232,10 +232,10 @@
 0x6A70DA: fadd    dword ptr [esi+38h]
 0x6A70DD: fstp    dword ptr [esp+2Ch+var_8]
 0x6A70E1: fld     dword ptr [esp+2Ch+var_8]
-0x6A70E5: fstp    [esp+2Ch+var_28]; float
+0x6A70E5: fstp    [esp+2Ch+b]; b
 0x6A70E9: fld     [esp+2Ch+var_18]
-0x6A70ED: fstp    [esp+2Ch+var_2C]; float
-0x6A70F0: call    sub_4AC760
+0x6A70ED: fstp    [esp+2Ch+a]; a
+0x6A70F0: call    Float_Min; Returns min(a,b) as a single-precision float. Native callers push two floats, clean 8 bytes, and consume ST0 as float; prior double return was an x87 decompiler artifact.
 0x6A70F5: fstp    dword ptr [esp+2Ch+var_8]
 0x6A70F9: add     esp, 8
 0x6A70FC: fld     dword ptr [esp+24h+var_8]
@@ -246,9 +246,9 @@
 0x6A7112: sub     esp, 8
 0x6A7115: fstp    dword ptr [esp+2Ch+var_8]
 0x6A7119: fld     dword ptr [esp+2Ch+var_8]
-0x6A711D: fstp    [esp+2Ch+var_28]; float
+0x6A711D: fstp    [esp+2Ch+b]; float
 0x6A7121: fld1
-0x6A7123: fstp    [esp+2Ch+var_2C]; float
+0x6A7123: fstp    [esp+2Ch+a]; float
 0x6A7126: call    Min_Float
 0x6A712B: fstp    dword ptr ds:0B2C7A4h
 0x6A7131: add     esp, 8
@@ -264,7 +264,7 @@
 0x6A714C: sub     esp, 0Ch
 0x6A714F: fstp    dword ptr [esp+34h+var_8]
 0x6A7153: fld     dword ptr [esp+34h+var_8]
-0x6A7157: fstp    [esp+34h+var_2C]
+0x6A7157: fstp    [esp+34h+a]
 0x6A715B: fmul    dword ptr ds:0B06D5Ch
 0x6A7161: fstp    dword ptr [esp+34h+var_8]
 0x6A7165: fld     dword ptr [esp+34h+var_8]
@@ -275,7 +275,7 @@
 0x6A7175: test    ah, 41h
 0x6A7178: jnz     SunDamageEffect_Update___Done_
 0x6A717E: fld     dword ptr [esi+38h]
-0x6A7181: mov     ecx, offset fMagicSunDamageScreenGlowRateDown
+0x6A7181: mov     ecx, (offset flt_B37ED0+0F8h)
 0x6A7186: fstp    [esp+24h+var_14]
 0x6A718A: call    GameSetting_GetSafeFloatPointer
 0x6A718F: fld     dword ptr [eax]
@@ -284,9 +284,9 @@
 0x6A7198: fsubr   [esp+2Ch+var_14]
 0x6A719C: fstp    dword ptr [esp+2Ch+var_8]
 0x6A71A0: fld     dword ptr [esp+2Ch+var_8]
-0x6A71A4: fstp    [esp+2Ch+var_28]; float
+0x6A71A4: fstp    [esp+2Ch+b]; float
 0x6A71A8: fld     [esp+2Ch+var_18]
-0x6A71AC: fstp    [esp+2Ch+var_2C]; float
+0x6A71AC: fstp    [esp+2Ch+a]; float
 0x6A71AF: call    Min_Float
 0x6A71B4: fstp    dword ptr [esp+2Ch+var_8]
 0x6A71B8: add     esp, 8
@@ -298,9 +298,9 @@
 0x6A71D1: sub     esp, 8
 0x6A71D4: fstp    dword ptr [esp+2Ch+var_8]
 0x6A71D8: fld     dword ptr [esp+2Ch+var_8]
-0x6A71DC: fstp    [esp+2Ch+var_28]; float
+0x6A71DC: fstp    [esp+2Ch+b]; float
 0x6A71E0: fld1
-0x6A71E2: fstp    [esp+2Ch+var_2C]; float
+0x6A71E2: fstp    [esp+2Ch+a]; float
 0x6A71E5: call    Min_Float
 0x6A71EA: fstp    dword ptr ds:0B2C7A4h
 0x6A71F0: add     esp, 8
@@ -316,7 +316,7 @@
 0x6A720B: sub     esp, 0Ch
 0x6A720E: fstp    dword ptr [esp+34h+var_8]
 0x6A7212: fld     dword ptr [esp+34h+var_8]
-0x6A7216: fstp    [esp+34h+var_2C]; float
+0x6A7216: fstp    [esp+34h+a]; float
 0x6A721A: fmul    dword ptr ds:0B06D5Ch
 0x6A7220: fstp    dword ptr [esp+34h+var_8]
 0x6A7224: fld     dword ptr [esp+34h+var_8]
@@ -327,5 +327,5 @@
 0x6A723D: fstp    [esp+34h+var_34]; float
 0x6A7240: push    edx; int
 0x6A7241: push    eax; int
-0x6A7242: call    sub_7B4830
+0x6A7242: call    sub_7B4830; MoonSugarEffect decode: writes BlurShader globals (blend type, pass count, radius, alpha, tex size). Called by WinMain defaults, SetImageSpaceGlow, and SunDamage paths.
 0x6A7247: add     esp, 18h

@@ -1,4 +1,7 @@
-BSStringT *sub_A11640()
+NiRTTI *sub_A11640()
 {
-  return sub_70E220((BSStringT *)dword_B46058, "ParticleShaderProperty", (int)dword_B46000);
+  return NiRTTI_Constructor( /*0xa11654*/
+           (NiRTTI *)&OB_ShaderConstantStorage_010201A0[0x91],
+           "ParticleShaderProperty",
+           (NiRTTI *)&OB_ShaderConstantStorage_010201A0[0x7B]);
 }

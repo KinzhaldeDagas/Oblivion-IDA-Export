@@ -1,1 +1,1 @@
-NiD3DShaderConstantManager
+struct NiD3DShaderConstantManager;

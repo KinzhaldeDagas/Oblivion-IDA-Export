@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x78ED50",
-    "line": "test    byte ptr [esp+arg_0], 1",
+    "line": "test    byte ptr [esp+flags], 1; Oblivion CIdvCamera scalar deleting destructor. Restores the base vftable and frees the object through FormHeap only when flags bit 0 is set.",
     "mnemonic": "test",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x78ED61",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

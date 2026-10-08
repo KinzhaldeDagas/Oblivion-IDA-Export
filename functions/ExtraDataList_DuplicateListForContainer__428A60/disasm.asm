@@ -2,7 +2,7 @@
 0x428A61: push    edi
 0x428A62: mov     edi, ecx
 0x428A64: push    offset aExtradatalistD; lpCriticalSection
-0x428A69: mov     ecx, offset BSExtraDataCS
+0x428A69: mov     ecx, 0B33800h
 0x428A6E: call    NiEnterCriticalSection
 0x428A73: mov     eax, [esp+8+arg_0]
 0x428A77: mov     esi, [eax+4]
@@ -17,11 +17,11 @@
 0x428A93: jmp     ds:jpt_428A93[ecx*4]; switch jump
 0x428A9A: push    esi; jumptable 00428A93 cases 18,27,28,34,39-47,54,55,72,80,85
 0x428A9B: mov     ecx, edi
-0x428A9D: call    ExtraDataList_CopyBSExtraData
+0x428A9D: call    ExtraDataList_CopyBSExtraData; Verified extra-data copy lifecycle for ownership state: the copy dispatcher handles kExtraData_Ownership, kExtraData_Global, and kExtraData_Rank through their typed setters, creating/updating separate ExtraOwnership, ExtraGlobal, and ExtraRank payloads rather than sharing the source node.
 0x428AA2: mov     esi, [esi+8]; jumptable 00428A93 default case, cases 19-26,29-33,35-38,48-53,56-71,73-79,81-84
 0x428AA5: test    esi, esi
 0x428AA7: jnz     short loc_428A80
-0x428AA9: mov     ecx, offset BSExtraDataCS; lpCriticalSection
+0x428AA9: mov     ecx, 0B33800h; lpCriticalSection
 0x428AAE: call    NiLeaveCriticalSection_0
 0x428AB3: pop     edi
 0x428AB4: pop     esi

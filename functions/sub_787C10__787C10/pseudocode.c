@@ -1,22 +1,23 @@
-int __thiscall sub_787C10(_DWORD *this, float a2)
+// Maps normalized/current tree LOD to an Oblivion discrete branch LOD; -1.0 selects instance or base-tree current LOD.
+unsigned __int16 __thiscall CSpeedTreeRT__GetDiscreteBranchLodLevel(OB_CSpeedTreeRT_010201A0 *this, float lod)
 {
-  int v2; // eax
-  double v3; // st7
-  int v4; // esi
-  int result; // eax
+  OB_STreeInstanceData *instanceData; // eax
+  double lodLevel; // st7
+  int branchLodCount_low; // esi
+  unsigned __int16 result; // ax
 
-  if ( flt_A30634 == a2 )
+  if ( kTerrainLODQuadRayDirectionZ == lod ) /*0x787c20*/
   {
-    v2 = *(this + 0xD);
-    if ( v2 )
-      v3 = *(float *)(v2 + 0x10);
+    instanceData = this->instanceData; /*0x787c22*/
+    if ( instanceData ) /*0x787c27*/
+      lodLevel = instanceData->lodLevel; /*0x787c29*/
     else
-      v3 = *(float *)(*this + 0x14);
-    a2 = v3;
+      lodLevel = this->treeEngine->currentLod; /*0x787c30*/
+    lod = lodLevel; /*0x787c33*/
   }
-  v4 = *(unsigned __int16 *)(*this + 0x70);
-  result = (unsigned __int16)Double_To_SInt32((1.0 - a2) * (double)v4);
-  if ( (__int16)result == v4 )
-    return (unsigned __int16)result - 1;
-  return result;
+  branchLodCount_low = LOWORD(this->treeEngine->branchLodCount); /*0x787c48*/
+  result = Double_To_SInt32((1.0 - lod) * (double)branchLodCount_low); /*0x787c56*/
+  if ( (__int16)result == branchLodCount_low ) /*0x787c64*/
+    --result; /*0x787c66*/
+  return result; /*0x787c6a*/
 }

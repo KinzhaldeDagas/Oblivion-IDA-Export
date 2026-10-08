@@ -95,3 +95,16 @@
 0x71437A: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x71437F: add     esp, 114h
 0x714385: retn
+0x9C9E00: lea     ecx, [ebp-114h]; slot
+0x9C9E06: jmp     NiPointerSlot_Release
+0x9C9E0B: mov     edx, [esp+arg_4]
+0x9C9E0F: lea     eax, [edx-118h]
+0x9C9E15: mov     ecx, [edx-11Ch]
+0x9C9E1B: xor     ecx, eax
+0x9C9E1D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C9E22: add     eax, 10h
+0x9C9E25: mov     ecx, [edx-4]
+0x9C9E28: xor     ecx, eax
+0x9C9E2A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C9E2F: mov     eax, offset stru_AF25B8
+0x9C9E34: jmp     ___CxxFrameHandler3

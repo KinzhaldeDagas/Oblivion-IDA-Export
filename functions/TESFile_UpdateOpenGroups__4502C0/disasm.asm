@@ -1,4 +1,4 @@
-0x4502C0: sub     esp, 18h
+0x4502C0: sub     esp, 18h; MEF PERF 2026-09-08: Not promoted as performance bug: open-group traversal invokes virtual hierarchy predicates and closes/creates groups with ordering side effects. Removing scans/calls without proving hierarchy and stream-position invariants would be speculative; no optimization window proposed.
 0x4502C3: push    edi
 0x4502C4: mov     edi, ecx
 0x4502C6: mov     ecx, [esp+1Ch+arg_0]
@@ -66,7 +66,7 @@
 0x450374: cmp     ecx, ds:0B05E20h
 0x45037A: jnz     short loc_4503F8
 0x45037C: push    18h; Size
-0x45037E: call    FormHeapAlloc
+0x45037E: call    FormHeapAlloc; MEF v51 bridge-stack audit confirms v44 guard: replacement CALL entry has injected return at [ESP] and pending size at [ESP+4]. Failure retargets [ESP] to the void epilogue 0x450427 and retn 4 removes size.
 0x450383: add     esp, 4
 0x450386: mov     esi, eax
 0x450388: push    esi

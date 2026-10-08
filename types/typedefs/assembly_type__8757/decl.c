@@ -1,1 +1,6 @@
-assembly_type
+enum assembly_type : __int32
+{
+APPLICATION_MANIFEST = 0x0,
+ASSEMBLY_MANIFEST = 0x1,
+ASSEMBLY_SHARED_MANIFEST = 0x2,
+};

@@ -1,34 +1,63 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "$17AC745A4F81B7EA2FEDC88B52ECD427",
+  "definition": "union $17AC745A4F81B7EA2FEDC88B52ECD427\n{\n$7C8D3051B07A1D7A9DDE4D1E805DF935 ProcessorCore;\n$727DBAF8FAF7EBCDF0052E2029C608C3 NumaNode;\nCACHE_DESCRIPTOR Cache;\nULONGLONG Reserved[2];\n}\n",
   "id": 18374686479672045859,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ProcessorCore",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 1
+      "size": 1,
+      "type": "$7C8D3051B07A1D7A9DDE4D1E805DF935"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "NumaNode",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "$727DBAF8FAF7EBCDF0052E2029C608C3"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Cache",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 12
+      "size": 12,
+      "type": "CACHE_DESCRIPTOR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Reserved",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "ULONGLONG[2]"
     }
   ],
   "name": "$17AC745A4F81B7EA2FEDC88B52ECD427",
+  "ordinal": 8275,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 16
 }

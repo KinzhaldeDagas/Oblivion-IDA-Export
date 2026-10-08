@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x6638A7",
-    "line": "call    sub_41E650",
+    "line": "call    ExtraDataList_GetLight; Returns the REFR_LIGHT payload from ExtraLight type 0x30; heavily used by TESObjectREF lighting and equipped-light paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -103,19 +103,19 @@
   },
   {
     "ea": "0x6638D5",
-    "line": "push    edx",
+    "line": "push    edx; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6638D6",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6638D8",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x6638F1",
-    "line": "call    TESObjectREFR__GetNiNode",
+    "line": "call    TESObjectREFR__GetNiNode; ODismemberment: TESObjectREFR::GetNiNode; runtime primitive starts from actor 3D and toggles prepared ODISMEMBER_* nodes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -187,19 +187,19 @@
   },
   {
     "ea": "0x6638FC",
-    "line": "push    ebp",
+    "line": "push    ebp; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6638FD",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6638FF",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },

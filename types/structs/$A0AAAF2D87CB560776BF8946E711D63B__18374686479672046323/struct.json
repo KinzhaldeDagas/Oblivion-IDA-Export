@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "$A0AAAF2D87CB560776BF8946E711D63B",
+  "definition": "union $A0AAAF2D87CB560776BF8946E711D63B\n{\n$5B14AD0CEFC788F40D13E2BB76411EF2 Detailed;\nLPWSTR SimpleReasonString;\n}\n",
   "id": 18374686479672046323,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Detailed",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "$5B14AD0CEFC788F40D13E2BB76411EF2"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SimpleReasonString",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "LPWSTR"
     }
   ],
   "name": "$A0AAAF2D87CB560776BF8946E711D63B",
+  "ordinal": 8437,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 16
 }

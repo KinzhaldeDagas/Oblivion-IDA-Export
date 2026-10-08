@@ -8,7 +8,7 @@
 0x55D4DD: push    eax; int
 0x55D4DE: push    ecx
 0x55D4DF: fstp    [esp+0A4h+var_A4]; float
-0x55D4E2: call    sub_70A0D0
+0x55D4E2: call    NiNode_UpdateDownwardPass; NiNode virtual UpdateDownwardPass (+0x60). Optionally updates this node's properties/controllers, invokes virtual UpdateWorldTransform (+0x74), clears its world-bound radius, recursively updates every non-null child in +0xB0/count +0xB6, and copies/merges nonempty child spheres into the node bound.
 0x55D4E7: pop     ebp
 0x55D4E8: add     esp, 98h
 0x55D4EE: retn    8
@@ -100,8 +100,8 @@
 0x55D61B: sub     ecx, ds:0B39DB4h
 0x55D621: mov     edx, [eax]
 0x55D623: test    ecx, ecx
-0x55D625: mov     dword ptr [esp+9Ch+var_90], ecx
-0x55D629: fild    dword ptr [esp+9Ch+var_90]
+0x55D625: mov     [esp+9Ch+var_90], ecx
+0x55D629: fild    [esp+9Ch+var_90]
 0x55D62D: jge     short loc_55D635
 0x55D62F: fadd    dword ptr ds:0A2FC78h
 0x55D635: fmul    qword ptr ds:0A30E40h
@@ -144,23 +144,23 @@
 0x55D6C6: rep movsd
 0x55D6C8: mov     ecx, 9
 0x55D6CD: mov     esi, (offset stru_B26AF0.unk2C+2A8h)
-0x55D6D2: lea     edi, [esp+0A4h+var_68]
+0x55D6D2: lea     edi, [esp+0A4h+right]
 0x55D6D6: rep movsd
 0x55D6D8: mov     ecx, ds:0B39DB0h
 0x55D6DE: sub     ecx, ds:0B39DB4h
 0x55D6E4: push    eax; int
 0x55D6E5: test    ecx, ecx
-0x55D6E7: mov     dword ptr [esp+0A8h+var_90], ecx
-0x55D6EB: fild    dword ptr [esp+0A8h+var_90]
+0x55D6E7: mov     [esp+0A8h+var_90], ecx
+0x55D6EB: fild    [esp+0A8h+var_90]
 0x55D6EF: jge     short loc_55D6F7
 0x55D6F1: fadd    dword ptr ds:0A2FC78h
 0x55D6F7: fmul    qword ptr ds:0A30E40h
 0x55D6FD: mov     eax, [ebp+0]
 0x55D700: push    ecx
-0x55D701: lea     edx, [esp+0ACh+var_44]
-0x55D705: fstp    dword ptr [esp+0ACh+var_90]
+0x55D701: lea     edx, [esp+0ACh+out]
+0x55D705: fstp    [esp+0ACh+var_90]
 0x55D709: mov     ecx, ebp
-0x55D70B: fld     dword ptr [esp+0ACh+var_90]
+0x55D70B: fld     [esp+0ACh+var_90]
 0x55D70F: fstp    [esp+0ACh+var_AC]; float
 0x55D712: push    edx; int
 0x55D713: mov     edx, [eax+9Ch]
@@ -171,7 +171,7 @@
 0x55D724: mov     eax, [ebp+0]
 0x55D727: mov     edx, [eax+9Ch]
 0x55D72D: mov     ecx, 9
-0x55D732: lea     edi, [esp+0A4h+var_68]
+0x55D732: lea     edi, [esp+0A4h+right]
 0x55D736: rep movsd
 0x55D738: mov     ecx, ebp
 0x55D73A: call    edx
@@ -183,17 +183,17 @@
 0x55D748: call    edx
 0x55D74A: mov     edi, [ebp+1Ch]
 0x55D74D: lea     eax, [esp+0A4h+var_8C]
-0x55D751: push    eax
-0x55D752: lea     ecx, [esp+0A8h+var_44]
-0x55D756: push    ecx
-0x55D757: lea     edx, [esp+0ACh+var_68]
-0x55D75B: push    edx
+0x55D751: push    eax; right
+0x55D752: lea     ecx, [esp+0A8h+out]
+0x55D756: push    ecx; out
+0x55D757: lea     edx, [esp+0ACh+right]
+0x55D75B: push    edx; right
 0x55D75C: lea     eax, [esp+0B0h+var_20]
-0x55D763: push    eax
-0x55D764: lea     ecx, [edi+64h]
-0x55D767: call    NiMAtrix33_Multiply
-0x55D76C: mov     ecx, eax
-0x55D76E: call    NiMAtrix33_Multiply
+0x55D763: push    eax; out
+0x55D764: lea     ecx, [edi+64h]; this
+0x55D767: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
+0x55D76C: mov     ecx, eax; this
+0x55D76E: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x55D773: fldz
 0x55D775: mov     esi, eax
 0x55D777: add     edi, 64h ; 'd'
@@ -209,8 +209,8 @@
 0x55D796: sub     ecx, ds:0B39DB4h
 0x55D79C: mov     eax, [ebp+1Ch]
 0x55D79F: test    ecx, ecx
-0x55D7A1: mov     dword ptr [esp+0A4h+var_90], ecx
-0x55D7A5: fild    dword ptr [esp+0A4h+var_90]
+0x55D7A1: mov     [esp+0A4h+var_90], ecx
+0x55D7A5: fild    [esp+0A4h+var_90]
 0x55D7A9: push    eax; int
 0x55D7AA: jge     short loc_55D7B2
 0x55D7AC: fadd    dword ptr ds:0A2FC78h
@@ -218,9 +218,9 @@
 0x55D7B8: mov     edx, [ebp+0]
 0x55D7BB: mov     eax, [edx+9Ch]
 0x55D7C1: push    ecx
-0x55D7C2: fstp    dword ptr [esp+0ACh+var_90]
+0x55D7C2: fstp    [esp+0ACh+var_90]
 0x55D7C6: mov     ecx, ebp
-0x55D7C8: fld     dword ptr [esp+0ACh+var_90]
+0x55D7C8: fld     [esp+0ACh+var_90]
 0x55D7CC: fstp    [esp+0ACh+var_AC]; float
 0x55D7CF: call    eax
 0x55D7D1: mov     ecx, eax
@@ -258,14 +258,14 @@
 0x55D82A: mov     ecx, [ebp+114h]
 0x55D830: push    0Ah
 0x55D832: push    ecx
-0x55D833: mov     ecx, offset ActorProcessManager_ptr
+0x55D833: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x55D838: call    sub_674860
 0x55D83D: test    al, al
 0x55D83F: jnz     short loc_55D858
 0x55D841: mov     edx, [ebp+114h]
 0x55D847: cmp     edx, ds:0B333C4h
 0x55D84D: jz      short loc_55D858
-0x55D84F: call    InterfaceManager_IsMenuMode
+0x55D84F: call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.
 0x55D854: test    al, al
 0x55D856: jz      short loc_55D864
 0x55D858: mov     eax, [esp+0A0h+var_98]
@@ -278,7 +278,7 @@
 0x55D873: push    ecx
 0x55D874: mov     ecx, ebp
 0x55D876: fstp    [esp+0A8h+var_A8]; float
-0x55D879: call    sub_70A0D0
+0x55D879: call    NiNode_UpdateDownwardPass; NiNode virtual UpdateDownwardPass (+0x60). Optionally updates this node's properties/controllers, invokes virtual UpdateWorldTransform (+0x74), clears its world-bound radius, recursively updates every non-null child in +0xB0/count +0xB6, and copies/merges nonempty child spheres into the node bound.
 0x55D87E: mov     edx, [ebp+0]
 0x55D881: mov     eax, [edx+9Ch]
 0x55D887: mov     ecx, ebp
@@ -293,7 +293,7 @@
 0x55D8A5: push    ecx
 0x55D8A6: mov     ecx, ebp
 0x55D8A8: fstp    [esp+0A8h+var_A8]; float
-0x55D8AB: call    sub_70A0D0
+0x55D8AB: call    NiNode_UpdateDownwardPass; NiNode virtual UpdateDownwardPass (+0x60). Optionally updates this node's properties/controllers, invokes virtual UpdateWorldTransform (+0x74), clears its world-bound radius, recursively updates every non-null child in +0xB0/count +0xB6, and copies/merges nonempty child spheres into the node bound.
 0x55D8B0: pop     ebx
 0x55D8B1: pop     ebp
 0x55D8B2: add     esp, 98h

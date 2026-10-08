@@ -1,19 +1,36 @@
 {
-  "callees_count": 12,
-  "callers_count": 24,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
+  "callers_count": 29,
+  "chunks": [
+    [
+      "0x4057B0",
+      "0x40586E"
+    ],
+    [
+      "0x9CA420",
+      "0x9CA446"
+    ]
+  ],
+  "chunks_sha256": "f5e7aa028b6d687f55e277508999ead69d39c7d1b98b63da71b04f0a1426167e",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 5,
-  "display_name": "NiTexturingProperty::SetUnk08",
+  "comment_repeatable": "Verified 2026-10-03: SetBaseTexture owns one texture ref via map[0]+8. Array storage is property+0x20. A missing map allocates 0x10 then stores it at slot 0; null allocation is followed by unchecked dereference at 0x40581D. Fallout named homolog 0x823E3F48 confirms semantic identity. Setter EAX is incidental; public contract is void.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 6,
+  "display_name": "OB_NiTexturingProperty_SetBaseTexture_010201A0",
   "end_ea": "0x40586E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "NiTexturingProperty::SetUnk08",
+  "name": "OB_NiTexturingProperty_SetBaseTexture_010201A0",
   "segment": ".text",
   "sha256": "c0ff1b4d60cb8fa0f1437dd35b245d1887cc49fa4b235ee4f806dd5b5e59a373",
   "size": 190,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4057B0",
-  "type": "NiTexturingProperty_Map *__thiscall(NiTexturingProperty *this, NiRenderedTexture *a2)",
-  "xrefs_from_count": 84,
+  "total_chunk_size": 228,
+  "type": "void __thiscall(NiTexturingProperty *this, NiTexture *texture)",
+  "xrefs_from_count": 98,
   "xrefs_to_count": 29
 }

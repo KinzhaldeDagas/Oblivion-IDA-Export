@@ -1,13 +1,13 @@
 0x68E8EF: cmp     byte ptr [esi+11h], 0
-0x68E8F3: jnz     short ActiveEffect_Base_ProcessEffect___CheckForExpiration
+0x68E8F3: jnz     short ActiveEffect_Base_ProcessEffect___CheckForExpiration; Verified expiration path: if duration reaches timeElapsed and spell/effect flags do not suppress expiration, sets bTerminated=1 and proceeds to target-death/termination handling.
 0x68E8F5: cmp     byte ptr [esi+12h], 0
-0x68E8F9: jnz     short ActiveEffect_Base_ProcessEffect___CheckForExpiration
+0x68E8F9: jnz     short ActiveEffect_Base_ProcessEffect___CheckForExpiration; Verified expiration path: if duration reaches timeElapsed and spell/effect flags do not suppress expiration, sets bTerminated=1 and proceeds to target-death/termination handling.
 0x68E8FB: mov     ecx, [esi+20h]
 0x68E8FE: mov     edx, [ecx]
 0x68E900: mov     eax, [edx+4]
 0x68E903: call    eax
 0x68E905: cmp     eax, ds:0B333C4h
-0x68E90B: jnz     short ActiveEffect_Base_ProcessEffect___CheckForExpiration
+0x68E90B: jnz     short ActiveEffect_Base_ProcessEffect___CheckForExpiration; Verified expiration path: if duration reaches timeElapsed and spell/effect flags do not suppress expiration, sets bTerminated=1 and proceeds to target-death/termination handling.
 0x68E90D: push    3ECh
 0x68E912: call    Menu_GetOpenMenuTile
 0x68E917: add     esp, 4

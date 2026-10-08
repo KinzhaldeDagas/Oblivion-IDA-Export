@@ -1,1 +1,1 @@
-GLvdpauSurfaceNV
+typedef GLintptr GLvdpauSurfaceNV;

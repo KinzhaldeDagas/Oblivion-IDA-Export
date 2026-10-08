@@ -1,19 +1,32 @@
 {
-  "callees_count": 9,
-  "callers_count": 5,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
+  "callers_count": 7,
+  "chunks": [
+    [
+      "0x4D8270",
+      "0x4D82DB"
+    ]
+  ],
+  "chunks_sha256": "94758a1ec4a0e64279b3410c3703729df0cef090c9df788f4964776056ac24ad",
+  "comment_regular": "Set reference action-state bits and synchronize special bit 0x04 with loaded/runtime open-state handling. ONAM itself represents action flag 0x08; PostLinkModifiedForm tests that bit before selecting set/clear paths.",
+  "comment_repeatable": "Set reference action-state bits and synchronize special bit 0x04 with loaded/runtime open-state handling. ONAM itself represents action flag 0x08; PostLinkModifiedForm tests that bit before selecting set/clear paths.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4D8270",
+  "display_name": "TESObjectREFR_SetActionFlagBits",
   "end_ea": "0x4D82DB",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4D8270",
+  "name": "TESObjectREFR_SetActionFlagBits",
   "segment": ".text",
   "sha256": "94758a1ec4a0e64279b3410c3703729df0cef090c9df788f4964776056ac24ad",
   "size": 107,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4D8270",
-  "type": "void __thiscall(_BYTE *this, int)",
+  "total_chunk_size": 107,
+  "type": "void __thiscall(TESObjectREFR *this, unsigned int mask)",
   "xrefs_from_count": 46,
   "xrefs_to_count": 7
 }

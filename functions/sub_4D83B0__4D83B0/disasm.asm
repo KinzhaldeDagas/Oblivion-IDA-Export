@@ -42,7 +42,7 @@
 0x4D8414: mov     ecx, esi
 0x4D8416: jz      short loc_4D8425
 0x4D8418: push    edi
-0x4D8419: call    sub_41E9C0
+0x4D8419: call    ExtraDataList_SetAnimation; Replaces or creates ExtraAnim. Existing ActorAnimData is disposed and freed before the new animation pointer is installed.
 0x4D841E: mov     eax, edi
 0x4D8420: pop     edi
 0x4D8421: pop     esi

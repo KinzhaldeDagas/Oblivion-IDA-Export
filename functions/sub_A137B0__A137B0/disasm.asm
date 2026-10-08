@@ -15,9 +15,9 @@
 0xA137E0: mov     byte ptr [esp+0A0h+var_94+2], dl
 0xA137E4: mov     byte ptr [esp+0A0h+var_94+3], al
 0xA137E8: mov     ecx, [esp+0A0h+var_94]
-0xA137EC: mov     dword_BA8344, offset aHkragdollconst; "hkRagdollConstraintData" ...
-0xA137F6: mov     dword_BA8348, offset sub_911430
-0xA13800: mov     dword_BA834C, ecx
+0xA137EC: mov     dword ptr unk_BA8344, offset aHkragdollconst; "hkRagdollConstraintData" ...
+0xA137F6: mov     dword ptr unk_BA8348, offset sub_911430
+0xA13800: mov     dword ptr unk_BA834C, ecx
 0xA13806: mov     esp, ebp
 0xA13808: pop     ebp
 0xA13809: retn

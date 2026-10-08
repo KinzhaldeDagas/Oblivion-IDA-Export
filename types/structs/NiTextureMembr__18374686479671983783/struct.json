@@ -1,40 +1,72 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "NiTextureMembr",
+  "definition": "struct NiTextureMembr\n{\nNiObjectNETMembr super;\nFormatPrefs formatPrefs;\nNiDX9TextureData *rendererData;\nNiTexture *nextTex;\nNiTexture *prevTex;\n}\n",
   "id": 18374686479671983783,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "super",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 20
+      "size": 20,
+      "type": "NiObjectNETMembr"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "formatPrefs",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 12
+      "size": 12,
+      "type": "FormatPrefs"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "rendererData",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "NiDX9TextureData *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nextTex",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "NiTexture *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "prevTex",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "NiTexture *"
     }
   ],
   "name": "NiTextureMembr",
+  "ordinal": 9282,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 44
 }

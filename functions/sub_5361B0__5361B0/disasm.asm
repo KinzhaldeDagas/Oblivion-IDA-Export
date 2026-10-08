@@ -1,4 +1,4 @@
-0x5361B0: mov     eax, [esp+arg_0]
+0x5361B0: mov     eax, [esp+materialId]; Verified: maps Havok/material hit IDs to the corresponding sHitParticle* GameSetting string. 1/0x10 Stone; 2/0x11 Cloth; 3/0x12 Dirt; 4/0x13 Glass; 5/0x0B/0x14/0x1A Grass; 6/0x15 Metal; 7/0x16 Organic; 8/0x17 Skin; 9/0x0C/0x18/0x1B Water; 0x0D/0x1C Wood; 0x0E/0x1D Chain; default (including remaining material IDs) Snow. Distinct from Actor/TESCreature blood NIF path.
 0x5361B4: cmp     eax, 1Dh; switch 30 cases
 0x5361B7: ja      short def_5361C0; jumptable 005361C0 default case, cases 0,10,15,25
 0x5361B9: movzx   eax, ds:byte_536240[eax]

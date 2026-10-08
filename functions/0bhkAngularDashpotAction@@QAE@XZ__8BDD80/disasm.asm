@@ -12,7 +12,7 @@
 0x8BDD9A: lea     eax, [esp+20h+var_C]
 0x8BDD9E: mov     large fs:0, eax
 0x8BDDA4: mov     edi, ecx
-0x8BDDA6: push    offset stru_BA7C80; lpCriticalSection
+0x8BDDA6: push    offset unk_BA7C80; lpCriticalSection
 0x8BDDAB: call    dword ptr ds:0A2806Ch
 0x8BDDB1: call    dword ptr ds:0A2808Ch
 0x8BDDB7: mov     ebp, 1
@@ -48,7 +48,7 @@
 0x8BDE33: sub     ds:0BA7CFCh, ebp
 0x8BDE39: jnz     short loc_8BDE45
 0x8BDE3B: mov     dword ptr ds:0BA7CF8h, 0
-0x8BDE45: push    offset stru_BA7C80; lpCriticalSection
+0x8BDE45: push    offset unk_BA7C80; lpCriticalSection
 0x8BDE4A: call    dword ptr ds:0A28074h
 0x8BDE50: mov     eax, esi
 0x8BDE52: mov     ecx, dword ptr [esp+20h+var_C]
@@ -59,3 +59,15 @@
 0x8BDE60: pop     ebp
 0x8BDE61: add     esp, 10h
 0x8BDE64: retn    4
+0x9CA420: mov     eax, [ebp-10h]
+0x9CA423: push    eax
+0x9CA424: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA429: pop     ecx
+0x9CA42A: retn
+0x9CA42B: mov     edx, [esp+arg_4]
+0x9CA42F: lea     eax, [edx-10h]
+0x9CA432: mov     ecx, [edx-14h]
+0x9CA435: xor     ecx, eax
+0x9CA437: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA43C: mov     eax, offset stru_AF2B24
+0x9CA441: jmp     ___CxxFrameHandler3

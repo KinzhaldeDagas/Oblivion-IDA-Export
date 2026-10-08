@@ -1,1 +1,1 @@
-_Bool
+typedef bool _Bool;

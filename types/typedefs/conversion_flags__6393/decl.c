@@ -1,1 +1,8 @@
-conversion_flags
+enum conversion_flags : __int32
+{
+CONVERT_SEND = 0x1,
+CONVERT_RECEIVE = 0x2,
+SEND_EMPTY_IF_NULL = 0x4,
+SET_NULL_IF_NO_MASK = 0x8,
+ZERO_SEND = 0x10,
+};

@@ -119,13 +119,13 @@
 0x774D49: jnz     short def_774BF8; jumptable 00774BF8 default case, cases 37-39,42-49,53-59,65,66,68,69,72,74,76,78,84-99,103-109
 0x774D4B: mov     eax, offset aD3dfmt_dxt2; "D3DFMT_DXT2"
 0x774D50: retn
-0x774D51: mov     eax, offset aD3dfmt_dxt1; "D3DFMT_DXT1"
+0x774D51: mov     eax, offset aD3dfmt_dxt1; Oblivion's DX9 format domain explicitly recognizes FourCC DXT1 (0x31545844); retained SpeedTree leaf atlases may need CPU DXT1 base-level decode before repacking.
 0x774D56: retn
 0x774D57: mov     eax, offset aD3dfmt_yuy2; "D3DFMT_YUY2"
 0x774D5C: retn
 0x774D5D: cmp     eax, 33545844h
 0x774D62: jnz     short def_774BF8; jumptable 00774BF8 default case, cases 37-39,42-49,53-59,65,66,68,69,72,74,76,78,84-99,103-109
-0x774D64: mov     eax, offset aD3dfmt_dxt3; "D3DFMT_DXT3"
+0x774D64: mov     eax, offset aD3dfmt_dxt3; Oblivion's DX9 format domain explicitly recognizes FourCC DXT3 (0x33545844); SpeedTreeRT 4.1 reference leaf DDS assets include this format.
 0x774D69: retn
 0x774D6A: mov     eax, offset aD3dfmt_dxt4; "D3DFMT_DXT4"
 0x774D6F: retn
@@ -138,7 +138,7 @@
 0x774D85: jnz     short def_774BF8; jumptable 00774BF8 default case, cases 37-39,42-49,53-59,65,66,68,69,72,74,76,78,84-99,103-109
 0x774D87: mov     eax, offset aD3dfmt_g8r8_g8; "D3DFMT_G8R8_G8B8"
 0x774D8C: retn
-0x774D8D: mov     eax, offset aD3dfmt_dxt5; "D3DFMT_DXT5"
+0x774D8D: mov     eax, offset aD3dfmt_dxt5; Oblivion's DX9 format domain explicitly recognizes FourCC DXT5 (0x35545844); SpeedTreeRT 4.1 reference leaf DDS assets predominantly use DXT5.
 0x774D92: retn
 0x774D93: mov     eax, offset aD3dfmt_r8g8_b8; "D3DFMT_R8G8_B8G8"
 0x774D98: retn

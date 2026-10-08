@@ -1,1 +1,1 @@
-IInternetSecurityManagerVtbl_0
+typedef IInternetSecurityManagerVtbl IInternetSecurityManagerVtbl_0;

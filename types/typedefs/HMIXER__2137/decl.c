@@ -1,1 +1,1 @@
-HMIXER
+typedef HMIXER__ *HMIXER;

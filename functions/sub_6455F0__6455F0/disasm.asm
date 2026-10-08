@@ -10,7 +10,7 @@
 0x645601: cmp     edx, [esp+0Ch+arg_0]
 0x645605: jnz     short loc_645617
 0x645607: push    eax
-0x645608: call    FormHeapFree
+0x645608: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x64560D: add     esp, 4
 0x645610: mov     dword ptr [edi+44h], 0
 0x645617: mov     eax, [edi+48h]
@@ -21,7 +21,7 @@
 0x645624: cmp     [ecx+0Ch], edx
 0x645627: jnz     short loc_645639
 0x645629: push    eax
-0x64562A: call    FormHeapFree
+0x64562A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x64562F: add     esp, 4
 0x645632: mov     dword ptr [edi+48h], 0
 0x645639: lea     ebx, [edi+3Ch]
@@ -39,7 +39,7 @@
 0x645654: mov     ecx, ebx
 0x645656: call    BSSimpleList_Remove
 0x64565B: push    esi
-0x64565C: call    FormHeapFree
+0x64565C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x645661: add     esp, 4
 0x645664: mov     eax, ebx
 0x645666: jmp     short loc_64566B
@@ -79,7 +79,7 @@
 0x6456BD: mov     edx, [eax]
 0x6456BF: push    eax
 0x6456C0: mov     [esi], edx
-0x6456C2: call    FormHeapFree
+0x6456C2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6456C7: add     esp, 4
 0x6456CA: jmp     short loc_6456D9
 0x6456CC: mov     dword ptr [esi], 0

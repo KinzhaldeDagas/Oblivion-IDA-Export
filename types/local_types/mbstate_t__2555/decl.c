@@ -1,1 +1,1 @@
-mbstate_t
+typedef int mbstate_t;

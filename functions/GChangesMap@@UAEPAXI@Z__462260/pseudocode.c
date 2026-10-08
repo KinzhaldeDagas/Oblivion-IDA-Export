@@ -1,7 +1,9 @@
-NiTMap_TESCELL *__thiscall ChangesMap::`scalar deleting destructor'(NiTMap_TESCELL *this, char a2)
+//
+// Verified: scalar deleting destructor: calls 45F030, frees self only when deleteFlags bit0 set, returns self.
+ChangesMap *__thiscall ChangesMap::`scalar deleting destructor'(ChangesMap *self, unsigned int deleteFlags)
 {
-  ChangesMap::~ChangesMap(this);
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  ChangesMap::~ChangesMap(self); /*0x462263*/
+  if ( (deleteFlags & 1) != 0 ) /*0x46226d*/
+    FormHeapFree((unsigned int)self); /*0x462270*/
+  return self; /*0x46227a*/
 }

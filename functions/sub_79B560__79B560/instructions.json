@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x79B560",
-    "line": "push    ecx",
+    "line": "push    ecx; Checked insert-one wrapper for st_vector<SFrondVertex>. Preserves the pre-growth iterator index, delegates to InsertFill(count=1), then returns an 8-byte {owner,current} iterator.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x79B563",
-    "line": "mov     ebp, [esp+0Ch+arg_8]",
+    "line": "mov     ebp, [esp+0Ch+position]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x79B58E",
-    "line": "mov     ebx, [esp+14h+arg_4]",
+    "line": "mov     ebx, [esp+14h+expectedOwner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x79B59F",
-    "line": "mov     ebx, [esp+14h+arg_4]",
+    "line": "mov     ebx, [esp+14h+expectedOwner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -253,43 +253,43 @@
   },
   {
     "ea": "0x79B5C7",
-    "line": "mov     ecx, [esp+14h+arg_C]",
+    "line": "mov     ecx, [esp+14h+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79B5CB",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B5CC",
-    "line": "push    1",
+    "line": "push    1; count",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x79B5CE",
-    "line": "push    ebp",
+    "line": "push    ebp; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B5CF",
-    "line": "push    ebx",
+    "line": "push    ebx; expectedOwner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B5D0",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79B5D2",
-    "line": "call    sub_79AE40",
+    "line": "call    OB_stVector_SFrondVertex_InsertFill_010201A0; Oblivion-authoritative fill insertion for st_vector<SFrondVertex>. Snapshots the value for alias safety, inserts count 0x38-byte records, reuses capacity when possible, otherwise grows to max(old+old/2, size+count), and preserves overlapping ranges with forward/backward movement.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x79B5F3",
-    "line": "mov     [esp+14h+arg_8], ebx",
+    "line": "mov     [esp+14h+position], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x79B603",
-    "line": "mov     eax, [esp+14h+arg_0]",
+    "line": "mov     eax, [esp+14h+result]",
     "mnemonic": "mov",
     "size": 4
   },

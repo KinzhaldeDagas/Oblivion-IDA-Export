@@ -1,19 +1,32 @@
 {
-  "callees_count": 15,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 336,
+  "chunks": [
+    [
+      "0x76CE40",
+      "0x76CEE5"
+    ]
+  ],
+  "chunks_sha256": "8820b3d8929e4bf217af145dc20862d4da17161e5bbebe92b5eb3937d3e3ee98",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.\nDX11 pass-queue audit 2026-10-01: embedded array layout vtable+0/data+4/capacity(u16)+8/end(u16)+A/live(u16)+C/grow(u16)+E. SetAt changes end/live but does not allocate or check capacity. It releases old pass+60 before installing/retaining new. Cold B42578 bit0 initialization zeros B42574 and registers A26DC0 via atexit; setting only the bit loses required lifecycle behavior.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_76CE40",
+  "display_name": "NiTArray_NiD3DPass_SetAt",
   "end_ea": "0x76CEE5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_76CE40",
+  "name": "NiTArray_NiD3DPass_SetAt",
   "segment": ".text",
   "sha256": "8820b3d8929e4bf217af145dc20862d4da17161e5bbebe92b5eb3937d3e3ee98",
   "size": 165,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x76CE40",
-  "type": "NiD3DPass *__thiscall(NiTArray_NiD3DPass *this, NiD3DPass *, NiD3DPass **)",
+  "total_chunk_size": 165,
+  "type": "NiD3DPass *__thiscall(NiTArray_NiD3DPass *this, unsigned int index, NiD3DPass **value)",
   "xrefs_from_count": 66,
   "xrefs_to_count": 337
 }

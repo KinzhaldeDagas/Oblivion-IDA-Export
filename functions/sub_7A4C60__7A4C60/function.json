@@ -1,19 +1,32 @@
 {
-  "callees_count": 23,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 11,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7A4C60",
+      "0x7A4DE2"
+    ]
+  ],
+  "chunks_sha256": "c9cb0c95fcd10501fcc247f16d0efe9e0cbfa80a846d83859c7064bed27be8d4",
+  "comment_regular": "Leaf-texture vector deep copy assignment: clear on empty source, reuse initialized/capacity ranges when possible, otherwise destroy/free and allocate exact source size.",
+  "comment_repeatable": "Leaf-texture vector deep copy assignment: clear on empty source, reuse initialized/capacity ranges when possible, otherwise destroy/free and allocate exact source size.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7A4C60",
+  "display_name": "OB_stVector_SIdvLeafTexture_CopyAssign_010201A0",
   "end_ea": "0x7A4DE2",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7A4C60",
+  "name": "OB_stVector_SIdvLeafTexture_CopyAssign_010201A0",
   "segment": ".text",
   "sha256": "c9cb0c95fcd10501fcc247f16d0efe9e0cbfa80a846d83859c7064bed27be8d4",
   "size": 386,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A4C60",
-  "type": "int *__thiscall(int *this, int *)",
-  "xrefs_from_count": 178,
+  "total_chunk_size": 386,
+  "type": "OB_stVector_SIdvLeafTexture_010201A0 *__thiscall(OB_stVector_SIdvLeafTexture_010201A0 *this, const OB_stVector_SIdvLeafTexture_010201A0 *source)",
+  "xrefs_from_count": 180,
   "xrefs_to_count": 1
 }

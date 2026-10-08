@@ -1,1 +1,1 @@
-IAudioRenderClientVtbl_0
+typedef IAudioRenderClientVtbl IAudioRenderClientVtbl_0;

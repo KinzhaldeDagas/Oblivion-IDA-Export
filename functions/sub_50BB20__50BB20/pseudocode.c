@@ -11,12 +11,12 @@ bool __cdecl sub_50BB20(
   bool result; // al
   UInt16 v9[2]; // [esp+0h] [ebp-4h] BYREF
 
-  *(_DWORD *)v9 = 0;
-  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v9);
-  if ( result )
+  *(_DWORD *)v9 = 0; /*0x50bb48*/
+  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v9); /*0x50bb50*/
+  if ( result ) /*0x50bb5a*/
   {
-    TESDataHandler_g_PlayerRef->AmountStolenSold += *(_DWORD *)v9;
-    return 1;
+    reference->AmountStolenSold += *(_DWORD *)v9; /*0x50bb66*/
+    return 1; /*0x50bb6c*/
   }
-  return result;
+  return result; /*0x50bb5d*/
 }

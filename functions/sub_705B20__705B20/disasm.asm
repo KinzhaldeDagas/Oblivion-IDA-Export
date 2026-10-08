@@ -64,7 +64,6 @@
 0x705BE1: cmp     [esp+0A0h+var_8C], ebp
 0x705BE5: jbe     loc_705F7E
 0x705BEB: jmp     short loc_705BF0
-0x705BED: align 10h
 0x705BF0: mov     ecx, [ebx+20h]
 0x705BF3: mov     edi, [ecx+ebp*4]
 0x705BF6: test    edi, edi

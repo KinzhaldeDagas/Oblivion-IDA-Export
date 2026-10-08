@@ -7,18 +7,18 @@ int __cdecl sub_8FB650(int *a1)
   char v6; // [esp+14h] [ebp-8h]
   char v7; // [esp+15h] [ebp-7h]
 
-  v2 = sub_8FAA00;
-  v3 = sub_8FB4F0;
-  v4 = sub_8FB570;
-  v5 = sub_8F9320;
-  v6 = 1;
-  v7 = 0;
-  sub_8DADD0(a1, (int)&v2, 7, 4);
-  v2 = sub_8FA9D0;
-  v3 = sub_8FB320;
-  v4 = sub_8FB040;
-  v5 = sub_935CC0;
-  v6 = 0;
-  v7 = 0;
-  return sub_8DADD0(a1, (int)&v2, 4, 7);
+  v2 = sub_8FAA00; /*0x8fb663*/
+  v3 = sub_8FB4F0; /*0x8fb66b*/
+  v4 = sub_8FB570; /*0x8fb673*/
+  v5 = sub_8F9320; /*0x8fb67b*/
+  v6 = 1; /*0x8fb683*/
+  v7 = 0; /*0x8fb688*/
+  sub_8DADD0(a1, (int)&v2, 7, 4); /*0x8fb68d*/
+  v2 = sub_8FA9D0; /*0x8fb69d*/
+  v3 = sub_8FB320; /*0x8fb6a5*/
+  v4 = sub_8FB040; /*0x8fb6ad*/
+  v5 = sub_935CC0; /*0x8fb6b5*/
+  v6 = 0; /*0x8fb6bd*/
+  v7 = 0; /*0x8fb6c2*/
+  return sub_8DADD0(a1, (int)&v2, 4, 7); /*0x8fb6cc*/
 }

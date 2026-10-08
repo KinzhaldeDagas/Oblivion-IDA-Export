@@ -57,7 +57,7 @@
 0x6CC646: push    edx; lpAddend
 0x6CC647: call    dword ptr ds:0A28078h
 0x6CC64D: mov     edx, [esp+10h+arg_0]
-0x6CC651: fld     dword ptr [esp+10h+arg_4]
+0x6CC651: fld     [esp+10h+arg_4]
 0x6CC655: mov     al, byte ptr [esp+10h+arg_8]
 0x6CC659: fstp    dword ptr [ebp+4]
 0x6CC65C: mov     [ebp+0Ch], al

@@ -1,4 +1,4 @@
-0x420680: push    44h ; 'D'; a2
+0x420680: push    44h ; 'D'; Returns the reference stored in ExtraMerchantContainer type 0x44.
 0x420682: call    BaseExtraList_GetExtraData
 0x420687: test    eax, eax
 0x420689: jz      short loc_42068F

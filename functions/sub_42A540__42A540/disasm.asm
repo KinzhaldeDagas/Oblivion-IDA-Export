@@ -34,11 +34,11 @@
 0x42A5A4: mov     [esi+14h], eax
 0x42A5A7: mov     [esi+18h], edi
 0x42A5AA: jmp     short loc_42A5CA
-0x42A5AC: mov     ecx, dword ptr Vector3_InitValue?
+0x42A5AC: mov     ecx, g_zeroNiPoint3.x
 0x42A5B2: mov     [esi+0Ch], ecx
-0x42A5B5: mov     edx, dword ptr Vector3_InitValue?+4
+0x42A5B5: mov     edx, g_zeroNiPoint3.y
 0x42A5BB: mov     [esi+10h], edx
-0x42A5BE: mov     ecx, dword_B3F9B0
+0x42A5BE: mov     ecx, g_zeroNiPoint3.z
 0x42A5C4: mov     [esi+14h], ecx
 0x42A5C7: mov     [esi+18h], eax
 0x42A5CA: mov     eax, esi
@@ -49,3 +49,12 @@
 0x42A5D9: pop     esi
 0x42A5DA: add     esp, 10h
 0x42A5DD: retn    8
+0x9ABA20: mov     ecx, [ebp-10h]; this
+0x9ABA23: jmp     ??1BSExtraData@@UAE@XZ; BSExtraData::~BSExtraData(void)
+0x9ABA28: mov     edx, [esp+arg_4]
+0x9ABA2C: lea     eax, [edx-0Ch]
+0x9ABA2F: mov     ecx, [edx-10h]
+0x9ABA32: xor     ecx, eax
+0x9ABA34: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9ABA39: mov     eax, offset stru_AD881C
+0x9ABA3E: jmp     ___CxxFrameHandler3

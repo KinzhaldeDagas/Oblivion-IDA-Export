@@ -1,4 +1,4 @@
-0x6A35C0: push    ecx
+0x6A35C0: push    ecx; Verified OpenEffect rule: clear only locked bit 0x01 when effect category >= current effective lock category; the locked-bit helper preserves bit 0x02, so an active LockEffect marker remains until LockEffect_Apply observes the resulting state.
 0x6A35C1: push    edi
 0x6A35C2: push    0; int
 0x6A35C4: push    offset ??_R0?AVNonActorMagicTarget@@@8; struct TypeDescriptor *
@@ -24,25 +24,25 @@
 0x6A35F8: push    ebx
 0x6A35F9: mov     ecx, esi
 0x6A35FB: call    edx
-0x6A35FD: mov     ecx, eax
-0x6A35FF: call    sub_4D7740
+0x6A35FD: mov     ecx, eax; this
+0x6A35FF: call    TESObjectREFR_GetEffectiveDoorLock; Verified: returns this reference's ExtraLockData* payload when present; otherwise, if its ExtraTeleport has a linked door, returns that linked reference's ExtraLockData* payload; null when neither exists. Directly supported by ExtraDataList_GetLock, ExtraDataList_GetTeleport, and TeleportData_GetLinkedDoor.
 0x6A3604: fld     dword ptr [edi+18h]
 0x6A3607: fstp    [esp+10h+var_4]
 0x6A360B: mov     ebx, eax
 0x6A360D: fld     [esp+10h+var_4]
-0x6A3611: call    Double_To_SInt32
-0x6A3616: push    eax
-0x6A3617: call    GetLockLevel
+0x6A3611: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
+0x6A3616: push    eax; numericLockMagnitude
+0x6A3617: call    GetLockLevel; Verified numeric lock magnitude to LOCK_LEVEL mapper. Thresholds are iLockLevelMaxVeryEasy, iLockLevelMaxEasy, iLockLevelMaxAverage, iLockLevelMaxHard, and iLockLevelMaxVeryHard; outputs 0..5 map through LockLevelNames to VeryEasy, Easy, Average, Hard, VeryHard, Impossible. Fallout independently uses the matching LOCK_LEVEL names, but this mapping is directly established by Oblivion code and data.
 0x6A361C: mov     edi, eax
 0x6A361E: mov     eax, [esi]
 0x6A3620: mov     edx, [eax+4]
 0x6A3623: add     esp, 4
 0x6A3626: mov     ecx, esi
 0x6A3628: call    edx
-0x6A362A: mov     ecx, eax
-0x6A362C: call    sub_4D7780
-0x6A3631: push    eax
-0x6A3632: call    GetLockLevel
+0x6A362A: mov     ecx, eax; this
+0x6A362C: call    TESObjectREFR_GetEffectiveDoorLockLevel; Verified effective lock-level helper: returns 0 when neither this reference nor its linked-door reference has ExtraLockData; otherwise tail-calls ExtraLockData_GetPlayerScaledLockLevel and returns its integer result. Callers feed the result to GetLockLevel or compare lock difficulty for lockpick/open behavior.
+0x6A3631: push    eax; numericLockMagnitude
+0x6A3632: call    GetLockLevel; Verified numeric lock magnitude to LOCK_LEVEL mapper. Thresholds are iLockLevelMaxVeryEasy, iLockLevelMaxEasy, iLockLevelMaxAverage, iLockLevelMaxHard, and iLockLevelMaxVeryHard; outputs 0..5 map through LockLevelNames to VeryEasy, Easy, Average, Hard, VeryHard, Impossible. Fallout independently uses the matching LOCK_LEVEL names, but this mapping is directly established by Oblivion code and data.
 0x6A3637: add     esp, 4
 0x6A363A: test    ebx, ebx
 0x6A363C: pop     ebx
@@ -54,10 +54,10 @@
 0x6A3648: mov     ecx, esi
 0x6A364A: call    edx
 0x6A364C: pop     esi
-0x6A364D: mov     ecx, eax
+0x6A364D: mov     ecx, eax; this
 0x6A364F: pop     edi
 0x6A3650: add     esp, 4
-0x6A3653: jmp     sub_4DBEA0
+0x6A3653: jmp     TESObjectREFR_ClearLockedFlagOnSelfOrLinkedDoor; Verified inverse lock-state helper: if this reference has an ExtraLock wrapper, clears its locked bit; otherwise follows the linked-door reference and clears that wrapper's locked bit. It then marks the owning reference or linked door modified with mask 0x40.
 0x6A3658: pop     esi
 0x6A3659: pop     edi
 0x6A365A: pop     ecx

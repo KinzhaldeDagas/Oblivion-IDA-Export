@@ -1,19 +1,36 @@
 {
-  "callees_count": 22,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 12,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_5326B0",
+  "chunks": [
+    [
+      "0x5326B0",
+      "0x5328A1"
+    ],
+    [
+      "0x9B8E00",
+      "0x9B8E39"
+    ]
+  ],
+  "chunks_sha256": "9eed968ad8896db0b72a150a55c7a0182df8a04d737be5bad38d31dde855b927",
+  "comment_regular": "TES4 authoritative: player camera collision phantom segment cast. Converts TES/world endpoints to Havok units, calls the first camera bhkSimpleShapePhantom hk object vfunc +0x30 with hkAllCdPointCollector, sorts hits, skips layer 0x14 hits that resolve to swimming MobileObjects, copies first usable 0x30 hit entry to caller, and rewrites the end point to hit position in TES/world units.",
+  "comment_repeatable": "TES4 authoritative: player camera collision phantom segment cast. Converts TES/world endpoints to Havok units, calls the first camera bhkSimpleShapePhantom hk object vfunc +0x30 with hkAllCdPointCollector, sorts hits, skips layer 0x14 hits that resolve to swimming MobileObjects, copies first usable 0x30 hit entry to caller, and rewrites the end point to hit position in TES/world units.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "PlayerCameraCollisionPhantomPair_CastSegment",
   "end_ea": "0x5328A1",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "sub_5326B0",
+  "name": "PlayerCameraCollisionPhantomPair_CastSegment",
   "segment": ".text",
   "sha256": "b6016cb045d82605ac17f0d881836a1892bffc78f0f73ae58b9e2747f3dae49a",
   "size": 497,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5326B0",
+  "total_chunk_size": 554,
   "type": "bool __thiscall(_DWORD *this, float *, float *, __m128 *)",
-  "xrefs_from_count": 172,
+  "xrefs_from_count": 188,
   "xrefs_to_count": 1
 }

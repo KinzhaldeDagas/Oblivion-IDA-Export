@@ -8,7 +8,6 @@
 0x711B9B: mov     [esp+14h+arg_0], 3
 0x711BA3: mov     ebp, 4
 0x711BA8: jmp     short loc_711BB0
-0x711BAA: align 10h
 0x711BB0: mov     edi, 3
 0x711BB5: mov     eax, [ebx+21Ch]
 0x711BBB: mov     edx, [eax+4]

@@ -92,3 +92,69 @@
 0x54BE71: pop     esi
 0x54BE72: add     esp, 10h
 0x54BE75: retn
+0x9BB6D0: mov     ecx, [ebp-10h]
+0x9BB6D3: jmp     NiExtraData_dtor
+0x9BB6D8: mov     ecx, [ebp-10h]
+0x9BB6DB: add     ecx, 10h; this
+0x9BB6DE: jmp     ??1BSFaceGenKeyframeMultiple@@UAE@XZ; BSFaceGenKeyframeMultiple::~BSFaceGenKeyframeMultiple(void)
+0x9BB6E3: mov     ecx, [ebp-10h]
+0x9BB6E6: add     ecx, 24h ; '$'
+0x9BB6E9: jmp     j_??1?$NiTPointerList@PAVBSFaceGenKeyframe@@@@UAE@XZ; NiTPointerList<BSFaceGenKeyframe *>::~NiTPointerList<BSFaceGenKeyframe *>(void)
+0x9BB6EE: mov     ecx, [ebp-10h]
+0x9BB6F1: add     ecx, 34h ; '4'; this
+0x9BB6F4: jmp     ??1BSFaceGenKeyframeMultiple@@UAE@XZ; BSFaceGenKeyframeMultiple::~BSFaceGenKeyframeMultiple(void)
+0x9BB6F9: mov     ecx, [ebp-10h]
+0x9BB6FC: add     ecx, 48h ; 'H'; this
+0x9BB6FF: jmp     ??1BSFaceGenKeyframeMultiple@@UAE@XZ; BSFaceGenKeyframeMultiple::~BSFaceGenKeyframeMultiple(void)
+0x9BB704: mov     ecx, [ebp-10h]
+0x9BB707: add     ecx, 5Ch ; '\'
+0x9BB70A: jmp     j_??1?$NiTPointerList@PAVBSFaceGenKeyframe@@@@UAE@XZ; NiTPointerList<BSFaceGenKeyframe *>::~NiTPointerList<BSFaceGenKeyframe *>(void)
+0x9BB70F: mov     ecx, [ebp-10h]
+0x9BB712: add     ecx, 6Ch ; 'l'; this
+0x9BB715: jmp     ??1BSFaceGenKeyframeMultiple@@UAE@XZ; BSFaceGenKeyframeMultiple::~BSFaceGenKeyframeMultiple(void)
+0x9BB71A: mov     ecx, [ebp-10h]
+0x9BB71D: add     ecx, 80h ; '€'
+0x9BB723: jmp     j_??1?$NiTPointerList@PAVBSFaceGenKeyframe@@@@UAE@XZ; NiTPointerList<BSFaceGenKeyframe *>::~NiTPointerList<BSFaceGenKeyframe *>(void)
+0x9BB728: mov     ecx, [ebp-10h]
+0x9BB72B: add     ecx, 90h; this
+0x9BB731: jmp     ??1BSFaceGenKeyframeMultiple@@UAE@XZ; BSFaceGenKeyframeMultiple::~BSFaceGenKeyframeMultiple(void)
+0x9BB736: mov     ecx, [ebp-10h]
+0x9BB739: add     ecx, 0A4h ; '¤'; this
+0x9BB73F: jmp     ??1BSFaceGenKeyframeMultiple@@UAE@XZ; BSFaceGenKeyframeMultiple::~BSFaceGenKeyframeMultiple(void)
+0x9BB744: mov     ecx, [ebp-10h]
+0x9BB747: add     ecx, 0B8h ; '¸'
+0x9BB74D: jmp     j_??1?$NiTPointerList@PAVBSFaceGenKeyframe@@@@UAE@XZ; NiTPointerList<BSFaceGenKeyframe *>::~NiTPointerList<BSFaceGenKeyframe *>(void)
+0x9BB752: mov     ecx, [ebp-10h]
+0x9BB755: add     ecx, 0C8h ; 'È'; this
+0x9BB75B: jmp     ??1BSFaceGenKeyframeMultiple@@UAE@XZ; BSFaceGenKeyframeMultiple::~BSFaceGenKeyframeMultiple(void)
+0x9BB760: mov     ecx, [ebp-10h]
+0x9BB763: add     ecx, 0DCh ; 'Ü'
+0x9BB769: jmp     j_??1?$NiTPointerList@PAVBSFaceGenKeyframe@@@@UAE@XZ; NiTPointerList<BSFaceGenKeyframe *>::~NiTPointerList<BSFaceGenKeyframe *>(void)
+0x9BB76E: mov     ecx, [ebp-10h]
+0x9BB771: add     ecx, 0ECh ; 'ì'; this
+0x9BB777: jmp     ??1BSFaceGenKeyframeMultiple@@UAE@XZ; BSFaceGenKeyframeMultiple::~BSFaceGenKeyframeMultiple(void)
+0x9BB77C: mov     ecx, [ebp-10h]
+0x9BB77F: add     ecx, 100h; this
+0x9BB785: jmp     ??1BSFaceGenKeyframeMultiple@@UAE@XZ; BSFaceGenKeyframeMultiple::~BSFaceGenKeyframeMultiple(void)
+0x9BB78A: mov     ecx, [ebp-10h]
+0x9BB78D: add     ecx, 114h
+0x9BB793: jmp     j_??1?$NiTPointerList@PAVBSFaceGenKeyframe@@@@UAE@XZ; NiTPointerList<BSFaceGenKeyframe *>::~NiTPointerList<BSFaceGenKeyframe *>(void)
+0x9BB798: mov     ecx, [ebp-10h]
+0x9BB79B: add     ecx, 124h; this
+0x9BB7A1: jmp     ??1BSFaceGenKeyframeMultiple@@UAE@XZ; BSFaceGenKeyframeMultiple::~BSFaceGenKeyframeMultiple(void)
+0x9BB7A6: mov     ecx, [ebp-10h]
+0x9BB7A9: add     ecx, 138h
+0x9BB7AF: jmp     j_??1?$NiTPointerList@PAVBSFaceGenKeyframe@@@@UAE@XZ; NiTPointerList<BSFaceGenKeyframe *>::~NiTPointerList<BSFaceGenKeyframe *>(void)
+0x9BB7B4: mov     ecx, [ebp-10h]
+0x9BB7B7: add     ecx, 148h; this
+0x9BB7BD: jmp     ??1BSFaceGenKeyframeMultiple@@UAE@XZ; BSFaceGenKeyframeMultiple::~BSFaceGenKeyframeMultiple(void)
+0x9BB7C2: mov     ecx, [ebp-10h]
+0x9BB7C5: add     ecx, 15Ch; this
+0x9BB7CB: jmp     ??1BSFaceGenKeyframeMultiple@@UAE@XZ; BSFaceGenKeyframeMultiple::~BSFaceGenKeyframeMultiple(void)
+0x9BB7D0: mov     edx, [esp+arg_4]
+0x9BB7D4: lea     eax, [edx-8]
+0x9BB7D7: mov     ecx, [edx-0Ch]
+0x9BB7DA: xor     ecx, eax
+0x9BB7DC: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BB7E1: mov     eax, offset stru_AE54B4
+0x9BB7E6: jmp     ___CxxFrameHandler3

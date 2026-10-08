@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x44A88F",
-    "line": "movzx   eax, byte ptr [esi+4]",
+    "line": "movzx   eax, byte ptr [esi+4]; New-ref path chooses allocation by base form type: type 0x23 Character -> Character_constr, type 0x24 Creature -> Creature_constr, otherwise TESObjectREFR_constr.",
     "mnemonic": "movzx",
     "size": 4
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x44A896",
-    "line": "jz      short TESDataHandler_PlaceObjectRef___CreateCharacter",
+    "line": "jz      short TESDataHandler_PlaceObjectRef___CreateCharacter; PlaceObjectRef Character allocation branch: base form type 0x23 allocates 0x10C bytes and calls Character_constr.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x44A89B",
-    "line": "jz      short TESDataHandler_PlaceObjectRef___CreateCreature",
+    "line": "jz      short TESDataHandler_PlaceObjectRef___CreateCreature; PlaceObjectRef Creature allocation branch: base form type 0x24 allocates 0x108 bytes and calls Creature_constr.",
     "mnemonic": "jz",
     "size": 2
   }

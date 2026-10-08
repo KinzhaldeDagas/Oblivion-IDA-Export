@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x68EC98",
+      "0x68ECB1"
+    ]
+  ],
+  "chunks_sha256": "f4d0ae2734aecba57be14530dac295d98fc83de85f8fb5d75e09ae781d2e1123",
+  "comment_regular": "Verified fallback: BoundItemEffect is selected when the effect setting's low flag byte bit 0 or flags word bit 0x20000 is set; otherwise valid value-modifier flags route to ValueModifierEffect. Semantics of the remaining masks are Unknown.",
+  "comment_repeatable": "Verified fallback: BoundItemEffect is selected when the effect setting's low flag byte bit 0 or flags word bit 0x20000 is set; otherwise valid value-modifier flags route to ValueModifierEffect. Semantics of the remaining masks are Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "ActiveEffect_Base_CreateDynamic:::CheckUseWeapon",
   "end_ea": "0x68ECB1",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "ActiveEffect_Base_CreateDynamic:::CheckUseWeapon",
   "segment": ".text",
   "sha256": "f4d0ae2734aecba57be14530dac295d98fc83de85f8fb5d75e09ae781d2e1123",
   "size": 25,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x68EC98",
-  "type": "int __usercall@<eax>(int@<esi>, int ecx0@<ecx>, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int)",
+  "total_chunk_size": 25,
+  "type": "void __usercall(EffectItem *@<esi>, int ecx0@<ecx>, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, MagicCaster *, MagicItem *, int, int)",
   "xrefs_from_count": 11,
   "xrefs_to_count": 1
 }

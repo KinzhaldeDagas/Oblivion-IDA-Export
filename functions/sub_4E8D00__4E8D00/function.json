@@ -1,19 +1,32 @@
 {
-  "callees_count": 9,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x4E8D00",
+      "0x4E8DA5"
+    ]
+  ],
+  "chunks_sha256": "f143a207e1533a70ed617c43205a60cc3e9281bd799c24ecc14bf6bb7f83fb7b",
+  "comment_regular": "Verified: searches the TESRoad connected-point bucket for the cell containing the requested NiPoint3, compares candidate positions with sub_47D810 using fConstant_2 tolerance, and returns the matching TESConnectedPoint or null.",
+  "comment_repeatable": "Verified: searches the TESRoad connected-point bucket for the cell containing the requested NiPoint3, compares candidate positions with sub_47D810 using fConstant_2 tolerance, and returns the matching TESConnectedPoint or null.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4E8D00",
+  "display_name": "TESRoad_FindConnectedPointByPosition",
   "end_ea": "0x4E8DA5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4E8D00",
+  "name": "TESRoad_FindConnectedPointByPosition",
   "segment": ".text",
   "sha256": "f143a207e1533a70ed617c43205a60cc3e9281bd799c24ecc14bf6bb7f83fb7b",
   "size": 165,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E8D00",
-  "type": "int __thiscall(_DWORD *this, float *)",
+  "total_chunk_size": 165,
+  "type": "TESConnectedPoint *__thiscall(TESRoad *this, const NiPoint3 *position)",
   "xrefs_from_count": 70,
   "xrefs_to_count": 4
 }

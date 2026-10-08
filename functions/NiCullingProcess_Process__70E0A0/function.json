@@ -1,19 +1,36 @@
 {
-  "callees_count": 13,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
+  "chunks": [
+    [
+      "0x70E0A0",
+      "0x70E19E"
+    ],
+    [
+      "0x9AEFA0",
+      "0x9AEFC3"
+    ]
+  ],
+  "chunks_sha256": "47c8438565907afdab155090050532f5e7afae99751247d4c7de891212ddf2fb",
+  "comment_regular": "CULLING audit 2026-09-27 (observed Oblivion behavior): ABI: __thiscall(self, camera, NiAVObject root, optional visible array), RET 0x0C. Installs camera(+0x0C) and rebuilds its frustum before traversal. Explicit array temporarily replaces +0x08; null configured array uses accumulator begin(+0x4C), traversal, flush(+0x50), release. Restores explicit-array replacement but CLEARS Camera on normal completion; it does not restore an outer camera/frustum for same-process nesting. Native +0x57F3F3 caller is a direct call, not Process-vtable dispatch.\n\nCULLING 2026-06-11 black-screen fix reference: Process wraps NiAVObject::Render; any expensive ProcessCull hot-path work stalls world load before first frame log.",
+  "comment_repeatable": "MoonSugarEffect decode: NiCullingProcess::Process sets camera/frustum. If VisibleGeo is null, it prepares the active accumulator (+0x4C), traverses NiAVObject_Render, then flushes accumulator (+0x50). If an explicit visible array is supplied, it temporarily installs it.\nDX11 GPU-world migration 2026-09-27: main-world acceleration must preserve accumulator begin/flush/release and explicit VisibleGeo array behavior. This routine clears Camera on completion; it does not preserve same-process nested camera state. Do not bypass all Process calls merely because a GPU visibility list exists.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
   "display_name": "NiCullingProcess::Process",
   "end_ea": "0x70E19E",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
   "name": "NiCullingProcess::Process",
   "segment": ".text",
   "sha256": "ee9639c92f76b3e6caaf2c641f288a36cb1c886df50e1a9e6450d07fd81c4bb3",
   "size": 254,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x70E0A0",
-  "type": "void __thiscall(NiCullingProcess *this, NiCamera *a2, NiAVObject *a3, void *a4)",
-  "xrefs_from_count": 97,
+  "total_chunk_size": 289,
+  "type": "void __thiscall(NiCullingProcess *self, NiCamera *camera, NiAVObject *root, CullingVisibleGeometryArray *visibleArray)",
+  "xrefs_from_count": 108,
   "xrefs_to_count": 4
 }

@@ -1,1 +1,1 @@
-tagTOKEN_TYPE
+typedef TOKEN_TYPE tagTOKEN_TYPE;

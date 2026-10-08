@@ -25,7 +25,7 @@
 0x4FF48B: call    MemoryHeap_Free_checked
 0x4FF490: mov     eax, [esi+0Ch]
 0x4FF493: push    eax
-0x4FF494: call    FormHeapFree
+0x4FF494: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4FF499: add     esp, 4
 0x4FF49C: mov     [esi+0Ch], edi
 0x4FF49F: mov     [esi+12h], di
@@ -37,3 +37,13 @@
 0x4FF4B4: pop     esi
 0x4FF4B5: add     esp, 10h
 0x4FF4B8: retn
+0x9B6CE0: mov     ecx, [ebp-10h]
+0x9B6CE3: add     ecx, 0Ch; void *
+0x9B6CE6: jmp     BSStringT_Clear
+0x9B6CEB: mov     edx, [esp+arg_4]
+0x9B6CEF: lea     eax, [edx-0Ch]
+0x9B6CF2: mov     ecx, [edx-10h]
+0x9B6CF5: xor     ecx, eax
+0x9B6CF7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B6CFC: mov     eax, offset stru_AE1A2C
+0x9B6D01: jmp     ___CxxFrameHandler3

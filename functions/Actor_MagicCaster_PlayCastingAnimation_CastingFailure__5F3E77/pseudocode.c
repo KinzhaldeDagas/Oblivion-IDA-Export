@@ -1,42 +1,31 @@
 // positive sp value has been detected, the output may be wrong!
-void __usercall Actor_MagicCaster_PlayCastingAnimation_::CastingFailure(
-        PlayerCharacter *a1@<ebx>,
-        int a2@<edi>,
-        int a3,
-        int a4,
-        int a5,
-        int a6,
-        int a7,
-        int a8,
-        int a9,
-        int a10,
-        int a11)
+void __usercall Actor_MagicCaster_PlayCastingAnimation_::CastingFailure(PlayerCharacter *a1@<ebx>, int a2@<edi>)
 {
   int SchoolAV; // eax
-  int SchoolFromSkillAV; // eax
-  BSStringT *v13; // eax
+  int v3; // eax
+  BSStringT *v4; // eax
   const char *m_data; // [esp-3Ch] [ebp-40h]
-  float v15; // [esp-30h] [ebp-34h]
-  int v16; // [esp-14h] [ebp-18h]
-  BSStringT v17; // [esp-10h] [ebp-14h] BYREF
+  float v6; // [esp-30h] [ebp-34h]
+  int v7; // [esp-14h] [ebp-18h]
+  BSStringT v8; // [esp-10h] [ebp-14h] BYREF
   float duration; // [esp+0h] [ebp-4h]
 
-  if ( a1 == TESDataHandler_g_PlayerRef )
+  if ( a1 == reference ) /*0x5f3e7d*/
   {
-    (*(void (__thiscall **)(int))(*(_DWORD *)a2 + 0x30))(a2);
-    SchoolAV = EffectItemList_GetSchoolAV();
-    SchoolFromSkillAV = Magic_GetSchoolFromSkillAV(SchoolAV);
-    sub_6635E0(TESDataHandler_g_PlayerRef, SchoolFromSkillAV);
-    (*(void (__thiscall **)(int))(*(_DWORD *)a2 + 0x30))(a2);
-    v13 = Magic_CastFailureMsg(&v17, v16);
-    v15 = flt_A30634;
-    m_data = v13->m_data;
-    duration = 0.0;
-    GameUI_QueueMessage(m_data, 0, 1u, v15);
-    FormHeapFree((unsigned int)v17.m_data);
+    (*(void (__thiscall **)(int))(*(_DWORD *)a2 + 0x30))(a2); /*0x5f3e8a*/
+    SchoolAV = EffectItemList_GetSchoolAV(); /*0x5f3e91*/
+    Magic_GetSchoolFromSkillAV(SchoolAV); /*0x5f3e97*/
+    sub_6635E0(reference, v3); /*0x5f3ea6*/
+    (*(void (__thiscall **)(int))(*(_DWORD *)a2 + 0x30))(a2); /*0x5f3ebc*/
+    v4 = Magic_CastFailureMsg(&v8, v7); /*0x5f3ec0*/
+    v6 = kTerrainLODQuadRayDirectionZ; /*0x5f3ece*/
+    m_data = v4->m_data; /*0x5f3ed5*/
+    duration = 0.0; /*0x5f3ed6*/
+    GameUI_QueueMessage(m_data, 0, 1u, v6); /*0x5f3ede*/
+    FormHeapFree((unsigned int)v8.m_data); /*0x5f3ee8*/
   }
   else
   {
-    Actor_MagicCaster_PlayCastingAnimation_::Done(a3, a4, a5, a6, a7, a8, a9, a10, a11);
+    Actor_MagicCaster_PlayCastingAnimation_::Done(); /*0x5f3e7d*/
   }
 }

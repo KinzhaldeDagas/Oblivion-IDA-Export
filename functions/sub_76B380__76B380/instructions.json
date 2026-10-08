@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x76B3CB",
-    "line": "mov     [esp+10h+var_4], edx",
+    "line": "mov     [esp+10h+node], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -187,25 +187,25 @@
   },
   {
     "ea": "0x76B3D1",
-    "line": "lea     ecx, [esp+10h+var_4]",
+    "line": "lea     ecx, [esp+10h+node]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x76B3D5",
-    "line": "push    ecx",
+    "line": "push    ecx; node",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76B3D6",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; list",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x76B3D8",
-    "line": "call    sub_7AA860",
+    "line": "call    NiTPointerList_RemoveNode; [Verified] Generic NiTPointerList node-removal helper. Unlinks the supplied node, updates head/tail and neighboring links, invokes the list's FreeNode vfunc, decrements item count, and returns the removed node's data pointer.",
     "mnemonic": "call",
     "size": 5
   },

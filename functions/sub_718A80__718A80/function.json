@@ -1,18 +1,31 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 2,
-  "callers_count": 41,
+  "callers_count": 47,
+  "chunks": [
+    [
+      "0x718A80",
+      "0x718B1A"
+    ]
+  ],
+  "chunks_sha256": "adaa10ba179b80083f7bf6fe16165225f447aa5d227070b722292f73abfdc390",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "\nDX11 GPU-world inverse input (2026-09-27):718A80 transposes the original unscaled3x3 via710400, stores reciprocal scale, computes transposed-rotation*(-world position) via7101F0 with a float store per component, then applies reciprocal scale. 7FB6F0 constructs the row-vector inverse matrix from this result without renderer-origin subtraction. The live frontend must read raw geometry+64 NiTransform; inverting the rounded/scaled renderer matrix loses this native operation sequence. CPU reproduction is compared to captured copies of all three helpers in isolated tests; no native helper is invoked by production capture.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "sub_718A80",
   "end_ea": "0x718B1A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_718A80",
   "segment": ".text",
   "sha256": "adaa10ba179b80083f7bf6fe16165225f447aa5d227070b722292f73abfdc390",
   "size": 154,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x718A80",
+  "total_chunk_size": 154,
   "type": "int __thiscall(float *this, NiTransform *)",
   "xrefs_from_count": 57,
   "xrefs_to_count": 47

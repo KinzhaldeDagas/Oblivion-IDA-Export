@@ -14,7 +14,7 @@
 0x4CC08F: push    ebx; a2
 0x4CC090: call    NiTMap_SetAt
 0x4CC095: push    ebx; a2
-0x4CC096: mov     ecx, offset stru_B35C80; this
+0x4CC096: mov     ecx, offset unk_B35C80; this
 0x4CC09B: call    sub_496EA0
 0x4CC0A0: lea     esi, [ebx+48h]
 0x4CC0A3: cmp     esi, ebp
@@ -35,11 +35,11 @@
 0x4CC0D4: cmp     byte ptr [eax+4], 18h
 0x4CC0D8: jnz     short loc_4CC100
 0x4CC0DA: mov     ecx, edi; this
-0x4CC0DC: call    GetTeleportExtraData
+0x4CC0DC: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x4CC0E1: test    eax, eax
 0x4CC0E3: jz      short loc_4CC100
 0x4CC0E5: mov     ecx, eax
-0x4CC0E7: call    sub_42B460
+0x4CC0E7: call    sub_42B460; ExtraTeleport_GetTargetCell-style helper: returns parent cell of ExtraTeleport+0 target ref if present.
 0x4CC0EC: test    eax, eax
 0x4CC0EE: jz      short loc_4CC100
 0x4CC0F0: test    byte ptr [eax+24h], 1
@@ -67,7 +67,7 @@
 0x4CC12F: test    esi, esi
 0x4CC131: jnz     short loc_4CC0B3
 0x4CC133: push    ebx; a2
-0x4CC134: mov     ecx, offset stru_B35C80; this
+0x4CC134: mov     ecx, offset unk_B35C80; this
 0x4CC139: call    sub_496F50
 0x4CC13E: lea     esi, [esp+1Ch+var_8]
 0x4CC142: cmp     dword ptr [esi+4], 0
@@ -76,15 +76,15 @@
 0x4CC14B: jz      short loc_4CC188
 0x4CC14D: mov     edi, [esi]
 0x4CC14F: mov     ebx, [esp+1Ch+arg_0]
-0x4CC153: lea     eax, [esp+1Ch+var_9]
-0x4CC157: push    eax
-0x4CC158: push    edi
-0x4CC159: mov     ecx, ebx
-0x4CC15B: mov     [esp+24h+var_9], 0
-0x4CC160: call    sub_4D6760
+0x4CC153: lea     eax, [esp+1Ch+valueOut]
+0x4CC157: push    eax; valueOut
+0x4CC158: push    edi; key
+0x4CC159: mov     ecx, ebx; this
+0x4CC15B: mov     [esp+24h+valueOut], 0
+0x4CC160: call    NiTMap_TryGetAtByteValue; Verified generic NiTMap lookup helper: hashes the UInt32 key through the map vtable, walks the bucket chain using the map's key comparator, returns false when absent, and on a match writes the low byte of the entry data field to valueOut and returns true. Callers use it for byte/boolean-valued maps, including PlayerCharacter_GetLastSpaceForDoor and cell/worldspace visited or filter maps; this helper does not establish the full map value width.
 0x4CC165: test    al, al
 0x4CC167: jz      short loc_4CC170
-0x4CC169: cmp     [esp+1Ch+var_9], 0
+0x4CC169: cmp     [esp+1Ch+valueOut], 0
 0x4CC16E: jnz     short loc_4CC181
 0x4CC170: push    ebx
 0x4CC171: mov     ecx, edi
@@ -96,7 +96,7 @@
 0x4CC184: test    esi, esi
 0x4CC186: jnz     short loc_4CC142
 0x4CC188: lea     ecx, [esp+1Ch+var_8]
-0x4CC18C: call    BSSimpleList_Clear
+0x4CC18C: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x4CC191: mov     al, [esp+1Ch+var_A]
 0x4CC195: pop     edi
 0x4CC196: pop     esi

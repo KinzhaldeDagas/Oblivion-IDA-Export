@@ -1,19 +1,36 @@
 {
-  "callees_count": 14,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7D5F80",
+  "chunks": [
+    [
+      "0x7D5F80",
+      "0x7D605F"
+    ],
+    [
+      "0x9CEC10",
+      "0x9CEC44"
+    ]
+  ],
+  "chunks_sha256": "7d71cbe176073153d2a5776b0343867507e8a1d4be19ff706b0d037693e5d848",
+  "comment_regular": "Searches a refcounted pointer list by payload identity, removes the first matching node through RemovePosition, and returns a strong reference. Used for active/full shadow lights and receiver geometry removal.",
+  "comment_repeatable": "Searches a refcounted pointer list by payload identity, removes the first matching node through RemovePosition, and returns a strong reference. Used for active/full shadow lights and receiver geometry removal.\n\nMEF PERF 2026-10-07: PERF-12 Verified rescan:7D5FAD loads list head;7D5FC0 compares requested payload with node+8, follows next+0, then7D5FE4 calls RemovePosition. Removing D tail entries after K retained entries costs D*(K+1) comparisons. Caller7C7813 repeats this scan for each orphan. Distinct from PERF-6 ranking and PERF-9 source-identity search.\nMEF v57 IMPLEMENTED 2026-10-08: PERF-12 and PERF-13 cleanup implemented: non-head unique payload lookup can use a maintained node index, then native RemovePosition and native returned-reference choreography. Head removal remains native O(1). Missing-key output remains original requested payload with strong reference. Cleanup temp becomes active only after RemovePosition returns, matching7D5FE9 SEH.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "NiTRefPointerList__RemoveFirstByValue",
   "end_ea": "0x7D605F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7D5F80",
+  "name": "NiTRefPointerList__RemoveFirstByValue",
   "segment": ".text",
   "sha256": "625adca78c1cdae6db24ab261ce0fd7fc14719e112d7c96bf29713642bcbe9a3",
   "size": 223,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7D5F80",
-  "type": "int *__thiscall(int **this, int *, int *)",
-  "xrefs_from_count": 92,
+  "total_chunk_size": 275,
+  "type": "void **__thiscall(MEF_RefList32 *self, void **result, void **payload)",
+  "xrefs_from_count": 108,
   "xrefs_to_count": 3
 }

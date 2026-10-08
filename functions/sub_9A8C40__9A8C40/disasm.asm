@@ -49,18 +49,18 @@
 0x9A8CC1: jnz     short loc_9A8D41
 0x9A8CC3: cmp     [esp+10h+arg_1C], 4
 0x9A8CC8: jnz     short loc_9A8D41
-0x9A8CCA: cmp     byte_B4295B, 0
+0x9A8CCA: cmp     g_D3DXParameterDispatchInitialized, 0
 0x9A8CD1: jnz     short loc_9A8CD8
-0x9A8CD3: call    sub_783C70
+0x9A8CD3: call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.
 0x9A8CD8: and     edi, 0FFh
-0x9A8CDE: cmp     dword_B428D8[edi*4], 1
+0x9A8CDE: cmp     g_D3DXParameterClassDispatch[edi*4], 1
 0x9A8CE6: jz      short loc_9A8D41
-0x9A8CE8: cmp     byte_B4295B, 0
+0x9A8CE8: cmp     g_D3DXParameterDispatchInitialized, 0
 0x9A8CEF: mov     edi, [esi+14h]
 0x9A8CF2: jnz     short loc_9A8CF9
-0x9A8CF4: call    sub_783C70
+0x9A8CF4: call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.
 0x9A8CF9: and     edi, 0FFh
-0x9A8CFF: cmp     dword_B428D8[edi*4], 3
+0x9A8CFF: cmp     g_D3DXParameterClassDispatch[edi*4], 3
 0x9A8D07: jz      short loc_9A8D41
 0x9A8D09: test    ebp, ebp
 0x9A8D0B: jz      short loc_9A8D2A
@@ -68,14 +68,14 @@
 0x9A8D10: mov     eax, [edx+4]
 0x9A8D13: mov     ecx, ebp
 0x9A8D15: call    eax
-0x9A8D17: cmp     eax, offset unk_BAA920
+0x9A8D17: cmp     eax, offset stru_BAA920
 0x9A8D1C: setz    al
 0x9A8D1F: test    al, al
 0x9A8D21: jz      short loc_9A8D2A
 0x9A8D23: mov     eax, 1
 0x9A8D28: jmp     short loc_9A8D45
 0x9A8D2A: push    ebp
-0x9A8D2B: push    offset unk_BAA8D8
+0x9A8D2B: push    offset stru_BAA8D8
 0x9A8D30: call    sub_435CC0
 0x9A8D35: add     esp, 8
 0x9A8D38: test    al, al
@@ -99,15 +99,15 @@
 0x9A8D73: mov     edx, [esi+30h]
 0x9A8D76: push    edx
 0x9A8D77: mov     byte ptr [esi+34h], 1
-0x9A8D7B: call    FormHeapFree
+0x9A8D7B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x9A8D80: push    ebx; Size
 0x9A8D81: call    FormHeapAlloc
 0x9A8D86: mov     ecx, [esp+18h+Src]
-0x9A8D8A: push    ebx; Size
-0x9A8D8B: push    ecx; Src
-0x9A8D8C: push    eax; Dst
+0x9A8D8A: push    ebx; byteCount
+0x9A8D8B: push    ecx; source
+0x9A8D8C: push    eax; destination
 0x9A8D8D: mov     [esi+30h], eax
-0x9A8D90: call    _memcpy
+0x9A8D90: call    _memcpy;
 0x9A8D95: add     esp, 14h
 0x9A8D98: jmp     short loc_9A8DA5
 0x9A8D9A: mov     edx, [esp+10h+Src]

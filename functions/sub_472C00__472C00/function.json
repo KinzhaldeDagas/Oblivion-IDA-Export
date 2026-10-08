@@ -1,18 +1,31 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x472C00",
+      "0x472C3E"
+    ]
+  ],
+  "chunks_sha256": "a7770624e1537d9bffc9a396ec1f3fab0bc88ac7f74ee73652361a38115563ff",
+  "comment_regular": "Attaches a played BSAnimGroupSequence to a ready AnimIdle. Requires phase +0x00 == 1, stores the sequence at +0x10, advances phase to 2 (active), and for dispatch mode +0x04 == 3 starts actor high-process action 0x0B.",
+  "comment_repeatable": "Attaches a played BSAnimGroupSequence to a ready AnimIdle. Requires phase +0x00 == 1, stores the sequence at +0x10, advances phase to 2 (active), and for dispatch mode +0x04 == 3 starts actor high-process action 0x0B.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_472C00",
+  "display_name": "AnimIdle_AttachLoadedSequence",
   "end_ea": "0x472C3E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_472C00",
+  "name": "AnimIdle_AttachLoadedSequence",
   "segment": ".text",
   "sha256": "a7770624e1537d9bffc9a396ec1f3fab0bc88ac7f74ee73652361a38115563ff",
   "size": 62,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x472C00",
+  "total_chunk_size": 62,
   "type": "char __thiscall(Ni2DBuffer **this, Ni2DBuffer *)",
   "xrefs_from_count": 27,
   "xrefs_to_count": 1

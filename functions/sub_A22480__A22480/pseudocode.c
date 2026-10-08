@@ -1,4 +1,4 @@
 void __cdecl sub_A22480()
 {
-  GameSetting_destr((int *)dword_B38EB0);
+  GameSetting_destr((int *)&stru_B38EB0); /*0xa22485*/
 }

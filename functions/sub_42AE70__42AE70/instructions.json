@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x42AEA8",
-    "line": "fstp    dword ptr [eax+1Ch]",
+    "line": "fstp    dword ptr [eax+1Ch]; Constructor stores fifth XPSL dword as runtime rotZ at +0x1C. Repeated XPSL does not update it, and the plugin writer does not read it.",
     "mnemonic": "fstp",
     "size": 3
   },

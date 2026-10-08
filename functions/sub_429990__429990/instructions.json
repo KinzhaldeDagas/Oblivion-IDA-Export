@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x429990",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Verified player-scaled lock level calculation. This reads ExtraLockData.level as a signed byte; when flags bit 0x04 is set it adds PlayerCharacter::GetLevel() multiplied by GameSettingFloat fLeveledLockMult and clamps to 99. Fallout's REFR_LOCK::GetLevel accepts an owner reference and uses that reference's calculated level when non-null; Oblivion always uses global PlayerCharacter reference. This is a direct implementation divergence.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -25,13 +25,13 @@
   },
   {
     "ea": "0x42999E",
-    "line": "jz      short loc_4299CD",
+    "line": "jz      short loc_4299CD; XLOC bit2 naming cross-check: ExtraLock leveling adjustment tests flags byte+8 &4 at0x42999E and when set derives difficulty from lock level plus Actor level times the leveled-lock global. This corroborates the loaded flag name leveled_lock; bit0 is independently proven by ExtraLock_IsLocked0x428E70. Other byte bits remain unnamed/unknown.",
     "mnemonic": "jz",
     "size": 2
   },
   {
     "ea": "0x4299A0",
-    "line": "mov     ecx, TESDataHandler_g_PlayerRef",
+    "line": "mov     ecx, dword ptr reference",
     "mnemonic": "mov",
     "size": 6
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x4299B4",
-    "line": "fmul    fLeveledLockMult",
+    "line": "fmul    dword ptr ds:0B33880h",
     "mnemonic": "fmul",
     "size": 6
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x4299BE",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },

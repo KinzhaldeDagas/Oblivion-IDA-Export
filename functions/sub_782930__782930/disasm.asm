@@ -1,4 +1,4 @@
-0x782930: push    ebx
+0x782930: push    ebx; Pass225: Unlinks NiGeometryBufferData from owning group; decrements group refcount and clears buffer+0x04.
 0x782931: push    ebp
 0x782932: push    esi
 0x782933: push    edi
@@ -6,7 +6,7 @@
 0x782936: lea     eax, [edi+4]
 0x782939: push    eax; lpAddend
 0x78293A: call    dword ptr ds:0A2807Ch
-0x782940: mov     ebx, [esp+10h+arg_0]
+0x782940: mov     ebx, [esp+10h+buffer]
 0x782944: mov     ebp, [ebx+1Ch]
 0x782947: xor     esi, esi
 0x782949: cmp     ebp, esi
@@ -22,7 +22,7 @@
 0x78295E: cmp     esi, ebp
 0x782960: jb      short loc_782950
 0x782962: mov     ecx, ebx
-0x782964: call    sub_777F40
+0x782964: call    sub_777F40; MoonSugarEffect decode: release BuffData index buffer and reset IBSize/IB.
 0x782969: pop     edi
 0x78296A: pop     esi
 0x78296B: pop     ebp

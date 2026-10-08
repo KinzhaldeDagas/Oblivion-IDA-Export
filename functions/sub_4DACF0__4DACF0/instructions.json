@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x4DAD08",
-    "line": "call    sub_452A60",
+    "line": "call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x4DAD60",
-    "line": "cmp     eax, offset dword_B35288",
+    "line": "cmp     eax, 0B35288h",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x4DAD7E",
-    "line": "push    offset dword_BA7D84",
+    "line": "push    offset stru_BA7D84",
     "mnemonic": "push",
     "size": 5
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x4DADA6",
-    "line": "lea     ecx, [esp+2Ch+var_10]",
+    "line": "lea     ecx, [esp+2Ch+source]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -391,13 +391,13 @@
   },
   {
     "ea": "0x4DADB2",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4DADB8",
-    "line": "push    0Ch; Size",
+    "line": "push    0Ch; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x4DADBE",
-    "line": "push    edx; Src",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -421,25 +421,25 @@
   },
   {
     "ea": "0x4DADC4",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4DADCA",
-    "line": "push    10h; Size",
+    "line": "push    10h; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4DADCC",
-    "line": "lea     eax, [esp+30h+var_10]",
+    "line": "lea     eax, [esp+30h+source]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4DADD0",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -529,13 +529,13 @@
   },
   {
     "ea": "0x4DADFA",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4DAE00",
-    "line": "push    1; Size",
+    "line": "push    1; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x4DAE06",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x4DAE1F",
-    "line": "lea     edx, [esp+2Ch+var_10]",
+    "line": "lea     edx, [esp+2Ch+source]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -619,13 +619,13 @@
   },
   {
     "ea": "0x4DAE2B",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4DAE31",
-    "line": "push    0Ch; Size",
+    "line": "push    0Ch; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x4DAE37",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -649,25 +649,25 @@
   },
   {
     "ea": "0x4DAE3D",
-    "line": "push    0Ch; Size",
+    "line": "push    0Ch; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4DAE3F",
-    "line": "lea     ecx, [esp+30h+var_10]",
+    "line": "lea     ecx, [esp+30h+source]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4DAE43",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4DAE44",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },

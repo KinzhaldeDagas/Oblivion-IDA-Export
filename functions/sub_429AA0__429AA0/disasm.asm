@@ -32,12 +32,12 @@
 0x429AEB: cmp     ecx, [edx+4]
 0x429AEE: jnz     short loc_429AC6
 0x429AF0: movsx   eax, byte ptr [eax]
-0x429AF3: push    eax
-0x429AF4: call    GetLockLevel
+0x429AF3: push    eax; numericLockMagnitude
+0x429AF4: call    GetLockLevel; Verified numeric lock magnitude to LOCK_LEVEL mapper. Thresholds are iLockLevelMaxVeryEasy, iLockLevelMaxEasy, iLockLevelMaxAverage, iLockLevelMaxHard, and iLockLevelMaxVeryHard; outputs 0..5 map through LockLevelNames to VeryEasy, Easy, Average, Hard, VeryHard, Impossible. Fallout independently uses the matching LOCK_LEVEL names, but this mapping is directly established by Oblivion code and data.
 0x429AF9: movsx   ecx, byte ptr [edx]
-0x429AFC: push    ecx
+0x429AFC: push    ecx; numericLockMagnitude
 0x429AFD: mov     esi, eax
-0x429AFF: call    GetLockLevel
+0x429AFF: call    GetLockLevel; Verified numeric lock magnitude to LOCK_LEVEL mapper. Thresholds are iLockLevelMaxVeryEasy, iLockLevelMaxEasy, iLockLevelMaxAverage, iLockLevelMaxHard, and iLockLevelMaxVeryHard; outputs 0..5 map through LockLevelNames to VeryEasy, Easy, Average, Hard, VeryHard, Impossible. Fallout independently uses the matching LOCK_LEVEL names, but this mapping is directly established by Oblivion code and data.
 0x429B04: add     esp, 8
 0x429B07: pop     edi
 0x429B08: cmp     esi, eax

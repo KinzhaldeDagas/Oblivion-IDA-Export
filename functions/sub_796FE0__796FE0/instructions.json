@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x796FE0",
-    "line": "push    ebp",
+    "line": "push    ebp; OBLIVION AUTHORITY (2026-08-30): Insert-fill core for vector<vector<unsigned short>>. Copies the fill value, uses 0x10-byte owner arithmetic, 1.5x growth, exception-safe move/fill construction, and normal epilogue at 0x797267; prior noreturn metadata was false.",
     "mnemonic": "push",
     "size": 1
   },
@@ -109,25 +109,25 @@
   },
   {
     "ea": "0x797010",
-    "line": "mov     eax, [ebp+arg_C]",
+    "line": "mov     eax, [ebp+first]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x797013",
-    "line": "push    eax",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x797014",
-    "line": "lea     ecx, [ebp+var_28]",
+    "line": "lea     ecx, [ebp+var_28]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x797017",
-    "line": "call    sub_795480",
+    "line": "call    OB_stVectorUShort_CopyCtor_010201A0; OBLIVION AUTHORITY (2026-08-30): Deep copy constructor for vector<unsigned short>; allocates exact source size and copies its 2-byte elements.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x797034",
-    "line": "mov     edi, [ebp+arg_8]",
+    "line": "mov     edi, [ebp+last]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x797056",
-    "line": "call    sub_790B90",
+    "line": "call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error(\"vector<T> too long\") and throws; used by multiple element specializations after max_size checks.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,13 +499,13 @@
   },
   {
     "ea": "0x7970B5",
-    "line": "push    ebx; char *",
+    "line": "push    ebx; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7970B6",
-    "line": "call    sub_794550",
+    "line": "call    OB_stVector16_Allocate_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded allocator for arrays of 0x10-byte elements. Checks count*0x10 overflow, throws std::bad_alloc on overflow, and allocates through FormHeapAlloc; used by multiple outer-vector specializations including vector<vector<float>> and vector<vector<SFrondGuide>>.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,13 +517,13 @@
   },
   {
     "ea": "0x7970BE",
-    "line": "mov     byte ptr [ebp+var_18], 0",
+    "line": "mov     byte ptr [ebp+destinationEnd], 0",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7970C2",
-    "line": "mov     edx, [ebp+var_18]",
+    "line": "mov     edx, [ebp+destinationEnd]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -535,13 +535,13 @@
   },
   {
     "ea": "0x7970C6",
-    "line": "mov     [ebp+arg_8], eax",
+    "line": "mov     [ebp+last], eax",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7970C9",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+last]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -559,31 +559,31 @@
   },
   {
     "ea": "0x7970CE",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7970CF",
-    "line": "mov     [ebp+arg_C], eax",
+    "line": "mov     [ebp+first], eax",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7970D2",
-    "line": "mov     eax, [ebp+arg_4]",
+    "line": "mov     eax, [ebp+position]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7970D5",
-    "line": "push    eax",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7970D6",
-    "line": "push    ecx",
+    "line": "push    ecx; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x7970DB",
-    "line": "call    sub_795E00",
+    "line": "call    OB_stVector_stVectorUShort_UninitializedMoveRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Exception-safe uninitialized move for vector<unsigned short> owners. Constructs empty destinations then swaps their buffers with sources, leaving sources empty; normal return is at 0x795EA8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -613,19 +613,19 @@
   },
   {
     "ea": "0x7970E6",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7970E7",
-    "line": "push    edi",
+    "line": "push    edi; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7970E8",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -637,13 +637,13 @@
   },
   {
     "ea": "0x7970EB",
-    "line": "mov     [ebp+arg_8], eax",
+    "line": "mov     [ebp+last], eax",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7970EE",
-    "line": "call    sub_7968D0",
+    "line": "call    OB_stVector_stVectorUShort_UninitializedFillNThunk_010201A0; OBLIVION AUTHORITY (2026-08-30): Stdcall uninitialized_fill_n adapter for vector<unsigned short> owners. Boundary repaired through its pointer-result epilogue and ret 0x0C at 0x796904.",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,13 +655,13 @@
   },
   {
     "ea": "0x7970F6",
-    "line": "mov     byte ptr [ebp+var_18], 0",
+    "line": "mov     byte ptr [ebp+destinationEnd], 0",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7970FA",
-    "line": "mov     edx, [ebp+var_18]",
+    "line": "mov     edx, [ebp+destinationEnd]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -673,13 +673,13 @@
   },
   {
     "ea": "0x7970FE",
-    "line": "mov     [ebp+arg_8], eax",
+    "line": "mov     [ebp+last], eax",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x797101",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+last]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -697,31 +697,31 @@
   },
   {
     "ea": "0x797106",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x797107",
-    "line": "mov     eax, [ebp+arg_4]",
+    "line": "mov     eax, [ebp+position]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x79710A",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79710B",
-    "line": "push    eax",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79710C",
-    "line": "call    sub_795E00",
+    "line": "call    OB_stVector_stVectorUShort_UninitializedMoveRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Exception-safe uninitialized move for vector<unsigned short> owners. Constructs empty destinations then swaps their buffers with sources, leaving sources empty; normal return is at 0x795EA8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -799,7 +799,7 @@
   },
   {
     "ea": "0x79712D",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+last]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -823,19 +823,19 @@
   },
   {
     "ea": "0x797135",
-    "line": "push    eax",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x797136",
-    "line": "push    ecx",
+    "line": "push    ecx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x797137",
-    "line": "call    sub_794FC0",
+    "line": "call    OB_stVector4_DestroyRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Destroys each 0x10-byte vector owner in [first,last), freeing its owned buffer and clearing the pointer triplet.",
     "mnemonic": "call",
     "size": 5
   },
@@ -853,7 +853,7 @@
   },
   {
     "ea": "0x797140",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x797148",
-    "line": "mov     eax, [ebp+arg_C]",
+    "line": "mov     eax, [ebp+first]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -919,13 +919,13 @@
   },
   {
     "ea": "0x797163",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+last]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x797166",
-    "line": "mov     esi, [ebp+arg_C]",
+    "line": "mov     esi, [ebp+first]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -937,19 +937,19 @@
   },
   {
     "ea": "0x79716C",
-    "line": "push    edx",
+    "line": "push    edx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79716D",
-    "line": "push    esi",
+    "line": "push    esi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79716E",
-    "line": "call    sub_795820",
+    "line": "call    OB_stVector4_DestroyRangeThunk_010201A0; OBLIVION AUTHORITY (2026-08-30): stdcall adapter for the compiler-folded 0x10-byte vector-owner destruction range.",
     "mnemonic": "call",
     "size": 5
   },
@@ -961,7 +961,7 @@
   },
   {
     "ea": "0x797174",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -997,7 +997,7 @@
   },
   {
     "ea": "0x797188",
-    "line": "mov     ebx, [ebp+arg_4]",
+    "line": "mov     ebx, [ebp+position]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1027,7 +1027,7 @@
   },
   {
     "ea": "0x797194",
-    "line": "mov     [ebp+var_18], eax",
+    "line": "mov     [ebp+destinationEnd], eax",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1051,7 +1051,7 @@
   },
   {
     "ea": "0x79719E",
-    "line": "mov     [ebp+arg_C], ecx",
+    "line": "mov     [ebp+first], ecx",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1063,19 +1063,19 @@
   },
   {
     "ea": "0x7971A3",
-    "line": "push    ecx",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7971A4",
-    "line": "push    eax",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7971A5",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -1087,7 +1087,7 @@
   },
   {
     "ea": "0x7971A8",
-    "line": "call    sub_796910",
+    "line": "call    OB_stVector_stVectorUShort_UninitializedMoveRangeThunk_010201A0; OBLIVION AUTHORITY (2026-08-30): Stdcall adapter for uninitialized moving vector<unsigned short> owners. Boundary repaired through ret 0x0C at 0x796936 and noreturn cleared.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1123,7 +1123,7 @@
   },
   {
     "ea": "0x7971BA",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -1135,13 +1135,13 @@
   },
   {
     "ea": "0x7971BD",
-    "line": "push    edi",
+    "line": "push    edi; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7971BE",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -1159,13 +1159,13 @@
   },
   {
     "ea": "0x7971C5",
-    "line": "call    sub_7968D0",
+    "line": "call    OB_stVector_stVectorUShort_UninitializedFillNThunk_010201A0; OBLIVION AUTHORITY (2026-08-30): Stdcall uninitialized_fill_n adapter for vector<unsigned short> owners. Boundary repaired through its pointer-result epilogue and ret 0x0C at 0x796904.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7971CA",
-    "line": "mov     eax, [ebp+arg_C]",
+    "line": "mov     eax, [ebp+first]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1189,7 +1189,7 @@
   },
   {
     "ea": "0x7971D6",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -1201,13 +1201,13 @@
   },
   {
     "ea": "0x7971D9",
-    "line": "push    esi",
+    "line": "push    esi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7971DA",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -1219,7 +1219,7 @@
   },
   {
     "ea": "0x7971E2",
-    "line": "call    sub_795D20",
+    "line": "call    OB_stVector_stVectorUShort_CopyAssignFillRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Assigns the same vector<unsigned short> value across an initialized owner range by repeated deep copy assignment.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1243,7 +1243,7 @@
   },
   {
     "ea": "0x7971EF",
-    "line": "mov     eax, [ebp+arg_8]",
+    "line": "mov     eax, [ebp+last]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1267,13 +1267,13 @@
   },
   {
     "ea": "0x7971FA",
-    "line": "push    edx",
+    "line": "push    edx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7971FB",
-    "line": "mov     edx, [ebp+arg_4]",
+    "line": "mov     edx, [ebp+position]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1285,13 +1285,13 @@
   },
   {
     "ea": "0x797200",
-    "line": "push    eax",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x797201",
-    "line": "call    sub_795820",
+    "line": "call    OB_stVector4_DestroyRangeThunk_010201A0; OBLIVION AUTHORITY (2026-08-30): stdcall adapter for the compiler-folded 0x10-byte vector-owner destruction range.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1327,7 +1327,7 @@
   },
   {
     "ea": "0x797214",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -1345,19 +1345,19 @@
   },
   {
     "ea": "0x797219",
-    "line": "push    eax",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79721A",
-    "line": "mov     [ebp+arg_C], ecx",
+    "line": "mov     [ebp+first], ecx",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x79721D",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -1369,7 +1369,7 @@
   },
   {
     "ea": "0x797220",
-    "line": "call    sub_796910",
+    "line": "call    OB_stVector_stVectorUShort_UninitializedMoveRangeThunk_010201A0; OBLIVION AUTHORITY (2026-08-30): Stdcall adapter for uninitialized moving vector<unsigned short> owners. Boundary repaired through ret 0x0C at 0x796936 and noreturn cleared.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1381,37 +1381,37 @@
   },
   {
     "ea": "0x797228",
-    "line": "mov     eax, [ebp+var_18]",
+    "line": "mov     eax, [ebp+destinationEnd]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x79722B",
-    "line": "push    eax",
+    "line": "push    eax; destinationEnd",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79722C",
-    "line": "push    edi",
+    "line": "push    edi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79722D",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79722E",
-    "line": "call    sub_796940",
+    "line": "call    OB_stVector_stVectorUShort_MoveAssignRangeBackward_010201A0; OBLIVION AUTHORITY (2026-08-30): Backward move-assignment of vector<unsigned short> owners, implemented by swapping pointer triplets from the range end toward destinationEnd.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x797233",
-    "line": "mov     edx, [ebp+arg_C]",
+    "line": "mov     edx, [ebp+first]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1423,7 +1423,7 @@
   },
   {
     "ea": "0x797239",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -1435,19 +1435,19 @@
   },
   {
     "ea": "0x79723C",
-    "line": "push    edx",
+    "line": "push    edx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79723D",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79723E",
-    "line": "call    sub_795D20",
+    "line": "call    OB_stVector_stVectorUShort_CopyAssignFillRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Assigns the same vector<unsigned short> value across an initialized owner range by repeated deep copy assignment.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1459,7 +1459,7 @@
   },
   {
     "ea": "0x797246",
-    "line": "mov     eax, [ebp+var_24]",
+    "line": "mov     eax, [ebp+var_28.begin]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1483,7 +1483,7 @@
   },
   {
     "ea": "0x79724E",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1546,5 +1546,59 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CBFB0",
+    "line": "lea     ecx, [ebp+var_28]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CBFB3",
+    "line": "jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CBFB8",
+    "line": "mov     edx, [esp-4+position]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CBFBC",
+    "line": "lea     eax, [edx+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CBFBF",
+    "line": "mov     ecx, [edx-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CBFC2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CBFC4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CBFC9",
+    "line": "mov     eax, offset stru_AF5020",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CBFCE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x6458CF",
-    "line": "call    Actor_GetBaseClass",
+    "line": "call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.",
     "mnemonic": "call",
     "size": 5
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x6458D6",
-    "line": "call    TESClass__IsGuardClass",
+    "line": "call    TESClass__IsGuardClass; TESClass::IsGuardClass reads classFlags at +0x60 bit 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -847,7 +847,7 @@
   },
   {
     "ea": "0x645A1D",
-    "line": "call    sub_5EAE70",
+    "line": "call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.",
     "mnemonic": "call",
     "size": 5
   },

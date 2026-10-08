@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
-  "callers_count": 26,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 30,
+  "chunks": [
+    [
+      "0x6B7260",
+      "0x6B7278"
+    ]
+  ],
+  "chunks_sha256": "24b5ba391c1f94381260cdb4c873a6e11b9a12fc64ce35882d1a9002bad4ab26",
+  "comment_regular": "Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.",
+  "comment_repeatable": "Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6B7260",
+  "display_name": "SoundHandle::IsPlaying",
   "end_ea": "0x6B7278",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6B7260",
+  "name": "SoundHandle::IsPlaying",
   "segment": ".text",
   "sha256": "24b5ba391c1f94381260cdb4c873a6e11b9a12fc64ce35882d1a9002bad4ab26",
   "size": 24,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6B7260",
-  "type": "bool __thiscall(int *this)",
+  "total_chunk_size": 24,
+  "type": "bool __thiscall(UInt32 *this)",
   "xrefs_from_count": 10,
   "xrefs_to_count": 30
 }

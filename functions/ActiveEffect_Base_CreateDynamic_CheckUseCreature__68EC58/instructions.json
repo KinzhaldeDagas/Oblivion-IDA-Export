@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x68EC58",
-    "line": "mov     edx, [ecx+58h]",
+    "line": "mov     edx, [ecx+58h]; Verified generic effect fallback: EffectSetting flag 0x40000 selects SummonCreatureEffect; otherwise dispatch continues through weapon/value-modifier handling. Other bits remain Unknown.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x68EC61",
-    "line": "jz      short ActiveEffect_Base_CreateDynamic___CheckUseWeapon",
+    "line": "jz      short ActiveEffect_Base_CreateDynamic___CheckUseWeapon; Verified (Oblivion): EffectSetting.effectFlags mask 0x40000 selects SummonCreatureEffect; the symbolic flag name is Unknown.",
     "mnemonic": "jz",
     "size": 2
   }

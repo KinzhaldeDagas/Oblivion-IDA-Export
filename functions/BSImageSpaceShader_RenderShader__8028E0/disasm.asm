@@ -1,4 +1,4 @@
-0x8028E0: push    ebx
+0x8028E0: push    ebx; MoonSugarEffect decode: BSImageSpaceShader::RenderShader stores source BSRenderedTexture at +0x7C and renders a NiScreenElements full-screen quad.
 0x8028E1: mov     ebx, 1
 0x8028E6: cmp     [esp+4+arg_C], bl
 0x8028EA: push    ebp
@@ -11,12 +11,12 @@
 0x8028F9: mov     ecx, [eax]; this
 0x8028FB: test    ecx, ecx
 0x8028FD: jz      short loc_802906
-0x8028FF: call    BSRenderedTexture__UseTextureToRender
+0x8028FF: call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.
 0x802904: jmp     short loc_802908
 0x802906: xor     eax, eax
 0x802908: push    0; clearFlags
 0x80290A: push    eax; a1
-0x80290B: call    StartUsingRenderTarget
+0x80290B: call    NiRenderer_PushAndBeginRenderTargetGroup; Begin a render-target-group stack entry: resolve null to the default group, end any currently ready group, begin the requested group, then strong-own it on the ten-entry global stack.
 0x802910: mov     ecx, [esp+10h+arg_4]
 0x802914: add     esp, 8
 0x802917: push    esi
@@ -61,8 +61,8 @@
 0x80297E: mov     ecx, ds:0B3F928h
 0x802984: push    ecx
 0x802985: mov     ecx, [esp+0Ch+arg_0]; this
-0x802989: call    sub_709C60
-0x80298E: call    sub_7D7110
+0x802989: call    sub_709C60; MoonSugarEffect decode: NiScreenElements render thunk. Callers push NiDX9Renderer on the stack, then this thunk jumps to object vtable +0x84.
+0x80298E: call    NiRenderer_PopRenderTargetGroupAndRestore; Pop the current render-target group, then resume the preceding stack entry (or the default group) with kClear_NONE.
 0x802993: pop     ebp
 0x802994: pop     ebx
 0x802995: retn    10h

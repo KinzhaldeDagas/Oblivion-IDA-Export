@@ -1,4 +1,4 @@
-0x59B920: push    ebx
+0x59B920: push    ebx; [Controller decode 2026-07-09] Selects next available input scheme for Controls menu: keyboard, mouse, or first joystick/controller when present.
 0x59B921: mov     bl, 3
 0x59B923: add     dword ptr [ecx+5Ch], 1
 0x59B927: cmp     dword ptr [ecx+5Ch], 3

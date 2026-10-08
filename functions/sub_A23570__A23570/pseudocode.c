@@ -1,4 +1,5 @@
-void __cdecl sub_A23570()
+// Verified atexit cleanup calls GameSetting_destr on fTreeFarDistanceBase.
+void __cdecl GameSetting_fTreeFarDistanceBase_atexit()
 {
-  GameSetting_destr((int *)&flt_B39E10);
+  GameSetting_destr((int *)fTreeFarDistanceBase); /*0xa23575*/
 }

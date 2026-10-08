@@ -1,136 +1,216 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "EMRPLGBLT",
+  "definition": "struct EMRPLGBLT\n{\nEMR emr;\nRECTL rclBounds;\nPOINTL aptlDest[3];\nLONG xSrc;\nLONG ySrc;\nLONG cxSrc;\nLONG cySrc;\nXFORM xformSrc;\nCOLORREF crBkColorSrc;\nDWORD iUsageSrc;\nDWORD offBmiSrc;\nDWORD cbBmiSrc;\nDWORD offBitsSrc;\nDWORD cbBitsSrc;\nLONG xMask;\nLONG yMask;\nDWORD iUsageMask;\nDWORD offBmiMask;\nDWORD cbBmiMask;\nDWORD offBitsMask;\nDWORD cbBitsMask;\n}\n",
   "id": 18374686479672027192,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "emr",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "EMR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "rclBounds",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 16
+      "size": 16,
+      "type": "RECTL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "aptlDest",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 24
+      "size": 24,
+      "type": "POINTL[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "xSrc",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ySrc",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cxSrc",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cySrc",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "xformSrc",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 24
+      "size": 24,
+      "type": "XFORM"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "crBkColorSrc",
       "offset": 88,
       "offset_hex": "0x58",
-      "size": 4
+      "size": 4,
+      "type": "COLORREF"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "iUsageSrc",
       "offset": 92,
-      "offset_hex": "0x5c",
-      "size": 4
+      "offset_hex": "0x5C",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "offBmiSrc",
       "offset": 96,
       "offset_hex": "0x60",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cbBmiSrc",
       "offset": 100,
       "offset_hex": "0x64",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "offBitsSrc",
       "offset": 104,
       "offset_hex": "0x68",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cbBitsSrc",
       "offset": 108,
-      "offset_hex": "0x6c",
-      "size": 4
+      "offset_hex": "0x6C",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "xMask",
       "offset": 112,
       "offset_hex": "0x70",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "yMask",
       "offset": 116,
       "offset_hex": "0x74",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "iUsageMask",
       "offset": 120,
       "offset_hex": "0x78",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "offBmiMask",
       "offset": 124,
-      "offset_hex": "0x7c",
-      "size": 4
+      "offset_hex": "0x7C",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cbBmiMask",
       "offset": 128,
       "offset_hex": "0x80",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "offBitsMask",
       "offset": 132,
       "offset_hex": "0x84",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cbBitsMask",
       "offset": 136,
       "offset_hex": "0x88",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     }
   ],
   "name": "EMRPLGBLT",
+  "ordinal": 1359,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 140
 }

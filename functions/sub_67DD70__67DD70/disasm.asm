@@ -11,7 +11,7 @@
 0x67DD8E: test    al, al
 0x67DD90: jz      short loc_67DDB4
 0x67DD92: mov     ecx, esi; this
-0x67DD94: call    TESObjectREFR_GetParentCell
+0x67DD94: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x67DD99: mov     ecx, eax
 0x67DD9B: call    sub_4AF170
 0x67DDA0: test    eax, eax

@@ -553,37 +553,37 @@
   },
   {
     "ea": "0x45ED89",
-    "line": "mov     ecx, [esi+0ACh]",
+    "line": "mov     ecx, [esi+0ACh]; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x45ED8F",
-    "line": "lea     eax, [esp+1Ch+var_8]",
+    "line": "lea     eax, [esp+1Ch+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x45ED93",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45ED94",
-    "line": "push    edi",
+    "line": "push    edi; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45ED95",
-    "line": "mov     [esp+24h+var_8], ebp",
+    "line": "mov     [esp+24h+value], ebp",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x45ED99",
-    "line": "call    sub_446C50",
+    "line": "call    NiTLargeArray32_SetSlot",
     "mnemonic": "call",
     "size": 5
   },
@@ -1099,7 +1099,7 @@
   },
   {
     "ea": "0x45EEA5",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },

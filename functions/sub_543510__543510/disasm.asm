@@ -14,7 +14,7 @@
 0x543531: mov     large fs:0, eax
 0x543537: mov     esi, ecx
 0x543539: push    3
-0x54353B: call    nullsub_returnTrue_0arg
+0x54353B: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x543540: xor     ebp, ebp
 0x543542: add     esp, 4
 0x543545: cmp     [esi+2Ch], ebp
@@ -84,25 +84,25 @@
 0x54360D: mov     ecx, [esi+2Ch]
 0x543610: mov     ecx, [ecx+ebx*4+8]
 0x543614: push    6
-0x543616: call    NiNode_GetNiPropertyByID
+0x543616: call    NiNode_GetNiPropertyByID;
 0x54361B: test    eax, eax
 0x54361D: jz      short loc_543647
 0x54361F: mov     edx, [esi+2Ch]
 0x543622: mov     edi, [edx+ebx*4+8]
 0x543626: push    1; char
-0x543628: push    offset dword_B256D0; int
+0x543628: push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0; int
 0x54362D: push    ebp; Src
-0x54362E: call    NiSourceTexture__LoadTextureByFilename
+0x54362E: call    NiSourceTexture__LoadTextureByFilename; SpeedTreeOBSE 2026-07-14: generic NiSourceTexture creation preserves default pixel/alpha/mipmap preferences. Suitable for authored DDS/TGA composite candidates resolved through engine resources.
 0x543633: add     esp, 0Ch
-0x543636: push    eax
+0x543636: push    eax; texture
 0x543637: push    6
 0x543639: mov     ecx, edi
-0x54363B: call    NiNode_GetNiPropertyByID
-0x543640: mov     ecx, eax
-0x543642: call    NiTexturingProperty__SetUnk08
+0x54363B: call    NiNode_GetNiPropertyByID;
+0x543640: mov     ecx, eax; this
+0x543642: call    OB_NiTexturingProperty_SetBaseTexture_010201A0
 0x543647: push    ebp
 0x543648: mov     [esp+2Ch+var_4], 0FFFFFFFFh
-0x543650: call    FormHeapFree
+0x543650: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x543655: xor     eax, eax
 0x543657: add     esp, 4
 0x54365A: mov     [esp+28h+Src], eax
@@ -167,8 +167,8 @@
 0x54371F: jnz     short loc_543726
 0x543721: mov     eax, offset EmptyString
 0x543726: push    offset aSkySunglare_dd; "Sky\\SunGlare.dds"
-0x54372B: push    eax; Str1
-0x54372C: call    __strcmp
+0x54372B: push    eax; left
+0x54372C: call    CRT_StricmpLocaleDispatch
 0x543731: add     esp, 8
 0x543734: test    eax, eax
 0x543736: jnz     short loc_543751
@@ -203,15 +203,15 @@
 0x543787: mov     ecx, [esi+24h]
 0x54378A: mov     edx, [ecx]
 0x54378C: mov     eax, [edx+4]
-0x54378F: push    1
-0x543791: push    ebp
-0x543792: push    0Ah
+0x54378F: push    1; arg3
+0x543791: push    ebp; normalMapBypass
+0x543792: push    0Ah; shaderId
 0x543794: call    eax
-0x543796: push    eax
-0x543797: call    sub_7B8940
+0x543796: push    eax; root
+0x543797: call    BSShaderManager_AssignShadersRecursive; Generic recursive shader assignment wrapper around 0x7B7FC0. In decoded TES4 tree code it is used for branch shader id 4 and simple/default id 1; no stock call with frond shader id 5 was found in this pass.
 0x54379C: add     esp, 10h
 0x54379F: push    2
-0x5437A1: call    nullsub_returnTrue_0arg
+0x5437A1: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x5437A6: add     esp, 4
 0x5437A9: mov     ecx, dword ptr [esp+28h+var_C]
 0x5437AD: mov     large fs:0, ecx
@@ -222,3 +222,12 @@
 0x5437B8: pop     ebx
 0x5437B9: add     esp, 14h
 0x5437BC: retn
+0x9B5BD0: lea     ecx, [ebp-14h]; void *
+0x9B5BD3: jmp     BSStringT_Clear
+0x9B5BD8: mov     edx, [esp+arg_4]
+0x9B5BDC: lea     eax, [edx-18h]
+0x9B5BDF: mov     ecx, [edx-1Ch]
+0x9B5BE2: xor     ecx, eax
+0x9B5BE4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B5BE9: mov     eax, offset stru_AE0BB4
+0x9B5BEE: jmp     ___CxxFrameHandler3

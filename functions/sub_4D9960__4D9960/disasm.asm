@@ -24,7 +24,7 @@
 0x4D999F: mov     edi, [esi+8]
 0x4D99A2: test    edi, edi
 0x4D99A4: jz      short loc_4D99C8
-0x4D99A6: call    sub_89F570
+0x4D99A6: call    bhkRefObject_UpdateHavokObject
 0x4D99AB: mov     ecx, edi
 0x4D99AD: call    sub_8A6410
 0x4D99B2: mov     ecx, [edi+50h]
@@ -34,7 +34,7 @@
 0x4D99BE: push    edx
 0x4D99BF: call    eax
 0x4D99C1: mov     ecx, esi
-0x4D99C3: call    sub_89F570
+0x4D99C3: call    bhkRefObject_UpdateHavokObject
 0x4D99C8: mov     ecx, [esp+30h+var_4]
 0x4D99CC: pop     edi
 0x4D99CD: pop     esi

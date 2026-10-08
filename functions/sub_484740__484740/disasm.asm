@@ -6,7 +6,6 @@
 0x484748: jz      short loc_484775
 0x48474A: push    edi
 0x48474B: jmp     short loc_484750
-0x48474D: align 10h
 0x484750: mov     edi, [esi]
 0x484752: test    edi, edi
 0x484754: jz      short loc_484774

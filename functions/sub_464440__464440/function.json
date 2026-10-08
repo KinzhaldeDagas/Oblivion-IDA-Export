@@ -1,19 +1,36 @@
 {
-  "callees_count": 94,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 53,
   "callers_count": 3,
+  "chunks": [
+    [
+      "0x464440",
+      "0x464906"
+    ],
+    [
+      "0x9AE6D0",
+      "0x9AE701"
+    ]
+  ],
+  "chunks_sha256": "1d4754dfb3edadaeb25f7e579fbfa76e2395720741cdb8248c57249bc2bf502c",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 9,
-  "display_name": "sub_464440",
+  "comment_repeatable": "Verified: LoadGame finalization (caller 466889) ensures incoming map at manager+4, walks current map at +0, reconciles extant forms through sub45F180/ResetObject and reconstructs missing moved references from their old locations, then destroys old current map and promotes incoming map to +0. Probable Fallout homolog BGSSaveLoadGame::RevertCurrentChanges 825F1938: same existing-form reconciliation, missing moved-reference handling, and final map swap. Fallout uses TESForm::Revert and BGSReconstructFormsInAllFilesMap; Oblivion uses sub45F180 plus source-file search at 45C4F0. Note: function also has a separate game/world initialization branch; the map reconciliation and swap are in the save-load branch.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 16,
+  "display_name": "TESSaveLoadGame_ReconcileExistingChanges",
   "end_ea": "0x464906",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_464440",
+  "name": "TESSaveLoadGame_ReconcileExistingChanges",
   "segment": ".text",
   "sha256": "28495146df09acee2661a61efa71f717a13db748729305b18c6c511e4f3472db",
   "size": 1222,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x464440",
-  "type": "TESWorldSpace *__userpurge@<eax>(char *ecx0@<ecx>, int@<edi>, double@<st2>, double@<st1>, double@<st0>, char)",
-  "xrefs_from_count": 454,
+  "total_chunk_size": 1271,
+  "type": "TESWorldSpace *__userpurge@<eax>(TESSaveLoadGame_SerializationView *self@<ecx>, int arg2@<edi>, double arg3@<st2>, double arg4@<st1>, double arg5@<st0>, char initializationMode)",
+  "xrefs_from_count": 479,
   "xrefs_to_count": 3
 }

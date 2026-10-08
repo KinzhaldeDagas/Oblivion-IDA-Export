@@ -37,7 +37,7 @@
 0x8ABE30: jz      short loc_8ABE3F
 0x8ABE32: push    edi
 0x8ABE33: push    edx
-0x8ABE34: call    sub_8ABCE0
+0x8ABE34: call    sub_8ABCE0; TES4 authoritative: resolves a contact point through the hit collidable/entity transform to compare contact positions between manifold entries.
 0x8ABE39: mov     ecx, [esp+20h+var_8]
 0x8ABE3D: jmp     short loc_8ABEB9
 0x8ABE3F: mov     eax, [ecx+50h]

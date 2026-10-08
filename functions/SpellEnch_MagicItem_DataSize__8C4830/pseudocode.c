@@ -1,4 +1,4 @@
 signed int SpellEnch_MagicItem_DataSize()
 {
-  return 0x10;
+  return 0x10; /*0x8c4835*/
 }

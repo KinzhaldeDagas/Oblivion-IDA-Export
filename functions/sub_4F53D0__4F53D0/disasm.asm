@@ -13,14 +13,14 @@
 0x4F53EE: test    al, al
 0x4F53F0: jz      short loc_4F5414
 0x4F53F2: mov     ecx, esi; this
-0x4F53F4: call    TESObjectREFR_GetParentCell
+0x4F53F4: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x4F53F9: test    eax, eax
 0x4F53FB: jz      short loc_4F5414
-0x4F53FD: push    esi
+0x4F53FD: push    esi; actor
 0x4F53FE: mov     ecx, esi; this
-0x4F5400: call    TESObjectREFR_GetParentCell
-0x4F5405: mov     ecx, eax
-0x4F5407: call    sub_4CAAC0
+0x4F5400: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x4F5405: mov     ecx, eax; cell
+0x4F5407: call    TESObjectCELL_IsOwnedByActor; Verified Oblivion owner predicate: reads the cell's XOWN and XRNK extra data; returns true for an NPC owner matching the actor's base form, or for a faction owner when the actor is an NPC whose faction rank meets the cell's required rank. Player identity is passed into faction-rank evaluation for its special handling. Called by door access/trespass policy and other ownership paths. Fallout has the analogous TESObjectCELL::IsActorBaseCellOwner; it takes TESActorBase* and uses a differently exposed faction-rank path.
 0x4F540C: test    al, al
 0x4F540E: jz      short loc_4F5414
 0x4F5410: fld1

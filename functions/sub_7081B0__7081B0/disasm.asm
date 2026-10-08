@@ -14,7 +14,7 @@
 0x7081CF: mov     large fs:0, eax
 0x7081D5: mov     esi, ecx
 0x7081D7: mov     [esp+24h+var_10], esi
-0x7081DB: mov     ebx, [esp+24h+arg_0]
+0x7081DB: mov     ebx, [esp+24h+payload]
 0x7081DF: push    ebx
 0x7081E0: call    sub_700050
 0x7081E5: mov     ecx, ebx
@@ -26,22 +26,21 @@
 0x7081FC: jz      loc_708315
 0x708202: lea     ebp, [esi+98h]
 0x708208: jmp     short loc_708210
-0x70820A: align 10h
 0x708210: mov     ecx, ebx
 0x708212: sub     edi, 1
 0x708215: call    sub_7124A0
 0x70821A: mov     esi, eax
 0x70821C: test    esi, esi
-0x70821E: mov     [esp+24h+arg_0], esi
+0x70821E: mov     [esp+24h+payload], esi
 0x708222: jz      short loc_70822E
 0x708224: lea     eax, [esi+4]
 0x708227: push    eax; lpAddend
 0x708228: call    dword ptr ds:0A28078h
-0x70822E: lea     ecx, [esp+24h+arg_0]
+0x70822E: lea     ecx, [esp+24h+payload]
 0x708232: push    ecx
 0x708233: mov     ecx, ebp
 0x708235: mov     [esp+28h+var_4], 0
-0x70823D: call    sub_7C16B0
+0x70823D: call    NiTRefPointerList__AddTail; Generic refcounted NiT pointer-list AddTail helper. Allocates a node, assigns/increments its object pointer, links it after the old tail, and updates head/tail/count.
 0x708242: test    esi, esi
 0x708244: mov     [esp+24h+var_4], 0FFFFFFFFh
 0x70824C: jz      short loc_708266
@@ -67,16 +66,16 @@
 0x708285: call    sub_7124A0
 0x70828A: mov     esi, eax
 0x70828C: test    esi, esi
-0x70828E: mov     [esp+24h+arg_0], esi
+0x70828E: mov     [esp+24h+payload], esi
 0x708292: jz      short loc_70829E
 0x708294: lea     eax, [esi+4]
 0x708297: push    eax; lpAddend
 0x708298: call    dword ptr ds:0A28078h
-0x70829E: lea     ecx, [esp+24h+arg_0]
-0x7082A2: push    ecx
-0x7082A3: mov     ecx, ebp
+0x70829E: lea     ecx, [esp+24h+payload]
+0x7082A2: push    ecx; payload
+0x7082A3: mov     ecx, ebp; self
 0x7082A5: mov     [esp+28h+var_4], 1
-0x7082AD: call    sub_749800
+0x7082AD: call    NiTRefPointerList__AddHead; Pass221: Refcounted NiTPointerList head-insert helper; node+0x08 owns the payload reference.
 0x7082B2: test    esi, esi
 0x7082B4: mov     [esp+24h+var_4], 0FFFFFFFFh
 0x7082BC: jz      short loc_7082D6
@@ -119,3 +118,14 @@
 0x708324: pop     ebx
 0x708325: add     esp, 10h
 0x708328: retn    4
+0x9C9760: lea     ecx, [ebp+4]; slot
+0x9C9763: jmp     NiPointerSlot_Release
+0x9C9768: lea     ecx, [ebp+4]; slot
+0x9C976B: jmp     NiPointerSlot_Release
+0x9C9770: mov     edx, [esp+arg_4]
+0x9C9774: lea     eax, [edx-14h]
+0x9C9777: mov     ecx, [edx-18h]
+0x9C977A: xor     ecx, eax
+0x9C977C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C9781: mov     eax, offset stru_AF1FFC
+0x9C9786: jmp     ___CxxFrameHandler3

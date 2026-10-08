@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7F0100",
-    "line": "sub     esp, 34h",
+    "line": "sub     esp, 34h; Transforms the global directional light vector into object space and writes leaf c11; optional point-light position becomes c12. Does not touch texture or alpha.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x7F010A",
-    "line": "mov     esi, [esp+38h+arg_4]",
+    "line": "mov     esi, [esp+38h+inverseWorld]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x7F0110",
-    "line": "fstp    [esp+38h+var_34]",
+    "line": "fstp    [esp+38h+var_34]; Leaf c11 source is the negated shared slot-0 vector. Reset supplies nonzero +X fallback; this function transforms and normalizes it into object space each draw.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x7F015B",
-    "line": "mov     ds:0B46738h, ecx",
+    "line": "mov     ds:0B46738h, ecx; Write leaf object-space directional-light constant c11.xyz. Normals/card data can suppress directional diffuse via NdotL, but cannot suppress a nonzero ambient c5 term.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -235,13 +235,13 @@
   },
   {
     "ea": "0x7F0190",
-    "line": "mov     ecx, [esp+38h+arg_0]",
+    "line": "mov     ecx, [esp+38h+leafProperty]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7F0194",
-    "line": "call    sub_7ED5D0",
+    "line": "call    OB_BSShaderProperty_CountPassListEntriesWithMarker_010201A0; OBLIVION AUTHORITY (2026-08-24): Generic pass-list marker counter used by the SpeedTree leaf program selector. Walks property+0x70 entries and counts nonnull shader objects whose word at +0x118 is not 0x00FF. It does not test ShadowSceneLight disabled byte +0xF4. Result selects point-light shader program bit; it is not a leaf layer/card/LOD index.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x7F01F0",
-    "line": "fdiv    [esp+38h+arg_8]",
+    "line": "fdiv    [esp+38h+objectScale]",
     "mnemonic": "fdiv",
     "size": 4
   },

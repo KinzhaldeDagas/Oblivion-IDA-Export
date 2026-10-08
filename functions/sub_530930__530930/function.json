@@ -1,19 +1,36 @@
 {
-  "callees_count": 18,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_530930",
+  "chunks": [
+    [
+      "0x530930",
+      "0x530A0F"
+    ],
+    [
+      "0x9BD8A0",
+      "0x9BD8C6"
+    ]
+  ],
+  "chunks_sha256": "b63ff17fab0e5738c0ffe20532b86947dc0ca416ebb9c9d3764c04e22af51642",
+  "comment_regular": "Deep-clone every shared TESResponse into a caller-owned response list. TESResponse::CopyFrom copies all 16 TRDT bytes and duplicates responseText; callers clear their temporary list after constructing their own DialogueResponse objects.",
+  "comment_repeatable": "Deep-clone every shared TESResponse into a caller-owned response list. TESResponse::CopyFrom copies all 16 TRDT bytes and duplicates responseText; callers clear their temporary list after constructing their own DialogueResponse objects.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "TESResponseList::CloneFrom",
   "end_ea": "0x530A0F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_530930",
+  "name": "TESResponseList::CloneFrom",
   "segment": ".text",
   "sha256": "56fd868fc3a253105e2fa0f4691c5856f6f2008e91a784a65192ee56a870ab2d",
   "size": 223,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x530930",
-  "type": "void __thiscall(unsigned int **this, int)",
-  "xrefs_from_count": 92,
+  "total_chunk_size": 261,
+  "type": "void __thiscall(TESResponseListView *this, TESResponseListView *source)",
+  "xrefs_from_count": 106,
   "xrefs_to_count": 1
 }

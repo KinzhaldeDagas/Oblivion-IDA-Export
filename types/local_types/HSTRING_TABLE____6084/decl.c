@@ -1,1 +1,4 @@
-HSTRING_TABLE__
+struct HSTRING_TABLE__
+{
+int unused;
+};

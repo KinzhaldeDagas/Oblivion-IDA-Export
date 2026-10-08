@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 3,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x659C30",
+      "0x659C83"
+    ]
+  ],
+  "chunks_sha256": "705f23174808b1d0c02f9b8c53cac0a27c328a4ab360b28b9078faa2dfee7b9a",
+  "comment_regular": "Verified: writes one-byte process level from process GetProcessLevel(+8), or FF when no process; calls TESObjectREFR save, then process SaveGame(+0x3F4) with changeMask and MobileObject owner. RET4; prior floating-point prototype parameters were artifacts.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "MobileObject_SaveModifiedForm",
   "end_ea": "0x659C83",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
-  "has_pseudocode": false,
+  "has_pseudocode": true,
   "name": "MobileObject_SaveModifiedForm",
   "segment": ".text",
   "sha256": "705f23174808b1d0c02f9b8c53cac0a27c328a4ab360b28b9078faa2dfee7b9a",
   "size": 83,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x659C30",
-  "type": "void __userpurge(TESObjectREFR *this@<ecx>, double@<st0>, int Src)",
+  "total_chunk_size": 83,
+  "type": "void __thiscall(MobileObject *self, unsigned int changeMask)",
   "xrefs_from_count": 36,
   "xrefs_to_count": 4
 }

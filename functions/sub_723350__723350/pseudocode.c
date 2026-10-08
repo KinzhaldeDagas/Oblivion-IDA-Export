@@ -1,41 +1,40 @@
-LONG __thiscall sub_723350(unsigned __int16 *this, _DWORD *a2)
+// 2026-10-08 verified NiGeometry LinkObject: first base7081B0 links inherited properties/collision, then two7124A0 stream object resolutions replace+B4 modelData and+B8 skinInstance with exact reference accounting; RET4. Strong family correspondence to Fallout/Xenon82C08C18 (NiAVObject::LinkObject and two object-link resolutions), independently checked in Oblivion body. Base/virtual/destructor side effects prevent narrow ECX-only invalidation without more proof.
+void __thiscall NiGeometry_LinkObject(NiGeometry *self, void *stream)
 {
   int v3; // eax
-  int v4; // esi
-  int v5; // ebx
-  LONG result; // eax
-  int v7; // esi
-  LONG v8; // ebx
+  NiGeometryData *geomData; // esi
+  NiGeometryData *v5; // ebx
+  int v6; // eax
+  NiObject *skinData; // esi
+  NiObject *v8; // ebx
 
-  sub_7081B0(this, a2);
-  v3 = sub_7124A0(a2);
-  v4 = *((_DWORD *)this + 0x2D);
-  v5 = v3;
-  if ( v4 != v3 )
+  sub_7081B0((unsigned __int16 *)self, stream); /*0x72335b*/
+  v3 = sub_7124A0(stream); /*0x723362*/
+  geomData = self->member.geomData; /*0x723367*/
+  v5 = (NiGeometryData *)v3; /*0x72336d*/
+  if ( geomData != (NiGeometryData *)v3 ) /*0x723371*/
   {
-    if ( v4 )
+    if ( geomData ) /*0x723375*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)(v4 + 4)) )
-        (**(void (__thiscall ***)(int, int))v4)(v4, 1);
+      if ( !InterlockedDecrement((volatile LONG *)&geomData->member) ) /*0x72337b*/
+        geomData->__vftable->super.super.Destructor((NiRefObject *)geomData, 1); /*0x723391*/
     }
-    *((_DWORD *)this + 0x2D) = v5;
-    if ( v5 )
-      InterlockedIncrement((volatile LONG *)(v5 + 4));
+    self->member.geomData = v5; /*0x723395*/
+    if ( v5 ) /*0x72339b*/
+      InterlockedIncrement((volatile LONG *)&v5->member); /*0x7233a1*/
   }
-  result = sub_7124A0(a2);
-  v7 = *((_DWORD *)this + 0x2E);
-  v8 = result;
-  if ( v7 != result )
+  v6 = sub_7124A0(stream); /*0x7233a9*/
+  skinData = self->member.skinData; /*0x7233ae*/
+  v8 = (NiObject *)v6; /*0x7233b4*/
+  if ( skinData != (NiObject *)v6 ) /*0x7233b8*/
   {
-    if ( v7 )
+    if ( skinData ) /*0x7233bc*/
     {
-      result = InterlockedDecrement((volatile LONG *)(v7 + 4));
-      if ( !result )
-        result = (**(int (__thiscall ***)(int, int))v7)(v7, 1);
+      if ( !InterlockedDecrement((volatile LONG *)&skinData->members) ) /*0x7233c2*/
+        skinData->__vftable->super.Destructor((NiRefObject *)skinData, 1); /*0x7233d8*/
     }
-    *((_DWORD *)this + 0x2E) = v8;
-    if ( v8 )
-      return InterlockedIncrement((volatile LONG *)(v8 + 4));
+    self->member.skinData = v8; /*0x7233dc*/
+    if ( v8 ) /*0x7233e2*/
+      InterlockedIncrement((volatile LONG *)&v8->members); /*0x7233e8*/
   }
-  return result;
 }

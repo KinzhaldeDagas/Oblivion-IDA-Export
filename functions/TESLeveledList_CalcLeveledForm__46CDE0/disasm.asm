@@ -1,4 +1,4 @@
-0x46CDE0: push    0FFFFFFFFh
+0x46CDE0: push    0FFFFFFFFh; CustomAnimSupport decode: leveled-list resolver evidence with chance/level/random/container logic; not used as deterministic animation target list.
 0x46CDE2: push    offset TESLeveledList_CalcLeveledForm_SEH
 0x46CDE7: mov     eax, large fs:0
 0x46CDED: push    eax
@@ -20,6 +20,15 @@
 0x46CE1A: cmp     si, bx
 0x46CE1D: jbe     TESLeveledList_CalcLeveledForm___Done
 0x46CE23: test    byte ptr [ebp+0Dh], 1
-0x46CE27: movzx   edi, word ptr [esp+3Ch+arg_0]
+0x46CE27: movzx   edi, word ptr [esp+3Ch+arg_0]; Morrowind Leveling hook point: replace raw leveled-list level load/store with adjusted world level, preserving flags for following JZ.
 0x46CE2C: mov     [esp+3Ch+var_28], edi
 0x46CE30: jz      short TESLeveledList_CalcLeveledForm___InitContainer
+0x9AEAF0: lea     ecx, [ebp-1Ch]
+0x9AEAF3: jmp     TESContainer_destr
+0x9AEAF8: mov     edx, [esp+arg_4]
+0x9AEAFC: lea     eax, [edx-2Ch]
+0x9AEAFF: mov     ecx, [edx-30h]
+0x9AEB02: xor     ecx, eax
+0x9AEB04: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AEB09: mov     eax, offset stru_ADB20C
+0x9AEB0E: jmp     ___CxxFrameHandler3

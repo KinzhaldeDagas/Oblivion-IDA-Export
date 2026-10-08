@@ -1,4 +1,4 @@
-0x784370: push    0FFFFFFFFh
+0x784370: push    0FFFFFFFFh; Oblivion compact stBezierSpline scaled-variance path: samples the 500-entry evenlySpacedPoints vector at +0x3C and returns uniform random variance scaled by the sampled y value and variance@0x08. Confirms the executable's min/max/variance field order.
 0x784372: push    offset SEH_784370
 0x784377: mov     eax, large fs:0
 0x78437D: push    eax
@@ -26,10 +26,10 @@
 0x7843BA: add     eax, edx
 0x7843BC: cmp     eax, 1F4h
 0x7843C1: jnz     loc_784488
-0x7843C7: fld     [esp+1Ch+arg_0]
+0x7843C7: fld     [esp+1Ch+percent]
 0x7843CB: fmul    qword ptr ds:0A8BA00h
 0x7843D1: fadd    qword ptr ds:0A2FAA0h
-0x7843D7: call    Double_To_SInt32
+0x7843D7: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x7843DC: mov     edi, eax
 0x7843DE: mov     eax, [esi+40h]
 0x7843E1: test    eax, eax
@@ -53,9 +53,9 @@
 0x784419: fstp    [esp+1Ch+var_10]
 0x78441D: jnz     short loc_78444C
 0x78441F: or      ds:0B42968h, eax
-0x784425: mov     ecx, offset unk_B42964
+0x784425: mov     ecx, offset stru_B42964; this
 0x78442A: mov     [esp+1Ch+var_4], 0
-0x784432: call    sub_78EAF0
+0x784432: call    OB_stRandom_ctor_010201A0; Oblivion stRandom constructor. The class has no per-instance generator state; if the shared SIdvRandomImpl state is not initialized, it invokes Reseed(-1).
 0x784437: push    offset sub_A26E20; void (__cdecl *)()
 0x78443C: call    _atexit
 0x784441: add     esp, 4
@@ -63,20 +63,20 @@
 0x78444C: fld     dword ptr [esi+8]
 0x78444F: sub     esp, 8
 0x784452: fld     [esp+24h+var_10]
-0x784456: mov     ecx, offset unk_B42964
+0x784456: mov     ecx, offset stru_B42964; this
 0x78445B: fld     st
 0x78445D: fmulp   st(2), st
 0x78445F: fxch    st(1)
-0x784461: fstp    [esp+24h+arg_0]
-0x784465: fld     [esp+24h+arg_0]
-0x784469: fstp    [esp+24h+var_20]; float
+0x784461: fstp    [esp+24h+percent]
+0x784465: fld     [esp+24h+percent]
+0x784469: fstp    [esp+24h+maxValue]; maxValue
 0x78446D: fld     dword ptr [esi+8]
 0x784470: fchs
 0x784472: fmulp   st(1), st
-0x784474: fstp    [esp+24h+arg_0]
-0x784478: fld     [esp+24h+arg_0]
-0x78447C: fstp    [esp+24h+var_24]; float
-0x78447F: call    sub_78EA00
+0x784474: fstp    [esp+24h+percent]
+0x784478: fld     [esp+24h+percent]
+0x78447C: fstp    [esp+24h+minValue]; minValue
+0x78447F: call    OB_stRandom_GetUniform_010201A0; Oblivion stRandom::GetUniform. Returns minValue + (maxValue - minValue) * SIdvRandomImpl::m_cUniform.Next(). Used throughout spline, branch, frond, tree, leaf-LOD, and seed generation paths.
 0x784484: fstp    [esp+1Ch+var_10]
 0x784488: fld     [esp+1Ch+var_10]
 0x78448C: mov     ecx, [esp+1Ch+var_C]
@@ -86,3 +86,14 @@
 0x784499: pop     esi
 0x78449A: add     esp, 10h
 0x78449D: retn    4
+0x9CAEE0: mov     eax, dword ptr unk_B42968
+0x9CAEE5: and     eax, 0FFFFFFFEh
+0x9CAEE8: mov     dword ptr unk_B42968, eax
+0x9CAEED: retn
+0x9CAEEE: mov     edx, [esp+arg_4]
+0x9CAEF2: lea     eax, [edx-0Ch]
+0x9CAEF5: mov     ecx, [edx-10h]
+0x9CAEF8: xor     ecx, eax
+0x9CAEFA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CAEFF: mov     eax, offset stru_AF3510
+0x9CAF04: jmp     ___CxxFrameHandler3

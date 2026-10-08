@@ -1,7 +1,7 @@
 0x9F2230: push    offset aIsUnconsciou_0; " is unconscious."
 0x9F2235: push    offset aSnotalkunconsc; "sNoTalkUnConscious"
-0x9F223A: mov     ecx, offset dword_B38B18
-0x9F223F: call    GameSetting_ConstrAndReg
+0x9F223A: mov     ecx, offset stru_B38B18; self
+0x9F223F: call    GameSetting_ConstrAndReg; Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.
 0x9F2244: push    offset sub_A21D50; void (__cdecl *)()
 0x9F2249: call    _atexit
 0x9F224E: pop     ecx

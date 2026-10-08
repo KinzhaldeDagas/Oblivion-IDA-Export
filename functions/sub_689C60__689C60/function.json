@@ -1,19 +1,32 @@
 {
-  "callees_count": 44,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 13,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x689C60",
+      "0x689DC0"
+    ]
+  ],
+  "chunks_sha256": "3218330ee86ac1c99fdd3cf232b6519ddbf7c285fb0e1e19264a99484323cc51",
+  "comment_regular": "Verified route normalization scans teleport references for an earlier route reference in the linked door's spatial container; when one is found, it removes nodes from the list head through the current node. Probable intent is to prune a redundant teleport loop; exact loop policy remains Unknown.",
+  "comment_repeatable": "Verified route normalization scans teleport references for an earlier route reference in the linked door's spatial container; when one is found, it removes nodes from the list head through the current node. Probable intent is to prune a redundant teleport loop; exact loop policy remains Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_689C60",
+  "display_name": "TravelPath_PruneTeleportRouteLoop",
   "end_ea": "0x689DC0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_689C60",
+  "name": "TravelPath_PruneTeleportRouteLoop",
   "segment": ".text",
   "sha256": "3218330ee86ac1c99fdd3cf232b6519ddbf7c285fb0e1e19264a99484323cc51",
   "size": 352,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x689C60",
-  "type": "void __thiscall(_DWORD *this)",
+  "total_chunk_size": 352,
+  "type": "void __thiscall(TravelPath *this)",
   "xrefs_from_count": 165,
   "xrefs_to_count": 1
 }

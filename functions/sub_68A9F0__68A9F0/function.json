@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
-  "callers_count": 13,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 15,
+  "chunks": [
+    [
+      "0x68A9F0",
+      "0x68AA0E"
+    ]
+  ],
+  "chunks_sha256": "5fd57dc6b4d65fc6d2c011d992016bd6f17e60cdfd037d41d1a1479ee7989a21",
+  "comment_regular": "Verified PathLow constructor: installs the PathLow vtable at +0, initializes the BSSimpleList at +4/+8 to empty, copies unk_B3A458 to +0x0C, and sets byte +0x10 to 1. +0x0C and byte +0x10 semantics remain Unknown.",
+  "comment_repeatable": "Verified PathLow constructor: installs the PathLow vtable at +0, initializes the BSSimpleList at +4/+8 to empty, copies unk_B3A458 to +0x0C, and sets byte +0x10 to 1. +0x0C and byte +0x10 semantics remain Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_68A9F0",
+  "display_name": "PathLow_ctor",
   "end_ea": "0x68AA0E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_68A9F0",
+  "name": "PathLow_ctor",
   "segment": ".text",
   "sha256": "5fd57dc6b4d65fc6d2c011d992016bd6f17e60cdfd037d41d1a1479ee7989a21",
   "size": 30,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x68A9F0",
-  "type": "float *__thiscall(float *this)",
+  "total_chunk_size": 30,
+  "type": "TravelPath *__thiscall(TravelPath *this)",
   "xrefs_from_count": 9,
   "xrefs_to_count": 15
 }

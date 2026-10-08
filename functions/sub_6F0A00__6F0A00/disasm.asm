@@ -15,34 +15,34 @@
 0x6F0A2D: push    eax
 0x6F0A2E: lea     eax, [esp+0C0h+var_C]
 0x6F0A35: mov     large fs:0, eax
-0x6F0A3B: mov     ebp, [esp+0C0h+arg_0]
+0x6F0A3B: mov     ebp, [esp+0C0h+source]
 0x6F0A42: mov     edi, [esp+0C0h+arg_4]
 0x6F0A49: mov     esi, [esp+0C0h+arg_8]
 0x6F0A50: mov     ebx, [esp+0C0h+arg_C]
 0x6F0A57: sub     esp, 1Ch
 0x6F0A5A: mov     [esp+0DCh+var_A0], esp
-0x6F0A5E: mov     ecx, esp
-0x6F0A60: push    8; MaxCount
+0x6F0A5E: mov     ecx, esp; this
+0x6F0A60: push    8; count
 0x6F0A62: mov     dword ptr [ecx+18h], 0Fh
 0x6F0A69: mov     dword ptr [ecx+14h], 0
 0x6F0A70: push    offset aFregm002; "FREGM002"
 0x6F0A75: mov     byte ptr [ecx+4], 0
-0x6F0A79: call    sub_414500
+0x6F0A79: call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.
 0x6F0A7E: lea     ecx, [esp+0DCh+var_94]; this
 0x6F0A82: call    sub_6F6110
 0x6F0A87: xor     eax, eax
 0x6F0A89: push    eax
 0x6F0A8A: sub     esp, 1Ch
-0x6F0A8D: mov     ecx, esp
+0x6F0A8D: mov     ecx, esp; this
 0x6F0A8F: mov     [esp+0E0h+var_AC], esp
-0x6F0A93: push    0FFFFFFFFh
-0x6F0A95: push    eax
+0x6F0A93: push    0FFFFFFFFh; count
+0x6F0A95: push    eax; offset
 0x6F0A96: mov     dword ptr [ecx+18h], 0Fh
 0x6F0A9D: mov     [ecx+14h], eax
-0x6F0AA0: push    ebp
+0x6F0AA0: push    ebp; source
 0x6F0AA1: mov     [esp+0ECh+var_4], eax
 0x6F0AA8: mov     [ecx+4], al
-0x6F0AAB: call    sub_414420
+0x6F0AAB: call    OB_stString28_AssignSubstring_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,offset,count). Bounds-checks offset, clamps count to source.size-offset, handles self-assignment by in-place erasure, grows when required, copies the selected bytes, updates size, and writes the terminator.
 0x6F0AB0: lea     ecx, [esp+0E0h+var_94]
 0x6F0AB4: call    sub_6F66E0
 0x6F0AB9: test    al, al
@@ -494,3 +494,20 @@
 0x6F1073: call    ??1FutBinaryFileC@@UAE@XZ; FutBinaryFileC::~FutBinaryFileC(void)
 0x6F1078: xor     al, al
 0x6F107A: jmp     short loc_6F1011
+0x9C8720: lea     ecx, [ebp-94h]; this
+0x9C8726: jmp     ??1BSFaceGenBinaryFile@@UAE@XZ; BSFaceGenBinaryFile::~BSFaceGenBinaryFile(void)
+0x9C872B: lea     ecx, [ebp-94h]; this
+0x9C8731: jmp     ??1FutBinaryFileC@@UAE@XZ; FutBinaryFileC::~FutBinaryFileC(void)
+0x9C8736: lea     ecx, [ebp-94h]; this
+0x9C873C: jmp     ??1FutBinaryFileC@@UAE@XZ; FutBinaryFileC::~FutBinaryFileC(void)
+0x9C8741: mov     edx, [esp+arg_4]
+0x9C8745: lea     eax, [edx-0B0h]
+0x9C874B: mov     ecx, [edx-0B4h]
+0x9C8751: xor     ecx, eax
+0x9C8753: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C8758: add     eax, 10h
+0x9C875B: mov     ecx, [edx-4]
+0x9C875E: xor     ecx, eax
+0x9C8760: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C8765: mov     eax, offset stru_AF0C10
+0x9C876A: jmp     ___CxxFrameHandler3

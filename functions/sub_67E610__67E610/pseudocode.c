@@ -1,114 +1,129 @@
-char __stdcall sub_67E610(float *a1, char *a2, int *a3)
+// Verified A* route builder: F=G+H, Euclidean edge G, Euclidean H, predecessor at +0x0C. It emits a TeleportData chain from v14: the goal if found, otherwise the best candidate seen; return value v13 separately reports whether the goal was reached. Fallout's inspected Pathing uses typed AStarQueue/NavMeshSearchNode and TeleportDoorSearch instead.
+bool __stdcall ConnectedPointGraph_BuildAStarRoute(
+        TESConnectedPoint *start,
+        TESConnectedPoint *goal,
+        TeleportData **outRouteNodes)
 {
-  char result; // al
-  char *i; // edi
-  char *v5; // eax
-  char *v6; // esi
-  char *j; // edi
-  char *v8; // eax
-  _BYTE *v9; // eax
-  _BYTE *v10; // esi
-  float v11; // [esp+0h] [ebp-50h]
-  float v12; // [esp+0h] [ebp-50h]
-  char v13; // [esp+17h] [ebp-39h]
-  char *v14; // [esp+18h] [ebp-38h]
-  char *v15; // [esp+1Ch] [ebp-34h]
+  bool result; // al
+  TESConnectedPoint *i; // edi
+  BSSimpleList_VoidPtr *Connections; // eax
+  TESConnectedPoint *data; // esi
+  _DWORD *p_totalEstimateCost; // edi
+  NiPoint3 *Position; // eax
+  TeleportData *v9; // eax
+  TeleportData *v10; // esi
+  float value; // [esp+0h] [ebp-50h]
+  float valuea; // [esp+0h] [ebp-50h]
+  bool v13; // [esp+17h] [ebp-39h]
+  TESConnectedPoint *v14; // [esp+18h] [ebp-38h]
+  BSSimpleList_VoidPtr *next; // [esp+1Ch] [ebp-34h]
   double v16; // [esp+20h] [ebp-30h]
   float v17; // [esp+20h] [ebp-30h]
-  double v18; // [esp+28h] [ebp-28h]
+  double TotalEstimateCost; // [esp+28h] [ebp-28h]
   NiTPointerList__BSImageSpaceShader v19; // [esp+30h] [ebp-20h] BYREF
   unsigned int v20; // [esp+4Ch] [ebp-4h]
 
-  result = 0;
-  v13 = 0;
-  if ( a1 )
+  result = 0; /*0x67e63f*/
+  v13 = 0; /*0x67e645*/
+  if ( start ) /*0x67e649*/
   {
-    if ( a2 )
+    if ( goal ) /*0x67e654*/
     {
-      if ( a3 )
+      if ( outRouteNodes ) /*0x67e65d*/
       {
-        memset(&v19.start, 0, 0xC);
-        v19.__vftable = (NiTPointerList_BSImageSpaceshaderVtbl *)&AStarNodeList::`vftable';
-        v20 = 0;
-        v14 = 0;
-        sub_67EC70(0.0);
-        v11 = sub_67EF50((char *)a1, a2);
-        sub_67EC80(a1, v11);
-        sub_67EC50(a1);
-        TESWaterCulling::SetCamera((TESWaterCulling *)a1, 0);
-        sub_67ECD0(a1, 1);
-        sub_67EFE0(&v19, (int)a1);
-        for ( i = (char *)sub_67F030(&v19); i; i = (char *)sub_67F030(&v19) )
+        memset(&v19.start, 0, 0xC); /*0x67e667*/
+        v19.__vftable = (NiTPointerList_BSImageSpaceshaderVtbl *)&AStarNodeList::`vftable'; /*0x67e66f*/
+        v20 = 0; /*0x67e67f*/
+        v14 = 0; /*0x67e683*/
+        SetFloatAtOffset_04(start, 0.0); /*0x67e687*/
+        value = TESConnectedPoint_DistanceTo(start, goal); /*0x67e693*/
+        TESConnectedPoint_SetHeuristicCost(start, value); /*0x67e69c*/
+        TESConnectedPoint_RecomputeTotalEstimateCost(start); /*0x67e6a3*/
+        TESWaterCulling::SetCamera((TESWaterCulling *)start, 0); /*0x67e6ab*/
+        GraphNode_SetFlag01(start, 1); /*0x67e6b4*/
+        AStarNodeList_Add(&v19, start); /*0x67e6be*/
+        for ( i = AStarNodeList_PopLowestTotalEstimateCost(&v19); i; i = AStarNodeList_PopLowestTotalEstimateCost(&v19) ) /*0x67e6d0*/
         {
-          if ( v13 )
-            break;
-          if ( i == a2 )
+          if ( v13 ) /*0x67e6e5*/
+            break; /*0x67e6e5*/
+          if ( i == goal ) /*0x67e6ed*/
           {
-            v13 = 1;
-            v14 = a2;
+            v13 = 1; /*0x67e6ef*/
+            v14 = goal; /*0x67e6f4*/
           }
-          v5 = sub_4E7DE0(i);
-          v15 = v5;
-          if ( v5 )
+          Connections = PathGraphNode_GetConnections(i); /*0x67e6fa*/
+          next = Connections; /*0x67e701*/
+          if ( Connections ) /*0x67e705*/
           {
-            while ( *((_DWORD *)v5 + 1) || *(_DWORD *)v5 )
+            while ( Connections->firstNode.next || Connections->firstNode.data ) /*0x67e714*/
             {
-              if ( v13 )
-                break;
-              v6 = *(char **)v5;
-              if ( *(char **)v5 == a2 )
+              if ( v13 ) /*0x67e728*/
+                break; /*0x67e728*/
+              data = (TESConnectedPoint *)Connections->firstNode.data; /*0x67e72e*/
+              if ( Connections->firstNode.data == goal ) /*0x67e732*/
               {
-                v13 = 1;
-                TESWaterCulling::SetCamera((TESWaterCulling *)a2, (NiCamera *)i);
-                v14 = a2;
+                v13 = 1; /*0x67e737*/
+                TESWaterCulling::SetCamera((TESWaterCulling *)goal, (NiCamera *)i); /*0x67e73c*/
+                v14 = goal; /*0x67e741*/
               }
               else
               {
-                v16 = sub_67EF50(i, (char *)*(_DWORD *)v5);
-                v17 = sub_67EC60((float *)i) + v16;
-                if ( !sub_67ECC0(v6) && !sub_67EC90(v6) || sub_67EC60((float *)v6) > v17 )
+                v16 = TESConnectedPoint_DistanceTo(i, (TESConnectedPoint *)Connections->firstNode.data); /*0x67e751*/
+                v17 = TESConnectedPoint_GetPathCost(i) + v16; /*0x67e765*/
+                if ( !GraphNode_IsFlag01Set(data) && !GraphNode_IsFlag02Set(data) /*0x67e795*/
+                  || TESConnectedPoint_GetPathCost(data) > (double)v17 )
                 {
-                  if ( !sub_67ECC0(v6) )
+                  if ( !GraphNode_IsFlag01Set(data) ) /*0x67e79d*/
                   {
-                    sub_67ECD0(v6, 1);
-                    sub_67EFE0(&v19, (int)v6);
+                    GraphNode_SetFlag01(data, 1); /*0x67e7aa*/
+                    AStarNodeList_Add(&v19, data); /*0x67e7b4*/
                   }
-                  sub_67EC70(v17);
-                  v12 = sub_67EF50(v6, a2);
-                  sub_67EC80((float *)v6, v12);
-                  sub_67EC50((float *)v6);
-                  TESWaterCulling::SetCamera((TESWaterCulling *)v6, (NiCamera *)i);
-                  if ( !v14 || (v18 = sub_67EC40(v6), sub_67EC40(v14) > v18) )
-                    v14 = v6;
+                  SetFloatAtOffset_04(data, v17); /*0x67e7c3*/
+                  valuea = TESConnectedPoint_DistanceTo(data, goal); /*0x67e7cf*/
+                  TESConnectedPoint_SetHeuristicCost(data, valuea); /*0x67e7d8*/
+                  TESConnectedPoint_RecomputeTotalEstimateCost(data); /*0x67e7df*/
+                  TESWaterCulling::SetCamera((TESWaterCulling *)data, (NiCamera *)i); /*0x67e7e7*/
+                  if ( !v14 /*0x67e810*/
+                    || (TotalEstimateCost = TESConnectedPoint_GetTotalEstimateCost(data),
+                        TESConnectedPoint_GetTotalEstimateCost(v14) > TotalEstimateCost) )
+                  {
+                    v14 = data; /*0x67e812*/
+                  }
                 }
-                v15 = *((char **)v15 + 1);
+                next = (BSSimpleList_VoidPtr *)next->firstNode.next; /*0x67e81d*/
               }
-              if ( !v15 )
-                break;
-              v5 = v15;
+              if ( !next ) /*0x67e826*/
+                break; /*0x67e826*/
+              Connections = next; /*0x67e710*/
             }
           }
-          sub_67ECA0(i, 1);
+          GraphNode_SetFlag02(i, 1); /*0x67e830*/
         }
-        for ( j = v14; j; j = (char *)TESEnchantableForm_GetCastingType(j) )
+        p_totalEstimateCost = (_DWORD *)&v14->totalEstimateCost; /*0x67e848*/
+        if ( v14 ) /*0x67e84e*/
         {
-          v8 = sub_4BEF40(j);
-          v9 = sub_68C280(a3, v8, 0);
-          v10 = v9;
-          if ( v9 )
+          do /*0x67e8a0*/
           {
-            sub_68CA30(v9, 1);
-            sub_68CA60(v10, 1);
-            sub_68CA90(v10, 0);
-            sub_68CAC0(v10, 0);
-            sub_68CB10(v10, 1);
+            Position = PathGraphNode_GetPosition(p_totalEstimateCost); /*0x67e854*/
+            v9 = sub_68C280(outRouteNodes, Position, 0); /*0x67e85d*/
+            v10 = v9; /*0x67e862*/
+            if ( v9 ) /*0x67e866*/
+            {
+              sub_68CA30(v9, 1); /*0x67e86c*/
+              sub_68CA60(v10, 1); /*0x67e875*/
+              sub_68CA90(v10, 0); /*0x67e87e*/
+              sub_68CAC0(v10, 0); /*0x67e887*/
+              sub_68CB10(v10, 1); /*0x67e890*/
+            }
+            p_totalEstimateCost = (_DWORD *)TESEnchantableForm_GetCastingType(p_totalEstimateCost); /*0x67e89c*/
           }
+          while ( p_totalEstimateCost ); /*0x67e8a0*/
         }
-        v20 = 0xFFFFFFFF;
-        AStarNodeList::~AStarNodeList(&v19);
-        return v13;
+        v20 = 0xFFFFFFFF; /*0x67e8a6*/
+        AStarNodeList_dtor(&v19); /*0x67e8ae*/
+        return v13; /*0x67e8b3*/
       }
     }
   }
-  return result;
+  return result; /*0x67e8b7*/
 }

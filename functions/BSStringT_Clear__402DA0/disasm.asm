@@ -2,7 +2,7 @@
 0x402DA1: mov     esi, ecx
 0x402DA3: mov     eax, [esi]
 0x402DA5: push    eax
-0x402DA6: call    FormHeapFree
+0x402DA6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x402DAB: xor     eax, eax
 0x402DAD: add     esp, 4
 0x402DB0: mov     [esi], eax

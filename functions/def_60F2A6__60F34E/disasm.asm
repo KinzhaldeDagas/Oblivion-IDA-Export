@@ -25,7 +25,7 @@
 0x60F393: mov     ecx, edi
 0x60F395: call    eax
 0x60F397: mov     ecx, edi; this
-0x60F399: call    sub_5E6C60
+0x60F399: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x60F39E: test    al, al
 0x60F3A0: jz      loc_60F5DA
 0x60F3A6: test    esi, esi
@@ -38,7 +38,7 @@
 0x60F3B9: push    0
 0x60F3BB: push    0Fh
 0x60F3BD: push    ebp
-0x60F3BE: mov     ecx, offset ActorProcessManager_ptr
+0x60F3BE: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x60F3C3: call    sub_6758E0
 0x60F3C8: test    eax, eax
 0x60F3CA: mov     ecx, [ebp+58h]
@@ -68,8 +68,8 @@
 0x60F40D: jl      loc_60F4D1
 0x60F413: test    esi, esi
 0x60F415: jz      loc_60FB86
-0x60F41B: mov     ecx, [esi+0Ch]
-0x60F41E: call    sub_5E32D0
+0x60F41B: mov     ecx, [esi+0Ch]; this
+0x60F41E: call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.
 0x60F423: test    al, al
 0x60F425: jz      loc_60FB86
 0x60F42B: cmp     byte ptr [esi+11h], 0
@@ -82,9 +82,9 @@
 0x60F443: cmp     eax, 64h ; 'd'
 0x60F446: jge     short loc_60F45E
 0x60F448: mov     ecx, edi
-0x60F44A: call    Actor_GetBaseClass
+0x60F44A: call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.
 0x60F44F: mov     ecx, eax
-0x60F451: call    TESClass__IsGuardClass
+0x60F451: call    TESClass__IsGuardClass; TESClass::IsGuardClass reads classFlags at +0x60 bit 1.
 0x60F456: test    al, al
 0x60F458: jz      loc_60FB86
 0x60F45E: push    1; a2
@@ -106,9 +106,9 @@
 0x60F48E: push    ebx; void *
 0x60F48F: call    OblivionDynamicCast
 0x60F494: add     esp, 14h
-0x60F497: mov     ecx, esi
+0x60F497: mov     ecx, esi; self
 0x60F499: mov     edi, eax
-0x60F49B: call    sub_606140
+0x60F49B: call    Crime_GetGoldValue
 0x60F4A0: fstp    [esp+10h+arg_18]
 0x60F4A4: mov     ecx, edi
 0x60F4A6: call    sub_5234A0
@@ -130,8 +130,8 @@
 0x60F4E5: jz      loc_60F5C8
 0x60F4EB: test    esi, esi
 0x60F4ED: jz      loc_60F5A4
-0x60F4F3: mov     ecx, [esi+0Ch]
-0x60F4F6: call    sub_5E32D0
+0x60F4F3: mov     ecx, [esi+0Ch]; this
+0x60F4F6: call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.
 0x60F4FB: test    al, al
 0x60F4FD: jz      loc_60F5A4
 0x60F503: cmp     byte ptr [esi+11h], 0
@@ -144,9 +144,9 @@
 0x60F51B: cmp     eax, 64h ; 'd'
 0x60F51E: jge     short loc_60F532
 0x60F520: mov     ecx, edi
-0x60F522: call    Actor_GetBaseClass
+0x60F522: call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.
 0x60F527: mov     ecx, eax
-0x60F529: call    TESClass__IsGuardClass
+0x60F529: call    TESClass__IsGuardClass; TESClass::IsGuardClass reads classFlags at +0x60 bit 1.
 0x60F52E: test    al, al
 0x60F530: jz      short loc_60F5A4
 0x60F532: push    1; a2
@@ -168,9 +168,9 @@
 0x60F562: push    ebx; void *
 0x60F563: call    OblivionDynamicCast
 0x60F568: add     esp, 14h
-0x60F56B: mov     ecx, esi
+0x60F56B: mov     ecx, esi; self
 0x60F56D: mov     ebx, eax
-0x60F56F: call    sub_606140
+0x60F56F: call    Crime_GetGoldValue
 0x60F574: fstp    [esp+10h+arg_18]
 0x60F578: mov     ecx, ebx
 0x60F57A: call    sub_5234A0
@@ -222,8 +222,8 @@
 0x60F600: mov     ebp, eax
 0x60F602: test    ebp, ebp
 0x60F604: jz      short loc_60F61B
-0x60F606: mov     ecx, ebp
-0x60F608: call    sub_567770
+0x60F606: mov     ecx, ebp; this
+0x60F608: call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.
 0x60F60D: test    al, al
 0x60F60F: jz      short loc_60F61B
 0x60F611: lea     ecx, [edi+44h]
@@ -267,8 +267,8 @@
 0x60F686: jz      loc_60F777
 0x60F68C: test    esi, esi
 0x60F68E: jz      loc_60F740
-0x60F694: mov     ecx, [esi+0Ch]
-0x60F697: call    sub_5E32D0
+0x60F694: mov     ecx, [esi+0Ch]; this
+0x60F697: call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.
 0x60F69C: test    al, al
 0x60F69E: jz      loc_60F740
 0x60F6A4: cmp     [esi+11h], bl
@@ -281,9 +281,9 @@
 0x60F6BB: cmp     eax, 64h ; 'd'
 0x60F6BE: jge     short loc_60F6D2
 0x60F6C0: mov     ecx, edi
-0x60F6C2: call    Actor_GetBaseClass
+0x60F6C2: call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.
 0x60F6C7: mov     ecx, eax
-0x60F6C9: call    TESClass__IsGuardClass
+0x60F6C9: call    TESClass__IsGuardClass; TESClass::IsGuardClass reads classFlags at +0x60 bit 1.
 0x60F6CE: test    al, al
 0x60F6D0: jz      short loc_60F740
 0x60F6D2: push    1; a2
@@ -305,9 +305,9 @@
 0x60F702: push    ebx; void *
 0x60F703: call    OblivionDynamicCast
 0x60F708: add     esp, 14h
-0x60F70B: mov     ecx, esi
+0x60F70B: mov     ecx, esi; self
 0x60F70D: mov     ebx, eax
-0x60F70F: call    sub_606140
+0x60F70F: call    Crime_GetGoldValue
 0x60F714: fstp    [esp+1Ch+arg_C]
 0x60F718: mov     ecx, ebx
 0x60F71A: call    sub_5234A0
@@ -344,29 +344,29 @@
 0x60F77C: mov     edx, [eax+178h]
 0x60F782: push    0; int
 0x60F784: call    edx
-0x60F786: mov     ecx, edi
-0x60F788: call    sub_5E0380
+0x60F786: mov     ecx, edi; this
+0x60F788: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x60F78D: test    eax, eax
 0x60F78F: jz      short loc_60F7C0
-0x60F791: mov     ecx, edi
-0x60F793: call    sub_5E0380
+0x60F791: mov     ecx, edi; this
+0x60F793: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x60F798: cmp     byte ptr [eax+20h], 0Fh
-0x60F79C: mov     ecx, edi
+0x60F79C: mov     ecx, edi; this
 0x60F79E: jnz     short loc_60F7A9
-0x60F7A0: call    sub_5E0380
+0x60F7A0: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x60F7A5: mov     ebx, eax
 0x60F7A7: jmp     short loc_60F7C0
-0x60F7A9: call    sub_5E0380
-0x60F7AE: mov     ecx, eax
-0x60F7B0: call    sub_567770
+0x60F7A9: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
+0x60F7AE: mov     ecx, eax; this
+0x60F7B0: call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.
 0x60F7B5: test    al, al
 0x60F7B7: jz      short loc_60F7C0
 0x60F7B9: mov     ecx, edi; int
-0x60F7BB: call    sub_5EAE70
+0x60F7BB: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x60F7C0: test    esi, esi
 0x60F7C2: jz      loc_60F95F
-0x60F7C8: mov     ecx, [esi+0Ch]
-0x60F7CB: call    sub_5E32D0
+0x60F7C8: mov     ecx, [esi+0Ch]; this
+0x60F7CB: call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.
 0x60F7D0: test    al, al
 0x60F7D2: jz      loc_60F875
 0x60F7D8: cmp     byte ptr [esi+11h], 0
@@ -379,9 +379,9 @@
 0x60F7F0: cmp     eax, 64h ; 'd'
 0x60F7F3: jge     short loc_60F807
 0x60F7F5: mov     ecx, edi
-0x60F7F7: call    Actor_GetBaseClass
+0x60F7F7: call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.
 0x60F7FC: mov     ecx, eax
-0x60F7FE: call    TESClass__IsGuardClass
+0x60F7FE: call    TESClass__IsGuardClass; TESClass::IsGuardClass reads classFlags at +0x60 bit 1.
 0x60F803: test    al, al
 0x60F805: jz      short loc_60F875
 0x60F807: push    1; a2
@@ -403,9 +403,9 @@
 0x60F837: push    ebp; void *
 0x60F838: call    OblivionDynamicCast
 0x60F83D: add     esp, 14h
-0x60F840: mov     ecx, esi
+0x60F840: mov     ecx, esi; self
 0x60F842: mov     ebp, eax
-0x60F844: call    sub_606140
+0x60F844: call    Crime_GetGoldValue
 0x60F849: fstp    [esp+20h+arg_8]
 0x60F84D: mov     ecx, ebp
 0x60F84F: call    sub_5234A0
@@ -420,9 +420,9 @@
 0x60F86F: call    edx
 0x60F871: mov     byte ptr [esi+11h], 1
 0x60F875: mov     ecx, edi
-0x60F877: call    Actor_GetBaseClass
+0x60F877: call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.
 0x60F87C: mov     ecx, eax
-0x60F87E: call    TESClass__IsGuardClass
+0x60F87E: call    TESClass__IsGuardClass; TESClass::IsGuardClass reads classFlags at +0x60 bit 1.
 0x60F883: test    al, al
 0x60F885: jz      loc_60F95F
 0x60F88B: mov     eax, [esi+0Ch]
@@ -452,8 +452,8 @@
 0x60F8D4: push    edi
 0x60F8D5: call    eax
 0x60F8D7: jmp     loc_60FB86
-0x60F8DC: mov     ecx, [esi+0Ch]
-0x60F8DF: call    sub_5E32D0
+0x60F8DC: mov     ecx, [esi+0Ch]; this
+0x60F8DF: call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.
 0x60F8E4: test    al, al
 0x60F8E6: jz      short loc_60F95F
 0x60F8E8: mov     ecx, [esi+0Ch]
@@ -466,7 +466,7 @@
 0x60F8FF: test    al, al
 0x60F901: jnz     short loc_60F95F
 0x60F903: mov     ecx, [esi+0Ch]; this
-0x60F906: call    TESObjectREFR_IsPersistent?
+0x60F906: call    TESObjectREFR_IsPersistent
 0x60F90B: test    al, al
 0x60F90D: jz      short loc_60F95F
 0x60F90F: mov     ebp, [esi+0Ch]
@@ -488,8 +488,8 @@
 0x60F937: push    offset ??_R0?AVFleePackage@@@8; struct TypeDescriptor *
 0x60F93C: push    offset ??_R0?AVTESPackage@@@8; struct _s_RTTICompleteObjectLocator *
 0x60F941: push    0; int
-0x60F943: mov     ecx, ebp
-0x60F945: call    sub_5E0380
+0x60F943: mov     ecx, ebp; this
+0x60F945: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x60F94A: push    eax; void *
 0x60F94B: call    OblivionDynamicCast
 0x60F950: add     esp, 14h
@@ -511,7 +511,7 @@
 0x60F985: jz      short loc_60F993
 0x60F987: push    esi
 0x60F988: mov     ecx, eax
-0x60F98A: call    sub_6068D0
+0x60F98A: call    sub_6068D0; RadiantAI: AlarmPackage constructor candidate with actor/ref argument. Hooked by RadiantAIRestored only for opt-in logging.
 0x60F98F: mov     ebp, eax
 0x60F991: jmp     short loc_60F995
 0x60F993: xor     ebp, ebp
@@ -570,13 +570,13 @@
 0x60FA47: call    TESPackage_LocationData_SetReference
 0x60FA4C: push    ebx
 0x60FA4D: mov     ecx, ebp
-0x60FA4F: call    TESPackage_SetLocation
+0x60FA4F: call    TESPackage_SetLocation; 3DTheft decode: TESPackage_SetLocation allocates package->location when needed and copies a 0x0C LocationData record; null source clears location data.
 0x60FA54: test    ebx, ebx
 0x60FA56: jz      short loc_60FA68
 0x60FA58: mov     ecx, ebx
 0x60FA5A: call    TESPackage_LocationData_destr
 0x60FA5F: push    ebx
-0x60FA60: call    FormHeapFree
+0x60FA60: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x60FA65: add     esp, 4
 0x60FA68: push    0Ch; Size
 0x60FA6A: call    FormHeapAlloc
@@ -586,25 +586,25 @@
 0x60FA78: mov     [esp+3Ch+var_20], 2
 0x60FA80: jz      short loc_60FA8D
 0x60FA82: mov     ecx, eax
-0x60FA84: call    TESPackage_TargetData_constr
+0x60FA84: call    TESPackage_TargetData_constr; 3DTheft decode: TESPackage_TargetData constructor initializes targetType=2, target/object=0, count=0.
 0x60FA89: mov     ebx, eax
 0x60FA8B: jmp     short loc_60FA8F
 0x60FA8D: xor     ebx, ebx
 0x60FA8F: push    ebx
 0x60FA90: mov     ecx, ebp
 0x60FA92: mov     [esp+40h+var_20], 0FFFFFFFFh
-0x60FA9A: call    TESPackage_SetTarget
+0x60FA9A: call    TESPackage_SetTarget; 3DTheft decode: TESPackage_SetTarget allocates package->target when needed, copies a 0x0C TargetData record, and leaves later callers to set target type/ref/count fields.
 0x60FA9F: test    ebx, ebx
 0x60FAA1: jz      short loc_60FAB3
-0x60FAA3: mov     ecx, ebx; void *
-0x60FAA5: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x60FAA3: mov     ecx, ebx; this
+0x60FAA5: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x60FAAA: push    ebx
-0x60FAAB: call    FormHeapFree
+0x60FAAB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x60FAB0: add     esp, 4
 0x60FAB3: mov     ecx, [ebp+28h]
 0x60FAB6: push    0
 0x60FAB8: mov     dword ptr [ebp+18h], 0Bh
-0x60FABF: call    TESPackage_TargetData_SetType
+0x60FABF: call    TESPackage_TargetData_SetType; 3DTheft decode: TargetData_SetType writes targetType and clears the target/object field for refr/base/type target modes.
 0x60FAC4: test    esi, esi
 0x60FAC6: mov     ecx, [ebp+28h]
 0x60FAC9: jz      short loc_60FAD1
@@ -613,7 +613,7 @@
 0x60FACF: jmp     short loc_60FAD6
 0x60FAD1: mov     eax, [esp+3Ch+var_C]
 0x60FAD5: push    eax
-0x60FAD6: call    TeSPackage_TargetData_SetTargetREFR
+0x60FAD6: call    TeSPackage_TargetData_SetTargetREFR; 3DTheft decode: TargetData_SetTargetREFR only writes the reference field when targetType is 0 (reference target). It does not set count.
 0x60FADB: mov     ecx, [edi+58h]
 0x60FADE: mov     edx, [ecx]
 0x60FAE0: mov     eax, [edx+20h]
@@ -651,12 +651,12 @@
 0x60FB35: push    0; a3
 0x60FB37: push    ebp; a2
 0x60FB38: mov     ecx, edi; this
-0x60FB3A: call    Actor_AddPackage?
+0x60FB3A: call    Actor_AddPackage?; 3DTheft: xrefs ignore this function's return value; use current package/process state after call, not AL/EAX, as the package assignment result.
 0x60FB3F: test    esi, esi
 0x60FB41: jz      short loc_60FB4B
-0x60FB43: push    edi
-0x60FB44: mov     ecx, esi
-0x60FB46: call    sub_605F00
+0x60FB43: push    edi; actor
+0x60FB44: mov     ecx, esi; self
+0x60FB46: call    Crime_AddWitness
 0x60FB4B: mov     ecx, [edi+58h]
 0x60FB4E: mov     eax, [ecx]
 0x60FB50: mov     edx, [esp+3Ch+var_14]

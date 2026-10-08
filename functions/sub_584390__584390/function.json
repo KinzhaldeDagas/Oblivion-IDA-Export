@@ -1,19 +1,32 @@
 {
-  "callees_count": 8,
-  "callers_count": 19,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
+  "callers_count": 20,
+  "chunks": [
+    [
+      "0x584390",
+      "0x5843FB"
+    ]
+  ],
+  "chunks_sha256": "d7aa96f1c2231bb172a7ac94e3fcfd82abe1fadd9384fd75bb673b07fc7b67ca",
+  "comment_regular": "Oblivion ClassMenu step refresh: derives the active step value from tile traits 0xFDB/0xFDC, updates menu state, sets state 8, and refreshes the interface manager.",
+  "comment_repeatable": "Oblivion ClassMenu step refresh: derives the active step value from tile traits 0xFDB/0xFDC, updates menu state, sets state 8, and refreshes the interface manager.\nVerified correction of previous ClassMenu_RefreshStep interpretation: generic Menu fade-in. Reads traits 0xFDB/0xFDC, creates timer, sets +0x24=8, updates timers. Fallout named analogue 0x827E2F18 has matching flow including null-root fallback.\n\nPrior ClassMenu-specific annotation superseded: verified generic Menu::StartFadeIn, analogous to Fallout 0x827E2F18. State +0x24=8 is fading in, not a character-class selection step.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_584390",
+  "display_name": "Menu::StartFadeIn",
   "end_ea": "0x5843FB",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_584390",
+  "name": "Menu::StartFadeIn",
   "segment": ".text",
   "sha256": "d7aa96f1c2231bb172a7ac94e3fcfd82abe1fadd9384fd75bb673b07fc7b67ca",
   "size": 107,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x584390",
-  "type": "void __thiscall(int this)",
+  "total_chunk_size": 107,
+  "type": "void __thiscall(_DWORD *this)",
   "xrefs_from_count": 40,
   "xrefs_to_count": 20
 }

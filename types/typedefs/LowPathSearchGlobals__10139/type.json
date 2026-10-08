@@ -1,0 +1,204 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "LowPathSearchGlobals",
+  "definition": "struct LowPathSearchGlobals\n{\nLowPathWorldDoorLinkMap *doorLinkMap; ///< Verified: outer NiTPointerMap keyed by source spatial TESForm; each value is a second NiTPointerMap of opposite spatial forms to AStarWorldNode lists.\nAStarWorldNode *bestGoalNode; ///< Verified: best destination-reaching AStarWorldNode selected by minimum total fitness.\nTESObjectREFR *sourceRef; ///< Verified source reference used for actor-sensitive door penalties.\nTESForm *sourceSpace; ///< Verified source spatial TESForm.\nTESForm *destinationSpace; ///< Verified destination spatial TESForm.\nunsigned __int8 ignoreLocks; ///< Verified ignore-locks policy byte.\nunsigned __int8 ignoreMinUse; ///< Verified ignore-min-use policy byte.\nunsigned __int8 allowDisabledDoors; ///< Verified allow-disabled-doors policy byte.\nunsigned __int8 unknown17; ///< Unknown byte.\nBSSimpleList_AStarWorldNode allAStarWorldNodes; ///< Verified inline BSSimpleList head of every allocated AStarWorldNode. AddToLowPathWorld pushes each created node here; unlink removes it; global cleanup drains and frees it.\nNiPoint3 sourcePosition; ///< Verified source NiPoint3 for route search.\nNiPoint3 destinationPosition; ///< Verified destination NiPoint3 for route search.\nchar unknown38[72]; ///< Unknown bytes before the critical section at +0x80.\n_RTL_CRITICAL_SECTION lowPathCriticalSection; ///< Verified shared low-path CRITICAL_SECTION; all per-space map insertion/removal and A* state operations enter/leave this lock.\nchar unknown98[104]; ///< Unknown bytes between the critical section and search-state table.\nTravelPathSearchState *states; ///< Verified pointer to the 0x10-byte-per-index AStar search-state table.\nunsigned __int16 stateCapacity; ///< Verified 16-bit search-state table capacity; allocation/resizing and table clear use this count.\nunsigned __int16 unknown106; ///< Unknown word.\nunsigned __int16 nextFreeStateIndex; ///< Verified 16-bit next-free state-slot index; 0xFFFF indicates no free slot.\nunsigned __int16 unknown10A; ///< Unknown word.\n}\n",
+  "kind": "struct",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified: outer NiTPointerMap keyed by source spatial TESForm; each value is a second NiTPointerMap of opposite spatial forms to AStarWorldNode lists.",
+      "name": "doorLinkMap",
+      "offset_bits": 0,
+      "offset_bytes": 0,
+      "size_bits": 32,
+      "type": "LowPathWorldDoorLinkMap *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified: best destination-reaching AStarWorldNode selected by minimum total fitness.",
+      "name": "bestGoalNode",
+      "offset_bits": 32,
+      "offset_bytes": 4,
+      "size_bits": 32,
+      "type": "AStarWorldNode *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified source reference used for actor-sensitive door penalties.",
+      "name": "sourceRef",
+      "offset_bits": 64,
+      "offset_bytes": 8,
+      "size_bits": 32,
+      "type": "TESObjectREFR *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified source spatial TESForm.",
+      "name": "sourceSpace",
+      "offset_bits": 96,
+      "offset_bytes": 12,
+      "size_bits": 32,
+      "type": "TESForm *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified destination spatial TESForm.",
+      "name": "destinationSpace",
+      "offset_bits": 128,
+      "offset_bytes": 16,
+      "size_bits": 32,
+      "type": "TESForm *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified ignore-locks policy byte.",
+      "name": "ignoreLocks",
+      "offset_bits": 160,
+      "offset_bytes": 20,
+      "size_bits": 8,
+      "type": "unsigned __int8"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified ignore-min-use policy byte.",
+      "name": "ignoreMinUse",
+      "offset_bits": 168,
+      "offset_bytes": 21,
+      "size_bits": 8,
+      "type": "unsigned __int8"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified allow-disabled-doors policy byte.",
+      "name": "allowDisabledDoors",
+      "offset_bits": 176,
+      "offset_bytes": 22,
+      "size_bits": 8,
+      "type": "unsigned __int8"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Unknown byte.",
+      "name": "unknown17",
+      "offset_bits": 184,
+      "offset_bytes": 23,
+      "size_bits": 8,
+      "type": "unsigned __int8"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified inline BSSimpleList head of every allocated AStarWorldNode. AddToLowPathWorld pushes each created node here; unlink removes it; global cleanup drains and frees it.",
+      "name": "allAStarWorldNodes",
+      "offset_bits": 192,
+      "offset_bytes": 24,
+      "size_bits": 64,
+      "type": "BSSimpleList_AStarWorldNode"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified source NiPoint3 for route search.",
+      "name": "sourcePosition",
+      "offset_bits": 256,
+      "offset_bytes": 32,
+      "size_bits": 96,
+      "type": "NiPoint3"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified destination NiPoint3 for route search.",
+      "name": "destinationPosition",
+      "offset_bits": 352,
+      "offset_bytes": 44,
+      "size_bits": 96,
+      "type": "NiPoint3"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Unknown bytes before the critical section at +0x80.",
+      "name": "unknown38",
+      "offset_bits": 448,
+      "offset_bytes": 56,
+      "size_bits": 576,
+      "type": "char[72]"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified shared low-path CRITICAL_SECTION; all per-space map insertion/removal and A* state operations enter/leave this lock.",
+      "name": "lowPathCriticalSection",
+      "offset_bits": 1024,
+      "offset_bytes": 128,
+      "size_bits": 192,
+      "type": "_RTL_CRITICAL_SECTION"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Unknown bytes between the critical section and search-state table.",
+      "name": "unknown98",
+      "offset_bits": 1216,
+      "offset_bytes": 152,
+      "size_bits": 832,
+      "type": "char[104]"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified pointer to the 0x10-byte-per-index AStar search-state table.",
+      "name": "states",
+      "offset_bits": 2048,
+      "offset_bytes": 256,
+      "size_bits": 32,
+      "type": "TravelPathSearchState *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified 16-bit search-state table capacity; allocation/resizing and table clear use this count.",
+      "name": "stateCapacity",
+      "offset_bits": 2080,
+      "offset_bytes": 260,
+      "size_bits": 16,
+      "type": "unsigned __int16"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Unknown word.",
+      "name": "unknown106",
+      "offset_bits": 2096,
+      "offset_bytes": 262,
+      "size_bits": 16,
+      "type": "unsigned __int16"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified 16-bit next-free state-slot index; 0xFFFF indicates no free slot.",
+      "name": "nextFreeStateIndex",
+      "offset_bits": 2112,
+      "offset_bytes": 264,
+      "size_bits": 16,
+      "type": "unsigned __int16"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Unknown word.",
+      "name": "unknown10A",
+      "offset_bits": 2128,
+      "offset_bytes": 266,
+      "size_bits": 16,
+      "type": "unsigned __int16"
+    }
+  ],
+  "name": "LowPathSearchGlobals",
+  "ordinal": 10139,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 268
+}

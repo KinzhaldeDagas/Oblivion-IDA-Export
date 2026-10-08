@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 2,
   "callers_count": 5,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_552240",
+  "chunks": [
+    [
+      "0x552240",
+      "0x5522AE"
+    ],
+    [
+      "0x9BBD30",
+      "0x9BBD56"
+    ]
+  ],
+  "chunks_sha256": "b24412b812fecdb5353790c23234f87e945189522c48daacb31eebda2d996bf5",
+  "comment_regular": "Initializes rows/columns and resizes the embedded coefficient vector to rows*columns floats.",
+  "comment_repeatable": "Initialize FaceGenMatrix dimensions and resize to rows*columns floats. The product is computed in 32 bits without overflow validation.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "FaceGenMatrix_InitializeDimensions",
   "end_ea": "0x5522AE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_552240",
+  "name": "FaceGenMatrix_InitializeDimensions",
   "segment": ".text",
   "sha256": "45d60a4669dd1781e575a8a63c70abdaa44fba3cf53409b87ea38916c1739213",
   "size": 110,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x552240",
-  "type": "_DWORD *__thiscall(_DWORD *this, int, int)",
-  "xrefs_from_count": 38,
+  "total_chunk_size": 148,
+  "type": "FaceGenMatrix *__thiscall(FaceGenMatrix *this, unsigned int rows, unsigned int columns)",
+  "xrefs_from_count": 50,
   "xrefs_to_count": 5
 }

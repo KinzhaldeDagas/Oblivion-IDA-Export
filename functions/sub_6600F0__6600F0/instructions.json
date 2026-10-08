@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6600F0",
-    "line": "cmp     byte ptr [ecx+588h], 0",
+    "line": "cmp     byte ptr [ecx+588h], 0; Returns the player's active render root. If PlayerCharacter+0x588 selects third person, or firstPersonNiNode +0x5D0 is null, returns ordinary TESObjectREFR NiNode; otherwise returns firstPersonNiNode.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x660103",
-    "line": "jmp     TESObjectREFR__GetNiNode",
+    "line": "jmp     TESObjectREFR__GetNiNode; ODismemberment: TESObjectREFR::GetNiNode; runtime primitive starts from actor 3D and toggles prepared ODISMEMBER_* nodes.",
     "mnemonic": "jmp",
     "size": 5
   },

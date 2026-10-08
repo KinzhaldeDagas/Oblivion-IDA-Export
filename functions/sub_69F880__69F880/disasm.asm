@@ -29,11 +29,11 @@
 0x69F8CD: ja      short def_69F8D6; jumptable 0069F8D6 default case, cases 3-7,9,11-13
 0x69F8CF: movzx   eax, ds:byte_69FA50[eax]
 0x69F8D6: jmp     ds:jpt_69F8D6[eax*4]; switch jump
-0x69F8DD: mov     ecx, offset unk_B37100; jumptable 0069F8D6 case 14
+0x69F8DD: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+428h); jumptable 0069F8D6 case 14
 0x69F8E2: call    GameSetting_GetSafeFloatPointer
 0x69F8E7: fld     dword ptr [eax]
 0x69F8E9: jmp     short loc_69F907
-0x69F8EB: mov     ecx, offset unk_B370F8; jumptable 0069F8D6 case 8
+0x69F8EB: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+420h); jumptable 0069F8D6 case 8
 0x69F8F0: call    GameSetting_GetSafeFloatPointer
 0x69F8F5: fld     dword ptr [eax]
 0x69F8F7: jmp     short loc_69F907

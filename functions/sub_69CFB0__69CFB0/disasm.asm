@@ -1,4 +1,4 @@
-0x69CFB0: mov     eax, [esp+arg_4]
+0x69CFB0: mov     eax, dword ptr [esp+arg_4]
 0x69CFB4: push    ebx
 0x69CFB5: push    edi
 0x69CFB6: mov     edi, ecx
@@ -8,7 +8,7 @@
 0x69CFBE: mov     ecx, edi; int
 0x69CFC0: call    MobilObject_PostLinkModifiedForm
 0x69CFC5: mov     ecx, edi; this
-0x69CFC7: call    MobileObject_GetCharProxy
+0x69CFC7: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x69CFCC: mov     ebx, eax
 0x69CFCE: test    ebx, ebx
 0x69CFD0: jz      loc_69D100
@@ -38,15 +38,15 @@
 0x69D014: lea     ecx, [esp+0Ch+arg_4]
 0x69D018: push    ecx
 0x69D019: mov     ecx, eax
-0x69D01B: call    sub_65ABE0
+0x69D01B: call    MobileObject_GetCollisionFilterInfo; Returns actor/proxy collision filter identity by calling 0x57E270 on MobileObject_GetCharProxy(this). Callers keep high 16 bits and OR in the chosen collision layer.
 0x69D020: movzx   esi, word ptr [eax+2]
 0x69D024: jmp     loc_69D0BF
 0x69D029: mov     edx, [esi]
 0x69D02B: mov     eax, [edx+154h]
 0x69D031: mov     ecx, esi
 0x69D033: call    eax
-0x69D035: push    eax
-0x69D036: call    sub_480340
+0x69D035: push    eax; object
+0x69D036: call    NiAVObject_FindBhkCollisionObjectRecursive; Returns the first bhk collision object found on object or recursively beneath its NiNode children. This is structural traversal, independent of node names.
 0x69D03B: add     esp, 4
 0x69D03E: test    eax, eax
 0x69D040: jz      short loc_69D059
@@ -65,8 +65,8 @@
 0x69D064: mov     edx, [eax+154h]
 0x69D06A: mov     ecx, edi
 0x69D06C: call    edx
-0x69D06E: push    eax
-0x69D06F: call    sub_480340
+0x69D06E: push    eax; object
+0x69D06F: call    NiAVObject_FindBhkCollisionObjectRecursive; Returns the first bhk collision object found on object or recursively beneath its NiNode children. This is structural traversal, independent of node names.
 0x69D074: add     esp, 4
 0x69D077: test    eax, eax
 0x69D079: jz      short loc_69D09D
@@ -94,8 +94,8 @@
 0x69D0BF: lea     eax, [esp+0Ch+arg_4]
 0x69D0C3: push    eax
 0x69D0C4: mov     ecx, ebx
-0x69D0C6: call    sub_57E270
-0x69D0CB: mov     eax, [esp+0Ch+arg_4]
+0x69D0C6: call    bhkCharacterProxy_GetCollisionFilterInfo; Reads collision filter info from proxy metadata: proxy+0x364 -> +8 -> +0x14 -> +0x1C. Used to preserve actor identity in raycast filter high 16 bits.
+0x69D0CB: mov     eax, dword ptr [esp+0Ch+arg_4]
 0x69D0CF: mov     ecx, [ebx+364h]
 0x69D0D5: and     eax, 0FFC0h
 0x69D0DA: or      eax, 7

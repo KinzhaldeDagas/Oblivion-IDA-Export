@@ -1,4 +1,4 @@
-0x402FC0: mov     eax, [esp+a2]
+0x402FC0: mov     eax, [esp+a2]; TES4 authoritative joystick button query modes mirror keyboard: held/pressed/released/changed.
 0x402FC4: mov     edx, [esp+a4]
 0x402FC8: lea     eax, [eax+eax*4]
 0x402FCB: shl     eax, 5

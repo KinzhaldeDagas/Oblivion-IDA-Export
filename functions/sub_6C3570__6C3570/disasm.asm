@@ -46,7 +46,7 @@
 0x6C360D: lea     esi, [esp+6Ch+var_2C]
 0x6C3611: rep movsd
 0x6C3613: mov     ecx, eax
-0x6C3615: call    sub_6D5C30
+0x6C3615: call    NiTransformInterpolator_ConstructWithTransform; Oblivion NiTransformInterpolator construction from a supplied 0x20-byte transform. Copies the transform to +0x0C, leaves data +0x2C null, and zeroes all three authored-key cursors.
 0x6C361A: mov     ecx, [esp+4Ch+var_C]
 0x6C361E: mov     large fs:0, ecx
 0x6C3625: pop     ecx
@@ -62,3 +62,15 @@
 0x6C363D: pop     esi
 0x6C363E: add     esp, 40h
 0x6C3641: retn    4
+0x9C71D0: mov     eax, [ebp-40h]
+0x9C71D3: push    eax
+0x9C71D4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C71D9: pop     ecx
+0x9C71DA: retn
+0x9C71DB: mov     edx, [esp+arg_4]
+0x9C71DF: lea     eax, [edx-3Ch]
+0x9C71E2: mov     ecx, [edx-40h]
+0x9C71E5: xor     ecx, eax
+0x9C71E7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C71EC: mov     eax, offset stru_AEF63C
+0x9C71F1: jmp     ___CxxFrameHandler3

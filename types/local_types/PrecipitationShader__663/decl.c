@@ -1,1 +1,1 @@
-PrecipitationShader
+struct PrecipitationShader;

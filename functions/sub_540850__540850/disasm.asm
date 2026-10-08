@@ -1,15 +1,15 @@
-0x540850: sub     esp, 60h
-0x540853: cmp     byte ptr ds:0B43070h, 0
+0x540850: sub     esp, 60h; HDR weather/global updater, not merely fog. While HDR is enabled it resolves first/second weather values, including fSunlightDimmer and fTreeDimmer, then writes direct or transitioned renderer globals.
+0x540853: cmp     byte ptr ds:0B43070h, 0; Entire weather HDR-constant update is gated by rendererGlobal+0x1D7 (B43070 HDR enabled).
 0x54085A: push    edi
 0x54085B: mov     edi, ecx
 0x54085D: jz      loc_540E7D
 0x540863: fldz
 0x540865: push    esi
-0x540866: mov     esi, [edi+10h]
+0x540866: mov     esi, [edi+10h]; Fog transition-global decode: reads Sky::firstWeather as primary source for weather globals; not a direct fog shader writer.
 0x540869: fcom    dword ptr [esi+130h]
 0x54086F: fnstsw  ax
 0x540871: test    ah, 5
-0x540874: jp      short loc_54087E
+0x540874: jp      short loc_54087E; Fog transition-global decode: firstWeather float field [0x4C] uses fallback flt_A56E28 when nonpositive.
 0x540876: fld     dword ptr [esi+130h]
 0x54087C: jmp     short loc_540884
 0x54087E: fld     dword ptr ds:0A56E28h
@@ -25,7 +25,7 @@
 0x5408A5: fild    dword ptr ds:0B06DF4h
 0x5408AB: fstp    [esp+68h+var_60]
 0x5408AF: fld     [esp+68h+var_60]
-0x5408B3: call    Double_To_SInt32
+0x5408B3: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5408B8: fcom    dword ptr [esi+114h]
 0x5408BE: mov     ecx, eax
 0x5408C0: mov     [esp+68h+var_28], ecx
@@ -41,7 +41,7 @@
 0x5408E5: fcom    dword ptr [esi+12Ch]
 0x5408EB: fnstsw  ax
 0x5408ED: test    ah, 5
-0x5408F0: jp      short loc_5408FA
+0x5408F0: jp      short loc_5408FA; Fog transition-global decode: firstWeather field [0x4B] participates in transition/weather global setup and has fallback flt_B06E04.
 0x5408F2: fld     dword ptr [esi+12Ch]
 0x5408F8: jmp     short loc_540900
 0x5408FA: fld     dword ptr ds:0B06E04h
@@ -118,7 +118,7 @@
 0x540A0E: fnstsw  ax
 0x540A10: fld     dword ptr ds:0B06E4Ch
 0x540A16: test    ah, 5
-0x540A19: jp      short loc_540A27
+0x540A19: jp      short loc_540A27; Resolve first-weather fTreeDimmer at weather+0x144; nonpositive weather values use the fTreeDimmer:BlurShaderHDR fallback (default 1.2).
 0x540A1B: fld     dword ptr [esi+144h]
 0x540A21: fstp    [esp+68h+var_60]
 0x540A25: jmp     short loc_540A2B
@@ -136,7 +136,7 @@
 0x540A52: jmp     short loc_540A58
 0x540A54: fst     [esp+68h+var_60]
 0x540A58: fld     [esp+68h+var_60]
-0x540A5C: mov     esi, [edi+14h]
+0x540A5C: mov     esi, [edi+14h]; Fog transition-global decode: reads Sky::secondWeather for transition blend of weather globals.
 0x540A5F: test    esi, esi
 0x540A61: fstp    [esp+68h+var_34]
 0x540A65: fld1
@@ -144,7 +144,7 @@
 0x540A6D: fcom    dword ptr [edi+0D8h]
 0x540A73: fnstsw  ax
 0x540A75: test    ah, 41h
-0x540A78: jnz     loc_540DF6
+0x540A78: jnz     loc_540DF6; Fog transition-global decode: when secondWeather exists and weatherPercent < 1, globals are lerped between second and first weather.
 0x540A7E: fstp    st
 0x540A80: fxch    st(1)
 0x540A82: fcom    dword ptr [esi+130h]
@@ -166,7 +166,7 @@
 0x540ABE: fild    dword ptr ds:0B06DF4h
 0x540AC4: fstp    [esp+68h+var_60]
 0x540AC8: fld     [esp+68h+var_60]
-0x540ACC: call    Double_To_SInt32
+0x540ACC: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x540AD1: fcom    dword ptr [esi+114h]
 0x540AD7: mov     [esp+68h+var_2C], eax
 0x540ADB: fnstsw  ax
@@ -256,7 +256,7 @@
 0x540C0B: fcom    dword ptr [esi+144h]
 0x540C11: fnstsw  ax
 0x540C13: test    ah, 5
-0x540C16: jp      short loc_540C22
+0x540C16: jp      short loc_540C22; Resolve second-weather fTreeDimmer at weather+0x144 with the same nonpositive-value fallback before interpolation.
 0x540C18: fstp    st(1)
 0x540C1A: fld     dword ptr [esi+144h]
 0x540C20: jmp     short loc_540C24
@@ -274,7 +274,7 @@
 0x540C49: fld     [esp+68h+var_60]
 0x540C4D: fstp    [esp+68h+var_60]
 0x540C51: fld     [esp+68h+var_30]
-0x540C55: fstp    dword ptr ds:0B2C73Ch
+0x540C55: fstp    dword ptr ds:0B2C73Ch; Fog transition-global decode: stores secondWeather/firstWeather paired global baseline for transition; upstream sky/weather state, not B333E4 payload.
 0x540C5B: fld     [esp+68h+var_5C]
 0x540C5F: fstp    dword ptr ds:0B2C740h
 0x540C65: fild    [esp+68h+var_2C]
@@ -293,7 +293,7 @@
 0x540C8B: faddp   st(1), st
 0x540C8D: fstp    [esp+68h+var_28]
 0x540C91: fld     [esp+68h+var_28]
-0x540C95: call    Double_To_SInt32
+0x540C95: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x540C9A: mov     ds:0B43220h, eax
 0x540C9F: fld     dword ptr [edi+0D8h]
 0x540CA5: fsub    st, st(1)
@@ -305,7 +305,7 @@
 0x540CB5: fxch    st(2)
 0x540CB7: fmulp   st(1), st
 0x540CB9: faddp   st(1), st
-0x540CBB: fstp    dword ptr ds:0B431F8h
+0x540CBB: fstp    dword ptr ds:0B431F8h; Fog transition-global decode: lerps a weather global from secondWeather to firstWeather by Sky::weatherPercent.
 0x540CC1: fld     dword ptr [edi+0D8h]
 0x540CC7: fsub    st, st(1)
 0x540CC9: fdiv    st, st(2)
@@ -383,7 +383,7 @@
 0x540DA4: fxch    st(2)
 0x540DA6: fmulp   st(1), st
 0x540DA8: faddp   st(1), st
-0x540DAA: fstp    dword ptr ds:0B42F4Ch
+0x540DAA: fstp    dword ptr ds:0B42F4Ch; Transition writer for rendererGlobal+0xB3 (B42F4C) fSunlightDimmer. This is distinct from leaf VS c10 TreeDimmer.
 0x540DB0: fld     dword ptr [edi+0D8h]
 0x540DB6: fsub    st, st(1)
 0x540DB8: fdiv    st, st(2)
@@ -394,7 +394,7 @@
 0x540DC6: fxch    st(2)
 0x540DC8: fmulp   st(1), st
 0x540DCA: faddp   st(1), st
-0x540DCC: fstp    dword ptr ds:0B42EA8h
+0x540DCC: fstp    dword ptr ds:0B42EA8h; Transition writer for rendererGlobal+0x0F (B42EA8) fTreeDimmer: lerp(second, first, Sky::weatherPercent). Positive/fallback endpoints remain positive.
 0x540DD2: fsubr   dword ptr [edi+0D8h]
 0x540DD8: pop     edi
 0x540DD9: fdivrp  st(1), st
@@ -409,7 +409,7 @@
 0x540DF2: add     esp, 60h
 0x540DF5: retn
 0x540DF6: fstp    st(2)
-0x540DF8: mov     ds:0B43220h, ecx
+0x540DF8: mov     ds:0B43220h, ecx; Fog transition-global decode: no active secondWeather blend; writes firstWeather-derived globals directly.
 0x540DFE: fstp    st
 0x540E00: pop     esi
 0x540E01: fstp    st(1)
@@ -434,11 +434,11 @@
 0x540E55: fld     [esp+64h+var_40]
 0x540E59: fstp    dword ptr ds:0B43218h
 0x540E5F: fld     [esp+64h+var_3C]
-0x540E63: fstp    dword ptr ds:0B42F4Ch
+0x540E63: fstp    dword ptr ds:0B42F4Ch; No-transition writer for fSunlightDimmer (B42F4C). 0x7ED6C0 may multiply nonpoint diffuse by this HDR sunlight scalar.
 0x540E69: fld     [esp+64h+var_38]
-0x540E6D: fstp    dword ptr ds:0B42EA8h
+0x540E6D: fstp    dword ptr ds:0B42EA8h; No-transition writer for leaf TreeDimmer/SunDimmer c10 source (B42EA8), resolved from first weather or the INI fallback.
 0x540E73: fld     [esp+64h+var_34]
-0x540E77: fstp    dword ptr ds:0B42F44h
+0x540E77: fstp    dword ptr ds:0B42F44h; Fog transition-global decode: writes firstWeather-derived byte_B42E99[0xAB] global directly when no transition blend is active.
 0x540E7D: pop     edi
 0x540E7E: add     esp, 60h
 0x540E81: retn

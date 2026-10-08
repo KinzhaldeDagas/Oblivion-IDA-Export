@@ -1,4 +1,4 @@
-void __usercall sub_6824F0(int a1@<ecx>, double a2@<st0>)
+void __thiscall sub_6824F0(int this)
 {
-  sub_682450(a2, *(_DWORD *)(a1 + 0x44));
+  sub_682450(*(_DWORD *)(this + 0x44)); /*0x6824f4*/
 }

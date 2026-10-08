@@ -1,1 +1,1 @@
-GLhandleARB
+typedef unsigned int GLhandleARB;

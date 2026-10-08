@@ -21,7 +21,7 @@
 0x72AB30: push    eax
 0x72AB31: push    ebx
 0x72AB32: mov     ecx, esi
-0x72AB34: call    sub_71FB40
+0x72AB34: call    NiTriShapeData_ConstructWithData; Construct NiTriShapeData around supplied geometry and triangle data; shared-normal storage starts empty.
 0x72AB39: mov     ax, [esp+0Ch+arg_1C]
 0x72AB3E: mov     cx, [esp+0Ch+arg_0]
 0x72AB43: mov     [esi+40h], ax

@@ -39,7 +39,7 @@
 0x4F7B4A: push    esi
 0x4F7B4B: push    edi
 0x4F7B4C: push    esi
-0x4F7B4D: mov     ecx, offset ActorProcessManager_ptr
+0x4F7B4D: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x4F7B52: call    sub_675C40
 0x4F7B57: test    al, al
 0x4F7B59: jz      short loc_4F7B5F

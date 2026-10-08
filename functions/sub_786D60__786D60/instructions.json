@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x786D60",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Oblivion cached-string stBezierSpline constructor. Initializes five compact 16-byte vectors, performs cache lookup/copy or parse/build/cache, and allocates exactly 0x5C bytes for cached copies. Confirms the shipped vector-only layout; RT4.1 source is corroborative, not layout-authoritative.",
     "mnemonic": "push",
     "size": 2
   },
@@ -193,19 +193,19 @@
   },
   {
     "ea": "0x786DBD",
-    "line": "mov     ebp, [esp+20h+arg_0]",
+    "line": "mov     ebp, [esp+20h+stringObject]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x786DC1",
-    "line": "push    ebp",
+    "line": "push    ebp; stringObject",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x786DC2",
-    "line": "mov     ecx, offset dword_B4296C",
+    "line": "mov     ecx, offset OB_stBezierSpline_CacheMap_010201A0; cacheMap",
     "mnemonic": "mov",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x786DCC",
-    "line": "call    sub_786C60",
+    "line": "call    OB_StBezierSpline_FindOrInsertCacheEntry_010201A0; Oblivion stBezierSpline cache lookup/insert helper. lower_bound searches the 28-byte source-string key; an absent key is copied into a {string,spline*} pair and inserted with a hint. Returns the node's stBezierSpline** value slot at +0x28.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x786DD5",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -247,31 +247,31 @@
   },
   {
     "ea": "0x786DD9",
-    "line": "push    ebp",
+    "line": "push    ebp; stringObject",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x786DDA",
-    "line": "call    sub_786AF0",
+    "line": "call    OB_StBezierSpline_ParseFromString_010201A0; stBezierSpline text parser. Accepts strings beginning with BezierSpline, reads min/max/variance, then a braced control-point count followed by point, tangent, and tangent-length float groups.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x786DDF",
-    "line": "push    1F4h",
+    "line": "push    1F4h; count",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x786DE4",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x786DE6",
-    "line": "call    sub_786350",
+    "line": "call    OB_StBezierSpline_CreateEvenlySpacedPoints_010201A0; stBezierSpline evenly-spaced point/table builder. Called after parsing a new profile string, with 0x1F4 samples in the observed constructor path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x786DF5",
-    "line": "mov     [esp+20h+arg_0], eax",
+    "line": "mov     [esp+20h+stringObject], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -319,19 +319,19 @@
   },
   {
     "ea": "0x786E02",
-    "line": "push    esi",
+    "line": "push    esi; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x786E03",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x786E05",
-    "line": "call    sub_785CB0",
+    "line": "call    OB_StBezierSpline_CopyCtor_010201A0; stBezierSpline/profile copy constructor wrapper: zeroes vector/storage fields, then copies from an existing parsed profile.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,13 +343,13 @@
   },
   {
     "ea": "0x786E0C",
-    "line": "push    ebp",
+    "line": "push    ebp; stringObject",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x786E0D",
-    "line": "mov     ecx, offset dword_B4296C",
+    "line": "mov     ecx, offset OB_stBezierSpline_CacheMap_010201A0; cacheMap",
     "mnemonic": "mov",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x786E17",
-    "line": "call    sub_786C60",
+    "line": "call    OB_StBezierSpline_FindOrInsertCacheEntry_010201A0; Oblivion stBezierSpline cache lookup/insert helper. lower_bound searches the 28-byte source-string key; an absent key is copied into a {string,spline*} pair and inserted with a hint. Returns the node's stBezierSpline** value slot at +0x28.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,13 +379,13 @@
   },
   {
     "ea": "0x786E20",
-    "line": "push    eax",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x786E21",
-    "line": "call    sub_785C50",
+    "line": "call    OB_StBezierSpline_CopyFrom_010201A0; stBezierSpline/profile copy helper used when a cached profile already exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -442,5 +442,167 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CB1F0",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB1F3",
+    "line": "add     ecx, 0Ch; this",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB1F6",
+    "line": "jmp     OB_stVector24_DestroyThunk_010201A0; Oblivion 1.2.0.416: compiler thunk to the shared 24-byte vector destructor.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB1FB",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB1FE",
+    "line": "add     ecx, 1Ch; this",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB201",
+    "line": "jmp     OB_stVector24_DestroyThunk_010201A0; Oblivion 1.2.0.416: compiler thunk to the shared 24-byte vector destructor.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB206",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB209",
+    "line": "add     ecx, 2Ch ; ','; this",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB20C",
+    "line": "jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB211",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB214",
+    "line": "add     ecx, 3Ch ; '<'; this",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB217",
+    "line": "jmp     OB_stVector24_DestroyThunk_010201A0; Oblivion 1.2.0.416: compiler thunk to the shared 24-byte vector destructor.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB21C",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB21F",
+    "line": "add     ecx, 4Ch ; 'L'; this",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB222",
+    "line": "jmp     OB_stVector24_DestroyThunk_010201A0; Oblivion 1.2.0.416: compiler thunk to the shared 24-byte vector destructor.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB227",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB22A",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CB22B",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB230",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CB231",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CB232",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CB236",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB239",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB23C",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CB23E",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB243",
+    "line": "mov     eax, offset stru_AF3894",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB248",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -3,7 +3,7 @@
 0x50100C: jz      short loc_50102F
 0x50100E: call    GetInterfaceSingleton0x50
 0x501013: test    al, al
-0x501015: mov     eax, offset aOn_0
+0x501015: mov     eax, offset aOn_0; "On"
 0x50101A: jnz     short loc_501021
 0x50101C: mov     eax, offset aOff
 0x501021: push    eax

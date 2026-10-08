@@ -1,62 +1,57 @@
-__int16 __usercall sub_4A3020@<ax>(int a1@<esi>)
+__int16 sub_4A3020()
 {
-  TESSaveLoad *v1; // ecx
-  _WORD *v2; // ebx
-  int v3; // eax
-  int *v4; // esi
-  int v5; // eax
+  TESSaveLoadGame_SerializationView *v1; // ecx
+  unsigned __int8 *bufferCursor; // ebx
+  TESRegionList *regionListOwner; // eax
+  OblivionRegionListNode *p_regions; // esi
+  TESForm *regionForm; // eax
   bool v6; // zf
-  size_t v8; // [esp-8h] [ebp-18h]
-  size_t v9; // [esp-4h] [ebp-14h]
   int Src; // [esp+4h] [ebp-Ch] BYREF
-  int v11; // [esp+8h] [ebp-8h] BYREF
-  float v12; // [esp+Ch] [ebp-4h] BYREF
+  unsigned int source; // [esp+8h] [ebp-8h] BYREF
+  Data *data; // [esp+Ch] [ebp-4h] BYREF
 
-  v1 = SaveLoad_CurrentSavegame;
-  LODWORD(v9) = 2;
-  Src = 0;
-  v2 = (_WORD *)v1->unk000[5];
-  SaveLoad_SaveData((int)v1, &Src, v9);
-  v3 = *(_DWORD *)(TESDataHandler + 0xBC);
-  if ( v3 )
+  v1 = g_TESSaveLoadGame; /*0x4a3023*/
+  Src = 0; /*0x4a3030*/
+  bufferCursor = v1->bufferCursor; /*0x4a3038*/
+  SaveLoad_SaveData(v1, &Src, 2u); /*0x4a303c*/
+  regionListOwner = g_TESDataHandler->regionListOwner; /*0x4a3047*/
+  if ( regionListOwner ) /*0x4a304f*/
   {
-    HIDWORD(v8) = a1;
-    v4 = (int *)(v3 + 4);
-    if ( v3 == 0xFFFFFFFC )
+    p_regions = &regionListOwner->regions; /*0x4a3056*/
+    if ( regionListOwner == (TESRegionList *)0xFFFFFFFC ) /*0x4a305b*/
     {
-      *v2 = Src;
+      *(_WORD *)bufferCursor = Src; /*0x4a30e0*/
     }
     else
     {
-      while ( v4[1] || *v4 )
+      while ( p_regions->next || p_regions->regionForm ) /*0x4a306a*/
       {
-        v5 = *v4;
-        v6 = *v4 == 0;
-        v12 = 0.0;
-        v11 = 0;
-        if ( !v6 )
+        regionForm = p_regions->regionForm; /*0x4a306c*/
+        v6 = p_regions->regionForm == 0; /*0x4a3070*/
+        *(float *)&data = 0.0; /*0x4a3072*/
+        source = 0; /*0x4a3076*/
+        if ( !v6 ) /*0x4a307e*/
         {
-          v11 = *(_DWORD *)(v5 + 0xC);
-          v12 = *(float *)(v5 + 0x28);
+          source = regionForm->member.refID; /*0x4a3083*/
+          data = regionForm[1].member.modlist.data; /*0x4a308a*/
         }
-        SaveLoad_SaveFormID(SaveLoad_CurrentSavegame, (int)&v11, 4u);
-        LODWORD(v8) = 4;
-        LOWORD(v3) = (unsigned __int16)SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, &v12, v8);
-        ++Src;
-        v4 = (int *)v4[1];
-        if ( !v4 )
+        SaveLoad_SaveFormID(g_TESSaveLoadGame, &source, 4u); /*0x4a309b*/
+        LOWORD(regionListOwner) = (unsigned __int16)SaveLoad_SaveData(g_TESSaveLoadGame, &data, 4u); /*0x4a30ad*/
+        ++Src; /*0x4a30b2*/
+        p_regions = p_regions->next; /*0x4a30b7*/
+        if ( !p_regions ) /*0x4a30bc*/
         {
-          *v2 = Src;
-          return v3;
+          *(_WORD *)bufferCursor = Src; /*0x4a30c4*/
+          return (__int16)regionListOwner; /*0x4a30cb*/
         }
       }
-      LOWORD(v3) = Src;
-      *v2 = Src;
+      LOWORD(regionListOwner) = Src; /*0x4a30cc*/
+      *(_WORD *)bufferCursor = Src; /*0x4a30d2*/
     }
   }
   else
   {
-    *v2 = Src;
+    *(_WORD *)bufferCursor = Src; /*0x4a30ed*/
   }
-  return v3;
+  return (__int16)regionListOwner; /*0x4a30c7*/
 }

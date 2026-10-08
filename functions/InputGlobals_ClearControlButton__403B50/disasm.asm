@@ -1,4 +1,4 @@
-0x403B50: mov     edx, dword ptr [esp+whichScheme]
+0x403B50: mov     edx, dword ptr [esp+whichScheme]; [Controller decode 2026-07-09] Clears/unbinds a control button from a selected scheme binding block.
 0x403B54: xor     eax, eax
 0x403B56: imul    edx, 1Dh
 0x403B59: lea     ecx, [edx+ecx+1B7Eh]

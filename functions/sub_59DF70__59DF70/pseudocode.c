@@ -1,32 +1,27 @@
 void __thiscall sub_59DF70(void **this)
 {
-  TESTopic *v2; // eax
-  Unk1C *DialogueInfo; // eax
-  Unk1C *v4; // edi
-  char **v5; // ebx
+  TESTopic *Topic; // eax
+  DialogueItemView *DialogueItem; // eax
+  DialogueListCursorView *v4; // edi
+  char **Current; // ebx
   float a3; // [esp+8h] [ebp-14h]
 
-  v2 = (TESTopic *)TESTopic::GEtTopic(3, 0x26);
-  DialogueInfo = TESTopic::CreateDialogueInfo(
-                   v2,
-                   (Actor *)*(this + 0x18),
-                   (TESObjectREFR *)TESDataHandler_g_PlayerRef,
-                   0,
-                   0);
-  v4 = DialogueInfo;
-  if ( DialogueInfo )
+  Topic = TESTopic::GetTopic(3, 0x26); /*0x59df79*/
+  DialogueItem = TESTopic::CreateDialogueItem(Topic, (Actor *)*(this + 0x18), (TESObjectREFR *)reference, 0, 0); /*0x59df92*/
+  v4 = (DialogueListCursorView *)DialogueItem; /*0x59df97*/
+  if ( DialogueItem ) /*0x59df9b*/
   {
-    if ( sub_6B7BA0(DialogueInfo) )
+    if ( DialogueItem::FirstResponse(DialogueItem) ) /*0x59dfa3*/
     {
-      v5 = (char **)sub_6B7C20(v4);
-      (*(void (__stdcall **)(_DWORD, char **))(*(_DWORD *)*(this + 0x18) + 0x304))(0.0, v5);
-      *((float *)this + 0x21) = fConstant_2;
-      *(this + 0x20) = (void *)2;
-      a3 = (float)((byte_B13200 != 0) + 1);
-      Tile_SetFloat((Tile *)*(this + 0xB), (_DWORD *)0xFA1, a3);
-      Tile_SetString(*(this + 0xB), (_DWORD *)0xFDE, *v5);
+      Current = (char **)DialogueListCursor::GetCurrent(v4); /*0x59dfb9*/
+      (*(void (__stdcall **)(_DWORD, char **))(*(_DWORD *)*(this + 0x18) + 0x304))(0.0, Current); /*0x59dfc8*/
+      *((float *)this + 0x21) = fConstant_2; /*0x59dfd2*/
+      *(this + 0x20) = (void *)2; /*0x59dfd8*/
+      a3 = (float)((byte_B13200 != 0) + 1); /*0x59dffa*/
+      Tile_SetFloat((Tile *)*(this + 0xB), (_DWORD *)0xFA1, a3); /*0x59e002*/
+      Tile_SetString(*(this + 0xB), (_DWORD *)0xFDE, *Current); /*0x59e012*/
     }
-    sub_6B81D0(v4->unk00);
-    FormHeapFree((unsigned int)v4);
+    DialogueItem::Destroy((DialogueItemView *)v4); /*0x59e01a*/
+    FormHeapFree((unsigned int)v4); /*0x59e020*/
   }
 }

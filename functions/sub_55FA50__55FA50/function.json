@@ -1,19 +1,32 @@
 {
-  "callees_count": 29,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 11,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x55FA50",
+      "0x55FCA8"
+    ]
+  ],
+  "chunks_sha256": "2e99696811b498a5bfa97bc52d67d39174db39e728b09b5d9e66f2076b51dbf8",
+  "comment_regular": "\n[2026-10-03 projected shadow motion] Native !skipTimeAndWindUpdate encloses sole55E060 call at55FC50. This follows sampling Sky.windSpeed (or zero for interiors) into manager+1C. Plugin wraps this call to advance RT4.1 reference self-shadow phase by strength*40*delta. Extra camera updates taking skip branch do not advance it. Native camera/wind behavior preserved.\nVerified 2026-10-07: source NiCamera forward column is offsets+64/+70/+7C; BSTreeManager negates it (A3D360=-1.0) before passing to SpeedTree SetCamera. Directional generated atlases use camera-to-tree forward azimuth; record this convention explicitly when adapting the native far billboard basis.\n\nVerified cross-version update divergence: Fallout obtains tree material tint from D3DX atmosphere shader defines[8..10] and writes NiMaterialProperty.emissive RGB. Oblivion instead calls Sky_GetFogProperty and copies dwords at returned-object +0x20/+0x24/+0x28 into three material color triplets. Both refresh manager material state each non-skipped update; the exact Oblivion color channels represented by the three triplets remain Candidate.",
+  "comment_repeatable": "Verified cross-version update divergence: Fallout obtains tree material tint from D3DX atmosphere shader defines[8..10] and writes NiMaterialProperty.emissive RGB. Oblivion instead calls Sky_GetFogProperty and copies dwords at returned-object +0x20/+0x24/+0x28 into three material color triplets. Both refresh manager material state each non-skipped update; the exact Oblivion color channels represented by the three triplets remain Candidate.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_55FA50",
+  "display_name": "BSTreeManager_Update",
   "end_ea": "0x55FCA8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_55FA50",
+  "name": "BSTreeManager_Update",
   "segment": ".text",
   "sha256": "2e99696811b498a5bfa97bc52d67d39174db39e728b09b5d9e66f2076b51dbf8",
   "size": 600,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x55FA50",
-  "type": "void __cdecl(float *, char)",
+  "total_chunk_size": 600,
+  "type": "void __cdecl(NiCamera *camera, bool skipTimeAndWindUpdate)",
   "xrefs_from_count": 190,
   "xrefs_to_count": 4
 }

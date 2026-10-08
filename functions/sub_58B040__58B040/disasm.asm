@@ -1,4 +1,4 @@
-0x58B040: push    0FFFFFFFFh
+0x58B040: push    0FFFFFFFFh; Verified 2026-10-07: underscore-prefixed names scan dynamic trait array with case-insensitive comparison; existing entry increments lookupHits and reuses ID. requestedID=-1 allocates ID=endIndex+10000, new entry0x10 with id+0,lookup counter+4,BSStringT name+8; appends to growable array. Non-underscore names search first-character buckets before allocation. Fallout0x827DDCD0 uses map and additional validation; do not transfer its rejection rules.
 0x58B042: push    offset SEH_690310
 0x58B047: mov     eax, large fs:0
 0x58B04D: push    eax
@@ -28,14 +28,14 @@
 0x58B091: mov     esi, [esi]
 0x58B093: jz      short loc_58B0A7
 0x58B095: push    ebx; unsigned __int8 *
-0x58B096: push    eax; unsigned __int8 *
+0x58B096: push    eax; name
 0x58B097: call    __mbsicmp
 0x58B09C: add     esp, 8
 0x58B09F: test    eax, eax
 0x58B0A1: jz      loc_58B18D
 0x58B0A7: test    esi, esi
 0x58B0A9: jnz     short loc_58B085
-0x58B0AB: mov     ebp, [esp+24h+arg_4]
+0x58B0AB: mov     ebp, [esp+24h+requestedID]
 0x58B0AF: cmp     ebp, 0FFFFFFFFh
 0x58B0B2: jnz     short loc_58B0C1
 0x58B0B4: movzx   ebp, word ptr ds:0B13BCEh
@@ -58,9 +58,9 @@
 0x58B0EC: mov     [ecx+4], dx
 0x58B0F0: mov     [ecx+6], dx
 0x58B0F4: call    BSStringT_Set
-0x58B0F9: push    ebp
-0x58B0FA: mov     ecx, esi
-0x58B0FC: call    sub_589F20
+0x58B0F9: push    ebp; id
+0x58B0FA: mov     ecx, esi; this
+0x58B0FC: call    Tile__TraitEntry__Initialize
 0x58B101: mov     edi, eax
 0x58B103: xor     edx, edx
 0x58B105: jmp     loc_58B1A9
@@ -130,7 +130,7 @@
 0x58B1C6: movzx   edx, word ptr ds:0B13BD2h
 0x58B1CD: add     edx, esi
 0x58B1CF: push    edx
-0x58B1D0: mov     ecx, offset off_B13BC4
+0x58B1D0: mov     ecx, offset g_TileUserTraitTable; Verified: dynamic trait entry pointer array. Header data+4,capacity+8,endIndex+0xA,count+0xC,growBy+0xE from AddUserTrait growth/writes. Custom numeric IDs depend on registry insertion order.
 0x58B1D5: call    NiTArray_SetSize
 0x58B1DA: xor     edx, edx
 0x58B1DC: movzx   eax, word ptr ds:0B13BCEh
@@ -154,3 +154,15 @@
 0x58B219: pop     ebx
 0x58B21A: add     esp, 10h
 0x58B21D: retn
+0x9BD8A0: mov     eax, [ebp+4]
+0x9BD8A3: push    eax
+0x9BD8A4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BD8A9: pop     ecx
+0x9BD8AA: retn
+0x9BD8AB: mov     edx, [esp+arg_4]
+0x9BD8AF: lea     eax, [edx-14h]
+0x9BD8B2: mov     ecx, [edx-18h]
+0x9BD8B5: xor     ecx, eax
+0x9BD8B7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BD8BC: mov     eax, offset stru_AE71E0
+0x9BD8C1: jmp     ___CxxFrameHandler3

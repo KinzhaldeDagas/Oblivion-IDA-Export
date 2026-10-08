@@ -1,60 +1,60 @@
-char __thiscall sub_6B7D30(const char ***this)
+// DialogueItem serialization writes UInt8 response count, each DialogueResponse, UInt8 internal current-response index (FF=null), then INFO/topic/ownerQuest/speaker FormIDs.
+void __thiscall DialogueItem::SaveGame(DialogueItemView *this)
 {
   TESSaveLoad *v2; // ecx
   _BYTE *v3; // ebp
-  int v4; // edx
-  const char ***i; // esi
-  int *v6; // eax
-  int v7; // eax
-  int v8; // eax
-  int v9; // eax
-  int v10; // edi
-  size_t v12; // [esp-4h] [ebp-28h]
-  size_t v13; // [esp-4h] [ebp-28h]
+  DialogueItemView *i; // esi
+  DialogueResponseNode *currentResponseNode; // eax
+  OblivionTopicInfo *info; // eax
+  TESTopic *topic; // eax
+  TESQuest *ownerQuest; // eax
+  TESObjectREFR *speaker; // edi
+  size_t v10; // [esp-4h] [ebp-28h]
+  size_t v11; // [esp-4h] [ebp-28h]
   char Src; // [esp+12h] [ebp-12h] BYREF
-  char v15; // [esp+13h] [ebp-11h] BYREF
-  int v16; // [esp+14h] [ebp-10h] BYREF
-  int v17; // [esp+18h] [ebp-Ch] BYREF
-  int v18; // [esp+1Ch] [ebp-8h] BYREF
-  int v19; // [esp+20h] [ebp-4h] BYREF
+  char DialogueResponseIndex; // [esp+13h] [ebp-11h] BYREF
+  UInt32 refID; // [esp+14h] [ebp-10h] BYREF
+  UInt32 v15; // [esp+18h] [ebp-Ch] BYREF
+  UInt32 v16; // [esp+1Ch] [ebp-8h] BYREF
+  UInt32 v17; // [esp+20h] [ebp-4h] BYREF
 
-  v2 = SaveLoad_CurrentSavegame;
-  LODWORD(v12) = 1;
-  Src = 0;
-  v3 = (_BYTE *)v2->unk000[5];
-  SaveLoad_SaveData((int)v2, &Src, v12);
-  for ( i = this; i; i = (const char ***)i[1] )
+  v2 = g_TESSaveLoadGame; /*0x6b7d39*/
+  LODWORD(v10) = 1; /*0x6b7d3f*/
+  Src = 0; /*0x6b7d47*/
+  v3 = (_BYTE *)v2->unk000[5]; /*0x6b7d4b*/
+  SaveLoad_SaveData((int)v2, &Src, v10); /*0x6b7d4f*/
+  for ( i = this; i; i = (DialogueItemView *)i->nextResponseNode ) /*0x6b7d58*/
   {
-    if ( !i[1] && !*i )
-      break;
-    sub_6B84A0(*i);
-    ++Src;
+    if ( !i->nextResponseNode && !i->firstResponse ) /*0x6b7d65*/
+      break; /*0x6b7d67*/
+    DialogueResponse::SaveGame(i->firstResponse); /*0x6b7d6b*/
+    ++Src; /*0x6b7d70*/
   }
-  *v3 = Src;
-  v6 = (int *)*(this + 2);
-  v15 = 0xFF;
-  if ( v6 )
-    v15 = sub_6B7C60(this, v4, *v6);
-  LODWORD(v13) = 1;
-  SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, &v15, v13);
-  v7 = (int)*(this + 3);
-  v16 = 0;
-  if ( v7 )
-    v16 = *(_DWORD *)(v7 + 0xC);
-  SaveLoad_SaveFormID(SaveLoad_CurrentSavegame, (int)&v16, 4u);
-  v8 = (int)*(this + 4);
-  v17 = 0;
-  if ( v8 )
-    v17 = *(_DWORD *)(v8 + 0xC);
-  SaveLoad_SaveFormID(SaveLoad_CurrentSavegame, (int)&v17, 4u);
-  v9 = (int)*(this + 5);
-  v18 = 0;
-  if ( v9 )
-    v18 = *(_DWORD *)(v9 + 0xC);
-  SaveLoad_SaveFormID(SaveLoad_CurrentSavegame, (int)&v18, 4u);
-  v10 = (int)*(this + 6);
-  v19 = 0;
-  if ( v10 )
-    v19 = *(_DWORD *)(v10 + 0xC);
-  return SaveLoad_SaveFormID(SaveLoad_CurrentSavegame, (int)&v19, 4u);
+  *v3 = Src; /*0x6b7d80*/
+  currentResponseNode = this->currentResponseNode; /*0x6b7d83*/
+  DialogueResponseIndex = 0xFF; /*0x6b7d88*/
+  if ( currentResponseNode ) /*0x6b7d8d*/
+    DialogueResponseIndex = DialogueItem::GetDialogueResponseIndex(this, currentResponseNode->item); /*0x6b7d99*/
+  LODWORD(v11) = 1; /*0x6b7da3*/
+  SaveLoad_SaveData((int)g_TESSaveLoadGame, &DialogueResponseIndex, v11); /*0x6b7daa*/
+  info = this->info; /*0x6b7daf*/
+  refID = 0; /*0x6b7db4*/
+  if ( info ) /*0x6b7db8*/
+    refID = info->super.member.refID; /*0x6b7dbd*/
+  SaveLoad_SaveFormID(g_TESSaveLoadGame, (int)&refID, 4u); /*0x6b7dce*/
+  topic = this->topic; /*0x6b7dd3*/
+  v15 = 0; /*0x6b7dd8*/
+  if ( topic ) /*0x6b7ddc*/
+    v15 = topic->super.refID; /*0x6b7de1*/
+  SaveLoad_SaveFormID(g_TESSaveLoadGame, (int)&v15, 4u); /*0x6b7df2*/
+  ownerQuest = this->ownerQuest; /*0x6b7df7*/
+  v16 = 0; /*0x6b7dfc*/
+  if ( ownerQuest ) /*0x6b7e00*/
+    v16 = ownerQuest->super.refID; /*0x6b7e05*/
+  SaveLoad_SaveFormID(g_TESSaveLoadGame, (int)&v16, 4u); /*0x6b7e16*/
+  speaker = this->speaker; /*0x6b7e1b*/
+  v17 = 0; /*0x6b7e20*/
+  if ( speaker ) /*0x6b7e24*/
+    v17 = speaker->member.super.refID; /*0x6b7e29*/
+  SaveLoad_SaveFormID(g_TESSaveLoadGame, (int)&v17, 4u); /*0x6b7e3a*/
 }

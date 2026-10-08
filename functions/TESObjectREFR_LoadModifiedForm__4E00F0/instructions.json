@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x4E00F8",
-    "line": "mov     ebx, [esp+0Ch+arg_0]",
+    "line": "mov     ebx, [esp+0Ch+changeMask]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -145,19 +145,19 @@
   },
   {
     "ea": "0x4E0131",
-    "line": "mov     [esp+18h+var_8], ebp",
+    "line": "mov     [esp+18h+destination], ebp",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E0135",
-    "line": "mov     [esp+18h+arg_0], ebp",
+    "line": "mov     [esp+18h+changeMask], ebp",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E0139",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x4E0146",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -187,19 +187,19 @@
   },
   {
     "ea": "0x4E014C",
-    "line": "push    ecx; Dst",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E014D",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4E0153",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x4E0174",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x4E01CA",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -421,37 +421,37 @@
   },
   {
     "ea": "0x4E01D3",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4E01D5",
-    "line": "lea     edx, [esp+1Ch+var_8]",
+    "line": "lea     edx, [esp+1Ch+destination]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4E01D9",
-    "line": "push    edx; Dst",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E01DA",
-    "line": "mov     [esp+20h+arg_0], eax",
+    "line": "mov     [esp+20h+changeMask], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E01DE",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E01E3",
-    "line": "mov     ebp, [esp+18h+arg_0]",
+    "line": "mov     ebp, [esp+18h+changeMask]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x4E01FC",
-    "line": "call    sub_420260",
+    "line": "call    ExtraDataList_GetEnableStateParent; Returns the parent TESObjectREFR stored in ExtraEnableStateParent type 0x3F.",
     "mnemonic": "call",
     "size": 5
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x4E0209",
-    "line": "call    sub_420340",
+    "line": "call    ExtraDataList_IsEnableStateInverse; Tests flag bit 0 of ExtraEnableStateParent, the inverse-enable-state flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -607,19 +607,19 @@
   },
   {
     "ea": "0x4E0230",
-    "line": "push    eax; a2",
+    "line": "push    eax; disabled",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E0231",
-    "line": "call    TESForm_SetEnabled?",
+    "line": "call    TESForm_SetDisabledFlag; Verified Oblivion setter: the bool parameter sets or clears TESFormMembr.flags bit 0x800. TESObjectREFR_LinkModifiedForm propagates this bit through ExtraEnableStateParent and the enable-state activation routine clears it. CalcLowPathToPoint independently appends '-Disabled' when this bit is set. Fallout's mangled TESForm::SetDisabled directly writes the same 0x800 mask; this is a cross-check, not the basis of the Oblivion interpretation.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E0236",
-    "line": "mov     ebp, [esp+18h+arg_0]",
+    "line": "mov     ebp, [esp+18h+changeMask]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -859,13 +859,13 @@
   },
   {
     "ea": "0x4E02A8",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E02AA",
-    "line": "call    sub_4DCCF0",
+    "line": "call    TESObjectREFR_ClearEquippedAmmo3D; Clears this reference's equipped-ammunition 3D and related actor-animation ammo slot state. No explicit stack arguments.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1171,7 +1171,7 @@
   },
   {
     "ea": "0x4E0341",
-    "line": "push    2; a2",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -1183,19 +1183,19 @@
   },
   {
     "ea": "0x4E0347",
-    "line": "push    ecx; a1",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E0348",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E034A",
-    "line": "call    TESForm_LoadDataFromCurrentSaveGame",
+    "line": "call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1237,7 +1237,7 @@
   },
   {
     "ea": "0x4E0360",
-    "line": "call    sub_459020",
+    "line": "call    SaveLoad_QueueAttachedAnimationBlob; MEF v27 verification: same raw blob consumed-length contract as sub_458E50 for SaveLoad+0x58 map; guarded skips must advance/discard payload.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1255,7 +1255,7 @@
   },
   {
     "ea": "0x4E036D",
-    "line": "push    2; a2",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -1267,19 +1267,19 @@
   },
   {
     "ea": "0x4E0373",
-    "line": "push    edx; a1",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E0374",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E0376",
-    "line": "call    TESForm_LoadDataFromCurrentSaveGame",
+    "line": "call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1333,7 +1333,7 @@
   },
   {
     "ea": "0x4E0394",
-    "line": "call    sub_459310",
+    "line": "call    SaveLoad_QueueHavokBlob; MEF v27 verification: same raw blob consumed-length contract as sub_458E50 for SaveLoad+0x60 map; guarded skips must advance/discard payload.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1357,7 +1357,7 @@
   },
   {
     "ea": "0x4E039F",
-    "line": "call    SaveLoad_AdvanceBufferOffset",
+    "line": "call    SaveLoad_AdvanceBufferOffset; EnginePatch v2: byte-checked SaveLoad_AdvanceBufferOffset hook. Clamps save cursor movement to active tracked record buffer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1393,7 +1393,7 @@
   },
   {
     "ea": "0x4E03B5",
-    "line": "push    4; a2",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -1405,19 +1405,19 @@
   },
   {
     "ea": "0x4E03BA",
-    "line": "push    ebp; a1",
+    "line": "push    ebp; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E03BB",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E03BD",
-    "line": "call    TESForm_LoadDataFromCurrentSaveGame",
+    "line": "call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1453,7 +1453,7 @@
   },
   {
     "ea": "0x4E03D0",
-    "line": "mov     ebp, [esp+18h+arg_0]",
+    "line": "mov     ebp, [esp+18h+changeMask]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1471,19 +1471,19 @@
   },
   {
     "ea": "0x4E03DC",
-    "line": "push    8",
+    "line": "push    8; mask",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4E03DE",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E03E0",
-    "line": "call    sub_41F830",
+    "line": "call    ExtraDataList_TestActionFlagBits; Test ExtraAction flag mask. Missing ExtraAction behaves as default flags byte 1. REFR save calls with 0x08 to decide whether to emit ONAM.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1495,13 +1495,13 @@
   },
   {
     "ea": "0x4E03E7",
-    "line": "push    8",
+    "line": "push    8; mask",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4E03E9",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1513,7 +1513,7 @@
   },
   {
     "ea": "0x4E03ED",
-    "line": "call    sub_423E50",
+    "line": "call    ExtraDataList_ClearActionFlagBits",
     "mnemonic": "call",
     "size": 5
   },
@@ -1525,7 +1525,7 @@
   },
   {
     "ea": "0x4E03F4",
-    "line": "call    sub_423DF0",
+    "line": "call    ExtraDataList_SetActionFlagBits; OR action flag mask into existing byte (default byte 1 when absent), creating state as needed. ONAM calls this with 0x08.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1549,7 +1549,7 @@
   },
   {
     "ea": "0x4E0403",
-    "line": "call    sub_420FF0",
+    "line": "call    ExtraDataList_RemoveLastFinishedSequence; Removes ExtraLastFinishedSequence (type 0x4A).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1603,13 +1603,13 @@
   },
   {
     "ea": "0x4E0420",
-    "line": "push    8",
+    "line": "push    8; mask",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4E0422",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1621,7 +1621,7 @@
   },
   {
     "ea": "0x4E0426",
-    "line": "call    sub_41F830",
+    "line": "call    ExtraDataList_TestActionFlagBits; Test ExtraAction flag mask. Missing ExtraAction behaves as default flags byte 1. REFR save calls with 0x08 to decide whether to emit ONAM.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1645,7 +1645,7 @@
   },
   {
     "ea": "0x4E0432",
-    "line": "call    sub_41F830",
+    "line": "call    ExtraDataList_TestActionFlagBits; Test ExtraAction flag mask. Missing ExtraAction behaves as default flags byte 1. REFR save calls with 0x08 to decide whether to emit ONAM.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1699,7 +1699,7 @@
   },
   {
     "ea": "0x4E0454",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },
@@ -1759,7 +1759,7 @@
   },
   {
     "ea": "0x4E047B",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1771,7 +1771,7 @@
   },
   {
     "ea": "0x4E0482",
-    "line": "movzx   eax, word ptr [esp+1Ch+var_8]",
+    "line": "movzx   eax, word ptr [esp+1Ch+destination]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -1849,7 +1849,7 @@
   },
   {
     "ea": "0x4E04A5",
-    "line": "movzx   edx, word ptr [esp+20h+var_8]",
+    "line": "movzx   edx, word ptr [esp+20h+destination]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -1999,7 +1999,7 @@
   },
   {
     "ea": "0x4E04EB",
-    "line": "movzx   ecx, word ptr [esp+20h+var_8]",
+    "line": "movzx   ecx, word ptr [esp+20h+destination]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -2107,7 +2107,7 @@
   },
   {
     "ea": "0x4E051A",
-    "line": "movzx   eax, word ptr [esp+18h+var_8]",
+    "line": "movzx   eax, word ptr [esp+18h+destination]",
     "mnemonic": "movzx",
     "size": 5
   },

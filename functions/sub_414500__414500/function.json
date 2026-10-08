@@ -1,19 +1,32 @@
 {
-  "callees_count": 19,
-  "callers_count": 66,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
+  "callers_count": 94,
+  "chunks": [
+    [
+      "0x414500",
+      "0x4145C1"
+    ]
+  ],
+  "chunks_sha256": "286919a42c4f2cfa3d5b4e07d565f7077005d75292a1e2812987842a431668f8",
+  "comment_regular": "Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
+  "comment_repeatable": "Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_414500",
+  "display_name": "OB_stString28_AssignBytes_010201A0",
   "end_ea": "0x4145C1",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_414500",
+  "name": "OB_stString28_AssignBytes_010201A0",
   "segment": ".text",
   "sha256": "286919a42c4f2cfa3d5b4e07d565f7077005d75292a1e2812987842a431668f8",
   "size": 193,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x414500",
-  "type": "_DWORD *__userpurge@<eax>(_DWORD *this@<ecx>, int@<edi>, _BYTE *Src, rsize_t MaxCount)",
+  "total_chunk_size": 193,
+  "type": "OB_stString28_010201A0 *__thiscall(OB_stString28_010201A0 *this, const char *source, unsigned int count)",
   "xrefs_from_count": 100,
   "xrefs_to_count": 94
 }

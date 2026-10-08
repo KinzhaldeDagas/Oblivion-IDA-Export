@@ -10,7 +10,6 @@
 0x8AD163: jle     short loc_8AD18A
 0x8AD165: lea     ebx, [esi+8]
 0x8AD168: jmp     short loc_8AD170
-0x8AD16A: align 10h
 0x8AD170: mov     eax, [esi+8Ch]
 0x8AD176: mov     ecx, [eax+edi*4]
 0x8AD179: push    ebx
@@ -114,12 +113,12 @@
 0x8AD2C2: lea     ebx, [ecx+ebp]
 0x8AD2C5: jle     loc_8AD3D6
 0x8AD2CB: mov     edx, [esp+3Ch+arg_0]
-0x8AD2CF: mov     [esp+3Ch+var_2C], edx
-0x8AD2D3: mov     eax, [esp+3Ch+var_2C]
-0x8AD2D7: push    ebx
-0x8AD2D8: push    eax
-0x8AD2D9: mov     ecx, esi
-0x8AD2DB: call    sub_8ABF70
+0x8AD2CF: mov     [esp+3Ch+candidate], edx
+0x8AD2D3: mov     eax, [esp+3Ch+candidate]
+0x8AD2D7: push    ebx; manifoldEntry
+0x8AD2D8: push    eax; candidate
+0x8AD2D9: mov     ecx, esi; this
+0x8AD2DB: call    hkpCharacterProxy_ComputeContactMatchError; TES4 authoritative: computes contact-match error from normal difference, contact plane/fraction difference, and resolved collidable-space point difference.
 0x8AD2E0: fcom    [esp+3Ch+var_20]
 0x8AD2E4: fnstsw  ax
 0x8AD2E6: test    ah, 5
@@ -128,12 +127,12 @@
 0x8AD2EF: mov     [esp+3Ch+var_1C], edi
 0x8AD2F3: jmp     short loc_8AD2F7
 0x8AD2F5: fstp    st
-0x8AD2F7: mov     ecx, [esp+3Ch+var_2C]
+0x8AD2F7: mov     ecx, [esp+3Ch+candidate]
 0x8AD2FB: mov     eax, [esp+3Ch+var_C]
 0x8AD2FF: inc     edi
 0x8AD300: add     ecx, 30h ; '0'
 0x8AD303: cmp     edi, eax
-0x8AD305: mov     [esp+3Ch+var_2C], ecx
+0x8AD305: mov     [esp+3Ch+candidate], ecx
 0x8AD309: jl      short loc_8AD2D3
 0x8AD30B: mov     eax, [esp+3Ch+var_1C]
 0x8AD30F: test    eax, eax
@@ -149,7 +148,6 @@
 0x8AD333: dec     ebp
 0x8AD334: js      short loc_8AD352
 0x8AD336: jmp     short loc_8AD340
-0x8AD338: align 10h
 0x8AD340: mov     ecx, [esi+80h]
 0x8AD346: mov     ecx, [ecx+ebp*4]
 0x8AD349: mov     edx, [ecx]
@@ -161,7 +159,6 @@
 0x8AD358: dec     ebp
 0x8AD359: js      short loc_8AD372
 0x8AD35B: jmp     short loc_8AD360
-0x8AD35D: align 10h
 0x8AD360: mov     eax, [esi+80h]
 0x8AD366: mov     ecx, [eax+ebp*4]
 0x8AD369: mov     edx, [ecx]
@@ -252,9 +249,9 @@
 0x8AD46F: test    ah, 44h
 0x8AD472: jp      loc_8AD4F6
 0x8AD478: lea     ebp, [edi-10h]
-0x8AD47B: push    ebp
-0x8AD47C: mov     ecx, esi
-0x8AD47E: call    sub_8AC640
+0x8AD47B: push    ebp; candidate
+0x8AD47C: mov     ecx, esi; this
+0x8AD47E: call    hkpCharacterProxy_FindMatchingManifoldContact; TES4 authoritative: searches existing manifold entries for a candidate 0x30-byte contact with match error < 0.1; returns index or 0xFFFFFFFF.
 0x8AD483: test    eax, eax
 0x8AD485: jge     short loc_8AD4F6
 0x8AD487: mov     ebx, [esi+84h]
@@ -306,9 +303,9 @@
 0x8AD50F: test    ecx, ecx
 0x8AD511: jle     loc_8AD596
 0x8AD517: mov     edi, [eax+10h]
-0x8AD51A: push    edi
-0x8AD51B: mov     ecx, esi
-0x8AD51D: call    sub_8AC640
+0x8AD51A: push    edi; candidate
+0x8AD51B: mov     ecx, esi; this
+0x8AD51D: call    hkpCharacterProxy_FindMatchingManifoldContact; TES4 authoritative: searches existing manifold entries for a candidate 0x30-byte contact with match error < 0.1; returns index or 0xFFFFFFFF.
 0x8AD522: cmp     eax, 0FFFFFFFFh
 0x8AD525: jnz     short loc_8AD596
 0x8AD527: mov     ebx, [esi+84h]
@@ -357,7 +354,6 @@
 0x8AD5A2: lea     edi, [eax+eax*2]
 0x8AD5A5: shl     edi, 4
 0x8AD5A8: jmp     short loc_8AD5B0
-0x8AD5AA: align 10h
 0x8AD5B0: cmp     eax, 1
 0x8AD5B3: lea     ebp, [eax-1]
 0x8AD5B6: mov     [esp+3Ch+var_18], ebp
@@ -368,10 +364,10 @@
 0x8AD5CA: lea     ebx, [eax+edi-30h]
 0x8AD5CE: mov     edi, edi
 0x8AD5D0: mov     edx, [esp+3Ch+arg_4]
-0x8AD5D4: push    ebx
-0x8AD5D5: push    edx
-0x8AD5D6: mov     ecx, esi
-0x8AD5D8: call    sub_8ABF70
+0x8AD5D4: push    ebx; manifoldEntry
+0x8AD5D5: push    edx; candidate
+0x8AD5D6: mov     ecx, esi; this
+0x8AD5D8: call    hkpCharacterProxy_ComputeContactMatchError; TES4 authoritative: computes contact-match error from normal difference, contact plane/fraction difference, and resolved collidable-space point difference.
 0x8AD5DD: fcomp   dword ptr ds:0A2FAACh
 0x8AD5E3: fnstsw  ax
 0x8AD5E5: test    ah, 5
@@ -422,7 +418,6 @@
 0x8AD670: jle     loc_8AD76E
 0x8AD676: xor     ebx, ebx
 0x8AD678: jmp     short loc_8AD680
-0x8AD67A: align 10h
 0x8AD680: mov     ecx, [esi+74h]
 0x8AD683: mov     eax, [ecx+ebx+28h]
 0x8AD687: cmp     byte ptr [eax+18h], 1

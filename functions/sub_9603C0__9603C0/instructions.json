@@ -217,13 +217,13 @@
   },
   {
     "ea": "0x96043A",
-    "line": "lea     ecx, [esp+58h+var_4C]",
+    "line": "lea     ecx, [esp+58h+var_4C]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x96043E",
-    "line": "call    sub_4E7DE0",
+    "line": "call    PathGraphNode_GetConnections; Verified graph-node connection-list accessor: returns this+0x20. TESPathGrid and TESRoad graph code both traverse this as a BSSimpleList of adjacency pointers.",
     "mnemonic": "call",
     "size": 5
   },

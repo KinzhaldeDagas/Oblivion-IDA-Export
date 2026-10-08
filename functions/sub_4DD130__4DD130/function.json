@@ -1,19 +1,32 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 2,
+  "chunks": [
+    [
+      "0x4DD130",
+      "0x4DD19F"
+    ]
+  ],
+  "chunks_sha256": "ea2b74ef0df229cf0da642f7b1e244e509a4881c99ea4a4d8a4a822584131bee",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "Allocate an AttachedLightPayload_Decoded for ordinary ExtraLight type 0x30, strongly own backingLight, initialize targetDimmer_04 to 1.0, and install it on the reference.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4DD130",
+  "display_name": "TESObjectREFR_SetExtraLightPayload",
   "end_ea": "0x4DD19F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4DD130",
+  "name": "TESObjectREFR_SetExtraLightPayload",
   "segment": ".text",
   "sha256": "ea2b74ef0df229cf0da642f7b1e244e509a4881c99ea4a4d8a4a822584131bee",
   "size": 111,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4DD130",
-  "type": "BSExtraData *__thiscall(PlayerCharacter *this, int)",
+  "total_chunk_size": 111,
+  "type": "BSExtraData *__thiscall(TESObjectREFR *self, NiLight *backingLight)",
   "xrefs_from_count": 55,
   "xrefs_to_count": 2
 }

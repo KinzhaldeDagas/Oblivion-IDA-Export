@@ -17,7 +17,7 @@
 0x4DDFF7: mov     esi, [esi+3Ch]
 0x4DDFFA: push    offset aBsfacegennin_0; "BSFaceGenNiNodeSkinned"
 0x4DDFFF: push    esi; a1
-0x4DE000: call    NiObjectNET_LookupObjectByName
+0x4DE000: call    NiObjectNET_LookupObjectByName; ODismemberment: FaceGen skinned node is resolved by name under actor root; runtime decap can app-cull this node without NIF edits.
 0x4DE005: add     esp, 8
 0x4DE008: pop     esi
 0x4DE009: retn    4

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7C5850",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Replace ShadowSceneNode+0x118 with a newly constructed ShadowSceneLight wrapper and assign its backing reference light.",
     "mnemonic": "push",
     "size": 2
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x7C5874",
-    "line": "mov     ecx, [esi+118h]",
+    "line": "mov     ecx, [esi+118h]; Release the previous strong-owned ShadowSceneNode+0x118 light-level reference wrapper, if present.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x7C5895",
-    "line": "call    FormHeapAlloc",
+    "line": "call    FormHeapAlloc; Allocate the exact retail ShadowSceneLight object size, 0x220 bytes, for the reference-light wrapper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x7C58AF",
-    "line": "call    ??0ShadowSceneLight@@QAE@XZ; ShadowSceneLight::ShadowSceneLight(void)",
+    "line": "call    ??0ShadowSceneLight@@QAE@XZ; Construct the replacement ShadowSceneLight; the complete direct constructor-xref census contains five native callsites.",
     "mnemonic": "call",
     "size": 5
   },
@@ -187,19 +187,19 @@
   },
   {
     "ea": "0x7C58B8",
-    "line": "mov     ecx, [esp+18h+arg_0]",
+    "line": "mov     ecx, [esp+18h+backingLight]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7C58BC",
-    "line": "push    ecx",
+    "line": "push    ecx; backingLight",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C58BD",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -211,19 +211,19 @@
   },
   {
     "ea": "0x7C58C7",
-    "line": "mov     [esi+118h], eax",
+    "line": "mov     [esi+118h], eax; Store the replacement wrapper at ShadowSceneNode+0x118 (lightLevelReference_118).",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x7C58CD",
-    "line": "call    sub_7D3400",
+    "line": "call    ShadowSceneLight_SetBackingLight; Strong-own and classify the backing NiLight. When trackBackingPosition is set, seed cached source position from the NiPointLight world translation.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7C58D2",
-    "line": "mov     ecx, dword ptr [esp+18h+var_C]",
+    "line": "mov     ecx, dword ptr [esp+18h+var_C]; Assign and strong-own the supplied sun/PlayerSceneLight backing light through ShadowSceneLight+0x100.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -256,5 +256,77 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D62E0",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D62E3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D62E4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D62E9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D62EA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D62EB",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D62EF",
+    "line": "lea     eax, [edx-8]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D62F2",
+    "line": "mov     ecx, [edx-0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D62F5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D62F7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D62FC",
+    "line": "mov     eax, offset stru_AFE21C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6301",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

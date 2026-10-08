@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x723020",
-    "line": "push    esi",
+    "line": "push    esi; Copies NiGeometry-specific members into a clone, including geometry data, then delegates the NiAVObject/base-member copy.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x723022",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+dest]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x72303B",
-    "line": "mov     eax, [esp+8+arg_4]",
+    "line": "mov     eax, [esp+8+cloningProcess]",
     "mnemonic": "mov",
     "size": 4
   },

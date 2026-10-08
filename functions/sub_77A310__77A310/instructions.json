@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x77A310",
-    "line": "mov     edx, [esp+arg_0]",
+    "line": "mov     edx, [esp+geometry]; DirectX10OBSE authority: Oblivion NiD3DShader geometry binder. Packs geometry, calls SetStreamSource for each BuffData stream, then SetIndices(BuffData->IB); DX10 bridge captures/restores streams and index bindings from this observed path.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x77A35F",
-    "line": "call    NiDX9Renderer__PackSkinnedGeometryBuffer",
+    "line": "call    NiDX9Renderer__PackSkinnedGeometryBuffer; Pack hardware-skinned geometry with the active Lighting30 ShaderDeclaration.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x77A373",
-    "line": "call    NiDX9Renderer__PackGeometryBuffers",
+    "line": "call    NiDX9Renderer__PackGeometryBuffers; Pack non-skinned geometry with the active Lighting30 ShaderDeclaration.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x77A37A",
-    "line": "mov     edi, [esp+0Ch+arg_8]",
+    "line": "mov     edi, [esp+0Ch+existingBuffer]",
     "mnemonic": "mov",
     "size": 4
   },

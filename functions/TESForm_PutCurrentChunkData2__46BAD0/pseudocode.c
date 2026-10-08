@@ -6,16 +6,16 @@ void *__cdecl TESForm_PutCurrentChunkData2(int a1, __int16 a2)
   void *result; // eax
   size_t v6; // [esp-4h] [ebp-8h]
 
-  v2 = TESForm_Static_FormRecordSize;
-  LODWORD(v6) = TESForm_Static_FormRecordSize + 8;
-  TESForm_Static_FormRecordSize = v6;
-  v3 = MemoryHeap_Reallocate((void (__thiscall ***)(void *, int))&FormHeap, TESForm_Static_FormRecordBuffer, v6);
-  TESForm_Static_FormRecordBuffer = v3;
-  v4 = (char *)v3 + v2;
-  *((_WORD *)v4 + 2) = 2;
-  *(_DWORD *)v4 = a1;
-  *((_WORD *)v4 + 2) = *((_WORD *)v4 + 2);
-  result = TESForm_Static_FormRecordBuffer;
-  *(_WORD *)((char *)TESForm_Static_FormRecordBuffer + v2 + 6) = a2;
-  return result;
+  v2 = *(_DWORD *)&word_B33C0E[5]; /*0x46bad6*/
+  LODWORD(v6) = *(_DWORD *)&word_B33C0E[5] + 8; /*0x46badb*/
+  *(_DWORD *)&word_B33C0E[5] = v6; /*0x46badc*/
+  v3 = MemoryHeap_Reallocate((void (__thiscall ***)(void *, int))&FormHeap, *(void **)&word_B33C0E[3], v6); /*0x46baec*/
+  *(_DWORD *)&word_B33C0E[3] = v3; /*0x46baf5*/
+  v4 = (char *)v3 + v2; /*0x46bafa*/
+  *((_WORD *)v4 + 2) = 2; /*0x46bafc*/
+  *(_DWORD *)v4 = a1; /*0x46bb04*/
+  *((_WORD *)v4 + 2) = *((_WORD *)v4 + 2); /*0x46bb0f*/
+  result = *(void **)&word_B33C0E[3]; /*0x46bb13*/
+  *(_WORD *)(*(_DWORD *)&word_B33C0E[3] + v2 + 6) = a2; /*0x46bb18*/
+  return result; /*0x46bb1d*/
 }

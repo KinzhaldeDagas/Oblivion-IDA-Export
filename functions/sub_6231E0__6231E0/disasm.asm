@@ -43,7 +43,7 @@
 0x623264: mov     ecx, ebp
 0x623266: call    edx
 0x623268: mov     ecx, edi
-0x62326A: call    sub_5E05B0
+0x62326A: call    sub_5E05B0; Checks process movement flags low nibble via vfunc +0x2C0. Player input uses this alongside swimming/sneaking skill progression; useful as a broad movement-mode guard.
 0x62326F: test    al, al
 0x623271: jnz     short loc_6232D4
 0x623273: mov     eax, [esi+3Ch]
@@ -82,7 +82,7 @@
 0x6232E4: call    TESObjectREFR_GetWorldSpace
 0x6232E9: push    eax
 0x6232EA: mov     ecx, edi; this
-0x6232EC: call    TESObjectREFR_GetParentCell
+0x6232EC: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6232F1: mov     ecx, [esi+11Ch]
 0x6232F7: mov     edx, [ebx+414h]
 0x6232FD: push    eax
@@ -156,14 +156,14 @@
 0x6233BD: fstp    [esp+20h+var_4]
 0x6233C1: jnz     loc_623450
 0x6233C7: lea     ecx, [esp+20h+var_C]
-0x6233CB: call    sub_404C90
+0x6233CB: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x6233D0: fcomp   dword ptr ds:0A427E4h
 0x6233D6: fnstsw  ax
 0x6233D8: test    ah, 41h
 0x6233DB: jnp     short loc_623450
 0x6233DD: mov     ecx, [esi+70h]
-0x6233E0: push    ecx
-0x6233E1: call    sub_612690
+0x6233E0: push    ecx; mode
+0x6233E1: call    CombatMode_IsRangedWeaponMode; Returns true only for native combat modes 2 and 4, the two ranged-weapon modes used by the distance and attack-option logic.
 0x6233E6: add     esp, 4
 0x6233E9: test    al, al
 0x6233EB: jz      short loc_62340A
@@ -178,14 +178,14 @@
 0x623403: mov     ecx, esi
 0x623405: call    sub_619920
 0x62340A: mov     ecx, edi
-0x62340C: call    Actor_IsBlocking
+0x62340C: call    Actor_IsBlocking; Actor_IsBlocking: process current-action vfunc +0x2D0 equals 6. Player jump path treats this specially; climb activation should reject or require explicit design override while blocking.
 0x623411: test    al, al
 0x623413: jz      short loc_62341E
-0x623415: push    0; float
-0x623417: mov     ecx, edi
-0x623419: call    sub_5F4AE0
+0x623415: push    0; shouldBlock
+0x623417: mov     ecx, edi; this
+0x623419: call    Actor_UpdateBlockingState; Starts or stops the actor blocking animation/current-action state and mirrors the result to CombatController byte +0x49. Native ABI is Actor in ECX plus one shouldBlock byte.
 0x62341E: mov     ecx, esi
-0x623420: call    sub_614290
+0x623420: call    CombatController_CanReachCurrentTarget; Returns current-target reachability at +0x174, additionally forcing false when a non-water-capable actor cannot fight a swimming target.
 0x623425: test    al, al
 0x623427: jz      short loc_62346A
 0x623429: mov     edx, [esi+1A8h]
@@ -205,8 +205,8 @@
 0x623450: push    9
 0x623452: mov     ecx, esi
 0x623454: call    sub_612DA0
-0x623459: mov     ecx, esi
-0x62345B: call    sub_61C6E0
+0x623459: mov     ecx, esi; this
+0x62345B: call    ActorMovement_BuildPathGridWaypointList; Verified actor movement path helper called by CombatController_UpdateMovementAndReachability and other movement callers. Finds a reachable PathGrid node near the actor, checks distance and line of sight, collects enabled linked-point positions into the actor's waypoint list, then updates the movement path. Owner class layout remains Unknown.
 0x623460: mov     dword ptr [esi+11Ch], 0
 0x62346A: pop     edi
 0x62346B: pop     ebp

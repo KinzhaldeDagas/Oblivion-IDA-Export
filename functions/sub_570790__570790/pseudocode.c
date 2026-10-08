@@ -1,4 +1,4 @@
-void *sub_570790()
+NiRTTI *sub_570790()
 {
-  return &unk_B3A69C;
+  return &NiRTTI_BSTempEffectParticle; /*0x570795*/
 }

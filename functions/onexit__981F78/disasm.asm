@@ -9,3 +9,5 @@
 0x981F96: mov     [ebp+var_1C], eax
 0x981F99: mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
 0x981FA0: call    __onexit___$LN7_0
+0x981FAE: call    __unlockexit
+0x981FB3: retn

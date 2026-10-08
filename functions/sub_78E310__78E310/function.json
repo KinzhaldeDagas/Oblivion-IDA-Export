@@ -1,19 +1,36 @@
 {
-  "callees_count": 46,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 27,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 8,
-  "display_name": "sub_78E310",
+  "chunks": [
+    [
+      "0x78E310",
+      "0x78E54B"
+    ],
+    [
+      "0x9CBB00",
+      "0x9CBB43"
+    ]
+  ],
+  "chunks_sha256": "ccf785dde3e0f710bca626bd045ddf36b4e98ba04759f75b05adddc66ed173d5",
+  "comment_regular": "2026-05-21 SpeedTreeOBSE core/tail known-family load pass: Oblivion path wrapper reads the complete SPT, calls LoadTree(buffer) at 0x78E39F, then frees the original bytes. Compatibility keeps the decoded core/tail prefix byte-exact, strips known 23000..75000 sidecars from the supplemental tail, and honors unknown terminal stop boundaries in both after-known and before-known ordering. Full-file fixtures now cover stock-wrapped all-known sidecars and both terminal-opaque orderings behind a valid Oblivion core; remaining load gaps are nonterminal unknown vendor payloads, grammar variants, allocation failures, deployment logs, and feature consumers.\n\n2026-05-21 SpeedTreeOBSE core/tail known-family load pass: Oblivion path wrapper reads the complete SPT, calls LoadTree(buffer) at 0x78E39F, then frees the original bytes. Compatibility must trace/copy sidecar payloads before this free, keep the core prefix byte-exact, strip known 23000..75000 sidecars from the supplemental tail, and honor unknown terminal stop boundaries in both orderings.",
+  "comment_repeatable": "2026-05-21 SpeedTreeOBSE core/tail known-family load pass: Oblivion path wrapper reads the complete SPT, calls LoadTree(buffer) at 0x78E39F, then frees the original bytes. Compatibility must trace/copy sidecar payloads before this free, keep the core prefix byte-exact, strip known 23000..75000 sidecars from the supplemental tail, and honor unknown terminal stop boundaries in both orderings.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 9,
+  "display_name": "CSpeedTreeRT__LoadTreeFromFile",
   "end_ea": "0x78E54B",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_78E310",
+  "name": "CSpeedTreeRT__LoadTreeFromFile",
   "segment": ".text",
   "sha256": "260ef81d95bb87ad1c890068c5f3407a7b7821f37cdbefa6ebd98b88d4e38916",
   "size": 571,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78E310",
-  "type": "char __thiscall(char *this, char *)",
-  "xrefs_from_count": 235,
+  "total_chunk_size": 638,
+  "type": "bool __thiscall(OB_CSpeedTreeRT_010201A0 *this, const char *filename)",
+  "xrefs_from_count": 254,
   "xrefs_to_count": 1
 }

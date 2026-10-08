@@ -21,7 +21,7 @@
 0x715C3F: call    edx
 0x715C41: test    eax, eax
 0x715C43: jz      short loc_715C86
-0x715C45: cmp     eax, offset dword_B3FA80
+0x715C45: cmp     eax, offset stru_B3FA80
 0x715C4A: jz      short loc_715C55
 0x715C4C: mov     eax, [eax+4]
 0x715C4F: test    eax, eax

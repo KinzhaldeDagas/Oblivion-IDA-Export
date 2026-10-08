@@ -129,7 +129,7 @@
 0x6AFA46: push    offset aWpnswishlarge; "WPNSwishLarge"
 0x6AFA4B: jmp     short loc_6AFAC0
 0x6AFA4D: fld     dword ptr [ebx+7Ch]
-0x6AFA50: mov     ecx, offset unk_B162CC
+0x6AFA50: mov     ecx, offset dword_B162CC
 0x6AFA55: fstp    [esp+34h+var_20]
 0x6AFA59: call    GameSetting_GetSafeFloatPointer
 0x6AFA5E: fld     [esp+34h+var_20]
@@ -138,7 +138,7 @@
 0x6AFA66: fnstsw  ax
 0x6AFA68: test    ah, 41h
 0x6AFA6B: jz      short loc_6AFABB
-0x6AFA6D: mov     ecx, offset unk_B162CC
+0x6AFA6D: mov     ecx, offset dword_B162CC
 0x6AFA72: call    GameSetting_GetSafeFloatPointer
 0x6AFA77: fld     [esp+34h+var_20]
 0x6AFA7B: fld     dword ptr [eax]
@@ -164,7 +164,7 @@
 0x6AFAB9: jmp     short loc_6AFAE9
 0x6AFABB: push    offset aWpnswishsmall; "WPNSwishSmall"
 0x6AFAC0: mov     ecx, ds:0B33A98h
-0x6AFAC6: call    sub_447490
+0x6AFAC6: call    SoundMap_ResolveAnimSoundNote; Animation Sound: note resolver. Looks up the note token in global sound map off_B06164 and accepts only entries whose form/type byte is 0x0A; returns the sound entry or 0.
 0x6AFACB: test    eax, eax
 0x6AFACD: jz      loc_6AFFC9
 0x6AFAD3: mov     eax, [eax+0Ch]
@@ -197,7 +197,7 @@
 0x6AFB30: mov     ecx, esi; this
 0x6AFB32: call    sub_6B73E0
 0x6AFB37: push    esi
-0x6AFB38: call    FormHeapFree
+0x6AFB38: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6AFB3D: add     esp, 4
 0x6AFB40: pop     esi
 0x6AFB41: pop     edi
@@ -225,7 +225,7 @@
 0x6AFB81: jmp     short loc_6AFBB3
 0x6AFB83: push    offset aPhyarmorhitlig; "PHYArmorHitLight"
 0x6AFB88: jmp     short loc_6AFBB3
-0x6AFB8A: mov     eax, dword ptr [esp+34h+arg_18]
+0x6AFB8A: mov     eax, [esp+34h+arg_18]
 0x6AFB8E: test    eax, eax
 0x6AFB90: jl      short loc_6AFBD4
 0x6AFB92: sub     eax, 0
@@ -237,7 +237,7 @@
 0x6AFBA3: push    offset aWpnblockshie_0; "WPNBlockShieldLight"
 0x6AFBA8: mov     ecx, ds:0B33A98h
 0x6AFBAE: mov     [esp+38h+var_21], 1
-0x6AFBB3: call    sub_447490
+0x6AFBB3: call    SoundMap_ResolveAnimSoundNote; Animation Sound: note resolver. Looks up the note token in global sound map off_B06164 and accepts only entries whose form/type byte is 0x0A; returns the sound entry or 0.
 0x6AFBB8: test    eax, eax
 0x6AFBBA: jz      short loc_6AFBD4
 0x6AFBBC: mov     eax, [eax+0Ch]
@@ -267,7 +267,7 @@
 0x6AFC10: jmp     short loc_6AFC17
 0x6AFC12: push    offset aPhydamageflesh; "PHYDamageFlesh"
 0x6AFC17: mov     ecx, ds:0B33A98h
-0x6AFC1D: call    sub_447490
+0x6AFC1D: call    SoundMap_ResolveAnimSoundNote; Animation Sound: note resolver. Looks up the note token in global sound map off_B06164 and accepts only entries whose form/type byte is 0x0A; returns the sound entry or 0.
 0x6AFC22: test    eax, eax
 0x6AFC24: jz      short loc_6AFC40
 0x6AFC26: mov     eax, [eax+0Ch]
@@ -298,7 +298,7 @@
 0x6AFC79: add     esp, 14h
 0x6AFC7C: push    9
 0x6AFC7E: mov     ecx, eax
-0x6AFC80: call    sub_51CEC0
+0x6AFC80: call    TESCreature_SelectSoundForAnimEnum; TESCreature sound selector: walks inherited creature data, chooses a sound entry by category index and probability.
 0x6AFC85: test    eax, eax
 0x6AFC87: jz      short loc_6AFCAD
 0x6AFC89: mov     ecx, ds:0B3C0F0h
@@ -345,7 +345,7 @@
 0x6AFD16: jmp     short loc_6AFD1D
 0x6AFD18: push    offset aWpnhithand; jumptable 006AFCB2 default case, case 4
 0x6AFD1D: mov     ecx, ds:0B33A98h
-0x6AFD23: call    sub_447490
+0x6AFD23: call    SoundMap_ResolveAnimSoundNote; Animation Sound: note resolver. Looks up the note token in global sound map off_B06164 and accepts only entries whose form/type byte is 0x0A; returns the sound entry or 0.
 0x6AFD28: test    eax, eax
 0x6AFD2A: jz      loc_6AFDE2
 0x6AFD30: mov     eax, [eax+0Ch]
@@ -410,7 +410,7 @@
 0x6AFE04: mov     ecx, ebx; this
 0x6AFE06: call    sub_6B73E0
 0x6AFE0B: push    ebx
-0x6AFE0C: call    FormHeapFree
+0x6AFE0C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6AFE11: add     esp, 4
 0x6AFE14: xor     ebx, ebx
 0x6AFE16: jmp     loc_6AFEE7
@@ -487,7 +487,7 @@
 0x6AFF08: fstp    [esp+40h+var_40]; float
 0x6AFF0B: call    sub_6B7360
 0x6AFF10: push    4
-0x6AFF12: call    Rand3
+0x6AFF12: call    Game_RandomIntBelow; Engine RNG upper-bound helper: returns max*rand()/0x7FFF after lazy time seed.
 0x6AFF17: sub     eax, 2
 0x6AFF1A: mov     [esp+38h+arg_0], eax
 0x6AFF1E: fild    [esp+38h+arg_0]
@@ -527,21 +527,21 @@
 0x6AFF91: mov     ecx, edi; this
 0x6AFF93: call    sub_6B73E0
 0x6AFF98: push    edi
-0x6AFF99: call    FormHeapFree
+0x6AFF99: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6AFF9E: add     esp, 4
 0x6AFFA1: test    ebx, ebx
 0x6AFFA3: jz      short loc_6AFFB5
 0x6AFFA5: mov     ecx, ebx; this
 0x6AFFA7: call    sub_6B73E0
 0x6AFFAC: push    ebx
-0x6AFFAD: call    FormHeapFree
+0x6AFFAD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6AFFB2: add     esp, 4
 0x6AFFB5: test    ebp, ebp
 0x6AFFB7: jz      short loc_6AFFC9
 0x6AFFB9: mov     ecx, ebp; this
 0x6AFFBB: call    sub_6B73E0
 0x6AFFC0: push    ebp
-0x6AFFC1: call    FormHeapFree
+0x6AFFC1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6AFFC6: add     esp, 4
 0x6AFFC9: pop     esi
 0x6AFFCA: pop     edi

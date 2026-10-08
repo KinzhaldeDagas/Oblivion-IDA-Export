@@ -1,35 +1,40 @@
-char __cdecl sub_6EFA20(_DWORD *a1, _DWORD *a2, int *a3, int *a4)
+// Load FREGT003 texture-morph data. Validate the magic, read the 56-byte descriptor, and materialize two banks of 64-byte RGB basis records. The descriptor supplies image dimensions and independent bank counts.
+bool __cdecl BSFaceGenEgtData_LoadFile(
+        void *sourceString,
+        unsigned int *coordinateMetadata,
+        FaceGenEgtBasisBank *bank0,
+        FaceGenEgtBasisBank *bank1)
 {
   unsigned int v5; // edi
   unsigned int v6; // ebp
-  unsigned int v7; // edi
-  int v8; // ecx
-  int v9; // ecx
-  int v10; // ecx
-  int v11; // ecx
+  int v7; // edi
+  void *begin; // ecx
+  void *v9; // ecx
+  void *v10; // ecx
+  void *v11; // ecx
   unsigned int v12; // ebp
-  int v13; // ecx
-  int v14; // ecx
-  unsigned int v15; // eax
-  _DWORD *v16; // edi
+  void *v13; // ecx
+  void *v14; // ecx
+  char *v15; // eax
+  char *v16; // edi
   int v17; // edi
   unsigned int v18; // ebp
   int v19; // eax
   unsigned int v20; // esi
   unsigned int v21; // esi
-  unsigned int v22; // edi
-  int v23; // ecx
-  int v24; // ecx
-  int v25; // ecx
-  int v26; // ecx
+  int v22; // edi
+  void *v23; // ecx
+  void *v24; // ecx
+  void *v25; // ecx
+  void *v26; // ecx
   unsigned int v27; // eax
   unsigned int v28; // edi
   unsigned int v29; // ebp
-  int v30; // ecx
-  int v31; // ecx
-  unsigned int v32; // eax
+  void *v30; // ecx
+  void *v31; // ecx
+  char *v32; // eax
   int v33; // ecx
-  _DWORD *v34; // esi
+  char *v34; // esi
   int v35; // esi
   unsigned int v36; // edi
   int v37; // eax
@@ -41,241 +46,298 @@ char __cdecl sub_6EFA20(_DWORD *a1, _DWORD *a2, int *a3, int *a4)
   int v43; // [esp-2Ch] [ebp-ECh]
   int v44; // [esp-28h] [ebp-E8h]
   int v45; // [esp-24h] [ebp-E4h]
-  rsize_t v46; // [esp-20h] [ebp-E0h] BYREF
-  int v47; // [esp-18h] [ebp-D8h]
-  int v48; // [esp-14h] [ebp-D4h]
-  int v49; // [esp-10h] [ebp-D0h]
-  int v50; // [esp-Ch] [ebp-CCh]
-  int v51; // [esp-8h] [ebp-C8h]
-  int v52; // [esp-4h] [ebp-C4h]
-  unsigned int v53; // [esp+14h] [ebp-ACh]
-  unsigned int v54; // [esp+18h] [ebp-A8h]
-  int *v55; // [esp+1Ch] [ebp-A4h]
-  unsigned int v56; // [esp+20h] [ebp-A0h]
-  unsigned int v57; // [esp+24h] [ebp-9Ch]
-  unsigned int v58; // [esp+28h] [ebp-98h]
-  int v59; // [esp+2Ch] [ebp-94h]
-  unsigned int v60; // [esp+30h] [ebp-90h]
-  unsigned int v61; // [esp+34h] [ebp-8Ch] BYREF
-  int v62; // [esp+38h] [ebp-88h]
-  unsigned int v63; // [esp+3Ch] [ebp-84h]
-  unsigned int v64; // [esp+40h] [ebp-80h]
-  int v65; // [esp+44h] [ebp-7Ch]
-  _DWORD v66[16]; // [esp+6Ch] [ebp-54h] BYREF
-  void (__thiscall ***v67)(_DWORD, int); // [esp+ACh] [ebp-14h]
-  int v68; // [esp+BCh] [ebp-4h]
+  OB_stString28_010201A0 v46; // [esp-20h] [ebp-E0h] BYREF
+  int v47; // [esp-4h] [ebp-C4h]
+  unsigned int v48; // [esp+14h] [ebp-ACh]
+  unsigned int v49; // [esp+18h] [ebp-A8h]
+  OB_stString28_010201A0 *p_storage; // [esp+1Ch] [ebp-A4h]
+  int v51; // [esp+20h] [ebp-A0h]
+  unsigned int v52; // [esp+24h] [ebp-9Ch]
+  int v53; // [esp+28h] [ebp-98h]
+  int v54; // [esp+2Ch] [ebp-94h]
+  unsigned int v55; // [esp+30h] [ebp-90h]
+  unsigned int v56; // [esp+34h] [ebp-8Ch] BYREF
+  int v57; // [esp+38h] [ebp-88h]
+  unsigned int v58; // [esp+3Ch] [ebp-84h]
+  unsigned int v59; // [esp+40h] [ebp-80h]
+  unsigned int v60; // [esp+44h] [ebp-7Ch]
+  unsigned int v61[16]; // [esp+6Ch] [ebp-54h] BYREF
+  void (__thiscall ***v62)(_DWORD, int); // [esp+ACh] [ebp-14h]
+  int v63; // [esp+BCh] [ebp-4h]
 
-  v55 = (int *)&v46 + 1;
-  LODWORD(v46) = 8;
-  v52 = 0xF;
-  v51 = 0;
-  LOBYTE(v47) = 0;
-  sub_414500((_DWORD *)&v46 + 1, (int)a2, "FREGT003", v46);
-  sub_6F6110((FutBinaryFileC *)v66, SBYTE4(v46), v47, v48, v49, v50, v51, v52);
-  v52 = 0;
-  v55 = (int *)&v46;
-  v51 = 0xF;
-  v50 = 0;
-  v68 = 0;
-  BYTE4(v46) = 0;
-  sub_414420((int)&v46, a1, 0, 0xFFFFFFFF);
-  if ( !sub_6F66E0(v66, v46, SHIDWORD(v46), v47, v48, v49, v50, v51, v52) )
+  p_storage = (OB_stString28_010201A0 *)&v46.storage; /*0x6efa7c*/
+  v47 = 0xF; /*0x6efa82*/
+  v46.capacity = 0; /*0x6efa89*/
+  v46.storage.inlineData[4] = 0; /*0x6efa95*/
+  OB_stString28_AssignBytes_010201A0((OB_stString28_010201A0 *)&v46.storage, "FREGT003", 8u); /*0x6efa99*/
+  sub_6F6110( /*0x6efaa5*/
+    (FutBinaryFileC *)v61,
+    (int)v46.storage.heapData,
+    *((unsigned int *)&v46.storage.heapData + 1),
+    *((int *)&v46.storage.heapData + 2),
+    *((int *)&v46.storage.heapData + 3),
+    v46.size,
+    v46.capacity,
+    v47);
+  v47 = 0; /*0x6efaac*/
+  p_storage = &v46; /*0x6efab2*/
+  v46.capacity = 0xF; /*0x6efab9*/
+  v46.size = 0; /*0x6efac0*/
+  v63 = 0; /*0x6efac4*/
+  v46.storage.inlineData[0] = 0; /*0x6efacb*/
+  OB_stString28_AssignSubstring_010201A0(&v46, (const OB_stString28_010201A0 *)sourceString, 0, 0xFFFFFFFF); /*0x6eface*/
+  if ( !sub_6F66E0( /*0x6efada*/
+          v61,
+          v46.allocatorState,
+          (unsigned int)v46.storage.heapData,
+          *((int *)&v46.storage.heapData + 1),
+          *((int *)&v46.storage.heapData + 2),
+          *((int *)&v46.storage.heapData + 3),
+          v46.size,
+          v46.capacity,
+          v47) )
   {
-    v68 = 0xFFFFFFFF;
-    BSFaceGenBinaryFile::~BSFaceGenBinaryFile((BSFaceGenBinaryFile *)v66);
-    return 0;
+    v63 = 0xFFFFFFFF; /*0x6efae7*/
+    BSFaceGenBinaryFile::~BSFaceGenBinaryFile((BSFaceGenBinaryFile *)v61); /*0x6efaf2*/
+    return 0; /*0x6efaf9*/
   }
-  if ( !sub_6F5E50(v66, (int)&v61, 1, 0x38) )
-    goto LABEL_4;
-  *a2 = v65;
-  sub_559930(a3);
-  sub_559930(a4);
-  v5 = v63;
-  v57 = ((v62 + 7) & 0xFFFFFFF8) - v62;
-  v55 = &v38;
-  v60 = (v62 + 7) & 0xFFFFFFF8;
-  v59 = v60 * v61;
-  ArrayConstructor(&v42, 0x10u, 3, (int)sub_6EF4A0, sub_794EB0);
-  sub_6EF920(a3, v5, v38, v39, v40, v41, v42, v43, v44, v45, v46, SHIDWORD(v46), v47, v48, v49, v50, v51, v52);
-  v6 = 0;
-  v54 = 0;
-  if ( v63 )
+  if ( !sub_6F5E50(v61, (int)&v56, 1, 0x38) )   // Read the 56-byte FREGT003 descriptor after the magic. Its first fields are width, height, and basis counts for two texture banks. Every one of the 20 vanilla EGT entries in Oblivion - Meshes.bsa declares 50/0 bases. /*0x6efb07*/
+    goto LABEL_4; /*0x6efb0e*/
+  *coordinateMetadata = v60; /*0x6efb2f*/
+  sub_559930((int *)bank0); /*0x6efb33*/
+  sub_559930((int *)bank1); /*0x6efb3a*/
+  v5 = v58; /*0x6efb43*/
+  v52 = ((v57 + 7) & 0xFFFFFFF8) - v57; /*0x6efb54*/
+  p_storage = (OB_stString28_010201A0 *)&v38; /*0x6efb5c*/
+  v55 = (v57 + 7) & 0xFFFFFFF8; /*0x6efb63*/
+  v54 = v55 * v56; /*0x6efb7b*/
+  ArrayConstructor( /*0x6efb82*/
+    &v42,
+    0x10u,
+    3,
+    (void (__thiscall *)(char *))FaceGenEgtBasisBank_Construct,
+    (void (__thiscall *)(void *))OB_stVector4_DestroyThiscall_010201A0);
+  sub_6EF920( /*0x6efb8a*/
+    (int *)bank0,
+    v5,
+    v38,
+    v39,
+    v40,
+    v41,
+    v42,
+    v43,
+    v44,
+    v45,
+    v46.allocatorState,
+    (int)v46.storage.heapData,
+    *((int *)&v46.storage.heapData + 1),
+    *((int *)&v46.storage.heapData + 2),
+    *((int *)&v46.storage.heapData + 3),
+    v46.size,
+    v46.capacity,
+    v47);
+  v6 = 0; /*0x6efb8f*/
+  v49 = 0; /*0x6efb95*/
+  if ( v58 ) /*0x6efb99*/
   {
-    v7 = 0;
-    v58 = 0;
-    while ( 2 )
+    v7 = 0; /*0x6efb9f*/
+    v53 = 0; /*0x6efba1*/
+    while ( 2 ) /*0x6efbb8*/
     {
-      v8 = a3[1];
-      if ( !v8 || v6 >= (a3[2] - v8) >> 6 )
-        _invalid_parameter_noinfo();
-      if ( !sub_6F5D40(v66, v7 + a3[1], 4u, 1) )
-        goto LABEL_4;
-      v9 = a3[1];
-      if ( !v9 || v6 >= (a3[2] - v9) >> 6 )
-        _invalid_parameter_noinfo();
-      *(_DWORD *)(v7 + a3[1] + 4) = v62;
-      v10 = a3[1];
-      if ( !v10 || v6 >= (a3[2] - v10) >> 6 )
-        _invalid_parameter_noinfo();
-      *(_DWORD *)(v7 + a3[1] + 8) = v61;
-      v11 = a3[1];
-      if ( !v11 || v6 >= (a3[2] - v11) >> 6 )
-        _invalid_parameter_noinfo();
-      v12 = v59 - v60;
-      *(_DWORD *)(v7 + a3[1] + 0xC) = v57;
-      v55 = (int *)v12;
-      v53 = 0;
-      v56 = v7;
-      while ( 1 )
+      begin = bank0->begin; /*0x6efbb8*/
+      if ( !begin || v6 >= ((char *)bank0->end - (char *)begin) >> 6 ) /*0x6efbc9*/
+        _invalid_parameter_noinfo((int)bank1, v7, (int)bank0); /*0x6efbcb*/
+      if ( !sub_6F5D40(v61, (int)bank0->begin + v7, 4u, 1) ) /*0x6efbe5*/
+        goto LABEL_4; /*0x6efbe5*/
+      v9 = bank0->begin; /*0x6efbeb*/
+      if ( !v9 || v6 >= ((char *)bank0->end - (char *)v9) >> 6 ) /*0x6efbfc*/
+        _invalid_parameter_noinfo((int)bank1, v7, (int)bank0); /*0x6efbfe*/
+      *(_DWORD *)((char *)bank0->begin + v7 + 4) = v57; /*0x6efc0a*/
+      v10 = bank0->begin; /*0x6efc0e*/
+      if ( !v10 || v6 >= ((char *)bank0->end - (char *)v10) >> 6 ) /*0x6efc1f*/
+        _invalid_parameter_noinfo((int)bank1, v7, (int)bank0); /*0x6efc21*/
+      *(_DWORD *)((char *)bank0->begin + v7 + 8) = v56; /*0x6efc2d*/
+      v11 = bank0->begin; /*0x6efc31*/
+      if ( !v11 || v6 >= ((char *)bank0->end - (char *)v11) >> 6 ) /*0x6efc42*/
+        _invalid_parameter_noinfo((int)bank1, v7, (int)bank0); /*0x6efc44*/
+      v12 = v54 - v55; /*0x6efc4d*/
+      *(_DWORD *)((char *)bank0->begin + v7 + 0xC) = v52; /*0x6efc58*/
+      p_storage = (OB_stString28_010201A0 *)v12; /*0x6efc5c*/
+      v48 = 0; /*0x6efc60*/
+      v51 = v7; /*0x6efc68*/
+      while ( 1 ) /*0x6efc78*/
       {
-        v13 = a3[1];
-        if ( !v13 || v54 >= (a3[2] - v13) >> 6 )
-          _invalid_parameter_noinfo();
-        sub_6EF4B0((char **)(v56 + a3[1] + 0x10), v59, 0);
-        v14 = a3[1];
-        if ( !v14 || v54 >= (a3[2] - v14) >> 6 )
-          _invalid_parameter_noinfo();
-        v15 = v7 + a3[1];
-        v16 = (_DWORD *)(v15 + v53 + 0x14);
-        if ( !*v16 || v12 >= *(_DWORD *)(v15 + v53 + 0x18) - *v16 )
-          _invalid_parameter_noinfo();
-        v17 = v12 + *v16;
-        v18 = 0;
-        if ( v61 )
+        v13 = bank0->begin; /*0x6efc78*/
+        if ( !v13 || v49 >= ((char *)bank0->end - (char *)v13) >> 6 ) /*0x6efc8b*/
+          _invalid_parameter_noinfo((int)bank1, v7, (int)bank0); /*0x6efc8d*/
+        OB_stVectorByte_ResizeFill_010201A0((char **)((char *)bank0->begin + v51 + 0x10), v54, 0); /*0x6efca4*/
+        v14 = bank0->begin; /*0x6efca9*/
+        if ( !v14 || v49 >= ((char *)bank0->end - (char *)v14) >> 6 ) /*0x6efcbc*/
+          _invalid_parameter_noinfo((int)bank1, v7, (int)bank0); /*0x6efcbe*/
+        v15 = (char *)bank0->begin + v7; /*0x6efcca*/
+        v16 = &v15[v48 + 0x14]; /*0x6efccc*/
+        if ( !*(_DWORD *)v16 || v12 >= *(_DWORD *)&v15[v48 + 0x18] - *(_DWORD *)v16 ) /*0x6efce2*/
+          _invalid_parameter_noinfo((int)bank1, (int)v16, (int)bank0); /*0x6efce4*/
+        v17 = v12 + *(_DWORD *)v16; /*0x6efceb*/
+        v18 = 0; /*0x6efced*/
+        if ( v56 ) /*0x6efcf3*/
         {
-          v19 = v62;
-          while ( sub_6F5D40(v66, v17, 1u, v19) )
+          v19 = v57; /*0x6efcf5*/
+          while ( sub_6F5D40(v61, v17, 1u, v19) ) /*0x6efd0f*/
           {
-            v19 = v62;
-            ++v18;
-            v17 -= v62 + v57;
-            if ( v18 >= v61 )
-              goto LABEL_36;
+            v19 = v57; /*0x6efd15*/
+            ++v18; /*0x6efd20*/
+            v17 -= v57 + v52; /*0x6efd23*/
+            if ( v18 >= v56 ) /*0x6efd29*/
+              goto LABEL_36; /*0x6efd29*/
           }
-          v66[0] = &BSFaceGenBinaryFile::`vftable';
-          v68 = 1;
+          v61[0] = (unsigned int)&BSFaceGenBinaryFile::`vftable'; /*0x6efda2*/
+          v63 = 1; /*0x6efdaa*/
 LABEL_41:
-          if ( v67 )
-            (**v67)(v67, 1);
-          v67 = 0;
-          v68 = 0xFFFFFFFF;
-          FutBinaryFileC::~FutBinaryFileC((FutBinaryFileC *)v66);
-          return 0;
+          if ( v62 ) /*0x6efdbe*/
+            (**v62)(v62, 1); /*0x6efdc6*/
+          v62 = 0; /*0x6efdcc*/
+          v63 = 0xFFFFFFFF; /*0x6efdd7*/
+          FutBinaryFileC::~FutBinaryFileC((FutBinaryFileC *)v61); /*0x6efde2*/
+          return 0; /*0x6efde9*/
         }
 LABEL_36:
-        v56 += 0x10;
-        v53 += 0x10;
-        if ( v53 >= 0x30 )
-          break;
-        v12 = (unsigned int)v55;
-        v7 = v58;
+        v51 += 0x10; /*0x6efd2f*/
+        v48 += 0x10; /*0x6efd3a*/
+        if ( v48 >= 0x30 ) /*0x6efd3e*/
+          break; /*0x6efd3e*/
+        v12 = (unsigned int)p_storage; /*0x6efc70*/
+        v7 = v53; /*0x6efc74*/
       }
-      v58 += 0x40;
-      if ( ++v54 < v63 )
+      v53 += 0x40; /*0x6efd48*/
+      if ( ++v49 < v58 ) /*0x6efd58*/
       {
-        v7 = v58;
-        v6 = v54;
-        continue;
+        v7 = v53; /*0x6efbb0*/
+        v6 = v49; /*0x6efbb4*/
+        continue; /*0x6efbb4*/
       }
       break;
     }
   }
-  v20 = v64;
-  v55 = &v38;
-  ArrayConstructor(&v42, 0x10u, 3, (int)sub_6EF4A0, sub_794EB0);
-  sub_6EF920(a4, v20, v38, v39, v40, v41, v42, v43, v44, v45, v46, SHIDWORD(v46), v47, v48, v49, v50, v51, v52);
-  v21 = 0;
-  v54 = 0;
-  if ( v64 )
+  v20 = v59;                                    // Load EGT basis bank 1 using the second descriptor count. Every shipped Oblivion EGT asset declares 50 bases in bank 0 and zero in bank 1. /*0x6efd5e*/
+  p_storage = (OB_stString28_010201A0 *)&v38; /*0x6efd67*/
+  ArrayConstructor( /*0x6efd7d*/
+    &v42,
+    0x10u,
+    3,
+    (void (__thiscall *)(char *))FaceGenEgtBasisBank_Construct,
+    (void (__thiscall *)(void *))OB_stVector4_DestroyThiscall_010201A0);
+  sub_6EF920( /*0x6efd85*/
+    (int *)bank1,
+    v20,
+    v38,
+    v39,
+    v40,
+    v41,
+    v42,
+    v43,
+    v44,
+    v45,
+    v46.allocatorState,
+    (int)v46.storage.heapData,
+    *((int *)&v46.storage.heapData + 1),
+    *((int *)&v46.storage.heapData + 2),
+    *((int *)&v46.storage.heapData + 3),
+    v46.size,
+    v46.capacity,
+    v47);
+  v21 = 0; /*0x6efd8a*/
+  v49 = 0; /*0x6efd90*/
+  if ( v59 ) /*0x6efd94*/
   {
-    v22 = 0;
-    v53 = 0;
-    while ( 2 )
+    v22 = 0; /*0x6efd9a*/
+    v48 = 0; /*0x6efd9c*/
+    while ( 2 ) /*0x6efdf8*/
     {
-      v23 = a4[1];
-      if ( !v23 || v21 >= (a4[2] - v23) >> 6 )
-        _invalid_parameter_noinfo();
-      if ( sub_6F5D40(v66, v22 + a4[1], 4u, 1) )
+      v23 = bank1->begin; /*0x6efdf8*/
+      if ( !v23 || v21 >= ((char *)bank1->end - (char *)v23) >> 6 ) /*0x6efe09*/
+        _invalid_parameter_noinfo((int)bank1, v22, v21); /*0x6efe0b*/
+      if ( sub_6F5D40(v61, (int)bank1->begin + v22, 4u, 1) ) /*0x6efe1e*/
       {
-        v24 = a4[1];
-        if ( !v24 || v21 >= (a4[2] - v24) >> 6 )
-          _invalid_parameter_noinfo();
-        *(_DWORD *)(a4[1] + v22 + 4) = v62;
-        v25 = a4[1];
-        if ( !v25 || v21 >= (a4[2] - v25) >> 6 )
-          _invalid_parameter_noinfo();
-        *(_DWORD *)(a4[1] + v22 + 8) = v61;
-        v26 = a4[1];
-        if ( !v26 || v21 >= (a4[2] - v26) >> 6 )
-          _invalid_parameter_noinfo();
-        v27 = v53;
-        *(_DWORD *)(a4[1] + v22 + 0xC) = v57;
-        v28 = v59 - v60;
-        v29 = 0;
-        v55 = (int *)(v59 - v60);
-        v56 = v27;
-        while ( 1 )
+        v24 = bank1->begin; /*0x6efe2b*/
+        if ( !v24 || v21 >= ((char *)bank1->end - (char *)v24) >> 6 ) /*0x6efe3c*/
+          _invalid_parameter_noinfo((int)bank1, v22, v21); /*0x6efe3e*/
+        *(_DWORD *)((char *)bank1->begin + v22 + 4) = v57; /*0x6efe4a*/
+        v25 = bank1->begin; /*0x6efe4e*/
+        if ( !v25 || v21 >= ((char *)bank1->end - (char *)v25) >> 6 ) /*0x6efe5f*/
+          _invalid_parameter_noinfo((int)bank1, v22, v21); /*0x6efe61*/
+        *(_DWORD *)((char *)bank1->begin + v22 + 8) = v56; /*0x6efe6d*/
+        v26 = bank1->begin; /*0x6efe71*/
+        if ( !v26 || v21 >= ((char *)bank1->end - (char *)v26) >> 6 ) /*0x6efe82*/
+          _invalid_parameter_noinfo((int)bank1, v22, v21); /*0x6efe84*/
+        v27 = v48; /*0x6efe90*/
+        *(_DWORD *)((char *)bank1->begin + v22 + 0xC) = v52; /*0x6efe94*/
+        v28 = v54 - v55; /*0x6efe9c*/
+        v29 = 0; /*0x6efea0*/
+        p_storage = (OB_stString28_010201A0 *)(v54 - v55); /*0x6efea2*/
+        v51 = v27; /*0x6efea6*/
+        while ( 1 ) /*0x6efeb8*/
         {
-          v30 = a4[1];
-          if ( !v30 || v21 >= (a4[2] - v30) >> 6 )
-            _invalid_parameter_noinfo();
-          sub_6EF4B0((char **)(a4[1] + v56 + 0x10), v59, 0);
-          v31 = a4[1];
-          if ( !v31 || v21 >= (a4[2] - v31) >> 6 )
-            _invalid_parameter_noinfo();
-          v32 = v53 + a4[1];
-          v33 = *(_DWORD *)(v32 + v29 + 0x14);
-          v34 = (_DWORD *)(v32 + v29 + 0x14);
-          if ( !v33 || v28 >= *(_DWORD *)(v32 + v29 + 0x18) - v33 )
-            _invalid_parameter_noinfo();
-          v35 = v28 + *v34;
-          v36 = 0;
-          if ( v61 )
+          v30 = bank1->begin; /*0x6efeb8*/
+          if ( !v30 || v21 >= ((char *)bank1->end - (char *)v30) >> 6 ) /*0x6efec9*/
+            _invalid_parameter_noinfo((int)bank1, v28, v21); /*0x6efecb*/
+          OB_stVectorByte_ResizeFill_010201A0((char **)((char *)bank1->begin + v51 + 0x10), v54, 0); /*0x6efee2*/
+          v31 = bank1->begin; /*0x6efee7*/
+          if ( !v31 || v21 >= ((char *)bank1->end - (char *)v31) >> 6 ) /*0x6efef8*/
+            _invalid_parameter_noinfo((int)bank1, v28, v21); /*0x6efefa*/
+          v32 = (char *)bank1->begin + v48; /*0x6eff02*/
+          v33 = *(_DWORD *)&v32[v29 + 0x14]; /*0x6eff06*/
+          v34 = &v32[v29 + 0x14]; /*0x6eff0c*/
+          if ( !v33 || v28 >= *(_DWORD *)&v32[v29 + 0x18] - v33 ) /*0x6eff1a*/
+            _invalid_parameter_noinfo((int)bank1, v28, (int)v34); /*0x6eff1c*/
+          v35 = v28 + *(_DWORD *)v34; /*0x6eff23*/
+          v36 = 0; /*0x6eff25*/
+          if ( v56 ) /*0x6eff2b*/
           {
-            v37 = v62;
-            while ( sub_6F5D40(v66, v35, 1u, v37) )
+            v37 = v57; /*0x6eff2d*/
+            while ( sub_6F5D40(v61, v35, 1u, v37) ) /*0x6eff40*/
             {
-              v37 = v62;
-              ++v36;
-              v35 -= v62 + v57;
-              if ( v36 >= v61 )
-                goto LABEL_73;
+              v37 = v57; /*0x6eff46*/
+              ++v36; /*0x6eff51*/
+              v35 -= v57 + v52; /*0x6eff54*/
+              if ( v36 >= v56 ) /*0x6eff5a*/
+                goto LABEL_73; /*0x6eff5a*/
             }
-            v66[0] = &BSFaceGenBinaryFile::`vftable';
-            v68 = 2;
-            goto LABEL_41;
+            v61[0] = (unsigned int)&BSFaceGenBinaryFile::`vftable'; /*0x6efff6*/
+            v63 = 2; /*0x6efffe*/
+            goto LABEL_41; /*0x6f0009*/
           }
 LABEL_73:
-          v56 += 0x10;
-          v29 += 0x10;
-          if ( v29 >= 0x30 )
-            break;
-          v28 = (unsigned int)v55;
-          v21 = v54;
+          v51 += 0x10; /*0x6eff5c*/
+          v29 += 0x10; /*0x6eff61*/
+          if ( v29 >= 0x30 ) /*0x6eff67*/
+            break; /*0x6eff67*/
+          v28 = (unsigned int)p_storage; /*0x6efeb0*/
+          v21 = v49; /*0x6efeb4*/
         }
-        v53 += 0x40;
-        if ( ++v54 < v64 )
+        v48 += 0x40; /*0x6eff71*/
+        if ( ++v49 < v59 ) /*0x6eff81*/
         {
-          v21 = v54;
-          v22 = v53;
-          continue;
+          v21 = v49; /*0x6efdf0*/
+          v22 = v48; /*0x6efdf4*/
+          continue; /*0x6efdf4*/
         }
-        goto LABEL_75;
+        goto LABEL_75; /*0x6eff81*/
       }
       break;
     }
 LABEL_4:
-    v68 = 0xFFFFFFFF;
-    BSFaceGenBinaryFile::~BSFaceGenBinaryFile((BSFaceGenBinaryFile *)v66);
-    return 0;
+    v63 = 0xFFFFFFFF; /*0x6efb10*/
+    BSFaceGenBinaryFile::~BSFaceGenBinaryFile((BSFaceGenBinaryFile *)v61); /*0x6efb1f*/
+    return 0; /*0x6efb26*/
   }
 LABEL_75:
-  v66[0] = &BSFaceGenBinaryFile::`vftable';
-  v68 = 3;
-  if ( v67 )
-    (**v67)(v67, 1);
-  v67 = 0;
-  v68 = 0xFFFFFFFF;
-  FutBinaryFileC::~FutBinaryFileC((FutBinaryFileC *)v66);
-  return 1;
+  v61[0] = (unsigned int)&BSFaceGenBinaryFile::`vftable'; /*0x6eff87*/
+  v63 = 3; /*0x6eff98*/
+  if ( v62 ) /*0x6effa3*/
+    (**v62)(v62, 1); /*0x6effab*/
+  v62 = 0; /*0x6effb1*/
+  v63 = 0xFFFFFFFF; /*0x6effbc*/
+  FutBinaryFileC::~FutBinaryFileC((FutBinaryFileC *)v61); /*0x6effc7*/
+  return 1; /*0x6effce*/
 }

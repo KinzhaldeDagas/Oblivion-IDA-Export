@@ -3,9 +3,9 @@
 0x5B2065: push    ecx
 0x5B2066: mov     esi, ecx
 0x5B2068: mov     ecx, [esi+4]; this
-0x5B206B: fstp    [esp+8+a2]; a3
-0x5B206E: push    0FAEh; a2
-0x5B2073: call    Tile_SetFloat
+0x5B206B: fstp    [esp+8+a2]; value
+0x5B206E: push    0FAEh; propertyCode
+0x5B2073: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B2078: push    1; arg1
 0x5B207A: push    0; canCreate
 0x5B207C: call    InterfaceManager_GetSingleton
@@ -27,15 +27,15 @@
 0x5B20B1: fld     dword ptr ds:0A6B618h
 0x5B20B7: push    ecx
 0x5B20B8: mov     ecx, [esi+34h]; this
-0x5B20BB: fstp    [esp+8+a2]; a3
-0x5B20BE: push    0FB7h; a2
-0x5B20C3: call    Tile_SetFloat
+0x5B20BB: fstp    [esp+8+a2]; value
+0x5B20BE: push    0FB7h; propertyCode
+0x5B20C3: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B20C8: fldz
 0x5B20CA: push    ecx
-0x5B20CB: fstp    [esp+8+a2]; a3
+0x5B20CB: fstp    [esp+8+a2]; value
 0x5B20CE: mov     ecx, [esi+34h]; this
-0x5B20D1: push    0FB7h; a2
-0x5B20D6: call    Tile_SetFloat
+0x5B20D1: push    0FB7h; propertyCode
+0x5B20D6: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B20DB: push    1; arg1
 0x5B20DD: push    0; canCreate
 0x5B20DF: call    InterfaceManager_GetSingleton
@@ -48,7 +48,7 @@
 0x5B20F4: push    ecx
 0x5B20F5: push    0FA8h
 0x5B20FA: call    Tile_GetFloat
-0x5B20FF: call    Double_To_SInt32
+0x5B20FF: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B2104: mov     edx, [edi+14h]
 0x5B2107: push    eax
 0x5B2108: mov     ecx, esi
@@ -62,12 +62,12 @@
 0x5B211A: call    InterfaceManager_GetSingleton
 0x5B211F: add     esp, 8
 0x5B2122: mov     ecx, eax
-0x5B2124: call    sub_57F9F0
+0x5B2124: call    InterfaceManager__SetCurrentFocusTarget; AchievementsNative evidence: focused tile with xlist=&xitem drives parent xscroll by pulsing the xscroll target's user5 through -999999, tile xscroll, then 0; do not leave scroll target user5 at the desired scroll value.
 0x5B2129: push    1; arg1
 0x5B212B: push    0; canCreate
 0x5B212D: call    InterfaceManager_GetSingleton
 0x5B2132: add     esp, 8
-0x5B2135: mov     ecx, eax
-0x5B2137: call    sub_57FD60
+0x5B2135: mov     ecx, eax; this
+0x5B2137: call    InterfaceManager__GetDefaultFocus; Verified: invokes ScanForMaxFocus with INT_MIN and null root, sets selected tile via SetCurrentFocusTarget, hides cursor, clears mouse-motion byte +0xB9. Fallout named analogue 0x824F09D0.
 0x5B213C: pop     esi
 0x5B213D: retn    8

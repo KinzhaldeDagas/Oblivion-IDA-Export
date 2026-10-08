@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6A0D90",
-    "line": "sub     esp, 10h",
+    "line": "sub     esp, 10h; Verified (Oblivion): helper resolves target visual attachment nodes from target actor/player skin, perspective state, effect code, and weapon/torch context; writes two selected visual-node outputs plus geometry/perspective state. Renamed from sub_6A0D90.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x6A0DA1",
-    "line": "setz    [esp+20h+var_E]",
+    "line": "setz    [esp+20h+var_E]; Verified (Oblivion): effectCode_2C value 0x45574944 is DIWE, directly registered to DisintegrateWeaponEffect_Make by ActiveEffect_Register_DIWE_Factory. ResolveVisualAttachmentTargets uses that code to select the weapon-attachment path.",
     "mnemonic": "setz",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x6A0DD3",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -241,13 +241,13 @@
   },
   {
     "ea": "0x6A0E09",
-    "line": "push    edx",
+    "line": "push    edx; firstPerson",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A0E0A",
-    "line": "call    sub_6600D0",
+    "line": "call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x6A0E56",
-    "line": "mov     [esi+30h], eax",
+    "line": "mov     [esi+30h], eax; Verified (Oblivion): when effectCode_2C is 0x52414944, the helper obtains the bound object from DisintegrateArmorEffect and stores it in +0x30. This directly supports the DisintegrateArmor enum value and TESBoundObject* member.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x6A0EDA",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -667,13 +667,13 @@
   },
   {
     "ea": "0x6A0EEC",
-    "line": "push    edx",
+    "line": "push    edx; firstPerson",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A0EED",
-    "line": "call    PlayerCharacter_GetPlayerNode",
+    "line": "call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -829,7 +829,7 @@
   },
   {
     "ea": "0x6A0F3A",
-    "line": "mov     ecx, [esi+1Ch]",
+    "line": "mov     ecx, [esi+1Ch]; Verified (Oblivion): if bWeaponEnchantment_28 is set, or effectCode_2C is DIWE, the resolver takes the weapon/torch scenegraph attachment path instead of the ordinary target-node path.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1213,19 +1213,19 @@
   },
   {
     "ea": "0x6A1001",
-    "line": "push    0",
+    "line": "push    0; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6A1003",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6A1005",
-    "line": "call    sub_405790",
+    "line": "call    NiNode_GetChildAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -1447,7 +1447,7 @@
   },
   {
     "ea": "0x6A1069",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1507,7 +1507,7 @@
   },
   {
     "ea": "0x6A108A",
-    "line": "call    sub_404C90",
+    "line": "call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.",
     "mnemonic": "call",
     "size": 5
   },

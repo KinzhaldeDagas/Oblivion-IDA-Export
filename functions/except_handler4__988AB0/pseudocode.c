@@ -1,66 +1,64 @@
 int __cdecl _except_handler4(int a1, char *TargetFrame, int a3)
 {
   int v3; // esi
-  char *v4; // edi
-  int v5; // ebp
-  int v6; // ecx
+  int v4; // ebp
+  int (*v5)(void); // ecx
+  int v6; // eax
   int v7; // eax
-  int v8; // eax
-  char *v10; // eax
-  int v11; // [esp+14h] [ebp-10h]
-  int v12; // [esp+18h] [ebp-Ch]
-  _DWORD v13[2]; // [esp+1Ch] [ebp-8h] BYREF
+  char *v9; // eax
+  int v10; // [esp+14h] [ebp-10h]
+  int v11; // [esp+18h] [ebp-Ch]
+  _DWORD v12[2]; // [esp+1Ch] [ebp-8h] BYREF
 
-  v3 = __security_cookie ^ *((_DWORD *)TargetFrame + 2);
-  v12 = 1;
-  v4 = TargetFrame + 0x10;
-  if ( (*(_BYTE *)(a1 + 4) & 0x66) != 0 )
+  v3 = __security_cookie ^ *((_DWORD *)TargetFrame + 2); /*0x988abd*/
+  v11 = 1; /*0x988ace*/
+  if ( (*(_BYTE *)(a1 + 4) & 0x66) != 0 ) /*0x988b00*/
   {
-    if ( *((_DWORD *)TargetFrame + 3) != 0xFFFFFFFE )
-      _EH4_LocalUnwind(TargetFrame + 0x10, &__security_cookie);
-    return v12;
+    if ( *((_DWORD *)TargetFrame + 3) != 0xFFFFFFFE ) /*0x988c29*/
+      _EH4_LocalUnwind(TargetFrame + 0x10, &__security_cookie); /*0x988c3c*/
+    return v11; /*0x988c41*/
   }
-  v5 = *((_DWORD *)TargetFrame + 3);
-  v13[0] = a1;
-  v13[1] = a3;
-  *((_DWORD *)TargetFrame + 0xFFFFFFFF) = v13;
-  if ( v5 == 0xFFFFFFFE )
-    return v12;
-  while ( 1 )
+  v4 = *((_DWORD *)TargetFrame + 3); /*0x988b06*/
+  v12[0] = a1; /*0x988b14*/
+  v12[1] = a3; /*0x988b18*/
+  *((_DWORD *)TargetFrame + 0xFFFFFFFF) = v12; /*0x988b1c*/
+  if ( v4 == 0xFFFFFFFE ) /*0x988b1f*/
+    return v11; /*0x988b8a*/
+  while ( 1 ) /*0x988b25*/
   {
-    v6 = *(_DWORD *)(v3 + 0xC * v5 + 0x14);
-    v7 = *(_DWORD *)(v3 + 0xC * v5 + 0x10);
-    v11 = v7;
-    if ( v6 )
-      break;
+    v5 = *(int (**)(void))(v3 + 0xC * v4 + 0x14); /*0x988b25*/
+    v6 = *(_DWORD *)(v3 + 0xC * v4 + 0x10); /*0x988b2f*/
+    v10 = v6; /*0x988b31*/
+    if ( v5 ) /*0x988b35*/
+      break; /*0x988b35*/
 LABEL_7:
-    v5 = v7;
-    if ( v7 == 0xFFFFFFFE )
-      return v12;
+    v4 = v6; /*0x988b4d*/
+    if ( v6 == 0xFFFFFFFE ) /*0x988b52*/
+      return v11; /*0x988b52*/
   }
-  v8 = _EH4_CallFilterFunc(v6, v4);
-  if ( v8 < 0 )
-    return 0;
-  if ( v8 <= 0 )
+  v7 = _EH4_CallFilterFunc(v5); /*0x988b39*/
+  if ( v7 < 0 ) /*0x988b45*/
+    return 0; /*0x988b93*/
+  if ( v7 <= 0 ) /*0x988b47*/
   {
-    v7 = v11;
-    goto LABEL_7;
+    v6 = v10; /*0x988b49*/
+    goto LABEL_7; /*0x988b49*/
   }
-  if ( *(_DWORD *)a1 == 0xE06D7363 )
+  if ( *(_DWORD *)a1 == 0xE06D7363 ) /*0x988b9f*/
   {
-    if ( __DestructExceptionObject )
+    if ( __DestructExceptionObject ) /*0x988ba8*/
     {
-      if ( _IsNonwritableInCurrentImage(&off_AA4930) )
-        __DestructExceptionObject(a1, 1);
+      if ( _IsNonwritableInCurrentImage((int)&off_AA4930) ) /*0x988baf*/
+        __DestructExceptionObject((_DWORD *)a1); /*0x988bc2*/
     }
   }
-  _EH4_GlobalUnwind(TargetFrame);
-  v10 = TargetFrame;
-  if ( *((_DWORD *)TargetFrame + 3) != v5 )
+  _EH4_GlobalUnwind(TargetFrame); /*0x988bcf*/
+  v9 = TargetFrame; /*0x988bd4*/
+  if ( *((_DWORD *)TargetFrame + 3) != v4 ) /*0x988bdb*/
   {
-    _EH4_LocalUnwind(v4, &__security_cookie);
-    v10 = TargetFrame;
+    _EH4_LocalUnwind(TargetFrame + 0x10, &__security_cookie); /*0x988be7*/
+    v9 = TargetFrame; /*0x988bec*/
   }
-  *((_DWORD *)v10 + 3) = v11;
-  return _except_handler4_::__EH4_TransferToHandler_8(*(_DWORD *)(v3 + 0xC * v5 + 0x18), v4);
+  *((_DWORD *)v9 + 3) = v10; /*0x988bf4*/
+  return _except_handler4_::__EH4_TransferToHandler_8(*(int (__fastcall **)(_DWORD, _DWORD))(v3 + 0xC * v4 + 0x18)); /*0x988b83*/
 }

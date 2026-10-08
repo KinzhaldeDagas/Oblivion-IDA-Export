@@ -1,19 +1,36 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_70BF30",
+  "chunks": [
+    [
+      "0x70BF30",
+      "0x70BFF4"
+    ],
+    [
+      "0x9C7C90",
+      "0x9C7CB3"
+    ]
+  ],
+  "chunks_sha256": "7b314c03fbeba0561295392cc79a82b418c09392253ad287a739500f9bf383c7",
+  "comment_regular": "Renderer visible-array submission helper. AddRefs the installed accumulator and calls its +0x54 submit entry; without an accumulator, directly renders each visible NiGeometry.\n\nCULLING audit 2026-09-27 (observed Oblivion behavior): Array submission endpoint: retains current accumulator and calls its array entry +0x54; without accumulator, iterates UInt32 count at array+4 over geometry pointers from +0 and directly calls each geometry Render(+0x84). No six-plane testing occurs here. Individual draw and array-queue observation must distinguish these branches.\n\nCULLING documentation correction 2026-09-27: bounded direct-xref query currently reports caller 0x70C064 in array submit/flush helper. This is static direct-call evidence only, not proof against indirect or plugin calls. Keep pass/array ownership explicit in any observer.\n\nMoonSugarEffect decode: visible-array submission helper. If renderer has an accumulator, AddRefs it and calls vtable +0x54 with the visible array; otherwise renders every NiGeometry directly through vtable +0x84.",
+  "comment_repeatable": "Renderer visible-array submission helper. AddRefs the installed accumulator and calls its +0x54 submit entry; without an accumulator, directly renders each visible NiGeometry.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "NiRenderer_SubmitVisibleGeometryArray",
   "end_ea": "0x70BFF4",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
-  "name": "sub_70BF30",
+  "name": "NiRenderer_SubmitVisibleGeometryArray",
   "segment": ".text",
   "sha256": "51cef8a34cfea4bdc44d4d6255596ae6ba4244a347a19498f508e6f624c578f0",
   "size": 196,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x70BF30",
-  "type": "void __cdecl(_DWORD *)",
-  "xrefs_from_count": 78,
+  "total_chunk_size": 231,
+  "type": "void __cdecl(CullingVisibleGeometryArray *visibleArray)",
+  "xrefs_from_count": 89,
   "xrefs_to_count": 1
 }

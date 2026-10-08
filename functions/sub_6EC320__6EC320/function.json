@@ -1,18 +1,31 @@
 {
-  "callees_count": 8,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6EC320",
+      "0x6EC458"
+    ]
+  ],
+  "chunks_sha256": "5810ab909c7805f13d27556131675c5c7cfaeb2366eb93bf777d13df294da9f8",
+  "comment_regular": "Aggregates active time range across every key channel exposed by the NiKeyBasedInterpolator virtual interface. Uses the first key time and last record time per nonempty channel; returns [0,0] when none exist.",
+  "comment_repeatable": "Aggregates active time range across every key channel exposed by the NiKeyBasedInterpolator virtual interface. Uses the first key time and last record time per nonempty channel; returns [0,0] when none exist.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6EC320",
+  "display_name": "NiKeyBasedInterpolator_GetActiveTimeRange",
   "end_ea": "0x6EC458",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6EC320",
+  "name": "NiKeyBasedInterpolator_GetActiveTimeRange",
   "segment": ".text",
   "sha256": "5810ab909c7805f13d27556131675c5c7cfaeb2366eb93bf777d13df294da9f8",
   "size": 312,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6EC320",
+  "total_chunk_size": 312,
   "type": "void __thiscall(void *this, float *, float *)",
   "xrefs_from_count": 124,
   "xrefs_to_count": 6

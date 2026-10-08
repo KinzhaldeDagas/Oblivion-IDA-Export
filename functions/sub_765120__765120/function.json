@@ -1,19 +1,32 @@
 {
-  "callees_count": 18,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x765120",
+      "0x76528E"
+    ]
+  ],
+  "chunks_sha256": "7e4842a12cdc1535e0074c20d98db04a43cc39120d14276a48dc373426a83b66",
+  "comment_regular": "Oblivion-authoritative NiDX9Renderer::Copy. Builds full-surface rectangles when either rectangle is null and maps Gamebryo CopyFilterPreference 1/2 to D3DTEXF_POINT/LINEAR (otherwise NONE), then performs IDirect3DDevice9::StretchRect.",
+  "comment_repeatable": "Oblivion-authoritative NiDX9Renderer::Copy. Builds full-surface rectangles when either rectangle is null and maps Gamebryo CopyFilterPreference 1/2 to D3DTEXF_POINT/LINEAR (otherwise NONE), then performs IDirect3DDevice9::StretchRect.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 5,
-  "display_name": "sub_765120",
+  "display_name": "NiDX9Renderer::Copy",
   "end_ea": "0x76528E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_765120",
+  "name": "NiDX9Renderer::Copy",
   "segment": ".text",
   "sha256": "7e4842a12cdc1535e0074c20d98db04a43cc39120d14276a48dc373426a83b66",
   "size": 366,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x765120",
-  "type": "char __thiscall(_BYTE *this, _DWORD *, _DWORD *, int *, int *, int)",
+  "total_chunk_size": 366,
+  "type": "bool __thiscall(NiDX9Renderer *this, const Ni2DBuffer *source, Ni2DBuffer *destination, const void *sourceRect, const void *destinationRect, int filterPreference)",
   "xrefs_from_count": 141,
   "xrefs_to_count": 1
 }

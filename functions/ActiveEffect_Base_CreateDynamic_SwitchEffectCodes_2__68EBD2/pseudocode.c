@@ -1,7 +1,8 @@
+// Verified nested FourCC mappings CUPO -> Alloc_CurePoison, CUDI -> Alloc_CureDisease, and ABSK -> the downstream AbsorbEffect selector.
 int __usercall ActiveEffect_Base_CreateDynamic_::SwitchEffectCodes_2@<eax>(
         int a1@<eax>,
-        int a2,
-        int a3,
+        int a2@<ecx>,
+        int a3@<esi>,
         int a4,
         int a5,
         int a6,
@@ -24,12 +25,14 @@ int __usercall ActiveEffect_Base_CreateDynamic_::SwitchEffectCodes_2@<eax>(
         int a23,
         int a24,
         int a25,
-        int a26)
+        int a26,
+        int a27,
+        int a28,
+        int a29)
 {
-  if ( a1 > 0x4F505543 )
-    return ActiveEffect_Base_CreateDynamic_::SwitchEffectCodes_3(a1);
-  if ( a1 == 0x4F505543 )
-    return ActiveEffect_Base_CreateDynamic_::Alloc_CurePoison(
+  if ( a1 > 0x4F505543 ) /*0x68ebd7*/
+    return ActiveEffect_Base_CreateDynamic_::SwitchEffectCodes_3( /*0x68ebd7*/
+             a1,
              a2,
              a3,
              a4,
@@ -54,11 +57,12 @@ int __usercall ActiveEffect_Base_CreateDynamic_::SwitchEffectCodes_2@<eax>(
              a23,
              a24,
              a25,
-             a26);
-  if ( a1 == 0x49445543 )
-    return ActiveEffect_Base_CreateDynamic_::Alloc_CureDisease(
-             a2,
-             a3,
+             a26,
+             a27,
+             a28,
+             a29);
+  if ( a1 == 0x4F505543 ) /*0x68ebd9*/
+    return ActiveEffect_Base_CreateDynamic_::Alloc_CurePoison( /*0x68ebd9*/
              a4,
              a5,
              a6,
@@ -81,6 +85,66 @@ int __usercall ActiveEffect_Base_CreateDynamic_::SwitchEffectCodes_2@<eax>(
              a23,
              a24,
              a25,
-             a26);
-  return ActiveEffect_Base_CreateDynamic_::SwitchEffectCodes_4();
+             a26,
+             a27,
+             a28,
+             a29);                              // Verified (Oblivion fallback code): CUPO routes to the shared CureEffect constructor with internal type value 3.
+  if ( a1 == 0x49445543 ) /*0x68ebe0*/
+    return ActiveEffect_Base_CreateDynamic_::Alloc_CureDisease( /*0x68ebe0*/
+             a4,
+             a5,
+             a6,
+             a7,
+             a8,
+             a9,
+             a10,
+             a11,
+             a12,
+             a13,
+             a14,
+             a15,
+             a16,
+             a17,
+             a18,
+             a19,
+             a20,
+             a21,
+             a22,
+             a23,
+             a24,
+             a25,
+             a26,
+             a27,
+             a28,
+             a29);                              // Verified (Oblivion fallback code): CUDI routes to the shared CureEffect constructor with internal type value 2.
+  return ActiveEffect_Base_CreateDynamic_::SwitchEffectCodes_4(
+           a3,
+           a2,
+           a1 == 0x4B534241,
+           a4,
+           a5,
+           a6,
+           a7,
+           a8,
+           a9,
+           a10,
+           a11,
+           a12,
+           a13,
+           a14,
+           a15,
+           a16,
+           a17,
+           a18,
+           a19,
+           a20,
+           a21,
+           a22,
+           a23,
+           a24,
+           a25,
+           a26,
+           a27,
+           a28,
+           a29);
 }

@@ -1,1 +1,8 @@
-LsaQueryInformationPolicy::$D23E9C24C66C59A53618261F20796FAA
+struct LsaQueryInformationPolicy::$D23E9C24C66C59A53618261F20796FAA
+{
+POLICY_DNS_DOMAIN_INFO info;
+LsaQueryInformationPolicy::$D23E9C24C66C59A53618261F20796FAA::$CA367FD9427F60917106769215DCFF66 domain_sid;
+WCHAR_0 domain_name[256];
+WCHAR_0 dns_domain_name[256];
+WCHAR_0 dns_forest_name[256];
+};

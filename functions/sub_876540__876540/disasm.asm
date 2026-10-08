@@ -12,7 +12,7 @@
 0x87655A: lea     eax, [esp+20h+var_C]
 0x87655E: mov     large fs:0, eax
 0x876564: mov     ebx, ecx
-0x876566: mov     eax, [esp+20h+arg_8]
+0x876566: mov     eax, [esp+20h+value]
 0x87656A: mov     edi, [eax+0Ch]
 0x87656D: mov     esi, ds:0B4767Ch
 0x876573: push    edi
@@ -32,7 +32,7 @@
 0x876599: mov     eax, [edx+88h]
 0x87659F: push    0
 0x8765A1: mov     ecx, ebp
-0x8765A3: mov     [esp+24h+arg_8], edi
+0x8765A3: mov     [esp+24h+value], edi
 0x8765A7: call    eax
 0x8765A9: mov     edi, [edi+4]
 0x8765AC: cmp     edi, eax
@@ -54,7 +54,7 @@
 0x8765D2: call    eax
 0x8765D4: mov     eax, [esp+20h+arg_0]
 0x8765D8: test    eax, eax
-0x8765DA: mov     ecx, [esp+20h+arg_8]
+0x8765DA: mov     ecx, [esp+20h+value]
 0x8765DE: mov     [ecx+4], eax
 0x8765E1: jz      short loc_8765ED
 0x8765E3: add     eax, 4
@@ -65,7 +65,7 @@
 0x8765F3: push    0
 0x8765F5: push    ebp
 0x8765F6: mov     ecx, ebx
-0x8765F8: mov     [esp+28h+arg_8], edi
+0x8765F8: mov     [esp+28h+value], edi
 0x8765FC: call    sub_848FD0
 0x876601: mov     edi, [edi+4]
 0x876604: cmp     edi, eax
@@ -87,7 +87,7 @@
 0x87662A: call    eax
 0x87662C: mov     eax, [esp+20h+arg_0]
 0x876630: test    eax, eax
-0x876632: mov     ecx, [esp+20h+arg_8]
+0x876632: mov     ecx, [esp+20h+value]
 0x876636: mov     [ecx+4], eax
 0x876639: jz      short loc_876645
 0x87663B: add     eax, 4
@@ -96,12 +96,12 @@
 0x876645: mov     edx, [esi+24h]
 0x876648: mov     eax, [edx+10h]
 0x87664B: mov     edx, [ebp+0]
-0x87664E: mov     [esp+20h+arg_8], eax
+0x87664E: mov     [esp+20h+value], eax
 0x876652: mov     eax, [edx+90h]
 0x876658: push    0
 0x87665A: mov     ecx, ebp
 0x87665C: call    eax
-0x87665E: mov     ecx, [esp+20h+arg_8]
+0x87665E: mov     ecx, [esp+20h+value]
 0x876662: mov     ebp, [ecx+4]
 0x876665: mov     edi, eax
 0x876667: cmp     ebp, edi
@@ -121,7 +121,7 @@
 0x876688: mov     ecx, ebp
 0x87668A: call    edx
 0x87668C: test    edi, edi
-0x87668E: mov     eax, [esp+20h+arg_8]
+0x87668E: mov     eax, [esp+20h+value]
 0x876692: mov     [eax+4], edi
 0x876695: jz      short loc_8766A1
 0x876697: add     edi, 4
@@ -133,7 +133,7 @@
 0x8766AC: mov     ebp, [edi+4]
 0x8766AF: add     edi, 4
 0x8766B2: cmp     ebp, eax
-0x8766B4: mov     [esp+20h+arg_8], eax
+0x8766B4: mov     [esp+20h+value], eax
 0x8766B8: jz      short loc_8766EF
 0x8766BA: test    ebp, ebp
 0x8766BC: jz      short loc_8766DF
@@ -149,7 +149,7 @@
 0x8766D5: push    1
 0x8766D7: mov     ecx, ebp
 0x8766D9: call    edx
-0x8766DB: mov     eax, [esp+20h+arg_8]
+0x8766DB: mov     eax, [esp+20h+value]
 0x8766DF: test    eax, eax
 0x8766E1: mov     [edi], eax
 0x8766E3: jz      short loc_8766EF
@@ -162,7 +162,7 @@
 0x8766FA: mov     ebp, [edi+4]
 0x8766FD: cmp     ebp, eax
 0x8766FF: mov     ecx, eax
-0x876701: mov     [esp+20h+arg_8], ecx
+0x876701: mov     [esp+20h+value], ecx
 0x876705: jz      short loc_87673D
 0x876707: test    ebp, ebp
 0x876709: jz      short loc_87672C
@@ -178,7 +178,7 @@
 0x876722: push    1
 0x876724: mov     ecx, ebp
 0x876726: call    eax
-0x876728: mov     ecx, [esp+20h+arg_8]
+0x876728: mov     ecx, [esp+20h+value]
 0x87672C: test    ecx, ecx
 0x87672E: mov     [edi+4], ecx
 0x876731: jz      short loc_87673D
@@ -187,20 +187,20 @@
 0x876737: call    dword ptr ds:0A28078h
 0x87673D: mov     edi, 1
 0x876742: add     [esi+60h], edi
-0x876745: mov     [esp+20h+arg_8], esi
+0x876745: mov     [esp+20h+value], esi
 0x876749: mov     edx, [ebx+38h]
-0x87674C: lea     ecx, [esp+20h+arg_8]
-0x876750: push    ecx
-0x876751: push    edx
-0x876752: lea     ecx, [ebx+40h]
+0x87674C: lea     ecx, [esp+20h+value]
+0x876750: push    ecx; value
+0x876751: push    edx; index
+0x876752: lea     ecx, [ebx+40h]; this
 0x876755: mov     [esp+28h+var_4], 0
-0x87675D: call    sub_76CE40
+0x87675D: call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.
 0x876762: or      eax, 0FFFFFFFFh
 0x876765: add     [esi+60h], eax
 0x876768: mov     [esp+20h+var_4], eax
 0x87676C: jnz     short loc_876775
 0x87676E: mov     ecx, esi
-0x876770: call    sub_7604D0
+0x876770: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x876775: add     [ebx+38h], edi
 0x876778: mov     ecx, [esp+20h+var_C]
 0x87677C: mov     large fs:0, ecx
@@ -211,3 +211,12 @@
 0x876787: pop     ebx
 0x876788: add     esp, 0Ch
 0x87678B: retn    10h
+0x9D3210: lea     ecx, [ebp+0Ch]; void *
+0x9D3213: jmp     sub_4027D0
+0x9D3218: mov     edx, [esp+arg_4]
+0x9D321C: lea     eax, [edx-10h]
+0x9D321F: mov     ecx, [edx-14h]
+0x9D3222: xor     ecx, eax
+0x9D3224: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D3229: mov     eax, offset stru_AFB660
+0x9D322E: jmp     ___CxxFrameHandler3

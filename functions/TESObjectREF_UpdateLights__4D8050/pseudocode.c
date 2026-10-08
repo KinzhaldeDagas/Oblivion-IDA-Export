@@ -1,25 +1,32 @@
-char __thiscall TESObjectREF_UpdateLights(TESChildCELL *this)
+// For a TESObjectREFR whose base form is TESObjectLIGH, update both ordinary ExtraLight type 0x30 and spell-effect ExtraLight type 0x49 payloads through the same native source-light state routine. Both calls pass optionalContext=null. Actor-owned transient spell-effect lights may share type 0x49 storage but are not converted into static caster admission.
+char __thiscall TESObjectREFR_UpdateAttachedLightPayloads(TESObjectREFR *self)
 {
-  ExtraDataList *v2; // ebx
-  float *v3; // ebp
+  ExtraDataList *p_baseExtraList; // ebx
+  BSExtraDataVtbl *Light; // ebp
   TESForm *v4; // edi
-  float *v5; // eax
+  BSExtraDataVtbl *SpellEffectLight; // eax
 
-  v2 = (ExtraDataList *)(this + 0x11);
-  v3 = (float *)sub_41E650((ExtraDataList *)(this + 0x11));
-  v4 = 0;
-  if ( *(_BYTE *)((*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x5C))(this) + 4) == kFormType_Light )
-    v4 = (TESForm *)(*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x5C))(this);
-  if ( v3 )
+  p_baseExtraList = &self->member.baseExtraList; /*0x4d8055*/
+  Light = ExtraDataList_GetLight(&self->member.baseExtraList); /*0x4d8060*/
+  v4 = 0; /*0x4d806c*/
+  if ( self->vtbl->GetBaseForm(self)->member.type == kFormType_Light ) /*0x4d8074*/
+    v4 = self->vtbl->GetBaseForm(self); /*0x4d8082*/
+  if ( Light ) /*0x4d8086*/
   {
-    if ( v4 )
-      sub_4B22E0((float *)v4, v3, 0);
+    if ( v4 ) /*0x4d808a*/
+      TESObjectLIGH_UpdateAttachedLightPayload( /*0x4d8091*/
+        (TESObjectLIGH_DecodedLayout *)v4,
+        (AttachedLightPayload_Decoded *)Light,
+        0);                                     // Update ordinary ExtraLight type 0x30 with optionalContext=null.
   }
-  v5 = (float *)sub_41E670(v2);
-  if ( v5 )
+  SpellEffectLight = ExtraDataList_GetSpellEffectLight(p_baseExtraList); /*0x4d8098*/
+  if ( SpellEffectLight ) /*0x4d809f*/
   {
-    if ( v4 )
-      LOBYTE(v5) = sub_4B22E0((float *)v4, v5, 0);
+    if ( v4 ) /*0x4d80a3*/
+      LOBYTE(SpellEffectLight) = TESObjectLIGH_UpdateAttachedLightPayload( /*0x4d80aa*/
+                                   (TESObjectLIGH_DecodedLayout *)v4,
+                                   (AttachedLightPayload_Decoded *)SpellEffectLight,
+                                   0);          // Update spell-effect ExtraLight type 0x49 with optionalContext=null.
   }
-  return (char)v5;
+  return (char)SpellEffectLight; /*0x4d80af*/
 }

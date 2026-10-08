@@ -64,7 +64,6 @@
 0x723D50: jbe     loc_723DF0
 0x723D56: xor     ebp, ebp
 0x723D58: jmp     short loc_723D60
-0x723D5A: align 10h
 0x723D60: mov     eax, [ebx+21Ch]
 0x723D66: push    1
 0x723D68: lea     ecx, [esp+48h+var_30]
@@ -142,3 +141,15 @@
 0x723E42: pop     ebx
 0x723E43: add     esp, 30h
 0x723E46: retn    4
+0x9CA480: mov     eax, [ebp-20h]
+0x9CA483: push    eax
+0x9CA484: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA489: pop     ecx
+0x9CA48A: retn
+0x9CA48B: mov     edx, [esp+arg_4]
+0x9CA48F: lea     eax, [edx-34h]
+0x9CA492: mov     ecx, [edx-38h]
+0x9CA495: xor     ecx, eax
+0x9CA497: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA49C: mov     eax, offset stru_AF2B7C
+0x9CA4A1: jmp     ___CxxFrameHandler3

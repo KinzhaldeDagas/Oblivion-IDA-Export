@@ -1,15 +1,16 @@
-void __userpurge sub_478CA0(char *a1@<ecx>, char a2@<bpl>, double a3@<st2>, double a4@<st1>, double a5@<st0>, int a6)
+// Installs only form type 0x21 (WEAP) into ActorSkinInfo WeaponForm at +0xDC after clearing prior state; WeaponModel at +0xE0 points to the form's embedded TESModel at form+0x30.
+void __thiscall ActorSkinInfo_SetWeaponSlotForm(ActorSkinInfo *this, TESForm *weaponForm)
 {
-  char *v7; // edi
+  TESObjectWEAP **p_WeaponForm; // edi
 
-  if ( a6 )
+  if ( weaponForm ) /*0x478caa*/
   {
-    if ( *(_BYTE *)(a6 + 4) == 0x21 )
+    if ( weaponForm->member.type == kFormType_Weapon ) /*0x478cb0*/
     {
-      v7 = a1 + 0xDC;
-      sub_478780(a1, a2, a3, a4, a5, (int)(a1 + 0xDC), 1, 0);
-      *(_DWORD *)v7 = a6;
-      *((_DWORD *)a1 + 0x38) = a6 + 0x30;
+      p_WeaponForm = &this->WeaponForm; /*0x478cb7*/
+      ActorSkinInfo_ClearOrReplaceEquipmentSlot(this, (ActorSkinInfoEquipmentSlot *)&this->WeaponForm, 1, 0); /*0x478cbe*/
+      *p_WeaponForm = (TESObjectWEAP *)weaponForm; /*0x478cc3*/
+      this->WeaponModel = (TESModel *)&weaponForm[2]; /*0x478cc8*/
     }
   }
 }

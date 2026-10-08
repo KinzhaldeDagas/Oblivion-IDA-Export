@@ -21,9 +21,9 @@
 0x6750B8: jmp     short loc_6750BC
 0x6750BA: push    3; a2
 0x6750BC: mov     ecx, esi; this
-0x6750BE: call    sub_673A50
+0x6750BE: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x6750C3: mov     ecx, eax; this
-0x6750C5: call    sub_7616D0
+0x6750C5: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x6750CA: test    eax, eax
 0x6750CC: mov     [esp+1Ch+var_C], eax
 0x6750D0: jz      loc_675200
@@ -70,14 +70,14 @@
 0x675143: jz      short loc_675155
 0x675145: mov     dword ptr [edi+0C0h], 0
 0x67514F: jmp     short loc_675155
-0x675151: mov     ecx, [esp+1Ch+arg_0]
+0x675151: mov     ecx, [esp+1Ch+arg_0]; this
 0x675155: mov     eax, [esi+58h]
 0x675158: test    eax, eax
 0x67515A: jz      short loc_67519B
 0x67515C: cmp     [eax+8], ecx
 0x67515F: jnz     short loc_67519B
 0x675161: mov     dword ptr [eax+8], 0
-0x675168: call    sub_567770
+0x675168: call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.
 0x67516D: test    al, al
 0x67516F: jz      short loc_67517F
 0x675171: mov     eax, [esi]

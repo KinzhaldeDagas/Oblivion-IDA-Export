@@ -6,7 +6,7 @@
 0x8B9B68: mov     ecx, [edi+8]
 0x8B9B6B: test    ecx, ecx
 0x8B9B6D: jz      short loc_8B9B7D
-0x8B9B6F: call    sub_8AC0C0
+0x8B9B6F: call    bhkCollisionWrapper_GetHavokObject; bhk collision wrapper accessor: returns stored low-level Havok object pointer at wrapper+0x30.
 0x8B9B74: test    eax, eax
 0x8B9B76: jz      short loc_8B9B7D
 0x8B9B78: mov     ecx, [eax+0Ch]

@@ -140,3 +140,28 @@
 0x8C24B9: pop     ebx
 0x8C24BA: add     esp, 3Ch
 0x8C24BD: retn
+0x539AF0: push    0
+0x539AF2: mov     dword ptr [ecx], offset ??_7hkConstraintCinfo@@6B@; const hkConstraintCinfo::`vftable'
+0x539AF8: call    sub_8A0200
+0x539AFD: retn
+0x9D7500: lea     ecx, [ebp-28h]
+0x9D7503: jmp     loc_539AF0
+0x9D7508: lea     ecx, [ebp-3Ch]
+0x9D750B: jmp     loc_539AF0
+0x9D7510: mov     eax, [ebp+8]
+0x9D7513: push    eax
+0x9D7514: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D7519: pop     ecx
+0x9D751A: retn
+0x9D751B: mov     eax, [ebp+8]
+0x9D751E: push    eax
+0x9D751F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D7524: pop     ecx
+0x9D7525: retn
+0x9D7526: mov     edx, [esp+arg_4]
+0x9D752A: lea     eax, [edx-3Ch]
+0x9D752D: mov     ecx, [edx-40h]
+0x9D7530: xor     ecx, eax
+0x9D7532: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D7537: mov     eax, offset stru_AFF134
+0x9D753C: jmp     ___CxxFrameHandler3

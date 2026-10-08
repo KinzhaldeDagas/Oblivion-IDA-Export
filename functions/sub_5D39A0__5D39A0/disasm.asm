@@ -21,9 +21,9 @@
 0x5D39DD: mov     esi, eax
 0x5D39DF: call    InterfaceManager_GetDepth
 0x5D39E4: fstp    [esp+144h+var_134]
-0x5D39E8: mov     ecx, [esi+68h]; TileWindow *
+0x5D39E8: mov     ecx, [esi+68h]; this
 0x5D39EB: push    offset aDataMenusOpt_7; "Data\\Menus\\Options\\save_menu.xml"
-0x5D39F0: call    Menu_LoadXML
+0x5D39F0: call    Tile__ReadFile; Verified: SDK ReadXML entry. Builds named tree under receiver via 0x590330, connects/evaluates traits via 0x58CF40, registers subtemplates with owning Menu, frees build storage, refreshes returned subtree via 0x58FBA0. Returns first created tile. Fallout analogue 0x827E2588; cache/cleanup differs.
 0x5D39F5: mov     edi, eax
 0x5D39F7: mov     ecx, edi
 0x5D39F9: mov     [esp+144h+var_138], edi
@@ -74,10 +74,10 @@
 0x5D3A8E: jp      short loc_5D3AA4
 0x5D3A90: fld     [esp+14Ch+var_134]
 0x5D3A94: push    ecx
-0x5D3A95: fstp    [esp+150h+a3]; a3
-0x5D3A98: push    0FABh; a2
+0x5D3A95: fstp    [esp+150h+a3]; value
+0x5D3A98: push    0FABh; propertyCode
 0x5D3A9D: mov     ecx, edi; this
-0x5D3A9F: call    Tile_SetFloat
+0x5D3A9F: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D3AA4: mov     ecx, ds:0B33B00h
 0x5D3AAA: call    sub_45E6A0
 0x5D3AAF: mov     ecx, ds:0B38708h
@@ -86,9 +86,9 @@
 0x5D3AB9: push    0
 0x5D3ABB: push    ecx
 0x5D3ABC: mov     ecx, ebx
-0x5D3ABE: call    sub_5D3650
+0x5D3ABE: call    SaveMenu_AddSaveRow
 0x5D3AC3: mov     ecx, ds:0B33B00h
-0x5D3AC9: call    sub_45D450
+0x5D3AC9: call    TESSaveLoadGame_EnumerateSaveFiles; Save-menu enumeration call site hooked by CharacterSpecificSaves; filtered before row construction.
 0x5D3ACE: mov     edx, ds:0B33B00h
 0x5D3AD4: mov     esi, [edx+6Ch]
 0x5D3AD7: xor     ebp, ebp
@@ -112,7 +112,7 @@
 0x5D3AFF: lea     eax, [esp+158h+var_130]
 0x5D3B03: push    eax
 0x5D3B04: mov     ecx, ebx
-0x5D3B06: call    sub_5D3650
+0x5D3B06: call    SaveMenu_AddSaveRow
 0x5D3B0B: mov     esi, [esi+4]
 0x5D3B0E: add     edi, 1
 0x5D3B11: test    esi, esi

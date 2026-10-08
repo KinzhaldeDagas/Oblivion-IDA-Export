@@ -38,7 +38,7 @@
 0x440055: mov     eax, [edx+esi*4]
 0x440058: mov     ecx, ds:0B33A98h
 0x44005E: push    eax; a1
-0x44005F: call    sub_447BA0
+0x44005F: call    TESObjectCELL_Deactivate; Verified TESObjectCELL deactivation path. Removes cell temp effects, lowers its process level, invokes cell teardown, clears pathgrid graph/render resources, removes the scene node and inactive cell forms, then for exteriors asks TESWorldSpace_UnloadExteriorCellIfEligible to either preserve or remove the cell. Nine call sites are in world/cell transition and TES destruction paths; inspect xrefs for the full lifecycle context.
 0x440064: mov     ecx, [edi+3Ch]
 0x440067: mov     dword ptr [ecx+esi*4], 0
 0x44006E: add     ebp, 1

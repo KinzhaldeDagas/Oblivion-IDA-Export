@@ -1,19 +1,32 @@
 {
-  "callees_count": 23,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 11,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x785400",
+      "0x785573"
+    ]
+  ],
+  "chunks_sha256": "4f170fd7e90539847312f73ea7c21d820207a38cf47a3fcefc95288793b90527",
+  "comment_regular": "Oblivion 1.2.0.416: vector<stVec> copy assignment with self, empty, reuse, capacity-reuse, and reallocation cases.",
+  "comment_repeatable": "Oblivion 1.2.0.416: vector<stVec> copy assignment with self, empty, reuse, capacity-reuse, and reallocation cases.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_785400",
+  "display_name": "OB_stVector_stVec_CopyAssign_010201A0",
   "end_ea": "0x785573",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_785400",
+  "name": "OB_stVector_stVec_CopyAssign_010201A0",
   "segment": ".text",
   "sha256": "4f170fd7e90539847312f73ea7c21d820207a38cf47a3fcefc95288793b90527",
   "size": 371,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x785400",
-  "type": "char **__thiscall(char **this, char **)",
+  "total_chunk_size": 371,
+  "type": "OB_stVector_stVec_010201A0 *__thiscall(OB_stVector_stVec_010201A0 *this, const OB_stVector_stVec_010201A0 *other)",
   "xrefs_from_count": 172,
   "xrefs_to_count": 4
 }

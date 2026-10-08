@@ -100,7 +100,7 @@
 0x49D3E6: cmp     ebp, esi
 0x49D3E8: jnz     short loc_49D3FA
 0x49D3EA: push    edi
-0x49D3EB: call    FormHeapFree
+0x49D3EB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x49D3F0: add     esp, 4
 0x49D3F3: xor     eax, eax
 0x49D3F5: jmp     loc_49D78F
@@ -111,9 +111,9 @@
 0x49D406: cmp     ebx, esi
 0x49D408: jnz     short loc_49D420
 0x49D40A: push    edi
-0x49D40B: call    FormHeapFree
+0x49D40B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x49D410: push    ebp
-0x49D411: call    FormHeapFree
+0x49D411: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x49D416: add     esp, 8
 0x49D419: xor     eax, eax
 0x49D41B: jmp     loc_49D78F
@@ -186,14 +186,14 @@
 0x49D530: push    ecx
 0x49D531: fstp    [esp+34h+var_34]; float
 0x49D534: push    offset aFalphaWater; "fAlpha:Water"
-0x49D539: mov     ecx, offset flt_B3524C
+0x49D539: mov     ecx, 0B3524Ch
 0x49D53E: mov     [esp+38h+var_4], 1
 0x49D546: call    sub_404850
 0x49D54B: push    offset sub_A1A630; void (__cdecl *)()
 0x49D550: call    _atexit
 0x49D555: add     esp, 4
 0x49D558: mov     [esp+30h+var_4], 0FFFFFFFFh
-0x49D560: mov     ecx, offset flt_B3524C
+0x49D560: mov     ecx, 0B3524Ch
 0x49D565: call    GameSetting_GetSafeFloatPointer
 0x49D56A: fld1
 0x49D56C: fcom    dword ptr [eax]
@@ -202,7 +202,7 @@
 0x49D573: jp      short loc_49D57D
 0x49D575: fstp    dword ptr ds:0B3524Ch
 0x49D57B: jmp     short loc_49D59E
-0x49D57D: mov     ecx, offset flt_B3524C
+0x49D57D: mov     ecx, 0B3524Ch
 0x49D582: fstp    st
 0x49D584: call    GameSetting_GetSafeFloatPointer
 0x49D589: fldz
@@ -213,7 +213,7 @@
 0x49D594: fstp    dword ptr ds:0B3524Ch
 0x49D59A: jmp     short loc_49D59E
 0x49D59C: fstp    st
-0x49D59E: mov     ecx, offset flt_B3524C
+0x49D59E: mov     ecx, 0B3524Ch
 0x49D5A3: call    sub_404E30
 0x49D5A8: fstp    [esp+30h+arg_14]
 0x49D5AC: fld1
@@ -229,7 +229,7 @@
 0x49D5D0: mov     eax, [esp+30h+var_10]
 0x49D5D4: mov     [esi+4], ecx
 0x49D5D7: mov     [esi+8], edx
-0x49D5DA: mov     ecx, offset flt_B3524C
+0x49D5DA: mov     ecx, 0B3524Ch
 0x49D5DF: mov     [esi+0Ch], eax
 0x49D5E2: call    sub_404E30
 0x49D5E7: fstp    [esp+30h+arg_14]
@@ -247,7 +247,7 @@
 0x49D614: mov     [esi+14h], edx
 0x49D617: mov     [esi+18h], eax
 0x49D61A: mov     [esi+1Ch], ecx
-0x49D61D: mov     ecx, offset flt_B3524C
+0x49D61D: mov     ecx, 0B3524Ch
 0x49D622: call    sub_404E30
 0x49D627: fstp    [esp+30h+arg_14]
 0x49D62B: fld1
@@ -263,7 +263,7 @@
 0x49D650: mov     edx, [esp+30h+var_10]
 0x49D654: mov     [esi+24h], eax
 0x49D657: mov     [esi+28h], ecx
-0x49D65A: mov     ecx, offset flt_B3524C
+0x49D65A: mov     ecx, 0B3524Ch
 0x49D65F: mov     [esi+2Ch], edx
 0x49D662: call    sub_404E30
 0x49D667: fstp    [esp+30h+arg_14]
@@ -341,22 +341,22 @@
 0x49D754: push    edi
 0x49D755: push    4
 0x49D757: mov     ecx, eax
-0x49D759: call    sub_71FB40
+0x49D759: call    NiTriShapeData_ConstructWithData; Construct NiTriShapeData around supplied geometry and triangle data; shared-normal storage starts empty.
 0x49D75E: mov     esi, eax
 0x49D760: test    esi, esi
 0x49D762: jnz     short loc_49D78D
 0x49D764: push    edi
-0x49D765: call    FormHeapFree
+0x49D765: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x49D76A: mov     eax, [esp+34h+arg_0]
 0x49D76E: push    eax
-0x49D76F: call    FormHeapFree
+0x49D76F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x49D774: push    ebp
-0x49D775: call    FormHeapFree
+0x49D775: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x49D77A: push    ebx
-0x49D77B: call    FormHeapFree
+0x49D77B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x49D780: mov     ecx, [esp+40h+arg_10]
 0x49D784: push    ecx
-0x49D785: call    FormHeapFree
+0x49D785: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x49D78A: add     esp, 14h
 0x49D78D: mov     eax, esi
 0x49D78F: mov     ecx, [esp+30h+var_C]
@@ -370,3 +370,24 @@
 0x49D7A2: retn    18h
 0x49D7A5: xor     esi, esi
 0x49D7A7: jmp     short loc_49D764
+0x9B1B30: mov     eax, [ebp+14h]
+0x9B1B33: push    eax
+0x9B1B34: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B1B39: pop     ecx
+0x9B1B3A: retn
+0x9B1B3B: mov     eax, ds:0B35260h
+0x9B1B40: and     eax, 0FFFFFFFDh
+0x9B1B43: mov     ds:0B35260h, eax
+0x9B1B48: retn
+0x9B1B49: mov     eax, [ebp+18h]
+0x9B1B4C: push    eax
+0x9B1B4D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B1B52: pop     ecx
+0x9B1B53: retn
+0x9B1B54: mov     edx, [esp+arg_4]
+0x9B1B58: lea     eax, [edx-20h]
+0x9B1B5B: mov     ecx, [edx-24h]
+0x9B1B5E: xor     ecx, eax
+0x9B1B60: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B1B65: mov     eax, offset stru_ADDC4C
+0x9B1B6A: jmp     ___CxxFrameHandler3

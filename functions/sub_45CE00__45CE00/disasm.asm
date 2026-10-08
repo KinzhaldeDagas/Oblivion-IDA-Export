@@ -1,4 +1,4 @@
-0x45CE00: sub     esp, 0Ch
+0x45CE00: sub     esp, 0Ch; MEF PERF 2026-10-02 PASS2: Verified animation drain: owner+54, key0 selects player reference, other keys resolve forms, scene-node gating, blob free then key removal. Diagnostic names LoadAnimations. Preserve zero-key special semantics in any index.
 0x45CE03: push    ebx
 0x45CE04: mov     ebx, ecx
 0x45CE06: mov     ecx, [ebx+54h]
@@ -17,17 +17,17 @@
 0x45CE25: jb      short loc_45CE18
 0x45CE27: xor     eax, eax
 0x45CE29: test    eax, eax
-0x45CE2B: mov     [esp+14h+var_8], eax
+0x45CE2B: mov     [esp+14h+position], eax
 0x45CE2F: jz      loc_45CEBE
 0x45CE35: push    edi
-0x45CE36: lea     eax, [esp+18h+var_C]
-0x45CE3A: push    eax
+0x45CE36: lea     eax, [esp+18h+valueOut]
+0x45CE3A: push    eax; valueOut
 0x45CE3B: lea     ecx, [esp+1Ch+a1]
-0x45CE3F: push    ecx
-0x45CE40: mov     ecx, [ebx+54h]
-0x45CE43: lea     edx, [esp+20h+var_8]
-0x45CE47: push    edx
-0x45CE48: call    sub_452600
+0x45CE3F: push    ecx; keyOut
+0x45CE40: mov     ecx, [ebx+54h]; self
+0x45CE43: lea     edx, [esp+20h+position]
+0x45CE47: push    edx; position
+0x45CE48: call    NiTMap_U32Pointer_GetNextEntry
 0x45CE4D: mov     esi, [esp+18h+a1]
 0x45CE51: test    esi, esi
 0x45CE53: jz      short loc_45CE7C
@@ -36,7 +36,7 @@
 0x45CE5C: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x45CE61: push    0; int
 0x45CE63: push    esi; a1
-0x45CE64: call    TESForm_LookupByFormID
+0x45CE64: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x45CE69: add     esp, 4
 0x45CE6C: push    eax; void *
 0x45CE6D: call    OblivionDynamicCast
@@ -46,7 +46,7 @@
 0x45CE7A: jmp     short loc_45CE29
 0x45CE7C: mov     eax, ds:0B333C4h
 0x45CE81: test    eax, eax
-0x45CE83: mov     edi, [esp+18h+var_C]
+0x45CE83: mov     edi, [esp+18h+valueOut]
 0x45CE87: jz      short loc_45CE9E
 0x45CE89: cmp     dword ptr [eax+3Ch], 0
 0x45CE8D: jnz     short loc_45CE94
@@ -64,7 +64,7 @@
 0x45CEA9: mov     ecx, [ebx+54h]
 0x45CEAC: push    esi
 0x45CEAD: call    NiTMap_RemoveAt
-0x45CEB2: cmp     [esp+18h+var_8], 0
+0x45CEB2: cmp     [esp+18h+position], 0
 0x45CEB7: jnz     loc_45CE36
 0x45CEBD: pop     edi
 0x45CEBE: mov     ecx, [ebx+54h]

@@ -1,9 +1,13 @@
-_DWORD *__usercall sub_795D20@<eax>(int a1@<ebp>, _DWORD *a2, _DWORD *a3, int a4)
+// OBLIVION AUTHORITY (2026-08-30): Assigns the same vector<unsigned short> value across an initialized owner range by repeated deep copy assignment.
+OB_stVectorUShort_010201A0 *__cdecl OB_stVector_stVectorUShort_CopyAssignFillRange_010201A0(
+        OB_stVectorUShort_010201A0 *first,
+        OB_stVectorUShort_010201A0 *last,
+        const OB_stVectorUShort_010201A0 *value)
 {
-  _DWORD *i; // esi
-  _DWORD *result; // eax
+  OB_stVectorUShort_010201A0 *i; // esi
+  OB_stVectorUShort_010201A0 *result; // eax
 
-  for ( i = a2; i != a3; i += 4 )
-    result = sub_795510(i, a1, a4);
-  return result;
+  for ( i = first; i != last; ++i ) /*0x795d2c*/
+    result = OB_stVectorUShort_CopyAssign_010201A0(i, value); /*0x795d36*/
+  return result; /*0x795d43*/
 }

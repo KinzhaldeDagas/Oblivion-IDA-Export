@@ -1,4 +1,4 @@
-0x6B7C20: mov     eax, [ecx+8]
+0x6B7C20: mov     eax, [ecx+8]; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.
 0x6B7C23: test    eax, eax
 0x6B7C25: jz      short loc_6B7C2A
 0x6B7C27: mov     eax, [eax]

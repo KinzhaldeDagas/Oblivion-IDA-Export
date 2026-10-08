@@ -1,1 +1,1 @@
-QuantityMenu
+struct QuantityMenu;

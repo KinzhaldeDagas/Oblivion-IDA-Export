@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x406360",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Pass231/241: Scene/sky setup passes global B333E4 into Sky initialization path.",
     "mnemonic": "push",
     "size": 2
   },
@@ -115,13 +115,13 @@
   },
   {
     "ea": "0x40639D",
-    "line": "mov     ecx, dword_B333E4",
+    "line": "mov     ecx, dword ptr unk_B333E4",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4063A3",
-    "line": "mov     edx, dword_B333D8",
+    "line": "mov     edx, dword ptr root",
     "mnemonic": "mov",
     "size": 6
   },
@@ -145,19 +145,19 @@
   },
   {
     "ea": "0x4063AD",
-    "line": "mov     dword_B333B0, eax",
+    "line": "mov     dword ptr unk_B333B0, eax",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x4063B2",
-    "line": "call    sub_5411D0",
+    "line": "call    sub_5411D0; Fog decode: passes global B333E4 into Sky/Atmosphere setup: sub_5411D0(B333B0, B333D8, B333E4).",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4063B7",
-    "line": "mov     eax, dword_B333B0",
+    "line": "mov     eax, dword ptr unk_B333B0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x4063BF",
-    "line": "mov     ecx, dword_B333DC",
+    "line": "mov     ecx, dword ptr unk_B333DC",
     "mnemonic": "mov",
     "size": 6
   },
@@ -217,13 +217,13 @@
   },
   {
     "ea": "0x4063D6",
-    "line": "mov     ebp, ObjectLODRoot",
+    "line": "mov     ebp, ds:0B333ACh",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4063DC",
-    "line": "mov     ecx, dword_B333B0",
+    "line": "mov     ecx, dword ptr unk_B333B0",
     "mnemonic": "mov",
     "size": 6
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x4063EF",
-    "line": "mov     ecx, dword_B333B0",
+    "line": "mov     ecx, dword ptr unk_B333B0; Oblivion world initialization obtains the Sky sun directional light before creating the ShadowSceneNode light-level reference wrapper.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x4063FA",
-    "line": "push    eax",
+    "line": "push    eax; backingLight",
     "mnemonic": "push",
     "size": 1
   },
@@ -289,31 +289,31 @@
   },
   {
     "ea": "0x406404",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x406406",
-    "line": "call    sub_7C5850",
+    "line": "call    ShadowSceneNode_RecreateLightLevelReference; Create/replace the world ShadowSceneNode+0x118 reference wrapper using Oblivion's sun directional light.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x40640B",
-    "line": "mov     ecx, dword_B333D8; this",
+    "line": "mov     ecx, dword ptr root; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x406411",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x406416",
-    "line": "mov     ecx, dword_B333D8",
+    "line": "mov     ecx, dword ptr root",
     "mnemonic": "mov",
     "size": 6
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x406426",
-    "line": "mov     ecx, dword_B333D8; this",
+    "line": "mov     ecx, dword ptr root; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -355,25 +355,25 @@
   },
   {
     "ea": "0x40642F",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x406434",
-    "line": "mov     ecx, dword_B333DC; this",
+    "line": "mov     ecx, dword ptr unk_B333DC; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x40643A",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x40643F",
-    "line": "mov     ecx, dword_B333DC",
+    "line": "mov     ecx, dword ptr unk_B333DC",
     "mnemonic": "mov",
     "size": 6
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x40644F",
-    "line": "mov     ecx, dword_B333DC; this",
+    "line": "mov     ecx, dword ptr unk_B333DC; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -415,85 +415,85 @@
   },
   {
     "ea": "0x406458",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x40645D",
-    "line": "mov     ecx, dword_B333D8",
+    "line": "mov     ecx, dword ptr root",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x406463",
-    "line": "push    1",
+    "line": "push    1; arg3",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x406465",
-    "line": "push    edi",
+    "line": "push    edi; normalMapBypass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x406466",
-    "line": "push    0Ah",
+    "line": "push    0Ah; shaderId",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x406468",
-    "line": "push    ecx",
+    "line": "push    ecx; root",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x406469",
-    "line": "call    sub_7B8940",
+    "line": "call    BSShaderManager_AssignShadersRecursive; Generic recursive shader assignment wrapper around 0x7B7FC0. In decoded TES4 tree code it is used for branch shader id 4 and simple/default id 1; no stock call with frond shader id 5 was found in this pass.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x40646E",
-    "line": "mov     edx, dword_B333DC",
+    "line": "mov     edx, dword ptr unk_B333DC",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x406474",
-    "line": "push    1",
+    "line": "push    1; arg3",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x406476",
-    "line": "push    edi",
+    "line": "push    edi; normalMapBypass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x406477",
-    "line": "push    0Ah",
+    "line": "push    0Ah; shaderId",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x406479",
-    "line": "push    edx",
+    "line": "push    edx; root",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x40647A",
-    "line": "call    sub_7B8940",
+    "line": "call    BSShaderManager_AssignShadersRecursive; Generic recursive shader assignment wrapper around 0x7B7FC0. In decoded TES4 tree code it is used for branch shader id 4 and simple/default id 1; no stock call with frond shader id 5 was found in this pass.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x40647F",
-    "line": "mov     eax, dword_B333B0",
+    "line": "mov     eax, dword ptr unk_B333B0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x40648A",
-    "line": "call    sub_452A60",
+    "line": "call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x406497",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x40649D",
-    "line": "push    offset dword_B4335C",
+    "line": "push    offset stru_B4335C",
     "mnemonic": "push",
     "size": 5
   },
@@ -589,7 +589,7 @@
   },
   {
     "ea": "0x4064B8",
-    "line": "mov     ecx, dword_B333B0",
+    "line": "mov     ecx, dword ptr unk_B333B0",
     "mnemonic": "mov",
     "size": 6
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x4064CE",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x4064D4",
-    "line": "push    offset dword_B4335C",
+    "line": "push    offset stru_B4335C",
     "mnemonic": "push",
     "size": 5
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x4064EF",
-    "line": "mov     edx, dword_B333B0",
+    "line": "mov     edx, dword ptr unk_B333B0",
     "mnemonic": "mov",
     "size": 6
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x406501",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -727,7 +727,7 @@
   },
   {
     "ea": "0x406507",
-    "line": "push    offset dword_B4335C",
+    "line": "push    offset stru_B4335C",
     "mnemonic": "push",
     "size": 5
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x40651E",
-    "line": "mov     eax, dword_B333B0",
+    "line": "mov     eax, dword ptr unk_B333B0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -799,7 +799,7 @@
   },
   {
     "ea": "0x40652F",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -811,7 +811,7 @@
   },
   {
     "ea": "0x406535",
-    "line": "push    offset dword_B4335C",
+    "line": "push    offset stru_B4335C",
     "mnemonic": "push",
     "size": 5
   },
@@ -853,7 +853,7 @@
   },
   {
     "ea": "0x406555",
-    "line": "mov     ecx, dword_B333B0",
+    "line": "mov     ecx, dword ptr unk_B333B0",
     "mnemonic": "mov",
     "size": 6
   },
@@ -889,7 +889,7 @@
   },
   {
     "ea": "0x406568",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -949,7 +949,7 @@
   },
   {
     "ea": "0x406580",
-    "line": "cmp     eax, offset dword_B4335C",
+    "line": "cmp     eax, offset stru_B4335C",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1063,7 +1063,7 @@
   },
   {
     "ea": "0x4065B5",
-    "line": "mov     esi, LODRoot",
+    "line": "mov     esi, ds:0B333A8h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1087,7 +1087,7 @@
   },
   {
     "ea": "0x4065C1",
-    "line": "mov     ecx, dword_B333B0",
+    "line": "mov     ecx, dword ptr unk_B333B0",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1255,7 +1255,7 @@
   },
   {
     "ea": "0x40661D",
-    "line": "mov     ecx, dword_B333B0",
+    "line": "mov     ecx, dword ptr unk_B333B0",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1327,7 +1327,7 @@
   },
   {
     "ea": "0x40663F",
-    "line": "mov     TES, eax",
+    "line": "mov     ds:0B333A0h, eax",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1351,13 +1351,13 @@
   },
   {
     "ea": "0x406653",
-    "line": "push    edi; ArgList",
+    "line": "push    edi; recreate",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x406654",
-    "line": "call    sub_55F750",
+    "line": "call    BSTreeManager_Create; Verified singleton Create(recreate): optionally destroys/frees an existing BSTreeManager, allocates 0x28 bytes, runs BSTreeManager_ctor, and stores the instance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1393,7 +1393,7 @@
   },
   {
     "ea": "0x40666C",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1441,7 +1441,7 @@
   },
   {
     "ea": "0x406682",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1657,7 +1657,7 @@
   },
   {
     "ea": "0x406717",
-    "line": "mov     ecx, TESDataHandler",
+    "line": "mov     ecx, g_TESDataHandler; Verified singleton pointer: allocated as TESDataHandler (0xCE0 bytes) and published at TES_constr 441B8A; passed to LoadFiles and form APIs; TES_destr 446915 destroys and clears it. Field +0x74 is the Global list head used by TESSaveLoadGame_LoadGlobalValues; surrounding layout remains Unknown.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1747,13 +1747,13 @@
   },
   {
     "ea": "0x406745",
-    "line": "push    offset AppDataPath",
+    "line": "push    (offset destination+10Ch)",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x40674A",
-    "line": "call    sub_404B00",
+    "line": "call    TESDataHandler_LoadPluginsFromFile; Reads a text plugin list at basePath + listFile; skips # comments, obtains each TESFile by line, and marks it loaded. Caller falls back to Oblivion.esm when no file is loaded.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1783,7 +1783,7 @@
   },
   {
     "ea": "0x406757",
-    "line": "mov     ecx, TESDataHandler",
+    "line": "mov     ecx, g_TESDataHandler; Verified singleton pointer: allocated as TESDataHandler (0xCE0 bytes) and published at TES_constr 441B8A; passed to LoadFiles and form APIs; TES_destr 446915 destroys and clears it. Field +0x74 is the Global list head used by TESSaveLoadGame_LoadGlobalValues; surrounding layout remains Unknown.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1921,7 +1921,7 @@
   },
   {
     "ea": "0x4067A6",
-    "line": "mov     TESDataHandler_g_PlayerRef, eax",
+    "line": "mov     dword ptr reference, eax",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1945,7 +1945,7 @@
   },
   {
     "ea": "0x4067BA",
-    "line": "mov     ecx, TESDataHandler",
+    "line": "mov     ecx, g_TESDataHandler; Verified singleton pointer: allocated as TESDataHandler (0xCE0 bytes) and published at TES_constr 441B8A; passed to LoadFiles and form APIs; TES_destr 446915 destroys and clears it. Field +0x74 is the Global list head used by TESSaveLoadGame_LoadGlobalValues; surrounding layout remains Unknown.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1969,13 +1969,13 @@
   },
   {
     "ea": "0x4067C7",
-    "line": "call    TESDataHandler_LoadFiles?",
+    "line": "call    TESDataHandler_LoadFiles?; Verified TESDataHandler_LoadFiles behavior: when activeFileState.retainActiveFile is nonzero, reopens the retained TESFile and rebuilds its loaded-master array before completing the file load. The flag's writer remains Unknown.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4067CC",
-    "line": "mov     ecx, TES",
+    "line": "mov     ecx, ds:0B333A0h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2035,7 +2035,7 @@
   },
   {
     "ea": "0x4067F4",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2059,7 +2059,7 @@
   },
   {
     "ea": "0x406802",
-    "line": "mov     ecx, TESDataHandler_g_PlayerRef; this",
+    "line": "mov     ecx, dword ptr reference; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2077,7 +2077,7 @@
   },
   {
     "ea": "0x40680D",
-    "line": "push    esi; a2",
+    "line": "push    esi; baseForm",
     "mnemonic": "push",
     "size": 1
   },
@@ -2095,7 +2095,7 @@
   },
   {
     "ea": "0x406819",
-    "line": "mov     ecx, TESDataHandler_g_PlayerRef",
+    "line": "mov     ecx, dword ptr reference",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2155,13 +2155,13 @@
   },
   {
     "ea": "0x40683C",
-    "line": "mov     ecx, dword ptr Vector3_InitValue?",
+    "line": "mov     ecx, g_zeroNiPoint3.x",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x406842",
-    "line": "mov     edx, dword ptr Vector3_InitValue?+4",
+    "line": "mov     edx, g_zeroNiPoint3.y",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2185,7 +2185,7 @@
   },
   {
     "ea": "0x40684F",
-    "line": "mov     ecx, dword_B3F9B0",
+    "line": "mov     ecx, g_zeroNiPoint3.z",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2203,7 +2203,7 @@
   },
   {
     "ea": "0x40685B",
-    "line": "mov     ecx, TESDataHandler_g_PlayerRef",
+    "line": "mov     ecx, dword ptr reference",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2215,7 +2215,7 @@
   },
   {
     "ea": "0x406866",
-    "line": "mov     ecx, TESDataHandler_g_PlayerRef",
+    "line": "mov     ecx, dword ptr reference",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2239,7 +2239,7 @@
   },
   {
     "ea": "0x406873",
-    "line": "mov     ecx, TESDataHandler_g_PlayerRef",
+    "line": "mov     ecx, dword ptr reference",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2293,7 +2293,7 @@
   },
   {
     "ea": "0x40688C",
-    "line": "call    TESForm_GetOverrideFile",
+    "line": "call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2329,7 +2329,7 @@
   },
   {
     "ea": "0x4068A2",
-    "line": "mov     ecx, TESDataHandler_g_PlayerRef",
+    "line": "mov     ecx, dword ptr reference",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2383,7 +2383,7 @@
   },
   {
     "ea": "0x4068BB",
-    "line": "call    TESForm_GetOverrideFile",
+    "line": "call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2431,7 +2431,7 @@
   },
   {
     "ea": "0x4068DB",
-    "line": "mov     ecx, TESDataHandler",
+    "line": "mov     ecx, g_TESDataHandler; Verified singleton pointer: allocated as TESDataHandler (0xCE0 bytes) and published at TES_constr 441B8A; passed to LoadFiles and form APIs; TES_destr 446915 destroys and clears it. Field +0x74 is the Global list head used by TESSaveLoadGame_LoadGlobalValues; surrounding layout remains Unknown.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2557,7 +2557,7 @@
   },
   {
     "ea": "0x40692B",
-    "line": "fstp    g_FPSGlobal",
+    "line": "fstp    dword ptr ds:0B33E94h",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -2614,5 +2614,107 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9A9F50",
+    "line": "mov     eax, [ebp-44h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9A9F53",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9A9F54",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9A9F59",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9A9F5A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9A9F5B",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9A9F5E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9A9F5F",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9A9F64",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9A9F65",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9A9F66",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9A9F6A",
+    "line": "lea     eax, [edx-4Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9A9F6D",
+    "line": "mov     ecx, [edx-50h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9A9F70",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9A9F72",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9A9F77",
+    "line": "mov     eax, offset stru_AD6FE0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9A9F7C",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

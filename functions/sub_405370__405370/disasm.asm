@@ -3,7 +3,7 @@
 0x405373: call    ds:GetActiveWindow
 0x405379: cmp     eax, [esi+8]
 0x40537C: jnz     short loc_4053D8
-0x40537E: call    InterfaceManager_IsMenuMode
+0x40537E: call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.
 0x405383: test    al, al
 0x405385: jz      short loc_4053D8
 0x405387: mov     eax, [esi+20h]

@@ -1,4 +1,4 @@
-0x7F25A0: push    0FFFFFFFFh
+0x7F25A0: push    0FFFFFFFFh; SpeedTreeShaderLightingProperty ctor: BSShaderLightingProperty base, stores STSPData ref at +0xA4, clears auxiliary ref +0x9C, sets mode/enable dword +0xA0=1.
 0x7F25A2: push    offset ??0SpeedTreeShaderLightingProperty@@QAE@XZ_SEH
 0x7F25A7: mov     eax, large fs:0
 0x7F25AD: push    eax
@@ -14,13 +14,13 @@
 0x7F25BF: mov     large fs:0, eax
 0x7F25C5: mov     esi, ecx
 0x7F25C7: mov     [esp+24h+var_10], esi
-0x7F25CB: call    ??0BSShaderLightingProperty@@QAE@XZ; BSShaderLightingProperty::BSShaderLightingProperty(void)
+0x7F25CB: call    ??0BSShaderLightingProperty@@QAE@XZ; [Verified] DECAL_DATA is 0x4C bytes: NiSourceTexture* +0, rotation matrix +8, target reference FormID +0x3C, fade progress +0x40, and NiProperty* +0x48. Fields +4, +0x2C, +0x38 and +0x44 remain Unknown. The property owns a NiTPointerList<DECAL_DATA*> at +0x80; effects add/remove entries and render-pass builders batch from count +0x8C.
 0x7F25D0: xor     ebp, ebp
 0x7F25D2: mov     dword ptr [esi], offset ??_7SpeedTreeShaderLightingProperty@@6B@; const SpeedTreeShaderLightingProperty::`vftable'
 0x7F25D8: mov     [esp+24h+var_4], ebp
 0x7F25DC: mov     [esi+9Ch], ebp
 0x7F25E2: mov     [esi+0A4h], ebp
-0x7F25E8: mov     ebx, [esp+24h+arg_0]
+0x7F25E8: mov     ebx, [esp+24h+data]
 0x7F25EC: mov     edi, ebp
 0x7F25EE: cmp     edi, ebx
 0x7F25F0: mov     byte ptr [esp+24h+var_4], 2
@@ -72,3 +72,18 @@
 0x7F2672: pop     ebx
 0x7F2673: add     esp, 10h
 0x7F2676: retn    4
+0x9CFE80: mov     ecx, [ebp-10h]; this
+0x9CFE83: jmp     ??1BSShaderLightingProperty@@UAE@XZ; [Verified] On property destruction, this owner drains its +0x80 NiTPointerList<DECAL_DATA*>; each node stores links at +0/+4 and payload at +8. The destructor removes nodes, releases payload smart pointers through DECAL_DATA_ReleaseOwnedReferences, and frees each 0x4C payload. Normal effect teardown instead removes one node through BSShaderLightingProperty_RemoveDecalData before freeing the payload.
+0x9CFE88: mov     ecx, [ebp-10h]
+0x9CFE8B: add     ecx, 9Ch ; 'œ'; slot
+0x9CFE91: jmp     NiPointerSlot_Release
+0x9CFE96: mov     ecx, [ebp-10h]
+0x9CFE99: add     ecx, 0A4h ; '¤'; slot
+0x9CFE9F: jmp     NiPointerSlot_Release
+0x9CFEA4: mov     edx, [esp+arg_4]
+0x9CFEA8: lea     eax, [edx-14h]
+0x9CFEAB: mov     ecx, [edx-18h]
+0x9CFEAE: xor     ecx, eax
+0x9CFEB0: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CFEB5: mov     eax, offset stru_AF8970
+0x9CFEBA: jmp     ___CxxFrameHandler3

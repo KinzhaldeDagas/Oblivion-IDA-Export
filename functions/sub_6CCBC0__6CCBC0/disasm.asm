@@ -5,7 +5,7 @@
 0x6CCBC4: mov     edi, [esp+10h+arg0]
 0x6CCBC8: push    edi; arg0
 0x6CCBC9: mov     esi, ecx
-0x6CCBCB: call    sub_700750
+0x6CCBCB: call    sub_700750; Pass227: NiScreenTexture vtable +0x38 map insertion helper; inserts object into map context, not a draw call.
 0x6CCBD0: mov     ecx, [edi]
 0x6CCBD2: lea     eax, [esp+10h+arg0]
 0x6CCBD6: push    eax
@@ -16,7 +16,6 @@
 0x6CCBE3: cmp     [esi+0Dh], bl
 0x6CCBE6: jbe     short loc_6CCC10
 0x6CCBE8: jmp     short loc_6CCBF0
-0x6CCBEA: align 10h
 0x6CCBF0: mov     edx, [esi+14h]
 0x6CCBF3: movzx   eax, bl
 0x6CCBF6: lea     ecx, [eax+eax*2]

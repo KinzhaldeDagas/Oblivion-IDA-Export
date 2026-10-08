@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E4080",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; TESObjectREFR vtable GenerateNiNode base implementation. Native ABI has no stack/x87 inputs and returns the generated NiNode*. Prior ST0/ST1/ST2 parameters were decompiler artifacts.",
     "mnemonic": "push",
     "size": 2
   },
@@ -31,25 +31,25 @@
   },
   {
     "ea": "0x4E4091",
-    "line": "push    ebx",
+    "line": "push    ebx; float",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E4092",
-    "line": "push    ebp",
+    "line": "push    ebp; float",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E4093",
-    "line": "push    esi",
+    "line": "push    esi; float",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E4094",
-    "line": "push    edi; int",
+    "line": "push    edi; float",
     "mnemonic": "push",
     "size": 1
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x4E409C",
-    "line": "push    eax; int",
+    "line": "push    eax; float",
     "mnemonic": "push",
     "size": 1
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x4E40CE",
-    "line": "mov     [esp+68h+var_50], ebx",
+    "line": "mov     [esp+68h+var_50], ebx; float",
     "mnemonic": "mov",
     "size": 4
   },
@@ -289,19 +289,19 @@
   },
   {
     "ea": "0x4E4114",
-    "line": "push    ebx",
+    "line": "push    ebx; node",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E4115",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E4117",
-    "line": "call    sub_4D7D10",
+    "line": "call    MobileObject_SetNiNode; Verified MobileObject node setter: invokes the reference's pre-node-update virtual, releases any old NiNode reference, stores the new node in TESObjectREFR+0x40, and AddRefs it. Used by both normal Set3D and the queued distant-tree attach path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x4E4146",
-    "line": "mov     word ptr [esp+68h+var_44], di",
+    "line": "mov     word ptr [esp+68h+var_44], di; float",
     "mnemonic": "mov",
     "size": 5
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x4E4198",
-    "line": "mov     [esp+6Ch+var_4C], ebp",
+    "line": "mov     [esp+6Ch+var_4C], ebp; float",
     "mnemonic": "mov",
     "size": 4
   },
@@ -625,7 +625,7 @@
   },
   {
     "ea": "0x4E41C7",
-    "line": "call    NiObjectNET_GetExtraData",
+    "line": "call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.",
     "mnemonic": "call",
     "size": 5
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x4E4206",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x4E4229",
-    "line": "fstp    [esp+6Ch+var_6C]; float",
+    "line": "fstp    [esp+6Ch+easeOutTime]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -853,13 +853,13 @@
   },
   {
     "ea": "0x4E423B",
-    "line": "push    ebx",
+    "line": "push    ebx; rootNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E423C",
-    "line": "call    sub_480770",
+    "line": "call    NiNode_RemoveScbChildAlongFadeNodeChain; Standalone reference 3D generation strips Scb only when the base form type is WEAP (0x21). An AMMO-backed projectile proxy does not enter this WEAP-only branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1045,7 +1045,7 @@
   },
   {
     "ea": "0x4E4292",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1081,7 +1081,7 @@
   },
   {
     "ea": "0x4E42A1",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1261,7 +1261,7 @@
   },
   {
     "ea": "0x4E42F7",
-    "line": "call    NiObjectNET_GetExtraData",
+    "line": "call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1273,7 +1273,7 @@
   },
   {
     "ea": "0x4E42FD",
-    "line": "push    offset dword_B35ACC",
+    "line": "push    offset stru_B35ACC",
     "mnemonic": "push",
     "size": 5
   },
@@ -1405,7 +1405,7 @@
   },
   {
     "ea": "0x4E433E",
-    "line": "call    NiNode_AddNiExtraData",
+    "line": "call    NiObjectNET_AddExtraData; Pass269 ABI and ownership proof: NiObjectNET::AddExtraData consumes one stack argument with RET 4 and also expects owning object in ECX/EBX at this build's callsites. The plugin wrapper must not execute caller-side ADD ESP,4.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1537,7 +1537,7 @@
   },
   {
     "ea": "0x4E4389",
-    "line": "mov     [esp+68h+var_54], esi",
+    "line": "mov     [esp+68h+var_54], esi; float",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1579,7 +1579,7 @@
   },
   {
     "ea": "0x4E439F",
-    "line": "call    sub_42B460",
+    "line": "call    sub_42B460; ExtraTeleport_GetTargetCell-style helper: returns parent cell of ExtraTeleport+0 target ref if present.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1621,7 +1621,7 @@
   },
   {
     "ea": "0x4E43B3",
-    "line": "call    sub_42B460",
+    "line": "call    sub_42B460; ExtraTeleport_GetTargetCell-style helper: returns parent cell of ExtraTeleport+0 target ref if present.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1645,7 +1645,7 @@
   },
   {
     "ea": "0x4E43C1",
-    "line": "call    sub_4E3490",
+    "line": "call    Actor_SetupAnimationData; CustomAnimSupport decode: actor animation setup creates ActorAnimData, loads default animation data, then for living NPC/CREA actors calls 0x476080 to load actor-base KFFZ entries from <model-dir>\\SpecialAnims.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1693,7 +1693,7 @@
   },
   {
     "ea": "0x4E43DC",
-    "line": "fstp    [esp+68h+Src]",
+    "line": "fstp    [esp+68h+Src]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1903,7 +1903,7 @@
   },
   {
     "ea": "0x4E443C",
-    "line": "call    sub_528550",
+    "line": "call    TESNPC_RefreshFaceGenForActor3D",
     "mnemonic": "call",
     "size": 5
   },
@@ -1921,7 +1921,7 @@
   },
   {
     "ea": "0x4E4447",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2113,7 +2113,7 @@
   },
   {
     "ea": "0x4E449E",
-    "line": "call    sub_6258D0",
+    "line": "call    sub_6258D0; BloodOnDeath decode 2026-05-26: vanilla creature/dismember helper resolves named Bip01 limb bones through the actor animation node manager. Confirmed anchors: Bip01 L UpperArm, Bip01 R UpperArm, Bip01 Head; use named Bip01 runtime bones for per-limb death blood.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2209,7 +2209,7 @@
   },
   {
     "ea": "0x4E44D8",
-    "line": "push    20h ; ' '",
+    "line": "push    20h ; ' '; encodedKey",
     "mnemonic": "push",
     "size": 2
   },
@@ -2227,13 +2227,13 @@
   },
   {
     "ea": "0x4E44DE",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E44E0",
-    "line": "call    sub_470D00",
+    "line": "call    ActorAnimData_HasAnimKey; Returns whether ActorAnimData +0x9C contains an entry for the encoded animation key. Presence test only; it does not select or play a sequence.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2287,7 +2287,7 @@
   },
   {
     "ea": "0x4E44FD",
-    "line": "fstp    [esp+6Ch+var_6C]; float",
+    "line": "fstp    [esp+6Ch+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -2299,19 +2299,19 @@
   },
   {
     "ea": "0x4E4502",
-    "line": "push    5; int",
+    "line": "push    5; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4E4504",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E4506",
-    "line": "call    sub_470FC0",
+    "line": "call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2365,25 +2365,25 @@
   },
   {
     "ea": "0x4E451B",
-    "line": "call    sub_474AB0",
+    "line": "call    ActorAnimData_RestorePlaySavedSlot; Restores one saved active slot by resolving the encoded key in +0x9C, selecting its sequence entry, replaying it, and restoring the saved slot clock/state.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E4520",
-    "line": "push    0",
+    "line": "push    0; slotSelector",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4E4522",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E4524",
-    "line": "call    sub_4706E0",
+    "line": "call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].",
     "mnemonic": "call",
     "size": 5
   },
@@ -2485,7 +2485,7 @@
   },
   {
     "ea": "0x4E455A",
-    "line": "fstp    [esp+70h+Src]",
+    "line": "fstp    [esp+70h+Src]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2497,7 +2497,7 @@
   },
   {
     "ea": "0x4E4562",
-    "line": "fstp    [esp+70h+var_6C]; float",
+    "line": "fstp    [esp+70h+easeOutTime]; explicitTimeOrMinusOne",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2509,19 +2509,19 @@
   },
   {
     "ea": "0x4E4568",
-    "line": "fstp    [esp+70h+a2]; float",
+    "line": "fstp    [esp+70h+a2]; deltaTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4E456B",
-    "line": "push    ebp; int",
+    "line": "push    ebp; ownerActor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E456C",
-    "line": "call    sub_476D10",
+    "line": "call    ActorAnimData_Update; Oblivion ActorAnimData scheduler with exact native ABI: this in ECX plus three 4-byte stack arguments, retn 0x0C. ownerActor is at [EBP+8]; all surveyed callers pass the owning Actor/Player, but the native body never dereferences it, so an interior hook's use of that value is a caller-derived contract. deltaTime at [EBP+0x0C] advances ActorAnimData time +0x94 and sequence offsets. explicitTimeOrMinusOne at [EBP+0x10] uses -1.0 for normal ticking; any other value drives an explicit-time scene update/early return. The function drains deferred KF models, maintains power/idle state, samples five slots, and advances required-note templates (class 4 terminal index 3; class 7 terminal index 4).",
     "mnemonic": "call",
     "size": 5
   },
@@ -2539,7 +2539,7 @@
   },
   {
     "ea": "0x4E4574",
-    "line": "call    sub_474510",
+    "line": "call    ActorAnimData_ApplyToActor; Applies actor-dependent scene/node state through 0x471C00 and then calls ActorAnimData::ApplyActorAnimData. Called during NiNode generation, animation updates, body toggles, resurrection/fast travel, and first-person transitions.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2557,19 +2557,19 @@
   },
   {
     "ea": "0x4E4581",
-    "line": "push    1; ArgList",
+    "line": "push    1; noteIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4E4583",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E4585",
-    "line": "call    sub_51AE20",
+    "line": "call    TESAnimGroup_GetRequiredNoteTime; Returns a 32-bit required-note time from TESAnimGroup +0x10 by zero-based note index after validating count, storage, and QNaN. Invalid entries report an error and return 0.0f.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2581,7 +2581,7 @@
   },
   {
     "ea": "0x4E458D",
-    "line": "fstp    [esp+70h+var_6C]; float",
+    "line": "fstp    [esp+70h+easeOutTime]; explicitTimeOrMinusOne",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2599,19 +2599,19 @@
   },
   {
     "ea": "0x4E4595",
-    "line": "fstp    [esp+70h+a2]; float",
+    "line": "fstp    [esp+70h+a2]; deltaTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4E4598",
-    "line": "push    ebp; int",
+    "line": "push    ebp; ownerActor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E4599",
-    "line": "call    sub_476D10",
+    "line": "call    ActorAnimData_Update; Oblivion ActorAnimData scheduler with exact native ABI: this in ECX plus three 4-byte stack arguments, retn 0x0C. ownerActor is at [EBP+8]; all surveyed callers pass the owning Actor/Player, but the native body never dereferences it, so an interior hook's use of that value is a caller-derived contract. deltaTime at [EBP+0x0C] advances ActorAnimData time +0x94 and sequence offsets. explicitTimeOrMinusOne at [EBP+0x10] uses -1.0 for normal ticking; any other value drives an explicit-time scene update/early return. The function drains deferred KF models, maintains power/idle state, samples five slots, and advances required-note templates (class 4 terminal index 3; class 7 terminal index 4).",
     "mnemonic": "call",
     "size": 5
   },
@@ -2629,7 +2629,7 @@
   },
   {
     "ea": "0x4E45A1",
-    "line": "call    sub_474510",
+    "line": "call    ActorAnimData_ApplyToActor; Applies actor-dependent scene/node state through 0x471C00 and then calls ActorAnimData::ApplyActorAnimData. Called during NiNode generation, animation updates, body toggles, resurrection/fast travel, and first-person transitions.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2647,19 +2647,19 @@
   },
   {
     "ea": "0x4E45AA",
-    "line": "lea     ecx, [esp+6Ch+var_30]",
+    "line": "lea     ecx, [esp+6Ch+var_30]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4E45AE",
-    "line": "fstp    [esp+6Ch+var_6C]; float",
+    "line": "fstp    [esp+6Ch+easeOutTime]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4E45B1",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2815,7 +2815,7 @@
   },
   {
     "ea": "0x4E45FD",
-    "line": "call    sub_8AB440",
+    "line": "call    sub_8AB440; ODismemberment: recursive post-death Havok force/blend helper. Finds bhkBlendCollisionObject, bhkBlendController, bhkForceController, and bhkConstraint objects; suitable only for existing collision-enabled subtrees, not arbitrary detached art.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3148,5 +3148,101 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9B5C90",
+    "line": "lea     ecx, [ebp-50h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5C93",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5C98",
+    "line": "lea     ecx, [ebp-48h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5C9B",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5CA0",
+    "line": "mov     eax, [ebp-48h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5CA3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5CA4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5CA9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5CAA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5CAB",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B5CAF",
+    "line": "lea     eax, [edx-58h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5CB2",
+    "line": "mov     ecx, [edx-5Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5CB5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B5CB7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5CBC",
+    "line": "mov     eax, offset stru_AE0C60",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5CC1",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

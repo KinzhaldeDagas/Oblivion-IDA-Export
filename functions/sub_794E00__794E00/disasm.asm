@@ -1,4 +1,4 @@
-0x794E00: mov     eax, [esp+arg_4]
+0x794E00: mov     eax, [esp+last]; OBLIVION AUTHORITY (2026-08-30): Copies the half-open unsigned-short range [first,last) into initialized destination storage with memmove_s and returns destination plus the copied element count.
 0x794E04: mov     edx, [esp+Src]
 0x794E08: sub     eax, edx
 0x794E0A: push    esi

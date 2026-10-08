@@ -1,1 +1,1 @@
-Precipitation
+struct Precipitation;

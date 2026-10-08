@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x80B5D6",
-    "line": "call    sub_8025F0",
+    "line": "call    sub_8025F0; Generic BSShader initialization used by SpeedTreeFrondShader vtable +0x84: sets renderer, invokes setup/check virtuals, and allocates one pass slot through sub_76CCA0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -438,12 +438,6 @@
     "size": 2
   },
   {
-    "ea": "0x80B69D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x80B6A0",
     "line": "mov     esi, [edi]",
     "mnemonic": "mov",
@@ -613,7 +607,7 @@
   },
   {
     "ea": "0x80B6EB",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },

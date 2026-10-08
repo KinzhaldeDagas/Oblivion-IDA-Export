@@ -1,19 +1,32 @@
 {
-  "callees_count": 42,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 36,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 48,
-  "display_name": "sub_7FD560",
+  "chunks": [
+    [
+      "0x7FD560",
+      "0x7FDDD9"
+    ]
+  ],
+  "chunks_sha256": "7323d8ba77ac710bed4e9c9ac8bdb904b563bdc49179dbac2bf964ee87420641",
+  "comment_regular": "Oblivion Lighting30 vertex-shader loader. SM3013..SM3016 load lighting\\3x\\SM3SimpleShadow.v.hlsl with macro sets none, VC, SKIN, and SKIN+VC. After observing the native loaders, maps, and declarations, stock Oblivion resource disassembly confirms SM3013==SM3014 and SM3015==SM3016 byte-for-byte; the VC variants do not declare or consume COLOR.\n\nLoads Oblivion Lighting30Shader vertex programs. Builds SM3Lighting and SimpleShadow/TexEffect variants using SKIN, vertex-color and projected-shadow feature macros; the observed fog register layouts remain Oblivion-specific.",
+  "comment_repeatable": "Oblivion Lighting30 vertex-shader loader. SM3013..SM3016 load lighting\\3x\\SM3SimpleShadow.v.hlsl with macro sets none, VC, SKIN, and SKIN+VC. After observing the native loaders, maps, and declarations, stock Oblivion resource disassembly confirms SM3013==SM3014 and SM3015==SM3016 byte-for-byte; the VC variants do not declare or consume COLOR.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 49,
+  "display_name": "Lighting30Shader__LoadVertexShaders",
   "end_ea": "0x7FDDD9",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7FD560",
+  "name": "Lighting30Shader__LoadVertexShaders",
   "segment": ".text",
   "sha256": "7323d8ba77ac710bed4e9c9ac8bdb904b563bdc49179dbac2bf964ee87420641",
   "size": 2169,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7FD560",
-  "type": "NiD3DShaderProgram *()",
+  "total_chunk_size": 2169,
+  "type": "void __thiscall(void *this)",
   "xrefs_from_count": 510,
   "xrefs_to_count": 1
 }

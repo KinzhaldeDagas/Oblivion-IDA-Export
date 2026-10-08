@@ -11,7 +11,6 @@
 0x410875: mov     [esp+138h+var_100], ecx
 0x410879: mov     edx, eax
 0x41087B: jmp     short loc_410880
-0x41087D: align 10h
 0x410880: mov     cl, [eax]
 0x410882: add     eax, 1
 0x410885: test    cl, cl
@@ -28,7 +27,7 @@
 0x41089E: mov     ecx, eax
 0x4108A0: shr     ecx, 2
 0x4108A3: mov     esi, edx
-0x4108A5: mov     edx, dword_B350D8
+0x4108A5: mov     edx, ds:0B350D8h
 0x4108AB: rep movsd
 0x4108AD: mov     ecx, eax
 0x4108AF: and     ecx, 3
@@ -111,7 +110,7 @@
 0x4109A6: fadd    st, st(1)
 0x4109A8: fsubp   st(2), st
 0x4109AA: fxch    st(1)
-0x4109AC: call    Double_To_SInt32
+0x4109AC: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4109B1: fld1
 0x4109B3: push    eax; int
 0x4109B4: sub     esp, 10h
@@ -134,7 +133,7 @@
 0x4109E6: push    0
 0x4109E8: push    esi
 0x4109E9: call    ecx
-0x4109EB: mov     esi, ds:GetTickCount
+0x4109EB: mov     esi, ds:GetTickCount; ModernWindowsCompatible patch site: loading texture wait computes future GetTickCount target through signed x87 conversion, then compares target > now.
 0x4109F1: call    esi ; GetTickCount
 0x4109F3: test    eax, eax
 0x4109F5: mov     dword ptr [esp+13Ch+var_12C], eax
@@ -152,11 +151,11 @@
 0x410A29: fistp   [esp+13Ch+var_12C]
 0x410A2D: mov     edi, dword ptr [esp+13Ch+var_12C]
 0x410A31: fldcw   word ptr [esp+13Ch+var_134]
-0x410A35: call    esi ; GetTickCount
+0x410A35: call    esi ; GetTickCount; ModernWindowsCompatible decode: vanilla wait loop calls GetTickCount and exits on unsigned target <= now; replaced by wrap-safe elapsed tick wait.
 0x410A37: cmp     edi, eax
 0x410A39: jbe     short loc_410A49
 0x410A3B: push    1
-0x410A3D: call    sub_410390
+0x410A3D: call    Input_CheckLoadPumpControls; ModernWindowsCompatible decode: message/input pump called as sub_410390(1) during loading texture wait; preserved by patch helper.
 0x410A42: add     esp, 4
 0x410A45: test    al, al
 0x410A47: jnz     short loc_410A35

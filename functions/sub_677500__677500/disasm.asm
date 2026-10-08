@@ -20,7 +20,7 @@
 0x677539: mov     [esp+1Ch+arg_0], 0
 0x677541: mov     [esp+1Ch+var_8], ebx
 0x677545: mov     [esp+1Ch+var_4], ebx
-0x677549: call    sub_7616D0
+0x677549: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x67754E: mov     ebp, eax
 0x677550: test    ebp, ebp
 0x677552: jz      loc_67763B
@@ -39,7 +39,7 @@
 0x677581: jz      loc_67762C
 0x677587: mov     ecx, esi; this
 0x677589: add     ebx, 1
-0x67758C: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x67758C: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x677591: cmp     eax, 2
 0x677594: jnz     loc_67762C
 0x67759A: mov     edi, [esi+58h]
@@ -142,7 +142,7 @@
 0x6776CD: test    esi, esi
 0x6776CF: jnz     short loc_6776A1
 0x6776D1: lea     ecx, [esp+1Ch+var_8]
-0x6776D5: call    BSSimpleList_Clear
+0x6776D5: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x6776DA: pop     edi
 0x6776DB: pop     ebp
 0x6776DC: pop     ebx
@@ -186,7 +186,7 @@
 0x677744: push    ebp
 0x677745: call    sub_6331C0
 0x67774A: lea     ecx, [esp+1Ch+var_8]
-0x67774E: call    BSSimpleList_Clear
+0x67774E: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x677753: pop     edi
 0x677754: pop     ebp
 0x677755: pop     ebx

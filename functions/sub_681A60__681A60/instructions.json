@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x681A64",
-    "line": "mov     ebx, [esp+10h+arg_0]",
+    "line": "mov     ebx, [esp+10h+actor]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x681A78",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x681AD5",
-    "line": "call    sub_4DC270",
+    "line": "call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.",
     "mnemonic": "call",
     "size": 5
   },
@@ -877,7 +877,7 @@
   },
   {
     "ea": "0x681C32",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -931,13 +931,13 @@
   },
   {
     "ea": "0x681C53",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x681C55",
-    "line": "call    sub_4B78E0",
+    "line": "call    TESObjectDOOR_HasRandomTeleportSpaces; Verified actor-door interaction branch: when the candidate is a door with no ExtraTeleport, a nonempty TESObjectDOOR.randomTeleport list causes this routine to reject it as a normal actor-openable door.",
     "mnemonic": "call",
     "size": 5
   },
@@ -985,7 +985,7 @@
   },
   {
     "ea": "0x681C6F",
-    "line": "push    offset dword_B3FAB0",
+    "line": "push    offset parent",
     "mnemonic": "push",
     "size": 5
   },
@@ -1009,19 +1009,19 @@
   },
   {
     "ea": "0x681C7E",
-    "line": "push    0",
+    "line": "push    0; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x681C80",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x681C82",
-    "line": "call    sub_405790",
+    "line": "call    NiNode_GetChildAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -1039,19 +1039,19 @@
   },
   {
     "ea": "0x681C8F",
-    "line": "push    0",
+    "line": "push    0; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x681C91",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x681C93",
-    "line": "call    sub_405790",
+    "line": "call    NiNode_GetChildAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -1069,19 +1069,19 @@
   },
   {
     "ea": "0x681CA2",
-    "line": "push    0",
+    "line": "push    0; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x681CA4",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x681CA6",
-    "line": "call    sub_405790",
+    "line": "call    NiNode_GetChildAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -1135,13 +1135,13 @@
   },
   {
     "ea": "0x681CC9",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x681CCB",
-    "line": "call    sub_4715A0",
+    "line": "call    NiControllerManager_FindSequenceByName; Looks up a NiControllerSequence by name in the controller manager name map at +0x58; returns null on miss.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1159,37 +1159,37 @@
   },
   {
     "ea": "0x681CD8",
-    "line": "lea     ecx, [esp+1Ch+arg_0]",
+    "line": "lea     ecx, [esp+1Ch+actor]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x681CDC",
-    "line": "push    ecx",
+    "line": "push    ecx; mustLockpickOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x681CDD",
-    "line": "push    ebx",
+    "line": "push    ebx; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x681CDE",
-    "line": "push    esi",
+    "line": "push    esi; doorReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x681CDF",
-    "line": "mov     byte ptr [esp+28h+arg_0], 0",
+    "line": "mov     byte ptr [esp+28h+actor], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x681CE4",
-    "line": "call    sub_4B7490",
+    "line": "call    TESObjectDOOR_CheckActorAccess; Verified door access helper: handles linked-cell ownership, door ownership, guards, trespass, effective ExtraLockData, TESKey inventory, and lockpick tools. In the trespass branch, an interior linked cell passes the cell check when TESObjectCELL_HasPublicFlag20 (flags0 bit 0x20) is set. If no key matches, Lockpick/Skeleton Key with effective level <100 sets mustLockpickOut=1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1213,7 +1213,7 @@
   },
   {
     "ea": "0x681CF0",
-    "line": "cmp     byte ptr [esp+1Ch+arg_0], 0",
+    "line": "cmp     byte ptr [esp+1Ch+actor], 0",
     "mnemonic": "cmp",
     "size": 5
   },

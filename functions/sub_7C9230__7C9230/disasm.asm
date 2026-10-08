@@ -1,4 +1,4 @@
-0x7C9230: push    ebp
+0x7C9230: push    ebp; Oblivion ShadowLight geometry constants. Mode-5 selectors 6..9 consume PointLightPos0 c16 from B44FD8; c16.w is the depth divisor with rigid object-scale correction.
 0x7C9231: mov     ebp, esp
 0x7C9233: and     esp, 0FFFFFFF0h
 0x7C9236: sub     esp, 234h
@@ -30,7 +30,7 @@
 0x7C9280: push    esi
 0x7C9281: push    ecx
 0x7C9282: mov     ecx, ds:0B43104h
-0x7C9288: call    NiDX9Renderer__CalculateBoneMatrixes
+0x7C9288: call    NiDX9Renderer__CalculateBoneMatrixes; MoonSugar build 39: CalculateBoneMatrixes owns NiSkinInstance cached bone matrix rebuild and camera-relative skin transforms. Do not mutate for Moon Sugar wobble; hook after native setup instead.
 0x7C928D: mov     ecx, [ebx+18h]
 0x7C9290: movzx   eax, word ptr [edi+24h]
 0x7C9294: mov     edx, [ecx]
@@ -42,7 +42,7 @@
 0x7C92A1: mov     ecx, [ebx+14h]
 0x7C92A4: push    0
 0x7C92A6: push    esi
-0x7C92A7: call    sub_765480
+0x7C92A7: call    NiDX9Renderer_SetModelTransform; MoonSugar build 39: common non-skinned transform upload has many shader-family xrefs (generic, water, grass, precipitation, SpeedTree, LOD, GeometryDecal, Lighting30). Do not globally detour for Moon Sugar; use scoped caller/hook windows.
 0x7C92AC: fld     dword ptr ds:0B44EE4h
 0x7C92B2: cmp     word ptr ds:0B42EACh, 5
 0x7C92BA: fldz
@@ -64,7 +64,7 @@
 0x7C92F0: mov     eax, ecx
 0x7C92F2: mov     ecx, [eax]
 0x7C92F4: push    edx
-0x7C92F5: call    sub_405AD0
+0x7C92F5: call    ShadowSceneLight_GetLightRef
 0x7C92FA: mov     ecx, [eax]
 0x7C92FC: mov     esi, [esp+240h+var_228]
 0x7C9300: fld     dword ptr [ecx+0F8h]
@@ -293,7 +293,7 @@
 0x7C9668: lea     edx, [esp+240h+var_1C0]
 0x7C966F: push    edx
 0x7C9670: mov     ecx, esi
-0x7C9672: call    sub_718A80
+0x7C9672: call    sub_718A80;
 0x7C9677: fld     [esp+240h+var_1C0]
 0x7C967E: fld     [esp+240h+var_190]
 0x7C9685: fld     st
@@ -398,7 +398,7 @@
 0x7C9836: fld     [esp+240h+var_208]
 0x7C983A: fsub    dword ptr [esi+2Ch]
 0x7C983D: fstp    [esp+240h+var_218]
-0x7C9841: call    sub_43F350
+0x7C9841: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x7C9846: fstp    st
 0x7C9848: fld     [esp+240h+var_220]
 0x7C984C: fstp    dword ptr ds:0B44F18h
@@ -457,7 +457,7 @@
 0x7C9937: test    eax, eax
 0x7C9939: jz      loc_7C9AE4
 0x7C993F: mov     ecx, [eax]
-0x7C9941: cmp     byte ptr [ecx+0F5h], 0
+0x7C9941: cmp     byte ptr [ecx+0F5h], 0; ShadowSceneLight +0xF5 selects the special-light shader-matrix branch; zero continues ordinary selector-specific handling.
 0x7C9948: jnz     loc_7C9AE4
 0x7C994E: cmp     edi, 180h
 0x7C9954: jl      short loc_7C9962

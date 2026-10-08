@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x7A9CD0",
-    "line": "push    9; a1",
+    "line": "push    9; Resolve shader definition 9 and bind the supplied NiRenderedTexture through its image-space shader.",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7A9CD2",
-    "line": "call    GetShaderDefinition",
+    "line": "call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.",
     "mnemonic": "call",
     "size": 5
   },
@@ -31,19 +31,19 @@
   },
   {
     "ea": "0x7A9CE1",
-    "line": "push    ecx; a2",
+    "line": "push    ecx; renderedTexture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A9CE2",
-    "line": "mov     ecx, [eax]; this",
+    "line": "mov     ecx, [eax]; imageSpaceShader",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A9CE4",
-    "line": "call    sub_7FA470",
+    "line": "call    BSImageSpaceShader_BindFirstFreeRenderedTexture; Find the first empty rendered-texture slot in a BSImageSpaceShader, replace its strong-owned texture reference, and AddRef the new texture.",
     "mnemonic": "call",
     "size": 5
   },

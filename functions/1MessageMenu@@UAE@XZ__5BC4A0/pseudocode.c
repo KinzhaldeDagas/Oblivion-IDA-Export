@@ -1,6 +1,10 @@
-void __usercall MessageMenu::~MessageMenu(MessageMenu *this@<ecx>, double a2@<st2>, double a3@<st1>, double a4@<st0>)
+void __thiscall MessageMenu::~MessageMenu(MessageMenu *this)
 {
-  *(_DWORD *)this = &MessageMenu::`vftable';
-  InterfaceManager_GetSingleton(0, 1)->unk0B4 = *((void **)this + 0x17);
-  Menu::~Menu((Menu *)this, a2, a3, a4);
+  double v1; // st5
+  double v2; // st6
+  double v3; // st7
+
+  this->__vftable = (MenuVtbl *)&MessageMenu::`vftable'; /*0x5bc4c8*/
+  InterfaceManager_GetSingleton(0, 1)->pendingMessageCallback = this->resultCallback; /*0x5bc4e2*/
+  Menu::~Menu(this, v1, v2, v3); /*0x5bc4f5*/
 }

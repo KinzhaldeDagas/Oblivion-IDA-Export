@@ -1,18 +1,31 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4B99F0",
+      "0x4B9A1E"
+    ]
+  ],
+  "chunks_sha256": "b1aee94c350be3349121df5961cc3e6ff53f4cfe8a31477fadc3958d4efe8ad1",
+  "comment_regular": "Verified save-record handler from local sequence: initializes form record, serializes the TESModel chunks, calls TESObjectTREE_WriteTextureHashChunk, then finalizes the record. The DMTL writer helper reaches a one-instruction `retn 8` no-op, so this Oblivion path emits no texture-hash chunk.",
+  "comment_repeatable": "Verified save-record handler from local sequence: initializes form record, serializes the TESModel chunks, calls TESObjectTREE_WriteTextureHashChunk, then finalizes the record. The DMTL writer helper reaches a one-instruction `retn 8` no-op, so this Oblivion path emits no texture-hash chunk.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4B99F0",
+  "display_name": "TESObjectTREE_SaveFormRecord",
   "end_ea": "0x4B9A1E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4B99F0",
+  "name": "TESObjectTREE_SaveFormRecord",
   "segment": ".text",
   "sha256": "b1aee94c350be3349121df5961cc3e6ff53f4cfe8a31477fadc3958d4efe8ad1",
   "size": 46,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4B99F0",
+  "total_chunk_size": 46,
   "type": "UInt32 __usercall@<eax>(TESForm *this@<ecx>, char@<bpl>)",
   "xrefs_from_count": 16,
   "xrefs_to_count": 1

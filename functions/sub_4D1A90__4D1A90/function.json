@@ -1,19 +1,32 @@
 {
-  "callees_count": 15,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_4D1A90",
+  "chunks": [
+    [
+      "0x4D1A90",
+      "0x4D1B97"
+    ]
+  ],
+  "chunks_sha256": "5b31f6808ee7bd936d2447891342a4d144c23ddef6b205cfd618e8803f6e0974",
+  "comment_regular": "Verified per-cell tree-model 3D cleanup (not billboard construction): iterates TREE references, casts current NiNode to RTTI BSTreeNode, follows BSTreeNode.treeModel (+0xDC), and checks BSTreeModel.trunkLength (+0x50). Removes the reference 3D and clears the probable HasTemp3D flag when the node/model data is invalid or trunkLength lies in [lowerBound,upperBound). Length units are Unknown.",
+  "comment_repeatable": "Verified per-cell tree-model 3D cleanup (not billboard construction): iterates TREE references, casts current NiNode to RTTI BSTreeNode, follows BSTreeNode.treeModel (+0xDC), and checks BSTreeModel.trunkLength (+0x50). Removes the reference 3D and clears the probable HasTemp3D flag when the node/model data is invalid or trunkLength lies in [lowerBound,upperBound). Length units are Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "TESObjectCELL_RemoveTreeModel3DByTrunkLength",
   "end_ea": "0x4D1B97",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4D1A90",
+  "name": "TESObjectCELL_RemoveTreeModel3DByTrunkLength",
   "segment": ".text",
   "sha256": "5b31f6808ee7bd936d2447891342a4d144c23ddef6b205cfd618e8803f6e0974",
   "size": 263,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4D1A90",
-  "type": "void __thiscall(TESObjectCELL *this, float, float)",
+  "total_chunk_size": 263,
+  "type": "void __thiscall(TESObjectCELL *this, float lowerBound, float upperBound)",
   "xrefs_from_count": 108,
   "xrefs_to_count": 1
 }

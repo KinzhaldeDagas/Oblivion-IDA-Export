@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x437590",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; QueuedTreeBillboard destructor: frees copied billboard context arrays at +0x30 through 0x4B9CF0, then releases QueuedTexture base resources.",
     "mnemonic": "push",
     "size": 2
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x4375A0",
-    "line": "push    edi",
+    "line": "push    edi; Verified destructor ownership chain: frees both context arrays through DistantTreeBillboardContext_FreeArrays, frees the context, then runs QueuedTexture destructor to release resolved resource/path and queued base.",
     "mnemonic": "push",
     "size": 1
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x4375D0",
-    "line": "call    sub_4B9CF0",
+    "line": "call    DistantTreeBillboardContext_FreeArrays; Verified: frees the context's copied NiPoint3 array at +0x14 and float array at +0x18; called by QueuedTreeBillboard destructor before QueuedTexture base cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x4375D6",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x4375E8",
-    "line": "call    ??1QueuedTexture@@UAE@XZ; QueuedTexture::~QueuedTexture(void)",
+    "line": "call    QueuedTexture_dtor; QueuedTexture destructor: releases loaded resource at +0x28, frees copied path at +0x20, then chains to queued base.",
     "mnemonic": "call",
     "size": 5
   },
@@ -202,5 +202,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9AC490",
+    "line": "mov     ecx, [ebp-10h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AC493",
+    "line": "jmp     QueuedTexture_dtor; QueuedTexture destructor: releases loaded resource at +0x28, frees copied path at +0x20, then chains to queued base.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AC498",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AC49C",
+    "line": "lea     eax, [edx-0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AC49F",
+    "line": "mov     ecx, [edx-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AC4A2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AC4A4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AC4A9",
+    "line": "mov     eax, offset stru_AD915C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AC4AE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

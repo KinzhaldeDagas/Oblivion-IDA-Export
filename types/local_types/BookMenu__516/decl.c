@@ -1,1 +1,1 @@
-BookMenu
+struct BookMenu;

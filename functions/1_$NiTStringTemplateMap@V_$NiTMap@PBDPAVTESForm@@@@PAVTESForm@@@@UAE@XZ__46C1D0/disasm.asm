@@ -16,7 +16,7 @@
 0x46C1F4: mov     ecx, [eax+4]
 0x46C1F7: mov     esi, [esi]
 0x46C1F9: push    ecx
-0x46C1FA: call    FormHeapFree
+0x46C1FA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x46C1FF: add     esp, 4
 0x46C202: test    esi, esi
 0x46C204: jnz     short loc_46C1F2

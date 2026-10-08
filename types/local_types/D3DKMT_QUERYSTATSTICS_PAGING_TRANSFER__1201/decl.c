@@ -1,1 +1,11 @@
-_D3DKMT_QUERYSTATSTICS_PAGING_TRANSFER
+struct _D3DKMT_QUERYSTATSTICS_PAGING_TRANSFER
+{
+ULONGLONG BytesFilled;
+ULONGLONG BytesDiscarded;
+ULONGLONG BytesMappedIntoAperture;
+ULONGLONG BytesUnmappedFromAperture;
+ULONGLONG BytesTransferredFromMdlToMemory;
+ULONGLONG BytesTransferredFromMemoryToMdl;
+ULONGLONG BytesTransferredFromApertureToMemory;
+ULONGLONG BytesTransferredFromMemoryToAperture;
+};

@@ -26,12 +26,12 @@
 0x73D973: mov     dword ptr [esi+0DCh], 0
 0x73D97D: jmp     short loc_73D981
 0x73D97F: xor     esi, esi
-0x73D981: mov     eax, [esp+1Ch+arg_0]
-0x73D985: push    eax
-0x73D986: push    esi
-0x73D987: mov     ecx, edi
+0x73D981: mov     eax, [esp+1Ch+cloningProcess]
+0x73D985: push    eax; cloningProcess
+0x73D986: push    esi; destination
+0x73D987: mov     ecx, edi; this
 0x73D989: mov     [esp+24h+var_4], 0FFFFFFFFh
-0x73D991: call    sub_70AC60
+0x73D991: call    OB_NiNode_CopyMembersForClone
 0x73D996: mov     ecx, [edi+0DCh]
 0x73D99C: mov     [esi+0DCh], ecx
 0x73D9A2: mov     eax, esi
@@ -42,3 +42,15 @@
 0x73D9B1: pop     esi
 0x73D9B2: add     esp, 10h
 0x73D9B5: retn    4
+0x9CA7E0: mov     eax, [ebp-10h]
+0x9CA7E3: push    eax
+0x9CA7E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA7E9: pop     ecx
+0x9CA7EA: retn
+0x9CA7EB: mov     edx, [esp+arg_4]
+0x9CA7EF: lea     eax, [edx-0Ch]
+0x9CA7F2: mov     ecx, [edx-10h]
+0x9CA7F5: xor     ecx, eax
+0x9CA7F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA7FC: mov     eax, offset stru_AF2E8C
+0x9CA801: jmp     ___CxxFrameHandler3

@@ -59,10 +59,10 @@
 0x69E4AA: mov     [esi+34h], ebx
 0x69E4AD: mov     [esi+29h], bl
 0x69E4B0: mov     [esi+2Ch], ebx
-0x69E4B3: mov     ecx, [ebp+8]
-0x69E4B6: push    ebx
-0x69E4B7: call    MagicItem_GetFXEffect
-0x69E4BC: mov     edx, [eax+18h]
+0x69E4B3: mov     ecx, [ebp+8]; magicItem
+0x69E4B6: push    ebx; effectIndex
+0x69E4B7: call    MagicItem_GetFXEffect; OBMEFix 2026-06-01 verification: MagicModelHitEffect pushes minRange=0, calls MagicItem_GetFXEffect with ECX=MagicItem, then dereferences EAX at 0x0069E4BC. OBMEFix chains this call through a null guard and falls back to SEFF only on null.
+0x69E4BC: mov     edx, [eax+18h]; OBMEFix implementation 2026-05-30: authoritative null-deref site noted by OBME source. EAX from MagicItem_GetFXEffect is dereferenced at [eax+18h] with no null check. OBMEFix substitutes SEFF default VFX only when the chained call returns null.
 0x69E4BF: lea     ecx, [eax+18h]
 0x69E4C2: mov     eax, [edx+14h]
 0x69E4C5: call    eax
@@ -78,3 +78,18 @@
 0x69E4DE: pop     ebx
 0x69E4DF: add     esp, 10h
 0x69E4E2: retn    8
+0x9C5D00: mov     ecx, [ebp-10h]
+0x9C5D03: jmp     MagicHitEffect_destr
+0x9C5D08: mov     ecx, [ebp-10h]
+0x9C5D0B: add     ecx, 30h ; '0'; slot
+0x9C5D0E: jmp     NiPointerSlot_Release
+0x9C5D13: mov     ecx, [ebp-10h]
+0x9C5D16: add     ecx, 34h ; '4'; slot
+0x9C5D19: jmp     NiPointerSlot_Release
+0x9C5D1E: mov     edx, [esp+arg_4]
+0x9C5D22: lea     eax, [edx-14h]
+0x9C5D25: mov     ecx, [edx-18h]
+0x9C5D28: xor     ecx, eax
+0x9C5D2A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5D2F: mov     eax, offset stru_AEE3DC
+0x9C5D34: jmp     ___CxxFrameHandler3

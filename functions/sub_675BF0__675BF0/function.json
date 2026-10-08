@@ -1,19 +1,32 @@
 {
-  "callees_count": 7,
-  "callers_count": 2,
-  "comment_regular": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x675BF0",
+      "0x675C37"
+    ]
+  ],
+  "chunks_sha256": "88ecf2e749ff9022507df161011025d16e51dad0237faa9e057b57e89b12035c",
+  "comment_regular": "Verified: finds first record matching criminal pointer0C and target pointer08. Guard admits category6; broader caller guarantees Unknown.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_675BF0",
+  "display_name": "ActorProcessManager_FindCrime",
   "end_ea": "0x675C37",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_675BF0",
+  "name": "ActorProcessManager_FindCrime",
   "segment": ".text",
   "sha256": "88ecf2e749ff9022507df161011025d16e51dad0237faa9e057b57e89b12035c",
   "size": 71,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x675BF0",
-  "type": "int __thiscall(_DWORD *this, int, int, unsigned int)",
+  "total_chunk_size": 71,
+  "type": "Crime *__thiscall(ActorProcessManager *self, Actor *criminal, TESObjectREFR *target, OblivionCrimeType category)",
   "xrefs_from_count": 35,
   "xrefs_to_count": 4
 }

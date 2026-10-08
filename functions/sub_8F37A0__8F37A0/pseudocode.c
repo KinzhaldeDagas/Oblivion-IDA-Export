@@ -9,28 +9,28 @@ void __cdecl sub_8F37A0(__m128 *a1, __m128 *a2, __m128 *a3, __m128 *a4)
   float v10; // [esp+Ch] [ebp-4h]
   unsigned int v11; // [esp+Ch] [ebp-4h]
 
-  v4 = *a2;
-  v5 = _mm_sub_ps(*a3, *a2);
-  v6 = _mm_mul_ps(v5, _mm_sub_ps(*a2, *a1));
-  v7 = -(float)(_mm_shuffle_ps(v6, v6, 0xAA).m128_f32[0]
+  v4 = *a2; /*0x8f37ac*/
+  v5 = _mm_sub_ps(*a3, *a2); /*0x8f37be*/
+  v6 = _mm_mul_ps(v5, _mm_sub_ps(*a2, *a1)); /*0x8f37ca*/
+  v7 = -(float)(_mm_shuffle_ps(v6, v6, 0xAA).m128_f32[0] /*0x8f37ef*/
               + (float)(_mm_shuffle_ps(v6, v6, 0x55).m128_f32[0] + v6.m128_f32[0]));
-  v9 = v7;
-  v8 = _mm_mul_ps(v5, v5);
-  v10 = _mm_shuffle_ps(v8, v8, 0xAA).m128_f32[0] + (float)(_mm_shuffle_ps(v8, v8, 0x55).m128_f32[0] + v8.m128_f32[0]);
-  if ( v7 > *(float *)&SrcStr )
+  v9 = v7; /*0x8f37f4*/
+  v8 = _mm_mul_ps(v5, v5); /*0x8f37f8*/
+  v10 = _mm_shuffle_ps(v8, v8, 0xAA).m128_f32[0] + (float)(_mm_shuffle_ps(v8, v8, 0x55).m128_f32[0] + v8.m128_f32[0]); /*0x8f3820*/
+  if ( v7 > *(float *)&SrcStr ) /*0x8f3824*/
   {
-    if ( v9 < (double)v10 )
+    if ( v9 < (double)v10 ) /*0x8f383d*/
     {
-      *(float *)&v11 = v9 / v10;
-      *a4 = _mm_add_ps(v4, _mm_mul_ps(_mm_shuffle_ps((__m128)v11, (__m128)v11, 0), v5));
+      *(float *)&v11 = v9 / v10; /*0x8f3854*/
+      *a4 = _mm_add_ps(v4, _mm_mul_ps(_mm_shuffle_ps((__m128)v11, (__m128)v11, 0), v5)); /*0x8f386b*/
     }
     else
     {
-      *a4 = *a3;
+      *a4 = *a3; /*0x8f3842*/
     }
   }
   else
   {
-    *a4 = v4;
+    *a4 = v4; /*0x8f3829*/
   }
 }

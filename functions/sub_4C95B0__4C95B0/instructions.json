@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x4C9680",
-    "line": "push    offset dword_B256D0",
+    "line": "push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0",
     "mnemonic": "push",
     "size": 5
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x4C9691",
-    "line": "push    offset dword_B256D0; int",
+    "line": "push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0; int",
     "mnemonic": "push",
     "size": 5
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x4C969B",
-    "line": "call    NiSourceTexture__LoadTextureByFilename",
+    "line": "call    NiSourceTexture__LoadTextureByFilename; SpeedTreeOBSE 2026-07-14: generic NiSourceTexture creation preserves default pixel/alpha/mipmap preferences. Suitable for authored DDS/TGA composite candidates resolved through engine resources.",
     "mnemonic": "call",
     "size": 5
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x4C96D0",
-    "line": "push    offset dword_B3F95C",
+    "line": "push    offset stru_B3F95C",
     "mnemonic": "push",
     "size": 5
   },
@@ -820,5 +820,83 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9B50F0",
+    "line": "lea     ecx, [ebp-21Ch]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B50F6",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B50FB",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B50FF",
+    "line": "lea     eax, [edx-220h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B5105",
+    "line": "mov     ecx, [edx-224h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B510B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B510D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5112",
+    "line": "add     eax, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5115",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5118",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B511A",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B511F",
+    "line": "mov     eax, offset stru_AE02E0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5124",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

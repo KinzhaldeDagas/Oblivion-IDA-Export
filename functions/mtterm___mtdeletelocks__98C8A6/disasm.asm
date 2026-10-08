@@ -15,7 +15,7 @@
 0x98C8C9: and     dword ptr [esi], 0
 0x98C8CC: pop     ecx
 0x98C8CD: add     esi, 8
-0x98C8D0: cmp     esi, offset unk_B311E0
+0x98C8D0: cmp     esi, offset dword_B311E0
 0x98C8D6: jl      short loc_98C8B4
 0x98C8D8: mov     esi, offset lpCriticalSection
 0x98C8DD: pop     edi
@@ -27,7 +27,7 @@
 0x98C8EA: push    eax; lpCriticalSection
 0x98C8EB: call    ebx ; DeleteCriticalSection
 0x98C8ED: add     esi, 8
-0x98C8F0: cmp     esi, offset unk_B311E0
+0x98C8F0: cmp     esi, offset dword_B311E0
 0x98C8F6: jl      short loc_98C8DE
 0x98C8F8: pop     esi
 0x98C8F9: pop     ebx

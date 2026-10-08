@@ -12,5 +12,5 @@ unsigned int __stdcall def_9A5F7E(
         int a10,
         int a11)
 {
-  return 0x80000010;
+  return 0x80000010; /*0x9a6051*/
 }

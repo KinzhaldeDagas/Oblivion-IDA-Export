@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x5C1A84",
-    "line": "cmp     ds:dword_B3B44C[eax], 0",
+    "line": "cmp     dword ptr ds:unk_B3B44C[eax], 0",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x5C1A9C",
-    "line": "mov     esi, ds:dword_B3B44C[eax]",
+    "line": "mov     esi, dword ptr ds:unk_B3B44C[eax]",
     "mnemonic": "mov",
     "size": 6
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x5C1AB0",
-    "line": "mov     edi, ds:dword_B3B444[eax]",
+    "line": "mov     edi, dword ptr ds:unk_B3B444[eax]",
     "mnemonic": "mov",
     "size": 6
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x5C1AD5",
-    "line": "mov     bl, byte ptr [esp+14h+arg_4]",
+    "line": "mov     bl, byte ptr [esp+14h+data]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x5C1AEC",
-    "line": "mov     [esp+14h+arg_4], esi",
+    "line": "mov     [esp+14h+data], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x5C1B3C",
-    "line": "lea     edx, [esp+14h+arg_4]",
+    "line": "lea     edx, [esp+14h+data]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x5C1B47",
-    "line": "lea     eax, [esp+14h+arg_4]",
+    "line": "lea     eax, [esp+14h+data]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -415,13 +415,13 @@
   },
   {
     "ea": "0x5C1B4E",
-    "line": "lea     ecx, [esp+14h+arg_4]",
+    "line": "lea     ecx, [esp+14h+data]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5C1B52",
-    "line": "push    ecx",
+    "line": "push    ecx; data",
     "mnemonic": "push",
     "size": 1
   },
@@ -445,13 +445,13 @@
   },
   {
     "ea": "0x5C1B5D",
-    "line": "add     ecx, offset quickKeyList_ptr",
+    "line": "add     ecx, 0B3B440h; list",
     "mnemonic": "add",
     "size": 6
   },
   {
     "ea": "0x5C1B63",
-    "line": "call    sub_776690",
+    "line": "call    NiTPointerList_RemoveByData; [Verified] Generic NiTPointerList remove-by-data helper. Scans node payloads for the supplied pointer, then delegates removal of the matching node to NiTPointerList_RemoveNode. The decal-list path calls it with the DECAL_DATA* payload address.",
     "mnemonic": "call",
     "size": 5
   },

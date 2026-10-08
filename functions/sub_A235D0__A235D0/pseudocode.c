@@ -1,4 +1,4 @@
-void __cdecl sub_A235D0()
+void __cdecl GameSetting_fLeafRustleSpeedSwayInfluence_atexit()
 {
-  GameSetting_destr((int *)&flt_B39E40);
+  GameSetting_destr((int *)flt_B39E40); /*0xa235d5*/
 }

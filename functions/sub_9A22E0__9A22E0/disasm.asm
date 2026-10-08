@@ -20,7 +20,7 @@
 0x9A2317: mov     [esp+20h+var_4], edi
 0x9A231B: mov     dword ptr [esi], offset ??_7NiSCMExtraData@@6B@; const NiSCMExtraData::`vftable'
 0x9A2321: call    sub_721440
-0x9A2326: mov     eax, [esp+1Ch+arg_4]
+0x9A2326: mov     eax, [esp+1Ch+vertexCapacity]
 0x9A232A: cmp     eax, edi
 0x9A232C: mov     [esi+0Ch], eax
 0x9A232F: mov     [esi+14h], edi
@@ -37,7 +37,7 @@
 0x9A234D: mov     [esi+1Ch], eax
 0x9A2350: jmp     short loc_9A2355
 0x9A2352: mov     [esi+1Ch], edi
-0x9A2355: mov     eax, [esp+1Ch+arg_8]
+0x9A2355: mov     eax, [esp+1Ch+pixelCapacity]
 0x9A2359: cmp     eax, edi
 0x9A235B: mov     [esi+10h], eax
 0x9A235E: mov     [esi+18h], edi
@@ -62,3 +62,12 @@
 0x9A2393: pop     esi
 0x9A2394: add     esp, 10h
 0x9A2397: retn    0Ch
+0x9D7E10: mov     ecx, [ebp-10h]
+0x9D7E13: jmp     NiExtraData_dtor
+0x9D7E18: mov     edx, [esp+arg_4]
+0x9D7E1C: lea     eax, [edx-0Ch]
+0x9D7E1F: mov     ecx, [edx-10h]
+0x9D7E22: xor     ecx, eax
+0x9D7E24: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D7E29: mov     eax, offset stru_B002E0
+0x9D7E2E: jmp     ___CxxFrameHandler3

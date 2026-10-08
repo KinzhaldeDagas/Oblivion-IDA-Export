@@ -9,8 +9,8 @@ char __usercall sub_504F50@<al>(
         int a8,
         double *a9)
 {
-  if ( a5 )
-    return sub_4F54A0(a1, a2, a5, 0, 0, a9);
+  if ( a5 ) /*0x504f56*/
+    return sub_4F54A0(a1, a2, a5, 0, 0, a9); /*0x504f62*/
   else
-    return 1;
+    return 1; /*0x504f6b*/
 }

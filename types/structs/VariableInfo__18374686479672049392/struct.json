@@ -1,52 +1,90 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "VariableInfo",
+  "definition": "struct VariableInfo\n{\nUInt32 idx;\nUInt32 pad04;\ndouble data;\nVarType type;\nUInt8 pad11[3];\nUInt32 unk14;\nBSStringT name;\n}\n",
   "id": 18374686479672049392,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "idx",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad04",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "data",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 8
+      "size": 8,
+      "type": "double"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "type",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 1
+      "size": 1,
+      "type": "VarType"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad11",
       "offset": 17,
       "offset_hex": "0x11",
-      "size": 3
+      "size": 3,
+      "type": "UInt8[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk14",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "name",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 8
+      "size": 8,
+      "type": "BSStringT"
     }
   ],
   "name": "VariableInfo",
+  "ordinal": 9488,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 32
 }

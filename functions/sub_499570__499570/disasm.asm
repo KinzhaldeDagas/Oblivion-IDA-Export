@@ -1,4 +1,4 @@
-0x499570: sub     esp, 10h
+0x499570: sub     esp, 10h; Fog water decode: water shader/global refresh also consumes 0x4994C0 source records, corroborating packed color and fog field layout.
 0x499573: cmp     byte ptr ds:0B07050h, 0
 0x49957A: push    esi
 0x49957B: mov     esi, ecx
@@ -6,9 +6,9 @@
 0x499583: cmp     byte ptr ds:0B42F3Eh, 0
 0x49958A: jz      loc_499E0F
 0x499590: push    edi
-0x499591: call    sub_4994C0
+0x499591: call    sub_4994C0; Fog water decode: selects current water fog source record from base/day/night/override water records.
 0x499596: cmp     byte ptr ds:0B07060h, 0
-0x49959D: mov     edi, eax
+0x49959D: mov     edi, eax; Fog water decode: refresh path obtains same selected water source record used by Sky water fog branch.
 0x49959F: jnz     short loc_4995AA
 0x4995A1: mov     byte ptr ds:0B45DC0h, 1
 0x4995A8: jmp     short loc_4995BF
@@ -40,7 +40,7 @@
 0x499608: test    ebx, ebx
 0x49960A: jnz     short loc_499624
 0x49960C: push    13h; a1
-0x49960E: call    GetShaderDefinition
+0x49960E: call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.
 0x499613: mov     ebx, ds:0B45FE0h
 0x499619: add     esp, 4
 0x49961C: test    ebx, ebx

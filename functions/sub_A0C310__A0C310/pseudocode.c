@@ -1,4 +1,4 @@
-BSStringT *sub_A0C310()
+NiRTTI *sub_A0C310()
 {
-  return sub_70E220((BSStringT *)dword_B40DFC, "NiPSysUpdateCtlr", (int)dword_B3FC98);
+  return NiRTTI_Constructor(&stru_B40DFC, "NiPSysUpdateCtlr", &stru_B3FC98); /*0xa0c324*/
 }

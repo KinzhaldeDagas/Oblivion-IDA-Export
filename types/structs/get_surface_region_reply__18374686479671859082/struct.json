@@ -1,34 +1,63 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "get_surface_region_reply",
+  "definition": "struct get_surface_region_reply\n{\nreply_header __header;\nrectangle_t visible_rect;\ndata_size_t total_size;\nchar __pad_28[4];\n}\n",
   "id": 18374686479671859082,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "__header",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "reply_header"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "visible_rect",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 16
+      "size": 16,
+      "type": "rectangle_t"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "total_size",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "data_size_t"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "__pad_28",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "char[4]"
     }
   ],
   "name": "get_surface_region_reply",
+  "ordinal": 6979,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 32
 }

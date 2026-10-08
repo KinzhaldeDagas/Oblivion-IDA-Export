@@ -53,7 +53,7 @@
 0x6F455F: sub     edx, eax
 0x6F4561: cmp     edx, edi
 0x6F4563: jnb     short loc_6F456A
-0x6F4565: call    sub_790B90
+0x6F4565: call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error("vector<T> too long") and throws; used by multiple element specializations after max_size checks.
 0x6F456A: test    ecx, ecx
 0x6F456C: jnz     short loc_6F4572
 0x6F456E: xor     eax, eax
@@ -93,13 +93,13 @@
 0x6F45C5: add     eax, edi
 0x6F45C7: cmp     ebx, eax
 0x6F45C9: jnb     short loc_6F45D6
-0x6F45CB: mov     ecx, esi
-0x6F45CD: call    sub_799F10
+0x6F45CB: mov     ecx, esi; this
+0x6F45CD: call    OB_stVector_SFrondGuide_Size_010201A0; Oblivion-authoritative size query for the compact SFrondGuide vector. Computes (end-begin)/0x30; returns zero when begin is null.
 0x6F45D2: mov     ebx, eax
 0x6F45D4: add     ebx, edi
 0x6F45D6: push    0
-0x6F45D8: push    ebx; char *
-0x6F45D9: call    sub_799FA0
+0x6F45D8: push    ebx; count
+0x6F45D9: call    OB_stVector_SFrondGuide_Allocate_010201A0; Allocates count compact 0x30-byte SFrondGuide records from FormHeap and throws std::bad_alloc on count*0x30 overflow.
 0x6F45DE: mov     ecx, [esi+4]
 0x6F45E1: mov     byte ptr [ebp+var_48], 0
 0x6F45E5: mov     edx, [ebp+var_48]
@@ -162,7 +162,7 @@
 0x6F4668: call    sub_5570D0
 0x6F466D: mov     ecx, [esi+4]
 0x6F4670: push    ecx
-0x6F4671: call    FormHeapFree
+0x6F4671: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F4676: add     esp, 14h
 0x6F4679: mov     eax, [ebp+var_54]
 0x6F467C: lea     edx, [ebx+ebx*2]
@@ -182,7 +182,7 @@
 0x6F46A4: push    esi
 0x6F46A5: call    sub_557720
 0x6F46AA: push    esi
-0x6F46AB: call    FormHeapFree
+0x6F46AB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F46B0: add     esp, 4
 0x6F46B3: push    0
 0x6F46B5: push    0
@@ -280,7 +280,7 @@
 0x6F47A5: test    eax, eax
 0x6F47A7: jz      short loc_6F47B2
 0x6F47A9: push    eax
-0x6F47AA: call    FormHeapFree
+0x6F47AA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F47AF: add     esp, 4
 0x6F47B2: xor     eax, eax
 0x6F47B4: cmp     [ebp+var_2C], 10h
@@ -290,7 +290,7 @@
 0x6F47C1: jb      short loc_6F47CF
 0x6F47C3: mov     eax, [ebp+var_40]
 0x6F47C6: push    eax
-0x6F47C7: call    FormHeapFree
+0x6F47C7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F47CC: add     esp, 4
 0x6F47CF: mov     ecx, [ebp+var_C]
 0x6F47D2: mov     large fs:0, ecx
@@ -304,3 +304,15 @@
 0x6F47E7: mov     esp, ebp
 0x6F47E9: pop     ebp
 0x6F47EA: retn    10h
+0x9C8A80: lea     ecx, [ebp+var_44]
+0x9C8A83: jmp     sub_556DC0
+0x9C8A88: mov     edx, [esp-4+arg_4]
+0x9C8A8C: lea     eax, [edx+0Ch]
+0x9C8A8F: mov     ecx, [edx-58h]
+0x9C8A92: xor     ecx, eax
+0x9C8A94: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C8A99: mov     ecx, [edx-8]
+0x9C8A9C: xor     ecx, eax
+0x9C8A9E: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C8AA3: mov     eax, offset stru_AF139C
+0x9C8AA8: jmp     ___CxxFrameHandler3

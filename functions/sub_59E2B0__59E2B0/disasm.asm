@@ -1,4 +1,4 @@
-0x59E2B0: push    ecx
+0x59E2B0: push    ecx; Refreshes DialogMenu topic/persuasion/service tile availability from the current speaker and package/service flags. Called when entering or leaving response display; it does not run TESTopicInfo results.
 0x59E2B1: push    ebx; a3
 0x59E2B2: mov     bl, byte ptr [esp+8+arg_0]
 0x59E2B6: xor     eax, eax
@@ -13,15 +13,15 @@
 0x59E2CB: fild    [esp+10h+a3]
 0x59E2CF: fstp    [esp+10h+a3]; a3
 0x59E2D3: fld     [esp+10h+a3]
-0x59E2D7: fstp    [esp+10h+a2]; a3
-0x59E2DA: push    0FA1h; a2
-0x59E2DF: call    Tile_SetFloat
+0x59E2D7: fstp    [esp+10h+a2]; value
+0x59E2DA: push    0FA1h; propertyCode
+0x59E2DF: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59E2E4: fld     [esp+0Ch+a3]
 0x59E2E8: push    ecx
 0x59E2E9: mov     ecx, [esi+30h]; this
-0x59E2EC: fstp    [esp+10h+a2]; a3
-0x59E2EF: push    0FA1h; a2
-0x59E2F4: call    Tile_SetFloat
+0x59E2EC: fstp    [esp+10h+a2]; value
+0x59E2EF: push    0FA1h; propertyCode
+0x59E2F4: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59E2F9: mov     ecx, [esi+60h]
 0x59E2FC: test    ecx, ecx
 0x59E2FE: jz      loc_59E4D4
@@ -31,17 +31,17 @@
 0x59E30D: fld1
 0x59E30F: push    ecx
 0x59E310: mov     ecx, [esi+40h]; this
-0x59E313: fstp    [esp+10h+a2]; a3
-0x59E316: push    0FA1h; a2
-0x59E31B: call    Tile_SetFloat
+0x59E313: fstp    [esp+10h+a2]; value
+0x59E316: push    0FA1h; propertyCode
+0x59E31B: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59E320: mov     ecx, [esi+60h]
 0x59E323: mov     edx, [ecx+58h]
 0x59E326: push    edi; a3
 0x59E327: mov     edi, [edx+8]
 0x59E32A: test    edi, edi
 0x59E32C: jz      loc_59E4D3
-0x59E332: mov     ecx, edi
-0x59E334: call    sub_567770
+0x59E332: mov     ecx, edi; this
+0x59E334: call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.
 0x59E339: test    al, al
 0x59E33B: jz      short loc_59E34A
 0x59E33D: mov     ecx, [esi+60h]
@@ -64,9 +64,9 @@
 0x59E37D: fild    [esp+10h+a3]
 0x59E381: push    ecx
 0x59E382: mov     ecx, [esi+4Ch]; this
-0x59E385: fstp    [esp+14h+var_14]; a3
-0x59E388: push    0FA1h; a2
-0x59E38D: call    Tile_SetFloat
+0x59E385: fstp    [esp+14h+value]; value
+0x59E388: push    0FA1h; propertyCode
+0x59E38D: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59E392: xor     bl, bl
 0x59E394: cmp     byte ptr [esp+10h+arg_0], bl
 0x59E398: jz      short loc_59E408
@@ -81,27 +81,27 @@
 0x59E3B2: add     ecx, 68h ; 'h'
 0x59E3B5: call    TESAIForm_GetTrainingLevel
 0x59E3BA: movzx   eax, al
-0x59E3BD: push    eax
+0x59E3BD: push    eax; skillValue
 0x59E3BE: mov     bl, 1
-0x59E3C0: call    Calc_MasteryFromSkill
+0x59E3C0: call    Calc_MasteryFromSkill; Map a base skill value to Oblivion's five mastery tiers using iSkillApprenticeMin=25, iSkillJourneymanMin=50, iSkillExpertMin=75, and iSkillMasterMin=100.
 0x59E3C5: add     esp, 4
 0x59E3C8: cmp     eax, 4
 0x59E3CB: jnz     short loc_59E408
-0x59E3CD: push    0
-0x59E3CF: push    5
-0x59E3D1: call    TESTopic__GEtTopic
+0x59E3CD: push    0; index
+0x59E3CF: push    5; topicType
+0x59E3D1: call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.
 0x59E3D6: add     esp, 8
 0x59E3D9: test    eax, eax
 0x59E3DB: jz      short loc_59E408
 0x59E3DD: mov     ecx, ds:0B333C4h
-0x59E3E3: push    0
-0x59E3E5: push    eax
+0x59E3E3: push    0; conversation
+0x59E3E5: push    eax; previousTopic
 0x59E3E6: mov     ds:0B131F8h, edi
 0x59E3EC: mov     edx, [esi+60h]
-0x59E3EF: push    ecx
-0x59E3F0: push    edx
-0x59E3F1: mov     ecx, eax
-0x59E3F3: call    TESTopic__CreateDialogueInfo
+0x59E3EF: push    ecx; target
+0x59E3F0: push    edx; speaker
+0x59E3F1: mov     ecx, eax; this
+0x59E3F3: call    TESTopic__CreateDialogueItem; Selects a matching TESTopicInfo and wraps it as a 0x1C DialogueItem containing response list/cursor, INFO, topic, owner quest, and speaker.
 0x59E3F8: test    eax, eax
 0x59E3FA: mov     dword ptr ds:0B131F8h, 0FFFFFFFFh
 0x59E404: jz      short loc_59E408
@@ -114,9 +114,9 @@
 0x59E413: add     eax, 1
 0x59E416: mov     [esp+14h+a3], eax; a3
 0x59E41A: fild    [esp+14h+a3]
-0x59E41E: fstp    [esp+14h+var_14]; a3
-0x59E421: push    0FA1h; a2
-0x59E426: call    Tile_SetFloat
+0x59E41E: fstp    [esp+14h+value]; value
+0x59E421: push    0FA1h; propertyCode
+0x59E426: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59E42B: mov     bl, byte ptr [esp+10h+arg_0]
 0x59E42F: test    bl, bl
 0x59E431: jz      short loc_59E443
@@ -129,9 +129,9 @@
 0x59E44B: fild    [esp+10h+arg_0]
 0x59E44F: push    ecx
 0x59E450: mov     ecx, [esi+58h]; this
-0x59E453: fstp    [esp+14h+var_14]; a3
-0x59E456: push    0FA1h; a2
-0x59E45B: call    Tile_SetFloat
+0x59E453: fstp    [esp+14h+value]; value
+0x59E456: push    0FA1h; propertyCode
+0x59E45B: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59E460: test    bl, bl
 0x59E462: jz      short loc_59E474
 0x59E464: mov     ecx, [esi+60h]
@@ -143,9 +143,9 @@
 0x59E47C: fild    [esp+10h+arg_0]
 0x59E480: push    ecx
 0x59E481: mov     ecx, [esi+54h]; this
-0x59E484: fstp    [esp+14h+var_14]; a3
-0x59E487: push    0FA1h; a2
-0x59E48C: call    Tile_SetFloat
+0x59E484: fstp    [esp+14h+value]; value
+0x59E487: push    0FA1h; propertyCode
+0x59E48C: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59E491: test    bl, bl
 0x59E493: jz      short loc_59E4B6
 0x59E495: mov     ecx, [esi+60h]; this
@@ -162,9 +162,9 @@
 0x59E4BE: fild    [esp+10h+arg_0]
 0x59E4C2: push    ecx
 0x59E4C3: mov     ecx, [esi+5Ch]; this
-0x59E4C6: fstp    [esp+14h+var_14]; a3
-0x59E4C9: push    0FA1h; a2
-0x59E4CE: call    Tile_SetFloat
+0x59E4C6: fstp    [esp+14h+value]; value
+0x59E4C9: push    0FA1h; propertyCode
+0x59E4CE: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59E4D3: pop     edi
 0x59E4D4: pop     esi
 0x59E4D5: pop     ebx

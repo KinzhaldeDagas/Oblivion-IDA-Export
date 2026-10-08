@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x56AC50",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Oblivion ConditionItem_Evaluate directly dispatches through CommandInfo.eval; it optionally swaps subject/target with operatorAndFlags bit 1, resolves ExtraXTarget in the enclosing list evaluator, and uses ConditionParamDefaultsToTarget only for a missing ObjectReferenceID/Actor param1. Fallout's TESConditionItem::IsTrue (x4y6:0x82480750) instead routes action, target, and linked-reference roles using its serialized parameter flags; do not transfer that routing to Oblivion.",
     "mnemonic": "sub",
     "size": 3
   },
   {
     "ea": "0x56AC53",
-    "line": "mov     edx, [esp+8+arg_8]",
+    "line": "mov     edx, [esp+8+lowDispositionFailure]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x56AC59",
-    "line": "mov     eax, [esp+8+arg_0]",
+    "line": "mov     eax, [esp+8+subject]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x56AC65",
-    "line": "mov     ecx, [esp+14h+arg_4]",
+    "line": "mov     ecx, [esp+14h+target]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x56AC79",
-    "line": "jz      short loc_56AC7F",
+    "line": "jz      short loc_56AC7F; Condition data bit 1 swaps subject and target before param fallback and evaluator dispatch. The target may already have been replaced by its ExtraXTarget in ConditionList_EvaluateCombined.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -145,19 +145,19 @@
   },
   {
     "ea": "0x56AC8A",
-    "line": "push    ebx",
+    "line": "push    ebx; paramIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x56AC8B",
-    "line": "push    eax",
+    "line": "push    eax; functionIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x56AC8C",
-    "line": "call    sub_56B1D0",
+    "line": "call    ConditionParamDefaultsToTarget; For a null param1, call ConditionParamDefaultsToTarget. Oblivion substitutes the resolved/swapped target only for ObjectReferenceID (ParamInfo type 4) and Actor (type 6) parameters.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,13 +205,13 @@
   },
   {
     "ea": "0x56ACA3",
-    "line": "add     eax, eax",
+    "line": "add     eax, eax; Runtime computes the CommandInfo row directly from the serialized 16-bit functionIndex and reads eval/needsParent without a bounds check. The separate ConditionParamDefaultsToTarget helper checks the table bound only on its null-param1 path, not this dispatch path; a malformed out-of-range CTDA index can read beyond the 369-row table.",
     "mnemonic": "add",
     "size": 2
   },
   {
     "ea": "0x56ACA5",
-    "line": "mov     ecx, ds:Script_CommandList?.eval[eax+eax]",
+    "line": "mov     ecx, ds:Script_CommandList.eval[eax+eax]; Condition opcode dispatch: `functionIndex` indexes the CommandInfo array at B0C8C0, and its eval pointer supplies the handler. A null eval pointer rejects the condition; script execution pointers do not participate in CTDA evaluation.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x56ACB6",
-    "line": "cmp     byte ptr ds:Script_CommandList?.needsParent[eax], 0",
+    "line": "cmp     byte ptr ds:Script_CommandList.needsParent[eax], 0",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x56ACD2",
-    "line": "call    ecx",
+    "line": "call    ecx; The indexed CommandInfo.needsParent field gates the callback. If it is set and the current subject is null, condition evaluation returns false before invoking the opcode handler.",
     "mnemonic": "call",
     "size": 2
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x56ACF1",
-    "line": "fstp    [esp+18h+arg_0]",
+    "line": "fstp    [esp+18h+subject]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x56ACF8",
-    "line": "fld     [esp+20h+arg_0]",
+    "line": "fld     [esp+20h+subject]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -415,13 +415,13 @@
   },
   {
     "ea": "0x56AD0A",
-    "line": "fstp    [esp+20h+arg_0]",
+    "line": "fstp    [esp+20h+subject]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x56AD0E",
-    "line": "fld     [esp+20h+arg_0]",
+    "line": "fld     [esp+20h+subject]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x56AD16",
-    "line": "call    sub_56A3B0",
+    "line": "call    Condition_CompareNumeric; Compare the condition function result against its literal or TESGlobal-backed comparison value, using operatorAndFlags bits 5-7 as the numeric comparison operator.",
     "mnemonic": "call",
     "size": 5
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x56AD27",
-    "line": "jnz     short loc_56AD4B",
+    "line": "jnz     short loc_56AD4B; Opcode 0x4C is Oblivion GetDisposition. A failed comparison sets lowDispositionFailure only for operator 2 (>) or 3 (>=), enabling the player InfoRefusal fallback without treating arbitrary failed conditions as fallback candidates.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x56AD38",
-    "line": "mov     ecx, [esp+18h+arg_8]",
+    "line": "mov     ecx, [esp+18h+lowDispositionFailure]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x56AD3F",
-    "line": "mov     byte ptr [ecx], 1",
+    "line": "mov     byte ptr [ecx], 1; Only a failed Oblivion GetDisposition condition with numeric operator > or >= sets lowDispositionFailure. Other comparison operators and other failed opcodes do not create the INFORefusal fallback marker.",
     "mnemonic": "mov",
     "size": 3
   },

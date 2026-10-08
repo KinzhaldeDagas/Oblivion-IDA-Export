@@ -31,7 +31,7 @@
 0x50603A: push    eax; a2
 0x50603B: push    ecx; a1
 0x50603C: mov     dword ptr [esp+48h+var_14], 0
-0x506044: call    Script_ExtractArgs
+0x506044: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x506049: add     esp, 24h
 0x50604C: test    al, al
 0x50604E: jnz     short loc_506062
@@ -46,7 +46,7 @@
 0x506064: jnz     short loc_50606C
 0x506066: mov     edi, ds:0B333C4h
 0x50606C: mov     ecx, edi; this
-0x50606E: call    TESObjectREFR_GetParentCell
+0x50606E: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x506073: mov     ecx, ds:0B333A0h
 0x506079: push    0; a2
 0x50607B: push    eax; a1
@@ -69,10 +69,10 @@
 0x5060B7: fld     [esp+24h+var_18]
 0x5060BB: push    ecx
 0x5060BC: mov     ecx, dword ptr [esp+28h+var_14]
-0x5060C0: fstp    [esp+28h+var_28]; float
-0x5060C3: push    ecx; int
-0x5060C4: push    edi; int
-0x5060C5: mov     ecx, eax
+0x5060C0: fstp    [esp+28h+elapsedSeconds]; elapsedSeconds
+0x5060C3: push    ecx; effectShader
+0x5060C4: push    edi; targetReference
+0x5060C5: mov     ecx, eax; this
 0x5060C7: call    MagicShaderHitEffect_constr_args2
 0x5060CC: mov     esi, eax
 0x5060CE: jmp     short loc_5060D2
@@ -84,9 +84,9 @@
 0x5060E1: call    eax
 0x5060E3: test    al, al
 0x5060E5: jz      short loc_50613A
-0x5060E7: push    esi
-0x5060E8: mov     ecx, offset ActorProcessManager_ptr
-0x5060ED: call    sub_678D30
+0x5060E7: push    esi; effect
+0x5060E8: mov     ecx, (offset qword_B3BB2C+1D4h); self
+0x5060ED: call    ActorProcessManager_RegisterTempEffect; [Verified] ActorProcessManager_RegisterTempEffect increments the effect reference and routes GetTypeID 4-6 into extendedTempEffects (+0x48), all other IDs into activeTempEffects (+0x40). Vtable evidence confirms decals 0/1 and particles 2 use the active list. Fallout divergence: its BGSDecalManager updates distinct simple-decal and emitter collections instead of using this per-actor temp-effect routing; one-to-one equivalence is Unknown.
 0x5060F2: cmp     byte ptr ds:0B361ACh, 0
 0x5060F9: jz      loc_50618E
 0x5060FF: mov     ecx, edi; this
@@ -145,3 +145,15 @@
 0x50619D: pop     esi
 0x50619E: add     esp, 18h
 0x5061A1: retn
+0x9CAD70: mov     eax, [ebp-10h]
+0x9CAD73: push    eax
+0x9CAD74: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CAD79: pop     ecx
+0x9CAD7A: retn
+0x9CAD7B: mov     edx, [esp+arg_4]
+0x9CAD7F: lea     eax, [edx-14h]
+0x9CAD82: mov     ecx, [edx-18h]
+0x9CAD85: xor     ecx, eax
+0x9CAD87: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CAD8C: mov     eax, offset stru_AF3390
+0x9CAD91: jmp     ___CxxFrameHandler3

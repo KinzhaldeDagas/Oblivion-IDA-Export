@@ -20,7 +20,7 @@
 0x7C856A: fst     [esp+90h+var_58]
 0x7C856E: fst     [esp+90h+var_6C]
 0x7C8572: fstp    [esp+90h+var_80]
-0x7C8576: call    sub_718A80
+0x7C8576: call    sub_718A80;
 0x7C857B: fld     [esp+8Ch+var_40]
 0x7C857F: fld     [esp+8Ch+var_10]
 0x7C8583: lea     ecx, [esp+8Ch+var_80]

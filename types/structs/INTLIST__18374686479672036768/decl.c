@@ -1,1 +1,1 @@
-INTLIST
+typedef _INTLIST INTLIST;

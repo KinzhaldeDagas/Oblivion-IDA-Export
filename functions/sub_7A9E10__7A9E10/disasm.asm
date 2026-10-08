@@ -1,4 +1,4 @@
-0x7A9E10: push    0FFFFFFFFh
+0x7A9E10: push    0FFFFFFFFh; Diagnostic RenderPasses scene-node builder. Calls BSShaderProperty_GetRenderPassName for pass bucket names, so BSSM_FRONDS here is debug/display evidence only, not geometry attachment.
 0x7A9E12: push    offset SEH_7A9E10
 0x7A9E17: mov     eax, large fs:0
 0x7A9E1D: push    eax
@@ -59,7 +59,7 @@
 0x7A9EE7: mov     esi, [ebp+0]
 0x7A9EEA: push    eax
 0x7A9EEB: mov     [esp+33Ch+var_4], 0FFFFFFFFh
-0x7A9EF6: call    BSShaderProperty_GetRenderPassName
+0x7A9EF6: call    BSShaderProperty_GetRenderPassName; Generic shader/render-pass name table. Case 0x0F returns BSSM_FRONDS, but this is only a pass-name mapping; it does not attach frond geometry or request SpeedTreeFrondShader.
 0x7A9EFB: push    eax
 0x7A9EFC: push    esi
 0x7A9EFD: lea     ecx, [esp+344h+Src]
@@ -205,7 +205,7 @@
 0x7AA0F5: push    ecx
 0x7AA0F6: fstp    [esp+340h+a2]; a2
 0x7AA0F9: mov     ecx, ebx; this
-0x7AA0FB: call    NiAVObject_UpdateNiAVObject
+0x7AA0FB: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x7AA100: mov     eax, ebx
 0x7AA102: mov     ecx, [esp+338h+var_C]
 0x7AA109: mov     large fs:0, ecx
@@ -219,3 +219,39 @@
 0x7AA11E: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x7AA123: add     esp, 324h
 0x7AA129: retn
+0x9CCFF0: mov     eax, [ebp-324h]
+0x9CCFF6: push    eax
+0x9CCFF7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CCFFC: pop     ecx
+0x9CCFFD: retn
+0x9CCFFE: mov     eax, [ebp-318h]
+0x9CD004: push    eax
+0x9CD005: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CD00A: pop     ecx
+0x9CD00B: retn
+0x9CD00C: mov     eax, [ebp-318h]
+0x9CD012: push    eax
+0x9CD013: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CD018: pop     ecx
+0x9CD019: retn
+0x9CD01A: mov     eax, [ebp-318h]
+0x9CD020: push    eax
+0x9CD021: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CD026: pop     ecx
+0x9CD027: retn
+0x9CD028: mov     eax, [ebp-318h]
+0x9CD02E: push    eax
+0x9CD02F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CD034: pop     ecx
+0x9CD035: retn
+0x9CD036: mov     edx, [esp+arg_4]
+0x9CD03A: lea     eax, [edx-328h]
+0x9CD040: mov     ecx, [edx-32Ch]
+0x9CD046: xor     ecx, eax
+0x9CD048: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CD04D: add     eax, 10h
+0x9CD050: mov     ecx, [edx-4]
+0x9CD053: xor     ecx, eax
+0x9CD055: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CD05A: mov     eax, offset stru_AF63F8
+0x9CD05F: jmp     ___CxxFrameHandler3

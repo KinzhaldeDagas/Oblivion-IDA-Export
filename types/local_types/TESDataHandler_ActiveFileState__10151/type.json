@@ -1,0 +1,51 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "TESDataHandler_ActiveFileState",
+  "definition": "struct TESDataHandler_ActiveFileState\n{\nUInt8 unknownBeforeActiveFileState[3089];\nUInt8 retainActiveFile; ///< Verified active-file retention flag: zero causes TESDataHandler_Clear to destroy/free the current file; nonzero preserves it. LoadFiles reopens it/builds masters, LoadFormRecord sets active-file form state, and CELL_LoadForm preserves flags0 bit 0x40 (Probable TempPublic). Constructor initializes zero; native nonzero writer remains Unknown.\nUInt8 unknownAfterActiveFileState[6];\n}\n",
+  "kind": "struct",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "unknownBeforeActiveFileState",
+      "offset_bits": 0,
+      "offset_bytes": 0,
+      "size_bits": 24712,
+      "type": "UInt8[3089]"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified active-file retention flag: zero causes TESDataHandler_Clear to destroy/free the current file; nonzero preserves it. LoadFiles reopens it/builds masters, LoadFormRecord sets active-file form state, and CELL_LoadForm preserves flags0 bit 0x40 (Probable TempPublic). Constructor initializes zero; native nonzero writer remains Unknown.",
+      "name": "retainActiveFile",
+      "offset_bits": 24712,
+      "offset_bytes": 3089,
+      "size_bits": 8,
+      "type": "UInt8"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "unknownAfterActiveFileState",
+      "offset_bits": 24720,
+      "offset_bytes": 3090,
+      "size_bits": 48,
+      "type": "UInt8[6]"
+    }
+  ],
+  "name": "TESDataHandler_ActiveFileState",
+  "ordinal": 10151,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 3096
+}

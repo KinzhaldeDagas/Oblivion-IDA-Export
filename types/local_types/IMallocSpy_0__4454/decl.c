@@ -1,1 +1,1 @@
-IMallocSpy_0
+typedef IMallocSpy IMallocSpy_0;

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4CB670",
-    "line": "push    esi",
+    "line": "push    esi; Cell reference-light lifecycle. Under the cell object-list guard, walk every TESObjectREFR and register or unregister its ordinary ExtraLight with the native ShadowSceneNode full-light list. This enumerates light sources, not static shadow casters.",
     "mnemonic": "push",
     "size": 1
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x4CB675",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x4CB687",
-    "line": "mov     bl, [esp+0Ch+arg_0]",
+    "line": "mov     bl, [esp+0Ch+registerLights]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -72,14 +72,8 @@
     "size": 2
   },
   {
-    "ea": "0x4CB68D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x4CB690",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -109,7 +103,7 @@
   },
   {
     "ea": "0x4CB69B",
-    "line": "push    0",
+    "line": "push    0; useSpellEffectExtraLight",
     "mnemonic": "push",
     "size": 2
   },
@@ -121,7 +115,7 @@
   },
   {
     "ea": "0x4CB69F",
-    "line": "call    sub_4D80C0",
+    "line": "call    TESObjectREFR_RegisterAttachedLightWithShadowScene; registerLights=true: register this reference's ordinary ExtraLight (useSpellEffectExtraLight=false) in the native full-light list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -133,7 +127,7 @@
   },
   {
     "ea": "0x4CB6A6",
-    "line": "call    sub_4D8150",
+    "line": "call    TESObjectREFR_UnregisterAttachedLightFromShadowScene; registerLights=false: unregister this reference's ordinary ExtraLight by backing NiLight identity.",
     "mnemonic": "call",
     "size": 5
   },
@@ -163,7 +157,7 @@
   },
   {
     "ea": "0x4CB6B1",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },

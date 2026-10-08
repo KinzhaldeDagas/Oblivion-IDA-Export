@@ -1,19 +1,32 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 2,
+  "chunks": [
+    [
+      "0x590330",
+      "0x5903D4"
+    ]
+  ],
+  "chunks_sha256": "1d7f5a0176c5a3aca383c414661f683fb9f0adb092bfc930beec29c636f64d8d",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "Verified: token 0x28 creates tile, calls virtual Init(newTile,currentParent,NULL,NULL), names it, records pointer in token +0x10, and descends. Token 0x2D ascends through Tile.parent +0x10. Returns FIRST created tile. No automatic wrapper tile and no duplicate-name/id check in this routine. Fallout analogue 0x827E2320 uses different token numbers.\n\nVerified injection consequence: no ID/name deduplication in this builder. Plugin retry must query expected child and parent before another ReadFile; return value identifies first created node, not the entire fragment.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_590330",
+  "display_name": "Tile::BuildAndNameTree",
   "end_ea": "0x5903D4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_590330",
+  "name": "Tile::BuildAndNameTree",
   "segment": ".text",
   "sha256": "1d7f5a0176c5a3aca383c414661f683fb9f0adb092bfc930beec29c636f64d8d",
   "size": 164,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x590330",
-  "type": "BSStringT *__thiscall(BSStringT *this, int)",
+  "total_chunk_size": 164,
+  "type": "Tile *__thiscall(Tile *this, OblivionTileTemplate *tileTemplate)",
   "xrefs_from_count": 76,
   "xrefs_to_count": 2
 }

@@ -1,4 +1,4 @@
-char *sub_6FA880()
+NiRTTI *sub_6FA880()
 {
-  return dword_B3F484;
+  return &stru_B3F484; /*0x6fa885*/
 }

@@ -1,1 +1,1 @@
-OBJREF
+typedef tagOBJREF OBJREF;

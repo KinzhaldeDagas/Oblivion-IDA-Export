@@ -1,1 +1,1 @@
-NiMaterialProperty
+struct NiMaterialProperty;

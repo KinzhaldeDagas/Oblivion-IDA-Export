@@ -1,10 +1,10 @@
 0x621270: push    esi
 0x621271: mov     esi, ecx
-0x621273: call    sub_6135F0
+0x621273: call    CombatController_GetCurrentTarget
 0x621278: test    eax, eax
 0x62127A: jz      loc_62138A
-0x621280: mov     ecx, [esi+3Ch]
-0x621283: call    Actor_IsSwimming
+0x621280: mov     ecx, [esi+3Ch]; this
+0x621283: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x621288: test    al, al
 0x62128A: jz      short loc_6212E5
 0x62128C: mov     ecx, [esi+3Ch]
@@ -12,7 +12,7 @@
 0x621294: test    al, al
 0x621296: jnz     short loc_6212E5
 0x621298: mov     ecx, esi
-0x62129A: call    sub_6135F0
+0x62129A: call    CombatController_GetCurrentTarget
 0x62129F: cmp     dword ptr [esi+6Ch], 7
 0x6212A3: jnz     short loc_6212CB
 0x6212A5: mov     eax, [esi+3Ch]
@@ -30,7 +30,7 @@
 0x6212C9: call    eax
 0x6212CB: push    0Ch
 0x6212CD: mov     ecx, esi
-0x6212CF: call    sub_612DE0
+0x6212CF: call    CombatController_SetCombatMode; Sets CombatController+0x70 active mode (0 H2H, 1 melee weapon, 2 ranged weapon, 3 touch spell, 4 ranged spell, 5 yield, 7 flee, 0xA switch weapon, 0xC leave water) and invalidates desired-distance cache +0x188.
 0x6212D4: push    0
 0x6212D6: mov     ecx, esi
 0x6212D8: call    sub_619920
@@ -44,14 +44,14 @@
 0x6212F4: jz      loc_62138A
 0x6212FA: push    ebx
 0x6212FB: mov     ecx, esi
-0x6212FD: call    sub_6135F0
-0x621302: mov     ecx, eax
-0x621304: call    Actor_IsSwimming
+0x6212FD: call    CombatController_GetCurrentTarget
+0x621302: mov     ecx, eax; this
+0x621304: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x621309: mov     bl, al
 0x62130B: test    bl, bl
 0x62130D: jz      short loc_621379
-0x62130F: mov     ecx, [esi+3Ch]
-0x621312: call    Actor_IsSwimming
+0x62130F: mov     ecx, [esi+3Ch]; this
+0x621312: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x621317: test    al, al
 0x621319: jnz     short loc_621379
 0x62131B: mov     ecx, [esi+3Ch]; this
@@ -59,8 +59,8 @@
 0x621323: test    al, al
 0x621325: jz      short loc_621379
 0x621327: mov     ecx, [esi+70h]
-0x62132A: push    ecx
-0x62132B: call    sub_612690
+0x62132A: push    ecx; mode
+0x62132B: call    CombatMode_IsRangedWeaponMode; Returns true only for native combat modes 2 and 4, the two ranged-weapon modes used by the distance and attack-option logic.
 0x621330: add     esp, 4
 0x621333: test    al, al
 0x621335: jz      short loc_62135F
@@ -106,9 +106,9 @@
 0x6213A8: cmp     byte ptr [esi+115h], 0
 0x6213AF: jz      short loc_6213BA
 0x6213B1: pop     ebx
-0x6213B2: mov     ecx, esi
+0x6213B2: mov     ecx, esi; this
 0x6213B4: pop     esi
-0x6213B5: jmp     sub_61C6E0
+0x6213B5: jmp     ActorMovement_BuildPathGridWaypointList; Verified actor movement path helper called by CombatController_UpdateMovementAndReachability and other movement callers. Finds a reachable PathGrid node near the actor, checks distance and line of sight, collects enabled linked-point positions into the actor's waypoint list, then updates the movement path. Owner class layout remains Unknown.
 0x6213BA: pop     ebx
 0x6213BB: mov     ecx, esi
 0x6213BD: pop     esi

@@ -1,4 +1,4 @@
-BSStringT *sub_A0BCD0()
+NiRTTI *sub_A0BCD0()
 {
-  return sub_70E220((BSStringT *)dword_B40C84, "NiPSysSpawnModifier", (int)dword_B40D08);
+  return NiRTTI_Constructor(&stru_B40C84, "NiPSysSpawnModifier", &stru_B40D08); /*0xa0bce4*/
 }

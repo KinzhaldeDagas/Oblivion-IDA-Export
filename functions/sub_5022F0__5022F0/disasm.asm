@@ -1,4 +1,4 @@
-0x5022F0: fldz
+0x5022F0: fldz; ScriptEffectStart begin-block callback: returns 1.0 only when eventList->m_scriptEffectInfo exists and byte 0 is set.
 0x5022F2: mov     eax, [esp+arg_14]
 0x5022F6: test    eax, eax
 0x5022F8: mov     ecx, [esp+arg_18]

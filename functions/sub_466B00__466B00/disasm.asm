@@ -16,7 +16,7 @@
 0x466B28: push    offset aQuicksave; "quicksave"
 0x466B2D: push    0
 0x466B2F: mov     ecx, esi
-0x466B31: call    TESSaveLoadGame_LoadGame
+0x466B31: call    TESSaveLoadGame_LoadGame;  Verified map lifecycle: allocates incomingChangesMap at +4, stores save records there, reconciles pre-load currentChangesMap at +0 after form loading, then swaps in incoming map via 464440. The map roles are based on direct stores/lookups and final pointer assignments.
 0x466B36: test    al, al
 0x466B38: jnz     short loc_466B5D
 0x466B3A: fld1

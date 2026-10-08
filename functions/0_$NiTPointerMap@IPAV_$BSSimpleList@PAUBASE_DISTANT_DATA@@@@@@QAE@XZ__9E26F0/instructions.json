@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x9E26F0",
-    "line": "xor     ecx, ecx",
+    "line": "xor     ecx, ecx; Verified static constructor: creates/initializes the 37-bucket per-cell DistantLOD model-usage map and registers its atexit destructor.",
     "mnemonic": "xor",
     "size": 2
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x9E270B",
-    "line": "mov     ecx, dword_B08304",
+    "line": "mov     ecx, g_DistantLODCellModelUsageMap.bucketCount",
     "mnemonic": "mov",
     "size": 6
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x9E271C",
-    "line": "mov     dword_B08308, eax",
+    "line": "mov     g_DistantLODCellModelUsageMap.buckets, eax",
     "mnemonic": "mov",
     "size": 5
   },
@@ -97,13 +97,13 @@
   },
   {
     "ea": "0x9E2726",
-    "line": "push    offset sub_A1B670; void (__cdecl *)()",
+    "line": "push    offset DistantLOD_CellModelUsageMap_atexit; void (__cdecl *)()",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x9E272B",
-    "line": "mov     off_B08300, offset ??_7?$NiTPointerMap@IPAV?$BSSimpleList@PAUBASE_DISTANT_DATA@@@@@@6B@; const NiTPointerMap<uint,BSSimpleList<BASE_DISTANT_DATA *> *>::`vftable' ...",
+    "line": "mov     g_DistantLODCellModelUsageMap.vftable, offset ??_7?$NiTPointerMap@IPAV?$BSSimpleList@PAUBASE_DISTANT_DATA@@@@@@6B@; const NiTPointerMap<uint,BSSimpleList<BASE_DISTANT_DATA *> *>::`vftable' ...",
     "mnemonic": "mov",
     "size": 10
   },

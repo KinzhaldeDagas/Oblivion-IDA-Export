@@ -1,5 +1,5 @@
 int __usercall TESLeveledList_CalcLeveledForm_::CalcEffectiveLevel@<eax>(
-        int a1@<ebx>,
+        unsigned __int16 *a1@<ebx>,
         int a2@<ebp>,
         int a3@<edi>,
         unsigned __int16 si0@<si>,
@@ -18,8 +18,8 @@ int __usercall TESLeveledList_CalcLeveledForm_::CalcEffectiveLevel@<eax>(
         int a17,
         int a18)
 {
-  if ( a2 + 4 == a1 )
-    JUMPOUT(0x46CE5E);
+  if ( (unsigned __int16 *)(a2 + 4) == a1 ) /*0x46ce39*/
+    JUMPOUT(0x46CE5E); /*0x46ce5e*/
   return TESLeveledList_CalcLeveledForm_::FindMaxLevelLoop(
            (unsigned __int16 **)(a2 + 4),
            0,

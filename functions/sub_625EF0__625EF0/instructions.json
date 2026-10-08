@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x625EF0",
-    "line": "push    ecx",
+    "line": "push    ecx; Modern DialoguePackage save size includes responseTimeRemaining, optional waitingForLip (save version >=0x6A), activeSpeaker/speaker/target/startingTopic FormIDs, UInt16 serialized-conversation size, the full Conversation payload, and package-level UInt16 current-item/current-response indices.",
     "mnemonic": "push",
     "size": 1
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x625EF6",
-    "line": "call    sub_567D20",
+    "line": "call    TESPackage_GetSaveSize",
     "mnemonic": "call",
     "size": 5
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x625F0B",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x625F28",
-    "line": "mov     ecx, [edi+50h]",
+    "line": "mov     ecx, [edi+50h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x625F36",
-    "line": "call    sub_6B75B0",
+    "line": "call    Conversation__GetSaveSize; Conversation save-size calculation includes every DialogueItem plus the saved current-item index.",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x625F68",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },

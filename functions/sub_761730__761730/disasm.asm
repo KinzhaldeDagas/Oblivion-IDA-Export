@@ -1,4 +1,4 @@
-0x761730: sub     esp, 10h
+0x761730: sub     esp, 10h; Oblivion string and behavior identify NiDX9RenderedTextureData::CreateSurf. Selects D3D format/usage/pool from NiRenderedTexture settings, creates a one-level texture or render-target surface, records exact byte size, and updates renderer video-memory accounting.
 0x761733: push    ebx
 0x761734: mov     ebx, [esp+14h+arg_0]
 0x761738: test    ebx, ebx
@@ -72,11 +72,11 @@
 0x7617F1: call    eax
 0x7617F3: test    eax, eax
 0x7617F5: jge     short loc_76181E
-0x7617F7: push    eax
-0x7617F8: call    sub_7736F0
+0x7617F7: push    eax; hresult
+0x7617F8: call    D3D9_HResultToString; Maps common COM/D3D9 HRESULT values to diagnostic names, including DEVICELOST, DEVICENOTRESET, INVALIDCALL, OUTOFVIDEOMEMORY, and format/state failures.
 0x7617FD: push    eax
 0x7617FE: push    offset aNidx9renderedt; "NiDX9RenderedTextureData::CreateSurf> F"...
-0x761803: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x761803: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x761808: add     esp, 0Ch
 0x76180B: pop     edi
 0x76180C: pop     esi

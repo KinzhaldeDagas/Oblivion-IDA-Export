@@ -1,136 +1,161 @@
-void __usercall sub_60D950(double a1@<st2>, double st7_0@<st0>, ArrowProjectile *a3, int a4, __m128 *a5, __m128 *a6)
+// Arrow projectile Havok-contact callback. Resolves the collidable to a live NiAVObject/TESObjectREFR, classifies Actor versus non-Actor impact, converts contact vectors, and dispatches the corresponding impact handler.
+void __cdecl ArrowProjectile_HandleCollisionHit(
+        ArrowProjectile *projectile,
+        void *collidable,
+        const void *havokPoint,
+        const void *havokNormal)
 {
-  TESChildCELL *v6; // edi
-  NiAVObject *v7; // eax
-  Actor *v8; // esi
+  double v4; // st5
+  double v5; // st6
+  double v6; // st7
+  TESChildCELL *v7; // edi
+  NiAVObject *v8; // eax
+  Actor *v9; // esi
   LowProcess *process; // ecx
-  TESObjectREFR *v10; // edi
-  float *v11; // eax
-  int v12; // ebp
+  TESObjectREFR *v11; // edi
+  float *v12; // eax
+  int v13; // ebp
   TESObjectREFR *shooter; // ecx
-  TESObjectREFR *v14; // edi
-  float *v15; // eax
-  int v16; // eax
+  TESObjectREFR *v15; // edi
+  float *v16; // eax
   int v17; // eax
-  TESObjectREFR *v18; // esi
-  int v19; // eax
-  int v20[3]; // [esp+10h] [ebp-18h] BYREF
-  float v21[3]; // [esp+1Ch] [ebp-Ch] BYREF
+  int v18; // eax
+  TESObjectREFR *v19; // esi
+  int v20; // eax
+  int v21[3]; // [esp+10h] [ebp-18h] BYREF
+  float v22[3]; // [esp+1Ch] [ebp-Ch] BYREF
 
-  v6 = 0;
-  v7 = sub_8AFCE0(a4);
-  if ( v7 )
-    v6 = (TESChildCELL *)sub_4DC270((int)v7);
-  v8 = (Actor *)OblivionDynamicCast(
-                  v6,
+  v7 = 0; /*0x60d95c*/
+  v8 = bhkCollidable_ResolveNiAVObject((int)collidable);// Resolve Havok collidable to NiAVObject and then owning TESObjectREFR; projectile impact never substitutes the equipped WEAP reference. /*0x60d95e*/
+  if ( v8 ) /*0x60d968*/
+    v7 = (TESChildCELL *)sub_4DC270((int)v8); /*0x60d973*/
+  v9 = (Actor *)OblivionDynamicCast( /*0x60d990*/
+                  v7,
                   0,
                   (struct _s_RTTICompleteObjectLocator *)&TESObjectREFR `RTTI Type Descriptor',
                   &Actor `RTTI Type Descriptor',
-                  0);
-  if ( *(_BYTE *)(a4 + 0x18) != 2 || !(a4 + *(_DWORD *)(a4 + 0x10)) )
+                  0);                           // Classify struck reference as Actor for actor damage/embedding versus non-actor reference impact.
+  if ( *((_BYTE *)collidable + 0x18) != 2 || !((char *)collidable + *((_DWORD *)collidable + 4)) ) /*0x60d99b*/
   {
 LABEL_14:
-    v12 = HIWORD(*(_DWORD *)(a4 + 0x1C));
-    if ( v12 != sub_607B60() && (!v6 || v6 != (TESChildCELL *)TESDataHandler_g_PlayerRef->unk578) )
+    v13 = HIWORD(*((_DWORD *)collidable + 7)); /*0x60da37*/
+    if ( v13 != sub_607B60() && (!v7 || v7 != (TESChildCELL *)reference->unk578) ) /*0x60da5a*/
     {
-      sub_43F3E0((float *)v20, a5);
-      sub_4D68A0(v21, a6);
-      if ( v12 == 1 )
+      HavokVector_ToWorldVector((float *)v21, (__m128 *)havokPoint); /*0x60da6a*/
+      sub_4D68A0(v22, (__m128 *)havokNormal); /*0x60da79*/
+      if ( v13 == 1 ) /*0x60da84*/
       {
-        sub_60BAC0((Actor *)a3, (int)v20, (void (__thiscall **)(MagicCaster *, MagicCaster *))v21);
-        shooter = (TESObjectREFR *)a3->shooter;
-        if ( shooter )
-          sub_677760((int)&ActorProcessManager_ptr, a4, a1, st7_0, shooter, *(float *)v20, v20[1], v20[2], 0, 0);
+        ArrowProjectile_HandleCollisionLayer1Impact( /*0x60da96*/
+          (Actor *)projectile,
+          (int)v21,
+          (void (__thiscall **)(MagicCaster *, MagicCaster *))v22);
+        shooter = (TESObjectREFR *)projectile->shooter; /*0x60da9b*/
+        if ( shooter ) /*0x60daa0*/
+          sub_677760( /*0x60dac9*/
+            (int)&qword_B3BB2C[0x75],
+            (char)collidable,
+            v4,
+            v6,
+            v5,
+            shooter,
+            *(float *)v21,
+            v21[1],
+            v21[2],
+            0,
+            0);
       }
-      else if ( v6 )
+      else if ( v7 ) /*0x60dad8*/
       {
-        if ( v8 )
+        if ( v9 ) /*0x60dae0*/
         {
-          if ( !Actor_IsGhost(v8) )
+          if ( !Actor_IsGhost(v9) ) /*0x60dae4*/
           {
-            v14 = (TESObjectREFR *)a3->shooter;
-            if ( v14 )
+            v15 = (TESObjectREFR *)projectile->shooter; /*0x60daf5*/
+            if ( v15 ) /*0x60dafa*/
             {
-              v15 = v8->vtbl->super.super.GetPos(v8);
-              sub_677760(
-                (int)&ActorProcessManager_ptr,
-                (char)a3,
-                a1,
-                st7_0,
-                v14,
-                *v15,
-                *((_DWORD *)v15 + 1),
-                *((_DWORD *)v15 + 2),
+              v16 = v9->vtbl->super.super.GetPos(v9); /*0x60db06*/
+              sub_677760( /*0x60db26*/
+                (int)&qword_B3BB2C[0x75],
+                (char)projectile,
+                v4,
+                v6,
+                v5,
+                v15,
+                *v16,
+                *((_DWORD *)v16 + 1),
+                *((_DWORD *)v16 + 2),
                 1,
-                (TESObjectREFR *)v8);
+                (TESObjectREFR *)v9);
             }
-            sub_60A640(
-              (Actor *)a3,
-              (float *)v20,
-              (void (__thiscall **)(MagicCaster *, MagicCaster *))v21,
-              (TESObjectREFR *)v8);
+            ArrowProjectile_HandleActorImpact( /*0x60db38*/
+              (Actor *)projectile,
+              (float *)v21,
+              (void (__thiscall **)(MagicCaster *, MagicCaster *))v22,
+              (TESObjectREFR *)v9);
           }
         }
         else
         {
-          v16 = sub_47DE00(a4);
-          if ( v16 )
-            v17 = *(_DWORD *)(v16 + 0xC);
+          v17 = sub_47DE00((int)collidable);    // RealArenaTraining decode: non-actor arrow collision branch after collidable -> TESObjectREFR resolution; Actor dynamic cast was null. /*0x60db46*/
+          if ( v17 ) /*0x60db50*/
+            v18 = *(_DWORD *)(v17 + 0xC); /*0x60db52*/
           else
-            v17 = 0;
-          sub_60B120(a3, v20, v21, v6, v17);
-          v18 = (TESObjectREFR *)a3->shooter;
-          if ( v18 )
+            v18 = 0; /*0x60db57*/
+          ArrowProjectile_HandleReferenceImpact(projectile, v21, v22, v7, v18);// RealArenaTraining decode: earlier arrow non-actor collision call to sub_60B120. Plugin hooks this call so TargetHay01 Marksman does not depend on later optional Script_AddEventToExtraScript branches. /*0x60db6b*/
+          v19 = (TESObjectREFR *)projectile->shooter; /*0x60db70*/
+          if ( v19 ) /*0x60db75*/
           {
-            v19 = (*((int (__thiscall **)(TESChildCELL *))v6->vtbl + 0x5D))(v6);
-            sub_677760(
-              (int)&ActorProcessManager_ptr,
-              a4,
-              a1,
-              st7_0,
-              v18,
-              *(float *)v19,
-              *(_DWORD *)(v19 + 4),
-              *(_DWORD *)(v19 + 8),
+            v20 = (*((int (__thiscall **)(TESChildCELL *))v7->vtbl + 0x5D))(v7); /*0x60db81*/
+            sub_677760( /*0x60dba2*/
+              (int)&qword_B3BB2C[0x75],
+              (char)collidable,
+              v4,
+              v6,
+              v5,
+              v19,
+              *(float *)v20,
+              *(_DWORD *)(v20 + 4),
+              *(_DWORD *)(v20 + 8),
               0,
               0);
           }
         }
       }
     }
-    return;
+    return; /*0x60dad5*/
   }
-  if ( v8 )
+  if ( v9 ) /*0x60d9a5*/
   {
-    if ( !v8->vtbl->super.super.IsDead((TESObjectREFR *)v8, 0) )
+    if ( !v9->vtbl->super.super.IsDead((TESObjectREFR *)v9, 0) ) /*0x60d9b7*/
     {
-      process = v8->members.super.process;
-      if ( !process
+      process = v9->members.super.process; /*0x60d9c1*/
+      if ( !process /*0x60d9e6*/
         || !((int (__thiscall *)(LowProcess *))process->GetKnockedState)(process)
-        || ((int (__thiscall *)(LowProcess *))v8->members.super.process->GetKnockedState)(v8->members.super.process) == 6 )
+        || ((int (__thiscall *)(LowProcess *))v9->members.super.process->GetKnockedState)(v9->members.super.process) == 6 )
       {
-        if ( v8->vtbl->super.super.GetSleepState((TESObjectREFR *)v8) == kSitSleep_Sitting
-          || v8->vtbl->super.super.GetSleepState((TESObjectREFR *)v8) == kSitSleep_Sleeping )
+        if ( v9->vtbl->super.super.GetSleepState((TESObjectREFR *)v9) == kSitSleep_Sitting /*0x60da0c*/
+          || v9->vtbl->super.super.GetSleepState((TESObjectREFR *)v9) == kSitSleep_Sleeping )
         {
-          v10 = (TESObjectREFR *)a3->shooter;
-          if ( v10 )
+          v11 = (TESObjectREFR *)projectile->shooter; /*0x60da12*/
+          if ( v11 ) /*0x60da17*/
           {
-            v11 = v8->vtbl->super.super.GetPos(v8);
-            sub_677760(
-              (int)&ActorProcessManager_ptr,
-              a4,
-              a1,
-              st7_0,
-              v10,
-              *v11,
-              *((_DWORD *)v11 + 1),
-              *((_DWORD *)v11 + 2),
+            v12 = v9->vtbl->super.super.GetPos(v9); /*0x60da27*/
+            sub_677760( /*0x60da32*/
+              (int)&qword_B3BB2C[0x75],
+              (char)collidable,
+              v4,
+              v6,
+              v5,
+              v11,
+              *v12,
+              *((_DWORD *)v12 + 1),
+              *((_DWORD *)v12 + 2),
               1,
-              (TESObjectREFR *)v8);
+              (TESObjectREFR *)v9);
           }
-          return;
+          return; /*0x60da32*/
         }
-        goto LABEL_14;
+        goto LABEL_14; /*0x60da0c*/
       }
     }
   }

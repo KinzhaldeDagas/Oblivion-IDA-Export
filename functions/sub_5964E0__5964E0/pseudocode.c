@@ -1,13 +1,13 @@
 void sub_5964E0()
 {
   _DWORD *OpenMenuTile; // eax
-  int ParentMenu; // eax
+  _DWORD *ParentMenu; // eax
 
-  OpenMenuTile = (_DWORD *)Menu_GetOpenMenuTile(0x415);
-  if ( OpenMenuTile )
+  OpenMenuTile = (_DWORD *)Menu_GetOpenMenuTile(0x415); /*0x5964e5*/
+  if ( OpenMenuTile ) /*0x5964ef*/
   {
-    ParentMenu = Tile_GetParentMenu(OpenMenuTile);
-    if ( ParentMenu )
-      sub_584390(ParentMenu);
+    ParentMenu = (_DWORD *)Tile_GetParentMenu(OpenMenuTile); /*0x5964f3*/
+    if ( ParentMenu ) /*0x5964fa*/
+      Menu::StartFadeIn(ParentMenu); /*0x5964fe*/
   }
 }

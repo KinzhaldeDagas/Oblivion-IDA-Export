@@ -1,19 +1,32 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 3,
+  "chunks": [
+    [
+      "0x772E30",
+      "0x772ECE"
+    ]
+  ],
+  "chunks_sha256": "e178d38e1e9b84b3a57c1a1b5923c4addf36164973dc98d19e8dac810fcaf1ae",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "\nDX11 pool audit 2026-10-01: corrected former NiD3DPass parameter type. This releases a render-state GROUP. RendererOwned byte0 selects pooled return: traverse both lists, return nodes, clear heads/counts, then return the group. Non-owned path destroys list contents and frees the group. Free pooled groups therefore have cleared counts/heads; free nodes can retain old fields.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_772E30",
+  "display_name": "NiD3DRenderStateGroup_ReleaseToPool",
   "end_ea": "0x772ECE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_772E30",
+  "name": "NiD3DRenderStateGroup_ReleaseToPool",
   "segment": ".text",
   "sha256": "e178d38e1e9b84b3a57c1a1b5923c4addf36164973dc98d19e8dac810fcaf1ae",
   "size": 158,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x772E30",
-  "type": "void __cdecl(NiD3DPass *)",
+  "total_chunk_size": 158,
+  "type": "void __cdecl(OblivionPooledRenderStateGroupPrefix *group)",
   "xrefs_from_count": 65,
   "xrefs_to_count": 3
 }

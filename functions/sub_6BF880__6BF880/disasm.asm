@@ -11,7 +11,7 @@
 0x6BF8B5: mov     dword ptr ds:0B3D374h, offset sub_6BF4D0
 0x6BF8BF: mov     dword ptr ds:0B3D2E4h, offset sub_6BF570
 0x6BF8C9: mov     byte ptr ds:0B3D3EFh, 10h
-0x6BF8D0: call    sub_6BF820
+0x6BF8D0: call    NiPosKey_RegisterEvaluatorType1; Position type 1 registers NiPosKey_InsertType1Linear for GuaranteeTimeRange boundary insertion.
 0x6BF8D5: add     esp, 8
 0x6BF8D8: mov     eax, 1
 0x6BF8DD: retn

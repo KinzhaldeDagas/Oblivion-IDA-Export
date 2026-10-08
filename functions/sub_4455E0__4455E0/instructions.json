@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x4455FF",
-    "line": "call    sub_40D160",
+    "line": "call    MenuBackground_CaptureWorldToTexture",
     "mnemonic": "call",
     "size": 5
   },
@@ -79,19 +79,19 @@
   },
   {
     "ea": "0x44560B",
-    "line": "call    InitBSShaderAccumulator",
+    "line": "call    BSShaderAccumulator_GetOrCreateGlobal",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x445610",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x445612",
-    "line": "call    sub_7AB6F0",
+    "line": "call    BSShaderAccumulator_ClearAccumulatedPasses; Reset transient BSShaderAccumulator storage. Iterates all 0x1A3 selector buckets at this+0x104 with stride 0x14, releases old free nodes, and moves active nodes to local free chains without destroying borrowed RenderPass payloads. Mode-5 flush uses this after drawing only buckets 6..9 and 0x154..0x155, so every other queued selector, including 0x177..0x17A, is discarded without draw. Separate accumulator-owned special pass lists later in this function explicitly call RenderPass_Destroy plus FormHeapFree.",
     "mnemonic": "call",
     "size": 5
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x44567F",
-    "line": "call    sub_43FC20",
+    "line": "call    sub_43FC20; TES cleanup/streaming critical-section path; calls SpeedTree cache prune 0x55E390(1) before and after heap/cell cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x4456B3",
-    "line": "call    sub_40D4D0",
+    "line": "call    Input_CheckScreenshotHotkey; Verified gamma integration 2026-09-26: frame path tests B34FA4 and calls Renderer_ApplyPendingGammaRamp at40D508 before scene rendering.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x4456C4",
-    "line": "call    sub_7C7E50",
+    "line": "call    ShadowSceneNode_TeardownLightLists; Cell/world transition boundary: tear down all native shadow-light lists before rebuilding reference-attached light sources for the destination cell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,13 +475,13 @@
   },
   {
     "ea": "0x4456E0",
-    "line": "call    nullsub_returnTrue_0arg",
+    "line": "call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4456E5",
-    "line": "call    sub_7B84E0",
+    "line": "call    sub_7B84E0; MoonSugarEffect decode: walks ShaderDefinition cache B42EC0..B42F30; for shaders with type != -1 calls vtable +0x90 to detach pass texture-stage refs before texture-manager rebuild. Does not walk arbitrary plugin-owned shader wrappers or call vertex wrapper +0x5C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -493,13 +493,13 @@
   },
   {
     "ea": "0x4456EC",
-    "line": "call    nullsub_returnTrue_0arg",
+    "line": "call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4456F1",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -511,13 +511,13 @@
   },
   {
     "ea": "0x4456FA",
-    "line": "push    0",
+    "line": "push    0; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4456FC",
-    "line": "call    PlayerCharacter_GetPlayerNode",
+    "line": "call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x44570E",
-    "line": "call    ShadowSceneNodeAddShadowCaster",
+    "line": "call    ShadowSceneNodeAddShadowCaster; Direct retail AddShadowCaster caller in player cell/world-transition lifecycle.",
     "mnemonic": "call",
     "size": 5
   },
@@ -703,7 +703,7 @@
   },
   {
     "ea": "0x44575D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; DX11 interior observer audit, OblivionNew reverified 2026-09-19: native block sets ECX=ESI, copies TES grid coordinates [ESI+20h]/[ESI+24h] into saved coordinates [ESI+48h]/[ESI+4Ch], then calls 441D50 at 445765. The enclosing transition (4455E0) tears down native shadow-light lists at 4456C4 and registers destination cell attached lights at 44591A. External-patch evidence, separate from native behavior: verified EngineBugFixes 2.22 BackgroundCellLoadFix replaces the first 5 bytes here with a jump to module+6380 and resumes at 445765; DX11 validation composes only the exact independently verified patch, not arbitrary code changes.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -853,7 +853,7 @@
   },
   {
     "ea": "0x4457B5",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1087,13 +1087,13 @@
   },
   {
     "ea": "0x44581E",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x445820",
-    "line": "call    sub_4E7610",
+    "line": "call    TESPathGrid_LoadOrResolveGraph; Verified destination-cell activation path: once destination cell state is attached, obtains TESPathGrid and invokes TESPathGrid_LoadOrResolveGraph; this makes graph resolution part of cell activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1351,7 +1351,7 @@
   },
   {
     "ea": "0x4458A3",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1375,19 +1375,19 @@
   },
   {
     "ea": "0x4458B4",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x4458B9",
-    "line": "call    sub_678750",
+    "line": "call    sub_678750; BunkFix: furniture activation/sit-sleep handoff. For Sleep package, revalidates candidate furniture refs, picks first unused marker via sub_4D73F0, resolves marker transform via sub_4DB9D0, then calls SetSleepState. This is after the actor has already reached/activated the furniture ref.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4458BE",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1399,7 +1399,7 @@
   },
   {
     "ea": "0x4458C8",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1423,7 +1423,7 @@
   },
   {
     "ea": "0x4458D6",
-    "line": "call    sub_43FC20",
+    "line": "call    sub_43FC20; TES cleanup/streaming critical-section path; calls SpeedTree cache prune 0x55E390(1) before and after heap/cell cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1465,7 +1465,7 @@
   },
   {
     "ea": "0x4458F1",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1525,25 +1525,25 @@
   },
   {
     "ea": "0x445911",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x445916",
-    "line": "push    1",
+    "line": "push    1; registerLights",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x445918",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x44591A",
-    "line": "call    sub_4CB670",
+    "line": "call    TESObjectCELL_RegisterOrUnregisterAttachedLights; Interior-cell activation registers ordinary attached light sources for every reference after the cell node and property state are prepared.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1777,7 +1777,7 @@
   },
   {
     "ea": "0x44598B",
-    "line": "call    InitBSShaderAccumulator",
+    "line": "call    BSShaderAccumulator_GetOrCreateGlobal",
     "mnemonic": "call",
     "size": 5
   },
@@ -1813,7 +1813,7 @@
   },
   {
     "ea": "0x44599D",
-    "line": "call    nullsub_returnTrue_0arg",
+    "line": "call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1843,7 +1843,7 @@
   },
   {
     "ea": "0x4459B0",
-    "line": "call    nullsub_returnTrue_0arg",
+    "line": "call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1861,7 +1861,7 @@
   },
   {
     "ea": "0x4459BB",
-    "line": "call    sub_482670",
+    "line": "call    ClearCanopyShadowMap; Clear/release canopy shadow-map state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1945,7 +1945,7 @@
   },
   {
     "ea": "0x4459EB",
-    "line": "call    sub_43FC20",
+    "line": "call    sub_43FC20; TES cleanup/streaming critical-section path; calls SpeedTree cache prune 0x55E390(1) before and after heap/cell cleanup.",
     "mnemonic": "call",
     "size": 5
   },

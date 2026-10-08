@@ -1,171 +1,171 @@
 void sub_572170()
 {
-  float *v4; // esi
-  int v5; // ebx
-  double v6; // st6
+  float *v0; // esi
+  int v1; // ebx
+  double v2; // st6
   InterfaceManager *Singleton; // eax
-  NiTPointerList_Node_void *v8; // edi
-  NiAVObject *v9; // edi
-  double v10; // st7
-  _DWORD *v11; // ebx
-  float *v12; // esi
-  int v13; // edx
-  NiTPointerList_Node_void *v14; // eax
-  BSTextureManager *v15; // ecx
-  bool v16; // zf
-  NiTPointerList_Node_void *v17; // edi
-  double v18; // st6
-  float v19; // edi
-  int v20; // edi
-  NiTPointerList_Node_void *v21; // eax
-  NiTPointerList_Node_void *v22; // edi
-  float *v23; // [esp+10h] [ebp-Ch]
-  float v24; // [esp+14h] [ebp-8h] BYREF
-  float v25; // [esp+18h] [ebp-4h] BYREF
+  void (__thiscall ***v4)(void *, int); // edi
+  NiAVObject *v5; // edi
+  double v6; // st7
+  _DWORD *v7; // ebx
+  float *v8; // esi
+  int v9; // edx
+  _DWORD *v10; // eax
+  void *v11; // ecx
+  bool v12; // zf
+  float v13; // edi
+  double v14; // st6
+  float v15; // edi
+  int v16; // edi
+  _DWORD *v17; // eax
+  float v18; // edi
+  float *v19; // [esp+10h] [ebp-Ch]
+  float v20; // [esp+14h] [ebp-8h] BYREF
+  void *node; // [esp+18h] [ebp-4h] BYREF
 
-  if ( !InterfaceManager_IsMenuMode() )
+  if ( !InterfaceManager_IsMenuMode() ) /*0x572173*/
   {
-    v23 = sub_571F90(1);
-    v4 = v23 + 3;
-    v5 = 0xC8;
-    do
+    v19 = sub_571F90(1); /*0x57218e*/
+    v0 = v19 + 3; /*0x572192*/
+    v1 = 0xC8; /*0x572195*/
+    do /*0x572278*/
     {
-      if ( v4[3] > 0.0 )
+      if ( v0[3] > 0.0 ) /*0x5721aa*/
       {
-        v24 = v4[3] - flt_B33E9C;
-        v6 = v24;
-        v4[3] = v24;
-        if ( v6 <= 0.0 )
+        v20 = v0[3] - *(float *)&MEMORY[0xB33E90][0xC]; /*0x5721b9*/
+        v2 = v20; /*0x5721bd*/
+        v0[3] = v20; /*0x5721c1*/
+        if ( v2 <= 0.0 ) /*0x5721cb*/
         {
-          if ( *(_DWORD *)v4 )
+          if ( *(_DWORD *)v0 ) /*0x5721d1*/
           {
-            Singleton = InterfaceManager_GetSingleton(0, 1);
-            Singleton->unk070->vtbl->RemoveObject(Singleton->unk070, (NiAVObject **)&v25, *(NiAVObject **)v4);
-            if ( v25 != 0.0 )
+            Singleton = InterfaceManager_GetSingleton(0, 1); /*0x5721dc*/
+            Singleton->unk070->vtbl->RemoveObject(Singleton->unk070, (NiAVObject **)&node, *(NiAVObject **)v0); /*0x5721f7*/
+            if ( *(float *)&node != 0.0 ) /*0x5721ff*/
             {
-              v8 = (NiTPointerList_Node_void *)LODWORD(v25);
-              if ( !InterlockedDecrement((volatile LONG *)(LODWORD(v25) + 4)) )
-                ((void (__thiscall *)(NiTPointerList_Node_void *, int))v8->next->next)(v8, 1);
+              v4 = (void (__thiscall ***)(void *, int))node; /*0x572201*/
+              if ( !InterlockedDecrement((volatile LONG *)node + 1) ) /*0x572207*/
+                (**v4)(v4, 1); /*0x57221d*/
             }
-            v9 = *(NiAVObject **)v4;
-            if ( *(_DWORD *)v4 )
+            v5 = *(NiAVObject **)v0; /*0x57221f*/
+            if ( *(_DWORD *)v0 ) /*0x57221f*/
             {
-              if ( !InterlockedDecrement((volatile LONG *)&v9->members) )
+              if ( !InterlockedDecrement((volatile LONG *)&v5->members) ) /*0x572229*/
               {
-                if ( v9 )
-                  v9->vtbl->super.super.Destructor((NiRefObject *)v9, 1);
+                if ( v5 ) /*0x572235*/
+                  v5->vtbl->super.super.Destructor((NiRefObject *)v5, 1); /*0x57223f*/
               }
-              *v4 = 0.0;
+              *v0 = 0.0; /*0x572241*/
             }
-            v4[0xFFFFFFFF] = 0.0;
-            v4[0xFFFFFFFD] = 0.0;
-            v4[0xFFFFFFFE] = 0.0;
-            FormHeapFree(*((_DWORD *)v4 + 1));
-            v10 = flt_A30634;
-            v4[1] = 0.0;
-            *((_WORD *)v4 + 5) = 0;
-            *((_WORD *)v4 + 4) = 0;
-            v4[3] = v10;
+            v0[0xFFFFFFFF] = 0.0; /*0x572245*/
+            v0[0xFFFFFFFD] = 0.0; /*0x572248*/
+            v0[0xFFFFFFFE] = 0.0; /*0x57224b*/
+            FormHeapFree(*((_DWORD *)v0 + 1)); /*0x572252*/
+            v6 = kTerrainLODQuadRayDirectionZ; /*0x572257*/
+            v0[1] = 0.0; /*0x57225d*/
+            *((_WORD *)v0 + 5) = 0; /*0x572260*/
+            *((_WORD *)v0 + 4) = 0; /*0x572264*/
+            v0[3] = v6; /*0x572268*/
           }
         }
       }
-      v4 += 7;
-      --v5;
+      v0 += 7; /*0x572272*/
+      --v1; /*0x572275*/
     }
-    while ( v5 );
-    v11 = *((_DWORD **)v23 + 0x579);
-    if ( v11 )
+    while ( v1 ); /*0x572278*/
+    v7 = *((_DWORD **)v19 + 0x579); /*0x572282*/
+    if ( v7 ) /*0x57228a*/
     {
-      while ( 1 )
+      while ( 1 ) /*0x572290*/
       {
-        v12 = (float *)v11[2];
-        v13 = *((_DWORD *)v12 + 3);
-        v11 = (_DWORD *)*v11;
-        if ( *(_DWORD *)(v13 + 4) < 2u )
-          break;
-        if ( v12[6] <= 0.0 )
-          goto LABEL_41;
-        v25 = v12[6] - flt_B33E9C;
-        v18 = v25;
-        v12[6] = v25;
-        if ( v18 >= 0.0 )
-          goto LABEL_41;
-        (*(void (__thiscall **)(_DWORD, float *, int))(**(_DWORD **)(v13 + 0x1C) + 0x88))(
-          *(_DWORD *)(v13 + 0x1C),
-          &v24,
-          v13);
-        if ( v24 != 0.0 )
+        v8 = (float *)v7[2]; /*0x572290*/
+        v9 = *((_DWORD *)v8 + 3); /*0x572293*/
+        v7 = (_DWORD *)*v7; /*0x57229d*/
+        if ( *(_DWORD *)(v9 + 4) < 2u ) /*0x57229f*/
+          break; /*0x57229f*/
+        if ( v8[6] <= 0.0 ) /*0x572302*/
+          goto LABEL_41; /*0x572302*/
+        *(float *)&node = v8[6] - *(float *)&MEMORY[0xB33E90][0xC]; /*0x572311*/
+        v14 = *(float *)&node; /*0x572315*/
+        v8[6] = *(float *)&node; /*0x572319*/
+        if ( v14 >= 0.0 ) /*0x572323*/
+          goto LABEL_41; /*0x572323*/
+        (*(void (__thiscall **)(_DWORD, float *, int))(**(_DWORD **)(v9 + 0x1C) + 0x88))( /*0x57233a*/
+          *(_DWORD *)(v9 + 0x1C),
+          &v20,
+          v9);
+        if ( v20 != 0.0 ) /*0x572342*/
         {
-          v19 = v24;
-          if ( !InterlockedDecrement((volatile LONG *)(LODWORD(v24) + 4)) )
-            (**(void (__thiscall ***)(float, int))LODWORD(v19))(COERCE_FLOAT(LODWORD(v19)), 1);
+          v15 = v20; /*0x572344*/
+          if ( !InterlockedDecrement((volatile LONG *)(LODWORD(v20) + 4)) ) /*0x57234a*/
+            (**(void (__thiscall ***)(float, int))LODWORD(v15))(COERCE_FLOAT(LODWORD(v15)), 1); /*0x572360*/
         }
-        v20 = *((_DWORD *)v12 + 3);
-        if ( v20 )
+        v16 = *((_DWORD *)v8 + 3); /*0x572362*/
+        if ( v16 ) /*0x572367*/
         {
-          if ( !InterlockedDecrement((volatile LONG *)(v20 + 4)) )
-            (**(void (__thiscall ***)(int, int))v20)(v20, 1);
-          v12[3] = 0.0;
+          if ( !InterlockedDecrement((volatile LONG *)(v16 + 4)) ) /*0x57236d*/
+            (**(void (__thiscall ***)(int, int))v16)(v16, 1); /*0x572383*/
+          v8[3] = 0.0; /*0x572385*/
         }
-        v21 = *((NiTPointerList_Node_void **)v23 + 0x579);
-        v15 = (BSTextureManager *)(v23 + 0x578);
-        if ( v21 )
+        v17 = *((_DWORD **)v19 + 0x579); /*0x57238c*/
+        v11 = v19 + 0x578; /*0x572392*/
+        if ( v17 ) /*0x57239a*/
         {
-          while ( 1 )
+          while ( 1 ) /*0x5723a0*/
           {
-            v16 = v12 == v21->data;
-            v22 = v21;
-            v21 = v21->next;
-            if ( v16 )
-              break;
-            if ( !v21 )
-              goto LABEL_38;
+            v12 = v8 == (float *)v17[2]; /*0x5723a0*/
+            v18 = *(float *)&v17; /*0x5723a6*/
+            v17 = (_DWORD *)*v17; /*0x5723a8*/
+            if ( v12 ) /*0x5723aa*/
+              break; /*0x5723aa*/
+            if ( !v17 ) /*0x5723ae*/
+              goto LABEL_38; /*0x5723ae*/
           }
         }
         else
         {
 LABEL_38:
-          *(float *)&v22 = 0.0;
+          v18 = 0.0; /*0x5723b0*/
         }
-        v25 = *(float *)&v22;
-        if ( *(float *)&v22 != 0.0 )
-          goto LABEL_23;
+        *(float *)&node = v18; /*0x5723b4*/
+        if ( v18 != 0.0 ) /*0x5723b8*/
+          goto LABEL_23; /*0x5723b8*/
 LABEL_24:
-        if ( v12 )
+        if ( v8 ) /*0x5722dd*/
         {
-          sub_571DF0(v12);
-          FormHeapFree((unsigned int)v12);
+          sub_571DF0(v8); /*0x5722e5*/
+          FormHeapFree((unsigned int)v8); /*0x5722eb*/
         }
 LABEL_41:
-        if ( !v11 )
-          return;
+        if ( !v7 ) /*0x5723cc*/
+          return; /*0x5723cc*/
       }
-      v14 = *((NiTPointerList_Node_void **)v23 + 0x579);
-      v15 = (BSTextureManager *)(v23 + 0x578);
-      if ( v14 )
+      v10 = *((_DWORD **)v19 + 0x579); /*0x5722a5*/
+      v11 = v19 + 0x578; /*0x5722ab*/
+      if ( v10 ) /*0x5722b3*/
       {
-        while ( 1 )
+        while ( 1 ) /*0x5722b5*/
         {
-          v16 = v12 == v14->data;
-          v17 = v14;
-          v14 = v14->next;
-          if ( v16 )
-            break;
-          if ( !v14 )
-            goto LABEL_21;
+          v12 = v8 == (float *)v10[2]; /*0x5722b5*/
+          v13 = *(float *)&v10; /*0x5722bb*/
+          v10 = (_DWORD *)*v10; /*0x5722bd*/
+          if ( v12 ) /*0x5722bf*/
+            break; /*0x5722bf*/
+          if ( !v10 ) /*0x5722c3*/
+            goto LABEL_21; /*0x5722c3*/
         }
       }
       else
       {
 LABEL_21:
-        *(float *)&v17 = 0.0;
+        v13 = 0.0; /*0x5722c5*/
       }
-      v25 = *(float *)&v17;
-      if ( *(float *)&v17 == 0.0 )
-        goto LABEL_24;
+      *(float *)&node = v13; /*0x5722c9*/
+      if ( v13 == 0.0 ) /*0x5722cd*/
+        goto LABEL_24; /*0x5722cd*/
 LABEL_23:
-      v12 = (float *)sub_7AA860(v15, (NiTPointerList_Node_void **)&v25);
-      goto LABEL_24;
+      v8 = (float *)NiTPointerList_RemoveNode(v11, &node); /*0x5722d9*/
+      goto LABEL_24; /*0x5722d9*/
     }
   }
 }

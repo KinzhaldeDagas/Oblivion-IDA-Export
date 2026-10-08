@@ -3,15 +3,15 @@ int __thiscall sub_8A2FB0(_DWORD *this, int a2, int a3)
   _DWORD **v4; // edi
   int result; // eax
 
-  if ( this )
+  if ( this ) /*0x8a2fb5*/
   {
-    v4 = (_DWORD **)*(this + 2);
-    if ( v4 )
+    v4 = (_DWORD **)*(this + 2); /*0x8a2fb8*/
+    if ( v4 ) /*0x8a2fbd*/
     {
-      sub_89F570(this);
-      sub_8A9E20(v4, a2, a3);
-      return sub_89F570(this);
+      bhkRefObject_UpdateHavokObject(this); /*0x8a2fbf*/
+      sub_8A9E20(v4, a2, a3); /*0x8a2fd0*/
+      return bhkRefObject_UpdateHavokObject(this); /*0x8a2fd7*/
     }
   }
-  return result;
+  return result; /*0x8a2fdd*/
 }

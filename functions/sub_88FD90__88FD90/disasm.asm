@@ -1,4 +1,4 @@
-0x88FD90: push    ebp
+0x88FD90: push    ebp; TES4 authoritative: basis projection helper, computes local components from basis columns and source vector without translation.
 0x88FD91: mov     ebp, esp
 0x88FD93: and     esp, 0FFFFFFF0h
 0x88FD96: mov     eax, [ebp+arg_0]

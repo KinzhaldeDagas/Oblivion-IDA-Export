@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x70C230",
-    "line": "sub     esp, 1Ch",
+    "line": "sub     esp, 1Ch; Pass329 decode: this camera-bound helper only fits near/far to the supplied source sphere (projected center +/- radius) and updates the camera. It does not recompute or overwrite ShadowSceneLight::Render's lateral FOV, so D1's remaining large-static silhouette cannot be assigned to a second lateral framing stage.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x70C29E",
-    "line": "fstp    [esp+20h+arg_0]",
+    "line": "fstp    [esp+20h+arg_0]; Pass328: NiCamera bound fitting derives near distance as projected center depth minus the supplied BSphere radius.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x70C2A5",
-    "line": "fstp    [esp+20h+var_1C]",
+    "line": "fstp    [esp+20h+var_1C]; Pass328: NiCamera bound fitting derives far distance as projected center depth plus the supplied BSphere radius; a temporary conservative radius also keeps native camera culling conservative.",
     "mnemonic": "fstp",
     "size": 4
   },

@@ -6,7 +6,7 @@
 0xA15CCD: push    0
 0xA15CCF: push    0
 0xA15CD1: push    8
-0xA15CD3: push    offset dword_BA9518
+0xA15CD3: push    offset unk_BA9518
 0xA15CD8: push    offset aHkrigidbodydea; "hkRigidBodyDeactivator"
 0xA15CDD: mov     ecx, offset unk_BA96EC
 0xA15CE2: call    sub_90D190

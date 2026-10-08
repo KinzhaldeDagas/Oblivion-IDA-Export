@@ -24,7 +24,6 @@
 0x8DB064: mov     ecx, edx
 0x8DB066: jge     short loc_8DB090
 0x8DB068: jmp     short loc_8DB070
-0x8DB06A: align 10h
 0x8DB070: mov     eax, [esi+1C04h]
 0x8DB076: mov     ebp, [eax+ecx*8+8]
 0x8DB07A: lea     eax, [eax+ecx*8]

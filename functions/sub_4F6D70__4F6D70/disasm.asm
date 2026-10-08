@@ -1,4 +1,4 @@
-0x4F6D70: fldz
+0x4F6D70: fldz; Shared GetInCell/GetInCellParam evaluator (553 and 4 vanilla core-root CTDAs, respectively). Param1 must be a Cell form. If param2 is a reference in Oblivion form-type range 0x31..0x33, test that reference; otherwise use the condition subject. Resolve its cell and compare editor-name strings case-insensitively over the requested Cell name length (a prefix comparison), not FormID pointer identity. GetInCellParam can run without a subject because it has an explicit ObjectReferenceID param2. Fallout analogue x4y6:0x823B6270 uses the same name comparison but recognizes reference type range 0x3A..0x40 or 0x69.
 0x4F6D72: mov     eax, [esp+arg_4]
 0x4F6D76: push    ebp
 0x4F6D77: mov     ebp, [esp+4+arg_C]
@@ -32,7 +32,7 @@
 0x4F6DC7: jz      short loc_4F6E0F
 0x4F6DC9: push    ebx
 0x4F6DCA: mov     ecx, esi; this
-0x4F6DCC: call    TESObjectREFR_GetParentCell
+0x4F6DCC: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x4F6DD1: mov     ebx, eax
 0x4F6DD3: test    ebx, ebx
 0x4F6DD5: jz      short loc_4F6E0E

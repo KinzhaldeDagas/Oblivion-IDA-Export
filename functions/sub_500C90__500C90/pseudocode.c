@@ -8,14 +8,14 @@ char __usercall sub_500C90@<al>(
 {
   int v6; // esi
 
-  v6 = sub_4533F0(SaveLoad_CurrentSavegame, (int)TESDataHandler_g_PlayerRef, 0);
-  sub_45A530(SaveLoad_CurrentSavegame, 1);
-  sub_464440((char *)SaveLoad_CurrentSavegame, a3, a4, a5, a6, 0);
-  SaveLoad_ValidateCreatedObj__((BSSimpleList_VoidPtr *)SaveLoad_CurrentSavegame);
-  sub_45A530(SaveLoad_CurrentSavegame, 0);
-  sub_45C320((BSSimpleList_VoidPtr *)SaveLoad_CurrentSavegame, a1, a2, a4, a5, a6);
-  sub_675310(&ActorProcessManager_ptr.middleHighActors, a4, a5, a6);
-  sub_447300((Sky **)TESDataHandler);
-  sub_663340((int)TESDataHandler_g_PlayerRef, a1, a4, a5, a6, v6);
-  return 1;
+  v6 = sub_4533F0(g_TESSaveLoadGame, (int)reference, 0); /*0x500cac*/
+  sub_45A530(g_TESSaveLoadGame, 1); /*0x500cae*/
+  TESSaveLoadGame_ReconcileExistingChanges(g_TESSaveLoadGame, a3, a4, a5, a6, 0); /*0x500cbb*/
+  TESSaveLoadGame_ProcessDeferredDeletions(g_TESSaveLoadGame); /*0x500cc6*/
+  sub_45A530(g_TESSaveLoadGame, 0); /*0x500cd3*/
+  sub_45C320((BSSimpleList_VoidPtr *)g_TESSaveLoadGame, a1, a2, a4, a5, a6); /*0x500cde*/
+  sub_675310((ActorList *)&qword_B3BB2C[0x75], a4, a5, a6); /*0x500ce8*/
+  sub_447300((TESHealthForm **)g_TESDataHandler); /*0x500cf3*/
+  sub_663340(reference, a4, a5, a3, v6); /*0x500cff*/
+  return 1; /*0x500d06*/
 }

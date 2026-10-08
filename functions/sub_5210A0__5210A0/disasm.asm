@@ -20,19 +20,19 @@
 0x5210D0: jb      short loc_5210C0
 0x5210D2: xor     eax, eax
 0x5210D4: cmp     eax, ebp
-0x5210D6: mov     [esp+1Ch+var_C], eax
+0x5210D6: mov     [esp+1Ch+position], eax
 0x5210DA: jz      loc_521173
 0x5210E0: push    ebx
-0x5210E1: lea     eax, [esp+20h+var_10]
-0x5210E5: push    eax
-0x5210E6: lea     ecx, [esp+24h+var_4]
-0x5210EA: push    ecx
-0x5210EB: lea     edx, [esp+28h+var_C]
-0x5210EF: push    edx
-0x5210F0: mov     ecx, edi
-0x5210F2: mov     [esp+2Ch+var_10], ebp
-0x5210F6: call    sub_452600
-0x5210FB: mov     esi, [esp+20h+var_10]
+0x5210E1: lea     eax, [esp+20h+valueOut]
+0x5210E5: push    eax; valueOut
+0x5210E6: lea     ecx, [esp+24h+keyOut]
+0x5210EA: push    ecx; keyOut
+0x5210EB: lea     edx, [esp+28h+position]
+0x5210EF: push    edx; position
+0x5210F0: mov     ecx, edi; self
+0x5210F2: mov     [esp+2Ch+valueOut], ebp
+0x5210F6: call    NiTMap_U32Pointer_GetNextEntry
+0x5210FB: mov     esi, [esp+20h+valueOut]
 0x5210FF: cmp     esi, ebp
 0x521101: jz      short loc_521168
 0x521103: mov     ebx, [esi+0Ch]
@@ -72,7 +72,7 @@
 0x52115E: mov     edi, [esp+20h+var_8]
 0x521162: mov     [esi+0Ch], ebp
 0x521165: mov     [esi+10h], ebp
-0x521168: cmp     [esp+20h+var_C], ebp
+0x521168: cmp     [esp+20h+position], ebp
 0x52116C: jnz     loc_5210E1
 0x521172: pop     ebx
 0x521173: pop     edi

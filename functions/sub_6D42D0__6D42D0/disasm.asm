@@ -9,7 +9,7 @@
 0x6D42E6: test    eax, eax
 0x6D42E8: jz      loc_6D43D8
 0x6D42EE: mov     edi, edi
-0x6D42F0: cmp     eax, offset dword_B3FA80
+0x6D42F0: cmp     eax, offset stru_B3FA80
 0x6D42F5: jz      short loc_6D4300
 0x6D42F7: mov     eax, [eax+4]
 0x6D42FA: test    eax, eax
@@ -29,7 +29,7 @@
 0x6D431A: call    edx
 0x6D431C: test    eax, eax
 0x6D431E: jz      short loc_6D432E
-0x6D4320: cmp     eax, offset dword_B3DBDC
+0x6D4320: cmp     eax, offset stru_B3DBDC
 0x6D4325: jz      short loc_6D4370
 0x6D4327: mov     eax, [eax+4]
 0x6D432A: test    eax, eax
@@ -41,8 +41,7 @@
 0x6D4337: test    eax, eax
 0x6D4339: jz      short loc_6D434E
 0x6D433B: jmp     short loc_6D4340
-0x6D433D: align 10h
-0x6D4340: cmp     eax, offset dword_B3DF34
+0x6D4340: cmp     eax, offset stru_B3DF34
 0x6D4345: jz      short loc_6D4378
 0x6D4347: mov     eax, [eax+4]
 0x6D434A: test    eax, eax
@@ -54,8 +53,7 @@
 0x6D4357: test    eax, eax
 0x6D4359: jz      short loc_6D4389
 0x6D435B: jmp     short loc_6D4360
-0x6D435D: align 10h
-0x6D4360: cmp     eax, offset dword_B3DDC0
+0x6D4360: cmp     eax, offset stru_B3DDC0
 0x6D4365: jz      short loc_6D4380
 0x6D4367: mov     eax, [eax+4]
 0x6D436A: test    eax, eax

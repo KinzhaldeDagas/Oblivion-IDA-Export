@@ -9,7 +9,7 @@
 0x682AAE: mov     esi, [esp+1BCh+arg_4]
 0x682AB5: push    edi
 0x682AB6: mov     edi, ecx
-0x682AB8: mov     ecx, offset stru_B3C000
+0x682AB8: mov     ecx, offset unk_B3C000
 0x682ABD: mov     [esp+1C0h+var_19C], esi
 0x682AC1: mov     [esp+1C0h+var_198], ebp
 0x682AC5: call    sub_49F470
@@ -53,7 +53,7 @@
 0x682B3D: jb      short loc_682B31
 0x682B3F: xor     ecx, ecx
 0x682B41: cmp     ecx, esi
-0x682B43: mov     [esp+1C0h+var_1A8], ecx
+0x682B43: mov     [esp+1C0h+position], ecx
 0x682B47: jz      loc_682BFF
 0x682B4D: jmp     short loc_682B59
 0x682B4F: mov     eax, [ebp+8]
@@ -61,15 +61,15 @@
 0x682B55: jmp     short loc_682B41
 0x682B57: xor     esi, esi
 0x682B59: lea     ecx, [esp+1C0h+var_1B0]
-0x682B5D: push    ecx
+0x682B5D: push    ecx; valueOut
 0x682B5E: lea     edx, [esp+1C4h+var_1AC]
-0x682B62: push    edx
-0x682B63: lea     eax, [esp+1C8h+var_1A8]
-0x682B67: push    eax
-0x682B68: mov     ecx, ebp
+0x682B62: push    edx; keyOut
+0x682B63: lea     eax, [esp+1C8h+position]
+0x682B67: push    eax; position
+0x682B68: mov     ecx, ebp; self
 0x682B6A: mov     [esp+1CCh+var_1AC], esi
 0x682B6E: mov     [esp+1CCh+var_1B0], esi
-0x682B72: call    sub_452600
+0x682B72: call    NiTMap_U32Pointer_GetNextEntry
 0x682B77: mov     esi, [esp+1C0h+var_1AC]
 0x682B7B: test    esi, esi
 0x682B7D: jz      short loc_682BF2
@@ -110,7 +110,7 @@
 0x682BEA: cmp     ebx, eax
 0x682BEC: mov     [esp+1C0h+var_1A0], ebx
 0x682BF0: jg      short loc_682BFD
-0x682BF2: cmp     [esp+1C0h+var_1A8], 0
+0x682BF2: cmp     [esp+1C0h+position], 0
 0x682BF7: jnz     loc_682B57
 0x682BFD: xor     esi, esi
 0x682BFF: mov     edx, [edi+24h]
@@ -128,22 +128,22 @@
 0x682C1C: jb      short loc_682C10
 0x682C1E: xor     eax, eax
 0x682C20: cmp     eax, esi
-0x682C22: mov     [esp+1C0h+var_1A8], eax
+0x682C22: mov     [esp+1C0h+position], eax
 0x682C26: jz      loc_682CDD
 0x682C2C: jmp     short loc_682C36
 0x682C2E: mov     eax, [ebp+eax*4+0]
 0x682C32: jmp     short loc_682C20
 0x682C34: xor     esi, esi
 0x682C36: lea     ecx, [esp+1C0h+var_1AC]
-0x682C3A: push    ecx
+0x682C3A: push    ecx; valueOut
 0x682C3B: lea     edx, [esp+1C4h+var_1B0]
-0x682C3F: push    edx
-0x682C40: lea     eax, [esp+1C8h+var_1A8]
-0x682C44: push    eax
-0x682C45: lea     ecx, [edi+20h]
+0x682C3F: push    edx; keyOut
+0x682C40: lea     eax, [esp+1C8h+position]
+0x682C44: push    eax; position
+0x682C45: lea     ecx, [edi+20h]; self
 0x682C48: mov     [esp+1CCh+var_1B0], esi
 0x682C4C: mov     [esp+1CCh+var_1AC], esi
-0x682C50: call    sub_452600
+0x682C50: call    NiTMap_U32Pointer_GetNextEntry
 0x682C55: mov     esi, [esp+1C0h+var_1B0]
 0x682C59: test    esi, esi
 0x682C5B: jz      short loc_682CD0
@@ -184,7 +184,7 @@
 0x682CC8: cmp     ebx, eax
 0x682CCA: mov     [esp+1C0h+var_1A0], ebx
 0x682CCE: jg      short loc_682CDB
-0x682CD0: cmp     [esp+1C0h+var_1A8], 0
+0x682CD0: cmp     [esp+1C0h+position], 0
 0x682CD5: jnz     loc_682C34
 0x682CDB: xor     esi, esi
 0x682CDD: mov     ecx, [edi+3Ch]
@@ -225,22 +225,22 @@
 0x682D4D: jb      short loc_682D41
 0x682D4F: xor     eax, eax
 0x682D51: cmp     eax, esi
-0x682D53: mov     [esp+1C0h+var_1A8], eax
+0x682D53: mov     [esp+1C0h+position], eax
 0x682D57: jz      loc_682E21
 0x682D5D: jmp     short loc_682D67
 0x682D5F: mov     eax, [ebp+eax*4+0]
 0x682D63: jmp     short loc_682D51
 0x682D65: xor     esi, esi
 0x682D67: lea     eax, [esp+1C0h+var_1AC]
-0x682D6B: push    eax
+0x682D6B: push    eax; valueOut
 0x682D6C: lea     ecx, [esp+1C4h+var_1B0]
-0x682D70: push    ecx
-0x682D71: lea     edx, [esp+1C8h+var_1A8]
-0x682D75: push    edx
-0x682D76: mov     ecx, edi
+0x682D70: push    ecx; keyOut
+0x682D71: lea     edx, [esp+1C8h+position]
+0x682D75: push    edx; position
+0x682D76: mov     ecx, edi; self
 0x682D78: mov     [esp+1CCh+var_1B0], esi
 0x682D7C: mov     [esp+1CCh+var_1AC], esi
-0x682D80: call    sub_452600
+0x682D80: call    NiTMap_U32Pointer_GetNextEntry
 0x682D85: mov     esi, [esp+1C0h+var_1B0]
 0x682D89: test    esi, esi
 0x682D8B: jz      loc_682E16
@@ -285,14 +285,14 @@
 0x682E0E: cmp     eax, ecx
 0x682E10: mov     [esp+1C0h+var_1A4], eax
 0x682E14: jg      short loc_682E21
-0x682E16: cmp     [esp+1C0h+var_1A8], 0
+0x682E16: cmp     [esp+1C0h+position], 0
 0x682E1B: jnz     loc_682D65
 0x682E21: mov     edx, [esp+1C0h+var_19C]
 0x682E25: mov     eax, [esp+1C0h+var_198]
 0x682E29: mov     ecx, [esp+1C0h+var_1A4]
 0x682E2D: mov     [edx], ebx
 0x682E2F: mov     [eax], ecx
-0x682E31: mov     ecx, offset stru_B3C000
+0x682E31: mov     ecx, offset unk_B3C000
 0x682E36: call    j_NiLeaveCriticalSection_0
 0x682E3B: mov     ecx, [esp+1C0h+var_4]
 0x682E42: pop     edi

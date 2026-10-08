@@ -1,7 +1,7 @@
 _DWORD *sub_A15F40()
 {
-  return sub_90D190(
-           dword_BA99F8,
+  return sub_90D190( /*0xa15f67*/
+           unk_BA99F8,
            (int)"hkMonitorStreamFrameInfo",
            0,
            0x18,

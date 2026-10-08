@@ -1,1 +1,1 @@
-LPBC
+typedef IBindCtx_0 *LPBC;

@@ -1,29 +1,30 @@
-void __usercall sub_478CE0(char *this@<ecx>, char a2@<bpl>, double a3@<st2>, double a4@<st1>, double a5@<st0>)
+// Clears ActorSkinInfo weapon form/model/3D state and, when the owning non-creature still has its weapon out, schedules the appropriate ActorAnimData equipment refresh. ActorSkinInfo and ActorAnimData are distinct objects.
+void __thiscall ActorSkinInfo_ClearWeaponSlot(ActorSkinInfo *this)
 {
-  Actor *v6; // edi
-  _DWORD *AnimData; // eax
+  Actor *owner; // edi
+  _DWORD *AnimDataByPerspective; // eax
 
-  sub_478780(this, a2, a3, a4, a5, (int)(this + 0xDC), 1, 0);
-  if ( (*(unsigned __int8 (__thiscall **)(_DWORD))(**((_DWORD **)this + 0x54) + 0x190))(*((_DWORD *)this + 0x54)) )
+  ActorSkinInfo_ClearOrReplaceEquipmentSlot(this, (ActorSkinInfoEquipmentSlot *)&this->WeaponForm, 1, 0); /*0x478cee*/
+  if ( this->owner->vtbl->super.super.IsActor((TESObjectREFR *)this->owner) ) /*0x478d01*/
   {
-    v6 = *((Actor **)this + 0x54);
-    if ( !Actor_IsCreature(v6) )
+    owner = this->owner; /*0x478d08*/
+    if ( !Actor_IsCreature(owner) ) /*0x478d10*/
     {
-      if ( v6->members.super.process )
+      if ( owner->members.super.process ) /*0x478d19*/
       {
-        if ( Actor_IsWeaponOut(v6) )
+        if ( Actor_IsWeaponOut(owner) ) /*0x478d21*/
         {
-          if ( *((PlayerCharacter **)this + 0x54) == TESDataHandler_g_PlayerRef
-            && this == (char *)sub_6600D0(TESDataHandler_g_PlayerRef, 1) )
+          if ( (PlayerCharacter *)this->owner == reference /*0x478d41*/
+            && this == Actor_GetSkinInfoByPerspective((Actor *)reference, 1) )
           {
-            AnimData = Player_GetAnimData((Actor *)TESDataHandler_g_PlayerRef, 1);
+            AnimDataByPerspective = PlayerCharacter_GetAnimDataByPerspective(reference, 1); /*0x478d4b*/
           }
           else
           {
-            AnimData = TESObjectREFR_GetAnimData(v6);
+            AnimDataByPerspective = TESObjectREFR_GetAnimData(owner); /*0x478d54*/
           }
-          if ( AnimData )
-            AnimData[0x32] = v6;
+          if ( AnimDataByPerspective ) /*0x478d5b*/
+            AnimDataByPerspective[0x32] = owner; /*0x478d5d*/
         }
       }
     }

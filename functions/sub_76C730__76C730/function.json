@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
-  "callers_count": 10,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 74,
+  "chunks": [
+    [
+      "0x76C730",
+      "0x76C75C"
+    ]
+  ],
+  "chunks_sha256": "ffdb263aec73e95f1522b0bc74876abe5bc6d670a31819b7ae76b0e5cf5986ec",
+  "comment_regular": "Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
+  "comment_repeatable": "Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_76C730",
+  "display_name": "NiD3DPass_SetRenderState",
   "end_ea": "0x76C75C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_76C730",
+  "name": "NiD3DPass_SetRenderState",
   "segment": ".text",
   "sha256": "ffdb263aec73e95f1522b0bc74876abe5bc6d670a31819b7ae76b0e5cf5986ec",
   "size": 44,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x76C730",
-  "type": "char __thiscall(_DWORD *this, int, int, char)",
+  "total_chunk_size": 44,
+  "type": "char __thiscall(NiD3DPass *this, int state, unsigned int value, char restore)",
   "xrefs_from_count": 18,
   "xrefs_to_count": 74
 }

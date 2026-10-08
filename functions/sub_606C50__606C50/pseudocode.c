@@ -1,116 +1,107 @@
-void __usercall sub_606C50(_DWORD *this@<ecx>, int a2@<ebp>)
+// Verified package persistence virtual SaveGame from vtable slot E0, matching paired implementations, package source-file diagnostics and BaseProcess dispatch. ECX object, no stack arguments. Previous indexed-vtable casts into TESForm components were caused by missing package-tail type.
+// Verified: after base package data and optional BLOK envelope, saves UInt16 count then records {crimeType byte from Crime+4, UInt16 manager-list index};3 bytes per crime, not actor FormIDs. Alarm list nodes reference manager-owned crime records. Fallout old AlarmPackage writer8274B2B8 instead writes zero count without this loop; divergence verified from respective code.
+void __thiscall AlarmPackage_SaveGame(AlarmPackage *self)
 {
-  bool v4; // zf
-  TESSaveLoad *v5; // ecx
-  UInt32 v6; // eax
-  TESSaveLoad *v7; // ecx
-  TESSaveLoad *v8; // ecx
-  TESSaveLoad *v9; // ecx
-  _WORD *v10; // ebp
-  int *i; // esi
-  int v12; // edi
-  TESSaveLoad *v13; // ecx
-  unsigned __int16 v14; // ax
-  TESSaveLoad *v15; // ecx
-  UInt32 *v16; // edi
-  UInt32 v17; // esi
-  TESForm *v18; // eax
-  const char *v19; // eax
-  _WORD *v20; // edi
-  unsigned int v21; // esi
-  int v22; // [esp-Ch] [ebp-2Ch]
-  size_t v23; // [esp-8h] [ebp-28h]
-  size_t v24; // [esp-8h] [ebp-28h]
-  size_t v25; // [esp-8h] [ebp-28h]
-  int v26; // [esp-8h] [ebp-28h]
-  size_t v27; // [esp-4h] [ebp-24h]
-  size_t v28; // [esp-4h] [ebp-24h]
-  const char *v29; // [esp-4h] [ebp-24h]
-  char v30; // [esp+Bh] [ebp-15h] BYREF
-  int v31; // [esp+Ch] [ebp-14h] BYREF
-  UInt32 v32; // [esp+10h] [ebp-10h]
-  UInt32 v33; // [esp+14h] [ebp-Ch]
+  bool v2; // zf
+  TESSaveLoadGame_SerializationView *v3; // ecx
+  unsigned __int8 *bufferCursor; // eax
+  TESSaveLoadGame_SerializationView *v5; // ecx
+  TESSaveLoadGame_SerializationView *v6; // ecx
+  TESSaveLoadGame_SerializationView *v7; // ecx
+  unsigned __int8 *v8; // ebp
+  CrimeListNode *i; // esi
+  Crime *crime; // edi
+  TESSaveLoadGame_SerializationView *v11; // ecx
+  unsigned __int16 CrimeIndex; // ax
+  TESSaveLoadGame_SerializationView *v13; // ecx
+  UInt32 *currentlySavingFormHeader; // edi
+  unsigned __int8 *v15; // esi
+  TESForm *v16; // eax
+  const char *v17; // eax
+  unsigned __int8 *v18; // edi
+  unsigned __int8 *v19; // esi
+  int v20; // [esp-Ch] [ebp-2Ch]
+  int v21; // [esp-8h] [ebp-28h]
+  const char *v22; // [esp-4h] [ebp-24h]
+  char category; // [esp+Bh] [ebp-15h] BYREF
+  int v24; // [esp+Ch] [ebp-14h] BYREF
+  unsigned __int8 *v25; // [esp+10h] [ebp-10h]
+  unsigned __int8 *v26; // [esp+14h] [ebp-Ch]
   int Src; // [esp+18h] [ebp-8h] BYREF
-  int v35; // [esp+1Ch] [ebp-4h] BYREF
+  int source; // [esp+1Ch] [ebp-4h] BYREF
 
-  sub_567E00(this);
-  v4 = Global_DebugSaveBuffer == 0;
-  v5 = SaveLoad_CurrentSavegame;
-  v35 = 0;
-  v6 = v5->unk000[5];
-  v33 = 0;
-  v32 = v6;
-  if ( !v4 )
-    v32 = v6;
-  if ( sub_45A170() )
+  TESPackage_SaveGame(&self->base); /*0x606c57*/
+  v2 = Global_DebugSaveBuffer == 0; /*0x606c5c*/
+  v3 = g_TESSaveLoadGame; /*0x606c63*/
+  source = 0; /*0x606c69*/
+  bufferCursor = v3->bufferCursor; /*0x606c71*/
+  v26 = 0; /*0x606c74*/
+  v25 = bufferCursor; /*0x606c7c*/
+  if ( !v2 ) /*0x606c80*/
+    v25 = bufferCursor; /*0x606c82*/
+  if ( TESSaveLoadGame_UseSaveGameBlocks() ) /*0x606c86*/
   {
-    v7 = SaveLoad_CurrentSavegame;
-    LODWORD(v27) = 4;
-    Src = 0x4B4F4C42;
-    SaveLoad_SaveData((int)v7, &Src, v27);
-    v8 = SaveLoad_CurrentSavegame;
-    LODWORD(v28) = 2;
-    v33 = SaveLoad_CurrentSavegame->unk000[5];
-    SaveLoad_SaveData((int)v8, &v35, v28);
+    v5 = g_TESSaveLoadGame; /*0x606c8f*/
+    Src = 0x4B4F4C42; /*0x606c9c*/
+    SaveLoad_SaveData(v5, &Src, 4u); /*0x606ca4*/
+    v6 = g_TESSaveLoadGame; /*0x606ca9*/
+    v26 = g_TESSaveLoadGame->bufferCursor; /*0x606cb9*/
+    SaveLoad_SaveData(v6, &source, 2u); /*0x606cbd*/
   }
-  v9 = SaveLoad_CurrentSavegame;
-  HIDWORD(v23) = a2;
-  LODWORD(v23) = 2;
-  v31 = 0;
-  v10 = (_WORD *)v9->unk000[5];
-  SaveLoad_SaveData((int)v9, &v31, v23);
-  for ( i = (int *)*(this + 0xF); i; i = (int *)i[1] )
+  v7 = g_TESSaveLoadGame; /*0x606cc2*/
+  v24 = 0; /*0x606ccf*/
+  v8 = v7->bufferCursor; /*0x606cd7*/
+  SaveLoad_SaveData(v7, &v24, 2u); /*0x606cdb*/
+  for ( i = self->crimes; i; i = i->next ) /*0x606ce5*/
   {
-    if ( !i[1] && !*i )
-      break;
-    v12 = *i;
-    LODWORD(v24) = 1;
-    v13 = SaveLoad_CurrentSavegame;
-    v30 = *(_BYTE *)(*i + 4);
-    SaveLoad_SaveData((int)v13, &v30, v24);
-    v14 = sub_675CC0(&ActorProcessManager_ptr, v30, v12);
-    LODWORD(v25) = 2;
-    v15 = SaveLoad_CurrentSavegame;
-    Src = v14;
-    SaveLoad_SaveData((int)v15, &Src, v25);
-    ++v31;
+    if ( !i->next && !i->crime ) /*0x606ced*/
+      break; /*0x606cf0*/
+    crime = i->crime; /*0x606cf2*/
+    v11 = g_TESSaveLoadGame; /*0x606cfe*/
+    category = i->crime->category; /*0x606d04*/
+    SaveLoad_SaveData(v11, &category, 1u); /*0x606d08*/
+    CrimeIndex = ActorProcessManager_GetCrimeIndex((ActorProcessManager *)&qword_B3BB2C[0x75], category, crime); /*0x606d19*/
+    v13 = g_TESSaveLoadGame; /*0x606d28*/
+    Src = CrimeIndex; /*0x606d2e*/
+    SaveLoad_SaveData(v13, &Src, 2u); /*0x606d32*/
+    ++v24; /*0x606d37*/
   }
-  *v10 = v31;
+  *(_WORD *)v8 = v24; /*0x606d48*/
   if ( Global_DebugSaveBuffer )
   {
-    v16 = (UInt32 *)SaveLoad_CurrentSavegame[1].unk030[1];
-    v17 = SaveLoad_CurrentSavegame->unk000[5];
-    if ( v16 )
+    currentlySavingFormHeader = (UInt32 *)g_TESSaveLoadGame->currentlySavingFormHeader; /*0x606d5b*/
+    v15 = g_TESSaveLoadGame->bufferCursor; /*0x606d63*/
+    if ( currentlySavingFormHeader )
     {
-      v18 = TESForm_LookupByFormID(*v16);
-      v19 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, int, const char *))v18->vtbl->GetEditorName)(
-                            v18,
-                            *(UInt32 *)((char *)v16 + 5),
+      v16 = TESForm_LookupByFormID(*currentlySavingFormHeader); /*0x606d6b*/
+      v17 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, int, const char *))v16->vtbl->GetEditorName)( /*0x606d8b*/
+                            v16,
+                            *(UInt32 *)((char *)currentlySavingFormHeader + 5),
                             0x216,
                             ".\\AI\\AlarmPackage.cpp");
       sub_40FEC0(
         "SaveGame(): %-5i for form %08X %s with flags %08X ending at line %i in file %s",
-        v17 - v32,
-        *v16,
-        v19,
-        v22,
-        v26,
-        v29);
+        v15 - v25,
+        *currentlySavingFormHeader,
+        v17,
+        v20,
+        v21,
+        v22);
     }
     else
     {
-      sub_40FEC0("SaveGame(): %-5i ending at line %i in file %s", v17 - v32, 0x216, ".\\AI\\AlarmPackage.cpp");
+      sub_40FEC0("SaveGame(): %-5i ending at line %i in file %s", v15 - v25, 0x216, ".\\AI\\AlarmPackage.cpp");
     }
   }
-  if ( sub_45A170() )
+  if ( TESSaveLoadGame_UseSaveGameBlocks() ) /*0x606dc7*/
   {
-    v20 = (_WORD *)v33;
-    v21 = SaveLoad_CurrentSavegame->unk000[5];
-    if ( v21 > v33 + 0xFFFF )
-      PrintError(
+    v18 = v26; /*0x606dd6*/
+    v19 = g_TESSaveLoadGame->bufferCursor; /*0x606dda*/
+    if ( v19 > v26 + 0xFFFF ) /*0x606de5*/
+      PrintError( /*0x606df6*/
         "Save Game Block in file %s on line %i is greater than maximum short size",
         ".\\AI\\AlarmPackage.cpp",
         0x216);
-    *v20 = v21 - (_WORD)v20;
+    *(_WORD *)v18 = (_WORD)v19 - (_WORD)v18; /*0x606e00*/
   }
 }

@@ -17,9 +17,9 @@
 0x57E7F3: and     word ptr [eax+18h], 0FFFEh
 0x57E7F9: push    ecx
 0x57E7FA: mov     ecx, [esi+1Ch]; this
-0x57E7FD: fstp    [esp+3Ch+var_3C]; a3
-0x57E800: push    0FA1h; a2
-0x57E805: call    Tile_SetFloat
+0x57E7FD: fstp    [esp+3Ch+var_3C]; value
+0x57E800: push    0FA1h; propertyCode
+0x57E805: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x57E80A: push    1; a2
 0x57E80C: mov     ecx, edi; this
 0x57E80E: call    InputGlobals__GetMouseAxisMovement
@@ -39,7 +39,7 @@
 0x57E83F: call    sub_57E330
 0x57E844: fsub    qword ptr ds:0A3D0C0h
 0x57E84A: fstp    [esp+38h+var_20]
-0x57E84E: call    sub_57D7A0
+0x57E84E: call    UI_GetVirtualScreenWidth; Returns virtual UI width: 1280 for portrait/square, otherwise aspect*960. Layout coordinates are independent of output pixel resolution.
 0x57E853: fidiv   dword ptr ds:0B06C4Ch
 0x57E859: fimul   dword ptr [esp+38h+var_30]
 0x57E85D: fadd    dword ptr [esp+2Ch]
@@ -81,7 +81,7 @@
 0x57E8D2: fstp    [esp+38h+var_30]
 0x57E8D6: fld     [esp+38h+var_4]
 0x57E8DA: fstp    [esp+38h+var_18]
-0x57E8DE: call    sub_57D7F0
+0x57E8DE: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x57E8E3: fidiv   dword ptr ds:0B06C50h
 0x57E8E9: fimul   dword ptr [esp+14h]
 0x57E8ED: fsubr   [esp+38h+var_18]
@@ -142,7 +142,7 @@
 0x57E998: fstp    dword ptr [esp+38h+var_30]
 0x57E99C: fld     dword ptr [esp+38h+var_30]
 0x57E9A0: fstp    [esp+38h+var_18]
-0x57E9A4: call    sub_57D7A0
+0x57E9A4: call    UI_GetVirtualScreenWidth; Returns virtual UI width: 1280 for portrait/square, otherwise aspect*960. Layout coordinates are independent of output pixel resolution.
 0x57E9A9: fdivr   [esp+38h+var_18]
 0x57E9AD: mov     ecx, [esi+1Ch]
 0x57E9B0: push    0FABh
@@ -161,7 +161,7 @@
 0x57E9E9: fmul    st, st(1)
 0x57E9EB: fstp    [esp+38h+var_20]
 0x57E9EF: fstp    [esp+38h+var_18]
-0x57E9F3: call    sub_57D7F0
+0x57E9F3: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x57E9F8: fdivr   [esp+38h+var_18]
 0x57E9FC: fmul    dword ptr [esi+28h]
 0x57E9FF: fsubr   [esp+38h+var_20]
@@ -172,7 +172,7 @@
 0x57EA0B: fstp    [esp+40h+a2]; a2
 0x57EA0E: mov     ecx, [esi+1Ch]
 0x57EA11: mov     ecx, [ecx+24h]; this
-0x57EA14: call    NiAVObject_UpdateNiAVObject
+0x57EA14: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x57EA19: pop     edi
 0x57EA1A: pop     esi
 0x57EA1B: mov     esp, ebp

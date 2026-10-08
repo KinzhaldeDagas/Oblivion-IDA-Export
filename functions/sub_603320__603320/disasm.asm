@@ -8,13 +8,13 @@
 0x603330: jz      short loc_603354
 0x603332: mov     eax, [esi]
 0x603334: mov     edx, [eax+164h]
-0x60333A: push    1
+0x60333A: push    1; slot
 0x60333C: mov     ecx, esi
 0x60333E: call    edx
-0x603340: mov     ecx, eax
-0x603342: call    ActorAnimData_GetAnimGroupFromField8Value
+0x603340: mov     ecx, eax; this
+0x603342: call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.
 0x603347: push    eax
-0x603348: call    sub_51AC80
+0x603348: call    AnimGroup_UsesAttackOrCastNoteTemplate; Returns true when the encoded key is not group 0xFF and the fixed Oblivion group record's note-template class is 4, 5, 6, or 7. Those classes cover AttackLeft/Right, power attacks, BlockAttack, AttackBow, and cast groups. This is a fixed-table classifier, not dynamic group registration.
 0x60334D: add     esp, 4
 0x603350: mov     bl, al
 0x603352: jmp     short loc_603356
@@ -127,7 +127,7 @@
 0x60347B: push    1
 0x60347D: push    ecx
 0x60347E: mov     ecx, esi
-0x603480: call    Actor_EquipItem
+0x603480: call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.
 0x603485: mov     ecx, [esi+58h]
 0x603488: mov     edx, [ecx]
 0x60348A: mov     eax, [edx+460h]

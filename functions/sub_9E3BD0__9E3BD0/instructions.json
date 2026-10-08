@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x9E3BD0",
-    "line": "fld     ds:flt_A3D65C",
+    "line": "fld     ds:kHeadBodyNormalMatchRadius",
     "mnemonic": "fld",
     "size": 6
   },
@@ -25,13 +25,13 @@
   },
   {
     "ea": "0x9E3BDF",
-    "line": "mov     ecx, offset fNPCGeneticVariation",
+    "line": "mov     ecx, (offset dword_B361CC+108h)",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x9E3BE4",
-    "line": "call    GameSetting_ConstrAndReg_float",
+    "line": "call    GameSetting_ConstrAndReg_float; Registers fNPCGeneticVariation with default 0.5; value storage is g_fNPCGeneticVariation at 0xB362D4.",
     "mnemonic": "call",
     "size": 5
   },

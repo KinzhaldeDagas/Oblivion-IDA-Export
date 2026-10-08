@@ -1,4 +1,5 @@
-char __userpurge sub_5F2820@<al>(
+// Oblivion actor line-of-sight query used by detection, combat reach, tactical refresh, and ray-cast script paths. Performs cell/world-space and Havok visibility tests and can report the viewed actor segment through the output parameter. Fallout corroborates the Actor::LineOfSight family name only.
+char __userpurge Actor_LineOfSight@<al>(
         Actor *this@<ecx>,
         double st7_0@<st0>,
         char arg0,
@@ -36,223 +37,221 @@ char __userpurge sub_5F2820@<al>(
   CombatController *(__thiscall *GetCombatController)(Actor *); // edx
   int v36; // ebx
   int v37; // eax
-  char v38; // al
-  int v39; // eax
-  char v40; // al
-  int v41; // esi
-  NiNode *v42; // eax
-  _DWORD *v43; // ecx
-  bool v44; // zf
-  char v45; // [esp+33h] [ebp-199h]
+  int v38; // eax
+  int v39; // esi
+  NiAVObject *v40; // eax
+  _DWORD *v41; // ecx
+  bool v42; // zf
+  char v43; // [esp+33h] [ebp-199h]
+  float v44; // [esp+34h] [ebp-198h]
+  float v45; // [esp+34h] [ebp-198h]
   float v46; // [esp+34h] [ebp-198h]
   float v47; // [esp+34h] [ebp-198h]
-  float v48; // [esp+34h] [ebp-198h]
-  float v49; // [esp+34h] [ebp-198h]
-  TESObjectCELL *ParentCell; // [esp+38h] [ebp-194h]
-  TESObjectCELL *v51; // [esp+38h] [ebp-194h]
-  TESObjectCELL *v52; // [esp+38h] [ebp-194h]
-  PlayerCharacter *v53; // [esp+40h] [ebp-18Ch]
-  NiPoint3 v54; // [esp+48h] [ebp-184h] BYREF
+  TESObjectCELL *DwordAtOffset40; // [esp+38h] [ebp-194h]
+  TESObjectCELL *v49; // [esp+38h] [ebp-194h]
+  TESObjectCELL *v50; // [esp+38h] [ebp-194h]
+  PlayerCharacter *v51; // [esp+40h] [ebp-18Ch]
+  NiPoint3 v52; // [esp+48h] [ebp-184h] BYREF
   NiPoint3 a2; // [esp+54h] [ebp-178h] BYREF
-  TESObjectREFR v56; // [esp+60h] [ebp-16Ch] BYREF
-  __m128 v57; // [esp+BCh] [ebp-110h] BYREF
-  __m128 v58; // [esp+CCh] [ebp-100h]
-  bhkWorldRayCastData v59; // [esp+DCh] [ebp-F0h] BYREF
-  int v60[28]; // [esp+15Ch] [ebp-70h] BYREF
+  TESObjectREFR v54; // [esp+60h] [ebp-16Ch] BYREF
+  __m128 v55; // [esp+BCh] [ebp-110h] BYREF
+  __m128 v56; // [esp+CCh] [ebp-100h]
+  bhkWorldRayCastData v57; // [esp+DCh] [ebp-F0h] BYREF
+  int v58[28]; // [esp+15Ch] [ebp-70h] BYREF
 
-  v7 = a3;
-  v45 = 0;
-  v53 = 0;
-  if ( !a3 || !a3->vtbl->GetNiNode(a3) || a3->vtbl->IsDead(a3, 0) && this->vtbl->IsInCombat(this, 1) )
-    return 0;
-  v9 = dword_B14904 - 5;
-  v10 = flt_B33E9C;
-  this->members.super.process->unk010 = this->members.super.process->unk010 + v10;
-  if ( Double_To_SInt32(st7_0) < 0x14 )
-    v9 = dword_B148FC;
-  if ( dword_B333BC > v9 )
+  v7 = a3; /*0x5f2860*/
+  v43 = 0; /*0x5f2872*/
+  v51 = 0; /*0x5f2877*/
+  if ( !a3 || !a3->vtbl->GetNiNode(a3) || a3->vtbl->IsDead(a3, 0) && this->vtbl->IsInCombat(this, 1) ) /*0x5f28b7*/
+    return 0; /*0x5f28bb*/
+  v9 = dword_B14904 - 5; /*0x5f28d7*/
+  v10 = *(float *)&MEMORY[0xB33E90][0xC]; /*0x5f28de*/
+  this->members.super.process->unk010 = this->members.super.process->unk010 + v10;// MEF v30 line-of-sight proof: EAX is loaded directly from Actor/ESI +0x58 immediately before the guarded fld [eax+0x10] at 0x005F28D4. /*0x5f28e4*/
+  if ( Double_To_SInt32(st7_0) < 0x14 ) /*0x5f28f3*/
+    v9 = dword_B148FC; /*0x5f28f5*/
+  if ( unk_B333BC > v9 ) /*0x5f2901*/
   {
-    if ( (this == (Actor *)TESDataHandler_g_PlayerRef || this->vtbl->IsInCombat(this, 1)) && dword_B3B914 > dword_B148E4 )
+    if ( (this == (Actor *)reference || this->vtbl->IsInCombat(this, 1)) && unk_B3B914 > g_iMaxHiPerfCombatCount_Combat ) /*0x5f292d*/
     {
-      if ( a6 )
-        *a6 = 1;
-      return 1;
+      if ( a6 ) /*0x5f2939*/
+        *a6 = 1; /*0x5f293b*/
+      return 1; /*0x5f2943*/
     }
-    return 0;
+    return 0; /*0x5f2e48*/
   }
-  if ( ((unsigned __int8 (__usercall *)@<al>(TESObjectREFR *@<ecx>, double@<st0>))a3->vtbl->IsActor)(a3, st7_0) )
-    v53 = (PlayerCharacter *)a3;
-  if ( !arg0 )
-    return ((int (__thiscall *)(LowProcess *, Actor *, PlayerCharacter *))this->members.super.process->Unk_70)(
+  if ( ((unsigned __int8 (__usercall *)@<al>(TESObjectREFR *@<ecx>, double@<st0>))a3->vtbl->IsActor)(a3, st7_0) ) /*0x5f2952*/
+    v51 = (PlayerCharacter *)a3; /*0x5f2958*/
+  if ( !arg0 ) /*0x5f2960*/
+    return ((int (__thiscall *)(LowProcess *, Actor *, PlayerCharacter *))this->members.super.process->Unk_70)( /*0x5f2979*/
              this->members.super.process,
              this,
-             v53);
-  if ( a6 )
-    *a6 = 3;
-  sub_4121A0(
+             v51);
+  if ( a6 ) /*0x5f2984*/
+    *a6 = 3; /*0x5f2986*/
+  sub_4121A0( /*0x5f299d*/
     a3->member.pos,
-    (float *)&v56.member.baseExtraList.members.m_presenceBitfield[4],
+    (float *)&v54.member.baseExtraList.members.m_presenceBitfield[4],
     this->members.super.super.pos);
-  v46 = sub_683CB0((float *)&v56.member.baseExtraList.members.m_presenceBitfield[4]);
-  sub_683D80((int)this, v46, (int)v56.member.baseExtraList.members.m_presenceBitfield);
-  v47 = 1.0 / v10;
-  v48 = fabs(v47);
-  if ( v48 >= dbl_A6E750 && !a7 )
-    return v45;
-  if ( !byte_B3B77C )
+  v44 = Vector3_CalculateHeadingRadiansXY((float *)&v54.member.baseExtraList.members.m_presenceBitfield[4]); /*0x5f29af*/
+  sub_683D80((int)this, v44, (float *)v54.member.baseExtraList.members.m_presenceBitfield); /*0x5f29c7*/
+  v45 = 1.0 / v10; /*0x5f29cc*/
+  v46 = fabs(v45); /*0x5f29d9*/
+  if ( v46 >= dbl_A6E750 && !a7 ) /*0x5f29f2*/
+    return v43; /*0x5f2e46*/
+  if ( !unk_B3B77C ) /*0x5f29ff*/
   {
-    ParentCell = TESObjectREFR_GetParentCell((TESObjectREFR *)this);
-    if ( !ParentCell )
-      return 0;
-    v12 = this->members.super.super.pos[0];
-    v13 = this->members.super.super.pos[2];
-    v54.y = this->members.super.super.pos[1];
-    v54.x = v12;
-    v54.z = v13;
-    if ( a5 )
-      v14 = sub_5E40C0(this);
+    DwordAtOffset40 = (TESObjectCELL *)Shared_GetDwordAtOffset40(this); /*0x5f2a1f*/
+    if ( !DwordAtOffset40 ) /*0x5f2a23*/
+      return 0; /*0x5f2a23*/
+    v12 = this->members.super.super.pos[0]; /*0x5f2a30*/
+    v13 = this->members.super.super.pos[2]; /*0x5f2a33*/
+    v52.y = this->members.super.super.pos[1]; /*0x5f2a36*/
+    v52.x = v12; /*0x5f2a3a*/
+    v52.z = v13; /*0x5f2a3e*/
+    if ( a5 ) /*0x5f2a44*/
+      v14 = sub_5E40C0(this); /*0x5f2a46*/
     else
-      v14 = sub_5E0660(this) * dbl_A31C70;
-    v54.z = v14 + v54.z;
-    if ( TESObjectCELL_IsInterior(ParentCell) )
+      v14 = Actor_GetScaledCollisionHeight(this) * dbl_A31C70; /*0x5f2a52*/
+    v52.z = v14 + v52.z; /*0x5f2a60*/
+    if ( TESObjectCELL_IsInterior(DwordAtOffset40) ) /*0x5f2a64*/
     {
-      v16 = (TESForm *)ParentCell;
+      v16 = (TESForm *)DwordAtOffset40; /*0x5f2a98*/
     }
     else
     {
-      WorldSpace = TESObjectCELL_GetWorldSpace(ParentCell);
-      v16 = sub_44A270((TESWorldSpace **)TESDataHandler, v54.x, v54.y, WorldSpace, 0);
+      WorldSpace = TESObjectCELL_GetWorldSpace(DwordAtOffset40); /*0x5f2a73*/
+      v16 = sub_44A270((TESWorldSpace **)g_TESDataHandler, v52.x, v52.y, WorldSpace, 0); /*0x5f2a91*/
     }
-    if ( TESObjectCELL_IsProcessLevel_LowHigh((TESObjectCELL *)v16, 1) )
+    if ( TESObjectCELL_IsProcessLevel_LowHigh((TESObjectCELL *)v16, 1) ) /*0x5f2aa5*/
     {
-      bhkWorldRayCastData::Init(&v59);
-      if ( !a3->vtbl->IsMobileObject(a3) )
-        v7 = 0;
-      sub_535A00((float *)v60, 0x1A, v7);
-      v17 = a3->member.pos[0];
-      v18 = a3->member.pos[1];
-      v19 = a3->member.pos[2];
-      v60[0x1B] = 0;
-      v59.RayHitCollector2 = 0;
-      v59.RayHitCollector1 = (hkRayHitCollector *)v60;
-      a2.x = v17;
-      a2.y = v18;
-      a2.z = v19;
-      bhkWorldRayCastData::SetCastInputFrom(&v59, &v54);
-      sub_65ABE0(this, &v56);
-      Unk_57 = a3->vtbl->Unk_57;
-      v59.WorldRayCastInput.FilterInfo = (int)v56.vtbl & 0xFFFF0000 | 0x1A;
-      *(double *)&v56.member.super.type = *(float *)(((int (__thiscall *)(TESObjectREFR *, TESForm::ModReferenceList *))Unk_57)(
+      bhkWorldRayCastData::Init(&v57); /*0x5f2ab9*/
+      if ( !a3->vtbl->IsMobileObject(a3) ) /*0x5f2ad0*/
+        v7 = 0; /*0x5f2ad6*/
+      SpecificItemCollector_InitForRaycast((float *)v58, 0x1A, v7); /*0x5f2ae4*/
+      v17 = a3->member.pos[0]; /*0x5f2ae9*/
+      v18 = a3->member.pos[1]; /*0x5f2aeb*/
+      v19 = a3->member.pos[2]; /*0x5f2aee*/
+      v58[0x1B] = 0; /*0x5f2af3*/
+      v57.RayHitCollector2 = 0; /*0x5f2b01*/
+      v57.RayHitCollector1 = (hkRayHitCollector *)v58; /*0x5f2b0c*/
+      a2.x = v17; /*0x5f2b1b*/
+      a2.y = v18; /*0x5f2b1f*/
+      a2.z = v19; /*0x5f2b23*/
+      bhkWorldRayCastData::SetCastInputFrom(&v57, &v52); /*0x5f2b27*/
+      MobileObject_GetCollisionFilterInfo((MobileObject *)this, &v54); /*0x5f2b33*/
+      Unk_57 = a3->vtbl->Unk_57; /*0x5f2b42*/
+      v57.WorldRayCastInput.FilterInfo = (int)v54.vtbl & 0xFFFF0000 | 0x1A; /*0x5f2b51*/
+      *(double *)&v54.member.super.type = *(float *)(((int (__thiscall *)(TESObjectREFR *, TESForm::ModReferenceList *))Unk_57)( /*0x5f2b66*/
                                                        a3,
-                                                       &v56.member.super.modlist)
+                                                       &v54.member.super.modlist)
                                                    + 8);
-      v21 = ((int (__thiscall *)(TESObjectREFR *, TESForm **))a3->vtbl->Unk_56)(a3, &v56.member.baseForm);
-      v22 = *(double *)&v56.member.super.type - *(float *)(v21 + 8);
-      v56.member.super.modlist.data = (Data *)1;
-      v56.member.super.modlist.next = (TESForm::ModReferenceList *)2;
-      v49 = v22;
-      v56.member.childCell.GetChildCell = 0;
-      *(float *)&v56.member.baseForm = flt_A3D65C;
-      v56.member.rot.x = flt_A41328;
-      v56.member.rot.y = flt_A41304;
-      v23 = TESObjectREFR_GetParentCell((TESObjectREFR *)this);
-      if ( v23 )
+      v21 = ((int (__thiscall *)(TESObjectREFR *, TESForm **))a3->vtbl->Unk_56)(a3, &v54.member.baseForm); /*0x5f2b77*/
+      v22 = *(double *)&v54.member.super.type - *(float *)(v21 + 8); /*0x5f2b7c*/
+      v54.member.super.modlist.data = (Data *)1; /*0x5f2b82*/
+      v54.member.super.modlist.next = (TESForm::ModReferenceList *)2; /*0x5f2b8a*/
+      v47 = v22; /*0x5f2b92*/
+      v54.member.childCell.GetChildCell = 0; /*0x5f2b96*/
+      *(float *)&v54.member.baseForm = kHeadBodyNormalMatchRadius; /*0x5f2ba4*/
+      v54.member.rot.x = flt_A41328; /*0x5f2bae*/
+      v54.member.rot.y = flt_A41304; /*0x5f2bb8*/
+      v23 = (TESObjectCELL *)Shared_GetDwordAtOffset40(this); /*0x5f2bbc*/
+      if ( v23 ) /*0x5f2bc3*/
       {
-        sub_4440C0(v23);
-        v51 = v24;
-        v25 = v49 * dbl_A2FAA0 + a2.z;
-        *(NiPoint3 *)&v56.member.rot.z = v54;
-        v56.member.scale = a2.y;
-        v56.member.baseExtraList.vtbl = (void **)LODWORD(a2.y);
-        *(float *)&v56.member.baseExtraList.members.m_data = v25;
-        v56.member.pos[2] = v17;
-        *(float *)&v56.member.niNode = v19;
-        *(float *)&v56.member.parentCell = v17;
-        sub_8B8800(&v56.member.rot.z, 3, 0xC, (int)&v57);
-        v26 = v51;
-        v27 = 0;
-        v27.m128_f32[0] = flt_A56118;
-        v57 = _mm_mul_ps(_mm_shuffle_ps(v27, v27, 0), v57);
-        v58 = _mm_mul_ps(_mm_shuffle_ps(v27, v27, 0), v58);
-        if ( v51 )
+        sub_4440C0(v23); /*0x5f2bcb*/
+        v49 = v24; /*0x5f2be2*/
+        v25 = v47 * dbl_A2FAA0 + a2.z; /*0x5f2bea*/
+        *(NiPoint3 *)&v54.member.rot.z = v52; /*0x5f2bee*/
+        v54.member.scale = a2.y; /*0x5f2bf6*/
+        v54.member.baseExtraList.vtbl = (void **)LODWORD(a2.y); /*0x5f2bfd*/
+        *(float *)&v54.member.baseExtraList.members.m_data = v25; /*0x5f2c1f*/
+        v54.member.pos[2] = v17; /*0x5f2c2e*/
+        *(float *)&v54.member.niNode = v19; /*0x5f2c35*/
+        *(float *)&v54.member.parentCell = v17; /*0x5f2c3c*/
+        sub_8B8800(&v54.member.rot.z, 3, 0xC, (int)&v55); /*0x5f2c43*/
+        v26 = v49; /*0x5f2c58*/
+        v27 = 0; /*0x5f2c5c*/
+        v27.m128_f32[0] = flt_A56118; /*0x5f2c5f*/
+        v55 = _mm_mul_ps(_mm_shuffle_ps(v27, v27, 0), v55); /*0x5f2c6d*/
+        v56 = _mm_mul_ps(_mm_shuffle_ps(v27, v27, 0), v56); /*0x5f2c8c*/
+        if ( v49 ) /*0x5f2c94*/
         {
-          v51->vtbl->Unk_16((TESForm *)v51);
-          v28 = ((int (__thiscall *)(TESObjectCELL *))v51->vtbl->Unk_16)(v51);
+          v49->vtbl->Unk_16((TESForm *)v49); /*0x5f2c9d*/
+          v28 = ((int (__thiscall *)(TESObjectCELL *))v49->vtbl->Unk_16)(v49); /*0x5f2ca6*/
         }
         else
         {
-          v28 = 0;
+          v28 = 0; /*0x5f2caa*/
         }
-        v29 = (*(int (__thiscall **)(_DWORD))(**(_DWORD **)(v28 + 0x64) + 0x3C))(*(_DWORD *)(v28 + 0x64));
-        *(_DWORD *)&v56.member.super.type = *((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + TlsIndex);
-        v30 = *(_DWORD **)(*(_DWORD *)&v56.member.super.type + 0x19C);
-        if ( !v30 )
-          v30 = (_DWORD *)dword_BA7D9C;
-        v31 = (hkBroadPhaseAabbCache *)v30[8];
-        v32 = (v29 + 0x10) & 0xFFFFFFF0;
-        if ( (unsigned int)v31 + v32 > v30[0xB] )
+        v29 = (*(int (__thiscall **)(_DWORD))(**(_DWORD **)(v28 + 0x64) + 0x3C))(*(_DWORD *)(v28 + 0x64)); /*0x5f2cb4*/
+        *(_DWORD *)&v54.member.super.type = *((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + MEMORY[0xBA9DE4]); /*0x5f2cc6*/
+        v30 = *(_DWORD **)(*(_DWORD *)&v54.member.super.type + 0x19C); /*0x5f2cca*/
+        if ( !v30 ) /*0x5f2cd2*/
+          v30 = (_DWORD *)unk_BA7D9C; /*0x5f2cd4*/
+        v31 = (hkBroadPhaseAabbCache *)v30[8]; /*0x5f2cda*/
+        v32 = (v29 + 0x10) & 0xFFFFFFF0; /*0x5f2ce0*/
+        if ( (unsigned int)v31 + v32 > v30[0xB] ) /*0x5f2ce9*/
         {
-          v52 = (TESObjectCELL *)(*(int (__thiscall **)(_DWORD *, unsigned int))(*v30 + 0xC))(v30, v32);
-          v33 = (hkBroadPhaseAabbCache *)v52;
+          v50 = (TESObjectCELL *)(*(int (__thiscall **)(_DWORD *, unsigned int))(*v30 + 0xC))(v30, v32); /*0x5f2cfe*/
+          v33 = (hkBroadPhaseAabbCache *)v50; /*0x5f2d02*/
         }
         else
         {
-          v30[8] = (char *)v31 + v32;
-          v33 = v31;
-          v52 = (TESObjectCELL *)v31;
+          v30[8] = (char *)v31 + v32; /*0x5f2ceb*/
+          v33 = v31; /*0x5f2cee*/
+          v50 = (TESObjectCELL *)v31; /*0x5f2cf0*/
         }
-        if ( v26 )
-          v34 = ((int (__thiscall *)(TESObjectCELL *))v26->vtbl->Unk_16)(v26);
+        if ( v26 ) /*0x5f2d06*/
+          v34 = ((int (__thiscall *)(TESObjectCELL *))v26->vtbl->Unk_16)(v26); /*0x5f2d0f*/
         else
-          v34 = 0;
-        (*(void (__thiscall **)(_DWORD, __m128 *, hkBroadPhaseAabbCache *))(**(_DWORD **)(v34 + 0x64) + 0x40))(
+          v34 = 0; /*0x5f2d13*/
+        (*(void (__thiscall **)(_DWORD, __m128 *, hkBroadPhaseAabbCache *))(**(_DWORD **)(v34 + 0x64) + 0x40))( /*0x5f2d26*/
           *(_DWORD *)(v34 + 0x64),
-          &v57,
+          &v55,
           v33);
-        if ( v26 )
-          v26->vtbl->Unk_16((TESForm *)v26);
-        GetCombatController = this->vtbl->GetCombatController;
-        *(float *)&v56.member.super.refID = a2.z;
-        v59.BroadPhaseAabbCache = v33;
-        v36 = 1;
-        v37 = (int)GetCombatController(this);
-        if ( v53 == TESDataHandler_g_PlayerRef
-          || this == (Actor *)TESDataHandler_g_PlayerRef
-          || v37 && (sub_612690(*(_DWORD *)(v37 + 0x70)), v38)
-          || v53
-          && (v39 = (int)v53->vtbl->super.GetCombatController((Actor *)v53)) != 0
-          && (sub_612690(*(_DWORD *)(v39 + 0x70)), v40) )
+        if ( v26 ) /*0x5f2d2a*/
+          v26->vtbl->Unk_16((TESForm *)v26); /*0x5f2d33*/
+        GetCombatController = this->vtbl->GetCombatController; /*0x5f2d3b*/
+        *(float *)&v54.member.super.refID = a2.z; /*0x5f2d41*/
+        v57.BroadPhaseAabbCache = v33; /*0x5f2d45*/
+        v36 = 1; /*0x5f2d4e*/
+        v37 = (int)GetCombatController(this); /*0x5f2d53*/
+        if ( v51 == reference /*0x5f2d93*/
+          || this == (Actor *)reference
+          || v37 && (unsigned __int8)CombatMode_IsRangedWeaponMode(*(_DWORD *)(v37 + 0x70))
+          || v51
+          && (v38 = (int)v51->vtbl->super.GetCombatController((Actor *)v51)) != 0
+          && (unsigned __int8)CombatMode_IsRangedWeaponMode(*(_DWORD *)(v38 + 0x70)) )
         {
-          v36 = 3;
+          v36 = 3; /*0x5f2d9f*/
         }
-        v41 = 0;
-        while ( 1 )
+        v39 = 0; /*0x5f2da4*/
+        while ( 1 ) /*0x5f2dc8*/
         {
-          a2.z = *((float *)&v56.member.baseForm + v41) * v49 + *(float *)&v56.member.super.refID;
-          bhkWorldRayCastData::SetCastInputTo(&v59, &a2);
-          ++dword_B333BC;
-          v42 = TES::CastRay(TES, &v59);
-          if ( !v42 || sub_4DC270((int)v42) == (PlayerCharacter *)a3 )
-            break;
-          if ( ++v41 >= v36 )
-            goto LABEL_65;
+          a2.z = *((float *)&v54.member.baseForm + v39) * v47 + *(float *)&v54.member.super.refID; /*0x5f2dc8*/
+          bhkWorldRayCastData::SetCastInputTo(&v57, &a2); /*0x5f2dcc*/
+          ++unk_B333BC; /*0x5f2dd1*/
+          v40 = TES::CastRay(MEMORY[0xB333A0], &v57); /*0x5f2de6*/
+          if ( !v40 || sub_4DC270((int)v40) == (PlayerCharacter *)a3 ) /*0x5f2dfc*/
+            break; /*0x5f2dfc*/
+          if ( ++v39 >= v36 ) /*0x5f2e03*/
+            goto LABEL_65; /*0x5f2e03*/
         }
-        v45 = 1;
-        if ( a6 )
-          *a6 = *((_DWORD *)&v56.member.super.modlist.data + v41);
+        v43 = 1; /*0x5f2e0d*/
+        if ( a6 ) /*0x5f2e12*/
+          *a6 = *((_DWORD *)&v54.member.super.modlist.data + v39); /*0x5f2e18*/
 LABEL_65:
-        v43 = *(_DWORD **)(*(_DWORD *)&v56.member.super.type + 0x19C);
-        if ( !v43 )
-          v43 = (_DWORD *)dword_BA7D9C;
-        v44 = v52 == (TESObjectCELL *)v43[0xA];
-        v43[8] = v52;
-        if ( v44 )
-          (*(void (__thiscall **)(_DWORD *, TESObjectCELL *))(*v43 + 0x10))(v43, v52);
+        v41 = *(_DWORD **)(*(_DWORD *)&v54.member.super.type + 0x19C); /*0x5f2e1a*/
+        if ( !v41 ) /*0x5f2e26*/
+          v41 = (_DWORD *)unk_BA7D9C; /*0x5f2e28*/
+        v42 = v50 == (TESObjectCELL *)v41[0xA]; /*0x5f2e32*/
+        v41[8] = v50; /*0x5f2e35*/
+        if ( v42 ) /*0x5f2e38*/
+          (*(void (__thiscall **)(_DWORD *, TESObjectCELL *))(*v41 + 0x10))(v41, v50); /*0x5f2e40*/
       }
     }
-    return v45;
+    return v43; /*0x5f2e40*/
   }
-  if ( a6 )
-    *a6 = 2;
-  return 1;
+  if ( a6 ) /*0x5f2a07*/
+    *a6 = 2; /*0x5f2a09*/
+  return 1; /*0x5f2e4a*/
 }

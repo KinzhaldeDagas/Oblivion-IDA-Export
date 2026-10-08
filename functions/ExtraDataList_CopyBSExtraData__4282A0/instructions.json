@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4282A0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified extra-data copy lifecycle for ownership state: the copy dispatcher handles kExtraData_Ownership, kExtraData_Global, and kExtraData_Rank through their typed setters, creating/updating separate ExtraOwnership, ExtraGlobal, and ExtraRank payloads rather than sharing the source node.",
     "mnemonic": "push",
     "size": 2
   },
@@ -445,19 +445,19 @@
   },
   {
     "ea": "0x428389",
-    "line": "push    ecx",
+    "line": "push    ecx; flags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x42838A",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x42838C",
-    "line": "call    sub_423DA0",
+    "line": "call    ExtraDataList_SetActionFlags; Replace ExtraAction flag byte. Default value 1 removes/omits the extra only when its companion action-state dword is zero; otherwise retain/update. This is the XACT consumer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,19 +475,19 @@
   },
   {
     "ea": "0x428399",
-    "line": "push    edx",
+    "line": "push    edx; owner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x42839A",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x42839C",
-    "line": "call    ExtraDataList__SetOrRemoveExtraOwnership",
+    "line": "call    ExtraDataList__SetOrRemoveExtraOwnership; Verified XOWN mutator: update ExtraOwnership.ownerForm when owner is nonnull; remove the XOWN extra when null; otherwise allocate a 16-byte ExtraOwnership payload and add it to the list. During plugin load the initial dword is a FormID temporarily held in the same union slot; ExtraDataList_ResolveLoadedFormIDs converts it to TESForm*. TESObjectCELL_LinkForm removes direct XOWN, XRNK, and XGLB from an exterior cell when an owner exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,19 +505,19 @@
   },
   {
     "ea": "0x4283A9",
-    "line": "push    eax",
+    "line": "push    eax; global",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4283AA",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4283AC",
-    "line": "call    sub_423720",
+    "line": "call    ExtraDataList_SetGlobal; Verified XGLB mutator: update the stored TESGlobal* when nonnull; remove the extra when null; otherwise allocate a 16-byte ExtraGlobal payload. During plugin load the stored dword is a FormID temporarily; ExtraDataList_ResolveLoadedFormIDs rebases, looks it up, RTTI-checks TESGlobal, and removes missing/wrong-type entries.",
     "mnemonic": "call",
     "size": 5
   },
@@ -535,19 +535,19 @@
   },
   {
     "ea": "0x4283B9",
-    "line": "push    ecx",
+    "line": "push    ecx; rank",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4283BA",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4283BC",
-    "line": "call    sub_4237E0",
+    "line": "call    ExtraDataList_SetRank; Verified ExtraRank lifecycle writer: rank -1 removes the payload; every other signed 32-bit value updates or allocates ExtraRank. XRNK loading supplies a bounded 4-byte value into a zero-initialized local, so empty/short chunks become zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -685,7 +685,7 @@
   },
   {
     "ea": "0x428409",
-    "line": "call    sub_41F2F0",
+    "line": "call    ExtraDataList_AddBoundArmor; Adds marker extra ExtraBoundArmor type 0x50 when it is not already present.",
     "mnemonic": "call",
     "size": 5
   },
@@ -703,19 +703,19 @@
   },
   {
     "ea": "0x428417",
-    "line": "push    ecx",
+    "line": "push    ecx; seed",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x428418",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x42841A",
-    "line": "call    sub_423BD0",
+    "line": "call    ExtraDataList_SetOrRemoveTreeSeed; Verified singleton ExtraData_Seed behavior: signed byte 0xFF removes the extra; other bytes add or replace it. Combined with TESObjectTREE_GetIndexForSeed, this means an empty/missing tree seed entry cannot be persisted as a concrete per-reference seed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -835,7 +835,7 @@
   },
   {
     "ea": "0x42845A",
-    "line": "call    ExtraDataList_SetUses",
+    "line": "call    ExtraDataList_SetUses; ExtraUses singleton setter always creates/updates and narrows to u8; no removal sentinel. Repeated XUSE retains node position and replaces the byte.",
     "mnemonic": "call",
     "size": 5
   },
@@ -871,7 +871,7 @@
   },
   {
     "ea": "0x42846D",
-    "line": "call    sub_41EDF0",
+    "line": "call    ExtraDataList_SetTimeLeft; ExtraTimeLeft singleton setter always creates/updates the supplied float32 bit pattern; no zero or NaN removal sentinel.",
     "mnemonic": "call",
     "size": 5
   },
@@ -907,7 +907,7 @@
   },
   {
     "ea": "0x428480",
-    "line": "call    sub_41EE90",
+    "line": "call    ExtraDataList_SetCharge; Updates or creates ExtraCharge type 0x2E with the supplied float.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1135,13 +1135,13 @@
   },
   {
     "ea": "0x4284F3",
-    "line": "push    eax",
+    "line": "push    eax; lockData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4284F4",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1153,7 +1153,7 @@
   },
   {
     "ea": "0x4284F9",
-    "line": "call    sub_41EAF0",
+    "line": "call    ExtraDataList_SetLock; Verified ExtraLock copy case in ExtraDataList_CopyBSExtraData: allocates a fresh 12-byte ExtraLockData, copies the level byte, TESKey* pointer, and flags byte from the source payload, then installs the copy via ExtraDataList_SetLock. The key form pointer is shared; payload storage and ExtraLock wrapper are independent.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1207,13 +1207,13 @@
   },
   {
     "ea": "0x42851D",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x42851F",
-    "line": "call    sub_42B590",
+    "line": "call    TeleportData_InitSentinels; TeleportData constructor initializes linkedDoor=NULL and all six transform floats to FLT_MAX sentinels. Any XTEL immediately replaces them from a fresh zeroed scratch in TeleportData_LoadXTEL.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1321,13 +1321,13 @@
   },
   {
     "ea": "0x428560",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x428562",
-    "line": "call    sub_42B3F0",
+    "line": "call    MapMarkerData_ctor; MapMarkerData constructor zeros TESFullName storage, FNAM flags byte, and TNAM u16 type. unused0D is not explicitly initialized.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1369,19 +1369,19 @@
   },
   {
     "ea": "0x42857C",
-    "line": "push    ebx",
+    "line": "push    ebx; data",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x42857D",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x42857F",
-    "line": "call    sub_423590",
+    "line": "call    ExtraDataList_SetMapMarkerData",
     "mnemonic": "call",
     "size": 5
   },
@@ -1531,7 +1531,7 @@
   },
   {
     "ea": "0x4285C6",
-    "line": "call    sub_41F4C0",
+    "line": "call    ExtraDataList_SetStartLocation; ExtraPackageStartLocation setter: first creation stores selected location FormID, XYZ, and rotZ; updating an extant singleton replaces only location/XYZ and preserves existing rotZ.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1579,19 +1579,19 @@
   },
   {
     "ea": "0x4285E3",
-    "line": "push    esi",
+    "line": "push    esi; normal",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4285E4",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4285E6",
-    "line": "call    sub_420100",
+    "line": "call    ExtraDataList_SetDistantDataNormal; Verified Oblivion setter writes the supplied NiPoint3 into ExtraDistantData.normal_00C (+0x0C..+0x17). Fallout's same-named setter uses LandNormal at the same +0x0C offset; its EType is 0x13 versus Oblivion's 0x18.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1626,12 +1626,6 @@
     "size": 2
   },
   {
-    "ea": "0x4285FD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x428600",
     "line": "mov     eax, [esi]",
     "mnemonic": "mov",
@@ -1663,7 +1657,7 @@
   },
   {
     "ea": "0x42860D",
-    "line": "call    sub_424C50",
+    "line": "call    sub_424C50; 3DTheft decode: Add/link ExtraFollower entry on target ExtraDataList; creates ExtraFollower if absent and pushes follower actor pointer if not already listed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1801,7 +1795,7 @@
   },
   {
     "ea": "0x42865A",
-    "line": "call    sub_41EFD0",
+    "line": "call    ExtraDataList_SetPoison; ExtraPoison setter always creates/updates raw serialized FormID, including zero. Post-load resolution removes zero/unresolved/non-AlchemyItem targets.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1867,7 +1861,7 @@
   },
   {
     "ea": "0x42867D",
-    "line": "call    sub_423FF0",
+    "line": "call    ExtraDataList_SetWaterHeight",
     "mnemonic": "call",
     "size": 5
   },
@@ -1897,7 +1891,7 @@
   },
   {
     "ea": "0x42868D",
-    "line": "call    sub_4204E0",
+    "line": "call    ExtraDataList_SetWaterType; Creates/updates ExtraCellWaterType with a TESWaterForm; null removes the water-type extra.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1927,7 +1921,7 @@
   },
   {
     "ea": "0x42869E",
-    "line": "call    sub_4242C0",
+    "line": "call    ExtraDataList_SetCellMusicType",
     "mnemonic": "call",
     "size": 5
   },
@@ -2029,19 +2023,19 @@
   },
   {
     "ea": "0x4286D3",
-    "line": "push    eax",
+    "line": "push    eax; climate",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4286D4",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4286D6",
-    "line": "call    TESObjectCELL_SetInteriorClimate",
+    "line": "call    TESObjectCELL_SetInteriorClimate; Verified: ExtraDataList copy dispatcher handles kExtraData_CellClimate by reading the climate pointer from ExtraCellClimate payload and invoking TESObjectCELL_SetInteriorClimate to recreate/update the destination extra.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2059,19 +2053,19 @@
   },
   {
     "ea": "0x4286E3",
-    "line": "push    ecx",
+    "line": "push    ecx; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4286E4",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4286E6",
-    "line": "call    ExtraDataList_SetReferencePointer",
+    "line": "call    ExtraDataList_SetReferencePointer; Set or create ExtraReferencePointer (type 0x22) in one logical function, now merged through 0x41FAF4. This extra preserves persistent-reference provenance inside an already form-keyed inventory entry; it does not override EntryData.type or sourceRef->baseForm and therefore cannot restore a thrown proxy AMMO to its source WEAP.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2179,7 +2173,7 @@
   },
   {
     "ea": "0x428718",
-    "line": "call    sub_41FBC0",
+    "line": "call    ExtraDataList_SetTrespassPackageExtra; Replaces or creates ExtraTresPassPackage. An existing package object is destructed before the supplied TrespassPackage is installed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2263,7 +2257,7 @@
   },
   {
     "ea": "0x428740",
-    "line": "call    sub_41FFC0",
+    "line": "call    ExtraDataList_SetRunOnceExtraPackage; Ensures ExtraRunOncePacks exists, then adds or updates a package record with the supplied package and state byte.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2299,19 +2293,19 @@
   },
   {
     "ea": "0x428754",
-    "line": "push    ecx",
+    "line": "push    ecx; originalReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x428755",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x428757",
-    "line": "call    sub_41E710",
+    "line": "call    ExtraDataList_SetOriginalReferenceExtra; Set ExtraOriginalReference (type 0x26) to a live TESObjectREFR. This provenance is used for synthetic/reference projections, is excluded by relevant copy paths, and is never interpreted by pickup as a base-form override.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2341,7 +2335,7 @@
   },
   {
     "ea": "0x428767",
-    "line": "call    sub_420280",
+    "line": "call    ExtraDataList_SetEnableStateParent; Creates or updates ExtraEnableStateParent; a null parent removes extra type 0x3F.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2365,7 +2359,7 @@
   },
   {
     "ea": "0x428773",
-    "line": "call    sub_420380",
+    "line": "call    ExtraDataList_SetEnableStateFlags; Replaces the complete ExtraEnableStateParent flags byte.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2383,19 +2377,19 @@
   },
   {
     "ea": "0x42877D",
-    "line": "push    ecx",
+    "line": "push    ecx; markerReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x42877E",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x428780",
-    "line": "call    sub_4205C0",
+    "line": "call    ExtraDataList_SetRandomTeleportMarker; Verified ExtraDataList random-marker setter: null removes ExtraData type 0x43; non-null updates or allocates an ExtraRandomTeleportMarker and stores the TESObjectREFR* marker at +0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2425,7 +2419,7 @@
   },
   {
     "ea": "0x42878D",
-    "line": "call    sub_4206A0",
+    "line": "call    ExtraDataList_SetMerchantContainer; Creates/updates ExtraMerchantContainer; null removes type 0x44.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2455,7 +2449,7 @@
   },
   {
     "ea": "0x42879A",
-    "line": "call    sub_420860",
+    "line": "call    ExtraDataList_SetTravelHorse; Creates/updates ExtraTravelHorse type 0x58; null removes the travel-horse link.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2485,7 +2479,7 @@
   },
   {
     "ea": "0x4287A7",
-    "line": "call    sub_420D40",
+    "line": "call    ExtraDataList_SetXTarget; Sets ExtraXTarget; null removes type 0x4D, otherwise updates or creates it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2515,7 +2509,7 @@
   },
   {
     "ea": "0x4287B4",
-    "line": "call    sub_420780",
+    "line": "call    ExtraDataList_SetLevCreaModifier; Creates/updates ExtraLevCreaModifier; null removes type 0x24.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2581,7 +2575,7 @@
   },
   {
     "ea": "0x4287D1",
-    "line": "call    sub_41F370",
+    "line": "call    ExtraDataList_SetCannotWear; Adds or removes marker extra ExtraCannotWear type 0x47 according to the requested state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2674,5 +2668,137 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AB9E0",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AB9E3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AB9E4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AB9E9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AB9EA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AB9EB",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AB9EE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AB9EF",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AB9F4",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AB9F5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AB9F6",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AB9F9",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AB9FA",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AB9FF",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9ABA00",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9ABA01",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9ABA05",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9ABA08",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9ABA0B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9ABA0D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9ABA12",
+    "line": "mov     eax, offset stru_AD87F0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9ABA17",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

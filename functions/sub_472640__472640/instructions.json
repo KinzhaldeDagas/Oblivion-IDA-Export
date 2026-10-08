@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x472642",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+object]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -67,13 +67,13 @@
   },
   {
     "ea": "0x47265D",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; object",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x47265F",
-    "line": "call    TESActorBaseData_GetMagicka",
+    "line": "call    Shared_GetWordAtOffset08; TESAnimGroup encoded key accessor: returns 16-bit group key at TESAnimGroup +0x08.",
     "mnemonic": "call",
     "size": 5
   },
@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x472669",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; object",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x47266B",
-    "line": "call    TESActorBaseData_GetMagicka",
+    "line": "call    Shared_GetWordAtOffset08; TESAnimGroup encoded key accessor: returns 16-bit group key at TESAnimGroup +0x08.",
     "mnemonic": "call",
     "size": 5
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x472677",
-    "line": "call    sub_472030",
+    "line": "call    ActorAnimData_SetAnimGroupMovementVector; ActorAnimData movement-vector recovery. For an installed TESAnimGroup, samples AccumRoot at current/end times, computes normalized movement delta, stores it back to the TESAnimGroup, and warns when Animate In Place exported zero movement.",
     "mnemonic": "call",
     "size": 5
   },

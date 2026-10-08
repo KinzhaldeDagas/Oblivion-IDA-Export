@@ -36,19 +36,19 @@ int __userpurge MagicCaster_ApplyActiveMagicItem_::ModCasterExperience@<eax>(
   void (__thiscall **v33)(int, int); // edi
   int SchoolAV; // eax
 
-  if ( (_BYTE)a6 )
+  if ( (_BYTE)a6 ) /*0x69b9a2*/
   {
-    if ( a7 )
+    if ( a7 ) /*0x69b9aa*/
     {
-      v31 = (*(int (__thiscall **)(_DWORD *))(*a1 + 0x30))(a1);
-      if ( !(*(int (__thiscall **)(int))(*(_DWORD *)v31 + 0x18))(v31)
+      v31 = (*(int (__thiscall **)(_DWORD *))(*a1 + 0x30))(a1); /*0x69b9b3*/
+      if ( !(*(int (__thiscall **)(int))(*(_DWORD *)v31 + 0x18))(v31) /*0x69b9d7*/
         || (v32 = (*(int (__thiscall **)(_DWORD *))(*a1 + 0x30))(a1),
             (*(int (__thiscall **)(int))(*(_DWORD *)v32 + 0x18))(v32) == 5) )
       {
-        v33 = (void (__thiscall **)(int, int))(*(_DWORD *)a7 + 0x39C);
-        (*(void (__thiscall **)(_DWORD *, int, _DWORD))(*a1 + 0x30))(a1, 1, 0.0);
-        SchoolAV = EffectItemList_GetSchoolAV();
-        (*v33)(a7, SchoolAV);
+        v33 = (void (__thiscall **)(int, int))(*(_DWORD *)a7 + 0x39C);// Advance the caster/player vtable pointer to Player_ModExperience (+0x39C) before resolving the effect school. /*0x69b9ea*/
+        (*(void (__thiscall **)(_DWORD *, int, _DWORD))(*a1 + 0x30))(a1, 1, 0.0); /*0x69b9f0*/
+        SchoolAV = EffectItemList_GetSchoolAV(); /*0x69b9f7*/
+        (*v33)(a7, SchoolAV);                   // Eligible active magic-item application: resolved school AV, useValue1, identity scale (0.0). /*0x69ba01*/
       }
     }
   }

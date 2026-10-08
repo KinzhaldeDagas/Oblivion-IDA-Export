@@ -1,10 +1,10 @@
-0x79AC10: push    esi
-0x79AC11: mov     esi, [esp+4+arg_0]
+0x79AC10: push    esi; Oblivion SFrondTexture destructor: releases the 28-byte small-string filename when heap-backed (capacity >= 0x10), then resets string length/capacity; scalar fields need no destruction.
+0x79AC11: mov     esi, [esp+4+this]
 0x79AC15: cmp     dword ptr [esi+18h], 10h
 0x79AC19: jb      short loc_79AC27
 0x79AC1B: mov     eax, [esi+4]
 0x79AC1E: push    eax
-0x79AC1F: call    FormHeapFree
+0x79AC1F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x79AC24: add     esp, 4
 0x79AC27: xor     eax, eax
 0x79AC29: mov     dword ptr [esi+18h], 0Fh

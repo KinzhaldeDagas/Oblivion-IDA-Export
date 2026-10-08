@@ -25,3 +25,14 @@
 0x6C54EF: pop     esi
 0x6C54F0: add     esp, 10h
 0x6C54F3: retn
+0x6C3FC0: mov     dword ptr [ecx], offset ??_7NiAVObjectPalette@@6B@; const NiAVObjectPalette::`vftable'
+0x6C3FC6: jmp     NiRefObject_destr
+0x9C7380: mov     ecx, [ebp-10h]
+0x9C7383: jmp     loc_6C3FC0
+0x9C7388: mov     edx, [esp+arg_4]
+0x9C738C: lea     eax, [edx-8]
+0x9C738F: mov     ecx, [edx-0Ch]
+0x9C7392: xor     ecx, eax
+0x9C7394: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C7399: mov     eax, offset stru_AEF7DC
+0x9C739E: jmp     ___CxxFrameHandler3

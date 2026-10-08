@@ -1,1 +1,4 @@
-_SERVICE_PRESHUTDOWN_INFO
+struct _SERVICE_PRESHUTDOWN_INFO
+{
+DWORD dwPreshutdownTimeout;
+};

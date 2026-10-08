@@ -31,7 +31,7 @@
 0x685198: test    al, al
 0x68519A: jz      loc_685523
 0x6851A0: mov     ecx, edi; this
-0x6851A2: call    TESObjectREFR_GetParentCell
+0x6851A2: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6851A7: test    eax, eax
 0x6851A9: jnz     short loc_6851C5
 0x6851AB: fld     [esp+48h+arg_4]
@@ -47,8 +47,8 @@
 0x6851BF: add     esp, 38h
 0x6851C2: retn    8
 0x6851C5: mov     ecx, edi
-0x6851C7: call    sub_5E65B0
-0x6851CC: fstp    [esp+48h+var_34]
+0x6851C7: call    sub_5E65B0; Authoritative actor movement speed selector: process flags +0x2C0 choose run (0x200), swim (0x800), fly-speed (0x2000); when those are absent it falls through to ordinary walk speed. AI callers may supply a movement vector without direction bits.
+0x6851CC: fstp    [esp+48h+var_34]; AI path interpolation uses sub_5E65B0(actor) as movement speed for segment timing, so no run/swim/fly flags means walk speed even when no direction bits are set.
 0x6851D0: mov     eax, [edi]
 0x6851D2: fld     [esp+48h+arg_4]
 0x6851D6: mov     edx, [eax+174h]
@@ -60,15 +60,15 @@
 0x6851E9: mov     eax, [eax+8]
 0x6851EC: mov     [esp+48h+a2], ecx
 0x6851F0: lea     ebx, [ebp+14h]
-0x6851F3: mov     ecx, ebx
+0x6851F3: mov     ecx, ebx; this
 0x6851F5: mov     [esp+48h+var_2C], edx
 0x6851F9: mov     [esp+48h+var_28], eax
-0x6851FD: call    sub_42B410
+0x6851FD: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x685202: mov     esi, eax
 0x685204: test    esi, esi
 0x685206: jz      loc_685471
 0x68520C: mov     ecx, esi
-0x68520E: call    sub_6899C0
+0x68520E: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x685213: fld     [esp+48h+a2]
 0x685217: fsub    dword ptr [eax]
 0x685219: fstp    [esp+48h+var_24]
@@ -106,7 +106,7 @@
 0x685282: test    ah, 5
 0x685285: jp      loc_68537C
 0x68528B: fstp    st
-0x68528D: call    sub_6899C0
+0x68528D: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x685292: mov     ecx, [eax]
 0x685294: mov     edx, [eax+4]
 0x685297: mov     eax, [eax+8]
@@ -116,8 +116,8 @@
 0x6852A1: mov     [esp+4Ch+var_2C], edx
 0x6852A5: mov     [esp+4Ch+var_28], eax
 0x6852A9: call    sub_68C170
-0x6852AE: mov     ecx, ebx
-0x6852B0: call    sub_42B410
+0x6852AE: mov     ecx, ebx; this
+0x6852B0: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x6852B5: fld     [esp+48h+arg_4]
 0x6852B9: fsub    [esp+48h+arg_0]
 0x6852BD: mov     esi, eax
@@ -127,8 +127,8 @@
 0x6852CB: push    edi
 0x6852CC: mov     ecx, ebp
 0x6852CE: call    sub_68B4F0
-0x6852D3: mov     ecx, ebx
-0x6852D5: call    sub_42B410
+0x6852D3: mov     ecx, ebx; this
+0x6852D5: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x6852DA: mov     esi, eax
 0x6852DC: test    esi, esi
 0x6852DE: jnz     loc_685366
@@ -156,7 +156,7 @@
 0x68531E: jmp     short loc_685322
 0x685320: fstp    st
 0x685322: lea     ecx, [esp+48h+var_24]
-0x685326: call    sub_43F350
+0x685326: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x68532B: fstp    st
 0x68532D: fld     [esp+48h+arg_0]
 0x685331: push    ecx
@@ -183,7 +183,7 @@
 0x68537C: fstp    [esp+48h+arg_0]
 0x685380: fldz
 0x685382: fstp    [esp+48h+arg_4]
-0x685386: call    sub_6899C0
+0x685386: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x68538B: fld     dword ptr [eax]
 0x68538D: fsub    [esp+48h+a2]
 0x685391: lea     ecx, [esp+48h+var_24]
@@ -194,7 +194,7 @@
 0x6853A4: fld     dword ptr [eax+8]
 0x6853A7: fsub    [esp+48h+var_28]
 0x6853AB: fstp    [esp+48h+var_1C]
-0x6853AF: call    sub_43F350
+0x6853AF: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x6853B4: fstp    st
 0x6853B6: fld     [esp+48h+var_24]
 0x6853BA: fld     [esp+48h+var_34]
@@ -241,7 +241,7 @@
 0x68544A: mov     ebx, [edi]
 0x68544C: lea     ecx, [esp+48h+var_24]
 0x685450: push    ecx
-0x685451: call    sub_683CB0
+0x685451: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x685456: fstp    [esp+4Ch+a4]; a4
 0x685459: mov     edx, [ebx+1E8h]
 0x68545F: mov     ecx, edi
@@ -278,21 +278,21 @@
 0x6854BC: mov     ecx, ebx; this
 0x6854BE: call    TESObjectREFR_SetPosition
 0x6854C3: mov     ecx, ebx; this
-0x6854C5: call    MobileObject_GetCharProxy
+0x6854C5: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x6854CA: test    eax, eax
 0x6854CC: jz      short loc_6854DA
 0x6854CE: lea     edx, [esp+48h+a2]
 0x6854D2: push    edx; a2
 0x6854D3: mov     ecx, eax; this
-0x6854D5: call    sub_452A10
+0x6854D5: call    sub_452A10; TES4 authoritative: converts TES/world NiPoint3 into Havok units with hkFactor, then writes proxy position through 0x891560.
 0x6854DA: mov     ecx, edi; this
-0x6854DC: call    MobileObject_GetCharProxy
+0x6854DC: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x6854E1: test    eax, eax
 0x6854E3: jz      short loc_6854F1
 0x6854E5: lea     ecx, [esp+48h+a2]
 0x6854E9: push    ecx; a2
 0x6854EA: mov     ecx, eax; this
-0x6854EC: call    sub_452A10
+0x6854EC: call    sub_452A10; TES4 authoritative: converts TES/world NiPoint3 into Havok units with hkFactor, then writes proxy position through 0x891560.
 0x6854F1: test    esi, esi
 0x6854F3: jnz     short loc_685515
 0x6854F5: mov     edx, [edi]

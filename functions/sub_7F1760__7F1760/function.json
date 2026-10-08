@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7F1760",
+      "0x7F1802"
+    ]
+  ],
+  "chunks_sha256": "c648879f16ce90ef85ed890e609e95b3811adeb4b0cd51830d64011fd51205a3",
+  "comment_regular": "Updates one global SpeedTree wind matrix. Builds yaw/pitch rotation, transposes it, writes WindMatrixes + 0x40*index; valid indices are 0..3.\n[SpeedTreeOBSE v172 CPU bridge] Native D3DXMatrixRotationYawPitchRoll output is transposed before256-byte four-matrix storage rooted atB45E14+269*4=B467B8. For registered CPU indexed clients only, the post55E060 bridge transposes existing shader matrices back into the first min(bankCount,4) SDK matrices atB42A10/+4, preserves later matrices and notifies event0 after change. A failed copy restores prior bytes and blocks host CPU scheduling until a successful bridge. Host choice to share Bethesda weather matrices with CPU is INFERRED application integration; storage/orientation are directly inspected.",
+  "comment_repeatable": "Updates one global SpeedTree wind matrix. Builds yaw/pitch rotation, transposes it, writes WindMatrixes + 0x40*index; valid indices are 0..3.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_7F1760",
+  "display_name": "OB_SpeedTreeLeafShader_SetWindMatrix_010201A0",
   "end_ea": "0x7F1802",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7F1760",
+  "name": "OB_SpeedTreeLeafShader_SetWindMatrix_010201A0",
   "segment": ".text",
   "sha256": "c648879f16ce90ef85ed890e609e95b3811adeb4b0cd51830d64011fd51205a3",
   "size": 162,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7F1760",
-  "type": "char __cdecl(unsigned int, float, float)",
+  "total_chunk_size": 162,
+  "type": "char __cdecl(unsigned int, int, int)",
   "xrefs_from_count": 54,
   "xrefs_to_count": 1
 }

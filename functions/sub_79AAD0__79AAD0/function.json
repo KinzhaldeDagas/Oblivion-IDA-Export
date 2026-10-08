@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x79AAD0",
+      "0x79AAF9"
+    ]
+  ],
+  "chunks_sha256": "a3d9a97913cdf3a96ff598f9fccc20758335cf92dbc6d81ae2805bbe1ed0815b",
+  "comment_regular": "Checked/uninitialized-copy trampoline for SFrondVertex ranges; delegates to 0x79A9B0 and returns the constructed end.",
+  "comment_repeatable": "Checked/uninitialized-copy trampoline for SFrondVertex ranges; delegates to 0x79A9B0 and returns the constructed end.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_79AAD0",
+  "display_name": "OB_SFrondVertex_UninitializedCopyThunk_010201A0",
   "end_ea": "0x79AAF9",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_79AAD0",
+  "name": "OB_SFrondVertex_UninitializedCopyThunk_010201A0",
   "segment": ".text",
   "sha256": "a3d9a97913cdf3a96ff598f9fccc20758335cf92dbc6d81ae2805bbe1ed0815b",
   "size": 41,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x79AAD0",
-  "type": "char *__stdcall(char *, char *, char *)",
+  "total_chunk_size": 41,
+  "type": "OB_SFrondVertex_010201A0 *__stdcall(const OB_SFrondVertex_010201A0 *first, const OB_SFrondVertex_010201A0 *last, OB_SFrondVertex_010201A0 *destinationFirst)",
   "xrefs_from_count": 16,
   "xrefs_to_count": 4
 }

@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x47F7FD",
-    "line": "mov     ecx, offset flt_B34398",
+    "line": "mov     ecx, 0B34398h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x47F825",
-    "line": "mov     ecx, offset flt_B34398",
+    "line": "mov     ecx, 0B34398h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x47F844",
-    "line": "mov     [esp+38h+var_1C.Center.x], edx",
+    "line": "mov     [esp+38h+self.Center.x], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -229,25 +229,25 @@
   },
   {
     "ea": "0x47F84B",
-    "line": "mov     [esp+38h+var_1C.Center.y], eax",
+    "line": "mov     [esp+38h+self.Center.y], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x47F84F",
-    "line": "mov     [esp+38h+var_1C.Center.z], ecx",
+    "line": "mov     [esp+38h+self.Center.z], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x47F853",
-    "line": "mov     [esp+38h+var_1C.Radius], edx",
+    "line": "mov     [esp+38h+self.Radius], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x47F857",
-    "line": "mov     esi, offset flt_B34398",
+    "line": "mov     esi, 0B34398h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -307,13 +307,13 @@
   },
   {
     "ea": "0x47F877",
-    "line": "push    ecx; a2",
+    "line": "push    ecx; plane",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x47F878",
-    "line": "lea     ecx, [esp+3Ch+var_1C]; this",
+    "line": "lea     ecx, [esp+3Ch+self]; self",
     "mnemonic": "lea",
     "size": 4
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x47F884",
-    "line": "call    sub_47DA70",
+    "line": "call    NiBound_ClassifyAgainstPlane",
     "mnemonic": "call",
     "size": 5
   },
@@ -466,5 +466,71 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9AF5A0",
+    "line": "mov     eax, ds:0B343FCh",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF5A5",
+    "line": "and     eax, 0FFFFFFFEh",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF5A8",
+    "line": "mov     ds:0B343FCh, eax",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF5AD",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF5AE",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AF5B2",
+    "line": "lea     eax, [edx-28h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF5B5",
+    "line": "mov     ecx, [edx-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF5B8",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AF5BA",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF5BF",
+    "line": "mov     eax, offset stru_ADBB48",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF5C4",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

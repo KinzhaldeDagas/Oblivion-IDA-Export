@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x768700",
+      "0x768737"
+    ]
+  ],
+  "chunks_sha256": "dbfc17737045011eedbc00af78b56bfd5e7fc164590965187c70d7b962009039",
+  "comment_regular": "Creates renderer data only when NiTexture::rendererData is absent, then records the NiRenderedTexture -> NiDX9RenderedTextureData association in the renderer's tracked map for reset-time reconstruction.",
+  "comment_repeatable": "Creates renderer data only when NiTexture::rendererData is absent, then records the NiRenderedTexture -> NiDX9RenderedTextureData association in the renderer's tracked map for reset-time reconstruction.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_768700",
+  "display_name": "NiDX9Renderer_CreateRenderedTextureRendererData",
   "end_ea": "0x768737",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_768700",
+  "name": "NiDX9Renderer_CreateRenderedTextureRendererData",
   "segment": ".text",
   "sha256": "dbfc17737045011eedbc00af78b56bfd5e7fc164590965187c70d7b962009039",
   "size": 55,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x768700",
-  "type": "char __thiscall(NiDX9Renderer *this, NiTexture *)",
+  "total_chunk_size": 55,
+  "type": "bool __thiscall(NiDX9Renderer *this, NiTexture *texture)",
   "xrefs_from_count": 26,
   "xrefs_to_count": 1
 }

@@ -1,1 +1,1 @@
-IClassActivatorVtbl_0
+typedef IClassActivatorVtbl IClassActivatorVtbl_0;

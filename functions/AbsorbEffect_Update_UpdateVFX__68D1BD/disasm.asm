@@ -41,8 +41,8 @@
 0x68D239: fstp    [esp+8+arg_0]
 0x68D23D: push    ecx
 0x68D23E: fld     dword ptr [eax]
-0x68D240: fstp    [esp+0Ch+var_C]; float
-0x68D243: call    Calc_GetCombatDistance
+0x68D240: fstp    [esp+0Ch+baseDistance]; baseDistance
+0x68D243: call    Calc_GetCombatDistance; Converts a base reach/distance value to world combat distance using the Oblivion combat-distance game-setting multiplier.
 0x68D248: fcomp   [esp+0Ch+arg_0]
 0x68D24C: add     esp, 4
 0x68D24F: fnstsw  ax
@@ -61,7 +61,7 @@
 0x68D270: jnz     short loc_68D27B
 0x68D272: push    0
 0x68D274: mov     ecx, esi
-0x68D276: call    ActiveEffect_Base_Remove
+0x68D276: call    ActiveEffect_Base_Remove; Verified termination API: sets bTerminated=1. When its flush flag is true, immediately invokes ActiveEffect_Base_ProcessEffect to run termination cleanup.
 0x68D27B: cmp     byte ptr [esi+11h], 0
 0x68D27F: jnz     short loc_68D290
 0x68D281: fld     [esp+0Ch+arg_8]

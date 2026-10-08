@@ -97,19 +97,19 @@
   },
   {
     "ea": "0x439303",
-    "line": "mov     ecx, ioManager",
+    "line": "mov     ecx, ds:0B33A10h",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x439309",
-    "line": "push    eax",
+    "line": "push    eax; task",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x43930A",
-    "line": "call    sub_432130",
+    "line": "call    IOTask_Cancel; Verified generic IOTask cancellation state machine: previous states 0/1/2 atomically transition to 6 and invoke vtable +0x0C with status 0; state 5 transitions to 6 and invokes it with status 1; states 3/4 wait for the worker's state change. Verified local role: state 6 is the cancellation/terminal marker written by IOTask_Cancel. Its canonical enum label remains Unknown.",
     "mnemonic": "call",
     "size": 5
   },

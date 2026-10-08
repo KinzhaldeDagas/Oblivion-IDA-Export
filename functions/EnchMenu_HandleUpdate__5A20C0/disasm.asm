@@ -5,17 +5,17 @@
 0x5A20C9: fld     dword ptr ds:0A379B4h
 0x5A20CF: push    ecx
 0x5A20D0: mov     ecx, [esi+88h]; this
-0x5A20D6: fstp    [esp+8+a2]; a3
-0x5A20D9: push    0FA1h; a2
-0x5A20DE: call    Tile_SetFloat
+0x5A20D6: fstp    [esp+8+a2]; value
+0x5A20D9: push    0FA1h; propertyCode
+0x5A20DE: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A20E3: cmp     dword ptr [esi+30h], 0
 0x5A20E7: jz      short loc_5A2103
 0x5A20E9: fld     dword ptr ds:0A379B4h
 0x5A20EF: push    ecx
 0x5A20F0: mov     ecx, [esi+8Ch]; this
-0x5A20F6: fstp    [esp+8+a2]; a3
-0x5A20F9: push    0FA1h; a2
-0x5A20FE: call    Tile_SetFloat
+0x5A20F6: fstp    [esp+8+a2]; value
+0x5A20F9: push    0FA1h; propertyCode
+0x5A20FE: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A2103: mov     ecx, [esi+98h]
 0x5A2109: call    sub_57D2F0
 0x5A210E: test    al, al

@@ -1,111 +1,112 @@
-double __thiscall sub_7155A0(int this, float a2)
+// Compute controller time from application-time delta, frequency, phase, cycle mode, and backwards flag. Updates scaledTimeAccumulator +0x24 and last application time +0x20; returns the clamped/looped/reversed time later cached at +0x28 by NiTimeController_IsUpdateUnchanged.
+float __thiscall NiTimeController_ComputeScaledTime(NiTimeController *this, float applicationTime)
 {
   double v3; // st7
   double v4; // st6
   bool v5; // zf
   int v6; // edi
   double v7; // st7
-  double v8; // st6
+  double m_fHiKeyTime; // st6
   double v9; // st7
-  double v10; // st7
-  float v12; // [esp+8h] [ebp-8h]
-  float v13; // [esp+Ch] [ebp-4h]
+  double m_fLoKeyTime; // st7
+  float v13; // [esp+8h] [ebp-8h]
   float v14; // [esp+Ch] [ebp-4h]
-  float v15; // [esp+14h] [ebp+4h]
-  float v16; // [esp+14h] [ebp+4h]
-  float v17; // [esp+14h] [ebp+4h]
-  float v18; // [esp+14h] [ebp+4h]
+  float v15; // [esp+Ch] [ebp-4h]
+  float applicationTimeb; // [esp+14h] [ebp+4h]
+  float applicationTimea; // [esp+14h] [ebp+4h]
+  float applicationTimec; // [esp+14h] [ebp+4h]
+  float applicationTimed; // [esp+14h] [ebp+4h]
 
-  v3 = a2;
-  if ( -flt_A7DEB4 == *(float *)(this + 0x1C) )
-    *(float *)(this + 0x1C) = a2;
-  v4 = 0.0;
-  if ( -flt_A7DEB4 == *(float *)(this + 0x20) )
+  v3 = applicationTime; /*0x7155b6*/
+  if ( -flt_A7DEB4 == this->members.m_fStartTime ) /*0x7155bd*/
+    this->members.m_fStartTime = applicationTime; /*0x7155bf*/
+  v4 = 0.0; /*0x7155d1*/
+  if ( -flt_A7DEB4 == this->members.m_fLastTime ) /*0x7155d6*/
   {
-    v5 = (*(_BYTE *)(this + 8) & 1) == 0;
-    *(float *)(this + 0x24) = 0.0;
-    if ( v5 )
-      goto LABEL_8;
+    v5 = (this->members.flags & 1) == 0; /*0x7155d8*/
+    this->members.scaledTimeAccumulator = 0.0; /*0x7155dc*/
+    if ( v5 ) /*0x7155df*/
+      goto LABEL_8; /*0x7155df*/
   }
   else
   {
-    v4 = v3 - *(float *)(this + 0x20);
+    v4 = v3 - this->members.m_fLastTime; /*0x7155ed*/
   }
-  a2 = v4;
+  applicationTime = v4; /*0x7155f0*/
 LABEL_8:
-  v6 = (*(unsigned __int8 *)(this + 8) >> 1) & 3;
-  v15 = *(float *)(this + 0xC) * a2 + *(float *)(this + 0x24);
-  *(float *)(this + 0x24) = v15;
-  v16 = v15 + *(float *)(this + 0x10);
-  *(float *)(this + 0x20) = v3;
-  EnterCriticalSection(&stru_B3FCA0);
-  v7 = v16;
-  if ( *(float *)(this + 0x18) == flt_B3FC94
-    && *(float *)(this + 0x14) == flt_B3FC90
-    && v7 == flt_B3FC8C
+  v6 = (LOBYTE(this->members.flags) >> 1) & 3; /*0x7155f4*/
+  applicationTimeb = this->members.m_fFrequency * applicationTime + this->members.scaledTimeAccumulator; /*0x71560e*/
+  this->members.scaledTimeAccumulator = applicationTimeb; /*0x715616*/
+  applicationTimea = applicationTimeb + this->members.m_fPhase; /*0x71561c*/
+  this->members.m_fLastTime = v3; /*0x715620*/
+  EnterCriticalSection(&unk_B3FCA0); /*0x715623*/
+  v7 = applicationTimea; /*0x715636*/
+  if ( this->members.m_fHiKeyTime == unk_B3FC94 /*0x715668*/
+    && this->members.m_fLoKeyTime == unk_B3FC90
+    && v7 == unk_B3FC8C
     && dword_B27130 == v6 )
   {
-    v16 = flt_B3FC88;
-    goto LABEL_35;
+    applicationTimea = unk_B3FC88; /*0x715672*/
+    goto LABEL_35; /*0x715676*/
   }
-  v8 = *(float *)(this + 0x18);
-  dword_B27130 = v6;
-  flt_B3FC94 = v8;
-  flt_B3FC90 = *(float *)(this + 0x14);
-  flt_B3FC8C = v16;
-  if ( -flt_A7DEB4 != *(float *)(this + 0x18) && *(float *)(this + 0x14) != flt_A7DEB4 )
+  m_fHiKeyTime = this->members.m_fHiKeyTime; /*0x71567b*/
+  dword_B27130 = v6; /*0x71567e*/
+  unk_B3FC94 = m_fHiKeyTime; /*0x715684*/
+  unk_B3FC90 = this->members.m_fLoKeyTime; /*0x71568d*/
+  unk_B3FC8C = applicationTimea; /*0x715693*/
+  if ( -flt_A7DEB4 != this->members.m_fHiKeyTime && this->members.m_fLoKeyTime != flt_A7DEB4 ) /*0x7156bf*/
   {
-    if ( v6 )
+    if ( v6 ) /*0x7156ca*/
     {
-      if ( v6 != 1 )
-        goto LABEL_27;
-      v13 = *(float *)(this + 0x18) - *(float *)(this + 0x14);
-      if ( v13 != 0.0 )
+      if ( v6 != 1 ) /*0x7156d3*/
+        goto LABEL_27; /*0x7156d3*/
+      v14 = this->members.m_fHiKeyTime - this->members.m_fLoKeyTime; /*0x7156df*/
+      if ( v14 != 0.0 ) /*0x7156f2*/
       {
-        v12 = v13 + v13;
-        unknown_libname_14(v12, v7);
-        v9 = v16;
-        if ( v16 < 0.0 )
+        v13 = v14 + v14; /*0x7156f6*/
+        unknown_libname_14(v13, v7); /*0x7156fe*/
+        v9 = applicationTimea; /*0x715719*/
+        if ( applicationTimea < 0.0 ) /*0x71571e*/
         {
-          v17 = v9 + v12;
-          v9 = v17;
+          applicationTimec = v9 + v13; /*0x715724*/
+          v9 = applicationTimec; /*0x715728*/
         }
-        if ( v13 < v9 )
-          v9 = v12 - v9;
-        v16 = v9 + *(float *)(this + 0x14);
-        goto LABEL_27;
+        if ( v14 < v9 ) /*0x715737*/
+          v9 = v13 - v9; /*0x715739*/
+        applicationTimea = v9 + this->members.m_fLoKeyTime; /*0x715740*/
+        goto LABEL_27; /*0x715744*/
       }
 LABEL_23:
-      v16 = *(float *)(this + 0x14);
-      goto LABEL_27;
+      applicationTimea = this->members.m_fLoKeyTime; /*0x715746*/
+      goto LABEL_27; /*0x715751*/
     }
-    v14 = *(float *)(this + 0x18) - *(float *)(this + 0x14);
-    if ( v14 == 0.0 )
-      goto LABEL_23;
-    v18 = v7 - *(float *)(this + 0x14);
-    unknown_libname_14(v14, v18);
-    v16 = v18 + *(float *)(this + 0x14);
-    if ( *(float *)(this + 0x14) > (double)v16 )
-      v16 = v16 + v14;
+    v15 = this->members.m_fHiKeyTime - this->members.m_fLoKeyTime; /*0x715759*/
+    if ( v15 == 0.0 ) /*0x71576c*/
+      goto LABEL_23; /*0x71576c*/
+    applicationTimed = v7 - this->members.m_fLoKeyTime; /*0x715775*/
+    unknown_libname_14(v15, applicationTimed); /*0x71577f*/
+    applicationTimea = applicationTimed + this->members.m_fLoKeyTime; /*0x71578f*/
+    if ( this->members.m_fLoKeyTime > (double)applicationTimea ) /*0x7157a1*/
+      applicationTimea = applicationTimea + v15; /*0x7157a7*/
   }
 LABEL_27:
-  if ( *(float *)(this + 0x18) < (double)v16 )
+  if ( this->members.m_fHiKeyTime < (double)applicationTimea ) /*0x7157bf*/
   {
-    v10 = *(float *)(this + 0x18);
+    m_fLoKeyTime = this->members.m_fHiKeyTime; /*0x7157c3*/
 LABEL_31:
-    v16 = v10;
-    goto LABEL_32;
+    applicationTimea = m_fLoKeyTime; /*0x7157d7*/
+    goto LABEL_32; /*0x7157d7*/
   }
-  if ( *(float *)(this + 0x14) > (double)v16 )
+  if ( this->members.m_fLoKeyTime > (double)applicationTimea ) /*0x7157d2*/
   {
-    v10 = *(float *)(this + 0x14);
-    goto LABEL_31;
+    m_fLoKeyTime = this->members.m_fLoKeyTime; /*0x7157d4*/
+    goto LABEL_31; /*0x7157d4*/
   }
 LABEL_32:
-  if ( (*(_BYTE *)(this + 8) & 0x10) != 0 )
-    v16 = *(float *)(this + 0x18) - (v16 - *(float *)(this + 0x14));
-  flt_B3FC88 = v16;
+  if ( (this->members.flags & 0x10) != 0 ) /*0x7157e4*/
+    applicationTimea = this->members.m_fHiKeyTime - (applicationTimea - this->members.m_fLoKeyTime); /*0x7157f2*/
+  unk_B3FC88 = applicationTimea; /*0x7157fa*/
 LABEL_35:
-  LeaveCriticalSection(&stru_B3FCA0);
-  return v16;
+  LeaveCriticalSection(&unk_B3FCA0); /*0x715800*/
+  return applicationTimea; /*0x71580f*/
 }

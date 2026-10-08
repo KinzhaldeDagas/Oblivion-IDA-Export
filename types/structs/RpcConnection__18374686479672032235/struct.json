@@ -1,166 +1,261 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_RpcConnection",
+  "definition": "struct _RpcConnection\n{\nLONG ref;\nBOOL server;\nHANDLE wait_release;\nLPSTR NetworkAddr;\nLPSTR Endpoint;\nLPWSTR NetworkOptions;\nconst connection_ops *ops;\nUSHORT MaxTransmissionSize;\n__declspec(align(8)) CtxtHandle ctx;\nTimeStamp exp;\nULONG attr;\nRpcAuthInfo *AuthInfo;\nULONG auth_context_id;\nULONG encryption_auth_len;\nULONG signature_auth_len;\nRpcQualityOfService *QOS;\nLPWSTR CookieAuth;\nlist conn_pool_entry;\nULONG assoc_group_id;\nRPC_ASYNC_STATE *async_state;\n_RpcAssoc *assoc;\nRPC_SYNTAX_IDENTIFIER ActiveInterface;\nUSHORT NextCallId;\nlist protseq_entry;\n_RpcServerProtseq *protseq;\n_RpcBinding *server_binding;\n}\n",
   "id": 18374686479672032235,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ref",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "server",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "wait_release",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "HANDLE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "NetworkAddr",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "LPSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Endpoint",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "LPSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "NetworkOptions",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "LPWSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ops",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "const connection_ops *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "MaxTransmissionSize",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 2
+      "offset_hex": "0x1C",
+      "size": 2,
+      "type": "USHORT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ctx",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 16
+      "size": 16,
+      "type": "CtxtHandle"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "exp",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 8
+      "size": 8,
+      "type": "TimeStamp"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "attr",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AuthInfo",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "RpcAuthInfo *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "auth_context_id",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "encryption_auth_len",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "signature_auth_len",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QOS",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 4
+      "offset_hex": "0x4C",
+      "size": 4,
+      "type": "RpcQualityOfService *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CookieAuth",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 4
+      "size": 4,
+      "type": "LPWSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "conn_pool_entry",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 8
+      "size": 8,
+      "type": "list"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "assoc_group_id",
       "offset": 92,
-      "offset_hex": "0x5c",
-      "size": 4
+      "offset_hex": "0x5C",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "async_state",
       "offset": 96,
       "offset_hex": "0x60",
-      "size": 4
+      "size": 4,
+      "type": "RPC_ASYNC_STATE *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "assoc",
       "offset": 100,
       "offset_hex": "0x64",
-      "size": 4
+      "size": 4,
+      "type": "_RpcAssoc *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ActiveInterface",
       "offset": 104,
       "offset_hex": "0x68",
-      "size": 20
+      "size": 20,
+      "type": "RPC_SYNTAX_IDENTIFIER"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "NextCallId",
       "offset": 124,
-      "offset_hex": "0x7c",
-      "size": 2
+      "offset_hex": "0x7C",
+      "size": 2,
+      "type": "USHORT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "protseq_entry",
       "offset": 128,
       "offset_hex": "0x80",
-      "size": 8
+      "size": 8,
+      "type": "list"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "protseq",
       "offset": 136,
       "offset_hex": "0x88",
-      "size": 4
+      "size": 4,
+      "type": "_RpcServerProtseq *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "server_binding",
       "offset": 140,
-      "offset_hex": "0x8c",
-      "size": 4
+      "offset_hex": "0x8C",
+      "size": 4,
+      "type": "_RpcBinding *"
     }
   ],
   "name": "_RpcConnection",
+  "ordinal": 3072,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 144
 }

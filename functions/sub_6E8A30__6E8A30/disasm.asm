@@ -37,12 +37,12 @@
 0x6E8AA1: mov     esi, [esp+28h+var_4]
 0x6E8AA5: add     esp, 14h
 0x6E8AA8: mov     edx, [esp+14h+a2]
-0x6E8AAC: mov     cl, ds:byte_B3D406[esi]
+0x6E8AAC: mov     cl, byte ptr ds:unk_B3D406[esi]
 0x6E8AB2: push    edx
 0x6E8AB3: mov     [edi+14h], cl
 0x6E8AB6: mov     eax, ds:0B3D100h[esi*4]
 0x6E8ABD: push    ebx
-0x6E8ABE: call    eax ; dword_B3D100
+0x6E8ABE: call    eax ; unk_B3D100
 0x6E8AC0: mov     ecx, [esp+1Ch+a2]
 0x6E8AC4: mov     edx, ds:0B3D488h[esi*4]
 0x6E8ACB: mov     ebx, eax

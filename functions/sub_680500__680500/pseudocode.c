@@ -1,21 +1,22 @@
-char *__thiscall sub_680500(unsigned __int16 *this, char a2)
+// Verified: Sets or clears bit 0x02 at byte +0x0C of the 0x10-byte state record selected by the node's 16-bit index. The route loop sets it after expanding a popped node, so its expanded/closed-set role is Probable; the full record layout remains Unknown.
+TravelPathSearchState *__thiscall TravelPath_SetSearchNodeExpandedFlag(TravelPathSpaceDoorLink *node, char expanded)
 {
-  unsigned __int16 v2; // cx
-  char *result; // eax
+  unsigned __int16 searchNodeIndex; // cx
+  TravelPathSearchState *result; // eax
 
-  v2 = *this;
-  result = 0;
-  if ( a2 )
+  searchNodeIndex = node->searchNodeIndex; /*0x680500*/
+  result = 0; /*0x680503*/
+  if ( expanded ) /*0x680509*/
   {
-    if ( v2 < (unsigned __int16)word_B3BF04 )
-      result = (char *)dword_B3BF00 + 0x10 * v2;
-    result[0xC] |= 2u;
+    if ( searchNodeIndex < MEMORY[0xB3BE00].stateCapacity ) /*0x680512*/
+      result = &MEMORY[0xB3BE00].states[searchNodeIndex]; /*0x68051a*/
+    result->flags |= 2u; /*0x680520*/
   }
   else
   {
-    if ( v2 < (unsigned __int16)word_B3BF04 )
-      result = (char *)dword_B3BF00 + 0x10 * v2;
-    result[0xC] &= ~2u;
+    if ( searchNodeIndex < MEMORY[0xB3BE00].stateCapacity ) /*0x68052e*/
+      result = &MEMORY[0xB3BE00].states[searchNodeIndex]; /*0x680536*/
+    result->flags &= ~2u; /*0x68053c*/
   }
-  return result;
+  return result; /*0x680524*/
 }

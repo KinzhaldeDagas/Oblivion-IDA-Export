@@ -28,7 +28,7 @@
 0x72CA05: call    edx
 0x72CA07: jmp     short loc_72CA12
 0x72CA09: push    eax
-0x72CA0A: call    FormHeapFree
+0x72CA0A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x72CA0F: add     esp, 4
 0x72CA12: mov     ecx, esi
 0x72CA14: mov     [esp+18h+var_4], 0FFFFFFFFh
@@ -39,3 +39,12 @@
 0x72CA2D: pop     esi
 0x72CA2E: add     esp, 10h
 0x72CA31: retn
+0x9CFDD0: mov     ecx, [ebp-10h]
+0x9CFDD3: jmp     NiRefObject_destr
+0x9CFDD8: mov     edx, [esp+arg_4]
+0x9CFDDC: lea     eax, [edx-8]
+0x9CFDDF: mov     ecx, [edx-0Ch]
+0x9CFDE2: xor     ecx, eax
+0x9CFDE4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CFDE9: mov     eax, offset stru_AF88CC
+0x9CFDEE: jmp     ___CxxFrameHandler3

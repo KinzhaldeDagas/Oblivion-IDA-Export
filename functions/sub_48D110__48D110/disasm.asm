@@ -31,13 +31,13 @@
 0x48D15B: mov     ecx, [esi]
 0x48D15D: cmp     ecx, ebx
 0x48D15F: jz      short loc_48D166
-0x48D161: call    BSSimpleList_Clear
+0x48D161: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x48D166: mov     edx, [esi]
 0x48D168: push    edx
-0x48D169: call    FormHeapFree
+0x48D169: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48D16E: push    esi
 0x48D16F: mov     [esi], ebx
-0x48D171: call    FormHeapFree
+0x48D171: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48D176: add     esp, 8
 0x48D179: mov     ecx, [ebp+4]; this
 0x48D17C: cmp     ecx, ebx
@@ -52,7 +52,6 @@
 0x48D193: jz      loc_48D44C
 0x48D199: jmp     short loc_48D1A4
 0x48D19B: jmp     short loc_48D1A0
-0x48D19D: align 10h
 0x48D1A0: mov     eax, [esp+24h+a2]
 0x48D1A4: cmp     [eax+4], ebx
 0x48D1A7: jnz     short loc_48D1B1
@@ -70,7 +69,7 @@
 0x48D1CA: mov     eax, [ebp+0]
 0x48D1CD: add     esp, 14h
 0x48D1D0: cmp     eax, ebx
-0x48D1D2: mov     [esp+24h+var_C], esi
+0x48D1D2: mov     [esp+24h+form], esi
 0x48D1D6: mov     dl, 1
 0x48D1D8: jz      short loc_48D1FA
 0x48D1DA: lea     ebx, [ebx+0]
@@ -96,12 +95,12 @@
 0x48D20C: mov     esi, [eax]
 0x48D20E: cmp     esi, ebx
 0x48D210: jz      short loc_48D22E
-0x48D212: mov     ecx, esi
-0x48D214: call    ExtraDataList_GetOwner
+0x48D212: mov     ecx, esi; this
+0x48D214: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48D219: test    eax, eax
 0x48D21B: jz      short loc_48D22E
-0x48D21D: mov     ecx, esi
-0x48D21F: call    ExtraDataList_GetOwner
+0x48D21D: mov     ecx, esi; this
+0x48D21F: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48D224: jmp     short loc_48D230
 0x48D226: cmp     eax, ebx
 0x48D228: jz      short loc_48D1FA
@@ -115,10 +114,10 @@
 0x48D23B: mov     esi, [edi]
 0x48D23D: cmp     esi, ebx
 0x48D23F: jz      short loc_48D25A
-0x48D241: mov     ecx, [esi]
+0x48D241: mov     ecx, [esi]; this
 0x48D243: cmp     ecx, ebx
 0x48D245: jz      short loc_48D25A
-0x48D247: call    ExtraDataList_GetOwner
+0x48D247: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48D24C: test    eax, eax
 0x48D24E: jz      short loc_48D253
 0x48D250: add     ebp, 1
@@ -131,12 +130,12 @@
 0x48D260: mov     esi, [eax]
 0x48D262: cmp     esi, ebx
 0x48D264: jz      short loc_48D28F
-0x48D266: mov     ecx, esi
-0x48D268: call    ExtraDataList_GetOwner
+0x48D266: mov     ecx, esi; this
+0x48D268: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48D26D: test    eax, eax
 0x48D26F: jz      short loc_48D28F
-0x48D271: mov     ecx, esi
-0x48D273: call    ExtraDataList_GetOwner
+0x48D271: mov     ecx, esi; this
+0x48D273: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48D278: cmp     eax, ebx
 0x48D27A: jz      short loc_48D28F
 0x48D27C: mov     ecx, [esp+24h+a2]
@@ -154,12 +153,12 @@
 0x48D29E: jg      short loc_48D2A8
 0x48D2A0: cmp     eax, ebx
 0x48D2A2: jge     loc_48D435
-0x48D2A8: cmp     [esp+24h+var_C], ebx
+0x48D2A8: cmp     [esp+24h+form], ebx
 0x48D2AC: jz      loc_48D435
 0x48D2B2: cmp     [esp+24h+arg_4], 0FFFFFFFFh
 0x48D2B7: jz      loc_48D435
 0x48D2BD: mov     edx, [esp+24h+arg_4]
-0x48D2C1: mov     esi, [esp+24h+var_C]
+0x48D2C1: mov     esi, [esp+24h+form]
 0x48D2C5: push    ebx
 0x48D2C6: push    edx
 0x48D2C7: lea     ecx, [esi+5Ch]
@@ -177,8 +176,8 @@
 0x48D2F3: mov     edi, [ebp+0]
 0x48D2F6: cmp     edi, ebx
 0x48D2F8: jz      loc_48D435
-0x48D2FE: push    esi
-0x48D2FF: call    sub_470520
+0x48D2FE: push    esi; form
+0x48D2FF: call    TESForm_GetValue
 0x48D304: push    eax
 0x48D305: call    Calc_ClothingRatingFromValue?
 0x48D30A: fstp    [esp+2Ch+var_8]
@@ -196,13 +195,13 @@
 0x48D332: mov     ecx, [esi]
 0x48D334: cmp     ecx, ebx
 0x48D336: jz      short loc_48D33D
-0x48D338: call    BSSimpleList_Clear
+0x48D338: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x48D33D: mov     eax, [esi]
 0x48D33F: push    eax
-0x48D340: call    FormHeapFree
+0x48D340: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48D345: push    esi
 0x48D346: mov     [esi], ebx
-0x48D348: call    FormHeapFree
+0x48D348: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48D34D: add     esp, 8
 0x48D350: push    0Ch; Size
 0x48D352: call    FormHeapAlloc
@@ -215,7 +214,7 @@
 0x48D366: mov     esi, eax
 0x48D368: jmp     short loc_48D36C
 0x48D36A: xor     esi, esi
-0x48D36C: mov     ecx, [esp+24h+var_C]
+0x48D36C: mov     ecx, [esp+24h+form]
 0x48D370: push    8; Size
 0x48D372: mov     [esp+28h+var_14], esi
 0x48D376: mov     [esi+8], ecx
@@ -229,22 +228,22 @@
 0x48D38B: mov     ecx, eax
 0x48D38D: mov     [esi], eax
 0x48D38F: call    BSSimpleList_PushFront
-0x48D394: mov     esi, [esp+24h+var_C]
+0x48D394: mov     esi, [esp+24h+form]
 0x48D398: jmp     short loc_48D3AE
 0x48D39A: xor     eax, eax
 0x48D39C: push    edi
 0x48D39D: mov     ecx, eax
 0x48D39F: mov     [esi], eax
 0x48D3A1: call    BSSimpleList_PushFront
-0x48D3A6: mov     esi, [esp+24h+var_C]
+0x48D3A6: mov     esi, [esp+24h+form]
 0x48D3AA: jmp     short loc_48D3AE
 0x48D3AC: fstp    st
 0x48D3AE: mov     ebp, [ebp+4]
 0x48D3B1: cmp     ebp, ebx
 0x48D3B3: jnz     loc_48D2F3
 0x48D3B9: jmp     short loc_48D435
-0x48D3BB: push    esi
-0x48D3BC: call    sub_470520
+0x48D3BB: push    esi; form
+0x48D3BC: call    TESForm_GetValue
 0x48D3C1: push    eax
 0x48D3C2: call    Calc_ClothingRatingFromValue?
 0x48D3C7: fstp    [esp+2Ch+var_8]
@@ -262,13 +261,13 @@
 0x48D3EB: mov     ecx, [edi]
 0x48D3ED: cmp     ecx, ebx
 0x48D3EF: jz      short loc_48D3F6
-0x48D3F1: call    BSSimpleList_Clear
+0x48D3F1: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x48D3F6: mov     edx, [edi]
 0x48D3F8: push    edx
-0x48D3F9: call    FormHeapFree
+0x48D3F9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48D3FE: push    edi
 0x48D3FF: mov     [edi], ebx
-0x48D401: call    FormHeapFree
+0x48D401: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48D406: add     esp, 8
 0x48D409: push    0Ch; Size
 0x48D40B: call    FormHeapAlloc
@@ -294,10 +293,9 @@
 0x48D446: jnz     loc_48D1A0
 0x48D44C: mov     esi, [ebp+0]
 0x48D44F: cmp     esi, ebx
-0x48D451: mov     [esp+24h+var_C], esi
+0x48D451: mov     [esp+24h+form], esi
 0x48D455: jz      loc_48D6AD
 0x48D45B: jmp     short loc_48D464
-0x48D45D: align 10h
 0x48D460: mov     ebp, [esp+24h+var_4]
 0x48D464: cmp     [esi+4], ebx
 0x48D467: jnz     short loc_48D471
@@ -322,12 +320,12 @@
 0x48D49F: mov     esi, [eax]
 0x48D4A1: cmp     esi, ebx
 0x48D4A3: jz      short loc_48D4E7
-0x48D4A5: mov     ecx, esi
-0x48D4A7: call    ExtraDataList_GetOwner
+0x48D4A5: mov     ecx, esi; this
+0x48D4A7: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48D4AC: test    eax, eax
 0x48D4AE: jz      short loc_48D4E7
-0x48D4B0: mov     ecx, esi
-0x48D4B2: call    ExtraDataList_GetOwner
+0x48D4B0: mov     ecx, esi; this
+0x48D4B2: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48D4B7: cmp     eax, ebx
 0x48D4B9: jz      short loc_48D4E7
 0x48D4BB: mov     eax, [edi]
@@ -336,12 +334,12 @@
 0x48D4C1: mov     esi, [eax]
 0x48D4C3: cmp     esi, ebx
 0x48D4C5: jz      short loc_48D4DB
-0x48D4C7: mov     ecx, esi
-0x48D4C9: call    ExtraDataList_GetOwner
+0x48D4C7: mov     ecx, esi; this
+0x48D4C9: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48D4CE: test    eax, eax
 0x48D4D0: jz      short loc_48D4DB
-0x48D4D2: mov     ecx, esi
-0x48D4D4: call    ExtraDataList_GetOwner
+0x48D4D2: mov     ecx, esi; this
+0x48D4D4: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48D4D9: jmp     short loc_48D4DD
 0x48D4DB: xor     eax, eax
 0x48D4DD: cmp     eax, [esp+24h+arg_0]
@@ -382,13 +380,12 @@
 0x48D553: jz      loc_48D620
 0x48D559: mov     ebp, eax
 0x48D55B: jmp     short loc_48D560
-0x48D55D: align 10h
 0x48D560: mov     edi, [ebp+0]
 0x48D563: cmp     edi, ebx
 0x48D565: jz      loc_48D69A
 0x48D56B: mov     edx, [esp+24h+a2]
-0x48D56F: push    edx
-0x48D570: call    sub_470520
+0x48D56F: push    edx; form
+0x48D570: call    TESForm_GetValue
 0x48D575: push    eax
 0x48D576: call    Calc_ClothingRatingFromValue?
 0x48D57B: fstp    [esp+2Ch+var_8]
@@ -406,13 +403,13 @@
 0x48D59F: mov     ecx, [esi]
 0x48D5A1: cmp     ecx, ebx
 0x48D5A3: jz      short loc_48D5AA
-0x48D5A5: call    BSSimpleList_Clear
+0x48D5A5: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x48D5AA: mov     eax, [esi]
 0x48D5AC: push    eax
-0x48D5AD: call    FormHeapFree
+0x48D5AD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48D5B2: push    esi
 0x48D5B3: mov     [esi], ebx
-0x48D5B5: call    FormHeapFree
+0x48D5B5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48D5BA: add     esp, 8
 0x48D5BD: push    0Ch; Size
 0x48D5BF: call    FormHeapAlloc
@@ -451,8 +448,8 @@
 0x48D616: cmp     ebp, ebx
 0x48D618: jnz     loc_48D560
 0x48D61E: jmp     short loc_48D69A
-0x48D620: push    ebp
-0x48D621: call    sub_470520
+0x48D620: push    ebp; form
+0x48D621: call    TESForm_GetValue
 0x48D626: push    eax
 0x48D627: call    Calc_ClothingRatingFromValue?
 0x48D62C: fstp    [esp+2Ch+var_8]
@@ -470,13 +467,13 @@
 0x48D650: mov     ecx, [esi]
 0x48D652: cmp     ecx, ebx
 0x48D654: jz      short loc_48D65B
-0x48D656: call    BSSimpleList_Clear
+0x48D656: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x48D65B: mov     edx, [esi]
 0x48D65D: push    edx
-0x48D65E: call    FormHeapFree
+0x48D65E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48D663: push    esi
 0x48D664: mov     [esi], ebx
-0x48D666: call    FormHeapFree
+0x48D666: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48D66B: add     esp, 8
 0x48D66E: push    0Ch; Size
 0x48D670: call    FormHeapAlloc
@@ -494,10 +491,10 @@
 0x48D693: mov     [eax+8], ebp
 0x48D696: jmp     short loc_48D69A
 0x48D698: fstp    st
-0x48D69A: mov     eax, [esp+24h+var_C]
+0x48D69A: mov     eax, [esp+24h+form]
 0x48D69E: mov     esi, [eax+4]
 0x48D6A1: cmp     esi, ebx
-0x48D6A3: mov     [esp+24h+var_C], esi
+0x48D6A3: mov     [esp+24h+form], esi
 0x48D6A7: jnz     loc_48D460
 0x48D6AD: mov     eax, [esp+24h+var_14]
 0x48D6B1: pop     edi

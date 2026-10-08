@@ -31,7 +31,7 @@
 0x72CD0A: xor     edi, edi
 0x72CD0C: mov     eax, [esi]
 0x72CD0E: push    eax
-0x72CD0F: call    FormHeapFree
+0x72CD0F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x72CD14: add     esp, 4
 0x72CD17: mov     [esi], edi
 0x72CD19: mov     [esi+4], ebp

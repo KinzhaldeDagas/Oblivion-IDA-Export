@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x48BDA0",
-    "line": "push    ebp",
+    "line": "push    ebp; Sidecar NPC decode: deeper equippable-item selector carries actor/base interface context used by weapon rating paths. Wrapper must forward four stack args unchanged while pushing/popping owner context.",
     "mnemonic": "push",
     "size": 1
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x48BDB1",
-    "line": "fstp    dword ptr [esp+5Ch+var_4C+4]",
+    "line": "fstp    [esp+5Ch+var_4C+4]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x48BE22",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x48BE2A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x48BE36",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x48BEBE",
-    "line": "call    Actor_GetFatigueFraction",
+    "line": "call    Actor_GetFatigueFraction; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x48BF0C",
-    "line": "mov     dword ptr [esp+60h+var_4C], esi",
+    "line": "mov     [esp+60h+var_4C], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1117,13 +1117,13 @@
   },
   {
     "ea": "0x48BFBF",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48BFC1",
-    "line": "call    ExtraDataList_GetOwner",
+    "line": "call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1141,13 +1141,13 @@
   },
   {
     "ea": "0x48BFCA",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48BFCC",
-    "line": "call    ExtraDataList_GetOwner",
+    "line": "call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1231,7 +1231,7 @@
   },
   {
     "ea": "0x48BFEE",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1249,7 +1249,7 @@
   },
   {
     "ea": "0x48BFF4",
-    "line": "call    ExtraDataList_GetOwner",
+    "line": "call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1327,13 +1327,13 @@
   },
   {
     "ea": "0x48C013",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48C015",
-    "line": "call    ExtraDataList_GetOwner",
+    "line": "call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1351,13 +1351,13 @@
   },
   {
     "ea": "0x48C01E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48C020",
-    "line": "call    ExtraDataList_GetOwner",
+    "line": "call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1483,7 +1483,7 @@
   },
   {
     "ea": "0x48C05D",
-    "line": "mov     edx, dword ptr [esp+60h+var_4C]",
+    "line": "mov     edx, [esp+60h+var_4C]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1507,7 +1507,7 @@
   },
   {
     "ea": "0x48C070",
-    "line": "mov     edx, dword ptr [esp+60h+var_4C]",
+    "line": "mov     edx, [esp+60h+var_4C]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1537,7 +1537,7 @@
   },
   {
     "ea": "0x48C088",
-    "line": "mov     esi, dword ptr [esp+60h+var_4C]",
+    "line": "mov     esi, [esp+60h+var_4C]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1699,7 +1699,7 @@
   },
   {
     "ea": "0x48C0E6",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1759,7 +1759,7 @@
   },
   {
     "ea": "0x48C102",
-    "line": "mov     ecx, dword ptr [esp+5Ch+var_4C+4]",
+    "line": "mov     ecx, [esp+5Ch+var_4C+4]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1777,7 +1777,7 @@
   },
   {
     "ea": "0x48C110",
-    "line": "call    TESObjectWEAP_GetWeaponSkillAV",
+    "line": "call    TESObjectWEAP_GetWeaponSkillAV; Equippable weapon-rating branch A: TESObjectWEAP_GetWeaponSkillAV returns at 0x48C115 and the joined Calc_WeaponDamage call returns at 0x48C7C0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1879,13 +1879,13 @@
   },
   {
     "ea": "0x48C144",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48C146",
-    "line": "call    sub_4849C0",
+    "line": "call    EquippedEntryData_GetCharge; Return per-instance ExtraCharge when present; otherwise return the TESEnchantableForm base charge. Returns the sentinel/default when the EntryData form is not enchantable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1992,12 +1992,6 @@
     "size": 2
   },
   {
-    "ea": "0x48C17D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x48C180",
     "line": "mov     eax, [esi]",
     "mnemonic": "mov",
@@ -2071,7 +2065,7 @@
   },
   {
     "ea": "0x48C1A6",
-    "line": "mov     eax, dword ptr [esp+60h+var_4C]",
+    "line": "mov     eax, [esp+60h+var_4C]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2173,7 +2167,7 @@
   },
   {
     "ea": "0x48C1DE",
-    "line": "mov     ecx, dword ptr [esp+60h+var_4C]",
+    "line": "mov     ecx, [esp+60h+var_4C]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2317,7 +2311,7 @@
   },
   {
     "ea": "0x48C230",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2335,7 +2329,7 @@
   },
   {
     "ea": "0x48C23A",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2353,7 +2347,7 @@
   },
   {
     "ea": "0x48C244",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2365,7 +2359,7 @@
   },
   {
     "ea": "0x48C24D",
-    "line": "mov     edx, dword ptr [esp+70h+var_4C]",
+    "line": "mov     edx, [esp+70h+var_4C]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2401,7 +2395,7 @@
   },
   {
     "ea": "0x48C258",
-    "line": "call    sub_547140",
+    "line": "call    AI_CalculateWeaponAndEnchantmentThreat",
     "mnemonic": "call",
     "size": 5
   },
@@ -2425,7 +2419,7 @@
   },
   {
     "ea": "0x48C268",
-    "line": "fld     dword ptr [esp+60h+var_4C+4]",
+    "line": "fld     [esp+60h+var_4C+4]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2461,7 +2455,7 @@
   },
   {
     "ea": "0x48C27B",
-    "line": "fstp    dword ptr [esp+60h+var_4C+4]",
+    "line": "fstp    [esp+60h+var_4C+4]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2491,7 +2485,7 @@
   },
   {
     "ea": "0x48C287",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2509,7 +2503,7 @@
   },
   {
     "ea": "0x48C28F",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2527,7 +2521,7 @@
   },
   {
     "ea": "0x48C297",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2605,7 +2599,7 @@
   },
   {
     "ea": "0x48C2BB",
-    "line": "mov     ecx, dword ptr [esp+60h+var_4C]",
+    "line": "mov     ecx, [esp+60h+var_4C]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2875,7 +2869,7 @@
   },
   {
     "ea": "0x48C340",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2893,7 +2887,7 @@
   },
   {
     "ea": "0x48C34A",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2911,7 +2905,7 @@
   },
   {
     "ea": "0x48C354",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2923,7 +2917,7 @@
   },
   {
     "ea": "0x48C35D",
-    "line": "mov     edi, dword ptr [esp+70h+var_4C]",
+    "line": "mov     edi, [esp+70h+var_4C]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2959,7 +2953,7 @@
   },
   {
     "ea": "0x48C368",
-    "line": "call    sub_547140",
+    "line": "call    AI_CalculateWeaponAndEnchantmentThreat",
     "mnemonic": "call",
     "size": 5
   },
@@ -2983,7 +2977,7 @@
   },
   {
     "ea": "0x48C378",
-    "line": "fld     dword ptr [esp+60h+var_4C+4]",
+    "line": "fld     [esp+60h+var_4C+4]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3019,7 +3013,7 @@
   },
   {
     "ea": "0x48C389",
-    "line": "fstp    dword ptr [esp+60h+var_4C+4]",
+    "line": "fstp    [esp+60h+var_4C+4]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -3055,7 +3049,7 @@
   },
   {
     "ea": "0x48C397",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3073,7 +3067,7 @@
   },
   {
     "ea": "0x48C39F",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3091,7 +3085,7 @@
   },
   {
     "ea": "0x48C3A7",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3247,7 +3241,7 @@
   },
   {
     "ea": "0x48C3EF",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3265,7 +3259,7 @@
   },
   {
     "ea": "0x48C3F7",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3283,7 +3277,7 @@
   },
   {
     "ea": "0x48C403",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3547,13 +3541,13 @@
   },
   {
     "ea": "0x48C494",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48C496",
-    "line": "call    ExtraDataList_GetOwner",
+    "line": "call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3571,13 +3565,13 @@
   },
   {
     "ea": "0x48C49F",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48C4A1",
-    "line": "call    ExtraDataList_GetOwner",
+    "line": "call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3631,13 +3625,13 @@
   },
   {
     "ea": "0x48C4B6",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48C4B8",
-    "line": "call    ExtraDataList_GetOwner",
+    "line": "call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3655,13 +3649,13 @@
   },
   {
     "ea": "0x48C4C1",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48C4C3",
-    "line": "call    ExtraDataList_GetOwner",
+    "line": "call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3955,7 +3949,7 @@
   },
   {
     "ea": "0x48C55C",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3973,7 +3967,7 @@
   },
   {
     "ea": "0x48C564",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3991,7 +3985,7 @@
   },
   {
     "ea": "0x48C570",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4015,7 +4009,7 @@
   },
   {
     "ea": "0x48C57D",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -4027,7 +4021,7 @@
   },
   {
     "ea": "0x48C585",
-    "line": "call    TESObjectWEAP_GetWeaponSkillAV",
+    "line": "call    TESObjectWEAP_GetWeaponSkillAV; Equippable weapon-rating branch B: TESObjectWEAP_GetWeaponSkillAV returns at 0x48C58A and the joined Calc_WeaponDamage call returns at 0x48C7C0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4153,7 +4147,7 @@
   },
   {
     "ea": "0x48C5CF",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4537,7 +4531,7 @@
   },
   {
     "ea": "0x48C69F",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4555,7 +4549,7 @@
   },
   {
     "ea": "0x48C6A9",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4573,7 +4567,7 @@
   },
   {
     "ea": "0x48C6B3",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4615,7 +4609,7 @@
   },
   {
     "ea": "0x48C6C3",
-    "line": "call    sub_547140",
+    "line": "call    AI_CalculateWeaponAndEnchantmentThreat",
     "mnemonic": "call",
     "size": 5
   },
@@ -4639,7 +4633,7 @@
   },
   {
     "ea": "0x48C6D3",
-    "line": "fld     dword ptr [esp+60h+var_4C+4]",
+    "line": "fld     [esp+60h+var_4C+4]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -4675,7 +4669,7 @@
   },
   {
     "ea": "0x48C6E8",
-    "line": "fstp    dword ptr [esp+60h+var_4C+4]",
+    "line": "fstp    [esp+60h+var_4C+4]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -4717,7 +4711,7 @@
   },
   {
     "ea": "0x48C6F8",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4735,7 +4729,7 @@
   },
   {
     "ea": "0x48C700",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4753,7 +4747,7 @@
   },
   {
     "ea": "0x48C708",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5071,7 +5065,7 @@
   },
   {
     "ea": "0x48C7A1",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5089,7 +5083,7 @@
   },
   {
     "ea": "0x48C7AB",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5107,7 +5101,7 @@
   },
   {
     "ea": "0x48C7B5",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5119,7 +5113,7 @@
   },
   {
     "ea": "0x48C7BB",
-    "line": "call    Calc_WeaponDamage",
+    "line": "call    Calc_WeaponDamage; Sidecar decode: Calc_WeaponDamage is actor/weapon agnostic after entry; BladeSkillsRestored substitutes only the skill-level argument after consuming the most recent exact source-return/formula-return token from its bounded per-thread stack. Unmatched or overflowed contexts retain native formula inputs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5143,7 +5137,7 @@
   },
   {
     "ea": "0x48C7CB",
-    "line": "fld     dword ptr [esp+60h+var_4C+4]",
+    "line": "fld     [esp+60h+var_4C+4]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -5179,7 +5173,7 @@
   },
   {
     "ea": "0x48C7DC",
-    "line": "fstp    dword ptr [esp+60h+var_4C+4]",
+    "line": "fstp    [esp+60h+var_4C+4]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -5221,7 +5215,7 @@
   },
   {
     "ea": "0x48C7EC",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5239,7 +5233,7 @@
   },
   {
     "ea": "0x48C7F4",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5257,7 +5251,7 @@
   },
   {
     "ea": "0x48C7FC",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5395,7 +5389,7 @@
   },
   {
     "ea": "0x48C843",
-    "line": "fld     dword ptr [esp+60h+var_4C+4]",
+    "line": "fld     [esp+60h+var_4C+4]",
     "mnemonic": "fld",
     "size": 4
   },

@@ -11,8 +11,8 @@
 0x5E6C29: call    Tile_GetParentMenu
 0x5E6C2E: test    eax, eax
 0x5E6C30: jz      short loc_5E6C59
-0x5E6C32: mov     ecx, esi
-0x5E6C34: call    sub_5893B0
+0x5E6C32: mov     ecx, esi; this
+0x5E6C34: call    Tile__IsVisible; AchievementsNative evidence: target eligibility helper returns true when the tile and ancestors are not suppressed by the observed flag path; inventory hover uses it before accepting header/item targets.
 0x5E6C39: test    al, al
 0x5E6C3B: jz      short loc_5E6C59
 0x5E6C3D: cmp     dword ptr [edi+58h], 0

@@ -1,37 +1,37 @@
 [
   {
     "ea": "0x548C00",
-    "line": "push    ecx",
+    "line": "push    ecx; Spell magicka cost uses luck-modified magic skill. AVU replacement must preserve vanilla lower clamp and fractional precision before configurable cap/DR handling.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x548C01",
-    "line": "mov     eax, [esp+4+arg_8]",
+    "line": "mov     eax, [esp+4+luckValue]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x548C05",
-    "line": "mov     ecx, [esp+4+arg_4]",
+    "line": "mov     ecx, [esp+4+skillValue]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x548C09",
-    "line": "push    eax",
+    "line": "push    eax; luckValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x548C0A",
-    "line": "push    ecx",
+    "line": "push    ecx; skillValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x548C0B",
-    "line": "call    Calc_LuckModifiedSkill",
+    "line": "call    Calc_LuckModifiedSkill; Compute Luck-adjusted effective skill as skill + iActorLuckSkillBase + Luck*fActorLuckSkillMult, then clamp to 0..100. Defaults simplify to skill + (Luck-50)*0.4.",
     "mnemonic": "call",
     "size": 5
   },

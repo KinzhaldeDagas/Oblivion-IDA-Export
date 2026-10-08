@@ -1,1 +1,1 @@
-threadlocinfo
+typedef threadlocaleinfostruct_1 threadlocinfo;

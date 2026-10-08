@@ -21,7 +21,7 @@
 0x49468A: pop     edi
 0x49468B: mov     ds:0B34D90h, esi
 0x494691: mov     eax, esi
-0x494693: mov     dword ptr ds:0B27E60h, offset nullsub_return0_0arg
-0x49469D: mov     dword ptr ds:0B40608h, offset ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x494693: mov     dword ptr ds:0B27E60h, offset nullsub_return0_0arg; [Verified] Shared zero-return leaf. BSTempEffectDecal vtable 0xA6822C uses it at +0x54 for GetTypeID 0 and also in other slots; many unrelated vtables reuse this target. Class meaning must be established from the owning vtable and caller.
+0x49469D: mov     dword ptr ds:0B40608h, offset Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x4946A7: pop     esi
 0x4946A8: retn    4

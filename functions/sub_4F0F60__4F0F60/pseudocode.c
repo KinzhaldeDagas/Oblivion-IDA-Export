@@ -1,4 +1,5 @@
+// NiTPointerList allocator virtual that acquires a node from the global NiTList node pool.
 int *sub_4F0F60()
 {
-  return sub_44D810();
+  return NiTListNodePool_Acquire();
 }

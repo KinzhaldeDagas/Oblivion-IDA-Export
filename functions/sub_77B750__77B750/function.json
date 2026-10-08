@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x77B750",
+      "0x77B7A0"
+    ]
+  ],
+  "chunks_sha256": "308e8d9885f9ce460cf57fdeb86bc0a2b8dc116a2996978c35c6e4bca1c4172a",
+  "comment_regular": "DX10OBSE target: caps-gated NiDX9RenderState software vertex-processing switch. Calls IDirect3DDevice9::SetSoftwareVertexProcessing via vtable +0x134 and rebinds current vertex shader; plugin mirrors mode into DX10 companion render-state constants.",
+  "comment_repeatable": "OblivionNew verified2026-10-03: vtableA8A9F4 established by constructor77BB34 and scalar deleting destructor77BAD3; slotEC points here. Compares requested byte to object+1014; only on change and nonzero byte at Renderer(object+FFC)+5C9 does it write cached byte, call Device(object+FF8)->SetSoftwareVertexProcessing atslot77/+134, and invoke own vtable+94 with CurrentVertexShader(object+FE0). The +94 target77B3C0 is RemoveVertexShader: it clears matching current and saved shader pointers and calls device SetVertexShader(NULL) when current matches; no COM AddRef/Release observed. This INVALIDATES/UNBINDS the current shader; the older comment saying rebinds was incorrect. Driver HRESULT is ignored; cached byte is written before that call. Renderer+5C9 gate meaning beyond allowing this transition is not yet reconstructed. Getter77B7A0/slotF0 returns the cached low byte. Return-void prototypes agree with the verified vtable entries. No Fallout layout transplanted.\n[DX11 raster migration host evidence 2026-10-03; not additional Oblivion semantics] Standalone native HAL/WARP raster comparisons exercised weights0..3, UBYTE4/color-beta fetch, hardware/software VP, indexed/UP and rotated views. Position suites96 cases per mode and software lighting96 cases passed scoped image comparisons; edge coverage differences were explicitly counted within2/256 pixel, lighting interior tolerance1 color byte. Hardware indexed lighting initially mismatched8/96 cases under rotated view; view*world normal-palette ordering correction is source-only pending validation. Existing native Oblivion wrapper behavior above remains authoritative; host tests do not prove broad raster equivalence. Evidence: DirectX12/analysis/dx11_completion/stage-raster-vertex-blending/LastTest-lighting.log.\n[DX11 raster validation update 2026-10-03] The indexed hardware normal-palette view*world correction subsequently passed all96 native/modern lighting cases with zero interior color error (140 explicitly counted boundary coverage differences under the existing2/256-pixel envelope). Palette state/mixed-VP/query restoration check passed;22 packed-color/float equivalent images matched exactly within each native/modern provider. This supersedes the pending-correction status in the preceding host-evidence note; wider raster semantics remain scoped. Evidence: stage-raster-vertex-blending/LastTest-normal-scope.log.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_77B750",
+  "display_name": "NiDX9RenderState_SetSoftwareVertexProcessing",
   "end_ea": "0x77B7A0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_77B750",
+  "name": "NiDX9RenderState_SetSoftwareVertexProcessing",
   "segment": ".text",
   "sha256": "308e8d9885f9ce460cf57fdeb86bc0a2b8dc116a2996978c35c6e4bca1c4172a",
   "size": 80,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x77B750",
-  "type": "int __thiscall(_DWORD *this, unsigned __int8)",
+  "total_chunk_size": 80,
+  "type": "void __thiscall(NiDX9RenderState *self, unsigned __int8 enabled)",
   "xrefs_from_count": 25,
   "xrefs_to_count": 1
 }

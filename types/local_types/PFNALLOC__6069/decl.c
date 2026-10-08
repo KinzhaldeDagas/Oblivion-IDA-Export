@@ -1,1 +1,1 @@
-PFNALLOC
+typedef void *(*PFNALLOC)(ULONG);

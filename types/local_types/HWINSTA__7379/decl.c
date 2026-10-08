@@ -1,1 +1,1 @@
-HWINSTA
+typedef HWINSTA__ *HWINSTA;

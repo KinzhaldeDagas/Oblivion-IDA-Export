@@ -9,7 +9,7 @@
 0x6E464E: mov     ecx, [esi+10h]
 0x6E4651: mov     edx, ds:0B3D310h[ecx*4]
 0x6E4658: push    eax
-0x6E4659: call    edx ; dword_B3D310
+0x6E4659: call    edx ; unk_B3D310
 0x6E465B: add     esp, 4
 0x6E465E: mov     edi, [esp+0Ch+arg_0]
 0x6E4662: cmp     edi, ebx
@@ -18,7 +18,7 @@
 0x6E466A: cmp     ecx, ebx
 0x6E466C: jz      short loc_6E468A
 0x6E466E: mov     eax, [esp+0Ch+arg_8]
-0x6E4672: mov     dl, ds:byte_B3D3FA[eax]
+0x6E4672: mov     dl, byte ptr ds:unk_B3D3FA[eax]
 0x6E4678: mov     [esi+0Ch], edi
 0x6E467B: pop     edi
 0x6E467C: mov     [esi+14h], dl

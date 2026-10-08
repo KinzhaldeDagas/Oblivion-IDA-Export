@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 14,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x5221C0",
+      "0x52222F"
+    ]
+  ],
+  "chunks_sha256": "1e3cbc9a75956f8b685483ced37d926d83302c0e60ce4519fc5367a681842895",
+  "comment_regular": "Builds absolute FaceGen parameters by combining race base with active NPC delta. CORRECTION: bank selection uses base actor value 0x45 (vampirism), zero -> +0x108, nonzero -> +0x168; earlier sex-selected description was incorrect. Null race copies manager default parameters.",
+  "comment_repeatable": "Builds absolute FaceGen parameters by combining race base with active NPC delta. CORRECTION: bank selection uses base actor value 0x45 (vampirism), zero -> +0x108, nonzero -> +0x168; earlier sex-selected description was incorrect. Null race copies manager default parameters.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_5221C0",
+  "display_name": "TESNPC_BuildAbsoluteFaceGenParameters",
   "end_ea": "0x52222F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_5221C0",
+  "name": "TESNPC_BuildAbsoluteFaceGenParameters",
   "segment": ".text",
   "sha256": "1e3cbc9a75956f8b685483ced37d926d83302c0e60ce4519fc5367a681842895",
   "size": 111,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5221C0",
-  "type": "void __thiscall(int *this, _DWORD *)",
+  "total_chunk_size": 111,
+  "type": "void __thiscall(const TESNPC *this, FaceGenHeadParameters *outAbsolute)",
   "xrefs_from_count": 44,
   "xrefs_to_count": 14
 }

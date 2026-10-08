@@ -36,7 +36,7 @@
 0x4FA265: jz      short loc_4FA2AD
 0x4FA267: mov     eax, [esi]
 0x4FA269: push    eax; a1
-0x4FA26A: call    TESForm_LookupByFormID
+0x4FA26A: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4FA26F: mov     ecx, [esi+5]
 0x4FA272: mov     edx, [eax]
 0x4FA274: add     esp, 4

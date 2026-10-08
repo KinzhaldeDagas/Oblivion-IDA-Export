@@ -63,13 +63,13 @@
 0x73B8B5: push    ecx
 0x73B8B6: lea     ecx, [ebx+64h]
 0x73B8B9: call    sub_710400
-0x73B8BE: push    eax
-0x73B8BF: lea     edx, [esp+0ACh+var_48]
-0x73B8C3: push    edx
-0x73B8C4: lea     ecx, [ebx+0DCh]
-0x73B8CA: call    NiMAtrix33_Multiply
+0x73B8BE: push    eax; right
+0x73B8BF: lea     edx, [esp+0ACh+out]
+0x73B8C3: push    edx; out
+0x73B8C4: lea     ecx, [ebx+0DCh]; this
+0x73B8CA: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x73B8CF: mov     ecx, eax
-0x73B8D1: call    sub_710190
+0x73B8D1: call    NiMatrix3_ScaleTo
 0x73B8D6: lea     edx, [ebx+10Ch]
 0x73B8DC: mov     esi, eax
 0x73B8DE: mov     edi, edx
@@ -98,18 +98,18 @@
 0x73B938: mov     [ebx+138h], ecx
 0x73B93E: jmp     short loc_73B981
 0x73B940: fldz
-0x73B942: lea     edx, [esp+0A0h+var_48]
+0x73B942: lea     edx, [esp+0A0h+out]
 0x73B946: fst     dword ptr [ebx+138h]
 0x73B94C: push    edx
 0x73B94D: fst     dword ptr [ebx+134h]
 0x73B953: lea     ecx, [ebx+64h]
 0x73B956: fstp    dword ptr [ebx+130h]
 0x73B95C: call    sub_710400
-0x73B961: push    eax
+0x73B961: push    eax; right
 0x73B962: lea     eax, [esp+0A4h+var_6C]
-0x73B966: push    eax
-0x73B967: lea     ecx, [ebx+0DCh]
-0x73B96D: call    NiMAtrix33_Multiply
+0x73B966: push    eax; out
+0x73B967: lea     ecx, [ebx+0DCh]; this
+0x73B96D: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x73B972: lea     edi, [ebx+10Ch]
 0x73B978: mov     ecx, 9
 0x73B97D: mov     esi, eax

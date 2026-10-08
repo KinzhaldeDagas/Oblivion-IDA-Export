@@ -1,18 +1,31 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x439880",
+      "0x4398C9"
+    ]
+  ],
+  "chunks_sha256": "6c2f0dc70e350d6ffe18b2bd2b32f53192bae0e9541c6a129d842584d519c48c",
+  "comment_regular": "QueuedTreeModel destructor. Releases held object/ref at +0x28, frees queued path at +0x20, then chains to QueuedFileEntry destructor.",
+  "comment_repeatable": "QueuedTreeModel destructor. Releases held object/ref at +0x28, frees queued path at +0x20, then chains to QueuedFileEntry destructor.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 4,
   "display_name": "sub_439880",
   "end_ea": "0x4398C9",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_439880",
   "segment": ".text",
   "sha256": "6c2f0dc70e350d6ffe18b2bd2b32f53192bae0e9541c6a129d842584d519c48c",
   "size": 73,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x439880",
+  "total_chunk_size": 73,
   "type": "QueuedMagicItem *__thiscall(QueuedMagicItem *this, char)",
   "xrefs_from_count": 32,
   "xrefs_to_count": 1

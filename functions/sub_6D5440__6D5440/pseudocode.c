@@ -1,9 +1,9 @@
-char __thiscall sub_6D5440(float *this, float a2)
+bool __thiscall sub_6D5440(NiTimeController *this, float applicationTime)
 {
-  char result; // al
+  bool result; // al
 
-  result = sub_6C36B0(this, a2);
-  if ( !result )
-    *((_BYTE *)this + 0x54) = 1;
-  return result;
+  result = NiTimeController_IsUpdateUnchanged(this, applicationTime); /*0x6d544b*/
+  if ( !result ) /*0x6d5452*/
+    *((_BYTE *)this + 0x54) = 1; /*0x6d5454*/
+  return result; /*0x6d5459*/
 }

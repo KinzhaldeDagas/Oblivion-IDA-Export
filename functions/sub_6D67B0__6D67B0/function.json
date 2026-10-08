@@ -1,18 +1,31 @@
 {
-  "callees_count": 8,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6D67B0",
+      "0x6D680F"
+    ]
+  ],
+  "chunks_sha256": "13d36733d16aac4b1220f6749e615901dbaa35da864bc1851f725be9a03ca891",
+  "comment_regular": "Oblivion NiTransformInterpolator binary load. Loads base state, reads cached 0x20-byte transform at +0x0C, resolves the streamed NiTransformData object reference, and replaces +0x2C with balanced refcounts. The three key cursors are not loaded.",
+  "comment_repeatable": "Oblivion NiTransformInterpolator binary load. Loads base state, reads cached 0x20-byte transform at +0x0C, resolves the streamed NiTransformData object reference, and replaces +0x2C with balanced refcounts. The three key cursors are not loaded.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6D67B0",
+  "display_name": "NiTransformInterpolator_LoadBinary",
   "end_ea": "0x6D680F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6D67B0",
+  "name": "NiTransformInterpolator_LoadBinary",
   "segment": ".text",
   "sha256": "13d36733d16aac4b1220f6749e615901dbaa35da864bc1851f725be9a03ca891",
   "size": 95,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6D67B0",
+  "total_chunk_size": 95,
   "type": "LONG __thiscall(char *this, _DWORD *)",
   "xrefs_from_count": 47,
   "xrefs_to_count": 1

@@ -42,12 +42,6 @@
     "size": 2
   },
   {
-    "ea": "0x68AE2D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x68AE30",
     "line": "mov     ecx, [eax+4]",
     "mnemonic": "mov",
@@ -151,25 +145,25 @@
   },
   {
     "ea": "0x68AE57",
-    "line": "mov     eax, [esp+8+arg_0]",
+    "line": "mov     eax, [esp+8+position]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x68AE5B",
-    "line": "push    eax",
+    "line": "push    eax; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x68AE5C",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x68AE5E",
-    "line": "call    sub_68B200",
+    "line": "call    TravelPathNode_SetOwnedPosition; Verified for kind 1 allocates a 12-byte NiPoint3 when payload is null and copies xyz from the supplied position; this record owns that copy until cleared.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,25 +199,25 @@
   },
   {
     "ea": "0x68AE6C",
-    "line": "mov     ecx, [esp+8+arg_0]",
+    "line": "mov     ecx, [esp+8+position]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x68AE70",
-    "line": "push    ecx",
+    "line": "push    ecx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x68AE71",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x68AE73",
-    "line": "call    sub_68A280",
+    "line": "call    TravelPath_AppendDestinationPosition; Verified appends the final destination as a kind-1 TravelPathNode with its own copied NiPoint3 payload, even if low-path A* produced no reference nodes.",
     "mnemonic": "call",
     "size": 5
   },

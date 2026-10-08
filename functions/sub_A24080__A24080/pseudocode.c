@@ -1,4 +1,4 @@
 void __cdecl sub_A24080()
 {
-  GameSetting_destr((int *)&flt_B3A428);
+  GameSetting_destr((int *)g_fPathSpaceExitPenalty); /*0xa24085*/
 }

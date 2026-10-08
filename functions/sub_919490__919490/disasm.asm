@@ -221,7 +221,6 @@
 0x919767: test    eax, eax
 0x919769: jle     short loc_9197CE
 0x91976B: jmp     short loc_919770
-0x91976D: align 10h
 0x919770: mov     eax, [esi]
 0x919772: mov     eax, [eax+edi*4]
 0x919775: mov     ecx, [eax+14h]

@@ -1,105 +1,99 @@
-char __cdecl sub_4B7490(TESObjectREFR *a1, TESObjectREFR *a2, _BYTE *a3)
+// Verified door access helper: handles linked-cell ownership, door ownership, guards, trespass, effective ExtraLockData, TESKey inventory, and lockpick tools. In the trespass branch, an interior linked cell passes the cell check when TESObjectCELL_HasPublicFlag20 (flags0 bit 0x20) is set. If no key matches, Lockpick/Skeleton Key with effective level <100 sets mustLockpickOut=1.
+bool __cdecl TESObjectDOOR_CheckActorAccess(TESObjectREFR *doorReference, Actor *actor, UInt8 *mustLockpickOut)
 {
   TESObjectCELL *v4; // ebp
-  TESObjectREFR **TeleportExtraData; // ebx
-  TESObjectCELL *ParentCell; // eax
+  TeleportData *TeleportData; // ebx
+  ExtraDataList *DwordAtOffset40; // eax
   int v7; // eax
-  TESObjectCELL *v8; // eax
+  ExtraDataList *v8; // eax
   int v9; // eax
-  char v10; // al
-  BSExtraData *v11; // eax
-  BSExtraData *v12; // edi
-  int v13; // eax
-  char v14; // al
-  int v15; // eax
-  char v16; // al
-  char v17; // al
-  char v19; // [esp+Bh] [ebp-5h]
-  int v20; // [esp+Ch] [ebp-4h] BYREF
-  BSExtraData *v21; // [esp+14h] [ebp+4h]
+  bool HasPublicFlag20; // al
+  ExtraLockData *EffectiveDoorLock; // eax
+  ExtraLockData *v12; // edi
+  unsigned __int8 *key; // eax
+  bool v15; // [esp+Bh] [ebp-5h]
+  signed int v16; // [esp+Ch] [ebp-4h] BYREF
+  ExtraLockData *effectiveLock; // [esp+14h] [ebp+4h]
 
-  v4 = 0;
-  v19 = 0;
-  v20 = 0;
-  *a3 = 0;
-  if ( !a1 || a1->vtbl->GetBaseForm(a1)->member.type != kFormType_Door || !a2 )
-    return v19;
-  TeleportExtraData = (TESObjectREFR **)GetTeleportExtraData(a1);
-  v21 = sub_4D7740(a1);
-  if ( !v21 )
-    return 1;
-  if ( TeleportExtraData )
+  v4 = 0; /*0x4b749d*/
+  v15 = 0; /*0x4b74a1*/
+  v16 = 0; /*0x4b74a6*/
+  *mustLockpickOut = 0; /*0x4b74aa*/
+  if ( !doorReference || doorReference->vtbl->GetBaseForm(doorReference)->member.type != kFormType_Door || !actor ) /*0x4b74d0*/
+    return v15; /*0x4b74d0*/
+  TeleportData = TESObjectREFR_GetTeleportData(doorReference); /*0x4b74e0*/
+  effectiveLock = TESObjectREFR_GetEffectiveDoorLock(doorReference); /*0x4b74e9*/
+  if ( !effectiveLock ) /*0x4b74ed*/
+    return 1; /*0x4b74ed*/
+  if ( TeleportData ) /*0x4b74f5*/
   {
-    v4 = sub_42B460(TeleportExtraData);
-    if ( a2 != (TESObjectREFR *)TESDataHandler_g_PlayerRef )
+    v4 = sub_42B460(&TeleportData->linkedDoor); /*0x4b7504*/
+    if ( actor != (Actor *)reference ) /*0x4b7506*/
     {
-      if ( TESObjectREFR_GetParentCell(a2) )
+      if ( Shared_GetDwordAtOffset40(actor) ) /*0x4b750a*/
       {
-        ParentCell = TESObjectREFR_GetParentCell(a2);
-        TESObjectCELL_GetOwner(ParentCell);
-        if ( v7 )
+        DwordAtOffset40 = (ExtraDataList *)Shared_GetDwordAtOffset40(actor); /*0x4b7515*/
+        TESObjectCELL_GetOwner(DwordAtOffset40); /*0x4b751c*/
+        if ( v7 ) /*0x4b7523*/
         {
-          v8 = TESObjectREFR_GetParentCell(a2);
-          if ( sub_4CAAC0(v8, a2) )
+          v8 = (ExtraDataList *)Shared_GetDwordAtOffset40(actor); /*0x4b7528*/
+          if ( sub_4CAAC0(v8, actor) ) /*0x4b752f*/
           {
-            if ( !v4 )
-              return 1;
-            TESObjectCELL_GetOwner(v4);
-            if ( !v9 )
-              return 1;
-            v10 = sub_4CAAC0(v4, a2);
+            if ( !v4 ) /*0x4b753a*/
+              return 1; /*0x4b753a*/
+            TESObjectCELL_GetOwner((ExtraDataList *)v4); /*0x4b7542*/
+            if ( !v9 ) /*0x4b7549*/
+              return 1; /*0x4b7549*/
+            HasPublicFlag20 = sub_4CAAC0((ExtraDataList *)v4, actor); /*0x4b7552*/
 LABEL_26:
-            if ( !v10 )
-              goto LABEL_27;
-            return 1;
+            if ( !HasPublicFlag20 ) /*0x4b75fb*/
+              goto LABEL_27; /*0x4b75fb*/
+            return 1; /*0x4b7683*/
           }
         }
       }
     }
   }
-  if ( TESOBjectREFR_IsOwnedBy(a1, (PlayerCharacter *)a2, 1) || sub_5E6C60((Actor *)a2) && sub_5E6BA0((Actor *)a2) )
-    return 1;
-  if ( a2 == (TESObjectREFR *)TESDataHandler_g_PlayerRef
-    && TESDataHandler_g_PlayerRef->vtbl->super.IsTresspassing((Actor *)TESDataHandler_g_PlayerRef) )
+  if ( TESOBjectREFR_IsOwnedBy(doorReference, (TESObjectREFR *)actor, 1) /*0x4b757b*/
+    || Actor_IsGuardClass(actor) && sub_5E6BA0(actor) )
   {
-    if ( TeleportExtraData && LOBYTE(v21->vtbl) != 0x64 )
+    return 1; /*0x4b7582*/
+  }
+  if ( actor == (Actor *)reference && reference->vtbl->super.IsTresspassing((Actor *)reference) ) /*0x4b759a*/
+  {
+    if ( TeleportData && effectiveLock->level != 0x64 ) /*0x4b75ab*/
     {
-      if ( !v4 || !TESObjectCELL_IsInterior(v4) )
-        return 1;
-      v10 = sub_4C9830(v4);
-      goto LABEL_26;
+      if ( !v4 || !TESObjectCELL_IsInterior(v4) ) /*0x4b75b7*/
+        return 1; /*0x4b75be*/
+      HasPublicFlag20 = TESObjectCELL_HasPublicFlag20(v4); /*0x4b75c6*/
+      goto LABEL_26; /*0x4b75cb*/
     }
   }
-  else if ( sub_5E3220(a2)
-         && (PlayerCharacter *)(*((int (__thiscall **)(TESObjectREFRVtbl *))a2[1].vtbl->super.super.InitializeComponent
-                                + 0x33))(a2[1].vtbl) == TESDataHandler_g_PlayerRef )
+  else if ( sub_5E3220(actor) /*0x4b75eb*/
+         && (PlayerCharacter *)actor->members.super.process->GetUnk02C(actor->members.super.process) == reference )
   {
-    v10 = ((int (__thiscall *)(TESObjectREFR *))a2->vtbl[2].super.super.ClearComponentReferences)(a2);
-    goto LABEL_26;
+    HasPublicFlag20 = actor->vtbl->IsTresspassing(actor); /*0x4b75f7*/
+    goto LABEL_26; /*0x4b75f7*/
   }
 LABEL_27:
-  v11 = sub_4D7740(a1);
-  v12 = v11;
-  if ( !v11 )
-    return 1;
-  if ( !sub_428E70(v11) )
-    return 1;
-  v13 = *(_DWORD *)&v12->members.type;
-  if ( v13 )
+  EffectiveDoorLock = TESObjectREFR_GetEffectiveDoorLock(doorReference); /*0x4b7601*/
+  v12 = EffectiveDoorLock; /*0x4b7608*/
+  if ( !EffectiveDoorLock ) /*0x4b760c*/
+    return 1; /*0x4b760c*/
+  if ( !ExtraLockData_IsLocked(EffectiveDoorLock) ) /*0x4b7610*/
+    return 1; /*0x4b7610*/
+  key = (unsigned __int8 *)v12->key;            // Verified field use: reads ExtraLockData.key, now typed TESKey* from the XLOC post-load RTTI resolver; passes it to the actor inventory query before testing lockpick tools. /*0x4b7619*/
+  if ( key ) /*0x4b761e*/
   {
-    sub_5E4A00(v13, 0, 1, 0, &v20);
-    if ( v14 )
-      return 1;
+    if ( sub_5E4A00((int)actor, key, 0, 1, 0, &v16) ) /*0x4b762e*/
+      return 1; /*0x4b7635*/
   }
-  sub_429990((char *)v12);
-  if ( v15 < 0x64 )
+  if ( ExtraLockData_GetPlayerScaledLockLevel(v12) < 0x64 /*0x4b7673*/
+    && (sub_5E4A00((int)actor, (unsigned __int8 *)MEMORY[0xB35EC8], 0, 1, 0, &v16)
+     || sub_5E4A00((int)actor, (unsigned __int8 *)MEMORY[0xB35ECC], 0, 1, 0, &v16)) )// Verified mustLockpickOut condition: after a lock-specific key fails, an effective lock level below 100 plus inventory presence of TESDataHandler_g_Lockpick or TESDataHandler_g_SkeletonKey returns accessible and sets mustLockpickOut=1.
   {
-    sub_5E4A00(TESDataHandler_g_Lockpick, 0, 1, 0, &v20);
-    if ( v16 || (sub_5E4A00(TESDataHandler_g_SkeletonKey, 0, 1, 0, &v20), v17) )
-    {
-      *a3 = 1;
-      return 1;
-    }
+    *mustLockpickOut = 1; /*0x4b7680*/
+    return 1; /*0x4b7680*/
   }
-  return v19;
+  return v15; /*0x4b768e*/
 }

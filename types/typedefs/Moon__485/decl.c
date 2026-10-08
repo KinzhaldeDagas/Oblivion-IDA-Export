@@ -1,1 +1,1 @@
-Moon
+struct Moon;

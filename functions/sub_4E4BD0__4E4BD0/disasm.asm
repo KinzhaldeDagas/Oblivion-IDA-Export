@@ -1,4 +1,4 @@
-0x4E4BD0: push    ebx
+0x4E4BD0: push    ebx; Verified PathGrid SetDefault override: release and clear renderNode (+0x1C), clear parent/array pointers at +0x20/+0x24 and pointCount at +0x30, then reinitialize TESForm components. The graph maps remain constructor-owned.
 0x4E4BD1: push    esi
 0x4E4BD2: mov     esi, ecx
 0x4E4BD4: push    edi

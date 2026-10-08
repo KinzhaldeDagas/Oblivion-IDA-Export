@@ -10,11 +10,11 @@
 0x52BA4A: jz      short loc_52BAB6
 0x52BA4C: push    0FFFFFFFFh; a2
 0x52BA4E: mov     dword ptr [esp+0Ch+ArgList], eax
-0x52BA52: call    TESForm_GetOverrideFile
+0x52BA52: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x52BA57: push    eax; a2
 0x52BA58: lea     ecx, [esp+0Ch+ArgList]
 0x52BA5C: push    ecx; a1
-0x52BA5D: call    TESForm_ResolveFormID
+0x52BA5D: call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.
 0x52BA62: mov     edx, dword ptr [esp+10h+ArgList]
 0x52BA66: add     esp, 8
 0x52BA69: push    0; int
@@ -22,7 +22,7 @@
 0x52BA70: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x52BA75: push    0; int
 0x52BA77: push    edx; a1
-0x52BA78: call    TESForm_LookupByFormID
+0x52BA78: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x52BA7D: add     esp, 4
 0x52BA80: push    eax; void *
 0x52BA81: call    OblivionDynamicCast
@@ -48,11 +48,11 @@
 0x52BAC0: push    0FFFFFFFFh; a2
 0x52BAC2: mov     ecx, esi; this
 0x52BAC4: mov     dword ptr [esp+0Ch+ArgList], eax
-0x52BAC8: call    TESForm_GetOverrideFile
+0x52BAC8: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x52BACD: push    eax; a2
 0x52BACE: lea     ecx, [esp+0Ch+ArgList]
 0x52BAD2: push    ecx; a1
-0x52BAD3: call    TESForm_ResolveFormID
+0x52BAD3: call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.
 0x52BAD8: mov     edx, dword ptr [esp+10h+ArgList]
 0x52BADC: add     esp, 8
 0x52BADF: push    0; int
@@ -60,7 +60,7 @@
 0x52BAE6: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x52BAEB: push    0; int
 0x52BAED: push    edx; a1
-0x52BAEE: call    TESForm_LookupByFormID
+0x52BAEE: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x52BAF3: add     esp, 4
 0x52BAF6: push    eax; void *
 0x52BAF7: call    OblivionDynamicCast
@@ -86,11 +86,11 @@
 0x52BB36: push    0FFFFFFFFh; a2
 0x52BB38: mov     ecx, esi; this
 0x52BB3A: mov     dword ptr [esp+0Ch+ArgList], eax
-0x52BB3E: call    TESForm_GetOverrideFile
+0x52BB3E: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x52BB43: push    eax; a2
 0x52BB44: lea     ecx, [esp+0Ch+ArgList]
 0x52BB48: push    ecx; a1
-0x52BB49: call    TESForm_ResolveFormID
+0x52BB49: call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.
 0x52BB4E: mov     edx, dword ptr [esp+10h+ArgList]
 0x52BB52: add     esp, 8
 0x52BB55: push    0; int
@@ -98,7 +98,7 @@
 0x52BB5C: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x52BB61: push    0; int
 0x52BB63: push    edx; a1
-0x52BB64: call    TESForm_LookupByFormID
+0x52BB64: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x52BB69: add     esp, 4
 0x52BB6C: push    eax; void *
 0x52BB6D: call    OblivionDynamicCast
@@ -124,11 +124,11 @@
 0x52BBAC: push    0FFFFFFFFh; a2
 0x52BBAE: mov     ecx, esi; this
 0x52BBB0: mov     dword ptr [esp+0Ch+ArgList], eax
-0x52BBB4: call    TESForm_GetOverrideFile
+0x52BBB4: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x52BBB9: push    eax; a2
 0x52BBBA: lea     ecx, [esp+0Ch+ArgList]
 0x52BBBE: push    ecx; a1
-0x52BBBF: call    TESForm_ResolveFormID
+0x52BBBF: call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.
 0x52BBC4: mov     edx, dword ptr [esp+10h+ArgList]
 0x52BBC8: add     esp, 8
 0x52BBCB: push    0; int
@@ -136,7 +136,7 @@
 0x52BBD2: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x52BBD7: push    0; int
 0x52BBD9: push    edx; a1
-0x52BBDA: call    TESForm_LookupByFormID
+0x52BBDA: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x52BBDF: add     esp, 4
 0x52BBE2: push    eax; void *
 0x52BBE3: call    OblivionDynamicCast

@@ -1,4 +1,4 @@
-0x800FE0: push    esi
+0x800FE0: push    esi; SpeedTree leaf shader begin/check: apply current property state, then generic shader begin state.
 0x800FE1: mov     esi, ecx
 0x800FE3: mov     ecx, [esi+18h]
 0x800FE6: mov     eax, [ecx]
@@ -6,7 +6,7 @@
 0x800FEB: push    edi
 0x800FEC: mov     edi, [esp+8+a5]
 0x800FF0: push    edi
-0x800FF1: call    edx
+0x800FF1: call    edx; Leaf draw entry applies the current NiPropertyState before building/applying the SpeedTree leaf pass.
 0x800FF3: mov     eax, [esp+8+a8]
 0x800FF7: mov     ecx, [esp+8+a7]
 0x800FFB: mov     edx, [esp+8+a6]
@@ -21,7 +21,7 @@
 0x801010: push    ecx; a3
 0x801011: push    edx; a2
 0x801012: mov     ecx, esi; this
-0x801014: call    sub_77A150
+0x801014: call    sub_77A150; MoonSugarEffect decode: NiD3DShader vtable +0x28 begin/check. Requires IsRenderSet, updates render state/light manager, applies shader render-state group.
 0x801019: pop     edi
 0x80101A: pop     esi
 0x80101B: retn    1Ch

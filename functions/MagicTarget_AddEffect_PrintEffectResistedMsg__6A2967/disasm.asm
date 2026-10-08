@@ -12,7 +12,7 @@
 0x6A2988: call    __sprintf
 0x6A298D: mov     eax, [esp+14h+arg_10]
 0x6A2991: push    eax
-0x6A2992: call    FormHeapFree
+0x6A2992: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6A2997: fld     dword ptr ds:0A30634h
 0x6A299D: add     esp, 10h
 0x6A29A0: fstp    [esp+8+duration]; duration

@@ -20,7 +20,7 @@
 0x4ED993: call    j_TESForm_ClearComponentReferences
 0x4ED998: mov     eax, [esi+30h]
 0x4ED99B: push    eax
-0x4ED99C: call    FormHeapFree
+0x4ED99C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4ED9A1: xor     ebx, ebx
 0x4ED9A3: add     esp, 4
 0x4ED9A6: lea     ecx, [esi+20h]; void *
@@ -43,3 +43,27 @@
 0x4ED9E6: pop     ebx
 0x4ED9E7: add     esp, 14h
 0x4ED9EA: retn
+0x9B6640: mov     ecx, [ebp-10h]; this
+0x9B6643: jmp     TESForm_destr
+0x9B6648: cmp     dword ptr [ebp-10h], 0
+0x9B664C: jz      loc_9B6660
+0x9B6652: mov     eax, [ebp-10h]
+0x9B6655: add     eax, 18h
+0x9B6658: mov     [ebp-14h], eax
+0x9B665B: jmp     loc_9B6667
+0x9B6660: mov     dword ptr [ebp-14h], 0
+0x9B6667: mov     ecx, [ebp-14h]
+0x9B666A: jmp     TESAttackDamageForm_destr
+0x9B666F: mov     ecx, [ebp-10h]
+0x9B6672: add     ecx, 20h ; ' '; void *
+0x9B6675: jmp     TESTexture_destr
+0x9B667A: mov     ecx, [ebp-10h]
+0x9B667D: add     ecx, 30h ; '0'; void *
+0x9B6680: jmp     BSStringT_Clear
+0x9B6685: mov     edx, [esp+arg_4]
+0x9B6689: lea     eax, [edx-14h]
+0x9B668C: mov     ecx, [edx-18h]
+0x9B668F: xor     ecx, eax
+0x9B6691: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B6696: mov     eax, offset stru_AE14F4
+0x9B669B: jmp     ___CxxFrameHandler3

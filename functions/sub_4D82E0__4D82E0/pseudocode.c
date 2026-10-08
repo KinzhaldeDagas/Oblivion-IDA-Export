@@ -1,28 +1,28 @@
-void __thiscall sub_4D82E0(_BYTE *this, int a2)
+void __thiscall TESObjectREFR_ClearActionFlagBits(TESObjectREFR *this, unsigned int mask)
 {
   int v3; // eax
-  ExtraDataList *v4; // ecx
+  ExtraDataList *p_baseExtraList; // ecx
   bool v5; // al
   bool v6; // zf
-  int v7; // eax
+  TESObjectREFRVtbl *vtbl; // eax
 
-  if ( a2 == 4 )
+  if ( mask == 4 ) /*0x4d82eb*/
   {
-    v3 = sub_4533F0(SaveLoad_CurrentSavegame, (int)this, 0);
-    v4 = (ExtraDataList *)(this + 0x44);
-    if ( (v3 & 0x40000) != 0 )
-      v5 = !sub_41F830(v4, 8);
+    v3 = sub_4533F0(g_TESSaveLoadGame, (int)this, 0); /*0x4d82f6*/
+    p_baseExtraList = &this->member.baseExtraList; /*0x4d8302*/
+    if ( (v3 & 0x40000) != 0 ) /*0x4d8305*/
+      v5 = !ExtraDataList_TestActionFlagBits(p_baseExtraList, 8u); /*0x4d830e*/
     else
-      v5 = sub_41F830(v4, 8);
-    v6 = !v5;
-    v7 = *(_DWORD *)this;
-    if ( !v6 )
+      v5 = ExtraDataList_TestActionFlagBits(p_baseExtraList, 8u); /*0x4d8313*/
+    v6 = !v5; /*0x4d8318*/
+    vtbl = this->vtbl; /*0x4d831a*/
+    if ( !v6 ) /*0x4d8323*/
     {
-      (*(void (__thiscall **)(_BYTE *, int))(v7 + 0x40))(this, 0x80000);
-      sub_423E50((ExtraDataList *)(this + 0x44), 4);
-      return;
+      vtbl->super.MarkAsModified((TESForm *)this, 0x80000); /*0x4d8328*/
+      ExtraDataList_ClearActionFlagBits(&this->member.baseExtraList, 4u); /*0x4d832e*/
+      return; /*0x4d8335*/
     }
-    (*(void (__thiscall **)(_BYTE *, int))(v7 + 0x44))(this, 0x80000);
+    vtbl->super.ClearModified((TESForm *)this, 0x80000); /*0x4d833b*/
   }
-  sub_423E50((ExtraDataList *)(this + 0x44), a2);
+  ExtraDataList_ClearActionFlagBits(&this->member.baseExtraList, mask); /*0x4d8341*/
 }

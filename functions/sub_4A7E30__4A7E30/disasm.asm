@@ -4,12 +4,12 @@
 0x4A7E39: call    NiTMap_Clear
 0x4A7E3E: mov     eax, [esi+8]
 0x4A7E41: push    eax
-0x4A7E42: call    FormHeapFree
+0x4A7E42: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4A7E47: add     esp, 4
 0x4A7E4A: test    [esp+4+arg_0], 1
 0x4A7E4F: jz      short loc_4A7E5A
 0x4A7E51: push    esi
-0x4A7E52: call    FormHeapFree
+0x4A7E52: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4A7E57: add     esp, 4
 0x4A7E5A: mov     eax, esi
 0x4A7E5C: pop     esi

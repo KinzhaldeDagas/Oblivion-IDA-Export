@@ -1,19 +1,32 @@
 {
-  "callees_count": 55,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 21,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_609DF0",
+  "chunks": [
+    [
+      "0x609DF0",
+      "0x60A20D"
+    ]
+  ],
+  "chunks_sha256": "122ef1ea3503dd7ac19ba1ab6068d28f5d134206d211aae0897b39fd5020661b",
+  "comment_regular": "Recursively searches an Actor scene subtree for an admissible collision-backed embed node. It filters collision layer/body groups, ray-tests the supplied start/direction against each candidate, updates inOutDistance to the accepted fraction, and returns the selected NiAVObject; no bone name is hard-coded.",
+  "comment_repeatable": "Recursively searches an Actor scene subtree for an admissible collision-backed embed node. It filters collision layer/body groups, ray-tests the supplied start/direction against each candidate, updates inOutDistance to the accepted fraction, and returns the selected NiAVObject; no bone name is hard-coded.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "ArrowProjectile_FindActorEmbedCollisionNode",
   "end_ea": "0x60A20D",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "sub_609DF0",
+  "name": "ArrowProjectile_FindActorEmbedCollisionNode",
   "segment": ".text",
   "sha256": "122ef1ea3503dd7ac19ba1ab6068d28f5d134206d211aae0897b39fd5020661b",
   "size": 1053,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x609DF0",
-  "type": "int __thiscall(void *this, int, float, float, float, float, float, float, int, int)",
+  "total_chunk_size": 1053,
+  "type": "NiAVObject *__thiscall(ArrowProjectile *this, NiAVObject *candidate, float startX, float startY, float startZ, float directionX, float directionY, float directionZ, float *inOutDistance, char excludeGroup0100)",
   "xrefs_from_count": 358,
   "xrefs_to_count": 2
 }

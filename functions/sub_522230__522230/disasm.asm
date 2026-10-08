@@ -1,4 +1,4 @@
-0x522230: push    ecx
+0x522230: push    ecx; Returns the stock sex-morph base endpoint: +2.0 for female TESNPCs and -2.0 for male TESNPCs.
 0x522231: call    TESActorBase_IsFemale
 0x522236: test    eax, eax
 0x522238: jnz     short loc_522248

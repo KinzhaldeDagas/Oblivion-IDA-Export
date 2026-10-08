@@ -1,9 +1,9 @@
 _DWORD *sub_A14A90()
 {
-  return sub_90D190(
-           dword_BA8E48,
+  return sub_90D190( /*0xa14aba*/
+           unk_BA8E48,
            (int)"hkKeyframedRigidMotion",
-           (int)&unk_BA96C8,
+           (int)unk_BA96C8,
            0x100,
            0,
            0,

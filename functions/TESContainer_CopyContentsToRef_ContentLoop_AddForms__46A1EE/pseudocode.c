@@ -13,7 +13,7 @@ int __userpurge TESContainer_CopyContentsToRef_::ContentLoop_AddForms@<eax>(
         int a12,
         int a13,
         int a14,
-        int a15,
+        _DWORD *a15,
         int a16,
         int a17,
         int a18,
@@ -64,13 +64,14 @@ int __userpurge TESContainer_CopyContentsToRef_::ContentLoop_AddForms@<eax>(
         int a63)
 {
   int a64; // [esp+E8h] [ebp+E8h]
-  int v65; // [esp-Ch] [ebp-Ch]
+  int a65; // [esp+ECh] [ebp+ECh]
+  TESForm *v66; // [esp-Ch] [ebp-Ch]
 
-  v65 = *(_DWORD *)(ebp0 + 4);
-  if ( edi0 )
-    (*(void (__thiscall **)(int, int, _DWORD, int))(*(_DWORD *)edi0 + 0x114))(edi0, v65, 0, eax0);
+  v66 = *(TESForm **)(ebp0 + 4); /*0x46a1f6*/
+  if ( edi0 ) /*0x46a1f7*/
+    (*(void (__thiscall **)(int, TESForm *, _DWORD, int))(*(_DWORD *)edi0 + 0x114))(edi0, v66, 0, eax0); /*0x46a203*/
   else
-    TESObjectREFR_AddItem_Abbrev((TESObjectREFR *)a14, v65, 0, eax0);
+    TESObjectREFR_AddItem_Abbrev((TESObjectREFR *)a14, v66, 0, eax0); /*0x46a20b*/
   return TESContainer_CopyContentsToRef_::ContentLoop_Next(
            a1,
            edi0,
@@ -133,5 +134,6 @@ int __userpurge TESContainer_CopyContentsToRef_::ContentLoop_AddForms@<eax>(
            a61,
            a62,
            a63,
-           a64);
+           a64,
+           a65);
 }

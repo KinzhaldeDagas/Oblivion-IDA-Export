@@ -1,19 +1,36 @@
 {
-  "callees_count": 99,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 40,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_525A70",
+  "chunks": [
+    [
+      "0x525A70",
+      "0x526230"
+    ],
+    [
+      "0x9B7F60",
+      "0x9B7FB9"
+    ]
+  ],
+  "chunks_sha256": "621c7ebefcc69c94297a6cff232d7646fb3da464f67f57df716ced56c64193d4",
+  "comment_regular": "Reconcile an NPC's cached biped/skinned FaceGen nodes with an actor instance. When both cached nodes are absent, synchronously calls TESRace_CreateFaceGenNodes; the Race/Sex refresh deliberately clears both nodes to force this branch.\n\nReconcile TESNPC FaceGen nodes with actor skin/animation state. If both cached FaceGen node pointers are absent, this routine calls TESRace_CreateFaceGenNodes and attaches the new biped/skinned pair.",
+  "comment_repeatable": "Reconcile TESNPC FaceGen nodes with actor skin/animation state. If both cached FaceGen node pointers are absent, this routine calls TESRace_CreateFaceGenNodes and attaches the new biped/skinned pair.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 8,
+  "display_name": "TESNPC_ReconcileFaceGenNodesForActor",
   "end_ea": "0x526230",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_525A70",
+  "name": "TESNPC_ReconcileFaceGenNodesForActor",
   "segment": ".text",
   "sha256": "2904eb4964d8880cf001a2fb16a11d0f070219ee7814b4d859204ba7a7488a4a",
   "size": 1984,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x525A70",
-  "type": "char __userpurge@<al>(int@<ecx>, double st7_0@<st0>, TESChildCELL *, int *)",
-  "xrefs_from_count": 677,
+  "total_chunk_size": 2073,
+  "type": "double __userpurge@<st0>(int@<ecx>, double st7_0@<st0>, TESChildCELL *, ActorAnimData *)",
+  "xrefs_from_count": 700,
   "xrefs_to_count": 3
 }

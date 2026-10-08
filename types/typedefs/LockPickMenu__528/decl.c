@@ -1,1 +1,1 @@
-LockPickMenu
+struct LockPickMenu;

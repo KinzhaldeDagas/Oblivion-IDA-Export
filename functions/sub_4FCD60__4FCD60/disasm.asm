@@ -67,3 +67,13 @@
 0x4FCE21: pop     ebx
 0x4FCE22: add     esp, 10h
 0x4FCE25: retn
+0x9B6C70: mov     ecx, [ebp-10h]
+0x9B6C73: add     ecx, 0Ch; void *
+0x9B6C76: jmp     BSStringT_Clear
+0x9B6C7B: mov     edx, [esp+arg_4]
+0x9B6C7F: lea     eax, [edx-14h]
+0x9B6C82: mov     ecx, [edx-18h]
+0x9B6C85: xor     ecx, eax
+0x9B6C87: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B6C8C: mov     eax, offset stru_AE19D4
+0x9B6C91: jmp     ___CxxFrameHandler3

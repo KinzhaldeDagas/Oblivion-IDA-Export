@@ -1,4 +1,4 @@
-0x7FB470: push    ebx
+0x7FB470: push    ebx; Lighting30 vtable +0x28 geometry-state preparation. In render mode 5 it applies NiAlphaProperty test enable bit 0x200, test-function bits 10..12, and reference byte +0x1A; disables alpha blending; uses GREATER/ref 128 for blend-only fallback; then applies native stencil/cull and wireframe/fill properties.
 0x7FB471: mov     ebx, [esp+4+arg_C]
 0x7FB475: push    esi
 0x7FB476: mov     esi, ecx
@@ -117,7 +117,7 @@
 0x7FB5AA: mov     eax, [eax+64h]
 0x7FB5AD: push    0
 0x7FB5AF: push    edx
-0x7FB5B0: jmp     loc_7FB678
+0x7FB5B0: jmp     loc_7FB678; Lighting30 blend-only mode-5 fallback writes alpha reference 128.
 0x7FB5B5: push    0
 0x7FB5B7: push    0Fh
 0x7FB5B9: jmp     loc_7FB67A
@@ -145,12 +145,12 @@
 0x7FB5FA: mov     cx, [edi+18h]
 0x7FB5FE: shr     cx, 9
 0x7FB602: test    cl, 1
-0x7FB605: jnz     short loc_7FB61B
+0x7FB605: jnz     short loc_7FB61B; Mode-5 Lighting30 alpha path applies NiAlphaProperty: test bit 0x200, function bits 10..12, reference byte +0x1A, and blend state.
 0x7FB607: test    byte ptr [edi+18h], 1
 0x7FB60B: jz      loc_7FB6A5
 0x7FB611: cmp     bp, 5
 0x7FB615: jnz     loc_7FB6AB
-0x7FB61B: mov     ecx, [esi+18h]
+0x7FB61B: mov     ecx, [esi+18h]; Mode-5 Lighting30 alpha path applies NiAlphaProperty: test bit 0x200, function bits 10..12, reference byte +0x1A, and blend state.
 0x7FB61E: mov     edx, [ecx]
 0x7FB620: mov     eax, [edx+8]
 0x7FB623: push    edi
@@ -163,7 +163,7 @@
 0x7FB634: push    0
 0x7FB636: push    0
 0x7FB638: push    1Bh
-0x7FB63A: call    eax
+0x7FB63A: call    eax; Disable D3DRS_ALPHABLENDENABLE for the mode-5 caster after property application.
 0x7FB63C: mov     cx, [edi+18h]
 0x7FB640: shr     cx, 9
 0x7FB644: test    cl, 1
@@ -174,20 +174,20 @@
 0x7FB651: push    0
 0x7FB653: push    1
 0x7FB655: push    0Fh
-0x7FB657: call    eax
+0x7FB657: call    eax; Lighting30 blend-only mode-5 fallback enables alpha test.
 0x7FB659: mov     ecx, [esi+18h]
 0x7FB65C: mov     edx, [ecx]
 0x7FB65E: mov     eax, [edx+64h]
 0x7FB661: push    0
 0x7FB663: push    5
 0x7FB665: push    19h
-0x7FB667: call    eax
+0x7FB667: call    eax; Lighting30 blend-only mode-5 fallback selects D3DCMP_GREATER.
 0x7FB669: push    0
 0x7FB66B: push    80h ; '€'
 0x7FB670: mov     ecx, [esi+18h]
 0x7FB673: mov     edx, [ecx]
 0x7FB675: mov     eax, [edx+64h]
-0x7FB678: push    18h
+0x7FB678: push    18h; Lighting30 blend-only mode-5 fallback writes alpha reference 128.
 0x7FB67A: call    eax
 0x7FB67C: pop     ebp
 0x7FB67D: mov     ecx, [esi+18h]
@@ -195,14 +195,14 @@
 0x7FB684: mov     edx, [ecx]
 0x7FB686: mov     eax, [edi+1Ch]
 0x7FB689: mov     edx, [edx+20h]
-0x7FB68C: push    eax
+0x7FB68C: push    eax; Apply NiStencilProperty; pass-local STENCILENABLE is later forced off, while property-driven D3DRS_CULLMODE remains.
 0x7FB68D: call    edx
 0x7FB68F: mov     ecx, [esi+18h]
 0x7FB692: mov     eax, [ecx]
 0x7FB694: mov     edx, [edi+28h]
 0x7FB697: mov     eax, [eax+24h]
 0x7FB69A: push    edx
-0x7FB69B: call    eax
+0x7FB69B: call    eax; Apply NiWireframeProperty so caster fill mode follows the geometry property state.
 0x7FB69D: pop     edi
 0x7FB69E: pop     esi
 0x7FB69F: xor     eax, eax

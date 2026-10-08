@@ -1,4 +1,4 @@
-0x52E150: push    0FFFFFFFFh
+0x52E150: push    0FFFFFFFFh; TESResponse defaults before TRDT overlay: DWORD0=0, DWORD4=50, DWORD8=0, byte12=0; bytes13..15 are not explicitly initialized. Response text starts empty.
 0x52E152: push    offset SEH_52E150
 0x52E157: mov     eax, large fs:0
 0x52E15D: push    eax
@@ -21,7 +21,7 @@
 0x52E18D: mov     [esi+16h], bx
 0x52E191: mov     eax, ebx
 0x52E193: push    eax
-0x52E194: call    FormHeapFree
+0x52E194: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x52E199: add     esp, 4
 0x52E19C: mov     [esi+10h], ebx
 0x52E19F: mov     [esi+16h], bx
@@ -34,3 +34,13 @@
 0x52E1B6: pop     ebx
 0x52E1B7: add     esp, 10h
 0x52E1BA: retn
+0x9B8930: mov     ecx, [ebp-10h]
+0x9B8933: add     ecx, 10h; void *
+0x9B8936: jmp     BSStringT_Clear
+0x9B893B: mov     edx, [esp+arg_4]
+0x9B893F: lea     eax, [edx-0Ch]
+0x9B8942: mov     ecx, [edx-10h]
+0x9B8945: xor     ecx, eax
+0x9B8947: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B894C: mov     eax, offset stru_AE2E14
+0x9B8951: jmp     ___CxxFrameHandler3

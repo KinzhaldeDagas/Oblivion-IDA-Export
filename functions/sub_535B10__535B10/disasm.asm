@@ -10,7 +10,7 @@
 0x535B33: xor     eax, eax
 0x535B35: push    esi
 0x535B36: push    eax
-0x535B37: push    offset dword_BA7D84
+0x535B37: push    offset stru_BA7D84
 0x535B3C: call    NiRTTI_Cast
 0x535B41: mov     esi, eax
 0x535B43: add     esp, 8
@@ -27,7 +27,7 @@
 0x535B6B: cmp     dword ptr ds:0B36594h, 0
 0x535B72: jz      short loc_535BD8
 0x535B74: push    edi
-0x535B75: mov     edi, offset dword_B36594
+0x535B75: mov     edi, (offset dword_B36590+4)
 0x535B7A: mov     eax, edi
 0x535B7C: lea     esp, [esp+0]
 0x535B80: mov     edx, [eax+4]
@@ -41,7 +41,7 @@
 0x535B91: cmp     [ecx], esi
 0x535B93: jnz     short loc_535BCF
 0x535B95: push    ecx
-0x535B96: mov     ecx, offset dword_B36594
+0x535B96: mov     ecx, (offset dword_B36590+4)
 0x535B9B: call    BSSimpleList_Remove
 0x535BA0: mov     ecx, esi
 0x535BA2: call    sub_47DE20
@@ -51,7 +51,7 @@
 0x535BB0: test    eax, eax
 0x535BB2: jz      short loc_535BCA
 0x535BB4: mov     ecx, eax
-0x535BB6: call    sub_452A60
+0x535BB6: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x535BBB: test    eax, eax
 0x535BBD: jz      short loc_535BCA
 0x535BBF: push    1

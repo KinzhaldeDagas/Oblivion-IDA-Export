@@ -1,50 +1,37 @@
-BSStringT *__userpurge sub_5D6270@<eax>(
-        int a1@<ecx>,
-        double st5_0@<st2>,
-        double st6_0@<st1>,
-        double a4@<st0>,
-        char *a5,
-        signed int a6)
+// Sidecar decode: creates chargen skill row; writes skill/AV to tile trait 0xFB0 and selection state to 0xFB1.
+BSStringT *__userpurge SkillsMenu_CreateSkillRow@<eax>(int a1@<ecx>, double st7_0@<st0>, char *arg0, signed int a4)
 {
-  BSStringT *TileFromTemplate; // esi
-  double Float; // st7
+  BSStringT *v5; // esi
   int i; // edx
-  char *v10; // eax
-  char v11; // cl
+  char *v7; // eax
+  char v8; // cl
   float a2; // [esp+0h] [ebp-118h]
   float a3; // [esp+10h] [ebp-108h]
-  char v15[255]; // [esp+14h] [ebp-104h] BYREF
-  char v16; // [esp+113h] [ebp-5h]
+  char v12[255]; // [esp+14h] [ebp-104h] BYREF
+  char v13; // [esp+113h] [ebp-5h]
 
-  TileFromTemplate = (BSStringT *)Menu_CreateTileFromTemplate(
-                                    (_DWORD *)a1,
-                                    st5_0,
-                                    st6_0,
-                                    a4,
-                                    *(TileWindow **)(a1 + 0x28),
-                                    "chargen_skill_template",
-                                    0);
-  if ( !TileFromTemplate )
-    return 0;
-  Float = Tile_GetFloat((_DWORD *)*(_DWORD *)(a1 + 0x28), 0xFD0);
-  a3 = (float)Double_To_SInt32(Float - dbl_A2F928);
-  Tile_SetFloat((Tile *)TileFromTemplate, (_DWORD *)0xFAA, a3);
-  Tile_SetFloat((Tile *)TileFromTemplate, (_DWORD *)0xFAE, a3);
-  for ( i = 0; i < 0x100; ++i )
+  v5 = (BSStringT *)Menu::RenderTemplate((Menu *)a1, *(Tile **)(a1 + 0x28), "chargen_skill_template", 0); /*0x5d62a0*/
+  if ( !v5 ) /*0x5d62a4*/
+    return 0; /*0x5d6372*/
+  Tile_GetFloat(*(_DWORD **)(a1 + 0x28), 0xFD0); /*0x5d62b2*/
+  a3 = (float)Double_To_SInt32(st7_0 - dbl_A2F928); /*0x5d62cd*/
+  Tile_SetFloat((Tile *)v5, 0xFAAu, a3); /*0x5d62dd*/
+  Tile_SetFloat((Tile *)v5, 0xFAEu, a3); /*0x5d62f1*/
+  for ( i = 0; i < 0x100; ++i ) /*0x5d62fc*/
   {
-    v10 = &v15[i];
-    v11 = v15[i + a5 - v15];
-    v15[i] = v11;
-    if ( v11 == 0x20 )
-      *v10 = 0x5F;
-    if ( !*v10 )
-      break;
+    v7 = &v12[i]; /*0x5d6300*/
+    v8 = v12[i + arg0 - v12]; /*0x5d6304*/
+    v12[i] = v8; /*0x5d630a*/
+    if ( v8 == 0x20 ) /*0x5d630c*/
+      *v7 = 0x5F; /*0x5d630e*/
+    if ( !*v7 ) /*0x5d6311*/
+      break; /*0x5d6314*/
   }
-  v16 = 0;
-  BSStringT_Set(TileFromTemplate + 1, v15, 0);
-  Tile_SetString(TileFromTemplate, (_DWORD *)0xFAF, a5);
-  a2 = (float)a6;
-  Tile_SetFloat((Tile *)TileFromTemplate, (_DWORD *)0xFB0, a2);
-  Tile_SetFloat((Tile *)TileFromTemplate, (_DWORD *)0xFB1, 1.0);
-  return TileFromTemplate;
+  v13 = 0; /*0x5d632b*/
+  BSStringT_Set(v5 + 1, v12, 0); /*0x5d6333*/
+  Tile_SetString(v5, (_DWORD *)0xFAF, arg0); /*0x5d6340*/
+  a2 = (float)a4; /*0x5d634f*/
+  Tile_SetFloat((Tile *)v5, 0xFB0u, a2); /*0x5d6357*/
+  Tile_SetFloat((Tile *)v5, 0xFB1u, 1.0); /*0x5d6369*/
+  return v5; /*0x5d6374*/
 }

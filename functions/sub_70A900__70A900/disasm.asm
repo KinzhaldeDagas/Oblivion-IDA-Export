@@ -58,3 +58,12 @@
 0x70A9B0: pop     esi
 0x70A9B1: add     esp, 0Ch
 0x70A9B4: retn    4
+0x9C9BA0: lea     ecx, [ebp+4]; slot
+0x9C9BA3: jmp     NiPointerSlot_Release
+0x9C9BA8: mov     edx, [esp+arg_4]
+0x9C9BAC: lea     eax, [edx-8]
+0x9C9BAF: mov     ecx, [edx-0Ch]
+0x9C9BB2: xor     ecx, eax
+0x9C9BB4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C9BB9: mov     eax, offset stru_AF23BC
+0x9C9BBE: jmp     ___CxxFrameHandler3

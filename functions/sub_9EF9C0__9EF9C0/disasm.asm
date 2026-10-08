@@ -2,7 +2,7 @@
 0x9EF9C6: push    ecx
 0x9EF9C7: fstp    [esp+4+var_4]; float
 0x9EF9CA: push    offset aFshockbranchbo; "fShockBranchBoltsRadius"
-0x9EF9CF: mov     ecx, offset fShockBranchBoltsRadius
+0x9EF9CF: mov     ecx, (offset flt_B37ED0+2E8h)
 0x9EF9D4: call    GameSetting_ConstrAndReg_float
 0x9EF9D9: push    offset sub_A20A90; void (__cdecl *)()
 0x9EF9DE: call    _atexit

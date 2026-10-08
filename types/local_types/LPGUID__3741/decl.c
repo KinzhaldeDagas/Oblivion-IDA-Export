@@ -1,1 +1,1 @@
-LPGUID
+typedef GUID *LPGUID;

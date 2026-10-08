@@ -1,1 +1,1 @@
-WINMM_QueryInterfaceInfo
+typedef _WINMM_QueryInterfaceInfo WINMM_QueryInterfaceInfo;

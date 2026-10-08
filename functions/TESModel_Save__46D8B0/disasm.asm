@@ -35,10 +35,10 @@
 0x46D904: push    eax; Src
 0x46D905: mov     eax, [esp+0Ch+arg_0]
 0x46D909: push    eax; int
-0x46D90A: call    TESForm_PutFormRecordChunkData
+0x46D90A: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x46D90F: fld     dword ptr [esi+0Ch]
 0x46D912: mov     ecx, [esp+10h+arg_4]
-0x46D916: fstp    [esp+10h+var_8]
+0x46D916: fstp    dword ptr [esp+10h+var_8]
 0x46D91A: add     esp, 8
 0x46D91D: push    ecx
 0x46D91E: call    TESForm_PutCurrentChunkData4

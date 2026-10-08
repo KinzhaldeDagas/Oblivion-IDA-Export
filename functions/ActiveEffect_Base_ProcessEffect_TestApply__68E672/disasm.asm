@@ -1,4 +1,4 @@
-0x68E672: push    esi
+0x68E672: push    esi; Verified apply/update state gate: if duration is expired or bTerminated is set, enters termination handling; otherwise bApplied selects the already-applied update path versus first-application/menu checks.
 0x68E673: fld     [esp+4+arg_0]
 0x68E677: mov     esi, ecx
 0x68E679: fcom    st(1)

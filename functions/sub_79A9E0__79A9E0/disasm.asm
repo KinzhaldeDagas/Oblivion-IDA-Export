@@ -1,9 +1,9 @@
-0x79A9E0: mov     eax, [esp+arg_0]
-0x79A9E4: mov     edx, [esp+arg_4]
+0x79A9E0: mov     eax, [esp+first]; Fills an initialized SFrondVertex range with one 0x38-byte value. Used by vector insert when the insertion point has enough trailing initialized elements.
+0x79A9E4: mov     edx, [esp+last]
 0x79A9E8: cmp     eax, edx
 0x79A9EA: jz      short locret_79AA08
 0x79A9EC: push    ebx
-0x79A9ED: mov     ebx, [esp+4+arg_8]
+0x79A9ED: mov     ebx, [esp+4+value]
 0x79A9F1: push    esi
 0x79A9F2: push    edi
 0x79A9F3: mov     edi, eax

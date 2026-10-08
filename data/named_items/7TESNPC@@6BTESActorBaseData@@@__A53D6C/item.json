@@ -3,14 +3,17 @@
   "bytes_sha256": "",
   "comments": {
     "regular": "",
-    "repeatable": ""
+    "repeatable": "Verified typed prefix through +0x50 only; complete table extends further. Blood slots +0x28/+0x30 are independent disable flags; +0x38/+0x40 are texture/particle getters. TESCreature ctor 0x51EB80 installs its component vtable at complete-object +0x24. Unknown slots intentionally remain untyped.\nVerified update 2026-10-03: serialization tail now decoded through +0x5C; 24 entries / 0x60 bytes precede next RTTI/table separator or data. +0x54 GetModifiedSize, +0x58 SaveModified, +0x5C LoadModified. Earlier prefix-only/tail-unknown note is superseded for these three slots. Derived tables route through -0x24 receiver thunks to full-object serializers."
   },
+  "confidence_scope": "Raw live IDA annotation; bulk synchronization does not independently verify semantic names or comments.",
   "display_name": "const TESNPC::`vftable'{for `TESActorBaseData'}",
   "ea": "0xA53D6C",
+  "evidence_confidence": "Unknown",
   "kind": "data",
   "name": "??_7TESNPC@@6BTESActorBaseData@@@",
   "segment": ".rdata",
-  "size": 4,
-  "type": "void *",
+  "size": 96,
+  "source_annotation_confidence": "Unknown",
+  "type": "TESActorBaseDataVtbl",
   "xrefs_to_count": 2
 }

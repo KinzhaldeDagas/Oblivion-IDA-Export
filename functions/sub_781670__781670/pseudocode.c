@@ -16,52 +16,52 @@ int __thiscall sub_781670(
   int v15; // [esp+30h] [ebp-8h] BYREF
   int v16; // [esp+34h] [ebp-4h] BYREF
 
-  v10 = FormHeapAlloc(0x44u);
-  if ( !v10 )
-    return 0;
-  NiD3DShaderProgram::NiD3DShaderProgram((NiD3DShaderProgram *)v10, dword_B428C4);
-  *(_BYTE *)(v10 + 0x28) = 0;
-  *(_DWORD *)(v10 + 0x2C) = 0;
-  *(_DWORD *)(v10 + 0x30) = 0;
-  *(_DWORD *)(v10 + 0x34) = 0;
-  *(_DWORD *)v10 = &NiD3DHLSLVertexShader::`vftable';
-  *(_DWORD *)(v10 + 0x38) = 0;
-  *(_DWORD *)(v10 + 0x3C) = 0;
-  *(_DWORD *)(v10 + 0x40) = 0;
-  v16 = 0;
-  v14 = 0;
-  v15 = 0;
-  if ( !a5 )
-    a5 = "main";
-  if ( !a6 )
-    a6 = D3DXGetVertexShaderProfile_0(dword_B428C0);
-  if ( !sub_781350((int)this, (int)this, a2, a3, a5, a6, (void **)&v14, (size_t *)&v16, (int)&v15) )
+  v10 = FormHeapAlloc(0x44u); /*0x78167f*/
+  if ( !v10 ) /*0x781688*/
+    return 0; /*0x781688*/
+  NiD3DShaderProgram::NiD3DShaderProgram((NiD3DShaderProgram *)v10, unk_B428C4); /*0x781696*/
+  *(_BYTE *)(v10 + 0x28) = 0; /*0x78169f*/
+  *(_DWORD *)(v10 + 0x2C) = 0; /*0x7816a3*/
+  *(_DWORD *)(v10 + 0x30) = 0; /*0x7816a6*/
+  *(_DWORD *)(v10 + 0x34) = 0; /*0x7816a9*/
+  *(_DWORD *)v10 = &NiD3DHLSLVertexShader::`vftable'; /*0x7816ac*/
+  *(_DWORD *)(v10 + 0x38) = 0; /*0x7816b2*/
+  *(_DWORD *)(v10 + 0x3C) = 0; /*0x7816b5*/
+  *(_DWORD *)(v10 + 0x40) = 0; /*0x7816b8*/
+  v16 = 0; /*0x7816bb*/
+  v14 = 0; /*0x7816bf*/
+  v15 = 0; /*0x7816c3*/
+  if ( !a5 ) /*0x7816c7*/
+    a5 = "main"; /*0x7816c9*/
+  if ( !a6 ) /*0x7816d5*/
+    a6 = D3DXGetVertexShaderProfile_0(g_ShaderD3DDevice); /*0x7816e3*/
+  if ( !sub_781350((int)this, (int)this, a2, a3, a5, a6, (void **)&v14, (size_t *)&v16, (int)&v15) ) /*0x78170c*/
   {
-    (**(void (__thiscall ***)(int, int))v10)(v10, 1);
-    return 0;
+    (**(void (__thiscall ***)(int, int))v10)(v10, 1); /*0x78171d*/
+    return 0; /*0x781727*/
   }
-  v12 = a9;
-  v13 = sub_783BF0(v14, (int)&a7, a8, 0, 0, a9);
-  if ( v13 )
+  v12 = a9; /*0x781733*/
+  v13 = NiDX9Renderer__CreateVertexShader(v14, (int)&a7, a8, 0, 0, a9); /*0x781748*/
+  if ( v13 ) /*0x781751*/
   {
-    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)v10 + 8))(v10, ArgList);
-    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)v10 + 0x10))(v10, 0);
-    (*(void (__thiscall **)(int, int, int))(*(_DWORD *)v10 + 0x1C))(v10, v16, v14);
-    (*(void (__thiscall **)(int, void *))(*(_DWORD *)v10 + 0x24))(v10, this);
-    (*(void (__thiscall **)(int, int))(*(_DWORD *)v10 + 0x44))(v10, v13);
-    (*(void (__thiscall **)(int, int))(*(_DWORD *)v10 + 0x3C))(v10, a8);
-    (*(void (__thiscall **)(int, int))(*(_DWORD *)v10 + 0x54))(v10, v12);
-    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)v10 + 0x64))(v10, a5);
-    (*(void (__thiscall **)(int, int))(*(_DWORD *)v10 + 0x6C))(v10, a6);
-    (*(void (__thiscall **)(int, int))(*(_DWORD *)v10 + 0x74))(v10, v15);
-    if ( v15 )
-      (*(void (__stdcall **)(int))(*(_DWORD *)v15 + 8))(v15);
-    return v10;
+    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)v10 + 8))(v10, ArgList); /*0x781780*/
+    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)v10 + 0x10))(v10, 0); /*0x78178b*/
+    (*(void (__thiscall **)(int, int, int))(*(_DWORD *)v10 + 0x1C))(v10, v16, v14); /*0x78179e*/
+    (*(void (__thiscall **)(int, void *))(*(_DWORD *)v10 + 0x24))(v10, this); /*0x7817a8*/
+    (*(void (__thiscall **)(int, int))(*(_DWORD *)v10 + 0x44))(v10, v13); /*0x7817b2*/
+    (*(void (__thiscall **)(int, int))(*(_DWORD *)v10 + 0x3C))(v10, a8); /*0x7817c0*/
+    (*(void (__thiscall **)(int, int))(*(_DWORD *)v10 + 0x54))(v10, v12); /*0x7817ca*/
+    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)v10 + 0x64))(v10, a5); /*0x7817d8*/
+    (*(void (__thiscall **)(int, int))(*(_DWORD *)v10 + 0x6C))(v10, a6); /*0x7817e6*/
+    (*(void (__thiscall **)(int, int))(*(_DWORD *)v10 + 0x74))(v10, v15); /*0x7817f4*/
+    if ( v15 ) /*0x7817fc*/
+      (*(void (__stdcall **)(int))(*(_DWORD *)v15 + 8))(v15); /*0x781804*/
+    return v10; /*0x781808*/
   }
   else
   {
-    sub_738460(1, 0, "Failed CreateVertexShader call on %s\n", ArgList);
-    (**(void (__thiscall ***)(int, int))v10)(v10, 1);
-    return 0;
+    sub_738460(1, 0, "Failed CreateVertexShader call on %s\n", ArgList); /*0x78175b*/
+    (**(void (__thiscall ***)(int, int))v10)(v10, 1); /*0x78176b*/
+    return 0; /*0x781770*/
   }
 }

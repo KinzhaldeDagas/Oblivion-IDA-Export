@@ -1,139 +1,131 @@
-double __usercall sub_6231E0@<st0>(int a1@<ecx>, double a2@<st2>, double result@<st0>)
+double __usercall sub_6231E0@<st0>(int a1@<ecx>, double result@<st0>)
 {
   int v4; // eax
-  double v5; // st6
-  double v6; // st5
-  TESObjectREFR *v7; // edi
+  TESObjectREFR *v5; // edi
   TESObjectREFRVtbl *vtbl; // ebp
-  double v9; // st7
-  bool v10; // c0
-  double v11; // st7
+  bool v7; // c0
+  double v8; // st7
   void (__thiscall *InitializeComponent)(BaseFormComponent *); // ebx
-  TESObjectCELL *ParentCell; // eax
+  UInt32 DwordAtOffset40; // eax
+  int v11; // eax
+  TESObjectREFRVtbl *v12; // ebp
+  unsigned int v13; // ebx
   int v14; // eax
-  TESObjectREFRVtbl *v15; // ebp
-  unsigned int v16; // ebx
-  int v17; // eax
-  _DWORD *v18; // esi
-  float *v19; // ebp
-  float *v20; // eax
-  char v21; // al
+  _DWORD *v15; // esi
+  float *v16; // ebp
+  float *v17; // eax
+  char v18; // al
   TESWorldSpace *WorldSpace; // [esp+Ch] [ebp-2Ch]
-  float v23; // [esp+10h] [ebp-28h]
-  bool v24; // [esp+27h] [ebp-11h]
-  float v25; // [esp+28h] [ebp-10h]
-  float v26[3]; // [esp+2Ch] [ebp-Ch] BYREF
+  float v20; // [esp+10h] [ebp-28h]
+  bool v21; // [esp+27h] [ebp-11h]
+  float v22; // [esp+28h] [ebp-10h]
+  float v23[3]; // [esp+2Ch] [ebp-Ch] BYREF
 
-  if ( *(_DWORD *)(a1 + 0x6C) == 0xC )
+  if ( *(_DWORD *)(a1 + 0x6C) == 0xC ) /*0x6231ea*/
   {
-    if ( *(_DWORD *)(a1 + 0x11C) )
+    if ( *(_DWORD *)(a1 + 0x11C) ) /*0x6231f0*/
     {
-      v5 = *(float *)(a1 + 0x44) - *(float *)(a1 + 0xEC);
-      v6 = *(float *)(a1 + 0xF0);
-      v7 = *(TESObjectREFR **)(a1 + 0x3C);
-      vtbl = v7[1].vtbl;
-      if ( v6 < v5
-        && ((*((int (__thiscall **)(TESObjectREFRVtbl *))vtbl->super.super.InitializeComponent + 0xB0))(v7[1].vtbl)
+      v5 = *(TESObjectREFR **)(a1 + 0x3C); /*0x623232*/
+      vtbl = v5[1].vtbl; /*0x623235*/
+      if ( *(float *)(a1 + 0xF0) < *(float *)(a1 + 0x44) - *(float *)(a1 + 0xEC) /*0x623252*/
+        && ((*((int (__thiscall **)(TESObjectREFRVtbl *))vtbl->super.super.InitializeComponent + 0xB0))(v5[1].vtbl)
           & 0x100) != 0 )
       {
-        (*((void (__thiscall **)(TESObjectREFRVtbl *, int, int))vtbl->super.super.InitializeComponent + 0xB1))(
+        (*((void (__thiscall **)(TESObjectREFRVtbl *, int, int))vtbl->super.super.InitializeComponent + 0xB1))( /*0x623266*/
           vtbl,
           0x201,
           1);
       }
-      if ( !sub_5E05B0(v7) )
+      if ( !sub_5E05B0(v5) ) /*0x62326a*/
       {
-        (*(void (__thiscall **)(_DWORD, int, int))(**(_DWORD **)(*(_DWORD *)(a1 + 0x3C) + 0x58) + 0x2C4))(
+        (*(void (__thiscall **)(_DWORD, int, int))(**(_DWORD **)(*(_DWORD *)(a1 + 0x3C) + 0x58) + 0x2C4))( /*0x623288*/
           *(_DWORD *)(*(_DWORD *)(a1 + 0x3C) + 0x58),
           0x101,
           1);
-        v9 = sub_5E5850((TESObjectREFR *)*(_DWORD *)(a1 + 0x3C), 3);
-        v5 = flt_A3D65C;
-        v10 = v5 < v9;
-        v11 = v5;
-        if ( v10 )
-          v11 = sub_5E5850((TESObjectREFR *)*(_DWORD *)(a1 + 0x3C), 3);
-        v25 = v11;
-        *(float *)(a1 + 0xEC) = *(float *)(a1 + 0x44);
-        *(float *)(a1 + 0xF0) = v25;
-        *(float *)(a1 + 0xF4) = flt_A30634;
+        v7 = kHeadBodyNormalMatchRadius < sub_5E5850((TESObjectREFR *)*(_DWORD *)(a1 + 0x3C), 3u); /*0x62329a*/
+        v8 = kHeadBodyNormalMatchRadius; /*0x62329e*/
+        if ( v7 ) /*0x6232a3*/
+          v8 = sub_5E5850((TESObjectREFR *)*(_DWORD *)(a1 + 0x3C), 3u); /*0x6232ac*/
+        v22 = v8; /*0x6232b1*/
+        *(float *)(a1 + 0xEC) = *(float *)(a1 + 0x44); /*0x6232b8*/
+        *(float *)(a1 + 0xF0) = v22; /*0x6232c2*/
+        *(float *)(a1 + 0xF4) = kTerrainLODQuadRayDirectionZ; /*0x6232ce*/
       }
-      result = flt_A30634;
-      InitializeComponent = vtbl->super.super.InitializeComponent;
-      v23 = flt_A30634;
-      WorldSpace = TESObjectREFR_GetWorldSpace(v7);
-      ParentCell = TESObjectREFR_GetParentCell(v7);
-      (*((void (__thiscall **)(TESObjectREFRVtbl *, TESObjectREFR *, _DWORD, TESObjectCELL *, TESWorldSpace *, _DWORD))InitializeComponent
+      result = kTerrainLODQuadRayDirectionZ; /*0x6232d4*/
+      InitializeComponent = vtbl->super.super.InitializeComponent; /*0x6232db*/
+      v20 = kTerrainLODQuadRayDirectionZ; /*0x6232e1*/
+      WorldSpace = TESObjectREFR_GetWorldSpace(v5); /*0x6232e9*/
+      DwordAtOffset40 = Shared_GetDwordAtOffset40(v5); /*0x6232ec*/
+      (*((void (__thiscall **)(TESObjectREFRVtbl *, TESObjectREFR *, _DWORD, UInt32, TESWorldSpace *, _DWORD))InitializeComponent /*0x623302*/
        + 0x105))(
         vtbl,
-        v7,
+        v5,
         *(_DWORD *)(a1 + 0x11C),
-        ParentCell,
+        DwordAtOffset40,
         WorldSpace,
-        LODWORD(v23));
-      v24 = 0;
-      if ( (*((int (__thiscall **)(TESObjectREFRVtbl *))vtbl->super.super.InitializeComponent + 0x103))(vtbl) )
+        LODWORD(v20));
+      v21 = 0; /*0x62330f*/
+      if ( (*((int (__thiscall **)(TESObjectREFRVtbl *))vtbl->super.super.InitializeComponent + 0x103))(vtbl) ) /*0x623314*/
       {
-        v14 = (*((int (__thiscall **)(TESObjectREFRVtbl *))vtbl->super.super.InitializeComponent + 0x103))(vtbl);
-        v24 = (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)v14 + 0x2C))(v14) != 0;
+        v11 = (*((int (__thiscall **)(TESObjectREFRVtbl *))vtbl->super.super.InitializeComponent + 0x103))(vtbl); /*0x623325*/
+        v21 = (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)v11 + 0x2C))(v11) != 0; /*0x623334*/
       }
-      v15 = v7[1].vtbl;
-      v16 = 0xFFFFFFFF;
-      v17 = (*((int (__thiscall **)(TESObjectREFRVtbl *))v15->super.super.InitializeComponent + 0x61))(v15);
-      if ( v17 )
-        v16 = *(char *)(v17 + 0x20);
-      v18 = (_DWORD *)((int (__thiscall *)(TESObjectREFR *))v7->vtbl[1].IsMobileObject)(v7);
-      if ( v16 == 0xC )
+      v12 = v5[1].vtbl; /*0x623339*/
+      v13 = 0xFFFFFFFF; /*0x623347*/
+      v14 = (*((int (__thiscall **)(TESObjectREFRVtbl *))v12->super.super.InitializeComponent + 0x61))(v12); /*0x62334a*/
+      if ( v14 ) /*0x62334e*/
+        v13 = *(char *)(v14 + 0x20); /*0x623350*/
+      v15 = (_DWORD *)((int (__thiscall *)(TESObjectREFR *))v5->vtbl[1].IsMobileObject)(v5); /*0x623363*/
+      if ( v13 == 0xC ) /*0x623366*/
       {
-        v19 = (float *)v18[0x47];
-        v20 = v7->vtbl->GetPos(v7);
-        v26[0] = *v20 - *v19;
-        v26[1] = v20[1] - v19[1];
-        result = v20[2] - v19[2];
-        v26[2] = result;
-        if ( v24 || (result = sub_404C90(v26), result <= flt_A427E4) )
+        v16 = (float *)v15[0x47]; /*0x623395*/
+        v17 = v5->vtbl->GetPos(v5); /*0x62339d*/
+        v23[0] = *v17 - *v16; /*0x6233a9*/
+        v23[1] = v17[1] - v16[1]; /*0x6233b3*/
+        v23[2] = v17[2] - v16[2]; /*0x6233bd*/
+        if ( v21 || NiPoint3_Length(v23) <= flt_A427E4 ) /*0x6233db*/
         {
-          sub_612DA0(v18, 9);
-          sub_61C6E0((int)v18);
-          v18[0x47] = 0;
+          sub_612DA0(v15, 9); /*0x623454*/
+          ActorMovement_BuildPathGridWaypointList(v15); /*0x62345b*/
+          v15[0x47] = 0; /*0x623460*/
         }
         else
         {
-          if ( sub_612690(v18[0x1C]) )
+          if ( (unsigned __int8)CombatMode_IsRangedWeaponMode(v15[0x1C]) ) /*0x6233e1*/
           {
-            result = ((double (__thiscall *)(_DWORD *))loc_622820)(v18);
-            if ( v21 )
+            ((void (__thiscall *)(_DWORD *))loc_622820)(v15); /*0x6233ef*/
+            if ( v18 ) /*0x6233f6*/
             {
-              sub_612DA0(v18, 9);
-              sub_619920((int)v18, 0);
+              sub_612DA0(v15, 9); /*0x6233fc*/
+              sub_619920((int)v15, 0); /*0x623405*/
             }
           }
-          if ( Actor_IsBlocking(v7) )
-            sub_5F4AE0((Actor *)v7, v6, v5, result, 0);
-          if ( sub_614290((int)v18) )
+          if ( Actor_IsBlocking(v5) ) /*0x62340c*/
+            Actor_UpdateBlockingState((Actor *)v5, 0); /*0x623419*/
+          if ( CombatController_CanReachCurrentTarget((int)v15) ) /*0x623420*/
           {
-            if ( v18[0x6A] >= iAICombatMinDetection )
+            if ( v15[0x6A] >= (int)MEMORY[0xB372F0].value ) /*0x623435*/
             {
-              sub_612DA0(v18, 9);
-              sub_619920((int)v18, 0);
+              sub_612DA0(v15, 9); /*0x62343b*/
+              sub_619920((int)v15, 0); /*0x623444*/
             }
           }
         }
       }
-      else if ( !(*((unsigned __int8 (__thiscall **)(TESObjectREFRVtbl *))v15->super.super.InitializeComponent + 0x32))(v15) )
+      else if ( !(*((unsigned __int8 (__thiscall **)(TESObjectREFRVtbl *))v12->super.super.InitializeComponent + 0x32))(v12) ) /*0x623373*/
       {
-        sub_612DA0(v18, 9);
+        sub_612DA0(v15, 9); /*0x623381*/
       }
     }
     else
     {
-      sub_6160B0((Actor **)a1);
-      v4 = *(_DWORD *)(a1 + 0x70);
-      if ( v4 == 2 || v4 == 4 )
-        sub_61FE90((float *)a1, a2, result);
+      sub_6160B0((Actor **)a1); /*0x6231f9*/
+      v4 = *(_DWORD *)(a1 + 0x70); /*0x6231fe*/
+      if ( v4 == 2 || v4 == 4 ) /*0x623209*/
+        sub_61FE90((float *)a1, result); /*0x623211*/
       else
-        sub_61FEF0((float *)a1, a2, result);
+        sub_61FEF0((float *)a1, result); /*0x62321c*/
     }
   }
-  return result;
+  return result; /*0x62320d*/
 }

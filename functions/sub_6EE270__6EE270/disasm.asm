@@ -1,4 +1,4 @@
-0x6EE270: push    0FFFFFFFFh
+0x6EE270: push    0FFFFFFFFh; CTL FanControls loader/precompute at manager+0xC8. First block: 20 FaceGenFanProjectionRecord records at +0x25C, indexed [fan 0..4][control 0..1][channel 0..1], strides 0x80/0x40/0x20. Each contains basis 1 x dimensions[2*channel], reciprocalSquaredLength (+0x18), and projectionOffset (+0x1C). Offset meaning verified in runtime getter. Later pair data/projection/inverse precomputation remains partially decoded. Initialized byte set after completion.
 0x6EE272: push    offset SEH_6EE270
 0x6EE277: mov     eax, large fs:0
 0x6EE27D: push    eax
@@ -13,7 +13,7 @@
 0x6EE290: lea     eax, [esp+0A8h+var_C]
 0x6EE297: mov     large fs:0, eax
 0x6EE29D: mov     [esp+0A8h+var_78], ecx
-0x6EE2A1: mov     ebx, [esp+0A8h+arg_0]
+0x6EE2A1: mov     ebx, [esp+0A8h+file]
 0x6EE2A8: add     ecx, 268h
 0x6EE2AE: mov     [esp+0A8h+var_8C], 0
 0x6EE2B6: mov     [esp+0A8h+var_88], ecx
@@ -22,17 +22,17 @@
 0x6EE2C6: mov     [esp+0A8h+var_94], eax
 0x6EE2CA: mov     esi, [esp+0A8h+var_94]
 0x6EE2CE: xor     edi, edi
-0x6EE2D0: mov     ecx, [esp+0A8h+arg_4]
+0x6EE2D0: mov     ecx, [esp+0A8h+basisDimensions]
 0x6EE2D7: fldz
 0x6EE2D9: mov     eax, [ecx+edi*8]
 0x6EE2DC: push    ecx
-0x6EE2DD: fstp    [esp+0ACh+var_AC]; int
+0x6EE2DD: fstp    [esp+0ACh+scale]; int
 0x6EE2E0: lea     ebp, [esi-0Ch]
 0x6EE2E3: push    eax; int
 0x6EE2E4: lea     ecx, [esi-4]; int
 0x6EE2E7: mov     dword ptr [ebp+0], 1
 0x6EE2EE: mov     [esi-8], eax
-0x6EE2F1: call    sub_527160
+0x6EE2F1: call    FaceGenFloatVector_ResizeFill; Vector resize: retain existing prefix, erase surplus elements when shrinking, fill only newly inserted elements when growing. Equal size does not overwrite coefficients. Matrix dimension products must already be valid; no recovery from rows*columns overflow.
 0x6EE2F6: mov     eax, [esi]
 0x6EE2F8: test    eax, eax
 0x6EE2FA: jz      short loc_6EE306
@@ -41,7 +41,7 @@
 0x6EE301: sar     edx, 2
 0x6EE304: jnz     short loc_6EE30B
 0x6EE306: call    __invalid_parameter_noinfo
-0x6EE30B: mov     ecx, [esp+0A8h+arg_4]
+0x6EE30B: mov     ecx, [esp+0A8h+basisDimensions]
 0x6EE312: mov     ecx, [ecx+edi*8]
 0x6EE315: mov     eax, [esi]
 0x6EE317: mov     edx, [ebx]
@@ -60,13 +60,13 @@
 0x6EE335: lea     ecx, [esi+10h]
 0x6EE338: push    ecx
 0x6EE339: mov     ecx, ebx
-0x6EE33B: call    edx
+0x6EE33B: call    edx; Reads one 4-byte projectionOffset into record+0x1C. Matched to runtime GetControlValue addition at 0x6EDDF3.
 0x6EE33D: test    al, al
 0x6EE33F: jz      loc_6EEA03
-0x6EE345: mov     ecx, ebp
-0x6EE347: call    sub_5511D0
+0x6EE345: mov     ecx, ebp; this
+0x6EE347: call    FaceGenMatrix_SumSquares; Verified Oblivion: row-major sum of coefficient squares over rows*columns. Each square and accumulator are stored as float; result returned through x87. Storage check only establishes nonempty vector, not index < storage length. Requires consistent matrix dimensions/storage. Used by Combine and sub_6EE270.
 0x6EE34C: fld1
-0x6EE34E: fdivrp  st(1), st
+0x6EE34E: fdivrp  st(1), st; Computes 1/sumSquares without a zero or finite check in this path; degenerate file vectors can produce nonfinite cached reciprocal. Asset reachability/gameplay impact not established.
 0x6EE350: add     edi, 1
 0x6EE353: add     esi, 20h ; ' '
 0x6EE356: cmp     edi, 2
@@ -101,17 +101,17 @@
 0x6EE3C9: xor     edi, edi
 0x6EE3CB: mov     [esp+0A8h+var_90], esi
 0x6EE3CF: add     esi, 4E8h
-0x6EE3D5: mov     eax, [esp+0A8h+arg_4]
+0x6EE3D5: mov     eax, [esp+0A8h+basisDimensions]
 0x6EE3DC: fldz
 0x6EE3DE: mov     eax, [eax+edi*8]
 0x6EE3E1: push    ecx
-0x6EE3E2: fstp    [esp+0ACh+var_AC]; int
+0x6EE3E2: fstp    [esp+0ACh+scale]; int
 0x6EE3E5: lea     ebp, [esi-0Ch]
 0x6EE3E8: push    eax; int
 0x6EE3E9: lea     ecx, [esi-4]; int
 0x6EE3EC: mov     dword ptr [ebp+0], 1
 0x6EE3F3: mov     [esi-8], eax
-0x6EE3F6: call    sub_527160
+0x6EE3F6: call    FaceGenFloatVector_ResizeFill; Vector resize: retain existing prefix, erase surplus elements when shrinking, fill only newly inserted elements when growing. Equal size does not overwrite coefficients. Matrix dimension products must already be valid; no recovery from rows*columns overflow.
 0x6EE3FB: mov     eax, [esi]
 0x6EE3FD: test    eax, eax
 0x6EE3FF: jz      short loc_6EE40B
@@ -120,7 +120,7 @@
 0x6EE406: sar     ecx, 2
 0x6EE409: jnz     short loc_6EE410
 0x6EE40B: call    __invalid_parameter_noinfo
-0x6EE410: mov     ecx, [esp+0A8h+arg_4]
+0x6EE410: mov     ecx, [esp+0A8h+basisDimensions]
 0x6EE417: mov     ecx, [ecx+edi*8]
 0x6EE41A: mov     eax, [esi]
 0x6EE41C: mov     edx, [ebx]
@@ -132,8 +132,8 @@
 0x6EE427: call    edx
 0x6EE429: test    al, al
 0x6EE42B: jz      loc_6EEA03
-0x6EE431: mov     ecx, ebp
-0x6EE433: call    sub_5511D0
+0x6EE431: mov     ecx, ebp; this
+0x6EE433: call    FaceGenMatrix_SumSquares; Verified Oblivion: row-major sum of coefficient squares over rows*columns. Each square and accumulator are stored as float; result returned through x87. Storage check only establishes nonempty vector, not index < storage length. Requires consistent matrix dimensions/storage. Used by Combine and sub_6EE270.
 0x6EE438: fadd    [esp+0A8h+var_88]
 0x6EE43C: add     edi, 1
 0x6EE43F: add     esi, 18h
@@ -166,7 +166,7 @@
 0x6EE499: cmp     ecx, 19h
 0x6EE49C: mov     [esp+0A8h+var_94], ecx
 0x6EE4A0: jb      loc_6EE3A1
-0x6EE4A6: mov     ecx, [esp+0A8h+arg_4]
+0x6EE4A6: mov     ecx, [esp+0A8h+basisDimensions]
 0x6EE4AD: mov     eax, [ecx+8]
 0x6EE4B0: add     eax, [ecx]
 0x6EE4B2: mov     [esp+0A8h+var_8C], 0
@@ -179,16 +179,16 @@
 0x6EE4D4: xor     ebp, ebp
 0x6EE4D6: add     esi, 0FFFFFFD0h
 0x6EE4D9: lea     esp, [esp+0]
-0x6EE4E0: mov     ecx, [esp+0A8h+arg_4]
+0x6EE4E0: mov     ecx, [esp+0A8h+basisDimensions]
 0x6EE4E7: fldz
 0x6EE4E9: mov     edi, [ecx+ebp*8]
 0x6EE4EC: push    ecx
-0x6EE4ED: fstp    [esp+0ACh+var_AC]; int
+0x6EE4ED: fstp    [esp+0ACh+scale]; int
 0x6EE4F0: push    edi; int
 0x6EE4F1: lea     ecx, [esi-4]; int
 0x6EE4F4: mov     [esi-0Ch], edi
 0x6EE4F7: mov     dword ptr [esi-8], 1
-0x6EE4FE: call    sub_527160
+0x6EE4FE: call    FaceGenFloatVector_ResizeFill; Vector resize: retain existing prefix, erase surplus elements when shrinking, fill only newly inserted elements when growing. Equal size does not overwrite coefficients. Matrix dimension products must already be valid; no recovery from rows*columns overflow.
 0x6EE503: mov     eax, [esi]
 0x6EE505: test    eax, eax
 0x6EE507: jz      short loc_6EE513
@@ -219,9 +219,9 @@
 0x6EE54A: imul    esi, esi
 0x6EE54D: push    ecx
 0x6EE54E: lea     ecx, [edi-4]; int
-0x6EE551: fstp    [esp+0ACh+var_AC]; int
+0x6EE551: fstp    [esp+0ACh+scale]; int
 0x6EE554: push    esi; int
-0x6EE555: call    sub_527160
+0x6EE555: call    FaceGenFloatVector_ResizeFill; Vector resize: retain existing prefix, erase surplus elements when shrinking, fill only newly inserted elements when growing. Equal size does not overwrite coefficients. Matrix dimension products must already be valid; no recovery from rows*columns overflow.
 0x6EE55A: mov     eax, [edi]
 0x6EE55C: test    eax, eax
 0x6EE55E: jz      short loc_6EE56A
@@ -244,7 +244,7 @@
 0x6EE58A: xor     ebp, ebp
 0x6EE58C: add     esi, 18h
 0x6EE58F: nop
-0x6EE590: mov     ecx, [esp+0A8h+arg_4]
+0x6EE590: mov     ecx, [esp+0A8h+basisDimensions]
 0x6EE597: fldz
 0x6EE599: mov     eax, [ecx+ebp*8]
 0x6EE59C: mov     edi, eax
@@ -252,10 +252,10 @@
 0x6EE5A1: push    ecx
 0x6EE5A2: lea     ecx, [esi-4]; int
 0x6EE5A5: mov     [esi-0Ch], eax
-0x6EE5A8: fstp    [esp+0ACh+var_AC]; int
+0x6EE5A8: fstp    [esp+0ACh+scale]; int
 0x6EE5AB: push    edi; int
 0x6EE5AC: mov     [esi-8], eax
-0x6EE5AF: call    sub_527160
+0x6EE5AF: call    FaceGenFloatVector_ResizeFill; Vector resize: retain existing prefix, erase surplus elements when shrinking, fill only newly inserted elements when growing. Equal size does not overwrite coefficients. Matrix dimension products must already be valid; no recovery from rows*columns overflow.
 0x6EE5B4: mov     eax, [esi]
 0x6EE5B6: test    eax, eax
 0x6EE5B8: jz      short loc_6EE5C4
@@ -293,8 +293,8 @@
 0x6EE624: mov     [esp+0A8h+var_84], 2
 0x6EE62C: lea     esp, [esp+0]
 0x6EE630: lea     esi, [ebp-40h]
-0x6EE633: mov     ecx, esi
-0x6EE635: call    sub_5511D0
+0x6EE633: mov     ecx, esi; this
+0x6EE635: call    FaceGenMatrix_SumSquares; Verified Oblivion: row-major sum of coefficient squares over rows*columns. Each square and accumulator are stored as float; result returned through x87. Storage check only establishes nonempty vector, not index < storage length. Requires consistent matrix dimensions/storage. Used by Combine and sub_6EE270.
 0x6EE63A: fstp    [esp+0A8h+var_90]
 0x6EE63E: fld     [esp+0A8h+var_90]
 0x6EE642: call    __CIsqrt
@@ -306,39 +306,39 @@
 0x6EE65D: fnstsw  ax
 0x6EE65F: test    ah, 41h
 0x6EE662: jz      short loc_6EE676
-0x6EE664: push    85h ; '…'; int
+0x6EE664: push    85h ; '…'; sourceLine
 0x6EE669: push    offset a_Fancontrols_c; ".\\FanControls.cpp"
-0x6EE66E: call    sub_6ED6D0
+0x6EE66E: call    FaceGen_ReportAssertionViolation; FaceGen assertion reporter: PrintError("FR2 ASSERT violation in %s line %i. Code may crash.", sourceFile, sourceLine); returns normally. NOT noreturn and NOT a validation barrier.
 0x6EE673: add     esp, 8
 0x6EE676: fld     [esp+0A8h+var_94]
 0x6EE67A: push    ecx
-0x6EE67B: lea     edx, [esp+0ACh+var_74]
-0x6EE67F: fstp    [esp+0ACh+var_AC]; float
-0x6EE682: push    edx; int
-0x6EE683: mov     ecx, esi
-0x6EE685: call    sub_6EE130
+0x6EE67B: lea     edx, [esp+0ACh+outDifference]
+0x6EE67F: fstp    [esp+0ACh+scale]; divisor
+0x6EE682: push    edx; out
+0x6EE683: mov     ecx, esi; this
+0x6EE685: call    FaceGenMatrix_DivideScalar; Returns out = this * (1/divisor) through FaceGenMatrix_Scale. No zero/finite divisor guard here. FanControls precompute supplies vector length after its own assertion.
 0x6EE68A: lea     esi, [edi-18h]
-0x6EE68D: push    eax
-0x6EE68E: mov     ecx, esi
+0x6EE68D: push    eax; source
+0x6EE68E: mov     ecx, esi; this
 0x6EE690: mov     [esp+0ACh+var_4], 0
-0x6EE69B: call    sub_5520E0
-0x6EE6A0: mov     eax, [esp+0A8h+var_68]
+0x6EE69B: call    FaceGenMatrix_Assign; Deep matrix assignment. Copies rows/columns, resizes coefficient storage, then copies rows*columns floats.
+0x6EE6A0: mov     eax, [esp+0A8h+outDifference.begin]
 0x6EE6A4: test    eax, eax
 0x6EE6A6: mov     [esp+0A8h+var_4], 0FFFFFFFFh
 0x6EE6B1: jz      short loc_6EE6BC
 0x6EE6B3: push    eax
-0x6EE6B4: call    FormHeapFree
+0x6EE6B4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6EE6B9: add     esp, 4
-0x6EE6BC: lea     eax, [esp+0A8h+var_3C]
-0x6EE6C0: push    eax
-0x6EE6C1: mov     ecx, esi
-0x6EE6C3: call    sub_552730
-0x6EE6C8: push    eax
-0x6EE6C9: lea     ecx, [esp+0ACh+var_74]
-0x6EE6CD: push    ecx
-0x6EE6CE: mov     ecx, ebp
+0x6EE6BC: lea     eax, [esp+0A8h+out]
+0x6EE6C0: push    eax; out
+0x6EE6C1: mov     ecx, esi; this
+0x6EE6C3: call    FaceGenMatrix_Transpose; Matrix transpose: out has source.columns x source.rows and receives out[col,row] = source[row,col].
+0x6EE6C8: push    eax; rhs
+0x6EE6C9: lea     ecx, [esp+0ACh+outDifference]
+0x6EE6CD: push    ecx; out
+0x6EE6CE: mov     ecx, ebp; this
 0x6EE6D0: mov     [esp+0B0h+var_4], 1
-0x6EE6DB: call    sub_5523C0
+0x6EE6DB: call    FaceGenMatrix_Multiply; Conventional matrix product: out = this * rhs. Asserts this.columns == rhs.rows.
 0x6EE6E0: mov     ebx, eax
 0x6EE6E2: mov     eax, [ebx+0Ch]
 0x6EE6E5: test    eax, eax
@@ -349,62 +349,62 @@
 0x6EE6F1: jnz     short loc_6EE6F8
 0x6EE6F3: call    __invalid_parameter_noinfo
 0x6EE6F8: mov     ebx, [ebx+0Ch]
-0x6EE6FB: mov     eax, [esp+0A8h+var_68]
+0x6EE6FB: mov     eax, [esp+0A8h+outDifference.begin]
 0x6EE6FF: fld     dword ptr [ebx]
 0x6EE701: xor     ecx, ecx
 0x6EE703: fstp    [esp+0A8h+var_90]
 0x6EE707: cmp     eax, ecx
 0x6EE709: jz      short loc_6EE716
 0x6EE70B: push    eax
-0x6EE70C: call    FormHeapFree
+0x6EE70C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6EE711: add     esp, 4
 0x6EE714: xor     ecx, ecx
-0x6EE716: mov     eax, [esp+0A8h+var_30]
+0x6EE716: mov     eax, [esp+0A8h+out.begin]
 0x6EE71A: cmp     eax, ecx
-0x6EE71C: mov     [esp+0A8h+var_68], ecx
-0x6EE720: mov     [esp+0A8h+var_64], ecx
-0x6EE724: mov     [esp+0A8h+var_60], ecx
+0x6EE71C: mov     [esp+0A8h+outDifference.begin], ecx
+0x6EE720: mov     [esp+0A8h+outDifference.end], ecx
+0x6EE724: mov     [esp+0A8h+outDifference.capacityEnd], ecx
 0x6EE728: mov     [esp+0A8h+var_4], 0FFFFFFFFh
 0x6EE733: jz      short loc_6EE73E
 0x6EE735: push    eax
-0x6EE736: call    FormHeapFree
+0x6EE736: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6EE73B: add     esp, 4
 0x6EE73E: fld     [esp+0A8h+var_90]
 0x6EE742: push    ecx
-0x6EE743: lea     eax, [esp+0ACh+var_3C]
-0x6EE747: fstp    [esp+0ACh+var_AC]; float
-0x6EE74A: push    eax; int
-0x6EE74B: mov     ecx, esi
-0x6EE74D: call    sub_552310
-0x6EE752: push    eax
-0x6EE753: lea     ecx, [esp+0ACh+var_74]
-0x6EE757: push    ecx
-0x6EE758: mov     ecx, ebp
+0x6EE743: lea     eax, [esp+0ACh+out]
+0x6EE747: fstp    [esp+0ACh+scale]; scale
+0x6EE74A: push    eax; out
+0x6EE74B: mov     ecx, esi; this
+0x6EE74D: call    FaceGenMatrix_Scale; Matrix scalar multiply: out = this * scale. Dimensions and storage are initialized from the source matrix.
+0x6EE752: push    eax; right
+0x6EE753: lea     ecx, [esp+0ACh+outDifference]
+0x6EE757: push    ecx; outDifference
+0x6EE758: mov     ecx, ebp; this
 0x6EE75A: mov     [esp+0B0h+var_4], 2
-0x6EE765: call    sub_552630
-0x6EE76A: push    eax
-0x6EE76B: mov     ecx, edi
+0x6EE765: call    FaceGenMatrix_Subtract; Dimension-checked element-wise matrix subtraction: outDifference = this - right.
+0x6EE76A: push    eax; source
+0x6EE76B: mov     ecx, edi; this
 0x6EE76D: mov     byte ptr [esp+0ACh+var_4], 3
-0x6EE775: call    sub_5520E0
-0x6EE77A: mov     eax, [esp+0A8h+var_68]
+0x6EE775: call    FaceGenMatrix_Assign; Deep matrix assignment. Copies rows/columns, resizes coefficient storage, then copies rows*columns floats.
+0x6EE77A: mov     eax, [esp+0A8h+outDifference.begin]
 0x6EE77E: xor     esi, esi
 0x6EE780: cmp     eax, esi
 0x6EE782: jz      short loc_6EE78D
 0x6EE784: push    eax
-0x6EE785: call    FormHeapFree
+0x6EE785: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6EE78A: add     esp, 4
-0x6EE78D: mov     eax, [esp+0A8h+var_30]
+0x6EE78D: mov     eax, [esp+0A8h+out.begin]
 0x6EE791: cmp     eax, esi
-0x6EE793: mov     [esp+0A8h+var_68], esi
-0x6EE797: mov     [esp+0A8h+var_64], esi
-0x6EE79B: mov     [esp+0A8h+var_60], esi
+0x6EE793: mov     [esp+0A8h+outDifference.begin], esi
+0x6EE797: mov     [esp+0A8h+outDifference.end], esi
+0x6EE79B: mov     [esp+0A8h+outDifference.capacityEnd], esi
 0x6EE79F: mov     [esp+0A8h+var_4], 0FFFFFFFFh
 0x6EE7AA: jz      short loc_6EE7B5
 0x6EE7AC: push    eax
-0x6EE7AD: call    FormHeapFree
+0x6EE7AD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6EE7B2: add     esp, 4
-0x6EE7B5: mov     ecx, edi
-0x6EE7B7: call    sub_5511D0
+0x6EE7B5: mov     ecx, edi; this
+0x6EE7B7: call    FaceGenMatrix_SumSquares; Verified Oblivion: row-major sum of coefficient squares over rows*columns. Each square and accumulator are stored as float; result returned through x87. Storage check only establishes nonempty vector, not index < storage length. Requires consistent matrix dimensions/storage. Used by Combine and sub_6EE270.
 0x6EE7BC: fstp    [esp+0A8h+var_90]
 0x6EE7C0: fld     [esp+0A8h+var_90]
 0x6EE7C4: call    __CIsqrt
@@ -416,19 +416,19 @@
 0x6EE7DF: fnstsw  ax
 0x6EE7E1: test    ah, 41h
 0x6EE7E4: jz      short loc_6EE7F8
-0x6EE7E6: push    8Dh; int
+0x6EE7E6: push    8Dh; sourceLine
 0x6EE7EB: push    offset a_Fancontrols_c; ".\\FanControls.cpp"
-0x6EE7F0: call    sub_6ED6D0
+0x6EE7F0: call    FaceGen_ReportAssertionViolation; FaceGen assertion reporter: PrintError("FR2 ASSERT violation in %s line %i. Code may crash.", sourceFile, sourceLine); returns normally. NOT noreturn and NOT a validation barrier.
 0x6EE7F5: add     esp, 8
 0x6EE7F8: fld     [esp+0A8h+var_94]
 0x6EE7FC: push    ecx
 0x6EE7FD: fld1
-0x6EE7FF: mov     ecx, edi
+0x6EE7FF: mov     ecx, edi; this
 0x6EE801: fdivrp  st(1), st
 0x6EE803: fstp    [esp+0ACh+var_90]
 0x6EE807: fld     [esp+0ACh+var_90]
-0x6EE80B: fstp    [esp+0ACh+var_AC]; float
-0x6EE80E: call    sub_551D40
+0x6EE80B: fstp    [esp+0ACh+scale]; scale
+0x6EE80E: call    FaceGenMatrix_ScaleInPlace; Verified Oblivion: multiply every stored float in [begin,end) by scale, independently of rows/columns; return this. ECX=this, one stack float, ret 4. EBX is saved and overwritten, not a semantic argument; prior userpurge signature was a decompiler artifact.
 0x6EE813: add     ebp, 20h ; ' '
 0x6EE816: add     edi, 30h ; '0'
 0x6EE819: sub     [esp+0A8h+var_84], 1
@@ -461,15 +461,15 @@
 0x6EE894: mov     [esp+0A8h+var_5C], 2
 0x6EE89C: lea     esp, [esp+0]
 0x6EE8A0: lea     ecx, [esp+0A8h+var_24]
-0x6EE8A7: push    ecx
-0x6EE8A8: mov     ecx, ebp
-0x6EE8AA: call    sub_552730
-0x6EE8AF: mov     ecx, [esp+0A8h+var_88]
-0x6EE8B3: push    eax
+0x6EE8A7: push    ecx; out
+0x6EE8A8: mov     ecx, ebp; this
+0x6EE8AA: call    FaceGenMatrix_Transpose; Matrix transpose: out has source.columns x source.rows and receives out[col,row] = source[row,col].
+0x6EE8AF: mov     ecx, [esp+0A8h+var_88]; this
+0x6EE8B3: push    eax; rhs
 0x6EE8B4: lea     edx, [esp+0ACh+var_54]
-0x6EE8B8: push    edx
+0x6EE8B8: push    edx; out
 0x6EE8B9: mov     [esp+0B0h+var_4], 4
-0x6EE8C4: call    sub_5523C0
+0x6EE8C4: call    FaceGenMatrix_Multiply; Conventional matrix product: out = this * rhs. Asserts this.columns == rhs.rows.
 0x6EE8C9: mov     esi, eax
 0x6EE8CB: mov     eax, [esi+0Ch]
 0x6EE8CE: test    eax, eax
@@ -482,24 +482,24 @@
 0x6EE8E1: mov     esi, [esi+0Ch]
 0x6EE8E4: fld     dword ptr [edi]
 0x6EE8E6: fadd    dword ptr [esi]
-0x6EE8E8: mov     eax, [esp+0A8h+var_48]
+0x6EE8E8: mov     eax, [esp+0A8h+var_54.begin]
 0x6EE8EC: xor     ecx, ecx
 0x6EE8EE: cmp     eax, ecx
 0x6EE8F0: fstp    dword ptr [edi]
 0x6EE8F2: jz      short loc_6EE8FF
 0x6EE8F4: push    eax
-0x6EE8F5: call    FormHeapFree
+0x6EE8F5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6EE8FA: add     esp, 4
 0x6EE8FD: xor     ecx, ecx
-0x6EE8FF: mov     eax, [esp+0A8h+var_18]
+0x6EE8FF: mov     eax, [esp+0A8h+var_24.begin]
 0x6EE906: cmp     eax, ecx
-0x6EE908: mov     [esp+0A8h+var_48], ecx
-0x6EE90C: mov     [esp+0A8h+var_44], ecx
-0x6EE910: mov     [esp+0A8h+var_40], ecx
+0x6EE908: mov     [esp+0A8h+var_54.begin], ecx
+0x6EE90C: mov     [esp+0A8h+var_54.end], ecx
+0x6EE910: mov     [esp+0A8h+var_54.capacityEnd], ecx
 0x6EE914: mov     [esp+0A8h+var_4], 0FFFFFFFFh
 0x6EE91F: jz      short loc_6EE92A
 0x6EE921: push    eax
-0x6EE922: call    FormHeapFree
+0x6EE922: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6EE927: add     esp, 4
 0x6EE92A: mov     ecx, 1
 0x6EE92F: add     edi, 4
@@ -529,24 +529,24 @@
 0x6EE986: fld     st
 0x6EE988: fmulp   st(2), st
 0x6EE98A: fxch    st(1)
-0x6EE98C: fstp    [esp+0A8h+var_74]
-0x6EE990: mov     edx, [esp+0A8h+var_74]
+0x6EE98C: fstp    [esp+0A8h+outDifference.rows]
+0x6EE990: mov     edx, [esp+0A8h+outDifference.rows]
 0x6EE994: fld     dword ptr [eax-10h]
 0x6EE997: fchs
 0x6EE999: fmul    st, st(1)
-0x6EE99B: fstp    [esp+0A8h+var_70]
+0x6EE99B: fstp    [esp+0A8h+outDifference.columns]
 0x6EE99F: fld     dword ptr [eax-0Ch]
 0x6EE9A2: fchs
 0x6EE9A4: fmul    st, st(1)
-0x6EE9A6: fstp    [esp+0A8h+var_6C]
+0x6EE9A6: fstp    [esp+0A8h+outDifference.allocator08]
 0x6EE9AA: fmul    dword ptr [ebx]
 0x6EE9AC: mov     [ebx], edx
-0x6EE9AE: mov     edx, [esp+0A8h+var_70]
+0x6EE9AE: mov     edx, [esp+0A8h+outDifference.columns]
 0x6EE9B2: mov     [ebx+4], edx
-0x6EE9B5: mov     edx, [esp+0A8h+var_6C]
-0x6EE9B9: fstp    [esp+0A8h+var_68]
+0x6EE9B5: mov     edx, [esp+0A8h+outDifference.allocator08]
+0x6EE9B9: fstp    [esp+0A8h+outDifference.begin]
 0x6EE9BD: mov     [ebx+8], edx
-0x6EE9C0: mov     edx, [esp+0A8h+var_68]
+0x6EE9C0: mov     edx, [esp+0A8h+outDifference.begin]
 0x6EE9C4: mov     [ebx+0Ch], edx
 0x6EE9C7: jnz     loc_6EE867
 0x6EE9CD: add     [esp+0A8h+var_84], 80h ; '€'
@@ -566,3 +566,20 @@
 0x6EEA00: retn    8
 0x6EEA03: xor     al, al
 0x6EEA05: jmp     short loc_6EE9E7
+0x9C84C0: lea     ecx, [ebp-74h]; this
+0x9C84C3: jmp     FaceGenMatrix_Destruct; Destroys a FaceGenMatrix by freeing the coefficient allocation at +0x0C, then clears begin/end/capacity-end.
+0x9C84C8: lea     ecx, [ebp-3Ch]; this
+0x9C84CB: jmp     FaceGenMatrix_Destruct; Destroys a FaceGenMatrix by freeing the coefficient allocation at +0x0C, then clears begin/end/capacity-end.
+0x9C84D0: lea     ecx, [ebp-3Ch]; this
+0x9C84D3: jmp     FaceGenMatrix_Destruct; Destroys a FaceGenMatrix by freeing the coefficient allocation at +0x0C, then clears begin/end/capacity-end.
+0x9C84D8: lea     ecx, [ebp-74h]; this
+0x9C84DB: jmp     FaceGenMatrix_Destruct; Destroys a FaceGenMatrix by freeing the coefficient allocation at +0x0C, then clears begin/end/capacity-end.
+0x9C84E0: lea     ecx, [ebp-24h]; this
+0x9C84E3: jmp     FaceGenMatrix_Destruct; Destroys a FaceGenMatrix by freeing the coefficient allocation at +0x0C, then clears begin/end/capacity-end.
+0x9C84E8: mov     edx, [esp+basisDimensions]
+0x9C84EC: lea     eax, [edx-98h]
+0x9C84F2: mov     ecx, [edx-9Ch]
+0x9C84F8: xor     ecx, eax
+0x9C84FA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C84FF: mov     eax, offset stru_AF0784
+0x9C8504: jmp     ___CxxFrameHandler3

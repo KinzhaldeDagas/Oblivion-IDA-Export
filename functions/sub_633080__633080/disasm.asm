@@ -36,13 +36,13 @@
 0x6330F4: call    TogglePOV
 0x6330F9: push    3Fh ; '?'
 0x6330FB: mov     ecx, esi
-0x6330FD: call    sub_5E05F0
+0x6330FD: call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.
 0x633102: fld1
 0x633104: sub     esp, 8
-0x633107: fst     [esp+10h+var_C]; int
-0x63310B: mov     ecx, esi
-0x63310D: fstp    [esp+10h+var_10]; float
-0x633110: call    Actor_ProcessAction
+0x633107: fst     [esp+10h+arg1]; arg1
+0x63310B: mov     ecx, esi; this
+0x63310D: fstp    [esp+10h+arg0]; arg0
+0x633110: call    Actor_ProcessAction; Per-actor native action state machine. Advances required-note phases, handles AttackBow nock/hold/release lifecycle, constructs ArrowProjectile on release, and dispatches post-shot AMMO consumption.
 0x633115: pop     esi
 0x633116: test    bl, bl
 0x633118: pop     ebx

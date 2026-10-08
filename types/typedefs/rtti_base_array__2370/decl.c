@@ -1,1 +1,4 @@
-rtti_base_array
+struct rtti_base_array
+{
+unsigned int bases[10];
+};

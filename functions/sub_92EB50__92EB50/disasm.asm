@@ -14,7 +14,6 @@
 0x92EB72: neg     eax
 0x92EB74: lea     esi, [esi+eax*4]
 0x92EB77: jmp     short loc_92EB80
-0x92EB79: align 10h
 0x92EB80: fld     dword ptr ds:0A2FAA8h
 0x92EB86: fld     dword ptr [ecx+0Ch]
 0x92EB89: fucompp

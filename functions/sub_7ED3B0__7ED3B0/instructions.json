@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7ED3B0",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Continues Oblivion BSShaderLightingProperty non-shadow-light iteration using the stored cursor and the same cull/backing-light eligibility filter. Fallout later adds an explicit cast-shadow exclusion absent here.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x7ED3ED",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x7ED44F",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },

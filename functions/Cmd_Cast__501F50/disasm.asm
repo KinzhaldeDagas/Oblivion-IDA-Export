@@ -22,7 +22,7 @@
 0x501F83: push    ecx; a1
 0x501F84: mov     dword ptr [esp+34h+var_8], edi
 0x501F88: mov     [esp+34h+var_4], edi
-0x501F8C: call    Script_ExtractArgs
+0x501F8C: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x501F91: add     esp, 24h
 0x501F94: test    al, al
 0x501F96: jnz     short loc_501F9E
@@ -78,6 +78,6 @@
 0x502026: jz      Cmd_Cast___CastNonActor
 0x50202C: mov     ecx, dword ptr [esp+18h+var_8]
 0x502030: add     ecx, 0Ch
-0x502033: call    EffectItemList_HasOnTarget
+0x502033: call    EffectItemList_HasOnTarget; True iff list has an EffectItem with range==2 (Target) and EffectSetting flag 0x400000 clear. Does not require hostile/detrimental.
 0x502038: test    al, al
 0x50203A: jz      short Cmd_Cast___CheckOnTouch

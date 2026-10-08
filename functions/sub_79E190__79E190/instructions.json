@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x79E190",
-    "line": "push    ebp",
+    "line": "push    ebp; Exception-safe uninitialized_fill_n for compact SFrondGuide records. Placement-copy-constructs count values; unwind cleanup destroys the constructed prefix before rethrowing.",
     "mnemonic": "push",
     "size": 1
   },
@@ -97,19 +97,19 @@
   },
   {
     "ea": "0x79E1BB",
-    "line": "mov     edi, [ebp+arg_0]",
+    "line": "mov     edi, [ebp+destination]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x79E1BE",
-    "line": "mov     ebx, [ebp+arg_8]",
+    "line": "mov     ebx, [ebp+source]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x79E1C1",
-    "line": "mov     esi, [ebp+arg_4]",
+    "line": "mov     esi, [ebp+count]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -145,19 +145,19 @@
   },
   {
     "ea": "0x79E1D4",
-    "line": "push    ebx",
+    "line": "push    ebx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E1D5",
-    "line": "push    edi",
+    "line": "push    edi; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E1D6",
-    "line": "call    sub_79B7D0",
+    "line": "call    OB_SFrondGuide_PlacementCopyConstruct_010201A0; Placement copy-construction of one Oblivion compact SFrondGuide. Deep-copy-constructs the embedded SFrondVertex vector and copies all scalar fields; no stock RT 4.1 stack-vertex/pointer relinking exists in this layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x79E1E4",
-    "line": "mov     [ebp+arg_0], edi",
+    "line": "mov     [ebp+destination], edi",
     "mnemonic": "mov",
     "size": 3
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x79E1EC",
-    "line": "mov     edi, [ebp+arg_0]",
+    "line": "mov     edi, [ebp+destination]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x79E1F6",
-    "line": "push    esi",
+    "line": "push    esi; this",
     "mnemonic": "push",
     "size": 1
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x79E1F9",
-    "line": "call    sub_79BFF0",
+    "line": "call    OB_stVector4_DestroyStdcall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded stdcall destructor for a 0x10-byte vector owner. Frees and clears the pointer triplet. Calls from SFrondGuide destruction reflect its first-member vector layout; calls from vector<vector<float>> operate directly on inner float vectors.",
     "mnemonic": "call",
     "size": 5
   },
@@ -328,5 +328,47 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CC400",
+    "line": "mov     edx, [esp-4+count]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CC404",
+    "line": "lea     eax, [edx+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC407",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC40A",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CC40C",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC411",
+    "line": "mov     eax, offset stru_AF55D0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC416",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

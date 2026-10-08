@@ -1,24 +1,25 @@
-int __thiscall Actor_ForceModCurAVf(_BYTE *this, int a2, int a3, int a4)
+// Verified collection relationship: modifies Actor+0x88 avModifiers through AdjustValue with allowPositive=1; then marks change mask0x200000. Distinct storage from process damage(+0x70) and max(+0x94) collections. Other hit/skill side effects are outside this pass.
+int __thiscall Actor_ForceModCurAVf(Actor *self, int actorValue, float delta, int a4)
 {
   int result; // eax
   float *ContainerChanges; // eax
 
-  if ( a2 != 0xA
-    || *(float *)&a3 >= 0.0
-    || (result = (*(int (__thiscall **)(_BYTE *))(*(_DWORD *)this + 0x278))(this), (_BYTE)result) )
+  if ( actorValue != 0xA /*0x5e2a16*/
+    || delta >= 0.0
+    || (result = ((int (__thiscall *)(Actor *))self->vtbl->Unk_9E)(self), (_BYTE)result) )
   {
-    AVCollection_ModAVLimited((_DWORD *)this + 0x22, a2, a3, 1);
-    if ( a2 == 8 && *(float *)&a3 < 0.0 )
-      (*(void (__thiscall **)(_BYTE *, int, int))(*(_DWORD *)this + 0x3B8))(this, a4, a3);
-    (*(void (__thiscall **)(_BYTE *, int))(*(_DWORD *)this + 0x40))(this, 0x200000);
-    result = a2 - 0xC;
-    if ( (unsigned int)(a2 - 0xC) <= 0x14 && (a2 == 0x12 || a2 == 0x1B) )
+    AVCollection_AdjustValue(&self->members.avModifiers, actorValue, delta, 1u); /*0x5e2a2d*/
+    if ( actorValue == 8 && delta < 0.0 ) /*0x5e2a46*/
+      ((void (__thiscall *)(Actor *, int, _DWORD))self->vtbl->OnHealthDamage)(self, a4, LODWORD(delta)); /*0x5e2a5b*/
+    self->vtbl->super.super.super.MarkAsModified((TESForm *)self, 0x200000); /*0x5e2a6d*/
+    result = actorValue - 0xC; /*0x5e2a6f*/
+    if ( (unsigned int)(actorValue - 0xC) <= 0x14 && (actorValue == 0x12 || actorValue == 0x1B) ) /*0x5e2a7f*/
     {
-      ContainerChanges = (float *)ExtraDataList_GetContainerChanges((ExtraDataList *)(this + 0x44));
-      if ( ContainerChanges )
-        sub_484310(ContainerChanges);
-      return (*(int (__thiscall **)(_BYTE *))(*(_DWORD *)this + 0x2C0))(this);
+      ContainerChanges = (float *)ExtraDataList_GetContainerChanges(&self->members.super.super.baseExtraList); /*0x5e2a84*/
+      if ( ContainerChanges ) /*0x5e2a8b*/
+        sub_484310(ContainerChanges); /*0x5e2a8f*/
+      return ((int (__thiscall *)(Actor *))self->vtbl->Unk_B0)(self); /*0x5e2a9e*/
     }
   }
-  return result;
+  return result; /*0x5e2aa0*/
 }

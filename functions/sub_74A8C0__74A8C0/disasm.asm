@@ -68,7 +68,7 @@
 0x74A97D: add     esp, 4
 0x74A980: test    eax, eax
 0x74A982: jz      short loc_74A999
-0x74A984: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; Concurrency::details::_NonReentrantLock::_Release(void)
+0x74A984: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; Pass222: NiPropertyState slot constructor callback; zeroes one dword smart-pointer slot.
 0x74A989: push    esi
 0x74A98A: lea     ebx, [eax+4]
 0x74A98D: push    4
@@ -177,7 +177,7 @@
 0x74AAA9: jns     short loc_74AA80
 0x74AAAB: mov     eax, [esp+14h+arg_0]
 0x74AAAF: push    eax
-0x74AAB0: call    FormHeapFree
+0x74AAB0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x74AAB5: add     esp, 4
 0x74AAB8: pop     esi
 0x74AAB9: pop     ebp

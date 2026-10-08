@@ -12,7 +12,7 @@
 0x431394: mov     eax, [esp+3Ch+arg_4]
 0x431398: test    eax, eax
 0x43139A: jnz     short loc_4313E6
-0x43139C: mov     ecx, OBSE_g_FileFinder
+0x43139C: mov     ecx, ds:0B33A04h
 0x4313A2: test    ecx, ecx
 0x4313A4: jz      short loc_4313CE
 0x4313A6: mov     eax, [ecx]
@@ -62,3 +62,12 @@
 0x43142D: pop     ebx
 0x43142E: add     esp, 34h
 0x431431: retn
+0x9ABEC0: lea     ecx, [ebp-34h]; this
+0x9ABEC3: jmp     ??1NiFile@@UAE@XZ; NiFile::~NiFile(void)
+0x9ABEC8: mov     edx, [esp+arg_4]
+0x9ABECC: lea     eax, [edx-2Ch]
+0x9ABECF: mov     ecx, [edx-30h]
+0x9ABED2: xor     ecx, eax
+0x9ABED4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9ABED9: mov     eax, offset stru_AD8BF0
+0x9ABEDE: jmp     ___CxxFrameHandler3

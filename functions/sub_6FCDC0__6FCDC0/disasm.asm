@@ -272,15 +272,15 @@
 0x6FD14F: test    eax, eax
 0x6FD151: mov     [esp+6Ch+var_4], ebx
 0x6FD155: jz      short loc_6FD16D
-0x6FD157: push    ebp
-0x6FD158: push    0
-0x6FD15A: push    0
-0x6FD15C: push    0
-0x6FD15E: push    esi
-0x6FD15F: push    edi
-0x6FD160: push    5
-0x6FD162: mov     ecx, eax
-0x6FD164: call    sub_7177E0
+0x6FD157: push    ebp; lineFlags
+0x6FD158: push    0; arg7
+0x6FD15A: push    0; arg6
+0x6FD15C: push    0; arg5
+0x6FD15E: push    esi; colors
+0x6FD15F: push    edi; vertices
+0x6FD160: push    5; vertexCount
+0x6FD162: mov     ecx, eax; this
+0x6FD164: call    NiLines_ctorWithGeometryData; Verified NiLines constructor wrapper: create NiGeometryData via NiLinesData_ctor, initialize NiGeometry, then install NiLines vtable.
 0x6FD169: mov     ebp, eax
 0x6FD16B: jmp     short loc_6FD16F
 0x6FD16D: xor     ebp, ebp
@@ -308,3 +308,20 @@
 0x6FD1BD: pop     ebx
 0x6FD1BE: add     esp, 58h
 0x6FD1C1: retn
+0x9C9200: mov     eax, [ebp+4]
+0x9C9203: push    eax
+0x9C9204: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C9209: pop     ecx
+0x9C920A: retn
+0x9C920B: mov     eax, [ebp+4]
+0x9C920E: push    eax
+0x9C920F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C9214: pop     ecx
+0x9C9215: retn
+0x9C9216: mov     edx, [esp+arg_4]
+0x9C921A: lea     eax, [edx-5Ch]
+0x9C921D: mov     ecx, [edx-60h]
+0x9C9220: xor     ecx, eax
+0x9C9222: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C9227: mov     eax, offset stru_AF1B24
+0x9C922C: jmp     ___CxxFrameHandler3

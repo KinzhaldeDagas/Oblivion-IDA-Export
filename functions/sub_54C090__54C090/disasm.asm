@@ -303,7 +303,7 @@
 0x54C443: fst     [esp+68h+var_40]
 0x54C447: push    0; Seed
 0x54C449: fstp    [esp+6Ch+var_3C]
-0x54C44D: call    GetRandomLargeInteger?
+0x54C44D: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x54C452: mov     [esp+6Ch+arg_4], eax
 0x54C456: fild    [esp+6Ch+arg_4]
 0x54C45A: add     esp, 10h

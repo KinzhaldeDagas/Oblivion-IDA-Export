@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6113B0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; RadiantAI: trespass crime side-effect path. Builds crime type 2 record.",
     "mnemonic": "push",
     "size": 2
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x611412",
-    "line": "mov     esi, [esp+168h+arg_8]",
+    "line": "mov     esi, [esp+168h+number]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x611446",
-    "line": "call    sub_6070B0",
+    "line": "call    sub_6070B0; RadiantAI: crime event record constructor. type field at +4: observed 0=steal item, 1=pickpocket, 2=trespass, 3=attack, 4=murder, 5=horse theft.",
     "mnemonic": "call",
     "size": 5
   },
@@ -289,25 +289,25 @@
   },
   {
     "ea": "0x611463",
-    "line": "push    esi",
+    "line": "push    esi; number",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x611464",
-    "line": "push    2",
+    "line": "push    2; category",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x611466",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x61146B",
-    "line": "call    sub_675BB0",
+    "line": "call    ActorProcessManager_FindCrimeByNumber",
     "mnemonic": "call",
     "size": 5
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x611497",
-    "line": "call    Actor_IsSneaking",
+    "line": "call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.",
     "mnemonic": "call",
     "size": 5
   },
@@ -409,25 +409,25 @@
   },
   {
     "ea": "0x6114A0",
-    "line": "push    esi",
+    "line": "push    esi; number",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6114A1",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x6114A6",
-    "line": "push    2",
+    "line": "push    2; category",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6114A8",
-    "line": "call    sub_675BB0",
+    "line": "call    ActorProcessManager_FindCrimeByNumber",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,13 +451,13 @@
   },
   {
     "ea": "0x6114B7",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6114B9",
-    "line": "call    sub_605E80",
+    "line": "call    Crime_Destructor",
     "mnemonic": "call",
     "size": 5
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x6114C5",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x6114EB",
-    "line": "mov     ecx, [edi+8]; this",
+    "line": "mov     ecx, [edi+8]; reference",
     "mnemonic": "mov",
     "size": 3
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x6114F0",
-    "line": "mov     byte ptr [esp+168h+var_14C], 0",
+    "line": "mov     [esp+168h+useBase], 0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x6114F7",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -589,7 +589,7 @@
   },
   {
     "ea": "0x611500",
-    "line": "mov     byte ptr [esp+168h+var_14C], 1",
+    "line": "mov     [esp+168h+useBase], 1",
     "mnemonic": "mov",
     "size": 5
   },
@@ -643,31 +643,31 @@
   },
   {
     "ea": "0x611521",
-    "line": "mov     eax, [esp+168h+var_14C]",
+    "line": "mov     eax, dword ptr [esp+168h+useBase]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x611525",
-    "line": "push    eax",
+    "line": "push    eax; useBase",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x611526",
-    "line": "push    esi",
+    "line": "push    esi; observer",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x611527",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x611529",
-    "line": "call    sub_605F60",
+    "line": "call    Crime_GetDispositionPenalty",
     "mnemonic": "call",
     "size": 5
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x61153C",
-    "line": "call    sub_5E6C60",
+    "line": "call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -907,19 +907,19 @@
   },
   {
     "ea": "0x611595",
-    "line": "push    ebx",
+    "line": "push    ebx; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x611596",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x611598",
-    "line": "call    sub_605F00",
+    "line": "call    Crime_AddWitness",
     "mnemonic": "call",
     "size": 5
   },
@@ -949,13 +949,13 @@
   },
   {
     "ea": "0x6115AB",
-    "line": "push    0Fh",
+    "line": "push    0Fh; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6115AD",
-    "line": "push    2",
+    "line": "push    2; topicType",
     "mnemonic": "push",
     "size": 2
   },
@@ -967,7 +967,7 @@
   },
   {
     "ea": "0x6115B5",
-    "line": "call    TESTopic__GEtTopic",
+    "line": "call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1273,7 +1273,7 @@
   },
   {
     "ea": "0x61164A",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1291,7 +1291,7 @@
   },
   {
     "ea": "0x611654",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1303,13 +1303,13 @@
   },
   {
     "ea": "0x61165C",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x61165E",
-    "line": "call    sub_605F30",
+    "line": "call    Crime_GetWitnessCount",
     "mnemonic": "call",
     "size": 5
   },
@@ -1321,7 +1321,7 @@
   },
   {
     "ea": "0x611665",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); self",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1333,7 +1333,7 @@
   },
   {
     "ea": "0x61166C",
-    "line": "mov     eax, [esp+168h+arg_8]",
+    "line": "mov     eax, [esp+168h+number]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1351,13 +1351,13 @@
   },
   {
     "ea": "0x611679",
-    "line": "push    edi",
+    "line": "push    edi; crime",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x61167A",
-    "line": "call    sub_675B30",
+    "line": "call    ActorProcessManager_AddCrime",
     "mnemonic": "call",
     "size": 5
   },
@@ -1369,7 +1369,7 @@
   },
   {
     "ea": "0x611680",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1405,13 +1405,13 @@
   },
   {
     "ea": "0x611691",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x611693",
-    "line": "call    sub_605E80",
+    "line": "call    Crime_Destructor",
     "mnemonic": "call",
     "size": 5
   },
@@ -1423,7 +1423,7 @@
   },
   {
     "ea": "0x611699",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1510,5 +1510,101 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C3260",
+    "line": "mov     eax, [ebp-150h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C3266",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3267",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C326C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C326D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C326E",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C3272",
+    "line": "lea     eax, [edx-158h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C3278",
+    "line": "mov     ecx, [edx-15Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C327E",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C3280",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3285",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3288",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C328B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C328D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3292",
+    "line": "mov     eax, offset stru_AEBEAC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3297",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

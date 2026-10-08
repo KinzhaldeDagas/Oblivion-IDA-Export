@@ -1,19 +1,19 @@
 [
   {
     "ea": "0xA10D00",
-    "line": "mov     ecx, offset word_B42A10",
+    "line": "mov     ecx, offset CWindEngine__s_windMatrixContainer; CRT dynamic initializer for the process-global Oblivion CWindMatrices object; constructs the four-matrix default and registers the matching atexit destructor.",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0xA10D05",
-    "line": "call    sub_793C60",
+    "line": "call    OB_CWindMatrices_ctor_010201A0; Constructs the shared CWindMatrices container, allocates four 0x40-byte identity transforms, then records size 4.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0xA10D0A",
-    "line": "push    offset sub_A27040; void (__cdecl *)()",
+    "line": "push    offset OB_CWindMatrices_GlobalDtor_010201A0; void (__cdecl *)()",
     "mnemonic": "push",
     "size": 5
   },

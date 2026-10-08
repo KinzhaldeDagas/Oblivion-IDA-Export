@@ -4,7 +4,7 @@
 0x774358: mov     dword ptr [esi], offset ??_7RendererData@NiTexture@@6B@; const NiTexture::RendererData::`vftable'
 0x77435E: jz      short loc_774369
 0x774360: push    esi
-0x774361: call    FormHeapFree
+0x774361: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x774366: add     esp, 4
 0x774369: mov     eax, esi
 0x77436B: pop     esi

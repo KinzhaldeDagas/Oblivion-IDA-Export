@@ -2,7 +2,7 @@
 0x9ECD86: push    ecx
 0x9ECD87: fstp    [esp+4+var_4]; float
 0x9ECD8A: push    offset aFpotionmortpes; "fPotionMortPestleMult"
-0x9ECD8F: mov     ecx, offset fPotionMortPestleMult
+0x9ECD8F: mov     ecx, 0B379D8h
 0x9ECD94: call    GameSetting_ConstrAndReg_float
 0x9ECD99: push    offset sub_A1FAD0; void (__cdecl *)()
 0x9ECD9E: call    _atexit

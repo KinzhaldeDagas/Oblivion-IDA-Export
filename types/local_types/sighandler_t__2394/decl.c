@@ -1,1 +1,1 @@
-__sighandler_t
+typedef void (*__sighandler_t)(int);

@@ -6,7 +6,7 @@
 0x549078: fstp    [esp+arg_0]
 0x54907C: fld     [esp+arg_0]
 0x549080: fld     st
-0x549082: call    Double_To_SInt32
+0x549082: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x549087: mov     [esp+arg_0], eax
 0x54908B: fild    [esp+arg_0]
 0x54908F: fstp    [esp+arg_0]

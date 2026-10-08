@@ -1,1 +1,1 @@
-std::locale::_Locimp
+struct std::locale::_Locimp;

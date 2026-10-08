@@ -1,39 +1,40 @@
-void __thiscall AVCollection_Remove(unsigned int **this, _BYTE *a2)
+// Verified: IDs9/10 zero permanent value without freeing; indexed IDs dispatch RemoveArrayNode; default removes pointer from list then frees entry. Dedicated allocation ownership ends at destructor, not Remove.
+void __thiscall AVCollection_Remove(AVCollection *self, AVCollectionEntry *entry)
 {
-  if ( a2 )
+  if ( entry ) /*0x65c9b7*/
   {
-    switch ( *a2 )
+    switch ( entry->actorValue ) /*0x65c9ca*/
     {
-      case 0:
-      case 4:
-      case 5:
-      case 6:
-      case 7:
-      case 8:
-      case 0xB:
-      case 0xD:
-      case 0x1A:
-      case 0x21:
-      case 0x24:
-      case 0x28:
-      case 0x29:
-      case 0x2E:
-      case 0x2F:
-      case 0x30:
-      case 0x31:
-      case 0x38:
-        AVCollection_RemoveArrayNode(this, *a2);
-        break;
-      case 9:
-        *((float *)*(this + 2) + 1) = 0.0;
-        break;
-      case 0xA:
-        *((float *)*(this + 3) + 1) = 0.0;
-        break;
+      case 0u: /*0x65c9ca*/
+      case 4u: /*0x65c9ca*/
+      case 5u: /*0x65c9ca*/
+      case 6u: /*0x65c9ca*/
+      case 7u: /*0x65c9ca*/
+      case 8u: /*0x65c9ca*/
+      case 0xBu: /*0x65c9ca*/
+      case 0xDu: /*0x65c9ca*/
+      case 0x1Au: /*0x65c9ca*/
+      case 0x21u: /*0x65c9ca*/
+      case 0x24u: /*0x65c9ca*/
+      case 0x28u: /*0x65c9ca*/
+      case 0x29u: /*0x65c9ca*/
+      case 0x2Eu: /*0x65c9ca*/
+      case 0x2Fu: /*0x65c9ca*/
+      case 0x30u: /*0x65c9ca*/
+      case 0x31u: /*0x65c9ca*/
+      case 0x38u: /*0x65c9ca*/
+        AVCollection_RemoveArrayNode(self, entry->actorValue); /*0x65c9ee*/
+        break; /*0x65c9ee*/
+      case 9u: /*0x65c9ca*/
+        self->magicka->value = 0.0; /*0x65c9d6*/
+        break; /*0x65c9da*/
+      case 0xAu: /*0x65c9ca*/
+        self->fatigue->value = 0.0; /*0x65c9e2*/
+        break; /*0x65c9e6*/
       default:
-        BSSimpleList_Remove((int *)this, (int)a2);
-        FormHeapFree((unsigned int)a2);
-        break;
+        BSSimpleList_Remove((int *)self, (int)entry); /*0x65c9f4*/
+        FormHeapFree((unsigned int)entry); /*0x65c9fa*/
+        break; /*0x65c9fa*/
     }
   }
 }

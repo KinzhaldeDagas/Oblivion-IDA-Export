@@ -1,1 +1,4 @@
-terminate_job_reply
+struct terminate_job_reply
+{
+reply_header __header;
+};

@@ -1,4 +1,4 @@
-BSStringT *sub_A0F060()
+NiRTTI *sub_A0F060()
 {
-  return sub_70E220((BSStringT *)dword_B418EC, "NiPSysColorModifier", (int)dword_B40D08);
+  return NiRTTI_Constructor(&stru_B418EC, "NiPSysColorModifier", &stru_B40D08); /*0xa0f074*/
 }

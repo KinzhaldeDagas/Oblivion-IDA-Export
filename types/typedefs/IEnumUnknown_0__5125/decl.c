@@ -1,1 +1,1 @@
-IEnumUnknown_0
+typedef IEnumUnknown IEnumUnknown_0;

@@ -56,7 +56,7 @@
 0x4AFE36: call    TESContainer_constr
 0x4AFE3B: lea     ecx, [edi+44h]
 0x4AFE3E: mov     [esp+3Ch+var_4], 1
-0x4AFE46: call    sub_420760
+0x4AFE46: call    ExtraDataList_GetLevCreaModifier; Returns the form stored in ExtraLevCreaModifier type 0x24.
 0x4AFE4B: mov     ecx, ds:0B333C4h
 0x4AFE51: mov     ebx, eax
 0x4AFE53: call    Actor_GetLevel
@@ -65,26 +65,26 @@
 0x4AFE5D: cmp     eax, 1
 0x4AFE60: jge     short loc_4AFE67
 0x4AFE62: mov     eax, 1
-0x4AFE67: lea     ecx, [esp+38h+anonymous_0]
+0x4AFE67: lea     ecx, [esp+3Ch+var_1C]
 0x4AFE6B: push    ecx
 0x4AFE6C: push    1; int
 0x4AFE6E: push    eax; int
 0x4AFE6F: lea     ecx, [esi+24h]; this
-0x4AFE72: call    TESLeveledList_CalcLeveledForm
+0x4AFE72: call    TESLeveledList_CalcLeveledForm; CustomAnimSupport decode: leveled-list resolver evidence with chance/level/random/container logic; not used as deterministic animation target list.
 0x4AFE77: push    0
-0x4AFE79: lea     ecx, [esp+40h+var_1C]
+0x4AFE79: lea     ecx, [esp+44h+var_20]
 0x4AFE7D: call    TESContainer_GetNthForm
 0x4AFE82: mov     esi, eax
 0x4AFE84: push    esi
-0x4AFE85: lea     ecx, [esp+40h+var_1C]
+0x4AFE85: lea     ecx, [esp+44h+var_20]
 0x4AFE89: call    TESContainer_GetFormCount
 0x4AFE8E: test    esi, esi
 0x4AFE90: movzx   ebx, ax
-0x4AFE93: mov     [esp+3Ch+arg_0], 0
+0x4AFE93: mov     dword ptr [esp+40h], 0
 0x4AFE9B: jz      loc_4AFF8A
 0x4AFEA1: test    bx, bx
 0x4AFEA4: jz      loc_4AFF8A
-0x4AFEAA: cmp     [esp+3Ch+arg_0], 0FFFFFFFFh
+0x4AFEAA: cmp     dword ptr [esp+40h], 0FFFFFFFFh
 0x4AFEAF: ja      loc_4AFF8A
 0x4AFEB5: push    0; int
 0x4AFEB7: push    offset ??_R0?AVTESActorBase@@@8; struct TypeDescriptor *
@@ -103,7 +103,7 @@
 0x4AFEDF: call    TESObjectREFR_GetWorldSpace
 0x4AFEE4: push    eax
 0x4AFEE5: mov     ecx, edi; this
-0x4AFEE7: call    TESObjectREFR_GetParentCell
+0x4AFEE7: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x4AFEEC: mov     edx, [edi]
 0x4AFEEE: push    eax
 0x4AFEEF: lea     eax, [edi+20h]
@@ -114,7 +114,7 @@
 0x4AFEFD: mov     ecx, ds:0B33A98h
 0x4AFF03: push    eax
 0x4AFF04: push    ebp
-0x4AFF05: call    TESDataHandler_PlaceObjectRef
+0x4AFF05: call    TESDataHandler_PlaceObjectRef; Verified object-reference placement helper accepts an interior cell or exterior WorldSpace and sets/reuses a reference base form. New reference attachment proceeds through cell lifecycle methods; this helper itself does not write the WorldSpace SubSpace index.
 0x4AFF0A: mov     esi, eax
 0x4AFF0C: test    esi, esi
 0x4AFF0E: jz      short loc_4AFF4E
@@ -124,9 +124,9 @@
 0x4AFF1A: call    eax
 0x4AFF1C: push    ecx
 0x4AFF1D: mov     ecx, esi
-0x4AFF1F: fstp    [esp+40h+var_40]; float
+0x4AFF1F: fstp    [esp+44h+var_44]; float
 0x4AFF22: call    sub_4DB520
-0x4AFF27: mov     ecx, [esp+3Ch+var_20]
+0x4AFF27: mov     ecx, [esp+40h+var_24]
 0x4AFF2B: mov     eax, [ecx+40h]
 0x4AFF2E: mov     edx, [esi]
 0x4AFF30: push    eax
@@ -136,34 +136,34 @@
 0x4AFF3B: push    1
 0x4AFF3D: mov     ecx, esi
 0x4AFF3F: call    sub_4D7A90
-0x4AFF44: add     [esp+3Ch+arg_0], 1
-0x4AFF49: mov     byte ptr [esp+3Ch+var_24], 1
+0x4AFF44: add     [esp+44h+var_4], 1
+0x4AFF49: mov     byte ptr [esp+44h+var_2C], 1
 0x4AFF4E: add     ebx, 0FFFFh
 0x4AFF54: test    bx, bx
 0x4AFF57: ja      short loc_4AFEDB
 0x4AFF59: push    0
-0x4AFF5B: lea     ecx, [esp+40h+var_1C]
+0x4AFF5B: lea     ecx, [esp+48h+var_24]
 0x4AFF5F: call    TESContainer_RemoveNthEntry
 0x4AFF64: push    0
-0x4AFF66: lea     ecx, [esp+40h+var_1C]
+0x4AFF66: lea     ecx, [esp+48h+var_24]
 0x4AFF6A: call    TESContainer_GetNthForm
 0x4AFF6F: mov     esi, eax
 0x4AFF71: push    esi
-0x4AFF72: lea     ecx, [esp+40h+var_1C]
+0x4AFF72: lea     ecx, [esp+48h+var_24]
 0x4AFF76: call    TESContainer_GetFormCount
 0x4AFF7B: test    esi, esi
-0x4AFF7D: mov     ebp, [esp+3Ch+var_28]
+0x4AFF7D: mov     ebp, [esp+44h+var_30]
 0x4AFF81: movzx   ebx, ax
 0x4AFF84: jnz     loc_4AFEA1
-0x4AFF8A: lea     ecx, [esp+3Ch+var_1C]
-0x4AFF8E: mov     [esp+3Ch+var_4], 0FFFFFFFFh
+0x4AFF8A: lea     ecx, [esp+44h+var_24]
+0x4AFF8E: mov     [esp+44h+var_C], 0FFFFFFFFh
 0x4AFF96: call    TESContainer_destr
-0x4AFF9B: mov     ecx, [esp+3Ch+var_24]
+0x4AFF9B: mov     ecx, [esp+44h+var_2C]
 0x4AFF9F: push    ecx
 0x4AFFA0: mov     ecx, edi
 0x4AFFA2: call    sub_4D7A90
 0x4AFFA7: mov     eax, ebp
-0x4AFFA9: mov     ecx, [esp+3Ch+var_C]
+0x4AFFA9: mov     ecx, [esp+44h+var_14]
 0x4AFFAD: mov     large fs:0, ecx
 0x4AFFB4: pop     ecx
 0x4AFFB5: pop     edi
@@ -172,3 +172,17 @@
 0x4AFFB8: pop     ebx
 0x4AFFB9: add     esp, 28h
 0x4AFFBC: retn    4
+0x9B2E20: mov     eax, [ebp-24h]
+0x9B2E23: push    eax
+0x9B2E24: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B2E29: pop     ecx
+0x9B2E2A: retn
+0x9B2E2B: lea     ecx, [ebp-1Ch]
+0x9B2E2E: jmp     TESContainer_destr
+0x9B2E33: mov     edx, [esp+arg_4]
+0x9B2E37: lea     eax, [edx-2Ch]
+0x9B2E3A: mov     ecx, [edx-30h]
+0x9B2E3D: xor     ecx, eax
+0x9B2E3F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B2E44: mov     eax, offset stru_ADEC7C
+0x9B2E49: jmp     ___CxxFrameHandler3

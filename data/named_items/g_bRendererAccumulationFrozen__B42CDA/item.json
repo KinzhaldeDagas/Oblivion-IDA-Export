@@ -1,0 +1,19 @@
+{
+  "bytes_preview_hex": "",
+  "bytes_sha256": "",
+  "comments": {
+    "regular": "Renderer accumulation debug replay/freeze flag. Sole writer is ToggleRendererAccumulationFrozen through the registered FreezeRenderAccumulation/fra console command. When set, FlushPassBucket draws but retains active selector-bucket nodes; accumulator flush preserves replay state, and ShadowSceneNode skips the render-mode-5 active-shadow-light loop. This is not an ordinary frame-lifecycle flag.",
+    "repeatable": "Renderer accumulation debug replay/freeze flag. Sole writer is ToggleRendererAccumulationFrozen through the registered FreezeRenderAccumulation/fra console command. When set, FlushPassBucket draws but retains active selector-bucket nodes; accumulator flush preserves replay state, and ShadowSceneNode skips the render-mode-5 active-shadow-light loop. This is not an ordinary frame-lifecycle flag."
+  },
+  "confidence_scope": "Raw live IDA annotation; bulk synchronization does not independently verify semantic names or comments.",
+  "display_name": "g_bRendererAccumulationFrozen",
+  "ea": "0xB42CDA",
+  "evidence_confidence": "Unknown",
+  "kind": "data",
+  "name": "g_bRendererAccumulationFrozen",
+  "segment": ".data",
+  "size": 1,
+  "source_annotation_confidence": "Unknown",
+  "type": "bool",
+  "xrefs_to_count": 10
+}

@@ -1,4 +1,4 @@
-0x53D4B0: sub     esp, 1Ch
+0x53D4B0: sub     esp, 1Ch; ODismemberment: __thiscall NiTransform point transform helper. Plugin hit capture must pass transform in ECX; cdecl here crashes on actor hits.
 0x53D4B3: mov     eax, [esp+1Ch+arg_4]
 0x53D4B7: push    esi
 0x53D4B8: mov     esi, ecx

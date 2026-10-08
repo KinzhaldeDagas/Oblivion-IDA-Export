@@ -1,19 +1,32 @@
 {
-  "callees_count": 60,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 20,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x52F830",
+      "0x52FADE"
+    ]
+  ],
+  "chunks_sha256": "8aa9e681ad07096f6a00aff8521a29cd2b2576a1c2f62c175b7cb594fb3133ef",
+  "comment_regular": "OFE ambient routes: constructor call 6B743D -> CreateConversation. Automatic null startingTopic means HELLO/D2; explicit nonnull start bypasses routing. A preselected replacement can be consumed once at native selector call 52F7D3, preserving native subsequent construction/result execution without reevaluating random conditions. CreateDialogueItem calls 52F902/52F91B/52F946 can route ambient D7; previous-topic identity must follow actual last DialogueItem.topic at +0x10 when using custom source topics.\n\nBuild an ambient NPC Conversation (maximum 100 DialogueItems). Null start resolves HELLO D2. INFO selection uses conversation links/ANY D3 and Random rules; selected linkedTo topics drive continuation. GOODBYE D4 is only a recovery topic after two failed item creations. NoRumors, INFOGENERAL caching, RunForRumors, and player-menu Goodbye closure are not consulted.",
+  "comment_repeatable": "Build an ambient NPC Conversation (maximum 100 DialogueItems). Null start resolves HELLO D2. INFO selection uses conversation links/ANY D3 and Random rules; selected linkedTo topics drive continuation. GOODBYE D4 is only a recovery topic after two failed item creations. NoRumors, INFOGENERAL caching, RunForRumors, and player-menu Goodbye closure are not consulted.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 3,
-  "display_name": "sub_52F830",
+  "display_name": "TESTopic::CreateConversation",
   "end_ea": "0x52FADE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_52F830",
+  "name": "TESTopic::CreateConversation",
   "segment": ".text",
   "sha256": "8aa9e681ad07096f6a00aff8521a29cd2b2576a1c2f62c175b7cb594fb3133ef",
   "size": 686,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x52F830",
-  "type": "int __usercall@<eax>(double@<st1>, double@<st0>, Actor *, TESObjectREFR *, BSSimpleList_VoidPtr *, TESTopic *)",
+  "total_chunk_size": 686,
+  "type": "int __cdecl(Actor *speaker, TESObjectREFR *target, ConversationView *conversation, TESTopic *startingTopic)",
   "xrefs_from_count": 294,
   "xrefs_to_count": 1
 }

@@ -1,4 +1,4 @@
-0x51DD00: push    ebp
+0x51DD00: push    ebp; CustomAnimSupport decode: CREA loader dispatches KFFZ to TESAnimation_LoadAnimationChunk at 0x51E14A.
 0x51DD01: mov     ebp, esp
 0x51DD03: sub     esp, 30h
 0x51DD06: mov     eax, ds:0B30AACh
@@ -17,7 +17,7 @@
 0x51DD25: jmp     loc_51E1A0
 0x51DD2A: push    esi
 0x51DD2B: mov     ecx, edi; this
-0x51DD2D: call    TESFile_InitializeFormFromRecord
+0x51DD2D: call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.
 0x51DD32: xor     ebx, ebx
 0x51DD34: push    ebx; a2
 0x51DD35: mov     ecx, esi; this
@@ -47,7 +47,7 @@
 0x51DDA6: push    eax; Dst
 0x51DDA7: push    edi; a2
 0x51DDA8: mov     ecx, esi; this
-0x51DDAA: call    TESForm_LoadGenericComponents
+0x51DDAA: call    TESForm_LoadGenericComponents; Generic fixed-prefix/component DATA overlay. Copies min(chunk_length,fixed_prefix_size), then updates later components only when their starting offset is below chunk_length; omitted suffix components retain prior in-memory values.
 0x51DDAF: jmp     TESCreature_LoadForm___def_51DFA5; jumptable 0051DFA5 default case, cases 1296125525,1296125526,1296125528,1296125529
 0x51DDB4: mov     eax, [edi+254h]
 0x51DDBA: cmp     eax, ebx
@@ -57,7 +57,7 @@
 0x51DDC9: push    0; a4
 0x51DDCB: push    ebx; Dst
 0x51DDCC: mov     ecx, edi; a1
-0x51DDCE: call    TESFile_GetChunkData
+0x51DDCE: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x51DDD3: push    0; a3
 0x51DDD5: push    ebx; a2
 0x51DDD6: lea     ecx, [esi+138h]; this
@@ -72,7 +72,7 @@
 0x51DDFD: push    0; a4
 0x51DDFF: push    ebx; Dst
 0x51DE00: mov     ecx, edi; a1
-0x51DE02: call    TESFile_GetChunkData
+0x51DE02: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x51DE07: mov     edx, [esi+11Ch]
 0x51DE0D: mov     eax, [edx+18h]
 0x51DE10: lea     ecx, [esi+11Ch]
@@ -88,7 +88,7 @@
 0x51DE35: push    ecx
 0x51DE36: mov     ecx, edi
 0x51DE38: mov     [ebp+var_8], ebx
-0x51DE3B: call    TESFile_GetChunkData4
+0x51DE3B: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x51DE40: mov     edx, [ebp+var_8]
 0x51DE43: push    edx
 0x51DE44: lea     ecx, [esi+68h]
@@ -100,7 +100,7 @@
 0x51DE5E: push    200h; a4
 0x51DE63: push    ebx; Dst
 0x51DE64: mov     ecx, edi; a1
-0x51DE66: call    TESFile_GetChunkData
+0x51DE66: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x51DE6B: mov     eax, [esi]
 0x51DE6D: mov     edx, [eax+0D8h]
 0x51DE73: push    ebx
@@ -129,7 +129,7 @@
 0x51DEC5: push    eax
 0x51DEC6: mov     ecx, edi
 0x51DEC8: mov     [ebp+var_8], ebx
-0x51DECB: call    TESFile_GetChunkData4
+0x51DECB: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x51DED0: mov     ecx, [ebp+var_8]
 0x51DED3: mov     [esi+0C8h], ecx
 0x51DED9: push    esi
@@ -152,13 +152,13 @@
 0x51DF0F: lea     eax, [esi+0A0h]
 0x51DF15: push    edi; a2
 0x51DF16: push    eax; a1
-0x51DF17: call    TESFullname_Load
+0x51DF17: call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.
 0x51DF1C: add     esp, 8
 0x51DF1F: jmp     TESCreature_LoadForm___def_51DFA5; jumptable 0051DFA5 default case, cases 1296125525,1296125526,1296125528,1296125529
 0x51DF24: xor     eax, eax
 0x51DF26: push    edi; a2
 0x51DF27: push    eax; a1
-0x51DF28: call    TESFullname_Load
+0x51DF28: call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.
 0x51DF2D: add     esp, 8
 0x51DF30: jmp     TESCreature_LoadForm___def_51DFA5; jumptable 0051DFA5 default case, cases 1296125525,1296125526,1296125528,1296125529
 0x51DF35: sub     eax, 4D414E42h
@@ -169,20 +169,20 @@
 0x51DF48: push    eax
 0x51DF49: mov     ecx, edi
 0x51DF4B: mov     [ebp+var_8], ebx
-0x51DF4E: call    TESFile_GetChunkData4
+0x51DF4E: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x51DF53: mov     ecx, [ebp+var_8]
 0x51DF56: mov     [esi+38h], ecx
 0x51DF59: jmp     TESCreature_LoadForm___def_51DFA5; jumptable 0051DFA5 default case, cases 1296125525,1296125526,1296125528,1296125529
 0x51DF5E: lea     edx, [esi+114h]
 0x51DF64: push    edx
 0x51DF65: mov     ecx, edi
-0x51DF67: call    TESFile_GetChunkData4
+0x51DF67: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x51DF6C: jmp     TESCreature_LoadForm___def_51DFA5; jumptable 0051DFA5 default case, cases 1296125525,1296125526,1296125528,1296125529
 0x51DF71: push    1; a4
 0x51DF73: lea     eax, [esi+10Ah]
 0x51DF79: push    eax; Dst
 0x51DF7A: mov     ecx, edi; a1
-0x51DF7C: call    TESFile_GetChunkData
+0x51DF7C: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x51DF81: jmp     TESCreature_LoadForm___def_51DFA5; jumptable 0051DFA5 default case, cases 1296125525,1296125526,1296125528,1296125529
 0x51DF86: cmp     eax, 4F4C5053h
 0x51DF8B: jg      loc_51E03B
@@ -198,7 +198,7 @@
 0x51DFB4: mov     ecx, edi; a1
 0x51DFB6: mov     dword ptr [ebp+Dst], eax
 0x51DFB9: mov     [ebp+var_10], eax
-0x51DFBC: call    TESFile_GetChunkData
+0x51DFBC: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x51DFC1: mov     edx, [ebp+var_10]
 0x51DFC4: mov     eax, dword ptr [ebp+Dst]
 0x51DFC7: push    edx
@@ -209,17 +209,17 @@
 0x51DFD6: lea     ecx, [esi+110h]; jumptable 0051DFA5 case 1296125527
 0x51DFDC: push    ecx
 0x51DFDD: mov     ecx, edi
-0x51DFDF: call    TESFile_GetChunkData4
+0x51DFDF: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x51DFE4: jmp     TESCreature_LoadForm___def_51DFA5; jumptable 0051DFA5 default case, cases 1296125525,1296125526,1296125528,1296125529
 0x51DFE9: lea     edx, [esi+10Ch]; jumptable 0051DFA5 case 1296125524
 0x51DFEF: push    edx
 0x51DFF0: mov     ecx, edi
-0x51DFF2: call    TESFile_GetChunkData4
+0x51DFF2: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x51DFF7: jmp     TESCreature_LoadForm___def_51DFA5; jumptable 0051DFA5 default case, cases 1296125525,1296125526,1296125528,1296125529
 0x51DFFC: lea     eax, [ebp+var_24]; jumptable 0051DFA5 case 1296125530
 0x51DFFF: push    eax
 0x51E000: mov     ecx, edi
-0x51E002: call    TESFile_GetChunkData4
+0x51E002: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x51E007: mov     edx, [esi]
 0x51E009: mov     eax, [ebp+var_24]
 0x51E00C: mov     edx, [edx+124h]
@@ -231,7 +231,7 @@
 0x51E01F: push    eax
 0x51E020: mov     ecx, edi
 0x51E022: mov     [ebp+var_8], ebx
-0x51E025: call    TESFile_GetChunkData4
+0x51E025: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x51E02A: mov     ecx, [ebp+var_8]
 0x51E02D: push    ecx
 0x51E02E: lea     ecx, [esi+54h]
@@ -251,7 +251,7 @@
 0x51E06A: push    edx
 0x51E06B: mov     ecx, edi
 0x51E06D: mov     [ebp+var_8], ebx
-0x51E070: call    TESFile_GetChunkData4
+0x51E070: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x51E075: mov     eax, [ebp+var_8]
 0x51E078: push    eax
 0x51E079: mov     ecx, esi
@@ -264,7 +264,7 @@
 0x51E08D: mov     ecx, edi; a1
 0x51E08F: mov     dword ptr [ebp+var_20], eax
 0x51E092: mov     [ebp+var_1C], eax
-0x51E095: call    TESFile_GetChunkData
+0x51E095: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x51E09A: lea     ebx, [esi+44h]
 0x51E09D: push    0
 0x51E09F: mov     ecx, ebx
@@ -279,7 +279,7 @@
 0x51E0BA: lea     eax, [esi+28h]
 0x51E0BD: push    eax; Dst
 0x51E0BE: mov     ecx, edi; a1
-0x51E0C0: call    TESFile_GetChunkData
+0x51E0C0: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x51E0C5: jmp     TESCreature_LoadForm___def_51DFA5; jumptable 0051DFA5 default case, cases 1296125525,1296125526,1296125528,1296125529
 0x51E0CA: cmp     eax, 54444941h
 0x51E0CF: jnz     TESCreature_LoadForm___def_51DFA5; jumptable 0051DFA5 default case, cases 1296125525,1296125526,1296125528,1296125529
@@ -291,7 +291,7 @@
 0x51E0DF: mov     dword ptr [ebp+var_30], eax
 0x51E0E2: mov     [ebp+var_2C], eax
 0x51E0E5: mov     [ebp+var_28], eax
-0x51E0E8: call    TESFile_GetChunkData
+0x51E0E8: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x51E0ED: lea     edx, [ebp+var_30]
 0x51E0F0: push    edx
 0x51E0F1: lea     ecx, [esi+68h]
@@ -303,7 +303,7 @@
 0x51E102: call    TESModel_Load
 0x51E107: add     esp, 8
 0x51E10A: jmp     short TESCreature_LoadForm___def_51DFA5; jumptable 0051DFA5 default case, cases 1296125525,1296125526,1296125528,1296125529
-0x51E10C: cmp     eax, 5A46464Bh
+0x51E10C: cmp     eax, 5A46464Bh; CustomAnimSupport evidence: CREA load dispatcher branch tests KFFZ chunk before TESAnimation_LoadAnimationChunk call.
 0x51E111: jg      short loc_51E162
 0x51E113: jz      short loc_51E138
 0x51E115: cmp     eax, 54445343h
@@ -314,7 +314,7 @@
 0x51E125: lea     eax, [ebp+var_18]
 0x51E128: push    eax
 0x51E129: mov     ecx, edi
-0x51E12B: call    TESFile_GetChunkData4
+0x51E12B: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x51E130: mov     ecx, [ebp+var_18]
 0x51E133: mov     [ebp+var_C], ecx
 0x51E136: jmp     short TESCreature_LoadForm___def_51DFA5; jumptable 0051DFA5 default case, cases 1296125525,1296125526,1296125528,1296125529
@@ -324,13 +324,13 @@
 0x51E142: push    edi
 0x51E143: push    eax
 0x51E144: lea     ecx, [esi+94h]
-0x51E14A: call    TESAnimation_LoadAnimationChunk
+0x51E14A: call    TESAnimation_LoadAnimationChunk; CustomAnimSupport xref: CREA load branch calls TESAnimation_LoadAnimationChunk for KFFZ.
 0x51E14F: jmp     short TESCreature_LoadForm___def_51DFA5; jumptable 0051DFA5 default case, cases 1296125525,1296125526,1296125528,1296125529
 0x51E151: xor     eax, eax
 0x51E153: push    edi
 0x51E154: push    eax
 0x51E155: lea     ecx, [esi+94h]
-0x51E15B: call    TESAnimation_LoadAnimationChunk
+0x51E15B: call    TESAnimation_LoadAnimationChunk; CustomAnimSupport decode: loads only chunk type 0x5A46464B ('KFFZ') as packed nul-terminated animation path strings.
 0x51E160: jmp     short TESCreature_LoadForm___def_51DFA5; jumptable 0051DFA5 default case, cases 1296125525,1296125526,1296125528,1296125529
 0x51E162: cmp     eax, 5A46494Eh
 0x51E167: jnz     short TESCreature_LoadForm___def_51DFA5; jumptable 0051DFA5 default case, cases 1296125525,1296125526,1296125528,1296125529

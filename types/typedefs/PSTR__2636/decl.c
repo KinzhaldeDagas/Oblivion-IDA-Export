@@ -1,1 +1,1 @@
-PSTR
+typedef CHAR *PSTR;

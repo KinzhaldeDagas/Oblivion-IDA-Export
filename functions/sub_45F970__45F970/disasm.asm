@@ -36,7 +36,7 @@
 0x45F9CF: mov     esi, [esi+4]
 0x45F9D2: test    esi, esi
 0x45F9D4: jnz     short loc_45F995
-0x45F9D6: mov     esi, [ebp+arg_0]
+0x45F9D6: mov     esi, [ebp+stream]
 0x45F9D9: mov     edx, [esi+4]
 0x45F9DC: push    1
 0x45F9DE: lea     eax, [esp+44h+var_10]
@@ -55,7 +55,7 @@
 0x45FA09: push    1
 0x45FA0B: push    eax
 0x45FA0C: mov     ecx, offset FormHeap
-0x45FA11: mov     [esp+48h+var_10], eax
+0x45FA11: mov     [esp+48h+var_10], eax; MEF v58 SR1 framing check: native global count is u16, but8*count is narrowed to u16 before allocation/read; counts>8191 cannot represent their whole8-byte record set in that allocation. Covered snapshot preflight rejects this overflow before global-state loading. This is not proof of general malformed global-payload recovery.
 0x45FA15: call    j_MemoryHeap_Alloc
 0x45FA1A: test    eax, eax
 0x45FA1C: mov     [edi+14h], eax
@@ -79,11 +79,11 @@
 0x45FA51: cmp     word ptr [esp+40h+a1], si
 0x45FA56: jbe     loc_45FAF8
 0x45FA5C: lea     esp, [esp+0]
-0x45FA60: push    4; Size
+0x45FA60: push    4; byteCount
 0x45FA62: lea     edx, [esp+44h+Dst]
-0x45FA66: push    edx; Dst
-0x45FA67: mov     ecx, edi
-0x45FA69: call    SaveLoad_LoadFormID
+0x45FA66: push    edx; destination
+0x45FA67: mov     ecx, edi; self
+0x45FA69: call    SaveLoad_LoadFormID; EnginePatch v2: byte-checked SaveLoad_LoadFormID hook. Bounded save-buffer copy, then preserves original iref-to-formID translation behavior.
 0x45FA6E: mov     eax, [edi+14h]
 0x45FA71: mov     ecx, [eax]
 0x45FA73: mov     [esp+48h+var_20], ecx
@@ -111,7 +111,7 @@
 0x45FABA: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x45FABF: push    0; int
 0x45FAC1: push    edx; a1
-0x45FAC2: call    TESForm_LookupByFormID
+0x45FAC2: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x45FAC7: add     esp, 4
 0x45FACA: push    eax; void *
 0x45FACB: call    OblivionDynamicCast
@@ -136,11 +136,11 @@
 0x45FB10: mov     eax, [esi]
 0x45FB12: test    eax, eax
 0x45FB14: jz      short loc_45FB22
-0x45FB16: push    0
-0x45FB18: push    1
-0x45FB1A: push    eax
-0x45FB1B: mov     ecx, edi
-0x45FB1D: call    TESSaveLoadGame_ResetObject
+0x45FB16: push    0; mode
+0x45FB18: push    1; changeFlags
+0x45FB1A: push    eax; form
+0x45FB1B: mov     ecx, edi; self
+0x45FB1D: call    TESSaveLoadGame_ResetObject; Verified: ResetObject reloads a form’s active override record. Counts override files, casts references/actors, calls UnloadForm-style buffer cleanup where needed, checks parent-cell and process constraints, finds the winning override file, and invokes TESDataHandler_LoadFormRecord under save/load guard. Callers include ResetFormForLoad 45F20E and LoadGame 4665B9.
 0x45FB22: mov     esi, [esi+4]
 0x45FB25: test    esi, esi
 0x45FB27: jnz     short loc_45FB10

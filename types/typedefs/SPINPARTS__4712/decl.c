@@ -1,1 +1,8 @@
-SPINPARTS
+enum SPINPARTS : __int32
+{
+SPINPartFiller0 = 0x0,
+SPNP_UP = 0x1,
+SPNP_DOWN = 0x2,
+SPNP_UPHORZ = 0x3,
+SPNP_DOWNHORZ = 0x4,
+};

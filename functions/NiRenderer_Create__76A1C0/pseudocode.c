@@ -29,16 +29,16 @@ char __thiscall NiRenderer_Create(
   int v27; // eax
   int v28; // eax
   void *v29; // ecx
-  void *v30; // ecx
-  int v31; // eax
-  UInt32 RendererHint; // edx
-  UInt32 v33; // ebx
+  HRESULT v30; // ecx
+  IDirect3D9 *v31; // eax
+  UINT BackBufferCount; // edx
+  UINT v33; // ebx
   void *v34; // ecx
   void *v36; // ecx
   char v37; // dl
   IDirect3DDevice9 *device; // edx
   NiDX9ImplicitBufferData *v39; // edi
-  NiRenderTargetGroup *NewRenderTargetGroup; // eax
+  NiRenderTargetGroup *v40; // eax
   int v41; // ecx
   NiRenderTargetGroup *v42; // eax
   void *v43; // ecx
@@ -69,89 +69,90 @@ char __thiscall NiRenderer_Create(
   NiRenderTargetGroup *defaultRTGroup; // [esp+28h] [ebp-4D8h]
   rsize_t v69; // [esp+30h] [ebp-4D0h]
   NiDepthStencilBuffer *v70; // [esp+3Ch] [ebp-4C4h]
-  Ni2DBuffer *v71; // [esp+40h] [ebp-4C0h] BYREF
+  Ni2DBuffer *parentBuffer; // [esp+40h] [ebp-4C0h] BYREF
   int a2a[2]; // [esp+44h] [ebp-4BCh] BYREF
   float v73[4]; // [esp+4Ch] [ebp-4B4h] BYREF
   NiFrustum v74; // [esp+5Ch] [ebp-4A4h] BYREF
-  NiPixelFormat v75[8]; // [esp+78h] [ebp-488h] BYREF
-  char v76[588]; // [esp+2B0h] [ebp-250h] BYREF
+  D3DPRESENT_PARAMETERS parameters; // [esp+78h] [ebp-488h] BYREF
+  _BYTE v76[512]; // [esp+B0h] [ebp-450h] BYREF
+  char v77[588]; // [esp+2B0h] [ebp-250h] BYREF
 
-  this->member.width = a2;
-  this->member.height = a3;
-  this->member.flags = a4;
-  this->member.deviceType = a8;
-  this->member.frameBufferFormat = a9;
-  this->member.depthStencilFormat = a10;
-  this->member.presentationInterval = a11;
-  this->member.swapEffect = a12;
-  a2a[1] = (int)a5;
-  this->member.windowDevice = (UInt32)a5;
-  this->member.windowFocus = (UInt32)a6;
-  this->member.adapterType = a7;
-  this->member.frameBufferMode = a13;
-  this->member.backBufferCount = a14;
-  this->member.refreshRate = a15;
-  sub_763DE0();
-  this->member.adapterIdx = a7;
-  this->member.focusWindow = a6;
-  p_d3dDevFlags = &this->member.d3dDevFlags;
-  this->member.deviceWindow = a5;
-  v17 = a8;
-  p_d3dDevType = &this->member.d3dDevType;
-  if ( !sub_7623D0(a8, &this->member.d3dDevType, &this->member.d3dDevFlags) )
-    goto LABEL_2;
-  if ( (a4 & 0x40) != 0 )
-    *p_d3dDevFlags |= 2u;
-  if ( (a4 & 0x20) != 0 )
-    *p_d3dDevFlags |= 4u;
-  adapterIdx = this->member.adapterIdx;
-  if ( adapterIdx >= *(unsigned __int16 *)(dword_B42160 + 0xE) )
-    v21 = 0;
+  this->member.width = a2; /*0x76a1f4*/
+  this->member.height = a3; /*0x76a201*/
+  this->member.flags = a4; /*0x76a20e*/
+  this->member.deviceType = a8; /*0x76a21b*/
+  this->member.frameBufferFormat = a9; /*0x76a228*/
+  this->member.depthStencilFormat = a10; /*0x76a245*/
+  this->member.presentationInterval = a11; /*0x76a252*/
+  this->member.swapEffect = a12; /*0x76a25f*/
+  a2a[1] = (int)a5; /*0x76a26c*/
+  this->member.windowDevice = (UInt32)a5; /*0x76a270*/
+  this->member.windowFocus = (UInt32)a6; /*0x76a276*/
+  this->member.adapterType = a7; /*0x76a27c*/
+  this->member.frameBufferMode = a13; /*0x76a282*/
+  this->member.backBufferCount = a14; /*0x76a288*/
+  this->member.refreshRate = a15; /*0x76a28e*/
+  NiDX9AdapterDescArray_GetSingleton(); /*0x76a294*/
+  this->member.adapterIdx = a7; /*0x76a299*/
+  this->member.focusWindow = a6; /*0x76a29f*/
+  p_d3dDevFlags = &this->member.d3dDevFlags; /*0x76a2a5*/
+  this->member.deviceWindow = a5; /*0x76a2ac*/
+  v17 = a8; /*0x76a2b2*/
+  p_d3dDevType = &this->member.d3dDevType; /*0x76a2b9*/
+  if ( !sub_7623D0(a8, &this->member.d3dDevType, &this->member.d3dDevFlags) ) /*0x76a2c1*/
+    goto LABEL_2; /*0x76a2c1*/
+  if ( (a4 & 0x40) != 0 ) /*0x76a301*/
+    *p_d3dDevFlags |= 2u; /*0x76a303*/
+  if ( (a4 & 0x20) != 0 ) /*0x76a308*/
+    *p_d3dDevFlags |= 4u; /*0x76a30a*/
+  adapterIdx = this->member.adapterIdx; /*0x76a317*/
+  if ( adapterIdx >= *((unsigned __int16 *)g_NiDX9AdapterDescArray + 7) ) /*0x76a31f*/
+    v21 = 0; /*0x76a329*/
   else
-    v21 = *(_DWORD **)(*(_DWORD *)(dword_B42160 + 8) + 4 * adapterIdx);
-  this->member.adapterDesc = v21;
+    v21 = *(_DWORD **)(*((_DWORD *)g_NiDX9AdapterDescArray + 2) + 4 * adapterIdx); /*0x76a324*/
+  this->member.adapterDesc = v21; /*0x76a32d*/
   if ( !v21 )
   {
     HIDWORD(v64) = "Creation failed: Invalid Adapter";
-    LODWORD(v64) = 0x100;
-    strncpy_s(&byte_B3F828, v64, (const char *)0xFF, v69);
-    TESTexture::ClearComponentReferences(v22);
-    return 0;
+    LODWORD(v64) = 0x100; /*0x76a33f*/
+    strncpy_s(&unk_B3F828, v64, (const char *)0xFF, v69); /*0x76a349*/
+    Shared_NoOpVirtual_60D0A0(v22); /*0x76a353*/
+    return 0; /*0x76a35b*/
   }
   v23 = *p_d3dDevType == 1 ? v21[0x118] : v21[0x119];
   v24 = *(_DWORD *)(v23 + 4) != 0 ? (void *)v23 : 0;
-  this->member.deviceDesc = v24;
+  this->member.deviceDesc = v24; /*0x76a37e*/
   if ( !v24 )
   {
 LABEL_2:
     HIDWORD(v63) = "Creation failed: Invalid 3D device type";
-    LODWORD(v63) = 0x100;
-    strncpy_s(&byte_B3F828, v63, (const char *)0xFF, v69);
-    TESTexture::ClearComponentReferences(v19);
-    return 0;
+    LODWORD(v63) = 0x100; /*0x76a2d7*/
+    strncpy_s(&unk_B3F828, v63, (const char *)0xFF, v69); /*0x76a2e1*/
+    Shared_NoOpVirtual_60D0A0(v19); /*0x76a2eb*/
+    return 0; /*0x76a62f*/
   }
-  _memset(v75, 0, 0x38);
+  _memset((int)&parameters, 0, sizeof(parameters)); /*0x76a393*/
   while ( 1 )
   {
-    TESTexture::ClearComponentReferences(v25);
-    v26 = this->member.adapterIdx;
-    if ( v26 >= *(unsigned __int16 *)(dword_B42160 + 0xE) )
-      v27 = 0;
+    Shared_NoOpVirtual_60D0A0(v25); /*0x76a3a5*/
+    v26 = this->member.adapterIdx; /*0x76a3b4*/
+    if ( v26 >= *((unsigned __int16 *)g_NiDX9AdapterDescArray + 7) ) /*0x76a3bf*/
+      v27 = 0; /*0x76a3c9*/
     else
-      v27 = *(_DWORD *)(*(_DWORD *)(dword_B42160 + 8) + 4 * v26);
-    if ( *p_d3dDevType == 1 )
-      v28 = *(_DWORD *)(v27 + 0x460);
+      v27 = *(_DWORD *)(*((_DWORD *)g_NiDX9AdapterDescArray + 2) + 4 * v26); /*0x76a3c4*/
+    if ( *p_d3dDevType == 1 ) /*0x76a3ce*/
+      v28 = *(_DWORD *)(v27 + 0x460); /*0x76a3d0*/
     else
-      v28 = *(_DWORD *)(v27 + 0x464);
+      v28 = *(_DWORD *)(v27 + 0x464); /*0x76a3d8*/
     if ( !*(_DWORD *)(v28 + 4) || !v28 )
     {
       HIDWORD(v65) = "Creation failed: Requested device not valid";
-      LODWORD(v65) = 0x100;
-      strncpy_s(&byte_B3F828, v65, (const char *)0xFF, v69);
-      TESTexture::ClearComponentReferences(v29);
-      goto LABEL_36;
+      LODWORD(v65) = 0x100; /*0x76a3f2*/
+      strncpy_s(&unk_B3F828, v65, (const char *)0xFF, v69); /*0x76a3fc*/
+      Shared_NoOpVirtual_60D0A0(v29); /*0x76a406*/
+      goto LABEL_36; /*0x76a40e*/
     }
-    if ( sub_761E60(
+    if ( NiDX9Renderer_BuildPresentParameters( /*0x76a471*/
            this,
            (unsigned int)this,
            v17,
@@ -166,192 +167,181 @@ LABEL_2:
            a12,
            a15,
            a11,
-           (int *)v75) )
+           (int *)&parameters) )
     {
-      break;
+      break; /*0x76a471*/
     }
 LABEL_36:
     if ( v17 == 4 )
     {
       HIDWORD(v67) = "Creation failed: Could not create reference device";
-      LODWORD(v67) = 0x100;
-      strncpy_s(&byte_B3F828, v67, (const char *)0xFF, v69);
-      TESTexture::ClearComponentReferences(v62);
-      return 0;
+      LODWORD(v67) = 0x100; /*0x76a936*/
+      strncpy_s(&unk_B3F828, v67, (const char *)0xFF, v69); /*0x76a940*/
+      Shared_NoOpVirtual_60D0A0(v62); /*0x76a94a*/
+      return 0; /*0x76a952*/
     }
-    a8 = ++v17;
-    if ( v17 == 4 )
+    a8 = ++v17; /*0x76a5ce*/
+    if ( v17 == 4 ) /*0x76a5d5*/
     {
-      TESTexture::ClearComponentReferences(v30);
-      return 0;
+      Shared_NoOpVirtual_60D0A0(v30); /*0x76a95c*/
+      return 0; /*0x76a964*/
     }
-    TESTexture::ClearComponentReferences(v30);
-    p_d3dDevType = &this->member.d3dDevType;
+    Shared_NoOpVirtual_60D0A0(v30); /*0x76a5e0*/
+    p_d3dDevType = &this->member.d3dDevType; /*0x76a5e6*/
     if ( !sub_7623D0(v17, &this->member.d3dDevType, p_d3dDevFlags) )
     {
       sub_761A90("Creation failed: Invalid 3D device type");
-      TESTexture::ClearComponentReferences(v34);
-      return 0;
+      Shared_NoOpVirtual_60D0A0(v34); /*0x76a60d*/
+      return 0; /*0x76a60d*/
     }
   }
-  v31 = dword_B42154;
-  RendererHint = v75[0].RendererHint;
-  byte_B420E6 = 0;
-  a14 = RendererHint;
-  v33 = 0;
-  if ( (*(int (__stdcall **)(int))(*(_DWORD *)v31 + 0x10))(v31) )
+  v31 = g_Direct3D9; /*0x76a47e*/
+  BackBufferCount = parameters.BackBufferCount; /*0x76a483*/
+  unk_B420E6 = 0; /*0x76a487*/
+  a14 = BackBufferCount; /*0x76a490*/
+  v33 = 0; /*0x76a49b*/
+  if ( v31->lpVtbl->GetAdapterCount(v31) ) /*0x76a49d*/
   {
-    while ( 1 )
+    while ( 1 ) /*0x76a4b0*/
     {
-      (*(void (__stdcall **)(int, UInt32, _DWORD, NiComponentSpec *))(*(_DWORD *)dword_B42154 + 0x14))(
-        dword_B42154,
-        v33,
-        0,
-        &v75[0].Components[3]);
-      if ( !strcmp(v76, "NVIDIA NVPerfHUD") )
-        break;
-      if ( ++v33 >= (*(int (__stdcall **)(int))(*(_DWORD *)dword_B42154 + 0x10))(dword_B42154) )
-        goto LABEL_32;
+      g_Direct3D9->lpVtbl->GetAdapterIdentifier(g_Direct3D9, v33, 0, (D3DADAPTER_IDENTIFIER9 *)v76); /*0x76a4c6*/
+      if ( !strcmp(v77, "NVIDIA NVPerfHUD") ) /*0x76a4db*/
+        break; /*0x76a4db*/
+      if ( ++v33 >= g_Direct3D9->lpVtbl->GetAdapterCount(g_Direct3D9) ) /*0x76a4f1*/
+        goto LABEL_32; /*0x76a4f1*/
     }
-    this->member.adapterIdx = v33;
-    this->member.d3dDevType = 2;
-    byte_B420E6 = 1;
+    this->member.adapterIdx = v33; /*0x76a4f5*/
+    this->member.d3dDevType = 2; /*0x76a4fb*/
+    unk_B420E6 = 1; /*0x76a505*/
   }
 LABEL_32:
-  p_d3dDevFlags = &this->member.d3dDevFlags;
-  v30 = (void *)(*(int (__stdcall **)(int, UInt32, UInt32, HANDLE, UInt32, NiPixelFormat *, IDirect3DDevice9 **))(*(_DWORD *)dword_B42154 + 0x40))(
-                  dword_B42154,
-                  this->member.adapterIdx,
-                  this->member.d3dDevType,
-                  this->member.focusWindow,
-                  this->member.d3dDevFlags,
-                  v75,
-                  &this->member.device);
-  this->member.unkA90 = 0x64 * v75[0].eFormat / (unsigned int)(0x64 * *(_DWORD *)&v75[0].BitsPerPixel) != 0x4B;
-  if ( (int)v30 < 0 )
+  p_d3dDevFlags = &this->member.d3dDevFlags; /*0x76a50c*/
+  v30 = g_Direct3D9->lpVtbl->CreateDevice( /*0x76a54b*/
+          g_Direct3D9,
+          this->member.adapterIdx,
+          this->member.d3dDevType,
+          this->member.focusWindow,
+          this->member.d3dDevFlags,
+          &parameters,
+          &this->member.device);                // DX10OBSE deployed 2026-05-24: guarded hook config is armed locally (InstallHooks=1, validation/target-byte logging on, draw mirroring off). Log stream reopen bug is fixed; next OBSE launch should log Load/config/target validation/D3D9 CreateDevice/DX10 sidecar diagnostics from this callsite.
+  this->member.unkA90 = 0x64 * parameters.BackBufferHeight / (0x64 * parameters.BackBufferWidth) != 0x4B; /*0x76a563*/
+  if ( (int)v30 < 0 ) /*0x76a569*/
   {
-    if ( a14 == v75[0].RendererHint
-      || (TESTexture::ClearComponentReferences(v30),
-          (*(int (__stdcall **)(int, UInt32, UInt32, HANDLE, UInt32, NiPixelFormat *, IDirect3DDevice9 **))(*(_DWORD *)dword_B42154 + 0x40))(
-            dword_B42154,
-            this->member.adapterIdx,
-            this->member.d3dDevType,
-            this->member.focusWindow,
-            *p_d3dDevFlags,
-            v75,
-            &this->member.device) < 0) )
+    if ( a14 == parameters.BackBufferCount /*0x76a5b6*/
+      || (Shared_NoOpVirtual_60D0A0(v30),
+          (int)g_Direct3D9->lpVtbl->CreateDevice(
+                 g_Direct3D9,
+                 this->member.adapterIdx,
+                 this->member.d3dDevType,
+                 this->member.focusWindow,
+                 *p_d3dDevFlags,
+                 &parameters,
+                 &this->member.device) < 0) )
     {
-      v17 = a8;
-      goto LABEL_36;
+      v17 = a8; /*0x76a5b8*/
+      goto LABEL_36; /*0x76a5b8*/
     }
   }
   if ( !this->member.device )
   {
     HIDWORD(v66) = "Creation failed: Could not create hardware device";
-    LODWORD(v66) = 0x100;
-    strncpy_s(&byte_B3F828, v66, (const char *)0xFF, v69);
-    TESTexture::ClearComponentReferences(v36);
-    return 0;
+    LODWORD(v66) = 0x100; /*0x76a645*/
+    strncpy_s(&unk_B3F828, v66, (const char *)0xFF, v69); /*0x76a64f*/
+    Shared_NoOpVirtual_60D0A0(v36); /*0x76a659*/
+    return 0; /*0x76a661*/
   }
-  if ( !sub_762110(this, (int)v75) )
-    return 0;
-  v37 = ~(unsigned __int8)(*p_d3dDevFlags >> 6);
-  this->member.mixedVertexProcessing = (*p_d3dDevFlags & 0x80) != 0;
-  this->member.softwareVertexProcessing = v37 & 1;
-  device = this->member.device;
-  a2a[0] = 0;
-  v71 = 0;
-  v39 = NiDX9ImplicitBufferData::NiDX9ImplicitBufferData((int)device, v75, (_DWORD **)a2a);
-  NiDX9DepthStencilBufferData_Create((int)this->member.device, &v71);
-  NewRenderTargetGroup = CreateNewRenderTargetGroup(1u, (NiRenderer *)this);
-  v41 = a2a[0];
-  this->member.defaultRTGroup = NewRenderTargetGroup;
-  ((void (__thiscall *)(NiRenderTargetGroup *, int))NewRenderTargetGroup->vtbl->AttachBuffer)(NewRenderTargetGroup, v41);
-  this->member.defaultRTGroup->vtbl->AttachDepthStencilBuffer(this->member.defaultRTGroup, v70);
-  defaultRTGroup = this->member.defaultRTGroup;
-  if ( defaultRTGroup )
-    InterlockedIncrement((volatile LONG *)&defaultRTGroup->members);
-  sub_768980(&this->member.screenRTGroups, a2a[0], defaultRTGroup, 0);
-  v42 = this->member.defaultRTGroup;
-  this->member.currentRTGroup = v42;
-  this->member.currentscreenRTGroup = v42;
-  if ( !sub_768C10(this) )
+  if ( !NiDX9Renderer_InitializeDeviceStateAndSamplerPresets(this, (int)&parameters) ) /*0x76a671*/
+    return 0; /*0x76a671*/
+  v37 = ~(unsigned __int8)(*p_d3dDevFlags >> 6); /*0x76a67f*/
+  this->member.mixedVertexProcessing = (*p_d3dDevFlags & 0x80) != 0; /*0x76a681*/
+  this->member.softwareVertexProcessing = v37 & 1; /*0x76a693*/
+  device = this->member.device; /*0x76a699*/
+  a2a[0] = 0; /*0x76a6a1*/
+  parentBuffer = 0; /*0x76a6a9*/
+  v39 = NiDX9ImplicitBufferData_Create(device, &parameters, (Ni2DBuffer **)a2a); /*0x76a6bc*/
+  NiDX9ImplicitDepthStencilBufferData::Create(this->member.device, &parentBuffer); /*0x76a6c4*/
+  v40 = NiRenderTargetGroup::Create(1u, (NiRenderer *)this); /*0x76a6cc*/
+  v41 = a2a[0]; /*0x76a6d1*/
+  this->member.defaultRTGroup = v40; /*0x76a6d8*/
+  ((void (__thiscall *)(NiRenderTargetGroup *, int))v40->vtbl->AttachBuffer)(v40, v41); /*0x76a6e8*/
+  this->member.defaultRTGroup->vtbl->AttachDepthStencilBuffer(this->member.defaultRTGroup, v70); /*0x76a6fa*/
+  defaultRTGroup = this->member.defaultRTGroup; /*0x76a707*/
+  if ( defaultRTGroup ) /*0x76a709*/
+    InterlockedIncrement((volatile LONG *)&defaultRTGroup->members); /*0x76a70f*/
+  sub_768980(&this->member.screenRTGroups, a2a[0], defaultRTGroup, 0); /*0x76a720*/
+  v42 = this->member.defaultRTGroup; /*0x76a725*/
+  this->member.currentRTGroup = v42; /*0x76a72d*/
+  this->member.currentscreenRTGroup = v42; /*0x76a733*/
+  if ( !NiDX9Renderer_InitializeTextureDefaults(this) ) /*0x76a739*/
   {
-    TESTexture::ClearComponentReferences(v43);
-    return 0;
+    Shared_NoOpVirtual_60D0A0(v43); /*0x76a747*/
+    return 0; /*0x76a74f*/
   }
-  this->member.renderState = (NiDX9RenderState *)NiDX9RenderState_constr((int)this, &this->member.caps, 1);
-  sub_778F60(this);
-  v44 = (NiD3DShader *)FormHeapAlloc(0x70u);
-  if ( v44 )
-    v45 = (Ni2DBuffer *)NiD3DShader::NiD3DShader(v44);
+  this->member.renderState = (NiDX9RenderState *)NiDX9RenderState_constr((int)this, &this->member.caps, 1); /*0x76a764*/
+  sub_778F60(this); /*0x76a76a*/
+  v44 = (NiD3DShader *)FormHeapAlloc(0x70u); /*0x76a771*/
+  if ( v44 ) /*0x76a77b*/
+    v45 = (Ni2DBuffer *)NiD3DShader::NiD3DShader(v44); /*0x76a77f*/
   else
-    v45 = 0;
-  NiSmartPointer_Set__((Ni2DBuffer **)&this->member.defaultShader, v45);
-  ((void (__thiscall *)(NiD3DShader *, NiDX9Renderer *))this->member.defaultShader->__vftable->SetRenderer)(
+    v45 = 0; /*0x76a786*/
+  NiSmartPointer_Set__((Ni2DBuffer **)&this->member.defaultShader, v45); /*0x76a791*/
+  ((void (__thiscall *)(NiD3DShader *, NiDX9Renderer *))this->member.defaultShader->__vftable->SetRenderer)( /*0x76a79e*/
     this->member.defaultShader,
     this);
-  v46 = (NiDX9VertexBufferManager *)FormHeapAlloc(0x100u);
-  if ( v46 )
-    v47 = NiDX9VertexBufferManager::NiDX9VertexBufferManager(v46, (int)this->member.device);
+  v46 = (NiDX9VertexBufferManager *)FormHeapAlloc(0x100u); /*0x76a7a5*/
+  if ( v46 ) /*0x76a7af*/
+    v47 = NiDX9VertexBufferManager::NiDX9VertexBufferManager(v46, (int)this->member.device); /*0x76a7ba*/
   else
-    v47 = 0;
-  this->member.vertexBufferMgr = v47;
-  v48 = (NiDX9IndexBufferManager *)FormHeapAlloc(0x4Cu);
-  if ( v48 )
-    v49 = NiDX9IndexBufferManager::NiDX9IndexBufferManager(v48, (int)this->member.device);
+    v47 = 0; /*0x76a7c1*/
+  this->member.vertexBufferMgr = v47; /*0x76a7c5*/
+  v48 = (NiDX9IndexBufferManager *)FormHeapAlloc(0x4Cu); /*0x76a7cb*/
+  if ( v48 ) /*0x76a7d5*/
+    v49 = NiDX9IndexBufferManager::NiDX9IndexBufferManager(v48, (int)this->member.device); /*0x76a7e0*/
   else
-    v49 = 0;
-  this->member.indexBufferMgr = v49;
-  v50 = (_DWORD *)FormHeapAlloc(0x10u);
-  if ( v50 )
-    v51 = (NiDX9TextureManager *)sub_77ABF0(v50, (int)this);
+    v49 = 0; /*0x76a7e7*/
+  this->member.indexBufferMgr = v49; /*0x76a7eb*/
+  v50 = (_DWORD *)FormHeapAlloc(0x10u); /*0x76a7f1*/
+  if ( v50 ) /*0x76a7fb*/
+    v51 = (NiDX9TextureManager *)sub_77ABF0(v50, (int)this); /*0x76a800*/
   else
-    v51 = 0;
-  v52 = this->member.device;
-  this->member.textureMgr = v51;
-  v53 = NiD3DGeometryGroupManager::NiD3DGeometryGroupManager((int)v52, (int)this->member.vertexBufferMgr);
-  vftable = this->__vftable;
-  this->member.geometryGroupMgr = v53;
-  v55 = vftable->super.GetFlags((NiRenderer *)this);
-  sub_778C80((_BYTE *)this->member.geometryGroupMgr, (v55 & 2) != 0);
-  v56 = (NiGeometryGroup *)(*(int (__thiscall **)(NiGeometryGroupManager *, int))(*(_DWORD *)this->member.geometryGroupMgr
+    v51 = 0; /*0x76a807*/
+  v52 = this->member.device; /*0x76a809*/
+  this->member.textureMgr = v51; /*0x76a80f*/
+  v53 = NiD3DGeometryGroupManager_Create(v52, this->member.vertexBufferMgr); /*0x76a81d*/
+  vftable = this->__vftable; /*0x76a822*/
+  this->member.geometryGroupMgr = v53; /*0x76a825*/
+  v55 = vftable->super.GetFlags((NiRenderer *)this); /*0x76a833*/
+  sub_778C80((_BYTE *)this->member.geometryGroupMgr, (v55 & 2) != 0); /*0x76a843*/
+  v56 = (NiGeometryGroup *)(*(int (__thiscall **)(NiGeometryGroupManager *, int))(*(_DWORD *)this->member.geometryGroupMgr /*0x76a855*/
                                                                                 + 4))(
                              this->member.geometryGroupMgr,
                              1);
-  geometryGroupMgr = this->member.geometryGroupMgr;
-  this->member.unsharedGeometryGroup = v56;
-  this->member.dynamicGeometryGroup = (NiGeometryGroup *)(*(int (__thiscall **)(NiGeometryGroupManager *, int))(*(_DWORD *)geometryGroupMgr + 4))(
+  geometryGroupMgr = this->member.geometryGroupMgr; /*0x76a857*/
+  this->member.unsharedGeometryGroup = v56; /*0x76a85d*/
+  this->member.dynamicGeometryGroup = (NiGeometryGroup *)(*(int (__thiscall **)(NiGeometryGroupManager *, int))(*(_DWORD *)geometryGroupMgr + 4))( /*0x76a871*/
                                                            geometryGroupMgr,
                                                            2);
-  v58 = (_DWORD *)FormHeapAlloc(0x240u);
-  if ( v58 )
-    v59 = (NiDX9LightManager *)sub_7766E0(v58, (int)this->member.renderState, (int)this->member.device);
+  v58 = (_DWORD *)FormHeapAlloc(0x240u); /*0x76a877*/
+  if ( v58 ) /*0x76a881*/
+    v59 = (NiDX9LightManager *)sub_7766E0(v58, (int)this->member.renderState, (int)this->member.device); /*0x76a893*/
   else
-    v59 = 0;
-  this->member.lightMgr = v59;
-  if ( v39->PresentParams.BackBufferCount )
-    ((void (__thiscall *)(NiDX9RenderState *, int))this->member.renderState->vtbl->func_0E)(this->member.renderState, 1);
-  NiFrustum::SetOrtho(&v74, 0);
-  v60 = this->__vftable;
-  v74.Bottom = flt_A30634;
-  SetupCamera = v60->super.SetupCamera;
-  v74.Left = v74.Bottom;
-  v74.Top = 1.0;
-  v74.Right = 1.0;
-  v74.Near = flt_A2FAAC;
-  v74.Far = 1.0;
-  v73[0] = 0.0;
-  v73[3] = 0.0;
-  v73[1] = 1.0;
-  v73[2] = 1.0;
-  SetupCamera(
-    (NiRenderer *)this,
-    (NiPoint3 *)&Vector3_InitValue_,
-    (NiPoint3 *)&dword_B258D0,
-    (NiPoint3 *)&dword_B258DC,
-    (NiPoint3 *)&dword_B258E8,
-    &v74,
-    v73);
-  return 1;
+    v59 = 0; /*0x76a89a*/
+  this->member.lightMgr = v59; /*0x76a89c*/
+  if ( v39->PresentParams.MultiSampleType ) /*0x76a8a2*/
+    ((void (__thiscall *)(NiDX9RenderState *, int))this->member.renderState->vtbl->func_0E)(this->member.renderState, 1); /*0x76a8b5*/
+  NiFrustum::SetOrtho(&v74, 0); /*0x76a8bd*/
+  v60 = this->__vftable; /*0x76a8c8*/
+  v74.Bottom = kTerrainLODQuadRayDirectionZ; /*0x76a8cb*/
+  SetupCamera = v60->super.SetupCamera; /*0x76a8cf*/
+  v74.Left = v74.Bottom; /*0x76a8d5*/
+  v74.Top = 1.0; /*0x76a8df*/
+  v74.Right = 1.0; /*0x76a8e4*/
+  v74.Near = kFaceEarNormalMatchRadius; /*0x76a8f3*/
+  v74.Far = 1.0; /*0x76a906*/
+  v73[0] = 0.0; /*0x76a913*/
+  v73[3] = 0.0; /*0x76a917*/
+  v73[1] = 1.0; /*0x76a91b*/
+  v73[2] = 1.0; /*0x76a91f*/
+  SetupCamera((NiRenderer *)this, &g_zeroNiPoint3, &stru_B258D0, &stru_B258DC, &rhs, &v74, v73); /*0x76a923*/
+  return 1; /*0x76a617*/
 }

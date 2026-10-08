@@ -1,12 +1,15 @@
-unsigned int *__thiscall sub_71FB00(unsigned int *this, char a2)
+// Destroy one shared-normal index-pool block and its linked successors.
+NiSharedNormalIndexPoolBlock *__thiscall NiSharedNormalIndexPoolBlock_Destruct(
+        NiSharedNormalIndexPoolBlock *self,
+        unsigned __int8 freeThis)
 {
-  unsigned int *v3; // ecx
+  NiSharedNormalIndexPoolBlock *next; // ecx
 
-  FormHeapFree(*this);
-  v3 = (unsigned int *)*(this + 4);
-  if ( v3 )
-    sub_71FB00(v3, 1);
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  FormHeapFree((unsigned int)self->begin); /*0x71fb06*/
+  next = self->next; /*0x71fb0b*/
+  if ( next ) /*0x71fb13*/
+    NiSharedNormalIndexPoolBlock_Destruct(next, 1u); /*0x71fb17*/
+  if ( (freeThis & 1) != 0 ) /*0x71fb21*/
+    FormHeapFree((unsigned int)self); /*0x71fb24*/
+  return self; /*0x71fb2e*/
 }

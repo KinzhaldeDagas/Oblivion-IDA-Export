@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x65FA90",
-    "line": "push    ecx",
+    "line": "push    ecx; Return raw PlayerCharacter::skillExp for one native Oblivion skill; return 0 outside SkillActorValue 0x0C..0x20. Major/minor affects the separate requirement array, not this numerator.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x65FA91",
-    "line": "mov     eax, [esp+4+arg_0]",
+    "line": "mov     eax, [esp+4+actorValue]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x65FAA9",
-    "line": "call    ActorValue_GetGroupOffsetFromAV",
+    "line": "call    ActorValue_GetGroupOffsetFromAV; Oblivion group 2 maps the native skill AV to skillExp index 0..20.",
     "mnemonic": "call",
     "size": 5
   },

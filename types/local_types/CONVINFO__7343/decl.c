@@ -1,1 +1,1 @@
-CONVINFO
+typedef tagCONVINFO CONVINFO;

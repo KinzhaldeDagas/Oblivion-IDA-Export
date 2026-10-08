@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8CFC70",
-    "line": "push    ebp",
+    "line": "push    ebp; Swimming state update. Uses desired movement at proxy+0x290 and water/depth constraints; sets near-surface/landing flag 0x400 and handles vertical buoyancy. Not suitable as a Climbing substitute.",
     "mnemonic": "push",
     "size": 1
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x8CFD5A",
-    "line": "call    sub_91F430",
+    "line": "call    bhkCharacterState_SolveVelocityToTarget; Swimming solver setup: response=1.0, basis slots use proxy+0x2C0/+0x2B0, third basis switches to proxy+0x230 when flag 0x100 is set, desired local velocity is swizzled from proxy+0x290, maxDelta=100, reference=proxy+0x280.",
     "mnemonic": "call",
     "size": 5
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x8CFD69",
-    "line": "call    sub_8AC070",
+    "line": "call    bhkCollisionWrapper_GetPositionPtr; Returns low-level Havok object position pointer: *(wrapper+0x30 + 0x1C) + 0x30.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x8CFD70",
-    "line": "mov     eax, offset stru_BA7A40",
+    "line": "mov     eax, offset unk_BA7A40",
     "mnemonic": "mov",
     "size": 5
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x8CFDF2",
-    "line": "jp      short loc_8CFE51",
+    "line": "jp      short loc_8CFE51; Swimming state compares proxy+0x318 water height against computed swimmer surface/depth height and sets flag 0x400 near/above water surface.",
     "mnemonic": "jp",
     "size": 2
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x8CFE0B",
-    "line": "call    sub_890720",
+    "line": "call    sub_890720; MorrowindMovements: commits pending state at proxy+0x2A0 into hkCharacterContext state slot proxy+0x1EC, then resets pending state to sentinel 0x0B. Use +0x1EC as active state when +0x2A0 is sentinel.",
     "mnemonic": "call",
     "size": 5
   },
@@ -811,7 +811,7 @@
   },
   {
     "ea": "0x8CFEA2",
-    "line": "call    sub_890720",
+    "line": "call    sub_890720; MorrowindMovements: commits pending state at proxy+0x2A0 into hkCharacterContext state slot proxy+0x1EC, then resets pending state to sentinel 0x0B. Use +0x1EC as active state when +0x2A0 is sentinel.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1363,7 +1363,7 @@
   },
   {
     "ea": "0x8CFFFA",
-    "line": "call    sub_890970",
+    "line": "call    sub_890970; Transient velocity-add channel: when proxy+0x300 timer is positive, adds timer * proxy+0x2F0 vector to velocity unless gravity-suppress flags 0x1800 are set. Setter not confirmed in current movement slice.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1387,7 +1387,7 @@
   },
   {
     "ea": "0x8D000A",
-    "line": "call    sub_890720",
+    "line": "call    sub_890720; MorrowindMovements: commits pending state at proxy+0x2A0 into hkCharacterContext state slot proxy+0x1EC, then resets pending state to sentinel 0x0B. Use +0x1EC as active state when +0x2A0 is sentinel.",
     "mnemonic": "call",
     "size": 5
   },

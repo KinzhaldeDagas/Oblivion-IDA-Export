@@ -1,4 +1,4 @@
-0x4B7A20: push    esi
+0x4B7A20: push    esi; Verified TESObjectDOOR destructor helper calls TESObjectDOOR_ClearRandomTeleportSpaceList, then clears TESForm component references.
 0x4B7A21: mov     esi, ecx
 0x4B7A23: cmp     dword ptr [esi+6Ch], 0
 0x4B7A27: jz      short loc_4B7A47
@@ -7,7 +7,7 @@
 0x4B7A30: mov     eax, [esi+6Ch]
 0x4B7A33: mov     edi, [eax+4]
 0x4B7A36: push    eax
-0x4B7A37: call    FormHeapFree
+0x4B7A37: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4B7A3C: add     esp, 4
 0x4B7A3F: test    edi, edi
 0x4B7A41: mov     [esi+6Ch], edi

@@ -50,3 +50,17 @@
 0x6C5409: pop     esi
 0x6C540A: add     esp, 10h
 0x6C540D: retn    4
+0x6C3FC0: mov     dword ptr [ecx], offset ??_7NiAVObjectPalette@@6B@; const NiAVObjectPalette::`vftable'
+0x6C3FC6: jmp     NiRefObject_destr
+0x9C7350: mov     ecx, [ebp-10h]
+0x9C7353: jmp     loc_6C3FC0
+0x9C7358: mov     ecx, [ebp-10h]
+0x9C735B: add     ecx, 8
+0x9C735E: jmp     j_??1?$NiTStringPointerMap@PAVNiAVObject@@@@UAE@XZ; NiTStringPointerMap<NiAVObject *>::~NiTStringPointerMap<NiAVObject *>(void)
+0x9C7363: mov     edx, [esp+arg_4]
+0x9C7367: lea     eax, [edx-8]
+0x9C736A: mov     ecx, [edx-0Ch]
+0x9C736D: xor     ecx, eax
+0x9C736F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C7374: mov     eax, offset stru_AEF7B0
+0x9C7379: jmp     ___CxxFrameHandler3

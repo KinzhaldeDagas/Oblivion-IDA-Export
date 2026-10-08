@@ -1,1 +1,1 @@
-tagOLEMISC
+typedef OLEMISC tagOLEMISC;

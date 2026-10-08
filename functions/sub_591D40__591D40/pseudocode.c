@@ -1,8 +1,8 @@
-void __thiscall sub_591D40(Tile *this, float a2, char *a3, int a4)
+void __thiscall sub_591D40(Tile *this, Tile *parent, char *name, Tile *sibling)
 {
-  sub_58DA00((int)this, a2, a3, a4);
-  Tile_SetFloat(this, (_DWORD *)0xFCC, flt_A40098);
-  Tile_SetFloat(this, (_DWORD *)0xFCD, flt_A40098);
-  Tile_SetFloat(this, (_DWORD *)0xFCE, flt_A40098);
-  Tile_SetFloat(this, (_DWORD *)0xFA7, 0.0);
+  Tile::Init(this, parent, name, sibling); /*0x591d54*/
+  Tile_SetFloat(this, 0xFCCu, flt_A40098); /*0x591d6a*/
+  Tile_SetFloat(this, 0xFCDu, flt_A40098); /*0x591d80*/
+  Tile_SetFloat(this, 0xFCEu, flt_A40098); /*0x591d96*/
+  Tile_SetFloat(this, 0xFA7u, 0.0); /*0x591da8*/
 }

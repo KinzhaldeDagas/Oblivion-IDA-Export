@@ -1,18 +1,31 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_8CF3B0",
+  "chunks": [
+    [
+      "0x8CF3B0",
+      "0x8CF6A9"
+    ]
+  ],
+  "chunks_sha256": "7730a0b7a22a10736c4ea2780ab8f43ee46f0ae30ef70318ae8839fffc14a4f9",
+  "comment_regular": "TES4 authoritative: OnGround state update. Uses desired movement at proxy+0x290, calls shared velocity solver, applies ground/contact velocity projection, and compares current z against water height +0x318 for gravity correction.",
+  "comment_repeatable": "TES4 authoritative: OnGround state update. Uses desired movement at proxy+0x290, calls shared velocity solver, applies ground/contact velocity projection, and compares current z against water height +0x318 for gravity correction.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "bhkCharacterStateOnGround_Update",
   "end_ea": "0x8CF6A9",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "sub_8CF3B0",
+  "name": "bhkCharacterStateOnGround_Update",
   "segment": ".text",
   "sha256": "7730a0b7a22a10736c4ea2780ab8f43ee46f0ae30ef70318ae8839fffc14a4f9",
   "size": 761,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x8CF3B0",
+  "total_chunk_size": 761,
   "type": "void __stdcall(int)",
   "xrefs_from_count": 189,
   "xrefs_to_count": 1

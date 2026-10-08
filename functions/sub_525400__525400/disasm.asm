@@ -7,13 +7,13 @@
 0x525414: mov     edx, [eax+318h]
 0x52541A: push    esi
 0x52541B: call    edx
-0x52541D: mov     ecx, ds:0B333C4h
+0x52541D: mov     ecx, ds:0B333C4h; this
 0x525423: cmp     esi, ecx
 0x525425: mov     byte ptr ds:0B33D80h, 0
 0x52542C: jnz     short loc_52548A
 0x52542E: push    ebx
-0x52542F: push    1
-0x525431: call    PlayerCharacter_GetPlayerNode
+0x52542F: push    1; firstPerson
+0x525431: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x525436: test    eax, eax
 0x525438: jz      short loc_52544E
 0x52543A: cmp     word ptr [eax+0B6h], 0

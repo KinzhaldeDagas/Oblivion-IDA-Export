@@ -1,28 +1,54 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "IClassFactoryImpl",
+  "definition": "struct IClassFactoryImpl\n{\nIClassFactory_0 IClassFactory_iface;\nconst CLSID *const rclsid __offset(OFF64|AUTO);\nFnCreateInstance pfnCreateInstance __offset(OFF64|AUTO);\n}\n",
   "id": 18374686479671834718,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IClassFactory_iface",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "IClassFactory_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "rclsid",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "const CLSID *const"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pfnCreateInstance",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "FnCreateInstance"
     }
   ],
   "name": "IClassFactoryImpl",
+  "ordinal": 3950,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 12
 }

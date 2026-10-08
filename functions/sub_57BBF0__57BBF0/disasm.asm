@@ -42,10 +42,10 @@
 0x57BC71: jz      short loc_57BCB5
 0x57BC73: fldz
 0x57BC75: push    ecx
-0x57BC76: fstp    [esp+0Ch+a2]; a3
+0x57BC76: fstp    [esp+0Ch+a2]; value
 0x57BC79: mov     ecx, esi; this
-0x57BC7B: push    0FABh; a2
-0x57BC80: call    Tile_SetFloat
+0x57BC7B: push    0FABh; propertyCode
+0x57BC80: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x57BC85: fld     [esp+8+arg_10]
 0x57BC89: sub     esp, 10h
 0x57BC8C: fstp    [esp+18h+a2]; float

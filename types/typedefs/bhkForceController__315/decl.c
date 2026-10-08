@@ -1,1 +1,1 @@
-bhkForceController
+struct bhkForceController;

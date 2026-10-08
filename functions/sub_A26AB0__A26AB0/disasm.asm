@@ -1,5 +1,5 @@
 0xA26AB0: push    esi
-0xA26AB1: mov     esi, dword_B3FCE4
+0xA26AB1: mov     esi, dword ptr unk_B3FCE4
 0xA26AB7: test    esi, esi
 0xA26AB9: jz      short loc_A26AD7
 0xA26ABB: lea     eax, [esi+4]

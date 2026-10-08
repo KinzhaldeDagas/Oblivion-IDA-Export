@@ -20,31 +20,31 @@ void __thiscall sub_915290(__m128 *this, __m128 *a2, int a3, void (__stdcall ***
   unsigned int v21; // [esp+20h] [ebp-10h]
   float v22; // [esp+24h] [ebp-Ch]
 
-  v4 = a2[3].m128_f32[0];
-  v5 = *(this + 1);
-  v6 = _mm_shuffle_ps(v5, v5, 0xFF).m128_f32[0];
-  v7 = _mm_mul_ps(v5, *a2);
-  v8 = *(this + 1);
-  v17 = (float)(_mm_shuffle_ps(v7, v7, 0x55).m128_f32[0] + v7.m128_f32[0])
+  v4 = a2[3].m128_f32[0]; /*0x9152a0*/
+  v5 = *(this + 1); /*0x9152a6*/
+  v6 = _mm_shuffle_ps(v5, v5, 0xFF).m128_f32[0]; /*0x9152ac*/
+  v7 = _mm_mul_ps(v5, *a2); /*0x9152b0*/
+  v8 = *(this + 1); /*0x9152cc*/
+  v17 = (float)(_mm_shuffle_ps(v7, v7, 0x55).m128_f32[0] + v7.m128_f32[0]) /*0x9152d4*/
       + (float)(_mm_shuffle_ps(v7, v7, 0xAA).m128_f32[0] + v6);
-  v9 = a2[1];
-  v10 = _mm_mul_ps(v8, v9);
-  v16 = v17 - v4;
-  v11 = (float)((float)(_mm_shuffle_ps(v10, v10, 0x55).m128_f32[0] + v10.m128_f32[0])
+  v9 = a2[1]; /*0x9152dc*/
+  v10 = _mm_mul_ps(v8, v9); /*0x9152e5*/
+  v16 = v17 - v4; /*0x9152eb*/
+  v11 = (float)((float)(_mm_shuffle_ps(v10, v10, 0x55).m128_f32[0] + v10.m128_f32[0]) /*0x915314*/
               + (float)(_mm_shuffle_ps(v10, v10, 0xAA).m128_f32[0] + _mm_shuffle_ps(v8, v8, 0xFF).m128_f32[0]))
       - v4;
-  if ( v11 < *(float *)&SrcStr )
+  if ( v11 < *(float *)&SrcStr ) /*0x915323*/
   {
-    v18 = v16 - v11;
-    if ( v18 >= (double)a2[3].m128_f32[1] )
+    v18 = v16 - v11; /*0x91532f*/
+    if ( v18 >= (double)a2[3].m128_f32[1] ) /*0x915341*/
     {
-      if ( v16 > (double)*(float *)&SrcStr )
-        v12 = v16 / v18;
+      if ( v16 > (double)*(float *)&SrcStr ) /*0x915356*/
+        v12 = v16 / v18; /*0x915364*/
       else
-        v12 = *(float *)&SrcStr;
-      *(float *)&v19 = v12;
-      v13 = _mm_shuffle_ps((__m128)v19, (__m128)v19, 0);
-      if ( (_mm_movemask_ps(
+        v12 = *(float *)&SrcStr; /*0x915358*/
+      *(float *)&v19 = v12; /*0x91536c*/
+      v13 = _mm_shuffle_ps((__m128)v19, (__m128)v19, 0); /*0x915381*/
+      if ( (_mm_movemask_ps( /*0x9153ae*/
               _mm_cmple_ps(
                 _mm_and_ps(
                   _mm_sub_ps(
@@ -54,12 +54,12 @@ void __thiscall sub_915290(__m128 *this, __m128 *a2, int a3, void (__stdcall ***
                 *(this + 3)))
           & 7) == 7 )
       {
-        v14 = *((_OWORD *)this + 1);
-        v22 = v12;
-        v15 = *a4;
-        v20 = v14;
-        v21 = 0xFFFFFFFF;
-        ((void (__thiscall *)(void (__stdcall ***)(int, __int128 *), int, __int128 *))*v15)(a4, a3, &v20);
+        v14 = *((_OWORD *)this + 1); /*0x9153b0*/
+        v22 = v12; /*0x9153b4*/
+        v15 = *a4; /*0x9153bb*/
+        v20 = v14; /*0x9153c6*/
+        v21 = 0xFFFFFFFF; /*0x9153cb*/
+        ((void (__thiscall *)(void (__stdcall ***)(int, __int128 *), int, __int128 *))*v15)(a4, a3, &v20); /*0x9153d3*/
       }
     }
   }

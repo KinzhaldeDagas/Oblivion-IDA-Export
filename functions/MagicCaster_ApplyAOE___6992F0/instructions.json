@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x69930F",
-    "line": "call    EffectItem_GetArea",
+    "line": "call    EffectItem_GetArea; Effective area: returns 0 for EffectSetting NoArea (0x200) or Self range (0); otherwise raw EffectItem+0x8 area.",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x69932E",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -469,25 +469,25 @@
   },
   {
     "ea": "0x6993EA",
-    "line": "lea     ecx, [esp+18h+arg_C]",
+    "line": "lea     ecx, [esp+18h+pointXYZ]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6993EE",
-    "line": "push    ecx",
+    "line": "push    ecx; pointXYZ",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6993EF",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6993F1",
-    "line": "call    sub_4D7E30",
+    "line": "call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.",
     "mnemonic": "call",
     "size": 5
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x699440",
-    "line": "mov     ecx, [esp+18h+arg_C]",
+    "line": "mov     ecx, [esp+18h+pointXYZ]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -949,7 +949,7 @@
   },
   {
     "ea": "0x6994CC",
-    "line": "add     esi, 39Ch",
+    "line": "add     esi, 39Ch; Advance the actor vtable pointer to Player_ModExperience (+0x39C); this adjusted-pointer form is why ordinary function xrefs miss the later call.",
     "mnemonic": "add",
     "size": 6
   },
@@ -979,7 +979,7 @@
   },
   {
     "ea": "0x6994DC",
-    "line": "call    edx",
+    "line": "call    edx; Eligible area magic application: resolved school AV, useValue1, identity scale (0.0).",
     "mnemonic": "call",
     "size": 2
   },

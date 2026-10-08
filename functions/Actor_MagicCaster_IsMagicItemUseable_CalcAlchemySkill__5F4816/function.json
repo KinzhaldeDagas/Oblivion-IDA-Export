@@ -1,19 +1,36 @@
 {
-  "callees_count": 3,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x5F4816",
+      "0x5F4842"
+    ],
+    [
+      "0x5F4842",
+      "0x5F484D"
+    ]
+  ],
+  "chunks_sha256": "3dff581675556acc448996c2e30cc61bd1f53d49d3ac68baa63397526d4ff928",
+  "comment_regular": "AVU decode: ingredient wortcraft Alchemy branch. Loads MagicCaster pointer from stack, subtracts 0x5C to recover owning Actor, pushes AV 0x13, then calls Actor_GetLuckModifiedBaseAV.",
+  "comment_repeatable": "AVU decode: ingredient wortcraft Alchemy branch. Loads MagicCaster pointer from stack, subtracts 0x5C to recover owning Actor, pushes AV 0x13, then calls Actor_GetLuckModifiedBaseAV.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "Actor_MagicCaster_IsMagicItemUseable:::CalcAlchemySkill",
   "end_ea": "0x5F4842",
-  "flags": 16384,
+  "evidence_confidence": "Unknown",
+  "flags": 21504,
   "has_pseudocode": true,
   "name": "Actor_MagicCaster_IsMagicItemUseable:::CalcAlchemySkill",
   "segment": ".text",
   "sha256": "4ebd973665ab2983d8cf40d15addb8c2bb684c313e0ac6df3e9c46e4fc001a80",
   "size": 44,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5F4816",
-  "type": "char __usercall@<al>(double@<st0>, int, float *)",
-  "xrefs_from_count": 17,
+  "total_chunk_size": 55,
+  "type": "void __cdecl(int, float *)",
+  "xrefs_from_count": 22,
   "xrefs_to_count": 2
 }

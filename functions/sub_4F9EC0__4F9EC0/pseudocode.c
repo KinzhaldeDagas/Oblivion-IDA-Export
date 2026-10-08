@@ -1,21 +1,21 @@
-void __usercall sub_4F9EC0(double a1@<st0>, double st5_0@<st2>, double st6_0@<st1>, int a4, ExtraDataList *a5)
+void __cdecl sub_4F9EC0(BSStringT *a1, ExtraDataList *a2)
 {
   ExtraScript *ExtraScriptEventList; // eax
-  int **Singleton; // eax
-  _DWORD *v7; // [esp-Ch] [ebp-10h]
-  int v8; // [esp-4h] [ebp-8h]
+  ScriptRunner **Singleton; // eax
+  Script *v7; // [esp-Ch] [ebp-10h]
+  ScriptEventList *v8; // [esp-4h] [ebp-8h]
 
-  if ( a5 )
+  if ( a2 ) /*0x4f9ec7*/
   {
-    if ( ExtraDataList_GetExtraScriptEventList(a5) )
+    if ( ExtraDataList_GetExtraScriptEventList(a2) ) /*0x4f9ecb*/
     {
-      ExtraScriptEventList = ExtraDataList_GetExtraScriptEventList(a5);
-      if ( !*((_DWORD *)ExtraScriptEventList + 2) )
+      ExtraScriptEventList = ExtraDataList_GetExtraScriptEventList(a2); /*0x4f9ed6*/
+      if ( !*((_DWORD *)ExtraScriptEventList + 2) ) /*0x4f9edb*/
       {
-        v8 = (int)ExtraScriptEventList;
-        v7 = *(_DWORD **)ExtraScriptEventList;
-        Singleton = (int **)ScriptRunner_GetSingleton();
-        sub_517950(Singleton, a1, st5_0, st6_0, v7, a4, v8);
+        v8 = (ScriptEventList *)ExtraScriptEventList; /*0x4f9ee7*/
+        v7 = *(Script **)ExtraScriptEventList; /*0x4f9ee9*/
+        Singleton = ScriptRunner_GetSingleton(); /*0x4f9eea*/
+        sub_517950(Singleton, v7, a1, v8); /*0x4f9ef1*/
       }
     }
   }

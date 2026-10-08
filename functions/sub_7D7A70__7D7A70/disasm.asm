@@ -1,5 +1,5 @@
-0x7D7A70: push    ebx
-0x7D7A71: mov     ebx, [esp+4+arg_0]
+0x7D7A70: push    ebx; Verified (Oblivion): replaces the TextureEffectData pointer at +0xE0 on the supplied NiProperty-derived shader property, with Interlocked release/addref handling, then clears a 32-bit state at +0x24. BSShaderPPLightingProperty constructor/destructor and viewer export independently confirm +0xE0 is its spTexEffectData ownership slot. Direct callers select property ID 4 subtypes 5..10: PP-lighting/SpeedTree PP (5), Hair (6), SpeedTree Branch (7), SpeedTree Leaf (9), and Lighting30 (10); subtype 8 remains Unknown.
+0x7D7A71: mov     ebx, [esp+4+data]
 0x7D7A75: push    esi
 0x7D7A76: push    edi
 0x7D7A77: mov     edi, ecx

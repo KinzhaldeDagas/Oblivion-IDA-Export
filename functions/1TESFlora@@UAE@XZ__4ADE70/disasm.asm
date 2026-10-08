@@ -28,3 +28,19 @@
 0x4ADEE6: pop     esi
 0x4ADEE7: add     esp, 14h
 0x4ADEEA: retn
+0x9B2C20: cmp     dword ptr [ebp-10h], 0
+0x9B2C24: jz      loc_9B2C38
+0x9B2C2A: mov     eax, [ebp-10h]
+0x9B2C2D: add     eax, 0Ch
+0x9B2C30: mov     [ebp-14h], eax
+0x9B2C33: jmp     loc_9B2C3F
+0x9B2C38: mov     dword ptr [ebp-14h], 0
+0x9B2C3F: mov     ecx, [ebp-14h]; this
+0x9B2C42: jmp     ??1TESObjectACTI@@UAE@XZ; TESObjectACTI::~TESObjectACTI(void)
+0x9B2C47: mov     edx, [esp+arg_4]
+0x9B2C4B: lea     eax, [edx-0Ch]
+0x9B2C4E: mov     ecx, [edx-10h]
+0x9B2C51: xor     ecx, eax
+0x9B2C53: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B2C58: mov     eax, offset stru_ADEAC0
+0x9B2C5D: jmp     ___CxxFrameHandler3

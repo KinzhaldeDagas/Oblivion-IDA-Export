@@ -26,7 +26,7 @@
 0x4A3202: jmp     loc_4A3405
 0x4A3207: push    ebx
 0x4A3208: mov     ecx, edi
-0x4A320A: call    TESFile_InitializeFormFromRecord
+0x4A320A: call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.
 0x4A320F: push    esi; a2
 0x4A3210: mov     ecx, ebx; this
 0x4A3212: call    TESForm_SetIsLinked
@@ -35,7 +35,6 @@
 0x4A321E: cmp     eax, esi
 0x4A3220: jz      loc_4A33C0
 0x4A3226: jmp     short loc_4A3230
-0x4A3228: align 10h
 0x4A3230: cmp     eax, 4D414E57h
 0x4A3235: jg      loc_4A335D
 0x4A323B: jz      loc_4A3323
@@ -60,7 +59,7 @@
 0x4A328E: push    200h; a4
 0x4A3293: push    esi; Dst
 0x4A3294: mov     ecx, edi; a1
-0x4A3296: call    TESFile_GetChunkData
+0x4A3296: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4A329B: mov     eax, [ebx]
 0x4A329D: mov     edx, [eax+0D8h]
 0x4A32A3: push    esi
@@ -79,7 +78,7 @@
 0x4A32D4: push    eax
 0x4A32D5: mov     ecx, edi
 0x4A32D7: mov     [ebp+var_18], esi
-0x4A32DA: call    TESFile_GetChunkData4
+0x4A32DA: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x4A32DF: push    28h ; '('; Size
 0x4A32E1: call    FormHeapAlloc
 0x4A32E6: add     esp, 4
@@ -106,7 +105,7 @@
 0x4A3326: push    edx
 0x4A3327: mov     ecx, edi
 0x4A3329: mov     [ebp+var_14], esi
-0x4A332C: call    TESFile_GetChunkData4
+0x4A332C: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x4A3331: mov     ecx, [ebp+var_14]
 0x4A3334: cmp     ecx, esi
 0x4A3336: mov     [ebx+20h], ecx
@@ -171,7 +170,7 @@
 0x4A33E7: mov     ecx, esi
 0x4A33E9: call    sub_4A76F0
 0x4A33EE: push    esi
-0x4A33EF: call    FormHeapFree
+0x4A33EF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4A33F4: add     esp, 4
 0x4A33F7: mov     esi, [ebx+1Ch]
 0x4A33FA: jmp     short loc_4A33FF
@@ -192,3 +191,18 @@
 0x4A3420: mov     esp, ebp
 0x4A3422: pop     ebp
 0x4A3423: retn    4
+0x9B2680: mov     eax, [ebp+var_14]
+0x9B2683: push    eax
+0x9B2684: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B2689: pop     ecx
+0x9B268A: retn
+0x9B268B: mov     edx, [esp-4+arg_4]
+0x9B268F: lea     eax, [edx+0Ch]
+0x9B2692: mov     ecx, [edx-20h]
+0x9B2695: xor     ecx, eax
+0x9B2697: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B269C: mov     ecx, [edx-4]
+0x9B269F: xor     ecx, eax
+0x9B26A1: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B26A6: mov     eax, offset stru_ADE62C
+0x9B26AB: jmp     ___CxxFrameHandler3

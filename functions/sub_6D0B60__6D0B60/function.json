@@ -1,19 +1,32 @@
 {
-  "callees_count": 13,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6D0B60",
+      "0x6D0C25"
+    ]
+  ],
+  "chunks_sha256": "6a3c31ac2f81c750992166e9f9a9431c4ede9b387d4732d0329ddd99ba6aa9aa",
+  "comment_regular": "Samples every morph-target interpolator and writes the resulting floats into morphWeights (+0x40; data +0x44, size +0x4A). Although the ABI consumes one float stack argument (retn 4), the native body does not read it: interpolation uses the controller's cached time at NiTimeController +0x28. Callers pass that same cached value. This is controller time, not a direct morph weight.",
+  "comment_repeatable": "Samples every morph-target interpolator and writes the resulting floats into morphWeights (+0x40; data +0x44, size +0x4A). Although the ABI consumes one float stack argument (retn 4), the native body does not read it: interpolation uses the controller's cached time at NiTimeController +0x28. Callers pass that same cached value. This is controller time, not a direct morph weight.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6D0B60",
+  "display_name": "NiGeomMorpherController_SampleInterpolators",
   "end_ea": "0x6D0C25",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6D0B60",
+  "name": "NiGeomMorpherController_SampleInterpolators",
   "segment": ".text",
   "sha256": "6a3c31ac2f81c750992166e9f9a9431c4ede9b387d4732d0329ddd99ba6aa9aa",
   "size": 197,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6D0B60",
-  "type": "void __thiscall(float *this, int)",
+  "total_chunk_size": 197,
+  "type": "void __thiscall(NiGeomMorpherController *this, float unusedControllerTime)",
   "xrefs_from_count": 82,
   "xrefs_to_count": 1
 }

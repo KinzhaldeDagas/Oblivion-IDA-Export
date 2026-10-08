@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x536110",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+collidable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,13 +31,13 @@
   },
   {
     "ea": "0x53611B",
-    "line": "push    eax",
+    "line": "push    eax; collidable",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x53611C",
-    "line": "call    sub_8AFCE0",
+    "line": "call    bhkCollidable_ResolveNiAVObject; TES4 authoritative: resolves Havok collidable/contact reference to a NiAVObject when possible. Handles collidable type 1 directly and type 2 with a fallback through v5+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -67,13 +67,13 @@
   },
   {
     "ea": "0x536129",
-    "line": "mov     [esp+arg_0], eax",
+    "line": "mov     [esp+collidable], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x53612D",
-    "line": "jmp     sub_4DC270",
+    "line": "jmp     sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.",
     "mnemonic": "jmp",
     "size": 5
   },

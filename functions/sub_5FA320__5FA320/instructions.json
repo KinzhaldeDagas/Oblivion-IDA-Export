@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x5FA396",
-    "line": "mov     [esp+0B4h+var_9D], al",
+    "line": "mov     byte ptr [esp+0B4h+var_BC.data+1Fh], al",
     "mnemonic": "mov",
     "size": 4
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x5FA3BD",
-    "line": "mov     [esp+0B8h+var_94], 0",
+    "line": "mov     byte ptr [esp+0B8h+var_98.data+4], 0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x5FA3CB",
-    "line": "mov     [esp+0B4h+var_94], 1",
+    "line": "mov     byte ptr [esp+0B4h+var_98.data+4], 1",
     "mnemonic": "mov",
     "size": 5
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x5FA3DA",
-    "line": "mov     [esp+0B4h+var_9C], ebp",
+    "line": "mov     [esp+0B4h+var_BC.data+20h], ebp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -433,13 +433,13 @@
   },
   {
     "ea": "0x5FA3E9",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x5FA3EE",
-    "line": "mov     [esp+0BCh+var_9C], eax",
+    "line": "mov     [esp+0BCh+var_BC.data+20h], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x5FA3F7",
-    "line": "mov     ebp, [esp+0B4h+var_9C]",
+    "line": "mov     ebp, [esp+0B4h+var_BC.data+20h]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -499,19 +499,19 @@
   },
   {
     "ea": "0x5FA40E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FA410",
-    "line": "fstp    [esp+0B8h+var_B8]; float",
+    "line": "fstp    [esp+0B8h+var_BC.data+4]; radians",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5FA413",
-    "line": "call    sub_4D89D0",
+    "line": "call    TESObjectREFR_SetRotationX; TES4 authoritative: write reference rotation X at TESObjectREFR+0x20, then notify the reference through virtual slot +0x40 with change mask 4.",
     "mnemonic": "call",
     "size": 5
   },
@@ -733,7 +733,7 @@
   },
   {
     "ea": "0x5FA488",
-    "line": "mov     [esp+0B8h+var_9C], eax",
+    "line": "mov     [esp+0B8h+var_BC.data+20h], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x5FA499",
-    "line": "call    ??0HighProcess@@QAE@XZ; HighProcess::HighProcess(void)",
+    "line": "call    ??0HighProcess@@QAE@XZ; HighProcess constructor: derives from MiddleHighProcess, then installs HighProcess vtable and initializes movementFlags at +0x1FC to 0. Confirms movement flag storage is HighProcess-only.",
     "mnemonic": "call",
     "size": 5
   },
@@ -847,7 +847,7 @@
   },
   {
     "ea": "0x5FA4C3",
-    "line": "push    1",
+    "line": "push    1; int",
     "mnemonic": "push",
     "size": 2
   },
@@ -931,7 +931,7 @@
   },
   {
     "ea": "0x5FA4E9",
-    "line": "push    1",
+    "line": "push    1; int",
     "mnemonic": "push",
     "size": 2
   },
@@ -943,43 +943,43 @@
   },
   {
     "ea": "0x5FA4ED",
-    "line": "push    0",
+    "line": "push    0; relativeTo",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FA4EF",
-    "line": "push    0",
+    "line": "push    0; insertRelative",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FA4F1",
-    "line": "push    0",
+    "line": "push    0; append",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FA4F3",
-    "line": "push    0",
+    "line": "push    0; processLevel",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FA4F5",
-    "line": "push    esi",
+    "line": "push    esi; object",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FA4F6",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x5FA4FB",
-    "line": "call    sub_673A90",
+    "line": "call    ActorProcessManager_AddMobileObject; Generic ActorProcessManager insertion. Selects process-level collection 0..3, silently returns if object->GetProcessLevel() does not match, then inserts with ordering controls. Returns void; there is no insertion-success result. Used for actors, load/resurrection paths, and projectiles.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1081,7 +1081,7 @@
   },
   {
     "ea": "0x5FA531",
-    "line": "push    0",
+    "line": "push    0; int",
     "mnemonic": "push",
     "size": 2
   },
@@ -1123,7 +1123,7 @@
   },
   {
     "ea": "0x5FA547",
-    "line": "push    eax",
+    "line": "push    eax; int",
     "mnemonic": "push",
     "size": 1
   },
@@ -1183,7 +1183,7 @@
   },
   {
     "ea": "0x5FA563",
-    "line": "push    eax",
+    "line": "push    eax; float",
     "mnemonic": "push",
     "size": 1
   },
@@ -1243,7 +1243,7 @@
   },
   {
     "ea": "0x5FA57F",
-    "line": "push    eax",
+    "line": "push    eax; float",
     "mnemonic": "push",
     "size": 1
   },
@@ -1303,7 +1303,7 @@
   },
   {
     "ea": "0x5FA59B",
-    "line": "push    eax",
+    "line": "push    eax; float",
     "mnemonic": "push",
     "size": 1
   },
@@ -1363,7 +1363,7 @@
   },
   {
     "ea": "0x5FA5B2",
-    "line": "fstp    [esp+0E0h+var_BC]",
+    "line": "fstp    [esp+0E0h+var_BC.data]; int",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1405,7 +1405,7 @@
   },
   {
     "ea": "0x5FA5C5",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1423,7 +1423,7 @@
   },
   {
     "ea": "0x5FA5D0",
-    "line": "fld     [esp+0D8h+var_BC]",
+    "line": "fld     [esp+0D8h+var_BC.data]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1447,7 +1447,7 @@
   },
   {
     "ea": "0x5FA5DD",
-    "line": "fstp    [esp+0DCh+var_DC]",
+    "line": "fstp    [esp+0DCh+var_DC]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1477,7 +1477,7 @@
   },
   {
     "ea": "0x5FA5ED",
-    "line": "push    1; int",
+    "line": "push    1; float",
     "mnemonic": "push",
     "size": 2
   },
@@ -1585,7 +1585,7 @@
   },
   {
     "ea": "0x5FA61F",
-    "line": "call    sub_5EAE70",
+    "line": "call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1615,13 +1615,13 @@
   },
   {
     "ea": "0x5FA631",
-    "line": "push    1",
+    "line": "push    1; float",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FA633",
-    "line": "push    1",
+    "line": "push    1; float",
     "mnemonic": "push",
     "size": 2
   },
@@ -1663,7 +1663,7 @@
   },
   {
     "ea": "0x5FA644",
-    "line": "push    0",
+    "line": "push    0; float",
     "mnemonic": "push",
     "size": 2
   },
@@ -1687,19 +1687,19 @@
   },
   {
     "ea": "0x5FA652",
-    "line": "push    eax",
+    "line": "push    eax; float",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FA653",
-    "line": "push    0",
+    "line": "push    0; float",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FA655",
-    "line": "push    ecx",
+    "line": "push    ecx; float",
     "mnemonic": "push",
     "size": 1
   },
@@ -1711,19 +1711,19 @@
   },
   {
     "ea": "0x5FA659",
-    "line": "push    0",
+    "line": "push    0; float",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FA65B",
-    "line": "push    ebx",
+    "line": "push    ebx; float",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FA65C",
-    "line": "push    esi",
+    "line": "push    esi; float",
     "mnemonic": "push",
     "size": 1
   },
@@ -1765,7 +1765,7 @@
   },
   {
     "ea": "0x5FA670",
-    "line": "mov     [esp+108h+var_EC], edi",
+    "line": "mov     [esp+108h+var_EC], edi; float",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1873,7 +1873,7 @@
   },
   {
     "ea": "0x5FA6A5",
-    "line": "push    0",
+    "line": "push    0; float",
     "mnemonic": "push",
     "size": 2
   },
@@ -1927,7 +1927,7 @@
   },
   {
     "ea": "0x5FA6B8",
-    "line": "call    sub_41FFA0",
+    "line": "call    ExtraDataList_GetRagDollData; Returns the ragdoll payload stored in ExtraRagDollData, or null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1951,7 +1951,7 @@
   },
   {
     "ea": "0x5FA6C3",
-    "line": "call    sub_4212C0",
+    "line": "call    ExtraDataList_GetSavedHavokData; Returns ExtraSavedMovementData's saved-Havok-data pointer, or null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1981,7 +1981,7 @@
   },
   {
     "ea": "0x5FA6D0",
-    "line": "call    Actor_HandleDeathSTate????",
+    "line": "call    Actor_HandleDeathState",
     "mnemonic": "call",
     "size": 5
   },
@@ -2005,7 +2005,7 @@
   },
   {
     "ea": "0x5FA6E4",
-    "line": "push    0",
+    "line": "push    0; float",
     "mnemonic": "push",
     "size": 2
   },
@@ -2251,7 +2251,7 @@
   },
   {
     "ea": "0x5FA75D",
-    "line": "push    20h ; ' '",
+    "line": "push    20h ; ' '; encodedKey",
     "mnemonic": "push",
     "size": 2
   },
@@ -2269,13 +2269,13 @@
   },
   {
     "ea": "0x5FA763",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FA765",
-    "line": "call    sub_470D00",
+    "line": "call    ActorAnimData_HasAnimKey; Returns whether ActorAnimData +0x9C contains an entry for the encoded animation key. Presence test only; it does not select or play a sequence.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2329,7 +2329,7 @@
   },
   {
     "ea": "0x5FA781",
-    "line": "fstp    [esp+114h+var_114]; float",
+    "line": "fstp    [esp+114h+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -2341,19 +2341,19 @@
   },
   {
     "ea": "0x5FA786",
-    "line": "push    5; int",
+    "line": "push    5; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FA788",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FA78A",
-    "line": "call    sub_470FC0",
+    "line": "call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2377,7 +2377,7 @@
   },
   {
     "ea": "0x5FA794",
-    "line": "fstp    [esp+118h+var_118]",
+    "line": "fstp    [esp+118h+deltaTime]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -2407,25 +2407,25 @@
   },
   {
     "ea": "0x5FA79F",
-    "line": "call    sub_474AB0",
+    "line": "call    ActorAnimData_RestorePlaySavedSlot; Restores one saved active slot by resolving the encoded key in +0x9C, selecting its sequence entry, replaying it, and restoring the saved slot clock/state.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5FA7A4",
-    "line": "push    0",
+    "line": "push    0; slotSelector",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FA7A6",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FA7A8",
-    "line": "call    sub_4706E0",
+    "line": "call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].",
     "mnemonic": "call",
     "size": 5
   },
@@ -2449,7 +2449,7 @@
   },
   {
     "ea": "0x5FA7B3",
-    "line": "call    Actor_HandleDeathSTate????",
+    "line": "call    Actor_HandleDeathState",
     "mnemonic": "call",
     "size": 5
   },
@@ -2533,7 +2533,7 @@
   },
   {
     "ea": "0x5FA7DE",
-    "line": "fstp    [esp+118h+var_114]; float",
+    "line": "fstp    [esp+118h+easeOutTime]; explicitTimeOrMinusOne",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2545,19 +2545,19 @@
   },
   {
     "ea": "0x5FA7E4",
-    "line": "fstp    [esp+118h+var_118]; float",
+    "line": "fstp    [esp+118h+deltaTime]; deltaTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5FA7E7",
-    "line": "push    esi; int",
+    "line": "push    esi; ownerActor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FA7E8",
-    "line": "call    sub_476D10",
+    "line": "call    ActorAnimData_Update; CustomAnimSupport evidence: observed ActorAnimData update caller in process/action path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2575,7 +2575,7 @@
   },
   {
     "ea": "0x5FA7F0",
-    "line": "call    sub_474510",
+    "line": "call    ActorAnimData_ApplyToActor; Applies actor-dependent scene/node state through 0x471C00 and then calls ActorAnimData::ApplyActorAnimData. Called during NiNode generation, animation updates, body toggles, resurrection/fast travel, and first-person transitions.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2611,19 +2611,19 @@
   },
   {
     "ea": "0x5FA809",
-    "line": "mov     ecx, [ebp+68h]",
+    "line": "mov     ecx, [ebp+68h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x5FA80C",
-    "line": "push    1; ArgList",
+    "line": "push    1; noteIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FA80E",
-    "line": "call    sub_51AE20",
+    "line": "call    TESAnimGroup_GetRequiredNoteTime; Returns a 32-bit required-note time from TESAnimGroup +0x10 by zero-based note index after validating count, storage, and QNaN. Invalid entries report an error and return 0.0f.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2635,7 +2635,7 @@
   },
   {
     "ea": "0x5FA816",
-    "line": "fstp    [esp+118h+var_114]; float",
+    "line": "fstp    [esp+118h+easeOutTime]; explicitTimeOrMinusOne",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2653,19 +2653,19 @@
   },
   {
     "ea": "0x5FA81E",
-    "line": "fstp    [esp+118h+var_118]; float",
+    "line": "fstp    [esp+118h+deltaTime]; deltaTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5FA821",
-    "line": "push    esi; int",
+    "line": "push    esi; ownerActor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FA822",
-    "line": "call    sub_476D10",
+    "line": "call    ActorAnimData_Update; CustomAnimSupport evidence: observed ActorAnimData update caller in process/action path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2683,7 +2683,7 @@
   },
   {
     "ea": "0x5FA82A",
-    "line": "call    sub_474510",
+    "line": "call    ActorAnimData_ApplyToActor; Applies actor-dependent scene/node state through 0x471C00 and then calls ActorAnimData::ApplyActorAnimData. Called during NiNode generation, animation updates, body toggles, resurrection/fast travel, and first-person transitions.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2701,19 +2701,19 @@
   },
   {
     "ea": "0x5FA833",
-    "line": "lea     ecx, [esp+114h+var_BC]",
+    "line": "lea     ecx, [esp+114h+var_BC]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5FA837",
-    "line": "fstp    [esp+114h+var_114]; float",
+    "line": "fstp    [esp+114h+easeOutTime]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5FA83A",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2827,7 +2827,7 @@
   },
   {
     "ea": "0x5FA874",
-    "line": "fstp    [esp+118h+var_118]; float",
+    "line": "fstp    [esp+118h+deltaTime]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -2875,7 +2875,7 @@
   },
   {
     "ea": "0x5FA889",
-    "line": "call    sub_8AB440",
+    "line": "call    sub_8AB440; ODismemberment: recursive post-death Havok force/blend helper. Finds bhkBlendCollisionObject, bhkBlendController, bhkForceController, and bhkConstraint objects; suitable only for existing collision-enabled subtrees, not arbitrary detached art.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2941,7 +2941,7 @@
   },
   {
     "ea": "0x5FA8AF",
-    "line": "call    Actor_HandleDeathSTate????",
+    "line": "call    Actor_HandleDeathState",
     "mnemonic": "call",
     "size": 5
   },
@@ -2977,19 +2977,19 @@
   },
   {
     "ea": "0x5FA8C1",
-    "line": "lea     ecx, [esp+114h+var_98]",
+    "line": "lea     ecx, [esp+114h+var_98]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5FA8C5",
-    "line": "fstp    [esp+114h+var_114]; float",
+    "line": "fstp    [esp+114h+easeOutTime]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5FA8C8",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3091,7 +3091,7 @@
   },
   {
     "ea": "0x5FA8FE",
-    "line": "fstp    [esp+118h+var_118]; float",
+    "line": "fstp    [esp+118h+deltaTime]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -3145,7 +3145,7 @@
   },
   {
     "ea": "0x5FA917",
-    "line": "call    sub_8AB440",
+    "line": "call    sub_8AB440; ODismemberment: recursive post-death Havok force/blend helper. Finds bhkBlendCollisionObject, bhkBlendController, bhkForceController, and bhkConstraint objects; suitable only for existing collision-enabled subtrees, not arbitrary detached art.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3601,7 +3601,7 @@
   },
   {
     "ea": "0x5FA9EC",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3661,7 +3661,7 @@
   },
   {
     "ea": "0x5FAA06",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -3793,7 +3793,7 @@
   },
   {
     "ea": "0x5FAA47",
-    "line": "call    ShadowSceneNodeAddShadowCaster",
+    "line": "call    ShadowSceneNodeAddShadowCaster; Direct retail AddShadowCaster caller in mobile/actor NiNode lifecycle.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3805,7 +3805,7 @@
   },
   {
     "ea": "0x5FAA4E",
-    "line": "mov     ecx, [esp+120h+var_84]",
+    "line": "mov     ecx, [esp+120h+var_98.data+14h]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -3856,5 +3856,77 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C2AF0",
+    "line": "mov     eax, [ebp-8Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C2AF6",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C2AF7",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2AFC",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C2AFD",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C2AFE",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C2B02",
+    "line": "lea     eax, [edx-98h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C2B08",
+    "line": "mov     ecx, [edx-9Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C2B0E",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C2B10",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2B15",
+    "line": "mov     eax, offset stru_AEB888",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2B1A",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

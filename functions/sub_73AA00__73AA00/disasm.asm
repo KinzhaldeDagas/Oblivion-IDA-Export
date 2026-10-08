@@ -1,4 +1,4 @@
-0x73AA00: push    ecx
+0x73AA00: push    ecx; Pass226/227: NiScreenSpaceCamera stream/lifecycle reconstruction path for texture array; not a RenderScreenTexture submission.
 0x73AA01: mov     eax, [esp+4+arg_0]
 0x73AA05: push    ebx
 0x73AA06: push    ebp
@@ -14,7 +14,6 @@
 0x73AA20: jbe     short loc_73AA6D
 0x73AA22: lea     esi, [ebp+124h]
 0x73AA28: jmp     short loc_73AA30
-0x73AA2A: align 10h
 0x73AA30: movzx   ebx, word ptr [esi+0Ah]
 0x73AA34: movzx   eax, word ptr [esi+8]
 0x73AA38: cmp     ebx, eax
@@ -36,7 +35,7 @@
 0x73AA67: cmp     edi, [esp+14h+arg_0]
 0x73AA6B: jb      short loc_73AA30
 0x73AA6D: lea     ecx, [ebp+124h]
-0x73AA73: call    sub_739670
+0x73AA73: call    sub_739670; Pass227: Clears NiScreenSpaceCamera +0x134 texture array and releases live NiScreenTexture pointers.
 0x73AA78: movzx   eax, word ptr [ebp+13Eh]
 0x73AA7F: xor     ebx, ebx
 0x73AA81: test    eax, eax
@@ -60,12 +59,12 @@
 0x73AABB: push    ecx
 0x73AABC: push    edi
 0x73AABD: mov     ecx, esi
-0x73AABF: call    sub_7395A0
+0x73AABF: call    sub_7395A0; Pass226/227: NiScreenSpaceCamera texture-array element setter; AddRefs/Releases NiScreenTexture pointers and updates array counts only.
 0x73AAC4: add     ebx, 1
 0x73AAC7: cmp     ebx, [esp+14h+arg_0]
 0x73AACB: jb      short loc_73AA90
 0x73AACD: lea     ecx, [ebp+134h]
-0x73AAD3: call    sub_739670
+0x73AAD3: call    sub_739670; Pass227: Clears NiScreenSpaceCamera +0x134 texture array and releases live NiScreenTexture pointers.
 0x73AAD8: pop     edi
 0x73AAD9: pop     esi
 0x73AADA: pop     ebp

@@ -50,15 +50,15 @@
 0x68B58C: fstp    [esp+1Ch+var_C]
 0x68B590: lea     esi, [edi+14h]
 0x68B593: fldz
-0x68B595: mov     ecx, esi
+0x68B595: mov     ecx, esi; this
 0x68B597: fst     [esp+1Ch+var_8]
 0x68B59B: mov     bl, 1
 0x68B59D: fstp    [esp+1Ch+var_4]
-0x68B5A1: call    sub_42B410
+0x68B5A1: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x68B5A6: test    eax, eax
 0x68B5A8: jz      short loc_68B5C5
 0x68B5AA: mov     ecx, eax
-0x68B5AC: call    sub_6899C0
+0x68B5AC: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x68B5B1: mov     ecx, [eax]
 0x68B5B3: mov     [esp+1Ch+var_C], ecx
 0x68B5B7: mov     edx, [eax+4]
@@ -80,8 +80,8 @@
 0x68B5E7: call    sub_68BE10
 0x68B5EC: test    al, al
 0x68B5EE: jnz     short loc_68B627
-0x68B5F0: mov     ecx, esi
-0x68B5F2: call    sub_42B410
+0x68B5F0: mov     ecx, esi; this
+0x68B5F2: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x68B5F7: mov     edi, eax
 0x68B5F9: test    edi, edi
 0x68B5FB: jz      short loc_68B627
@@ -91,7 +91,7 @@
 0x68B608: call    eax
 0x68B60A: push    eax
 0x68B60B: mov     ecx, edi
-0x68B60D: call    sub_6899C0
+0x68B60D: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x68B612: mov     ecx, eax
 0x68B614: call    sub_8AA350
 0x68B619: test    al, al

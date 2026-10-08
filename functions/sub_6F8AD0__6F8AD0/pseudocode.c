@@ -1,6 +1,8 @@
-std::exception *__thiscall sub_6F8AD0(std::exception *this, struct std::exception *a2)
+OB_std_runtime_error_010201A0 *__thiscall sub_6F8AD0(
+        OB_std_runtime_error_010201A0 *this,
+        OB_std_runtime_error_010201A0 *source)
 {
-  sub_6F85B0(this, a2);
-  *(_DWORD *)this = &std::ios_base::failure::`vftable';
-  return this;
+  OB_std_runtime_error_CopyCtor_010201A0(this, source); /*0x6f8ad8*/
+  *(_DWORD *)this->exceptionBase = &std::ios_base::failure::`vftable'; /*0x6f8add*/
+  return this; /*0x6f8ae5*/
 }

@@ -4,8 +4,8 @@ int __cdecl sub_901060(int a1, int *a2, int a3, int a4)
   char v6; // [esp+4h] [ebp-8h]
   int v7; // [esp+8h] [ebp-4h]
 
-  v7 = a4;
-  v6 = 0;
-  v5 = &off_A9B4F0;
-  return sub_900420(a2, a1, a3, (int)&v5);
+  v7 = a4; /*0x901073*/
+  v6 = 0; /*0x90107e*/
+  v5 = &off_A9B4F0; /*0x901083*/
+  return sub_900420(a2, a1, a3, (int)&v5); /*0x901093*/
 }

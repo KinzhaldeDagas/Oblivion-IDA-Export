@@ -1,1 +1,1 @@
-hkEntityEntityBroadPhaseListener
+struct hkEntityEntityBroadPhaseListener;

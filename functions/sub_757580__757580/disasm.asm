@@ -38,28 +38,28 @@
 0x7575E2: fstp    st
 0x7575E4: lea     esi, [ecx+64h]
 0x7575E7: mov     ecx, 0Dh
-0x7575EC: lea     edi, [esp+148h+var_9C]
+0x7575EC: lea     edi, [esp+148h+local]
 0x7575F3: rep movsd
 0x7575F5: mov     esi, [ebx+10h]
 0x7575F8: add     esi, 64h ; 'd'
 0x7575FB: mov     ecx, 0Dh
 0x757600: lea     edi, [esp+148h+var_68]
-0x757607: lea     eax, [esp+148h+var_34]
+0x757607: lea     eax, [esp+148h+parent]
 0x75760E: rep movsd
 0x757610: push    eax
 0x757611: lea     ecx, [esp+14Ch+var_68]
-0x757618: call    sub_718A80
-0x75761D: lea     ecx, [esp+148h+var_9C]
-0x757624: push    ecx
-0x757625: lea     edx, [esp+14Ch+var_D0]
-0x757629: push    edx
-0x75762A: lea     ecx, [esp+150h+var_34]
-0x757631: call    sub_53D7A0
-0x757636: mov     eax, [esp+148h+var_AC]
+0x757618: call    sub_718A80;
+0x75761D: lea     ecx, [esp+148h+local]
+0x757624: push    ecx; local
+0x757625: lea     edx, [esp+14Ch+out]
+0x757629: push    edx; out
+0x75762A: lea     ecx, [esp+150h+parent]; parent
+0x757631: call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.
+0x757636: mov     eax, [esp+148h+out.pos.x]
 0x75763D: fld     dword ptr [ebx+20h]
-0x757640: mov     ecx, [esp+148h+var_A8]
+0x757640: mov     ecx, [esp+148h+out.pos.y]
 0x757647: fmul    qword ptr ds:0A2FAA0h
-0x75764D: mov     edx, [esp+148h+var_A4]
+0x75764D: mov     edx, [esp+148h+out.pos.z]
 0x757654: mov     [esp+148h+var_118], eax
 0x757658: mov     [esp+148h+var_114], ecx
 0x75765C: fstp    [esp+148h+var_E8]
@@ -67,7 +67,7 @@
 0x757663: push    eax
 0x757664: lea     ecx, [esp+14Ch+var_124]
 0x757668: push    ecx
-0x757669: lea     ecx, [esp+150h+var_D0]
+0x757669: lea     ecx, [esp+150h+out]
 0x757670: mov     [esp+150h+var_110], edx
 0x757674: call    sub_7101F0
 0x757679: mov     esi, [ebp+arg_4]

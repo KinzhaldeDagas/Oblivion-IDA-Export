@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x6DF998",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x6DF9C1",
-    "line": "mov     ecx, [edi+ebp]",
+    "line": "mov     ecx, [edi+ebp]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x6DF9C8",
-    "line": "call    sub_700900",
+    "line": "call    NiObject_CloneWithPointerMap; Clones a loaded NiObject with a temporary pointer map and runs clone post-processing; the returned scene object is distinct from its source.",
     "mnemonic": "call",
     "size": 5
   },

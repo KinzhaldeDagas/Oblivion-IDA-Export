@@ -1,0 +1,60 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "AVCollection",
+  "definition": "struct AVCollection\n{\nAVCollectionListNode list;\nAVCollectionEntry *magicka; ///< Verified ID9: ctor writes key9; name API table cell B1277C -> setting B3A07C; initializer 9F9780 registers Magicka/sDerivedAttributeNameMagicka.\nAVCollectionEntry *fatigue; ///< Verified ID10: ctor writes key10; name table cell B12780 -> setting B3A084; initializer 9F97A0 registers Fatigue/sDerivedAttributeNameFatigue.\nAVCollectionIndex *indexedEntries;\n}\n",
+  "kind": "struct",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "list",
+      "offset_bits": 0,
+      "offset_bytes": 0,
+      "size_bits": 64,
+      "type": "AVCollectionListNode"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified ID9: ctor writes key9; name API table cell B1277C -> setting B3A07C; initializer 9F9780 registers Magicka/sDerivedAttributeNameMagicka.",
+      "name": "magicka",
+      "offset_bits": 64,
+      "offset_bytes": 8,
+      "size_bits": 32,
+      "type": "AVCollectionEntry *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified ID10: ctor writes key10; name table cell B12780 -> setting B3A084; initializer 9F97A0 registers Fatigue/sDerivedAttributeNameFatigue.",
+      "name": "fatigue",
+      "offset_bits": 96,
+      "offset_bytes": 12,
+      "size_bits": 32,
+      "type": "AVCollectionEntry *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "indexedEntries",
+      "offset_bits": 128,
+      "offset_bytes": 16,
+      "size_bits": 32,
+      "type": "AVCollectionIndex *"
+    }
+  ],
+  "name": "AVCollection",
+  "ordinal": 9967,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 20
+}

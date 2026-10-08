@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4B2D30",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; [constructor audit] Initializes NiTArray<NiPointer<NiAVObject>>. Capacity0 branch at4B2DD6 writes data=NULL and makes no allocation. Nonzero capacity allocates4+capacity*4 with a count cookie and constructs NiPointer elements; NULL heap result yields data=NULL. Frond group constructor70B780 uses capacity0, so the nonzero allocation branch is not part of that plugin creation path.",
     "mnemonic": "push",
     "size": 2
   },
@@ -85,13 +85,13 @@
   },
   {
     "ea": "0x4B2D56",
-    "line": "mov     eax, [esp+20h+arg_0]",
+    "line": "mov     eax, dword ptr [esp+20h+capacity]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4B2D5A",
-    "line": "mov     cx, [esp+20h+arg_4]",
+    "line": "mov     cx, [esp+20h+grow]",
     "mnemonic": "mov",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x4B2DA6",
-    "line": "mov     [esp+20h+arg_0], eax",
+    "line": "mov     dword ptr [esp+20h+capacity], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x4B2DB2",
-    "line": "push    offset sub_7016A0; a5",
+    "line": "push    offset NiPointerSlot_Release; a5",
     "mnemonic": "push",
     "size": 5
   },
@@ -406,5 +406,77 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C6200",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C6203",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C6204",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C6209",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C620A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C620B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C620F",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C6212",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C6215",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C6217",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C621C",
+    "line": "mov     eax, offset stru_AEE7E8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C6221",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -11,71 +11,71 @@ _BYTE *__cdecl sub_71D4A0(int a1, _BYTE *a2, int a3, _BYTE *a4, int a5, int a6, 
   int v15; // edi
   _BYTE *v16; // eax
 
-  v7 = *(_DWORD *)(a5 + 0x14);
-  result = (_BYTE *)a6;
-  if ( *(_DWORD *)(a6 + 4) == 0xFF00 )
+  v7 = *(_DWORD *)(a5 + 0x14); /*0x71d4a4*/
+  result = (_BYTE *)a6; /*0x71d4a7*/
+  if ( *(_DWORD *)(a6 + 4) == 0xFF00 ) /*0x71d4b2*/
   {
-    result = *(_BYTE **)a6;
-    if ( *(_DWORD *)a6 == 0xFF )
+    result = *(_BYTE **)a6; /*0x71d4b8*/
+    if ( *(_DWORD *)a6 == 0xFF ) /*0x71d4c3*/
     {
-      result = a2;
-      if ( a2 )
+      result = a2; /*0x71d4c5*/
+      if ( a2 ) /*0x71d4cb*/
       {
-        v9 = a7;
-        v10 = a2;
-        result = a4;
-        do
+        v9 = a7; /*0x71d4d5*/
+        v10 = a2; /*0x71d4d9*/
+        result = a4; /*0x71d4db*/
+        do /*0x71d517*/
         {
-          if ( a1 )
+          if ( a1 ) /*0x71d4e2*/
           {
-            v11 = a1;
-            do
+            v11 = a1; /*0x71d4e4*/
+            do /*0x71d512*/
             {
-              *result = *(_BYTE *)(v7 + 4 * *v9);
-              v12 = result + 1;
-              *v12++ = *(_BYTE *)(v7 + 4 * *v9 + 1);
-              *v12 = *(_BYTE *)(v7 + 4 * *v9 + 2);
-              result = v12 + 1;
-              ++v9;
-              --v11;
+              *result = *(_BYTE *)(v7 + 4 * *v9); /*0x71d4ed*/
+              v12 = result + 1; /*0x71d4f7*/
+              *v12++ = *(_BYTE *)(v7 + 4 * *v9 + 1); /*0x71d4fa*/
+              *v12 = *(_BYTE *)(v7 + 4 * *v9 + 2); /*0x71d507*/
+              result = v12 + 1; /*0x71d509*/
+              ++v9; /*0x71d50c*/
+              --v11; /*0x71d50f*/
             }
-            while ( v11 );
+            while ( v11 ); /*0x71d512*/
           }
-          --v10;
+          --v10; /*0x71d514*/
         }
-        while ( v10 );
+        while ( v10 ); /*0x71d517*/
       }
     }
-    else if ( result == (_BYTE *)0xFF0000 )
+    else if ( result == (_BYTE *)0xFF0000 ) /*0x71d523*/
     {
-      result = a2;
-      if ( a2 )
+      result = a2; /*0x71d525*/
+      if ( a2 ) /*0x71d52b*/
       {
-        v13 = a7;
-        v14 = a2;
-        result = a4;
-        do
+        v13 = a7; /*0x71d531*/
+        v14 = a2; /*0x71d535*/
+        result = a4; /*0x71d537*/
+        do /*0x71d577*/
         {
-          if ( a1 )
+          if ( a1 ) /*0x71d542*/
           {
-            v15 = a1;
-            do
+            v15 = a1; /*0x71d544*/
+            do /*0x71d572*/
             {
-              *result = *(_BYTE *)(v7 + 4 * *v13 + 2);
-              v16 = result + 1;
-              *v16++ = *(_BYTE *)(v7 + 4 * *v13 + 1);
-              *v16 = *(_BYTE *)(v7 + 4 * *v13);
-              result = v16 + 1;
-              ++v13;
-              --v15;
+              *result = *(_BYTE *)(v7 + 4 * *v13 + 2); /*0x71d54e*/
+              v16 = result + 1; /*0x71d558*/
+              *v16++ = *(_BYTE *)(v7 + 4 * *v13 + 1); /*0x71d55b*/
+              *v16 = *(_BYTE *)(v7 + 4 * *v13); /*0x71d567*/
+              result = v16 + 1; /*0x71d569*/
+              ++v13; /*0x71d56c*/
+              --v15; /*0x71d56f*/
             }
-            while ( v15 );
+            while ( v15 ); /*0x71d572*/
           }
-          --v14;
+          --v14; /*0x71d574*/
         }
-        while ( v14 );
+        while ( v14 ); /*0x71d577*/
       }
     }
   }
-  return result;
+  return result; /*0x71d51d*/
 }

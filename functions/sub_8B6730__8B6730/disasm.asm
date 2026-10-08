@@ -11,7 +11,7 @@
 0x8B6747: jz      short loc_8B674E
 0x8B6749: add     eax, 10h
 0x8B674C: jmp     short loc_8B6753
-0x8B674E: mov     eax, offset stru_BA7A40
+0x8B674E: mov     eax, offset unk_BA7A40
 0x8B6753: push    eax
 0x8B6754: lea     ecx, [edi+10h]
 0x8B6757: call    sub_47DCD0
@@ -21,7 +21,7 @@
 0x8B6763: test    esi, esi
 0x8B6765: lea     eax, [esi+20h]
 0x8B6768: jnz     short loc_8B676F
-0x8B676A: mov     eax, offset stru_BA7A40
+0x8B676A: mov     eax, offset unk_BA7A40
 0x8B676F: push    eax
 0x8B6770: lea     ecx, [edi+20h]
 0x8B6773: call    sub_47DCD0

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8CF3B0",
-    "line": "push    ebp",
+    "line": "push    ebp; TES4 authoritative: OnGround state update. Uses desired movement at proxy+0x290, calls shared velocity solver, applies ground/contact velocity projection, and compares current z against water height +0x318 for gravity correction.",
     "mnemonic": "push",
     "size": 1
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x8CF4A2",
-    "line": "call    sub_91F430",
+    "line": "call    bhkCharacterState_SolveVelocityToTarget; OnGround low-speed solver setup: response=1.0, basis slots use proxy+0x2C0/+0x2B0/+0x2B0, desired local velocity is swizzled from proxy+0x290, maxDelta=100000, reference=proxy+0x280.",
     "mnemonic": "call",
     "size": 5
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x8CF53E",
-    "line": "call    sub_91F430",
+    "line": "call    bhkCharacterState_SolveVelocityToTarget; MorrowindMovements: OnGround solver consumes desired vector from proxy+0x290 and writes solved velocity to proxy+0x2E0. Desired-vector scaling may need a post-solve cap because projection/reference velocity can preserve horizontal speed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -775,13 +775,13 @@
   },
   {
     "ea": "0x8CF5FB",
-    "line": "movaps  xmmword ptr [edi], xmm1",
+    "line": "movaps  xmmword ptr [edi], xmm1; MorrowindMovements: final OnGround velocity in proxy+0x2E0 is multiplied by proxy+0x324 before water/gravity correction; post-state hook can cap horizontal solved velocity after this vanilla output exists.",
     "mnemonic": "movaps",
     "size": 3
   },
   {
     "ea": "0x8CF5FE",
-    "line": "call    sub_891440",
+    "line": "call    bhkCharacterController_ReadRelativePosition; TES4 authoritative: reads current proxy position. Gets collision object transform at 0x8AC070, subtracts metadata/world transform basis offset, returns Havok-unit position.",
     "mnemonic": "call",
     "size": 5
   },
@@ -811,7 +811,7 @@
   },
   {
     "ea": "0x8CF616",
-    "line": "fld     dword ptr [esi+318h]",
+    "line": "fld     dword ptr [esi+318h]; OnGround state compares current position z against proxy+0x318 water height before applying gravity correction.",
     "mnemonic": "fld",
     "size": 6
   },
@@ -835,7 +835,7 @@
   },
   {
     "ea": "0x8CF623",
-    "line": "jp      short loc_8CF683",
+    "line": "jp      short loc_8CF683; TES4 authoritative OnGround: position read is only compared against proxy+0x318 water height for gravity correction; not a ledge/clearance test.",
     "mnemonic": "jp",
     "size": 2
   },
@@ -1027,7 +1027,7 @@
   },
   {
     "ea": "0x8CF68E",
-    "line": "call    sub_890720",
+    "line": "call    sub_890720; MorrowindMovements: commits pending state at proxy+0x2A0 into hkCharacterContext state slot proxy+0x1EC, then resets pending state to sentinel 0x0B. Use +0x1EC as active state when +0x2A0 is sentinel.",
     "mnemonic": "call",
     "size": 5
   },

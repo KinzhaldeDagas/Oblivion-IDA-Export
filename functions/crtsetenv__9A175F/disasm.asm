@@ -36,19 +36,19 @@
 0x9A17AD: jz      short loc_9A17ED
 0x9A17AF: xor     ecx, ecx
 0x9A17B1: cmp     [eax+1], bl
-0x9A17B4: mov     eax, dword_BA9DB4
+0x9A17B4: mov     eax, dword ptr unk_BA9DB4
 0x9A17B9: setz    cl
-0x9A17BC: cmp     eax, dword_BA9DB8
+0x9A17BC: cmp     eax, dword ptr unk_BA9DB8
 0x9A17C2: mov     [ebp+var_8], ecx
 0x9A17C5: jnz     short loc_9A17D3
 0x9A17C7: mov     edi, eax
 0x9A17C9: call    _copy_environ
-0x9A17CE: mov     dword_BA9DB4, eax
+0x9A17CE: mov     dword ptr unk_BA9DB4, eax
 0x9A17D3: cmp     eax, ebx
 0x9A17D5: jnz     short loc_9A1837
 0x9A17D7: cmp     [ebp+arg_4], ebx
 0x9A17DA: jz      short loc_9A1800
-0x9A17DC: cmp     dword_BA9DBC, ebx
+0x9A17DC: cmp     dword ptr unk_BA9DBC, ebx
 0x9A17E2: jz      short loc_9A1800
 0x9A17E4: call    ___wtomb_environ
 0x9A17E9: test    eax, eax
@@ -67,19 +67,19 @@
 0x9A180B: call    unknown_libname_72
 0x9A1810: cmp     eax, ebx
 0x9A1812: pop     ecx
-0x9A1813: mov     dword_BA9DB4, eax
+0x9A1813: mov     dword ptr unk_BA9DB4, eax
 0x9A1818: jz      short loc_9A17F8
 0x9A181A: mov     [eax], ebx
-0x9A181C: cmp     dword_BA9DBC, ebx
+0x9A181C: cmp     dword ptr unk_BA9DBC, ebx
 0x9A1822: jnz     short loc_9A1837
 0x9A1824: push    4
 0x9A1826: call    unknown_libname_72
 0x9A182B: cmp     eax, ebx
 0x9A182D: pop     ecx
-0x9A182E: mov     dword_BA9DBC, eax
+0x9A182E: mov     dword ptr unk_BA9DBC, eax
 0x9A1833: jz      short loc_9A17F8
 0x9A1835: mov     [eax], ebx
-0x9A1837: mov     esi, dword_BA9DB4
+0x9A1837: mov     esi, dword ptr unk_BA9DB4
 0x9A183D: cmp     esi, ebx
 0x9A183F: mov     [ebp+var_14], esi
 0x9A1842: jz      short loc_9A17F8
@@ -115,7 +115,7 @@
 0x9A1892: jnb     short loc_9A18FE
 0x9A1894: push    4
 0x9A1896: push    edi
-0x9A1897: push    dword_BA9DB4
+0x9A1897: push    dword ptr unk_BA9DB4
 0x9A189D: call    unknown_libname_78
 0x9A18A2: add     esp, 0Ch
 0x9A18A5: cmp     eax, ebx
@@ -133,7 +133,7 @@
 0x9A18CA: jnb     loc_9A17F8
 0x9A18D0: push    eax
 0x9A18D1: push    4
-0x9A18D3: push    dword_BA9DB4
+0x9A18D3: push    dword ptr unk_BA9DB4
 0x9A18D9: call    unknown_libname_78
 0x9A18DE: add     esp, 0Ch
 0x9A18E1: cmp     eax, ebx
@@ -144,7 +144,7 @@
 0x9A18F1: mov     [ecx+4], ebx
 0x9A18F4: mov     ecx, [ebp+arg_0]
 0x9A18F7: mov     [ecx], ebx
-0x9A18F9: mov     dword_BA9DB4, eax
+0x9A18F9: mov     dword ptr unk_BA9DB4, eax
 0x9A18FE: cmp     [ebp+arg_4], ebx
 0x9A1901: jz      short loc_9A197B
 0x9A1903: mov     esi, [ebp+Str]

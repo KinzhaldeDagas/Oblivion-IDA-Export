@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x7965E0",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; Oblivion CIndexedGeometry::AddVertexBinormal. Appends one xyz binormal to the indexed vertex stream.",
     "mnemonic": "sub",
     "size": 3
   },
   {
     "ea": "0x7965E3",
-    "line": "mov     eax, [esp+0Ch+arg_0]",
+    "line": "mov     eax, [esp+0Ch+binormal]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x7965EA",
-    "line": "fstp    [esp+10h+var_C]",
+    "line": "fstp    [esp+10h+value]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x7965F7",
-    "line": "mov     ecx, esi; int",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -61,13 +61,13 @@
   },
   {
     "ea": "0x796600",
-    "line": "lea     eax, [esp+10h+var_C]",
+    "line": "lea     eax, [esp+10h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x796604",
-    "line": "push    eax; int",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x796609",
-    "line": "call    sub_785F30",
+    "line": "call    OB_stVector_float_PushBack_010201A0; Oblivion compact float-vector push_back. Appends a 4-byte float in place when capacity remains; otherwise delegates to the reallocation/insertion path. Shared by spline tangent lengths and indexed-geometry float streams.",
     "mnemonic": "call",
     "size": 5
   },
@@ -91,19 +91,19 @@
   },
   {
     "ea": "0x796612",
-    "line": "push    ecx; int",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x796613",
-    "line": "mov     ecx, esi; int",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x796615",
-    "line": "call    sub_785F30",
+    "line": "call    OB_stVector_float_PushBack_010201A0; Oblivion compact float-vector push_back. Appends a 4-byte float in place when capacity remains; otherwise delegates to the reallocation/insertion path. Shared by spline tangent lengths and indexed-geometry float streams.",
     "mnemonic": "call",
     "size": 5
   },
@@ -115,19 +115,19 @@
   },
   {
     "ea": "0x79661E",
-    "line": "push    edx; int",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79661F",
-    "line": "mov     ecx, esi; int",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x796621",
-    "line": "call    sub_785F30",
+    "line": "call    OB_stVector_float_PushBack_010201A0; Oblivion compact float-vector push_back. Appends a 4-byte float in place when capacity remains; otherwise delegates to the reallocation/insertion path. Shared by spline tangent lengths and indexed-geometry float streams.",
     "mnemonic": "call",
     "size": 5
   },

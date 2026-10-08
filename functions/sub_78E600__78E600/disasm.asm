@@ -1,4 +1,4 @@
-0x78E600: push    ecx
+0x78E600: push    ecx; Oblivion stVec::Magnitude: sums squares over the vector's logical size and returns sqrt(sum). Exact behavior corroborated by RT4.1 Vec.cpp.
 0x78E601: fldz
 0x78E603: push    esi
 0x78E604: push    edi

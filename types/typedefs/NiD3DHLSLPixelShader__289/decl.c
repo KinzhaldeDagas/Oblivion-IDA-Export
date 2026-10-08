@@ -1,1 +1,1 @@
-NiD3DHLSLPixelShader
+struct NiD3DHLSLPixelShader;

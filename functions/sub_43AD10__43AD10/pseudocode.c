@@ -1,19 +1,20 @@
-LONG __thiscall sub_43AD10(_DWORD *this)
+// QueuedDistantLOD load-complete path: loads queued model, applies transform/context through 0x435060, then enqueues completion on IO manager queue.
+NiAVObject *__thiscall sub_43AD10(volatile LONG *this)
 {
-  LONG result; // eax
+  NiAVObject *result; // eax
   IOManager *v3; // edi
   int v4[4]; // [esp-4h] [ebp-10h] BYREF
 
-  sub_439400(this);
-  result = *(this + 0xA);
-  if ( result )
+  QueuedTexture_LoadModelStream(this); /*0x43ad15*/
+  result = *((NiAVObject **)this + 0xA); /*0x43ad1a*/
+  if ( result ) /*0x43ad1f*/
   {
-    sub_435060(this, result, *(this + 0xE));
-    v3 = ioManager;
-    v4[0] = (int)this;
-    v4[3] = (int)v4;
-    InterlockedIncrement(this + 2);
-    return sub_43A5F0(&v3->members.taskQueue->vtbl, v4[0]);
+    QueuedDistantLOD_ApplyTransform((QueuedDistantLOD *)this, result, *((DistantLODQueuedInstanceData **)this + 0xE)); /*0x43ad28*/
+    v3 = MEMORY[0xB33A10]; /*0x43ad2d*/
+    v4[0] = (int)this; /*0x43ad36*/
+    v4[3] = (int)v4; /*0x43ad38*/
+    InterlockedIncrement(this + 2); /*0x43ad40*/
+    return (NiAVObject *)sub_43A5F0(&v3->members.taskQueue->vtbl, v4[0]); /*0x43ad49*/
   }
-  return result;
+  return result; /*0x43ad4e*/
 }

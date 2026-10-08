@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8AC3C0",
-    "line": "push    ebp",
+    "line": "push    ebp; TES4 authoritative: converts a 0x40-byte manifold/contact surface into a support surface constraint when its dot against the up/support basis is between 0.01 and the proxy slope limit.",
     "mnemonic": "push",
     "size": 1
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x8AC3F9",
-    "line": "movss   dword ptr [ecx], xmm2",
+    "line": "movss   dword ptr [ecx], xmm2; Computes dot(candidate surface vector, up/support basis) for support-surface filtering.",
     "mnemonic": "movss",
     "size": 4
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x8AC41E",
-    "line": "jp      loc_8AC51D",
+    "line": "jp      loc_8AC51D; Rejects surfaces with dot <= 0.01 or dot >= proxy slope limit; accepted surfaces are projected into the horizontal/support plane.",
     "mnemonic": "jp",
     "size": 6
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x8AC4A2",
-    "line": "addps   xmm1, xmm2",
+    "line": "addps   xmm1, xmm2; Removes the up/support-basis component from the surface vector before normalizing it for the support constraint.",
     "mnemonic": "addps",
     "size": 3
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x8AC512",
-    "line": "movaps  xmmword ptr [eax], xmm2",
+    "line": "movaps  xmmword ptr [eax], xmm2; Stores normalized projected support constraint vector in the 0x40-byte surface entry.",
     "mnemonic": "movaps",
     "size": 3
   },

@@ -27,7 +27,7 @@
 0x697AD2: cmp     dword ptr [ebp+80h], 0
 0x697AD9: jnz     loc_697C6F
 0x697ADF: mov     ecx, ebp; this
-0x697AE1: call    MobileObject_GetCharProxy
+0x697AE1: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x697AE6: fld     dword ptr [eax+318h]
 0x697AEC: mov     edx, [ebp+0]
 0x697AEF: fstp    [esp+78h+var_68]
@@ -76,15 +76,15 @@
 0x697B7D: mov     [esp+6Ch+var_4C], edx
 0x697B81: fstp    [esp+6Ch+var_2C]
 0x697B85: fstp    [esp+6Ch+var_28]
-0x697B89: call    MobileObject_GetCharProxy
+0x697B89: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x697B8E: test    eax, eax
 0x697B90: jz      short loc_697BA5
 0x697B92: lea     eax, [esp+6Ch+var_54]
 0x697B96: push    eax
 0x697B97: mov     ecx, ebp; this
-0x697B99: call    MobileObject_GetCharProxy
+0x697B99: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x697B9E: mov     ecx, eax
-0x697BA0: call    sub_5E1500
+0x697BA0: call    sub_5E1500; TES4 authoritative: reads proxy position via 0x891440 and converts Havok units back to TES/world units via 0x43F3E0.
 0x697BA5: mov     edx, [ebp+0]
 0x697BA8: fld     [esp+6Ch+arg_C]
 0x697BAC: mov     edx, [edx+1B4h]
@@ -102,15 +102,15 @@
 0x697BD6: mov     ecx, ebp; this
 0x697BD8: mov     dword ptr [esp+78h+var_54], eax
 0x697BDC: mov     [esp+78h+var_4C], edx
-0x697BE0: call    MobileObject_GetCharProxy
+0x697BE0: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x697BE5: test    eax, eax
 0x697BE7: jz      short loc_697BFC
 0x697BE9: lea     eax, [esp+78h+var_54]
 0x697BED: push    eax
 0x697BEE: mov     ecx, ebp; this
-0x697BF0: call    MobileObject_GetCharProxy
+0x697BF0: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x697BF5: mov     ecx, eax
-0x697BF7: call    sub_5E1500
+0x697BF7: call    sub_5E1500; TES4 authoritative: reads proxy position via 0x891440 and converts Havok units back to TES/world units via 0x43F3E0.
 0x697BFC: fld     dword ptr [esp+78h+var_54]
 0x697C00: lea     ecx, [esp+78h+var_30]
 0x697C04: fsub    dword ptr [esp+78h+var_60]
@@ -121,7 +121,7 @@
 0x697C18: fld     [esp+78h+var_4C]
 0x697C1C: fsub    [esp+78h+var_58]
 0x697C20: fstp    [esp+78h+var_28]
-0x697C24: call    sub_404C90
+0x697C24: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x697C29: fadd    dword ptr [ebp+60h]
 0x697C2C: fstp    [esp+78h+var_68]
 0x697C30: fld     [esp+78h+var_68]
@@ -176,7 +176,7 @@
 0x697CE1: lea     eax, [esp+7Ch+var_64]
 0x697CE5: push    eax
 0x697CE6: call    edx
-0x697CE8: mov     eax, dword ptr [esp+78h+var_64]
+0x697CE8: mov     eax, [esp+78h+var_64]
 0x697CEC: test    eax, eax
 0x697CEE: jz      short loc_697D0E
 0x697CF0: mov     edi, eax
@@ -267,7 +267,7 @@
 0x697DBB: mov     ecx, esi
 0x697DBD: call    sub_696C00
 0x697DC2: push    esi
-0x697DC3: call    FormHeapFree
+0x697DC3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x697DC8: mov     ecx, dword ptr [esp+7Ch+var_60]
 0x697DCC: add     esp, 4
 0x697DCF: jmp     short loc_697DD5
@@ -311,7 +311,7 @@
 0x697E69: push    ecx
 0x697E6A: lea     ecx, [esp+80h+var_54]
 0x697E6E: fstp    [esp+80h+var_80]; float
-0x697E71: call    sub_404C90
+0x697E71: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x697E76: mov     ecx, [ebp+7Ch]
 0x697E79: sub     esp, 8
 0x697E7C: fstp    [esp+88h+var_84]; float
@@ -325,7 +325,7 @@
 0x697E9D: fstp    [esp+78h+var_4C]
 0x697EA1: fld     [esp+78h+arg_0]
 0x697EA5: fstp    [esp+78h+var_60]
-0x697EA9: call    sub_404C90
+0x697EA9: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x697EAE: fld     [esp+78h+var_60]
 0x697EB2: fxch    st(1)
 0x697EB4: call    sub_98598A
@@ -352,15 +352,15 @@
 0x697F09: rep movsd
 0x697F0B: jmp     loc_697FEF
 0x697F10: mov     ecx, ebp; this
-0x697F12: call    MobileObject_GetCharProxy
+0x697F12: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x697F17: test    eax, eax
 0x697F19: jz      loc_697FEF
 0x697F1F: lea     edx, [esp+78h+var_30]
 0x697F23: push    edx
 0x697F24: mov     ecx, ebp; this
-0x697F26: call    MobileObject_GetCharProxy
+0x697F26: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x697F2B: mov     ecx, eax
-0x697F2D: call    sub_5E1500
+0x697F2D: call    sub_5E1500; TES4 authoritative: reads proxy position via 0x891440 and converts Havok units back to TES/world units via 0x43F3E0.
 0x697F32: fld     [esp+78h+var_48]
 0x697F36: fsub    [esp+78h+var_30]
 0x697F3A: lea     ecx, [esp+78h+var_3C]
@@ -371,7 +371,7 @@
 0x697F4E: fld     [esp+78h+var_40]
 0x697F52: fsub    [esp+78h+var_28]
 0x697F56: fstp    [esp+78h+var_34]
-0x697F5A: call    sub_404C90
+0x697F5A: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x697F5F: test    bl, bl
 0x697F61: fstp    dword ptr [esp+78h+var_60]
 0x697F65: jz      short loc_697F85
@@ -395,22 +395,22 @@
 0x697F9F: fld     [esp+88h+arg_0]
 0x697FA6: fstp    [esp+88h+var_88]; float
 0x697FA9: call    sub_7F3530
-0x697FAE: mov     ecx, [ebp+7Ch]
-0x697FB1: call    nullsub_returnFalse_0arg
+0x697FAE: mov     ecx, [ebp+7Ch]; this
+0x697FB1: call    TESForm__IsActor; [Verified] Shared leaf returning false (zero), despite the TESForm::IsActor symbol. BSTempEffect base vtable 0xA681AC uses it at +0x58 for IsSaveable; NiAdditionalGeometryData vtable 0xA45EC4 uses it at +0x4C and other classes reuse it. The leaf has no unique class identity.
 0x697FB6: test    al, al
 0x697FB8: jz      short loc_697FEF
 0x697FBA: lea     ecx, [esp+78h+arg_0]
 0x697FBE: push    ecx
 0x697FBF: mov     ecx, ebp; this
 0x697FC1: mov     dword ptr [ebp+80h], 2
-0x697FCB: call    MobileObject_GetCharProxy
+0x697FCB: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x697FD0: mov     ecx, eax
-0x697FD2: call    sub_57E270
+0x697FD2: call    bhkCharacterProxy_GetCollisionFilterInfo; Reads collision filter info from proxy metadata: proxy+0x364 -> +8 -> +0x14 -> +0x1C. Used to preserve actor identity in raycast filter high 16 bits.
 0x697FD7: mov     eax, [esp+78h+arg_0]
 0x697FDB: or      eax, 4000h
 0x697FE0: push    eax
 0x697FE1: mov     ecx, ebp; this
-0x697FE3: call    MobileObject_GetCharProxy
+0x697FE3: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x697FE8: mov     ecx, eax
 0x697FEA: call    sub_694FC0
 0x697FEF: mov     esi, [ebp+94h]
@@ -450,7 +450,7 @@
 0x698072: mov     ecx, esi; this
 0x698074: call    sub_6B73E0
 0x698079: push    esi
-0x69807A: call    FormHeapFree
+0x69807A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x69807F: add     esp, 4
 0x698082: mov     dword ptr [ebp+9Ch], 0
 0x69808C: cmp     dword ptr [ebp+84h], 0

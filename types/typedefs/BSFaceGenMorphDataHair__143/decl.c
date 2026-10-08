@@ -1,1 +1,1 @@
-BSFaceGenMorphDataHair
+struct BSFaceGenMorphDataHair;

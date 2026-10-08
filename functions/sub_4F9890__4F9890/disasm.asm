@@ -18,20 +18,20 @@
 0x4F98B6: jz      short loc_4F98CB
 0x4F98B8: push    0FFFFFFFFh; a2
 0x4F98BA: mov     ecx, ebx; this
-0x4F98BC: call    TESForm_GetOverrideFile
+0x4F98BC: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x4F98C1: push    eax; a2
 0x4F98C2: push    esi; a1
-0x4F98C3: call    TESForm_ResolveFormID
+0x4F98C3: call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.
 0x4F98C8: add     esp, 8
 0x4F98CB: add     esi, 4
 0x4F98CE: cmp     dword ptr [esi], 0
 0x4F98D1: jz      short loc_4F98E6
 0x4F98D3: push    0FFFFFFFFh; a2
 0x4F98D5: mov     ecx, ebx; this
-0x4F98D7: call    TESForm_GetOverrideFile
+0x4F98D7: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x4F98DC: push    eax; a2
 0x4F98DD: push    esi; a1
-0x4F98DE: call    TESForm_ResolveFormID
+0x4F98DE: call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.
 0x4F98E3: add     esp, 8
 0x4F98E6: mov     edi, [edi+4]
 0x4F98E9: test    edi, edi

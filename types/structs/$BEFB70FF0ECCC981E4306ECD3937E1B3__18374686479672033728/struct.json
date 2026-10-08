@@ -1,28 +1,54 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "$BEFB70FF0ECCC981E4306ECD3937E1B3",
+  "definition": "union __declspec(align(8)) $BEFB70FF0ECCC981E4306ECD3937E1B3\n{\nLPWSTR pOleStr;\nUINT uOffset;\nchar cStr[260];\n}\n",
   "id": 18374686479672033728,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pOleStr",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "LPWSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "uOffset",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cStr",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 260
+      "size": 260,
+      "type": "char[260]"
     }
   ],
   "name": "$BEFB70FF0ECCC981E4306ECD3937E1B3",
+  "ordinal": 3624,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 264
 }

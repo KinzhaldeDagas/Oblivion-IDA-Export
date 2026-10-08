@@ -1,109 +1,110 @@
 int __cdecl _ftell_nolock(FILE *File)
 {
-  int v3; // eax
+  int v1; // esi
   int v4; // eax
+  int v5; // eax
   int flag; // edx
   char *ptr; // eax
   char *base; // ecx
-  char *v8; // edx
+  char *v9; // edx
   int cnt; // edx
-  int v10; // esi
-  _DWORD *v11; // ebx
-  char *v12; // eax
-  char *v13; // ecx
-  bool v14; // zf
+  int v11; // esi
+  _DWORD *v12; // ebx
+  char *v13; // eax
+  char *v14; // ecx
+  bool v15; // zf
   int bufsiz; // eax
-  int v16; // ecx
-  char *v17; // [esp+8h] [ebp-Ch]
-  int v18; // [esp+Ch] [ebp-8h]
-  int v19; // [esp+10h] [ebp-4h]
+  int v17; // ecx
+  char *v18; // [esp+8h] [ebp-Ch]
+  int v19; // [esp+Ch] [ebp-8h]
+  int v20; // [esp+10h] [ebp-4h]
   int Filea; // [esp+1Ch] [ebp+8h]
 
-  if ( !File )
+  if ( !File ) /*0x984895*/
   {
-    *_errno() = 0x16;
-    _invalid_parameter(0, 0, 0, 0, 0);
-    return 0xFFFFFFFF;
+    *_errno() = 0x16; /*0x9848a1*/
+    _invalid_parameter(0, 0, v1); /*0x9848a7*/
+    return 0xFFFFFFFF; /*0x9848b2*/
   }
-  v3 = _fileno(File);
-  v19 = v3;
-  if ( File->_cnt < 0 )
-    File->_cnt = 0;
-  v4 = _lseek(v3, 0, 1);
-  v18 = v4;
-  if ( v4 < 0 )
-    return 0xFFFFFFFF;
-  flag = File->_flag;
-  if ( (flag & 0x108) == 0 )
-    return v4 - File->_cnt;
-  ptr = File->_ptr;
-  base = File->_base;
-  v17 = (char *)(File->_ptr - base);
-  if ( (flag & 3) != 0 )
+  v4 = _fileno(File); /*0x9848b8*/
+  v20 = v4; /*0x9848c1*/
+  if ( File->_cnt < 0 ) /*0x9848c4*/
+    File->_cnt = 0; /*0x9848c6*/
+  v5 = _lseek(v4, 0, 1); /*0x9848cd*/
+  v19 = v5; /*0x9848d7*/
+  if ( v5 < 0 ) /*0x9848da*/
+    return 0xFFFFFFFF; /*0x9848da*/
+  flag = File->_flag; /*0x9848dc*/
+  if ( (flag & 0x108) == 0 ) /*0x9848e4*/
+    return v5 - File->_cnt; /*0x9848e9*/
+  ptr = File->_ptr; /*0x9848ee*/
+  base = File->_base; /*0x9848f0*/
+  v18 = (char *)(File->_ptr - base); /*0x9848fb*/
+  if ( (flag & 3) != 0 ) /*0x9848fe*/
   {
-    if ( *(char *)(*(_DWORD *)(4 * (v19 >> 5) + 0xBAAAC0) + 0x28 * (v19 & 0x1F) + 4) < 0 )
+    if ( *(char *)(*(_DWORD *)(4 * (v20 >> 5) + 0xBAAAC0) + 0x28 * (v20 & 0x1F) + 4) < 0 ) /*0x98491b*/
     {
-      v8 = File->_base;
-      if ( base < ptr )
+      v9 = File->_base; /*0x98491d*/
+      if ( base < ptr ) /*0x984921*/
       {
-        do
+        do /*0x984932*/
         {
-          if ( *v8 == 0xA )
-            ++v17;
-          ++v8;
+          if ( *v9 == 0xA ) /*0x984928*/
+            ++v18; /*0x98492a*/
+          ++v9; /*0x98492f*/
         }
-        while ( v8 < ptr );
+        while ( v9 < ptr ); /*0x984932*/
       }
     }
   }
-  else if ( (char)flag >= 0 )
+  else if ( (char)flag >= 0 ) /*0x984943*/
   {
-    *_errno() = 0x16;
-    return 0xFFFFFFFF;
+    *_errno() = 0x16; /*0x98494a*/
+    return 0xFFFFFFFF; /*0x984950*/
   }
-  if ( !v18 )
-    return (int)v17;
-  if ( (File->_flag & 1) == 0 )
-    return (int)&v17[v18];
-  cnt = File->_cnt;
-  if ( cnt )
+  if ( !v19 ) /*0x984937*/
+    return (int)v18; /*0x98493c*/
+  if ( (File->_flag & 1) == 0 ) /*0x984959*/
+    return (int)&v18[v19]; /*0x984959*/
+  cnt = File->_cnt; /*0x98495f*/
+  if ( cnt ) /*0x984964*/
   {
-    v10 = 0x28 * (v19 & 0x1F);
-    v11 = (_DWORD *)(4 * (v19 >> 5) + 0xBAAAC0);
-    Filea = cnt + ptr - base;
-    if ( *(char *)(*v11 + v10 + 4) >= 0 )
+    v11 = 0x28 * (v20 & 0x1F); /*0x984977*/
+    v12 = (_DWORD *)(4 * (v20 >> 5) + 0xBAAAC0); /*0x984981*/
+    Filea = cnt + ptr - base; /*0x984988*/
+    if ( *(char *)(*v12 + v11 + 4) >= 0 ) /*0x984992*/
     {
 LABEL_39:
-      v18 -= Filea;
-      return (int)&v17[v18];
+      v19 -= Filea; /*0x984a0b*/
+      return (int)&v18[v19]; /*0x984a0e*/
     }
-    if ( _lseek(v19, 0, 2) == v18 )
+    if ( _lseek(v20, 0, 2) == v19 ) /*0x9849a6*/
     {
-      v12 = File->_base;
-      v13 = &v12[Filea];
-      while ( v12 < v13 )
+      v13 = File->_base; /*0x9849a8*/
+      v14 = &v13[Filea]; /*0x9849ae*/
+      while ( v13 < v14 ) /*0x9849bd*/
       {
-        if ( *v12 == 0xA )
-          ++Filea;
-        ++v12;
+        if ( *v13 == 0xA ) /*0x9849b5*/
+          ++Filea; /*0x9849b7*/
+        ++v13; /*0x9849ba*/
       }
-      v14 = (File->_flag & 0x2000) == 0;
+      v15 = (File->_flag & 0x2000) == 0; /*0x9849bf*/
 LABEL_37:
-      if ( !v14 )
-        ++Filea;
-      goto LABEL_39;
+      if ( !v15 ) /*0x984a06*/
+        ++Filea; /*0x984a08*/
+      goto LABEL_39; /*0x984a08*/
     }
-    if ( _lseek(v19, v18, 0) >= 0 )
+    if ( _lseek(v20, v19, 0) >= 0 ) /*0x9849d9*/
     {
-      bufsiz = 0x200;
-      if ( (unsigned int)Filea > 0x200 || (v16 = File->_flag, (v16 & 8) == 0) || (v16 & 0x400) != 0 )
-        bufsiz = File->_bufsiz;
-      Filea = bufsiz;
-      v14 = (*(_BYTE *)(*v11 + v10 + 4) & 4) == 0;
-      goto LABEL_37;
+      bufsiz = 0x200; /*0x9849e0*/
+      if ( (unsigned int)Filea > 0x200 || (v17 = File->_flag, (v17 & 8) == 0) || (v17 & 0x400) != 0 ) /*0x9849f7*/
+        bufsiz = File->_bufsiz; /*0x9849f9*/
+      Filea = bufsiz; /*0x9849fc*/
+      v15 = (*(_BYTE *)(*v12 + v11 + 4) & 4) == 0; /*0x984a01*/
+      goto LABEL_37; /*0x984a01*/
     }
-    return 0xFFFFFFFF;
+    return 0xFFFFFFFF; /*0x9849de*/
   }
-  v17 = 0;
-  return (int)&v17[v18];
+  v18 = 0; /*0x984966*/
+  return (int)&v18[v19]; /*0x984a1a*/
 }

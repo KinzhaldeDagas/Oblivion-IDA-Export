@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x88F3F9",
-    "line": "call    sub_452A60",
+    "line": "call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x88F4A4",
-    "line": "push    offset stru_BA7A40",
+    "line": "push    offset unk_BA7A40",
     "mnemonic": "push",
     "size": 5
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x88F4B0",
-    "line": "push    offset stru_BA7A40",
+    "line": "push    offset unk_BA7A40",
     "mnemonic": "push",
     "size": 5
   },
@@ -919,7 +919,7 @@
   },
   {
     "ea": "0x88F5E5",
-    "line": "call    sub_4D6830",
+    "line": "call    hkQuaternion_Normalize; Normalizes a quaternion/vector with reciprocal sqrt refinement. Used before converting movement input orientation to basis vectors.",
     "mnemonic": "call",
     "size": 5
   },
@@ -979,7 +979,7 @@
   },
   {
     "ea": "0x88F613",
-    "line": "call    sub_8B1DD0",
+    "line": "call    hkMatrix3_SetFromQuaternion; Converts a quaternion into a 3x3 basis matrix. 0x896000 uses this during per-frame movement basis refresh.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1039,7 +1039,7 @@
   },
   {
     "ea": "0x88F637",
-    "line": "call    sub_43F3E0",
+    "line": "call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).",
     "mnemonic": "call",
     "size": 5
   },

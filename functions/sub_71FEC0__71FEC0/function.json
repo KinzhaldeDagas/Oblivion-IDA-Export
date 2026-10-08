@@ -1,19 +1,36 @@
 {
-  "callees_count": 30,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 12,
   "callers_count": 3,
+  "chunks": [
+    [
+      "0x71FEC0",
+      "0x7201A8"
+    ],
+    [
+      "0x9CA1B0",
+      "0x9CA1EC"
+    ]
+  ],
+  "chunks_sha256": "ff2349f8adb7ce9b428545ff4576ff4fcc2c6c4475adaeebb67b264e2a8b4fd3",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_71FEC0",
+  "comment_repeatable": "Load NiTriShapeData triangle indices and its serialized shared-normal table. The table is an array of 8-byte {UInt16 count, UInt16* indices} entries backed by linked index-pool blocks.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "NiTriShapeData_Load",
   "end_ea": "0x7201A8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_71FEC0",
+  "name": "NiTriShapeData_Load",
   "segment": ".text",
   "sha256": "49e1c83da04613551ac488bb82bba38419e015fc9b93a1e3b70e6f2bdc595569",
   "size": 744,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x71FEC0",
-  "type": "int *__thiscall(NiTriBasedGeomData *this, signed int)",
-  "xrefs_from_count": 264,
+  "total_chunk_size": 804,
+  "type": "void __thiscall(NiTriShapeData *self, NiStream *stream)",
+  "xrefs_from_count": 288,
   "xrefs_to_count": 4
 }

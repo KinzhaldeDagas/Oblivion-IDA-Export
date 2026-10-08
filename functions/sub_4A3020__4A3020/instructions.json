@@ -7,7 +7,7 @@
   },
   {
     "ea": "0x4A3023",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x4A302A",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x4A303B",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x4A3076",
-    "line": "mov     [esp+14h+var_8], 0",
+    "line": "mov     [esp+14h+source], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x4A3083",
-    "line": "mov     [esp+14h+var_8], edx",
+    "line": "mov     [esp+14h+source], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -187,37 +187,37 @@
   },
   {
     "ea": "0x4A308E",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4A3094",
-    "line": "push    4",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4A3096",
-    "line": "lea     eax, [esp+18h+var_8]",
+    "line": "lea     eax, [esp+18h+source]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4A309A",
-    "line": "push    eax",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4A309B",
-    "line": "call    SaveLoad_SaveFormID",
+    "line": "call    SaveLoad_SaveFormID; Writes an array of FormIDs to the save buffer. When IRef encoding is enabled, each full FormID is first converted to a compact IRef via SaveLoad_FormIDToIRef.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4A30A0",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -229,13 +229,13 @@
   },
   {
     "ea": "0x4A30A6",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4A30A7",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },

@@ -1,19 +1,32 @@
 {
-  "callees_count": 21,
-  "callers_count": 8,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
+  "callers_count": 12,
+  "chunks": [
+    [
+      "0x79B160",
+      "0x79B2E2"
+    ]
+  ],
+  "chunks_sha256": "ee09f71b658df4d8d991187d7a0f7e3ae09425c08ea27e7cc46b85058b7ee1bc",
+  "comment_regular": "Oblivion-authoritative copy assignment for the SFrondGuide vertex vector at +0x00. Reuses existing 0x38-byte-element capacity when possible, otherwise frees/reserves and deep-copies the source range.\nSpeedTreeOBSE v164 VERIFIED: all12 observed direct copy-assignment callsites are intercepted for paired guide metadata. This includes swap, heap sort and guide LOD construction. Source/destination vertex counts must match retained metadata; unknown source invalidates destination. Self-assignment remains native-safe.",
+  "comment_repeatable": "Oblivion-authoritative copy assignment for the SFrondGuide vertex vector at +0x00. Reuses existing 0x38-byte-element capacity when possible, otherwise frees/reserves and deep-copies the source range.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_79B160",
+  "display_name": "OB_stVector_SFrondVertex_CopyAssign_010201A0",
   "end_ea": "0x79B2E2",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_79B160",
+  "name": "OB_stVector_SFrondVertex_CopyAssign_010201A0",
   "segment": ".text",
   "sha256": "ee09f71b658df4d8d991187d7a0f7e3ae09425c08ea27e7cc46b85058b7ee1bc",
   "size": 386,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x79B160",
-  "type": "char **__thiscall(char **this, char **)",
+  "total_chunk_size": 386,
+  "type": "OB_stVector16_010201A0 *__thiscall(OB_stVector16_010201A0 *this, const OB_stVector16_010201A0 *source)",
   "xrefs_from_count": 172,
   "xrefs_to_count": 12
 }

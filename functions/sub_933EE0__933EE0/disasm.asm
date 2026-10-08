@@ -51,3 +51,9 @@
 0x933F71: jmp     short loc_933F24
 0x933F73: movzx   ecx, byte ptr [esi+3]; jumptable 00933F1A case 0
 0x933F77: add     esi, ecx
+0x933F98: pop     edi; jumptable 00933F1A case 1
+0x933F99: pop     esi
+0x933F9A: pop     ebp
+0x933F9B: pop     ebx
+0x933F9C: add     esp, 8
+0x933F9F: retn

@@ -1,4 +1,4 @@
-0x78F160: sub     esp, 10h
+0x78F160: sub     esp, 10h; Builds a 3x3 axis-angle rotation matrix from degrees and normalized axis vector without multiplying into an existing transform.
 0x78F163: fld     [esp+10h+arg_0]
 0x78F167: push    esi
 0x78F168: fdiv    qword ptr ds:0A8BA48h

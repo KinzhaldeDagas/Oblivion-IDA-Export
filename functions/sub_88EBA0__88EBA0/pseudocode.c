@@ -1,9 +1,9 @@
-bhkNiCollisionObject *__thiscall sub_88EBA0(bhkNiCollisionObject *this, char a2)
+Ni2DBuffer **__thiscall sub_88EBA0(Ni2DBuffer **this, char a2)
 {
-  *(_DWORD *)this = &bhkBlendCollisionObject::`vftable';
-  --dword_BA7A1C;
-  bhkNiCollisionObject::~bhkNiCollisionObject(this);
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  *this = (Ni2DBuffer *)&bhkBlendCollisionObject::`vftable'; /*0x88eba3*/
+  --unk_BA7A1C; /*0x88eba9*/
+  bhkNiCollisionObject::~bhkNiCollisionObject(this); /*0x88ebb0*/
+  if ( (a2 & 1) != 0 ) /*0x88ebba*/
+    FormHeapFree((unsigned int)this); /*0x88ebbd*/
+  return this; /*0x88ebc7*/
 }

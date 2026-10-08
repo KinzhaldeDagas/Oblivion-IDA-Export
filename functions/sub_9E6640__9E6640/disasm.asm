@@ -1,7 +1,7 @@
-0x9E6640: push    64h ; 'd'
+0x9E6640: push    64h ; 'd'; defaultValue
 0x9E6642: push    offset aIcrimegoldjail; "iCrimeGoldJailBreak"
-0x9E6647: mov     ecx, offset dword_B36768
-0x9E664C: call    GameSetting_ConstrAndReg
+0x9E6647: mov     ecx, offset stru_B36768; self
+0x9E664C: call    GameSetting_ConstrAndReg; Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.
 0x9E6651: push    offset sub_A1D5F0; void (__cdecl *)()
 0x9E6656: call    _atexit
 0x9E665B: pop     ecx

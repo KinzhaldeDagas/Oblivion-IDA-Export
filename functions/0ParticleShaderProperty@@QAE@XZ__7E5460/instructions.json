@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x7E5494",
-    "line": "mov     dword ptr [esi], offset ??_7ParticleShaderProperty@@6B@; const ParticleShaderProperty::`vftable'",
+    "line": "mov     dword ptr [esi], offset ??_7ParticleShaderProperty@@6B@; Verified (Oblivion): ParticleShaderProperty constructor installs the vtable whose +0x54 GetSubtype returns 0xE, the exact subtype accepted by NiNode_CreateAttachedParticleShaderProperty.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x7E54EE",
-    "line": "push    0Ah",
+    "line": "push    0Ah; grow",
     "mnemonic": "push",
     "size": 2
   },
@@ -217,13 +217,13 @@
   },
   {
     "ea": "0x7E54F6",
-    "line": "push    0Ah",
+    "line": "push    0Ah; capacity",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7E54F8",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x7E54FF",
-    "line": "call    sub_4B2D30",
+    "line": "call    OB_NiAVObjectPointerArray_ctor_010201A0",
     "mnemonic": "call",
     "size": 5
   },
@@ -685,7 +685,7 @@
   },
   {
     "ea": "0x7E5639",
-    "line": "fstp    dword ptr [esi+124h]",
+    "line": "fstp    dword ptr [esi+124h]; Verified (Oblivion): targetScaleRatio_124 initializes to 1.0; MagicShaderHitEffect_Update later replaces it with a clamped target visual-size ratio.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -733,7 +733,7 @@
   },
   {
     "ea": "0x7E5663",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x7E566B",
-    "line": "call    sub_477EF0",
+    "line": "call    NiTObjectArray_ClearAndRelease; Clears a ref-counted NiT object-pointer array: releases every non-null element, nulls entries, and resets end/count words to zero. At bow release it is invoked on ArrowBone+0xAC, thereby releasing all ArrowBone children including the held Arrow:0 clone.",
     "mnemonic": "call",
     "size": 5
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x7E567B",
-    "line": "call    sub_7E2D60",
+    "line": "call    ParticleShaderProperty_GetSlotCapacity; Verified (Oblivion): returns the cached slot capacity, initialized to 40 or 120 according to renderer capability, and used to size particleInstanceBuffer_6C and update iteration.",
     "mnemonic": "call",
     "size": 5
   },
@@ -823,7 +823,7 @@
   },
   {
     "ea": "0x7E5698",
-    "line": "mov     [esi+6Ch], eax",
+    "line": "mov     [esi+6Ch], eax; Verified (Oblivion): ParticleShaderProperty allocates particleInstanceBuffer_6C as slotCapacity * 0x20 bytes and zeroes the buffer; destructor frees the same allocation.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -928,5 +928,197 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x4B2E30",
+    "line": "mov     eax, [ecx+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4B2E33",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4B2E35",
+    "line": "mov     dword ptr [ecx], offset ??_7?$NiTArray@V?$NiPointer@VNiAVObject@@@@@@6B@; const NiTArray<NiPointer<NiAVObject>>::`vftable'",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x4B2E3B",
+    "line": "jz      short locret_4B2E5C",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4B2E3D",
+    "line": "mov     ecx, [eax-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4B2E40",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4B2E41",
+    "line": "lea     esi, [eax-4]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x4B2E44",
+    "line": "push    offset NiPointerSlot_Release; void (__thiscall *)(void *)",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4B2E49",
+    "line": "push    ecx; int",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4B2E4A",
+    "line": "push    4; unsigned int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4B2E4C",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4B2E4D",
+    "line": "call    $LN21",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4B2E52",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4B2E53",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4B2E58",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4B2E5B",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4B2E5C",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CF780",
+    "line": "mov     ecx, [ebp-20h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CF783",
+    "line": "jmp     ??1BSShaderProperty@@UAE@XZ; BSShaderProperty::~BSShaderProperty(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CF788",
+    "line": "mov     ecx, [ebp-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CF78B",
+    "line": "add     ecx, 10Ch; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CF791",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CF796",
+    "line": "mov     ecx, [ebp-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CF799",
+    "line": "add     ecx, 110h",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CF79F",
+    "line": "jmp     loc_4B2E30",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CF7A4",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CF7A8",
+    "line": "lea     eax, [edx-24h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CF7AB",
+    "line": "mov     ecx, [edx-28h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CF7AE",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CF7B0",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CF7B5",
+    "line": "mov     eax, offset stru_AF83AC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CF7BA",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

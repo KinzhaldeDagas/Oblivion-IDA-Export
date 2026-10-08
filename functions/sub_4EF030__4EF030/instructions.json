@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x4EF057",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x4EF06B",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x4EF07D",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x4EF08D",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -178,12 +178,6 @@
     "line": "jmp     short loc_4EF0A4",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x4EF09F",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 1
   },
   {
     "ea": "0x4EF0A0",
@@ -229,7 +223,7 @@
   },
   {
     "ea": "0x4EF0B4",
-    "line": "call    TESWorldSpace__GetIndexForCellCoord",
+    "line": "call    TESWorldSpace__GetIndexForCellCoord; EngineFix trace 2026-05-11: GetIndexForCellCoord validates coordinates against worldspace [0xAC..0xB8] bounds. DoPostFixups offset-table allocation is based on [0x98..0xA4], so callers that write into rebuilt tables must separately check index against the allocation rectangle.",
     "mnemonic": "call",
     "size": 5
   },

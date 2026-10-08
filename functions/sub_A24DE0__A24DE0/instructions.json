@@ -1,7 +1,7 @@
 [
   {
     "ea": "0xA24DE0",
-    "line": "push    offset unk_B14388",
+    "line": "push    offset fXenonMenuStickMapCursorMaxSpeed; [Controller decode 2026-07-10] atexit cleanup for registered Xenon-era Controls INI setting.",
     "mnemonic": "push",
     "size": 5
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0xA24DEF",
-    "line": "mov     eax, off_B1438C; \"fXenonMenuStickMapCursorMaxSpeed:Contro\"...",
+    "line": "mov     eax, fXenonMenuStickMapCursorMaxSpeedSettingName",
     "mnemonic": "mov",
     "size": 5
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0xA24DFE",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

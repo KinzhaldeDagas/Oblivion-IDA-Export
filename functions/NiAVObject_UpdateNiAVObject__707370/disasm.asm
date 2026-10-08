@@ -1,4 +1,4 @@
-0x707370: fld     [esp+arg_0]
+0x707370: fld     [esp+arg_0]; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x707374: push    esi
 0x707375: mov     esi, ecx
 0x707377: mov     ecx, [esp+4+arg_4]

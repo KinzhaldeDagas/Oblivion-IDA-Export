@@ -1,4 +1,4 @@
-0x6575B0: push    0FFFFFFFFh
+0x6575B0: push    0FFFFFFFFh; Verified (Oblivion): the same method is present in HighProcess and MiddleHighProcess vtable groups. It refreshes per-target enchantment shader state and the PlayerCharacter cache; the exact shared subobject interface name remains Candidate.
 0x6575B2: push    offset SEH_6575B0
 0x6575B7: mov     eax, large fs:0
 0x6575BD: push    eax
@@ -13,20 +13,20 @@
 0x6575CD: lea     eax, [esp+28h+var_C]
 0x6575D1: mov     large fs:0, eax
 0x6575D7: mov     esi, ecx
-0x6575D9: cmp     [esp+28h+arg_8], 0
-0x6575DE: mov     ebp, [esp+28h+arg_0]
+0x6575D9: cmp     [esp+28h+arg4], 0
+0x6575DE: mov     ebp, [esp+28h+targetReference]
 0x6575E2: mov     byte ptr [esi+160h], 0
 0x6575E9: jz      short loc_657603
-0x6575EB: push    ebp
-0x6575EC: mov     ecx, offset ActorProcessManager_ptr
-0x6575F1: call    sub_679120
+0x6575EB: push    ebp; targetReference
+0x6575EC: mov     ecx, (offset qword_B3BB2C+1D4h); this
+0x6575F1: call    ActorProcessManager_FindTargetNonWeaponShaderHitEffect; Verified (Oblivion): weapon-enchantment refresh first queries the manager for an existing non-weapon shader candidate on this target and reinitializes the returned object before handling the weapon-enchantment-specific instance.
 0x6575F6: test    eax, eax
 0x6575F8: jz      short loc_657603
 0x6575FA: mov     edx, [eax]
 0x6575FC: mov     ecx, eax
 0x6575FE: mov     eax, [edx+68h]
 0x657601: call    eax
-0x657603: cmp     byte ptr [esp+28h+arg_4], 0
+0x657603: cmp     [esp+28h+arg3], 0
 0x657608: jz      loc_657850
 0x65760E: mov     edx, [esi]
 0x657610: mov     eax, [edx+420h]
@@ -65,8 +65,8 @@
 0x657671: mov     eax, [edx+0ECh]
 0x657677: push    1
 0x657679: call    eax
-0x65767B: mov     ecx, eax
-0x65767D: call    sub_4849C0
+0x65767B: mov     ecx, eax; this
+0x65767D: call    EquippedEntryData_GetCharge; Return per-instance ExtraCharge when present; otherwise return the TESEnchantableForm base charge. Returns the sentinel/default when the EntryData form is not enchantable.
 0x657682: fstp    [esp+28h+var_14]
 0x657686: mov     edx, [edi+24h]
 0x657689: mov     eax, [edx]
@@ -77,9 +77,9 @@
 0x657695: fnstsw  ax
 0x657697: test    ah, 41h
 0x65769A: jp      short loc_6576BE
-0x65769C: push    0
-0x65769E: lea     ecx, [edi+18h]
-0x6576A1: call    MagicItem_GetFXEffect
+0x65769C: push    0; effectIndex
+0x65769E: lea     ecx, [edi+18h]; magicItem
+0x6576A1: call    MagicItem_GetFXEffect; Verified (Oblivion): MagicItem_GetFXEffect returns the effect's EffectSetting pointer; MagicShaderHitEffect constructors/PostLink dereference its +0x78 EffectSetting::effectShader field.
 0x6576A6: test    eax, eax
 0x6576A8: jz      short loc_6576BE
 0x6576AA: mov     eax, [eax+7Ch]
@@ -93,12 +93,12 @@
 0x6576BE: mov     edx, [esi]
 0x6576C0: mov     eax, [edx+41Ch]
 0x6576C6: mov     ecx, esi
-0x6576C8: mov     [esp+28h+arg_8], 0
+0x6576C8: mov     [esp+28h+arg4], 0
 0x6576CD: call    eax
-0x6576CF: push    eax
-0x6576D0: push    ebp
-0x6576D1: mov     ecx, offset ActorProcessManager_ptr
-0x6576D6: call    sub_679240
+0x6576CF: push    eax; effectShader
+0x6576D0: push    ebp; targetReference
+0x6576D1: mov     ecx, (offset qword_B3BB2C+1D4h); this
+0x6576D6: call    ActorProcessManager_FindWeaponEnchantmentShader; Verified (Oblivion): weapon-enchantment refresh first asks ActorProcessManager_FindWeaponEnchantmentShader for an active matching effect. Existing effects are reinitialized; otherwise a new effect is created, flagged bWeaponEnchantment_28, and registered.
 0x6576DB: test    eax, eax
 0x6576DD: jz      short loc_6576ED
 0x6576DF: mov     edx, [eax]
@@ -116,7 +116,7 @@
 0x6576FF: call    FormHeapAlloc
 0x657704: mov     edi, eax
 0x657706: add     esp, 4
-0x657709: mov     [esp+28h+arg_4], edi
+0x657709: mov     dword ptr [esp+28h+arg3], edi
 0x65770D: test    edi, edi
 0x65770F: mov     [esp+28h+var_4], 0
 0x657717: jz      short loc_65773C
@@ -125,19 +125,19 @@
 0x657721: mov     eax, [edx+41Ch]
 0x657727: push    ecx
 0x657728: mov     ecx, esi
-0x65772A: fstp    [esp+2Ch+var_2C]; float
+0x65772A: fstp    [esp+2Ch+elapsedSeconds]; elapsedSeconds
 0x65772D: call    eax
-0x65772F: push    eax; int
-0x657730: push    ebp; int
-0x657731: mov     ecx, edi
+0x65772F: push    eax; effectShader
+0x657730: push    ebp; targetReference
+0x657731: mov     ecx, edi; this
 0x657733: call    MagicShaderHitEffect_constr_args2
 0x657738: mov     edi, eax
 0x65773A: jmp     short loc_65773E
 0x65773C: xor     edi, edi
-0x65773E: mov     bl, [esp+28h+arg_C]
+0x65773E: mov     bl, [esp+28h+arg5]
 0x657742: test    bl, bl
 0x657744: mov     [esp+28h+var_4], 0FFFFFFFFh
-0x65774C: mov     byte ptr [edi+28h], 1
+0x65774C: mov     byte ptr [edi+28h], 1; Verified (Oblivion): sets bWeaponEnchantment_28 immediately after constructing the shader from the equipped item's enchantment shader (EffectSetting.enchantEffect).
 0x657750: jz      short loc_65775B
 0x657752: fld     dword ptr ds:0A2FE7Ch
 0x657758: fstp    dword ptr [edi+38h]
@@ -147,12 +147,12 @@
 0x657762: call    eax
 0x657764: test    al, al
 0x657766: jz      short loc_65777C
-0x657768: push    edi
-0x657769: mov     ecx, offset ActorProcessManager_ptr
-0x65776E: call    sub_678D30
+0x657768: push    edi; effect
+0x657769: mov     ecx, (offset qword_B3BB2C+1D4h); self
+0x65776E: call    ActorProcessManager_RegisterTempEffect; [Verified] ActorProcessManager_RegisterTempEffect increments the effect reference and routes GetTypeID 4-6 into extendedTempEffects (+0x48), all other IDs into activeTempEffects (+0x40). Vtable evidence confirms decals 0/1 and particles 2 use the active list. Fallout divergence: its BGSDecalManager updates distinct simple-decal and emitter collections instead of using this per-actor temp-effect routing; one-to-one equivalence is Unknown.
 0x657773: test    bl, bl
 0x657775: jnz     short loc_65777C
-0x657777: mov     [esp+28h+arg_8], 1
+0x657777: mov     [esp+28h+arg4], 1
 0x65777C: mov     eax, ds:0B333C4h
 0x657781: cmp     ebp, eax
 0x657783: jnz     loc_657850
@@ -180,22 +180,22 @@
 0x6577CC: push    4Ch ; 'L'; Size
 0x6577CE: call    FormHeapAlloc
 0x6577D3: add     esp, 4
-0x6577D6: mov     [esp+28h+arg_4], eax
+0x6577D6: mov     dword ptr [esp+28h+arg3], eax
 0x6577DA: cmp     eax, ebx
 0x6577DC: mov     [esp+28h+var_4], 1
 0x6577E4: jz      short loc_657801
 0x6577E6: fld     dword ptr ds:0A30634h
 0x6577EC: push    ecx
 0x6577ED: mov     ecx, ds:0B333C4h
-0x6577F3: fstp    [esp+2Ch+var_2C]; float
-0x6577F6: push    edi; int
-0x6577F7: push    ecx; int
-0x6577F8: mov     ecx, eax
+0x6577F3: fstp    [esp+2Ch+elapsedSeconds]; elapsedSeconds
+0x6577F6: push    edi; effectShader
+0x6577F7: push    ecx; targetReference
+0x6577F8: mov     ecx, eax; this
 0x6577FA: call    MagicShaderHitEffect_constr_args2
 0x6577FF: jmp     short loc_657803
 0x657801: xor     eax, eax
-0x657803: cmp     [esp+28h+arg_8], 0
-0x657808: mov     byte ptr [eax+28h], 1
+0x657803: cmp     [esp+28h+arg4], 0
+0x657808: mov     byte ptr [eax+28h], 1; Verified (Oblivion): sets bWeaponEnchantment_28 on the player's cached weapon-enchantment shader before storing it in PlayerCharacter::unk5E0.
 0x65780C: mov     edx, ds:0B333C4h
 0x657812: mov     [esp+28h+var_4], 0FFFFFFFFh
 0x65781A: mov     esi, eax
@@ -235,3 +235,20 @@
 0x657874: mov     eax, ds:0B333C4h
 0x657879: mov     [eax+5E0h], ebx
 0x65787F: jmp     short loc_657850
+0x9C3BA0: mov     eax, [ebp+8]
+0x9C3BA3: push    eax
+0x9C3BA4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C3BA9: pop     ecx
+0x9C3BAA: retn
+0x9C3BAB: mov     eax, [ebp+8]
+0x9C3BAE: push    eax
+0x9C3BAF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C3BB4: pop     ecx
+0x9C3BB5: retn
+0x9C3BB6: mov     edx, dword ptr [esp+arg3]
+0x9C3BBA: lea     eax, [edx-18h]
+0x9C3BBD: mov     ecx, [edx-1Ch]
+0x9C3BC0: xor     ecx, eax
+0x9C3BC2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C3BC7: mov     eax, offset stru_AEC704
+0x9C3BCC: jmp     ___CxxFrameHandler3

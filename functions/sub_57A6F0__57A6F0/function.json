@@ -1,19 +1,32 @@
 {
-  "callees_count": 19,
-  "callers_count": 17,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 13,
+  "callers_count": 23,
+  "chunks": [
+    [
+      "0x57A6F0",
+      "0x57A7CC"
+    ]
+  ],
+  "chunks_sha256": "34a5eac95b30ef98907ba841a390ea261c3492fc68cf4d76558e03243fa8df47",
+  "comment_regular": "MWMediumArmor: native actor-value display refresh used with the configured Heavy/Light bucket before Player_OnActorValueBaseChanged so Medium sidecar level changes refresh armor-derived UI without passing synthetic IDs into native skill arrays.",
+  "comment_repeatable": "UI_UpdateActorValueDisplays(actorValue), called by player base-AV setters/modifiers after changing base form values.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 4,
-  "display_name": "sub_57A6F0",
+  "display_name": "UI_UpdateActorValueDisplays",
   "end_ea": "0x57A7CC",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_57A6F0",
+  "name": "UI_UpdateActorValueDisplays",
   "segment": ".text",
   "sha256": "34a5eac95b30ef98907ba841a390ea261c3492fc68cf4d76558e03243fa8df47",
   "size": 220,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x57A6F0",
-  "type": "int __cdecl(int a2)",
+  "total_chunk_size": 220,
+  "type": "void __cdecl(unsigned int actorValue)",
   "xrefs_from_count": 90,
   "xrefs_to_count": 23
 }

@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x9A671C",
-    "line": "fst     [esp+234h+var_134]; int",
+    "line": "fst     [esp+234h+var_15C.pos.y]; int",
     "mnemonic": "fst",
     "size": 7
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x9A6726",
-    "line": "fst     [esp+228h+var_148]; int",
+    "line": "fst     [esp+228h+var_15C.rot.data+14h]; int",
     "mnemonic": "fst",
     "size": 7
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x9A6730",
-    "line": "fst     [esp+228h+var_15C]; int",
+    "line": "fst     [esp+228h+var_15C.rot.data]; int",
     "mnemonic": "fst",
     "size": 7
   },
@@ -937,7 +937,7 @@
   },
   {
     "ea": "0x9A692A",
-    "line": "push    offset dword_B3FCFC",
+    "line": "push    offset stru_B3FCFC",
     "mnemonic": "push",
     "size": 5
   },
@@ -1147,7 +1147,7 @@
   },
   {
     "ea": "0x9A69B3",
-    "line": "lea     edx, [esp+228h+var_11C]",
+    "line": "lea     edx, [esp+228h+local]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -1159,7 +1159,7 @@
   },
   {
     "ea": "0x9A69BB",
-    "line": "call    sub_718A80",
+    "line": "call    sub_718A80;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1171,7 +1171,7 @@
   },
   {
     "ea": "0x9A69C1",
-    "line": "push    offset dword_B3FCFC",
+    "line": "push    offset stru_B3FCFC",
     "mnemonic": "push",
     "size": 5
   },
@@ -1249,7 +1249,7 @@
   },
   {
     "ea": "0x9A69EF",
-    "line": "lea     ecx, [esp+230h+var_11C]",
+    "line": "lea     ecx, [esp+230h+local]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -1291,7 +1291,7 @@
   },
   {
     "ea": "0x9A6A10",
-    "line": "call    sub_53D4B0",
+    "line": "call    NiTransform_TransformPoint; ODismemberment: __thiscall NiTransform point transform helper. Plugin hit capture must pass transform in ECX; cdecl here crashes on actor hits.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1363,13 +1363,13 @@
   },
   {
     "ea": "0x9A6A3D",
-    "line": "lea     ecx, [esp+230h+var_11C]",
+    "line": "lea     ecx, [esp+230h+local]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x9A6A44",
-    "line": "call    sub_53D4B0",
+    "line": "call    NiTransform_TransformPoint; ODismemberment: __thiscall NiTransform point transform helper. Plugin hit capture must pass transform in ECX; cdecl here crashes on actor hits.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1447,7 +1447,7 @@
   },
   {
     "ea": "0x9A6A74",
-    "line": "push    offset dword_B3FD80",
+    "line": "push    offset stru_B3FD80",
     "mnemonic": "push",
     "size": 5
   },
@@ -1555,7 +1555,7 @@
   },
   {
     "ea": "0x9A6AB8",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1579,7 +1579,7 @@
   },
   {
     "ea": "0x9A6AC5",
-    "line": "push    offset dword_B3FCFC",
+    "line": "push    offset stru_B3FCFC",
     "mnemonic": "push",
     "size": 5
   },
@@ -1789,7 +1789,7 @@
   },
   {
     "ea": "0x9A6B49",
-    "line": "push    offset dword_B3FD80",
+    "line": "push    offset stru_B3FD80",
     "mnemonic": "push",
     "size": 5
   },
@@ -1897,7 +1897,7 @@
   },
   {
     "ea": "0x9A6B8D",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1921,7 +1921,7 @@
   },
   {
     "ea": "0x9A6B97",
-    "line": "push    offset dword_B3FCFC",
+    "line": "push    offset stru_B3FCFC",
     "mnemonic": "push",
     "size": 5
   },
@@ -2107,25 +2107,25 @@
   },
   {
     "ea": "0x9A6C19",
-    "line": "fst     [esp+22Ch+var_17C]",
+    "line": "fst     [esp+22Ch+parent.pos.z]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x9A6C20",
-    "line": "push    offset dword_B3FCFC",
+    "line": "push    offset stru_B3FCFC",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x9A6C25",
-    "line": "fst     [esp+230h+var_18C]",
+    "line": "fst     [esp+230h+parent.rot.data+1Ch]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x9A6C2C",
-    "line": "fstp    [esp+230h+var_19C]",
+    "line": "fstp    [esp+230h+parent.rot.data+0Ch]",
     "mnemonic": "fstp",
     "size": 7
   },
@@ -2203,7 +2203,7 @@
   },
   {
     "ea": "0x9A6C5E",
-    "line": "lea     edx, [esp+22Ch+var_1A8]",
+    "line": "lea     edx, [esp+22Ch+parent]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -2275,7 +2275,7 @@
   },
   {
     "ea": "0x9A6C88",
-    "line": "call    sub_761AE0",
+    "line": "call    sub_761AE0; MoonSugarEffect decode: builds a camera-relative D3D world matrix from NiTransform using column/row layout used for non-skinned world constants; translation subtracts CameraWorldTranslate/flt_B3F930/flt_B3F934.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2293,7 +2293,7 @@
   },
   {
     "ea": "0x9A6C97",
-    "line": "lea     eax, [esp+228h+var_1A8]",
+    "line": "lea     eax, [esp+228h+parent]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -2341,7 +2341,7 @@
   },
   {
     "ea": "0x9A6CB1",
-    "line": "lea     eax, [esp+228h+var_1A8]",
+    "line": "lea     eax, [esp+228h+parent]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -2377,7 +2377,7 @@
   },
   {
     "ea": "0x9A6CC9",
-    "line": "lea     eax, [esp+228h+var_1A8]",
+    "line": "lea     eax, [esp+228h+parent]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -2503,7 +2503,7 @@
   },
   {
     "ea": "0x9A6D12",
-    "line": "lea     ecx, [esp+22Ch+var_1A8]",
+    "line": "lea     ecx, [esp+22Ch+parent]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -2521,7 +2521,7 @@
   },
   {
     "ea": "0x9A6D21",
-    "line": "call    sub_718A80",
+    "line": "call    sub_718A80;",
     "mnemonic": "call",
     "size": 5
   },
@@ -2551,7 +2551,7 @@
   },
   {
     "ea": "0x9A6D31",
-    "line": "push    offset dword_B3FCFC",
+    "line": "push    offset stru_B3FCFC",
     "mnemonic": "push",
     "size": 5
   },
@@ -2629,7 +2629,7 @@
   },
   {
     "ea": "0x9A6D69",
-    "line": "lea     edi, [esp+22Ch+var_11C]",
+    "line": "lea     edi, [esp+22Ch+local]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -2701,55 +2701,55 @@
   },
   {
     "ea": "0x9A6D9A",
-    "line": "mov     [esp+22Ch+var_F8], edx",
+    "line": "mov     [esp+22Ch+local.pos.x], edx",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x9A6DA1",
-    "line": "lea     edx, [esp+22Ch+var_11C]",
+    "line": "lea     edx, [esp+22Ch+local]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x9A6DA8",
-    "line": "mov     [esp+22Ch+var_F4], eax",
+    "line": "mov     [esp+22Ch+local.pos.y], eax",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x9A6DAF",
-    "line": "push    edx",
+    "line": "push    edx; local",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x9A6DB0",
-    "line": "lea     eax, [esp+230h+var_34]",
+    "line": "lea     eax, [esp+230h+out]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x9A6DB7",
-    "line": "mov     [esp+230h+var_F0], ecx",
+    "line": "mov     [esp+230h+local.pos.z], ecx",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x9A6DBE",
-    "line": "push    eax",
+    "line": "push    eax; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x9A6DBF",
-    "line": "lea     ecx, [esp+234h+var_1A8]",
+    "line": "lea     ecx, [esp+234h+parent]; parent",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x9A6DC6",
-    "line": "call    sub_53D7A0",
+    "line": "call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2785,7 +2785,7 @@
   },
   {
     "ea": "0x9A6DD6",
-    "line": "push    ebx",
+    "line": "push    ebx; local",
     "mnemonic": "push",
     "size": 1
   },
@@ -2797,19 +2797,19 @@
   },
   {
     "ea": "0x9A6DDE",
-    "line": "push    edx",
+    "line": "push    edx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x9A6DDF",
-    "line": "lea     ecx, [esp+234h+var_1A8]",
+    "line": "lea     ecx, [esp+234h+parent]; parent",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x9A6DE6",
-    "line": "call    sub_53D7A0",
+    "line": "call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2983,7 +2983,7 @@
   },
   {
     "ea": "0x9A6E46",
-    "line": "push    offset dword_B40190",
+    "line": "push    offset stru_B40190",
     "mnemonic": "push",
     "size": 5
   },
@@ -3037,7 +3037,7 @@
   },
   {
     "ea": "0x9A6E68",
-    "line": "fmul    flt_B3F9A4",
+    "line": "fmul    dword ptr unk_B3F9A4",
     "mnemonic": "fmul",
     "size": 6
   },
@@ -3145,7 +3145,7 @@
   },
   {
     "ea": "0x9A6EAC",
-    "line": "fld     ds:flt_A30634",
+    "line": "fld     ds:kTerrainLODQuadRayDirectionZ",
     "mnemonic": "fld",
     "size": 6
   },
@@ -3217,7 +3217,7 @@
   },
   {
     "ea": "0x9A6ED1",
-    "line": "fld     ds:flt_A30634",
+    "line": "fld     ds:kTerrainLODQuadRayDirectionZ",
     "mnemonic": "fld",
     "size": 6
   },
@@ -3313,7 +3313,7 @@
   },
   {
     "ea": "0x9A6EFD",
-    "line": "push    offset dword_B3FD80",
+    "line": "push    offset stru_B3FD80",
     "mnemonic": "push",
     "size": 5
   },
@@ -3625,7 +3625,7 @@
   },
   {
     "ea": "0x9A6FA5",
-    "line": "push    offset Vector3_InitValue?; int",
+    "line": "push    offset g_zeroNiPoint3; int",
     "mnemonic": "push",
     "size": 5
   },
@@ -3649,7 +3649,7 @@
   },
   {
     "ea": "0x9A6FB0",
-    "line": "call    sub_761AE0",
+    "line": "call    sub_761AE0; MoonSugarEffect decode: builds a camera-relative D3D world matrix from NiTransform using column/row layout used for non-skinned world constants; translation subtracts CameraWorldTranslate/flt_B3F930/flt_B3F934.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3787,19 +3787,19 @@
   },
   {
     "ea": "0x9A700E",
-    "line": "push    offset Vector3_InitValue?",
+    "line": "push    offset g_zeroNiPoint3",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x9A7013",
-    "line": "push    eax",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x9A7014",
-    "line": "push    edx",
+    "line": "push    edx; out",
     "mnemonic": "push",
     "size": 1
   },
@@ -3823,13 +3823,13 @@
   },
   {
     "ea": "0x9A7022",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x9A7024",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3967,7 +3967,7 @@
   },
   {
     "ea": "0x9A7084",
-    "line": "lea     edx, [esp+228h+var_1A8]",
+    "line": "lea     edx, [esp+228h+parent]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -3979,7 +3979,7 @@
   },
   {
     "ea": "0x9A708C",
-    "line": "call    sub_718A80",
+    "line": "call    sub_718A80;",
     "mnemonic": "call",
     "size": 5
   },
@@ -4039,7 +4039,7 @@
   },
   {
     "ea": "0x9A70B8",
-    "line": "lea     ecx, [esp+230h+var_1A8]",
+    "line": "lea     ecx, [esp+230h+parent]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -4051,7 +4051,7 @@
   },
   {
     "ea": "0x9A70C3",
-    "line": "call    sub_53D4B0",
+    "line": "call    NiTransform_TransformPoint; ODismemberment: __thiscall NiTransform point transform helper. Plugin hit capture must pass transform in ECX; cdecl here crashes on actor hits.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4327,7 +4327,7 @@
   },
   {
     "ea": "0x9A7170",
-    "line": "lea     eax, [esp+228h+var_1A8]",
+    "line": "lea     eax, [esp+228h+parent]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -4339,7 +4339,7 @@
   },
   {
     "ea": "0x9A7178",
-    "line": "call    sub_718A80",
+    "line": "call    sub_718A80;",
     "mnemonic": "call",
     "size": 5
   },
@@ -4417,7 +4417,7 @@
   },
   {
     "ea": "0x9A71AF",
-    "line": "lea     ecx, [esp+230h+var_1A8]",
+    "line": "lea     ecx, [esp+230h+parent]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -4477,7 +4477,7 @@
   },
   {
     "ea": "0x9A71D6",
-    "line": "lea     ecx, [esp+230h+var_1A8]",
+    "line": "lea     ecx, [esp+230h+parent]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -4513,7 +4513,7 @@
   },
   {
     "ea": "0x9A71EF",
-    "line": "call    sub_53D4B0",
+    "line": "call    NiTransform_TransformPoint; ODismemberment: __thiscall NiTransform point transform helper. Plugin hit capture must pass transform in ECX; cdecl here crashes on actor hits.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4915,6 +4915,78 @@
   },
   {
     "ea": "0x9A72D9",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9A72FD",
+    "line": "fstp    st",
+    "mnemonic": "fstp",
+    "size": 2
+  },
+  {
+    "ea": "0x9A72FF",
+    "line": "fldz",
+    "mnemonic": "fldz",
+    "size": 2
+  },
+  {
+    "ea": "0x9A7301",
+    "line": "mov     eax, [esp+228h+arg_0]",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x9A7308",
+    "line": "fst     dword ptr [eax]",
+    "mnemonic": "fst",
+    "size": 2
+  },
+  {
+    "ea": "0x9A730A",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9A730B",
+    "line": "fst     dword ptr [eax+4]",
+    "mnemonic": "fst",
+    "size": 3
+  },
+  {
+    "ea": "0x9A730E",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9A730F",
+    "line": "fst     dword ptr [eax+8]",
+    "mnemonic": "fst",
+    "size": 3
+  },
+  {
+    "ea": "0x9A7312",
+    "line": "fstp    dword ptr [eax+0Ch]",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x9A7315",
+    "line": "xor     al, al",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9A7317",
+    "line": "add     esp, 220h",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9A731D",
     "line": "retn",
     "mnemonic": "retn",
     "size": 1

@@ -1,18 +1,31 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6C6DC0",
+      "0x6C6EC9"
+    ]
+  ],
+  "chunks_sha256": "d66877be835f05f1b8fec6155a9c064b5017a2cc82561aca3e2958eda99c5207",
+  "comment_regular": "Propagates a sequence update across its 0x10-byte controlled-block records. For each bound interpolator/controller it writes sample time, effective sequence weight, and transition weight into the selected blend item, invalidates cached times, and marks the blend data dirty. This consumes already-selected sequence timing; it does not select animation paths or map entries.",
+  "comment_repeatable": "Propagates a sequence update across its 0x10-byte controlled-block records. For each bound interpolator/controller it writes sample time, effective sequence weight, and transition weight into the selected blend item, invalidates cached times, and marks the blend data dirty. This consumes already-selected sequence timing; it does not select animation paths or map entries.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6C6DC0",
+  "display_name": "NiControllerSequence_UpdateControlledBlocks",
   "end_ea": "0x6C6EC9",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6C6DC0",
+  "name": "NiControllerSequence_UpdateControlledBlocks",
   "segment": ".text",
   "sha256": "d66877be835f05f1b8fec6155a9c064b5017a2cc82561aca3e2958eda99c5207",
   "size": 265,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6C6DC0",
+  "total_chunk_size": 265,
   "type": "void __thiscall(_DWORD *this, float, float, float)",
   "xrefs_from_count": 98,
   "xrefs_to_count": 1

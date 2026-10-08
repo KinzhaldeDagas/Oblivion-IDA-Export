@@ -1,4 +1,4 @@
 char __thiscall sub_42B310(_BYTE *this)
 {
-  return *(this + 0xC) & 1;
+  return *(this + 0xC) & 1; /*0x42b315*/
 }

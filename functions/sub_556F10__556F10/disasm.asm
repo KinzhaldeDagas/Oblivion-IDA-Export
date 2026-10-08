@@ -4,7 +4,7 @@
 0x556F19: jb      short loc_556F27
 0x556F1B: mov     eax, [esi+8]
 0x556F1E: push    eax
-0x556F1F: call    FormHeapFree
+0x556F1F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x556F24: add     esp, 4
 0x556F27: xor     eax, eax
 0x556F29: mov     dword ptr [esi+1Ch], 0Fh

@@ -76,7 +76,7 @@
 0x577923: fsub    dword ptr [ebp+34h]
 0x577926: mov     edx, [eax+38h]
 0x577929: fadd    dword ptr [edx]
-0x57792B: call    Double_To_SInt32
+0x57792B: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x577930: mov     [edi+20h], eax
 0x577933: test    ebx, ebx
 0x577935: jz      loc_5779D0
@@ -117,7 +117,7 @@
 0x57799C: lea     eax, [esp+20h+arg_0]
 0x5779A0: push    eax
 0x5779A1: mov     ecx, edi
-0x5779A3: call    sub_5B1E20
+0x5779A3: call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.
 0x5779A8: mov     ecx, [ebx+18h]
 0x5779AB: add     ecx, [ebx+20h]
 0x5779AE: add     [edi+14h], ecx
@@ -153,3 +153,20 @@
 0x5779FC: pop     ebx
 0x5779FD: add     esp, 0Ch
 0x577A00: retn    8
+0x9BE570: mov     eax, [ebp+8]
+0x9BE573: push    eax
+0x9BE574: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BE579: pop     ecx
+0x9BE57A: retn
+0x9BE57B: mov     eax, [ebp+4]
+0x9BE57E: push    eax
+0x9BE57F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BE584: pop     ecx
+0x9BE585: retn
+0x9BE586: mov     edx, [esp+arg_4]
+0x9BE58A: lea     eax, [edx-10h]
+0x9BE58D: mov     ecx, [edx-14h]
+0x9BE590: xor     ecx, eax
+0x9BE592: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BE597: mov     eax, offset stru_AE7CB4
+0x9BE59C: jmp     ___CxxFrameHandler3

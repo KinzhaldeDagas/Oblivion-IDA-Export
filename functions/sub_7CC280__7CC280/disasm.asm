@@ -1,4 +1,4 @@
-0x7CC280: push    0FFFFFFFFh
+0x7CC280: push    0FFFFFFFFh; Verified (Oblivion): builds ShadowLightShader-owned vertex/pixel constant maps and registers texture-effect U/V at vertex c9/c10, current fill/edge RGBA at pixel c0/c1, and edge-falloff/fVars at pixel c2. ShadowLightShader's vtable slot +0x88 points here; slot +0x38 applies these maps to the active pass's shader programs. This confirms the 0x18C..0x18F passes consume these maps through their active shader owner.
 0x7CC282: push    offset SEH_7CC280
 0x7CC287: mov     eax, large fs:0
 0x7CC28D: push    eax
@@ -97,7 +97,7 @@
 0x7CC3A2: mov     edx, [ecx]
 0x7CC3A4: mov     eax, [edx+18h]
 0x7CC3A7: push    0
-0x7CC3A9: push    offset flt_B44EE8
+0x7CC3A9: push    offset unk_B44EE8
 0x7CC3AE: push    4
 0x7CC3B0: push    10h
 0x7CC3B2: push    offset EmptyString
@@ -110,7 +110,7 @@
 0x7CC3C9: mov     ecx, [esi]
 0x7CC3CB: mov     edx, [ecx]
 0x7CC3CD: push    0
-0x7CC3CF: push    offset flt_B44EF8
+0x7CC3CF: push    offset unk_B44EF8
 0x7CC3D4: push    4
 0x7CC3D6: mov     eax, [edx+18h]
 0x7CC3D9: push    10h
@@ -125,7 +125,7 @@
 0x7CC3F4: mov     edx, [ecx]
 0x7CC3F6: mov     eax, [edx+18h]
 0x7CC3F9: push    0
-0x7CC3FB: push    offset unk_B46698
+0x7CC3FB: push    (offset flt_B46638+60h)
 0x7CC400: push    4
 0x7CC402: push    10h
 0x7CC404: push    offset EmptyString
@@ -139,7 +139,7 @@
 0x7CC41D: mov     edx, [ecx]
 0x7CC41F: mov     eax, [edx+18h]
 0x7CC422: push    0
-0x7CC424: push    offset flt_B454D8
+0x7CC424: push    offset unk_B454D8
 0x7CC429: push    4
 0x7CC42B: push    10h
 0x7CC42D: push    offset EmptyString
@@ -153,7 +153,7 @@
 0x7CC446: mov     edx, [ecx]
 0x7CC448: mov     eax, [edx+18h]
 0x7CC44B: push    0
-0x7CC44D: push    offset flt_B454E8
+0x7CC44D: push    offset unk_B454E8
 0x7CC452: push    4
 0x7CC454: push    10h
 0x7CC456: push    offset EmptyString
@@ -167,7 +167,7 @@
 0x7CC46F: mov     edx, [ecx]
 0x7CC471: mov     eax, [edx+18h]
 0x7CC474: push    0
-0x7CC476: push    offset dword_B44FD8
+0x7CC476: push    offset ShadowLightPointLightPos0Constant; Backing vector for ShadowLight PointLightPos0 vertex constant c16. Retail mode-5 caster CTAB names this register LightPosition.
 0x7CC47B: push    4
 0x7CC47D: push    10h
 0x7CC47F: push    offset EmptyString
@@ -175,13 +175,13 @@
 0x7CC486: push    10h
 0x7CC488: push    0
 0x7CC48A: push    10000007h
-0x7CC48F: push    offset aPointlightpos0
+0x7CC48F: push    offset aPointlightpos0; Register PointLightPos0 at vertex c16 from B44FD8, four floats; c16.w is the caster projected-depth denominator.
 0x7CC494: call    eax
 0x7CC496: mov     ecx, [esi]
 0x7CC498: mov     edx, [ecx]
 0x7CC49A: mov     eax, [edx+18h]
 0x7CC49D: push    0
-0x7CC49F: push    offset flt_B44FE8
+0x7CC49F: push    offset unk_B44FE8
 0x7CC4A4: push    4
 0x7CC4A6: push    10h
 0x7CC4A8: push    offset EmptyString
@@ -195,7 +195,7 @@
 0x7CC4C1: mov     edx, [ecx]
 0x7CC4C3: mov     eax, [edx+18h]
 0x7CC4C6: push    0
-0x7CC4C8: push    offset flt_B44FF8
+0x7CC4C8: push    offset unk_B44FF8
 0x7CC4CD: push    4
 0x7CC4CF: push    10h
 0x7CC4D1: push    offset EmptyString
@@ -209,7 +209,7 @@
 0x7CC4EA: mov     edx, [ecx]
 0x7CC4EC: mov     eax, [edx+18h]
 0x7CC4EF: push    0
-0x7CC4F1: push    offset dword_B464A8
+0x7CC4F1: push    (offset flt_B464A0+8)
 0x7CC4F6: push    4
 0x7CC4F8: push    10h
 0x7CC4FA: push    offset EmptyString
@@ -223,7 +223,7 @@
 0x7CC513: mov     edx, [ecx]
 0x7CC515: mov     eax, [edx+18h]
 0x7CC518: push    0
-0x7CC51A: push    offset unk_B464B8
+0x7CC51A: push    (offset flt_B464A0+18h)
 0x7CC51F: push    4
 0x7CC521: push    10h
 0x7CC523: push    offset EmptyString
@@ -237,7 +237,7 @@
 0x7CC53C: mov     edx, [ecx]
 0x7CC53E: mov     eax, [edx+18h]
 0x7CC541: push    0
-0x7CC543: push    offset unk_B464C8
+0x7CC543: push    (offset flt_B464A0+28h)
 0x7CC548: push    4
 0x7CC54A: push    10h
 0x7CC54C: push    offset EmptyString
@@ -251,7 +251,7 @@
 0x7CC565: mov     edx, [ecx]
 0x7CC567: mov     eax, [edx+18h]
 0x7CC56A: push    0
-0x7CC56C: push    offset dword_B46638
+0x7CC56C: push    offset flt_B46638
 0x7CC571: push    4
 0x7CC573: push    10h
 0x7CC575: push    offset EmptyString
@@ -260,12 +260,12 @@
 0x7CC57E: push    0
 0x7CC580: push    10000007h
 0x7CC585: push    offset aFogparamShadow
-0x7CC58A: call    eax
+0x7CC58A: call    eax; Fog constant-map decode: ShadowLight/shared map declares FogParam | ShadowVolumeFatness at vs c23 from B46638; shared fog vector also has shadow-volume semantics.
 0x7CC58C: mov     ecx, [esi]
 0x7CC58E: mov     edx, [ecx]
 0x7CC590: mov     eax, [edx+18h]
 0x7CC593: push    0
-0x7CC595: push    offset dword_B46648
+0x7CC595: push    (offset flt_B46638+10h)
 0x7CC59A: push    4
 0x7CC59C: push    10h
 0x7CC59E: push    offset EmptyString
@@ -274,12 +274,12 @@
 0x7CC5A7: push    0
 0x7CC5A9: push    10000007h
 0x7CC5AE: push    offset aFogcolorShadow
-0x7CC5B3: call    eax
+0x7CC5B3: call    eax; Fog constant-map decode: ShadowLight/shared map declares FogColor | ShadowVolumeExtrudeDistance at vs c24 from B46648; shared fog vector also has shadow-volume semantics.
 0x7CC5B5: mov     ecx, [esi]
 0x7CC5B7: mov     edx, [ecx]
 0x7CC5B9: mov     eax, [edx+18h]
 0x7CC5BC: push    0
-0x7CC5BE: push    offset flt_B44F08
+0x7CC5BE: push    offset unk_B44F08
 0x7CC5C3: push    4
 0x7CC5C5: push    10h
 0x7CC5C7: push    offset EmptyString
@@ -293,7 +293,7 @@
 0x7CC5E0: mov     edx, [ecx]
 0x7CC5E2: mov     eax, [edx+18h]
 0x7CC5E5: push    0
-0x7CC5E7: push    offset flt_B44F28
+0x7CC5E7: push    offset unk_B44F28
 0x7CC5EC: push    4
 0x7CC5EE: push    10h
 0x7CC5F0: push    offset EmptyString
@@ -307,7 +307,7 @@
 0x7CC609: mov     edx, [ecx]
 0x7CC60B: mov     eax, [edx+18h]
 0x7CC60E: push    0
-0x7CC610: push    offset unk_B466B8
+0x7CC610: push    (offset flt_B46638+80h)
 0x7CC615: push    4
 0x7CC617: push    10h
 0x7CC619: push    offset EmptyString
@@ -350,7 +350,7 @@
 0x7CC68A: mov     ecx, [esi]
 0x7CC68C: mov     edx, [ecx]
 0x7CC68E: push    0
-0x7CC690: push    offset flt_B44EE0
+0x7CC690: push    offset unk_B44EE0
 0x7CC695: push    4
 0x7CC697: push    4
 0x7CC699: push    offset EmptyString
@@ -516,7 +516,7 @@
 0x7CC87F: mov     edx, [ecx]
 0x7CC881: mov     eax, [edx+38h]
 0x7CC884: push    offset aFogparamShadow
-0x7CC889: call    eax
+0x7CC889: call    eax; Fog constant-map decode: caches handle for shared FogParam | ShadowVolumeFatness declaration; handle target is B46638.
 0x7CC88B: push    eax; a2
 0x7CC88C: mov     ecx, offset dword_B45050; this
 0x7CC891: call    NiSmartPointer_Set??
@@ -524,7 +524,7 @@
 0x7CC898: mov     edx, [ecx]
 0x7CC89A: mov     eax, [edx+38h]
 0x7CC89D: push    offset aFogcolorShadow
-0x7CC8A2: call    eax
+0x7CC8A2: call    eax; Fog constant-map decode: caches handle for shared FogColor | ShadowVolumeExtrudeDistance declaration; handle target is B46648.
 0x7CC8A4: push    eax; a2
 0x7CC8A5: mov     ecx, offset dword_B45054; this
 0x7CC8AA: call    NiSmartPointer_Set??
@@ -590,7 +590,7 @@
 0x7CC96D: mov     edx, [ecx]
 0x7CC96F: mov     eax, [edx+18h]
 0x7CC972: push    0
-0x7CC974: push    offset flt_B4615C
+0x7CC974: push    offset unk_B4615C
 0x7CC979: push    4
 0x7CC97B: push    10h
 0x7CC97D: push    offset EmptyString
@@ -606,13 +606,13 @@
 0x7CC99B: push    offset aDecalcount
 0x7CC9A0: call    eax
 0x7CC9A2: push    eax; a2
-0x7CC9A3: mov     ecx, offset dword_B45060; this
+0x7CC9A3: mov     ecx, offset unk_B45060; this
 0x7CC9A8: call    NiSmartPointer_Set??
 0x7CC9AD: mov     ecx, [esi]
 0x7CC9AF: mov     edx, [ecx]
 0x7CC9B1: mov     eax, [edx+18h]
 0x7CC9B4: push    0
-0x7CC9B6: push    offset flt_B46218
+0x7CC9B6: push    offset unk_B46218
 0x7CC9BB: push    4
 0x7CC9BD: push    80h ; '€'
 0x7CC9C2: push    offset EmptyString
@@ -652,9 +652,9 @@
 0x7CCA2C: push    eax; a2
 0x7CCA2D: mov     ecx, offset dword_B44F8C; this
 0x7CCA32: call    NiSmartPointer_Set??
-0x7CCA37: push    esi
-0x7CCA38: lea     ecx, [ebx+98h]
-0x7CCA3E: call    sub_55E2A0
+0x7CCA37: push    esi; incoming
+0x7CCA38: lea     ecx, [ebx+98h]; this
+0x7CCA3E: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
 0x7CCA43: cmp     dword ptr [ebx+2Ch], 0
 0x7CCA47: lea     esi, [ebx+2Ch]
 0x7CCA4A: jnz     loc_7CCE1C
@@ -679,7 +679,7 @@
 0x7CCA87: mov     edx, [ecx]
 0x7CCA89: mov     eax, [edx+18h]
 0x7CCA8C: push    0
-0x7CCA8E: push    offset flt_B44F18
+0x7CCA8E: push    offset unk_B44F18
 0x7CCA93: push    4
 0x7CCA95: push    10h
 0x7CCA97: push    offset EmptyString
@@ -693,7 +693,7 @@
 0x7CCAB0: mov     edx, [ecx]
 0x7CCAB2: mov     eax, [edx+18h]
 0x7CCAB5: push    0
-0x7CCAB7: push    offset dword_B46498
+0x7CCAB7: push    offset flt_B46498
 0x7CCABC: push    4
 0x7CCABE: push    10h
 0x7CCAC0: push    offset EmptyString
@@ -707,7 +707,7 @@
 0x7CCAD9: mov     edx, [ecx]
 0x7CCADB: mov     eax, [edx+18h]
 0x7CCADE: push    0
-0x7CCAE0: push    offset dword_B464A8
+0x7CCAE0: push    (offset flt_B464A0+8)
 0x7CCAE5: push    4
 0x7CCAE7: push    10h
 0x7CCAE9: push    offset EmptyString
@@ -721,7 +721,7 @@
 0x7CCB02: mov     edx, [ecx]
 0x7CCB04: mov     eax, [edx+18h]
 0x7CCB07: push    0
-0x7CCB09: push    offset unk_B464B8
+0x7CCB09: push    (offset flt_B464A0+18h)
 0x7CCB0E: push    4
 0x7CCB10: push    10h
 0x7CCB12: push    offset EmptyString
@@ -735,7 +735,7 @@
 0x7CCB2B: mov     edx, [ecx]
 0x7CCB2D: mov     eax, [edx+18h]
 0x7CCB30: push    0
-0x7CCB32: push    offset unk_B464C8
+0x7CCB32: push    (offset flt_B464A0+28h)
 0x7CCB37: push    4
 0x7CCB39: push    10h
 0x7CCB3B: push    offset EmptyString
@@ -748,7 +748,7 @@
 0x7CCB52: mov     ecx, [esi]
 0x7CCB54: mov     edx, [ecx]
 0x7CCB56: push    0
-0x7CCB58: push    offset unk_B464D8
+0x7CCB58: push    (offset flt_B464A0+38h)
 0x7CCB5D: push    4
 0x7CCB5F: push    10h
 0x7CCB61: push    offset EmptyString
@@ -763,7 +763,7 @@
 0x7CCB7D: mov     edx, [ecx]
 0x7CCB7F: mov     eax, [edx+18h]
 0x7CCB82: push    0
-0x7CCB84: push    offset dword_B46628
+0x7CCB84: push    (offset flt_B464A0+188h)
 0x7CCB89: push    4
 0x7CCB8B: push    10h
 0x7CCB8D: push    offset EmptyString
@@ -777,7 +777,7 @@
 0x7CCBA6: mov     edx, [ecx]
 0x7CCBA8: mov     eax, [edx+18h]
 0x7CCBAB: push    0
-0x7CCBAD: push    offset flt_B46688
+0x7CCBAD: push    (offset flt_B46638+50h)
 0x7CCBB2: push    4
 0x7CCBB4: push    10h
 0x7CCBB6: push    offset EmptyString
@@ -791,7 +791,7 @@
 0x7CCBCF: mov     edx, [ecx]
 0x7CCBD1: mov     eax, [edx+18h]
 0x7CCBD4: push    0
-0x7CCBD6: push    offset dword_B4616C
+0x7CCBD6: push    offset flt_B4616C
 0x7CCBDB: push    4
 0x7CCBDD: push    10h
 0x7CCBDF: push    offset EmptyString
@@ -805,7 +805,7 @@
 0x7CCBF8: mov     edx, [ecx]
 0x7CCBFA: mov     eax, [edx+18h]
 0x7CCBFD: push    0
-0x7CCBFF: push    offset unk_B466A8
+0x7CCBFF: push    (offset flt_B46638+70h)
 0x7CCC04: push    4
 0x7CCC06: push    10h
 0x7CCC08: push    offset EmptyString
@@ -813,13 +813,13 @@
 0x7CCC0F: push    1Ah
 0x7CCC11: push    0
 0x7CCC13: push    10000007h
-0x7CCC18: push    offset aStbbcolorconst
+0x7CCC18: push    offset aStbbcolorconst; Registers shader constant map entry STBBColorConstants using backing globals at B466A8. This supports TES STBB color constants only; it is separate from SpeedTreeRT 360 billboard image selection.
 0x7CCC1D: call    eax
 0x7CCC1F: mov     ecx, [esi]
 0x7CCC21: mov     edx, [ecx]
 0x7CCC23: mov     eax, [edx+18h]
 0x7CCC26: push    0
-0x7CCC28: push    offset flt_B44EDC
+0x7CCC28: push    offset unk_B44EDC
 0x7CCC2D: push    4
 0x7CCC2F: push    4
 0x7CCC31: push    offset EmptyString
@@ -938,7 +938,7 @@
 0x7CCD8B: mov     edx, [ecx]
 0x7CCD8D: mov     eax, [edx+18h]
 0x7CCD90: push    0
-0x7CCD92: push    offset flt_B4615C
+0x7CCD92: push    offset unk_B4615C
 0x7CCD97: push    4
 0x7CCD99: push    10h
 0x7CCD9B: push    offset EmptyString
@@ -960,7 +960,7 @@
 0x7CCDCD: mov     edx, [ecx]
 0x7CCDCF: mov     eax, [edx+18h]
 0x7CCDD2: push    0
-0x7CCDD4: push    offset dword_B46198
+0x7CCDD4: push    offset flt_B46198
 0x7CCDD9: push    4
 0x7CCDDB: push    80h ; '€'
 0x7CCDE0: push    offset EmptyString
@@ -978,9 +978,9 @@
 0x7CCE05: push    eax; a2
 0x7CCE06: mov     ecx, offset dword_B44F88; this
 0x7CCE0B: call    NiSmartPointer_Set??
-0x7CCE10: push    esi
-0x7CCE11: lea     ecx, [ebx+94h]
-0x7CCE17: call    sub_55E2A0
+0x7CCE10: push    esi; incoming
+0x7CCE11: lea     ecx, [ebx+94h]; this
+0x7CCE17: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
 0x7CCE1C: cmp     dword ptr [ebx+90h], 0
 0x7CCE23: lea     esi, [ebx+90h]
 0x7CCE29: jnz     loc_7CCFB4
@@ -1035,7 +1035,7 @@
 0x7CCEC0: mov     edx, [ecx]
 0x7CCEC2: mov     eax, [edx+18h]
 0x7CCEC5: push    0
-0x7CCEC7: push    offset flt_B44F08
+0x7CCEC7: push    offset unk_B44F08
 0x7CCECC: push    4
 0x7CCECE: push    10h
 0x7CCED0: push    offset EmptyString
@@ -1049,7 +1049,7 @@
 0x7CCEE9: mov     edx, [ecx]
 0x7CCEEB: mov     eax, [edx+18h]
 0x7CCEEE: push    0
-0x7CCEF0: push    offset flt_B44ED0
+0x7CCEF0: push    offset g_ShadowLight_TextureEffectUOffset
 0x7CCEF5: push    4
 0x7CCEF7: push    4
 0x7CCEF9: push    offset EmptyString
@@ -1063,7 +1063,7 @@
 0x7CCF12: mov     edx, [ecx]
 0x7CCF14: mov     eax, [edx+18h]
 0x7CCF17: push    0
-0x7CCF19: push    offset flt_B44ED4
+0x7CCF19: push    offset g_ShadowLight_TextureEffectVOffset
 0x7CCF1E: push    4
 0x7CCF20: push    4
 0x7CCF22: push    offset EmptyString
@@ -1091,7 +1091,7 @@
 0x7CCF64: mov     edx, [ecx]
 0x7CCF66: mov     eax, [edx+18h]
 0x7CCF69: push    0
-0x7CCF6B: push    offset dword_B44F78
+0x7CCF6B: push    offset flt_B44F78
 0x7CCF70: push    4
 0x7CCF72: push    10h
 0x7CCF74: push    offset EmptyString
@@ -1100,12 +1100,12 @@
 0x7CCF7D: push    0
 0x7CCF7F: push    10000007h
 0x7CCF84: push    offset aFogparam
-0x7CCF89: call    eax
+0x7CCF89: call    eax; Fog constant-map decode: ShadowLight alternate explicit FogParam at vs c12 uses local/global backing B44F78, not shared B46638.
 0x7CCF8B: mov     ecx, [esi]
 0x7CCF8D: mov     edx, [ecx]
 0x7CCF8F: mov     eax, [edx+18h]
 0x7CCF92: push    0
-0x7CCF94: push    offset dword_B44F68
+0x7CCF94: push    offset flt_B44F68
 0x7CCF99: push    4
 0x7CCF9B: push    10h
 0x7CCF9D: push    offset EmptyString
@@ -1114,7 +1114,7 @@
 0x7CCFA6: push    0
 0x7CCFA8: push    10000007h
 0x7CCFAD: push    offset aFogcolor
-0x7CCFB2: call    eax
+0x7CCFB2: call    eax; Fog constant-map decode: ShadowLight alternate explicit FogColor at vs c13 uses local/global backing B44F68, not shared B46648.
 0x7CCFB4: cmp     dword ptr [ebx+8Ch], 0
 0x7CCFBB: lea     esi, [ebx+8Ch]
 0x7CCFC1: jnz     loc_7CD077
@@ -1139,7 +1139,7 @@
 0x7CCFFE: mov     edx, [ecx]
 0x7CD000: mov     eax, [edx+18h]
 0x7CD003: push    0
-0x7CD005: push    offset dword_B44F38
+0x7CD005: push    offset g_ShadowLight_CurrentFillColor
 0x7CD00A: push    4
 0x7CD00C: push    10h
 0x7CD00E: push    offset EmptyString
@@ -1153,7 +1153,7 @@
 0x7CD027: mov     edx, [ecx]
 0x7CD029: mov     eax, [edx+18h]
 0x7CD02C: push    0
-0x7CD02E: push    offset dword_B44F48
+0x7CD02E: push    offset g_ShadowLight_CurrentEdgeColor
 0x7CD033: push    4
 0x7CD035: push    10h
 0x7CD037: push    offset EmptyString
@@ -1167,7 +1167,7 @@
 0x7CD050: mov     edx, [ecx]
 0x7CD052: mov     eax, [edx+18h]
 0x7CD055: push    0
-0x7CD057: push    offset flt_B44F58
+0x7CD057: push    offset g_ShadowLight_TextureEffectEdgeFalloff
 0x7CD05C: push    4
 0x7CD05E: push    10h
 0x7CD060: push    offset EmptyString
@@ -1176,7 +1176,7 @@
 0x7CD069: push    0
 0x7CD06B: push    10000007h
 0x7CD070: push    offset aFvars
-0x7CD075: call    eax
+0x7CD075: call    eax; Verified (Oblivion): ShadowLight pixel constant map registers the 16-byte fVars vector at pixel constant c2. The installed shaderpackage002.sdp SLS2076 CTAB independently describes a float4 fVars at c2, but its program-name/source association conflicts with the current loader table (SLS2076 -> SimpleShadow). CTAB confirms the vector shape only as Candidate corroboration; components z/w remain Unknown.
 0x7CD077: mov     ecx, dword ptr [esp+28h+var_C]
 0x7CD07B: mov     large fs:0, ecx
 0x7CD082: pop     ecx
@@ -1186,3 +1186,30 @@
 0x7CD086: pop     ebx
 0x7CD087: add     esp, 14h
 0x7CD08A: retn
+0x9CE980: mov     eax, [ebp-10h]; Microsoft VisualC 2-14/net runtime
+0x9CE983: push    eax
+0x9CE984: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CE989: pop     ecx
+0x9CE98A: retn
+0x9CE98B: mov     eax, [ebp-10h]
+0x9CE98E: push    eax
+0x9CE98F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CE994: pop     ecx
+0x9CE995: retn
+0x9CE996: mov     eax, [ebp-10h]
+0x9CE999: push    eax
+0x9CE99A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CE99F: pop     ecx
+0x9CE9A0: retn
+0x9CE9A1: mov     eax, [ebp-10h]
+0x9CE9A4: push    eax
+0x9CE9A5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CE9AA: pop     ecx
+0x9CE9AB: retn
+0x9CE9AC: mov     edx, [esp+arg_4]
+0x9CE9B0: lea     eax, [edx-18h]
+0x9CE9B3: mov     ecx, [edx-1Ch]
+0x9CE9B6: xor     ecx, eax
+0x9CE9B8: call    @__security_check_cookie@4
+0x9CE9BD: mov     eax, offset stru_AF78C4
+0x9CE9C2: jmp     ___CxxFrameHandler3

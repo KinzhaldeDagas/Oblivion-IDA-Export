@@ -11,7 +11,6 @@
 0x8BAC63: lea     esi, [edi+14h]
 0x8BAC66: mov     ebp, 6
 0x8BAC6B: jmp     short loc_8BAC70
-0x8BAC6D: align 10h
 0x8BAC70: push    1; lMaximumCount
 0x8BAC72: push    ebx; lInitialCount
 0x8BAC73: lea     ecx, [esi+10h]

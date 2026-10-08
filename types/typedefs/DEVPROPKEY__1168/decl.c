@@ -1,1 +1,5 @@
-_DEVPROPKEY
+struct _DEVPROPKEY
+{
+DEVPROPGUID fmtid;
+DEVPROPID pid;
+};

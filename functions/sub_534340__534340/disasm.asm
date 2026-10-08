@@ -26,3 +26,15 @@
 0x53439B: pop     ecx
 0x53439C: add     esp, 10h
 0x53439F: retn    4
+0x9B9140: mov     eax, [ebp-10h]
+0x9B9143: push    eax
+0x9B9144: call    sub_533D80
+0x9B9149: pop     ecx
+0x9B914A: retn
+0x9B914B: mov     edx, [esp+arg_4]
+0x9B914F: lea     eax, [edx-4]
+0x9B9152: mov     ecx, [edx-8]
+0x9B9155: xor     ecx, eax
+0x9B9157: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B915C: mov     eax, offset stru_AE3528
+0x9B9161: jmp     ___CxxFrameHandler3

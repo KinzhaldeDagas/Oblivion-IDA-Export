@@ -1,4 +1,4 @@
-0x6BBBA0: sub     esp, 1Ch
+0x6BBBA0: sub     esp, 1Ch; Oblivion 3-component position/vector key-track evaluator. One key or sentinel time returns key value at +4. Otherwise cursor-assisted bracket search uses the supplied byte stride, normalized segment time selects the interpolation-type dispatch table, and the lower-key cursor is written back.
 0x6BBBA3: push    ebx
 0x6BBBA4: mov     ebx, [esp+20h+arg_10]
 0x6BBBA8: cmp     ebx, 1

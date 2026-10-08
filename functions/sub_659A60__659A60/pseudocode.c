@@ -1,24 +1,24 @@
-char __usercall sub_659A60@<al>(_DWORD **a1@<ecx>, char a2@<bpl>, double a3@<st2>, double a4@<st1>, double a5@<st0>)
+char __thiscall sub_659A60(MobileObject *this)
 {
   int v6; // eax
   HighProcess *v7; // eax
   HighProcess *v8; // edi
-  void (__thiscall ***v9)(_DWORD, int); // ecx
+  _DWORD *v9; // ecx
 
-  v6 = (*(int (__thiscall **)(_DWORD *))(*a1[0x16] + 8))(a1[0x16]);
-  sub_674550(a2, a3, a4, a5, (int)a1, v6);
-  v7 = (HighProcess *)FormHeapAlloc(0x2ECu);
-  if ( v7 )
-    v8 = HighProcess::HighProcess(v7);
+  v6 = this->process->GetProcessLevel(this->process); /*0x659a8d*/
+  sub_674550((int)this, v6); /*0x659a96*/
+  v7 = (HighProcess *)FormHeapAlloc(0x2ECu); /*0x659aa0*/
+  if ( v7 ) /*0x659ab6*/
+    v8 = HighProcess::HighProcess(v7); /*0x659abf*/
   else
-    v8 = 0;
-  v8->Copy(v8, (BaseProcess *)a1[0x16]);
-  v9 = (void (__thiscall ***)(_DWORD, int))a1[0x16];
-  if ( v9 )
-    (**v9)(v9, 1);
-  a1[0x16] = &v8->__vftable;
-  sub_673A90((int)a1, 0, 0, 0, 0);
-  ((void (__thiscall *)(_DWORD **, _DWORD))(*a1)[0x5E])(a1, 0);
-  (*(void (__thiscall **)(_DWORD *))(*a1[0x16] + 0x4C))(a1[0x16]);
-  return 1;
+    v8 = 0; /*0x659ac3*/
+  v8->Copy(v8, this->process); /*0x659ad8*/
+  v9 = &this->process->__vftable; /*0x659ada*/
+  if ( v9 ) /*0x659adf*/
+    (*(void (__thiscall **)(_DWORD *, int))*v9)(v9, 1); /*0x659ae7*/
+  this->process = v8; /*0x659af7*/
+  ActorProcessManager_AddMobileObject((ActorProcessManager *)&qword_B3BB2C[0x75], this, 0, 0, 0, 0); /*0x659afa*/
+  ((void (__thiscall *)(MobileObject *, _DWORD))this->vtbl->super.Unk_5E)(this, 0); /*0x659b0b*/
+  this->process->Unk_13(this->process); /*0x659b15*/
+  return 1; /*0x659b19*/
 }

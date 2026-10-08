@@ -1,4 +1,4 @@
-0x4211C0: push    4Bh ; 'K'; a2
+0x4211C0: push    4Bh ; 'K'; Returns ExtraSavedMovementData's saved-attached-animation pointer, or null.
 0x4211C2: call    BaseExtraList_GetExtraData
 0x4211C7: test    eax, eax
 0x4211C9: jz      short loc_4211CF

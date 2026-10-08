@@ -1,4 +1,5 @@
-int __thiscall sub_51BF00(_DWORD *this, int a2)
+// Return one of exactly seven SkillActorValue entries from TESClass::majorSkills. Caller must supply index 0..6.
+SkillActorValue __thiscall TESClass_GetMajorSkillAV(TESClass *this, UInt32 index)
 {
-  return *(this + a2 + 0x11);
+  return this->members.majorSkills[index]; /*0x51bf08*/
 }

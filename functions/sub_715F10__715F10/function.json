@@ -1,18 +1,31 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 8,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x715F10",
+      "0x715F3D"
+    ]
+  ],
+  "chunks_sha256": "bee15bb874d4fc59a3dde0b670edfc125ee8368de68249171a756eb9a847b3ae",
+  "comment_regular": "Registers the NiObject base first and, on success, registers the refcounted next-controller object at +0x34. The target at +0x30 is a link, not recursively registered here.",
+  "comment_repeatable": "Registers the NiObject base first and, on success, registers the refcounted next-controller object at +0x34. The target at +0x30 is a link, not recursively registered here.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_715F10",
+  "display_name": "NiTimeController_RegisterStreamables",
   "end_ea": "0x715F3D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_715F10",
+  "name": "NiTimeController_RegisterStreamables",
   "segment": ".text",
   "sha256": "bee15bb874d4fc59a3dde0b670edfc125ee8368de68249171a756eb9a847b3ae",
   "size": 45,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x715F10",
+  "total_chunk_size": 45,
   "type": "char __thiscall(NiRenderTargetGroup *this, int)",
   "xrefs_from_count": 23,
   "xrefs_to_count": 12

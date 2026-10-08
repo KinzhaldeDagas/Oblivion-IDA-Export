@@ -1,1 +1,1 @@
-TileWindow
+struct TileWindow;

@@ -5,7 +5,7 @@
 0x44F0D4: push    ebx
 0x44F0D5: push    ebp
 0x44F0D6: push    esi
-0x44F0D7: mov     esi, [esp+128h+arg_0]
+0x44F0D7: mov     esi, [esp+128h+file]
 0x44F0DE: push    edi; ArgList
 0x44F0DF: xor     ebp, ebp
 0x44F0E1: mov     edi, ecx
@@ -41,7 +41,7 @@
 0x44F149: jnz     loc_44F2E0; jumptable 0044F2A9 cases 35,36,49-51
 0x44F14F: mov     ecx, esi
 0x44F151: mov     [esp+12Ch+var_119], al
-0x44F155: call    TESFile__NextGroup
+0x44F155: call    TESFile__NextGroup; MEF v20 fix: TESFile::NextGroup short-GRUP guard. Reject lengths below 0x14 before subtracting the group header and tail-calling TESFile_NextRecord.
 0x44F15A: test    al, al
 0x44F15C: jnz     loc_44F2E0; jumptable 0044F2A9 cases 35,36,49-51
 0x44F162: xor     bl, bl
@@ -83,18 +83,18 @@
 0x44F1E5: mov     ecx, ds:0B33A9Ch; this
 0x44F1EB: cmp     ecx, ebp
 0x44F1ED: jz      loc_44F2E0; jumptable 0044F2A9 cases 35,36,49-51
-0x44F1F3: call    TESObjectCELL_IsInterior
+0x44F1F3: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x44F1F8: test    al, al
 0x44F1FA: jz      loc_44F2E0; jumptable 0044F2A9 cases 35,36,49-51
 0x44F200: mov     ecx, ds:0B33A9Ch
 0x44F206: push    edi
 0x44F207: call    sub_4C9D20
 0x44F20C: jmp     loc_44F2E0; jumptable 0044F2A9 cases 35,36,49-51
-0x44F211: mov     eax, [esp+12Ch+arg_4]
-0x44F218: push    eax
-0x44F219: push    esi
-0x44F21A: mov     ecx, edi
-0x44F21C: call    TESDataHandler_LoadFormRecord
+0x44F211: mov     eax, dword ptr [esp+12Ch+firstFileLowFormFilter]
+0x44F218: push    eax; firstFileLowFormFilter
+0x44F219: push    esi; file
+0x44F21A: mov     ecx, edi; dataHandler
+0x44F21C: call    TESDataHandler_LoadFormRecord; Verified TESDataHandler_LoadFormRecord behavior: when activeFileState.retainActiveFile is nonzero, newly loaded cells receive TESForm::SetFromActiveFile(1). This matches the flag's file-retention use; the flag's writer remains Unknown.
 0x44F221: test    eax, eax
 0x44F223: jnz     short loc_44F22E
 0x44F225: mov     [esp+12Ch+var_114], ebp
@@ -118,7 +118,7 @@
 0x44F25B: call    sub_4523A0
 0x44F260: mov     eax, [esi+248h]
 0x44F266: push    eax; a1
-0x44F267: call    TESForm_LookupByFormID
+0x44F267: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x44F26C: add     esp, 4
 0x44F26F: cmp     eax, ebp
 0x44F271: jz      short loc_44F2E0; jumptable 0044F2A9 cases 35,36,49-51
@@ -128,7 +128,7 @@
 0x44F27F: jmp     short loc_44F2E0; jumptable 0044F2A9 cases 35,36,49-51
 0x44F281: mov     eax, [esi+248h]
 0x44F287: push    eax; a1
-0x44F288: call    TESForm_LookupByFormID
+0x44F288: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x44F28D: mov     edi, eax
 0x44F28F: add     esp, 4
 0x44F292: cmp     edi, ebp
@@ -173,7 +173,7 @@
 0x44F30F: fadd    dword ptr ds:0A2FC78h
 0x44F315: fdivp   st(1), st
 0x44F317: fmul    qword ptr ds:0A309F0h
-0x44F31D: call    Double_To_SInt32
+0x44F31D: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x44F322: cmp     eax, [esp+12Ch+var_110]
 0x44F326: mov     [esp+12Ch+var_118], eax
 0x44F32A: jz      short loc_44F357
@@ -189,7 +189,7 @@
 0x44F348: add     esp, 0Ch
 0x44F34B: fstp    [esp+130h+var_130]; float
 0x44F34E: push    ebp; int
-0x44F34F: call    sub_57B950
+0x44F34F: call    sub_57B950; Fast-travel UI/progress update helper called once per simulated travel-time step before relocation.
 0x44F354: add     esp, 8
 0x44F357: cmp     [esp+12Ch+var_119], 0
 0x44F35C: jz      short loc_44F369

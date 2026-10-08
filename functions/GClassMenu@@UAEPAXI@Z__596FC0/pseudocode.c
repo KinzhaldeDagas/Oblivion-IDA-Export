@@ -5,8 +5,8 @@ Menu *__userpurge ClassMenu::`scalar deleting destructor'@<eax>(
         double a4@<st0>,
         char a5)
 {
-  ClassMenu::~ClassMenu(this, a2, a3, a4);
-  if ( (a5 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  ClassMenu::~ClassMenu(this, a2, a3, a4); /*0x596fc3*/
+  if ( (a5 & 1) != 0 ) /*0x596fcd*/
+    FormHeapFree((unsigned int)this); /*0x596fd0*/
+  return this; /*0x596fda*/
 }

@@ -1,100 +1,162 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "DIDEVICEOBJECTINSTANCEW",
+  "definition": "struct DIDEVICEOBJECTINSTANCEW\n{\nDWORD dwSize;\nGUID guidType;\nDWORD dwOfs;\nDWORD dwType;\nDWORD dwFlags;\nWCHAR tszName[260];\nDWORD dwFFMaxForce;\nDWORD dwFFForceResolution;\nWORD wCollectionNumber;\nWORD wDesignatorIndex;\nWORD wUsagePage;\nWORD wUsage;\nDWORD dwDimension;\nWORD wExponent;\nWORD wReserved;\n}\n",
   "id": 18374686479672035083,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwSize",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "guidType",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 16
+      "size": 16,
+      "type": "GUID"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwOfs",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwType",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwFlags",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "tszName",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 520
+      "size": 520,
+      "type": "WCHAR[260]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwFFMaxForce",
       "offset": 552,
       "offset_hex": "0x228",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwFFForceResolution",
       "offset": 556,
-      "offset_hex": "0x22c",
-      "size": 4
+      "offset_hex": "0x22C",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "wCollectionNumber",
       "offset": 560,
       "offset_hex": "0x230",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "wDesignatorIndex",
       "offset": 562,
       "offset_hex": "0x232",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "wUsagePage",
       "offset": 564,
       "offset_hex": "0x234",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "wUsage",
       "offset": 566,
       "offset_hex": "0x236",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwDimension",
       "offset": 568,
       "offset_hex": "0x238",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "wExponent",
       "offset": 572,
-      "offset_hex": "0x23c",
-      "size": 2
+      "offset_hex": "0x23C",
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "wReserved",
       "offset": 574,
-      "offset_hex": "0x23e",
-      "size": 2
+      "offset_hex": "0x23E",
+      "size": 2,
+      "type": "WORD"
     }
   ],
   "name": "DIDEVICEOBJECTINSTANCEW",
+  "ordinal": 4024,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 576
 }

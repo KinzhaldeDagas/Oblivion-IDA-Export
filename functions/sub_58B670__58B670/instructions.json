@@ -252,12 +252,6 @@
     "size": 2
   },
   {
-    "ea": "0x58B6F7",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x58B700",
     "line": "movzx   eax, word ptr [esi+0Ah]",
     "mnemonic": "movzx",
@@ -415,7 +409,7 @@
   },
   {
     "ea": "0x58B755",
-    "line": "cmp     eax, offset unk_B352A4",
+    "line": "cmp     eax, 0B352A4h",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -487,7 +481,7 @@
   },
   {
     "ea": "0x58B777",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,7 +499,7 @@
   },
   {
     "ea": "0x58B781",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,7 +517,7 @@
   },
   {
     "ea": "0x58B78B",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,7 +535,7 @@
   },
   {
     "ea": "0x58B795",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,18 +1,31 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x46AED0",
+      "0x46AF2D"
+    ]
+  ],
+  "chunks_sha256": "4be53bce51c9ffcc02915f766f41570ba7b7095bb75429e0650b47965ae02ca3",
+  "comment_regular": "Expands an existing record CHUNK by up to 0xFFFF bytes: increases its 16-bit length, grows the global TESForm save buffer, and leaves the appended range ready for the caller to fill.",
+  "comment_repeatable": "Expands an existing record CHUNK by up to 0xFFFF bytes: increases its 16-bit length, grows the global TESForm save buffer, and leaves the appended range ready for the caller to fill.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_46AED0",
+  "display_name": "TESForm_ExpandChunk",
   "end_ea": "0x46AF2D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_46AED0",
+  "name": "TESForm_ExpandChunk",
   "segment": ".text",
   "sha256": "4be53bce51c9ffcc02915f766f41570ba7b7095bb75429e0650b47965ae02ca3",
   "size": 93,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x46AED0",
+  "total_chunk_size": 93,
   "type": "char __stdcall(int, unsigned __int16)",
   "xrefs_from_count": 35,
   "xrefs_to_count": 1

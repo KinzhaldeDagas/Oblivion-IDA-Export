@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6EC6B0",
-    "line": "mov     eax, [ecx+4]",
+    "line": "mov     eax, [ecx+4]; Destroys one NiTextKey by freeing its owned text pointer at +0x04.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x6EC6B8",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

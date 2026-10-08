@@ -1,7 +1,8 @@
-bool __thiscall sub_550330(int *this, _DWORD *a2)
+// Exact FaceGen matrix equality: dimensions must match and all coefficient bytes are compared.
+bool __thiscall FaceGenMatrix_Equals(const FaceGenMatrix *this, const FaceGenMatrix *right)
 {
-  int v3; // eax
-  int v4; // esi
+  unsigned int rows; // eax
+  unsigned int columns; // esi
   unsigned int v5; // esi
   _DWORD *v6; // edi
   _DWORD *v7; // eax
@@ -16,57 +17,57 @@ bool __thiscall sub_550330(int *this, _DWORD *a2)
   unsigned __int8 *v16; // eax
   int v17; // eax
 
-  v3 = *this;
-  if ( *a2 != *this )
-    return 0;
-  v4 = *(this + 1);
-  if ( a2[1] != v4 )
-    return 0;
-  if ( v3 && v4 )
+  rows = this->rows; /*0x550333*/
+  if ( right->rows != this->rows ) /*0x55033c*/
+    return 0; /*0x55033c*/
+  columns = this->columns; /*0x550342*/
+  if ( right->columns != columns ) /*0x550348*/
+    return 0; /*0x55041c*/
+  if ( rows && columns ) /*0x550358*/
   {
-    v5 = 4 * v3 * v4;
-    v6 = (_DWORD *)sub_54F7A0(a2 + 2, 0);
-    v7 = (_DWORD *)sub_54F7A0(this + 2, 0);
-    if ( v5 < 4 )
+    v5 = 4 * rows * columns; /*0x550369*/
+    v6 = (_DWORD *)sub_54F7A0(&right->allocator08, 0); /*0x550375*/
+    v7 = (_DWORD *)sub_54F7A0(&this->allocator08, 0); /*0x550377*/
+    if ( v5 < 4 ) /*0x55037f*/
     {
 LABEL_8:
-      if ( !v5 )
-        goto LABEL_18;
+      if ( !v5 ) /*0x550397*/
+        goto LABEL_18; /*0x550397*/
     }
     else
     {
-      while ( *v7 == *v6 )
+      while ( *v7 == *v6 ) /*0x550385*/
       {
-        v5 -= 4;
-        ++v6;
-        ++v7;
-        if ( v5 < 4 )
-          goto LABEL_8;
+        v5 -= 4; /*0x550387*/
+        ++v6; /*0x55038a*/
+        ++v7; /*0x55038d*/
+        if ( v5 < 4 ) /*0x550393*/
+          goto LABEL_8; /*0x550393*/
       }
     }
-    v8 = *(unsigned __int8 *)v7 - *(unsigned __int8 *)v6;
-    if ( v8 )
-      goto LABEL_16;
-    v9 = v5 - 1;
-    v10 = (unsigned __int8 *)v6 + 1;
-    v11 = (unsigned __int8 *)v7 + 1;
-    if ( v9 )
+    v8 = *(unsigned __int8 *)v7 - *(unsigned __int8 *)v6; /*0x55039f*/
+    if ( v8 ) /*0x5503a1*/
+      goto LABEL_16; /*0x5503a1*/
+    v9 = v5 - 1; /*0x5503a3*/
+    v10 = (unsigned __int8 *)v6 + 1; /*0x5503a6*/
+    v11 = (unsigned __int8 *)v7 + 1; /*0x5503a9*/
+    if ( v9 ) /*0x5503ae*/
     {
-      v8 = *v11 - *v10;
-      if ( v8
+      v8 = *v11 - *v10; /*0x5503b6*/
+      if ( v8 /*0x5503e6*/
         || (v12 = v9 - 1, v13 = v10 + 1, v14 = v11 + 1, v12)
         && ((v8 = *v14 - *v13) != 0 || (v15 = v13 + 1, v16 = v14 + 1, v12 != 1) && (v8 = *v16 - *v15) != 0) )
       {
 LABEL_16:
-        v17 = 1;
-        if ( v8 <= 0 )
-          return 0;
-        return v17 == 0;
+        v17 = 1; /*0x5503ea*/
+        if ( v8 <= 0 ) /*0x5503ef*/
+          return 0; /*0x550400*/
+        return v17 == 0; /*0x5503ef*/
       }
     }
 LABEL_18:
-    v17 = 0;
-    return v17 == 0;
+    v17 = 0; /*0x550403*/
+    return v17 == 0; /*0x550411*/
   }
-  return 1;
+  return 1; /*0x5503fc*/
 }

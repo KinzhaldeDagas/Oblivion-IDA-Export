@@ -1,1 +1,4 @@
-ChamaleonEffectMembr
+struct ChamaleonEffectMembr
+{
+ValueModifierEffectMembr super;
+};

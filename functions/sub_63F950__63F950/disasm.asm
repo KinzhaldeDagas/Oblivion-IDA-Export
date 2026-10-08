@@ -49,7 +49,7 @@
 0x63F9EA: push    edi
 0x63F9EB: push    ebp
 0x63F9EC: push    0Ch
-0x63F9EE: mov     ecx, offset dword_B3BDB0
+0x63F9EE: mov     ecx, (offset qword_B3BB2C+284h)
 0x63F9F3: call    sub_67CF50
 0x63F9F8: mov     ebx, eax
 0x63F9FA: mov     edi, [ebx]
@@ -87,7 +87,6 @@
 0x63FA61: mov     [esp+34h+arg_4], edi
 0x63FA65: jz      loc_63FE59
 0x63FA6B: jmp     short loc_63FA70
-0x63FA6D: align 10h
 0x63FA70: cmp     dword ptr [edi], 0
 0x63FA73: jz      loc_63FE59
 0x63FA79: mov     edx, [esi]
@@ -183,16 +182,16 @@
 0x63FB77: test    edi, edi
 0x63FB79: jz      loc_63FDBD
 0x63FB7F: mov     ecx, esi; this
-0x63FB81: call    sub_5E6C60
+0x63FB81: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x63FB86: test    al, al
 0x63FB88: jz      short loc_63FB99
 0x63FB8A: mov     ecx, edi; this
-0x63FB8C: call    sub_5E6C60
+0x63FB8C: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x63FB91: test    al, al
 0x63FB93: jz      loc_63FDBD
 0x63FB99: push    ebp
 0x63FB9A: push    0Ch
-0x63FB9C: mov     ecx, offset dword_B3BDB0
+0x63FB9C: mov     ecx, (offset qword_B3BB2C+284h)
 0x63FBA1: mov     byte ptr [esp+3Ch+responsibility], 0
 0x63FBA6: call    sub_67CF50
 0x63FBAB: mov     ebx, eax
@@ -219,10 +218,10 @@
 0x63FBE5: jmp     short loc_63FBEC
 0x63FBE7: mov     byte ptr [esp+34h+responsibility], 1
 0x63FBEC: mov     ecx, [esp+34h+var_20]
-0x63FBF0: call    BSSimpleList_Clear
+0x63FBF0: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x63FBF5: mov     ecx, [esp+34h+var_20]
 0x63FBF9: push    ecx
-0x63FBFA: call    FormHeapFree
+0x63FBFA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x63FBFF: mov     edx, [esi]
 0x63FC01: mov     eax, [edx+284h]
 0x63FC07: add     esp, 4
@@ -271,22 +270,22 @@
 0x63FC7C: mov     ecx, offset unk_B36C48
 0x63FC81: call    GameSetting_GetSafeFloatPointer
 0x63FC86: fld     dword ptr [eax]
-0x63FC88: call    Double_To_SInt32
+0x63FC88: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x63FC8D: mov     ecx, ebp; this
 0x63FC8F: mov     [esp+34h+var_20], eax
-0x63FC93: call    TESObjectREFR_GetParentCell
+0x63FC93: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x63FC98: test    eax, eax
 0x63FC9A: jz      short loc_63FCC3
 0x63FC9C: mov     ecx, ebp; this
-0x63FC9E: call    TESObjectREFR_GetParentCell
+0x63FC9E: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x63FCA3: mov     ecx, eax; this
-0x63FCA5: call    TESObjectCELL_IsInterior
+0x63FCA5: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x63FCAA: test    al, al
 0x63FCAC: jz      short loc_63FCC3
 0x63FCAE: mov     ecx, offset unk_B36C50
 0x63FCB3: call    GameSetting_GetSafeFloatPointer
 0x63FCB8: fld     dword ptr [eax]
-0x63FCBA: call    Double_To_SInt32
+0x63FCBA: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x63FCBF: mov     [esp+34h+var_20], eax
 0x63FCC3: mov     ecx, ebp; this
 0x63FCC5: call    Actor_IsCreature
@@ -375,7 +374,7 @@
 0x63FDB5: mov     ds:0B3B930h, edx
 0x63FDBB: jmp     short loc_63FDEB
 0x63FDBD: mov     ecx, esi; this
-0x63FDBF: call    sub_5E6C60
+0x63FDBF: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x63FDC4: test    al, al
 0x63FDC6: jz      short loc_63FDEB
 0x63FDC8: mov     ecx, ebp
@@ -480,8 +479,8 @@
 0x63FED5: push    0; a2
 0x63FED7: call    Actor_GetActorBaseForm
 0x63FEDC: mov     ebx, eax
-0x63FEDE: mov     ecx, [edi]
-0x63FEE0: call    sub_5E32D0
+0x63FEDE: mov     ecx, [edi]; this
+0x63FEE0: call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.
 0x63FEE5: test    al, al
 0x63FEE7: jz      short loc_63FF2E
 0x63FEE9: mov     ecx, [edi]
@@ -495,11 +494,11 @@
 0x63FF00: cmp     [edi+4], al
 0x63FF03: jnz     short loc_63FF2E
 0x63FF05: mov     ecx, [esp+34h+a6]
-0x63FF09: push    3
-0x63FF0B: push    ecx
-0x63FF0C: push    ebp
-0x63FF0D: mov     ecx, offset ActorProcessManager_ptr
-0x63FF12: call    sub_675BF0
+0x63FF09: push    3; category
+0x63FF0B: push    ecx; target
+0x63FF0C: push    ebp; criminal
+0x63FF0D: mov     ecx, (offset qword_B3BB2C+1D4h); self
+0x63FF12: call    ActorProcessManager_FindCrime
 0x63FF17: test    eax, eax
 0x63FF19: jz      short loc_63FF2E
 0x63FF1B: mov     edx, [esi]
@@ -542,11 +541,11 @@
 0x63FF89: test    al, al
 0x63FF8B: jnz     short loc_63FFB4
 0x63FF8D: mov     ecx, [edi]
-0x63FF8F: push    3
-0x63FF91: push    ebp
-0x63FF92: push    ecx
-0x63FF93: mov     ecx, offset ActorProcessManager_ptr
-0x63FF98: call    sub_675BF0
+0x63FF8F: push    3; category
+0x63FF91: push    ebp; target
+0x63FF92: push    ecx; criminal
+0x63FF93: mov     ecx, (offset qword_B3BB2C+1D4h); self
+0x63FF98: call    ActorProcessManager_FindCrime
 0x63FF9D: test    eax, eax
 0x63FF9F: jz      short loc_63FFB4
 0x63FFA1: mov     edx, [esi]
@@ -557,8 +556,8 @@
 0x63FFAA: mov     eax, [edx+310h]
 0x63FFB0: mov     ecx, esi
 0x63FFB2: call    eax
-0x63FFB4: mov     ecx, esi
-0x63FFB6: call    sub_5E0F30
+0x63FFB4: mov     ecx, esi; this
+0x63FFB6: call    Actor__IsSleeping; Returns true exactly when Actor.process exists and GetSleepState() == kSitSleep_Sleeping (9). This is a SitSleep-state test, not a combat/procedure test.
 0x63FFBB: test    al, al
 0x63FFBD: jz      short loc_63FFD2
 0x63FFBF: mov     edx, [esi]
@@ -569,9 +568,9 @@
 0x63FFCE: add     dword ptr [esi+4], 0FFFFFFFFh
 0x63FFD2: mov     ebx, [esp+34h+var_4]
 0x63FFD6: mov     ecx, ebx
-0x63FFD8: call    BSSimpleList_Clear
+0x63FFD8: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x63FFDD: push    ebx
-0x63FFDE: call    FormHeapFree
+0x63FFDE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x63FFE3: add     esp, 4
 0x63FFE6: pop     edi
 0x63FFE7: pop     ebx

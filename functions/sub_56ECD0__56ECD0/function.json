@@ -1,10 +1,22 @@
 {
   "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 42,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x56ECD0",
+      "0x56FB3F"
+    ],
+    [
+      "0x9BDB90",
+      "0x9BDBE9"
+    ]
+  ],
   "chunks_sha256": "d1c072d12ba03f61fd54b53de3b7baa0929d439c7b4d1fd71997ca2e92ad72e3",
   "comment_regular": "Verified CPU-skinned fallback builder passes sourceGeometry->skinData and NiGeometryData vertex/normal arrays/count to sub_72AF20, then computes/clips decal arrays and calls BSTempEffectGeometryDecal_BuildGeneratedGeometry. Called from Initialize when source additional-data vslot +0x4C returns false.",
   "comment_repeatable": "Verified CPU-skinned fallback builder passes sourceGeometry->skinData and NiGeometryData vertex/normal arrays/count to sub_72AF20, then computes/clips decal arrays and calls BSTempEffectGeometryDecal_BuildGeneratedGeometry. Called from Initialize when source additional-data vslot +0x4C returns false.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
   "display_name": "BSTempEffectGeometryDecal_InitializeUsingSkinnedGeometryData",
   "end_ea": "0x56FB3F",
@@ -15,6 +27,7 @@
   "segment": ".text",
   "sha256": "9178900b9c72663693292429ba5b804b8d690069c165ade73af736533f4a5beb",
   "size": 3695,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x56ECD0",
   "total_chunk_size": 3784,
   "type": "void __thiscall(BSTempEffectGeometryDecalLayout_t *this)",

@@ -92,7 +92,7 @@
 0x6A20E9: jnz     short loc_6A20F4
 0x6A20EB: push    0
 0x6A20ED: mov     ecx, esi
-0x6A20EF: call    ActiveEffect_Base_Remove
+0x6A20EF: call    ActiveEffect_Base_Remove; Verified termination API: sets bTerminated=1. When its flush flag is true, immediately invokes ActiveEffect_Base_ProcessEffect to run termination cleanup.
 0x6A20F4: test    edi, edi
 0x6A20F6: mov     eax, edi
 0x6A20F8: jnz     short loc_6A2091

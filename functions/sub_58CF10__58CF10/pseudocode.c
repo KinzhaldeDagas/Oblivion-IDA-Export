@@ -1,7 +1,13 @@
-float *__thiscall sub_58CF10(_DWORD *this, _DWORD *a2, _DWORD *a3, int a4, int a5)
+// Verified wrapper: gets/creates destination trait Value and forwards source tile/source trait/operator to Value::AddReferenceAction. Called from ConnectTraitsToTree after GetTileByName resolves source.
+void *__thiscall Tile::AddReferenceAction(
+        Tile *this,
+        unsigned int destinationTrait,
+        Tile *source,
+        unsigned int sourceTrait,
+        unsigned int action)
 {
-  float *PropertyByCode; // eax
+  OblivionTileValueView *Value; // eax
 
-  PropertyByCode = (float *)Tile_GetPropertyByCode_(this, a2);
-  return sub_58CC60(PropertyByCode, a3, a4, a5);
+  Value = Tile::GetOrCreateValue(this, destinationTrait); /*0x58cf24*/
+  return Tile::Value::AddReferenceAction(Value, source, sourceTrait, action); /*0x58cf30*/
 }

@@ -1,1 +1,4 @@
-IDirectSound
+struct IDirectSound
+{
+const IDirectSoundVtbl *lpVtbl;
+};

@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x5BDCFE",
-    "line": "push    4",
+    "line": "push    4; modeBit",
     "mnemonic": "push",
     "size": 2
   },
@@ -85,13 +85,13 @@
   },
   {
     "ea": "0x5BDD05",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5BDD07",
-    "line": "call    sub_4EF2D0",
+    "line": "call    TESWorldSpace_IsDistantLODModeEnabled; Verified .cmp mode-mask bit meanings from Oblivion consumers: 0x1 enables the tree channel (DistantLOD_UpdateExteriorGrid pairs this with bDisplayLODTrees); 0x2 enables the building/object channel (paired with bDisplayLODBuildings and CellsWithLODObjects); 0x4 enables the LandLOD channel (DistantLOD_UpdateLandLODMap). Default mask 0x7 enables all three.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x5BDD35",
-    "line": "call    esi ; GetTickCount",
+    "line": "call    esi ; GetTickCount; ModernWindowsCompatible patch site: worldspace message delay records GetTickCount, then vanilla waits until absolute start+1000 target.",
     "mnemonic": "call",
     "size": 2
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x5BDD41",
-    "line": "jnb     short loc_5BDD5E",
+    "line": "jnb     short loc_5BDD5E; ModernWindowsCompatible decode: unsigned now >= target check skips the intended one-second pump when start+1000 wraps low.",
     "mnemonic": "jnb",
     "size": 2
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x5BDD53",
-    "line": "call    sub_40D4D0",
+    "line": "call    Input_CheckScreenshotHotkey; Verified gamma integration 2026-09-26: frame path tests B34FA4 and calls Renderer_ApplyPendingGammaRamp at40D508 before scene rendering.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x5BDD5E",
-    "line": "push    1",
+    "line": "push    1; ModernWindowsCompatible continuation: after the delay loop, vanilla calls sub_4EBAE0(1) and sub_578DA0.",
     "mnemonic": "push",
     "size": 2
   },
@@ -415,13 +415,13 @@
   },
   {
     "ea": "0x5BDDB6",
-    "line": "fstp    [esp+0Ch+a3]; a3",
+    "line": "fstp    [esp+0Ch+a3]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5BDDB9",
-    "line": "push    1772h; a2",
+    "line": "push    1772h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x5BDDC0",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x5BDDC9",
-    "line": "jmp     sub_584740",
+    "line": "jmp     Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.",
     "mnemonic": "jmp",
     "size": 5
   },

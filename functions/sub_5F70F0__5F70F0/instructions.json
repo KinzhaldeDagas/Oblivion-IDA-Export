@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5F70F0",
-    "line": "sub     esp, 21Ch",
+    "line": "sub     esp, 21Ch; Actor single-topic speech path. Selects one INFO with ambient conversation rules, immediately runs AddTopicList/result on this actor, then plays only the first decoded response and destroys the temporary DialogueItem. Named from observed Oblivion behavior.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x5F7104",
-    "line": "mov     eax, [esp+21Ch+arg_4]",
+    "line": "mov     eax, [esp+21Ch+target]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -43,13 +43,13 @@
   },
   {
     "ea": "0x5F710D",
-    "line": "push    0",
+    "line": "push    0; conversation",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F710F",
-    "line": "push    0",
+    "line": "push    0; previousTopic",
     "mnemonic": "push",
     "size": 2
   },
@@ -61,25 +61,25 @@
   },
   {
     "ea": "0x5F7113",
-    "line": "mov     ecx, [esp+22Ch+arg_0]",
+    "line": "mov     ecx, [esp+22Ch+arg_0]; this",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x5F711A",
-    "line": "push    eax",
+    "line": "push    eax; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F711B",
-    "line": "push    edi",
+    "line": "push    edi; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F711C",
-    "line": "call    TESTopic__CreateDialogueInfo",
+    "line": "call    TESTopic__CreateDialogueItem; Selects a matching TESTopicInfo and wraps it as a 0x1C DialogueItem containing response list/cursor, INFO, topic, owner quest, and speaker.",
     "mnemonic": "call",
     "size": 5
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x5F7123",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x5F712B",
-    "line": "call    sub_5EF930",
+    "line": "call    Actor__StopDialoguePlayback; Stops an Actor's current dialogue/audio/lip playback and associated animation state. Used before starting/replacing dialogue, on menu close, death/paralysis, and DialoguePackage active-speaker cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,31 +157,31 @@
   },
   {
     "ea": "0x5F7141",
-    "line": "mov     ecx, esi; int",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F7143",
-    "line": "call    sub_5308D0",
+    "line": "call    TESTopicInfo__AddTopicList; Adds TESTopicInfo.addedTopics to PlayerCharacter. Pointer-duplicate topics are ignored, each genuinely new topic may show the sTopicAddedText notification outside DialogMenu, and the player's known-topic list is sorted once afterward.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5F7148",
-    "line": "push    edi",
+    "line": "push    edi; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F7149",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F714B",
-    "line": "call    sub_531470",
+    "line": "call    TESTopicInfo__RunResult; Single-topic speech commits the selected INFO before starting its first response. Unlike generated Conversation playback, this path does not defer result execution until response exhaustion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,25 +211,25 @@
   },
   {
     "ea": "0x5F7160",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F7162",
-    "line": "call    sub_6B7BA0",
+    "line": "call    DialogueItem__FirstResponse",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5F7167",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F7169",
-    "line": "call    sub_6B7C20",
+    "line": "call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -877,13 +877,13 @@
   },
   {
     "ea": "0x5F72D7",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F72D9",
-    "line": "call    sub_6B81D0",
+    "line": "call    DialogueItem__Destroy",
     "mnemonic": "call",
     "size": 5
   },
@@ -895,7 +895,7 @@
   },
   {
     "ea": "0x5F72DF",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

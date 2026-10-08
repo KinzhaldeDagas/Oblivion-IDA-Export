@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x63A210",
-    "line": "sub     esp, 154h",
+    "line": "sub     esp, 154h; RadiantAI: HighProcess package action dispatcher. Uses selected package procedureArrayIndex and current procedure slot to index 0xB152B0. Case 5 calls HighProcess vtable +0x510 -> sub_62DA10.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x63A26D",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x63A27C",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x63A2C3",
-    "line": "call    sub_471730",
+    "line": "call    ActorAnimData_HasPendingKFModels; Returns whether ActorAnimData has any deferred KFModel install state: first model at +0xB4 or linked-list head at +0xB8. ActorAnimData_Update uses this after each budgeted install.",
     "mnemonic": "call",
     "size": 5
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x63A37F",
-    "line": "call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)",
+    "line": "call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,25 +649,25 @@
   },
   {
     "ea": "0x63A38E",
-    "line": "fst     [esp+16Ch+var_168]; int",
+    "line": "fst     [esp+16Ch+arg1]; arg1",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x63A392",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x63A394",
-    "line": "fstp    [esp+16Ch+var_16C]; float",
+    "line": "fstp    [esp+16Ch+arg0]; arg0",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x63A397",
-    "line": "call    Actor_ProcessAction",
+    "line": "call    Actor_ProcessAction; Per-actor native action state machine. Advances required-note phases, handles AttackBow nock/hold/release lifecycle, constructs ArrowProjectile on release, and dispatches post-shot AMMO consumption.",
     "mnemonic": "call",
     "size": 5
   },
@@ -853,7 +853,7 @@
   },
   {
     "ea": "0x63A3F6",
-    "line": "call    sub_5EAE70",
+    "line": "call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1045,7 +1045,7 @@
   },
   {
     "ea": "0x63A457",
-    "line": "fstp    [esp+168h+var_168]; float",
+    "line": "fstp    [esp+168h+arg1]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1057,7 +1057,7 @@
   },
   {
     "ea": "0x63A45D",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1207,7 +1207,7 @@
   },
   {
     "ea": "0x63A49F",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1219,7 +1219,7 @@
   },
   {
     "ea": "0x63A4A6",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1243,7 +1243,7 @@
   },
   {
     "ea": "0x63A4B5",
-    "line": "mov     ecx, offset fTorchEvaluationTimer",
+    "line": "mov     ecx, 0B37A58h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1441,13 +1441,13 @@
   },
   {
     "ea": "0x63A53A",
-    "line": "fstp    [esp+168h+var_168]; float",
+    "line": "fstp    [esp+168h+arg1]; float",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x63A53D",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1573,7 +1573,7 @@
   },
   {
     "ea": "0x63A578",
-    "line": "mov     ecx, offset flt_B36C88",
+    "line": "mov     ecx, offset unk_B36C88",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1771,13 +1771,13 @@
   },
   {
     "ea": "0x63A5E6",
-    "line": "push    1",
+    "line": "push    1; useFactionOwnership",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x63A5E8",
-    "line": "push    edi",
+    "line": "push    edi; actorReference",
     "mnemonic": "push",
     "size": 1
   },
@@ -1795,13 +1795,13 @@
   },
   {
     "ea": "0x63A5ED",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; reference",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x63A5EF",
-    "line": "call    TESOBjectREFR_IsOwnedBy",
+    "line": "call    TESObjectREFR_IsOwnedBy; Verified ownership predicate and flag meaning: resolve the effective owner; accept exact equality with the actor's template/base form. When the owner differs, a nonzero ownership-global value can permit the access. With useFactionOwnership=true, a Faction owner is instead checked against the actor base's faction rank and the reference's effective required rank; callers passing false skip that faction-rank path. Direct callers include many `true` paths and ContainerExtraData_RemoveForm's item-sweep call with false. Fallout's TESObjectREFR::IsAnOwner/DoorLock::IsAnOwner also expose a `useFaction` boolean, but its implementation uses actor faction membership and has different rank/global handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1825,7 +1825,7 @@
   },
   {
     "ea": "0x63A5FA",
-    "line": "call    sub_5EAE70",
+    "line": "call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1867,7 +1867,7 @@
   },
   {
     "ea": "0x63A617",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2083,7 +2083,7 @@
   },
   {
     "ea": "0x63A68F",
-    "line": "call    sub_565DF0",
+    "line": "call    sub_565DF0; RadiantAI: package flag helper used by chooser skip logic; tests TESPackage flag 0x0400.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2101,7 +2101,7 @@
   },
   {
     "ea": "0x63A698",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2131,7 +2131,7 @@
   },
   {
     "ea": "0x63A6A6",
-    "line": "call    sub_41FFC0",
+    "line": "call    ExtraDataList_SetRunOnceExtraPackage; Ensures ExtraRunOncePacks exists, then adds or updates a package record with the supplied package and state byte.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2155,7 +2155,7 @@
   },
   {
     "ea": "0x63A6B2",
-    "line": "call    sub_5660E0",
+    "line": "call    sub_5660E0; RadiantAI: package flag helper used by chooser skip logic; tests TESPackage flag 0x8000.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2191,7 +2191,7 @@
   },
   {
     "ea": "0x63A6CC",
-    "line": "mov     ecx, [esi+8]",
+    "line": "mov     ecx, [esi+8]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -2209,7 +2209,7 @@
   },
   {
     "ea": "0x63A6D3",
-    "line": "call    sub_567770",
+    "line": "call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2653,7 +2653,7 @@
   },
   {
     "ea": "0x63A7AB",
-    "line": "call    sub_452A60",
+    "line": "call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3061,13 +3061,13 @@
   },
   {
     "ea": "0x63A87F",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x63A881",
-    "line": "call    sub_567770",
+    "line": "call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3211,7 +3211,7 @@
   },
   {
     "ea": "0x63A8C7",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3229,7 +3229,7 @@
   },
   {
     "ea": "0x63A8D0",
-    "line": "push    edi",
+    "line": "push    edi; actor",
     "mnemonic": "push",
     "size": 1
   },
@@ -3241,19 +3241,19 @@
   },
   {
     "ea": "0x63A8D3",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x63A8D8",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; cell",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x63A8DA",
-    "line": "call    sub_4CAAC0",
+    "line": "call    TESObjectCELL_IsOwnedByActor; Verified Oblivion owner predicate: reads the cell's XOWN and XRNK extra data; returns true for an NPC owner matching the actor's base form, or for a faction owner when the actor is an NPC whose faction rank meets the cell's required rank. Player identity is passed into faction-rank evaluation for its special handling. Called by door access/trespass policy and other ownership paths. Fallout has the analogous TESObjectCELL::IsActorBaseCellOwner; it takes TESActorBase* and uses a differently exposed faction-rank path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4033,7 +4033,7 @@
   },
   {
     "ea": "0x63AA57",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4753,7 +4753,7 @@
   },
   {
     "ea": "0x63ABC5",
-    "line": "fstp    [esp+170h+var_16C]; float",
+    "line": "fstp    [esp+170h+arg0]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -5251,7 +5251,7 @@
   },
   {
     "ea": "0x63ACBF",
-    "line": "mov     ebp, [ebx+18h]",
+    "line": "mov     ebp, [ebx+18h]; RadiantAI: reads TESPackage::procedureArrayIndex (offset 0x18). This selects the procedure-array dispatch row; package type is separate at offset 0x20.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -5269,13 +5269,13 @@
   },
   {
     "ea": "0x63ACC6",
-    "line": "mov     ecx, ds:0B152B0h[ebp*4]",
+    "line": "mov     ecx, ds:0B152B0h[ebp*4]; RadiantAI: loads dispatch row from 0x00B152B0[procedureArrayIndex].",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x63ACCD",
-    "line": "mov     eax, [ecx+eax*4]",
+    "line": "mov     eax, [ecx+eax*4]; RadiantAI: indexes selected dispatch row by current procedure slot; result is the action code used by the switch at 0x63ACD5.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -5293,7 +5293,7 @@
   },
   {
     "ea": "0x63ACD5",
-    "line": "jmp     ds:jpt_63ACD5[eax*4]; switch jump",
+    "line": "jmp     ds:jpt_63ACD5[eax*4]; RadiantAI: package action dispatcher switch. Jump table 0x63B978 covers action codes 0..44; see RadiantAI/docs/dispatcher_action_map.md.",
     "mnemonic": "jmp",
     "size": 7
   },
@@ -5509,7 +5509,7 @@
   },
   {
     "ea": "0x63AD39",
-    "line": "fstp    [esp+168h+var_168]",
+    "line": "fstp    [esp+168h+arg1]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -5605,25 +5605,25 @@
   },
   {
     "ea": "0x63AD6B",
-    "line": "fst     [esp+16Ch+var_168]; int",
+    "line": "fst     [esp+16Ch+arg1]; arg1",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x63AD6F",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x63AD71",
-    "line": "fstp    [esp+16Ch+var_16C]; float",
+    "line": "fstp    [esp+16Ch+arg0]; arg0",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x63AD74",
-    "line": "call    Actor_ProcessAction",
+    "line": "call    Actor_ProcessAction; Per-actor native action state machine. Advances required-note phases, handles AttackBow nock/hold/release lifecycle, constructs ArrowProjectile on release, and dispatches post-shot AMMO consumption.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5947,7 +5947,7 @@
   },
   {
     "ea": "0x63AE1E",
-    "line": "mov     eax, [esi]; jumptable 0063ACD5 case 2",
+    "line": "mov     eax, [esi]; RadiantAI: dispatcher action 2 (PROCEDURE_AQUIRE) calls HighProcess vtable +0x51C -> sub_636FD0 with actor and flag=1; action 14 calls same slot with flag=0.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -6493,7 +6493,7 @@
   },
   {
     "ea": "0x63AF31",
-    "line": "call    sub_5E05F0",
+    "line": "call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6547,7 +6547,7 @@
   },
   {
     "ea": "0x63AF4E",
-    "line": "call    sub_5EAE70",
+    "line": "call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6565,7 +6565,7 @@
   },
   {
     "ea": "0x63AF57",
-    "line": "call    sub_5E05F0",
+    "line": "call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6655,7 +6655,7 @@
   },
   {
     "ea": "0x63AF89",
-    "line": "call    sub_5E05F0",
+    "line": "call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6853,13 +6853,13 @@
   },
   {
     "ea": "0x63AFF8",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x63AFFA",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6883,7 +6883,7 @@
   },
   {
     "ea": "0x63B008",
-    "line": "call    sub_452A60",
+    "line": "call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7015,7 +7015,7 @@
   },
   {
     "ea": "0x63B04A",
-    "line": "call    sub_5E05F0",
+    "line": "call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7039,7 +7039,7 @@
   },
   {
     "ea": "0x63B05A",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -7165,7 +7165,7 @@
   },
   {
     "ea": "0x63B0A4",
-    "line": "call    sub_5E05F0",
+    "line": "call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7177,13 +7177,13 @@
   },
   {
     "ea": "0x63B0AE",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x63B0B0",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7279,13 +7279,13 @@
   },
   {
     "ea": "0x63B0DF",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x63B0E1",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7375,7 +7375,7 @@
   },
   {
     "ea": "0x63B10E",
-    "line": "call    sub_452A60",
+    "line": "call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7441,7 +7441,7 @@
   },
   {
     "ea": "0x63B136",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7453,7 +7453,7 @@
   },
   {
     "ea": "0x63B13D",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7471,7 +7471,7 @@
   },
   {
     "ea": "0x63B146",
-    "line": "mov     ecx, offset flt_B36AA0",
+    "line": "mov     ecx, (offset flt_B36A88+18h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -7495,7 +7495,7 @@
   },
   {
     "ea": "0x63B154",
-    "line": "mov     ecx, offset flt_B36A98",
+    "line": "mov     ecx, (offset flt_B36A88+10h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -7585,7 +7585,7 @@
   },
   {
     "ea": "0x63B182",
-    "line": "call    sub_5E05B0",
+    "line": "call    sub_5E05B0; Checks process movement flags low nibble via vfunc +0x2C0. Player input uses this alongside swimming/sneaking skill progression; useful as a broad movement-mode guard.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7723,7 +7723,7 @@
   },
   {
     "ea": "0x63B1C4",
-    "line": "call    sub_5E05F0",
+    "line": "call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7849,7 +7849,7 @@
   },
   {
     "ea": "0x63B201",
-    "line": "call    sub_5E05F0",
+    "line": "call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7945,7 +7945,7 @@
   },
   {
     "ea": "0x63B22C",
-    "line": "call    sub_5E05F0",
+    "line": "call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7975,7 +7975,7 @@
   },
   {
     "ea": "0x63B23C",
-    "line": "call    sub_5E05F0",
+    "line": "call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8557,19 +8557,19 @@
   },
   {
     "ea": "0x63B356",
-    "line": "push    edi; jumptable 0063ACD5 case 1",
+    "line": "push    edi; RadiantAI dispatcher action 1 calls sub_6384B0 directly; that broad procedure contains the second random-conversation scan.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x63B357",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x63B359",
-    "line": "call    sub_6384B0",
+    "line": "call    HighProcess__UpdatePackageProcedureAction1; Package-procedure dispatcher action 1 invokes HighProcess::UpdatePackageProcedureAction1 directly; its embedded social scan is the second ambient-conversation entry path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8581,7 +8581,7 @@
   },
   {
     "ea": "0x63B363",
-    "line": "mov     edx, [esi]; jumptable 0063ACD5 case 4",
+    "line": "mov     edx, [esi]; RadiantAI: dispatcher action 4 calls HighProcess vtable +0x50C -> sub_62D750. sub_5672A0 maps Sleep package type to row 4, so do not label this as standalone Eat behavior without runtime context.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -8653,7 +8653,7 @@
   },
   {
     "ea": "0x63B387",
-    "line": "mov     edx, [esi]; jumptable 0063ACD5 case 5",
+    "line": "mov     edx, [esi]; RadiantAI dispatcher action 5 calls HighProcess vtable +0x510 (sub_62DA10); that handler contains the first random-conversation scan.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -8665,7 +8665,7 @@
   },
   {
     "ea": "0x63B38F",
-    "line": "push    edi",
+    "line": "push    edi; RadiantAI: dispatcher action 5 pushes actor argument before calling HighProcess vtable +0x510 (sub_62DA10). ECX is process.",
     "mnemonic": "push",
     "size": 1
   },
@@ -8677,7 +8677,7 @@
   },
   {
     "ea": "0x63B392",
-    "line": "call    eax",
+    "line": "call    eax; Package-procedure dispatcher action 5 invokes HighProcess vtable +0x510 -> UpdatePackageProcedureAction5; its completed/idle branch contains the first ambient-conversation scan.",
     "mnemonic": "call",
     "size": 2
   },
@@ -9133,7 +9133,7 @@
   },
   {
     "ea": "0x63B477",
-    "line": "call    sub_452A60",
+    "line": "call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9223,7 +9223,7 @@
   },
   {
     "ea": "0x63B4A6",
-    "line": "fstp    [esp+168h+var_168]; float",
+    "line": "fstp    [esp+168h+arg1]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -9763,7 +9763,7 @@
   },
   {
     "ea": "0x63B5BF",
-    "line": "fstp    [esp+16Ch+var_16C]; float",
+    "line": "fstp    [esp+16Ch+arg0]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -9883,7 +9883,7 @@
   },
   {
     "ea": "0x63B601",
-    "line": "fstp    [esp+16Ch+var_16C]; float",
+    "line": "fstp    [esp+16Ch+arg0]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -9925,7 +9925,7 @@
   },
   {
     "ea": "0x63B616",
-    "line": "call    sub_5E05F0",
+    "line": "call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9991,7 +9991,7 @@
   },
   {
     "ea": "0x63B63C",
-    "line": "fstp    [esp+168h+var_168]; float",
+    "line": "fstp    [esp+168h+arg1]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -10189,7 +10189,7 @@
   },
   {
     "ea": "0x63B69D",
-    "line": "call    sub_565DF0",
+    "line": "call    sub_565DF0; RadiantAI: package flag helper used by chooser skip logic; tests TESPackage flag 0x0400.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10207,7 +10207,7 @@
   },
   {
     "ea": "0x63B6A6",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -10237,7 +10237,7 @@
   },
   {
     "ea": "0x63B6B4",
-    "line": "call    sub_41FFC0",
+    "line": "call    ExtraDataList_SetRunOnceExtraPackage; Ensures ExtraRunOncePacks exists, then adds or updates a package record with the supplied package and state byte.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10627,13 +10627,13 @@
   },
   {
     "ea": "0x63B78F",
-    "line": "mov     ecx, [esi+8]",
+    "line": "mov     ecx, [esi+8]; self",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x63B792",
-    "line": "call    sub_5660A0",
+    "line": "call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).",
     "mnemonic": "call",
     "size": 5
   },
@@ -10657,7 +10657,7 @@
   },
   {
     "ea": "0x63B7A2",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -10669,7 +10669,7 @@
   },
   {
     "ea": "0x63B7A8",
-    "line": "call    sub_567770",
+    "line": "call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10789,7 +10789,7 @@
   },
   {
     "ea": "0x63B7E8",
-    "line": "call    sub_5E8DE0",
+    "line": "call    sub_5E8DE0; 3DTheft: marks actor modified when assigning created package/editor package. For created package refIDs, uses actor modified mask 0x20000, or 0x30000 for types 0x13/0x11.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10807,7 +10807,7 @@
   },
   {
     "ea": "0x63B7F2",
-    "line": "call    sub_41FB40",
+    "line": "call    ExtraDataList_GetPackageExtraIndex; Returns ExtraPackage's package index field, or zero when absent.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10849,7 +10849,7 @@
   },
   {
     "ea": "0x63B80B",
-    "line": "call    sub_41FB60",
+    "line": "call    ExtraDataList_GetPackageExtraTarget; Returns ExtraPackage's target TESObjectREFR pointer, or null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10897,7 +10897,7 @@
   },
   {
     "ea": "0x63B823",
-    "line": "call    sub_41FB80",
+    "line": "call    ExtraDataList_GetPackageExtraComplete; Returns ExtraPackage's completion byte, or false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10957,7 +10957,7 @@
   },
   {
     "ea": "0x63B840",
-    "line": "call    sub_41FBA0",
+    "line": "call    ExtraDataList_GetPackageExtraActivate; Returns ExtraPackage's activation byte, or false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11287,7 +11287,7 @@
   },
   {
     "ea": "0x63B8D5",
-    "line": "call    sub_565DF0",
+    "line": "call    sub_565DF0; RadiantAI: package flag helper used by chooser skip logic; tests TESPackage flag 0x0400.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11395,7 +11395,7 @@
   },
   {
     "ea": "0x63B904",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11473,7 +11473,7 @@
   },
   {
     "ea": "0x63B927",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11551,7 +11551,7 @@
   },
   {
     "ea": "0x63B954",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },

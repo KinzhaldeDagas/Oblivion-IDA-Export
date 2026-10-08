@@ -1,41 +1,45 @@
-double __cdecl sub_67EDE0(char *a1, int a2, TESObjectREFR *a3)
+// Verified actor-aware edge cost: TESObjectREFR_GetPathGraphMovementCost(from, actor) + Euclidean distance + fPathWaterExitPenalty when below-water bit 0x08 differs + fPathSpaceExitPenalty when SubSpace bit 0x40 differs. Current defaults: 20,000 for each boundary penalty; exact tuning rationale Unknown.
+float __cdecl TESConnectedPoint_ComputeActorAwareEdgeCost(
+        TESConnectedPoint *from,
+        TESConnectedPoint *to,
+        TESObjectREFR *actor)
 {
   double v4; // st7
-  float *v5; // esi
-  float *v6; // eax
-  float v8; // [esp+4h] [ebp-10h]
-  float v9[3]; // [esp+8h] [ebp-Ch] BYREF
-  float v10; // [esp+18h] [ebp+4h]
+  NiPoint3 *Position; // esi
+  NiPoint3 *v6; // eax
+  float v9; // [esp+4h] [ebp-10h]
+  float v10[3]; // [esp+8h] [ebp-Ch] BYREF
+  float froma; // [esp+18h] [ebp+4h]
 
-  v8 = flt_A32048;
-  if ( a1 )
+  v9 = flt_A32048; /*0x67edee*/
+  if ( from ) /*0x67edf4*/
   {
-    if ( a2 )
+    if ( to ) /*0x67ee01*/
     {
-      if ( a3 )
+      if ( actor ) /*0x67ee0d*/
       {
-        v10 = sub_5EC1F0(a3, (float *)a2);
-        if ( (((unsigned __int8)((unsigned int)a1[0x10] >> 3)
-             ^ (unsigned __int8)((unsigned int)*(char *)(a2 + 0x10) >> 3))
+        froma = TESObjectREFR_GetPathGraphMovementCost(actor, &to->totalEstimateCost); /*0x67ee1a*/
+        if ( (((unsigned __int8)((unsigned int)from->stateFlags >> 3) /*0x67ee35*/
+             ^ (unsigned __int8)((unsigned int)to->stateFlags >> 3))
             & 1) != 0 )
-          v10 = flt_B3A420 + v10;
-        if ( (((unsigned __int8)((unsigned int)a1[0x10] >> 6)
-             ^ (unsigned __int8)((unsigned int)*(char *)(a2 + 0x10) >> 6))
+          froma = g_fPathWaterExitPenalty + froma; /*0x67ee41*/
+        if ( (((unsigned __int8)((unsigned int)from->stateFlags >> 6) /*0x67ee53*/
+             ^ (unsigned __int8)((unsigned int)to->stateFlags >> 6))
             & 1) != 0 )
-          v10 = flt_B3A428 + v10;
-        v4 = 0.0;
-        if ( v10 > 0.0 )
+          froma = g_fPathSpaceExitPenalty + froma; /*0x67ee5f*/
+        v4 = 0.0; /*0x67ee63*/
+        if ( froma > 0.0 ) /*0x67ee6e*/
         {
-          v5 = (float *)sub_4BEF40((char *)a2);
-          v6 = (float *)sub_4BEF40(a1);
-          v9[0] = *v6 - *v5;
-          v9[1] = v6[1] - v5[1];
-          v9[2] = v6[2] - v5[2];
-          return (float)(sub_404C90(v9) + v10);
+          Position = PathGraphNode_GetPosition(to); /*0x67ee7b*/
+          v6 = PathGraphNode_GetPosition(from); /*0x67ee7d*/
+          v10[0] = v6->x - Position->x; /*0x67ee8a*/
+          v10[1] = v6->y - Position->y; /*0x67ee94*/
+          v10[2] = v6->z - Position->z; /*0x67ee9e*/
+          return NiPoint3_Length(v10) + froma; /*0x67eea7*/
         }
-        return (float)v4;
+        return v4; /*0x67eeab*/
       }
     }
   }
-  return v8;
+  return v9; /*0x67eeb4*/
 }

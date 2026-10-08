@@ -1,19 +1,36 @@
 {
-  "callees_count": 40,
-  "callers_count": 6,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 10,
+  "callers_count": 7,
+  "chunks": [
+    [
+      "0x7D7490",
+      "0x7D770E"
+    ],
+    [
+      "0x9CEDA0",
+      "0x9CEDDF"
+    ]
+  ],
+  "chunks_sha256": "3b7e18551d3e720e436627106da0524430242aece001b74fedcbe6fcb022f4a9",
+  "comment_regular": "Verified (Oblivion): BSShaderPPLightingProperty destructor releases and clears the reference-counted pointer at this+0xE0 (DWORD index 0x38), matching TextureEffectProperty_SetData and the viewer's \"spTexEffectData\" label. Fallout's CopyToMembers copies a NiPointer<BSShaderPPLightingProperty::TextureEffectData> at +0xE0; equivalent Oblivion clone retention is Probable but its mirror has not yet been located.",
+  "comment_repeatable": "Verified (Oblivion): BSShaderPPLightingProperty destructor releases and clears the reference-counted pointer at this+0xE0 (DWORD index 0x38), matching TextureEffectProperty_SetData and the viewer's \"spTexEffectData\" label. Fallout's CopyToMembers copies a NiPointer<BSShaderPPLightingProperty::TextureEffectData> at +0xE0; equivalent Oblivion clone retention is Probable but its mirror has not yet been located.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 6,
   "display_name": "BSShaderPPLightingProperty::~BSShaderPPLightingProperty(void)",
   "end_ea": "0x7D770E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??1BSShaderPPLightingProperty@@UAE@XZ",
   "segment": ".text",
   "sha256": "3e8940ff2a97050689c3761bd138e1c535d76ca0478db1d5094e786272e54d97",
   "size": 638,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7D7490",
+  "total_chunk_size": 701,
   "type": "void __thiscall(BSShaderPPLightingProperty *__hidden this)",
-  "xrefs_from_count": 258,
+  "xrefs_from_count": 275,
   "xrefs_to_count": 7
 }

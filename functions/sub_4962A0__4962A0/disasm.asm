@@ -27,7 +27,7 @@
 0x4962FE: call    eax
 0x496300: test    eax, eax
 0x496302: jz      short loc_496312
-0x496304: cmp     eax, offset dword_BA7B80
+0x496304: cmp     eax, offset stru_BA7B80
 0x496309: jz      short loc_496380
 0x49630B: mov     eax, [eax+4]
 0x49630E: test    eax, eax
@@ -176,3 +176,19 @@
 0x4964DA: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x4964DF: add     esp, 90h
 0x4964E5: retn    8
+0x9B02C0: mov     eax, [ebp-54h]
+0x9B02C3: push    eax
+0x9B02C4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B02C9: pop     ecx
+0x9B02CA: retn
+0x9B02CB: mov     edx, [esp+arg_4]
+0x9B02CF: lea     eax, [edx-94h]
+0x9B02D5: mov     ecx, [edx-98h]
+0x9B02DB: xor     ecx, eax
+0x9B02DD: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B02E2: add     eax, 10h
+0x9B02E5: mov     ecx, [edx-4]
+0x9B02E8: xor     ecx, eax
+0x9B02EA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B02EF: mov     eax, offset stru_ADC64C
+0x9B02F4: jmp     ___CxxFrameHandler3

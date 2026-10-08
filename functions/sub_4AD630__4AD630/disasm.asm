@@ -1,9 +1,9 @@
-0x4AD630: sub     esp, 40h
+0x4AD630: sub     esp, 40h; Verified (Oblivion): maps TESEffectShaderData fields into ParticleShaderProperty parameters and retains a NiSourceTexture*. The member labels in TESEffectShaderData are Probable correspondences to Fallout's named fields, corroborated by these direct Oblivion copies and the initializer.
 0x4AD633: push    ebx
 0x4AD634: push    ebp
-0x4AD635: mov     ebp, [esp+48h+arg_4]
+0x4AD635: mov     ebp, [esp+48h+sourceTexture]
 0x4AD639: push    esi
-0x4AD63A: mov     esi, [esp+4Ch+arg_0]
+0x4AD63A: mov     esi, [esp+4Ch+property]
 0x4AD63E: mov     ebx, [esi+10Ch]
 0x4AD644: cmp     ebx, ebp
 0x4AD646: push    edi
@@ -30,7 +30,7 @@
 0x4AD678: push    ebp; lpAddend
 0x4AD679: call    dword ptr ds:0A28078h
 0x4AD67F: fld     dword ptr [edi+9Ch]
-0x4AD685: fstp    dword ptr [esi+84h]
+0x4AD685: fstp    dword ptr [esi+84h]; Verified (Oblivion data flow): words from TESEffectShader::Data +0x84..+0xB8 are copied into the ParticleShaderProperty parameter block. Probable semantic names from the aligned Fallout EffectShaderData layout are fParticleLifetime, fParticleLifeVar, fParticleNormalSpeed, fParticleNormalAcc, ParticleVelocity, ParticleAcceleration, fParticleScale1/2 and fParticleScale1/2Time.
 0x4AD68B: fld     dword ptr [edi+0A0h]
 0x4AD691: fstp    dword ptr [esi+88h]
 0x4AD697: fld     dword ptr [edi+0A4h]
@@ -52,20 +52,20 @@
 0x4AD6F7: movzx   ecx, byte ptr [edi+0D4h]
 0x4AD6FE: movzx   edx, byte ptr [edi+0D5h]
 0x4AD705: movzx   eax, byte ptr [edi+0D6h]
-0x4AD70C: mov     [esp+50h+arg_0], ecx
-0x4AD710: fild    [esp+50h+arg_0]
-0x4AD714: mov     [esp+50h+arg_0], edx
-0x4AD718: fstp    [esp+50h+var_20]
+0x4AD70C: mov     [esp+50h+property], ecx
+0x4AD710: fild    [esp+50h+property]
+0x4AD714: mov     [esp+50h+property], edx
+0x4AD718: fstp    [esp+50h+var_20]; Verified (Oblivion data flow): low RGB bytes from Data.iParticleColor1/2/3 are divided by 255 and copied to ParticleShaderProperty colors. The Fallout field names are Probable correspondences, corroborated by the same packed-color defaults and direct Oblivion conversions; high bytes are not consumed here.
 0x4AD71C: mov     ecx, [esp+50h+var_20]
-0x4AD720: fild    [esp+50h+arg_0]
-0x4AD724: mov     [esp+50h+arg_0], eax
+0x4AD720: fild    [esp+50h+property]
+0x4AD724: mov     [esp+50h+property], eax
 0x4AD728: mov     [esp+50h+var_40], ecx
 0x4AD72C: fstp    [esp+50h+var_1C]
 0x4AD730: mov     edx, [esp+50h+var_1C]
-0x4AD734: fild    [esp+50h+arg_0]
+0x4AD734: fild    [esp+50h+property]
 0x4AD738: mov     [esp+50h+var_3C], edx
 0x4AD73C: movzx   edx, byte ptr [edi+0D8h]
-0x4AD743: mov     [esp+50h+arg_0], edx
+0x4AD743: mov     [esp+50h+property], edx
 0x4AD747: fstp    [esp+50h+var_18]
 0x4AD74B: mov     eax, [esp+50h+var_18]
 0x4AD74F: fldz
@@ -86,16 +86,16 @@
 0x4AD78B: fld     [esp+50h+var_38]
 0x4AD78F: fdiv    st, st(1)
 0x4AD791: fstp    [esp+50h+var_38]
-0x4AD795: fild    [esp+50h+arg_0]
-0x4AD799: mov     [esp+50h+arg_0], eax
+0x4AD795: fild    [esp+50h+property]
+0x4AD799: mov     [esp+50h+property], eax
 0x4AD79D: fstp    [esp+50h+var_20]
 0x4AD7A1: mov     edx, [esp+50h+var_20]
-0x4AD7A5: fild    [esp+50h+arg_0]
-0x4AD7A9: mov     [esp+50h+arg_0], ecx
+0x4AD7A5: fild    [esp+50h+property]
+0x4AD7A9: mov     [esp+50h+property], ecx
 0x4AD7AD: mov     [esp+50h+var_30], edx
 0x4AD7B1: fstp    [esp+50h+var_1C]
 0x4AD7B5: mov     eax, [esp+50h+var_1C]
-0x4AD7B9: fild    [esp+50h+arg_0]
+0x4AD7B9: fild    [esp+50h+property]
 0x4AD7BD: mov     [esp+50h+var_2C], eax
 0x4AD7C1: fstp    [esp+50h+var_18]
 0x4AD7C5: mov     ecx, [esp+50h+var_18]
@@ -115,18 +115,18 @@
 0x4AD7FA: fdiv    st, st(2)
 0x4AD7FC: movzx   ecx, byte ptr [edi+0DDh]
 0x4AD803: movzx   edx, byte ptr [edi+0DEh]
-0x4AD80A: mov     [esp+50h+arg_0], eax
+0x4AD80A: mov     [esp+50h+property], eax
 0x4AD80E: fstp    [esp+50h+var_28]
-0x4AD812: fild    [esp+50h+arg_0]
-0x4AD816: mov     [esp+50h+arg_0], ecx
+0x4AD812: fild    [esp+50h+property]
+0x4AD816: mov     [esp+50h+property], ecx
 0x4AD81A: fstp    [esp+50h+var_10]
 0x4AD81E: mov     eax, [esp+50h+var_10]
-0x4AD822: fild    [esp+50h+arg_0]
-0x4AD826: mov     [esp+50h+arg_0], edx
+0x4AD822: fild    [esp+50h+property]
+0x4AD826: mov     [esp+50h+property], edx
 0x4AD82A: mov     [esp+50h+var_20], eax
 0x4AD82E: fstp    [esp+50h+var_C]
 0x4AD832: mov     ecx, [esp+50h+var_C]
-0x4AD836: fild    [esp+50h+arg_0]
+0x4AD836: fild    [esp+50h+property]
 0x4AD83A: mov     [esp+50h+var_1C], ecx
 0x4AD83E: mov     ecx, [esp+50h+var_40]
 0x4AD842: fstp    [esp+50h+var_8]
@@ -146,7 +146,7 @@
 0x4AD876: fdivr   [esp+50h+var_18]
 0x4AD87A: fstp    [esp+50h+var_18]
 0x4AD87E: fld     dword ptr [edi+0E0h]
-0x4AD884: fstp    [esp+50h+var_34]
+0x4AD884: fstp    [esp+50h+var_34]; Verified (Oblivion data flow): Data floats at +0xC8..+0xDC are copied into ParticleShaderProperty alpha/time parameters. Probable field names, aligned with Fallout EffectShaderData, are fParticleColor1/2/3Alpha and fParticleColor1/2/3Time.
 0x4AD888: fld     dword ptr [edi+0E4h]
 0x4AD88E: fstp    [esp+50h+var_24]
 0x4AD892: fld     dword ptr [edi+0E8h]
@@ -173,7 +173,7 @@
 0x4AD8FC: mov     [esi+0E0h], edx
 0x4AD902: mov     [esi+0E4h], eax
 0x4AD908: fld     dword ptr [edi+0ECh]
-0x4AD90E: fstp    dword ptr [esi+0ACh]
+0x4AD90E: fstp    dword ptr [esi+0ACh]; Verified (Oblivion data flow): TESEffectShader::Data.fParticleColor1Time/2Time/3Time at +0xD4/+0xD8/+0xDC are copied into ParticleShaderProperty timing slots. Names are Probable cross-version mappings supported by the aligned offsets and initializer defaults.
 0x4AD914: fld     dword ptr [edi+0F0h]
 0x4AD91A: fstp    dword ptr [esi+0B0h]
 0x4AD920: fld     dword ptr [edi+0F4h]
@@ -187,7 +187,7 @@
 0x4AD950: fld     dword ptr [edi+0D0h]
 0x4AD956: fstp    dword ptr [esi+0F4h]
 0x4AD95C: mov     ecx, [edi+78h]
-0x4AD95F: mov     [esi+0FCh], ecx
+0x4AD95F: mov     [esi+0FCh], ecx; Verified (Oblivion data flow): TESEffectShader::Data fields at +0x60/+0x6C/+0x64/+0x68 copy to ParticleShaderProperty blend/Z-test slots. Probable Fallout-correlated names are eParticleBlendModeSource, eParticleBlendModeDest, eParticleBlendOperation, and eParticleZTestFunction.
 0x4AD965: mov     edx, [edi+84h]
 0x4AD96B: mov     [esi+100h], edx
 0x4AD971: mov     eax, [edi+7Ch]

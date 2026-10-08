@@ -1,4 +1,5 @@
-int start_3_::SNaN_detected()
+void start_3_::SNaN_detected()
 {
-  return start_3_::_ErrorHandling();
+  __asm { faddp   st(1), st } /*0x985c77*/
+  start_3_::_ErrorHandling(); /*0x985c7e*/
 }

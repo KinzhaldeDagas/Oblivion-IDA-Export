@@ -1,1 +1,31 @@
-_WINMM_Device
+struct _WINMM_Device
+{
+WINMM_CBInfo cb_info;
+HWAVE handle;
+BOOL open;
+IMMDevice_0 *device;
+IAudioClient_0 *client;
+IAudioRenderClient_0 *render;
+IAudioCaptureClient_0 *capture;
+IAudioClock_0 *clock;
+IAudioStreamVolume_0 *volume;
+WAVEFORMATEX *orig_fmt;
+HACMSTREAM acm_handle;
+ACMSTREAMHEADER acm_hdr;
+UINT32 acm_offs;
+WAVEHDR *first;
+WAVEHDR *last;
+WAVEHDR *playing;
+WAVEHDR *loop_start;
+BOOL stopped;
+DWORD loop_counter;
+UINT32 bytes_per_frame;
+UINT32 samples_per_sec;
+UINT32 ofs_bytes;
+UINT32 played_frames;
+UINT32 remainder_frames;
+__declspec(align(8)) UINT64 last_clock_pos;
+HANDLE event;
+CRITICAL_SECTION lock;
+WINMM_MMDevice *parent;
+};

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x60BF70",
-    "line": "push    esi",
+    "line": "push    esi; Post-load resolver for an embedded arrow projectile. Stores a pending load context when collision attachment cannot yet be resolved, otherwise reconstructs the saved collision-object association.",
     "mnemonic": "push",
     "size": 1
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x60C01E",
-    "line": "mov     ecx, [esp+8+arg_0]",
+    "line": "mov     ecx, [esp+8+postLoadContext]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -409,13 +409,13 @@
   },
   {
     "ea": "0x60C023",
-    "line": "mov     byte ptr [esi+94h], 1",
+    "line": "mov     byte ptr [esi+94h], 1; ArrowProjectile +0x94 = embedded-collision post-load fixup pending. Set when PostLoad runs before the projectile NiNode/collision link is resolvable; +0x98 retains the retry context.",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x60C02A",
-    "line": "mov     [esi+98h], ecx",
+    "line": "mov     [esi+98h], ecx; ArrowProjectile +0x98 retains the PostLoad link context while +0x94 is pending; lifecycle update passes it back to vtable slot +0x5C for a deferred retry.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -451,31 +451,31 @@
   },
   {
     "ea": "0x60C03A",
-    "line": "fstp    [esp+0Ch+var_C]; float",
+    "line": "fstp    [esp+0Ch+attackStrength]; attackStrength",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x60C03D",
-    "line": "push    edx; int",
+    "line": "push    edx; shooter",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60C03E",
-    "line": "call    sub_60A230",
+    "line": "call    ArrowProjectile_EnsureCharacterProxy; Ensures a high-process ArrowProjectile owns a sphere-based bhk character proxy. Builds projectile collision layer 6 independently of the visible NIF, derives gravity/collision metadata from shooter and attack strength, attaches the projectile NiNode, and initializes water-height/filter state.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x60C043",
-    "line": "mov     eax, [esp+8+arg_4]",
+    "line": "mov     eax, [esp+8+arg1]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x60C047",
-    "line": "mov     ecx, [esp+8+arg_0]",
+    "line": "mov     ecx, [esp+8+postLoadContext]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x60C098",
-    "line": "mov     byte ptr [esp+10h+arg_0], cl",
+    "line": "mov     byte ptr [esp+10h+postLoadContext], cl",
     "mnemonic": "mov",
     "size": 4
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x60C09E",
-    "line": "mov     edi, [esp+10h+arg_0]",
+    "line": "mov     edi, [esp+10h+postLoadContext]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -871,7 +871,7 @@
   },
   {
     "ea": "0x60C101",
-    "line": "call    sub_452A60",
+    "line": "call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.",
     "mnemonic": "call",
     "size": 5
   },

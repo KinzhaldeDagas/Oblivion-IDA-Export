@@ -325,19 +325,19 @@
   },
   {
     "ea": "0x45CD2A",
-    "line": "push    eax",
+    "line": "push    eax; changeFlags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45CD2B",
-    "line": "push    edi",
+    "line": "push    edi; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45CD2C",
-    "line": "call    sub_4535A0",
+    "line": "call    SaveLoad_NormalizeFormChangeFlags; Verified: starts with created-form flag adjustment, then normalizes flags by runtime type/state. For TESObjectREFR it checks inventory/process/package/death/persistence and location; bit31 is set when reference location differs from its starting location. For TESObjectCELL it validates light/terrain-related flags and classifies exterior grid coordinates. Callers include UnloadForm, ResetFormForLoad, save/load consistency passes. Do not assign names to remaining individual bits without further use tracing.",
     "mnemonic": "call",
     "size": 5
   },

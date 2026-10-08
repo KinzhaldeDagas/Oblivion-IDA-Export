@@ -1,34 +1,63 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "NiSourceTextureVtbl",
+  "definition": "struct NiSourceTextureVtbl\n{\nNiTextureVtbl super;\nvoid (__thiscall *Unk15)(NiSourceTexture *this);\nvoid (__thiscall *FreePixelData)(NiSourceTexture *this);\nbool (__thiscall *Unk17)(NiSourceTexture *this);\n}\n",
   "id": 18374686479671995491,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "super",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 84
+      "size": 84,
+      "type": "NiTextureVtbl"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk15",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiSourceTexture *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "FreePixelData",
       "offset": 88,
       "offset_hex": "0x58",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiSourceTexture *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk17",
       "offset": 92,
-      "offset_hex": "0x5c",
-      "size": 4
+      "offset_hex": "0x5C",
+      "size": 4,
+      "type": "bool (__thiscall *)(NiSourceTexture *this)"
     }
   ],
   "name": "NiSourceTextureVtbl",
+  "ordinal": 9470,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 96
 }

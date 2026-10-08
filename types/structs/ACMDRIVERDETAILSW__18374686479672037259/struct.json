@@ -1,106 +1,171 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_ACMDRIVERDETAILSW",
+  "definition": "struct __unaligned __declspec(align(4)) _ACMDRIVERDETAILSW\n{\nDWORD cbStruct;\nFOURCC fccType;\nFOURCC fccComp;\nWORD wMid;\nWORD wPid;\nDWORD vdwACM;\nDWORD vdwDriver;\nDWORD fdwSupport;\nDWORD cFormatTags;\nDWORD cFilterTags;\nHICON hicon;\nWCHAR_0 szShortName[32];\nWCHAR_0 szLongName[128];\nWCHAR_0 szCopyright[80];\nWCHAR_0 szLicensing[128];\nWCHAR_0 szFeatures[512];\n}\n",
   "id": 18374686479672037259,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cbStruct",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fccType",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "FOURCC"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fccComp",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "FOURCC"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "wMid",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 2
+      "offset_hex": "0xC",
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "wPid",
       "offset": 14,
-      "offset_hex": "0xe",
-      "size": 2
+      "offset_hex": "0xE",
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "vdwACM",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "vdwDriver",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fdwSupport",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cFormatTags",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cFilterTags",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hicon",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "HICON"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "szShortName",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 64
+      "size": 64,
+      "type": "WCHAR_0[32]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "szLongName",
       "offset": 104,
       "offset_hex": "0x68",
-      "size": 256
+      "size": 256,
+      "type": "WCHAR_0[128]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "szCopyright",
       "offset": 360,
       "offset_hex": "0x168",
-      "size": 160
+      "size": 160,
+      "type": "WCHAR_0[80]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "szLicensing",
       "offset": 520,
       "offset_hex": "0x208",
-      "size": 256
+      "size": 256,
+      "type": "WCHAR_0[128]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "szFeatures",
       "offset": 776,
       "offset_hex": "0x308",
-      "size": 1024
+      "size": 1024,
+      "type": "WCHAR_0[512]"
     }
   ],
   "name": "_ACMDRIVERDETAILSW",
+  "ordinal": 4909,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 1800
 }

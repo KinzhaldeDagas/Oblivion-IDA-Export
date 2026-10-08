@@ -10,7 +10,8 @@ int __usercall ContainerExtraData_EvaluateOwnerLeveledItems_::IncLevItemIndex@<e
         int a9,
         int a10,
         int a11,
-        int a12)
+        int a12,
+        int a13)
 {
   return ContainerExtraData_EvaluateOwnerLeveledItems_::EvaluateLLLoop_next(
            a1,
@@ -24,5 +25,6 @@ int __usercall ContainerExtraData_EvaluateOwnerLeveledItems_::IncLevItemIndex@<e
            a9,
            a10,
            a11,
-           a12);
+           a12,
+           a13);
 }

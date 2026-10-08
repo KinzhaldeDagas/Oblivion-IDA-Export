@@ -1,19 +1,18 @@
-double __userpurge sub_65D880@<st0>(_DWORD *this@<ecx>, double result@<st0>, int *a3, TESObjectREFR *a4)
+void __thiscall sub_65D880(TESObjectREFR *this, TravelPath *a2, TESObjectREFR *a3)
 {
-  float *v5; // eax
-  TESObjectCELL *ParentCell; // [esp-Ch] [ebp-14h]
+  const NiPoint3 *v5; // eax
+  TESObjectCELL *DwordAtOffset40; // [esp-Ch] [ebp-14h]
   TESWorldSpace *WorldSpace; // [esp-8h] [ebp-10h]
 
-  if ( a3 )
+  if ( a2 ) /*0x65d88c*/
   {
-    if ( a4 )
+    if ( a3 ) /*0x65d895*/
     {
-      sub_689A00(a3);
-      WorldSpace = TESObjectREFR_GetWorldSpace(a4);
-      ParentCell = TESObjectREFR_GetParentCell(a4);
-      v5 = a4->vtbl->GetPos(a4);
-      return sub_68B030(a3, result, this, v5, ParentCell, WorldSpace);
+      TravelPath_ClearNodes(a2); /*0x65d899*/
+      WorldSpace = TESObjectREFR_GetWorldSpace(a3); /*0x65d8a5*/
+      DwordAtOffset40 = (TESObjectCELL *)Shared_GetDwordAtOffset40(a3); /*0x65d8ad*/
+      v5 = (const NiPoint3 *)a3->vtbl->GetPos(a3); /*0x65d8b8*/
+      TravelPath_BuildToDestination(a2, this, v5, DwordAtOffset40, WorldSpace); /*0x65d8be*/
     }
   }
-  return result;
 }

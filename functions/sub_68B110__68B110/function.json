@@ -1,19 +1,32 @@
 {
-  "callees_count": 13,
-  "callers_count": 10,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 12,
+  "chunks": [
+    [
+      "0x68B110",
+      "0x68B177"
+    ]
+  ],
+  "chunks_sha256": "39edebeaa6f88284fe3d3cbaba0b4253b3939528bc4f09f9ff7f0b573d603165",
+  "comment_regular": "Verified TravelPathNode_GetPosition returns a stored NiPoint3* for kind 1; for kind 0, returns reference GetPos unless the ref has TeleportData, in which case it returns the linked door's TeleportData xyz marker. Null payloads and unrecognized kinds return g_zeroNiPoint3.",
+  "comment_repeatable": "Verified TravelPathNode_GetPosition returns a stored NiPoint3* for kind 1; for kind 0, returns reference GetPos unless the ref has TeleportData, in which case it returns the linked door's TeleportData xyz marker. Null payloads and unrecognized kinds return g_zeroNiPoint3.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_68B110",
+  "display_name": "TravelPathNode_GetPosition",
   "end_ea": "0x68B177",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_68B110",
+  "name": "TravelPathNode_GetPosition",
   "segment": ".text",
   "sha256": "39edebeaa6f88284fe3d3cbaba0b4253b3939528bc4f09f9ff7f0b573d603165",
   "size": 103,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x68B110",
-  "type": "void __thiscall(float **this)",
+  "total_chunk_size": 103,
+  "type": "NiPoint3 *__thiscall(const TravelPathNode *this)",
   "xrefs_from_count": 51,
   "xrefs_to_count": 12
 }

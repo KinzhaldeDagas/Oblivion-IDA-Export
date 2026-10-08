@@ -1,1 +1,1 @@
-_locale_tstruct_0
+typedef localeinfo_struct_3 _locale_tstruct_0;

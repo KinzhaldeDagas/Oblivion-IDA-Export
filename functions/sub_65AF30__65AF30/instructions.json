@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x65AF30",
-    "line": "push    ebp",
+    "line": "push    ebp; TES4 authoritative: MobileObject movement step. Builds local movement/update packet and calls CharProxy vtable +0x80; for bhkCharacterController that dispatches to 0x896000. Entry point for per-actor movement discipline injection before controller integration.",
     "mnemonic": "push",
     "size": 1
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x65AF41",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -727,19 +727,19 @@
   },
   {
     "ea": "0x65B0C5",
-    "line": "lea     ecx, [esp+0C4h+var_48]",
+    "line": "lea     ecx, [esp+0C4h+var_48]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x65B0C9",
-    "line": "fstp    [esp+0C4h+X+4]; float",
+    "line": "fstp    [esp+0C4h+X+4]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x65B0CC",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1111,7 +1111,7 @@
   },
   {
     "ea": "0x65B185",
-    "line": "lea     ecx, [esp+0C4h+var_48]",
+    "line": "lea     ecx, [esp+0C4h+var_48]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1159,13 +1159,13 @@
   },
   {
     "ea": "0x65B1A2",
-    "line": "fstp    [esp+0C4h+X+4]; float",
+    "line": "fstp    [esp+0C4h+X+4]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x65B1A5",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1321,7 +1321,7 @@
   },
   {
     "ea": "0x65B1F8",
-    "line": "call    eax",
+    "line": "call    eax; TES4 authoritative: MobileObject::Move does not enter the character-controller update when no char proxy exists or TESObjectREFR vtable +0x198 IsDead(this,1) returns true. Movement discipline hook at 0x896000 will not run for this path.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1405,7 +1405,7 @@
   },
   {
     "ea": "0x65B226",
-    "line": "call    sub_4D74D0",
+    "line": "call    TESObjectREFR_HasHorseCreatureBase; 0x4D74D0: Travel-horse target predicate decoded 2026-09-05: reference base pointer+0x1C must be nonnull; GetBaseForm virtual slot+0x170 yields typebyte0x24 CREA; creature byte+0x104 must equal4 (horse). XHRS resolver invokes this at0x426681 after target REFR cast. TESCS peer0x53F310 uses ref+0x28, vslot+0x19C, creature+0x138.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1489,7 +1489,7 @@
   },
   {
     "ea": "0x65B25B",
-    "line": "mov     edx, [edi+24h]",
+    "line": "mov     edx, [edi+24h]; Movement packet build: +0 dt, +4/+8/+C actor rot, +10/+14/+18 desired movement, +1C caller flag. Vector has already been yaw/world adjusted by MobileObject::Move paths when applicable.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1609,7 +1609,7 @@
   },
   {
     "ea": "0x65B2A4",
-    "line": "mov     eax, [edi]",
+    "line": "mov     eax, [edi]; TES4 authoritative: special proxy-position path only when controller flag 0x800 is set and owner is actor.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1651,7 +1651,7 @@
   },
   {
     "ea": "0x65B2BA",
-    "line": "mov     edx, [eax+380h]",
+    "line": "mov     edx, [eax+380h]; TES4 authoritative: Actor vtable +0x380 GetMountedHorse check inside MobileObject::Move special path.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1705,7 +1705,7 @@
   },
   {
     "ea": "0x65B2D1",
-    "line": "mov     edx, [eax+36Ch]",
+    "line": "mov     edx, [eax+36Ch]; TES4 authoritative: process vtable +0x36C GetSitSleepState; state 4 with GetMountedHorse makes MobileObject::Move snap proxy position to the mount rather than ordinary controller movement.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1807,7 +1807,7 @@
   },
   {
     "ea": "0x65B306",
-    "line": "call    sub_452A10",
+    "line": "call    sub_452A10; TES4 authoritative: converts TES/world NiPoint3 into Havok units with hkFactor, then writes proxy position through 0x891560.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1897,19 +1897,19 @@
   },
   {
     "ea": "0x65B33E",
-    "line": "lea     ecx, [esp+0C4h+var_48]",
+    "line": "lea     ecx, [esp+0C4h+var_48]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x65B342",
-    "line": "fstp    [esp+0C4h+X+4]; float",
+    "line": "fstp    [esp+0C4h+X+4]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x65B345",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2089,7 +2089,7 @@
   },
   {
     "ea": "0x65B3A8",
-    "line": "call    sub_5E1500",
+    "line": "call    sub_5E1500; TES4 authoritative: reads proxy position via 0x891440 and converts Havok units back to TES/world units via 0x43F3E0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2341,7 +2341,7 @@
   },
   {
     "ea": "0x65B44B",
-    "line": "call    edx",
+    "line": "call    edx; Calls CharProxy vtable+0x80 (bhkCharacterController::Update at 0x896000 for actors) with movement packet built above. Caller hook can see MobileObject + desired movement; inner hook is better for velocity mutation after state update.",
     "mnemonic": "call",
     "size": 2
   },
@@ -2389,25 +2389,25 @@
   },
   {
     "ea": "0x65B460",
-    "line": "call    sub_5E1500",
+    "line": "call    sub_5E1500; TES4 authoritative: reads proxy position via 0x891440 and converts Havok units back to TES/world units via 0x43F3E0.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x65B465",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x65B467",
-    "line": "call    sub_8913C0",
+    "line": "call    bhkCharacterController_GetRadius; Controller radius helper. Returns shape radius from proxy+0x374 object when available, else proxy+0x3A0/E8 default. MobileObject::Move converts this from Havok to world with 0xA372E0.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x65B46C",
-    "line": "fstp    [esp+0C0h+var_AC]",
+    "line": "fstp    [esp+0C0h+var_AC]; After controller update, MobileObject::Move reads controller radius via 0x8913C0.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2449,7 +2449,7 @@
   },
   {
     "ea": "0x65B487",
-    "line": "fstp    [esp+0C4h+var_AC]",
+    "line": "fstp    [esp+0C4h+var_AC]; Converts controller radius from Havok to TES/world units using dbl_A372E0 (~6.999 inverse hkFactor).",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2473,7 +2473,7 @@
   },
   {
     "ea": "0x65B493",
-    "line": "fstp    [esp+0C4h+var_AC]",
+    "line": "fstp    [esp+0C4h+var_AC]; Uses 2 * world radius as a native capsule diameter scale; suitable as the first climb wall-probe distance scale.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2569,7 +2569,7 @@
   },
   {
     "ea": "0x65B4CE",
-    "line": "call    sub_5E1500",
+    "line": "call    sub_5E1500; TES4 authoritative: reads proxy position via 0x891440 and converts Havok units back to TES/world units via 0x43F3E0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2743,19 +2743,19 @@
   },
   {
     "ea": "0x65B527",
-    "line": "lea     ecx, [esp+0C4h+var_48]",
+    "line": "lea     ecx, [esp+0C4h+var_48]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x65B52B",
-    "line": "fstp    [esp+0C4h+X+4]; float",
+    "line": "fstp    [esp+0C4h+X+4]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x65B52E",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },

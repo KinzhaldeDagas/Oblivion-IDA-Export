@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x722C94",
-    "line": "mov     [esp+98h+var_68], ecx",
+    "line": "mov     [esp+98h+vertices], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -127,31 +127,31 @@
   },
   {
     "ea": "0x722CAC",
-    "line": "push    edi",
+    "line": "push    edi; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x722CAD",
-    "line": "lea     eax, [esp+9Ch+var_54]",
+    "line": "lea     eax, [esp+9Ch+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x722CB1",
-    "line": "push    eax",
+    "line": "push    eax; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x722CB2",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x722CB4",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x722D2B",
-    "line": "call    sub_710250",
+    "line": "call    NiPoint3_MultiplyMatrix3",
     "mnemonic": "call",
     "size": 5
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x722D34",
-    "line": "mov     esi, [esp+0A4h+var_68]",
+    "line": "mov     esi, [esp+0A4h+vertices]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x722DC7",
-    "line": "lea     eax, [esp+98h+var_54]",
+    "line": "lea     eax, [esp+98h+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x722DE2",
-    "line": "lea     ecx, [esp+98h+var_54]",
+    "line": "lea     ecx, [esp+98h+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -751,7 +751,7 @@
   },
   {
     "ea": "0x722DED",
-    "line": "call    sub_710250",
+    "line": "call    NiPoint3_MultiplyMatrix3",
     "mnemonic": "call",
     "size": 5
   },
@@ -823,7 +823,7 @@
   },
   {
     "ea": "0x722E11",
-    "line": "mov     eax, [esp+98h+var_68]",
+    "line": "mov     eax, [esp+98h+vertices]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -835,13 +835,13 @@
   },
   {
     "ea": "0x722E18",
-    "line": "push    eax",
+    "line": "push    eax; vertices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x722E19",
-    "line": "push    ecx",
+    "line": "push    ecx; vertexCount",
     "mnemonic": "push",
     "size": 1
   },
@@ -853,13 +853,13 @@
   },
   {
     "ea": "0x722E20",
-    "line": "add     ecx, 0Ch",
+    "line": "add     ecx, 0Ch; self",
     "mnemonic": "add",
     "size": 3
   },
   {
     "ea": "0x722E23",
-    "line": "call    sub_72A0F0",
+    "line": "call    NiSphere_ComputeFromVertices; Local bounding sphere for contiguous NiPoint3 array: midpoint of component minima/maxima; radius=max vertex distance to midpoint; zero-count case clears sphere. Writes sphere only, not NiAVObject world bounds or renderer dirty flags. Prettier Faces invokes after morph on direct CPU vertex data; propagation of world bounds remains a separate runtime verification requirement.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1117,7 +1117,7 @@
   },
   {
     "ea": "0x722EB2",
-    "line": "lea     edx, [esp+98h+var_54]",
+    "line": "lea     edx, [esp+98h+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1158,14 +1158,8 @@
     "size": 2
   },
   {
-    "ea": "0x722ECA",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x722ED0",
-    "line": "lea     eax, [esp+98h+var_54]",
+    "line": "lea     eax, [esp+98h+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1195,7 +1189,7 @@
   },
   {
     "ea": "0x722EDB",
-    "line": "call    sub_710250",
+    "line": "call    NiPoint3_MultiplyMatrix3",
     "mnemonic": "call",
     "size": 5
   },

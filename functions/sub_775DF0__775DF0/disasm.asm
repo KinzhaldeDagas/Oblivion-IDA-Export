@@ -13,7 +13,7 @@
 0x775E1B: push    eax
 0x775E1C: push    ecx
 0x775E1D: mov     ecx, esi
-0x775E1F: call    sub_775CC0
+0x775E1F: call    NiDX9AdapterDescArray_Populate
 0x775E24: mov     eax, esi
 0x775E26: pop     esi
 0x775E27: retn    8

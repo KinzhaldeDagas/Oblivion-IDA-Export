@@ -1,4 +1,4 @@
-0x59E680: push    ebp
+0x59E680: push    ebp; Builds player topic-choice tiles by starting at MenuTopicManager::FirstTopic(skipGreeting=true), deliberately omitting the GREETING/current spoken head entry. Each rendered tile receives a zero-based choice index; the manager cursor is restored with FirstTopic(false) afterward.
 0x59E681: mov     ebp, esp
 0x59E683: and     esp, 0FFFFFFF8h
 0x59E686: push    0FFFFFFFFh
@@ -16,7 +16,7 @@
 0x59E6A3: lea     eax, [esp+44h+var_C]
 0x59E6A7: mov     large fs:0, eax
 0x59E6AD: mov     edi, ecx
-0x59E6AF: call    sub_6B8660
+0x59E6AF: call    MenuTopicManager__GetSingleton
 0x59E6B4: mov     ebp, eax
 0x59E6B6: mov     eax, [edi+28h]
 0x59E6B9: mov     eax, [eax+34h]
@@ -25,10 +25,10 @@
 0x59E6C0: mov     [esp+44h+var_28], eax; a3
 0x59E6C4: jz      short loc_59E6EA
 0x59E6C6: lea     ecx, [esp+44h+var_28]
-0x59E6CA: push    ecx
+0x59E6CA: push    ecx; node
 0x59E6CB: mov     ecx, [edi+28h]
-0x59E6CE: add     ecx, 30h ; '0'
-0x59E6D1: call    sub_7AA860
+0x59E6CE: add     ecx, 30h ; '0'; list
+0x59E6D1: call    NiTPointerList_RemoveNode; Verified rebuild lifetime: child-list removal is followed by child deleting destructor; TileText slot0 resolves 0x58FF30 -> 0x58FE50 -> 0x58FAB0. Last clears matching +0x88 focus. Old Tile/Value references must not be reused for new topic rows.
 0x59E6D6: cmp     eax, ebx
 0x59E6D8: jz      short loc_59E6E4
 0x59E6DA: mov     edx, [eax]
@@ -38,10 +38,10 @@
 0x59E6E2: call    eax
 0x59E6E4: cmp     [esp+44h+var_28], ebx
 0x59E6E8: jnz     short loc_59E6C6
-0x59E6EA: push    1
-0x59E6EC: mov     ecx, ebp
+0x59E6EA: push    1; skipGreeting
+0x59E6EC: mov     ecx, ebp; this
 0x59E6EE: mov     [esp+48h+a3], ebx; a3
-0x59E6F2: call    sub_6B85C0
+0x59E6F2: call    MenuTopicManager__FirstTopic; FirstTopic(abSkipGreeting). Sets the cursor to the inline head node; when skipGreeting is true it advances once, so callers render/select ordinary TOPIC choices without replaying the greeting.
 0x59E6F7: cmp     al, bl
 0x59E6F9: mov     ecx, [edi+44h]; this
 0x59E6FC: mov     byte ptr [esp+44h+var_30+3], al
@@ -50,13 +50,13 @@
 0x59E703: fld1
 0x59E705: jmp     short loc_59E70D
 0x59E707: fld     dword ptr ds:0A379B4h
-0x59E70D: fstp    [esp+48h+a2]; a3
-0x59E710: push    0FA1h; a2
-0x59E715: call    Tile_SetFloat
+0x59E70D: fstp    [esp+48h+a2]; value
+0x59E710: push    0FA1h; propertyCode
+0x59E715: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59E71A: cmp     [edi+88h], bl
 0x59E720: jz      short loc_59E740
 0x59E722: mov     [edi+64h], bl
-0x59E725: call    sub_59DD40
+0x59E725: call    DialogMenu__Close; Verified: LoadTopicsList invokes Close and returns AL=1 without normal build completion. Silt Strider post-hook should skip tile refresh for this result; immediate free is not established.
 0x59E72A: mov     al, 1
 0x59E72C: mov     ecx, dword ptr [esp+44h+var_C]
 0x59E730: mov     large fs:0, ecx
@@ -85,15 +85,15 @@
 0x59E778: call    BSStringT_Set
 0x59E77D: mov     ecx, [esp+44h+var_18.m_data]
 0x59E781: mov     edx, [edi+28h]
-0x59E784: push    esi
-0x59E785: push    ecx
-0x59E786: push    edx
-0x59E787: mov     ecx, edi
+0x59E784: push    esi; lastTile
+0x59E785: push    ecx; name
+0x59E786: push    edx; parent
+0x59E787: mov     ecx, edi; this
 0x59E789: mov     [esp+50h+var_4], ebx
-0x59E78D: call    Menu_CreateTileFromTemplate
-0x59E792: mov     ecx, ebp
+0x59E78D: call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.
+0x59E792: mov     ecx, ebp; this
 0x59E794: mov     esi, eax
-0x59E796: call    sub_6B8650
+0x59E796: call    MenuTopicManager__GetCurrentTopic
 0x59E79B: mov     eax, [eax]
 0x59E79D: push    ebx; a3
 0x59E79E: push    eax; a2
@@ -108,13 +108,13 @@
 0x59E7BB: mov     ecx, [esp+44h+var_20.m_data]
 0x59E7BF: push    ecx
 0x59E7C0: mov     byte ptr [esp+48h+var_4], bl
-0x59E7C4: call    FormHeapFree
+0x59E7C4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x59E7C9: add     esp, 4
-0x59E7CC: mov     ecx, ebp
+0x59E7CC: mov     ecx, ebp; this
 0x59E7CE: mov     [esp+44h+var_20.m_data], ebx
 0x59E7D2: mov     [esp+44h+var_20.m_bufLen], bx
 0x59E7D7: mov     [esp+44h+var_20.m_dataLen], bx
-0x59E7DC: call    sub_6B8650
+0x59E7DC: call    MenuTopicManager__GetCurrentTopic
 0x59E7E1: mov     eax, [eax]
 0x59E7E3: push    eax
 0x59E7E4: push    0FDEh
@@ -126,15 +126,15 @@
 0x59E7FB: fild    [esp+44h+var_24]
 0x59E7FF: push    ecx
 0x59E800: mov     ecx, esi; this
-0x59E802: fstp    [esp+48h+a2]; a3
-0x59E805: push    0FA8h; a2
-0x59E80A: call    Tile_SetFloat
+0x59E802: fstp    [esp+48h+a2]; value
+0x59E805: push    0FA8h; propertyCode
+0x59E80A: call    Tile_SetFloat; Verified: topic id = zero-based choice ordinal + 0x65; trait 0xFA8. Preserve association when hiding a topic.
 0x59E80F: fild    [esp+44h+a3]
 0x59E813: push    ecx
 0x59E814: mov     ecx, esi; this
-0x59E816: fstp    [esp+48h+a2]; a3
-0x59E819: push    0FAAh; a2
-0x59E81E: call    Tile_SetFloat
+0x59E816: fstp    [esp+48h+a2]; value
+0x59E819: push    0FAAh; propertyCode
+0x59E81E: call    Tile_SetFloat; Verified: listindex trait 0xFAA stores zero-based engine choice ordinal. DoClick reads this trait for GoToTopic; it is not merely a visual row number.
 0x59E823: add     [esp+44h+a3], 1
 0x59E828: cmp     [esp+44h+var_28], ebx
 0x59E82C: jnz     short loc_59E870
@@ -153,55 +153,55 @@
 0x59E856: jge     short loc_59E85E
 0x59E858: fadd    dword ptr ds:0A2FC78h
 0x59E85E: add     esp, 0Ch
-0x59E861: fstp    [esp+48h+a2]; a3
-0x59E864: push    0FF0h; a2
+0x59E861: fstp    [esp+48h+a2]; value
+0x59E864: push    0FF0h; propertyCode
 0x59E869: mov     ecx, esi; this
-0x59E86B: call    Tile_SetFloat
-0x59E870: mov     ecx, ebp
-0x59E872: call    sub_6B8650
-0x59E877: cmp     [eax+21h], bl
+0x59E86B: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
+0x59E870: mov     ecx, ebp; this
+0x59E872: call    MenuTopicManager__GetCurrentTopic
+0x59E877: cmp     [eax+21h], bl; MenuTopic.infoNotSpoken controls the topic tile's new/unread presentation. This cached UI byte is separate from TESTopicInfo.spoken.
 0x59E87A: jnz     loc_59E961
 0x59E880: fldz
 0x59E882: push    ecx
-0x59E883: fstp    [esp+48h+a2]; a3
+0x59E883: fstp    [esp+48h+a2]; value
 0x59E886: mov     ecx, esi; this
-0x59E888: push    0FB0h; a2
-0x59E88D: call    Tile_SetFloat
+0x59E888: push    0FB0h; propertyCode
+0x59E88D: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59E892: mov     ecx, [edi+28h]
 0x59E895: push    0FB5h
 0x59E89A: call    Tile_GetFloat
 0x59E89F: push    ecx
-0x59E8A0: fstp    [esp+48h+a2]; a3
-0x59E8A3: push    0FCCh; a2
+0x59E8A0: fstp    [esp+48h+a2]; value
+0x59E8A3: push    0FCCh; propertyCode
 0x59E8A8: mov     ecx, esi; this
-0x59E8AA: call    Tile_SetFloat
+0x59E8AA: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59E8AF: mov     ecx, [edi+28h]
 0x59E8B2: push    0FB6h
 0x59E8B7: call    Tile_GetFloat
 0x59E8BC: push    ecx
-0x59E8BD: fstp    [esp+48h+a2]; a3
-0x59E8C0: push    0FCDh; a2
+0x59E8BD: fstp    [esp+48h+a2]; value
+0x59E8C0: push    0FCDh; propertyCode
 0x59E8C5: mov     ecx, esi; this
-0x59E8C7: call    Tile_SetFloat
+0x59E8C7: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59E8CC: mov     ecx, [edi+28h]
 0x59E8CF: push    0FB7h
 0x59E8D4: call    Tile_GetFloat
 0x59E8D9: push    ecx
-0x59E8DA: fstp    [esp+48h+a2]; a3
-0x59E8DD: push    0FCEh; a2
+0x59E8DA: fstp    [esp+48h+a2]; value
+0x59E8DD: push    0FCEh; propertyCode
 0x59E8E2: mov     ecx, esi; this
-0x59E8E4: call    Tile_SetFloat
-0x59E8E9: mov     ecx, ebp
-0x59E8EB: call    sub_6B8650
+0x59E8E4: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
+0x59E8E9: mov     ecx, ebp; this
+0x59E8EB: call    MenuTopicManager__GetCurrentTopic
 0x59E8F0: mov     eax, [eax]
 0x59E8F2: cmp     eax, ebx
 0x59E8F4: jz      short loc_59E90C
 0x59E8F6: mov     ecx, [edi+8Ch]
 0x59E8FC: cmp     ecx, ebx
 0x59E8FE: jz      short loc_59E90C
-0x59E900: push    eax; Str2
-0x59E901: push    ecx; Str1
-0x59E902: call    __strcmp
+0x59E900: push    eax; right
+0x59E901: push    ecx; left
+0x59E902: call    CRT_StricmpLocaleDispatch
 0x59E907: add     esp, 8
 0x59E90A: jmp     short loc_59E919
 0x59E90C: xor     ecx, ecx
@@ -225,18 +225,18 @@
 0x59E947: jge     short loc_59E94F
 0x59E949: fadd    dword ptr ds:0A2FC78h
 0x59E94F: add     esp, 0Ch
-0x59E952: fstp    [esp+48h+a2]; a3
-0x59E955: push    0FF0h; a2
+0x59E952: fstp    [esp+48h+a2]; value
+0x59E955: push    0FF0h; propertyCode
 0x59E95A: mov     ecx, esi; this
-0x59E95C: call    Tile_SetFloat
-0x59E961: mov     ecx, ebp
-0x59E963: call    sub_6B85F0
+0x59E95C: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
+0x59E961: mov     ecx, ebp; this
+0x59E963: call    MenuTopicManager__NextTopic
 0x59E968: add     [esp+44h+var_28], 1
 0x59E96D: mov     byte ptr [esp+44h+var_30+3], al
 0x59E971: mov     eax, [esp+44h+var_18.m_data]
 0x59E975: push    eax
 0x59E976: mov     [esp+48h+var_4], 0FFFFFFFFh
-0x59E97E: call    FormHeapFree
+0x59E97E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x59E983: add     esp, 4
 0x59E986: cmp     byte ptr [esp+44h+var_30+3], bl
 0x59E98A: mov     [esp+44h+var_18.m_data], ebx
@@ -248,12 +248,12 @@
 0x59E9A4: fld     dword ptr ds:0A379B4h
 0x59E9AA: push    ecx
 0x59E9AB: mov     ecx, [edi+30h]; this
-0x59E9AE: fstp    [esp+48h+a2]; a3
-0x59E9B1: push    0FA1h; a2
-0x59E9B6: call    Tile_SetFloat
-0x59E9BB: push    ebx
-0x59E9BC: mov     ecx, ebp
-0x59E9BE: call    sub_6B85C0
+0x59E9AE: fstp    [esp+48h+a2]; value
+0x59E9B1: push    0FA1h; propertyCode
+0x59E9B6: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
+0x59E9BB: push    ebx; skipGreeting
+0x59E9BC: mov     ecx, ebp; this
+0x59E9BE: call    MenuTopicManager__FirstTopic; Always restore the manager cursor to the head MenuTopic after rendering the list that intentionally skipped that head. This enables initial GREETING playback even when Initialize returned closePending for Goodbye.
 0x59E9C3: mov     ecx, [edi+28h]
 0x59E9C6: push    ebx; float
 0x59E9C7: call    sub_58FBA0
@@ -267,8 +267,8 @@
 0x59E9E1: push    ebx; canCreate
 0x59E9E2: call    InterfaceManager_GetSingleton
 0x59E9E7: add     esp, 8
-0x59E9EA: mov     ecx, eax
-0x59E9EC: call    sub_57FD60
+0x59E9EA: mov     ecx, eax; this
+0x59E9EC: call    InterfaceManager__GetDefaultFocus; Verified: invokes ScanForMaxFocus with INT_MIN and null root, sets selected tile via SetCurrentFocusTarget, hides cursor, clears mouse-motion byte +0xB9. Fallout named analogue 0x824F09D0.
 0x59E9F1: xor     al, al
 0x59E9F3: mov     ecx, dword ptr [esp+44h+var_C]
 0x59E9F7: mov     large fs:0, ecx
@@ -280,3 +280,14 @@
 0x59EA03: mov     esp, ebp
 0x59EA05: pop     ebp
 0x59EA06: retn
+0x9C0120: lea     ecx, [ebp-18h]; void *
+0x9C0123: jmp     BSStringT_Clear
+0x9C0128: lea     ecx, [ebp-20h]; void *
+0x9C012B: jmp     BSStringT_Clear
+0x9C0130: mov     edx, [esp-4+arg_4]
+0x9C0134: lea     eax, [edx-34h]
+0x9C0137: mov     ecx, [edx-38h]
+0x9C013A: xor     ecx, eax
+0x9C013C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C0141: mov     eax, offset stru_AE946C
+0x9C0146: jmp     ___CxxFrameHandler3

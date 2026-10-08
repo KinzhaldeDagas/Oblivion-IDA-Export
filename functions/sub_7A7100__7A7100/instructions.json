@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A7100",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Oblivion Random::Set. Requires 0 < seed < 1, converts seed*2147483648 to the shared integer seed, then initializes all 128 shuffled samples with Raw().",
     "mnemonic": "push",
     "size": 2
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x7A7126",
-    "line": "fld     [esp+58h+arg_0]",
+    "line": "fld     [esp+58h+seed]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -145,25 +145,25 @@
   },
   {
     "ea": "0x7A7146",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A714B",
-    "line": "mov     dword ptr [esp+58h+arg_0], eax",
+    "line": "mov     dword ptr [esp+58h+seed], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A714F",
-    "line": "fild    dword ptr [esp+58h+arg_0]",
+    "line": "fild    dword ptr [esp+58h+seed]",
     "mnemonic": "fild",
     "size": 4
   },
   {
     "ea": "0x7A7153",
-    "line": "mov     esi, offset flt_B42A90",
+    "line": "mov     esi, offset OB_Random_Buffer_010201A0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x7A7160",
-    "line": "call    sub_7A6CD0",
+    "line": "call    OB_Random_Raw_010201A0; Oblivion Random::Raw Park-Miller step. Advances the shared integer seed with multiplier 16807 modulo 2147483647 and returns seed * 4.656612875e-10 as float.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x7A716A",
-    "line": "cmp     esi, offset dbl_B42C90",
+    "line": "cmp     esi, offset OB_Random_seed_010201A0",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x7A7183",
-    "line": "push    19h; MaxCount",
+    "line": "push    19h; count",
     "mnemonic": "push",
     "size": 2
   },
@@ -265,31 +265,31 @@
   },
   {
     "ea": "0x7A718C",
-    "line": "lea     ecx, [esp+60h+var_50]",
+    "line": "lea     ecx, [esp+60h+var_50]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A7190",
-    "line": "mov     [esp+60h+var_38], 0Fh",
+    "line": "mov     [esp+60h+var_50.capacity], 0Fh",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x7A7198",
-    "line": "mov     [esp+60h+var_3C], 0",
+    "line": "mov     [esp+60h+var_50.size], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x7A71A0",
-    "line": "mov     [esp+60h+var_4C], 0",
+    "line": "mov     byte ptr [esp+60h+var_50.storage], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x7A71A5",
-    "line": "call    sub_414500",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
     "mnemonic": "call",
     "size": 5
   },
@@ -345,6 +345,60 @@
     "ea": "0x7A71CA",
     "line": "call    ThrowException??",
     "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCD10",
+    "line": "lea     ecx, [ebp-50h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCD13",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCD18",
+    "line": "mov     edx, dword ptr [esp+seed+4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CCD1C",
+    "line": "lea     eax, [edx-48h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCD1F",
+    "line": "mov     ecx, [edx-4Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCD22",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CCD24",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCD29",
+    "line": "mov     eax, offset stru_AF6118",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCD2E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
     "size": 5
   }
 ]

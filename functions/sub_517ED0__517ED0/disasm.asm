@@ -19,9 +19,9 @@
 0x517EFE: test    eax, eax
 0x517F00: jnz     short loc_517F07
 0x517F02: mov     eax, offset EmptyString
-0x517F07: push    ebx; Str2
-0x517F08: push    eax; Str1
-0x517F09: call    __strcmp
+0x517F07: push    ebx; right
+0x517F08: push    eax; left
+0x517F09: call    CRT_StricmpLocaleDispatch
 0x517F0E: add     esp, 8
 0x517F11: test    eax, eax
 0x517F13: jz      short loc_517F23

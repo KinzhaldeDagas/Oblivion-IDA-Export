@@ -1,11 +1,11 @@
-0x4CABC0: push    ecx
+0x4CABC0: push    ecx; Verified return predicate: returns true only for an NPC actor in a cell with direct XOWN, no XGLB, and neither Public nor TempPublic bit set; guards return false. With an NPC owner it returns true when the actor's base form differs; with a faction owner it returns true when actor rank is below the cell's XRNK requirement (absent XRNK defaults to rank 0). Other owner types and non-NPC actors return false. This is an ownership-restriction check; the calling script-condition identity remains Unknown.
 0x4CABC1: push    ebx
 0x4CABC2: push    esi
-0x4CABC3: mov     esi, [esp+0Ch+arg_0]
+0x4CABC3: mov     esi, [esp+0Ch+actor]
 0x4CABC7: mov     ebx, ecx
 0x4CABC9: mov     ecx, esi; this
 0x4CABCB: mov     [esp+0Ch+var_1], 0
-0x4CABD0: call    sub_5E6C60
+0x4CABD0: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x4CABD5: test    al, al
 0x4CABD7: jz      short loc_4CABE1
 0x4CABD9: pop     esi
@@ -16,8 +16,8 @@
 0x4CABE1: push    ebp
 0x4CABE2: lea     ebp, [ebx+28h]
 0x4CABE5: push    edi
-0x4CABE6: mov     ecx, ebp
-0x4CABE8: call    ExtraDataList_GetOwner
+0x4CABE6: mov     ecx, ebp; this
+0x4CABE8: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x4CABED: mov     edi, eax
 0x4CABEF: test    edi, edi
 0x4CABF1: jz      short loc_4CAC68
@@ -27,8 +27,8 @@
 0x4CABFB: shr     eax, 6
 0x4CABFE: test    al, 1
 0x4CAC00: jnz     short loc_4CAC68
-0x4CAC02: mov     ecx, ebp
-0x4CAC04: call    sub_41E7D0
+0x4CAC02: mov     ecx, ebp; this
+0x4CAC04: call    ExtraDataList_GetGlobal; Verified accessor: returns the TESGlobal* in ExtraGlobal (extra type 0x28/XGLB), or null if the extra is absent.
 0x4CAC09: test    eax, eax
 0x4CAC0B: jnz     loc_4CACCC
 0x4CAC11: mov     ecx, esi; this
@@ -68,8 +68,8 @@
 0x4CAC71: retn    4
 0x4CAC74: test    edi, edi
 0x4CAC76: jz      short loc_4CAC68
-0x4CAC78: mov     ecx, ebx
-0x4CAC7A: call    sub_4CA990
+0x4CAC78: mov     ecx, ebx; cell
+0x4CAC7A: call    TESObjectCELL_GetRequiredOwnerFactionRank; Verified cell helper: returns ExtraRank.rank from the cell's XRNK extra, substituting 0 when no rank extra exists.
 0x4CAC7F: push    0; int
 0x4CAC81: push    offset ??_R0?AVTESNPC@@@8; struct TypeDescriptor *
 0x4CAC86: mov     ebp, eax

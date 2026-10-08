@@ -17,7 +17,7 @@
 0x75E0C7: call    edx
 0x75E0C9: jmp     short loc_75E0D4
 0x75E0CB: push    eax
-0x75E0CC: call    FormHeapFree
+0x75E0CC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x75E0D1: add     esp, 4
 0x75E0D4: mov     ecx, [esi+8]
 0x75E0D7: test    ecx, ecx
@@ -25,11 +25,11 @@
 0x75E0DB: push    1
 0x75E0DD: call    sub_56B680
 0x75E0E2: push    esi
-0x75E0E3: call    FormHeapFree
+0x75E0E3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x75E0E8: add     esp, 4
 0x75E0EB: mov     eax, [edi]
 0x75E0ED: push    eax
-0x75E0EE: call    FormHeapFree
+0x75E0EE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x75E0F3: add     esp, 4
 0x75E0F6: pop     edi
 0x75E0F7: pop     esi

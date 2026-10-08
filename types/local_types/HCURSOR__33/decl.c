@@ -1,1 +1,1 @@
-HCURSOR
+typedef HICON HCURSOR;

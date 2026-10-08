@@ -1,1 +1,1 @@
-HPCON
+typedef void *HPCON;

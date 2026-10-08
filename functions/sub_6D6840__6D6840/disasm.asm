@@ -1,4 +1,4 @@
-0x6D6840: push    esi
+0x6D6840: push    esi; Oblivion NiTransformInterpolator binary save. Saves base state, writes cached 0x20-byte transform +0x0C, and writes the NiTransformData object reference +0x2C. The three key cursors are transient and not serialized.
 0x6D6841: push    edi
 0x6D6842: mov     edi, [esp+8+arg_0]
 0x6D6846: push    edi

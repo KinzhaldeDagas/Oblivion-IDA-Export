@@ -9,11 +9,11 @@ int sub_8BBEE0(int a1, char *Format, ...)
   va_list Args; // [esp+418h] [ebp+Ch] BYREF
 
   va_start(Args, Format);
-  HIDWORD(v6) = Format;
-  LODWORD(v6) = 0x400;
-  j___vsnprintf(Dest, v6, Args, v7);
-  v2 = *(int **)(a1 + 8);
-  v3 = *v2;
-  v4 = sub_8B1860(Dest);
-  return (*(int (__thiscall **)(int *, char *, unsigned int))(v3 + 0xC))(v2, Dest, v4);
+  HIDWORD(v6) = Format; /*0x8bbf03*/
+  LODWORD(v6) = 0x400; /*0x8bbf08*/
+  j___vsnprintf(Dest, v6, Args, v7); /*0x8bbf0e*/
+  v2 = *(int **)(a1 + 8); /*0x8bbf1a*/
+  v3 = *v2; /*0x8bbf1d*/
+  v4 = sub_8B1860(Dest); /*0x8bbf24*/
+  return (*(int (__thiscall **)(int *, char *, unsigned int))(v3 + 0xC))(v2, Dest, v4); /*0x8bbf37*/
 }

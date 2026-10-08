@@ -1,19 +1,36 @@
 {
-  "callees_count": 15,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x45A990",
+      "0x45AA7D"
+    ],
+    [
+      "0x9AE230",
+      "0x9AE253"
+    ]
+  ],
+  "chunks_sha256": "bd2f6f50e5c967f87b29de66a595c5fc3da56d9346cd5fff3f88e64fad3e1b48",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "InteriorCellNewReferencesMap::~InteriorCellNewReferencesMap(void)",
+  "comment_repeatable": "\nVerified: walks map values, frees 8-byte overflow list nodes, clears head ID, clears map then base pointer-map destructor. Vtable scalar destructor 45F090.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "InteriorCellNewReferencesMap_dtor",
   "end_ea": "0x45AA7D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "??1InteriorCellNewReferencesMap@@UAE@XZ",
+  "name": "InteriorCellNewReferencesMap_dtor",
   "segment": ".text",
   "sha256": "89136b001a2c5e449809fd23479cd8cf37f40d6b000e6b8c2610ce997e3c5137",
   "size": 237,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x45A990",
-  "type": "void __thiscall(NiTMap_Entry_TESCELL *this)",
-  "xrefs_from_count": 89,
+  "total_chunk_size": 272,
+  "type": "void __thiscall(InteriorCellNewReferencesMap *self)",
+  "xrefs_from_count": 100,
   "xrefs_to_count": 1
 }

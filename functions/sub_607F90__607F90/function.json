@@ -1,19 +1,32 @@
 {
-  "callees_count": 37,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x607F90",
+      "0x608120"
+    ]
+  ],
+  "chunks_sha256": "7355cb56737f0b8ba8d71c4b0ac3af8f6990b9aeca7015aca6b79ec51ab36844",
+  "comment_regular": "Scans two ActorProcessManager lists for ArrowProjectile objects matching baseForm and recorded target. Stops at maximumMatches; optionally requires transfer marker +0x95 and either destroys immediately or marks lifecycle state 3.",
+  "comment_repeatable": "Scans two ActorProcessManager lists for ArrowProjectile objects matching baseForm and recorded target. Stops at maximumMatches; optionally requires transfer marker +0x95 and either destroys immediately or marks lifecycle state 3.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 6,
-  "display_name": "sub_607F90",
+  "display_name": "ArrowProjectile_CleanupMatchingByBaseAndTarget",
   "end_ea": "0x608120",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_607F90",
+  "name": "ArrowProjectile_CleanupMatchingByBaseAndTarget",
   "segment": ".text",
   "sha256": "7355cb56737f0b8ba8d71c4b0ac3af8f6990b9aeca7015aca6b79ec51ab36844",
   "size": 400,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x607F90",
-  "type": "_BYTE *__cdecl(_BYTE *, int, _BYTE *, char, char)",
+  "total_chunk_size": 400,
+  "type": "void __cdecl(TESForm *baseForm, int maximumMatches, TESObjectREFR *target, char destroyImmediately, char requireInventoryTransfer)",
   "xrefs_from_count": 177,
   "xrefs_to_count": 4
 }

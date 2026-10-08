@@ -1,8 +1,9 @@
-int sub_9F2330()
+// Static GameSetting constructor only; not the runtime validation callback.
+int InitGameSetting_sFastTravelNoTravelHealthDamage()
 {
-  GameSetting_ConstrAndReg(
-    &dword_B38B58,
-    (int)"sFastTravelNoTravelHealthDamage",
-    (int)"You can't fast travel while taking health damage");
-  return atexit(sub_A21DD0);
+  GameSetting_ConstrAndReg( /*0x9f233f*/
+    &stru_B38B58,
+    "sFastTravelNoTravelHealthDamage",
+    "You can't fast travel while taking health damage");
+  return atexit(sub_A21DD0); /*0x9f234f*/
 }

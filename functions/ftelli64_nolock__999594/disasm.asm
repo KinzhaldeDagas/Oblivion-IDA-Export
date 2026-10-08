@@ -53,7 +53,7 @@
 0x999612: and     ebx, 1Fh
 0x999615: imul    ebx, 28h ; '('
 0x999618: sar     edx, 5
-0x99961B: mov     edx, dword_BAAAC0[edx*4]
+0x99961B: mov     edx, dword ptr unk_BAAAC0[edx*4]
 0x999622: test    byte ptr [edx+ebx+4], 80h
 0x999627: jz      short loc_99963A
 0x999629: mov     edx, ecx

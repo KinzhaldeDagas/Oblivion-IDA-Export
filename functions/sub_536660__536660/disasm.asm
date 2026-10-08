@@ -1,4 +1,4 @@
-0x536660: push    ebp
+0x536660: push    ebp; ODismemberment: recursively walks NiAVObject children and pushes a translated vector into each bhkCollisionObject-backed Havok object via sub_4D6AF0.
 0x536661: mov     ebp, esp
 0x536663: and     esp, 0FFFFFFF0h
 0x536666: sub     esp, 24h
@@ -13,7 +13,7 @@
 0x53667E: push    edi
 0x53667F: jz      loc_536728
 0x536685: push    esi
-0x536686: call    sub_47FAC0
+0x536686: call    NiAVObject_GetBhkCollisionObject; ODismemberment: authoritative NiAVObject collision getter. Reads NiAVObject+0xA8 and accepts objects whose class chain includes bhkCollisionObject.
 0x53668B: add     esp, 4
 0x53668E: test    eax, eax
 0x536690: jz      short loc_5366E3
@@ -34,7 +34,7 @@
 0x5366BA: mov     eax, [eax+50h]
 0x5366BD: add     eax, 0D0h ; 'Ð'
 0x5366C2: jmp     short loc_5366C9
-0x5366C4: mov     eax, offset stru_BA7A40
+0x5366C4: mov     eax, offset unk_BA7A40
 0x5366C9: movaps  xmm1, xmmword ptr [eax]
 0x5366CC: movaps  xmm0, [esp+30h+var_20]
 0x5366D1: lea     eax, [esp+30h+var_20]
@@ -61,7 +61,7 @@
 0x53670D: mov     eax, [ecx+esi*4]
 0x536710: push    ebx
 0x536711: push    eax
-0x536712: call    sub_536660
+0x536712: call    sub_536660; ODismemberment: recursively walks NiAVObject children and pushes a translated vector into each bhkCollisionObject-backed Havok object via sub_4D6AF0.
 0x536717: movzx   eax, word ptr [edi+0B6h]
 0x53671E: add     esi, 1
 0x536721: add     esp, 8

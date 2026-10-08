@@ -1,1 +1,1 @@
-_SC_ENUM_TYPE
+typedef SC_ENUM_TYPE _SC_ENUM_TYPE;

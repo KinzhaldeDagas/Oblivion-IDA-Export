@@ -1,6 +1,6 @@
 0x484370: fld     [esp+arg_0]
 0x484374: fld     st
-0x484376: call    Double_To_SInt32
+0x484376: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x48437B: mov     [esp+arg_0], eax
 0x48437F: fild    [esp+arg_0]
 0x484383: fstp    [esp+arg_0]

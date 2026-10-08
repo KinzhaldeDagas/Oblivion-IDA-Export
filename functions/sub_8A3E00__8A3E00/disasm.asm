@@ -35,20 +35,20 @@
 0x8A3E58: retn    4
 0x8A3E5B: fld     dword ptr ds:0A57CB0h
 0x8A3E61: mov     ecx, [esp+20h+var_4]
-0x8A3E65: fst     dword ptr [esp+20h+var_20]
+0x8A3E65: fst     [esp+20h+var_20]
 0x8A3E68: xor     ecx, esp
-0x8A3E6A: fst     dword ptr [esp+20h+var_20+4]
-0x8A3E6E: fstp    dword ptr [esp+20h+var_20+8]
+0x8A3E6A: fst     [esp+20h+var_20+4]
+0x8A3E6E: fstp    [esp+20h+var_20+8]
 0x8A3E72: fldz
-0x8A3E74: fst     dword ptr [esp+20h+var_20+0Ch]
-0x8A3E78: movaps  xmm0, [esp+20h+var_20]
+0x8A3E74: fst     [esp+20h+var_20+0Ch]
+0x8A3E78: movaps  xmm0, xmmword ptr [esp+20h+var_20]
 0x8A3E7C: fld     dword ptr ds:0A37080h
-0x8A3E82: fst     dword ptr [esp+20h+var_20]
+0x8A3E82: fst     [esp+20h+var_20]
 0x8A3E85: movaps  xmmword ptr [edx], xmm0
-0x8A3E88: fst     dword ptr [esp+20h+var_20+4]
-0x8A3E8C: fstp    dword ptr [esp+20h+var_20+8]
-0x8A3E90: fstp    dword ptr [esp+20h+var_20+0Ch]
-0x8A3E94: movaps  xmm0, [esp+20h+var_20]
+0x8A3E88: fst     [esp+20h+var_20+4]
+0x8A3E8C: fstp    [esp+20h+var_20+8]
+0x8A3E90: fstp    [esp+20h+var_20+0Ch]
+0x8A3E94: movaps  xmm0, xmmword ptr [esp+20h+var_20]
 0x8A3E98: movaps  xmmword ptr [edx+10h], xmm0
 0x8A3E9C: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x8A3EA1: mov     esp, ebp

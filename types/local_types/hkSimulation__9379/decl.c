@@ -1,1 +1,1 @@
-hkSimulation
+struct hkSimulation;

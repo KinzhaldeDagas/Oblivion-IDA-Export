@@ -9,10 +9,10 @@
 0x4DE031: test    ebp, ebp
 0x4DE033: jz      loc_4DE0C6
 0x4DE039: mov     ecx, ebp
-0x4DE03B: call    sub_452A60
+0x4DE03B: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x4DE040: mov     edi, eax
 0x4DE042: push    edi
-0x4DE043: call    sub_4DC270
+0x4DE043: call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.
 0x4DE048: mov     esi, eax
 0x4DE04A: add     esp, 4
 0x4DE04D: test    esi, esi
@@ -69,7 +69,7 @@
 0x4DE0D6: pop     ebp
 0x4DE0D7: retn
 0x4DE0D8: mov     ecx, [esp+arg_0]
-0x4DE0DC: call    sub_452A60
+0x4DE0DC: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x4DE0E1: mov     cx, [eax+18h]
 0x4DE0E5: mov     edx, [esp+arg_4]
 0x4DE0E9: and     cx, 0FFF9h

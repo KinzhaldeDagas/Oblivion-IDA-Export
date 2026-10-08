@@ -4,7 +4,7 @@
 0x557188: test    eax, eax
 0x55718A: jz      short loc_557195
 0x55718C: push    eax
-0x55718D: call    FormHeapFree
+0x55718D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x557192: add     esp, 4
 0x557195: mov     dword ptr [esi+8], 0
 0x55719C: mov     dword ptr [esi+0Ch], 0

@@ -1,22 +1,180 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "TESQuest",
+  "definition": "struct TESQuest\n{\nTESFormVtbl *vtbl;\nTESFormMembr super;\nTESScriptableForm scriptable;\nTESIcon icon;\nTESFullName fullName;\nTESQuestFlags questFlags;\nUInt8 priority;\nUInt8 pad3E[2];\nBSSimpleList_VoidPtr stages;\nBSSimpleList_VoidPtr targets;\nConditionEntry conditions;\nScriptEventList *eventList;\nUInt8 currentStage;\nUInt8 pad5D[3];\nUInt32 unk60;\nUInt16 unk64;\nUInt16 unk66;\n}\n",
   "id": 18374686479672017605,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "vtbl",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "TESFormVtbl *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "super",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 20
+      "size": 20,
+      "type": "TESFormMembr"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "scriptable",
+      "offset": 24,
+      "offset_hex": "0x18",
+      "size": 12,
+      "type": "TESScriptableForm"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "icon",
+      "offset": 36,
+      "offset_hex": "0x24",
+      "size": 12,
+      "type": "TESIcon"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "fullName",
+      "offset": 48,
+      "offset_hex": "0x30",
+      "size": 12,
+      "type": "TESFullName"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "questFlags",
+      "offset": 60,
+      "offset_hex": "0x3C",
+      "size": 1,
+      "type": "TESQuestFlags"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "priority",
+      "offset": 61,
+      "offset_hex": "0x3D",
+      "size": 1,
+      "type": "UInt8"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "pad3E",
+      "offset": 62,
+      "offset_hex": "0x3E",
+      "size": 2,
+      "type": "UInt8[2]"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "stages",
+      "offset": 64,
+      "offset_hex": "0x40",
+      "size": 8,
+      "type": "BSSimpleList_VoidPtr"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "targets",
+      "offset": 72,
+      "offset_hex": "0x48",
+      "size": 8,
+      "type": "BSSimpleList_VoidPtr"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "conditions",
+      "offset": 80,
+      "offset_hex": "0x50",
+      "size": 8,
+      "type": "ConditionEntry"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "eventList",
+      "offset": 88,
+      "offset_hex": "0x58",
+      "size": 4,
+      "type": "ScriptEventList *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "currentStage",
+      "offset": 92,
+      "offset_hex": "0x5C",
+      "size": 1,
+      "type": "UInt8"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "pad5D",
+      "offset": 93,
+      "offset_hex": "0x5D",
+      "size": 3,
+      "type": "UInt8[3]"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "unk60",
+      "offset": 96,
+      "offset_hex": "0x60",
+      "size": 4,
+      "type": "UInt32"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "unk64",
+      "offset": 100,
+      "offset_hex": "0x64",
+      "size": 2,
+      "type": "UInt16"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "unk66",
+      "offset": 102,
+      "offset_hex": "0x66",
+      "size": 2,
+      "type": "UInt16"
     }
   ],
   "name": "TESQuest",
-  "size": 24
+  "ordinal": 9355,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 104
 }

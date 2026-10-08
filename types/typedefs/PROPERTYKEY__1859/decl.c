@@ -1,1 +1,1 @@
-PROPERTYKEY
+typedef _tagpropertykey PROPERTYKEY;

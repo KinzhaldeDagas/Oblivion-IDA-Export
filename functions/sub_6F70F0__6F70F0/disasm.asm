@@ -11,7 +11,7 @@
 0x6F7113: test    [esp+4+arg_0], 1
 0x6F7118: jz      short loc_6F7123
 0x6F711A: push    esi
-0x6F711B: call    FormHeapFree
+0x6F711B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F7120: add     esp, 4
 0x6F7123: mov     eax, esi
 0x6F7125: pop     esi

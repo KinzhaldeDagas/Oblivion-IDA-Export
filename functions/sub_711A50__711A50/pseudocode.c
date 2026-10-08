@@ -3,9 +3,9 @@ char *__thiscall sub_711A50(float *this, char *ArgList)
   unsigned int v3; // kr00_4
   char *v4; // ebx
 
-  v3 = strlen(ArgList);
-  v4 = (char *)FormHeapAlloc(v3 + 0x80);
-  sub_6C5D40(
+  v3 = strlen(ArgList); /*0x711a59*/
+  v4 = (char *)FormHeapAlloc(v3 + 0x80); /*0x711a81*/
+  sub_6C5D40( /*0x711ac5*/
     (va_list)(v3 + 0x80),
     v4,
     __PAIR64__("%s = ((%g,%g,%g),(%g,%g,%g),(%g,%g,%g))", v3 + 0x80),
@@ -19,5 +19,5 @@ char *__thiscall sub_711A50(float *this, char *ArgList)
     *(this + 6),
     *(this + 7),
     *(this + 8));
-  return v4;
+  return v4; /*0x711acd*/
 }

@@ -1,8 +1,8 @@
-0x435830: sub     esp, 10Ch
+0x435830: sub     esp, 10Ch; Builds a KF path list for a model directory. Feeds ModelLoader KF discovery used by actor animation setup and generated attack/idle lists.
 0x435836: mov     eax, ___security_cookie
 0x43583B: xor     eax, esp
 0x43583D: mov     [esp+10Ch+var_4], eax
-0x435844: mov     ecx, g_idleAnimationMap
+0x435844: mov     ecx, dword_B361CC+0F4h
 0x43584A: test    ecx, ecx
 0x43584C: push    ebp
 0x43584D: mov     ebp, [esp+110h+arg_0]
@@ -13,13 +13,13 @@
 0x43585D: call    sub_521190
 0x435862: test    eax, eax
 0x435864: jz      loc_435927
-0x43586A: mov     ecx, g_idleAnimationMap
+0x43586A: mov     ecx, dword_B361CC+0F4h
 0x435870: push    ebp
 0x435871: call    sub_521190
 0x435876: mov     esi, eax
 0x435878: push    8; Size
 0x43587A: mov     [esp+11Ch+var_10C], esi
-0x43587E: call    FormHeapAlloc
+0x43587E: call    FormHeapAlloc; MEF v43 Oblivion-verified KF list head OOM guard: set EBP=0, remove pending size, and return empty list via 0x435920 before any EBP dereference.
 0x435883: add     esp, 4
 0x435886: test    eax, eax
 0x435888: jz      short loc_43589B
@@ -42,7 +42,7 @@
 0x4358BB: sub     eax, edx
 0x4358BD: add     eax, 1
 0x4358C0: push    eax; Size
-0x4358C1: call    FormHeapAlloc
+0x4358C1: call    FormHeapAlloc; MEF v43 Oblivion-verified KF string OOM guard: remove pending size and skip current source entry at 0x435911 before copy/list mutation.
 0x4358C6: mov     edi, eax
 0x4358C8: mov     edx, edi
 0x4358CA: add     esp, 4
@@ -60,7 +60,7 @@
 0x4358E7: push    8; Size
 0x4358E9: call    FormHeapAlloc
 0x4358EE: add     esp, 4
-0x4358F1: test    eax, eax
+0x4358F1: test    eax, eax; MEF v43 Oblivion-verified KF link-node OOM guard: free newly copied EDI string, preserve existing list head/tail, and skip current source entry at 0x435911.
 0x4358F3: jz      short loc_435903
 0x4358F5: mov     ecx, [ebp+0]
 0x4358F8: mov     [eax], ecx
@@ -122,7 +122,7 @@
 0x4359A8: lea     eax, [esp+120h+Str]
 0x4359AC: push    ebp; char *
 0x4359AD: push    eax; Str
-0x4359AE: call    sub_431970
+0x4359AE: call    ModelLoader_BuildFileListWildcard; Decoded animation/model-loader helper. Builds a BSSimpleList of file paths for an input path that may contain wildcards; merges loose-file FindFirstFile results when archive invalidation is enabled, then asks archive/file systems to append matches. Used by KF/model discovery, not a CustomAnim override registry.
 0x4359B3: add     esp, 10h
 0x4359B6: mov     ecx, [esp+118h+var_4]
 0x4359BD: pop     edi

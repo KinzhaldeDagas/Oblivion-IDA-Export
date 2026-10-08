@@ -14,9 +14,9 @@
 0x5F45DF: jz      short Actor_MagicCaster_IsMagicItemUseable___CheckImmuneToSilence_
 0x5F45E1: mov     ecx, edi
 0x5F45E3: call    EffectItemList_GetSchoolAV
-0x5F45E8: push    eax
-0x5F45E9: mov     ecx, esi
-0x5F45EB: call    Actor_GetSkillMasteryLevel
+0x5F45E8: push    eax; actorValue
+0x5F45E9: mov     ecx, esi; this
+0x5F45EB: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x5F45F0: mov     esi, eax
 0x5F45F2: mov     eax, [edi]
 0x5F45F4: mov     edx, [eax+8]

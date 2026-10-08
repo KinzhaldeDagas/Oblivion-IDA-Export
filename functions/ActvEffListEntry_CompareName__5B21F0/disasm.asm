@@ -37,20 +37,20 @@
 0x5B225D: call    EffectItem_GetName
 0x5B2262: mov     edi, [edi]
 0x5B2264: mov     eax, [eax]
-0x5B2266: push    edi; Str2
-0x5B2267: push    eax; Str1
-0x5B2268: call    __strcmp
+0x5B2266: push    edi; right
+0x5B2267: push    eax; left
+0x5B2268: call    CRT_StricmpLocaleDispatch
 0x5B226D: test    eax, eax
 0x5B226F: mov     eax, [esp+40h+var_24]
 0x5B2273: push    eax
 0x5B2274: setz    bl
-0x5B2277: call    FormHeapFree
+0x5B2277: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5B227C: mov     ecx, [esp+44h+var_1C]
 0x5B2280: push    ecx
 0x5B2281: mov     [esp+48h+var_24], ebp
 0x5B2285: mov     word ptr [esp+48h+var_20+2], bp
 0x5B228A: mov     word ptr [esp+48h+var_20], bp
-0x5B228F: call    FormHeapFree
+0x5B228F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5B2294: add     esp, 10h
 0x5B2297: test    bl, bl
 0x5B2299: setnz   al
@@ -69,3 +69,12 @@
 0x5B22B8: mov     edx, [ebx+14h]
 0x5B22BB: cmp     edx, [ecx+14h]
 0x5B22BE: jnz     short ActvEffListEntry_CompareName___Return_0
+0x9C08A0: lea     ecx, [ebp-14h]; void *
+0x9C08A3: jmp     BSStringT_Clear
+0x9C08A8: mov     edx, [esp+arg_4]
+0x9C08AC: lea     eax, [edx-20h]
+0x9C08AF: mov     ecx, [edx-24h]
+0x9C08B2: xor     ecx, eax
+0x9C08B4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C08B9: mov     eax, offset stru_AE9AEC
+0x9C08BE: jmp     ___CxxFrameHandler3

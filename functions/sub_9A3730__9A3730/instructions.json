@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x9A3738",
-    "line": "cmp     byte_B4295B, bl",
+    "line": "cmp     g_D3DXParameterDispatchInitialized, bl",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x9A3744",
-    "line": "call    sub_783C70",
+    "line": "call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x9A374F",
-    "line": "cmp     dword_B428D8[edi*4], 1",
+    "line": "cmp     g_D3DXParameterClassDispatch[edi*4], 1",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x9A3761",
-    "line": "mov     dword_BAA930, ecx",
+    "line": "mov     g_NiD3DConstantMap_MappedBool, ecx",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x9A3767",
-    "line": "push    offset dword_BAA930",
+    "line": "push    offset g_NiD3DConstantMap_MappedBool",
     "mnemonic": "push",
     "size": 5
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x9A3771",
-    "line": "cmp     byte_B4295B, bl",
+    "line": "cmp     g_D3DXParameterDispatchInitialized, bl",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x9A377C",
-    "line": "call    sub_783C70",
+    "line": "call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x9A3787",
-    "line": "cmp     dword_B428D8[edi*4], 3",
+    "line": "cmp     g_D3DXParameterClassDispatch[edi*4], 3",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -169,31 +169,31 @@
   },
   {
     "ea": "0x9A3798",
-    "line": "mov     dword_BAA934, eax",
+    "line": "mov     g_NiD3DConstantMap_MappedInt4, eax",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x9A379D",
-    "line": "mov     dword_BAA938, eax",
+    "line": "mov     g_NiD3DConstantMap_MappedInt4+4, eax",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x9A37A2",
-    "line": "mov     dword_BAA93C, eax",
+    "line": "mov     g_NiD3DConstantMap_MappedInt4+8, eax",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x9A37A7",
-    "line": "mov     dword_BAA940, eax",
+    "line": "mov     g_NiD3DConstantMap_MappedInt4+0Ch, eax",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x9A37AC",
-    "line": "push    offset dword_BAA934",
+    "line": "push    offset g_NiD3DConstantMap_MappedInt4",
     "mnemonic": "push",
     "size": 5
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x9A37B6",
-    "line": "cmp     byte_B4295B, bl",
+    "line": "cmp     g_D3DXParameterDispatchInitialized, bl",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x9A37C1",
-    "line": "call    sub_783C70",
+    "line": "call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x9A37CC",
-    "line": "cmp     dword_B428D8[edi*4], 4",
+    "line": "cmp     g_D3DXParameterClassDispatch[edi*4], 4",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -259,25 +259,25 @@
   },
   {
     "ea": "0x9A37DB",
-    "line": "fstp    flt_BAA990",
+    "line": "fstp    g_NiD3DConstantMap_MappedFloat4",
     "mnemonic": "fstp",
     "size": 6
   },
   {
     "ea": "0x9A37E1",
-    "line": "fld     flt_BAA990",
+    "line": "fld     g_NiD3DConstantMap_MappedFloat4",
     "mnemonic": "fld",
     "size": 6
   },
   {
     "ea": "0x9A37E7",
-    "line": "fst     flt_BAA994",
+    "line": "fst     g_NiD3DConstantMap_MappedFloat4+4",
     "mnemonic": "fst",
     "size": 6
   },
   {
     "ea": "0x9A37ED",
-    "line": "fst     flt_BAA998",
+    "line": "fst     g_NiD3DConstantMap_MappedFloat4+8",
     "mnemonic": "fst",
     "size": 6
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x9A37F8",
-    "line": "cmp     byte_B4295B, bl",
+    "line": "cmp     g_D3DXParameterDispatchInitialized, bl",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x9A3803",
-    "line": "call    sub_783C70",
+    "line": "call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x9A380E",
-    "line": "cmp     dword_B428D8[edi*4], 5",
+    "line": "cmp     g_D3DXParameterClassDispatch[edi*4], 5",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x9A381D",
-    "line": "fstp    flt_BAA990",
+    "line": "fstp    g_NiD3DConstantMap_MappedFloat4",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -355,25 +355,25 @@
   },
   {
     "ea": "0x9A3826",
-    "line": "fstp    flt_BAA994",
+    "line": "fstp    g_NiD3DConstantMap_MappedFloat4+4",
     "mnemonic": "fstp",
     "size": 6
   },
   {
     "ea": "0x9A382C",
-    "line": "fld     flt_BAA990",
+    "line": "fld     g_NiD3DConstantMap_MappedFloat4",
     "mnemonic": "fld",
     "size": 6
   },
   {
     "ea": "0x9A3832",
-    "line": "fstp    flt_BAA998",
+    "line": "fstp    g_NiD3DConstantMap_MappedFloat4+8",
     "mnemonic": "fstp",
     "size": 6
   },
   {
     "ea": "0x9A3838",
-    "line": "fld     flt_BAA994",
+    "line": "fld     g_NiD3DConstantMap_MappedFloat4+4",
     "mnemonic": "fld",
     "size": 6
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x9A3853",
-    "line": "fstp    flt_BAA990",
+    "line": "fstp    g_NiD3DConstantMap_MappedFloat4",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x9A385C",
-    "line": "fstp    flt_BAA994",
+    "line": "fstp    g_NiD3DConstantMap_MappedFloat4+4",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x9A3865",
-    "line": "fstp    flt_BAA998",
+    "line": "fstp    g_NiD3DConstantMap_MappedFloat4+8",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -553,13 +553,13 @@
   },
   {
     "ea": "0x9A38A2",
-    "line": "fstp    flt_BAA9A0",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix",
     "mnemonic": "fstp",
     "size": 6
   },
   {
     "ea": "0x9A38A8",
-    "line": "push    offset flt_BAA9A0",
+    "line": "push    offset g_NiD3DConstantMap_MappedMatrix",
     "mnemonic": "push",
     "size": 5
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x9A38B0",
-    "line": "fstp    flt_BAA9A4",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix+4",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x9A38B9",
-    "line": "fstp    flt_BAA9A8",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix+8",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x9A38C1",
-    "line": "fst     flt_BAA9AC",
+    "line": "fst     g_NiD3DConstantMap_MappedMatrix+0Ch",
     "mnemonic": "fst",
     "size": 6
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x9A38CA",
-    "line": "fstp    flt_BAA9B0",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix+10h",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x9A38D3",
-    "line": "fstp    flt_BAA9B4",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix+14h",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -631,13 +631,13 @@
   },
   {
     "ea": "0x9A38DC",
-    "line": "fstp    flt_BAA9B8",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix+18h",
     "mnemonic": "fstp",
     "size": 6
   },
   {
     "ea": "0x9A38E2",
-    "line": "fst     flt_BAA9BC",
+    "line": "fst     g_NiD3DConstantMap_MappedMatrix+1Ch",
     "mnemonic": "fst",
     "size": 6
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x9A38EB",
-    "line": "fstp    flt_BAA9C0",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix+20h",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x9A38F4",
-    "line": "fstp    flt_BAA9C4",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix+24h",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -673,13 +673,13 @@
   },
   {
     "ea": "0x9A38FD",
-    "line": "fstp    flt_BAA9C8",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix+28h",
     "mnemonic": "fstp",
     "size": 6
   },
   {
     "ea": "0x9A3903",
-    "line": "fstp    flt_BAA9CC",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix+2Ch",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -751,7 +751,7 @@
   },
   {
     "ea": "0x9A3923",
-    "line": "fstp    flt_BAA990",
+    "line": "fstp    g_NiD3DConstantMap_MappedFloat4",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x9A392C",
-    "line": "fstp    flt_BAA994",
+    "line": "fstp    g_NiD3DConstantMap_MappedFloat4+4",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x9A3935",
-    "line": "fstp    flt_BAA998",
+    "line": "fstp    g_NiD3DConstantMap_MappedFloat4+8",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -793,13 +793,13 @@
   },
   {
     "ea": "0x9A3940",
-    "line": "fstp    flt_BAA99C",
+    "line": "fstp    g_NiD3DConstantMap_MappedFloat4+0Ch",
     "mnemonic": "fstp",
     "size": 6
   },
   {
     "ea": "0x9A3946",
-    "line": "push    offset flt_BAA990",
+    "line": "push    offset g_NiD3DConstantMap_MappedFloat4",
     "mnemonic": "push",
     "size": 5
   },

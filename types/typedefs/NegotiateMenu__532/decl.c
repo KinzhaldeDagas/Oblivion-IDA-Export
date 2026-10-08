@@ -1,1 +1,1 @@
-NegotiateMenu
+struct NegotiateMenu;

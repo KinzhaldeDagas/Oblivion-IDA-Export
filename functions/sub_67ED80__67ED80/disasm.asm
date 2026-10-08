@@ -1,4 +1,4 @@
-0x67ED80: cmp     [esp+arg_0], 0
+0x67ED80: cmp     [esp+value], 0; Verified sets/clears the PathGrid linked-points-disabled flag (0x20). SetLinkedPointsEnabled stores the inverse of its enabled argument.
 0x67ED85: jz      short loc_67ED8E
 0x67ED87: or      byte ptr [ecx+10h], 20h
 0x67ED8B: retn    4

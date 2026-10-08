@@ -1,4 +1,4 @@
-0x568BB0: push    ebx
+0x568BB0: push    ebx; 3DTheft: package target resolver/follower bookkeeping. Runtime packages with packageFlags bit 0x800 skip normal follower extra-data side effects for actor targets.
 0x568BB1: mov     ebx, ecx
 0x568BB3: mov     ecx, [ebx+28h]
 0x568BB6: test    ecx, ecx
@@ -35,7 +35,7 @@
 0x568C1A: call    edx
 0x568C1C: push    eax; a2
 0x568C1D: mov     ecx, esi; this
-0x568C1F: call    TESObjectREFR_GetParentCell
+0x568C1F: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x568C24: mov     ecx, ds:0B33A98h
 0x568C2A: push    eax; a1
 0x568C2B: call    sub_446B90
@@ -87,7 +87,7 @@
 0x568CC9: call    eax
 0x568CCB: push    eax; a2
 0x568CCC: mov     ecx, esi; this
-0x568CCE: call    TESObjectREFR_GetParentCell
+0x568CCE: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x568CD3: mov     ecx, ds:0B33A98h
 0x568CD9: push    eax; a1
 0x568CDA: call    sub_446B90
@@ -103,10 +103,10 @@
 0x568D06: shr     ecx, 5
 0x568D09: test    cl, 1
 0x568D0C: jz      short loc_568D1C
-0x568D0E: lea     ecx, [edi+44h]
+0x568D0E: lea     ecx, [edi+44h]; this
 0x568D11: test    ecx, ecx
 0x568D13: jz      short loc_568D1C
-0x568D15: call    ExtraDataList_GetReferencePointer
+0x568D15: call    ExtraDataList_GetReferencePointer; Return the TESObjectREFR payload from ExtraReferencePointer type 0x22, or null. Provenance only: callers still select EntryData by exact TESForm first.
 0x568D1A: mov     edi, eax
 0x568D1C: test    edi, edi
 0x568D1E: jz      loc_568E00
@@ -127,17 +127,17 @@
 0x568D55: jnz     loc_568E00
 0x568D5B: push    edi
 0x568D5C: lea     ecx, [esi+44h]
-0x568D5F: call    sub_424C50
+0x568D5F: call    sub_424C50; 3DTheft decode: Add/link ExtraFollower entry on target ExtraDataList; creates ExtraFollower if absent and pushes follower actor pointer if not already listed.
 0x568D64: push    edi
 0x568D65: mov     ecx, esi
-0x568D67: call    sub_5E03C0
+0x568D67: call    sub_5E03C0; 3DTheft decode 2026-05-17: Actor wrapper for process vfunc +0xD0; writes the resolved procedure target/follow reference into the actor process.
 0x568D6C: pop     edi
 0x568D6D: pop     esi
 0x568D6E: pop     ebx
 0x568D6F: retn    4
 0x568D72: mov     ecx, ds:0B333C4h
 0x568D78: add     ecx, 44h ; 'D'
-0x568D7B: call    GetExtraDataFollower
+0x568D7B: call    ExtraDataList_GetFollowerExtra; Returns ExtraFollower (type 0x23) itself, or null.
 0x568D80: cmp     edi, ds:0B333C4h
 0x568D86: jnz     short loc_568DF7
 0x568D88: mov     ecx, [esi+58h]
@@ -172,17 +172,17 @@
 0x568DE6: add     esp, 10h
 0x568DE9: push    edi
 0x568DEA: mov     ecx, esi
-0x568DEC: call    sub_5E03C0
+0x568DEC: call    sub_5E03C0; 3DTheft decode 2026-05-17: Actor wrapper for process vfunc +0xD0; writes the resolved procedure target/follow reference into the actor process.
 0x568DF1: pop     edi
 0x568DF2: pop     esi
 0x568DF3: pop     ebx
 0x568DF4: retn    4
 0x568DF7: push    esi
 0x568DF8: lea     ecx, [edi+44h]
-0x568DFB: call    sub_424C50
+0x568DFB: call    sub_424C50; 3DTheft decode 2026-05-17: Follow/Escort target resolver links the package owner actor into the target actor's ExtraFollower list when package flag 0x800 is clear.
 0x568E00: push    edi
 0x568E01: mov     ecx, esi
-0x568E03: call    sub_5E03C0
+0x568E03: call    sub_5E03C0; 3DTheft decode 2026-05-17: Actor wrapper for process vfunc +0xD0; writes the resolved procedure target/follow reference into the actor process.
 0x568E08: pop     edi
 0x568E09: pop     esi
 0x568E0A: pop     ebx

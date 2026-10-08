@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x68DA30",
+      "0x68DA3A"
+    ]
+  ],
+  "chunks_sha256": "a0e43f0a894fc84b00b14eb4ecf94afc381dbd809adf3473577851dc54f3f9ad",
+  "comment_regular": "Verified registry-clear helper, called during WinMain shutdown after EffectSettingCollection_Clear; it clears NiTMap_AECreatorFuncs. The map also has a separate atexit destructor that frees its bucket array.",
+  "comment_repeatable": "Verified registry-clear helper, called during WinMain shutdown after EffectSettingCollection_Clear; it clears NiTMap_AECreatorFuncs. The map also has a separate atexit destructor that frees its bucket array.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
   "display_name": "ActiveEffect_Base_ClearCreateFuncTable",
   "end_ea": "0x68DA3A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "ActiveEffect_Base_ClearCreateFuncTable",
   "segment": ".text",
   "sha256": "a0e43f0a894fc84b00b14eb4ecf94afc381dbd809adf3473577851dc54f3f9ad",
   "size": 10,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x68DA30",
-  "type": "int()",
+  "total_chunk_size": 10,
+  "type": "void __cdecl()",
   "xrefs_from_count": 3,
   "xrefs_to_count": 1
 }

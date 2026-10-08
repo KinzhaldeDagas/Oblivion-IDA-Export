@@ -1,37 +1,37 @@
 [
   {
     "ea": "0x722292",
-    "line": "lea     ecx, [esp+arg_44]; jumptable 00721BEB default case",
+    "line": "lea     ecx, [esp+right]; jumptable 00721BEB default case",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x722296",
-    "line": "push    ecx",
+    "line": "push    ecx; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x722297",
-    "line": "lea     edx, [esp+4+arg_108]",
+    "line": "lea     edx, [esp+4+out]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x72229E",
-    "line": "push    edx",
+    "line": "push    edx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x72229F",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7222A1",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },

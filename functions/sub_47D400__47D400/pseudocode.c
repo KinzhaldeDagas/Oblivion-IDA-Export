@@ -22,37 +22,37 @@ BSStringT *__thiscall sub_47D400(unsigned __int16 *this, BSStringT *a2)
   char v23; // [esp+37h] [ebp-11h]
   int v24; // [esp+44h] [ebp-4h]
 
-  a2->m_data = 0;
-  a2->m_dataLen = 0;
-  a2->m_bufLen = 0;
-  v3 = byte_A3D192;
-  v4 = word_A3D18C;
-  v5 = *this;
-  v24 = 0;
-  v16 = word_A3D190;
-  v6 = byte_A3D18E;
-  v17 = v3;
-  v7 = word_A3D188;
-  v19 = v6;
-  v8 = word_A3D184;
-  v20 = v7;
-  LOBYTE(v7) = byte_A3D186;
-  v18 = v4;
-  v21 = byte_A3D18A;
-  v22 = v8;
-  v23 = v7;
-  sub_47D330(v5);
-  v10 = v9;
-  if ( v9 < 1 || v9 > 3 )
-    v15 = 0;
+  a2->m_data = 0; /*0x47d442*/
+  a2->m_dataLen = 0; /*0x47d444*/
+  a2->m_bufLen = 0; /*0x47d448*/
+  v3 = byte_A3D192; /*0x47d44c*/
+  v4 = word_A3D18C; /*0x47d453*/
+  v5 = *this; /*0x47d45a*/
+  v24 = 0; /*0x47d45d*/
+  v16 = word_A3D190; /*0x47d468*/
+  v6 = byte_A3D18E; /*0x47d46d*/
+  v17 = v3; /*0x47d472*/
+  v7 = word_A3D188; /*0x47d476*/
+  v19 = v6; /*0x47d47d*/
+  v8 = word_A3D184; /*0x47d481*/
+  v20 = v7; /*0x47d488*/
+  LOBYTE(v7) = byte_A3D186; /*0x47d48d*/
+  v18 = v4; /*0x47d494*/
+  v21 = byte_A3D18A; /*0x47d4a8*/
+  v22 = v8; /*0x47d4ac*/
+  v23 = v7; /*0x47d4b1*/
+  sub_47D330(v5); /*0x47d4b5*/
+  v10 = v9; /*0x47d4ba*/
+  if ( v9 < 1 || v9 > 3 ) /*0x47d4cb*/
+    v15 = 0; /*0x47d4d6*/
   else
-    v15 = v9;
-  v11 = *(this + 1);
-  v12 = *(const char ***)(4 * sub_47D330(v5) + 0xB06FA4);
-  if ( v12 )
-    v13 = *v12;
+    v15 = v9; /*0x47d4d0*/
+  v11 = *(this + 1); /*0x47d4de*/
+  v12 = *(const char ***)(4 * sub_47D330(v5) + 0xB06FA4); /*0x47d4e8*/
+  if ( v12 ) /*0x47d4f8*/
+    v13 = *v12; /*0x47d4fa*/
   else
-    v13 = 0;
-  BSStringT_Static_Format(a2, "%d%s of %s, 3E%d", v10, (const char *)&v16 + 2 * v15 + v15, v13, v11);
-  return a2;
+    v13 = 0; /*0x47d4fe*/
+  BSStringT_Static_Format(a2, "%d%s of %s, 3E%d", v10, (const char *)&v16 + 2 * v15 + v15, v13, v11); /*0x47d51b*/
+  return a2; /*0x47d525*/
 }

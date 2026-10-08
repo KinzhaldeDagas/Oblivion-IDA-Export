@@ -1,1 +1,1 @@
-CInterfaceStubHeader
+typedef tagCInterfaceStubHeader CInterfaceStubHeader;

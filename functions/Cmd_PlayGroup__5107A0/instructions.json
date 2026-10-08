@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5107A0",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; PlayGroup script command path. Actors use Actor_LoadAnimGroup_ + ActorAnimData_PlayAnimGroup; non-actors play a sequence directly from NiControllerManager.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x5107D9",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x510842",
-    "line": "mov     edx, [esp+30h+var_10]",
+    "line": "mov     edx, [esp+30h+groupID]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -349,19 +349,19 @@
   },
   {
     "ea": "0x510849",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; repeatOrAction",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x51084B",
-    "line": "push    ecx",
+    "line": "push    ecx; playImmediately",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x51084C",
-    "line": "push    0",
+    "line": "push    0; forceWeaponPrefix",
     "mnemonic": "push",
     "size": 2
   },
@@ -373,25 +373,25 @@
   },
   {
     "ea": "0x510850",
-    "line": "push    0",
+    "line": "push    0; weaponEntryDataArg",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x510852",
-    "line": "push    edx",
+    "line": "push    edx; groupID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x510853",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x510855",
-    "line": "call    Actor_LoadAnimGroup?",
+    "line": "call    Actor_LoadAnimGroup_; Builds an initial encoded key from live actor movement/weapon state and requested fixed group ID, then returns ActorAnimData_ResolveAnimKeyFallback's concrete playable key or sentinel 0x00FF when no ActorAnimData exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x51085C",
-    "line": "push    eax",
+    "line": "push    eax; encodedKey",
     "mnemonic": "push",
     "size": 1
   },
@@ -427,19 +427,19 @@
   },
   {
     "ea": "0x510867",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x510869",
-    "line": "call    ActorAnimData_PlayAnimGroup",
+    "line": "call    ActorAnimData_PlayAnimGroup; Native group dispatcher. Reads fixed group-table slot (+0x08) and note-template class (+0x0C), normalizing slot aliases 5->0 and 6->3. For note classes 0/1, playImmediately=0 stores only the encoded key at ActorAnimData +0x70[slot] and repeat/action value at +0x7C[slot]; playImmediately=1 clears that queue and plays now. Classes 2..7 play immediately. No queued sequence pointer or path is stored.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x51086E",
-    "line": "cmp     [esp+1Ch+var_10], 0",
+    "line": "cmp     [esp+1Ch+groupID], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x51087D",
-    "line": "push    0",
+    "line": "push    0; slotSelector",
     "mnemonic": "push",
     "size": 2
   },
@@ -481,37 +481,37 @@
   },
   {
     "ea": "0x510883",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x510885",
-    "line": "call    sub_4706E0",
+    "line": "call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x51088A",
-    "line": "push    eax",
+    "line": "push    eax; sequence",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x51088B",
-    "line": "push    0Ch",
+    "line": "push    0Ch; action",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x51088D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x51088F",
-    "line": "call    HighPRocess_DoAction?????",
+    "line": "call    Actor_SetCurrentActionWithBowVisualCleanup; Void Actor action-transition wrapper. Performs transition-specific bow/held-arrow visual cleanup, then commits action and sequence through process vtable +0x2D8. It has no success/result contract; callers/plugins must not consume EAX, so Crossbow's UInt32 HighProcessDoActionFn typedef is incorrect. Meaningful current-action state is HighProcess-only: HighProcess +0x2D0/+0x2D8 read/store +0x1F4/+0x1F8, while MiddleHigh returns None (-1) and its setter is a no-op; Crossbow's process-level-0 action filter therefore matches Oblivion. External Crossbow state-machine contrast: Equip-as-Cocked/first-shot-loaded is plugin policy, repeated action 4 while Reloading can flip state to Cocked and rebuild controller tracking, and interruption/cancellation actions are not modeled, leaving stale Reloading/Cocked phases.",
     "mnemonic": "call",
     "size": 5
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x51089B",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -547,25 +547,25 @@
   },
   {
     "ea": "0x5108A9",
-    "line": "push    0",
+    "line": "push    0; sequence",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5108AB",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; action",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5108AD",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5108AF",
-    "line": "call    HighPRocess_DoAction?????",
+    "line": "call    Actor_SetCurrentActionWithBowVisualCleanup; Void Actor action-transition wrapper. Performs transition-specific bow/held-arrow visual cleanup, then commits action and sequence through process vtable +0x2D8. It has no success/result contract; callers/plugins must not consume EAX, so Crossbow's UInt32 HighProcessDoActionFn typedef is incorrect. Meaningful current-action state is HighProcess-only: HighProcess +0x2D0/+0x2D8 read/store +0x1F4/+0x1F8, while MiddleHigh returns None (-1) and its setter is a no-op; Crossbow's process-level-0 action filter therefore matches Oblivion. External Crossbow state-machine contrast: Equip-as-Cocked/first-shot-loaded is plugin policy, repeated action 4 while Reloading can flip state to Cocked and rebuild controller tracking, and interruption/cancellation actions are not modeled, leaving stale Reloading/Cocked phases.",
     "mnemonic": "call",
     "size": 5
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x5108B9",
-    "line": "cmp     [esp+1Ch+var_10], 0FFh",
+    "line": "cmp     [esp+1Ch+groupID], 0FFh",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -673,19 +673,19 @@
   },
   {
     "ea": "0x5108EF",
-    "line": "push    0",
+    "line": "push    0; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5108F1",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5108F3",
-    "line": "call    sub_405790",
+    "line": "call    NiNode_GetChildAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -703,19 +703,19 @@
   },
   {
     "ea": "0x510900",
-    "line": "push    0",
+    "line": "push    0; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x510902",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x510904",
-    "line": "call    sub_405790",
+    "line": "call    NiNode_GetChildAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -733,19 +733,19 @@
   },
   {
     "ea": "0x510913",
-    "line": "push    0",
+    "line": "push    0; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x510915",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x510917",
-    "line": "call    sub_405790",
+    "line": "call    NiNode_GetChildAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -847,7 +847,7 @@
   },
   {
     "ea": "0x51094E",
-    "line": "mov     eax, [esp+20h+var_10]",
+    "line": "mov     eax, [esp+20h+groupID]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -865,19 +865,19 @@
   },
   {
     "ea": "0x51095C",
-    "line": "push    edx",
+    "line": "push    edx; name",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x51095D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x51095F",
-    "line": "call    sub_4715A0",
+    "line": "call    NiControllerManager_FindSequenceByName; Looks up a NiControllerSequence by name in the controller manager name map at +0x58; returns null on miss.",
     "mnemonic": "call",
     "size": 5
   },
@@ -955,19 +955,19 @@
   },
   {
     "ea": "0x51098F",
-    "line": "push    ecx; Str2",
+    "line": "push    ecx; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x510990",
-    "line": "push    eax; Str1",
+    "line": "push    eax; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x510991",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -997,7 +997,7 @@
   },
   {
     "ea": "0x51099F",
-    "line": "push    0; char",
+    "line": "push    0; transition",
     "mnemonic": "push",
     "size": 2
   },
@@ -1009,19 +1009,19 @@
   },
   {
     "ea": "0x5109A2",
-    "line": "fstp    [esp+28h+var_28]; float",
+    "line": "fstp    [esp+28h+easeInTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5109A5",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5109A7",
-    "line": "call    sub_6C9CB0",
+    "line": "call    NiControllerSequence_Deactivate; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1063,7 +1063,7 @@
   },
   {
     "ea": "0x5109C0",
-    "line": "push    0; int",
+    "line": "push    0; timeSyncSequence",
     "mnemonic": "push",
     "size": 2
   },
@@ -1117,7 +1117,7 @@
   },
   {
     "ea": "0x5109DD",
-    "line": "fstp    [esp+30h+var_2C]; float",
+    "line": "fstp    [esp+30h+weight]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1141,7 +1141,7 @@
   },
   {
     "ea": "0x5109E7",
-    "line": "call    sub_6C5C70",
+    "line": "call    NiControllerManager_BlendFromPose; Creates or reuses a __TempBlendSequence__ for the current pose, then transitions from that temporary pose to the requested destination sequence through 0x6C9D30. ActorAnimData_PlaySequence uses this for player/camera-visible roots when a normal cross-fade cannot be used.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1165,7 +1165,7 @@
   },
   {
     "ea": "0x5109F3",
-    "line": "fstp    [esp+2Ch+var_28]; float",
+    "line": "fstp    [esp+2Ch+easeInTime]; easeInTime",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1177,31 +1177,31 @@
   },
   {
     "ea": "0x5109F9",
-    "line": "fstp    [esp+2Ch+var_2C]; float",
+    "line": "fstp    [esp+2Ch+weight]; weight",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5109FC",
-    "line": "push    0; int",
+    "line": "push    0; startOver",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5109FE",
-    "line": "push    0; int",
+    "line": "push    0; priority",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x510A00",
-    "line": "push    ebp; int",
+    "line": "push    ebp; sequence",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x510A01",
-    "line": "call    sub_470B20",
+    "line": "call    BSAnimGroupSequence_Activate; BSAnimGroupSequence activation wrapper. Delegates to NiControllerSequence_Activate with the final transition flag forced to zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1267,7 +1267,7 @@
   },
   {
     "ea": "0x510A24",
-    "line": "mov     eax, [esp+28h+var_10]",
+    "line": "mov     eax, [esp+28h+groupID]",
     "mnemonic": "mov",
     "size": 4
   },

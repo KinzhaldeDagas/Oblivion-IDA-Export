@@ -1,52 +1,90 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "ifstub",
+  "definition": "struct ifstub\n{\nlist entry;\nIRpcStubBuffer_0 *stubbuffer;\nIID iid;\nIPID ipid;\nIUnknown_0 *iface;\nMSHLFLAGS flags;\nIRpcChannelBuffer_0 *chan;\n}\n",
   "id": 18374686479672036381,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "entry",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "list"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "stubbuffer",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "IRpcStubBuffer_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "iid",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 16
+      "offset_hex": "0xC",
+      "size": 16,
+      "type": "IID"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ipid",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 16
+      "offset_hex": "0x1C",
+      "size": 16,
+      "type": "IPID"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "iface",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "IUnknown_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "flags",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "MSHLFLAGS"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "chan",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "IRpcChannelBuffer_0 *"
     }
   ],
   "name": "ifstub",
+  "ordinal": 4485,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 56
 }

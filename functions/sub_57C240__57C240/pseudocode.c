@@ -18,91 +18,91 @@ void __cdecl sub_57C240(unsigned int a1, char *a2)
   char *v17; // edx
   char v18; // al
   char *m_data; // esi
-  char *v20; // ecx
+  const char *value; // ecx
   char *v21; // edx
   char v22; // al
   BSStringT v23; // [esp+0h] [ebp-8h] BYREF
 
-  if ( a1 <= 0x1D )
+  if ( a1 <= 0x1D ) /*0x57c24a*/
   {
-    *a2 = 0;
-    input = OSGlobals->input;
-    v3 = input->MouseInputControls[a1];
-    v4 = (char *)input + a1;
-    if ( v3 >= 9u )
+    *a2 = 0; /*0x57c255*/
+    input = MEMORY[0xB33398]->input; /*0x57c25e*/
+    v3 = input->MouseInputControls[a1]; /*0x57c261*/
+    v4 = (char *)input + a1; /*0x57c268*/
+    if ( v3 >= 9u ) /*0x57c26d*/
     {
-      v9 = v4[0x1B7E];
-      if ( v9 >= 0xEEu )
+      v9 = v4[0x1B7E]; /*0x57c295*/
+      if ( v9 >= 0xEEu ) /*0x57c29e*/
       {
-        v14 = v4[0x1BB8];
-        if ( v14 >= 8u )
+        v14 = v4[0x1BB8]; /*0x57c2c6*/
+        if ( v14 >= 8u ) /*0x57c2ce*/
         {
 LABEL_24:
-          v20 = (char *)dword_B38F20;
-          v21 = a2;
-          do
+          value = stru_B38F20.value; /*0x57c341*/
+          v21 = a2; /*0x57c347*/
+          do /*0x57c35c*/
           {
-            v22 = *v20;
-            *v21++ = *v20++;
+            v22 = *value; /*0x57c350*/
+            *v21++ = *value++; /*0x57c352*/
           }
-          while ( v22 );
-          return;
+          while ( v22 ); /*0x57c35c*/
+          return; /*0x57c35c*/
         }
-        v15 = *(char ***)(4 * v14 + 0xB39930);
-        if ( v15 )
-          v16 = *v15;
+        v15 = *(char ***)(4 * v14 + 0xB39930); /*0x57c2d3*/
+        if ( v15 ) /*0x57c2dc*/
+          v16 = *v15; /*0x57c2de*/
         else
-          v16 = 0;
-        v17 = a2;
-        do
+          v16 = 0; /*0x57c2e2*/
+        v17 = a2; /*0x57c2e4*/
+        do /*0x57c2f2*/
         {
-          v18 = *v16;
-          *v17++ = *v16++;
+          v18 = *v16; /*0x57c2e6*/
+          *v17++ = *v16++; /*0x57c2e8*/
         }
-        while ( v18 );
+        while ( v18 ); /*0x57c2f2*/
       }
       else
       {
-        v10 = *(char ***)(4 * v9 + 0xB39578);
-        if ( v10 )
-          v11 = *v10;
+        v10 = *(char ***)(4 * v9 + 0xB39578); /*0x57c2a3*/
+        if ( v10 ) /*0x57c2ac*/
+          v11 = *v10; /*0x57c2ae*/
         else
-          v11 = 0;
-        v12 = a2;
-        do
+          v11 = 0; /*0x57c2b2*/
+        v12 = a2; /*0x57c2b4*/
+        do /*0x57c2c2*/
         {
-          v13 = *v11;
-          *v12++ = *v11++;
+          v13 = *v11; /*0x57c2b6*/
+          *v12++ = *v11++; /*0x57c2b8*/
         }
-        while ( v13 );
+        while ( v13 ); /*0x57c2c2*/
       }
     }
     else
     {
-      v5 = *(char ***)(4 * v3 + 0xB39554);
-      if ( v5 )
-        v6 = *v5;
+      v5 = *(char ***)(4 * v3 + 0xB39554); /*0x57c272*/
+      if ( v5 ) /*0x57c27b*/
+        v6 = *v5; /*0x57c27d*/
       else
-        v6 = 0;
-      v7 = a2;
-      do
+        v6 = 0; /*0x57c281*/
+      v7 = a2; /*0x57c283*/
+      do /*0x57c291*/
       {
-        v8 = *v6;
-        *v7++ = *v6++;
+        v8 = *v6; /*0x57c285*/
+        *v7++ = *v6++; /*0x57c287*/
       }
-      while ( v8 );
+      while ( v8 ); /*0x57c291*/
     }
-    if ( *a2 )
+    if ( *a2 ) /*0x57c2f4*/
     {
-      v23.m_data = 0;
-      v23.m_dataLen = 0;
-      v23.m_bufLen = 0;
-      BSStringT_Set(&v23, a2, 0);
-      m_data = v23.m_data;
-      _sprintf(a2, "%s %s", (const char *)dword_B38F18, v23.m_data);
-      FormHeapFree((unsigned int)m_data);
-      return;
+      v23.m_data = 0; /*0x57c301*/
+      v23.m_dataLen = 0; /*0x57c309*/
+      v23.m_bufLen = 0; /*0x57c310*/
+      BSStringT_Set(&v23, a2, 0); /*0x57c317*/
+      m_data = v23.m_data; /*0x57c31c*/
+      _sprintf(a2, "%s %s", stru_B38F18.value, v23.m_data); /*0x57c32d*/
+      FormHeapFree((unsigned int)m_data); /*0x57c333*/
+      return; /*0x57c340*/
     }
-    goto LABEL_24;
+    goto LABEL_24; /*0x57c2f7*/
   }
 }

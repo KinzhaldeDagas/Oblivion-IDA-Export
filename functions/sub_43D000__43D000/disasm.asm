@@ -57,7 +57,7 @@
 0x43D0C9: push    offset aMeshes; "Meshes\\"
 0x43D0CE: push    eax; Str1
 0x43D0CF: mov     dword ptr [esp+238h+var_20C], ecx
-0x43D0D3: mov     [esp+238h+var_208], dx
+0x43D0D3: mov     word ptr [esp+238h+var_20C+4], dx
 0x43D0D8: call    __strnicmp
 0x43D0DD: add     esp, 0Ch
 0x43D0E0: test    eax, eax
@@ -65,7 +65,6 @@
 0x43D0E4: lea     eax, [esp+22Ch+var_20C]
 0x43D0E8: add     eax, 0FFFFFFFFh
 0x43D0EB: jmp     short loc_43D0F0
-0x43D0ED: align 10h
 0x43D0F0: mov     cl, [eax+1]
 0x43D0F3: add     eax, 1
 0x43D0F6: test    cl, cl
@@ -110,7 +109,7 @@
 0x43D16E: lea     edx, [esp+240h+var_20C]
 0x43D172: push    edx; Str
 0x43D173: mov     [esi+8], al
-0x43D176: call    sub_431970
+0x43D176: call    ModelLoader_BuildFileListWildcard; Decoded animation/model-loader helper. Builds a BSSimpleList of file paths for an input path that may contain wildcards; merges loose-file FindFirstFile results when archive invalidation is enabled, then asks archive/file systems to append matches. Used by KF/model discovery, not a CustomAnim override registry.
 0x43D17B: mov     ebp, [esp+244h+arg_4]
 0x43D182: add     esp, 18h
 0x43D185: mov     edi, eax
@@ -122,7 +121,7 @@
 0x43D190: mov     ecx, ebx
 0x43D192: call    sub_43BDA0
 0x43D197: push    edi
-0x43D198: call    FormHeapFree
+0x43D198: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x43D19D: mov     ecx, ds:dword_A370D0
 0x43D1A3: mov     [esi], ecx
 0x43D1A5: mov     edx, ds:dword_A370D4
@@ -135,7 +134,7 @@
 0x43D1C0: lea     edx, [esp+23Ch+var_20C]
 0x43D1C4: push    edx; Str
 0x43D1C5: mov     [esi+8], ax
-0x43D1C9: call    sub_431970
+0x43D1C9: call    ModelLoader_BuildFileListWildcard; Decoded animation/model-loader helper. Builds a BSSimpleList of file paths for an input path that may contain wildcards; merges loose-file FindFirstFile results when archive invalidation is enabled, then asks archive/file systems to append matches. Used by KF/model discovery, not a CustomAnim override registry.
 0x43D1CE: add     esp, 14h
 0x43D1D1: mov     esi, eax
 0x43D1D3: mov     eax, [esp+22Ch+var_21C]
@@ -183,7 +182,7 @@
 0x43D24E: lea     eax, [esp+230h+Str]
 0x43D255: push    eax; char *
 0x43D256: mov     ecx, ebx
-0x43D258: call    sub_435830
+0x43D258: call    BuildKFListForModelDirectory; Builds a KF path list for a model directory. Feeds ModelLoader KF discovery used by actor animation setup and generated attack/idle lists.
 0x43D25D: mov     ecx, [esp+22Ch+var_21C]
 0x43D261: mov     edx, [esp+22Ch+arg_4]
 0x43D268: push    edi
@@ -194,7 +193,7 @@
 0x43D26E: mov     ecx, ebx
 0x43D270: call    sub_43BDA0
 0x43D275: push    esi
-0x43D276: call    FormHeapFree
+0x43D276: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x43D27B: add     esp, 4
 0x43D27E: push    edi; int
 0x43D27F: push    offset ??_R0?AVTESAnimation@@@8; struct TypeDescriptor *
@@ -207,7 +206,7 @@
 0x43D295: cmp     esi, edi
 0x43D297: jz      loc_43D3CA
 0x43D29D: mov     ecx, esi
-0x43D29F: call    TESAnimation_HasAnimations
+0x43D29F: call    TESAnimation_HasAnimations; TESAnimation has any entries: returns embedded list first data pointer nonzero.
 0x43D2A4: test    al, al
 0x43D2A6: jz      loc_43D3CA
 0x43D2AC: push    8; Size
@@ -221,7 +220,7 @@
 0x43D2C1: jmp     short loc_43D2C5
 0x43D2C3: xor     ebp, ebp
 0x43D2C5: mov     ecx, esi
-0x43D2C7: call    sub_6899C0
+0x43D2C7: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x43D2CC: mov     ebx, eax
 0x43D2CE: test    ebx, ebx
 0x43D2D0: jz      short loc_43D347
@@ -307,7 +306,7 @@
 0x43D3BB: push    ebp
 0x43D3BC: call    sub_43BDA0
 0x43D3C1: push    ebp
-0x43D3C2: call    FormHeapFree
+0x43D3C2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x43D3C7: add     esp, 4
 0x43D3CA: mov     ecx, [esp+22Ch+var_4]
 0x43D3D1: pop     edi

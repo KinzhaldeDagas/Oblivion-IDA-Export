@@ -1,18 +1,31 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0xA26DC0",
+      "0xA26DDD"
+    ]
+  ],
+  "chunks_sha256": "77a80d0e8ab2c5d872e090c16c78120f0353bac7108ccecdd3b1729836550b37",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_A26DC0",
+  "comment_repeatable": "\nVerified 2026-10-01: atexit handler registered by76CE40. If B42574 sentinel is nonnull, decrements pass+60 and calls7604D0 on zero. This is a real shutdown lifetime registration, not equivalent to just setting B42578 bit0.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "NiD3DPassArray_DestroyEmptySentinel",
   "end_ea": "0xA26DDD",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_A26DC0",
+  "name": "NiD3DPassArray_DestroyEmptySentinel",
   "segment": ".text",
   "sha256": "77a80d0e8ab2c5d872e090c16c78120f0353bac7108ccecdd3b1729836550b37",
   "size": 29,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0xA26DC0",
+  "total_chunk_size": 29,
   "type": "void __cdecl()",
   "xrefs_from_count": 12,
   "xrefs_to_count": 1

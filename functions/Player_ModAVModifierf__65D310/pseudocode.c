@@ -1,10 +1,20 @@
-int __stdcall Player_ModAVModifierf(int a1, int a2, int a3, int a4)
+void __thiscall Player_ModAVModifierf(float *this, int a2, int a3, float a4, int a5)
 {
-  if ( !a1 )
-    return Player_ModAVModifierf_::ModMaxAV(0, a2, a3, a4);
-  if ( a1 == 1 )
-    return Player_ModAVModifierf_::ModForcedCurAV(1, a2, a3, a4);
-  if ( a1 != 2 )
-    JUMPOUT(0x65D470);
-  return Player_ModAVModifierf_::ModCurAV(2, a2, a3, a4);
+  if ( a2 ) /*0x65d31b*/
+  {
+    if ( a2 == 1 ) /*0x65d324*/
+    {
+      Player_ModAVModifierf_::ModForcedCurAV((int)this, 1, a3, a4, a5); /*0x65d324*/
+    }
+    else
+    {
+      if ( a2 != 2 ) /*0x65d32d*/
+        JUMPOUT(0x65D470); /*0x65d470*/
+      Player_ModAVModifierf_::ModCurAV(this, 2, a3, a4, a5); /*0x65d32e*/
+    }
+  }
+  else
+  {
+    Player_ModAVModifierf_::ModMaxAV((int)this, 0, a3, a4, a5); /*0x65d31b*/
+  }
 }

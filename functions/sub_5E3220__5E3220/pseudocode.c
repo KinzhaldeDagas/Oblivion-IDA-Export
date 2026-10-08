@@ -1,11 +1,12 @@
 bool __thiscall sub_5E3220(_DWORD *this)
 {
-  TESPackage *v1; // eax
-  TESPackage *v2; // esi
+  int v1; // eax
+  int v2; // esi
 
-  if ( !*(this + 0x16) )
-    return 0;
-  v1 = (TESPackage *)(*(int (__thiscall **)(_DWORD))(*(_DWORD *)*(this + 0x16) + 0x184))(*(this + 0x16));
-  v2 = v1;
-  return v1 && (v1->members.type == 1 && !sub_5660A0(v1) || v2->members.type == 0x1F);
+  if ( !*(this + 0x16) ) /*0x5e3223*/
+    return 0; /*0x5e325e*/
+  v1 = (*(int (__thiscall **)(_DWORD))(*(_DWORD *)*(this + 0x16) + 0x184))(*(this + 0x16)); /*0x5e3235*/
+  v2 = v1; /*0x5e3237*/
+  return v1 /*0x5e3257*/
+      && (*(_BYTE *)(v1 + 0x20) == 1 && !TESPackage_IsRuntimePackage((TESPackage *)v1) || *(_BYTE *)(v2 + 0x20) == 0x1F);
 }

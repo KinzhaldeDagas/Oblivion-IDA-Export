@@ -1,19 +1,32 @@
 {
-  "callees_count": 14,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_79FA30",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x79FA30",
+      "0x79FB75"
+    ]
+  ],
+  "chunks_sha256": "055113f1267f2c1077a87caddb9b37d069aeed7ed3a94fdc0392d81e3379a8ef",
+  "comment_regular": "Oblivion CFrondEngine guide introsort used only by BuildGuideLods. Orders full 0x30-byte SFrondGuide records by descending fuzzySurfaceArea: three-way partition while the ideal partition budget remains, insertion sort at <=32 records, and heap fallback on budget exhaustion. RT 4.1 corroborates the descending comparator, but its source sorts SFrondGuide* pointers; the executable moves compact guide records directly.",
+  "comment_repeatable": "Oblivion CFrondEngine guide introsort used only by BuildGuideLods. Orders full 0x30-byte SFrondGuide records by descending fuzzySurfaceArea: three-way partition while the ideal partition budget remains, insertion sort at <=32 records, and heap fallback on budget exhaustion. RT 4.1 corroborates the descending comparator, but its source sorts SFrondGuide* pointers; the executable moves compact guide records directly.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
+  "display_name": "OB_CFrondEngine_SortGuidesByFuzzyArea_010201A0",
   "end_ea": "0x79FB75",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_79FA30",
+  "name": "OB_CFrondEngine_SortGuidesByFuzzyArea_010201A0",
   "segment": ".text",
   "sha256": "055113f1267f2c1077a87caddb9b37d069aeed7ed3a94fdc0392d81e3379a8ef",
   "size": 325,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x79FA30",
-  "type": "void __cdecl(unsigned int, int, int, char *)",
-  "xrefs_from_count": 142,
+  "total_chunk_size": 325,
+  "type": "void __cdecl(OB_SFrondGuide_010201A0 *first, OB_SFrondGuide_010201A0 *last, int partitionBudget, unsigned __int8 sorterState)",
+  "xrefs_from_count": 146,
   "xrefs_to_count": 4
 }

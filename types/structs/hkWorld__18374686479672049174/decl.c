@@ -1,1 +1,47 @@
-hkWorld
+struct __cppobj hkWorld : hkRefObject
+{
+hkSimulation *m_simulation;
+float unk00C;
+hkVector4 unk010;
+hkVector4 m_gravity;
+hkSimulationIsland *m_fixedIsland;
+hkRigidBody *m_fixedRigidBody;
+hkArray m_activeSimulationIslands;
+hkArray m_inactiveSimulationIslands;
+hkArray m_dirtySimulationIslands;
+hkWorldMaintenanceManager *m_maintenanceMgr;
+hkWorldMemoryAvailableWatchDog *m_memoryWatchDog;
+hkBroadPhase *m_broadPhase;
+hkTypedBroadPhaseDispatcher *m_broadPhaseDispatcher;
+hkPhantomBroadPhaseListener *m_phantomBroadPhaseListener;
+hkEntityEntityBroadPhaseListener *m_entityEntityBroadPhaseListener;
+hkProcessCollisionInput *m_collisionInput;
+hkCollisionFilter *m_collisionFilter;
+hkCollisionDispatcher *m_collisionDispatcher;
+hkWorldOperationQueue *m_pendingOperations;
+int m_pendingOperationsCount;
+int m_lockCount;
+int m_lockCountForPhantoms;
+UInt8 m_blockExecutingPendingOperations;
+UInt8 m_criticalOperationsAllowed;
+UInt8 m_pad092[2];
+UInt32 m_unk094[3];
+CRITICAL_SECTION *m_unk0A0;
+UInt8 m_unk0A4;
+UInt8 m_unk0A5[3];
+UInt32 m_unk0A8[4];
+hkArray m_phantoms;
+hkArray m_actionListeners;
+hkArray m_entityListeners;
+hkArray m_phantomListeners;
+hkArray m_constraintListeners;
+hkArray m_worldDeletionListeners;
+hkArray m_islandActivationListeners;
+hkArray m_worldPostSimulationListeners;
+hkArray m_worldPostIntegrateListeners;
+hkArray m_worldPostCollideListeners;
+hkArray m_islandPostIntegrateListeners;
+hkArray m_islandPostCollideListeners;
+hkArray m_collisionListeners;
+void *m_unk154;
+};

@@ -1,28 +1,27 @@
-_DWORD *__userpurge sub_794EE0@<eax>(
-        _DWORD *this@<ecx>,
-        int a2@<ebx>,
-        _DWORD *a3,
-        int a4,
-        char *Dst,
-        int a6,
-        char *Src)
+// OBLIVION AUTHORITY (2026-08-30): Checked vector<unsigned short>::erase(first,last). Validates both iterator owners, shifts the suffix by 2-byte elements, updates end, and returns the resulting checked iterator.
+OB_stVectorUShortIterator_010201A0 *__thiscall OB_stVectorUShort_EraseRange_010201A0(
+        OB_stVectorUShort_010201A0 *this,
+        OB_stVectorUShortIterator_010201A0 *result,
+        OB_stVectorUShortIterator_010201A0 first,
+        OB_stVectorUShortIterator_010201A0 last)
 {
-  int v8; // eax
-  char *v9; // ebx
-  rsize_t v11; // [esp-4h] [ebp-10h]
+  int v4; // ebx
+  int v5; // esi
+  int v7; // eax
+  unsigned __int16 *v8; // ebx
+  rsize_t v10; // [esp-4h] [ebp-10h]
 
-  if ( !a4 || a4 != a6 )
-    _invalid_parameter_noinfo();
-  if ( Dst != Src )
+  if ( !first.owner || first.owner != last.owner ) /*0x794ef1*/
+    _invalid_parameter_noinfo(v4, (int)this, v5); /*0x794ef3*/
+  if ( first.current != last.current ) /*0x794f02*/
   {
-    v8 = (*(this + 2) - (int)Src) >> 1;
-    LODWORD(v11) = a2;
-    v9 = &Dst[2 * v8];
-    if ( v8 > 0 )
-      memmove_s(Dst, __PAIR64__((unsigned int)Src, 2 * v8), (const void *)(2 * v8), v11);
-    *(this + 2) = v9;
+    v7 = this->end - last.current; /*0x794f09*/
+    LODWORD(v10) = v4; /*0x794f10*/
+    v8 = &first.current[v7]; /*0x794f11*/
+    if ( v7 > 0 ) /*0x794f14*/
+      memmove_s(first.current, __PAIR64__((unsigned int)last.current, 2 * v7), (const void *)(2 * v7), v10); /*0x794f1a*/
+    this->end = v8; /*0x794f22*/
   }
-  a3[1] = Dst;
-  *a3 = a4;
-  return a3;
+  *result = first; /*0x794f2b*/
+  return result; /*0x794f2a*/
 }

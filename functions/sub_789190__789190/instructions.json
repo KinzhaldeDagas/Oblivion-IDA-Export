@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x789190",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Oblivion IdvFileError constructor: builds details + ' [' + optional strerror(errno) + ']', constructs the binary runtime_error base, then installs IdvFileError vftable. RT4.1 corroborates the message expression but its st_string inheritance is not used for this older binary layout.",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x7891C1",
-    "line": "cmp     byte ptr [esp+0B0h+arg_4], bl",
+    "line": "cmp     [esp+0B0h+appendSystemError], bl",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -163,19 +163,19 @@
   },
   {
     "ea": "0x7891E7",
-    "line": "mov     [esp+0B0h+var_64], edi",
+    "line": "mov     [esp+0B0h+var_7C.capacity], edi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7891EB",
-    "line": "mov     [esp+0B0h+var_68], ebx",
+    "line": "mov     [esp+0B0h+var_7C.size], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7891EF",
-    "line": "mov     byte ptr [esp+0B0h+var_78], bl",
+    "line": "mov     byte ptr [esp+0B0h+var_7C.storage], bl",
     "mnemonic": "mov",
     "size": 4
   },
@@ -217,25 +217,25 @@
   },
   {
     "ea": "0x789201",
-    "line": "push    ecx; MaxCount",
+    "line": "push    ecx; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x789202",
-    "line": "push    esi; Src",
+    "line": "push    esi; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x789203",
-    "line": "lea     ecx, [esp+0B8h+var_7C]",
+    "line": "lea     ecx, [esp+0B8h+var_7C]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x789207",
-    "line": "call    sub_414500",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x789221",
-    "line": "push    ebx; MaxCount",
+    "line": "push    ebx; count",
     "mnemonic": "push",
     "size": 1
   },
@@ -277,37 +277,37 @@
   },
   {
     "ea": "0x789227",
-    "line": "push    offset EmptyString; Src",
+    "line": "push    offset EmptyString; source",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x78922C",
-    "line": "lea     ecx, [esp+0B8h+var_98]",
+    "line": "lea     ecx, [esp+0B8h+var_98]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x789230",
-    "line": "mov     [esp+0B8h+var_80], edi",
+    "line": "mov     [esp+0B8h+var_98.capacity], edi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x789234",
-    "line": "mov     [esp+0B8h+var_84], ebx",
+    "line": "mov     [esp+0B8h+var_98.size], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x789238",
-    "line": "mov     byte ptr [esp+0B8h+var_94], bl",
+    "line": "mov     byte ptr [esp+0B8h+var_98.storage], bl",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x78923C",
-    "line": "call    sub_414500",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
     "mnemonic": "call",
     "size": 5
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x789258",
-    "line": "mov     ecx, [esp+0B0h+arg_0]",
+    "line": "mov     ecx, [esp+0B0h+details]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -445,13 +445,13 @@
   },
   {
     "ea": "0x7892A7",
-    "line": "push    eax",
+    "line": "push    eax; message",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7892A8",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x7892B2",
-    "line": "call    sub_6F7DD0",
+    "line": "call    OB_std_runtime_error_CtorFromString_010201A0; Oblivion runtime_error constructor from the 28-byte SpeedTree small string: constructs std::exception, installs runtime_error vftable, initializes SSO state, and copies the message.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x7892CA",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x7892EF",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x789314",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x78933D",
-    "line": "cmp     [esp+0B0h+var_80], esi",
+    "line": "cmp     [esp+0B0h+var_98.capacity], esi",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x789343",
-    "line": "mov     edx, [esp+0B0h+var_94]",
+    "line": "mov     edx, dword ptr [esp+0B0h+var_98.storage]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x789348",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -691,19 +691,19 @@
   },
   {
     "ea": "0x789350",
-    "line": "mov     [esp+0B0h+var_80], edi",
+    "line": "mov     [esp+0B0h+var_98.capacity], edi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x789354",
-    "line": "mov     [esp+0B0h+var_84], ebx",
+    "line": "mov     [esp+0B0h+var_98.size], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x789358",
-    "line": "mov     byte ptr [esp+0B0h+var_94], bl",
+    "line": "mov     byte ptr [esp+0B0h+var_98.storage], bl",
     "mnemonic": "mov",
     "size": 4
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x789363",
-    "line": "cmp     [esp+0B0h+var_64], esi",
+    "line": "cmp     [esp+0B0h+var_7C.capacity], esi",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -733,7 +733,7 @@
   },
   {
     "ea": "0x789369",
-    "line": "mov     eax, [esp+0B0h+var_78]",
+    "line": "mov     eax, dword ptr [esp+0B0h+var_7C.storage]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x78936E",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -820,5 +820,167 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CB2E0",
+    "line": "mov     eax, [ebp-9Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9CB2E6",
+    "line": "and     eax, 1",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB2E9",
+    "line": "jz      locret_9CB2FE",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9CB2EF",
+    "line": "and     dword ptr [ebp-9Ch], 0FFFFFFFEh",
+    "mnemonic": "and",
+    "size": 7
+  },
+  {
+    "ea": "0x9CB2F6",
+    "line": "lea     ecx, [ebp-7Ch]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB2F9",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB2FE",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CB2FF",
+    "line": "mov     eax, [ebp-9Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9CB305",
+    "line": "and     eax, 2",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB308",
+    "line": "jz      locret_9CB320",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9CB30E",
+    "line": "and     dword ptr [ebp-9Ch], 0FFFFFFFDh",
+    "mnemonic": "and",
+    "size": 7
+  },
+  {
+    "ea": "0x9CB315",
+    "line": "lea     ecx, [ebp-98h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CB31B",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB320",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CB321",
+    "line": "lea     ecx, [ebp-28h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB324",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB329",
+    "line": "lea     ecx, [ebp-60h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB32C",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB331",
+    "line": "lea     ecx, [ebp-44h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB334",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB339",
+    "line": "mov     edx, dword ptr [esp+appendSystemError]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CB33D",
+    "line": "lea     eax, [edx-0A0h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CB343",
+    "line": "mov     ecx, [edx-0A4h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9CB349",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CB34B",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB350",
+    "line": "mov     eax, offset stru_AF396C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB355",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

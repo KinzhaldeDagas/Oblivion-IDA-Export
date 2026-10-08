@@ -31,3 +31,18 @@
 0x708E1D: pop     esi
 0x708E1E: add     esp, 10h
 0x708E21: retn
+0x9C9800: mov     ecx, [ebp-10h]; this
+0x9C9803: jmp     ??1NiAVObject@@UAE@XZ; NiAVObject::~NiAVObject(void)
+0x9C9808: mov     ecx, [ebp-10h]
+0x9C980B: add     ecx, 0BCh ; '¼'
+0x9C9811: jmp     j_??1?$NiTPointerList@PAVNiNode@@@@UAE@XZ; NiTPointerList<NiNode *>::~NiTPointerList<NiNode *>(void)
+0x9C9816: mov     ecx, [ebp-10h]
+0x9C9819: add     ecx, 0CCh ; 'Ì'
+0x9C981F: jmp     j_??1?$NiTPointerList@PAVNiNode@@@@UAE@XZ; NiTPointerList<NiNode *>::~NiTPointerList<NiNode *>(void)
+0x9C9824: mov     edx, [esp+arg_4]
+0x9C9828: lea     eax, [edx-8]
+0x9C982B: mov     ecx, [edx-0Ch]
+0x9C982E: xor     ecx, eax
+0x9C9830: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C9835: mov     eax, offset stru_AF20A0
+0x9C983A: jmp     ___CxxFrameHandler3

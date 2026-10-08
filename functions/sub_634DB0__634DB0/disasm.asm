@@ -28,15 +28,15 @@
 0x634DFB: test    ebx, ebx
 0x634DFD: jz      loc_634F56
 0x634E03: mov     ecx, ebx
-0x634E05: call    sub_472EA0
+0x634E05: call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.
 0x634E0A: test    al, al
 0x634E0C: jz      loc_634F56
 0x634E12: mov     ecx, edi
 0x634E14: call    sub_5E6FA0
 0x634E19: test    al, al
 0x634E1B: jnz     loc_634F56
-0x634E21: mov     ecx, edi
-0x634E23: call    sub_5E0F30
+0x634E21: mov     ecx, edi; this
+0x634E23: call    Actor__IsSleeping; Returns true exactly when Actor.process exists and GetSleepState() == kSitSleep_Sleeping (9). This is a SitSleep-state test, not a combat/procedure test.
 0x634E28: test    al, al
 0x634E2A: jnz     loc_634F56
 0x634E30: mov     edx, [edi]
@@ -45,13 +45,13 @@
 0x634E3A: call    eax
 0x634E3C: test    al, al
 0x634E3E: jnz     loc_634F56
-0x634E44: push    0
-0x634E46: mov     ecx, ebx
-0x634E48: call    sub_4706E0
+0x634E44: push    0; slotSelector
+0x634E46: mov     ecx, ebx; this
+0x634E48: call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].
 0x634E4D: test    eax, eax
 0x634E4F: jz      short loc_634E5D
 0x634E51: mov     ecx, [eax+68h]
-0x634E54: call    sub_51AF00
+0x634E54: call    TESAnimGroup_IsIdleGroup; Member form of the native idle-group classifier. Reads the low group byte from the encoded key at TESAnimGroup +0x08 and returns true only for Idle, DynamicIdle, BlockIdle, or TorchIdle.
 0x634E59: test    al, al
 0x634E5B: jnz     short loc_634E9A
 0x634E5D: cmp     edi, ds:0B333C4h
@@ -99,7 +99,7 @@
 0x634EE8: call    sub_546770
 0x634EED: fstp    [esp+1Ch+var_C+4]
 0x634EF1: push    0; Seed
-0x634EF3: call    GetRandomLargeInteger?
+0x634EF3: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x634EF8: cdq
 0x634EF9: mov     ecx, 1388h
 0x634EFE: idiv    ecx

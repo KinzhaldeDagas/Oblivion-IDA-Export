@@ -159,7 +159,7 @@
 0x931D7B: shl     ecx, 4
 0x931D7E: inc     eax
 0x931D7F: mov     [esp+58h+var_3C], ecx
-0x931D83: mov     dword ptr [esp+58h+var_34], eax
+0x931D83: mov     [esp+58h+var_34], eax
 0x931D87: jmp     short loc_931D91
 0x931D89: mov     edi, [esp+58h+arg_8]
 0x931D8D: mov     ecx, [esp+58h+var_3C]
@@ -281,12 +281,12 @@
 0x931F0F: mov     [esp+58h+var_44], ecx
 0x931F13: mov     ecx, [esp+58h+var_3C]
 0x931F17: mov     edx, eax
-0x931F19: mov     eax, dword ptr [esp+58h+var_34]
+0x931F19: mov     eax, [esp+58h+var_34]
 0x931F1D: sub     ecx, 10h
 0x931F20: dec     eax
 0x931F21: mov     [esp+58h+var_48], ebp
 0x931F25: mov     [esp+58h+var_3C], ecx
-0x931F29: mov     dword ptr [esp+58h+var_34], eax
+0x931F29: mov     [esp+58h+var_34], eax
 0x931F2D: jnz     loc_931D89
 0x931F33: mov     ecx, [esp+58h+var_24]
 0x931F37: mov     ebp, [esp+58h+var_30]

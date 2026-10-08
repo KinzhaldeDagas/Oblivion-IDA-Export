@@ -1,1 +1,1 @@
-ExtraSavedMovementData
+struct ExtraSavedMovementData;

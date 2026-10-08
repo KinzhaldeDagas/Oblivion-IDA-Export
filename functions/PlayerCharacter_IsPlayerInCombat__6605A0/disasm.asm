@@ -55,7 +55,7 @@
 0x660643: mov     edx, [ecx]
 0x660645: push    ecx
 0x660646: mov     [eax], edx
-0x660648: call    FormHeapFree
+0x660648: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x66064D: add     esp, 4
 0x660650: jmp     short loc_660658
 0x660652: mov     dword ptr [eax], 0

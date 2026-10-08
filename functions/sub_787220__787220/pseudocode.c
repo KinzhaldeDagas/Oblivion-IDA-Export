@@ -1,14 +1,15 @@
-float *__cdecl sub_787220(
-        float a1,
-        unsigned __int16 a2,
-        float a3,
-        float a4,
-        float a5,
-        float a6,
-        float *a7,
-        float *a8,
-        __int16 *a9,
-        _WORD *a10)
+// 2026-05-26 SpeedTreeOBSE: shared stock LOD fade/index resolver. Plugin calls it unmodified for candidate 75002 transition-radius and 75005 transition-factor comparisons; optional writes are limited to caller-side SGeometry+0x38 under explicit INI gates. Not patched.
+void __cdecl CSpeedTreeRT__GetTransitionValues(
+        float lodLevel,
+        unsigned __int16 lodCount,
+        float overlapRadius,
+        float transitionFactor,
+        float curveExponent,
+        float targetAlpha,
+        float *highAlpha,
+        float *lowAlpha,
+        __int16 *highLod,
+        unsigned __int16 *lowLod)
 {
   double v11; // st7
   double v12; // st5
@@ -16,64 +17,64 @@ float *__cdecl sub_787220(
   int v14; // esi
   double v15; // st4
   double v16; // st6
-  __int16 v18; // ax
-  double v19; // st7
-  double v20; // [esp+10h] [ebp-8h]
-  float v21; // [esp+1Ch] [ebp+4h]
-  float v22; // [esp+20h] [ebp+8h]
-  float v23; // [esp+20h] [ebp+8h]
-  float v24; // [esp+20h] [ebp+8h]
-  int v25; // [esp+20h] [ebp+8h]
-  float v26; // [esp+20h] [ebp+8h]
-  int v27; // [esp+20h] [ebp+8h]
-  float v28; // [esp+20h] [ebp+8h]
-  float v29; // [esp+20h] [ebp+8h]
-  int v30; // [esp+20h] [ebp+8h]
-  float v31; // [esp+20h] [ebp+8h]
-  float v32; // [esp+20h] [ebp+8h]
+  __int16 v17; // ax
+  double v18; // st7
+  double v19; // [esp+10h] [ebp-8h]
+  float lodLevela; // [esp+1Ch] [ebp+4h]
+  float lodCountd; // [esp+20h] [ebp+8h]
+  float lodCounte; // [esp+20h] [ebp+8h]
+  float lodCountf; // [esp+20h] [ebp+8h]
+  float lodCounta; // [esp+20h] [ebp+8h]
+  float lodCountg; // [esp+20h] [ebp+8h]
+  float lodCountb; // [esp+20h] [ebp+8h]
+  float lodCounth; // [esp+20h] [ebp+8h]
+  float lodCounti; // [esp+20h] [ebp+8h]
+  float lodCountc; // [esp+20h] [ebp+8h]
+  float lodCountj; // [esp+20h] [ebp+8h]
+  float lodCountk; // [esp+20h] [ebp+8h]
 
-  v11 = (double)a2;
-  v22 = 1.0 / v11;
-  v12 = 1.0 - a1;
-  v13 = v22;
-  v23 = v12 / v22;
-  v14 = Double_To_SInt32(v11);
-  v24 = v23 - (double)v14;
-  if ( v24 >= (double)flt_A3D65C )
-    LOWORD(v14) = v14 + 1;
-  *(float *)&v25 = v12 - v13 * (double)(unsigned __int16)v14;
-  if ( !(_WORD)v14 || (_WORD)v14 == a2 || (v15 = *(float *)&v25, v26 = fabs(*(float *)&v25), a3 < (double)v26) )
+  v11 = (double)lodCount; /*0x787230*/
+  lodCountd = 1.0 / v11; /*0x78723a*/
+  v12 = 1.0 - lodLevel; /*0x787242*/
+  v13 = lodCountd; /*0x787244*/
+  lodCounte = v12 / lodCountd; /*0x78724c*/
+  v14 = Double_To_SInt32(v11); /*0x78725b*/
+  lodCountf = lodCounte - (double)v14; /*0x787265*/
+  if ( lodCountf >= (double)kHeadBodyNormalMatchRadius ) /*0x787278*/
+    LOWORD(v14) = v14 + 1; /*0x78727a*/
+  lodCounta = v12 - v13 * (double)(unsigned __int16)v14; /*0x78728f*/
+  if ( !(_WORD)v14 /*0x7872bf*/
+    || (_WORD)v14 == lodCount
+    || (v15 = lodCounta, lodCountg = fabs(lodCounta), overlapRadius < (double)lodCountg) )
   {
-    *a7 = a6;
-    v18 = Double_To_SInt32(v11 * v12);
-    *a9 = v18;
-    if ( v18 >= (__int16)(a2 - 1) )
-      v18 = a2 - 1;
-    v19 = flt_A40098;
-    *a9 = v18;
-    *a8 = v19;
-    *a10 = 0xFFFF;
-    return (float *)a10;
+    *highAlpha = targetAlpha; /*0x7873b8*/
+    v17 = Double_To_SInt32(v11 * v12); /*0x7873bc*/
+    *highLod = v17; /*0x7873c8*/
+    if ( v17 >= (__int16)(lodCount - 1) ) /*0x7873d1*/
+      v17 = lodCount - 1; /*0x7873d3*/
+    v18 = flt_A40098; /*0x7873d6*/
+    *highLod = v17; /*0x7873dc*/
+    *lowAlpha = v18; /*0x7873e7*/
+    *lowLod = 0xFFFF; /*0x7873ea*/
   }
   else
   {
-    v21 = 1.0 - (a3 - v15) / (a3 + a3);
-    v20 = 1.0 - a4;
-    *(float *)&v27 = 1.0 - (v21 - a4) / v20;
-    if ( *(float *)&v27 >= 1.0 )
-      *(float *)&v27 = 1.0;
-    v16 = dbl_A3DDD8 - a6;
-    *a9 = v14 - 1;
-    v28 = 1.0 - *(float *)&v27;
-    v29 = pow(v28, a5);
-    *a7 = v29 * v16 + a6;
-    *(float *)&v30 = v21 / v20;
-    if ( *(float *)&v30 >= 1.0 )
-      *(float *)&v30 = 1.0;
-    *a10 = v14;
-    v31 = 1.0 - *(float *)&v30;
-    v32 = pow(v31, a5);
-    *a8 = v32 * v16 + a6;
-    return a8;
+    lodLevela = 1.0 - (overlapRadius - v15) / (overlapRadius + overlapRadius); /*0x7872d7*/
+    v19 = 1.0 - transitionFactor; /*0x7872e3*/
+    lodCountb = 1.0 - (lodLevela - transitionFactor) / v19; /*0x7872f1*/
+    if ( lodCountb >= 1.0 ) /*0x787300*/
+      lodCountb = 1.0; /*0x787302*/
+    v16 = dbl_A3DDD8 - targetAlpha; /*0x787312*/
+    *highLod = v14 - 1; /*0x78731b*/
+    lodCounth = 1.0 - lodCountb; /*0x787326*/
+    lodCounti = pow(lodCounth, curveExponent); /*0x787337*/
+    *highAlpha = lodCounti * v16 + targetAlpha; /*0x78734b*/
+    lodCountc = lodLevela / v19; /*0x787355*/
+    if ( lodCountc >= 1.0 ) /*0x787364*/
+      lodCountc = 1.0; /*0x787366*/
+    *lowLod = v14; /*0x787378*/
+    lodCountj = 1.0 - lodCountc; /*0x78737d*/
+    lodCountk = pow(lodCountj, curveExponent); /*0x78738e*/
+    *lowAlpha = lodCountk * v16 + targetAlpha; /*0x7873a4*/
   }
 }

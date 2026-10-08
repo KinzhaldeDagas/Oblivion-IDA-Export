@@ -4,9 +4,9 @@
 0x6D0A5B: jnb     short loc_6D0A6E
 0x6D0A5D: mov     ecx, [ecx+10h]
 0x6D0A60: lea     eax, [eax+eax*2]
-0x6D0A63: lea     ecx, [ecx+eax*4]
-0x6D0A66: call    TESHealthForm_GetHealth
+0x6D0A63: lea     ecx, [ecx+eax*4]; this
+0x6D0A66: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x6D0A6B: retn    4
-0x6D0A6E: xor     ecx, ecx
-0x6D0A70: call    TESHealthForm_GetHealth
+0x6D0A6E: xor     ecx, ecx; this
+0x6D0A70: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x6D0A75: retn    4

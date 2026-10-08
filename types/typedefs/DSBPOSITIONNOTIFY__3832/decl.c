@@ -1,1 +1,5 @@
-_DSBPOSITIONNOTIFY
+struct _DSBPOSITIONNOTIFY
+{
+DWORD dwOffset;
+HANDLE hEventNotify;
+};

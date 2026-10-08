@@ -106,7 +106,7 @@
 0x47FD0C: push    ecx
 0x47FD0D: push    ebx
 0x47FD0E: mov     ecx, ebp
-0x47FD10: call    sub_959D60
+0x47FD10: call    NiPick_ExecuteAndSort; Verified NiPick query runner: invokes NiPick_ProcessSceneObject over the configured pick root, gathers hit records, sorts by the record distance field, and leaves the nearest record first in the result list.
 0x47FD15: test    al, al
 0x47FD17: jz      short loc_47FCF2
 0x47FD19: pop     edi

@@ -1,4 +1,4 @@
-0x5B4080: sub     esp, 0Ch
+0x5B4080: sub     esp, 0Ch; AchievementsNative evidence: MagicPopupMenu update/slide. State 1 advances popup background x toward this+0x50 at root user2 pixels/ms; state 3 moves back toward this+0x54 then hides. Confirms user10 is exposed popup X in inventory call path, not a right edge.
 0x5B4083: push    ebx
 0x5B4084: push    esi; a3
 0x5B4085: push    edi; a3
@@ -14,7 +14,7 @@
 0x5B40A4: cmp     eax, 2
 0x5B40A7: jnz     short loc_5B40B0
 0x5B40A9: mov     ecx, esi; int
-0x5B40AB: call    sub_584390
+0x5B40AB: call    Menu__StartFadeIn; Oblivion ClassMenu step refresh: derives the active step value from tile traits 0xFDB/0xFDC, updates menu state, sets state 8, and refreshes the interface manager.
 0x5B40B0: mov     ecx, [esi+28h]
 0x5B40B3: mov     ebx, [esi+4]
 0x5B40B6: push    0FADh
@@ -83,25 +83,25 @@
 0x5B4182: mov     ecx, esi; int
 0x5B4184: fstp    st
 0x5B4186: mov     dword ptr [esi+58h], 2
-0x5B418D: call    sub_584740
+0x5B418D: call    Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.
 0x5B4192: fld     dword ptr [esi+54h]
 0x5B4195: push    ecx
 0x5B4196: mov     ecx, [esi+28h]; this
-0x5B4199: fstp    [esp+1Ch+a2]; a3
-0x5B419C: push    0FADh; a2
-0x5B41A1: call    Tile_SetFloat
-0x5B41A6: call    InterfaceManager_IsMenuMode
+0x5B4199: fstp    [esp+1Ch+a2]; value
+0x5B419C: push    0FADh; propertyCode
+0x5B41A1: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
+0x5B41A6: call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.
 0x5B41AB: test    al, al
 0x5B41AD: jnz     short loc_5B41D1
 0x5B41AF: mov     ecx, esi; int
 0x5B41B1: mov     dword ptr [esi+58h], 2
-0x5B41B8: call    sub_584740
+0x5B41B8: call    Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.
 0x5B41BD: fld     dword ptr [esi+54h]
 0x5B41C0: push    ecx
 0x5B41C1: mov     ecx, [esi+28h]; this
-0x5B41C4: fstp    [esp+1Ch+a2]; a3
-0x5B41C7: push    0FADh; a2
-0x5B41CC: call    Tile_SetFloat
+0x5B41C4: fstp    [esp+1Ch+a2]; value
+0x5B41C7: push    0FADh; propertyCode
+0x5B41CC: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B41D1: mov     [esi+5Ch], edi
 0x5B41D4: pop     edi
 0x5B41D5: pop     esi

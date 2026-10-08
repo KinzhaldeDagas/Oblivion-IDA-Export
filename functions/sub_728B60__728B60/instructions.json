@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x728BC3",
-    "line": "jnz     short loc_728BE2",
+    "line": "jnz     short loc_728BE2; When additional geometry supplies a locked stream, return its buffer pointer and stride. This writable morph stream is not guaranteed to alias NiGeometryData::m_pkVertex.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x728BC8",
-    "line": "mov     eax, [esp+24h+arg_0]",
+    "line": "mov     eax, [esp+24h+outVertices]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x728BD6",
-    "line": "mov     [eax], ecx",
+    "line": "mov     [eax], ecx; Fallback only: without an additional-geometry stream, expose m_pkVertex with the native 12-byte NiPoint3 stride.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x728BE2",
-    "line": "mov     eax, [esp+24h+arg_0]",
+    "line": "mov     eax, [esp+24h+outVertices]",
     "mnemonic": "mov",
     "size": 4
   },

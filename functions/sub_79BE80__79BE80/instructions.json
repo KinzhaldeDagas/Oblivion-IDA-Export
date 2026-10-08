@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x79BE80",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Thin checked/STL wrapper around forward SFrondGuide range copy-assignment; returns destination end.",
     "mnemonic": "sub",
     "size": 3
   },
   {
     "ea": "0x79BE83",
-    "line": "mov     edx, [esp+8+arg_8]",
+    "line": "mov     edx, [esp+8+destinationFirst]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x79BE88",
-    "line": "mov     ebx, [esp+0Ch+arg_0]",
+    "line": "mov     ebx, [esp+0Ch+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x79BE8D",
-    "line": "mov     esi, [esp+10h+arg_4]",
+    "line": "mov     esi, [esp+10h+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x79BE92",
-    "line": "mov     edi, [esp+14h+arg_8]",
+    "line": "mov     edi, [esp+14h+destinationFirst]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -97,25 +97,25 @@
   },
   {
     "ea": "0x79BEAB",
-    "line": "push    edi",
+    "line": "push    edi; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79BEAC",
-    "line": "push    esi",
+    "line": "push    esi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79BEAD",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79BEAE",
-    "line": "call    sub_79B700",
+    "line": "call    OB_SFrondGuide_CopyAssignRangeForward_010201A0; Forward copy-assignment of initialized compact 0x30-byte SFrondGuide records. Deep-assigns each embedded SFrondVertex vector, then copies the eight scalar fields.",
     "mnemonic": "call",
     "size": 5
   },

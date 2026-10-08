@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x73E720",
-    "line": "sub     esp, 14h",
+    "line": "sub     esp, 14h; Pass330 decode: NiScreenLODData camera selector. It computes distance and projected screen scale from the supplied camera/frustum and Camera::LODAdjust, then selects an authored screen-size threshold.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x73E823",
-    "line": "fstp    [esp+1Ch+arg_0]",
+    "line": "fstp    [esp+1Ch+arg_0]; Pass332 decode: NiScreenLODData selection depends on supplied camera frustum, distance, and LODAdjust; the per-light shadow camera can therefore differ from the main-view silhouette.",
     "mnemonic": "fstp",
     "size": 4
   },

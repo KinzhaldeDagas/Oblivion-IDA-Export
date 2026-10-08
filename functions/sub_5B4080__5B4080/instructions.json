@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5B4080",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; AchievementsNative evidence: MagicPopupMenu update/slide. State 1 advances popup background x toward this+0x50 at root user2 pixels/ms; state 3 moves back toward this+0x54 then hides. Confirms user10 is exposed popup X in inventory call path, not a right edge.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x5B40AB",
-    "line": "call    sub_584390",
+    "line": "call    Menu__StartFadeIn; Oblivion ClassMenu step refresh: derives the active step value from tile traits 0xFDB/0xFDC, updates menu state, sets state 8, and refreshes the interface manager.",
     "mnemonic": "call",
     "size": 5
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x5B418D",
-    "line": "call    sub_584740",
+    "line": "call    Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.",
     "mnemonic": "call",
     "size": 5
   },
@@ -535,25 +535,25 @@
   },
   {
     "ea": "0x5B4199",
-    "line": "fstp    [esp+1Ch+a2]; a3",
+    "line": "fstp    [esp+1Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5B419C",
-    "line": "push    0FADh; a2",
+    "line": "push    0FADh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5B41A1",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5B41A6",
-    "line": "call    InterfaceManager_IsMenuMode",
+    "line": "call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x5B41B8",
-    "line": "call    sub_584740",
+    "line": "call    Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.",
     "mnemonic": "call",
     "size": 5
   },
@@ -607,19 +607,19 @@
   },
   {
     "ea": "0x5B41C4",
-    "line": "fstp    [esp+1Ch+a2]; a3",
+    "line": "fstp    [esp+1Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5B41C7",
-    "line": "push    0FADh; a2",
+    "line": "push    0FADh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5B41CC",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },

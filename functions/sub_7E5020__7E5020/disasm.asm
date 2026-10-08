@@ -1,4 +1,4 @@
-0x7E5020: sub     esp, 2Ch
+0x7E5020: sub     esp, 2Ch; Verified (Oblivion): generates a particle along the target node's local ray using rayLength_74, optionally transforms it to world coordinates when bWorldspace_78 is set, and writes the 0x20-byte slot record. This is emitterType_70 value 2, kParticleShaderEmitter_Ray.
 0x7E5023: push    esi
 0x7E5024: mov     esi, ecx
 0x7E5026: cmp     word ptr [esi+11Ah], 0
@@ -54,9 +54,9 @@
 0x7E50F5: mov     dword ptr [esp+34h+var_24+4], edx
 0x7E50F9: mov     eax, [esp+34h+var_4]
 0x7E50FD: mov     [esp+34h+var_1C], eax
-0x7E5101: call    sub_43F350
+0x7E5101: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x7E5106: fstp    st
-0x7E5108: cmp     byte ptr [esi+78h], 0
+0x7E5108: cmp     byte ptr [esi+78h], 0; Verified (Oblivion): when bWorldspace_78 is true, ray-generated position and direction are transformed by the target node's world transform.
 0x7E510C: jz      short loc_7E5186
 0x7E510E: lea     ecx, [esp+34h+var_18]
 0x7E5112: push    ecx
@@ -64,7 +64,7 @@
 0x7E5117: add     edi, 64h ; 'd'
 0x7E511A: push    edx
 0x7E511B: mov     ecx, edi
-0x7E511D: call    sub_53D4B0
+0x7E511D: call    NiTransform_TransformPoint; ODismemberment: __thiscall NiTransform point transform helper. Plugin hit capture must pass transform in ECX; cdecl here crashes on actor hits.
 0x7E5122: mov     ecx, [eax]
 0x7E5124: mov     dword ptr [esp+34h+var_18], ecx
 0x7E5128: mov     edx, [eax+4]
@@ -95,7 +95,7 @@
 0x7E5182: mov     [esp+34h+var_1C], edx
 0x7E5186: mov     ecx, [esi+6Ch]
 0x7E5189: fld     dword ptr [esp+34h+var_18]
-0x7E518D: mov     eax, [esp+34h+arg_0]
+0x7E518D: mov     eax, [esp+34h+slotIndex]
 0x7E5191: shl     eax, 5
 0x7E5194: fstp    dword ptr [eax+ecx]
 0x7E5197: mov     edx, [esi+6Ch]

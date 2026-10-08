@@ -1,6 +1,6 @@
 0x75E540: push    esi
 0x75E541: mov     esi, ecx
-0x75E543: call    sub_6CE1D0
+0x75E543: call    NiSingleInterpController_Construct; Constructs the 0x40-byte NiSingleInterpController base state: initializes NiTimeController, installs this vtable, and clears the sole refcounted interpolator smart pointer at +0x3C.
 0x75E548: xor     eax, eax
 0x75E54A: mov     [esi+40h], eax
 0x75E54D: mov     [esi+44h], eax

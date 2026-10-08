@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x46DD70",
-    "line": "push    ebx",
+    "line": "push    ebx; MEF PERF 2026-09-07: PERF-2 add-unique path first performs full duplicate scan46DD79; unique input then computes length, allocates/copies owned string, and calls67B1E0 PushBack46DDB5 which walks the list again. Preserve duplicate equality, first-occurrence order and owned-string/node destruction in any bulk optimization.",
     "mnemonic": "push",
     "size": 1
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x46DD79",
-    "line": "call    sub_46DD20",
+    "line": "call    TESModelList_ContainsModelPath",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x46DDB5",
-    "line": "call    BSSimpleList_PushBack",
+    "line": "call    BSSimpleList_PushBack; MEF PERF 2026-09-07: PERF-2 redundant tail walk after completed uniqueness scan. For N successful distinct additions from empty embedded head, PushBack next-link traversals sum (N-1)*(N-2)/2 (N>=2). Tail caching alone leaves quadratic duplicate comparisons. Avoid carrying stale tail across allocator-recovery mutations.",
     "mnemonic": "call",
     "size": 5
   },

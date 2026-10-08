@@ -1,1 +1,1 @@
-tagDVASPECT
+typedef DVASPECT tagDVASPECT;

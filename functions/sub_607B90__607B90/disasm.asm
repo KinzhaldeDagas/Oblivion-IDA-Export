@@ -83,7 +83,7 @@
 0x607C81: mov     ecx, ebx
 0x607C83: call    eax
 0x607C85: mov     ecx, eax
-0x607C87: call    BSSimpleList_Clear
+0x607C87: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x607C8C: mov     edx, [ebx]
 0x607C8E: mov     eax, [edx+8]
 0x607C91: mov     ecx, ebx
@@ -99,10 +99,10 @@
 0x607CA8: cmp     eax, 1
 0x607CAB: jz      loc_607DA6
 0x607CB1: push    0; a2
-0x607CB3: mov     ecx, offset ActorProcessManager_ptr; this
-0x607CB8: call    sub_673A50
+0x607CB3: mov     ecx, (offset qword_B3BB2C+1D4h); this
+0x607CB8: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x607CBD: mov     ecx, eax; this
-0x607CBF: call    sub_7616D0
+0x607CBF: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x607CC4: test    eax, eax
 0x607CC6: mov     [esp+18h+var_4], eax
 0x607CCA: mov     ebp, eax
@@ -177,10 +177,10 @@
 0x607D9B: cmp     [esp+18h+var_5], 0
 0x607DA0: jz      loc_607E80
 0x607DA6: push    1; a2
-0x607DA8: mov     ecx, offset ActorProcessManager_ptr; this
-0x607DAD: call    sub_673A50
+0x607DA8: mov     ecx, (offset qword_B3BB2C+1D4h); this
+0x607DAD: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x607DB2: mov     ecx, eax; this
-0x607DB4: call    sub_7616D0
+0x607DB4: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x607DB9: test    eax, eax
 0x607DBB: mov     [esp+18h+var_4], eax
 0x607DBF: mov     ebp, eax

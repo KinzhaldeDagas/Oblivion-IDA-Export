@@ -1,9 +1,9 @@
-0x4043A0: push    esi
+0x4043A0: push    esi; [Controller decode 2026-07-09] Input shutdown: disables joystick/controller support first, then releases keyboard, mouse, and root DirectInput interface.
 0x4043A1: mov     esi, ecx
 0x4043A3: test    byte ptr [esi], 1
 0x4043A6: jz      short loc_4043AF
 0x4043A8: push    0
-0x4043AA: call    sub_404010
+0x4043AA: call    InputGlobals__SetJoystickEnabled
 0x4043AF: cmp     dword ptr [esi+28h], 0
 0x4043B3: jz      short loc_4043CB
 0x4043B5: mov     eax, [esi+28h]

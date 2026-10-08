@@ -1,1 +1,1 @@
-HDSKSPC
+typedef PVOID HDSKSPC;

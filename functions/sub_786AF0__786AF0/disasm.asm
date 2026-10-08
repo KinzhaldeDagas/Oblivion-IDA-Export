@@ -1,11 +1,11 @@
-0x786AF0: push    ebp
+0x786AF0: push    ebp; stBezierSpline text parser. Accepts strings beginning with BezierSpline, reads min/max/variance, then a braced control-point count followed by point, tangent, and tangent-length float groups.
 0x786AF1: mov     ebp, esp
 0x786AF3: and     esp, 0FFFFFFF8h
 0x786AF6: sub     esp, 124h
 0x786AFC: mov     eax, ds:0B30AACh
 0x786B01: xor     eax, esp
 0x786B03: mov     [esp+124h+var_4], eax
-0x786B0A: mov     eax, [ebp+arg_0]
+0x786B0A: mov     eax, [ebp+stringObject]
 0x786B0D: cmp     dword ptr [eax+18h], 10h
 0x786B11: push    ebx
 0x786B12: push    esi
@@ -65,7 +65,7 @@
 0x786BBE: push    ecx; String
 0x786BBF: mov     esi, eax
 0x786BC1: call    _atof
-0x786BC6: fstp    [esp+134h+var_110]
+0x786BC6: fstp    [esp+134h+point]
 0x786BCA: mov     eax, esi
 0x786BCC: call    sub_783E20
 0x786BD1: mov     edx, edi
@@ -79,7 +79,7 @@
 0x786BE8: mov     eax, edi
 0x786BEA: push    eax; String
 0x786BEB: call    _atof
-0x786BF0: fstp    [esp+13Ch+var_118]
+0x786BF0: fstp    [esp+13Ch+tangent]
 0x786BF4: mov     eax, esi
 0x786BF6: call    sub_783E20
 0x786BFB: mov     ecx, edi
@@ -96,13 +96,13 @@
 0x786C1A: fstp    [esp+144h+var_11C]
 0x786C1E: fld     [esp+144h+var_11C]
 0x786C22: add     esp, 10h
-0x786C25: fstp    [esp+134h+var_134]
-0x786C28: lea     eax, [esp+134h+var_118]
-0x786C2C: push    eax
-0x786C2D: lea     ecx, [esp+138h+var_110]
-0x786C31: push    ecx
-0x786C32: mov     ecx, ebx
-0x786C34: call    sub_7860D0
+0x786C25: fstp    [esp+134h+tangentLength]; tangentLength
+0x786C28: lea     eax, [esp+134h+tangent]
+0x786C2C: push    eax; tangent
+0x786C2D: lea     ecx, [esp+138h+point]
+0x786C31: push    ecx; point
+0x786C32: mov     ecx, ebx; this
+0x786C34: call    OB_StBezierSpline_AddControlPoint_010201A0; Oblivion stBezierSpline::AddControlPoint. Builds 2D point/tangent stVecs, normalizes the tangent, appends prior outgoing/current incoming cubic-Bezier controls to splinePoints, then appends the point, tangent, and tangent length. Shipped compact layout: controlPoints@0x0C, tangents@0x1C, lengths@0x2C, splinePoints@0x4C. Binary behavior matches RT4.1 IdvSpline.cpp after observation.
 0x786C39: sub     [esp+130h+var_120], 1
 0x786C3E: jnz     loc_786BB1
 0x786C44: mov     ecx, [esp+130h+var_4]

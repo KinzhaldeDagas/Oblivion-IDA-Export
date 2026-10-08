@@ -19,8 +19,8 @@
 0x5F861D: mov     ecx, ds:0B333C4h; this
 0x5F8623: cmp     edi, ecx
 0x5F8625: jnz     short loc_5F8675
-0x5F8627: push    1; a2
-0x5F8629: call    Player_GetAnimData
+0x5F8627: push    1; firstPerson
+0x5F8629: call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.
 0x5F862E: cmp     eax, ebx
 0x5F8630: jz      short loc_5F8667
 0x5F8632: mov     eax, [eax+98h]
@@ -39,11 +39,11 @@
 0x5F8656: call    eax
 0x5F8658: cmp     eax, ebx
 0x5F865A: jz      short loc_5F8667
-0x5F865C: lea     ecx, [eax+0ACh]
-0x5F8662: call    sub_477EF0
+0x5F865C: lea     ecx, [eax+0ACh]; this
+0x5F8662: call    NiTObjectArray_ClearAndRelease; Clears a ref-counted NiT object-pointer array: releases every non-null element, nulls entries, and resets end/count words to zero. At bow release it is invoked on ArrowBone+0xAC, thereby releasing all ArrowBone children including the held Arrow:0 clone.
 0x5F8667: mov     ecx, ds:0B333C4h; this
-0x5F866D: push    ebx; a2
-0x5F866E: call    Player_GetAnimData
+0x5F866D: push    ebx; firstPerson
+0x5F866E: call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.
 0x5F8673: jmp     short loc_5F8681
 0x5F8675: mov     edx, [edi]
 0x5F8677: mov     eax, [edx+164h]
@@ -67,15 +67,15 @@
 0x5F86A9: call    eax
 0x5F86AB: cmp     eax, ebx
 0x5F86AD: jz      short loc_5F86BA
-0x5F86AF: lea     ecx, [eax+0ACh]
-0x5F86B5: call    sub_477EF0
+0x5F86AF: lea     ecx, [eax+0ACh]; this
+0x5F86B5: call    NiTObjectArray_ClearAndRelease; Clears a ref-counted NiT object-pointer array: releases every non-null element, nulls entries, and resets end/count words to zero. At bow release it is invoked on ArrowBone+0xAC, thereby releasing all ArrowBone children including the held Arrow:0 clone.
 0x5F86BA: mov     esi, [edi+60h]
 0x5F86BD: cmp     esi, ebx
 0x5F86BF: jz      short loc_5F86D1
 0x5F86C1: mov     ecx, esi; this
 0x5F86C3: call    MagicCaster_CastingVFX_destr
 0x5F86C8: push    esi
-0x5F86C9: call    FormHeapFree
+0x5F86C9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5F86CE: add     esp, 4
 0x5F86D1: mov     [edi+60h], ebx
 0x5F86D4: push    ebp
@@ -94,7 +94,7 @@
 0x5F86FC: jnz     short loc_5F8729
 0x5F86FE: mov     ecx, [esi]
 0x5F8700: push    ecx
-0x5F8701: call    FormHeapFree
+0x5F8701: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5F8706: mov     eax, [esi+4]
 0x5F8709: add     esp, 4
 0x5F870C: cmp     eax, ebx
@@ -104,7 +104,7 @@
 0x5F8716: mov     ecx, [eax]
 0x5F8718: push    eax
 0x5F8719: mov     [esi], ecx
-0x5F871B: call    FormHeapFree
+0x5F871B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5F8720: add     esp, 4
 0x5F8723: jmp     short loc_5F86F3
 0x5F8725: mov     [esi], ebx
@@ -112,7 +112,7 @@
 0x5F8729: test    ebp, 200000h
 0x5F872F: pop     ebp
 0x5F8730: jz      short loc_5F873D
-0x5F8732: lea     ecx, [edi+88h]
+0x5F8732: lea     ecx, [edi+88h]; self
 0x5F8738: call    AVCollection_Clear
 0x5F873D: mov     edx, ds:0B33B00h
 0x5F8743: mov     eax, [edx+44h]

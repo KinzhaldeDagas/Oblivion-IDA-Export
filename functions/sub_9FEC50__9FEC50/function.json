@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_9FEC50",
+  "chunks": [
+    [
+      "0x9FEC50",
+      "0x9FEC68"
+    ]
+  ],
+  "chunks_sha256": "5a2a7533ed64e6bfe9b261349344e286d489103018eba23042413b80442d8262",
+  "comment_regular": "Verified (Oblivion): registers FourCC LOCK (0x4B434F4C) to LockEffect_Make in NiTMap_AECreatorFuncs. Fallout's LockEffect::Instantiate is registered under EffectArchetypes enum HEALTH by a dynamic initializer and allocates 0x48 bytes; Oblivion's factory allocates 0x38 bytes. Registry key and object layout diverge.",
+  "comment_repeatable": "Verified (Oblivion): registers FourCC LOCK (0x4B434F4C) to LockEffect_Make in NiTMap_AECreatorFuncs. Fallout's LockEffect::Instantiate is registered under EffectArchetypes enum HEALTH by a dynamic initializer and allocates 0x48 bytes; Oblivion's factory allocates 0x38 bytes. Registry key and object layout diverge.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "ActiveEffect_Register_LOCK_Factory",
   "end_ea": "0x9FEC68",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_9FEC50",
+  "name": "ActiveEffect_Register_LOCK_Factory",
   "segment": ".text",
   "sha256": "5a2a7533ed64e6bfe9b261349344e286d489103018eba23042413b80442d8262",
   "size": 24,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x9FEC50",
-  "type": "char()",
+  "total_chunk_size": 24,
+  "type": "bool __cdecl()",
   "xrefs_from_count": 8,
   "xrefs_to_count": 0
 }

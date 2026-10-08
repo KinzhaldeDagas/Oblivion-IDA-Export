@@ -1,4 +1,4 @@
-0x41E980: push    52h ; 'R'; a2
+0x41E980: push    52h ; 'R'; Returns the integer value stored in ExtraInvestmentGold type 0x52, or zero when absent.
 0x41E982: call    BaseExtraList_GetExtraData
 0x41E987: test    eax, eax
 0x41E989: jnz     short loc_41E98C

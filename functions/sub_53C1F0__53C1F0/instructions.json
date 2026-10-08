@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x53C206",
-    "line": "fstp    [esp+9Ch+var_9C]",
+    "line": "fstp    [esp+9Ch+angleX]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x53C20C",
-    "line": "call    nullsub_returnVoid_2arg",
+    "line": "call    nullsub_returnVoid_2arg; nullsub_returnVoid_2arg; used by Low/MiddleLow movement/package setter slots and MiddleHigh movement flag setter slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x53C243",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1003,7 +1003,7 @@
   },
   {
     "ea": "0x53C3F4",
-    "line": "lea     ecx, [esp+9Ch+var_6C]",
+    "line": "lea     ecx, [esp+9Ch+var_6C]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1027,13 +1027,13 @@
   },
   {
     "ea": "0x53C406",
-    "line": "fstp    [esp+9Ch+var_9C]; float",
+    "line": "fstp    [esp+9Ch+angleX]; angleX",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x53C409",
-    "line": "call    NiMatrix33_InitRotationTransposedTransform???",
+    "line": "call    NiMatrix33_InitRotationXTransposed; Verified matrix coefficients make this an X-axis rotation in the engine's transposed convention: X stays fixed; only the Y/Z submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1057,7 +1057,7 @@
   },
   {
     "ea": "0x53C418",
-    "line": "lea     ecx, [esp+9Ch+var_48]",
+    "line": "lea     ecx, [esp+9Ch+right]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1075,13 +1075,13 @@
   },
   {
     "ea": "0x53C424",
-    "line": "fstp    [esp+9Ch+var_9C]; float",
+    "line": "fstp    [esp+9Ch+angleX]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x53C427",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1093,37 +1093,37 @@
   },
   {
     "ea": "0x53C42F",
-    "line": "lea     eax, [esp+98h+var_48]",
+    "line": "lea     eax, [esp+98h+right]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x53C433",
-    "line": "push    eax",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x53C434",
-    "line": "lea     ecx, [esp+9Ch+var_24]",
+    "line": "lea     ecx, [esp+9Ch+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x53C438",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x53C439",
-    "line": "lea     ecx, [esp+0A0h+var_6C]",
+    "line": "lea     ecx, [esp+0A0h+var_6C]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x53C43D",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1387,7 +1387,7 @@
   },
   {
     "ea": "0x53C4BC",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1417,7 +1417,7 @@
   },
   {
     "ea": "0x53C4CA",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1495,7 +1495,7 @@
   },
   {
     "ea": "0x53C4EB",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1609,7 +1609,7 @@
   },
   {
     "ea": "0x53C529",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1639,7 +1639,7 @@
   },
   {
     "ea": "0x53C53B",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1717,7 +1717,7 @@
   },
   {
     "ea": "0x53C55C",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },

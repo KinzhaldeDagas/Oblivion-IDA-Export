@@ -1,1 +1,1 @@
-u_int
+typedef unsigned int u_int;

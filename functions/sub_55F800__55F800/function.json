@@ -1,19 +1,36 @@
 {
-  "callees_count": 40,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 18,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_55F800",
+  "chunks": [
+    [
+      "0x55F800",
+      "0x55FA48"
+    ],
+    [
+      "0x9BCCB0",
+      "0x9BCCE6"
+    ]
+  ],
+  "chunks_sha256": "9b00360e223e63a7326d468cb4d2bb61f3b6dc7a86b501354ba62c282e9d7d24",
+  "comment_regular": "Verified local call paths: invoked from QueuedTreeModel_RunCreateStage (worker result publication) and TESObjectTREE_CreateTreeNodeDirect (synchronous creation). Validates tree model path and reference base-form identity, consumes an already-published node if present, otherwise derives seed, obtains/copies cached model, applies reference scale, and creates BSTreeNode art.",
+  "comment_repeatable": "Verified local call paths: invoked from QueuedTreeModel_RunCreateStage (worker result publication) and TESObjectTREE_CreateTreeNodeDirect (synchronous creation). Validates tree model path and reference base-form identity, consumes an already-published node if present, otherwise derives seed, obtains/copies cached model, applies reference scale, and creates BSTreeNode art.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "BSTreeManager_CreateTreeForReference",
   "end_ea": "0x55FA48",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_55F800",
+  "name": "BSTreeManager_CreateTreeForReference",
   "segment": ".text",
   "sha256": "b399ec9e2fa818a6f3d7828fcd2e494c62a0e528bfbfae1399e235c28ca1d5ba",
   "size": 584,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x55F800",
-  "type": "NiObjectNET *__thiscall(_DWORD **this, _BYTE *, int)",
-  "xrefs_from_count": 227,
+  "total_chunk_size": 638,
+  "type": "BSTreeNode_OblivionLayout_0F0 *__thiscall(BSTreeManager_OblivionVerifiedLayout *this, TESObjectREFR *reference, TESObjectTREE_OblivionLayout_080_NiTArrayVerified *tree)",
+  "xrefs_from_count": 245,
   "xrefs_to_count": 2
 }

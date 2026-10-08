@@ -1,1 +1,1 @@
-ExtraLight
+struct ExtraLight;

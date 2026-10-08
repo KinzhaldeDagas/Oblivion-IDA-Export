@@ -45,7 +45,6 @@
 0x5716D6: mov     eax, [edx]
 0x5716D8: lea     esi, [eax+1]
 0x5716DB: jmp     short loc_5716E0
-0x5716DD: align 10h
 0x5716E0: mov     cl, [eax]
 0x5716E2: add     eax, 1
 0x5716E5: test    cl, cl

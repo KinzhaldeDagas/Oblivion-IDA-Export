@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x98A685",
-    "line": "mov     [ebp+60h+var_A4], edi",
+    "line": "mov     [ebp+60h+destination], edi",
     "mnemonic": "mov",
     "size": 3
   },
@@ -805,7 +805,7 @@
   },
   {
     "ea": "0x98A7CF",
-    "line": "cmp     [ebp+60h+var_A4], esi",
+    "line": "cmp     [ebp+60h+destination], esi",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -817,25 +817,25 @@
   },
   {
     "ea": "0x98A7D4",
-    "line": "push    6; Size",
+    "line": "push    6; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x98A7D6",
-    "line": "push    ebx; Src",
+    "line": "push    ebx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x98A7D7",
-    "line": "push    [ebp+60h+var_A4]; Dst",
+    "line": "push    [ebp+60h+destination]; destination",
     "mnemonic": "push",
     "size": 3
   },
   {
     "ea": "0x98A7DA",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -859,25 +859,25 @@
   },
   {
     "ea": "0x98A7E7",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x98A7E9",
-    "line": "push    [ebp+60h+Src]; Src",
+    "line": "push    [ebp+60h+Src]; source",
     "mnemonic": "push",
     "size": 3
   },
   {
     "ea": "0x98A7EC",
-    "line": "push    [ebp+60h+var_A0]; Dst",
+    "line": "push    [ebp+60h+var_A0]; destination",
     "mnemonic": "push",
     "size": 3
   },
   {
     "ea": "0x98A7EF",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },

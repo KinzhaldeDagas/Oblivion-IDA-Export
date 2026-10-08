@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "$BA244A2CA362F63DBBD7E2E437BC18C3",
+  "definition": "struct $BA244A2CA362F63DBBD7E2E437BC18C3\n{\nCInterfaceProxyHeader header;\nvoid *Vtbl[15] __offset(OFF64|AUTO);\n}\n",
   "id": 18374686479671848889,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "header",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "CInterfaceProxyHeader"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Vtbl",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 60
+      "size": 60,
+      "type": "void *[15]"
     }
   ],
   "name": "$BA244A2CA362F63DBBD7E2E437BC18C3",
+  "ordinal": 5636,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 64
 }

@@ -48,14 +48,14 @@ int __usercall EffectItem_BuildDisplayString_::AppendDuration@<eax>(
         char a47)
 {
   int Duration; // eax
-  const char *v48; // ecx
+  const char *value; // ecx
 
-  Duration = EffectItem_GetDuration(a3);
-  v48 = (const char *)sMagicEffectItemSecondsSingular;
-  if ( Duration != 1 )
-    v48 = (const char *)sMagicEffectItemSecondsPlural;
-  _sprintf(&a12, " %s %d %s", (const char *)sMagicEffectItemFor, Duration, v48);
-  BSStringT_Append(a2, &a12);
+  Duration = EffectItem_GetDuration(a3); /*0x413ef0*/
+  value = MEMORY[0xB33478].value; /*0x413ef8*/
+  if ( Duration != 1 ) /*0x413efe*/
+    value = MEMORY[0xB33490].value; /*0x413f00*/
+  _sprintf(&a12, " %s %d %s", MEMORY[0xB33460].value, Duration, value); /*0x413f18*/
+  BSStringT_Append(a2, &a12); /*0x413f27*/
   return EffectItem_BuildDisplayString_::CheckRangeType(
            a1,
            a4,

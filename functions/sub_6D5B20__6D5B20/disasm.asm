@@ -1,4 +1,4 @@
-0x6D5B20: push    esi
+0x6D5B20: push    esi; Oblivion NiTransformInterpolator construction with NiTransformData. Initializes the cached 0x20-byte transform at +0x0C to native defaults, stores data at +0x2C with an added reference, and zeroes rotation/translation/scale cursors +0x30/+0x32/+0x34. Object size is 0x38.
 0x6D5B21: mov     esi, ecx
 0x6D5B23: call    sub_6EC220
 0x6D5B28: mov     dword ptr [esi], offset ??_7NiTransformInterpolator@@6B@; const NiTransformInterpolator::`vftable'

@@ -1,8 +1,8 @@
-0x4170D3: mov     ecx, dword_B3350C
+0x4170D3: mov     ecx, dword ptr unk_B3350C
 0x4170D9: xor     eax, eax
 0x4170DB: test    ecx, ecx
 0x4170DD: jbe     short loc_4170F2
-0x4170DF: mov     edx, dword_B33510
+0x4170DF: mov     edx, dword ptr unk_B33510
 0x4170E5: cmp     dword ptr [edx+eax*4], 0
 0x4170E9: jnz     short loc_41710D
 0x4170EB: add     eax, 1
@@ -23,16 +23,16 @@
 0x41710D: mov     eax, [edx+eax*4]
 0x417110: jmp     short loc_4170F4
 0x417112: mov     eax, [esi+4]
-0x417115: mov     edx, EffectSettingCollection
+0x417115: mov     edx, ds:0B33508h
 0x41711B: push    eax
 0x41711C: mov     eax, [edx+4]
-0x41711F: mov     ecx, offset EffectSettingCollection
+0x41711F: mov     ecx, 0B33508h
 0x417124: call    eax
-0x417126: mov     edx, dword_B3350C
+0x417126: mov     edx, dword ptr unk_B3350C
 0x41712C: add     eax, 1
 0x41712F: cmp     eax, edx
 0x417131: jnb     short loc_41714E
-0x417133: mov     esi, dword_B33510
+0x417133: mov     esi, dword ptr unk_B33510
 0x417139: lea     esp, [esp+0]
 0x417140: mov     ecx, [esi+eax*4]
 0x417143: test    ecx, ecx

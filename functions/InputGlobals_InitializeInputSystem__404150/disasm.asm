@@ -1,4 +1,4 @@
-0x404150: mov     eax, [esp+hinst]
+0x404150: mov     eax, [esp+hinst]; [Controller decode 2026-07-09] Initializes DirectInput keyboard, mouse, and joystick/controller devices. If bUseJoystick is true, enumerates joystick/gamepad devices, clears state caches, then resets default control bindings.
 0x404154: sub     esp, 14h
 0x404157: push    ebx
 0x404158: push    ebp

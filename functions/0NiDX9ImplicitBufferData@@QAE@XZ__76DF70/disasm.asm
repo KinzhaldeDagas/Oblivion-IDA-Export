@@ -10,7 +10,7 @@
 0x76DF82: add     esp, 4
 0x76DF85: cmp     esi, ebp
 0x76DF87: jz      short loc_76DFB1
-0x76DF89: push    offset NiRefObject_objcount; lpAddend
+0x76DF89: push    0B3FD64h; lpAddend
 0x76DF8E: mov     dword ptr [esi], offset ??_7NiRefObject@@6B@; const NiRefObject::`vftable'
 0x76DF94: mov     [esi+4], ebp
 0x76DF97: call    dword ptr ds:0A28078h
@@ -22,12 +22,12 @@
 0x76DFAF: jmp     short loc_76DFB3
 0x76DFB1: xor     esi, esi
 0x76DFB3: mov     eax, [esp+30h+Src]
-0x76DFB7: push    38h ; '8'; Size
-0x76DFB9: push    eax; Src
+0x76DFB7: push    38h ; '8'; byteCount
+0x76DFB9: push    eax; source
 0x76DFBA: lea     ecx, [esi+14h]
-0x76DFBD: push    ecx; Dst
-0x76DFBE: call    _memcpy
-0x76DFC3: mov     edi, [esp+3Ch+arg_0]
+0x76DFBD: push    ecx; destination
+0x76DFBE: call    _memcpy;
+0x76DFC3: mov     edi, [esp+3Ch+device]
 0x76DFC7: mov     [esi+4Ch], edi
 0x76DFCA: mov     edx, [edi]
 0x76DFCC: mov     eax, [edx+4]
@@ -70,10 +70,10 @@
 0x76E01A: mov     [esi+10h], eax
 0x76E01D: mov     ecx, [esp+34h+a1]
 0x76E021: push    ecx
-0x76E022: call    sub_774BD0
+0x76E022: call    OB_D3DFormat_ToString_010201A0
 0x76E027: push    eax
 0x76E028: push    offset aNidx9render_20; "NiDX9Renderer::Create> Using %s backbuf"...
-0x76E02D: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x76E02D: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x76E032: add     esp, 10h
 0x76E035: cmp     ds:0B42614h, ebp
 0x76E03B: jnz     short loc_76E065
@@ -88,7 +88,7 @@
 0x76E05C: mov     ecx, edi
 0x76E05E: call    eax
 0x76E060: mov     ds:0B42618h, al
-0x76E065: mov     edi, [esp+30h+arg_8]
+0x76E065: mov     edi, [esp+30h+parentBuffer]
 0x76E069: mov     ecx, [edi]; this
 0x76E06B: cmp     ecx, ebp
 0x76E06D: push    esi; a2

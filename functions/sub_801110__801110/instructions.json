@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x801110",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, [esp+arg_4]; Configure a shader texture stage for pixel-shader use: select the supplied texcoord index, disable fixed-function color/alpha ops and texture transform, set U/V address mode, set MAG/MIN/MIP filters, then apply the native filter preset. Mode-5 casters pass texcoord 0, WRAP, and linear filtering.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x801124",
-    "line": "call    sub_772FF0",
+    "line": "call    sub_772FF0; D3DTSS_TEXCOORDINDEX: use the supplied coordinate set; all decoded mode-5 caster passes pass texcoord 0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x801132",
-    "line": "call    sub_772FF0",
+    "line": "call    sub_772FF0; D3DTSS_COLOROP = D3DTOP_DISABLE because these passes use a pixel shader.",
     "mnemonic": "call",
     "size": 5
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x801140",
-    "line": "call    sub_772FF0",
+    "line": "call    sub_772FF0; D3DTSS_COLORARG1 = D3DTA_TEXTURE.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x80114E",
-    "line": "call    sub_772FF0",
+    "line": "call    sub_772FF0; D3DTSS_ALPHAOP = D3DTOP_DISABLE because these passes use a pixel shader.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x80115C",
-    "line": "call    sub_772FF0",
+    "line": "call    sub_772FF0; D3DTSS_ALPHAARG1 = D3DTA_TEXTURE.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,13 +205,13 @@
   },
   {
     "ea": "0x80116A",
-    "line": "mov     byte ptr [esi+5Ah], 0",
+    "line": "mov     byte ptr [esi+5Ah], 0; No texture transform matrix is installed for this stage.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x80116E",
-    "line": "call    sub_772FF0",
+    "line": "call    sub_772FF0; D3DTSS_TEXTURETRANSFORMFLAGS = D3DTTFF_DISABLE.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x801181",
-    "line": "call    sub_773100",
+    "line": "call    sub_773100; D3DSAMP_ADDRESSU: use supplied address mode; decoded mode-5 caster passes initialize this to D3DTADDRESS_WRAP.",
     "mnemonic": "call",
     "size": 5
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x801190",
-    "line": "call    sub_773100",
+    "line": "call    sub_773100; D3DSAMP_ADDRESSV: use supplied address mode; decoded mode-5 caster passes initialize this to D3DTADDRESS_WRAP.",
     "mnemonic": "call",
     "size": 5
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x8011A3",
-    "line": "call    sub_773100",
+    "line": "call    sub_773100; D3DSAMP_MAGFILTER: use supplied filter; decoded mode-5 caster passes initialize this to D3DTEXF_LINEAR.",
     "mnemonic": "call",
     "size": 5
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x8011B2",
-    "line": "call    sub_773100",
+    "line": "call    sub_773100; D3DSAMP_MINFILTER: use supplied filter; decoded mode-5 caster passes initialize this to D3DTEXF_LINEAR.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,31 +403,31 @@
   },
   {
     "ea": "0x8011C1",
-    "line": "call    sub_773100",
+    "line": "call    sub_773100; D3DSAMP_MIPFILTER: use supplied filter; decoded mode-5 caster passes initialize this to D3DTEXF_LINEAR.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x8011C6",
-    "line": "push    2",
+    "line": "push    2; filterPreset",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x8011C8",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8011CA",
-    "line": "call    sub_771640",
+    "line": "call    NiD3DTextureStage_ApplyFilterPreset; Apply one native filter-preset row to a NiD3DTextureStage: D3DSAMP_MAGFILTER (5) from row.MAG, D3DSAMP_MINFILTER (6) from row.MIN, and D3DSAMP_MIPFILTER (7) from row.MIP. Lighting30 SimpleShadow uses preset 1 = MIN/MAG LINEAR, MIP NONE.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x8011CF",
-    "line": "pop     edi",
+    "line": "pop     edi; Apply native filter preset 2 after the explicit sampler fields; for these passes this is the engine trilinear preset.",
     "mnemonic": "pop",
     "size": 1
   },

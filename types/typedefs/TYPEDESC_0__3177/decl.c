@@ -1,1 +1,1 @@
-TYPEDESC_0
+typedef tagTYPEDESC_0 TYPEDESC_0;

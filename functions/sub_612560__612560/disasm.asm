@@ -15,8 +15,8 @@
 0x61258A: push    esi
 0x61258B: mov     esi, [esp+18h+arg_0]
 0x61258F: mov     ebx, [esi]
-0x612591: mov     ecx, edi
-0x612593: call    TESObjectWEAP_GetWeaponSkillAV
+0x612591: mov     ecx, edi; this
+0x612593: call    TESObjectWEAP_GetWeaponSkillAV; BladeSkillsRestored schema-4 owner decode: ECX is TESObjectWEAP and ESI is the Actor argument. Call returns at 0x612598; downstream weapon-damage wrapper returns at 0x5471CC. Patch passes ESI and binds the resolved player/NPC sidecar level to the exact pair.
 0x612598: push    eax
 0x612599: mov     eax, [ebx+288h]
 0x61259F: mov     ecx, esi
@@ -37,7 +37,7 @@
 0x6125CB: fild    [esp+18h+arg_4]
 0x6125CF: mov     ecx, esi; this
 0x6125D1: fstp    [esp+18h+var_C]
-0x6125D5: call    Actor_GetFatigueFraction
+0x6125D5: call    Actor_GetFatigueFraction; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.
 0x6125DA: fstp    [esp+18h+arg_4]
 0x6125DE: sub     esp, 8
 0x6125E1: fld     dword ptr ds:0A30634h
@@ -45,13 +45,13 @@
 0x6125EB: fld     [esp+20h+arg_4]
 0x6125EF: fstp    [esp+20h+var_20]; float
 0x6125F2: fld     [esp+20h+var_C]
-0x6125F6: call    Double_To_SInt32
+0x6125F6: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x6125FB: fld     [esp+20h+var_8]
 0x6125FF: push    eax; int
-0x612600: call    Double_To_SInt32
+0x612600: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x612605: fld     [esp+24h+var_4]
 0x612609: push    eax; int
-0x61260A: call    Double_To_SInt32
+0x61260A: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x61260F: fld     [esp+28h+arg_8]
 0x612613: push    eax; int
 0x612614: push    ecx
@@ -59,7 +59,7 @@
 0x612619: fstp    [esp+30h+var_30]; float
 0x61261C: push    ecx; int
 0x61261D: push    edi; int
-0x61261E: call    sub_547140
+0x61261E: call    AI_CalculateWeaponAndEnchantmentThreat
 0x612623: fstp    [esp+38h+var_C]
 0x612627: add     esp, 20h
 0x61262A: pop     esi

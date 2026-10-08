@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6B7690",
-    "line": "sub     esp, 18h",
+    "line": "sub     esp, 18h; Conversation serialization writes UInt16 item count, every DialogueItem, and a UInt16 index for the list-internal current-item cursor. This is distinct from DialoguePackage's external currentItem/currentResponse indices.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x6B76A5",
-    "line": "mov     [esp+24h+var_4], 0",
+    "line": "mov     [esp+24h+source], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x6B76C2",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },
@@ -97,13 +97,13 @@
   },
   {
     "ea": "0x6B76CB",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x6B76D1",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x6B76D7",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x6B76E5",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -145,19 +145,19 @@
   },
   {
     "ea": "0x6B76EE",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6B76F0",
-    "line": "lea     eax, [esp+28h+var_4]",
+    "line": "lea     eax, [esp+28h+source]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6B76F4",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -175,13 +175,13 @@
   },
   {
     "ea": "0x6B76FE",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x6B7704",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x6B7715",
-    "line": "push    edx; Src",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -259,13 +259,13 @@
   },
   {
     "ea": "0x6B772C",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6B772E",
-    "line": "call    sub_6B7D30",
+    "line": "call    DialogueItem__SaveGame; DialogueItem serialization writes UInt8 response count, each DialogueResponse, UInt8 internal current-response index (FF=null), then INFO/topic/ownerQuest/speaker FormIDs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,19 +337,19 @@
   },
   {
     "ea": "0x6B7759",
-    "line": "push    eax",
+    "line": "push    eax; item",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B775A",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6B775C",
-    "line": "call    sub_6B7520",
+    "line": "call    Conversation__GetDialogueItemIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -367,13 +367,13 @@
   },
   {
     "ea": "0x6B7768",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x6B776E",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x6B7774",
-    "line": "push    edx; Src",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x6B7798",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x6B77F4",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },

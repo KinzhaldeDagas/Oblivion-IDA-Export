@@ -9,7 +9,7 @@
 0x8AB8B6: test    eax, eax
 0x8AB8B8: jz      loc_8AB98F
 0x8AB8BE: mov     edi, edi
-0x8AB8C0: cmp     eax, offset dword_B3FAB0
+0x8AB8C0: cmp     eax, offset parent
 0x8AB8C5: jz      short loc_8AB8E1
 0x8AB8C7: mov     eax, [eax+4]
 0x8AB8CA: test    eax, eax
@@ -35,7 +35,7 @@
 0x8AB907: call    eax
 0x8AB909: test    eax, eax
 0x8AB90B: jz      loc_8AB98E
-0x8AB911: cmp     eax, offset dword_B3FAB0
+0x8AB911: cmp     eax, offset parent
 0x8AB916: jz      short loc_8AB933
 0x8AB918: mov     eax, [eax+4]
 0x8AB91B: test    eax, eax
@@ -57,7 +57,7 @@
 0x8AB947: jz      short loc_8AB98E
 0x8AB949: mov     eax, [eax+0A8h]
 0x8AB94F: push    eax
-0x8AB950: push    offset dword_BA7D24
+0x8AB950: push    0BA7D24h
 0x8AB955: call    NiRTTI_Cast
 0x8AB95A: add     esp, 8
 0x8AB95D: test    eax, eax
@@ -70,10 +70,10 @@
 0x8AB970: push    6
 0x8AB972: mov     ecx, esi
 0x8AB974: call    eax
-0x8AB976: push    offset stru_BA7A40
+0x8AB976: push    offset unk_BA7A40
 0x8AB97B: mov     ecx, esi
 0x8AB97D: call    sub_4D6AF0
-0x8AB982: push    offset stru_BA7A40
+0x8AB982: push    offset unk_BA7A40
 0x8AB987: mov     ecx, esi
 0x8AB989: call    sub_4D6B30
 0x8AB98E: pop     esi

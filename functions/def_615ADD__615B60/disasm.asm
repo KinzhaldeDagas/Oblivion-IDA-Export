@@ -9,7 +9,7 @@
 0x615B7B: fnstsw  ax
 0x615B7D: mov     [esp+arg_4C], edx
 0x615B81: test    ah, 44h
-0x615B84: jp      loc_615C89
+0x615B84: jp      loc_615C89; Zero-gravity projectile branch: iteratively recompute distance, flightTime=distance/projectileSpeed, then targetPos += targetVelocity*flightTime.
 0x615B8A: test    ebx, ebx
 0x615B8C: jle     loc_615DF5
 0x615B92: fld     [esp+arg_44]
@@ -54,7 +54,7 @@
 0x615C12: fdiv    dword ptr [ebp+1Ch]
 0x615C15: add     esi, 1
 0x615C18: cmp     esi, ebx
-0x615C1A: fstp    [esp+arg_C]
+0x615C1A: fstp    [esp+arg_C]; Zero-gravity iteration flight time = current predicted 3D distance / projectile speed.
 0x615C1E: fld     [esp+arg_50]
 0x615C22: fld     [esp+arg_C]
 0x615C26: fld     st
@@ -84,7 +84,7 @@
 0x615C7E: jl      loc_615B92
 0x615C84: jmp     loc_615DF5
 0x615C89: test    ebx, ebx
-0x615C8B: jle     loc_615DF5
+0x615C8B: jle     loc_615DF5; Nonzero gravity enters the bow-only ballistic lead loop; zero-gravity spells/enchantments use the straight 3D distance branch.
 0x615C91: fldz
 0x615C93: fmul    st, st
 0x615C95: fstp    [esp+arg_14]
@@ -135,8 +135,8 @@
 0x615D2F: fstp    [esp+10h+var_8]; float
 0x615D33: fstp    [esp+10h+var_C]; float
 0x615D37: fstp    [esp+10h+var_10]; float
-0x615D3A: call    sub_6132D0
-0x615D3F: fstp    [esp+10h+arg_8]
+0x615D3A: call    Combat_CalculateBallisticPitch; Low ballistic-pitch solver. It forms the quadratic in cos^2(theta), selects the larger valid root for the low arc, and returns a signed acos(sqrt(root)); invalid trajectories return the engine fallback angle.
+0x615D3F: fstp    [esp+10h+arg_8]; Gravity branch solves ballistic pitch, then uses horizontalDistance/(cos(pitch)*projectileSpeed) as target lead time.
 0x615D43: add     esp, 10h
 0x615D46: fld     [esp+arg_C]
 0x615D4A: fstp    [esp+arg_24]
@@ -237,7 +237,7 @@
 0x615EA4: fchs
 0x615EA6: fstp    [esp+arg_8]
 0x615EAA: lea     ecx, [esp+arg_5C]
-0x615EAE: call    sub_43F350
+0x615EAE: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x615EB3: fstp    st
 0x615EB5: fld     [esp+arg_8]
 0x615EB9: fchs
@@ -263,7 +263,7 @@
 0x615EF7: fstp    st
 0x615EF9: lea     eax, [esp+arg_5C]
 0x615EFD: push    eax
-0x615EFE: call    sub_683CB0
+0x615EFE: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x615F03: fstp    [esp+4+arg_8]
 0x615F07: fld     [esp+4+arg_8]
 0x615F0B: add     esp, 4

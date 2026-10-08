@@ -1,17 +1,17 @@
-0x4E4FE0: push    ebx
-0x4E4FE1: mov     ebx, [esp+4+arg_0]
+0x4E4FE0: push    ebx; Verified PGRI row creation writes local point index in low u16 and remote point XYZ at +4; bytes +2..+3 are left unwritten here and ignored by inspected readers, so their intended meaning remains Unknown.
+0x4E4FE1: mov     ebx, [esp+4+point]
 0x4E4FE5: push    esi
-0x4E4FE6: mov     esi, [esp+8+arg_4]
+0x4E4FE6: mov     esi, [esp+8+neighborPosition]
 0x4E4FEA: push    edi
-0x4E4FEB: push    esi
-0x4E4FEC: push    ebx
+0x4E4FEB: push    esi; neighborPosition
+0x4E4FEC: push    ebx; point
 0x4E4FED: mov     edi, ecx
-0x4E4FEF: call    sub_4E4F70
+0x4E4FEF: call    TESPathGrid_HasPGRICrossCellLinkRequest; Verified duplicate check for a deferred cross-cell PGRI request: compares the point-array entry selected by the record's low u16 index and matches the stored neighbor NiPoint3 at +4 using fConstant_2 tolerance.
 0x4E4FF4: test    al, al
 0x4E4FF6: jnz     short loc_4E502E
-0x4E4FF8: push    ebx
-0x4E4FF9: mov     ecx, edi
-0x4E4FFB: call    sub_4E4E90
+0x4E4FF8: push    ebx; point
+0x4E4FF9: mov     ecx, edi; this
+0x4E4FFB: call    TESPathGrid_GetPointIndex; Verified scans the TESPathGrid point array for pointer identity and returns its u16 array index; returns 0xFFFFFFFF if no point array or no matching point.
 0x4E5000: mov     ebx, eax
 0x4E5002: cmp     ebx, 0FFFFFFFFh
 0x4E5005: jz      short loc_4E502E

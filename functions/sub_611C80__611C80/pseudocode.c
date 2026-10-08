@@ -2,8 +2,8 @@ bool __thiscall sub_611C80(_DWORD **this)
 {
   void *v2; // eax
 
-  v2 = (void *)(*(int (__thiscall **)(_DWORD))(**(this + 0x16) + 0x184))(*(this + 0x16));
-  return OblivionDynamicCast(
+  v2 = (void *)(*(int (__thiscall **)(_DWORD))(**(this + 0x16) + 0x184))(*(this + 0x16)); /*0x611c9c*/
+  return OblivionDynamicCast( /*0x611ccb*/
            v2,
            0,
            (struct _s_RTTICompleteObjectLocator *)&TESPackage `RTTI Type Descriptor',

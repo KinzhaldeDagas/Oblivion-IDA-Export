@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x99E6C9",
-    "line": "mov     dword_BAA86C, ebx",
+    "line": "mov     dword_BA9E10+0A5Ch, ebx",
     "mnemonic": "mov",
     "size": 6
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x99E6F6",
-    "line": "mov     eax, dword_BAA870",
+    "line": "mov     eax, dword_BA9E10+0A60h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x99E710",
-    "line": "mov     eax, dword_BAA870",
+    "line": "mov     eax, dword_BA9E10+0A60h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x99E72F",
-    "line": "mov     dword_BAA870, eax",
+    "line": "mov     dword_BA9E10+0A60h, eax",
     "mnemonic": "mov",
     "size": 5
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x99E746",
-    "line": "push    dword_BAA870; Dst",
+    "line": "push    dword_BA9E10+0A60h; Dst",
     "mnemonic": "push",
     "size": 6
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x99E76E",
-    "line": "mov     eax, dword_BAA870",
+    "line": "mov     eax, dword_BA9E10+0A60h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -727,13 +727,13 @@
   },
   {
     "ea": "0x99E77E",
-    "line": "mov     dword_BAA870, ebx",
+    "line": "mov     dword_BA9E10+0A60h, ebx",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x99E784",
-    "line": "push    offset TimeZoneInformation; lpTimeZoneInformation",
+    "line": "push    (offset dword_BA9E10+9B0h); lpTimeZoneInformation",
     "mnemonic": "push",
     "size": 5
   },
@@ -769,13 +769,13 @@
   },
   {
     "ea": "0x99E79A",
-    "line": "mov     dword_BAA86C, ecx",
+    "line": "mov     dword_BA9E10+0A5Ch, ecx",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x99E7A0",
-    "line": "mov     eax, TimeZoneInformation.Bias",
+    "line": "mov     eax, dword_BA9E10+9B0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x99E7AB",
-    "line": "cmp     TimeZoneInformation.StandardDate.wMonth, bx",
+    "line": "cmp     word ptr dword_BA9E10+9F6h, bx",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -805,7 +805,7 @@
   },
   {
     "ea": "0x99E7B4",
-    "line": "mov     edx, TimeZoneInformation.StandardBias",
+    "line": "mov     edx, dword_BA9E10+0A04h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -829,7 +829,7 @@
   },
   {
     "ea": "0x99E7C2",
-    "line": "cmp     TimeZoneInformation.DaylightDate.wMonth, bx",
+    "line": "cmp     word ptr dword_BA9E10+0A4Ah, bx",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -841,7 +841,7 @@
   },
   {
     "ea": "0x99E7CB",
-    "line": "mov     eax, TimeZoneInformation.DaylightBias",
+    "line": "mov     eax, dword_BA9E10+0A58h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x99E7D7",
-    "line": "sub     eax, TimeZoneInformation.StandardBias",
+    "line": "sub     eax, dword_BA9E10+0A04h",
     "mnemonic": "sub",
     "size": 6
   },
@@ -943,7 +943,7 @@
   },
   {
     "ea": "0x99E7F8",
-    "line": "push    offset TimeZoneInformation.StandardName; lpWideCharStr",
+    "line": "push    (offset dword_BA9E10+9B4h); lpWideCharStr",
     "mnemonic": "push",
     "size": 5
   },
@@ -1081,7 +1081,7 @@
   },
   {
     "ea": "0x99E832",
-    "line": "push    offset TimeZoneInformation.DaylightName; lpWideCharStr",
+    "line": "push    (offset dword_BA9E10+0A08h); lpWideCharStr",
     "mnemonic": "push",
     "size": 5
   },
@@ -1240,5 +1240,41 @@
     "line": "call    __tzset_nolock___$LN38_1",
     "mnemonic": "call",
     "size": 5
+  },
+  {
+    "ea": "0x99E8E7",
+    "line": "xor     ebx, ebx",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x99E8E9",
+    "line": "mov     esi, [ebp+var_3C]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x99E8EC",
+    "line": "push    7",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x99E8EE",
+    "line": "call    __unlock",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x99E8F3",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x99E8F4",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
   }
 ]

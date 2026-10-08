@@ -82,7 +82,7 @@
 0x6A26D2: call    __sprintf
 0x6A26D7: mov     ecx, [esp+240h+var_20C]
 0x6A26DB: push    ecx
-0x6A26DC: call    FormHeapFree
+0x6A26DC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6A26E1: mov     esi, [edi+0Ch]
 0x6A26E4: mov     edx, [esi+1Ch]
 0x6A26E7: mov     eax, [edx+58h]
@@ -159,7 +159,7 @@
 0x6A27B0: call    __sprintf
 0x6A27B5: mov     eax, [esp+240h+var_20C]
 0x6A27B9: push    eax
-0x6A27BA: call    FormHeapFree
+0x6A27BA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6A27BF: lea     ecx, [esp+244h+var_204]
 0x6A27C3: push    ecx; unsigned __int8 *
 0x6A27C4: lea     edx, [esp+248h+var_104]

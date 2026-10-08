@@ -40,7 +40,7 @@
 0x7585F1: push    edx
 0x7585F2: push    esi
 0x7585F3: mov     byte ptr [esp+38h+var_4], cl
-0x7585F7: call    eax ; dword_B3D088
+0x7585F7: call    eax ; unk_B3D088
 0x7585F9: mov     ecx, [esp+38h+a2]
 0x7585FD: mov     edx, ds:0B3D410h[edi*4]
 0x758604: mov     ebx, eax
@@ -48,7 +48,7 @@
 0x75860A: push    eax
 0x75860B: push    ecx
 0x75860C: push    ebx
-0x75860D: call    edx ; dword_B3D410
+0x75860D: call    edx ; unk_B3D410
 0x75860F: mov     eax, [esp+44h+a2]
 0x758613: add     esp, 28h
 0x758616: push    edi
@@ -88,12 +88,12 @@
 0x75867A: mov     edi, [esp+30h+var_8]
 0x75867E: add     esp, 14h
 0x758681: mov     edx, [esp+1Ch+var_C]
-0x758685: mov     cl, ds:byte_B3D406[edi]
+0x758685: mov     cl, byte ptr ds:unk_B3D406[edi]
 0x75868B: mov     eax, ds:0B3D100h[edi*4]
 0x758692: push    edx
 0x758693: push    esi
 0x758694: mov     byte ptr [esp+24h+var_4], cl
-0x758698: call    eax ; dword_B3D100
+0x758698: call    eax ; unk_B3D100
 0x75869A: mov     ecx, [esp+24h+var_C]
 0x75869E: mov     edx, ds:0B3D488h[edi*4]
 0x7586A5: mov     esi, eax

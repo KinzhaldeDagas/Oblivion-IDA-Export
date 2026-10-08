@@ -1,7 +1,8 @@
-signed int __stdcall sub_9A61E0(
-        int a1,
-        int a2,
-        NiObjectNET *a3,
+// Verified NiD3DSCM_Vertex attribute constant path: when supplied an SCM object, cursor+14 indexes 8-byte entries at+1C. A cache hit compares the key against entry numeric register | (passIndex<<16), reads the NiExtraData pointer, and increments the cursor. Otherwise falls back to GetExtraData by the constant entry name. This is a cursor over a prebuilt attribute lookup cache, not an appended draw record.
+int __stdcall NiD3DSCM_Vertex_SetAttributeConstant(
+        NiD3DShaderProgram *shaderProgram,
+        NiD3DShaderConstantMapEntry *entry,
+        NiObjectNET *geometry,
         int a4,
         int a5,
         int a6,
@@ -9,68 +10,82 @@ signed int __stdcall sub_9A61E0(
         int a8,
         int a9,
         int a10,
-        int a11,
+        unsigned int passIndex,
         int a12,
-        int a13)
+        NiSCMExtraData *cache)
 {
-  int v14; // edi
-  _DWORD *v15; // eax
-  NiExtraData *ExtraData; // eax
-  int *v17; // edi
-  int v18; // ebx
-  int v19; // ebx
+  unsigned int vertexCursor; // edi
+  NiSCMConstantEntry *v15; // eax
+  NiExtraData *extraData; // eax
+  void *v17; // edi
+  UInt32 Flags; // ebx
+  UInt32 v19; // ebx
 
-  if ( !a3 )
-    return 1;
-  if ( a13
-    && (v14 = *(_DWORD *)(a13 + 0x14),
-        v15 = (_DWORD *)(*(_DWORD *)(a13 + 0x1C) + 8 * v14),
-        *v15 == (*(_DWORD *)(a2 + 0x1C) | (a11 << 0x10)))
-    && (ExtraData = (NiExtraData *)v15[1], *(_DWORD *)(a13 + 0x14) = v14 + 1, ExtraData)
-    || (ExtraData = NiObjectNET_GetExtraData(a3, *(const char **)(a2 + 0xC))) != 0 )
+  if ( !geometry ) /*0x9a61e8*/
+    return 1; /*0x9a61f0*/
+  if ( cache /*0x9a623b*/
+    && (vertexCursor = cache->vertexCursor,
+        v15 = &cache->vertexEntries[vertexCursor],
+        v15->constantAndPass == (entry->ShaderRegister | (passIndex << 0x10)))
+    && (extraData = v15->extraData, cache->vertexCursor = vertexCursor + 1, extraData)
+    || (extraData = NiObjectNET_GetExtraData(geometry, entry->Key)) != 0 )
   {
-    v17 = sub_9A9040((_DWORD *)a2, (int)ExtraData);
-    if ( !v17 )
-      return 0x80000040;
+    v17 = sub_9A9040(entry, (int)extraData); /*0x9a625f*/
+    if ( !v17 ) /*0x9a6263*/
+      return 0x80000040; /*0x9a626d*/
   }
   else
   {
-    v17 = sub_9A92E0(a2);
-    if ( !v17 )
-      return 0x80000010;
+    v17 = (void *)NiD3DShaderConstantMap_ConvertMappedValue(entry); /*0x9a6245*/
+    if ( !v17 ) /*0x9a6249*/
+      return 0x80000010; /*0x9a6253*/
   }
-  v18 = *(_DWORD *)(a2 + 0x14);
-  if ( !byte_B4295B )
-    sub_783C70();
-  if ( dword_B428D8[(unsigned __int8)v18] == 9 )
+  Flags = entry->Flags; /*0x9a6277*/
+  if ( !g_D3DXParameterDispatchInitialized ) /*0x9a627a*/
+    NiD3DHLSLShader__InitializeParameterClassTables(); /*0x9a627c*/
+  if ( g_D3DXParameterClassDispatch[(unsigned __int8)Flags] == 9 ) /*0x9a628f*/
   {
-    if ( !(*(unsigned __int8 (__thiscall **)(int, int, int *, int))(*(_DWORD *)a1 + 0x28))(a1, a2, v17, 4) )
-      return 0x80000050;
-    return 0;
+    if ( !(*(unsigned __int8 (__thiscall **)(NiD3DShaderProgram *, NiD3DShaderConstantMapEntry *, void *, int))(*(_DWORD *)shaderProgram + 0x28))( /*0x9a629e*/
+            shaderProgram,
+            entry,
+            v17,
+            4) )
+      return 0x80000050; /*0x9a62b0*/
+    return 0; /*0x9a62a2*/
   }
-  v19 = *(_DWORD *)(a2 + 0x14);
-  if ( !byte_B4295B )
-    sub_783C70();
-  if ( dword_B428D8[(unsigned __int8)v19] != 6
-    && !sub_7833A0((_DWORD *)a2)
-    && !sub_783340((_DWORD *)a2)
-    && !sub_783310((_DWORD *)a2)
-    && !sub_7833D0((_DWORD *)a2)
-    && !sub_7832E0((_DWORD *)a2)
-    && !sub_7832B0((_DWORD *)a2) )
+  v19 = entry->Flags; /*0x9a62ba*/
+  if ( !g_D3DXParameterDispatchInitialized ) /*0x9a62bd*/
+    NiD3DHLSLShader__InitializeParameterClassTables(); /*0x9a62bf*/
+  if ( g_D3DXParameterClassDispatch[(unsigned __int8)v19] != 6 /*0x9a630d*/
+    && !sub_7833A0(entry)
+    && !sub_783340(entry)
+    && !sub_783310(entry)
+    && !sub_7833D0(entry)
+    && !sub_7832E0(entry)
+    && !sub_7832B0(entry) )
   {
-    if ( sub_782DE0((_DWORD *)a2) )
+    if ( sub_782DE0(entry) ) /*0x9a6318*/
     {
-      if ( !(*(unsigned __int8 (__thiscall **)(int, int, int *, int))(*(_DWORD *)a1 + 0x28))(a1, a2, v17, 3) )
-        return 0x80000050;
+      if ( !(*(unsigned __int8 (__thiscall **)(NiD3DShaderProgram *, NiD3DShaderConstantMapEntry *, void *, int))(*(_DWORD *)shaderProgram + 0x28))( /*0x9a632e*/
+              shaderProgram,
+              entry,
+              v17,
+              3) )
+        return 0x80000050; /*0x9a633c*/
     }
     else
     {
-      sub_9A32B0((_DWORD *)a2);
+      sub_9A32B0(entry); /*0x9a6341*/
     }
-    return 0;
+    return 0; /*0x9a6332*/
   }
-  if ( (*(unsigned __int8 (__thiscall **)(int, int, int *, _DWORD))(*(_DWORD *)a1 + 0x28))(a1, a2, v17, 0) )
-    return 0;
-  return 0x80000050;
+  if ( (*(unsigned __int8 (__thiscall **)(NiD3DShaderProgram *, NiD3DShaderConstantMapEntry *, void *, _DWORD))(*(_DWORD *)shaderProgram + 0x28))( /*0x9a635b*/
+         shaderProgram,
+         entry,
+         v17,
+         0) )
+  {
+    return 0; /*0x9a634b*/
+  }
+  return 0x80000050; /*0x9a61ef*/
 }

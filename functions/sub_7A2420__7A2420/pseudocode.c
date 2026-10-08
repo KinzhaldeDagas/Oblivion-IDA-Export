@@ -1,5 +1,6 @@
-void __thiscall sub_7A2420(float *this, float a2, float a3)
+// CTreeEngine::SetSize: stores tree size and variance at CTreeEngine+0x4C/+0x50.
+void __thiscall CTreeEngine__SetSize(OB_CTreeEngine_010201A0 *this, float size, float variance)
 {
-  *(this + 0x13) = a2;
-  *(this + 0x14) = a3;
+  this->treeSizeScalar = size; /*0x7a2424*/
+  this->treeSizeVariance = variance; /*0x7a242b*/
 }

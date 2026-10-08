@@ -1,7 +1,7 @@
-_DWORD *__thiscall sub_4A5610(_BYTE *this)
+TESRegionDataWeather *__thiscall TESRegionDataWeather_ctor(TESRegionDataWeather *self)
 {
-  sub_4A34C0(this);
-  *(_DWORD *)this = &TESRegionDataWeather::`vftable';
-  sub_4EED50((_DWORD *)this + 2);
-  return this;
+  TESRegionData_InitializeBase(&self->base); /*0x4a5638*/
+  self->base.vtable = (TESRegionDataVtable *)&TESRegionDataWeather::`vftable'; /*0x4a5648*/
+  sub_4EED50((unsigned int *)&self->weatherList); /*0x4a564e*/
+  return self; /*0x4a5655*/
 }

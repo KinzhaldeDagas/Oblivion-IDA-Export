@@ -1,4 +1,4 @@
-0x5E1E30: push    esi
+0x5E1E30: push    esi; Engine-native NoRumors predicate used by the GetNoRumors command and MenuTopicManager::FillTopicList. Its code xrefs do not include TESTopic::CreateConversation; it gates the player-facing INFOGENERAL/Rumors entry, not arbitrary ambient linked-topic playback.
 0x5E1E31: mov     esi, ecx
 0x5E1E33: call    Actor_IsNPC
 0x5E1E38: test    al, al

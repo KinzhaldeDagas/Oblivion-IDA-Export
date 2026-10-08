@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7D3400",
-    "line": "push    ebx",
+    "line": "push    ebx; Strong-own and classify the backing NiLight. When trackBackingPosition is set, seed cached source position from the NiPointLight world translation.",
     "mnemonic": "push",
     "size": 1
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x7D340B",
-    "line": "mov     edi, [esp+0Ch+arg_0]",
+    "line": "mov     edi, [esp+0Ch+backingLight]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x7D3435",
-    "line": "mov     [ebx+100h], edi",
+    "line": "mov     [ebx+100h], edi; Store and strong-own the backing NiLight at ShadowSceneLight+0x100 until replacement or destruction.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x7D3458",
-    "line": "cmp     eax, offset dword_B3FD80",
+    "line": "cmp     eax, offset stru_B3FD80; Walk the backing object's RTTI parent chain looking for RTTI_NiPointLight; this is the producer test for ShadowSceneLight+0xFC.",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x7D346A",
-    "line": "mov     [ebx+0FCh], al",
+    "line": "mov     [ebx+0FCh], al; Store backingIsNiPointLight into the byte at ShadowSceneLight+0xFC.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x7D3472",
-    "line": "cmp     byte ptr [ebx+104h], 0",
+    "line": "cmp     byte ptr [ebx+104h], 0; trackBackingPosition controls whether SetBackingLight copies backing point-light world translation into +0x108..+0x110.",
     "mnemonic": "cmp",
     "size": 7
   },

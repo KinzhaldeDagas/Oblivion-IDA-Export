@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x68A760",
-    "line": "sub     esp, 1Ch",
+    "line": "sub     esp, 1Ch; Verified TravelPath_ComputeDistance sums Euclidean segments from sourceRef->GetPos through each TravelPathNode_GetPosition. For a type-0 teleport node, the segment endpoint is the linked door's TeleportData xyz marker; after consuming that node, the next segment starts at the current door's own TeleportData xyz (its destination marker). Type-1 nodes use owned position payloads; ordinary references use GetPos.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x68A76C",
-    "line": "mov     ecx, [esp+20h+arg_0]",
+    "line": "mov     ecx, [esp+20h+sourceRef]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -157,13 +157,13 @@
   },
   {
     "ea": "0x68A7B3",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x68A7B5",
-    "line": "call    sub_68B110",
+    "line": "call    TravelPathNode_GetPosition; Verified distance loop uses TravelPathNode_GetPosition as each segment endpoint before accumulating the Euclidean length from the current position.",
     "mnemonic": "call",
     "size": 5
   },
@@ -289,13 +289,13 @@
   },
   {
     "ea": "0x68A7F6",
-    "line": "fstp    [esp+24h+arg_0]",
+    "line": "fstp    [esp+24h+sourceRef]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x68A7FA",
-    "line": "fld     [esp+24h+arg_0]",
+    "line": "fld     [esp+24h+sourceRef]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -307,13 +307,13 @@
   },
   {
     "ea": "0x68A803",
-    "line": "fstp    [esp+24h+arg_0]",
+    "line": "fstp    [esp+24h+sourceRef]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x68A807",
-    "line": "fld     [esp+24h+arg_0]",
+    "line": "fld     [esp+24h+sourceRef]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x68A815",
-    "line": "call    ?status@DName@@QBE?AW4DNameStatus@@XZ; DName::status(void)",
+    "line": "call    ?status@DName@@QBE?AW4DNameStatus@@XZ; After a segment is fully consumed, vanilla current-position update is type-sensitive: type 1 vector nodes update to node position; type 0 teleport refs update to linked ExtraTeleport+4 target position; type 0 non-teleport refs leave current position unchanged.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,19 +349,19 @@
   },
   {
     "ea": "0x68A81D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x68A81F",
-    "line": "jnz     short loc_68A828",
+    "line": "jnz     short loc_68A828; Verified current-position update after each node: position nodes use their owned xyz; a teleport reference uses that reference's own TeleportData xyz as the next segment's starting position; a normal reference uses its GetPos result.",
     "mnemonic": "jnz",
     "size": 2
   },
   {
     "ea": "0x68A821",
-    "line": "call    sub_68B110",
+    "line": "call    TravelPathNode_GetPosition; Verified TravelPathNode_GetPosition returns a stored NiPoint3* for kind 1; for kind 0, returns reference GetPos unless the ref has TeleportData, in which case it returns the linked door's TeleportData xyz marker. Null payloads and unrecognized kinds return g_zeroNiPoint3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x68A828",
-    "line": "call    sub_68B0F0",
+    "line": "call    TravelPathNode_GetReference; Verified returns payload as TESObjectREFR* only when kind==0 (reference node); returns null for position nodes or other kinds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x68A835",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x68A840",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x68A847",
-    "line": "call    sub_6899C0",
+    "line": "call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.",
     "mnemonic": "call",
     "size": 5
   },

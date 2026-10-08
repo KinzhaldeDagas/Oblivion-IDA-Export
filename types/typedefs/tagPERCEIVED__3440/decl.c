@@ -1,1 +1,1 @@
-tagPERCEIVED
+typedef PERCEIVED tagPERCEIVED;

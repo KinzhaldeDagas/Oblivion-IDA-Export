@@ -1,4 +1,4 @@
-BSStringT *sub_A128C0()
+NiRTTI *sub_A128C0()
 {
-  return sub_70E220(&stru_BA80EC, "bhkBallAndSocketConstraint", (int)&stru_BA7D50);
+  return NiRTTI_Constructor(&stru_BA80EC, "bhkBallAndSocketConstraint", &MEMORY[0xBA7D50]); /*0xa128d4*/
 }

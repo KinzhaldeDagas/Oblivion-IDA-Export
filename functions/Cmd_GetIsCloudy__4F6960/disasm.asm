@@ -4,7 +4,7 @@
 0x4F696A: test    ecx, ecx
 0x4F696C: jz      short loc_4F697C
 0x4F696E: test    byte ptr [ecx+53h], 2
-0x4F6972: jz      short loc_4F697C
+0x4F6972: jz      short loc_4F697C; GetIsCloudy uses TESWeather+0x53 bit 1, blended by Sky+0xD8 weatherPercent against secondWeather.
 0x4F6974: fld     dword ptr [eax+0D8h]
 0x4F697A: jmp     short loc_4F697E
 0x4F697C: fld     st

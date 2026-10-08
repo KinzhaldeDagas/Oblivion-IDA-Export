@@ -67,7 +67,7 @@
 0x94BCFC: push    ecx
 0x94BCFD: push    ebx
 0x94BCFE: lea     ecx, [esi+edx]
-0x94BD01: call    sub_88FCC0
+0x94BD01: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x94BD06: add     esi, 10h
 0x94BD09: dec     edi
 0x94BD0A: jnz     short loc_94BCF1

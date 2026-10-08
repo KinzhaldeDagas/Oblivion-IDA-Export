@@ -1,4 +1,4 @@
-0x439FF0: push    0FFFFFFFFh
+0x439FF0: push    0FFFFFFFFh; Synchronous KF model load path. Queued idle loader and menu/power-attack setup use this when an immediate KFModel is required.
 0x439FF2: push    offset SEH_439FF0
 0x439FF7: mov     eax, large fs:0
 0x439FFD: push    eax
@@ -22,7 +22,7 @@
 0x43A030: call    eax
 0x43A032: test    al, al
 0x43A034: jnz     loc_43A0C9
-0x43A03A: mov     edi, ioManager
+0x43A03A: mov     edi, ds:0B33A10h
 0x43A040: call    ds:GetCurrentThreadId
 0x43A046: cmp     eax, [edi+30h]
 0x43A049: jz      short loc_43A056
@@ -42,7 +42,7 @@
 0x43A079: call    sub_4378F0
 0x43A07E: test    bl, bl
 0x43A080: jz      short loc_43A08D
-0x43A082: mov     ecx, ioManager
+0x43A082: mov     ecx, ds:0B33A10h
 0x43A088: call    sub_432890
 0x43A08D: mov     eax, [esp+50h+var_14]
 0x43A091: test    eax, eax
@@ -54,8 +54,8 @@
 0x43A0A5: call    ds:InterlockedDecrement
 0x43A0AB: mov     ecx, [esp+50h+var_1C]
 0x43A0AF: push    ecx
-0x43A0B0: mov     [esp+54h+var_3C], offset ??_7QueuedFileEntry@@6B@; const QueuedFileEntry::`vftable'
-0x43A0B8: call    FormHeapFree
+0x43A0B0: mov     [esp+54h+var_3C.vtbl], offset ??_7QueuedFileEntry@@6B@; const QueuedFileEntry::`vftable'
+0x43A0B8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x43A0BD: add     esp, 4
 0x43A0C0: lea     ecx, [esp+50h+var_3C]; this
 0x43A0C4: call    ??1QueuedMagicItem@@UAE@XZ; QueuedMagicItem::~QueuedMagicItem(void)
@@ -74,3 +74,28 @@
 0x43A0ED: pop     ebx
 0x43A0EE: add     esp, 40h
 0x43A0F1: retn    4
+0x437860: push    esi
+0x437861: mov     esi, ecx
+0x437863: mov     eax, [esi+28h]
+0x437866: test    eax, eax
+0x437868: jz      short loc_437874
+0x43786A: add     eax, 0Ch
+0x43786D: push    eax; lpAddend
+0x43786E: call    ds:InterlockedDecrement
+0x437874: mov     eax, [esi+20h]
+0x437877: push    eax
+0x437878: mov     dword ptr [esi], offset ??_7QueuedFileEntry@@6B@; const QueuedFileEntry::`vftable'
+0x43787E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x437883: add     esp, 4
+0x437886: mov     ecx, esi; this
+0x437888: pop     esi
+0x437889: jmp     ??1QueuedMagicItem@@UAE@XZ; QueuedMagicItem::~QueuedMagicItem(void)
+0x9AC930: lea     ecx, [ebp-3Ch]
+0x9AC933: jmp     loc_437860
+0x9AC938: mov     edx, [esp+arg_4]
+0x9AC93C: lea     eax, [edx-40h]
+0x9AC93F: mov     ecx, [edx-44h]
+0x9AC942: xor     ecx, eax
+0x9AC944: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AC949: mov     eax, offset stru_AD95BC
+0x9AC94E: jmp     ___CxxFrameHandler3

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5E07D0",
-    "line": "push    ecx",
+    "line": "push    ecx; Applies only a negative Fatigue delta. Requires the actor AV path, reads Fatigue AV 0x0A, clamps damage so Fatigue cannot fall below zero, then calls the actor DamageAV float virtual. Nonnegative deltas and actors with no positive Fatigue are ignored.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x5E07D4",
-    "line": "fcomp   [esp+8+arg_0]",
+    "line": "fcomp   [esp+8+delta]",
     "mnemonic": "fcomp",
     "size": 4
   },
@@ -157,13 +157,13 @@
   },
   {
     "ea": "0x5E0812",
-    "line": "fld     [esp+8+arg_0]",
+    "line": "fld     [esp+8+delta]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x5E0816",
-    "line": "fst     [esp+8+arg_0]",
+    "line": "fst     [esp+8+delta]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x5E082B",
-    "line": "fstp    [esp+8+arg_0]",
+    "line": "fstp    [esp+8+delta]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x5E0835",
-    "line": "fld     [esp+8+arg_0]",
+    "line": "fld     [esp+8+delta]",
     "mnemonic": "fld",
     "size": 4
   },

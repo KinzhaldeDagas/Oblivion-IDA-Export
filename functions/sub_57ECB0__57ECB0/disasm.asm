@@ -10,7 +10,7 @@
 0x57ECCC: lea     edx, [esp+0Ch+var_4]
 0x57ECD0: push    edx
 0x57ECD1: call    eax
-0x57ECD3: mov     eax, dword ptr [esp+8+var_4]
+0x57ECD3: mov     eax, [esp+8+var_4]
 0x57ECD7: test    eax, eax
 0x57ECD9: jz      short loc_57ECFB
 0x57ECDB: push    edi
@@ -32,7 +32,7 @@
 0x57ECFE: or      word ptr [eax+18h], 1
 0x57ED03: mov     ecx, ds:0B333C4h; int
 0x57ED09: push    0; char
-0x57ED0B: call    sub_668D00
+0x57ED0B: call    ObservedActorRef_InitDefaultIdleVariants; Actor reference default idle variant initialization. Seeds default idle/animation choices during actor setup; observed from actor initialization path.
 0x57ED10: pop     esi
 0x57ED11: pop     ecx
 0x57ED12: retn

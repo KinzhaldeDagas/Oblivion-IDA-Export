@@ -1,19 +1,32 @@
 {
-  "callees_count": 37,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_5F48D0",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 14,
+  "callers_count": 5,
+  "chunks": [
+    [
+      "0x5F48D0",
+      "0x5F4ADA"
+    ]
+  ],
+  "chunks_sha256": "35cc49a36fc2c4fe27211fd8bcbf0bf5982b32514fd4f198f7a3ddd694ad47ff",
+  "comment_regular": "Player attack-animation admission uses Oblivion behavior and preserves a compiler-specific register/FPU ABI. Bow admission requires equipped AMMO and an AttackBow group with the required Start/Attach/Hold/Release/End note contract. Rejects a new bow attack while action 5 (AttackBowArrowAttached) remains at phase <=3; an accepted bow group commits action 4 (AttackBow). This path does not automatically reload: later attack input must admit another AttackBow sequence.",
+  "comment_repeatable": "Player attack-animation admission uses Oblivion behavior and preserves a compiler-specific register/FPU ABI. Bow admission requires equipped AMMO and an AttackBow group with the required Start/Attach/Hold/Release/End note contract. Rejects a new bow attack while action 5 (AttackBowArrowAttached) remains at phase <=3; an accepted bow group commits action 4 (AttackBow). This path does not automatically reload: later attack input must admit another AttackBow sequence.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "PlayerCharacter_TryStartAttackAnimGroup",
   "end_ea": "0x5F4ADA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_5F48D0",
+  "name": "PlayerCharacter_TryStartAttackAnimGroup",
   "segment": ".text",
   "sha256": "35cc49a36fc2c4fe27211fd8bcbf0bf5982b32514fd4f198f7a3ddd694ad47ff",
   "size": 522,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5F48D0",
-  "type": "char __userpurge@<al>(PlayerCharacter *@<ecx>, int@<ebx>, int@<ebp>, int@<edi>, double@<st1>, double@<st0>, int)",
+  "total_chunk_size": 522,
+  "type": "char __userpurge@<al>(PlayerCharacter *@<ecx>, BSAnimGroupSequence *@<ebx>, int@<ebp>, int@<edi>, double@<st1>, double@<st0>, unsigned int groupID)",
   "xrefs_from_count": 230,
   "xrefs_to_count": 5
 }

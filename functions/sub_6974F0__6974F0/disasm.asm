@@ -15,7 +15,7 @@
 0x697518: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x69751D: push    0; int
 0x69751F: push    eax; a1
-0x697520: call    TESForm_LookupByFormID
+0x697520: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x697525: add     esp, 4
 0x697528: push    eax; void *
 0x697529: call    OblivionDynamicCast
@@ -40,14 +40,14 @@
 0x697565: mov     ecx, esi
 0x697567: call    sub_696CE0
 0x69756C: mov     ecx, [esi+88h]
-0x697572: push    ecx
-0x697573: mov     ecx, esi
-0x697575: call    sub_4D7D10
-0x69757A: push    esi; Concurrency::details::SchedulerBase *
+0x697572: push    ecx; node
+0x697573: mov     ecx, esi; this
+0x697575: call    MobileObject_SetNiNode; Verified MobileObject node setter: invokes the reference's pre-node-update virtual, releases any old NiNode reference, stores the new node in TESObjectREFR+0x40, and AddRefs it. Used by both normal Set3D and the queued distant-tree attach path.
+0x69757A: push    esi; reference
 0x69757B: mov     ecx, esi; this
-0x69757D: call    TESObjectREFR_GetParentCell
-0x697582: mov     ecx, eax
-0x697584: call    sub_4D35D0
+0x69757D: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x697582: mov     ecx, eax; this
+0x697584: call    TESObjectCELL_AddReference; Verified: persistent-cell AddReference updates the WorldSpace coordinate/fallback persistent-reference index (+0x64) through TESWorldSpace_IndexReference. Ordinary cell additions do not index there. This routine does not populate the separate SubSpace spatial index at +0x60.
 0x697589: mov     edx, [esi+74h]
 0x69758C: mov     eax, [edx+84h]
 0x697592: test    eax, eax
@@ -61,7 +61,7 @@
 0x6975A9: mov     ecx, edi; this
 0x6975AB: call    sub_6B73E0
 0x6975B0: push    edi
-0x6975B1: call    FormHeapFree
+0x6975B1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6975B6: add     esp, 4
 0x6975B9: mov     dword ptr [esi+9Ch], 0
 0x6975C3: mov     eax, ds:0B33398h

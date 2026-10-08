@@ -1,19 +1,32 @@
 {
-  "callees_count": 34,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 12,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6EF2F0",
+      "0x6EF494"
+    ]
+  ],
+  "chunks_sha256": "17a729dcb1f269f4c6354d694233593944751dfea75fb9b755b63498142623f1",
+  "comment_regular": "Oblivion body: checked byte-vector insert-fill. Handles alias-safe in-place insertion and reallocation, uses 1.5x growth, and updates begin/end/capacity. Called by byte insert-one and resize; RT4.1 st_vector_byte corroborates the element role.",
+  "comment_repeatable": "Oblivion body: checked byte-vector insert-fill. Handles alias-safe in-place insertion and reallocation, uses 1.5x growth, and updates begin/end/capacity. Called by byte insert-one and resize; RT4.1 st_vector_byte corroborates the element role.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6EF2F0",
+  "display_name": "OB_stVectorByte_InsertFill_010201A0",
   "end_ea": "0x6EF494",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6EF2F0",
+  "name": "OB_stVectorByte_InsertFill_010201A0",
   "segment": ".text",
   "sha256": "17a729dcb1f269f4c6354d694233593944751dfea75fb9b755b63498142623f1",
   "size": 420,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6EF2F0",
-  "type": "char *__userpurge@<eax>(_DWORD *this@<ecx>, int@<edi>, int, char *Src, unsigned int, _BYTE *)",
+  "total_chunk_size": 420,
+  "type": "void __thiscall(OB_stVectorByte_010201A0 *this, OB_stVectorByteIterator_010201A0 position, unsigned int count, const unsigned __int8 *value)",
   "xrefs_from_count": 203,
   "xrefs_to_count": 2
 }

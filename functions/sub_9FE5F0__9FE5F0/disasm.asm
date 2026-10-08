@@ -1,4 +1,4 @@
-0x9FE5F0: mov     ecx, offset ActorProcessManager_ptr
+0x9FE5F0: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x9FE5F5: call    sub_67AF60
 0x9FE5FA: push    offset sub_A25DA0; void (__cdecl *)()
 0x9FE5FF: call    _atexit

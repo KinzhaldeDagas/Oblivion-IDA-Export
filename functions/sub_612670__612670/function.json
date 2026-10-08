@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x612670",
+      "0x61268B"
+    ]
+  ],
+  "chunks_sha256": "ef814f4e8e4dfad65bfb48ebb9453fbde26a6c01fc805a18a2ec7624b8ac9d68",
+  "comment_regular": "Returns true for native combat modes 0, 1, or 3; returns false for ranged weapon modes 2 and 4 and for values above 3.",
+  "comment_repeatable": "Returns true for native combat modes 0, 1, or 3; returns false for ranged weapon modes 2 and 4 and for values above 3.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_612670",
+  "display_name": "CombatMode_IsNonRangedMode",
   "end_ea": "0x61268B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_612670",
+  "name": "CombatMode_IsNonRangedMode",
   "segment": ".text",
   "sha256": "ef814f4e8e4dfad65bfb48ebb9453fbde26a6c01fc805a18a2ec7624b8ac9d68",
   "size": 27,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x612670",
-  "type": "BOOL __cdecl(unsigned int)",
+  "total_chunk_size": 27,
+  "type": "int __cdecl(unsigned int mode)",
   "xrefs_from_count": 12,
   "xrefs_to_count": 3
 }

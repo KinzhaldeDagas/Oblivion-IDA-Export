@@ -1,1 +1,1 @@
-TESSkill
+struct TESSkill;

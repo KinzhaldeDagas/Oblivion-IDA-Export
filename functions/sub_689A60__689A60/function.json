@@ -1,19 +1,36 @@
 {
-  "callees_count": 30,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_689A60",
+  "chunks": [
+    [
+      "0x689A60",
+      "0x689BAB"
+    ],
+    [
+      "0x9AFAA0",
+      "0x9AFAC6"
+    ]
+  ],
+  "chunks_sha256": "bfac0f5d9f328ffcdbd06aaa21acbc1793e4a0d4b42d914de1f1876091e2a813",
+  "comment_regular": "Verified copies low-path route entries into newly allocated TravelPathNode records. Each clone is set to kind 0 and stores the route TESObjectREFR*; these references remain non-owned.",
+  "comment_repeatable": "Verified copies low-path route entries into newly allocated TravelPathNode records. Each clone is set to kind 0 and stores the route TESObjectREFR*; these references remain non-owned.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "TravelPath_CopyRouteNodes",
   "end_ea": "0x689BAB",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_689A60",
+  "name": "TravelPath_CopyRouteNodes",
   "segment": ".text",
   "sha256": "d695a824f116d57ff5e0aa91dccfdc66e9b5103b7835d44b5684fca7947a2207",
   "size": 331,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x689A60",
-  "type": "int *__thiscall(int *this, int *)",
-  "xrefs_from_count": 142,
+  "total_chunk_size": 369,
+  "type": "void __thiscall(TravelPath *this, BSSimpleList_VoidPtr *sourceNodes)",
+  "xrefs_from_count": 156,
   "xrefs_to_count": 1
 }

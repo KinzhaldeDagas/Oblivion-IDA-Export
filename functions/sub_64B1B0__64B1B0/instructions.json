@@ -7,7 +7,7 @@
   },
   {
     "ea": "0x64B1B2",
-    "line": "mov     ecx, [esp+arg_0]",
+    "line": "mov     ecx, [esp+nodeIndex]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,13 +37,13 @@
   },
   {
     "ea": "0x64B1C3",
-    "line": "mov     [esp+arg_0], 7",
+    "line": "mov     [esp+nodeIndex], 7; nodeIndex",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x64B1CB",
-    "line": "jmp     sub_477EC0",
+    "line": "jmp     ActorSkinInfo_GetCachedNode; Returns ActorSkinInfo cached node at +8+nodeIndex*8. Index 6 is QuiverNode at +0x38, the native Arrow:0 clone source.",
     "mnemonic": "jmp",
     "size": 5
   }

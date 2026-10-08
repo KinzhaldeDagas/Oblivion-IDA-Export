@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7D2070",
-    "line": "push    ecx",
+    "line": "push    ecx; Traverse ShadowSceneLight+0xE8 object/geometry list and apply the cached caster-category mask. This is category filtering, not per-reference static-light admission.",
     "mnemonic": "push",
     "size": 1
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x7D20BF",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x7D20D6",
-    "line": "call    eax ; dword_B42EB4",
+    "line": "call    eax",
     "mnemonic": "call",
     "size": 2
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x7D20E2",
-    "line": "mov     ecx, [edi+68h]",
+    "line": "mov     ecx, [edi+68h]; Load the cached category assigned to this object-list entry.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -235,19 +235,19 @@
   },
   {
     "ea": "0x7D20EA",
-    "line": "shl     edx, cl",
+    "line": "shl     edx, cl; Form the category bit used by the native mask test.",
     "mnemonic": "shl",
     "size": 2
   },
   {
     "ea": "0x7D20EC",
-    "line": "test    ds:0B2C678h, edx",
+    "line": "test    ds:0B2C678h, edx; Exact consumer of g_ShadowCasterCategoryMask.",
     "mnemonic": "test",
     "size": 6
   },
   {
     "ea": "0x7D20F2",
-    "line": "jz      loc_7D21D3",
+    "line": "jz      loc_7D21D3; Reject object-list entry when its category bit is clear.",
     "mnemonic": "jz",
     "size": 6
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x7D214F",
-    "line": "call    sub_7D1320",
+    "line": "call    sub_7D1320; MoonSugarEffect decode: native shader-id selector for standard shader property families. Updates program/pass render-state choices and constants for hardcoded IDs before object render.",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x7D2162",
-    "line": "call    sub_7D1320",
+    "line": "call    sub_7D1320; MoonSugarEffect decode: native shader-id selector for standard shader property families. Updates program/pass render-state choices and constants for hardcoded IDs before object render.",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x7D219A",
-    "line": "jmp     short loc_7D21AB",
+    "line": "jmp     short loc_7D21AB; Object/category-list renderer selects retail pass 0x155 on this branch.",
     "mnemonic": "jmp",
     "size": 2
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x7D21AB",
-    "line": "call    sub_7FD260",
+    "line": "call    Lighting30Shader_SelectRenderPass; Object/category-list renderer selects retail pass 0x154 on this branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x7D21C7",
-    "line": "mov     ecx, [esp+14h+a2]",
+    "line": "mov     ecx, [esp+14h+a2]; Category/object-list rendering draws the pre-collected NiGeometry leaf directly.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x7D21CE",
-    "line": "call    NiAVObject_Render",
+    "line": "call    NiAVObject_Render; Retail visibility dispatch honors NiAVObject AppCulled flag bit 0 before OnVisible traversal.",
     "mnemonic": "call",
     "size": 5
   },

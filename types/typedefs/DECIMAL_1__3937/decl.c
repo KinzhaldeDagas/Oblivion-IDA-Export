@@ -1,1 +1,1 @@
-DECIMAL_1
+typedef tagDEC_1 DECIMAL_1;

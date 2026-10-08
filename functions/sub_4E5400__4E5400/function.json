@@ -1,19 +1,32 @@
 {
-  "callees_count": 15,
-  "callers_count": 6,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
+  "callers_count": 7,
+  "chunks": [
+    [
+      "0x4E5400",
+      "0x4E54CE"
+    ]
+  ],
+  "chunks_sha256": "fb2381bdd33b8e04f501596e9727ed25dc56e4d5f5a0f93d4e0988b80dedb543",
+  "comment_regular": "Verified cleanup of TESPathGrid.renderNode (+0x1C): resets point render helpers, detaches the generated root from shared path-grid visual state, updates the root node, releases it, and clears the field.",
+  "comment_repeatable": "Verified cleanup of TESPathGrid.renderNode (+0x1C): resets point render helpers, detaches the generated root from shared path-grid visual state, updates the root node, releases it, and clears the field.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_4E5400",
+  "display_name": "TESPathGrid_ClearRenderedPointGeometry",
   "end_ea": "0x4E54CE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4E5400",
+  "name": "TESPathGrid_ClearRenderedPointGeometry",
   "segment": ".text",
   "sha256": "fb2381bdd33b8e04f501596e9727ed25dc56e4d5f5a0f93d4e0988b80dedb543",
   "size": 206,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E5400",
-  "type": "void __thiscall(int this)",
+  "total_chunk_size": 206,
+  "type": "void __thiscall(TESPathGrid *this)",
   "xrefs_from_count": 94,
   "xrefs_to_count": 7
 }

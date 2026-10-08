@@ -3,66 +3,66 @@ int __thiscall sub_8A5C10(char *this, NiTArray_NiTexturingPropertyMap *a2)
   char *v2; // eax
   unsigned int end; // edi
   unsigned int capacity; // ecx
-  int *v5; // ebx
-  int *v6; // eax
+  NodeVoid *v5; // ebx
+  char *v6; // eax
   unsigned int v7; // edi
   unsigned int v8; // ecx
-  int *v9; // eax
+  char *v9; // eax
   unsigned int v10; // edi
   unsigned int v11; // ecx
-  int *v12; // eax
+  char *v12; // eax
   unsigned int v13; // edi
-  int *v14; // eax
+  char *v14; // eax
   unsigned int v15; // edi
-  int *v16; // eax
+  char *v16; // eax
   unsigned int v17; // edi
-  int *v18; // eax
+  char *v18; // eax
   unsigned int v19; // edi
-  int *v20; // eax
+  char *v20; // eax
   unsigned int v21; // edi
-  int *v22; // eax
+  char *v22; // eax
   unsigned int v23; // edi
-  int *v24; // eax
+  char *v24; // eax
   unsigned int v25; // edi
   unsigned int v26; // ecx
-  int *v27; // eax
+  char *v27; // eax
   unsigned int v28; // edi
   unsigned int v29; // ecx
-  int *v30; // eax
+  char *v30; // eax
   unsigned int v31; // edi
-  int *v32; // eax
+  char *v32; // eax
   unsigned int v33; // edi
   unsigned int v34; // edx
-  int *v35; // eax
+  char *v35; // eax
   unsigned int v36; // edi
   unsigned int v37; // edx
   const char *v38; // eax
-  int *v39; // eax
+  char *v39; // eax
   unsigned int v40; // edi
   unsigned int v41; // edx
   int v42; // eax
-  int *v43; // eax
+  char *v43; // eax
   unsigned int v44; // edi
   unsigned int v45; // edx
-  int *v46; // ebx
-  int *v47; // eax
+  NodeVoid *v46; // ebx
+  void **DataAddRef; // eax
   bool v48; // zf
-  int *v49; // edi
-  int v50; // edi
-  void (__thiscall ***v51)(_DWORD, int); // ebx
+  void (__thiscall ***v49)(void *, int); // edi
+  void *v50; // edi
+  void (__thiscall ***v51)(void *, int); // ebx
   const char **v52; // eax
   char *v53; // eax
   unsigned int v54; // edi
   char *v55; // ebx
-  int *v56; // edx
+  NodeVoid *v56; // edx
   int result; // eax
   int v58; // ecx
-  int *v59; // [esp+18h] [ebp-1B0h] BYREF
+  void *outData; // [esp+18h] [ebp-1B0h] BYREF
   char v60; // [esp+1Fh] [ebp-1A9h]
-  int *i; // [esp+20h] [ebp-1A8h] BYREF
+  NodeVoid *i; // [esp+20h] [ebp-1A8h] BYREF
   int v62; // [esp+24h] [ebp-1A4h]
   float v63[3]; // [esp+28h] [ebp-1A0h] BYREF
-  int v64; // [esp+34h] [ebp-194h] BYREF
+  void *v64; // [esp+34h] [ebp-194h] BYREF
   float v65[4]; // [esp+38h] [ebp-190h] BYREF
   float v66[5]; // [esp+48h] [ebp-180h] BYREF
   int v67; // [esp+5Ch] [ebp-16Ch]
@@ -86,193 +86,193 @@ int __thiscall sub_8A5C10(char *this, NiTArray_NiTexturingPropertyMap *a2)
   char v85[132]; // [esp+130h] [ebp-98h] BYREF
   unsigned int v86; // [esp+1C4h] [ebp-4h]
 
-  v59 = (int *)this;
-  v62 = 0;
-  sub_8B0080(this, (unsigned __int16 *)a2);
-  v2 = TESOutput_PrintString(*(char **)dword_BA7D84);
-  end = a2->end;
-  capacity = a2->capacity;
-  i = (int *)v2;
-  if ( end >= capacity )
-    NiTArray_SetSize((unsigned __int16 *)a2, end + a2->growSize);
-  NiTArray_SetAt(a2, end, &i);
-  sub_8A5790(v66);
-  v86 = 0;
-  v5 = v59;
-  sub_8A2DE0(v59, (int)v66);
-  sub_43F3E0(v63, &v68);
-  v65[1] = v69;
-  v65[2] = v70;
-  v65[3] = v71;
-  v65[0] = v72;
-  v6 = (int *)sub_707280(v63, "Position");
-  v7 = a2->end;
-  v8 = a2->capacity;
-  v59 = v6;
-  if ( v7 >= v8 )
-    NiTArray_SetSize((unsigned __int16 *)a2, v7 + a2->growSize);
-  NiTArray_SetAt(a2, v7, &v59);
-  v9 = (int *)sub_7153C0(v65, "Rotation");
-  v10 = a2->end;
-  v11 = a2->capacity;
-  v59 = v9;
-  if ( v10 >= v11 )
-    NiTArray_SetSize((unsigned __int16 *)a2, v10 + a2->growSize);
-  NiTArray_SetAt(a2, v10, &v59);
-  sub_43F3E0(v63, &v75);
-  v12 = (int *)sub_707280(v63, (char *)&off_A97548);
-  v13 = a2->end;
-  v59 = v12;
-  if ( v13 >= a2->capacity )
-    NiTArray_SetSize((unsigned __int16 *)a2, v13 + a2->growSize);
-  NiTArray_SetAt(a2, v13, &v59);
-  v14 = (int *)TESOutput_PrintLabeledFloat("MASS", v76);
-  v15 = a2->end;
-  v59 = v14;
-  if ( v15 >= a2->capacity )
-    NiTArray_SetSize((unsigned __int16 *)a2, v15 + a2->growSize);
-  NiTArray_SetAt(a2, v15, &v59);
-  v16 = (int *)TESOutput_PrintLabeledFloat("LINDAMP", v77);
-  v17 = a2->end;
-  v59 = v16;
-  if ( v17 >= a2->capacity )
-    NiTArray_SetSize((unsigned __int16 *)a2, v17 + a2->growSize);
-  NiTArray_SetAt(a2, v17, &v59);
-  v18 = (int *)TESOutput_PrintLabeledFloat("ANGDAMP", v78);
-  v19 = a2->end;
-  v59 = v18;
-  if ( v19 >= a2->capacity )
-    NiTArray_SetSize((unsigned __int16 *)a2, v19 + a2->growSize);
-  NiTArray_SetAt(a2, v19, &v59);
-  v20 = (int *)TESOutput_PrintLabeledFloat("FRICTION", v79);
-  v21 = a2->end;
-  v59 = v20;
-  if ( v21 >= a2->capacity )
-    NiTArray_SetSize((unsigned __int16 *)a2, v21 + a2->growSize);
-  NiTArray_SetAt(a2, v21, &v59);
-  v22 = (int *)TESOutput_PrintLabeledFloat("REST", v80);
-  v23 = a2->end;
-  v59 = v22;
-  if ( v23 >= a2->capacity )
-    NiTArray_SetSize((unsigned __int16 *)a2, v23 + a2->growSize);
-  NiTArray_SetAt(a2, v23, &v59);
-  sub_8A5280((unsigned __int16 *)a2, (char *)v84);
-  v24 = (int *)TESOutput_PrintLabeledFloat("MAXLINVEL", v81);
-  v25 = a2->end;
-  v26 = a2->capacity;
-  v59 = v24;
-  if ( v25 >= v26 )
-    NiTArray_SetSize((unsigned __int16 *)a2, v25 + a2->growSize);
-  NiTArray_SetAt(a2, v25, &v59);
-  v27 = (int *)TESOutput_PrintLabeledFloat("MAXANGVEL", v82);
-  v28 = a2->end;
-  v29 = a2->capacity;
-  v59 = v27;
-  if ( v28 >= v29 )
-    NiTArray_SetSize((unsigned __int16 *)a2, v28 + a2->growSize);
-  NiTArray_SetAt(a2, v28, &v59);
-  sub_43F3E0(v63, &v73);
-  v30 = (int *)sub_707280(v63, "LinVel");
-  v31 = a2->end;
-  v59 = v30;
-  if ( v31 >= a2->capacity )
-    NiTArray_SetSize((unsigned __int16 *)a2, v31 + a2->growSize);
-  NiTArray_SetAt(a2, v31, &v59);
-  sub_43F3E0(v63, v74);
-  v32 = (int *)sub_707280(v63, "AngVel");
-  v33 = a2->end;
-  v34 = a2->capacity;
-  v59 = v32;
-  if ( v33 >= v34 )
-    NiTArray_SetSize((unsigned __int16 *)a2, v33 + a2->growSize);
-  NiTArray_SetAt(a2, v33, &v59);
-  v35 = (int *)TESOutput_PrintLabeledFloat("PENDEPTH", v83);
-  v36 = a2->end;
-  v37 = a2->capacity;
-  v59 = v35;
-  if ( v36 >= v37 )
-    NiTArray_SetSize((unsigned __int16 *)a2, v36 + a2->growSize);
-  NiTArray_SetAt(a2, v36, &v59);
-  v38 = sub_8A3200((char *)v66);
-  v39 = (int *)TESOutput_PrintLabeledString("QUALITYTYPE", v38);
-  v40 = a2->end;
-  v41 = a2->capacity;
-  v59 = v39;
-  if ( v40 >= v41 )
-    NiTArray_SetSize((unsigned __int16 *)a2, v40 + a2->growSize);
-  NiTArray_SetAt(a2, v40, &v59);
-  v42 = sub_8A4740(v5);
-  v43 = (int *)TESOutput_PrintLabeledUnsignedInt("ACTCONCOUNT", v42);
-  v44 = a2->end;
-  v45 = a2->capacity;
-  v59 = v43;
-  if ( v44 >= v45 )
-    NiTArray_SetSize((unsigned __int16 *)a2, v44 + a2->growSize);
-  NiTArray_SetAt(a2, v44, &v59);
-  v46 = v5 + 4;
+  outData = this; /*0x8a5c56*/
+  v62 = 0; /*0x8a5c5a*/
+  sub_8B0080(this, (unsigned __int16 *)a2); /*0x8a5c5e*/
+  v2 = TESOutput_PrintString((char *)stru_BA7D84.name); /*0x8a5c69*/
+  end = a2->end; /*0x8a5c6e*/
+  capacity = a2->capacity; /*0x8a5c72*/
+  i = (NodeVoid *)v2; /*0x8a5c7b*/
+  if ( end >= capacity ) /*0x8a5c7f*/
+    NiTArray_SetSize((unsigned __int16 *)a2, end + a2->growSize); /*0x8a5c8a*/
+  NiTArray_SetAt(a2, end, &i); /*0x8a5c97*/
+  sub_8A5790(v66); /*0x8a5ca0*/
+  v86 = 0; /*0x8a5ca5*/
+  v5 = (NodeVoid *)outData; /*0x8a5cac*/
+  sub_8A2DE0((int *)outData, (int)v66); /*0x8a5cb7*/
+  HavokVector_ToWorldVector(v63, &v68); /*0x8a5cc6*/
+  v65[1] = v69; /*0x8a5cd2*/
+  v65[2] = v70; /*0x8a5ce5*/
+  v65[3] = v71; /*0x8a5cf4*/
+  v65[0] = v72; /*0x8a5cff*/
+  v6 = sub_707280(v63, "Position"); /*0x8a5d03*/
+  v7 = a2->end; /*0x8a5d08*/
+  v8 = a2->capacity; /*0x8a5d0c*/
+  outData = v6; /*0x8a5d12*/
+  if ( v7 >= v8 ) /*0x8a5d16*/
+    NiTArray_SetSize((unsigned __int16 *)a2, v7 + a2->growSize); /*0x8a5d21*/
+  NiTArray_SetAt(a2, v7, &outData); /*0x8a5d2e*/
+  v9 = sub_7153C0(v65, "Rotation"); /*0x8a5d3c*/
+  v10 = a2->end; /*0x8a5d41*/
+  v11 = a2->capacity; /*0x8a5d45*/
+  outData = v9; /*0x8a5d4b*/
+  if ( v10 >= v11 ) /*0x8a5d4f*/
+    NiTArray_SetSize((unsigned __int16 *)a2, v10 + a2->growSize); /*0x8a5d5a*/
+  NiTArray_SetAt(a2, v10, &outData); /*0x8a5d67*/
+  HavokVector_ToWorldVector(v63, &v75); /*0x8a5d79*/
+  v12 = sub_707280(v63, (char *)&off_A97548); /*0x8a5d8a*/
+  v13 = a2->end; /*0x8a5d8f*/
+  outData = v12; /*0x8a5d93*/
+  if ( v13 >= a2->capacity ) /*0x8a5d9d*/
+    NiTArray_SetSize((unsigned __int16 *)a2, v13 + a2->growSize); /*0x8a5da8*/
+  NiTArray_SetAt(a2, v13, &outData); /*0x8a5db5*/
+  v14 = TESOutput_PrintLabeledFloat("MASS", v76); /*0x8a5dca*/
+  v15 = a2->end; /*0x8a5dcf*/
+  outData = v14; /*0x8a5dd3*/
+  if ( v15 >= a2->capacity ) /*0x8a5de0*/
+    NiTArray_SetSize((unsigned __int16 *)a2, v15 + a2->growSize); /*0x8a5deb*/
+  NiTArray_SetAt(a2, v15, &outData); /*0x8a5df8*/
+  v16 = TESOutput_PrintLabeledFloat("LINDAMP", v77); /*0x8a5e0d*/
+  v17 = a2->end; /*0x8a5e12*/
+  outData = v16; /*0x8a5e16*/
+  if ( v17 >= a2->capacity ) /*0x8a5e23*/
+    NiTArray_SetSize((unsigned __int16 *)a2, v17 + a2->growSize); /*0x8a5e2e*/
+  NiTArray_SetAt(a2, v17, &outData); /*0x8a5e3b*/
+  v18 = TESOutput_PrintLabeledFloat("ANGDAMP", v78); /*0x8a5e50*/
+  v19 = a2->end; /*0x8a5e55*/
+  outData = v18; /*0x8a5e59*/
+  if ( v19 >= a2->capacity ) /*0x8a5e66*/
+    NiTArray_SetSize((unsigned __int16 *)a2, v19 + a2->growSize); /*0x8a5e71*/
+  NiTArray_SetAt(a2, v19, &outData); /*0x8a5e7e*/
+  v20 = TESOutput_PrintLabeledFloat("FRICTION", v79); /*0x8a5e93*/
+  v21 = a2->end; /*0x8a5e98*/
+  outData = v20; /*0x8a5e9c*/
+  if ( v21 >= a2->capacity ) /*0x8a5ea9*/
+    NiTArray_SetSize((unsigned __int16 *)a2, v21 + a2->growSize); /*0x8a5eb4*/
+  NiTArray_SetAt(a2, v21, &outData); /*0x8a5ec1*/
+  v22 = TESOutput_PrintLabeledFloat("REST", v80); /*0x8a5ed6*/
+  v23 = a2->end; /*0x8a5edb*/
+  outData = v22; /*0x8a5edf*/
+  if ( v23 >= a2->capacity ) /*0x8a5eec*/
+    NiTArray_SetSize((unsigned __int16 *)a2, v23 + a2->growSize); /*0x8a5ef7*/
+  NiTArray_SetAt(a2, v23, &outData); /*0x8a5f04*/
+  sub_8A5280((unsigned __int16 *)a2, (char *)v84); /*0x8a5f13*/
+  v24 = TESOutput_PrintLabeledFloat("MAXLINVEL", v81); /*0x8a5f2a*/
+  v25 = a2->end; /*0x8a5f2f*/
+  v26 = a2->capacity; /*0x8a5f33*/
+  outData = v24; /*0x8a5f3c*/
+  if ( v25 >= v26 ) /*0x8a5f40*/
+    NiTArray_SetSize((unsigned __int16 *)a2, v25 + a2->growSize); /*0x8a5f4b*/
+  NiTArray_SetAt(a2, v25, &outData); /*0x8a5f58*/
+  v27 = TESOutput_PrintLabeledFloat("MAXANGVEL", v82); /*0x8a5f6d*/
+  v28 = a2->end; /*0x8a5f72*/
+  v29 = a2->capacity; /*0x8a5f76*/
+  outData = v27; /*0x8a5f7f*/
+  if ( v28 >= v29 ) /*0x8a5f83*/
+    NiTArray_SetSize((unsigned __int16 *)a2, v28 + a2->growSize); /*0x8a5f8e*/
+  NiTArray_SetAt(a2, v28, &outData); /*0x8a5f9b*/
+  HavokVector_ToWorldVector(v63, &v73); /*0x8a5fad*/
+  v30 = sub_707280(v63, "LinVel"); /*0x8a5fbe*/
+  v31 = a2->end; /*0x8a5fc3*/
+  outData = v30; /*0x8a5fc7*/
+  if ( v31 >= a2->capacity ) /*0x8a5fd1*/
+    NiTArray_SetSize((unsigned __int16 *)a2, v31 + a2->growSize); /*0x8a5fdc*/
+  NiTArray_SetAt(a2, v31, &outData); /*0x8a5fe9*/
+  HavokVector_ToWorldVector(v63, v74); /*0x8a5ffb*/
+  v32 = sub_707280(v63, "AngVel"); /*0x8a600c*/
+  v33 = a2->end; /*0x8a6011*/
+  v34 = a2->capacity; /*0x8a6015*/
+  outData = v32; /*0x8a601b*/
+  if ( v33 >= v34 ) /*0x8a601f*/
+    NiTArray_SetSize((unsigned __int16 *)a2, v33 + a2->growSize); /*0x8a602a*/
+  NiTArray_SetAt(a2, v33, &outData); /*0x8a6037*/
+  v35 = TESOutput_PrintLabeledFloat("PENDEPTH", v83); /*0x8a604c*/
+  v36 = a2->end; /*0x8a6051*/
+  v37 = a2->capacity; /*0x8a6055*/
+  outData = v35; /*0x8a605e*/
+  if ( v36 >= v37 ) /*0x8a6062*/
+    NiTArray_SetSize((unsigned __int16 *)a2, v36 + a2->growSize); /*0x8a606d*/
+  NiTArray_SetAt(a2, v36, &outData); /*0x8a607a*/
+  sub_8A3200((char *)v66); /*0x8a6083*/
+  v39 = TESOutput_PrintLabeledString("QUALITYTYPE", v38); /*0x8a608e*/
+  v40 = a2->end; /*0x8a6093*/
+  v41 = a2->capacity; /*0x8a6097*/
+  outData = v39; /*0x8a60a0*/
+  if ( v40 >= v41 ) /*0x8a60a4*/
+    NiTArray_SetSize((unsigned __int16 *)a2, v40 + a2->growSize); /*0x8a60af*/
+  NiTArray_SetAt(a2, v40, &outData); /*0x8a60bc*/
+  v42 = sub_8A4740(v5); /*0x8a60c3*/
+  v43 = TESOutput_PrintLabeledUnsignedInt("ACTCONCOUNT", v42); /*0x8a60ce*/
+  v44 = a2->end; /*0x8a60d3*/
+  v45 = a2->capacity; /*0x8a60d7*/
+  outData = v43; /*0x8a60e0*/
+  if ( v44 >= v45 ) /*0x8a60e4*/
+    NiTArray_SetSize((unsigned __int16 *)a2, v44 + a2->growSize); /*0x8a60ef*/
+  NiTArray_SetAt(a2, v44, &outData); /*0x8a60fc*/
+  v46 = v5 + 2; /*0x8a6101*/
   for ( i = v46; ; v46 = i )
   {
-    if ( !v46 || (v47 = sub_677C70(v46, (int *)&v59), v62 |= 1u, v48 = *v47 == 0, v60 = 1, v48) )
-      v60 = 0;
-    if ( (v62 & 1) != 0 )
+    if ( !v46 || (DataAddRef = NodeVoid_GetDataAddRef(v46, &outData), v62 |= 1u, v48 = *DataAddRef == 0, v60 = 1, v48) ) /*0x8a6125*/
+      v60 = 0; /*0x8a6127*/
+    if ( (v62 & 1) != 0 ) /*0x8a6131*/
     {
-      v49 = v59;
-      v62 &= ~1u;
-      if ( v59 )
+      v49 = (void (__thiscall ***)(void *, int))outData; /*0x8a6133*/
+      v62 &= ~1u; /*0x8a6137*/
+      if ( outData ) /*0x8a613e*/
       {
-        if ( !InterlockedDecrement(v59 + 1) )
+        if ( !InterlockedDecrement((volatile LONG *)outData + 1) ) /*0x8a6144*/
         {
-          if ( v49 )
-            (*(void (__thiscall **)(int *, int))*v49)(v49, 1);
+          if ( v49 ) /*0x8a6150*/
+            (**v49)(v49, 1); /*0x8a615a*/
         }
       }
     }
-    if ( !v60 )
-      break;
-    v50 = *sub_677C70(v46, &v64);
-    if ( v64 )
+    if ( !v60 ) /*0x8a6161*/
+      break; /*0x8a6161*/
+    v50 = *NodeVoid_GetDataAddRef(v46, &v64); /*0x8a6173*/
+    if ( v64 ) /*0x8a617b*/
     {
-      v51 = (void (__thiscall ***)(_DWORD, int))v64;
-      if ( !InterlockedDecrement((volatile LONG *)(v64 + 4)) )
-        (**v51)(v51, 1);
+      v51 = (void (__thiscall ***)(void *, int))v64; /*0x8a617d*/
+      if ( !InterlockedDecrement((volatile LONG *)v64 + 1) ) /*0x8a6183*/
+        (**v51)(v51, 1); /*0x8a6199*/
     }
-    v52 = (const char **)(*(int (__thiscall **)(int))(*(_DWORD *)v50 + 4))(v50);
+    v52 = (const char **)(*(int (__thiscall **)(void *))(*(_DWORD *)v50 + 4))(v50); /*0x8a61a2*/
     _sprintf(v85, "%s: 0x%8X", *v52, v50);
-    v53 = TESOutput_PrintLabeledString("ACTCON", v85);
-    v54 = a2->end;
-    v55 = v53;
-    if ( v54 >= a2->capacity )
-      NiTArray_SetSize((unsigned __int16 *)a2, v54 + a2->growSize);
-    if ( v54 < a2->end )
+    v53 = TESOutput_PrintLabeledString("ACTCON", v85); /*0x8a61c7*/
+    v54 = a2->end; /*0x8a61cc*/
+    v55 = v53; /*0x8a61d9*/
+    if ( v54 >= a2->capacity ) /*0x8a61db*/
+      NiTArray_SetSize((unsigned __int16 *)a2, v54 + a2->growSize); /*0x8a61e6*/
+    if ( v54 < a2->end ) /*0x8a61f1*/
     {
-      if ( v55 )
+      if ( v55 ) /*0x8a6207*/
       {
-        if ( !*((_DWORD *)&a2->data->vtbl + v54) )
-          ++a2->numObjs;
+        if ( !*((_DWORD *)&a2->data->vtbl + v54) ) /*0x8a620c*/
+          ++a2->numObjs; /*0x8a6212*/
       }
-      else if ( *((_DWORD *)&a2->data->vtbl + v54) )
+      else if ( *((_DWORD *)&a2->data->vtbl + v54) ) /*0x8a621c*/
       {
-        --a2->numObjs;
+        --a2->numObjs; /*0x8a6222*/
       }
     }
     else
     {
-      a2->end = v54 + 1;
-      if ( v55 )
-        ++a2->numObjs;
+      a2->end = v54 + 1; /*0x8a61f8*/
+      if ( v55 ) /*0x8a61fc*/
+        ++a2->numObjs; /*0x8a61fe*/
     }
-    v56 = i;
-    *((_DWORD *)&a2->data->vtbl + v54) = v55;
-    i = (int *)v56[1];
+    v56 = i; /*0x8a622b*/
+    *((_DWORD *)&a2->data->vtbl + v54) = v55; /*0x8a622f*/
+    i = v56->next; /*0x8a6235*/
   }
-  result = v67;
-  v86 = 0xFFFFFFFF;
-  if ( v67 >= 0 )
+  result = v67; /*0x8a6240*/
+  v86 = 0xFFFFFFFF; /*0x8a6246*/
+  if ( v67 >= 0 ) /*0x8a6251*/
   {
-    v58 = *(_DWORD *)(*((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + TlsIndex) + 0x19C);
-    if ( !v58 )
-      v58 = dword_BA7D9C;
-    return sub_8A75D0(v58, (_DWORD *)LODWORD(v66[3]), 8 * v67, 0x14);
+    v58 = *(_DWORD *)(*((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + MEMORY[0xBA9DE4]) + 0x19C); /*0x8a6263*/
+    if ( !v58 ) /*0x8a626b*/
+      v58 = unk_BA7D9C; /*0x8a626d*/
+    return sub_8A75D0(v58, (_DWORD *)LODWORD(v66[3]), 8 * v67, 0x14); /*0x8a6286*/
   }
-  return result;
+  return result; /*0x8a628b*/
 }

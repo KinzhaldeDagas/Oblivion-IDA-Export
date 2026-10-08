@@ -1,19 +1,32 @@
 {
-  "callees_count": 19,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6BCF70",
+      "0x6BD1E6"
+    ]
+  ],
+  "chunks_sha256": "df6bb0932a72b741f91a04ee5e25be6a813f61dcff2f7adad2546178b8f87005",
+  "comment_regular": "Oblivion quaternion rotation key-track evaluator. One key/sentinel time normally returns key quaternion at +4; interpolation type 4 uses its dedicated evaluator even for that case. Otherwise performs cursor-assisted timestamp bracketing, normalized segment-time evaluation through the rotation dispatch table, and writes back the lower-key cursor.",
+  "comment_repeatable": "Oblivion quaternion rotation key-track evaluator. One key/sentinel time normally returns key quaternion at +4; interpolation type 4 uses its dedicated evaluator even for that case. Otherwise performs cursor-assisted timestamp bracketing, normalized segment-time evaluation through the rotation dispatch table, and writes back the lower-key cursor.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6BCF70",
+  "display_name": "NiRotKey_EvaluateTrack",
   "end_ea": "0x6BD1E6",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6BCF70",
+  "name": "NiRotKey_EvaluateTrack",
   "segment": ".text",
   "sha256": "df6bb0932a72b741f91a04ee5e25be6a813f61dcff2f7adad2546178b8f87005",
   "size": 630,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6BCF70",
-  "type": "_DWORD *__cdecl(_DWORD *, float, int, int, int, int *, unsigned __int8)",
+  "total_chunk_size": 630,
+  "type": "_DWORD *__cdecl(_DWORD *, float, int, int, int, int *, char)",
   "xrefs_from_count": 227,
   "xrefs_to_count": 3
 }

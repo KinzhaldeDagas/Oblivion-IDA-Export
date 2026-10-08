@@ -5,7 +5,6 @@
 0x7726C7: test    esi, esi
 0x7726C9: jz      short loc_7726ED
 0x7726CB: jmp     short loc_7726D0
-0x7726CD: align 10h
 0x7726D0: mov     edx, [esi+4]
 0x7726D3: mov     ecx, ds:0B427A4h
 0x7726D9: mov     eax, [ecx]

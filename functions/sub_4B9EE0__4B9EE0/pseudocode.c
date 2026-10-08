@@ -1,4 +1,5 @@
-double __thiscall sub_4B9EE0(float *this)
+// Verified: getter for the TESObjectTREE maximum leaf/bud angle. BSTreeModel_ApplyBaseObject uses it as the upper bound passed to CSpeedTreeRT_SetMaximumBudAngle; Fallout's named homolog is GetMaximumLeafAngle.
+float __thiscall TESObjectTREE_GetMaximumLeafAngle(TESObjectTREE_OblivionLayout_080_NiTArrayVerified *this)
 {
-  return *(this + 0x18);
+  return this->maximumLeafAngle; /*0x4b9ee3*/
 }

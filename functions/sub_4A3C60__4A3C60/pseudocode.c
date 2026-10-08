@@ -1,33 +1,33 @@
-LONG sub_4A3C60()
+NiObjectNET *sub_4A3C60()
 {
-  LONG result; // eax
+  NiObjectNET *result; // eax
   LONG (__stdcall *v1)(volatile LONG *); // edi
-  int (__thiscall ***v2)(_DWORD, int); // esi
+  NiObjectNET *v2; // esi
   int v3; // esi
 
-  result = dword_B35414;
-  v1 = InterlockedDecrement;
-  if ( dword_B35414 )
+  result = g_FallbackCanopyShadowTextureProperty; /*0x4a3c60*/
+  v1 = InterlockedDecrement; /*0x4a3c69*/
+  if ( g_FallbackCanopyShadowTextureProperty ) /*0x4a3c60*/
   {
-    v2 = (int (__thiscall ***)(_DWORD, int))dword_B35414;
-    result = v1((volatile LONG *)(result + 4));
-    if ( !result )
+    v2 = g_FallbackCanopyShadowTextureProperty; /*0x4a3c71*/
+    result = (NiObjectNET *)v1((volatile LONG *)&result->members); /*0x4a3c77*/
+    if ( !result ) /*0x4a3c7b*/
     {
-      if ( v2 )
-        result = (**v2)(v2, 1);
+      if ( v2 ) /*0x4a3c7f*/
+        result = (NiObjectNET *)(*(int (__thiscall **)(NiObjectNET *, int))v2->vtbl)(v2, 1); /*0x4a3c89*/
     }
-    dword_B35414 = 0;
+    g_FallbackCanopyShadowTextureProperty = 0; /*0x4a3c8b*/
   }
-  v3 = dword_B35418;
-  if ( dword_B35418 )
+  v3 = unk_B35418; /*0x4a3c95*/
+  if ( unk_B35418 ) /*0x4a3c95*/
   {
-    result = v1((volatile LONG *)(v3 + 4));
-    if ( !result )
+    result = (NiObjectNET *)v1((volatile LONG *)(v3 + 4)); /*0x4a3ca3*/
+    if ( !result ) /*0x4a3ca7*/
     {
-      if ( v3 )
-        result = (**(int (__thiscall ***)(int, int))v3)(v3, 1);
+      if ( v3 ) /*0x4a3cab*/
+        result = (NiObjectNET *)(**(int (__thiscall ***)(int, int))v3)(v3, 1); /*0x4a3cb5*/
     }
-    dword_B35418 = 0;
+    unk_B35418 = 0; /*0x4a3cb7*/
   }
-  return result;
+  return result; /*0x4a3cc1*/
 }

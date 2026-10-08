@@ -14,8 +14,8 @@ int __cdecl sub_95DAB0(
 {
   int v12; // eax
 
-  v12 = (*(int (__thiscall **)(int))(*(_DWORD *)a2 + 0xC))(a2);
-  return (*(int (__cdecl **)(_DWORD, int, int, int, int, int, int, int, int, int, int, int))(dword_BA9AAC + 4 * v12))(
+  v12 = (*(int (__thiscall **)(int))(*(_DWORD *)a2 + 0xC))(a2); /*0x95dabc*/
+  return (*(int (__cdecl **)(_DWORD, int, int, int, int, int, int, int, int, int, int, int))(unk_BA9AAC + 4 * v12))( /*0x95db07*/
            LODWORD(a1),
            a2,
            a3,

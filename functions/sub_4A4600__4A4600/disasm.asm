@@ -1,4 +1,4 @@
-0x4A4600: push    0FFFFFFFFh
+0x4A4600: push    0FFFFFFFFh; Verified (Oblivion): supported factory IDs are 3 Weather, 4 Map, 5 Landscape, 6 Grass, 7 Sound; allocation sizes confirmed in this switch. Do not import Fallout's extra ID8.
 0x4A4602: push    offset SEH_4A4600
 0x4A4607: mov     eax, large fs:0
 0x4A460D: push    eax
@@ -7,7 +7,7 @@
 0x4A4615: push    eax
 0x4A4616: lea     eax, [esp+10h+var_C]
 0x4A461A: mov     large fs:0, eax
-0x4A4620: mov     ecx, [esp+10h+arg_0]
+0x4A4620: mov     ecx, [esp+10h+dataID]
 0x4A4624: add     ecx, 0FFFFFFFDh; switch 5 cases
 0x4A4627: xor     eax, eax
 0x4A4629: cmp     ecx, 4
@@ -16,12 +16,12 @@
 0x4A4639: push    10h; jumptable 004A4632 case 3
 0x4A463B: call    FormHeapAlloc
 0x4A4640: add     esp, 4
-0x4A4643: mov     [esp+10h+arg_0], eax
+0x4A4643: mov     [esp+10h+dataID], eax
 0x4A4647: test    eax, eax
 0x4A4649: mov     [esp+10h+var_4], 0
 0x4A4651: jz      loc_4A4740
-0x4A4657: mov     ecx, eax
-0x4A4659: call    sub_4A5610
+0x4A4657: mov     ecx, eax; self
+0x4A4659: call    TESRegionDataWeather_ctor
 0x4A465E: mov     ecx, [esp+10h+var_C]
 0x4A4662: mov     large fs:0, ecx
 0x4A4669: pop     ecx
@@ -30,12 +30,12 @@
 0x4A4670: push    10h; jumptable 004A4632 case 4
 0x4A4672: call    FormHeapAlloc
 0x4A4677: add     esp, 4
-0x4A467A: mov     [esp+10h+arg_0], eax
+0x4A467A: mov     [esp+10h+dataID], eax
 0x4A467E: test    eax, eax
 0x4A4680: mov     [esp+10h+var_4], 1
 0x4A4688: jz      loc_4A4740
-0x4A468E: mov     ecx, eax
-0x4A4690: call    sub_4A4A80
+0x4A468E: mov     ecx, eax; self
+0x4A4690: call    TESRegionDataMap_ctor; Verified: Map region data constructor initializes base and assigns Map vtable; mapName defaults to 'Default Region Name'.
 0x4A4695: mov     ecx, [esp+10h+var_C]
 0x4A4699: mov     large fs:0, ecx
 0x4A46A0: pop     ecx
@@ -44,12 +44,12 @@
 0x4A46A7: push    0Ch; jumptable 004A4632 case 5
 0x4A46A9: call    FormHeapAlloc
 0x4A46AE: add     esp, 4
-0x4A46B1: mov     [esp+10h+arg_0], eax
+0x4A46B1: mov     [esp+10h+dataID], eax
 0x4A46B5: test    eax, eax
 0x4A46B7: mov     [esp+10h+var_4], 2
 0x4A46BF: jz      short loc_4A4740
-0x4A46C1: mov     ecx, eax
-0x4A46C3: call    sub_4A3CD0
+0x4A46C1: mov     ecx, eax; self
+0x4A46C3: call    TESRegionDataLandscape_ctor
 0x4A46C8: mov     ecx, [esp+10h+var_C]
 0x4A46CC: mov     large fs:0, ecx
 0x4A46D3: pop     ecx
@@ -58,12 +58,12 @@
 0x4A46DA: push    0Ch; jumptable 004A4632 case 6
 0x4A46DC: call    FormHeapAlloc
 0x4A46E1: add     esp, 4
-0x4A46E4: mov     [esp+10h+arg_0], eax
+0x4A46E4: mov     [esp+10h+dataID], eax
 0x4A46E8: test    eax, eax
 0x4A46EA: mov     [esp+10h+var_4], 3
 0x4A46F2: jz      short loc_4A4740
-0x4A46F4: mov     ecx, eax
-0x4A46F6: call    sub_4A35E0
+0x4A46F4: mov     ecx, eax; self
+0x4A46F6: call    TESRegionDataGrass_ctor
 0x4A46FB: mov     ecx, [esp+10h+var_C]
 0x4A46FF: mov     large fs:0, ecx
 0x4A4706: pop     ecx
@@ -72,15 +72,47 @@
 0x4A470D: push    14h; jumptable 004A4632 case 7
 0x4A470F: call    FormHeapAlloc
 0x4A4714: add     esp, 4
-0x4A4717: mov     [esp+10h+arg_0], eax
+0x4A4717: mov     [esp+10h+dataID], eax
 0x4A471B: test    eax, eax
 0x4A471D: mov     [esp+10h+var_4], 4
 0x4A4725: jz      short loc_4A4740
-0x4A4727: mov     ecx, eax
-0x4A4729: call    sub_4A55C0
+0x4A4727: mov     ecx, eax; self
+0x4A4729: call    TESRegionDataSound_ctor; Verified: Sound region data allocation size 0x14 and constructor anchor for its Oblivion vtable; Fallout layout is larger and not transferable.
 0x4A472E: mov     ecx, [esp+10h+var_C]
 0x4A4732: mov     large fs:0, ecx
 0x4A4739: pop     ecx
 0x4A473A: add     esp, 0Ch
 0x4A473D: retn    4
 0x4A4740: xor     eax, eax
+0x9B2750: mov     eax, [ebp+4]
+0x9B2753: push    eax
+0x9B2754: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B2759: pop     ecx
+0x9B275A: retn
+0x9B275B: mov     eax, [ebp+4]
+0x9B275E: push    eax
+0x9B275F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B2764: pop     ecx
+0x9B2765: retn
+0x9B2766: mov     eax, [ebp+4]
+0x9B2769: push    eax
+0x9B276A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B276F: pop     ecx
+0x9B2770: retn
+0x9B2771: mov     eax, [ebp+4]
+0x9B2774: push    eax
+0x9B2775: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B277A: pop     ecx
+0x9B277B: retn
+0x9B277C: mov     eax, [ebp+4]
+0x9B277F: push    eax
+0x9B2780: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B2785: pop     ecx
+0x9B2786: retn
+0x9B2787: mov     edx, [esp+arg_4]
+0x9B278B: lea     eax, [edx]
+0x9B278D: mov     ecx, [edx-4]
+0x9B2790: xor     ecx, eax
+0x9B2792: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B2797: mov     eax, offset stru_ADE6EC
+0x9B279C: jmp     ___CxxFrameHandler3

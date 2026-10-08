@@ -29,13 +29,13 @@
 0x5BF827: mov     ecx, [esi+ecx*4]; this
 0x5BF82A: push    ecx
 0x5BF82B: lea     eax, [edi+edi*4]
-0x5BF82E: fstp    [esp+34h+a2]; a3
+0x5BF82E: fstp    [esp+34h+a2]; value
 0x5BF831: lea     ebp, [esi+eax*4]
-0x5BF834: push    0FA7h; a2
+0x5BF834: push    0FA7h; propertyCode
 0x5BF839: mov     dword ptr [ebp+34h], 0FFFFFFFFh
 0x5BF840: mov     [ebp+2Ch], ebx
 0x5BF843: mov     [ebp+38h], bl
-0x5BF846: call    Tile_SetFloat
+0x5BF846: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5BF84B: cmp     edi, 3; switch 4 cases
 0x5BF84E: ja      short def_5BF850
 0x5BF850: jmp     ds:jpt_5BF850[edi*4]; switch jump
@@ -46,3 +46,12 @@
 0x5BF865: mov     dword ptr [ebp+30h], 2; jumptable 005BF850 case 2
 0x5BF86C: jmp     short def_5BF850
 0x5BF86E: mov     dword ptr [ebp+30h], 3; jumptable 005BF850 case 3
+0x9C08A0: lea     ecx, [ebp-14h]; void *
+0x9C08A3: jmp     BSStringT_Clear
+0x9C08A8: mov     edx, [esp+arg_4]
+0x9C08AC: lea     eax, [edx-20h]
+0x9C08AF: mov     ecx, [edx-24h]
+0x9C08B2: xor     ecx, eax
+0x9C08B4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C08B9: mov     eax, offset stru_AE9AEC
+0x9C08BE: jmp     ___CxxFrameHandler3

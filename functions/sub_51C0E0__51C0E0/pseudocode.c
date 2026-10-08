@@ -1,9 +1,6 @@
-unsigned int __thiscall sub_51C0E0(_DWORD *this, unsigned int a2)
+// Stores the second favored/primary attribute in the fixed CLAS DATA payload.
+void __thiscall TESClass_SetPrimaryAttribute2(TESClass *this, AttributeActorValue attribute)
 {
-  unsigned int result; // eax
-
-  result = a2;
-  if ( a2 <= 7 )
-    *(this + 0xF) = a2;
-  return result;
+  if ( attribute <= kAttribute_Luck ) /*0x51c0e7*/
+    this->members.attributes[1] = attribute; /*0x51c0e9*/
 }

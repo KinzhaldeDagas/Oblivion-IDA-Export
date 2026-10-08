@@ -1,7 +1,7 @@
 0x4F6A20: push    ecx
 0x4F6A21: call    Sky_CreateOrGetGlobalObject
 0x4F6A26: mov     ecx, eax
-0x4F6A28: call    sub_4F5F70
+0x4F6A28: call    Sky_IsSnowingByWeatherFlags; GetIsSnowing delegates to Sky snow-state helper 0x4F5F70 rather than comparing weather FormIDs.
 0x4F6A2D: test    al, al
 0x4F6A2F: jz      short loc_4F6A35
 0x4F6A31: fld1

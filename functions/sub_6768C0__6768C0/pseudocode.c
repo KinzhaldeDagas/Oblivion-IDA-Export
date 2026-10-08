@@ -1,27 +1,27 @@
 void __usercall sub_6768C0(int a1@<ecx>, double a2@<st1>, double a3@<st0>)
 {
-  Actor *v4; // edi
+  Actor *v3; // edi
   TESObjectREFR *vtbl; // esi
   double Distance; // st5
 
-  v4 = sub_7616D0((ActorList *)(a1 + 0x68));
-  while ( v4 )
+  v3 = ActorList_ReturnHead((ActorList *)(a1 + 0x68)); /*0x6768c9*/
+  while ( v3 ) /*0x6768cd*/
   {
-    if ( !v4->vtbl )
-      break;
-    vtbl = 0;
-    if ( (*((unsigned __int8 (__thiscall **)(ActorVtbl *))v4->vtbl->super.super.super.super.InitializeComponent + 0x64))(v4->vtbl) )
-      vtbl = (TESObjectREFR *)v4->vtbl;
-    v4 = *(Actor **)&v4->members.super.super.super.type;
-    if ( vtbl )
+    if ( !v3->vtbl ) /*0x6768d0*/
+      break; /*0x6768d4*/
+    vtbl = 0; /*0x6768de*/
+    if ( (*((unsigned __int8 (__thiscall **)(ActorVtbl *))v3->vtbl->super.super.super.super.InitializeComponent + 0x64))(v3->vtbl) ) /*0x6768e0*/
+      vtbl = (TESObjectREFR *)v3->vtbl; /*0x6768e6*/
+    v3 = *(Actor **)&v3->members.super.super.super.type; /*0x6768ea*/
+    if ( vtbl ) /*0x6768ed*/
     {
-      if ( !vtbl->vtbl->IsDead(vtbl, 0) )
+      if ( !vtbl->vtbl->IsDead(vtbl, 0) ) /*0x6768fb*/
       {
-        if ( sub_660E90((Concurrency::details::SchedulerBase *)vtbl) )
+        if ( sub_660E90((Actor *)vtbl) ) /*0x676908*/
         {
-          Distance = TesObjectREF_GetDistance((TESObjectREFR *)TESDataHandler_g_PlayerRef, vtbl, 0);
-          if ( Distance > flt_A44F64 )
-            sub_5F9200((PlayerCharacter *)vtbl, Distance, a2, a3, (TESObjectREFR *)TESDataHandler_g_PlayerRef);
+          Distance = TesObjectREF_GetDistance((TESObjectREFR *)reference, vtbl, 0); /*0x67691a*/
+          if ( Distance > flt_A44F64 ) /*0x67692a*/
+            sub_5F9200((PlayerCharacter *)vtbl, Distance, a2, a3, (TESObjectREFR *)reference); /*0x676934*/
         }
       }
     }

@@ -13,7 +13,7 @@
 0x9932FC: xor     edi, edi
 0x9932FE: cmp     eax, edi
 0x993300: jl      short loc_99330A
-0x993302: cmp     eax, uNumber
+0x993302: cmp     eax, ds:0BAAAA0h
 0x993308: jb      short loc_99332B
 0x99330A: call    ___doserrno
 0x99330F: mov     [eax], edi

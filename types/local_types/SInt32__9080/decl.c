@@ -1,1 +1,1 @@
-SInt32
+typedef int SInt32;

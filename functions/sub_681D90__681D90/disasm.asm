@@ -13,11 +13,11 @@
 0x681DAE: mov     ecx, edi; this
 0x681DB0: mov     [esi+8], eax
 0x681DB3: xor     bl, bl
-0x681DB5: call    MobileObject_GetCharProxy
+0x681DB5: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x681DBA: test    eax, eax
 0x681DBC: jz      short loc_681DDD
 0x681DBE: lea     ecx, [eax+1E0h]
-0x681DC4: call    sub_88D370
+0x681DC4: call    hkCharacterContext_GetStateId; hkCharacterContext state id accessor used by controller update; proxy+0x1E0 context stores current state id at +0x0C.
 0x681DC9: test    eax, eax
 0x681DCB: jnz     short loc_681DDD
 0x681DCD: push    esi

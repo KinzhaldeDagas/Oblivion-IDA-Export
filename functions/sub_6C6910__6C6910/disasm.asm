@@ -14,7 +14,7 @@
 0x6C6931: mov     large fs:0, eax
 0x6C6937: mov     edi, ecx
 0x6C6939: mov     ecx, [esp+28h+arg_0]
-0x6C693D: push    offset dword_B3CD7C
+0x6C693D: push    offset stru_B3CD7C
 0x6C6942: call    sub_700010
 0x6C6947: mov     esi, eax
 0x6C6949: xor     ebx, ebx
@@ -34,7 +34,6 @@
 0x6C6976: mov     [esp+28h+var_14], ebx
 0x6C697A: jbe     short loc_6C69E7
 0x6C697C: jmp     short loc_6C6984
-0x6C697E: align 10h
 0x6C6980: mov     ebp, [esp+28h+var_10]
 0x6C6984: mov     eax, [edi+18h]
 0x6C6987: movzx   ecx, word ptr [eax+ebx+4]
@@ -105,3 +104,12 @@
 0x6C6A3C: add     ecx, [esi+3Ch]
 0x6C6A3F: mov     [eax+8], ecx
 0x6C6A42: jmp     short loc_6C69D4
+0x9C7560: lea     ecx, [ebp+4]; slot
+0x9C7563: jmp     NiPointerSlot_Release
+0x9C7568: mov     edx, [esp+arg_4]
+0x9C756C: lea     eax, [edx-18h]
+0x9C756F: mov     ecx, [edx-1Ch]
+0x9C7572: xor     ecx, eax
+0x9C7574: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C7579: mov     eax, offset stru_AEF9AC
+0x9C757E: jmp     ___CxxFrameHandler3

@@ -1,19 +1,36 @@
 {
-  "callees_count": 59,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 4,
-  "display_name": "sub_78C4D0",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 25,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x78C4D0",
+      "0x78C6ED"
+    ],
+    [
+      "0x9CB830",
+      "0x9CB85B"
+    ]
+  ],
+  "chunks_sha256": "d367c66563be47c503591719c83a97c975d5cd093400d20df5bfff46fbdab004",
+  "comment_regular": "Static CSpeedTreeRT::NotifyAllTreesOfEvent. Iterates registered unique trees: wind/time invalidation clears wind-dependent branch/frond/leaf caches; camera invalidation clears leaf LOD and simple-billboard caches.\n[SpeedTreeOBSE v171] Verified event0 clears branch geometry+12 at78C588 only for windEngine+8==1 and frond geometry+12 at78C5AF only for windEngine+C==1. SetTime78D3F0 already invokes this event. The paired indexed CPU entry preserves this validity gate; a higher-level CPU update/scene scheduler remains missing. No extra time advancement or invalidation was installed in v171.",
+  "comment_repeatable": "Static CSpeedTreeRT::NotifyAllTreesOfEvent. Iterates registered unique trees: wind/time invalidation clears wind-dependent branch/frond/leaf caches; camera invalidation clears leaf LOD and simple-billboard caches.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 7,
+  "display_name": "CSpeedTreeRT__NotifyAllTreesOfEvent",
   "end_ea": "0x78C6ED",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_78C4D0",
+  "name": "CSpeedTreeRT__NotifyAllTreesOfEvent",
   "segment": ".text",
   "sha256": "6cf967e6a32f88972669d3ffd0d62d8bcbc4bca03edddb79345c03dd0a0bd0b2",
   "size": 541,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78C4D0",
-  "type": "void __cdecl(int)",
-  "xrefs_from_count": 229,
+  "total_chunk_size": 584,
+  "type": "void __cdecl(int message)",
+  "xrefs_from_count": 242,
   "xrefs_to_count": 3
 }

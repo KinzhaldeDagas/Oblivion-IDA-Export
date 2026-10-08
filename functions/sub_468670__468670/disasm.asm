@@ -1,4 +1,4 @@
-0x468670: push    esi
+0x468670: push    esi; RadiantAI: obtains TESAIForm package list from actor base form, then calls central package chooser sub_569020.
 0x468671: mov     esi, [esp+4+arg_0]
 0x468675: push    edi
 0x468676: xor     edi, edi
@@ -25,7 +25,7 @@
 0x4686A9: jz      short sub_4686B7
 0x4686AB: push    esi
 0x4686AC: lea     ecx, [eax+10h]
-0x4686AF: call    sub_569020
+0x4686AF: call    sub_569020; 3DTheft: central TESAIForm package chooser. It resolves procedureArrayIndex only when -1, so runtime packages assigned directly should resolve their procedure row before assignment.
 0x4686B4: pop     edi
 0x4686B5: pop     esi
 0x4686B6: retn

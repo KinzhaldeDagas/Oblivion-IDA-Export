@@ -1,4 +1,4 @@
-0x5E5520: mov     eax, [esp+arg_0]
+0x5E5520: mov     eax, [esp+arg_0]; AVU decode: MagicTarget::AttemptReflect. Dynamic-casts caster to Actor, rejects self/invalid caster, then rolls Game_RandomLargeInteger()%100 against target AV 0x35 SpellReflectChance.
 0x5E5524: push    ebx
 0x5E5525: push    ebp
 0x5E5526: push    esi
@@ -18,7 +18,7 @@
 0x5E554E: cmp     edi, ebx
 0x5E5550: jz      loc_5E561D
 0x5E5556: push    0; Seed
-0x5E5558: call    GetRandomLargeInteger?
+0x5E5558: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x5E555D: cdq
 0x5E555E: mov     ecx, 64h ; 'd'
 0x5E5563: idiv    ecx
@@ -29,9 +29,9 @@
 0x5E556F: mov     edx, [ecx]
 0x5E5571: mov     eax, [edx+284h]
 0x5E5577: call    eax
-0x5E5579: cmp     esi, eax
+0x5E5579: cmp     esi, eax; Spell reflection succeeds when the 0..99 engine roll is below current actor value 0x35, then redirects the active effect to the caster.
 0x5E557B: jge     loc_5E561D
-0x5E5581: test    ebx, ebx
+0x5E5581: test    ebx, ebx; Reflect success branch. AVU jumps here when roll is below the possibly diminished-return reflect chance.
 0x5E5583: jz      short loc_5E558A
 0x5E5585: lea     eax, [ebp-0Ch]
 0x5E5588: jmp     short loc_5E558C
@@ -106,7 +106,7 @@
 0x5E5617: mov     al, 1
 0x5E5619: pop     ebx
 0x5E561A: retn    0Ch
-0x5E561D: pop     edi
+0x5E561D: pop     edi; Reflect failure/self/invalid-caster branch. AVU jumps here when reflect roll fails.
 0x5E561E: pop     esi
 0x5E561F: pop     ebp
 0x5E5620: xor     al, al

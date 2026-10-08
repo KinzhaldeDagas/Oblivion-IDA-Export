@@ -22,6 +22,6 @@
 0x56A129: lea     edx, [esp+10h+Src]
 0x56A12D: push    edx; Src
 0x56A12E: push    54445450h; int
-0x56A133: call    TESForm_PutFormRecordChunkData
+0x56A133: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x56A138: add     esp, 18h
 0x56A13B: retn

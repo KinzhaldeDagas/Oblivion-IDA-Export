@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x762640",
-    "line": "sub     esp, 24h",
+    "line": "sub     esp, 24h; Build and upload camera view/projection state, convert a normalized viewport against current target dimensions, and call IDirect3DDevice9::SetViewport. This function does not set a scissor rectangle or alter D3DRS_SCISSORTESTENABLE.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x762653",
-    "line": "mov     eax, [esp+28h+arg_0]",
+    "line": "mov     eax, [esp+28h+position]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x762682",
-    "line": "mov     ebx, [esp+2Ch+arg_8]",
+    "line": "mov     ebx, [esp+2Ch+up]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x762687",
-    "line": "mov     edi, [esp+30h+arg_C]",
+    "line": "mov     edi, [esp+30h+right]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x7626A9",
-    "line": "mov     eax, [esp+30h+arg_4]",
+    "line": "mov     eax, [esp+30h+forward]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -367,13 +367,13 @@
   },
   {
     "ea": "0x762729",
-    "line": "fstp    [esp+30h+arg_0]",
+    "line": "fstp    [esp+30h+position]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x76272D",
-    "line": "fld     [esp+30h+arg_0]",
+    "line": "fld     [esp+30h+position]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -439,13 +439,13 @@
   },
   {
     "ea": "0x76274B",
-    "line": "fstp    [esp+30h+arg_0]",
+    "line": "fstp    [esp+30h+position]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x76274F",
-    "line": "fld     [esp+30h+arg_0]",
+    "line": "fld     [esp+30h+position]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -511,13 +511,13 @@
   },
   {
     "ea": "0x76276D",
-    "line": "fstp    [esp+30h+arg_0]",
+    "line": "fstp    [esp+30h+position]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x762771",
-    "line": "fld     [esp+30h+arg_0]",
+    "line": "fld     [esp+30h+position]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -925,13 +925,13 @@
   },
   {
     "ea": "0x762890",
-    "line": "fstp    [esp+28h+arg_8]",
+    "line": "fstp    [esp+28h+up]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x762894",
-    "line": "fld     [esp+28h+arg_8]",
+    "line": "fld     [esp+28h+up]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -955,7 +955,7 @@
   },
   {
     "ea": "0x7628A3",
-    "line": "fstp    [esp+28h+arg_8]",
+    "line": "fstp    [esp+28h+up]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -973,7 +973,7 @@
   },
   {
     "ea": "0x7628AC",
-    "line": "fstp    [esp+28h+arg_14]",
+    "line": "fstp    [esp+28h+viewport]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -991,7 +991,7 @@
   },
   {
     "ea": "0x7628B6",
-    "line": "fstp    [esp+28h+arg_10]",
+    "line": "fstp    [esp+28h+frustum]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1027,7 +1027,7 @@
   },
   {
     "ea": "0x7628CC",
-    "line": "fstp    [esp+28h+arg_C]",
+    "line": "fstp    [esp+28h+right]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1081,7 +1081,7 @@
   },
   {
     "ea": "0x7628EB",
-    "line": "fld     [esp+28h+arg_8]",
+    "line": "fld     [esp+28h+up]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1135,7 +1135,7 @@
   },
   {
     "ea": "0x76290F",
-    "line": "fld     [esp+28h+arg_14]",
+    "line": "fld     [esp+28h+viewport]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1177,7 +1177,7 @@
   },
   {
     "ea": "0x762927",
-    "line": "fld     [esp+28h+arg_14]",
+    "line": "fld     [esp+28h+viewport]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1213,7 +1213,7 @@
   },
   {
     "ea": "0x76293D",
-    "line": "fld     [esp+28h+arg_10]",
+    "line": "fld     [esp+28h+frustum]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1249,7 +1249,7 @@
   },
   {
     "ea": "0x762953",
-    "line": "fld     [esp+28h+arg_C]",
+    "line": "fld     [esp+28h+right]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1369,7 +1369,7 @@
   },
   {
     "ea": "0x7629A7",
-    "line": "fld     [esp+28h+arg_8]",
+    "line": "fld     [esp+28h+up]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1417,7 +1417,7 @@
   },
   {
     "ea": "0x7629C5",
-    "line": "fld     [esp+28h+arg_14]",
+    "line": "fld     [esp+28h+viewport]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1453,7 +1453,7 @@
   },
   {
     "ea": "0x7629D7",
-    "line": "fld     [esp+28h+arg_14]",
+    "line": "fld     [esp+28h+viewport]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1495,7 +1495,7 @@
   },
   {
     "ea": "0x7629F3",
-    "line": "fld     [esp+28h+arg_10]",
+    "line": "fld     [esp+28h+frustum]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1525,7 +1525,7 @@
   },
   {
     "ea": "0x762A03",
-    "line": "fld     [esp+28h+arg_C]",
+    "line": "fld     [esp+28h+right]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1747,13 +1747,13 @@
   },
   {
     "ea": "0x762A87",
-    "line": "mov     [esp+28h+arg_8], eax",
+    "line": "mov     [esp+28h+up], eax; Query current render-target width for normalized-to-pixel viewport conversion.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x762A8B",
-    "line": "fild    [esp+28h+arg_8]",
+    "line": "fild    [esp+28h+up]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -1777,7 +1777,7 @@
   },
   {
     "ea": "0x762A9D",
-    "line": "fstp    [esp+28h+arg_8]",
+    "line": "fstp    [esp+28h+up]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1813,13 +1813,13 @@
   },
   {
     "ea": "0x762AAC",
-    "line": "mov     [esp+28h+arg_14], eax",
+    "line": "mov     [esp+28h+viewport], eax; Query current render-target height for normalized-to-pixel viewport conversion.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x762AB0",
-    "line": "fild    [esp+28h+arg_14]",
+    "line": "fild    [esp+28h+viewport]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -1843,7 +1843,7 @@
   },
   {
     "ea": "0x762AC0",
-    "line": "fstp    [esp+28h+arg_10]",
+    "line": "fstp    [esp+28h+frustum]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1855,7 +1855,7 @@
   },
   {
     "ea": "0x762AC6",
-    "line": "fld     [esp+28h+arg_8]",
+    "line": "fld     [esp+28h+up]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1873,13 +1873,13 @@
   },
   {
     "ea": "0x762ACE",
-    "line": "fnstcw  word ptr [esp+28h+arg_8]",
+    "line": "fnstcw  word ptr [esp+28h+up]",
     "mnemonic": "fnstcw",
     "size": 4
   },
   {
     "ea": "0x762AD2",
-    "line": "movzx   eax, word ptr [esp+28h+arg_8]",
+    "line": "movzx   eax, word ptr [esp+28h+up]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -1897,13 +1897,13 @@
   },
   {
     "ea": "0x762ADE",
-    "line": "mov     [esp+28h+arg_14], eax",
+    "line": "mov     [esp+28h+viewport], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x762AE2",
-    "line": "fldcw   word ptr [esp+28h+arg_14]",
+    "line": "fldcw   word ptr [esp+28h+viewport]",
     "mnemonic": "fldcw",
     "size": 4
   },
@@ -1921,13 +1921,13 @@
   },
   {
     "ea": "0x762AEE",
-    "line": "mov     [esp+28h+var_10], edx",
+    "line": "mov     [esp+28h+var_10], edx; Viewport X = normalized left * target width.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x762AF2",
-    "line": "fldcw   word ptr [esp+28h+arg_8]",
+    "line": "fldcw   word ptr [esp+28h+up]",
     "mnemonic": "fldcw",
     "size": 4
   },
@@ -1951,7 +1951,7 @@
   },
   {
     "ea": "0x762AFD",
-    "line": "fld     [esp+28h+arg_10]",
+    "line": "fld     [esp+28h+frustum]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1969,7 +1969,7 @@
   },
   {
     "ea": "0x762B05",
-    "line": "fnstcw  word ptr [esp+28h+arg_8]",
+    "line": "fnstcw  word ptr [esp+28h+up]",
     "mnemonic": "fnstcw",
     "size": 4
   },
@@ -1981,7 +1981,7 @@
   },
   {
     "ea": "0x762B0B",
-    "line": "movzx   eax, word ptr [esp+28h+arg_8]",
+    "line": "movzx   eax, word ptr [esp+28h+up]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -1993,13 +1993,13 @@
   },
   {
     "ea": "0x762B15",
-    "line": "mov     [esp+28h+arg_14], eax",
+    "line": "mov     [esp+28h+viewport], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x762B19",
-    "line": "fldcw   word ptr [esp+28h+arg_14]",
+    "line": "fldcw   word ptr [esp+28h+viewport]",
     "mnemonic": "fldcw",
     "size": 4
   },
@@ -2017,13 +2017,13 @@
   },
   {
     "ea": "0x762B25",
-    "line": "mov     [esp+28h+var_C], eax",
+    "line": "mov     [esp+28h+var_C], eax; Viewport Y = (1 - normalized top) * target height.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x762B29",
-    "line": "fldcw   word ptr [esp+28h+arg_8]",
+    "line": "fldcw   word ptr [esp+28h+up]",
     "mnemonic": "fldcw",
     "size": 4
   },
@@ -2041,7 +2041,7 @@
   },
   {
     "ea": "0x762B32",
-    "line": "fnstcw  word ptr [esp+28h+arg_8]",
+    "line": "fnstcw  word ptr [esp+28h+up]",
     "mnemonic": "fnstcw",
     "size": 4
   },
@@ -2053,7 +2053,7 @@
   },
   {
     "ea": "0x762B38",
-    "line": "movzx   eax, word ptr [esp+28h+arg_8]",
+    "line": "movzx   eax, word ptr [esp+28h+up]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -2071,13 +2071,13 @@
   },
   {
     "ea": "0x762B44",
-    "line": "mov     [esp+28h+arg_14], eax",
+    "line": "mov     [esp+28h+viewport], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x762B48",
-    "line": "fldcw   word ptr [esp+28h+arg_14]",
+    "line": "fldcw   word ptr [esp+28h+viewport]",
     "mnemonic": "fldcw",
     "size": 4
   },
@@ -2095,7 +2095,7 @@
   },
   {
     "ea": "0x762B54",
-    "line": "mov     [esp+28h+var_8], edx",
+    "line": "mov     [esp+28h+var_8], edx; Viewport width = target width * (right - left).",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2113,7 +2113,7 @@
   },
   {
     "ea": "0x762B5D",
-    "line": "fldcw   word ptr [esp+2Ch+arg_8]",
+    "line": "fldcw   word ptr [esp+2Ch+up]",
     "mnemonic": "fldcw",
     "size": 4
   },
@@ -2131,7 +2131,7 @@
   },
   {
     "ea": "0x762B67",
-    "line": "fnstcw  word ptr [esp+2Ch+arg_8]",
+    "line": "fnstcw  word ptr [esp+2Ch+up]",
     "mnemonic": "fnstcw",
     "size": 4
   },
@@ -2143,7 +2143,7 @@
   },
   {
     "ea": "0x762B6D",
-    "line": "movzx   eax, word ptr [esp+2Ch+arg_8]",
+    "line": "movzx   eax, word ptr [esp+2Ch+up]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -2155,13 +2155,13 @@
   },
   {
     "ea": "0x762B77",
-    "line": "mov     [esp+2Ch+arg_14], eax",
+    "line": "mov     [esp+2Ch+viewport], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x762B7B",
-    "line": "fldcw   word ptr [esp+2Ch+arg_14]",
+    "line": "fldcw   word ptr [esp+2Ch+viewport]",
     "mnemonic": "fldcw",
     "size": 4
   },
@@ -2179,7 +2179,7 @@
   },
   {
     "ea": "0x762B87",
-    "line": "mov     [esp+2Ch+var_4], eax",
+    "line": "mov     [esp+2Ch+var_4], eax; Viewport height = target height * (top - bottom).",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2197,7 +2197,7 @@
   },
   {
     "ea": "0x762B92",
-    "line": "fldcw   word ptr [esp+30h+arg_8]",
+    "line": "fldcw   word ptr [esp+30h+up]",
     "mnemonic": "fldcw",
     "size": 4
   },
@@ -2221,7 +2221,7 @@
   },
   {
     "ea": "0x762B9E",
-    "line": "fstp    [esp+30h+arg_0]",
+    "line": "fstp    [esp+30h+position]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2239,7 +2239,7 @@
   },
   {
     "ea": "0x762BAA",
-    "line": "call    eax",
+    "line": "call    eax; Install the computed pixel viewport. The shadow producer supplies (0,1,1,0), yielding the full ShadowSurfaceRes square; no scissor state is paired with this update.",
     "mnemonic": "call",
     "size": 2
   },

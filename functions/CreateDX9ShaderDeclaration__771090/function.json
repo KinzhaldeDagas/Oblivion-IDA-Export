@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
-  "callers_count": 28,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
+  "callers_count": 38,
+  "chunks": [
+    [
+      "0x771090",
+      "0x7710FB"
+    ]
+  ],
+  "chunks_sha256": "c912e6437f57447d40d7fba7573fa73b8cf1d637e1d164ecbe475bc1aab51937",
+  "comment_regular": "Oblivion NiDX9 declaration factory. Allocates a 0x38-byte NiDX9ShaderDeclaration and initializes elementCount internal element records for each streamCount stream.\n\nMoonSugarEffect decode: CreateDX9ShaderDeclaration. Allocates 0x38-byte NiDX9ShaderDeclaration, initializes base fields, binds renderer/device/buffer-manager, allocates stream descriptors and disabled element arrays.",
+  "comment_repeatable": "Oblivion NiDX9 declaration factory. Allocates a 0x38-byte NiDX9ShaderDeclaration and initializes elementCount internal element records for each streamCount stream.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
   "display_name": "CreateDX9ShaderDeclaration",
   "end_ea": "0x7710FB",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "CreateDX9ShaderDeclaration",
   "segment": ".text",
   "sha256": "c912e6437f57447d40d7fba7573fa73b8cf1d637e1d164ecbe475bc1aab51937",
   "size": 107,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x771090",
-  "type": "NiDX9ShaderDeclaration *__cdecl(NiDX9Renderer *a1, int a2, unsigned int StreamCount)",
+  "total_chunk_size": 107,
+  "type": "NiDX9ShaderDeclaration *__cdecl(NiDX9Renderer *renderer, unsigned int elementCount, unsigned int streamCount)",
   "xrefs_from_count": 47,
   "xrefs_to_count": 38
 }

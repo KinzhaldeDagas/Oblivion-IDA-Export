@@ -1,5 +1,5 @@
 0x45C4F0: sub     esp, 20h
-0x45C4F3: mov     ecx, [esp+20h+arg_4]
+0x45C4F3: mov     ecx, [esp+20h+data]
 0x45C4F7: mov     eax, [ecx]
 0x45C4F9: push    ebx
 0x45C4FA: push    ebp
@@ -12,7 +12,7 @@
 0x45C507: mov     eax, [ecx+10h]
 0x45C50A: mov     [esp+30h+var_1C], eax
 0x45C50E: push    eax; a1
-0x45C50F: call    TESForm_LookupByFormID
+0x45C50F: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x45C514: push    esi; int
 0x45C515: push    offset ??_R0?AVTESObjectCELL@@@8; struct TypeDescriptor *
 0x45C51A: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
@@ -38,7 +38,7 @@
 0x45C557: xor     ecx, ecx
 0x45C559: lea     eax, [ebx+10h]
 0x45C55C: cmp     eax, esi
-0x45C55E: mov     [esp+30h+arg_4], ecx
+0x45C55E: mov     [esp+30h+data], ecx
 0x45C562: jz      short loc_45C576
 0x45C564: cmp     [eax], esi
 0x45C566: jz      short loc_45C56B
@@ -46,16 +46,16 @@
 0x45C56B: mov     eax, [eax+4]
 0x45C56E: cmp     eax, esi
 0x45C570: jnz     short loc_45C564
-0x45C572: mov     [esp+30h+arg_4], ecx
+0x45C572: mov     [esp+30h+data], ecx
 0x45C576: xor     ebx, ebx
 0x45C578: test    ecx, ecx
 0x45C57A: jle     short loc_45C5E1
 0x45C57C: lea     esp, [esp+0]
 0x45C580: mov     ecx, [esp+30h+var_18]; this
 0x45C584: push    ebx; a2
-0x45C585: call    TESForm_GetOverrideFile
+0x45C585: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x45C58A: mov     ecx, eax
-0x45C58C: call    sub_4520F0
+0x45C58C: call    TESFile_GetThreadSafeFile; Returns the root TESFile on the main thread; on worker threads returns the per-thread clone selected by GetCurrentThreadId via TESFile_GetThreadSafeFileForThread.
 0x45C591: mov     ecx, [esp+30h+var_18]
 0x45C595: mov     edi, eax
 0x45C597: push    ecx
@@ -71,17 +71,17 @@
 0x45C5B1: test    al, al
 0x45C5B3: jz      short loc_45C5D0
 0x45C5B5: mov     ecx, edi
-0x45C5B7: call    TESFile_GetRecordType
+0x45C5B7: call    TESFile_GetRecordType; MEF v32 changed-reference cell override hook. Vanilla allocates a new reference on every matching override and overwrites ESI; MEF allocates once, then reloads later overrides into the existing ESI form.
 0x45C5BC: push    1
 0x45C5BE: push    eax
 0x45C5BF: call    sub_4DB260
 0x45C5C4: mov     esi, eax
 0x45C5C6: push    edi
 0x45C5C7: push    esi
-0x45C5C8: call    TESDataHandler_LoadForm
+0x45C5C8: call    TESDataHandler_LoadForm; TESDataHandler_LoadForm supports override reuse: invokes virtual TESForm::LoadForm on the supplied existing object and updates master/active-file flags.
 0x45C5CD: add     esp, 10h
 0x45C5D0: add     ebx, 1
-0x45C5D3: cmp     ebx, [esp+30h+arg_4]
+0x45C5D3: cmp     ebx, [esp+30h+data]
 0x45C5D7: jl      short loc_45C580
 0x45C5D9: test    esi, esi
 0x45C5DB: jnz     loc_45C6E6
@@ -117,18 +117,18 @@
 0x45C62A: cmp     eax, esi
 0x45C62C: jnz     short loc_45C620
 0x45C62E: mov     [esp+30h+var_10], edx
-0x45C632: mov     eax, [esp+30h+arg_4]
+0x45C632: mov     eax, [esp+30h+data]
 0x45C636: fld     dword ptr [eax+4]
 0x45C639: fstp    [esp+30h+var_20]
 0x45C63D: fld     [esp+30h+var_20]
-0x45C641: fistp   [esp+30h+arg_4]
-0x45C645: mov     ebp, [esp+30h+arg_4]
+0x45C641: fistp   [esp+30h+data]
+0x45C645: mov     ebp, [esp+30h+data]
 0x45C649: fld     dword ptr [eax+8]
 0x45C64C: fstp    [esp+30h+var_20]
 0x45C650: sar     ebp, 0Ch
 0x45C653: fld     [esp+30h+var_20]
-0x45C657: fistp   [esp+30h+arg_4]
-0x45C65B: mov     eax, [esp+30h+arg_4]
+0x45C657: fistp   [esp+30h+data]
+0x45C65B: mov     eax, [esp+30h+data]
 0x45C65F: sar     eax, 0Ch
 0x45C662: xor     ebx, ebx
 0x45C664: test    edx, edx
@@ -137,9 +137,9 @@
 0x45C670: jmp     short loc_45C676
 0x45C672: mov     ecx, [esp+30h+var_14]; this
 0x45C676: push    ebx; a2
-0x45C677: call    TESForm_GetOverrideFile
+0x45C677: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x45C67C: mov     ecx, eax
-0x45C67E: call    sub_4520F0
+0x45C67E: call    TESFile_GetThreadSafeFile; Returns the root TESFile on the main thread; on worker threads returns the per-thread clone selected by GetCurrentThreadId via TESFile_GetThreadSafeFileForThread.
 0x45C683: mov     ecx, [esp+30h+var_14]
 0x45C687: mov     edi, eax
 0x45C689: mov     eax, [esp+30h+var_20]
@@ -157,14 +157,14 @@
 0x45C6A7: test    al, al
 0x45C6A9: jz      short loc_45C6C6
 0x45C6AB: mov     ecx, edi
-0x45C6AD: call    TESFile_GetRecordType
+0x45C6AD: call    TESFile_GetRecordType; MEF v32 changed-reference worldspace override hook; same allocate-once/reuse contract as 0x45C5B7.
 0x45C6B2: push    1
 0x45C6B4: push    eax
 0x45C6B5: call    sub_4DB260
 0x45C6BA: mov     esi, eax
 0x45C6BC: push    edi
 0x45C6BD: push    esi
-0x45C6BE: call    TESDataHandler_LoadForm
+0x45C6BE: call    TESDataHandler_LoadForm; TESDataHandler_LoadForm supports override reuse: invokes virtual TESForm::LoadForm on the supplied existing object and updates master/active-file flags.
 0x45C6C3: add     esp, 10h
 0x45C6C6: add     ebx, 1
 0x45C6C9: cmp     ebx, [esp+30h+var_10]

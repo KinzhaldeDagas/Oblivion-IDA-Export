@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 3,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_79AC40",
+  "chunks": [
+    [
+      "0x79AC40",
+      "0x79ACBF"
+    ],
+    [
+      "0x9CC270",
+      "0x9CC29C"
+    ]
+  ],
+  "chunks_sha256": "59d1f1716a0edab479acc9ba4d3e41ac90f18dae5e9b10846b98c1206ca9ae92",
+  "comment_regular": "Oblivion SFrondTexture copy constructor: deep-copies the 28-byte filename string and copies aspectRatio, sizeScale, minAngleOffset, and maxAngleOffset. The 0x2C layout is established by executable accesses; RT 4.1 FrondEngine.h corroborates the member names.",
+  "comment_repeatable": "Oblivion SFrondTexture copy constructor: deep-copies the 28-byte filename string and copies aspectRatio, sizeScale, minAngleOffset, and maxAngleOffset. The 0x2C layout is established by executable accesses; RT 4.1 FrondEngine.h corroborates the member names.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_SFrondTexture_CopyCtor_010201A0",
   "end_ea": "0x79ACBF",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_79AC40",
+  "name": "OB_SFrondTexture_CopyCtor_010201A0",
   "segment": ".text",
   "sha256": "47029116cc58e90b4ac758fd7bc1948e05df19a0d3a6fe80d737b62fc0695754",
   "size": 127,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x79AC40",
-  "type": "_DWORD *__cdecl(int, int)",
-  "xrefs_from_count": 45,
+  "total_chunk_size": 171,
+  "type": "OB_SFrondTexture_010201A0 *__cdecl(OB_SFrondTexture_010201A0 *this, const OB_SFrondTexture_010201A0 *source)",
+  "xrefs_from_count": 61,
   "xrefs_to_count": 2
 }

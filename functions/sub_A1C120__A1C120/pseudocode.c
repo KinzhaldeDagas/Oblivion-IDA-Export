@@ -1,4 +1,4 @@
 void __cdecl sub_A1C120()
 {
-  GameSetting_destr((int *)&stru_B36208 + 0x1D);
+  GameSetting_destr(&dword_B361CC[0x2C]); /*0xa1c125*/
 }

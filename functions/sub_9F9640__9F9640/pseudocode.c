@@ -1,4 +1,4 @@
-BSStringT *sub_9F9640()
+NiRTTI *sub_9F9640()
 {
-  return sub_70E220(&BSTreeNode, "BSTreeNode", (int)dword_B3FAB0);
+  return NiRTTI_Constructor(&MEMORY[0xB3A02C], "BSTreeNode", &parent); /*0x9f9654*/
 }

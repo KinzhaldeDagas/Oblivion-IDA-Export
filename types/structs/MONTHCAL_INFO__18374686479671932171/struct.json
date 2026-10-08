@@ -1,220 +1,342 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "MONTHCAL_INFO",
+  "definition": "struct MONTHCAL_INFO\n{\nHWND hwndSelf __offset(OFF64|AUTO);\nDWORD dwStyle;\nCOLORREF colors[6];\nHBRUSH brushes[3] __offset(OFF64|AUTO);\nHPEN pens[2] __offset(OFF64|AUTO);\nHFONT hFont __offset(OFF64|AUTO);\nHFONT hBoldFont __offset(OFF64|AUTO);\nint textHeight;\nint height_increment;\nint width_increment;\nINT delta;\nint firstDay;\nBOOL firstDaySet;\nBOOL isUnicode;\nMONTHDAYSTATE *monthdayState __offset(OFF64|AUTO);\nSYSTEMTIME todaysDate;\nBOOL todaySet;\nint status;\nSYSTEMTIME firstSel;\nINT maxSelCount;\nSYSTEMTIME minSel;\nSYSTEMTIME maxSel;\nSYSTEMTIME focusedSel;\nDWORD rangeValid;\nSYSTEMTIME minDate;\nSYSTEMTIME maxDate;\nRECT titlebtnnext;\nRECT titlebtnprev;\nRECT todayrect;\nHWND hwndNotify __offset(OFF64|AUTO);\nHWND hWndYearEdit __offset(OFF64|AUTO);\nHWND hWndYearUpDown __offset(OFF64|AUTO);\nWNDPROC_0 EditWndProc __offset(OFF64|AUTO);\nCALENDAR_INFO *calendars __offset(OFF64|AUTO);\nSIZE dim;\n}\n",
   "id": 18374686479671932171,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hwndSelf",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwStyle",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "colors",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 24
+      "size": 24,
+      "type": "COLORREF[6]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "brushes",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 12
+      "size": 12,
+      "type": "HBRUSH[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pens",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 8
+      "offset_hex": "0x2C",
+      "size": 8,
+      "type": "HPEN[2]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hFont",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "HFONT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hBoldFont",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "HFONT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "textHeight",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "height_increment",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "width_increment",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 4
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "delta",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "firstDay",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 4
+      "offset_hex": "0x4C",
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "firstDaySet",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "isUnicode",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "monthdayState",
       "offset": 88,
       "offset_hex": "0x58",
-      "size": 4
+      "size": 4,
+      "type": "MONTHDAYSTATE *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "todaysDate",
       "offset": 92,
-      "offset_hex": "0x5c",
-      "size": 16
+      "offset_hex": "0x5C",
+      "size": 16,
+      "type": "SYSTEMTIME"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "todaySet",
       "offset": 108,
-      "offset_hex": "0x6c",
-      "size": 4
+      "offset_hex": "0x6C",
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "status",
       "offset": 112,
       "offset_hex": "0x70",
-      "size": 4
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "firstSel",
       "offset": 116,
       "offset_hex": "0x74",
-      "size": 16
+      "size": 16,
+      "type": "SYSTEMTIME"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "maxSelCount",
       "offset": 132,
       "offset_hex": "0x84",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "minSel",
       "offset": 136,
       "offset_hex": "0x88",
-      "size": 16
+      "size": 16,
+      "type": "SYSTEMTIME"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "maxSel",
       "offset": 152,
       "offset_hex": "0x98",
-      "size": 16
+      "size": 16,
+      "type": "SYSTEMTIME"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "focusedSel",
       "offset": 168,
-      "offset_hex": "0xa8",
-      "size": 16
+      "offset_hex": "0xA8",
+      "size": 16,
+      "type": "SYSTEMTIME"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "rangeValid",
       "offset": 184,
-      "offset_hex": "0xb8",
-      "size": 4
+      "offset_hex": "0xB8",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "minDate",
       "offset": 188,
-      "offset_hex": "0xbc",
-      "size": 16
+      "offset_hex": "0xBC",
+      "size": 16,
+      "type": "SYSTEMTIME"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "maxDate",
       "offset": 204,
-      "offset_hex": "0xcc",
-      "size": 16
+      "offset_hex": "0xCC",
+      "size": 16,
+      "type": "SYSTEMTIME"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "titlebtnnext",
       "offset": 220,
-      "offset_hex": "0xdc",
-      "size": 16
+      "offset_hex": "0xDC",
+      "size": 16,
+      "type": "RECT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "titlebtnprev",
       "offset": 236,
-      "offset_hex": "0xec",
-      "size": 16
+      "offset_hex": "0xEC",
+      "size": 16,
+      "type": "RECT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "todayrect",
       "offset": 252,
-      "offset_hex": "0xfc",
-      "size": 16
+      "offset_hex": "0xFC",
+      "size": 16,
+      "type": "RECT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hwndNotify",
       "offset": 268,
-      "offset_hex": "0x10c",
-      "size": 4
+      "offset_hex": "0x10C",
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hWndYearEdit",
       "offset": 272,
       "offset_hex": "0x110",
-      "size": 4
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hWndYearUpDown",
       "offset": 276,
       "offset_hex": "0x114",
-      "size": 4
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "EditWndProc",
       "offset": 280,
       "offset_hex": "0x118",
-      "size": 4
+      "size": 4,
+      "type": "WNDPROC_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "calendars",
       "offset": 284,
-      "offset_hex": "0x11c",
-      "size": 4
+      "offset_hex": "0x11C",
+      "size": 4,
+      "type": "CALENDAR_INFO *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dim",
       "offset": 288,
       "offset_hex": "0x120",
-      "size": 8
+      "size": 8,
+      "type": "SIZE"
     }
   ],
   "name": "MONTHCAL_INFO",
+  "ordinal": 6358,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 296
 }

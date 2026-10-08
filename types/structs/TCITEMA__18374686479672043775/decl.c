@@ -1,1 +1,1 @@
-TCITEMA
+typedef tagTCITEMA TCITEMA;

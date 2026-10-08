@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4DBDF0",
+      "0x4DBE3A"
+    ]
+  ],
+  "chunks_sha256": "bc52869d2b1bf53965368f132f80eb8f22a3b1edafea4c683a06ca3d2e3e1a53",
+  "comment_regular": "Verified lock-data factory: returns the existing ExtraLockData payload or allocates a zeroed 12-byte payload, installs it in an ExtraLock wrapper, and returns it. An allocation failure leaves/sets a null-payload ExtraLock wrapper through ExtraDataList_SetLock.",
+  "comment_repeatable": "Verified lock-data factory: returns the existing ExtraLockData payload or allocates a zeroed 12-byte payload, installs it in an ExtraLock wrapper, and returns it. An allocation failure leaves/sets a null-payload ExtraLock wrapper through ExtraDataList_SetLock.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4DBDF0",
+  "display_name": "TESObjectREFR_GetOrCreateLockData",
   "end_ea": "0x4DBE3A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4DBDF0",
+  "name": "TESObjectREFR_GetOrCreateLockData",
   "segment": ".text",
   "sha256": "bc52869d2b1bf53965368f132f80eb8f22a3b1edafea4c683a06ca3d2e3e1a53",
   "size": 74,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4DBDF0",
-  "type": "ExtraLock *__thiscall(_BYTE *this)",
+  "total_chunk_size": 74,
+  "type": "ExtraLockData *__thiscall(TESObjectREFR *this)",
   "xrefs_from_count": 35,
   "xrefs_to_count": 2
 }

@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 6,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_785360",
+  "chunks": [
+    [
+      "0x785360",
+      "0x7853F2"
+    ],
+    [
+      "0x9CB000",
+      "0x9CB02C"
+    ]
+  ],
+  "chunks_sha256": "a867d101848b8f44d38cd3e4960b009c7117d1ab9fd802dd9b521aad41bcc7bc",
+  "comment_regular": "Allocates a 0x30-byte spline-cache node from FormHeap and delegates field/key/value initialization to OB_stBezierSplineCacheNode_Init_010201A0.",
+  "comment_repeatable": "Allocates a 0x30-byte spline-cache node from FormHeap and delegates field/key/value initialization to OB_stBezierSplineCacheNode_Init_010201A0.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_stBezierSplineCacheMap_AllocateNode_010201A0",
   "end_ea": "0x7853F2",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_785360",
+  "name": "OB_stBezierSplineCacheMap_AllocateNode_010201A0",
   "segment": ".text",
   "sha256": "d0fc25a81f295ef2dcc3f03332ba13cd0f4070164aba8feb19f3816fcdadd4fa",
   "size": 146,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x785360",
-  "type": "_DWORD *__stdcall(int, int, int, _DWORD *, char)",
-  "xrefs_from_count": 59,
+  "total_chunk_size": 190,
+  "type": "OB_stBezierSplineCacheNode_010201A0 *__cdecl(OB_stBezierSplineCacheNode_010201A0 *left, OB_stBezierSplineCacheNode_010201A0 *parent, OB_stBezierSplineCacheNode_010201A0 *right, const OB_stBezierSplineCachePair_010201A0 *value, unsigned __int8 color)",
+  "xrefs_from_count": 75,
   "xrefs_to_count": 1
 }

@@ -9,20 +9,20 @@ double __thiscall sub_6DD0F0(_DWORD *this, int a2, int a3, float a4)
   float v11; // [esp+20h] [ebp-4h]
   float v12; // [esp+2Ch] [ebp+8h]
 
-  v4 = *(this + 0x12);
-  if ( v4 )
+  v4 = *(this + 0x12); /*0x6dd0f0*/
+  if ( v4 ) /*0x6dd0fa*/
   {
-    v5 = *(_DWORD *)(v4 + 0x10);
-    v6 = *(_BYTE *)(v4 + 0x14);
-    v7 = *(_DWORD *)(v4 + 0xC);
+    v5 = *(_DWORD *)(v4 + 0x10); /*0x6dd0fc*/
+    v6 = *(_BYTE *)(v4 + 0x14); /*0x6dd0ff*/
+    v7 = *(_DWORD *)(v4 + 0xC); /*0x6dd102*/
   }
   else
   {
-    v5 = 0;
-    v7 = 0;
-    v6 = 0;
+    v5 = 0; /*0x6dd107*/
+    v7 = 0; /*0x6dd109*/
+    v6 = 0; /*0x6dd10b*/
   }
-  (*(void (__cdecl **)(_DWORD, int, int, float *))(4 * v5 + 0xB3D250))(LODWORD(a4), v7 + a2 * v6, v7 + a3 * v6, &v9);
-  v12 = v10 * v10 + v9 * v9 + v11 * v11;
-  return (float)sqrt(v12);
+  (*(void (__cdecl **)(_DWORD, int, int, float *))(4 * v5 + 0xB3D250))(LODWORD(a4), v7 + a2 * v6, v7 + a3 * v6, &v9); /*0x6dd136*/
+  v12 = v10 * v10 + v9 * v9 + v11 * v11; /*0x6dd157*/
+  return (float)sqrt(v12); /*0x6dd16c*/
 }

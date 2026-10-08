@@ -1,48 +1,50 @@
-void __thiscall sub_45C7A0(char *this, TESForm *a2)
+// Verified 2026-10-04: DeleteForm identity anchored by literal diagnostic and Oblivion behavior. Removes changes entry with force=true. Flag4000 forms or RTTI TESObjectCELL receive a fresh FormID; ordinary forms get FormID0, global-list removal, empty editor ID and deduplicated queue insertion at manager+30. NO immediate destructor/free in this ordinary branch. Probable Fallout homolog82600530. Unknown complete queue-drain timing.
+// Verified continuation: ordinary deferred forms are ultimately destroyed by manager459870, which unlinks before destructor and orders TESBoundObject/SpellItem last. Queue insertion453910, removal453940 and load-completion call4668BA close ownership chain; prior queue-drain Unknown superseded for these anchors.
+void __thiscall TESSaveLoadGame_DeleteForm(TESSaveLoadGame_SerializationView *self, TESForm *form)
 {
   UInt32 mainThreadID; // esi
-  int v4; // eax
+  unsigned int v4; // eax
   void *v5; // eax
-  char *v6; // eax
+  SaveLoadDeferredFormNode *p_deferredDeleteList; // eax
   int FormID; // eax
 
-  mainThreadID = OSGlobals->mainThreadID;
-  if ( GetCurrentThreadId() == mainThreadID )
-    LOBYTE(v4) = *(this + 0x18);
+  mainThreadID = MEMORY[0xB33398]->mainThreadID; /*0x45c7a6*/
+  if ( GetCurrentThreadId() == mainThreadID ) /*0x45c7b4*/
+    LOBYTE(v4) = self->flags; /*0x45c7b6*/
   else
-    v4 = *((_DWORD *)this + 6) >> 0x12;
-  if ( (v4 & 1) == 0 )
-    PrintError("DeleteForm() was called, but the game is not being loaded.");
-  sub_452DF0(*(_DWORD **)this, a2->member.refID, 1);
-  v5 = OblivionDynamicCast(
-         a2,
+    v4 = self->flags >> 0x12; /*0x45c7be*/
+  if ( (v4 & 1) == 0 ) /*0x45c7c5*/
+    PrintError("DeleteForm() was called, but the game is not being loaded."); /*0x45c7cc*/
+  SaveLoadChangesMap_RemoveChanges(self->currentChangesMap, form->member.refID, 1); /*0x45c7e0*/
+  v5 = OblivionDynamicCast( /*0x45c7f4*/
+         form,
          0,
          (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
          &TESObjectCELL `RTTI Type Descriptor',
          0);
-  if ( (a2->member.flags & 0x4000) != 0 || v5 )
+  if ( (form->member.flags & 0x4000) != 0 || v5 ) /*0x45c809*/
   {
-    FormID = TESDataHandler_ReserveNextFormID((int *)TESDataHandler);
-    TESForm_SetFormID(a2, FormID, 1);
+    FormID = TESDataHandler_ReserveNextFormID((int *)g_TESDataHandler); /*0x45c854*/
+    TESForm_SetFormID(form, FormID, 1); /*0x45c85c*/
   }
   else
   {
-    TESForm_SetFormID(a2, 0, 1);
-    TESForm_RemoveFromGlobalLists(a2);
-    a2->vtbl->SetEditorID(a2, EmptyString);
-    v6 = this + 0x30;
-    if ( this == (char *)0xFFFFFFD0 )
+    TESForm_SetFormID(form, 0, 1); /*0x45c810*/
+    TESForm_RemoveFromGlobalLists(form); /*0x45c817*/
+    form->vtbl->SetEditorID(form, EmptyString); /*0x45c82b*/
+    p_deferredDeleteList = &self->deferredDeleteList; /*0x45c830*/
+    if ( self == (TESSaveLoadGame_SerializationView *)0xFFFFFFD0 ) /*0x45c834*/
     {
 LABEL_11:
-      BSSimpleList_PushFront((_DWORD *)this + 0xC, (int)a2);
+      BSSimpleList_PushFront(&self->deferredDeleteList.form, (int)form); /*0x45c841*/
     }
     else
     {
-      while ( *(TESForm **)v6 != a2 )
+      while ( p_deferredDeleteList->form != form ) /*0x45c838*/
       {
-        v6 = *((char **)v6 + 1);
-        if ( !v6 )
-          goto LABEL_11;
+        p_deferredDeleteList = p_deferredDeleteList->next; /*0x45c83a*/
+        if ( !p_deferredDeleteList ) /*0x45c83f*/
+          goto LABEL_11; /*0x45c83f*/
       }
     }
   }

@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x55CEF0",
+      "0x55CEF7"
+    ]
+  ],
+  "chunks_sha256": "ece045cd72819fefc220dfd44d2284740d4d23c7ae49d8b1557b97e9e0eb6e9a",
+  "comment_regular": "Verified linker-folded shared accessor: returns the dword/pointer at this+0xDC. It appears in multiple class vtables; BSTreeNode vtable slot +0x9C uses it specifically to return BSTreeNode.treeModel.",
+  "comment_repeatable": "Verified linker-folded shared accessor: returns the dword/pointer at this+0xDC. It appears in multiple class vtables; BSTreeNode vtable slot +0x9C uses it specifically to return BSTreeNode.treeModel.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "Concurrency::details::UMSSchedulerProxy::GetCompletionListEvent(void)",
+  "display_name": "Shared_GetDwordAtOffsetDC",
   "end_ea": "0x55CEF7",
+  "evidence_confidence": "Unknown",
   "flags": 21572,
   "has_pseudocode": true,
-  "name": "?GetCompletionListEvent@UMSSchedulerProxy@details@Concurrency@@QBEPAXXZ",
+  "name": "Shared_GetDwordAtOffsetDC",
   "segment": ".text",
   "sha256": "ece045cd72819fefc220dfd44d2284740d4d23c7ae49d8b1557b97e9e0eb6e9a",
   "size": 7,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x55CEF0",
-  "type": "void *__thiscall(Concurrency::details::UMSSchedulerProxy *__hidden this)",
+  "total_chunk_size": 7,
+  "type": "void *__thiscall(void *this)",
   "xrefs_from_count": 1,
   "xrefs_to_count": 7
 }

@@ -1,1 +1,5 @@
-tagPOINT
+struct tagPOINT
+{
+LONG x;
+LONG y;
+};

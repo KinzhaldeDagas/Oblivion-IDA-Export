@@ -1,4 +1,4 @@
-BSStringT *sub_A098A0()
+NiRTTI *sub_A098A0()
 {
-  return sub_70E220(&stru_B3F53C, "BSNodeReferences", (int)dword_B3F684);
+  return NiRTTI_Constructor(&stru_B3F53C, "BSNodeReferences", &stru_B3F684); /*0xa098b4*/
 }

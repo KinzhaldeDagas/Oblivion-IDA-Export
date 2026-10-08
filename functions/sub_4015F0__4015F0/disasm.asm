@@ -1,4 +1,4 @@
-0x4015F0: push    esi
+0x4015F0: push    esi; Marks a block free, appends it to the size-selected doubly linked free list, updates free-list statistics, and records the bin's active count.
 0x4015F1: mov     esi, [esp+4+arg_0]
 0x4015F5: or      dword ptr [esi+4], 40000000h
 0x4015FC: mov     eax, [esi+4]

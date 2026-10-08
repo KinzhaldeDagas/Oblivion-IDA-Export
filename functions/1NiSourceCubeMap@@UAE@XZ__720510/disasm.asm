@@ -40,3 +40,12 @@
 0x72058D: pop     esi
 0x72058E: add     esp, 10h
 0x720591: retn
+0x9CA1F0: mov     ecx, [ebp-10h]; this
+0x9CA1F3: jmp     ??1NiSourceTexture@@UAE@XZ; NiSourceTexture::~NiSourceTexture(void)
+0x9CA1F8: mov     edx, [esp+arg_4]
+0x9CA1FC: lea     eax, [edx-0Ch]
+0x9CA1FF: mov     ecx, [edx-10h]
+0x9CA202: xor     ecx, eax
+0x9CA204: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA209: mov     eax, offset stru_AF2974
+0x9CA20E: jmp     ___CxxFrameHandler3

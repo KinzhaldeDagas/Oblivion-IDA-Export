@@ -1,0 +1,4 @@
+struct OpenEffect
+{
+ActiveEffect super;
+};

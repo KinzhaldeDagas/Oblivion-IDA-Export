@@ -8,7 +8,7 @@
 0x572DD3: mov     [edx-8], cl
 0x572DD6: mov     [edx], ecx
 0x572DD8: add     edx, 18h
-0x572DDB: cmp     edx, offset unk_B12E18
+0x572DDB: cmp     edx, offset dword_B12E18
 0x572DE1: jl      short loc_572DD0
 0x572DE3: fstp    st
 0x572DE5: retn

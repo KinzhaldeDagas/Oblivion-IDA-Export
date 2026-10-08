@@ -14,7 +14,7 @@ void __userpurge sub_464060(
         char *a13,
         char *Str)
 {
-  int v14; // ebx
+  _BYTE *v14; // ebx
   _DWORD *v16; // edi
   char *v17; // eax
   int v18; // ebp
@@ -35,80 +35,82 @@ void __userpurge sub_464060(
   int v33; // [esp+10h] [ebp-14h] BYREF
   int v34[4]; // [esp+14h] [ebp-10h] BYREF
 
-  v14 = (int)a12;
-  if ( a12 )
-    *a12 = 0;
-  v16 = (_DWORD *)a11;
-  if ( !sub_459570(a10, (int *)a11, (int)a13, Str) )
+  v14 = a12; /*0x464064*/
+  if ( a12 ) /*0x46406f*/
+    *a12 = 0; /*0x464071*/
+  v16 = (_DWORD *)a11; /*0x46407c*/
+  if ( !sub_459570(a10, (int *)a11, (int)a13, Str) ) /*0x46408a*/
   {
-    v17 = (char *)Savegame_Rename(a1, a9, a6, a7, a8, a5, a2, a3, a4, a10, 0, 2);
-    v18 = (int)v17;
-    if ( v17 && v17[0x24] && (v19 = sub_45DBC0((int)a1, a9, a6, a7, a8, a5, a2, a3, a4, v17, 0)) != 0 )
+    v17 = (char *)TESSaveLoadGame_ResolveSaveFile(a1, a9, a6, a7, a8, a5, a2, a3, a4, a10, 0, 2); /*0x46409e*/
+    v18 = (int)v17; /*0x4640a3*/
+    if ( v17 /*0x4640bb*/
+      && v17[0x24]
+      && (v19 = TESSaveLoadGame_OpenAndValidateSave((int)a1, a9, a6, a7, a8, a5, a2, a3, a4, v17, 0)) != 0 )
     {
-      a12 = 0;
-      sub_45D5F0(a1, v18, a10, v19, v16, 0, &a12, 0, (float *)&v33, v34, &a11, 0);
-      if ( a13 )
-        _sprintf(a13, "%s %i", (const char *)dword_B38720, (unsigned __int16)a12);
-      if ( Str )
-        _sprintf(Str, "%02i:%02i:%02i", a11 / 0x36EE80, a11 % 0x36EE80 / 0xEA60, a11 % 0x36EE80 % 0xEA60 / 0x3E8);
-      (*(void (__thiscall **)(int, _DWORD, int))(*(_DWORD *)v18 + 0xC))(v18, 0, BSFile_FilePos_Beg);
+      a12 = 0; /*0x46410d*/
+      TESSaveLoadGame_ReadSaveHeader(a1, v18, a10, v19, v16, 0, &a12, 0, (float *)&v33, v34, &a11, 0); /*0x464115*/
+      if ( a13 ) /*0x464120*/
+        _sprintf(a13, "%s %i", (const char *)unk_B38720, (unsigned __int16)a12); /*0x464135*/
+      if ( Str ) /*0x464142*/
+        _sprintf(Str, "%02i:%02i:%02i", a11 / 0x36EE80, a11 % 0x36EE80 / 0xEA60, a11 % 0x36EE80 % 0xEA60 / 0x3E8); /*0x46418b*/
+      (*(void (__thiscall **)(int, _DWORD, int))(*(_DWORD *)v18 + 0xC))(v18, 0, BSFile_FilePos_Beg); /*0x4641a3*/
     }
     else
     {
-      if ( v16 )
-        *v16 = 0;
-      if ( a13 )
-        *a13 = 0;
-      if ( Str )
-        *Str = 0;
-      if ( !v18 )
-        goto LABEL_21;
+      if ( v16 ) /*0x4640bf*/
+        *v16 = 0; /*0x4640c1*/
+      if ( a13 ) /*0x4640cd*/
+        *a13 = 0; /*0x4640cf*/
+      if ( Str ) /*0x4640d8*/
+        *Str = 0; /*0x4640da*/
+      if ( !v18 ) /*0x4640df*/
+        goto LABEL_21; /*0x4640df*/
     }
-    BSFile_Flush(v18);
+    BSFile_Flush(v18); /*0x4641a7*/
 LABEL_21:
-    if ( v14 )
+    if ( v14 ) /*0x4641ae*/
     {
-      v20 = (const char *)(a10 + 0x3C);
-      if ( strstr((const char *)(a10 + 0x3C), "quicksave") )
+      v20 = (const char *)(a10 + 0x3C); /*0x4641b8*/
+      if ( strstr((const char *)(a10 + 0x3C), "quicksave") ) /*0x4641c1*/
       {
-        v21 = (char *)dword_B38710;
-        v22 = (_BYTE *)v14;
-        do
+        v21 = (char *)unk_B38710; /*0x4641cd*/
+        v22 = v14; /*0x4641d3*/
+        do /*0x4641e1*/
         {
-          v23 = *v21;
-          *v22++ = *v21++;
+          v23 = *v21; /*0x4641d5*/
+          *v22++ = *v21++; /*0x4641d7*/
         }
-        while ( v23 );
-        *(_DWORD *)(v14 + strlen((const char *)v14)) = dword_A3B140;
-        strcat((char *)v14, a13);
+        while ( v23 ); /*0x4641e1*/
+        *(_DWORD *)&v14[strlen(v14)] = dword_A3B140; /*0x4641f7*/
+        strcat(v14, a13); /*0x464221*/
       }
-      else if ( strstr(v20, "autosave") )
+      else if ( strstr(v20, "autosave") ) /*0x46423a*/
       {
-        v24 = (char *)dword_B38718;
-        v25 = (_BYTE *)v14;
-        do
+        v24 = (char *)unk_B38718; /*0x464246*/
+        v25 = v14; /*0x46424c*/
+        do /*0x46425c*/
         {
-          v26 = *v24;
-          *v25++ = *v24++;
+          v26 = *v24; /*0x464250*/
+          *v25++ = *v24++; /*0x464252*/
         }
-        while ( v26 );
-        v27 = (_DWORD *)(v14 + strlen((const char *)v14));
-        v28 = a13;
-        *v27 = dword_A3B140;
-        strcat((char *)v14, v28);
+        while ( v26 ); /*0x46425c*/
+        v27 = &v14[strlen(v14)]; /*0x464260*/
+        v28 = a13; /*0x464273*/
+        *v27 = dword_A3B140; /*0x464277*/
+        strcat(v14, v28); /*0x4642a1*/
       }
       else
       {
-        LODWORD(v32) = 5;
-        v29 = strrchr(v20, 0x5C) + 1;
-        if ( _strnicmp(v29, "Save ", v32) )
+        LODWORD(v32) = 5; /*0x4642be*/
+        v29 = strrchr(v20, 0x5C) + 1; /*0x4642c0*/
+        if ( _strnicmp(v29, "Save ", v32) ) /*0x4642c9*/
         {
-          strcpy((char *)v14, v29);
-          v30 = strlen((const char *)v14);
-          if ( v30 > 4 )
-            *(_BYTE *)(v30 + v14 - 4) = v31;
-          if ( v30 > 0x12 )
-            *(_BYTE *)(v14 + 0x12) = 0;
+          strcpy(v14, v29); /*0x4642d7*/
+          v30 = strlen(v14); /*0x4642ee*/
+          if ( v30 > 4 ) /*0x4642ff*/
+            v14[v30 - 4] = v31; /*0x464301*/
+          if ( v30 > 0x12 ) /*0x464308*/
+            v14[0x12] = 0; /*0x46430a*/
         }
       }
     }

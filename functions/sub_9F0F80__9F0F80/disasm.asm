@@ -1,7 +1,7 @@
 0x9F0F80: push    offset aThereWasAnErro; "There was an error accessing the device"...
 0x9F0F85: push    offset aSsavegamedevic; "sSaveGameDeviceError"
-0x9F0F8A: mov     ecx, offset unk_B386C8
-0x9F0F8F: call    GameSetting_ConstrAndReg
+0x9F0F8A: mov     ecx, offset stru_B386C8; self
+0x9F0F8F: call    GameSetting_ConstrAndReg; Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.
 0x9F0F94: push    offset sub_A214B0; void (__cdecl *)()
 0x9F0F99: call    _atexit
 0x9F0F9E: pop     ecx

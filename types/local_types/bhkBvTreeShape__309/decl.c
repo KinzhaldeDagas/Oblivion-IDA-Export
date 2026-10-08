@@ -1,1 +1,1 @@
-bhkBvTreeShape
+struct bhkBvTreeShape;

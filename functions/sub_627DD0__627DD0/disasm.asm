@@ -109,7 +109,7 @@
 0x627F0A: cmp     eax, ds:0B36C30h
 0x627F10: jl      short loc_627F2E
 0x627F12: mov     ecx, esi; this
-0x627F14: call    sub_5E6C60
+0x627F14: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x627F19: test    al, al
 0x627F1B: jz      short loc_627F28
 0x627F1D: mov     ecx, edi; this
@@ -150,11 +150,11 @@
 0x627F77: test    al, al
 0x627F79: jz      short loc_627FD1
 0x627F7B: mov     ecx, esi; this
-0x627F7D: call    TESObjectREFR_GetParentCell
+0x627F7D: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x627F82: test    eax, eax
 0x627F84: jz      short loc_627FD1
 0x627F86: mov     ecx, esi; this
-0x627F88: call    TESObjectREFR_GetParentCell
+0x627F88: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x627F8D: mov     ecx, eax
 0x627F8F: call    TESObjectCELL_GetWaterHeight
 0x627F94: fld     [esp+0Ch+arg_0]
@@ -168,11 +168,11 @@
 0x627FA5: pop     esi
 0x627FA6: retn
 0x627FA7: mov     ecx, esi; this
-0x627FA9: call    TESObjectREFR_GetParentCell
+0x627FA9: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x627FAE: test    eax, eax
 0x627FB0: jz      short loc_627FD1
 0x627FB2: mov     ecx, esi; this
-0x627FB4: call    TESObjectREFR_GetParentCell
+0x627FB4: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x627FB9: mov     ecx, eax
 0x627FBB: call    TESObjectCELL_GetWaterHeight
 0x627FC0: fld     [esp+0Ch+arg_0]

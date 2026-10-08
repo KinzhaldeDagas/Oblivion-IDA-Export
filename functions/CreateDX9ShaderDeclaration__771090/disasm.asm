@@ -1,4 +1,4 @@
-0x771090: push    ebp
+0x771090: push    ebp; MoonSugarEffect decode: CreateDX9ShaderDeclaration. Allocates 0x38-byte NiDX9ShaderDeclaration, initializes base fields, binds renderer/device/buffer-manager, allocates stream descriptors and disabled element arrays.
 0x771091: mov     ebp, [esp+4+a1]
 0x771095: push    edi
 0x771096: mov     edi, [esp+8+StreamCount]
@@ -26,7 +26,7 @@
 0x7710CE: mov     dword ptr [esi+2Ch], 0
 0x7710D5: mov     dword ptr [esi+30h], 0
 0x7710DC: mov     byte ptr [esi+34h], 0
-0x7710E0: call    sub_76E320
+0x7710E0: call    NiDX9ShaderDeclaration__Initialize; Oblivion NiDX9 declaration initializer. Binds renderer, buffer manager, and D3D device, then allocates stream descriptors and elementCount 0x1C-byte element records for each stream.
 0x7710E5: test    al, al
 0x7710E7: jnz     short loc_7710F5
 0x7710E9: mov     edx, [esi]

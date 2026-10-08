@@ -1,10 +1,18 @@
 {
   "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 417,
   "callers_count": 3,
+  "chunks": [
+    [
+      "0x7B4920",
+      "0x7B69D7"
+    ]
+  ],
   "chunks_sha256": "f2ec5230ebf1e8947e2e3cde114d42a3d395e348f25c8753d1bf0564edac31ab",
   "comment_regular": "\n[2026-10-03 frond selector correction] Exact name-query ENTRY is7B4920. loc7B4A20 is only case15 switch arm with cookie/stack epilogue; prior disabled plugin probe wrongly treated it as entry. Case15 returns BSSM_FRONDS; case19 at7B4A70 returns ambient name. Plugin now uses RenderPass selector0F and corrects the still-disabled probe entry.\n\nGeneric shader/render-pass name table. Case 0x0F returns BSSM_FRONDS, but this is only a pass-name mapping; it does not attach frond geometry or request SpeedTreeFrondShader.",
   "comment_repeatable": "Generic shader/render-pass name table. Case 0x0F returns BSSM_FRONDS, but this is only a pass-name mapping; it does not attach frond geometry or request SpeedTreeFrondShader.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 418,
   "display_name": "BSShaderProperty_GetRenderPassName",
   "end_ea": "0x7B69D7",
@@ -15,6 +23,7 @@
   "segment": ".text",
   "sha256": "f2ec5230ebf1e8947e2e3cde114d42a3d395e348f25c8753d1bf0564edac31ab",
   "size": 8375,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7B4920",
   "total_chunk_size": 8375,
   "type": "const char *__cdecl(int)",

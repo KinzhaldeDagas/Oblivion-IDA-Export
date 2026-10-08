@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x50D020",
-    "line": "sub     esp, 20Ch",
+    "line": "sub     esp, 20Ch; Shared Oblivion console execute routine for AdvSkill/AdvancePCSkill and ModPCSkill. It raises the base skill and manually increments skill, specialization, governing-attribute, and major counters. Unlike Player_SkillLevelIncrease, it never calls Player_MaybeStartNextAttributeBonusBucket, so repeated command-driven major advances do not perform normal attribute-bucket rollover.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x50D08C",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,13 +229,13 @@
   },
   {
     "ea": "0x50D0A3",
-    "line": "call    ActorValue_GetGroupOffsetFromAV",
+    "line": "call    ActorValue_GetGroupOffsetFromAV; RealArenaTraining fidelity pass: ActorValue_GetGroupOffsetFromAV(group, actorValue). Player skill-progress code calls this with group 2 before indexing player skillExp/requiredSkillExp.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x50D0A8",
-    "line": "mov     ecx, ds:0B33A98h",
+    "line": "mov     ecx, ds:0B33A98h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -247,13 +247,13 @@
   },
   {
     "ea": "0x50D0B1",
-    "line": "push    eax",
+    "line": "push    eax; skillIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50D0B2",
-    "line": "call    TESDataHandler_GetTESSkillByCode",
+    "line": "call    TESDataHandler_GetTESSkillByCode; Return one of exactly 21 inline Oblivion TESSkill records. Reject skillIndex > 20; otherwise return TESDataHandler+0xD8+(skillIndex*0x60).",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,19 +283,19 @@
   },
   {
     "ea": "0x50D0C4",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x50D0CA",
-    "line": "push    eax",
+    "line": "push    eax; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50D0CB",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x50D0E7",
-    "line": "jz      loc_50D1CA",
+    "line": "jz      loc_50D1CA; Console ModPCSkill repeats the native skill-level side effects for the requested count; it uses Oblivion's 21-skill AV/group-2 layout.",
     "mnemonic": "jz",
     "size": 6
   },
@@ -349,19 +349,19 @@
   },
   {
     "ea": "0x50D0F3",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x50D0F9",
-    "line": "push    eax",
+    "line": "push    eax; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50D0FA",
-    "line": "call    sub_65FA90",
+    "line": "call    Player_GetSkillProgress; Return raw PlayerCharacter::skillExp for one native Oblivion skill; return 0 outside SkillActorValue 0x0C..0x20. Major/minor affects the separate requirement array, not this numerator.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,13 +379,13 @@
   },
   {
     "ea": "0x50D107",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x50D10D",
-    "line": "push    esi",
+    "line": "push    esi; skill",
     "mnemonic": "push",
     "size": 1
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x50D112",
-    "line": "call    sub_65FAD0",
+    "line": "call    Player_GetRequiredSkillProgress; Return the precomputed required-use threshold for a TESSkill. Null skill, absent base class, or a non-native actor value falls back to 1.0; otherwise read requiredSkillExp[0..20]. Major/minor and specialization multipliers are already baked into this array.",
     "mnemonic": "call",
     "size": 5
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x50D11F",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -439,19 +439,19 @@
   },
   {
     "ea": "0x50D12D",
-    "line": "fstp    [esp+220h+duration]; float",
+    "line": "fstp    [esp+220h+duration]; progress",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x50D130",
-    "line": "push    edx; int",
+    "line": "push    edx; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50D131",
-    "line": "call    sub_65FA40",
+    "line": "call    Player_SetSkillProgress; Store raw Oblivion skill-use progress. Negative inputs clamp to 0; only native SkillActorValue 0x0C..0x20 maps into PlayerCharacter::skillExp[21]. This helper does not apply major/minor multipliers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x50D150",
-    "line": "call    Player_Actor_SetAViBase",
+    "line": "call    Player_Actor_SetAViBase; Player integer base-AV setter. Write the actor-base value, refresh UI, and call Player_OnActorValueBaseChanged with rebuild=true. For skills this rebuilds all requiredSkillExp entries but bypasses normal advancement counters.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,19 +517,19 @@
   },
   {
     "ea": "0x50D158",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x50D15E",
-    "line": "push    eax",
+    "line": "push    eax; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50D15F",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -577,19 +577,19 @@
   },
   {
     "ea": "0x50D180",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x50D186",
-    "line": "push    edx",
+    "line": "push    edx; specialization",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50D187",
-    "line": "call    sub_65D5F0",
+    "line": "call    Player_IncrementSpecializationAdvanceCount; Increment the Combat, Magic, or Stealth advance byte from TESSkill::specialization. This counter is independent of class major membership.",
     "mnemonic": "call",
     "size": 5
   },
@@ -601,19 +601,19 @@
   },
   {
     "ea": "0x50D18F",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x50D195",
-    "line": "push    eax",
+    "line": "push    eax; governingAttribute",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50D196",
-    "line": "call    sub_6648D0",
+    "line": "call    Player_IncrementAttributeBonus; Increment the current eight-byte governing-attribute bonus bucket for AttributeActorValue 0..7. Both major and non-major skill increases invoke this before any major-only rollover logic.",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,25 +631,25 @@
   },
   {
     "ea": "0x50D1A4",
-    "line": "push    eax",
+    "line": "push    eax; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50D1A5",
-    "line": "call    Actor_GetBaseClass",
+    "line": "call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x50D1AA",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x50D1AC",
-    "line": "call    sub_51C090",
+    "line": "call    TESClass_IsMajorSkillAV; Console routine increments majorSkillAdvances only for a seven-entry TESClass major match, but does not invoke the normal bucket-rollover helper afterward.",
     "mnemonic": "call",
     "size": 5
   },
@@ -877,13 +877,13 @@
   },
   {
     "ea": "0x50D23A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x50D23C",
-    "line": "call    sub_52EA90",
+    "line": "call    TESSkill_GetName; Resolve the native Oblivion TESSkill display name for the console-command level-up message.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1081,7 +1081,7 @@
   },
   {
     "ea": "0x50D2A3",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1129,13 +1129,13 @@
   },
   {
     "ea": "0x50D2CA",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x50D2CC",
-    "line": "call    sub_52EA90",
+    "line": "call    TESSkill_GetName; Resolve the native Oblivion TESSkill display name for the ordinary console-command skill-increased message.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1285,7 +1285,7 @@
   },
   {
     "ea": "0x50D31A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1357,7 +1357,7 @@
   },
   {
     "ea": "0x50D341",
-    "line": "jz      short loc_50D3BC",
+    "line": "jz      short loc_50D3BC; AdvSkill/ModPCSkill also shows mastery text when its repeated level changes cross a rank boundary, independent of major membership.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -1393,19 +1393,19 @@
   },
   {
     "ea": "0x50D34F",
-    "line": "push    ebp",
+    "line": "push    ebp; mastery",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50D350",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x50D352",
-    "line": "call    TESSKill_GetMasteryDescription",
+    "line": "call    TESSkill_GetMasteryDescription; Return a mastery-specific SKIL description. Novice uses the shared novice text; Apprentice through Master use the four descriptions stored at TESSkill+0x40..+0x58; invalid ranks return empty.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1471,13 +1471,13 @@
   },
   {
     "ea": "0x50D376",
-    "line": "push    0; a2",
+    "line": "push    0; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x50D378",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1495,7 +1495,7 @@
   },
   {
     "ea": "0x50D381",
-    "line": "call    sub_471990",
+    "line": "call    ActorAnimData_RemovePowerAttackGroups; Remove all power-attack animation groups (0x16-0x1A) across movement 0-3 and weapon 0-5 from ActorAnimData before rebuilding the dynamic power-attack list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1525,7 +1525,7 @@
   },
   {
     "ea": "0x50D391",
-    "line": "call    sub_476410",
+    "line": "call    ActorAnimData_RebuildPowerAttackKFList; Native Oblivion power-attack rebuild: clears groups 0x16..0x1A, generates movement/weapon/mastery filename candidates, probes the model loader, and installs parsed native power groups. No dynamic weapon type or override registry is consulted.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1537,13 +1537,13 @@
   },
   {
     "ea": "0x50D39C",
-    "line": "push    1; a2",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x50D39E",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1561,7 +1561,7 @@
   },
   {
     "ea": "0x50D3A7",
-    "line": "call    sub_471990",
+    "line": "call    ActorAnimData_RemovePowerAttackGroups; Remove all power-attack animation groups (0x16-0x1A) across movement 0-3 and weapon 0-5 from ActorAnimData before rebuilding the dynamic power-attack list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1591,13 +1591,13 @@
   },
   {
     "ea": "0x50D3B7",
-    "line": "call    sub_476410",
+    "line": "call    ActorAnimData_RebuildPowerAttackKFList; Native Oblivion power-attack rebuild: clears groups 0x16..0x1A, generates movement/weapon/mastery filename candidates, probes the model loader, and installs parsed native power groups. No dynamic weapon type or override registry is consulted.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x50D3BC",
-    "line": "call    sub_57A7D0",
+    "line": "call    UI_RefreshStatsMenuActorValues",
     "mnemonic": "call",
     "size": 5
   },

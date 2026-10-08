@@ -45,19 +45,19 @@
 0x52E499: jnz     short loc_52E4B3
 0x52E49B: mov     edx, [esp+34h+var_1C.m_data]
 0x52E49F: push    edx
-0x52E4A0: call    FormHeapFree
+0x52E4A0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x52E4A5: push    ebx
-0x52E4A6: call    FormHeapFree
+0x52E4A6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x52E4AB: add     esp, 8
 0x52E4AE: jmp     loc_52E639
 0x52E4B3: push    0FFFFFFFFh; a2
 0x52E4B5: mov     ecx, esi; this
-0x52E4B7: call    TESForm_GetOverrideFile
+0x52E4B7: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x52E4BC: mov     ebp, eax
 0x52E4BE: push    ebx; a2
 0x52E4BF: mov     ecx, esi; this
 0x52E4C1: mov     [esp+38h+arg_C], ebp
-0x52E4C5: call    TESForm_GetOverrideFile
+0x52E4C5: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x52E4CA: cmp     ebp, ebx
 0x52E4CC: mov     [esp+34h+arg_0], eax
 0x52E4D0: jnz     short loc_52E4F4
@@ -66,9 +66,9 @@
 0x52E4D8: jnz     short loc_52E4F2
 0x52E4DA: mov     eax, [esp+34h+var_1C.m_data]
 0x52E4DE: push    eax
-0x52E4DF: call    FormHeapFree
+0x52E4DF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x52E4E4: push    ebx
-0x52E4E5: call    FormHeapFree
+0x52E4E5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x52E4EA: add     esp, 8
 0x52E4ED: jmp     loc_52E639
 0x52E4F2: mov     ebp, eax
@@ -82,9 +82,9 @@
 0x52E50A: jnz     short loc_52E524
 0x52E50C: mov     ecx, [esp+34h+var_1C.m_data]
 0x52E510: push    ecx
-0x52E511: call    FormHeapFree
+0x52E511: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x52E516: push    ebx
-0x52E517: call    FormHeapFree
+0x52E517: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x52E51C: add     esp, 8
 0x52E51F: jmp     loc_52E639
 0x52E524: push    esi
@@ -183,3 +183,14 @@
 0x52E64E: retn    14h
 0x52E651: int     3; Trap to Debugger
 0x52E652: int     3; Trap to Debugger
+0x9B8960: lea     ecx, [ebp-14h]; void *
+0x9B8963: jmp     BSStringT_Clear
+0x9B8968: lea     ecx, [ebp-1Ch]; void *
+0x9B896B: jmp     BSStringT_Clear
+0x9B8970: mov     edx, [esp+arg_4]
+0x9B8974: lea     eax, [edx-24h]
+0x9B8977: mov     ecx, [edx-28h]
+0x9B897A: xor     ecx, eax
+0x9B897C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B8981: mov     eax, offset stru_AE2E48
+0x9B8986: jmp     ___CxxFrameHandler3

@@ -1,4 +1,4 @@
-0x7879A0: mov     eax, ecx
+0x7879A0: mov     eax, ecx; 2026-05-26 SpeedTreeOBSE: identified temporary SGeometry/output initializer used by the optional 360 diagnostic candidate export probe before stock GetGeometry(0x08). Must not be treated as live render-resource allocation.
 0x7879A2: fld     dword ptr ds:0A30634h
 0x7879A8: xor     ecx, ecx
 0x7879AA: fst     dword ptr [eax+38h]
@@ -23,7 +23,7 @@
 0x7879E5: mov     [eax+48h], ecx
 0x7879E8: mov     [eax+4Ch], cx
 0x7879EC: mov     [eax+50h], ecx
-0x7879EF: mov     [eax+54h], ecx
+0x7879EF: mov     [eax+54h], ecx; SGeometry constructor/subobject init: +0x54 here is geometry-output storage, not CSpeedTreeRT+0x54 directional image count.
 0x7879F2: mov     [eax+58h], ecx
 0x7879F5: mov     [eax+5Ch], ecx
 0x7879F8: mov     [eax+60h], ecx

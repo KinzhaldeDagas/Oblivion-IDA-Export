@@ -23,7 +23,7 @@
 0x8B3EA5: lea     edx, [edi+eax+50h]
 0x8B3EA9: push    edx
 0x8B3EAA: lea     ecx, [esp+88h+var_50]
-0x8B3EAE: call    sub_88FCC0
+0x8B3EAE: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x8B3EB3: fld     [esp+80h+var_6C]
 0x8B3EB7: mov     eax, [esi]
 0x8B3EB9: fadd    dword ptr [edi+eax+4]
@@ -102,7 +102,7 @@
 0x8B3FB7: add     eax, 50h ; 'P'
 0x8B3FBA: push    eax
 0x8B3FBB: lea     ecx, [esp+88h+var_50]
-0x8B3FBF: call    sub_88FCC0
+0x8B3FBF: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x8B3FC4: movaps  xmm0, [esp+80h+var_50]
 0x8B3FC9: mov     eax, [esi]
 0x8B3FCB: subps   xmm0, [esp+80h+var_60]

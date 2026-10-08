@@ -1,19 +1,32 @@
 {
-  "callees_count": 9,
-  "callers_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
+  "callers_count": 7,
+  "chunks": [
+    [
+      "0x452C20",
+      "0x452C8C"
+    ]
+  ],
+  "chunks_sha256": "b40d71713850d54c1850d4dfac7d747576c365c7fe2efc7e39686361373403ff",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "\nVerified: reads TESForm+0xC key, allocates/zeros 8-byte entry on lookup miss, ORs flags at entry+0 only if savedFormBuffer+4 is null; returns entry. Oblivion 45B670/45B700 and blob-drain callers establish modifier role. Probable homolog: Fallout 825EDC40 AddChangeFlags; Fallout takes formID directly, Oblivion takes TESForm*.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_452C20",
+  "display_name": "ChangesMap_AddFormChangeFlags",
   "end_ea": "0x452C8C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_452C20",
+  "name": "ChangesMap_AddFormChangeFlags",
   "segment": ".text",
   "sha256": "b40d71713850d54c1850d4dfac7d747576c365c7fe2efc7e39686361373403ff",
   "size": 108,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x452C20",
-  "type": "_DWORD *__thiscall(_DWORD *this, _DWORD *, int)",
+  "total_chunk_size": 108,
+  "type": "OblivionChangeData *__thiscall(ChangesMap *self, TESForm *form, unsigned int flags)",
   "xrefs_from_count": 49,
   "xrefs_to_count": 7
 }

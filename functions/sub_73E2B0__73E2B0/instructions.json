@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x73E2B0",
-    "line": "sub     esp, 24h",
+    "line": "sub     esp, 24h; Pass225/226: NiScreenTexture stream load; loads 0x1C-byte records and queues one object reference for +0x14 texturing property. Does not set +0x18 dirty mask.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x73E3ED",
-    "line": "call    sub_73DD70",
+    "line": "call    sub_73DD70; Pass226: NiScreenTexture record capacity helper; reallocates/copies 0x1C-byte records. Stock xrefs are load/copy only and do not set +0x18.",
     "mnemonic": "call",
     "size": 5
   },

@@ -9,7 +9,7 @@
 0x8AEDD5: mov     esi, [ebp+arg_0]
 0x8AEDD8: lea     eax, [esp+60h+var_50]
 0x8AEDDC: push    eax
-0x8AEDDD: call    sub_6848D0
+0x8AEDDD: call    bhkRefObject_CopyHavokObjectTransform; Copies low-level Havok object transform rows/columns from wrapper hkObject+0x70 into caller transform output.
 0x8AEDE2: lea     ecx, [esp+60h+var_50]
 0x8AEDE6: push    ecx
 0x8AEDE7: push    esi
@@ -18,7 +18,7 @@
 0x8AEDF1: push    edx
 0x8AEDF2: add     esi, 24h ; '$'
 0x8AEDF5: push    esi
-0x8AEDF6: call    sub_43F3E0
+0x8AEDF6: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x8AEDFB: mov     ecx, [esp+70h+var_4]
 0x8AEDFF: add     esp, 10h
 0x8AEE02: pop     esi

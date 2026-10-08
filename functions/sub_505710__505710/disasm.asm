@@ -1,4 +1,4 @@
-0x505710: push    ecx
+0x505710: push    ecx; HasMagicEffect command execute callback: extracts a magic-effect code parameter and calls the shared object/magic-target evaluator.
 0x505711: mov     ecx, [esp+4+l]
 0x505715: mov     edx, [esp+4+arg_10]
 0x505719: push    esi
@@ -17,7 +17,7 @@
 0x505738: push    edx; a2
 0x505739: push    eax; a1
 0x50573A: mov     dword ptr [esp+28h+var_4], 0
-0x505742: call    Script_ExtractArgs
+0x505742: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x505747: add     esp, 20h
 0x50574A: test    al, al
 0x50574C: jnz     short loc_505751
@@ -30,7 +30,7 @@
 0x50575A: push    0
 0x50575C: push    edx
 0x50575D: push    esi
-0x50575E: call    sub_4F8300
+0x50575E: call    Cmd_HasMagicEffect_EvalOrConsole; HasMagicEffect evaluator: validates thisObj as a magic target, gets MagicTarget through vfunc +0x124, then queries MagicTarget_HasEffect(effectCode).
 0x505763: add     esp, 10h
 0x505766: pop     esi
 0x505767: pop     ecx

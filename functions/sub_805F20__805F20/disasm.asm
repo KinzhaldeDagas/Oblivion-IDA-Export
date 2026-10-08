@@ -1,4 +1,4 @@
-0x805F20: push    0FFFFFFFFh
+0x805F20: push    0FFFFFFFFh; BloodOnDeath decode 2026-05-30: GeometryDecalShader draw/update callback. Consumes existing decal geometry and updates constants; does not emit blood/trails.
 0x805F22: push    offset SEH_805F20
 0x805F27: mov     eax, large fs:0
 0x805F2D: push    eax
@@ -34,7 +34,7 @@
 0x805F73: mov     ebx, eax
 0x805F75: mov     eax, [edx+80h]
 0x805F7B: mov     ecx, esi
-0x805F7D: call    eax
+0x805F7D: call    eax; BloodOnDeath decode: refresh shader constant maps before rendering existing decal geometry.
 0x805F7F: xor     ecx, ecx
 0x805F81: cmp     [esp+34h+arg_4], ecx
 0x805F85: setnz   cl
@@ -117,3 +117,12 @@
 0x8060CB: fst     [esp+34h+var_14]
 0x8060CF: fstp    [esp+34h+var_10]
 0x8060D3: jmp     loc_806010
+0x9D0BE0: lea     ecx, [ebp+8]; void *
+0x9D0BE3: jmp     sub_4027D0
+0x9D0BE8: mov     edx, [esp+arg_4]
+0x9D0BEC: lea     eax, [edx-24h]
+0x9D0BEF: mov     ecx, [edx-28h]
+0x9D0BF2: xor     ecx, eax
+0x9D0BF4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D0BF9: mov     eax, offset stru_AF9444
+0x9D0BFE: jmp     ___CxxFrameHandler3

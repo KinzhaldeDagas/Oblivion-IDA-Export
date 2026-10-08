@@ -4,7 +4,7 @@
 0x584D98: test    [esp+4+arg_0], 1
 0x584D9D: jz      short loc_584DA8
 0x584D9F: push    esi
-0x584DA0: call    FormHeapFree
+0x584DA0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x584DA5: add     esp, 4
 0x584DA8: mov     eax, esi
 0x584DAA: pop     esi

@@ -4,7 +4,6 @@
 0x572F65: push    edi
 0x572F66: xor     ebp, ebp
 0x572F68: jmp     short loc_572F70
-0x572F6A: align 10h
 0x572F70: fldz
 0x572F72: lea     esi, [ebp+ebp*2+0]
 0x572F76: mov     edx, ds:0B12DD0h[esi*8]
@@ -59,7 +58,7 @@
 0x573010: lea     edx, [esp+18h+var_4]
 0x573014: push    edx
 0x573015: call    eax
-0x573017: mov     eax, dword ptr [esp+14h+var_4]
+0x573017: mov     eax, [esp+14h+var_4]
 0x57301B: test    eax, eax
 0x57301D: jz      short loc_57303D
 0x57301F: mov     edi, eax

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7AE070",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Culling.dll decode: BSShaderAccumulator flush entry at vtable slot +0x50. Sorts and dispatches queued render passes, processes query/refraction/special lists, then clears pending state via 0x733830.",
     "mnemonic": "push",
     "size": 2
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x7AE0CC",
-    "line": "cmp     ds:0B42EACh, bp",
+    "line": "cmp     ds:0B42EACh, bp; Mode-5 accumulator flush selects the dedicated shadow-production bucket path.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x7AE0DF",
-    "line": "mov     edi, 6",
+    "line": "mov     edi, 6; Mode-5 path begins its first and only ordinary bucket range, selectors 6..9.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x7AE0ED",
-    "line": "call    eax",
+    "line": "call    eax; Flush mode-5 pass buckets 6 through 9.",
     "mnemonic": "call",
     "size": 2
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x7AE0F7",
-    "line": "mov     edi, 154h",
+    "line": "mov     edi, 154h; Mode-5 path begins its second bucket range, selectors 0x154..0x155.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x7AE109",
-    "line": "call    eax",
+    "line": "call    eax; Flush mode-5 pass buckets 0x154 through 0x155.",
     "mnemonic": "call",
     "size": 2
   },
@@ -301,13 +301,13 @@
   },
   {
     "ea": "0x7AE116",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; After the six mode-5 buckets, reset all 0x1A3 buckets. Residual 0x177..0x17A entries are discarded without draw.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7AE118",
-    "line": "call    sub_7AB6F0",
+    "line": "call    BSShaderAccumulator_ClearAccumulatedPasses; Clear all accumulator pass buckets/lists after mode-5 shadow submission.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x7AE133",
-    "line": "call    GetShaderDefinition",
+    "line": "call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.",
     "mnemonic": "call",
     "size": 5
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x7AE18D",
-    "line": "call    sub_7A9E10",
+    "line": "call    sub_7A9E10; Diagnostic RenderPasses scene-node builder. Calls BSShaderProperty_GetRenderPassName for pass bucket names, so BSSM_FRONDS here is debug/display evidence only, not geometry attachment.",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x7AE193",
-    "line": "mov     ecx, offset RenderWindowNiNode; this",
+    "line": "mov     ecx, 0B42CF4h; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x7AE1BD",
-    "line": "mov     [esp+4Ch+var_30], edx",
+    "line": "mov     dword ptr [esp+4Ch+selector], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -823,7 +823,7 @@
   },
   {
     "ea": "0x7AE246",
-    "line": "fstp    [esp+4Ch+var_1C]",
+    "line": "fstp    [esp+4Ch+outPass.geometry_00]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -847,7 +847,7 @@
   },
   {
     "ea": "0x7AE251",
-    "line": "fstp    [esp+4Ch+var_18]",
+    "line": "fstp    dword ptr [esp+4Ch+outPass.selector_04]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -859,7 +859,7 @@
   },
   {
     "ea": "0x7AE258",
-    "line": "fstp    [esp+4Ch+var_14]",
+    "line": "fstp    dword ptr [esp+4Ch+outPass.lightCount_08]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -931,7 +931,7 @@
   },
   {
     "ea": "0x7AE279",
-    "line": "lea     ecx, [esp+4Ch+var_1C]",
+    "line": "lea     ecx, [esp+4Ch+outPass]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1279,7 +1279,7 @@
   },
   {
     "ea": "0x7AE348",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1345,7 +1345,7 @@
   },
   {
     "ea": "0x7AE372",
-    "line": "call    sub_7D1320",
+    "line": "call    sub_7D1320; MoonSugarEffect decode: native shader-id selector for standard shader property families. Updates program/pass render-state choices and constants for hardcoded IDs before object render.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1477,37 +1477,37 @@
   },
   {
     "ea": "0x7AE3B9",
-    "line": "push    edi",
+    "line": "push    edi; lightCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7AE3BA",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7AE3BC",
-    "line": "push    edi",
+    "line": "push    edi; selector",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7AE3BD",
-    "line": "push    edi",
+    "line": "push    edi; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7AE3BE",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7AE3BF",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1639,7 +1639,7 @@
   },
   {
     "ea": "0x7AE409",
-    "line": "call    eax",
+    "line": "call    eax; DX11 migration audit: IDirect3DDevice9::CreateQuery(D3DQUERYTYPE_OCCLUSION=9), device vtable +0x1D8 (slot 118).",
     "mnemonic": "call",
     "size": 2
   },
@@ -1687,13 +1687,13 @@
   },
   {
     "ea": "0x7AE41E",
-    "line": "push    3; float",
+    "line": "push    3; selector",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7AE420",
-    "line": "push    ebp; int",
+    "line": "push    ebp; entry",
     "mnemonic": "push",
     "size": 1
   },
@@ -1705,7 +1705,7 @@
   },
   {
     "ea": "0x7AE423",
-    "line": "call    sub_7A9820",
+    "line": "call    BSShaderAccumulator_DrawRenderPass; Submit one accumulated Oblivion RenderPass. Publishes selector/current entry, dispatches each light pointer, then invokes geometry render virtual +0x84 exactly once. It does not prevalidate the Lighting30 selector; invalid 0x177..0x17A records are suppressed later by SetupRenderPass leaving PassCount zero. Valid SimpleShadow compatibility records each have lightCount=1, so eligible lights remain separate receiver draws.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1867,13 +1867,13 @@
   },
   {
     "ea": "0x7AE47D",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7AE47F",
-    "line": "call    sub_7E2400",
+    "line": "call    RenderPass_Destroy; Destroy the members of one RenderPass: clear selector, free the owned light-pointer array, clear byte +0x09 and array pointer. This function does not free the 0x10-byte RenderPass record itself and does not release the raw geometry/light objects.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1885,7 +1885,7 @@
   },
   {
     "ea": "0x7AE485",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1897,7 +1897,7 @@
   },
   {
     "ea": "0x7AE48D",
-    "line": "cmp     byte ptr ds:0B42CDAh, 0",
+    "line": "cmp     byte ptr ds:0B42CDAh, 0; Frozen replay in render mode 0 suppresses reset of the temporary occlusion/render list; other modes or active accumulation reset it normally.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -1981,13 +1981,13 @@
   },
   {
     "ea": "0x7AE4C7",
-    "line": "mov     edx, [esp+4Ch+var_30]",
+    "line": "mov     edx, dword ptr [esp+4Ch+selector]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7AE4CB",
-    "line": "mov     [esp+4Ch+var_30], eax",
+    "line": "mov     dword ptr [esp+4Ch+selector], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2017,7 +2017,7 @@
   },
   {
     "ea": "0x7AE4D9",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2059,7 +2059,7 @@
   },
   {
     "ea": "0x7AE4F1",
-    "line": "cmp     ds:0B42CDAh, bl",
+    "line": "cmp     ds:0B42CDAh, bl; When renderer accumulation is not frozen, reset the temporary list immediately on the non-query path.",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -2197,7 +2197,7 @@
   },
   {
     "ea": "0x7AE55A",
-    "line": "mov     ecx, [esp+4Ch+var_30]",
+    "line": "mov     ecx, dword ptr [esp+4Ch+selector]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2293,7 +2293,7 @@
   },
   {
     "ea": "0x7AE596",
-    "line": "lea     edx, [esp+54h+var_30]",
+    "line": "lea     edx, [esp+54h+selector]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2340,12 +2340,6 @@
     "size": 2
   },
   {
-    "ea": "0x7AE5A8",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x7AE5B0",
     "line": "add     dword ptr ds:0B42CA8h, 1",
     "mnemonic": "add",
@@ -2389,7 +2383,7 @@
   },
   {
     "ea": "0x7AE5C9",
-    "line": "lea     ecx, [esp+54h+var_30]",
+    "line": "lea     ecx, [esp+54h+selector]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2407,7 +2401,7 @@
   },
   {
     "ea": "0x7AE5CF",
-    "line": "call    edx",
+    "line": "call    edx; DX11 migration audit: GetData(&DWORD,4,FLUSH=1); S_FALSE=1 branches back to 0x7AE5B0. Query progress is required within this render call, before Present.",
     "mnemonic": "call",
     "size": 2
   },
@@ -2425,7 +2419,7 @@
   },
   {
     "ea": "0x7AE5D6",
-    "line": "cmp     [esp+4Ch+var_30], 0",
+    "line": "cmp     dword ptr [esp+4Ch+selector], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -2449,19 +2443,19 @@
   },
   {
     "ea": "0x7AE5E2",
-    "line": "push    eax",
+    "line": "push    eax; payloadAddress",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7AE5E3",
-    "line": "lea     ecx, [esi+21ECh]",
+    "line": "lea     ecx, [esi+21ECh]; this",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x7AE5E9",
-    "line": "call    sub_7ABDE0",
+    "line": "call    BSTPersistentList_AppendTailReusingFreeNode; BSTPersistentList tail append. Reuses a local free node or acquires one, stores the caller's payload pointer verbatim at node+0x08, links at tail, and increments count. For accumulator RenderPass buckets this creates a non-owning pointer borrow; it does not copy, retain, or destroy the RenderPass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2509,7 +2503,7 @@
   },
   {
     "ea": "0x7AE610",
-    "line": "cmp     byte ptr ds:0B42CDAh, 0",
+    "line": "cmp     byte ptr ds:0B42CDAh, 0; Non-frozen flush clears the retained occlusion-query count; frozen replay preserves it.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -2551,7 +2545,7 @@
   },
   {
     "ea": "0x7AE62C",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2599,13 +2593,13 @@
   },
   {
     "ea": "0x7AE647",
-    "line": "cmp     byte ptr ds:0B42CDAh, 0",
+    "line": "cmp     byte ptr ds:0B42CDAh, 0; If FreezeRenderAccumulation is active in render mode 0, set the retained-scene latch used by subsequent AccumulateGeometry entry filtering.",
     "mnemonic": "cmp",
     "size": 7
   },
   {
     "ea": "0x7AE64E",
-    "line": "jz      short loc_7AE660",
+    "line": "jz      short BSShaderAccumulator_FlushPassBuckets4_17B; Flush selector buckets in ascending order for 4 <= selector < 0x17C: base Lighting30 0x12D..0x146 precedes SimpleShadow 0x14E..0x151.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -2617,7 +2611,7 @@
   },
   {
     "ea": "0x7AE657",
-    "line": "jnz     short loc_7AE660",
+    "line": "jnz     short BSShaderAccumulator_FlushPassBuckets4_17B; Flush selector buckets in ascending order for 4 <= selector < 0x17C: base Lighting30 0x12D..0x146 precedes SimpleShadow 0x14E..0x151.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -2629,7 +2623,7 @@
   },
   {
     "ea": "0x7AE660",
-    "line": "mov     edi, 4",
+    "line": "mov     edi, 4; Ordinary flush loop covers selectors 4 through 0x17B with specialMode 0; this necessarily reaches 0x177..0x17A.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2671,7 +2665,7 @@
   },
   {
     "ea": "0x7AE670",
-    "line": "add     edi, 1",
+    "line": "add     edi, 1;",
     "mnemonic": "add",
     "size": 3
   },
@@ -2737,7 +2731,7 @@
   },
   {
     "ea": "0x7AE68B",
-    "line": "call    sub_7ABAC0",
+    "line": "call    BSShaderAccumulator_DrainRenderPassList; Pass249 runtime correction: decoded native RenderPassListDrain call, but do not patch this callsite. The seven-callsite rendered-reference transaction repeatedly caused the identical world-load StackHash access violation. Preserve the native call.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2767,19 +2761,19 @@
   },
   {
     "ea": "0x7AE69D",
-    "line": "push    offset sub_7AA390",
+    "line": "push    offset RenderPassNode_CompareGeometryDataAddressAscending; compare",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x7AE6A2",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7AE6A4",
-    "line": "call    sub_7AA550",
+    "line": "call    BSTPersistentRenderPassList_StableMergeSort; MEF PERF 2026-10-07 PASS5: PERF-15 Flush direct sorts at7AE6A4 and7AE6CC use7AA390 before specialized rendering paths. Eight direct sort calls examined use only7A9A90 or7AA390; this does not prove there are no indirect/plugin callers with other comparators. Unknown comparator must retain native behavior/call sequence.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2803,7 +2797,7 @@
   },
   {
     "ea": "0x7AE6B2",
-    "line": "call    sub_7F8DB0",
+    "line": "call    sub_7F8DB0; Pass205: Object-batch render path calls shader virtual +0x2C with NiPropertyState returned by sub_405760(geometry).",
     "mnemonic": "call",
     "size": 5
   },
@@ -2815,7 +2809,7 @@
   },
   {
     "ea": "0x7AE6BD",
-    "line": "jbe     short loc_7AE6E2",
+    "line": "jbe     short BSShaderAccumulator_FlushPassBuckets17C_197",
     "mnemonic": "jbe",
     "size": 2
   },
@@ -2827,49 +2821,49 @@
   },
   {
     "ea": "0x7AE6C5",
-    "line": "push    offset sub_7AA390",
+    "line": "push    offset RenderPassNode_CompareGeometryDataAddressAscending; compare",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x7AE6CA",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7AE6CC",
-    "line": "call    sub_7AA550",
+    "line": "call    BSTPersistentRenderPassList_StableMergeSort",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7AE6D1",
-    "line": "mov     ecx, [esi+2264h]",
+    "line": "mov     ecx, [esi+2264h]; Call ABI setup: ECX=[BSShaderAccumulator+0x2264] is batchScratch; stack args are renderPassList=[accumulator+0x90] and shaderIndex=0x195. Full gated sequence through the call is 8B 8E 64 22 00 00 68 95 01 00 00 57 E8 2E AD 04 00.",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x7AE6D7",
-    "line": "push    195h",
+    "line": "push    195h; shaderIndex",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x7AE6DC",
-    "line": "push    edi",
+    "line": "push    edi; renderPassList",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7AE6DD",
-    "line": "call    sub_7F9410",
+    "line": "call    OB_DrawLODTreePassList_WithMipBias_010201A0; Sole code xref to 0x7F9410. Exact bytes E8 2E AD 04 00; ECX=[accumulator+0x2264], stack args list and 0x195; caller ignores EAX and performs no sampler0 state8 reset.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7AE6E2",
-    "line": "mov     edi, 17Ch",
+    "line": "mov     edi, 17Ch; Next ordinary bucket range covers 0x17C..0x197. The earlier 4..0x17B loop fully owns the target 0x177..0x17A selectors.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2995,7 +2989,7 @@
   },
   {
     "ea": "0x7AE714",
-    "line": "call    sub_7ABAC0",
+    "line": "call    BSShaderAccumulator_DrainRenderPassList; Pass249 runtime correction: decoded native RenderPassListDrain call, but do not patch this callsite. The seven-callsite rendered-reference transaction repeatedly caused the identical world-load StackHash access violation. Preserve the native call.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3013,7 +3007,7 @@
   },
   {
     "ea": "0x7AE721",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3163,13 +3157,13 @@
   },
   {
     "ea": "0x7AE769",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7AE76B",
-    "line": "call    sub_7A9C30",
+    "line": "call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3421,13 +3415,13 @@
   },
   {
     "ea": "0x7AE80E",
-    "line": "mov     [esp+54h+var_30], ebp",
+    "line": "mov     dword ptr [esp+54h+selector], ebp",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7AE812",
-    "line": "call    sub_7D1320",
+    "line": "call    sub_7D1320; MoonSugarEffect decode: native shader-id selector for standard shader property families. Updates program/pass render-state choices and constants for hardcoded IDs before object render.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3583,13 +3577,13 @@
   },
   {
     "ea": "0x7AE85B",
-    "line": "mov     [esp+54h+var_30], ebp",
+    "line": "mov     dword ptr [esp+54h+selector], ebp",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7AE85F",
-    "line": "call    sub_7FD260",
+    "line": "call    Lighting30Shader_SelectRenderPass; Oblivion Lighting30 selector activation. Selectors outside 0x15E/0x15F restore the main constant maps, derive row selector-0x12A, rewrite automatic vertex/pixel-constant enable flags from B46988/B46A60, and apply a route render-state group. SimpleShadow selectors 0x14E..0x151 use valid rows and route group 7. Stock one-light selectors 0x177..0x17A are not rejected here: they derive rows 0x4D..0x50 and use the generic route-group-0 path. The later per-geometry resolver is the actual validity gate; every later selector activation deterministically rewrites these flags before its draw.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3661,7 +3655,7 @@
   },
   {
     "ea": "0x7AE87F",
-    "line": "mov     ebp, [esp+4Ch+var_30]",
+    "line": "mov     ebp, dword ptr [esp+4Ch+selector]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3673,43 +3667,43 @@
   },
   {
     "ea": "0x7AE885",
-    "line": "push    0",
+    "line": "push    0; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7AE887",
-    "line": "push    0",
+    "line": "push    0; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7AE889",
-    "line": "push    ebp",
+    "line": "push    ebp; selector",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7AE88A",
-    "line": "lea     ecx, [esp+5Ch+var_1C]",
+    "line": "lea     ecx, [esp+5Ch+outPass]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7AE88E",
-    "line": "push    ebx",
+    "line": "push    ebx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7AE88F",
-    "line": "push    ecx",
+    "line": "push    ecx; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7AE890",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3742,12 +3736,6 @@
     "line": "jmp     short loc_7AE8B0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x7AE8AD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x7AE8B0",
@@ -4273,25 +4261,25 @@
   },
   {
     "ea": "0x7AE9B2",
-    "line": "mov     eax, [esp+4Ch+var_30]",
+    "line": "mov     eax, dword ptr [esp+4Ch+selector]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7AE9B6",
-    "line": "push    eax; float",
+    "line": "push    eax; selector",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7AE9B7",
-    "line": "lea     ecx, [esp+50h+var_1C]",
+    "line": "lea     ecx, [esp+50h+outPass]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7AE9BB",
-    "line": "push    ecx; int",
+    "line": "push    ecx; entry",
     "mnemonic": "push",
     "size": 1
   },
@@ -4303,7 +4291,7 @@
   },
   {
     "ea": "0x7AE9BE",
-    "line": "call    sub_7A9820",
+    "line": "call    BSShaderAccumulator_DrawRenderPass; Submit one accumulated Oblivion RenderPass. Publishes selector/current entry, dispatches each light pointer, then invokes geometry render virtual +0x84 exactly once. It does not prevalidate the Lighting30 selector; invalid 0x177..0x17A records are suppressed later by SetupRenderPass leaving PassCount zero. Valid SimpleShadow compatibility records each have lightCount=1, so eligible lights remain separate receiver draws.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4429,7 +4417,7 @@
   },
   {
     "ea": "0x7AE9FE",
-    "line": "lea     ecx, [esp+4Ch+var_1C]",
+    "line": "lea     ecx, [esp+4Ch+outPass]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -4441,7 +4429,7 @@
   },
   {
     "ea": "0x7AEA0A",
-    "line": "call    sub_7E2400",
+    "line": "call    RenderPass_Destroy; Destroy the members of one RenderPass: clear selector, free the owned light-pointer array, clear byte +0x09 and array pointer. This function does not free the 0x10-byte RenderPass record itself and does not release the raw geometry/light objects.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4465,7 +4453,7 @@
   },
   {
     "ea": "0x7AEA22",
-    "line": "call    sub_7ACF40",
+    "line": "call    sub_7ACF40; MoonSugarEffect decode: drains immediate geometry groups/nodes during accumulator flush, interleaving queued RenderPass lists by depth and using sub_7A9820 for property-owned shader IDs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4543,19 +4531,19 @@
   },
   {
     "ea": "0x7AEA4F",
-    "line": "call    sub_7ACF40",
+    "line": "call    sub_7ACF40; MoonSugarEffect decode: drains immediate geometry groups/nodes during accumulator flush, interleaving queued RenderPass lists by depth and using sub_7A9820 for property-owned shader IDs.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7AEA54",
-    "line": "mov     edi, 198h",
+    "line": "mov     edi, 198h; Final ordinary bucket range covers 0x198..0x19F with the special argument set; selector buckets 0x1A0..0x1A2 are not part of these flush loops.",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x7AEA59",
-    "line": "mov     [esp+4Ch+var_30], edi",
+    "line": "mov     dword ptr [esp+4Ch+selector], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4687,7 +4675,7 @@
   },
   {
     "ea": "0x7AEAA1",
-    "line": "call    sub_7ACF40",
+    "line": "call    sub_7ACF40; MoonSugarEffect decode: drains immediate geometry groups/nodes during accumulator flush, interleaving queued RenderPass lists by depth and using sub_7A9820 for property-owned shader IDs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4765,7 +4753,7 @@
   },
   {
     "ea": "0x7AEAC6",
-    "line": "call    sub_7ABAC0",
+    "line": "call    BSShaderAccumulator_DrainRenderPassList; Pass249 runtime correction: decoded native RenderPassListDrain call, but do not patch this callsite. The seven-callsite rendered-reference transaction repeatedly caused the identical world-load StackHash access violation. Preserve the native call.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4783,7 +4771,7 @@
   },
   {
     "ea": "0x7AEAD3",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4999,7 +4987,7 @@
   },
   {
     "ea": "0x7AEB33",
-    "line": "mov     edi, [esp+4Ch+var_30]",
+    "line": "mov     edi, dword ptr [esp+4Ch+selector]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5041,7 +5029,7 @@
   },
   {
     "ea": "0x7AEB4D",
-    "line": "mov     [esp+4Ch+var_30], edi",
+    "line": "mov     dword ptr [esp+4Ch+selector], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5077,7 +5065,7 @@
   },
   {
     "ea": "0x7AEB61",
-    "line": "call    sub_7ABAC0",
+    "line": "call    BSShaderAccumulator_DrainRenderPassList; Pass249 runtime correction: decoded native RenderPassListDrain call, but do not patch this callsite. The seven-callsite rendered-reference transaction repeatedly caused the identical world-load StackHash access violation. Preserve the native call.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5179,7 +5167,7 @@
   },
   {
     "ea": "0x7AEBA7",
-    "line": "mov     edi, offset dword_B42CF8",
+    "line": "mov     edi, offset unk_B42CF8",
     "mnemonic": "mov",
     "size": 5
   },
@@ -5203,7 +5191,7 @@
   },
   {
     "ea": "0x7AEBB3",
-    "line": "call    sub_709C60",
+    "line": "call    sub_709C60; MoonSugarEffect decode: NiScreenElements render thunk. Callers push NiDX9Renderer on the stack, then this thunk jumps to object vtable +0x84.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5215,7 +5203,7 @@
   },
   {
     "ea": "0x7AEBBB",
-    "line": "cmp     edi, offset dword_B42D3C",
+    "line": "cmp     edi, offset unk_B42D3C",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -5317,7 +5305,7 @@
   },
   {
     "ea": "0x7AEBF2",
-    "line": "call    SetCameraViewProj",
+    "line": "call    SetCameraViewProj; MoonSugarEffect build 16: after temporary camera sway is restored, plugin calls SetCameraViewProj(g_Renderer, restoredCamera) to reset renderer camera globals/view/projection/viewport to the original camera state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5386,5 +5374,89 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CD4C0",
+    "line": "mov     eax, [ebp-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD4C3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CD4C4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD4C9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CD4CA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CD4CB",
+    "line": "lea     ecx, [ebp-1Ch]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD4CE",
+    "line": "jmp     RenderPass_Destroy; Destroy the members of one RenderPass: clear selector, free the owned light-pointer array, clear byte +0x09 and array pointer. This function does not free the 0x10-byte RenderPass record itself and does not release the raw geometry/light objects.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD4D3",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CD4D7",
+    "line": "lea     eax, [edx-3Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD4DA",
+    "line": "mov     ecx, [edx-40h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD4DD",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CD4DF",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD4E4",
+    "line": "mov     eax, offset stru_AF67BC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD4E9",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

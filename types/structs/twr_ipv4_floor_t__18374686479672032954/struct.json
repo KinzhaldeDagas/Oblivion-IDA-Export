@@ -1,34 +1,63 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "twr_ipv4_floor_t",
+  "definition": "struct __unaligned __declspec(align(1)) twr_ipv4_floor_t\n{\nu_int16 count_lhs;\nu_int8 protid;\nu_int16 count_rhs;\nu_int32 ipv4addr;\n}\n",
   "id": 18374686479672032954,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "count_lhs",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 2
+      "size": 2,
+      "type": "u_int16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "protid",
       "offset": 2,
       "offset_hex": "0x2",
-      "size": 1
+      "size": 1,
+      "type": "u_int8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "count_rhs",
       "offset": 3,
       "offset_hex": "0x3",
-      "size": 2
+      "size": 2,
+      "type": "u_int16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ipv4addr",
       "offset": 5,
       "offset_hex": "0x5",
-      "size": 4
+      "size": 4,
+      "type": "u_int32"
     }
   ],
   "name": "twr_ipv4_floor_t",
+  "ordinal": 3317,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 9
 }

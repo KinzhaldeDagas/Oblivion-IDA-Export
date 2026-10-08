@@ -1,19 +1,32 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x71AC10",
+      "0x71ACD6"
+    ]
+  ],
+  "chunks_sha256": "a2b5e147e342b05afffab562bc2430698f3de8821f1b656986f1ea48eb25f1a3",
+  "comment_regular": "BSShaderAccumulator visible-array submit entry (vtable +0x54). Iterates the visible geometry array; directly renders excluded geometry and queues eligible geometry for accumulator/pass-bucket processing.\n\nCULLING MainWorld goal 2026-09-27: visible-array slot +0x54 does not route each entry through single-geometry slot +0x58. It independently tests property/object flags, either directly invokes geometry Render at 0x71ACBF or appends to the accumulator list at +0x0C. A hook on +0x58 alone cannot observe the complete array submission route.\n\nMoonSugarEffect decode: BSShaderAccumulator visible-array consumer (+0x54). Iterates {data,count}; direct-renders disallowed/flagged geometry, otherwise appends geometry into accumulator group list for normal material-owned flush.",
+  "comment_repeatable": "BSShaderAccumulator visible-array submit entry (vtable +0x54). Iterates the visible geometry array; directly renders excluded geometry and queues eligible geometry for accumulator/pass-bucket processing.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_71AC10",
+  "display_name": "BSShaderAccumulator_SubmitVisibleGeometryArray",
   "end_ea": "0x71ACD6",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_71AC10",
+  "name": "BSShaderAccumulator_SubmitVisibleGeometryArray",
   "segment": ".text",
   "sha256": "a2b5e147e342b05afffab562bc2430698f3de8821f1b656986f1ea48eb25f1a3",
   "size": 198,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x71AC10",
-  "type": "NiDX9Renderer *__thiscall(_DWORD *this, _DWORD *)",
+  "total_chunk_size": 198,
+  "type": "void __thiscall(BSShaderAccumulator *this, void *visibleArray)",
   "xrefs_from_count": 75,
   "xrefs_to_count": 2
 }

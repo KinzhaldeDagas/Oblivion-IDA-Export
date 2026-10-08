@@ -9,7 +9,7 @@
 0x547B20: fld     [esp+arg_14]
 0x547B24: call    __CIpow
 0x547B29: fmul    [esp+arg_0]
-0x547B2D: call    Double_To_SInt32
+0x547B2D: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x547B32: mov     ecx, [esp+arg_10]
 0x547B36: cmp     eax, ecx
 0x547B38: jle     short locret_547B3C

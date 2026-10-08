@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x675CC0",
+      "0x675CFF"
+    ]
+  ],
+  "chunks_sha256": "c8feca90c78b1447771174151e09ed344617028937fe8aa6eef7a0e9f77e8967",
+  "comment_regular": "Verified: selects crime-list pointer at manager+28+4*crimeType, walks node positions and compares Crime* identity. Returns UInt16 index; not-found logs crime-index diagnostic and returns0 (ambiguous with first element). Used by AlarmPackage_SaveGame for compact references.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_675CC0",
+  "display_name": "ActorProcessManager_GetCrimeIndex",
   "end_ea": "0x675CFF",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_675CC0",
+  "name": "ActorProcessManager_GetCrimeIndex",
   "segment": ".text",
   "sha256": "c8feca90c78b1447771174151e09ed344617028937fe8aa6eef7a0e9f77e8967",
   "size": 63,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x675CC0",
-  "type": "__int16 __thiscall(_DWORD *this, int, int)",
+  "total_chunk_size": 63,
+  "type": "unsigned __int16 __thiscall(ActorProcessManager *self, unsigned int crimeType, Crime *crime)",
   "xrefs_from_count": 30,
   "xrefs_to_count": 1
 }

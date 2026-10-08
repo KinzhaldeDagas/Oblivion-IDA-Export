@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6A45F0",
-    "line": "push    esi",
+    "line": "push    esi; ScriptEffect Apply vfunc: if a script exists, create the ScriptEventList for this active effect, resolve the target through caster vfunc +4, then run ScriptEffectStart.",
     "mnemonic": "push",
     "size": 1
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x6A4611",
-    "line": "call    sub_4F9F00",
+    "line": "call    ScriptEffect_RunStartEvent; Wrapper for ScriptEffectStart: calls ScriptRunner_RunEvent with start=1, finish=0, elapsedSeconds=0.0.",
     "mnemonic": "call",
     "size": 5
   },

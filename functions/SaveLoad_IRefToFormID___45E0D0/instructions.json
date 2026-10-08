@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x45E0D0",
-    "line": "push    ebx",
+    "line": "push    ebx; Maps a full FormID to its compact save-game IRef index: returns an existing array index or appends the FormID and returns the new index. Created IDs (0xFFxxxxxx) pass through unchanged. This is FormID->IRef, despite the former reversed name.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45E0D1",
-    "line": "mov     ebx, [esp+4+arg_0]",
+    "line": "mov     ebx, [esp+4+formID]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x45E100",
-    "line": "cmp     [edx], ebx",
+    "line": "cmp     [edx], ebx; MEF PERF 2026-09-08: PERF-3 exact linear probe: CMP[EDX],EBX, increment indexEAX and pointerEDX by4 until used-sizeECX. No auxiliary index participates in this body. A side index must store the lowest matching position, not reorder or deduplicate the authoritative array.",
     "mnemonic": "cmp",
     "size": 2
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x45E10C",
-    "line": "jb      short loc_45E100",
+    "line": "jb      short loc_45E100; MEF PERF 2026-09-08: PERF-3 exact linear probe: CMP[EDX],EBX, increment indexEAX and pointerEDX by4 until used-sizeECX. No auxiliary index participates in this body. A side index must store the lowest matching position, not reorder or deduplicate the authoritative array.",
     "mnemonic": "jb",
     "size": 2
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x45E11E",
-    "line": "call    sub_452910",
+    "line": "call    NiTLargeArray_Resize32; MEF SAVE AUDIT 2026-10-08: PERF-19 Verified save-side growth: missing non-created FormID and full numeric array request used+grow. Ctor capacity100/grow50; v57 PerfLookupIDCore retains identical increment while making publication transactional. PERF4 reservation applies to count-known LOAD, not this append. Do not re-report PERF3 lookup scans as still present in supported v57 path.",
     "mnemonic": "call",
     "size": 5
   },

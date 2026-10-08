@@ -1,4 +1,4 @@
-0x673980: mov     ecx, [esp+arg_0]
+0x673980: mov     ecx, [esp+arg_0]; 3DTheft: returns package procedure row length for procedureArrayIndex. Rows used here include Follow row 7 and Flee row 0x13.
 0x673984: or      eax, 0FFFFFFFFh
 0x673987: cmp     ecx, 27h; switch 40 cases
 0x67398A: ja      short def_67398C

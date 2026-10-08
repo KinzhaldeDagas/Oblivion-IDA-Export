@@ -1,25 +1,25 @@
 [
   {
     "ea": "0x692AB5",
-    "line": "mov     ecx, [ecx+20h]",
+    "line": "mov     ecx, [ecx+20h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x692AB8",
-    "line": "push    0",
+    "line": "push    0; casterFilterOrNull",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x692ABA",
-    "line": "push    eax",
+    "line": "push    eax; effectCode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x692ABB",
-    "line": "call    sub_6A24B0",
+    "line": "call    MagicTarget_RemoveActiveEffectsByCode; Removes every nonterminated active effect whose effectCode matches. If casterFilterOrNull is nonnull, only effects from that caster are removed; null matches all casters. Native ABI is thiscall with two stack args and void return; prior ESI/ST0/userpurge inputs were decompiler artifacts.",
     "mnemonic": "call",
     "size": 5
   },

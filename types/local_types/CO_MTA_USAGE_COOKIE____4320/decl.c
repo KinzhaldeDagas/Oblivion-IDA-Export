@@ -1,1 +1,4 @@
-CO_MTA_USAGE_COOKIE__
+struct CO_MTA_USAGE_COOKIE__
+{
+int unused;
+};

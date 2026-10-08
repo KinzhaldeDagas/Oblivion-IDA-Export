@@ -1,19 +1,32 @@
 {
-  "callees_count": 16,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x76FB30",
+      "0x76FBF4"
+    ]
+  ],
+  "chunks_sha256": "e4c9288b059b6c71207048ee0c53884238091122cc37912e217f05462df3bf48",
+  "comment_regular": "Oblivion NiDX9 vertex-declaration semantic helper. Maps semanticId 0..14 to D3D usages POSITION, BLENDWEIGHT, BLENDINDICES, NORMAL, COLOR, TEXCOORD0..7, TANGENT, and BINORMAL, then forwards to NiDX9ShaderDeclaration_SetRawElement.\n\nMoonSugarEffect decode: NiDX9ShaderDeclaration semantic helper. Converts Oblivion semantic ids to D3D usage/usageIndex and forwards to raw element setter (+0x4C).",
+  "comment_repeatable": "Oblivion NiDX9 vertex-declaration semantic helper. Maps semanticId 0..14 to D3D usages POSITION, BLENDWEIGHT, BLENDINDICES, NORMAL, COLOR, TEXCOORD0..7, TANGENT, and BINORMAL, then forwards to NiDX9ShaderDeclaration_SetRawElement.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_76FB30",
+  "display_name": "NiDX9ShaderDeclaration_SetSemanticElement",
   "end_ea": "0x76FBF4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_76FB30",
+  "name": "NiDX9ShaderDeclaration_SetSemanticElement",
   "segment": ".text",
   "sha256": "e4c9288b059b6c71207048ee0c53884238091122cc37912e217f05462df3bf48",
   "size": 196,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x76FB30",
-  "type": "int __thiscall(void *this, int, int, int, int, int)",
+  "total_chunk_size": 196,
+  "type": "int __thiscall(NiDX9ShaderDeclaration *this, unsigned int elementIndex, unsigned int sourceIndex, unsigned int semanticId, unsigned int declarationType, unsigned int streamIndex)",
   "xrefs_from_count": 76,
   "xrefs_to_count": 1
 }

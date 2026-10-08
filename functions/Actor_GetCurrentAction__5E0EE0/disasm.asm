@@ -1,4 +1,4 @@
-0x5E0EE0: cmp     dword ptr [ecx+58h], 0
+0x5E0EE0: cmp     dword ptr [ecx+58h], 0; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x5E0EE4: jz      short loc_5E0EF3
 0x5E0EE6: mov     ecx, [ecx+58h]
 0x5E0EE9: mov     eax, [ecx]

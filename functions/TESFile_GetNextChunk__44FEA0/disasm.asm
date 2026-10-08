@@ -9,9 +9,9 @@
 0x44FEBD: test    [esi+244h], edi
 0x44FEC3: jz      short TESFile_GetNextChunk___AdvanceChunkOffset
 0x44FEC5: mov     edx, [esi+418h]
-0x44FECB: mov     eax, [esi+254h]
+0x44FECB: mov     eax, [esi+254h]; MEF v19 candidate/fix: byte-checked TESFile_GetNextChunk advance. Validate currentChunkOffset + currentChunk.length + 6 against active record/decompressed length; reload EAX with checked offset before 0x44FEF7.
 0x44FED1: add     eax, 6
-0x44FED4: add     [esi+260h], eax
+0x44FED4: add     [esi+260h], eax; EngineIssues review: TESFile_GetNextChunk advances currentChunkOffset by chunk length + 6 without overflow/progress check before comparing to record length.
 0x44FEDA: mov     eax, [esi+260h]
 0x44FEE0: cmp     eax, edx
 0x44FEE2: jb      short loc_44FEF7

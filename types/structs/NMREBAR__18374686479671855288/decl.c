@@ -1,1 +1,1 @@
-NMREBAR
+typedef tagNMREBAR NMREBAR;

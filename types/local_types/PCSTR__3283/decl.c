@@ -1,1 +1,1 @@
-PCSTR
+typedef const CHAR *PCSTR;

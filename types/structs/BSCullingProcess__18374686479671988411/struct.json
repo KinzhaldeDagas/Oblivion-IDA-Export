@@ -1,46 +1,81 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "BSCullingProcess",
+  "definition": "struct BSCullingProcess\n{\nNiCullingProcess super;\nUInt8 useFrustumCull;\nUInt8 unk91[3];\nUInt32 unk94;\nUInt32 unk98;\nUInt32 unk9C;\n}\n",
   "id": 18374686479671988411,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "super",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 144
+      "size": 144,
+      "type": "NiCullingProcess"
     },
     {
-      "name": "unk90",
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "useFrustumCull",
       "offset": 144,
       "offset_hex": "0x90",
-      "size": 1
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk91",
       "offset": 145,
       "offset_hex": "0x91",
-      "size": 3
+      "size": 3,
+      "type": "UInt8[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk94",
       "offset": 148,
       "offset_hex": "0x94",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk98",
       "offset": 152,
       "offset_hex": "0x98",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk9C",
       "offset": 156,
-      "offset_hex": "0x9c",
-      "size": 4
+      "offset_hex": "0x9C",
+      "size": 4,
+      "type": "UInt32"
     }
   ],
   "name": "BSCullingProcess",
+  "ordinal": 170,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 160
 }

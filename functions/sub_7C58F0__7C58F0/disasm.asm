@@ -1,5 +1,5 @@
-0x7C58F0: mov     eax, [esp+arg_0]
-0x7C58F4: mov     edx, [esp+arg_4]
+0x7C58F0: mov     eax, [esp+node]; Pure doubly-linked-list move-before operation; no allocation, free, refcount, or count change.
+0x7C58F4: mov     edx, [esp+before]
 0x7C58F8: cmp     eax, edx
 0x7C58FA: jz      short locret_7C5943
 0x7C58FC: cmp     [ecx+4], eax

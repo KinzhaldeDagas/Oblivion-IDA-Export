@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4F1E70",
-    "line": "push    ebp",
+    "line": "push    ebp; Verified local WRLD Load does not read the runtime TESRoad* field at WorldSpace+0x54; ROAD is a separate form/group relationship. The neighboring WorldSpace words +0x4C and +0x50 remain Unknown.",
     "mnemonic": "push",
     "size": 1
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x4F1ECC",
-    "line": "call    TESFile_InitializeFormFromRecord",
+    "line": "call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x4F1F3B",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; NAM9 maximum-axis replay uses bounded GetChunkData(maxSize=8) into an uninitialized local pair, then compares/stores both axes. Widths 0..7 retain stack bytes and may change bounds; >8 deterministically reads first 7 bytes and a forced zero. x87 ordered/unordered branch behavior must be preserved for NaNs; the TESCS WRLD reader does not dispatch NAM9.",
     "mnemonic": "call",
     "size": 5
   },
@@ -571,13 +571,13 @@
   },
   {
     "ea": "0x4F1FBC",
-    "line": "mov     [ebp+var_14], ebx",
+    "line": "mov     [ebp+var_14], ebx; WRLD u32 reader semantics: fresh zero-init then cap/copy up to all 4 bytes; overlong chunks keep the first four bytes. Later NAM2 replaces/clears earlier water state.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x4F1FBF",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; NAM2 freshzero u32 through0x4510E0 max4: overlong candidate copies3+zero. Every candidate replaces previous WaterForm includingzero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -589,7 +589,7 @@
   },
   {
     "ea": "0x4F1FC7",
-    "line": "mov     [esi+80h], ecx",
+    "line": "mov     [esi+80h], ecx; Verified WRLD load: NAM2 chunk reads WaterForm FormID; TESWorldSpace_DoPostFixups resolves it later.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -625,7 +625,7 @@
   },
   {
     "ea": "0x4F1FDA",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; NAM0 minimum-axis replay: 0x4F1FD2..0x4F1FDA calls bounded GetChunkData with maxSize 8 into local bytes [ebp-0x24..-0x1D] without prior initialization, then both axes are compared/stored at 0x4F1FDF..0x4F202B. Widths 0..7 retain stack bytes and may change state; >8 copies 7 payload bytes and forces the last local byte to zero. x87 test at 0x4F1FEE selects the new candidate on unordered/NaN comparisons.",
     "mnemonic": "call",
     "size": 5
   },
@@ -859,7 +859,7 @@
   },
   {
     "ea": "0x4F205E",
-    "line": "call    TESForm_LoadGenericComponents",
+    "line": "call    TESForm_LoadGenericComponents; Authoritative WRLD DATA replay: every occurrence calls the generic prefix-overlay helper. Zero length is a no-op; any nonempty DATA deterministically replaces worldFlags with payload[0], including overlong chunks. Repeated nonempty chunks are stream-order last-wins; deleted WRLD payload still replays.",
     "mnemonic": "call",
     "size": 5
   },
@@ -925,7 +925,7 @@
   },
   {
     "ea": "0x4F2083",
-    "line": "call    TESFullname_Load",
+    "line": "call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -955,7 +955,7 @@
   },
   {
     "ea": "0x4F2091",
-    "line": "call    TESFullname_Load",
+    "line": "call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1003,7 +1003,7 @@
   },
   {
     "ea": "0x4F20B0",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1069,13 +1069,13 @@
   },
   {
     "ea": "0x4F20CF",
-    "line": "mov     [ebp+var_14], ebx",
+    "line": "mov     [ebp+var_14], ebx; WRLD u32 reader semantics: fresh zero-init then cap/copy up to all 4 bytes; overlong chunks keep the first four bytes (no ExtraDataList max-1 terminator rule). Later CNAM replaces/clears earlier climate state.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x4F20D2",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; CNAM freshzero u32 through0x4510E0 max4: overlong candidate is low24 plus zero highbyte; highbyte-only oversized input becomeszero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1087,7 +1087,7 @@
   },
   {
     "ea": "0x4F20DA",
-    "line": "mov     [esi+58h], ecx",
+    "line": "mov     [esi+58h], ecx; Verified WRLD load: CNAM chunk reads Climate FormID into unresolved TESWorldSpace.climate field; TESWorldSpace_DoPostFixups resolves it later.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1159,13 +1159,13 @@
   },
   {
     "ea": "0x4F2101",
-    "line": "mov     [ebp+var_14], ebx",
+    "line": "mov     [ebp+var_14], ebx; SNAM authoritative replay: initialize fresh u32=0 for every occurrence, bounded-read max 4, then store the complete dword (zero is a stored/default value; last occurrence wins).",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x4F2104",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; WRLD SNAM reader assignment reviewed 2026-10-01: fresh-zero bounded U32 read at0x4F2104->0x4510E0->0x450C20 assigns the destination U32, including zero, at0x4F210C. Full-object initial state is zero from TESWorldSpace::SetDefault0x4F1E00/0x4F1E53; omitted partial SNAM retains its prior object value. The semantic fold now distinguishes those cases.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1177,7 +1177,7 @@
   },
   {
     "ea": "0x4F210C",
-    "line": "mov     [esi+94h], eax",
+    "line": "mov     [esi+94h], eax; Oblivion WRLD SNAM assignment: fresh zeroed bounded-u32 scratch is read through0x4510E0->0x450C20 and always copied into music field unk084[4] here, including effective zero. New full objects initialize this field to zero atSetDefault0x4F1E53. Semantic replay now distinguishes absent full default-zero from absent partial inherited-unknown state.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1213,7 +1213,7 @@
   },
   {
     "ea": "0x4F2122",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Authoritative WRLD MNAM replay into existing field with cap16. Zero length retains. Lengths1..16 overlay that prefix; length>16 copies payload[0:15] and writes byte15=0. Fresh full forms start with 16 zero bytes in SetDefault; partial records inherit unknown prior bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1243,13 +1243,13 @@
   },
   {
     "ea": "0x4F2132",
-    "line": "mov     [ebp+var_14], ebx",
+    "line": "mov     [ebp+var_14], ebx; WRLD u32 reader semantics: fresh zero-init then cap/copy up to all 4 bytes; overlong chunks keep the first four bytes. Later WNAM replaces/clears earlier parent state.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x4F2135",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; WNAM freshzero u32 through0x4510E0 max4: overlong candidate copies3+zero. Every candidate replaces parentWorldspace includingzero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1261,7 +1261,7 @@
   },
   {
     "ea": "0x4F213D",
-    "line": "mov     [esi+7Ch], eax",
+    "line": "mov     [esi+7Ch], eax; Verified WRLD load: WNAM chunk reads parent worldspace FormID; TESWorldSpace_DoPostFixups resolves it later.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1297,7 +1297,7 @@
   },
   {
     "ea": "0x4F2150",
-    "line": "mov     eax, [edi+254h]",
+    "line": "mov     eax, [edi+254h]; Authoritative WRLD OFST replay: every nonempty OFST occurrence frees any prior cellOffsetsArray, allocates floor(length/4) DWORD storage, then reads the chunk; a later nonempty OFST replaces the earlier array. Zero-length OFST takes no mutation branch and retains inherited/prior state.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1351,7 +1351,7 @@
   },
   {
     "ea": "0x4F216A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1447,7 +1447,7 @@
   },
   {
     "ea": "0x4F2198",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; MEF decode 2026-05-30: GetChunkData is called with a4=0 after allocating only 4*floor(length/4); faithful fix must bound/pad the read and preserve element count.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1639,7 +1639,7 @@
   },
   {
     "ea": "0x4F21EC",
-    "line": "call    sub_46B660",
+    "line": "call    TESForm_HasBuiltinFormID; Returns true when this TESForm has a built-in FormID in the reserved range 0x00000001..0x000007FF.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1876,5 +1876,125 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B68B0",
+    "line": "mov     eax, [ebp+var_14]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B68B3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B68B4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B68B9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B68BA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B68BB",
+    "line": "mov     eax, [ebp+var_14]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B68BE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B68BF",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B68C4",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B68C5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B68C6",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B68CA",
+    "line": "lea     eax, [edx+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B68CD",
+    "line": "mov     ecx, [edx-28h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B68D0",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B68D2",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B68D7",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B68DA",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B68DC",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B68E1",
+    "line": "mov     eax, offset stru_AE16B4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B68E6",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

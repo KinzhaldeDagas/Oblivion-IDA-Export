@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4BA030",
-    "line": "push    esi",
+    "line": "push    esi; Verified: scans the uint32 seed array at +0x4C with uint16 count +0x52; returns byte index on match or 0xFF for empty/missing values. TESObjectREFR_SetTreeSeedByValue uses 0xFF to remove the per-reference seed extra.",
     "mnemonic": "push",
     "size": 1
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x4BA041",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+seed]",
     "mnemonic": "mov",
     "size": 4
   },

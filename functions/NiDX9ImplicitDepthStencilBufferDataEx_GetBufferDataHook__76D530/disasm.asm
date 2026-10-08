@@ -1,4 +1,4 @@
-0x76D530: sub     esp, 20h
+0x76D530: sub     esp, 20h; Recreates renderer data for the device's implicit depth/stencil buffer: releases the prior surface, calls GetDepthStencilSurface, reads its D3DSURFACE_DESC, refreshes NiSurfaceData, and propagates width/height to the parent Ni2DBuffer.
 0x76D533: push    esi
 0x76D534: push    edi
 0x76D535: mov     edi, ecx
@@ -8,7 +8,7 @@
 0x76D540: mov     eax, [edi]
 0x76D542: mov     edx, [eax+2Ch]
 0x76D545: call    edx
-0x76D547: mov     eax, [esp+28h+arg_0]
+0x76D547: mov     eax, [esp+28h+device]
 0x76D54B: mov     ecx, [eax]
 0x76D54D: mov     edx, [ecx+0A0h]
 0x76D553: push    esi

@@ -33,7 +33,7 @@
 0x5AA2F9: retn
 0x5AA2FA: push    edi
 0x5AA2FB: push    esi
-0x5AA2FC: mov     ecx, offset byte_B3B3DB
+0x5AA2FC: mov     ecx, (offset dword_B3B0B4+327h)
 0x5AA301: call    sub_584500
 0x5AA306: test    eax, eax
 0x5AA308: jg      short loc_5AA347

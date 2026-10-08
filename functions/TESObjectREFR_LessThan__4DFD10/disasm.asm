@@ -37,7 +37,7 @@
 0x4DFD74: ja      TESObjectREFR_LessThan___def_4DFD7A; jumptable 004DFD7A default case, case 53
 0x4DFD7A: jmp     ds:jpt_4DFD7A[eax*4]; switch jump
 0x4DFD81: mov     ecx, ebp; jumptable 004DFD7A cases 52,54
-0x4DFD83: call    TESObjectREFR_IsPersistent?
+0x4DFD83: call    TESObjectREFR_IsPersistent
 0x4DFD88: pop     edi
 0x4DFD89: test    al, al
 0x4DFD8B: pop     esi
@@ -56,13 +56,13 @@
 0x4DFDAF: add     esp, 14h
 0x4DFDB2: mov     ecx, ebp; this
 0x4DFDB4: mov     esi, eax
-0x4DFDB6: call    TESObjectREFR_IsPersistent?
+0x4DFDB6: call    TESObjectREFR_IsPersistent
 0x4DFDBB: test    al, al
 0x4DFDBD: jz      short loc_4DFDDF
 0x4DFDBF: test    esi, esi
 0x4DFDC1: jz      short TESObjectREFR_LessThan___def_4DFD7A; jumptable 004DFD7A default case, case 53
 0x4DFDC3: mov     ecx, esi; this
-0x4DFDC5: call    TESObjectREFR_IsPersistent?
+0x4DFDC5: call    TESObjectREFR_IsPersistent
 0x4DFDCA: test    al, al
 0x4DFDCC: jnz     short TESObjectREFR_LessThan___def_4DFD7A; jumptable 004DFD7A default case, case 53
 0x4DFDCE: pop     edi
@@ -79,7 +79,7 @@
 0x4DFDE9: test    esi, esi
 0x4DFDEB: jz      short TESObjectREFR_LessThan___def_4DFD7A; jumptable 004DFD7A default case, case 53
 0x4DFDED: mov     ecx, esi; this
-0x4DFDEF: call    TESObjectREFR_IsPersistent?
+0x4DFDEF: call    TESObjectREFR_IsPersistent
 0x4DFDF4: test    al, al
 0x4DFDF6: jnz     short loc_4DFE0E
 0x4DFDF8: test    [esi+8], edi

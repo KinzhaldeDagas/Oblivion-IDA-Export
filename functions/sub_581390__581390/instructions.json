@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x5813CC",
-    "line": "call    sub_959BC0",
+    "line": "call    NiPickContext_ctor; Verified NiPick context initializer: initializes the record array, pick flags/root pointers, and default query settings used by TESTerrainLODQuad_PickSurfacePoint.",
     "mnemonic": "call",
     "size": 5
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x5814E8",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x5814F2",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x58150F",
-    "line": "call    sub_959D60",
+    "line": "call    NiPick_ExecuteAndSort; Verified NiPick query runner: invokes NiPick_ProcessSceneObject over the configured pick root, gathers hit records, sorts by the record distance field, and leaves the nearest record first in the result list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -820,12 +820,6 @@
     "line": "jmp     short loc_581530",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x58152D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x581530",
@@ -925,7 +919,7 @@
   },
   {
     "ea": "0x581560",
-    "line": "cmp     eax, offset dword_B3FAB0",
+    "line": "cmp     eax, offset parent",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1069,7 +1063,7 @@
   },
   {
     "ea": "0x581596",
-    "line": "cmp     eax, offset dword_B3FAB0",
+    "line": "cmp     eax, offset parent",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1465,7 +1459,7 @@
   },
   {
     "ea": "0x581666",
-    "line": "push    offset unk_B352A4",
+    "line": "push    0B352A4h",
     "mnemonic": "push",
     "size": 5
   },
@@ -2065,7 +2059,7 @@
   },
   {
     "ea": "0x5817B8",
-    "line": "call    sub_959EC0",
+    "line": "call    NiPickContext_dtor; Verified NiPick context destructor: clears/releases hit records, frees the record-pointer array, and releases its retained root object.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2122,5 +2116,59 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9BEBC0",
+    "line": "lea     ecx, [ebp-3Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BEBC3",
+    "line": "jmp     NiPickContext_dtor; Verified NiPick context destructor: clears/releases hit records, frees the record-pointer array, and releases its retained root object.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BEBC8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BEBCC",
+    "line": "lea     eax, [edx-78h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BEBCF",
+    "line": "mov     ecx, [edx-7Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BEBD2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BEBD4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BEBD9",
+    "line": "mov     eax, offset stru_AE8254",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BEBDE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,46 +1,81 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "LFH_heap_0",
+  "definition": "typedef LFH_heap LFH_heap_0\n",
   "id": 18374686479672047849,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "list_defer",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "LFH_slist_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cached_large_arena",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "LFH_arena_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "block_class",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 2000
+      "size": 2000,
+      "type": "LFH_class_0[125]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "large_class",
       "offset": 2008,
-      "offset_hex": "0x7d8",
-      "size": 512
+      "offset_hex": "0x7D8",
+      "size": 512,
+      "type": "LFH_class_0[32]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "entry_orphan",
       "offset": 2528,
-      "offset_hex": "0x9e0",
-      "size": 16
+      "offset_hex": "0x9E0",
+      "size": 16,
+      "type": "SLIST_ENTRY"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad",
       "offset": 2544,
-      "offset_hex": "0x9f0",
-      "size": 776
+      "offset_hex": "0x9F0",
+      "size": 776,
+      "type": "void *[194]"
     }
   ],
   "name": "LFH_heap_0",
+  "ordinal": 8873,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 3328
 }

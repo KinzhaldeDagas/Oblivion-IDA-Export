@@ -1,19 +1,19 @@
 [
   {
     "ea": "0x546B20",
-    "line": "push    ecx",
+    "line": "push    ecx; Returns a uniformly distributed floating value between the two inputs, accepting either input order.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x546B21",
-    "line": "fld     [esp+4+arg_0]",
+    "line": "fld     [esp+4+value1]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x546B25",
-    "line": "fld     [esp+4+arg_4]",
+    "line": "fld     [esp+4+value2]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x546B34",
-    "line": "fst     [esp+4+arg_0]",
+    "line": "fst     [esp+4+value1]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x546B3A",
-    "line": "fst     [esp+4+arg_0]",
+    "line": "fst     [esp+4+value1]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -115,19 +115,19 @@
   },
   {
     "ea": "0x546B4F",
-    "line": "fstp    [esp+4+arg_4]",
+    "line": "fstp    [esp+4+value2]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x546B53",
-    "line": "fld     [esp+4+arg_4]",
+    "line": "fld     [esp+4+value2]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x546B57",
-    "line": "fld     [esp+4+arg_0]",
+    "line": "fld     [esp+4+value1]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x546B61",
-    "line": "fstp    [esp+4+arg_4]",
+    "line": "fstp    [esp+4+value2]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x546B67",
-    "line": "fcomp   [esp+4+arg_4]",
+    "line": "fcomp   [esp+4+value2]",
     "mnemonic": "fcomp",
     "size": 4
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x546B76",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,25 +229,25 @@
   },
   {
     "ea": "0x546B8C",
-    "line": "fmul    [esp+4+arg_4]",
+    "line": "fmul    [esp+4+value2]",
     "mnemonic": "fmul",
     "size": 4
   },
   {
     "ea": "0x546B90",
-    "line": "fadd    [esp+4+arg_0]",
+    "line": "fadd    [esp+4+value1]",
     "mnemonic": "fadd",
     "size": 4
   },
   {
     "ea": "0x546B94",
-    "line": "fstp    [esp+4+arg_0]",
+    "line": "fstp    [esp+4+value1]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x546B98",
-    "line": "fld     [esp+4+arg_0]",
+    "line": "fld     [esp+4+value1]",
     "mnemonic": "fld",
     "size": 4
   },

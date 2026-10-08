@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x4D1EEF",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x4D1F1C",
-    "line": "call    sub_420B50",
+    "line": "call    ExtraDataList_GetSeenData; Returns the owned SeenData pointer from ExtraSeenData (type 0x09), or null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,13 +361,13 @@
   },
   {
     "ea": "0x4D1F7B",
-    "line": "mov     ecx, [edi+44h]",
+    "line": "mov     ecx, [edi+44h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x4D1F7E",
-    "line": "call    sub_4E5A40",
+    "line": "call    TESPathGrid_GetModifiedSize; Verified modified-form size: 2-byte disabled-point count, plus 2 bytes for each non-null point with linkedPointsDisabled set; adds 6 bytes when save-game block framing is enabled.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x4D1FA2",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },

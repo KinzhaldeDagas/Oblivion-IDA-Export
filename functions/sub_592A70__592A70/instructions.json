@@ -721,67 +721,67 @@
   },
   {
     "ea": "0x592C2C",
-    "line": "push    ebp",
+    "line": "push    ebp; triangleIndices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x592C2D",
-    "line": "push    2",
+    "line": "push    2; triangleCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x592C2F",
-    "line": "push    0",
+    "line": "push    0; dataFlags",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x592C31",
-    "line": "push    0",
+    "line": "push    0; hasVertexColors",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x592C33",
-    "line": "push    0",
+    "line": "push    0; textureCoordinates",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x592C35",
-    "line": "push    0",
+    "line": "push    0; colors",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x592C37",
-    "line": "push    0",
+    "line": "push    0; normals",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x592C39",
-    "line": "push    edi",
+    "line": "push    edi; vertices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x592C3A",
-    "line": "push    4",
+    "line": "push    4; vertexCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x592C3C",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x592C3E",
-    "line": "call    sub_7174B0",
+    "line": "call    NiTriShape_ctorWithGeometryData; Verified NiTriShape constructor wrapper: allocate/init NiTriShapeData from caller-supplied vertices, colors and triangle-index buffer; initialize NiTriBasedGeom and install NiTriShape vtable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1069,7 +1069,7 @@
   },
   {
     "ea": "0x592CE5",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1513,7 +1513,7 @@
   },
   {
     "ea": "0x592DDD",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1645,13 +1645,13 @@
   },
   {
     "ea": "0x592E21",
-    "line": "call    NiNode_AddNiExtraData",
+    "line": "call    NiObjectNET_AddExtraData; Pass269 ABI and ownership proof: NiObjectNET::AddExtraData consumes one stack argument with RET 4 and also expects owning object in ECX/EBX at this build's callsites. The plugin wrapper must not execute caller-side ADD ESP,4.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x592E26",
-    "line": "push    0; int",
+    "line": "push    0; text",
     "mnemonic": "push",
     "size": 2
   },
@@ -1681,31 +1681,31 @@
   },
   {
     "ea": "0x592E35",
-    "line": "fstp    [esp+54h+var_54]; float",
+    "line": "fstp    [esp+54h+value]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x592E38",
-    "line": "push    0FADh; int",
+    "line": "push    0FADh; trait",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x592E3D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x592E3F",
-    "line": "call    sub_58B2F0",
+    "line": "call    Tile__FinalPostParse; Verified shared fallback called by CalculateValue when owner virtual PostParse returns NULL. Marks trait-specific dirty flags; ID trait 0xFA8 calls owning Menu vtable +4 AttachTileByID with numeric ID and Tile*. Visibility traits mark dirty bit4. Fallout named analogue 0x82232168.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x592E44",
-    "line": "push    0; int",
+    "line": "push    0; text",
     "mnemonic": "push",
     "size": 2
   },
@@ -1735,25 +1735,25 @@
   },
   {
     "ea": "0x592E53",
-    "line": "fstp    [esp+54h+var_54]; float",
+    "line": "fstp    [esp+54h+value]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x592E56",
-    "line": "push    0FACh; int",
+    "line": "push    0FACh; trait",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x592E5B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x592E5D",
-    "line": "call    sub_58B2F0",
+    "line": "call    Tile__FinalPostParse; Verified shared fallback called by CalculateValue when owner virtual PostParse returns NULL. Marks trait-specific dirty flags; ID trait 0xFA8 calls owning Menu vtable +4 AttachTileByID with numeric ID and Tile*. Visibility traits mark dirty bit4. Fallout named analogue 0x82232168.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1816,5 +1816,167 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9BFCF0",
+    "line": "mov     eax, [ebp-34h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BFCF3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BFCF4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BFCF9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BFCFA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BFCFB",
+    "line": "mov     eax, [ebp-34h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BFCFE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BFCFF",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BFD04",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BFD05",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BFD06",
+    "line": "mov     eax, [ebp-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BFD09",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BFD0A",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BFD0F",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BFD10",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BFD11",
+    "line": "mov     eax, [ebp-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BFD14",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BFD15",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BFD1A",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BFD1B",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BFD1C",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BFD20",
+    "line": "lea     eax, [edx-3Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BFD23",
+    "line": "mov     ecx, [edx-40h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BFD26",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BFD28",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BFD2D",
+    "line": "mov     eax, offset stru_AE913C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BFD32",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

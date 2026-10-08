@@ -1,19 +1,36 @@
 {
-  "callees_count": 12,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_784370",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x784370",
+      "0x7844A0"
+    ],
+    [
+      "0x9CAEE0",
+      "0x9CAF09"
+    ]
+  ],
+  "chunks_sha256": "d7d6f0734368b97e145920df5dd5b786e0d775952928bc6cc96d94b236876a51",
+  "comment_regular": "Oblivion compact stBezierSpline scaled-variance path: samples the 500-entry evenlySpacedPoints vector at +0x3C and returns uniform random variance scaled by the sampled y value and variance@0x08. Confirms the executable's min/max/variance field order.",
+  "comment_repeatable": "Oblivion compact stBezierSpline scaled-variance path: samples the 500-entry evenlySpacedPoints vector at +0x3C and returns uniform random variance scaled by the sampled y value and variance@0x08. Confirms the executable's min/max/variance field order.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "OB_stBezierSpline_ScaledVariance_010201A0",
   "end_ea": "0x7844A0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_784370",
+  "name": "OB_stBezierSpline_ScaledVariance_010201A0",
   "segment": ".text",
   "sha256": "b32cf443143f6c0d9b950764d073e40b9859c3b58391acebaa22c540fac738ce",
   "size": 304,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x784370",
-  "type": "double __thiscall(float *this, float)",
-  "xrefs_from_count": 101,
+  "total_chunk_size": 345,
+  "type": "float __thiscall(const OB_stBezierSpline_010201A0 *this, float percent)",
+  "xrefs_from_count": 115,
   "xrefs_to_count": 4
 }

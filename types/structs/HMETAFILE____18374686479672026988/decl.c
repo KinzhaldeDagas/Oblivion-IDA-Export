@@ -1,1 +1,4 @@
-HMETAFILE__
+struct HMETAFILE__
+{
+int unused;
+};

@@ -1,7 +1,7 @@
-0x790AB0: push    esi
-0x790AB1: mov     esi, [esp+4+arg_4]
+0x790AB0: push    esi; Completes heap sort for a CBranch pointer range by repeatedly moving the root to the shrinking tail and adjusting the remaining fuzzy-volume heap.
+0x790AB1: mov     esi, [esp+4+end]
 0x790AB5: push    edi
-0x790AB6: mov     edi, [esp+8+arg_0]
+0x790AB6: mov     edi, [esp+8+begin]
 0x790ABA: sub     esi, edi
 0x790ABC: mov     eax, esi
 0x790ABE: sar     eax, 2
@@ -12,14 +12,14 @@
 0x790ACB: mov     eax, [edi+esi-4]
 0x790ACF: mov     ecx, [edi]
 0x790AD1: push    ebx
-0x790AD2: push    eax
+0x790AD2: push    eax; value
 0x790AD3: lea     edx, [esi-4]
 0x790AD6: sar     edx, 2
-0x790AD9: push    edx
-0x790ADA: push    0
-0x790ADC: push    edi
+0x790AD9: push    edx; count
+0x790ADA: push    0; holeIndex
+0x790ADC: push    edi; begin
 0x790ADD: mov     [edi+esi-4], ecx
-0x790AE1: call    sub_7903B0
+0x790AE1: call    OB_BranchPtrVector_AdjustHeapByFuzzyVolume_010201A0; MSVC adjust-heap primitive for CBranch pointers: selects a child by fuzzyBranchVolume, sifts the hole downward, then delegates to the heap-push helper. Used by make-heap and sort-heap.
 0x790AE6: sub     esi, 4
 0x790AE9: mov     eax, esi
 0x790AEB: sar     eax, 2

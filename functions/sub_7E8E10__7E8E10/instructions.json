@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7E8E10",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Fog render consumer decode: TallGrass/world-render fog writer reads active fog property and writes shared FogParam/FogColor vectors at B46638/B46648.",
     "mnemonic": "push",
     "size": 2
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x7E8EA7",
-    "line": "push    0",
+    "line": "push    0; slot",
     "mnemonic": "push",
     "size": 2
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x7E8EAC",
-    "line": "call    sub_7ECAE0",
+    "line": "call    OB_BSShader_SetSharedFloat4Constant_010201A0; Shader global table helper: store four dwords at dword_B46498 + 0x10 * index.",
     "mnemonic": "call",
     "size": 5
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x7E8F6D",
-    "line": "mov     eax, [ebp+0Ch]",
+    "line": "mov     eax, [ebp+0Ch]; Fog render consumer decode: TallGrass reads active fog property from render/property state +0x0C; normally the B333E4-derived scene fog property.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x7E8FB5",
-    "line": "mov     ds:0B46638h, ecx",
+    "line": "mov     ds:0B46638h, ecx; Fog render consumer decode: TallGrass shared FogParam B45E14[0x209..0x20C] = (fogEnd, fogEnd - fogStart, 0, 0).",
     "mnemonic": "mov",
     "size": 6
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x7E9000",
-    "line": "mov     ds:0B46648h, edx",
+    "line": "mov     ds:0B46648h, edx; Fog render consumer decode: TallGrass shared FogColor B45E14[0x20D..0x210] = (fog.r, fog.g, fog.b, 0).",
     "mnemonic": "mov",
     "size": 6
   },
@@ -853,7 +853,7 @@
   },
   {
     "ea": "0x7E902F",
-    "line": "fstp    [esp+5Ch+var_1C]",
+    "line": "fstp    [esp+5Ch+var_1C]; Fog render consumer decode: TallGrass null-property fallback starts FogParam default path.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x7E9037",
-    "line": "mov     ds:0B46638h, eax",
+    "line": "mov     ds:0B46638h, eax; Fog render consumer decode: TallGrass null-property fallback writes B45E14[0x209] = flt_A8C690 and zeroes remaining FogParam lanes.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -943,7 +943,7 @@
   },
   {
     "ea": "0x7E9076",
-    "line": "mov     ds:0B46648h, ecx",
+    "line": "mov     ds:0B46648h, ecx; Fog render consumer decode: TallGrass null-property fallback writes default FogColor from dword_B25AD0/B25AD4/B25AD8/B25ADC.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1795,7 +1795,7 @@
   },
   {
     "ea": "0x7E92A6",
-    "line": "call    sub_7AECB0",
+    "line": "call    NiD3DPass_SetVertexShader; Reference-counted NiD3DPass vertex-shader setter. Replaces pass+0x58 and AddRefs the new NiD3DVertexShader.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1813,7 +1813,7 @@
   },
   {
     "ea": "0x7E92B8",
-    "line": "push    eax; a2",
+    "line": "push    eax; shader",
     "mnemonic": "push",
     "size": 1
   },
@@ -1825,7 +1825,7 @@
   },
   {
     "ea": "0x7E92BB",
-    "line": "call    sub_7AEC60",
+    "line": "call    NiD3DPass_SetPixelShader; Reference-counted NiD3DPass pixel-shader setter. Replaces pass+0x44 and AddRefs the new NiD3DPixelShader.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1843,7 +1843,7 @@
   },
   {
     "ea": "0x7E92C6",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1879,7 +1879,7 @@
   },
   {
     "ea": "0x7E92DA",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1921,7 +1921,7 @@
   },
   {
     "ea": "0x7E92F2",
-    "line": "push    ecx; a2",
+    "line": "push    ecx; texture",
     "mnemonic": "push",
     "size": 1
   },
@@ -1933,7 +1933,7 @@
   },
   {
     "ea": "0x7E92F7",
-    "line": "call    sub_76C910",
+    "line": "call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2005,7 +2005,7 @@
   },
   {
     "ea": "0x7E9325",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
@@ -2017,7 +2017,7 @@
   },
   {
     "ea": "0x7E9328",
-    "line": "call    sub_76C910",
+    "line": "call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2041,13 +2041,13 @@
   },
   {
     "ea": "0x7E933B",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7E933D",
-    "line": "call    sub_7ED600",
+    "line": "call    BSShaderLightingProperty__CountFrustumVisibleEnabledLights; Counts list entries with a non-null ShadowSceneLight, frustumCull != 0xFF, and byte +0xF4 == 0. Unlike GetFirst/NextActiveLight, this counter does not test the backing NiLight AppCulled bit.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2149,7 +2149,7 @@
   },
   {
     "ea": "0x7E9374",
-    "line": "push    ecx; a2",
+    "line": "push    ecx; texture",
     "mnemonic": "push",
     "size": 1
   },
@@ -2161,7 +2161,7 @@
   },
   {
     "ea": "0x7E9379",
-    "line": "call    sub_76C910",
+    "line": "call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2227,13 +2227,13 @@
   },
   {
     "ea": "0x7E939F",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7E93A0",
-    "line": "call    sub_76C910",
+    "line": "call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2281,13 +2281,13 @@
   },
   {
     "ea": "0x7E93BF",
-    "line": "push    edx; a2",
+    "line": "push    edx; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7E93C0",
-    "line": "call    sub_76C910",
+    "line": "call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2353,7 +2353,7 @@
   },
   {
     "ea": "0x7E93E4",
-    "line": "call    sub_7AECB0",
+    "line": "call    NiD3DPass_SetVertexShader; Reference-counted NiD3DPass vertex-shader setter. Replaces pass+0x58 and AddRefs the new NiD3DVertexShader.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2629,7 +2629,7 @@
   },
   {
     "ea": "0x7E9492",
-    "line": "call    sub_7AECB0",
+    "line": "call    NiD3DPass_SetVertexShader; Reference-counted NiD3DPass vertex-shader setter. Replaces pass+0x58 and AddRefs the new NiD3DVertexShader.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2755,13 +2755,13 @@
   },
   {
     "ea": "0x7E94E3",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7E94E4",
-    "line": "call    sub_76C910",
+    "line": "call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2821,13 +2821,13 @@
   },
   {
     "ea": "0x7E950C",
-    "line": "push    edx; a2",
+    "line": "push    edx; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7E950D",
-    "line": "call    sub_76C910",
+    "line": "call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2887,7 +2887,7 @@
   },
   {
     "ea": "0x7E9530",
-    "line": "push    ecx; a2",
+    "line": "push    ecx; texture",
     "mnemonic": "push",
     "size": 1
   },
@@ -2899,7 +2899,7 @@
   },
   {
     "ea": "0x7E9535",
-    "line": "call    sub_76C910",
+    "line": "call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2947,13 +2947,13 @@
   },
   {
     "ea": "0x7E9553",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7E9554",
-    "line": "call    sub_76C910",
+    "line": "call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2983,13 +2983,13 @@
   },
   {
     "ea": "0x7E956A",
-    "line": "push    edx; a2",
+    "line": "push    edx; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7E956B",
-    "line": "call    sub_76C910",
+    "line": "call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3031,7 +3031,7 @@
   },
   {
     "ea": "0x7E9586",
-    "line": "push    ecx; a2",
+    "line": "push    ecx; texture",
     "mnemonic": "push",
     "size": 1
   },
@@ -3043,7 +3043,7 @@
   },
   {
     "ea": "0x7E958B",
-    "line": "call    sub_76C910",
+    "line": "call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3169,7 +3169,7 @@
   },
   {
     "ea": "0x7E95DC",
-    "line": "call    sub_7AECB0",
+    "line": "call    NiD3DPass_SetVertexShader; Reference-counted NiD3DPass vertex-shader setter. Replaces pass+0x58 and AddRefs the new NiD3DVertexShader.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3187,7 +3187,7 @@
   },
   {
     "ea": "0x7E95ED",
-    "line": "push    eax; a2",
+    "line": "push    eax; shader",
     "mnemonic": "push",
     "size": 1
   },
@@ -3199,7 +3199,7 @@
   },
   {
     "ea": "0x7E95F0",
-    "line": "call    sub_7AEC60",
+    "line": "call    NiD3DPass_SetPixelShader; Reference-counted NiD3DPass pixel-shader setter. Replaces pass+0x44 and AddRefs the new NiD3DPixelShader.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3217,7 +3217,7 @@
   },
   {
     "ea": "0x7E95FB",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3253,7 +3253,7 @@
   },
   {
     "ea": "0x7E960F",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3289,7 +3289,7 @@
   },
   {
     "ea": "0x7E962C",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3325,7 +3325,7 @@
   },
   {
     "ea": "0x7E963D",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3343,7 +3343,7 @@
   },
   {
     "ea": "0x7E9648",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3379,7 +3379,7 @@
   },
   {
     "ea": "0x7E9659",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3397,7 +3397,7 @@
   },
   {
     "ea": "0x7E9664",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3433,7 +3433,7 @@
   },
   {
     "ea": "0x7E9675",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3451,7 +3451,7 @@
   },
   {
     "ea": "0x7E9680",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3487,7 +3487,7 @@
   },
   {
     "ea": "0x7E9691",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3505,7 +3505,7 @@
   },
   {
     "ea": "0x7E969C",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3733,7 +3733,7 @@
   },
   {
     "ea": "0x7E9727",
-    "line": "call    sub_7AECB0",
+    "line": "call    NiD3DPass_SetVertexShader; Reference-counted NiD3DPass vertex-shader setter. Replaces pass+0x58 and AddRefs the new NiD3DVertexShader.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3769,7 +3769,7 @@
   },
   {
     "ea": "0x7E9746",
-    "line": "push    eax; a2",
+    "line": "push    eax; shader",
     "mnemonic": "push",
     "size": 1
   },
@@ -3781,7 +3781,7 @@
   },
   {
     "ea": "0x7E9749",
-    "line": "call    sub_7AEC60",
+    "line": "call    NiD3DPass_SetPixelShader; Reference-counted NiD3DPass pixel-shader setter. Replaces pass+0x44 and AddRefs the new NiD3DPixelShader.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3877,7 +3877,7 @@
   },
   {
     "ea": "0x7E9799",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3913,7 +3913,7 @@
   },
   {
     "ea": "0x7E97AA",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3973,7 +3973,7 @@
   },
   {
     "ea": "0x7E97D1",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4015,7 +4015,7 @@
   },
   {
     "ea": "0x7E97E4",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4033,25 +4033,25 @@
   },
   {
     "ea": "0x7E97F0",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7E97F1",
-    "line": "push    ecx",
+    "line": "push    ecx; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7E97F2",
-    "line": "lea     ecx, [edi+40h]",
+    "line": "lea     ecx, [edi+40h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7E97F5",
-    "line": "call    sub_76CE40",
+    "line": "call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4105,7 +4105,7 @@
   },
   {
     "ea": "0x7E9811",
-    "line": "call    sub_772560",
+    "line": "call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4135,7 +4135,7 @@
   },
   {
     "ea": "0x7E9821",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4198,5 +4198,113 @@
     "line": "retn    1Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x75FA70",
+    "line": "mov     ecx, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x75FA72",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x75FA74",
+    "line": "jz      short locret_75FA81",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x75FA76",
+    "line": "add     dword ptr [ecx+5Ch], 0FFFFFFFFh",
+    "mnemonic": "add",
+    "size": 4
+  },
+  {
+    "ea": "0x75FA7A",
+    "line": "jnz     short locret_75FA81",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x75FA7C",
+    "line": "jmp     sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x75FA81",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CF920",
+    "line": "lea     ecx, [ebp-40h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CF923",
+    "line": "jmp     sub_4027D0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CF928",
+    "line": "lea     ecx, [ebp+4]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CF92B",
+    "line": "jmp     loc_75FA70",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CF930",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CF934",
+    "line": "lea     eax, [edx-4Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CF937",
+    "line": "mov     ecx, [edx-50h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CF93A",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CF93C",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CF941",
+    "line": "mov     eax, offset stru_AF8508",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CF946",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -21,9 +21,9 @@
 0x4838A6: mov     [ecx+edi+0Ch], edx
 0x4838AA: mov     ecx, [esi+10h]
 0x4838AD: lea     eax, [ebx+4]
-0x4838B0: push    eax
-0x4838B1: lea     ecx, [ecx+edi+4]
-0x4838B5: call    sub_55E2A0
+0x4838B0: push    eax; incoming
+0x4838B1: lea     ecx, [ecx+edi+4]; this
+0x4838B5: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
 0x4838BA: mov     edx, [esi+10h]
 0x4838BD: mov     al, [ebx+1]
 0x4838C0: mov     [edx+edi+1], al

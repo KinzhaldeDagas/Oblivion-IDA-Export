@@ -1,15 +1,13 @@
-int __thiscall sub_77B3C0(int *this, int a2)
+void __thiscall NiDX9RenderState_RemoveVertexShader(NiDX9RenderState *self, IDirect3DVertexShader9 *shader)
 {
-  int v3; // eax
-  int result; // eax
+  IDirect3DDevice9 *Device; // eax
 
-  if ( *(this + 0x3F8) == a2 )
+  if ( self->member.CurrentVertexShader == shader ) /*0x77b3ce*/
   {
-    v3 = *(this + 0x3FE);
-    *(this + 0x3F8) = 0;
-    result = (*(int (__stdcall **)(int, _DWORD))(*(_DWORD *)v3 + 0x170))(v3, 0);
+    Device = self->member.Device; /*0x77b3d0*/
+    self->member.CurrentVertexShader = 0; /*0x77b3d6*/
+    Device->lpVtbl->SetVertexShader(Device, 0); /*0x77b3eb*/
   }
-  if ( *(this + 0x3F9) == a2 )
-    *(this + 0x3F9) = 0;
-  return result;
+  if ( self->member.SavedVertexShader == shader ) /*0x77b3f3*/
+    self->member.SavedVertexShader = 0; /*0x77b3f5*/
 }

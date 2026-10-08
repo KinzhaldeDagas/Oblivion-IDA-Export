@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A24F0",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+seed]; CTreeEngine::SetSeed per local SpeedTreeRT 4.1: 0=random seed, 1=keep existing seed, >1=store provided seed at +0x48.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,19 +43,19 @@
   },
   {
     "ea": "0x7A24FF",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; seed",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7A2501",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A2503",
-    "line": "call    sub_78EA30",
+    "line": "call    OB_stRandom_Reseed_010201A0; Oblivion stRandom::Reseed. Seed -1 derives a nonzero fractional seed from time and either 12345 or an existing uniform sample; explicit seeds <=1 clamp to 1 and use Random::SetLong. Marks the shared generator initialized.",
     "mnemonic": "call",
     "size": 5
   },
@@ -73,13 +73,13 @@
   },
   {
     "ea": "0x7A2511",
-    "line": "fstp    [esp+10h+var_C]; float",
+    "line": "fstp    [esp+10h+maxValue]; maxValue",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A2515",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -91,19 +91,19 @@
   },
   {
     "ea": "0x7A251D",
-    "line": "fstp    [esp+10h+var_10]; float",
+    "line": "fstp    [esp+10h+minValue]; minValue",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7A2520",
-    "line": "call    sub_78EA00",
+    "line": "call    OB_stRandom_GetUniform_010201A0; Oblivion stRandom::GetUniform. Returns minValue + (maxValue - minValue) * SIdvRandomImpl::m_cUniform.Next(). Used throughout spline, branch, frond, tree, leaf-LOD, and seed generation paths.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A2525",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },

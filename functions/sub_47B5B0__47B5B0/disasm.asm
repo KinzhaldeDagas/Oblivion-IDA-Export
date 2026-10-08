@@ -26,7 +26,7 @@
 0x47B5F2: call    edx
 0x47B5F4: cmp     eax, ebx
 0x47B5F6: jz      short loc_47B606
-0x47B5F8: cmp     eax, offset unk_B35408
+0x47B5F8: cmp     eax, offset stru_B35408
 0x47B5FD: jz      short loc_47B623
 0x47B5FF: mov     eax, [eax+4]
 0x47B602: cmp     eax, ebx
@@ -185,3 +185,19 @@
 0x47B7BA: pop     ebx
 0x47B7BB: add     esp, 1Ch
 0x47B7BE: retn    10h
+0x9AF2C0: lea     ecx, [ebp-14h]; slot
+0x9AF2C3: jmp     NiPointerSlot_Release
+0x9AF2C8: lea     ecx, [ebp-1Ch]; slot
+0x9AF2CB: jmp     NiPointerSlot_Release
+0x9AF2D0: mov     eax, [ebp-10h]
+0x9AF2D3: push    eax
+0x9AF2D4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AF2D9: pop     ecx
+0x9AF2DA: retn
+0x9AF2DB: mov     edx, [esp+arg_4]
+0x9AF2DF: lea     eax, [edx-20h]
+0x9AF2E2: mov     ecx, [edx-24h]
+0x9AF2E5: xor     ecx, eax
+0x9AF2E7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AF2EC: mov     eax, offset stru_ADB8F0
+0x9AF2F1: jmp     ___CxxFrameHandler3

@@ -1,19 +1,24 @@
-char *__usercall sub_788AE0@<eax>(char *result@<eax>, char *a2, int a3, const void *a4)
+// Oblivion collision-vector uninitialized fill-N primitive: constructs count trivial 28-byte records by copying the supplied value and returns one-past-last.
+OB_CollisionObject_010201A0 *__cdecl OB_stVector_CollisionObject_UninitializedFillN_010201A0(
+        OB_CollisionObject_010201A0 *destination,
+        unsigned int count,
+        const OB_CollisionObject_010201A0 *value)
 {
-  int v4; // edx
+  OB_CollisionObject_010201A0 *result; // eax
+  unsigned int v4; // edx
 
-  v4 = a3;
-  if ( a3 )
+  v4 = count; /*0x788ae0*/
+  if ( count ) /*0x788ae6*/
   {
-    result = a2;
-    do
+    result = destination; /*0x788ae8*/
+    do /*0x788b0a*/
     {
-      if ( result )
-        qmemcpy(result, a4, 0x1Cu);
-      --v4;
-      result += 0x1C;
+      if ( result ) /*0x788af5*/
+        qmemcpy(result, value, sizeof(OB_CollisionObject_010201A0)); /*0x788b00*/
+      --v4; /*0x788b02*/
+      ++result; /*0x788b05*/
     }
-    while ( v4 );
+    while ( v4 ); /*0x788b0a*/
   }
-  return result;
+  return result; /*0x788b0f*/
 }

@@ -1,1 +1,1 @@
-AbsorbEffect
+struct AbsorbEffect;

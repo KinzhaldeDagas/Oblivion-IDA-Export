@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x793E10",
-    "line": "sub     esp, 0B4h",
+    "line": "sub     esp, 0B4h; OBLIVION AUTHORITY 2026-08-27: Static leaf color processing runs only when leafLightingMethod==1 (static) and staticLightingStyle!=0. Style bit0/value1 (USE_LIGHT_SOURCES) computes material/light RGB and SetColor(false); style bit1/value2 (SIMULATE_SHADOWS) runs AdjustStaticLighting, which SetColor(true) and reapplies colorScaleByte. Value3 would execute both in order.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x793E2E",
-    "line": "mov     eax, [esp+0B4h+arg_8]",
+    "line": "mov     eax, [esp+0B4h+numLeafLods]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x793E41",
-    "line": "mov     edi, [esp+0C4h+arg_4]",
+    "line": "mov     edi, [esp+0C4h+leafLods]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -289,25 +289,25 @@
   },
   {
     "ea": "0x793EB5",
-    "line": "mov     ecx, [ebp+0]",
+    "line": "mov     ecx, [ebp+0]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x793EB8",
-    "line": "lea     eax, [esp+0C4h+var_C]",
+    "line": "lea     eax, [esp+0C4h+outRgb]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x793EBF",
-    "line": "push    eax",
+    "line": "push    eax; outColor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x793EC0",
-    "line": "call    sub_7A7EC0",
+    "line": "call    OB_CBillboardLeaf_GetColor_010201A0; OBLIVION AUTHORITY (2026-08-24): CBillboardLeaf::GetColor decodes packed +0x14 R/G/B bytes to float channels by dividing by 255. Used by lower-LOD pair averaging at 0x7A91A8/0x7A91AA.",
     "mnemonic": "call",
     "size": 5
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x793EC7",
-    "line": "fst     [esp+0C4h+var_6C]",
+    "line": "fst     [esp+0C4h+lightPosition.z]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -331,19 +331,19 @@
   },
   {
     "ea": "0x793ECD",
-    "line": "fst     [esp+0C4h+var_70]",
+    "line": "fst     [esp+0C4h+lightPosition.y]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x793ED1",
-    "line": "mov     esi, offset unk_B2B7D4",
+    "line": "mov     esi, offset CLightingEngine__s_lightAttributes.position.y",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x793ED6",
-    "line": "fst     [esp+0C4h+var_74]",
+    "line": "fst     [esp+0C4h+lightPosition.x]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x793EEC",
-    "line": "fst     [esp+0C4h+var_B0]",
+    "line": "fst     [esp+0C4h+rgb]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x793EF2",
-    "line": "cmp     ds:byte_B42A18[ebx], 0",
+    "line": "cmp     ds:CLightingEngine__s_lightEnabled[ebx], 0",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -883,19 +883,19 @@
   },
   {
     "ea": "0x79400E",
-    "line": "mov     [esp+0C4h+var_74], ecx",
+    "line": "mov     [esp+0C4h+lightPosition.x], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x794012",
-    "line": "mov     [esp+0C4h+var_70], edx",
+    "line": "mov     [esp+0C4h+lightPosition.y], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x794016",
-    "line": "mov     [esp+0C4h+var_6C], eax",
+    "line": "mov     [esp+0C4h+lightPosition.z], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1441,7 +1441,7 @@
   },
   {
     "ea": "0x794128",
-    "line": "fld     [esp+0C4h+var_C]",
+    "line": "fld     [esp+0C4h+outRgb]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -1687,13 +1687,13 @@
   },
   {
     "ea": "0x7941EF",
-    "line": "fadd    [esp+0C4h+var_B0]",
+    "line": "fadd    [esp+0C4h+rgb]",
     "mnemonic": "fadd",
     "size": 4
   },
   {
     "ea": "0x7941F3",
-    "line": "fstp    [esp+0C4h+var_B0]",
+    "line": "fstp    [esp+0C4h+rgb]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1765,7 +1765,7 @@
   },
   {
     "ea": "0x794229",
-    "line": "fld     [esp+0C4h+var_B0]",
+    "line": "fld     [esp+0C4h+rgb]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1807,7 +1807,7 @@
   },
   {
     "ea": "0x79423A",
-    "line": "fst     [esp+0C4h+var_B0]",
+    "line": "fst     [esp+0C4h+rgb]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -1861,7 +1861,7 @@
   },
   {
     "ea": "0x79424F",
-    "line": "fst     [esp+0C4h+var_B0]",
+    "line": "fst     [esp+0C4h+rgb]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -2113,31 +2113,31 @@
   },
   {
     "ea": "0x7942C0",
-    "line": "mov     ecx, [ebp+0]",
+    "line": "mov     ecx, [ebp+0]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7942C3",
-    "line": "push    0",
+    "line": "push    0; applyDimming",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7942C5",
-    "line": "lea     edx, [esp+0C8h+var_B0]",
+    "line": "lea     edx, [esp+0C8h+rgb]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7942C9",
-    "line": "push    edx",
+    "line": "push    edx; color",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7942CA",
-    "line": "call    sub_7A7F10",
+    "line": "call    OB_CBillboardLeaf_SetColor_010201A0; Static style bit0 writes computed RGB with applyDimming=false: repacks but does not multiply colorScaleByte.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2197,43 +2197,43 @@
   },
   {
     "ea": "0x7942EA",
-    "line": "mov     ecx, [esp+0C8h+arg_0]",
+    "line": "mov     ecx, [esp+0C8h+treeCenter]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x7942F1",
-    "line": "fstp    [esp+0C8h+var_C8]; float",
+    "line": "fstp    [esp+0C8h+lightScalar]; lightScalar",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7942F4",
-    "line": "lea     eax, [esp+0C8h+var_74]",
+    "line": "lea     eax, [esp+0C8h+lightPosition]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7942F8",
-    "line": "push    eax; int",
+    "line": "push    eax; lightPosition",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7942F9",
-    "line": "push    ecx; int",
+    "line": "push    ecx; treeCenter",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7942FA",
-    "line": "mov     ecx, [ebp+0]",
+    "line": "mov     ecx, [ebp+0]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7942FD",
-    "line": "call    sub_7A8090",
+    "line": "call    OB_CBillboardLeaf_AdjustStaticLighting_010201A0; Static style bit1 invokes dominant-light shadow adjustment after optional bit0 processing. That helper decodes packed RGB then calls SetColor(true).",
     "mnemonic": "call",
     "size": 5
   },

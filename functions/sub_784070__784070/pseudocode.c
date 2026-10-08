@@ -1,18 +1,12 @@
-_DWORD *__cdecl sub_784070(_DWORD *a1)
+// Oblivion 1.2.0.416: follows cache-tree left links to the leftmost non-nil node.
+OB_stBezierSplineCacheNode_010201A0 *__cdecl OB_stBezierSplineCacheNode_Leftmost_010201A0(
+        OB_stBezierSplineCacheNode_010201A0 *node)
 {
-  _DWORD *result; // eax
-  int *v2; // ecx
+  OB_stBezierSplineCacheNode_010201A0 *result; // eax
+  OB_stBezierSplineCacheNode_010201A0 *i; // ecx
 
-  result = a1;
-  v2 = (int *)*a1;
-  if ( !*(_BYTE *)(*a1 + 0x2D) )
-  {
-    do
-    {
-      result = v2;
-      v2 = (int *)*v2;
-    }
-    while ( !*((_BYTE *)v2 + 0x2D) );
-  }
-  return result;
+  result = node; /*0x784070*/
+  for ( i = node->left; !i->isNil; i = i->left ) /*0x784076*/
+    result = i; /*0x784080*/
+  return result; /*0x78408a*/
 }

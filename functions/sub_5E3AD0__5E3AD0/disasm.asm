@@ -1,4 +1,4 @@
-0x5E3AD0: sub     esp, 10h
+0x5E3AD0: sub     esp, 10h; Swim run-speed branch used by sub_5E65B0 when run 0x200 and swim 0x800 are set. Calls Calc_SwimRunSpeed and applies same package-target limiting pattern.
 0x5E3AD3: push    esi
 0x5E3AD4: mov     esi, ecx
 0x5E3AD6: mov     eax, [esi]
@@ -99,7 +99,7 @@
 0x5E3C01: cmp     dword ptr [edi+58h], 0
 0x5E3C05: jz      short loc_5E3C70
 0x5E3C07: mov     ecx, edi
-0x5E3C09: call    sub_5E3AD0
+0x5E3C09: call    sub_5E3AD0; Swim run-speed branch used by sub_5E65B0 when run 0x200 and swim 0x800 are set. Calls Calc_SwimRunSpeed and applies same package-target limiting pattern.
 0x5E3C0E: fstp    [esp+18h+var_10]
 0x5E3C12: fldz
 0x5E3C14: fcomp   [esp+18h+var_10]

@@ -7,9 +7,9 @@
 0x718B2E: test    al, al
 0x718B30: jz      short loc_718B58
 0x718B32: lea     eax, [edi+24h]
-0x718B35: push    eax
-0x718B36: lea     ecx, [esi+24h]
-0x718B39: call    sub_8AA390
+0x718B35: push    eax; other
+0x718B36: lea     ecx, [esi+24h]; this
+0x718B39: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x718B3E: test    al, al
 0x718B40: jnz     short loc_718B58
 0x718B42: fld     dword ptr [esi+30h]

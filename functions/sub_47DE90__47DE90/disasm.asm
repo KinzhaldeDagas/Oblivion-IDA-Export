@@ -32,3 +32,12 @@
 0x47DF07: pop     esi
 0x47DF08: add     esp, 10h
 0x47DF0B: retn    4
+0x9D7370: mov     ecx, [ebp-10h]; this
+0x9D7373: jmp     ??1bhkUnaryAction@@UAE@XZ; bhkUnaryAction::~bhkUnaryAction(void)
+0x9D7378: mov     edx, [esp+arg_4]
+0x9D737C: lea     eax, [edx-8]
+0x9D737F: mov     ecx, [edx-0Ch]
+0x9D7382: xor     ecx, eax
+0x9D7384: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D7389: mov     eax, offset stru_AFEFBC
+0x9D738E: jmp     ___CxxFrameHandler3

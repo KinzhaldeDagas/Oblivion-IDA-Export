@@ -1,4 +1,4 @@
-0x423DF0: push    ebx
+0x423DF0: push    ebx; OR action flag mask into existing byte (default byte 1 when absent), creating state as needed. ONAM calls this with 0x08.
 0x423DF1: push    esi
 0x423DF2: push    13h; a2
 0x423DF4: mov     esi, ecx
@@ -8,7 +8,7 @@
 0x423DFF: movzx   ebx, byte ptr [eax+0Ch]
 0x423E03: jmp     short loc_423E0A
 0x423E05: mov     ebx, 1
-0x423E0A: or      ebx, [esp+8+arg_0]
+0x423E0A: or      ebx, [esp+8+mask]
 0x423E0E: push    13h; a2
 0x423E10: mov     ecx, esi; this
 0x423E12: call    BaseExtraList_GetExtraData
@@ -17,7 +17,7 @@
 0x423E1B: cmp     ebx, 1
 0x423E1E: jz      short loc_423E2E
 0x423E20: mov     ecx, esi
-0x423E22: call    sub_41EB90
+0x423E22: call    ExtraDataList_GetOrCreateAction; Returns existing ExtraAction type 0x13, or creates one with default action flag byte 1 and null action reference.
 0x423E27: test    eax, eax
 0x423E29: jz      short loc_423E2E
 0x423E2B: mov     [eax+0Ch], bl

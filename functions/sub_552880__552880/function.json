@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 8,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x552880",
+      "0x5528E4"
+    ]
+  ],
+  "chunks_sha256": "308284097ccb947e613b8b6192dee9c1f063561f594c328532778b51c24c65be",
+  "comment_regular": "Standard FaceGenHeadParameters dimensions: matrix0 50x1, matrix1 30x1, matrix2 50x1, matrix3 untouched. Thus standard initialized active coefficient count is 130, under PF supported 256 cap. Existing elements survive ResizeFill as documented; this routine is not a full zero reset.",
+  "comment_repeatable": "Standard FaceGenHeadParameters dimensions: matrix0 50x1, matrix1 30x1, matrix2 50x1, matrix3 untouched. Thus standard initialized active coefficient count is 130, under PF supported 256 cap. Existing elements survive ResizeFill as documented; this routine is not a full zero reset.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_552880",
+  "display_name": "FaceGenHeadParameters_Initialize",
   "end_ea": "0x5528E4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_552880",
+  "name": "FaceGenHeadParameters_Initialize",
   "segment": ".text",
   "sha256": "308284097ccb947e613b8b6192dee9c1f063561f594c328532778b51c24c65be",
   "size": 100,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x552880",
-  "type": "void __cdecl(_DWORD *)",
+  "total_chunk_size": 100,
+  "type": "void __cdecl(FaceGenHeadParameters *parameters)",
   "xrefs_from_count": 33,
   "xrefs_to_count": 8
 }

@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x471C5D",
-    "line": "call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)",
+    "line": "call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x471C88",
-    "line": "push    offset dword_B35288",
+    "line": "push    0B35288h",
     "mnemonic": "push",
     "size": 5
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x471C9F",
-    "line": "fstp    [esp+40h+var_2C]",
+    "line": "fstp    [esp+40h+slot]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x471CA5",
-    "line": "fcomp   [esp+40h+var_2C]",
+    "line": "fcomp   [esp+40h+slot]",
     "mnemonic": "fcomp",
     "size": 4
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x471CE6",
-    "line": "call    InitBSShaderAccumulator",
+    "line": "call    BSShaderAccumulator_GetOrCreateGlobal",
     "mnemonic": "call",
     "size": 5
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x471D1E",
-    "line": "push    offset dword_B35288",
+    "line": "push    0B35288h",
     "mnemonic": "push",
     "size": 5
   },
@@ -991,7 +991,7 @@
   },
   {
     "ea": "0x471DE7",
-    "line": "lea     eax, [esp+44h+var_2C]",
+    "line": "lea     eax, [esp+44h+slot]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1015,13 +1015,13 @@
   },
   {
     "ea": "0x471DF0",
-    "line": "lea     ecx, [esp+40h+var_2C]; this",
+    "line": "lea     ecx, [esp+40h+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x471DF4",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -1159,7 +1159,7 @@
   },
   {
     "ea": "0x471E3C",
-    "line": "lea     ecx, [esp+40h+arg_0]; this",
+    "line": "lea     ecx, [esp+40h+arg_0]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1177,7 +1177,7 @@
   },
   {
     "ea": "0x471E4E",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -1351,7 +1351,7 @@
   },
   {
     "ea": "0x471EAA",
-    "line": "call    sub_46D5C0",
+    "line": "call    sub_46D5C0; Collision/model radius-ish helper used by PlaceAtMe after a ray hit. It dynamic-casts a form to TESModel and reads +0x0C, otherwise resolves from TESObjectREFR via 0x4694A0; result scales the normalized hit vector before final placement point.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1558,5 +1558,59 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AEC50",
+    "line": "lea     ecx, [ebp+4]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AEC53",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AEC58",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AEC5C",
+    "line": "lea     eax, [edx-30h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AEC5F",
+    "line": "mov     ecx, [edx-34h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AEC62",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AEC64",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AEC69",
+    "line": "mov     eax, offset stru_ADB358",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AEC6E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

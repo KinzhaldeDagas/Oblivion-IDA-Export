@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8AF890",
-    "line": "push    ecx",
+    "line": "push    ecx; TES4 authoritative: sorts collector contact hits by entry+0x1C when more than one hit is present.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x8AF897",
-    "line": "mov     byte ptr [esp+4+var_4], 0",
+    "line": "mov     byte ptr [esp+4+flags], 0",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,13 +31,13 @@
   },
   {
     "ea": "0x8AF89D",
-    "line": "mov     edx, [esp+4+var_4]",
+    "line": "mov     edx, [esp+4+flags]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x8AF8A0",
-    "line": "push    edx",
+    "line": "push    edx; flags",
     "mnemonic": "push",
     "size": 1
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x8AF8A2",
-    "line": "push    eax",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
@@ -61,19 +61,19 @@
   },
   {
     "ea": "0x8AF8A6",
-    "line": "push    0",
+    "line": "push    0; left",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x8AF8A8",
-    "line": "push    eax",
+    "line": "push    eax; entries",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8AF8A9",
-    "line": "call    sub_8AF760",
+    "line": "call    hkpCdPointEntry30_QuickSortByDistance; TES4 authoritative: quicksort over 0x30-byte contact entries using float at entry+0x1C as the sort key.",
     "mnemonic": "call",
     "size": 5
   },

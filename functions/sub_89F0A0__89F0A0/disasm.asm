@@ -26,7 +26,7 @@
 0x89F0E4: push    edx
 0x89F0E5: call    eax
 0x89F0E7: movss   xmm1, dword ptr ds:0A3D65Ch
-0x89F0EF: movaps  xmm2, xmmword ptr [esp+70h+var_24+4]
+0x89F0EF: movaps  xmm2, [esp+70h+var_24+4]
 0x89F0F4: xorps   xmm0, xmm0
 0x89F0F7: movss   xmm0, xmm1
 0x89F0FB: movaps  xmm1, [esp+70h+var_34+4]
@@ -36,11 +36,11 @@
 0x89F10B: mulps   xmm0, xmm2
 0x89F10E: push    ecx
 0x89F10F: lea     edx, [esp+74h+var_40]
-0x89F113: movaps  xmmword ptr [esp+74h+var_24+4], xmm0
+0x89F113: movaps  [esp+74h+var_24+4], xmm0
 0x89F118: addps   xmm0, xmm1
 0x89F11B: push    edx
 0x89F11C: movaps  [esp+78h+var_34+4], xmm0
-0x89F121: call    sub_43F3E0
+0x89F121: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x89F126: mov     eax, [edi]
 0x89F128: mov     edx, [eax+78h]
 0x89F12B: add     esp, 8

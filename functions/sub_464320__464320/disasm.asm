@@ -6,7 +6,7 @@
 0x46432A: test    ebx, ebx
 0x46432C: mov     [esp+30h+var_25], 0
 0x464331: jnz     short loc_464340
-0x464333: call    sub_45D450
+0x464333: call    TESSaveLoadGame_EnumerateSaveFiles; ContinueFromLastSave fidelity decode: enumerates GameSaveRoot+SaveSubdir+*.ess, constructs SaveGameFile objects (BSFile + vtable + flag byte), inserts into SaveLoad+0x6C list via BSSimpleList_InsertSorted comparator 0x459450.
 0x464338: mov     ebx, [edi+6Ch]
 0x46433B: mov     [esp+30h+var_25], 1
 0x464340: test    ebx, ebx
@@ -25,14 +25,14 @@
 0x46436B: push    eax; int
 0x46436C: push    ebp; int
 0x46436D: mov     ecx, edi
-0x46436F: call    sub_459570
+0x46436F: call    sub_459570; ContinueFromLastSave fidelity decode: parses vanilla numbered save filename metadata: expects 'Save ' prefix, '-' separator, and 'Playing Time'; extracts save number/display text/time for UI only.
 0x464374: test    al, al
 0x464376: jnz     short loc_4643F3
 0x464378: push    2
 0x46437A: push    0
 0x46437C: push    ebp
 0x46437D: mov     ecx, edi
-0x46437F: call    Savegame_Rename
+0x46437F: call    TESSaveLoadGame_ResolveSaveFile
 0x464384: mov     esi, eax
 0x464386: test    esi, esi
 0x464388: jz      short loc_46439E
@@ -41,7 +41,7 @@
 0x464390: push    0
 0x464392: push    esi
 0x464393: mov     ecx, edi
-0x464395: call    sub_45DBC0
+0x464395: call    TESSaveLoadGame_OpenAndValidateSave
 0x46439A: test    eax, eax
 0x46439C: jnz     short loc_4643B3
 0x46439E: test    esi, esi
@@ -66,7 +66,7 @@
 0x4643D2: push    eax; int
 0x4643D3: push    ebp; int
 0x4643D4: mov     ecx, edi
-0x4643D6: call    sub_45D5F0
+0x4643D6: call    TESSaveLoadGame_ReadSaveHeader
 0x4643DB: mov     eax, ds:0A853D0h
 0x4643E0: mov     edx, [esi]
 0x4643E2: mov     edx, [edx+0Ch]

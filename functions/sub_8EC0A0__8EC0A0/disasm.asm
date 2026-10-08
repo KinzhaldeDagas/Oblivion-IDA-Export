@@ -1,4 +1,4 @@
-0x8EC0A0: push    ebp
+0x8EC0A0: push    ebp; Projects against three active planes; falls back through two-plane projections and marks incompatible surfaces in the per-surface state array.
 0x8EC0A1: mov     ebp, esp
 0x8EC0A3: and     esp, 0FFFFFFF0h
 0x8EC0A6: sub     esp, 74h
@@ -7,9 +7,9 @@
 0x8EC0AB: push    edi
 0x8EC0AC: mov     ebx, eax
 0x8EC0AE: mov     esi, ecx
-0x8EC0B0: mov     edi, edx
+0x8EC0B0: mov     edi, edx; solverState
 0x8EC0B2: movaps  xmm3, xmmword ptr [ebx]
-0x8EC0B5: mov     ecx, [ebp+arg_0]
+0x8EC0B5: mov     ecx, [ebp+surfaceC]
 0x8EC0B8: movaps  xmm2, xmmword ptr [ecx]
 0x8EC0BB: movaps  xmm5, xmm3
 0x8EC0BE: shufps  xmm5, xmm3, 0C9h ; 'É'
@@ -124,16 +124,16 @@
 0x8EC25A: and     eax, 7
 0x8EC25D: cmp     al, 7
 0x8EC25F: jz      loc_8EC32B
-0x8EC265: mov     eax, [ebp+arg_4]
+0x8EC265: mov     eax, [ebp+allowFallback]
 0x8EC268: test    eax, eax
 0x8EC26A: jz      short loc_8EC281
 0x8EC26C: push    edi
-0x8EC26D: call    sub_8EB7E0
+0x8EC26D: call    hkSurfaceConstraintUtil_SortActiveConstraints; Sorts active surface constraints before recomputing the active-set solution.
 0x8EC272: mov     ecx, [edi+1Ch]
 0x8EC275: mov     esi, [edi+4]
 0x8EC278: mov     ebx, [edi+10h]
 0x8EC27B: add     esp, 4
-0x8EC27E: mov     [ebp+arg_0], ecx
+0x8EC27E: mov     [ebp+surfaceC], ecx
 0x8EC281: mov     edx, [edi+38h]
 0x8EC284: mov     eax, esi
 0x8EC286: sub     eax, [edx+48h]
@@ -157,38 +157,38 @@
 0x8EC2C5: sar     ecx, 6
 0x8EC2C8: shl     ecx, 4
 0x8EC2CB: mov     dword ptr [ecx+edx+0Ch], 1
-0x8EC2D3: mov     ecx, [ebp+arg_C]
-0x8EC2D6: mov     edx, [ebp+arg_8]
+0x8EC2D3: mov     ecx, [ebp+outPoint]
+0x8EC2D6: mov     edx, [ebp+inputPoint]
 0x8EC2D9: mov     eax, [edi+30h]
-0x8EC2DC: push    ecx
-0x8EC2DD: push    edx
-0x8EC2DE: push    ebx
-0x8EC2DF: push    esi
+0x8EC2DC: push    ecx; outPoint
+0x8EC2DD: push    edx; inputPoint
+0x8EC2DE: push    ebx; surfaceB
+0x8EC2DF: push    esi; surfaceA
 0x8EC2E0: mov     [esp+90h+var_70], eax
-0x8EC2E4: call    sub_8EBCD0
+0x8EC2E4: call    hkSurfaceConstraintUtil_ProjectAgainstTwoPlanes; Projects a point/motion against two active surface planes; falls back to single-plane projections when the pair is degenerate or incompatible.
 0x8EC2E9: mov     eax, [esp+90h+var_70]
 0x8EC2ED: mov     ecx, [edi+30h]
 0x8EC2F0: add     esp, 10h
 0x8EC2F3: cmp     eax, ecx
 0x8EC2F5: jnz     short loc_8EC309
-0x8EC2F7: mov     eax, [ebp+arg_C]
-0x8EC2FA: mov     ecx, [ebp+arg_0]
-0x8EC2FD: push    eax
-0x8EC2FE: push    eax
-0x8EC2FF: push    ecx
-0x8EC300: push    esi
-0x8EC301: call    sub_8EBCD0
+0x8EC2F7: mov     eax, [ebp+outPoint]
+0x8EC2FA: mov     ecx, [ebp+surfaceC]
+0x8EC2FD: push    eax; outPoint
+0x8EC2FE: push    eax; inputPoint
+0x8EC2FF: push    ecx; surfaceB
+0x8EC300: push    esi; surfaceA
+0x8EC301: call    hkSurfaceConstraintUtil_ProjectAgainstTwoPlanes; Projects a point/motion against two active surface planes; falls back to single-plane projections when the pair is degenerate or incompatible.
 0x8EC306: add     esp, 10h
 0x8EC309: mov     edx, [esp+80h+var_70]
 0x8EC30D: cmp     edx, [edi+30h]
 0x8EC310: jnz     short loc_8EC331
-0x8EC312: mov     eax, [ebp+arg_C]
-0x8EC315: push    eax
-0x8EC316: push    eax
-0x8EC317: mov     eax, [ebp+arg_0]
-0x8EC31A: push    eax
-0x8EC31B: push    ebx
-0x8EC31C: call    sub_8EBCD0
+0x8EC312: mov     eax, [ebp+outPoint]
+0x8EC315: push    eax; outPoint
+0x8EC316: push    eax; inputPoint
+0x8EC317: mov     eax, [ebp+surfaceC]
+0x8EC31A: push    eax; surfaceB
+0x8EC31B: push    ebx; surfaceA
+0x8EC31C: call    hkSurfaceConstraintUtil_ProjectAgainstTwoPlanes; Projects a point/motion against two active surface planes; falls back to single-plane projections when the pair is degenerate or incompatible.
 0x8EC321: add     esp, 10h
 0x8EC324: pop     edi
 0x8EC325: pop     esi
@@ -196,7 +196,7 @@
 0x8EC327: mov     esp, ebp
 0x8EC329: pop     ebp
 0x8EC32A: retn
-0x8EC32B: mov     ecx, [ebp+arg_C]
+0x8EC32B: mov     ecx, [ebp+outPoint]
 0x8EC32E: movaps  xmmword ptr [ecx], xmm0
 0x8EC331: pop     edi
 0x8EC332: pop     esi

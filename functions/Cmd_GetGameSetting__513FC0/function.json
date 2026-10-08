@@ -1,19 +1,32 @@
 {
-  "callees_count": 16,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 5,
+  "chunks": [
+    [
+      "0x513FC0",
+      "0x514100"
+    ]
+  ],
+  "chunks_sha256": "386fcae59f82445ca8705e9840183b3ee2c7c614738d2c047b7d462a6397a226",
+  "comment_regular": "Verified function body: Cmd_GetGameSetting parses a key and looks up g_GameSettingsByName, formatting string settings for output. Candidate availability only: no direct reference to this function or its \"GetGameSetting\" string was found in the inspected command table, so do not claim it is registered/reachable as a console command.",
+  "comment_repeatable": "Verified function body: Cmd_GetGameSetting parses a key and looks up g_GameSettingsByName, formatting string settings for output. Candidate availability only: no direct reference to this function or its \"GetGameSetting\" string was found in the inspected command table, so do not claim it is registered/reachable as a console command.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 6,
   "display_name": "Cmd_GetGameSetting",
   "end_ea": "0x514100",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "Cmd_GetGameSetting",
   "segment": ".text",
   "sha256": "386fcae59f82445ca8705e9840183b3ee2c7c614738d2c047b7d462a6397a226",
   "size": 320,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x513FC0",
+  "total_chunk_size": 320,
   "type": "void __cdecl(ParamInfo *, UInt8 *, TESObjectREFR *, TESObjectREFR *argC, Script *, ScriptEventList *, double *, UInt32 *)",
   "xrefs_from_count": 119,
-  "xrefs_to_count": 1
+  "xrefs_to_count": 0
 }

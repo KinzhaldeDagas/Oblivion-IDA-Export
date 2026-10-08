@@ -1,4 +1,4 @@
-0x66EAF0: sub     esp, 0B4h
+0x66EAF0: sub     esp, 0B4h; World/cell transition path used by fast travel relocation after cell resolution. Leaves normal exterior refresh/SpeedTree/weather side effects intact.
 0x66EAF6: push    ebx
 0x66EAF7: push    ebp
 0x66EAF8: push    esi
@@ -19,14 +19,14 @@
 0x66EB28: mov     ecx, ebp; this
 0x66EB2A: mov     byte ptr [esp+0C4h+var_B4+3], al
 0x66EB2E: mov     byte ptr [esp+0C4h+var_B4+2], 0
-0x66EB33: call    TESObjectREFR_GetParentCell
+0x66EB33: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x66EB38: test    eax, eax
 0x66EB3A: jz      short loc_66EB4B
-0x66EB3C: push    ebp
+0x66EB3C: push    ebp; reference
 0x66EB3D: mov     ecx, ebp; this
-0x66EB3F: call    TESObjectREFR_GetParentCell
-0x66EB44: mov     ecx, eax
-0x66EB46: call    sub_4CECD0
+0x66EB3F: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x66EB44: mov     ecx, eax; this
+0x66EB46: call    TESObjectCELL_RemoveReference; Verified: removes a reference from the cell object list under the cell lock. For persistent cells, clears the reference's ExtraDataList cell pointer and removes it from the owning WorldSpace persistent-reference index (+0x64); for normal cells, clears its parent cell and updates changed state. No write to the separate SubSpace index (+0x60) is present.
 0x66EB4B: mov     eax, [ebp+0]
 0x66EB4E: mov     edx, [eax+1CCh]
 0x66EB54: lea     ecx, [esp+0C4h+arg_0]
@@ -54,22 +54,22 @@
 0x66EBA2: mov     ecx, ebp; this
 0x66EBA4: mov     [esp+0C8h+var_A8], esi
 0x66EBA8: mov     [esp+0C8h+var_AC], edi
-0x66EBAC: call    TESObjectREFR_ChangeCell
+0x66EBAC: call    TESObjectREFR_ChangeCell; 3DTheft decode: ChangeCellAndPosition commits the target cell through TESObjectREFR_ChangeCell before position/scenegraph finalization.
 0x66EBB1: test    esi, esi
 0x66EBB3: jz      short loc_66EBCF
 0x66EBB5: mov     ecx, esi; this
-0x66EBB7: call    TESObjectREFR_GetParentCell
+0x66EBB7: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x66EBBC: test    eax, eax
 0x66EBBE: jz      short loc_66EBCF
-0x66EBC0: push    esi
+0x66EBC0: push    esi; reference
 0x66EBC1: mov     ecx, esi; this
-0x66EBC3: call    TESObjectREFR_GetParentCell
-0x66EBC8: mov     ecx, eax
-0x66EBCA: call    sub_4CECD0
+0x66EBC3: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x66EBC8: mov     ecx, eax; this
+0x66EBCA: call    TESObjectCELL_RemoveReference; Verified: removes a reference from the cell object list under the cell lock. For persistent cells, clears the reference's ExtraDataList cell pointer and removes it from the owning WorldSpace persistent-reference index (+0x64); for normal cells, clears its parent cell and updates changed state. No write to the separate SubSpace index (+0x60) is present.
 0x66EBCF: test    ebx, ebx
 0x66EBD1: jz      short loc_66EC35
 0x66EBD3: mov     ecx, ebx; this
-0x66EBD5: call    TESObjectCELL_IsInterior
+0x66EBD5: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x66EBDA: test    al, al
 0x66EBDC: jz      short loc_66EC35
 0x66EBDE: test    edi, edi
@@ -78,7 +78,7 @@
 0x66EBE4: push    0
 0x66EBE6: push    0
 0x66EBE8: mov     ecx, ebx
-0x66EBEA: call    TESObjectCELL_GetMusicType
+0x66EBEA: call    TESObjectCELL_GetMusicType; Verified: resolves the music type for a cell by using region-data ID 7, virtual sound-type lookup, and a position/cell cache; falls back to worldspace music when no region sound type is selected.
 0x66EBEF: push    eax
 0x66EBF0: mov     ecx, edi
 0x66EBF2: call    SoundManager_OpenMusicFile
@@ -97,18 +97,18 @@
 0x66EC24: push    edx
 0x66EC25: push    ebx
 0x66EC26: call    sub_4455E0
-0x66EC2B: call    sub_560110
+0x66EC2B: call    BSTreeManager_ClearCanopyShadow; Verified canopy-shadow cleanup plus version difference: Oblivion releases manager.canopyShadowTexture and an adjacent cached resource, then calls sub_440420 to unload the DDS. Fallout releases the manager pointer and BSShaderManager::pProjectedShadowTexture, then calls TES::RemoveTextureImage.
 0x66EC30: jmp     loc_66ED16
 0x66EC35: test    ebx, ebx
 0x66EC37: mov     esi, 7FFFFFFFh
-0x66EC3C: mov     [esp+0C4h+var_A4], esi
+0x66EC3C: mov     [esp+0C4h+cellY], esi
 0x66EC40: jz      short loc_66EC56
 0x66EC42: mov     ecx, ebx; this
 0x66EC44: call    TESObjectCELL_GetXCoordinate
 0x66EC49: mov     ecx, ebx; this
 0x66EC4B: mov     esi, eax
 0x66EC4D: call    TESObjectCELL_GetYCoordinate
-0x66EC52: mov     [esp+0C4h+var_A4], eax
+0x66EC52: mov     [esp+0C4h+cellY], eax
 0x66EC56: mov     eax, [esp+0C4h+var_B0]
 0x66EC5A: test    eax, eax
 0x66EC5C: jz      short loc_66ECA1
@@ -130,7 +130,7 @@
 0x66EC8F: call    sub_442630
 0x66EC94: mov     ecx, ds:0B333A0h; this
 0x66EC9A: push    0; a2
-0x66EC9C: call    sub_43FC20
+0x66EC9C: call    sub_43FC20; TES cleanup/streaming critical-section path; calls SpeedTree cache prune 0x55E390(1) before and after heap/cell cleanup.
 0x66ECA1: test    ebx, ebx
 0x66ECA3: jz      short loc_66ECF2
 0x66ECA5: test    edi, edi
@@ -140,7 +140,7 @@
 0x66ECAD: lea     eax, [esp+0CCh+arg_0]
 0x66ECB4: push    eax
 0x66ECB5: mov     ecx, ebx
-0x66ECB7: call    TESObjectCELL_GetMusicType
+0x66ECB7: call    TESObjectCELL_GetMusicType; Verified: resolves the music type for a cell by using region-data ID 7, virtual sound-type lookup, and a position/cell cache; falls back to worldspace music when no region sound type is selected.
 0x66ECBC: push    eax
 0x66ECBD: mov     ecx, edi
 0x66ECBF: call    SoundManager_OpenMusicFile
@@ -152,7 +152,7 @@
 0x66ECD1: call    SoundManager_PlayMusic
 0x66ECD6: jmp     short loc_66ECDD
 0x66ECD8: mov     byte ptr [esp+0C4h+var_B4+2], 1
-0x66ECDD: call    sub_55FDF0
+0x66ECDD: call    BSTreeManager_GetCanopyShadow; Verified canopy-shadow path plus version difference: both games use Data\\Textures\\Trees\\CanopyShadow.dds and a white 16x16 fallback. Fallout loads through TES::CreateTextureImage and also updates BSShaderManager::pProjectedShadowTexture; Oblivion loads through OB_TES_LoadOrFindSourceTexture and stores through its renderer helper. Oblivion's adjacent renderer-resource global remains Unknown.
 0x66ECE2: mov     ecx, [esp+0C4h+var_A0]
 0x66ECE6: push    ecx
 0x66ECE7: mov     ecx, ds:0B333A0h
@@ -161,10 +161,10 @@
 0x66ECF8: lea     edx, [esp+0C4h+arg_0]
 0x66ECFF: push    edx
 0x66ED00: call    sub_445A10
-0x66ED05: mov     eax, [esp+0C4h+var_A4]
+0x66ED05: mov     eax, [esp+0C4h+cellY]
 0x66ED09: mov     ecx, [esp+0C4h+var_A0]; this
-0x66ED0D: push    eax; signed int
-0x66ED0E: push    esi; signed int
+0x66ED0D: push    eax; cellY
+0x66ED0E: push    esi; cellX
 0x66ED0F: call    TESWorldSpace__GetCellAtCellCoord
 0x66ED14: mov     ebx, eax
 0x66ED16: test    edi, edi
@@ -192,10 +192,10 @@
 0x66ED5A: call    sub_540380
 0x66ED5F: push    0; a2
 0x66ED61: mov     ecx, ebp; this
-0x66ED63: call    TESObjectREFR_ChangeCell
-0x66ED68: push    ebp; Concurrency::details::SchedulerBase *
-0x66ED69: mov     ecx, ebx
-0x66ED6B: call    sub_4D35D0
+0x66ED63: call    TESObjectREFR_ChangeCell; 3DTheft decode: ChangeCellAndPosition also calls ChangeCell(player, nullptr); this null transition does not reach the 0x66765A non-null cell hook.
+0x66ED68: push    ebp; reference
+0x66ED69: mov     ecx, ebx; this
+0x66ED6B: call    TESObjectCELL_AddReference; Verified: persistent-cell AddReference updates the WorldSpace coordinate/fallback persistent-reference index (+0x64) through TESWorldSpace_IndexReference. Ordinary cell additions do not index there. This routine does not populate the separate SubSpace spatial index at +0x60.
 0x66ED70: mov     edx, [ebp+0]
 0x66ED73: mov     eax, [edx+154h]
 0x66ED79: mov     ecx, ebp
@@ -253,15 +253,15 @@
 0x66EE20: fstp    st(1)
 0x66EE22: fstp    st(1)
 0x66EE24: push    ecx
-0x66EE25: lea     ecx, [esp+0C8h+var_6C]
-0x66EE29: fstp    [esp+0C8h+var_C8]; float
-0x66EE2C: call    NiMatrix33_InitRotationTransform
-0x66EE31: lea     ecx, [esp+0C4h+var_6C]
-0x66EE35: push    ecx
-0x66EE36: lea     edx, [esp+0C8h+var_24]
-0x66EE3D: push    edx
-0x66EE3E: lea     ecx, [esp+0CCh+var_48]
-0x66EE45: call    NiMAtrix33_Multiply
+0x66EE25: lea     ecx, [esp+0C8h+right]; this
+0x66EE29: fstp    [esp+0C8h+angleZ]; angleZ
+0x66EE2C: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
+0x66EE31: lea     ecx, [esp+0C4h+right]
+0x66EE35: push    ecx; right
+0x66EE36: lea     edx, [esp+0C8h+out]
+0x66EE3D: push    edx; out
+0x66EE3E: lea     ecx, [esp+0CCh+var_48]; this
+0x66EE45: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x66EE4A: fldz
 0x66EE4C: fcomp   [esp+0C4h+arg_14]
 0x66EE53: mov     esi, eax
@@ -271,7 +271,7 @@
 0x66EE60: fnstsw  ax
 0x66EE62: test    ah, 41h
 0x66EE65: push    ecx
-0x66EE66: lea     ecx, [esp+0C8h+var_6C]
+0x66EE66: lea     ecx, [esp+0C8h+right]; this
 0x66EE6A: jp      short loc_66EE84
 0x66EE6C: fld     [esp+0C8h+arg_C]
 0x66EE73: fsub    [esp+0C8h+arg_10]
@@ -282,8 +282,8 @@
 0x66EE8B: fadd    [esp+0C8h+arg_C]
 0x66EE92: fstp    [esp+0C8h+var_B0]
 0x66EE96: fld     [esp+0C8h+var_B0]
-0x66EE9A: fstp    [esp+0C8h+var_C8]; float
-0x66EE9D: call    NiMatrix33_InitRotationTransposedTransform???
+0x66EE9A: fstp    [esp+0C8h+angleZ]; angleX
+0x66EE9D: call    NiMatrix33_InitRotationXTransposed; Verified matrix coefficients make this an X-axis rotation in the engine's transposed convention: X stays fixed; only the Y/Z submatrix contains sin/cos.
 0x66EEA2: mov     eax, [ebp+0]
 0x66EEA5: mov     edx, [eax+154h]
 0x66EEAB: mov     ecx, ebp
@@ -296,14 +296,14 @@
 0x66EEBE: call    edx
 0x66EEC0: lea     edi, [eax+30h]
 0x66EEC3: mov     ecx, 9
-0x66EEC8: lea     esi, [esp+0C4h+var_6C]
+0x66EEC8: lea     esi, [esp+0C4h+right]
 0x66EECC: rep movsd
 0x66EECE: lea     eax, [esp+0C4h+var_48]
-0x66EED2: push    eax
-0x66EED3: lea     ecx, [esp+0C8h+var_24]
-0x66EEDA: push    ecx
-0x66EEDB: lea     ecx, [esp+0CCh+var_6C]
-0x66EEDF: call    NiMAtrix33_Multiply
+0x66EED2: push    eax; right
+0x66EED3: lea     ecx, [esp+0C8h+out]
+0x66EEDA: push    ecx; out
+0x66EEDB: lea     ecx, [esp+0CCh+right]; this
+0x66EEDF: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x66EEE4: mov     ecx, 9
 0x66EEE9: mov     esi, eax
 0x66EEEB: lea     edi, [esp+0C4h+var_48]
@@ -326,7 +326,7 @@
 0x66EF2A: jmp     short loc_66EF34
 0x66EF2C: mov     eax, [eax+0B0h]
 0x66EF32: mov     eax, [eax]
-0x66EF34: mov     ecx, [esp+0C4h+arg_0]
+0x66EF34: mov     ecx, [esp+0C4h+arg_0]; Scene graph position is written from the ChangeCellAndPosition pos args after the cell change machinery has run.
 0x66EF3B: mov     [eax+54h], ecx
 0x66EF3E: mov     edx, [esp+0C4h+arg_4]
 0x66EF45: mov     [eax+58h], edx
@@ -343,10 +343,10 @@
 0x66EF6F: push    0; a3
 0x66EF71: push    ecx
 0x66EF72: fstp    [esp+0CCh+a2]; a2
-0x66EF75: call    NiAVObject_UpdateNiAVObject
+0x66EF75: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x66EF7A: mov     eax, ds:0B333A0h
 0x66EF7F: mov     ecx, [eax+0Ch]; this
-0x66EF82: call    NiAVObject_InitializePropertyState
+0x66EF82: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x66EF87: mov     ecx, ds:0B333A0h
 0x66EF8D: mov     ecx, [ecx+0Ch]
 0x66EF90: call    NiNode_UpdateDynamicEffectState
@@ -355,7 +355,7 @@
 0x66EF9B: jz      loc_66F026
 0x66EFA1: fld     [esp+0C4h+arg_8]
 0x66EFA8: sub     esp, 0Ch
-0x66EFAB: fstp    [esp+0D0h+var_C8]; float
+0x66EFAB: fstp    [esp+0D0h+angleZ]; float
 0x66EFAF: mov     ecx, edi
 0x66EFB1: fld     [esp+0D0h+arg_4]
 0x66EFB8: fstp    [esp+0D0h+a2]; float
@@ -377,7 +377,7 @@
 0x66EFF6: fstp    [esp+0C4h+var_B0]
 0x66EFFA: fldz
 0x66EFFC: sub     esp, 8
-0x66EFFF: fstp    [esp+0CCh+var_C8]; float
+0x66EFFF: fstp    [esp+0CCh+angleZ]; float
 0x66F003: fld     [esp+0CCh+var_AC]
 0x66F007: fstp    [esp+0CCh+a2]; a3
 0x66F00A: fld     [esp+0CCh+var_B0]
@@ -416,7 +416,7 @@
 0x66F079: push    0
 0x66F07B: mov     ecx, esi
 0x66F07D: call    eax
-0x66F07F: call    InitBSShaderAccumulator
+0x66F07F: call    BSShaderAccumulator_GetOrCreateGlobal
 0x66F084: test    eax, eax
 0x66F086: jz      short loc_66F08F
 0x66F088: mov     ecx, eax
@@ -440,20 +440,20 @@
 0x66F0CE: mov     [esp+0C4h+var_94], eax
 0x66F0D2: jz      short loc_66F12B
 0x66F0D4: mov     ecx, ebx; this
-0x66F0D6: call    TESObjectCELL_IsInterior
+0x66F0D6: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x66F0DB: test    al, al
 0x66F0DD: jnz     short loc_66F12B
 0x66F0DF: fldz
-0x66F0E1: lea     ecx, [esp+0C4h+var_A4]
+0x66F0E1: lea     ecx, [esp+0C4h+cellY]
 0x66F0E5: push    ecx
-0x66F0E6: fstp    [esp+0C8h+var_A4]
+0x66F0E6: fstp    [esp+0C8h+cellY]
 0x66F0EA: lea     edx, [esp+0C8h+var_9C]
 0x66F0EE: push    edx
 0x66F0EF: mov     ecx, ebx
 0x66F0F1: call    sub_4D1E10
 0x66F0F6: test    al, al
 0x66F0F8: jz      short loc_66F12B
-0x66F0FA: fld     [esp+0C4h+var_A4]
+0x66F0FA: fld     [esp+0C4h+cellY]
 0x66F0FE: fadd    qword ptr ds:0A46970h
 0x66F104: fld     [esp+0C4h+var_94]
 0x66F108: fcomp   st(1)
@@ -494,7 +494,7 @@
 0x66F176: fstp    [esp+0D0h+var_D0]; float
 0x66F179: mov     dword ptr [esp+0D0h+var_84+4], edx
 0x66F17D: mov     [esp+0D0h+var_7C], eax
-0x66F181: call    sub_65AF30
+0x66F181: call    MobileObject_Move; TES4 authoritative: MobileObject movement step. Builds local movement/update packet and calls CharProxy vtable +0x80; for bhkCharacterController that dispatches to 0x896000. Entry point for per-actor movement discipline injection before controller integration.
 0x66F186: mov     edx, [ebp+0]
 0x66F189: mov     eax, [edx+174h]
 0x66F18F: mov     ecx, ebp
@@ -530,7 +530,7 @@
 0x66F1F1: cmp     byte ptr [ebp+588h], 0
 0x66F1F8: fldz
 0x66F1FA: push    ecx
-0x66F1FB: fstp    [esp+0C8h+var_C8]; a2
+0x66F1FB: fstp    [esp+0C8h+angleZ]; a2
 0x66F1FE: setz    al
 0x66F201: mov     ecx, ebp; this
 0x66F203: mov     [ebp+588h], al
@@ -541,27 +541,27 @@
 0x66F21A: mov     [ebp+588h], cl
 0x66F220: push    ecx
 0x66F221: mov     ecx, ebp; this
-0x66F223: fstp    [esp+0C8h+var_C8]; a2
+0x66F223: fstp    [esp+0C8h+angleZ]; a2
 0x66F226: call    sub_603CA0
 0x66F22B: push    0
 0x66F22D: mov     ecx, ebp
 0x66F22F: call    sub_66B710
 0x66F234: mov     edx, ds:0B333CCh
 0x66F23A: mov     eax, [edx+0DCh]
-0x66F240: push    0; float
-0x66F242: push    eax; int
-0x66F243: call    sub_55FA50
+0x66F240: push    0; skipTimeAndWindUpdate
+0x66F242: push    eax; camera
+0x66F243: call    BSTreeManager_Update; Fast travel reaches the normal SpeedTree refresh path only after PlayerCharacter_ChangeCellAndPosition has performed the player cell/position change. Encounter interruption should occur before the 0x66FAFA relocation call if the destination move is to be replaced by a midpoint move.
 0x66F248: fld     dword ptr ds:0B33E9Ch
 0x66F24E: mov     ecx, ds:0B333A0h
-0x66F254: fstp    [esp+0CCh+var_C8]; float
+0x66F254: fstp    [esp+0CCh+angleZ]; float
 0x66F258: add     esp, 4
-0x66F25B: call    sub_4424D0
+0x66F25B: call    sub_4424D0; ModernWindowsCompatible decode: PlayerCharacter_ChangeCellAndPosition caller passes flt_B33E9C into shared TES global scene update sub_4424D0 after transition refresh work.
 0x66F260: cmp     byte ptr [ebp+7F8h], 0
 0x66F267: jz      loc_66F2EE
 0x66F26D: fld     dword ptr ds:0A3744Ch
 0x66F273: push    ecx
 0x66F274: mov     ecx, ds:0B3A6B0h
-0x66F27A: fstp    [esp+0C8h+var_C8]; float
+0x66F27A: fstp    [esp+0C8h+angleZ]; float
 0x66F27D: push    2; int
 0x66F27F: call    sub_5732D0
 0x66F284: mov     ecx, ds:0B333A0h
@@ -608,7 +608,7 @@
 0x66F314: mov     ecx, esi; this
 0x66F316: call    sub_6B73E0
 0x66F31B: push    esi
-0x66F31C: call    FormHeapFree
+0x66F31C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x66F321: add     esp, 4
 0x66F324: mov     [ebp+764h], edi
 0x66F32A: mov     [ebp+760h], edi

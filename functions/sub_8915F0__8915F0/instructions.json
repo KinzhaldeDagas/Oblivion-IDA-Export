@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8915F0",
-    "line": "push    ebp",
+    "line": "push    ebp; TES4 authoritative: casts a 25-Havok-unit downward ray from one cached capsule endpoint and returns adjusted endpoint z on hit.",
     "mnemonic": "push",
     "size": 1
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x891683",
-    "line": "fsub    qword ptr ds:0A492B0h",
+    "line": "fsub    qword ptr ds:0A492B0h; Downward ray target starts 25 Havok units below cached capsule endpoint z.",
     "mnemonic": "fsub",
     "size": 6
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x8916C8",
-    "line": "call    sub_57E270",
+    "line": "call    bhkCharacterProxy_GetCollisionFilterInfo; TES4 authoritative capsule endpoint ray: uses proxy metadata collision filter info so the ray preserves actor identity/filtering.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x8916E3",
-    "line": "call    sub_8AC0C0",
+    "line": "call    bhkCollisionWrapper_GetHavokObject; bhk collision wrapper accessor: returns stored low-level Havok object pointer at wrapper+0x30.",
     "mnemonic": "call",
     "size": 5
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x89171B",
-    "line": "mov     byte ptr [esp+104h+var_E8+3], al",
+    "line": "mov     byte ptr [esp+104h+var_E8+3], al; TES4 authoritative capsule endpoint ray: raw Havok-world vfunc +0x88 raycast from cached capsule endpoint downward 25 Havok units. Used for support slope sampling only.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -652,5 +652,83 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D6310",
+    "line": "lea     ecx, [ebp+var_E0]; void *",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9D6316",
+    "line": "jmp     sub_4F5E90",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D631B",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D631F",
+    "line": "lea     eax, [edx-0F4h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9D6325",
+    "line": "mov     ecx, [edx-0F8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9D632B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D632D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6332",
+    "line": "add     eax, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9D6335",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D6338",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D633A",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D633F",
+    "line": "mov     eax, offset stru_AFE248",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6344",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

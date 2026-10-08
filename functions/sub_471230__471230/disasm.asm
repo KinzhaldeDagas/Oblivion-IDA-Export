@@ -1,4 +1,4 @@
-0x471230: push    esi
+0x471230: push    esi; Samples the actor scene graph while extracting accumulation/root motion. Seeds AccumNode +0x54 from ActorAnimData +0x18, updates RootNode at the requested time, optionally copies the resulting AccumNode translation to the caller, then zeroes AccumNode +0x54. Used after forced play, animation-state restore, and explicit play-group paths.
 0x471231: mov     esi, ecx
 0x471233: mov     eax, [esi+8]
 0x471236: test    eax, eax

@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6600F0",
+      "0x660109"
+    ]
+  ],
+  "chunks_sha256": "546db2ead7e081403092943dbe80bde86777fb0ce0cf55c8dea5cd9761c407a6",
+  "comment_regular": "Returns the player's active render root. If PlayerCharacter+0x588 selects third person, or firstPersonNiNode +0x5D0 is null, returns ordinary TESObjectREFR NiNode; otherwise returns firstPersonNiNode.",
+  "comment_repeatable": "Returns the player's active render root. If PlayerCharacter+0x588 selects third person, or firstPersonNiNode +0x5D0 is null, returns ordinary TESObjectREFR NiNode; otherwise returns firstPersonNiNode.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6600F0",
+  "display_name": "PlayerCharacter_GetActiveNode",
   "end_ea": "0x660109",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6600F0",
+  "name": "PlayerCharacter_GetActiveNode",
   "segment": ".text",
   "sha256": "546db2ead7e081403092943dbe80bde86777fb0ce0cf55c8dea5cd9761c407a6",
   "size": 25,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6600F0",
-  "type": "void __thiscall(TESObjectREFR *this)",
+  "total_chunk_size": 25,
+  "type": "NiNode *__thiscall(PlayerCharacter *this)",
   "xrefs_from_count": 8,
   "xrefs_to_count": 1
 }

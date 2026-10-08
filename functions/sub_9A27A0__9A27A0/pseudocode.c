@@ -1,12 +1,19 @@
-unsigned int __stdcall sub_9A27A0(int a1, int a2, int a3)
+unsigned int __stdcall NiD3DPixelConstantMap_ApplyMappedConstant(
+        NiD3DPixelShader *program,
+        const NiD3DShaderConstantMapEntry *entry,
+        unsigned int passIndex)
 {
-  int *v3; // eax
+  const void *v3; // eax
 
-  v3 = sub_9A92E0(a2);
+  v3 = NiD3DShaderConstantMap_ConvertMappedValue(entry); /*0x9a27a6*/
   if ( v3 )
-    return (*(unsigned __int8 (__thiscall **)(int, int, int *, _DWORD))(*(_DWORD *)a1 + 0x30))(a1, a2, v3, 0) != 0
+    return (*(unsigned __int8 (__thiscall **)(NiD3DPixelShader *, const NiD3DShaderConstantMapEntry *, const void *, _DWORD))(*(_DWORD *)program + 0x30))(
+             program,
+             entry,
+             v3,
+             0) != 0
          ? 0
          : 0x80000050;
   else
-    return 1;
+    return 1; /*0x9a27af*/
 }

@@ -1,70 +1,117 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "tagMODULEENTRY32W",
+  "definition": "struct tagMODULEENTRY32W\n{\nDWORD dwSize;\nDWORD th32ModuleID;\nDWORD th32ProcessID;\nDWORD GlblcntUsage;\nDWORD ProccntUsage;\nBYTE *modBaseAddr;\nDWORD modBaseSize;\nHMODULE hModule;\nWCHAR_0 szModule[256];\nWCHAR_0 szExePath[260];\n}\n",
   "id": 18374686479672047177,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwSize",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "th32ModuleID",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "th32ProcessID",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GlblcntUsage",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ProccntUsage",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "modBaseAddr",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "BYTE *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "modBaseSize",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hModule",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "HMODULE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "szModule",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 512
+      "size": 512,
+      "type": "WCHAR_0[256]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "szExePath",
       "offset": 544,
       "offset_hex": "0x220",
-      "size": 520
+      "size": 520,
+      "type": "WCHAR_0[260]"
     }
   ],
   "name": "tagMODULEENTRY32W",
+  "ordinal": 8734,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 1064
 }

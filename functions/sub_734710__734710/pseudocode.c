@@ -6,21 +6,21 @@ char *__thiscall sub_734710(char *this)
   char *v4; // esi
   double v5; // st5
 
-  v1 = dbl_A492F0;
-  v2 = dbl_A3DDD8;
-  v3 = 0;
-  *(_DWORD *)this = 0;
-  *((_DWORD *)this + 1) = sub_733F90;
-  *((_DWORD *)this + 2) = 0;
-  *((_DWORD *)this + 3) = 0;
-  v4 = this + 0x11;
-  do
+  v1 = dbl_A492F0; /*0x734710*/
+  v2 = dbl_A3DDD8; /*0x734719*/
+  v3 = 0; /*0x73471f*/
+  *(_DWORD *)this = 0; /*0x734722*/
+  *((_DWORD *)this + 1) = sub_733F90; /*0x734724*/
+  *((_DWORD *)this + 2) = 0; /*0x73472b*/
+  *((_DWORD *)this + 3) = 0; /*0x73472e*/
+  v4 = this + 0x11; /*0x734731*/
+  do /*0x7347c5*/
   {
-    v4[0xFFFFFFFF] = (int)((double)(v3 & 0xF) / v1 * v2);
-    v5 = (double)((unsigned __int8)v3++ >> 4);
-    v4 += 2;
-    v4[0xFFFFFFFE] = (int)(v5 / v1 * v2);
+    v4[0xFFFFFFFF] = (int)((double)(v3 & 0xF) / v1 * v2); /*0x73476e*/
+    v5 = (double)((unsigned __int8)v3++ >> 4); /*0x734783*/
+    v4 += 2; /*0x734794*/
+    v4[0xFFFFFFFE] = (int)(v5 / v1 * v2); /*0x7347be*/
   }
-  while ( v3 < 0x100 );
-  return this;
+  while ( v3 < 0x100 ); /*0x7347c5*/
+  return this; /*0x7347d1*/
 }

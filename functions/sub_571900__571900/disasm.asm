@@ -39,10 +39,10 @@
 0x571975: fsub    qword ptr ds:0A687B0h
 0x57197B: fmul    [esp+50h+var_3C]
 0x57197F: fstp    [esp+50h+arg_4]
-0x571983: call    sub_57D7F0
+0x571983: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x571988: fsub    [esp+50h+arg_8]
 0x57198C: fstp    [esp+50h+var_34]
-0x571990: call    sub_57D7F0
+0x571990: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x571995: fmul    qword ptr ds:0A2FAA0h
 0x57199B: mov     eax, [esp+50h+arg_C]
 0x57199F: cmp     eax, 3
@@ -190,18 +190,18 @@
 0x571B82: mov     eax, [esp+50h+var_2C]
 0x571B86: mov     ecx, esi; this
 0x571B88: mov     [esi+5Ch], eax
-0x571B8B: call    NiAVObject_InitializePropertyState
+0x571B8B: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x571B90: mov     ecx, esi
 0x571B92: call    NiNode_UpdateDynamicEffectState
 0x571B97: fldz
 0x571B99: push    1; a3
 0x571B9B: push    ecx
 0x571B9C: mov     ecx, esi; this
-0x571B9E: fstp    [esp+58h+var_58]; a2
-0x571BA1: call    NiAVObject_UpdateNiAVObject
+0x571B9E: fstp    [esp+58h+var_5C+4]; a2
+0x571BA1: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x571BA6: mov     ecx, [esp+50h+var_24.m_data]
 0x571BAA: push    ecx
-0x571BAB: call    FormHeapFree
+0x571BAB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x571BB0: add     esp, 4
 0x571BB3: mov     eax, esi
 0x571BB5: mov     ecx, dword ptr [esp+50h+var_C]
@@ -213,3 +213,17 @@
 0x571BC4: pop     ebx
 0x571BC5: add     esp, 3Ch
 0x571BC8: retn    14h
+0x9BDD90: mov     eax, [ebp+10h]
+0x9BDD93: push    eax
+0x9BDD94: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BDD99: pop     ecx
+0x9BDD9A: retn
+0x9BDD9B: lea     ecx, [ebp-24h]; void *
+0x9BDD9E: jmp     BSStringT_Clear
+0x9BDDA3: mov     edx, [esp+arg_4]
+0x9BDDA7: lea     eax, [edx-40h]
+0x9BDDAA: mov     ecx, [edx-44h]
+0x9BDDAD: xor     ecx, eax
+0x9BDDAF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BDDB4: mov     eax, offset stru_AE760C
+0x9BDDB9: jmp     ___CxxFrameHandler3

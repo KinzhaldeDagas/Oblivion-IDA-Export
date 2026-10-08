@@ -1,9 +1,9 @@
 _DWORD *sub_A13CE0()
 {
-  return sub_90D190(
-           dword_BA84AC,
+  return sub_90D190( /*0xa13d0a*/
+           unk_BA84AC,
            (int)"hkConstraintInstance",
-           (int)&unk_BA94C0,
+           (int)unk_BA94C0,
            0x28,
            0,
            0,

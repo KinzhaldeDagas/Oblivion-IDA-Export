@@ -7,13 +7,13 @@
 0x43035C: retn
 0x43035D: push    esi
 0x43035E: push    edi; Size
-0x43035F: call    FormHeapAlloc
+0x43035F: call    FormHeapAlloc; MEF v40 verified BSFile swapped-write OOM guard: successful allocation returns to vanilla; failure removes allocator return/size, restores saved ESI/EDI, and returns 0 bytes without memcpy, byte swap, stream write, or free.
 0x430364: mov     esi, eax
 0x430366: mov     eax, [esp+0Ch+Src]
-0x43036A: push    edi; Size
-0x43036B: push    eax; Src
-0x43036C: push    esi; Dst
-0x43036D: call    _memcpy
+0x43036A: push    edi; byteCount
+0x43036B: push    eax; source
+0x43036C: push    esi; destination
+0x43036D: call    _memcpy;
 0x430372: mov     eax, [esp+18h+arg_C]
 0x430376: add     esp, 10h
 0x430379: test    eax, eax
@@ -33,7 +33,7 @@
 0x430398: call    eax
 0x43039A: push    esi
 0x43039B: mov     edi, eax
-0x43039D: call    FormHeapFree
+0x43039D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4303A2: add     esp, 4
 0x4303A5: pop     esi
 0x4303A6: mov     eax, edi

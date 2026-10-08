@@ -12,24 +12,24 @@ int __thiscall sub_6D8F60(NiRenderer *this, signed int a2)
   int v12; // [esp+Ch] [ebp-8h] BYREF
   int v13; // [esp+10h] [ebp-4h] BYREF
 
-  v2 = a2;
-  sub_7008A0(this, a2);
-  v10 = *(_DWORD *)(v2 + 0x21C);
-  v4 = *(int (__cdecl **)(int, signed int *, int, int *, int))(v10 + 4);
-  v12 = 4;
-  result = v4(v10, &a2, 4, &v12, 1);
-  if ( a2 )
+  v2 = a2; /*0x6d8f64*/
+  sub_7008A0(this, a2); /*0x6d8f6d*/
+  v10 = *(_DWORD *)(v2 + 0x21C); /*0x6d8f8a*/
+  v4 = *(int (__cdecl **)(int, signed int *, int, int *, int))(v10 + 4); /*0x6d8f8b*/
+  v12 = 4; /*0x6d8f8e*/
+  result = v4(v10, &a2, 4, &v12, 1); /*0x6d8f92*/
+  if ( a2 ) /*0x6d8f9c*/
   {
-    v11 = *(_DWORD *)(v2 + 0x21C);
-    v6 = *(void (__cdecl **)(int, int *, int, int *, int))(v11 + 4);
-    v12 = 4;
-    v6(v11, &v13, 4, &v12, 1);
-    v7 = v13;
-    v9 = a2;
-    LOBYTE(this->members.pad014[0]) = byte_B3D3F4[v13];
-    v8 = (*(int (__cdecl **)(signed int, signed int))(4 * v7 + 0xB3D0B8))(v2, v9);
-    (*(void (__cdecl **)(int, signed int, _DWORD))(4 * v7 + 0xB3D440))(v8, a2, LOBYTE(this->members.pad014[0]));
-    return sub_6D8E10(this, v8, a2, v7);
+    v11 = *(_DWORD *)(v2 + 0x21C); /*0x6d8fb1*/
+    v6 = *(void (__cdecl **)(int, int *, int, int *, int))(v11 + 4); /*0x6d8fb2*/
+    v12 = 4; /*0x6d8fb5*/
+    v6(v11, &v13, 4, &v12, 1); /*0x6d8fb9*/
+    v7 = v13; /*0x6d8fbb*/
+    v9 = a2; /*0x6d8fc9*/
+    LOBYTE(this->members.pad014[0]) = byte_B3D3F4[v13]; /*0x6d8fca*/
+    v8 = (*(int (__cdecl **)(signed int, signed int))(4 * v7 + 0xB3D0B8))(v2, v9); /*0x6d8fe2*/
+    (*(void (__cdecl **)(int, signed int, _DWORD))(4 * v7 + 0xB3D440))(v8, a2, LOBYTE(this->members.pad014[0])); /*0x6d8feb*/
+    return sub_6D8E10(this, v8, a2, v7); /*0x6d8ff9*/
   }
-  return result;
+  return result; /*0x6d8ffe*/
 }

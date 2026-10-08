@@ -1,34 +1,63 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "$BF7B74CD53CFF8561894266E67287D81",
+  "definition": "struct $BF7B74CD53CFF8561894266E67287D81\n{\nULONG Unknown[6];\nULONG State[5];\nULONG Count[2];\nUCHAR Buffer[64];\n}\n",
   "id": 18374686479672047452,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unknown",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "ULONG[6]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "State",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 20
+      "size": 20,
+      "type": "ULONG[5]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Count",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 8
+      "offset_hex": "0x2C",
+      "size": 8,
+      "type": "ULONG[2]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Buffer",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 64
+      "size": 64,
+      "type": "UCHAR[64]"
     }
   ],
   "name": "$BF7B74CD53CFF8561894266E67287D81",
+  "ordinal": 8804,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 116
 }

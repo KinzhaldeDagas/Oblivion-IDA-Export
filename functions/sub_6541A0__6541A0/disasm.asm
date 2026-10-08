@@ -1,4 +1,4 @@
-0x6541A0: push    ebx
+0x6541A0: push    ebx; Refreshes the equipment attachment cache for the selected skeleton context: either first-person globals or MiddleHighProcess fields (+0xFC Weapon, +0x100 Torch, +0x104 Bip01 L ForearmTwist, +0x108 BackWeapon/SideWeapon selected by native WEAP type, +0x10C Quiver). It pre-clears the matching ArrowBone cache for separate population. The Boolean result is not general cache success; it is NiNode_RemoveScbChildAlongFadeNodeChain(cached Weapon), meaning whether literal Scb was removed.
 0x6541A1: push    esi
 0x6541A2: push    edi
 0x6541A3: mov     edi, ecx
@@ -12,17 +12,17 @@
 0x6541C2: cmp     eax, 2
 0x6541C5: ja      short loc_6541CC
 0x6541C7: mov     ebx, 4
-0x6541CC: mov     esi, [esp+0Ch+arg_0]
+0x6541CC: mov     esi, [esp+0Ch+skinInstance]
 0x6541D0: test    esi, esi
 0x6541D2: jz      loc_654329
 0x6541D8: mov     ecx, ds:0B333C4h; this
-0x6541DE: push    1; a2
-0x6541E0: call    Player_GetAnimData
+0x6541DE: push    1; firstPerson
+0x6541E0: call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.
 0x6541E5: test    eax, eax
 0x6541E7: jz      loc_654293
 0x6541ED: mov     ecx, ds:0B333C4h; this
-0x6541F3: push    1; a2
-0x6541F5: call    Player_GetAnimData
+0x6541F3: push    1; firstPerson
+0x6541F5: call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.
 0x6541FA: cmp     esi, [eax+98h]
 0x654200: jnz     loc_654293
 0x654206: mov     ecx, [esi+7Ch]
@@ -60,10 +60,10 @@
 0x65426C: push    eax
 0x65426D: call    edx
 0x65426F: mov     edx, ds:0B3BA84h
-0x654275: push    edx
+0x654275: push    edx; rootNode
 0x654276: mov     ds:0B3BA94h, eax
 0x65427B: mov     dword ptr ds:0B3BA98h, 0
-0x654285: call    sub_480770
+0x654285: call    NiNode_RemoveScbChildAlongFadeNodeChain; Scans direct children for exact name 'Scb', removes/releases the first match, and returns true. On the first child whose name begins 'FadeNode ', it immediately abandons remaining siblings and follows only that single child-as-NiNode chain; null cast or exhausted chain returns false. This is not a general recursive tree search.
 0x65428A: add     esp, 4
 0x65428D: pop     edi
 0x65428E: pop     esi
@@ -105,9 +105,9 @@
 0x654302: call    eax
 0x654304: mov     [edi+10Ch], eax
 0x65430A: mov     eax, [edi+0FCh]
-0x654310: push    eax
+0x654310: push    eax; rootNode
 0x654311: mov     dword ptr [edi+110h], 0
-0x65431B: call    sub_480770
+0x65431B: call    NiNode_RemoveScbChildAlongFadeNodeChain; Scans direct children for exact name 'Scb', removes/releases the first match, and returns true. On the first child whose name begins 'FadeNode ', it immediately abandons remaining siblings and follows only that single child-as-NiNode chain; null cast or exhausted chain returns false. This is not a general recursive tree search.
 0x654320: add     esp, 4
 0x654323: pop     edi
 0x654324: pop     esi
@@ -117,13 +117,13 @@
 0x65432D: test    esi, esi
 0x65432F: jz      short loc_65430A
 0x654331: mov     ecx, ds:0B333C4h; this
-0x654337: push    1; a2
-0x654339: call    Player_GetAnimData
+0x654337: push    1; firstPerson
+0x654339: call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.
 0x65433E: test    eax, eax
 0x654340: jz      short loc_6543B1
 0x654342: mov     ecx, ds:0B333C4h; this
-0x654348: push    1; a2
-0x65434A: call    Player_GetAnimData
+0x654348: push    1; firstPerson
+0x65434A: call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.
 0x65434F: cmp     esi, [eax+4]
 0x654352: jnz     short loc_6543B1
 0x654354: mov     ecx, ds:0B0655Ch

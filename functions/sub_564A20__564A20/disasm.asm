@@ -8,7 +8,7 @@
 0x564A32: test    edi, edi
 0x564A34: jz      short loc_564A73
 0x564A36: push    6
-0x564A38: call    NiNode_GetNiPropertyByID
+0x564A38: call    NiNode_GetNiPropertyByID;
 0x564A3D: test    eax, eax
 0x564A3F: jz      short loc_564A60
 0x564A41: cmp     eax, edi
@@ -18,11 +18,11 @@
 0x564A4D: lea     eax, [esp+0Ch+a2]
 0x564A51: push    eax
 0x564A52: call    sub_708560
-0x564A57: lea     ecx, [esp+8+a2]; this
-0x564A5B: call    sub_7016A0
+0x564A57: lea     ecx, [esp+8+a2]; slot
+0x564A5B: call    NiPointerSlot_Release
 0x564A60: mov     ecx, [esi+0E8h]; this
 0x564A66: push    edi; a2
-0x564A67: call    sub_405680
+0x564A67: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x564A6C: pop     edi
 0x564A6D: mov     al, 1
 0x564A6F: pop     esi

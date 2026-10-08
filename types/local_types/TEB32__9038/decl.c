@@ -1,1 +1,1 @@
-TEB32
+typedef _TEB32 TEB32;

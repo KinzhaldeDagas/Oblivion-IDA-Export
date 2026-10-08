@@ -1,4 +1,4 @@
-0x795990: sub     esp, 8
+0x795990: sub     esp, 8; OBLIVION AUTHORITY (2026-08-30): Resizes vector<unsigned short> with 2-byte arithmetic; grows through insert-fill and shrinks through checked erase.
 0x795993: push    ebx
 0x795994: push    ebp
 0x795995: push    esi
@@ -12,7 +12,7 @@
 0x7959A4: mov     eax, [esi+8]
 0x7959A7: sub     eax, ecx
 0x7959A9: sar     eax, 1
-0x7959AB: mov     ebx, [esp+18h+arg_0]
+0x7959AB: mov     ebx, [esp+18h+newSize]
 0x7959AF: cmp     eax, ebx
 0x7959B1: jnb     short loc_7959E9
 0x7959B3: test    ecx, ecx
@@ -26,14 +26,14 @@
 0x7959C5: cmp     ecx, ebp
 0x7959C7: jbe     short loc_7959CE
 0x7959C9: call    __invalid_parameter_noinfo
-0x7959CE: lea     eax, [esp+18h+arg_4]
-0x7959D2: push    eax; int
+0x7959CE: lea     eax, [esp+18h+value]
+0x7959D2: push    eax; value
 0x7959D3: sub     ebx, edi
-0x7959D5: push    ebx; int
-0x7959D6: push    ebp; Src
-0x7959D7: push    esi; int
-0x7959D8: mov     ecx, esi
-0x7959DA: call    sub_7952B0
+0x7959D5: push    ebx; count
+0x7959D6: push    ebp; count
+0x7959D7: push    esi; position
+0x7959D8: mov     ecx, esi; this
+0x7959DA: call    OB_stVectorUShort_InsertFill_010201A0; OBLIVION AUTHORITY (2026-08-30): vector<unsigned short> insert-fill core. Uses 2-byte element arithmetic, overlap-safe moves, and 1.5x growth.
 0x7959DF: pop     edi
 0x7959E0: pop     esi
 0x7959E1: pop     ebp
@@ -55,21 +55,21 @@
 0x795A06: cmp     edi, [esi+8]
 0x795A09: jbe     short loc_795A10
 0x795A0B: call    __invalid_parameter_noinfo
-0x795A10: mov     [esp+18h+var_4], edi
+0x795A10: mov     [esp+18h+result.current], edi
 0x795A14: lea     edi, [edi+ebx*2]
 0x795A17: cmp     edi, [esi+8]
 0x795A1A: ja      short loc_795A21
 0x795A1C: cmp     edi, [esi+4]
 0x795A1F: jnb     short loc_795A26
 0x795A21: call    __invalid_parameter_noinfo
-0x795A26: push    ebp; Src
-0x795A27: push    esi; int
-0x795A28: push    edi; Dst
-0x795A29: push    esi; int
-0x795A2A: lea     ecx, [esp+28h+var_8]
-0x795A2E: push    ecx; int
-0x795A2F: mov     ecx, esi
-0x795A31: call    sub_794EE0
+0x795A26: push    ebp; last
+0x795A27: push    esi; last
+0x795A28: push    edi; first
+0x795A29: push    esi; first
+0x795A2A: lea     ecx, [esp+28h+result]
+0x795A2E: push    ecx; result
+0x795A2F: mov     ecx, esi; this
+0x795A31: call    OB_stVectorUShort_EraseRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Checked vector<unsigned short>::erase(first,last). Validates both iterator owners, shifts the suffix by 2-byte elements, updates end, and returns the resulting checked iterator.
 0x795A36: pop     edi
 0x795A37: pop     esi
 0x795A38: pop     ebp

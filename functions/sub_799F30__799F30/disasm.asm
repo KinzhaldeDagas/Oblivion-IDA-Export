@@ -1,4 +1,4 @@
-0x799F30: mov     ecx, [esp+arg_0]
+0x799F30: mov     ecx, [esp+arg_0]; Oblivion-authoritative allocator for count SFrondVertex elements. Allocates count*0x38 bytes from FormHeap and throws std::bad_alloc on multiplication overflow.
 0x799F34: sub     esp, 0Ch
 0x799F37: test    ecx, ecx
 0x799F39: ja      short loc_799F59

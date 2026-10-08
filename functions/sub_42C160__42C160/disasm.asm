@@ -13,7 +13,7 @@
 0x42C183: mov     eax, [esi+178h]
 0x42C189: mov     ecx, [eax+ebx+0Ch]
 0x42C18D: push    ecx
-0x42C18E: call    FormHeapFree
+0x42C18E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x42C193: add     edi, 1
 0x42C196: add     esp, 4
 0x42C199: add     ebx, 10h
@@ -22,7 +22,7 @@
 0x42C1A4: pop     ebx
 0x42C1A5: mov     edx, [esi+178h]
 0x42C1AB: push    edx
-0x42C1AC: call    FormHeapFree
+0x42C1AC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x42C1B1: add     esp, 4
 0x42C1B4: pop     edi
 0x42C1B5: mov     dword ptr [esi+178h], 0

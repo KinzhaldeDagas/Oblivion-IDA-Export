@@ -1,1 +1,8 @@
-__tagVARIANT
+struct __tagVARIANT
+{
+VARTYPE vt;
+WORD wReserved1;
+WORD wReserved2;
+WORD wReserved3;
+$549B3F412BDB19E83CD8783CD75EBBAE n3;
+};

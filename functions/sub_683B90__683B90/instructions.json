@@ -25,13 +25,13 @@
   },
   {
     "ea": "0x683B9B",
-    "line": "lea     ecx, [esi+14h]",
+    "line": "lea     ecx, [esi+14h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x683B9E",
-    "line": "call    sub_42B410",
+    "line": "call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.",
     "mnemonic": "call",
     "size": 5
   },

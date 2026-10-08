@@ -17,7 +17,7 @@
 0x4A2AC4: jz      loc_4A2B86
 0x4A2ACA: push    2
 0x4A2ACC: mov     ecx, ebp
-0x4A2ACE: call    NiNode_GetNiPropertyByID
+0x4A2ACE: call    NiNode_GetNiPropertyByID;
 0x4A2AD3: mov     ecx, eax
 0x4A2AD5: test    ecx, ecx
 0x4A2AD7: jz      short loc_4A2AF8
@@ -35,7 +35,7 @@
 0x4A2AF6: fstp    st
 0x4A2AF8: push    4
 0x4A2AFA: mov     ecx, ebp
-0x4A2AFC: call    NiNode_GetNiPropertyByID
+0x4A2AFC: call    NiNode_GetNiPropertyByID;
 0x4A2B01: mov     edi, eax
 0x4A2B03: test    edi, edi
 0x4A2B05: jnz     short loc_4A2B0B
@@ -55,10 +55,10 @@
 0x4A2B25: push    ecx
 0x4A2B26: mov     ecx, esi
 0x4A2B28: fstp    [esp+14h+var_14]; float
-0x4A2B2B: call    sub_7E2430
+0x4A2B2B: call    sub_7E2430; Shader property LOD/alpha helper: update float +0x20 and reset dword +0x24 when crossing 1.0 threshold.
 0x4A2B30: push    0
 0x4A2B32: mov     ecx, ebp
-0x4A2B34: call    NiNode_GetNiPropertyByID
+0x4A2B34: call    NiNode_GetNiPropertyByID;
 0x4A2B39: fld1
 0x4A2B3B: fld     [esp+10h+arg_4]
 0x4A2B3F: mov     ecx, eax

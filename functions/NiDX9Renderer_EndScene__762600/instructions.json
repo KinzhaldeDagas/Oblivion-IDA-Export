@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x762600",
-    "line": "push    esi",
+    "line": "push    esi; DeferredRendering implementation: EndScene is the opt-in full-screen lighting resolve point because IDA shows native drawing is complete before the D3D EndScene call. Resolve remains disabled by default until G-buffer material replacement is exact-gated.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x762603",
-    "line": "cmp     byte ptr [esi+6F0h], 0",
+    "line": "cmp     byte ptr [esi+6F0h], 0; DeferredRendering: EndScene checks NiDX9Renderer lostDevice byte at +0x6F0, then calls IDirect3DDevice9::EndScene through device at +0x280.",
     "mnemonic": "cmp",
     "size": 7
   },

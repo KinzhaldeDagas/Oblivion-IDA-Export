@@ -4,7 +4,7 @@
 0x6D0D35: mov     esi, [esp+10h+arg_0]
 0x6D0D39: push    esi
 0x6D0D3A: mov     ebx, ecx
-0x6D0D3C: call    sub_6D0550
+0x6D0D3C: call    NiInterpController_LoadBinary; Loads NiTimeController, then for stream versions 0x0A010068 through 0x0A01006C reads a transitional Boolean and maps it to controller flag 0x20. Other versions rely on the base flag representation/migration.
 0x6D0D41: cmp     dword ptr [esi+0D8h], 0A000102h
 0x6D0D4B: jnb     short loc_6D0D62
 0x6D0D4D: mov     ax, [esi+25Ah]

@@ -1,8 +1,8 @@
 0x9A23F0: cmp     [esp+arg_C], 0
-0x9A23F5: mov     eax, [esp+arg_4]
+0x9A23F5: mov     eax, dword ptr [esp+Size+4]
 0x9A23F9: push    esi
 0x9A23FA: push    edi
-0x9A23FB: mov     edi, [esp+8+Size]
+0x9A23FB: mov     edi, dword ptr [esp+8+Size]
 0x9A23FF: mov     esi, ecx
 0x9A2401: mov     [esi+28h], edi
 0x9A2404: mov     [esi+2Ch], eax
@@ -10,15 +10,15 @@
 0x9A2409: mov     ecx, [esi+30h]
 0x9A240C: push    ecx
 0x9A240D: mov     byte ptr [esi+34h], 1
-0x9A2411: call    FormHeapFree
+0x9A2411: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x9A2416: push    edi; Size
 0x9A2417: call    FormHeapAlloc
 0x9A241C: mov     edx, [esp+10h+Src]
-0x9A2420: push    edi; Size
-0x9A2421: push    edx; Src
-0x9A2422: push    eax; Dst
+0x9A2420: push    edi; byteCount
+0x9A2421: push    edx; source
+0x9A2422: push    eax; destination
 0x9A2423: mov     [esi+30h], eax
-0x9A2426: call    _memcpy
+0x9A2426: call    _memcpy;
 0x9A242B: add     esp, 14h
 0x9A242E: pop     edi
 0x9A242F: pop     esi

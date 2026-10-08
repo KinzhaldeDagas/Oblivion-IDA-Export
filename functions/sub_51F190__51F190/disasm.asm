@@ -13,11 +13,11 @@
 0x51F1A9: call    sub_46EC70
 0x51F1AE: test    bl, 4
 0x51F1B1: jz      short loc_51F1C0
-0x51F1B3: push    1; a2
+0x51F1B3: push    1; byteCount
 0x51F1B5: lea     eax, [esi+34h]
-0x51F1B8: push    eax; a1
-0x51F1B9: mov     ecx, esi
-0x51F1BB: call    TESForm_LoadDataFromCurrentSaveGame
+0x51F1B8: push    eax; destination
+0x51F1B9: mov     ecx, esi; self
+0x51F1BB: call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.
 0x51F1C0: pop     edi
 0x51F1C1: pop     esi
 0x51F1C2: pop     ebx

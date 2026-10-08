@@ -1,1 +1,4 @@
-NATIVEFONT_INFO
+struct NATIVEFONT_INFO
+{
+HWND hwndSelf;
+};

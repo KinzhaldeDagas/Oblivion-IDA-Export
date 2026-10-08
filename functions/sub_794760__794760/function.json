@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x794760",
+      "0x794796"
+    ]
+  ],
+  "chunks_sha256": "9222ec359d3c0e9c1b871ad01b37237f6c2f71c364b74e5522b79a73834207cb",
+  "comment_regular": "Oblivion CIndexedGeometry::GetVertexTexCoord0. Returns the selected vertex's two-float diffuse UV pair; projected-shadow UVs live in the separate shadowTexcoords stream.",
+  "comment_repeatable": "Oblivion CIndexedGeometry::GetVertexTexCoord0. Returns the selected vertex's two-float diffuse UV pair; projected-shadow UVs live in the separate shadowTexcoords stream.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_794760",
+  "display_name": "OB_CIndexedGeometry_GetVertexTexCoord0_010201A0",
   "end_ea": "0x794796",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_794760",
+  "name": "OB_CIndexedGeometry_GetVertexTexCoord0_010201A0",
   "segment": ".text",
   "sha256": "9222ec359d3c0e9c1b871ad01b37237f6c2f71c364b74e5522b79a73834207cb",
   "size": 54,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x794760",
-  "type": "int __thiscall(_DWORD *this, int)",
+  "total_chunk_size": 54,
+  "type": "const float *__thiscall(OB_CIndexedGeometry_010201A0 *this, unsigned int vertexIndex)",
   "xrefs_from_count": 21,
   "xrefs_to_count": 3
 }

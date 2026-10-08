@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x41E4D0",
-    "line": "push    esi",
+    "line": "push    esi; Asymmetric container-stack compatibility check (__thiscall, retn 4). Scans only 'other'. Returns true when the lists must remain distinct: other contains Script (0x12) or Ownership (0x27), this lacks a matching extra-data type, or that type's virtual CompareTo reports a difference. Count (0x2A) is deliberately ignored because callers merge counts separately. Returns false only when every relevant node in other is compatible.",
     "mnemonic": "push",
     "size": 1
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x41E4D9",
-    "line": "mov     ecx, offset BSExtraDataCS",
+    "line": "mov     ecx, 0B33800h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x41E4E3",
-    "line": "mov     eax, [esp+8+arg_0]",
+    "line": "mov     eax, dword ptr [esp+8+a2]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -64,5 +64,221 @@
     "line": "mov     edi, edi",
     "mnemonic": "mov",
     "size": 2
+  },
+  {
+    "ea": "0x41E4F0",
+    "line": "mov     al, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x41E4F3",
+    "line": "cmp     al, 12h; Script (0x12) and Ownership (0x27) force a non-stackable/different result.",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x41E4F5",
+    "line": "jz      short ExtraDataList_CompareListForContainer___Return_1",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x41E4F7",
+    "line": "cmp     al, 27h ; '''",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x41E4F9",
+    "line": "jz      short ExtraDataList_CompareListForContainer___Return_1",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x41E4FB",
+    "line": "cmp     al, 2Ah ; '*'; Count extra data (0x2A) is excluded from comparison; the inventory callers add counts explicitly.",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x41E4FD",
+    "line": "jz      short ExtraDataList_CompareListForContainer___ExtraDataLoop_Next",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x41E4FF",
+    "line": "mov     [esp+8+a2], al",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x41E503",
+    "line": "mov     ecx, dword ptr [esp+8+a2]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x41E507",
+    "line": "push    ecx; a2",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x41E508",
+    "line": "mov     ecx, edi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x41E50A",
+    "line": "call    BaseExtraList_GetExtraData",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x41E50F",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x41E511",
+    "line": "jz      short ExtraDataList_CompareListForContainer___Return_1",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x41E513",
+    "line": "mov     edx, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x41E515",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x41E517",
+    "line": "mov     eax, [edx+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x41E51A",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x41E51B",
+    "line": "call    eax; Virtual CompareTo returns nonzero for a mismatch; missing same-type data also yields the function's true/different result.",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x41E51D",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x41E51F",
+    "line": "jnz     short ExtraDataList_CompareListForContainer___Return_1",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x41E521",
+    "line": "mov     esi, [esi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x41E524",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x41E526",
+    "line": "jnz     short ExtraDataList_CompareListForContainer___ExtraDataLoop",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x41E528",
+    "line": "mov     ecx, 0B33800h; lpCriticalSection",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x41E52D",
+    "line": "call    NiLeaveCriticalSection_0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x41E532",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x41E533",
+    "line": "xor     al, al",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x41E535",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x41E536",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x41E539",
+    "line": "mov     ecx, 0B33800h; lpCriticalSection",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x41E53E",
+    "line": "call    NiLeaveCriticalSection_0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x41E543",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x41E544",
+    "line": "mov     al, 1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x41E546",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x41E547",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
   }
 ]

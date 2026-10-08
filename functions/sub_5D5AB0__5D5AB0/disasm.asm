@@ -12,35 +12,35 @@
 0x5D5ACA: jz      short loc_5D5B31
 0x5D5ACC: cmp     dword ptr [esi+34h], 0
 0x5D5AD0: jz      short loc_5D5B31
-0x5D5AD2: mov     ecx, esi
-0x5D5AD4: call    sub_5D5A00
+0x5D5AD2: mov     ecx, esi; this
+0x5D5AD4: call    SkillsMenu_CountSelectedRows; Count native SkillsMenu rows whose selection tile trait 0xFB1 equals 2. Class-major selection uses this count against the configured cap of seven.
 0x5D5AD9: cmp     eax, [esi+44h]
 0x5D5ADC: push    ecx
 0x5D5ADD: mov     ecx, [esi+34h]; this
 0x5D5AE0: jnz     short loc_5D5B0F
 0x5D5AE2: fld     dword ptr ds:0A379B4h
-0x5D5AE8: fstp    [esp+0Ch+a2]; a3
-0x5D5AEB: push    0FAFh; a2
-0x5D5AF0: call    Tile_SetFloat
+0x5D5AE8: fstp    [esp+0Ch+a2]; value
+0x5D5AEB: push    0FAFh; propertyCode
+0x5D5AF0: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D5AF5: fld     dword ptr ds:0A379B4h
 0x5D5AFB: push    ecx
 0x5D5AFC: mov     ecx, [esi+34h]; this
-0x5D5AFF: fstp    [esp+0Ch+a2]; a3
-0x5D5B02: push    0FC9h; a2
-0x5D5B07: call    Tile_SetFloat
+0x5D5AFF: fstp    [esp+0Ch+a2]; value
+0x5D5B02: push    0FC9h; propertyCode
+0x5D5B07: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D5B0C: pop     edi
 0x5D5B0D: pop     esi
 0x5D5B0E: retn
 0x5D5B0F: fld1
-0x5D5B11: fstp    [esp+0Ch+a2]; a3
-0x5D5B14: push    0FAFh; a2
-0x5D5B19: call    Tile_SetFloat
+0x5D5B11: fstp    [esp+0Ch+a2]; value
+0x5D5B14: push    0FAFh; propertyCode
+0x5D5B19: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D5B1E: fld1
 0x5D5B20: push    ecx
-0x5D5B21: fstp    [esp+0Ch+a2]; a3
+0x5D5B21: fstp    [esp+0Ch+a2]; value
 0x5D5B24: mov     ecx, [esi+34h]; this
-0x5D5B27: push    0FC9h; a2
-0x5D5B2C: call    Tile_SetFloat
+0x5D5B27: push    0FC9h; propertyCode
+0x5D5B2C: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D5B31: pop     edi
 0x5D5B32: pop     esi
 0x5D5B33: retn

@@ -1,5 +1,5 @@
 0x5BDDE0: sub     esp, 10h
-0x5BDDE3: call    sub_578D70
+0x5BDDE3: call    InterfaceManager_ConsumeMessageButton
 0x5BDDE8: cmp     al, 2
 0x5BDDEA: jnz     short loc_5BDE31
 0x5BDDEC: fld1
@@ -37,7 +37,7 @@
 0x5BDE54: add     esp, 8
 0x5BDE57: push    0
 0x5BDE59: mov     ecx, eax
-0x5BDE5B: call    MiscPass
+0x5BDE5B: call    MiscPass; MoonSugarEffect decode: MiscPass constructs a temporary BSCullingProcess with the source scenegraph cullingProcess->VisibleGeo. This confirms visible arrays are opt-in/inherited state, not guaranteed for the normal world path.
 0x5BDE60: mov     edx, ds:0B33398h
 0x5BDE66: mov     byte ptr [edx], 1
 0x5BDE69: add     esp, 10h

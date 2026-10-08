@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x75C316",
-    "line": "lea     edi, [esp+128h+var_9C]",
+    "line": "lea     edi, [esp+128h+local]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x75C331",
-    "line": "lea     eax, [esp+128h+var_34]",
+    "line": "lea     eax, [esp+128h+parent]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -139,43 +139,43 @@
   },
   {
     "ea": "0x75C342",
-    "line": "call    sub_718A80",
+    "line": "call    sub_718A80;",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x75C347",
-    "line": "lea     ecx, [esp+128h+var_9C]",
+    "line": "lea     ecx, [esp+128h+local]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x75C34E",
-    "line": "push    ecx",
+    "line": "push    ecx; local",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x75C34F",
-    "line": "lea     edx, [esp+12Ch+var_D0]",
+    "line": "lea     edx, [esp+12Ch+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x75C353",
-    "line": "push    edx",
+    "line": "push    edx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x75C354",
-    "line": "lea     ecx, [esp+130h+var_34]",
+    "line": "lea     ecx, [esp+130h+parent]; parent",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x75C35B",
-    "line": "call    sub_53D7A0",
+    "line": "call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x75C36B",
-    "line": "mov     eax, [esp+128h+var_AC]",
+    "line": "mov     eax, [esp+128h+out.pos.x]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -205,13 +205,13 @@
   },
   {
     "ea": "0x75C372",
-    "line": "mov     ecx, [esp+128h+var_A8]",
+    "line": "mov     ecx, [esp+128h+out.pos.y]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x75C379",
-    "line": "mov     edx, [esp+128h+var_A4]",
+    "line": "mov     edx, [esp+128h+out.pos.z]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x75C3A0",
-    "line": "lea     ecx, [esp+130h+var_D0]",
+    "line": "lea     ecx, [esp+130h+out]",
     "mnemonic": "lea",
     "size": 4
   },

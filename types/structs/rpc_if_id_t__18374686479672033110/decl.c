@@ -1,1 +1,1 @@
-rpc_if_id_t
+typedef __WIDL_epm_generated_name_0000000C rpc_if_id_t;

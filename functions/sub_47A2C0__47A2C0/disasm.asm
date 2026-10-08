@@ -18,18 +18,18 @@
 0x47A2EF: jz      loc_47A627
 0x47A2F5: cmp     byte ptr [esi+4], 1Ah
 0x47A2F9: jnz     loc_47A627
-0x47A2FF: push    0
-0x47A301: push    1
+0x47A2FF: push    0; newModelData
+0x47A301: push    1; replaceMetadata
 0x47A303: lea     ebp, [ebx+12Ch]
-0x47A309: push    ebp
-0x47A30A: call    sub_478780
+0x47A309: push    ebp; slot
+0x47A30A: call    ActorSkinInfo_ClearOrReplaceEquipmentSlot; ActorSkinInfo equipment-slot teardown/replacement. Slot is exactly {TESForm*, TESModel*, NiAVObject*}; native code removes loaded 3D from shadow/parent ownership, releases loader/scene state, clears object3D, and optionally replaces form/model metadata. Known slots include rings, amulet, WEAP, AMMO, shield, and light. External Crossbow contrast after this native ownership behavior: retained raw controller/target pointers are invalidated when the owning WeaponObject graph is torn down; pointer equality alone is not a lifetime or generation check. Current removal/reset erases tracking without restoring original controller timing state, and target mismatch leaves null-controller tombstones instead of generation-validating/rescanning.
 0x47A30F: cmp     byte ptr [esi+4], 1Ah
 0x47A313: jnz     short loc_47A32D
-0x47A315: push    0
-0x47A317: push    1
-0x47A319: push    ebp
-0x47A31A: mov     ecx, ebx
-0x47A31C: call    sub_478780
+0x47A315: push    0; newModelData
+0x47A317: push    1; replaceMetadata
+0x47A319: push    ebp; slot
+0x47A31A: mov     ecx, ebx; this
+0x47A31C: call    ActorSkinInfo_ClearOrReplaceEquipmentSlot; ActorSkinInfo equipment-slot teardown/replacement. Slot is exactly {TESForm*, TESModel*, NiAVObject*}; native code removes loaded 3D from shadow/parent ownership, releases loader/scene state, clears object3D, and optionally replaces form/model metadata. Known slots include rings, amulet, WEAP, AMMO, shield, and light. External Crossbow contrast after this native ownership behavior: retained raw controller/target pointers are invalidated when the owning WeaponObject graph is torn down; pointer equality alone is not a lifetime or generation check. Current removal/reset erases tracking without restoring original controller timing state, and target mismatch leaves null-controller tombstones instead of generation-validating/rescanning.
 0x47A321: mov     [ebp+0], esi
 0x47A324: add     esi, 30h ; '0'
 0x47A327: mov     [ebx+130h], esi
@@ -43,29 +43,29 @@
 0x47A34F: push    ebx
 0x47A350: mov     esi, eax
 0x47A352: call    sub_65D770
-0x47A357: mov     ecx, ds:0B333C4h
-0x47A35D: push    eax
-0x47A35E: call    PlayerCharacter_GetPlayerNode
+0x47A357: mov     ecx, ds:0B333C4h; this
+0x47A35D: push    eax; firstPerson
+0x47A35E: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x47A363: mov     edx, [esi]
-0x47A365: push    eax
+0x47A365: push    eax; skeletonRoot
 0x47A366: mov     eax, [ebx+150h]
-0x47A36C: push    eax
+0x47A36C: push    eax; actorRef
 0x47A36D: mov     eax, [edx+14h]
-0x47A370: push    0Eh
+0x47A370: push    0Eh; slot
 0x47A372: mov     ecx, esi
 0x47A374: call    eax
-0x47A376: push    eax
-0x47A377: call    sub_479450
+0x47A376: push    eax; modelPath
+0x47A377: call    Actor_LoadCloneAndAttachModel3D; Loads and clones a model for an actor equipment/add-on slot, binds actor-specific resources, applies the stock attachment transform, attaches through Prn metadata, and initializes render property/dynamic-effect state.
 0x47A37C: mov     [ebx+134h], eax
 0x47A382: mov     ecx, ds:0B333C4h
 0x47A388: add     esp, 10h
 0x47A38B: add     ecx, 44h ; 'D'
-0x47A38E: call    sub_41E650
+0x47A38E: call    ExtraDataList_GetLight; Returns the REFR_LIGHT payload from ExtraLight type 0x30; heavily used by TESObjectREF lighting and equipped-light paths.
 0x47A393: test    eax, eax
 0x47A395: mov     ecx, ds:0B333C4h
 0x47A39B: jz      short loc_47A3C5
 0x47A39D: add     ecx, 44h ; 'D'
-0x47A3A0: call    sub_41E650
+0x47A3A0: call    ExtraDataList_GetLight; Returns the REFR_LIGHT payload from ExtraLight type 0x30; heavily used by TESObjectREF lighting and equipped-light paths.
 0x47A3A5: mov     ecx, ds:0B333C4h
 0x47A3AB: mov     esi, [eax]
 0x47A3AD: push    ebx
@@ -100,11 +100,11 @@
 0x47A410: push    3
 0x47A412: push    1
 0x47A414: push    eax
-0x47A415: call    sub_439EB0
+0x47A415: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
 0x47A41A: mov     esi, eax
-0x47A41C: lea     ecx, [esp+48h+var_28]
-0x47A420: mov     [esp+48h+var_34], esi
-0x47A424: call    sub_478B90
+0x47A41C: lea     ecx, [esp+48h+var_28]; this
+0x47A420: mov     [esp+48h+sourceModelRoot], esi
+0x47A424: call    OB_NiCloningProcess_ctor
 0x47A429: fld1
 0x47A42B: fst     [esp+48h+var_10]
 0x47A42F: fst     [esp+48h+var_14]
@@ -143,7 +143,7 @@
 0x47A494: test    ebp, ebp
 0x47A496: jz      loc_47A56F
 0x47A49C: push    ebp
-0x47A49D: push    offset dword_B35288
+0x47A49D: push    0B35288h
 0x47A4A2: call    NiRTTI__IsObjectOfRTTIType
 0x47A4A7: add     esp, 8
 0x47A4AA: test    al, al
@@ -172,15 +172,15 @@
 0x47A4F6: call    PrintError
 0x47A4FB: add     esp, 8
 0x47A4FE: jmp     short loc_47A561
-0x47A500: mov     eax, [esp+48h+var_34]
+0x47A500: mov     eax, [esp+48h+sourceModelRoot]
 0x47A504: mov     esi, [esp+48h+Src]
-0x47A508: push    0
-0x47A50A: push    0FFFFFFFFh
-0x47A50C: push    0
-0x47A50E: push    eax
-0x47A50F: push    ebp
-0x47A510: push    esi
-0x47A511: call    sub_479140
+0x47A508: push    0; unusedTrailing
+0x47A50A: push    0FFFFFFFFh; modelType
+0x47A50C: push    0; unusedContext
+0x47A50E: push    eax; sourceModelRoot
+0x47A50F: push    ebp; modelRoot
+0x47A510: push    esi; skeletonRoot
+0x47A511: call    AttachModelUsingPrnExtraData; Six-argument cdecl helper (all ten native callers push 6 arguments; unusedContext and unusedTrailing are not read). Reads NiStringExtraData 'Prn' from sourceModelRoot, falling back to modelRoot; resolves that exact parent in skeletonRoot and attaches modelRoot. For modelType==7 it forces Prn string byte 6 to 'L' for lookup, then writes it back to 'R'. It then finds exact-name 'Scb' inside modelRoot and attaches that object separately to the same parent, reparenting Scb as modelRoot's sibling before refreshing property/effect state. Missing creature parents invoke the narrow FadeNode-chain Scb removal. Every exit returns the bool result of sub_88D000(modelRoot,1,1), which is not proven to be general attachment success.
 0x47A516: mov     edx, [ebp+0]
 0x47A519: mov     eax, [edx+8]
 0x47A51C: add     esp, 18h
@@ -212,7 +212,7 @@
 0x47A561: mov     ecx, ebp
 0x47A563: call    NiNode_UpdateDynamicEffectState
 0x47A568: mov     ecx, ebp; this
-0x47A56A: call    NiAVObject_InitializePropertyState
+0x47A56A: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x47A56F: mov     esi, [esp+48h+arg_0]
 0x47A573: test    esi, esi
 0x47A575: mov     byte ptr [esp+48h+var_4], 0
@@ -270,7 +270,7 @@
 0x47A617: mov     ecx, ebx
 0x47A619: call    NiObjectNET_SetName
 0x47A61E: push    esi
-0x47A61F: call    FormHeapFree
+0x47A61F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x47A624: add     esp, 4
 0x47A627: mov     ecx, dword ptr [esp+48h+var_C]
 0x47A62B: mov     large fs:0, ecx
@@ -281,3 +281,16 @@
 0x47A636: pop     ebx
 0x47A637: add     esp, 34h
 0x47A63A: retn    4
+0x9AF170: lea     ecx, [ebp-28h]
+0x9AF173: jmp     sub_4781A0
+0x9AF178: lea     ecx, [ebp+4]; slot
+0x9AF17B: jmp     NiPointerSlot_Release
+0x9AF180: lea     ecx, [ebp-30h]; void *
+0x9AF183: jmp     BSStringT_Clear
+0x9AF188: mov     edx, [esp+arg_4]
+0x9AF18C: lea     eax, [edx-38h]
+0x9AF18F: mov     ecx, [edx-3Ch]
+0x9AF192: xor     ecx, eax
+0x9AF194: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AF199: mov     eax, offset stru_ADB7F0
+0x9AF19E: jmp     ___CxxFrameHandler3

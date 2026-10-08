@@ -1,4 +1,4 @@
-0x4282A0: push    0FFFFFFFFh
+0x4282A0: push    0FFFFFFFFh; Verified extra-data copy lifecycle for ownership state: the copy dispatcher handles kExtraData_Ownership, kExtraData_Global, and kExtraData_Rank through their typed setters, creating/updating separate ExtraOwnership, ExtraGlobal, and ExtraRank payloads rather than sharing the source node.
 0x4282A2: push    offset ExtraDataList_CopyBSExtraData_SEH
 0x4282A7: mov     eax, large fs:0
 0x4282AD: push    eax
@@ -72,24 +72,24 @@
 0x42837D: mov     [ecx+8], eax
 0x428380: jmp     loc_4287E9
 0x428385: movzx   ecx, byte ptr [esi+0Ch]; jumptable 004282FB case 19
-0x428389: push    ecx
-0x42838A: mov     ecx, edi
-0x42838C: call    sub_423DA0
+0x428389: push    ecx; flags
+0x42838A: mov     ecx, edi; this
+0x42838C: call    ExtraDataList_SetActionFlags; Replace ExtraAction flag byte. Default value 1 removes/omits the extra only when its companion action-state dword is zero; otherwise retain/update. This is the XACT consumer.
 0x428391: jmp     loc_4287E9
 0x428396: mov     edx, [esi+0Ch]; jumptable 004282FB case 39
-0x428399: push    edx
-0x42839A: mov     ecx, edi
-0x42839C: call    ExtraDataList__SetOrRemoveExtraOwnership
+0x428399: push    edx; owner
+0x42839A: mov     ecx, edi; this
+0x42839C: call    ExtraDataList__SetOrRemoveExtraOwnership; Verified XOWN mutator: update ExtraOwnership.ownerForm when owner is nonnull; remove the XOWN extra when null; otherwise allocate a 16-byte ExtraOwnership payload and add it to the list. During plugin load the initial dword is a FormID temporarily held in the same union slot; ExtraDataList_ResolveLoadedFormIDs converts it to TESForm*. TESObjectCELL_LinkForm removes direct XOWN, XRNK, and XGLB from an exterior cell when an owner exists.
 0x4283A1: jmp     loc_4287E9
 0x4283A6: mov     eax, [esi+0Ch]; jumptable 004282FB case 40
-0x4283A9: push    eax
-0x4283AA: mov     ecx, edi
-0x4283AC: call    sub_423720
+0x4283A9: push    eax; global
+0x4283AA: mov     ecx, edi; this
+0x4283AC: call    ExtraDataList_SetGlobal; Verified XGLB mutator: update the stored TESGlobal* when nonnull; remove the extra when null; otherwise allocate a 16-byte ExtraGlobal payload. During plugin load the stored dword is a FormID temporarily; ExtraDataList_ResolveLoadedFormIDs rebases, looks it up, RTTI-checks TESGlobal, and removes missing/wrong-type entries.
 0x4283B1: jmp     loc_4287E9
 0x4283B6: mov     ecx, [esi+0Ch]; jumptable 004282FB case 41
-0x4283B9: push    ecx
-0x4283BA: mov     ecx, edi
-0x4283BC: call    sub_4237E0
+0x4283B9: push    ecx; rank
+0x4283BA: mov     ecx, edi; this
+0x4283BC: call    ExtraDataList_SetRank; Verified ExtraRank lifecycle writer: rank -1 removes the payload; every other signed 32-bit value updates or allocates ExtraRank. XRNK loading supplies a bounded 4-byte value into a zero-initialized local, so empty/short chunks become zero.
 0x4283C1: jmp     loc_4287E9
 0x4283C6: movzx   edx, word ptr [esi+0Ch]; jumptable 004282FB case 42
 0x4283CA: push    edx
@@ -112,12 +112,12 @@
 0x4283FD: call    SetWorn
 0x428402: jmp     loc_4287E9
 0x428407: mov     ecx, edi; jumptable 004282FB case 80
-0x428409: call    sub_41F2F0
+0x428409: call    ExtraDataList_AddBoundArmor; Adds marker extra ExtraBoundArmor type 0x50 when it is not already present.
 0x42840E: jmp     loc_4287E9
 0x428413: movzx   ecx, byte ptr [esi+0Ch]; jumptable 004282FB case 56
-0x428417: push    ecx
-0x428418: mov     ecx, edi
-0x42841A: call    sub_423BD0
+0x428417: push    ecx; seed
+0x428418: mov     ecx, edi; this
+0x42841A: call    ExtraDataList_SetOrRemoveTreeSeed; Verified singleton ExtraData_Seed behavior: signed byte 0xFF removes the extra; other bytes add or replace it. Combined with TESObjectTREE_GetIndexForSeed, this means an empty/missing tree seed entry cannot be persisted as a concrete per-reference seed.
 0x42841F: jmp     loc_4287E9
 0x428424: mov     edx, [esi+0Ch]; jumptable 004282FB case 54
 0x428427: push    edx
@@ -137,19 +137,19 @@
 0x428453: movzx   ecx, byte ptr [esi+0Ch]; jumptable 004282FB case 44
 0x428457: push    ecx
 0x428458: mov     ecx, edi
-0x42845A: call    ExtraDataList_SetUses
+0x42845A: call    ExtraDataList_SetUses; ExtraUses singleton setter always creates/updates and narrows to u8; no removal sentinel. Repeated XUSE retains node position and replaces the byte.
 0x42845F: jmp     loc_4287E9
 0x428464: fld     dword ptr [esi+0Ch]; jumptable 004282FB case 45
 0x428467: push    ecx
 0x428468: mov     ecx, edi
 0x42846A: fstp    [esp+24h+a3]; float
-0x42846D: call    sub_41EDF0
+0x42846D: call    ExtraDataList_SetTimeLeft; ExtraTimeLeft singleton setter always creates/updates the supplied float32 bit pattern; no zero or NaN removal sentinel.
 0x428472: jmp     loc_4287E9
 0x428477: fld     dword ptr [esi+0Ch]; jumptable 004282FB case 46
 0x42847A: push    ecx
 0x42847B: mov     ecx, edi
 0x42847D: fstp    [esp+24h+a3]; float
-0x428480: call    sub_41EE90
+0x428480: call    ExtraDataList_SetCharge; Updates or creates ExtraCharge type 0x2E with the supplied float.
 0x428485: jmp     loc_4287E9
 0x42848A: movsx   edx, byte ptr [esi+0Ch]; jumptable 004282FB case 47
 0x42848E: push    edx
@@ -187,10 +187,10 @@
 0x4284EA: mov     ecx, [esi+4]
 0x4284ED: mov     [eax+4], ecx
 0x4284F0: mov     edx, [esi+8]
-0x4284F3: push    eax
-0x4284F4: mov     ecx, edi
+0x4284F3: push    eax; lockData
+0x4284F4: mov     ecx, edi; this
 0x4284F6: mov     [eax+8], edx
-0x4284F9: call    sub_41EAF0
+0x4284F9: call    ExtraDataList_SetLock; Verified ExtraLock copy case in ExtraDataList_CopyBSExtraData: allocates a fresh 12-byte ExtraLockData, copies the level byte, TESKey* pointer, and flags byte from the source payload, then installs the copy via ExtraDataList_SetLock. The key form pointer is shared; payload storage and ExtraLock wrapper are independent.
 0x4284FE: jmp     loc_4287E9
 0x428503: push    1Ch; jumptable 004282FB case 50
 0x428505: call    FormHeapAlloc
@@ -199,8 +199,8 @@
 0x428511: cmp     eax, ebx
 0x428513: mov     [esp+20h+var_4], 1
 0x42851B: jz      short loc_428526
-0x42851D: mov     ecx, eax
-0x42851F: call    sub_42B590
+0x42851D: mov     ecx, eax; this
+0x42851F: call    TeleportData_InitSentinels; TeleportData constructor initializes linkedDoor=NULL and all six transform floats to FLT_MAX sentinels. Any XTEL immediately replaces them from a fresh zeroed scratch in TeleportData_LoadXTEL.
 0x428524: mov     ebx, eax
 0x428526: mov     eax, [esi+0Ch]
 0x428529: push    eax
@@ -218,17 +218,17 @@
 0x428554: cmp     eax, ebx
 0x428556: mov     [esp+20h+var_4], 2
 0x42855E: jz      short loc_428569
-0x428560: mov     ecx, eax
-0x428562: call    sub_42B3F0
+0x428560: mov     ecx, eax; this
+0x428562: call    MapMarkerData_ctor; MapMarkerData constructor zeros TESFullName storage, FNAM flags byte, and TNAM u16 type. unused0D is not explicitly initialized.
 0x428567: mov     ebx, eax
 0x428569: mov     ecx, [esi+0Ch]
 0x42856C: push    ecx
 0x42856D: mov     ecx, ebx
 0x42856F: mov     [esp+24h+var_4], 0FFFFFFFFh
 0x428577: call    sub_42B2A0
-0x42857C: push    ebx
-0x42857D: mov     ecx, edi
-0x42857F: call    sub_423590
+0x42857C: push    ebx; data
+0x42857D: mov     ecx, edi; this
+0x42857F: call    ExtraDataList_SetMapMarkerData
 0x428584: jmp     loc_4287E9
 0x428589: mov     edx, [esi+0Ch]; jumptable 004282FB case 30
 0x42858C: push    ebx; int
@@ -253,7 +253,7 @@
 0x4285C2: push    eax; int
 0x4285C3: push    ebp; int
 0x4285C4: mov     ecx, edi
-0x4285C6: call    sub_41F4C0
+0x4285C6: call    ExtraDataList_SetStartLocation; ExtraPackageStartLocation setter: first creation stores selected location FormID, XYZ, and rotZ; updating an extant singleton replaces only location/XYZ and preserves existing rotZ.
 0x4285CB: jmp     loc_4287E9
 0x4285D0: mov     ecx, [esi+0Ch]; jumptable 004282FB case 25
 0x4285D3: push    ecx
@@ -261,21 +261,20 @@
 0x4285D6: call    sub_424970
 0x4285DB: jmp     loc_4287E9
 0x4285E0: add     esi, 0Ch; jumptable 004282FB case 24
-0x4285E3: push    esi
-0x4285E4: mov     ecx, edi
-0x4285E6: call    sub_420100
+0x4285E3: push    esi; normal
+0x4285E4: mov     ecx, edi; this
+0x4285E6: call    ExtraDataList_SetDistantDataNormal; Verified Oblivion setter writes the supplied NiPoint3 into ExtraDistantData.normal_00C (+0x0C..+0x17). Fallout's same-named setter uses LandNormal at the same +0x0C offset; its EType is 0x13 versus Oblivion's 0x18.
 0x4285EB: jmp     loc_4287E9
 0x4285F0: mov     esi, [esi+0Ch]; jumptable 004282FB case 35
 0x4285F3: cmp     esi, ebx
 0x4285F5: jz      loc_4287E9
 0x4285FB: jmp     short loc_428600
-0x4285FD: align 10h
 0x428600: mov     eax, [esi]
 0x428602: cmp     eax, ebx
 0x428604: jz      loc_4287E9
 0x42860A: push    eax
 0x42860B: mov     ecx, edi
-0x42860D: call    sub_424C50
+0x42860D: call    sub_424C50; 3DTheft decode: Add/link ExtraFollower entry on target ExtraDataList; creates ExtraFollower if absent and pushes follower actor pointer if not already listed.
 0x428612: mov     esi, [esi+4]
 0x428615: cmp     esi, ebx
 0x428617: jnz     short loc_428600
@@ -298,7 +297,7 @@
 0x428654: mov     eax, [esi+0Ch]; jumptable 004282FB case 72
 0x428657: push    eax
 0x428658: mov     ecx, edi
-0x42865A: call    sub_41EFD0
+0x42865A: call    ExtraDataList_SetPoison; ExtraPoison setter always creates/updates raw serialized FormID, including zero. Post-load resolution removes zero/unresolved/non-AlchemyItem targets.
 0x42865F: jmp     loc_4287E9
 0x428664: mov     ecx, [esi+0Ch]; jumptable 004282FB case 3
 0x428667: push    ecx
@@ -309,17 +308,17 @@
 0x428677: push    ecx
 0x428678: mov     ecx, edi
 0x42867A: fstp    [esp+24h+a3]; float
-0x42867D: call    sub_423FF0
+0x42867D: call    ExtraDataList_SetWaterHeight
 0x428682: jmp     loc_4287E9
 0x428687: mov     edx, [esi+0Ch]; jumptable 004282FB case 5
 0x42868A: push    edx
 0x42868B: mov     ecx, edi
-0x42868D: call    sub_4204E0
+0x42868D: call    ExtraDataList_SetWaterType; Creates/updates ExtraCellWaterType with a TESWaterForm; null removes the water-type extra.
 0x428692: jmp     loc_4287E9
 0x428697: movsx   eax, byte ptr [esi+0Ch]; jumptable 004282FB case 11
 0x42869B: push    eax
 0x42869C: mov     ecx, edi
-0x42869E: call    sub_4242C0
+0x42869E: call    ExtraDataList_SetCellMusicType
 0x4286A3: jmp     loc_4287E9
 0x4286A8: mov     edx, [esi+10h]; jumptable 004282FB case 15
 0x4286AB: mov     eax, [esi+0Ch]
@@ -336,14 +335,14 @@
 0x4286C9: mov     [eax], edx
 0x4286CB: jmp     loc_4287E9
 0x4286D0: mov     eax, [esi+0Ch]; jumptable 004282FB case 12
-0x4286D3: push    eax
-0x4286D4: mov     ecx, edi
-0x4286D6: call    TESObjectCELL_SetInteriorClimate
+0x4286D3: push    eax; climate
+0x4286D4: mov     ecx, edi; this
+0x4286D6: call    TESObjectCELL_SetInteriorClimate; Verified: ExtraDataList copy dispatcher handles kExtraData_CellClimate by reading the climate pointer from ExtraCellClimate payload and invoking TESObjectCELL_SetInteriorClimate to recreate/update the destination extra.
 0x4286DB: jmp     loc_4287E9
 0x4286E0: mov     ecx, [esi+0Ch]; jumptable 004282FB case 34
-0x4286E3: push    ecx
-0x4286E4: mov     ecx, edi
-0x4286E6: call    ExtraDataList_SetReferencePointer
+0x4286E3: push    ecx; reference
+0x4286E4: mov     ecx, edi; this
+0x4286E6: call    ExtraDataList_SetReferencePointer; Set or create ExtraReferencePointer (type 0x22) in one logical function, now merged through 0x41FAF4. This extra preserves persistent-reference provenance inside an already form-keyed inventory entry; it does not override EntryData.type or sourceRef->baseForm and therefore cannot restore a thrown proxy AMMO to its source WEAP.
 0x4286EB: jmp     loc_4287E9
 0x4286F0: movzx   edx, byte ptr [esi+19h]; jumptable 004282FB case 31
 0x4286F4: movzx   eax, byte ptr [esi+18h]
@@ -361,7 +360,7 @@
 0x428712: mov     ecx, [esi+0Ch]; jumptable 004282FB case 32
 0x428715: push    ecx
 0x428716: mov     ecx, edi
-0x428718: call    sub_41FBC0
+0x428718: call    ExtraDataList_SetTrespassPackageExtra; Replaces or creates ExtraTresPassPackage. An existing package object is destructed before the supplied TrespassPackage is installed.
 0x42871D: jmp     loc_4287E9
 0x428722: mov     esi, [esi+0Ch]; jumptable 004282FB case 33
 0x428725: cmp     esi, ebx
@@ -375,49 +374,49 @@
 0x42873C: push    edx
 0x42873D: push    eax
 0x42873E: mov     ecx, edi
-0x428740: call    sub_41FFC0
+0x428740: call    ExtraDataList_SetRunOnceExtraPackage; Ensures ExtraRunOncePacks exists, then adds or updates a package record with the supplied package and state byte.
 0x428745: mov     esi, [esi+4]
 0x428748: cmp     esi, ebx
 0x42874A: jnz     short loc_428730
 0x42874C: jmp     loc_4287E9
 0x428751: mov     ecx, [esi+0Ch]; jumptable 004282FB cases 38,84
-0x428754: push    ecx
-0x428755: mov     ecx, edi
-0x428757: call    sub_41E710
+0x428754: push    ecx; originalReference
+0x428755: mov     ecx, edi; this
+0x428757: call    ExtraDataList_SetOriginalReferenceExtra; Set ExtraOriginalReference (type 0x26) to a live TESObjectREFR. This provenance is used for synthetic/reference projections, is excluded by relevant copy paths, and is never interpreted by pickup as a base-form override.
 0x42875C: jmp     loc_4287E9
 0x428761: mov     edx, [esi+0Ch]; jumptable 004282FB case 63
 0x428764: push    edx
 0x428765: mov     ecx, edi
-0x428767: call    sub_420280
+0x428767: call    ExtraDataList_SetEnableStateParent; Creates or updates ExtraEnableStateParent; a null parent removes extra type 0x3F.
 0x42876C: movzx   eax, byte ptr [esi+10h]
 0x428770: push    eax
 0x428771: mov     ecx, edi
-0x428773: call    sub_420380
+0x428773: call    ExtraDataList_SetEnableStateFlags; Replaces the complete ExtraEnableStateParent flags byte.
 0x428778: jmp     short loc_4287E9
 0x42877A: mov     ecx, [esi+0Ch]; jumptable 004282FB case 67
-0x42877D: push    ecx
-0x42877E: mov     ecx, edi
-0x428780: call    sub_4205C0
+0x42877D: push    ecx; markerReference
+0x42877E: mov     ecx, edi; this
+0x428780: call    ExtraDataList_SetRandomTeleportMarker; Verified ExtraDataList random-marker setter: null removes ExtraData type 0x43; non-null updates or allocates an ExtraRandomTeleportMarker and stores the TESObjectREFR* marker at +0x0C.
 0x428785: jmp     short loc_4287E9
 0x428787: mov     edx, [esi+0Ch]; jumptable 004282FB case 68
 0x42878A: push    edx
 0x42878B: mov     ecx, edi
-0x42878D: call    sub_4206A0
+0x42878D: call    ExtraDataList_SetMerchantContainer; Creates/updates ExtraMerchantContainer; null removes type 0x44.
 0x428792: jmp     short loc_4287E9
 0x428794: mov     eax, [esi+0Ch]; jumptable 004282FB case 88
 0x428797: push    eax
 0x428798: mov     ecx, edi
-0x42879A: call    sub_420860
+0x42879A: call    ExtraDataList_SetTravelHorse; Creates/updates ExtraTravelHorse type 0x58; null removes the travel-horse link.
 0x42879F: jmp     short loc_4287E9
 0x4287A1: mov     ecx, [esi+0Ch]; jumptable 004282FB case 77
 0x4287A4: push    ecx
 0x4287A5: mov     ecx, edi
-0x4287A7: call    sub_420D40
+0x4287A7: call    ExtraDataList_SetXTarget; Sets ExtraXTarget; null removes type 0x4D, otherwise updates or creates it.
 0x4287AC: jmp     short loc_4287E9
 0x4287AE: mov     edx, [esi+0Ch]; jumptable 004282FB case 36
 0x4287B1: push    edx
 0x4287B2: mov     ecx, edi
-0x4287B4: call    sub_420780
+0x4287B4: call    ExtraDataList_SetLevCreaModifier; Creates/updates ExtraLevCreaModifier; null removes type 0x24.
 0x4287B9: jmp     short loc_4287E9
 0x4287BB: fld     dword ptr [esi+0Ch]; jumptable 004282FB case 81
 0x4287BE: push    ecx
@@ -428,7 +427,7 @@
 0x4287CB: jmp     short loc_4287E9
 0x4287CD: push    1; jumptable 004282FB case 71
 0x4287CF: mov     ecx, edi
-0x4287D1: call    sub_41F370
+0x4287D1: call    ExtraDataList_SetCannotWear; Adds or removes marker extra ExtraCannotWear type 0x47 according to the requested state.
 0x4287D6: jmp     short loc_4287E9
 0x4287D8: movzx   eax, cl; jumptable 004282FB default case, cases 6-10,13,14,16,17,20-23,26,29,37,48,52,53,57-62,64-66,69,70,73-76,82,83,86
 0x4287DB: push    eax; ArgList
@@ -444,3 +443,25 @@
 0x4287F8: pop     ebx
 0x4287F9: add     esp, 0Ch
 0x4287FC: retn    4
+0x9AB9E0: mov     eax, [ebp+4]
+0x9AB9E3: push    eax
+0x9AB9E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AB9E9: pop     ecx
+0x9AB9EA: retn
+0x9AB9EB: mov     eax, [ebp+4]
+0x9AB9EE: push    eax
+0x9AB9EF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AB9F4: pop     ecx
+0x9AB9F5: retn
+0x9AB9F6: mov     eax, [ebp+4]
+0x9AB9F9: push    eax
+0x9AB9FA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AB9FF: pop     ecx
+0x9ABA00: retn
+0x9ABA01: mov     edx, [esp+arg_4]
+0x9ABA05: lea     eax, [edx-10h]
+0x9ABA08: mov     ecx, [edx-14h]
+0x9ABA0B: xor     ecx, eax
+0x9ABA0D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9ABA12: mov     eax, offset stru_AD87F0
+0x9ABA17: jmp     ___CxxFrameHandler3

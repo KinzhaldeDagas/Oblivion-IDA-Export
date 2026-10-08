@@ -1,4 +1,4 @@
-int __stdcall TESContainer_RemoveNthEntry_::Done_(int a1)
+void __stdcall TESContainer_RemoveNthEntry_::Done_(int a1)
 {
-  return TESContainer_RemoveNthEntry_::Done(a1);
+  TESContainer_RemoveNthEntry_::Done(a1); /*0x469747*/
 }

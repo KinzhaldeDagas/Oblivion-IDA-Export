@@ -5,13 +5,13 @@
 0x51A3B4: mov     edi, ecx
 0x51A3B6: mov     ecx, ds:0B33B00h
 0x51A3BC: mov     [esp+10h+var_4], 0
-0x51A3C4: call    sub_45A170
+0x51A3C4: call    TESSaveLoadGame_UseSaveGameBlocks
 0x51A3C9: test    al, al
 0x51A3CB: jz      short loc_51A3D5
 0x51A3CD: mov     [esp+10h+var_4], 6
 0x51A3D5: mov     eax, ds:0B33B00h
 0x51A3DA: cmp     byte ptr [eax+7Ch], 6Dh ; 'm'
-0x51A3DE: mov     ebx, [esp+10h+arg_0]
+0x51A3DE: mov     ebx, [esp+10h+changeMask]
 0x51A3E2: jb      short loc_51A3F6
 0x51A3E4: push    ebx
 0x51A3E5: mov     ecx, edi
@@ -23,8 +23,8 @@
 0x51A3FB: push    ebx
 0x51A3FC: lea     ecx, [edi+88h]
 0x51A402: call    TESAttributes_ModifiedSize
-0x51A407: push    ebx
-0x51A408: lea     ecx, [edi+24h]
+0x51A407: push    ebx; changeMask
+0x51A408: lea     ecx, [edi+24h]; self
 0x51A40B: add     si, ax
 0x51A40E: call    TESActorBaseData_ModifiedComponentSize
 0x51A413: push    ebx
@@ -43,7 +43,7 @@
 0x51A43D: mov     si, word ptr [esp+10h+var_4]
 0x51A442: test    ebx, 10000000h
 0x51A448: jz      short loc_51A45D
-0x51A44A: lea     ecx, [edi+0D0h]
+0x51A44A: lea     ecx, [edi+0D0h]; self
 0x51A450: call    AVCollection_GetSaveSize
 0x51A455: add     si, ax
 0x51A458: mov     word ptr [esp+10h+var_4], si
@@ -72,7 +72,7 @@
 0x51A4AB: jz      short loc_51A4F1
 0x51A4AD: mov     edx, [edi]
 0x51A4AF: push    edx; a1
-0x51A4B0: call    TESForm_LookupByFormID
+0x51A4B0: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x51A4B5: mov     ecx, [edi+5]
 0x51A4B8: mov     edx, [eax]
 0x51A4BA: add     esp, 4

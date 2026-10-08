@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x795820",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, [esp+last]; OBLIVION AUTHORITY (2026-08-30): stdcall adapter for the compiler-folded 0x10-byte vector-owner destruction range.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x795824",
-    "line": "mov     edx, [esp+arg_0]",
+    "line": "mov     edx, [esp+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,25 +25,25 @@
   },
   {
     "ea": "0x79582A",
-    "line": "mov     ecx, [esp+8+arg_4]",
+    "line": "mov     ecx, [esp+8+last]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79582E",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79582F",
-    "line": "push    edx",
+    "line": "push    edx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x795830",
-    "line": "call    sub_794FC0",
+    "line": "call    OB_stVector4_DestroyRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Destroys each 0x10-byte vector owner in [first,last), freeing its owned buffer and clearing the pointer triplet.",
     "mnemonic": "call",
     "size": 5
   },

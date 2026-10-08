@@ -17,14 +17,14 @@
 0x464086: push    edi; int
 0x464087: push    ebp; int
 0x464088: mov     ecx, esi
-0x46408A: call    sub_459570
+0x46408A: call    sub_459570; ContinueFromLastSave fidelity decode: parses vanilla numbered save filename metadata: expects 'Save ' prefix, '-' separator, and 'Playing Time'; extracts save number/display text/time for UI only.
 0x46408F: test    al, al
 0x464091: jnz     loc_46430E
 0x464097: push    2
 0x464099: push    0
 0x46409B: push    ebp
 0x46409C: mov     ecx, esi
-0x46409E: call    Savegame_Rename
+0x46409E: call    TESSaveLoadGame_ResolveSaveFile
 0x4640A3: mov     ebp, eax
 0x4640A5: test    ebp, ebp
 0x4640A7: jz      short loc_4640BD
@@ -33,7 +33,7 @@
 0x4640AF: push    0
 0x4640B1: push    ebp
 0x4640B2: mov     ecx, esi
-0x4640B4: call    sub_45DBC0
+0x4640B4: call    TESSaveLoadGame_OpenAndValidateSave
 0x4640B9: test    eax, eax
 0x4640BB: jnz     short loc_4640EA
 0x4640BD: test    edi, edi
@@ -67,7 +67,7 @@
 0x46410A: push    edx; int
 0x46410B: mov     ecx, esi
 0x46410D: mov     [esp+4Ch+arg_8], 0
-0x464115: call    sub_45D5F0
+0x464115: call    TESSaveLoadGame_ReadSaveHeader
 0x46411A: mov     eax, [esp+24h+arg_C]
 0x46411E: test    eax, eax
 0x464120: jz      short loc_46413D
@@ -195,7 +195,6 @@
 0x464277: mov     [edi], ecx
 0x464279: mov     ecx, eax
 0x46427B: jmp     short loc_464280
-0x46427D: align 10h
 0x464280: mov     dl, [eax]
 0x464282: add     eax, 1
 0x464285: test    dl, dl
@@ -236,7 +235,6 @@
 0x4642D7: mov     eax, esi
 0x4642D9: sub     edx, esi
 0x4642DB: jmp     short loc_4642E0
-0x4642DD: align 10h
 0x4642E0: mov     cl, [eax]
 0x4642E2: mov     [edx+eax], cl
 0x4642E5: add     eax, 1

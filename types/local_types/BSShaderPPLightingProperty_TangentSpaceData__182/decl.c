@@ -1,1 +1,1 @@
-BSShaderPPLightingProperty::TangentSpaceData
+struct BSShaderPPLightingProperty::TangentSpaceData;

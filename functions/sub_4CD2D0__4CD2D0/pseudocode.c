@@ -1,21 +1,22 @@
-int __thiscall sub_4CD2D0(_DWORD *this, int a2)
+const void *__thiscall sub_4CD2D0(const void **this, int a2)
 {
   _DWORD *v3; // eax
   int v4; // eax
-  _DWORD *v5; // esi
-  int result; // eax
+  const void **v5; // esi
+  const void *result; // eax
 
-  if ( this )
+  if ( this ) /*0x4cd2da*/
   {
-    v3 = (_DWORD *)(*(int (__thiscall **)(_DWORD *))(*this + 0x58))(this);
-    if ( v3 )
-      sub_899CA0(v3, a2);
+    v3 = (_DWORD *)(*((int (__thiscall **)(const void **))*this + 0x16))(this); /*0x4cd2e1*/
+    if ( v3 ) /*0x4cd2e5*/
+      sub_899CA0(v3, a2); /*0x4cd2ea*/
   }
-  v4 = *(this + 0x1A);
-  v5 = this + 0x18;
-  result = v4 & 0x3FFFFFFF;
-  if ( v5[1] == result )
-    result = sub_8A6EE0((int)v5, 4);
-  *(_DWORD *)(*v5 + 4 * v5[1]++) = a2;
-  return result;
+  v4 = (int)*(this + 0x1A); /*0x4cd2ef*/
+  v5 = this + 0x18; /*0x4cd2f2*/
+  result = (const void *)(v4 & 0x3FFFFFFF); /*0x4cd2f5*/
+  if ( v5[1] == result ) /*0x4cd2fd*/
+    result = (const void *)sub_8A6EE0(v5, 4); /*0x4cd302*/
+  *((_DWORD *)*v5 + (_DWORD)v5[1]) = a2; /*0x4cd30f*/
+  v5[1] = (char *)v5[1] + 1; /*0x4cd312*/
+  return result; /*0x4cd316*/
 }

@@ -2,22 +2,22 @@ int __thiscall sub_77BEE0(void *this)
 {
   int result; // eax
 
-  if ( !byte_B4288C )
+  if ( !unk_B4288C ) /*0x77bee0*/
   {
-    byte_B4288C = 1;
-    sub_77BE60(0x16);
-    sub_77BE60(0x17);
-    sub_77BE60(0x18);
-    sub_772970();
-    sub_7734A0();
-    sub_7797B0();
-    sub_76FAC0();
-    sub_77D180(this);
-    sub_77F6F0();
-    sub_77BC90();
-    sub_77BCE0();
-    sub_77BC40();
-    _cfltcvt_init();
+    unk_B4288C = 1; /*0x77beeb*/
+    sub_77BE60(0x16); /*0x77bef2*/
+    sub_77BE60(0x17); /*0x77bef9*/
+    sub_77BE60(0x18); /*0x77bf00*/
+    sub_772970(); /*0x77bf08*/
+    sub_7734A0(); /*0x77bf0d*/
+    sub_7797B0(); /*0x77bf12*/
+    sub_76FAC0(); /*0x77bf17*/
+    sub_77D180(this); /*0x77bf1c*/
+    sub_77F6F0(); /*0x77bf21*/
+    sub_77BC90(); /*0x77bf26*/
+    sub_77BCE0(); /*0x77bf2b*/
+    sub_77BC40(); /*0x77bf30*/
+    _cfltcvt_init(); /*0x77bf35*/
   }
-  return result;
+  return result; /*0x77bf3a*/
 }

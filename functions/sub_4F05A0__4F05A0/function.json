@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4F05A0",
+      "0x4F05FD"
+    ]
+  ],
+  "chunks_sha256": "1e7fb8c8b5dd389374d61753954f93bbd3ce52b2ec7ea040412a59813829f4f7",
+  "comment_regular": "Verified: retrieves the +0x60 coordinate bucket using the SubSpace reference's position-derived signed-X/unsigned-Y cell key (shift 12 after engine float-to-int conversion), returning its 8-byte list head. The writer populates every bucket touched by the scaled SubSpace radius.",
+  "comment_repeatable": "Verified: retrieves the +0x60 coordinate bucket using the SubSpace reference's position-derived signed-X/unsigned-Y cell key (shift 12 after engine float-to-int conversion), returning its 8-byte list head. The writer populates every bucket touched by the scaled SubSpace radius.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4F05A0",
+  "display_name": "TESWorldSpace_GetSubSpaceCandidatesAtPosition",
   "end_ea": "0x4F05FD",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4F05A0",
+  "name": "TESWorldSpace_GetSubSpaceCandidatesAtPosition",
   "segment": ".text",
   "sha256": "1e7fb8c8b5dd389374d61753954f93bbd3ce52b2ec7ea040412a59813829f4f7",
   "size": 93,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4F05A0",
-  "type": "int __thiscall(_DWORD *this, float *)",
+  "total_chunk_size": 93,
+  "type": "TESSubSpaceReferenceList *__thiscall(TESWorldSpace *this, float *worldPosition)",
   "xrefs_from_count": 31,
   "xrefs_to_count": 1
 }

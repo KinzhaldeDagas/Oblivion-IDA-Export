@@ -1,4 +1,4 @@
-0x77DE00: mov     eax, ds:0B428A0h
+0x77DE00: mov     eax, ds:0B428A0h; Pass225: NiUnsharedGeometryGroup creation path used for renderer+0x8A4 screen-texture group.
 0x77DE05: test    eax, eax
 0x77DE07: jnz     short locret_77DE38
 0x77DE09: push    esi

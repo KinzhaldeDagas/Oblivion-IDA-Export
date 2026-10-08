@@ -35,7 +35,7 @@
 0x74E902: call    edx
 0x74E904: test    eax, eax
 0x74E906: jz      short loc_74E916
-0x74E908: cmp     eax, offset dword_B40DFC
+0x74E908: cmp     eax, offset stru_B40DFC
 0x74E90D: jz      short loc_74E950
 0x74E90F: mov     eax, [eax+4]
 0x74E912: test    eax, eax

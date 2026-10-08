@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7F07D0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Pass230: SpeedTree leaf vertex map uses shared FogParam/ShadowVolumeFatness 0x00B46638 and FogColor/ShadowVolumeExtrudeDistance 0x00B46648.",
     "mnemonic": "push",
     "size": 2
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x7F0867",
-    "line": "push    offset dword_B46498",
+    "line": "push    offset flt_B46498",
     "mnemonic": "push",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x7F0885",
-    "line": "call    eax",
+    "line": "call    eax; Leaf VS c5 AmbientColor comes from shared constant bank B46498; a zero ambient term contributes no texture RGB.",
     "mnemonic": "call",
     "size": 2
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x7F0890",
-    "line": "push    offset dword_B464A8",
+    "line": "push    (offset flt_B464A0+8)",
     "mnemonic": "push",
     "size": 5
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x7F08AE",
-    "line": "call    eax",
+    "line": "call    eax; Leaf VS c6 DiffColor comes from shared constant bank B464A8; lit RGB is derived from this plus ambient, not vertex color.",
     "mnemonic": "call",
     "size": 2
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x7F08B9",
-    "line": "push    offset unk_B464B8",
+    "line": "push    (offset flt_B464A0+18h)",
     "mnemonic": "push",
     "size": 5
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x7F08D7",
-    "line": "call    eax",
+    "line": "call    eax; Leaf VS c7 point-light DiffColorPt comes from shared constant bank B464B8 for point-light variants.",
     "mnemonic": "call",
     "size": 2
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x7F08E2",
-    "line": "push    offset dword_B46638",
+    "line": "push    offset flt_B46638",
     "mnemonic": "push",
     "size": 5
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x7F0900",
-    "line": "call    eax",
+    "line": "call    eax; Fog constant-map decode: SpeedTree leaf vertex map declares FogParam | ShadowVolumeFatness at vs c8 from shared B46638.",
     "mnemonic": "call",
     "size": 2
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x7F0908",
-    "line": "push    offset dword_B46648",
+    "line": "push    (offset flt_B46638+10h)",
     "mnemonic": "push",
     "size": 5
   },
@@ -697,13 +697,13 @@
   },
   {
     "ea": "0x7F0929",
-    "line": "call    eax",
+    "line": "call    eax; Fog constant-map decode: SpeedTree leaf vertex map declares FogColor | ShadowVolumeExtrudeDistance at vs c9 from shared B46648.",
     "mnemonic": "call",
     "size": 2
   },
   {
     "ea": "0x7F092B",
-    "line": "cmp     byte ptr ds:0B43070h, 0",
+    "line": "cmp     byte ptr ds:0B43070h, 0; Register leaf VS c10 Tree Dimmer only in HDR mode. Non-HDR STLEAF shader omits c10; HDR variants name c10 SunDimmer.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -739,7 +739,7 @@
   },
   {
     "ea": "0x7F093D",
-    "line": "push    offset flt_B42EA8",
+    "line": "push    (offset OB_RendererGlobalState_010201A0.pad_00D+2)",
     "mnemonic": "push",
     "size": 5
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x7F095B",
-    "line": "call    eax",
+    "line": "call    eax; Leaf VS c10 maps to B42EA8 fTreeDimmer. It scales directional diffuse only, not ambient and not sampled alpha.",
     "mnemonic": "call",
     "size": 2
   },
@@ -823,7 +823,7 @@
   },
   {
     "ea": "0x7F0966",
-    "line": "push    offset dword_B46738",
+    "line": "push    (offset flt_B46638+100h)",
     "mnemonic": "push",
     "size": 5
   },
@@ -877,7 +877,7 @@
   },
   {
     "ea": "0x7F0984",
-    "line": "call    eax",
+    "line": "call    eax; Registers c11..c16: object-space light vector/position, billboard axes, rock and rustle parameters. c11 drives N.L; there is no per-vertex color stream.",
     "mnemonic": "call",
     "size": 2
   },
@@ -889,19 +889,19 @@
   },
   {
     "ea": "0x7F0988",
-    "line": "push    11h",
+    "line": "push    11h; baseRegister",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F098A",
-    "line": "push    ecx",
+    "line": "push    ecx; constantMap",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7F098B",
-    "line": "call    sub_7F16F0",
+    "line": "call    OB_SpeedTreeShader_RegisterTreeAndWindConstants_010201A0; Registers SpeedTree shader constants: TreeData at base register and WindMatrices at base+1 (16 float4 registers).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1042,5 +1042,77 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CA7E0",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA7E3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA7E4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA7E9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA7EA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA7EB",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CA7EF",
+    "line": "lea     eax, [edx-0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA7F2",
+    "line": "mov     ecx, [edx-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA7F5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CA7F7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA7FC",
+    "line": "mov     eax, offset stru_AF2E8C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA801",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

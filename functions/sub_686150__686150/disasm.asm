@@ -3,8 +3,8 @@
 0x686154: push    ebp
 0x686155: mov     ebp, ecx
 0x686157: push    esi
-0x686158: lea     ecx, [ebp+14h]
-0x68615B: call    sub_42B410
+0x686158: lea     ecx, [ebp+14h]; this
+0x68615B: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x686160: mov     esi, [esp+1Ch+arg_0]
 0x686164: test    esi, esi
 0x686166: mov     ebx, eax
@@ -16,11 +16,11 @@
 0x68617D: test    al, al
 0x68617F: jz      short loc_6861A0
 0x686181: mov     ecx, esi; this
-0x686183: call    MobileObject_GetCharProxy
+0x686183: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x686188: test    eax, eax
 0x68618A: jz      short loc_6861A0
 0x68618C: lea     ecx, [eax+1E0h]
-0x686192: call    sub_88D370
+0x686192: call    hkCharacterContext_GetStateId; hkCharacterContext state id accessor used by controller update; proxy+0x1E0 context stores current state id at +0x0C.
 0x686197: cmp     eax, 2
 0x68619A: jz      loc_6862AE
 0x6861A0: mov     eax, [esi]
@@ -30,7 +30,7 @@
 0x6861AB: call    edx
 0x6861AD: mov     ecx, ebx
 0x6861AF: mov     edi, eax
-0x6861B1: call    sub_6899C0
+0x6861B1: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x6861B6: fld     dword ptr [eax+4]
 0x6861B9: fsub    dword ptr [edi+4]
 0x6861BC: fstp    [esp+20h+arg_0]
@@ -46,7 +46,7 @@
 0x6861DB: fstp    [esp+24h+var_8]
 0x6861DF: fld     [esp+24h+var_10]
 0x6861E3: fstp    [esp+24h+var_4]
-0x6861E7: call    sub_683CB0
+0x6861E7: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x6861EC: fstp    [esp+24h+arg_0]
 0x6861F0: mov     ecx, ebp
 0x6861F2: fld     [esp+24h+arg_0]

@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x6859E0",
-    "line": "mov     esi, [ebp+arg_0]",
+    "line": "mov     esi, [ebp+worldXY]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x685A19",
-    "line": "push    esi; float *",
+    "line": "push    esi; worldXY",
     "mnemonic": "push",
     "size": 1
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x685A21",
-    "line": "call    TESWorldSpace__GetCellAtPos",
+    "line": "call    TESWorldSpace_GetCellAtWorldPosition",
     "mnemonic": "call",
     "size": 5
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x685A44",
-    "line": "push    edi; float *",
+    "line": "push    edi; worldXY",
     "mnemonic": "push",
     "size": 1
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x685A4C",
-    "line": "call    TESWorldSpace__GetCellAtPos",
+    "line": "call    TESWorldSpace_GetCellAtWorldPosition",
     "mnemonic": "call",
     "size": 5
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x685B4A",
-    "line": "call    TES__CastRay",
+    "line": "call    TES__CastRay; TES4 authoritative: TES::CastRay. Uses current interior cell's bhkWorld or exterior bhkWorldM; calls bhkWorld raycast vfunc +0x88 with bhkWorldRayCastData. Reusable for climbing wall/ledge probes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -805,7 +805,7 @@
   },
   {
     "ea": "0x685B93",
-    "line": "fld     [esp+114h+a2.WorldRayCastOutput.HitFraction]",
+    "line": "fld     [esp+114h+a2.WorldRayCastOutput.HitFraction]; Another native HitFraction use: obstruction/visibility ray scales the total segment length by WorldRayCastOutput.HitFraction and checks remaining clearance. Confirms HitFraction is normalized 0..1 along the ray vector.",
     "mnemonic": "fld",
     "size": 4
   },
@@ -934,5 +934,83 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C4ED0",
+    "line": "lea     ecx, [ebp+var_60]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C4ED3",
+    "line": "jmp     sub_4F5E90",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4ED8",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C4EDC",
+    "line": "lea     eax, [edx-104h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C4EE2",
+    "line": "mov     ecx, [edx-108h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C4EE8",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C4EEA",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4EEF",
+    "line": "add     eax, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C4EF2",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C4EF5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C4EF7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4EFC",
+    "line": "mov     eax, offset stru_AED764",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4F01",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

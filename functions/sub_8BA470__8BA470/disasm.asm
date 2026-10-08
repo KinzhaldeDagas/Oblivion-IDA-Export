@@ -1,4 +1,4 @@
-0x8BA470: push    ebp
+0x8BA470: push    ebp; TES4 authoritative: hkWorldRayCaster helper for collector-based broadphase raycasts. Confirms raycast output normal storage at bhkWorldRayCastData +0x30 and related output fields.
 0x8BA471: mov     ebp, esp
 0x8BA473: and     esp, 0FFFFFFF0h
 0x8BA476: sub     esp, 14h

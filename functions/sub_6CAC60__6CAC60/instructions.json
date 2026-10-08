@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x6CAC67",
-    "line": "cmp     [edi+44h], ebx",
+    "line": "cmp     [edi+44h], ebx; Crash investigation 2026-05-26: WER hit-crash offset mapped here in animation/controller cleanup (sub_6CAC60 reading this+0x44). BloodOnDeath now avoids doing limb lookup/native decal projection inside Actor_Kill/death call stack to avoid interfering with this hit/death cleanup path.",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x6CAC6E",
-    "line": "push    ebx; char",
+    "line": "push    ebx; transition",
     "mnemonic": "push",
     "size": 1
   },
@@ -61,13 +61,13 @@
   },
   {
     "ea": "0x6CAC70",
-    "line": "fstp    [esp+14h+var_14]; float",
+    "line": "fstp    [esp+14h+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6CAC73",
-    "line": "call    sub_6C9CB0",
+    "line": "call    NiControllerSequence_Deactivate; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.",
     "mnemonic": "call",
     "size": 5
   },

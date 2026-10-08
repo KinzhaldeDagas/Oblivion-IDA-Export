@@ -44,7 +44,7 @@
 0x99010D: jmp     short loc_9900CF
 0x99010F: mov     edi, [ebp+arg_0]
 0x990112: mov     eax, [edi]
-0x990114: mov     [ebp+var_C], eax
+0x990114: mov     dword ptr [ebp+var_C], eax
 0x990117: mov     eax, [edi+4]
 0x99011A: mov     ecx, eax
 0x99011C: shr     ecx, 14h
@@ -160,19 +160,19 @@
 0x990243: mov     ecx, [edi+4]
 0x990246: mov     eax, [edi]
 0x990248: and     ecx, 0FFFFFh
-0x99024E: mov     [ebp+var_8], ecx
+0x99024E: mov     dword ptr [ebp+var_C+4], ecx
 0x990251: ja      short loc_99025B
 0x990253: cmp     eax, edx
 0x990255: jbe     loc_990310
-0x99025B: mov     [ebp+var_C], edx
-0x99025E: mov     [ebp+var_8], 0F0000h
+0x99025B: mov     dword ptr [ebp+var_C], edx
+0x99025E: mov     dword ptr [ebp+var_C+4], 0F0000h
 0x990265: cmp     [ebp+arg_C], 0
 0x990269: jle     short loc_9902B8
 0x99026B: mov     edx, [edi+4]
-0x99026E: and     edx, [ebp+var_8]
+0x99026E: and     edx, dword ptr [ebp+var_C+4]
 0x990271: mov     eax, [edi]
 0x990273: movsx   ecx, word ptr [ebp+var_4]
-0x990277: and     eax, [ebp+var_C]
+0x990277: and     eax, dword ptr [ebp+var_C]
 0x99027A: and     edx, 0FFFFFh
 0x990280: call    unknown_libname_200
 0x990285: add     ax, 30h ; '0'
@@ -180,25 +180,25 @@
 0x99028C: cmp     ax, 39h ; '9'
 0x990290: jbe     short loc_990294
 0x990292: add     eax, ebx
-0x990294: mov     ecx, [ebp+var_8]
+0x990294: mov     ecx, dword ptr [ebp+var_C+4]
 0x990297: sub     [ebp+var_4], 4
 0x99029B: mov     [esi], al
-0x99029D: mov     eax, [ebp+var_C]
+0x99029D: mov     eax, dword ptr [ebp+var_C]
 0x9902A0: shrd    eax, ecx, 4
 0x9902A4: shr     ecx, 4
 0x9902A7: inc     esi
 0x9902A8: dec     [ebp+arg_C]
 0x9902AB: cmp     word ptr [ebp+var_4], 0
-0x9902B0: mov     [ebp+var_C], eax
-0x9902B3: mov     [ebp+var_8], ecx
+0x9902B0: mov     dword ptr [ebp+var_C], eax
+0x9902B3: mov     dword ptr [ebp+var_C+4], ecx
 0x9902B6: jge     short loc_990265
 0x9902B8: cmp     word ptr [ebp+var_4], 0
 0x9902BD: jl      short loc_990310
 0x9902BF: mov     edx, [edi+4]
-0x9902C2: and     edx, [ebp+var_8]
+0x9902C2: and     edx, dword ptr [ebp+var_C+4]
 0x9902C5: mov     eax, [edi]
 0x9902C7: movsx   ecx, word ptr [ebp+var_4]
-0x9902CB: and     eax, [ebp+var_C]
+0x9902CB: and     eax, dword ptr [ebp+var_C]
 0x9902CE: and     edx, 0FFFFFh
 0x9902D4: call    unknown_libname_200
 0x9902D9: cmp     ax, 8

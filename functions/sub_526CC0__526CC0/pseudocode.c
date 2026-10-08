@@ -1,4 +1,4 @@
-int __stdcall sub_526CC0(void *a1, size_t a2)
+void __userpurge sub_526CC0(int a1@<ecx>, ActorBaseSaveChangeMask a2, size_t a3)
 {
-  return sub_525380(a1, a2);
+  TESNPC_LoadModifiedForm((TESNPC *)(a1 - 0x68), a2, a3); /*0x526cc3*/
 }

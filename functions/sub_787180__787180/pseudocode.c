@@ -1,9 +1,6 @@
-int __thiscall sub_787180(int *this, float a2)
+// CSpeedTreeRT::SetMaximumBudAngle. Writes CTreeEngine leaf-info field +0xB8 when the engine exists.
+void __thiscall CSpeedTreeRT__SetMaximumBudAngle(OB_CSpeedTreeRT_010201A0 *this, float angle)
 {
-  int result; // eax
-
-  result = *this;
-  if ( *this )
-    *(float *)(result + 0xB8) = a2;
-  return result;
+  if ( this->treeEngine ) /*0x787180*/
+    *(float *)(this->treeEngine + 0xB8) = angle; /*0x78718a*/
 }

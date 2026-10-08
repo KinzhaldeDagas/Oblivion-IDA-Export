@@ -1,5 +1,5 @@
-0xA0D440: push    offset dword_B41F8C
+0xA0D440: push    offset stru_B41F8C; parent
 0xA0D445: push    offset aNipsysinitialr; "NiPSysInitialRotAngleCtlr"
-0xA0D44A: mov     ecx, offset dword_B41224
-0xA0D44F: call    sub_70E220
+0xA0D44A: mov     ecx, offset stru_B41224; this
+0xA0D44F: call    NiRTTI_Constructor; Constructs one Oblivion NiRTTI descriptor: writes the class-name pointer at +0 and parent NiRTTI pointer at +4, then returns this. This is the native NiRTTI constructor used by the SpeedTree shader-property RTTI initializers decoded in Pass 368.
 0xA0D454: retn

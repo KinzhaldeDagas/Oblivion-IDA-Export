@@ -1,4 +1,4 @@
-0x9A8BD0: mov     eax, [esp+arg_0]
+0x9A8BD0: mov     eax, [esp+arg_0]; MoonSugarEffect decode: constant-map renderer binding. Stores renderer, AddRefs IDirect3DDevice9 at renderer+0x280, and caches renderer state at +0x8AC.
 0x9A8BD4: test    eax, eax
 0x9A8BD6: push    esi
 0x9A8BD7: mov     esi, ecx

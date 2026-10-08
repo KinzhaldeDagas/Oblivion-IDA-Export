@@ -1,6 +1,6 @@
-0x726200: push    ebx
+0x726200: push    ebx;
 0x726201: push    ebp
-0x726202: mov     ebp, [esp+8+arg_0]
+0x726202: mov     ebp, [esp+8+blockIndex]
 0x726206: push    esi
 0x726207: mov     esi, ecx
 0x726209: movzx   eax, word ptr [esi+26h]
@@ -24,15 +24,15 @@
 0x72622D: mov     ecx, edi
 0x72622F: call    eax
 0x726231: push    edi
-0x726232: call    FormHeapFree
+0x726232: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x726237: add     esp, 4
-0x72623A: lea     ecx, [esp+10h+arg_0]
+0x72623A: lea     ecx, [esp+10h+blockIndex]
 0x72623E: push    ecx
 0x72623F: push    ebp
 0x726240: lea     ecx, [esi+1Ch]
-0x726243: mov     [esp+18h+arg_0], ebx
+0x726243: mov     [esp+18h+blockIndex], ebx
 0x726247: call    NiTArray_SetAt; Actually first arg is a generic NiTArray
-0x72624C: cmp     [esp+10h+arg_4], bl
+0x72624C: cmp     [esp+10h+clearStreams], bl
 0x726250: jz      short loc_726296
 0x726252: mov     edx, [esi+10h]
 0x726255: xor     edi, edi
@@ -40,7 +40,7 @@
 0x726259: jbe     short loc_726296
 0x72625B: xor     ecx, ecx
 0x72625D: lea     ecx, [ecx+0]
-0x726260: mov     eax, [esi+14h]
+0x726260: mov     eax, [esi+14h];
 0x726263: cmp     ebp, [ecx+eax+14h]
 0x726267: jnz     short loc_726289
 0x726269: cmp     edi, edx

@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x65D720",
+      "0x65D742"
+    ]
+  ],
+  "chunks_sha256": "77782531b343e5f98fa3e9c29f622d21deb63a8826c70873487c8af666e9b7d6",
+  "comment_regular": "Player active ActorAnimData selector. Prefer defaultAnimData override +0x5DC when nonnull; otherwise, when first-person is active (+0x588 == 0), prefer firstPersonAnimData +0x5CC; fall back to TESObjectREFR_GetAnimData. This is distinct from perspective-specific ActorSkinInfo.",
+  "comment_repeatable": "Player active ActorAnimData selector. Prefer defaultAnimData override +0x5DC when nonnull; otherwise, when first-person is active (+0x588 == 0), prefer firstPersonAnimData +0x5CC; fall back to TESObjectREFR_GetAnimData. This is distinct from perspective-specific ActorSkinInfo.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_65D720",
+  "display_name": "PlayerCharacter_GetActiveAnimData",
   "end_ea": "0x65D742",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_65D720",
+  "name": "PlayerCharacter_GetActiveAnimData",
   "segment": ".text",
   "sha256": "77782531b343e5f98fa3e9c29f622d21deb63a8826c70873487c8af666e9b7d6",
   "size": 34,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x65D720",
-  "type": "BSExtraDataVtbl *__thiscall(TESObjectREFR *this)",
+  "total_chunk_size": 34,
+  "type": "ActorAnimData *__thiscall(PlayerCharacter *this)",
   "xrefs_from_count": 12,
   "xrefs_to_count": 1
 }

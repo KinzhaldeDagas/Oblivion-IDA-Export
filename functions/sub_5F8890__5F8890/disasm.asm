@@ -109,7 +109,7 @@
 0x5F89FE: fstp    [esp+148h+var_118]
 0x5F8A02: add     esp, 4
 0x5F8A05: fld     [esp+144h+var_118]
-0x5F8A09: call    Double_To_SInt32
+0x5F8A09: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5F8A0E: push    eax
 0x5F8A0F: mov     eax, [esi]
 0x5F8A11: mov     edx, [eax+288h]
@@ -119,7 +119,7 @@
 0x5F8A1C: sub     esp, 8
 0x5F8A1F: fstp    qword ptr [esp+14Ch+var_14C]
 0x5F8A22: push    edi
-0x5F8A23: call    ActorValue_GetName
+0x5F8A23: call    ActorValue_GetName; Return the localized actor-value display name through g_actorValueNameSettings. Native skills occupy the contiguous SkillActorValue range 0x0C..0x20.
 0x5F8A28: add     esp, 4
 0x5F8A2B: push    eax
 0x5F8A2C: lea     eax, [esp+150h+var_DC]
@@ -132,7 +132,7 @@
 0x5F8A41: fstp    [esp+140h+var_114]
 0x5F8A45: fld     [esp+140h+var_114]
 0x5F8A49: fld     st
-0x5F8A4B: call    Double_To_SInt32
+0x5F8A4B: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5F8A50: mov     [esp+140h+var_114], eax
 0x5F8A54: fild    [esp+140h+var_114]
 0x5F8A58: fstp    [esp+140h+var_114]
@@ -147,7 +147,7 @@
 0x5F8A73: fsub    qword ptr ds:0A2F928h
 0x5F8A79: fstp    [esp+140h+var_114]
 0x5F8A7D: fld     [esp+140h+var_114]
-0x5F8A81: call    Double_To_SInt32
+0x5F8A81: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5F8A86: mov     edx, [esi]
 0x5F8A88: push    eax
 0x5F8A89: mov     eax, [edx+288h]
@@ -157,7 +157,7 @@
 0x5F8A94: sub     esp, 8
 0x5F8A97: fstp    qword ptr [esp+14Ch+var_14C]
 0x5F8A9A: push    edi
-0x5F8A9B: call    ActorValue_GetName
+0x5F8A9B: call    ActorValue_GetName; Return the localized actor-value display name through g_actorValueNameSettings. Native skills occupy the contiguous SkillActorValue range 0x0C..0x20.
 0x5F8AA0: add     esp, 4
 0x5F8AA3: push    eax
 0x5F8AA4: lea     ecx, [esp+150h+var_DC]
@@ -188,7 +188,7 @@
 0x5F8AFC: fstp    [esp+140h+var_114]
 0x5F8B00: fld     [esp+140h+var_114]
 0x5F8B04: fld     st
-0x5F8B06: call    Double_To_SInt32
+0x5F8B06: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5F8B0B: mov     [esp+140h+var_114], eax
 0x5F8B0F: fild    [esp+140h+var_114]
 0x5F8B13: fstp    [esp+140h+var_114]
@@ -203,7 +203,7 @@
 0x5F8B2E: fsub    qword ptr ds:0A2F928h
 0x5F8B34: fstp    [esp+140h+var_114]
 0x5F8B38: fld     [esp+140h+var_114]
-0x5F8B3C: call    Double_To_SInt32
+0x5F8B3C: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5F8B41: mov     edx, [esi]
 0x5F8B43: push    eax
 0x5F8B44: mov     eax, [edx+288h]
@@ -213,7 +213,7 @@
 0x5F8B4F: sub     esp, 8
 0x5F8B52: fstp    qword ptr [esp+14Ch+var_14C]
 0x5F8B55: push    edi
-0x5F8B56: call    ActorValue_GetName
+0x5F8B56: call    ActorValue_GetName; Return the localized actor-value display name through g_actorValueNameSettings. Native skills occupy the contiguous SkillActorValue range 0x0C..0x20.
 0x5F8B5B: add     esp, 4
 0x5F8B5E: push    eax
 0x5F8B5F: lea     ecx, [esp+150h+var_DC]
@@ -261,7 +261,7 @@
 0x5F8BF4: fstp    [esp+140h+var_11C]
 0x5F8BF8: fld     [esp+140h+var_11C]
 0x5F8BFC: fld     st
-0x5F8BFE: call    Double_To_SInt32
+0x5F8BFE: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5F8C03: mov     [esp+140h+var_11C], eax
 0x5F8C07: fild    [esp+140h+var_11C]
 0x5F8C0B: fstp    [esp+140h+var_11C]
@@ -276,7 +276,7 @@
 0x5F8C26: fsub    qword ptr ds:0A2F928h
 0x5F8C2C: fstp    [esp+140h+var_11C]
 0x5F8C30: fld     [esp+140h+var_11C]
-0x5F8C34: call    Double_To_SInt32
+0x5F8C34: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5F8C39: mov     edx, [esi]
 0x5F8C3B: push    eax
 0x5F8C3C: mov     eax, [edx+288h]
@@ -311,7 +311,7 @@
 0x5F8C9D: fstp    [esp+138h+var_114]
 0x5F8CA1: fld     [esp+138h+var_114]
 0x5F8CA5: fld     st
-0x5F8CA7: call    Double_To_SInt32
+0x5F8CA7: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5F8CAC: mov     [esp+138h+var_114], eax
 0x5F8CB0: fild    [esp+138h+var_114]
 0x5F8CB4: fstp    [esp+138h+var_114]
@@ -326,7 +326,7 @@
 0x5F8CCF: fsub    qword ptr ds:0A2F928h
 0x5F8CD5: fstp    [esp+138h+var_114]
 0x5F8CD9: fld     [esp+138h+var_114]
-0x5F8CDD: call    Double_To_SInt32
+0x5F8CDD: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5F8CE2: mov     edx, [esi]
 0x5F8CE4: push    eax
 0x5F8CE5: mov     eax, [edx+288h]
@@ -361,7 +361,7 @@
 0x5F8D46: fstp    [esp+13Ch+var_118]
 0x5F8D4A: fld     [esp+13Ch+var_118]
 0x5F8D4E: fld     st
-0x5F8D50: call    Double_To_SInt32
+0x5F8D50: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5F8D55: mov     [esp+13Ch+var_118], eax
 0x5F8D59: fild    [esp+13Ch+var_118]
 0x5F8D5D: fstp    [esp+13Ch+var_118]
@@ -376,7 +376,7 @@
 0x5F8D78: fsub    qword ptr ds:0A2F928h
 0x5F8D7E: fstp    [esp+13Ch+var_118]
 0x5F8D82: fld     [esp+13Ch+var_118]
-0x5F8D86: call    Double_To_SInt32
+0x5F8D86: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5F8D8B: mov     edx, [esi]
 0x5F8D8D: push    eax
 0x5F8D8E: mov     eax, [edx+288h]
@@ -413,7 +413,7 @@
 0x5F8DF8: fstp    [esp+140h+var_11C]
 0x5F8DFC: fld     [esp+140h+var_11C]
 0x5F8E00: fld     st
-0x5F8E02: call    Double_To_SInt32
+0x5F8E02: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5F8E07: mov     [esp+140h+var_11C], eax
 0x5F8E0B: fild    [esp+140h+var_11C]
 0x5F8E0F: fstp    [esp+140h+var_11C]
@@ -428,7 +428,7 @@
 0x5F8E2A: fsub    qword ptr ds:0A2F928h
 0x5F8E30: fstp    [esp+140h+var_11C]
 0x5F8E34: fld     [esp+140h+var_11C]
-0x5F8E38: call    Double_To_SInt32
+0x5F8E38: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5F8E3D: mov     edx, [esi]
 0x5F8E3F: push    eax
 0x5F8E40: mov     eax, [edx+288h]
@@ -438,7 +438,7 @@
 0x5F8E4B: sub     esp, 8
 0x5F8E4E: fstp    qword ptr [esp+14Ch+var_14C]
 0x5F8E51: push    edi
-0x5F8E52: call    ActorValue_GetName
+0x5F8E52: call    ActorValue_GetName; Return the localized actor-value display name through g_actorValueNameSettings. Native skills occupy the contiguous SkillActorValue range 0x0C..0x20.
 0x5F8E57: add     esp, 4
 0x5F8E5A: push    eax
 0x5F8E5B: lea     ecx, [esp+150h+var_DC]
@@ -505,7 +505,7 @@
 0x5F8F33: fstp    [esp+140h+var_11C]
 0x5F8F37: fld     [esp+140h+var_11C]
 0x5F8F3B: fld     st
-0x5F8F3D: call    Double_To_SInt32
+0x5F8F3D: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5F8F42: mov     [esp+140h+var_11C], eax
 0x5F8F46: fild    [esp+140h+var_11C]
 0x5F8F4A: fstp    [esp+140h+var_11C]
@@ -520,7 +520,7 @@
 0x5F8F65: fsub    qword ptr ds:0A2F928h
 0x5F8F6B: fstp    [esp+140h+var_11C]
 0x5F8F6F: fld     [esp+140h+var_11C]
-0x5F8F73: call    Double_To_SInt32
+0x5F8F73: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5F8F78: mov     edx, [esi]
 0x5F8F7A: push    eax
 0x5F8F7B: mov     eax, [edx+288h]
@@ -530,7 +530,7 @@
 0x5F8F86: sub     esp, 8
 0x5F8F89: fstp    qword ptr [esp+14Ch+var_14C]
 0x5F8F8C: push    edi
-0x5F8F8D: call    ActorValue_GetName
+0x5F8F8D: call    ActorValue_GetName; Return the localized actor-value display name through g_actorValueNameSettings. Native skills occupy the contiguous SkillActorValue range 0x0C..0x20.
 0x5F8F92: add     esp, 4
 0x5F8F95: push    eax
 0x5F8F96: lea     ecx, [esp+150h+var_DC]
@@ -541,7 +541,7 @@
 0x5F8FA8: fld     [esp+ebx*4+158h+var_F4]
 0x5F8FAC: add     esp, 18h
 0x5F8FAF: push    0FFFFFFFFh; int
-0x5F8FB1: call    Double_To_SInt32
+0x5F8FB1: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5F8FB6: fild    [esp+144h+var_118]
 0x5F8FBA: push    eax; int
 0x5F8FBB: sub     esp, 8
@@ -581,7 +581,6 @@
 0x5F9033: jz      loc_5F91B0
 0x5F9039: jmp     short loc_5F9044
 0x5F903B: jmp     short loc_5F9040
-0x5F903D: align 10h
 0x5F9040: mov     edi, [esp+140h+var_10C]
 0x5F9044: cmp     dword ptr [edi+4], 0
 0x5F9048: jnz     short loc_5F9053

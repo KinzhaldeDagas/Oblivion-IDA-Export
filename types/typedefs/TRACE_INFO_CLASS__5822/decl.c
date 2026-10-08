@@ -1,1 +1,24 @@
-TRACE_INFO_CLASS
+enum TRACE_INFO_CLASS : __int32
+{
+TraceGuidQueryList = 0x0,
+TraceGuidQueryInfo = 0x1,
+TraceGuidQueryProcess = 0x2,
+TraceStackTracingInfo = 0x3,
+TraceSystemTraceEnableFlagsInfo = 0x4,
+TraceSampledProfileIntervalInfo = 0x5,
+TraceProfileSourceConfigInfo = 0x6,
+TraceProfileSourceListInfo = 0x7,
+TracePmcEventListInfo = 0x8,
+TracePmcCounterListInfo = 0x9,
+TraceSetDisallowList = 0xA,
+TraceVersionInfo = 0xB,
+TraceGroupQueryList = 0xC,
+TraceGroupQueryInfo = 0xD,
+TraceDisallowListQuery = 0xE,
+TraceCompressionInfo = 0xF,
+TracePeriodicCaptureStateListInfo = 0x10,
+TracePeriodicCaptureStateInfo = 0x11,
+TraceProviderBinaryTracking = 0x12,
+TraceMaxLoggersQuery = 0x13,
+MaxTraceSetInfoClass = 0x14,
+};

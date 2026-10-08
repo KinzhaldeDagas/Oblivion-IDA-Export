@@ -1,18 +1,31 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x5EC180",
+      "0x5EC1E6"
+    ]
+  ],
+  "chunks_sha256": "886d60505b84fa488a59c812818440067b563f74eb48e42bf59ab603aaa63424",
+  "comment_regular": "Returns true for swimming/falling style animation groups 0x28..0x2A, or if current character state id == 2 InAir. Player jump path uses this to suppress normal jump handling.",
+  "comment_repeatable": "Returns true for swimming/falling style animation groups 0x28..0x2A, or if current character state id == 2 InAir. Player jump path uses this to suppress normal jump handling.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_5EC180",
+  "display_name": "MobileObject_IsJumpSuppressedByFallAnimOrInAir",
   "end_ea": "0x5EC1E6",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_5EC180",
+  "name": "MobileObject_IsJumpSuppressedByFallAnimOrInAir",
   "segment": ".text",
   "sha256": "886d60505b84fa488a59c812818440067b563f74eb48e42bf59ab603aaa63424",
   "size": 102,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5EC180",
+  "total_chunk_size": 102,
   "type": "bool __thiscall(MobileObject *this)",
   "xrefs_from_count": 49,
   "xrefs_to_count": 3

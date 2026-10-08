@@ -1,1 +1,1 @@
-_NORM_FORM
+typedef NORM_FORM _NORM_FORM;

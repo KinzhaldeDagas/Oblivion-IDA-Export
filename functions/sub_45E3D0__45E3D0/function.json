@@ -1,19 +1,32 @@
 {
-  "callees_count": 44,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x45E3D0",
+      "0x45E695"
+    ]
+  ],
+  "chunks_sha256": "f0b2efe1a9882906b9f11dadda9575ed59247ec97481f3735e6aeada2084d513",
+  "comment_regular": "MEF v56 load wrapper preserves native body/return and suspends auxiliary ID caches during clear/remap/population. Finally invalidates and releases suspension. Existing count/read/required-allocation error behavior is not relabeled as a new bool-abort protocol; caller465C28 remains unchanged.",
+  "comment_repeatable": "\nVerified: resets two NiTLargeArray fields at manager offsets +0x74/+0x78, reads counted 32-bit arrays, remaps load-order high bytes through manager +0x4C table, and records diagnostic strings Numeric ID Array / WorldSpace ID Array. Strong load path xrefs from 45E4CD/45E5BD. File argument callback layout is only partially typed; BSFile identification Candidate.\nCandidate: stream object inferred only from indirect read callback at stream+4; class identity and return semantics remain unresolved.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_45E3D0",
+  "display_name": "SaveLoad_LoadIDArrays",
   "end_ea": "0x45E695",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_45E3D0",
+  "name": "SaveLoad_LoadIDArrays",
   "segment": ".text",
   "sha256": "f0b2efe1a9882906b9f11dadda9575ed59247ec97481f3735e6aeada2084d513",
   "size": 709,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x45E3D0",
-  "type": "char __thiscall(_DWORD *this, int)",
+  "total_chunk_size": 709,
+  "type": "char __thiscall(TESSaveLoadGame_SerializationView *self, void *stream)",
   "xrefs_from_count": 274,
   "xrefs_to_count": 1
 }

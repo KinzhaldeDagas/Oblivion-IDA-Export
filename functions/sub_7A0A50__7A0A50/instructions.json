@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A0A50",
-    "line": "push    ecx",
+    "line": "push    ecx; Checked insert-one wrapper for st_vector<SFrondGuide>. Preserves the iterator index across possible reallocation, delegates to InsertFill(count=1), and returns the 8-byte {owner,current} iterator.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x7A0A53",
-    "line": "mov     ebp, [esp+0Ch+arg_8]",
+    "line": "mov     ebp, [esp+0Ch+position]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x7A0A7C",
-    "line": "mov     ebx, [esp+14h+arg_4]",
+    "line": "mov     ebx, [esp+14h+expectedOwner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x7A0A8D",
-    "line": "mov     ebx, [esp+14h+arg_4]",
+    "line": "mov     ebx, [esp+14h+expectedOwner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -241,44 +241,176 @@
   },
   {
     "ea": "0x7A0AB3",
-    "line": "mov     ecx, [esp+14h+arg_C]",
+    "line": "mov     ecx, [esp+14h+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A0AB7",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A0AB8",
-    "line": "push    1",
+    "line": "push    1; count",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7A0ABA",
-    "line": "push    ebp",
+    "line": "push    ebp; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A0ABB",
-    "line": "push    ebx",
+    "line": "push    ebx; expectedOwner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A0ABC",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A0ABE",
-    "line": "call    sub_79F700",
+    "line": "call    OB_stVector_SFrondGuide_InsertFill_010201A0; Oblivion-authoritative fill insertion for st_vector<SFrondGuide>. Snapshots the deep guide value for alias safety, inserts count 0x30 records, uses exception-safe placement construction, reuses capacity or grows by 1.5x, and deep-moves overlapping guide ranges.",
     "mnemonic": "call",
     "size": 5
+  },
+  {
+    "ea": "0x7A0AC3",
+    "line": "mov     ebx, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7A0AC6",
+    "line": "cmp     ebx, [esi+8]",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x7A0AC9",
+    "line": "jbe     short loc_7A0AD0",
+    "mnemonic": "jbe",
+    "size": 2
+  },
+  {
+    "ea": "0x7A0ACB",
+    "line": "call    __invalid_parameter_noinfo",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7A0AD0",
+    "line": "lea     edx, [edi+edi*2]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x7A0AD3",
+    "line": "shl     edx, 4",
+    "mnemonic": "shl",
+    "size": 3
+  },
+  {
+    "ea": "0x7A0AD6",
+    "line": "lea     edi, [edx+ebx]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x7A0AD9",
+    "line": "cmp     edi, [esi+8]",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x7A0ADC",
+    "line": "mov     [esp+14h+position], ebx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x7A0AE0",
+    "line": "ja      short loc_7A0AE7",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x7A0AE2",
+    "line": "cmp     edi, [esi+4]",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x7A0AE5",
+    "line": "jnb     short loc_7A0AEC",
+    "mnemonic": "jnb",
+    "size": 2
+  },
+  {
+    "ea": "0x7A0AE7",
+    "line": "call    __invalid_parameter_noinfo",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7A0AEC",
+    "line": "mov     eax, [esp+14h+result]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x7A0AF0",
+    "line": "mov     [eax+4], edi",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7A0AF3",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7A0AF4",
+    "line": "mov     [eax], esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7A0AF6",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7A0AF7",
+    "line": "pop     ebp",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7A0AF8",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7A0AF9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7A0AFA",
+    "line": "retn    10h",
+    "mnemonic": "retn",
+    "size": 3
   }
 ]

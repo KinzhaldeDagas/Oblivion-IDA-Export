@@ -1,19 +1,36 @@
 {
-  "callees_count": 10,
-  "callers_count": 7,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_78EC20",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
+  "callers_count": 9,
+  "chunks": [
+    [
+      "0x78EC20",
+      "0x78ECE8"
+    ],
+    [
+      "0x9CBB50",
+      "0x9CBB84"
+    ]
+  ],
+  "chunks_sha256": "da34a7fa4108b40334c999629208815abd0736bd132ceed1728855bbdbba56f1",
+  "comment_regular": "CTreeFileAccess::ParseString-style helper. Reads a 4-byte byte count, then consumes that many raw bytes into a small-string object.",
+  "comment_repeatable": "CTreeFileAccess::ParseString-style helper. Reads a 4-byte byte count, then consumes that many raw bytes into a small-string object.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_CTreeFileAccess_ReadString_010201A0",
   "end_ea": "0x78ECE8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_78EC20",
+  "name": "OB_CTreeFileAccess_ReadString_010201A0",
   "segment": ".text",
   "sha256": "9623aa98c200c40d8daefa0da5290c23ab146eb3b017ad5da86f2048358107aa",
   "size": 200,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78EC20",
-  "type": "int __fastcall(unsigned int *, int, int)",
-  "xrefs_from_count": 80,
+  "total_chunk_size": 252,
+  "type": "void *__fastcall(OB_CTreeFileAccess_010201A0 *this, int scratch, void *outSmallString)",
+  "xrefs_from_count": 96,
   "xrefs_to_count": 9
 }

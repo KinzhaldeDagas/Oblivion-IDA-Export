@@ -43,7 +43,7 @@
 0x692750: retn    4
 0x692753: push    0
 0x692755: mov     ecx, ebx
-0x692757: call    ActiveEffect_Base_Remove
+0x692757: call    ActiveEffect_Base_Remove; Verified termination API: sets bTerminated=1. When its flush flag is true, immediately invokes ActiveEffect_Base_ProcessEffect to run termination cleanup.
 0x69275C: pop     edi
 0x69275D: pop     esi
 0x69275E: pop     ebx

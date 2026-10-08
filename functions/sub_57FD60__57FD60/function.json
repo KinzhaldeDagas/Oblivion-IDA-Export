@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 4,
+  "chunks": [
+    [
+      "0x57FD60",
+      "0x57FDBD"
+    ]
+  ],
+  "chunks_sha256": "e371e3c798191667e9cac42404eb1aa918c55875a4597fbe3d3d91974c381664",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "Verified: invokes ScanForMaxFocus with INT_MIN and null root, sets selected tile via SetCurrentFocusTarget, hides cursor, clears mouse-motion byte +0xB9. Fallout named analogue 0x824F09D0.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_57FD60",
+  "display_name": "InterfaceManager::GetDefaultFocus",
   "end_ea": "0x57FDBD",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_57FD60",
+  "name": "InterfaceManager::GetDefaultFocus",
   "segment": ".text",
   "sha256": "e371e3c798191667e9cac42404eb1aa918c55875a4597fbe3d3d91974c381664",
   "size": 93,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x57FD60",
-  "type": "void __usercall(Tile **@<ecx>, double@<st2>, double@<st1>, double@<st0>)",
+  "total_chunk_size": 93,
+  "type": "void __thiscall(InterfaceManager *this)",
   "xrefs_from_count": 36,
   "xrefs_to_count": 4
 }

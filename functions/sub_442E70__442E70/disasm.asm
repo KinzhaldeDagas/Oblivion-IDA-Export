@@ -30,10 +30,10 @@
 0x442EBC: call    eax
 0x442EBE: mov     [ebp+14h], edi
 0x442EC1: push    edi
-0x442EC2: push    offset Vector3_InitValue?
-0x442EC7: push    offset Vector3_InitValue?
+0x442EC2: push    offset g_zeroNiPoint3
+0x442EC7: push    offset g_zeroNiPoint3
 0x442ECC: mov     ecx, ebp
-0x442ECE: call    sub_959D60
+0x442ECE: call    NiPick_ExecuteAndSort; Verified NiPick query runner: invokes NiPick_ProcessSceneObject over the configured pick root, gathers hit records, sorts by the record distance field, and leaves the nearest record first in the result list.
 0x442ED3: mov     ecx, ds:0B333A0h
 0x442ED9: mov     ecx, [ecx+34h]
 0x442EDC: cmp     ecx, edi

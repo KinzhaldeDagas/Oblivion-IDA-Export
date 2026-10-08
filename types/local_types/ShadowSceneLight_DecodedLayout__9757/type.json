@@ -1,0 +1,402 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "ShadowSceneLight_DecodedLayout",
+  "definition": "struct ShadowSceneLight_DecodedLayout\n{\nunsigned __int8 base_000[208];\nfloat cameraRelativeScore_D0;\nfloat cullRange_D4;\nfloat visibilityFade_D8;\nfloat transitionTarget_DC;\nfloat transitionTimer_E0;\nvoid *objectListVtable_E4;\nMEF_RefListNode32 *objectListHead_E8;\nMEF_RefListNode32 *objectListTail_EC;\nunsigned int objectListCount_F0;\nunsigned __int8 perSourceProjectorMode_F4;\nunsigned __int8 specialCubeDispatch_F5;\nunsigned __int8 pad_F6[2];\nvoid *auxiliaryOwnedRef_F8;\nunsigned __int8 backingIsNiPointLight_FC;\nunsigned __int8 pad_FD[3];\nvoid *backingLight_100;\nunsigned __int8 trackBackingPosition_104; ///< When true, SetBackingLight seeds +0x108..+0x110 from the backing NiPointLight world position and ShadowSceneNode_RefreshMovedPointLightSource tracks later movement. Retail callers pass false for reference/equipped ExtraLight sources and true for dynamic/scene-graph point lights.\nunsigned __int8 pad_105[3];\nfloat cachedSourceX_108;\nfloat cachedSourceY_10C;\nfloat cachedSourceZ_110;\nvoid *shadowMap_114;\nunsigned __int16 cullStatus_118;\nunsigned __int16 statusPad_11A;\nunsigned __int8 pad_11C[4];\nunsigned __int8 renderGateOverride_120; ///< Alternate normal-render eligibility gate. Constructor and TESObjectREFR attached-light registration clear it; no retail true producer is proved.\nunsigned __int8 pad_121[3];\nfloat projectorFovDegrees_124; ///< Projector field of view in degrees. Constructor and TESObjectLIGH DATA source default to 90.0; attached-reference registration copies TESObjectLIGH+0x84; projected-caster rendering may recompute radius/distance*110.\nfloat falloffExponent_128; ///< Oblivion TESObjectLIGH DATA falloff exponent. Attached-reference registration copies base-form +0x80 here; record load normalizes zero to 1.0. The Oblivion Construction Set Light dialog independently labels the matching DATA field 'Falloff Exponent'. No ShadowSceneLight renderer-side consumer is proved.\nunsigned __int8 bindShadowMapToShader9_12C;\nunsigned __int8 pad_12D[3];\nvoid *exactCasterRoot_130;\nunsigned __int8 pad_134[16];\nMEF_RefListNode32 *receiverCursor_144;\nNiGeometry *receiverFence_148;\nunsigned int projectorPlaneState_14C;\nfloat projectorPlanes_150[6][4];\nunsigned int activePlaneMask_1B0;\nunsigned __int8 reservedPostPlaneBlock_1B4[96];\nunsigned __int8 postRenderState_214;\nunsigned __int8 reservedTail_215[11];\n}\n",
+  "kind": "struct",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "base_000",
+      "offset_bits": 0,
+      "offset_bytes": 0,
+      "size_bits": 1664,
+      "type": "unsigned __int8[208]"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "cameraRelativeScore_D0",
+      "offset_bits": 1664,
+      "offset_bytes": 208,
+      "size_bits": 32,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "cullRange_D4",
+      "offset_bits": 1696,
+      "offset_bytes": 212,
+      "size_bits": 32,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "visibilityFade_D8",
+      "offset_bits": 1728,
+      "offset_bytes": 216,
+      "size_bits": 32,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "transitionTarget_DC",
+      "offset_bits": 1760,
+      "offset_bytes": 220,
+      "size_bits": 32,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "transitionTimer_E0",
+      "offset_bits": 1792,
+      "offset_bytes": 224,
+      "size_bits": 32,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "objectListVtable_E4",
+      "offset_bits": 1824,
+      "offset_bytes": 228,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "objectListHead_E8",
+      "offset_bits": 1856,
+      "offset_bytes": 232,
+      "size_bits": 32,
+      "type": "MEF_RefListNode32 *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "objectListTail_EC",
+      "offset_bits": 1888,
+      "offset_bytes": 236,
+      "size_bits": 32,
+      "type": "MEF_RefListNode32 *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "objectListCount_F0",
+      "offset_bits": 1920,
+      "offset_bytes": 240,
+      "size_bits": 32,
+      "type": "unsigned int"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "perSourceProjectorMode_F4",
+      "offset_bits": 1952,
+      "offset_bytes": 244,
+      "size_bits": 8,
+      "type": "unsigned __int8"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "specialCubeDispatch_F5",
+      "offset_bits": 1960,
+      "offset_bytes": 245,
+      "size_bits": 8,
+      "type": "unsigned __int8"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "pad_F6",
+      "offset_bits": 1968,
+      "offset_bytes": 246,
+      "size_bits": 16,
+      "type": "unsigned __int8[2]"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "auxiliaryOwnedRef_F8",
+      "offset_bits": 1984,
+      "offset_bytes": 248,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "backingIsNiPointLight_FC",
+      "offset_bits": 2016,
+      "offset_bytes": 252,
+      "size_bits": 8,
+      "type": "unsigned __int8"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "pad_FD",
+      "offset_bits": 2024,
+      "offset_bytes": 253,
+      "size_bits": 24,
+      "type": "unsigned __int8[3]"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "backingLight_100",
+      "offset_bits": 2048,
+      "offset_bytes": 256,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "When true, SetBackingLight seeds +0x108..+0x110 from the backing NiPointLight world position and ShadowSceneNode_RefreshMovedPointLightSource tracks later movement. Retail callers pass false for reference/equipped ExtraLight sources and true for dynamic/scene-graph point lights.",
+      "name": "trackBackingPosition_104",
+      "offset_bits": 2080,
+      "offset_bytes": 260,
+      "size_bits": 8,
+      "type": "unsigned __int8"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "pad_105",
+      "offset_bits": 2088,
+      "offset_bytes": 261,
+      "size_bits": 24,
+      "type": "unsigned __int8[3]"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "cachedSourceX_108",
+      "offset_bits": 2112,
+      "offset_bytes": 264,
+      "size_bits": 32,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "cachedSourceY_10C",
+      "offset_bits": 2144,
+      "offset_bytes": 268,
+      "size_bits": 32,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "cachedSourceZ_110",
+      "offset_bits": 2176,
+      "offset_bytes": 272,
+      "size_bits": 32,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "shadowMap_114",
+      "offset_bits": 2208,
+      "offset_bytes": 276,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "cullStatus_118",
+      "offset_bits": 2240,
+      "offset_bytes": 280,
+      "size_bits": 16,
+      "type": "unsigned __int16"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "statusPad_11A",
+      "offset_bits": 2256,
+      "offset_bytes": 282,
+      "size_bits": 16,
+      "type": "unsigned __int16"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "pad_11C",
+      "offset_bits": 2272,
+      "offset_bytes": 284,
+      "size_bits": 32,
+      "type": "unsigned __int8[4]"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Alternate normal-render eligibility gate. Constructor and TESObjectREFR attached-light registration clear it; no retail true producer is proved.",
+      "name": "renderGateOverride_120",
+      "offset_bits": 2304,
+      "offset_bytes": 288,
+      "size_bits": 8,
+      "type": "unsigned __int8"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "pad_121",
+      "offset_bits": 2312,
+      "offset_bytes": 289,
+      "size_bits": 24,
+      "type": "unsigned __int8[3]"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Projector field of view in degrees. Constructor and TESObjectLIGH DATA source default to 90.0; attached-reference registration copies TESObjectLIGH+0x84; projected-caster rendering may recompute radius/distance*110.",
+      "name": "projectorFovDegrees_124",
+      "offset_bits": 2336,
+      "offset_bytes": 292,
+      "size_bits": 32,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Oblivion TESObjectLIGH DATA falloff exponent. Attached-reference registration copies base-form +0x80 here; record load normalizes zero to 1.0. The Oblivion Construction Set Light dialog independently labels the matching DATA field 'Falloff Exponent'. No ShadowSceneLight renderer-side consumer is proved.",
+      "name": "falloffExponent_128",
+      "offset_bits": 2368,
+      "offset_bytes": 296,
+      "size_bits": 32,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "bindShadowMapToShader9_12C",
+      "offset_bits": 2400,
+      "offset_bytes": 300,
+      "size_bits": 8,
+      "type": "unsigned __int8"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "pad_12D",
+      "offset_bits": 2408,
+      "offset_bytes": 301,
+      "size_bits": 24,
+      "type": "unsigned __int8[3]"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "exactCasterRoot_130",
+      "offset_bits": 2432,
+      "offset_bytes": 304,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "pad_134",
+      "offset_bits": 2464,
+      "offset_bytes": 308,
+      "size_bits": 128,
+      "type": "unsigned __int8[16]"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "receiverCursor_144",
+      "offset_bits": 2592,
+      "offset_bytes": 324,
+      "size_bits": 32,
+      "type": "MEF_RefListNode32 *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "receiverFence_148",
+      "offset_bits": 2624,
+      "offset_bytes": 328,
+      "size_bits": 32,
+      "type": "NiGeometry *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "projectorPlaneState_14C",
+      "offset_bits": 2656,
+      "offset_bytes": 332,
+      "size_bits": 32,
+      "type": "unsigned int"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "projectorPlanes_150",
+      "offset_bits": 2688,
+      "offset_bytes": 336,
+      "size_bits": 768,
+      "type": "float[6][4]"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "activePlaneMask_1B0",
+      "offset_bits": 3456,
+      "offset_bytes": 432,
+      "size_bits": 32,
+      "type": "unsigned int"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "reservedPostPlaneBlock_1B4",
+      "offset_bits": 3488,
+      "offset_bytes": 436,
+      "size_bits": 768,
+      "type": "unsigned __int8[96]"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "postRenderState_214",
+      "offset_bits": 4256,
+      "offset_bytes": 532,
+      "size_bits": 8,
+      "type": "unsigned __int8"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "reservedTail_215",
+      "offset_bits": 4264,
+      "offset_bytes": 533,
+      "size_bits": 88,
+      "type": "unsigned __int8[11]"
+    }
+  ],
+  "name": "ShadowSceneLight_DecodedLayout",
+  "ordinal": 9757,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 544
+}

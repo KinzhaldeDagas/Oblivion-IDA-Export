@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x621B40",
-    "line": "sub     esp, 1Ch",
+    "line": "sub     esp, 1Ch; Six-argument cdecl combat-choice evaluator. skipFleeAndYieldEvaluation nonzero skips the entire flee/yield block; allowYieldEvaluation gates only the yield portion when that block runs. These are control flags, not allowYield/hasYieldIdle. Any additional throwing-weapon scoring multipliers are external emulation policy, not observed here.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x621B50",
-    "line": "mov     esi, [esp+28h+arg_0]",
+    "line": "mov     esi, [esp+28h+actor]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x621B5F",
-    "line": "call    sub_5E0F50",
+    "line": "call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x621B72",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x621B78",
-    "line": "call    Actor_IsSwimming",
+    "line": "call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x621B8F",
-    "line": "mov     edi, [esp+2Ch+arg_8]",
+    "line": "mov     edi, [esp+2Ch+target]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x621BA5",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,19 +223,19 @@
   },
   {
     "ea": "0x621BB0",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x621BB5",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x621BB7",
-    "line": "call    Actor_IsSwimming",
+    "line": "call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,13 +253,13 @@
   },
   {
     "ea": "0x621BC0",
-    "line": "mov     ecx, [edi+3Ch]",
+    "line": "mov     ecx, [edi+3Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x621BC3",
-    "line": "call    Actor_IsSwimming",
+    "line": "call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x621BD8",
-    "line": "mov     byte ptr [esp+2Ch+arg_0], al",
+    "line": "mov     byte ptr [esp+2Ch+actor], al",
     "mnemonic": "mov",
     "size": 4
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x621BE4",
-    "line": "mov     byte ptr [esp+2Ch+arg_0], cl",
+    "line": "mov     byte ptr [esp+2Ch+actor], cl",
     "mnemonic": "mov",
     "size": 4
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x621C0A",
-    "line": "call    sub_5F2820",
+    "line": "call    Actor_LineOfSight; Oblivion actor line-of-sight query used by detection, combat reach, tactical refresh, and ray-cast script paths. Performs cell/world-space and Havok visibility tests and can report the viewed actor segment through the output parameter. Fallout corroborates the Actor::LineOfSight family name only.",
     "mnemonic": "call",
     "size": 5
   },
@@ -457,13 +457,13 @@
   },
   {
     "ea": "0x621C1A",
-    "line": "mov     byte ptr [esp+2Ch+arg_0], al",
+    "line": "mov     byte ptr [esp+2Ch+actor], al",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x621C1E",
-    "line": "mov     ebx, [esp+2Ch+arg_4]",
+    "line": "mov     ebx, [esp+2Ch+equippedEntry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -733,7 +733,7 @@
   },
   {
     "ea": "0x621CA5",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x621CAA",
-    "line": "call    sub_4849C0",
+    "line": "call    EquippedEntryData_GetCharge; Return per-instance ExtraCharge when present; otherwise return the TESEnchantableForm base charge. Returns the sentinel/default when the EntryData form is not enchantable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -937,25 +937,25 @@
   },
   {
     "ea": "0x621D07",
-    "line": "push    1",
+    "line": "push    1; forceWeaponPrefix",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x621D09",
-    "line": "push    0",
+    "line": "push    0; weaponEntryDataArg",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x621D0B",
-    "line": "push    11h",
+    "line": "push    11h; groupID",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x621D0D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -967,7 +967,7 @@
   },
   {
     "ea": "0x621D11",
-    "line": "call    Actor_LoadAnimGroup?",
+    "line": "call    Actor_LoadAnimGroup_; Builds an initial encoded key from live actor movement/weapon state and requested fixed group ID, then returns ActorAnimData_ResolveAnimKeyFallback's concrete playable key or sentinel 0x00FF when no ActorAnimData exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1057,7 +1057,7 @@
   },
   {
     "ea": "0x621D3C",
-    "line": "call    sub_470960",
+    "line": "call    ActorAnimData_FindAnimMapEntry; CustomAnimSupport decode: anim-map lookup helper used by playback, validators, and save/load restore to test an encoded group key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1147,7 +1147,7 @@
   },
   {
     "ea": "0x621D74",
-    "line": "cmp     [esp+2Ch+arg_4], 0",
+    "line": "cmp     [esp+2Ch+equippedEntry], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1159,7 +1159,7 @@
   },
   {
     "ea": "0x621D7B",
-    "line": "mov     edx, [esp+2Ch+arg_4]",
+    "line": "mov     edx, [esp+2Ch+equippedEntry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1507,13 +1507,13 @@
   },
   {
     "ea": "0x621E2A",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x621E2C",
-    "line": "call    TESObjectWEAP_GetWeaponSkillAV",
+    "line": "call    TESObjectWEAP_GetWeaponSkillAV; Sidecar decode: combat selection obtains candidate weapon native skill AV before comparing weapon skill against hand-to-hand.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1615,7 +1615,7 @@
   },
   {
     "ea": "0x621E57",
-    "line": "cmp     byte ptr [esp+2Ch+arg_0], 0",
+    "line": "cmp     byte ptr [esp+2Ch+actor], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1663,7 +1663,7 @@
   },
   {
     "ea": "0x621E6F",
-    "line": "cmp     byte ptr [esp+2Ch+arg_0], 0",
+    "line": "cmp     byte ptr [esp+2Ch+actor], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1717,7 +1717,7 @@
   },
   {
     "ea": "0x621E8D",
-    "line": "fstp    [esp+2Ch+arg_4]",
+    "line": "fstp    [esp+2Ch+equippedEntry]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1747,7 +1747,7 @@
   },
   {
     "ea": "0x621E9D",
-    "line": "lea     ecx, [esp+34h+arg_4]",
+    "line": "lea     ecx, [esp+34h+equippedEntry]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1765,7 +1765,7 @@
   },
   {
     "ea": "0x621EA4",
-    "line": "call    sub_616980",
+    "line": "call    CombatController_SelectAttackSpellByMode",
     "mnemonic": "call",
     "size": 5
   },
@@ -1777,7 +1777,7 @@
   },
   {
     "ea": "0x621EAB",
-    "line": "fld     [esp+2Ch+arg_4]",
+    "line": "fld     [esp+2Ch+equippedEntry]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1957,13 +1957,13 @@
   },
   {
     "ea": "0x621EFE",
-    "line": "mov     [esp+34h+arg_4], eax",
+    "line": "mov     [esp+34h+equippedEntry], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x621F02",
-    "line": "fild    [esp+34h+arg_4]",
+    "line": "fild    [esp+34h+equippedEntry]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -1987,7 +1987,7 @@
   },
   {
     "ea": "0x621F0F",
-    "line": "fstp    [esp+38h+arg_4]",
+    "line": "fstp    [esp+38h+equippedEntry]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1999,7 +1999,7 @@
   },
   {
     "ea": "0x621F16",
-    "line": "fld     [esp+2Ch+arg_4]",
+    "line": "fld     [esp+2Ch+equippedEntry]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2059,7 +2059,7 @@
   },
   {
     "ea": "0x621F33",
-    "line": "mov     edx, [esi]",
+    "line": "mov     edx, [esi]; Sidecar hook boundary: player weapon-vs-hand-to-hand comparison must use effective exclusive Blade/Spear sidecar skill without writing synthetic AVs.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -2137,7 +2137,7 @@
   },
   {
     "ea": "0x621F54",
-    "line": "fld     [esp+2Ch+arg_4]",
+    "line": "fld     [esp+2Ch+equippedEntry]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2197,7 +2197,7 @@
   },
   {
     "ea": "0x621F73",
-    "line": "fstp    [esp+30h+arg_4]",
+    "line": "fstp    [esp+30h+equippedEntry]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2209,7 +2209,7 @@
   },
   {
     "ea": "0x621F79",
-    "line": "lea     edx, [esp+34h+arg_4]",
+    "line": "lea     edx, [esp+34h+equippedEntry]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2227,7 +2227,7 @@
   },
   {
     "ea": "0x621F80",
-    "line": "call    sub_616980",
+    "line": "call    CombatController_SelectAttackSpellByMode",
     "mnemonic": "call",
     "size": 5
   },
@@ -2281,7 +2281,7 @@
   },
   {
     "ea": "0x621FA0",
-    "line": "fld     [esp+2Ch+arg_4]",
+    "line": "fld     [esp+2Ch+equippedEntry]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2533,7 +2533,7 @@
   },
   {
     "ea": "0x62201F",
-    "line": "cmp     [esp+2Ch+arg_10], 0",
+    "line": "cmp     [esp+2Ch+flag0], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -2575,7 +2575,7 @@
   },
   {
     "ea": "0x622038",
-    "line": "push    eax",
+    "line": "push    eax; Combat choice reads actor Confidence, current/base Health, calls AI_CalculateFleeScore, and selects mode 7 only when score beats the current choice and fAICombatFleeScoreThreshold and combat style does not set FleeingDisabled (0x20).",
     "mnemonic": "push",
     "size": 1
   },
@@ -2605,13 +2605,13 @@
   },
   {
     "ea": "0x622044",
-    "line": "mov     [esp+30h+arg_4], eax",
+    "line": "mov     [esp+30h+equippedEntry], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x622048",
-    "line": "fild    [esp+30h+arg_4]",
+    "line": "fild    [esp+30h+equippedEntry]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -2665,7 +2665,7 @@
   },
   {
     "ea": "0x622060",
-    "line": "call    sub_546CC0",
+    "line": "call    AI_CalculateFleeScore; Exact flee score: fAIFleeConfBase + confidence*fAIFleeConfMult + (1-currentHealth/baseHealth)*fAIFleeHealthMult. Vanilla defaults: 40 - 0.5*confidence + 20*missingHealthFraction.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2677,7 +2677,7 @@
   },
   {
     "ea": "0x622067",
-    "line": "fstp    [esp+3Ch+arg_0]",
+    "line": "fstp    [esp+3Ch+actor]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2725,13 +2725,13 @@
   },
   {
     "ea": "0x62207E",
-    "line": "fstp    [esp+2Ch+arg_4]",
+    "line": "fstp    [esp+2Ch+equippedEntry]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x622082",
-    "line": "fld     [esp+2Ch+arg_4]",
+    "line": "fld     [esp+2Ch+equippedEntry]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2803,7 +2803,7 @@
   },
   {
     "ea": "0x6220A4",
-    "line": "call    sub_5E0F50",
+    "line": "call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2851,7 +2851,7 @@
   },
   {
     "ea": "0x6220BB",
-    "line": "fld     [esp+2Ch+arg_4]",
+    "line": "fld     [esp+2Ch+equippedEntry]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2881,7 +2881,7 @@
   },
   {
     "ea": "0x6220CC",
-    "line": "cmp     [esp+2Ch+arg_14], 0",
+    "line": "cmp     [esp+2Ch+flag1], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -2893,7 +2893,7 @@
   },
   {
     "ea": "0x6220D7",
-    "line": "mov     edi, [esp+2Ch+arg_8]",
+    "line": "mov     edi, [esp+2Ch+target]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2917,7 +2917,7 @@
   },
   {
     "ea": "0x6220E5",
-    "line": "call    sub_5E0F50",
+    "line": "call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3031,7 +3031,7 @@
   },
   {
     "ea": "0x622118",
-    "line": "fld     [esp+30h+arg_4]",
+    "line": "fld     [esp+30h+equippedEntry]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3061,7 +3061,7 @@
   },
   {
     "ea": "0x622126",
-    "line": "fstp    [esp+38h+arg_4]",
+    "line": "fstp    [esp+38h+equippedEntry]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -3073,7 +3073,7 @@
   },
   {
     "ea": "0x62212D",
-    "line": "fld     [esp+2Ch+arg_4]",
+    "line": "fld     [esp+2Ch+equippedEntry]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3151,7 +3151,7 @@
   },
   {
     "ea": "0x62214F",
-    "line": "fld     [esp+2Ch+arg_4]",
+    "line": "fld     [esp+2Ch+equippedEntry]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3169,7 +3169,7 @@
   },
   {
     "ea": "0x62215C",
-    "line": "mov     eax, [esp+2Ch+arg_C]",
+    "line": "mov     eax, [esp+2Ch+outScore]",
     "mnemonic": "mov",
     "size": 4
   },

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7D59C0",
-    "line": "cmp     byte ptr [ecx+0F5h], 0",
+    "line": "cmp     byte ptr [ecx+0F5h], 0; Dispatch on ShadowSceneLight+0xF5: zero -> normal per-source projected map at 0x007D46C0; nonzero -> special cube/object-list path at 0x007D4570. No persistent direct native producer for +0xF5 is proven.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x7D59C9",
-    "line": "jmp     sub_7D4570",
+    "line": "jmp     ShadowSceneLight_RenderSpecialCubeObjectList; Special ShadowSceneLight renderer selected only when +0xF5 is nonzero. Uses a BSCubeMapCamera and the light-local category/object list; it is separate from the normal exact-caster-root map renderer.",
     "mnemonic": "jmp",
     "size": 5
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x7D59D3",
-    "line": "call    ShadowSceneLight_Render???",
+    "line": "call    ShadowSceneLight_RenderPerSourceShadowMap; Normal dispatch branch calls the retail per-source shadow-map renderer.",
     "mnemonic": "call",
     "size": 5
   },

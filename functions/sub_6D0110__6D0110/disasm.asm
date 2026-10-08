@@ -15,7 +15,7 @@
 0x6D0132: test    bl, 1
 0x6D0135: jz      short loc_6D0140
 0x6D0137: push    edi
-0x6D0138: call    FormHeapFree
+0x6D0138: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6D013D: add     esp, 4
 0x6D0140: mov     eax, edi
 0x6D0142: pop     edi
@@ -26,7 +26,7 @@
 0x6D014D: test    bl, 1
 0x6D0150: jz      short loc_6D015B
 0x6D0152: push    esi
-0x6D0153: call    FormHeapFree
+0x6D0153: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6D0158: add     esp, 4
 0x6D015B: mov     eax, esi
 0x6D015D: pop     esi

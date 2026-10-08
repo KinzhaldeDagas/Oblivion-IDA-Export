@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E4C20",
-    "line": "push    ebx",
+    "line": "push    ebx; Verified PathGrid child-record predicate. For a candidate TESChildCell, compares its child cell with TESPathGrid.parentCell and delegates on mismatch. For the owning cell, only REFR/ACHR/ACRE records are accepted, and only when the reference is nonpersistent; other record types return false.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x4E4C23",
-    "line": "mov     edi, [esp+0Ch+arg_0]",
+    "line": "mov     edi, [esp+0Ch+candidate]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x4E4CAB",
-    "line": "call    TESObjectREFR_IsPersistent?",
+    "line": "call    TESObjectREFR_IsPersistent",
     "mnemonic": "call",
     "size": 5
   },

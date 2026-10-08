@@ -1,3 +1,4 @@
+// MoonSugarEffect decode: Refraction active pass; stores source at +0x7C, binds dword_B474AC inner texture at +0xA0 as second sampler, draws, then releases/returns the one-frame refraction target.
 void __thiscall ReflectionPass(
         BSImageSpaceShader *this,
         NiScreenElements *a2,
@@ -48,148 +49,147 @@ void __thiscall ReflectionPass(
   float v47; // [esp+34h] [ebp+8h]
   float v48; // [esp+34h] [ebp+8h]
 
-  v7 = g_Renderer->__vftable->super.GetDefaultRTGroup(g_Renderer);
-  RenderedTexture = (*a3)->members.RenderedTexture;
-  if ( RenderedTexture )
-    v9 = RenderedTexture->__vftable->super.GetWidth((NiTexture *)RenderedTexture);
+  v7 = renderer->__vftable->super.GetDefaultRTGroup(renderer); /*0x80045a*/
+  RenderedTexture = (*a3)->members.RenderedTexture; /*0x80045f*/
+  if ( RenderedTexture ) /*0x800464*/
+    v9 = RenderedTexture->__vftable->super.GetWidth((NiTexture *)RenderedTexture); /*0x80046d*/
   else
-    v9 = 0;
-  v45 = v7->vtbl->GetWidth(v7, 0);
-  v10 = (double)v45;
-  if ( v45 < 0 )
-    v10 = v10 + flt_A2FC78;
-  v11 = (double)v9;
-  if ( v9 < 0 )
-    v11 = v11 + flt_A2FC78;
-  v46 = v10 / v11;
-  v12 = g_Renderer->__vftable->super.GetDefaultRTGroup(g_Renderer);
-  v13 = (*a3)->members.RenderedTexture;
-  if ( v13 )
-    v14 = v13->__vftable->super.GetHeight((NiTexture *)v13);
+    v9 = 0; /*0x800471*/
+  v45 = v7->vtbl->GetWidth(v7, 0); /*0x800480*/
+  v10 = (double)v45; /*0x800484*/
+  if ( v45 < 0 ) /*0x800488*/
+    v10 = v10 + flt_A2FC78; /*0x80048a*/
+  v11 = (double)v9; /*0x800496*/
+  if ( v9 < 0 ) /*0x80049a*/
+    v11 = v11 + flt_A2FC78; /*0x80049c*/
+  v46 = v10 / v11; /*0x8004af*/
+  v12 = renderer->__vftable->super.GetDefaultRTGroup(renderer); /*0x8004b5*/
+  v13 = (*a3)->members.RenderedTexture; /*0x8004ba*/
+  if ( v13 ) /*0x8004bf*/
+    v14 = v13->__vftable->super.GetHeight((NiTexture *)v13); /*0x8004c8*/
   else
-    v14 = 0;
-  v39 = v12->vtbl->GetHeight(v12, 0);
-  v15 = (double)v39;
-  if ( v39 < 0 )
-    v15 = v15 + flt_A2FC78;
-  v16 = (double)v14;
-  if ( v14 < 0 )
-    v16 = v16 + flt_A2FC78;
-  v37 = v15 / v16;
-  v17 = 1.0;
-  if ( byte_B42E96 )
+    v14 = 0; /*0x8004cc*/
+  v39 = v12->vtbl->GetHeight(v12, 0); /*0x8004db*/
+  v15 = (double)v39; /*0x8004df*/
+  if ( v39 < 0 ) /*0x8004e3*/
+    v15 = v15 + flt_A2FC78; /*0x8004e5*/
+  v16 = (double)v14; /*0x8004f1*/
+  if ( v14 < 0 ) /*0x8004f5*/
+    v16 = v16 + flt_A2FC78; /*0x8004f7*/
+  v37 = v15 / v16; /*0x800506*/
+  v17 = 1.0; /*0x80050a*/
+  if ( unk_B42E96 ) /*0x8004fd*/
   {
-    v46 = 1.0;
-    v37 = 1.0;
+    v46 = 1.0; /*0x80050e*/
+    v37 = 1.0; /*0x800512*/
   }
-  v18 = *a3;
-  v41 = 0.0;
-  v44 = 0.0;
-  v42 = 1.0;
-  v43 = 1.0;
-  v19 = v18->members.RenderedTexture;
-  if ( v19 )
+  v18 = *a3; /*0x800518*/
+  v41 = 0.0; /*0x80051b*/
+  v44 = 0.0; /*0x80051f*/
+  v42 = 1.0; /*0x800523*/
+  v43 = 1.0; /*0x800527*/
+  v19 = v18->members.RenderedTexture; /*0x80052b*/
+  if ( v19 ) /*0x800530*/
   {
-    v20 = v19->__vftable->super.GetWidth((NiTexture *)v19);
-    v17 = 1.0;
-  }
-  else
-  {
-    v20 = 0;
-  }
-  v21 = (double)v20;
-  if ( v20 < 0 )
-    v21 = v21 + flt_A2FC78;
-  v22 = (*a3)->members.RenderedTexture;
-  v38 = dbl_A2FAA0 / v21;
-  if ( v22 )
-  {
-    v23 = v22->__vftable->super.GetHeight((NiTexture *)v22);
-    v17 = 1.0;
+    v20 = v19->__vftable->super.GetWidth((NiTexture *)v19); /*0x800539*/
+    v17 = 1.0; /*0x80053b*/
   }
   else
   {
-    v23 = 0;
+    v20 = 0; /*0x80053f*/
   }
-  v24 = (double)v23;
-  if ( v23 < 0 )
-    v24 = v24 + flt_A2FC78;
-  v25 = dbl_A2FAA0 / v24;
-  *((_DWORD *)this + 0x26) = 0;
-  v40 = v25;
-  v26 = v46;
-  *((float *)this + 0x29) = v46;
-  *((float *)this + 0x2A) = v37;
-  v47 = v38 + 0.0;
-  *((float *)this + 0x2B) = v47;
-  v27 = v47;
-  v48 = v40 + 0.0;
-  *((float *)this + 0x2C) = v48;
-  *((float *)this + 0x30) = v48;
-  *((float *)this + 0x2D) = v26;
-  *((float *)this + 0x2E) = v37;
-  *((float *)this + 0x2F) = v27;
-  if ( a5 )
+  v21 = (double)v20; /*0x800547*/
+  if ( v20 < 0 ) /*0x80054b*/
+    v21 = v21 + flt_A2FC78; /*0x80054d*/
+  v22 = (*a3)->members.RenderedTexture; /*0x80055c*/
+  v38 = dbl_A2FAA0 / v21; /*0x800561*/
+  if ( v22 ) /*0x800565*/
   {
-    v42 = v17;
+    v23 = v22->__vftable->super.GetHeight((NiTexture *)v22); /*0x80056e*/
+    v17 = 1.0; /*0x800570*/
   }
   else
   {
-    v17 = v37;
-    v42 = v26;
+    v23 = 0; /*0x800574*/
   }
-  v28 = *a3;
-  v43 = v17;
-  sub_802890(this, v28);
-  InnerTexture = BSRenderedTexture::GetInnerTexture((BSRenderedTexture *)dword_B474AC);
-  v30 = *((NiRenderedTexture **)this + 0x28);
-  v31 = InterlockedDecrement;
-  v32 = InnerTexture;
-  if ( v30 != InnerTexture )
+  v24 = (double)v23; /*0x80057c*/
+  if ( v23 < 0 ) /*0x800580*/
+    v24 = v24 + flt_A2FC78; /*0x800582*/
+  v25 = dbl_A2FAA0 / v24; /*0x80058d*/
+  *((_DWORD *)this + 0x26) = 0; /*0x800593*/
+  v40 = v25; /*0x80059d*/
+  v26 = v46; /*0x8005a1*/
+  *((float *)this + 0x29) = v46; /*0x8005a5*/
+  *((float *)this + 0x2A) = v37; /*0x8005af*/
+  v47 = v38 + 0.0; /*0x8005bf*/
+  *((float *)this + 0x2B) = v47; /*0x8005c7*/
+  v27 = v47; /*0x8005d3*/
+  v48 = v40 + 0.0; /*0x8005d5*/
+  *((float *)this + 0x2C) = v48; /*0x8005dd*/
+  *((float *)this + 0x30) = v48; /*0x8005e3*/
+  *((float *)this + 0x2D) = v26; /*0x8005eb*/
+  *((float *)this + 0x2E) = v37; /*0x8005f3*/
+  *((float *)this + 0x2F) = v27; /*0x8005fb*/
+  if ( a5 ) /*0x800601*/
   {
-    if ( v30 )
+    v42 = v17; /*0x800607*/
+  }
+  else
+  {
+    v17 = v37; /*0x80060f*/
+    v42 = v26; /*0x800611*/
+  }
+  v28 = *a3; /*0x800615*/
+  v43 = v17; /*0x800618*/
+  sub_802890(this, v28); /*0x80061f*/
+  InnerTexture = BSRenderedTexture::GetInnerTexture((BSRenderedTexture *)unk_B474AC); /*0x80062a*/
+  v30 = *((NiRenderedTexture **)this + 0x28); /*0x80062f*/
+  v31 = InterlockedDecrement; /*0x800635*/
+  v32 = InnerTexture; /*0x80063b*/
+  if ( v30 != InnerTexture ) /*0x80063f*/
+  {
+    if ( v30 ) /*0x800643*/
     {
-      if ( !v31((volatile LONG *)&v30->member) )
-        v30->__vftable->super.super.super.Destructor((NiRefObject *)v30, 1);
+      if ( !v31((volatile LONG *)&v30->member) ) /*0x800649*/
+        v30->__vftable->super.super.super.Destructor((NiRefObject *)v30, 1); /*0x80065b*/
     }
-    *((_DWORD *)this + 0x28) = v32;
-    if ( v32 )
-      InterlockedIncrement((volatile LONG *)&v32->member);
+    *((_DWORD *)this + 0x28) = v32; /*0x80065f*/
+    if ( v32 ) /*0x800665*/
+      InterlockedIncrement((volatile LONG *)&v32->member); /*0x80066b*/
   }
-  if ( *a4 )
+  if ( *a4 ) /*0x800675*/
   {
-    v33 = BSRenderedTexture::UseTextureToRender(*a4);
-    NiRenderer_BeginScene(kClear_BACKBUFFER, v33);
+    v33 = BSRenderedTexture::UseTextureToRender(*a4); /*0x80067b*/
+    NiRenderer_BeginScene(kClear_BACKBUFFER, v33); /*0x800683*/
   }
   else
   {
-    NiRenderer_BeginScene1(kClear_BACKBUFFER, 0);
+    NiRenderer_BeginScene1(kClear_BACKBUFFER, 0); /*0x80068e*/
   }
-  v34 = g_Renderer;
-  if ( (g_Renderer->member.super.SceneState1 == 1 || v34->member.super.SceneState2 == 1)
-    && v34->member.super.IsReady == 1 )
+  v34 = renderer; /*0x800693*/
+  if ( (renderer->member.super.SceneState1 == 1 || v34->member.super.SceneState2 == 1) && v34->member.super.IsReady == 1 ) /*0x8006b7*/
+    v34->__vftable->super.SetupScreenSpaceCamera((NiRenderer *)v34, (NiViewport *)&v41); /*0x8006c6*/
+  sub_709C60(a2); /*0x8006d3*/
+  if ( *a4 ) /*0x8006da*/
+    NiRenderer_EndScene(); /*0x8006de*/
+  v35 = *((_DWORD *)this + 0x28); /*0x8006e3*/
+  if ( v35 ) /*0x8006eb*/
   {
-    v34->__vftable->super.SetupScreenSpaceCamera((NiRenderer *)v34, (NiViewport *)&v41);
+    if ( !v31((volatile LONG *)(v35 + 4)) ) /*0x8006f1*/
+      (**(void (__thiscall ***)(int, int))v35)(v35, 1); /*0x800703*/
+    *((_DWORD *)this + 0x28) = 0; /*0x800705*/
   }
-  sub_709C60(a2);
-  if ( *a4 )
-    NiRenderer_EndScene();
-  v35 = *((_DWORD *)this + 0x28);
-  if ( v35 )
+  BSTextureManager__ReturnRenderedTexture( /*0x800718*/
+    *(BSTextureManager **)&OB_RendererGlobalState_010201A0.pad_0B3[4],
+    (BSRenderedTexture *)unk_B474AC);
+  v36 = unk_B474AC; /*0x80071d*/
+  if ( unk_B474AC ) /*0x80071d*/
   {
-    if ( !v31((volatile LONG *)(v35 + 4)) )
-      (**(void (__thiscall ***)(int, int))v35)(v35, 1);
-    *((_DWORD *)this + 0x28) = 0;
-  }
-  sub_7C1EE0(g_textureManager, (BSRenderedTexture *)dword_B474AC);
-  v36 = dword_B474AC;
-  if ( dword_B474AC )
-  {
-    if ( !v31((volatile LONG *)(v36 + 4)) )
+    if ( !v31((volatile LONG *)(v36 + 4)) ) /*0x80072b*/
     {
-      if ( v36 )
-        (**(void (__thiscall ***)(UInt32, int))v36)(v36, 1);
+      if ( v36 ) /*0x800733*/
+        (**(void (__thiscall ***)(UInt32, int))v36)(v36, 1); /*0x80073d*/
     }
-    dword_B474AC = 0;
+    unk_B474AC = 0; /*0x80073f*/
   }
 }

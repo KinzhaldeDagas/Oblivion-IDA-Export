@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x52B886",
-    "line": "push    esi",
+    "line": "push    esi; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -235,31 +235,31 @@
   },
   {
     "ea": "0x52B8BC",
-    "line": "call    sub_5538D0",
+    "line": "call    FaceGenManager_GetDefaultHeadParameters; Returns the FaceGen manager's default head-parameter block at manager+0x08, initializing the manager on demand.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x52B8C1",
-    "line": "push    eax",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52B8C2",
-    "line": "call    sub_5528F0",
+    "line": "call    FaceGenHeadParameters_Copy; Deep-copies all four FaceGen matrices, preserving dimensions and engine ownership of destination coefficient buffers.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x52B8C7",
-    "line": "push    esi",
+    "line": "push    esi; parameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52B8C8",
-    "line": "call    sub_552880",
+    "line": "call    FaceGenHeadParameters_Initialize; Standard FaceGenHeadParameters dimensions: matrix0 50x1, matrix1 30x1, matrix2 50x1, matrix3 untouched. Thus standard initialized active coefficient count is 130, under PF supported 256 cap. Existing elements survive ResizeFill as documented; this routine is not a full zero reset.",
     "mnemonic": "call",
     "size": 5
   },

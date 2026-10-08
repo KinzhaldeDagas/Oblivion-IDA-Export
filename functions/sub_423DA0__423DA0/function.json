@@ -1,19 +1,32 @@
 {
-  "callees_count": 8,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x423DA0",
+      "0x423DE4"
+    ]
+  ],
+  "chunks_sha256": "918b5439a96b275cd4e822b0bd47a0a84ec6dbddfa30826e9eb03989a090279c",
+  "comment_regular": "Replace ExtraAction flag byte. Default value 1 removes/omits the extra only when its companion action-state dword is zero; otherwise retain/update. This is the XACT consumer.",
+  "comment_repeatable": "Replace ExtraAction flag byte. Default value 1 removes/omits the extra only when its companion action-state dword is zero; otherwise retain/update. This is the XACT consumer.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_423DA0",
+  "display_name": "ExtraDataList_SetActionFlags",
   "end_ea": "0x423DE4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_423DA0",
+  "name": "ExtraDataList_SetActionFlags",
   "segment": ".text",
   "sha256": "918b5439a96b275cd4e822b0bd47a0a84ec6dbddfa30826e9eb03989a090279c",
   "size": 68,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x423DA0",
-  "type": "void __thiscall(ExtraDataList *this, int)",
+  "total_chunk_size": 68,
+  "type": "void __thiscall(ExtraDataList *this, unsigned int flags)",
   "xrefs_from_count": 35,
   "xrefs_to_count": 2
 }

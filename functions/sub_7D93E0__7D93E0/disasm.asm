@@ -8,7 +8,7 @@
 0x7D93F0: mov     ecx, esi
 0x7D93F2: jz      short loc_7D9452
 0x7D93F4: push    4
-0x7D93F6: call    NiNode_GetNiPropertyByID
+0x7D93F6: call    NiNode_GetNiPropertyByID;
 0x7D93FB: mov     esi, eax
 0x7D93FD: test    esi, esi
 0x7D93FF: jz      loc_7D94A4

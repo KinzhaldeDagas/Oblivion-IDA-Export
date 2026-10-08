@@ -42,7 +42,7 @@
 0x8C5B05: mov     word ptr [esp+0B4h+var_90+2], cx
 0x8C5B0A: mov     word ptr [esp+0B4h+var_94+2], di
 0x8C5B0F: mov     word ptr [esp+0B4h+var_90], di
-0x8C5B14: mov     [esp+0B4h+var_98], edi
+0x8C5B14: mov     [esp+0B4h+source], edi
 0x8C5B18: mov     byte ptr [esp+0B4h+var_4], cl
 0x8C5B1F: xor     ecx, ecx
 0x8C5B21: cmp     [edx+10h], di
@@ -66,7 +66,6 @@
 0x8C5B60: mov     [esp+0B4h+var_5C], edi
 0x8C5B64: mov     [esp+0B4h+var_84], eax
 0x8C5B68: jmp     short loc_8C5B74
-0x8C5B6A: align 10h
 0x8C5B70: mov     eax, [esp+0B4h+var_84]
 0x8C5B74: mov     esi, [edx+14h]
 0x8C5B77: add     esi, eax
@@ -103,18 +102,18 @@
 0x8C5BE1: test    bx, bx
 0x8C5BE4: lea     eax, [esi+1]
 0x8C5BE7: mov     word ptr [esp+0B4h+var_94+2], ax
-0x8C5BEC: mov     eax, [esp+0B4h+var_98]
+0x8C5BEC: mov     eax, [esp+0B4h+source]
 0x8C5BF0: jz      short loc_8C5C24
 0x8C5BF2: add     word ptr [esp+0B4h+var_90], 1
 0x8C5BF8: jmp     short loc_8C5C24
 0x8C5BFA: test    bx, bx
-0x8C5BFD: mov     eax, [esp+0B4h+var_98]
+0x8C5BFD: mov     eax, [esp+0B4h+source]
 0x8C5C01: jz      short loc_8C5C12
 0x8C5C03: cmp     word ptr [eax+esi*2], 0
 0x8C5C08: jnz     short loc_8C5C24
 0x8C5C0A: add     word ptr [esp+0B4h+var_90], 1
 0x8C5C10: jmp     short loc_8C5C24
-0x8C5C12: mov     edx, [esp+0B4h+var_98]
+0x8C5C12: mov     edx, [esp+0B4h+source]
 0x8C5C16: cmp     word ptr [edx+esi*2], 0
 0x8C5C1B: jz      short loc_8C5C24
 0x8C5C1D: add     word ptr [esp+0B4h+var_90], 0FFFFh
@@ -131,7 +130,7 @@
 0x8C5C43: lea     ecx, [esp+0B8h+var_9C]
 0x8C5C47: call    sub_8C5490
 0x8C5C4C: mov     ecx, [esp+0B4h+var_88]
-0x8C5C50: mov     eax, [esp+0B4h+var_98]
+0x8C5C50: mov     eax, [esp+0B4h+source]
 0x8C5C54: movzx   edx, word ptr [esp+0B4h+var_94+2]
 0x8C5C59: cmp     esi, edx
 0x8C5C5B: jb      short loc_8C5C72
@@ -164,7 +163,7 @@
 0x8C5CB7: lea     ecx, [esp+0B8h+var_9C]
 0x8C5CBB: call    sub_8C5490
 0x8C5CC0: mov     ecx, [esp+0B4h+var_88]
-0x8C5CC4: mov     eax, [esp+0B4h+var_98]
+0x8C5CC4: mov     eax, [esp+0B4h+source]
 0x8C5CC8: movzx   edx, word ptr [esp+0B4h+var_94+2]
 0x8C5CCD: cmp     esi, edx
 0x8C5CCF: jb      short loc_8C5CE6
@@ -220,16 +219,16 @@
 0x8C5D8B: jmp     short loc_8C5DB7
 0x8C5D8D: test    ax, ax
 0x8C5D90: jz      short loc_8C5DA5
-0x8C5D92: mov     ecx, [esp+0B4h+var_98]
+0x8C5D92: mov     ecx, [esp+0B4h+source]
 0x8C5D96: cmp     word ptr [ecx+edi*2], 0
 0x8C5D9B: jnz     short loc_8C5DB7
 0x8C5D9D: add     word ptr [esp+0B4h+var_90], 1
 0x8C5DA3: jmp     short loc_8C5DB7
-0x8C5DA5: mov     edx, [esp+0B4h+var_98]
+0x8C5DA5: mov     edx, [esp+0B4h+source]
 0x8C5DA9: cmp     word ptr [edx+edi*2], 0
 0x8C5DAE: jz      short loc_8C5DB7
 0x8C5DB0: add     word ptr [esp+0B4h+var_90], 0FFFFh
-0x8C5DB7: mov     ecx, [esp+0B4h+var_98]
+0x8C5DB7: mov     ecx, [esp+0B4h+source]
 0x8C5DBB: movzx   edx, word ptr [esp+0B4h+var_7C]
 0x8C5DC0: add     [esp+0B4h+var_80], 1
 0x8C5DC5: add     [esp+0B4h+var_84], 14h
@@ -389,16 +388,16 @@
 0x8C5FD8: mov     edi, eax
 0x8C5FDA: mov     eax, [esp+0BCh+var_7C]
 0x8C5FDE: lea     ecx, [eax+eax]
-0x8C5FE1: push    ecx; Size
-0x8C5FE2: push    edx; Src
-0x8C5FE3: push    esi; Dst
-0x8C5FE4: call    _memcpy
-0x8C5FE9: mov     ecx, [esp+0C8h+var_98]
+0x8C5FE1: push    ecx; byteCount
+0x8C5FE2: push    edx; source
+0x8C5FE3: push    esi; destination
+0x8C5FE4: call    _memcpy;
+0x8C5FE9: mov     ecx, [esp+0C8h+source]
 0x8C5FED: lea     eax, [ebx+ebx]
-0x8C5FF0: push    eax; Size
-0x8C5FF1: push    ecx; Src
-0x8C5FF2: push    edi; Dst
-0x8C5FF3: call    _memcpy
+0x8C5FF0: push    eax; byteCount
+0x8C5FF1: push    ecx; source
+0x8C5FF2: push    edi; destination
+0x8C5FF3: call    _memcpy;
 0x8C5FF8: mov     edx, [esp+0D4h+var_70+2]
 0x8C5FFC: add     esp, 20h
 0x8C5FFF: push    edi
@@ -441,7 +440,7 @@
 0x8C607B: call    eax
 0x8C607D: push    2
 0x8C607F: mov     ecx, esi
-0x8C6081: call    NiNode_GetNiPropertyByID
+0x8C6081: call    NiNode_GetNiPropertyByID;
 0x8C6086: mov     edi, eax
 0x8C6088: test    edi, edi
 0x8C608A: jz      short loc_8C60D0
@@ -467,7 +466,7 @@
 0x8C60CD: mov     [edi+48h], edx
 0x8C60D0: cmp     word ptr [esp+0B4h+var_94+2], 0
 0x8C60D6: jbe     short loc_8C60E9
-0x8C60D8: mov     edi, [esp+0B4h+var_98]
+0x8C60D8: mov     edi, [esp+0B4h+source]
 0x8C60DC: xor     eax, eax
 0x8C60DE: mov     ecx, ebx
 0x8C60E0: shr     ecx, 1
@@ -506,12 +505,12 @@
 0x8C614D: cmp     eax, edx
 0x8C614F: mov     [esp+0B4h+var_58], eax
 0x8C6153: jl      loc_8C5B41
-0x8C6159: mov     eax, [esp+0B4h+var_98]
+0x8C6159: mov     eax, [esp+0B4h+source]
 0x8C615D: push    eax
-0x8C615E: call    FormHeapFree
+0x8C615E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x8C6163: mov     ecx, [esp+0B8h+Src]
 0x8C6167: push    ecx
-0x8C6168: call    FormHeapFree
+0x8C6168: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x8C616D: add     esp, 8
 0x8C6170: mov     ecx, dword ptr [esp+0B4h+var_C]
 0x8C6177: mov     large fs:0, ecx
@@ -525,3 +524,34 @@
 0x8C6190: mov     esp, ebp
 0x8C6192: pop     ebp
 0x8C6193: retn    4
+0x8C5440: mov     eax, [ecx+4]
+0x8C5443: push    eax
+0x8C5444: mov     dword ptr [ecx], offset ??_7?$NiTArray@G@@6B@; const NiTArray<ushort>::`vftable'
+0x8C544A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x8C544F: pop     ecx
+0x8C5450: retn
+0x9D76A0: lea     ecx, [ebp+var_78]
+0x9D76A3: jmp     loc_8C5440
+0x9D76A8: lea     ecx, [ebp+var_9C]
+0x9D76AE: jmp     loc_8C5440
+0x9D76B3: mov     eax, [ebp+var_8C]
+0x9D76B9: push    eax
+0x9D76BA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D76BF: pop     ecx
+0x9D76C0: retn
+0x9D76C1: mov     eax, [ebp+var_60]
+0x9D76C4: push    eax
+0x9D76C5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D76CA: pop     ecx
+0x9D76CB: retn
+0x9D76CC: mov     edx, [esp-4+arg_4]
+0x9D76D0: lea     eax, [edx-0A4h]
+0x9D76D6: mov     ecx, [edx-0A8h]
+0x9D76DC: xor     ecx, eax
+0x9D76DE: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D76E3: add     eax, 0Ch
+0x9D76E6: mov     ecx, [edx-8]
+0x9D76E9: xor     ecx, eax
+0x9D76EB: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D76F0: mov     eax, offset stru_AFF298
+0x9D76F5: jmp     ___CxxFrameHandler3

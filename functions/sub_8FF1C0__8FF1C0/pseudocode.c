@@ -16,31 +16,31 @@ __m128 *__cdecl sub_8FF1C0(__m128 *a1, char *a2, __m128 *a3)
   _BYTE v17[192]; // [esp+58h] [ebp-160h] BYREF
   _BYTE v18[160]; // [esp+118h] [ebp-A0h] BYREF
 
-  v3 = *(_DWORD *)a1->m128_i32[1];
-  v4 = a2[8];
-  v5 = a2[0xA];
-  v6 = *(_DWORD *)a1->m128_i32[0];
-  v14.m128_i32[1] = a2[9];
-  v14.m128_i32[3] = a2[0xB];
-  v15 = 0;
-  v14.m128_i32[0] = v4;
-  v14.m128_i32[2] = v5;
-  v16 = 0;
-  (*(void (__thiscall **)(int, char *, __int32, _BYTE *))(*(_DWORD *)v6 + 0x28))(v6, a2, v4, v17);
-  (*(void (__thiscall **)(int, char *, __int32, _BYTE *))(*(_DWORD *)v3 + 0x28))(
+  v3 = *(_DWORD *)a1->m128_i32[1]; /*0x8ff1d5*/
+  v4 = a2[8]; /*0x8ff1db*/
+  v5 = a2[0xA]; /*0x8ff1df*/
+  v6 = *(_DWORD *)a1->m128_i32[0]; /*0x8ff1e4*/
+  v14.m128_i32[1] = a2[9]; /*0x8ff1ea*/
+  v14.m128_i32[3] = a2[0xB]; /*0x8ff1f2*/
+  v15 = 0; /*0x8ff1fc*/
+  v14.m128_i32[0] = v4; /*0x8ff201*/
+  v14.m128_i32[2] = v5; /*0x8ff205*/
+  v16 = 0; /*0x8ff209*/
+  (*(void (__thiscall **)(int, char *, __int32, _BYTE *))(*(_DWORD *)v6 + 0x28))(v6, a2, v4, v17); /*0x8ff216*/
+  (*(void (__thiscall **)(int, char *, __int32, _BYTE *))(*(_DWORD *)v3 + 0x28))( /*0x8ff232*/
     v3,
     &a2[2 * v14.m128_i32[0]],
     v14.m128_i32[1],
     v18);
-  sub_93C690(&v14, (int *)v6, (int *)v3, a1 + 1, &v13);
-  if ( v16 )
-    sub_93B660(&v14, (int)a2);
-  v7 = v13.m128_f32[3];
-  v8 = *(__m128 **)(a1->m128_i32[0] + 8);
-  v9 = _mm_mul_ps(v8[2], _mm_shuffle_ps(v13, v13, 0xAA));
-  v10 = _mm_mul_ps(v8[1], _mm_shuffle_ps(v13, v13, 0x55));
-  v11 = *v8;
-  *a3 = _mm_add_ps(_mm_add_ps(_mm_mul_ps(v11, _mm_shuffle_ps(v13, v13, 0)), v10), v9);
-  a3->m128_f32[3] = v7 - *(float *)(v6 + 0xC) - *(float *)(v3 + 0xC);
-  return a3;
+  sub_93C690(&v14, (int *)v6, (int *)v3, a1 + 1, &v13); /*0x8ff247*/
+  if ( v16 ) /*0x8ff252*/
+    sub_93B660(&v14, (int)a2); /*0x8ff259*/
+  v7 = v13.m128_f32[3]; /*0x8ff263*/
+  v8 = *(__m128 **)(a1->m128_i32[0] + 8); /*0x8ff26c*/
+  v9 = _mm_mul_ps(v8[2], _mm_shuffle_ps(v13, v13, 0xAA)); /*0x8ff27e*/
+  v10 = _mm_mul_ps(v8[1], _mm_shuffle_ps(v13, v13, 0x55)); /*0x8ff288*/
+  v11 = *v8; /*0x8ff292*/
+  *a3 = _mm_add_ps(_mm_add_ps(_mm_mul_ps(v11, _mm_shuffle_ps(v13, v13, 0)), v10), v9); /*0x8ff2a1*/
+  a3->m128_f32[3] = v7 - *(float *)(v6 + 0xC) - *(float *)(v3 + 0xC); /*0x8ff2ad*/
+  return a3; /*0x8ff2b0*/
 }

@@ -15,19 +15,19 @@
 0x615F8D: mov     esi, [esp+24h+arg_8]
 0x615F91: mov     [esi], eax
 0x615F93: mov     ecx, ds:0B3F9ACh
-0x615F99: mov     eax, [esp+24h+arg_4]
+0x615F99: mov     eax, [esp+24h+groupID]
 0x615F9D: push    edi
-0x615F9E: push    0
+0x615F9E: push    0; forceWeaponPrefix
 0x615FA0: mov     [esi+4], ecx
 0x615FA3: mov     edx, ds:0B3F9B0h
-0x615FA9: push    0
-0x615FAB: push    eax
-0x615FAC: mov     ecx, ebp
+0x615FA9: push    0; weaponEntryDataArg
+0x615FAB: push    eax; groupID
+0x615FAC: mov     ecx, ebp; this
 0x615FAE: mov     [esi+8], edx
-0x615FB1: call    Actor_LoadAnimGroup?
+0x615FB1: call    Actor_LoadAnimGroup_; Builds an initial encoded key from live actor movement/weapon state and requested fixed group ID, then returns ActorAnimData_ResolveAnimKeyFallback's concrete playable key or sentinel 0x00FF when no ActorAnimData exists.
 0x615FB6: movzx   edi, ax
 0x615FB9: push    edi
-0x615FBA: call    sub_51ACC0
+0x615FBA: call    AnimGroup_UsesPowerOrCastNoteTemplate; Returns true when the encoded key is not group 0xFF and its fixed group record uses note-template class 5. In Oblivion's 43 records that is AttackPower..AttackRightPower plus CastSelf/Touch/Target and their Alt variants.
 0x615FBF: add     esp, 4
 0x615FC2: test    al, al
 0x615FC4: jz      loc_616097
@@ -40,7 +40,7 @@
 0x615FE1: push    ecx
 0x615FE2: push    edi
 0x615FE3: mov     ecx, eax
-0x615FE5: call    sub_470960
+0x615FE5: call    ActorAnimData_FindAnimMapEntry; CustomAnimSupport decode: anim-map lookup helper used by playback, validators, and save/load restore to test an encoded group key.
 0x615FEA: test    al, al
 0x615FEC: jz      loc_616097
 0x615FF2: mov     ecx, [esp+28h+arg_0]
@@ -49,19 +49,19 @@
 0x615FFB: push    0FFFFFFFFh
 0x615FFD: call    eax
 0x615FFF: mov     edi, [eax+68h]
-0x616002: push    2; ArgList
-0x616004: mov     ecx, edi
-0x616006: call    sub_51AE20
+0x616002: push    2; noteIndex
+0x616004: mov     ecx, edi; this
+0x616006: call    TESAnimGroup_GetRequiredNoteTime; Returns a 32-bit required-note time from TESAnimGroup +0x10 by zero-based note index after validating count, storage, and QNaN. Invalid entries report an error and return 0.0f.
 0x61600B: fstp    [esp+28h+var_1C+4]
-0x61600F: push    0; ArgList
-0x616011: mov     ecx, edi
-0x616013: call    sub_51AE20
+0x61600F: push    0; noteIndex
+0x616011: mov     ecx, edi; this
+0x616013: call    TESAnimGroup_GetRequiredNoteTime; Returns a 32-bit required-note time from TESAnimGroup +0x10 by zero-based note index after validating count, storage, and QNaN. Invalid entries report an error and return 0.0f.
 0x616018: fsubr   [esp+28h+var_1C+4]
 0x61601C: lea     ecx, [esp+28h+var_C]
 0x616020: push    ecx
 0x616021: mov     ecx, edi
 0x616023: fstp    [esp+2Ch+arg_0]
-0x616027: call    sub_51AAB0
+0x616027: call    TESAnimGroup_GetMovementVector; TESAnimGroup movement-vector getter. Copies the three float movement components stored at TESAnimGroup +0x14/+0x18/+0x1C.
 0x61602C: fld     dword ptr [eax]
 0x61602E: fld     [esp+28h+arg_0]
 0x616032: mov     edx, [ebp+0]

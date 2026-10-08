@@ -1,1 +1,6 @@
-tagSTRRET_TYPE
+enum tagSTRRET_TYPE : __int32
+{
+STRRET_WSTR = 0x0,
+STRRET_OFFSET = 0x1,
+STRRET_CSTR = 0x2,
+};

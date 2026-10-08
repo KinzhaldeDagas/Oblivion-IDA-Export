@@ -1,1 +1,1 @@
-TextEditMenu
+struct TextEditMenu;

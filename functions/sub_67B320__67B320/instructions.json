@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x67B329",
-    "line": "cmp     edi, offset ActorProcessManager_ptr.actor64",
+    "line": "cmp     edi, (offset qword_B3BB2C+23Ch)",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x67B3EA",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

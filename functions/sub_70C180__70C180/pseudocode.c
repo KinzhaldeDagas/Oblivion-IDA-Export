@@ -1,4 +1,4 @@
-char *sub_70C180()
+NiRTTI *sub_70C180()
 {
-  return dword_B3FACC;
+  return &stru_B3FACC; /*0x70c185*/
 }

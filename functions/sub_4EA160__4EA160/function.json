@@ -1,19 +1,36 @@
 {
-  "callees_count": 44,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 22,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_4EA160",
+  "chunks": [
+    [
+      "0x4EA160",
+      "0x4EA39C"
+    ],
+    [
+      "0x9B60C0",
+      "0x9B60E3"
+    ]
+  ],
+  "chunks_sha256": "e6123d323bb6b679a795b678cfe5dd2b929b2f4c96ec65b098a5aaaf806654c9",
+  "comment_regular": "Verified LandLOD update loop passes each quad's parent LandLOD node, maximum visibility distance, and view X/Y into TESTerrainLODQuad_Update; worldspace mode bit 0x4 and bDisplayLODLand gate the update.",
+  "comment_repeatable": "Verified LandLOD update loop passes each quad's parent LandLOD node, maximum visibility distance, and view X/Y into TESTerrainLODQuad_Update; worldspace mode bit 0x4 and bDisplayLODLand gate the update.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "DistantLOD_UpdateLandLODMap",
   "end_ea": "0x4EA39C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4EA160",
+  "name": "DistantLOD_UpdateLandLODMap",
   "segment": ".text",
   "sha256": "3ddbc5bf66327953a7ef2fd1e80964bf3ab1e5fc2f373fc41f3921e0e91fa68b",
   "size": 572,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4EA160",
-  "type": "void __cdecl(int, float arg4, int, NiTMap_TESCELL *, int)",
-  "xrefs_from_count": 212,
+  "total_chunk_size": 607,
+  "type": "void __cdecl(unsigned int a1, float arg4, int a3, TESWorldSpaceTerrainLODQuadMap *terrainLODQuadRoots, int a5)",
+  "xrefs_from_count": 223,
   "xrefs_to_count": 1
 }

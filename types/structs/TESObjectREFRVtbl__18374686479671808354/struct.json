@@ -1,322 +1,495 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "TESObjectREFRVtbl",
+  "definition": "struct TESObjectREFRVtbl\n{\nTESFormVtbl super;\nvoid (__thiscall *Unk_37)(TESObjectREFR *this);\nvoid (__thiscall *Unk_38)(TESObjectREFR *this);\nvoid (__thiscall *Unk_39)(TESObjectREFR *this);\nvoid (__thiscall *Unk_3A)(TESObjectREFR *this);\nfloat (__thiscall *GetScale)(TESObjectREFR *this);\nvoid (__thiscall *GetStartingAngle)(TESObjectREFR *this, float *pos);\nvoid (__thiscall *GetStartingPos)(TESObjectREFR *this, float *pos);\nvoid (__thiscall *Unk_3E)(TESObjectREFR *this);\nvoid (__thiscall *Unk_3F)(TESObjectREFR *this);\nvoid (__thiscall *RemoveItem)(TESObjectREFR *this, TESForm *toRemove, BaseExtraList *extraList, UInt32 quantity, UInt32 useContainerOwnership, UInt32 drop, TESObjectREFR *destRef, float *dropPos, float *dropRot, UInt32 unk8, UInt8 useExistingEntryData);\nvoid (__thiscall *Unk_41)(TESObjectREFR *this);\nvoid (__thiscall *Unk_42)(TESObjectREFR *this);\nvoid (__thiscall *Unk_43)(TESObjectREFR *this);\nvoid (__thiscall *Unk_44)(TESObjectREFR *this);\nvoid (__thiscall *AddItem)(TESObjectREFR *this, TESForm *item, ExtraDataList *xDataList);\nvoid (__thiscall *Unk_46)(TESObjectREFR *this);\nvoid (__thiscall *Unk_47)(TESObjectREFR *this);\nvoid (__thiscall *Unk_48)(TESObjectREFR *this);\nMagicTarget *(__thiscall *GetMagicTarget)(TESObjectREFR *this);\nvoid (__thiscall *GetTemplateForm)(TESObjectREFR *this);\nvoid (__thiscall *SetTemplateForm)(TESObjectREFR *this, TESObjectREFR *oth);\nvoid (__thiscall *Unk_4C)(TESObjectREFR *this);\nvoid (__thiscall *Unk_4D)(TESObjectREFR *this);\nvoid (__thiscall *Unk_4E)(TESObjectREFR *this);\nvoid (__thiscall *Unk_4F)(TESObjectREFR *this);\nvoid (__thiscall *Unk_50)(TESObjectREFR *this);\nvoid (__thiscall *Unk_51)(TESObjectREFR *this);\nvoid (__thiscall *Unk_52)(TESObjectREFR *this);\nNiNode *(__thiscall *GenerateNiNode)(TESObjectREFR *this); ///< Generate/attach this reference's NiNode. Base 0x4E4080, MobileObject 0x659F30, PlayerCharacter 0x667BE0. Native ABI has no x87 or stack arguments.\nvoid (__thiscall *Set3D)(void *niNode);\nNiNode *(__thiscall *GetNiNode)(TESObjectREFR *this);\nvoid (__thiscall *Unk_56)(TESObjectREFR *this);\nvoid (__thiscall *Unk_57)(UInt32 arg0);\nvoid (__thiscall *Unk_58)(TESObjectREFR *this);\nActorAnimData *(__thiscall *GetAnimData)(TESObjectREFR *this); ///< Virtual active ActorAnimData accessor. Base 0x4D8370 uses process +0x17C when available or ExtraAnim fallback; Player override 0x65D720 prefers defaultAnimData +0x5DC, then visible first-person +0x5CC, then base.\nActorSkinInfo *(__thiscall *GetActiveSkinInfo)(TESObjectREFR *this); ///< PlayerCharacter override 0x6600B0 returns active perspective ActorSkinInfo; base Actor target 0x6F7070 returns null. Used by bow visual cleanup, whose process accessor interprets null as ordinary/NPC context.\nvoid (__thiscall *Unk_5B)(TESObjectREFR *this);\nTESForm *(__thiscall *GetBaseForm)(TESObjectREFR *this);\nfloat *(__thiscall *GetPos)(TESObjectREFR *this);\nvoid (__thiscall *Unk_5E)(TESObjectREFR *this);\nvoid (__thiscall *SetProcedureCompleted)(TESObjectREFR *this, bool completed);\nvoid (__thiscall *Unk_60)(TESObjectREFR *this);\nvoid (__thiscall *Unk_61)(TESObjectREFR *this, UInt8 unk01);\nbool (__thiscall *IsMobileObject)(TESObjectREFR *this);\nSitSleep (__thiscall *GetSleepState)(TESObjectREFR *this);\nbool (__thiscall *IsActor)(TESObjectREFR *this);\nvoid (__thiscall *ChangeCell)(TESObjectCELL *newCell);\nbool (__thiscall *IsDead)(TESObjectREFR *this, char arg0);\nUInt8 (__thiscall *GetKnockedState)(TESObjectREFR *this);\nbool (__thiscall *HasFatigue)(TESObjectREFR *this);\nbool (__thiscall *MoveToHigh)(TESObjectREFR *self); ///< Verified: saved-tier switch659C90 and Actor concrete override allocation/registration establish process transition. Prior IsParalyzed label at1A4 was incorrect; boolean result is transition result.\n}\n",
   "id": 18374686479671808354,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00053.",
       "name": "super",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 220
+      "size": 220,
+      "type": "TESFormVtbl"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00054.",
       "name": "Unk_37",
       "offset": 220,
-      "offset_hex": "0xdc",
-      "size": 4
+      "offset_hex": "0xDC",
+      "size": 4,
+      "type": "void (__thiscall *)(TESObjectREFR *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_38",
       "offset": 224,
-      "offset_hex": "0xe0",
-      "size": 4
+      "offset_hex": "0xE0",
+      "size": 4,
+      "type": "void (__thiscall *)(TESObjectREFR *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_39",
       "offset": 228,
-      "offset_hex": "0xe4",
-      "size": 4
+      "offset_hex": "0xE4",
+      "size": 4,
+      "type": "void (__thiscall *)(TESObjectREFR *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_3A",
       "offset": 232,
-      "offset_hex": "0xe8",
-      "size": 4
+      "offset_hex": "0xE8",
+      "size": 4,
+      "type": "void (__thiscall *)(TESObjectREFR *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetScale",
       "offset": 236,
-      "offset_hex": "0xec",
-      "size": 4
+      "offset_hex": "0xEC",
+      "size": 4,
+      "type": "float (__thiscall *)(TESObjectREFR *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetStartingAngle",
       "offset": 240,
-      "offset_hex": "0xf0",
-      "size": 4
+      "offset_hex": "0xF0",
+      "size": 4,
+      "type": "void (__thiscall *)(TESObjectREFR *this, float *pos)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetStartingPos",
       "offset": 244,
-      "offset_hex": "0xf4",
-      "size": 4
+      "offset_hex": "0xF4",
+      "size": 4,
+      "type": "void (__thiscall *)(TESObjectREFR *this, float *pos)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_3E",
       "offset": 248,
-      "offset_hex": "0xf8",
-      "size": 4
+      "offset_hex": "0xF8",
+      "size": 4,
+      "type": "void (__thiscall *)(TESObjectREFR *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_3F",
       "offset": 252,
-      "offset_hex": "0xfc",
-      "size": 4
+      "offset_hex": "0xFC",
+      "size": 4,
+      "type": "void (__thiscall *)(TESObjectREFR *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RemoveItem",
       "offset": 256,
       "offset_hex": "0x100",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESObjectREFR *this, TESForm *toRemove, BaseExtraList *extraList, UInt32 quantity, UInt32 useContainerOwnership, UInt32 drop, TESObjectREFR *destRef, float *dropPos, float *dropRot, UInt32 unk8, UInt8 useExistingEntryData)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_41",
       "offset": 260,
       "offset_hex": "0x104",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESObjectREFR *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_42",
       "offset": 264,
       "offset_hex": "0x108",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESObjectREFR *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_43",
       "offset": 268,
-      "offset_hex": "0x10c",
-      "size": 4
+      "offset_hex": "0x10C",
+      "size": 4,
+      "type": "void (__thiscall *)(TESObjectREFR *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_44",
       "offset": 272,
       "offset_hex": "0x110",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESObjectREFR *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddItem",
       "offset": 276,
       "offset_hex": "0x114",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESObjectREFR *this, TESForm *item, ExtraDataList *xDataList)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_46",
       "offset": 280,
       "offset_hex": "0x118",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESObjectREFR *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_47",
       "offset": 284,
-      "offset_hex": "0x11c",
-      "size": 4
+      "offset_hex": "0x11C",
+      "size": 4,
+      "type": "void (__thiscall *)(TESObjectREFR *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_48",
       "offset": 288,
       "offset_hex": "0x120",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESObjectREFR *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetMagicTarget",
       "offset": 292,
       "offset_hex": "0x124",
-      "size": 4
+      "size": 4,
+      "type": "MagicTarget *(__thiscall *)(TESObjectREFR *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetTemplateForm",
       "offset": 296,
       "offset_hex": "0x128",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESObjectREFR *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetTemplateForm",
       "offset": 300,
-      "offset_hex": "0x12c",
-      "size": 4
+      "offset_hex": "0x12C",
+      "size": 4,
+      "type": "void (__thiscall *)(TESObjectREFR *this, TESObjectREFR *oth)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_4C",
       "offset": 304,
       "offset_hex": "0x130",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESObjectREFR *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_4D",
       "offset": 308,
       "offset_hex": "0x134",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESObjectREFR *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_4E",
       "offset": 312,
       "offset_hex": "0x138",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESObjectREFR *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_4F",
       "offset": 316,
-      "offset_hex": "0x13c",
-      "size": 4
+      "offset_hex": "0x13C",
+      "size": 4,
+      "type": "void (__thiscall *)(TESObjectREFR *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_50",
       "offset": 320,
       "offset_hex": "0x140",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESObjectREFR *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_51",
       "offset": 324,
       "offset_hex": "0x144",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESObjectREFR *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_52",
       "offset": 328,
       "offset_hex": "0x148",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESObjectREFR *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "Generate/attach this reference's NiNode. Base 0x4E4080, MobileObject 0x659F30, PlayerCharacter 0x667BE0. Native ABI has no x87 or stack arguments.",
       "name": "GenerateNiNode",
       "offset": 332,
-      "offset_hex": "0x14c",
-      "size": 4
+      "offset_hex": "0x14C",
+      "size": 4,
+      "type": "NiNode *(__thiscall *)(TESObjectREFR *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Set3D",
       "offset": 336,
       "offset_hex": "0x150",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(void *niNode)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetNiNode",
       "offset": 340,
       "offset_hex": "0x154",
-      "size": 4
+      "size": 4,
+      "type": "NiNode *(__thiscall *)(TESObjectREFR *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_56",
       "offset": 344,
       "offset_hex": "0x158",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESObjectREFR *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_57",
       "offset": 348,
-      "offset_hex": "0x15c",
-      "size": 4
+      "offset_hex": "0x15C",
+      "size": 4,
+      "type": "void (__thiscall *)(UInt32 arg0)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_58",
       "offset": 352,
       "offset_hex": "0x160",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESObjectREFR *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "Virtual active ActorAnimData accessor. Base 0x4D8370 uses process +0x17C when available or ExtraAnim fallback; Player override 0x65D720 prefers defaultAnimData +0x5DC, then visible first-person +0x5CC, then base.",
       "name": "GetAnimData",
       "offset": 356,
       "offset_hex": "0x164",
-      "size": 4
+      "size": 4,
+      "type": "ActorAnimData *(__thiscall *)(TESObjectREFR *this)"
     },
     {
-      "name": "Unk_5A",
+      "annotation_confidence": "Unknown",
+      "comment": "PlayerCharacter override 0x6600B0 returns active perspective ActorSkinInfo; base Actor target 0x6F7070 returns null. Used by bow visual cleanup, whose process accessor interprets null as ordinary/NPC context.",
+      "name": "GetActiveSkinInfo",
       "offset": 360,
       "offset_hex": "0x168",
-      "size": 4
+      "size": 4,
+      "type": "ActorSkinInfo *(__thiscall *)(TESObjectREFR *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_5B",
       "offset": 364,
-      "offset_hex": "0x16c",
-      "size": 4
+      "offset_hex": "0x16C",
+      "size": 4,
+      "type": "void (__thiscall *)(TESObjectREFR *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetBaseForm",
       "offset": 368,
       "offset_hex": "0x170",
-      "size": 4
+      "size": 4,
+      "type": "TESForm *(__thiscall *)(TESObjectREFR *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetPos",
       "offset": 372,
       "offset_hex": "0x174",
-      "size": 4
+      "size": 4,
+      "type": "float *(__thiscall *)(TESObjectREFR *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_5E",
       "offset": 376,
       "offset_hex": "0x178",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESObjectREFR *this)"
     },
     {
-      "name": "Unk_5F",
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SetProcedureCompleted",
       "offset": 380,
-      "offset_hex": "0x17c",
-      "size": 4
+      "offset_hex": "0x17C",
+      "size": 4,
+      "type": "void (__thiscall *)(TESObjectREFR *this, bool completed)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_60",
       "offset": 384,
       "offset_hex": "0x180",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESObjectREFR *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_61",
       "offset": 388,
       "offset_hex": "0x184",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESObjectREFR *this, UInt8 unk01)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IsMobileObject",
       "offset": 392,
       "offset_hex": "0x188",
-      "size": 4
+      "size": 4,
+      "type": "bool (__thiscall *)(TESObjectREFR *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetSleepState",
       "offset": 396,
-      "offset_hex": "0x18c",
-      "size": 4
+      "offset_hex": "0x18C",
+      "size": 4,
+      "type": "SitSleep (__thiscall *)(TESObjectREFR *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IsActor",
       "offset": 400,
       "offset_hex": "0x190",
-      "size": 4
+      "size": 4,
+      "type": "bool (__thiscall *)(TESObjectREFR *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ChangeCell",
       "offset": 404,
       "offset_hex": "0x194",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESObjectCELL *newCell)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IsDead",
       "offset": 408,
       "offset_hex": "0x198",
-      "size": 4
+      "size": 4,
+      "type": "bool (__thiscall *)(TESObjectREFR *this, char arg0)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetKnockedState",
       "offset": 412,
-      "offset_hex": "0x19c",
-      "size": 4
+      "offset_hex": "0x19C",
+      "size": 4,
+      "type": "UInt8 (__thiscall *)(TESObjectREFR *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "HasFatigue",
       "offset": 416,
-      "offset_hex": "0x1a0",
-      "size": 4
+      "offset_hex": "0x1A0",
+      "size": 4,
+      "type": "bool (__thiscall *)(TESObjectREFR *this)"
     },
     {
-      "name": "IsParalyzed",
+      "annotation_confidence": "Unknown",
+      "comment": "Verified: saved-tier switch659C90 and Actor concrete override allocation/registration establish process transition. Prior IsParalyzed label at1A4 was incorrect; boolean result is transition result.",
+      "name": "MoveToHigh",
       "offset": 420,
-      "offset_hex": "0x1a4",
-      "size": 4
+      "offset_hex": "0x1A4",
+      "size": 4,
+      "type": "bool (__thiscall *)(TESObjectREFR *self)"
     }
   ],
   "name": "TESObjectREFRVtbl",
+  "ordinal": 732,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 424
 }

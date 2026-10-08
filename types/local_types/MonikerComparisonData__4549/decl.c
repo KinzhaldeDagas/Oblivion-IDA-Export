@@ -1,1 +1,1 @@
-MonikerComparisonData
+typedef tagMonikerComparisonData MonikerComparisonData;

@@ -1,274 +1,423 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "TES",
+  "definition": "struct __cppobj TES\n{\nTES_vtbl *__vftable /*VFT*/;\nGridDistantArray *gridDistantArray;\nGridCellArray *gridCellArray;\nNiNode *ObjectLODRoot;\nNiNode *LandLOD;\nBSTempNodeManager *tempNodeManager;\nNiDirectionalLight *niDirectionalLight;\nBSFogProperty *fogProperty;\nint extXCoord;\nint extYCoord;\nint unk28;\nint unk2C;\nTESObjectCELL *currentExteriorCell;\nTESObjectCELL *currentInteriorCell;\nTESObjectCELL **interiorCellBufferArray;\nTESObjectCELL **exteriorCellBufferArray;\nUInt32 unk40;\nUInt32 unk44;\nUInt32 unk48;\nUInt32 unk4C;\nUInt8 unk50;\nUInt8 unk51;\nUInt8 unk52;\nUInt8 CellBorders;\nWaterManager *waterManager;\nWaterPlaneData *waterNodeData;\nSky *sky;\nUInt32 unk60;\nUInt32 unk64;\nUInt32 unk68;\nfloat unk6C;\nfloat unk70;\nTESWorldSpace *currentWorldSpace;\nUInt32 unk78;\nUInt32 unk7C;\nUInt32 unk80;\nUInt32 unk84;\nUInt32 unk88;\ntListUnk8C list8C;\nNiSourceTexture *bloodDecals[3];\ntListVoid listA0;\nUInt8 unkA8;\nUInt8 unkA9;\nUInt8 padA8[2];\n}\n",
   "id": 18374686479672049229,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "__vftable",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "TES_vtbl *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "gridDistantArray",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "GridDistantArray *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "gridCellArray",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "GridCellArray *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ObjectLODRoot",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "NiNode *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "LandLOD",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "NiNode *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "tempNodeManager",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "BSTempNodeManager *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "niDirectionalLight",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "NiDirectionalLight *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fogProperty",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "BSFogProperty *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "extXCoord",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "extYCoord",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk28",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk2C",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "currentExteriorCell",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "TESObjectCELL *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "currentInteriorCell",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "TESObjectCELL *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "interiorCellBufferArray",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "TESObjectCELL **"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "exteriorCellBufferArray",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "TESObjectCELL **"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk40",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk44",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk48",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk4C",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 4
+      "offset_hex": "0x4C",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk50",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 1
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk51",
       "offset": 81,
       "offset_hex": "0x51",
-      "size": 1
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk52",
       "offset": 82,
       "offset_hex": "0x52",
-      "size": 1
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CellBorders",
       "offset": 83,
       "offset_hex": "0x53",
-      "size": 1
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "waterManager",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 4
+      "size": 4,
+      "type": "WaterManager *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "waterNodeData",
       "offset": 88,
       "offset_hex": "0x58",
-      "size": 4
+      "size": 4,
+      "type": "WaterPlaneData *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "sky",
       "offset": 92,
-      "offset_hex": "0x5c",
-      "size": 4
+      "offset_hex": "0x5C",
+      "size": 4,
+      "type": "Sky *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk60",
       "offset": 96,
       "offset_hex": "0x60",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk64",
       "offset": 100,
       "offset_hex": "0x64",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk68",
       "offset": 104,
       "offset_hex": "0x68",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk6C",
       "offset": 108,
-      "offset_hex": "0x6c",
-      "size": 4
+      "offset_hex": "0x6C",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk70",
       "offset": 112,
       "offset_hex": "0x70",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "currentWorldSpace",
       "offset": 116,
       "offset_hex": "0x74",
-      "size": 4
+      "size": 4,
+      "type": "TESWorldSpace *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk78",
       "offset": 120,
       "offset_hex": "0x78",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk7C",
       "offset": 124,
-      "offset_hex": "0x7c",
-      "size": 4
+      "offset_hex": "0x7C",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk80",
       "offset": 128,
       "offset_hex": "0x80",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk84",
       "offset": 132,
       "offset_hex": "0x84",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk88",
       "offset": 136,
       "offset_hex": "0x88",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "list8C",
       "offset": 140,
-      "offset_hex": "0x8c",
-      "size": 8
+      "offset_hex": "0x8C",
+      "size": 8,
+      "type": "tListUnk8C"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bloodDecals",
       "offset": 148,
       "offset_hex": "0x94",
-      "size": 12
+      "size": 12,
+      "type": "NiSourceTexture *[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "listA0",
       "offset": 160,
-      "offset_hex": "0xa0",
-      "size": 8
+      "offset_hex": "0xA0",
+      "size": 8,
+      "type": "tListVoid"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unkA8",
       "offset": 168,
-      "offset_hex": "0xa8",
-      "size": 1
+      "offset_hex": "0xA8",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unkA9",
       "offset": 169,
-      "offset_hex": "0xa9",
-      "size": 1
+      "offset_hex": "0xA9",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "padA8",
       "offset": 170,
-      "offset_hex": "0xaa",
-      "size": 2
+      "offset_hex": "0xAA",
+      "size": 2,
+      "type": "UInt8[2]"
     }
   ],
   "name": "TES",
+  "ordinal": 9408,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 172
 }

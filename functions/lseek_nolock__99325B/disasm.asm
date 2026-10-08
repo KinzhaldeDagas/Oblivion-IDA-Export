@@ -33,7 +33,7 @@
 0x9932B1: and     esi, 1Fh
 0x9932B4: imul    esi, 28h ; '('
 0x9932B7: sar     eax, 5
-0x9932BA: mov     eax, dword_BAAAC0[eax*4]
+0x9932BA: mov     eax, dword ptr unk_BAAAC0[eax*4]
 0x9932C1: lea     eax, [eax+esi+4]
 0x9932C5: and     byte ptr [eax], 0FDh
 0x9932C8: mov     eax, edi

@@ -1,18 +1,31 @@
 {
-  "callees_count": 20,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7694F0",
+      "0x7696FA"
+    ]
+  ],
+  "chunks_sha256": "d7d59a70b39c72f8413d07fc3601ba99a6cca39a6ce2d4acba90ff9cc1bf3755",
+  "comment_regular": "CULLING standalone pipeline audit 2026-09-27: descriptive DrawGeometryBuffers name replaces RenderTriShapes. Verified native slot +0x168 in NiDX9Renderer table 0xA88EA4. Body performs shader/constant setup then may issue zero or multiple D3D9 draws: skinned indexed loop at 0x769622, ordinary indexed array loop at 0x7696A6, non-indexed draw at 0x7696E4. Lost device, zero vertices, zero arrays and hardware-bone constraints can skip draw attempts. It also clears lower geometry dirty bits with &=0xF000; preserve state/update semantics. These are observed Oblivion backend facts, independent of the DX11 project. Entry alone cannot prove GPU work or MainWorld ownership.\n\nDX10OBSE verified decode: raw D3D DrawIndexedPrimitive/DrawPrimitive dispatch after shader/pass setup. Do not change draw dispatch for texture problems unless logs prove geometry/draw sequencing failure.",
+  "comment_repeatable": "DX10OBSE verified decode: raw D3D DrawIndexedPrimitive/DrawPrimitive dispatch after shader/pass setup. Do not change draw dispatch for texture problems unless logs prove geometry/draw sequencing failure.\n\nDX11 concurrency audit 2026-09-24: inspected final draw body reaches D3D DIP at 769622/7696A6 and DP at 7696E4 without a local 763FE0/764040 scope. An enclosing caller may serialize it, but that has not been proved for every renderer/state path.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "RenderTriShapes",
+  "display_name": "NiDX9Renderer_DrawGeometryBuffers",
   "end_ea": "0x7696FA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "RenderTriShapes",
+  "name": "NiDX9Renderer_DrawGeometryBuffers",
   "segment": ".text",
   "sha256": "d7d59a70b39c72f8413d07fc3601ba99a6cca39a6ce2d4acba90ff9cc1bf3755",
   "size": 522,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7694F0",
+  "total_chunk_size": 522,
   "type": "void __thiscall(NiDX9Renderer *this, NiGeometry *)",
   "xrefs_from_count": 190,
   "xrefs_to_count": 1

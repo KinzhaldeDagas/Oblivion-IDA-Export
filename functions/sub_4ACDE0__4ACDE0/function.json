@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4ACDE0",
+      "0x4ACE26"
+    ]
+  ],
+  "chunks_sha256": "a90e86b50b0bec448926b575d45b6876abc262db2906ce4722753499b4baba34",
+  "comment_regular": "Verified (Oblivion): returns 1 when the amplitude field at TESEffectShader+0x3C is nonpositive; otherwise returns sin(2π * activeElapsedSeconds * frequency at +0x40) * amplitude. TESEffectShader_AnimateTextureEffect multiplies fill alpha by (1 + this pulse) and clamps the result. Fill-alpha pulse role is direct; field names are Probable from Fallout's corresponding EffectShaderData layout.",
+  "comment_repeatable": "Verified (Oblivion): returns 1 when the amplitude field at TESEffectShader+0x3C is nonpositive; otherwise returns sin(2π * activeElapsedSeconds * frequency at +0x40) * amplitude. TESEffectShader_AnimateTextureEffect multiplies fill alpha by (1 + this pulse) and clamps the result. Fill-alpha pulse role is direct; field names are Probable from Fallout's corresponding EffectShaderData layout.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4ACDE0",
+  "display_name": "TESEffectShader_CalculateFillEffectPulse",
   "end_ea": "0x4ACE26",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4ACDE0",
+  "name": "TESEffectShader_CalculateFillEffectPulse",
   "segment": ".text",
   "sha256": "a90e86b50b0bec448926b575d45b6876abc262db2906ce4722753499b4baba34",
   "size": 70,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4ACDE0",
-  "type": "double __thiscall(float *this, float)",
+  "total_chunk_size": 70,
+  "type": "float __thiscall(TESEffectShader *this, float activeElapsedSeconds)",
   "xrefs_from_count": 23,
   "xrefs_to_count": 1
 }

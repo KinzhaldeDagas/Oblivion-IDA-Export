@@ -1,19 +1,32 @@
 {
-  "callees_count": 11,
-  "callers_count": 5,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
+  "callers_count": 6,
+  "chunks": [
+    [
+      "0x423DF0",
+      "0x423E4C"
+    ]
+  ],
+  "chunks_sha256": "4284a0ad5b1ea66edc7949819207e88369714f0d52cdb82622f44a8db0fce4ab",
+  "comment_regular": "OR action flag mask into existing byte (default byte 1 when absent), creating state as needed. ONAM calls this with 0x08.",
+  "comment_repeatable": "OR action flag mask into existing byte (default byte 1 when absent), creating state as needed. ONAM calls this with 0x08.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_423DF0",
+  "display_name": "ExtraDataList_SetActionFlagBits",
   "end_ea": "0x423E4C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_423DF0",
+  "name": "ExtraDataList_SetActionFlagBits",
   "segment": ".text",
   "sha256": "4284a0ad5b1ea66edc7949819207e88369714f0d52cdb82622f44a8db0fce4ab",
   "size": 92,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x423DF0",
-  "type": "void __thiscall(ExtraDataList *this, int)",
+  "total_chunk_size": 92,
+  "type": "void __thiscall(ExtraDataList *this, unsigned int mask)",
   "xrefs_from_count": 45,
   "xrefs_to_count": 6
 }

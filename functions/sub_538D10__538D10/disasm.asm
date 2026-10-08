@@ -28,12 +28,12 @@
 0x538D5E: push    ecx
 0x538D5F: mov     ecx, eax
 0x538D61: fstp    [esp+8Ch+var_8C]; float
-0x538D64: call    sub_532090
+0x538D64: call    bhkSphereShape_CtorRadius; TES4 authoritative: constructs a bhkSphereShape; if the third byte arg is true, radius is converted from TES/world units to Havok units with hkFactor.
 0x538D69: mov     esi, eax
 0x538D6B: jmp     short loc_538D6F
 0x538D6D: xor     esi, esi
-0x538D6F: lea     ecx, [esp+84h+var_70]
-0x538D73: call    sub_532250
+0x538D6F: lea     ecx, [esp+84h+info]
+0x538D73: call    OB_bhkShapePhantomCinfo_InitIdentity_010201A0; 2026-05-18 73000 consumer decode: initializes bhkSimpleShapePhantom cinfo, including identity transform at +0x20 and shape pointer slot at +0x04. Stock 0x565510 installs one shape pointer and attaches the phantom to the target NiAVObject.
 0x538D78: mov     ecx, [ebp+arg_4]
 0x538D7B: mov     eax, ecx
 0x538D7D: shl     eax, 10h
@@ -41,41 +41,41 @@
 0x538D83: cmp     esi, edi
 0x538D85: mov     [esp+84h+var_4], 1
 0x538D90: mov     [ebx+8], ecx
-0x538D93: mov     [esp+84h+var_70], eax
+0x538D93: mov     [esp+84h+info.collisionFilter], eax
 0x538D97: jz      short loc_538DA2
 0x538D99: mov     eax, [esi+8]
-0x538D9C: mov     [esp+84h+var_6C], eax
+0x538D9C: mov     [esp+84h+info.shape], eax
 0x538DA0: jmp     short loc_538DA6
-0x538DA2: mov     [esp+84h+var_6C], edi
+0x538DA2: mov     [esp+84h+info.shape], edi
 0x538DA6: fldz
 0x538DA8: push    14h; Size
-0x538DAA: fst     [esp+88h+var_4C]
-0x538DAE: fst     [esp+88h+var_48]
-0x538DB2: fst     [esp+88h+var_44]
-0x538DB6: fst     [esp+88h+var_40]
-0x538DBA: fst     [esp+88h+var_38]
-0x538DBE: fst     [esp+88h+var_34]
-0x538DC2: fst     [esp+88h+var_30]
-0x538DC6: fst     [esp+88h+var_2C]
-0x538DCA: fst     [esp+88h+var_24]
+0x538DAA: fst     [esp+88h+info.transform+4]
+0x538DAE: fst     [esp+88h+info.transform+8]
+0x538DB2: fst     [esp+88h+info.transform+0Ch]
+0x538DB6: fst     [esp+88h+info.transform+10h]
+0x538DBA: fst     [esp+88h+info.transform+18h]
+0x538DBE: fst     [esp+88h+info.transform+1Ch]
+0x538DC2: fst     [esp+88h+info.transform+20h]
+0x538DC6: fst     [esp+88h+info.transform+24h]
+0x538DCA: fst     [esp+88h+info.transform+2Ch]
 0x538DCE: fld1
-0x538DD0: fst     [esp+88h+var_50]
-0x538DD4: fst     [esp+88h+var_3C]
-0x538DD8: fstp    [esp+88h+var_28]
-0x538DDC: fst     [esp+88h+var_20]
-0x538DE0: fst     [esp+88h+var_1C]
-0x538DE4: fst     [esp+88h+var_18]
-0x538DE8: fstp    [esp+88h+var_14]
+0x538DD0: fst     [esp+88h+info.transform]
+0x538DD4: fst     [esp+88h+info.transform+14h]
+0x538DD8: fstp    [esp+88h+info.transform+28h]
+0x538DDC: fst     [esp+88h+info.transform+30h]
+0x538DE0: fst     [esp+88h+info.transform+34h]
+0x538DE4: fst     [esp+88h+info.transform+38h]
+0x538DE8: fstp    [esp+88h+info.transform+3Ch]
 0x538DEC: call    FormHeapAlloc
 0x538DF1: add     esp, 4
 0x538DF4: mov     [esp+84h+var_74], eax
 0x538DF8: cmp     eax, edi
 0x538DFA: mov     byte ptr [esp+84h+var_4], 2
 0x538E02: jz      short loc_538E12
-0x538E04: lea     ecx, [esp+84h+var_70]
-0x538E08: push    ecx
-0x538E09: mov     ecx, eax
-0x538E0B: call    sub_531FC0
+0x538E04: lea     ecx, [esp+84h+info]
+0x538E08: push    ecx; info
+0x538E09: mov     ecx, eax; self
+0x538E0B: call    OB_bhkSimpleShapePhantom_CtorFromCinfo_010201A0; Constructs bhkSimpleShapePhantom wrapper and calls 0x8AF1A0 to create/attach the low-level Havok phantom object from cinfo.
 0x538E10: mov     edi, eax
 0x538E12: mov     esi, [ebx]
 0x538E14: cmp     esi, edi
@@ -101,7 +101,7 @@
 0x538E46: add     edi, 4
 0x538E49: push    edi; lpAddend
 0x538E4A: call    dword ptr ds:0A28078h
-0x538E50: mov     eax, [esp+84h+var_5C]
+0x538E50: mov     eax, [esp+84h+info.propertyCapacityFlags]
 0x538E54: test    eax, eax
 0x538E56: mov     byte ptr [ebx+4], 1
 0x538E5A: mov     [esp+84h+var_4], 0FFFFFFFFh
@@ -113,7 +113,7 @@
 0x538E7D: test    ecx, ecx
 0x538E7F: jnz     short loc_538E87
 0x538E81: mov     ecx, ds:0BA7D9Ch
-0x538E87: mov     edx, [esp+84h+var_64]
+0x538E87: mov     edx, [esp+84h+info.propertyData]
 0x538E8B: and     eax, 3FFFFFFFh
 0x538E90: add     eax, eax
 0x538E92: add     eax, eax
@@ -131,3 +131,22 @@
 0x538EAE: mov     esp, ebp
 0x538EB0: pop     ebp
 0x538EB1: retn    8
+0x9B9410: mov     eax, [ebp+var_74]
+0x9B9413: push    eax
+0x9B9414: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B9419: pop     ecx
+0x9B941A: retn
+0x9B941B: lea     ecx, [ebp+info]
+0x9B941E: jmp     sub_8A5090
+0x9B9423: mov     eax, [ebp+var_74]
+0x9B9426: push    eax
+0x9B9427: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B942C: pop     ecx
+0x9B942D: retn
+0x9B942E: mov     edx, [esp-4+arg_4]
+0x9B9432: lea     eax, [edx-74h]
+0x9B9435: mov     ecx, [edx-78h]
+0x9B9438: xor     ecx, eax
+0x9B943A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B943F: mov     eax, offset stru_AE37AC
+0x9B9444: jmp     ___CxxFrameHandler3

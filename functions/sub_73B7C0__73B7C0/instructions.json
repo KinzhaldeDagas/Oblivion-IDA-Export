@@ -391,31 +391,31 @@
   },
   {
     "ea": "0x73B8BE",
-    "line": "push    eax",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x73B8BF",
-    "line": "lea     edx, [esp+0ACh+var_48]",
+    "line": "lea     edx, [esp+0ACh+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x73B8C3",
-    "line": "push    edx",
+    "line": "push    edx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x73B8C4",
-    "line": "lea     ecx, [ebx+0DCh]",
+    "line": "lea     ecx, [ebx+0DCh]; this",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x73B8CA",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x73B8D1",
-    "line": "call    sub_710190",
+    "line": "call    NiMatrix3_ScaleTo",
     "mnemonic": "call",
     "size": 5
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x73B942",
-    "line": "lea     edx, [esp+0A0h+var_48]",
+    "line": "lea     edx, [esp+0A0h+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x73B961",
-    "line": "push    eax",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
@@ -655,19 +655,19 @@
   },
   {
     "ea": "0x73B966",
-    "line": "push    eax",
+    "line": "push    eax; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x73B967",
-    "line": "lea     ecx, [ebx+0DCh]",
+    "line": "lea     ecx, [ebx+0DCh]; this",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x73B96D",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },

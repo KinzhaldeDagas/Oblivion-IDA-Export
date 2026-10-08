@@ -1,1 +1,1 @@
-StdGITEntry_0
+typedef StdGITEntry StdGITEntry_0;

@@ -1,8 +1,9 @@
-PowerListEntry *__thiscall sub_4706E0(ActorAnimData *this, int a2)
+// ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].
+BSAnimGroupSequence *__thiscall ActorAnimData_GetNormalizedSequenceSlot(ActorAnimData *this, unsigned int slotSelector)
 {
-  if ( a2 == 5 )
-    return (PowerListEntry *)this->animSequences[0];
-  if ( a2 == 6 )
-    return (PowerListEntry *)this->animSequences[3];
-  return (PowerListEntry *)this->animSequences[a2];
+  if ( slotSelector == 5 ) /*0x4706e9*/
+    return this->animSequences[0]; /*0x470701*/
+  if ( slotSelector == 6 ) /*0x4706ee*/
+    return this->animSequences[3]; /*0x4706f5*/
+  return this->animSequences[slotSelector]; /*0x4706fc*/
 }

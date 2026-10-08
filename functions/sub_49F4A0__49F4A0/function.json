@@ -1,18 +1,31 @@
 {
-  "callees_count": 2,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 6,
+  "chunks": [
+    [
+      "0x49F4A0",
+      "0x49F4CD"
+    ]
+  ],
+  "chunks_sha256": "0af56add8d884341a18b51a129e256e15b39407e6ae23a6bde06c17087a98d0d",
+  "comment_regular": "Samples a BSAnimGroupSequence only while native controller state +0x44 is 1, 2, or 3. Passes sequence +0x48 plus ActorAnimData scheduler time +0x94 to NiControllerSequence_AdvanceTime with commit enabled.",
+  "comment_repeatable": "Samples a BSAnimGroupSequence only while native controller state +0x44 is 1, 2, or 3. Passes sequence +0x48 plus ActorAnimData scheduler time +0x94 to NiControllerSequence_AdvanceTime with commit enabled.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_49F4A0",
+  "display_name": "BSAnimGroupSequence_SampleUpdate",
   "end_ea": "0x49F4CD",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_49F4A0",
+  "name": "BSAnimGroupSequence_SampleUpdate",
   "segment": ".text",
   "sha256": "0af56add8d884341a18b51a129e256e15b39407e6ae23a6bde06c17087a98d0d",
   "size": 45,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x49F4A0",
+  "total_chunk_size": 45,
   "type": "double __thiscall(int this, float)",
   "xrefs_from_count": 15,
   "xrefs_to_count": 6

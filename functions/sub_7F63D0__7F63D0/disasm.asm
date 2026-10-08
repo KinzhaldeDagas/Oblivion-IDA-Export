@@ -297,7 +297,7 @@
 0x7F672D: push    edx
 0x7F672E: push    0
 0x7F6730: push    eax
-0x7F6731: call    sub_85E300
+0x7F6731: call    sub_85E300; Branch render helper used by dword_B42E90 mode 0x129. Uses/appends branch pass dword_B477F8 (index 26) and binds texture data from the current property/helper path.
 0x7F6736: retn    14h
 0x7F6739: mov     ecx, [esp+arg_C]
 0x7F673D: mov     edx, [esp+arg_8]
@@ -308,5 +308,5 @@
 0x7F674C: push    edx
 0x7F674D: push    0
 0x7F674F: push    eax
-0x7F6750: call    sub_85E160
+0x7F6750: call    sub_85E160; Branch render helper used by dword_B42E90 mode 0x122. Uses/appends branch pass dword_B477F4 (index 25), binds property texture plus canopy shadow map state.
 0x7F6755: retn    14h; jumptable 007F63FB default case, cases 25-46,49,50,52-83,85-94,96-105,107-116,118-129,131-143,145-156,158-169,171-183,185-196,198-209,211-222,224-229,232-237,239-251,253-266,268-274

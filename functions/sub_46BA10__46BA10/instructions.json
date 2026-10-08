@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x46BA10",
-    "line": "mov     eax, ds:0B33C18h",
+    "line": "mov     eax, ds:0B33C18h; Appends a six-byte empty CHUNK header (four-byte chunk ID plus zero 16-bit payload length) to the global TESForm save buffer.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x46BA54",
-    "line": "push    0; Size",
+    "line": "push    0; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -127,19 +127,19 @@
   },
   {
     "ea": "0x46BA5A",
-    "line": "push    0; Src",
+    "line": "push    0; source",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x46BA5C",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46BA5D",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },

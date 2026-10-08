@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 4,
-  "callers_count": 3,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x5852C0",
+      "0x585330"
+    ],
+    [
+      "0x9BF870",
+      "0x9BF89E"
+    ]
+  ],
+  "chunks_sha256": "39414283946d596cb9cc1e1b300c775e5b48d8da52638c24e4a48905dafda850",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_5852C0",
+  "comment_repeatable": "Verified: invokes TileTemplate::Clear, list destructor, then releases template name buffer. Caller frees template object separately.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "Tile::TileTemplate::Destroy",
   "end_ea": "0x585330",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_5852C0",
+  "name": "Tile::TileTemplate::Destroy",
   "segment": ".text",
   "sha256": "e2b79f51b3611e2ed3d31d6b4951707b7432b485cb4113983137b6d181efec46",
   "size": 112,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5852C0",
-  "type": "void __thiscall(unsigned int *this)",
-  "xrefs_from_count": 34,
+  "total_chunk_size": 158,
+  "type": "void __thiscall(OblivionTileTemplate *this)",
+  "xrefs_from_count": 48,
   "xrefs_to_count": 4
 }

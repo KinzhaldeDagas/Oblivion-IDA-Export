@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6199F0",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; Builds predicted aim point/angles using target torso height and ballistic solver; output rotations are wrapped individually to [-pi,pi].",
     "mnemonic": "sub",
     "size": 3
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x619A14",
-    "line": "call    sub_5E0660",
+    "line": "call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x619A59",
-    "line": "call    sub_6159C0",
+    "line": "call    Combat_PredictAimPoint_Setup",
     "mnemonic": "call",
     "size": 5
   },

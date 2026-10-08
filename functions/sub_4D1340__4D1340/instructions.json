@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x4D1344",
-    "line": "mov     ebp, [esp+0Ch+arg_0]",
+    "line": "mov     ebp, [esp+0Ch+file]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x4D13D2",
-    "line": "call    TESFile__NextGroup",
+    "line": "call    TESFile__NextGroup; MEF v20 fix: TESFile::NextGroup short-GRUP guard. Reject lengths below 0x14 before subtracting the group header and tail-calling TESFile_NextRecord.",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x4D146F",
-    "line": "mov     byte ptr [esp+18h+arg_0], 1",
+    "line": "mov     byte ptr [esp+18h+file], 1",
     "mnemonic": "mov",
     "size": 5
   },
@@ -670,12 +670,6 @@
     "line": "jmp     short loc_4D1484",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x4D147C",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 4
   },
   {
     "ea": "0x4D1480",
@@ -757,7 +751,7 @@
   },
   {
     "ea": "0x4D14AA",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -877,25 +871,25 @@
   },
   {
     "ea": "0x4D14E5",
-    "line": "mov     ecx, ds:0B33A98h",
+    "line": "mov     ecx, ds:0B33A98h; dataHandler",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4D14EB",
-    "line": "push    0",
+    "line": "push    0; firstFileLowFormFilter",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4D14ED",
-    "line": "push    ebp",
+    "line": "push    ebp; file",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D14EE",
-    "line": "call    TESDataHandler_LoadFormRecord",
+    "line": "call    TESDataHandler_LoadFormRecord; Verified TESDataHandler_LoadFormRecord behavior: when activeFileState.retainActiveFile is nonzero, newly loaded cells receive TESForm::SetFromActiveFile(1). This matches the flag's file-retention use; the flag's writer remains Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -913,7 +907,7 @@
   },
   {
     "ea": "0x4D14F7",
-    "line": "mov     byte ptr [esp+18h+arg_0], al",
+    "line": "mov     byte ptr [esp+18h+file], al",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1069,7 +1063,7 @@
   },
   {
     "ea": "0x4D1541",
-    "line": "mov     al, byte ptr [esp+18h+arg_0]",
+    "line": "mov     al, byte ptr [esp+18h+file]",
     "mnemonic": "mov",
     "size": 4
   },

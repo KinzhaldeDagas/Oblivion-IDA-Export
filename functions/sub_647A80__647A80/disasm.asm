@@ -91,10 +91,10 @@
 0x647B6E: push    ecx
 0x647B6F: mov     ecx, edi
 0x647B71: call    sub_566B30
-0x647B76: mov     ecx, [esi+2Ch]
-0x647B79: push    eax
-0x647B7A: call    sub_4D7E30
-0x647B7F: call    Double_To_SInt32
+0x647B76: mov     ecx, [esi+2Ch]; this
+0x647B79: push    eax; pointXYZ
+0x647B7A: call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.
+0x647B7F: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x647B84: mov     ecx, edi
 0x647B86: mov     ebp, eax
 0x647B88: call    sub_566DB0

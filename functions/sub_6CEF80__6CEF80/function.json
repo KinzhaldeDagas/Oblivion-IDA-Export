@@ -1,19 +1,32 @@
 {
-  "callees_count": 44,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 30,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_6CEF80",
+  "chunks": [
+    [
+      "0x6CEF80",
+      "0x6CF483"
+    ]
+  ],
+  "chunks_sha256": "1c6560dffb0bf60e8b1365851758ad9f84120a79a2d964c1dffede3c1ffe3ab5",
+  "comment_regular": "Oblivion: updates one accumulation item's 0x68-byte state (cached time, current transform, accumulated delta/reference state). Evaluates virtual +0x4C and handles forward time versus backward/wrap time using the interpolator range from virtual +0x80.",
+  "comment_repeatable": "Oblivion: updates one accumulation item's 0x68-byte state (cached time, current transform, accumulated delta/reference state). Evaluates virtual +0x4C and handles forward time versus backward/wrap time using the interpolator range from virtual +0x80.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "NiBlendAccumTransformInterpolator_UpdateItemAccumulation",
   "end_ea": "0x6CF483",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6CEF80",
+  "name": "NiBlendAccumTransformInterpolator_UpdateItemAccumulation",
   "segment": ".text",
   "sha256": "1c6560dffb0bf60e8b1365851758ad9f84120a79a2d964c1dffede3c1ffe3ab5",
   "size": 1283,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6CEF80",
-  "type": "void __thiscall(int this, unsigned __int8, float, int)",
+  "total_chunk_size": 1283,
+  "type": "void __thiscall(int this, char, float, int)",
   "xrefs_from_count": 428,
   "xrefs_to_count": 1
 }

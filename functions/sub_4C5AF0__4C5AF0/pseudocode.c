@@ -7,16 +7,16 @@ int __thiscall sub_4C5AF0(TESObjectCELL **this, float *a2)
   _BYTE v8[24]; // [esp+4h] [ebp-50h] BYREF
   int v9; // [esp+1Ch] [ebp-38h]
 
-  if ( sub_4C3030(this, (int)v8, a2, 0)
+  if ( sub_4C3030(this, (int)v8, a2, 0) /*0x4c5b2a*/
     && (v3 = (int *)*(this + 9)) != 0
     && *v3
     && (v4 = *v3, v5 = (int *)(*v3 + 4 * v9), *(_DWORD *)(v4 + 4 * v9))
     && (v6 = *v5, *(_WORD *)(v6 + 0xB6)) )
   {
-    return **(_DWORD **)(v6 + 0xB0);
+    return **(_DWORD **)(v6 + 0xB0); /*0x4c5b3a*/
   }
   else
   {
-    return 0;
+    return 0; /*0x4c5b43*/
   }
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4D63A0",
-    "line": "push    ebp",
+    "line": "push    ebp;",
     "mnemonic": "push",
     "size": 1
   },
@@ -241,19 +241,19 @@
   },
   {
     "ea": "0x4D641B",
-    "line": "push    1",
+    "line": "push    1; registerLights",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4D641D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D641F",
-    "line": "call    sub_4CB670",
+    "line": "call    TESObjectCELL_RegisterOrUnregisterAttachedLights; As the cell enters process level 5 and its scene node is attached, register ordinary attached light sources for every cell reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x4D642F",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x4D643E",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },

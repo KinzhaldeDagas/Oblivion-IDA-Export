@@ -41,3 +41,12 @@
 0x57778F: pop     esi
 0x577790: add     esp, 10h
 0x577793: retn    10h
+0x9BE510: mov     ecx, [ebp-10h]
+0x9BE513: jmp     j_??1?$NiTList@PAVCharData@FontManager@@@@UAE@XZ; NiTList<FontManager::CharData *>::~NiTList<FontManager::CharData *>(void)
+0x9BE518: mov     edx, [esp+arg_4]
+0x9BE51C: lea     eax, [edx-8]
+0x9BE51F: mov     ecx, [edx-0Ch]
+0x9BE522: xor     ecx, eax
+0x9BE524: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BE529: mov     eax, offset stru_AE7C54
+0x9BE52E: jmp     ___CxxFrameHandler3

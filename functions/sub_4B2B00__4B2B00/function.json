@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4B2B00",
+      "0x4B2B62"
+    ]
+  ],
+  "chunks_sha256": "ac7517005347c5aa21f7fc0f4d8ea15d6484ea32a0852e0415c3558c2b01cbe2",
+  "comment_regular": "Verified: chooses reference-specific model path if available, otherwise the form model path, then appends scale percent (GetScale()*100) to create the per-reference model-loader key.",
+  "comment_repeatable": "Verified: chooses reference-specific model path if available, otherwise the form model path, then appends scale percent (GetScale()*100) to create the per-reference model-loader key.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_4B2B00",
+  "display_name": "TESBoundObject_BuildReferenceModelPath",
   "end_ea": "0x4B2B62",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4B2B00",
+  "name": "TESBoundObject_BuildReferenceModelPath",
   "segment": ".text",
   "sha256": "ac7517005347c5aa21f7fc0f4d8ea15d6484ea32a0852e0415c3558c2b01cbe2",
   "size": 98,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4B2B00",
-  "type": "int __thiscall(void *this, TESObjectREFR *, char *)",
+  "total_chunk_size": 98,
+  "type": "int __thiscall(TESBoundObject *this, TESObjectREFR *reference, char *outPath)",
   "xrefs_from_count": 42,
   "xrefs_to_count": 3
 }

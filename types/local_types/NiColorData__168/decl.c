@@ -1,1 +1,1 @@
-NiColorData
+struct NiColorData;

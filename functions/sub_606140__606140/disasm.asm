@@ -3,15 +3,15 @@
 0x606143: mov     eax, [ecx+4]
 0x606146: cmp     eax, 5; switch 6 cases
 0x606149: fstp    [esp+4+var_4]
-0x60614C: ja      short def_60614E
+0x60614C: ja      short def_60614E; jumptable 0060614E default case
 0x60614E: jmp     ds:jpt_60614E[eax*4]; switch jump
 0x606155: mov     eax, [ecx+14h]; jumptable 0060614E case 0
 0x606158: test    eax, eax
 0x60615A: jnz     short loc_606161
 0x60615C: mov     eax, [ecx+18h]
 0x60615F: jmp     short loc_60616A
-0x606161: push    eax
-0x606162: call    sub_470520
+0x606161: push    eax; form
+0x606162: call    TESForm_GetValue
 0x606167: add     esp, 4
 0x60616A: test    eax, eax
 0x60616C: mov     [esp+4+var_4], eax
@@ -45,3 +45,6 @@
 0x6061C0: retn
 0x6061C1: fild    dword ptr ds:0B376A8h; jumptable 0060614E case 2
 0x6061C7: fstp    [esp+4+var_4]
+0x6061CA: fld     [esp+4+var_4]; jumptable 0060614E default case
+0x6061CD: pop     ecx
+0x6061CE: retn

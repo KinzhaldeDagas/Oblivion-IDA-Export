@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x61CAD8",
-    "line": "call    sub_615980",
+    "line": "call    CombatController_GetCachedTargetSurfaceDistance; Returns CombatController cached target surface distance at +0x184, computing it once when negative. The inherited EDI low-byte input belongs to this private compiler ABI and is deliberately retained.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x61CB06",
-    "line": "push    0",
+    "line": "push    0; outAngleDegrees",
     "mnemonic": "push",
     "size": 2
   },
@@ -193,25 +193,25 @@
   },
   {
     "ea": "0x61CB10",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x61CB15",
-    "line": "push    eax",
+    "line": "push    eax; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x61CB16",
-    "line": "push    edi",
+    "line": "push    edi; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x61CB17",
-    "line": "call    sub_6131D0",
+    "line": "call    Actor_IsFacingReferenceWithinCombatAngle; Computes the absolute XY heading difference from actor to target, normalizes across the 360-degree boundary, optionally returns degrees, and tests it against the combat-facing threshold game setting.",
     "mnemonic": "call",
     "size": 5
   },

@@ -22,7 +22,7 @@
 0x4F7BCA: test    eax, eax
 0x4F7BCC: jz      short loc_4F7BDD
 0x4F7BCE: mov     ecx, eax
-0x4F7BD0: call    TESClass__IsGuardClass
+0x4F7BD0: call    TESClass__IsGuardClass; TESClass::IsGuardClass reads classFlags at +0x60 bit 1.
 0x4F7BD5: test    al, al
 0x4F7BD7: jz      short loc_4F7BDD
 0x4F7BD9: fld1

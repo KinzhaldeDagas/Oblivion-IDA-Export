@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x660910",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; PlayerCharacter vtable +0x2CC pickup transaction for a world reference. Handles activation/ownership, optional direct merge into currently equipped AMMO, world-reference cleanup, and quiver refresh.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x660922",
-    "line": "push    edi",
+    "line": "push    edi; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x66092B",
-    "line": "call    edx",
+    "line": "call    edx; Player world pickup begins by virtual sourceRef->GetBaseForm(). For a landed thrown proxy this is the AMMO assigned at 0x60CCA5, not the originating WEAP.",
     "mnemonic": "call",
     "size": 2
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x660955",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x660988",
-    "line": "call    sub_5E03C0",
+    "line": "call    sub_5E03C0; 3DTheft decode 2026-05-17: Actor wrapper for process vfunc +0xD0; writes the resolved procedure target/follow reference into the actor process.",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x660998",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x6609A2",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x6609AE",
-    "line": "call    TESForm_GetOverrideFile",
+    "line": "call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.",
     "mnemonic": "call",
     "size": 5
   },
@@ -415,13 +415,13 @@
   },
   {
     "ea": "0x6609DE",
-    "line": "mov     ecx, esi; this",
+    "line": "mov     ecx, esi; reference",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6609E0",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x660A00",
-    "line": "mov     ebx, eax",
+    "line": "mov     ebx, eax; Ownership handling explicitly recognizes ArrowProjectile references: projectile pickups qualify for owner removal rather than ordinary stolen-owner handling.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -493,25 +493,25 @@
   },
   {
     "ea": "0x660A08",
-    "line": "push    1",
+    "line": "push    1; useFactionOwnership",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x660A0A",
-    "line": "push    edi",
+    "line": "push    edi; actorReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x660A0B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; reference",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x660A0D",
-    "line": "call    TESOBjectREFR_IsOwnedBy",
+    "line": "call    TESObjectREFR_IsOwnedBy; Verified ownership predicate and flag meaning: resolve the effective owner; accept exact equality with the actor's template/base form. When the owner differs, a nonzero ownership-global value can permit the access. With useFactionOwnership=true, a Faction owner is instead checked against the actor base's faction rank and the reference's effective required rank; callers passing false skip that faction-rank path. Direct callers include many `true` paths and ContainerExtraData_RemoveForm's item-sweep call with false. Fallout's TESObjectREFR::IsAnOwner/DoorLock::IsAnOwner also expose a `useFaction` boolean, but its implementation uses actor faction membership and has different rank/global handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x660A39",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x660A6A",
-    "line": "mov     ecx, [esp+18h+arg_4]",
+    "line": "mov     ecx, [esp+18h+arg1]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -751,7 +751,7 @@
   },
   {
     "ea": "0x660A90",
-    "line": "mov     eax, [esp+18h+arg_4]",
+    "line": "mov     eax, [esp+18h+arg1]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x660ABF",
-    "line": "lea     ecx, [esi+44h]",
+    "line": "lea     ecx, [esi+44h]; this",
     "mnemonic": "lea",
     "size": 3
   },
@@ -877,13 +877,13 @@
   },
   {
     "ea": "0x660AC4",
-    "line": "push    ebp",
+    "line": "push    ebp; owner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x660AC5",
-    "line": "call    ExtraDataList__SetOrRemoveExtraOwnership",
+    "line": "call    ExtraDataList__SetOrRemoveExtraOwnership; Verified XOWN mutator: update ExtraOwnership.ownerForm when owner is nonnull; remove the XOWN extra when null; otherwise allocate a 16-byte ExtraOwnership payload and add it to the list. During plugin load the initial dword is a FormID temporarily held in the same union slot; ExtraDataList_ResolveLoadedFormIDs converts it to TESForm*. TESObjectCELL_LinkForm removes direct XOWN, XRNK, and XGLB from an exterior cell when an owner exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1021,7 +1021,7 @@
   },
   {
     "ea": "0x660B0D",
-    "line": "jnz     loc_660BD7",
+    "line": "jnz     loc_660BD7; Equipped-AMMO fast merge: requires picked reference base form to equal the currently equipped AMMO form. On success this path bypasses both form-based ContainerExtraData_AddItem (0x48F7C0) and reference-based ContainerExtraData_AddItemFromWorldReference (0x48AA10).",
     "mnemonic": "jnz",
     "size": 6
   },
@@ -1063,7 +1063,7 @@
   },
   {
     "ea": "0x660B24",
-    "line": "call    sub_4847C0",
+    "line": "call    EntryData_HasDefaultContainerExtraList",
     "mnemonic": "call",
     "size": 5
   },
@@ -1081,13 +1081,13 @@
   },
   {
     "ea": "0x660B2D",
-    "line": "lea     ecx, [esi+44h]",
+    "line": "lea     ecx, [esi+44h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x660B30",
-    "line": "call    ExtraDataList_GetOwner",
+    "line": "call    ExtraDataList_GetOwner; If equipped EntryData contains a default-for-container extra list, an unowned picked reference is not fast-merged; owned references or entries without that default list may proceed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1159,13 +1159,13 @@
   },
   {
     "ea": "0x660B59",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x660B5B",
-    "line": "call    TESHealthForm_GetHealth",
+    "line": "call    TESHealthForm_GetHealth; Read equipped EntryData +0x04 count field (the callee is a trivial +4 accessor despite its inherited/misapplied type name), then add picked reference ExtraCount.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1195,7 +1195,7 @@
   },
   {
     "ea": "0x660B6D",
-    "line": "push    ebp",
+    "line": "push    ebp; mergedCount was pushed before GetEquippedAmmoData(process,true). That virtual consumes only its own boolean argument, leaving mergedCount on the stack for EntryData_SetCount.",
     "mnemonic": "push",
     "size": 1
   },
@@ -1207,19 +1207,19 @@
   },
   {
     "ea": "0x660B70",
-    "line": "call    edx",
+    "line": "call    edx; Calling-convention pipeline: total count remains on stack across GetEquippedAmmoData(process,true), then 0x60D020 consumes it and writes equipped EntryData +0x04 = total.",
     "mnemonic": "call",
     "size": 2
   },
   {
     "ea": "0x660B72",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x660B74",
-    "line": "call    sub_60D020",
+    "line": "call    Shared_SetDwordAtOffset04; Writes the previously stacked mergedCount into the selected equipped-AMMO EntryData+0x04; no health calculation occurs in this branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1285,7 +1285,7 @@
   },
   {
     "ea": "0x660B9A",
-    "line": "mov     [esp+18h+var_8], eax",
+    "line": "mov     [esp+18h+form], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1309,19 +1309,19 @@
   },
   {
     "ea": "0x660BAA",
-    "line": "mov     eax, [esp+18h+var_8]",
+    "line": "mov     eax, [esp+18h+form]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x660BAE",
-    "line": "push    edx",
+    "line": "push    edx; countDelta",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x660BAF",
-    "line": "push    eax",
+    "line": "push    eax; form",
     "mnemonic": "push",
     "size": 1
   },
@@ -1333,13 +1333,13 @@
   },
   {
     "ea": "0x660BB5",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x660BB7",
-    "line": "call    sub_487350",
+    "line": "call    ExtraContainerChanges_AdjustCountForForm; Adjust PlayerCharacter ContainerChanges for the equipped AMMO form by the picked reference ExtraCount.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1393,7 +1393,7 @@
   },
   {
     "ea": "0x660BD0",
-    "line": "call    ExtraDataList_SetExtraCount",
+    "line": "call    ExtraDataList_SetExtraCount; Write the merged total into the selected equipped-AMMO ExtraDataList and mark fast-merge success, suppressing both ordinary inventory-add boundaries. A proxy-to-WEAP recovery hook must account for this separate path if it can become reachable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1483,43 +1483,43 @@
   },
   {
     "ea": "0x660C04",
-    "line": "mov     edx, [esp+18h+arg_4]",
+    "line": "mov     edx, [esp+18h+arg1]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x660C08",
-    "line": "push    0",
+    "line": "push    0; forceWorn",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x660C0A",
-    "line": "push    0",
+    "line": "push    0; unusedArg",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x660C0C",
-    "line": "push    edx",
+    "line": "push    edx; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x660C0D",
-    "line": "push    esi",
+    "line": "push    esi; sourceRef",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x660C0E",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x660C10",
-    "line": "call    sub_4DDC40",
+    "line": "call    TESObjectREFR_AddItemFromWorldReference; Player world-pickup branch uses the reference-based insertion path, not form-based ContainerExtraData_AddItem.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1591,43 +1591,43 @@
   },
   {
     "ea": "0x660C2D",
-    "line": "mov     eax, [esp+18h+arg_4]",
+    "line": "mov     eax, [esp+18h+arg1]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x660C31",
-    "line": "push    0",
+    "line": "push    0; forceWorn",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x660C33",
-    "line": "push    0",
+    "line": "push    0; unusedArg",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x660C35",
-    "line": "push    eax",
+    "line": "push    eax; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x660C36",
-    "line": "push    esi",
+    "line": "push    esi; sourceRef",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x660C37",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x660C39",
-    "line": "call    sub_4DDC40",
+    "line": "call    TESObjectREFR_AddItemFromWorldReference; Player world-pickup branch uses the reference-based insertion path, preserving sourceRef->GetBaseForm().",
     "mnemonic": "call",
     "size": 5
   },
@@ -1675,31 +1675,31 @@
   },
   {
     "ea": "0x660C4D",
-    "line": "mov     eax, [edi+104h]",
+    "line": "mov     eax, [edi+104h]; After recovering/adding the relevant equipped AMMO form, refresh third-person and first-person quiver presentation from the new container count.",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x660C53",
-    "line": "push    0",
+    "line": "push    0; quiverNode",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x660C55",
-    "line": "push    eax",
+    "line": "push    eax; animData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x660C56",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x660C58",
-    "line": "call    sub_5F8300",
+    "line": "call    Actor_RefreshQuiverArrowVisibility; Recomputes Quiver Arrow:0/ArrowN visibility from the current equipped-AMMO inventory count. animData selects the perspective/cache and quiverNode may supply an already resolved node.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1711,25 +1711,25 @@
   },
   {
     "ea": "0x660C63",
-    "line": "push    0",
+    "line": "push    0; quiverNode",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x660C65",
-    "line": "push    ecx",
+    "line": "push    ecx; animData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x660C66",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x660C68",
-    "line": "call    sub_5F8300",
+    "line": "call    Actor_RefreshQuiverArrowVisibility; Second player perspective quiver refresh after recovered AMMO inventory reconciliation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1813,49 +1813,49 @@
   },
   {
     "ea": "0x660C8C",
-    "line": "mov     ecx, [esp+18h+arg_8]",
+    "line": "mov     ecx, [esp+18h+arg2]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x660C90",
-    "line": "mov     edx, [esp+18h+arg_4]",
+    "line": "mov     edx, [esp+18h+arg1]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x660C94",
-    "line": "push    0",
+    "line": "push    0; forceWorn",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x660C96",
-    "line": "push    ecx",
+    "line": "push    ecx; unusedArg",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x660C97",
-    "line": "push    edx",
+    "line": "push    edx; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x660C98",
-    "line": "push    esi",
+    "line": "push    esi; sourceRef",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x660C99",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x660C9B",
-    "line": "call    sub_4DDC40",
+    "line": "call    TESObjectREFR_AddItemFromWorldReference; Player world-pickup branch uses the reference-based insertion path; an AMMO-backed thrown reference therefore yields proxy AMMO without a companion hook here.",
     "mnemonic": "call",
     "size": 5
   },

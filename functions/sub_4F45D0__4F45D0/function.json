@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4F45D0",
+      "0x4F4634"
+    ]
+  ],
+  "chunks_sha256": "8eb5a0f60613dc058c872b902c37e3772c0f07fc128bc987e5bb36b399f13222",
+  "comment_regular": "GetBaseAV eval/helper. Requires an actor-like reference, reads base calculated AV, writes the numeric result, and prints to console when active.",
+  "comment_repeatable": "GetBaseAV eval/helper. Requires an actor-like reference, reads base calculated AV, writes the numeric result, and prints to console when active.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_4F45D0",
+  "display_name": "Cmd_GetBaseAV_EvalOrConsole",
   "end_ea": "0x4F4634",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4F45D0",
+  "name": "Cmd_GetBaseAV_EvalOrConsole",
   "segment": ".text",
   "sha256": "8eb5a0f60613dc058c872b902c37e3772c0f07fc128bc987e5bb36b399f13222",
   "size": 100,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4F45D0",
-  "type": "char __cdecl(int *, int, int, double *)",
+  "total_chunk_size": 100,
+  "type": "char __usercall@<al>(int@<ebx>, int *, int, int, double *)",
   "xrefs_from_count": 41,
-  "xrefs_to_count": 2
+  "xrefs_to_count": 1
 }

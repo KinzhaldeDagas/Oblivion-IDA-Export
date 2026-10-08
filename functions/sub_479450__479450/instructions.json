@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x479450",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Loads and clones a model for an actor equipment/add-on slot, binds actor-specific resources, applies the stock attachment transform, attaches through Prn metadata, and initializes render property/dynamic-effect state.",
     "mnemonic": "push",
     "size": 2
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x479485",
-    "line": "mov     edi, [esp+40h+arg_8]",
+    "line": "mov     edi, [esp+40h+actorRef]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x479491",
-    "line": "mov     eax, [esp+40h+arg_C]",
+    "line": "mov     eax, [esp+40h+skeletonRoot]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -205,13 +205,13 @@
   },
   {
     "ea": "0x4794B9",
-    "line": "call    sub_439EB0",
+    "line": "call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4794BE",
-    "line": "lea     ecx, [esp+40h+var_28]",
+    "line": "lea     ecx, [esp+40h+var_28]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x4794C4",
-    "line": "call    sub_478B90",
+    "line": "call    OB_NiCloningProcess_ctor",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x479522",
-    "line": "mov     edx, [esp+40h+arg_4]",
+    "line": "mov     edx, [esp+40h+slot]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x479542",
-    "line": "push    offset dword_B35288",
+    "line": "push    0B35288h",
     "mnemonic": "push",
     "size": 5
   },
@@ -649,43 +649,43 @@
   },
   {
     "ea": "0x4795AC",
-    "line": "push    0",
+    "line": "push    0; unusedTrailing",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4795AE",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; modelType",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4795B0",
-    "line": "push    0",
+    "line": "push    0; unusedContext",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4795B2",
-    "line": "push    ebx",
+    "line": "push    ebx; sourceModelRoot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4795B3",
-    "line": "push    ebp",
+    "line": "push    ebp; modelRoot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4795B4",
-    "line": "push    eax",
+    "line": "push    eax; skeletonRoot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4795B5",
-    "line": "call    sub_479140",
+    "line": "call    AttachModelUsingPrnExtraData; Six-argument cdecl helper (all ten native callers push 6 arguments; unusedContext and unusedTrailing are not read). Reads NiStringExtraData 'Prn' from sourceModelRoot, falling back to modelRoot; resolves that exact parent in skeletonRoot and attaches modelRoot. For modelType==7 it forces Prn string byte 6 to 'L' for lookup, then writes it back to 'R'. It then finds exact-name 'Scb' inside modelRoot and attaches that object separately to the same parent, reparenting Scb as modelRoot's sibling before refreshing property/effect state. Missing creature parents invoke the narrow FadeNode-chain Scb removal. Every exit returns the bool result of sub_88D000(modelRoot,1,1), which is not proven to be general attachment success.",
     "mnemonic": "call",
     "size": 5
   },
@@ -739,7 +739,7 @@
   },
   {
     "ea": "0x4795D2",
-    "line": "mov     edi, [esp+40h+arg_4]",
+    "line": "mov     edi, [esp+40h+slot]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -895,7 +895,7 @@
   },
   {
     "ea": "0x47961C",
-    "line": "mov     ecx, [esp+40h+arg_8]",
+    "line": "mov     ecx, [esp+40h+actorRef]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1063,7 +1063,7 @@
   },
   {
     "ea": "0x479664",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1360,5 +1360,71 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9AF0E0",
+    "line": "lea     ecx, [ebp-28h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF0E3",
+    "line": "jmp     sub_4781A0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF0E8",
+    "line": "lea     ecx, [ebp-2Ch]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF0EB",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF0F0",
+    "line": "mov     edx, [esp+slot]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AF0F4",
+    "line": "lea     eax, [edx-30h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF0F7",
+    "line": "mov     ecx, [edx-34h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF0FA",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AF0FC",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF101",
+    "line": "mov     eax, offset stru_ADB770",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF106",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

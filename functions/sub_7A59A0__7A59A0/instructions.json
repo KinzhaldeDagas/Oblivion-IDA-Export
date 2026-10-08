@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A59A0",
-    "line": "push    ebp",
+    "line": "push    ebp; Exception-safe uninitialized fill of count compact leaf textures. The normal path returns; the SEH landing path destroys the constructed prefix and rethrows.",
     "mnemonic": "push",
     "size": 1
   },
@@ -97,13 +97,13 @@
   },
   {
     "ea": "0x7A59CB",
-    "line": "mov     esi, [ebp+arg_0]",
+    "line": "mov     esi, [ebp+destination]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A59CE",
-    "line": "mov     edi, [ebp+arg_4]",
+    "line": "mov     edi, [ebp+count]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x7A59E4",
-    "line": "mov     [ebp+arg_4], esi",
+    "line": "mov     [ebp+count], esi",
     "mnemonic": "mov",
     "size": 3
   },
@@ -175,25 +175,25 @@
   },
   {
     "ea": "0x7A59F2",
-    "line": "mov     eax, [ebp+arg_8]",
+    "line": "mov     eax, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A59F5",
-    "line": "push    eax",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A59F6",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A59F8",
-    "line": "call    sub_7A2850",
+    "line": "call    OB_SIdvLeafTexture_CopyCtor_010201A0; Deep copy-constructs one compact 0x54 SIdvLeafTexture, including initialization and assignment of its owned 28-byte small string.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x7A5A06",
-    "line": "mov     [ebp+arg_0], esi",
+    "line": "mov     [ebp+destination], esi",
     "mnemonic": "mov",
     "size": 3
   },
@@ -229,13 +229,13 @@
   },
   {
     "ea": "0x7A5A0B",
-    "line": "mov     esi, [ebp+var_14]",
+    "line": "mov     esi, [ebp+var_14]; SEH-only cleanup landing path: destroy the prefix already fill-constructed, then rethrow. Normal flow branches to 0x7A5A30.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A5A0E",
-    "line": "mov     edi, [ebp+arg_0]",
+    "line": "mov     edi, [ebp+destination]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x7A5A18",
-    "line": "push    esi",
+    "line": "push    esi; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x7A5A1B",
-    "line": "call    sub_7A3440",
+    "line": "call    OB_SIdvLeafTexture_Destroy_010201A0; Destroys one compact SIdvLeafTexture by releasing its filename only when the 28-byte small string is heap-backed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -370,5 +370,89 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CCBE0",
+    "line": "mov     eax, [ebp+count]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCBE3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CCBE4",
+    "line": "mov     ecx, [ebp+var_18]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCBE7",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CCBE8",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCBED",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCBF0",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CCBF1",
+    "line": "mov     edx, [esp-4+count]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CCBF5",
+    "line": "lea     eax, [edx+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCBF8",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCBFB",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CCBFD",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCC02",
+    "line": "mov     eax, offset stru_AF5F90",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCC07",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

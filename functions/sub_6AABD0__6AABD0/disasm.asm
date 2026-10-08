@@ -243,7 +243,7 @@
 0x6AAF54: add     esp, 0Ch
 0x6AAF57: mov     eax, [esp+220h+var_11C]
 0x6AAF5E: push    eax
-0x6AAF5F: call    FormHeapFree
+0x6AAF5F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6AAF64: add     esp, 4
 0x6AAF67: push    0; fuClose
 0x6AAF69: push    esi; hmmio
@@ -347,7 +347,7 @@
 0x6AB0BE: mov     [eax], dx
 0x6AB0C1: mov     eax, [esp+220h+var_11C]
 0x6AB0C8: push    eax
-0x6AB0C9: call    FormHeapFree
+0x6AB0C9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6AB0CE: mov     ax, word ptr [esp+224h+var_208]
 0x6AB0D3: add     esp, 4
 0x6AB0D6: pop     ebx
@@ -361,7 +361,7 @@
 0x6AB0EE: retn    10h
 0x6AB0F1: mov     ecx, [esp+220h+var_11C]
 0x6AB0F8: push    ecx
-0x6AB0F9: call    FormHeapFree
+0x6AB0F9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6AB0FE: mov     eax, [esp+224h+var_20C]
 0x6AB102: mov     ecx, [esp+224h+var_210]
 0x6AB106: mov     edx, [ebp+0]

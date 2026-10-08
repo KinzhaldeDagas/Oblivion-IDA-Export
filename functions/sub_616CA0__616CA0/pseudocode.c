@@ -1,58 +1,59 @@
+// Applies the CombatController-selected poison item at +0xA4 to the equipped weapon when it has neither poison nor enchantment, removes the consumed poison item, and clears the selection when empty. Private EBP-carried state is preserved in the type.
 void __usercall sub_616CA0(int a1@<ecx>, char a2@<bpl>, double a3@<st2>, double a4@<st1>, double a5@<st0>)
 {
-  _DWORD *v7; // eax
-  int v8; // eax
-  ExtraDataList ***v9; // ebx
-  int v10; // edi
-  _DWORD *v11; // ecx
-  int v12; // edi
-  CHAR *v13; // eax
+  _DWORD *v6; // eax
+  int v7; // eax
+  ExtraDataList ***v8; // ebx
+  int v9; // edi
+  _DWORD *v10; // ecx
+  int v11; // edi
+  CHAR *v12; // eax
   char *Name; // eax
-  int v15; // eax
-  BSExtraDataVtbl *v16; // eax
-  const char *v17; // [esp-Ch] [ebp-10h]
+  int v14; // eax
+  BSExtraDataVtbl *v15; // eax
+  const char *v16; // [esp-Ch] [ebp-10h]
 
-  v7 = *(_DWORD **)(a1 + 0xA4);
-  if ( v7 )
+  v6 = *(_DWORD **)(a1 + 0xA4); /*0x616ca3*/
+  if ( v6 ) /*0x616cab*/
   {
-    if ( *v7 )
+    if ( *v6 ) /*0x616cb1*/
     {
-      v8 = (*(int (__thiscall **)(_DWORD, int))(**(_DWORD **)(*(_DWORD *)(a1 + 0x3C) + 0x58) + 0xEC))(
+      v7 = (*(int (__thiscall **)(_DWORD, int))(**(_DWORD **)(*(_DWORD *)(a1 + 0x3C) + 0x58) + 0xEC))( /*0x616ccc*/
              *(_DWORD *)(*(_DWORD *)(a1 + 0x3C) + 0x58),
              1);
-      v9 = (ExtraDataList ***)v8;
-      if ( v8 )
-        v10 = *(_DWORD *)(v8 + 8);
+      v8 = (ExtraDataList ***)v7; /*0x616cce*/
+      if ( v7 ) /*0x616cd2*/
+        v9 = *(_DWORD *)(v7 + 8); /*0x616cd4*/
       else
-        v10 = 0;
-      if ( v10 )
+        v9 = 0; /*0x616cd9*/
+      if ( v9 ) /*0x616cdd*/
       {
-        if ( !sub_484DF0((ExtraDataList ***)v8) && !*(_DWORD *)(v10 + 0x64) )
+        if ( !EquippedEntryData_GetPoison((ExtraDataList ***)v7) && !*(_DWORD *)(v9 + 0x64) ) /*0x616cf2*/
         {
-          v11 = *(_DWORD **)(a1 + 0xA4);
-          if ( *v11 )
-            v12 = *v11 - 0x24;
+          v10 = *(_DWORD **)(a1 + 0xA4); /*0x616cfb*/
+          if ( *v10 ) /*0x616d01*/
+            v11 = *v10 - 0x24; /*0x616d07*/
           else
-            v12 = 0;
-          if ( byte_B3B908 )
+            v11 = 0; /*0x616d0c*/
+          if ( unk_B3B908 ) /*0x616d0e*/
           {
-            v13 = *(CHAR **)(v12 + 0x28);
-            if ( !v13 )
-              v13 = EmptyString;
-            v17 = v13;
-            Name = TESObjectREFR_GetName(*(TESObjectREFR **)(a1 + 0x3C));
-            Interface_ConsolePrint("%.20s poisons current weapon with %s!", Name, v17);
+            v12 = *(CHAR **)(v11 + 0x28); /*0x616d17*/
+            if ( !v12 ) /*0x616d1c*/
+              v12 = EmptyString; /*0x616d1e*/
+            v16 = v12; /*0x616d26*/
+            Name = TESObjectREFR_GetName(*(TESObjectREFR **)(a1 + 0x3C)); /*0x616d27*/
+            Interface_ConsolePrint("%.20s poisons current weapon with %s!", Name, v16); /*0x616d32*/
           }
-          v15 = **(_DWORD **)(a1 + 0xA4);
-          if ( v15 )
-            v16 = (BSExtraDataVtbl *)(v15 - 0x24);
+          v14 = **(_DWORD **)(a1 + 0xA4); /*0x616d40*/
+          if ( v14 ) /*0x616d44*/
+            v15 = (BSExtraDataVtbl *)(v14 - 0x24); /*0x616d46*/
           else
-            v16 = 0;
-          sub_484E20(v9, a2, a3, a4, a5, v16);
-          sub_67F100(*(_DWORD **)(a1 + 0xA4));
-          (*(void (__thiscall **)(_DWORD, int, _DWORD, int, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, int, _DWORD))(**(_DWORD **)(a1 + 0x3C) + 0x100))(
+            v15 = 0; /*0x616d4b*/
+          sub_484E20(v8, a2, a3, a4, a5, v15); /*0x616d50*/
+          BSSimpleList_PopHeadWithoutPayloadFree(*(_DWORD **)(a1 + 0xA4)); /*0x616d5b*/
+          (*(void (__thiscall **)(_DWORD, int, _DWORD, int, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, int, _DWORD))(**(_DWORD **)(a1 + 0x3C) + 0x100))( /*0x616d7e*/
             *(_DWORD *)(a1 + 0x3C),
-            v12,
+            v11,
             0,
             1,
             0,
@@ -62,10 +63,10 @@ void __usercall sub_616CA0(int a1@<ecx>, char a2@<bpl>, double a3@<st2>, double 
             0,
             1,
             0);
-          if ( !**(_DWORD **)(a1 + 0xA4) )
+          if ( !**(_DWORD **)(a1 + 0xA4) ) /*0x616d86*/
           {
-            FormHeapFree(*(_DWORD *)(a1 + 0xA4));
-            *(_DWORD *)(a1 + 0xA4) = 0;
+            FormHeapFree(*(_DWORD *)(a1 + 0xA4)); /*0x616d8c*/
+            *(_DWORD *)(a1 + 0xA4) = 0; /*0x616d94*/
           }
         }
       }

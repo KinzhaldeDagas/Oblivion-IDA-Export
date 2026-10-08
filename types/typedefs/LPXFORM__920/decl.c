@@ -1,1 +1,1 @@
-LPXFORM
+typedef tagXFORM *LPXFORM;

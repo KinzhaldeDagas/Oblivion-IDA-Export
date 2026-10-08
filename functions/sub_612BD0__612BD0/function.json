@@ -1,18 +1,31 @@
 {
-  "callees_count": 6,
-  "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 5,
+  "chunks": [
+    [
+      "0x612BD0",
+      "0x612C2B"
+    ]
+  ],
+  "chunks_sha256": "3864472d018b60f74aae9e8e492385732f69bd330fb67ca7089fbef55397a7a3",
+  "comment_regular": "Attempts to start the selected attack animation group; on success it saves the prior mode, sets combat mode +0x74 to 0, and records the chosen attack group at +0x50. Private register-carried inputs are retained.",
+  "comment_repeatable": "Attempts to start the selected attack animation group; on success it saves the prior mode, sets combat mode +0x74 to 0, and records the chosen attack group at +0x50. Private register-carried inputs are retained.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_612BD0",
+  "display_name": "CombatController_TryStartAttackAction",
   "end_ea": "0x612C2B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_612BD0",
+  "name": "CombatController_TryStartAttackAction",
   "segment": ".text",
   "sha256": "3864472d018b60f74aae9e8e492385732f69bd330fb67ca7089fbef55397a7a3",
   "size": 91,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x612BD0",
+  "total_chunk_size": 91,
   "type": "void __userpurge(int@<ecx>, int@<ebx>, int@<ebp>, double@<st1>, double@<st0>, int, char)",
   "xrefs_from_count": 37,
   "xrefs_to_count": 5

@@ -12,7 +12,7 @@
 0x557098: jb      short loc_5570A6
 0x55709A: mov     eax, [esi-14h]
 0x55709D: push    eax
-0x55709E: call    FormHeapFree
+0x55709E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5570A3: add     esp, 4
 0x5570A6: mov     dword ptr [esi], 0Fh
 0x5570AC: mov     [esi-4], ebx

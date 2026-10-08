@@ -1,5 +1,8 @@
 // attributes: thunk
-void __thiscall sub_69E2F0(_DWORD *this, int a2, TESObjectREFR *a3)
+void __thiscall MagicHitEffect_SetParentCellFromTarget_Thunk(
+        MagicHitEffect *this,
+        TESObjectREFR *linkContext,
+        TESChildCELL *targetReference)
 {
-  sub_69D960(this, a2, a3);
+  MagicHitEffect_SetParentCellFromTarget(this, linkContext, targetReference); /*0x69e2f0*/
 }

@@ -8,5 +8,5 @@
 0x5964C8: test    eax, eax
 0x5964CA: jz      short locret_5964D3
 0x5964CC: mov     ecx, eax; int
-0x5964CE: jmp     sub_584740
+0x5964CE: jmp     Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.
 0x5964D3: retn

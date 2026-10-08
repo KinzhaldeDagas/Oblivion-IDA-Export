@@ -1,4 +1,4 @@
-0x410310: mov     eax, OSGlobals
+0x410310: mov     eax, ds:0B33398h
 0x410315: cmp     dword ptr [eax+24h], 0
 0x410319: jz      short locret_410333
 0x41031B: cmp     bSoundEnabled_Audio, 0

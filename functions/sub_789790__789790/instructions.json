@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x789790",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+source]; Oblivion IdvFileError copy constructor: copies the binary runtime_error base/message then installs IdvFileError vftable.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x789795",
-    "line": "push    eax; struct std::exception *",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x789798",
-    "line": "call    sub_6F85B0",
+    "line": "call    OB_std_runtime_error_CopyCtor_010201A0; Oblivion runtime_error copy constructor: copies the std::exception base, installs runtime_error vftable, initializes the embedded 28-byte SSO string, and copies the source message.",
     "mnemonic": "call",
     "size": 5
   },

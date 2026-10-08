@@ -1,29 +1,29 @@
-void __thiscall SunDamageEffect_PostLink(volatile LONG ***this, int a2)
+void __thiscall SunDamageEffect_PostLink(volatile LONG ***this, TESObjectREFR *linkContext)
 {
   float v3; // [esp+Ch] [ebp-Ch]
-  float v4; // [esp+1Ch] [ebp+4h]
-  float v5; // [esp+1Ch] [ebp+4h]
-  float v6; // [esp+1Ch] [ebp+4h]
+  float linkContexta; // [esp+1Ch] [ebp+4h]
+  float linkContextb; // [esp+1Ch] [ebp+4h]
+  float linkContextc; // [esp+1Ch] [ebp+4h]
 
-  ActiveEffect_Base_PostLink(this, a2);
-  if ( *((_BYTE *)this + 0x10) )
+  ActiveEffect_Base_PostLink((ActiveEffect *)this, linkContext); /*0x6a6d18*/
+  if ( *((_BYTE *)this + 0x10) ) /*0x6a6d1d*/
   {
-    if ( *((float *)this + 0xE) > 1.0 )
+    if ( *((float *)this + 0xE) > 1.0 ) /*0x6a6d31*/
     {
-      if ( UseHDR )
+      if ( OB_RendererGlobalState_010201A0.bHighDynamicRangeMode ) /*0x6a6d37*/
       {
-        v4 = *((float *)this + 0xE) / dbl_A563D0;
-        if ( v4 >= dbl_A2F928 )
-          flt_B2C7A4 = v4;
+        linkContexta = *((float *)this + 0xE) / kFaceGenVariationScale1_5; /*0x6a6d49*/
+        if ( linkContexta >= dbl_A2F928 ) /*0x6a6d5c*/
+          flt_B2C7A4 = linkContexta; /*0x6a6d6d*/
         else
-          flt_B2C7A4 = 1.0;
+          flt_B2C7A4 = 1.0; /*0x6a6d61*/
       }
       else
       {
-        v5 = flt_B06D64 * *((float *)this + 0xE);
-        v3 = v5;
-        v6 = flt_B06D5C * *((float *)this + 0xE);
-        sub_7B4830(dword_B06D3C, dword_B06D44, flt_B06D4C, v6, v3, dword_B06D54);
+        linkContextb = flt_B06D64 * *((float *)this + 0xE); /*0x6a6d96*/
+        v3 = linkContextb; /*0x6a6d9e*/
+        linkContextc = flt_B06D5C * *((float *)this + 0xE); /*0x6a6dab*/
+        sub_7B4830(dword_B06D3C, dword_B06D44, flt_B06D4C, linkContextc, v3, dword_B06D54); /*0x6a6dc2*/
       }
     }
   }

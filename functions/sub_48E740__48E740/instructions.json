@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x48E763",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x48E87D",
-    "line": "push    eax; a2",
+    "line": "push    eax; baseForm",
     "mnemonic": "push",
     "size": 1
   },
@@ -1159,7 +1159,7 @@
   },
   {
     "ea": "0x48E987",
-    "line": "push    0; a2",
+    "line": "push    0; baseForm",
     "mnemonic": "push",
     "size": 2
   },

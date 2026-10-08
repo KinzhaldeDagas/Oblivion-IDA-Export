@@ -7,7 +7,7 @@
 0x5367C1: push    ebp
 0x5367C2: push    esi
 0x5367C3: push    edi
-0x5367C4: call    sub_47FAC0
+0x5367C4: call    NiAVObject_GetBhkCollisionObject; ODismemberment: authoritative NiAVObject collision getter. Reads NiAVObject+0xA8 and accepts objects whose class chain includes bhkCollisionObject.
 0x5367C9: mov     ebx, [esp+1Ch+arg_8]
 0x5367CD: mov     ebp, [esp+1Ch+arg_4]
 0x5367D1: add     esp, 4
@@ -53,7 +53,7 @@
 0x536833: push    ecx
 0x536834: mov     ecx, esi
 0x536836: call    edx
-0x536838: mov     eax, dword ptr [esp+18h+var_8]
+0x536838: mov     eax, [esp+18h+var_8]
 0x53683C: add     [ebp+0], eax
 0x53683F: jmp     short loc_53685F
 0x536841: mov     edx, [esi]

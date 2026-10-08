@@ -1,146 +1,145 @@
-int __cdecl sub_934990(
-        _DWORD ***a1,
+_DWORD *__cdecl sub_934990(
+        int *a1,
         int **a2,
-        void (__cdecl *a3)(int **, unsigned __int8 *, unsigned __int8 *),
+        int (__cdecl *a3)(int **, int, int),
         int a4,
-        int a5,
-        int a6,
+        _DWORD *a5,
+        _DWORD *a6,
         int a7,
         int a8,
-        int a9,
-        int a10,
-        int a11,
-        int a12,
-        int a13)
+        int a9)
 {
-  _DWORD **v13; // eax
-  _DWORD *v14; // eax
-  int v15; // edx
-  _DWORD *v16; // edi
-  int v17; // eax
-  _DWORD *v18; // ecx
-  _DWORD *v19; // eax
-  int v20; // esi
-  _DWORD *v21; // ecx
-  _DWORD *v22; // eax
-  int v23; // edi
-  int v24; // edx
-  int v25; // ecx
-  int v26; // edx
-  int v27; // ecx
-  int v28; // edx
-  int v29; // ebx
+  _DWORD **v9; // eax
+  _DWORD *v10; // eax
+  int v11; // edx
+  _DWORD *v12; // edi
+  int v13; // eax
+  _DWORD *v14; // ecx
+  _DWORD *v15; // eax
+  int v16; // esi
+  _DWORD *v17; // ecx
+  _DWORD *v18; // eax
+  int v19; // edi
+  int *v20; // edx
+  int *v21; // ecx
+  int *v22; // edx
+  int *v23; // ecx
+  int *v24; // edx
+  int v25; // ebx
+  int v26; // eax
+  int *v27; // edx
+  int v28; // eax
+  _DWORD *result; // eax
   int v30; // eax
-  int *v31; // edx
-  int result; // eax
-  int v33; // [esp+18h] [ebp-248h]
-  int v34; // [esp+30h] [ebp-230h] BYREF
-  int v35; // [esp+34h] [ebp-22Ch]
-  int *v36; // [esp+40h] [ebp-220h] BYREF
-  int *v37; // [esp+44h] [ebp-21Ch]
-  int *v38; // [esp+48h] [ebp-218h]
-  int v39; // [esp+4Ch] [ebp-214h]
-  int v40; // [esp+50h] [ebp-210h]
-  int v41; // [esp+54h] [ebp-20Ch]
-  int v42; // [esp+58h] [ebp-208h]
-  int v43; // [esp+5Ch] [ebp-204h]
-  _BYTE v44[512]; // [esp+60h] [ebp-200h] BYREF
+  int v31; // [esp+18h] [ebp-248h]
+  int v32; // [esp+30h] [ebp-230h] BYREF
+  int v33; // [esp+34h] [ebp-22Ch]
+  int *v34; // [esp+40h] [ebp-220h] BYREF
+  int *v35; // [esp+44h] [ebp-21Ch]
+  int *v36; // [esp+48h] [ebp-218h]
+  int *v37; // [esp+4Ch] [ebp-214h]
+  int *v38; // [esp+50h] [ebp-210h]
+  int *v39; // [esp+54h] [ebp-20Ch]
+  int *v40; // [esp+58h] [ebp-208h]
+  int *v41; // [esp+5Ch] [ebp-204h]
+  _BYTE v42[512]; // [esp+60h] [ebp-200h] BYREF
+  int savedregs; // [esp+260h] [ebp+0h] BYREF
 
-  v37 = a2[1];
-  v13 = *a1;
-  v36 = (int *)v37[2];
-  v14 = *v13;
-  v15 = (int)v14 + *v14 + 0x10;
-  v16 = v14 + 4;
-  v34 = *((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + TlsIndex);
-  v17 = *(_DWORD *)(v34 + 0x19C);
-  v18 = *(_DWORD **)(v17 + 0x64);
-  v35 = v15;
-  if ( v18 )
+  v35 = a2[1]; /*0x9349a5*/
+  v9 = (_DWORD **)*a1; /*0x9349ac*/
+  v34 = (int *)v35[2]; /*0x9349ae*/
+  v10 = *v9; /*0x9349b2*/
+  v11 = (int)v10 + *v10 + 0x10; /*0x9349b7*/
+  v12 = v10 + 4; /*0x9349c8*/
+  v32 = *((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + MEMORY[0xBA9DE4]); /*0x9349d3*/
+  v13 = *(_DWORD *)(v32 + 0x19C); /*0x9349d7*/
+  v14 = *(_DWORD **)(v13 + 0x64); /*0x9349dd*/
+  v33 = v11; /*0x9349e4*/
+  if ( v14 ) /*0x9349f8*/
   {
-    --*(_DWORD *)(v17 + 0xA8);
-    *(_DWORD *)(v17 + 0x64) = *v18;
-    v19 = v18;
+    --*(_DWORD *)(v13 + 0xA8); /*0x9349fa*/
+    *(_DWORD *)(v13 + 0x64) = *v14; /*0x934a02*/
+    v15 = v14; /*0x934a05*/
   }
   else
   {
-    v19 = (_DWORD *)(*(int (__thiscall **)(int, int, int))(*(_DWORD *)dword_BA7D98 + 0x18))(dword_BA7D98, 0xC, 0x1C);
+    v15 = (_DWORD *)(*(int (__thiscall **)(int, int, int))(*(_DWORD *)unk_BA7D98 + 0x18))(unk_BA7D98, 0xC, 0x1C); /*0x934a15*/
   }
-  if ( v19 )
+  if ( v15 ) /*0x934a1a*/
   {
-    *v19 = 0;
-    v20 = (int)(v19 + 4);
+    *v15 = 0; /*0x934a1c*/
+    v16 = (int)(v15 + 4); /*0x934a24*/
   }
   else
   {
-    v20 = 0x10;
+    v16 = 0x10; /*0x934a2d*/
   }
-  if ( (*((unsigned __int8 *)v16 + 3) >> 4) - 1 >= 0 )
+  if ( (*((unsigned __int8 *)v12 + 3) >> 4) - 1 >= 0 ) /*0x934a42*/
   {
-    v21 = v16 + 3;
-    v22 = (_DWORD *)(v20 + 8);
-    v33 = *((unsigned __int8 *)v16 + 3) >> 4;
-    do
+    v17 = v12 + 3; /*0x934a49*/
+    v18 = (_DWORD *)(v16 + 8); /*0x934a4c*/
+    v31 = *((unsigned __int8 *)v12 + 3) >> 4; /*0x934a4f*/
+    do /*0x934a78*/
     {
-      v22[0xFFFFFFFE] = v21[0xFFFFFFFD];
-      v22[0xFFFFFFFF] = v21[0xFFFFFFFE];
-      *v22 = *(_DWORD *)((char *)v22 + (_DWORD)v16 - v20);
-      v22[1] = *v21;
-      v21 += 4;
-      v22 += 4;
-      --v33;
+      v18[0xFFFFFFFE] = v17[0xFFFFFFFD]; /*0x934a56*/
+      v18[0xFFFFFFFF] = v17[0xFFFFFFFE]; /*0x934a5c*/
+      *v18 = *(_DWORD *)((char *)v18 + (_DWORD)v12 - v16); /*0x934a62*/
+      v18[1] = *v17; /*0x934a66*/
+      v17 += 4; /*0x934a6d*/
+      v18 += 4; /*0x934a70*/
+      --v31; /*0x934a74*/
     }
-    while ( v33 );
+    while ( v31 ); /*0x934a78*/
   }
-  v23 = v16[2];
-  v24 = (int)a2[1];
-  v38 = *a2;
-  v25 = (int)a2[2];
-  v39 = v24;
-  v26 = (int)a2[3];
-  v40 = v25;
-  v27 = (int)a2[4];
-  v41 = v26;
-  v28 = (int)a2[5];
-  v42 = v27;
-  v43 = v28;
-  v29 = 0x10;
-  switch ( *(_BYTE *)v20 )
+  v19 = v12[2]; /*0x934a8d*/
+  v20 = a2[1]; /*0x934a90*/
+  v36 = *a2; /*0x934a93*/
+  v21 = a2[2]; /*0x934a97*/
+  v37 = v20; /*0x934a9a*/
+  v22 = a2[3]; /*0x934a9e*/
+  v38 = v21; /*0x934aa1*/
+  v23 = a2[4]; /*0x934aa5*/
+  v39 = v22; /*0x934aa8*/
+  v24 = a2[5]; /*0x934aac*/
+  v40 = v23; /*0x934aaf*/
+  v41 = v24; /*0x934ab3*/
+  v25 = 0x10; /*0x934abd*/
+  switch ( *(_BYTE *)v16 ) /*0x934ac8*/
   {
-    case 0:
+    case 0: /*0x934ac8*/
       goto LABEL_15;
-    case 1:
-      return def_934AC8(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13);
-    case 2:
-    case 6:
+    case 1: /*0x934ac8*/
+      return def_934AC8((int)&savedregs, v16 + 0x10, a1, (int)a2, (int)a3, a4, a5, a6, a7, a8, a9); /*0x934b54*/
+    case 2: /*0x934ac8*/
+    case 6: /*0x934ac8*/
       goto LABEL_14;
-    case 3:
+    case 3: /*0x934ac8*/
       goto LABEL_12;
-    case 4:
-      v29 = 0x20;
+    case 4: /*0x934ac8*/
+      v25 = 0x20; /*0x934b11*/
 LABEL_14:
-      v34 = (*(int (__thiscall **)(int *, int, _BYTE *))(*a2[2] + 0x28))(a2[2], v23, v44);
-      v35 = v23;
+      v32 = (*(int (__thiscall **)(int *, int, _BYTE *))(*a2[2] + 0x28))(a2[2], v19, v42); /*0x934b16*/
+      v33 = v19; /*0x934b2b*/
 LABEL_15:
-      v36 = *a2;
-      v37 = &v34;
-      a3(&v36, (unsigned __int8 *)v20, (unsigned __int8 *)(v20 + v29));
-      result = def_934AC8(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13);
-      break;
-    case 5:
-      v29 = 0x20;
+      v34 = *a2; /*0x934b2f*/
+      v35 = &v32; /*0x934b45*/
+      v30 = a3(&v34, v16, v16 + v25); /*0x934b49*/
+      result = def_934AC8((int)&savedregs, v30, a1, (int)a2, (int)a3, a4, a5, a6, a7, a8, a9); /*0x934b51*/
+      break; /*0x934b51*/
+    case 5: /*0x934ac8*/
+      v25 = 0x20; /*0x934acf*/
 LABEL_12:
-      v30 = (*(int (__thiscall **)(int *, int, _BYTE *))(*a2[2] + 0x28))(a2[2], v23, v44);
-      v31 = *a2;
-      v34 = v30;
-      v35 = v23;
-      v37 = v31;
-      v36 = &v34;
-      a3(&v36, (unsigned __int8 *)v20, (unsigned __int8 *)(v20 + v29));
-      result = def_934AC8(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13);
-      break;
+      v26 = (*(int (__thiscall **)(int *, int, _BYTE *))(*a2[2] + 0x28))(a2[2], v19, v42); /*0x934ad4*/
+      v27 = *a2; /*0x934ae8*/
+      v32 = v26; /*0x934aed*/
+      v33 = v19; /*0x934afb*/
+      v35 = v27; /*0x934aff*/
+      v34 = &v32; /*0x934b03*/
+      v28 = a3(&v34, v16, v16 + v25); /*0x934b07*/
+      result = def_934AC8((int)&savedregs, v28, a1, (int)a2, (int)a3, a4, a5, a6, a7, a8, a9); /*0x934b0f*/
+      break; /*0x934b0f*/
     default:
-      JUMPOUT(0x934B56);
+      JUMPOUT(0x934B56); /*0x934b56*/
   }
   return result;
 }

@@ -24,5 +24,5 @@
 0x6A2BFB: fldz
 0x6A2BFD: push    ecx
 0x6A2BFE: mov     ecx, esi
-0x6A2C00: fstp    [esp-0Ch+arg_8]
+0x6A2C00: fstp    [esp-0Ch+arg_8]; Verified ActiveEffectList is Oblivion's existing EffectNode type: the getter returns the embedded two-word head, sorted insertion and removal use BSSimpleList helpers, and update/removal loops traverse data then next. Fallout independently identifies its homolog as BSSimpleList<ActiveEffect *> (Probable family name).
 0x6A2C03: call    ActiveEffect_Base_ProcessEffect

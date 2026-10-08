@@ -1,19 +1,32 @@
 {
-  "callees_count": 122,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 83,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x59F010",
+      "0x59F63D"
+    ]
+  ],
+  "chunks_sha256": "5e1fd6370610f2e05a6a37dd4eab38f26d95487447cdccaa13c1bc3eecba1b84",
+  "comment_regular": "DialogMenu click dispatcher. TOPIC tiles select a post-GREETING MenuTopic; INFOGENERAL clears its cached unread byte immediately; clicked Goodbye INFO is parked for close-time commit. Tile ID 4 is the response-skip/continue control: it stops current playback and immediately advances the already-prepositioned response cursor, so skipping the final response reaches INFO processing without waiting for audio or the post-line delay.",
+  "comment_repeatable": "DialogMenu click dispatcher. TOPIC tiles select a post-GREETING MenuTopic; INFOGENERAL clears its cached unread byte immediately; clicked Goodbye INFO is parked for close-time commit. Tile ID 4 is the response-skip/continue control: it stops current playback and immediately advances the already-prepositioned response cursor, so skipping the final response reaches INFO processing without waiting for audio or the post-line delay.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_59F010",
+  "display_name": "DialogMenu::DoClick",
   "end_ea": "0x59F63D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_59F010",
+  "name": "DialogMenu::DoClick",
   "segment": ".text",
   "sha256": "5e1fd6370610f2e05a6a37dd4eab38f26d95487447cdccaa13c1bc3eecba1b84",
   "size": 1581,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x59F010",
-  "type": "void __userpurge(int@<ecx>, const char **@<ebp>, double@<st2>, double@<st1>, double@<st0>, signed int, const char **)",
+  "total_chunk_size": 1581,
+  "type": "void __thiscall(DialogMenu *this, int tileID, Tile *tile)",
   "xrefs_from_count": 611,
   "xrefs_to_count": 1
 }

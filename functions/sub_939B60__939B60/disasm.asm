@@ -10,7 +10,6 @@
 0x939B74: push    esi
 0x939B75: lea     esi, [edi+6]
 0x939B78: jmp     short loc_939B80
-0x939B7A: align 10h
 0x939B80: xor     eax, eax
 0x939B82: mov     ax, [esi]
 0x939B85: cmp     ax, 0FFFFh

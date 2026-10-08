@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 7,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "TESClimate::~TESClimate(void)",
+  "chunks": [
+    [
+      "0x4BE940",
+      "0x4BE9CC"
+    ],
+    [
+      "0x9B45C0",
+      "0x9B460F"
+    ]
+  ],
+  "chunks_sha256": "ca555ce1521032704087a19f1be3ac80123534b9519a1bd2be8e03f458cc5f03",
+  "comment_regular": "Verified: TESClimate destructor destroys both textures, clears the weather EntryData list at +0x30, then destroys model and TESForm base.",
+  "comment_repeatable": "Verified: TESClimate destructor destroys both textures, clears the weather EntryData list at +0x30, then destroys model and TESForm base.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "TESClimate_dtor",
   "end_ea": "0x4BE9CC",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "??1TESClimate@@UAE@XZ",
+  "name": "TESClimate_dtor",
   "segment": ".text",
   "sha256": "730471d50dfe2dbcefb014a6e04fb76351249875c2f26c528da0017c80dc7c31",
   "size": 140,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4BE940",
-  "type": "void __thiscall(TESClimate *__hidden this)",
-  "xrefs_from_count": 45,
+  "total_chunk_size": 219,
+  "type": "void __thiscall(TESClimate *this)",
+  "xrefs_from_count": 71,
   "xrefs_to_count": 1
 }

@@ -1,13 +1,14 @@
-void sub_553550()
+// Lazily allocates and constructs the process FaceGen manager singleton (0xDBC bytes). Callers use g_faceGenManager; the authoritative control/basis data comes from FaceGen\\si.ctl.
+void __cdecl FaceGenManager_EnsureInitialized()
 {
-  _DWORD *v0; // eax
+  void *v0; // eax
 
-  if ( !dword_B39B80 )
+  if ( !g_faceGenManager ) /*0x553571*/
   {
-    v0 = (_DWORD *)FormHeapAlloc(0xDBCu);
-    if ( v0 )
-      dword_B39B80 = (int)sub_553140(v0);
+    v0 = (void *)FormHeapAlloc(0xDBCu); /*0x55357f*/
+    if ( v0 ) /*0x553595*/
+      g_faceGenManager = FaceGenManager_Construct(v0); /*0x55359e*/
     else
-      dword_B39B80 = 0;
+      g_faceGenManager = 0; /*0x5535b5*/
   }
 }

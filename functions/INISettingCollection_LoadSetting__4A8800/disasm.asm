@@ -49,7 +49,7 @@
 0x4A88A1: push    eax; lpKeyName
 0x4A88A2: lea     ecx, [esp+6BCh+AppName]
 0x4A88A6: push    ecx; lpAppName
-0x4A88A7: call    dword ptr ds:0A280B4h
+0x4A88A7: call    dword ptr ds:0A280B4h; Performance audit resolution: Oblivion loads string INI settings, including sArchiveList:Archive, through GetPrivateProfileStringA with nSize=0x100. The later 0x8000 archive-list initial copy is therefore bounded by this authoritative producer; no extra copy hook required.
 0x4A88AD: lea     edx, [esp+6A8h+ReturnedString]
 0x4A88B4: push    edx
 0x4A88B5: mov     ecx, esi
@@ -178,7 +178,7 @@
 0x4A8A52: cmp     eax, 4
 0x4A8A55: mov     eax, [esp+6C0h+var_68C]
 0x4A8A59: push    eax
-0x4A8A5A: mov     eax, dword ptr [esp+6C4h+var_688]
+0x4A8A5A: mov     eax, [esp+6C4h+var_688]
 0x4A8A5E: push    ecx
 0x4A8A5F: push    edx
 0x4A8A60: push    eax

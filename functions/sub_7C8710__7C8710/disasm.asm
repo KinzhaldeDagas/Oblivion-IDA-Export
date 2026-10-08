@@ -1,4 +1,4 @@
-0x7C8710: push    esi
+0x7C8710: push    esi; Reloads Oblivion ShadowLightShader programs and re-presets pass families. After virtual vertex/pixel loading, installs 1x pass families or the larger 2x family set according to the observed shader-level selector.
 0x7C8711: mov     esi, ecx
 0x7C8713: mov     eax, [esi]
 0x7C8715: mov     edx, [eax+0A8h]
@@ -26,13 +26,13 @@
 0x7C8763: cmp     dword ptr ds:0B42F48h, 2
 0x7C876A: mov     ecx, esi
 0x7C876C: jl      short loc_7C87BA
-0x7C876E: call    sub_82D990
+0x7C876E: call    ShadowLightShader_InitializeMultiPointPassPool
 0x7C8773: mov     ecx, esi
-0x7C8775: call    sub_820C00
+0x7C8775: call    ShadowLightShader_InitializePassPool; Oblivion ShadowLight pass-pool initializer. Mode-5 pool[6..9] each owns one stage configured for texcoord 0, wrap addressing, linear MAG/MIN/MIP filtering, and disabled fixed-function color/alpha ops. All four disable alpha blending and stencil, enable Z test/write with LESS_EQUAL, and differ only in alpha-test enable: pools 6/8 off, 7/9 on. Opaque shaders ignore the unbound stage.
 0x7C877A: mov     ecx, esi
 0x7C877C: call    sub_828280
 0x7C8781: mov     ecx, esi
-0x7C8783: call    sub_831910
+0x7C8783: call    ShadowLightShader_InitializeAdditivePointPassPool
 0x7C8788: mov     ecx, esi
 0x7C878A: call    sub_832740
 0x7C878F: mov     ecx, esi

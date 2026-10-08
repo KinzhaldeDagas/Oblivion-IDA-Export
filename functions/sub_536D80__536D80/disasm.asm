@@ -27,7 +27,7 @@
 0x536DB8: call    sub_536980
 0x536DBD: push    esi
 0x536DBE: mov     [edi+8], eax
-0x536DC1: call    FormHeapFree
+0x536DC1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x536DC6: add     esp, 4
 0x536DC9: pop     esi
 0x536DCA: pop     edi

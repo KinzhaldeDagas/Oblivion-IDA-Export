@@ -15,7 +15,7 @@
 0x55C417: mov     ebx, ecx
 0x55C419: mov     [esp+40h+var_20], ebx
 0x55C41D: xor     ebp, ebp
-0x55C41F: push    offset NiRefObject_objcount; lpAddend
+0x55C41F: push    0B3FD64h; lpAddend
 0x55C424: mov     dword ptr [ebx], offset ??_7NiRefObject@@6B@; const NiRefObject::`vftable'
 0x55C42A: mov     [ebx+4], ebp
 0x55C42D: call    dword ptr ds:0A28078h
@@ -44,9 +44,9 @@
 0x55C482: mov     eax, [eax+4]
 0x55C485: jmp     short loc_55C48A
 0x55C487: add     eax, 4
-0x55C48A: push    eax; Str2
+0x55C48A: push    eax; right
 0x55C48B: push    offset aHairmorph; "HairMorph"
-0x55C490: call    __strcmp
+0x55C490: call    CRT_StricmpLocaleDispatch
 0x55C495: add     esp, 8
 0x55C498: test    eax, eax
 0x55C49A: jnz     loc_55C69F
@@ -224,3 +224,17 @@
 0x55C6B0: pop     ebx
 0x55C6B1: add     esp, 2Ch
 0x55C6B4: retn    4
+0x9BCA70: mov     ecx, [ebp-20h]
+0x9BCA73: jmp     NiRefObject_destr
+0x9BCA78: mov     eax, [ebp-24h]
+0x9BCA7B: push    eax
+0x9BCA7C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BCA81: pop     ecx
+0x9BCA82: retn
+0x9BCA83: mov     edx, [esp+arg_4]
+0x9BCA87: lea     eax, [edx-30h]
+0x9BCA8A: mov     ecx, [edx-34h]
+0x9BCA8D: xor     ecx, eax
+0x9BCA8F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BCA94: mov     eax, offset stru_AE6610
+0x9BCA99: jmp     ___CxxFrameHandler3

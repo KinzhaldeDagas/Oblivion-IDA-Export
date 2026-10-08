@@ -13,7 +13,6 @@
 0x8E3C52: cmp     eax, ecx
 0x8E3C54: jnb     short loc_8E3CC6
 0x8E3C56: jmp     short loc_8E3C60
-0x8E3C58: align 10h
 0x8E3C60: movzx   eax, word ptr [edi-2]
 0x8E3C64: mov     edx, [esp+10h+arg_4]
 0x8E3C68: shl     eax, 4
@@ -156,7 +155,6 @@
 0x8E3E04: cmp     edi, ecx
 0x8E3E06: jbe     short loc_8E3E7F
 0x8E3E08: jmp     short loc_8E3E10
-0x8E3E0A: align 10h
 0x8E3E10: mov     edx, [esp+10h+arg_4]
 0x8E3E14: mov     edi, eax
 0x8E3E16: movzx   eax, word ptr [edi+2]

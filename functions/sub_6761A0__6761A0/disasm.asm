@@ -5,7 +5,7 @@
 0x6761AA: push    esi
 0x6761AB: push    edi
 0x6761AC: add     ecx, 44h ; 'D'
-0x6761AF: call    GetExtraDataFollower
+0x6761AF: call    ExtraDataList_GetFollowerExtra; Returns ExtraFollower (type 0x23) itself, or null.
 0x6761B4: test    eax, eax
 0x6761B6: mov     edi, [esp+10h+arg_4]
 0x6761BA: jz      short loc_676224
@@ -52,7 +52,7 @@
 0x676222: jnz     short loc_6761C3
 0x676224: mov     ecx, [esp+10h+var_4]
 0x676228: add     ecx, 68h ; 'h'; this
-0x67622B: call    sub_7616D0
+0x67622B: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x676230: mov     ebx, eax
 0x676232: test    ebx, ebx
 0x676234: jz      short loc_6762A9
@@ -65,16 +65,16 @@
 0x676246: test    al, al
 0x676248: jz      short loc_6762A2
 0x67624A: mov     esi, [ebx]
-0x67624C: mov     ecx, esi
-0x67624E: call    sub_5E0380
+0x67624C: mov     ecx, esi; this
+0x67624E: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x676253: test    eax, eax
 0x676255: jz      short loc_6762A2
-0x676257: mov     ecx, esi
-0x676259: call    sub_5E0380
+0x676257: mov     ecx, esi; this
+0x676259: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x67625E: cmp     byte ptr [eax+20h], 2
 0x676262: jz      short loc_676271
-0x676264: mov     ecx, esi
-0x676266: call    sub_5E0380
+0x676264: mov     ecx, esi; this
+0x676266: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x67626B: cmp     byte ptr [eax+20h], 7
 0x67626F: jnz     short loc_6762A2
 0x676271: mov     ecx, esi

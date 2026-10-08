@@ -61,3 +61,15 @@
 0x70E85C: pop     ebp
 0x70E85D: add     esp, 10h
 0x70E860: retn
+0x9C9B40: mov     ecx, [ebp-10h]
+0x9C9B43: jmp     NiRefObject_destr
+0x9C9B48: mov     ecx, [ebp-10h]
+0x9C9B4B: add     ecx, 4Ch ; 'L'; slot
+0x9C9B4E: jmp     NiPointerSlot_Release
+0x9C9B53: mov     edx, [esp+arg_4]
+0x9C9B57: lea     eax, [edx-10h]
+0x9C9B5A: mov     ecx, [edx-14h]
+0x9C9B5D: xor     ecx, eax
+0x9C9B5F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C9B64: mov     eax, offset stru_AF2364
+0x9C9B69: jmp     ___CxxFrameHandler3

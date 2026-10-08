@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x69E730",
-    "line": "mov     eax, [esp+Dst]",
+    "line": "mov     eax, [esp+Dst]; Verified (Oblivion): loads base hit-effect data, optionally starts an I/O task using the owner ActiveEffect's model path, then reads a 16-bit length and allocates/stores that many payload bytes at object +0x2C. The payload's precise in-memory semantic type remains Candidate.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x69E735",
-    "line": "mov     esi, [esp+4+arg_0]",
+    "line": "mov     esi, [esp+4+ownerActiveEffect]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,13 +25,13 @@
   },
   {
     "ea": "0x69E73A",
-    "line": "push    eax",
+    "line": "push    eax; targetReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x69E73B",
-    "line": "push    esi",
+    "line": "push    esi; ownerActiveEffect",
     "mnemonic": "push",
     "size": 1
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x69E73E",
-    "line": "call    sub_69DBF0",
+    "line": "call    MagicHitEffect_LoadExtraData; Verified load callback arguments: ownerActiveEffect is stored at +0x18 and targetReference at +0x1C; it restores elapsedSeconds and bFinished, plus durationSeconds on version 0x72+.",
     "mnemonic": "call",
     "size": 5
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x69E77A",
-    "line": "lea     ecx, [esp+24h+arg_0]",
+    "line": "lea     ecx, [esp+24h+ownerActiveEffect]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x69E78A",
-    "line": "mov     eax, [esp+8+arg_0]",
+    "line": "mov     eax, [esp+8+ownerActiveEffect]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x69E7B0",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -319,19 +319,19 @@
   },
   {
     "ea": "0x69E7B6",
-    "line": "push    ecx; Dst",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x69E7B7",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x69E7BD",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x69E7EE",
-    "line": "push    eax; Size",
+    "line": "push    eax; byteCount",
     "mnemonic": "push",
     "size": 1
   },
@@ -427,19 +427,19 @@
   },
   {
     "ea": "0x69E7F2",
-    "line": "push    ecx; Dst",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x69E7F3",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x69E7F9",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },

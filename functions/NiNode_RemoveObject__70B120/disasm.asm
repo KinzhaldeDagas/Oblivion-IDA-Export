@@ -1,4 +1,4 @@
-0x70B120: push    0FFFFFFFFh
+0x70B120: push    0FFFFFFFFh; Removes child from this NiNode and clears/detaches the child's parent relationship.
 0x70B122: push    offset SEH_88E880
 0x70B127: mov     eax, large fs:0
 0x70B12D: push    eax
@@ -19,7 +19,6 @@
 0x70B14F: cmp     [ebx+0B6h], bp
 0x70B156: jbe     short loc_70B1BE
 0x70B158: jmp     short loc_70B160
-0x70B15A: align 10h
 0x70B160: mov     eax, [ebx+0B0h]
 0x70B166: mov     esi, [eax+edi*4]
 0x70B169: cmp     esi, ebp
@@ -32,7 +31,7 @@
 0x70B17E: cmp     esi, ebp
 0x70B180: mov     [esp+24h+var_4], ebp
 0x70B184: jz      short loc_70B18C
-0x70B186: cmp     esi, [esp+24h+arg_4]
+0x70B186: cmp     esi, [esp+24h+arg1]
 0x70B18A: jz      short loc_70B1DA
 0x70B18C: cmp     esi, ebp
 0x70B18E: mov     [esp+24h+var_4], 0FFFFFFFFh
@@ -51,7 +50,7 @@
 0x70B1B7: add     edi, 1
 0x70B1BA: cmp     edi, eax
 0x70B1BC: jb      short loc_70B160
-0x70B1BE: mov     eax, [esp+24h+arg_0]
+0x70B1BE: mov     eax, [esp+24h+child]
 0x70B1C2: mov     [eax], ebp
 0x70B1C4: mov     ecx, dword ptr [esp+24h+var_C]
 0x70B1C8: mov     large fs:0, ecx
@@ -63,12 +62,12 @@
 0x70B1D4: add     esp, 10h
 0x70B1D7: retn    8
 0x70B1DA: push    edi
-0x70B1DB: lea     ecx, [esp+28h+arg_4]
+0x70B1DB: lea     ecx, [esp+28h+arg1]
 0x70B1DF: push    ecx
 0x70B1E0: lea     ecx, [ebx+0ACh]
 0x70B1E6: mov     [esi+1Ch], ebp
 0x70B1E9: call    sub_6D7F60
-0x70B1EE: mov     eax, [esp+24h+arg_4]
+0x70B1EE: mov     eax, [esp+24h+arg1]
 0x70B1F2: cmp     eax, ebp
 0x70B1F4: jz      short loc_70B214
 0x70B1F6: mov     edi, eax
@@ -84,7 +83,7 @@
 0x70B20E: push    1
 0x70B210: mov     ecx, edi
 0x70B212: call    eax
-0x70B214: mov     ebx, [esp+24h+arg_0]
+0x70B214: mov     ebx, [esp+24h+child]
 0x70B218: lea     edi, [esi+4]
 0x70B21B: push    edi; lpAddend
 0x70B21C: mov     [ebx], esi
@@ -101,3 +100,12 @@
 0x70B23F: call    eax
 0x70B241: mov     eax, ebx
 0x70B243: jmp     loc_70B1C4
+0x9C7C90: lea     ecx, [ebp-10h]; slot
+0x9C7C93: jmp     NiPointerSlot_Release
+0x9C7C98: mov     edx, [esp+arg_4]
+0x9C7C9C: lea     eax, [edx-14h]
+0x9C7C9F: mov     ecx, [edx-18h]
+0x9C7CA2: xor     ecx, eax
+0x9C7CA4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C7CA9: mov     eax, offset stru_AF0030
+0x9C7CAE: jmp     ___CxxFrameHandler3

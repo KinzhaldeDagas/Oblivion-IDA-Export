@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
   "callers_count": 2,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x52F770",
+      "0x52F78D"
+    ]
+  ],
+  "chunks_sha256": "1cca4e5f9891fae10666d82aa31c257d355974fee90b42f3374f8c9404af8962",
+  "comment_regular": "OFE RC1 verification (2026-10-02): GetMatchingInfo is a direct thiscall wrapper around SelectInfoForSpeaker(topic, lowDispositionFailure, speaker, target, false, nullptr, nullptr). No extra role/category filtering occurs in this wrapper; the OFE player Greeting/Rumors probe uses that same selector signature and arguments.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_52F770",
+  "display_name": "TESTopic::GetMatchingInfo",
   "end_ea": "0x52F78D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_52F770",
+  "name": "TESTopic::GetMatchingInfo",
   "segment": ".text",
   "sha256": "1cca4e5f9891fae10666d82aa31c257d355974fee90b42f3374f8c9404af8962",
   "size": 29,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x52F770",
-  "type": "int __thiscall(TESTopic *this, _BYTE *, Actor *, TESObjectREFR *)",
+  "total_chunk_size": 29,
+  "type": "OblivionTopicInfo *__thiscall(TESTopic *this, bool *lowDispositionFailure, Actor *speaker, TESObjectREFR *target)",
   "xrefs_from_count": 11,
   "xrefs_to_count": 2
 }

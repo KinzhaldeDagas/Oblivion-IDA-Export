@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x663EE0",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+door]; Verified paired writer for PlayerCharacter_GetLastSpaceForDoor: writes spaceIndex into the same per-player map at +0x788 using TESObjectDOOR.refID (+0x0C) as key. Called after random destination-space selection. Map value's full stored width is not inferred here; getter returns UInt8.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x663EEB",
-    "line": "mov     [esp+arg_0], eax",
+    "line": "mov     [esp+door], eax",
     "mnemonic": "mov",
     "size": 4
   },

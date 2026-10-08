@@ -253,19 +253,19 @@
   },
   {
     "ea": "0x5EDE34",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5EDE36",
-    "line": "fstp    [esp+4+var_4]; float",
+    "line": "fstp    [esp+4+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5EDE39",
-    "line": "call    sub_4715C0",
+    "line": "call    NiControllerManager_DeactivateAllSequences; Iterates all controller-manager sequence slots and deactivates each sequence with the supplied ease-out time and transition flag zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,13 +277,13 @@
   },
   {
     "ea": "0x5EDE40",
-    "line": "push    0; int",
+    "line": "push    0; transition",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5EDE42",
-    "line": "push    0; int",
+    "line": "push    0; timeSyncSequence",
     "mnemonic": "push",
     "size": 2
   },
@@ -295,13 +295,13 @@
   },
   {
     "ea": "0x5EDE47",
-    "line": "fstp    [esp+10h+var_C]; float",
+    "line": "fstp    [esp+10h+easeInTime]; easeInTime",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x5EDE4B",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -313,25 +313,25 @@
   },
   {
     "ea": "0x5EDE4F",
-    "line": "fstp    [esp+10h+var_10]; float",
+    "line": "fstp    [esp+10h+weight]; weight",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5EDE52",
-    "line": "push    0; char",
+    "line": "push    0; startOver",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5EDE54",
-    "line": "push    0; int",
+    "line": "push    0; priority",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5EDE56",
-    "line": "call    sub_6C9BA0",
+    "line": "call    NiControllerSequence_Activate; Native controller-sequence activation state machine. Rejects an already-active sequence, validates optional time-sync compatibility, records activation parameters, and queues the active sequence with its manager.",
     "mnemonic": "call",
     "size": 5
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x5EDE84",
-    "line": "fstp    [esp+4+var_4]; float",
+    "line": "fstp    [esp+4+easeOutTime]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x5EDE98",
-    "line": "fstp    [esp+4+var_4]; float",
+    "line": "fstp    [esp+4+easeOutTime]; float",
     "mnemonic": "fstp",
     "size": 3
   },

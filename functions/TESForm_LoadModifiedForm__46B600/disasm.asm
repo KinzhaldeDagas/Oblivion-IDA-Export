@@ -2,11 +2,11 @@
 0x46B605: push    esi
 0x46B606: mov     esi, ecx
 0x46B608: jz      short loc_46B65B
-0x46B60A: mov     ecx, ds:0B33B00h
-0x46B610: push    4; Size
+0x46B60A: mov     ecx, ds:0B33B00h; self
+0x46B610: push    4; byteCount
 0x46B612: lea     eax, [esp+8+Dst]
-0x46B616: push    eax; Dst
-0x46B617: call    SaveLoad_LoadData
+0x46B616: push    eax; destination
+0x46B617: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x46B61C: push    0; int
 0x46B61E: push    offset ??_R0?AVTESObjectREFR@@@8; struct TypeDescriptor *
 0x46B623: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *

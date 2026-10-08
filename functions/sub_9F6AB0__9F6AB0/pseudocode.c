@@ -1,5 +1,5 @@
 int sub_9F6AB0()
 {
-  GameSetting_ConstrAndReg((int *)&dword_B39020, (int)"sForehead", (int)"Forehead");
-  return atexit(sub_A22760);
+  GameSetting_ConstrAndReg(&stru_B39020, "sForehead", "Forehead"); /*0x9f6abf*/
+  return atexit(sub_A22760); /*0x9f6acf*/
 }

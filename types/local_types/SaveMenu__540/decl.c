@@ -1,1 +1,1 @@
-SaveMenu
+struct SaveMenu;

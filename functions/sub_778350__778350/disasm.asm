@@ -83,7 +83,7 @@
 0x77841F: test    eax, eax
 0x778421: jge     short loc_778438
 0x778423: push    offset aNidx9indexbuff; "NiDX9IndexBufferManager::CreateIndexBuf"...
-0x778428: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x778428: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x77842D: add     esp, 4
 0x778430: xor     edi, edi
 0x778432: mov     [esp+28h+arg_4], edi
@@ -92,7 +92,7 @@
 0x77843C: test    edi, edi
 0x77843E: jnz     short loc_778459
 0x778440: push    offset aNidx9indexbu_2; "NiDX9IndexBufferManager::ResizeTempPoin"...
-0x778445: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x778445: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x77844A: add     esp, 4
 0x77844D: pop     esi
 0x77844E: pop     ebp
@@ -118,7 +118,6 @@
 0x778475: mov     eax, [esp+24h+arg_10]
 0x778479: jbe     short loc_7784B8
 0x77847B: jmp     short loc_778480
-0x77847D: align 10h
 0x778480: movzx   ecx, si
 0x778483: mov     [eax], cx
 0x778486: add     eax, 2
@@ -144,7 +143,7 @@
 0x7784BE: call    ecx
 0x7784C0: jmp     short loc_7784E1
 0x7784C2: push    offset aNidx9indexbu_1; "NiDX9IndexBufferManager::PackBuffer> Fa"...
-0x7784C7: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x7784C7: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x7784CC: mov     edx, [edi]
 0x7784CE: mov     eax, [edx+30h]
 0x7784D1: add     esp, 4

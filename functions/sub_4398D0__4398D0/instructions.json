@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4398D0",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+destructorFlags]; Verified queued tree-task cleanup removes a pending reference->BSTreeNode entry after releasing task resources; this prevents a cancelled/completed task result from remaining available for handoff.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x4398D8",
-    "line": "call    sub_4392E0",
+    "line": "call    QueuedTreeModel_ReleaseBuildResources; Verified cleanup hook releases queued tree build resources, then under the tree critical section checks/removes the pendingReferenceNodes entry keyed by QueuedTreeModel.reference (+0x38). Fallout QueuedTreeModel::Cancel similarly removes the map entry when cancellation follows a finished task; retain that state condition as a documented cross-version difference until Oblivion task-state dispatch is mapped.",
     "mnemonic": "call",
     "size": 5
   },
@@ -43,13 +43,13 @@
   },
   {
     "ea": "0x4398E1",
-    "line": "mov     [esp+arg_0], ecx",
+    "line": "mov     [esp+destructorFlags], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4398E5",
-    "line": "mov     ecx, dword_B39E04",
+    "line": "mov     ecx, g_BSTreeManager_Instance",
     "mnemonic": "mov",
     "size": 6
   },
@@ -58,5 +58,221 @@
     "line": "jmp     loc_55DFA0",
     "mnemonic": "jmp",
     "size": 5
+  },
+  {
+    "ea": "0x55DFA0",
+    "line": "push    ecx; IDA tail chunk for 0x4398D0: enters stru_B39E80, tests singleton map +0x24 for key this+0x38, removes through vtable +0x10 if present.",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DFA1",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DFA2",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DFA3",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55DFA5",
+    "line": "push    offset unk_A2F830",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x55DFAA",
+    "line": "mov     ecx, offset g_BSTreeManager_TreeCriticalSection",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x55DFAF",
+    "line": "mov     [esp+10h+var_4], 0",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x55DFB7",
+    "line": "call    NiEnterCriticalSection",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DFBC",
+    "line": "mov     ecx, [esi+24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x55DFBF",
+    "line": "mov     eax, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55DFC1",
+    "line": "mov     edi, [esp+0Ch+destructorFlags]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x55DFC5",
+    "line": "mov     eax, [eax+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x55DFC8",
+    "line": "lea     edx, [esp+0Ch+var_4]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x55DFCC",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DFCD",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DFCE",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x55DFD0",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x55DFD2",
+    "line": "jz      short loc_55DFEF",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x55DFD4",
+    "line": "mov     ecx, [esi+24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x55DFD7",
+    "line": "mov     edx, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55DFD9",
+    "line": "mov     eax, [edx+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x55DFDC",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x55DFDD",
+    "line": "call    eax; Verified cleanup removes the pending reference key and releases the removed node returned by the map operation. This is paired with the worker's insert at 0x55DF85 and one-time consume/removal in CreateTreeForReference at 0x55F8C9/0x55F8D8.",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x55DFDF",
+    "line": "mov     ecx, [esp+18h+var_10]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x55DFE3",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x55DFE5",
+    "line": "jz      short loc_55DFEF",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x55DFE7",
+    "line": "mov     edx, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55DFE9",
+    "line": "mov     eax, [edx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x55DFEB",
+    "line": "push    1; lpCriticalSection",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x55DFED",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x55DFEF",
+    "line": "mov     ecx, offset g_BSTreeManager_TreeCriticalSection; lpCriticalSection",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x55DFF4",
+    "line": "call    NiLeaveCriticalSection_0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x55DFF9",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x55DFFA",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x55DFFB",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x55DFFC",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
   }
 ]

@@ -2,7 +2,7 @@
 0x75E6C4: push    esi
 0x75E6C5: push    eax
 0x75E6C6: mov     esi, ecx
-0x75E6C8: call    nullsub_returnvVoid_1arg
+0x75E6C8: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x75E6CD: mov     ecx, [esi+30h]
 0x75E6D0: test    ecx, ecx
 0x75E6D2: jz      short loc_75E6F3

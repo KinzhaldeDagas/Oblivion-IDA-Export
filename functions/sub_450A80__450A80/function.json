@@ -1,18 +1,31 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x450A80",
+      "0x450ABF"
+    ]
+  ],
+  "chunks_sha256": "42e162af7f3691fee143118ab34f9fd0abfebc561eb025e99fcb13371628acb9",
+  "comment_regular": "Closes the current form record: increments formCount, writes the final payload length into the saved record header, seeks back to its header offset, and rewrites the 0x14-byte header.",
+  "comment_repeatable": "Closes the current form record: increments formCount, writes the final payload length into the saved record header, seeks back to its header offset, and rewrites the 0x14-byte header.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_450A80",
+  "display_name": "TESFile_CloseForm",
   "end_ea": "0x450ABF",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_450A80",
+  "name": "TESFile_CloseForm",
   "segment": ".text",
   "sha256": "42e162af7f3691fee143118ab34f9fd0abfebc561eb025e99fcb13371628acb9",
   "size": 63,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x450A80",
+  "total_chunk_size": 63,
   "type": "UInt32 __thiscall(Data *this)",
   "xrefs_from_count": 20,
   "xrefs_to_count": 1

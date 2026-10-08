@@ -1,19 +1,32 @@
 {
-  "callees_count": 16,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
+  "callers_count": 5,
+  "chunks": [
+    [
+      "0x4ADAD0",
+      "0x4ADB92"
+    ]
+  ],
+  "chunks_sha256": "82e599cd0e706e85c6ec9c0d5fa907b806a26dd274cd3ccb4ea3d560bf50f88d",
+  "comment_regular": "Verified (Oblivion): inverse traversal visits the same property ID 4 subtype 5..10 classes (PPLighting/SpeedTree PP, Hair, SpeedTree Branch, SpeedTree Leaf, Lighting30). It clears the TextureEffectData pointer only when it equals the supplied object. No current shader-property vtable returns subtype 8 (Unknown). Fallout StopTextureShader uses property ID 3 and subtype 8..12, so do not transfer these IDs across versions.",
+  "comment_repeatable": "Verified (Oblivion): inverse traversal visits the same property ID 4 subtype 5..10 classes (PPLighting/SpeedTree PP, Hair, SpeedTree Branch, SpeedTree Leaf, Lighting30). It clears the TextureEffectData pointer only when it equals the supplied object. No current shader-property vtable returns subtype 8 (Unknown). Fallout StopTextureShader uses property ID 3 and subtype 8..12, so do not transfer these IDs across versions.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4ADAD0",
+  "display_name": "TESEffectShader_RemoveTextureEffectFromScenegraph",
   "end_ea": "0x4ADB92",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4ADAD0",
+  "name": "TESEffectShader_RemoveTextureEffectFromScenegraph",
   "segment": ".text",
   "sha256": "82e599cd0e706e85c6ec9c0d5fa907b806a26dd274cd3ccb4ea3d560bf50f88d",
   "size": 194,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4ADAD0",
-  "type": "void __stdcall(NiNode *, int)",
+  "total_chunk_size": 194,
+  "type": "void __stdcall(NiAVObject *sceneRoot, OblivionTextureEffectData *data)",
   "xrefs_from_count": 90,
   "xrefs_to_count": 5
 }

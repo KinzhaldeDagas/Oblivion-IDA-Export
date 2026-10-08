@@ -36,3 +36,12 @@
 0x890AF5: pop     esi
 0x890AF6: add     esp, 10h
 0x890AF9: retn    4
+0x9D6210: mov     ecx, [ebp-10h]; this
+0x9D6213: jmp     ??1bhkAabbPhantom@@UAE@XZ; bhkAabbPhantom::~bhkAabbPhantom(void)
+0x9D6218: mov     edx, [esp+arg_4]
+0x9D621C: lea     eax, [edx-8]
+0x9D621F: mov     ecx, [edx-0Ch]
+0x9D6222: xor     ecx, eax
+0x9D6224: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D6229: mov     eax, offset stru_AFE168
+0x9D622E: jmp     ___CxxFrameHandler3

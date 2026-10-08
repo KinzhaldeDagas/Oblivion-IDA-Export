@@ -1,8 +1,8 @@
 void sub_77C180()
 {
-  _DWORD *v0; // eax
+  NiD3DShaderProgramFactory *v0; // eax
 
-  v0 = (_DWORD *)sub_77EAE0();
-  if ( v0 )
-    sub_77F460(v0);
+  v0 = sub_77EAE0(); /*0x77c180*/
+  if ( v0 ) /*0x77c187*/
+    sub_77F460(v0); /*0x77c18b*/
 }

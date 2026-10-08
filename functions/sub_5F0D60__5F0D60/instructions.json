@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5F0D60",
-    "line": "sub     esp, 18h",
+    "line": "sub     esp, 18h; Health Bars plugin analysis: native predicate for actor 3D HealthBar visibility. Vanilla excludes player, requires bHealthBarShowing, actor alive/loaded/visible/in range/in view, and hides when base health <= current health. Plugin changes the equality case so full-health actors can show the native bar while still hiding current > base.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x5F0D81",
-    "line": "jz      loc_5F0ED0",
+    "line": "jz      loc_5F0ED0; Health Bars plugin patch site for no-bars issue: vanilla returns false when bHealthBarShowing:GamePlay is 0. Plugin NOPs this branch so the setting cannot suppress actor-head bars after startup/INI load.",
     "mnemonic": "jz",
     "size": 6
   },
@@ -241,13 +241,13 @@
   },
   {
     "ea": "0x5F0DCD",
-    "line": "test    ah, 41h",
+    "line": "test    ah, 41h; Health Bars plugin patch site: vanilla tests FPU C0|C3 and hides base<=current health. Plugin changes mask/branch to hide only current>base, allowing full-health actor bars.",
     "mnemonic": "test",
     "size": 3
   },
   {
     "ea": "0x5F0DD0",
-    "line": "jnp     loc_5F0ED0",
+    "line": "jnp     loc_5F0ED0; Health Bars plugin patch site for no-bars issue: vanilla returns false when TESActorBase health <= current health. Leveled/modified actors can have current health above base-form health, so plugin NOPs this branch and clamps the visual ratio in the 0x640080 call hook.",
     "mnemonic": "jnp",
     "size": 6
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x5F0E20",
-    "line": "push    offset dword_B3FAB0",
+    "line": "push    offset parent",
     "mnemonic": "push",
     "size": 5
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x5F0E87",
-    "line": "call    sub_683CB0",
+    "line": "call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 8,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4D6760",
+      "0x4D67B1"
+    ]
+  ],
+  "chunks_sha256": "8fe1527c4903bc9e68ec2adf118061e6266aa54db1db6c27a1b7a8ca0b879070",
+  "comment_regular": "Verified generic NiTMap lookup helper: hashes the UInt32 key through the map vtable, walks the bucket chain using the map's key comparator, returns false when absent, and on a match writes the low byte of the entry data field to valueOut and returns true. Callers use it for byte/boolean-valued maps, including PlayerCharacter_GetLastSpaceForDoor and cell/worldspace visited or filter maps; this helper does not establish the full map value width.",
+  "comment_repeatable": "Verified generic NiTMap lookup helper: hashes the UInt32 key through the map vtable, walks the bucket chain using the map's key comparator, returns false when absent, and on a match writes the low byte of the entry data field to valueOut and returns true. Callers use it for byte/boolean-valued maps, including PlayerCharacter_GetLastSpaceForDoor and cell/worldspace visited or filter maps; this helper does not establish the full map value width.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4D6760",
+  "display_name": "NiTMap_TryGetAtByteValue",
   "end_ea": "0x4D67B1",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4D6760",
+  "name": "NiTMap_TryGetAtByteValue",
   "segment": ".text",
   "sha256": "8fe1527c4903bc9e68ec2adf118061e6266aa54db1db6c27a1b7a8ca0b879070",
   "size": 81,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4D6760",
-  "type": "char __thiscall(_DWORD *this, int, _BYTE *)",
+  "total_chunk_size": 81,
+  "type": "bool __thiscall(void *this, UInt32 key, UInt8 *valueOut)",
   "xrefs_from_count": 40,
   "xrefs_to_count": 8
 }

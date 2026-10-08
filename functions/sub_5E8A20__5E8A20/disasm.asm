@@ -5,8 +5,8 @@
 0x5E8A27: mov     edi, [eax+8]
 0x5E8A2A: test    edi, edi
 0x5E8A2C: jz      short loc_5E8A85
-0x5E8A2E: mov     ecx, edi
-0x5E8A30: call    sub_567770
+0x5E8A2E: mov     ecx, edi; this
+0x5E8A30: call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.
 0x5E8A35: test    al, al
 0x5E8A37: jz      short loc_5E8A43
 0x5E8A39: lea     ecx, [esi+44h]

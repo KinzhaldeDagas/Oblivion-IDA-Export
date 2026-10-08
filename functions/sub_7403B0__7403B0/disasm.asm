@@ -10,7 +10,6 @@
 0x7403C6: mov     [esp+14h+var_8], ebp
 0x7403CA: push    ebx
 0x7403CB: jmp     short loc_7403D0
-0x7403CD: align 10h
 0x7403D0: mov     eax, [esi+5Ch]
 0x7403D3: movzx   ecx, word ptr [eax+0B6h]
 0x7403DA: cmp     ecx, edi

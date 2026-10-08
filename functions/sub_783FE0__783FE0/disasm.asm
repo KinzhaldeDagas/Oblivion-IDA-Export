@@ -1,4 +1,4 @@
-0x783FE0: mov     eax, [ecx+4]
+0x783FE0: mov     eax, [ecx+4]; Oblivion 1.2.0.416: returns (end-begin)/0x18 for a compiler-folded 24-byte vector specialization; xrefs show both stVec and branch-flare records.
 0x783FE3: test    eax, eax
 0x783FE5: jnz     short loc_783FE8
 0x783FE7: retn

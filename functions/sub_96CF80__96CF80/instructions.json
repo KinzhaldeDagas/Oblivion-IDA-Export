@@ -1627,7 +1627,7 @@
   },
   {
     "ea": "0x96D302",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2623,13 +2623,13 @@
   },
   {
     "ea": "0x96D55F",
-    "line": "lea     ecx, [esp+108h+var_6C]",
+    "line": "lea     ecx, [esp+108h+var_6C]; this",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x96D566",
-    "line": "call    sub_4E7DE0",
+    "line": "call    PathGraphNode_GetConnections; Verified graph-node connection-list accessor: returns this+0x20. TESPathGrid and TESRoad graph code both traverse this as a BSSimpleList of adjacency pointers.",
     "mnemonic": "call",
     "size": 5
   },

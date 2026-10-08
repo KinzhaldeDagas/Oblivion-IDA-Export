@@ -1,18 +1,31 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 0,
+  "chunks": [
+    [
+      "0x4CA3D0",
+      "0x4CA42F"
+    ]
+  ],
+  "chunks_sha256": "d30a6782b62821b7871ea8a565f68b2d9098ced15c9a0228bc9ada24c23e03eb",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "0x4CA421: CELL writer0x4CA3D0 invokes shared ExtraDataList_Save0x422F10 with cell extra list; shared writer has no owner form or CELL filter. It can serialize surviving runtime CELL XLOC/XTEL; XESP was removed by owner check. Candidate decoding and lossless parser recompile must not be mistaken for this resolved native save.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "TESObjectCELL_SaveFormChunks",
   "end_ea": "0x4CA42F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "TESObjectCELL_SaveFormChunks",
   "segment": ".text",
   "sha256": "d30a6782b62821b7871ea8a565f68b2d9098ced15c9a0228bc9ada24c23e03eb",
   "size": 95,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4CA3D0",
+  "total_chunk_size": 95,
   "type": "UInt32 __usercall@<eax>(TESForm *this@<ecx>, int@<ebx>, char@<bpl>)",
   "xrefs_from_count": 42,
   "xrefs_to_count": 1

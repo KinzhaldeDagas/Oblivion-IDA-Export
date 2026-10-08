@@ -1,1 +1,1 @@
-SkyTask
+struct SkyTask;

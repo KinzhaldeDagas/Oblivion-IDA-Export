@@ -1,19 +1,36 @@
 {
-  "callees_count": 10,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_57AB00",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 40,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x57AB00",
+      "0x57AB64"
+    ],
+    [
+      "0x59ED30",
+      "0x59F001"
+    ]
+  ],
+  "chunks_sha256": "cac11ffdf67f1645263f4528883f221345409937d8ae1b3150f104260da5b5cf",
+  "comment_regular": "arg1",
+  "comment_repeatable": "Verified 2026-10-07: interface dialogue entry with two stack arguments speaker/forcedTopic. Requires interface singleton, cursor+0x1C, menu root+0x68, and root user0==2. Tail JMP0x57AB5C to0x59ED30 preserves argument stack. Callsites0x525011/0x52511E push topic then speaker. Fallout Interface::CreateDialogMenu0x824E4AF0 is a role analogue but adds speaker-as parameter/time-multiplier handling.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
+  "display_name": "Interface::CreateDialogMenu",
   "end_ea": "0x57AB64",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": false,
-  "name": "sub_57AB00",
+  "name": "Interface::CreateDialogMenu",
   "segment": ".text",
   "sha256": "bd41a92492da8325507fdaa864e66aea61b65e0cb66162049bcf5c21afc3c8b7",
   "size": 100,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x57AB00",
-  "type": "int __cdecl(_DWORD, _DWORD)",
-  "xrefs_from_count": 41,
+  "total_chunk_size": 821,
+  "type": "Tile *__cdecl(TESObjectREFR *speaker, TESTopic *forcedTopic)",
+  "xrefs_from_count": 323,
   "xrefs_to_count": 2
 }

@@ -2,15 +2,15 @@
 0x66A5E1: mov     esi, ecx
 0x66A5E3: cmp     dword ptr [esi+1F0h], 0
 0x66A5EA: jz      short loc_66A668
-0x66A5EC: call    TESObjectREFR_GetParentCell
+0x66A5EC: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x66A5F1: test    eax, eax
 0x66A5F3: jz      short loc_66A668
 0x66A5F5: push    edi
 0x66A5F6: mov     ecx, esi; this
-0x66A5F8: call    TESObjectREFR_GetParentCell
+0x66A5F8: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x66A5FD: mov     edi, eax
 0x66A5FF: mov     ecx, edi; this
-0x66A601: call    TESObjectCELL_IsInterior
+0x66A601: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x66A606: test    al, al
 0x66A608: jz      short loc_66A616
 0x66A60A: lea     ecx, [edi+28h]
@@ -23,10 +23,10 @@
 0x66A627: cmp     eax, edi
 0x66A629: jz      short loc_66A667
 0x66A62B: mov     ecx, esi; this
-0x66A62D: call    TESObjectREFR_GetParentCell
+0x66A62D: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x66A632: mov     edi, eax
 0x66A634: mov     ecx, edi; this
-0x66A636: call    TESObjectCELL_IsInterior
+0x66A636: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x66A63B: test    al, al
 0x66A63D: jz      short loc_66A656
 0x66A63F: lea     ecx, [edi+28h]

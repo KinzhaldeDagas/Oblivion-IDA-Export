@@ -1,19 +1,32 @@
 {
-  "callees_count": 18,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_4F02B0",
+  "chunks": [
+    [
+      "0x4F02B0",
+      "0x4F039B"
+    ]
+  ],
+  "chunks_sha256": "704d498e8f1445a29520fea933c46f48fd0be03ca8e5263570c7799fff0e3fa0",
+  "comment_regular": "Verified: under the shared critical section, frees fallbackReferences nodes and every per-coordinate BSSimpleList payload/head in referencesByCell, then clears the map.",
+  "comment_repeatable": "Verified: under the shared critical section, frees fallbackReferences nodes and every per-coordinate BSSimpleList payload/head in referencesByCell, then clears the map.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "TESWorldSpace_ClearReferenceIndex",
   "end_ea": "0x4F039B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4F02B0",
+  "name": "TESWorldSpace_ClearReferenceIndex",
   "segment": ".text",
   "sha256": "704d498e8f1445a29520fea933c46f48fd0be03ca8e5263570c7799fff0e3fa0",
   "size": 235,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4F02B0",
-  "type": "int __thiscall(unsigned int *this)",
+  "total_chunk_size": 235,
+  "type": "int __thiscall(TESWorldSpace *this)",
   "xrefs_from_count": 97,
   "xrefs_to_count": 1
 }

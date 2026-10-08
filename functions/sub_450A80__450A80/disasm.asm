@@ -1,4 +1,4 @@
-0x450A80: push    esi
+0x450A80: push    esi; Closes the current form record: increments formCount, writes the final payload length into the saved record header, seeks back to its header offset, and rewrites the 0x14-byte header.
 0x450A81: mov     esi, ecx
 0x450A83: mov     eax, [esi+280h]
 0x450A89: add     dword ptr [esi+3D4h], 1

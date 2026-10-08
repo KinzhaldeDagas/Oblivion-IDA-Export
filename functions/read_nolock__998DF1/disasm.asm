@@ -20,7 +20,7 @@
 0x998E27: xor     edi, edi
 0x998E29: cmp     esi, edi
 0x998E2B: jl      short loc_998E35
-0x998E2D: cmp     esi, uNumber
+0x998E2D: cmp     esi, ds:0BAAAA0h
 0x998E33: jb      short loc_998E5C
 0x998E35: call    ___doserrno
 0x998E3A: mov     [eax], edi

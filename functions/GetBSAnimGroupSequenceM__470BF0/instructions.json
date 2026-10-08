@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x470BF0",
-    "line": "mov     al, [esp+arg_0]",
+    "line": "mov     al, [esp+selector]; AnimSequenceMultiple vtable +0x10. Consumes a signed selector byte: 0..127 can select exactly; 0x80..0xFE sign-extend and fail the unsigned count bound, while 0xFF is explicit random. ActorAnimData_LoadState intercepts serialized 0xFE before this virtual, so 0xFE is a null-sequence marker in save files rather than random restore.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x470C0F",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },

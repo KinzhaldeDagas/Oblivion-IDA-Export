@@ -1,4 +1,4 @@
-0x4359D0: mov     eax, [esp+arg_0]
+0x4359D0: mov     eax, [esp+arg_0]; Finds a loaded KF model by BSAnimGroupSequence/source sequence. Used when mapping runtime sequence objects back to model-loader records.
 0x4359D4: test    eax, eax
 0x4359D6: jz      short loc_435A00
 0x4359D8: mov     eax, [eax+8]

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A8A40",
-    "line": "push    ebp",
+    "line": "push    ebp; OBLIVION AUTHORITY (2026-08-30): Core fill-insert for the 0x10-byte vector<CLeafLodEngine::SLodEntry>; handles capacity growth, relocation, and repeated 8-byte pair insertion.",
     "mnemonic": "push",
     "size": 1
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x7A8A6D",
-    "line": "mov     eax, [ebp+arg_C]",
+    "line": "mov     eax, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -133,13 +133,13 @@
   },
   {
     "ea": "0x7A8A7A",
-    "line": "mov     [ebp+var_1C], ecx",
+    "line": "mov     [ebp+var_1C.m_pLeaf], ecx",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A8A7D",
-    "line": "mov     [ebp+var_18], edx",
+    "line": "mov     [ebp+var_1C.m_pLeafMatch], edx",
     "mnemonic": "mov",
     "size": 3
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x7A8A8E",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+count]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x7A8AB4",
-    "line": "call    sub_790B90",
+    "line": "call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error(\"vector<T> too long\") and throws; used by multiple element specializations after max_size checks.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,31 +499,31 @@
   },
   {
     "ea": "0x7A8B13",
-    "line": "push    edi; char *",
+    "line": "push    edi; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A8B14",
-    "line": "call    sub_7A8660",
+    "line": "call    OB_stVectorLeafLodEntry_Allocate_010201A0; OBLIVION AUTHORITY (2026-08-30): Allocates count*8 bytes from the FormHeap for CLeafLodEngine::SLodEntry storage; each entry is {primaryLeaf, matchedLeaf}.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A8B19",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+count]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A8B1C",
-    "line": "mov     byte ptr [ebp+arg_C], 0",
+    "line": "mov     byte ptr [ebp+value], 0",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A8B20",
-    "line": "mov     ecx, [ebp+arg_C]",
+    "line": "mov     ecx, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x7A8B24",
-    "line": "mov     ecx, [ebp+arg_4]",
+    "line": "mov     ecx, [ebp+position]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -565,19 +565,19 @@
   },
   {
     "ea": "0x7A8B2E",
-    "line": "push    ebx",
+    "line": "push    ebx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A8B2F",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A8B30",
-    "line": "push    eax",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -595,13 +595,13 @@
   },
   {
     "ea": "0x7A8B3B",
-    "line": "call    sub_7A86C0",
+    "line": "call    OB_LeafLodEntry_UninitializedCopyRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Uninitialized forward copy of 8-byte SLodEntry values used while growing m_vPairs.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A8B40",
-    "line": "mov     ecx, [ebp+arg_8]",
+    "line": "mov     ecx, [ebp+count]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -619,19 +619,19 @@
   },
   {
     "ea": "0x7A8B49",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A8B4A",
-    "line": "push    ecx",
+    "line": "push    ecx; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A8B4B",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x7A8B4E",
-    "line": "call    sub_7A8790",
+    "line": "call    OB_LeafLodEntry_UninitializedFillN_ReturnEnd_010201A0; OBLIVION AUTHORITY (2026-08-30): Uninitialized fill_n wrapper for SLodEntry; returns destination+count.",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,13 +655,13 @@
   },
   {
     "ea": "0x7A8B56",
-    "line": "mov     byte ptr [ebp+arg_C], 0",
+    "line": "mov     byte ptr [ebp+value], 0",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A8B5A",
-    "line": "mov     edx, [ebp+arg_C]",
+    "line": "mov     edx, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x7A8B5E",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+count]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -691,31 +691,31 @@
   },
   {
     "ea": "0x7A8B63",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A8B64",
-    "line": "mov     eax, [ebp+arg_4]",
+    "line": "mov     eax, [ebp+position]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A8B67",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A8B68",
-    "line": "push    eax",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A8B69",
-    "line": "call    sub_7A86C0",
+    "line": "call    OB_LeafLodEntry_UninitializedCopyRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Uninitialized forward copy of 8-byte SLodEntry values used while growing m_vPairs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x7A8B84",
-    "line": "add     [ebp+arg_8], eax",
+    "line": "add     [ebp+count], eax",
     "mnemonic": "add",
     "size": 3
   },
@@ -799,7 +799,7 @@
   },
   {
     "ea": "0x7A8B8C",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -811,7 +811,7 @@
   },
   {
     "ea": "0x7A8B94",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+count]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -913,7 +913,7 @@
   },
   {
     "ea": "0x7A8BBE",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -949,7 +949,7 @@
   },
   {
     "ea": "0x7A8BD2",
-    "line": "mov     edi, [ebp+arg_4]",
+    "line": "mov     edi, [ebp+position]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -991,7 +991,7 @@
   },
   {
     "ea": "0x7A8BE7",
-    "line": "mov     [ebp+arg_C], eax",
+    "line": "mov     [ebp+value], eax",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1003,19 +1003,19 @@
   },
   {
     "ea": "0x7A8BEC",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A8BED",
-    "line": "push    ebx",
+    "line": "push    ebx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A8BEE",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -1027,7 +1027,7 @@
   },
   {
     "ea": "0x7A8BF1",
-    "line": "call    sub_7A88D0",
+    "line": "call    OB_LeafLodEntry_UninitializedCopyRange_Checked_010201A0; OBLIVION AUTHORITY (2026-08-30): Checked wrapper around the trivial SLodEntry uninitialized-copy range helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1051,13 +1051,13 @@
   },
   {
     "ea": "0x7A8BFE",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A8BFF",
-    "line": "mov     ecx, [ebp+arg_8]",
+    "line": "mov     ecx, [ebp+count]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1081,13 +1081,13 @@
   },
   {
     "ea": "0x7A8C09",
-    "line": "push    ecx",
+    "line": "push    ecx; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A8C0A",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -1105,13 +1105,13 @@
   },
   {
     "ea": "0x7A8C14",
-    "line": "call    sub_7A8790",
+    "line": "call    OB_LeafLodEntry_UninitializedFillN_ReturnEnd_010201A0; OBLIVION AUTHORITY (2026-08-30): Uninitialized fill_n wrapper for SLodEntry; returns destination+count.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A8C19",
-    "line": "mov     eax, [ebp+arg_C]",
+    "line": "mov     eax, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1135,7 +1135,7 @@
   },
   {
     "ea": "0x7A8C25",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -1147,19 +1147,19 @@
   },
   {
     "ea": "0x7A8C28",
-    "line": "push    esi",
+    "line": "push    esi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A8C29",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A8C2A",
-    "line": "call    sub_7A86F0",
+    "line": "call    OB_LeafLodEntry_CopyFillRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Assigns one 8-byte SLodEntry value across an initialized destination range; compiler-folded trivial pair helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1231,7 +1231,7 @@
   },
   {
     "ea": "0x7A8C4D",
-    "line": "push    ebx",
+    "line": "push    ebx; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -1249,19 +1249,19 @@
   },
   {
     "ea": "0x7A8C52",
-    "line": "push    ebx",
+    "line": "push    ebx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A8C53",
-    "line": "mov     [ebp+arg_C], ecx",
+    "line": "mov     [ebp+value], ecx",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A8C56",
-    "line": "push    eax",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -1273,37 +1273,37 @@
   },
   {
     "ea": "0x7A8C59",
-    "line": "mov     [ebp+arg_8], eax",
+    "line": "mov     [ebp+count], eax",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A8C5C",
-    "line": "call    sub_7A88D0",
+    "line": "call    OB_LeafLodEntry_UninitializedCopyRange_Checked_010201A0; OBLIVION AUTHORITY (2026-08-30): Checked wrapper around the trivial SLodEntry uninitialized-copy range helper.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A8C61",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+count]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A8C64",
-    "line": "push    ebx",
+    "line": "push    ebx; destinationEnd",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A8C65",
-    "line": "push    edx",
+    "line": "push    edx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A8C66",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -1315,13 +1315,13 @@
   },
   {
     "ea": "0x7A8C6A",
-    "line": "call    sub_7A8750",
+    "line": "call    OB_LeafLodEntry_CopyBackwardRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Copies 8-byte SLodEntry values backward for in-place vector insertion.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A8C6F",
-    "line": "mov     ecx, [ebp+arg_C]",
+    "line": "mov     ecx, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1333,7 +1333,7 @@
   },
   {
     "ea": "0x7A8C75",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -1345,19 +1345,19 @@
   },
   {
     "ea": "0x7A8C78",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A8C79",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A8C7A",
-    "line": "call    sub_7A86F0",
+    "line": "call    OB_LeafLodEntry_CopyFillRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Assigns one 8-byte SLodEntry value across an initialized destination range; compiler-folded trivial pair helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1420,5 +1420,47 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CCEC0",
+    "line": "mov     edx, [esp-4+position]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CCEC4",
+    "line": "lea     eax, [edx+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCEC7",
+    "line": "mov     ecx, [edx-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCECA",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CCECC",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCED1",
+    "line": "mov     eax, offset stru_AF62D4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCED6",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

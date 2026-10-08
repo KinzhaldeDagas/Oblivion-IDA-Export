@@ -1,4 +1,4 @@
-0x6C5760: push    0FFFFFFFFh
+0x6C5760: push    0FFFFFFFFh; Adds a controller sequence to a NiControllerManager: rejects an already-owned sequence, binds manager, optionally validates controlled blocks, stores name mapping/list membership, and balances the temporary reference.
 0x6C5762: push    offset SEH_6C5760
 0x6C5767: mov     eax, large fs:0
 0x6C576D: push    eax
@@ -12,7 +12,7 @@
 0x6C577D: mov     large fs:0, eax
 0x6C5783: mov     ebp, ecx
 0x6C5785: test    ebp, ebp
-0x6C5787: mov     esi, [esp+1Ch+arg_0]
+0x6C5787: mov     esi, [esp+1Ch+sequence]
 0x6C578B: jz      short loc_6C5793
 0x6C578D: cmp     dword ptr [esi+40h], 0
 0x6C5791: jnz     short loc_6C57C7
@@ -24,7 +24,7 @@
 0x6C57A2: push    eax; Src
 0x6C57A3: mov     ecx, esi
 0x6C57A5: call    sub_49F4D0
-0x6C57AA: cmp     byte ptr [esp+1Ch+arg_8], 0
+0x6C57AA: cmp     [esp+1Ch+validateControlledBlocks], 0
 0x6C57AF: jz      short loc_6C57DE
 0x6C57B1: mov     ecx, [ebp+30h]
 0x6C57B4: push    ecx
@@ -42,7 +42,7 @@
 0x6C57D7: pop     ebp
 0x6C57D8: add     esp, 0Ch
 0x6C57DB: retn    0Ch
-0x6C57DE: mov     eax, [esp+1Ch+arg_4]
+0x6C57DE: mov     eax, [esp+1Ch+name]
 0x6C57E2: test    eax, eax
 0x6C57E4: jz      short loc_6C57EE
 0x6C57E6: push    eax
@@ -50,9 +50,9 @@
 0x6C57E9: call    sub_434930
 0x6C57EE: lea     edi, [esi+4]
 0x6C57F1: push    edi; lpAddend
-0x6C57F2: mov     [esp+20h+arg_8], esi
+0x6C57F2: mov     dword ptr [esp+20h+validateControlledBlocks], esi
 0x6C57F6: call    dword ptr ds:0A28078h
-0x6C57FC: lea     edx, [esp+1Ch+arg_8]
+0x6C57FC: lea     edx, [esp+1Ch+validateControlledBlocks]
 0x6C5800: push    edx
 0x6C5801: lea     ecx, [ebp+3Ch]
 0x6C5804: mov     [esp+20h+var_4], 0
@@ -81,3 +81,12 @@
 0x6C584B: pop     ebp
 0x6C584C: add     esp, 0Ch
 0x6C584F: retn    0Ch
+0x9C7470: lea     ecx, [ebp+0Ch]; slot
+0x9C7473: jmp     NiPointerSlot_Release
+0x9C7478: mov     edx, [esp+name]
+0x9C747C: lea     eax, [edx-0Ch]
+0x9C747F: mov     ecx, [edx-10h]
+0x9C7482: xor     ecx, eax
+0x9C7484: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C7489: mov     eax, offset stru_AEF8C8
+0x9C748E: jmp     ___CxxFrameHandler3

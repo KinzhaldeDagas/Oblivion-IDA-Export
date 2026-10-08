@@ -1,1 +1,1 @@
-CtxtHandle
+typedef SecHandle CtxtHandle;

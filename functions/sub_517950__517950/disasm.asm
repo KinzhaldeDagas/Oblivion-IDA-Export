@@ -70,7 +70,7 @@
 0x517A14: mov     ecx, ebx
 0x517A16: call    Script_RunSomethingElse??
 0x517A1B: push    ebx
-0x517A1C: call    FormHeapFree
+0x517A1C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x517A21: add     esp, 4
 0x517A24: pop     esi
 0x517A25: mov     al, 1

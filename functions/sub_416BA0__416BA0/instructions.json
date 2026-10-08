@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x416BAA",
-    "line": "mov     ecx, SaveLoad_CurrentSavegame",
+    "line": "mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x416BB0",
-    "line": "mov     [esp+14h+var_4], 0",
+    "line": "mov     [esp+14h+source], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x416BCD",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },
@@ -73,13 +73,13 @@
   },
   {
     "ea": "0x416BD6",
-    "line": "mov     ecx, SaveLoad_CurrentSavegame",
+    "line": "mov     ecx, g_TESSaveLoadGame; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x416BDC",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x416BE2",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x416BF0",
-    "line": "mov     ecx, SaveLoad_CurrentSavegame",
+    "line": "mov     ecx, g_TESSaveLoadGame; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -121,19 +121,19 @@
   },
   {
     "ea": "0x416BF9",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x416BFB",
-    "line": "lea     eax, [esp+18h+var_4]",
+    "line": "lea     eax, [esp+18h+source]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x416BFF",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -151,13 +151,13 @@
   },
   {
     "ea": "0x416C09",
-    "line": "mov     edx, dword_B33510",
+    "line": "mov     edx, dword ptr unk_B33510",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x416C0F",
-    "line": "mov     ecx, dword_B3350C",
+    "line": "mov     ecx, dword ptr unk_B3350C",
     "mnemonic": "mov",
     "size": 6
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x416C70",
-    "line": "mov     edx, EffectSettingCollection",
+    "line": "mov     edx, ds:0B33508h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x416C7A",
-    "line": "mov     ecx, offset EffectSettingCollection",
+    "line": "mov     ecx, 0B33508h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -391,13 +391,13 @@
   },
   {
     "ea": "0x416C81",
-    "line": "mov     ecx, dword_B3350C",
+    "line": "mov     ecx, dword ptr unk_B3350C",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x416C87",
-    "line": "mov     edx, dword_B33510",
+    "line": "mov     edx, dword ptr unk_B33510",
     "mnemonic": "mov",
     "size": 6
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x416CBD",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -535,13 +535,13 @@
   },
   {
     "ea": "0x416CC3",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x416CC4",
-    "line": "mov     ecx, SaveLoad_CurrentSavegame",
+    "line": "mov     ecx, g_TESSaveLoadGame; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -553,13 +553,13 @@
   },
   {
     "ea": "0x416CCF",
-    "line": "mov     edx, dword_B33510",
+    "line": "mov     edx, dword ptr unk_B33510",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x416CD5",
-    "line": "mov     ecx, dword_B3350C",
+    "line": "mov     ecx, dword ptr unk_B3350C",
     "mnemonic": "mov",
     "size": 6
   },
@@ -589,13 +589,13 @@
   },
   {
     "ea": "0x416CE7",
-    "line": "mov     ecx, SaveLoad_CurrentSavegame",
+    "line": "mov     ecx, g_TESSaveLoadGame; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x416CED",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x416CF3",
-    "line": "push    edx; Src",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -631,13 +631,13 @@
   },
   {
     "ea": "0x416CFF",
-    "line": "mov     edx, dword_B33510",
+    "line": "mov     edx, dword ptr unk_B33510",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x416D05",
-    "line": "mov     ecx, dword_B3350C",
+    "line": "mov     ecx, dword ptr unk_B3350C",
     "mnemonic": "mov",
     "size": 6
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x416D20",
-    "line": "mov     eax, SaveLoad_CurrentSavegame",
+    "line": "mov     eax, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x416D35",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -871,13 +871,13 @@
   },
   {
     "ea": "0x416D8B",
-    "line": "mov     ecx, SaveLoad_CurrentSavegame",
+    "line": "mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x416D91",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },
@@ -895,7 +895,7 @@
   },
   {
     "ea": "0x416D9A",
-    "line": "mov     edx, SaveLoad_CurrentSavegame",
+    "line": "mov     edx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.",
     "mnemonic": "mov",
     "size": 6
   },

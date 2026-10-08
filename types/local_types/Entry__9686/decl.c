@@ -1,1 +1,1 @@
-Entry
+struct Entry;

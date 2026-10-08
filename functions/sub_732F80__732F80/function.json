@@ -1,18 +1,31 @@
 {
-  "callees_count": 14,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x732F80",
+      "0x7331A4"
+    ]
+  ],
+  "chunks_sha256": "7ee2ae7b353706402153495ef381e12823773ccc8f9501090acfdc6b50ca1cfb",
+  "comment_regular": "NiTriStripsData::UpdateNormals. Allocate/zero normal storage, walk strips with alternating winding, skip degenerate triangles, accumulate normalized face directions, normalize all vertex normals, and mark normals dirty. On NBT data the allocator also clears tangent-space planes that this routine does not rebuild.\n\nNiTriStripsData normal rebuild: alternating strip winding, degenerate-triangle skipping, face-direction accumulation, vertex normalization and dirtyFlags |= 2. Confirms Prettier Faces virtual UpdateNormals handles strip dirty state. NBT allocator clears tangent/binormal planes too, so plugin excludes that format.",
+  "comment_repeatable": "NiTriStripsData normal rebuild: alternating strip winding, degenerate-triangle skipping, face-direction accumulation, vertex normalization and dirtyFlags |= 2. Confirms Prettier Faces virtual UpdateNormals handles strip dirty state. NBT allocator clears tangent/binormal planes too, so plugin excludes that format.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_732F80",
+  "display_name": "NiTriStripsData_UpdateNormals",
   "end_ea": "0x7331A4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_732F80",
+  "name": "NiTriStripsData_UpdateNormals",
   "segment": ".text",
   "sha256": "7ee2ae7b353706402153495ef381e12823773ccc8f9501090acfdc6b50ca1cfb",
   "size": 548,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x732F80",
+  "total_chunk_size": 548,
   "type": "float *__thiscall(unsigned __int16 *this)",
   "xrefs_from_count": 189,
   "xrefs_to_count": 2

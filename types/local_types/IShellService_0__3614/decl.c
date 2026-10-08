@@ -1,1 +1,1 @@
-IShellService_0
+typedef IShellService IShellService_0;

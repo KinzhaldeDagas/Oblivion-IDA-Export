@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x864750",
+      "0x864762"
+    ]
+  ],
+  "chunks_sha256": "e02a31743b8bd98f1133ce3e9cccd068cde3e172be7a7656440be65ad787c912",
+  "comment_regular": "[Verified] Oblivion GeometryDecalShaderProperty constructor delegates to BSShaderLightingProperty::BSShaderLightingProperty, so it inherits the +0x80 NiTPointerList<DECAL_DATA*> and +0x8C count. Its stream construction helper allocates 0x9C bytes, matching the Oblivion lighting-property layout. Fallout divergence: Fallout's GeometryDecalShaderProperty is 0xF0 bytes and its ExtraDecalRefs path is separate reference metadata; no matching inherited DECAL_DATA list has been established there. Do not infer 1:1 class equivalence.",
+  "comment_repeatable": "[Verified] Oblivion GeometryDecalShaderProperty constructor delegates to BSShaderLightingProperty::BSShaderLightingProperty, so it inherits the +0x80 NiTPointerList<DECAL_DATA*> and +0x8C count. Its stream construction helper allocates 0x9C bytes, matching the Oblivion lighting-property layout. Fallout divergence: Fallout's GeometryDecalShaderProperty is 0xF0 bytes and its ExtraDecalRefs path is separate reference metadata; no matching inherited DECAL_DATA list has been established there. Do not infer 1:1 class equivalence.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_864750",
+  "display_name": "GeometryDecalShaderProperty_Ctor",
   "end_ea": "0x864762",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_864750",
+  "name": "GeometryDecalShaderProperty_Ctor",
   "segment": ".text",
   "sha256": "e02a31743b8bd98f1133ce3e9cccd068cde3e172be7a7656440be65ad787c912",
   "size": 18,
+  "source_annotation_confidence": "Verified",
   "start_ea": "0x864750",
-  "type": "BSShaderLightingProperty *__thiscall(BSShaderLightingProperty *this)",
+  "total_chunk_size": 18,
+  "type": "BSShaderLightingPropertyLayout_t *__thiscall(BSShaderLightingPropertyLayout_t *this)",
   "xrefs_from_count": 8,
   "xrefs_to_count": 1
 }

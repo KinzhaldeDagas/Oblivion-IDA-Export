@@ -4,5 +4,5 @@
 0x41D408: test    byte ptr [esp+4+arg_0], 1
 0x41D40D: jz      short ??_GSpellItem@@UAEPAXI@Z___Return_This
 0x41D40F: push    esi
-0x41D410: call    FormHeapFree
+0x41D410: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x41D415: add     esp, 4

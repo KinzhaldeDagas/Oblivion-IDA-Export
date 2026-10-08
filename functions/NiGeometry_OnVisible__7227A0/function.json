@@ -1,18 +1,31 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7227A0",
+      "0x7227AD"
+    ]
+  ],
+  "chunks_sha256": "88be6793d0d2b83d25e37bf79d9c93b4a6f6c6df7280d191cc975a3d022dd8ed",
+  "comment_regular": "CULLING audit 2026-09-27 (observed Oblivion behavior): Geometry OnVisible wrapper forwards (process in stack, geometry in ECX) to process submission function 0x70E1A0. Twelve native data xrefs correspond to CULLING's known +0x7C vtable slots. This is not evidence that every rendering route passes those slots.\n\nCulling.dll audit 2026-06-05: NiGeometry::OnVisible returns NiCullingProcess::OnVisible result; hooks must preserve EAX even though vanilla 0x70DFB0 ignores it.",
+  "comment_repeatable": "MoonSugarEffect decode: NiGeometry::OnVisible forwards the visible geometry to NiCullingProcess::OnVisible.\nDX11 GPU-world migration 2026-09-27: verified direct NiGeometry OnVisible body forwards geometry to 70E1A0 via call at7227A5 and returns opaque EAX with RET4. This is a submission boundary after native culling, not proof of a complete material pass or final GPU draw. Derived OnVisible overrides require separate qualification.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "NiGeometry::OnVisible",
   "end_ea": "0x7227AD",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "NiGeometry::OnVisible",
   "segment": ".text",
   "sha256": "88be6793d0d2b83d25e37bf79d9c93b4a6f6c6df7280d191cc975a3d022dd8ed",
   "size": 13,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7227A0",
+  "total_chunk_size": 13,
   "type": "const void *__thiscall(NiGeometry *this, NiCullingProcess *)",
   "xrefs_from_count": 4,
   "xrefs_to_count": 12

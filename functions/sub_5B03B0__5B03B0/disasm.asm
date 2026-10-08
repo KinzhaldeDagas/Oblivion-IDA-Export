@@ -7,9 +7,9 @@
 0x5B03C2: cmp     dword ptr [eax+44h], 0
 0x5B03C6: jz      short loc_5B03E9
 0x5B03C8: mov     eax, ds:0B35ECCh
-0x5B03CD: mov     ecx, ds:0B333C4h
-0x5B03D3: push    eax
-0x5B03D4: call    TESObjectREF_GetItemCount
+0x5B03CD: mov     ecx, ds:0B333C4h; this
+0x5B03D3: push    eax; item
+0x5B03D4: call    TESObjectREFR_GetItemCount; TESObjectREFR inventory count accessor: returns 0 when the reference has no container or no ContainerChanges; otherwise asks ContainerExtraData_GetItemCount(this, item), which combines base TESContainer count with EntryData.countDelta. Exact ABI is thiscall (TESObjectREFR *this, TESForm *item).
 0x5B03D9: test    eax, eax
 0x5B03DB: jnz     short loc_5B03E9
 0x5B03DD: cmp     ds:0B3B3F5h, al
@@ -51,14 +51,14 @@
 0x5B0470: push    0FABh
 0x5B0475: call    Tile_GetFloat
 0x5B047A: fadd    qword ptr ds:0A2F928h
-0x5B0480: call    Double_To_SInt32
+0x5B0480: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B0485: mov     [esp+0Ch+var_4], eax
 0x5B0489: fild    [esp+0Ch+var_4]
 0x5B048D: push    ecx
 0x5B048E: mov     ecx, [esi+144h]; this
-0x5B0494: fstp    [esp+10h+a2]; a3
-0x5B0497: push    0FABh; a2
-0x5B049C: call    Tile_SetFloat
+0x5B0494: fstp    [esp+10h+a2]; value
+0x5B0497: push    0FABh; propertyCode
+0x5B049C: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B04A1: push    offset aOpen; "Open"
 0x5B04A6: mov     ecx, edi
 0x5B04A8: mov     byte ptr ds:0B3B3F4h, 0
@@ -67,8 +67,8 @@
 0x5B04BB: push    0; float
 0x5B04BD: mov     ecx, edi
 0x5B04BF: call    sub_58FBA0
-0x5B04C4: mov     ecx, [esi+38h]
-0x5B04C7: call    sub_4DBEA0
+0x5B04C4: mov     ecx, [esi+38h]; this
+0x5B04C7: call    TESObjectREFR_ClearLockedFlagOnSelfOrLinkedDoor; Verified inverse lock-state helper: if this reference has an ExtraLock wrapper, clears its locked bit; otherwise follows the linked-door reference and clears that wrapper's locked bit. It then marks the owning reference or linked door modified with mask 0x40.
 0x5B04CC: push    offset aUilocksuccess; "UILockSuccess"
 0x5B04D1: mov     ecx, esi
 0x5B04D3: call    sub_5AFD50
@@ -103,16 +103,16 @@
 0x5B055B: jz      loc_5B05E5
 0x5B0561: mov     eax, [esi+38h]
 0x5B0564: mov     ecx, ds:0B333C4h
-0x5B056A: push    2
-0x5B056C: push    eax
-0x5B056D: push    ecx
-0x5B056E: mov     ecx, offset ActorProcessManager_ptr
-0x5B0573: call    sub_675BF0
+0x5B056A: push    2; category
+0x5B056C: push    eax; target
+0x5B056D: push    ecx; criminal
+0x5B056E: mov     ecx, (offset qword_B3BB2C+1D4h); self
+0x5B0573: call    ActorProcessManager_FindCrime
 0x5B0578: test    eax, eax
 0x5B057A: jz      short loc_5B05E5
 0x5B057C: push    0
 0x5B057E: push    eax
-0x5B057F: mov     ecx, offset ActorProcessManager_ptr
+0x5B057F: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x5B0584: call    sub_675740
 0x5B0589: mov     edi, eax
 0x5B058B: test    edi, edi
@@ -137,15 +137,15 @@
 0x5B05BE: mov     edx, [eax]
 0x5B05C0: push    eax
 0x5B05C1: mov     [edi], edx
-0x5B05C3: call    FormHeapFree
+0x5B05C3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5B05C8: add     esp, 4
 0x5B05CB: jmp     short loc_5B0590
 0x5B05CD: mov     dword ptr [edi], 0
 0x5B05D3: jmp     short loc_5B0590
 0x5B05D5: mov     ecx, edi
-0x5B05D7: call    BSSimpleList_Clear
+0x5B05D7: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x5B05DC: push    edi
-0x5B05DD: call    FormHeapFree
+0x5B05DD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5B05E2: add     esp, 4
 0x5B05E5: mov     eax, ds:0B333C4h
 0x5B05EA: push    1

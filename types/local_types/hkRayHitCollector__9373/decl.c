@@ -1,1 +1,4 @@
-hkRayHitCollector
+struct hkRayHitCollector
+{
+void **__vftable;
+};

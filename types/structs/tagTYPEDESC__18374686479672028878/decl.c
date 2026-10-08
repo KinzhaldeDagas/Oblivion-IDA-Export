@@ -1,1 +1,5 @@
-tagTYPEDESC
+struct __declspec(align(8)) tagTYPEDESC
+{
+$DC5FDF412BF3FA567BAE6923E5F77BCA u;
+VARTYPE vt;
+};

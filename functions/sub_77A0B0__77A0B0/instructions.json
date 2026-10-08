@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x77A0B0",
-    "line": "push    esi",
+    "line": "push    esi; MoonSugarEffect decode: NiD3DShader vtable +0x48 pass-loop begin. Selects pass 0, refcounts CurrentPass, and returns pass count.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x77A0B3",
-    "line": "mov     dword ptr [esi+34h], 0",
+    "line": "mov     dword ptr [esi+34h], 0; Begin pass loop at index zero and synchronize CurrentPass from Passes[0]. ResetPassQueue leaves both null on selector failure.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x77A0CF",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x77A0E4",
-    "line": "pop     edi",
+    "line": "pop     edi; Return PassCount. Zero is the rigid and skinned renderer guard that bypasses all pass work and D3D draw calls.",
     "mnemonic": "pop",
     "size": 1
   },

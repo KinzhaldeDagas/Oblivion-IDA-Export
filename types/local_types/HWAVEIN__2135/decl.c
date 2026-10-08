@@ -1,1 +1,1 @@
-HWAVEIN
+typedef HWAVEIN__ *HWAVEIN;

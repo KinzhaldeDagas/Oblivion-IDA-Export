@@ -41,7 +41,7 @@
 0x72F156: xor     edi, edi
 0x72F158: mov     ecx, [esi]
 0x72F15A: push    ecx
-0x72F15B: call    FormHeapFree
+0x72F15B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x72F160: add     esp, 4
 0x72F163: mov     [esi], edi
 0x72F165: mov     [esi+4], ebp

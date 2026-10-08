@@ -108,3 +108,21 @@
 0x574F6C: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x574F71: add     esp, 820h
 0x574F77: retn    20h ; ' '
+0x9BE280: mov     eax, [ebp-818h]
+0x9BE286: and     eax, 1
+0x9BE289: jz      locret_9BE2A1
+0x9BE28F: and     dword ptr [ebp-818h], 0FFFFFFFEh
+0x9BE296: mov     ecx, [ebp-814h]; void *
+0x9BE29C: jmp     BSStringT_Clear
+0x9BE2A1: retn
+0x9BE2A2: mov     edx, [esp+arg_4]
+0x9BE2A6: lea     eax, [edx-824h]
+0x9BE2AC: mov     ecx, [edx-828h]
+0x9BE2B2: xor     ecx, eax
+0x9BE2B4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BE2B9: add     eax, 10h
+0x9BE2BC: mov     ecx, [edx-4]
+0x9BE2BF: xor     ecx, eax
+0x9BE2C1: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BE2C6: mov     eax, offset stru_AE7A2C
+0x9BE2CB: jmp     ___CxxFrameHandler3

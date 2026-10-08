@@ -1,1 +1,1 @@
-hkCollisionListener
+struct hkCollisionListener;

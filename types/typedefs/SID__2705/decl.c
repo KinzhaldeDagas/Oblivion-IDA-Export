@@ -1,1 +1,1 @@
-SID
+typedef _SID SID;

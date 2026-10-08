@@ -1,4 +1,4 @@
-0x7043B0: push    0FFFFFFFFh
+0x7043B0: push    0FFFFFFFFh; Verified constructor initializes the 7-slot map array and shaderMaps+2C. After successful constructor return, raw FormHeapFree(property) leaks the array and any later map/texture. Frond v107 uses the native deleting destructor if subsequent configuration fails. Faults before constructor return remain a separate partial-construction limitation.
 0x7043B2: push    offset SEH_7043B0
 0x7043B7: mov     eax, large fs:0
 0x7043BD: push    eax
@@ -109,3 +109,12 @@
 0x704504: retn
 0x704505: or      esi, 1
 0x704508: jmp     short loc_7044DC
+0x9C9540: mov     ecx, [ebp-10h]; this
+0x9C9543: jmp     j_??1NiDitherProperty@@UAE@XZ; NiDitherProperty::~NiDitherProperty(void)
+0x9C9548: mov     edx, [esp+arg_4]
+0x9C954C: lea     eax, [edx-10h]
+0x9C954F: mov     ecx, [edx-14h]
+0x9C9552: xor     ecx, eax
+0x9C9554: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C9559: mov     eax, offset stru_AF1E08
+0x9C955E: jmp     ___CxxFrameHandler3

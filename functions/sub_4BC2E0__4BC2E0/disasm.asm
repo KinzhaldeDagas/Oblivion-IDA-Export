@@ -1,7 +1,7 @@
-0x4BC2E0: sub     esp, 44h
+0x4BC2E0: sub     esp, 44h; Verified: tests whether a world position lies inside a placed TESSubSpace. Requires base form kFormType_SubSpace (0x29) and reference flag 0x20 clear; first applies bound-radius broadphase (+0x2C times reference scale), transforms the query into local space, then tests all three scaled half-extents.
 0x4BC2E3: push    ebx
 0x4BC2E4: push    esi
-0x4BC2E5: mov     esi, [esp+4Ch+arg_4]
+0x4BC2E5: mov     esi, [esp+4Ch+candidate]
 0x4BC2E9: xor     bl, bl
 0x4BC2EB: test    esi, esi
 0x4BC2ED: jz      loc_4BC497
@@ -27,12 +27,12 @@
 0x4BC330: mov     eax, [edx+0ECh]
 0x4BC336: mov     ecx, esi
 0x4BC338: call    eax
-0x4BC33A: fstp    [esp+50h+arg_4]
+0x4BC33A: fstp    [esp+50h+candidate]
 0x4BC33E: mov     edx, [esi]
 0x4BC340: mov     eax, [edx+174h]
 0x4BC346: mov     ecx, esi
 0x4BC348: call    eax
-0x4BC34A: mov     ecx, [esp+50h+arg_0]
+0x4BC34A: mov     ecx, [esp+50h+worldPosition]
 0x4BC34E: fld     dword ptr [ecx+4]
 0x4BC351: fsub    dword ptr [eax+4]
 0x4BC354: fstp    [esp+50h+var_44]
@@ -59,7 +59,7 @@
 0x4BC397: fstp    [esp+50h+var_40]
 0x4BC39B: fld     [esp+50h+var_40]
 0x4BC39F: fld     dword ptr [edi+2Ch]
-0x4BC3A2: fmul    [esp+50h+arg_4]
+0x4BC3A2: fmul    [esp+50h+candidate]
 0x4BC3A6: fcompp
 0x4BC3A8: fnstsw  ax
 0x4BC3AA: test    ah, 41h
@@ -71,33 +71,33 @@
 0x4BC3BF: push    eax
 0x4BC3C0: lea     edx, [esp+54h+var_3C]
 0x4BC3C4: push    edx
-0x4BC3C5: lea     eax, [esp+58h+var_30]
+0x4BC3C5: lea     eax, [esp+58h+outHalfExtents]
 0x4BC3C9: push    eax
-0x4BC3CA: call    sub_710250
+0x4BC3CA: call    NiPoint3_MultiplyMatrix3
 0x4BC3CF: mov     ecx, [eax]
 0x4BC3D1: mov     [esp+5Ch+var_3C], ecx
 0x4BC3D5: mov     edx, [eax+4]
 0x4BC3D8: add     esp, 0Ch
-0x4BC3DB: lea     ecx, [esp+50h+var_30]
+0x4BC3DB: lea     ecx, [esp+50h+outHalfExtents]
 0x4BC3DF: mov     [esp+50h+var_38], edx
 0x4BC3E3: mov     eax, [eax+8]
-0x4BC3E6: push    ecx
-0x4BC3E7: mov     ecx, edi
+0x4BC3E6: push    ecx; outHalfExtents
+0x4BC3E7: mov     ecx, edi; this
 0x4BC3E9: mov     [esp+54h+var_34], eax
-0x4BC3ED: call    sub_4BC290
-0x4BC3F2: fld     [esp+50h+var_30]
-0x4BC3F6: fld     [esp+50h+arg_4]
+0x4BC3ED: call    TESSubSpace_GetHalfExtents; Verified: reads TESSubSpace dimensions at +0x24/+0x26/+0x28 and multiplies each by 0.5 to return the three local-space half-extents.
+0x4BC3F2: fld     [esp+50h+outHalfExtents]
+0x4BC3F6: fld     [esp+50h+candidate]
 0x4BC3FA: fld     st
 0x4BC3FC: fmulp   st(2), st
 0x4BC3FE: fxch    st(1)
-0x4BC400: fstp    [esp+50h+var_30]
+0x4BC400: fstp    [esp+50h+outHalfExtents]
 0x4BC404: fld     [esp+50h+var_2C]
 0x4BC408: fmul    st, st(1)
 0x4BC40A: fstp    [esp+50h+var_2C]
 0x4BC40E: fmul    [esp+50h+var_28]
 0x4BC412: fstp    [esp+50h+var_28]
 0x4BC416: fld     [esp+50h+var_3C]
-0x4BC41A: fld     [esp+50h+var_30]
+0x4BC41A: fld     [esp+50h+outHalfExtents]
 0x4BC41E: fcom    st(1)
 0x4BC420: fnstsw  ax
 0x4BC422: test    ah, 41h

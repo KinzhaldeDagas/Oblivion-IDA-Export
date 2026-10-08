@@ -1,4 +1,4 @@
-0x7856B0: push    0FFFFFFFFh
+0x7856B0: push    0FFFFFFFFh; Oblivion 1.2.0.416: vector<stVec>::resize(newSize,value), with the 24-byte value passed by value; grows through insert-fill or shrinks through checked erase.
 0x7856B2: push    offset SEH_7856B0
 0x7856B7: mov     eax, large fs:0
 0x7856BD: push    eax
@@ -28,7 +28,7 @@
 0x7856F9: mov     eax, edx
 0x7856FB: shr     eax, 1Fh
 0x7856FE: add     eax, edx
-0x785700: mov     ebx, [esp+28h+arg_0]
+0x785700: mov     ebx, [esp+28h+newSize]
 0x785704: cmp     eax, ebx
 0x785706: jnb     short loc_785741
 0x785708: cmp     ecx, edi
@@ -45,14 +45,14 @@
 0x785725: cmp     ecx, ebp
 0x785727: jbe     short loc_78572E
 0x785729: call    __invalid_parameter_noinfo
-0x78572E: lea     eax, [esp+28h+arg_4]
-0x785732: push    eax
+0x78572E: lea     eax, [esp+28h+value]
+0x785732: push    eax; value
 0x785733: sub     ebx, edi
-0x785735: push    ebx
+0x785735: push    ebx; count
 0x785736: push    ebp
-0x785737: push    esi
-0x785738: mov     ecx, esi
-0x78573A: call    sub_785050
+0x785737: push    esi; position
+0x785738: mov     ecx, esi; this
+0x78573A: call    OB_stVector_stVec_InsertFill_010201A0; Oblivion 1.2.0.416: vector<stVec>::insert(position,count,value); preserves aliasing with a local 24-byte copy, uses 1.5x growth, and handles in-place or reallocated insertion. False FUNC_NORET cleared.
 0x78573F: jmp     short loc_7857A1
 0x785741: cmp     ecx, edi
 0x785743: jz      short loc_7857A1
@@ -77,22 +77,22 @@
 0x785777: lea     ecx, [ebx+ebx*2]
 0x78577A: lea     ebx, [ebp+ecx*8+0]
 0x78577E: cmp     ebx, [esi+8]
-0x785781: mov     [esp+28h+var_10], ebp
+0x785781: mov     [esp+28h+result.current], ebp
 0x785785: ja      short loc_78578C
 0x785787: cmp     ebx, [esi+4]
 0x78578A: jnb     short loc_785791
 0x78578C: call    __invalid_parameter_noinfo
 0x785791: push    edi
-0x785792: push    esi
+0x785792: push    esi; last
 0x785793: push    ebx
-0x785794: push    esi
-0x785795: lea     edx, [esp+38h+var_14]
-0x785799: push    edx
-0x78579A: mov     ecx, esi
-0x78579C: call    sub_784AC0
-0x7857A1: lea     ecx, [esp+28h+arg_4]; void *
+0x785794: push    esi; first
+0x785795: lea     edx, [esp+38h+result]
+0x785799: push    edx; result
+0x78579A: mov     ecx, esi; this
+0x78579C: call    OB_stVector24_EraseRange_010201A0; Oblivion 1.2.0.416: checked erase(first,last) for 0x18-byte records; compacts the tail, destroys remnants, updates end, and returns an iterator.
+0x7857A1: lea     ecx, [esp+28h+value]; this
 0x7857A5: mov     [esp+28h+var_4], 0FFFFFFFFh
-0x7857AD: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x7857AD: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x7857B2: mov     ecx, [esp+28h+var_C]
 0x7857B6: mov     large fs:0, ecx
 0x7857BD: pop     ecx
@@ -102,3 +102,12 @@
 0x7857C1: pop     ebx
 0x7857C2: add     esp, 14h
 0x7857C5: retn    1Ch
+0x9CB030: lea     ecx, [ebp+8]; this
+0x9CB033: jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x9CB038: mov     edx, [esp+value.data]
+0x9CB03C: lea     eax, [edx-18h]
+0x9CB03F: mov     ecx, [edx-1Ch]
+0x9CB042: xor     ecx, eax
+0x9CB044: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CB049: mov     eax, offset stru_AF3708
+0x9CB04E: jmp     ___CxxFrameHandler3

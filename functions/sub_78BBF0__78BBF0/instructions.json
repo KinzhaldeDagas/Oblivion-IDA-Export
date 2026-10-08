@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x78BBF0",
-    "line": "push    ebp",
+    "line": "push    ebp; CSpeedTreeRT::SetWindStrength. Accepts nonnegative strength, defaults old strength/time offset from CWindEngine on -1.0 sentinels, updates wind engine, and invalidates CPU-wind branch/frond/leaf caches.",
     "mnemonic": "push",
     "size": 1
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x78BC27",
-    "line": "fld     [ebp+arg_0]",
+    "line": "fld     [ebp+newStrength]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x78BC3F",
-    "line": "fcom    [ebp+arg_4]",
+    "line": "fcom    [ebp+oldStrength]",
     "mnemonic": "fcom",
     "size": 3
   },
@@ -205,13 +205,13 @@
   },
   {
     "ea": "0x78BC4F",
-    "line": "fstp    [ebp+arg_4]",
+    "line": "fstp    [ebp+oldStrength]",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x78BC52",
-    "line": "fcomp   [ebp+arg_8]",
+    "line": "fcomp   [ebp+frequencyTimeOffset]",
     "mnemonic": "fcomp",
     "size": 3
   },
@@ -247,19 +247,19 @@
   },
   {
     "ea": "0x78BC61",
-    "line": "fstp    [ebp+arg_8]",
+    "line": "fstp    [ebp+frequencyTimeOffset]",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x78BC64",
-    "line": "fld     [ebp+arg_8]",
+    "line": "fld     [ebp+frequencyTimeOffset]",
     "mnemonic": "fld",
     "size": 3
   },
   {
     "ea": "0x78BC67",
-    "line": "mov     ecx, [esi+10h]",
+    "line": "mov     ecx, [esi+10h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -271,31 +271,31 @@
   },
   {
     "ea": "0x78BC6D",
-    "line": "fstp    dword ptr [esp+6Ch+var_64]; float",
+    "line": "fstp    [esp+6Ch+oldTimeShift]; oldTimeShift",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x78BC71",
-    "line": "fld     [ebp+arg_4]",
+    "line": "fld     [ebp+oldStrength]",
     "mnemonic": "fld",
     "size": 3
   },
   {
     "ea": "0x78BC74",
-    "line": "fstp    [esp+6Ch+var_68]; float",
+    "line": "fstp    [esp+6Ch+var_68]; oldStrength",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x78BC78",
-    "line": "fstp    [esp+6Ch+var_6C]; float",
+    "line": "fstp    [esp+6Ch+var_6C]; newStrength",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x78BC7B",
-    "line": "call    sub_793B90",
+    "line": "call    OB_CWindEngine_SetWindStrength_010201A0; Sets wind strength, recomputes leaf frequency/throw, preserves phase continuity via timeFrequencyShift, and disables external rocking-angle input.",
     "mnemonic": "call",
     "size": 5
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x78BC83",
-    "line": "fstp    [ebp+arg_8]",
+    "line": "fstp    [ebp+frequencyTimeOffset]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x78BC89",
-    "line": "fld     [ebp+arg_8]",
+    "line": "fld     [ebp+frequencyTimeOffset]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -439,13 +439,13 @@
   },
   {
     "ea": "0x78BCBF",
-    "line": "mov     ecx, [esi+8]",
+    "line": "mov     ecx, [esi+8]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x78BCC2",
-    "line": "call    sub_7982D0",
+    "line": "call    OB_CLeafGeometry_Invalidate_010201A0; Oblivion CLeafGeometry::Invalidate. Clears generatedCardTableValid at +0x3C in every 0x44-byte leaf LOD record; persistent counts and pointers are not rebuilt here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x78BCDE",
-    "line": "push    32h ; '2'; MaxCount",
+    "line": "push    32h ; '2'; count",
     "mnemonic": "push",
     "size": 2
   },
@@ -529,13 +529,13 @@
   },
   {
     "ea": "0x78BCE7",
-    "line": "mov     ecx, offset dword_B2B614",
+    "line": "mov     ecx, offset OB_g_strError_010201A0; this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x78BCEC",
-    "line": "call    sub_414500",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
     "mnemonic": "call",
     "size": 5
   },
@@ -589,13 +589,13 @@
   },
   {
     "ea": "0x78BD08",
-    "line": "lea     esi, [ebp+var_34]",
+    "line": "lea     esi, [ebp+result]; result",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x78BD0B",
-    "line": "call    sub_7A54A0",
+    "line": "call    OB_IdvFormatString_010201A0; Oblivion binary evidence: IdvFormatString. Formats variadic arguments with vsprintf into a 1024-byte stack buffer, constructs the hidden-result 28-byte SSO string, assigns strlen(buffer) bytes, and returns the result pointer in EAX. SpeedTreeRT 4.1 IdvGlobals.h:77-93 corroborates the name and fixed buffer only after observation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -643,13 +643,13 @@
   },
   {
     "ea": "0x78BD25",
-    "line": "push    eax; Src",
+    "line": "push    eax; error",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78BD26",
-    "line": "call    sub_7895E0",
+    "line": "call    CSpeedTreeRT__SetError; Oblivion binary evidence: CSpeedTreeRT static error setter. Assigns the NUL-terminated input into the sole 28-byte global error string at 0xB2B614. After observation, SpeedTreeRT 4.1 SpeedTreeRT.cpp:2671-2677 corroborates SetError and g_strError.",
     "mnemonic": "call",
     "size": 5
   },
@@ -661,13 +661,13 @@
   },
   {
     "ea": "0x78BD2E",
-    "line": "lea     ecx, [ebp+var_34]",
+    "line": "lea     ecx, [ebp+result]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x78BD31",
-    "line": "call    sub_79AB00",
+    "line": "call    OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -703,13 +703,13 @@
   },
   {
     "ea": "0x78BD48",
-    "line": "lea     esi, [ebp+var_50]",
+    "line": "lea     esi, [ebp+var_50]; result",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x78BD4B",
-    "line": "call    sub_7A54A0",
+    "line": "call    OB_IdvFormatString_010201A0; Oblivion binary evidence: IdvFormatString. Formats variadic arguments with vsprintf into a 1024-byte stack buffer, constructs the hidden-result 28-byte SSO string, assigns strlen(buffer) bytes, and returns the result pointer in EAX. SpeedTreeRT 4.1 IdvGlobals.h:77-93 corroborates the name and fixed buffer only after observation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -757,13 +757,13 @@
   },
   {
     "ea": "0x78BD65",
-    "line": "push    eax; Src",
+    "line": "push    eax; error",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78BD66",
-    "line": "call    sub_7895E0",
+    "line": "call    CSpeedTreeRT__SetError; Oblivion binary evidence: CSpeedTreeRT static error setter. Assigns the NUL-terminated input into the sole 28-byte global error string at 0xB2B614. After observation, SpeedTreeRT 4.1 SpeedTreeRT.cpp:2671-2677 corroborates SetError and g_strError.",
     "mnemonic": "call",
     "size": 5
   },
@@ -775,13 +775,13 @@
   },
   {
     "ea": "0x78BD6E",
-    "line": "lea     ecx, [ebp+var_50]",
+    "line": "lea     ecx, [ebp+var_50]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x78BD71",
-    "line": "call    sub_79AB00",
+    "line": "call    OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -796,5 +796,71 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CB6E0",
+    "line": "lea     ecx, [ebp+result]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB6E3",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB6E8",
+    "line": "lea     ecx, [ebp+var_50]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB6EB",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB6F0",
+    "line": "mov     edx, [esp-4+oldStrength]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CB6F4",
+    "line": "lea     eax, [edx+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB6F7",
+    "line": "mov     ecx, [edx-54h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB6FA",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CB6FC",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB701",
+    "line": "mov     eax, offset stru_AF414C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB706",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

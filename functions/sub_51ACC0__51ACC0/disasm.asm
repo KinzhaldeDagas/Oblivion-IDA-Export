@@ -1,4 +1,4 @@
-0x51ACC0: mov     eax, [esp+arg_0]
+0x51ACC0: mov     eax, [esp+arg_0]; Returns true when the encoded key is not group 0xFF and its fixed group record uses note-template class 5. In Oblivion's 43 records that is AttackPower..AttackRightPower plus CastSelf/Touch/Target and their Alt variants.
 0x51ACC4: cmp     ax, 0FFh
 0x51ACC8: jnz     short loc_51ACCD
 0x51ACCA: xor     al, al

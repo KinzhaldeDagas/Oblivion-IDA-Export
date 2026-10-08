@@ -1,1 +1,1 @@
-IOleInPlaceSite_0
+typedef IOleInPlaceSite IOleInPlaceSite_0;

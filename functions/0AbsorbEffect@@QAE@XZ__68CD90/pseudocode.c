@@ -14,5 +14,5 @@ void __cdecl AbsorbEffect::AbsorbEffect(
 {
   ActiveEffect *v12; // ecx
 
-  AbsorbEffect::AbsorbEffect(v12, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12);
+  AbsorbEffect::AbsorbEffect(v12, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12); /*0x68cdb0*/
 }

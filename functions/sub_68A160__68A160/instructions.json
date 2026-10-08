@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x68A160",
-    "line": "mov     ecx, [ecx+4]",
+    "line": "mov     ecx, [ecx+4]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -19,13 +19,13 @@
   },
   {
     "ea": "0x68A167",
-    "line": "jmp     sub_68B110",
+    "line": "jmp     TravelPathNode_GetPosition; Verified TravelPathNode_GetPosition returns a stored NiPoint3* for kind 1; for kind 0, returns reference GetPos unless the ref has TeleportData, in which case it returns the linked door's TeleportData xyz marker. Null payloads and unrecognized kinds return g_zeroNiPoint3.",
     "mnemonic": "jmp",
     "size": 5
   },
   {
     "ea": "0x68A16C",
-    "line": "mov     eax, offset Vector3_InitValue?",
+    "line": "mov     eax, offset g_zeroNiPoint3",
     "mnemonic": "mov",
     "size": 5
   },

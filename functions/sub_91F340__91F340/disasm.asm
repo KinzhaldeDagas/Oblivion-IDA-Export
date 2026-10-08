@@ -23,7 +23,6 @@
 0x91F373: mov     [ebx+4], esi
 0x91F376: jle     short loc_91F390
 0x91F378: jmp     short loc_91F380
-0x91F37A: align 10h
 0x91F380: mov     ecx, [edi]
 0x91F382: mov     edx, [ecx]
 0x91F384: mov     dword ptr [edx+eax*4], 0FFFFFFFFh

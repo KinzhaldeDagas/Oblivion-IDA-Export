@@ -1,1 +1,4 @@
-_LDRP_CSLIST
+struct _LDRP_CSLIST
+{
+SINGLE_LIST_ENTRY *Tail;
+};

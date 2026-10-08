@@ -1,19 +1,32 @@
 {
-  "callees_count": 8,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 6,
+  "chunks": [
+    [
+      "0x5511D0",
+      "0x551248"
+    ]
+  ],
+  "chunks_sha256": "38520cb0e616abf52ef3a92f63932e35aa9c81ed136aeb06a782a2940a033309",
+  "comment_regular": "Verified Oblivion: row-major sum of coefficient squares over rows*columns. Each square and accumulator are stored as float; result returned through x87. Storage check only establishes nonempty vector, not index < storage length. Requires consistent matrix dimensions/storage. Used by Combine and sub_6EE270.",
+  "comment_repeatable": "Verified Oblivion: row-major sum of coefficient squares over rows*columns. Each square and accumulator are stored as float; result returned through x87. Storage check only establishes nonempty vector, not index < storage length. Requires consistent matrix dimensions/storage. Used by Combine and sub_6EE270.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_5511D0",
+  "display_name": "FaceGenMatrix_SumSquares",
   "end_ea": "0x551248",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_5511D0",
+  "name": "FaceGenMatrix_SumSquares",
   "segment": ".text",
   "sha256": "38520cb0e616abf52ef3a92f63932e35aa9c81ed136aeb06a782a2940a033309",
   "size": 120,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5511D0",
-  "type": "double __thiscall(unsigned int *this)",
+  "total_chunk_size": 120,
+  "type": "float __thiscall(const FaceGenMatrix *this)",
   "xrefs_from_count": 52,
   "xrefs_to_count": 6
 }

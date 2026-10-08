@@ -13,41 +13,41 @@ void *__thiscall BSHash_constr(void *this, char *FullPath, int a3)
   char Filename[260]; // [esp+2Ch] [ebp-20Ch] BYREF
   char Dir[260]; // [esp+130h] [ebp-108h] BYREF
 
-  v3 = FullPath;
-  v4 = 0;
-  if ( a3 != 2 )
+  v3 = FullPath; /*0x6fa2e4*/
+  v4 = 0; /*0x6fa2f5*/
+  if ( a3 != 2 ) /*0x6fa2fc*/
   {
-    Drive[0] = 0;
-    Dir[0] = 0;
-    Filename[0] = 0;
-    Ext[0] = 0;
-    _splitpath(FullPath, Drive, Dir, Filename, Ext);
-    if ( a3 )
+    Drive[0] = 0; /*0x6fa31a*/
+    Dir[0] = 0; /*0x6fa31e*/
+    Filename[0] = 0; /*0x6fa325*/
+    Ext[0] = 0; /*0x6fa329*/
+    _splitpath(FullPath, Drive, Dir, Filename, Ext); /*0x6fa32d*/
+    if ( a3 ) /*0x6fa337*/
     {
-      v6 = 0;
-      do
+      v6 = 0; /*0x6fa33f*/
+      do /*0x6fa34e*/
       {
-        v7 = Drive[v6];
-        Filename[v6++] = v7;
+        v7 = Drive[v6]; /*0x6fa341*/
+        Filename[v6++] = v7; /*0x6fa345*/
       }
-      while ( v7 );
-      v8 = strlen(Dir) + 1;
-      v9 = &v15;
-      while ( *++v9 )
-        ;
-      qmemcpy(v9, Dir, v8);
-      if ( !Filename[0] )
-        strcpy(Filename, ".");
-      v11 = strlen(Filename);
-      if ( Filename[v11 - 1] == 0x5C )
-        Filename[v11 - 1] = 0;
+      while ( v7 ); /*0x6fa34e*/
+      v8 = strlen(Dir) + 1; /*0x6fa367*/
+      v9 = &v15; /*0x6fa370*/
+      while ( *++v9 ) /*0x6fa37b*/
+        ; /*0x6fa373*/
+      qmemcpy(v9, Dir, v8); /*0x6fa384*/
+      if ( !Filename[0] ) /*0x6fa392*/
+        strcpy(Filename, "."); /*0x6fa394*/
+      v11 = strlen(Filename); /*0x6fa39b*/
+      if ( Filename[v11 - 1] == 0x5C ) /*0x6fa3b6*/
+        Filename[v11 - 1] = 0; /*0x6fa3b8*/
     }
     else
     {
-      v4 = Ext;
+      v4 = Ext; /*0x6fa339*/
     }
-    v3 = Filename;
+    v3 = Filename; /*0x6fa3ba*/
   }
-  sub_6FA080(v3, v4, (int)this);
-  return this;
+  sub_6FA080(v3, v4, (int)this); /*0x6fa3c1*/
+  return this; /*0x6fa3d0*/
 }

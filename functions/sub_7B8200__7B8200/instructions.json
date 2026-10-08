@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7B8200",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Loads/caches a NiSourceTexture by filename and optionally rejects a loaded texture that lacks mipmaps. The first argument is the returned smart-pointer storage.",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x7B823A",
-    "line": "mov     ebp, [esp+220h+arg_0]",
+    "line": "mov     ebp, [esp+220h+outTexture]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x7B8292",
-    "line": "cmp     [esp+220h+arg_8], 0",
+    "line": "cmp     [esp+220h+loadFromCache], 0",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x7B82B8",
-    "line": "push    offset dword_B256D0; int",
+    "line": "push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0; int",
     "mnemonic": "push",
     "size": 5
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x7B82BE",
-    "line": "call    NiSourceTexture__LoadTextureByFilename",
+    "line": "call    NiSourceTexture__LoadTextureByFilename; SpeedTreeOBSE 2026-07-14: generic NiSourceTexture creation preserves default pixel/alpha/mipmap preferences. Suitable for authored DDS/TGA composite candidates resolved through engine resources.",
     "mnemonic": "call",
     "size": 5
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x7B82E7",
-    "line": "cmp     [esp+220h+arg_8], 0",
+    "line": "cmp     [esp+220h+loadFromCache], 0",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x7B82F5",
-    "line": "cmp     [esp+220h+arg_C], 0",
+    "line": "cmp     [esp+220h+requireMipmaps], 0",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x7B830C",
-    "line": "push    offset dword_B3F95C",
+    "line": "push    offset stru_B3F95C",
     "mnemonic": "push",
     "size": 5
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x7B836C",
-    "line": "call    eax ; dword_B42E8C",
+    "line": "call    eax ; unk_B42E8C",
     "mnemonic": "call",
     "size": 2
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x7B8378",
-    "line": "lea     ecx, [esp+220h+var_210]; this",
+    "line": "lea     ecx, [esp+220h+var_210]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -685,7 +685,7 @@
   },
   {
     "ea": "0x7B838C",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -886,5 +886,125 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CDAE0",
+    "line": "lea     ecx, [ebp-210h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CDAE6",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDAEB",
+    "line": "mov     eax, [ebp-20Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9CDAF1",
+    "line": "and     eax, 1",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9CDAF4",
+    "line": "jz      locret_9CDB0C",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9CDAFA",
+    "line": "and     dword ptr [ebp-20Ch], 0FFFFFFFEh",
+    "mnemonic": "and",
+    "size": 7
+  },
+  {
+    "ea": "0x9CDB01",
+    "line": "mov     ecx, [ebp-208h]; slot",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9CDB07",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDB0C",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CDB0D",
+    "line": "mov     edx, [esp+Src]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CDB11",
+    "line": "lea     eax, [edx-210h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CDB17",
+    "line": "mov     ecx, [edx-214h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9CDB1D",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CDB1F",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDB24",
+    "line": "add     eax, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CDB27",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CDB2A",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CDB2C",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDB31",
+    "line": "mov     eax, offset stru_AF6CC4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDB36",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,0 +1,1743 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "request",
+  "definition": "enum request : __int32\n{\nREQ_new_process = 0x0,\nREQ_get_new_process_info = 0x1,\nREQ_new_thread = 0x2,\nREQ_get_startup_info = 0x3,\nREQ_init_process_done = 0x4,\nREQ_init_first_thread = 0x5,\nREQ_init_thread = 0x6,\nREQ_terminate_process = 0x7,\nREQ_terminate_thread = 0x8,\nREQ_get_process_info = 0x9,\nREQ_get_process_debug_info = 0xA,\nREQ_get_process_image_name = 0xB,\nREQ_get_process_vm_counters = 0xC,\nREQ_set_process_info = 0xD,\nREQ_get_thread_info = 0xE,\nREQ_get_thread_times = 0xF,\nREQ_set_thread_info = 0x10,\nREQ_suspend_thread = 0x11,\nREQ_resume_thread = 0x12,\nREQ_queue_apc = 0x13,\nREQ_get_apc_result = 0x14,\nREQ_close_handle = 0x15,\nREQ_set_handle_info = 0x16,\nREQ_dup_handle = 0x17,\nREQ_make_temporary = 0x18,\nREQ_open_process = 0x19,\nREQ_open_thread = 0x1A,\nREQ_select = 0x1B,\nREQ_create_event = 0x1C,\nREQ_event_op = 0x1D,\nREQ_query_event = 0x1E,\nREQ_open_event = 0x1F,\nREQ_create_keyed_event = 0x20,\nREQ_open_keyed_event = 0x21,\nREQ_create_mutex = 0x22,\nREQ_release_mutex = 0x23,\nREQ_open_mutex = 0x24,\nREQ_query_mutex = 0x25,\nREQ_create_semaphore = 0x26,\nREQ_release_semaphore = 0x27,\nREQ_query_semaphore = 0x28,\nREQ_open_semaphore = 0x29,\nREQ_create_file = 0x2A,\nREQ_open_file_object = 0x2B,\nREQ_alloc_file_handle = 0x2C,\nREQ_get_handle_unix_name = 0x2D,\nREQ_get_handle_fd = 0x2E,\nREQ_get_directory_cache_entry = 0x2F,\nREQ_flush = 0x30,\nREQ_get_file_info = 0x31,\nREQ_get_volume_info = 0x32,\nREQ_lock_file = 0x33,\nREQ_unlock_file = 0x34,\nREQ_recv_socket = 0x35,\nREQ_poll_socket = 0x36,\nREQ_send_socket = 0x37,\nREQ_get_next_console_request = 0x38,\nREQ_read_directory_changes = 0x39,\nREQ_read_change = 0x3A,\nREQ_create_mapping = 0x3B,\nREQ_open_mapping = 0x3C,\nREQ_get_mapping_info = 0x3D,\nREQ_map_view = 0x3E,\nREQ_unmap_view = 0x3F,\nREQ_get_mapping_committed_range = 0x40,\nREQ_add_mapping_committed_range = 0x41,\nREQ_is_same_mapping = 0x42,\nREQ_get_mapping_filename = 0x43,\nREQ_list_processes = 0x44,\nREQ_create_debug_obj = 0x45,\nREQ_wait_debug_event = 0x46,\nREQ_queue_exception_event = 0x47,\nREQ_get_exception_status = 0x48,\nREQ_continue_debug_event = 0x49,\nREQ_debug_process = 0x4A,\nREQ_set_debug_obj_info = 0x4B,\nREQ_read_process_memory = 0x4C,\nREQ_write_process_memory = 0x4D,\nREQ_create_key = 0x4E,\nREQ_open_key = 0x4F,\nREQ_delete_key = 0x50,\nREQ_flush_key = 0x51,\nREQ_enum_key = 0x52,\nREQ_set_key_value = 0x53,\nREQ_get_key_value = 0x54,\nREQ_enum_key_value = 0x55,\nREQ_delete_key_value = 0x56,\nREQ_load_registry = 0x57,\nREQ_unload_registry = 0x58,\nREQ_save_registry = 0x59,\nREQ_set_registry_notification = 0x5A,\nREQ_create_timer = 0x5B,\nREQ_open_timer = 0x5C,\nREQ_set_timer = 0x5D,\nREQ_cancel_timer = 0x5E,\nREQ_get_timer_info = 0x5F,\nREQ_get_thread_context = 0x60,\nREQ_set_thread_context = 0x61,\nREQ_get_selector_entry = 0x62,\nREQ_add_atom = 0x63,\nREQ_delete_atom = 0x64,\nREQ_find_atom = 0x65,\nREQ_get_atom_information = 0x66,\nREQ_get_msg_queue = 0x67,\nREQ_set_queue_fd = 0x68,\nREQ_set_queue_mask = 0x69,\nREQ_get_queue_status = 0x6A,\nREQ_get_process_idle_event = 0x6B,\nREQ_send_message = 0x6C,\nREQ_post_quit_message = 0x6D,\nREQ_send_hardware_message = 0x6E,\nREQ_get_message = 0x6F,\nREQ_reply_message = 0x70,\nREQ_accept_hardware_message = 0x71,\nREQ_get_message_reply = 0x72,\nREQ_set_win_timer = 0x73,\nREQ_kill_win_timer = 0x74,\nREQ_is_window_hung = 0x75,\nREQ_get_serial_info = 0x76,\nREQ_set_serial_info = 0x77,\nREQ_register_async = 0x78,\nREQ_cancel_async = 0x79,\nREQ_get_async_result = 0x7A,\nREQ_read = 0x7B,\nREQ_write = 0x7C,\nREQ_ioctl = 0x7D,\nREQ_set_irp_result = 0x7E,\nREQ_create_named_pipe = 0x7F,\nREQ_set_named_pipe_info = 0x80,\nREQ_create_window = 0x81,\nREQ_destroy_window = 0x82,\nREQ_get_desktop_window = 0x83,\nREQ_set_window_owner = 0x84,\nREQ_get_window_info = 0x85,\nREQ_set_window_info = 0x86,\nREQ_set_parent = 0x87,\nREQ_get_window_parents = 0x88,\nREQ_get_window_children = 0x89,\nREQ_get_window_children_from_point = 0x8A,\nREQ_get_window_tree = 0x8B,\nREQ_set_window_pos = 0x8C,\nREQ_get_window_rectangles = 0x8D,\nREQ_get_window_text = 0x8E,\nREQ_set_window_text = 0x8F,\nREQ_get_windows_offset = 0x90,\nREQ_get_visible_region = 0x91,\nREQ_get_surface_region = 0x92,\nREQ_get_window_region = 0x93,\nREQ_set_window_region = 0x94,\nREQ_set_layer_region = 0x95,\nREQ_get_update_region = 0x96,\nREQ_update_window_zorder = 0x97,\nREQ_redraw_window = 0x98,\nREQ_set_window_property = 0x99,\nREQ_remove_window_property = 0x9A,\nREQ_get_window_property = 0x9B,\nREQ_get_window_properties = 0x9C,\nREQ_create_winstation = 0x9D,\nREQ_open_winstation = 0x9E,\nREQ_close_winstation = 0x9F,\nREQ_get_process_winstation = 0xA0,\nREQ_set_process_winstation = 0xA1,\nREQ_enum_winstation = 0xA2,\nREQ_create_desktop = 0xA3,\nREQ_open_desktop = 0xA4,\nREQ_open_input_desktop = 0xA5,\nREQ_close_desktop = 0xA6,\nREQ_get_thread_desktop = 0xA7,\nREQ_set_thread_desktop = 0xA8,\nREQ_enum_desktop = 0xA9,\nREQ_set_user_object_info = 0xAA,\nREQ_register_hotkey = 0xAB,\nREQ_unregister_hotkey = 0xAC,\nREQ_attach_thread_input = 0xAD,\nREQ_get_thread_input = 0xAE,\nREQ_get_last_input_time = 0xAF,\nREQ_get_key_state = 0xB0,\nREQ_set_key_state = 0xB1,\nREQ_set_foreground_window = 0xB2,\nREQ_set_focus_window = 0xB3,\nREQ_set_active_window = 0xB4,\nREQ_set_capture_window = 0xB5,\nREQ_set_caret_window = 0xB6,\nREQ_set_caret_info = 0xB7,\nREQ_set_hook = 0xB8,\nREQ_remove_hook = 0xB9,\nREQ_start_hook_chain = 0xBA,\nREQ_finish_hook_chain = 0xBB,\nREQ_get_hook_info = 0xBC,\nREQ_create_class = 0xBD,\nREQ_destroy_class = 0xBE,\nREQ_set_class_info = 0xBF,\nREQ_open_clipboard = 0xC0,\nREQ_close_clipboard = 0xC1,\nREQ_empty_clipboard = 0xC2,\nREQ_set_clipboard_data = 0xC3,\nREQ_get_clipboard_data = 0xC4,\nREQ_get_clipboard_formats = 0xC5,\nREQ_enum_clipboard_formats = 0xC6,\nREQ_release_clipboard = 0xC7,\nREQ_get_clipboard_info = 0xC8,\nREQ_set_clipboard_viewer = 0xC9,\nREQ_add_clipboard_listener = 0xCA,\nREQ_remove_clipboard_listener = 0xCB,\nREQ_open_token = 0xCC,\nREQ_set_global_windows = 0xCD,\nREQ_adjust_token_privileges = 0xCE,\nREQ_get_token_privileges = 0xCF,\nREQ_check_token_privileges = 0xD0,\nREQ_duplicate_token = 0xD1,\nREQ_filter_token = 0xD2,\nREQ_access_check = 0xD3,\nREQ_get_token_sid = 0xD4,\nREQ_get_token_groups = 0xD5,\nREQ_get_token_default_dacl = 0xD6,\nREQ_set_token_default_dacl = 0xD7,\nREQ_set_security_object = 0xD8,\nREQ_get_security_object = 0xD9,\nREQ_get_system_handles = 0xDA,\nREQ_create_mailslot = 0xDB,\nREQ_set_mailslot_info = 0xDC,\nREQ_create_directory = 0xDD,\nREQ_open_directory = 0xDE,\nREQ_get_directory_entry = 0xDF,\nREQ_create_symlink = 0xE0,\nREQ_open_symlink = 0xE1,\nREQ_query_symlink = 0xE2,\nREQ_get_object_info = 0xE3,\nREQ_get_object_name = 0xE4,\nREQ_get_object_type = 0xE5,\nREQ_get_object_types = 0xE6,\nREQ_allocate_locally_unique_id = 0xE7,\nREQ_create_device_manager = 0xE8,\nREQ_create_device = 0xE9,\nREQ_delete_device = 0xEA,\nREQ_get_next_device_request = 0xEB,\nREQ_get_kernel_object_ptr = 0xEC,\nREQ_set_kernel_object_ptr = 0xED,\nREQ_grab_kernel_object = 0xEE,\nREQ_release_kernel_object = 0xEF,\nREQ_get_kernel_object_handle = 0xF0,\nREQ_make_process_system = 0xF1,\nREQ_get_token_info = 0xF2,\nREQ_create_linked_token = 0xF3,\nREQ_create_completion = 0xF4,\nREQ_open_completion = 0xF5,\nREQ_add_completion = 0xF6,\nREQ_remove_completion = 0xF7,\nREQ_query_completion = 0xF8,\nREQ_set_completion_info = 0xF9,\nREQ_add_fd_completion = 0xFA,\nREQ_set_fd_completion_mode = 0xFB,\nREQ_set_fd_disp_info = 0xFC,\nREQ_set_fd_name_info = 0xFD,\nREQ_set_fd_eof_info = 0xFE,\nREQ_get_window_layered_info = 0xFF,\nREQ_set_window_layered_info = 0x100,\nREQ_alloc_user_handle = 0x101,\nREQ_free_user_handle = 0x102,\nREQ_set_cursor = 0x103,\nREQ_get_cursor_history = 0x104,\nREQ_get_rawinput_buffer = 0x105,\nREQ_update_rawinput_devices = 0x106,\nREQ_get_rawinput_devices = 0x107,\nREQ_create_job = 0x108,\nREQ_open_job = 0x109,\nREQ_assign_job = 0x10A,\nREQ_process_in_job = 0x10B,\nREQ_set_job_limits = 0x10C,\nREQ_set_job_completion_port = 0x10D,\nREQ_get_job_info = 0x10E,\nREQ_terminate_job = 0x10F,\nREQ_suspend_process = 0x110,\nREQ_resume_process = 0x111,\nREQ_get_next_thread = 0x112,\nREQ_create_esync = 0x113,\nREQ_open_esync = 0x114,\nREQ_get_esync_fd = 0x115,\nREQ_esync_msgwait = 0x116,\nREQ_get_esync_apc_fd = 0x117,\nREQ_create_fsync = 0x118,\nREQ_open_fsync = 0x119,\nREQ_get_fsync_idx = 0x11A,\nREQ_fsync_msgwait = 0x11B,\nREQ_get_fsync_apc_idx = 0x11C,\nREQ_NB_REQUESTS = 0x11D,\n}\n",
+  "id": 18374686479672023582,
+  "is_union": false,
+  "kind": "enum",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_new_process",
+      "value": 0
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_new_process_info",
+      "value": 1
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_new_thread",
+      "value": 2
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_startup_info",
+      "value": 3
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_init_process_done",
+      "value": 4
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_init_first_thread",
+      "value": 5
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_init_thread",
+      "value": 6
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_terminate_process",
+      "value": 7
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_terminate_thread",
+      "value": 8
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_process_info",
+      "value": 9
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_process_debug_info",
+      "value": 10
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_process_image_name",
+      "value": 11
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_process_vm_counters",
+      "value": 12
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_process_info",
+      "value": 13
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_thread_info",
+      "value": 14
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_thread_times",
+      "value": 15
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_thread_info",
+      "value": 16
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_suspend_thread",
+      "value": 17
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_resume_thread",
+      "value": 18
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_queue_apc",
+      "value": 19
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_apc_result",
+      "value": 20
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_close_handle",
+      "value": 21
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_handle_info",
+      "value": 22
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_dup_handle",
+      "value": 23
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_make_temporary",
+      "value": 24
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_open_process",
+      "value": 25
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_open_thread",
+      "value": 26
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_select",
+      "value": 27
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_create_event",
+      "value": 28
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_event_op",
+      "value": 29
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_query_event",
+      "value": 30
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_open_event",
+      "value": 31
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_create_keyed_event",
+      "value": 32
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_open_keyed_event",
+      "value": 33
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_create_mutex",
+      "value": 34
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_release_mutex",
+      "value": 35
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_open_mutex",
+      "value": 36
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_query_mutex",
+      "value": 37
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_create_semaphore",
+      "value": 38
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_release_semaphore",
+      "value": 39
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_query_semaphore",
+      "value": 40
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_open_semaphore",
+      "value": 41
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_create_file",
+      "value": 42
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_open_file_object",
+      "value": 43
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_alloc_file_handle",
+      "value": 44
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_handle_unix_name",
+      "value": 45
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_handle_fd",
+      "value": 46
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_directory_cache_entry",
+      "value": 47
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_flush",
+      "value": 48
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_file_info",
+      "value": 49
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_volume_info",
+      "value": 50
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_lock_file",
+      "value": 51
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_unlock_file",
+      "value": 52
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_recv_socket",
+      "value": 53
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_poll_socket",
+      "value": 54
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_send_socket",
+      "value": 55
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_next_console_request",
+      "value": 56
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_read_directory_changes",
+      "value": 57
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_read_change",
+      "value": 58
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_create_mapping",
+      "value": 59
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_open_mapping",
+      "value": 60
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_mapping_info",
+      "value": 61
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_map_view",
+      "value": 62
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_unmap_view",
+      "value": 63
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_mapping_committed_range",
+      "value": 64
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_add_mapping_committed_range",
+      "value": 65
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_is_same_mapping",
+      "value": 66
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_mapping_filename",
+      "value": 67
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_list_processes",
+      "value": 68
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_create_debug_obj",
+      "value": 69
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_wait_debug_event",
+      "value": 70
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_queue_exception_event",
+      "value": 71
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_exception_status",
+      "value": 72
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_continue_debug_event",
+      "value": 73
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_debug_process",
+      "value": 74
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_debug_obj_info",
+      "value": 75
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_read_process_memory",
+      "value": 76
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_write_process_memory",
+      "value": 77
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_create_key",
+      "value": 78
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_open_key",
+      "value": 79
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_delete_key",
+      "value": 80
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_flush_key",
+      "value": 81
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_enum_key",
+      "value": 82
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_key_value",
+      "value": 83
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_key_value",
+      "value": 84
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_enum_key_value",
+      "value": 85
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_delete_key_value",
+      "value": 86
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_load_registry",
+      "value": 87
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_unload_registry",
+      "value": 88
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_save_registry",
+      "value": 89
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_registry_notification",
+      "value": 90
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_create_timer",
+      "value": 91
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_open_timer",
+      "value": 92
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_timer",
+      "value": 93
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_cancel_timer",
+      "value": 94
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_timer_info",
+      "value": 95
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_thread_context",
+      "value": 96
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_thread_context",
+      "value": 97
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_selector_entry",
+      "value": 98
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_add_atom",
+      "value": 99
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_delete_atom",
+      "value": 100
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_find_atom",
+      "value": 101
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_atom_information",
+      "value": 102
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_msg_queue",
+      "value": 103
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_queue_fd",
+      "value": 104
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_queue_mask",
+      "value": 105
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_queue_status",
+      "value": 106
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_process_idle_event",
+      "value": 107
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_send_message",
+      "value": 108
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_post_quit_message",
+      "value": 109
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_send_hardware_message",
+      "value": 110
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_message",
+      "value": 111
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_reply_message",
+      "value": 112
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_accept_hardware_message",
+      "value": 113
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_message_reply",
+      "value": 114
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_win_timer",
+      "value": 115
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_kill_win_timer",
+      "value": 116
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_is_window_hung",
+      "value": 117
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_serial_info",
+      "value": 118
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_serial_info",
+      "value": 119
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_register_async",
+      "value": 120
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_cancel_async",
+      "value": 121
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_async_result",
+      "value": 122
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_read",
+      "value": 123
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_write",
+      "value": 124
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_ioctl",
+      "value": 125
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_irp_result",
+      "value": 126
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_create_named_pipe",
+      "value": 127
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_named_pipe_info",
+      "value": 128
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_create_window",
+      "value": 129
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_destroy_window",
+      "value": 130
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_desktop_window",
+      "value": 131
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_window_owner",
+      "value": 132
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_window_info",
+      "value": 133
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_window_info",
+      "value": 134
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_parent",
+      "value": 135
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_window_parents",
+      "value": 136
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_window_children",
+      "value": 137
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_window_children_from_point",
+      "value": 138
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_window_tree",
+      "value": 139
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_window_pos",
+      "value": 140
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_window_rectangles",
+      "value": 141
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_window_text",
+      "value": 142
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_window_text",
+      "value": 143
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_windows_offset",
+      "value": 144
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_visible_region",
+      "value": 145
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_surface_region",
+      "value": 146
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_window_region",
+      "value": 147
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_window_region",
+      "value": 148
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_layer_region",
+      "value": 149
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_update_region",
+      "value": 150
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_update_window_zorder",
+      "value": 151
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_redraw_window",
+      "value": 152
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_window_property",
+      "value": 153
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_remove_window_property",
+      "value": 154
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_window_property",
+      "value": 155
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_window_properties",
+      "value": 156
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_create_winstation",
+      "value": 157
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_open_winstation",
+      "value": 158
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_close_winstation",
+      "value": 159
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_process_winstation",
+      "value": 160
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_process_winstation",
+      "value": 161
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_enum_winstation",
+      "value": 162
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_create_desktop",
+      "value": 163
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_open_desktop",
+      "value": 164
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_open_input_desktop",
+      "value": 165
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_close_desktop",
+      "value": 166
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_thread_desktop",
+      "value": 167
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_thread_desktop",
+      "value": 168
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_enum_desktop",
+      "value": 169
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_user_object_info",
+      "value": 170
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_register_hotkey",
+      "value": 171
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_unregister_hotkey",
+      "value": 172
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_attach_thread_input",
+      "value": 173
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_thread_input",
+      "value": 174
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_last_input_time",
+      "value": 175
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_key_state",
+      "value": 176
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_key_state",
+      "value": 177
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_foreground_window",
+      "value": 178
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_focus_window",
+      "value": 179
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_active_window",
+      "value": 180
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_capture_window",
+      "value": 181
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_caret_window",
+      "value": 182
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_caret_info",
+      "value": 183
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_hook",
+      "value": 184
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_remove_hook",
+      "value": 185
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_start_hook_chain",
+      "value": 186
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_finish_hook_chain",
+      "value": 187
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_hook_info",
+      "value": 188
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_create_class",
+      "value": 189
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_destroy_class",
+      "value": 190
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_class_info",
+      "value": 191
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_open_clipboard",
+      "value": 192
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_close_clipboard",
+      "value": 193
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_empty_clipboard",
+      "value": 194
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_clipboard_data",
+      "value": 195
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_clipboard_data",
+      "value": 196
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_clipboard_formats",
+      "value": 197
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_enum_clipboard_formats",
+      "value": 198
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_release_clipboard",
+      "value": 199
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_clipboard_info",
+      "value": 200
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_clipboard_viewer",
+      "value": 201
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_add_clipboard_listener",
+      "value": 202
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_remove_clipboard_listener",
+      "value": 203
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_open_token",
+      "value": 204
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_global_windows",
+      "value": 205
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_adjust_token_privileges",
+      "value": 206
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_token_privileges",
+      "value": 207
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_check_token_privileges",
+      "value": 208
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_duplicate_token",
+      "value": 209
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_filter_token",
+      "value": 210
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_access_check",
+      "value": 211
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_token_sid",
+      "value": 212
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_token_groups",
+      "value": 213
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_token_default_dacl",
+      "value": 214
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_token_default_dacl",
+      "value": 215
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_security_object",
+      "value": 216
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_security_object",
+      "value": 217
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_system_handles",
+      "value": 218
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_create_mailslot",
+      "value": 219
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_mailslot_info",
+      "value": 220
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_create_directory",
+      "value": 221
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_open_directory",
+      "value": 222
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_directory_entry",
+      "value": 223
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_create_symlink",
+      "value": 224
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_open_symlink",
+      "value": 225
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_query_symlink",
+      "value": 226
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_object_info",
+      "value": 227
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_object_name",
+      "value": 228
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_object_type",
+      "value": 229
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_object_types",
+      "value": 230
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_allocate_locally_unique_id",
+      "value": 231
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_create_device_manager",
+      "value": 232
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_create_device",
+      "value": 233
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_delete_device",
+      "value": 234
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_next_device_request",
+      "value": 235
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_kernel_object_ptr",
+      "value": 236
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_kernel_object_ptr",
+      "value": 237
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_grab_kernel_object",
+      "value": 238
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_release_kernel_object",
+      "value": 239
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_kernel_object_handle",
+      "value": 240
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_make_process_system",
+      "value": 241
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_token_info",
+      "value": 242
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_create_linked_token",
+      "value": 243
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_create_completion",
+      "value": 244
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_open_completion",
+      "value": 245
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_add_completion",
+      "value": 246
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_remove_completion",
+      "value": 247
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_query_completion",
+      "value": 248
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_completion_info",
+      "value": 249
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_add_fd_completion",
+      "value": 250
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_fd_completion_mode",
+      "value": 251
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_fd_disp_info",
+      "value": 252
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_fd_name_info",
+      "value": 253
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_fd_eof_info",
+      "value": 254
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_window_layered_info",
+      "value": 255
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_window_layered_info",
+      "value": 256
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_alloc_user_handle",
+      "value": 257
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_free_user_handle",
+      "value": 258
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_cursor",
+      "value": 259
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_cursor_history",
+      "value": 260
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_rawinput_buffer",
+      "value": 261
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_update_rawinput_devices",
+      "value": 262
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_rawinput_devices",
+      "value": 263
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_create_job",
+      "value": 264
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_open_job",
+      "value": 265
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_assign_job",
+      "value": 266
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_process_in_job",
+      "value": 267
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_job_limits",
+      "value": 268
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_set_job_completion_port",
+      "value": 269
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_job_info",
+      "value": 270
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_terminate_job",
+      "value": 271
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_suspend_process",
+      "value": 272
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_resume_process",
+      "value": 273
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_next_thread",
+      "value": 274
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_create_esync",
+      "value": 275
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_open_esync",
+      "value": 276
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_esync_fd",
+      "value": 277
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_esync_msgwait",
+      "value": 278
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_esync_apc_fd",
+      "value": 279
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_create_fsync",
+      "value": 280
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_open_fsync",
+      "value": 281
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_fsync_idx",
+      "value": 282
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_fsync_msgwait",
+      "value": 283
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_get_fsync_apc_idx",
+      "value": 284
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REQ_NB_REQUESTS",
+      "value": 285
+    }
+  ],
+  "name": "request",
+  "ordinal": 7257,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": true,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": true,
+    "is_struct": false,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 4
+}

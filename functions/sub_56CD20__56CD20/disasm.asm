@@ -15,5 +15,5 @@
 0x56CD45: mov     eax, [eax+1Ch]
 0x56CD48: push    edx
 0x56CD49: push    eax
-0x56CD4A: call    sub_72AF20
+0x56CD4A: call    sub_72AF20; Verified shared weighted-skin transform: composes per-bone NiTransforms, traverses per-vertex bone indices/weights, transforms source positions/normals and accumulates into caller-provided output arrays. BSTempEffectGeometryDecal_InitializeUsingSkinnedGeometryData passes its source skinData and NiGeometryData vertex/normal arrays here; NiDX9ShaderDeclaration_PackVertexStream is another caller. This is general renderer skinning code, not a blood-specific routine.
 0x56CD4F: retn    18h

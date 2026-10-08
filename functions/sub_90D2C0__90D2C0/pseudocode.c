@@ -1,4 +1,4 @@
 int __thiscall sub_90D2C0(_DWORD *this)
 {
-  return *(this + 7);
+  return *(this + 7); /*0x90d2c3*/
 }

@@ -1,0 +1,35 @@
+struct OB_SIdvBranchInfo_010201A0
+{
+int crossSectionSegments;
+int segments;
+float firstBranch;
+float lastBranch;
+float frequency;
+float diffuseSTile;
+float diffuseTTile;
+char diffuseSTileAbsolute;
+char diffuseTTileAbsolute;
+char oldDiffuseRandomTFlag;
+char pad_1F;
+float oldDiffuseTwist;
+float segmentPackingExponent;
+int numFlares;
+float flareBalance;
+float radialInfluence;
+float radialInfluenceVariance;
+float radialExponent;
+float radialDistance;
+float radialVariance;
+float lengthDistance;
+float lengthVariance;
+float lengthExponent;
+OB_stBezierSpline_010201A0 *disturbanceProfile;
+OB_stBezierSpline_010201A0 *gravityProfile;
+OB_stBezierSpline_010201A0 *flexibilityProfile;
+OB_stBezierSpline_010201A0 *flexibilityScaleProfile;
+OB_stBezierSpline_010201A0 *lengthProfile;
+OB_stBezierSpline_010201A0 *radiusProfile;
+OB_stBezierSpline_010201A0 *radiusScaleProfile;
+OB_stBezierSpline_010201A0 *startAngleProfile;
+OB_stBezierSpline_010201A0 *angleProfile;
+};

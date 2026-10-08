@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6C5760",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Adds a controller sequence to a NiControllerManager: rejects an already-owned sequence, binds manager, optionally validates controlled blocks, stores name mapping/list membership, and balances the temporary reference.",
     "mnemonic": "push",
     "size": 2
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x6C5787",
-    "line": "mov     esi, [esp+1Ch+arg_0]",
+    "line": "mov     esi, [esp+1Ch+sequence]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x6C57AA",
-    "line": "cmp     byte ptr [esp+1Ch+arg_8], 0",
+    "line": "cmp     [esp+1Ch+validateControlledBlocks], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x6C57DE",
-    "line": "mov     eax, [esp+1Ch+arg_4]",
+    "line": "mov     eax, [esp+1Ch+name]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x6C57F2",
-    "line": "mov     [esp+20h+arg_8], esi",
+    "line": "mov     dword ptr [esp+20h+validateControlledBlocks], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x6C57FC",
-    "line": "lea     edx, [esp+1Ch+arg_8]",
+    "line": "lea     edx, [esp+1Ch+validateControlledBlocks]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -496,5 +496,59 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C7470",
+    "line": "lea     ecx, [ebp+0Ch]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C7473",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C7478",
+    "line": "mov     edx, [esp+name]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C747C",
+    "line": "lea     eax, [edx-0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C747F",
+    "line": "mov     ecx, [edx-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C7482",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C7484",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C7489",
+    "line": "mov     eax, offset stru_AEF8C8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C748E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -4,7 +4,6 @@
 0x7374E3: test    ebp, ebp
 0x7374E5: jbe     short loc_737535
 0x7374E7: jmp     short loc_7374F0
-0x7374E9: align 10h
 0x7374F0: mov     eax, [edi+5Ch]
 0x7374F3: mov     edx, [eax+esi*4+4]
 0x7374F7: sub     edx, [eax+esi*4]

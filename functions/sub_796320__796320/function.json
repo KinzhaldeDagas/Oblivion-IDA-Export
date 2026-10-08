@@ -1,19 +1,32 @@
 {
-  "callees_count": 34,
-  "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
+  "callers_count": 8,
+  "chunks": [
+    [
+      "0x796320",
+      "0x7964E6"
+    ]
+  ],
+  "chunks_sha256": "3184cccba319fb640deed063eaaca128b8f3fdcd8138dd0287e01cc964cc7e25",
+  "comment_regular": "\n\n[2026-10-02 comparative audit] Fallout AddVertexTexCoord0 0x82828980 independently matches exported T = textureFlip ? -inputT : inputT; retained original coordinates remain unchanged. RT4.1 IndexedGeometry.cpp:787 generalizes this by texture layer. These routines neither add 1 nor clamp T; any plugin D3D rebasing/clamp is a separate rendering policy, not the native export contract. No UV policy change made in this bounds pass.\n\n[2026-10-03 UV domain correction] Verified retained local UV vector is wrapper+C8, begin/end/cap at+CC/+D0/+D4 and stores unflipped source values. Exported diffuse UV vector at+B8 stores GetTextureFlip ? -T : T. Plugin now owns both final and retained streams before transient deletion. Individual-map D3D binding uses retained U and (flip ?1-T:T), preserving the established origin policy without clamping tiled values. It no longer blindly adds1 to every final UV.\n\n[v152 texture controls] Confirmed exported diffuse vector wrapper+B8, begin+BC,end+C0; T stores flip?-inputT:inputT. Branch calls mapIndex=-1 so retained CAD/index vectors are not modified by this insertion. v152 commits its reference diffuse channel into this same vector after engine computation, and validates against canonical coords wrapper+68 begin+6C/end+70.\n\nLegacy TexCoord0 writer: stores diffuse S/T, optionally retains original CAD S/T plus map index, and applies the global T-flip only to the exported diffuse layer.",
+  "comment_repeatable": "Legacy TexCoord0 writer: stores diffuse S/T, optionally retains original CAD S/T plus map index, and applies the global T-flip only to the exported diffuse layer.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_796320",
+  "display_name": "OB_CIndexedGeometry_AddVertexTexCoord0_010201A0",
   "end_ea": "0x7964E6",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_796320",
+  "name": "OB_CIndexedGeometry_AddVertexTexCoord0_010201A0",
   "segment": ".text",
   "sha256": "3184cccba319fb640deed063eaaca128b8f3fdcd8138dd0287e01cc964cc7e25",
   "size": 454,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x796320",
-  "type": "int __thiscall(char **this, float *, float)",
+  "total_chunk_size": 454,
+  "type": "void __thiscall(OB_CIndexedGeometry_010201A0 *this, const float *diffuseST, __int16 mapIndex)",
   "xrefs_from_count": 178,
   "xrefs_to_count": 8
 }

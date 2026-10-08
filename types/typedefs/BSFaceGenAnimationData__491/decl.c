@@ -1,1 +1,1 @@
-BSFaceGenAnimationData
+struct BSFaceGenAnimationData;

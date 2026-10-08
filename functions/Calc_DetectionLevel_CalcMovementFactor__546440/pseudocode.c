@@ -1,6 +1,7 @@
-int __usercall Calc_DetectionLevel_::CalcMovementFactor@<eax>(
+// When the target is moving, builds its boot-noise term as bootWeight * fSneakBootWeightMult + fSneakBootWeightBase; stationary targets retain the quiet baseline.
+int __usercall Calc_DetectionLevel_ApplyMovementFactor@<eax>(
         char a1@<zf>,
-        int a2,
+        float a2,
         int a3,
         int a4,
         int a5,
@@ -22,10 +23,10 @@ int __usercall Calc_DetectionLevel_::CalcMovementFactor@<eax>(
 {
   int v21; // [esp+20h] [ebp+20h]
 
-  __asm { fst     [esp+arg_1C] }
-  if ( !a1 )
+  __asm { fst     [esp+arg_1C]; When the target is moving, builds its boot-noise term as bootWeight * fSneakBootWeightMult + fSneakBootWeightBase; stationary targets retain the quiet baseline. } /*0x546440*/
+  if ( !a1 ) /*0x546444*/
   {
-    __asm
+    __asm /*0x546446*/
     {
       fild    [esp+arg_2C]
       fmul    dword ptr ds:0B366F8h
@@ -33,7 +34,7 @@ int __usercall Calc_DetectionLevel_::CalcMovementFactor@<eax>(
       fstp    [esp+arg_1C]
     }
   }
-  return Calc_DetectionLevel_::CalcInCombatBonus(
+  return Calc_DetectionLevel_ApplyCombatBonus(
            a2,
            a3,
            a4,

@@ -1,1 +1,1 @@
-_Init_atexit
+struct _Init_atexit;

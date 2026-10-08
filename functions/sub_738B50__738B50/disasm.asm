@@ -71,7 +71,6 @@
 0x738C30: mov     [esp+44h+var_20], edi
 0x738C34: mov     [esp+44h+var_1C], ebx
 0x738C38: jmp     short loc_738C4C
-0x738C3A: align 10h
 0x738C40: mov     ecx, [esp+44h+arg_0]
 0x738C44: mov     edi, [esp+44h+var_20]
 0x738C48: mov     ebx, [esp+44h+var_1C]
@@ -95,7 +94,6 @@
 0x738C82: mov     esi, ebp
 0x738C84: mov     [esp+44h+var_C], eax
 0x738C88: jmp     short loc_738C94
-0x738C8A: align 10h
 0x738C90: mov     eax, [esp+44h+var_C]
 0x738C94: add     eax, esi
 0x738C96: push    eax

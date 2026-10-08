@@ -1,18 +1,31 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x64AF90",
+      "0x64B01A"
+    ]
+  ],
+  "chunks_sha256": "b3fb61d8777ba30209fb9d3af19c7ee580a7424d2949f8c80bffc27c7215f196",
+  "comment_regular": "3DTheft: BaseProcess::SetCurrentPackage implementation. Writes currentPackage and resets currentPackProcedure to first row slot; clearing a dynamic package can destroy it.",
+  "comment_repeatable": "3DTheft: BaseProcess::SetCurrentPackage implementation. Writes currentPackage and resets currentPackProcedure to first row slot; clearing a dynamic package can destroy it.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "LowProcess_SetCurrentPackage",
   "end_ea": "0x64B01A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "LowProcess_SetCurrentPackage",
   "segment": ".text",
   "sha256": "b3fb61d8777ba30209fb9d3af19c7ee580a7424d2949f8c80bffc27c7215f196",
   "size": 138,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x64AF90",
+  "total_chunk_size": 138,
   "type": "void __thiscall(HighProcess *this, TESPackage *a2)",
   "xrefs_from_count": 51,
   "xrefs_to_count": 2

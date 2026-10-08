@@ -1,19 +1,32 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x799780",
+      "0x7997EA"
+    ]
+  ],
+  "chunks_sha256": "e72cd1617c952cc387210f8ebb6c87dec5c345ffa2a7b072882b444116551fa0",
+  "comment_regular": "vector<float>::push_back(const float&). Appends directly when end!=capacity; otherwise builds the checked end iterator and delegates to single-element insert.",
+  "comment_repeatable": "vector<float>::push_back(const float&). Appends directly when end!=capacity; otherwise builds the checked end iterator and delegates to single-element insert.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_799780",
+  "display_name": "OB_stVectorFloat_PushBack_010201A0",
   "end_ea": "0x7997EA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_799780",
+  "name": "OB_stVectorFloat_PushBack_010201A0",
   "segment": ".text",
   "sha256": "e72cd1617c952cc387210f8ebb6c87dec5c345ffa2a7b072882b444116551fa0",
   "size": 106,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x799780",
-  "type": "unsigned int **__thiscall(unsigned int *this, unsigned int **)",
+  "total_chunk_size": 106,
+  "type": "void __thiscall(OB_stVectorFloat_010201A0 *this, const float *value)",
   "xrefs_from_count": 48,
   "xrefs_to_count": 1
 }

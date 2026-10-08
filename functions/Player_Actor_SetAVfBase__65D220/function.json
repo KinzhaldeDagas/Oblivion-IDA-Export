@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 3,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x65D220",
+      "0x65D25C"
+    ]
+  ],
+  "chunks_sha256": "0e5f72818705422748e1ba572b91ebfbe143c6765603d6afd5ca8f70a03110c0",
+  "comment_regular": "Player float base-AV setter. Write actor-base storage, refresh UI, and notify with rebuild=true; direct skill writes do not increment majorSkillAdvances.",
+  "comment_repeatable": "Player float base-AV setter. Write actor-base storage, refresh UI, and notify with rebuild=true; direct skill writes do not increment majorSkillAdvances.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "Player_Actor_SetAVfBase",
   "end_ea": "0x65D25C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "Player_Actor_SetAVfBase",
   "segment": ".text",
   "sha256": "0e5f72818705422748e1ba572b91ebfbe143c6765603d6afd5ca8f70a03110c0",
   "size": 60,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x65D220",
-  "type": "int __thiscall(Actor *this, int, float)",
+  "total_chunk_size": 60,
+  "type": "void __thiscall(Actor *this, UInt32, float)",
   "xrefs_from_count": 26,
   "xrefs_to_count": 1
 }

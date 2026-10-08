@@ -1,19 +1,36 @@
 {
-  "callees_count": 16,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_669690",
+  "chunks": [
+    [
+      "0x669690",
+      "0x669793"
+    ],
+    [
+      "0x9B7140",
+      "0x9B7163"
+    ]
+  ],
+  "chunks_sha256": "da45abb51fb7512878dfcf2f79889b01ea56eea3d26108ebc6103d2d360a6d7b",
+  "comment_regular": "Adds one topic to PlayerCharacter.knownTopics. Duplicate suppression is by exact TESTopic pointer; successful new entries are pushed to the head, optional notification is suppressed when DialogMenu is active, and optional immediate sorting is case-insensitive by display name.",
+  "comment_repeatable": "Adds one topic to PlayerCharacter.knownTopics. Duplicate suppression is by exact TESTopic pointer; successful new entries are pushed to the head, optional notification is suppressed when DialogMenu is active, and optional immediate sorting is case-insensitive by display name.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "PlayerCharacter::AddKnownTopic",
   "end_ea": "0x669793",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
-  "name": "sub_669690",
+  "name": "PlayerCharacter::AddKnownTopic",
   "segment": ".text",
   "sha256": "17b0f4b7e51f020fd607bb23ab0a8e77ed7d46b0dfbf8a31a8524363c31a1d01",
   "size": 259,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x669690",
-  "type": "TESTopic *__thiscall(PlayerCharacter *a1, TESTopic *a5, char a6, char a7)",
-  "xrefs_from_count": 103,
+  "total_chunk_size": 294,
+  "type": "bool __thiscall(PlayerCharacter *this, TESTopic *topic, bool sortImmediately, bool notifyPlayer)",
+  "xrefs_from_count": 114,
   "xrefs_to_count": 2
 }

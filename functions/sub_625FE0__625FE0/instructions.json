@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x625FE0",
-    "line": "sub     esp, 24h",
+    "line": "sub     esp, 24h; Serializes exact random-conversation resume state. The generated Conversation is saved rather than regenerated; package-level current item/response indices complement the list-internal cursors. Save does not execute INFO results.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x625FE9",
-    "line": "call    sub_567E00",
+    "line": "call    TESPackage_SaveGame",
     "mnemonic": "call",
     "size": 5
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x625FF6",
-    "line": "mov     [esp+34h+var_4], ebx",
+    "line": "mov     [esp+34h+source], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x626001",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },
@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x62600A",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x626010",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x626016",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x626024",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -139,19 +139,19 @@
   },
   {
     "ea": "0x62602D",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x62602F",
-    "line": "lea     eax, [esp+38h+var_4]",
+    "line": "lea     eax, [esp+38h+source]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x626033",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x62603D",
-    "line": "push    4; a2",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -181,19 +181,19 @@
   },
   {
     "ea": "0x626042",
-    "line": "push    ecx; a1",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x626043",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x626045",
-    "line": "call    TESForm_SaveDataToCurrentSaveGame",
+    "line": "call    TESForm_SaveDataToCurrentSaveGame; Persist responseTimeRemaining so a loaded in-progress line retains its remaining package delay.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x626056",
-    "line": "push    1; a2",
+    "line": "push    1; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -229,19 +229,19 @@
   },
   {
     "ea": "0x62605B",
-    "line": "push    eax; a1",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x62605C",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62605E",
-    "line": "call    TESForm_SaveDataToCurrentSaveGame",
+    "line": "call    TESForm_SaveDataToCurrentSaveGame; For save version >=0x6A, persist waitingForLip. A restored true value makes DialoguePackage::Speak retain the current response rather than advancing it while asynchronous LIP loading completes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x626075",
-    "line": "push    4",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -295,13 +295,13 @@
   },
   {
     "ea": "0x62607B",
-    "line": "push    edx",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x62607C",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x626095",
-    "line": "push    4",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -361,13 +361,13 @@
   },
   {
     "ea": "0x62609B",
-    "line": "push    ecx",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x62609C",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x6260B5",
-    "line": "push    4",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -427,13 +427,13 @@
   },
   {
     "ea": "0x6260BB",
-    "line": "push    eax",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6260BC",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x6260D5",
-    "line": "push    4",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -493,13 +493,13 @@
   },
   {
     "ea": "0x6260DB",
-    "line": "push    edx",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6260DC",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x6260E3",
-    "line": "mov     ecx, [esi+50h]",
+    "line": "mov     ecx, [esi+50h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x6260EE",
-    "line": "call    sub_6B75B0",
+    "line": "call    Conversation__GetSaveSize; Conversation save-size calculation includes every DialogueItem plus the saved current-item index.",
     "mnemonic": "call",
     "size": 5
   },
@@ -547,13 +547,13 @@
   },
   {
     "ea": "0x6260F6",
-    "line": "mov     [esp+34h+var_24], eax",
+    "line": "mov     [esp+34h+var_24], eax; Compute serialized size of the already-generated Conversation; zero means no conversation payload.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6260FA",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -565,13 +565,13 @@
   },
   {
     "ea": "0x626100",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x626101",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -595,13 +595,13 @@
   },
   {
     "ea": "0x626113",
-    "line": "mov     ecx, [esi+50h]",
+    "line": "mov     ecx, [esi+50h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x626116",
-    "line": "call    sub_6B7690",
+    "line": "call    Conversation__SaveGame; Persist the complete generated item/response chain and its internal cursors. Modern load therefore does not call INFO selection again.",
     "mnemonic": "call",
     "size": 5
   },
@@ -637,19 +637,19 @@
   },
   {
     "ea": "0x626129",
-    "line": "mov     ecx, [esi+50h]",
+    "line": "mov     ecx, [esi+50h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x62612C",
-    "line": "push    eax",
+    "line": "push    eax; item",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x62612D",
-    "line": "call    sub_6B7520",
+    "line": "call    Conversation__GetDialogueItemIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -661,13 +661,13 @@
   },
   {
     "ea": "0x626135",
-    "line": "mov     [esp+34h+var_10], edx",
+    "line": "mov     [esp+34h+var_10], edx; Persist DialoguePackage.currentItem as a UInt16 index into the serialized Conversation; FFFF means null.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x626139",
-    "line": "push    2; a2",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -679,13 +679,13 @@
   },
   {
     "ea": "0x62613F",
-    "line": "push    eax; a1",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x626140",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x626147",
-    "line": "mov     ecx, [esi+54h]",
+    "line": "mov     ecx, [esi+54h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -739,13 +739,13 @@
   },
   {
     "ea": "0x626159",
-    "line": "push    eax",
+    "line": "push    eax; response",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x62615A",
-    "line": "call    sub_6B7C60",
+    "line": "call    DialogueItem__GetDialogueResponseIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -757,13 +757,13 @@
   },
   {
     "ea": "0x626162",
-    "line": "mov     [esp+34h+Src], ecx",
+    "line": "mov     [esp+34h+Src], ecx; Persist DialoguePackage.currentResponse as a UInt16 index within currentItem; FFFF means null.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x626166",
-    "line": "push    2; a2",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -775,13 +775,13 @@
   },
   {
     "ea": "0x62616C",
-    "line": "push    edx; a1",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x62616D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -847,7 +847,7 @@
   },
   {
     "ea": "0x626191",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1009,7 +1009,7 @@
   },
   {
     "ea": "0x6261E9",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },

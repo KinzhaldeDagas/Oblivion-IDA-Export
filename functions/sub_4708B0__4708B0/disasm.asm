@@ -1,4 +1,4 @@
-0x4708B0: push    ebx
+0x4708B0: push    ebx; CustomAnimSupport decode: removes an encoded-key entry from ActorAnimData.animsMap; used by scoped live-sequence cleanup.
 0x4708B1: push    ebp
 0x4708B2: mov     ebp, [esp+8+arg_0]
 0x4708B6: push    esi

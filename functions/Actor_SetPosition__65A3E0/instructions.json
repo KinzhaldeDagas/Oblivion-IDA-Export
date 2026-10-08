@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x65A406",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x65A414",
-    "line": "call    sub_452A10",
+    "line": "call    sub_452A10; TES4 authoritative: converts TES/world NiPoint3 into Havok units with hkFactor, then writes proxy position through 0x891560.",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,13 +151,13 @@
   },
   {
     "ea": "0x65A420",
-    "line": "push    offset stru_BA7A40; a2",
+    "line": "push    offset unk_BA7A40; a2",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x65A425",
-    "line": "call    sub_8AC0B0",
+    "line": "call    sub_8AC0B0; TES4 authoritative: writes proxy velocity vector back into bhk collision object+0x10. Climbing/Slowfall velocity edits must happen before these calls or must write both proxy+0x2E0 and object+0x10 after the fact.",
     "mnemonic": "call",
     "size": 5
   },

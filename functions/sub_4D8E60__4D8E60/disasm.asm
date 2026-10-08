@@ -5,7 +5,7 @@
 0x4D8E68: push    edi
 0x4D8E69: push    esi
 0x4D8E6A: lea     ecx, [esi+44h]
-0x4D8E6D: call    sub_4201A0
+0x4D8E6D: call    ExtraDataList_SetOrRemoveOblivionEntry; Creates/updates ExtraOblivionEntry from a reference position plus entry reference; removes type 0x3E when either required input is null.
 0x4D8E72: test    edi, edi
 0x4D8E74: mov     eax, [esi]
 0x4D8E76: push    4000h

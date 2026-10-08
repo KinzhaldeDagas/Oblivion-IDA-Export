@@ -1,124 +1,198 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "NiObjectVtbl",
+  "definition": "struct NiObjectVtbl\n{\nNiRefObjectVtbl super;\nNiRTTI *(__thiscall *GetType)(NiObject *);\nNiObject *(__thiscall *Unk_02)(NiObject *);\nUInt32 (__thiscall *Unk_03)(NiObject *);\nUInt32 (__thiscall *Unk_04)(NiObject *);\nUInt32 (__thiscall *Unk_05)(NiObject *);\nNiObject *(__thiscall *Copy)(NiObject *);\nvoid (__thiscall *Load)(NiObject *, NiStream *stream);\nvoid (__thiscall *PostLoad)(NiObject *, NiStream *stream);\nvoid (__thiscall *FindNodes)(NiObject *, NiStream *stream);\nvoid (__thiscall *Save)(NiObject *, NiStream *stream);\nbool (__thiscall *Compare)(NiObject *, NiObject *obj);\nvoid (__thiscall *DumpAttributes)(NiObject *, void *dst);\nvoid (__thiscall *DumpChildAttributes)(NiObject *, void *dst);\nvoid (__thiscall *Unk_0E)(NiObject *);\nvoid (__thiscall *Unk_0F)(NiObject *, UInt32 arg);\nvoid (__thiscall *Unk_10)(NiObject *);\nvoid (__thiscall *Unk_11)(NiObject *);\nvoid (__thiscall *Unk_12)(NiObject *, UInt32 arg);\n}\n",
   "id": 18374686479671988374,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "super",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "NiRefObjectVtbl"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetType",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "NiRTTI *(__thiscall *)(NiObject *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_02",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "NiObject *(__thiscall *)(NiObject *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_03",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "UInt32 (__thiscall *)(NiObject *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_04",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "UInt32 (__thiscall *)(NiObject *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_05",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "UInt32 (__thiscall *)(NiObject *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Copy",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "NiObject *(__thiscall *)(NiObject *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Load",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "void (__thiscall *)(NiObject *, NiStream *stream)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "PostLoad",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiObject *, NiStream *stream)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "FindNodes",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiObject *, NiStream *stream)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Save",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiObject *, NiStream *stream)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Compare",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "bool (__thiscall *)(NiObject *, NiObject *obj)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DumpAttributes",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiObject *, void *dst)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DumpChildAttributes",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiObject *, void *dst)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_0E",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiObject *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_0F",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "void (__thiscall *)(NiObject *, UInt32 arg)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_10",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiObject *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_11",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiObject *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_12",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiObject *, UInt32 arg)"
     }
   ],
   "name": "NiObjectVtbl",
+  "ordinal": 9438,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 76
 }

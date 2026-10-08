@@ -178,5 +178,245 @@
     "line": "cmp     byte ptr [esp+arg_18], 0; jumptable 005F475F case 3",
     "mnemonic": "cmp",
     "size": 5
+  },
+  {
+    "ea": "0x5F47B1",
+    "line": "test    bl, bl; jumptable 005F475F case 6",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5F47B3",
+    "line": "jnz     short Actor_MagicCaster_IsMagicItemUseable___Return_0",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x5F47B5",
+    "line": "cmp     [esp+arg_9], bl",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x5F47B9",
+    "line": "jnz     short Actor_MagicCaster_IsMagicItemUseable___Return_0",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x5F47BB",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5F47BC",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5F47BD",
+    "line": "mov     eax, 1",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x5F47C2",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5F47C3",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5F47C6",
+    "line": "retn    10h",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x5F47D4",
+    "line": "cmp     byte ptr [esp+arg_18], 0; jumptable 005F475F cases 0,5",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x5F47D9",
+    "line": "jz      short Actor_MagicCaster_IsMagicItemUseable___Return_0",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5F47DB",
+    "line": "cmp     [esp+arg_B], 0",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x5F47E0",
+    "line": "jmp     short Actor_MagicCaster_IsMagicItemUseable___CheckSilence",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x5F47E2",
+    "line": "push    0; Ingredient branch of Actor_MagicCaster_IsMagicItemUseable. Non-food ingredients fall through to CalcAlchemySkill unless the ingredient flags force zero output.",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5F47E4",
+    "line": "push    offset ??_R0?AVIngredientItem@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5F47E9",
+    "line": "push    offset ??_R0?AVMagicItem@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5F47EE",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5F47F0",
+    "line": "push    edi; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5F47F1",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5F47F6",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5F47F9",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5F47FB",
+    "line": "jz      short Actor_MagicCaster_IsMagicItemUseable___CalcAlchemySkill; AVU decode: ingredient wortcraft Alchemy branch. Loads MagicCaster pointer from stack, subtracts 0x5C to recover owning Actor, pushes AV 0x13, then calls Actor_GetLuckModifiedBaseAV.",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5F47FD",
+    "line": "test    byte ptr [eax+7Ch], 2",
+    "mnemonic": "test",
+    "size": 4
+  },
+  {
+    "ea": "0x5F4801",
+    "line": "jz      short Actor_MagicCaster_IsMagicItemUseable___CalcAlchemySkill; AVU decode: ingredient wortcraft Alchemy branch. Loads MagicCaster pointer from stack, subtracts 0x5C to recover owning Actor, pushes AV 0x13, then calls Actor_GetLuckModifiedBaseAV.",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5F4803",
+    "line": "fldz",
+    "mnemonic": "fldz",
+    "size": 2
+  },
+  {
+    "ea": "0x5F4805",
+    "line": "mov     ecx, [esp+arg_1C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5F4809",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5F480A",
+    "line": "fstp    dword ptr [ecx]",
+    "mnemonic": "fstp",
+    "size": 2
+  },
+  {
+    "ea": "0x5F480C",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5F480D",
+    "line": "mov     al, 1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5F480F",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5F4810",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5F4813",
+    "line": "retn    10h",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x5F4842",
+    "line": "pop     edi; jumptable 005F475F default case, cases 1,4,7",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5F4843",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5F4844",
+    "line": "mov     al, 1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5F4846",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5F4847",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5F484A",
+    "line": "retn    10h",
+    "mnemonic": "retn",
+    "size": 3
   }
 ]

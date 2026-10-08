@@ -1,4 +1,4 @@
-0x4E7FB0: push    ebx
+0x4E7FB0: push    ebx; Verified removes reciprocal PathGrid adjacency at a neighbor position: searches this point's connection list by each neighbor's NiPoint3 within fConstant_2 tolerance, removes this point from that neighbor's list, then removes/frees the local connection entry.
 0x4E7FB1: push    ebp
 0x4E7FB2: mov     ebp, ecx
 0x4E7FB4: push    esi
@@ -14,7 +14,7 @@
 0x4E7FC9: jz      short loc_4E8033
 0x4E7FCB: mov     edi, [esi]
 0x4E7FCD: fld     dword ptr ds:0A379B4h
-0x4E7FD3: mov     eax, [esp+10h+arg_0]
+0x4E7FD3: mov     eax, [esp+10h+position]
 0x4E7FD7: push    ecx
 0x4E7FD8: fstp    [esp+14h+var_14]; float
 0x4E7FDB: push    eax; int
@@ -42,7 +42,7 @@
 0x4E8013: mov     ecx, [eax]
 0x4E8015: push    eax
 0x4E8016: mov     [esi], ecx
-0x4E8018: call    FormHeapFree
+0x4E8018: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4E801D: add     esp, 4
 0x4E8020: jmp     short loc_4E802F
 0x4E8022: mov     dword ptr [esi], 0

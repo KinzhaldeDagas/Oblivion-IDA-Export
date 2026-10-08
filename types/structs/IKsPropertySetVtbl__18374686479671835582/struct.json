@@ -1,46 +1,81 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "IKsPropertySetVtbl",
+  "definition": "struct IKsPropertySetVtbl\n{\nHRESULT_0 (*QueryInterface)(IKsPropertySet_0 *, const IID *const, void **) __offset(OFF64|AUTO);\nULONG (*AddRef)(IKsPropertySet_0 *) __offset(OFF64|AUTO);\nULONG (*Release)(IKsPropertySet_0 *) __offset(OFF64|AUTO);\nHRESULT_0 (*Get)(IKsPropertySet_0 *, const GUID *const, ULONG, LPVOID, ULONG, LPVOID, ULONG, ULONG *) __offset(OFF64|AUTO);\nHRESULT_0 (*Set)(IKsPropertySet_0 *, const GUID *const, ULONG, LPVOID, ULONG, LPVOID, ULONG) __offset(OFF64|AUTO);\nHRESULT_0 (*QuerySupport)(IKsPropertySet_0 *, const GUID *const, ULONG, ULONG *) __offset(OFF64|AUTO);\n}\n",
   "id": 18374686479671835582,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QueryInterface",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IKsPropertySet_0 *, const IID *const, void **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddRef",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(IKsPropertySet_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Release",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(IKsPropertySet_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Get",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IKsPropertySet_0 *, const GUID *const, ULONG, LPVOID, ULONG, LPVOID, ULONG, ULONG *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Set",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IKsPropertySet_0 *, const GUID *const, ULONG, LPVOID, ULONG, LPVOID, ULONG)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QuerySupport",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IKsPropertySet_0 *, const GUID *const, ULONG, ULONG *)"
     }
   ],
   "name": "IKsPropertySetVtbl",
+  "ordinal": 3855,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 24
 }

@@ -1,19 +1,32 @@
 {
-  "callees_count": 25,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7ECC60",
+      "0x7ECEB2"
+    ]
+  ],
+  "chunks_sha256": "286b53581652ba7244507d7e4f5bbaaccd2ca78bf8fb04e439ee77fe44e4e805",
+  "comment_regular": "Detect duplicate and find ordered insertion point using normalized receiver-surface distance: (distance to light - receiver radius) / light range.",
+  "comment_repeatable": "Detect duplicate and find ordered insertion point using normalized receiver-surface distance: (distance to light - receiver radius) / light range.\n\nMEF PERF 2026-10-07 PASS3: PERF-14 adjacent helper contract: initializes insertion-position out param null; returns1 only if duplicate wrapper encountered before the first greater-score node. First greater score stores that position and returns0 immediately, not an exhaustive whole-list duplicate search. Corrected bound argument from misleading float to pointer to four floats. Keep existing native behavior.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7ECC60",
+  "display_name": "BSShaderProperty_FindShadowLightInsertionPoint",
   "end_ea": "0x7ECEB2",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7ECC60",
+  "name": "BSShaderProperty_FindShadowLightInsertionPoint",
   "segment": ".text",
   "sha256": "286b53581652ba7244507d7e4f5bbaaccd2ca78bf8fb04e439ee77fe44e4e805",
   "size": 594,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7ECC60",
-  "type": "char __thiscall(_DWORD *this, _DWORD *, float, _DWORD *)",
+  "total_chunk_size": 594,
+  "type": "unsigned __int8 __thiscall(MEF_PropertyShadowLightListView32 *self, ShadowSceneLight_DecodedLayout *light, const MEF_ReceiverBound32 *bound, MEF_RefListNode32 **before)",
   "xrefs_from_count": 231,
   "xrefs_to_count": 1
 }

@@ -1,4 +1,5 @@
-void __usercall sub_478EA0(char *this@<ecx>, char a2@<bpl>, double a3@<st2>, double a4@<st1>, double a5@<st0>)
+// Clear ActorSkinInfo amulet equipment slot at +0xCC; this is biped slot 8 teardown.
+void __thiscall ActorSkinInfo_ClearAmuletSlot(ActorSkinInfo *this)
 {
-  sub_478780(this, a2, a3, a4, a5, (int)(this + 0xCC), 1, 0);
+  ActorSkinInfo_ClearOrReplaceEquipmentSlot(this, (ActorSkinInfoEquipmentSlot *)&this->AmuletForm, 1, 0); /*0x478eab*/
 }

@@ -16,7 +16,7 @@
 0x6FDC59: mov     [esp+38h+var_10], edi
 0x6FDC5D: mov     ebx, [esp+38h+arg_0]
 0x6FDC61: push    ebx
-0x6FDC62: call    sub_715F40
+0x6FDC62: call    NiTimeController_LoadBinary; Load persistent NiTimeController state: flags +0x08, frequency/phase/key bounds, and target/next links. Legacy migration clears flag bit 0x20 before stream version 0x0A01006D. Runtime time caches and update bytes are constructor state, not serialized.
 0x6FDC67: mov     eax, [ebx+21Ch]
 0x6FDC6D: push    1
 0x6FDC6F: lea     ecx, [esp+3Ch+var_18]
@@ -60,7 +60,6 @@
 0x6FDCD6: add     edi, 44h ; 'D'
 0x6FDCD9: jmp     short loc_6FDCE6
 0x6FDCDB: jmp     short loc_6FDCE0
-0x6FDCDD: align 10h
 0x6FDCE0: mov     ebx, [esp+38h+arg_0]
 0x6FDCE4: xor     esi, esi
 0x6FDCE6: push    0Ch; Size
@@ -152,3 +151,15 @@
 0x6FDDEF: pop     ebx
 0x6FDDF0: add     esp, 24h
 0x6FDDF3: retn    4
+0x9B28F0: mov     eax, [ebp-24h]
+0x9B28F3: push    eax
+0x9B28F4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B28F9: pop     ecx
+0x9B28FA: retn
+0x9B28FB: mov     edx, [esp+worldXY]
+0x9B28FF: lea     eax, [edx-28h]
+0x9B2902: mov     ecx, [edx-2Ch]
+0x9B2905: xor     ecx, eax
+0x9B2907: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B290C: mov     eax, offset stru_ADE880
+0x9B2911: jmp     ___CxxFrameHandler3

@@ -1,18 +1,31 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x47DFD0",
+      "0x47E01C"
+    ]
+  ],
+  "chunks_sha256": "fd6a48da8fa2f2aec0f6f182aeafb439e65adb00b173ae5fa83de66c9c80dbc4",
+  "comment_regular": "Engine RNG range helper: returns min + (max-min)*rand()/0x7FFF after lazy time seed.",
+  "comment_repeatable": "Engine RNG range helper: returns min + (max-min)*rand()/0x7FFF after lazy time seed.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "Rand2",
+  "display_name": "Game_RandomIntInRange",
   "end_ea": "0x47E01C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "Rand2",
+  "name": "Game_RandomIntInRange",
   "segment": ".text",
   "sha256": "fd6a48da8fa2f2aec0f6f182aeafb439e65adb00b173ae5fa83de66c9c80dbc4",
   "size": 76,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x47DFD0",
+  "total_chunk_size": 76,
   "type": "int __cdecl(int, int)",
   "xrefs_from_count": 28,
   "xrefs_to_count": 1

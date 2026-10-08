@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x42E000",
-    "line": "push    esi",
+    "line": "push    esi; MEF PLAN 2026-09-07: Scalar deleting destructor invokes Archive::~Archive42CA60 and frees object with FormHeapFree iff flag bit0. Existing factory failure42F5DF passes1. Checked cached construction returns an invalid object to factory; checked registration failure destroys still-private valid object through same path, never after list publication.",
     "mnemonic": "push",
     "size": 1
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x42E010",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

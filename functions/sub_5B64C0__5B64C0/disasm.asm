@@ -6,7 +6,7 @@
 0x5B64D1: lea     ecx, [eax-2]; switch 6 cases
 0x5B64D4: cmp     ecx, 5
 0x5B64D7: ja      def_5B64DD
-0x5B64DD: jmp     ds:jpt_5B64DD[ecx*4]; switch jump
+0x5B64DD: jmp     ds:jpt_5B64DD[ecx*4]; MainMenu button dispatch: 2 Continue, 3 New, 4 Load, 5 Options, 6 Credits, 7 Quit.
 0x5B64E4: mov     byte ptr [esi+4Dh], 1; jumptable 005B64DD case 2
 0x5B64E8: mov     eax, ds:0B38D00h
 0x5B64ED: mov     ecx, ds:0B38CF8h
@@ -44,7 +44,7 @@
 0x5B654C: mov     ecx, esi
 0x5B654E: call    edx
 0x5B6550: push    0
-0x5B6552: call    sub_5AEA60
+0x5B6552: call    LoadgameMenu_Open; CharacterSpecificSaves v5 hooks all callers. Its wrapper resets to the character overview, pre-enumerates *g_createdBaseObjList, and prepares exact-name grouping before native menu construction; this covers the native branch that can skip 0x005AEBB6.
 0x5B6557: add     esp, 4
 0x5B655A: pop     esi
 0x5B655B: retn    8

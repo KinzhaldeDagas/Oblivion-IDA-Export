@@ -1,4 +1,4 @@
-0x49F750: sub     esp, 8
+0x49F750: sub     esp, 8; BSAnimGroupSequence removed-controller cleanup. Drops controller references that belong to an idle/sequence being destroyed or replaced.
 0x49F753: push    ebp
 0x49F754: push    edi
 0x49F755: mov     edi, ecx

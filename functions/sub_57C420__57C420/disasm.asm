@@ -50,7 +50,7 @@
 0x57C4C8: and     eax, 0Bh
 0x57C4CB: push    eax
 0x57C4CC: push    3FFh
-0x57C4D1: call    sub_5790E0
+0x57C4D1: call    InterfaceManager_IsMenuVisibleByID; CustomAnimSupport evidence: player node/control-state check used by install/defer and playback paths.
 0x57C4D6: add     esp, 18h
 0x57C4D9: cmp     [esp+10h+arg_0], 0
 0x57C4DE: jz      loc_57C587
@@ -61,19 +61,19 @@
 0x57C4F0: mov     ecx, edi
 0x57C4F2: call    Tile_GetParentMenu
 0x57C4F7: mov     ecx, eax; int
-0x57C4F9: call    sub_584740
+0x57C4F9: call    Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.
 0x57C4FE: test    ebx, ebx
 0x57C500: jz      short loc_57C510
 0x57C502: mov     ecx, ebx
 0x57C504: call    Tile_GetParentMenu
 0x57C509: mov     ecx, eax; int
-0x57C50B: call    sub_584740
+0x57C50B: call    Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.
 0x57C510: test    ebp, ebp
 0x57C512: jz      short loc_57C522
 0x57C514: mov     ecx, ebp
 0x57C516: call    Tile_GetParentMenu
 0x57C51B: mov     ecx, eax; int
-0x57C51D: call    sub_584740
+0x57C51D: call    Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.
 0x57C522: test    esi, esi
 0x57C524: jnz     short loc_57C531
 0x57C526: call    sub_579F80
@@ -85,10 +85,10 @@
 0x57C535: call    InterfaceManager_GetSingleton
 0x57C53A: fld     dword ptr ds:0A68C04h
 0x57C540: mov     ecx, [eax+68h]; this
-0x57C543: fstp    [esp+18h+var_14]; a3
+0x57C543: fstp    [esp+18h+var_14]; value
 0x57C547: add     esp, 4
-0x57C54A: push    1771h; a2
-0x57C54F: call    Tile_SetFloat
+0x57C54A: push    1771h; propertyCode
+0x57C54F: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x57C554: push    1; arg1
 0x57C556: push    0; canCreate
 0x57C558: call    InterfaceManager_GetSingleton
@@ -101,7 +101,7 @@
 0x57C572: mov     ecx, esi
 0x57C574: call    Tile_GetParentMenu
 0x57C579: mov     ecx, eax; int
-0x57C57B: call    sub_584390
+0x57C57B: call    Menu__StartFadeIn; Oblivion ClassMenu step refresh: derives the active step value from tile traits 0xFDB/0xFDC, updates menu state, sets state 8, and refreshes the interface manager.
 0x57C580: call    sub_57A060
 0x57C585: jmp     short loc_57C5CA
 0x57C587: test    al, al
@@ -111,7 +111,7 @@
 0x57C58F: mov     ecx, esi
 0x57C591: call    Tile_GetParentMenu
 0x57C596: mov     ecx, eax; int
-0x57C598: call    sub_584740
+0x57C598: call    Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.
 0x57C59D: push    1; arg1
 0x57C59F: push    0; canCreate
 0x57C5A1: call    InterfaceManager_GetSingleton
@@ -136,7 +136,7 @@
 0x57C5DA: push    ecx
 0x57C5DB: mov     ecx, [eax+60h]; this
 0x57C5DE: fstp    [esp+18h+a2]; a2
-0x57C5E1: call    NiAVObject_UpdateNiAVObject
+0x57C5E1: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x57C5E6: pop     edi
 0x57C5E7: pop     esi
 0x57C5E8: pop     ebp

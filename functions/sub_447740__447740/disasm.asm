@@ -12,19 +12,19 @@
 0x447756: pop     ebp
 0x447757: retn    10h
 0x44775A: push    ebx
-0x44775B: mov     ebx, [esp+0Ch+arg_0]
+0x44775B: mov     ebx, [esp+0Ch+cellX]
 0x44775F: cmp     ebx, 7FFFh
 0x447765: push    edi
 0x447766: jg      short loc_4477C6
-0x447768: mov     edi, [esp+10h+arg_4]
+0x447768: mov     edi, [esp+10h+cellY]
 0x44776C: cmp     edi, 7FFFh
 0x447772: jg      short loc_4477C6
 0x447774: cmp     ebx, 0FFFF8000h
 0x44777A: jl      short loc_4477C6
 0x44777C: cmp     edi, 0FFFF8000h
 0x447782: jl      short loc_4477C6
-0x447784: push    edi; signed int
-0x447785: push    ebx; signed int
+0x447784: push    edi; cellY
+0x447785: push    ebx; cellX
 0x447786: mov     ecx, esi; this
 0x447788: call    TESWorldSpace__GetCellAtCellCoord
 0x44778D: test    eax, eax

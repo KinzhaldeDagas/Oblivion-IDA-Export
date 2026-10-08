@@ -1,7 +1,7 @@
 0x5F12D0: push    esi
 0x5F12D1: push    edi
 0x5F12D2: mov     esi, ecx
-0x5F12D4: call    MobileObject_GetCharProxy
+0x5F12D4: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x5F12D9: mov     edi, eax
 0x5F12DB: test    edi, edi
 0x5F12DD: jz      short loc_5F131F

@@ -16,49 +16,49 @@ unsigned int __thiscall sub_72CD30(int *this)
   float v14; // [esp+8h] [ebp-4h]
   float v15; // [esp+8h] [ebp-4h]
 
-  v11 = 0.0;
-  v1 = *(this + 2);
-  v2 = 0;
-  if ( v1 >= 4 )
+  v11 = 0.0; /*0x72cd35*/
+  v1 = *(this + 2); /*0x72cd39*/
+  v2 = 0; /*0x72cd3c*/
+  if ( v1 >= 4 ) /*0x72cd41*/
   {
-    v3 = *this + 0xC;
-    v4 = ((unsigned int)(v1 - 4) >> 2) + 1;
-    v2 = 4 * v4;
-    do
+    v3 = *this + 0xC; /*0x72cd4b*/
+    v4 = ((unsigned int)(v1 - 4) >> 2) + 1; /*0x72cd4e*/
+    v2 = 4 * v4; /*0x72cd51*/
+    do /*0x72cd92*/
     {
-      v5 = *(float *)(v3 - 8);
-      v3 += 0x20;
-      --v4;
-      v12 = v5 + v11;
-      v13 = v12 + *(float *)(v3 - 0x20);
-      v14 = v13 + *(float *)(v3 - 0x18);
-      v11 = v14 + *(float *)(v3 - 0x10);
+      v5 = *(float *)(v3 - 8); /*0x72cd60*/
+      v3 += 0x20; /*0x72cd63*/
+      --v4; /*0x72cd66*/
+      v12 = v5 + v11; /*0x72cd6d*/
+      v13 = v12 + *(float *)(v3 - 0x20); /*0x72cd78*/
+      v14 = v13 + *(float *)(v3 - 0x18); /*0x72cd83*/
+      v11 = v14 + *(float *)(v3 - 0x10); /*0x72cd8e*/
     }
-    while ( v4 );
+    while ( v4 ); /*0x72cd92*/
   }
-  if ( v2 < v1 )
+  if ( v2 < v1 ) /*0x72cd96*/
   {
-    v6 = (float *)(*this + 8 * v2 + 4);
-    v7 = v1 - v2;
-    do
+    v6 = (float *)(*this + 8 * v2 + 4); /*0x72cd9a*/
+    v7 = v1 - v2; /*0x72cda0*/
+    do /*0x72cdb2*/
     {
-      v8 = *v6;
-      v6 += 2;
-      --v7;
-      v11 = v8 + v11;
+      v8 = *v6; /*0x72cda2*/
+      v6 += 2; /*0x72cda4*/
+      --v7; /*0x72cda7*/
+      v11 = v8 + v11; /*0x72cdae*/
     }
-    while ( v7 );
+    while ( v7 ); /*0x72cdb2*/
   }
-  result = 0;
-  v15 = 1.0 / v11;
-  if ( v1 )
+  result = 0; /*0x72cdb8*/
+  v15 = 1.0 / v11; /*0x72cdc2*/
+  if ( v1 ) /*0x72cdc5*/
   {
-    do
+    do /*0x72cdde*/
     {
-      v10 = (float *)(*this + 8 * result++ + 4);
-      *v10 = *v10 * v15;
+      v10 = (float *)(*this + 8 * result++ + 4); /*0x72cdd0*/
+      *v10 = *v10 * v15; /*0x72cdd9*/
     }
-    while ( result < *(this + 2) );
+    while ( result < *(this + 2) ); /*0x72cdde*/
   }
-  return result;
+  return result; /*0x72cde2*/
 }

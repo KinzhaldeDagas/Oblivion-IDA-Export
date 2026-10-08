@@ -1,5 +1,5 @@
-0x65FA90: push    ecx
-0x65FA91: mov     eax, [esp+4+arg_0]
+0x65FA90: push    ecx; Return raw PlayerCharacter::skillExp for one native Oblivion skill; return 0 outside SkillActorValue 0x0C..0x20. Major/minor affects the separate requirement array, not this numerator.
+0x65FA91: mov     eax, [esp+4+actorValue]
 0x65FA95: fldz
 0x65FA97: push    esi
 0x65FA98: fstp    [esp+8+var_4]
@@ -9,7 +9,7 @@
 0x65FAA4: ja      short loc_65FABF
 0x65FAA6: push    eax
 0x65FAA7: push    2
-0x65FAA9: call    ActorValue_GetGroupOffsetFromAV
+0x65FAA9: call    ActorValue_GetGroupOffsetFromAV; Oblivion group 2 maps the native skill AV to skillExp index 0..20.
 0x65FAAE: movsx   edx, al
 0x65FAB1: add     esp, 8
 0x65FAB4: fld     dword ptr [esi+edx*4+130h]

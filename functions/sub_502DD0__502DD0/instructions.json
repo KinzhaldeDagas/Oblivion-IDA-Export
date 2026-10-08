@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x502E00",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x502E0E",
-    "line": "mov     ecx, dword ptr [esp+4+var_4]",
+    "line": "mov     ecx, dword ptr [esp+4+var_4]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -163,13 +163,13 @@
   },
   {
     "ea": "0x502E15",
-    "line": "push    1",
+    "line": "push    1; completed",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x502E17",
-    "line": "call    Quest_CompleteQuest",
+    "line": "call    TESQuest__SetCompleted; TESQuest completed-state setter used by CompleteQuest. Runtime bit 0x02 is saved through the same one-byte questFlags field.",
     "mnemonic": "call",
     "size": 5
   },

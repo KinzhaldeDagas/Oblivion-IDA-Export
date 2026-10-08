@@ -77,10 +77,10 @@
 0x49E9A7: cmp     byte ptr ds:0B333B8h, 0
 0x49E9AE: mov     byte ptr ds:0B45DB8h, 0
 0x49E9B5: jnz     loc_49EA97
-0x49E9BB: push    esi
-0x49E9BC: push    edi
-0x49E9BD: mov     ecx, ebp
-0x49E9BF: call    NiRenderer_ReflectionPass
+0x49E9BB: push    esi; secondaryRoot
+0x49E9BC: push    edi; primaryRoot
+0x49E9BD: mov     ecx, ebp; this
+0x49E9BF: call    WaterManager_RenderReflectionPass; Dispatch the gated WaterManager reflection render for the two scene roots. The callee owns g_bWaterReflectionPassActive for the duration of its dedicated accumulation transaction.
 0x49E9C4: jmp     loc_49EA97
 0x49E9C9: cmp     byte ptr ds:0B0703Ch, 0
 0x49E9D0: jz      loc_49EA97
@@ -96,7 +96,7 @@
 0x49EA01: call    __sprintf
 0x49EA06: mov     eax, ds:0B43104h
 0x49EA0B: mov     esi, ds:0B45DCCh
-0x49EA11: push    offset dword_B256D0
+0x49EA11: push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0
 0x49EA16: push    eax
 0x49EA17: lea     ecx, [esp+254h+var_218]
 0x49EA1B: push    ecx
@@ -127,8 +127,8 @@
 0x49EA5D: test    eax, eax
 0x49EA5F: jz      short loc_49EA97
 0x49EA61: mov     ecx, ds:0B42F50h; this
-0x49EA67: push    eax; a2
-0x49EA68: call    sub_7C1EE0
+0x49EA67: push    eax; texture
+0x49EA68: call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.
 0x49EA6D: mov     esi, [ebp+4]
 0x49EA70: test    esi, esi
 0x49EA72: jz      short loc_49EA97
@@ -168,11 +168,11 @@
 0x49EAE8: jnz     short loc_49EB04
 0x49EAEA: cmp     ds:0B35229h, al
 0x49EAF0: jnz     short loc_49EB04
-0x49EAF2: call    sub_4E9F40
+0x49EAF2: call    sub_4E9F40; Fog decode: returns global far-plane/clamp mode flag unk_B3608F; when false, non-water 0x541DD0 paths clamp fogEnd to GetFarPlane.
 0x49EAF7: test    al, al
 0x49EAF9: jz      short loc_49EB04
 0x49EAFB: mov     ecx, ebp
-0x49EAFD: call    sub_49E280
+0x49EAFD: call    sub_49E280; Pass205/206: LODWaterRoot jump-table loop creates four generated child quads under 0x00B35234 and reaches shared child-creation tail.
 0x49EB02: jmp     short loc_49EB2A
 0x49EB04: mov     ecx, ds:0B333A0h
 0x49EB0A: call    TES__GetCurrentWorldspace
@@ -191,7 +191,7 @@
 0x49EB40: mov     ecx, ds:0B333C4h; this
 0x49EB46: test    ecx, ecx
 0x49EB48: jz      loc_49EBFA
-0x49EB4E: call    TESObjectREFR_GetParentCell
+0x49EB4E: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x49EB53: test    eax, eax
 0x49EB55: jz      loc_49EBFA
 0x49EB5B: mov     ecx, ds:0B333CCh; this
@@ -199,11 +199,11 @@
 0x49EB66: fld     dword ptr [eax+90h]
 0x49EB6C: mov     ecx, ds:0B333C4h; this
 0x49EB72: add     eax, 88h ; 'ˆ'
-0x49EB77: fstp    qword ptr [esp+244h+var_22C+4]
-0x49EB7B: call    TESObjectREFR_GetParentCell
+0x49EB77: fstp    qword ptr [esp+244h+node+4]
+0x49EB7B: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x49EB80: mov     ecx, eax
 0x49EB82: call    TESObjectCELL_GetWaterHeight
-0x49EB87: fcomp   qword ptr [esp+244h+var_22C+4]
+0x49EB87: fcomp   qword ptr [esp+244h+node+4]
 0x49EB8B: fnstsw  ax
 0x49EB8D: test    ah, 41h
 0x49EB90: jnz     short loc_49EBC0
@@ -219,10 +219,10 @@
 0x49EBC7: mov     byte ptr ds:0B42CE2h, 0
 0x49EBCE: mov     byte ptr ds:0B43164h, 0
 0x49EBD5: mov     ecx, ds:0B333C4h; this
-0x49EBDB: call    TESObjectREFR_GetParentCell
+0x49EBDB: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x49EBE0: mov     ecx, eax
 0x49EBE2: call    TESObjectCELL_GetWaterHeight
-0x49EBE7: call    Double_To_SInt32
+0x49EBE7: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x49EBEC: mov     ds:0B42CE4h, eax
 0x49EBF1: mov     byte ptr ds:0B42CE1h, 1
 0x49EBF8: jmp     short loc_49EC01
@@ -248,25 +248,25 @@
 0x49EC45: fstp    st
 0x49EC47: mov     eax, [ebp+34h]
 0x49EC4A: test    eax, eax
-0x49EC4C: mov     dword ptr [esp+244h+var_22C], eax
+0x49EC4C: mov     [esp+244h+node], eax
 0x49EC50: jz      loc_49ED60
 0x49EC56: mov     esi, [eax+8]
 0x49EC59: cmp     byte ptr [esi+10h], 0
 0x49EC5D: mov     ebx, [eax]
-0x49EC5F: mov     [esp+244h+var_21C], ebx
+0x49EC5F: mov     [esp+244h+shadowMap], ebx
 0x49EC63: jz      loc_49ED3F
 0x49EC69: mov     eax, [esi+8]
 0x49EC6C: test    eax, eax
 0x49EC6E: jz      short loc_49EC7C
 0x49EC70: mov     ecx, ds:0B42F50h; this
-0x49EC76: push    eax; a2
-0x49EC77: call    sub_7C1EE0
+0x49EC76: push    eax; texture
+0x49EC77: call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.
 0x49EC7C: mov     eax, [esi+0Ch]
 0x49EC7F: test    eax, eax
 0x49EC81: jz      short loc_49EC8F
 0x49EC83: mov     ecx, ds:0B42F50h; this
-0x49EC89: push    eax; a2
-0x49EC8A: call    sub_7C1EE0
+0x49EC89: push    eax; texture
+0x49EC8A: call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.
 0x49EC8F: mov     edi, [esi+8]
 0x49EC92: test    edi, edi
 0x49EC94: mov     ebx, ds:0A2807Ch
@@ -300,19 +300,19 @@
 0x49ECD6: mov     ecx, edi
 0x49ECD8: call    eax
 0x49ECDA: mov     dword ptr [esi+0Ch], 0
-0x49ECE1: lea     ecx, [esp+244h+var_22C]
-0x49ECE5: push    ecx
-0x49ECE6: lea     ecx, [ebp+30h]
-0x49ECE9: call    sub_7AA860
+0x49ECE1: lea     ecx, [esp+244h+node]
+0x49ECE5: push    ecx; node
+0x49ECE6: lea     ecx, [ebp+30h]; list
+0x49ECE9: call    NiTPointerList_RemoveNode; [Verified] Generic NiTPointerList node-removal helper. Unlinks the supplied node, updates head/tail and neighboring links, invokes the list's FreeNode vfunc, decrements item count, and returns the removed node's data pointer.
 0x49ECEE: mov     eax, [esi+4]
 0x49ECF1: mov     ecx, ds:0B35230h
 0x49ECF7: mov     edx, [ecx]
 0x49ECF9: mov     edx, [edx+88h]
 0x49ECFF: push    eax
-0x49ED00: lea     eax, [esp+248h+var_22C+4]
+0x49ED00: lea     eax, [esp+248h+node+4]
 0x49ED04: push    eax
 0x49ED05: call    edx
-0x49ED07: mov     eax, dword ptr [esp+244h+var_22C+4]
+0x49ED07: mov     eax, [esp+244h+node+4]
 0x49ED0B: test    eax, eax
 0x49ED0D: jz      short loc_49ED29
 0x49ED0F: mov     edi, eax
@@ -331,8 +331,8 @@
 0x49ED29: mov     ecx, esi
 0x49ED2B: call    sub_4993B0
 0x49ED30: push    esi
-0x49ED31: call    FormHeapFree
-0x49ED36: mov     ebx, [esp+248h+var_21C]
+0x49ED31: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x49ED36: mov     ebx, [esp+248h+shadowMap]
 0x49ED3A: add     esp, 4
 0x49ED3D: jmp     short loc_49ED52
 0x49ED3F: cmp     byte ptr ds:0B07090h, 0
@@ -343,7 +343,7 @@
 0x49ED4D: call    WaterGeometryPAss
 0x49ED52: test    ebx, ebx
 0x49ED54: mov     eax, ebx
-0x49ED56: mov     dword ptr [esp+244h+var_22C], eax
+0x49ED56: mov     [esp+244h+node], eax
 0x49ED5A: jnz     loc_49EC56
 0x49ED60: xor     ebx, ebx
 0x49ED62: cmp     ds:0B3521Dh, bl
@@ -364,14 +364,14 @@
 0x49ED99: cmp     ecx, ebx
 0x49ED9B: jnz     short loc_49EDAA
 0x49ED9D: mov     ecx, ds:0B333C4h; this
-0x49EDA3: call    TESObjectREFR_GetParentCell
+0x49EDA3: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x49EDA8: mov     ecx, eax; this
 0x49EDAA: call    TESObjectCELL__GetWaterForm
 0x49EDAF: mov     ds:0B35220h, eax
-0x49EDB4: mov     ecx, [ebp+40h]
+0x49EDB4: mov     ecx, [ebp+40h]; this
 0x49EDB7: cmp     ecx, ebx
 0x49EDB9: jz      short loc_49EDEE
-0x49EDBB: call    sub_6B7260
+0x49EDBB: call    SoundHandle__IsPlaying; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.
 0x49EDC0: test    al, al
 0x49EDC2: jz      short loc_49EDEE
 0x49EDC4: mov     ecx, [ebp+40h]
@@ -384,7 +384,7 @@
 0x49EDDB: mov     ecx, esi; this
 0x49EDDD: call    sub_6B73E0
 0x49EDE2: push    esi
-0x49EDE3: call    FormHeapFree
+0x49EDE3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x49EDE8: add     esp, 4
 0x49EDEB: mov     [ebp+40h], ebx
 0x49EDEE: mov     eax, ds:0B35220h
@@ -423,7 +423,7 @@
 0x49EE59: mov     eax, [eax]
 0x49EE5B: mov     ecx, eax
 0x49EE5D: push    4
-0x49EE5F: call    NiNode_GetNiPropertyByID
+0x49EE5F: call    NiNode_GetNiPropertyByID;
 0x49EE64: cmp     eax, ebx
 0x49EE66: jz      short loc_49EE92
 0x49EE68: mov     eax, ds:0B35220h
@@ -431,9 +431,9 @@
 0x49EE70: cmp     eax, ebx
 0x49EE72: jnz     short loc_49EE79
 0x49EE74: mov     eax, offset EmptyString
-0x49EE79: push    eax; Str2
+0x49EE79: push    eax; right
 0x49EE7A: push    offset aLava; "lava"
-0x49EE7F: call    __strcmp
+0x49EE7F: call    CRT_StricmpLocaleDispatch
 0x49EE84: add     esp, 8
 0x49EE87: test    eax, eax
 0x49EE89: setz    cl
@@ -453,38 +453,38 @@
 0x49EEC2: push    edx
 0x49EEC3: call    __sprintf
 0x49EEC8: add     esp, 10h
-0x49EECB: push    ebx; char
-0x49EECC: push    1; char
+0x49EECB: push    ebx; searchArchives
+0x49EECC: push    1; allowMissing
 0x49EECE: lea     eax, [esp+24Ch+ArgList]
-0x49EED5: push    eax; ArgList
-0x49EED6: lea     ecx, [esp+250h+var_21C]
-0x49EEDA: push    ecx; int
+0x49EED5: push    eax; path
+0x49EED6: lea     ecx, [esp+250h+shadowMap]
+0x49EEDA: push    ecx; outTexture
 0x49EEDB: mov     ecx, ds:0B333A0h
-0x49EEE1: call    sub_442890
-0x49EEE6: mov     edx, [esp+244h+var_21C]
-0x49EEEA: mov     ecx, ds:0B45DCCh
-0x49EEF0: push    edx
+0x49EEE1: call    OB_TES_LoadOrFindSourceTexture_010201A0; TES texture cache/load helper: checks the global texture map, optionally verifies file existence via FileFinder, loads NiSourceTexture by filename, caches it, and returns a refcounted texture pointer.
+0x49EEE6: mov     edx, [esp+244h+shadowMap]
+0x49EEEA: mov     ecx, ds:0B45DCCh; self
+0x49EEF0: push    edx; shadowMap
 0x49EEF1: mov     [esp+248h+var_4], ebx
-0x49EEF8: call    sub_499310
-0x49EEFD: lea     ecx, [esp+244h+var_21C]; this
+0x49EEF8: call    ShadowSceneLight_SetShadowMap; Strong-own the supplied frame-local shadow map at ShadowSceneLight+0x114, releasing any previous map reference.
+0x49EEFD: lea     ecx, [esp+244h+shadowMap]; slot
 0x49EF01: mov     [esp+244h+var_4], 0FFFFFFFFh
-0x49EF0C: call    sub_7016A0
+0x49EF0C: call    NiPointerSlot_Release
 0x49EF11: call    Sky_CreateOrGetGlobalObject
 0x49EF16: mov     eax, [eax+28h]
 0x49EF19: mov     ecx, [eax+8]
 0x49EF1C: mov     eax, [ecx+1Ch]
 0x49EF1F: mov     edx, [eax+54h]
 0x49EF22: mov     ecx, [eax+58h]
-0x49EF25: mov     dword ptr [esp+244h+var_22C+4], edx
+0x49EF25: mov     [esp+244h+node+4], edx
 0x49EF29: mov     edx, [eax+5Ch]
-0x49EF2C: mov     dword ptr [esp+244h+var_22C+8], ecx
-0x49EF30: lea     ecx, [esp+244h+var_22C+4]
+0x49EF2C: mov     [esp+244h+node+8], ecx
+0x49EF30: lea     ecx, [esp+244h+node+4]
 0x49EF34: mov     [esp+244h+var_220], edx
-0x49EF38: call    sub_43F350
+0x49EF38: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x49EF3D: fstp    st
-0x49EF3F: fld     dword ptr [esp+244h+var_22C+4]
+0x49EF3F: fld     [esp+244h+node+4]
 0x49EF43: fstp    dword ptr ds:0B45DF4h
-0x49EF49: fld     dword ptr [esp+244h+var_22C+8]
+0x49EF49: fld     [esp+244h+node+8]
 0x49EF4D: fstp    dword ptr ds:0B45DF8h
 0x49EF53: fld     [esp+244h+var_220]
 0x49EF57: fstp    dword ptr ds:0B45DFCh
@@ -497,11 +497,11 @@
 0x49EF7B: mov     ecx, [eax+6Ch]
 0x49EF7E: mov     edx, [eax+70h]
 0x49EF81: mov     eax, [eax+74h]
-0x49EF84: mov     dword ptr [esp+244h+var_22C+4], ecx
-0x49EF88: fld     dword ptr [esp+244h+var_22C+4]
+0x49EF84: mov     [esp+244h+node+4], ecx
+0x49EF88: fld     [esp+244h+node+4]
 0x49EF8C: fstp    dword ptr ds:0B45E04h
-0x49EF92: mov     dword ptr [esp+244h+var_22C+8], edx
-0x49EF96: fld     dword ptr [esp+244h+var_22C+8]
+0x49EF92: mov     [esp+244h+node+8], edx
+0x49EF96: fld     [esp+244h+node+8]
 0x49EF9A: mov     [esp+244h+var_220], eax
 0x49EF9E: fstp    dword ptr ds:0B45E08h
 0x49EFA4: fld     [esp+244h+var_220]
@@ -525,23 +525,23 @@
 0x49EFE9: mov     ds:0B45DBBh, al
 0x49EFEE: cmp     [ecx+34h], ebx
 0x49EFF1: jnz     loc_49F3C8
-0x49EFF7: mov     ecx, offset TimeGlobals
+0x49EFF7: mov     ecx, 0B332E0h
 0x49EFFC: call    TimeGlobals_GetGameHour
-0x49F001: fstp    qword ptr [esp+244h+var_22C+4]
+0x49F001: fstp    qword ptr [esp+244h+node+4]
 0x49F005: call    Sky_CreateOrGetGlobalObject
 0x49F00A: mov     ecx, eax
-0x49F00C: call    sub_4991C0
-0x49F011: fcomp   qword ptr [esp+244h+var_22C+4]
+0x49F00C: call    sub_4991C0; Exterior fog day/night helper: climate sunset boundary byte (+0x52) cached as normalized time for weather fog interpolation.
+0x49F011: fcomp   qword ptr [esp+244h+node+4]
 0x49F015: fnstsw  ax
 0x49F017: test    ah, 5
 0x49F01A: jp      loc_49F1FC
-0x49F020: mov     ecx, offset TimeGlobals
+0x49F020: mov     ecx, 0B332E0h
 0x49F025: call    TimeGlobals_GetGameHour
-0x49F02A: fstp    qword ptr [esp+244h+var_22C+4]
+0x49F02A: fstp    qword ptr [esp+244h+node+4]
 0x49F02E: call    Sky_CreateOrGetGlobalObject
 0x49F033: mov     ecx, eax
-0x49F035: call    sub_499200
-0x49F03A: fcomp   qword ptr [esp+244h+var_22C+4]
+0x49F035: call    sub_499200; Exterior fog day/night helper: climate night boundary byte (+0x53) cached as normalized time for weather fog interpolation.
+0x49F03A: fcomp   qword ptr [esp+244h+node+4]
 0x49F03E: fnstsw  ax
 0x49F040: test    ah, 1
 0x49F043: jnz     loc_49F1FC
@@ -551,19 +551,19 @@
 0x49F05A: mov     eax, [eax+0A4h]
 0x49F060: cmp     eax, ebx
 0x49F062: jz      loc_49F1EE
-0x49F068: mov     ecx, offset TimeGlobals
+0x49F068: mov     ecx, 0B332E0h
 0x49F06D: mov     [ebp+24h], eax
 0x49F070: call    TimeGlobals_GetGameHour
 0x49F075: push    ecx
 0x49F076: fstp    [esp+248h+var_248]; float
 0x49F079: call    Sky_CreateOrGetGlobalObject
 0x49F07E: mov     ecx, eax
-0x49F080: call    sub_499200
+0x49F080: call    sub_499200; Exterior fog day/night helper: climate night boundary byte (+0x53) cached as normalized time for weather fog interpolation.
 0x49F085: push    ecx
 0x49F086: fstp    [esp+24Ch+var_24C]; float
 0x49F089: call    Sky_CreateOrGetGlobalObject
 0x49F08E: mov     ecx, eax
-0x49F090: call    sub_4991C0
+0x49F090: call    sub_4991C0; Exterior fog day/night helper: climate sunset boundary byte (+0x52) cached as normalized time for weather fog interpolation.
 0x49F095: sub     esp, 0Ch
 0x49F098: fstp    [esp+258h+var_250]; float
 0x49F09C: fld1
@@ -578,18 +578,18 @@
 0x49F0BA: jp      short loc_49F0C0
 0x49F0BC: fldz
 0x49F0BE: jmp     short loc_49F104
-0x49F0C0: mov     ecx, offset TimeGlobals
+0x49F0C0: mov     ecx, 0B332E0h
 0x49F0C5: call    TimeGlobals_GetGameHour
 0x49F0CA: push    ecx
 0x49F0CB: fstp    [esp+248h+var_248]; float
 0x49F0CE: call    Sky_CreateOrGetGlobalObject
 0x49F0D3: mov     ecx, eax
-0x49F0D5: call    sub_499200
+0x49F0D5: call    sub_499200; Exterior fog day/night helper: climate night boundary byte (+0x53) cached as normalized time for weather fog interpolation.
 0x49F0DA: push    ecx
 0x49F0DB: fstp    [esp+24Ch+var_24C]; float
 0x49F0DE: call    Sky_CreateOrGetGlobalObject
 0x49F0E3: mov     ecx, eax
-0x49F0E5: call    sub_4991C0
+0x49F0E5: call    sub_4991C0; Exterior fog day/night helper: climate sunset boundary byte (+0x52) cached as normalized time for weather fog interpolation.
 0x49F0EA: sub     esp, 0Ch
 0x49F0ED: fstp    [esp+258h+var_250]; float
 0x49F0F1: fld1
@@ -598,8 +598,8 @@
 0x49F0F9: fstp    [esp+258h+var_258]; float
 0x49F0FC: call    sub_410EB0
 0x49F101: add     esp, 14h
-0x49F104: fstp    dword ptr [esp+244h+var_22C]
-0x49F108: fld     dword ptr [esp+244h+var_22C]
+0x49F104: fstp    [esp+244h+node]
+0x49F108: fld     [esp+244h+node]
 0x49F10C: fcomp   qword ptr ds:0A2F928h
 0x49F112: fnstsw  ax
 0x49F114: test    ah, 41h
@@ -610,18 +610,18 @@
 0x49F123: fld     [esp+244h+var_230]
 0x49F127: fstp    dword ptr [ebp+2Ch]
 0x49F12A: jmp     loc_49F3CB
-0x49F12F: mov     ecx, offset TimeGlobals
+0x49F12F: mov     ecx, 0B332E0h
 0x49F134: call    TimeGlobals_GetGameHour
 0x49F139: push    ecx
 0x49F13A: fstp    [esp+248h+var_248]; float
 0x49F13D: call    Sky_CreateOrGetGlobalObject
 0x49F142: mov     ecx, eax
-0x49F144: call    sub_499200
+0x49F144: call    sub_499200; Exterior fog day/night helper: climate night boundary byte (+0x53) cached as normalized time for weather fog interpolation.
 0x49F149: push    ecx
 0x49F14A: fstp    [esp+24Ch+var_24C]; float
 0x49F14D: call    Sky_CreateOrGetGlobalObject
 0x49F152: mov     ecx, eax
-0x49F154: call    sub_4991C0
+0x49F154: call    sub_4991C0; Exterior fog day/night helper: climate sunset boundary byte (+0x52) cached as normalized time for weather fog interpolation.
 0x49F159: sub     esp, 0Ch
 0x49F15C: fstp    [esp+258h+var_250]; float
 0x49F160: fld1
@@ -640,18 +640,18 @@
 0x49F18A: fld     [esp+244h+var_230]
 0x49F18E: fstp    dword ptr [ebp+2Ch]
 0x49F191: jmp     loc_49F3CB
-0x49F196: mov     ecx, offset TimeGlobals
+0x49F196: mov     ecx, 0B332E0h
 0x49F19B: call    TimeGlobals_GetGameHour
 0x49F1A0: push    ecx
 0x49F1A1: fstp    [esp+248h+var_248]; float
 0x49F1A4: call    Sky_CreateOrGetGlobalObject
 0x49F1A9: mov     ecx, eax
-0x49F1AB: call    sub_499200
+0x49F1AB: call    sub_499200; Exterior fog day/night helper: climate night boundary byte (+0x53) cached as normalized time for weather fog interpolation.
 0x49F1B0: push    ecx
 0x49F1B1: fstp    [esp+24Ch+var_24C]; float
 0x49F1B4: call    Sky_CreateOrGetGlobalObject
 0x49F1B9: mov     ecx, eax
-0x49F1BB: call    sub_4991C0
+0x49F1BB: call    sub_4991C0; Exterior fog day/night helper: climate sunset boundary byte (+0x52) cached as normalized time for weather fog interpolation.
 0x49F1C0: sub     esp, 0Ch
 0x49F1C3: fstp    [esp+258h+var_250]; float
 0x49F1C7: fld1
@@ -669,38 +669,38 @@
 0x49F1F0: mov     byte ptr [ebp+28h], 0
 0x49F1F4: fstp    dword ptr [ebp+2Ch]
 0x49F1F7: jmp     loc_49F3CB
-0x49F1FC: mov     ecx, offset TimeGlobals
+0x49F1FC: mov     ecx, 0B332E0h
 0x49F201: call    TimeGlobals_GetGameHour
-0x49F206: fstp    qword ptr [esp+244h+var_22C+4]
+0x49F206: fstp    qword ptr [esp+244h+node+4]
 0x49F20A: call    Sky_CreateOrGetGlobalObject
 0x49F20F: mov     ecx, eax
-0x49F211: call    sub_499140
-0x49F216: fcomp   qword ptr [esp+244h+var_22C+4]
+0x49F211: call    sub_499140; Exterior fog day/night helper: climate sunrise boundary byte (+0x50) cached as normalized time for weather fog interpolation.
+0x49F216: fcomp   qword ptr [esp+244h+node+4]
 0x49F21A: fnstsw  ax
 0x49F21C: test    ah, 5
 0x49F21F: jp      loc_49F3B6
-0x49F225: mov     ecx, offset TimeGlobals
+0x49F225: mov     ecx, 0B332E0h
 0x49F22A: call    TimeGlobals_GetGameHour
-0x49F22F: fstp    qword ptr [esp+244h+var_22C+4]
+0x49F22F: fstp    qword ptr [esp+244h+node+4]
 0x49F233: call    Sky_CreateOrGetGlobalObject
 0x49F238: mov     ecx, eax
-0x49F23A: call    sub_499180
-0x49F23F: fcomp   qword ptr [esp+244h+var_22C+4]
+0x49F23A: call    sub_499180; Exterior fog day/night helper: climate day boundary byte (+0x51) cached as normalized time for weather fog interpolation.
+0x49F23F: fcomp   qword ptr [esp+244h+node+4]
 0x49F243: fnstsw  ax
 0x49F245: test    ah, 1
 0x49F248: jnz     loc_49F3B6
-0x49F24E: mov     ecx, offset TimeGlobals
+0x49F24E: mov     ecx, 0B332E0h
 0x49F253: call    TimeGlobals_GetGameHour
 0x49F258: push    ecx
 0x49F259: fstp    [esp+248h+var_248]; float
 0x49F25C: call    Sky_CreateOrGetGlobalObject
 0x49F261: mov     ecx, eax
-0x49F263: call    sub_499180
+0x49F263: call    sub_499180; Exterior fog day/night helper: climate day boundary byte (+0x51) cached as normalized time for weather fog interpolation.
 0x49F268: push    ecx
 0x49F269: fstp    [esp+24Ch+var_24C]; float
 0x49F26C: call    Sky_CreateOrGetGlobalObject
 0x49F271: mov     ecx, eax
-0x49F273: call    sub_499140
+0x49F273: call    sub_499140; Exterior fog day/night helper: climate sunrise boundary byte (+0x50) cached as normalized time for weather fog interpolation.
 0x49F278: sub     esp, 0Ch
 0x49F27B: fstp    [esp+258h+var_250]; float
 0x49F27F: fld1
@@ -715,18 +715,18 @@
 0x49F29D: jp      short loc_49F2A3
 0x49F29F: fldz
 0x49F2A1: jmp     short loc_49F2E7
-0x49F2A3: mov     ecx, offset TimeGlobals
+0x49F2A3: mov     ecx, 0B332E0h
 0x49F2A8: call    TimeGlobals_GetGameHour
 0x49F2AD: push    ecx
 0x49F2AE: fstp    [esp+248h+var_248]; float
 0x49F2B1: call    Sky_CreateOrGetGlobalObject
 0x49F2B6: mov     ecx, eax
-0x49F2B8: call    sub_499180
+0x49F2B8: call    sub_499180; Exterior fog day/night helper: climate day boundary byte (+0x51) cached as normalized time for weather fog interpolation.
 0x49F2BD: push    ecx
 0x49F2BE: fstp    [esp+24Ch+var_24C]; float
 0x49F2C1: call    Sky_CreateOrGetGlobalObject
 0x49F2C6: mov     ecx, eax
-0x49F2C8: call    sub_499140
+0x49F2C8: call    sub_499140; Exterior fog day/night helper: climate sunrise boundary byte (+0x50) cached as normalized time for weather fog interpolation.
 0x49F2CD: sub     esp, 0Ch
 0x49F2D0: fstp    [esp+258h+var_250]; float
 0x49F2D4: fld1
@@ -735,26 +735,26 @@
 0x49F2DC: fstp    [esp+258h+var_258]; float
 0x49F2DF: call    sub_410EB0
 0x49F2E4: add     esp, 14h
-0x49F2E7: fstp    dword ptr [esp+244h+var_22C]
-0x49F2EB: fld     dword ptr [esp+244h+var_22C]
+0x49F2E7: fstp    [esp+244h+node]
+0x49F2EB: fld     [esp+244h+node]
 0x49F2EF: fcomp   qword ptr ds:0A2F928h
 0x49F2F5: fnstsw  ax
 0x49F2F7: test    ah, 41h
 0x49F2FA: jnz     short loc_49F303
 0x49F2FC: fld1
 0x49F2FE: jmp     loc_49F39C
-0x49F303: mov     ecx, offset TimeGlobals
+0x49F303: mov     ecx, 0B332E0h
 0x49F308: call    TimeGlobals_GetGameHour
 0x49F30D: push    ecx
 0x49F30E: fstp    [esp+248h+var_248]; float
 0x49F311: call    Sky_CreateOrGetGlobalObject
 0x49F316: mov     ecx, eax
-0x49F318: call    sub_499180
+0x49F318: call    sub_499180; Exterior fog day/night helper: climate day boundary byte (+0x51) cached as normalized time for weather fog interpolation.
 0x49F31D: push    ecx
 0x49F31E: fstp    [esp+24Ch+var_24C]; float
 0x49F321: call    Sky_CreateOrGetGlobalObject
 0x49F326: mov     ecx, eax
-0x49F328: call    sub_499140
+0x49F328: call    sub_499140; Exterior fog day/night helper: climate sunrise boundary byte (+0x50) cached as normalized time for weather fog interpolation.
 0x49F32D: sub     esp, 0Ch
 0x49F330: fstp    [esp+258h+var_250]; float
 0x49F334: fld1
@@ -769,18 +769,18 @@
 0x49F352: jp      short loc_49F358
 0x49F354: fldz
 0x49F356: jmp     short loc_49F39C
-0x49F358: mov     ecx, offset TimeGlobals
+0x49F358: mov     ecx, 0B332E0h
 0x49F35D: call    TimeGlobals_GetGameHour
 0x49F362: push    ecx
 0x49F363: fstp    [esp+248h+var_248]; float
 0x49F366: call    Sky_CreateOrGetGlobalObject
 0x49F36B: mov     ecx, eax
-0x49F36D: call    sub_499180
+0x49F36D: call    sub_499180; Exterior fog day/night helper: climate day boundary byte (+0x51) cached as normalized time for weather fog interpolation.
 0x49F372: push    ecx
 0x49F373: fstp    [esp+24Ch+var_24C]; float
 0x49F376: call    Sky_CreateOrGetGlobalObject
 0x49F37B: mov     ecx, eax
-0x49F37D: call    sub_499140
+0x49F37D: call    sub_499140; Exterior fog day/night helper: climate sunrise boundary byte (+0x50) cached as normalized time for weather fog interpolation.
 0x49F382: sub     esp, 0Ch
 0x49F385: fstp    [esp+258h+var_250]; float
 0x49F389: fld1
@@ -818,7 +818,7 @@
 0x49F3E7: fstp    [esp+24Ch+var_24C]; float
 0x49F3EA: push    eax; int
 0x49F3EB: mov     ecx, ebp
-0x49F3ED: call    sub_499570
+0x49F3ED: call    sub_499570; Fog water decode: water shader/global refresh also consumes 0x4994C0 source records, corroborating packed color and fog field layout.
 0x49F3F2: fld1
 0x49F3F4: fcomp   dword ptr [ebp+2Ch]
 0x49F3F7: fnstsw  ax
@@ -832,7 +832,7 @@
 0x49F40A: mov     ecx, ebp
 0x49F40C: fstp    [esp+24Ch+var_24C]; float
 0x49F40F: push    ebx; int
-0x49F410: call    sub_499570
+0x49F410: call    sub_499570; Fog water decode: water shader/global refresh also consumes 0x4994C0 source records, corroborating packed color and fog field layout.
 0x49F415: mov     ecx, ebp
 0x49F417: call    sub_49AD00
 0x49F41C: mov     ecx, dword ptr [esp+244h+var_C]
@@ -847,3 +847,16 @@
 0x49F438: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x49F43D: add     esp, 230h
 0x49F443: retn    8
+0x9B1C90: lea     ecx, [ebp-21Ch]; slot
+0x9B1C96: jmp     NiPointerSlot_Release
+0x9B1C9B: mov     edx, [esp+a3]
+0x9B1C9F: lea     eax, [edx-234h]
+0x9B1CA5: mov     ecx, [edx-238h]
+0x9B1CAB: xor     ecx, eax
+0x9B1CAD: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B1CB2: add     eax, 10h
+0x9B1CB5: mov     ecx, [edx-4]
+0x9B1CB8: xor     ecx, eax
+0x9B1CBA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B1CBF: mov     eax, offset stru_ADDD4C
+0x9B1CC4: jmp     ___CxxFrameHandler3

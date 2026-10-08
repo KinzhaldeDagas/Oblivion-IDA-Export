@@ -1,4 +1,4 @@
-0x6094C0: push    esi
+0x6094C0: push    esi; Collision state 2: restore saved static/world position, switch geometry and collision filtering to settled projectile values, and assign the shared settled-projectile collision group.
 0x6094C1: mov     esi, ecx
 0x6094C3: mov     eax, [esi]
 0x6094C5: mov     edx, [eax+1C8h]
@@ -28,7 +28,7 @@
 0x60950A: mov     [ecx+8], eax
 0x60950D: mov     ecx, esi; this
 0x60950F: call    TESObjectREFR_SetPosition
-0x609514: mov     esi, [esp+8+arg_0]
+0x609514: mov     esi, [esp+8+collisionObject]
 0x609518: test    esi, esi
 0x60951A: jz      short loc_60952D
 0x60951C: mov     eax, [esi+8]

@@ -1,19 +1,36 @@
 {
-  "callees_count": 9,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_7A7100",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x7A7100",
+      "0x7A71CF"
+    ],
+    [
+      "0x9CCD10",
+      "0x9CCD33"
+    ]
+  ],
+  "chunks_sha256": "54f95911d470ed0b8fc605cf066692bf38268b2bb79762caf2ebcea3379e0421",
+  "comment_regular": "Oblivion Random::Set. Requires 0 < seed < 1, converts seed*2147483648 to the shared integer seed, then initializes all 128 shuffled samples with Raw().",
+  "comment_repeatable": "Oblivion Random::Set. Requires 0 < seed < 1, converts seed*2147483648 to the shared integer seed, then initializes all 128 shuffled samples with Raw().",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 9,
+  "display_name": "OB_Random_Set_010201A0",
   "end_ea": "0x7A71CF",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7A7100",
+  "name": "OB_Random_Set_010201A0",
   "segment": ".text",
   "sha256": "5617ab45b1be1f4c7b244fd759337dc07588c54c00aa6e98f6be470399191bd9",
   "size": 207,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A7100",
-  "type": "void __usercall(int@<edi>, double)",
-  "xrefs_from_count": 69,
+  "total_chunk_size": 242,
+  "type": "void __cdecl(double seed)",
+  "xrefs_from_count": 84,
   "xrefs_to_count": 2
 }

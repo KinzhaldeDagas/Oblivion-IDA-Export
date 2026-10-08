@@ -1,1 +1,1 @@
-HandlerCF_0
+typedef HandlerCF HandlerCF_0;

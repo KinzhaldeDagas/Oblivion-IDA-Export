@@ -1,4 +1,4 @@
-0x4F1630: push    0FFFFFFFFh
+0x4F1630: push    0FFFFFFFFh; Verified: exterior-cell loader checks cellMap first, searches master files using cellOffsetsArray fast path or GRUP/CELL fallback, creates a missing TESObjectCELL, post-fixes it, then attaches worldspace-indexed references.
 0x4F1632: push    offset SEH_798CC0
 0x4F1637: mov     eax, large fs:0
 0x4F163D: push    eax
@@ -15,8 +15,8 @@
 0x4F1657: mov     edi, ecx
 0x4F1659: mov     ebx, [esp+2Ch+a2]
 0x4F165D: mov     eax, [esp+2Ch+ArgList]
-0x4F1661: push    ebx; signed int
-0x4F1662: push    eax; signed int
+0x4F1661: push    ebx; cellY
+0x4F1662: push    eax; cellX
 0x4F1663: mov     [esp+34h+var_15], 1
 0x4F1668: call    TESWorldSpace__GetCellAtCellCoord
 0x4F166D: mov     esi, eax
@@ -45,9 +45,9 @@
 0x4F16B8: mov     ecx, [esp+2Ch+a2]
 0x4F16BC: push    ecx; a2
 0x4F16BD: mov     ecx, edi; this
-0x4F16BF: call    TESForm_GetOverrideFile
+0x4F16BF: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x4F16C4: mov     ecx, eax
-0x4F16C6: call    sub_4520F0
+0x4F16C6: call    TESFile_GetThreadSafeFile; Returns the root TESFile on the main thread; on worker threads returns the per-thread clone selected by GetCurrentThreadId via TESFile_GetThreadSafeFileForThread.
 0x4F16CB: mov     ebp, eax
 0x4F16CD: test    ebp, ebp
 0x4F16CF: jz      loc_4F178B
@@ -86,9 +86,9 @@
 0x4F173A: push    eax
 0x4F173B: mov     ecx, esi
 0x4F173D: call    sub_4C9AC0
-0x4F1742: push    esi
-0x4F1743: mov     ecx, edi
-0x4F1745: call    sub_4EFEF0
+0x4F1742: push    esi; cell
+0x4F1743: mov     ecx, edi; this
+0x4F1745: call    TESWorldSpace_RegisterExteriorCell; Verified: external cell registration separates one quest-item exterior cell into persistentCell; normal exterior cells are stored in cellMap under packed signed X/Y.
 0x4F174A: mov     ecx, [esp+2Ch+ArgList]
 0x4F174E: mov     eax, [edi+0Ch]
 0x4F1751: push    ebx
@@ -104,7 +104,7 @@
 0x4F1768: call    TESForm_SetFormID
 0x4F176D: push    ebp
 0x4F176E: push    esi
-0x4F176F: call    TESDataHandler_LoadForm
+0x4F176F: call    TESDataHandler_LoadForm; TESDataHandler_LoadForm supports override reuse: invokes virtual TESForm::LoadForm on the supplied existing object and updates master/active-file flags.
 0x4F1774: add     esp, 8
 0x4F1777: mov     [esp+2Ch+var_15], al
 0x4F177B: push    ebp
@@ -139,9 +139,9 @@
 0x4F17DA: mov     ecx, ds:0B33B00h
 0x4F17E0: push    eax
 0x4F17E1: call    sub_45A530
-0x4F17E6: push    esi
-0x4F17E7: mov     ecx, edi
-0x4F17E9: call    sub_4F03F0
+0x4F17E6: push    esi; cell
+0x4F17E7: mov     ecx, edi; this
+0x4F17E9: call    TESWorldSpace_AttachIndexedReferencesToCell; Verified: replays coordinate-bucketed +0x64 references and spatially tests fallback references when attaching references to an exterior cell. This is the persistent-reference lifecycle, distinct from the SubSpace spatial lookup map at +0x60.
 0x4F17EE: cmp     [esp+2Ch+var_15], 0
 0x4F17F3: jnz     short loc_4F1819
 0x4F17F5: mov     eax, [edi+0Ch]
@@ -167,3 +167,15 @@
 0x4F182A: pop     ebx
 0x4F182B: add     esp, 18h
 0x4F182E: retn    8
+0x9B8CE0: mov     eax, [ebp-10h]
+0x9B8CE3: push    eax
+0x9B8CE4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B8CE9: pop     ecx
+0x9B8CEA: retn
+0x9B8CEB: mov     edx, [esp+a2]
+0x9B8CEF: lea     eax, [edx-1Ch]
+0x9B8CF2: mov     ecx, [edx-20h]
+0x9B8CF5: xor     ecx, eax
+0x9B8CF7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B8CFC: mov     eax, offset stru_AE3140
+0x9B8D01: jmp     ___CxxFrameHandler3

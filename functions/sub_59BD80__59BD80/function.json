@@ -1,19 +1,36 @@
 {
-  "callees_count": 108,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 50,
   "callers_count": 0,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x59BD80",
+      "0x59C3E3"
+    ],
+    [
+      "0x9BD870",
+      "0x9BD893"
+    ]
+  ],
+  "chunks_sha256": "df4399a3bb760c19b78967510ef42b4c07170aa6d5a20b458ad53096710ff540",
+  "comment_regular": "[Controller decode 2026-07-09] Controls menu update/rebind capture. Displays current bindings, scans joystick 0 physical buttons before POV/D-pad virtual buttons, and writes joystick bindings through scheme 2.\n\n[Controller decode 2026-07-09] Central decoded PC controller/joystick/IsXBox summary is stored in IDB netnode \"$ ControllerStuff\"; full external doc is C:\\src\\OblivionIDA\\ControllerStuff.md.\n\n[Controller decode 2026-07-09] Controller decode completion estimate stored in IDB netnode \"$ ControllerStuff\" sup 200. Current overall decoded PC Controller/IsXBox/Joystick knowledge is about 92%.\n\n[Controller decode 2026-07-09] Full ControllerStuff.md is embedded in IDB netnode \"$ ControllerStuff\" sup 1000..1065; metadata at sup 999; completion estimate at sup 200.\n\n[Controller decode 2026-07-09] Full ControllerStuff.md is embedded in IDB netnode \"$ ControllerStuff\" sup 1000..1067; metadata at sup 999; completion estimate at sup 200.",
   "comment_repeatable": "",
-  "data_refs_count": 5,
-  "display_name": "sub_59BD80",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 15,
+  "display_name": "ControlsMenu::UpdateBindingsAndCaptureRebind",
   "end_ea": "0x59C3E3",
+  "evidence_confidence": "Unknown",
   "flags": 22528,
   "has_pseudocode": true,
-  "name": "sub_59BD80",
+  "name": "ControlsMenu::UpdateBindingsAndCaptureRebind",
   "segment": ".text",
   "sha256": "e02d371632a67fe5be19318ecbca8dfc0efde204131dc11082ab8dad8c781fab",
   "size": 1635,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x59BD80",
+  "total_chunk_size": 1670,
   "type": "void __usercall(int@<ecx>, double@<st1>, double@<st0>)",
-  "xrefs_from_count": 587,
+  "xrefs_from_count": 598,
   "xrefs_to_count": 1
 }

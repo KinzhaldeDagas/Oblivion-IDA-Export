@@ -1,1 +1,1 @@
-IServerSecurityVtbl_0
+typedef IServerSecurityVtbl IServerSecurityVtbl_0;

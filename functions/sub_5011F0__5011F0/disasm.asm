@@ -17,7 +17,7 @@
 0x501218: push    edx; a2
 0x501219: push    eax; a1
 0x50121A: mov     dword ptr [esp+28h+var_4], 0
-0x501222: call    Script_ExtractArgs
+0x501222: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x501227: add     esp, 20h
 0x50122A: test    al, al
 0x50122C: jnz     short loc_501231
@@ -44,7 +44,7 @@
 0x501267: jz      short loc_5012DD
 0x501269: mov     ecx, dword ptr [esp+8+var_4]; this
 0x50126D: cmp     byte ptr [ecx+78h], 0
-0x501271: mov     eax, offset aOn_0
+0x501271: mov     eax, offset aOn_0; "On"
 0x501276: jnz     short loc_50127D
 0x501278: mov     eax, offset aOff
 0x50127D: push    eax
@@ -63,7 +63,7 @@
 0x5012A7: mov     ds:0B3BD98h, al
 0x5012AC: jz      short loc_5012CF
 0x5012AE: test    al, al
-0x5012B0: mov     eax, offset aOn_0
+0x5012B0: mov     eax, offset aOn_0; "On"
 0x5012B5: jnz     short loc_5012BC
 0x5012B7: mov     eax, offset aOff
 0x5012BC: push    eax
@@ -73,7 +73,7 @@
 0x5012CC: add     esp, 8
 0x5012CF: test    al, al
 0x5012D1: jnz     short loc_5012DD
-0x5012D3: mov     ecx, offset ActorProcessManager_ptr
+0x5012D3: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x5012D8: call    sub_675880
 0x5012DD: mov     al, 1
 0x5012DF: pop     esi

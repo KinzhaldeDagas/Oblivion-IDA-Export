@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
-  "callers_count": 11,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 15,
+  "chunks": [
+    [
+      "0x6ED6D0",
+      "0x6ED6E8"
+    ]
+  ],
+  "chunks_sha256": "4c1c2cedab5beb95a2366f8350fd5c99c4d48785dc5144e3f0dab31eb8343660",
+  "comment_regular": "FaceGen assertion reporter: PrintError(\"FR2 ASSERT violation in %s line %i. Code may crash.\", sourceFile, sourceLine); returns normally. NOT noreturn and NOT a validation barrier.",
+  "comment_repeatable": "FaceGen assertion reporter: PrintError(\"FR2 ASSERT violation in %s line %i. Code may crash.\", sourceFile, sourceLine); returns normally. NOT noreturn and NOT a validation barrier.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_6ED6D0",
+  "display_name": "FaceGen_ReportAssertionViolation",
   "end_ea": "0x6ED6E8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6ED6D0",
+  "name": "FaceGen_ReportAssertionViolation",
   "segment": ".text",
   "sha256": "4c1c2cedab5beb95a2366f8350fd5c99c4d48785dc5144e3f0dab31eb8343660",
   "size": 24,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6ED6D0",
-  "type": "int __cdecl(const char *ArgList, int)",
+  "total_chunk_size": 24,
+  "type": "int __cdecl(const char *sourceFile, int sourceLine)",
   "xrefs_from_count": 9,
   "xrefs_to_count": 15
 }

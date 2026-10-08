@@ -64,13 +64,13 @@
 0x6910E9: mov     ecx, eax
 0x6910EB: call    sub_41F6D0
 0x6910F0: mov     ecx, esi
-0x6910F2: call    Actor_GetCurrentAction
+0x6910F2: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x6910F7: cmp     eax, 6
 0x6910FA: ja      short loc_691107
-0x6910FC: push    0
-0x6910FE: push    0FFFFFFFFh
-0x691100: mov     ecx, esi
-0x691102: call    HighPRocess_DoAction?????
+0x6910FC: push    0; sequence
+0x6910FE: push    0FFFFFFFFh; action
+0x691100: mov     ecx, esi; this
+0x691102: call    Actor_SetCurrentActionWithBowVisualCleanup; Void Actor action-transition wrapper. Performs transition-specific bow/held-arrow visual cleanup, then commits action and sequence through process vtable +0x2D8. It has no success/result contract; callers/plugins must not consume EAX, so Crossbow's UInt32 HighProcessDoActionFn typedef is incorrect. Meaningful current-action state is HighProcess-only: HighProcess +0x2D0/+0x2D8 read/store +0x1F4/+0x1F8, while MiddleHigh returns None (-1) and its setter is a no-op; Crossbow's process-level-0 action filter therefore matches Oblivion. External Crossbow state-machine contrast: Equip-as-Cocked/first-shot-loaded is plugin policy, repeated action 4 while Reloading can flip state to Cocked and rebuild controller tracking, and interruption/cancellation actions are not modeled, leaving stale Reloading/Cocked phases.
 0x691107: push    0
 0x691109: push    0
 0x69110B: push    0
@@ -103,9 +103,9 @@
 0x69114C: jmp     short loc_691150
 0x69114E: xor     ebp, ebp
 0x691150: mov     eax, [eax+8]
-0x691153: push    eax
-0x691154: mov     ecx, esi
-0x691156: call    TESObjectREF_GetItemCount
+0x691153: push    eax; item
+0x691154: mov     ecx, esi; this
+0x691156: call    TESObjectREFR_GetItemCount; TESObjectREFR inventory count accessor: returns 0 when the reference has no container or no ContainerChanges; otherwise asks ContainerExtraData_GetItemCount(this, item), which combines base TESContainer count with EntryData.countDelta. Exact ABI is thiscall (TESObjectREFR *this, TESForm *item).
 0x69115B: cmp     eax, 1
 0x69115E: jl      short loc_691175
 0x691160: mov     eax, [ebx+3Ch]
@@ -116,7 +116,7 @@
 0x69116B: push    1
 0x69116D: push    eax
 0x69116E: mov     ecx, esi
-0x691170: call    Actor_EquipItem
+0x691170: call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.
 0x691175: cmp     byte ptr [ebx+86h], 0
 0x69117C: jz      short loc_6911CD
 0x69117E: mov     ecx, [ebx+3Ch]
@@ -131,8 +131,8 @@
 0x69119B: test    eax, eax
 0x69119D: jz      short loc_6911C6
 0x69119F: lea     edi, [eax+30h]
-0x6911A2: mov     ecx, edi
-0x6911A4: call    sub_449190
+0x6911A2: mov     ecx, edi; compactString
+0x6911A4: call    OB_CompactString_Length_010201A0; Bethesda compact string length helper. If inline length marker is 0xFFFF, strlen(heap string); otherwise returns the 16-bit stored length. Used here to gate optional TESObjectTREE leaf texture.
 0x6911A9: test    eax, eax
 0x6911AB: jbe     short loc_6911C6
 0x6911AD: mov     edx, [edi]
@@ -157,7 +157,7 @@
 0x6911E7: mov     ecx, edi
 0x6911E9: call    ContainerEntryExtraData_DestroyDataTable
 0x6911EE: push    edi
-0x6911EF: call    FormHeapFree
+0x6911EF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6911F4: add     esp, 4
 0x6911F7: mov     dword ptr [ebx+3Ch], 0
 0x6911FE: mov     ecx, [esi+58h]
@@ -250,10 +250,10 @@
 0x6912FC: mov     eax, [eax]
 0x6912FE: mov     [esp+38h+var_1C], eax
 0x691302: mov     eax, [edi+8]
-0x691305: push    eax
-0x691306: mov     ecx, esi
+0x691305: push    eax; item
+0x691306: mov     ecx, esi; this
 0x691308: mov     [esp+3Ch+var_21], 0
-0x69130D: call    TESObjectREF_GetItemCount
+0x69130D: call    TESObjectREFR_GetItemCount; TESObjectREFR inventory count accessor: returns 0 when the reference has no container or no ContainerChanges; otherwise asks ContainerExtraData_GetItemCount(this, item), which combines base TESContainer count with EntryData.countDelta. Exact ABI is thiscall (TESObjectREFR *this, TESForm *item).
 0x691312: cmp     eax, 1
 0x691315: jl      short loc_691374
 0x691317: mov     ecx, [esp+38h+var_1C]
@@ -264,7 +264,7 @@
 0x691323: push    1
 0x691325: push    eax
 0x691326: mov     ecx, esi
-0x691328: call    Actor_EquipItem
+0x691328: call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.
 0x69132D: push    0
 0x69132F: push    ebp
 0x691330: lea     ecx, [esi+44h]; this
@@ -288,7 +288,7 @@
 0x691360: mov     ecx, ebp
 0x691362: call    ContainerEntryExtraData_DestroyDataTable
 0x691367: push    ebp
-0x691368: call    FormHeapFree
+0x691368: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x69136D: add     esp, 4
 0x691370: mov     ebp, [esp+38h+var_18]
 0x691374: cmp     byte ptr [ebx+87h], 0
@@ -325,7 +325,7 @@
 0x6913D6: mov     ecx, edi
 0x6913D8: call    ContainerEntryExtraData_DestroyDataTable
 0x6913DD: push    edi
-0x6913DE: call    FormHeapFree
+0x6913DE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6913E3: mov     eax, [esp+3Ch+var_20]
 0x6913E7: add     esp, 4
 0x6913EA: mov     dword ptr [eax], 0
@@ -349,13 +349,13 @@
 0x691430: call    eax
 0x691432: test    eax, eax
 0x691434: jnz     loc_69154A
-0x69143A: mov     ecx, [ebx+8]
+0x69143A: mov     ecx, [ebx+8]; magicItem
 0x69143D: test    ecx, ecx
 0x69143F: jz      loc_69154A
 0x691445: cmp     [ebx+0Ch], eax
 0x691448: jz      loc_69154A
-0x69144E: push    eax
-0x69144F: call    MagicItem_GetFXEffect
+0x69144E: push    eax; effectIndex
+0x69144F: call    MagicItem_GetFXEffect; Verified (Oblivion): MagicItem_GetFXEffect returns the effect's EffectSetting pointer; MagicShaderHitEffect constructors/PostLink dereference its +0x78 EffectSetting::effectShader field.
 0x691454: mov     ecx, [ebx+8]
 0x691457: mov     ebp, eax
 0x691459: mov     eax, [ebx+0Ch]
@@ -363,13 +363,13 @@
 0x69145F: push    0
 0x691461: push    eax
 0x691462: add     ecx, 0Ch
-0x691465: call    EffectItemList_GetStrongestItem
+0x691465: call    EffectItemList_GetStrongestItem; this=EffectItemList; args are rangeFilter (0 self,1 touch,2 target,3 any) and requireArea. Returns effective (flag 0x400000 clear) qualifying item with greatest truncated MagickaCostForCaster(item,null).
 0x69146A: mov     ecx, [ebx+0Ch]
 0x69146D: cmp     ecx, eax
 0x69146F: jnz     loc_69154A
 0x691475: mov     ecx, [ecx+1Ch]
-0x691478: add     ecx, 18h
-0x69147B: call    sub_449190
+0x691478: add     ecx, 18h; compactString
+0x69147B: call    OB_CompactString_Length_010201A0; Bethesda compact string length helper. If inline length marker is 0xFFFF, strlen(heap string); otherwise returns the 16-bit stored length. Used here to gate optional TESObjectTREE leaf texture.
 0x691480: test    eax, eax
 0x691482: jbe     loc_69151F
 0x691488: push    38h ; '8'; Size
@@ -401,9 +401,9 @@
 0x6914D7: call    eax
 0x6914D9: test    al, al
 0x6914DB: jz      short loc_6914EA
-0x6914DD: push    edi
-0x6914DE: mov     ecx, offset ActorProcessManager_ptr
-0x6914E3: call    sub_678D30
+0x6914DD: push    edi; effect
+0x6914DE: mov     ecx, (offset qword_B3BB2C+1D4h); self
+0x6914E3: call    ActorProcessManager_RegisterTempEffect; [Verified] ActorProcessManager_RegisterTempEffect increments the effect reference and routes GetTypeID 4-6 into extendedTempEffects (+0x48), all other IDs into activeTempEffects (+0x40). Vtable evidence confirms decals 0/1 and particles 2 use the active list. Fallout divergence: its BGSDecalManager updates distinct simple-decal and emitter collections instead of using this per-actor temp-effect routing; one-to-one equivalence is Unknown.
 0x6914E8: jmp     short loc_6914F4
 0x6914EA: mov     edx, [edi]
 0x6914EC: mov     eax, [edx]
@@ -427,14 +427,14 @@
 0x691526: push    0
 0x691528: push    offset aItmbounddisapp; "ITMBoundDisappear"
 0x69152D: mov     ecx, esi
-0x69152F: call    sub_65A970
+0x69152F: call    TESObjectREFR_PlayResolvedAnimSoundNote; Reference animation sound-note playback. Resolves a Sound: note token through SoundMap_ResolveAnimSoundNote, plays it, positions it on the reference when requested, and applies volume/loop flags.
 0x691534: mov     esi, eax
 0x691536: test    esi, esi
 0x691538: jz      short loc_69154A
 0x69153A: mov     ecx, esi; this
 0x69153C: call    sub_6B73E0
 0x691541: push    esi
-0x691542: call    FormHeapFree
+0x691542: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x691547: add     esp, 4
 0x69154A: mov     dword ptr [ebx+20h], 0
 0x691551: mov     byte ptr [ebx+84h], 0
@@ -447,3 +447,15 @@
 0x691567: pop     ebx
 0x691568: add     esp, 24h
 0x69156B: retn
+0x9C49B0: mov     eax, [ebp-10h]
+0x9C49B3: push    eax
+0x9C49B4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C49B9: pop     ecx
+0x9C49BA: retn
+0x9C49BB: mov     edx, [esp+arg_4]
+0x9C49BF: lea     eax, [edx-28h]
+0x9C49C2: mov     ecx, [edx-2Ch]
+0x9C49C5: xor     ecx, eax
+0x9C49C7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C49CC: mov     eax, offset stru_AED2E8
+0x9C49D1: jmp     ___CxxFrameHandler3

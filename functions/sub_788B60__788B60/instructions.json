@@ -1,19 +1,19 @@
 [
   {
     "ea": "0x788B60",
-    "line": "push    ecx",
+    "line": "push    ecx; Oblivion compiler adapter for the 28-byte collision copy-backward primitive; preserves the same first/last/destinationEnd semantics.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x788B61",
-    "line": "mov     ecx, [esp+4+arg_8]",
+    "line": "mov     ecx, [esp+4+destinationEnd]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x788B65",
-    "line": "mov     edx, [esp+4+arg_8]",
+    "line": "mov     edx, [esp+4+destinationEnd]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x788B71",
-    "line": "mov     eax, [esp+8+arg_8]",
+    "line": "mov     eax, [esp+8+destinationEnd]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x788B76",
-    "line": "mov     ecx, [esp+0Ch+arg_4]",
+    "line": "mov     ecx, [esp+0Ch+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,31 +61,31 @@
   },
   {
     "ea": "0x788B7B",
-    "line": "mov     edx, [esp+10h+arg_0]",
+    "line": "mov     edx, [esp+10h+first]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x788B7F",
-    "line": "push    eax",
+    "line": "push    eax; destinationEnd",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x788B80",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x788B81",
-    "line": "push    edx",
+    "line": "push    edx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x788B82",
-    "line": "call    sub_788660",
+    "line": "call    OB_stVector_CollisionObject_CopyBackwardRange_010201A0; Oblivion collision-vector copy-backward primitive: moves 28-byte records from the end toward the front-safe destination and returns destination start.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,73 +1,75 @@
-char __fastcall Actor_SetEquippedWeaponData(HighProcess *a1, int a2, EntryData *a3, _DWORD *a4)
+// Replaces HighProcess equippedWeaponData, derives staff/bow flags from TESObjectWEAP weapon type, rebuilds equipment attachment-node caches for active player perspectives, or clears those caches when equipment is absent.
+char __thiscall Actor_SetEquippedWeaponData(HighProcess *this, EntryData *entry, NiNode *rootNode)
 {
+  int v3; // edx
   EntryData *equippedWeaponData; // edi
   TESForm *type; // ebp
   ActorAnimData *animData; // eax
-  NiNode *RootNode; // ecx
-  _DWORD *v9; // edi
-  _DWORD *v10; // eax
+  NiNode *v8; // ecx
+  NiNode *v9; // edi
+  void **v10; // eax
   char result; // al
 
-  equippedWeaponData = a1->equippedWeaponData;
-  if ( equippedWeaponData != a3 )
+  equippedWeaponData = this->equippedWeaponData; /*0x65855a*/
+  if ( equippedWeaponData != entry ) /*0x658564*/
   {
-    if ( equippedWeaponData )
+    if ( equippedWeaponData ) /*0x658568*/
     {
-      ContainerEntryExtraData_DestroyDataTable((unsigned int *)a1->equippedWeaponData, a2);
-      FormHeapFree((unsigned int)equippedWeaponData);
+      ContainerEntryExtraData_DestroyDataTable((unsigned int *)this->equippedWeaponData, v3); /*0x65856c*/
+      FormHeapFree((unsigned int)equippedWeaponData); /*0x658572*/
     }
-    a1->equippedWeaponData = a3;
-    a1->unk0F4 = 0;
-    a1->unk0F5 = 0;
-    if ( a3 )
+    this->equippedWeaponData = entry; /*0x65857c*/
+    this->unk0F4 = 0; /*0x658582*/
+    this->unk0F5 = 0; /*0x658588*/
+    if ( entry ) /*0x65858e*/
     {
-      type = a3->type;
-      if ( type )
+      type = entry->type; /*0x658590*/
+      if ( type ) /*0x658595*/
       {
-        if ( LOBYTE(type[6].vtbl) == 4 )
+        if ( LOBYTE(type[6].vtbl) == 4 ) /*0x6585a1*/
         {
-          a1->unk0F5 = 1;
+          this->unk0F5 = 1; /*0x6585b1*/
         }
-        else if ( LOBYTE(type[6].vtbl) == 5 )
+        else if ( LOBYTE(type[6].vtbl) == 5 ) /*0x6585a6*/
         {
-          a1->unk0F4 = 1;
+          this->unk0F4 = 1; /*0x6585a8*/
         }
       }
     }
   }
-  animData = a1->animData;
-  if ( animData && a1->equippedWeaponData )
+  animData = this->animData; /*0x6585b8*/
+  if ( animData && this->equippedWeaponData ) /*0x6585c2*/
   {
-    RootNode = animData->RootNode;
-    if ( RootNode )
-      sub_6541A0((int *)a1, (int)animData->manager, RootNode);
+    v8 = animData->RootNode; /*0x6585ca*/
+    if ( v8 ) /*0x6585cf*/
+      MiddleHighProcess_CacheEquipmentAttachmentNodes(this, animData->manager, v8); /*0x6585d9*/
     else
-      sub_6541A0((int *)a1, 0, a4);
-    if ( a1->animData == Player_GetAnimData((Actor *)TESDataHandler_g_PlayerRef, 0) )
+      MiddleHighProcess_CacheEquipmentAttachmentNodes(this, 0, rootNode); /*0x6585e3*/
+    if ( this->animData == PlayerCharacter_GetAnimDataByPerspective((Actor *)reference, 0) ) /*0x6585fa*/
     {
-      v9 = *((_DWORD **)Player_GetAnimData((Actor *)TESDataHandler_g_PlayerRef, 1) + 1);
-      v10 = Player_GetAnimData((Actor *)TESDataHandler_g_PlayerRef, 1);
-      sub_6541A0((int *)a1, v10[0x26], v9);
+      v9 = *((NiNode **)PlayerCharacter_GetAnimDataByPerspective((Actor *)reference, 1) + 1); /*0x65860f*/
+      v10 = (void **)PlayerCharacter_GetAnimDataByPerspective((Actor *)reference, 1); /*0x658614*/
+      MiddleHighProcess_CacheEquipmentAttachmentNodes(this, v10[0x26], v9); /*0x658623*/
     }
-    return 1;
+    return 1; /*0x658623*/
   }
-  a1->unk0FC = 0;
-  a1->unk100 = 0;
-  a1->unk104 = 0;
-  a1->unk108 = 0;
-  a1->unk10C = 0;
-  a1->unk110 = 0;
-  if ( !TESDataHandler_g_PlayerRef )
-    return 1;
-  result = 1;
-  if ( TESDataHandler_g_PlayerRef->super.super.super.process == a1 )
+  this->weaponAttachNode = 0; /*0x658631*/
+  this->torchAttachNode = 0; /*0x658637*/
+  this->forearmTwistAttachNode = 0; /*0x65863d*/
+  this->backOrSideWeaponAttachNode = 0; /*0x658643*/
+  this->quiverAttachNode = 0; /*0x658649*/
+  this->arrowBoneAttachNode = 0; /*0x65864f*/
+  if ( !reference ) /*0x65865c*/
+    return 1; /*0x658628*/
+  result = 1; /*0x658661*/
+  if ( reference->super.super.super.process == this ) /*0x658663*/
   {
-    dword_B3BA84 = 0;
-    dword_B3BA88 = 0;
-    dword_B3BA8C = 0;
-    dword_B3BA90 = 0;
-    dword_B3BA94 = 0;
-    dword_B3BA98 = 0;
+    g_playerFirstPersonWeaponAttachNode = 0; /*0x658668*/
+    g_playerFirstPersonTorchAttachNode = 0; /*0x65866e*/
+    g_playerFirstPersonForearmTwistNode = 0; /*0x658674*/
+    g_playerFirstPersonBackOrSideWeaponAttachNode = 0; /*0x65867a*/
+    g_playerFirstPersonQuiverAttachNode = 0; /*0x658680*/
+    g_playerFirstPersonArrowBoneAttachNode = 0; /*0x658686*/
   }
-  return result;
+  return result; /*0x65862a*/
 }

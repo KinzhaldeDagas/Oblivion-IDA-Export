@@ -17,7 +17,7 @@
 0x5075C8: push    edx; a2
 0x5075C9: push    eax; a1
 0x5075CA: mov     dword ptr [esp+28h+var_4], 0
-0x5075D2: call    Script_ExtractArgs
+0x5075D2: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x5075D7: add     esp, 20h
 0x5075DA: test    al, al
 0x5075DC: jnz     short loc_5075E1
@@ -34,9 +34,9 @@
 0x5075F9: mov     dword ptr [esp+8+var_4], eax
 0x5075FD: test    esi, esi
 0x5075FF: jz      short loc_507618
-0x507601: push    eax
-0x507602: lea     ecx, [esi+44h]
-0x507605: call    ExtraDataList__SetOrRemoveExtraOwnership
+0x507601: push    eax; owner
+0x507602: lea     ecx, [esi+44h]; this
+0x507605: call    ExtraDataList__SetOrRemoveExtraOwnership; Verified XOWN mutator: update ExtraOwnership.ownerForm when owner is nonnull; remove the XOWN extra when null; otherwise allocate a 16-byte ExtraOwnership payload and add it to the list. During plugin load the initial dword is a FormID temporarily held in the same union slot; ExtraDataList_ResolveLoadedFormIDs converts it to TESForm*. TESObjectCELL_LinkForm removes direct XOWN, XRNK, and XGLB from an exterior cell when an owner exists.
 0x50760A: mov     edx, [esi]
 0x50760C: mov     eax, [edx+40h]
 0x50760F: push    80h ; '€'

@@ -1,13 +1,13 @@
 unsigned int *sub_6FA900()
 {
-  unsigned int *v0; // eax
+  NiObject *v0; // eax
   unsigned int *v1; // esi
 
-  v0 = (unsigned int *)FormHeapAlloc(0x10u);
-  if ( v0 )
-    v1 = BSXFlags_constr(v0);
+  v0 = (NiObject *)FormHeapAlloc(0x10u); /*0x6fa924*/
+  if ( v0 ) /*0x6fa93a*/
+    v1 = (unsigned int *)BSXFlags_constr(v0); /*0x6fa943*/
   else
-    v1 = 0;
-  sub_721440(v1, 0);
-  return v1;
+    v1 = 0; /*0x6fa947*/
+  sub_721440(v1, 0); /*0x6fa955*/
+  return v1; /*0x6fa95c*/
 }

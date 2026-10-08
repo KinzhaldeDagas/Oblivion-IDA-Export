@@ -1,6 +1,6 @@
 0x540600: push    esi
 0x540601: mov     esi, ecx
-0x540603: call    InterfaceManager_IsMenuMode
+0x540603: call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.
 0x540608: test    al, al
 0x54060A: jnz     loc_5406E7
 0x540610: call    sub_5AD410
@@ -31,17 +31,17 @@
 0x540655: mov     ecx, ebx; this
 0x540657: call    sub_6B73E0
 0x54065C: push    ebx
-0x54065D: call    FormHeapFree
+0x54065D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x540662: add     esp, 4
 0x540665: mov     [esi], edi
 0x540667: pop     ebx
 0x540668: pop     edi
-0x540669: mov     ecx, [esi]
+0x540669: mov     ecx, [esi]; this
 0x54066B: test    ecx, ecx
 0x54066D: jz      short loc_5406E7
 0x54066F: cmp     dword ptr [esi+8], 3
 0x540673: jnz     short loc_540682
-0x540675: call    sub_6B7260
+0x540675: call    SoundHandle__IsPlaying; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.
 0x54067A: test    al, al
 0x54067C: jnz     short loc_5406A6
 0x54067E: push    0
@@ -51,8 +51,8 @@
 0x540689: call    sub_53FD20
 0x54068E: test    al, al
 0x540690: jz      short loc_5406A6
-0x540692: mov     ecx, [esi]
-0x540694: call    sub_6B7260
+0x540692: mov     ecx, [esi]; this
+0x540694: call    SoundHandle__IsPlaying; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.
 0x540699: test    al, al
 0x54069B: jnz     short loc_5406A6
 0x54069D: push    1

@@ -1,5 +1,5 @@
-0x4AC740: mov     eax, [esp+arg_4]
-0x4AC744: mov     ecx, [esp+arg_0]
+0x4AC740: mov     eax, [esp+property]; Verified (Oblivion): removes the exact ParticleShaderProperty instance from the attached actor scenegraph before releasing the retained reference.
+0x4AC744: mov     ecx, [esp+rootNode]
 0x4AC748: push    eax
 0x4AC749: push    ecx
 0x4AC74A: call    sub_7E39A0

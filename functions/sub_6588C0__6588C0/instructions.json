@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x6588C5",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x6588E5",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x6588FA",
-    "line": "call    sub_649340",
+    "line": "call    sub_649340; RadiantAI: package refresh/reselection bridge. If no current package, calls 0x648E40 to choose one; validates procedure row, checks duration/package flags, can end/reset packages, then calls 0x648E40 again for reselection.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x658905",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },

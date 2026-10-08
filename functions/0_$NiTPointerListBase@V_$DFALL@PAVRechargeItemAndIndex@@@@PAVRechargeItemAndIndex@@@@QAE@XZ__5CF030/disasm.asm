@@ -68,23 +68,23 @@
 0x5CF117: mov     ecx, [edi+8]
 0x5CF11A: cmp     ecx, [eax+8]
 0x5CF11D: jnz     short loc_5CF159
-0x5CF11F: mov     ecx, edi
-0x5CF121: call    sub_4849C0
+0x5CF11F: mov     ecx, edi; this
+0x5CF121: call    EquippedEntryData_GetCharge; Return per-instance ExtraCharge when present; otherwise return the TESEnchantableForm base charge. Returns the sentinel/default when the EntryData form is not enchantable.
 0x5CF126: fcomp   dword ptr ds:0A2FAA8h
 0x5CF12C: fnstsw  ax
 0x5CF12E: test    ah, 41h
 0x5CF131: jnz     short loc_5CF159
 0x5CF133: mov     eax, [esp+168h+var_134]
 0x5CF137: mov     esi, [eax+4]
-0x5CF13A: mov     ecx, edi
-0x5CF13C: call    TESHealthForm_GetHealth
+0x5CF13A: mov     ecx, edi; this
+0x5CF13C: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x5CF141: mov     [esp+168h+var_140], eax
 0x5CF145: fild    [esp+168h+var_140]
 0x5CF149: push    ecx
 0x5CF14A: mov     ecx, esi; this
-0x5CF14C: fstp    [esp+16Ch+a2]; a3
-0x5CF14F: push    0FB4h; a2
-0x5CF154: call    Tile_SetFloat
+0x5CF14C: fstp    [esp+16Ch+a2]; value
+0x5CF14F: push    0FB4h; propertyCode
+0x5CF154: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5CF159: test    ebx, ebx
 0x5CF15B: jz      short loc_5CF193
 0x5CF15D: mov     eax, [edi+8]
@@ -96,8 +96,8 @@
 0x5CF170: jz      short loc_5CF193
 0x5CF172: cmp     dword ptr [ebx+4], 0
 0x5CF176: jz      short loc_5CF193
-0x5CF178: mov     ecx, edi
-0x5CF17A: call    sub_4849C0
+0x5CF178: mov     ecx, edi; this
+0x5CF17A: call    EquippedEntryData_GetCharge; Return per-instance ExtraCharge when present; otherwise return the TESEnchantableForm base charge. Returns the sentinel/default when the EntryData form is not enchantable.
 0x5CF17F: movzx   ecx, bp
 0x5CF182: mov     [esp+168h+var_140], ecx
 0x5CF186: fild    [esp+168h+var_140]
@@ -110,7 +110,7 @@
 0x5CF197: mov     ecx, edi
 0x5CF199: call    ContainerEntryExtraData_DestroyDataTable
 0x5CF19E: push    edi
-0x5CF19F: call    FormHeapFree
+0x5CF19F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5CF1A4: add     esp, 4
 0x5CF1A7: xor     edi, edi
 0x5CF1A9: test    edi, edi
@@ -236,10 +236,10 @@
 0x5CF31C: fld1
 0x5CF31E: mov     ecx, [eax+28h]; this
 0x5CF321: push    ecx
-0x5CF322: fstp    [esp+16Ch+a2]; a3
-0x5CF325: push    0FA1h; a2
+0x5CF322: fstp    [esp+16Ch+a2]; value
+0x5CF325: push    0FA1h; propertyCode
 0x5CF32A: mov     dword ptr [eax+3Ch], 0
-0x5CF331: call    Tile_SetFloat
+0x5CF331: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5CF336: mov     edx, [esp+168h+var_11C]
 0x5CF33A: mov     esi, [edx+34h]
 0x5CF33D: test    esi, esi
@@ -249,10 +249,10 @@
 0x5CF34A: mov     eax, [eax]
 0x5CF34C: mov     esi, [esi]
 0x5CF34E: push    ecx
-0x5CF34F: fstp    [esp+16Ch+a2]; a3
-0x5CF352: push    0FAEh; a2
+0x5CF34F: fstp    [esp+16Ch+a2]; value
+0x5CF352: push    0FAEh; propertyCode
 0x5CF357: mov     ecx, eax; this
-0x5CF359: call    Tile_SetFloat
+0x5CF359: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5CF35E: test    esi, esi
 0x5CF360: jnz     short loc_5CF341
 0x5CF362: mov     eax, [esp+168h+var_148]
@@ -370,23 +370,23 @@
 0x5CF4CD: fild    [esp+168h+var_140]
 0x5CF4D1: push    ecx
 0x5CF4D2: mov     ecx, esi; this
-0x5CF4D4: fstp    [esp+16Ch+a2]; a3
-0x5CF4D7: push    0FB9h; a2
-0x5CF4DC: call    Tile_SetFloat
+0x5CF4D4: fstp    [esp+16Ch+a2]; value
+0x5CF4D7: push    0FB9h; propertyCode
+0x5CF4DC: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5CF4E1: fild    [esp+168h+var_154]
 0x5CF4E5: push    ecx
 0x5CF4E6: mov     ecx, esi; this
-0x5CF4E8: fstp    [esp+16Ch+a2]; a3
-0x5CF4EB: push    0FAEh; a2
-0x5CF4F0: call    Tile_SetFloat
+0x5CF4E8: fstp    [esp+16Ch+a2]; value
+0x5CF4EB: push    0FAEh; propertyCode
+0x5CF4F0: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5CF4F5: mov     [esp+168h+var_130], ebx
 0x5CF4F9: mov     [esp+168h+var_12C], bx
 0x5CF4FE: mov     [esp+168h+var_12A], bx
 0x5CF503: push    ebp
-0x5CF504: mov     ecx, edi
+0x5CF504: mov     ecx, edi; this
 0x5CF506: mov     byte ptr [esp+16Ch+var_4], 1
-0x5CF50E: call    sub_4849C0
-0x5CF513: call    Double_To_SInt32
+0x5CF50E: call    EquippedEntryData_GetCharge; Return per-instance ExtraCharge when present; otherwise return the TESEnchantableForm base charge. Returns the sentinel/default when the EntryData form is not enchantable.
+0x5CF513: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5CF518: push    eax; ArgList
 0x5CF519: lea     ecx, [esp+170h+var_130]
 0x5CF51D: push    offset aDD_0; "%d/%d"
@@ -399,7 +399,7 @@
 0x5CF535: mov     ecx, esi
 0x5CF537: call    Tile_SetString
 0x5CF53C: mov     eax, [esi+10h]
-0x5CF53F: lea     ecx, [eax+30h]
+0x5CF53F: lea     ecx, [eax+30h]; list
 0x5CF542: mov     eax, [ecx+4]
 0x5CF545: cmp     eax, ebx
 0x5CF547: jz      short loc_5CF560
@@ -416,8 +416,8 @@
 0x5CF564: mov     [esp+168h+var_120], edi
 0x5CF568: jz      short loc_5CF574
 0x5CF56A: lea     edx, [esp+168h+var_120]
-0x5CF56E: push    edx
-0x5CF56F: call    sub_7AA860
+0x5CF56E: push    edx; node
+0x5CF56F: call    NiTPointerList_RemoveNode; [Verified] Generic NiTPointerList node-removal helper. Unlinks the supplied node, updates head/tail and neighboring links, invokes the list's FreeNode vfunc, decrements item count, and returns the removed node's data pointer.
 0x5CF574: mov     edi, [esi+10h]
 0x5CF577: mov     eax, [edi+30h]
 0x5CF57A: mov     edx, [eax+4]
@@ -438,7 +438,7 @@
 0x5CF5A2: push    ebp
 0x5CF5A3: mov     [edi+4], eax
 0x5CF5A6: mov     byte ptr [esp+16Ch+var_4], 0
-0x5CF5AE: call    FormHeapFree
+0x5CF5AE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5CF5B3: mov     [esp+16Ch+var_130], ebx
 0x5CF5B7: mov     [esp+16Ch+var_12A], bx
 0x5CF5BC: mov     [esp+16Ch+var_12C], bx
@@ -458,18 +458,18 @@
 0x5CF5EA: fild    [esp+168h+var_140]
 0x5CF5EE: push    ecx
 0x5CF5EF: mov     esi, eax
-0x5CF5F1: fstp    [esp+16Ch+a2]; a3
-0x5CF5F4: push    0FB9h; a2
+0x5CF5F1: fstp    [esp+16Ch+a2]; value
+0x5CF5F4: push    0FB9h; propertyCode
 0x5CF5F9: mov     ecx, esi; this
-0x5CF5FB: call    Tile_SetFloat
+0x5CF5FB: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5CF600: mov     [esp+168h+var_128], ebx
 0x5CF604: mov     [esp+168h+var_124], bx
 0x5CF609: mov     [esp+168h+var_122], bx
 0x5CF60E: push    ebp
-0x5CF60F: mov     ecx, edi
+0x5CF60F: mov     ecx, edi; this
 0x5CF611: mov     byte ptr [esp+16Ch+var_4], 2
-0x5CF619: call    sub_4849C0
-0x5CF61E: call    Double_To_SInt32
+0x5CF619: call    EquippedEntryData_GetCharge; Return per-instance ExtraCharge when present; otherwise return the TESEnchantableForm base charge. Returns the sentinel/default when the EntryData form is not enchantable.
+0x5CF61E: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5CF623: push    eax; ArgList
 0x5CF624: lea     ecx, [esp+170h+var_128]
 0x5CF628: push    offset aDD_0; "%d/%d"
@@ -483,7 +483,7 @@
 0x5CF642: call    Tile_SetString
 0x5CF647: push    edi
 0x5CF648: mov     byte ptr [esp+16Ch+var_4], 0
-0x5CF650: call    FormHeapFree
+0x5CF650: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5CF655: mov     [esp+16Ch+var_128], ebx
 0x5CF659: mov     [esp+16Ch+var_122], bx
 0x5CF65E: mov     [esp+16Ch+var_124], bx
@@ -540,10 +540,10 @@
 0x5CF6F2: mov     ecx, edi
 0x5CF6F4: call    ContainerEntryExtraData_DestroyDataTable
 0x5CF6F9: push    edi
-0x5CF6FA: call    FormHeapFree
+0x5CF6FA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5CF6FF: add     esp, 4
 0x5CF702: push    esi
-0x5CF703: call    FormHeapFree
+0x5CF703: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5CF708: add     esp, 4
 0x5CF70B: cmp     [esp+168h+var_144], ebx
 0x5CF70F: jnz     short loc_5CF6BB
@@ -573,3 +573,24 @@
 0x5CF75E: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x5CF763: add     esp, 154h
 0x5CF769: retn    4
+0x5CE7E0: mov     dword ptr [ecx], offset ??_7?$NiTListBase@V?$DFALL@PAVRechargeItemAndIndex@@@@PAVRechargeItemAndIndex@@@@6B@; const NiTListBase<DFALL<RechargeItemAndIndex *>,RechargeItemAndIndex *>::`vftable'
+0x5CE7E6: retn
+0x9C1C70: lea     ecx, [ebp-150h]
+0x9C1C76: jmp     j_??1?$NiTList@PAVRechargeItemAndIndex@@@@UAE@XZ; NiTList<RechargeItemAndIndex *>::~NiTList<RechargeItemAndIndex *>(void)
+0x9C1C7B: lea     ecx, [ebp-130h]; void *
+0x9C1C81: jmp     BSStringT_Clear
+0x9C1C86: lea     ecx, [ebp-128h]; void *
+0x9C1C8C: jmp     BSStringT_Clear
+0x9C1C91: lea     ecx, [ebp-150h]
+0x9C1C97: jmp     loc_5CE7E0
+0x9C1C9C: mov     edx, [esp+arg_4]
+0x9C1CA0: lea     eax, [edx-158h]
+0x9C1CA6: mov     ecx, [edx-15Ch]
+0x9C1CAC: xor     ecx, eax
+0x9C1CAE: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C1CB3: add     eax, 10h
+0x9C1CB6: mov     ecx, [edx-4]
+0x9C1CB9: xor     ecx, eax
+0x9C1CBB: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C1CC0: mov     eax, offset stru_AEACA4
+0x9C1CC5: jmp     ___CxxFrameHandler3

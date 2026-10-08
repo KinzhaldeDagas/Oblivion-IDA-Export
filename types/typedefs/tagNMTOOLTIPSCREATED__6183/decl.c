@@ -1,1 +1,5 @@
-tagNMTOOLTIPSCREATED
+struct tagNMTOOLTIPSCREATED
+{
+NMHDR hdr;
+HWND hwndToolTips;
+};

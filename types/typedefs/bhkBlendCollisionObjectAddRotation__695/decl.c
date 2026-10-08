@@ -1,1 +1,1 @@
-bhkBlendCollisionObjectAddRotation
+struct bhkBlendCollisionObjectAddRotation;

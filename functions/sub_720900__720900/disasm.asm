@@ -19,7 +19,7 @@
 0x72093B: push    ebp
 0x72093C: jnb     loc_720A08
 0x720942: call    sub_6D7DF0
-0x720947: push    offset sub_7016A0; a5
+0x720947: push    offset NiPointerSlot_Release; a5
 0x72094C: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x720951: push    6; size
 0x720953: push    4; a2
@@ -78,7 +78,7 @@
 0x7209E3: push    eax
 0x7209E4: mov     ecx, esi
 0x7209E6: call    sub_7205A0
-0x7209EB: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x7209EB: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x7209F0: push    6; int
 0x7209F2: push    4; unsigned int
 0x7209F4: lea     ecx, [esp+48h+a1]
@@ -96,3 +96,17 @@
 0x720A1C: pop     ebx
 0x720A1D: add     esp, 28h
 0x720A20: retn    4
+0x9CA260: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9CA265: push    6; int
+0x9CA267: push    4; unsigned int
+0x9CA269: lea     eax, [ebp-24h]
+0x9CA26C: push    eax; void *
+0x9CA26D: call    $LN21
+0x9CA272: retn
+0x9CA273: mov     edx, [esp+arg_4]
+0x9CA277: lea     eax, [edx-2Ch]
+0x9CA27A: mov     ecx, [edx-30h]
+0x9CA27D: xor     ecx, eax
+0x9CA27F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA284: mov     eax, offset stru_AF29D4
+0x9CA289: jmp     ___CxxFrameHandler3

@@ -14,15 +14,15 @@ int __userpurge MagicCaster_CastingVFX_initialize___::LookupTESObjectLIGH@<eax>(
   TESForm *v11; // eax
   void *v12; // eax
 
-  v11 = TESForm_LookupByFormID(a1);
-  v12 = OblivionDynamicCast(
+  v11 = TESForm_LookupByFormID(a1); /*0x69defc*/
+  v12 = OblivionDynamicCast( /*0x69df10*/
           v11,
           0,
           (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
           &TESObjectLIGH `RTTI Type Descriptor',
           0);
-  *(_DWORD *)(edi0 + 4) = v12;
-  if ( !v12 )
-    JUMPOUT(0x69E08E);
+  *(_DWORD *)(edi0 + 4) = v12; /*0x69df1a*/
+  if ( !v12 ) /*0x69df1d*/
+    JUMPOUT(0x69E08E); /*0x69e08e*/
   return MagicCaster_CastingVFX_initialize___::CreateNiPointLight(a2, a3);
 }

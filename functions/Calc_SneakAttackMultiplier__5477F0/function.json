@@ -1,19 +1,36 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "Calc_SneakAttackMultiplier",
+  "chunks": [
+    [
+      "0x5477F0",
+      "0x547829"
+    ],
+    [
+      "0x54782D",
+      "0x5478F5"
+    ]
+  ],
+  "chunks_sha256": "b9fb56aa3a56269ef63076aa7dcaf99fd84a3fd6e7a8d3d4569d8f82c24fa85e",
+  "comment_regular": "Returns the Oblivion sneak-attack damage multiplier. Weapon types -1, 0, and 2 use the melee mastery settings; type 5 uses Marksman mastery settings; unsupported types remain 1.0. Mastery indices 0..4 select Novice through Master game settings.",
+  "comment_repeatable": "Returns the Oblivion sneak-attack damage multiplier. Weapon types -1, 0, and 2 use the melee mastery settings; type 5 uses Marksman mastery settings; unsupported types remain 1.0. Mastery indices 0..4 select Novice through Master game settings.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 11,
+  "display_name": "Calc_SneakAttackDamageMultiplier",
   "end_ea": "0x547829",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "Calc_SneakAttackMultiplier",
+  "name": "Calc_SneakAttackDamageMultiplier",
   "segment": ".text",
   "sha256": "a956135f2c98c17cda1224da7a89c9d1f8f490382afdb754d612ad3894b6e8d7",
   "size": 57,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5477F0",
-  "type": "double __cdecl(int, int)",
-  "xrefs_from_count": 28,
+  "total_chunk_size": 257,
+  "type": "float __cdecl(int masteryLevel, int weaponType)",
+  "xrefs_from_count": 115,
   "xrefs_to_count": 1
 }

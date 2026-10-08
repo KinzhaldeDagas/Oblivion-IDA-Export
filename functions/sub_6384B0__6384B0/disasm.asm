@@ -1,4 +1,4 @@
-0x6384B0: sub     esp, 180h
+0x6384B0: sub     esp, 180h; HighProcess package-procedure action 1. Its random-social scan is explicitly gated by conversationScanCooldown, decrements that field once when gated or unsuccessful, and resets it to fAItalktoNPCtimer only after successful package creation. Its early radius gate unusually admits a dead candidate long enough to consume chance/recent-target suppression before final rejection.
 0x6384B6: mov     eax, ds:0B30AACh
 0x6384BB: xor     eax, esp
 0x6384BD: mov     [esp+180h+var_4], eax
@@ -6,7 +6,7 @@
 0x6384C5: push    ebp
 0x6384C6: push    esi
 0x6384C7: mov     esi, ecx
-0x6384C9: cmp     byte ptr [esi+228h], 0
+0x6384C9: cmp     byte ptr [esi+228h], 0; RadiantAI action-1 does not run its normal package/social scan while HighProcess.dialogueActive is set; it dispatches the dialogue-update path at vslot +0x194 instead.
 0x6384D0: mov     eax, [esi]
 0x6384D2: push    edi
 0x6384D3: mov     edi, [esp+190h+arg_0]
@@ -104,7 +104,7 @@
 0x6385F7: cmp     eax, 9
 0x6385FA: jz      short loc_63859B
 0x6385FC: push    edi
-0x6385FD: lea     ecx, [esp+194h+var_14C]
+0x6385FD: lea     ecx, [esp+194h+pointXYZ]
 0x638601: push    ecx
 0x638602: mov     ecx, ebp
 0x638604: mov     [esp+198h+a1], 0
@@ -127,7 +127,7 @@
 0x63863F: mov     ecx, edi
 0x638641: call    eax
 0x638643: mov     ecx, [eax]
-0x638645: mov     [esp+190h+var_14C], ecx
+0x638645: mov     [esp+190h+pointXYZ], ecx
 0x638649: mov     edx, [eax+4]
 0x63864C: mov     [esp+190h+var_148], edx
 0x638650: mov     eax, [eax+8]
@@ -223,7 +223,7 @@
 0x638780: jmp     loc_6397A8
 0x638785: push    30h ; '0'
 0x638787: mov     ecx, edi
-0x638789: call    sub_5E05F0
+0x638789: call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.
 0x63878E: jmp     loc_6397A8
 0x638793: cmp     byte ptr [esp+190h+var_180+3], 0
 0x638798: jnz     short loc_6387F1
@@ -286,9 +286,9 @@
 0x638862: test    eax, eax
 0x638864: jnz     short loc_6388E0
 0x638866: lea     ebx, [esi+128h]
-0x63886C: push    ebx
-0x63886D: mov     ecx, edi
-0x63886F: call    sub_4D7E30
+0x63886C: push    ebx; pointXYZ
+0x63886D: mov     ecx, edi; this
+0x63886F: call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.
 0x638874: fcomp   qword ptr ds:0A2FCC8h
 0x63887A: fnstsw  ax
 0x63887C: test    ah, 41h
@@ -302,7 +302,7 @@
 0x6388A3: call    TESObjectREFR_GetWorldSpace
 0x6388A8: mov     ecx, [esi+120h]; this
 0x6388AE: push    eax
-0x6388AF: call    TESObjectREFR_GetParentCell
+0x6388AF: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6388B4: mov     ecx, [ebx]
 0x6388B6: mov     edx, [ebx+4]
 0x6388B9: push    eax
@@ -354,8 +354,8 @@
 0x63893F: mov     ecx, edi
 0x638941: call    TesObjectREF_GetDistance
 0x638946: fstp    [esp+190h+var_174]
-0x63894A: mov     ecx, edi
-0x63894C: call    sub_5E32D0
+0x63894A: mov     ecx, edi; this
+0x63894C: call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.
 0x638951: test    al, al
 0x638953: jz      loc_638DDA
 0x638959: fld     [esp+190h+var_174]
@@ -365,7 +365,7 @@
 0x638967: test    ah, 1
 0x63896A: jnz     loc_638DDA
 0x638970: fldz
-0x638972: fcomp   dword ptr [esi+1A8h]
+0x638972: fcomp   dword ptr [esi+1A8h]; Action-1 random social scan requires conversationScanCooldown <= 0, plus the surrounding package/global/process gates. Its timer is reset only after StartConversationPackage succeeds.
 0x638978: fnstsw  ax
 0x63897A: test    ah, 1
 0x63897D: jnz     loc_638DDA
@@ -419,46 +419,46 @@
 0x638A41: cmp     byte ptr [esp+190h+var_180+3], 0
 0x638A46: fstp    [esp+190h+a1]
 0x638A4A: jnz     short loc_638A56
-0x638A4C: fld     dword ptr ds:0A57FB8h
+0x638A4C: fld     dword ptr ds:0A57FB8h; Second scan's radius cap is 600.0 when the preceding mode flag is clear; otherwise a dynamic cap computed just above is retained.
 0x638A52: fstp    [esp+190h+a1]
-0x638A56: mov     ecx, offset fAISocialRadiusToTriggerConversation
+0x638A56: mov     ecx, (offset flt_B36778+178h)
 0x638A5B: call    GameSetting_GetSafeFloatPointer
 0x638A60: fld     dword ptr [eax]
 0x638A62: mov     ecx, edi; this
-0x638A64: fstp    [esp+190h+var_17C]
-0x638A68: call    TESObjectREFR_GetParentCell
+0x638A64: fstp    [esp+190h+var_17C]; Second HighProcess social scan uses the same exterior/interior conversation-radius GameSettings.
+0x638A68: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x638A6D: mov     ecx, eax; this
-0x638A6F: call    TESObjectCELL_IsInterior
+0x638A6F: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x638A74: test    al, al
 0x638A76: jz      short loc_638A88
-0x638A78: mov     ecx, offset fAISocialRadiusToTriggerConversationInt
+0x638A78: mov     ecx, (offset flt_B36778+180h)
 0x638A7D: call    GameSetting_GetSafeFloatPointer
 0x638A82: fld     dword ptr [eax]
 0x638A84: fstp    [esp+190h+var_17C]
-0x638A88: fld     [esp+190h+a1]
+0x638A88: fld     [esp+190h+a1]; Second-scan Oblivion radius quirk: compare the selected exterior/interior social radius with the current cap; if selected radius is smaller, replace the cap with the EXTERIOR radius even in an interior cell.
 0x638A8C: fld     [esp+190h+var_17C]
 0x638A90: fcompp
 0x638A92: fnstsw  ax
 0x638A94: test    ah, 5
 0x638A97: jp      short loc_638AA9
-0x638A99: mov     ecx, offset fAISocialRadiusToTriggerConversation
+0x638A99: mov     ecx, (offset flt_B36778+178h)
 0x638A9E: call    GameSetting_GetSafeFloatPointer
 0x638AA3: fld     dword ptr [eax]
 0x638AA5: fstp    [esp+190h+a1]
-0x638AA9: lea     ecx, [esp+190h+var_14C]
-0x638AAD: push    ecx
-0x638AAE: mov     ecx, ebp
-0x638AB0: call    sub_4D7E30
+0x638AA9: lea     ecx, [esp+190h+pointXYZ]
+0x638AAD: push    ecx; pointXYZ
+0x638AAE: mov     ecx, ebp; this
+0x638AB0: call    TESObjectREFR__GetDistanceToPoint; TESObjectREFR::GetDistanceToPoint returns candidate distance to the scan point; reject when it exceeds the effective cap/radius.
 0x638AB5: fld     [esp+190h+a1]
 0x638AB9: fcompp
 0x638ABB: fnstsw  ax
 0x638ABD: test    ah, 1
 0x638AC0: jnz     loc_638BA5
-0x638AC6: push    edi
-0x638AC7: mov     ecx, ebp
-0x638AC9: call    sub_5ED730
+0x638AC6: push    edi; other
+0x638AC7: mov     ecx, ebp; this
+0x638AC9: call    Actor__CanStartSocialConversationWith; Action-1 preliminary eligibility is (CanStartSocialConversationWith(candidate, initiator) || candidate.IsDead()). Dead candidates therefore continue into recent-target cooldown and chance processing instead of being rejected here.
 0x638ACE: test    al, al
-0x638AD0: jnz     short loc_638AE9
+0x638AD0: jnz     short loc_638AE9; If normal social eligibility fails, accept the candidate provisionally only when IsDead is true. Final eligibility later rejects death, but only after the pair may already be recorded in both recent-target lists.
 0x638AD2: mov     edx, [ebp+0]
 0x638AD5: mov     eax, [edx+198h]
 0x638ADB: push    0
@@ -471,11 +471,11 @@
 0x638AF1: call    BSSimpleList_IsEmpty
 0x638AF6: test    al, al
 0x638AF8: jz      short loc_638B08
-0x638AFA: mov     ecx, offset unk_B36AA8
+0x638AFA: mov     ecx, (offset flt_B36A88+20h)
 0x638AFF: call    GameSetting_GetSafeFloatPointer
 0x638B04: fld     dword ptr [eax]
 0x638B06: jmp     short loc_638B14
-0x638B08: fld     dword ptr [esi+198h]
+0x638B08: fld     dword ptr [esi+198h]; With a nonempty recent-target list, decrement recentSocialTargetCooldown once per candidate reaching this block; multiple candidates can consume multiple frame deltas during one scan, as in action 5.
 0x638B0E: fsub    dword ptr ds:0B33E9Ch
 0x638B14: fstp    dword ptr [esi+198h]
 0x638B1A: fldz
@@ -484,9 +484,9 @@
 0x638B24: test    ah, 1
 0x638B27: jnz     short loc_638B30
 0x638B29: mov     ecx, ebx
-0x638B2B: call    BSSimpleList_Clear
+0x638B2B: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x638B30: push    0; Seed
-0x638B32: call    GetRandomLargeInteger?
+0x638B32: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x638B37: mov     ecx, eax
 0x638B39: mov     eax, 0AE147AE1h
 0x638B3E: imul    ecx
@@ -497,27 +497,27 @@
 0x638B4A: imul    eax, 64h ; 'd'
 0x638B4D: add     ecx, eax
 0x638B4F: add     esp, 4
-0x638B52: mov     [esp+190h+a1], ecx
-0x638B56: push    ebp
-0x638B57: mov     ecx, ebx
-0x638B59: call    sub_446C30
+0x638B52: mov     [esp+190h+a1], ecx; Compiler-expanded rand() % 100 produces the second 0..99 social-conversation chance roll.
+0x638B56: push    ebp; item
+0x638B57: mov     ecx, ebx; this
+0x638B59: call    BSSimpleList__Contains; Generic BSSimpleList membership test. Dialogue menu code uses it to avoid duplicate MenuTopics; social AI uses it for the recent-conversation target cooldown list.
 0x638B5E: test    al, al
 0x638B60: jnz     short loc_638BA5
-0x638B62: mov     ecx, offset fAISocialchanceForConversation
+0x638B62: mov     ecx, (offset flt_B36778+188h)
 0x638B67: call    GameSetting_GetSafeFloatPointer
 0x638B6C: fld     dword ptr [eax]
 0x638B6E: mov     ecx, edi; this
-0x638B70: fstp    [esp+190h+var_17C]
-0x638B74: call    TESObjectREFR_GetParentCell
+0x638B70: fstp    [esp+190h+var_17C]; Second social trigger uses the same exterior/interior fAISocialchanceForConversation threshold.
+0x638B74: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x638B79: mov     ecx, eax; this
-0x638B7B: call    TESObjectCELL_IsInterior
+0x638B7B: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x638B80: test    al, al
 0x638B82: jz      short loc_638B94
-0x638B84: mov     ecx, offset fAISocialchanceForConversationInterior
+0x638B84: mov     ecx, (offset flt_B36778+190h)
 0x638B89: call    GameSetting_GetSafeFloatPointer
 0x638B8E: fld     dword ptr [eax]
 0x638B90: fstp    [esp+190h+var_17C]
-0x638B94: fild    [esp+190h+a1]
+0x638B94: fild    [esp+190h+a1]; Second scan uses the same strict threshold: conversation chance must be greater than rand()%100; equality fails.
 0x638B98: fld     [esp+190h+var_17C]
 0x638B9C: fcompp
 0x638B9E: fnstsw  ax
@@ -531,14 +531,14 @@
 0x638BB8: jmp     loc_638DEC
 0x638BBD: push    ebp
 0x638BBE: lea     ecx, [esi+190h]
-0x638BC4: call    BSSimpleList_PushFront
+0x638BC4: call    BSSimpleList_PushFront; Record the candidate before final eligibility. This includes the action-1 dead-candidate provisional path, so a dead or otherwise later-rejected actor can consume the random roll and remain suppressed until the recent-target timer clears the list.
 0x638BC9: mov     ecx, [ebp+58h]
 0x638BCC: mov     edx, [ecx]
 0x638BCE: mov     eax, [edx+16Ch]
 0x638BD4: push    edi
-0x638BD5: call    eax
-0x638BD7: mov     ecx, ebp
-0x638BD9: call    sub_5E32D0
+0x638BD5: call    eax; Second scan also records the initiator in the candidate's recentSocialTargets before final eligibility.
+0x638BD7: mov     ecx, ebp; this
+0x638BD9: call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.
 0x638BDE: test    al, al
 0x638BE0: jz      loc_638DEC
 0x638BE6: mov     edx, [ebp+0]
@@ -547,17 +547,17 @@
 0x638BF1: call    eax
 0x638BF3: test    al, al
 0x638BF5: jnz     loc_638DEC
-0x638BFB: mov     ecx, ebp
-0x638BFD: call    sub_5E0F30
+0x638BFB: mov     ecx, ebp; this
+0x638BFD: call    Actor__IsSleeping; Returns true exactly when Actor.process exists and GetSleepState() == kSitSleep_Sleeping (9). This is a SitSleep-state test, not a combat/procedure test.
 0x638C02: test    al, al
 0x638C04: jnz     loc_638DEC
 0x638C0A: mov     ecx, ebp; this
-0x638C0C: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x638C0C: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x638C11: cmp     eax, 3
 0x638C14: jz      loc_638DEC
-0x638C1A: push    edi
-0x638C1B: mov     ecx, ebp
-0x638C1D: call    sub_5ED730
+0x638C1A: push    edi; other
+0x638C1B: mov     ecx, ebp; this
+0x638C1D: call    Actor__CanStartSocialConversationWith; Oblivion social eligibility predicate used only by the two random-conversation scans. Requires a process; in interiors requires |Z(this)-Z(other)| <= 90; rejects process current-package flag 0x1000, dead actors, process mode 9, sub_5E6FA0 state, sleep states other than None/Sitting, and package types accepted by sub_567770; final process metric at vslot +0x15C must be <= 0.
 0x638C22: test    al, al
 0x638C24: jz      loc_638DEC
 0x638C2A: mov     ecx, [ebp+58h]
@@ -589,8 +589,8 @@
 0x638C8A: mov     eax, [eax+8]
 0x638C8D: test    eax, eax
 0x638C8F: jz      short loc_638CA0
-0x638C91: mov     ecx, eax
-0x638C93: call    sub_567770
+0x638C91: mov     ecx, eax; this
+0x638C93: call    TESPackage__IsTemporaryOverrideType; Second social scan applies the same TESPackage::IsTemporaryOverrideType rejection before starting an ambient conversation.
 0x638C98: test    al, al
 0x638C9A: jnz     loc_638DEC
 0x638CA0: mov     edx, [edi]
@@ -599,15 +599,15 @@
 0x638CAA: push    0
 0x638CAC: push    ebp
 0x638CAD: mov     ecx, edi
-0x638CAF: call    eax
+0x638CAF: call    eax; Second authoritative ambient handoff: Actor::StartConversationPackage(initiator, candidate, false, null), beginning at stock HELLO FormID 000000D2.
 0x638CB1: test    al, al
 0x638CB3: jz      loc_638DEC
 0x638CB9: fldz
-0x638CBB: mov     ecx, offset unk_B36AB0
+0x638CBB: mov     ecx, (offset flt_B36A88+28h)
 0x638CC0: fstp    dword ptr [esi+1D8h]
 0x638CC6: call    GameSetting_GetSafeFloatPointer
 0x638CCB: fld     dword ptr [eax]
-0x638CCD: fstp    dword ptr [esi+1A8h]
+0x638CCD: fstp    dword ptr [esi+1A8h]; Action 1 reaches this write only after StartConversationPackage returned true; failed starts leave the cooldown unreset and fall through to the single frame-delta decrement at 0x638DDA.
 0x638CD3: call    sub_579440
 0x638CD8: cmp     eax, edi
 0x638CDA: jnz     short loc_638D08
@@ -625,12 +625,12 @@
 0x638CFF: push    edx; Format
 0x638D00: call    Interface_ConsolePrint
 0x638D05: add     esp, 14h
-0x638D08: mov     ecx, ebp
-0x638D0A: call    sub_5E0380
+0x638D08: mov     ecx, ebp; this
+0x638D0A: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x638D0F: test    eax, eax
 0x638D11: jz      short loc_638D58
-0x638D13: mov     ecx, ebp
-0x638D15: call    sub_5E0380
+0x638D13: mov     ecx, ebp; this
+0x638D15: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x638D1A: mov     eax, [eax+1Ch]
 0x638D1D: shr     eax, 0Ch
 0x638D20: test    al, 1
@@ -654,8 +654,8 @@
 0x638D58: mov     eax, [ebp+58h]
 0x638D5B: cmp     dword ptr [eax+8], 0
 0x638D5F: jz      short loc_638DA7
-0x638D61: mov     ecx, [eax+8]
-0x638D64: call    sub_5660A0
+0x638D61: mov     ecx, [eax+8]; self
+0x638D64: call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).
 0x638D69: test    al, al
 0x638D6B: jnz     short loc_638DA7
 0x638D6D: mov     ebx, [ebp+58h]
@@ -682,11 +682,11 @@
 0x638DA2: call    sub_4268B0
 0x638DA7: push    1; a4
 0x638DA9: push    0; a3
-0x638DAB: mov     ecx, edi
-0x638DAD: call    sub_5E0380
+0x638DAB: mov     ecx, edi; this
+0x638DAD: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x638DB2: push    eax; a2
 0x638DB3: mov     ecx, ebp; this
-0x638DB5: call    Actor_AddPackage?
+0x638DB5: call    Actor_AddPackage?; Mirrored partner handoff in the second social trigger: share the initiator's DialoguePackage as the partner's editorPackage, mark it dynamic, then notify the partner process.
 0x638DBA: mov     ebp, [ebp+58h]
 0x638DBD: mov     eax, [ebp+0]
 0x638DC0: mov     edx, [eax+188h]
@@ -697,7 +697,7 @@
 0x638DCD: fldz
 0x638DCF: fstp    dword ptr [esi+1D8h]
 0x638DD5: jmp     loc_6397A8
-0x638DDA: fld     dword ptr [esi+1A8h]
+0x638DDA: fld     dword ptr [esi+1A8h]; Action-1 gated/no-success epilogue: subtract exactly one frame delta from conversationScanCooldown. Candidate count does not multiply this decrement.
 0x638DE0: fsub    dword ptr ds:0B33E9Ch
 0x638DE6: fstp    dword ptr [esi+1A8h]
 0x638DEC: fldz
@@ -720,7 +720,7 @@
 0x638E2B: mov     eax, [eax+8]
 0x638E2E: mov     ecx, edi; this
 0x638E30: mov     [esp+190h+var_164], eax
-0x638E34: call    TESObjectREFR_GetParentCell
+0x638E34: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x638E39: mov     ecx, edi
 0x638E3B: mov     [esp+190h+a1], eax
 0x638E3F: call    sub_5E3290
@@ -732,7 +732,7 @@
 0x638E56: jz      short loc_638E62
 0x638E58: fld     dword ptr ds:0A579A8h
 0x638E5E: fstp    [esp+190h+var_178]
-0x638E62: fld     [esp+190h+var_14C]
+0x638E62: fld     [esp+190h+pointXYZ]
 0x638E66: lea     ecx, [esp+190h+var_158]
 0x638E6A: fsub    [esp+190h+a2]
 0x638E6E: fstp    [esp+190h+var_158]
@@ -745,7 +745,7 @@
 0x638E8A: fld     [esp+190h+var_178]
 0x638E8E: fadd    qword ptr ds:0A529C0h
 0x638E94: fstp    qword ptr [esp+190h+var_174]
-0x638E98: call    sub_43F350
+0x638E98: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x638E9D: fcomp   qword ptr [esp+190h+var_174]
 0x638EA1: fnstsw  ax
 0x638EA3: test    ah, 41h
@@ -755,13 +755,13 @@
 0x638EB0: push    0
 0x638EB2: jmp     loc_6397A4
 0x638EB7: mov     ecx, edi; this
-0x638EB9: call    TESObjectREFR_GetParentCell
+0x638EB9: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x638EBE: mov     ecx, eax; this
-0x638EC0: call    TESObjectCELL_IsInterior
+0x638EC0: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x638EC5: test    al, al
 0x638EC7: mov     ecx, edi; this
 0x638EC9: jz      loc_638FA1
-0x638ECF: call    TESObjectREFR_GetParentCell
+0x638ECF: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x638ED4: fld     [esp+190h+var_178]
 0x638ED8: fcomp   qword ptr ds:0A3F470h
 0x638EDE: mov     edx, [edi]
@@ -819,7 +819,7 @@
 0x638F7A: mov     ecx, edi
 0x638F7C: mov     [esp+1B0h+var_164], ebx
 0x638F80: mov     [eax+8], ebx
-0x638F83: call    sub_5E2E20
+0x638F83: call    Actor_ChoosePathGridSteeringPosition; Verified actor package movement helper. Finds a reachable PathGrid point for the requested destination; if it has outgoing connections, selects the first linked node and chooses a randomized intermediate position along that edge. Handles empty/unavailable PathGrids by falling back to terrain height or the actor's current position. Multiple HighProcess package-action callers establish the steering-position role.
 0x638F88: mov     ecx, [eax]
 0x638F8A: mov     [esp+190h+a2], ecx
 0x638F8E: mov     edx, [eax+4]
@@ -887,7 +887,7 @@
 0x639056: lea     ecx, [esp+1ACh+var_158]
 0x63905A: push    ecx; int
 0x63905B: mov     ecx, edi
-0x63905D: call    sub_5E2E20
+0x63905D: call    Actor_ChoosePathGridSteeringPosition; Verified actor package movement helper. Finds a reachable PathGrid point for the requested destination; if it has outgoing connections, selects the first linked node and chooses a randomized intermediate position along that edge. Handles empty/unavailable PathGrids by falling back to terrain height or the actor's current position. Multiple HighProcess package-action callers establish the steering-position role.
 0x639062: mov     edx, [eax]
 0x639064: mov     [esp+190h+a2], edx
 0x639068: mov     ecx, [eax+4]
@@ -895,9 +895,9 @@
 0x63906F: mov     edx, [eax+8]
 0x639072: mov     [esp+190h+var_164], edx
 0x639076: lea     eax, [esp+190h+a2]
-0x63907A: push    eax
-0x63907B: mov     ecx, edi
-0x63907D: call    sub_4D7E30
+0x63907A: push    eax; pointXYZ
+0x63907B: mov     ecx, edi; this
+0x63907D: call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.
 0x639082: fcomp   dword ptr ds:0A417B4h
 0x639088: fnstsw  ax
 0x63908A: test    ah, 41h
@@ -910,8 +910,8 @@
 0x6390A2: call    Actor_IsNPC
 0x6390A7: test    al, al
 0x6390A9: jz      short loc_63910F
-0x6390AB: mov     ecx, offset dword_B3B94C
-0x6390B0: call    BSSimpleList_Clear
+0x6390AB: mov     ecx, offset stru_B3B94C
+0x6390B0: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x6390B5: xor     ebx, ebx
 0x6390B7: lea     ebp, [esi+1BCh]
 0x6390BD: lea     ecx, [ecx+0]
@@ -919,7 +919,7 @@
 0x6390C3: test    eax, eax
 0x6390C5: jz      short loc_6390DD
 0x6390C7: push    eax
-0x6390C8: mov     ecx, offset dword_B3B94C
+0x6390C8: mov     ecx, offset stru_B3B94C
 0x6390CD: call    BSSimpleList_PushFront
 0x6390D2: add     ebx, 1
 0x6390D5: add     ebp, 4
@@ -931,7 +931,7 @@
 0x6390E6: push    offset sub_62EAA0; a6
 0x6390EB: push    ecx
 0x6390EC: fstp    [esp+19Ch+a5+4]; a5
-0x6390EF: lea     ecx, [esp+19Ch+var_14C]
+0x6390EF: lea     ecx, [esp+19Ch+pointXYZ]
 0x6390F3: fld     dword ptr ds:0A34A80h
 0x6390F9: push    ecx; a4
 0x6390FA: push    ecx
@@ -1021,7 +1021,7 @@
 0x639226: call    TESObjectREFR_GetWorldSpace
 0x63922B: push    eax
 0x63922C: mov     ecx, ebp; this
-0x63922E: call    TESObjectREFR_GetParentCell
+0x63922E: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x639233: mov     ecx, [ebx]
 0x639235: mov     edx, [ebx+4]
 0x639238: push    eax
@@ -1047,7 +1047,7 @@
 0x639272: call    TESObjectREFR_GetWorldSpace
 0x639277: push    eax
 0x639278: mov     ecx, ebp; this
-0x63927A: call    TESObjectREFR_GetParentCell
+0x63927A: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x63927F: mov     ecx, [esp+190h+var_178]
 0x639283: jmp     short loc_6392CB
 0x639285: mov     eax, [esi]
@@ -1070,7 +1070,7 @@
 0x6392BA: call    TESObjectREFR_GetWorldSpace
 0x6392BF: push    eax
 0x6392C0: mov     ecx, ebp; this
-0x6392C2: call    TESObjectREFR_GetParentCell
+0x6392C2: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6392C7: mov     ecx, [esp+190h+var_170]
 0x6392CB: mov     edx, [ecx]
 0x6392CD: push    eax
@@ -1088,7 +1088,7 @@
 0x6392E8: test    al, al
 0x6392EA: jz      loc_6397A8
 0x6392F0: mov     ecx, edi; this
-0x6392F2: call    Actor_GetFatigueFraction
+0x6392F2: call    Actor_GetFatigueFraction; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.
 0x6392F7: push    ecx
 0x6392F8: mov     ecx, edi
 0x6392FA: fstp    [esp+194h+var_198+4]; float
@@ -1130,16 +1130,16 @@
 0x639375: add     esp, 24h
 0x639378: jmp     loc_6397A8
 0x63937D: mov     ecx, edi; this
-0x63937F: call    TESObjectREFR_GetParentCell
+0x63937F: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x639384: mov     ecx, eax; this
-0x639386: call    TESObjectCELL_IsInterior
+0x639386: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x63938B: test    al, al
 0x63938D: jnz     loc_639627
 0x639393: cmp     ds:0B3B935h, al
 0x639399: jnz     loc_6397A8
 0x63939F: fld     [esp+190h+a2]
 0x6393A3: lea     ecx, [esp+190h+var_158]
-0x6393A7: fsub    [esp+190h+var_14C]
+0x6393A7: fsub    [esp+190h+pointXYZ]
 0x6393AB: mov     byte ptr ds:0B3B935h, 1
 0x6393B2: fstp    [esp+190h+var_158]
 0x6393B6: fld     [esp+190h+var_168]
@@ -1150,7 +1150,7 @@
 0x6393CA: fstp    [esp+190h+var_150]
 0x6393CE: fld     [esp+190h+var_178]
 0x6393D2: fstp    qword ptr [esp+190h+var_174]
-0x6393D6: call    sub_404C90
+0x6393D6: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x6393DB: fld     qword ptr [esp+190h+var_174]
 0x6393DF: fcom    st(1)
 0x6393E1: fnstsw  ax
@@ -1161,7 +1161,7 @@
 0x6393F4: fstp    [esp+190h+var_174]
 0x6393F8: fld     [esp+190h+var_178]
 0x6393FC: fld     [esp+190h+var_174]
-0x639400: mov     edx, [esp+190h+var_14C]
+0x639400: mov     edx, [esp+190h+pointXYZ]
 0x639404: mov     ecx, [esp+190h+var_148]
 0x639408: sub     esp, 14h
 0x63940B: fstp    [esp+1A4h+var_198+4]; float
@@ -1177,7 +1177,7 @@
 0x63942B: mov     ecx, [eax]
 0x63942D: mov     [esp+1A8h+a2], ecx
 0x639431: fld     [esp+1A8h+a2]
-0x639435: fsub    [esp+1A8h+var_14C]
+0x639435: fsub    [esp+1A8h+pointXYZ]
 0x639439: mov     edx, [eax+4]
 0x63943C: mov     [esp+1A8h+var_168], edx
 0x639440: mov     eax, [eax+8]
@@ -1221,11 +1221,11 @@
 0x6394B9: push    0; float
 0x6394BB: push    1; float
 0x6394BD: lea     ecx, [esp+19Ch+a2]
-0x6394C1: push    ecx; float *
+0x6394C1: push    ecx; worldXY
 0x6394C2: mov     ecx, edi; this
 0x6394C4: call    TESObjectREFR_GetWorldSpace
 0x6394C9: mov     ecx, eax; this
-0x6394CB: call    TESWorldSpace__GetCellAtPos
+0x6394CB: call    TESWorldSpace_GetCellAtWorldPosition
 0x6394D0: mov     edx, [esp+19Ch+a2]
 0x6394D4: mov     ecx, [esp+19Ch+var_168]
 0x6394D8: push    eax; int
@@ -1238,7 +1238,7 @@
 0x6394EA: lea     eax, [esp+1ACh+var_13C]
 0x6394EE: push    eax; int
 0x6394EF: mov     ecx, edi
-0x6394F1: call    sub_5E2E20
+0x6394F1: call    Actor_ChoosePathGridSteeringPosition; Verified actor package movement helper. Finds a reachable PathGrid point for the requested destination; if it has outgoing connections, selects the first linked node and chooses a randomized intermediate position along that edge. Handles empty/unavailable PathGrids by falling back to terrain height or the actor's current position. Multiple HighProcess package-action callers establish the steering-position role.
 0x6394F6: mov     ecx, [eax]
 0x6394F8: mov     [esp+190h+a2], ecx
 0x6394FC: mov     edx, [eax+4]
@@ -1272,7 +1272,7 @@
 0x63956B: call    TESObjectREFR_GetWorldSpace
 0x639570: push    eax
 0x639571: mov     ecx, edi; this
-0x639573: call    TESObjectREFR_GetParentCell
+0x639573: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x639578: mov     ecx, [esp+194h+a2]
 0x63957C: mov     edx, [esp+194h+var_168]
 0x639580: push    eax
@@ -1289,9 +1289,9 @@
 0x639599: test    al, al
 0x63959B: jz      loc_6397A8
 0x6395A1: lea     eax, [esp+190h+a2]
-0x6395A5: push    eax
-0x6395A6: mov     ecx, edi
-0x6395A8: call    sub_4D7E30
+0x6395A5: push    eax; pointXYZ
+0x6395A6: mov     ecx, edi; this
+0x6395A8: call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.
 0x6395AD: fcomp   qword ptr ds:0A3F3D0h
 0x6395B3: fnstsw  ax
 0x6395B5: test    ah, 5
@@ -1299,7 +1299,7 @@
 0x6395BA: fldz
 0x6395BC: jmp     short loc_6395D9
 0x6395BE: mov     ecx, edi; this
-0x6395C0: call    Actor_GetFatigueFraction
+0x6395C0: call    Actor_GetFatigueFraction; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.
 0x6395C5: push    ecx
 0x6395C6: mov     ecx, edi
 0x6395C8: fstp    [esp+194h+var_198+4]; float
@@ -1347,7 +1347,7 @@
 0x639661: call    TESObjectREFR_GetWorldSpace
 0x639666: push    eax
 0x639667: mov     ecx, edi; this
-0x639669: call    TESObjectREFR_GetParentCell
+0x639669: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x63966E: mov     ecx, [esp+194h+a2]
 0x639672: mov     edx, [esp+194h+var_168]
 0x639676: push    eax
@@ -1364,15 +1364,15 @@
 0x63968F: test    al, al
 0x639691: jz      loc_6397A8
 0x639697: lea     eax, [esp+190h+a2]
-0x63969B: push    eax
-0x63969C: mov     ecx, edi
-0x63969E: call    sub_4D7E30
+0x63969B: push    eax; pointXYZ
+0x63969C: mov     ecx, edi; this
+0x63969E: call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.
 0x6396A3: fcomp   qword ptr ds:0A3F3D0h
 0x6396A9: fnstsw  ax
 0x6396AB: test    ah, 5
 0x6396AE: jnp     loc_638DCD
 0x6396B4: mov     ecx, edi; this
-0x6396B6: call    Actor_GetFatigueFraction
+0x6396B6: call    Actor_GetFatigueFraction; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.
 0x6396BB: push    ecx
 0x6396BC: mov     ecx, edi
 0x6396BE: fstp    [esp+194h+var_198+4]; float

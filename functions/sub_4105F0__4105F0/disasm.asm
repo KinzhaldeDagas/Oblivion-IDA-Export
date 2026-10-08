@@ -14,7 +14,7 @@
 0x410613: call    sub_410160
 0x410618: test    al, al
 0x41061A: jz      loc_4106A0
-0x410620: mov     edx, dword_B350D8
+0x410620: mov     edx, ds:0B350D8h
 0x410626: mov     eax, [edx+280h]
 0x41062C: mov     [esi+4], eax
 0x41062F: fild    nHeight

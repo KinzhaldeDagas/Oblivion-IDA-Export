@@ -1,19 +1,32 @@
 {
-  "callees_count": 28,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x7E51F0",
+      "0x7E5453"
+    ]
+  ],
+  "chunks_sha256": "1189a890414f848c034529587941504a54b8984e567226c2f53d2a043b6493c1",
+  "comment_regular": "Verified (Oblivion): updates the ParticleShaderProperty particleInstanceBuffer_6C using elapsed time, currentParticleLevel_80 and fParticleLifetime_84; it retires expired slots, increments/decrements activeParticleCount_7C, and dispatches new particles by emitterType_70. Each Oblivion record is 0x20 bytes. Fallout's UpdateParticles uses 0x30-byte ParticleData records and different field offsets.",
+  "comment_repeatable": "Verified (Oblivion): updates the ParticleShaderProperty particleInstanceBuffer_6C using elapsed time, currentParticleLevel_80 and fParticleLifetime_84; it retires expired slots, increments/decrements activeParticleCount_7C, and dispatches new particles by emitterType_70. Each Oblivion record is 0x20 bytes. Fallout's UpdateParticles uses 0x30-byte ParticleData records and different field offsets.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_7E51F0",
+  "display_name": "ParticleShaderProperty_UpdateParticles",
   "end_ea": "0x7E5453",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7E51F0",
+  "name": "ParticleShaderProperty_UpdateParticles",
   "segment": ".text",
   "sha256": "1189a890414f848c034529587941504a54b8984e567226c2f53d2a043b6493c1",
   "size": 611,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7E51F0",
-  "type": "void __thiscall(float *this, float, char, char)",
+  "total_chunk_size": 611,
+  "type": "void __thiscall(ParticleShaderProperty *this, float elapsedSeconds, bool applyWorldOffset, bool allowEmission)",
   "xrefs_from_count": 203,
   "xrefs_to_count": 3
 }

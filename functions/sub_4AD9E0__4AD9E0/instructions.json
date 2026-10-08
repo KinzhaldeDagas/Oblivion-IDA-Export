@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4AD9E0",
-    "line": "push    ebp",
+    "line": "push    ebp; Verified (Oblivion): recursively applies TextureEffectData to scene nodes whose property ID 4 returns shader-property subtype 5..10 from vtable slot +0x54. Direct vtable bodies identify accepted values: 5 BSShaderPPLightingProperty and SpeedTreeShaderPPLightingProperty; 6 HairShaderProperty; 7 SpeedTreeBranchShaderProperty; 9 SpeedTreeLeafShaderProperty; 10 Lighting30ShaderProperty. The current exhaustive 17-entry BSShaderProperty-family vtable census has no subtype 8 mapping (Unknown). Data.cFlags bit 0x20 additionally restricts candidates to property ID 2 name \"skin\". Fallout StartTextureShader instead queries property ID 3 and accepts subtype IDs 8..12; these numeric IDs are version-specific.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x4AD9E2",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+sceneNode]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x4ADA03",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x4ADA47",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x4ADA5F",
-    "line": "repe cmpsb",
+    "line": "repe cmpsb; Verified (Oblivion): Data.cFlags bit 0x20 changes recursive attachment filtering: when set, only property ID 2 names equal to the literal \"skin\" receive the texture-effect data; when clear, that name filter is bypassed. The flag's practical meaning is skin-only texture-effect attachment.",
     "mnemonic": "cmpsb",
     "size": 2
   },
@@ -319,25 +319,25 @@
   },
   {
     "ea": "0x4ADA63",
-    "line": "mov     ecx, [esp+10h+arg_4]",
+    "line": "mov     ecx, [esp+10h+data]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4ADA67",
-    "line": "push    ecx",
+    "line": "push    ecx; data",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4ADA68",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; textureEffectProperty",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4ADA6A",
-    "line": "call    sub_7D7A70",
+    "line": "call    TextureEffectProperty_SetData; Verified (Oblivion): replaces the TextureEffectData pointer at +0xE0 on the supplied NiProperty-derived shader property, with Interlocked release/addref handling, then clears a 32-bit state at +0x24. BSShaderPPLightingProperty constructor/destructor and viewer export independently confirm +0xE0 is its spTexEffectData ownership slot. Direct callers select property ID 4 subtypes 5..10: PP-lighting/SpeedTree PP (5), Hair (6), SpeedTree Branch (7), SpeedTree Leaf (9), and Lighting30 (10); subtype 8 remains Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x4ADA92",
-    "line": "mov     ebx, [esp+10h+arg_4]",
+    "line": "mov     ebx, [esp+10h+data]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -475,25 +475,25 @@
   },
   {
     "ea": "0x4ADAA5",
-    "line": "push    ebx",
+    "line": "push    ebx; data",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4ADAA6",
-    "line": "push    eax",
+    "line": "push    eax; sceneRoot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4ADAA7",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4ADAA9",
-    "line": "call    sub_4AD9E0",
+    "line": "call    TESEffectShader_ApplyTextureEffectToScenegraph; Verified (Oblivion): recursively applies TextureEffectData to scene nodes whose property ID 4 returns shader-property subtype 5..10 from vtable slot +0x54. Direct vtable bodies identify accepted values: 5 BSShaderPPLightingProperty and SpeedTreeShaderPPLightingProperty; 6 HairShaderProperty; 7 SpeedTreeBranchShaderProperty; 9 SpeedTreeLeafShaderProperty; 10 Lighting30ShaderProperty. The current exhaustive 17-entry BSShaderProperty-family vtable census has no subtype 8 mapping (Unknown). Data.cFlags bit 0x20 additionally restricts candidates to property ID 2 name \"skin\". Fallout StartTextureShader instead queries property ID 3 and accepts subtype IDs 8..12; these numeric IDs are version-specific.",
     "mnemonic": "call",
     "size": 5
   },

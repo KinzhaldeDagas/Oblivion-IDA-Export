@@ -1,5 +1,5 @@
 // attributes: thunk
-int __stdcall sub_75E480(int a1)
+int __thiscall j_NiSingleInterpController_LinkObject(_DWORD *this, _DWORD *a2)
 {
-  return sub_6CE1C0(a1);
+  return NiSingleInterpController_LinkObject(this, a2);
 }

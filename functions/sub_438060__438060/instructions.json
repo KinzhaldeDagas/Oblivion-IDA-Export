@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x438085",
-    "line": "mov     ecx, SaveLoad_CurrentSavegame",
+    "line": "mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x438094",
-    "line": "mov     eax, SaveLoad_CurrentSavegame",
+    "line": "mov     eax, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x4380A7",
-    "line": "mov     esi, [esp+1Ch+arg_0]",
+    "line": "mov     esi, [esp+1Ch+reference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x43811C",
-    "line": "call    sub_612DE0",
+    "line": "call    CombatController_SetCombatMode; Sets CombatController+0x70 active mode (0 H2H, 1 melee weapon, 2 ranged weapon, 3 touch spell, 4 ranged spell, 5 yield, 7 flee, 0xA switch weapon, 0xC leave water) and invalidates desired-distance cache +0x188.",
     "mnemonic": "call",
     "size": 5
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x438156",
-    "line": "mov     ecx, [esp+1Ch+arg_4]",
+    "line": "mov     ecx, dword ptr [esp+1Ch+priority]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x43818E",
-    "line": "cmp     esi, TESDataHandler_g_PlayerRef",
+    "line": "cmp     esi, dword ptr reference",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x4381A8",
-    "line": "mov     ecx, [esp+1Ch+arg_4]",
+    "line": "mov     ecx, dword ptr [esp+1Ch+priority]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -739,7 +739,7 @@
   },
   {
     "ea": "0x4381E6",
-    "line": "mov     ecx, [esp+1Ch+arg_4]",
+    "line": "mov     ecx, dword ptr [esp+1Ch+priority]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -799,7 +799,7 @@
   },
   {
     "ea": "0x438201",
-    "line": "mov     edx, [esp+1Ch+arg_4]",
+    "line": "mov     edx, dword ptr [esp+1Ch+priority]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x43821E",
-    "line": "mov     ecx, [esp+1Ch+arg_4]",
+    "line": "mov     ecx, dword ptr [esp+1Ch+priority]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -931,31 +931,31 @@
   },
   {
     "ea": "0x43823B",
-    "line": "mov     edx, [esp+1Ch+arg_4]",
+    "line": "mov     edx, dword ptr [esp+1Ch+priority]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x43823F",
-    "line": "push    edx",
+    "line": "push    edx; priority",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x438240",
-    "line": "push    esi",
+    "line": "push    esi; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x438241",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x438243",
-    "line": "call    sub_437E20",
+    "line": "call    QueuedTree_ctor; Verified 0x30-byte QueuedTree task constructor: stores its TESObjectREFR at +0x20 and clears fields +0x18/+0x1C/+0x24/+0x28/+0x2C before installing QueuedTree vtable. The remaining zeroed pointer roles are Unknown. Fallout's constructor initializes a larger QueuedTree with queued-model, base-model, cloned-3D, and distant-attach task pointers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1033,7 +1033,7 @@
   },
   {
     "ea": "0x438267",
-    "line": "mov     [esp+24h+arg_4], esp",
+    "line": "mov     dword ptr [esp+24h+priority], esp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1390,5 +1390,59 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AC610",
+    "line": "lea     ecx, [ebp-10h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AC613",
+    "line": "jmp     sub_4BDDC0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AC618",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AC61C",
+    "line": "lea     eax, [edx-0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AC61F",
+    "line": "mov     ecx, [edx-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AC622",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AC624",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AC629",
+    "line": "mov     eax, offset stru_AD92D8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AC62E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -6,24 +6,24 @@ int __userpurge sub_942D70@<eax>(int a1@<ecx>, int a2@<ebx>, _DWORD *a3)
   char **v7; // edi
   int v9; // [esp+8h] [ebp-4h] BYREF
 
-  *(_WORD *)(a1 + 6) = 1;
-  *(_DWORD *)a1 = &off_AA2444;
-  v4 = (_WORD *)(*(int (__thiscall **)(int, int, int))(*(_DWORD *)dword_BA7D98 + 0x10))(dword_BA7D98, 0x14, 0x12);
-  v4[2] = 0x14;
-  sub_90BBA0(&v9, &dword_B2FDE4);
-  v5 = sub_953530(v4, &v9, a3);
-  *(_DWORD *)(a1 + 8) = v5;
-  if ( v5[6] == (unsigned __int16)dword_B2FDE4 && v5[7] == HIWORD(dword_B2FDE4)
-    || (v6 = (char **)(*(int (__thiscall **)(int, int, int))(*(_DWORD *)dword_BA7D98 + 0x10))(dword_BA7D98, 0xC, 5),
+  *(_WORD *)(a1 + 6) = 1; /*0x942d75*/
+  *(_DWORD *)a1 = &off_AA2444; /*0x942d7b*/
+  v4 = (_WORD *)(*(int (__thiscall **)(int, int, int))(*(_DWORD *)unk_BA7D98 + 0x10))(unk_BA7D98, 0x14, 0x12); /*0x942d90*/
+  v4[2] = 0x14; /*0x942d9b*/
+  sub_90BBA0(&v9, &dword_B2FDE4); /*0x942da1*/
+  v5 = sub_953530(v4, &v9, a3); /*0x942db2*/
+  *(_DWORD *)(a1 + 8) = v5; /*0x942db7*/
+  if ( v5[6] == (unsigned __int16)dword_B2FDE4 && v5[7] == HIWORD(dword_B2FDE4) /*0x942dee*/
+    || (v6 = (char **)(*(int (__thiscall **)(int, int, int))(*(_DWORD *)unk_BA7D98 + 0x10))(unk_BA7D98, 0xC, 5),
         (v7 = v6) == 0) )
   {
-    *(_DWORD *)(a1 + 0xC) = 0;
-    return a1;
+    *(_DWORD *)(a1 + 0xC) = 0; /*0x942e04*/
+    return a1; /*0x942e08*/
   }
   else
   {
-    sub_8B0E10(v6, a2);
-    *(_DWORD *)(a1 + 0xC) = v7;
-    return a1;
+    sub_8B0E10(v6, a2); /*0x942df2*/
+    *(_DWORD *)(a1 + 0xC) = v7; /*0x942df7*/
+    return a1; /*0x942dfb*/
   }
 }

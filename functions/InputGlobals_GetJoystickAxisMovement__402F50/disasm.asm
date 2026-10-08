@@ -1,4 +1,4 @@
-0x402F50: mov     eax, [esp+whichDevice]
+0x402F50: mov     eax, [esp+whichDevice]; [Controller decode 2026-07-09] Returns one cached DirectInput joystick axis from joystick index n. Axis selectors: 1 lX, 2 lY, 3 lZ, 4 lRx, 5 lRy, 6 lRz. State stride is 0xA0.
 0x402F54: lea     eax, [eax+eax*4]
 0x402F57: shl     eax, 5
 0x402F5A: lea     ecx, [eax+ecx+30h]

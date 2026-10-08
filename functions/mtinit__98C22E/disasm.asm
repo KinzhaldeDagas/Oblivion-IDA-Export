@@ -15,60 +15,60 @@
 0x98C256: call    esi ; GetProcAddress
 0x98C258: push    offset aFlsgetvalue
 0x98C25D: push    edi; hModule
-0x98C25E: mov     FlsAlloc, eax
+0x98C25E: mov     dword_BA9E10+8, eax
 0x98C263: call    esi ; GetProcAddress
 0x98C265: push    offset aFlssetvalue
 0x98C26A: push    edi; hModule
-0x98C26B: mov     lpTlsValue, eax
+0x98C26B: mov     dword_BA9E10+0Ch, eax
 0x98C270: call    esi ; GetProcAddress
 0x98C272: push    offset aFlsfree
 0x98C277: push    edi; hModule
-0x98C278: mov     FlsSetValue, eax
+0x98C278: mov     dword_BA9E10+10h, eax
 0x98C27D: call    esi ; GetProcAddress
-0x98C27F: cmp     FlsAlloc, 0
+0x98C27F: cmp     dword_BA9E10+8, 0
 0x98C286: mov     esi, ds:TlsSetValue
-0x98C28C: mov     dword_BA9E24, eax
+0x98C28C: mov     dword_BA9E10+14h, eax
 0x98C291: jz      short loc_98C2A9
-0x98C293: cmp     lpTlsValue, 0
+0x98C293: cmp     dword_BA9E10+0Ch, 0
 0x98C29A: jz      short loc_98C2A9
-0x98C29C: cmp     FlsSetValue, 0
+0x98C29C: cmp     dword_BA9E10+10h, 0
 0x98C2A3: jz      short loc_98C2A9
 0x98C2A5: test    eax, eax
 0x98C2A7: jnz     short loc_98C2CD
 0x98C2A9: mov     eax, ds:TlsGetValue
-0x98C2AE: mov     lpTlsValue, eax
+0x98C2AE: mov     dword_BA9E10+0Ch, eax
 0x98C2B3: mov     eax, ds:TlsFree
-0x98C2B8: mov     FlsAlloc, offset ___crtTlsAlloc@4
-0x98C2C2: mov     FlsSetValue, esi
-0x98C2C8: mov     dword_BA9E24, eax
+0x98C2B8: mov     dword_BA9E10+8, offset ___crtTlsAlloc@4
+0x98C2C2: mov     dword_BA9E10+10h, esi
+0x98C2C8: mov     dword_BA9E10+14h, eax
 0x98C2CD: call    ds:TlsAlloc
 0x98C2D3: cmp     eax, 0FFFFFFFFh
 0x98C2D6: mov     dwTlsIndex, eax
 0x98C2DB: jz      loc_98C3AD
-0x98C2E1: push    lpTlsValue; lpTlsValue
+0x98C2E1: push    dword_BA9E10+0Ch; lpTlsValue
 0x98C2E7: push    eax; dwTlsIndex
 0x98C2E8: call    esi ; TlsSetValue
 0x98C2EA: test    eax, eax
 0x98C2EC: jz      loc_98C3AD
 0x98C2F2: call    __init_pointers
-0x98C2F7: push    FlsAlloc
+0x98C2F7: push    dword_BA9E10+8
 0x98C2FD: call    __encode_pointer
-0x98C302: push    lpTlsValue
-0x98C308: mov     FlsAlloc, eax
+0x98C302: push    dword_BA9E10+0Ch
+0x98C308: mov     dword_BA9E10+8, eax
 0x98C30D: call    __encode_pointer
-0x98C312: push    FlsSetValue
-0x98C318: mov     lpTlsValue, eax
+0x98C312: push    dword_BA9E10+10h
+0x98C318: mov     dword_BA9E10+0Ch, eax
 0x98C31D: call    __encode_pointer
-0x98C322: push    dword_BA9E24
-0x98C328: mov     FlsSetValue, eax
+0x98C322: push    dword_BA9E10+14h
+0x98C328: mov     dword_BA9E10+10h, eax
 0x98C32D: call    __encode_pointer
 0x98C332: add     esp, 10h
-0x98C335: mov     dword_BA9E24, eax
+0x98C335: mov     dword_BA9E10+14h, eax
 0x98C33A: call    __mtinitlocks
 0x98C33F: test    eax, eax
 0x98C341: jz      short loc_98C3A8
 0x98C343: push    offset __freefls@4
-0x98C348: push    FlsAlloc
+0x98C348: push    dword_BA9E10+8
 0x98C34E: call    __decode_pointer
 0x98C353: pop     ecx
 0x98C354: call    eax
@@ -85,7 +85,7 @@
 0x98C372: jz      short loc_98C3A8
 0x98C374: push    esi
 0x98C375: push    dword_B310AC
-0x98C37B: push    FlsSetValue
+0x98C37B: push    dword_BA9E10+10h
 0x98C381: call    __decode_pointer
 0x98C386: pop     ecx
 0x98C387: call    eax

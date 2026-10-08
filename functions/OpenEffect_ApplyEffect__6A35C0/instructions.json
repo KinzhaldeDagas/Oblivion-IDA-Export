@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6A35C0",
-    "line": "push    ecx",
+    "line": "push    ecx; Verified OpenEffect rule: clear only locked bit 0x01 when effect category >= current effective lock category; the locked-bit helper preserves bit 0x02, so an active LockEffect marker remains until LockEffect_Apply observes the resulting state.",
     "mnemonic": "push",
     "size": 1
   },
@@ -157,13 +157,13 @@
   },
   {
     "ea": "0x6A35FD",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6A35FF",
-    "line": "call    sub_4D7740",
+    "line": "call    TESObjectREFR_GetEffectiveDoorLock; Verified: returns this reference's ExtraLockData* payload when present; otherwise, if its ExtraTeleport has a linked door, returns that linked reference's ExtraLockData* payload; null when neither exists. Directly supported by ExtraDataList_GetLock, ExtraDataList_GetTeleport, and TeleportData_GetLinkedDoor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,19 +193,19 @@
   },
   {
     "ea": "0x6A3611",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6A3616",
-    "line": "push    eax",
+    "line": "push    eax; numericLockMagnitude",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A3617",
-    "line": "call    GetLockLevel",
+    "line": "call    GetLockLevel; Verified numeric lock magnitude to LOCK_LEVEL mapper. Thresholds are iLockLevelMaxVeryEasy, iLockLevelMaxEasy, iLockLevelMaxAverage, iLockLevelMaxHard, and iLockLevelMaxVeryHard; outputs 0..5 map through LockLevelNames to VeryEasy, Easy, Average, Hard, VeryHard, Impossible. Fallout independently uses the matching LOCK_LEVEL names, but this mapping is directly established by Oblivion code and data.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,25 +247,25 @@
   },
   {
     "ea": "0x6A362A",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6A362C",
-    "line": "call    sub_4D7780",
+    "line": "call    TESObjectREFR_GetEffectiveDoorLockLevel; Verified effective lock-level helper: returns 0 when neither this reference nor its linked-door reference has ExtraLockData; otherwise tail-calls ExtraLockData_GetPlayerScaledLockLevel and returns its integer result. Callers feed the result to GetLockLevel or compare lock difficulty for lockpick/open behavior.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6A3631",
-    "line": "push    eax",
+    "line": "push    eax; numericLockMagnitude",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A3632",
-    "line": "call    GetLockLevel",
+    "line": "call    GetLockLevel; Verified numeric lock magnitude to LOCK_LEVEL mapper. Thresholds are iLockLevelMaxVeryEasy, iLockLevelMaxEasy, iLockLevelMaxAverage, iLockLevelMaxHard, and iLockLevelMaxVeryHard; outputs 0..5 map through LockLevelNames to VeryEasy, Easy, Average, Hard, VeryHard, Impossible. Fallout independently uses the matching LOCK_LEVEL names, but this mapping is directly established by Oblivion code and data.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x6A364D",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x6A3653",
-    "line": "jmp     sub_4DBEA0",
+    "line": "jmp     TESObjectREFR_ClearLockedFlagOnSelfOrLinkedDoor; Verified inverse lock-state helper: if this reference has an ExtraLock wrapper, clears its locked bit; otherwise follows the linked-door reference and clears that wrapper's locked bit. It then marks the owning reference or linked door modified with mask 0x40.",
     "mnemonic": "jmp",
     "size": 5
   },

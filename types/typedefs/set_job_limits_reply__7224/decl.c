@@ -1,1 +1,4 @@
-set_job_limits_reply
+struct set_job_limits_reply
+{
+reply_header __header;
+};

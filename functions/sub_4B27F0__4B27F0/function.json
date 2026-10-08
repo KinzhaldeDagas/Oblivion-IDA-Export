@@ -1,19 +1,32 @@
 {
-  "callees_count": 18,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 10,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_4B27F0",
+  "chunks": [
+    [
+      "0x4B27F0",
+      "0x4B28D9"
+    ]
+  ],
+  "chunks_sha256": "7b153d089d1b1ab2483de2e96c48b8761bb278aef4d7189b6ef5145d39e22c32",
+  "comment_regular": "Verified cell-unload cleanup: walks BASE_DISTANT_DATA entries, derives each model path, calls QueuedModelLoader_RemoveModel(path, count), frees list nodes/data, then removes the packed-cell map entry.",
+  "comment_repeatable": "Verified cell-unload cleanup: walks BASE_DISTANT_DATA entries, derives each model path, calls QueuedModelLoader_RemoveModel(path, count), frees list nodes/data, then removes the packed-cell map entry.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "DistantLOD_RemoveCellModelUsages",
   "end_ea": "0x4B28D9",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4B27F0",
+  "name": "DistantLOD_RemoveCellModelUsages",
   "segment": ".text",
   "sha256": "7b153d089d1b1ab2483de2e96c48b8761bb278aef4d7189b6ef5145d39e22c32",
   "size": 233,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4B27F0",
-  "type": "void __cdecl(int)",
+  "total_chunk_size": 233,
+  "type": "void __cdecl(unsigned int packedExteriorCellLabel)",
   "xrefs_from_count": 92,
   "xrefs_to_count": 1
 }

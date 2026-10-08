@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4035D0",
-    "line": "push    ebx",
+    "line": "push    ebx; [Controller decode 2026-07-09] DirectInput EnumObjects callback. Records supported joystick axes in axisMask bits 0..5 and POV objects in povMask.",
     "mnemonic": "push",
     "size": 1
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x4035EA",
-    "line": "jnz     short loc_4035FE",
+    "line": "jnz     short loc_4035FE; [Controller decode 2026-07-09] EnumJoystickObjectsCallback: XAxis object -> axisMask bit 0.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x403679",
-    "line": "jnz     short loc_40368D",
+    "line": "jnz     short loc_40368D; [Controller decode 2026-07-09] EnumJoystickObjectsCallback: YAxis object -> axisMask bit 1.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x403704",
-    "line": "jnz     short loc_403718",
+    "line": "jnz     short loc_403718; [Controller decode 2026-07-09] EnumJoystickObjectsCallback: ZAxis object -> axisMask bit 2.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -1039,7 +1039,7 @@
   },
   {
     "ea": "0x403794",
-    "line": "jnz     short loc_4037A8",
+    "line": "jnz     short loc_4037A8; [Controller decode 2026-07-09] EnumJoystickObjectsCallback: RxAxis object -> axisMask bit 3.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -1363,7 +1363,7 @@
   },
   {
     "ea": "0x403824",
-    "line": "jnz     short loc_403838",
+    "line": "jnz     short loc_403838; [Controller decode 2026-07-09] EnumJoystickObjectsCallback: RyAxis object -> axisMask bit 4.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -1680,12 +1680,6 @@
     "size": 2
   },
   {
-    "ea": "0x4038AD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x4038B0",
     "line": "mov     esi, [edx]",
     "mnemonic": "mov",
@@ -1699,7 +1693,7 @@
   },
   {
     "ea": "0x4038B4",
-    "line": "jnz     short loc_4038C8",
+    "line": "jnz     short loc_4038C8; [Controller decode 2026-07-09] EnumJoystickObjectsCallback: RzAxis object -> axisMask bit 5.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -1999,7 +1993,7 @@
   },
   {
     "ea": "0x403936",
-    "line": "jz      short loc_403948",
+    "line": "jz      short loc_403948; [Controller decode 2026-07-09] EnumJoystickObjectsCallback: POV object -> povMask bit based on DirectInput object instance.",
     "mnemonic": "jz",
     "size": 2
   },

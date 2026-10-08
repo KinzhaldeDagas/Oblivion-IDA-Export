@@ -1,7 +1,10 @@
-float *__thiscall sub_4F0600(_DWORD *this, float *a2)
+// Verified: queries the SubSpace candidate list for the position-derived cell key, then returns the smallest-radius TESSubSpace whose exact scaled local bounds contain the point.
+TESObjectREFR *__thiscall TESWorldSpace_FindSmallestSubSpaceContainingPosition(
+        TESWorldSpace *this,
+        float *worldPosition)
 {
-  float **v2; // eax
+  TESSubSpaceReferenceList *SubSpaceCandidatesAtPosition; // eax
 
-  v2 = (float **)sub_4F05A0(this, a2);
-  return sub_4BC4A0(a2, v2);
+  SubSpaceCandidatesAtPosition = TESWorldSpace_GetSubSpaceCandidatesAtPosition(this, worldPosition); /*0x4f0606*/
+  return TESSubSpace_FindSmallestContainingPosition(worldPosition, SubSpaceCandidatesAtPosition); /*0x4f0615*/
 }

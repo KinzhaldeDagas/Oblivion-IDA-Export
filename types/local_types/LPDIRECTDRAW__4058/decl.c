@@ -1,1 +1,1 @@
-LPDIRECTDRAW
+typedef IDirectDraw *LPDIRECTDRAW;

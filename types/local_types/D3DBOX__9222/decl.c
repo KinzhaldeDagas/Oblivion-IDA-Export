@@ -1,1 +1,1 @@
-D3DBOX
+typedef _D3DBOX D3DBOX;

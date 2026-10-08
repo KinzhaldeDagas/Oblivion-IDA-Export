@@ -1,4 +1,4 @@
-void *sub_7FAF00()
+NiRTTI *sub_7FAF00()
 {
-  return &unk_B46CBC;
+  return &stru_B46CBC; /*0x7faf05*/
 }

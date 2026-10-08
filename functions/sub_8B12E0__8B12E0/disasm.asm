@@ -28,7 +28,6 @@
 0x8B1325: or      ebp, [edx+eax*8+4]
 0x8B1329: jz      short loc_8B1351
 0x8B132B: jmp     short loc_8B1330
-0x8B132D: align 10h
 0x8B1330: mov     ebp, edi
 0x8B1332: add     ebp, eax
 0x8B1334: mov     eax, ebx

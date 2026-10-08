@@ -1,4 +1,4 @@
-0x5E1BB0: push    ebx
+0x5E1BB0: push    ebx; ODismemberment authority: resolves actor blood decal texture path through actor-base virtual +0x38, falling back below to default sBloodTextureDefault path.
 0x5E1BB1: push    esi
 0x5E1BB2: mov     esi, ecx
 0x5E1BB4: mov     eax, [esi]

@@ -1,5 +1,5 @@
 // attributes: thunk
-char __stdcall sub_721A50(int a2)
+char __stdcall sub_721A50(NiStream *a2)
 {
   NiNode *this; // ecx
 

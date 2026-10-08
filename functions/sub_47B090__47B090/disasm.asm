@@ -78,7 +78,7 @@
 0x47B1B5: push    ecx
 0x47B1B6: mov     ecx, ebx
 0x47B1B8: call    edx
-0x47B1BA: mov     eax, dword ptr [esp+0B4h+var_84]
+0x47B1BA: mov     eax, [esp+0B4h+var_84]
 0x47B1BE: test    eax, eax
 0x47B1C0: jz      loc_47B548
 0x47B1C6: mov     esi, eax
@@ -112,7 +112,7 @@
 0x47B220: push    eax
 0x47B221: mov     ecx, ebx
 0x47B223: call    edx
-0x47B225: mov     eax, dword ptr [esp+0B4h+var_70]
+0x47B225: mov     eax, [esp+0B4h+var_70]
 0x47B229: test    eax, eax
 0x47B22B: jz      loc_47B548
 0x47B231: mov     esi, eax
@@ -157,8 +157,8 @@
 0x47B2D1: mov     eax, [ecx]
 0x47B2D3: mov     edx, [eax+170h]
 0x47B2D9: call    edx
-0x47B2DB: push    offset sub_43ACE0; a5
-0x47B2E0: push    offset sub_43EB30; a4
+0x47B2DB: push    offset FaceGenMatrix_Destruct; a5
+0x47B2E0: push    offset FaceGenMatrix_Construct; a4
 0x47B2E5: push    4; size
 0x47B2E7: mov     edi, eax
 0x47B2E9: push    18h; a2
@@ -166,7 +166,7 @@
 0x47B2EF: push    eax; a1
 0x47B2F0: call    ArrayConstructor
 0x47B2F5: mov     ecx, [esi+0B4h]
-0x47B2FB: lea     edx, [esp+0B4h+var_78]
+0x47B2FB: lea     edx, [esp+0B4h+slot]
 0x47B2FF: push    edx
 0x47B300: mov     [esp+0B8h+var_4], 0
 0x47B30B: call    sub_700790
@@ -174,9 +174,9 @@
 0x47B312: push    eax
 0x47B313: lea     ecx, [esp+0B8h+var_8C]
 0x47B317: call    sub_405070
-0x47B31C: lea     ecx, [esp+0B4h+var_78]; this
+0x47B31C: lea     ecx, [esp+0B4h+slot]; slot
 0x47B320: mov     byte ptr [esp+0B4h+var_4], 1
-0x47B328: call    sub_7016A0
+0x47B328: call    NiPointerSlot_Release
 0x47B32D: mov     ecx, [esp+0B4h+var_8C]
 0x47B331: mov     eax, [esi]
 0x47B333: mov     edx, [eax+8Ch]
@@ -197,11 +197,11 @@
 0x47B35F: push    eax
 0x47B360: lea     ecx, [esp+0B8h+a2]
 0x47B364: call    sub_405070
-0x47B369: lea     ecx, [esp+0B4h+var_80]; this
+0x47B369: lea     ecx, [esp+0B4h+var_80]; slot
 0x47B36D: mov     byte ptr [esp+0B4h+var_4], 2
-0x47B375: call    sub_7016A0
-0x47B37A: mov     ecx, [esi+0B8h]
-0x47B380: call    sub_700900
+0x47B375: call    NiPointerSlot_Release
+0x47B37A: mov     ecx, [esi+0B8h]; this
+0x47B380: call    NiObject_CloneWithPointerMap; Clones a loaded NiObject with a temporary pointer map and runs clone post-processing; the returned scene object is distinct from its source.
 0x47B385: push    eax
 0x47B386: mov     ecx, esi
 0x47B388: call    sub_478350
@@ -209,28 +209,28 @@
 0x47B391: mov     ecx, [esi+0B8h]; this
 0x47B397: push    edx; a2
 0x47B398: call    sub_478300
-0x47B39D: lea     ecx, [esp+0B4h+a2]; this
+0x47B39D: lea     ecx, [esp+0B4h+a2]; slot
 0x47B3A1: mov     byte ptr [esp+0B4h+var_4], 1
-0x47B3A9: call    sub_7016A0
+0x47B3A9: call    NiPointerSlot_Release
 0x47B3AE: lea     eax, [esp+0B4h+a1]
-0x47B3B2: push    eax
-0x47B3B3: mov     ecx, edi
-0x47B3B5: call    sub_5221C0
+0x47B3B2: push    eax; outAbsolute
+0x47B3B3: mov     ecx, edi; this
+0x47B3B5: call    TESNPC_BuildAbsoluteFaceGenParameters; Builds absolute FaceGen parameters by combining race base with active NPC delta. CORRECTION: bank selection uses base actor value 0x45 (vampirism), zero -> +0x108, nonzero -> +0x168; earlier sex-selected description was incorrect. Null race copies manager default parameters.
 0x47B3BA: cmp     byte ptr ds:0B120B4h, 0
 0x47B3C1: jz      short loc_47B3DA
 0x47B3C3: fld1
-0x47B3C5: push    0; int
+0x47B3C5: push    0; basePositions
 0x47B3C7: push    ecx
-0x47B3C8: fstp    [esp+0BCh+var_BC]; float
-0x47B3CB: push    esi; int
+0x47B3C8: fstp    [esp+0BCh+morphScale]; morphScale
+0x47B3CB: push    esi; geometry
 0x47B3CC: lea     ecx, [esp+0C0h+a1]
-0x47B3D0: push    ecx; int
-0x47B3D1: mov     ecx, [esp+0C4h+var_9C]
-0x47B3D5: call    sub_558840
-0x47B3DA: lea     ecx, [esp+0B4h+var_8C]; this
+0x47B3D0: push    ecx; parameters
+0x47B3D1: mov     ecx, [esp+0C4h+var_9C]; this
+0x47B3D5: call    BSFaceGenModel_ApplyEGMMorph; Native EGM lock defects, statically verified: early failures after stream acquisition can return false without unlock; failed acquisition can still continue via cached base-vertex branch then success unlocks preexisting stream. Preconditions matter; runtime/shipped-asset reachability not established. IDA range +0x944 matches deployed EXE hash 33bcefd2c3f77a074957c9a8a22b445211c7ee83f533fcf8f6cfca843cd4bde0. PF guards source versions 1.19.11, but local PF DLL removed 2026-10-01 at user request. OCO LoadGame root cause remains unresolved.
+0x47B3DA: lea     ecx, [esp+0B4h+var_8C]; slot
 0x47B3DE: mov     byte ptr [esp+0B4h+var_4], 0
-0x47B3E6: call    sub_7016A0
-0x47B3EB: push    offset sub_43ACE0; void (__thiscall *)(void *)
+0x47B3E6: call    NiPointerSlot_Release
+0x47B3EB: push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)
 0x47B3F0: push    4; int
 0x47B3F2: push    18h; unsigned int
 0x47B3F4: lea     edx, [esp+0C0h+a1]
@@ -252,7 +252,6 @@
 0x47B42E: mov     [esp+0B4h+var_7C], ebx
 0x47B432: jbe     loc_47B51C
 0x47B438: jmp     short loc_47B440
-0x47B43A: align 10h
 0x47B440: mov     ecx, [ebx+edi*4]
 0x47B443: mov     eax, [ecx+8]
 0x47B446: mov     edx, [esp+0B4h+var_A0]
@@ -368,3 +367,21 @@
 0x47B5A4: pop     ebx
 0x47B5A5: add     esp, 0A0h
 0x47B5AB: retn    14h
+0x9AF270: push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)
+0x9AF275: push    4; int
+0x9AF277: push    18h; unsigned int
+0x9AF279: lea     eax, [ebp-6Ch]
+0x9AF27C: push    eax; void *
+0x9AF27D: call    $LN21
+0x9AF282: retn
+0x9AF283: lea     ecx, [ebp-8Ch]; slot
+0x9AF289: jmp     NiPointerSlot_Release
+0x9AF28E: lea     ecx, [ebp-88h]; slot
+0x9AF294: jmp     NiPointerSlot_Release
+0x9AF299: mov     edx, [esp+arg_4]
+0x9AF29D: lea     eax, [edx-0A4h]
+0x9AF2A3: mov     ecx, [edx-0A8h]
+0x9AF2A9: xor     ecx, eax
+0x9AF2AB: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AF2B0: mov     eax, offset stru_ADB8B4
+0x9AF2B5: jmp     ___CxxFrameHandler3

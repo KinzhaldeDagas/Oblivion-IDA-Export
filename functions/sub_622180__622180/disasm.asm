@@ -1,4 +1,4 @@
-0x622180: push    0FFFFFFFFh
+0x622180: push    0FFFFFFFFh; Executes the live combat mode. Mode 3 validates selected touch/melee spell at +0x7C; mode 4 validates selected ranged spell at +0x80; invalid choices transition to mode 0xD.
 0x622182: push    offset SEH_6D7780
 0x622187: mov     eax, large fs:0
 0x62218D: push    eax
@@ -61,15 +61,15 @@
 0x622257: mov     ebp, [esi+3Ch]
 0x62225A: mov     ecx, esi
 0x62225C: mov     dword ptr [esi+70h], 5
-0x622263: call    sub_6135F0
+0x622263: call    CombatController_GetCurrentTarget
 0x622268: mov     ecx, ds:0B362C0h
 0x62226E: push    eax
 0x62226F: push    ebp
-0x622270: call    sub_521450
+0x622270: call    TESIdleForm_FindIdleForActor; Idle root lookup for actor model path; rejects final candidate when ANAM high bit is set but model path is not .kf.
 0x622275: push    edi
 0x622276: mov     ecx, esi
 0x622278: mov     [esi+0C8h], eax
-0x62227E: call    sub_612DE0
+0x62227E: call    CombatController_SetCombatMode; Sets CombatController+0x70 active mode (0 H2H, 1 melee weapon, 2 ranged weapon, 3 touch spell, 4 ranged spell, 5 yield, 7 flee, 0xA switch weapon, 0xC leave water) and invalidates desired-distance cache +0x188.
 0x622283: push    0Ch; Size
 0x622285: call    FormHeapAlloc
 0x62228A: add     esp, 4
@@ -90,21 +90,21 @@
 0x6222BA: setnz   dl
 0x6222BD: mov     ecx, esi
 0x6222BF: mov     [esp+28h+var_4], 0FFFFFFFFh
-0x6222C7: push    edx
-0x6222C8: push    eax
-0x6222C9: push    0
-0x6222CB: call    sub_6135F0
-0x6222D0: push    eax
-0x6222D1: push    edi
-0x6222D2: push    ebp
-0x6222D3: call    sub_621B40
+0x6222C7: push    edx; allowYieldEvaluation
+0x6222C8: push    eax; skipFleeAndYieldEvaluation
+0x6222C9: push    0; outScore
+0x6222CB: call    CombatController_GetCurrentTarget
+0x6222D0: push    eax; target
+0x6222D1: push    edi; equippedEntry
+0x6222D2: push    ebp; actor
+0x6222D3: call    CombatSelection_EvaluateWeaponVsHandToHand; Six-argument cdecl combat-choice evaluator. skipFleeAndYieldEvaluation nonzero skips the entire flee/yield block; allowYieldEvaluation gates only the yield portion when that block runs. These are control flags, not allowYield/hasYieldIdle. Any additional throwing-weapon scoring multipliers are external emulation policy, not observed here.
 0x6222D8: add     esp, 18h
 0x6222DB: test    edi, edi
 0x6222DD: jz      short loc_6222EF
 0x6222DF: mov     ecx, edi
 0x6222E1: call    ContainerEntryExtraData_DestroyDataTable
 0x6222E6: push    edi
-0x6222E7: call    FormHeapFree
+0x6222E7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6222EC: add     esp, 4
 0x6222EF: mov     ebp, 0Dh
 0x6222F4: cmp     dword ptr [esi+6Ch], 7
@@ -116,7 +116,7 @@
 0x622310: test    al, al
 0x622312: jz      loc_6224CC
 0x622318: mov     ecx, [esi+3Ch]
-0x62231B: call    sub_5E0F50
+0x62231B: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x622320: mov     edx, [eax]
 0x622322: mov     ecx, eax
 0x622324: mov     eax, [edx+168h]
@@ -145,9 +145,9 @@
 0x622370: mov     eax, [eax+64h]
 0x622373: test    eax, eax
 0x622375: jz      loc_6224B9
-0x62237B: mov     ecx, edi
+0x62237B: mov     ecx, edi; this
 0x62237D: lea     ebp, [eax+24h]
-0x622380: call    sub_4849C0
+0x622380: call    EquippedEntryData_GetCharge; Return per-instance ExtraCharge when present; otherwise return the TESEnchantableForm base charge. Returns the sentinel/default when the EntryData form is not enchantable.
 0x622385: fstp    [esp+28h+var_18+4]
 0x622389: mov     edx, [ebp+0]
 0x62238C: mov     eax, [edx]
@@ -175,34 +175,34 @@
 0x6223DB: mov     ebp, [esi+3Ch]
 0x6223DE: mov     ecx, esi
 0x6223E0: mov     dword ptr [esi+70h], 5
-0x6223E7: call    sub_6135F0
+0x6223E7: call    CombatController_GetCurrentTarget
 0x6223EC: mov     ecx, ds:0B362C0h
 0x6223F2: push    eax
 0x6223F3: push    ebp
-0x6223F4: call    sub_521450
+0x6223F4: call    TESIdleForm_FindIdleForActor; Idle root lookup for actor model path; rejects final candidate when ANAM high bit is set but model path is not .kf.
 0x6223F9: push    ebx
 0x6223FA: mov     ecx, esi
 0x6223FC: mov     [esi+0C8h], eax
-0x622402: call    sub_612DE0
+0x622402: call    CombatController_SetCombatMode; Sets CombatController+0x70 active mode (0 H2H, 1 melee weapon, 2 ranged weapon, 3 touch spell, 4 ranged spell, 5 yield, 7 flee, 0xA switch weapon, 0xC leave water) and invalidates desired-distance cache +0x188.
 0x622407: cmp     dword ptr [esi+0C8h], 0
 0x62240E: movzx   edx, byte ptr [esi+4Dh]
 0x622412: mov     ebp, [esi+3Ch]
 0x622415: setnz   cl
-0x622418: push    ecx
-0x622419: push    edx
-0x62241A: push    0
+0x622418: push    ecx; allowYieldEvaluation
+0x622419: push    edx; skipFleeAndYieldEvaluation
+0x62241A: push    0; outScore
 0x62241C: mov     ecx, esi
-0x62241E: call    sub_6135F0
-0x622423: push    eax
-0x622424: push    edi
-0x622425: push    ebp
-0x622426: call    sub_621B40
+0x62241E: call    CombatController_GetCurrentTarget
+0x622423: push    eax; target
+0x622424: push    edi; equippedEntry
+0x622425: push    ebp; actor
+0x622426: call    CombatSelection_EvaluateWeaponVsHandToHand; Six-argument cdecl combat-choice evaluator. skipFleeAndYieldEvaluation nonzero skips the entire flee/yield block; allowYieldEvaluation gates only the yield portion when that block runs. These are control flags, not allowYield/hasYieldIdle. Any additional throwing-weapon scoring multipliers are external emulation policy, not observed here.
 0x62242B: add     esp, 18h
 0x62242E: mov     ecx, edi
 0x622430: mov     ebp, eax
 0x622432: call    ContainerEntryExtraData_DestroyDataTable
 0x622437: push    edi
-0x622438: call    FormHeapFree
+0x622438: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x62243D: add     esp, 4
 0x622440: cmp     ebp, 1
 0x622443: jz      short loc_62246E
@@ -210,7 +210,7 @@
 0x622448: jz      short loc_62246E
 0x62244A: push    ebp
 0x62244B: mov     ecx, esi
-0x62244D: call    sub_612DE0
+0x62244D: call    CombatController_SetCombatMode; Sets CombatController+0x70 active mode (0 H2H, 1 melee weapon, 2 ranged weapon, 3 touch spell, 4 ranged spell, 5 yield, 7 flee, 0xA switch weapon, 0xC leave water) and invalidates desired-distance cache +0x188.
 0x622452: mov     ecx, [esi+3Ch]
 0x622455: call    sub_5E0A70
 0x62245A: mov     ecx, dword ptr [esp+28h+var_C]
@@ -404,8 +404,8 @@
 0x6226A9: mov     edi, [edi+64h]
 0x6226AC: test    edi, edi
 0x6226AE: jz      short loc_6226D6
-0x6226B0: mov     ecx, ebx
-0x6226B2: call    sub_4849C0
+0x6226B0: mov     ecx, ebx; this
+0x6226B2: call    EquippedEntryData_GetCharge; Return per-instance ExtraCharge when present; otherwise return the TESEnchantableForm base charge. Returns the sentinel/default when the EntryData form is not enchantable.
 0x6226B7: fstp    [esp+28h+var_18+4]
 0x6226BB: mov     edx, [edi+24h]
 0x6226BE: mov     eax, [edx]
@@ -466,7 +466,7 @@
 0x622761: push    ecx
 0x622762: push    eax
 0x622763: mov     ecx, esi
-0x622765: call    sub_613BB0
+0x622765: call    CombatController_CanUseSpellAgainstCurrentTarget
 0x62276A: test    al, al
 0x62276C: jz      short loc_622774
 0x62276E: cmp     dword ptr [esi+7Ch], 0
@@ -478,8 +478,8 @@
 0x622785: mov     [esi+70h], ebp
 0x622788: cmp     dword ptr [esi+6Ch], 0Ch; jumptable 006224D8 default case, cases 5-7
 0x62278C: jz      short loc_622795
-0x62278E: mov     ecx, esi
-0x622790: call    sub_6213D0
+0x62278E: mov     ecx, esi; this
+0x622790: call    CombatController_UpdateCombatModeState
 0x622795: mov     ecx, dword ptr [esp+28h+var_C]
 0x622799: mov     large fs:0, ecx
 0x6227A0: pop     ecx
@@ -497,7 +497,7 @@
 0x6227BC: push    edx
 0x6227BD: push    eax
 0x6227BE: mov     ecx, esi
-0x6227C0: call    sub_613BB0
+0x6227C0: call    CombatController_CanUseSpellAgainstCurrentTarget
 0x6227C5: test    al, al
 0x6227C7: jz      short loc_622774
 0x6227C9: cmp     dword ptr [esi+80h], 0
@@ -516,3 +516,15 @@
 0x6227F1: pop     ebx
 0x6227F2: add     esp, 14h
 0x6227F5: retn
+0x9B5200: mov     eax, [ebp-14h]
+0x9B5203: push    eax
+0x9B5204: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B5209: pop     ecx
+0x9B520A: retn
+0x9B520B: mov     edx, [esp+arg_4]
+0x9B520F: lea     eax, [edx-18h]
+0x9B5212: mov     ecx, [edx-1Ch]
+0x9B5215: xor     ecx, eax
+0x9B5217: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B521C: mov     eax, offset stru_AE03C0
+0x9B5221: jmp     ___CxxFrameHandler3

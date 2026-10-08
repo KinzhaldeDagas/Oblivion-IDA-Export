@@ -1,4 +1,4 @@
-int __thiscall sub_52B330(char *this)
+void __thiscall sub_52B330(char *this)
 {
-  return sub_56A7A0(this + 4);
+  sub_56A7A0((BSSimpleList_VoidPtr *)(this + 4)); /*0x52b333*/
 }

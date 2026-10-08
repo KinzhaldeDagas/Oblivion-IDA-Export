@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x4E15CF",
-    "line": "mov     ecx, offset TimeInfo",
+    "line": "mov     ecx, 0B33E90h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x4E15EE",
-    "line": "call    sub_4728C0",
+    "line": "call    ActorAnimData_ResetRootMotion; Resets ActorAnimData root-motion state: zeroes the cached accumulation vector at +0x18, restores the accumulation/root node transform fields, then finds the matching accumulation controllers and resets them. Used before sequence play and by full actor/animation reset paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x4E1600",
-    "line": "mov     [esp+154h+var_138], ecx",
+    "line": "mov     [esp+154h+skeletonRoot], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -313,13 +313,13 @@
   },
   {
     "ea": "0x4E1636",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E1638",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x4E16A2",
-    "line": "call    sub_6899C0",
+    "line": "call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -574,12 +574,6 @@
     "line": "jmp     short loc_4E16C0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x4E16B9",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
   },
   {
     "ea": "0x4E16C0",
@@ -799,7 +793,7 @@
   },
   {
     "ea": "0x4E172F",
-    "line": "call    sub_439EB0",
+    "line": "call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.",
     "mnemonic": "call",
     "size": 5
   },
@@ -853,13 +847,13 @@
   },
   {
     "ea": "0x4E174F",
-    "line": "lea     ecx, [esp+154h+var_130]",
+    "line": "lea     ecx, [esp+154h+var_130]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4E1753",
-    "line": "call    sub_478B90",
+    "line": "call    OB_NiCloningProcess_ctor",
     "mnemonic": "call",
     "size": 5
   },
@@ -1045,7 +1039,7 @@
   },
   {
     "ea": "0x4E17BF",
-    "line": "mov     edx, [esp+158h+var_138]",
+    "line": "mov     edx, [esp+158h+skeletonRoot]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1219,7 +1213,7 @@
   },
   {
     "ea": "0x4E1809",
-    "line": "mov     ecx, [esp+154h+var_138]",
+    "line": "mov     ecx, [esp+154h+skeletonRoot]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1261,49 +1255,49 @@
   },
   {
     "ea": "0x4E181B",
-    "line": "mov     edx, [esp+154h+var_138]",
+    "line": "mov     edx, [esp+154h+skeletonRoot]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E181F",
-    "line": "push    0",
+    "line": "push    0; unusedTrailing",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4E1821",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; modelType",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4E1823",
-    "line": "push    0",
+    "line": "push    0; unusedContext",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4E1825",
-    "line": "push    0",
+    "line": "push    0; sourceModelRoot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4E1827",
-    "line": "push    esi",
+    "line": "push    esi; modelRoot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E1828",
-    "line": "push    edx",
+    "line": "push    edx; skeletonRoot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E1829",
-    "line": "call    sub_479140",
+    "line": "call    AttachModelUsingPrnExtraData; Six-argument cdecl helper (all ten native callers push 6 arguments; unusedContext and unusedTrailing are not read). Reads NiStringExtraData 'Prn' from sourceModelRoot, falling back to modelRoot; resolves that exact parent in skeletonRoot and attaches modelRoot. For modelType==7 it forces Prn string byte 6 to 'L' for lookup, then writes it back to 'R'. It then finds exact-name 'Scb' inside modelRoot and attaches that object separately to the same parent, reparenting Scb as modelRoot's sibling before refreshing property/effect state. Missing creature parents invoke the narrow FadeNode-chain Scb removal. Every exit returns the bool result of sub_88D000(modelRoot,1,1), which is not proven to be general attachment success.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1615,7 +1609,7 @@
   },
   {
     "ea": "0x4E18C1",
-    "line": "mov     ecx, offset TimeInfo",
+    "line": "mov     ecx, 0B33E90h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1702,5 +1696,95 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9B5B80",
+    "line": "lea     ecx, [ebp-130h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B5B86",
+    "line": "jmp     sub_4781A0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5B8B",
+    "line": "lea     ecx, [ebp-140h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B5B91",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5B96",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B5B9A",
+    "line": "lea     eax, [edx-144h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B5BA0",
+    "line": "mov     ecx, [edx-148h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B5BA6",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B5BA8",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5BAD",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5BB0",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5BB3",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B5BB5",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5BBA",
+    "line": "mov     eax, offset stru_AE0B88",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5BBF",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

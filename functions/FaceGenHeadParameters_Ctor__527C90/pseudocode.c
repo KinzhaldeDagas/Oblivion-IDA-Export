@@ -1,4 +1,5 @@
-_DWORD *__thiscall FaceGenHeadParameters_Ctor(_DWORD *this)
+// Constructs a 0xC4 FaceGenRenderState. The first 0x60 bytes are FaceGenHeadParameters; appearance assets and four 0x10-byte pointer arrays follow.
+FaceGenRenderState *__thiscall FaceGenRenderState_Construct(FaceGenRenderState *this)
 {
   int i; // ecx
   int v3; // edi
@@ -7,49 +8,54 @@ _DWORD *__thiscall FaceGenHeadParameters_Ctor(_DWORD *this)
   int k; // ecx
   int v7; // edi
 
-  ArrayConstructor(this, 0x18u, 4, (int)sub_43EB30, (void (__thiscall *)(void *))sub_43ACE0);
-  *(this + 0x1D) = &NiTArray<TESModel *>::`vftable';
-  *((_WORD *)this + 0x3E) = 0;
-  *((_WORD *)this + 0x41) = 1;
-  *((_WORD *)this + 0x3F) = 0;
-  *((_WORD *)this + 0x40) = 0;
-  *(this + 0x1E) = 0;
-  *(this + 0x21) = &NiTArray<TESTexture *>::`vftable';
-  *((_WORD *)this + 0x46) = 0;
-  *((_WORD *)this + 0x49) = 1;
-  *((_WORD *)this + 0x47) = 0;
-  *((_WORD *)this + 0x48) = 0;
-  *(this + 0x22) = 0;
-  *(this + 0x25) = &NiTArray<char const *>::`vftable';
-  *((_WORD *)this + 0x4E) = 0;
-  *((_WORD *)this + 0x51) = 1;
-  *((_WORD *)this + 0x4F) = 0;
-  *((_WORD *)this + 0x50) = 0;
-  *(this + 0x26) = 0;
-  *(this + 0x29) = &NiTArray<NiPointer<NiTexture>>::`vftable';
-  *((_WORD *)this + 0x56) = 0;
-  *((_WORD *)this + 0x59) = 1;
-  *((_WORD *)this + 0x57) = 0;
-  *((_WORD *)this + 0x58) = 0;
-  *(this + 0x2A) = 0;
-  *((float *)this + 0x1A) = 0.0;
-  *(this + 0x18) = 0;
-  *(this + 0x19) = 0;
-  *(this + 0x1B) = 0;
-  *(this + 0x1C) = 0;
-  for ( i = 0; (unsigned __int16)i < *((_WORD *)this + 0x3F); *(_DWORD *)(*(this + 0x1E) + 4 * v3) = 0 )
-    v3 = (unsigned __int16)i++;
-  *((_WORD *)this + 0x3F) = 0;
-  *((_WORD *)this + 0x40) = 0;
-  for ( j = 0; (unsigned __int16)j < *((_WORD *)this + 0x47); *(_DWORD *)(*(this + 0x22) + 4 * v5) = 0 )
-    v5 = (unsigned __int16)j++;
-  *((_WORD *)this + 0x47) = 0;
-  *((_WORD *)this + 0x48) = 0;
-  for ( k = 0; (unsigned __int16)k < *((_WORD *)this + 0x4F); *(_DWORD *)(*(this + 0x26) + 4 * v7) = 0 )
-    v7 = (unsigned __int16)k++;
-  *((_WORD *)this + 0x4F) = 0;
-  *((_WORD *)this + 0x50) = 0;
-  *((_BYTE *)this + 0xB4) = 0;
-  *(this + 0x30) = 0xFFFFFFFF;
-  return this;
+  ArrayConstructor( /*0x527cc5*/
+    (char *)this,
+    0x18u,
+    4,
+    (void (__thiscall *)(char *))FaceGenMatrix_Construct,
+    (void (__thiscall *)(void *))FaceGenMatrix_Destruct);
+  this->headModels.vtable = &NiTArray<TESModel *>::`vftable'; /*0x527cd1*/
+  this->headModels.capacity = 0; /*0x527cd8*/
+  this->headModels.growSize = 1; /*0x527cdc*/
+  this->headModels.firstFree = 0; /*0x527ce3*/
+  this->headModels.objectCount = 0; /*0x527ce7*/
+  this->headModels.data = 0; /*0x527cee*/
+  this->headTextures.vtable = &NiTArray<TESTexture *>::`vftable'; /*0x527cf1*/
+  this->headTextures.capacity = 0; /*0x527cfb*/
+  this->headTextures.growSize = 1; /*0x527d02*/
+  this->headTextures.firstFree = 0; /*0x527d09*/
+  this->headTextures.objectCount = 0; /*0x527d10*/
+  this->headTextures.data = 0; /*0x527d17*/
+  this->nodeNames.vtable = &NiTArray<char const *>::`vftable'; /*0x527d1d*/
+  this->nodeNames.capacity = 0; /*0x527d27*/
+  this->nodeNames.growSize = 1; /*0x527d2e*/
+  this->nodeNames.firstFree = 0; /*0x527d35*/
+  this->nodeNames.objectCount = 0; /*0x527d3c*/
+  this->nodeNames.data = 0; /*0x527d43*/
+  this->textureOverrides.vtable = &NiTArray<NiPointer<NiTexture>>::`vftable'; /*0x527d4b*/
+  this->textureOverrides.capacity = 0; /*0x527d55*/
+  this->textureOverrides.growSize = 1; /*0x527d5c*/
+  this->textureOverrides.firstFree = 0; /*0x527d63*/
+  this->textureOverrides.objectCount = 0; /*0x527d6a*/
+  this->textureOverrides.data = 0; /*0x527d71*/
+  this->hairLength = 0.0; /*0x527d77*/
+  this->hair = 0; /*0x527d7a*/
+  this->hairColorRGB = 0; /*0x527d7d*/
+  this->eyes = 0; /*0x527d80*/
+  this->isFemale = 0; /*0x527d83*/
+  for ( i = 0; (unsigned __int16)i < this->headModels.firstFree; this->headModels.data[v3] = 0 ) /*0x527d88*/
+    v3 = (unsigned __int16)i++; /*0x527d93*/
+  this->headModels.firstFree = 0; /*0x527da1*/
+  this->headModels.objectCount = 0; /*0x527da5*/
+  for ( j = 0; (unsigned __int16)j < this->headTextures.firstFree; this->headTextures.data[v5] = 0 ) /*0x527dae*/
+    v5 = (unsigned __int16)j++; /*0x527dc6*/
+  this->headTextures.firstFree = 0; /*0x527dd7*/
+  this->headTextures.objectCount = 0; /*0x527dde*/
+  for ( k = 0; (unsigned __int16)k < this->nodeNames.firstFree; this->nodeNames.data[v7] = 0 ) /*0x527de7*/
+    v7 = (unsigned __int16)k++; /*0x527df6*/
+  this->nodeNames.firstFree = 0; /*0x527e07*/
+  this->nodeNames.objectCount = 0; /*0x527e0e*/
+  this->useTextureOverrides = 0; /*0x527e15*/
+  this->renderFlags = 0xFFFFFFFF; /*0x527e1b*/
+  return this; /*0x527e27*/
 }

@@ -1,4 +1,4 @@
-0x7D1170: push    0FFFFFFFFh
+0x7D1170: push    0FFFFFFFFh; Verified (Oblivion): ShadowLightShader__LoadStagesAndPasses acquires and stores NiD3DPass pool objects into g_ShadowLightPassBySelector[0..0x1A2], AddRefs each stored pass, then installs the shared vertex shader in each pass at +0x58 before building the pass families. The four texture-effect template slots line up exactly with selector indices 0x18C..0x18F.
 0x7D1172: push    offset SEH_7E9A20
 0x7D1177: mov     eax, large fs:0
 0x7D117D: push    eax
@@ -16,10 +16,10 @@
 0x7D119B: xor     ebx, ebx
 0x7D119D: lea     eax, [esp+28h+var_14]
 0x7D11A1: push    eax
-0x7D11A2: call    sub_7606A0
+0x7D11A2: call    NiD3DPassPool_Acquire; Acquire a renderer-owned NiD3DPass from the global pass pool and return it with a reference.
 0x7D11A7: add     esp, 4
 0x7D11AA: mov     esi, eax
-0x7D11AC: mov     ecx, ds:dword_B455A0[ebx]
+0x7D11AC: mov     ecx, ds:g_ShadowLightPassBySelector[ebx]
 0x7D11B2: cmp     ecx, [esi]
 0x7D11B4: mov     [esp+28h+var_4], 0
 0x7D11BC: jz      short loc_7D11DD
@@ -27,10 +27,10 @@
 0x7D11C0: jz      short loc_7D11CD
 0x7D11C2: add     dword ptr [ecx+60h], 0FFFFFFFFh
 0x7D11C6: jnz     short loc_7D11CD
-0x7D11C8: call    sub_7604D0
+0x7D11C8: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x7D11CD: mov     eax, [esi]
 0x7D11CF: test    eax, eax
-0x7D11D1: mov     ds:dword_B455A0[ebx], eax
+0x7D11D1: mov     ds:g_ShadowLightPassBySelector[ebx], eax
 0x7D11D7: jz      short loc_7D11DD
 0x7D11D9: add     dword ptr [eax+60h], 1
 0x7D11DD: mov     eax, [esp+28h+var_14]
@@ -42,8 +42,8 @@
 0x7D11F3: add     eax, 60h ; '`'
 0x7D11F6: cmp     dword ptr [eax], 0
 0x7D11F9: jnz     short loc_7D1200
-0x7D11FB: call    sub_7604D0
-0x7D1200: mov     esi, ds:dword_B455A0[ebx]
+0x7D11FB: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
+0x7D1200: mov     esi, ds:g_ShadowLightPassBySelector[ebx]
 0x7D1206: mov     eax, ds:0B45290h
 0x7D120B: mov     edi, [esi+58h]
 0x7D120E: add     esi, 58h ; 'X'
@@ -97,13 +97,13 @@
 0x7D12A0: cmp     dword ptr ds:0B42F48h, 2
 0x7D12A7: mov     ecx, esi
 0x7D12A9: jl      short loc_7D12F8
-0x7D12AB: call    sub_82D990
+0x7D12AB: call    ShadowLightShader_InitializeMultiPointPassPool
 0x7D12B0: mov     ecx, esi
-0x7D12B2: call    sub_820C00
+0x7D12B2: call    ShadowLightShader_InitializePassPool; Oblivion ShadowLight pass-pool initializer. Mode-5 pool[6..9] each owns one stage configured for texcoord 0, wrap addressing, linear MAG/MIN/MIP filtering, and disabled fixed-function color/alpha ops. All four disable alpha blending and stencil, enable Z test/write with LESS_EQUAL, and differ only in alpha-test enable: pools 6/8 off, 7/9 on. Opaque shaders ignore the unbound stage.
 0x7D12B7: mov     ecx, esi
 0x7D12B9: call    sub_828280
 0x7D12BE: mov     ecx, esi
-0x7D12C0: call    sub_831910
+0x7D12C0: call    ShadowLightShader_InitializeAdditivePointPassPool
 0x7D12C5: mov     ecx, esi
 0x7D12C7: call    sub_832740
 0x7D12CC: mov     ecx, esi
@@ -130,3 +130,12 @@
 0x7D130E: pop     ebx
 0x7D130F: add     esp, 14h
 0x7D1312: retn
+0x9D0AC0: lea     ecx, [ebp-14h]; void *
+0x9D0AC3: jmp     sub_4027D0
+0x9D0AC8: mov     edx, [esp+arg_4]
+0x9D0ACC: lea     eax, [edx-18h]
+0x9D0ACF: mov     ecx, [edx-1Ch]
+0x9D0AD2: xor     ecx, eax
+0x9D0AD4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D0AD9: mov     eax, offset stru_AF9368
+0x9D0ADE: jmp     ___CxxFrameHandler3

@@ -1,4 +1,4 @@
 double __thiscall sub_629840(float *this)
 {
-  return *(this + 0x8E);
+  return *(this + 0x8E); /*0x629846*/
 }

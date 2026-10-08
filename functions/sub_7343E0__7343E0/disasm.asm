@@ -27,17 +27,16 @@
 0x734421: add     ebp, ebp
 0x734423: test    eax, eax
 0x734425: jbe     short loc_734448
-0x734427: mov     dword ptr [esp+58h+var_48], eax
+0x734427: mov     [esp+58h+var_48], eax
 0x73442B: jmp     short loc_734430
-0x73442D: align 10h
-0x734430: push    ebp; Size
-0x734431: push    ebx; Src
-0x734432: push    esi; Dst
-0x734433: call    _memcpy
+0x734430: push    ebp; byteCount
+0x734431: push    ebx; source
+0x734432: push    esi; destination
+0x734433: call    _memcpy;
 0x734438: add     esi, [edi+0Ch]
 0x73443B: add     esp, 0Ch
 0x73443E: add     ebx, 10h
-0x734441: sub     dword ptr [esp+58h+var_48], 1
+0x734441: sub     [esp+58h+var_48], 1
 0x734446: jnz     short loc_734430
 0x734448: mov     ecx, [esp+58h+var_4]
 0x73444C: pop     edi

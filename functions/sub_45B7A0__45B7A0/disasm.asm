@@ -52,14 +52,14 @@
 0x45B833: jmp     short loc_45B859
 0x45B835: test    edi, edi
 0x45B837: jz      short loc_45B867
-0x45B839: push    0
-0x45B83B: mov     ecx, edi
-0x45B83D: call    sub_405790
+0x45B839: push    0; index
+0x45B83B: mov     ecx, edi; this
+0x45B83D: call    NiNode_GetChildAtIndex
 0x45B842: test    eax, eax
 0x45B844: jz      short loc_45B863
-0x45B846: push    0
-0x45B848: mov     ecx, edi
-0x45B84A: call    sub_405790
+0x45B846: push    0; index
+0x45B848: mov     ecx, edi; this
+0x45B84A: call    NiNode_GetChildAtIndex
 0x45B84F: cmp     dword ptr [eax+0Ch], 0
 0x45B853: jz      short loc_45B863
 0x45B855: mov     edx, [esi]
@@ -143,7 +143,7 @@
 0x45B935: mov     ecx, [esi]
 0x45B937: test    ecx, ecx
 0x45B939: jz      short loc_45B946
-0x45B93B: call    sub_41E850
+0x45B93B: call    ExtraDataList_GetLeveledItem; Returns the ExtraLeveledItem object itself, allowing callers to inspect its selected leveled-list state.
 0x45B940: test    eax, eax
 0x45B942: jz      short loc_45B946
 0x45B944: mov     bl, 1

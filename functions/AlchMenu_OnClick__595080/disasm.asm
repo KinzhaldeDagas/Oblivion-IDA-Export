@@ -42,7 +42,7 @@
 0x595113: push    0
 0x595115: push    0
 0x595117: push    3
-0x595119: call    sub_5D2070
+0x595119: call    RepairMenu_Create
 0x59511E: add     esp, 10h
 0x595121: pop     edi; jumptable 005950C6 default case, cases 12,13
 0x595122: pop     esi

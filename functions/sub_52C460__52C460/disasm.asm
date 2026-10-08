@@ -210,7 +210,7 @@
 0x52C711: mov     eax, [ebp+4]
 0x52C714: mov     ebx, [eax+4]
 0x52C717: push    eax
-0x52C718: call    FormHeapFree
+0x52C718: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x52C71D: add     esp, 4
 0x52C720: test    ebx, ebx
 0x52C722: mov     [ebp+4], ebx
@@ -227,7 +227,6 @@
 0x52C745: cmp     dword ptr [ebx+4], 0
 0x52C749: jz      short loc_52C759
 0x52C74B: jmp     short loc_52C750
-0x52C74D: align 10h
 0x52C750: mov     ebx, [ebx+4]
 0x52C753: cmp     dword ptr [ebx+4], 0
 0x52C757: jnz     short loc_52C750
@@ -261,7 +260,7 @@
 0x52C7B0: mov     eax, [ebp+4]
 0x52C7B3: mov     ebx, [eax+4]
 0x52C7B6: push    eax
-0x52C7B7: call    FormHeapFree
+0x52C7B7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x52C7BC: add     esp, 4
 0x52C7BF: test    ebx, ebx
 0x52C7C1: mov     [ebp+4], ebx
@@ -303,10 +302,10 @@
 0x52C830: mov     [esp+14h+a2], eax
 0x52C834: jnz     short loc_52C7D4
 0x52C836: lea     ecx, [edi+29Ch]
-0x52C83C: push    ecx
+0x52C83C: push    ecx; destination
 0x52C83D: lea     edx, [esi+29Ch]
-0x52C843: push    edx
-0x52C844: call    sub_5528F0
+0x52C843: push    edx; source
+0x52C844: call    FaceGenHeadParameters_Copy; Deep-copies all four FaceGen matrices, preserving dimensions and engine ownership of destination coefficient buffers.
 0x52C849: mov     ax, [esi+2FCh]
 0x52C850: add     esp, 8
 0x52C853: mov     [edi+2FCh], ax

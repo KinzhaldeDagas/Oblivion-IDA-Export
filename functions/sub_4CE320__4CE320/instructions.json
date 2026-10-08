@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4CE320",
-    "line": "push    ecx",
+    "line": "push    ecx; Verified scene-node teardown: temporarily sets cellProcessLevel=1, detaches the cell NiNode from its parent, clears/releases its child array, releases the NiNode and cell extra-data component, then resets cellProcessLevel to 0.",
     "mnemonic": "push",
     "size": 1
   },
@@ -223,13 +223,13 @@
   },
   {
     "ea": "0x4CE373",
-    "line": "lea     ecx, [esi+0ACh]",
+    "line": "lea     ecx, [esi+0ACh]; this",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x4CE379",
-    "line": "call    sub_477EF0",
+    "line": "call    NiTObjectArray_ClearAndRelease; Clears a ref-counted NiT object-pointer array: releases every non-null element, nulls entries, and resets end/count words to zero. At bow release it is invoked on ArrowBone+0xAC, thereby releasing all ArrowBone children including the held Arrow:0 clone.",
     "mnemonic": "call",
     "size": 5
   },

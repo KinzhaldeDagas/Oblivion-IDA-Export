@@ -9,111 +9,111 @@ void __thiscall Sky::~Sky(Sky *this)
   Precipitation *precipitation; // ecx
   NiNode *nodeMoonsRoot; // esi
   NiNode *nodeSkyRoot; // eax
-  void (__thiscall ***v14)(_DWORD, int); // esi
-  NiNode *v15; // esi
+  void (__thiscall ***v11)(_DWORD, int); // esi
+  NiNode *v12; // esi
   unsigned int *i; // esi
-  unsigned int *v17; // eax
-  unsigned int v18; // ebp
+  unsigned int *v14; // eax
+  unsigned int v15; // ebp
   _DWORD *unk0E0; // esi
-  int v20; // ebp
-  NiNode *v21; // esi
-  NiNode *v22; // edi
-  _DWORD v23[2]; // [esp+30h] [ebp-14h] BYREF
-  int v24; // [esp+40h] [ebp-4h]
+  int v17; // ebp
+  NiNode *v18; // esi
+  NiNode *v19; // edi
+  _DWORD v20[2]; // [esp+30h] [ebp-14h] BYREF
+  int v21; // [esp+40h] [ebp-4h]
 
-  v23[1] = this;
-  this->vtbl = &Sky::`vftable';
-  atmosphere = this->atmosphere;
-  v24 = 1;
-  if ( atmosphere )
-    ((void (__thiscall *)(Atmosphere *, int))atmosphere->__vftbl->GetObjectNode)(atmosphere, 1);
-  stars = this->stars;
-  if ( stars )
-    (**(void (__thiscall ***)(Stars *, int))stars)(stars, 1);
-  clouds = this->clouds;
-  if ( clouds )
-    ((void (__thiscall *)(Clouds *, int))clouds->__vftbl->GetObjectNode)(clouds, 1);
-  sun = this->sun;
-  if ( sun )
-    ((void (__thiscall *)(Sun *, int))sun->vtbl->GetObjectNode)(sun, 1);
-  masserMoon = this->masserMoon;
-  if ( masserMoon )
-    (**(void (__thiscall ***)(Moon *, int))masserMoon)(masserMoon, 1);
-  secundaMoon = this->secundaMoon;
-  if ( secundaMoon )
-    (**(void (__thiscall ***)(Moon *, int))secundaMoon)(secundaMoon, 1);
-  precipitation = this->precipitation;
-  if ( precipitation )
-    (**(void (__thiscall ***)(Precipitation *, int))precipitation)(precipitation, 1);
-  nodeMoonsRoot = this->nodeMoonsRoot;
-  if ( nodeMoonsRoot )
+  v20[1] = this; /*0x53fd98*/
+  this->vtbl = &Sky::`vftable'; /*0x53fd9c*/
+  atmosphere = this->atmosphere; /*0x53fda2*/
+  v21 = 1; /*0x53fda7*/
+  if ( atmosphere ) /*0x53fdaf*/
+    ((void (__thiscall *)(Atmosphere *, int))atmosphere->__vftbl->GetObjectNode)(atmosphere, 1); /*0x53fdb7*/
+  stars = this->stars; /*0x53fdb9*/
+  if ( stars ) /*0x53fdbe*/
+    (**(void (__thiscall ***)(Stars *, int))stars)(stars, 1); /*0x53fdc6*/
+  clouds = this->clouds; /*0x53fdc8*/
+  if ( clouds ) /*0x53fdcd*/
+    ((void (__thiscall *)(Clouds *, int))clouds->__vftbl->GetObjectNode)(clouds, 1); /*0x53fdd5*/
+  sun = this->sun; /*0x53fdd7*/
+  if ( sun ) /*0x53fddc*/
+    ((void (__thiscall *)(Sun *, int))sun->vtbl->GetObjectNode)(sun, 1); /*0x53fde4*/
+  masserMoon = this->masserMoon; /*0x53fde6*/
+  if ( masserMoon ) /*0x53fdeb*/
+    (**(void (__thiscall ***)(Moon *, int))masserMoon)(masserMoon, 1); /*0x53fdf3*/
+  secundaMoon = this->secundaMoon; /*0x53fdf5*/
+  if ( secundaMoon ) /*0x53fdfa*/
+    (**(void (__thiscall ***)(Moon *, int))secundaMoon)(secundaMoon, 1); /*0x53fe02*/
+  precipitation = this->precipitation; /*0x53fe04*/
+  if ( precipitation ) /*0x53fe09*/
+    (**(void (__thiscall ***)(Precipitation *, int))precipitation)(precipitation, 1); /*0x53fe11*/
+  nodeMoonsRoot = this->nodeMoonsRoot; /*0x53fe13*/
+  if ( nodeMoonsRoot ) /*0x53fe18*/
   {
-    if ( !InterlockedDecrement((volatile LONG *)&nodeMoonsRoot->members) )
-      nodeMoonsRoot->vtbl->super.super.super.Destructor((NiRefObject *)nodeMoonsRoot, 1);
-    this->nodeMoonsRoot = 0;
+    if ( !InterlockedDecrement((volatile LONG *)&nodeMoonsRoot->members) ) /*0x53fe1e*/
+      nodeMoonsRoot->vtbl->super.super.super.Destructor((NiRefObject *)nodeMoonsRoot, 1); /*0x53fe34*/
+    this->nodeMoonsRoot = 0; /*0x53fe36*/
   }
-  nodeSkyRoot = this->nodeSkyRoot;
-  if ( nodeSkyRoot )
+  nodeSkyRoot = this->nodeSkyRoot; /*0x53fe3d*/
+  if ( nodeSkyRoot ) /*0x53fe42*/
   {
-    if ( nodeSkyRoot->members.super.m_parent )
+    if ( nodeSkyRoot->members.super.m_parent ) /*0x53fe44*/
     {
-      nodeSkyRoot->members.super.m_parent->vtbl->RemoveObject(
+      nodeSkyRoot->members.super.m_parent->vtbl->RemoveObject( /*0x53fe5b*/
         nodeSkyRoot->members.super.m_parent,
-        (NiAVObject **)v23,
+        (NiAVObject **)v20,
         (NiAVObject *)this->nodeSkyRoot);
-      if ( v23[0] )
+      if ( v20[0] ) /*0x53fe63*/
       {
-        v14 = (void (__thiscall ***)(_DWORD, int))v23[0];
-        if ( !InterlockedDecrement((volatile LONG *)(v23[0] + 4)) )
-          (**v14)(v14, 1);
+        v11 = (void (__thiscall ***)(_DWORD, int))v20[0]; /*0x53fe65*/
+        if ( !InterlockedDecrement((volatile LONG *)(v20[0] + 4)) ) /*0x53fe6b*/
+          (**v11)(v11, 1); /*0x53fe81*/
       }
     }
   }
-  v15 = this->nodeSkyRoot;
-  if ( v15 )
+  v12 = this->nodeSkyRoot; /*0x53fe83*/
+  if ( v12 ) /*0x53fe88*/
   {
-    if ( !InterlockedDecrement((volatile LONG *)&v15->members) )
-      v15->vtbl->super.super.super.Destructor((NiRefObject *)v15, 1);
-    this->nodeSkyRoot = 0;
+    if ( !InterlockedDecrement((volatile LONG *)&v12->members) ) /*0x53fe8e*/
+      v12->vtbl->super.super.super.Destructor((NiRefObject *)v12, 1); /*0x53fea4*/
+    this->nodeSkyRoot = 0; /*0x53fea6*/
   }
-  for ( i = (unsigned int *)this->unk0E0; i; i = (unsigned int *)i[1] )
+  for ( i = (unsigned int *)this->unk0E0; i; i = (unsigned int *)i[1] ) /*0x53feb5*/
   {
-    v17 = (unsigned int *)*i;
-    if ( !*i )
-      break;
-    v18 = *v17;
-    if ( *v17 )
+    v14 = (unsigned int *)*i; /*0x53feb7*/
+    if ( !*i ) /*0x53feb7*/
+      break; /*0x53febb*/
+    v15 = *v14; /*0x53febd*/
+    if ( *v14 ) /*0x53febd*/
     {
-      sub_6B73E0((_DWORD *)*v17);
-      FormHeapFree(v18);
+      sub_6B73E0((_DWORD *)*v14); /*0x53fec5*/
+      FormHeapFree(v15); /*0x53fecb*/
     }
-    FormHeapFree(*i);
+    FormHeapFree(*i); /*0x53fed6*/
   }
-  unk0E0 = (_DWORD *)this->unk0E0;
-  if ( unk0E0[1] )
+  unk0E0 = (_DWORD *)this->unk0E0; /*0x53fee5*/
+  if ( unk0E0[1] ) /*0x53feeb*/
   {
-    do
+    do /*0x53ff05*/
     {
-      v20 = *(_DWORD *)(unk0E0[1] + 4);
-      FormHeapFree(unk0E0[1]);
-      unk0E0[1] = v20;
+      v17 = *(_DWORD *)(unk0E0[1] + 4); /*0x53fef4*/
+      FormHeapFree(unk0E0[1]); /*0x53fef8*/
+      unk0E0[1] = v17; /*0x53ff02*/
     }
-    while ( v20 );
+    while ( v17 ); /*0x53ff05*/
   }
-  *unk0E0 = 0;
-  FormHeapFree(this->unk0E0);
-  v21 = this->nodeMoonsRoot;
-  LOBYTE(v24) = 0;
-  if ( v21 )
+  *unk0E0 = 0; /*0x53ff07*/
+  FormHeapFree(this->unk0E0); /*0x53ff14*/
+  v18 = this->nodeMoonsRoot; /*0x53ff19*/
+  LOBYTE(v21) = 0; /*0x53ff21*/
+  if ( v18 ) /*0x53ff26*/
   {
-    if ( !InterlockedDecrement((volatile LONG *)&v21->members) )
-      v21->vtbl->super.super.super.Destructor((NiRefObject *)v21, 1);
+    if ( !InterlockedDecrement((volatile LONG *)&v18->members) ) /*0x53ff2c*/
+      v18->vtbl->super.super.super.Destructor((NiRefObject *)v18, 1); /*0x53ff42*/
   }
-  v22 = this->nodeSkyRoot;
-  v24 = 0xFFFFFFFF;
-  if ( v22 )
+  v19 = this->nodeSkyRoot; /*0x53ff44*/
+  v21 = 0xFFFFFFFF; /*0x53ff49*/
+  if ( v19 ) /*0x53ff51*/
   {
-    if ( !InterlockedDecrement((volatile LONG *)&v22->members) )
-      v22->vtbl->super.super.super.Destructor((NiRefObject *)v22, 1);
+    if ( !InterlockedDecrement((volatile LONG *)&v19->members) ) /*0x53ff57*/
+      v19->vtbl->super.super.super.Destructor((NiRefObject *)v19, 1); /*0x53ff6d*/
   }
 }

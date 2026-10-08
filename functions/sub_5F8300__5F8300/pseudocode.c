@@ -1,9 +1,10 @@
-void __thiscall sub_5F8300(TESObjectREFR *this, int a2, int a3)
+// Recomputes Quiver Arrow:0/ArrowN visibility from the current equipped-AMMO inventory count. animData selects the perspective/cache and quiverNode may supply an already resolved node.
+void __thiscall Actor_RefreshQuiverArrowVisibility(Actor *this, ActorAnimData *animData, NiNode *quiverNode)
 {
-  int v4; // eax
-  TESForm *v5; // edi
+  EntryData *v4; // eax
+  TESForm *type; // edi
   ExtraContainerChanges_Data *ContainerExtraDataForRef; // eax
-  int v7; // edi
+  NiNode *v7; // edi
   int v8; // eax
   int i; // esi
   char *m_data; // ebp
@@ -12,48 +13,48 @@ void __thiscall sub_5F8300(TESObjectREFR *this, int a2, int a3)
   BSStringT v13; // [esp+1Ch] [ebp-14h] BYREF
   unsigned int v14; // [esp+2Ch] [ebp-4h]
 
-  if ( *((_DWORD *)this + 0x16) )
+  if ( this->members.super.process ) /*0x5f832b*/
   {
-    v4 = (*(int (__thiscall **)(_DWORD, int))(**((_DWORD **)this + 0x16) + 0xF4))(*((_DWORD *)this + 0x16), 1);
-    if ( v4 )
+    v4 = this->members.super.process->GetEquippedAmmoData(this->members.super.process, 1); /*0x5f8341*/
+    if ( v4 ) /*0x5f8345*/
     {
-      v5 = *(TESForm **)(v4 + 8);
-      ItemCount = 0;
-      if ( TESObjectREFR_GetContainer(this) )
+      type = v4->type; /*0x5f834b*/
+      ItemCount = 0; /*0x5f8350*/
+      if ( TESObjectREFR_GetContainer((TESObjectREFR *)this) ) /*0x5f8354*/
       {
-        ContainerExtraDataForRef = ContainerExtraData_GetContainerExtraDataForRef(this);
-        if ( ContainerExtraDataForRef )
-          ItemCount = ContainerExtraData_GetItemCount(ContainerExtraDataForRef, v5);
+        ContainerExtraDataForRef = ContainerExtraData_GetContainerExtraDataForRef((TESObjectREFR *)this); /*0x5f835f*/
+        if ( ContainerExtraDataForRef ) /*0x5f8369*/
+          ItemCount = ContainerExtraData_GetItemCount(ContainerExtraDataForRef, type); /*0x5f8373*/
       }
-      if ( (*(int (__thiscall **)(_DWORD, int))(**((_DWORD **)this + 0x16) + 0x128))(*((_DWORD *)this + 0x16), a2) )
+      if ( this->members.super.process->Unk_49(this->members.super.process, (UInt32)animData) ) /*0x5f8387*/
       {
-        v7 = a3;
-        if ( !a3 )
-          v7 = (*(int (__thiscall **)(_DWORD, int))(**((_DWORD **)this + 0x16) + 0x128))(*((_DWORD *)this + 0x16), a2);
-        v8 = (*(int (__thiscall **)(int, const char *))(*(_DWORD *)v7 + 0x58))(v7, "Arrow:0");
-        if ( v8 )
-          *(_WORD *)(v8 + 0x18) &= ~1u;
-        for ( i = 1; i < iMaxArrowsInQuiver; ++i )
+        v7 = quiverNode; /*0x5f8391*/
+        if ( !quiverNode ) /*0x5f8397*/
+          v7 = (NiNode *)this->members.super.process->Unk_49(this->members.super.process, (UInt32)animData); /*0x5f83a9*/
+        v8 = (int)v7->vtbl->super.GetObjectByName((NiAVObject *)v7, "Arrow:0"); /*0x5f83b7*/
+        if ( v8 ) /*0x5f83bb*/
+          *(_WORD *)(v8 + 0x18) &= ~1u;         // Always clear hidden bit 0 on Quiver/Arrow:0 before rebuilding the visible-count mask. /*0x5f83bd*/
+        for ( i = 1; i < MEMORY[0xB35588]; ++i ) /*0x5f83c3*/
         {
-          v13.m_data = 0;
-          v13.m_dataLen = 0;
-          v13.m_bufLen = 0;
-          v14 = 0;
-          BSStringT_Static_Format(&v13, "Arrow%d", i);
-          m_data = v13.m_data;
-          v11 = (*(int (__thiscall **)(int, char *))(*(_DWORD *)v7 + 0x58))(v7, v13.m_data);
-          if ( v11 )
-          {
-            if ( i < ItemCount )
-              *(_WORD *)(v11 + 0x18) &= ~1u;
+          v13.m_data = 0; /*0x5f83d0*/
+          v13.m_dataLen = 0; /*0x5f83d4*/
+          v13.m_bufLen = 0; /*0x5f83d9*/
+          v14 = 0; /*0x5f83e9*/
+          BSStringT_Static_Format(&v13, "Arrow%d", i); /*0x5f83ed*/
+          m_data = v13.m_data; /*0x5f83f4*/
+          v11 = (int)v7->vtbl->super.GetObjectByName((NiAVObject *)v7, v13.m_data); /*0x5f8401*/
+          if ( v11 ) /*0x5f8405*/
+          {                                     // For ArrowN indices 1..iMaxArrowsInQuiver-1: visible when N < current AMMO count, hidden otherwise.
+            if ( i < ItemCount ) /*0x5f840b*/
+              *(_WORD *)(v11 + 0x18) &= ~1u; /*0x5f8414*/
             else
-              *(_WORD *)(v11 + 0x18) |= 1u;
+              *(_WORD *)(v11 + 0x18) |= 1u; /*0x5f840d*/
           }
-          v14 = 0xFFFFFFFF;
-          FormHeapFree((unsigned int)m_data);
-          v13.m_data = 0;
-          v13.m_bufLen = 0;
-          v13.m_dataLen = 0;
+          v14 = 0xFFFFFFFF; /*0x5f841b*/
+          FormHeapFree((unsigned int)m_data); /*0x5f8423*/
+          v13.m_data = 0; /*0x5f842b*/
+          v13.m_bufLen = 0; /*0x5f842f*/
+          v13.m_dataLen = 0; /*0x5f8434*/
         }
       }
     }

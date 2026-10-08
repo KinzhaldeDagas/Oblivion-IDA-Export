@@ -17,7 +17,7 @@
 0x46B1A2: movzx   eax, ds:byte_46B21C[eax]
 0x46B1A9: jmp     ds:jpt_46B1A9[eax*4]; switch jump
 0x46B1B0: lea     ecx, [esi+18h]; jumptable 0046B1A9 case 48
-0x46B1B3: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x46B1B3: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x46B1B8: mov     ecx, [esp+7Ch+var_C]
 0x46B1BC: mov     large fs:0, ecx
 0x46B1C3: pop     ecx
@@ -32,12 +32,21 @@
 0x46B1DF: call    FormComponentList_Build
 0x46B1E4: lea     ecx, [esp+7Ch+var_74]
 0x46B1E8: call    FormComponentList_ClearReferences
-0x46B1ED: lea     ecx, [esp+7Ch+var_74]; void *
+0x46B1ED: lea     ecx, [esp+7Ch+var_74]; this
 0x46B1F1: mov     [esp+7Ch+var_4], 0FFFFFFFFh
-0x46B1F9: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x46B1F9: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x46B1FE: mov     ecx, [esp+7Ch+var_C]; jumptable 0046B1A9 cases 13,49-52,54,61
 0x46B202: mov     large fs:0, ecx
 0x46B209: pop     ecx
 0x46B20A: pop     esi
 0x46B20B: add     esp, 74h
 0x46B20E: retn
+0x9AEA60: lea     ecx, [ebp-74h]; this
+0x9AEA63: jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x9AEA68: mov     edx, [esp+arg_4]
+0x9AEA6C: lea     eax, [edx-6Ch]
+0x9AEA6F: mov     ecx, [edx-70h]
+0x9AEA72: xor     ecx, eax
+0x9AEA74: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AEA79: mov     eax, offset stru_ADB188
+0x9AEA7E: jmp     ___CxxFrameHandler3

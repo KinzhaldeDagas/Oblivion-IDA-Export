@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x615220",
-    "line": "push    ebp",
+    "line": "push    ebp; Returns true to suppress the ranged attack/cast for ally safety. Optional arg is SelectedSpellInfo*; null selects equipped staff/bow enchantment or ammo effects.",
     "mnemonic": "push",
     "size": 1
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x61523C",
-    "line": "call    EffectItemList_HasOnTarget",
+    "line": "call    EffectItemList_HasOnTarget; Selected magic must contain an effective Target-range effect (range==2; EffectSetting flag 0x400000 clear) before ally hold-fire logic applies.",
     "mnemonic": "call",
     "size": 5
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x615249",
-    "line": "cmp     byte ptr [edi+159h], 0",
+    "line": "cmp     byte ptr [edi+159h], 0; CombatController+0x159 is the precomputed 'ally blocks main target' flag. It immediately suppresses target spells and ranged weapon attacks.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -331,13 +331,13 @@
   },
   {
     "ea": "0x6152C8",
-    "line": "call    sub_612D60",
+    "line": "call    CombatController_GetEquippedWeaponForm",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6152CD",
-    "line": "cmp     byte ptr [eax+90h], 5",
+    "line": "cmp     byte ptr [eax+90h], 5; Null selected-spell path applies only to weapon types 4 Staff and 5 Bow.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x6152D8",
-    "line": "call    sub_612D60",
+    "line": "call    CombatController_GetEquippedWeaponForm",
     "mnemonic": "call",
     "size": 5
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x6152FB",
-    "line": "call    sub_612D60",
+    "line": "call    CombatController_GetEquippedWeaponForm",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x615306",
-    "line": "call    sub_612D60",
+    "line": "call    CombatController_GetEquippedWeaponForm",
     "mnemonic": "call",
     "size": 5
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x615315",
-    "line": "add     eax, 18h",
+    "line": "add     eax, 18h; Weapon fallback effect source is weapon enchantment; if absent on staff/bow path, tries equipped ammo enchantment.",
     "mnemonic": "add",
     "size": 3
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x615370",
-    "line": "push    1",
+    "line": "push    1; Resolve effect list from selected spell, weapon enchantment, or ammo enchantment, then choose highest truncated-cost effect with range filter 3 (any) and requireArea=true.",
     "mnemonic": "push",
     "size": 2
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x615377",
-    "line": "call    EffectItemList_GetStrongestItem",
+    "line": "call    EffectItemList_GetStrongestItem; this=EffectItemList; args are rangeFilter (0 self,1 touch,2 target,3 any) and requireArea. Returns effective (flag 0x400000 clear) qualifying item with greatest truncated MagickaCostForCaster(item,null).",
     "mnemonic": "call",
     "size": 5
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x615384",
-    "line": "lea     ebx, [edi+15Ch]",
+    "line": "lea     ebx, [edi+15Ch]; CombatController+0x15C is inline BSSimpleList<Actor*> cached friendly actors.",
     "mnemonic": "lea",
     "size": 6
   },
@@ -751,7 +751,7 @@
   },
   {
     "ea": "0x61539E",
-    "line": "push    0; a4",
+    "line": "push    0; useActorProjection",
     "mnemonic": "push",
     "size": 2
   },
@@ -763,25 +763,25 @@
   },
   {
     "ea": "0x6153A2",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6153A7",
-    "line": "push    eax; a3",
+    "line": "push    eax; to",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6153A8",
-    "line": "push    esi; a2",
+    "line": "push    esi; from",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6153A9",
-    "line": "call    TESObjectREFR_GetDistanceBetween?",
+    "line": "call    TESObjectREFR_GetSurfaceDistance; Three-argument cdecl routine: returns float surface distance from 'from' to 'to'. All 24 callers push exactly from, to, and useActorProjection then reclaim 0x0C. The prior EDI register argument, fourth stack byte, and double return were analysis pollution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x6153C1",
-    "line": "call    EffectItem_GetArea",
+    "line": "call    EffectItem_GetArea; Effective area: returns 0 for EffectSetting NoArea (0x200) or Self range (0); otherwise raw EffectItem+0x8 area.",
     "mnemonic": "call",
     "size": 5
   },
@@ -859,7 +859,7 @@
   },
   {
     "ea": "0x6153DD",
-    "line": "jz      short loc_6153EE",
+    "line": "jz      short loc_6153EE; Area safety threshold: hold fire when SurfaceDistance(ally,currentTarget,false) <= 1.5 * effectiveArea. Pure 3D proximity; no LOS/raycast.",
     "mnemonic": "jz",
     "size": 2
   },

@@ -1,1 +1,1 @@
-Extra
+struct Extra;

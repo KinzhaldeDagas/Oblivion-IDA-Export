@@ -1,1732 +1,2610 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "generic_reply",
+  "definition": "union generic_reply\n{\nrequest_max_size max_size;\nreply_header reply_header;\nnew_process_reply new_process_reply;\nget_new_process_info_reply get_new_process_info_reply;\nnew_thread_reply new_thread_reply;\nget_startup_info_reply get_startup_info_reply;\ninit_process_done_reply init_process_done_reply;\ninit_first_thread_reply init_first_thread_reply;\ninit_thread_reply init_thread_reply;\nterminate_process_reply terminate_process_reply;\nterminate_thread_reply terminate_thread_reply;\nget_process_info_reply get_process_info_reply;\nget_process_debug_info_reply get_process_debug_info_reply;\nget_process_image_name_reply get_process_image_name_reply;\nget_process_vm_counters_reply get_process_vm_counters_reply;\nset_process_info_reply set_process_info_reply;\nget_thread_info_reply get_thread_info_reply;\nget_thread_times_reply get_thread_times_reply;\nset_thread_info_reply set_thread_info_reply;\nsuspend_thread_reply suspend_thread_reply;\nresume_thread_reply resume_thread_reply;\nqueue_apc_reply queue_apc_reply;\nget_apc_result_reply get_apc_result_reply;\nclose_handle_reply close_handle_reply;\nset_handle_info_reply set_handle_info_reply;\ndup_handle_reply dup_handle_reply;\nmake_temporary_reply make_temporary_reply;\nopen_process_reply open_process_reply;\nopen_thread_reply open_thread_reply;\nselect_reply select_reply;\ncreate_event_reply create_event_reply;\nevent_op_reply event_op_reply;\nquery_event_reply query_event_reply;\nopen_event_reply open_event_reply;\ncreate_keyed_event_reply create_keyed_event_reply;\nopen_keyed_event_reply open_keyed_event_reply;\ncreate_mutex_reply create_mutex_reply;\nrelease_mutex_reply release_mutex_reply;\nopen_mutex_reply open_mutex_reply;\nquery_mutex_reply query_mutex_reply;\ncreate_semaphore_reply create_semaphore_reply;\nrelease_semaphore_reply release_semaphore_reply;\nquery_semaphore_reply query_semaphore_reply;\nopen_semaphore_reply open_semaphore_reply;\ncreate_file_reply create_file_reply;\nopen_file_object_reply open_file_object_reply;\nalloc_file_handle_reply alloc_file_handle_reply;\nget_handle_unix_name_reply get_handle_unix_name_reply;\nget_handle_fd_reply get_handle_fd_reply;\nget_directory_cache_entry_reply get_directory_cache_entry_reply;\nflush_reply flush_reply;\nget_file_info_reply get_file_info_reply;\nget_volume_info_reply get_volume_info_reply;\nlock_file_reply lock_file_reply;\nunlock_file_reply unlock_file_reply;\nrecv_socket_reply recv_socket_reply;\npoll_socket_reply poll_socket_reply;\nsend_socket_reply send_socket_reply;\nget_next_console_request_reply get_next_console_request_reply;\nread_directory_changes_reply read_directory_changes_reply;\nread_change_reply read_change_reply;\ncreate_mapping_reply create_mapping_reply;\nopen_mapping_reply open_mapping_reply;\nget_mapping_info_reply get_mapping_info_reply;\nmap_view_reply map_view_reply;\nunmap_view_reply unmap_view_reply;\nget_mapping_committed_range_reply get_mapping_committed_range_reply;\nadd_mapping_committed_range_reply add_mapping_committed_range_reply;\nis_same_mapping_reply is_same_mapping_reply;\nget_mapping_filename_reply get_mapping_filename_reply;\nlist_processes_reply list_processes_reply;\ncreate_debug_obj_reply create_debug_obj_reply;\nwait_debug_event_reply wait_debug_event_reply;\nqueue_exception_event_reply queue_exception_event_reply;\nget_exception_status_reply get_exception_status_reply;\ncontinue_debug_event_reply continue_debug_event_reply;\ndebug_process_reply debug_process_reply;\nset_debug_obj_info_reply set_debug_obj_info_reply;\nread_process_memory_reply read_process_memory_reply;\nwrite_process_memory_reply write_process_memory_reply;\ncreate_key_reply create_key_reply;\nopen_key_reply open_key_reply;\ndelete_key_reply delete_key_reply;\nflush_key_reply flush_key_reply;\nenum_key_reply enum_key_reply;\nset_key_value_reply set_key_value_reply;\nget_key_value_reply get_key_value_reply;\nenum_key_value_reply enum_key_value_reply;\ndelete_key_value_reply delete_key_value_reply;\nload_registry_reply load_registry_reply;\nunload_registry_reply unload_registry_reply;\nsave_registry_reply save_registry_reply;\nset_registry_notification_reply set_registry_notification_reply;\ncreate_timer_reply create_timer_reply;\nopen_timer_reply open_timer_reply;\nset_timer_reply set_timer_reply;\ncancel_timer_reply cancel_timer_reply;\nget_timer_info_reply get_timer_info_reply;\nget_thread_context_reply get_thread_context_reply;\nset_thread_context_reply set_thread_context_reply;\nget_selector_entry_reply get_selector_entry_reply;\nadd_atom_reply add_atom_reply;\ndelete_atom_reply delete_atom_reply;\nfind_atom_reply find_atom_reply;\nget_atom_information_reply get_atom_information_reply;\nget_msg_queue_reply get_msg_queue_reply;\nset_queue_fd_reply set_queue_fd_reply;\nset_queue_mask_reply set_queue_mask_reply;\nget_queue_status_reply get_queue_status_reply;\nget_process_idle_event_reply get_process_idle_event_reply;\nsend_message_reply send_message_reply;\npost_quit_message_reply post_quit_message_reply;\nsend_hardware_message_reply send_hardware_message_reply;\nget_message_reply get_message_reply;\nreply_message_reply reply_message_reply;\naccept_hardware_message_reply accept_hardware_message_reply;\nget_message_reply_reply get_message_reply_reply;\nset_win_timer_reply set_win_timer_reply;\nkill_win_timer_reply kill_win_timer_reply;\nis_window_hung_reply is_window_hung_reply;\nget_serial_info_reply get_serial_info_reply;\nset_serial_info_reply set_serial_info_reply;\nregister_async_reply register_async_reply;\ncancel_async_reply cancel_async_reply;\nget_async_result_reply get_async_result_reply;\nread_reply read_reply;\nwrite_reply write_reply;\nioctl_reply ioctl_reply;\nset_irp_result_reply set_irp_result_reply;\ncreate_named_pipe_reply create_named_pipe_reply;\nset_named_pipe_info_reply set_named_pipe_info_reply;\ncreate_window_reply create_window_reply;\ndestroy_window_reply destroy_window_reply;\nget_desktop_window_reply get_desktop_window_reply;\nset_window_owner_reply set_window_owner_reply;\nget_window_info_reply get_window_info_reply;\nset_window_info_reply set_window_info_reply;\nset_parent_reply set_parent_reply;\nget_window_parents_reply get_window_parents_reply;\nget_window_children_reply get_window_children_reply;\nget_window_children_from_point_reply get_window_children_from_point_reply;\nget_window_tree_reply get_window_tree_reply;\nset_window_pos_reply set_window_pos_reply;\nget_window_rectangles_reply get_window_rectangles_reply;\nget_window_text_reply get_window_text_reply;\nset_window_text_reply set_window_text_reply;\nget_windows_offset_reply get_windows_offset_reply;\nget_visible_region_reply get_visible_region_reply;\nget_surface_region_reply get_surface_region_reply;\nget_window_region_reply get_window_region_reply;\nset_window_region_reply set_window_region_reply;\nset_layer_region_reply set_layer_region_reply;\nget_update_region_reply get_update_region_reply;\nupdate_window_zorder_reply update_window_zorder_reply;\nredraw_window_reply redraw_window_reply;\nset_window_property_reply set_window_property_reply;\nremove_window_property_reply remove_window_property_reply;\nget_window_property_reply get_window_property_reply;\nget_window_properties_reply get_window_properties_reply;\ncreate_winstation_reply create_winstation_reply;\nopen_winstation_reply open_winstation_reply;\nclose_winstation_reply close_winstation_reply;\nget_process_winstation_reply get_process_winstation_reply;\nset_process_winstation_reply set_process_winstation_reply;\nenum_winstation_reply enum_winstation_reply;\ncreate_desktop_reply create_desktop_reply;\nopen_desktop_reply open_desktop_reply;\nopen_input_desktop_reply open_input_desktop_reply;\nclose_desktop_reply close_desktop_reply;\nget_thread_desktop_reply get_thread_desktop_reply;\nset_thread_desktop_reply set_thread_desktop_reply;\nenum_desktop_reply enum_desktop_reply;\nset_user_object_info_reply set_user_object_info_reply;\nregister_hotkey_reply register_hotkey_reply;\nunregister_hotkey_reply unregister_hotkey_reply;\nattach_thread_input_reply attach_thread_input_reply;\nget_thread_input_reply get_thread_input_reply;\nget_last_input_time_reply get_last_input_time_reply;\nget_key_state_reply get_key_state_reply;\nset_key_state_reply set_key_state_reply;\nset_foreground_window_reply set_foreground_window_reply;\nset_focus_window_reply set_focus_window_reply;\nset_active_window_reply set_active_window_reply;\nset_capture_window_reply set_capture_window_reply;\nset_caret_window_reply set_caret_window_reply;\nset_caret_info_reply set_caret_info_reply;\nset_hook_reply set_hook_reply;\nremove_hook_reply remove_hook_reply;\nstart_hook_chain_reply start_hook_chain_reply;\nfinish_hook_chain_reply finish_hook_chain_reply;\nget_hook_info_reply get_hook_info_reply;\ncreate_class_reply create_class_reply;\ndestroy_class_reply destroy_class_reply;\nset_class_info_reply set_class_info_reply;\nopen_clipboard_reply open_clipboard_reply;\nclose_clipboard_reply close_clipboard_reply;\nempty_clipboard_reply empty_clipboard_reply;\nset_clipboard_data_reply set_clipboard_data_reply;\nget_clipboard_data_reply get_clipboard_data_reply;\nget_clipboard_formats_reply get_clipboard_formats_reply;\nenum_clipboard_formats_reply enum_clipboard_formats_reply;\nrelease_clipboard_reply release_clipboard_reply;\nget_clipboard_info_reply get_clipboard_info_reply;\nset_clipboard_viewer_reply set_clipboard_viewer_reply;\nadd_clipboard_listener_reply add_clipboard_listener_reply;\nremove_clipboard_listener_reply remove_clipboard_listener_reply;\nopen_token_reply open_token_reply;\nset_global_windows_reply set_global_windows_reply;\nadjust_token_privileges_reply adjust_token_privileges_reply;\nget_token_privileges_reply get_token_privileges_reply;\ncheck_token_privileges_reply check_token_privileges_reply;\nduplicate_token_reply duplicate_token_reply;\nfilter_token_reply filter_token_reply;\naccess_check_reply access_check_reply;\nget_token_sid_reply get_token_sid_reply;\nget_token_groups_reply get_token_groups_reply;\nget_token_default_dacl_reply get_token_default_dacl_reply;\nset_token_default_dacl_reply set_token_default_dacl_reply;\nset_security_object_reply set_security_object_reply;\nget_security_object_reply get_security_object_reply;\nget_system_handles_reply get_system_handles_reply;\ncreate_mailslot_reply create_mailslot_reply;\nset_mailslot_info_reply set_mailslot_info_reply;\ncreate_directory_reply create_directory_reply;\nopen_directory_reply open_directory_reply;\nget_directory_entry_reply get_directory_entry_reply;\ncreate_symlink_reply create_symlink_reply;\nopen_symlink_reply open_symlink_reply;\nquery_symlink_reply query_symlink_reply;\nget_object_info_reply get_object_info_reply;\nget_object_name_reply get_object_name_reply;\nget_object_type_reply get_object_type_reply;\nget_object_types_reply get_object_types_reply;\nallocate_locally_unique_id_reply allocate_locally_unique_id_reply;\ncreate_device_manager_reply create_device_manager_reply;\ncreate_device_reply create_device_reply;\ndelete_device_reply delete_device_reply;\nget_next_device_request_reply get_next_device_request_reply;\nget_kernel_object_ptr_reply get_kernel_object_ptr_reply;\nset_kernel_object_ptr_reply set_kernel_object_ptr_reply;\ngrab_kernel_object_reply grab_kernel_object_reply;\nrelease_kernel_object_reply release_kernel_object_reply;\nget_kernel_object_handle_reply get_kernel_object_handle_reply;\nmake_process_system_reply make_process_system_reply;\nget_token_info_reply get_token_info_reply;\ncreate_linked_token_reply create_linked_token_reply;\ncreate_completion_reply create_completion_reply;\nopen_completion_reply open_completion_reply;\nadd_completion_reply add_completion_reply;\nremove_completion_reply remove_completion_reply;\nquery_completion_reply query_completion_reply;\nset_completion_info_reply set_completion_info_reply;\nadd_fd_completion_reply add_fd_completion_reply;\nset_fd_completion_mode_reply set_fd_completion_mode_reply;\nset_fd_disp_info_reply set_fd_disp_info_reply;\nset_fd_name_info_reply set_fd_name_info_reply;\nset_fd_eof_info_reply set_fd_eof_info_reply;\nget_window_layered_info_reply get_window_layered_info_reply;\nset_window_layered_info_reply set_window_layered_info_reply;\nalloc_user_handle_reply alloc_user_handle_reply;\nfree_user_handle_reply free_user_handle_reply;\nset_cursor_reply set_cursor_reply;\nget_cursor_history_reply get_cursor_history_reply;\nget_rawinput_buffer_reply get_rawinput_buffer_reply;\nupdate_rawinput_devices_reply update_rawinput_devices_reply;\nget_rawinput_devices_reply get_rawinput_devices_reply;\ncreate_job_reply create_job_reply;\nopen_job_reply open_job_reply;\nassign_job_reply assign_job_reply;\nprocess_in_job_reply process_in_job_reply;\nset_job_limits_reply set_job_limits_reply;\nset_job_completion_port_reply set_job_completion_port_reply;\nget_job_info_reply get_job_info_reply;\nterminate_job_reply terminate_job_reply;\nsuspend_process_reply suspend_process_reply;\nresume_process_reply resume_process_reply;\nget_next_thread_reply get_next_thread_reply;\ncreate_esync_reply create_esync_reply;\nopen_esync_reply open_esync_reply;\nget_esync_fd_reply get_esync_fd_reply;\nesync_msgwait_reply esync_msgwait_reply;\nget_esync_apc_fd_reply get_esync_apc_fd_reply;\ncreate_fsync_reply create_fsync_reply;\nopen_fsync_reply open_fsync_reply;\nget_fsync_idx_reply get_fsync_idx_reply;\nfsync_msgwait_reply fsync_msgwait_reply;\nget_fsync_apc_idx_reply get_fsync_apc_idx_reply;\n}\n",
   "id": 18374686479671858272,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "max_size",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 64
+      "size": 64,
+      "type": "request_max_size"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "reply_header",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "reply_header"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "new_process_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "new_process_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_new_process_info_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_new_process_info_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "new_thread_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "new_thread_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_startup_info_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_startup_info_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "init_process_done_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "init_process_done_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "init_first_thread_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 32
+      "size": 32,
+      "type": "init_first_thread_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "init_thread_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "init_thread_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "terminate_process_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "terminate_process_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "terminate_thread_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "terminate_thread_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_process_info_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 64
+      "size": 64,
+      "type": "get_process_info_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_process_debug_info_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_process_debug_info_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_process_image_name_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_process_image_name_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_process_vm_counters_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 56
+      "size": 56,
+      "type": "get_process_vm_counters_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_process_info_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "set_process_info_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_thread_info_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 64
+      "size": 64,
+      "type": "get_thread_info_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_thread_times_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 32
+      "size": 32,
+      "type": "get_thread_times_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_thread_info_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "set_thread_info_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "suspend_thread_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "suspend_thread_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "resume_thread_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "resume_thread_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "queue_apc_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "queue_apc_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_apc_result_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 48
+      "size": 48,
+      "type": "get_apc_result_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "close_handle_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "close_handle_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_handle_info_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "set_handle_info_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dup_handle_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "dup_handle_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "make_temporary_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "make_temporary_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "open_process_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "open_process_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "open_thread_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "open_thread_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "select_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 64
+      "size": 64,
+      "type": "select_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "create_event_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "create_event_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "event_op_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "event_op_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "query_event_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "query_event_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "open_event_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "open_event_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "create_keyed_event_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "create_keyed_event_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "open_keyed_event_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "open_keyed_event_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "create_mutex_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "create_mutex_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "release_mutex_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "release_mutex_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "open_mutex_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "open_mutex_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "query_mutex_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "query_mutex_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "create_semaphore_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "create_semaphore_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "release_semaphore_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "release_semaphore_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "query_semaphore_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "query_semaphore_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "open_semaphore_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "open_semaphore_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "create_file_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "create_file_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "open_file_object_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "open_file_object_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "alloc_file_handle_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "alloc_file_handle_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_handle_unix_name_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_handle_unix_name_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_handle_fd_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "get_handle_fd_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_directory_cache_entry_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_directory_cache_entry_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "flush_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "flush_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_file_info_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "get_file_info_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_volume_info_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_volume_info_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lock_file_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "lock_file_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unlock_file_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "unlock_file_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "recv_socket_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "recv_socket_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "poll_socket_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "poll_socket_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "send_socket_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "send_socket_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_next_console_request_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "get_next_console_request_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "read_directory_changes_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "read_directory_changes_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "read_change_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "read_change_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "create_mapping_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "create_mapping_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "open_mapping_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "open_mapping_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_mapping_info_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 32
+      "size": 32,
+      "type": "get_mapping_info_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "map_view_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "map_view_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unmap_view_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "unmap_view_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_mapping_committed_range_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "get_mapping_committed_range_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "add_mapping_committed_range_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "add_mapping_committed_range_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "is_same_mapping_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "is_same_mapping_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_mapping_filename_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_mapping_filename_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "list_processes_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "list_processes_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "create_debug_obj_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "create_debug_obj_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "wait_debug_event_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "wait_debug_event_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "queue_exception_event_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "queue_exception_event_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_exception_status_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "get_exception_status_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "continue_debug_event_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "continue_debug_event_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "debug_process_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "debug_process_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_debug_obj_info_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "set_debug_obj_info_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "read_process_memory_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "read_process_memory_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "write_process_memory_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "write_process_memory_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "create_key_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "create_key_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "open_key_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "open_key_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "delete_key_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "delete_key_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "flush_key_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "flush_key_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "enum_key_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 48
+      "size": 48,
+      "type": "enum_key_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_key_value_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "set_key_value_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_key_value_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_key_value_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "enum_key_value_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "enum_key_value_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "delete_key_value_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "delete_key_value_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "load_registry_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "load_registry_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unload_registry_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "unload_registry_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "save_registry_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "save_registry_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_registry_notification_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "set_registry_notification_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "create_timer_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "create_timer_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "open_timer_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "open_timer_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_timer_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "set_timer_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cancel_timer_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "cancel_timer_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_timer_info_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "get_timer_info_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_thread_context_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_thread_context_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_thread_context_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "set_thread_context_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_selector_entry_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "get_selector_entry_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "add_atom_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "add_atom_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "delete_atom_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "delete_atom_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "find_atom_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "find_atom_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_atom_information_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "get_atom_information_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_msg_queue_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_msg_queue_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_queue_fd_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "set_queue_fd_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_queue_mask_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "set_queue_mask_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_queue_status_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_queue_status_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_process_idle_event_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_process_idle_event_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "send_message_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "send_message_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "post_quit_message_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "post_quit_message_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "send_hardware_message_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 32
+      "size": 32,
+      "type": "send_hardware_message_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_message_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 56
+      "size": 56,
+      "type": "get_message_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "reply_message_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "reply_message_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "accept_hardware_message_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "accept_hardware_message_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_message_reply_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_message_reply_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_win_timer_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "set_win_timer_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "kill_win_timer_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "kill_win_timer_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "is_window_hung_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "is_window_hung_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_serial_info_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "get_serial_info_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_serial_info_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "set_serial_info_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "register_async_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "register_async_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cancel_async_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "cancel_async_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_async_result_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_async_result_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "read_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "read_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "write_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "write_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ioctl_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "ioctl_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_irp_result_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "set_irp_result_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "create_named_pipe_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "create_named_pipe_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_named_pipe_info_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "set_named_pipe_info_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "create_window_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 40
+      "size": 40,
+      "type": "create_window_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "destroy_window_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "destroy_window_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_desktop_window_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_desktop_window_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_window_owner_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "set_window_owner_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_window_info_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 40
+      "size": 40,
+      "type": "get_window_info_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_window_info_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 48
+      "size": 48,
+      "type": "set_window_info_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_parent_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "set_parent_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_window_parents_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_window_parents_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_window_children_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_window_children_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_window_children_from_point_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_window_children_from_point_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_window_tree_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 40
+      "size": 40,
+      "type": "get_window_tree_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_window_pos_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "set_window_pos_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_window_rectangles_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 40
+      "size": 40,
+      "type": "get_window_rectangles_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_window_text_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_window_text_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_window_text_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "set_window_text_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_windows_offset_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "get_windows_offset_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_visible_region_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 56
+      "size": 56,
+      "type": "get_visible_region_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_surface_region_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 32
+      "size": 32,
+      "type": "get_surface_region_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_window_region_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_window_region_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_window_region_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "set_window_region_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_layer_region_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "set_layer_region_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_update_region_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "get_update_region_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "update_window_zorder_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "update_window_zorder_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "redraw_window_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "redraw_window_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_window_property_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "set_window_property_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "remove_window_property_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "remove_window_property_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_window_property_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_window_property_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_window_properties_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_window_properties_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "create_winstation_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "create_winstation_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "open_winstation_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "open_winstation_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "close_winstation_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "close_winstation_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_process_winstation_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_process_winstation_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_process_winstation_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "set_process_winstation_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "enum_winstation_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "enum_winstation_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "create_desktop_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "create_desktop_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "open_desktop_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "open_desktop_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "open_input_desktop_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "open_input_desktop_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "close_desktop_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "close_desktop_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_thread_desktop_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_thread_desktop_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_thread_desktop_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "set_thread_desktop_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "enum_desktop_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "enum_desktop_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_user_object_info_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "set_user_object_info_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "register_hotkey_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "register_hotkey_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unregister_hotkey_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "unregister_hotkey_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "attach_thread_input_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "attach_thread_input_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_thread_input_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 64
+      "size": 64,
+      "type": "get_thread_input_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_last_input_time_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_last_input_time_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_key_state_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_key_state_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_key_state_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "set_key_state_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_foreground_window_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "set_foreground_window_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_focus_window_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "set_focus_window_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_active_window_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "set_active_window_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_capture_window_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "set_capture_window_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_caret_window_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 40
+      "size": 40,
+      "type": "set_caret_window_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_caret_info_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 40
+      "size": 40,
+      "type": "set_caret_info_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_hook_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "set_hook_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "remove_hook_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "remove_hook_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "start_hook_chain_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 40
+      "size": 40,
+      "type": "start_hook_chain_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "finish_hook_chain_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "finish_hook_chain_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_hook_info_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 40
+      "size": 40,
+      "type": "get_hook_info_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "create_class_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "create_class_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "destroy_class_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "destroy_class_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_class_info_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 48
+      "size": 48,
+      "type": "set_class_info_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "open_clipboard_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "open_clipboard_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "close_clipboard_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "close_clipboard_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "empty_clipboard_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "empty_clipboard_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_clipboard_data_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "set_clipboard_data_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_clipboard_data_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "get_clipboard_data_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_clipboard_formats_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_clipboard_formats_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "enum_clipboard_formats_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "enum_clipboard_formats_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "release_clipboard_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "release_clipboard_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_clipboard_info_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "get_clipboard_info_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_clipboard_viewer_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "set_clipboard_viewer_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "add_clipboard_listener_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "add_clipboard_listener_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "remove_clipboard_listener_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "remove_clipboard_listener_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "open_token_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "open_token_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_global_windows_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "set_global_windows_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "adjust_token_privileges_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "adjust_token_privileges_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_token_privileges_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_token_privileges_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "check_token_privileges_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "check_token_privileges_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "duplicate_token_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "duplicate_token_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "filter_token_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "filter_token_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "access_check_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "access_check_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_token_sid_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_token_sid_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_token_groups_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_token_groups_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_token_default_dacl_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_token_default_dacl_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_token_default_dacl_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "set_token_default_dacl_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_security_object_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "set_security_object_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_security_object_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_security_object_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_system_handles_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_system_handles_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "create_mailslot_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "create_mailslot_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_mailslot_info_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "set_mailslot_info_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "create_directory_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "create_directory_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "open_directory_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "open_directory_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_directory_entry_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_directory_entry_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "create_symlink_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "create_symlink_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "open_symlink_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "open_symlink_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "query_symlink_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "query_symlink_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_object_info_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "get_object_info_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_object_name_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_object_name_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_object_type_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "get_object_type_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_object_types_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_object_types_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "allocate_locally_unique_id_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "allocate_locally_unique_id_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "create_device_manager_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "create_device_manager_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "create_device_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "create_device_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "delete_device_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "delete_device_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_next_device_request_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 64
+      "size": 64,
+      "type": "get_next_device_request_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_kernel_object_ptr_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_kernel_object_ptr_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_kernel_object_ptr_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "set_kernel_object_ptr_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "grab_kernel_object_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "grab_kernel_object_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "release_kernel_object_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "release_kernel_object_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_kernel_object_handle_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_kernel_object_handle_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "make_process_system_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "make_process_system_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_token_info_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 48
+      "size": 48,
+      "type": "get_token_info_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "create_linked_token_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "create_linked_token_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "create_completion_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "create_completion_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "open_completion_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "open_completion_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "add_completion_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "add_completion_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "remove_completion_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 40
+      "size": 40,
+      "type": "remove_completion_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "query_completion_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "query_completion_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_completion_info_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "set_completion_info_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "add_fd_completion_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "add_fd_completion_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_fd_completion_mode_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "set_fd_completion_mode_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_fd_disp_info_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "set_fd_disp_info_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_fd_name_info_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "set_fd_name_info_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_fd_eof_info_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "set_fd_eof_info_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_window_layered_info_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "get_window_layered_info_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_window_layered_info_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "set_window_layered_info_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "alloc_user_handle_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "alloc_user_handle_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "free_user_handle_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "free_user_handle_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_cursor_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 56
+      "size": 56,
+      "type": "set_cursor_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_cursor_history_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "get_cursor_history_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_rawinput_buffer_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_rawinput_buffer_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "update_rawinput_devices_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "update_rawinput_devices_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_rawinput_devices_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_rawinput_devices_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "create_job_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "create_job_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "open_job_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "open_job_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "assign_job_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "assign_job_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "process_in_job_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "process_in_job_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_job_limits_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "set_job_limits_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "set_job_completion_port_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "set_job_completion_port_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_job_info_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_job_info_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "terminate_job_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "terminate_job_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "suspend_process_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "suspend_process_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "resume_process_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "resume_process_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_next_thread_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_next_thread_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "create_esync_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "create_esync_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "open_esync_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "open_esync_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_esync_fd_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_esync_fd_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "esync_msgwait_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "esync_msgwait_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_esync_apc_fd_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "get_esync_apc_fd_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "create_fsync_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "create_fsync_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "open_fsync_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "open_fsync_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_fsync_idx_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_fsync_idx_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fsync_msgwait_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "fsync_msgwait_reply"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_fsync_apc_idx_reply",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "get_fsync_apc_idx_reply"
     }
   ],
   "name": "generic_reply",
+  "ordinal": 7259,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 64
 }

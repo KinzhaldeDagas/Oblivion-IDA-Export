@@ -1,1 +1,4 @@
-tListEntryData
+struct tListEntryData
+{
+NodeEntryData node;
+};

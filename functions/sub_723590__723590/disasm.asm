@@ -21,7 +21,7 @@
 0x7235C5: test    ecx, ecx
 0x7235C7: mov     byte ptr [esp+0Ch+arg_0], 0
 0x7235CC: jz      short loc_7235DC
-0x7235CE: call    sub_452A60
+0x7235CE: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x7235D3: test    eax, eax
 0x7235D5: jz      short loc_7235DC
 0x7235D7: mov     byte ptr [esp+0Ch+arg_0], 1

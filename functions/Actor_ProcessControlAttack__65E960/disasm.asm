@@ -1,11 +1,11 @@
-0x65E960: sub     esp, 10h
+0x65E960: sub     esp, 10h; Top-level PlayerCharacter attack-control handler; sole direct caller is Player_OnInput at 0x672664. Native ABI is bool __thiscall with no x87/stack arguments. It reads the current process attack gate (vtable +0x138), handles ordinary attack control, and in the Bow lane coordinates AttackBow Hold/release state across third- and first-person ActorAnimData. The prior ST0/ST1 parameters and non-player description were decompiler artifacts.
 0x65E963: push    ebx
 0x65E964: push    ebp
 0x65E965: push    esi
 0x65E966: push    edi
 0x65E967: mov     esi, ecx
 0x65E969: mov     edi, 0FFh
-0x65E96E: call    TESObjectREFR_GetAnimData
+0x65E96E: call    TESObjectREFR_GetAnimData; Return active ActorAnimData for an actor reference. For actor/creature refs with process level 0 or 1, return process+0x17C; otherwise tail-call the ExtraAnim lookup on the reference extra list. Exact return type is ActorAnimData*.
 0x65E973: mov     ecx, ds:0B33398h
 0x65E979: mov     ebx, [ecx+20h]
 0x65E97C: mov     ecx, [esi+58h]
@@ -16,25 +16,25 @@
 0x65E98D: mov     eax, [edx+138h]
 0x65E993: mov     [esp+20h+var_4], ebx
 0x65E997: mov     [esp+20h+var_D], 0
-0x65E99C: call    eax
+0x65E99C: call    eax; Calls process vtable +0x138, implemented for High/MiddleHighProcess by the byte getter at 0x6293C0 (process +0xF4). Its semantic name remains unproven; do not treat this call as an extra function argument.
 0x65E99E: test    al, al
 0x65E9A0: jz      short loc_65E9EC
 0x65E9A2: cmp     byte ptr ds:0B3BB04h, 0
 0x65E9A9: jz      short loc_65E9EC
 0x65E9AB: mov     ecx, esi
-0x65E9AD: call    Actor_GetCurrentAction
+0x65E9AD: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x65E9B2: cmp     eax, 5
 0x65E9B5: jz      short loc_65E9EC
 0x65E9B7: push    0; a3
 0x65E9B9: push    4; a2
 0x65E9BB: mov     ecx, ebx; this
-0x65E9BD: call    InputGlobals__QueryControlState
+0x65E9BD: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x65E9C2: test    eax, eax
 0x65E9C4: jnz     short loc_65E9DF
 0x65E9C6: push    1; a3
 0x65E9C8: push    4; a2
 0x65E9CA: mov     ecx, ebx; this
-0x65E9CC: call    InputGlobals__QueryControlState
+0x65E9CC: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x65E9D1: test    eax, eax
 0x65E9D3: jnz     short loc_65E9DF
 0x65E9D5: pop     edi
@@ -53,19 +53,19 @@
 0x65E9EB: retn
 0x65E9EC: cmp     dword ptr ds:0B3BAF4h, 0
 0x65E9F3: jz      loc_65EB57
-0x65E9F9: push    3
-0x65E9FB: mov     ecx, ebp
-0x65E9FD: call    ActorAnimData_GetAnimGroupFromField8Value
+0x65E9F9: push    3; slot
+0x65E9FB: mov     ecx, ebp; this
+0x65E9FD: call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.
 0x65EA02: push    eax
-0x65EA03: call    sub_51AC80
+0x65EA03: call    AnimGroup_UsesAttackOrCastNoteTemplate; Returns true when the encoded key is not group 0xFF and the fixed Oblivion group record's note-template class is 4, 5, 6, or 7. Those classes cover AttackLeft/Right, power attacks, BlockAttack, AttackBow, and cast groups. This is a fixed-table classifier, not dynamic group registration.
 0x65EA08: add     esp, 4
 0x65EA0B: test    al, al
 0x65EA0D: jz      loc_65EADE
-0x65EA13: push    3
-0x65EA15: mov     ecx, ebp
-0x65EA17: call    ActorAnimData_GetAnimGroupFromField8Value
+0x65EA13: push    3; slot
+0x65EA15: mov     ecx, ebp; this
+0x65EA17: call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.
 0x65EA1C: push    eax
-0x65EA1D: call    sub_51ACC0
+0x65EA1D: call    AnimGroup_UsesPowerOrCastNoteTemplate; Returns true when the encoded key is not group 0xFF and its fixed group record uses note-template class 5. In Oblivion's 43 records that is AttackPower..AttackRightPower plus CastSelf/Touch/Target and their Alt variants.
 0x65EA22: add     esp, 4
 0x65EA25: test    al, al
 0x65EA27: jnz     loc_65EF38
@@ -74,30 +74,30 @@
 0x65EA32: mov     eax, [edx+138h]
 0x65EA38: call    eax
 0x65EA3A: test    al, al
-0x65EA3C: push    3
-0x65EA3E: mov     ecx, ebp
+0x65EA3C: push    3; slot
+0x65EA3E: mov     ecx, ebp; this
 0x65EA40: jz      short loc_65EA92
-0x65EA42: call    ActorAnimData_GetSomethingFromField8Value
+0x65EA42: call    ActorAnimData_GetSlotActionState; Reads the per-slot action/state dword at ActorAnimData +0x48 + 4*normalizedSlot. Native aliases slot 5 to slot 0 and slot 6 to slot 3.
 0x65EA47: cmp     eax, 3
 0x65EA4A: jnz     loc_65EF38
 0x65EA50: mov     ecx, esi
-0x65EA52: call    Actor_GetCurrentAction
+0x65EA52: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x65EA57: cmp     eax, 5
 0x65EA5A: jnz     short loc_65EA6E
-0x65EA5C: push    3
-0x65EA5E: mov     ecx, ebp
-0x65EA60: call    ActorAnimData_GetSomethingFromField8Value
+0x65EA5C: push    3; slot
+0x65EA5E: mov     ecx, ebp; this
+0x65EA60: call    ActorAnimData_GetSlotActionState; Reads the per-slot action/state dword at ActorAnimData +0x48 + 4*normalizedSlot. Native aliases slot 5 to slot 0 and slot 6 to slot 3.
 0x65EA65: cmp     eax, 3
 0x65EA68: jle     loc_65EF38
 0x65EA6E: fldz
-0x65EA70: mov     ecx, offset flt_B370B0
+0x65EA70: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+3D8h)
 0x65EA75: fstp    dword ptr [esi+640h]
 0x65EA7B: mov     edi, 13h
 0x65EA80: call    GameSetting_GetSafeFloatPointer
 0x65EA85: fld     dword ptr [eax]
 0x65EA87: fstp    dword ptr ds:0B3BAFCh
 0x65EA8D: jmp     loc_65EC36
-0x65EA92: call    ActorAnimData_GetSomethingFromField8Value
+0x65EA92: call    ActorAnimData_GetSlotActionState; Reads the per-slot action/state dword at ActorAnimData +0x48 + 4*normalizedSlot. Native aliases slot 5 to slot 0 and slot 6 to slot 3.
 0x65EA97: cmp     eax, 2
 0x65EA9A: jnz     loc_65EF38
 0x65EAA0: mov     eax, ds:0B3BAF4h
@@ -111,7 +111,7 @@
 0x65EABF: push    offset off_A70EA4; Str2
 0x65EAC4: push    3; MaxCount
 0x65EAC6: mov     ecx, ebp
-0x65EAC8: call    sub_472720
+0x65EAC8: call    ActorAnimData_FindFirstTextKeyWithPrefix; Searches the active BSAnimGroupSequence at ActorAnimData +0xA0 + 4*slot. Walks its NiTextKeyExtraData [time,string] entries and returns the zero-based index of the first case-insensitive string-prefix match; optionally writes that key's time. Returns 0xFFFFFFFF for a missing sequence/prefix, empty prefix, or no match. Observed with prefix "a:l" in combat/player attack selection.
 0x65EACD: mov     edi, eax
 0x65EACF: sub     edi, 0FFFFFFFFh
 0x65EAD2: neg     edi
@@ -125,12 +125,12 @@
 0x65EAEB: test    al, al
 0x65EAED: jz      short loc_65EB17
 0x65EAEF: mov     ecx, esi
-0x65EAF1: call    Actor_GetCurrentAction
+0x65EAF1: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x65EAF6: cmp     eax, 5
 0x65EAF9: jnz     short loc_65EB0D
-0x65EAFB: push    3
-0x65EAFD: mov     ecx, ebp
-0x65EAFF: call    ActorAnimData_GetSomethingFromField8Value
+0x65EAFB: push    3; slot
+0x65EAFD: mov     ecx, ebp; this
+0x65EAFF: call    ActorAnimData_GetSlotActionState; Reads the per-slot action/state dword at ActorAnimData +0x48 + 4*normalizedSlot. Native aliases slot 5 to slot 0 and slot 6 to slot 3.
 0x65EB04: cmp     eax, 3
 0x65EB07: jle     loc_65EF38
 0x65EB0D: mov     edi, 13h
@@ -147,7 +147,7 @@
 0x65EB3C: push    ecx; Str2
 0x65EB3D: push    0; MaxCount
 0x65EB3F: mov     ecx, ebp
-0x65EB41: call    sub_4727E0
+0x65EB41: call    ActorAnimData_GetNextTextKeySuffixChar; Searches the active sequence at ActorAnimData +0xA0 + 4*slot for the first case-insensitive prefix match whose text-key time is >= sequence current time at +0x3C. Optionally writes the matched time and returns tolower(text[prefixLength]); returns 0 when absent. Observed with "m:" and compared with suffix 'l' to choose left/right attacks.
 0x65EB46: xor     edx, edx
 0x65EB48: cmp     al, 6Ch ; 'l'
 0x65EB4A: setnz   dl
@@ -157,7 +157,7 @@
 0x65EB57: push    1; a3
 0x65EB59: push    4; a2
 0x65EB5B: mov     ecx, ebx; this
-0x65EB5D: call    InputGlobals__QueryControlState
+0x65EB5D: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x65EB62: test    eax, eax
 0x65EB64: jz      loc_65ECF4
 0x65EB6A: cmp     byte ptr ds:0B3BAEBh, 0
@@ -179,36 +179,36 @@
 0x65EBA3: test    al, al
 0x65EBA5: jz      short loc_65EBEE
 0x65EBA7: mov     ecx, esi
-0x65EBA9: call    Actor_GetCurrentAction
+0x65EBA9: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x65EBAE: cmp     eax, 4
 0x65EBB1: jz      short loc_65EBBF
 0x65EBB3: mov     ecx, esi
-0x65EBB5: call    Actor_GetCurrentAction
+0x65EBB5: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x65EBBA: cmp     eax, 5
 0x65EBBD: jnz     short loc_65EBCD
-0x65EBBF: push    3
-0x65EBC1: mov     ecx, ebp
-0x65EBC3: call    ActorAnimData_GetSomethingFromField8Value
+0x65EBBF: push    3; slot
+0x65EBC1: mov     ecx, ebp; this
+0x65EBC3: call    ActorAnimData_GetSlotActionState; Reads the per-slot action/state dword at ActorAnimData +0x48 + 4*normalizedSlot. Native aliases slot 5 to slot 0 and slot 6 to slot 3.
 0x65EBC8: cmp     eax, 3
 0x65EBCB: jle     short loc_65EC1D
 0x65EBCD: fldz
-0x65EBCF: mov     ecx, offset flt_B370B0
+0x65EBCF: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+3D8h)
 0x65EBD4: fstp    dword ptr [esi+640h]
 0x65EBDA: mov     edi, 13h
 0x65EBDF: call    GameSetting_GetSafeFloatPointer
 0x65EBE4: fld     dword ptr [eax]
 0x65EBE6: fstp    dword ptr ds:0B3BAFCh
 0x65EBEC: jmp     short loc_65EC1D
-0x65EBEE: push    3
-0x65EBF0: mov     ecx, ebp
-0x65EBF2: call    ActorAnimData_GetAnimGroupFromField8Value
+0x65EBEE: push    3; slot
+0x65EBF0: mov     ecx, ebp; this
+0x65EBF2: call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.
 0x65EBF7: push    eax
-0x65EBF8: call    sub_51AC80
+0x65EBF8: call    AnimGroup_UsesAttackOrCastNoteTemplate; Returns true when the encoded key is not group 0xFF and the fixed Oblivion group record's note-template class is 4, 5, 6, or 7. Those classes cover AttackLeft/Right, power attacks, BlockAttack, AttackBow, and cast groups. This is a fixed-table classifier, not dynamic group registration.
 0x65EBFD: add     esp, 4
 0x65EC00: test    al, al
 0x65EC02: jz      loc_65ECD2
 0x65EC08: mov     ecx, esi
-0x65EC0A: call    Actor_IsSneaking
+0x65EC0A: call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.
 0x65EC0F: test    al, al
 0x65EC11: jnz     short loc_65EC1D
 0x65EC13: mov     dword ptr ds:0B3BAF4h, 1
@@ -218,14 +218,14 @@
 0x65EC2A: cmp     edi, 0FFh
 0x65EC30: jz      loc_65EF38
 0x65EC36: mov     ecx, esi
-0x65EC38: call    Actor_GetCurrentAction
+0x65EC38: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x65EC3D: cmp     eax, 6
 0x65EC40: jnz     short loc_65EC4B
-0x65EC42: push    0; float
-0x65EC44: mov     ecx, esi
-0x65EC46: call    sub_5F4AE0
+0x65EC42: push    0; shouldBlock
+0x65EC44: mov     ecx, esi; this
+0x65EC46: call    Actor_UpdateBlockingState; Starts or stops the actor blocking animation/current-action state and mirrors the result to CombatController byte +0x49. Native ABI is Actor in ECX plus one shouldBlock byte.
 0x65EC4B: mov     ecx, esi
-0x65EC4D: call    Actor_IsSneaking
+0x65EC4D: call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.
 0x65EC52: test    al, al
 0x65EC54: jz      short loc_65EC96
 0x65EC56: mov     ecx, [esi+58h]
@@ -240,13 +240,13 @@
 0x65EC72: call    eax
 0x65EC74: test    al, al
 0x65EC76: jnz     short loc_65EC96
-0x65EC78: mov     ecx, esi
-0x65EC7A: call    Actor_IsSwimming
+0x65EC78: mov     ecx, esi; this
+0x65EC7A: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x65EC7F: test    al, al
 0x65EC81: jnz     short loc_65EC96
-0x65EC83: push    1Ah
-0x65EC85: mov     ecx, esi
-0x65EC87: call    Actor_GetSkillMasteryLevel
+0x65EC83: push    1Ah; actorValue
+0x65EC85: mov     ecx, esi; this
+0x65EC87: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x65EC8C: cmp     eax, 1
 0x65EC8F: jle     short loc_65EC96
 0x65EC91: mov     edi, 16h
@@ -254,7 +254,7 @@
 0x65EC98: cmp     edi, 16h
 0x65EC9B: jnz     loc_65EEEF
 0x65ECA1: mov     ecx, esi
-0x65ECA3: call    Actor_IsSneaking
+0x65ECA3: call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.
 0x65ECA8: test    al, al
 0x65ECAA: jnz     loc_65EEC6
 0x65ECB0: mov     ecx, [esi+58h]
@@ -271,7 +271,7 @@
 0x65ECD9: push    eax; Str2
 0x65ECDA: push    0; MaxCount
 0x65ECDC: mov     ecx, ebp
-0x65ECDE: call    sub_4727E0
+0x65ECDE: call    ActorAnimData_GetNextTextKeySuffixChar; Searches the active sequence at ActorAnimData +0xA0 + 4*slot for the first case-insensitive prefix match whose text-key time is >= sequence current time at +0x3C. Optionally writes the matched time and returns tolower(text[prefixLength]); returns 0 when absent. Observed with "m:" and compared with suffix 'l' to choose left/right attacks.
 0x65ECE3: xor     ecx, ecx
 0x65ECE5: cmp     al, 6Ch ; 'l'
 0x65ECE7: setnz   cl
@@ -281,7 +281,7 @@
 0x65ECF4: push    0; a3
 0x65ECF6: push    4; a2
 0x65ECF8: mov     ecx, ebx; this
-0x65ECFA: call    InputGlobals__QueryControlState
+0x65ECFA: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x65ECFF: test    eax, eax
 0x65ED01: jz      loc_65EF38
 0x65ED07: mov     ecx, [esi+58h]
@@ -299,20 +299,20 @@
 0x65ED36: test    al, al
 0x65ED38: jz      short loc_65ED9F
 0x65ED3A: mov     ecx, esi
-0x65ED3C: call    Actor_GetCurrentAction
+0x65ED3C: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x65ED41: cmp     eax, 4
 0x65ED44: jz      short loc_65ED52
 0x65ED46: mov     ecx, esi
-0x65ED48: call    Actor_GetCurrentAction
+0x65ED48: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x65ED4D: cmp     eax, 5
 0x65ED50: jnz     short loc_65ED60
-0x65ED52: push    3
-0x65ED54: mov     ecx, ebp
-0x65ED56: call    ActorAnimData_GetSomethingFromField8Value
+0x65ED52: push    3; slot
+0x65ED54: mov     ecx, ebp; this
+0x65ED56: call    ActorAnimData_GetSlotActionState; Reads the per-slot action/state dword at ActorAnimData +0x48 + 4*normalizedSlot. Native aliases slot 5 to slot 0 and slot 6 to slot 3.
 0x65ED5B: cmp     eax, 3
 0x65ED5E: jle     short loc_65ED7B
 0x65ED60: fldz
-0x65ED62: mov     ecx, offset flt_B370B0
+0x65ED62: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+3D8h)
 0x65ED67: fstp    dword ptr [esi+640h]
 0x65ED6D: mov     edi, 13h
 0x65ED72: call    GameSetting_GetSafeFloatPointer
@@ -330,11 +330,11 @@
 0x65EDA9: call    eax
 0x65EDAB: test    al, al
 0x65EDAD: jnz     loc_65EC2A
-0x65EDB3: push    3
-0x65EDB5: mov     ecx, ebp
-0x65EDB7: call    ActorAnimData_GetAnimGroupFromField8Value
+0x65EDB3: push    3; slot
+0x65EDB5: mov     ecx, ebp; this
+0x65EDB7: call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.
 0x65EDBC: push    eax
-0x65EDBD: call    sub_51ACC0
+0x65EDBD: call    AnimGroup_UsesPowerOrCastNoteTemplate; Returns true when the encoded key is not group 0xFF and its fixed group record uses note-template class 5. In Oblivion's 43 records that is AttackPower..AttackRightPower plus CastSelf/Touch/Target and their Alt variants.
 0x65EDC2: add     esp, 4
 0x65EDC5: test    al, al
 0x65EDC7: jnz     short loc_65EE06
@@ -363,30 +363,30 @@
 0x65EE1A: fnstsw  ax
 0x65EE1C: test    ah, 5
 0x65EE1F: jp      loc_65EC25
-0x65EE25: mov     ecx, esi
-0x65EE27: call    Actor_IsSwimming
+0x65EE25: mov     ecx, esi; this
+0x65EE27: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x65EE2C: test    al, al
 0x65EE2E: jnz     loc_65EC13
-0x65EE34: push    1Ah
-0x65EE36: mov     ecx, esi
-0x65EE38: call    Actor_GetSkillMasteryLevel
+0x65EE34: push    1Ah; actorValue
+0x65EE36: mov     ecx, esi; this
+0x65EE38: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x65EE3D: cmp     eax, 1
 0x65EE40: jg      short loc_65EE51
 0x65EE42: mov     ecx, esi
-0x65EE44: call    sub_5EC180
+0x65EE44: call    MobileObject_IsJumpSuppressedByFallAnimOrInAir; Returns true for swimming/falling style animation groups 0x28..0x2A, or if current character state id == 2 InAir. Player jump path uses this to suppress normal jump handling.
 0x65EE49: test    al, al
 0x65EE4B: jnz     loc_65EC13
-0x65EE51: push    3
-0x65EE53: mov     ecx, ebp
-0x65EE55: call    ActorAnimData_GetAnimGroupFromField8Value
+0x65EE51: push    3; slot
+0x65EE53: mov     ecx, ebp; this
+0x65EE55: call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.
 0x65EE5A: push    eax
-0x65EE5B: call    sub_51AC80
+0x65EE5B: call    AnimGroup_UsesAttackOrCastNoteTemplate; Returns true when the encoded key is not group 0xFF and the fixed Oblivion group record's note-template class is 4, 5, 6, or 7. Those classes cover AttackLeft/Right, power attacks, BlockAttack, AttackBow, and cast groups. This is a fixed-table classifier, not dynamic group registration.
 0x65EE60: add     esp, 4
 0x65EE63: test    al, al
 0x65EE65: jz      short loc_65EE9D
-0x65EE67: push    3
-0x65EE69: mov     ecx, ebp
-0x65EE6B: call    sub_4706E0
+0x65EE67: push    3; slotSelector
+0x65EE69: mov     ecx, ebp; this
+0x65EE6B: call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].
 0x65EE70: fld     dword ptr [eax+48h]
 0x65EE73: fadd    dword ptr [ebp+94h]
 0x65EE79: fstp    [esp+20h+var_8]
@@ -411,7 +411,7 @@
 0x65EEBF: jz      short loc_65EEC6
 0x65EEC1: mov     edi, 1Ah
 0x65EEC6: push    0; Seed
-0x65EEC8: call    GetRandomLargeInteger?
+0x65EEC8: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x65EECD: mov     [esp+24h+var_8], eax
 0x65EED1: fild    [esp+24h+var_8]
 0x65EED5: add     esp, 4
@@ -424,7 +424,7 @@
 0x65EEED: mov     bl, 1
 0x65EEEF: push    edi
 0x65EEF0: mov     ecx, esi
-0x65EEF2: call    sub_5F48D0
+0x65EEF2: call    PlayerCharacter_TryStartAttackAnimGroup; Accepted later attack input calls PlayerCharacter_TryStartAttackAnimGroup; it schedules a fresh AttackBow cycle. Release processing itself does not reload/nock.
 0x65EEF7: test    al, al
 0x65EEF9: jz      short loc_65EF21
 0x65EEFB: test    bl, bl
@@ -450,13 +450,13 @@
 0x65EF38: push    0; a3
 0x65EF3A: push    4; a2
 0x65EF3C: mov     ecx, ebx; this
-0x65EF3E: call    InputGlobals__QueryControlState
+0x65EF3E: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x65EF43: test    eax, eax
 0x65EF45: jnz     short loc_65EF5A
 0x65EF47: push    1; a3
 0x65EF49: push    4; a2
 0x65EF4B: mov     ecx, ebx; this
-0x65EF4D: call    InputGlobals__QueryControlState
+0x65EF4D: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x65EF52: test    eax, eax
 0x65EF54: jz      loc_65F056
 0x65EF5A: mov     ecx, [esi+58h]
@@ -473,27 +473,27 @@
 0x65EF7E: jnz     loc_65F056
 0x65EF84: cmp     ds:0B3BAEBh, al
 0x65EF8A: jnz     loc_65F056
-0x65EF90: push    3
-0x65EF92: mov     ecx, ebp
-0x65EF94: call    ActorAnimData_GetAnimGroupFromField8Value
+0x65EF90: push    3; slot
+0x65EF92: mov     ecx, ebp; this
+0x65EF94: call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.
 0x65EF99: push    eax
-0x65EF9A: call    sub_51AC80
+0x65EF9A: call    AnimGroup_UsesAttackOrCastNoteTemplate; Returns true when the encoded key is not group 0xFF and the fixed Oblivion group record's note-template class is 4, 5, 6, or 7. Those classes cover AttackLeft/Right, power attacks, BlockAttack, AttackBow, and cast groups. This is a fixed-table classifier, not dynamic group registration.
 0x65EF9F: add     esp, 4
 0x65EFA2: test    al, al
 0x65EFA4: jz      loc_65F070
-0x65EFAA: push    3
-0x65EFAC: mov     ecx, ebp
-0x65EFAE: call    ActorAnimData_GetAnimGroupFromField8Value
+0x65EFAA: push    3; slot
+0x65EFAC: mov     ecx, ebp; this
+0x65EFAE: call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.
 0x65EFB3: push    eax
-0x65EFB4: call    sub_51ACC0
+0x65EFB4: call    AnimGroup_UsesPowerOrCastNoteTemplate; Returns true when the encoded key is not group 0xFF and its fixed group record uses note-template class 5. In Oblivion's 43 records that is AttackPower..AttackRightPower plus CastSelf/Touch/Target and their Alt variants.
 0x65EFB9: add     esp, 4
 0x65EFBC: test    al, al
 0x65EFBE: jnz     loc_65F070
 0x65EFC4: cmp     dword ptr ds:0B3BAF4h, 0
 0x65EFCB: jnz     loc_65F070
-0x65EFD1: push    3
-0x65EFD3: mov     ecx, ebp
-0x65EFD5: call    sub_4706E0
+0x65EFD1: push    3; slotSelector
+0x65EFD3: mov     ecx, ebp; this
+0x65EFD5: call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].
 0x65EFDA: mov     ecx, [esi+58h]
 0x65EFDD: mov     edx, [ecx]
 0x65EFDF: mov     edi, eax
@@ -501,15 +501,15 @@
 0x65EFE4: mov     eax, [edx+138h]
 0x65EFEA: fadd    dword ptr [ebp+94h]
 0x65EFF0: fstp    [esp+20h+var_4]
-0x65EFF4: call    eax
+0x65EFF4: call    eax; Bow-control branch tests the same process +0xF4 flag. When set, slot 3 must be at phase 2 and the attack-input latch must be armed before update state 3 is sent to both perspectives.
 0x65EFF6: test    al, al
 0x65EFF8: jz      short loc_65F013
-0x65EFFA: push    3
-0x65EFFC: mov     ecx, ebp
-0x65EFFE: call    ActorAnimData_GetSomethingFromField8Value
+0x65EFFA: push    3; slot
+0x65EFFC: mov     ecx, ebp; this
+0x65EFFE: call    ActorAnimData_GetSlotActionState; Reads the per-slot action/state dword at ActorAnimData +0x48 + 4*normalizedSlot. Native aliases slot 5 to slot 0 and slot 6 to slot 3.
 0x65F003: cmp     eax, 2
 0x65F006: jnz     short loc_65F070
-0x65F008: cmp     byte ptr ds:0B3BB84h, 0
+0x65F008: cmp     byte ptr ds:0B3BB84h, 0; Native AttackBow Hold gate: current slot-3 required-note phase must equal 2 and the attack-control latch at 0xB3BB84 must be set.
 0x65F00F: jz      short loc_65F070
 0x65F011: jmp     short loc_65F036
 0x65F013: fldz
@@ -525,12 +525,12 @@
 0x65F030: call    eax
 0x65F032: test    al, al
 0x65F034: jnz     short loc_65F070
-0x65F036: push    3
-0x65F038: mov     ecx, ebp
-0x65F03A: call    sub_4706D0
-0x65F03F: mov     ecx, [esp+20h+var_C]
-0x65F043: push    3
-0x65F045: call    sub_4706D0
+0x65F036: push    3; Control-to-animation bridge: write ActorAnimData update-control state 3 to third-person and first-person data. This does not directly write the slot phase; the required-note scheduler advances it.
+0x65F038: mov     ecx, ebp; this
+0x65F03A: call    ActorAnimData_SetUpdateState; Oblivion ActorAnimData update-control setter: stores one byte at +0x90. Observed callers write state 3 for attack/action synchronization and state 5 from Cmd_SkipAnim. Do not infer KF unloading or map mutation from this setter.
+0x65F03F: mov     ecx, [esp+20h+var_C]; this
+0x65F043: push    3; state
+0x65F045: call    ActorAnimData_SetUpdateState; Oblivion ActorAnimData update-control setter: stores one byte at +0x90. Observed callers write state 3 for attack/action synchronization and state 5 from Cmd_SkipAnim. Do not infer KF unloading or map mutation from this setter.
 0x65F04A: mov     al, [esp+20h+var_D]
 0x65F04E: pop     edi
 0x65F04F: pop     esi
@@ -540,7 +540,7 @@
 0x65F055: retn
 0x65F056: mov     ecx, esi
 0x65F058: mov     byte ptr ds:0B3BB84h, 0
-0x65F05F: call    Actor_GetCurrentAction
+0x65F05F: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x65F064: cmp     eax, 0FFFFFFFFh
 0x65F067: jnz     short loc_65F070
 0x65F069: mov     byte ptr ds:0B3BAEBh, 0

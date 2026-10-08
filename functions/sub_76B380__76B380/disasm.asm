@@ -27,12 +27,12 @@
 0x76B3C5: jnz     short loc_76B3B7
 0x76B3C7: xor     edx, edx
 0x76B3C9: test    edx, edx
-0x76B3CB: mov     [esp+10h+var_4], edx
+0x76B3CB: mov     [esp+10h+node], edx
 0x76B3CF: jz      short loc_76B3DD
-0x76B3D1: lea     ecx, [esp+10h+var_4]
-0x76B3D5: push    ecx
-0x76B3D6: mov     ecx, ebx
-0x76B3D8: call    sub_7AA860
+0x76B3D1: lea     ecx, [esp+10h+node]
+0x76B3D5: push    ecx; node
+0x76B3D6: mov     ecx, ebx; list
+0x76B3D8: call    NiTPointerList_RemoveNode; [Verified] Generic NiTPointerList node-removal helper. Unlinks the supplied node, updates head/tail and neighboring links, invokes the list's FreeNode vfunc, decrements item count, and returns the removed node's data pointer.
 0x76B3DD: cmp     dword ptr [edi+910h], 0
 0x76B3E4: jnz     short loc_76B395
 0x76B3E6: pop     esi

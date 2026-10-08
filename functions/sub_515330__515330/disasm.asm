@@ -33,7 +33,7 @@
 0x5153B0: push    edx; a3
 0x5153B1: push    ecx; a2
 0x5153B2: push    eax; a1
-0x5153B3: call    Script_ExtractArgs
+0x5153B3: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x5153B8: add     esp, 20h
 0x5153BB: xor     edi, edi
 0x5153BD: test    al, al
@@ -162,7 +162,7 @@
 0x51558E: call    edx
 0x515590: test    eax, eax
 0x515592: jz      short loc_5155A6
-0x515594: cmp     eax, offset dword_B3F95C
+0x515594: cmp     eax, offset stru_B3F95C
 0x515599: jz      loc_515668
 0x51559F: mov     eax, [eax+4]
 0x5155A2: test    eax, eax
@@ -260,12 +260,12 @@
 0x5156B0: push    edx
 0x5156B1: push    eax
 0x5156B2: lea     ecx, [esp+45Ch+var_424]
-0x5156B6: call    sub_7C6A20
+0x5156B6: call    NiTRefPointerList_InsertBeforePosition
 0x5156BB: jmp     short loc_5156CB
 0x5156BD: lea     eax, [esp+454h+var_42C]
 0x5156C1: push    eax
 0x5156C2: lea     ecx, [esp+458h+var_424]
-0x5156C6: call    sub_7C16B0
+0x5156C6: call    NiTRefPointerList__AddTail; Generic refcounted NiT pointer-list AddTail helper. Allocates a node, assigns/increments its object pointer, links it after the old tail, and updates head/tail/count.
 0x5156CB: test    esi, esi
 0x5156CD: mov     byte ptr [esp+454h+var_4], 2
 0x5156D5: jz      short loc_5156EF
@@ -405,7 +405,7 @@
 0x515860: test    ebp, ebp
 0x515862: jnz     loc_51573A
 0x515868: lea     ecx, [esp+454h+var_424]
-0x51586C: call    NiTPointerList__FreeAllNodes
+0x51586C: call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.
 0x515871: push    offset aDumptexturep_0; ">>> DUMPTEXTUREPALETTE results"
 0x515876: call    PrintError
 0x51587B: mov     dl, [esp+458h+var_439]
@@ -454,3 +454,24 @@
 0x515906: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x51590B: add     esp, 440h
 0x515911: retn
+0x9B71E0: lea     ecx, [ebp-434h]; slot
+0x9B71E6: jmp     NiPointerSlot_Release
+0x9B71EB: lea     ecx, [ebp-424h]
+0x9B71F1: jmp     j_??1?$NiTPointerList@V?$NiPointer@VNiSourceTexture@@@@@@UAE@XZ; NiTPointerList<NiPointer<NiSourceTexture>>::~NiTPointerList<NiPointer<NiSourceTexture>>(void)
+0x9B71F6: lea     ecx, [ebp-42Ch]; slot
+0x9B71FC: jmp     NiPointerSlot_Release
+0x9B7201: lea     ecx, [ebp-414h]; slot
+0x9B7207: jmp     NiPointerSlot_Release
+0x9B720C: lea     ecx, [ebp-438h]; slot
+0x9B7212: jmp     NiPointerSlot_Release
+0x9B7217: mov     edx, [esp+arg_4]
+0x9B721B: lea     eax, [edx-444h]
+0x9B7221: mov     ecx, [edx-448h]
+0x9B7227: xor     ecx, eax
+0x9B7229: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B722E: add     eax, 10h
+0x9B7231: mov     ecx, [edx-4]
+0x9B7234: xor     ecx, eax
+0x9B7236: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B723B: mov     eax, offset stru_AE1E38
+0x9B7240: jmp     ___CxxFrameHandler3

@@ -1,52 +1,90 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "NiNodeVtbl",
+  "definition": "struct NiNodeVtbl\n{\nNiAVObjectVtbl super;\nvoid (__thiscall *AddObject)(NiNode This, NiAVObject *nChild, UInt8 FirstAvail);\nNiAVObject *(__thiscall *RemoveObject)(NiNode *This, NiAVObject **RemovedChild, NiAVObject *nChild);\nNiAVObject *(__thiscall *RemoveObjectAt)(NiNode *This, NiAVObject **RemovedChild, UInt32 Index);\nNiAVObject *(__thiscall *SetObjectAt)(NiNode This, NiAVObject **SetChild, UInt32 Index, NiAVObject *nChild);\nvoid (__thiscall *Unk_25)(NiNode *);\nbool (__thiscall *Unk_26)(NiNode *);\n}\n",
   "id": 18374686479671995592,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00053.",
       "name": "super",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 132
+      "size": 132,
+      "type": "NiAVObjectVtbl"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00054.",
       "name": "AddObject",
       "offset": 132,
       "offset_hex": "0x84",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiNode This, NiAVObject *nChild, UInt8 FirstAvail)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00055.",
       "name": "RemoveObject",
       "offset": 136,
       "offset_hex": "0x88",
-      "size": 4
+      "size": 4,
+      "type": "NiAVObject *(__thiscall *)(NiNode *This, NiAVObject **RemovedChild, NiAVObject *nChild)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00056.",
       "name": "RemoveObjectAt",
       "offset": 140,
-      "offset_hex": "0x8c",
-      "size": 4
+      "offset_hex": "0x8C",
+      "size": 4,
+      "type": "NiAVObject *(__thiscall *)(NiNode *This, NiAVObject **RemovedChild, UInt32 Index)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00057.",
       "name": "SetObjectAt",
       "offset": 144,
       "offset_hex": "0x90",
-      "size": 4
+      "size": 4,
+      "type": "NiAVObject *(__thiscall *)(NiNode This, NiAVObject **SetChild, UInt32 Index, NiAVObject *nChild)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00058.",
       "name": "Unk_25",
       "offset": 148,
       "offset_hex": "0x94",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiNode *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00059.",
       "name": "Unk_26",
       "offset": 152,
       "offset_hex": "0x98",
-      "size": 4
+      "size": 4,
+      "type": "bool (__thiscall *)(NiNode *)"
     }
   ],
   "name": "NiNodeVtbl",
+  "ordinal": 9594,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 156
 }

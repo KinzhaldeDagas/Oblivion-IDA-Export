@@ -7,7 +7,7 @@
 0x895069: mov     ecx, [esi+8]
 0x89506C: test    ecx, ecx
 0x89506E: jz      short loc_895077
-0x895070: call    sub_8AC0C0
+0x895070: call    bhkCollisionWrapper_GetHavokObject; bhk collision wrapper accessor: returns stored low-level Havok object pointer at wrapper+0x30.
 0x895075: jmp     short loc_895079
 0x895077: xor     eax, eax
 0x895079: mov     eax, [eax+8]
@@ -48,7 +48,7 @@
 0x8950D9: mov     ecx, [esi+8]
 0x8950DC: test    ecx, ecx
 0x8950DE: jz      short loc_8950EC
-0x8950E0: call    sub_8ABDB0
+0x8950E0: call    sub_8ABDB0; TES4 authoritative: returns collision wrapper contact header at this+0x74. Header layout observed as +0 entries pointer, +4 count, +8 capacity/flags.
 0x8950E5: mov     dword ptr [eax+4], 0
 0x8950EC: test    ebx, ebx
 0x8950EE: jz      loc_895187
@@ -64,7 +64,7 @@
 0x895119: push    ecx
 0x89511A: mov     ecx, esi
 0x89511C: fstp    [esp+10h+var_10]; float
-0x89511F: call    sub_894BD0
+0x89511F: call    bhkCharacterController_SetTargetSize
 0x895124: fld     dword ptr ds:0A968E0h
 0x89512A: push    ecx
 0x89512B: mov     ecx, esi
@@ -74,7 +74,7 @@
 0x895137: push    ecx
 0x895138: fstp    [esp+10h+var_10]; float
 0x89513B: mov     ecx, esi
-0x89513D: call    sub_894BD0
+0x89513D: call    bhkCharacterController_SetTargetSize
 0x895142: mov     ecx, [esi+364h]
 0x895148: mov     edx, [ecx]
 0x89514A: mov     eax, [edx+5Ch]

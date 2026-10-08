@@ -98,7 +98,7 @@
 0x8E1F7E: shr     eax, 7
 0x8E1F81: and     ebx, 0FFFEh
 0x8E1F87: shr     ecx, 7
-0x8E1F8A: mov     [esp+60h+var_18], ebx
+0x8E1F8A: mov     dword ptr [esp+60h+var_18], ebx
 0x8E1F8E: movzx   ebx, ax
 0x8E1F91: movzx   eax, cx
 0x8E1F94: mov     ecx, [esi+70h]
@@ -191,7 +191,6 @@
 0x8E20A5: cmp     ecx, [esp+60h+var_20]
 0x8E20A9: jnb     short loc_8E20DB
 0x8E20AB: jmp     short loc_8E20B0
-0x8E20AD: align 10h
 0x8E20B0: movzx   ecx, word ptr [eax+2]
 0x8E20B4: mov     edi, ecx
 0x8E20B6: and     ecx, 1Fh
@@ -213,7 +212,6 @@
 0x8E20E7: cmp     ecx, ebx
 0x8E20E9: jnb     short loc_8E212A
 0x8E20EB: jmp     short loc_8E20F0
-0x8E20ED: align 10h
 0x8E20F0: test    byte ptr [esp+60h+var_44], 1
 0x8E20F5: jnz     short loc_8E2116
 0x8E20F7: movzx   ecx, word ptr [eax+2]
@@ -275,7 +273,7 @@
 0x8E21B3: sub     edx, ebx
 0x8E21B5: mov     ebx, [esi+64h]
 0x8E21B8: add     eax, edx
-0x8E21BA: mov     edx, [esp+60h+var_18]
+0x8E21BA: mov     edx, dword ptr [esp+60h+var_18]
 0x8E21BE: sar     eax, 2
 0x8E21C1: lea     edi, [esi+64h]
 0x8E21C4: mov     word ptr [esp+60h+var_34+8], ax

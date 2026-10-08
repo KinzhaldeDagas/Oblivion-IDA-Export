@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x55F4C0",
-    "line": "push    ebx",
+    "line": "push    ebx; LockFreeMap vtable slot +0x0C: computes bucket/hash then inserts or updates key/value through 0x55F120.",
     "mnemonic": "push",
     "size": 1
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x55F4FC",
-    "line": "call    sub_55F120",
+    "line": "call    sub_55F120; LockFreeMap insert/update core: insert new 12-byte node or update existing value when replace flag is set.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,4 +1,4 @@
-0x7D79C0: push    0FFFFFFFFh
+0x7D79C0: push    0FFFFFFFFh; Verified (Oblivion): destructor releases the reference-counted object at TextureEffectData+0x08, then restores the NiRefObject vtable. This confirms sourceTexture_08's ownership and the base-object prefix in OblivionTextureEffectData.
 0x7D79C2: push    offset ??0TextureEffectData@BSShaderPPLightingProperty@@QAE@XZ_SEH
 0x7D79C7: mov     eax, large fs:0
 0x7D79CD: push    eax
@@ -48,7 +48,7 @@
 0x7D7A42: push    1
 0x7D7A44: mov     ecx, esi
 0x7D7A46: call    eax
-0x7D7A48: push    offset NiRefObject_objcount; lpAddend
+0x7D7A48: push    0B3FD64h; lpAddend
 0x7D7A4D: mov     dword ptr [edi], offset ??_7NiRefObject@@6B@; const NiRefObject::`vftable'
 0x7D7A53: call    ebp ; InterlockedDecrement
 0x7D7A55: mov     ecx, dword ptr [esp+20h+var_C]
@@ -59,3 +59,15 @@
 0x7D7A63: pop     ebp
 0x7D7A64: add     esp, 10h
 0x7D7A67: retn
+0x9CA7B0: mov     ecx, [ebp-10h]
+0x9CA7B3: jmp     NiRefObject_destr
+0x9CA7B8: mov     ecx, [ebp-10h]
+0x9CA7BB: add     ecx, 8; slot
+0x9CA7BE: jmp     NiPointerSlot_Release
+0x9CA7C3: mov     edx, [esp+arg_4]
+0x9CA7C7: lea     eax, [edx-10h]
+0x9CA7CA: mov     ecx, [edx-14h]
+0x9CA7CD: xor     ecx, eax
+0x9CA7CF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA7D4: mov     eax, offset stru_AF2E60
+0x9CA7D9: jmp     ___CxxFrameHandler3

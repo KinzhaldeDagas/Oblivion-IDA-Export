@@ -107,7 +107,7 @@
 0x95EAB5: mov     edi, [esp+58h+arg_14]
 0x95EAB9: fstp    st(2)
 0x95EABB: fstp    st
-0x95EABD: push    offset Vector3_InitValue?; int
+0x95EABD: push    offset g_zeroNiPoint3; int
 0x95EAC2: fstp    st
 0x95EAC4: push    ecx
 0x95EAC5: fstp    dword ptr [edi]
@@ -198,7 +198,7 @@
 0x95EBB4: mov     edi, [esp+58h+arg_14]
 0x95EBB8: fstp    st(1)
 0x95EBBA: fstp    st
-0x95EBBC: push    offset Vector3_InitValue?; int
+0x95EBBC: push    offset g_zeroNiPoint3; int
 0x95EBC1: fstp    dword ptr [edi]
 0x95EBC3: push    ecx
 0x95EBC4: fld1

@@ -1,4 +1,4 @@
-BOOL __thiscall sub_4F5ED0(Sky *this)
+BOOL __thiscall Sky_IsRainingByWeatherFlags(Sky *this)
 {
   TESWeather *firstWeather; // eax
   double v2; // st7
@@ -7,27 +7,27 @@ BOOL __thiscall sub_4F5ED0(Sky *this)
   float v5; // [esp+0h] [ebp-4h]
   float v6; // [esp+0h] [ebp-4h]
 
-  firstWeather = this->firstWeather;
-  v2 = dbl_A3F398;
-  if ( firstWeather )
-  {
-    if ( (*((_BYTE *)firstWeather + 0x53) & 4) != 0 )
+  firstWeather = this->firstWeather; /*0x4f5ed1*/
+  v2 = dbl_A3F398; /*0x4f5ed4*/
+  if ( firstWeather ) /*0x4f5ede*/
+  {                                             // Rain helper tests TESWeather+0x53 bit 2 on firstWeather and compares Sky+0xD8 against the first-weather transition threshold at TESWeather+0x4E.
+    if ( (*((_BYTE *)firstWeather + 0x53) & 4) != 0 ) /*0x4f5ee3*/
     {
-      v5 = (dbl_A3F460 - 0.0) * ((double)*((unsigned __int8 *)firstWeather + 0x4E) * v2) + 0.0;
-      if ( v5 < (double)this->weatherPercent )
-        return 1;
+      v5 = (dbl_A3F460 - 0.0) * ((double)*((unsigned __int8 *)firstWeather + 0x4E) * v2) + 0.0; /*0x4f5f07*/
+      if ( v5 < (double)this->weatherPercent ) /*0x4f5f14*/
+        return 1; /*0x4f5f5a*/
     }
   }
-  secondWeather = this->secondWeather;
-  result = 0;
-  if ( secondWeather )
-  {
-    if ( (*((_BYTE *)secondWeather + 0x53) & 4) != 0 )
+  secondWeather = this->secondWeather; /*0x4f5f16*/
+  result = 0; /*0x4f5f51*/
+  if ( secondWeather ) /*0x4f5f1b*/
+  {                                             // Rain helper also tests secondWeather bit 2 and second-weather transition threshold at TESWeather+0x4F.
+    if ( (*((_BYTE *)secondWeather + 0x53) & 4) != 0 ) /*0x4f5f20*/
     {
-      v6 = v2 * (double)*((unsigned __int8 *)secondWeather + 0x4F) * dbl_A48DD8 + dbl_A30E40;
-      if ( v6 > (double)this->weatherPercent )
-        return 1;
+      v6 = v2 * (double)*((unsigned __int8 *)secondWeather + 0x4F) * dbl_A48DD8 + dbl_A30E40; /*0x4f5f42*/
+      if ( v6 > (double)this->weatherPercent ) /*0x4f5f4f*/
+        return 1; /*0x4f5f1b*/
     }
   }
-  return result;
+  return result; /*0x4f5f57*/
 }

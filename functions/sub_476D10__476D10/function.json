@@ -1,19 +1,32 @@
 {
-  "callees_count": 128,
-  "callers_count": 14,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 38,
+  "callers_count": 19,
+  "chunks": [
+    [
+      "0x476D10",
+      "0x4774BD"
+    ]
+  ],
+  "chunks_sha256": "a558d2865c4c0f2a93f14fb4d61d7062a219ef4c43150331a781d4b51e183733",
+  "comment_regular": "Oblivion ActorAnimData scheduler with exact native ABI: this in ECX plus three 4-byte stack arguments, retn 0x0C. ownerActor is at [EBP+8]; all surveyed callers pass the owning Actor/Player, but the native body never dereferences it, so an interior hook's use of that value is a caller-derived contract. deltaTime at [EBP+0x0C] advances ActorAnimData time +0x94 and sequence offsets. explicitTimeOrMinusOne at [EBP+0x10] uses -1.0 for normal ticking; any other value drives an explicit-time scene update/early return. The function drains deferred KF models, maintains power/idle state, samples five slots, and advances required-note templates (class 4 terminal index 3; class 7 terminal index 4).",
+  "comment_repeatable": "Oblivion ActorAnimData scheduler with exact native ABI: this in ECX plus three 4-byte stack arguments, retn 0x0C. ownerActor is at [EBP+8]; all surveyed callers pass the owning Actor/Player, but the native body never dereferences it, so an interior hook's use of that value is a caller-derived contract. deltaTime at [EBP+0x0C] advances ActorAnimData time +0x94 and sequence offsets. explicitTimeOrMinusOne at [EBP+0x10] uses -1.0 for normal ticking; any other value drives an explicit-time scene update/early return. The function drains deferred KF models, maintains power/idle state, samples five slots, and advances required-note templates (class 4 terminal index 3; class 7 terminal index 4).",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_476D10",
+  "display_name": "ActorAnimData_Update",
   "end_ea": "0x4774BD",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "sub_476D10",
+  "name": "ActorAnimData_Update",
   "segment": ".text",
   "sha256": "a558d2865c4c0f2a93f14fb4d61d7062a219ef4c43150331a781d4b51e183733",
   "size": 1965,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x476D10",
-  "type": "int __userpurge@<eax>(AnimSequenceSingle *this@<ecx>, int@<edi>, double st5_0@<st2>, double st6_0@<st1>, double st7_0@<st0>, int, float, float)",
+  "total_chunk_size": 1965,
+  "type": "void __thiscall(ActorAnimData *this, Actor *ownerActor, float deltaTime, float explicitTimeOrMinusOne)",
   "xrefs_from_count": 667,
   "xrefs_to_count": 19
 }

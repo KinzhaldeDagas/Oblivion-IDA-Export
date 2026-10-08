@@ -153,7 +153,7 @@
 0x7145A2: xor     ebp, ebp
 0x7145A4: cmp     dword ptr [esi+260h], 2
 0x7145AB: jnz     short loc_714611
-0x7145AD: push    offset stru_B3FC00; lpCriticalSection
+0x7145AD: push    offset unk_B3FC00; lpCriticalSection
 0x7145B2: call    dword ptr ds:0A2806Ch
 0x7145B8: call    dword ptr ds:0A2808Ch
 0x7145BE: mov     edi, 1
@@ -168,7 +168,7 @@
 0x7145F1: sub     ds:0B3FC7Ch, edi
 0x7145F7: jnz     short loc_7145FF
 0x7145F9: mov     ds:0B3FC78h, ebp
-0x7145FF: push    offset stru_B3FC00; lpCriticalSection
+0x7145FF: push    offset unk_B3FC00; lpCriticalSection
 0x714604: call    dword ptr ds:0A28074h
 0x71460A: pop     edi
 0x71460B: pop     ebp
@@ -178,7 +178,7 @@
 0x714610: retn
 0x714611: mov     ecx, esi
 0x714613: call    sub_7126A0
-0x714618: push    offset stru_B3FC00; lpCriticalSection
+0x714618: push    offset unk_B3FC00; lpCriticalSection
 0x71461D: call    dword ptr ds:0A2806Ch
 0x714623: call    dword ptr ds:0A2808Ch
 0x714629: mov     edi, 1
@@ -193,7 +193,7 @@
 0x71465C: sub     ds:0B3FC7Ch, edi
 0x714662: jnz     short loc_71466A
 0x714664: mov     ds:0B3FC78h, ebp
-0x71466A: push    offset stru_B3FC00; lpCriticalSection
+0x71466A: push    offset unk_B3FC00; lpCriticalSection
 0x71466F: call    dword ptr ds:0A28074h
 0x714675: pop     edi
 0x714676: pop     ebp

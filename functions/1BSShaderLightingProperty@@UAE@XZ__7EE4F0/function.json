@@ -1,10 +1,22 @@
 {
   "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 7,
   "callers_count": 12,
+  "chunks": [
+    [
+      "0x7EE4F0",
+      "0x7EE5D0"
+    ],
+    [
+      "0x9CFBF0",
+      "0x9CFC2C"
+    ]
+  ],
   "chunks_sha256": "89e99f6b05548b86e166f66dc9ed47ccbafaec0ceb2b5a16ad2c7f84492d7d22",
   "comment_regular": "[Verified] On property destruction, this owner drains its +0x80 NiTPointerList<DECAL_DATA*>; each node stores links at +0/+4 and payload at +8. The destructor removes nodes, releases payload smart pointers through DECAL_DATA_ReleaseOwnedReferences, and frees each 0x4C payload. Normal effect teardown instead removes one node through BSShaderLightingProperty_RemoveDecalData before freeing the payload.",
   "comment_repeatable": "[Verified] On property destruction, this owner drains its +0x80 NiTPointerList<DECAL_DATA*>; each node stores links at +0/+4 and payload at +8. The destructor removes nodes, releases payload smart pointers through DECAL_DATA_ReleaseOwnedReferences, and frees each 0x4C payload. Normal effect teardown instead removes one node through BSShaderLightingProperty_RemoveDecalData before freeing the payload.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
   "display_name": "??1BSShaderLightingProperty@@UAE@XZ",
   "end_ea": "0x7EE5D0",
@@ -15,6 +27,7 @@
   "segment": ".text",
   "sha256": "e50a2f08bdb3b8b08dc46de5d948d2bfc247f3a47862bd15d2367ee8248635e6",
   "size": 224,
+  "source_annotation_confidence": "Verified",
   "start_ea": "0x7EE4F0",
   "total_chunk_size": 284,
   "type": "void __thiscall(BSShaderLightingPropertyLayout_t *this)",

@@ -100,7 +100,7 @@
 0x6AB2CA: push    0
 0x6AB2CC: call    TES_GetCurrentCell
 0x6AB2D1: mov     ecx, eax
-0x6AB2D3: call    TESObjectCELL_GetMusicType
+0x6AB2D3: call    TESObjectCELL_GetMusicType; Verified: resolves the music type for a cell by using region-data ID 7, virtual sound-type lookup, and a position/cell cache; falls back to worldspace music when no region sound type is selected.
 0x6AB2D8: movzx   ebp, ax
 0x6AB2DB: jmp     short loc_6AB2DF
 0x6AB2DD: xor     ebp, ebp
@@ -108,7 +108,7 @@
 0x6AB2E0: lea     eax, [esp+41Ch+MultiByteStr]
 0x6AB2E4: push    eax; lpFileName
 0x6AB2E5: mov     ecx, edi
-0x6AB2E7: call    sub_6A8E80
+0x6AB2E7: call    sub_6A8E80; NoCombatMusic research: music type 4 selects Data\Music\Battle\*.mp3.
 0x6AB2EC: test    al, al
 0x6AB2EE: jz      loc_6AB1F3
 0x6AB2F4: lea     ecx, [esp+418h+MultiByteStr]

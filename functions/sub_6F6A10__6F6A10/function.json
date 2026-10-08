@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x6F6A10",
+      "0x6F6A76"
+    ]
+  ],
+  "chunks_sha256": "6831543a9eae753d918d125a12f6219d6739ce3f52af058acc5590cac9df1fe5",
+  "comment_regular": "FaceGen unit generator: lazily reseeds process-global CRT rand() from whole-second time, concatenates four base-32768 digits, and scales the integer by 2^-60 to the exact grid k/2^60 in [0,1).\n\nReturns a pseudo-random unit-interval value assembled from four CRT rand() draws; lazily seeds rand() from time.",
+  "comment_repeatable": "Returns a pseudo-random unit-interval value assembled from four CRT rand() draws; lazily seeds rand() from time.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6F6A10",
+  "display_name": "FaceGen_CRTRandomUnitInterval",
   "end_ea": "0x6F6A76",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "sub_6F6A10",
+  "name": "FaceGen_CRTRandomUnitInterval",
   "segment": ".text",
   "sha256": "6831543a9eae753d918d125a12f6219d6739ce3f52af058acc5590cac9df1fe5",
   "size": 102,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6F6A10",
-  "type": "double()",
+  "total_chunk_size": 102,
+  "type": "double __cdecl()",
   "xrefs_from_count": 36,
   "xrefs_to_count": 2
 }

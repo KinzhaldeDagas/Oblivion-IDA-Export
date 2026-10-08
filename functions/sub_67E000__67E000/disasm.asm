@@ -6,17 +6,17 @@
 0x67E00A: jz      short loc_67E07C
 0x67E00C: cmp     dword ptr [esi+24h], 0
 0x67E010: jz      short loc_67E074
-0x67E012: mov     ecx, edi
-0x67E014: call    TESHealthForm_GetHealth
+0x67E012: mov     ecx, edi; this
+0x67E014: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x67E019: test    eax, eax
 0x67E01B: jz      short loc_67E04A
-0x67E01D: mov     ecx, [esi+24h]
-0x67E020: call    sub_4BEF40
+0x67E01D: mov     ecx, [esi+24h]; this
+0x67E020: call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.
 0x67E025: push    eax
-0x67E026: mov     ecx, edi
-0x67E028: call    TESHealthForm_GetHealth
+0x67E026: mov     ecx, edi; this
+0x67E028: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x67E02D: mov     ecx, eax
-0x67E02F: call    sub_6899C0
+0x67E02F: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x67E034: mov     ecx, eax
 0x67E036: call    sub_8AA350
 0x67E03B: test    al, al
@@ -34,8 +34,8 @@
 0x67E05C: jmp     short loc_67E060
 0x67E05E: xor     al, al
 0x67E060: push    eax
-0x67E061: mov     ecx, edi
-0x67E063: call    TESHealthForm_GetHealth
+0x67E061: mov     ecx, edi; this
+0x67E063: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x67E068: push    eax
 0x67E069: mov     eax, [esi+24h]
 0x67E06C: push    eax

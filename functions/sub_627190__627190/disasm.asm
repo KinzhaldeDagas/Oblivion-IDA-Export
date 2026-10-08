@@ -3,18 +3,18 @@
 0x627194: push    esi
 0x627195: push    edi
 0x627196: mov     esi, ecx
-0x627198: call    sub_567F70
+0x627198: call    TESPackage_LoadGame
 0x62719D: mov     ecx, ds:0B33B00h
 0x6271A3: xor     ebx, ebx
 0x6271A5: mov     dword ptr [esp+24h+a1.member.type], ebx
-0x6271A9: call    sub_45A170
+0x6271A9: call    TESSaveLoadGame_UseSaveGameBlocks
 0x6271AE: test    al, al
 0x6271B0: jz      loc_62724F
-0x6271B6: mov     ecx, ds:0B33B00h
-0x6271BC: push    4; Size
+0x6271B6: mov     ecx, ds:0B33B00h; self
+0x6271BC: push    4; byteCount
 0x6271BE: lea     eax, [esp+28h+a1.member.flags]
-0x6271C2: push    eax; Dst
-0x6271C3: call    SaveLoad_LoadData
+0x6271C2: push    eax; destination
+0x6271C3: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x6271C8: cmp     [esp+24h+a1.member.flags], 4B4F4C42h
 0x6271D0: jz      short loc_62723A
 0x6271D2: mov     eax, ds:0B33B00h
@@ -23,7 +23,7 @@
 0x6271DF: jz      short loc_62721E
 0x6271E1: mov     ecx, [edi]
 0x6271E3: push    ecx; a1
-0x6271E4: call    TESForm_LookupByFormID
+0x6271E4: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x6271E9: mov     edx, [edi+5]
 0x6271EC: movzx   ecx, byte ptr [edi+9]
 0x6271F0: add     esp, 4
@@ -49,26 +49,26 @@
 0x62722D: push    offset aLoadgameBuff_0; "LoadGame Buffer error: Block Header is "...
 0x627232: call    PrintError
 0x627237: add     esp, 10h
-0x62723A: mov     ecx, ds:0B33B00h
+0x62723A: mov     ecx, ds:0B33B00h; self
 0x627240: mov     ebx, [ecx+14h]
-0x627243: push    2; Size
+0x627243: push    2; byteCount
 0x627245: lea     eax, [esp+28h+a1.member]
-0x627249: push    eax; Dst
-0x62724A: call    SaveLoad_LoadData
+0x627249: push    eax; destination
+0x62724A: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x62724F: push    ebp
-0x627250: push    2; a2
+0x627250: push    2; byteCount
 0x627252: lea     ecx, [esp+2Ch+a1]
-0x627256: push    ecx; a1
-0x627257: mov     ecx, esi
-0x627259: call    TESForm_LoadDataFromCurrentSaveGame
+0x627256: push    ecx; destination
+0x627257: mov     ecx, esi; self
+0x627259: call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.
 0x62725E: xor     ebp, ebp
 0x627260: cmp     word ptr [esp+28h+a1.vtbl], bp
 0x627265: jbe     short loc_6272CC
-0x627267: push    4; a2
+0x627267: push    4; byteCount
 0x627269: lea     edx, [esp+2Ch+a1.member.refID]
-0x62726D: push    edx; a1
-0x62726E: mov     ecx, esi
-0x627270: call    TESForm_LoadFormIDFromCurrentSaveGame
+0x62726D: push    edx; destination
+0x62726E: mov     ecx, esi; self
+0x627270: call    TESForm_LoadFormIDFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadFormIDFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadFormID.
 0x627275: mov     eax, dword ptr [esp+30h+a1.member.type]
 0x627279: test    eax, eax
 0x62727B: mov     edi, eax
@@ -95,65 +95,65 @@
 0x6272B8: mov     [esi+54h], edi
 0x6272BB: jmp     short loc_6272C0
 0x6272BD: mov     [esi+54h], eax
-0x6272C0: movzx   eax, [esp+30h+var_20]
+0x6272C0: movzx   eax, word ptr [esp+30h+var_20]
 0x6272C5: add     ebp, 1
 0x6272C8: cmp     ebp, eax
 0x6272CA: jl      short loc_627267
-0x6272CC: push    4; a2
+0x6272CC: push    4; byteCount
 0x6272CE: lea     ecx, [esp+34h+a1.member.flags]
-0x6272D2: push    ecx; a1
-0x6272D3: mov     ecx, esi
-0x6272D5: call    TESForm_LoadFormIDFromCurrentSaveGame
+0x6272D2: push    ecx; destination
+0x6272D3: mov     ecx, esi; self
+0x6272D5: call    TESForm_LoadFormIDFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadFormIDFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadFormID.
 0x6272DA: mov     edx, [esp+38h+a1.vtbl]
-0x6272DE: push    4; a2
+0x6272DE: push    4; byteCount
 0x6272E0: lea     eax, [esp+3Ch+a1.member]
-0x6272E4: push    eax; a1
-0x6272E5: mov     ecx, esi
+0x6272E4: push    eax; destination
+0x6272E5: mov     ecx, esi; self
 0x6272E7: mov     [esi+60h], edx
-0x6272EA: call    TESForm_LoadFormIDFromCurrentSaveGame
+0x6272EA: call    TESForm_LoadFormIDFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadFormIDFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadFormID.
 0x6272EF: mov     ecx, [esp+40h+var_1C]
-0x6272F3: push    1; a2
+0x6272F3: push    1; byteCount
 0x6272F5: lea     edx, [esi+3Dh]
 0x6272F8: mov     [esi+5Ch], ecx
-0x6272FB: push    edx; a1
-0x6272FC: mov     ecx, esi
-0x6272FE: call    TESForm_LoadDataFromCurrentSaveGame
-0x627303: push    1; a2
+0x6272FB: push    edx; destination
+0x6272FC: mov     ecx, esi; self
+0x6272FE: call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.
+0x627303: push    1; byteCount
 0x627305: lea     eax, [esi+64h]
-0x627308: push    eax; a1
-0x627309: mov     ecx, esi
-0x62730B: call    TESForm_LoadDataFromCurrentSaveGame
-0x627310: push    1; a2
+0x627308: push    eax; destination
+0x627309: mov     ecx, esi; self
+0x62730B: call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.
+0x627310: push    1; byteCount
 0x627312: lea     ecx, [esi+50h]
-0x627315: push    ecx; a1
-0x627316: mov     ecx, esi
-0x627318: call    TESForm_LoadDataFromCurrentSaveGame
-0x62731D: push    4; a2
+0x627315: push    ecx; destination
+0x627316: mov     ecx, esi; self
+0x627318: call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.
+0x62731D: push    4; byteCount
 0x62731F: lea     edx, [esi+4Ch]
-0x627322: push    edx; a1
-0x627323: mov     ecx, esi
-0x627325: call    TESForm_LoadDataFromCurrentSaveGame
-0x62732A: push    0Ch; a2
+0x627322: push    edx; destination
+0x627323: mov     ecx, esi; self
+0x627325: call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.
+0x62732A: push    0Ch; byteCount
 0x62732C: lea     eax, [esi+40h]
-0x62732F: push    eax; a1
-0x627330: mov     ecx, esi
-0x627332: call    TESForm_LoadDataFromCurrentSaveGame
-0x627337: push    1; a2
+0x62732F: push    eax; destination
+0x627330: mov     ecx, esi; self
+0x627332: call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.
+0x627337: push    1; byteCount
 0x627339: lea     ecx, [esi+3Ch]
-0x62733C: push    ecx; a1
-0x62733D: mov     ecx, esi
-0x62733F: call    TESForm_LoadDataFromCurrentSaveGame
+0x62733C: push    ecx; destination
+0x62733D: mov     ecx, esi; self
+0x62733F: call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.
 0x627344: mov     edx, ds:0B33B00h
 0x62734A: cmp     byte ptr [edx+7Ch], 71h ; 'q'
 0x62734E: pop     ebp
 0x62734F: jb      short loc_62735E
-0x627351: push    1; a2
+0x627351: push    1; byteCount
 0x627353: lea     eax, [esi+65h]
-0x627356: push    eax; a1
-0x627357: mov     ecx, esi
-0x627359: call    TESForm_LoadDataFromCurrentSaveGame
+0x627356: push    eax; destination
+0x627357: mov     ecx, esi; self
+0x627359: call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.
 0x62735E: mov     ecx, ds:0B33B00h
-0x627364: call    sub_45A170
+0x627364: call    TESSaveLoadGame_UseSaveGameBlocks
 0x627369: test    al, al
 0x62736B: jz      loc_62747C
 0x627371: mov     ecx, ds:0B33B00h
@@ -163,7 +163,7 @@
 0x627382: jz      loc_627425
 0x627388: mov     ecx, [edi]
 0x62738A: push    ecx; a1
-0x62738B: call    TESForm_LookupByFormID
+0x62738B: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x627390: movzx   edx, word ptr [esp+40h+var_2C]
 0x627395: mov     ecx, eax
 0x627397: lea     eax, [edx+ebx]

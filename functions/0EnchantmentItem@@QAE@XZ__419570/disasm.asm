@@ -32,3 +32,12 @@
 0x4195E3: pop     esi
 0x4195E4: add     esp, 10h
 0x4195E7: retn
+0x9AB450: mov     ecx, [ebp-10h]; this
+0x9AB453: jmp     ??1MagicItemForm@@UAE@XZ; MagicItemForm::~MagicItemForm(void)
+0x9AB458: mov     edx, [esp+arg_4]
+0x9AB45C: lea     eax, [edx-8]
+0x9AB45F: mov     ecx, [edx-0Ch]
+0x9AB462: xor     ecx, eax
+0x9AB464: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AB469: mov     eax, offset stru_AD8390
+0x9AB46E: jmp     ___CxxFrameHandler3

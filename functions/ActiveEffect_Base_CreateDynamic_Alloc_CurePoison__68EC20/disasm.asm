@@ -1,4 +1,4 @@
-0x68EC20: push    40h ; '@'; Size
+0x68EC20: push    40h ; '@'; Verified allocation path for CUPO: creates the shared CureEffect class and calls CureEffect_constr_MagicType with subtype value 3.
 0x68EC22: call    FormHeapAlloc
 0x68EC27: add     esp, 4
 0x68EC2A: mov     [esp+arg_60], eax

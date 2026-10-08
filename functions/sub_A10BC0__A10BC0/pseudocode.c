@@ -1,4 +1,4 @@
-BSStringT *sub_A10BC0()
+NiRTTI *sub_A10BC0()
 {
-  return sub_70E220(&stru_B42868, "NiDX9Direct3DTexture", (int)dword_B3F70C);
+  return NiRTTI_Constructor(&stru_B42868, "NiDX9Direct3DTexture", &stru_B3F70C); /*0xa10bd4*/
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x60BAC0",
-    "line": "push    ebp",
+    "line": "push    ebp; Handle collision-filter layer/category 1 without a TESObjectREFR target. Builds state-2 world placement data from impact position/normal, records material effects, and applies all retained projectile magic items through the shooter with a null casting target.",
     "mnemonic": "push",
     "size": 1
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x60BAD6",
-    "line": "mov     esi, [ebp+arg_0]",
+    "line": "mov     esi, [ebp+impactPosition]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x60BB0D",
-    "line": "call    sub_4BFAA0",
+    "line": "call    NiPoint3_NormalizeApproximateInPlace",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x60BB1F",
-    "line": "mov     dword ptr [ecx], 2",
+    "line": "mov     dword ptr [ecx], 2; Collision-filter layer/category 1 impact initializes state 2 with no target reference/node.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x60BB44",
-    "line": "mov     ecx, [ebp+arg_4]",
+    "line": "mov     ecx, [ebp+impactNormal]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x60BBD8",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x60BBE7",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x60BBF9",
-    "line": "call    sub_8AC0A0",
+    "line": "call    bhkWorldObject_GetLinearVelocityPtr; TES4 authoritative: returns pointer to bhk collision object's velocity vector at object+0x10. 0x896000 copies this into proxy +0x2E0 before state update.",
     "mnemonic": "call",
     "size": 5
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x60BC00",
-    "line": "mov     eax, offset stru_BA7A40",
+    "line": "mov     eax, offset unk_BA7A40",
     "mnemonic": "mov",
     "size": 5
   },
@@ -901,7 +901,7 @@
   },
   {
     "ea": "0x60BCAB",
-    "line": "call    sub_43F3E0",
+    "line": "call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).",
     "mnemonic": "call",
     "size": 5
   },
@@ -967,7 +967,7 @@
   },
   {
     "ea": "0x60BCD8",
-    "line": "mov     ecx, [ebp+arg_4]; jumptable 0060BCD1 cases 0,3,5,10,11,13,15,18,20,25,26,28,30",
+    "line": "mov     ecx, [ebp+impactNormal]; jumptable 0060BCD1 cases 0,3,5,10,11,13,15,18,20,25,26,28,30",
     "mnemonic": "mov",
     "size": 3
   },
@@ -991,7 +991,7 @@
   },
   {
     "ea": "0x60BCDF",
-    "line": "call    sub_608DA0",
+    "line": "call    ArrowProjectile_SetFreeImpactState3; Convert to free-impact state 3 without changing TESObjectREFR.baseForm or attaching source-WEAP identity.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1309,7 +1309,7 @@
   },
   {
     "ea": "0x60BD79",
-    "line": "mov     eax, [ebx+7Ch]",
+    "line": "mov     eax, [ebx+7Ch]; Layer-1 impact AMMO enchantment path: ArrowProjectile+0x7C, applied through shooter MagicCaster with no reference target.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1441,13 +1441,13 @@
   },
   {
     "ea": "0x60BDB2",
-    "line": "call    MagicCaster_UseActiveMagicItem",
+    "line": "call    MagicCaster_UseActiveMagicItem; Collision-layer-1 impact applies projectile-held AMMO enchantment through shooter MagicCaster.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x60BDB7",
-    "line": "mov     edx, [ebx+84h]",
+    "line": "mov     edx, [ebx+84h]; Layer-1 impact poison path: ArrowProjectile+0x84, applied through shooter MagicCaster with no reference target.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1585,13 +1585,13 @@
   },
   {
     "ea": "0x60BDF4",
-    "line": "call    MagicCaster_UseActiveMagicItem",
+    "line": "call    MagicCaster_UseActiveMagicItem; Collision-layer-1 impact applies projectile-held poison through shooter MagicCaster.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x60BDF9",
-    "line": "mov     edx, [ebx+80h]",
+    "line": "mov     edx, [ebx+80h]; Layer-1 impact bow enchantment path: ArrowProjectile+0x80, applied through shooter MagicCaster with no reference target.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1729,7 +1729,7 @@
   },
   {
     "ea": "0x60BE36",
-    "line": "call    MagicCaster_UseActiveMagicItem",
+    "line": "call    MagicCaster_UseActiveMagicItem; Collision-layer-1 impact applies projectile-held bow enchantment through shooter MagicCaster.",
     "mnemonic": "call",
     "size": 5
   },

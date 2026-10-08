@@ -11,7 +11,7 @@
 0x64CB29: test    al, al
 0x64CB2B: jnz     loc_64CD48
 0x64CB31: mov     ecx, edi
-0x64CB33: call    sub_5E6B40
+0x64CB33: call    Actor_IsInDialogueProcedure; 3DTheft 2026-05-17: returns true when the actor's current package type is 0x12 (Dialogue). AddScriptPackage uses this as a pre-handoff gate.
 0x64CB38: test    al, al
 0x64CB3A: jnz     loc_64CD48
 0x64CB40: mov     ecx, edi
@@ -39,12 +39,12 @@
 0x64CB8D: push    0
 0x64CB8F: mov     ecx, esi
 0x64CB91: call    edx
-0x64CB93: mov     ecx, offset TimeGlobals
+0x64CB93: mov     ecx, 0B332E0h
 0x64CB98: call    TimeGlobals_GetGameHour
-0x64CB9D: fstp    dword ptr [esp+10h+var_4]
-0x64CBA1: mov     ecx, edi
+0x64CB9D: fstp    [esp+10h+var_4]
+0x64CBA1: mov     ecx, edi; this
 0x64CBA3: mov     [esp+10h+var_5], 0
-0x64CBA8: call    sub_5E0380
+0x64CBA8: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x64CBAD: test    eax, eax
 0x64CBAF: mov     byte ptr [esp+10h+arg_0], 0
 0x64CBB4: jz      short loc_64CBD5
@@ -65,18 +65,18 @@
 0x64CBDC: jnz     short loc_64CBF9
 0x64CBDE: cmp     dword ptr [esi+8], 0
 0x64CBE2: jz      short loc_64CBF9
-0x64CBE4: fld     dword ptr [esp+14h+var_4]
-0x64CBE8: call    Double_To_SInt32
+0x64CBE4: fld     [esp+14h+var_4]
+0x64CBE8: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x64CBED: cmp     [esi+90h], eax
 0x64CBF3: jz      loc_64CD3B
 0x64CBF9: push    ebx
 0x64CBFA: push    edi
 0x64CBFB: mov     ecx, esi
-0x64CBFD: call    sub_649340
-0x64CC02: fld     dword ptr [esp+14h+var_4]
+0x64CBFD: call    sub_649340; RadiantAI: package refresh/reselection bridge. If no current package, calls 0x648E40 to choose one; validates procedure row, checks duration/package flags, can end/reset packages, then calls 0x648E40 again for reselection.
+0x64CC02: fld     [esp+14h+var_4]
 0x64CC06: mov     bl, al
 0x64CC08: mov     [esp+14h+var_5], bl
-0x64CC0C: call    Double_To_SInt32
+0x64CC0C: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x64CC11: test    bl, bl
 0x64CC13: mov     [esi+90h], eax
 0x64CC19: jz      loc_64CD3B
@@ -106,7 +106,7 @@
 0x64CC5F: test    ebx, ebx
 0x64CC61: jz      short loc_64CC6C
 0x64CC63: push    ebx
-0x64CC64: call    FormHeapFree
+0x64CC64: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x64CC69: add     esp, 4
 0x64CC6C: push    ebx
 0x64CC6D: mov     ecx, ebp

@@ -1,1 +1,1 @@
-Lighting30Shader
+struct Lighting30Shader;

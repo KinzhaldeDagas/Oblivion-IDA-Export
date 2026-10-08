@@ -37,7 +37,7 @@
 0x5F796F: mov     ecx, esi
 0x5F7971: call    edx
 0x5F7973: mov     ecx, eax
-0x5F7975: call    sub_472EA0
+0x5F7975: call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.
 0x5F797A: test    al, al
 0x5F797C: jnz     loc_5F7A36; jumptable 005F7A2F cases 8,18
 0x5F7982: mov     ecx, [esi+58h]
@@ -55,18 +55,18 @@
 0x5F79A7: jnz     loc_5F7A36; jumptable 005F7A2F cases 8,18
 0x5F79AD: mov     eax, [esi]
 0x5F79AF: mov     edx, [eax+164h]
-0x5F79B5: push    3
+0x5F79B5: push    3; slot
 0x5F79B7: mov     ecx, esi
 0x5F79B9: call    edx
-0x5F79BB: mov     ecx, eax
-0x5F79BD: call    ActorAnimData_GetAnimGroupFromField8Value
+0x5F79BB: mov     ecx, eax; this
+0x5F79BD: call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.
 0x5F79C2: push    eax
-0x5F79C3: call    sub_51AC80
+0x5F79C3: call    AnimGroup_UsesAttackOrCastNoteTemplate; Returns true when the encoded key is not group 0xFF and the fixed Oblivion group record's note-template class is 4, 5, 6, or 7. Those classes cover AttackLeft/Right, power attacks, BlockAttack, AttackBow, and cast groups. This is a fixed-table classifier, not dynamic group registration.
 0x5F79C8: add     esp, 4
 0x5F79CB: test    al, al
 0x5F79CD: jnz     short loc_5F7A36; jumptable 005F7A2F cases 8,18
 0x5F79CF: mov     ecx, ds:0B333C4h
-0x5F79D5: call    Actor_IsSneaking
+0x5F79D5: call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.
 0x5F79DA: test    al, al
 0x5F79DC: jz      short loc_5F7A12
 0x5F79DE: mov     ecx, ds:0B333C4h
@@ -84,7 +84,7 @@
 0x5F7A04: push    ecx; int
 0x5F7A05: push    0; int
 0x5F7A07: mov     ecx, esi; int
-0x5F7A09: call    Actor_GetDetectionLevel
+0x5F7A09: call    Actor_GetDetectionLevelAgainstActor; Oblivion authoritative detection pipeline. Computes this detector's level against a target actor: obtains cached/physical LOS and distance, target light, boot weight, movement/running/sneak/combat/underwater/exterior state, Luck-modified Sneak values, detector Blindness AV 0x2D, target Chameleon AV 0x2E, and target Invisibility AV 0x2F; then calls Calc_DetectionLevel and updates the detector's process entry. Positive means detected. Fallout only corroborates the GetDetectionLevelAgainstActor terminology.
 0x5F7A0E: test    eax, eax
 0x5F7A10: jle     short loc_5F7A36; jumptable 005F7A2F cases 8,18
 0x5F7A12: mov     ecx, [esi+58h]

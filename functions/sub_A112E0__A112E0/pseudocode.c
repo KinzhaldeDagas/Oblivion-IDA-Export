@@ -1,4 +1,4 @@
-BSStringT *sub_A112E0()
+NiRTTI *sub_A112E0()
 {
-  return sub_70E220((BSStringT *)dword_B43484, "BSFogProperty", (int)dword_B401F4);
+  return NiRTTI_Constructor(&stru_B43484, "BSFogProperty", &stru_B401F4); /*0xa112f4*/
 }

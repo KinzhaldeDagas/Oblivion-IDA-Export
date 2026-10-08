@@ -1,12 +1,12 @@
-0x7C5340: mov     eax, [esp+arg_4]
+0x7C5340: mov     eax, [esp+cloneProcess]
 0x7C5344: push    ebx
-0x7C5345: mov     ebx, [esp+4+arg_0]
+0x7C5345: mov     ebx, [esp+4+clone]
 0x7C5349: push    esi
 0x7C534A: push    edi
-0x7C534B: push    eax
-0x7C534C: push    ebx
+0x7C534B: push    eax; cloneProcess
+0x7C534C: push    ebx; clone
 0x7C534D: mov     esi, ecx
-0x7C534F: call    sub_7E2490
+0x7C534F: call    BSShaderProperty_CopyCloneMembers; [Verified] Shared BSShaderProperty clone-field copier: delegates to the common property copier, copies source +0x1C and +0x20 into the clone, and clears clone +0x24. Directly used by BSShaderProperty_CreateClone and the inherited path used by GeometryDecalShaderProperty. It does not touch BSShaderLightingProperty's +0x80 DECAL_DATA* list.
 0x7C5354: mov     edi, [ebx+7Ch]
 0x7C5357: cmp     edi, [esi+7Ch]
 0x7C535A: jz      short loc_7C5390

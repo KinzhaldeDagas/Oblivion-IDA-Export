@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x55E060",
-    "line": "sub     esp, 14h",
+    "line": "sub     esp, 14h; Verified wind loop: uses four phase accumulators and four sine/cosine coefficient pairs to generate four wind matrices; previous wind speed normalizes phase when current wind changes. Fallout's named UpdateWindMatrices has the same four-matrix pattern but uses different manager offsets and its own wind/time globals.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -94,12 +94,6 @@
     "line": "jmp     short loc_55E0A0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x55E097",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
   },
   {
     "ea": "0x55E0A0",
@@ -493,7 +487,7 @@
   },
   {
     "ea": "0x55E19B",
-    "line": "call    sub_7F1760",
+    "line": "call    OB_SpeedTreeLeafShader_SetWindMatrix_010201A0; Updates one global SpeedTree wind matrix. Builds yaw/pitch rotation, transposes it, writes WindMatrixes + 0x40*index; valid indices are 0..3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,7 +643,7 @@
   },
   {
     "ea": "0x55E1F0",
-    "line": "fstp    [esp+2Ch+var_4]",
+    "line": "fstp    [esp+2Ch+var_4]; Verified: fLeafRustleTimeScale.value is multiplied by frame delta and the leaf wind modulation term, then passed to OB_SpeedTreeLeafShader_UpdateWindScalars.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -733,7 +727,7 @@
   },
   {
     "ea": "0x55E21E",
-    "line": "fstp    [esp+2Ch+var_4]",
+    "line": "fstp    [esp+2Ch+var_4]; Verified: fLeafRockTimeScale.value is multiplied by frame delta and the leaf wind modulation term, then passed to OB_SpeedTreeLeafShader_UpdateWindScalars.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -907,7 +901,7 @@
   },
   {
     "ea": "0x55E27B",
-    "line": "call    sub_7F0210",
+    "line": "call    OB_SpeedTreeLeafShader_UpdateWindScalars_010201A0; Updates global SpeedTree leaf wind scalar constants: RockPArams, RsutleParams, and accumulative phase/scalar globals flt_B4672C/flt_B46730.",
     "mnemonic": "call",
     "size": 5
   },

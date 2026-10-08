@@ -9,7 +9,7 @@
 0x52A8B0: cmp     ecx, esi
 0x52A8B2: push    edi
 0x52A8B3: jz      loc_52A94D
-0x52A8B9: call    BSSimpleList_Clear
+0x52A8B9: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x52A8BE: mov     ebx, ds:0B333C4h
 0x52A8C4: add     ebx, 5ECh
 0x52A8CA: cmp     ebx, esi
@@ -60,7 +60,7 @@
 0x52A940: test    ebx, ebx
 0x52A942: jnz     short loc_52A8D6
 0x52A944: lea     ecx, [esp+18h+var_8]
-0x52A948: call    BSSimpleList_Clear
+0x52A948: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x52A94D: pop     edi
 0x52A94E: pop     esi
 0x52A94F: pop     ebx

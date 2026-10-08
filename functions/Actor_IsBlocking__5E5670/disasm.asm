@@ -1,4 +1,4 @@
-0x5E5670: cmp     dword ptr [ecx+58h], 0
+0x5E5670: cmp     dword ptr [ecx+58h], 0; Actor_IsBlocking: process current-action vfunc +0x2D0 equals 6. Player jump path treats this specially; climb activation should reject or require explicit design override while blocking.
 0x5E5674: jz      short loc_5E5688
 0x5E5676: mov     ecx, [ecx+58h]
 0x5E5679: mov     eax, [ecx]

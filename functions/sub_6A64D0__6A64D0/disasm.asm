@@ -42,7 +42,7 @@
 0x6A6549: cmp     esi, edi
 0x6A654B: jl      short loc_6A6530
 0x6A654D: push    ebp
-0x6A654E: call    FormHeapFree
+0x6A654E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6A6553: add     esp, 4
 0x6A6556: pop     ebx
 0x6A6557: pop     edi
@@ -63,7 +63,7 @@
 0x6A657D: mov     eax, [eax+8]
 0x6A6580: push    ebp
 0x6A6581: mov     [ecx+8], eax
-0x6A6584: call    FormHeapFree
+0x6A6584: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6A6589: add     esp, 4
 0x6A658C: pop     ebx
 0x6A658D: pop     edi

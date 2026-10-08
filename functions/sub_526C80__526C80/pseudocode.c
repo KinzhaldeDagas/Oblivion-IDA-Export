@@ -1,4 +1,4 @@
-int __stdcall sub_526C80(int a1)
+void __thiscall sub_526C80(char *this, ActorBaseSaveChangeMask a2)
 {
-  return sub_523370(a1);
+  TESNPC_SaveModified((TESNPC *)(this + 0xFFFFFFAC), a2); /*0x526c83*/
 }

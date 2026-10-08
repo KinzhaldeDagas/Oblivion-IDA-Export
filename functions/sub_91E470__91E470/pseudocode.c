@@ -1,4 +1,4 @@
 int sub_91E470()
 {
-  return dword_BA845C;
+  return unk_BA845C; /*0x91e475*/
 }

@@ -1,18 +1,19 @@
-_DWORD *__thiscall sub_43EB30(_DWORD *this)
+// Constructs a 0x18-byte FaceGenMatrix. Embedded vector layout: allocator state +0x08, begin +0x0C, end +0x10, capacity end +0x14.
+FaceGenMatrix *__thiscall FaceGenMatrix_Construct(FaceGenMatrix *this)
 {
-  _DWORD *v2; // esi
-  char *v3; // ebp
+  unsigned int *p_allocator08; // esi
+  float *begin; // ebp
   int v5; // [esp+10h] [ebp-8h] BYREF
 
-  v2 = this + 2;
-  *this = 0;
-  *(this + 1) = 0;
-  *(this + 3) = 0;
-  *(this + 4) = 0;
-  *(this + 5) = 0;
-  v3 = (char *)*(this + 3);
-  if ( (unsigned int)v3 > *(this + 4) )
-    _invalid_parameter_noinfo();
-  sub_439050(v2, 0, &v5, (int)v2, v3, (int)v2, 0);
-  return this;
+  p_allocator08 = &this->allocator08; /*0x43eb3b*/
+  this->rows = 0; /*0x43eb3e*/
+  this->columns = 0; /*0x43eb40*/
+  this->begin = 0; /*0x43eb47*/
+  this->end = 0; /*0x43eb4a*/
+  this->capacityEnd = 0; /*0x43eb4d*/
+  begin = this->begin; /*0x43eb57*/
+  if ( begin > this->end ) /*0x43eb5d*/
+    _invalid_parameter_noinfo(0, (int)this, (int)p_allocator08); /*0x43eb5f*/
+  OB_stVector4_EraseRange_010201A0(p_allocator08, 0, &v5, (int)p_allocator08, (char *)begin, (int)p_allocator08, 0); /*0x43eb6f*/
+  return this; /*0x43eb76*/
 }

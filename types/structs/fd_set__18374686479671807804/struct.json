@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "fd_set",
+  "definition": "struct fd_set\n{\nu_int fd_count;\nSOCKET fd_array[64];\n}\n",
   "id": 18374686479671807804,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fd_count",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "u_int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fd_array",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 256
+      "size": 256,
+      "type": "SOCKET[64]"
     }
   ],
   "name": "fd_set",
+  "ordinal": 78,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 260
 }

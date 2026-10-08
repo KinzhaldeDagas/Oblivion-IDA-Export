@@ -8,6 +8,6 @@ unsigned int __thiscall sub_76D360(
         int a7,
         int a8)
 {
-  (*(void (__thiscall **)(unsigned __int16 *))(*(_DWORD *)this + 0x80))(this);
-  return sub_76D200(this, a2, a3, a4, a5, a6, a7, a8);
+  (*(void (__thiscall **)(unsigned __int16 *))(*(_DWORD *)this + 0x80))(this); /*0x76d36b*/
+  return sub_76D200(this, a2, a3, a4, a5, a6, a7, a8); /*0x76d397*/
 }

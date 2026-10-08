@@ -15,17 +15,17 @@
 0x4DA92E: jp      short loc_4DA93D
 0x4DA930: fld     dword ptr ds:0B33A30h
 0x4DA936: fstp    [esp+134h+arg_8]
-0x4DA93D: push    2; Size
+0x4DA93D: push    2; byteCount
 0x4DA93F: lea     ecx, [esp+138h+Dst]
-0x4DA943: push    ecx; Dst
-0x4DA944: mov     ecx, ds:0B33B00h
-0x4DA94A: call    SaveLoad_LoadData
+0x4DA943: push    ecx; destination
+0x4DA944: mov     ecx, ds:0B33B00h; self
+0x4DA94A: call    SaveLoad_LoadData; EnginePatch analysis 2026-05-07: animation-state count is UInt16 with only a very high 0xFDE8 ceiling. Each entry consumes at least 4 bytes in save versions 0x15-0x16 or at least a length byte otherwise, then scans current sequences. Candidate for remaining-byte clamp.
 0x4DA94F: mov     eax, [esp+134h+Dst]
 0x4DA953: cmp     ax, 0FDE8h
 0x4DA957: jbe     short loc_4DA95F
 0x4DA959: xor     eax, eax
 0x4DA95B: mov     [esp+134h+Dst], eax
-0x4DA95F: xor     ebx, ebx
+0x4DA95F: xor     ebx, ebx; EngineFix implementation 2026-05-11: animation-state count clamp installed after the engine's 0xFDE8 ceiling has already zeroed invalid large counts. The hook clamps only surviving counts to remaining save-record bytes / minimum entry size (4 bytes for save versions 0x15-0x16, otherwise at least one length byte), then re-emits the original setup through 0x4DA973.
 0x4DA961: test    esi, esi
 0x4DA963: jz      short loc_4DA973
 0x4DA965: test    ax, ax
@@ -39,18 +39,17 @@
 0x4DA989: push    ebp
 0x4DA98A: push    edi
 0x4DA98B: jmp     short loc_4DA990
-0x4DA98D: align 10h
-0x4DA990: mov     ecx, ds:0B33B00h
+0x4DA990: mov     ecx, ds:0B33B00h; self
 0x4DA996: mov     al, [ecx+7Ch]
 0x4DA999: cmp     al, 15h
 0x4DA99B: jb      short loc_4DA9EE
 0x4DA99D: cmp     al, 17h
 0x4DA99F: jnb     short loc_4DA9EE
-0x4DA9A1: push    4; Size
-0x4DA9A3: lea     edx, [esp+140h+var_10C]
-0x4DA9A7: push    edx; Dst
-0x4DA9A8: call    SaveLoad_LoadData
-0x4DA9AD: mov     eax, [esp+13Ch+var_10C]
+0x4DA9A1: push    4; byteCount
+0x4DA9A3: lea     edx, [esp+140h+destination]
+0x4DA9A7: push    edx; destination
+0x4DA9A8: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
+0x4DA9AD: mov     eax, [esp+13Ch+destination]
 0x4DA9B1: cmp     eax, 2Bh ; '+'
 0x4DA9B4: jge     short loc_4DA9D4
 0x4DA9B6: lea     eax, [eax+eax*8]
@@ -69,16 +68,16 @@
 0x4DA9DF: push    ecx
 0x4DA9E0: call    __memset
 0x4DA9E5: add     esp, 0Ch
-0x4DA9E8: mov     ecx, ds:0B33B00h
+0x4DA9E8: mov     ecx, ds:0B33B00h; self
 0x4DA9EE: mov     al, [ecx+7Ch]
 0x4DA9F1: cmp     al, 15h
 0x4DA9F3: jb      short loc_4DA9F9
 0x4DA9F5: cmp     al, 17h
 0x4DA9F7: jb      short loc_4DAA2F
-0x4DA9F9: push    1; Size
+0x4DA9F9: push    1; byteCount
 0x4DA9FB: lea     edx, [esp+140h+var_121]
-0x4DA9FF: push    edx; Dst
-0x4DAA00: call    SaveLoad_LoadData
+0x4DA9FF: push    edx; destination
+0x4DAA00: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x4DAA05: push    104h
 0x4DAA0A: lea     eax, [esp+140h+var_108]
 0x4DAA0E: push    0
@@ -86,11 +85,11 @@
 0x4DAA11: call    __memset
 0x4DAA16: movzx   ecx, [esp+148h+var_121]
 0x4DAA1B: add     esp, 0Ch
-0x4DAA1E: push    ecx; Size
-0x4DAA1F: mov     ecx, ds:0B33B00h
+0x4DAA1E: push    ecx; byteCount
+0x4DAA1F: mov     ecx, ds:0B33B00h; self
 0x4DAA25: lea     edx, [esp+140h+var_108]
-0x4DAA29: push    edx; Dst
-0x4DAA2A: call    SaveLoad_LoadData
+0x4DAA29: push    edx; destination
+0x4DAA2A: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x4DAA2F: test    esi, esi
 0x4DAA31: jz      short loc_4DAA87
 0x4DAA33: xor     edi, edi
@@ -127,11 +126,11 @@
 0x4DAA7F: cmp     edi, ebx
 0x4DAA81: jb      short loc_4DAA40
 0x4DAA83: mov     esi, [esp+13Ch+var_114]
-0x4DAA87: call    sub_49F550
+0x4DAA87: call    BSAnimGroupSequence_GetSaveStateSize; Returns native serialized BSAnimGroupSequence state size: 20 bytes for save versions >= 0x71, otherwise 24 bytes.
 0x4DAA8C: mov     ecx, ds:0B33B00h
 0x4DAA92: movzx   eax, ax
 0x4DAA95: push    eax
-0x4DAA96: call    SaveLoad_AdvanceBufferOffset
+0x4DAA96: call    SaveLoad_AdvanceBufferOffset; EnginePatch v2: byte-checked SaveLoad_AdvanceBufferOffset hook. Clamps save cursor movement to active tracked record buffer.
 0x4DAA9B: mov     eax, [esp+13Ch+var_110]
 0x4DAA9F: movzx   ecx, word ptr [esp+13Ch+Dst]
 0x4DAAA4: add     eax, 1
@@ -149,7 +148,7 @@
 0x4DAACB: push    1; a3
 0x4DAACD: push    ecx
 0x4DAACE: fstp    [esp+13Ch+a2]; a2
-0x4DAAD1: call    NiAVObject_UpdateNiAVObject
+0x4DAAD1: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x4DAAD6: mov     ecx, [esp+134h+var_4]
 0x4DAADD: pop     esi
 0x4DAADE: pop     ebx
@@ -160,21 +159,21 @@
 0x4DAAED: cmp     dword ptr [esi+44h], 0
 0x4DAAF1: jnz     short loc_4DAB10
 0x4DAAF3: fldz
-0x4DAAF5: push    0; int
-0x4DAAF7: push    0; int
+0x4DAAF5: push    0; transition
+0x4DAAF7: push    0; timeSyncSequence
 0x4DAAF9: sub     esp, 8
-0x4DAAFC: fstp    [esp+14Ch+var_148]; float
-0x4DAB00: mov     ecx, esi
+0x4DAAFC: fstp    [esp+14Ch+easeInTime]; easeInTime
+0x4DAB00: mov     ecx, esi; this
 0x4DAB02: fld1
-0x4DAB04: fstp    [esp+14Ch+var_14C]; float
-0x4DAB07: push    0; char
-0x4DAB09: push    0; int
-0x4DAB0B: call    sub_6C9BA0
+0x4DAB04: fstp    [esp+14Ch+weight]; weight
+0x4DAB07: push    0; startOver
+0x4DAB09: push    0; priority
+0x4DAB0B: call    NiControllerSequence_Activate; Native controller-sequence activation state machine. Rejects an already-active sequence, validates optional time-sync compatibility, records activation parameters, and queues the active sequence with its manager.
 0x4DAB10: fld     [esp+13Ch+arg_8]
 0x4DAB17: push    ecx
 0x4DAB18: mov     ecx, esi
 0x4DAB1A: fstp    [esp+140h+var_140]; float
-0x4DAB1D: call    sub_49F5F0
+0x4DAB1D: call    BSAnimGroupSequence_LoadState; Restores BSAnimGroupSequence timing/state, rebases local time against load clock, resets +0x4C/+0x50 sentinels, and resamples native active states 1..3.
 0x4DAB22: mov     edi, [esp+13Ch+var_118]
 0x4DAB26: test    edi, edi
 0x4DAB28: jz      loc_4DABE3

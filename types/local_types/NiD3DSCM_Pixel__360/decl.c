@@ -1,1 +1,31 @@
-NiD3DSCM_Pixel
+struct __cppobj NiD3DSCM_Pixel
+{
+void (__thiscall *Destroy)(NiD3DShaderConstantMap *);
+void (__thiscall *sub_9A2470)(NiD3DShaderConstantMap *);
+void (__thiscall *nullsub_return0_0arg1)(NiD3DShaderConstantMap *);
+void (__thiscall *nullsub_return0_0arg2)(NiD3DShaderConstantMap *);
+void (__thiscall *nullsub_return0_0arg3)(NiD3DShaderConstantMap *);
+void (__thiscall *nullsub_return0_0arg4)(NiD3DShaderConstantMap *);
+int (__thiscall *NiD3DShaderConstantMap__AddConstant)(NiD3DShaderConstantMap *this, char *constName, int flags, int extra, int register_1, int boh, char *sawEmpty, int size, int number, void *a10, int a11);
+void (__thiscall *sub_9A8800)(NiD3DShaderConstantMap *);
+void (__thiscall *sub_9A8890)(NiD3DShaderConstantMap *);
+void (__thiscall *sub_9A8C40)(NiD3DShaderConstantMap *);
+void (__thiscall *sub_9A8940)(NiD3DShaderConstantMap *);
+void (__thiscall *sub_9A8A50)(NiD3DShaderConstantMap *);
+void (__thiscall *sub_9A8AE0)(NiD3DShaderConstantMap *);
+void (__thiscall *sub_9A9740)(NiD3DShaderConstantMap *);
+void (__thiscall *sub_9A8DD0)(NiD3DShaderConstantMap *);
+void (__thiscall *sub_9A8E20)(NiD3DShaderConstantMap *);
+void (__thiscall *sub_9A8E30)(NiD3DShaderConstantMap *);
+void (__thiscall *sub_9A9620)(NiD3DShaderConstantMap *);
+void (__thiscall *sub_9A97B0)(NiD3DShaderConstantMap *);
+void (__thiscall *sub_9A9AD0)(NiD3DShaderConstantMap *);
+void (__thiscall *sub_9A26F0)(NiD3DShaderConstantMap *);
+void (__thiscall *sub_9A3310)(NiD3DShaderConstantMap *);
+void (__thiscall *sub_9A27A0)(NiD3DShaderConstantMap *);
+void (__thiscall *sub_9A35A0)(NiD3DShaderConstantMap *);
+void (__thiscall *sub_9A3730)(NiD3DShaderConstantMap *);
+void (__thiscall *sub_9A4370)(NiD3DShaderConstantMap *);
+void (__thiscall *sub_9A27E0)(NiD3DShaderConstantMap *);
+void (__thiscall *sub_9A3970)(NiD3DShaderConstantMap *);
+};

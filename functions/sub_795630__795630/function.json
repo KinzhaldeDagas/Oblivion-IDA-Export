@@ -1,19 +1,36 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_795630",
+  "chunks": [
+    [
+      "0x795630",
+      "0x7956A6"
+    ],
+    [
+      "0x9CBD60",
+      "0x9CBD83"
+    ]
+  ],
+  "chunks_sha256": "b363f24db24c2b6eea7a47fc66456a09aa0112e9cb2ee29827172fb33ba1558a",
+  "comment_regular": "OBLIVION AUTHORITY (2026-08-30): Swaps two vector<unsigned short> owners via a temporary deep copy and copy assignments; exception cleanup frees the temporary buffer.",
+  "comment_repeatable": "OBLIVION AUTHORITY (2026-08-30): Swaps two vector<unsigned short> owners via a temporary deep copy and copy assignments; exception cleanup frees the temporary buffer.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "OB_stVectorUShort_Swap_010201A0",
   "end_ea": "0x7956A6",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_795630",
+  "name": "OB_stVectorUShort_Swap_010201A0",
   "segment": ".text",
   "sha256": "0afa93c12cb3ff50fea40b58f679c70ac7ae27d6404a66f2b0a8a041898e57a0",
   "size": 118,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x795630",
-  "type": "void __userpurge(_DWORD *this@<ecx>, unsigned int@<ebp>, _DWORD *)",
-  "xrefs_from_count": 43,
+  "total_chunk_size": 153,
+  "type": "void __thiscall(OB_stVectorUShort_010201A0 *this, OB_stVectorUShort_010201A0 *other)",
+  "xrefs_from_count": 55,
   "xrefs_to_count": 2
 }

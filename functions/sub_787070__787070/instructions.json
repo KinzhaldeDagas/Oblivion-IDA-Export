@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x787070",
-    "line": "mov     eax, [ecx+34h]",
+    "line": "mov     eax, [ecx+34h]; CSpeedTreeRT::SetTreePosition. Oblivion writes STreeInstanceData position for instances, otherwise CTreeEngine::cameraPosition/current tree position storage; exact method name corroborated only after observing this split.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x787073",
-    "line": "fld     [esp+arg_0]",
+    "line": "fld     [esp+x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x787081",
-    "line": "fld     [esp+0Ch+arg_4]",
+    "line": "fld     [esp+0Ch+y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x787088",
-    "line": "fld     [esp+0Ch+arg_8]",
+    "line": "fld     [esp+0Ch+z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x78709A",
-    "line": "fld     [esp+0Ch+arg_4]",
+    "line": "fld     [esp+0Ch+y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x7870A9",
-    "line": "fld     [esp+0Ch+arg_8]",
+    "line": "fld     [esp+0Ch+z]",
     "mnemonic": "fld",
     "size": 4
   },

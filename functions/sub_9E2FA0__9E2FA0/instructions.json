@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x9E2FAA",
-    "line": "mov     ecx, offset sDefaultCellName",
+    "line": "mov     ecx, 0B35C0Ch; self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x9E2FAF",
-    "line": "call    GameSetting_ConstrAndReg",
+    "line": "call    GameSetting_ConstrAndReg; 3DTheft decode: Oblivion registers sDefaultCellName as \"Wilderness\". For plugin wilderness checks, unnamed exterior cells should be treated as wilderness rather than using worldspace fallback names.",
     "mnemonic": "call",
     "size": 5
   },

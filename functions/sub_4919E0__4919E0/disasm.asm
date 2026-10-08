@@ -51,7 +51,6 @@
 0x491A93: cmp     [eax], ebx
 0x491A95: jz      loc_491C92
 0x491A9B: jmp     short loc_491AA0
-0x491A9D: align 10h
 0x491AA0: mov     edi, [eax]
 0x491AA2: cmp     edi, ebx
 0x491AA4: jz      loc_491CAE
@@ -60,16 +59,16 @@
 0x491AB4: mov     [esp+150h+var_118], eax
 0x491AB8: mov     [esp+150h+var_139], bl
 0x491ABC: jz      short loc_491AD2
-0x491ABE: mov     ecx, edi
-0x491AC0: call    ExtraDataList_GetOwner
+0x491ABE: mov     ecx, edi; this
+0x491AC0: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x491AC5: cmp     [esp+150h+arg_8], eax
 0x491ACC: jnz     loc_491C51
-0x491AD2: mov     ecx, edi
-0x491AD4: call    ExtraDataList_GetOwner
+0x491AD2: mov     ecx, edi; this
+0x491AD4: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x491AD9: test    eax, eax
 0x491ADB: jz      loc_491C51
-0x491AE1: mov     ecx, edi
-0x491AE3: call    ExtraDataList_GetOwner
+0x491AE1: mov     ecx, edi; this
+0x491AE3: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x491AE8: cmp     eax, [esp+150h+var_124]
 0x491AEC: jz      loc_491C51
 0x491AF2: mov     ecx, [esp+150h+var_128]
@@ -105,7 +104,7 @@
 0x491B57: mov     eax, ds:0B38298h
 0x491B5C: push    eax
 0x491B5D: push    ebp; a1
-0x491B5E: call    TESFullName_GetNameForForm
+0x491B5E: call    TESFullName_GetNameForForm; 3DTheft decode: TESFullName_GetNameForForm only dynamic-casts the passed form to TESFullName and returns its raw name/EmptyString; it does not apply worldspace fallback.
 0x491B63: add     esp, 4
 0x491B66: push    eax
 0x491B67: push    esi; ArgList
@@ -116,7 +115,7 @@
 0x491B77: add     esp, 18h
 0x491B7A: jmp     short loc_491B98
 0x491B7C: push    ebp; a1
-0x491B7D: call    TESFullName_GetNameForForm
+0x491B7D: call    TESFullName_GetNameForForm; 3DTheft decode: TESFullName_GetNameForForm only dynamic-casts the passed form to TESFullName and returns its raw name/EmptyString; it does not apply worldspace fallback.
 0x491B82: add     esp, 4
 0x491B85: push    eax; ArgList
 0x491B86: lea     eax, [esp+158h+var_130]
@@ -151,7 +150,7 @@
 0x491BE0: call    QueueUIMessage
 0x491BE5: push    esi
 0x491BE6: mov     [esp+164h+var_4], 0FFFFFFFFh
-0x491BF1: call    FormHeapFree
+0x491BF1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x491BF6: add     esp, 14h
 0x491BF9: mov     [esp+150h+var_130], ebx
 0x491BFD: mov     [esp+150h+var_12A], bx
@@ -232,3 +231,16 @@
 0x491CD2: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x491CD7: add     esp, 13Ch
 0x491CDD: retn    0Ch
+0x9AFF80: lea     ecx, [ebp-130h]; void *
+0x9AFF86: jmp     BSStringT_Clear
+0x9AFF8B: mov     edx, [esp+arg_4]
+0x9AFF8F: lea     eax, [edx-140h]
+0x9AFF95: mov     ecx, [edx-144h]
+0x9AFF9B: xor     ecx, eax
+0x9AFF9D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AFFA2: add     eax, 10h
+0x9AFFA5: mov     ecx, [edx-4]
+0x9AFFA8: xor     ecx, eax
+0x9AFFAA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AFFAF: mov     eax, offset stru_ADC3B8
+0x9AFFB4: jmp     ___CxxFrameHandler3

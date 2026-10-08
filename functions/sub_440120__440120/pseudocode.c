@@ -9,27 +9,27 @@ unsigned int __userpurge sub_440120@<eax>(
   unsigned int i; // esi
   int v8; // edx
 
-  result = uInteriorCellBuffer;
-  for ( i = 0; ; ++i )
+  result = uInteriorCellBuffer; /*0x440120*/
+  for ( i = 0; ; ++i ) /*0x44012d*/
   {
-    if ( i >= result )
-      goto LABEL_7;
-    if ( a1 == *(TESObjectCELL **)(*(this + 0xE) + 4 * i) )
-      break;
+    if ( i >= result ) /*0x440132*/
+      goto LABEL_7; /*0x440132*/
+    if ( a1 == *(TESObjectCELL **)(*(this + 0xE) + 4 * i) ) /*0x44013a*/
+      break; /*0x44013a*/
   }
-  sub_447BA0(st5_0, a3, a4, a1);
-  *(_DWORD *)(*(this + 0xE) + 4 * i) = 0;
-  while ( 1 )
+  TESObjectCELL_Deactivate(st5_0, a3, a4, a1); /*0x440148*/
+  *(_DWORD *)(*(this + 0xE) + 4 * i) = 0; /*0x440150*/
+  while ( 1 ) /*0x440157*/
   {
-    result = uInteriorCellBuffer;
+    result = uInteriorCellBuffer; /*0x440157*/
 LABEL_7:
-    v8 = *(this + 0xE);
-    if ( i >= result - 1 )
-      break;
-    *(_DWORD *)(v8 + 4 * i) = *(_DWORD *)(v8 + 4 * i + 4);
-    ++i;
+    v8 = *(this + 0xE); /*0x440160*/
+    if ( i >= result - 1 ) /*0x440168*/
+      break; /*0x440168*/
+    *(_DWORD *)(v8 + 4 * i) = *(_DWORD *)(v8 + 4 * i + 4); /*0x440171*/
+    ++i; /*0x440173*/
   }
-  *(_DWORD *)(v8 + 4 * result - 4) = 0;
-  *((_BYTE *)this + 0x69) = 1;
-  return result;
+  *(_DWORD *)(v8 + 4 * result - 4) = 0; /*0x440178*/
+  *((_BYTE *)this + 0x69) = 1; /*0x440180*/
+  return result; /*0x440184*/
 }

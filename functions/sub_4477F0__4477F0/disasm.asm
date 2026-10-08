@@ -5,7 +5,7 @@
 0x4477FD: mov     esi, ecx
 0x4477FF: jz      short loc_44784E
 0x447801: mov     ecx, ebx; this
-0x447803: call    TESForm_GetQuestItem
+0x447803: call    TESForm_GetQuestItem; TESForm_GetQuestItem: returns TESForm flags bit 0x400. Plugin IsStealableForm uses this, so quest items are skipped before RemoveItem.
 0x447808: test    al, al
 0x44780A: jz      short loc_447825
 0x44780C: mov     ecx, ds:0B33ABCh
@@ -18,11 +18,11 @@
 0x447822: retn    4
 0x447825: mov     ecx, ebx; this
 0x447827: call    TESObjectCELL_GetYCoordinate
-0x44782C: push    eax; signed int
+0x44782C: push    eax; cellY
 0x44782D: mov     ecx, ebx; this
 0x44782F: call    TESObjectCELL_GetXCoordinate
 0x447834: mov     ecx, ds:0B33ABCh; this
-0x44783A: push    eax; signed int
+0x44783A: push    eax; cellX
 0x44783B: call    TESWorldSpace__GetCellAtCellCoord
 0x447840: cmp     eax, ebx
 0x447842: jnz     short loc_44784E
@@ -39,7 +39,7 @@
 0x44785A: mov     edi, [edi+4]
 0x44785D: jz      short loc_447894
 0x44785F: mov     ecx, ebx; this
-0x447861: call    TESForm_GetQuestItem
+0x447861: call    TESForm_GetQuestItem; TESForm_GetQuestItem: returns TESForm flags bit 0x400. Plugin IsStealableForm uses this, so quest items are skipped before RemoveItem.
 0x447866: test    al, al
 0x447868: mov     ds:0B33ABCh, esi
 0x44786E: jz      short loc_447879
@@ -48,10 +48,10 @@
 0x447877: jmp     short loc_447890
 0x447879: mov     ecx, ebx; this
 0x44787B: call    TESObjectCELL_GetYCoordinate
-0x447880: push    eax; signed int
+0x447880: push    eax; cellY
 0x447881: mov     ecx, ebx; this
 0x447883: call    TESObjectCELL_GetXCoordinate
-0x447888: push    eax; signed int
+0x447888: push    eax; cellX
 0x447889: mov     ecx, esi; this
 0x44788B: call    TESWorldSpace__GetCellAtCellCoord
 0x447890: cmp     eax, ebx

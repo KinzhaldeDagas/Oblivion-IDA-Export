@@ -103,3 +103,15 @@
 0x495263: pop     ebx
 0x495264: add     esp, 44h
 0x495267: retn    8
+0x9B01C0: mov     eax, [ebp+8]
+0x9B01C3: push    eax
+0x9B01C4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B01C9: pop     ecx
+0x9B01CA: retn
+0x9B01CB: mov     edx, [esp+arg_4]
+0x9B01CF: lea     eax, [edx-48h]
+0x9B01D2: mov     ecx, [edx-4Ch]
+0x9B01D5: xor     ecx, eax
+0x9B01D7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B01DC: mov     eax, offset stru_ADC594
+0x9B01E1: jmp     ___CxxFrameHandler3

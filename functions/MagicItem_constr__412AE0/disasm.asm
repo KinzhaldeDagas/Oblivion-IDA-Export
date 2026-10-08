@@ -31,3 +31,12 @@
 0x412B45: pop     esi
 0x412B46: add     esp, 10h
 0x412B49: retn
+0x9AB5A0: mov     ecx, [ebp-10h]
+0x9AB5A3: jmp     TESFullName_Initialize
+0x9AB5A8: mov     edx, [esp+arg_4]
+0x9AB5AC: lea     eax, [edx-0Ch]
+0x9AB5AF: mov     ecx, [edx-10h]
+0x9AB5B2: xor     ecx, eax
+0x9AB5B4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AB5B9: mov     eax, offset stru_AD8470
+0x9AB5BE: jmp     ___CxxFrameHandler3

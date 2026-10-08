@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x47DF80",
-    "line": "mov     eax, [esp+Seed]",
+    "line": "mov     eax, [esp+Seed]; Engine RNG: optional explicit seed, otherwise lazy seed with time64 once, then returns rand().",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x47DF9D",
-    "line": "cmp     byte ptr ds:0B069C3h, 0",
+    "line": "cmp     byte ptr ds:0B069C3h, 0; Game RNG consults only g_gameCRTRandomNeedsSeed; it cannot observe FaceGen's separate srand call despite sharing the same CRT state.",
     "mnemonic": "cmp",
     "size": 7
   },

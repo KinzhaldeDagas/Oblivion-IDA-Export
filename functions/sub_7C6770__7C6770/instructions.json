@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7C6770",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Own mode-5 shadow-map rendering: consume active lights, publish current light, dispatch render, release transient camera state, clear current light, and restore prior render mode.",
     "mnemonic": "push",
     "size": 2
   },
@@ -103,13 +103,13 @@
   },
   {
     "ea": "0x7C679F",
-    "line": "call    InitBSShaderAccumulator",
+    "line": "call    BSShaderAccumulator_GetOrCreateGlobal",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7C67A4",
-    "line": "cmp     ds:0B42CDAh, bl",
+    "line": "cmp     ds:0B42CDAh, bl; FreezeRenderAccumulation debug replay state suppresses the complete render-mode-5 active-shadow-light presentation loop.",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x7C67E0",
-    "line": "call    ??0BSCubeMapCamera@@QAE@XZ; BSCubeMapCamera::BSCubeMapCamera(void)",
+    "line": "call    ??0BSCubeMapCamera@@QAE@XZ; BSCubeMapCamera constructor: initializes mode +0x124, six face references +0x128..+0x13C, render/scene fields, cube frustum, and image-space shader list +0x14C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x7C680E",
-    "line": "call    sub_7B4890",
+    "line": "call    BSShader_SetRenderMode; Enter global render mode 5 for native shadow-map production; the prior mode is saved.",
     "mnemonic": "call",
     "size": 5
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x7C6844",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x7C6898",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -703,7 +703,7 @@
   },
   {
     "ea": "0x7C68D8",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -751,7 +751,7 @@
   },
   {
     "ea": "0x7C68F1",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; Update the backing NiLight immediately before render dispatch; the loop has no second branch update after the renderer returns.",
     "mnemonic": "call",
     "size": 5
   },
@@ -883,7 +883,7 @@
   },
   {
     "ea": "0x7C6937",
-    "line": "mov     ds:0B42EB0h, esi",
+    "line": "mov     ds:0B42EB0h, esi; Publish this ShadowSceneLight as the current mode-5 light before rendering its map.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -913,7 +913,7 @@
   },
   {
     "ea": "0x7C6943",
-    "line": "call    sub_7D59C0",
+    "line": "call    ShadowSceneLight_DispatchRender; Dispatch the current light to the normal per-source or special cube/object-list shadow producer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -931,7 +931,7 @@
   },
   {
     "ea": "0x7C694C",
-    "line": "call    sub_7D21F0",
+    "line": "call    ShadowSceneLight_ClearReceiverAssociations; Remove property-side shadow-light links, reset shader-side state, and free this light's object/receiver list associations.",
     "mnemonic": "call",
     "size": 5
   },
@@ -943,7 +943,7 @@
   },
   {
     "ea": "0x7C6953",
-    "line": "jnz     loc_7C6830",
+    "line": "jnz     loc_7C6830; Post-render active-loop edge; advance without another projector-transform consumer.",
     "mnemonic": "jnz",
     "size": 6
   },
@@ -961,7 +961,7 @@
   },
   {
     "ea": "0x7C695F",
-    "line": "mov     ds:0B42EB0h, ebx",
+    "line": "mov     ds:0B42EB0h, ebx; Clear the current ShadowSceneLight pointer after the active-light loop.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1087,7 +1087,7 @@
   },
   {
     "ea": "0x7C699A",
-    "line": "call    sub_7B4890",
+    "line": "call    BSShader_SetRenderMode; Restore the render mode saved before the mode-5 shadow-light loop.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1150,5 +1150,89 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CE6A0",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE6A3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE6A4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE6A9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE6AA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE6AB",
+    "line": "lea     ecx, [ebp-14h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE6AE",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE6B3",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CE6B7",
+    "line": "lea     eax, [edx-28h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE6BA",
+    "line": "mov     ecx, [edx-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE6BD",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CE6BF",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE6C4",
+    "line": "mov     eax, offset stru_AF7644",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE6C9",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

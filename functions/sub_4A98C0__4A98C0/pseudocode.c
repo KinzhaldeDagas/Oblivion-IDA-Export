@@ -1,4 +1,4 @@
 int *sub_4A98C0()
 {
-  return &dword_B35788;
+  return &unk_B35788; /*0x4a98c5*/
 }

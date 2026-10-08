@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x4B6D50",
-    "line": "push    edi",
+    "line": "push    edi; Verified teleport-extra removal hook: before removing linked-door metadata, it removes the corresponding AStarWorldNode from the low-path space maps; then it clears teleport metadata from the linked door and this reference.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B6D51",
-    "line": "mov     edi, [esp+4+arg_0]",
+    "line": "mov     edi, [esp+4+doorReference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x4B6D5C",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -61,13 +61,13 @@
   },
   {
     "ea": "0x4B6D67",
-    "line": "push    edi",
+    "line": "push    edi; doorReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B6D68",
-    "line": "call    sub_67F340",
+    "line": "call    TravelPath_RemoveAStarWorldNodeFromSpaceMaps; Verified unlink path for a door reference whose ExtraTeleport is being removed: locate its AStarWorldNode by reciprocal space pair and endpoint refs, remove it from both inner lists, remove/free empty inner maps and outer entries, unlink it from LowPathSearchGlobals.allAStarWorldNodes, release its state slot, and free the node. Called from RemoveExtraTeleportFromDoorRef and ExtraData cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -79,13 +79,13 @@
   },
   {
     "ea": "0x4B6D70",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B6D72",
-    "line": "call    sub_42B410",
+    "line": "call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.",
     "mnemonic": "call",
     "size": 5
   },

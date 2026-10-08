@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6F6A80",
-    "line": "push    ebp",
+    "line": "push    ebp; Marsaglia polar method with rejection; returns one standard-normal sample.",
     "mnemonic": "push",
     "size": 1
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x6F6A8D",
-    "line": "call    sub_6F6A10",
+    "line": "call    FaceGen_CRTRandomUnitInterval; Map the first k/2^60 unit sample to polar component x = 2u - 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x6F6A9D",
-    "line": "call    sub_6F6A10",
+    "line": "call    FaceGen_CRTRandomUnitInterval; Map the second independent call to polar component y = 2u - 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x6F6AB7",
-    "line": "fst     [esp+10h+var_10]",
+    "line": "fst     [esp+10h+var_10]; radiusSquared = x*x + y*y for Marsaglia polar rejection.",
     "mnemonic": "fst",
     "size": 3
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x6F6AC3",
-    "line": "jz      short loc_6F6A8B",
+    "line": "jz      short loc_6F6A8B; Stock acceptance bug: retries only when radiusSquared > 1, so the exact unit-circle boundary is accepted instead of requiring radiusSquared < 1.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -181,13 +181,13 @@
   },
   {
     "ea": "0x6F6ACE",
-    "line": "jnp     short loc_6F6A8B",
+    "line": "jnp     short loc_6F6A8B; Correctly rejects radiusSquared == 0 before log(radiusSquared)/radiusSquared.",
     "mnemonic": "jnp",
     "size": 2
   },
   {
     "ea": "0x6F6AD0",
-    "line": "call    __CIlog",
+    "line": "call    __CIlog; Compute sqrt(-2 * log(radiusSquared) / radiusSquared).",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,13 +211,13 @@
   },
   {
     "ea": "0x6F6AE3",
-    "line": "fmul    [esp+10h+var_8]",
+    "line": "fmul    [esp+10h+var_8]; Return y * scale. The equally valid x * scale sample is not cached and is discarded.",
     "mnemonic": "fmul",
     "size": 4
   },
   {
     "ea": "0x6F6AE7",
-    "line": "mov     esp, ebp",
+    "line": "mov     esp, ebp; INEFFICIENCY: returns only the second valid polar component and discards the equally valid first component, doubling expected transcendental work.",
     "mnemonic": "mov",
     "size": 2
   },

@@ -48,7 +48,7 @@
 0x67BF6A: push    esi
 0x67BF6B: call    BSSimpleList_Remove
 0x67BF70: push    esi
-0x67BF71: call    FormHeapFree
+0x67BF71: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x67BF76: add     esp, 4
 0x67BF79: mov     esi, [ebp+0]
 0x67BF7C: jmp     short loc_67BF44

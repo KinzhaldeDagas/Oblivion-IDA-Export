@@ -1,19 +1,36 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "BSTextureManager_FetchShadowMap",
+  "chunks": [
+    [
+      "0x7C1960",
+      "0x7C1A28"
+    ],
+    [
+      "0x9CE1E0",
+      "0x9CE20B"
+    ]
+  ],
+  "chunks_sha256": "9adfc99764b30580d5726fef17372d0afaf365fd586eec1cedf22175c61d9ba4",
+  "comment_regular": "Oblivion frustum-shadow pool borrow. Removes the head BSRenderedTexture from the unused shadowMaps list and appends the same refcounted object to the used pool.\n\nBorrows one Oblivion frustum shadow render texture by removing the head of BSTextureManager's unused pool and adding the same refcounted texture to its used pool.",
+  "comment_repeatable": "Oblivion frustum-shadow pool borrow. Removes the head BSRenderedTexture from the unused shadowMaps list and appends the same refcounted object to the used pool.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "BSTextureManager__BorrowFrustumShadowTexture",
   "end_ea": "0x7C1A28",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
-  "name": "BSTextureManager_FetchShadowMap",
+  "name": "BSTextureManager__BorrowFrustumShadowTexture",
   "segment": ".text",
   "sha256": "6d38119d932dc6c4f55c92ce800857b3adfb7d54d3f3cf5de846359cd2a7779a",
   "size": 200,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7C1960",
-  "type": "int __thiscall(BSTextureManager *this)",
-  "xrefs_from_count": 84,
+  "total_chunk_size": 243,
+  "type": "BSRenderedTexture *__thiscall(BSTextureManager *this)",
+  "xrefs_from_count": 97,
   "xrefs_to_count": 2
 }

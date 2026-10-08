@@ -2716,11 +2716,19 @@
   {
     "after": {
       "analysis_pass": "OctoberPass",
+      "bytes_read_complete": true,
       "callees_count": 4,
       "callers_count": 3,
+      "chunks": [
+        [
+          "0x67ACA0",
+          "0x67AE88"
+        ]
+      ],
       "chunks_sha256": "5b2255125c3509802f3418878ecce464eac12f3614127ba5712a9aea6999e837",
-      "comment_regular": "[Verified] Per-actor temp-effect update loop visits both activeTempEffects (+0x40) and extendedTempEffects (+0x48), dispatches virtual Update(effect, deltaSeconds), removes effects returning false, and releases manager references. Active-list decals (types 0/1) and particles (2) update through this shared manager. Fallout divergence: Fallout updates its separate BGSDecalManager simple-decal/emitter collections through UpdateDecals.",
-      "comment_repeatable": "[Verified] Per-actor temp-effect update loop visits both activeTempEffects (+0x40) and extendedTempEffects (+0x48), dispatches virtual Update(effect, deltaSeconds), removes effects returning false, and releases manager references. Active-list decals (types 0/1) and particles (2) update through this shared manager. Fallout divergence: Fallout updates its separate BGSDecalManager simple-decal/emitter collections through UpdateDecals.",
+      "comment_regular": "[Verified] ActorProcessManager temp-effect update loop visits both activeTempEffects (+0x40) and extendedTempEffects (+0x48), dispatches virtual Update(effect, deltaSeconds), removes effects returning false, and releases manager references. Active-list decals (types 0/1) and particles (2) update through this shared manager. Fallout divergence: Fallout updates its separate BGSDecalManager simple-decal/emitter collections through UpdateDecals.",
+      "comment_repeatable": "[Verified] ActorProcessManager temp-effect update loop visits both activeTempEffects (+0x40) and extendedTempEffects (+0x48), dispatches virtual Update(effect, deltaSeconds), removes effects returning false, and releases manager references. Active-list decals (types 0/1) and particles (2) update through this shared manager. Fallout divergence: Fallout updates its separate BGSDecalManager simple-decal/emitter collections through UpdateDecals.",
+      "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
       "data_refs_count": 0,
       "display_name": "ActorProcessManager_UpdateTempEffects",
       "end_ea": "0x67AE88",
@@ -2731,6 +2739,7 @@
       "segment": ".text",
       "sha256": "5b2255125c3509802f3418878ecce464eac12f3614127ba5712a9aea6999e837",
       "size": 488,
+      "source_annotation_confidence": "Verified",
       "start_ea": "0x67ACA0",
       "total_chunk_size": 488,
       "type": "void __thiscall(ActorProcessManager *self, float deltaSeconds)",

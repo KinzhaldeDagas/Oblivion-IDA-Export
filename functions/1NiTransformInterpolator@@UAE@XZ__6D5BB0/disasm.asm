@@ -1,4 +1,4 @@
-0x6D5BB0: push    0FFFFFFFFh
+0x6D5BB0: push    0FFFFFFFFh; Oblivion NiTransformInterpolator destructor. Releases the refcounted NiTransformData pointer at +0x2C, deleting it at zero references, then runs the interpolator base destructor.
 0x6D5BB2: push    offset ??1NiPoint3Interpolator@@UAE@XZ_SEH
 0x6D5BB7: mov     eax, large fs:0
 0x6D5BBD: push    eax
@@ -38,3 +38,12 @@
 0x6D5C20: pop     esi
 0x6D5C21: add     esp, 10h
 0x6D5C24: retn
+0x9C7DA0: mov     ecx, [ebp-10h]
+0x9C7DA3: jmp     sub_6EC250
+0x9C7DA8: mov     edx, [esp+arg_4]
+0x9C7DAC: lea     eax, [edx-0Ch]
+0x9C7DAF: mov     ecx, [edx-10h]
+0x9C7DB2: xor     ecx, eax
+0x9C7DB4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C7DB9: mov     eax, offset stru_AF0100
+0x9C7DBE: jmp     ___CxxFrameHandler3

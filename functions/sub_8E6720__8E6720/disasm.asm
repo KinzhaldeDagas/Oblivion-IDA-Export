@@ -59,7 +59,6 @@
 0x8E67B6: sub     edi, eax
 0x8E67B8: lea     eax, [edx+1]
 0x8E67BB: jmp     short loc_8E67C0
-0x8E67BD: align 10h
 0x8E67C0: mov     edx, [edi+ecx]
 0x8E67C3: mov     [ecx], edx
 0x8E67C5: sub     ecx, 4

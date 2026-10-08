@@ -1,25 +1,25 @@
-0x6C9E00: fldz
+0x6C9E00: fldz; Internal sequence morph implementation. Activates the source against the destination, marks destination transition state and source state 6 (morph source), and records morph timing/weight fields. ActorAnimData reaches this only through the guarded 0x6C4060 wrapper.
 0x6C9E02: push    ebx
 0x6C9E03: push    esi
 0x6C9E04: push    edi
-0x6C9E05: push    1; char
+0x6C9E05: push    1; transition
 0x6C9E07: push    ecx
-0x6C9E08: fstp    [esp+14h+var_14]; float
+0x6C9E08: fstp    [esp+14h+easeOutTime]; easeOutTime
 0x6C9E0B: mov     edi, ecx
-0x6C9E0D: call    sub_6C9CB0
+0x6C9E0D: call    NiControllerSequence_Deactivate; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.
 0x6C9E12: fld     [esp+0Ch+arg_4]
 0x6C9E16: mov     esi, [esp+0Ch+a2]
-0x6C9E1A: mov     ebx, [esp+0Ch+arg_8]
-0x6C9E1E: push    1; int
-0x6C9E20: push    esi; int
+0x6C9E1A: mov     ebx, dword ptr [esp+0Ch+priority]
+0x6C9E1E: push    1; transition
+0x6C9E20: push    esi; timeSyncSequence
 0x6C9E21: sub     esp, 8
-0x6C9E24: fstp    [esp+1Ch+var_18]; float
-0x6C9E28: mov     ecx, edi
+0x6C9E24: fstp    [esp+1Ch+easeInTime]; easeInTime
+0x6C9E28: mov     ecx, edi; this
 0x6C9E2A: fld     [esp+1Ch+arg_C]
-0x6C9E2E: fstp    [esp+1Ch+var_1C]; float
-0x6C9E31: push    0; char
-0x6C9E33: push    ebx; int
-0x6C9E34: call    sub_6C9BA0
+0x6C9E2E: fstp    [esp+1Ch+weight]; weight
+0x6C9E31: push    0; startOver
+0x6C9E33: push    ebx; priority
+0x6C9E34: call    NiControllerSequence_Activate; Native controller-sequence activation state machine. Rejects an already-active sequence, validates optional time-sync compatibility, records activation parameters, and queues the active sequence with its manager.
 0x6C9E39: test    al, al
 0x6C9E3B: jz      loc_6C9F07
 0x6C9E41: cmp     dword ptr [esi+44h], 0

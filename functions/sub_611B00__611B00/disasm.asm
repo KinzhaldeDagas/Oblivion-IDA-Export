@@ -11,7 +11,7 @@
 0x611B17: mov     ecx, esi
 0x611B19: call    sub_47AB80
 0x611B1E: push    esi
-0x611B1F: call    FormHeapFree
+0x611B1F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x611B24: add     esp, 4
 0x611B27: mov     [edi+104h], ebx
 0x611B2D: pop     edi

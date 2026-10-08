@@ -1,12 +1,12 @@
 0x5508F0: sub     esp, 0Ch
 0x5508F3: push    ebx
-0x5508F4: mov     ebx, [esp+10h+arg_0]
-0x5508F8: push    ebx
-0x5508F9: call    sub_5508A0
+0x5508F4: mov     ebx, [esp+10h+geometry]
+0x5508F8: push    ebx; object
+0x5508F9: call    NiObjectNET_FindFaceGenBaseVertexData; Scan NiObjectNET extra data and return the FaceGen base-vertex data object used to restore authored positions.
 0x5508FE: add     esp, 4
 0x550901: test    eax, eax
 0x550903: jz      short loc_55096E
-0x550905: mov     edx, [esp+10h+arg_4]
+0x550905: mov     edx, [esp+10h+vertices]
 0x550909: cmp     dword ptr [edx], 0
 0x55090C: jz      short loc_55096E
 0x55090E: mov     ecx, [edx+8]
@@ -43,7 +43,7 @@
 0x550965: pop     esi
 0x550966: pop     ebp
 0x550967: jz      short loc_55096E
-0x550969: or      word ptr [ebx+2Eh], 1
+0x550969: or      word ptr [ebx+2Eh], 1; Mark only vertex positions dirty (bit 0) after restoring base vertices; normals remain unchanged.
 0x55096E: pop     ebx
 0x55096F: add     esp, 0Ch
 0x550972: retn

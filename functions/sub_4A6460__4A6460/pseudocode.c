@@ -1,97 +1,101 @@
-int __thiscall sub_4A6460(int *this, int a2, float *a3, int a4)
+TESRegionData *__thiscall TESRegionList_SelectDataForLocation(
+        TESRegionList *this,
+        int dataID,
+        float *worldXY,
+        TESWorldSpace *worldspace)
 {
-  int *v4; // ebp
+  int *p_regions; // ebp
   int v5; // eax
   int v6; // edi
-  int v7; // eax
+  TESRegionData *DataByID; // eax
   int v8; // esi
-  _DWORD *v9; // eax
+  OblivionRegionListNode *v9; // eax
   void (__thiscall ***v10)(_DWORD, int); // esi
-  int v11; // edi
-  _DWORD *v12; // ecx
+  TESRegionData **v11; // edi
+  TESRegionList *v12; // ecx
   void (__thiscall ***v14)(_DWORD, int); // ecx
-  _DWORD *v15; // esi
-  _DWORD *v16; // edi
-  _BYTE *v17; // eax
-  _BYTE *v18; // esi
-  _DWORD *v19; // eax
+  TESRegionList **v15; // esi
+  OblivionRegionListNode *v16; // edi
+  TESRegionData *v17; // eax
+  TESRegionData *v18; // esi
+  OblivionRegionListNode *v19; // eax
   int v20; // ecx
   int v21; // edi
-  void (__thiscall ***v22)(_DWORD, int); // eax
+  TESRegionList *v22; // eax
   bool v23; // zf
   char v24; // [esp+1Bh] [ebp-1Dh]
-  _DWORD *v25; // [esp+1Ch] [ebp-1Ch]
-  int v26; // [esp+20h] [ebp-18h]
-  unsigned __int16 v27; // [esp+24h] [ebp-14h]
-  _BYTE *v28; // [esp+28h] [ebp-10h]
-  int *v29; // [esp+44h] [ebp+Ch]
+  TESRegionList *self; // [esp+1Ch] [ebp-1Ch]
+  TESRegionData *v26; // [esp+20h] [ebp-18h]
+  unsigned __int16 priority; // [esp+24h] [ebp-14h]
+  TESRegionData *v28; // [esp+28h] [ebp-10h]
+  TESWorldSpace *worldspacea; // [esp+44h] [ebp+Ch]
 
-  v24 = 0;
-  v27 = 0;
-  v28 = 0;
-  v26 = 0;
-  if ( this )
-    v4 = this + 1;
+  v24 = 0; /*0x4a648b*/
+  priority = 0; /*0x4a648f*/
+  v28 = 0; /*0x4a6493*/
+  v26 = 0; /*0x4a6497*/
+  if ( this ) /*0x4a649b*/
+    p_regions = (int *)&this->regions; /*0x4a649d*/
   else
-    v4 = 0;
-  v5 = FormHeapAlloc(0x10u);
-  if ( v5 )
+    p_regions = 0; /*0x4a64a2*/
+  v5 = FormHeapAlloc(0x10u); /*0x4a64a6*/
+  if ( v5 ) /*0x4a64b0*/
   {
-    *(_DWORD *)(v5 + 4) = 0;
-    *(_DWORD *)(v5 + 8) = 0;
-    *(_DWORD *)v5 = &TESRegionList::`vftable';
-    *(_BYTE *)(v5 + 0xC) = 0;
-    v25 = (_DWORD *)v5;
+    *(_DWORD *)(v5 + 4) = 0; /*0x4a64b2*/
+    *(_DWORD *)(v5 + 8) = 0; /*0x4a64b5*/
+    *(_DWORD *)v5 = &TESRegionList::`vftable'; /*0x4a64b8*/
+    *(_BYTE *)(v5 + 0xC) = 0; /*0x4a64be*/
+    self = (TESRegionList *)v5; /*0x4a64c1*/
   }
   else
   {
-    v25 = 0;
+    self = 0; /*0x4a64c7*/
   }
-  for ( ; v4; v4 = (int *)v4[1] )
+  for ( ; p_regions; p_regions = (int *)p_regions[1] ) /*0x4a64d5*/
   {
-    v6 = *v4;
-    if ( !*v4 )
-      break;
-    if ( (*(_DWORD *)(v6 + 8) & 0x20) == 0 && (!a4 || a4 == *(_DWORD *)(v6 + 0x20)) )
+    v6 = *p_regions; /*0x4a64e0*/
+    if ( !*p_regions ) /*0x4a64e0*/
+      break; /*0x4a64e5*/
+    if ( (*(_DWORD *)(v6 + 8) & 0x20) == 0 && (!worldspace || worldspace == *(TESWorldSpace **)(v6 + 0x20)) ) /*0x4a6500*/
     {
-      v7 = sub_4A4460(*(int **)(v6 + 0x18), a2);
-      if ( v7 )
+      DataByID = TESRegion_FindDataByID(*(TESRegionDataList **)(v6 + 0x18), dataID); /*0x4a650a*/
+      if ( DataByID ) /*0x4a6511*/
       {
-        if ( !*(_BYTE *)(v7 + 5) )
+        if ( !DataByID->bIgnore ) /*0x4a6513*/
         {
-          if ( a3 )
+          if ( worldXY ) /*0x4a651c*/
           {
-            v8 = *(_DWORD *)(v6 + 0x1C);
-            if ( v8 )
+            v8 = *(_DWORD *)(v6 + 0x1C); /*0x4a651e*/
+            if ( v8 ) /*0x4a6523*/
             {
-              while ( *(_DWORD *)v8 )
+              while ( *(_DWORD *)v8 ) /*0x4a6529*/
               {
-                if ( sub_4A7330(*(float **)v8, a3) )
+                if ( sub_4A7330(*(float **)v8, worldXY) ) /*0x4a6530*/
                 {
-                  sub_4A6350(v25, v6);
-                  break;
+                  TESRegionList_AddUniqueRegion(self, (TESForm *)v6); /*0x4a6547*/
+                  break; /*0x4a654c*/
                 }
-                v8 = *(_DWORD *)(v8 + 4);
-                if ( !v8 )
-                  break;
+                v8 = *(_DWORD *)(v8 + 4); /*0x4a6539*/
+                if ( !v8 ) /*0x4a653e*/
+                  break; /*0x4a653e*/
               }
             }
           }
           else
           {
-            v9 = v25 + 1;
-            if ( v25 == (_DWORD *)0xFFFFFFFC )
+            v9 = &self->regions; /*0x4a6555*/
+            if ( self == (TESRegionList *)0xFFFFFFFC ) /*0x4a6559*/
             {
 LABEL_24:
-              BSSimpleList_PushFront(v25 + 1, v6);
+              BSSimpleList_PushFront(&self->regions.regionForm, v6); /*0x4a656b*/
             }
             else
             {
-              while ( *v9 != v6 )
+              while ( v9->regionForm != (TESForm *)v6 ) /*0x4a6562*/
               {
-                v9 = (_DWORD *)v9[1];
-                if ( !v9 )
-                  goto LABEL_24;
+                v9 = v9->next; /*0x4a6564*/
+                if ( !v9 ) /*0x4a6569*/
+                  goto LABEL_24; /*0x4a6569*/
               }
             }
           }
@@ -99,111 +103,111 @@ LABEL_24:
       }
     }
   }
-  v10 = *(void (__thiscall ****)(_DWORD, int))(8 * a2 + 0xB35420);
-  v11 = 8 * a2 + 0xB35420;
-  v29 = (int *)v11;
-  if ( v10 )
+  v10 = *(void (__thiscall ****)(_DWORD, int))(8 * dataID + 0xB35420);// Verified: cache slot selected-data pointer address = 0xB35420 + 8 * regionDataID. /*0x4a6580*/
+  v11 = (TESRegionData **)(8 * dataID + 0xB35420);// Verified: corresponding cache slot matched-region-list pointer is selected-data slot +4. /*0x4a6589*/
+  worldspacea = (TESWorldSpace *)v11; /*0x4a6590*/
+  if ( v10 ) /*0x4a6594*/
   {
-    v12 = *(_DWORD **)(8 * a2 + 0xB35424);
-    if ( v12 && sub_4A6410(v12, (int)v25) )
+    v12 = *(TESRegionList **)(8 * dataID + 0xB35424); /*0x4a6596*/
+    if ( v12 && TESRegionList_AreEqual(v12, self) ) /*0x4a65a6*/
     {
-      BSSimpleList_Clear(v25 + 1);
-      if ( v25 )
-        (*(void (__thiscall **)(_DWORD *, int))*v25)(v25, 1);
-      return *(_DWORD *)v11;
+      BSSimpleList_Clear(&self->regions.regionForm); /*0x4a65b6*/
+      if ( self ) /*0x4a65bd*/
+        self->vtable->scalarDeletingDestructor(self, 1u); /*0x4a65c7*/
+      return *v11; /*0x4a65cb*/
     }
-    *(_DWORD *)v11 = 0;
-    (**v10)(v10, 1);
+    *v11 = 0; /*0x4a65d4*/
+    (**v10)(v10, 1); /*0x4a65de*/
   }
-  v14 = *(void (__thiscall ****)(_DWORD, int))(8 * a2 + 0xB35424);
-  v15 = (_DWORD *)(8 * a2 + 0xB35424);
-  if ( v14 )
+  v14 = *(void (__thiscall ****)(_DWORD, int))(8 * dataID + 0xB35424); /*0x4a65e0*/
+  v15 = (TESRegionList **)(8 * dataID + 0xB35424); /*0x4a65e9*/
+  if ( v14 ) /*0x4a65f4*/
   {
-    *v15 = 0;
-    (**v14)(v14, 1);
+    *v15 = 0; /*0x4a65f6*/
+    (**v14)(v14, 1); /*0x4a65fe*/
   }
-  if ( v25 )
+  if ( self ) /*0x4a6606*/
   {
-    v16 = v25 + 1;
-    if ( v25 == (_DWORD *)0xFFFFFFFC )
-      goto LABEL_63;
-    do
+    v16 = &self->regions; /*0x4a660f*/
+    if ( self == (TESRegionList *)0xFFFFFFFC ) /*0x4a6613*/
+      goto LABEL_63; /*0x4a6613*/
+    do /*0x4a66c1*/
     {
-      if ( !*v16 )
-        break;
-      v17 = (_BYTE *)sub_4A4460(*(int **)(*v16 + 0x18), a2);
-      v18 = v17;
-      if ( v17 )
+      if ( !v16->regionForm ) /*0x4a6620*/
+        break; /*0x4a6624*/
+      v17 = TESRegion_FindDataByID((TESRegionDataList *)v16->regionForm[1].vtbl, dataID); /*0x4a6634*/
+      v18 = v17; /*0x4a6639*/
+      if ( v17 ) /*0x4a663d*/
       {
-        if ( v17[4] )
+        if ( v17->bOverride ) /*0x4a663f*/
         {
-          v24 = 1;
-          if ( v26 )
+          v24 = 1; /*0x4a664a*/
+          if ( v26 ) /*0x4a664f*/
           {
-            (**(void (__thiscall ***)(int, int))v26)(v26, 1);
-            v26 = 0;
+            ((void (__thiscall *)(TESRegionData *, int))v26->vtable->scalarDeletingDestructor)(v26, 1); /*0x4a6657*/
+            v26 = 0; /*0x4a6659*/
           }
-          if ( (unsigned __int8)v18[6] > v27 )
+          if ( v18->priority > priority ) /*0x4a6667*/
           {
-            v28 = v18;
-            v27 = (unsigned __int8)v18[6];
+            v28 = v18; /*0x4a666c*/
+            priority = v18->priority; /*0x4a6670*/
           }
         }
-        else if ( !v24 )
+        else if ( !v24 ) /*0x4a667a*/
         {
-          if ( v26 )
+          if ( v26 ) /*0x4a6682*/
           {
-            v19 = v25 + 1;
-            v20 = 0;
-            do
+            v19 = &self->regions; /*0x4a6684*/
+            v20 = 0; /*0x4a6686*/
+            do /*0x4a669c*/
             {
-              if ( *v19 )
-                ++v20;
-              v19 = (_DWORD *)v19[1];
+              if ( v19->regionForm ) /*0x4a6690*/
+                ++v20; /*0x4a6694*/
+              v19 = v19->next; /*0x4a6697*/
             }
-            while ( v19 );
-            (*(void (__thiscall **)(int, _BYTE *, int))(*(_DWORD *)v26 + 0x18))(v26, v18, v20);
+            while ( v19 ); /*0x4a669c*/
+            ((void (__thiscall *)(TESRegionData *, TESRegionData *, int))v26->vtable->unknown18)(v26, v18, v20); /*0x4a66a7*/
           }
           else
           {
-            v26 = (*(int (__thiscall **)(_BYTE *))(*(_DWORD *)v17 + 0x10))(v17);
+            v26 = (TESRegionData *)((int (__thiscall *)(TESRegionData *))v17->vtable->unknown10)(v17); /*0x4a66b4*/
           }
         }
       }
-      v16 = (_DWORD *)v16[1];
-      v15 = (_DWORD *)(8 * a2 + 0xB35424);
+      v16 = v16->next; /*0x4a66b8*/
+      v15 = (TESRegionList **)(8 * dataID + 0xB35424); /*0x4a66bd*/
     }
-    while ( v16 );
-    if ( v24 )
+    while ( v16 ); /*0x4a66c1*/
+    if ( v24 ) /*0x4a66cb*/
     {
-      v21 = (*(int (__thiscall **)(_BYTE *))(*(_DWORD *)v28 + 0x10))(v28);
-      v26 = v21;
+      v21 = ((int (__thiscall *)(TESRegionData *))v28->vtable->unknown10)(v28); /*0x4a66d8*/
+      v26 = (TESRegionData *)v21; /*0x4a66da*/
     }
     else
     {
-      v21 = v26;
+      v21 = (int)v26; /*0x4a66e0*/
     }
-    if ( !v21 )
+    if ( !v21 ) /*0x4a66e6*/
     {
 LABEL_63:
-      BSSimpleList_Clear(v25 + 1);
-      (*(void (__thiscall **)(_DWORD *, int))*v25)(v25, 1);
+      BSSimpleList_Clear(&self->regions.regionForm); /*0x4a6724*/
+      self->vtable->scalarDeletingDestructor(self, 1u); /*0x4a6733*/
     }
     else
     {
-      if ( *v29 )
-        (**(void (__thiscall ***)(int, int))*v29)(*v29, 1);
-      v22 = (void (__thiscall ***)(_DWORD, int))*v15;
-      v23 = *v15 == 0;
-      *v29 = v21;
-      if ( !v23 )
+      if ( worldspacea->vtbl ) /*0x4a66ec*/
+        (*(void (__thiscall **)(TESFormVtbl *, int))worldspacea->vtbl->super.InitializeComponent)(worldspacea->vtbl, 1); /*0x4a66f9*/
+      v22 = *v15; /*0x4a66fb*/
+      v23 = *v15 == 0; /*0x4a66fd*/
+      worldspacea->vtbl = (TESFormVtbl *)v21; /*0x4a66ff*/
+      if ( !v23 ) /*0x4a6702*/
       {
-        BSSimpleList_Clear(v22 + 1);
-        if ( *v15 )
-          (**(void (__thiscall ***)(_DWORD, int))*v15)(*v15, 1);
+        BSSimpleList_Clear(&v22->regions.regionForm); /*0x4a6707*/
+        if ( *v15 ) /*0x4a670c*/
+          (*v15)->vtable->scalarDeletingDestructor(*v15, 1u); /*0x4a6718*/
       }
-      *v15 = v25;
+      *v15 = self; /*0x4a671e*/
     }
   }
-  return v26;
+  return v26; /*0x4a6739*/
 }

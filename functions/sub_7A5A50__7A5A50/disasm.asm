@@ -1,10 +1,10 @@
-0x7A5A50: push    ebx
+0x7A5A50: push    ebx; Overlap-safe backward deep-copy assignment of compact SIdvLeafTexture records.
 0x7A5A51: push    ebp
 0x7A5A52: push    esi
-0x7A5A53: mov     esi, [esp+0Ch+arg_4]
-0x7A5A57: mov     ebp, [esp+0Ch+arg_8]
+0x7A5A53: mov     esi, [esp+0Ch+last]
+0x7A5A57: mov     ebp, [esp+0Ch+destinationEnd]
 0x7A5A5B: push    edi
-0x7A5A5C: mov     edi, [esp+10h+arg_0]
+0x7A5A5C: mov     edi, [esp+10h+first]
 0x7A5A60: mov     ecx, esi
 0x7A5A62: sub     ecx, edi
 0x7A5A64: mov     eax, 30C30C31h
@@ -20,9 +20,9 @@
 0x7A5A7E: jz      short loc_7A5A92
 0x7A5A80: sub     ebp, esi
 0x7A5A82: sub     esi, 54h ; 'T'
-0x7A5A85: push    esi
-0x7A5A86: lea     ecx, [esi+ebp]
-0x7A5A89: call    sub_7A3470
+0x7A5A85: push    esi; source
+0x7A5A86: lea     ecx, [esi+ebp]; this
+0x7A5A89: call    OB_SIdvLeafTexture_CopyAssign_010201A0; Deep copy-assigns a compact 0x54 SIdvLeafTexture: byte blossom flag, color/variance, owned filename, origin, size, and sizeUsed.
 0x7A5A8E: cmp     esi, edi
 0x7A5A90: jnz     short loc_7A5A82
 0x7A5A92: pop     edi

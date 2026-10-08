@@ -48,16 +48,16 @@
 0x698141: mov     [esp+64h+a2], esi
 0x698145: mov     ecx, ebx; this
 0x698147: mov     [esp+64h+var_4], 0FFFFFFFFh
-0x69814F: call    TESObjectREFR_GetParentCell
+0x69814F: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x698154: push    ebx; TESObjectREFR *
 0x698155: call    sub_4C9BE0
 0x69815A: add     esp, 4
 0x69815D: mov     ecx, ebx; this
 0x69815F: mov     edi, eax
-0x698161: call    TESObjectREFR_GetParentCell
-0x698166: mov     ecx, eax; this
+0x698161: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x698166: mov     ecx, eax; object
 0x698168: add     edi, 2
-0x69816B: call    TESObjectCELL_GetNiNode?
+0x69816B: call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.
 0x698170: test    eax, eax
 0x698172: jz      short loc_6981A1
 0x698174: movzx   ecx, word ptr [eax+0B6h]
@@ -138,16 +138,16 @@
 0x6982CA: fstp    dword ptr [edi+15Ch]
 0x6982D0: call    sub_7F2EC0
 0x6982D5: mov     ecx, ebx; this
-0x6982D7: call    MobileObject_GetCharProxy
+0x6982D7: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x6982DC: lea     edx, [esp+64h+var_30]
 0x6982E0: push    edx
 0x6982E1: mov     ecx, eax
-0x6982E3: call    sub_891440
+0x6982E3: call    bhkCharacterController_ReadRelativePosition; TES4 authoritative: reads current proxy position. Gets collision object transform at 0x8AC070, subtracts metadata/world transform basis offset, returns Havok-unit position.
 0x6982E8: lea     eax, [esp+64h+var_30]
 0x6982EC: push    eax
 0x6982ED: lea     ecx, [esp+68h+var_48]
 0x6982F1: push    ecx
-0x6982F2: call    sub_43F3E0
+0x6982F2: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x6982F7: mov     ecx, [ebx+98h]
 0x6982FD: add     esp, 8
 0x698300: test    ecx, ecx
@@ -237,3 +237,19 @@
 0x6983FF: mov     esp, ebp
 0x698401: pop     ebp
 0x698402: retn    8
+0x9C5AA0: mov     eax, [ebp+var_34]
+0x9C5AA3: push    eax
+0x9C5AA4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C5AA9: pop     ecx
+0x9C5AAA: retn
+0x9C5AAB: mov     edx, [esp-4+arg_4]
+0x9C5AAF: lea     eax, [edx-54h]
+0x9C5AB2: mov     ecx, [edx-58h]
+0x9C5AB5: xor     ecx, eax
+0x9C5AB7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5ABC: add     eax, 0Ch
+0x9C5ABF: mov     ecx, [edx-8]
+0x9C5AC2: xor     ecx, eax
+0x9C5AC4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5AC9: mov     eax, offset stru_AEE1D0
+0x9C5ACE: jmp     ___CxxFrameHandler3

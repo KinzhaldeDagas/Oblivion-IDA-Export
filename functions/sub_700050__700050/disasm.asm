@@ -4,7 +4,7 @@
 0x700056: push    edi
 0x700057: push    esi
 0x700058: mov     edi, ecx
-0x70005A: call    nullsub_returnvVoid_1arg
+0x70005A: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x70005F: cmp     dword ptr [esi+0D8h], 500000Bh
 0x700069: mov     ecx, esi
 0x70006B: jnb     short loc_700077
@@ -23,7 +23,7 @@
 0x700092: call    sub_7124A0
 0x700097: push    eax
 0x700098: mov     ecx, edi
-0x70009A: call    NiNode_AddNiExtraData
+0x70009A: call    NiObjectNET_AddExtraData; Pass269 ABI and ownership proof: NiObjectNET::AddExtraData consumes one stack argument with RET 4 and also expects owning object in ECX/EBX at this build's callsites. The plugin wrapper must not execute caller-side ADD ESP,4.
 0x70009F: sub     ebx, 1
 0x7000A2: jnz     short loc_700090
 0x7000A4: mov     ecx, esi

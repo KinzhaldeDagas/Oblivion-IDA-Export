@@ -1,4 +1,4 @@
-char *sub_750B40()
+NiRTTI *sub_750B40()
 {
-  return dword_B40C3C;
+  return &stru_B40C3C; /*0x750b45*/
 }

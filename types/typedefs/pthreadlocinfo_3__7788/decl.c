@@ -1,1 +1,1 @@
-pthreadlocinfo_3
+typedef threadlocaleinfostruct_3 *pthreadlocinfo_3;

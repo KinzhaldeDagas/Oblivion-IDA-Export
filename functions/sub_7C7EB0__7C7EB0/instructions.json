@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7C7EB0",
-    "line": "cmp     [esp+arg_0], 0",
+    "line": "cmp     [esp+reconcileReceivers], 0; If reconcileReceivers is true, walk fullListHead_E8 and reconcile each non-null ShadowSceneLight source. If retainLightLists is false afterward, tear down the full/active lists. Both direct retail callers pass true/true, so this wrapper's teardown branch is not taken by them.",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x7C7EBB",
-    "line": "mov     esi, [edi+0E8h]",
+    "line": "mov     esi, [edi+0E8h]; Begin the native full-list walk; entries are source ShadowSceneLight objects, not loaded static references.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -79,19 +79,19 @@
   },
   {
     "ea": "0x7C7ED0",
-    "line": "push    eax",
+    "line": "push    eax; light",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C7ED1",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7C7ED3",
-    "line": "call    sub_7C5F60",
+    "line": "call    ShadowSceneNode_ReconcileSourceLightReceivers; Reconcile the current source light's eligible receiver geometry against the current scene.",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x7C7EDC",
-    "line": "cmp     [esp+8+arg_4], 0",
+    "line": "cmp     [esp+8+retainLightLists], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x7C7EE6",
-    "line": "call    sub_7C7E50",
+    "line": "call    ShadowSceneNode_TeardownLightLists; Conditional list teardown occurs only when reconcileReceivers=true and retainLightLists=false. The two direct retail callers both pass retainLightLists=true.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,4 +1,4 @@
-0x468790: mov     eax, [esp+arg_0]
+0x468790: mov     eax, [esp+arg_0]; CustomAnimSupport decode: ordered exact-string compare for TESAnimation KFFZ lists.
 0x468794: push    esi
 0x468795: push    0; int
 0x468797: push    offset ??_R0?AVTESAnimation@@@8; struct TypeDescriptor *
@@ -27,9 +27,9 @@
 0x4687CF: jmp     short loc_4687E1
 0x4687D1: test    ecx, ecx
 0x4687D3: jz      short loc_4687FC
-0x4687D5: push    ecx; Str2
-0x4687D6: push    eax; Str1
-0x4687D7: call    __strcmp
+0x4687D5: push    ecx; right
+0x4687D6: push    eax; left
+0x4687D7: call    CRT_StricmpLocaleDispatch
 0x4687DC: add     esp, 8
 0x4687DF: test    eax, eax
 0x4687E1: jnz     short loc_4687FC

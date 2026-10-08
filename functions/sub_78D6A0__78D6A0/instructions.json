@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x78D6A0",
-    "line": "push    ebp",
+    "line": "push    ebp; CSpeedTreeRT default constructor/init. Allocates owned engine/geometry/lighting/wind/simple-billboard/frond objects, tree sizes, shared refcount/list, registers in global tree list, and initializes base extents/horizontal coords.",
     "mnemonic": "push",
     "size": 1
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x78D72F",
-    "line": "mov     [esi+54h], bx",
+    "line": "mov     [esi+54h], bx; 2026-05-21 360 gap pass: CSpeedTreeRT constructor zeros +0x54 directional image count; current parser paths do not later populate it.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x78D74E",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x78D753",
-    "line": "mov     [ebp+var_18], ecx",
+    "line": "mov     [ebp+value], ecx",
     "mnemonic": "mov",
     "size": 3
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x78D75E",
-    "line": "call    sub_793B40",
+    "line": "call    OB_CWindEngine_ctor_010201A0; Initializes the exact Oblivion CWindEngine per-instance defaults: strength 0.25, method fields 2, rocking enabled, matrix span 4, leaf factors/scalars 1, and angle pointers/count zero. Unlike RT4.1's constructor, this Oblivion body contains no wind-matrix resize or reference-count side effects.",
     "mnemonic": "call",
     "size": 5
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x78D777",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x78D77C",
-    "line": "mov     [ebp+var_18], ecx",
+    "line": "mov     [ebp+value], ecx",
     "mnemonic": "mov",
     "size": 3
   },
@@ -457,19 +457,19 @@
   },
   {
     "ea": "0x78D78A",
-    "line": "push    ebx",
+    "line": "push    ebx; retainTexcoords",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78D78B",
-    "line": "push    eax",
+    "line": "push    eax; windEngine",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78D78C",
-    "line": "call    sub_795FB0",
+    "line": "call    OB_CIndexedGeometry_ctor_010201A0; CIndexedGeometry constructor: stock 0x118-byte geometry writer; records retain-texcoord flag, CWindEngine pointer, vertex-weighting state, 16-bit vertex/LOD/strip counters, index strip vectors, and attribute vectors.",
     "mnemonic": "call",
     "size": 5
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x78D7A5",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; Allocates stock Oblivion CTreeEngine as 0x110 bytes. This hard bounds the embedded layout at SIdvWindInfo strength (+0x10C); later 4.1 floor/root/mesh/global fields are not present in this object.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x78D7AA",
-    "line": "mov     [ebp+var_18], ecx",
+    "line": "mov     [ebp+value], ecx",
     "mnemonic": "mov",
     "size": 3
   },
@@ -553,13 +553,13 @@
   },
   {
     "ea": "0x78D7B8",
-    "line": "push    edx",
+    "line": "push    edx; branchGeometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78D7B9",
-    "line": "call    sub_7A3700",
+    "line": "call    OB_CTreeEngine_ctor_010201A0; Constructs CTreeEngine with branch geometry pointer. See 0x7A3700 for stock 0x110-byte field map.",
     "mnemonic": "call",
     "size": 5
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x78D7D1",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x78D7D6",
-    "line": "mov     [ebp+var_18], ecx",
+    "line": "mov     [ebp+value], ecx",
     "mnemonic": "mov",
     "size": 3
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x78D7E1",
-    "line": "call    sub_793CF0",
+    "line": "call    OB_CLightingEngine_ctor_010201A0; Oblivion-local CLightingEngine constructor. Establishes the 0xB0 layout: branch/leaf/frond lighting methods, three 13-float OpenGL-style materials, leaf adjustment scalar, and static-lighting style.",
     "mnemonic": "call",
     "size": 5
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x78D7F7",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x78D7FC",
-    "line": "mov     [ebp+var_18], ecx",
+    "line": "mov     [ebp+value], ecx",
     "mnemonic": "mov",
     "size": 3
   },
@@ -721,13 +721,13 @@
   },
   {
     "ea": "0x78D80A",
-    "line": "push    eax",
+    "line": "push    eax; windEngine",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78D80B",
-    "line": "call    sub_798290",
+    "line": "call    OB_CLeafGeometry_ctor_010201A0; SpeedTree decode: CLeafGeometry ctor. Initializes compact 0x30-byte stock leaf-geometry container: manual-lighting=false, vertex-weighting=false, CWindEngine*, default 3 rocking groups, leaf vertex/texcoord/program-table/dim/origin pointers null, texture and LOD counts zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -769,7 +769,7 @@
   },
   {
     "ea": "0x78D821",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -781,7 +781,7 @@
   },
   {
     "ea": "0x78D826",
-    "line": "mov     [ebp+var_18], ecx",
+    "line": "mov     [ebp+value], ecx",
     "mnemonic": "mov",
     "size": 3
   },
@@ -805,7 +805,7 @@
   },
   {
     "ea": "0x78D831",
-    "line": "call    sub_7A66F0",
+    "line": "call    OB_CSimpleBillboard_ctor_010201A0; Initializes a legacy 0x34-byte CSimpleBillboard cache by clearing only its valid byte.",
     "mnemonic": "call",
     "size": 5
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x78D84F",
-    "line": "call    FormHeapAlloc",
+    "line": "call    FormHeapAlloc; Allocates the 4-byte shared-instance refcount object used as family identity; initializes it to 1 at 0x78D85C. This allocation outlives individual base/instance wrappers until final shared cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -973,7 +973,7 @@
   },
   {
     "ea": "0x78D884",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -985,7 +985,7 @@
   },
   {
     "ea": "0x78D889",
-    "line": "mov     [ebp+var_18], ecx",
+    "line": "mov     [ebp+value], ecx",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1009,7 +1009,7 @@
   },
   {
     "ea": "0x78D894",
-    "line": "call    sub_7A13B0",
+    "line": "call    OB_CFrondEngine_ctor_010201A0; SpeedTree decode: compact stock CFrondEngine ctor. Object is 0x6C bytes in CSpeedTreeRT construction; initializes geometry/lighting pointers, MSVC vector containers for guides/guide-LODs/textures, stock frond fields through min cross segments, and default Bezier profile. Later 4.1 supplemental frond fields are not present in this stock allocation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1051,7 +1051,7 @@
   },
   {
     "ea": "0x78D8AD",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1063,7 +1063,7 @@
   },
   {
     "ea": "0x78D8B2",
-    "line": "mov     [ebp+var_18], ecx",
+    "line": "mov     [ebp+value], ecx",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1093,19 +1093,19 @@
   },
   {
     "ea": "0x78D8C0",
-    "line": "push    edi",
+    "line": "push    edi; retainTexcoords",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78D8C1",
-    "line": "push    edx",
+    "line": "push    edx; windEngine",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78D8C2",
-    "line": "call    sub_795FB0",
+    "line": "call    OB_CIndexedGeometry_ctor_010201A0; CIndexedGeometry constructor: stock 0x118-byte geometry writer; records retain-texcoord flag, CWindEngine pointer, vertex-weighting state, 16-bit vertex/LOD/strip counters, index strip vectors, and attribute vectors.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1129,19 +1129,19 @@
   },
   {
     "ea": "0x78D8CE",
-    "line": "lea     eax, [ebp+var_18]",
+    "line": "lea     eax, [ebp+value]",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x78D8D1",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78D8D2",
-    "line": "mov     ecx, offset dword_B42984",
+    "line": "mov     ecx, offset stru_B42984; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1153,13 +1153,13 @@
   },
   {
     "ea": "0x78D8DA",
-    "line": "mov     [ebp+var_18], esi",
+    "line": "mov     [ebp+value], esi",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x78D8DD",
-    "line": "call    sub_791770",
+    "line": "call    OB_stVector4_PushBack_010201A0; CSpeedTreeRT constructor registers the instance in global list dword_B42984; SetCamera/cache invalidation walks this list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1417,13 +1417,13 @@
   },
   {
     "ea": "0x78D956",
-    "line": "lea     esi, [ebp+var_38]",
+    "line": "lea     esi, [ebp+result]; result",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x78D959",
-    "line": "call    sub_7A54A0",
+    "line": "call    OB_IdvFormatString_010201A0; Oblivion binary evidence: IdvFormatString. Formats variadic arguments with vsprintf into a 1024-byte stack buffer, constructs the hidden-result 28-byte SSO string, assigns strlen(buffer) bytes, and returns the result pointer in EAX. SpeedTreeRT 4.1 IdvGlobals.h:77-93 corroborates the name and fixed buffer only after observation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1471,13 +1471,13 @@
   },
   {
     "ea": "0x78D973",
-    "line": "push    eax; Src",
+    "line": "push    eax; error",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78D974",
-    "line": "call    sub_7895E0",
+    "line": "call    CSpeedTreeRT__SetError; Oblivion binary evidence: CSpeedTreeRT static error setter. Assigns the NUL-terminated input into the sole 28-byte global error string at 0xB2B614. After observation, SpeedTreeRT 4.1 SpeedTreeRT.cpp:2671-2677 corroborates SetError and g_strError.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1489,13 +1489,13 @@
   },
   {
     "ea": "0x78D97C",
-    "line": "lea     ecx, [ebp+var_38]",
+    "line": "lea     ecx, [ebp+result]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x78D97F",
-    "line": "call    sub_79AB00",
+    "line": "call    OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1525,13 +1525,13 @@
   },
   {
     "ea": "0x78D994",
-    "line": "lea     esi, [ebp+var_54]",
+    "line": "lea     esi, [ebp+var_54]; result",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x78D997",
-    "line": "call    sub_7A54A0",
+    "line": "call    OB_IdvFormatString_010201A0; Oblivion binary evidence: IdvFormatString. Formats variadic arguments with vsprintf into a 1024-byte stack buffer, constructs the hidden-result 28-byte SSO string, assigns strlen(buffer) bytes, and returns the result pointer in EAX. SpeedTreeRT 4.1 IdvGlobals.h:77-93 corroborates the name and fixed buffer only after observation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1579,13 +1579,13 @@
   },
   {
     "ea": "0x78D9B1",
-    "line": "push    eax; Src",
+    "line": "push    eax; error",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78D9B2",
-    "line": "call    sub_7895E0",
+    "line": "call    CSpeedTreeRT__SetError; Oblivion binary evidence: CSpeedTreeRT static error setter. Assigns the NUL-terminated input into the sole 28-byte global error string at 0xB2B614. After observation, SpeedTreeRT 4.1 SpeedTreeRT.cpp:2671-2677 corroborates SetError and g_strError.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1597,13 +1597,13 @@
   },
   {
     "ea": "0x78D9BA",
-    "line": "lea     ecx, [ebp+var_54]",
+    "line": "lea     ecx, [ebp+var_54]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x78D9BD",
-    "line": "call    sub_79AB00",
+    "line": "call    OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1684,5 +1684,341 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CB970",
+    "line": "mov     eax, [ebp+value]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB973",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CB974",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB979",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CB97A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CB97B",
+    "line": "mov     eax, [ebp+value]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB97E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CB97F",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB984",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CB985",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CB986",
+    "line": "mov     eax, [ebp+value]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB989",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CB98A",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB98F",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CB990",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CB991",
+    "line": "mov     eax, [ebp+value]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB994",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CB995",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB99A",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CB99B",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CB99C",
+    "line": "mov     eax, [ebp+value]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB99F",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CB9A0",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB9A5",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CB9A6",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CB9A7",
+    "line": "mov     eax, [ebp+value]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB9AA",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CB9AB",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB9B0",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CB9B1",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CB9B2",
+    "line": "mov     eax, [ebp+var_58]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB9B5",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CB9B6",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB9BB",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CB9BC",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CB9BD",
+    "line": "mov     eax, [ebp+value]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB9C0",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CB9C1",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB9C6",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CB9C7",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CB9C8",
+    "line": "mov     eax, [ebp+value]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB9CB",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CB9CC",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB9D1",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CB9D2",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CB9D3",
+    "line": "lea     ecx, [ebp+result]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB9D6",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB9DB",
+    "line": "lea     ecx, [ebp+var_54]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB9DE",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB9E3",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CB9E7",
+    "line": "lea     eax, [edx+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB9EA",
+    "line": "mov     ecx, [edx-5Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB9ED",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CB9EF",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB9F4",
+    "line": "mov     eax, offset stru_AF4708",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB9F9",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,11 +1,11 @@
-0x473420: push    ecx
+0x473420: push    ecx; Computes ActorAnimData serialized size from fixed slot/key/action fields plus variable active sequence and current/queued idle state.
 0x473421: push    ebp
 0x473422: push    esi
 0x473423: mov     ebp, ecx
 0x473425: mov     ecx, ds:0B33B00h
 0x47342B: push    edi
 0x47342C: mov     [esp+10h+var_4], 0
-0x473434: call    sub_45A170
+0x473434: call    TESSaveLoadGame_UseSaveGameBlocks
 0x473439: test    al, al
 0x47343B: jz      short loc_473445
 0x47343D: mov     [esp+10h+var_4], 6
@@ -24,7 +24,7 @@
 0x473471: add     [esp+14h+var_4], 11h
 0x473476: test    ecx, ecx
 0x473478: jz      short loc_473484
-0x47347A: call    sub_49F550
+0x47347A: call    BSAnimGroupSequence_GetSaveStateSize; Returns native serialized BSAnimGroupSequence state size: 20 bytes for save versions >= 0x71, otherwise 24 bytes.
 0x47347F: add     word ptr [esp+14h+var_4], ax
 0x473484: add     edi, 2
 0x473487: add     esi, 4
@@ -48,7 +48,7 @@
 0x4734B6: mov     eax, [ebp+0CCh]
 0x4734BC: push    eax
 0x4734BD: push    esi
-0x4734BE: call    sub_471130
+0x4734BE: call    AnimIdle_GetSaveStateSize; Computes variable AnimIdle serialized size, including optional idle form/phase data and optional BSAnimGroupSequence state with version-dependent payload size.
 0x4734C3: add     word ptr [esp+18h+var_4], ax
 0x4734C8: mov     ecx, ds:0B33B00h
 0x4734CE: mov     eax, 1
@@ -100,7 +100,7 @@
 0x47355E: mov     ecx, [esp+10h+arg_0]
 0x473562: test    ecx, ecx
 0x473564: jz      short loc_473579
-0x473566: call    sub_49F550
+0x473566: call    BSAnimGroupSequence_GetSaveStateSize; Returns native serialized BSAnimGroupSequence state size: 20 bytes for save versions >= 0x71, otherwise 24 bytes.
 0x47356B: mov     di, word ptr [esp+10h+var_4]
 0x473570: add     ax, 4
 0x473574: add     di, ax
@@ -114,7 +114,7 @@
 0x473594: jz      short loc_4735DA
 0x473596: mov     ecx, [esi]
 0x473598: push    ecx; a1
-0x473599: call    TESForm_LookupByFormID
+0x473599: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x47359E: mov     edx, [esi+5]
 0x4735A1: add     esp, 4
 0x4735A4: push    offset a__TesSharedAni; "..\\TES Shared\\Animation.cpp"

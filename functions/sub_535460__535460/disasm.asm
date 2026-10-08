@@ -24,7 +24,7 @@
 0x53549C: jz      short loc_5354A6
 0x53549E: add     eax, 14h
 0x5354A1: jz      short loc_5354A6
-0x5354A3: mov     [eax+1Ch], edx
+0x5354A3: mov     [eax+1Ch], edx; TES4 authoritative: rewrites phantom collision filter high 16 bits while preserving low 16 layer/filter bits, then refreshes the phantom.
 0x5354A6: mov     eax, [ecx]
 0x5354A8: mov     edx, [eax+80h]
 0x5354AE: call    edx

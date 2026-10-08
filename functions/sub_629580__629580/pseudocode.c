@@ -1,4 +1,4 @@
 int __thiscall sub_629580(_DWORD *this)
 {
-  return *(this + 0x62);
+  return *(this + 0x62); /*0x629586*/
 }

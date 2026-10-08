@@ -1,10 +1,10 @@
-0x6D0550: push    ecx
+0x6D0550: push    ecx; Loads NiTimeController, then for stream versions 0x0A010068 through 0x0A01006C reads a transitional Boolean and maps it to controller flag 0x20. Other versions rely on the base flag representation/migration.
 0x6D0551: push    esi
 0x6D0552: mov     esi, [esp+8+arg_0]
 0x6D0556: push    edi
 0x6D0557: push    esi
 0x6D0558: mov     edi, ecx
-0x6D055A: call    sub_715F40
+0x6D055A: call    NiTimeController_LoadBinary; Load persistent NiTimeController state: flags +0x08, frequency/phase/key bounds, and target/next links. Legacy migration clears flag bit 0x20 before stream version 0x0A01006D. Runtime time caches and update bytes are constructor state, not serialized.
 0x6D055F: mov     eax, [esi+0D8h]
 0x6D0565: cmp     eax, 0A010068h
 0x6D056A: jb      short loc_6D05B0

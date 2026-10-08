@@ -1,23 +1,21 @@
-LONG sub_7D7030()
+// Release the strong-owned top render-target-group stack entry and decrement the global depth.
+void __cdecl NiRenderer_ReleaseTopRenderTargetGroup()
 {
-  LONG result; // eax
+  unsigned __int32 v0; // eax
   int v1; // esi
   _DWORD *v2; // edi
 
-  result = dword_B45D74;
-  if ( dword_B45D74 )
+  if ( NiRendererRenderTargetStackDepth ) /*0x7d7030*/
   {
-    --result;
-    v1 = *(_DWORD *)(4 * result + 0xB45D78);
-    v2 = (_DWORD *)(4 * result + 0xB45D78);
-    dword_B45D74 = result;
-    if ( v1 )
+    v0 = NiRendererRenderTargetStackDepth - 1; /*0x7d703a*/
+    v1 = *(_DWORD *)(4 * v0 + 0xB45D78); /*0x7d703d*/
+    v2 = (_DWORD *)(4 * v0 + 0xB45D78); /*0x7d7047*/
+    NiRendererRenderTargetStackDepth = v0; /*0x7d704e*/
+    if ( v1 ) /*0x7d7053*/
     {
-      result = InterlockedDecrement((volatile LONG *)(v1 + 4));
-      if ( !result )
-        result = (**(int (__thiscall ***)(int, int))v1)(v1, 1);
-      *v2 = 0;
+      if ( !InterlockedDecrement((volatile LONG *)(v1 + 4)) ) /*0x7d7059*/
+        (**(void (__thiscall ***)(int, int))v1)(v1, 1); /*0x7d706f*/
+      *v2 = 0; /*0x7d7071*/
     }
   }
-  return result;
 }

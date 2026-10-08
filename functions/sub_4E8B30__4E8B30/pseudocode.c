@@ -1,20 +1,29 @@
-char __thiscall sub_4E8B30(_DWORD *this, _DWORD *a2, int a3, int a4)
+// Verified local ROAD grouping: TESRoad stores its owner TESWorldSpace at +0x2C. Direct ROAD membership is GRUP type 1 labeled with the owner WRLD FormID24; with include_parent set, it first delegates to the owning WRLD's group matcher.
+bool __thiscall TESRoad_MatchesSerializedGroup(
+        TESRoad *this,
+        const unsigned int *groupHeader,
+        bool includeParent,
+        int matchFlags)
 {
   char v4; // bl
-  _DWORD *v5; // esi
+  TESWorldSpace *ownerWorldspace; // esi
 
-  v4 = 0;
-  if ( !a2 || *a2 != dword_B05E20 )
-    return 0;
-  v5 = (_DWORD *)*(this + 0xB);
-  if ( (_BYTE)a3 )
+  v4 = 0; /*0x4e8b36*/
+  if ( !groupHeader || *groupHeader != dword_B05E20 ) /*0x4e8b44*/
+    return 0; /*0x4e8b91*/
+  ownerWorldspace = this->ownerWorldspace; /*0x4e8b4d*/
+  if ( includeParent ) /*0x4e8b50*/
   {
-    v4 = (*(int (__thiscall **)(_DWORD *, _DWORD *, int, int))(*v5 + 0xBC))(v5, a2, a3, a4);
-    if ( v4 )
-      return v4;
+    v4 = ((int (__thiscall *)(TESWorldSpace *, const unsigned int *, bool, int))ownerWorldspace->vtbl->Unk_2F)( /*0x4e8b65*/
+           ownerWorldspace,
+           groupHeader,
+           includeParent,
+           matchFlags);
+    if ( v4 ) /*0x4e8b69*/
+      return v4; /*0x4e8b69*/
   }
-  if ( a2[3] != 1 || !sub_46AF50(v5, a2[2]) )
-    return v4;
+  if ( groupHeader[3] != 1 || !TESForm_FormIDMatchesObjectID24(ownerWorldspace, groupHeader[2]) )// Direct ROAD membership requires groupType=1 and label == owning WRLD object ID (low FormID24). /*0x4e8b77*/
+    return v4; /*0x4e8b8a*/
   else
-    return 1;
+    return 1; /*0x4e8b82*/
 }

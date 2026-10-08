@@ -1,5 +1,5 @@
 0x70F9B0: push    ebx
-0x70F9B1: mov     ebx, dword ptr [esp+4+ArgList]
+0x70F9B1: mov     ebx, [esp+4+ArgList]
 0x70F9B5: push    esi
 0x70F9B6: mov     eax, ebx
 0x70F9B8: push    edi

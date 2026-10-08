@@ -7,7 +7,7 @@
 0x6623B0: mov     eax, [esi+4]
 0x6623B3: mov     edi, [eax+4]
 0x6623B6: push    eax
-0x6623B7: call    FormHeapFree
+0x6623B7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6623BC: add     esp, 4
 0x6623BF: test    edi, edi
 0x6623C1: mov     [esi+4], edi

@@ -1,4 +1,4 @@
-BSStringT *sub_A0DDA0()
+NiRTTI *sub_A0DDA0()
 {
-  return sub_70E220((BSStringT *)dword_B4146C, "NiPSysFieldAttenuationCtlr", (int)dword_B41F8C);
+  return NiRTTI_Constructor(&stru_B4146C, "NiPSysFieldAttenuationCtlr", &stru_B41F8C); /*0xa0ddb4*/
 }

@@ -17,6 +17,6 @@
 0x5C9FF3: call    sub_578D70
 0x5C9FF8: cmp     al, 2
 0x5C9FFA: jnz     short loc_5CA001
-0x5C9FFC: jmp     sub_5C9CD0
+0x5C9FFC: jmp     RaceSexMenu_ExecuteRandomizeFace; Native Randomize Face confirmation entry is a tail JMP (E9) to 0x5C9CD0, not a CALL. Earlier PF optional-hook validation incorrectly expected E8 and disabled all custom-XML safety hooks. PF 1.19.12 leaves this jump untouched.
 0x5CA001: mov     byte ptr ds:0B3B4C8h, 0
 0x5CA008: retn

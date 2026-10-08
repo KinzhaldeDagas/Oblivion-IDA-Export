@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x67F030",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Verified Oblivion AStarNodeList pop scans from start through each node's next link, compares F cost at graph-node+0, unlinks the lowest-F entry, and returns the generic graph-node pointer. Fallout's inspected NavMesh AStarQueue instead selects the first nonempty F bucket among 20.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x67F048",
-    "line": "mov     [esp+10h+var_4], ebx",
+    "line": "mov     [esp+10h+node], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x67F078",
-    "line": "mov     [esp+14h+var_4], ebx",
+    "line": "mov     [esp+14h+node], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -211,19 +211,19 @@
   },
   {
     "ea": "0x67F083",
-    "line": "lea     eax, [esp+10h+var_4]",
+    "line": "lea     eax, [esp+10h+node]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x67F087",
-    "line": "push    eax",
+    "line": "push    eax; node",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67F088",
-    "line": "call    sub_7AA860",
+    "line": "call    NiTPointerList_RemoveNode; [Verified] Generic NiTPointerList node-removal helper. Unlinks the supplied node, updates head/tail and neighboring links, invokes the list's FreeNode vfunc, decrements item count, and returns the removed node's data pointer.",
     "mnemonic": "call",
     "size": 5
   },

@@ -6,7 +6,7 @@
 0x78268B: jnb     short loc_7826A3
 0x78268D: mov     eax, [esi+18h]
 0x782690: push    eax
-0x782691: call    FormHeapFree
+0x782691: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x782696: add     esp, 4
 0x782699: mov     dword ptr [esi+18h], 0
 0x7826A0: mov     [esi+14h], edi
@@ -21,10 +21,10 @@
 0x7826BC: test    eax, eax
 0x7826BE: jz      short loc_7826CE
 0x7826C0: mov     edx, [esi+18h]
-0x7826C3: push    edi; Size
-0x7826C4: push    eax; Src
-0x7826C5: push    edx; Dst
-0x7826C6: call    _memcpy
+0x7826C3: push    edi; byteCount
+0x7826C4: push    eax; source
+0x7826C5: push    edx; destination
+0x7826C6: call    _memcpy;
 0x7826CB: add     esp, 0Ch
 0x7826CE: pop     edi
 0x7826CF: pop     esi

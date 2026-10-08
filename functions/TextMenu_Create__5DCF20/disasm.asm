@@ -18,9 +18,9 @@
 0x5DCF4A: mov     esi, eax
 0x5DCF4C: call    InterfaceManager_GetDepth
 0x5DCF51: fstp    [esp+0Ch+var_4]
-0x5DCF55: mov     ecx, [esi+68h]; TileWindow *
+0x5DCF55: mov     ecx, [esi+68h]; this
 0x5DCF58: push    offset aDataMenusDia_2; "Data\\Menus\\Dialog\\TextEditMenu.xml"
-0x5DCF5D: call    Menu_LoadXML
+0x5DCF5D: call    Tile__ReadFile; Verified: SDK ReadXML entry. Builds named tree under receiver via 0x590330, connects/evaluates traits via 0x58CF40, registers subtemplates with owning Menu, frees build storage, refreshes returned subtree via 0x58FBA0. Returns first created tile. Fallout analogue 0x827E2588; cache/cleanup differs.
 0x5DCF62: mov     ebp, eax
 0x5DCF64: mov     ecx, ebp
 0x5DCF66: call    Tile_GetParentMenu
@@ -79,10 +79,10 @@
 0x5DD014: jp      short loc_5DD02A
 0x5DD016: fld     [esp+14h+var_4]
 0x5DD01A: push    ecx
-0x5DD01B: fstp    [esp+18h+a3]; a3
-0x5DD01E: push    0FABh; a2
+0x5DD01B: fstp    [esp+18h+a3]; value
+0x5DD01E: push    0FABh; propertyCode
 0x5DD023: mov     ecx, ebp; this
-0x5DD025: call    Tile_SetFloat
+0x5DD025: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5DD02A: mov     ecx, [esp+14h+arg_0]
 0x5DD02E: push    ecx
 0x5DD02F: push    0FAEh
@@ -97,7 +97,7 @@
 0x5DD04E: push    0FD4h
 0x5DD053: add     edi, 34h ; '4'
 0x5DD056: call    Tile_GetFloat
-0x5DD05B: call    Double_To_SInt32
+0x5DD05B: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5DD060: push    eax
 0x5DD061: mov     ecx, edi
 0x5DD063: call    sub_583DD0

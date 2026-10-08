@@ -14,7 +14,7 @@
 0x77E03F: jz      short loc_77E051
 0x77E041: mov     ecx, [esi+4]
 0x77E044: push    eax
-0x77E045: call    nullsub_returnvVoid_1arg
+0x77E045: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x77E04A: mov     dword ptr [esi+8], 0
 0x77E051: cmp     ebx, [edi+1Ch]
 0x77E054: jnb     short loc_77E060

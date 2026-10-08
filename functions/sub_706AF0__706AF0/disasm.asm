@@ -1,4 +1,4 @@
-0x706AF0: push    esi
+0x706AF0: push    esi; Pass223: Clears default NiWireframeProperty global 0x00B3F984.
 0x706AF1: mov     esi, ds:0B3F984h
 0x706AF7: test    esi, esi
 0x706AF9: jz      short loc_706B21

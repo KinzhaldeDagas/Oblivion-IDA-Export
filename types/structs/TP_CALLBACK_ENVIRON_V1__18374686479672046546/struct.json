@@ -1,58 +1,99 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_TP_CALLBACK_ENVIRON_V1",
+  "definition": "struct __declspec(align(8)) _TP_CALLBACK_ENVIRON_V1\n{\nTP_VERSION Version;\nPTP_POOL Pool;\nPTP_CLEANUP_GROUP CleanupGroup;\nPTP_CLEANUP_GROUP_CANCEL_CALLBACK CleanupGroupCancelCallback;\nPVOID RaceDll;\n_ACTIVATION_CONTEXT *ActivationContext;\nPTP_SIMPLE_CALLBACK FinalizationCallback;\n$6339CDE423AF4478A0B00260CF12A62C u;\n}\n",
   "id": 18374686479672046546,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Version",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "TP_VERSION"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Pool",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "PTP_POOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CleanupGroup",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "PTP_CLEANUP_GROUP"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CleanupGroupCancelCallback",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "PTP_CLEANUP_GROUP_CANCEL_CALLBACK"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RaceDll",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "PVOID"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ActivationContext",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "_ACTIVATION_CONTEXT *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "FinalizationCallback",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "PTP_SIMPLE_CALLBACK"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "u",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "$6339CDE423AF4478A0B00260CF12A62C"
     }
   ],
   "name": "_TP_CALLBACK_ENVIRON_V1",
+  "ordinal": 8515,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 32
 }

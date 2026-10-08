@@ -1,8 +1,5 @@
-NiNode *__thiscall sub_725410(NiCamera *this)
+void __thiscall sub_725410(NiCamera *this)
 {
-  NiNode *result; // eax
-
-  result = sub_70C120(this);
-  ++LODWORD(this->members.WorldToCam[0][3]);
-  return result;
+  NiAVObject_UpdateWorldTransform((NiAVObject *)this); /*0x725413*/
+  ++LODWORD(this->members.WorldToCam[0][3]); /*0x725418*/
 }

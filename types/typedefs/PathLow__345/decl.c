@@ -1,1 +1,1 @@
-PathLow
+struct PathLow;

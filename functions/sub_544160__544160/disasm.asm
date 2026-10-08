@@ -23,7 +23,7 @@
 0x5441B5: lea     ecx, [esp+128h+var_114]
 0x5441B9: push    ecx; int
 0x5441BA: push    eax; Str1
-0x5441BB: call    sub_47D8F0
+0x5441BB: call    sub_47D8F0; SpeedTreeOBSE 2026-07-14: normalizes texture palette keys in a fixed 256-byte local buffer. Plugin loader inputs are therefore capped at 255 characters.
 0x5441C0: add     esp, 8
 0x5441C3: lea     esi, [esp+128h+var_114]
 0x5441C7: push    38h ; '8'; Size
@@ -59,3 +59,19 @@
 0x54422E: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x544233: add     esp, 118h
 0x544239: retn    10h
+0x9BA760: mov     eax, [ebp-118h]
+0x9BA766: push    eax
+0x9BA767: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BA76C: pop     ecx
+0x9BA76D: retn
+0x9BA76E: mov     edx, [esp+Str1]
+0x9BA772: lea     eax, [edx-118h]
+0x9BA778: mov     ecx, [edx-11Ch]
+0x9BA77E: xor     ecx, eax
+0x9BA780: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BA785: add     eax, 0Ch
+0x9BA788: mov     ecx, [edx-4]
+0x9BA78B: xor     ecx, eax
+0x9BA78D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BA792: mov     eax, offset stru_AE4884
+0x9BA797: jmp     ___CxxFrameHandler3

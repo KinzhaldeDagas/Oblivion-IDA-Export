@@ -1,1 +1,1 @@
-LPLVITEMA
+typedef tagLVITEMA *LPLVITEMA;

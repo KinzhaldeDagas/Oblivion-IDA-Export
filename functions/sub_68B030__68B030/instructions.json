@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x68B030",
-    "line": "push    ebx",
+    "line": "push    ebx; Verified top-level TravelPath build sequence: select the destination's smallest containing interior/exterior SubSpace (fallback to supplied cell/worldspace), call TravelPath_BuildRoute with the source reference and positions, then, on success, augment the route with TESRoad surface samples.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x68B033",
-    "line": "mov     esi, [esp+0Ch+arg_8]",
+    "line": "mov     esi, [esp+0Ch+destinationCell]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x68B042",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x68B04D",
-    "line": "mov     edi, [esp+10h+arg_4]",
+    "line": "mov     edi, [esp+10h+worldPosition]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -109,19 +109,19 @@
   },
   {
     "ea": "0x68B057",
-    "line": "push    edi",
+    "line": "push    edi; worldPosition",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x68B058",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x68B05A",
-    "line": "call    sub_4CBBB0",
+    "line": "call    TESObjectCELL_FindSmallestSubSpaceContainingPosition; Verified: locks a cell's object list and returns the smallest-radius TESSubSpace reference containing the query position; this is the interior-cell counterpart to the WorldSpace coordinate-bucket lookup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x68B061",
-    "line": "mov     esi, [esp+10h+arg_C]",
+    "line": "mov     esi, [esp+10h+destinationWorldspace]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -151,19 +151,19 @@
   },
   {
     "ea": "0x68B069",
-    "line": "push    edi",
+    "line": "push    edi; worldPosition",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x68B06A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x68B06C",
-    "line": "call    sub_4F0600",
+    "line": "call    TESWorldSpace_FindSmallestSubSpaceContainingPosition; Verified: fast-travel destination builder resolves a containing TESSubSpace by interior cell scan or exterior WorldSpace +0x60 index. If none contains the destination, it falls back to the supplied cell/worldspace; the selected SubSpace is passed into path construction.",
     "mnemonic": "call",
     "size": 5
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x68B077",
-    "line": "mov     esi, [esp+10h+arg_0]",
+    "line": "mov     esi, [esp+10h+sourceRef]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -217,19 +217,19 @@
   },
   {
     "ea": "0x68B083",
-    "line": "push    esi",
+    "line": "push    esi; sourceRef",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x68B084",
-    "line": "push    edi",
+    "line": "push    edi; destinationPosition",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x68B085",
-    "line": "push    eax",
+    "line": "push    eax; destinationSpace",
     "mnemonic": "push",
     "size": 1
   },
@@ -259,37 +259,37 @@
   },
   {
     "ea": "0x68B092",
-    "line": "push    eax",
+    "line": "push    eax; sourceRouteContext",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x68B093",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x68B095",
-    "line": "call    sub_4D8AF0",
+    "line": "call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x68B09A",
-    "line": "push    eax",
+    "line": "push    eax; sourceSpace",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x68B09B",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x68B09D",
-    "line": "call    sub_68AB20",
+    "line": "call    TravelPath_BuildRoute; Verified TravelPath orchestration: clears existing node records; calls TravelPath_FindLowLevelRoute; copies returned kind-0 reference nodes into the TravelPath list; runs the teleport-loop pruning pass; and appends a kind-1 owned position node for the destination only when the A* search succeeded.",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,19 +313,19 @@
   },
   {
     "ea": "0x68B0A8",
-    "line": "push    esi",
+    "line": "push    esi; sourceRef",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x68B0A9",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x68B0AB",
-    "line": "call    sub_689DC0",
+    "line": "call    TravelPath_AddRoadSegmentsForPath; Verified post-A* road augmentation. It walks TravelPath nodes, switches to the linked door's WorldSpace and TeleportData marker position on teleport transitions, then asks that world's TESRoad to add surface-derived position nodes for applicable segments. TravelPath_ComputeDistance subsequently sums the added node segments, so road data changes the measured travel distance; this is route measurement/surface sampling, not the A* route search.",
     "mnemonic": "call",
     "size": 5
   },

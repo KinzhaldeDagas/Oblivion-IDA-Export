@@ -1,4 +1,4 @@
-0x5AEA60: sub     esp, 144h
+0x5AEA60: sub     esp, 144h; CharacterSpecificSaves v5 hooks all callers. Its wrapper resets to the character overview, pre-enumerates *g_createdBaseObjList, and prepares exact-name grouping before native menu construction; this covers the native branch that can skip 0x005AEBB6.
 0x5AEA66: mov     eax, ds:0B30AACh
 0x5AEA6B: xor     eax, esp
 0x5AEA6D: mov     [esp+144h+var_4], eax
@@ -21,12 +21,12 @@
 0x5AEA9D: mov     esi, eax
 0x5AEA9F: call    InterfaceManager_GetDepth
 0x5AEAA4: fstp    [esp+14Ch+var_13C]
-0x5AEAA8: mov     ecx, [esi+68h]; TileWindow *
+0x5AEAA8: mov     ecx, [esi+68h]; this
 0x5AEAAB: push    offset aDataMenusOpt_1; "Data\\Menus\\Options\\load_menu.xml"
-0x5AEAB0: call    Menu_LoadXML
+0x5AEAB0: call    Tile__ReadFile; CharacterSpecificSaves v9 forwards the active installed Load-menu XML unchanged. Post-load structural detection adapts vanilla, DarNified UI, NorthernUIAway, NorthernUI themed, and DarN+Northern hybrid layouts; optional instruction headers are not required.
 0x5AEAB5: mov     edi, eax
 0x5AEAB7: mov     ecx, edi
-0x5AEAB9: mov     dword ptr [esp+14Ch+var_134], edi
+0x5AEAB9: mov     [esp+14Ch+var_134], edi
 0x5AEABD: call    Tile_GetParentMenu
 0x5AEAC2: mov     esi, eax
 0x5AEAC4: test    esi, esi
@@ -75,18 +75,18 @@
 0x5AEB52: jp      short loc_5AEB68
 0x5AEB54: fld     [esp+154h+var_13C]
 0x5AEB58: push    ecx
-0x5AEB59: fstp    [esp+158h+var_158]; a3
-0x5AEB5C: push    0FABh; a2
+0x5AEB59: fstp    [esp+158h+var_158]; value
+0x5AEB5C: push    0FABh; propertyCode
 0x5AEB61: mov     ecx, edi; this
-0x5AEB63: call    Tile_SetFloat
+0x5AEB63: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5AEB68: cmp     [esp+154h+arg_0], 0
 0x5AEB70: jz      short loc_5AEB85
 0x5AEB72: fld1
 0x5AEB74: push    ecx
 0x5AEB75: mov     ecx, [ebx+28h]; this
-0x5AEB78: fstp    [esp+158h+var_158]; a3
-0x5AEB7B: push    0FA1h; a2
-0x5AEB80: call    Tile_SetFloat
+0x5AEB78: fstp    [esp+158h+var_158]; value
+0x5AEB7B: push    0FA1h; propertyCode
+0x5AEB80: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5AEB85: mov     ecx, ds:0B33B00h
 0x5AEB8B: call    sub_45E6A0
 0x5AEB90: push    414h
@@ -100,7 +100,7 @@
 0x5AEBA9: cmp     byte ptr [esp+154h+var_144+3], 0
 0x5AEBAE: jz      short loc_5AEBBB
 0x5AEBB0: mov     ecx, ds:0B33B00h
-0x5AEBB6: call    sub_45D450
+0x5AEBB6: call    TESSaveLoadGame_EnumerateSaveFiles; CharacterSpecificSaves v9 enumeration builds exact-name counts, sorts saves, and compacts overview rows before native tile creation. Native user0 list indices preserve DarN 48px/9-row, NorthernUIAway 82px/6-row, and Northern themed 64px/dynamic geometry.
 0x5AEBBB: mov     ecx, ds:0B33B00h
 0x5AEBC1: mov     esi, [ecx+6Ch]
 0x5AEBC4: mov     [ebx+54h], esi
@@ -123,7 +123,7 @@
 0x5AEBEA: push    0
 0x5AEBEC: lea     edx, [esp+160h+var_130]
 0x5AEBF0: push    edx
-0x5AEBF1: call    sub_5AE6D0
+0x5AEBF1: call    LoadgameMenu_AddSaveRow; CharacterSpecificSaves v9 wraps native row creation after overview compaction. It changes user3 to Name (N) and centers only the overview label while preserving user0 listindex, user2 save name, installed fonts, focus boxes, scrolling, and preview behavior.
 0x5AEBF6: mov     edi, eax
 0x5AEBF8: test    esi, esi
 0x5AEBFA: jz      short loc_5AEC27
@@ -137,7 +137,7 @@
 0x5AEC0C: push    ebp
 0x5AEC0D: lea     eax, [esp+160h+var_130]
 0x5AEC11: push    eax
-0x5AEC12: call    sub_5AE6D0
+0x5AEC12: call    LoadgameMenu_AddSaveRow; Creates one load row. user1/0xFAE stores the original save-list index, so filtered/omitted rows can retain correct click selection.
 0x5AEC17: test    edi, edi
 0x5AEC19: jnz     short loc_5AEC1D
 0x5AEC1B: mov     edi, eax
@@ -145,7 +145,7 @@
 0x5AEC20: add     ebp, 1
 0x5AEC23: test    esi, esi
 0x5AEC25: jnz     short loc_5AEC00
-0x5AEC27: mov     esi, dword ptr [esp+154h+var_134]
+0x5AEC27: mov     esi, [esp+154h+var_134]
 0x5AEC2B: push    0; float
 0x5AEC2D: mov     ecx, esi
 0x5AEC2F: call    sub_58FBA0
@@ -160,7 +160,7 @@
 0x5AEC4B: call    InterfaceManager_GetSingleton
 0x5AEC50: add     esp, 8
 0x5AEC53: mov     ecx, eax
-0x5AEC55: call    sub_57F9F0
+0x5AEC55: call    InterfaceManager__SetCurrentFocusTarget; AchievementsNative evidence: focused tile with xlist=&xitem drives parent xscroll by pulsing the xscroll target's user5 through -999999, tile xscroll, then 0; do not leave scroll target user5 at the desired scroll value.
 0x5AEC5A: pop     ebp
 0x5AEC5B: pop     ebx
 0x5AEC5C: pop     edi

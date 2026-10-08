@@ -1645,55 +1645,55 @@
   },
   {
     "ea": "0x6FD157",
-    "line": "push    ebp",
+    "line": "push    ebp; lineFlags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6FD158",
-    "line": "push    0",
+    "line": "push    0; arg7",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6FD15A",
-    "line": "push    0",
+    "line": "push    0; arg6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6FD15C",
-    "line": "push    0",
+    "line": "push    0; arg5",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6FD15E",
-    "line": "push    esi",
+    "line": "push    esi; colors",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6FD15F",
-    "line": "push    edi",
+    "line": "push    edi; vertices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6FD160",
-    "line": "push    5",
+    "line": "push    5; vertexCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6FD162",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6FD164",
-    "line": "call    sub_7177E0",
+    "line": "call    NiLines_ctorWithGeometryData; Verified NiLines constructor wrapper: create NiGeometryData via NiLinesData_ctor, initialize NiGeometry, then install NiLines vtable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1858,5 +1858,107 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C9200",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C9203",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C9204",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C9209",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C920A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C920B",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C920E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C920F",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C9214",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C9215",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C9216",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C921A",
+    "line": "lea     eax, [edx-5Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C921D",
+    "line": "mov     ecx, [edx-60h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C9220",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C9222",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C9227",
+    "line": "mov     eax, offset stru_AF1B24",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C922C",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

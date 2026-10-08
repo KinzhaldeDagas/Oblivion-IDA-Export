@@ -1,19 +1,36 @@
 {
-  "callees_count": 30,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 15,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_4A51F0",
+  "chunks": [
+    [
+      "0x4A51F0",
+      "0x4A5384"
+    ],
+    [
+      "0x9BD8A0",
+      "0x9BD8C6"
+    ]
+  ],
+  "chunks_sha256": "33d75300688a4f6619633d9be5cd3eb200f028528fe278d84238a701262d5f05",
+  "comment_regular": "Verified: accepts RDMD and RDSD chunks; RDMD populates TESRegionDataSound.regionSoundMetadata (+8), and RDSD builds the embedded TESRegionSoundNode list at +0xC.",
+  "comment_repeatable": "Verified: accepts RDMD and RDSD chunks; RDMD populates TESRegionDataSound.regionSoundMetadata (+8), and RDSD builds the embedded TESRegionSoundNode list at +0xC.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "TESRegionDataSound_LoadChunkData",
   "end_ea": "0x4A5384",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
-  "name": "sub_4A51F0",
+  "name": "TESRegionDataSound_LoadChunkData",
   "segment": ".text",
   "sha256": "6d1dc49458da991738f2e8b803317c1b4675d7e347ca2441dc6c3be8640d53ca",
   "size": 404,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4A51F0",
+  "total_chunk_size": 442,
   "type": "char __thiscall(char *this, Data *)",
-  "xrefs_from_count": 159,
+  "xrefs_from_count": 173,
   "xrefs_to_count": 1
 }

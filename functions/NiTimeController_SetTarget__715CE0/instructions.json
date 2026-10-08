@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x715CE0",
-    "line": "push    esi",
+    "line": "push    esi; Retargets a controller while holding a temporary self-reference. Removes it from the previous NiObjectNET controller chain, assigns non-owning target +0x30, avoids duplicate insertion, then inserts into the new target's refcounted chain and propagates manager-controlled target state when applicable.",
     "mnemonic": "push",
     "size": 1
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x715D0A",
-    "line": "call    sub_6FFE90",
+    "line": "call    NiObjectNET_RemoveController; Removes a specific NiTimeController from NiObjectNET's refcounted controller chain, relinking predecessor/head and clearing the removed controller's next link with balanced temporary references.",
     "mnemonic": "call",
     "size": 5
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x715D2E",
-    "line": "call    sub_6FFE60",
+    "line": "call    NiObjectNET_AddController; Prepends a non-null NiTimeController to NiObjectNET's refcounted controller chain, first setting the controller's next link to the current head.",
     "mnemonic": "call",
     "size": 5
   },

@@ -2,8 +2,8 @@ ExtraDroppedItemList *__thiscall ExtraDroppedItemList::`scalar deleting destruct
         ExtraDroppedItemList *this,
         char a2)
 {
-  ExtraDroppedItemList::~ExtraDroppedItemList(this);
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  ExtraDroppedItemList::~ExtraDroppedItemList(this); /*0x42af63*/
+  if ( (a2 & 1) != 0 ) /*0x42af6d*/
+    FormHeapFree((unsigned int)this); /*0x42af70*/
+  return this; /*0x42af7a*/
 }

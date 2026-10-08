@@ -1,4 +1,4 @@
-BSStringT *sub_A09E30()
+NiRTTI *sub_A09E30()
 {
-  return sub_70E220((BSStringT *)dword_B3FCDC, "NiLines", (int)dword_B3FD5C);
+  return NiRTTI_Constructor(&stru_B3FCDC, "NiLines", &stru_B3FD5C); /*0xa09e44*/
 }

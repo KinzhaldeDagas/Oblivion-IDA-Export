@@ -78,7 +78,7 @@
 0x413692: jb      short loc_4136A0
 0x413694: mov     ecx, [edi+4]
 0x413697: push    ecx
-0x413698: call    FormHeapFree
+0x413698: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x41369D: add     esp, 4
 0x4136A0: cmp     esi, 10h
 0x4136A3: mov     ecx, [ebp+Dst]
@@ -104,7 +104,7 @@
 0x4136D7: jb      short loc_4136E5
 0x4136D9: mov     edx, [esi+4]
 0x4136DC: push    edx
-0x4136DD: call    FormHeapFree
+0x4136DD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4136E2: add     esp, 4
 0x4136E5: push    0
 0x4136E7: mov     dword ptr [esi+18h], 0Fh
@@ -112,3 +112,10 @@
 0x4136F5: push    0
 0x4136F7: mov     byte ptr [esi+4], 0
 0x4136FB: call    ThrowException??
+0x9AB080: mov     edx, [esp-4+MaxCount]
+0x9AB084: lea     eax, [edx+0Ch]
+0x9AB087: mov     ecx, [edx-1Ch]
+0x9AB08A: xor     ecx, eax
+0x9AB08C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AB091: mov     eax, offset stru_AD7FC8
+0x9AB096: jmp     ___CxxFrameHandler3

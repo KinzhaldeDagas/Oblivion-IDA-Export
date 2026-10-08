@@ -1,12 +1,13 @@
-void sub_4BDD40()
+// Verified singleton teardown: destroys and frees g_DistantLODLoaderTasksByCell, then clears the global pointer.
+void __cdecl DistantLODLoaderTaskMap_Destroy()
 {
-  unsigned int v0; // esi
+  LockFreeMap *v0; // esi
 
-  if ( dword_B35B8C )
+  if ( g_DistantLODLoaderTasksByCell ) /*0x4bdd40*/
   {
-    v0 = dword_B35B8C;
-    sub_4BDC50((unsigned int **)dword_B35B8C);
-    FormHeapFree(v0);
-    dword_B35B8C = 0;
+    v0 = g_DistantLODLoaderTasksByCell; /*0x4bdd4b*/
+    DistantLODLoaderTaskMap_dtor(g_DistantLODLoaderTasksByCell); /*0x4bdd4d*/
+    FormHeapFree((unsigned int)v0); /*0x4bdd53*/
+    g_DistantLODLoaderTasksByCell = 0; /*0x4bdd5b*/
   }
 }

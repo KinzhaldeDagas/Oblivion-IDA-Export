@@ -30,7 +30,7 @@
 0x509683: push    edx; a3
 0x509684: push    ecx; a2
 0x509685: push    eax; a1
-0x509686: call    Script_ExtractArgs
+0x509686: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x50968B: add     esp, 20h
 0x50968E: test    al, al
 0x509690: pop     ebp
@@ -46,7 +46,7 @@
 0x5096AE: fstp    [esp+21Ch+var_21C]
 0x5096B1: push    eax
 0x5096B2: push    eax; Seed
-0x5096B3: call    GetRandomLargeInteger?
+0x5096B3: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x5096B8: add     esp, 4
 0x5096BB: and     eax, 80000003h
 0x5096C0: jns     short loc_5096C7

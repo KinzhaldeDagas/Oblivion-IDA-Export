@@ -9,9 +9,9 @@ int __cdecl _local_unwind4(
         int a8,
         int a9,
         int a10,
-        int a11,
+        _DWORD *a11,
         int a12,
-        int a13)
+        unsigned int a13)
 {
-  return _local_unwind4_::_lu_top(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13);
+  return _local_unwind4_::_lu_top(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13); /*0x98f4ef*/
 }

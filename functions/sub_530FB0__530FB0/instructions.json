@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x530FB0",
-    "line": "sub     esp, 10h",
+    "line": "sub     esp, 10h; Oblivion main INFO loader stores the winning record offset for lazy response/result-script reconstruction, but does not consume SCHR, SCHD, SCDA, SCTX, or SCRO here. Result scripts are reconstructed later by TESTopicInfo::GetResultScript from that winning serialized INFO record.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x530FD2",
-    "line": "call    sub_44FAB0",
+    "line": "call    TESFile_GetIsOptimized; If this TESFile is not optimized, preserve the current INFO record offset at TESTopicInfo+0x34 for lazy runtime response reconstruction.",
     "mnemonic": "call",
     "size": 5
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x530FE1",
-    "line": "mov     [edi+34h], eax",
+    "line": "mov     [edi+34h], eax; Last loader invocation wins sourceFileOffset. A valid partial INFO also reaches this write, so runtime responses later come from the partial override record rather than an inherited/eager list.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x530FF6",
-    "line": "call    TESFile_InitializeFormFromRecord",
+    "line": "call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x530FFD",
-    "line": "call    TESFile_GetChunkType",
+    "line": "call    TESFile_GetChunkType; Main INFO chunk loop does not recognize TRDT/NAM1/NAM2. Oblivion reconstructs response data lazily in TESTopicInfo::GetResponseList instead.",
     "mnemonic": "call",
     "size": 5
   },
@@ -196,12 +196,6 @@
     "line": "jmp     short loc_531010",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x53100D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x531010",
@@ -289,7 +283,7 @@
   },
   {
     "ea": "0x531048",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,7 +391,7 @@
   },
   {
     "ea": "0x531081",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -553,7 +547,7 @@
   },
   {
     "ea": "0x5310D3",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -607,7 +601,7 @@
   },
   {
     "ea": "0x5310F1",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -781,7 +775,7 @@
   },
   {
     "ea": "0x531143",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -865,7 +859,7 @@
   },
   {
     "ea": "0x53116C",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -901,7 +895,7 @@
   },
   {
     "ea": "0x53117D",
-    "line": "call    TESForm_ResolveFormID",
+    "line": "call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.",
     "mnemonic": "call",
     "size": 5
   },

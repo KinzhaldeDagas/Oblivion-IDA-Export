@@ -1,8 +1,8 @@
 // positive sp value has been detected, the output may be wrong!
-int __usercall ceil_::jnedef_10@<eax>(char a1@<zf>, __int64 a2)
+double __usercall ceil_::jnedef_10@<st0>(char a1@<zf>, const __m128i a2@<xmm0>, double a3)
 {
-  if ( a1 )
-    return ceil_::__ceil_pentium4(a2);
+  if ( a1 ) /*0x987c38*/
+    return ceil_::__ceil_pentium4(a2); /*0x987c3e*/
   else
-    return _floor_default_0(*(double *)&a2);
+    return _floor_default_0(a3); /*0x987c38*/
 }

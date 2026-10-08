@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x66EAF0",
-    "line": "sub     esp, 0B4h",
+    "line": "sub     esp, 0B4h; World/cell transition path used by fast travel relocation after cell resolution. Leaves normal exterior refresh/SpeedTree/weather side effects intact.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x66EB33",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x66EB3C",
-    "line": "push    ebp",
+    "line": "push    ebp; reference",
     "mnemonic": "push",
     "size": 1
   },
@@ -157,19 +157,19 @@
   },
   {
     "ea": "0x66EB3F",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x66EB44",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x66EB46",
-    "line": "call    sub_4CECD0",
+    "line": "call    TESObjectCELL_RemoveReference; Verified: removes a reference from the cell object list under the cell lock. For persistent cells, clears the reference's ExtraDataList cell pointer and removes it from the owning WorldSpace persistent-reference index (+0x64); for normal cells, clears its parent cell and updates changed state. No write to the separate SubSpace index (+0x60) is present.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x66EBAC",
-    "line": "call    TESObjectREFR_ChangeCell",
+    "line": "call    TESObjectREFR_ChangeCell; 3DTheft decode: ChangeCellAndPosition commits the target cell through TESObjectREFR_ChangeCell before position/scenegraph finalization.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x66EBB7",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x66EBC0",
-    "line": "push    esi",
+    "line": "push    esi; reference",
     "mnemonic": "push",
     "size": 1
   },
@@ -391,19 +391,19 @@
   },
   {
     "ea": "0x66EBC3",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x66EBC8",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x66EBCA",
-    "line": "call    sub_4CECD0",
+    "line": "call    TESObjectCELL_RemoveReference; Verified: removes a reference from the cell object list under the cell lock. For persistent cells, clears the reference's ExtraDataList cell pointer and removes it from the owning WorldSpace persistent-reference index (+0x64); for normal cells, clears its parent cell and updates changed state. No write to the separate SubSpace index (+0x60) is present.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x66EBD5",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x66EBEA",
-    "line": "call    TESObjectCELL_GetMusicType",
+    "line": "call    TESObjectCELL_GetMusicType; Verified: resolves the music type for a cell by using region-data ID 7, virtual sound-type lookup, and a position/cell cache; falls back to worldspace music when no region sound type is selected.",
     "mnemonic": "call",
     "size": 5
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x66EC2B",
-    "line": "call    sub_560110",
+    "line": "call    BSTreeManager_ClearCanopyShadow; Verified canopy-shadow cleanup plus version difference: Oblivion releases manager.canopyShadowTexture and an adjacent cached resource, then calls sub_440420 to unload the DDS. Fallout releases the manager pointer and BSShaderManager::pProjectedShadowTexture, then calls TES::RemoveTextureImage.",
     "mnemonic": "call",
     "size": 5
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x66EC3C",
-    "line": "mov     [esp+0C4h+var_A4], esi",
+    "line": "mov     [esp+0C4h+cellY], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x66EC52",
-    "line": "mov     [esp+0C4h+var_A4], eax",
+    "line": "mov     [esp+0C4h+cellY], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x66EC9C",
-    "line": "call    sub_43FC20",
+    "line": "call    sub_43FC20; TES cleanup/streaming critical-section path; calls SpeedTree cache prune 0x55E390(1) before and after heap/cell cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -853,7 +853,7 @@
   },
   {
     "ea": "0x66ECB7",
-    "line": "call    TESObjectCELL_GetMusicType",
+    "line": "call    TESObjectCELL_GetMusicType; Verified: resolves the music type for a cell by using region-data ID 7, virtual sound-type lookup, and a position/cell cache; falls back to worldspace music when no region sound type is selected.",
     "mnemonic": "call",
     "size": 5
   },
@@ -925,7 +925,7 @@
   },
   {
     "ea": "0x66ECDD",
-    "line": "call    sub_55FDF0",
+    "line": "call    BSTreeManager_GetCanopyShadow; Verified canopy-shadow path plus version difference: both games use Data\\\\Textures\\\\Trees\\\\CanopyShadow.dds and a white 16x16 fallback. Fallout loads through TES::CreateTextureImage and also updates BSShaderManager::pProjectedShadowTexture; Oblivion loads through OB_TES_LoadOrFindSourceTexture and stores through its renderer helper. Oblivion's adjacent renderer-resource global remains Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -979,7 +979,7 @@
   },
   {
     "ea": "0x66ED05",
-    "line": "mov     eax, [esp+0C4h+var_A4]",
+    "line": "mov     eax, [esp+0C4h+cellY]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -991,13 +991,13 @@
   },
   {
     "ea": "0x66ED0D",
-    "line": "push    eax; signed int",
+    "line": "push    eax; cellY",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x66ED0E",
-    "line": "push    esi; signed int",
+    "line": "push    esi; cellX",
     "mnemonic": "push",
     "size": 1
   },
@@ -1165,25 +1165,25 @@
   },
   {
     "ea": "0x66ED63",
-    "line": "call    TESObjectREFR_ChangeCell",
+    "line": "call    TESObjectREFR_ChangeCell; 3DTheft decode: ChangeCellAndPosition also calls ChangeCell(player, nullptr); this null transition does not reach the 0x66765A non-null cell hook.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x66ED68",
-    "line": "push    ebp; Concurrency::details::SchedulerBase *",
+    "line": "push    ebp; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x66ED69",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x66ED6B",
-    "line": "call    sub_4D35D0",
+    "line": "call    TESObjectCELL_AddReference; Verified: persistent-cell AddReference updates the WorldSpace coordinate/fallback persistent-reference index (+0x64) through TESWorldSpace_IndexReference. Ordinary cell additions do not index there. This routine does not populate the separate SubSpace spatial index at +0x60.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1531,55 +1531,55 @@
   },
   {
     "ea": "0x66EE25",
-    "line": "lea     ecx, [esp+0C8h+var_6C]",
+    "line": "lea     ecx, [esp+0C8h+right]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x66EE29",
-    "line": "fstp    [esp+0C8h+var_C8]; float",
+    "line": "fstp    [esp+0C8h+angleZ]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x66EE2C",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x66EE31",
-    "line": "lea     ecx, [esp+0C4h+var_6C]",
+    "line": "lea     ecx, [esp+0C4h+right]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x66EE35",
-    "line": "push    ecx",
+    "line": "push    ecx; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x66EE36",
-    "line": "lea     edx, [esp+0C8h+var_24]",
+    "line": "lea     edx, [esp+0C8h+out]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x66EE3D",
-    "line": "push    edx",
+    "line": "push    edx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x66EE3E",
-    "line": "lea     ecx, [esp+0CCh+var_48]",
+    "line": "lea     ecx, [esp+0CCh+var_48]; this",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x66EE45",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1639,7 +1639,7 @@
   },
   {
     "ea": "0x66EE66",
-    "line": "lea     ecx, [esp+0C8h+var_6C]",
+    "line": "lea     ecx, [esp+0C8h+right]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1705,13 +1705,13 @@
   },
   {
     "ea": "0x66EE9A",
-    "line": "fstp    [esp+0C8h+var_C8]; float",
+    "line": "fstp    [esp+0C8h+angleZ]; angleX",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x66EE9D",
-    "line": "call    NiMatrix33_InitRotationTransposedTransform???",
+    "line": "call    NiMatrix33_InitRotationXTransposed; Verified matrix coefficients make this an X-axis rotation in the engine's transposed convention: X stays fixed; only the Y/Z submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1789,7 +1789,7 @@
   },
   {
     "ea": "0x66EEC8",
-    "line": "lea     esi, [esp+0C4h+var_6C]",
+    "line": "lea     esi, [esp+0C4h+right]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1807,31 +1807,31 @@
   },
   {
     "ea": "0x66EED2",
-    "line": "push    eax",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x66EED3",
-    "line": "lea     ecx, [esp+0C8h+var_24]",
+    "line": "lea     ecx, [esp+0C8h+out]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x66EEDA",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x66EEDB",
-    "line": "lea     ecx, [esp+0CCh+var_6C]",
+    "line": "lea     ecx, [esp+0CCh+right]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x66EEDF",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1969,7 +1969,7 @@
   },
   {
     "ea": "0x66EF34",
-    "line": "mov     ecx, [esp+0C4h+arg_0]",
+    "line": "mov     ecx, [esp+0C4h+arg_0]; Scene graph position is written from the ChangeCellAndPosition pos args after the cell change machinery has run.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2071,7 +2071,7 @@
   },
   {
     "ea": "0x66EF75",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2089,7 +2089,7 @@
   },
   {
     "ea": "0x66EF82",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2143,7 +2143,7 @@
   },
   {
     "ea": "0x66EFAB",
-    "line": "fstp    [esp+0D0h+var_C8]; float",
+    "line": "fstp    [esp+0D0h+angleZ]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2275,7 +2275,7 @@
   },
   {
     "ea": "0x66EFFF",
-    "line": "fstp    [esp+0CCh+var_C8]; float",
+    "line": "fstp    [esp+0CCh+angleZ]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2509,7 +2509,7 @@
   },
   {
     "ea": "0x66F07F",
-    "line": "call    InitBSShaderAccumulator",
+    "line": "call    BSShaderAccumulator_GetOrCreateGlobal",
     "mnemonic": "call",
     "size": 5
   },
@@ -2653,7 +2653,7 @@
   },
   {
     "ea": "0x66F0D6",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2677,7 +2677,7 @@
   },
   {
     "ea": "0x66F0E1",
-    "line": "lea     ecx, [esp+0C4h+var_A4]",
+    "line": "lea     ecx, [esp+0C4h+cellY]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2689,7 +2689,7 @@
   },
   {
     "ea": "0x66F0E6",
-    "line": "fstp    [esp+0C8h+var_A4]",
+    "line": "fstp    [esp+0C8h+cellY]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2731,7 +2731,7 @@
   },
   {
     "ea": "0x66F0FA",
-    "line": "fld     [esp+0C4h+var_A4]",
+    "line": "fld     [esp+0C4h+cellY]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2977,7 +2977,7 @@
   },
   {
     "ea": "0x66F181",
-    "line": "call    sub_65AF30",
+    "line": "call    MobileObject_Move; TES4 authoritative: MobileObject movement step. Builds local movement/update packet and calls CharProxy vtable +0x80; for bhkCharacterController that dispatches to 0x896000. Entry point for per-actor movement discipline injection before controller integration.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3193,7 +3193,7 @@
   },
   {
     "ea": "0x66F1FB",
-    "line": "fstp    [esp+0C8h+var_C8]; a2",
+    "line": "fstp    [esp+0C8h+angleZ]; a2",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -3259,7 +3259,7 @@
   },
   {
     "ea": "0x66F223",
-    "line": "fstp    [esp+0C8h+var_C8]; a2",
+    "line": "fstp    [esp+0C8h+angleZ]; a2",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -3301,19 +3301,19 @@
   },
   {
     "ea": "0x66F240",
-    "line": "push    0; float",
+    "line": "push    0; skipTimeAndWindUpdate",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x66F242",
-    "line": "push    eax; int",
+    "line": "push    eax; camera",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x66F243",
-    "line": "call    sub_55FA50",
+    "line": "call    BSTreeManager_Update; Fast travel reaches the normal SpeedTree refresh path only after PlayerCharacter_ChangeCellAndPosition has performed the player cell/position change. Encounter interruption should occur before the 0x66FAFA relocation call if the destination move is to be replaced by a midpoint move.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3331,7 +3331,7 @@
   },
   {
     "ea": "0x66F254",
-    "line": "fstp    [esp+0CCh+var_C8]; float",
+    "line": "fstp    [esp+0CCh+angleZ]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -3343,7 +3343,7 @@
   },
   {
     "ea": "0x66F25B",
-    "line": "call    sub_4424D0",
+    "line": "call    sub_4424D0; ModernWindowsCompatible decode: PlayerCharacter_ChangeCellAndPosition caller passes flt_B33E9C into shared TES global scene update sub_4424D0 after transition refresh work.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3379,7 +3379,7 @@
   },
   {
     "ea": "0x66F27A",
-    "line": "fstp    [esp+0C8h+var_C8]; float",
+    "line": "fstp    [esp+0C8h+angleZ]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -3661,7 +3661,7 @@
   },
   {
     "ea": "0x66F31C",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

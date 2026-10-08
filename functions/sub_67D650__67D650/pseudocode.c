@@ -1,43 +1,40 @@
-char __thiscall sub_67D650(int this, TESObjectREFR *a2)
+bool __thiscall sub_67D650(int this, MobileObject *a2)
 {
-  char *v3; // ecx
-  float *v4; // edi
-  float *v5; // eax
-  float *v6; // eax
-  float *v7; // eax
-  float *v8; // eax
+  void *v3; // ecx
+  NiPoint3 *v4; // edi
+  NiPoint3 *Position; // eax
+  NiPoint3 *v6; // eax
+  NiPoint3 *v7; // eax
+  NiPoint3 *v8; // eax
   float v10; // [esp+0h] [ebp-14h]
   float v11; // [esp+0h] [ebp-14h]
 
-  if ( !a2 )
-    return 0;
-  if ( *(_DWORD *)(this + 0x1C) && (v3 = *(char **)(this + 0x24)) != 0 )
+  if ( !a2 ) /*0x67d65d*/
+    return 0; /*0x67d717*/
+  if ( *(_DWORD *)(this + 0x1C) && (v3 = *(void **)(this + 0x24)) != 0 ) /*0x67d66f*/
   {
-    v10 = flt_A34A80;
-    v4 = (float *)(this + 0xC);
-    v5 = (float *)sub_4BEF40(v3);
-    if ( sub_480520((float *)(this + 0xC), v5, v10) < 0 )
+    v10 = flt_A34A80; /*0x67d678*/
+    v4 = (NiPoint3 *)(this + 0xC); /*0x67d67b*/
+    Position = PathGraphNode_GetPosition(v3); /*0x67d67e*/
+    if ( sub_480520((float *)(this + 0xC), &Position->x, v10) < 0 ) /*0x67d68f*/
     {
-      v6 = (float *)sub_4BEF40(*(char **)(this + 0x24));
-      if ( sub_687C30(a2, v6, (float *)(this + 0xC)) )
+      v6 = PathGraphNode_GetPosition(*(void **)(this + 0x24)); /*0x67d695*/
+      if ( sub_687C30(a2, v6, (float *)(this + 0xC)) ) /*0x67d69c*/
       {
-        v11 = flt_A34A80;
-        v7 = (float *)sub_4BEF40(*(char **)(this + 0x1C));
-        if ( sub_480520((float *)this, v7, v11) < 0 )
+        v11 = flt_A34A80; /*0x67d6b2*/
+        v7 = PathGraphNode_GetPosition(*(void **)(this + 0x1C)); /*0x67d6b5*/
+        if ( sub_480520((float *)this, &v7->x, v11) < 0 ) /*0x67d6c6*/
         {
-          v8 = (float *)sub_4BEF40(*(char **)(this + 0x1C));
-          if ( sub_687C30(a2, (float *)this, v8) )
-            return 1;
+          v8 = PathGraphNode_GetPosition(*(void **)(this + 0x1C)); /*0x67d6cb*/
+          if ( sub_687C30(a2, (NiPoint3 *)this, &v8->x) ) /*0x67d6d3*/
+            return 1; /*0x67d6e5*/
         }
       }
     }
   }
   else
   {
-    v4 = (float *)(this + 0xC);
+    v4 = (NiPoint3 *)(this + 0xC); /*0x67d6e8*/
   }
-  if ( sub_480520((float *)this, v4, flt_A34A80) >= 0 )
-    return 0;
-  else
-    return sub_687AA0(a2, (float *)this, v4);
+  return sub_480520((float *)this, &v4->x, flt_A34A80) < 0 && sub_687AA0(a2, (NiPoint3 *)this, v4); /*0x67d6e0*/
 }

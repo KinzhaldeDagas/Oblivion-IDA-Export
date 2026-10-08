@@ -1,4 +1,4 @@
-0x532250: fldz
+0x532250: fldz; 2026-05-18 73000 consumer decode: initializes bhkSimpleShapePhantom cinfo, including identity transform at +0x20 and shape pointer slot at +0x04. Stock 0x565510 installs one shape pointer and attaches the phantom to the target NiAVObject.
 0x532252: mov     eax, ecx
 0x532254: mov     dword ptr [eax+14h], 80000000h
 0x53225B: xor     ecx, ecx

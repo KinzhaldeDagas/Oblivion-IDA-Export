@@ -5,7 +5,6 @@
 0x5369D8: jz      short loc_5369FB
 0x5369DA: push    esi
 0x5369DB: jmp     short loc_5369E0
-0x5369DD: align 10h
 0x5369E0: movzx   ecx, byte ptr [eax-1]
 0x5369E4: mov     esi, [eax+4]
 0x5369E7: sub     eax, ecx

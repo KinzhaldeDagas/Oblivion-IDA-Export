@@ -1,5 +1,5 @@
 0x405B40: push    esi
-0x405B41: mov     esi, g_Interface3DScenegraph
+0x405B41: mov     esi, ds:0B333D4h
 0x405B47: test    esi, esi
 0x405B49: jz      short loc_405B71
 0x405B4B: lea     eax, [esi+4]
@@ -14,6 +14,6 @@
 0x405B61: push    1
 0x405B63: mov     ecx, esi
 0x405B65: call    eax
-0x405B67: mov     g_Interface3DScenegraph, 0
+0x405B67: mov     dword ptr ds:0B333D4h, 0
 0x405B71: pop     esi
 0x405B72: retn

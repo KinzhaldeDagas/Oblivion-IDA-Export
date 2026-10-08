@@ -1,1 +1,5 @@
-tagCASCODE
+struct tagCASCODE
+{
+ULONG cElems;
+SCODE *pElems;
+};

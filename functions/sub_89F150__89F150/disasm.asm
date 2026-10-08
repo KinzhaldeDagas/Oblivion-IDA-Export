@@ -13,7 +13,7 @@
 0x89F16C: jz      loc_89F27E
 0x89F172: cmp     dword ptr [ebx+8], 0
 0x89F176: jz      loc_89F27E
-0x89F17C: call    sub_452A60
+0x89F17C: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x89F181: test    eax, eax
 0x89F183: jz      loc_89F27E
 0x89F189: lea     esi, [eax+64h]
@@ -51,7 +51,7 @@
 0x89F1FB: fmul    [esp+80h+var_48]
 0x89F1FF: shufps  xmm2, xmm1, 0
 0x89F203: mulps   xmm2, xmm0
-0x89F206: push    offset stru_BA7B00; lpCriticalSection
+0x89F206: push    offset unk_BA7B00; lpCriticalSection
 0x89F20B: fstp    [esp+84h+var_44+0Ch]
 0x89F20F: movaps  xmm1, xmmword ptr [esp+84h+var_44+4]
 0x89F214: addps   xmm2, xmm1
@@ -67,17 +67,17 @@
 0x89F243: test    esi, esi
 0x89F245: jz      short loc_89F261
 0x89F247: mov     ecx, ebx
-0x89F249: call    sub_89F570
+0x89F249: call    bhkRefObject_UpdateHavokObject
 0x89F24E: lea     ecx, [esp+80h+var_30]
 0x89F252: push    ecx
 0x89F253: mov     ecx, esi
 0x89F255: call    sub_8CD9D0
 0x89F25A: mov     ecx, ebx
-0x89F25C: call    sub_89F570
+0x89F25C: call    bhkRefObject_UpdateHavokObject
 0x89F261: sub     ds:0BA7B7Ch, edi
 0x89F267: jnz     short loc_89F273
 0x89F269: mov     dword ptr ds:0BA7B78h, 0
-0x89F273: push    offset stru_BA7B00; lpCriticalSection
+0x89F273: push    offset unk_BA7B00; lpCriticalSection
 0x89F278: call    dword ptr ds:0A28074h
 0x89F27E: mov     ecx, [esp+80h+var_4]
 0x89F282: pop     edi

@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x69E37B",
-    "line": "call    MagicHitEffect_constr",
+    "line": "call    MagicHitEffect_constr; Verified MagicHitEffect constructor starts from the 24-byte BSTempEffect base, nulls ownerActiveEffect (+0x18) and targetReference (+0x1C), zeros elapsedSeconds (+0x20) and bFinished (+0x24), establishing a 40-byte base layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x69E382",
-    "line": "mov     dword ptr [esi], offset ??_7MagicModelHitEffect@@6B@; const MagicModelHitEffect::`vftable'",
+    "line": "mov     dword ptr [esi], offset ??_7MagicModelHitEffect@@6B@; Verified (Oblivion): constructor initializes a 0x38-byte derived object. Base occupies 0x00..0x27; +0x29 is player third-person state (verified by read/write in visual placement); +0x2C is state-dependent model path/serialized payload; +0x30 is a refcounted NiAVObject model root; +0x34 remains Unknown. Fallout's MagicModelHitEffect is 0x3C and has separate pFilename/spObject/spTarget/LoadedDataSubBuffer members, so its layout cannot be copied onto Oblivion.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x69E3E1",
-    "line": "mov     [esi+29h], bl",
+    "line": "mov     [esi+29h], bl; Verified (Oblivion): derived model byte +0x29 is cleared in construction and later updated/read by model visual placement. Its precise boolean/perspective meaning is Probable.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -412,5 +412,95 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C5D00",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5D03",
+    "line": "jmp     MagicHitEffect_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5D08",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5D0B",
+    "line": "add     ecx, 30h ; '0'; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5D0E",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5D13",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5D16",
+    "line": "add     ecx, 34h ; '4'; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5D19",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5D1E",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C5D22",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5D25",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5D28",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C5D2A",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5D2F",
+    "line": "mov     eax, offset stru_AEE3DC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5D34",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

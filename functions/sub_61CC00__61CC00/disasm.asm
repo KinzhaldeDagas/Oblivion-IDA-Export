@@ -26,12 +26,12 @@
 0x61CC4B: fnstsw  ax
 0x61CC4D: test    ah, 41h
 0x61CC50: jnz     short loc_61CC6B
-0x61CC52: push    0; a4
+0x61CC52: push    0; useActorProjection
 0x61CC54: mov     ecx, esi
-0x61CC56: call    sub_6135F0
-0x61CC5B: push    eax; a3
-0x61CC5C: push    edi; a2
-0x61CC5D: call    TESObjectREFR_GetDistanceBetween?
+0x61CC56: call    CombatController_GetCurrentTarget
+0x61CC5B: push    eax; to
+0x61CC5C: push    edi; from
+0x61CC5D: call    TESObjectREFR_GetSurfaceDistance; Three-argument cdecl routine: returns float surface distance from 'from' to 'to'. All 24 callers push exactly from, to, and useActorProjection then reclaim 0x0C. The prior EDI register argument, fourth stack byte, and double return were analysis pollution.
 0x61CC62: fstp    dword ptr [esi+184h]
 0x61CC68: add     esp, 0Ch
 0x61CC6B: fld     dword ptr [esi+184h]

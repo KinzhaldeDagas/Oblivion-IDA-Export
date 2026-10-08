@@ -1,19 +1,32 @@
 {
-  "callees_count": 13,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4F4E20",
+      "0x4F4EE8"
+    ]
+  ],
+  "chunks_sha256": "49ed5ea966243eb85f0e028f066667a0b1a7236fc5066a7f586457d1df1c0a23",
+  "comment_regular": "GetDisposition_Eval (index 76 / opcode 0x104C): for valid actor subject and Actor parameter, returns the subject's disposition toward that target. A global one-pair cache reuses the last result; non-actor inputs leave numeric result 0.",
+  "comment_repeatable": "GetDisposition_Eval (index 76 / opcode 0x104C): for valid actor subject and Actor parameter, returns the subject's disposition toward that target. A global one-pair cache reuses the last result; non-actor inputs leave numeric result 0.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_4F4E20",
+  "display_name": "GetDisposition_Eval",
   "end_ea": "0x4F4EE8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4F4E20",
+  "name": "GetDisposition_Eval",
   "segment": ".text",
   "sha256": "49ed5ea966243eb85f0e028f066667a0b1a7236fc5066a7f586457d1df1c0a23",
   "size": 200,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4F4E20",
-  "type": "char __cdecl(TESObjectREFR *, TESObjectREFR *, int, double *)",
+  "total_chunk_size": 200,
+  "type": "char __cdecl(TESObjectREFR *subject, TESObjectREFR *target, TESForm *param2, double *value)",
   "xrefs_from_count": 83,
-  "xrefs_to_count": 3
+  "xrefs_to_count": 2
 }

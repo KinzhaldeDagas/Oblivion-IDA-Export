@@ -1,4 +1,4 @@
-0x439400: push    0FFFFFFFFh
+0x439400: push    0FFFFFFFFh; Queued texture/model stream loader. Checks model-loader cache for the requested path, otherwise opens archive/loose file data and builds the stream-backed object.
 0x439402: push    offset SEH_439400
 0x439407: mov     eax, large fs:0
 0x43940D: push    eax
@@ -16,7 +16,7 @@
 0x43942E: lea     eax, [esp+5C4h+var_C]
 0x439435: mov     large fs:0, eax
 0x43943B: mov     esi, ecx
-0x43943D: mov     ecx, ModelLoaderPtr
+0x43943D: mov     ecx, ds:0B33A1Ch
 0x439443: mov     eax, [esi+20h]
 0x439446: mov     ecx, [ecx]
 0x439448: xor     ebx, ebx
@@ -53,7 +53,7 @@
 0x43949B: mov     eax, [esi+20h]
 0x43949E: lea     ecx, [esp+5C4h+Src]
 0x4394A5: push    ecx; int
-0x4394A6: mov     ecx, ModelLoaderPtr
+0x4394A6: mov     ecx, ds:0B33A1Ch
 0x4394AC: push    eax; Str1
 0x4394AD: call    sub_434710
 0x4394B2: mov     eax, [esi+24h]
@@ -143,3 +143,21 @@
 0x4395B7: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x4395BC: add     esp, 5B0h
 0x4395C2: retn
+0x9AC7A0: lea     ecx, [ebp-5A4h]; this
+0x9AC7A6: jmp     ??1BSStream@@UAE@XZ; BSStream::~BSStream(void)
+0x9AC7AB: mov     eax, [ebp-5A8h]
+0x9AC7B1: push    eax
+0x9AC7B2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AC7B7: pop     ecx
+0x9AC7B8: retn
+0x9AC7B9: mov     edx, [esp+arg_4]
+0x9AC7BD: lea     eax, [edx-5B4h]
+0x9AC7C3: mov     ecx, [edx-5B8h]
+0x9AC7C9: xor     ecx, eax
+0x9AC7CB: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AC7D0: add     eax, 10h
+0x9AC7D3: mov     ecx, [edx-4]
+0x9AC7D6: xor     ecx, eax
+0x9AC7D8: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AC7DD: mov     eax, offset stru_AD9468
+0x9AC7E2: jmp     ___CxxFrameHandler3

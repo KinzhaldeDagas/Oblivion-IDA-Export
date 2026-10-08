@@ -1,19 +1,40 @@
 {
-  "callees_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_4CC7C0",
+  "chunks": [
+    [
+      "0x4CC7C0",
+      "0x4CC847"
+    ],
+    [
+      "0x4BCBC0",
+      "0x4BCBD1"
+    ],
+    [
+      "0x9B51D0",
+      "0x9B51FE"
+    ]
+  ],
+  "chunks_sha256": "9dd668f76686ca903e4007b3d4203d954db27a21391e6a30a5def4aee591412c",
+  "comment_regular": "Verified DistantLODCellObjectData constructor/layout: three NiTArray<float> subobjects at +0x00/+0x10/+0x20 and recordCount +0x30. The arrays are rotationAnglesXYZ, positions, and scalePercent in that order. Base-object queued transforms apply angles X/Y/Z in radians.",
+  "comment_repeatable": "Verified DistantLODCellObjectData constructor/layout: three NiTArray<float> subobjects at +0x00/+0x10/+0x20 and recordCount +0x30. The arrays are rotationAnglesXYZ, positions, and scalePercent in that order. Base-object queued transforms apply angles X/Y/Z in radians.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "DistantLODCellObjectData_ctor",
   "end_ea": "0x4CC847",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4CC7C0",
+  "name": "DistantLODCellObjectData_ctor",
   "segment": ".text",
   "sha256": "5f86e6cf1dba31e48cd690fc32a9ff7ebd9168bbdde897e7e30c5be0260eac0b",
   "size": 135,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4CC7C0",
-  "type": "_WORD *__thiscall(_WORD *this)",
-  "xrefs_from_count": 39,
+  "total_chunk_size": 198,
+  "type": "DistantLODCellObjectData *__thiscall(DistantLODCellObjectData *this)",
+  "xrefs_from_count": 60,
   "xrefs_to_count": 2
 }

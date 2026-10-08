@@ -31,14 +31,13 @@
 0x4A64B5: mov     [eax+8], ebx
 0x4A64B8: mov     dword ptr [eax], offset ??_7TESRegionList@@6B@; const TESRegionList::`vftable'
 0x4A64BE: mov     [eax+0Ch], bl
-0x4A64C1: mov     [esp+38h+var_1C], eax
+0x4A64C1: mov     [esp+38h+self], eax
 0x4A64C5: jmp     short loc_4A64CB
-0x4A64C7: mov     [esp+38h+var_1C], ebx
+0x4A64C7: mov     [esp+38h+self], ebx
 0x4A64CB: cmp     ebp, ebx
 0x4A64CD: mov     [esp+38h+var_4], 0FFFFFFFFh
 0x4A64D5: jz      loc_4A657C
 0x4A64DB: jmp     short loc_4A64E0
-0x4A64DD: align 10h
 0x4A64E0: mov     edi, [ebp+0]
 0x4A64E3: cmp     edi, ebx
 0x4A64E5: jz      loc_4A657C
@@ -46,20 +45,20 @@
 0x4A64EE: shr     eax, 5
 0x4A64F1: test    al, 1
 0x4A64F3: jnz     short loc_4A6571
-0x4A64F5: mov     eax, [esp+38h+arg_8]
+0x4A64F5: mov     eax, [esp+38h+worldspace]
 0x4A64F9: cmp     eax, ebx
 0x4A64FB: jz      short loc_4A6502
 0x4A64FD: cmp     eax, [edi+20h]
-0x4A6500: jnz     short loc_4A6571
-0x4A6502: mov     edx, [esp+38h+arg_0]
-0x4A6506: mov     ecx, [edi+18h]
-0x4A6509: push    edx
-0x4A650A: call    sub_4A4460
+0x4A6500: jnz     short loc_4A6571; Verified: ignores regions with flag bit 0x20 and constrains candidates to the requested worldspace when one is provided.
+0x4A6502: mov     edx, [esp+38h+dataID]
+0x4A6506: mov     ecx, [edi+18h]; dataList
+0x4A6509: push    edx; dataID
+0x4A650A: call    TESRegion_FindDataByID; Verified: walks TESRegionDataList and returns the element whose virtual GetDataID (+0x0C) equals the requested ID.
 0x4A650F: cmp     eax, ebx
 0x4A6511: jz      short loc_4A6571
-0x4A6513: cmp     [eax+5], bl
+0x4A6513: cmp     [eax+5], bl; Verified: region-data entries with byte +5 nonzero are excluded before geometry/selection. Meaning of this byte remains Candidate pending additional direct naming or writer evidence; Fallout similarity alone is not sufficient.
 0x4A6516: jnz     short loc_4A6571
-0x4A6518: cmp     [esp+38h+arg_4], ebx
+0x4A6518: cmp     [esp+38h+worldXY], ebx
 0x4A651C: jz      short loc_4A654E
 0x4A651E: mov     esi, [edi+1Ch]
 0x4A6521: cmp     esi, ebx
@@ -67,7 +66,7 @@
 0x4A6525: mov     ecx, [esi]
 0x4A6527: cmp     ecx, ebx
 0x4A6529: jz      short loc_4A6571
-0x4A652B: mov     eax, [esp+38h+arg_4]
+0x4A652B: mov     eax, [esp+38h+worldXY]
 0x4A652F: push    eax
 0x4A6530: call    sub_4A7330
 0x4A6535: test    al, al
@@ -76,17 +75,16 @@
 0x4A653C: cmp     esi, ebx
 0x4A653E: jnz     short loc_4A6525
 0x4A6540: jmp     short loc_4A6571
-0x4A6542: mov     ecx, [esp+38h+var_1C]
-0x4A6546: push    edi
-0x4A6547: call    sub_4A6350
+0x4A6542: mov     ecx, [esp+38h+self]; self
+0x4A6546: push    edi; region
+0x4A6547: call    TESRegionList_AddUniqueRegion; Verified: inserts region only when not already present, preserving unique TESRegion membership.
 0x4A654C: jmp     short loc_4A6571
-0x4A654E: mov     ecx, [esp+38h+var_1C]
+0x4A654E: mov     ecx, [esp+38h+self]
 0x4A6552: add     ecx, 4
 0x4A6555: mov     eax, ecx
 0x4A6557: cmp     eax, ebx
 0x4A6559: jz      short loc_4A656B
 0x4A655B: jmp     short loc_4A6560
-0x4A655D: align 10h
 0x4A6560: cmp     [eax], edi
 0x4A6562: jz      short loc_4A6571
 0x4A6564: mov     eax, [eax+4]
@@ -97,23 +95,23 @@
 0x4A6571: mov     ebp, [ebp+4]
 0x4A6574: cmp     ebp, ebx
 0x4A6576: jnz     loc_4A64E0
-0x4A657C: mov     ebp, [esp+38h+arg_0]
-0x4A6580: mov     esi, ds:0B35420h[ebp*8]
+0x4A657C: mov     ebp, [esp+38h+dataID]
+0x4A6580: mov     esi, ds:0B35420h[ebp*8]; Verified: cache slot selected-data pointer address = 0xB35420 + 8 * regionDataID.
 0x4A6587: cmp     esi, ebx
-0x4A6589: lea     edi, ds:0B35420h[ebp*8]
-0x4A6590: mov     [esp+38h+arg_8], edi
+0x4A6589: lea     edi, ds:0B35420h[ebp*8]; Verified: corresponding cache slot matched-region-list pointer is selected-data slot +4.
+0x4A6590: mov     [esp+38h+worldspace], edi
 0x4A6594: jz      short loc_4A65E0
-0x4A6596: mov     ecx, ds:0B35424h[ebp*8]
+0x4A6596: mov     ecx, ds:0B35424h[ebp*8]; self
 0x4A659D: cmp     ecx, ebx
 0x4A659F: jz      short loc_4A65D0
-0x4A65A1: mov     edx, [esp+38h+var_1C]
-0x4A65A5: push    edx
-0x4A65A6: call    sub_4A6410
+0x4A65A1: mov     edx, [esp+38h+self]
+0x4A65A5: push    edx; other
+0x4A65A6: call    TESRegionList_AreEqual; Verified: compares region-list membership; used to decide whether cached region-data selection remains valid.
 0x4A65AB: test    al, al
 0x4A65AD: jz      short loc_4A65D0
-0x4A65AF: mov     esi, [esp+38h+var_1C]
+0x4A65AF: mov     esi, [esp+38h+self]
 0x4A65B3: lea     ecx, [esi+4]
-0x4A65B6: call    BSSimpleList_Clear
+0x4A65B6: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x4A65BB: cmp     esi, ebx
 0x4A65BD: jz      short loc_4A65C9
 0x4A65BF: mov     eax, [esi]
@@ -134,14 +132,14 @@
 0x4A65E0: mov     ecx, ds:0B35424h[ebp*8]
 0x4A65E7: cmp     ecx, ebx
 0x4A65E9: lea     esi, ds:0B35424h[ebp*8]
-0x4A65F0: mov     [esp+38h+arg_4], esi
+0x4A65F0: mov     [esp+38h+worldXY], esi
 0x4A65F4: jz      short loc_4A6600
 0x4A65F6: mov     [esi], ebx
 0x4A65F8: mov     eax, [ecx]
 0x4A65FA: mov     edx, [eax]
 0x4A65FC: push    1
 0x4A65FE: call    edx
-0x4A6600: mov     ebp, [esp+38h+var_1C]
+0x4A6600: mov     ebp, [esp+38h+self]
 0x4A6604: cmp     ebp, ebx
 0x4A6606: jz      loc_4A6735
 0x4A660C: add     ebp, 4
@@ -152,11 +150,11 @@
 0x4A6620: mov     eax, [edi]
 0x4A6622: cmp     eax, ebx
 0x4A6624: jz      loc_4A66C7
-0x4A662A: mov     ecx, [esp+38h+arg_0]
+0x4A662A: mov     ecx, [esp+38h+dataID]
 0x4A662E: mov     eax, [eax+18h]
-0x4A6631: push    ecx
-0x4A6632: mov     ecx, eax
-0x4A6634: call    sub_4A4460
+0x4A6631: push    ecx; dataID
+0x4A6632: mov     ecx, eax; dataList
+0x4A6634: call    TESRegion_FindDataByID; Verified: walks TESRegionDataList and returns the element whose virtual GetDataID (+0x0C) equals the requested ID.
 0x4A6639: mov     esi, eax
 0x4A663B: cmp     esi, ebx
 0x4A663D: jz      short loc_4A66B8
@@ -199,7 +197,7 @@
 0x4A66A1: mov     ecx, edx
 0x4A66A3: mov     edx, [eax+18h]
 0x4A66A6: push    esi
-0x4A66A7: call    edx
+0x4A66A7: call    edx; Verified: when another non-override candidate is encountered, prior selected TESRegionData receives current candidate and the number of matching regions through its virtual slot +0x18.
 0x4A66A9: jmp     short loc_4A66B8
 0x4A66AB: mov     eax, [esi]
 0x4A66AD: mov     edx, [eax+10h]
@@ -208,7 +206,7 @@
 0x4A66B4: mov     [esp+38h+var_18], eax
 0x4A66B8: mov     edi, [edi+4]
 0x4A66BB: cmp     edi, ebx
-0x4A66BD: mov     esi, [esp+38h+arg_4]
+0x4A66BD: mov     esi, [esp+38h+worldXY]
 0x4A66C1: jnz     loc_4A6620
 0x4A66C7: cmp     byte ptr [esp+38h+var_20+3], bl
 0x4A66CB: jz      short loc_4A66E0
@@ -222,7 +220,7 @@
 0x4A66E0: mov     edi, [esp+38h+var_18]
 0x4A66E4: cmp     edi, ebx
 0x4A66E6: jz      short loc_4A6722
-0x4A66E8: mov     ebp, [esp+38h+arg_8]
+0x4A66E8: mov     ebp, [esp+38h+worldspace]
 0x4A66EC: mov     ecx, [ebp+0]
 0x4A66EF: cmp     ecx, ebx
 0x4A66F1: jz      short loc_4A66FB
@@ -232,10 +230,10 @@
 0x4A66F9: call    edx
 0x4A66FB: mov     eax, [esi]
 0x4A66FD: cmp     eax, ebx
-0x4A66FF: mov     [ebp+0], edi
+0x4A66FF: mov     [ebp+0], edi; Verified: stores selected resolved data and matched-region-list snapshot in the per-data-ID cache; cache slot index is 8 * dataID.
 0x4A6702: jz      short loc_4A671A
 0x4A6704: lea     ecx, [eax+4]
-0x4A6707: call    BSSimpleList_Clear
+0x4A6707: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x4A670C: mov     ecx, [esi]
 0x4A670E: cmp     ecx, ebx
 0x4A6710: jz      short loc_4A671A
@@ -243,12 +241,12 @@
 0x4A6714: mov     edx, [eax]
 0x4A6716: push    1
 0x4A6718: call    edx
-0x4A671A: mov     eax, [esp+38h+var_1C]
+0x4A671A: mov     eax, [esp+38h+self]
 0x4A671E: mov     [esi], eax
 0x4A6720: jmp     short loc_4A6735
 0x4A6722: mov     ecx, ebp
-0x4A6724: call    BSSimpleList_Clear
-0x4A6729: mov     ecx, [esp+38h+var_1C]
+0x4A6724: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
+0x4A6729: mov     ecx, [esp+38h+self]
 0x4A672D: mov     edx, [ecx]
 0x4A672F: mov     eax, [edx]
 0x4A6731: push    1
@@ -263,3 +261,15 @@
 0x4A6748: pop     ebx
 0x4A6749: add     esp, 24h
 0x4A674C: retn    0Ch
+0x9B28F0: mov     eax, [ebp-24h]
+0x9B28F3: push    eax
+0x9B28F4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B28F9: pop     ecx
+0x9B28FA: retn
+0x9B28FB: mov     edx, [esp+worldXY]
+0x9B28FF: lea     eax, [edx-28h]
+0x9B2902: mov     ecx, [edx-2Ch]
+0x9B2905: xor     ecx, eax
+0x9B2907: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B290C: mov     eax, offset stru_ADE880
+0x9B2911: jmp     ___CxxFrameHandler3

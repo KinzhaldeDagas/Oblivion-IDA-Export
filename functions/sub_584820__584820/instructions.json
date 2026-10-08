@@ -43,19 +43,19 @@
   },
   {
     "ea": "0x584833",
-    "line": "fstp    [esp+8+a2]; a3",
+    "line": "fstp    [esp+8+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x584836",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x58483B",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x584868",
-    "line": "push    esi",
+    "line": "push    esi; index",
     "mnemonic": "push",
     "size": 1
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x584870",
-    "line": "call    sub_583CF0",
+    "line": "call    InterfaceManager__ClearTimer; Verified: finds timer by opaque owner/index pointer, unlinks and frees only the timer node. Used by NewTimer and fade cancellation.",
     "mnemonic": "call",
     "size": 5
   },

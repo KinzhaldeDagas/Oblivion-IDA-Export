@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x728B20",
-    "line": "push    esi",
+    "line": "push    esi; Corrected audit: if locked, checks additional-data virtual predicate +0x4C; calls sub_7261D0(additional,0) only when saved lock-mode byte +0x3D is ZERO, then clears locked byte +0x3C. Earlier description as committing a write lock was unsupported/opposite to this branch. Exact additional-data operation remains unresolved.",
     "mnemonic": "push",
     "size": 1
   },

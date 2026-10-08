@@ -1,4 +1,4 @@
-0x46B370: sub     esp, 40h
+0x46B370: sub     esp, 40h; Compresses the global TESForm record buffer with zlib when payload exists and FORM flag 0x40000 is clear. Rebuilds the record with compressed flag, original payload size, and deflated data.
 0x46B373: push    edi
 0x46B374: mov     edi, ds:0B33C14h
 0x46B37A: xor     eax, eax
@@ -33,7 +33,7 @@
 0x46B3E3: pop     edi
 0x46B3E4: add     esp, 40h
 0x46B3E7: retn
-0x46B3E8: push    ebp
+0x46B3E8: push    ebp; MEF v51 bridge-stack audit: at direct-JMP entry B, saved EBP/ESI plus pending size place payload at [ESP+14h] and zlib stream at [ESP+1Ch]; no-size failure after cleanup uses [ESP+18h]. All paths rejoin with vanilla ESP.
 0x46B3E9: push    esi; ArgList
 0x46B3EA: lea     esi, [ebx+ebx]
 0x46B3ED: push    esi; Size
@@ -53,8 +53,8 @@
 0x46B41B: jnz     short loc_46B438
 0x46B41D: push    offset aErrorDeflating; "Error deflating ZLib stream."
 0x46B422: call    PrintError
-0x46B427: push    ebp
-0x46B428: call    FormHeapFree
+0x46B427: push    ebp; MEF v51 bridge-stack audit: pending error-string push makes zlib stream [ESP+1Ch]. Helper arguments plus original string total 0Ch; add esp,0Ch restores the common failure-epilogue stack.
+0x46B428: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x46B42D: add     esp, 8
 0x46B430: pop     esi
 0x46B431: pop     ebp
@@ -67,7 +67,7 @@
 0x46B43F: push    ebx; Size
 0x46B440: mov     [esp+54h+Size], esi
 0x46B444: call    FormHeapAlloc
-0x46B449: or      dword ptr [edi+8], 40000h
+0x46B449: or      dword ptr [edi+8], 40000h; MEF v51 bridge-stack audit: pending final allocation size makes zlib stream [ESP+1Ch]. Helper arguments plus size total 0Ch; cleanup restores the common uncompressed-return frame.
 0x46B450: mov     esi, eax
 0x46B452: lea     edx, [ebx-14h]
 0x46B455: mov     [edi+4], edx
@@ -82,23 +82,23 @@
 0x46B46F: mov     [esi+0Ch], eax
 0x46B472: mov     ecx, [edi+10h]
 0x46B475: mov     eax, [esp+54h+Size]
-0x46B479: push    eax; Size
+0x46B479: push    eax; byteCount
 0x46B47A: mov     [esi+10h], ecx
 0x46B47D: lea     ecx, [esi+18h]
-0x46B480: push    ebp; Src
-0x46B481: push    ecx; Dst
+0x46B480: push    ebp; source
+0x46B481: push    ecx; destination
 0x46B482: mov     [esi+14h], edx
-0x46B485: call    _memcpy
+0x46B485: call    _memcpy;
 0x46B48A: mov     edx, ds:0B33C14h
 0x46B490: push    edx
-0x46B491: call    FormHeapFree
+0x46B491: call    FormHeapFree; Success path ownership: compressed record allocation succeeded before old B33C14 buffer is freed and replaced.
 0x46B496: lea     eax, [esp+64h+var_38]
 0x46B49A: push    eax
 0x46B49B: mov     ds:0B33C14h, esi
 0x46B4A1: mov     ds:0B33C18h, ebx
 0x46B4A7: call    sub_743E50
 0x46B4AC: push    ebp
-0x46B4AD: call    FormHeapFree
+0x46B4AD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x46B4B2: add     esp, 1Ch
 0x46B4B5: pop     esi
 0x46B4B6: pop     ebp

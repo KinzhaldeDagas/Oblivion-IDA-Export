@@ -1,29 +1,30 @@
-void __thiscall sub_4D9070(_BYTE *this)
+// Verified modified-state propagation: if this reference has lock data, calls TESFormVtbl::MarkAsModified with mask 0x40; otherwise, if its linked-door chain has lock data, marks that linked-door reference with the same mask.
+void __thiscall TESObjectREFR_MarkLockDataAsModified(TESObjectREFR *this)
 {
-  ExtraDataList *v2; // edi
-  BSExtraData *Teleport; // eax
-  BSExtraData *v4; // esi
-  BSExtraDataVtbl *v5; // eax
-  BSExtraDataVtbl *v6; // eax
+  ExtraDataList *p_baseExtraList; // edi
+  TeleportData *Teleport; // eax
+  TeleportData *v4; // esi
+  TESObjectREFR *LinkedDoor; // eax
+  TESObjectREFR *v6; // eax
 
-  v2 = (ExtraDataList *)(this + 0x44);
-  if ( sub_41E690((ExtraDataList *)(this + 0x44)) )
+  p_baseExtraList = &this->member.baseExtraList; /*0x4d9074*/
+  if ( ExtraDataList_GetLock(&this->member.baseExtraList) ) /*0x4d9079*/
   {
-    (*(void (__thiscall **)(_BYTE *, int))(*(_DWORD *)this + 0x40))(this, 0x40);
+    this->vtbl->super.MarkAsModified((TESForm *)this, 0x40); /*0x4d908b*/
   }
   else
   {
-    Teleport = (BSExtraData *)ExtraDataList_GetTeleport(v2);
-    v4 = Teleport;
-    if ( Teleport )
+    Teleport = ExtraDataList_GetTeleport(p_baseExtraList); /*0x4d9092*/
+    v4 = Teleport; /*0x4d9097*/
+    if ( Teleport ) /*0x4d909b*/
     {
-      if ( sub_42B410(Teleport) )
+      if ( TeleportData_GetLinkedDoor(Teleport) ) /*0x4d909f*/
       {
-        v5 = sub_42B410(v4);
-        if ( sub_41E690((ExtraDataList *)&v5[8].CompareTo) )
+        LinkedDoor = TeleportData_GetLinkedDoor(v4); /*0x4d90aa*/
+        if ( ExtraDataList_GetLock(&LinkedDoor->member.baseExtraList) ) /*0x4d90b2*/
         {
-          v6 = sub_42B410(v4);
-          (*((void (__thiscall **)(BSExtraDataVtbl *, int))v6->Destructor + 0x10))(v6, 0x40);
+          v6 = TeleportData_GetLinkedDoor(v4); /*0x4d90bd*/
+          v6->vtbl->super.MarkAsModified((TESForm *)v6, 0x40); /*0x4d90cb*/
         }
       }
     }

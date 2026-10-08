@@ -109,25 +109,25 @@
   },
   {
     "ea": "0x4BE0C5",
-    "line": "mov     edi, [esp+24h+arg_8]",
+    "line": "mov     edi, dword ptr [esp+24h+group_y]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4BE0C9",
-    "line": "mov     ebp, [esp+24h+arg_4]",
+    "line": "mov     ebp, [esp+24h+group_x]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4BE0CD",
-    "line": "push    edi; signed int",
+    "line": "push    edi; cellY",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BE0CE",
-    "line": "push    ebp; signed int",
+    "line": "push    ebp; cellX",
     "mnemonic": "push",
     "size": 1
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x4BE0E4",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,25 +265,25 @@
   },
   {
     "ea": "0x4BE115",
-    "line": "mov     ecx, [esp+24h+var_10]",
+    "line": "mov     ecx, [esp+24h+var_10]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4BE119",
-    "line": "push    edi",
+    "line": "push    edi; groupY",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BE11A",
-    "line": "push    ebp",
+    "line": "push    ebp; groupX",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BE11B",
-    "line": "call    sub_4BDE80",
+    "line": "call    DistantLODLoaderTaskMap_HasCellTask; Verified duplicate-cell check: packs exterior coordinates and performs GetAt through map vtable +0x04. Releases the temporary task smart pointer and returns whether that cell already has a DistantLODLoaderTask.",
     "mnemonic": "call",
     "size": 5
   },
@@ -463,13 +463,13 @@
   },
   {
     "ea": "0x4BE177",
-    "line": "push    edi",
+    "line": "push    edi; group_y",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BE178",
-    "line": "push    ebp",
+    "line": "push    ebp; group_x",
     "mnemonic": "push",
     "size": 1
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x4BE181",
-    "line": "call    sub_4EF1D0",
+    "line": "call    TESObjectCELL_PackExteriorGroupLabel; Verified exact key encoding used by the DistantLOD cell model map: packed label = (signed cellX << 16) | unsigned cellY.",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x4BE192",
-    "line": "mov     [esp+2Ch+arg_8], esp",
+    "line": "mov     dword ptr [esp+2Ch+group_y], esp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -748,5 +748,59 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AC700",
+    "line": "lea     ecx, [ebp+4]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AC703",
+    "line": "jmp     sub_4BDDC0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AC708",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AC70C",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AC70F",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AC712",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AC714",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AC719",
+    "line": "mov     eax, offset stru_AD93CC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AC71E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

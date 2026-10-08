@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7DCBD0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Fog render consumer decode: WaterShader pass setup writes water pixel FogParam c9 and FogColor c10 from active fog property.",
     "mnemonic": "push",
     "size": 2
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x7DCC03",
-    "line": "mov     eax, [esp+44h+arg_C]",
+    "line": "mov     eax, [esp+44h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1273,7 +1273,7 @@
   },
   {
     "ea": "0x7DCE7D",
-    "line": "mov     ecx, [esp+44h+arg_C]",
+    "line": "mov     ecx, [esp+44h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1285,7 +1285,7 @@
   },
   {
     "ea": "0x7DCE83",
-    "line": "mov     eax, [ecx+0Ch]",
+    "line": "mov     eax, [ecx+0Ch]; Fog render consumer decode: WaterShader loads active fog property from render/property state +0x0C.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1345,13 +1345,13 @@
   },
   {
     "ea": "0x7DCEA5",
-    "line": "fstp    [esp+44h+arg_C]",
+    "line": "fstp    [esp+44h+value]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7DCEA9",
-    "line": "fld     [esp+44h+arg_C]",
+    "line": "fld     [esp+44h+value]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1381,7 +1381,7 @@
   },
   {
     "ea": "0x7DCEBB",
-    "line": "fstp    [esp+44h+arg_C]",
+    "line": "fstp    [esp+44h+value]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1399,13 +1399,13 @@
   },
   {
     "ea": "0x7DCEC7",
-    "line": "fld     [esp+44h+arg_C]",
+    "line": "fld     [esp+44h+value]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7DCECB",
-    "line": "mov     ds:0B45E74h, eax",
+    "line": "mov     ds:0B45E74h, eax; Fog render consumer decode: Water FogParam ps c9 B45E14[0x18..0x1B] = (fogEnd, fogEnd - fogStart, 0, 0).",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1507,7 +1507,7 @@
   },
   {
     "ea": "0x7DCF15",
-    "line": "mov     ds:0B45E84h, ecx",
+    "line": "mov     ds:0B45E84h, ecx; Fog render consumer decode: Water FogColor ps c10 B45E14[0x1C..0x1F] = (fog.r, fog.g, fog.b, 0).",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1609,13 +1609,13 @@
   },
   {
     "ea": "0x7DCF58",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7DCF59",
-    "line": "call    sub_76C910",
+    "line": "call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1669,13 +1669,13 @@
   },
   {
     "ea": "0x7DCF78",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7DCF79",
-    "line": "call    sub_76C910",
+    "line": "call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1723,7 +1723,7 @@
   },
   {
     "ea": "0x7DCF91",
-    "line": "mov     [esp+44h+arg_C], ecx",
+    "line": "mov     [esp+44h+value], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1819,7 +1819,7 @@
   },
   {
     "ea": "0x7DCFB8",
-    "line": "mov     ecx, [esp+44h+arg_C]",
+    "line": "mov     ecx, [esp+44h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1867,7 +1867,7 @@
   },
   {
     "ea": "0x7DCFD1",
-    "line": "cmp     byte ptr [ebx+71h], 0",
+    "line": "cmp     byte ptr [ebx+71h], 0; Pass205: WaterShader suppresses/branches stage bind when WaterShaderProperty +0x71 generated LOD-water flag is active.",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -1897,19 +1897,19 @@
   },
   {
     "ea": "0x7DCFE3",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7DCFE4",
-    "line": "call    sub_76C910",
+    "line": "call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7DCFE9",
-    "line": "mov     eax, [edi+114h]",
+    "line": "mov     eax, [edi+114h]; Pass205: End of +0x71 generated LOD-water stage-bind suppression branch.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1939,13 +1939,13 @@
   },
   {
     "ea": "0x7DCFF9",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7DCFFA",
-    "line": "call    sub_76C910",
+    "line": "call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1975,7 +1975,7 @@
   },
   {
     "ea": "0x7DD00E",
-    "line": "mov     eax, [edi+10Ch]",
+    "line": "mov     eax, [edi+10Ch]; Pass202: WaterShader binds native WaterShader::Unk104[2] depth/height texture when pass data +0x72 path is active.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2005,13 +2005,13 @@
   },
   {
     "ea": "0x7DD01E",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7DD01F",
-    "line": "call    sub_76C910",
+    "line": "call    NiD3DTextureStage_SetTexture; Pass202: WaterShader stage bind using native WaterShader::Unk104[2] for copied-depth state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2047,7 +2047,7 @@
   },
   {
     "ea": "0x7DD038",
-    "line": "mov     eax, [edi+10Ch]",
+    "line": "mov     eax, [edi+10Ch]; Pass202: WaterShader selected Unk07C[7]/[8] path binds native WaterShader::Unk104[2].",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2101,19 +2101,19 @@
   },
   {
     "ea": "0x7DD058",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7DD059",
-    "line": "call    sub_76C910",
+    "line": "call    NiD3DTextureStage_SetTexture; Pass202: End of selected Unk07C[7]/[8] native height/depth texture bind path.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7DD05E",
-    "line": "cmp     byte ptr [ebx+70h], 0",
+    "line": "cmp     byte ptr [ebx+70h], 0; Pass205: WaterShader optional stage bind consumes WaterShaderProperty +0x6C texture when +0x70 displacement flag is active.",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -2155,19 +2155,19 @@
   },
   {
     "ea": "0x7DD071",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7DD072",
-    "line": "call    sub_76C910",
+    "line": "call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7DD077",
-    "line": "cmp     dword ptr ds:0B42D78h, 0",
+    "line": "cmp     dword ptr ds:0B42D78h, 0; Pass205: End of optional WaterShaderProperty +0x6C stage bind path.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -2227,13 +2227,13 @@
   },
   {
     "ea": "0x7DD09B",
-    "line": "fstp    [esp+44h+arg_C]",
+    "line": "fstp    [esp+44h+value]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7DD09F",
-    "line": "fld     [esp+44h+arg_C]",
+    "line": "fld     [esp+44h+value]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2299,13 +2299,13 @@
   },
   {
     "ea": "0x7DD0C6",
-    "line": "fstp    [esp+44h+arg_C]",
+    "line": "fstp    [esp+44h+value]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7DD0CA",
-    "line": "fld     [esp+44h+arg_C]",
+    "line": "fld     [esp+44h+value]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2479,7 +2479,7 @@
   },
   {
     "ea": "0x7DD149",
-    "line": "mov     [esp+44h+arg_C], esi",
+    "line": "mov     [esp+44h+value], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2509,25 +2509,25 @@
   },
   {
     "ea": "0x7DD15D",
-    "line": "lea     edx, [esp+44h+arg_C]",
+    "line": "lea     edx, [esp+44h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7DD161",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7DD162",
-    "line": "push    eax",
+    "line": "push    eax; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7DD163",
-    "line": "lea     ecx, [edi+40h]",
+    "line": "lea     ecx, [edi+40h]; this",
     "mnemonic": "lea",
     "size": 3
   },
@@ -2539,7 +2539,7 @@
   },
   {
     "ea": "0x7DD16E",
-    "line": "call    sub_76CE40",
+    "line": "call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2575,7 +2575,7 @@
   },
   {
     "ea": "0x7DD181",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2644,5 +2644,59 @@
     "line": "retn    1Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CF1D0",
+    "line": "lea     ecx, [ebp+10h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CF1D3",
+    "line": "jmp     sub_4027D0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CF1D8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CF1DC",
+    "line": "lea     eax, [edx-34h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CF1DF",
+    "line": "mov     ecx, [edx-38h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CF1E2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CF1E4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CF1E9",
+    "line": "mov     eax, offset stru_AF7ED8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CF1EE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x532370",
-    "line": "push    ebp",
+    "line": "push    ebp; TES4 authoritative: rebuilds the two player camera collision bhkSimpleShapePhantoms from sphere shape radius and filter layer 0x18 cinfo; only observed constructor path for the object used by 0x5326B0.",
     "mnemonic": "push",
     "size": 1
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x5323CE",
-    "line": "call    sub_532090",
+    "line": "call    bhkSphereShape_CtorRadius; TES4 authoritative: constructs a bhkSphereShape; if the third byte arg is true, radius is converted from TES/world units to Havok units with hkFactor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,13 +211,13 @@
   },
   {
     "ea": "0x5323D9",
-    "line": "lea     ecx, [esp+0F4h+var_70]",
+    "line": "lea     ecx, [esp+0F4h+info]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x5323E0",
-    "line": "call    sub_532250",
+    "line": "call    OB_bhkShapePhantomCinfo_InitIdentity_010201A0; 2026-05-18 73000 consumer decode: initializes bhkSimpleShapePhantom cinfo, including identity transform at +0x20 and shape pointer slot at +0x04. Stock 0x565510 installs one shape pointer and attaches the phantom to the target NiAVObject.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x5323F4",
-    "line": "call    sub_532250",
+    "line": "call    OB_bhkShapePhantomCinfo_InitIdentity_010201A0; 2026-05-18 73000 consumer decode: initializes bhkSimpleShapePhantom cinfo, including identity transform at +0x20 and shape pointer slot at +0x04. Stock 0x565510 installs one shape pointer and attaches the phantom to the target NiAVObject.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,13 +325,13 @@
   },
   {
     "ea": "0x532430",
-    "line": "mov     [esp+0F4h+var_D8], eax",
+    "line": "mov     [esp+0F4h+var_D8], eax; Second camera collision phantom uses generated high-word identity and filter layer 0x18.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x532434",
-    "line": "mov     [esp+0F4h+var_70], ecx",
+    "line": "mov     [esp+0F4h+info.collisionFilter], ecx; First camera collision phantom uses filter layer 0x18 plus caller high-word identity.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x532440",
-    "line": "mov     [esp+0F4h+var_6C], eax",
+    "line": "mov     [esp+0F4h+info.shape], eax",
     "mnemonic": "mov",
     "size": 7
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x532449",
-    "line": "mov     [esp+0F4h+var_6C], edi",
+    "line": "mov     [esp+0F4h+info.shape], edi",
     "mnemonic": "mov",
     "size": 7
   },
@@ -379,55 +379,55 @@
   },
   {
     "ea": "0x532454",
-    "line": "fst     [esp+0F8h+var_4C]",
+    "line": "fst     [esp+0F8h+info.transform+4]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x53245B",
-    "line": "fst     [esp+0F8h+var_48]",
+    "line": "fst     [esp+0F8h+info.transform+8]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x532462",
-    "line": "fst     [esp+0F8h+var_44]",
+    "line": "fst     [esp+0F8h+info.transform+0Ch]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x532469",
-    "line": "fst     [esp+0F8h+var_40]",
+    "line": "fst     [esp+0F8h+info.transform+10h]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x532470",
-    "line": "fst     [esp+0F8h+var_38]",
+    "line": "fst     [esp+0F8h+info.transform+18h]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x532477",
-    "line": "fst     [esp+0F8h+var_34]",
+    "line": "fst     [esp+0F8h+info.transform+1Ch]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x53247E",
-    "line": "fst     [esp+0F8h+var_30]",
+    "line": "fst     [esp+0F8h+info.transform+20h]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x532485",
-    "line": "fst     [esp+0F8h+var_2C]",
+    "line": "fst     [esp+0F8h+info.transform+24h]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x53248C",
-    "line": "fst     [esp+0F8h+var_24]",
+    "line": "fst     [esp+0F8h+info.transform+2Ch]",
     "mnemonic": "fst",
     "size": 7
   },
@@ -439,43 +439,43 @@
   },
   {
     "ea": "0x532495",
-    "line": "fst     [esp+0F8h+var_50]",
+    "line": "fst     [esp+0F8h+info.transform]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x53249C",
-    "line": "fst     [esp+0F8h+var_3C]",
+    "line": "fst     [esp+0F8h+info.transform+14h]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x5324A3",
-    "line": "fstp    [esp+0F8h+var_28]",
+    "line": "fstp    [esp+0F8h+info.transform+28h]",
     "mnemonic": "fstp",
     "size": 7
   },
   {
     "ea": "0x5324AA",
-    "line": "fst     [esp+0F8h+var_20]",
+    "line": "fst     [esp+0F8h+info.transform+30h]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x5324B1",
-    "line": "fst     [esp+0F8h+var_1C]",
+    "line": "fst     [esp+0F8h+info.transform+34h]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x5324B8",
-    "line": "fst     [esp+0F8h+var_18]",
+    "line": "fst     [esp+0F8h+info.transform+38h]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x5324BF",
-    "line": "fstp    [esp+0F8h+var_14]",
+    "line": "fstp    [esp+0F8h+info.transform+3Ch]",
     "mnemonic": "fstp",
     "size": 7
   },
@@ -517,25 +517,25 @@
   },
   {
     "ea": "0x5324DE",
-    "line": "lea     ecx, [esp+0F4h+var_70]",
+    "line": "lea     ecx, [esp+0F4h+info]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x5324E5",
-    "line": "push    ecx",
+    "line": "push    ecx; info",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5324E6",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5324E8",
-    "line": "call    sub_531FC0",
+    "line": "call    OB_bhkSimpleShapePhantom_CtorFromCinfo_010201A0; Constructs bhkSimpleShapePhantom wrapper and calls 0x8AF1A0 to create/attach the low-level Havok phantom object from cinfo.",
     "mnemonic": "call",
     "size": 5
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x532537",
-    "line": "mov     [esp+0F4h+var_D0], ecx",
+    "line": "mov     [esp+0F4h+var_D0.collisionFilter], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -727,7 +727,7 @@
   },
   {
     "ea": "0x532540",
-    "line": "mov     [esp+0F4h+var_CC], edx",
+    "line": "mov     [esp+0F4h+var_D0.shape], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -739,7 +739,7 @@
   },
   {
     "ea": "0x532546",
-    "line": "mov     [esp+0F4h+var_CC], 0",
+    "line": "mov     [esp+0F4h+var_D0.shape], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -757,55 +757,55 @@
   },
   {
     "ea": "0x532552",
-    "line": "fst     [esp+0F8h+var_AC]",
+    "line": "fst     [esp+0F8h+var_D0.transform+4]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x532556",
-    "line": "fst     [esp+0F8h+var_A8]",
+    "line": "fst     [esp+0F8h+var_D0.transform+8]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x53255A",
-    "line": "fst     [esp+0F8h+var_A4]",
+    "line": "fst     [esp+0F8h+var_D0.transform+0Ch]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x53255E",
-    "line": "fst     [esp+0F8h+var_A0]",
+    "line": "fst     [esp+0F8h+var_D0.transform+10h]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x532562",
-    "line": "fst     [esp+0F8h+var_98]",
+    "line": "fst     [esp+0F8h+var_D0.transform+18h]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x532566",
-    "line": "fst     [esp+0F8h+var_94]",
+    "line": "fst     [esp+0F8h+var_D0.transform+1Ch]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x53256A",
-    "line": "fst     [esp+0F8h+var_90]",
+    "line": "fst     [esp+0F8h+var_D0.transform+20h]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x53256E",
-    "line": "fst     [esp+0F8h+var_8C]",
+    "line": "fst     [esp+0F8h+var_D0.transform+24h]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x532572",
-    "line": "fst     [esp+0F8h+var_84]",
+    "line": "fst     [esp+0F8h+var_D0.transform+2Ch]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -817,43 +817,43 @@
   },
   {
     "ea": "0x532578",
-    "line": "fst     [esp+0F8h+var_B0]",
+    "line": "fst     [esp+0F8h+var_D0.transform]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x53257C",
-    "line": "fst     [esp+0F8h+var_9C]",
+    "line": "fst     [esp+0F8h+var_D0.transform+14h]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x532580",
-    "line": "fstp    [esp+0F8h+var_88]",
+    "line": "fstp    [esp+0F8h+var_D0.transform+28h]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x532584",
-    "line": "fst     [esp+0F8h+var_80]",
+    "line": "fst     [esp+0F8h+var_D0.transform+30h]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x532588",
-    "line": "fst     [esp+0F8h+var_7C]",
+    "line": "fst     [esp+0F8h+var_D0.transform+34h]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x53258C",
-    "line": "fst     [esp+0F8h+var_78]",
+    "line": "fst     [esp+0F8h+var_D0.transform+38h]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x532593",
-    "line": "fstp    [esp+0F8h+var_74]",
+    "line": "fstp    [esp+0F8h+var_D0.transform+3Ch]",
     "mnemonic": "fstp",
     "size": 7
   },
@@ -901,19 +901,19 @@
   },
   {
     "ea": "0x5325B6",
-    "line": "push    ecx",
+    "line": "push    ecx; info",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5325B7",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5325B9",
-    "line": "call    sub_531FC0",
+    "line": "call    OB_bhkSimpleShapePhantom_CtorFromCinfo_010201A0; Constructs bhkSimpleShapePhantom wrapper and calls 0x8AF1A0 to create/attach the low-level Havok phantom object from cinfo.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1093,7 +1093,7 @@
   },
   {
     "ea": "0x53260C",
-    "line": "mov     eax, [esp+0F4h+var_BC]",
+    "line": "mov     eax, [esp+0F4h+var_D0.propertyCapacityFlags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1195,7 +1195,7 @@
   },
   {
     "ea": "0x53264A",
-    "line": "mov     eax, [esp+0FCh+var_C4]",
+    "line": "mov     eax, [esp+0FCh+var_D0.propertyData]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1213,7 +1213,7 @@
   },
   {
     "ea": "0x532654",
-    "line": "mov     eax, [esp+0F4h+var_5C]",
+    "line": "mov     eax, [esp+0F4h+info.propertyCapacityFlags]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1267,7 +1267,7 @@
   },
   {
     "ea": "0x53267D",
-    "line": "mov     edx, [esp+0F4h+var_64]",
+    "line": "mov     edx, [esp+0F4h+info.propertyData]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1372,5 +1372,161 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B8DA0",
+    "line": "mov     eax, [ebp+var_D8]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B8DA6",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B8DA7",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8DAC",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B8DAD",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B8DAE",
+    "line": "lea     ecx, [ebp+info]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B8DB1",
+    "line": "jmp     sub_8A5090",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8DB6",
+    "line": "lea     ecx, [ebp+var_D0]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B8DBC",
+    "line": "jmp     sub_8A5090",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8DC1",
+    "line": "mov     eax, [ebp+var_D4]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B8DC7",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B8DC8",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8DCD",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B8DCE",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B8DCF",
+    "line": "mov     eax, [ebp+var_D4]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B8DD5",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B8DD6",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8DDB",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B8DDC",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B8DDD",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B8DE1",
+    "line": "lea     eax, [edx-0E4h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B8DE7",
+    "line": "mov     ecx, [edx-0E8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B8DED",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B8DEF",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8DF4",
+    "line": "mov     eax, offset stru_AE31E8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8DF9",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

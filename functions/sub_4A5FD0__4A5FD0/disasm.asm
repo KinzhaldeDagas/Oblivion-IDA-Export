@@ -1,4 +1,4 @@
-0x4A5FD0: mov     dl, [esp+arg_0]
+0x4A5FD0: mov     dl, [esp+ownsObjectMemory]
 0x4A5FD4: mov     eax, ecx
 0x4A5FD6: xor     ecx, ecx
 0x4A5FD8: mov     [eax+4], ecx

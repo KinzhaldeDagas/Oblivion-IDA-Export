@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4F5C50",
-    "line": "fldz",
+    "line": "fldz; GetNoRumors_Evaluate is separately used by CTDA rows: returns Actor::IsNoRumor(subject) as numeric 1/0 for actor subjects, and 0 for null/nonactor input. A GetNoRumors condition is a predicate result; it does not itself add/remove the INFOGENERAL topic cache.",
     "mnemonic": "fldz",
     "size": 2
   },
@@ -85,13 +85,13 @@
   },
   {
     "ea": "0x4F5C72",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4F5C74",
-    "line": "call    Actor__IsNoRumor",
+    "line": "call    Actor__IsNoRumor; Engine-native NoRumors predicate used by the GetNoRumors command and MenuTopicManager::FillTopicList. Its code xrefs do not include TESTopic::CreateConversation; it gates the player-facing INFOGENERAL/Rumors entry, not arbitrary ambient linked-topic playback.",
     "mnemonic": "call",
     "size": 5
   },

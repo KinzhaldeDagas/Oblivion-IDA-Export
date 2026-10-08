@@ -9,13 +9,13 @@ void __cdecl UpdateParticleShaderFOVData(float a1)
   float v7; // [esp+Ch] [ebp+4h]
   float v8; // [esp+Ch] [ebp+4h]
 
-  v4 = a1 * dbl_A2FAA0 * dbl_A31C78;
-  v1 = sin(v4);
-  v5 = cos(v4);
-  v6 = v1 / v5;
-  v3 = v6;
-  v7 = sin(dbl_A690D0);
-  v2 = v7;
-  v8 = cos(dbl_A690D0);
-  flt_B2D80C = v3 / (v2 / v8);
+  v4 = a1 * dbl_A2FAA0 * dbl_A31C78; /*0x7b70f3*/
+  v1 = sin(v4); /*0x7b7100*/
+  v5 = cos(v4); /*0x7b7112*/
+  v6 = v1 / v5; /*0x7b711d*/
+  v3 = v6; /*0x7b7125*/
+  v7 = sin(dbl_A690D0); /*0x7b7134*/
+  v2 = v7; /*0x7b713c*/
+  v8 = cos(dbl_A690D0); /*0x7b714a*/
+  flt_B2D80C = v3 / (v2 / v8); /*0x7b7159*/
 }

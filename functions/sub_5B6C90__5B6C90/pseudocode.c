@@ -1,21 +1,32 @@
-void __userpurge sub_5B6C90(int a1@<ecx>, double st3_0@<st4>, double a3@<st3>, double a4@<st0>, int a5, Tile *a6)
+void __userpurge sub_5B6C90(
+        int a1@<ecx>,
+        double st3_0@<st4>,
+        double a3@<st3>,
+        double a4@<st0>,
+        double a5@<st2>,
+        double a6@<st1>,
+        int a7,
+        Tile *a8)
 {
-  double v10; // st5
-  Tile *v11; // edi
-  double v12; // st6
-  double v13; // st5
-  char *v14; // eax
-  double v15; // st7
-  double v16; // st5
-  char *v17; // eax
-  double v19; // st5
-  int v20; // ebx
-  int v21; // eax
-  int v22; // ebp
+  Tile *v9; // edi
+  char *v10; // eax
+  double v11; // st7
+  char *v12; // eax
   double Float; // st7
-  int v24; // eax
+  double v15; // st7
+  double v16; // st7
+  int v17; // ebx
+  double v18; // st7
+  int v19; // eax
+  int v20; // ebp
+  double v21; // st7
+  int v22; // eax
+  float v23; // [esp+0h] [ebp-20h]
+  float v24; // [esp+0h] [ebp-20h]
   float v25; // [esp+0h] [ebp-20h]
   float v26; // [esp+0h] [ebp-20h]
+  float v27; // [esp+0h] [ebp-20h]
+  float v28; // [esp+0h] [ebp-20h]
   float a2; // [esp+8h] [ebp-18h]
   float a2a; // [esp+8h] [ebp-18h]
   float a2b; // [esp+8h] [ebp-18h]
@@ -23,96 +34,131 @@ void __userpurge sub_5B6C90(int a1@<ecx>, double st3_0@<st4>, double a3@<st3>, d
   float a2d; // [esp+8h] [ebp-18h]
   float a2e; // [esp+8h] [ebp-18h]
   float a2f; // [esp+8h] [ebp-18h]
-  float v34; // [esp+14h] [ebp-Ch]
-  int v35; // [esp+18h] [ebp-8h]
-  _DWORD *v36; // [esp+18h] [ebp-8h]
-  float v37; // [esp+1Ch] [ebp-4h]
-  float v38; // [esp+24h] [ebp+4h]
-  float v39; // [esp+24h] [ebp+4h]
-  Tile *v40; // [esp+28h] [ebp+8h]
-  float v41; // [esp+28h] [ebp+8h]
+  float a2g; // [esp+8h] [ebp-18h]
+  float a2h; // [esp+8h] [ebp-18h]
+  float a2i; // [esp+8h] [ebp-18h]
+  float a2j; // [esp+8h] [ebp-18h]
+  int v41; // [esp+18h] [ebp-8h]
+  _DWORD *v42; // [esp+18h] [ebp-8h]
+  Tile *v46; // [esp+28h] [ebp+8h]
+  Tile *v47; // [esp+28h] [ebp+8h]
 
-  switch ( a5 )
+  switch ( a7 ) /*0x5b6ca7*/
   {
-    case '3':
-    case '4':
-      Tile_GetFloat(a6, 0xFE0);
-      v35 = Double_To_SInt32(a4);
-      v38 = (float)(2 * v35);
-      Tile_GetFloat(a6, 0xFCA);
-      v40 = (Tile *)Double_To_SInt32(a4);
-      v34 = (float)v35;
-      v19 = sub_588CF0(a6);
-      v20 = Double_To_SInt32(a4);
-      v36 = (_DWORD *)v20;
-      sub_588CF0(*(_DWORD **)(*(_DWORD *)(a1 + 0x48) + 0x10));
-      v21 = Double_To_SInt32(a4);
-      v22 = v21;
-      if ( v20 < v21 )
+    case '3': /*0x5b6ca7*/
+    case '4': /*0x5b6ca7*/
+      Float = Tile_GetFloat(a8, 0xFE0); /*0x5b6e2e*/
+      v41 = Double_To_SInt32(Float); /*0x5b6e38*/
+      v46 = (Tile *)(2 * v41); /*0x5b6e3e*/
+      __asm { fild    [esp+1Ch+arg_4] } /*0x5b6e42*/
+      __asm { fstp    [esp+20h+arg_0] }
+      v15 = Tile_GetFloat(a8, 0xFCA); /*0x5b6e51*/
+      __asm { fsub    [esp+1Ch+arg_0] } /*0x5b6e56*/
+      __asm { fild    [esp+1Ch+var_8] }
+      v47 = (Tile *)Double_To_SInt32(v15); /*0x5b6e65*/
+      __asm { fstp    [esp+1Ch+var_C]; a3 } /*0x5b6e69*/
+      v16 = sub_588CF0(a8); /*0x5b6e6d*/
+      __asm { fadd    [esp+1Ch+var_C] } /*0x5b6e72*/
+      v17 = Double_To_SInt32(v16); /*0x5b6e81*/
+      v42 = (_DWORD *)v17; /*0x5b6e83*/
+      v18 = sub_588CF0((_DWORD *)*(_DWORD *)(*(_DWORD *)(a1 + 0x48) + 0x10)); /*0x5b6e87*/
+      v19 = Double_To_SInt32(v18); /*0x5b6e8c*/
+      v20 = v19; /*0x5b6e91*/
+      if ( v17 < v19 ) /*0x5b6e95*/
       {
-        v40 = (Tile *)((char *)v40 + v20 - v21);
-        v20 = v21;
-        v36 = (_DWORD *)v21;
+        v47 = (Tile *)((char *)v47 + v17 - v19); /*0x5b6e99*/
+        v17 = v19; /*0x5b6e9d*/
+        v42 = (_DWORD *)v19; /*0x5b6e9f*/
       }
-      Float = Tile_GetFloat((_DWORD *)*(_DWORD *)(*(_DWORD *)(a1 + 0x48) + 0x10), 0xFCA);
-      v24 = Double_To_SInt32(Float);
-      if ( (int)v40 + v20 > v24 + v22 )
-        v40 = (Tile *)(v22 + v24 - v20);
-      v37 = sub_588D90(a6, Float) - dbl_A2FAA0;
-      Tile_SetFloat(*(Tile **)(a1 + 0x4C), (_DWORD *)0xFAB, v37);
-      v39 = Tile_GetFloat(a6, 0xFCB) - v38;
-      Tile_SetFloat(*(Tile **)(a1 + 0x4C), (_DWORD *)0xFCB, v39);
-      v25 = (float)(int)v40;
-      Tile_SetFloat(*(Tile **)(a1 + 0x4C), (_DWORD *)0xFCA, v25);
-      sub_588C50(a6);
-      v41 = v19 + v34;
-      Tile_SetFloat(*(Tile **)(a1 + 0x4C), (_DWORD *)0xFAD, v41);
-      v26 = (float)(int)v36;
-      Tile_SetFloat(*(Tile **)(a1 + 0x4C), (_DWORD *)0xFAC, v26);
-      Tile_SetFloat(*(Tile **)(a1 + 0x4C), (_DWORD *)0xFA1, fConstant_2);
-      *(_DWORD *)(a1 + 0x78) = a6;
-      *(_BYTE *)(a1 + 0x84) = 0xFF;
+      v21 = Tile_GetFloat((_DWORD *)*(_DWORD *)(*(_DWORD *)(a1 + 0x48) + 0x10), 0xFCA); /*0x5b6eae*/
+      v22 = Double_To_SInt32(v21); /*0x5b6eb3*/
+      if ( (int)v47 + v17 > v22 + v20 ) /*0x5b6ec3*/
+        v47 = (Tile *)(v20 + v22 - v17); /*0x5b6ec9*/
+      sub_588D90(a8, v21); /*0x5b6ecf*/
+      __asm { fsub    qword ptr ds:0A2FAA0h } /*0x5b6ed4*/
+      __asm
+      {
+        fstp    [esp+20h+var_4]
+        fld     [esp+20h+var_4]
+        fstp    [esp+20h+var_20]; value
+      }
+      Tile_SetFloat(*(Tile **)(a1 + 0x4C), 0xFABu, v23); /*0x5b6eee*/
+      Tile_GetFloat(a8, 0xFCB); /*0x5b6efa*/
+      __asm { fsub    [esp+1Ch+arg_0] } /*0x5b6eff*/
+      __asm
+      {
+        fstp    [esp+20h+arg_0]
+        fld     [esp+20h+arg_0]
+        fstp    [esp+20h+var_20]; value
+      }
+      Tile_SetFloat(*(Tile **)(a1 + 0x4C), 0xFCBu, v24); /*0x5b6f17*/
+      __asm { fild    [esp+1Ch+arg_4] } /*0x5b6f1c*/
+      __asm { fstp    [esp+20h+var_20]; value }
+      Tile_SetFloat(*(Tile **)(a1 + 0x4C), 0xFCAu, v25); /*0x5b6f2c*/
+      sub_588C50(a8); /*0x5b6f33*/
+      __asm { fadd    [esp+1Ch+var_C] } /*0x5b6f38*/
+      __asm
+      {
+        fstp    [esp+20h+arg_4]
+        fld     [esp+20h+arg_4]
+        fstp    [esp+20h+var_20]; value
+      }
+      Tile_SetFloat(*(Tile **)(a1 + 0x4C), 0xFADu, v26); /*0x5b6f50*/
+      __asm { fild    [esp+1Ch+var_8] } /*0x5b6f55*/
+      __asm { fstp    [esp+20h+var_20]; value }
+      Tile_SetFloat(*(Tile **)(a1 + 0x4C), 0xFACu, v27); /*0x5b6f65*/
+      __asm { fld     dword ptr ds:0A379B4h } /*0x5b6f6a*/
+      __asm { fstp    [esp+20h+var_20]; value }
+      Tile_SetFloat(*(Tile **)(a1 + 0x4C), 0xFA1u, v28); /*0x5b6f7c*/
+      *(_DWORD *)(a1 + 0x78) = a8; /*0x5b6f82*/
+      *(_BYTE *)(a1 + 0x84) = 0xFF; /*0x5b6f85*/
       break;
-    case '+':
-      v10 = flt_A2FE7C;
-      v11 = a6;
-      Tile_SetFloat(a6, (_DWORD *)0xFB5, flt_A2FE7C);
-      v12 = sub_588D90(a6, a4);
-      a2 = v10;
-      Tile_SetFloat(*(Tile **)(a1 + 0x5C), (_DWORD *)0xFAE, a2);
-      v13 = sub_588C50(a6);
-      a2a = st3_0;
-      Tile_SetFloat(*(Tile **)(a1 + 0x5C), (_DWORD *)0xFAF, a2a);
-      sub_588CF0(a6);
-      a2b = a3;
-      Tile_SetFloat(*(Tile **)(a1 + 0x5C), (_DWORD *)0xFB0, a2b);
-      v14 = sub_588C10(a6, 0xFB2);
-      Tile_SetString(*(_DWORD **)(a1 + 0x5C), (_DWORD *)0xFDE, v14);
-      Tile_SetFloat(*(Tile **)(a1 + 0x5C), (_DWORD *)0xFA1, fConstant_2);
-      v15 = Tile_GetFloat(a6, 0xFB4);
+    case '+': /*0x5b6ca7*/
+      __asm { fld     dword ptr ds:0A2FE7Ch } /*0x5b6cb6*/
+      v9 = a8; /*0x5b6cbc*/
+      __asm { fstp    [esp+18h+a2]; value } /*0x5b6cc1*/
+      Tile_SetFloat(a8, 0xFB5u, a2); /*0x5b6ccb*/
+      sub_588D90(a8, a4); /*0x5b6cd2*/
+      __asm { fstp    [esp+18h+a2]; value } /*0x5b6cdb*/
+      Tile_SetFloat(*(Tile **)(a1 + 0x5C), 0xFAEu, a2a); /*0x5b6ce3*/
+      sub_588C50(a8); /*0x5b6cea*/
+      __asm { fstp    [esp+18h+a2]; value } /*0x5b6cf3*/
+      Tile_SetFloat(*(Tile **)(a1 + 0x5C), 0xFAFu, a2b); /*0x5b6cfb*/
+      sub_588CF0(a8); /*0x5b6d02*/
+      __asm { fstp    [esp+18h+a2]; value } /*0x5b6d0b*/
+      Tile_SetFloat(*(Tile **)(a1 + 0x5C), 0xFB0u, a2c); /*0x5b6d13*/
+      v10 = sub_588C10(a8, 0xFB2); /*0x5b6d1f*/
+      Tile_SetString(*(_DWORD **)(a1 + 0x5C), (_DWORD *)0xFDE, v10); /*0x5b6d2d*/
+      __asm { fld     dword ptr ds:0A379B4h } /*0x5b6d32*/
+      __asm { fstp    [esp+18h+a2]; value }
+      Tile_SetFloat(*(Tile **)(a1 + 0x5C), 0xFA1u, a2d); /*0x5b6d44*/
+      v11 = Tile_GetFloat(a8, 0xFB4); /*0x5b6d50*/
 LABEL_5:
-      a2c = v15;
-      Tile_SetFloat(*(Tile **)(a1 + 0x5C), (_DWORD *)0xFB4, a2c);
-      sub_58FBA0(*(_DWORD *)(a1 + 0x5C), v13, v12, v15, 0);
-      *(_DWORD *)(a1 + 0xF4) = v11;
-      return;
-    case '1':
-      v16 = flt_A2FE7C;
-      v11 = a6;
-      Tile_SetFloat(a6, (_DWORD *)0xFB5, flt_A2FE7C);
-      v12 = sub_588D90(a6, a4);
-      a2d = v16;
-      Tile_SetFloat(*(Tile **)(a1 + 0x5C), (_DWORD *)0xFAE, a2d);
-      v13 = sub_588C50(a6);
-      a2e = st3_0;
-      Tile_SetFloat(*(Tile **)(a1 + 0x5C), (_DWORD *)0xFAF, a2e);
-      sub_588CF0(a6);
-      a2f = a3;
-      Tile_SetFloat(*(Tile **)(a1 + 0x5C), (_DWORD *)0xFB0, a2f);
-      v17 = sub_588C10(a6, 0xFB2);
-      Tile_SetString(*(_DWORD **)(a1 + 0x5C), (_DWORD *)0xFDE, v17);
-      Tile_SetFloat(*(Tile **)(a1 + 0x5C), (_DWORD *)0xFA1, fConstant_2);
-      v15 = 1.0;
-      goto LABEL_5;
+      __asm { fstp    [esp+18h+a2]; value } /*0x5b6d55*/
+      Tile_SetFloat(*(Tile **)(a1 + 0x5C), 0xFB4u, a2e); /*0x5b6d61*/
+      sub_58FBA0(*(_DWORD *)(a1 + 0x5C), a5, a6, v11, 0); /*0x5b6d6b*/
+      *(_DWORD *)(a1 + 0xF4) = v9; /*0x5b6d70*/
+      return; /*0x5b6d7b*/
+    case '1': /*0x5b6ca7*/
+      __asm { fld     dword ptr ds:0A2FE7Ch } /*0x5b6d87*/
+      v9 = a8; /*0x5b6d8d*/
+      __asm { fstp    [esp+18h+a2]; value } /*0x5b6d92*/
+      Tile_SetFloat(a8, 0xFB5u, a2f); /*0x5b6d9c*/
+      sub_588D90(a8, a4); /*0x5b6da3*/
+      __asm { fstp    [esp+18h+a2]; value } /*0x5b6dac*/
+      Tile_SetFloat(*(Tile **)(a1 + 0x5C), 0xFAEu, a2g); /*0x5b6db4*/
+      sub_588C50(a8); /*0x5b6dbb*/
+      __asm { fstp    [esp+18h+a2]; value } /*0x5b6dc4*/
+      Tile_SetFloat(*(Tile **)(a1 + 0x5C), 0xFAFu, a2h); /*0x5b6dcc*/
+      v11 = sub_588CF0(a8); /*0x5b6dd3*/
+      __asm { fstp    [esp+18h+a2]; value } /*0x5b6ddc*/
+      Tile_SetFloat(*(Tile **)(a1 + 0x5C), 0xFB0u, a2i); /*0x5b6de4*/
+      v12 = sub_588C10(a8, 0xFB2); /*0x5b6df0*/
+      Tile_SetString(*(_DWORD **)(a1 + 0x5C), (_DWORD *)0xFDE, v12); /*0x5b6dfe*/
+      __asm { fld     dword ptr ds:0A379B4h } /*0x5b6e03*/
+      __asm { fstp    [esp+18h+a2]; value }
+      Tile_SetFloat(*(Tile **)(a1 + 0x5C), 0xFA1u, a2j); /*0x5b6e15*/
+      __asm { fld1 } /*0x5b6e1a*/
+      goto LABEL_5; /*0x5b6e1c*/
   }
 }

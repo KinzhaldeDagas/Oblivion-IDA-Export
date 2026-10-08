@@ -8,48 +8,48 @@ char __thiscall sub_4A7270(float **this, char a2)
   float **v8; // esi
   char v9; // [esp+7h] [ebp-5h]
 
-  v2 = this;
-  if ( (unsigned int)*(this + 9) < 4 )
-    return 0;
-  v4 = (int)*(this + 1);
-  v5 = *(_DWORD *)(v4 + 4);
-  v6 = this;
-  if ( v5 )
+  v2 = this; /*0x4a7274*/
+  if ( (unsigned int)*(this + 9) < 4 ) /*0x4a727e*/
+    return 0; /*0x4a7280*/
+  v4 = (int)*(this + 1); /*0x4a728b*/
+  v5 = *(_DWORD *)(v4 + 4); /*0x4a728e*/
+  v6 = this; /*0x4a7294*/
+  if ( v5 ) /*0x4a7296*/
   {
-    while ( 2 )
+    while ( 2 ) /*0x4a7298*/
     {
-      v7 = (float **)v5;
-      v8 = *(float ***)(v5 + 4);
-      v9 = 0;
-      do
+      v7 = (float **)v5; /*0x4a7298*/
+      v8 = *(float ***)(v5 + 4); /*0x4a729e*/
+      v9 = 0; /*0x4a72a5*/
+      do /*0x4a72fd*/
       {
-        if ( !v8 )
+        if ( !v8 ) /*0x4a72b2*/
         {
-          if ( a2 )
+          if ( a2 ) /*0x4a72b9*/
           {
-            if ( v6 != v2 )
-              v8 = v2;
+            if ( v6 != v2 ) /*0x4a72bd*/
+              v8 = v2; /*0x4a72bf*/
           }
-          v9 = 1;
+          v9 = 1; /*0x4a72c1*/
         }
-        if ( v6 && v7 && v8 )
+        if ( v6 && v7 && v8 ) /*0x4a72d0*/
         {
-          if ( sub_4A6AF0(*v6, *(float **)v4, *v7, *v8) )
-            return 1;
-          v2 = this;
+          if ( sub_4A6AF0(*v6, *(float **)v4, *v7, *v8) ) /*0x4a72df*/
+            return 1; /*0x4a731a*/
+          v2 = this; /*0x4a72eb*/
         }
-        v7 = v8;
-        if ( v8 )
-          v8 = (float **)v8[1];
+        v7 = v8; /*0x4a72f1*/
+        if ( v8 ) /*0x4a72f3*/
+          v8 = (float **)v8[1]; /*0x4a72f5*/
       }
-      while ( !v9 );
-      v6 = (float **)v4;
-      v4 = *(_DWORD *)(v4 + 4);
-      v5 = *(_DWORD *)(v4 + 4);
-      if ( v5 )
-        continue;
+      while ( !v9 ); /*0x4a72fd*/
+      v6 = (float **)v4; /*0x4a72ff*/
+      v4 = *(_DWORD *)(v4 + 4); /*0x4a7301*/
+      v5 = *(_DWORD *)(v4 + 4); /*0x4a7304*/
+      if ( v5 ) /*0x4a7309*/
+        continue; /*0x4a7309*/
       break;
     }
   }
-  return 0;
+  return 0; /*0x4a7282*/
 }

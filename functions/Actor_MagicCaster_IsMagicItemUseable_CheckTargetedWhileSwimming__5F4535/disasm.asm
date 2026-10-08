@@ -9,7 +9,7 @@
 0x5F454E: test    edi, edi
 0x5F4550: jz      short loc_5F4560
 0x5F4552: lea     ecx, [edi+0Ch]
-0x5F4555: call    EffectItemList_HasOnTarget
+0x5F4555: call    EffectItemList_HasOnTarget; True iff list has an EffectItem with range==2 (Target) and EffectSetting flag 0x400000 clear. Does not require hostile/detrimental.
 0x5F455A: mov     [esp+arg_D], al
 0x5F455E: jmp     short Actor_MagicCaster_IsMagicItemUseable___CheckMagickaCost
 0x5F4560: mov     [esp+arg_D], 0

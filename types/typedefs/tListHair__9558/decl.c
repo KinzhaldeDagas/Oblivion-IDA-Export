@@ -1,1 +1,4 @@
-tListHair
+struct tListHair
+{
+NodeHair node;
+};

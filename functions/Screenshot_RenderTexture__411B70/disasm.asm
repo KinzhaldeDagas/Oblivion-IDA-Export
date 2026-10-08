@@ -12,7 +12,7 @@
 0x411B8F: push    eax; ArgList
 0x411B90: lea     eax, [esp+0BCh+var_C]
 0x411B97: mov     large fs:0, eax
-0x411B9D: mov     ecx, dword_B350D8
+0x411B9D: mov     ecx, ds:0B350D8h
 0x411BA3: mov     eax, [ecx]
 0x411BA5: mov     edx, [eax+8Ch]
 0x411BAB: mov     ebp, [ecx+280h]
@@ -64,13 +64,13 @@
 0x411C48: fstp    [esp+0BCh+var_90]
 0x411C4C: fild    dword ptr [edi]
 0x411C4E: fmul    [esp+0BCh+var_90]
-0x411C52: call    Double_To_SInt32
-0x411C57: mov     ecx, TESDataHandler_g_PlayerRef
+0x411C52: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
+0x411C57: mov     ecx, dword ptr reference
 0x411C5D: push    0
 0x411C5F: mov     [esp+0C0h+var_94], eax
 0x411C63: call    sub_66B710
 0x411C68: fldz
-0x411C6A: mov     ecx, g_worldScenegraph
+0x411C6A: mov     ecx, g_WorldSceneReceiverRoot; Verified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.
 0x411C70: fstp    [esp+0BCh+var_A4]
 0x411C74: fld1
 0x411C76: mov     eax, [ecx+0DCh]
@@ -89,10 +89,10 @@
 0x411CAB: fstp    [esp+0C0h+var_98]
 0x411CAF: mov     ecx, [esp+0C0h+var_98]
 0x411CB3: mov     [eax+11Ch], ecx
-0x411CB9: mov     ecx, OSGlobals; this
-0x411CBF: call    NiRenderer_Render
+0x411CB9: mov     ecx, ds:0B33398h; this
+0x411CBF: call    NiRenderer_Render;
 0x411CC4: fldz
-0x411CC6: mov     edx, g_worldScenegraph
+0x411CC6: mov     edx, g_WorldSceneReceiverRoot; Verified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.
 0x411CCC: fst     [esp+0BCh+var_A4]
 0x411CD0: mov     eax, [edx+0DCh]
 0x411CD6: fld1
@@ -124,7 +124,7 @@
 0x411D31: push    edx
 0x411D32: push    0
 0x411D34: push    esi
-0x411D35: call    eax
+0x411D35: call    eax; DX11 readback contract verified 2026-09-24: IDirect3DTexture9::GetLevelDesc(0, &desc), vtable +0x44. Queried Format feeds CPU surface creation; numeric runtime format is not statically established.
 0x411D37: mov     ecx, [esi]
 0x411D39: mov     eax, [ecx+48h]
 0x411D3C: lea     edx, [esp+0BCh+var_8C]
@@ -145,7 +145,7 @@
 0x411D61: push    edx
 0x411D62: push    eax
 0x411D63: push    ebp
-0x411D64: call    ecx
+0x411D64: call    ecx; DX11 readback contract verified 2026-09-24: IDirect3DDevice9::CreateOffscreenPlainSurface, vtable +0x90: queried source Format, pool=2 (SYSTEMMEM), shared handle=null. This creation HRESULT is checked.
 0x411D66: test    eax, eax
 0x411D68: jz      short loc_411DA5
 0x411D6A: push    offset aScreenshotUn_3; "ScreenShot: Unable to create image surf"...
@@ -172,7 +172,7 @@
 0x411DB6: push    ecx
 0x411DB7: push    edx
 0x411DB8: push    ebp
-0x411DB9: call    eax
+0x411DB9: call    eax; DX11 readback contract verified 2026-09-24: IDirect3DDevice9::GetRenderTargetData(source level-0 surface, SYSTEMMEM destination), vtable +0x80. HRESULT is not tested; source Release follows at 0x411DC5. Modern replacement must complete real CPU destination bytes before return; a sidecar-valid flag is insufficient.
 0x411DBB: mov     eax, [esp+0BCh+var_8C]
 0x411DBF: mov     ecx, [eax]
 0x411DC1: mov     edx, [ecx+8]
@@ -186,7 +186,7 @@
 0x411DD8: push    edx
 0x411DD9: push    eax
 0x411DDA: mov     eax, [ecx+34h]
-0x411DDD: call    eax
+0x411DDD: call    eax; DX11 readback contract verified 2026-09-24: IDirect3DSurface9::LockRect(&locked, null, 0x800), vtable +0x34. 0x800 is D3DLOCK_NOSYSLOCK, not READONLY. HRESULT is not tested before conversion.
 0x411DDF: mov     ecx, [esp+0BCh+var_94]
 0x411DE3: push    70h ; 'p'; Size
 0x411DE5: mov     [edi], ecx
@@ -221,7 +221,7 @@
 0x411E38: jle     short loc_411E6F
 0x411E3A: mov     esi, [esp+0BCh+var_74]
 0x411E3E: add     esi, 1
-0x411E41: movzx   edx, byte ptr [esi+ecx+1]
+0x411E41: movzx   edx, byte ptr [esi+ecx+1]; DX11 readback contract verified 2026-09-24: Pixel loop reads source bytes 2,1,0 into RGB output, increments input by four bytes per pixel; no LockedRect.Pitch use in this loop. UnlockRect at 0x411E79 and Release at 0x411E85.
 0x411E46: mov     [eax], dl
 0x411E48: movzx   edx, byte ptr [esi+ecx]
 0x411E4C: mov     [eax+1], dl
@@ -268,3 +268,17 @@
 0x411EB7: pop     ebx
 0x411EB8: add     esp, 0A8h
 0x411EBE: retn
+0x9AAF50: lea     ecx, [ebp-88h]; slot
+0x9AAF56: jmp     NiPointerSlot_Release
+0x9AAF5B: mov     eax, [ebp-94h]
+0x9AAF61: push    eax
+0x9AAF62: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AAF67: pop     ecx
+0x9AAF68: retn
+0x9AAF69: mov     edx, [esp+arg_4]
+0x9AAF6D: lea     eax, [edx-0ACh]
+0x9AAF73: mov     ecx, [edx-0B0h]
+0x9AAF79: xor     ecx, eax
+0x9AAF7B: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AAF80: mov     eax, offset stru_AD7E34
+0x9AAF85: jmp     ___CxxFrameHandler3

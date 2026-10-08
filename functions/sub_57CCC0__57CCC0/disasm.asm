@@ -13,7 +13,6 @@
 0x57CCE4: jz      loc_57CD84
 0x57CCEA: push    esi
 0x57CCEB: jmp     short loc_57CCF4
-0x57CCED: align 10h
 0x57CCF0: mov     edi, [esp+14h+var_8]
 0x57CCF4: mov     esi, [ebp+8]
 0x57CCF7: test    esi, esi
@@ -39,7 +38,7 @@
 0x57CD39: jnz     short loc_57CD7B; jumptable 0057CD2D cases 1002-1004,1007,1022,1023,1045
 0x57CD3B: mov     eax, [edi+34h]; jumptable 0057CD2D default case, cases 1005,1006,1008,1009,1011-1021,1024-1044
 0x57CD3E: test    eax, eax
-0x57CD40: lea     ecx, [edi+30h]
+0x57CD40: lea     ecx, [edi+30h]; list
 0x57CD43: jz      short loc_57CD55
 0x57CD45: cmp     esi, [eax+8]
 0x57CD48: lea     edx, [eax+8]
@@ -50,11 +49,11 @@
 0x57CD53: jnz     short loc_57CD45
 0x57CD55: xor     edi, edi
 0x57CD57: test    edi, edi
-0x57CD59: mov     [esp+14h+var_4], edi
+0x57CD59: mov     [esp+14h+node], edi
 0x57CD5D: jz      short loc_57CD6B
-0x57CD5F: lea     edx, [esp+14h+var_4]
-0x57CD63: push    edx
-0x57CD64: call    sub_7AA860
+0x57CD5F: lea     edx, [esp+14h+node]
+0x57CD63: push    edx; node
+0x57CD64: call    NiTPointerList_RemoveNode; [Verified] Generic NiTPointerList node-removal helper. Unlinks the supplied node, updates head/tail and neighboring links, invokes the list's FreeNode vfunc, decrements item count, and returns the removed node's data pointer.
 0x57CD69: jmp     short loc_57CD6D
 0x57CD6B: mov     eax, esi
 0x57CD6D: test    eax, eax

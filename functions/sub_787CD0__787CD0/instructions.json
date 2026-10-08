@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x787CD0",
-    "line": "push    ecx",
+    "line": "push    ecx; Maps normalized/current tree LOD to leaf LOD; includes one synthetic billboard level only when global drop-to-billboard is enabled.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x787CD7",
-    "line": "fld     [esp+4+arg_0]",
+    "line": "fld     [esp+4+lod]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -97,25 +97,25 @@
   },
   {
     "ea": "0x787CF9",
-    "line": "fstp    [esp+4+arg_0]",
+    "line": "fstp    [esp+4+lod]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x787CFD",
-    "line": "fld     [esp+4+arg_0]",
+    "line": "fld     [esp+4+lod]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x787D01",
-    "line": "fstp    [esp+4+arg_0]",
+    "line": "fstp    [esp+4+lod]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x787D05",
-    "line": "fld     [esp+4+arg_0]",
+    "line": "fld     [esp+4+lod]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -163,25 +163,25 @@
   },
   {
     "ea": "0x787D22",
-    "line": "mov     [esp+4+arg_0], ecx",
+    "line": "mov     [esp+4+lod], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x787D26",
-    "line": "fimul   [esp+4+arg_0]",
+    "line": "fimul   [esp+4+lod]",
     "mnemonic": "fimul",
     "size": 4
   },
   {
     "ea": "0x787D2A",
-    "line": "fnstcw  word ptr [esp+4+arg_0]",
+    "line": "fnstcw  word ptr [esp+4+lod]",
     "mnemonic": "fnstcw",
     "size": 4
   },
   {
     "ea": "0x787D2E",
-    "line": "movzx   eax, word ptr [esp+4+arg_0]",
+    "line": "movzx   eax, word ptr [esp+4+lod]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x787D45",
-    "line": "fldcw   word ptr [esp+4+arg_0]",
+    "line": "fldcw   word ptr [esp+4+lod]",
     "mnemonic": "fldcw",
     "size": 4
   },
@@ -241,25 +241,25 @@
   },
   {
     "ea": "0x787D54",
-    "line": "mov     [esp+4+arg_0], ecx",
+    "line": "mov     [esp+4+lod], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x787D58",
-    "line": "fimul   [esp+4+arg_0]",
+    "line": "fimul   [esp+4+lod]",
     "mnemonic": "fimul",
     "size": 4
   },
   {
     "ea": "0x787D5C",
-    "line": "fnstcw  word ptr [esp+4+arg_0]",
+    "line": "fnstcw  word ptr [esp+4+lod]",
     "mnemonic": "fnstcw",
     "size": 4
   },
   {
     "ea": "0x787D60",
-    "line": "movzx   eax, word ptr [esp+4+arg_0]",
+    "line": "movzx   eax, word ptr [esp+4+lod]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x787D77",
-    "line": "fldcw   word ptr [esp+4+arg_0]",
+    "line": "fldcw   word ptr [esp+4+lod]",
     "mnemonic": "fldcw",
     "size": 4
   },

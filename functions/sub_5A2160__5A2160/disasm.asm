@@ -20,10 +20,10 @@
 0x5A21A3: xor     ebx, ebx
 0x5A21A5: cmp     ecx, ebx
 0x5A21A7: jz      short loc_5A21C3
-0x5A21A9: call    BSSimpleList_Clear
+0x5A21A9: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x5A21AE: mov     eax, [edi+90h]
 0x5A21B4: push    eax
-0x5A21B5: call    FormHeapFree
+0x5A21B5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5A21BA: add     esp, 4
 0x5A21BD: mov     [edi+90h], ebx
 0x5A21C3: mov     eax, [edi+30h]
@@ -110,7 +110,7 @@
 0x5A2295: mov     ecx, [eax]
 0x5A2297: push    eax
 0x5A2298: mov     [esi], ecx
-0x5A229A: call    FormHeapFree
+0x5A229A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5A229F: add     esp, 4
 0x5A22A2: jmp     short loc_5A22AA
 0x5A22A4: mov     dword ptr [esi], 0
@@ -118,7 +118,7 @@
 0x5A22AC: test    esi, esi
 0x5A22AE: jnz     short loc_5A2237
 0x5A22B0: mov     ecx, [edi+54h]
-0x5A22B3: mov     [esp+144h+var_118], ecx
+0x5A22B3: mov     [esp+144h+parent], ecx
 0x5A22B7: call    sub_5893F0
 0x5A22BC: push    ebx; a3
 0x5A22BD: push    offset aKnown_effect_t; "known_effect_template"
@@ -143,7 +143,7 @@
 0x5A230A: mov     byte ptr [esp+148h+var_4], 1
 0x5A2312: call    eax
 0x5A2314: fmul    dword ptr ds:0B37FE8h
-0x5A231A: call    Double_To_SInt32
+0x5A231A: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5A231F: push    eax; ArgList
 0x5A2320: lea     ecx, [esp+148h+var_128]
 0x5A2324: push    offset aD_0; "%d"
@@ -171,16 +171,15 @@
 0x5A2374: cmp     esi, ebx
 0x5A2376: jz      loc_5A24E0
 0x5A237C: jmp     short loc_5A2384
-0x5A237E: align 10h
 0x5A2380: mov     esi, [esp+144h+var_12C]
 0x5A2384: mov     edx, [esp+144h+var_120.m_data]
-0x5A2388: mov     eax, [esp+144h+var_118]
+0x5A2388: mov     eax, [esp+144h+parent]
 0x5A238C: mov     ebx, [esi]
-0x5A238E: push    0
-0x5A2390: push    edx
-0x5A2391: push    eax
-0x5A2392: mov     ecx, edi
-0x5A2394: call    Menu_CreateTileFromTemplate
+0x5A238E: push    0; lastTile
+0x5A2390: push    edx; name
+0x5A2391: push    eax; parent
+0x5A2392: mov     ecx, edi; this
+0x5A2394: call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.
 0x5A2399: mov     esi, eax
 0x5A239B: test    esi, esi
 0x5A239D: jz      loc_5A24CD
@@ -189,17 +188,17 @@
 0x5A23AB: fild    [esp+144h+var_130]
 0x5A23AF: push    ecx
 0x5A23B0: mov     ecx, esi; this
-0x5A23B2: fstp    [esp+148h+var_148]; a3
-0x5A23B5: push    0FAEh; a2
-0x5A23BA: call    Tile_SetFloat
+0x5A23B2: fstp    [esp+148h+var_148]; value
+0x5A23B5: push    0FAEh; propertyCode
+0x5A23BA: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A23BF: lea     ecx, [ebp+3E8h]
 0x5A23C5: mov     [esp+144h+var_130], ecx; a3
 0x5A23C9: fild    [esp+144h+var_130]
 0x5A23CD: push    ecx
 0x5A23CE: mov     ecx, esi; this
-0x5A23D0: fstp    [esp+148h+var_148]; a3
-0x5A23D3: push    0FA8h; a2
-0x5A23D8: call    Tile_SetFloat
+0x5A23D0: fstp    [esp+148h+var_148]; value
+0x5A23D3: push    0FA8h; propertyCode
+0x5A23D8: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A23DD: mov     eax, [ebx+3Ch]
 0x5A23E0: test    eax, eax
 0x5A23E2: jnz     short loc_5A23E9
@@ -220,10 +219,10 @@
 0x5A2410: push    0FB5h
 0x5A2415: call    Tile_GetFloat
 0x5A241A: push    ecx
-0x5A241B: fstp    [esp+148h+var_148]; a3
-0x5A241E: push    0FB1h; a2
+0x5A241B: fstp    [esp+148h+var_148]; value
+0x5A241E: push    0FB1h; propertyCode
 0x5A2423: mov     ecx, esi; this
-0x5A2425: call    Tile_SetFloat
+0x5A2425: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A242A: mov     eax, [ebx+48h]
 0x5A242D: test    eax, eax
 0x5A242F: jnz     short loc_5A2436
@@ -245,31 +244,31 @@
 0x5A2469: fild    [esp+144h+var_130]
 0x5A246D: push    ecx
 0x5A246E: mov     ecx, esi; this
-0x5A2470: fstp    [esp+148h+var_148]; a3
-0x5A2473: push    0FB2h; a2
-0x5A2478: call    Tile_SetFloat
+0x5A2470: fstp    [esp+148h+var_148]; value
+0x5A2473: push    0FB2h; propertyCode
+0x5A2478: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A247D: fld     dword ptr ds:0A31C80h
 0x5A2483: push    ecx
-0x5A2484: fstp    [esp+148h+var_148]; a3
-0x5A2487: push    0FB4h; a2
+0x5A2484: fstp    [esp+148h+var_148]; value
+0x5A2487: push    0FB4h; propertyCode
 0x5A248C: mov     ecx, esi; this
-0x5A248E: call    Tile_SetFloat
+0x5A248E: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A2493: fld     dword ptr ds:0A379B4h
 0x5A2499: push    ecx
-0x5A249A: fstp    [esp+148h+var_148]; a3
-0x5A249D: push    0FC9h; a2
+0x5A249A: fstp    [esp+148h+var_148]; value
+0x5A249D: push    0FC9h; propertyCode
 0x5A24A2: mov     ecx, esi; this
-0x5A24A4: call    Tile_SetFloat
+0x5A24A4: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A24A9: mov     ecx, [edi+60h]
 0x5A24AC: add     ebp, 1
 0x5A24AF: push    0FB5h
 0x5A24B4: mov     [esp+148h+var_130], ebp
 0x5A24B8: call    Tile_GetFloat
 0x5A24BD: push    ecx
-0x5A24BE: fstp    [esp+148h+var_148]; a3
-0x5A24C1: push    0FB6h; a2
+0x5A24BE: fstp    [esp+148h+var_148]; value
+0x5A24C1: push    0FB6h; propertyCode
 0x5A24C6: mov     ecx, esi; this
-0x5A24C8: call    Tile_SetFloat
+0x5A24C8: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A24CD: mov     edx, [esp+144h+var_12C]
 0x5A24D1: mov     eax, [edx+4]
 0x5A24D4: test    eax, eax
@@ -277,10 +276,10 @@
 0x5A24DA: jnz     loc_5A2380
 0x5A24E0: mov     eax, [esp+144h+var_128]
 0x5A24E4: push    eax
-0x5A24E5: call    FormHeapFree
+0x5A24E5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5A24EA: mov     ecx, [esp+148h+var_120.m_data]
 0x5A24EE: push    ecx
-0x5A24EF: call    FormHeapFree
+0x5A24EF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5A24F4: add     esp, 8
 0x5A24F7: mov     ecx, dword ptr [esp+144h+var_C]
 0x5A24FE: mov     large fs:0, ecx
@@ -294,3 +293,18 @@
 0x5A2513: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x5A2518: add     esp, 130h
 0x5A251E: retn
+0x9C01F0: lea     ecx, [ebp-120h]; void *
+0x9C01F6: jmp     BSStringT_Clear
+0x9C01FB: lea     ecx, [ebp-128h]; void *
+0x9C0201: jmp     BSStringT_Clear
+0x9C0206: mov     edx, [esp+arg_4]
+0x9C020A: lea     eax, [edx-134h]
+0x9C0210: mov     ecx, [edx-138h]
+0x9C0216: xor     ecx, eax
+0x9C0218: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C021D: add     eax, 10h
+0x9C0220: mov     ecx, [edx-4]
+0x9C0223: xor     ecx, eax
+0x9C0225: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C022A: mov     eax, offset stru_AE9520
+0x9C022F: jmp     ___CxxFrameHandler3

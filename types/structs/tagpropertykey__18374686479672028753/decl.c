@@ -1,1 +1,5 @@
-_tagpropertykey
+struct _tagpropertykey
+{
+GUID fmtid;
+DWORD pid;
+};

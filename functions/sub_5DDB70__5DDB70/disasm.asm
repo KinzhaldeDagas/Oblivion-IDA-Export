@@ -53,7 +53,7 @@
 0x5DDC25: call    sub_5DDAA0
 0x5DDC2A: pop     esi
 0x5DDC2B: retn    8
-0x5DDC2E: push    2D0h; jumptable 005DDBD3 case 8
+0x5DDC2E: push    2D0h; Only adjacent 1280x720 hardcoded pair found in Oblivion.exe; belongs to VideoDisplayMenu resolution selection, not Fallout Pip-Boy/terminal screen rendering.
 0x5DDC33: push    500h
 0x5DDC38: mov     ecx, esi
 0x5DDC3A: call    sub_5DDAA0

@@ -1,1 +1,1 @@
-hkActionListener
+struct hkActionListener;

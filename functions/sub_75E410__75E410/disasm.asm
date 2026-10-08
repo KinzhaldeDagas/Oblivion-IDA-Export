@@ -6,11 +6,11 @@
 0x75E41B: push    eax
 0x75E41C: push    edi
 0x75E41D: mov     esi, ecx
-0x75E41F: call    sub_6CE2C0
+0x75E41F: call    NiSingleInterpController_CopyMembers; Copies NiTimeController members, clones the source interpolator at +0x3C through the stream clone map, and assigns the clone through the destination smart pointer.
 0x75E424: mov     ecx, [edi+40h]
 0x75E427: mov     ebx, [esi+40h]
 0x75E42A: push    ecx
-0x75E42B: call    FormHeapFree
+0x75E42B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x75E430: mov     eax, ebx
 0x75E432: add     esp, 4
 0x75E435: lea     edx, [eax+1]

@@ -1,4 +1,4 @@
-0x7F5350: sub     esp, 2A4h
+0x7F5350: sub     esp, 2A4h; MoonSugarEffect decode: NightEye program loader. Stores CreateVertexShader/CreatePixelShader wrappers into object slots with ref-counted replace before pass binding.
 0x7F5356: mov     eax, ds:0B30AACh
 0x7F535B: xor     eax, esp
 0x7F535D: mov     [esp+2A4h+var_4], eax
@@ -44,7 +44,7 @@
 0x7F53EF: lea     eax, [esp+2C4h+FileName]
 0x7F53F6: push    eax; lpFileName
 0x7F53F7: mov     ecx, esi
-0x7F53F9: call    CreateVertexShader
+0x7F53F9: call    CreateVertexShader; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.
 0x7F53FE: mov     edi, [esi+90h]
 0x7F5404: mov     ebx, eax
 0x7F5406: cmp     edi, ebx
@@ -92,7 +92,7 @@
 0x7F5485: lea     edx, [esp+2C4h+FileName]
 0x7F548C: push    edx; lpFileName
 0x7F548D: mov     ecx, esi
-0x7F548F: call    CreatePixelShader
+0x7F548F: call    CreatePixelShader; Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.
 0x7F5494: mov     edi, [esi+94h]
 0x7F549A: mov     ebx, eax
 0x7F549C: cmp     edi, ebx

@@ -13,7 +13,7 @@
 0x48F484: add     esp, 4
 0x48F487: mov     eax, ds:0B3442Ch
 0x48F48C: push    eax
-0x48F48D: call    FormHeapFree
+0x48F48D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48F492: mov     eax, [esp+0Ch+arg_0]
 0x48F496: add     esp, 4
 0x48F499: cmp     eax, esi
@@ -32,7 +32,7 @@
 0x48F4CF: add     ecx, edx
 0x48F4D1: push    ecx; ArgList
 0x48F4D2: push    offset off_A3D904; Format
-0x48F4D7: push    offset dword_B3442C; int
+0x48F4D7: push    0B3442Ch; int
 0x48F4DC: call    BSStringT_Static_Format
 0x48F4E1: mov     eax, ds:0B3442Ch
 0x48F4E6: add     esp, 0Ch
@@ -49,7 +49,7 @@
 0x48F505: add     eax, edx
 0x48F507: push    eax; ArgList
 0x48F508: push    offset off_A3D900; Format
-0x48F50D: push    offset dword_B3442C; int
+0x48F50D: push    0B3442Ch; int
 0x48F512: call    BSStringT_Static_Format
 0x48F517: mov     eax, ds:0B3442Ch
 0x48F51C: add     esp, 0Ch
@@ -60,7 +60,7 @@
 0x48F527: jle     short loc_48F546
 0x48F529: push    ecx; ArgList
 0x48F52A: push    offset aI; "%i"
-0x48F52F: push    offset dword_B3442C; int
+0x48F52F: push    0B3442Ch; int
 0x48F534: call    BSStringT_Static_Format
 0x48F539: mov     eax, ds:0B3442Ch
 0x48F53E: add     esp, 0Ch
@@ -68,7 +68,7 @@
 0x48F542: pop     esi
 0x48F543: retn    14h
 0x48F546: push    offset word_A36430; Format
-0x48F54B: push    offset dword_B3442C; int
+0x48F54B: push    0B3442Ch; int
 0x48F550: call    BSStringT_Static_Format
 0x48F555: mov     eax, ds:0B3442Ch
 0x48F55A: add     esp, 8
@@ -77,8 +77,8 @@
 0x48F55F: retn    14h
 0x48F562: cmp     eax, 1
 0x48F565: jnz     short loc_48F57F
-0x48F567: mov     ecx, [esp+8+arg_10]
-0x48F56B: mov     edx, [esp+8+arg_C]
+0x48F567: mov     ecx, dword ptr [esp+8+arg_C+4]
+0x48F56B: mov     edx, dword ptr [esp+8+arg_C]
 0x48F56F: mov     eax, [esp+8+arg_8]
 0x48F573: push    ecx
 0x48F574: push    edx
@@ -88,8 +88,8 @@
 0x48F57D: jmp     short loc_48F5DD
 0x48F57F: cmp     eax, 2
 0x48F582: jnz     short loc_48F59C
-0x48F584: mov     ecx, [esp+8+arg_10]
-0x48F588: mov     edx, [esp+8+arg_C]
+0x48F584: mov     ecx, dword ptr [esp+8+arg_C+4]
+0x48F588: mov     edx, dword ptr [esp+8+arg_C]
 0x48F58C: mov     eax, [esp+8+arg_8]
 0x48F590: push    ecx
 0x48F591: push    edx
@@ -99,19 +99,19 @@
 0x48F59A: jmp     short loc_48F5DD
 0x48F59C: cmp     eax, 3
 0x48F59F: jnz     short loc_48F5B9
-0x48F5A1: mov     ecx, [esp+8+arg_10]
-0x48F5A5: mov     edx, [esp+8+arg_C]
+0x48F5A1: mov     ecx, dword ptr [esp+8+arg_C+4]
+0x48F5A5: mov     edx, dword ptr [esp+8+arg_C]
 0x48F5A9: mov     eax, [esp+8+arg_8]
 0x48F5AD: push    ecx
 0x48F5AE: push    edx
 0x48F5AF: push    eax
 0x48F5B0: mov     ecx, edi
-0x48F5B2: call    sub_4891C0
+0x48F5B2: call    Player_CalcInventoryEntryRating
 0x48F5B7: jmp     short loc_48F5DD
 0x48F5B9: cmp     eax, 4
 0x48F5BC: jnz     loc_48F68C
-0x48F5C2: mov     ecx, [esp+8+arg_10]
-0x48F5C6: mov     edx, [esp+8+arg_C]
+0x48F5C2: mov     ecx, dword ptr [esp+8+arg_C+4]
+0x48F5C6: mov     edx, dword ptr [esp+8+arg_C]
 0x48F5CA: mov     eax, [esp+8+arg_8]
 0x48F5CE: push    ecx
 0x48F5CF: mov     ecx, [esp+0Ch+arg_4]
@@ -120,9 +120,9 @@
 0x48F5D5: push    ecx
 0x48F5D6: mov     ecx, edi
 0x48F5D8: call    ContainerEntryExtraData_GetHealthFracOrUses
-0x48F5DD: fstp    [esp+8+arg_10]
+0x48F5DD: fstp    dword ptr [esp+8+arg_C+4]
 0x48F5E1: fldz
-0x48F5E3: fld     [esp+8+arg_10]
+0x48F5E3: fld     dword ptr [esp+8+arg_C+4]
 0x48F5E7: fcom    st(1)
 0x48F5E9: fnstsw  ax
 0x48F5EB: fstp    st(1)
@@ -142,9 +142,9 @@
 0x48F617: fstp    [esp+10h+var_10+4]; float
 0x48F61B: fstp    [esp+10h+var_10]; float
 0x48F61E: call    Round_Float
-0x48F623: fstp    [esp+10h+arg_10]
+0x48F623: fstp    dword ptr [esp+10h+arg_C+4]
 0x48F627: add     esp, 8
-0x48F62A: fld     [esp+8+arg_10]
+0x48F62A: fld     dword ptr [esp+8+arg_C+4]
 0x48F62E: fcom    qword ptr ds:0A2FC68h
 0x48F634: fnstsw  ax
 0x48F636: test    ah, 41h
@@ -157,17 +157,17 @@
 0x48F646: sub     esp, 8
 0x48F649: fstp    qword ptr [esp+10h+var_10]; ArgList
 0x48F64C: push    offset a_1f; "%.1f"
-0x48F651: push    offset dword_B3442C; int
+0x48F651: push    0B3442Ch; int
 0x48F656: call    BSStringT_Static_Format
 0x48F65B: mov     eax, ds:0B3442Ch
 0x48F660: add     esp, 10h
 0x48F663: pop     edi
 0x48F664: pop     esi
 0x48F665: retn    14h
-0x48F668: call    Double_To_SInt32
+0x48F668: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x48F66D: push    eax; ArgList
 0x48F66E: push    offset aD_0; "%d"
-0x48F673: push    offset dword_B3442C; int
+0x48F673: push    0B3442Ch; int
 0x48F678: call    BSStringT_Static_Format
 0x48F67D: mov     eax, ds:0B3442Ch
 0x48F682: add     esp, 0Ch

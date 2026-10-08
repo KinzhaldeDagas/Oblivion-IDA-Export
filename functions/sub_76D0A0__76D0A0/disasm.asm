@@ -9,7 +9,7 @@
 0x76D0B3: lea     eax, [esp+10h+var_4]
 0x76D0B7: push    edi
 0x76D0B8: push    eax
-0x76D0B9: call    sub_7606A0
+0x76D0B9: call    NiD3DPassPool_Acquire; Acquire a renderer-owned NiD3DPass from the global pass pool and return it with a reference.
 0x76D0BE: mov     ecx, [esi]
 0x76D0C0: mov     edi, eax
 0x76D0C2: add     esp, 4
@@ -19,7 +19,7 @@
 0x76D0CB: jz      short loc_76D0D8
 0x76D0CD: add     dword ptr [ecx+60h], 0FFFFFFFFh
 0x76D0D1: jnz     short loc_76D0D8
-0x76D0D3: call    sub_7604D0
+0x76D0D3: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x76D0D8: mov     eax, [edi]
 0x76D0DA: test    eax, eax
 0x76D0DC: mov     [esi], eax
@@ -33,17 +33,17 @@
 0x76D0F2: add     eax, 60h ; '`'
 0x76D0F5: cmp     dword ptr [eax], 0
 0x76D0F8: jnz     short loc_76D0FF
-0x76D0FA: call    sub_7604D0
+0x76D0FA: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x76D0FF: mov     edi, [esi]
 0x76D101: cmp     dword ptr [edi+30h], 0
 0x76D105: jnz     short loc_76D10F
-0x76D107: call    sub_772DF0
+0x76D107: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x76D10C: mov     [edi+30h], eax
 0x76D10F: mov     ecx, [edi+30h]
 0x76D112: push    1
 0x76D114: push    7
 0x76D116: push    0A8h ; '¨'
-0x76D11B: call    sub_772CD0
+0x76D11B: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x76D120: movzx   ecx, word ptr [ebp+48h]
 0x76D124: mov     ebx, [ebp+38h]
 0x76D127: cmp     ebx, ecx
@@ -54,10 +54,10 @@
 0x76D134: push    edx
 0x76D135: mov     ecx, edi
 0x76D137: call    sub_76CCA0
-0x76D13C: push    esi
-0x76D13D: push    ebx
-0x76D13E: mov     ecx, edi
-0x76D140: call    sub_76CE40
+0x76D13C: push    esi; value
+0x76D13D: push    ebx; index
+0x76D13E: mov     ecx, edi; this
+0x76D140: call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.
 0x76D145: cmp     dword ptr [ebp+38h], 0
 0x76D149: jz      short loc_76D1C6
 0x76D14B: mov     ebx, [esp+14h+arg_0]
@@ -65,43 +65,43 @@
 0x76D152: jnz     short loc_76D16A
 0x76D154: cmp     [esp+14h+arg_4], 1
 0x76D159: jnz     short loc_76D16A
-0x76D15B: mov     ecx, [esi]
-0x76D15D: push    1
-0x76D15F: push    0
-0x76D161: push    1Bh
-0x76D163: call    sub_76C730
+0x76D15B: mov     ecx, [esi]; this
+0x76D15D: push    1; restore
+0x76D15F: push    0; value
+0x76D161: push    1Bh; state
+0x76D163: call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.
 0x76D168: jmp     short loc_76D1C6
 0x76D16A: mov     edi, [esi]
 0x76D16C: cmp     dword ptr [edi+30h], 0
 0x76D170: jnz     short loc_76D17A
-0x76D172: call    sub_772DF0
+0x76D172: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x76D177: mov     [edi+30h], eax
 0x76D17A: mov     ecx, [edi+30h]
 0x76D17D: push    0
 0x76D17F: push    ebx
 0x76D180: push    13h
-0x76D182: call    sub_772CD0
+0x76D182: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x76D187: mov     edi, [esi]
 0x76D189: cmp     dword ptr [edi+30h], 0
 0x76D18D: jnz     short loc_76D197
-0x76D18F: call    sub_772DF0
+0x76D18F: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x76D194: mov     [edi+30h], eax
 0x76D197: mov     eax, [esp+14h+arg_4]
 0x76D19B: mov     ecx, [edi+30h]
 0x76D19E: push    0
 0x76D1A0: push    eax
 0x76D1A1: push    14h
-0x76D1A3: call    sub_772CD0
+0x76D1A3: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x76D1A8: mov     esi, [esi]
 0x76D1AA: cmp     dword ptr [esi+30h], 0
 0x76D1AE: jnz     short loc_76D1B8
-0x76D1B0: call    sub_772DF0
+0x76D1B0: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x76D1B5: mov     [esi+30h], eax
 0x76D1B8: mov     ecx, [esi+30h]
 0x76D1BB: push    1
 0x76D1BD: push    1
 0x76D1BF: push    1Bh
-0x76D1C1: call    sub_772CD0
+0x76D1C1: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x76D1C6: mov     al, [esp+14h+arg_8]
 0x76D1CA: test    al, al
 0x76D1CC: mov     cl, [esp+14h+arg_C]

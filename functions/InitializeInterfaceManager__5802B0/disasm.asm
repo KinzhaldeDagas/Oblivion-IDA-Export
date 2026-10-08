@@ -204,7 +204,7 @@
 0x5805A5: push    offset aMenu3droot; "Menu3DRoot"
 0x5805AA: push    ecx
 0x5805AB: mov     ecx, esi
-0x5805AD: call    sub_57ED20
+0x5805AD: call    InterfaceManager_CreateSceneGraph
 0x5805B2: mov     edi, [esi+4]
 0x5805B5: mov     ebp, eax
 0x5805B7: cmp     edi, ebp
@@ -234,7 +234,7 @@
 0x5805F2: push    offset aMenuroot; "MenuRoot"
 0x5805F7: push    eax
 0x5805F8: mov     ecx, esi
-0x5805FA: call    sub_57ED20
+0x5805FA: call    InterfaceManager_CreateSceneGraph
 0x5805FF: mov     edi, [esi]
 0x580601: mov     ebp, eax
 0x580603: cmp     edi, ebp
@@ -304,3 +304,28 @@
 0x5806C3: pop     ebx
 0x5806C4: add     esp, 20h
 0x5806C7: retn
+0x9BEB40: mov     ecx, [ebp-10h]; slot
+0x9BEB43: jmp     NiPointerSlot_Release
+0x9BEB48: mov     ecx, [ebp-10h]
+0x9BEB4B: add     ecx, 4; slot
+0x9BEB4E: jmp     NiPointerSlot_Release
+0x9BEB53: mov     ecx, [ebp-10h]
+0x9BEB56: add     ecx, 78h ; 'x'; slot
+0x9BEB59: jmp     NiPointerSlot_Release
+0x9BEB5E: mov     eax, [ebp-14h]
+0x9BEB61: push    eax
+0x9BEB62: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BEB67: pop     ecx
+0x9BEB68: retn
+0x9BEB69: mov     eax, [ebp-14h]
+0x9BEB6C: push    eax
+0x9BEB6D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BEB72: pop     ecx
+0x9BEB73: retn
+0x9BEB74: mov     edx, [esp+arg_4]
+0x9BEB78: lea     eax, [edx-24h]
+0x9BEB7B: mov     ecx, [edx-28h]
+0x9BEB7E: xor     ecx, eax
+0x9BEB80: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BEB85: mov     eax, offset stru_AE81D4
+0x9BEB8A: jmp     ___CxxFrameHandler3

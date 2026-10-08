@@ -1,1 +1,1 @@
-PDWORD_PTR
+typedef ULONG_PTR *PDWORD_PTR;

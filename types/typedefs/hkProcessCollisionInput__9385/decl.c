@@ -1,1 +1,1 @@
-hkProcessCollisionInput
+struct hkProcessCollisionInput;

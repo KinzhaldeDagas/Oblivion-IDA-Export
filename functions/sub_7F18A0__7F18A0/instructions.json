@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7F18A0",
-    "line": "push    ebx",
+    "line": "push    ebx; Copy at most 0xC0 floats (192 floats / 0x300 bytes) into the leaf constant table, then zero-fill the remainder.",
     "mnemonic": "push",
     "size": 1
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x7F18B3",
-    "line": "mov     esi, [esp+8+arg_4]",
+    "line": "mov     esi, [esp+8+floatCount]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -103,25 +103,25 @@
   },
   {
     "ea": "0x7F18D0",
-    "line": "push    edi; Size",
+    "line": "push    edi; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7F18D1",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7F18D2",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7F18D3",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },

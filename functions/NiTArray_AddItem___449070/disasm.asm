@@ -1,6 +1,6 @@
-0x449070: push    ebx
+0x449070: push    ebx; MEF PERF 2026-10-08: PERF-16 related RAW 32-bit AddFirstEmpty:24-byte array has DWORD cap8,usedEndC,occupied10,grow14. It also scans dense prefix from0, then grows/appends. No smart-pointer refs here. Do not reuse16-bit offsets/ownership. Sole direct caller observed46C68A.
 0x449071: push    ebp
-0x449072: mov     ebp, [esp+8+arg_0]
+0x449072: mov     ebp, [esp+8+element]
 0x449076: mov     ebx, [ebp+0]
 0x449079: test    ebx, ebx
 0x44907B: push    esi
@@ -12,10 +12,10 @@
 0x449085: pop     ebx
 0x449086: retn    4
 0x449089: push    edi
-0x44908A: mov     edi, [esi+0Ch]
+0x44908A: mov     edi, [esi+0Ch]; MEF v57 IMPLEMENTED 2026-10-08: PERF-16 raw analogue restricted to active-form arrayB0614C/vtableA37AAC. Dense safe metadata branches to native4490A7; other folded arrays and sparse/unsupported states preserve native44908F. Separate TESForm duplicate scan remains.
 0x44908D: xor     eax, eax
 0x44908F: test    edi, edi
-0x449091: jbe     short loc_4490A7
+0x449091: jbe     short loc_4490A7; MEF PERF 2026-10-08: Comparative naming only after Oblivion observation: Fallout822B5148 names raw32 analogue NiTLargeArray<TESForm*>::AddFirstEmpty; Fallout82856390 names strong16 NiAVObject analogue. Both still scan prefixes in that corpus. Oblivion bodies, widths and ownership determine this decode; no PPC ABI/layout copied.
 0x449093: mov     edx, [esi+4]
 0x449096: mov     ecx, edx
 0x449098: cmp     dword ptr [ecx], 0
@@ -24,13 +24,13 @@
 0x4490A0: add     ecx, 4
 0x4490A3: cmp     eax, edi
 0x4490A5: jb      short loc_449098
-0x4490A7: cmp     edi, [esi+8]
+0x4490A7: cmp     edi, [esi+8]; MEF PERF 2026-10-08: Comparative naming only after Oblivion observation: Fallout822B5148 names raw32 analogue NiTLargeArray<TESForm*>::AddFirstEmpty; Fallout82856390 names strong16 NiAVObject analogue. Both still scan prefixes in that corpus. Oblivion bodies, widths and ownership determine this decode; no PPC ABI/layout copied.
 0x4490AA: jb      short loc_4490B9
 0x4490AC: mov     eax, [esi+14h]
 0x4490AF: add     eax, edi
 0x4490B1: push    eax
 0x4490B2: mov     ecx, esi
-0x4490B4: call    sub_452910
+0x4490B4: call    NiTLargeArray_Resize32
 0x4490B9: cmp     edi, [esi+0Ch]
 0x4490BC: jb      short loc_4490EE
 0x4490BE: lea     ecx, [edi+1]

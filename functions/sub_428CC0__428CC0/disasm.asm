@@ -36,9 +36,9 @@
 0x428D18: mov     ecx, esi
 0x428D1A: call    eax
 0x428D1C: push    edi
-0x428D1D: call    FormHeapFree
+0x428D1D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x428D22: add     esp, 4
-0x428D25: mov     ecx, [esp+20h+arg_0]
+0x428D25: mov     ecx, [esp+20h+payload]
 0x428D29: mov     [ebx+0Ch], ecx
 0x428D2C: mov     eax, ebx
 0x428D2E: mov     ecx, [esp+20h+var_C]
@@ -56,7 +56,7 @@
 0x428D51: test    eax, eax
 0x428D53: mov     [esp+20h+var_4], 0
 0x428D5B: jz      short loc_428D6D
-0x428D5D: mov     edx, [esp+20h+arg_0]
+0x428D5D: mov     edx, [esp+20h+payload]
 0x428D61: push    edx
 0x428D62: mov     ecx, eax; this
 0x428D64: call    ??0ExtraLight@@QAE@XZ; ExtraLight::ExtraLight(void)
@@ -76,3 +76,15 @@
 0x428D8F: pop     ebx
 0x428D90: add     esp, 10h
 0x428D93: retn    4
+0x9CA420: mov     eax, [ebp-10h]
+0x9CA423: push    eax
+0x9CA424: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA429: pop     ecx
+0x9CA42A: retn
+0x9CA42B: mov     edx, [esp+arg_4]
+0x9CA42F: lea     eax, [edx-10h]
+0x9CA432: mov     ecx, [edx-14h]
+0x9CA435: xor     ecx, eax
+0x9CA437: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA43C: mov     eax, offset stru_AF2B24
+0x9CA441: jmp     ___CxxFrameHandler3

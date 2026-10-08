@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x401DA3",
-    "line": "mov     ebx, g_HeapPoolByAddress[eax*4]",
+    "line": "mov     ebx, ds:0B32C80h[eax*4]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x401DB1",
-    "line": "call    sub_4011B0",
+    "line": "call    MemoryPool_ContainsAddress; Checks whether an address lies in this pool's backing range: base at +0x40 through base + size at +0x110. Called by MemoryHeap_Free before dispatching to MemoryPool_Free.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x401DED",
-    "line": "call    sub_4015F0",
+    "line": "call    MemoryHeap_InsertFreeEntry; Marks a block free, appends it to the size-selected doubly linked free list, updates free-list statistics, and records the bin's active count.",
     "mnemonic": "call",
     "size": 5
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x401DF5",
-    "line": "call    sub_401A30",
+    "line": "call    MemoryHeap_CoalesceFreeEntry; Coalesces a just-freed entry with adjacent free predecessors/successors, then releases any now-free tail region.",
     "mnemonic": "call",
     "size": 5
   },

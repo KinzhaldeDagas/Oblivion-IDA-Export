@@ -1,19 +1,32 @@
 {
-  "callees_count": 43,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 25,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x6471A0",
+      "0x647443"
+    ]
+  ],
+  "chunks_sha256": "3af772fdf8e2e57f7da36be48fa9ce2031b2fac9aff59c733ee9474ed83404e2",
+  "comment_regular": "Verified 2026-10-04: LowProcess save role from Oblivion process vtable slot +0x3F4, parent call chain and matching serialization/reset behavior. ECX receiver and RET8 establish stack arity; owner is MobileObject (dispatch 65A835 for Revert). \nVerified versioned low-process payload: +14 float,+18 date,+1C/+1D/+84 bytes; >=34 adds+1F byte, >=37 +20 byte, >=4B +88 float, >=4F +28 float and usedItem FormID, >=56 +38 dword; always follow/unk030 FormIDs; mask400000 damage collection; >=74 +8C float; >=76 +1E byte. Sizes agree with647060. Semantic names of unknown fields not inferred from wire order.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 6,
-  "display_name": "LowProcess_Save?",
+  "display_name": "LowProcess_SaveGame",
   "end_ea": "0x647443",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "LowProcess_Save?",
+  "name": "LowProcess_SaveGame",
   "segment": ".text",
   "sha256": "3af772fdf8e2e57f7da36be48fa9ce2031b2fac9aff59c733ee9474ed83404e2",
   "size": 675,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6471A0",
-  "type": "void __thiscall(_DWORD *this, int, int Src)",
+  "total_chunk_size": 675,
+  "type": "void __thiscall(LowProcess *self, ProcessSaveChangeMask changeMask, MobileObject *owner)",
   "xrefs_from_count": 250,
   "xrefs_to_count": 2
 }

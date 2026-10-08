@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x77B000",
+      "0x77B04B"
+    ]
+  ],
+  "chunks_sha256": "5ebc4c80899d7fbf30a86b80643efd85bad41c51cfb34b8ba364fa9c983232c1",
+  "comment_regular": "DX10 bridge note: Oblivion render-state cache only calls IDirect3DDevice9::SetRenderState through vtable +0xE4 when a cached value changes. The DX10 device vtable hook captures runtime render-state shader variants here; generated fallback pixel shaders use captured alpha-test and fog render states for D3D10 shader-side discard/fog because D3D10 has no fixed-function alpha-test/fog stage.",
+  "comment_repeatable": "DX10 bridge note: Oblivion render-state cache only calls IDirect3DDevice9::SetRenderState through vtable +0xE4 when a cached value changes. The DX10 device vtable hook captures runtime render-state shader variants here; generated fallback pixel shaders use captured alpha-test and fog render states for D3D10 shader-side discard/fog because D3D10 has no fixed-function alpha-test/fog stage.\nAuthoritative render-state cache semantics for GPU batching: current DWORD at this+120+state*8; previous DWORD at this+124+state*8. Compare current before issuing device SetRenderState(+E4 via device at this+FF8). If savePrevious is nonzero, copy current to previous even when no device call was necessary; then store requested current. Do not coalesce repeated saved writes or infer these effects solely from intercepted device calls.\nDX11 inherited-state audit 2026-09-30: cache and logical device state are distinct. An equal cached render request suppresses the device call even if the actual device state differs. SavePrevious copies the native current register, not a device query. Manager cache capture preserves current/saved pairs at120+8*state; evaluation must retain this suppression and single-register restoration.\nDX11 state-handoff audit 2026-10-01: receiver is a render-state manager, not NiDX9Renderer. Shared entries appear in NiDX9RenderState vtable A8A9F4 and NiD3DRenderState vtable A8B2AC. State/value arguments are DWORDs, not pointers. Return register is not a uniform HRESULT (equal cached paths can omit the device call); do not infer backend success from it. Preserve physical current/saved cache words separately from actual logical device state and guard runtime enum-map values before native commit.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "NiRenderer_SetRenderState",
+  "display_name": "NiDX9RenderState_SetRenderState",
   "end_ea": "0x77B04B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "NiRenderer_SetRenderState",
+  "name": "NiDX9RenderState_SetRenderState",
   "segment": ".text",
   "sha256": "5ebc4c80899d7fbf30a86b80643efd85bad41c51cfb34b8ba364fa9c983232c1",
   "size": 75,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x77B000",
-  "type": "_DWORD *__thiscall(NiDX9Renderer *this, int a2, _DWORD *a3, char a4)",
+  "total_chunk_size": 75,
+  "type": "unsigned int __thiscall(NiDX9RenderState *self, unsigned int state, unsigned int value, unsigned __int8 savePrevious)",
   "xrefs_from_count": 25,
   "xrefs_to_count": 2
 }

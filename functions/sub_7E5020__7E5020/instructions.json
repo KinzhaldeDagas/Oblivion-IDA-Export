@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7E5020",
-    "line": "sub     esp, 2Ch",
+    "line": "sub     esp, 2Ch; Verified (Oblivion): generates a particle along the target node's local ray using rayLength_74, optionally transforms it to world coordinates when bWorldspace_78 is set, and writes the 0x20-byte slot record. This is emitterType_70 value 2, kParticleShaderEmitter_Ray.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x7E5101",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x7E5108",
-    "line": "cmp     byte ptr [esi+78h], 0",
+    "line": "cmp     byte ptr [esi+78h], 0; Verified (Oblivion): when bWorldspace_78 is true, ray-generated position and direction are transformed by the target node's world transform.",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x7E511D",
-    "line": "call    sub_53D4B0",
+    "line": "call    NiTransform_TransformPoint; ODismemberment: __thiscall NiTransform point transform helper. Plugin hit capture must pass transform in ECX; cdecl here crashes on actor hits.",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x7E518D",
-    "line": "mov     eax, [esp+34h+arg_0]",
+    "line": "mov     eax, [esp+34h+slotIndex]",
     "mnemonic": "mov",
     "size": 4
   },

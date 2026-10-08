@@ -4,7 +4,7 @@
 0x508311: mov     ds:0B14B74h, al
 0x508316: jz      short loc_508334
 0x508318: test    al, al
-0x50831A: mov     eax, offset aOn_0
+0x50831A: mov     eax, offset aOn_0; "On"
 0x50831F: jnz     short loc_508326
 0x508321: mov     eax, offset aOff
 0x508326: push    eax

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8098E0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh;",
     "mnemonic": "push",
     "size": 2
   },
@@ -157,13 +157,13 @@
   },
   {
     "ea": "0x809938",
-    "line": "mov     [esp+58h+var_34], edi",
+    "line": "mov     [esp+58h+slot], edi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x80993C",
-    "line": "mov     ebp, [esp+58h+arg_C]",
+    "line": "mov     ebp, [esp+58h+arg4]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x8099C8",
-    "line": "call    eax ; dword_B42E8C",
+    "line": "call    eax ; unk_B42E8C",
     "mnemonic": "call",
     "size": 2
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x8099DB",
-    "line": "setnbe  byte ptr [esp+58h+arg_C]",
+    "line": "setnbe  byte ptr [esp+58h+arg4]",
     "mnemonic": "setnbe",
     "size": 5
   },
@@ -739,13 +739,13 @@
   },
   {
     "ea": "0x809A6E",
-    "line": "fstp    [esp+5Ch+var_5C]; float",
+    "line": "fstp    [esp+5Ch+w]; w",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x809A71",
-    "line": "call    sub_7E2430",
+    "line": "call    sub_7E2430; Shader property LOD/alpha helper: update float +0x20 and reset dword +0x24 when crossing 1.0 threshold.",
     "mnemonic": "call",
     "size": 5
   },
@@ -757,7 +757,7 @@
   },
   {
     "ea": "0x809A7B",
-    "line": "mov     esi, [esp+58h+arg_0]",
+    "line": "mov     esi, [esp+58h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -877,13 +877,13 @@
   },
   {
     "ea": "0x809AC1",
-    "line": "mov     ecx, [esp+58h+var_38]",
+    "line": "mov     ecx, [esp+58h+var_38]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x809AC5",
-    "line": "call    sub_7ED5D0",
+    "line": "call    OB_BSShaderProperty_CountPassListEntriesWithMarker_010201A0; OBLIVION AUTHORITY (2026-08-24): Generic pass-list marker counter used by the SpeedTree leaf program selector. Walks property+0x70 entries and counts nonnull shader objects whose word at +0x118 is not 0x00FF. It does not test ShadowSceneLight disabled byte +0xF4. Result selects point-light shader program bit; it is not a leaf layer/card/LOD index.",
     "mnemonic": "call",
     "size": 5
   },
@@ -985,7 +985,7 @@
   },
   {
     "ea": "0x809AFB",
-    "line": "push    0",
+    "line": "push    0; slot",
     "mnemonic": "push",
     "size": 2
   },
@@ -997,7 +997,7 @@
   },
   {
     "ea": "0x809B00",
-    "line": "call    sub_7ECAE0",
+    "line": "call    OB_BSShader_SetSharedFloat4Constant_010201A0; Shader global table helper: store four dwords at dword_B46498 + 0x10 * index.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1057,7 +1057,7 @@
   },
   {
     "ea": "0x809B2A",
-    "line": "push    19h",
+    "line": "push    19h; slot",
     "mnemonic": "push",
     "size": 2
   },
@@ -1069,7 +1069,7 @@
   },
   {
     "ea": "0x809B2F",
-    "line": "call    sub_7ECAE0",
+    "line": "call    OB_BSShader_SetSharedFloat4Constant_010201A0; Shader global table helper: store four dwords at dword_B46498 + 0x10 * index.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1087,7 +1087,7 @@
   },
   {
     "ea": "0x809B39",
-    "line": "call    GetShaderDefinition",
+    "line": "call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1111,7 +1111,7 @@
   },
   {
     "ea": "0x809B46",
-    "line": "cmp     byte ptr [esp+58h+arg_C], 0",
+    "line": "cmp     byte ptr [esp+58h+arg4], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1213,7 +1213,7 @@
   },
   {
     "ea": "0x809B92",
-    "line": "mov     ecx, [esp+58h+arg_4]; jumptable 00809B8B case 78",
+    "line": "mov     ecx, [esp+58h+arg3]; jumptable 00809B8B case 78",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1297,7 +1297,7 @@
   },
   {
     "ea": "0x809BC4",
-    "line": "push    0",
+    "line": "push    0; restore",
     "mnemonic": "push",
     "size": 2
   },
@@ -1309,25 +1309,25 @@
   },
   {
     "ea": "0x809BC9",
-    "line": "mov     ecx, ds:0B47718h[esi*4]",
+    "line": "mov     ecx, ds:0B47718h[esi*4]; this",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x809BD0",
-    "line": "push    0",
+    "line": "push    0; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x809BD2",
-    "line": "push    1Ch",
+    "line": "push    1Ch; state",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x809BD4",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Fog decode: shader-family pass builder disables fixed-function fog; fog is handled by shader constants.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1357,31 +1357,31 @@
   },
   {
     "ea": "0x809BEB",
-    "line": "mov     ecx, ds:0B47718h[esi*4]",
+    "line": "mov     ecx, ds:0B47718h[esi*4]; this",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x809BF2",
-    "line": "push    0",
+    "line": "push    0; restore",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x809BF4",
-    "line": "push    0Fh",
+    "line": "push    0Fh; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x809BF6",
-    "line": "push    0A8h ; '¨'",
+    "line": "push    0A8h ; '¨'; state",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x809BFB",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1393,7 +1393,7 @@
   },
   {
     "ea": "0x809C05",
-    "line": "mov     edx, [esp+58h+arg_4]; jumptable 00809B8B case 83",
+    "line": "mov     edx, [esp+58h+arg3]; jumptable 00809B8B case 83",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1447,7 +1447,7 @@
   },
   {
     "ea": "0x809C1E",
-    "line": "mov     eax, [esp+58h+arg_4]; jumptable 00809B8B case 100",
+    "line": "mov     eax, [esp+58h+arg3]; jumptable 00809B8B case 100",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1483,7 +1483,7 @@
   },
   {
     "ea": "0x809C28",
-    "line": "call    sub_880200",
+    "line": "call    SkinShader_QueueSKIN2012_SKIN2006",
     "mnemonic": "call",
     "size": 5
   },
@@ -1501,7 +1501,7 @@
   },
   {
     "ea": "0x809C3A",
-    "line": "mov     ecx, [esp+58h+arg_4]; jumptable 00809B8B case 105",
+    "line": "mov     ecx, [esp+58h+arg3]; jumptable 00809B8B case 105",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1537,7 +1537,7 @@
   },
   {
     "ea": "0x809C44",
-    "line": "call    sub_8803B0",
+    "line": "call    SkinShader_QueueSKIN2013_SKIN2006",
     "mnemonic": "call",
     "size": 5
   },
@@ -1555,7 +1555,7 @@
   },
   {
     "ea": "0x809C56",
-    "line": "mov     edx, [esp+58h+arg_4]; jumptable 00809B8B case 121",
+    "line": "mov     edx, [esp+58h+arg3]; jumptable 00809B8B case 121",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1609,7 +1609,7 @@
   },
   {
     "ea": "0x809C72",
-    "line": "mov     eax, [esp+58h+arg_4]; jumptable 00809B8B case 127",
+    "line": "mov     eax, [esp+58h+arg3]; jumptable 00809B8B case 127",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1663,7 +1663,7 @@
   },
   {
     "ea": "0x809C8E",
-    "line": "mov     ecx, [esp+58h+arg_4]; jumptable 00809B8B case 148",
+    "line": "mov     ecx, [esp+58h+arg3]; jumptable 00809B8B case 148",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1699,7 +1699,7 @@
   },
   {
     "ea": "0x809C98",
-    "line": "call    sub_8813A0",
+    "line": "call    SkinShader_QueueSKIN2004_SKIN2002",
     "mnemonic": "call",
     "size": 5
   },
@@ -1717,7 +1717,7 @@
   },
   {
     "ea": "0x809CAA",
-    "line": "mov     edx, [esp+58h+arg_4]; jumptable 00809B8B case 154",
+    "line": "mov     edx, [esp+58h+arg3]; jumptable 00809B8B case 154",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1753,7 +1753,7 @@
   },
   {
     "ea": "0x809CB4",
-    "line": "call    sub_881610",
+    "line": "call    SkinShader_QueueSKIN2005_SKIN2002",
     "mnemonic": "call",
     "size": 5
   },
@@ -1771,7 +1771,7 @@
   },
   {
     "ea": "0x809CC6",
-    "line": "mov     eax, [esp+58h+arg_4]; jumptable 00809B8B case 233",
+    "line": "mov     eax, [esp+58h+arg3]; jumptable 00809B8B case 233",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1825,7 +1825,7 @@
   },
   {
     "ea": "0x809CE2",
-    "line": "mov     ecx, [esp+58h+arg_4]; jumptable 00809B8B case 236",
+    "line": "mov     ecx, [esp+58h+arg3]; jumptable 00809B8B case 236",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1879,7 +1879,7 @@
   },
   {
     "ea": "0x809CFE",
-    "line": "mov     edx, [esp+58h+arg_4]; jumptable 00809B8B case 247",
+    "line": "mov     edx, [esp+58h+arg3]; jumptable 00809B8B case 247",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1933,7 +1933,7 @@
   },
   {
     "ea": "0x809D1A",
-    "line": "mov     eax, [esp+58h+arg_4]; jumptable 00809B8B case 250",
+    "line": "mov     eax, [esp+58h+arg3]; jumptable 00809B8B case 250",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1987,7 +1987,7 @@
   },
   {
     "ea": "0x809D36",
-    "line": "mov     ecx, [esp+58h+arg_4]; jumptable 00809B8B case 89",
+    "line": "mov     ecx, [esp+58h+arg3]; jumptable 00809B8B case 89",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2041,7 +2041,7 @@
   },
   {
     "ea": "0x809D52",
-    "line": "mov     edx, [esp+58h+arg_4]; jumptable 00809B8B case 94",
+    "line": "mov     edx, [esp+58h+arg3]; jumptable 00809B8B case 94",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2095,7 +2095,7 @@
   },
   {
     "ea": "0x809D6E",
-    "line": "mov     eax, [esp+58h+arg_4]; jumptable 00809B8B case 111",
+    "line": "mov     eax, [esp+58h+arg3]; jumptable 00809B8B case 111",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2149,7 +2149,7 @@
   },
   {
     "ea": "0x809D8A",
-    "line": "mov     ecx, [esp+58h+arg_4]; jumptable 00809B8B case 116",
+    "line": "mov     ecx, [esp+58h+arg3]; jumptable 00809B8B case 116",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2203,7 +2203,7 @@
   },
   {
     "ea": "0x809DA6",
-    "line": "mov     edx, [esp+58h+arg_4]; jumptable 00809B8B case 135",
+    "line": "mov     edx, [esp+58h+arg3]; jumptable 00809B8B case 135",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2257,7 +2257,7 @@
   },
   {
     "ea": "0x809DC2",
-    "line": "mov     eax, [esp+58h+arg_4]; jumptable 00809B8B case 141",
+    "line": "mov     eax, [esp+58h+arg3]; jumptable 00809B8B case 141",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2311,7 +2311,7 @@
   },
   {
     "ea": "0x809DDE",
-    "line": "mov     ecx, [esp+58h+arg_4]; jumptable 00809B8B case 161",
+    "line": "mov     ecx, [esp+58h+arg3]; jumptable 00809B8B case 161",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2365,7 +2365,7 @@
   },
   {
     "ea": "0x809DFA",
-    "line": "mov     edx, [esp+58h+arg_4]; jumptable 00809B8B case 167",
+    "line": "mov     edx, [esp+58h+arg3]; jumptable 00809B8B case 167",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2419,43 +2419,43 @@
   },
   {
     "ea": "0x809E16",
-    "line": "mov     eax, [esp+58h+arg_4]",
+    "line": "mov     eax, [esp+58h+arg3]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x809E1A",
-    "line": "push    edi",
+    "line": "push    edi; shaderProperty",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x809E1B",
-    "line": "push    ebp",
+    "line": "push    ebp; arg4",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x809E1C",
-    "line": "push    eax",
+    "line": "push    eax; arg3",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x809E1D",
-    "line": "push    esi",
+    "line": "push    esi; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x809E1E",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x809E20",
-    "line": "call    sub_851CA0",
+    "line": "call    NiD3DPassArray_AddTextureEffectPass1x; Verified (Oblivion): shared by ShadowLight, Skin, and Hair setup for selector 0x18C. It binds TextureEffectData's texture and render-state fields into the pass template; the active shader's owned pixel/vertex constant maps are then applied by NiD3DShader_SetupShaderPrograms. ShadowLight's vtable owner is confirmed to build/apply maps from the texture-effect globals.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2539,7 +2539,7 @@
   },
   {
     "ea": "0x809E4D",
-    "line": "mov     edx, [esp+60h+arg_4]",
+    "line": "mov     edx, [esp+60h+arg3]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2581,13 +2581,13 @@
   },
   {
     "ea": "0x809E58",
-    "line": "call    sub_7C9F30",
+    "line": "call    ShadowLightShader__SetupRenderPass; Base ShadowLight consumer includes concrete cases for refraction selectors 0x160, 0x161, and 0x162, as well as inherited high selectors 0x177..0x179. Selector-only filtering would remove valid ordinary PP-lighting work.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x809E5D",
-    "line": "lea     ecx, [esp+58h+var_34]; this",
+    "line": "lea     ecx, [esp+58h+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2605,7 +2605,7 @@
   },
   {
     "ea": "0x809E6B",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -2623,43 +2623,43 @@
   },
   {
     "ea": "0x809E77",
-    "line": "mov     eax, [esp+58h+arg_4]",
+    "line": "mov     eax, [esp+58h+arg3]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x809E7B",
-    "line": "push    edi",
+    "line": "push    edi; shaderProperty",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x809E7C",
-    "line": "push    ebp",
+    "line": "push    ebp; arg4",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x809E7D",
-    "line": "push    eax",
+    "line": "push    eax; arg3",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x809E7E",
-    "line": "push    esi",
+    "line": "push    esi; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x809E7F",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x809E81",
-    "line": "call    sub_848AD0",
+    "line": "call    NiD3DPassArray_AddTextureEffectPass2xS; Verified (Oblivion): shared by ShadowLight, Skin, and Hair setup for selector 0x18F. It binds the same effect data and uses the active shader's owned texture-effect maps through NiD3DShader_SetupShaderPrograms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2671,43 +2671,43 @@
   },
   {
     "ea": "0x809E8B",
-    "line": "mov     ecx, [esp+58h+arg_4]",
+    "line": "mov     ecx, [esp+58h+arg3]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x809E8F",
-    "line": "push    edi",
+    "line": "push    edi; shaderProperty",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x809E90",
-    "line": "push    ebp",
+    "line": "push    ebp; arg4",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x809E91",
-    "line": "push    ecx",
+    "line": "push    ecx; arg3",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x809E92",
-    "line": "push    esi",
+    "line": "push    esi; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x809E93",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x809E95",
-    "line": "call    sub_848950",
+    "line": "call    NiD3DPassArray_AddTextureEffectPass2x; Verified (Oblivion): shared by ShadowLight, Skin, and Hair setup for selector 0x18E. It binds the effect texture and render-state fields; NiD3DShader_SetupShaderPrograms applies the active shader's owned fill/rim/fVars/U/V maps afterward.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2719,43 +2719,43 @@
   },
   {
     "ea": "0x809E9F",
-    "line": "mov     edx, [esp+58h+arg_4]",
+    "line": "mov     edx, [esp+58h+arg3]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x809EA3",
-    "line": "push    edi",
+    "line": "push    edi; shaderProperty",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x809EA4",
-    "line": "push    ebp",
+    "line": "push    ebp; arg4",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x809EA5",
-    "line": "push    edx",
+    "line": "push    edx; arg3",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x809EA6",
-    "line": "push    esi",
+    "line": "push    esi; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x809EA7",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x809EA9",
-    "line": "call    sub_851E70",
+    "line": "call    NiD3DPassArray_AddTextureEffectPass1xS; Verified (Oblivion): shared by ShadowLight, Skin, and Hair setup for selector 0x18D. It binds the same effect-data fields as 0x18C; the active shader's owned pixel/vertex maps are applied afterward by NiD3DShader_SetupShaderPrograms. The selector is passInfo bit 0x02-dependent.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2827,31 +2827,31 @@
   },
   {
     "ea": "0x809ED6",
-    "line": "push    0",
+    "line": "push    0; restore",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x809ED8",
-    "line": "push    7",
+    "line": "push    7; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x809EDA",
-    "line": "push    0A8h ; '¨'",
+    "line": "push    0A8h ; '¨'; state",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x809EDF",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x809EE1",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2869,31 +2869,31 @@
   },
   {
     "ea": "0x809EEF",
-    "line": "push    0",
+    "line": "push    0; restore",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x809EF1",
-    "line": "push    8",
+    "line": "push    8; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x809EF3",
-    "line": "push    0A8h ; '¨'",
+    "line": "push    0A8h ; '¨'; state",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x809EF8",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x809EFA",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2923,7 +2923,7 @@
   },
   {
     "ea": "0x809F10",
-    "line": "mov     ecx, ds:0B47718h[eax*4]",
+    "line": "mov     ecx, ds:0B47718h[eax*4]; this",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2935,7 +2935,7 @@
   },
   {
     "ea": "0x809F1E",
-    "line": "push    0",
+    "line": "push    0; restore",
     "mnemonic": "push",
     "size": 2
   },
@@ -2947,109 +2947,109 @@
   },
   {
     "ea": "0x809F22",
-    "line": "push    1",
+    "line": "push    1; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x809F24",
-    "line": "push    34h ; '4'",
+    "line": "push    34h ; '4'; state",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x809F26",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x809F2B",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x809F2D",
-    "line": "push    0",
+    "line": "push    0; restore",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x809F2F",
-    "line": "push    8",
+    "line": "push    8; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x809F31",
-    "line": "push    38h ; '8'",
+    "line": "push    38h ; '8'; state",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x809F33",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x809F38",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x809F3A",
-    "line": "push    0",
+    "line": "push    0; restore",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x809F3C",
-    "line": "push    7",
+    "line": "push    7; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x809F3E",
-    "line": "push    37h ; '7'",
+    "line": "push    37h ; '7'; state",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x809F40",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x809F45",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x809F47",
-    "line": "push    0",
+    "line": "push    0; restore",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x809F49",
-    "line": "push    1",
+    "line": "push    1; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x809F4B",
-    "line": "push    35h ; '5'",
+    "line": "push    35h ; '5'; state",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x809F4D",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3085,19 +3085,19 @@
   },
   {
     "ea": "0x809F5C",
-    "line": "push    0",
+    "line": "push    0; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x809F5E",
-    "line": "push    34h ; '4'",
+    "line": "push    34h ; '4'; state",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x809F60",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3139,13 +3139,13 @@
   },
   {
     "ea": "0x809F7B",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x809F7D",
-    "line": "push    0",
+    "line": "push    0; restore",
     "mnemonic": "push",
     "size": 2
   },
@@ -3169,19 +3169,19 @@
   },
   {
     "ea": "0x809F88",
-    "line": "push    0",
+    "line": "push    0; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x809F8A",
-    "line": "push    1Bh",
+    "line": "push    1Bh; state",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x809F8C",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3193,19 +3193,19 @@
   },
   {
     "ea": "0x809F93",
-    "line": "push    1",
+    "line": "push    1; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x809F95",
-    "line": "push    1Bh",
+    "line": "push    1Bh; state",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x809F97",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3253,31 +3253,31 @@
   },
   {
     "ea": "0x809FAC",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x809FAE",
-    "line": "push    0",
+    "line": "push    0; restore",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x809FB0",
-    "line": "push    4",
+    "line": "push    4; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x809FB2",
-    "line": "push    17h",
+    "line": "push    17h; state",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x809FB4",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3307,49 +3307,49 @@
   },
   {
     "ea": "0x809FC1",
-    "line": "push    1",
+    "line": "push    1; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x809FC3",
-    "line": "push    1Bh",
+    "line": "push    1Bh; state",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x809FC5",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x809FCA",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x809FCC",
-    "line": "push    0",
+    "line": "push    0; restore",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x809FCE",
-    "line": "push    3",
+    "line": "push    3; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x809FD0",
-    "line": "push    17h",
+    "line": "push    17h; state",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x809FD2",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3403,7 +3403,7 @@
   },
   {
     "ea": "0x809FEE",
-    "line": "push    0",
+    "line": "push    0; restore",
     "mnemonic": "push",
     "size": 2
   },
@@ -3427,13 +3427,13 @@
   },
   {
     "ea": "0x809FF6",
-    "line": "push    0",
+    "line": "push    0; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x809FF8",
-    "line": "push    1Bh",
+    "line": "push    1Bh; state",
     "mnemonic": "push",
     "size": 2
   },
@@ -3445,13 +3445,13 @@
   },
   {
     "ea": "0x809FFC",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x809FFE",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3499,7 +3499,7 @@
   },
   {
     "ea": "0x80A01A",
-    "line": "lea     ecx, [esp+58h+var_34]; this",
+    "line": "lea     ecx, [esp+58h+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3511,7 +3511,7 @@
   },
   {
     "ea": "0x80A026",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -3553,7 +3553,7 @@
   },
   {
     "ea": "0x80A03C",
-    "line": "mov     ecx, [esp+5Ch+arg_C]",
+    "line": "mov     ecx, [esp+5Ch+arg4]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3577,7 +3577,7 @@
   },
   {
     "ea": "0x80A046",
-    "line": "mov     eax, [esp+64h+arg_4]",
+    "line": "mov     eax, [esp+64h+arg3]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3589,7 +3589,7 @@
   },
   {
     "ea": "0x80A04B",
-    "line": "mov     ecx, [esp+68h+arg_0]",
+    "line": "mov     ecx, [esp+68h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3619,7 +3619,7 @@
   },
   {
     "ea": "0x80A054",
-    "line": "call    sub_7C9F30",
+    "line": "call    ShadowLightShader__SetupRenderPass; Base ShadowLight consumer includes concrete cases for refraction selectors 0x160, 0x161, and 0x162, as well as inherited high selectors 0x177..0x179. Selector-only filtering would remove valid ordinary PP-lighting work.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3676,5 +3676,59 @@
     "line": "retn    1Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D0CE0",
+    "line": "lea     ecx, [ebp-34h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0CE3",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0CE8",
+    "line": "mov     edx, [esp+arg3]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D0CEC",
+    "line": "lea     eax, [edx-48h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0CEF",
+    "line": "mov     ecx, [edx-4Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0CF2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D0CF4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0CF9",
+    "line": "mov     eax, offset stru_AF950C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0CFE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

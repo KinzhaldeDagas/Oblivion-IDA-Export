@@ -1,1 +1,1 @@
-IOleWindow_0
+typedef IOleWindow IOleWindow_0;

@@ -1,1 +1,1 @@
-Tile::Extra
+struct Tile::Extra;

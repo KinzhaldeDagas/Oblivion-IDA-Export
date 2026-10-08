@@ -13,7 +13,7 @@
 0x415652: mov     ecx, eax
 0x415654: mov     eax, [edx+0D4h]
 0x41565A: call    eax
-0x41565C: mov     ecx, dword ptr [esp+4+ArgList]
+0x41565C: mov     ecx, [esp+4+ArgList]
 0x415660: push    eax
 0x415661: push    ecx; ArgList
 0x415662: push    offset aUnableToFindEf; "Unable to find EffectSetting %d in spel"...
@@ -24,7 +24,7 @@
 0x415675: cmp     eax, ebx
 0x415677: jnz     short loc_41567E
 0x415679: mov     eax, offset aUnknown_0; "{unknown}"
-0x41567E: mov     edx, dword ptr [esp+ArgList]
+0x41567E: mov     edx, [esp+ArgList]
 0x415682: push    eax
 0x415683: push    edx; ArgList
 0x415684: push    offset aUnableToFind_0; "Unable to find EffectSetting %d in spel"...

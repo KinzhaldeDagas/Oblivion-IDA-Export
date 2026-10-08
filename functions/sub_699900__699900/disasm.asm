@@ -50,7 +50,7 @@
 0x6999A3: fstp    qword ptr [esp+6Ch+var_68+4]
 0x6999A7: fld     dword ptr [esp+6Ch+var_48+4]
 0x6999AB: fstp    qword ptr [esp+6Ch+var_4C]
-0x6999AF: call    Actor_GetFatigueFraction
+0x6999AF: call    Actor_GetFatigueFraction; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.
 0x6999B4: mov     edx, [esi]
 0x6999B6: mov     eax, [edx+284h]
 0x6999BC: push    ecx
@@ -81,14 +81,14 @@
 0x699A01: push    ecx
 0x699A02: fstp    [esp+7Ch+var_7C]; float
 0x699A05: mov     ecx, [esp+7Ch+arg_10]
-0x699A0C: call    EffectItem_GetArea
+0x699A0C: call    EffectItem_GetArea; Effective area: returns 0 for EffectSetting NoArea (0x200) or Self range (0); otherwise raw EffectItem+0x8 area.
 0x699A11: mov     [esp+7Ch+arg_0], eax
 0x699A18: fild    [esp+7Ch+arg_0]
 0x699A1F: fmul    dword ptr ds:0B37DB8h
-0x699A25: call    Double_To_SInt32
+0x699A25: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x699A2A: fld     [esp+7Ch+arg_14]
 0x699A31: push    eax; int
-0x699A32: call    Double_To_SInt32
+0x699A32: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x699A37: push    eax; int
 0x699A38: call    Calc_MagicExplosionSize?
 0x699A3D: fstp    [esp+84h+arg_0]
@@ -164,13 +164,13 @@
 0x699B37: lea     ecx, [esp+6Ch+var_34]
 0x699B3B: push    ecx
 0x699B3C: lea     ecx, [eax+64h]
-0x699B3F: call    sub_718A80
+0x699B3F: call    sub_718A80;
 0x699B44: lea     edx, [esp+6Ch+arg_4]
 0x699B48: push    edx
 0x699B49: lea     eax, [esp+70h+var_68+4]
 0x699B4D: push    eax
 0x699B4E: lea     ecx, [esp+74h+var_34]
-0x699B52: call    sub_53D4B0
+0x699B52: call    NiTransform_TransformPoint; ODismemberment: __thiscall NiTransform point transform helper. Plugin hit capture must pass transform in ECX; cdecl here crashes on actor hits.
 0x699B57: mov     ecx, [eax]
 0x699B59: mov     [esp+6Ch+var_4C], ecx
 0x699B5D: mov     edx, [eax+4]
@@ -182,7 +182,7 @@
 0x699B70: push    edx
 0x699B71: lea     ecx, [esp+74h+var_34]
 0x699B75: mov     dword ptr [esp+74h+var_48+4], eax
-0x699B79: call    sub_53D4B0
+0x699B79: call    NiTransform_TransformPoint; ODismemberment: __thiscall NiTransform point transform helper. Plugin hit capture must pass transform in ECX; cdecl here crashes on actor hits.
 0x699B7E: mov     ecx, [eax]
 0x699B80: mov     dword ptr [esp+6Ch+var_58], ecx
 0x699B84: mov     edx, [eax+4]

@@ -6,7 +6,6 @@
 0x4845D8: jz      short loc_484614
 0x4845DA: push    esi
 0x4845DB: jmp     short loc_4845E0
-0x4845DD: align 10h
 0x4845E0: mov     esi, [edi]
 0x4845E2: test    esi, esi
 0x4845E4: jz      short loc_484613

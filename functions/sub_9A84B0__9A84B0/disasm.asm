@@ -2,7 +2,7 @@
 0x9A84B1: push    esi
 0x9A84B2: mov     esi, ecx
 0x9A84B4: xor     ebx, ebx
-0x9A84B6: push    offset NiRefObject_objcount; lpAddend
+0x9A84B6: push    0B3FD64h; lpAddend
 0x9A84BB: mov     dword ptr [esi], offset ??_7NiRefObject@@6B@; const NiRefObject::`vftable'
 0x9A84C1: mov     [esi+4], ebx
 0x9A84C4: call    ds:InterlockedIncrement
@@ -18,10 +18,10 @@
 0x9A84E9: mov     [esi+2Ch], ebx
 0x9A84EC: mov     [esi+30h], ebx
 0x9A84EF: mov     [esi+34h], bl
-0x9A84F2: cmp     byte_B4295B, bl
+0x9A84F2: cmp     g_D3DXParameterDispatchInitialized, bl
 0x9A84F8: jnz     short loc_9A84FF
-0x9A84FA: call    sub_783C70
-0x9A84FF: cmp     byte_B4295C, bl
+0x9A84FA: call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.
+0x9A84FF: cmp     byte ptr unk_B4295C, bl
 0x9A8505: jnz     short loc_9A850C
 0x9A8507: call    sub_783D70
 0x9A850C: mov     eax, esi

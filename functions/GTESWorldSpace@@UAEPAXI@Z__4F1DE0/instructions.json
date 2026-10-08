@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x4F1DE3",
-    "line": "call    ??1TESWorldSpace@@UAE@XZ; TESWorldSpace::~TESWorldSpace(void)",
+    "line": "call    ??1TESWorldSpace@@UAE@XZ; Verified destruction order: clears persistent-reference index (+0x64), TESForm component references, SubSpace spatial index (+0x60), exterior cell map, cellMap, persistent cell, auxiliary resources, LOD-cell map, terrain LOD map, then base components.",
     "mnemonic": "call",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x4F1DF0",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

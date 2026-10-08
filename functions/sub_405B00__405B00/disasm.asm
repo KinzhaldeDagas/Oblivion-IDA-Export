@@ -1,5 +1,5 @@
 0x405B00: push    esi
-0x405B01: mov     esi, g_InterfaceScenegraph
+0x405B01: mov     esi, ds:0B333D0h
 0x405B07: test    esi, esi
 0x405B09: jz      short loc_405B31
 0x405B0B: lea     eax, [esi+4]
@@ -14,6 +14,6 @@
 0x405B21: push    1
 0x405B23: mov     ecx, esi
 0x405B25: call    eax
-0x405B27: mov     g_InterfaceScenegraph, 0
+0x405B27: mov     dword ptr ds:0B333D0h, 0
 0x405B31: pop     esi
 0x405B32: retn

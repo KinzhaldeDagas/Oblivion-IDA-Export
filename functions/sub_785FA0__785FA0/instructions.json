@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x785FA0",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; Unique insertion for the spline-cache map. Searches by the 28-byte small-string key, inserts and rebalances only when absent, and returns {iterator, inserted}.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x785FA4",
-    "line": "mov     ebx, [esp+10h+arg_4]",
+    "line": "mov     ebx, [esp+10h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x785FBB",
-    "line": "mov     [esp+1Ch+var_8], edi",
+    "line": "mov     [esp+1Ch+var_8.owner], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x785FCC",
-    "line": "mov     [esp+1Ch+arg_4], esi",
+    "line": "mov     [esp+1Ch+value], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -343,13 +343,13 @@
   },
   {
     "ea": "0x78602E",
-    "line": "mov     edi, [esp+1Ch+var_8]",
+    "line": "mov     edi, [esp+1Ch+var_8.owner]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x786032",
-    "line": "mov     ebp, [esp+1Ch+arg_4]",
+    "line": "mov     ebp, [esp+1Ch+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -367,13 +367,13 @@
   },
   {
     "ea": "0x78603A",
-    "line": "mov     [esp+1Ch+var_4], esi",
+    "line": "mov     [esp+1Ch+var_8.node], esi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x78603E",
-    "line": "mov     [esp+1Ch+var_8], edi",
+    "line": "mov     [esp+1Ch+var_8.owner], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x786049",
-    "line": "lea     ecx, [esp+1Ch+var_8]",
+    "line": "lea     ecx, [esp+1Ch+var_8]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -409,37 +409,37 @@
   },
   {
     "ea": "0x78604F",
-    "line": "push    ebx",
+    "line": "push    ebx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x786050",
-    "line": "push    ebp",
+    "line": "push    ebp; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x786051",
-    "line": "push    1",
+    "line": "push    1; insertLeft",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x786053",
-    "line": "push    ecx",
+    "line": "push    ecx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x786054",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x786056",
-    "line": "call    sub_7859E0",
+    "line": "call    OB_stBezierSplineCacheMap_InsertNodeAndRebalance_010201A0; Links a newly allocated spline-cache node beneath the selected parent, increments map size, performs standard red-black insertion recoloring/rotations, forces the root black, and returns {map,node}.",
     "mnemonic": "call",
     "size": 5
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x786060",
-    "line": "mov     eax, [esp+18h+arg_0]",
+    "line": "mov     eax, [esp+18h+result]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -523,13 +523,13 @@
   },
   {
     "ea": "0x786079",
-    "line": "call    sub_7840B0",
+    "line": "call    OB_stBezierSplineCacheIterator_Decrement_010201A0; Oblivion 1.2.0.416: checked spline-cache iterator pre-decrement using parent/left-subtree traversal and nil-node validation.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x78607E",
-    "line": "mov     esi, [esp+1Ch+var_4]",
+    "line": "mov     esi, [esp+1Ch+var_8.node]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -661,13 +661,13 @@
   },
   {
     "ea": "0x7860B4",
-    "line": "mov     eax, [esp+1Ch+arg_0]",
+    "line": "mov     eax, [esp+1Ch+result]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7860B8",
-    "line": "mov     edx, [esp+1Ch+var_8]",
+    "line": "mov     edx, [esp+1Ch+var_8.owner]",
     "mnemonic": "mov",
     "size": 4
   },

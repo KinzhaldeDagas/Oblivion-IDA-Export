@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x78FA00",
-    "line": "push    esi",
+    "line": "push    esi; OBLIVION AUTHORITY 2026-08-27: Recursively accumulates hierarchical branch placement percent. Base is 0 when branch is null or has no parent. Otherwise A(branch)=A(parent)+(1-A(parent))*branch->percentAlongParent. This visits the full parent chain; it is not the RT4.1 limited-depth product formula.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78FA01",
-    "line": "mov     esi, [esp+4+arg_0]",
+    "line": "mov     esi, [esp+4+branch]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,25 +43,25 @@
   },
   {
     "ea": "0x78FA0F",
-    "line": "push    eax",
+    "line": "push    eax; branch",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78FA10",
-    "line": "call    sub_78FA00",
+    "line": "call    OB_CBranch_AccumulateLeafDimmingPercent_010201A0; OBLIVION AUTHORITY 2026-08-27: Recursively accumulates hierarchical branch placement percent. Base is 0 when branch is null or has no parent. Otherwise A(branch)=A(parent)+(1-A(parent))*branch->percentAlongParent. This visits the full parent chain; it is not the RT4.1 limited-depth product formula.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x78FA15",
-    "line": "fstp    [esp+8+arg_0]",
+    "line": "fstp    [esp+8+branch]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x78FA19",
-    "line": "fld     [esp+8+arg_0]",
+    "line": "fld     [esp+8+branch]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -109,13 +109,13 @@
   },
   {
     "ea": "0x78FA2C",
-    "line": "fstp    [esp+arg_0]",
+    "line": "fstp    [esp+branch]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x78FA30",
-    "line": "fld     [esp+arg_0]",
+    "line": "fld     [esp+branch]",
     "mnemonic": "fld",
     "size": 4
   },

@@ -1,19 +1,32 @@
 {
-  "callees_count": 13,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_472690",
+  "chunks": [
+    [
+      "0x472690",
+      "0x47271C"
+    ]
+  ],
+  "chunks_sha256": "83d497e09e1608cfeb1c65c1e692d4f4b06289e273406561fc89d836ed3b9c14",
+  "comment_regular": "Iterates the controller manager sequence array, filters to BSAnimGroupSequence RTTI, and returns the first active sequence or the next active sequence after the supplied pointer.",
+  "comment_repeatable": "Iterates the controller manager sequence array, filters to BSAnimGroupSequence RTTI, and returns the first active sequence or the next active sequence after the supplied pointer.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "ActorAnimData_FindNextActiveAnimGroupSequence",
   "end_ea": "0x47271C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_472690",
+  "name": "ActorAnimData_FindNextActiveAnimGroupSequence",
   "segment": ".text",
   "sha256": "83d497e09e1608cfeb1c65c1e692d4f4b06289e273406561fc89d836ed3b9c14",
   "size": 140,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x472690",
-  "type": "int __thiscall(_DWORD *this, int)",
+  "total_chunk_size": 140,
+  "type": "BSAnimGroupSequence *__thiscall(ActorAnimData *this, BSAnimGroupSequence *after)",
   "xrefs_from_count": 69,
   "xrefs_to_count": 2
 }

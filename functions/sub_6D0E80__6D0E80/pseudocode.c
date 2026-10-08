@@ -21,44 +21,44 @@ int __thiscall sub_6D0E80(_DWORD *this, _DWORD *a2)
   int v21; // [esp+14h] [ebp-8h] BYREF
   int v22; // [esp+18h] [ebp-4h] BYREF
 
-  v2 = a2;
-  sub_754EB0(a2);
-  v17 = v2[0x88];
-  v4 = *(void (__cdecl **)(int, _DWORD *, int, int *, int))(v17 + 8);
-  v21 = 2;
-  v4(v17, this + 0xF, 2, &v21, 1);
-  (*(void (__thiscall **)(_DWORD *, _DWORD))(*v2 + 0x2C))(v2, *(this + 0x14));
-  LOBYTE(a2) = *((_BYTE *)this + 0x5A);
-  v18 = v2[0x88];
-  v5 = *(void (__cdecl **)(int, _DWORD **, int, int *, int))(v18 + 8);
-  v21 = 1;
-  v5(v18, &a2, 1, &v21, 1);
-  v6 = (*(unsigned __int16 (__thiscall **)(_DWORD *))(*this + 0x74))(this);
-  v7 = v2[0x88];
-  v20 = v6;
-  v8 = *(void (__cdecl **)(int, unsigned int *, int, int *, int))(v7 + 8);
-  v21 = 4;
-  v8(v7, &v20, 4, &v21, 1);
-  for ( i = 0; (unsigned __int16)i < v20; ++i )
+  v2 = a2; /*0x6d0e86*/
+  j_NiTimeController_SaveBinary(this, (signed int)a2); /*0x6d0e8e*/
+  v17 = v2[0x88]; /*0x6d0ea6*/
+  v4 = *(void (__cdecl **)(int, _DWORD *, int, int *, int))(v17 + 8); /*0x6d0ea7*/
+  v21 = 2; /*0x6d0eaa*/
+  v4(v17, this + 0xF, 2, &v21, 1); /*0x6d0eb2*/
+  (*(void (__thiscall **)(_DWORD *, _DWORD))(*v2 + 0x2C))(v2, *(this + 0x14)); /*0x6d0ec2*/
+  LOBYTE(a2) = *((_BYTE *)this + 0x5A); /*0x6d0ece*/
+  v18 = v2[0x88]; /*0x6d0edf*/
+  v5 = *(void (__cdecl **)(int, _DWORD **, int, int *, int))(v18 + 8); /*0x6d0ee0*/
+  v21 = 1; /*0x6d0ee3*/
+  v5(v18, &a2, 1, &v21, 1); /*0x6d0eeb*/
+  v6 = (*(unsigned __int16 (__thiscall **)(_DWORD *))(*this + 0x74))(this); /*0x6d0ef9*/
+  v7 = v2[0x88]; /*0x6d0efc*/
+  v20 = v6; /*0x6d0f09*/
+  v8 = *(void (__cdecl **)(int, unsigned int *, int, int *, int))(v7 + 8); /*0x6d0f0d*/
+  v21 = 4; /*0x6d0f1c*/
+  v8(v7, &v20, 4, &v21, 1); /*0x6d0f20*/
+  for ( i = 0; (unsigned __int16)i < v20; ++i ) /*0x6d0f2b*/
   {
-    v10 = (*(int (__thiscall **)(_DWORD *, int))(*this + 0x80))(this, i);
-    (*(void (__thiscall **)(_DWORD *, int))(*v2 + 0x2C))(v2, v10);
+    v10 = (*(int (__thiscall **)(_DWORD *, int))(*this + 0x80))(this, i); /*0x6d0f3b*/
+    (*(void (__thiscall **)(_DWORD *, int))(*v2 + 0x2C))(v2, v10); /*0x6d0f45*/
   }
-  v11 = *(int (__cdecl **)(int, unsigned int *, int, int *, int))(v2[0x88] + 8);
-  v19 = v2[0x88];
-  v21 = 4;
-  result = v11(v19, &v20, 4, &v21, 1);
-  for ( j = 0; j < v20; ++j )
+  v11 = *(int (__cdecl **)(int, unsigned int *, int, int *, int))(v2[0x88] + 8); /*0x6d0f60*/
+  v19 = v2[0x88]; /*0x6d0f69*/
+  v21 = 4; /*0x6d0f6a*/
+  result = v11(v19, &v20, 4, &v21, 1); /*0x6d0f6e*/
+  for ( j = 0; j < v20; ++j ) /*0x6d0f79*/
   {
-    v14 = *((unsigned __int16 *)this + 0x25);
-    *(float *)&v21 = 0.0;
-    if ( j < v14 )
-      v21 = *(int *)(*(this + 0x11) + 4 * j);
-    v15 = v2[0x88];
-    v22 = v21;
-    v16 = *(int (__cdecl **)(int, int *, int, int *, int))(v15 + 8);
-    v21 = 4;
-    result = v16(v15, &v22, 4, &v21, 1);
+    v14 = *((unsigned __int16 *)this + 0x25); /*0x6d0f80*/
+    *(float *)&v21 = 0.0; /*0x6d0f88*/
+    if ( j < v14 ) /*0x6d0f8c*/
+      v21 = *(int *)(*(this + 0x11) + 4 * j); /*0x6d0f94*/
+    v15 = v2[0x88]; /*0x6d0f9c*/
+    v22 = v21; /*0x6d0fa4*/
+    v16 = *(int (__cdecl **)(int, int *, int, int *, int))(v15 + 8); /*0x6d0fad*/
+    v21 = 4; /*0x6d0fb7*/
+    result = v16(v15, &v22, 4, &v21, 1); /*0x6d0fbb*/
   }
-  return result;
+  return result; /*0x6d0fc9*/
 }

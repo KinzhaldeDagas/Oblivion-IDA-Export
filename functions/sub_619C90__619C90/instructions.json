@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x619CC5",
-    "line": "push    offset sub_614190",
+    "line": "push    offset CombatTargetInfo_ComparePriorityDescending",
     "mnemonic": "push",
     "size": 5
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x619CCC",
-    "line": "call    sub_5B27A0",
+    "line": "call    BSSimpleList_SortViaArrayAndRebuild; MEF LARGE PERF 2026-09-08: PERF-8 combat caller: target-retention routine sorts once when target count>1, then may adjust displaced target signed priority and sort again619D33. Both calls ignore the sort helper's incidental EAX. Removing a sort or retention delta is not the proposed optimization; remove only internal node churn.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x619CD3",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x619CE2",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x619CEA",
-    "line": "call    TeSPackage_TargetData_SetTargetREFR",
+    "line": "call    TeSPackage_TargetData_SetTargetREFR; 3DTheft decode: TargetData_SetTargetREFR only writes the reference field when targetType is 0 (reference target). It does not set count.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x619CF1",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x619CFE",
-    "line": "call    sub_613640",
+    "line": "call    CombatController_FindTargetInfo",
     "mnemonic": "call",
     "size": 5
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x619D28",
-    "line": "mov     [ecx+4], edx",
+    "line": "mov     [ecx+4], edx; Stock target-retention decay: add unk_B36C70 == -1 to the displaced target's live signed priority before resorting. SmartAI must preserve this external delta.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -331,13 +331,13 @@
   },
   {
     "ea": "0x619D2E",
-    "line": "push    offset sub_614190",
+    "line": "push    offset CombatTargetInfo_ComparePriorityDescending",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x619D33",
-    "line": "call    sub_5B27A0",
+    "line": "call    BSSimpleList_SortViaArrayAndRebuild",
     "mnemonic": "call",
     "size": 5
   },

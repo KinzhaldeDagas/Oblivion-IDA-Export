@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x7F27A3",
-    "line": "call    ??1SpeedTreeShaderPPLightingProperty@@UAE@XZ; SpeedTreeShaderPPLightingProperty::~SpeedTreeShaderPPLightingProperty(void)",
+    "line": "call    OB_SpeedTreeShaderPPLightingProperty_dtor_010201A0; SpeedTreeShaderPPLightingProperty dtor: releases the +0xF0 STSPData reference before running the BSShaderPPLightingProperty base destructor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x7F27B0",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

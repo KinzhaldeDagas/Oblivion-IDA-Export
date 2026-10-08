@@ -1,19 +1,36 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_535A00",
+  "chunks": [
+    [
+      "0x535A00",
+      "0x535A98"
+    ],
+    [
+      "0x9B93E0",
+      "0x9B9403"
+    ]
+  ],
+  "chunks_sha256": "90546fcdd5778b77a85921d6eeb989970eaf9191096fca88a86bacb93972765f",
+  "comment_regular": "SpecificItemCollector constructor for raycasts. Initializes collector and, when a TESObjectREFR is supplied, reads its collision filter via 0x65ABE0 and rewrites collision layer matrix row for layer a2 (or 0x1C if a2 < 0x18). LOS uses this, but movement climb probes should avoid unintended global mask churn unless needed.",
+  "comment_repeatable": "SpecificItemCollector constructor for raycasts. Initializes collector and, when a TESObjectREFR is supplied, reads its collision filter via 0x65ABE0 and rewrites collision layer matrix row for layer a2 (or 0x1C if a2 < 0x18). LOS uses this, but movement climb probes should avoid unintended global mask churn unless needed.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "SpecificItemCollector_InitForRaycast",
   "end_ea": "0x535A98",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_535A00",
+  "name": "SpecificItemCollector_InitForRaycast",
   "segment": ".text",
   "sha256": "95e2b39693763e1b77b73c2ff7a792d3202e36b5b3436709bdcd119f17c1bf2b",
   "size": 152,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x535A00",
+  "total_chunk_size": 187,
   "type": "float *__thiscall(float *this, signed int, TESObjectREFR *)",
-  "xrefs_from_count": 50,
+  "xrefs_from_count": 61,
   "xrefs_to_count": 2
 }

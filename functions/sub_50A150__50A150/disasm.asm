@@ -82,7 +82,7 @@
 0x50A220: test    al, 1
 0x50A222: jz      short loc_50A22B
 0x50A224: mov     ecx, esi
-0x50A226: call    sub_4DD850
+0x50A226: call    sub_4DD850; Verified enable-state activation: this branch runs when the reference's 0x800 disabled bit is set, performs activation/processing work, then clears the bit through TESForm_SetDisabledFlag. It recursively propagates state through ExtraEnableStateChildren.
 0x50A22B: mov     eax, [esp+4+arg_14]
 0x50A22F: and     byte ptr [eax+4], 0FEh
 0x50A233: mov     al, 1

@@ -1,19 +1,32 @@
 {
-  "callees_count": 69,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 18,
   "callers_count": 2,
+  "chunks": [
+    [
+      "0x58CF40",
+      "0x58D1B6"
+    ]
+  ],
+  "chunks_sha256": "700583b2157bae01c9378a1837da6b56ab57595242c73f9297a5d6aacf6f5535",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "Verified: second pass over template tokens. On tile-close token 0x2D, traverses current Tile value list and calls Value::CalculateValue(value,true) for every trait except class 0xFA2, then ascends parent. ReadFile therefore initializes properties natively; never call CalculateValue with Tile*. Fallout analogue 0x827E0B28; Fallout adds a critical section and uses other token numbers.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 5,
-  "display_name": "sub_58CF40",
+  "display_name": "Tile::ConnectTraitsToTree",
   "end_ea": "0x58D1B6",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_58CF40",
+  "name": "Tile::ConnectTraitsToTree",
   "segment": ".text",
   "sha256": "700583b2157bae01c9378a1837da6b56ab57595242c73f9297a5d6aacf6f5535",
   "size": 630,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x58CF40",
-  "type": "void __userpurge(double@<st0>, int)",
+  "total_chunk_size": 630,
+  "type": "void __thiscall(Tile *this, OblivionTileTemplate *tileTemplate)",
   "xrefs_from_count": 265,
   "xrefs_to_count": 2
 }

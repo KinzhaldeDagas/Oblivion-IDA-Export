@@ -1,1 +1,1 @@
-MMVERSION
+typedef UINT MMVERSION;

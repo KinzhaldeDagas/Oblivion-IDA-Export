@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x78ADE0",
-    "line": "push    ebp",
+    "line": "push    ebp; Oblivion vector<collision-record>::insert(position,count,value): authoritative 0x1C record stride, checked maximum 0x09249249, 1.5x growth, alias-safe in-place/reallocation paths, and FormHeap ownership.",
     "mnemonic": "push",
     "size": 1
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x78AE0D",
-    "line": "mov     esi, [ebp+arg_C]",
+    "line": "mov     esi, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x78AE3D",
-    "line": "mov     esi, [ebp+arg_8]",
+    "line": "mov     esi, [ebp+count]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x78AE74",
-    "line": "call    sub_790B90",
+    "line": "call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error(\"vector<T> too long\") and throws; used by multiple element specializations after max_size checks.",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,13 +583,13 @@
   },
   {
     "ea": "0x78AEE4",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x78AEE6",
-    "line": "call    sub_7876C0",
+    "line": "call    OB_stVector_CollisionObject_Size_010201A0; Oblivion collision-vector size helper: returns (end-begin)/0x1C. The 28-byte stride is authoritative; RT4.1's later 40-byte SShape adds Euler angles and is only a version contrast.",
     "mnemonic": "call",
     "size": 5
   },
@@ -613,13 +613,13 @@
   },
   {
     "ea": "0x78AEF1",
-    "line": "push    edi; char *",
+    "line": "push    edi; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78AEF2",
-    "line": "call    sub_787740",
+    "line": "call    OB_stVector_CollisionObject_Allocate_010201A0; Oblivion collision-vector allocator: checks count*0x1C for overflow, throws std::bad_alloc on overflow, and allocates through FormHeap.",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,13 +631,13 @@
   },
   {
     "ea": "0x78AEFA",
-    "line": "mov     byte ptr [ebp+arg_8], 0",
+    "line": "mov     byte ptr [ebp+count], 0",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x78AEFE",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+count]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -649,13 +649,13 @@
   },
   {
     "ea": "0x78AF02",
-    "line": "mov     [ebp+arg_C], eax",
+    "line": "mov     [ebp+value], eax",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x78AF05",
-    "line": "mov     edx, [ebp+arg_C]",
+    "line": "mov     edx, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -673,25 +673,25 @@
   },
   {
     "ea": "0x78AF0A",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78AF0B",
-    "line": "mov     eax, [ebp+arg_4]",
+    "line": "mov     eax, [ebp+last]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x78AF0E",
-    "line": "push    eax",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78AF0F",
-    "line": "push    ecx",
+    "line": "push    ecx; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -703,7 +703,7 @@
   },
   {
     "ea": "0x78AF17",
-    "line": "call    sub_788630",
+    "line": "call    OB_stVector_CollisionObject_UninitializedCopyRange_010201A0; Oblivion collision-vector uninitialized copy: copies [first,last) as 28-byte records into destination and returns the advanced destination.",
     "mnemonic": "call",
     "size": 5
   },
@@ -721,19 +721,19 @@
   },
   {
     "ea": "0x78AF22",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78AF23",
-    "line": "push    esi",
+    "line": "push    esi; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78AF24",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x78AF27",
-    "line": "call    sub_788E90",
+    "line": "call    OB_stVector_CollisionObject_UninitializedFillN_Stdcall_010201A0; Oblivion stdcall adapter for uninitialized fill-N of trivial 28-byte collision records; returns destination + count.",
     "mnemonic": "call",
     "size": 5
   },
@@ -757,13 +757,13 @@
   },
   {
     "ea": "0x78AF2F",
-    "line": "mov     byte ptr [ebp+arg_8], 0",
+    "line": "mov     byte ptr [ebp+count], 0",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x78AF33",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+count]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x78AF37",
-    "line": "mov     edx, [ebp+arg_C]",
+    "line": "mov     edx, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -793,31 +793,31 @@
   },
   {
     "ea": "0x78AF3C",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78AF3D",
-    "line": "mov     eax, [ebp+arg_4]",
+    "line": "mov     eax, [ebp+last]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x78AF40",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78AF41",
-    "line": "push    eax",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78AF42",
-    "line": "call    sub_788630",
+    "line": "call    OB_stVector_CollisionObject_UninitializedCopyRange_010201A0; Oblivion collision-vector uninitialized copy: copies [first,last) as 28-byte records into destination and returns the advanced destination.",
     "mnemonic": "call",
     "size": 5
   },
@@ -931,7 +931,7 @@
   },
   {
     "ea": "0x78AF73",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -943,7 +943,7 @@
   },
   {
     "ea": "0x78AF7B",
-    "line": "mov     eax, [ebp+arg_C]",
+    "line": "mov     eax, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1057,7 +1057,7 @@
   },
   {
     "ea": "0x78AFB3",
-    "line": "mov     eax, [ebp+arg_C]",
+    "line": "mov     eax, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1069,7 +1069,7 @@
   },
   {
     "ea": "0x78AFB7",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1105,7 +1105,7 @@
   },
   {
     "ea": "0x78AFCB",
-    "line": "mov     edi, [ebp+arg_4]",
+    "line": "mov     edi, [ebp+last]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1123,7 +1123,7 @@
   },
   {
     "ea": "0x78AFD2",
-    "line": "mov     [ebp+arg_C], edx",
+    "line": "mov     [ebp+value], edx",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1141,13 +1141,13 @@
   },
   {
     "ea": "0x78AFDC",
-    "line": "add     edx, [ebp+arg_C]",
+    "line": "add     edx, [ebp+value]",
     "mnemonic": "add",
     "size": 3
   },
   {
     "ea": "0x78AFDF",
-    "line": "mov     [ebp+arg_8], ecx",
+    "line": "mov     [ebp+count], ecx",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1213,7 +1213,7 @@
   },
   {
     "ea": "0x78AFFD",
-    "line": "mov     [ebp+arg_C], eax",
+    "line": "mov     [ebp+value], eax",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1225,19 +1225,19 @@
   },
   {
     "ea": "0x78B002",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78B003",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78B004",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -1249,7 +1249,7 @@
   },
   {
     "ea": "0x78B007",
-    "line": "call    sub_788ED0",
+    "line": "call    OB_stVector_CollisionObject_UninitializedCopyRange_Stdcall_010201A0; Oblivion stdcall adapter for uninitialized copying of a range of trivial 28-byte collision records.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1273,7 +1273,7 @@
   },
   {
     "ea": "0x78B014",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -1333,13 +1333,13 @@
   },
   {
     "ea": "0x78B02D",
-    "line": "push    esi",
+    "line": "push    esi; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78B02E",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -1357,13 +1357,13 @@
   },
   {
     "ea": "0x78B038",
-    "line": "call    sub_788E90",
+    "line": "call    OB_stVector_CollisionObject_UninitializedFillN_Stdcall_010201A0; Oblivion stdcall adapter for uninitialized fill-N of trivial 28-byte collision records; returns destination + count.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x78B03D",
-    "line": "mov     eax, [ebp+arg_C]",
+    "line": "mov     eax, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1387,7 +1387,7 @@
   },
   {
     "ea": "0x78B049",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -1399,19 +1399,19 @@
   },
   {
     "ea": "0x78B04C",
-    "line": "push    ebx",
+    "line": "push    ebx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78B04D",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78B04E",
-    "line": "call    sub_788AB0",
+    "line": "call    OB_stVector_CollisionObject_CopyFillRange_010201A0; Oblivion collision-vector fill-copy primitive: assigns one 28-byte collision record to every initialized element in [first,last).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1489,7 +1489,7 @@
   },
   {
     "ea": "0x78B06E",
-    "line": "push    ecx",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -1507,7 +1507,7 @@
   },
   {
     "ea": "0x78B073",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
@@ -1519,7 +1519,7 @@
   },
   {
     "ea": "0x78B076",
-    "line": "push    esi",
+    "line": "push    esi; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -1531,37 +1531,37 @@
   },
   {
     "ea": "0x78B079",
-    "line": "mov     [ebp+arg_C], eax",
+    "line": "mov     [ebp+value], eax",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x78B07C",
-    "line": "call    sub_788ED0",
+    "line": "call    OB_stVector_CollisionObject_UninitializedCopyRange_Stdcall_010201A0; Oblivion stdcall adapter for uninitialized copying of a range of trivial 28-byte collision records.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x78B081",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+count]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x78B084",
-    "line": "push    edx",
+    "line": "push    edx; destinationEnd",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78B085",
-    "line": "push    esi",
+    "line": "push    esi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78B086",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -1573,13 +1573,13 @@
   },
   {
     "ea": "0x78B08A",
-    "line": "call    sub_788B60",
+    "line": "call    OB_stVector_CollisionObject_CopyBackwardRange_Thunk_010201A0; Oblivion compiler adapter for the 28-byte collision copy-backward primitive; preserves the same first/last/destinationEnd semantics.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x78B08F",
-    "line": "mov     ecx, [ebp+arg_C]",
+    "line": "mov     ecx, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1591,7 +1591,7 @@
   },
   {
     "ea": "0x78B095",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -1603,19 +1603,19 @@
   },
   {
     "ea": "0x78B098",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78B099",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78B09A",
-    "line": "call    sub_788AB0",
+    "line": "call    OB_stVector_CollisionObject_CopyFillRange_010201A0; Oblivion collision-vector fill-copy primitive: assigns one 28-byte collision record to every initialized element in [first,last).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1678,5 +1678,47 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CB510",
+    "line": "mov     edx, [esp-4+last]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CB514",
+    "line": "lea     eax, [edx+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB517",
+    "line": "mov     ecx, [edx-30h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB51A",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CB51C",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB521",
+    "line": "mov     eax, offset stru_AF3C74",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB526",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

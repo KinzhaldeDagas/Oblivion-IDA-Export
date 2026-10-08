@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x794EE0",
-    "line": "push    ebp",
+    "line": "push    ebp; OBLIVION AUTHORITY (2026-08-30): Checked vector<unsigned short>::erase(first,last). Validates both iterator owners, shifts the suffix by 2-byte elements, updates end, and returns the resulting checked iterator.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x794EE1",
-    "line": "mov     ebp, [esp+4+arg_4]",
+    "line": "mov     ebp, [esp+4+firstOwner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x794EED",
-    "line": "cmp     ebp, [esp+0Ch+arg_C]",
+    "line": "cmp     ebp, [esp+0Ch+lastOwner]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x794F26",
-    "line": "mov     eax, [esp+0Ch+arg_0]",
+    "line": "mov     eax, [esp+0Ch+result]",
     "mnemonic": "mov",
     "size": 4
   },

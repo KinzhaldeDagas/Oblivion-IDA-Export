@@ -1,4 +1,4 @@
 UInt32 __thiscall sub_629420(HighProcess *this)
 {
-  return this->unk048;
+  return this->unk048; /*0x629423*/
 }

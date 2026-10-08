@@ -1,1 +1,10 @@
-_D3DVOLUME_DESC
+struct _D3DVOLUME_DESC
+{
+D3DFORMAT Format;
+D3DRESOURCETYPE Type;
+DWORD Usage;
+D3DPOOL Pool;
+UINT Width;
+UINT Height;
+UINT Depth;
+};

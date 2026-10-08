@@ -1,4 +1,4 @@
-0x4AEE40: mov     eax, [esp+arg_0]
+0x4AEE40: mov     eax, [esp+arg_0]; Pass228: Representative false positive in +0x178 indirect-call scan; this is TESForm/actor virtual dispatch, not NiDX9Renderer::RenderScreenTexture.
 0x4AEE44: sub     esp, 8
 0x4AEE47: push    esi
 0x4AEE48: push    edi

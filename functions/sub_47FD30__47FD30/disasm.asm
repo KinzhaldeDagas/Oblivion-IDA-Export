@@ -1,4 +1,4 @@
-0x47FD30: push    0FFFFFFFFh
+0x47FD30: push    0FFFFFFFFh; Verified generic NiTriShape geometry factory, used by PathGrid rendering and multiple other callers. It builds six octahedron vertices (four ±scale X/Y equatorial points and two ±scale*sqrt(2) Z poles), repeats a supplied NiColorAlpha for all six, writes 24 u16 indices for eight triangular faces, and returns a NiTriShape. This constructs a filled octahedron surface; wireframe is a separate scene property.
 0x47FD32: push    offset SEH_47FD30
 0x47FD37: mov     eax, large fs:0
 0x47FD3D: push    eax
@@ -19,7 +19,7 @@
 0x47FD64: mov     ebx, eax
 0x47FD66: fst     [esp+30h+var_14]
 0x47FD6A: mov     eax, [esp+30h+var_18]
-0x47FD6E: fld     [esp+30h+arg_0]
+0x47FD6E: fld     [esp+30h+scale]
 0x47FD72: mov     ecx, [esp+30h+var_14]
 0x47FD76: fld     st
 0x47FD78: mov     [ebx], eax
@@ -33,8 +33,8 @@
 0x47FD91: fld     st(1)
 0x47FD93: mov     [ebx+8], edx
 0x47FD96: fchs
-0x47FD98: fstp    [esp+34h+arg_0]
-0x47FD9C: fld     [esp+34h+arg_0]
+0x47FD98: fstp    [esp+34h+scale]
+0x47FD9C: fld     [esp+34h+scale]
 0x47FDA0: fst     [esp+34h+var_18]
 0x47FDA4: mov     eax, [esp+34h+var_18]
 0x47FDA8: fxch    st(2)
@@ -93,7 +93,7 @@
 0x47FE59: call    FormHeapAlloc
 0x47FE5E: add     esp, 8
 0x47FE61: mov     edi, eax
-0x47FE63: mov     [esp+2Ch+arg_0], edi
+0x47FE63: mov     [esp+2Ch+scale], edi
 0x47FE67: test    edi, edi
 0x47FE69: mov     [esp+2Ch+var_4], 0
 0x47FE71: jz      short loc_47FE84
@@ -104,7 +104,7 @@
 0x47FE7D: call    sub_401080
 0x47FE82: jmp     short loc_47FE86
 0x47FE84: xor     edi, edi
-0x47FE86: mov     eax, [esp+2Ch+arg_4]
+0x47FE86: mov     eax, [esp+2Ch+vertexColor]
 0x47FE8A: mov     ecx, [eax]
 0x47FE8C: mov     [edi], ecx
 0x47FE8E: mov     edx, [eax+4]
@@ -190,21 +190,21 @@
 0x47FFA5: mov     [esi+2Eh], ax
 0x47FFA9: call    FormHeapAlloc
 0x47FFAE: add     esp, 8
-0x47FFB1: mov     [esp+2Ch+arg_0], eax
+0x47FFB1: mov     [esp+2Ch+scale], eax
 0x47FFB5: test    eax, eax
 0x47FFB7: mov     [esp+2Ch+var_4], ebp
 0x47FFBB: jz      short loc_47FFE7
-0x47FFBD: push    esi
-0x47FFBE: push    8
-0x47FFC0: push    0
-0x47FFC2: push    0
-0x47FFC4: push    0
-0x47FFC6: push    edi
-0x47FFC7: push    0
-0x47FFC9: push    ebx
-0x47FFCA: push    6
-0x47FFCC: mov     ecx, eax
-0x47FFCE: call    sub_7174B0
+0x47FFBD: push    esi; triangleIndices
+0x47FFBE: push    8; triangleCount
+0x47FFC0: push    0; dataFlags
+0x47FFC2: push    0; hasVertexColors
+0x47FFC4: push    0; textureCoordinates
+0x47FFC6: push    edi; colors
+0x47FFC7: push    0; normals
+0x47FFC9: push    ebx; vertices
+0x47FFCA: push    6; vertexCount
+0x47FFCC: mov     ecx, eax; this
+0x47FFCE: call    NiTriShape_ctorWithGeometryData; Verified NiTriShape constructor wrapper: allocate/init NiTriShapeData from caller-supplied vertices, colors and triangle-index buffer; initialize NiTriBasedGeom and install NiTriShape vtable.
 0x47FFD3: mov     ecx, [esp+2Ch+var_C]
 0x47FFD7: mov     large fs:0, ecx
 0x47FFDE: pop     ecx
@@ -224,3 +224,20 @@
 0x47FFF8: pop     ebx
 0x47FFF9: add     esp, 18h
 0x47FFFC: retn
+0x9AF4B0: mov     eax, [ebp+4]
+0x9AF4B3: push    eax
+0x9AF4B4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AF4B9: pop     ecx
+0x9AF4BA: retn
+0x9AF4BB: mov     eax, [ebp+4]
+0x9AF4BE: push    eax
+0x9AF4BF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AF4C4: pop     ecx
+0x9AF4C5: retn
+0x9AF4C6: mov     edx, [esp+arg_4]
+0x9AF4CA: lea     eax, [edx-1Ch]
+0x9AF4CD: mov     ecx, [edx-20h]
+0x9AF4D0: xor     ecx, eax
+0x9AF4D2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AF4D7: mov     eax, offset stru_ADBA88
+0x9AF4DC: jmp     ___CxxFrameHandler3

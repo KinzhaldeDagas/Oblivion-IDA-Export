@@ -6,10 +6,10 @@
 0x6F5FAA: push    eax; File
 0x6F5FAB: call    _fclose
 0x6F5FB0: add     esp, 4
-0x6F5FB3: push    0; MaxCount
-0x6F5FB5: push    offset EmptyString; Src
-0x6F5FBA: lea     ecx, [esi+4]
-0x6F5FBD: call    sub_414500
+0x6F5FB3: push    0; count
+0x6F5FB5: push    offset EmptyString; source
+0x6F5FBA: lea     ecx, [esi+4]; this
+0x6F5FBD: call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.
 0x6F5FC2: mov     dword ptr [esi+3Ch], 0
 0x6F5FC9: pop     esi
 0x6F5FCA: retn

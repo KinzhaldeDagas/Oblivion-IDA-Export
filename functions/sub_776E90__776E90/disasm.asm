@@ -1,4 +1,4 @@
-0x776E90: sub     esp, 4Ch
+0x776E90: sub     esp, 4Ch; MoonSugarEffect decode: fallback FVF/one-stream non-skinned vertex packer. Position begins at stream offset 0, then optional normals/color/UVs. A pack-time wobble here would persist in the geometry VB until a later clean repack.
 0x776E93: push    ebx
 0x776E94: push    ebp
 0x776E95: mov     ebp, [esp+54h+arg_0]
@@ -7,7 +7,7 @@
 0x776E9F: push    edi
 0x776EA0: mov     edi, ecx
 0x776EA2: mov     ecx, ebp
-0x776EA4: mov     [esp+58h+var_48], edi
+0x776EA4: mov     [esp+58h+self], edi
 0x776EA8: call    edx
 0x776EAA: movzx   eax, ax
 0x776EAD: xor     ebx, ebx
@@ -28,7 +28,7 @@
 0x776ED6: cmp     eax, 8
 0x776ED9: push    esi
 0x776EDA: mov     esi, [ebp+24h]
-0x776EDD: mov     [esp+5Ch+var_2C], ecx
+0x776EDD: mov     [esp+5Ch+source], ecx
 0x776EE1: mov     [esp+5Ch+var_38], eax
 0x776EE5: jbe     short loc_776EEF
 0x776EE7: mov     [esp+5Ch+var_38], 8
@@ -42,7 +42,7 @@
 0x776F02: push    edx
 0x776F03: lea     eax, [esp+6Ch+var_30]
 0x776F07: push    eax
-0x776F08: lea     ecx, [esp+70h+var_44]
+0x776F08: lea     ecx, [esp+70h+destinationStride]
 0x776F0C: push    ecx
 0x776F0D: lea     edx, [esp+74h+var_40]
 0x776F11: push    edx
@@ -50,17 +50,17 @@
 0x776F13: push    ebp
 0x776F14: mov     ecx, edi
 0x776F16: mov     [esp+80h+var_40], ebx
-0x776F1A: mov     [esp+80h+var_44], ebx
-0x776F1E: call    sub_776DD0
+0x776F1A: mov     [esp+80h+destinationStride], ebx
+0x776F1E: call    sub_776DD0; MoonSugarEffect decode: fallback non-declaration vertex layout calculator. Builds FVF-like flags, stride, and offsets: position is 12 bytes; optional skin weights/indices, normals, color, and UV sets are appended, with UV count clamped by dword_B28CB0.
 0x776F23: mov     edi, [ebp+38h]
 0x776F26: mov     eax, [esp+5Ch+var_40]
 0x776F2A: push    eax
 0x776F2B: mov     ecx, edi
-0x776F2D: call    sub_7780A0
+0x776F2D: call    sub_7780A0; MoonSugarEffect decode: NiGeometryBufferData SetFVF-style input ownership. Stores FVF and releases any cached IDirect3DVertexDeclaration9, so callers switch the buffer to fixed-function input mode.
 0x776F32: cmp     [edi+1Ch], ebx
 0x776F35: jbe     short loc_776F40
 0x776F37: mov     ecx, [edi+20h]
-0x776F3A: mov     edx, [esp+5Ch+var_44]
+0x776F3A: mov     edx, [esp+5Ch+destinationStride]
 0x776F3E: mov     [ecx], edx
 0x776F40: mov     ebx, [esp+5Ch+arg_10]
 0x776F44: test    ebx, ebx
@@ -92,16 +92,16 @@
 0x776F96: cmp     [esp+5Ch+var_4], eax
 0x776F9A: jnz     short loc_776FB4
 0x776F9C: movzx   ecx, word ptr [esp+5Ch+var_3C]
-0x776FA1: imul    ecx, [esp+5Ch+var_44]
+0x776FA1: imul    ecx, [esp+5Ch+destinationStride]
 0x776FA6: cmp     [esp+5Ch+var_8], ecx
 0x776FAA: jb      short loc_776FB4
 0x776FAC: mov     eax, ebx
 0x776FAE: mov     [esp+5Ch+var_40], eax
 0x776FB2: jmp     short loc_776FED
-0x776FB4: mov     ecx, [esp+5Ch+var_48]
+0x776FB4: mov     ecx, [esp+5Ch+self]
 0x776FB8: push    0
 0x776FBA: push    edi
-0x776FBB: call    NiGeometryBufferData__RefreshVBChips
+0x776FBB: call    NiGeometryBufferData__RefreshVBChips; MoonSugarEffect decode: NiGeometryBufferData::RefreshVBChips. Releases the existing geometry-group chip for this stream, creates a replacement chip through NiGeometryGroup, and stores it in VBChip[stream] if stream is in range. This is allocation/lifetime ownership, not a safe mask-pass getter.
 0x776FC0: test    al, al
 0x776FC2: jz      loc_7771AA
 0x776FC8: cmp     dword ptr [edi+1Ch], 0
@@ -117,12 +117,12 @@
 0x776FF0: mov     edx, [eax+14h]
 0x776FF3: mov     edi, [eax+0Ch]
 0x776FF6: mov     eax, [eax+8]
-0x776FF9: push    ecx; int
-0x776FFA: mov     ecx, [esp+60h+var_48]
-0x776FFE: push    edx; Size
-0x776FFF: push    edi; int
-0x777000: push    eax; int
-0x777001: call    sub_776C90
+0x776FF9: push    ecx; flags
+0x776FFA: mov     ecx, [esp+60h+self]; self
+0x776FFE: push    edx; byteCount
+0x776FFF: push    edi; offsetBytes
+0x777000: push    eax; buffer
+0x777001: call    NiDX9VertexBufferManager_LockToStaging; MoonSugarEffect decode: VB lock helper. Locks D3D VB, caches original bytes in a staging buffer, and returns a writable pointer; unlock is handled by packers when they own the lock.
 0x777006: mov     ebx, eax
 0x777008: mov     ecx, [esp+5Ch+arg_4]
 0x77700C: test    ecx, ecx
@@ -133,13 +133,13 @@
 0x777020: jz      short loc_77704A
 0x777022: mov     edx, [esp+5Ch+var_30]
 0x777026: add     edx, ebx
-0x777028: cmp     [esp+5Ch+var_2C], 0
+0x777028: cmp     [esp+5Ch+source], 0
 0x77702D: jz      short loc_777037
 0x77702F: mov     eax, [esp+5Ch+var_28]
 0x777033: add     eax, ebx
 0x777035: jmp     short loc_777039
 0x777037: xor     eax, eax
-0x777039: mov     edi, [esp+5Ch+var_44]
+0x777039: mov     edi, [esp+5Ch+destinationStride]
 0x77703D: push    edi
 0x77703E: push    0
 0x777040: push    0
@@ -147,7 +147,7 @@
 0x777043: push    edx
 0x777044: push    ebp
 0x777045: call    sub_56CD20
-0x77704A: mov     edi, [esp+5Ch+var_48]
+0x77704A: mov     edi, [esp+5Ch+self]
 0x77704E: test    esi, esi
 0x777050: jz      loc_777106
 0x777056: test    byte ptr [esp+5Ch+arg_8], 4
@@ -159,7 +159,6 @@
 0x77706E: jbe     loc_777106
 0x777074: mov     ebp, eax
 0x777076: jmp     short loc_777080
-0x777078: align 10h
 0x777080: fld     dword ptr [esi+0Ch]
 0x777083: fmul    qword ptr ds:0A3DDD8h
 0x777089: fstp    [esp+5Ch+var_24]
@@ -191,11 +190,11 @@
 0x7770EC: or      eax, [esp+5Ch+var_28]
 0x7770F0: add     esi, 10h
 0x7770F3: mov     [ecx], eax
-0x7770F5: add     ecx, [esp+5Ch+var_44]
+0x7770F5: add     ecx, [esp+5Ch+destinationStride]
 0x7770F9: sub     ebp, 1
 0x7770FC: jnz     short loc_777080
 0x7770FE: mov     ebp, [esp+5Ch+arg_0]
-0x777102: mov     edi, [esp+5Ch+var_48]
+0x777102: mov     edi, [esp+5Ch+self]
 0x777106: test    byte ptr [esp+5Ch+arg_8], 8
 0x77710B: jz      short loc_77715A
 0x77710D: xor     esi, esi
@@ -215,7 +214,7 @@
 0x777132: mov     [ecx], ebp
 0x777134: mov     ebp, [eax+4]
 0x777137: mov     [ecx+4], ebp
-0x77713A: add     ecx, [esp+5Ch+var_44]
+0x77713A: add     ecx, [esp+5Ch+destinationStride]
 0x77713E: add     eax, 8
 0x777141: sub     edx, 1
 0x777144: jnz     short loc_777130
@@ -224,7 +223,7 @@
 0x77714D: add     ebx, 8
 0x777150: cmp     esi, [esp+5Ch+var_38]
 0x777154: jb      short loc_777120
-0x777156: mov     edi, [esp+5Ch+var_48]
+0x777156: mov     edi, [esp+5Ch+self]
 0x77715A: cmp     [esp+5Ch+var_49], 0
 0x77715F: jz      loc_777223
 0x777165: mov     ecx, [edi+4Ch]
@@ -232,10 +231,10 @@
 0x77716C: mov     edx, [edi+40h]
 0x77716F: mov     esi, [eax+8]
 0x777172: mov     eax, [edi+48h]
-0x777175: push    ecx; Size
-0x777176: push    edx; Src
-0x777177: push    eax; Dst
-0x777178: call    _memcpy
+0x777175: push    ecx; byteCount
+0x777176: push    edx; source
+0x777177: push    eax; destination
+0x777178: call    _memcpy;
 0x77717D: xor     ecx, ecx
 0x77717F: lea     eax, [edi+80h]
 0x777185: add     esp, 0Ch
@@ -265,35 +264,35 @@
 0x7771BE: test    byte ptr [esp+5Ch+arg_8], 1
 0x7771C3: jz      short loc_7771E7
 0x7771C5: movzx   ecx, word ptr [esp+5Ch+var_3C]
-0x7771CA: mov     edx, [esp+5Ch+var_44]
-0x7771CE: mov     edi, [esp+5Ch+var_48]
-0x7771D2: push    ecx; int
-0x7771D3: push    0Ch; Size
-0x7771D5: push    edx; int
-0x7771D6: push    eax; Src
+0x7771CA: mov     edx, [esp+5Ch+destinationStride]
+0x7771CE: mov     edi, [esp+5Ch+self]
+0x7771D2: push    ecx; elementCount
+0x7771D3: push    0Ch; elementBytes
+0x7771D5: push    edx; destinationStride
+0x7771D6: push    eax; source
 0x7771D7: mov     eax, [esp+6Ch+var_30]
 0x7771DB: add     eax, ebx
-0x7771DD: push    eax; Dst
+0x7771DD: push    eax; destination
 0x7771DE: mov     ecx, edi
-0x7771E0: call    sub_776D40
+0x7771E0: call    NiDX9VertexBufferManager_CopyStrided; MoonSugarEffect decode: strided memcpy helper used by fallback packer to copy source vertex arrays into mapped stream bytes.
 0x7771E5: jmp     short loc_7771EB
-0x7771E7: mov     edi, [esp+5Ch+var_48]
-0x7771EB: mov     eax, [esp+5Ch+var_2C]
+0x7771E7: mov     edi, [esp+5Ch+self]
+0x7771EB: mov     eax, [esp+5Ch+source]
 0x7771EF: test    eax, eax
 0x7771F1: jz      loc_77704E
 0x7771F7: test    byte ptr [esp+5Ch+arg_8], 2
 0x7771FC: jz      loc_77704E
 0x777202: movzx   ecx, word ptr [esp+5Ch+var_3C]
-0x777207: mov     edx, [esp+5Ch+var_44]
-0x77720B: push    ecx; int
-0x77720C: push    0Ch; Size
-0x77720E: push    edx; int
-0x77720F: push    eax; Src
+0x777207: mov     edx, [esp+5Ch+destinationStride]
+0x77720B: push    ecx; elementCount
+0x77720C: push    0Ch; elementBytes
+0x77720E: push    edx; destinationStride
+0x77720F: push    eax; source
 0x777210: mov     eax, [esp+6Ch+var_28]
 0x777214: add     eax, ebx
-0x777216: push    eax; Dst
+0x777216: push    eax; destination
 0x777217: mov     ecx, edi
-0x777219: call    sub_776D40
+0x777219: call    NiDX9VertexBufferManager_CopyStrided; MoonSugarEffect decode: strided memcpy helper used by fallback packer to copy source vertex arrays into mapped stream bytes.
 0x77721E: jmp     loc_77704E
 0x777223: mov     eax, [esp+5Ch+var_40]
 0x777227: pop     esi

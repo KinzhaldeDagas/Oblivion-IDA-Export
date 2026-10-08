@@ -1,4 +1,4 @@
-0x741080: push    esi
+0x741080: push    esi; Fog decode: clears default plain NiFogProperty global B401FC during shutdown.
 0x741081: mov     esi, ds:0B401FCh
 0x741087: test    esi, esi
 0x741089: jz      short loc_7410B1
@@ -14,6 +14,6 @@
 0x7410A1: push    1
 0x7410A3: mov     ecx, esi
 0x7410A5: call    eax
-0x7410A7: mov     dword ptr ds:0B401FCh, 0
+0x7410A7: mov     dword ptr ds:0B401FCh, 0; Fog fixed/default decode: clears default plain NiFogProperty global B401FC; lifetime cleanup only, not active fog payload.
 0x7410B1: pop     esi
 0x7410B2: retn

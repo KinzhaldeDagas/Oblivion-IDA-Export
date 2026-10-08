@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5F6540",
-    "line": "sub     esp, 108h",
+    "line": "sub     esp, 108h; Oblivion authoritative detection pipeline. Computes this detector's level against a target actor: obtains cached/physical LOS and distance, target light, boot weight, movement/running/sneak/combat/underwater/exterior state, Luck-modified Sneak values, detector Blindness AV 0x2D, target Chameleon AV 0x2E, and target Invisibility AV 0x2F; then calls Calc_DetectionLevel and updates the detector's process entry. Positive means detected. Fallout only corroborates the GetDetectionLevelAgainstActor terminology.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x5F6563",
-    "line": "push    esi",
+    "line": "push    esi; luckValue",
     "mnemonic": "push",
     "size": 1
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x5F656F",
-    "line": "jmp     Actor_GetDetectionLevel___Return",
+    "line": "jmp     Actor_GetDetectionLevelAgainstActor_Epilogue; Common Actor_GetDetectionLevelAgainstActor epilogue/stack cleanup tail.",
     "mnemonic": "jmp",
     "size": 5
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x5F65AE",
-    "line": "jz      Actor_GetDetectionLevel___Return_Neg1",
+    "line": "jz      Actor_GetDetectionLevelAgainstActor_ReturnNegativeOne; Shared tail for invalid/unrendered targets: returns detection level -1 through the common Oblivion epilogue.",
     "mnemonic": "jz",
     "size": 6
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x5F65C2",
-    "line": "jnz     Actor_GetDetectionLevel___ReturnDetectionLevel",
+    "line": "jnz     Actor_GetDetectionLevelAgainstActor_ReturnResult; Shared tail that forwards the computed Oblivion detection level to the common epilogue.",
     "mnemonic": "jnz",
     "size": 6
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x5F65ED",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x5F661B",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x5F6647",
-    "line": "call    sub_5F2820",
+    "line": "call    Actor_LineOfSight; Oblivion actor line-of-sight query used by detection, combat reach, tactical refresh, and ray-cast script paths. Performs cell/world-space and Havok visibility tests and can report the viewed actor segment through the output parameter. Fallout corroborates the Actor::LineOfSight family name only.",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x5F666E",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -625,7 +625,7 @@
   },
   {
     "ea": "0x5F6697",
-    "line": "call    sub_5F3B50",
+    "line": "call    Actor_GetBootWeight; Oblivion boot-noise input. Returns a default of 5 in complex-scene mode; suppresses boot weight for qualifying sneaking mastery/process state; otherwise reads weight from the relevant base form or the equipped footwear instance. Fallout corroborates the GetBootWeight label only.",
     "mnemonic": "call",
     "size": 5
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x5F66A2",
-    "line": "call    Actor_IsSneaking",
+    "line": "call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.",
     "mnemonic": "call",
     "size": 5
   },
@@ -679,13 +679,13 @@
   },
   {
     "ea": "0x5F66B4",
-    "line": "push    eax",
+    "line": "push    eax; skillValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F66B5",
-    "line": "call    Calc_MasteryFromSkill",
+    "line": "call    Calc_MasteryFromSkill; Map a base skill value to Oblivion's five mastery tiers using iSkillApprenticeMin=25, iSkillJourneymanMin=50, iSkillExpertMin=75, and iSkillMasterMin=100.",
     "mnemonic": "call",
     "size": 5
   },
@@ -829,7 +829,7 @@
   },
   {
     "ea": "0x5F670A",
-    "line": "call    Actor_IsSneaking",
+    "line": "call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.",
     "mnemonic": "call",
     "size": 5
   },
@@ -865,13 +865,13 @@
   },
   {
     "ea": "0x5F671C",
-    "line": "push    eax",
+    "line": "push    eax; skillValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F671D",
-    "line": "call    Calc_MasteryFromSkill",
+    "line": "call    Calc_MasteryFromSkill; Map a base skill value to Oblivion's five mastery tiers using iSkillApprenticeMin=25, iSkillJourneymanMin=50, iSkillExpertMin=75, and iSkillMasterMin=100.",
     "mnemonic": "call",
     "size": 5
   },
@@ -913,7 +913,7 @@
   },
   {
     "ea": "0x5F6736",
-    "line": "call    Actor_IsSneaking",
+    "line": "call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.",
     "mnemonic": "call",
     "size": 5
   },
@@ -949,7 +949,7 @@
   },
   {
     "ea": "0x5F674B",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1099,7 +1099,7 @@
   },
   {
     "ea": "0x5F67A1",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1123,7 +1123,7 @@
   },
   {
     "ea": "0x5F67AC",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1135,7 +1135,7 @@
   },
   {
     "ea": "0x5F67B3",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1189,7 +1189,7 @@
   },
   {
     "ea": "0x5F67CF",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1231,19 +1231,19 @@
   },
   {
     "ea": "0x5F67E3",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5F67E8",
-    "line": "push    eax",
+    "line": "push    eax; skillValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F67E9",
-    "line": "call    Calc_LuckModifiedSkill",
+    "line": "call    Calc_LuckModifiedSkill; AVU hook site: detector Sneak. Oblivion has just rounded detector Luck and Sneak via Double_To_SInt32 and calls Calc_LuckModifiedSkill(skill, luck); the original post-call Double_To_SInt32 remains.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1255,7 +1255,7 @@
   },
   {
     "ea": "0x5F67F1",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1279,7 +1279,7 @@
   },
   {
     "ea": "0x5F6801",
-    "line": "push    7",
+    "line": "push    7; luckValue",
     "mnemonic": "push",
     "size": 2
   },
@@ -1303,7 +1303,7 @@
   },
   {
     "ea": "0x5F680B",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1345,19 +1345,19 @@
   },
   {
     "ea": "0x5F6820",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5F6825",
-    "line": "push    eax",
+    "line": "push    eax; skillValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F6826",
-    "line": "call    Calc_LuckModifiedSkill",
+    "line": "call    Calc_LuckModifiedSkill; AVU hook site: target Sneak. Oblivion has just rounded target Luck and Sneak via Double_To_SInt32 and calls Calc_LuckModifiedSkill(skill, luck); the original post-call Double_To_SInt32 remains.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1369,7 +1369,7 @@
   },
   {
     "ea": "0x5F682E",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1393,7 +1393,7 @@
   },
   {
     "ea": "0x5F683E",
-    "line": "push    2Fh ; '/'",
+    "line": "push    2Fh ; '/'; Target Invisibility AV 0x2F check. If current integer invisibility is positive, Oblivion skips normal detection, stores chameleon/invis marker 100, and forces detection result -100.",
     "mnemonic": "push",
     "size": 2
   },
@@ -1447,7 +1447,7 @@
   },
   {
     "ea": "0x5F6861",
-    "line": "mov     edx, [ebp+0]",
+    "line": "mov     edx, [ebp+0]; AVU hook site: target Chameleon. Vanilla reads current integer AV 0x2E, stores it as the detection invisibility/chameleon parameter, and forces result -100 when value >= 100.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1639,7 +1639,7 @@
   },
   {
     "ea": "0x5F68BE",
-    "line": "mov     edx, [eax+284h]",
+    "line": "mov     edx, [eax+284h]; AVU hook site: detector Blindness. Vanilla reads current integer AV 0x2D and passes it into Calc_DetectionLevel.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1711,7 +1711,7 @@
   },
   {
     "ea": "0x5F68DB",
-    "line": "call    Calc_DetectionLevel",
+    "line": "call    Calc_DetectionLevel; Entry to Oblivion's staged detection formula. Inputs include detector/target Sneak, LOS, distance, Blindness, target light, Chameleon/Invisibility, boot weight, movement, combat/attack, running, underwater/sleep, and exterior state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1789,7 +1789,7 @@
   },
   {
     "ea": "0x5F6909",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1927,7 +1927,7 @@
   },
   {
     "ea": "0x5F6959",
-    "line": "jz      Actor_GetDetectionLevel___ReturnDetectionLevel",
+    "line": "jz      Actor_GetDetectionLevelAgainstActor_ReturnResult; Shared tail that forwards the computed Oblivion detection level to the common epilogue.",
     "mnemonic": "jz",
     "size": 6
   },
@@ -1969,7 +1969,7 @@
   },
   {
     "ea": "0x5F6972",
-    "line": "jnz     Actor_GetDetectionLevel___ReturnDetectionLevel",
+    "line": "jnz     Actor_GetDetectionLevelAgainstActor_ReturnResult; Shared tail that forwards the computed Oblivion detection level to the common epilogue.",
     "mnemonic": "jnz",
     "size": 6
   },
@@ -2077,7 +2077,7 @@
   },
   {
     "ea": "0x5F69BE",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2113,7 +2113,7 @@
   },
   {
     "ea": "0x5F69D2",
-    "line": "jnz     Actor_GetDetectionLevel___ReturnDetectionLevel",
+    "line": "jnz     Actor_GetDetectionLevelAgainstActor_ReturnResult; Shared tail that forwards the computed Oblivion detection level to the common epilogue.",
     "mnemonic": "jnz",
     "size": 6
   },
@@ -2977,7 +2977,7 @@
   },
   {
     "ea": "0x5F6BCE",
-    "line": "push    2Dh ; '-'",
+    "line": "push    2Dh ; '-'; AVU hook site: detection debug text only. Vanilla rereads detector Blindness AV 0x2D for the debug line; AVU keeps this display consistent with its optional Blindness DR.",
     "mnemonic": "push",
     "size": 2
   },
@@ -5179,7 +5179,7 @@
   },
   {
     "ea": "0x5F70BD",
-    "line": "jmp     short Actor_GetDetectionLevel___ReturnDetectionLevel",
+    "line": "jmp     short Actor_GetDetectionLevelAgainstActor_ReturnResult; Shared tail that forwards the computed Oblivion detection level to the common epilogue.",
     "mnemonic": "jmp",
     "size": 2
   }

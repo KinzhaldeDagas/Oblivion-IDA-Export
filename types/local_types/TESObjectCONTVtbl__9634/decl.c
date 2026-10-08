@@ -1,1 +1,4 @@
-TESObjectCONTVtbl
+struct TESObjectCONTVtbl
+{
+TESBoundObjectVtbl super;
+};

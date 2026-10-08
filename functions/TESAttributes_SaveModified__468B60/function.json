@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x468B60",
+      "0x468B7B"
+    ]
+  ],
+  "chunks_sha256": "80044e6df4bf9a5f77c61744899568337f0ba1d2b16a6ee81f8a20708e06ba5f",
+  "comment_regular": "Verified: ECX component receiver; one stack mask for save (RET 4), two stack words for load (RET 8). No extra register parameters. Mask 0x8 transfers the 8 attribute bytes at component +4.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "TESAttributes_SaveModified",
   "end_ea": "0x468B7B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
-  "has_pseudocode": false,
+  "has_pseudocode": true,
   "name": "TESAttributes_SaveModified",
   "segment": ".text",
   "sha256": "80044e6df4bf9a5f77c61744899568337f0ba1d2b16a6ee81f8a20708e06ba5f",
   "size": 27,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x468B60",
-  "type": "void *__thiscall(int this, char)",
+  "total_chunk_size": 27,
+  "type": "void __thiscall(TESAttributes *self, ActorBaseSaveChangeMask changeMask)",
   "xrefs_from_count": 9,
   "xrefs_to_count": 2
 }

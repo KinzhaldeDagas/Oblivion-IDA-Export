@@ -1,13 +1,13 @@
 0x62E790: sub     esp, 20h
 0x62E793: push    esi
 0x62E794: push    0; Seed
-0x62E796: call    GetRandomLargeInteger?
+0x62E796: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x62E79B: mov     [esp+28h+var_20], eax
 0x62E79F: fild    [esp+28h+var_20]
 0x62E7A3: push    0; Seed
 0x62E7A5: fsub    qword ptr ds:0A71DB8h
 0x62E7AB: fstp    [esp+2Ch+var_1C]
-0x62E7AF: call    GetRandomLargeInteger?
+0x62E7AF: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x62E7B4: mov     esi, [esp+2Ch+arg_0]
 0x62E7B8: mov     [esp+2Ch+var_20], eax
 0x62E7BC: fild    [esp+2Ch+var_20]
@@ -21,10 +21,10 @@
 0x62E7D9: fstp    dword ptr [esi+4]
 0x62E7DC: fldz
 0x62E7DE: fstp    dword ptr [esi+8]
-0x62E7E1: call    sub_43F350
+0x62E7E1: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x62E7E6: fstp    st
 0x62E7E8: push    0; Seed
-0x62E7EA: call    GetRandomLargeInteger?
+0x62E7EA: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x62E7EF: mov     [esp+28h+arg_0], eax
 0x62E7F3: fild    [esp+28h+arg_0]
 0x62E7F7: add     esp, 4

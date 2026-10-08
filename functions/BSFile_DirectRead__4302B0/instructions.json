@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4302B0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; MEF PLAN 2026-09-07: Revalidated read ABI: self in ECX, destination/count stack, RET8. Calls747E80 at43032C and adds returned byte count to owner+148h at430331. EBP/EDI in prior __userpurge prototype were inferred artifacts, not arguments. Prior declaration retained in analysis ledger; corrected to ordinary thiscall.",
     "mnemonic": "push",
     "size": 2
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x4302D8",
-    "line": "test    byte ptr dword_B33A00, al",
+    "line": "test    byte ptr unk_B33A00, al",
     "mnemonic": "test",
     "size": 6
   },
@@ -85,13 +85,13 @@
   },
   {
     "ea": "0x4302E0",
-    "line": "or      dword_B33A00, eax",
+    "line": "or      dword ptr unk_B33A00, eax",
     "mnemonic": "or",
     "size": 6
   },
   {
     "ea": "0x4302E6",
-    "line": "mov     ecx, offset stru_B33980; lpCriticalSection",
+    "line": "mov     ecx, offset unk_B33980; lpCriticalSection",
     "mnemonic": "mov",
     "size": 5
   },
@@ -193,19 +193,19 @@
   },
   {
     "ea": "0x430328",
-    "line": "push    eax; Count",
+    "line": "push    eax; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x430329",
-    "line": "push    ecx; Dst",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x43032A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -256,5 +256,71 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9ABDE0",
+    "line": "mov     eax, dword ptr unk_B33A00",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9ABDE5",
+    "line": "and     eax, 0FFFFFFFEh",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9ABDE8",
+    "line": "mov     dword ptr unk_B33A00, eax",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9ABDED",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9ABDEE",
+    "line": "mov     edx, [esp+Count]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9ABDF2",
+    "line": "lea     eax, [edx-4]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9ABDF5",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9ABDF8",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9ABDFA",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9ABDFF",
+    "line": "mov     eax, offset stru_AD8B38",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9ABE04",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

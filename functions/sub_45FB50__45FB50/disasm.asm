@@ -1,9 +1,9 @@
-0x45FB50: push    ecx
+0x45FB50: push    ecx; [Verified] TESSaveLoadGame_SaveTempEffectsList obtains the actor process manager's temp-effect save size, writes a bounded Temp Effects List chunk, calls ActorProcessManager_SaveTempEffects, checks full-buffer consumption, and frees the temporary buffer.
 0x45FB51: push    ebp
 0x45FB52: push    esi; ArgList
 0x45FB53: mov     esi, ecx
-0x45FB55: mov     ecx, offset ActorProcessManager_ptr
-0x45FB5A: call    sub_679480
+0x45FB55: mov     ecx, (offset qword_B3BB2C+1D4h); self
+0x45FB5A: call    ActorProcessManager_GetTempEffectsSaveSize; Verified call-chain anchor: TESSaveLoadGame_SaveGame invokes the temp-effect size/save wrapper from the global TESSaveLoadGame serialization pipeline.
 0x45FB5F: mov     ecx, [esi+18h]
 0x45FB62: mov     ebp, [esp+0Ch+arg_0]
 0x45FB66: shr     ecx, 9
@@ -45,8 +45,8 @@
 0x45FBDA: add     esp, 4
 0x45FBDD: push    edi
 0x45FBDE: mov     edi, [esi+14h]
-0x45FBE1: mov     ecx, offset ActorProcessManager_ptr
-0x45FBE6: call    sub_679630
+0x45FBE1: mov     ecx, (offset qword_B3BB2C+1D4h); self
+0x45FBE6: call    ActorProcessManager_SaveTempEffects; [Verified] ActorProcessManager_SaveTempEffects walks active and extended effect lists, skips effects whose virtual IsSaveable returns false, writes each saveable effect's one-byte GetTypeID, then calls SaveGame and increments the count. Thus fallback decals may persist without a target reference, while generated-geometry decals require a valid target reference and 3D.
 0x45FBEB: mov     eax, [esp+10h+var_4]
 0x45FBEF: lea     edx, [edi+eax]
 0x45FBF2: cmp     edx, [esi+14h]

@@ -9,7 +9,7 @@
 0x5F23F0: mov     eax, [ecx]
 0x5F23F2: mov     edx, [eax+8]
 0x5F23F5: push    ebx
-0x5F23F6: push    edi
+0x5F23F6: push    edi; flushTermination
 0x5F23F7: call    edx
 0x5F23F9: mov     ecx, esi
 0x5F23FB: mov     edi, eax
@@ -79,7 +79,7 @@
 0x5F249D: pop     esi
 0x5F249E: retn
 0x5F249F: mov     ecx, esi; this
-0x5F24A1: call    TESObjectREFR_IsPersistent?
+0x5F24A1: call    TESObjectREFR_IsPersistent
 0x5F24A6: test    al, al
 0x5F24A8: mov     ecx, esi
 0x5F24AA: jz      short loc_5F24D4
@@ -107,19 +107,19 @@
 0x5F24D9: test    al, al
 0x5F24DB: jnz     short loc_5F250C
 0x5F24DD: mov     ecx, esi; this
-0x5F24DF: call    TESObjectREFR_GetParentCell
+0x5F24DF: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5F24E4: test    eax, eax
 0x5F24E6: jz      short loc_5F250C
 0x5F24E8: mov     ecx, esi
 0x5F24EA: call    sub_5E4B00
-0x5F24EF: lea     ecx, [esi+68h]
-0x5F24F2: call    MagicTarget_RemoveAllEffects
+0x5F24EF: lea     ecx, [esi+68h]; this
+0x5F24F2: call    MagicTarget_RemoveAllEffects; Verified no-argument target method: walks the EffectNode chain and calls ActiveEffect_Base_Remove(effect, 1) for each nonnull entry. It marks/flushes effect termination but leaves list unlink, PostRemoveEffect, and deleting destruction to the process loop or explicit removal paths.
 0x5F24F7: push    0
 0x5F24F9: mov     ecx, esi
 0x5F24FB: call    sub_5EDA20
-0x5F2500: mov     ecx, ds:0B33B00h
-0x5F2506: push    esi
-0x5F2507: call    sub_463A90
+0x5F2500: mov     ecx, ds:0B33B00h; self
+0x5F2506: push    esi; form
+0x5F2507: call    TESSaveLoadGame_UnloadForm;
 0x5F250C: mov     eax, [esi]
 0x5F250E: mov     edx, [eax+10h]
 0x5F2511: push    1

@@ -25,7 +25,7 @@
 0x5D47F3: push    0
 0x5D47F5: call    EffectItem_MagickaCostForCaster
 0x5D47FA: fiadd   dword ptr [esi+7Ch]
-0x5D47FD: call    Double_To_SInt32
+0x5D47FD: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5D4802: mov     [esi+7Ch], eax
 0x5D4805: mov     edi, [edi+4]
 0x5D4808: test    edi, edi
@@ -34,18 +34,18 @@
 0x5D480D: fild    dword ptr [esi+7Ch]
 0x5D4810: push    ecx
 0x5D4811: mov     ecx, [esi+4]; this
-0x5D4814: fstp    [esp+0Ch+a2]; a3
-0x5D4817: push    0FAEh; a2
-0x5D481C: call    Tile_SetFloat
+0x5D4814: fstp    [esp+0Ch+a2]; value
+0x5D4817: push    0FAEh; propertyCode
+0x5D481C: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D4821: mov     edx, [esi+28h]
 0x5D4824: movzx   eax, byte ptr [edx+74h]
 0x5D4828: mov     [esp+8+var_4], eax
 0x5D482C: push    ecx
 0x5D482D: mov     ecx, [esi+4]; this
 0x5D4830: fild    [esp+0Ch+var_4]
-0x5D4834: fstp    [esp+0Ch+a2]; a3
-0x5D4837: push    0FAFh; a2
-0x5D483C: call    Tile_SetFloat
+0x5D4834: fstp    [esp+0Ch+a2]; value
+0x5D4837: push    0FAFh; propertyCode
+0x5D483C: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D4841: mov     ecx, [esi+28h]
 0x5D4844: movzx   edx, byte ptr [ecx+74h]
 0x5D4848: imul    edx, [esi+7Ch]
@@ -56,15 +56,15 @@
 0x5D4852: fldz
 0x5D4854: push    ecx
 0x5D4855: mov     ecx, [esi+4]; this
-0x5D4858: fstp    [esp+0Ch+a2]; a3
-0x5D485B: push    0FAEh; a2
-0x5D4860: call    Tile_SetFloat
+0x5D4858: fstp    [esp+0Ch+a2]; value
+0x5D485B: push    0FAEh; propertyCode
+0x5D4860: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D4865: fldz
 0x5D4867: push    ecx
-0x5D4868: fstp    [esp+0Ch+a2]; a3
+0x5D4868: fstp    [esp+0Ch+a2]; value
 0x5D486B: mov     ecx, [esi+4]; this
-0x5D486E: push    0FAFh; a2
-0x5D4873: call    Tile_SetFloat
+0x5D486E: push    0FAFh; propertyCode
+0x5D4873: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D4878: pop     esi
 0x5D4879: pop     ecx
 0x5D487A: retn

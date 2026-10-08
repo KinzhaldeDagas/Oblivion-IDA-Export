@@ -54,7 +54,7 @@
 0x54DF44: cmp     eax, ebx
 0x54DF46: jz      short loc_54DF51
 0x54DF48: push    eax
-0x54DF49: call    FormHeapFree
+0x54DF49: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x54DF4E: add     esp, 4
 0x54DF51: mov     [esi+4], ebx
 0x54DF54: mov     [esi+8], ebx
@@ -75,7 +75,7 @@
 0x54DF7B: push    1
 0x54DF7D: mov     ecx, esi
 0x54DF7F: call    eax
-0x54DF81: push    offset NiRefObject_objcount; lpAddend
+0x54DF81: push    0B3FD64h; lpAddend
 0x54DF86: mov     dword ptr [ebp+0], offset ??_7NiRefObject@@6B@; const NiRefObject::`vftable'
 0x54DF8D: call    dword ptr ds:0A2807Ch
 0x54DF93: mov     ecx, dword ptr [esp+2Ch+var_C]
@@ -87,3 +87,18 @@
 0x54DFA2: pop     ebx
 0x54DFA3: add     esp, 18h
 0x54DFA6: retn
+0x9BBA20: mov     ecx, [ebp-18h]
+0x9BBA23: jmp     NiRefObject_destr
+0x9BBA28: mov     ecx, [ebp-18h]
+0x9BBA2B: add     ecx, 8; slot
+0x9BBA2E: jmp     NiPointerSlot_Release
+0x9BBA33: mov     ecx, [ebp-18h]
+0x9BBA36: add     ecx, 0Ch; this
+0x9BBA39: jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.
+0x9BBA3E: mov     edx, [esp+arg_4]
+0x9BBA42: lea     eax, [edx-1Ch]
+0x9BBA45: mov     ecx, [edx-20h]
+0x9BBA48: xor     ecx, eax
+0x9BBA4A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BBA4F: mov     eax, offset stru_AE5720
+0x9BBA54: jmp     ___CxxFrameHandler3

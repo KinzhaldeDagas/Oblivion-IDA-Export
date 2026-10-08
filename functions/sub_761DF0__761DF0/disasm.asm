@@ -1,4 +1,4 @@
-0x761DF0: push    esi
+0x761DF0: push    esi; Oblivion-authoritative: lazily loads D3D9.DLL, resolves Direct3DCreate9, and creates the process IDirect3D9 singleton with SDK version 0x20. Returns 0 on success, -1 on failure.
 0x761DF1: xor     esi, esi
 0x761DF3: cmp     ds:0B42154h, esi
 0x761DF9: jnz     short loc_761E59
@@ -17,18 +17,18 @@
 0x761E26: mov     ds:0B42158h, eax
 0x761E2B: jz      short loc_761E3A
 0x761E2D: push    20h ; ' '
-0x761E2F: call    eax
+0x761E2F: call    eax ; g_Direct3DCreate9
 0x761E31: test    eax, eax
 0x761E33: mov     ds:0B42154h, eax
 0x761E38: jnz     short loc_761E4C
 0x761E3A: push    offset aCreateD3d9Inst; "Create D3D9 instance...FAILED\n"
-0x761E3F: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x761E3F: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x761E44: add     esp, 4
 0x761E47: or      eax, 0FFFFFFFFh
 0x761E4A: pop     esi
 0x761E4B: retn
 0x761E4C: push    offset aCreateD3d9In_0; "Create D3D9 instance...SUCCESSFUL\n"
-0x761E51: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x761E51: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x761E56: add     esp, 4
 0x761E59: mov     eax, esi
 0x761E5B: pop     esi

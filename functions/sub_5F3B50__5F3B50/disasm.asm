@@ -1,4 +1,4 @@
-0x5F3B50: push    esi
+0x5F3B50: push    esi; Oblivion boot-noise input. Returns a default of 5 in complex-scene mode; suppresses boot weight for qualifying sneaking mastery/process state; otherwise reads weight from the relevant base form or the equipped footwear instance. Fallout corroborates the GetBootWeight label only.
 0x5F3B51: push    edi
 0x5F3B52: xor     edi, edi
 0x5F3B54: cmp     byte ptr ds:0B333B8h, 0
@@ -25,8 +25,8 @@
 0x5F3B92: push    1Fh
 0x5F3B94: mov     ecx, esi
 0x5F3B96: call    Actor_GetBaseCalcAVi
-0x5F3B9B: push    eax
-0x5F3B9C: call    Calc_MasteryFromSkill
+0x5F3B9B: push    eax; skillValue
+0x5F3B9C: call    Calc_MasteryFromSkill; Map a base skill value to Oblivion's five mastery tiers using iSkillApprenticeMin=25, iSkillJourneymanMin=50, iSkillExpertMin=75, and iSkillMasterMin=100.
 0x5F3BA1: add     esp, 4
 0x5F3BA4: cmp     eax, 2
 0x5F3BA7: jl      short loc_5F3BAE
@@ -47,7 +47,7 @@
 0x5F3BCC: test    eax, eax
 0x5F3BCE: jz      short loc_5F3C1E
 0x5F3BD0: fld     dword ptr [eax+110h]
-0x5F3BD6: call    Double_To_SInt32
+0x5F3BD6: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5F3BDB: mov     edi, eax
 0x5F3BDD: pop     edi
 0x5F3BDE: pop     esi
@@ -67,12 +67,12 @@
 0x5F3C00: test    eax, eax
 0x5F3C02: jz      short loc_5F3C0E
 0x5F3C04: fld     dword ptr [eax+58h]
-0x5F3C07: call    Double_To_SInt32
+0x5F3C07: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5F3C0C: mov     edi, eax
 0x5F3C0E: mov     ecx, esi
 0x5F3C10: call    ContainerEntryExtraData_DestroyDataTable
 0x5F3C15: push    esi
-0x5F3C16: call    FormHeapFree
+0x5F3C16: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5F3C1B: add     esp, 4
 0x5F3C1E: mov     eax, edi
 0x5F3C20: pop     edi

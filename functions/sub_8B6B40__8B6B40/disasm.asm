@@ -8,7 +8,7 @@
 0x8B6B53: test    eax, eax
 0x8B6B55: jz      short loc_8B6B60
 0x8B6B57: mov     ecx, eax
-0x8B6B59: call    sub_564030
+0x8B6B59: call    OB_bhkCapsuleShapeCinfo_InitDefaults_010201A0; Treetop collision helper: initializes the local capsule cinfo defaults before 0x565510 fills radius and two +Z/up-axis endpoints for bhkCapsuleShape construction.
 0x8B6B5E: jmp     short loc_8B6B62
 0x8B6B60: xor     eax, eax
 0x8B6B62: cmp     dword ptr [esi+8], 0

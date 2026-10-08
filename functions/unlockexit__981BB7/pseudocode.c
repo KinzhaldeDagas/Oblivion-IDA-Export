@@ -1,4 +1,4 @@
-int _unlockexit()
+void _unlockexit()
 {
-  return _unlock(8);
+  _unlock(8); /*0x981bb9*/
 }

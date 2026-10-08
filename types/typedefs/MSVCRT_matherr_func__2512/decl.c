@@ -1,1 +1,1 @@
-MSVCRT_matherr_func
+typedef int (*MSVCRT_matherr_func)(_exception *);

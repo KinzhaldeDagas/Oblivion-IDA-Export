@@ -37,13 +37,13 @@
 0x450F7A: cmp     [esi+414h], ebx
 0x450F80: mov     edi, [esi+260h]
 0x450F86: jnz     short loc_450F8D
-0x450F88: call    TESFile_GetDecompressedRecordData
+0x450F88: call    TESFile_GetDecompressedRecordData; EngineIssues review: compressed TES record loader trusts advertised decompressed size and subtracts 4 from compressed length before inflate; verify length>=4 and cap decompressed size.
 0x450F8D: mov     eax, [esi+414h]
 0x450F93: cmp     eax, ebx
 0x450F95: jz      short loc_450F65
-0x450F97: cmp     edi, [esi+418h]
+0x450F97: cmp     edi, [esi+418h]; MEF v20 fix: compressed TES chunk header tail guard. Validate currentChunkOffset + 6 <= currentRecordDCLength before reading type/length; invalid data uses existing chunk-header fail path 0x450F65.
 0x450F9D: jnb     short loc_450F65
-0x450F9F: mov     ecx, [eax+edi]
+0x450F9F: mov     ecx, [eax+edi]; EngineIssues review: compressed chunk header path checks currentChunkOffset < decompressed length but then reads 6 bytes; verify offset+6 <= length.
 0x450FA2: add     eax, edi
 0x450FA4: mov     [esp+18h+var_8], ecx
 0x450FA8: mov     dx, [eax+4]
@@ -60,7 +60,7 @@
 0x450FD5: push    ecx; Dst
 0x450FD6: mov     ecx, esi; a1
 0x450FD8: mov     dword ptr [esp+20h+Dst], ebx
-0x450FDC: call    TESFile_GetChunkData
+0x450FDC: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x450FE1: mov     ecx, esi
 0x450FE3: call    TESFile_GetNextChunk
 0x450FE8: mov     edx, dword ptr [esp+18h+Dst]

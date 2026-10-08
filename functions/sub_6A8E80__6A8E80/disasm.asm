@@ -1,4 +1,4 @@
-0x6A8E80: sub     esp, 248h
+0x6A8E80: sub     esp, 248h; NoCombatMusic research: music type 4 selects Data\Music\Battle\*.mp3.
 0x6A8E86: mov     eax, ds:0B30AACh
 0x6A8E8B: xor     eax, esp
 0x6A8E8D: mov     [esp+248h+var_4], eax
@@ -63,7 +63,7 @@
 0x6A8F56: test    ebx, ebx
 0x6A8F58: jz      loc_6A8FF5
 0x6A8F5E: push    0; Seed
-0x6A8F60: call    GetRandomLargeInteger?
+0x6A8F60: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x6A8F65: cdq
 0x6A8F66: idiv    ebx
 0x6A8F68: add     esp, 4
@@ -93,3 +93,41 @@
 0x6A8FA7: mov     ecx, eax
 0x6A8FA9: sub     edx, ecx
 0x6A8FAB: jmp     short loc_6A8FB0
+0x6A8FB0: mov     cl, [eax]
+0x6A8FB2: mov     [edx+eax], cl
+0x6A8FB5: add     eax, 1
+0x6A8FB8: test    cl, cl
+0x6A8FBA: jnz     short loc_6A8FB0
+0x6A8FBC: lea     eax, [esp+258h+FindFileData.cFileName]
+0x6A8FC0: mov     ecx, eax
+0x6A8FC2: mov     dl, [eax]
+0x6A8FC4: add     eax, 1
+0x6A8FC7: test    dl, dl
+0x6A8FC9: jnz     short loc_6A8FC2
+0x6A8FCB: sub     eax, ecx
+0x6A8FCD: mov     esi, ecx
+0x6A8FCF: add     edi, 0FFFFFFFFh
+0x6A8FD2: mov     cl, [edi+1]
+0x6A8FD5: add     edi, 1
+0x6A8FD8: test    cl, cl
+0x6A8FDA: jnz     short loc_6A8FD2
+0x6A8FDC: mov     ecx, eax
+0x6A8FDE: shr     ecx, 2
+0x6A8FE1: rep movsd
+0x6A8FE3: mov     ecx, eax
+0x6A8FE5: and     ecx, 3
+0x6A8FE8: rep movsb
+0x6A8FEA: mov     al, 1
+0x6A8FEC: jmp     short loc_6A8FF7
+0x6A8FEE: push    esi; hFindFile
+0x6A8FEF: call    dword ptr ds:0A28120h
+0x6A8FF5: xor     al, al
+0x6A8FF7: mov     ecx, [esp+258h+var_4]
+0x6A8FFE: pop     edi
+0x6A8FFF: pop     esi
+0x6A9000: pop     ebp
+0x6A9001: pop     ebx
+0x6A9002: xor     ecx, esp
+0x6A9004: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x6A9009: add     esp, 248h
+0x6A900F: retn    8

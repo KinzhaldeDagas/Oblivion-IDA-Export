@@ -1,19 +1,32 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x663980",
+      "0x6639F8"
+    ]
+  ],
+  "chunks_sha256": "3c5276894700a20d1437b108b61ac21483331182e8452d192ae55311e824ccef",
+  "comment_regular": "Frees every queued eight-byte attribute-bonus bucket and the BSSimpleList head, then clears PlayerCharacter::attributeBonuses. Used before loading a replacement queue.",
+  "comment_repeatable": "Frees every queued eight-byte attribute-bonus bucket and the BSSimpleList head, then clears PlayerCharacter::attributeBonuses. Used before loading a replacement queue.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_663980",
+  "display_name": "Player_ClearAttributeBonusBuckets",
   "end_ea": "0x6639F8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_663980",
+  "name": "Player_ClearAttributeBonusBuckets",
   "segment": ".text",
   "sha256": "3c5276894700a20d1437b108b61ac21483331182e8452d192ae55311e824ccef",
   "size": 120,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x663980",
-  "type": "void __thiscall(unsigned int *this)",
+  "total_chunk_size": 120,
+  "type": "void __thiscall(PlayerCharacter *this)",
   "xrefs_from_count": 43,
   "xrefs_to_count": 2
 }

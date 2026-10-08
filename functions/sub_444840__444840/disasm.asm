@@ -4,10 +4,10 @@
 0x444845: push    esi
 0x444846: mov     ebx, ecx
 0x444848: push    edi
-0x444849: push    1; ArgList
+0x444849: push    1; enabled
 0x44484B: mov     [esp+2Ch+var_10], ebx
 0x44484F: mov     byte ptr [ebx+51h], 1
-0x444853: call    sub_65D810
+0x444853: call    SetGodMode; Sets and returns g_godModeEnabled (0x00B3BB06).
 0x444858: push    offset aRunningCellTes; "Running Cell Test"
 0x44485D: call    sub_40FEC0
 0x444862: add     esp, 8
@@ -20,7 +20,6 @@
 0x44487E: mov     [esp+28h+var_18], eax
 0x444882: jz      loc_4449BC
 0x444888: jmp     short loc_444894
-0x44488A: align 10h
 0x444890: mov     eax, [esp+28h+var_18]
 0x444894: cmp     dword ptr [eax+4], 0
 0x444898: jnz     short loc_4448A3
@@ -33,20 +32,20 @@
 0x4448AE: mov     ecx, ebx
 0x4448B0: call    sub_4431F0
 0x4448B5: fld     dword ptr [esi+98h]
-0x4448BB: call    Double_To_SInt32
+0x4448BB: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4448C0: fld     dword ptr [esi+9Ch]
 0x4448C6: mov     ebp, eax
 0x4448C8: sar     ebp, 0Ch
-0x4448CB: call    Double_To_SInt32
+0x4448CB: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4448D0: fld     dword ptr [esi+0A0h]
 0x4448D6: sar     eax, 0Ch
-0x4448D9: mov     [esp+28h+var_14], eax
-0x4448DD: call    Double_To_SInt32
+0x4448D9: mov     [esp+28h+cellY], eax
+0x4448DD: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4448E2: fld     dword ptr [esi+0A4h]
 0x4448E8: mov     edi, eax
 0x4448EA: sar     edi, 0Ch
 0x4448ED: mov     [esp+28h+var_4], edi
-0x4448F1: call    Double_To_SInt32
+0x4448F1: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4448F6: mov     ebx, eax
 0x4448F8: mov     eax, [esi+1Ch]
 0x4448FB: sar     ebx, 0Ch
@@ -68,7 +67,7 @@
 0x444925: mov     edx, [eax+0D4h]
 0x44492B: mov     ecx, esi
 0x44492D: call    edx
-0x44492F: mov     ecx, [esp+28h+var_14]
+0x44492F: mov     ecx, [esp+28h+cellY]
 0x444933: mov     edx, [esi+0Ch]
 0x444936: push    ebx
 0x444937: push    edi
@@ -82,12 +81,12 @@
 0x444949: cmp     ebp, edi
 0x44494B: jge     short loc_4449A1
 0x44494D: mov     eax, ds:0B06A2Ch
-0x444952: mov     edi, [esp+28h+var_14]
+0x444952: mov     edi, [esp+28h+cellY]
 0x444956: cmp     edi, ebx
 0x444958: jge     short loc_444999
 0x44495A: lea     ebx, [ebx+0]
-0x444960: push    edi; signed int
-0x444961: push    ebp; signed int
+0x444960: push    edi; cellY
+0x444961: push    ebp; cellX
 0x444962: mov     ecx, esi; this
 0x444964: call    TESWorldSpace__GetCellAtCellCoord
 0x444969: test    eax, eax
@@ -95,7 +94,7 @@
 0x44496D: push    edi; int
 0x44496E: push    ebp; ArgList
 0x44496F: mov     ecx, esi
-0x444971: call    sub_4F1630
+0x444971: call    TESWorldSpace_LoadExteriorCellAtCoord; Verified: exterior-cell loader checks cellMap first, searches master files using cellOffsetsArray fast path or GRUP/CELL fallback, creates a missing TESObjectCELL, post-fixes it, then attaches worldspace-indexed references.
 0x444976: test    eax, eax
 0x444978: jz      short loc_44498E
 0x44497A: mov     ecx, [esp+28h+var_C]

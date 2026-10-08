@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5F48D0",
-    "line": "push    esi",
+    "line": "push    esi; Player attack-animation admission uses Oblivion behavior and preserves a compiler-specific register/FPU ABI. Bow admission requires equipped AMMO and an AttackBow group with the required Start/Attach/Hold/Release/End note contract. Rejects a new bow attack while action 5 (AttackBowArrowAttached) remains at phase <=3; an accepted bow group commits action 4 (AttackBow). This path does not automatically reload: later attack input must admit another AttackBow sequence.",
     "mnemonic": "push",
     "size": 1
   },
@@ -25,13 +25,13 @@
   },
   {
     "ea": "0x5F48DA",
-    "line": "push    eax",
+    "line": "push    eax; skillValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F48DB",
-    "line": "call    Calc_MasteryFromSkill",
+    "line": "call    Calc_MasteryFromSkill; Map a base skill value to Oblivion's five mastery tiers using iSkillApprenticeMin=25, iSkillJourneymanMin=50, iSkillExpertMin=75, and iSkillMasterMin=100.",
     "mnemonic": "call",
     "size": 5
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x5F48E9",
-    "line": "call    sub_5EC180",
+    "line": "call    MobileObject_IsJumpSuppressedByFallAnimOrInAir; Returns true for swimming/falling style animation groups 0x28..0x2A, or if current character state id == 2 InAir. Player jump path uses this to suppress normal jump handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x5F4913",
-    "line": "mov     ecx, offset dword_B3BDB0",
+    "line": "mov     ecx, (offset qword_B3BB2C+284h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x5F493B",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x5F4941",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x5F4970",
-    "line": "jnz     short loc_5F499C",
+    "line": "jnz     short loc_5F499C; Attack admission specially rejects only action 5 while its slot-3 phase is <= Release. Action 3 is not rejected here and may be replaced by a new accepted attack.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x5F498A",
-    "line": "push    3",
+    "line": "push    3; slot",
     "mnemonic": "push",
     "size": 2
   },
@@ -433,13 +433,13 @@
   },
   {
     "ea": "0x5F4990",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F4992",
-    "line": "call    ActorAnimData_GetSomethingFromField8Value",
+    "line": "call    ActorAnimData_GetSlotActionState; Reads the per-slot action/state dword at ActorAnimData +0x48 + 4*normalizedSlot. Native aliases slot 5 to slot 0 and slot 6 to slot 3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x5F49BA",
-    "line": "call    edx",
+    "line": "call    edx; Bow attack startup requires GetEquippedAmmoData(process, true) to return non-null before the attack animation is allowed to proceed.",
     "mnemonic": "call",
     "size": 2
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x5F49C1",
-    "line": "xor     al, al",
+    "line": "xor     al, al; A later bow-class attack is rejected when GetEquippedAmmoData(process, true) returns NULL. The final-shot setter therefore closes the next-attack admission path; this is not a reload animation transition.",
     "mnemonic": "xor",
     "size": 2
   },
@@ -649,25 +649,25 @@
   },
   {
     "ea": "0x5F49F0",
-    "line": "push    0",
+    "line": "push    0; casterFilterOrNull",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F49F2",
-    "line": "push    49564E49h",
+    "line": "push    49564E49h; effectCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5F49F7",
-    "line": "lea     ecx, [esi+68h]",
+    "line": "lea     ecx, [esi+68h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x5F49FA",
-    "line": "call    sub_6A24B0",
+    "line": "call    MagicTarget_RemoveActiveEffectsByCode; Ordinary attack-start path removes all 'INVI' effects before starting the attack. The bow Release tail repeats this at 0x5FD4F2, catching invisibility regained between attack start and release or unusual entry paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -757,7 +757,7 @@
   },
   {
     "ea": "0x5F4A25",
-    "line": "mov     edi, [esp+0Ch+arg_0]",
+    "line": "mov     edi, [esp+0Ch+groupID]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -787,7 +787,7 @@
   },
   {
     "ea": "0x5F4A35",
-    "line": "mov     edi, [esp+0Ch+arg_0]",
+    "line": "mov     edi, [esp+0Ch+groupID]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -883,31 +883,31 @@
   },
   {
     "ea": "0x5F4A66",
-    "line": "push    0",
+    "line": "push    0; forceWeaponPrefix",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F4A68",
-    "line": "push    0",
+    "line": "push    0; weaponEntryDataArg",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F4A6A",
-    "line": "push    edi",
+    "line": "push    edi; groupID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F4A6B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F4A6D",
-    "line": "call    Actor_LoadAnimGroup?",
+    "line": "call    Actor_LoadAnimGroup_; Load requested animation group (0x13 from normal bow input = AttackBow).",
     "mnemonic": "call",
     "size": 5
   },
@@ -925,7 +925,7 @@
   },
   {
     "ea": "0x5F4A76",
-    "line": "call    sub_51AC80",
+    "line": "call    AnimGroup_UsesAttackOrCastNoteTemplate; Returns true when the encoded key is not group 0xFF and the fixed Oblivion group record's note-template class is 4, 5, 6, or 7. Those classes cover AttackLeft/Right, power attacks, BlockAttack, AttackBow, and cast groups. This is a fixed-table classifier, not dynamic group registration.",
     "mnemonic": "call",
     "size": 5
   },
@@ -949,37 +949,37 @@
   },
   {
     "ea": "0x5F4A82",
-    "line": "push    ebx",
+    "line": "push    ebx; sequence",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F4A83",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; repeatOrAction",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F4A85",
-    "line": "push    1",
+    "line": "push    1; playImmediately",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F4A87",
-    "line": "push    edi",
+    "line": "push    edi; encodedKey",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F4A88",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F4A8A",
-    "line": "call    ActorAnimData_PlayAnimGroup",
+    "line": "call    ActorAnimData_PlayAnimGroup; Play accepted attack group in ActorAnimData.",
     "mnemonic": "call",
     "size": 5
   },
@@ -991,19 +991,19 @@
   },
   {
     "ea": "0x5F4A92",
-    "line": "push    3",
+    "line": "push    3; slotSelector",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F4A94",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F4A96",
-    "line": "call    sub_4706E0",
+    "line": "call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].",
     "mnemonic": "call",
     "size": 5
   },
@@ -1045,7 +1045,7 @@
   },
   {
     "ea": "0x5F4AAA",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1069,13 +1069,13 @@
   },
   {
     "ea": "0x5F4AB4",
-    "line": "push    eax",
+    "line": "push    eax; action",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F4AB5",
-    "line": "call    HighPRocess_DoAction?????",
+    "line": "call    Actor_SetCurrentActionWithBowVisualCleanup; Accepted attack overwrites the prior process action with 4 for bow-class slot 3; this is the observed normal re-entry from follow-through.",
     "mnemonic": "call",
     "size": 5
   },

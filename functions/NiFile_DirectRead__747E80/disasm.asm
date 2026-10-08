@@ -1,4 +1,4 @@
-0x747E80: push    ecx
+0x747E80: push    ecx; MEF PLAN 2026-09-07: Assembly confirms thiscall(self,destination,count), RET8; EBP and EDI are saved registers assigned local values. fread uses elementSize1; returned EAX counts copied bytes. Short reads return fewer bytes, closed stream returns0; destination may remain partly/uninitialized. Cached builder must require exact count. Prior type retained in ledger.
 0x747E81: push    esi
 0x747E82: mov     esi, ecx
 0x747E84: cmp     byte ptr [esi+24h], 0
@@ -17,11 +17,11 @@
 0x747EAD: test    edi, edi
 0x747EAF: jbe     short loc_747EC9
 0x747EB1: mov     ecx, [esi+18h]
-0x747EB4: push    edi; Size
+0x747EB4: push    edi; byteCount
 0x747EB5: add     ecx, eax
-0x747EB7: push    ecx; Src
-0x747EB8: push    ebp; Dst
-0x747EB9: call    _memcpy
+0x747EB7: push    ecx; source
+0x747EB8: push    ebp; destination
+0x747EB9: call    _memcpy;
 0x747EBE: add     esp, 0Ch
 0x747EC1: add     ebp, edi
 0x747EC3: sub     ebx, edi
@@ -57,10 +57,10 @@
 0x747F09: mov     ebx, eax
 0x747F0B: mov     eax, [esi+18h]
 0x747F0E: add     eax, [esi+14h]
-0x747F11: push    ebx; Size
-0x747F12: push    eax; Src
-0x747F13: push    ebp; Dst
-0x747F14: call    _memcpy
+0x747F11: push    ebx; byteCount
+0x747F12: push    eax; source
+0x747F13: push    ebp; destination
+0x747F14: call    _memcpy;
 0x747F19: mov     ecx, [esp+20h+var_4]
 0x747F1D: add     esp, 0Ch
 0x747F20: add     [esi+14h], ebx

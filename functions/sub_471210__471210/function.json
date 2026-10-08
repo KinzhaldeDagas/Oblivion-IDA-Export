@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x471210",
+      "0x471228"
+    ]
+  ],
+  "chunks_sha256": "182f65958c88da759f8af7749a279dcf31738f12de295280ca940761155e7f02",
+  "comment_regular": "Returns true when ActorAnimData current idle (+0xCC) exists and its phase field is 2. Mounted/action callers treat this as the active idle phase.",
+  "comment_repeatable": "Returns true when ActorAnimData current idle (+0xCC) exists and its phase field is 2. Mounted/action callers treat this as the active idle phase.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_471210",
+  "display_name": "ActorAnimData_IsCurrentIdleActive",
   "end_ea": "0x471228",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_471210",
+  "name": "ActorAnimData_IsCurrentIdleActive",
   "segment": ".text",
   "sha256": "182f65958c88da759f8af7749a279dcf31738f12de295280ca940761155e7f02",
   "size": 24,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x471210",
-  "type": "bool __thiscall(_DWORD *this)",
+  "total_chunk_size": 24,
+  "type": "bool __thiscall(ActorAnimData *this)",
   "xrefs_from_count": 9,
   "xrefs_to_count": 2
 }

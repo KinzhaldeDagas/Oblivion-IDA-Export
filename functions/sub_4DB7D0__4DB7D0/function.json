@@ -1,19 +1,36 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4DB7D0",
+      "0x4DB827"
+    ],
+    [
+      "0x4CA980",
+      "0x4CA988"
+    ]
+  ],
+  "chunks_sha256": "0038b0c2543409cd67b21821514b67057fbc089d359231387bc803ee89c53de3",
+  "comment_regular": "Verified effective ownership-condition global lookup: use this reference's XGLB first, then the linked door's XGLB, then the parent cell's XGLB. Fallout's TESObjectREFR::GetOwnershipGlobal has the same fallback sequence. This is distinct from TESObjectREFR_GetOwner's owner-form inheritance.",
+  "comment_repeatable": "Verified effective ownership-condition global lookup: use this reference's XGLB first, then the linked door's XGLB, then the parent cell's XGLB. Fallout's TESObjectREFR::GetOwnershipGlobal has the same fallback sequence. This is distinct from TESObjectREFR_GetOwner's owner-form inheritance.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4DB7D0",
+  "display_name": "TESObjectREFR_GetOwnershipGlobal",
   "end_ea": "0x4DB827",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4DB7D0",
+  "name": "TESObjectREFR_GetOwnershipGlobal",
   "segment": ".text",
   "sha256": "698ba18cf809c211fde8bc7524590b1275944b33132633a5acc5273bdd2c23b7",
   "size": 87,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4DB7D0",
-  "type": "BSExtraDataVtbl *__thiscall(_BYTE *this)",
-  "xrefs_from_count": 47,
+  "total_chunk_size": 95,
+  "type": "TESGlobal *__thiscall(TESObjectREFR *reference)",
+  "xrefs_from_count": 49,
   "xrefs_to_count": 1
 }

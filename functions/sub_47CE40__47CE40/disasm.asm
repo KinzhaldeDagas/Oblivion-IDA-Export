@@ -8,6 +8,6 @@
 0x47CE54: push    ecx
 0x47CE55: mov     ecx, esi
 0x47CE57: fstp    [esp+8+var_8]; float
-0x47CE5A: call    sub_70A190
+0x47CE5A: call    sub_70A190; NiNode selected downward: flags+18 choose controllers/world update; child flags bit1 and bit4 choose synchronous vfunc+64/+68 at 70A215/70A210. Child bounds merge before RET 4. No queue/dispatch in this body. Full-call observer may fence same-thread descendants, not asynchronous work.
 0x47CE5F: pop     esi
 0x47CE60: retn    4

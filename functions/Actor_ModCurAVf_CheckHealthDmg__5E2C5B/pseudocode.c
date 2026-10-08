@@ -8,8 +8,8 @@ int __usercall Actor_ModCurAVf_::CheckHealthDmg@<eax>(
         float a6,
         float a7)
 {
-  if ( a1 != 8 || a6 >= 0.0 )
-    JUMPOUT(0x5E2C8B);
-  (*(void (__thiscall **)(_BYTE *, _DWORD, float))(*(_DWORD *)a2 + 0x3B8))(a2, LODWORD(a7), COERCE_FLOAT(LODWORD(a6)));
+  if ( a1 != 8 || a6 >= 0.0 ) /*0x5e2c70*/
+    JUMPOUT(0x5E2C8B); /*0x5e2c8b*/
+  (*(void (__thiscall **)(_BYTE *, _DWORD, _DWORD))(*(_DWORD *)a2 + 0x3B8))(a2, LODWORD(a7), LODWORD(a6)); /*0x5e2c85*/
   return Actor_ModCurAVf_::MarkAsModified(a2, 8, a3, a4, a5);
 }

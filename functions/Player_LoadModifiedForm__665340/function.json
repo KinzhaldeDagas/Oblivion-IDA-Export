@@ -1,19 +1,32 @@
 {
-  "callees_count": 329,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 186,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 40,
+  "chunks": [
+    [
+      "0x665340",
+      "0x6665D4"
+    ]
+  ],
+  "chunks_sha256": "ee480f36ebf9cd7789b0ec0ae8e5a17f1d4d3db82c79a47624eca1d45706f442",
+  "comment_regular": "Loads versioned PlayerCharacter modified-form state. The skill block mirrors Player_SaveModifiedForm, rebuilds queued attribute buckets, and later relies on form linking to recalculate requiredSkillExp[21].",
+  "comment_repeatable": "Loads versioned PlayerCharacter modified-form state. The skill block mirrors Player_SaveModifiedForm, rebuilds queued attribute buckets, and later relies on form linking to recalculate requiredSkillExp[21].",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 202,
   "display_name": "Player_LoadModifiedForm",
   "end_ea": "0x6665D4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "Player_LoadModifiedForm",
   "segment": ".text",
   "sha256": "ee480f36ebf9cd7789b0ec0ae8e5a17f1d4d3db82c79a47624eca1d45706f442",
   "size": 4756,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x665340",
-  "type": "void __userpurge(int@<ecx>, TESFormVtbl *@<ebp>, double@<st2>, double@<st1>, double@<st0>, int, int)",
+  "total_chunk_size": 4756,
+  "type": "void __userpurge(int@<ecx>, TESFormVtbl *ebp0@<ebp>, double@<st2>, double@<st0>, int, int)",
   "xrefs_from_count": 1974,
   "xrefs_to_count": 1
 }

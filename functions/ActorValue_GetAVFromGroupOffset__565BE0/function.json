@@ -1,18 +1,31 @@
 {
-  "callees_count": 2,
-  "callers_count": 18,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 23,
+  "chunks": [
+    [
+      "0x565BE0",
+      "0x565C2C"
+    ]
+  ],
+  "chunks_sha256": "d41a3ade2532100c6bc6f3689bb852b527991a4217501282685d2b2ad2c81a52",
+  "comment_regular": "mwMediumArmor: Oblivion group 2 maps skill offset to actor value by adding 0x0C. OpenMW/Morrowind skill index 2 is MediumArmor, but Oblivion offset 2 becomes actor value 0x0E (Blade). Do not pass Morrowind skill indexes directly through this helper.",
+  "comment_repeatable": "mwMediumArmor: Oblivion group 2 maps skill offset to actor value by adding 0x0C. OpenMW/Morrowind skill index 2 is MediumArmor, but Oblivion offset 2 becomes actor value 0x0E (Blade). Do not pass Morrowind skill indexes directly through this helper.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
   "display_name": "ActorValue_GetAVFromGroupOffset",
   "end_ea": "0x565C2C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "ActorValue_GetAVFromGroupOffset",
   "segment": ".text",
   "sha256": "d41a3ade2532100c6bc6f3689bb852b527991a4217501282685d2b2ad2c81a52",
   "size": 76,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x565BE0",
+  "total_chunk_size": 76,
   "type": "int __cdecl(int, char)",
   "xrefs_from_count": 25,
   "xrefs_to_count": 23

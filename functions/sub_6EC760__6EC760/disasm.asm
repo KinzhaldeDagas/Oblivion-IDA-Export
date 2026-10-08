@@ -1,4 +1,4 @@
-0x6EC760: push    esi
+0x6EC760: push    esi; Saves one NiTextKey: writes float time at +0x00 followed by text at +0x04.
 0x6EC761: push    edi
 0x6EC762: mov     edi, [esp+8+arg_0]
 0x6EC766: mov     eax, [edi+220h]

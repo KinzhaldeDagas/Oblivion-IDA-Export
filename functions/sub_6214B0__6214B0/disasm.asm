@@ -44,7 +44,7 @@
 0x621541: call    eax
 0x621543: mov     ecx, [esi+3Ch]
 0x621546: movzx   ebx, ax
-0x621549: call    sub_5E05B0
+0x621549: call    sub_5E05B0; Checks process movement flags low nibble via vfunc +0x2C0. Player input uses this alongside swimming/sneaking skill progression; useful as a broad movement-mode guard.
 0x62154E: test    al, al
 0x621550: jz      loc_621682
 0x621556: cmp     byte ptr ds:0B333B8h, 0
@@ -86,21 +86,21 @@
 0x6215CB: mov     ecx, esi
 0x6215CD: call    sub_614BB0
 0x6215D2: mov     ecx, esi
-0x6215D4: call    sub_6135F0
+0x6215D4: call    CombatController_GetCurrentTarget
 0x6215D9: test    eax, eax
 0x6215DB: jz      short loc_621605
 0x6215DD: mov     ecx, esi
-0x6215DF: call    sub_6135F0
+0x6215DF: call    CombatController_GetCurrentTarget
 0x6215E4: mov     ecx, eax
-0x6215E6: call    Actor_GetCurrentAction
+0x6215E6: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x6215EB: cmp     eax, edi
 0x6215ED: jnz     short loc_621605
 0x6215EF: cmp     [esi+74h], edi
 0x6215F2: jnz     short loc_621605
-0x6215F4: mov     ecx, esi
+0x6215F4: mov     ecx, esi; this
 0x6215F6: mov     [esi+78h], edi
 0x6215F9: mov     dword ptr [esi+74h], 3
-0x621600: call    sub_6213D0
+0x621600: call    CombatController_UpdateCombatModeState
 0x621605: test    [esi+192h], bx
 0x62160C: jz      short loc_62162F
 0x62160E: cmp     byte ptr ds:0B3B908h, 0
@@ -113,16 +113,16 @@
 0x62162A: add     esp, 8
 0x62162D: jmp     short loc_62167B
 0x62162F: mov     ecx, esi
-0x621631: call    sub_615980
+0x621631: call    CombatController_GetCachedTargetSurfaceDistance; Returns CombatController cached target surface distance at +0x184, computing it once when negative. The inherited EDI low-byte input belongs to this private compiler ABI and is deliberately retained.
 0x621636: fstp    [esp+24h+var_15+1]
-0x62163A: mov     ecx, esi
-0x62163C: call    sub_615520
+0x62163A: mov     ecx, esi; this
+0x62163C: call    CombatController_GetDesiredCombatDistance; Caches desired combat distance based on active combat mode and ranged/melee data.
 0x621641: fstp    [esp+24h+var_10]
 0x621645: test    bl, 0Ch
 0x621648: jnz     short loc_621692
 0x62164A: test    bl, 1
 0x62164D: jz      loc_621751
-0x621653: mov     ecx, offset fCombatMinEngageDistance
+0x621653: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+240h)
 0x621658: call    GameSetting_GetSafeFloatPointer
 0x62165D: fld     [esp+24h+var_15+1]
 0x621661: fld     dword ptr [eax]
@@ -148,24 +148,24 @@
 0x62169C: fnstsw  ax
 0x62169E: test    ah, 5
 0x6216A1: jp      short loc_62171B
-0x6216A3: push    0; int
+0x6216A3: push    0; unused
 0x6216A5: sub     esp, 8
-0x6216A8: fstp    [esp+30h+var_2C]; float
-0x6216AC: mov     ecx, esi
-0x6216AE: fstp    [esp+30h+var_30]; float
-0x6216B1: call    sub_613440
+0x6216A8: fstp    [esp+30h+maximumDistance]; maximumDistance
+0x6216AC: mov     ecx, esi; this
+0x6216AE: fstp    [esp+30h+surfaceDistance]; surfaceDistance
+0x6216B1: call    CombatController_IsTargetWithinRangedDistance; Tests surfaceDistance against maximumDistance plus a combat-style-controlled tolerance. Ranged weapon modes 2 and 4 suppress that extra tolerance.
 0x6216B6: test    al, al
 0x6216B8: jnz     short loc_621705
 0x6216BA: cmp     byte ptr [esp+24h+var_15], al
 0x6216BE: jz      loc_621751
 0x6216C4: mov     ecx, [esi+70h]
-0x6216C7: push    ecx
-0x6216C8: call    sub_612690
+0x6216C7: push    ecx; mode
+0x6216C8: call    CombatMode_IsRangedWeaponMode; Returns true only for native combat modes 2 and 4, the two ranged-weapon modes used by the distance and attack-option logic.
 0x6216CD: add     esp, 4
 0x6216D0: test    al, al
 0x6216D2: mov     ecx, esi
 0x6216D4: jz      short loc_6216F7
-0x6216D6: call    sub_614290
+0x6216D6: call    CombatController_CanReachCurrentTarget; Returns current-target reachability at +0x174, additionally forcing false when a non-water-capable actor cannot fight a swimming target.
 0x6216DB: test    al, al
 0x6216DD: jnz     short loc_6216EF
 0x6216DF: mov     ecx, esi
@@ -189,7 +189,7 @@
 0x621717: call    edx
 0x621719: jmp     short loc_621751
 0x62171B: fstp    st(1)
-0x62171D: mov     ecx, offset fCombatMinEngageDistance
+0x62171D: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+240h)
 0x621722: fstp    st
 0x621724: call    GameSetting_GetSafeFloatPointer
 0x621729: fld     [esp+24h+var_15+1]
@@ -208,17 +208,17 @@
 0x62174D: push    1
 0x62174F: call    eax
 0x621751: mov     ecx, esi
-0x621753: call    sub_6135F0
+0x621753: call    CombatController_GetCurrentTarget
 0x621758: test    eax, eax
 0x62175A: jz      short loc_6217D0
 0x62175C: mov     ecx, esi
-0x62175E: call    sub_6135F0
+0x62175E: call    CombatController_GetCurrentTarget
 0x621763: mov     ecx, eax
-0x621765: call    Actor_GetCurrentAction
+0x621765: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x62176A: cmp     eax, edi
 0x62176C: jnz     short loc_6217D0
 0x62176E: push    0; Seed
-0x621770: call    GetRandomLargeInteger?
+0x621770: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x621775: cdq
 0x621776: mov     ecx, 64h ; 'd'
 0x62177B: idiv    ecx
@@ -235,7 +235,7 @@
 0x6217A0: jz      short loc_6217FD
 0x6217A2: cmp     byte ptr [esi+49h], 0
 0x6217A6: jnz     short loc_6217FD
-0x6217A8: mov     ecx, offset unk_B36D90
+0x6217A8: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+0B8h)
 0x6217AD: call    GameSetting_GetSafeFloatPointer
 0x6217B2: fld     [esp+24h+var_10]
 0x6217B6: fld     dword ptr [eax]
@@ -263,7 +263,7 @@
 0x6217F5: mov     eax, [edx+2C4h]
 0x6217FB: call    eax
 0x6217FD: push    0; Seed
-0x6217FF: call    GetRandomLargeInteger?
+0x6217FF: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x621804: mov     [esp+28h+var_10], eax
 0x621808: fild    [esp+28h+var_10]
 0x62180C: add     esp, 4
@@ -279,7 +279,7 @@
 0x62182B: push    0
 0x62182D: mov     ecx, esi
 0x62182F: add     edi, 308h
-0x621835: call    sub_6135F0
+0x621835: call    CombatController_GetCurrentTarget
 0x62183A: mov     edx, [edi]
 0x62183C: push    eax
 0x62183D: mov     ecx, ebx

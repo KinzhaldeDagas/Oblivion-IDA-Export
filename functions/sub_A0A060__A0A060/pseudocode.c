@@ -1,4 +1,4 @@
-BSStringT *sub_A0A060()
+NiRTTI *sub_A0A060()
 {
-  return sub_70E220((BSStringT *)dword_B3FD70, "NiSwitchNode", (int)dword_B3FAB0);
+  return NiRTTI_Constructor(&stru_B3FD70, "NiSwitchNode", &parent); /*0xa0a074*/
 }

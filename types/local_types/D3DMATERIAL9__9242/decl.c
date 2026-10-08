@@ -1,1 +1,8 @@
-_D3DMATERIAL9
+struct _D3DMATERIAL9
+{
+D3DCOLORVALUE Diffuse;
+D3DCOLORVALUE Ambient;
+D3DCOLORVALUE Specular;
+D3DCOLORVALUE Emissive;
+float Power;
+};

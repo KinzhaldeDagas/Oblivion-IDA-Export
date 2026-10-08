@@ -11,9 +11,9 @@
 0x45F04C: mov     large fs:0, eax
 0x45F052: mov     esi, ecx
 0x45F054: mov     [esp+18h+var_10], esi
-0x45F058: mov     dword ptr [esi], offset ??_7ChangesMap@@6B@; const ChangesMap::`vftable'
+0x45F058: mov     dword ptr [esi], offset ??_7ChangesMap@@6B@; Verified: ChangesMap vtable (RTTI COL AB7C90 -> TypeDescriptor B05A38 -> .?AVChangesMap@@). Slots +0 deleting dtor 462260, +4 hash, +8 key equality, +C set node key/value, +10 no-op clear value, +14 allocate node, +18 release node. Owned ChangeData/buffers are freed by 45A8B0, not ClearValue.
 0x45F05E: mov     [esp+18h+var_4], 0
-0x45F066: call    sub_45A8B0
+0x45F066: call    ChangesMap_RemoveAllChanges;
 0x45F06B: mov     ecx, esi
 0x45F06D: mov     [esp+18h+var_4], 0FFFFFFFFh
 0x45F075: call    ??1?$NiTPointerMap@IPAVChangeData@@@@UAE@XZ; NiTPointerMap<uint,ChangeData *>::~NiTPointerMap<uint,ChangeData *>(void)
@@ -23,3 +23,12 @@
 0x45F086: pop     esi
 0x45F087: add     esp, 10h
 0x45F08A: retn
+0x9AE4E0: mov     ecx, [ebp-10h]
+0x9AE4E3: jmp     ??1?$NiTPointerMap@IPAVChangeData@@@@UAE@XZ; NiTPointerMap<uint,ChangeData *>::~NiTPointerMap<uint,ChangeData *>(void)
+0x9AE4E8: mov     edx, [esp+arg_4]
+0x9AE4EC: lea     eax, [edx-8]
+0x9AE4EF: mov     ecx, [edx-0Ch]
+0x9AE4F2: xor     ecx, eax
+0x9AE4F4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AE4F9: mov     eax, offset stru_ADAD18
+0x9AE4FE: jmp     ___CxxFrameHandler3

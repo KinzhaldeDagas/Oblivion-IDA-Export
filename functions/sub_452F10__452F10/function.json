@@ -1,19 +1,32 @@
 {
-  "callees_count": 12,
-  "callers_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x452F10",
+      "0x452FDB"
+    ]
+  ],
+  "chunks_sha256": "9097f9f3f0e5d01b1cd7fff23ce36b69cb91e4a38fb725d60228d096453403f0",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "\nVerified: keyed by worldspace FormID; allocates 12-byte record and stores referenceID, worldX>>12, worldY>>12 at offsets 0/4/8; worldZ unused. UnloadForm supplies GetPos X/Y and worldspace ID at 463C71; LoadGame callers 4660A2/4662C7. Probable Fallout homolog BGS SaveLoadReferencesMap::AddReference 825FA1B0: same worldspace/reference/location role, but Oblivion stores quantized XY cell coordinates and Fallout passes NiPoint3 into GetKeyForWorldCoord.\nVerified return: all callers ignore it; records are accumulated as side effects.\n\nMEF SAVE AUDIT 2026-10-08: PERF-18 producer: worldspace-keyed list prepends distinct allocated12-byte tuples {referenceID,signedcellX,signedcellY}. UnloadForm463C71 and LoadGame4660A2/4662C7 are observed producers. Preserve newest-first sequence and all ownership. Existing v57 PERF11 indexes different raw blob maps, not this coordinate list.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_452F10",
+  "display_name": "ExteriorCellNewReferencesMap_AddReference",
   "end_ea": "0x452FDB",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_452F10",
+  "name": "ExteriorCellNewReferencesMap_AddReference",
   "segment": ".text",
   "sha256": "9097f9f3f0e5d01b1cd7fff23ce36b69cb91e4a38fb725d60228d096453403f0",
   "size": 203,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x452F10",
-  "type": "int __thiscall(_DWORD *this, int, int, float, float, int)",
+  "total_chunk_size": 203,
+  "type": "void __thiscall(ExteriorCellNewReferencesMap *self, unsigned int worldspaceFormID, unsigned int referenceID, float worldX, float worldY, float worldZ)",
   "xrefs_from_count": 83,
   "xrefs_to_count": 3
 }

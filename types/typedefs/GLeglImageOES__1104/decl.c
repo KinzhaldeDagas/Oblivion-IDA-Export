@@ -1,1 +1,1 @@
-GLeglImageOES
+typedef void *GLeglImageOES;

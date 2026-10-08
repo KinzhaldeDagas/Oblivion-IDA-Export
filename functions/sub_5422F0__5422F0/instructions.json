@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5422F0",
-    "line": "push    ecx",
+    "line": "push    ecx; Exterior fog decode: updates selected weather and transition state. Maintains Sky::firstWeather, secondWeather, and weatherPercent consumed by fog distance 0x541DD0 and fog color 0x5418F0.",
     "mnemonic": "push",
     "size": 1
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x54236D",
-    "line": "cmp     [esi+14h], ebp",
+    "line": "cmp     [esi+14h], ebp; Verified: weatherAndMoonFlags low byte participates in Sky's climate weather-reselection timing formula; field name also reflects moon-presence bits 0x8000 and 0x4000.",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -229,13 +229,13 @@
   },
   {
     "ea": "0x542372",
-    "line": "add     ecx, 30h ; '0'",
+    "line": "add     ecx, 30h ; '0'; list",
     "mnemonic": "add",
     "size": 3
   },
   {
     "ea": "0x542375",
-    "line": "call    sub_4EECE0",
+    "line": "call    OblivionTESWeatherList_SelectWeightedWeather; Verified: Sky climate reselection passes firstClimate.weatherList to OblivionTESWeatherList_SelectWeightedWeather; null result falls back to default TESWeather FormID 0x15E.",
     "mnemonic": "call",
     "size": 5
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x542392",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; Exterior fog source: fallback to default weather FormID 0x15E when climate selection returns null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x5423C0",
-    "line": "mov     ecx, [edi]",
+    "line": "mov     ecx, [edi]; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x5423C6",
-    "line": "call    sub_4A2E90",
+    "line": "call    TESRegion_RefreshCachedWeather; Verified: after climate-selected weather changes, Sky walks all registered regions and refreshes cached region weather using region weather data ID 3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x542407",
-    "line": "mov     eax, [eax+6E8h]",
+    "line": "mov     eax, [eax+6E8h]; Exterior fog source: active region weather override candidate path.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x542414",
-    "line": "mov     eax, [eax+24h]",
+    "line": "mov     eax, [eax+24h]; Exterior fog source: read current region cached weather candidate.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x542424",
-    "line": "mov     edi, eax",
+    "line": "mov     edi, eax; Exterior fog source: use region weather override when mode allows (unk0DC != 2).",
     "mnemonic": "mov",
     "size": 2
   },
@@ -703,13 +703,13 @@
   },
   {
     "ea": "0x54245F",
-    "line": "mov     [esi+14h], eax",
+    "line": "mov     [esi+14h], eax; Exterior fog decode: starts a transition by moving prior firstWeather into secondWeather.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x542462",
-    "line": "mov     [esi+10h], edi",
+    "line": "mov     [esi+10h], edi; Exterior fog source: install selected weather as Sky::firstWeather.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -751,13 +751,13 @@
   },
   {
     "ea": "0x542480",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x542482",
-    "line": "call    sub_540850",
+    "line": "call    OB_Sky_UpdateHDRWeatherAndTreeDimmerConstants_010201A0; Fog time-boundary decode: after firstWeather changes, 0x540850 initializes transition/weather globals used around sky update; fog still flows through Sky/B333E4.",
     "mnemonic": "call",
     "size": 5
   },
@@ -835,7 +835,7 @@
   },
   {
     "ea": "0x5424AA",
-    "line": "fst     dword ptr [esi+0D8h]",
+    "line": "fst     dword ptr [esi+0D8h]; Exterior fog transition: no secondWeather means weatherPercent is pinned to 1.0.",
     "mnemonic": "fst",
     "size": 6
   },
@@ -973,7 +973,7 @@
   },
   {
     "ea": "0x542509",
-    "line": "fstp    [esp+0Ch+var_4]",
+    "line": "fstp    [esp+0Ch+var_4]; Fog weather-field decode: transition duration derives from firstWeather byte +0x4B scaled between transition bounds; drives weatherPercent for fog color and distance.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -985,7 +985,7 @@
   },
   {
     "ea": "0x542511",
-    "line": "fstp    dword ptr [esi+0D8h]",
+    "line": "fstp    dword ptr [esi+0D8h]; Exterior fog transition: weatherPercent = elapsed/transitionDuration; firstWeather contributes percent and secondWeather contributes 1-percent in fog color/distance blends.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -1039,7 +1039,7 @@
   },
   {
     "ea": "0x542540",
-    "line": "fstp    dword ptr [esi+0D8h]",
+    "line": "fstp    dword ptr [esi+0D8h]; Fog weather-field decode: Flags0FC bit 3 smooths weatherPercent from unk0F4 toward computed percent; affects fog color and distance transition blends.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -1057,7 +1057,7 @@
   },
   {
     "ea": "0x54254B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1069,7 +1069,7 @@
   },
   {
     "ea": "0x54254F",
-    "line": "call    sub_540850",
+    "line": "call    OB_Sky_UpdateHDRWeatherAndTreeDimmerConstants_010201A0; Fog time-boundary decode: while secondWeather remains active, 0x540850 refreshes transition/weather globals using current weatherPercent.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1105,7 +1105,7 @@
   },
   {
     "ea": "0x542563",
-    "line": "and     dword ptr [esi+0FCh], 0FFFFFFF7h",
+    "line": "and     dword ptr [esi+0FCh], 0FFFFFFF7h; Fog weather-field decode: transition complete; clears smoothing flag when weatherPercent exceeds 1.0.",
     "mnemonic": "and",
     "size": 7
   },
@@ -1123,13 +1123,13 @@
   },
   {
     "ea": "0x542572",
-    "line": "mov     [esi+14h], ebp",
+    "line": "mov     [esi+14h], ebp; Fog weather-field decode: transition complete; clears secondWeather so exterior fog uses firstWeather at weatherPercent 1.0.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x542575",
-    "line": "fstp    dword ptr [esi+0F4h]",
+    "line": "fstp    dword ptr [esi+0F4h]; Fog weather-field decode: transition complete; resets unk0F4 smoothing baseline after clamping weatherPercent.",
     "mnemonic": "fstp",
     "size": 6
   },

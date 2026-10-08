@@ -1,4 +1,4 @@
-0x6D7540: push    0FFFFFFFFh
+0x6D7540: push    0FFFFFFFFh; Destroys every 0x08-byte NiTextKey (freeing each text), frees the header-backed array at +0x10, then destroys NiExtraData base state.
 0x6D7542: push    offset SEH_9A22E0
 0x6D7547: mov     eax, large fs:0
 0x6D754D: push    eax
@@ -19,13 +19,13 @@
 0x6D757C: jz      short loc_6D759B
 0x6D757E: mov     ecx, [eax-4]
 0x6D7581: lea     edi, [eax-4]
-0x6D7584: push    offset sub_6EC6B0; void (__thiscall *)(void *)
+0x6D7584: push    offset NiTextKey_Destroy; void (__thiscall *)(void *)
 0x6D7589: push    ecx; int
 0x6D758A: push    8; unsigned int
 0x6D758C: push    eax; void *
 0x6D758D: call    $LN21
 0x6D7592: push    edi
-0x6D7593: call    FormHeapFree
+0x6D7593: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6D7598: add     esp, 4
 0x6D759B: mov     ecx, esi
 0x6D759D: mov     [esp+1Ch+var_4], 0FFFFFFFFh
@@ -37,3 +37,12 @@
 0x6D75B7: pop     esi
 0x6D75B8: add     esp, 10h
 0x6D75BB: retn
+0x9D7E10: mov     ecx, [ebp-10h]
+0x9D7E13: jmp     NiExtraData_dtor
+0x9D7E18: mov     edx, [esp+arg_4]
+0x9D7E1C: lea     eax, [edx-0Ch]
+0x9D7E1F: mov     ecx, [edx-10h]
+0x9D7E22: xor     ecx, eax
+0x9D7E24: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D7E29: mov     eax, offset stru_B002E0
+0x9D7E2E: jmp     ___CxxFrameHandler3

@@ -10,7 +10,6 @@
 0x4A3E75: mov     eax, [edx+4]
 0x4A3E78: lea     esi, [eax+1]
 0x4A3E7B: jmp     short loc_4A3E80
-0x4A3E7D: align 10h
 0x4A3E80: mov     cl, [eax]
 0x4A3E82: add     eax, 1
 0x4A3E85: test    cl, cl
@@ -26,9 +25,9 @@
 0x4A3E9D: mov     ecx, [esi]
 0x4A3E9F: jnz     short loc_4A3EA6
 0x4A3EA1: mov     eax, offset EmptyString
-0x4A3EA6: push    ecx; Str2
-0x4A3EA7: push    eax; Str1
-0x4A3EA8: call    __strcmp
+0x4A3EA6: push    ecx; right
+0x4A3EA7: push    eax; left
+0x4A3EA8: call    CRT_StricmpLocaleDispatch
 0x4A3EAD: add     esp, 8
 0x4A3EB0: test    eax, eax
 0x4A3EB2: jz      short loc_4A3ECB

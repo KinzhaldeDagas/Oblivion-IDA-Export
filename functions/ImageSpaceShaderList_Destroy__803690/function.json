@@ -1,19 +1,36 @@
 {
-  "callees_count": 15,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 4,
+  "chunks": [
+    [
+      "0x803690",
+      "0x803781"
+    ],
+    [
+      "0x9D0930",
+      "0x9D0969"
+    ]
+  ],
+  "chunks_sha256": "088e921bac54bf9970d13d71e99d93df983c8361b1a763c8e45c318f137906e0",
+  "comment_regular": "MoonSugarEffect decode: ImageSpaceShaderList::Destroy frees list nodes and owned renderTarget/screen quad, clears fallback pointer; it does not release shader objects stored as raw list data.",
+  "comment_repeatable": "MoonSugarEffect decode: ImageSpaceShaderList::Destroy frees list nodes and owned renderTarget/screen quad, clears fallback pointer; it does not release shader objects stored as raw list data.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
   "display_name": "ImageSpaceShaderList::Destroy",
   "end_ea": "0x803781",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "ImageSpaceShaderList::Destroy",
   "segment": ".text",
   "sha256": "eef9d376faa507c4581436e1c63418dd2e917b8daedb8f89d2181df21457743f",
   "size": 241,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x803690",
+  "total_chunk_size": 298,
   "type": "void __thiscall(NiTPointerList__BSImageSpaceShader *this)",
-  "xrefs_from_count": 115,
+  "xrefs_from_count": 132,
   "xrefs_to_count": 3
 }

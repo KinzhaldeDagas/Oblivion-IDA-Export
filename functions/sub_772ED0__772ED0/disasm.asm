@@ -19,7 +19,7 @@
 0x772EFA: sub     esi, 1
 0x772EFD: jns     short loc_772EF0
 0x772EFF: push    ebx
-0x772F00: call    FormHeapFree
+0x772F00: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x772F05: add     esp, 4
 0x772F08: pop     edi
 0x772F09: pop     ebx
@@ -29,7 +29,7 @@
 0x772F11: mov     ecx, esi
 0x772F13: call    sub_772ED0
 0x772F18: push    esi
-0x772F19: call    FormHeapFree
+0x772F19: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x772F1E: add     esp, 4
 0x772F21: pop     esi
 0x772F22: pop     ebp

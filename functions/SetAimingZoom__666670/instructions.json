@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x666670",
-    "line": "sub     esp, 18h",
+    "line": "sub     esp, 18h; [Controller decode 2026-07-09] Non-player QueryControlState consumer: Block control 6 held drives first-person block/aim FOV behavior.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x6666EA",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,19 +205,19 @@
   },
   {
     "ea": "0x666704",
-    "line": "push    1Ch",
+    "line": "push    1Ch; actorValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x666706",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x666708",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x666733",
-    "line": "mov     ecx, offset flt_B370A0",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+3C8h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x66678F",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -685,7 +685,7 @@
   },
   {
     "ea": "0x66680A",
-    "line": "call    SetCameraFOV",
+    "line": "call    SetCameraFOV; MoonSugarEffect decode: PlayerCharacter SetCameraFOV wrapper writes worldFoV, calls SetCameraFOV_0, then updates particle shader FOV data.",
     "mnemonic": "call",
     "size": 5
   },

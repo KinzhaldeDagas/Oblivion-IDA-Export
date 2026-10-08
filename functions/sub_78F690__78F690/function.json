@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x78F690",
+      "0x78F71A"
+    ]
+  ],
+  "chunks_sha256": "5a5ae8e26687efa1eb68ed55e3a215eb792fe2d8593e3af236367fd9a33d7395",
+  "comment_regular": "CBranch::ComputeVolume. Sums segment length times adjacent radius sum across compact 0x48-byte branch vertices and writes CBranch+0x28 volume.",
+  "comment_repeatable": "Sums adjacent compact branch-vertex segment lengths times endpoint radius sum and writes CBranch+0x28 branchVolume.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_78F690",
+  "display_name": "OB_CBranch_ComputeVolume_010201A0",
   "end_ea": "0x78F71A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_78F690",
+  "name": "OB_CBranch_ComputeVolume_010201A0",
   "segment": ".text",
   "sha256": "5a5ae8e26687efa1eb68ed55e3a215eb792fe2d8593e3af236367fd9a33d7395",
   "size": 138,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78F690",
-  "type": "void __thiscall(int this)",
+  "total_chunk_size": 138,
+  "type": "void __thiscall(OB_CBranch_010201A0 *this)",
   "xrefs_from_count": 52,
   "xrefs_to_count": 1
 }

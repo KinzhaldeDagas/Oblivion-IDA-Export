@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x470D20",
-    "line": "push    ecx",
+    "line": "push    ecx; Native encoded animation-key resolver. A candidate is valid only when its map entry's selector virtual returns a sequence. Order: exact key; weapon-prefix compatibility; fast-move group to normal-move group; on the outer pass only, strip movement prefix; finally replace nonzero group with Idle (0). Returns 0 on failure.",
     "mnemonic": "push",
     "size": 1
   },
@@ -30,14 +30,8 @@
     "size": 2
   },
   {
-    "ea": "0x470D27",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x470D30",
-    "line": "mov     ebx, [esp+0Ch+arg_0]",
+    "line": "mov     ebx, dword ptr [esp+0Ch+requestedKey]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -67,7 +61,7 @@
   },
   {
     "ea": "0x470D40",
-    "line": "call    sub_470960",
+    "line": "call    ActorAnimData_FindAnimMapEntry; CustomAnimSupport decode: anim-map lookup helper used by playback, validators, and save/load restore to test an encoded group key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,7 +103,7 @@
   },
   {
     "ea": "0x470D54",
-    "line": "call    eax",
+    "line": "call    eax; Exact candidate validation is stronger than map presence: invoke AnimSequenceSingle/Multiple vtable +0x10 with selector -1 and accept only a non-null sequence.",
     "mnemonic": "call",
     "size": 2
   },
@@ -145,7 +139,7 @@
   },
   {
     "ea": "0x470D6B",
-    "line": "call    sub_51A9E0",
+    "line": "call    AnimKey_GetWeaponPrefix; Final name: AnimKey_GetWeaponPrefix. Returns (encoded key >> 8) & 0xF.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,7 +193,7 @@
   },
   {
     "ea": "0x470D84",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; Weapon prefix 4 (Staff): unless movement prefix is Swimming (2), try TwoHand (3) before the shared OneHand/unprefixed fallbacks.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -235,7 +229,7 @@
   },
   {
     "ea": "0x470D9C",
-    "line": "lea     edx, [esp+10h+var_8]",
+    "line": "lea     edx, [esp+0Ch+var_4]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -265,7 +259,7 @@
   },
   {
     "ea": "0x470DAC",
-    "line": "call    sub_470960",
+    "line": "call    ActorAnimData_FindAnimMapEntry; CustomAnimSupport decode: anim-map lookup helper used by playback, validators, and save/load restore to test an encoded group key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,7 +277,7 @@
   },
   {
     "ea": "0x470DB5",
-    "line": "mov     ecx, [esp+10h+var_8]",
+    "line": "mov     ecx, [esp+0Ch+var_4]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -325,13 +319,13 @@
   },
   {
     "ea": "0x470DCA",
-    "line": "mov     edx, ebx",
+    "line": "mov     edx, ebx; Weapon prefixes TwoHand (3), Staff (4), and Bow (5) try OneHand (2). Other nonzero weapon prefixes skip directly to unprefixed.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x470DCC",
-    "line": "lea     ecx, [esp+10h+var_8]",
+    "line": "lea     ecx, [esp+0Ch+var_4]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -367,7 +361,7 @@
   },
   {
     "ea": "0x470DE4",
-    "line": "call    sub_470960",
+    "line": "call    ActorAnimData_FindAnimMapEntry; CustomAnimSupport decode: anim-map lookup helper used by playback, validators, and save/load restore to test an encoded group key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,7 +379,7 @@
   },
   {
     "ea": "0x470DED",
-    "line": "mov     ecx, [esp+10h+var_8]",
+    "line": "mov     ecx, [esp+0Ch+var_4]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -427,7 +421,7 @@
   },
   {
     "ea": "0x470E02",
-    "line": "lea     eax, [esp+10h+var_8]",
+    "line": "lea     eax, [esp+0Ch+var_4]; Final same-movement/group weapon fallback clears bits 8..11 to the unprefixed key.",
     "mnemonic": "lea",
     "size": 4
   },
@@ -463,7 +457,7 @@
   },
   {
     "ea": "0x470E16",
-    "line": "call    sub_470960",
+    "line": "call    ActorAnimData_FindAnimMapEntry; CustomAnimSupport decode: anim-map lookup helper used by playback, validators, and save/load restore to test an encoded group key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -481,7 +475,7 @@
   },
   {
     "ea": "0x470E1F",
-    "line": "mov     ecx, [esp+10h+var_8]",
+    "line": "mov     ecx, [esp+0Ch+var_4]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -529,7 +523,7 @@
   },
   {
     "ea": "0x470E37",
-    "line": "jz      short def_470E4A",
+    "line": "jz      short def_470E4A; jumptable 00470E4A default case",
     "mnemonic": "jz",
     "size": 2
   },
@@ -541,7 +535,7 @@
   },
   {
     "ea": "0x470E3A",
-    "line": "call    sub_51AA00",
+    "line": "call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -565,7 +559,7 @@
   },
   {
     "ea": "0x470E48",
-    "line": "ja      short def_470E4A",
+    "line": "ja      short def_470E4A; jumptable 00470E4A default case",
     "mnemonic": "ja",
     "size": 2
   },
@@ -577,7 +571,7 @@
   },
   {
     "ea": "0x470E51",
-    "line": "and     ebx, 0FF03h; jumptable 00470E4A case 7",
+    "line": "and     ebx, 0FF03h; FastForward (7) recursively resolves Forward (3), preserving movement and weapon prefix bits.",
     "mnemonic": "and",
     "size": 6
   },
@@ -595,7 +589,7 @@
   },
   {
     "ea": "0x470E5C",
-    "line": "and     ebx, 0FF04h; jumptable 00470E4A case 8",
+    "line": "and     ebx, 0FF04h; FastBackward (8) recursively resolves Backward (4), preserving movement and weapon prefix bits.",
     "mnemonic": "and",
     "size": 6
   },
@@ -613,7 +607,7 @@
   },
   {
     "ea": "0x470E67",
-    "line": "and     ebx, 0FF05h; jumptable 00470E4A case 9",
+    "line": "and     ebx, 0FF05h; FastLeft (9) recursively resolves Left (5), preserving movement and weapon prefix bits.",
     "mnemonic": "and",
     "size": 6
   },
@@ -631,7 +625,7 @@
   },
   {
     "ea": "0x470E72",
-    "line": "and     ebx, 0FF06h; jumptable 00470E4A case 10",
+    "line": "and     ebx, 0FF06h; FastRight (10) recursively resolves Right (6), preserving movement and weapon prefix bits.",
     "mnemonic": "and",
     "size": 6
   },
@@ -655,25 +649,25 @@
   },
   {
     "ea": "0x470E82",
-    "line": "push    1",
+    "line": "push    1; fallbackPass",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x470E84",
-    "line": "push    ebx",
+    "line": "push    ebx; requestedKey",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x470E85",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x470E87",
-    "line": "call    sub_470D20",
+    "line": "call    ActorAnimData_ResolveAnimKeyFallback; Native encoded animation-key resolver. A candidate is valid only when its map entry's selector virtual returns a sequence. Order: exact key; weapon-prefix compatibility; fast-move group to normal-move group; on the outer pass only, strip movement prefix; finally replace nonzero group with Idle (0). Returns 0 on failure.",
     "mnemonic": "call",
     "size": 5
   },
@@ -703,8 +697,308 @@
   },
   {
     "ea": "0x470E99",
-    "line": "mov     ebx, [esp+14h+var_4]",
+    "line": "mov     ebx, dword ptr [esp+0Ch+requestedKey]",
     "mnemonic": "mov",
     "size": 4
+  },
+  {
+    "ea": "0x470E9D",
+    "line": "cmp     [esp+0Ch+fallbackPass], 0; jumptable 00470E4A default case",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x470EA2",
+    "line": "jnz     short loc_470F19; fallbackPass is a recursion guard: nested fast/movement fallback may use exact/weapon/fast resolution but cannot continue into another movement-strip or group-to-Idle pass.",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x470EA4",
+    "line": "test    ebx, 0F000h",
+    "mnemonic": "test",
+    "size": 6
+  },
+  {
+    "ea": "0x470EAA",
+    "line": "jz      short loc_470EC7",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x470EAC",
+    "line": "mov     edx, ebx; Outer pass only: clear movement-prefix bits 12..15 and recursively resolve the same weapon/group with fallbackPass=1.",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x470EAE",
+    "line": "push    1; fallbackPass",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x470EB0",
+    "line": "and     edx, 0FFFh",
+    "mnemonic": "and",
+    "size": 6
+  },
+  {
+    "ea": "0x470EB6",
+    "line": "push    edx; requestedKey",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x470EB7",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x470EB9",
+    "line": "call    ActorAnimData_ResolveAnimKeyFallback; Native encoded animation-key resolver. A candidate is valid only when its map entry's selector virtual returns a sequence. Order: exact key; weapon-prefix compatibility; fast-move group to normal-move group; on the outer pass only, strip movement prefix; finally replace nonzero group with Idle (0). Returns 0 on failure.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x470EBE",
+    "line": "movzx   eax, ax",
+    "mnemonic": "movzx",
+    "size": 3
+  },
+  {
+    "ea": "0x470EC1",
+    "line": "mov     cl, al",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x470EC3",
+    "line": "xor     cl, bl",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x470EC5",
+    "line": "jz      short loc_470F1C",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x470EC7",
+    "line": "test    bl, bl",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x470EC9",
+    "line": "jz      short loc_470F19",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x470ECB",
+    "line": "and     ebx, 0FF00h; Last outer fallback: if group is nonzero, replace only the low group byte with Idle (0), preserve movement/weapon prefixes, and restart the resolver.",
+    "mnemonic": "and",
+    "size": 6
+  },
+  {
+    "ea": "0x470ED1",
+    "line": "mov     [esp+0Ch+fallbackPass], 0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x470ED6",
+    "line": "mov     dword ptr [esp+0Ch+requestedKey], ebx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x470EDA",
+    "line": "jmp     loc_470D30",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x470EDF",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x470EE0",
+    "line": "mov     ax, bx",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x470EE3",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x470EE4",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x470EE5",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x470EE8",
+    "line": "mov     eax, ebx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x470EEA",
+    "line": "and     eax, 0F0FFh",
+    "mnemonic": "and",
+    "size": 5
+  },
+  {
+    "ea": "0x470EEF",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x470EF0",
+    "line": "or      eax, 300h",
+    "mnemonic": "or",
+    "size": 5
+  },
+  {
+    "ea": "0x470EF5",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x470EF6",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x470EF7",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x470EFA",
+    "line": "mov     eax, ebx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x470EFC",
+    "line": "and     eax, 0F0FFh",
+    "mnemonic": "and",
+    "size": 5
+  },
+  {
+    "ea": "0x470F01",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x470F02",
+    "line": "or      eax, 200h",
+    "mnemonic": "or",
+    "size": 5
+  },
+  {
+    "ea": "0x470F07",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x470F08",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x470F09",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x470F0C",
+    "line": "mov     eax, ebx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x470F0E",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x470F0F",
+    "line": "and     eax, 0F0FFh",
+    "mnemonic": "and",
+    "size": 5
+  },
+  {
+    "ea": "0x470F14",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x470F15",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x470F16",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x470F19",
+    "line": "xor     ax, ax",
+    "mnemonic": "xor",
+    "size": 3
+  },
+  {
+    "ea": "0x470F1C",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x470F1D",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x470F1E",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x470F1F",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
   }
 ]

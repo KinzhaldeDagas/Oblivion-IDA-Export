@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x552730",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Matrix transpose: out has source.columns x source.rows and receives out[col,row] = source[row,col].",
     "mnemonic": "sub",
     "size": 3
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x552734",
-    "line": "mov     ebx, [esp+0Ch+arg_0]",
+    "line": "mov     ebx, [esp+0Ch+out]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,13 +49,13 @@
   },
   {
     "ea": "0x552741",
-    "line": "push    eax",
+    "line": "push    eax; columns",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x552742",
-    "line": "push    ecx",
+    "line": "push    ecx; rows",
     "mnemonic": "push",
     "size": 1
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x552745",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x55274B",
-    "line": "call    sub_552240",
+    "line": "call    FaceGenMatrix_InitializeDimensions; Initialize FaceGenMatrix dimensions and resize to rows*columns floats. The product is computed in 32 bits without overflow validation.",
     "mnemonic": "call",
     "size": 5
   },

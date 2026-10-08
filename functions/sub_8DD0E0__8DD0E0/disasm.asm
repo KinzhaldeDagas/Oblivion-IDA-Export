@@ -15,7 +15,7 @@
 0x8DD106: lea     ecx, [esp+38h+var_10]
 0x8DD10A: movaps  [esp+38h+var_20], xmm2
 0x8DD10F: movaps  xmmword ptr [esi+80h], xmm0
-0x8DD116: call    sub_88FE00
+0x8DD116: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x8DD11B: movaps  xmm1, xmmword ptr ds:0A9A470h
 0x8DD122: movaps  xmm0, [esp+30h+var_10]
 0x8DD127: andps   xmm0, xmm1

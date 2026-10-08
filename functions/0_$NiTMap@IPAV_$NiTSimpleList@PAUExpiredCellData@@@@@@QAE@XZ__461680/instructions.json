@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x4616AF",
-    "line": "mov     [esp+0D4h+var_BC], esi",
+    "line": "mov     [esp+0D4h+self], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x461726",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x46173E",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x461798",
-    "line": "mov     [esp+0D4h+var_9C], ecx",
+    "line": "mov     [esp+0D4h+position], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -493,19 +493,19 @@
   },
   {
     "ea": "0x4617A4",
-    "line": "lea     ecx, [esp+0D4h+var_C0]",
+    "line": "lea     ecx, [esp+0D4h+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4617A8",
-    "line": "push    ecx",
+    "line": "push    ecx; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4617A9",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x4617AF",
-    "line": "mov     [esp+0D8h+var_C0], eax",
+    "line": "mov     [esp+0D8h+valueOut], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -529,31 +529,31 @@
   },
   {
     "ea": "0x4617B7",
-    "line": "push    edx",
+    "line": "push    edx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4617B8",
-    "line": "lea     eax, [esp+0DCh+var_9C]",
+    "line": "lea     eax, [esp+0DCh+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4617BC",
-    "line": "push    eax",
+    "line": "push    eax; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4617BD",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4617C2",
-    "line": "mov     eax, [esp+0D4h+var_C0]",
+    "line": "mov     eax, [esp+0D4h+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x4617E0",
-    "line": "mov     [esp+0D4h+var_C0], 0",
+    "line": "mov     [esp+0D4h+valueOut], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -733,7 +733,7 @@
   },
   {
     "ea": "0x461838",
-    "line": "mov     [esp+0D8h+var_C0], edx",
+    "line": "mov     [esp+0D8h+valueOut], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -745,13 +745,13 @@
   },
   {
     "ea": "0x461841",
-    "line": "movsx   ebp, byte ptr [esp+0D4h+var_C0+2]",
+    "line": "movsx   ebp, byte ptr [esp+0D4h+valueOut+2]",
     "mnemonic": "movsx",
     "size": 5
   },
   {
     "ea": "0x461846",
-    "line": "movsx   ebx, byte ptr [esp+0D4h+var_C0+3]",
+    "line": "movsx   ebx, byte ptr [esp+0D4h+valueOut+3]",
     "mnemonic": "movsx",
     "size": 5
   },
@@ -787,7 +787,7 @@
   },
   {
     "ea": "0x461858",
-    "line": "mov     [esp+0D4h+var_C0], ecx",
+    "line": "mov     [esp+0D4h+valueOut], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -931,7 +931,7 @@
   },
   {
     "ea": "0x4618AE",
-    "line": "mov     [esp+0D4h+var_C0], ecx",
+    "line": "mov     [esp+0D4h+valueOut], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -979,7 +979,7 @@
   },
   {
     "ea": "0x4618CD",
-    "line": "mov     [esp+0D4h+var_C0], ecx",
+    "line": "mov     [esp+0D4h+valueOut], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1027,7 +1027,7 @@
   },
   {
     "ea": "0x4618EC",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1087,13 +1087,13 @@
   },
   {
     "ea": "0x461911",
-    "line": "mov     [esp+0D4h+var_C0], eax",
+    "line": "mov     [esp+0D4h+valueOut], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x461915",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1165,13 +1165,13 @@
   },
   {
     "ea": "0x46193A",
-    "line": "mov     esi, [esp+0D4h+var_BC]",
+    "line": "mov     esi, [esp+0D4h+self]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x46193E",
-    "line": "mov     eax, [esp+0D4h+var_C0]",
+    "line": "mov     eax, [esp+0D4h+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1243,7 +1243,7 @@
   },
   {
     "ea": "0x461972",
-    "line": "mov     [esp+0D4h+var_A8], eax",
+    "line": "mov     [esp+0D4h+source], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1261,7 +1261,7 @@
   },
   {
     "ea": "0x46197B",
-    "line": "lea     eax, [esp+0D4h+var_C0]",
+    "line": "lea     eax, [esp+0D4h+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1285,7 +1285,7 @@
   },
   {
     "ea": "0x461985",
-    "line": "mov     [esp+0DCh+var_C0], 0",
+    "line": "mov     [esp+0DCh+valueOut], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -1381,7 +1381,7 @@
   },
   {
     "ea": "0x4619BE",
-    "line": "mov     ecx, [esp+0D4h+var_A8]",
+    "line": "mov     ecx, [esp+0D4h+source]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1447,7 +1447,7 @@
   },
   {
     "ea": "0x4619DB",
-    "line": "mov     ecx, [esp+0D4h+var_A8]",
+    "line": "mov     ecx, [esp+0D4h+source]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1477,13 +1477,13 @@
   },
   {
     "ea": "0x4619E9",
-    "line": "mov     ecx, [esp+0D4h+var_A8]",
+    "line": "mov     ecx, [esp+0D4h+source]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4619ED",
-    "line": "mov     ebx, [esp+0D4h+var_C0]",
+    "line": "mov     ebx, [esp+0D4h+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1543,13 +1543,13 @@
   },
   {
     "ea": "0x461A09",
-    "line": "mov     esi, [esp+0D4h+var_BC]",
+    "line": "mov     esi, [esp+0D4h+self]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x461A0D",
-    "line": "cmp     [esp+0D4h+var_9C], 0",
+    "line": "cmp     [esp+0D4h+position], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1608,12 +1608,6 @@
     "size": 2
   },
   {
-    "ea": "0x461A2A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x461A30",
     "line": "cmp     dword ptr [ecx], 0",
     "mnemonic": "cmp",
@@ -1663,7 +1657,7 @@
   },
   {
     "ea": "0x461A47",
-    "line": "mov     [esp+0D4h+var_9C], eax",
+    "line": "mov     [esp+0D4h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1675,19 +1669,19 @@
   },
   {
     "ea": "0x461A51",
-    "line": "mov     ebx, [esp+0D4h+var_BC]",
+    "line": "mov     ebx, [esp+0D4h+self]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x461A55",
-    "line": "lea     edx, [esp+0D4h+var_C0]",
+    "line": "lea     edx, [esp+0D4h+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x461A59",
-    "line": "push    edx",
+    "line": "push    edx; valueOut",
     "mnemonic": "push",
     "size": 1
   },
@@ -1699,13 +1693,13 @@
   },
   {
     "ea": "0x461A5E",
-    "line": "push    eax",
+    "line": "push    eax; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x461A5F",
-    "line": "lea     ecx, [esp+0DCh+var_9C]",
+    "line": "lea     ecx, [esp+0DCh+position]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1717,19 +1711,19 @@
   },
   {
     "ea": "0x461A65",
-    "line": "push    ecx",
+    "line": "push    ecx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x461A66",
-    "line": "mov     ecx, [ebx]",
+    "line": "mov     ecx, [ebx]; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x461A68",
-    "line": "mov     [esp+0E0h+var_C0], ebp",
+    "line": "mov     [esp+0E0h+valueOut], ebp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1741,13 +1735,13 @@
   },
   {
     "ea": "0x461A70",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x461A75",
-    "line": "mov     eax, [esp+0D4h+var_C0]",
+    "line": "mov     eax, [esp+0D4h+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1933,7 +1927,7 @@
   },
   {
     "ea": "0x461AE1",
-    "line": "push    24h ; '$'; Size",
+    "line": "push    24h ; '$'; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -1945,19 +1939,19 @@
   },
   {
     "ea": "0x461AE7",
-    "line": "push    esi; Src",
+    "line": "push    esi; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x461AE8",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x461AE9",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1993,7 +1987,7 @@
   },
   {
     "ea": "0x461B05",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2059,31 +2053,31 @@
   },
   {
     "ea": "0x461B30",
-    "line": "push    2Ch ; ','; Size",
+    "line": "push    2Ch ; ','; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x461B32",
-    "line": "lea     ecx, [esp+0D8h+var_38]",
+    "line": "lea     ecx, [esp+0D8h+destination]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x461B39",
-    "line": "push    esi; Src",
+    "line": "push    esi; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x461B3A",
-    "line": "push    ecx; Dst",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x461B3B",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -2119,7 +2113,7 @@
   },
   {
     "ea": "0x461B57",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2137,7 +2131,7 @@
   },
   {
     "ea": "0x461B65",
-    "line": "push    1Ch; Size",
+    "line": "push    1Ch; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -2149,19 +2143,19 @@
   },
   {
     "ea": "0x461B6B",
-    "line": "push    esi; Src",
+    "line": "push    esi; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x461B6C",
-    "line": "push    edx; Dst",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x461B6D",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -2197,7 +2191,7 @@
   },
   {
     "ea": "0x461B83",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2221,7 +2215,7 @@
   },
   {
     "ea": "0x461B91",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2341,7 +2335,7 @@
   },
   {
     "ea": "0x461BD1",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2425,7 +2419,7 @@
   },
   {
     "ea": "0x461C02",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2455,7 +2449,7 @@
   },
   {
     "ea": "0x461C13",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2587,7 +2581,7 @@
   },
   {
     "ea": "0x461C61",
-    "line": "lea     edx, [esp+0D4h+var_A8]",
+    "line": "lea     edx, [esp+0D4h+source]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2611,7 +2605,7 @@
   },
   {
     "ea": "0x461C6B",
-    "line": "mov     [esp+0DCh+var_A8], 0",
+    "line": "mov     [esp+0DCh+source], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -2635,7 +2629,7 @@
   },
   {
     "ea": "0x461C80",
-    "line": "mov     ecx, [esp+0D4h+var_A8]",
+    "line": "mov     ecx, [esp+0D4h+source]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2656,12 +2650,6 @@
     "line": "jmp     short loc_461C90",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x461C8A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
   },
   {
     "ea": "0x461C90",
@@ -2779,31 +2767,31 @@
   },
   {
     "ea": "0x461CCE",
-    "line": "mov     ecx, [esp+0D4h+var_BC]",
+    "line": "mov     ecx, [esp+0D4h+self]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x461CD2",
-    "line": "mov     ecx, [ecx]",
+    "line": "mov     ecx, [ecx]; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x461CD4",
-    "line": "push    1",
+    "line": "push    1; force",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x461CD6",
-    "line": "push    eax",
+    "line": "push    eax; formID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x461CD7",
-    "line": "call    sub_452DF0",
+    "line": "call    SaveLoadChangesMap_RemoveChanges;",
     "mnemonic": "call",
     "size": 5
   },
@@ -2815,7 +2803,7 @@
   },
   {
     "ea": "0x461CE1",
-    "line": "mov     edx, [esp+0D4h+var_C0]",
+    "line": "mov     edx, [esp+0D4h+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2965,7 +2953,7 @@
   },
   {
     "ea": "0x461D42",
-    "line": "mov     ecx, [esp+0D4h+var_BC]",
+    "line": "mov     ecx, [esp+0D4h+self]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2989,13 +2977,13 @@
   },
   {
     "ea": "0x461D4D",
-    "line": "call    sub_453500",
+    "line": "call    sub_453500; EnginePatch v1: save-buffer allocation hook used to track record buffer base/end for later savegame parser count clamps.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x461D52",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -3007,7 +2995,7 @@
   },
   {
     "ea": "0x461D5A",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -3019,7 +3007,7 @@
   },
   {
     "ea": "0x461D60",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -3043,31 +3031,31 @@
   },
   {
     "ea": "0x461D6A",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x461D6C",
-    "line": "lea     ecx, [esp+0D8h+var_A8]",
+    "line": "lea     ecx, [esp+0D8h+source]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x461D70",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x461D71",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x461D77",
-    "line": "mov     [esp+0DCh+var_A8], ebp",
+    "line": "mov     [esp+0DCh+source], ebp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3097,25 +3085,25 @@
   },
   {
     "ea": "0x461D8C",
-    "line": "mov     edi, [esp+0D4h+var_BC]",
+    "line": "mov     edi, [esp+0D4h+self]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x461D90",
-    "line": "push    edx; Size",
+    "line": "push    edx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x461D91",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x461D92",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -3145,7 +3133,7 @@
   },
   {
     "ea": "0x461DA4",
-    "line": "mov     eax, [esp+0D4h+var_C0]",
+    "line": "mov     eax, [esp+0D4h+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3205,31 +3193,31 @@
   },
   {
     "ea": "0x461DC7",
-    "line": "mov     eax, [esp+0D4h+var_BC]",
+    "line": "mov     eax, [esp+0D4h+self]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x461DCB",
-    "line": "mov     ecx, [eax]",
+    "line": "mov     ecx, [eax]; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x461DCD",
-    "line": "push    80000008h",
+    "line": "push    80000008h; flags",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x461DD2",
-    "line": "push    edx",
+    "line": "push    edx; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x461DD3",
-    "line": "call    sub_452D60",
+    "line": "call    ChangesMap_RemoveFormChangeFlags;",
     "mnemonic": "call",
     "size": 5
   },
@@ -3253,7 +3241,7 @@
   },
   {
     "ea": "0x461DE0",
-    "line": "mov     ecx, [esp+0D4h+var_BC]",
+    "line": "mov     ecx, [esp+0D4h+self]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3367,7 +3355,7 @@
   },
   {
     "ea": "0x461E18",
-    "line": "call    TESObjectREFR_IsPersistent?",
+    "line": "call    TESObjectREFR_IsPersistent",
     "mnemonic": "call",
     "size": 5
   },
@@ -3445,31 +3433,31 @@
   },
   {
     "ea": "0x461E39",
-    "line": "mov     ecx, [esp+0D4h+var_BC]",
+    "line": "mov     ecx, [esp+0D4h+self]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x461E3D",
-    "line": "mov     ecx, [ecx]",
+    "line": "mov     ecx, [ecx]; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x461E3F",
-    "line": "push    1",
+    "line": "push    1; force",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x461E41",
-    "line": "push    edi",
+    "line": "push    edi; formID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x461E42",
-    "line": "call    sub_452DF0",
+    "line": "call    SaveLoadChangesMap_RemoveChanges;",
     "mnemonic": "call",
     "size": 5
   },
@@ -3565,31 +3553,31 @@
   },
   {
     "ea": "0x461E6F",
-    "line": "mov     ecx, [esp+0D4h+var_BC]",
+    "line": "mov     ecx, [esp+0D4h+self]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x461E73",
-    "line": "mov     ecx, [ecx]",
+    "line": "mov     ecx, [ecx]; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x461E75",
-    "line": "push    1",
+    "line": "push    1; force",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x461E77",
-    "line": "push    edi",
+    "line": "push    edi; formID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x461E78",
-    "line": "call    sub_452DF0",
+    "line": "call    SaveLoadChangesMap_RemoveChanges;",
     "mnemonic": "call",
     "size": 5
   },
@@ -3637,7 +3625,7 @@
   },
   {
     "ea": "0x461E8C",
-    "line": "cmp     [esp+0D4h+var_9C], 0",
+    "line": "cmp     [esp+0D4h+position], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -3931,7 +3919,7 @@
   },
   {
     "ea": "0x461F0D",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3991,7 +3979,7 @@
   },
   {
     "ea": "0x461F27",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4039,7 +4027,7 @@
   },
   {
     "ea": "0x461F3E",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4162,5 +4150,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9AE600",
+    "line": "lea     ecx, [ebp-98h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9AE606",
+    "line": "jmp     ??1?$NiTMap@IPAV?$NiTSimpleList@PAUExpiredCellData@@@@@@UAE@XZ; NiTMap<uint,NiTSimpleList<ExpiredCellData *> *>::~NiTMap<uint,NiTSimpleList<ExpiredCellData *> *>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE60B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AE60F",
+    "line": "lea     eax, [edx-0C4h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9AE615",
+    "line": "mov     ecx, [edx-0C8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9AE61B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AE61D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE622",
+    "line": "mov     eax, offset stru_ADAE00",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE627",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

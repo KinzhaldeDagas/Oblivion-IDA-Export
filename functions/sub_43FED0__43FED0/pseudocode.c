@@ -13,31 +13,31 @@ void __userpurge sub_43FED0(
   TESObjectCELL *v11; // ecx
   unsigned int j; // eax
 
-  cellProcessLevel = a1->members.cellProcessLevel;
-  v7 = cellProcessLevel == 6 || cellProcessLevel == 5;
-  i = uGridsToLoad * uGridsToLoad;
-  if ( !*(_DWORD *)(*(this + 0xF) + 4 * i - 4) )
-    v7 = 1;
-  v9 = a1;
-  if ( !v7 && i < uExteriorCellBuffer )
-    goto LABEL_11;
-  for ( i = 0; i < uExteriorCellBuffer; ++i )
+  cellProcessLevel = a1->members.cellProcessLevel; /*0x43fed5*/
+  v7 = cellProcessLevel == 6 || cellProcessLevel == 5; /*0x43fee8*/
+  i = uGridsToLoad * uGridsToLoad; /*0x43fef3*/
+  if ( !*(_DWORD *)(*(this + 0xF) + 4 * i - 4) ) /*0x43fef6*/
+    v7 = 1; /*0x43fefd*/
+  v9 = a1; /*0x43ff01*/
+  if ( !v7 && i < uExteriorCellBuffer ) /*0x43ff0b*/
+    goto LABEL_11; /*0x43ff0b*/
+  for ( i = 0; i < uExteriorCellBuffer; ++i ) /*0x43ff0d*/
   {
 LABEL_11:
-    v10 = *(this + 0xF);
-    v11 = *(TESObjectCELL **)(v10 + 4 * i);
-    *(_DWORD *)(v10 + 4 * i) = v9;
-    if ( v11 == a1 )
-      return;
-    v9 = v11;
+    v10 = *(this + 0xF); /*0x43ff18*/
+    v11 = *(TESObjectCELL **)(v10 + 4 * i); /*0x43ff1b*/
+    *(_DWORD *)(v10 + 4 * i) = v9; /*0x43ff23*/
+    if ( v11 == a1 ) /*0x43ff25*/
+      return; /*0x43ff25*/
+    v9 = v11; /*0x43ff27*/
   }
-  if ( v9 )
+  if ( v9 ) /*0x43ff30*/
   {
-    if ( TESObjectCELL_GetNiNode_(v9) )
-      TESObjectCELL_GetNiNode_(v9);
-    for ( j = 0; j < uExteriorCellBuffer && *(TESObjectCELL **)(*(this + 0xF) + 4 * j) != v9; ++j )
-      ;
-    sub_447BA0(st5_0, a3, a4, v9);
-    *((_BYTE *)this + 0x69) = 1;
+    if ( GetObjectPointerAt_054(v9) ) /*0x43ff34*/
+      GetObjectPointerAt_054(v9); /*0x43ff3f*/
+    for ( j = 0; j < uExteriorCellBuffer && *(TESObjectCELL **)(*(this + 0xF) + 4 * j) != v9; ++j ) /*0x43ff4a*/
+      ; /*0x43ff5c*/
+    TESObjectCELL_Deactivate(st5_0, a3, a4, v9); /*0x43ff68*/
+    *((_BYTE *)this + 0x69) = 1; /*0x43ff6d*/
   }
 }

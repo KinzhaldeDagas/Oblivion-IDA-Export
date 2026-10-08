@@ -1,9 +1,9 @@
-0x56A510: sub     esp, 8
-0x56A513: mov     eax, [esp+8+arg_8]
+0x56A510: sub     esp, 8; Oblivion condition-stream evaluator. operatorAndFlags bit 0 connects the current predicate to the next predicate by OR; an unflagged item closes that OR group, and groups are combined with AND. TESTopicInfo::EvaluateConditions supplies quest conditions as this list and INFO conditions as continuation, so evaluator state can cross their boundary.
+0x56A513: mov     eax, [esp+8+lowDispositionFailure]
 0x56A517: push    ebx
 0x56A518: xor     bl, bl
 0x56A51A: push    ebp
-0x56A51B: mov     ebp, [esp+10h+arg_4]
+0x56A51B: mov     ebp, [esp+10h+target]
 0x56A51F: test    ebp, ebp
 0x56A521: push    esi
 0x56A522: push    edi
@@ -17,7 +17,7 @@
 0x56A53C: mov     [esp+18h+var_2], bl
 0x56A540: jz      short loc_56A54F
 0x56A542: mov     ecx, ebp; this
-0x56A544: call    TESForm__GetExtraXTarget
+0x56A544: call    TESForm__GetExtraXTarget; Resolve TESObjectREFR target through its ExtraXTarget before evaluating any condition item. The subject argument is unchanged; each condition's operatorAndFlags bit 1 may swap subject and resolved target.
 0x56A549: test    eax, eax
 0x56A54B: jz      short loc_56A54F
 0x56A54D: mov     ebp, eax
@@ -29,17 +29,17 @@
 0x56A560: jz      loc_56A607
 0x56A566: cmp     [esp+18h+var_4], 0
 0x56A56B: mov     esi, [edi]
-0x56A56D: mov     byte ptr [esp+18h+arg_4], 0
+0x56A56D: mov     byte ptr [esp+18h+target], 0
 0x56A572: jnz     loc_56A684
 0x56A578: test    byte ptr [esi], 1
 0x56A57B: mov     edx, [esp+18h+arg_0]
-0x56A57F: lea     ecx, [esp+18h+arg_4]
-0x56A583: push    ecx
-0x56A584: push    ebp
-0x56A585: mov     ecx, esi
-0x56A587: push    edx
+0x56A57F: lea     ecx, [esp+18h+target]
+0x56A583: push    ecx; lowDispositionFailure
+0x56A584: push    ebp; target
+0x56A585: mov     ecx, esi; this
+0x56A587: push    edx; subject
 0x56A588: jnz     loc_56A651
-0x56A58E: call    sub_56AC50
+0x56A58E: call    ConditionItem_Evaluate; Oblivion ConditionItem_Evaluate directly dispatches through CommandInfo.eval; it optionally swaps subject/target with operatorAndFlags bit 1, resolves ExtraXTarget in the enclosing list evaluator, and uses ConditionParamDefaultsToTarget only for a missing ObjectReferenceID/Actor param1. Fallout's TESConditionItem::IsTrue (x4y6:0x82480750) instead routes action, target, and linked-reference roles using its serialized parameter flags; do not transfer that routing to Oblivion.
 0x56A593: cmp     [esp+18h+var_6], 0
 0x56A598: mov     bl, al
 0x56A59A: jz      short loc_56A5A5
@@ -47,21 +47,21 @@
 0x56A59E: mov     [esp+18h+var_6], 1
 0x56A5A3: jnz     short loc_56A5AA
 0x56A5A5: mov     [esp+18h+var_6], 0
-0x56A5AA: cmp     byte ptr [esp+18h+arg_4], 0
+0x56A5AA: cmp     byte ptr [esp+18h+target], 0
 0x56A5AF: jz      loc_56A63F
-0x56A5B5: mov     eax, [esp+18h+arg_8]
-0x56A5B9: mov     byte ptr [eax], 1
+0x56A5B5: mov     eax, [esp+18h+lowDispositionFailure]
+0x56A5B9: mov     byte ptr [eax], 1; A failed GetDisposition `>`/`>=` predicate marks a disposition-only fallback candidate. The output is provisional: a later ordinary failed predicate clears it at aggregate completion.
 0x56A5BC: cmp     [esp+18h+var_6], 0
 0x56A5C1: jnz     short loc_56A5D7
 0x56A5C3: cmp     [esp+18h+var_4], 0
 0x56A5C8: jnz     short loc_56A5D7
-0x56A5CA: mov     eax, [esp+18h+arg_8]
+0x56A5CA: mov     eax, [esp+18h+lowDispositionFailure]
 0x56A5CE: cmp     byte ptr [eax], 0
 0x56A5D1: jz      loc_56A732
-0x56A5D7: mov     eax, [esp+18h+arg_C]
+0x56A5D7: mov     eax, [esp+18h+continuation]
 0x56A5DB: test    eax, eax
 0x56A5DD: mov     edi, [edi+4]
-0x56A5E0: jz      short loc_56A5FF
+0x56A5E0: jz      short loc_56A5FF; When the quest-condition list ends, switch to the INFO-condition continuation without resetting AND/OR accumulators or the disposition-failure state. Thus a trailing quest condition marked OR-with-next can join the first INFO condition in one group.
 0x56A5E2: cmp     [esp+18h+var_1], 0
 0x56A5E7: jnz     short loc_56A5FF
 0x56A5E9: test    edi, edi
@@ -70,7 +70,7 @@
 0x56A5F1: jnz     short loc_56A5FF
 0x56A5F3: cmp     dword ptr [edi], 0
 0x56A5F6: jnz     short loc_56A5FF
-0x56A5F8: mov     edi, eax
+0x56A5F8: mov     edi, eax; Continuation handoff point: `this` now starts at TESTopicInfo.conditions while the existing combined-stream state remains live.
 0x56A5FA: mov     [esp+18h+var_1], 1
 0x56A5FF: test    edi, edi
 0x56A601: jnz     loc_56A557
@@ -80,7 +80,7 @@
 0x56A617: jz      loc_56A70F
 0x56A61D: test    bl, bl
 0x56A61F: jz      loc_56A70F
-0x56A625: mov     edx, [esp+18h+arg_8]
+0x56A625: mov     edx, [esp+18h+lowDispositionFailure]
 0x56A629: pop     edi
 0x56A62A: pop     esi
 0x56A62B: mov     [esp+10h+var_6], 1
@@ -94,9 +94,9 @@
 0x56A641: jnz     loc_56A5BC
 0x56A647: mov     [esp+18h+var_2], 1
 0x56A64C: jmp     loc_56A5BC
-0x56A651: call    sub_56AC50
+0x56A651: call    ConditionItem_Evaluate; Oblivion ConditionItem_Evaluate directly dispatches through CommandInfo.eval; it optionally swaps subject/target with operatorAndFlags bit 1, resolves ExtraXTarget in the enclosing list evaluator, and uses ConditionParamDefaultsToTarget only for a missing ObjectReferenceID/Actor param1. Fallout's TESConditionItem::IsTrue (x4y6:0x82480750) instead routes action, target, and linked-reference roles using its serialized parameter flags; do not transfer that routing to Oblivion.
 0x56A656: mov     bl, al
-0x56A658: mov     al, byte ptr [esp+18h+arg_4]
+0x56A658: mov     al, byte ptr [esp+18h+target]
 0x56A65C: test    al, al
 0x56A65E: mov     [esp+18h+var_4], 1
 0x56A663: mov     [esp+18h+var_3], 0
@@ -109,15 +109,15 @@
 0x56A684: test    bl, bl
 0x56A686: jnz     short loc_56A6C3
 0x56A688: mov     ecx, [esp+18h+arg_0]
-0x56A68C: lea     eax, [esp+18h+arg_4]
-0x56A690: push    eax
-0x56A691: push    ebp
-0x56A692: push    ecx
-0x56A693: mov     ecx, esi
-0x56A695: call    sub_56AC50
+0x56A68C: lea     eax, [esp+18h+target]
+0x56A690: push    eax; lowDispositionFailure
+0x56A691: push    ebp; target
+0x56A692: push    ecx; subject
+0x56A693: mov     ecx, esi; this
+0x56A695: call    ConditionItem_Evaluate; Oblivion ConditionItem_Evaluate directly dispatches through CommandInfo.eval; it optionally swaps subject/target with operatorAndFlags bit 1, resolves ExtraXTarget in the enclosing list evaluator, and uses ConditionParamDefaultsToTarget only for a missing ObjectReferenceID/Actor param1. Fallout's TESConditionItem::IsTrue (x4y6:0x82480750) instead routes action, target, and linked-reference roles using its serialized parameter flags; do not transfer that routing to Oblivion.
 0x56A69A: cmp     [esp+18h+var_5], 0
 0x56A69F: mov     bl, al
-0x56A6A1: mov     al, byte ptr [esp+18h+arg_4]
+0x56A6A1: mov     al, byte ptr [esp+18h+target]
 0x56A6A5: jnz     short loc_56A6B1
 0x56A6A7: test    al, al
 0x56A6A9: jnz     short loc_56A6B1
@@ -143,8 +143,8 @@
 0x56A6F0: jz      short loc_56A705
 0x56A6F2: cmp     [esp+18h+var_3], 0
 0x56A6F7: jnz     short loc_56A705
-0x56A6F9: mov     edx, [esp+18h+arg_8]
-0x56A6FD: mov     byte ptr [edx], 1
+0x56A6F9: mov     edx, [esp+18h+lowDispositionFailure]
+0x56A6FD: mov     byte ptr [edx], 1; A failed OR group sets lowDispositionFailure only if the group had a failing GetDisposition comparison and no non-disposition failure. Any independent failed condition makes the overall result ineligible for InfoRefusal fallback.
 0x56A700: jmp     loc_56A5D7
 0x56A705: mov     [esp+18h+var_2], 1
 0x56A70A: jmp     loc_56A5CA
@@ -153,14 +153,14 @@
 0x56A719: jz      short loc_56A739
 0x56A71B: cmp     [esp+18h+var_3], 0
 0x56A720: jnz     short loc_56A739
-0x56A722: mov     ecx, [esp+18h+arg_8]
+0x56A722: mov     ecx, [esp+18h+lowDispositionFailure]
 0x56A726: mov     byte ptr [ecx], 1
 0x56A729: jmp     short loc_56A732
 0x56A72B: cmp     [esp+18h+var_6], 0
 0x56A730: jnz     short loc_56A739
 0x56A732: cmp     [esp+18h+var_2], 0
-0x56A737: jz      short loc_56A740
-0x56A739: mov     edx, [esp+18h+arg_8]
+0x56A737: jz      short loc_56A740; Before returning a rejected aggregate condition stream, clear lowDispositionFailure when any non-disposition failure was encountered. TESTopic selection uses this output only for the player's low-disposition InfoRefusal fallback path.
+0x56A739: mov     edx, [esp+18h+lowDispositionFailure]
 0x56A73D: mov     byte ptr [edx], 0
 0x56A740: mov     al, [esp+18h+var_6]
 0x56A744: pop     edi

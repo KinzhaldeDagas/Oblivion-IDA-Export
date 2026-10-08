@@ -1,1 +1,4 @@
-HSTRING__
+struct HSTRING__
+{
+int unused;
+};

@@ -1,1 +1,4 @@
-HWINSTA__
+struct HWINSTA__
+{
+int unused;
+};

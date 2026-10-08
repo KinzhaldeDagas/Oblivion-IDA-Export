@@ -1,4 +1,4 @@
-0x6B83B0: push    0FFFFFFFFh
+0x6B83B0: push    0FFFFFFFFh; DialogueResponse constructor (0x18 bytes): owns copied display text at +0x00, copies only the first 8 bytes of TESResponse.TRDT to +0x08 (not a BSString), and owns the generated voice path at +0x10.
 0x6B83B2: push    offset SEH_6B83B0
 0x6B83B7: mov     eax, large fs:0
 0x6B83BD: push    eax
@@ -27,8 +27,8 @@
 0x6B83FD: mov     byte ptr [esp+20h+var_4], 1
 0x6B8402: jz      short loc_6B843B
 0x6B8404: push    eax; a3
-0x6B8405: mov     ecx, ebx
-0x6B8407: call    sub_52E100; ?what@runtime_error@@UBEPBDXZ
+0x6B8405: mov     ecx, ebx; this
+0x6B8407: call    TESResponse__GetText; ?what@runtime_error@@UBEPBDXZ
 0x6B840C: push    eax; a2
 0x6B840D: mov     ecx, esi; this
 0x6B840F: call    BSStringT_Set
@@ -56,3 +56,15 @@
 0x6B844B: pop     ebx
 0x6B844C: add     esp, 10h
 0x6B844F: retn    14h
+0x9C6F00: mov     ecx, [ebp-10h]; void *
+0x9C6F03: jmp     BSStringT_Clear
+0x9C6F08: mov     ecx, [ebp-10h]
+0x9C6F0B: add     ecx, 10h; void *
+0x9C6F0E: jmp     BSStringT_Clear
+0x9C6F13: mov     edx, [esp+a3]
+0x9C6F17: lea     eax, [edx-10h]
+0x9C6F1A: mov     ecx, [edx-14h]
+0x9C6F1D: xor     ecx, eax
+0x9C6F1F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C6F24: mov     eax, offset stru_AEF394
+0x9C6F29: jmp     ___CxxFrameHandler3

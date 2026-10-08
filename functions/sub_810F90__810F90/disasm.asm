@@ -1,4 +1,4 @@
-0x810F90: push    0FFFFFFFFh
+0x810F90: push    0FFFFFFFFh; Fog decode: DistantLOD constant-map builder maps DISTLOD fog constants to shared world fog vectors, not a separate DistantLOD fog producer.
 0x810F92: push    offset SEH_8122A0
 0x810F97: mov     eax, large fs:0
 0x810F9D: push    eax
@@ -75,7 +75,7 @@
 0x811067: push    0
 0x811069: push    10000007h
 0x81106E: push    offset aDiffuseLightCo; "Diffuse Light color"
-0x811073: call    eax
+0x811073: call    eax; Pass238: DistantLOD diffuse/light color maps to vs c5, instance storage this+0x34.
 0x811075: mov     ecx, [esi]
 0x811077: mov     edx, [ecx]
 0x811079: mov     edx, [edx+18h]
@@ -90,7 +90,7 @@
 0x811092: push    0
 0x811094: push    10000007h
 0x811099: push    offset aAmbientColor_0; "ambient color"
-0x81109E: call    edx
+0x81109E: call    edx; Pass238: DistantLOD ambient color maps to vs c13, instance storage this+0x2C.
 0x8110A0: mov     ecx, [esi]
 0x8110A2: mov     eax, [ecx]
 0x8110A4: mov     eax, [eax+18h]
@@ -139,7 +139,7 @@
 0x811121: mov     eax, [ecx]
 0x811123: mov     edx, [eax+18h]
 0x811126: push    0
-0x811128: push    offset dword_B46638
+0x811128: push    offset flt_B46638
 0x81112D: push    4
 0x81112F: push    10h
 0x811131: push    offset EmptyString
@@ -148,12 +148,12 @@
 0x81113A: push    0
 0x81113C: push    10000007h
 0x811141: push    offset aFogparam_0; "fogparam"
-0x811146: call    edx
+0x811146: call    edx; Fog constant-map decode: DistantLOD declares fogparam at vs c11 from shared world B45E14[0x209] / B46638; not a separate DistantLOD fog producer.
 0x811148: mov     ecx, [esi]
 0x81114A: mov     eax, [ecx]
 0x81114C: mov     edx, [eax+18h]
 0x81114F: push    0
-0x811151: push    offset dword_B46648
+0x811151: push    (offset flt_B46638+10h)
 0x811156: push    4
 0x811158: push    10h
 0x81115A: push    offset EmptyString
@@ -162,7 +162,7 @@
 0x811163: push    0
 0x811165: push    10000007h
 0x81116A: push    offset aFogcolor_0; "fogcolor"
-0x81116F: call    edx
+0x81116F: call    edx; Fog constant-map decode: DistantLOD declares fogcolor at vs c10 from shared world B45E14[0x20D] / B46648; not a separate DistantLOD fog producer.
 0x811171: movzx   eax, word ptr [edi+0ACh]
 0x811178: mov     ebp, [edi+0A4h]
 0x81117E: mov     ecx, [esi]
@@ -234,3 +234,20 @@
 0x811241: pop     ebp
 0x811242: add     esp, 10h
 0x811245: retn    4
+0x9D0CA0: mov     eax, [ebp-10h]
+0x9D0CA3: push    eax
+0x9D0CA4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D0CA9: pop     ecx
+0x9D0CAA: retn
+0x9D0CAB: mov     eax, [ebp-10h]
+0x9D0CAE: push    eax
+0x9D0CAF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D0CB4: pop     ecx
+0x9D0CB5: retn
+0x9D0CB6: mov     edx, [esp+arg_4]
+0x9D0CBA: lea     eax, [edx-10h]
+0x9D0CBD: mov     ecx, [edx-14h]
+0x9D0CC0: xor     ecx, eax
+0x9D0CC2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D0CC7: mov     eax, offset stru_AF94E0
+0x9D0CCC: jmp     ___CxxFrameHandler3

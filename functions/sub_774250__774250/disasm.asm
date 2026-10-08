@@ -3,7 +3,6 @@
 0x774257: test    esi, esi
 0x774259: jz      short loc_77427D
 0x77425B: jmp     short loc_774260
-0x77425D: align 10h
 0x774260: mov     ecx, [esi+24h]
 0x774263: test    ecx, ecx
 0x774265: jz      short loc_774276

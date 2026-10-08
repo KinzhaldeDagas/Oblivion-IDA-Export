@@ -13,13 +13,13 @@
 0x43684F: push    eax; void *
 0x436850: call    $LN21
 0x436855: push    edi
-0x436856: call    FormHeapFree
+0x436856: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x43685B: add     esp, 4
 0x43685E: pop     edi
 0x43685F: test    [esp+4+arg_0], 1
 0x436864: jz      short loc_43686F
 0x436866: push    esi
-0x436867: call    FormHeapFree
+0x436867: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x43686C: add     esp, 4
 0x43686F: mov     eax, esi
 0x436871: pop     esi

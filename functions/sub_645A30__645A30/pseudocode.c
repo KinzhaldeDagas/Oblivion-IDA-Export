@@ -1,42 +1,44 @@
-char __cdecl sub_645A30(TESObjectREFR *a1, TESObjectREFR *a2)
+// Verified body: rejects null/dead actor refs and non-door forms; applies only when the door is owned by the actor (using worldspace-sensitive ownership when applicable) and has an effective lock; sets locked bit on this/linked door and marks linked owner cells as not unlocked. Probable role: callback used by actor package/cell spatial queries; callers include EvaluatePackage and process movement paths.
+char __cdecl TESObjectREFR_SetOwnedDoorLockedForActor(TESObjectREFR *door, TESObjectREFR *actor)
 {
-  TESObjectREFR **TeleportExtraData; // eax
-  TESObjectCELL *ParentCell; // eax
-  TESObjectREFR **v5; // eax
+  TeleportData *TeleportData; // eax
+  TESObjectCELL *DwordAtOffset40; // eax
+  TeleportData *v5; // eax
   char v7; // [esp+Ch] [ebp+8h]
 
-  if ( a2 )
+  if ( actor ) /*0x645a37*/
   {
-    if ( !a2->vtbl->IsDead(a2, 0) )
+    if ( !actor->vtbl->IsDead(actor, 0) ) /*0x645a49*/
     {
-      if ( a1 )
+      if ( door ) /*0x645a5a*/
       {
-        if ( a1->vtbl->GetBaseForm(a1)->member.type == kFormType_Door )
+        if ( door->vtbl->GetBaseForm(door)->member.type == kFormType_Door ) /*0x645a70*/
         {
-          v7 = 0;
-          TeleportExtraData = (TESObjectREFR **)GetTeleportExtraData(a1);
-          if ( TeleportExtraData )
+          v7 = 0; /*0x645a74*/
+          TeleportData = TESObjectREFR_GetTeleportData(door); /*0x645a79*/
+          if ( TeleportData ) /*0x645a80*/
           {
-            if ( sub_42B470(TeleportExtraData)
-              || !TESObjectREFR_GetParentCell(a2)
-              || (ParentCell = TESObjectREFR_GetParentCell(a2), !TESObjectCELL_IsInterior(ParentCell)) )
+            if ( TeleportData_GetLinkedDoorWorldspace(&TeleportData->linkedDoor) /*0x645aa1*/
+              || !Shared_GetDwordAtOffset40(actor)
+              || (DwordAtOffset40 = (TESObjectCELL *)Shared_GetDwordAtOffset40(actor),
+                  !TESObjectCELL_IsInterior(DwordAtOffset40)) )
             {
-              v7 = 1;
+              v7 = 1; /*0x645aaa*/
             }
           }
-          if ( TESOBjectREFR_IsOwnedBy(a1, a2, v7) )
+          if ( TESOBjectREFR_IsOwnedBy(door, actor, v7) ) /*0x645ab7*/
           {
-            if ( sub_4D7740(a1) )
+            if ( TESObjectREFR_GetEffectiveDoorLock(door) ) /*0x645ac2*/
             {
-              sub_4DBE40(a1);
-              v5 = (TESObjectREFR **)GetTeleportExtraData(a1);
-              if ( v5 )
-                sub_42B5F0(v5, a1, 0);
+              TESObjectREFR_SetLockedFlagOnSelfOrLinkedDoor(door); /*0x645acd*/
+              v5 = TESObjectREFR_GetTeleportData(door); /*0x645ad4*/
+              if ( v5 ) /*0x645adb*/
+                TESObjectREFR_PropagateLockStateToLinkedDoorCells(&v5->linkedDoor, door, 0);// Verified crime/security path: after setting the door's locked bit, updates the linked-door owner cells with unlocked=false. /*0x645ae2*/
             }
           }
         }
       }
     }
   }
-  return 0;
+  return 0; /*0x645aea*/
 }

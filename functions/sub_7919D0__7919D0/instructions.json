@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7919D0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; OBLIVION AUTHORITY 2026-08-27: CBranch::MakeLeaf exact compact signature and dimming path. If leafInfo.dimmingEnabled: A=Accumulate(parentBranch); q=A+(1-A)*percentAlongParent; q3=q*q*q; scale=q3+(1-q3)*(1-leafInfo.dimmingScalar)=1-s+s*q3. Else scale=1. colorScaleByte=trunc(scale*255). Selected texture RGB plus one shared random variance offset is later SetColor(...,true), so green is clamped/quantized after colorScaleByte multiplication. Oblivion differs materially from RT4.1 source's limited-depth multiplicative/linear formula.",
     "mnemonic": "push",
     "size": 2
   },
@@ -217,13 +217,13 @@
   },
   {
     "ea": "0x791A48",
-    "line": "fld     [esp+58h+arg_4]",
+    "line": "fld     [esp+58h+percentAlongParent]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x791A4C",
-    "line": "mov     edx, [esp+58h+arg_8]",
+    "line": "mov     edx, [esp+58h+parentBranch]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x791A51",
-    "line": "fstp    [esp+5Ch+var_5C]; float",
+    "line": "fstp    [esp+5Ch+maxValue]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x791A57",
-    "line": "call    sub_78F600",
+    "line": "call    OB_CBranch_CheckBlossomRoom_010201A0; Leaf-room/blossom spacing predicate used before MakeLeaf.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,13 +343,13 @@
   },
   {
     "ea": "0x791A8A",
-    "line": "fstp    [esp+60h+var_5C]; float",
+    "line": "fstp    [esp+60h+maxValue]; maxValue",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x791A8E",
-    "line": "mov     ecx, offset unk_B429C9",
+    "line": "mov     ecx, offset stru_B429C9; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -361,13 +361,13 @@
   },
   {
     "ea": "0x791A95",
-    "line": "fstp    [esp+60h+var_60]; float",
+    "line": "fstp    [esp+60h+primaryWindWeight]; minValue",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x791A98",
-    "line": "call    sub_78EA00",
+    "line": "call    OB_stRandom_GetUniform_010201A0; Oblivion stRandom::GetUniform. Returns minValue + (maxValue - minValue) * SIdvRandomImpl::m_cUniform.Next(). Used throughout spline, branch, frond, tree, leaf-LOD, and seed generation paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x791AAD",
-    "line": "mov     dword ptr [esp+58h+var_3C], eax",
+    "line": "mov     [esp+58h+var_3C.x], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -409,19 +409,19 @@
   },
   {
     "ea": "0x791AB7",
-    "line": "fldcw   word ptr [esp+58h+var_3C]",
+    "line": "fldcw   word ptr [esp+58h+var_3C.x]",
     "mnemonic": "fldcw",
     "size": 4
   },
   {
     "ea": "0x791ABB",
-    "line": "fistp   [esp+58h+var_3C]",
+    "line": "fistp   qword ptr [esp+58h+var_3C.x]",
     "mnemonic": "fistp",
     "size": 4
   },
   {
     "ea": "0x791ABF",
-    "line": "mov     eax, dword ptr [esp+58h+var_3C]",
+    "line": "mov     eax, [esp+58h+var_3C.x]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -571,13 +571,13 @@
   },
   {
     "ea": "0x791B1A",
-    "line": "fstp    [esp+60h+var_5C]; float",
+    "line": "fstp    [esp+60h+maxValue]; maxValue",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x791B1E",
-    "line": "mov     ecx, offset unk_B429C9",
+    "line": "mov     ecx, offset stru_B429C9; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -589,19 +589,19 @@
   },
   {
     "ea": "0x791B25",
-    "line": "fstp    [esp+60h+var_60]; float",
+    "line": "fstp    [esp+60h+primaryWindWeight]; minValue",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x791B28",
-    "line": "call    sub_78EA00",
+    "line": "call    OB_stRandom_GetUniform_010201A0; Oblivion stRandom::GetUniform. Returns minValue + (maxValue - minValue) * SIdvRandomImpl::m_cUniform.Next(). Used throughout spline, branch, frond, tree, leaf-LOD, and seed generation paths.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x791B2D",
-    "line": "fstp    dword ptr [esp+58h+var_3C]",
+    "line": "fstp    [esp+58h+var_3C.x]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x791B4C",
-    "line": "fld     dword ptr [esp+58h+var_3C]",
+    "line": "fld     [esp+58h+var_3C.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -691,25 +691,25 @@
   },
   {
     "ea": "0x791B60",
-    "line": "mov     dword ptr [esp+58h+var_3C], eax",
+    "line": "mov     [esp+58h+var_3C.x], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x791B64",
-    "line": "fldcw   word ptr [esp+58h+var_3C]",
+    "line": "fldcw   word ptr [esp+58h+var_3C.x]",
     "mnemonic": "fldcw",
     "size": 4
   },
   {
     "ea": "0x791B68",
-    "line": "fistp   [esp+58h+var_3C]",
+    "line": "fistp   qword ptr [esp+58h+var_3C.x]",
     "mnemonic": "fistp",
     "size": 4
   },
   {
     "ea": "0x791B6C",
-    "line": "mov     eax, dword ptr [esp+58h+var_3C]",
+    "line": "mov     eax, [esp+58h+var_3C.x]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -811,13 +811,13 @@
   },
   {
     "ea": "0x791B9F",
-    "line": "mov     ecx, offset dword_B429CC",
+    "line": "mov     ecx, offset stru_B429CC",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x791BA4",
-    "line": "call    sub_54F7A0",
+    "line": "call    sub_54F7A0; Bounds-checked float-vector element access. Returns begin + index*4; begin is vector+4 (FaceGenMatrix+0x0C).",
     "mnemonic": "call",
     "size": 5
   },
@@ -847,13 +847,13 @@
   },
   {
     "ea": "0x791BB7",
-    "line": "mov     ebp, [esp+58h+arg_1C]",
+    "line": "mov     ebp, [esp+58h+leaves]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x791BBB",
-    "line": "mov     esi, [esp+58h+arg_0]",
+    "line": "mov     esi, [esp+58h+position]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -889,7 +889,7 @@
   },
   {
     "ea": "0x791BC9",
-    "line": "push    offset dword_B429FC",
+    "line": "push    offset stru_B429FC",
     "mnemonic": "push",
     "size": 5
   },
@@ -937,7 +937,7 @@
   },
   {
     "ea": "0x791BDB",
-    "line": "call    sub_78FD30",
+    "line": "call    OB_CBranch_CheckLeafRoom_010201A0; Leaf-room spacing check used for stock leaf collision/placement modes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -973,7 +973,7 @@
   },
   {
     "ea": "0x791BF3",
-    "line": "fstp    [esp+58h+arg_1C]",
+    "line": "fstp    [esp+58h+leaves]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -985,31 +985,31 @@
   },
   {
     "ea": "0x791BF9",
-    "line": "mov     eax, [esp+58h+arg_8]",
+    "line": "mov     eax, [esp+58h+parentBranch]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x791BFD",
-    "line": "push    eax",
+    "line": "push    eax; branch",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x791BFE",
-    "line": "call    sub_78FA00",
+    "line": "call    OB_CBranch_AccumulateLeafDimmingPercent_010201A0; Calls Oblivion full-chain accumulator A(parentBranch); full-chain complement interpolation is authoritative and differs from supplied RT4.1 source.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x791C03",
-    "line": "fstp    [esp+5Ch+arg_8]",
+    "line": "fstp    [esp+5Ch+parentBranch]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x791C07",
-    "line": "fld     [esp+5Ch+arg_8]",
+    "line": "fld     [esp+5Ch+parentBranch]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1045,7 +1045,7 @@
   },
   {
     "ea": "0x791C16",
-    "line": "fld     [esp+58h+arg_4]",
+    "line": "fld     [esp+58h+percentAlongParent]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1075,13 +1075,13 @@
   },
   {
     "ea": "0x791C22",
-    "line": "fstp    [esp+58h+arg_8]",
+    "line": "fstp    [esp+58h+parentBranch]; q = A(parentBranch) + (1 - A(parentBranch)) * percentAlongParent.",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x791C26",
-    "line": "fld     [esp+58h+arg_8]",
+    "line": "fld     [esp+58h+parentBranch]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1105,13 +1105,13 @@
   },
   {
     "ea": "0x791C30",
-    "line": "fstp    [esp+58h+arg_8]",
+    "line": "fstp    [esp+58h+parentBranch]; Cubes the hierarchical percent: q3 = q*q*q.",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x791C34",
-    "line": "fld     dword ptr [ecx+4]",
+    "line": "fld     dword ptr [ecx+4]; Reads OB_SIdvLeafInfo_010201A0::dimmingScalar at leafInfo+4. Final float scale is 1-dimmingScalar+dimmingScalar*q3.",
     "mnemonic": "fld",
     "size": 3
   },
@@ -1123,19 +1123,19 @@
   },
   {
     "ea": "0x791C39",
-    "line": "fstp    [esp+58h+arg_4]",
+    "line": "fstp    [esp+58h+percentAlongParent]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x791C3D",
-    "line": "fld     [esp+58h+arg_4]",
+    "line": "fld     [esp+58h+percentAlongParent]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x791C41",
-    "line": "fld     [esp+58h+arg_8]",
+    "line": "fld     [esp+58h+parentBranch]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1171,7 +1171,7 @@
   },
   {
     "ea": "0x791C4F",
-    "line": "fstp    [esp+58h+arg_1C]",
+    "line": "fstp    [esp+58h+leaves]; Final generated-leaf scale = q3 + (1-q3)*(1-s) = 1-s+s*q3.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1201,7 +1201,7 @@
   },
   {
     "ea": "0x791C5F",
-    "line": "mov     [esp+58h+arg_8], edi",
+    "line": "mov     [esp+58h+parentBranch], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1225,7 +1225,7 @@
   },
   {
     "ea": "0x791C6F",
-    "line": "mov     ecx, [esp+58h+arg_18]",
+    "line": "mov     ecx, [esp+58h+primaryWindGroup]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1237,7 +1237,7 @@
   },
   {
     "ea": "0x791C77",
-    "line": "push    ecx; int",
+    "line": "push    ecx; primaryWindGroup",
     "mnemonic": "push",
     "size": 1
   },
@@ -1249,13 +1249,13 @@
   },
   {
     "ea": "0x791C7B",
-    "line": "fstp    [esp+68h+var_60]; float",
+    "line": "fstp    [esp+68h+primaryWindWeight]; primaryWindWeight",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x791C7F",
-    "line": "mov     ecx, offset unk_B429C9",
+    "line": "mov     ecx, offset stru_B429C9; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1267,7 +1267,7 @@
   },
   {
     "ea": "0x791C8A",
-    "line": "fstp    [esp+68h+var_64]; float",
+    "line": "fstp    [esp+68h+var_64]; maxValue",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1279,25 +1279,25 @@
   },
   {
     "ea": "0x791C90",
-    "line": "fstp    [esp+68h+var_68]; float",
+    "line": "fstp    [esp+68h+minValue]; minValue",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x791C93",
-    "line": "call    sub_78EA00",
+    "line": "call    OB_stRandom_GetUniform_010201A0; Oblivion stRandom::GetUniform. Returns minValue + (maxValue - minValue) * SIdvRandomImpl::m_cUniform.Next(). Used throughout spline, branch, frond, tree, leaf-LOD, and seed generation paths.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x791C98",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x791C9D",
-    "line": "fld     [esp+60h+arg_1C]",
+    "line": "fld     [esp+60h+leaves]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -1327,37 +1327,37 @@
   },
   {
     "ea": "0x791CB4",
-    "line": "push    edx; char",
+    "line": "push    edx; angleIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x791CB5",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Converts scale*255 with truncation toward zero; constructor stores the low byte as CBillboardLeaf::colorScaleByte at +0x18.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x791CBA",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x791CBC",
-    "line": "push    eax; char",
+    "line": "push    eax; colorScale",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x791CBD",
-    "line": "push    esi; int",
+    "line": "push    esi; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x791CBE",
-    "line": "call    sub_7A7D10",
+    "line": "call    OB_CBillboardLeaf_ctor_args_010201A0; SpeedTreeRT 4.1 source match: CBillboardLeaf constructor. Initializes position, wind fields, texture index/color defaults, and orientation state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1381,19 +1381,19 @@
   },
   {
     "ea": "0x791CC9",
-    "line": "lea     edx, [esp+58h+arg_8]",
+    "line": "lea     edx, [esp+58h+parentBranch]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x791CCD",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x791CCE",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1405,13 +1405,13 @@
   },
   {
     "ea": "0x791CD8",
-    "line": "mov     [esp+5Ch+arg_8], esi",
+    "line": "mov     [esp+5Ch+parentBranch], esi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x791CDC",
-    "line": "call    sub_791770",
+    "line": "call    OB_stVector4_PushBack_010201A0; Pushes one 4-byte value into an OB_stVector4. Writes directly at end when capacity remains, otherwise calls the checked insert-one helper. Oblivion uses it for CBranch pointers and other pointer-sized SpeedTree lists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1435,25 +1435,25 @@
   },
   {
     "ea": "0x791CEC",
-    "line": "lea     ecx, [esp+58h+arg_8]",
+    "line": "lea     ecx, [esp+58h+parentBranch]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x791CF0",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x791CF1",
-    "line": "mov     ecx, offset dword_B429FC",
+    "line": "mov     ecx, offset stru_B429FC; this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x791CF6",
-    "line": "call    sub_791770",
+    "line": "call    OB_stVector4_PushBack_010201A0; Pushes one 4-byte value into an OB_stVector4. Writes directly at end when capacity remains, otherwise calls the checked insert-one helper. Oblivion uses it for CBranch pointers and other pointer-sized SpeedTree lists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1489,31 +1489,31 @@
   },
   {
     "ea": "0x791D08",
-    "line": "push    eax",
+    "line": "push    eax; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x791D09",
-    "line": "add     ecx, 10h",
+    "line": "add     ecx, 10h; this",
     "mnemonic": "add",
     "size": 3
   },
   {
     "ea": "0x791D0C",
-    "line": "call    sub_78FA40",
+    "line": "call    OB_stVectorLeafTexture_At_010201A0; SpeedTree CBillboardLeaf raw alternate index is texture*2+mirror. Divide by two before indexing compact SIdvLeafTexture or leaf map-bank collections.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x791D11",
-    "line": "mov     ecx, [esp+58h+arg_C]",
+    "line": "mov     ecx, [esp+58h+normal]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x791D15",
-    "line": "mov     [esi+40h], bl",
+    "line": "mov     [esi+40h], bl; Stores raw alternate texture index (texture*2 + mirror) in CBillboardLeaf+0x40; this byte is not a zero-based map-bank collection index.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1591,13 +1591,13 @@
   },
   {
     "ea": "0x791D32",
-    "line": "fstp    [esp+58h+arg_8]",
+    "line": "fstp    [esp+58h+parentBranch]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x791D36",
-    "line": "mov     edx, [esp+58h+arg_8]",
+    "line": "mov     edx, [esp+58h+parentBranch]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1615,13 +1615,13 @@
   },
   {
     "ea": "0x791D42",
-    "line": "mov     [esp+58h+arg_8], edx",
+    "line": "mov     [esp+58h+parentBranch], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x791D46",
-    "line": "fld     [esp+58h+arg_8]",
+    "line": "fld     [esp+58h+parentBranch]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1651,7 +1651,7 @@
   },
   {
     "ea": "0x791D57",
-    "line": "mov     eax, [esp+58h+arg_10]",
+    "line": "mov     eax, [esp+58h+parentDirection]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1675,43 +1675,43 @@
   },
   {
     "ea": "0x791D61",
-    "line": "fstp    [esp+5Ch+var_5C]; float",
+    "line": "fstp    [esp+5Ch+maxValue]; percent",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x791D64",
-    "line": "push    ecx; int",
+    "line": "push    ecx; end",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x791D65",
-    "line": "mov     ecx, [esp+60h+arg_10]",
+    "line": "mov     ecx, [esp+60h+parentDirection]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x791D69",
-    "line": "push    ecx; int",
+    "line": "push    ecx; start",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x791D6A",
-    "line": "lea     edx, [esp+64h+var_18]",
+    "line": "lea     edx, [esp+64h+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x791D6E",
-    "line": "push    edx; int",
+    "line": "push    edx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x791D6F",
-    "line": "call    sub_78F250",
+    "line": "call    OB_stVec3_Interpolate_010201A0; Computes result = start + (end - start) * percent for all three components. CBranch::MakeLeaf passes parent direction, geometric normal, and the leaf texture color-variance scalar. RT4.1 Branch.cpp/IdvVector.h corroborate the VecInterpolate role.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1741,37 +1741,37 @@
   },
   {
     "ea": "0x791D7F",
-    "line": "mov     dword ptr [esp+58h+var_3C], ecx",
+    "line": "mov     [esp+58h+var_3C.x], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x791D83",
-    "line": "lea     ecx, [esp+58h+var_3C]",
+    "line": "lea     ecx, [esp+58h+var_3C]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x791D87",
-    "line": "mov     [esp+58h+var_34], eax",
+    "line": "mov     [esp+58h+var_3C.z], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x791D8B",
-    "line": "mov     dword ptr [esp+58h+var_3C+4], edx",
+    "line": "mov     [esp+58h+var_3C.y], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x791D8F",
-    "line": "call    sub_78ED70",
+    "line": "call    OB_NormalizeVec3_010201A0; Normalizes one OB_stVec3 in place as v *= 1/sqrt(dot(v,v)); the binary has no zero-length guard. Used by CBranch::MakeLeaf and projected-shadow closest-point code. RT4.1 IdvVector.h corroborates stVec3::Normalize.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x791D94",
-    "line": "fld     dword ptr [esp+58h+var_3C+4]",
+    "line": "fld     [esp+58h+var_3C.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1783,19 +1783,19 @@
   },
   {
     "ea": "0x791D9A",
-    "line": "mov     eax, dword ptr [esp+58h+var_3C]",
+    "line": "mov     eax, [esp+58h+var_3C.x]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x791D9E",
-    "line": "fld     [esp+58h+var_34]",
+    "line": "fld     [esp+58h+var_3C.z]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x791DA2",
-    "line": "mov     ecx, dword ptr [esp+58h+var_3C+4]",
+    "line": "mov     ecx, [esp+58h+var_3C.y]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1807,7 +1807,7 @@
   },
   {
     "ea": "0x791DA8",
-    "line": "mov     edx, [esp+58h+var_34]",
+    "line": "mov     edx, [esp+58h+var_3C.z]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1867,7 +1867,7 @@
   },
   {
     "ea": "0x791DC3",
-    "line": "lea     ecx, [esp+58h+var_30]",
+    "line": "lea     ecx, [esp+58h+var_30]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1879,13 +1879,13 @@
   },
   {
     "ea": "0x791DCA",
-    "line": "fstp    [esp+58h+var_30]",
+    "line": "fstp    [esp+58h+var_30.x]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x791DCE",
-    "line": "fld     dword ptr [esp+58h+var_3C]",
+    "line": "fld     [esp+58h+var_3C.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1921,7 +1921,7 @@
   },
   {
     "ea": "0x791DDC",
-    "line": "fstp    [esp+58h+var_2C]",
+    "line": "fstp    [esp+58h+var_30.y]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1939,31 +1939,31 @@
   },
   {
     "ea": "0x791DE4",
-    "line": "fstp    [esp+58h+var_28]",
+    "line": "fstp    [esp+58h+var_30.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x791DE8",
-    "line": "call    sub_78ED70",
+    "line": "call    OB_NormalizeVec3_010201A0; Normalizes one OB_stVec3 in place as v *= 1/sqrt(dot(v,v)); the binary has no zero-length guard. Used by CBranch::MakeLeaf and projected-shadow closest-point code. RT4.1 IdvVector.h corroborates stVec3::Normalize.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x791DED",
-    "line": "mov     ecx, [esp+58h+var_30]",
+    "line": "mov     ecx, [esp+58h+var_30.x]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x791DF1",
-    "line": "mov     edx, [esp+58h+var_2C]",
+    "line": "mov     edx, [esp+58h+var_30.y]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x791DF5",
-    "line": "mov     eax, [esp+58h+var_28]",
+    "line": "mov     eax, [esp+58h+var_30.z]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1999,13 +1999,13 @@
   },
   {
     "ea": "0x791E08",
-    "line": "fstp    [esp+60h+var_5C]; float",
+    "line": "fstp    [esp+60h+maxValue]; maxValue",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x791E0C",
-    "line": "mov     ecx, offset unk_B429C9",
+    "line": "mov     ecx, offset stru_B429C9; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2023,25 +2023,25 @@
   },
   {
     "ea": "0x791E16",
-    "line": "fstp    [esp+60h+var_60]; float",
+    "line": "fstp    [esp+60h+primaryWindWeight]; minValue",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x791E19",
-    "line": "call    sub_78EA00",
+    "line": "call    OB_stRandom_GetUniform_010201A0; Oblivion stRandom::GetUniform. Returns minValue + (maxValue - minValue) * SIdvRandomImpl::m_cUniform.Next(). Used throughout spline, branch, frond, tree, leaf-LOD, and seed generation paths.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x791E1E",
-    "line": "fstp    [esp+58h+arg_8]",
+    "line": "fstp    [esp+58h+parentBranch]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x791E22",
-    "line": "push    1",
+    "line": "push    1; applyDimming",
     "mnemonic": "push",
     "size": 2
   },
@@ -2053,19 +2053,19 @@
   },
   {
     "ea": "0x791E27",
-    "line": "lea     ecx, [esp+5Ch+var_24]",
+    "line": "lea     ecx, [esp+5Ch+rgb]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x791E2B",
-    "line": "fld     [esp+5Ch+arg_8]",
+    "line": "fld     [esp+5Ch+parentBranch]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x791E2F",
-    "line": "push    ecx",
+    "line": "push    ecx; color",
     "mnemonic": "push",
     "size": 1
   },
@@ -2077,7 +2077,7 @@
   },
   {
     "ea": "0x791E32",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -2095,7 +2095,7 @@
   },
   {
     "ea": "0x791E38",
-    "line": "fstp    [esp+60h+arg_8]",
+    "line": "fstp    [esp+60h+parentBranch]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2113,7 +2113,7 @@
   },
   {
     "ea": "0x791E41",
-    "line": "fstp    [esp+60h+arg_4]",
+    "line": "fstp    [esp+60h+percentAlongParent]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2125,13 +2125,13 @@
   },
   {
     "ea": "0x791E48",
-    "line": "fstp    [esp+60h+var_24]",
+    "line": "fstp    [esp+60h+rgb]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x791E4C",
-    "line": "fld     [esp+60h+arg_8]",
+    "line": "fld     [esp+60h+parentBranch]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2143,7 +2143,7 @@
   },
   {
     "ea": "0x791E54",
-    "line": "fld     [esp+60h+arg_4]",
+    "line": "fld     [esp+60h+percentAlongParent]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2155,7 +2155,7 @@
   },
   {
     "ea": "0x791E5C",
-    "line": "call    sub_7A7F10",
+    "line": "call    OB_CBillboardLeaf_SetColor_010201A0; OBLIVION AUTHORITY (2026-08-24): Interior callsite, not the function entry. Calls CBillboardLeaf::SetColor(newLeaf, generatedRgb, true), applying CBillboardLeaf+0x18 colorScaleByte once when generating LOD0 leaves.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2212,5 +2212,77 @@
     "line": "retn    20h ; ' '",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CBC80",
+    "line": "mov     eax, [ebp+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CBC83",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CBC84",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CBC89",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CBC8A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CBC8B",
+    "line": "mov     edx, [esp+percentAlongParent]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CBC8F",
+    "line": "lea     eax, [edx-48h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CBC92",
+    "line": "mov     ecx, [edx-4Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CBC95",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CBC97",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CBC9C",
+    "line": "mov     eax, offset stru_AF4BE0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CBCA1",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

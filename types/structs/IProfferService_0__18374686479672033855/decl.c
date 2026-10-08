@@ -1,1 +1,1 @@
-IProfferService_0
+typedef IProfferService IProfferService_0;

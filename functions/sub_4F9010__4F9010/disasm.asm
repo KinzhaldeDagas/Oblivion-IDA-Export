@@ -7,13 +7,13 @@
 0x4F901E: fstp    qword ptr [edi]
 0x4F9020: jz      short loc_4F9043
 0x4F9022: mov     ecx, esi; this
-0x4F9024: call    TESObjectREFR_GetParentCell
+0x4F9024: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x4F9029: test    eax, eax
 0x4F902B: jz      short loc_4F9043
 0x4F902D: mov     ecx, esi; this
-0x4F902F: call    TESObjectREFR_GetParentCell
+0x4F902F: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x4F9034: mov     ecx, eax; this
-0x4F9036: call    TESObjectCELL_IsInterior
+0x4F9036: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x4F903B: test    al, al
 0x4F903D: jz      short loc_4F9043
 0x4F903F: fld1

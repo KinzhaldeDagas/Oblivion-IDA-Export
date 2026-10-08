@@ -4,7 +4,7 @@
 0x6FE163: mov     edi, [esp+0Ch+arg_0]
 0x6FE167: push    edi
 0x6FE168: mov     ebx, ecx
-0x6FE16A: call    nullsub_returnvVoid_1arg
+0x6FE16A: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x6FE16F: mov     ecx, edi
 0x6FE171: call    sub_7124D0
 0x6FE176: mov     esi, eax
@@ -17,7 +17,6 @@
 0x6FE187: jz      short loc_6FE1BC
 0x6FE189: mov     ebx, esi
 0x6FE18B: jmp     short loc_6FE190
-0x6FE18D: align 10h
 0x6FE190: mov     ecx, edi
 0x6FE192: call    sub_7124A0
 0x6FE197: mov     ecx, edi

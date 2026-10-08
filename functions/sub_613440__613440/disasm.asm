@@ -1,14 +1,14 @@
-0x613440: push    ebx
+0x613440: push    ebx; Tests surfaceDistance against maximumDistance plus a combat-style-controlled tolerance. Ranged weapon modes 2 and 4 suppress that extra tolerance.
 0x613441: push    esi
 0x613442: mov     esi, ecx
 0x613444: mov     ecx, [esi+3Ch]
 0x613447: xor     bl, bl
-0x613449: call    sub_5E0F50
+0x613449: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x61344E: mov     edx, [eax]
 0x613450: mov     ecx, eax
 0x613452: mov     eax, [edx+11Ch]
 0x613458: call    eax
-0x61345A: fld     [esp+8+arg_4]
+0x61345A: fld     [esp+8+maximumDistance]
 0x61345E: cmp     al, 64h ; 'd'
 0x613460: jge     short loc_613487
 0x613462: cmp     dword ptr [esi+70h], 0
@@ -26,15 +26,15 @@
 0x613485: jmp     short loc_613489
 0x613487: fldz
 0x613489: mov     esi, [esi+70h]
-0x61348C: fstp    [esp+8+arg_4]
+0x61348C: fstp    [esp+8+maximumDistance]
 0x613490: cmp     esi, 2
 0x613493: jz      short loc_61349A
 0x613495: cmp     esi, 4
 0x613498: jnz     short loc_6134A0
 0x61349A: fldz
-0x61349C: fstp    [esp+8+arg_4]
-0x6134A0: fld     [esp+8+arg_0]
-0x6134A4: fld     [esp+8+arg_4]
+0x61349C: fstp    [esp+8+maximumDistance]
+0x6134A0: fld     [esp+8+surfaceDistance]
+0x6134A4: fld     [esp+8+maximumDistance]
 0x6134A8: faddp   st(2), st
 0x6134AA: fcompp
 0x6134AC: fnstsw  ax

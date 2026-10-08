@@ -1,6 +1,6 @@
 0x4A4B60: push    esi
 0x4A4B61: mov     esi, ecx
-0x4A4B63: call    sub_4A3560
+0x4A4B63: call    TESRegionData_SaveHeader; Verified: serializes region-data type/override/priority base header into RDAT.
 0x4A4B68: movzx   eax, word ptr [esi+0Ch]
 0x4A4B6C: cmp     ax, 0FFFFh
 0x4A4B70: jnz     short loc_4A4B85

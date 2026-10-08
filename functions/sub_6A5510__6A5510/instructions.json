@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x6A5525",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -103,19 +103,19 @@
   },
   {
     "ea": "0x6A5545",
-    "line": "push    ebx",
+    "line": "push    ebx; excludedPoints",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A5546",
-    "line": "push    1",
+    "line": "push    1; pathMode",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6A5548",
-    "line": "push    esi",
+    "line": "push    esi; actor",
     "mnemonic": "push",
     "size": 1
   },
@@ -139,13 +139,13 @@
   },
   {
     "ea": "0x6A5553",
-    "line": "push    eax",
+    "line": "push    eax; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A5554",
-    "line": "call    sub_67D820",
+    "line": "call    TESPathGrid_FindNearestReachablePointForActor; Verified actor-aware PathGrid point selection. For a placed reference, builds a temporary graph node at the requested position, attaches below-water and SubSpace flags, and asks that cell's PathGrid for the best reachable candidate. For exterior coordinates, searches the loaded cell grid; when the position is in the active world's loaded neighborhood, compares actor-aware candidates from the containing and adjacent cell PathGrids. It may reduce cost for candidates with the extra reachability result; exact meaning of that mode remains Candidate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -492,12 +492,6 @@
     "size": 2
   },
   {
-    "ea": "0x6A5618",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x6A5620",
     "line": "mov     eax, [esp+0BCh+var_A4]",
     "mnemonic": "mov",
@@ -505,13 +499,13 @@
   },
   {
     "ea": "0x6A5624",
-    "line": "mov     ecx, [eax]",
+    "line": "mov     ecx, [eax]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6A5626",
-    "line": "call    sub_4BEF40",
+    "line": "call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.",
     "mnemonic": "call",
     "size": 5
   },
@@ -595,7 +589,7 @@
   },
   {
     "ea": "0x6A5650",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -913,7 +907,7 @@
   },
   {
     "ea": "0x6A572C",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1285,7 +1279,7 @@
   },
   {
     "ea": "0x6A5820",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1297,7 +1291,7 @@
   },
   {
     "ea": "0x6A5827",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1495,13 +1489,13 @@
   },
   {
     "ea": "0x6A5895",
-    "line": "fstp    [esp+0C0h+var_C0]; float",
+    "line": "fstp    [esp+0C0h+angleZ]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6A5898",
-    "line": "lea     ecx, [esp+0C0h+var_24]",
+    "line": "lea     ecx, [esp+0C0h+var_24]; this",
     "mnemonic": "lea",
     "size": 7
   },
@@ -1513,7 +1507,7 @@
   },
   {
     "ea": "0x6A58A3",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1810,12 +1804,6 @@
     "line": "jmp     short loc_6A5960",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x6A595A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
   },
   {
     "ea": "0x6A5960",

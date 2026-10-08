@@ -1,10 +1,10 @@
-0x4EED80: push    esi
-0x4EED81: mov     esi, [esp+4+arg_0]
+0x4EED80: push    esi; Verified: clears destination weather list when mode is false, then copies each 8-byte {TESWeather*, sortWeight} payload into a new list node; mode true preserves existing entries and appends.
+0x4EED81: mov     esi, [esp+4+source]
 0x4EED85: test    esi, esi
 0x4EED87: push    edi
 0x4EED88: mov     edi, ecx
 0x4EED8A: jz      short loc_4EEDC8
-0x4EED8C: cmp     [esp+8+arg_4], 0
+0x4EED8C: cmp     [esp+8+append], 0
 0x4EED91: jnz     short loc_4EED98
 0x4EED93: call    sub_5B1D70
 0x4EED98: cmp     dword ptr [esi+4], 0

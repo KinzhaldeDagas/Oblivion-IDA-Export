@@ -1,18 +1,31 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 5,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_8907A0",
+  "chunks": [
+    [
+      "0x8907A0",
+      "0x890887"
+    ]
+  ],
+  "chunks_sha256": "acb708de663127d91a8e76fd78462804c242e48daec7839ea21ef07c78bc3010",
+  "comment_regular": "TES4 authoritative: set transient push/knockback channel. Converts caller world vector by hkFactor, divides by duration, and if stronger than current +0x2F0 stores +0x300=duration and +0x2F0=push vector/duration. Not a generic ledge-climb impulse API.",
+  "comment_repeatable": "TES4 authoritative: set transient push/knockback channel. Converts caller world vector by hkFactor, divides by duration, and if stronger than current +0x2F0 stores +0x300=duration and +0x2F0=push vector/duration. Not a generic ledge-climb impulse API.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 6,
+  "display_name": "bhkCharacterController_SetTransientPushVector",
   "end_ea": "0x890887",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "sub_8907A0",
+  "name": "bhkCharacterController_SetTransientPushVector",
   "segment": ".text",
   "sha256": "acb708de663127d91a8e76fd78462804c242e48daec7839ea21ef07c78bc3010",
   "size": 231,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x8907A0",
+  "total_chunk_size": 231,
   "type": "void __thiscall(__m128 *this, float *, float)",
   "xrefs_from_count": 75,
   "xrefs_to_count": 5

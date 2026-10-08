@@ -10,7 +10,7 @@
 0x49474F: mov     edi, [esp+118h+lpFileName]
 0x494756: mov     esi, ecx
 0x494758: push    offset unk_A2F830; lpCriticalSection
-0x49475D: mov     ecx, offset stru_B34E00
+0x49475D: mov     ecx, 0B34E00h
 0x494762: call    NiEnterCriticalSection
 0x494767: mov     eax, ds:0B34D8Ch
 0x49476C: test    eax, eax
@@ -39,7 +39,7 @@
 0x4947B4: mov     ecx, esi
 0x4947B6: call    edx
 0x4947B8: mov     byte ptr ds:0B34E80h, 0
-0x4947BF: mov     ecx, offset stru_B34E00; lpCriticalSection
+0x4947BF: mov     ecx, 0B34E00h; lpCriticalSection
 0x4947C4: call    NiLeaveCriticalSection_0
 0x4947C9: push    0; hTemplateFile
 0x4947CB: push    80h ; '€'; dwFlagsAndAttributes

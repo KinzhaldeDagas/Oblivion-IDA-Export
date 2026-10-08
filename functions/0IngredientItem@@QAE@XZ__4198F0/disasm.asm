@@ -53,3 +53,21 @@
 0x4199B8: pop     ebx
 0x4199B9: add     esp, 10h
 0x4199BC: retn
+0x9AB520: mov     ecx, [ebp-10h]; this
+0x9AB523: jmp     ??1MagicItemObject@@UAE@XZ; MagicItemObject::~MagicItemObject(void)
+0x9AB528: mov     ecx, [ebp-10h]
+0x9AB52B: add     ecx, 40h ; '@'; this
+0x9AB52E: jmp     ??1TESModel@@UAE@XZ; TESModel::~TESModel(void)
+0x9AB533: mov     ecx, [ebp-10h]
+0x9AB536: add     ecx, 58h ; 'X'; void *
+0x9AB539: jmp     j_TESTexture_destr
+0x9AB53E: mov     ecx, [ebp-10h]
+0x9AB541: add     ecx, 70h ; 'p'
+0x9AB544: jmp     TESWeightForm_destr
+0x9AB549: mov     edx, [esp+arg_4]
+0x9AB54D: lea     eax, [edx-14h]
+0x9AB550: mov     ecx, [edx-18h]
+0x9AB553: xor     ecx, eax
+0x9AB555: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AB55A: mov     eax, offset stru_AD8418
+0x9AB55F: jmp     ___CxxFrameHandler3

@@ -1,1 +1,1 @@
-VARKIND
+typedef tagVARKIND VARKIND;

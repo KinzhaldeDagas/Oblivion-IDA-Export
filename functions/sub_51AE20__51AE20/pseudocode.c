@@ -1,41 +1,39 @@
-double __thiscall sub_51AE20(int this, unsigned int ArgList)
+// Returns a 32-bit required-note time from TESAnimGroup +0x10 by zero-based note index after validating count, storage, and QNaN. Invalid entries report an error and return 0.0f.
+float __thiscall TESAnimGroup_GetRequiredNoteTime(CAS_TESAnimGroup_Decoded *this, int noteIndex)
 {
-  unsigned int v4; // ecx
-  int v5; // eax
+  CAS_u32 requiredNoteCount; // ecx
+  float *requiredNoteTimes; // eax
 
-  if ( (int)ArgList < 0 )
+  if ( noteIndex < 0 ) /*0x51ae2a*/
   {
-    PrintError(
+    PrintError( /*0x51ae47*/
       "Invalid anim group action (action %d too small) in %s (%04X).",
-      ArgList,
-      *(const char **)(0x24 * (unsigned __int8)*(_WORD *)(this + 8) + 0xB102E0),
-      *(unsigned __int16 *)(this + 8));
-    return 0.0;
+      noteIndex,
+      *(const char **)(0x24 * (unsigned __int8)this->encodedKey + 0xB102E0),
+      this->encodedKey);
+    return 0.0; /*0x51ae53*/
   }
-  v4 = *(_DWORD *)(this + 0xC);
-  if ( ArgList < v4 )
+  requiredNoteCount = this->requiredNoteCount; /*0x51ae56*/
+  if ( noteIndex >= requiredNoteCount ) /*0x51ae5b*/
   {
-    v5 = *(_DWORD *)(this + 0x10);
-    if ( !v5 )
-      return 0.0;
-    if ( _isnan(*(float *)(v5 + 4 * ArgList)) )
-    {
-      PrintError("Time %d in group %04X is QNAN", ArgList, *(unsigned __int16 *)(this + 8));
-      return 0.0;
-    }
-    else
-    {
-      return *(float *)(*(_DWORD *)(this + 0x10) + 4 * ArgList);
-    }
+    PrintError( /*0x51ae79*/
+      "Invalid anim group action (action %d too big %d max) in %s (%04x).",
+      noteIndex,
+      requiredNoteCount,
+      *(const char **)(0x24 * (unsigned __int8)this->encodedKey + 0xB102E0),
+      this->encodedKey);
+    return 0.0; /*0x51ae85*/
+  }
+  requiredNoteTimes = this->requiredNoteTimes; /*0x51ae88*/
+  if ( !requiredNoteTimes ) /*0x51ae8d*/
+    return 0.0; /*0x51ae8d*/
+  if ( _isnan(requiredNoteTimes[noteIndex]) ) /*0x51ae98*/
+  {
+    PrintError("Time %d in group %04X is QNAN", noteIndex, this->encodedKey); /*0x51aeaf*/
+    return 0.0; /*0x51aeb7*/
   }
   else
   {
-    PrintError(
-      "Invalid anim group action (action %d too big %d max) in %s (%04x).",
-      ArgList,
-      v4,
-      *(const char **)(0x24 * (unsigned __int8)*(_WORD *)(this + 8) + 0xB102E0),
-      *(unsigned __int16 *)(this + 8));
-    return 0.0;
+    return this->requiredNoteTimes[noteIndex]; /*0x51aec1*/
   }
 }

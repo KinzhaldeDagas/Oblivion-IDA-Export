@@ -10,19 +10,19 @@
 0x597D16: ja      loc_598179
 0x597D1C: push    ebp; a3
 0x597D1D: push    edi; a3
-0x597D1E: mov     edi, [esp+30h+arg_4]
+0x597D1E: mov     edi, [esp+30h+target]
 0x597D22: xor     ebp, ebp
 0x597D24: cmp     edi, ebp
 0x597D26: jz      loc_598177
 0x597D2C: cmp     ebx, 10h
 0x597D2F: jnz     short loc_597D65
-0x597D31: mov     ecx, edi
-0x597D33: call    sub_5893B0
+0x597D31: mov     ecx, edi; this
+0x597D33: call    Tile__IsVisible; AchievementsNative evidence: target eligibility helper returns true when the tile and ancestors are not suppressed by the observed flag path; inventory hover uses it before accepting header/item targets.
 0x597D38: test    al, al
 0x597D3A: jnz     short loc_597D65
 0x597D3C: push    offset aCont_p4p5_head; "cont_p4p5_header_text"
-0x597D41: push    edi; int
-0x597D42: call    sub_58B800
+0x597D41: push    edi; target
+0x597D42: call    Tile__GetTileByName; Verified XML source resolver. sibling() walks parent child list to current tile, returns following list node, and wraps to head if current is last or not found. It does not filter visible, target, or listindex. sibling(name) compares immediate sibling names case-insensitively. Fallout analogue 0x827DC678.
 0x597D47: add     esp, 8
 0x597D4A: push    ebp
 0x597D4B: push    0FDDh
@@ -33,7 +33,7 @@
 0x597D56: call    InterfaceManager_GetSingleton
 0x597D5B: add     esp, 8
 0x597D5E: mov     ecx, eax
-0x597D60: call    sub_57F9F0
+0x597D60: call    InterfaceManager__SetCurrentFocusTarget; AchievementsNative evidence: focused tile with xlist=&xitem drives parent xscroll by pulsing the xscroll target's user5 through -999999, tile xscroll, then 0; do not leave scroll target user5 at the desired scroll value.
 0x597D65: mov     [esi+3Ch], ebp
 0x597D68: call    sub_57BD80
 0x597D6D: cmp     edi, ebp
@@ -46,7 +46,7 @@
 0x597D88: push    0FE0h
 0x597D8D: mov     ecx, edi
 0x597D8F: call    Tile_GetFloat
-0x597D94: call    Double_To_SInt32
+0x597D94: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x597D99: mov     ebp, eax
 0x597D9B: push    0FD1h
 0x597DA0: mov     ecx, edi
@@ -64,21 +64,21 @@
 0x597DCC: fldz
 0x597DCE: mov     ecx, edi
 0x597DD0: fstp    [esp+30h+var_10]
-0x597DD4: call    sub_588D90
+0x597DD4: call    sub_588D90; AchievementsNative evidence: stock tile depth helper starts with tile depth and adds parent depth for locus ancestors / top menu child; InventoryMenu hover sets focus box depth to this value minus 0.5.
 0x597DD9: fsub    qword ptr ds:0A2FAA0h
 0x597DDF: mov     ecx, [esi+34h]
 0x597DE2: fstp    qword ptr [esp+30h+var_18]; a3
 0x597DE6: call    sub_589390
 0x597DEB: mov     ecx, eax
-0x597DED: call    sub_588D90
+0x597DED: call    sub_588D90; AchievementsNative evidence: stock tile depth helper starts with tile depth and adds parent depth for locus ancestors / top menu child; InventoryMenu hover sets focus box depth to this value minus 0.5.
 0x597DF2: fsubr   qword ptr [esp+30h+var_18]
 0x597DF6: push    ecx
 0x597DF7: mov     ecx, [esi+34h]; this
 0x597DFA: fstp    [esp+34h+arg_0]
 0x597DFE: fld     [esp+34h+arg_0]
-0x597E02: fstp    [esp+34h+a2]; a3
-0x597E05: push    0FABh; a2
-0x597E0A: call    Tile_SetFloat
+0x597E02: fstp    [esp+34h+a2]; value
+0x597E05: push    0FABh; propertyCode
+0x597E0A: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x597E0F: lea     ecx, [ebp+ebp+0]
 0x597E13: mov     [esp+30h+arg_0], ecx
 0x597E17: fild    [esp+30h+arg_0]
@@ -89,11 +89,11 @@
 0x597E2B: fsub    [esp+30h+arg_0]
 0x597E2F: push    ecx
 0x597E30: mov     ecx, [esi+34h]; this
-0x597E33: fstp    [esp+34h+arg_4]
-0x597E37: fld     [esp+34h+arg_4]
-0x597E3B: fstp    [esp+34h+a2]; a3
-0x597E3E: push    0FCBh; a2
-0x597E43: call    Tile_SetFloat
+0x597E33: fstp    [esp+34h+target]
+0x597E37: fld     [esp+34h+target]
+0x597E3B: fstp    [esp+34h+a2]; value
+0x597E3E: push    0FCBh; propertyCode
+0x597E43: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x597E48: push    0FCAh
 0x597E4D: mov     ecx, edi
 0x597E4F: call    Tile_GetFloat
@@ -102,41 +102,41 @@
 0x597E59: mov     ecx, [esi+34h]; this
 0x597E5C: fstp    [esp+34h+arg_0]
 0x597E60: fld     [esp+34h+arg_0]
-0x597E64: fstp    [esp+34h+a2]; a3
-0x597E67: push    0FCAh; a2
-0x597E6C: call    Tile_SetFloat
+0x597E64: fstp    [esp+34h+a2]; value
+0x597E67: push    0FCAh; propertyCode
+0x597E6C: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x597E71: fild    [esp+30h+a3]
 0x597E75: mov     ecx, edi
 0x597E77: fstp    [esp+30h+arg_0]
-0x597E7B: call    sub_588C50
+0x597E7B: call    sub_588C50; AchievementsNative evidence: stock tile X helper starts with tile x and adds ancestor x only when ancestor locus is nonzero; use for inventory focus/popup coordinate mimic.
 0x597E80: fadd    [esp+30h+arg_0]
 0x597E84: fld     [esp+30h+var_10]
-0x597E88: call    Double_To_SInt32
-0x597E8D: mov     [esp+30h+arg_4], eax
-0x597E91: fisub   [esp+30h+arg_4]
+0x597E88: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
+0x597E8D: mov     [esp+30h+target], eax
+0x597E91: fisub   [esp+30h+target]
 0x597E95: push    ecx
 0x597E96: mov     ecx, [esi+34h]; this
-0x597E99: fstp    [esp+34h+arg_4]
-0x597E9D: fld     [esp+34h+arg_4]
-0x597EA1: fstp    [esp+34h+a2]; a3
-0x597EA4: push    0FADh; a2
-0x597EA9: call    Tile_SetFloat
+0x597E99: fstp    [esp+34h+target]
+0x597E9D: fld     [esp+34h+target]
+0x597EA1: fstp    [esp+34h+a2]; value
+0x597EA4: push    0FADh; propertyCode
+0x597EA9: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x597EAE: mov     ecx, edi
-0x597EB0: call    sub_588CF0
+0x597EB0: call    sub_588CF0; AchievementsNative evidence: stock tile Y helper starts with tile y and adds ancestor y only when ancestor locus is nonzero; inventory hover passes this row Y to popup path.
 0x597EB5: fadd    [esp+30h+arg_0]
 0x597EB9: push    ecx
 0x597EBA: mov     ecx, [esi+34h]; this
 0x597EBD: fstp    [esp+34h+arg_0]
 0x597EC1: fld     [esp+34h+arg_0]
-0x597EC5: fstp    [esp+34h+a2]; a3
-0x597EC8: push    0FACh; a2
-0x597ECD: call    Tile_SetFloat
+0x597EC5: fstp    [esp+34h+a2]; value
+0x597EC8: push    0FACh; propertyCode
+0x597ECD: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x597ED2: fld     dword ptr ds:0A379B4h
 0x597ED8: push    ecx
 0x597ED9: mov     ecx, [esi+34h]; this
-0x597EDC: fstp    [esp+34h+a2]; a3
-0x597EDF: push    0FA1h; a2
-0x597EE4: call    Tile_SetFloat
+0x597EDC: fstp    [esp+34h+a2]; value
+0x597EDF: push    0FA1h; propertyCode
+0x597EE4: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x597EE9: cmp     ebx, 33h ; '3'
 0x597EEC: mov     [esi+3Ch], edi
 0x597EEF: jnz     loc_598177
@@ -145,16 +145,16 @@
 0x597EFE: mov     ecx, edi
 0x597F00: jz      short loc_597F11
 0x597F02: call    Tile_GetFloat
-0x597F07: call    Double_To_SInt32
+0x597F07: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x597F0C: mov     [esi+5Ch], eax
 0x597F0F: jmp     short loc_597F1E
 0x597F11: call    Tile_GetFloat
-0x597F16: call    Double_To_SInt32
+0x597F16: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x597F1B: mov     [esi+58h], eax
 0x597F1E: push    0FB9h
 0x597F23: mov     ecx, edi
 0x597F25: call    Tile_GetFloat
-0x597F2A: call    Double_To_SInt32
+0x597F2A: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x597F2F: cmp     byte ptr [esi+64h], 0
 0x597F33: jnz     short loc_597F3F
 0x597F35: mov     ecx, ds:0B333C4h
@@ -203,7 +203,7 @@
 0x597FC6: call    Tile_GetFloat
 0x597FCB: fstp    [esp+30h+var_8]
 0x597FCF: mov     ecx, ebx
-0x597FD1: call    sub_588D90
+0x597FD1: call    sub_588D90; AchievementsNative evidence: stock tile depth helper starts with tile depth and adds parent depth for locus ancestors / top menu child; InventoryMenu hover sets focus box depth to this value minus 0.5.
 0x597FD6: fadd    [esp+30h+var_8]
 0x597FDA: push    1; arg1
 0x597FDC: push    0; canCreate
@@ -211,7 +211,7 @@
 0x597FE2: call    InterfaceManager_GetSingleton
 0x597FE7: mov     esi, [esi+4]
 0x597FEA: add     esp, 8
-0x597FED: call    sub_57D7F0
+0x597FED: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x597FF2: fstp    [esp+30h+var_8]
 0x597FF6: push    0FC4h
 0x597FFB: mov     ecx, esi
@@ -219,7 +219,7 @@
 0x598002: fsubr   [esp+30h+var_8]
 0x598006: mov     eax, [esp+30h+var_1C]
 0x59800A: test    eax, eax
-0x59800C: fstp    [esp+30h+arg_4]
+0x59800C: fstp    [esp+30h+target]
 0x598010: jz      short loc_59802E
 0x598012: test    byte ptr [eax+88h], 1
 0x598019: jz      short loc_59802E
@@ -241,11 +241,11 @@
 0x598041: push    ecx
 0x598042: fstp    [esp+34h+a2]; float
 0x598045: push    ebp; int
-0x598046: fld     [esp+38h+arg_4]
+0x598046: fld     [esp+38h+target]
 0x59804A: push    ecx
 0x59804B: mov     ecx, edi
 0x59804D: fstp    [esp+3Ch+var_3C]; float
-0x598050: call    sub_588CF0
+0x598050: call    sub_588CF0; AchievementsNative evidence: stock tile Y helper starts with tile y and adds ancestor y only when ancestor locus is nonzero; inventory hover passes this row Y to popup path.
 0x598055: sub     esp, 8
 0x598058: fstp    [esp+44h+var_40]; float
 0x59805C: add     esi, 18h
@@ -262,11 +262,11 @@
 0x598080: push    ecx
 0x598081: fstp    [esp+34h+a2]; float
 0x598084: push    ebp; int
-0x598085: fld     [esp+38h+arg_4]
+0x598085: fld     [esp+38h+target]
 0x598089: push    ecx
 0x59808A: mov     ecx, edi
 0x59808C: fstp    [esp+3Ch+var_3C]; float
-0x59808F: call    sub_588CF0
+0x59808F: call    sub_588CF0; AchievementsNative evidence: stock tile Y helper starts with tile y and adds ancestor y only when ancestor locus is nonzero; inventory hover passes this row Y to popup path.
 0x598094: sub     esp, 8
 0x598097: fstp    [esp+44h+var_40]; float
 0x59809B: fld     [esp+44h+a3]
@@ -291,20 +291,20 @@
 0x5980CE: sub     esp, 8
 0x5980D1: fstp    [esp+38h+a2]; float
 0x5980D5: mov     ecx, edi
-0x5980D7: fld     [esp+38h+arg_4]
+0x5980D7: fld     [esp+38h+target]
 0x5980DB: fstp    [esp+38h+var_38]; float
-0x5980DE: call    sub_588CF0
+0x5980DE: call    sub_588CF0; AchievementsNative evidence: stock tile Y helper starts with tile y and adds ancestor y only when ancestor locus is nonzero; inventory hover passes this row Y to popup path.
 0x5980E3: sub     esp, 8
 0x5980E6: fstp    [esp+40h+var_3C]; float
 0x5980EA: fld     [esp+40h+a3]
 0x5980EE: fstp    [esp+40h+var_40]; float
 0x5980F1: push    ebp; int
-0x5980F2: call    sub_57BCC0
+0x5980F2: call    sub_57BCC0; AchievementsNative evidence: armor/soul/sigil popup wrapper. Args observed from InventoryMenu hover: inventory entry, exposed popup X, source row Y, bottom margin, popup depth; opens/validates MagicPopupMenu then forwards to 0x5B4E10.
 0x5980F7: add     esp, 14h
 0x5980FA: mov     ecx, ebp
 0x5980FC: call    ContainerEntryExtraData_DestroyDataTable
 0x598101: push    ebp
-0x598102: call    FormHeapFree
+0x598102: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x598107: add     esp, 4
 0x59810A: pop     edi
 0x59810B: pop     ebp
@@ -317,10 +317,10 @@
 0x598119: jz      short loc_598177
 0x59811B: fld1
 0x59811D: push    ecx
-0x59811E: fstp    [esp+34h+a2]; a3
+0x59811E: fstp    [esp+34h+a2]; value
 0x598121: mov     ecx, esi; this
-0x598123: push    0FA1h; a2
-0x598128: call    Tile_SetFloat
+0x598123: push    0FA1h; propertyCode
+0x598128: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59812D: push    1; arg1
 0x59812F: push    0; canCreate
 0x598131: call    InterfaceManager_GetSingleton
@@ -337,10 +337,10 @@
 0x598152: jz      short loc_598177
 0x598154: fld1
 0x598156: push    ecx
-0x598157: fstp    [esp+34h+a2]; a3
+0x598157: fstp    [esp+34h+a2]; value
 0x59815A: mov     ecx, esi; this
-0x59815C: push    0FA1h; a2
-0x598161: call    Tile_SetFloat
+0x59815C: push    0FA1h; propertyCode
+0x598161: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x598166: push    1; arg1
 0x598168: push    ebp; canCreate
 0x598169: call    InterfaceManager_GetSingleton

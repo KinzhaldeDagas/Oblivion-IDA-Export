@@ -4,10 +4,10 @@
 0x968218: add     esp, 4
 0x96821B: test    eax, eax
 0x96821D: jz      short loc_968252
-0x96821F: push    offset dword_B258E8
-0x968224: push    offset dword_B258DC
-0x968229: push    offset dword_B258D0
-0x96822E: push    offset Vector3_InitValue?
+0x96821F: push    offset rhs
+0x968224: push    offset stru_B258DC
+0x968229: push    offset stru_B258D0
+0x96822E: push    offset g_zeroNiPoint3
 0x968233: push    offset flt_B258F4
 0x968238: mov     ecx, eax
 0x96823A: call    sub_961580

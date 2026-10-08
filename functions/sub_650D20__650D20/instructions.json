@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x650D20",
-    "line": "push    ebp",
+    "line": "push    ebp; Rebuilds weapon and ammunition 3D for actorRef from this MiddleHighProcess's equipped data. Native ABI is ECX process plus one actorRef stack argument.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x650D23",
-    "line": "mov     edi, [esp+0Ch+arg_0]",
+    "line": "mov     edi, [esp+0Ch+actorRef]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x650DB5",
-    "line": "call    edx",
+    "line": "call    edx; Full equipment-3D rebuild captures equipped slot 0x0C (AMMO) from ContainerChanges into process equipped-ammo data.",
     "mnemonic": "call",
     "size": 2
   },
@@ -463,31 +463,31 @@
   },
   {
     "ea": "0x650DFB",
-    "line": "push    eax",
+    "line": "push    eax; weapon",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x650DFC",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x650DFE",
-    "line": "call    EquipWeapon",
+    "line": "call    EquipWeapon; Equips the supplied form on this reference. The native ABI has one stack argument: the weapon/form pointer.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x650E03",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x650E05",
-    "line": "call    sub_4DCCF0",
+    "line": "call    TESObjectREFR_ClearEquippedAmmo3D; Full equipment-3D rebuild explicitly clears existing equipped AMMO/quiver 3D before reconstructing equipment presentation. This is not a per-shot release path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,19 +517,19 @@
   },
   {
     "ea": "0x650E17",
-    "line": "push    ecx",
+    "line": "push    ecx; ammo",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x650E18",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x650E1A",
-    "line": "call    sub_4E1DF0",
+    "line": "call    TESObjectREFR_RefreshEquippedAmmo3D; Refreshes equipped-AMMO/quiver 3D for a reference. For PlayerCharacter it updates both relevant animation perspectives; then refreshes quiver arrow visibility and actor 3D state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -955,7 +955,7 @@
   },
   {
     "ea": "0x650EE5",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1045,7 +1045,7 @@
   },
   {
     "ea": "0x650F0F",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1123,7 +1123,7 @@
   },
   {
     "ea": "0x650F35",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

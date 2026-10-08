@@ -1,1 +1,1 @@
-IRunningObjectTableVtbl_0
+typedef IRunningObjectTableVtbl IRunningObjectTableVtbl_0;

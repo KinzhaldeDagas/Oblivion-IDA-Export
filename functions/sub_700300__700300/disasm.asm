@@ -45,11 +45,11 @@
 0x700370: mov     byte ptr [esi+edi-1], 0
 0x700375: call    NiObjectNET_SetName
 0x70037A: push    esi
-0x70037B: call    FormHeapFree
+0x70037B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x700380: add     esp, 4
 0x700383: cmp     word ptr [ebp+14h], 0
 0x700388: jz      short loc_700405
-0x70038A: push    offset stru_B3F600; lpCriticalSection
+0x70038A: push    offset unk_B3F600; lpCriticalSection
 0x70038F: call    dword ptr ds:0A2806Ch
 0x700395: call    dword ptr ds:0A2808Ch
 0x70039B: add     dword ptr ds:0B3F67Ch, 1
@@ -76,14 +76,14 @@
 0x7003D2: call    eax
 0x7003D4: mov     ecx, [esp+10h+arg_0]
 0x7003D8: push    eax
-0x7003D9: call    NiNode_AddNiExtraData
+0x7003D9: call    NiObjectNET_AddExtraData; Pass269 ABI and ownership proof: NiObjectNET::AddExtraData consumes one stack argument with RET 4 and also expects owning object in ECX/EBX at this build's callsites. The plugin wrapper must not execute caller-side ADD ESP,4.
 0x7003DE: add     edi, 1
 0x7003E1: cmp     di, [ebp+14h]
 0x7003E5: jb      short loc_7003B0
 0x7003E7: sub     dword ptr ds:0B3F67Ch, 1
 0x7003EE: jnz     short loc_7003FA
 0x7003F0: mov     dword ptr ds:0B3F678h, 0
-0x7003FA: push    offset stru_B3F600; lpCriticalSection
+0x7003FA: push    offset unk_B3F600; lpCriticalSection
 0x7003FF: call    dword ptr ds:0A28074h
 0x700405: mov     ecx, [ebp+0Ch]
 0x700408: test    ecx, ecx

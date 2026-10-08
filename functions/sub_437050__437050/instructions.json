@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x437050",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified base initializer for QueuedTexture: initializes IOTask fields, stores normalized path and resolves archive/file entry via HashFilePath + ArchiveManager_LazyFileLookup.",
     "mnemonic": "push",
     "size": 2
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x437085",
-    "line": "mov     edi, [esp+34h+arg_0]",
+    "line": "mov     edi, [esp+34h+path]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x4370B8",
-    "line": "call    sub_434600",
+    "line": "call    sub_434600; QueuedFileEntry path copy helper. Allocates and copies source path string into entry +0x20.",
     "mnemonic": "call",
     "size": 5
   },
@@ -382,5 +382,101 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AC3C0",
+    "line": "mov     ecx, [ebp-1Ch]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AC3C3",
+    "line": "jmp     ??1LipTask@@UAE@XZ; LipTask::~LipTask(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AC3C8",
+    "line": "mov     ecx, [ebp-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AC3CB",
+    "line": "add     ecx, 28h ; '('; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9AC3CE",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AC3D3",
+    "line": "mov     edx, dword ptr [esp+a2]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AC3D7",
+    "line": "lea     eax, [edx-24h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AC3DA",
+    "line": "mov     ecx, [edx-28h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AC3DD",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AC3DF",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AC3E4",
+    "line": "add     eax, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9AC3E7",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AC3EA",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AC3EC",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AC3F1",
+    "line": "mov     eax, offset stru_AD909C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AC3F6",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

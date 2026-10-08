@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x625D80",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Constructs the dynamic 0x64-byte DialoguePackage and takes ownership of the prepared Conversation. Runtime fields at +0x50/+0x54/+0x58 are the conversation/item/response cursors.",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x625DAF",
-    "line": "mov     ecx, [esp+20h+arg_0]",
+    "line": "mov     ecx, [esp+20h+conversation]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x625DBB",
-    "line": "mov     dword ptr [esi], offset ??_7DialoguePackage@@6B@; const DialoguePackage::`vftable'",
+    "line": "mov     dword ptr [esi], offset ??_7DialoguePackage@@6B@; Verified complete TESPackage persistence table extentEC; tail DC/E0/E4/E8 is no-argument size/save/load/init-load virtuals. Derived vtable identity from constructor stores and RTTI names. Prior incompleteDC type corrected.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -139,13 +139,13 @@
   },
   {
     "ea": "0x625DC6",
-    "line": "call    sub_6B74B0",
+    "line": "call    Conversation__FirstItem",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x625DCB",
-    "line": "mov     edi, [esp+20h+arg_4]",
+    "line": "mov     edi, [esp+20h+speaker]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -157,13 +157,13 @@
   },
   {
     "ea": "0x625DD1",
-    "line": "mov     eax, [esp+20h+arg_8]",
+    "line": "mov     eax, [esp+20h+target]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x625DD5",
-    "line": "fstp    dword ptr [esi+44h]",
+    "line": "fstp    dword ptr [esi+44h]; New DialoguePackage begins with responseTimeRemaining=0. A package that is already MiddleHigh therefore advances through Speak(false) at update cadence rather than receiving text-duration delays.",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -217,13 +217,13 @@
   },
   {
     "ea": "0x625DEF",
-    "line": "call    eax",
+    "line": "call    eax; New DialoguePackage marks the initiating speaker's current procedure incomplete before playback begins.",
     "mnemonic": "call",
     "size": 2
   },
   {
     "ea": "0x625DF1",
-    "line": "mov     [esi+3Ch], ebx",
+    "line": "mov     [esi+3Ch], ebx; Initialize DialoguePackage.activeSoundHandle to null. Actor::InitDialogue later returns the allocated engine sound-handle object through this field.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -271,13 +271,13 @@
   },
   {
     "ea": "0x625E09",
-    "line": "fstp    [esp+20h+arg_0]",
+    "line": "fstp    [esp+20h+conversation]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x625E0D",
-    "line": "fld     [esp+20h+arg_0]",
+    "line": "fld     [esp+20h+conversation]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x625E3B",
-    "line": "fld     [esp+20h+arg_0]",
+    "line": "fld     [esp+20h+conversation]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -454,5 +454,59 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C2ED0",
+    "line": "mov     ecx, [ebp-10h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2ED3",
+    "line": "jmp     ??1TESPackage@@UAE@XZ; TESPackage::~TESPackage(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2ED8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C2EDC",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2EDF",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2EE2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C2EE4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2EE9",
+    "line": "mov     eax, offset stru_AEBBEC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2EEE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

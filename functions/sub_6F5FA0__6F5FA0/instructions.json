@@ -49,25 +49,25 @@
   },
   {
     "ea": "0x6F5FB3",
-    "line": "push    0; MaxCount",
+    "line": "push    0; count",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6F5FB5",
-    "line": "push    offset EmptyString; Src",
+    "line": "push    offset EmptyString; source",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x6F5FBA",
-    "line": "lea     ecx, [esi+4]",
+    "line": "lea     ecx, [esi+4]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x6F5FBD",
-    "line": "call    sub_414500",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
     "mnemonic": "call",
     "size": 5
   },

@@ -21,12 +21,12 @@
 0x4BBCC9: lea     eax, [esi+70h]
 0x4BBCCC: push    eax; Src
 0x4BBCCD: push    4C554F53h; int
-0x4BBCD2: call    TESForm_PutFormRecordChunkData
+0x4BBCD2: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4BBCD7: push    1; Size
 0x4BBCD9: lea     ecx, [esi+71h]
 0x4BBCDC: push    ecx; Src
 0x4BBCDD: push    50434C53h; int
-0x4BBCE2: call    TESForm_PutFormRecordChunkData
+0x4BBCE2: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4BBCE7: add     esp, 18h
 0x4BBCEA: mov     ecx, esi
 0x4BBCEC: pop     esi

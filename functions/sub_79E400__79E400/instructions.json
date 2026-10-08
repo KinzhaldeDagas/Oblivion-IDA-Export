@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x79E400",
-    "line": "push    ebp",
+    "line": "push    ebp; Oblivion st_vector<SFrondTexture>::insert(position,count,value). Makes an alias-safe value copy, enforces max_size 0x5D1745D, grows capacity by 1.5x when needed, and performs exception-safe deep construction/destruction of 0x2C-byte string-bearing records.",
     "mnemonic": "push",
     "size": 1
   },
@@ -103,13 +103,13 @@
   },
   {
     "ea": "0x79E42E",
-    "line": "mov     ebx, [ebp+arg_C]",
+    "line": "mov     ebx, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x79E431",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; count",
     "mnemonic": "push",
     "size": 2
   },
@@ -127,19 +127,19 @@
   },
   {
     "ea": "0x79E437",
-    "line": "push    edi",
+    "line": "push    edi; offset",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E438",
-    "line": "push    ebx",
+    "line": "push    ebx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E439",
-    "line": "lea     ecx, [ebp+var_40]",
+    "line": "lea     ecx, [ebp+var_40]; this",
     "mnemonic": "lea",
     "size": 3
   },
@@ -151,25 +151,25 @@
   },
   {
     "ea": "0x79E43F",
-    "line": "mov     [ebp+var_28], 0Fh",
+    "line": "mov     [ebp+var_40.filename.capacity], 0Fh",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x79E446",
-    "line": "mov     [ebp+var_2C], edi",
+    "line": "mov     [ebp+var_40.filename.size], edi",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x79E449",
-    "line": "mov     byte ptr [ebp+var_3C], 0",
+    "line": "mov     byte ptr [ebp+var_40.filename.storage], 0",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79E44D",
-    "line": "call    sub_414420",
+    "line": "call    OB_stString28_AssignSubstring_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,offset,count). Bounds-checks offset, clamps count to source.size-offset, handles self-assignment by in-place erasure, grows when required, copies the selected bytes, updates size, and writes the terminator.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x79E455",
-    "line": "fstp    [ebp+var_24]",
+    "line": "fstp    [ebp+var_40.aspectRatio]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x79E45B",
-    "line": "fstp    [ebp+var_20]",
+    "line": "fstp    [ebp+var_40.sizeScale]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x79E461",
-    "line": "fstp    [ebp+var_1C]",
+    "line": "fstp    [ebp+var_40.minAngleOffset]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x79E467",
-    "line": "fstp    [ebp+var_18]",
+    "line": "fstp    [ebp+var_40.maxAngleOffset]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x79E48A",
-    "line": "mov     ebx, [ebp+arg_8]",
+    "line": "mov     ebx, [ebp+count]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x79E4BE",
-    "line": "call    sub_790B90",
+    "line": "call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error(\"vector<T> too long\") and throws; used by multiple element specializations after max_size checks.",
     "mnemonic": "call",
     "size": 5
   },
@@ -697,13 +697,13 @@
   },
   {
     "ea": "0x79E53A",
-    "line": "mov     byte ptr [ebp+var_44], 0",
+    "line": "mov     byte ptr [ebp+destinationLast], 0",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79E53E",
-    "line": "mov     edx, [ebp+var_44]",
+    "line": "mov     edx, [ebp+destinationLast]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x79E542",
-    "line": "mov     edx, [ebp+var_44]",
+    "line": "mov     edx, [ebp+destinationLast]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -733,37 +733,37 @@
   },
   {
     "ea": "0x79E547",
-    "line": "push    eax",
+    "line": "push    eax; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E548",
-    "line": "mov     [ebp+var_50], eax",
+    "line": "mov     [ebp+first], eax",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x79E54B",
-    "line": "mov     [ebp+var_4C], eax",
+    "line": "mov     [ebp+last], eax",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x79E54E",
-    "line": "mov     eax, [ebp+arg_4]",
+    "line": "mov     eax, [ebp+position]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x79E551",
-    "line": "push    eax",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E552",
-    "line": "push    ecx",
+    "line": "push    ecx; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x79E557",
-    "line": "call    sub_79B470",
+    "line": "call    OB_SFrondTexture_UninitializedCopy_010201A0; Exception-safe uninitialized_copy for SFrondTexture. Normal path placement-copy-constructs [first,last) and returns destination end; the SEH cleanup landing path destroys the constructed prefix and rethrows.",
     "mnemonic": "call",
     "size": 5
   },
@@ -793,37 +793,37 @@
   },
   {
     "ea": "0x79E562",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E563",
-    "line": "push    ebx",
+    "line": "push    ebx; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E564",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E565",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79E567",
-    "line": "mov     [ebp+var_4C], eax",
+    "line": "mov     [ebp+last], eax",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x79E56A",
-    "line": "call    sub_79E080",
+    "line": "call    OB_stVector_SFrondTexture_UninitializedFillNThunk_010201A0; st_vector<SFrondTexture> uninitialized-fill thunk: placement-copy-constructs count values and returns destination+count.",
     "mnemonic": "call",
     "size": 5
   },
@@ -835,13 +835,13 @@
   },
   {
     "ea": "0x79E572",
-    "line": "mov     byte ptr [ebp+var_44], 0",
+    "line": "mov     byte ptr [ebp+destinationLast], 0",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79E576",
-    "line": "mov     edx, [ebp+var_44]",
+    "line": "mov     edx, [ebp+destinationLast]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -853,7 +853,7 @@
   },
   {
     "ea": "0x79E57A",
-    "line": "mov     edx, [ebp+var_44]",
+    "line": "mov     edx, [ebp+destinationLast]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -871,37 +871,37 @@
   },
   {
     "ea": "0x79E57F",
-    "line": "push    eax",
+    "line": "push    eax; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E580",
-    "line": "mov     [ebp+var_4C], eax",
+    "line": "mov     [ebp+last], eax",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x79E583",
-    "line": "mov     eax, [ebp+arg_4]",
+    "line": "mov     eax, [ebp+position]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x79E586",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E587",
-    "line": "push    eax",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E588",
-    "line": "call    sub_79B470",
+    "line": "call    OB_SFrondTexture_UninitializedCopy_010201A0; Exception-safe uninitialized_copy for SFrondTexture. Normal path placement-copy-constructs [first,last) and returns destination end; the SEH cleanup landing path destroys the constructed prefix and rethrows.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1009,7 +1009,7 @@
   },
   {
     "ea": "0x79E5B7",
-    "line": "mov     edx, [ebp+var_44]",
+    "line": "mov     edx, [ebp+destinationLast]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1033,19 +1033,19 @@
   },
   {
     "ea": "0x79E5BF",
-    "line": "push    eax",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E5C0",
-    "line": "push    ecx",
+    "line": "push    ecx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E5C1",
-    "line": "call    sub_79B120",
+    "line": "call    OB_SFrondTexture_DestroyRange_010201A0; Destroys [first,last) SFrondTexture records at 0x2C-byte stride by releasing each embedded filename string.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1063,7 +1063,7 @@
   },
   {
     "ea": "0x79E5CA",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1075,7 +1075,7 @@
   },
   {
     "ea": "0x79E5D2",
-    "line": "mov     eax, [ebp+var_50]",
+    "line": "mov     eax, [ebp+first]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1129,13 +1129,13 @@
   },
   {
     "ea": "0x79E5ED",
-    "line": "mov     edx, [ebp+var_4C]",
+    "line": "mov     edx, [ebp+last]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x79E5F0",
-    "line": "mov     esi, [ebp+var_50]",
+    "line": "mov     esi, [ebp+first]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1147,19 +1147,19 @@
   },
   {
     "ea": "0x79E5F6",
-    "line": "push    edx",
+    "line": "push    edx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E5F7",
-    "line": "push    esi",
+    "line": "push    esi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E5F8",
-    "line": "call    sub_79BDD0",
+    "line": "call    OB_SFrondTexture_DestroyRangeThunk_010201A0; Thin checked/STL trampoline for destruction of an SFrondTexture range.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1171,7 +1171,7 @@
   },
   {
     "ea": "0x79E5FE",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1207,7 +1207,7 @@
   },
   {
     "ea": "0x79E612",
-    "line": "mov     edi, [ebp+arg_4]",
+    "line": "mov     edi, [ebp+position]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1267,7 +1267,7 @@
   },
   {
     "ea": "0x79E62C",
-    "line": "mov     [ebp+var_44], ecx",
+    "line": "mov     [ebp+destinationLast], ecx",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1291,7 +1291,7 @@
   },
   {
     "ea": "0x79E63A",
-    "line": "mov     [ebp+var_44], eax",
+    "line": "mov     [ebp+destinationLast], eax",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1303,31 +1303,31 @@
   },
   {
     "ea": "0x79E63F",
-    "line": "push    eax",
+    "line": "push    eax; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E640",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E641",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E642",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79E644",
-    "line": "call    sub_79E0F0",
+    "line": "call    OB_stVector_SFrondTexture_UninitializedCopyThunk_010201A0; st_vector<SFrondTexture> uninitialized-copy thunk: deep-copy-constructs [first,last) into raw destination storage and returns destination end.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1345,7 +1345,7 @@
   },
   {
     "ea": "0x79E64F",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -1405,19 +1405,19 @@
   },
   {
     "ea": "0x79E667",
-    "line": "push    ebx",
+    "line": "push    ebx; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E668",
-    "line": "push    ecx",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E669",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1429,13 +1429,13 @@
   },
   {
     "ea": "0x79E66F",
-    "line": "call    sub_79E080",
+    "line": "call    OB_stVector_SFrondTexture_UninitializedFillNThunk_010201A0; st_vector<SFrondTexture> uninitialized-fill thunk: placement-copy-constructs count values and returns destination+count.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x79E674",
-    "line": "mov     eax, [ebp+var_44]",
+    "line": "mov     eax, [ebp+destinationLast]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1459,7 +1459,7 @@
   },
   {
     "ea": "0x79E680",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -1471,13 +1471,13 @@
   },
   {
     "ea": "0x79E683",
-    "line": "push    esi",
+    "line": "push    esi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E684",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -1489,7 +1489,7 @@
   },
   {
     "ea": "0x79E68C",
-    "line": "call    sub_79B6B0",
+    "line": "call    OB_SFrondTexture_FillRange_010201A0; Assigns one SFrondTexture value throughout [first,last), including deep filename assignment and all four scalar fields.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1507,7 +1507,7 @@
   },
   {
     "ea": "0x79E696",
-    "line": "mov     eax, [ebp+arg_8]",
+    "line": "mov     eax, [ebp+count]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1537,13 +1537,13 @@
   },
   {
     "ea": "0x79E6A4",
-    "line": "push    edx",
+    "line": "push    edx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E6A5",
-    "line": "mov     edx, [ebp+arg_4]",
+    "line": "mov     edx, [ebp+position]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1555,13 +1555,13 @@
   },
   {
     "ea": "0x79E6AA",
-    "line": "push    eax",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E6AB",
-    "line": "call    sub_79BDD0",
+    "line": "call    OB_SFrondTexture_DestroyRangeThunk_010201A0; Thin checked/STL trampoline for destruction of an SFrondTexture range.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1591,7 +1591,7 @@
   },
   {
     "ea": "0x79E6BC",
-    "line": "push    ecx",
+    "line": "push    ecx; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
@@ -1609,19 +1609,19 @@
   },
   {
     "ea": "0x79E6C1",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E6C2",
-    "line": "push    eax",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E6C3",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1633,7 +1633,7 @@
   },
   {
     "ea": "0x79E6C8",
-    "line": "call    sub_79E0F0",
+    "line": "call    OB_stVector_SFrondTexture_UninitializedCopyThunk_010201A0; st_vector<SFrondTexture> uninitialized-copy thunk: deep-copy-constructs [first,last) into raw destination storage and returns destination end.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1651,31 +1651,31 @@
   },
   {
     "ea": "0x79E6D3",
-    "line": "mov     eax, [ebp+var_44]",
+    "line": "mov     eax, [ebp+destinationLast]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x79E6D6",
-    "line": "push    eax",
+    "line": "push    eax; destinationLast",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E6D7",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E6D8",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E6D9",
-    "line": "call    sub_79E120",
+    "line": "call    OB_SFrondTexture_CopyAssignRangeBackwardCheckedThunk_010201A0; Checked/STL trampoline for overlap-safe backward SFrondTexture range assignment.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1687,7 +1687,7 @@
   },
   {
     "ea": "0x79E6E1",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -1699,19 +1699,19 @@
   },
   {
     "ea": "0x79E6E4",
-    "line": "push    ebx",
+    "line": "push    ebx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E6E5",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E6E6",
-    "line": "call    sub_79B6B0",
+    "line": "call    OB_SFrondTexture_FillRange_010201A0; Assigns one SFrondTexture value throughout [first,last), including deep filename assignment and all four scalar fields.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1723,7 +1723,7 @@
   },
   {
     "ea": "0x79E6EE",
-    "line": "cmp     [ebp+var_28], 10h",
+    "line": "cmp     [ebp+var_40.filename.capacity], 10h",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -1735,7 +1735,7 @@
   },
   {
     "ea": "0x79E6F4",
-    "line": "mov     eax, [ebp+var_3C]",
+    "line": "mov     eax, dword ptr [ebp+var_40.filename.storage]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1747,7 +1747,7 @@
   },
   {
     "ea": "0x79E6F8",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1828,5 +1828,77 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CC420",
+    "line": "lea     ecx, [ebp+var_40]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC423",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC428",
+    "line": "mov     edx, [esp-4+position]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CC42C",
+    "line": "lea     eax, [edx+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC42F",
+    "line": "mov     ecx, [edx-54h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC432",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CC434",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC439",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC43C",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CC43E",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC443",
+    "line": "mov     eax, offset stru_AF5614",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC448",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,119 +1,143 @@
-unsigned int __thiscall sub_791140(unsigned int *this, int a2, char *a3, unsigned int a4, int *a5)
+// Fixed-stride 0x18 vector insert/fill machinery for OB_CBranchFlareEntry records. Handles overlap, capacity growth, reallocation, and count copies; the observed wrapper at 0x791510 always requests count=1.
+unsigned int __thiscall OB_stVectorBranchFlareEntry_InsertFill_010201A0(
+        OB_stVector16_010201A0 *this,
+        int iteratorOwner,
+        OB_CBranchFlareEntry_010201A0 *position,
+        unsigned int count,
+        const OB_CBranchFlareEntry_010201A0 *value)
 {
   unsigned int result; // eax
-  int v7; // edx
-  int v8; // ecx
-  int v9; // edx
-  int v10; // ecx
+  float radialInfluence; // edx
+  float lengthExponent; // ecx
+  float lengthInfluence; // edx
+  void *begin; // ecx
   unsigned int v11; // ebx
   int v12; // eax
   int v13; // eax
   unsigned int v14; // ebx
   int v15; // eax
-  _DWORD *v16; // eax
-  _DWORD *v17; // eax
-  int v18; // ecx
+  unsigned __int8 *v16; // eax
+  unsigned __int8 *v17; // eax
+  void *v18; // ecx
   int v19; // eax
-  int v20; // edi
-  _DWORD *v21; // ecx
+  unsigned int v20; // edi
+  unsigned __int8 *end; // ecx
   unsigned int v22; // edi
-  _DWORD *v23; // [esp-20h] [ebp-58h]
-  _DWORD *v24; // [esp-Ch] [ebp-44h]
-  int v25; // [esp-8h] [ebp-40h]
+  const unsigned __int8 *v23; // [esp-20h] [ebp-58h]
+  unsigned __int8 *v24; // [esp-Ch] [ebp-44h]
+  unsigned int v25; // [esp-8h] [ebp-40h]
   int v26; // [esp+0h] [ebp-38h] BYREF
-  _DWORD v27[7]; // [esp+10h] [ebp-28h] BYREF
-  int v28; // [esp+34h] [ebp-4h]
-  char *v29; // [esp+48h] [ebp+10h]
-  _DWORD *v30; // [esp+4Ch] [ebp+14h]
-  _DWORD *v31; // [esp+4Ch] [ebp+14h]
+  unsigned __int8 v27[4]; // [esp+10h] [ebp-28h] BYREF
+  float v28; // [esp+14h] [ebp-24h]
+  float radialExponent; // [esp+18h] [ebp-20h]
+  float v30; // [esp+1Ch] [ebp-1Ch]
+  float v31; // [esp+20h] [ebp-18h]
+  float flareDistance; // [esp+24h] [ebp-14h]
+  int *v33; // [esp+28h] [ebp-10h]
+  int v34; // [esp+34h] [ebp-4h]
+  const unsigned __int8 *counta; // [esp+48h] [ebp+10h]
+  unsigned __int8 *valuea; // [esp+4Ch] [ebp+14h]
+  unsigned __int8 *valueb; // [esp+4Ch] [ebp+14h]
 
-  v27[6] = &v26;
-  result = (unsigned int)a5;
-  v7 = a5[1];
-  v27[0] = *a5;
-  v27[2] = a5[2];
-  v8 = a5[4];
-  v27[1] = v7;
-  v9 = a5[3];
-  v27[4] = v8;
-  v10 = *(this + 1);
-  v27[3] = v9;
-  v27[5] = a5[5];
-  if ( v10 )
+  v33 = &v26; /*0x791168*/
+  result = (unsigned int)value; /*0x79116d*/
+  radialInfluence = value->radialInfluence; /*0x791172*/
+  *(float *)v27 = value->flareAngle; /*0x791175*/
+  radialExponent = value->radialExponent; /*0x79117b*/
+  lengthExponent = value->lengthExponent; /*0x79117e*/
+  v28 = radialInfluence; /*0x791181*/
+  lengthInfluence = value->lengthInfluence; /*0x791184*/
+  v31 = lengthExponent; /*0x791187*/
+  begin = this->begin; /*0x79118a*/
+  v30 = lengthInfluence; /*0x79118f*/
+  flareDistance = value->flareDistance; /*0x791195*/
+  if ( begin ) /*0x791198*/
   {
-    result = 0x2AAAAAAB * (*(this + 3) - v10);
-    v11 = (int)(*(this + 3) - v10) / 0x18;
+    result = 0x2AAAAAAB * ((char *)this->capacityEnd - (char *)begin); /*0x7911a8*/
+    v11 = ((char *)this->capacityEnd - (char *)begin) / 0x18; /*0x7911b2*/
   }
   else
   {
-    v11 = 0;
+    v11 = 0; /*0x79119a*/
   }
-  if ( a4 )
+  if ( count ) /*0x7911b9*/
   {
-    if ( v10 )
-      v12 = (int)(*(this + 2) - v10) / 0x18;
+    if ( begin ) /*0x7911c1*/
+      v12 = ((char *)this->end - (char *)begin) / 0x18; /*0x7911db*/
     else
-      v12 = 0;
-    if ( 0xAAAAAAA - v12 < a4 )
-      sub_790B90(a4);
-    if ( v10 )
-      v13 = (int)(*(this + 2) - v10) / 0x18;
+      v12 = 0; /*0x7911c3*/
+    if ( 0xAAAAAAA - v12 < count ) /*0x7911e6*/
+      OB_stVector_ThrowLengthError_010201A0(count); /*0x7911e8*/
+    if ( begin ) /*0x7911ef*/
+      v13 = ((char *)this->end - (char *)begin) / 0x18; /*0x791209*/
     else
-      v13 = 0;
-    if ( v11 >= a4 + v13 )
+      v13 = 0; /*0x7911f1*/
+    if ( v11 >= count + v13 ) /*0x79120f*/
     {
-      v21 = (_DWORD *)*(this + 2);
-      v31 = v21;
-      if ( ((char *)v21 - a3) / 0x18 >= a4 )
+      end = (unsigned __int8 *)this->end; /*0x791325*/
+      valueb = end; /*0x791342*/
+      if ( (end - (unsigned __int8 *)position) / 0x18 >= count ) /*0x791345*/
       {
-        v22 = 0x18 * a4;
-        v29 = (char *)&v21[0xFFFFFFFA * a4];
-        *(this + 2) = (unsigned int)sub_7849C0(v29, v21, v21);
-        sub_7905A0(a3, v29, v31);
-        return (unsigned int)sub_784140(a3, &a3[v22], v27);
+        v22 = count; /*0x7913c4*/
+        counta = &end[0xFFFFFFE8 * count]; /*0x7913cc*/
+        this->end = OB_stVector24_UninitializedCopyRangeThunk_010201A0(counta, end, end); /*0x7913d7*/
+        OB_stVector24_CopyBackwardRangeThunk_010201A0((const unsigned __int8 *)position, counta, valueb); /*0x7913e0*/
+        return (unsigned int)OB_stVector24_CopyFillRange_010201A0( /*0x7913ed*/
+                               (unsigned __int8 *)position,
+                               (unsigned __int8 *)&position[v22],
+                               v27);
       }
       else
       {
-        sub_7849C0(a3, v21, &a3[0x18 * a4]);
-        v25 = a4 - (int)(*(this + 2) - (_DWORD)a3) / 0x18;
-        v24 = (_DWORD *)*(this + 2);
-        v28 = 2;
-        sub_790A70(v24, v25, v27);
-        *(this + 2) += 0x18 * a4;
-        return (unsigned int)sub_784140(a3, (_DWORD *)(*(this + 2) - 0x18 * a4), v27);
+        OB_stVector24_UninitializedCopyRangeThunk_010201A0( /*0x79135a*/
+          (const unsigned __int8 *)position,
+          end,
+          (unsigned __int8 *)&position[count]);
+        v25 = count - ((char *)this->end - (char *)position) / 0x18; /*0x79137d*/
+        v24 = (unsigned __int8 *)this->end; /*0x79137e*/
+        v34 = 2; /*0x791381*/
+        OB_stVector24_UninitializedFillNThunk_010201A0(v24, v25, v27); /*0x791388*/
+        this->end = (char *)this->end + 0x18 * count; /*0x791390*/
+        return (unsigned int)OB_stVector24_CopyFillRange_010201A0( /*0x79139e*/
+                               (unsigned __int8 *)position,
+                               (unsigned __int8 *)this->end + 0xFFFFFFE8 * count,
+                               v27);
       }
     }
     else
     {
-      if ( 0xAAAAAAA - (v11 >> 1) >= v11 )
-        v14 = (v11 >> 1) + v11;
+      if ( 0xAAAAAAA - (v11 >> 1) >= v11 ) /*0x791222*/
+        v14 = (v11 >> 1) + v11; /*0x791228*/
       else
-        v14 = 0;
-      if ( v10 )
-        v15 = (int)(*(this + 2) - v10) / 0x18;
+        v14 = 0; /*0x791224*/
+      if ( begin ) /*0x79122c*/
+        v15 = ((char *)this->end - (char *)begin) / 0x18; /*0x791246*/
       else
-        v15 = 0;
-      if ( v14 < a4 + v15 )
-        v14 = a4 + sub_783FE0(this);
-      v30 = (_DWORD *)sub_78FB00((char *)v14);
-      v23 = (_DWORD *)*(this + 1);
-      v28 = 0;
-      v16 = sub_7847F0(v23, a3, v30);
-      v17 = sub_790A70(v16, a4, v27);
-      sub_7847F0(a3, (_DWORD *)*(this + 2), v17);
-      v18 = *(this + 1);
-      if ( v18 )
-        v19 = (int)(*(this + 2) - v18) / 0x18;
+        v15 = 0; /*0x79122e*/
+      if ( v14 < count + v15 ) /*0x79124c*/
+        v14 = count + OB_stVector24_Size_010201A0((const OB_stVector24_010201A0 *)this); /*0x791257*/
+      valuea = (unsigned __int8 *)OB_stVectorBranchFlareEntry_Allocate_010201A0((char *)v14); /*0x79126c*/
+      v23 = (const unsigned __int8 *)this->begin; /*0x791279*/
+      v34 = 0; /*0x79127a*/
+      v16 = OB_stVector24_UninitializedCopyRange_010201A0(v23, (const unsigned __int8 *)position, valuea); /*0x791281*/
+      v17 = OB_stVector24_UninitializedFillNThunk_010201A0(v16, count, v27); /*0x791291*/
+      OB_stVector24_UninitializedCopyRange_010201A0( /*0x7912ac*/
+        (const unsigned __int8 *)position,
+        (const unsigned __int8 *)this->end,
+        v17);
+      v18 = this->begin; /*0x7912b1*/
+      if ( v18 ) /*0x7912b9*/
+        v19 = ((char *)this->end - (char *)v18) / 0x18; /*0x7912d3*/
       else
-        v19 = 0;
-      v20 = v19 + a4;
-      if ( v18 )
-        FormHeapFree(*(this + 1));
-      *(this + 3) = (unsigned int)&v30[6 * v14];
-      *(this + 2) = (unsigned int)&v30[6 * v20];
-      *(this + 1) = (unsigned int)v30;
-      return (unsigned int)v30;
+        v19 = 0; /*0x7912bb*/
+      v20 = v19 + count; /*0x7912d5*/
+      if ( v18 ) /*0x7912d9*/
+        FormHeapFree((unsigned int)this->begin); /*0x7912dc*/
+      this->capacityEnd = &valuea[0x18 * v14]; /*0x7912f0*/
+      this->end = &valuea[0x18 * v20]; /*0x7912f6*/
+      this->begin = valuea; /*0x7912f9*/
+      return (unsigned int)valuea; /*0x7912e4*/
     }
   }
-  return result;
+  return result; /*0x7912fc*/
 }

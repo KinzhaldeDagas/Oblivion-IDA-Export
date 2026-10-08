@@ -1,4 +1,4 @@
-0x438540: push    ecx
+0x438540: push    ecx; Releases a model-loader path reference. Used by AnimIdle/queued-loader cleanup when a KF/model reference is no longer needed.
 0x438541: push    esi
 0x438542: push    edi
 0x438543: mov     edi, [esp+0Ch+arg_0]
@@ -33,7 +33,7 @@
 0x438597: jz      short loc_4385A7
 0x438599: call    sub_436CB0
 0x43859E: push    esi
-0x43859F: call    FormHeapFree
+0x43859F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4385A4: add     esp, 4
 0x4385A7: pop     edi
 0x4385A8: pop     esi

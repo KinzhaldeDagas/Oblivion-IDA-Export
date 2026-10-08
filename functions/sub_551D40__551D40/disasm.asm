@@ -1,4 +1,4 @@
-0x551D40: push    ebx
+0x551D40: push    ebx; Verified Oblivion: multiply every stored float in [begin,end) by scale, independently of rows/columns; return this. ECX=this, one stack float, ret 4. EBX is saved and overwritten, not a semantic argument; prior userpurge signature was a decompiler artifact.
 0x551D41: push    ebp
 0x551D42: push    esi
 0x551D43: mov     ebp, ecx
@@ -21,7 +21,7 @@
 0x551D73: jb      short loc_551D7A
 0x551D75: call    __invalid_parameter_noinfo
 0x551D7A: fld     dword ptr [edi]
-0x551D7C: fmul    [esp+10h+arg_0]
+0x551D7C: fmul    [esp+10h+scale]
 0x551D80: fstp    dword ptr [edi]
 0x551D82: cmp     edi, [esi+8]
 0x551D85: jb      short loc_551D8C

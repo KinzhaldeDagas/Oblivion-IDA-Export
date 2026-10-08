@@ -1,4 +1,4 @@
-0x4BC530: push    ecx
+0x4BC530: push    ecx; Verified virtual reset callback (vtable +0x14): restores dimensions 400/400/200, radius 300, then reinitializes form components. The constructor establishes the same defaults.
 0x4BC531: fld     qword ptr ds:0A45A50h
 0x4BC537: push    esi
 0x4BC538: mov     esi, ecx

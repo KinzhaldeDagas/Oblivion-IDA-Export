@@ -1,24 +1,25 @@
-float *__thiscall sub_7A7560(float *this)
+// Oblivion Normal constructor. Initializes the PosGen layout, reuses the static Normal sx/sfx/xi tables when available or builds them symmetrically once, then increments the shared instance count.
+OB_Normal_010201A0 *__thiscall OB_Normal_ctor_010201A0(OB_Normal_010201A0 *this)
 {
-  *(this + 1) = 0.0;
-  *((_BYTE *)this + 0x10) = 1;
-  *(this + 2) = 0.0;
-  *(this + 3) = 0.0;
-  *(_DWORD *)this = &Normal::`vftable';
-  if ( dword_B42C9C )
+  this->xi = 0.0; /*0x7a758c*/
+  this->notReady = 1; /*0x7a758f*/
+  this->sx = 0; /*0x7a7593*/
+  this->sfx = 0; /*0x7a7596*/
+  this->vftable = &Normal::`vftable'; /*0x7a7599*/
+  if ( OB_Normal_count_010201A0 ) /*0x7a759f*/
   {
-    *((_BYTE *)this + 0x10) = 0;
-    *(this + 1) = flt_B42C98;
-    *((_DWORD *)this + 2) = dword_B42A88;
-    *((_DWORD *)this + 3) = dword_B42A8C;
+    this->notReady = 0; /*0x7a75ab*/
+    this->xi = OB_Normal_Nxi_010201A0; /*0x7a75b4*/
+    this->sx = OB_Normal_Nsx_010201A0; /*0x7a75bc*/
+    this->sfx = OB_Normal_Nsfx_010201A0; /*0x7a75c5*/
   }
   else
   {
-    sub_7A71D0(this, 1);
-    flt_B42C98 = *(this + 1);
-    dword_B42A88 = *((_DWORD *)this + 2);
-    dword_B42A8C = *((_DWORD *)this + 3);
+    OB_PosGen_Build_010201A0((OB_PosGen_010201A0 *)this, 1); /*0x7a75ce*/
+    OB_Normal_Nxi_010201A0 = this->xi; /*0x7a75d6*/
+    OB_Normal_Nsx_010201A0 = this->sx; /*0x7a75df*/
+    OB_Normal_Nsfx_010201A0 = this->sfx; /*0x7a75e8*/
   }
-  ++dword_B42C9C;
-  return this;
+  ++OB_Normal_count_010201A0; /*0x7a75ef*/
+  return this; /*0x7a75f6*/
 }

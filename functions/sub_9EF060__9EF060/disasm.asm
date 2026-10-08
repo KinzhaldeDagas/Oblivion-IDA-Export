@@ -2,7 +2,7 @@
 0x9EF066: push    ecx
 0x9EF067: fstp    [esp+4+var_4]; float
 0x9EF06A: push    offset aFmagiclightfor; "fMagicLightForwardOffset"
-0x9EF06F: mov     ecx, offset fMagicLightForwardOffset
+0x9EF06F: mov     ecx, (offset flt_B37ED0+140h)
 0x9EF074: call    GameSetting_ConstrAndReg_float
 0x9EF079: push    offset sub_A20740; void (__cdecl *)()
 0x9EF07E: call    _atexit

@@ -21,7 +21,7 @@
 0x6A889E: fstp    [esp+8+var_8]; int
 0x6A88A1: push    eax; int
 0x6A88A2: mov     ecx, edi; int
-0x6A88A4: call    Actor_Kill
+0x6A88A4: call    Actor_Kill; ODismemberment: candidate future death/kill integration point after visual/state pipeline is stable.
 0x6A88A9: pop     edi
 0x6A88AA: pop     esi
 0x6A88AB: retn    4
@@ -31,4 +31,4 @@
 0x6A88B3: fstp    [esp+8+var_8]; int
 0x6A88B6: push    eax; int
 0x6A88B7: mov     ecx, edi; int
-0x6A88B9: call    Actor_Kill
+0x6A88B9: call    Actor_Kill; ODismemberment: candidate future death/kill integration point after visual/state pipeline is stable.

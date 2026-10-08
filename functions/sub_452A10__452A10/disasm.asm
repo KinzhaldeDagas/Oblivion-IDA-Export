@@ -1,4 +1,4 @@
-0x452A10: push    ebp
+0x452A10: push    ebp; TES4 authoritative: converts TES/world NiPoint3 into Havok units with hkFactor, then writes proxy position through 0x891560.
 0x452A11: mov     ebp, esp
 0x452A13: and     esp, 0FFFFFFF0h
 0x452A16: sub     esp, 20h
@@ -18,7 +18,7 @@
 0x452A42: lea     eax, [esp+20h+var_20]
 0x452A45: push    eax; a2
 0x452A46: fstp    [esp+24h+var_18]
-0x452A4A: call    sub_891560
+0x452A4A: call    bhkCharacterController_WriteRelativePosition; TES4 authoritative: writes proxy position. Adds metadata/world transform basis offset, then writes to collision object through 0x8AC080.
 0x452A4F: mov     ecx, [esp+20h+var_4]
 0x452A53: xor     ecx, esp
 0x452A55: call    @__security_check_cookie@4; __security_check_cookie(x)

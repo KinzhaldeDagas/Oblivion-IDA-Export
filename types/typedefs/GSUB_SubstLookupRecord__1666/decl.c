@@ -1,1 +1,5 @@
-GSUB_SubstLookupRecord
+struct GSUB_SubstLookupRecord
+{
+WORD SequenceIndex;
+WORD LookupListIndex;
+};

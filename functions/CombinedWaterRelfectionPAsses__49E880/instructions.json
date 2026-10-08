@@ -475,25 +475,25 @@
   },
   {
     "ea": "0x49E9BB",
-    "line": "push    esi",
+    "line": "push    esi; secondaryRoot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x49E9BC",
-    "line": "push    edi",
+    "line": "push    edi; primaryRoot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x49E9BD",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x49E9BF",
-    "line": "call    NiRenderer_ReflectionPass",
+    "line": "call    WaterManager_RenderReflectionPass; Dispatch the gated WaterManager reflection render for the two scene roots. The callee owns g_bWaterReflectionPassActive for the duration of its dedicated accumulation transaction.",
     "mnemonic": "call",
     "size": 5
   },
@@ -589,7 +589,7 @@
   },
   {
     "ea": "0x49EA11",
-    "line": "push    offset dword_B256D0",
+    "line": "push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0",
     "mnemonic": "push",
     "size": 5
   },
@@ -775,13 +775,13 @@
   },
   {
     "ea": "0x49EA67",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x49EA68",
-    "line": "call    sub_7C1EE0",
+    "line": "call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1021,7 +1021,7 @@
   },
   {
     "ea": "0x49EAF2",
-    "line": "call    sub_4E9F40",
+    "line": "call    sub_4E9F40; Fog decode: returns global far-plane/clamp mode flag unk_B3608F; when false, non-water 0x541DD0 paths clamp fogEnd to GetFarPlane.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1045,7 +1045,7 @@
   },
   {
     "ea": "0x49EAFD",
-    "line": "call    sub_49E280",
+    "line": "call    sub_49E280; Pass205/206: LODWaterRoot jump-table loop creates four generated child quads under 0x00B35234 and reaches shared child-creation tail.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1159,7 +1159,7 @@
   },
   {
     "ea": "0x49EB4E",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1207,13 +1207,13 @@
   },
   {
     "ea": "0x49EB77",
-    "line": "fstp    qword ptr [esp+244h+var_22C+4]",
+    "line": "fstp    qword ptr [esp+244h+node+4]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x49EB7B",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1231,7 +1231,7 @@
   },
   {
     "ea": "0x49EB87",
-    "line": "fcomp   qword ptr [esp+244h+var_22C+4]",
+    "line": "fcomp   qword ptr [esp+244h+node+4]",
     "mnemonic": "fcomp",
     "size": 4
   },
@@ -1327,7 +1327,7 @@
   },
   {
     "ea": "0x49EBDB",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1345,7 +1345,7 @@
   },
   {
     "ea": "0x49EBE7",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1501,7 +1501,7 @@
   },
   {
     "ea": "0x49EC4C",
-    "line": "mov     dword ptr [esp+244h+var_22C], eax",
+    "line": "mov     [esp+244h+node], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1531,7 +1531,7 @@
   },
   {
     "ea": "0x49EC5F",
-    "line": "mov     [esp+244h+var_21C], ebx",
+    "line": "mov     [esp+244h+shadowMap], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1567,13 +1567,13 @@
   },
   {
     "ea": "0x49EC76",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x49EC77",
-    "line": "call    sub_7C1EE0",
+    "line": "call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1603,13 +1603,13 @@
   },
   {
     "ea": "0x49EC89",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x49EC8A",
-    "line": "call    sub_7C1EE0",
+    "line": "call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1813,25 +1813,25 @@
   },
   {
     "ea": "0x49ECE1",
-    "line": "lea     ecx, [esp+244h+var_22C]",
+    "line": "lea     ecx, [esp+244h+node]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x49ECE5",
-    "line": "push    ecx",
+    "line": "push    ecx; node",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x49ECE6",
-    "line": "lea     ecx, [ebp+30h]",
+    "line": "lea     ecx, [ebp+30h]; list",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x49ECE9",
-    "line": "call    sub_7AA860",
+    "line": "call    NiTPointerList_RemoveNode; [Verified] Generic NiTPointerList node-removal helper. Unlinks the supplied node, updates head/tail and neighboring links, invokes the list's FreeNode vfunc, decrements item count, and returns the removed node's data pointer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1867,7 +1867,7 @@
   },
   {
     "ea": "0x49ED00",
-    "line": "lea     eax, [esp+248h+var_22C+4]",
+    "line": "lea     eax, [esp+248h+node+4]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1885,7 +1885,7 @@
   },
   {
     "ea": "0x49ED07",
-    "line": "mov     eax, dword ptr [esp+244h+var_22C+4]",
+    "line": "mov     eax, [esp+244h+node+4]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1999,13 +1999,13 @@
   },
   {
     "ea": "0x49ED31",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x49ED36",
-    "line": "mov     ebx, [esp+248h+var_21C]",
+    "line": "mov     ebx, [esp+248h+shadowMap]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2071,7 +2071,7 @@
   },
   {
     "ea": "0x49ED56",
-    "line": "mov     dword ptr [esp+244h+var_22C], eax",
+    "line": "mov     [esp+244h+node], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2197,7 +2197,7 @@
   },
   {
     "ea": "0x49EDA3",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2221,7 +2221,7 @@
   },
   {
     "ea": "0x49EDB4",
-    "line": "mov     ecx, [ebp+40h]",
+    "line": "mov     ecx, [ebp+40h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -2239,7 +2239,7 @@
   },
   {
     "ea": "0x49EDBB",
-    "line": "call    sub_6B7260",
+    "line": "call    SoundHandle__IsPlaying; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2317,7 +2317,7 @@
   },
   {
     "ea": "0x49EDE3",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2551,7 +2551,7 @@
   },
   {
     "ea": "0x49EE5F",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -2599,7 +2599,7 @@
   },
   {
     "ea": "0x49EE79",
-    "line": "push    eax; Str2",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
@@ -2611,7 +2611,7 @@
   },
   {
     "ea": "0x49EE7F",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -2731,13 +2731,13 @@
   },
   {
     "ea": "0x49EECB",
-    "line": "push    ebx; char",
+    "line": "push    ebx; searchArchives",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x49EECC",
-    "line": "push    1; char",
+    "line": "push    1; allowMissing",
     "mnemonic": "push",
     "size": 2
   },
@@ -2749,19 +2749,19 @@
   },
   {
     "ea": "0x49EED5",
-    "line": "push    eax; ArgList",
+    "line": "push    eax; path",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x49EED6",
-    "line": "lea     ecx, [esp+250h+var_21C]",
+    "line": "lea     ecx, [esp+250h+shadowMap]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x49EEDA",
-    "line": "push    ecx; int",
+    "line": "push    ecx; outTexture",
     "mnemonic": "push",
     "size": 1
   },
@@ -2773,25 +2773,25 @@
   },
   {
     "ea": "0x49EEE1",
-    "line": "call    sub_442890",
+    "line": "call    OB_TES_LoadOrFindSourceTexture_010201A0; TES texture cache/load helper: checks the global texture map, optionally verifies file existence via FileFinder, loads NiSourceTexture by filename, caches it, and returns a refcounted texture pointer.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x49EEE6",
-    "line": "mov     edx, [esp+244h+var_21C]",
+    "line": "mov     edx, [esp+244h+shadowMap]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x49EEEA",
-    "line": "mov     ecx, ds:0B45DCCh",
+    "line": "mov     ecx, ds:0B45DCCh; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x49EEF0",
-    "line": "push    edx",
+    "line": "push    edx; shadowMap",
     "mnemonic": "push",
     "size": 1
   },
@@ -2803,13 +2803,13 @@
   },
   {
     "ea": "0x49EEF8",
-    "line": "call    sub_499310",
+    "line": "call    ShadowSceneLight_SetShadowMap; Strong-own the supplied frame-local shadow map at ShadowSceneLight+0x114, releasing any previous map reference.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x49EEFD",
-    "line": "lea     ecx, [esp+244h+var_21C]; this",
+    "line": "lea     ecx, [esp+244h+shadowMap]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2821,7 +2821,7 @@
   },
   {
     "ea": "0x49EF0C",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -2863,7 +2863,7 @@
   },
   {
     "ea": "0x49EF25",
-    "line": "mov     dword ptr [esp+244h+var_22C+4], edx",
+    "line": "mov     [esp+244h+node+4], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2875,13 +2875,13 @@
   },
   {
     "ea": "0x49EF2C",
-    "line": "mov     dword ptr [esp+244h+var_22C+8], ecx",
+    "line": "mov     [esp+244h+node+8], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x49EF30",
-    "line": "lea     ecx, [esp+244h+var_22C+4]",
+    "line": "lea     ecx, [esp+244h+node+4]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2893,7 +2893,7 @@
   },
   {
     "ea": "0x49EF38",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2905,7 +2905,7 @@
   },
   {
     "ea": "0x49EF3F",
-    "line": "fld     dword ptr [esp+244h+var_22C+4]",
+    "line": "fld     [esp+244h+node+4]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2917,7 +2917,7 @@
   },
   {
     "ea": "0x49EF49",
-    "line": "fld     dword ptr [esp+244h+var_22C+8]",
+    "line": "fld     [esp+244h+node+8]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2995,13 +2995,13 @@
   },
   {
     "ea": "0x49EF84",
-    "line": "mov     dword ptr [esp+244h+var_22C+4], ecx",
+    "line": "mov     [esp+244h+node+4], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x49EF88",
-    "line": "fld     dword ptr [esp+244h+var_22C+4]",
+    "line": "fld     [esp+244h+node+4]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3013,13 +3013,13 @@
   },
   {
     "ea": "0x49EF92",
-    "line": "mov     dword ptr [esp+244h+var_22C+8], edx",
+    "line": "mov     [esp+244h+node+8], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x49EF96",
-    "line": "fld     dword ptr [esp+244h+var_22C+8]",
+    "line": "fld     [esp+244h+node+8]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3163,7 +3163,7 @@
   },
   {
     "ea": "0x49EFF7",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -3175,7 +3175,7 @@
   },
   {
     "ea": "0x49F001",
-    "line": "fstp    qword ptr [esp+244h+var_22C+4]",
+    "line": "fstp    qword ptr [esp+244h+node+4]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -3193,13 +3193,13 @@
   },
   {
     "ea": "0x49F00C",
-    "line": "call    sub_4991C0",
+    "line": "call    sub_4991C0; Exterior fog day/night helper: climate sunset boundary byte (+0x52) cached as normalized time for weather fog interpolation.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x49F011",
-    "line": "fcomp   qword ptr [esp+244h+var_22C+4]",
+    "line": "fcomp   qword ptr [esp+244h+node+4]",
     "mnemonic": "fcomp",
     "size": 4
   },
@@ -3223,7 +3223,7 @@
   },
   {
     "ea": "0x49F020",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -3235,7 +3235,7 @@
   },
   {
     "ea": "0x49F02A",
-    "line": "fstp    qword ptr [esp+244h+var_22C+4]",
+    "line": "fstp    qword ptr [esp+244h+node+4]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -3253,13 +3253,13 @@
   },
   {
     "ea": "0x49F035",
-    "line": "call    sub_499200",
+    "line": "call    sub_499200; Exterior fog day/night helper: climate night boundary byte (+0x53) cached as normalized time for weather fog interpolation.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x49F03A",
-    "line": "fcomp   qword ptr [esp+244h+var_22C+4]",
+    "line": "fcomp   qword ptr [esp+244h+node+4]",
     "mnemonic": "fcomp",
     "size": 4
   },
@@ -3319,7 +3319,7 @@
   },
   {
     "ea": "0x49F068",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -3361,7 +3361,7 @@
   },
   {
     "ea": "0x49F080",
-    "line": "call    sub_499200",
+    "line": "call    sub_499200; Exterior fog day/night helper: climate night boundary byte (+0x53) cached as normalized time for weather fog interpolation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3391,7 +3391,7 @@
   },
   {
     "ea": "0x49F090",
-    "line": "call    sub_4991C0",
+    "line": "call    sub_4991C0; Exterior fog day/night helper: climate sunset boundary byte (+0x52) cached as normalized time for weather fog interpolation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3481,7 +3481,7 @@
   },
   {
     "ea": "0x49F0C0",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -3517,7 +3517,7 @@
   },
   {
     "ea": "0x49F0D5",
-    "line": "call    sub_499200",
+    "line": "call    sub_499200; Exterior fog day/night helper: climate night boundary byte (+0x53) cached as normalized time for weather fog interpolation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3547,7 +3547,7 @@
   },
   {
     "ea": "0x49F0E5",
-    "line": "call    sub_4991C0",
+    "line": "call    sub_4991C0; Exterior fog day/night helper: climate sunset boundary byte (+0x52) cached as normalized time for weather fog interpolation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3601,13 +3601,13 @@
   },
   {
     "ea": "0x49F104",
-    "line": "fstp    dword ptr [esp+244h+var_22C]",
+    "line": "fstp    [esp+244h+node]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x49F108",
-    "line": "fld     dword ptr [esp+244h+var_22C]",
+    "line": "fld     [esp+244h+node]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3673,7 +3673,7 @@
   },
   {
     "ea": "0x49F12F",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -3709,7 +3709,7 @@
   },
   {
     "ea": "0x49F144",
-    "line": "call    sub_499200",
+    "line": "call    sub_499200; Exterior fog day/night helper: climate night boundary byte (+0x53) cached as normalized time for weather fog interpolation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3739,7 +3739,7 @@
   },
   {
     "ea": "0x49F154",
-    "line": "call    sub_4991C0",
+    "line": "call    sub_4991C0; Exterior fog day/night helper: climate sunset boundary byte (+0x52) cached as normalized time for weather fog interpolation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3853,7 +3853,7 @@
   },
   {
     "ea": "0x49F196",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -3889,7 +3889,7 @@
   },
   {
     "ea": "0x49F1AB",
-    "line": "call    sub_499200",
+    "line": "call    sub_499200; Exterior fog day/night helper: climate night boundary byte (+0x53) cached as normalized time for weather fog interpolation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3919,7 +3919,7 @@
   },
   {
     "ea": "0x49F1BB",
-    "line": "call    sub_4991C0",
+    "line": "call    sub_4991C0; Exterior fog day/night helper: climate sunset boundary byte (+0x52) cached as normalized time for weather fog interpolation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4027,7 +4027,7 @@
   },
   {
     "ea": "0x49F1FC",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -4039,7 +4039,7 @@
   },
   {
     "ea": "0x49F206",
-    "line": "fstp    qword ptr [esp+244h+var_22C+4]",
+    "line": "fstp    qword ptr [esp+244h+node+4]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -4057,13 +4057,13 @@
   },
   {
     "ea": "0x49F211",
-    "line": "call    sub_499140",
+    "line": "call    sub_499140; Exterior fog day/night helper: climate sunrise boundary byte (+0x50) cached as normalized time for weather fog interpolation.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x49F216",
-    "line": "fcomp   qword ptr [esp+244h+var_22C+4]",
+    "line": "fcomp   qword ptr [esp+244h+node+4]",
     "mnemonic": "fcomp",
     "size": 4
   },
@@ -4087,7 +4087,7 @@
   },
   {
     "ea": "0x49F225",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -4099,7 +4099,7 @@
   },
   {
     "ea": "0x49F22F",
-    "line": "fstp    qword ptr [esp+244h+var_22C+4]",
+    "line": "fstp    qword ptr [esp+244h+node+4]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -4117,13 +4117,13 @@
   },
   {
     "ea": "0x49F23A",
-    "line": "call    sub_499180",
+    "line": "call    sub_499180; Exterior fog day/night helper: climate day boundary byte (+0x51) cached as normalized time for weather fog interpolation.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x49F23F",
-    "line": "fcomp   qword ptr [esp+244h+var_22C+4]",
+    "line": "fcomp   qword ptr [esp+244h+node+4]",
     "mnemonic": "fcomp",
     "size": 4
   },
@@ -4147,7 +4147,7 @@
   },
   {
     "ea": "0x49F24E",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -4183,7 +4183,7 @@
   },
   {
     "ea": "0x49F263",
-    "line": "call    sub_499180",
+    "line": "call    sub_499180; Exterior fog day/night helper: climate day boundary byte (+0x51) cached as normalized time for weather fog interpolation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4213,7 +4213,7 @@
   },
   {
     "ea": "0x49F273",
-    "line": "call    sub_499140",
+    "line": "call    sub_499140; Exterior fog day/night helper: climate sunrise boundary byte (+0x50) cached as normalized time for weather fog interpolation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4303,7 +4303,7 @@
   },
   {
     "ea": "0x49F2A3",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -4339,7 +4339,7 @@
   },
   {
     "ea": "0x49F2B8",
-    "line": "call    sub_499180",
+    "line": "call    sub_499180; Exterior fog day/night helper: climate day boundary byte (+0x51) cached as normalized time for weather fog interpolation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4369,7 +4369,7 @@
   },
   {
     "ea": "0x49F2C8",
-    "line": "call    sub_499140",
+    "line": "call    sub_499140; Exterior fog day/night helper: climate sunrise boundary byte (+0x50) cached as normalized time for weather fog interpolation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4423,13 +4423,13 @@
   },
   {
     "ea": "0x49F2E7",
-    "line": "fstp    dword ptr [esp+244h+var_22C]",
+    "line": "fstp    [esp+244h+node]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x49F2EB",
-    "line": "fld     dword ptr [esp+244h+var_22C]",
+    "line": "fld     [esp+244h+node]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -4471,7 +4471,7 @@
   },
   {
     "ea": "0x49F303",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -4507,7 +4507,7 @@
   },
   {
     "ea": "0x49F318",
-    "line": "call    sub_499180",
+    "line": "call    sub_499180; Exterior fog day/night helper: climate day boundary byte (+0x51) cached as normalized time for weather fog interpolation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4537,7 +4537,7 @@
   },
   {
     "ea": "0x49F328",
-    "line": "call    sub_499140",
+    "line": "call    sub_499140; Exterior fog day/night helper: climate sunrise boundary byte (+0x50) cached as normalized time for weather fog interpolation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4627,7 +4627,7 @@
   },
   {
     "ea": "0x49F358",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -4663,7 +4663,7 @@
   },
   {
     "ea": "0x49F36D",
-    "line": "call    sub_499180",
+    "line": "call    sub_499180; Exterior fog day/night helper: climate day boundary byte (+0x51) cached as normalized time for weather fog interpolation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4693,7 +4693,7 @@
   },
   {
     "ea": "0x49F37D",
-    "line": "call    sub_499140",
+    "line": "call    sub_499140; Exterior fog day/night helper: climate sunrise boundary byte (+0x50) cached as normalized time for weather fog interpolation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4921,7 +4921,7 @@
   },
   {
     "ea": "0x49F3ED",
-    "line": "call    sub_499570",
+    "line": "call    sub_499570; Fog water decode: water shader/global refresh also consumes 0x4994C0 source records, corroborating packed color and fog field layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5005,7 +5005,7 @@
   },
   {
     "ea": "0x49F410",
-    "line": "call    sub_499570",
+    "line": "call    sub_499570; Fog water decode: water shader/global refresh also consumes 0x4994C0 source records, corroborating packed color and fog field layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5092,5 +5092,83 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B1C90",
+    "line": "lea     ecx, [ebp-21Ch]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B1C96",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B1C9B",
+    "line": "mov     edx, [esp+a3]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B1C9F",
+    "line": "lea     eax, [edx-234h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B1CA5",
+    "line": "mov     ecx, [edx-238h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B1CAB",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B1CAD",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B1CB2",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B1CB5",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B1CB8",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B1CBA",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B1CBF",
+    "line": "mov     eax, offset stru_ADDD4C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B1CC4",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

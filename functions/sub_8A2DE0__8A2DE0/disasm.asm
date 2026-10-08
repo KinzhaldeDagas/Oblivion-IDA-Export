@@ -12,13 +12,13 @@
 0x8A2DF5: cmp     dword ptr [esi+8], 0
 0x8A2DF9: jz      loc_8A2E9F
 0x8A2DFF: mov     ecx, esi
-0x8A2E01: call    sub_89F570
+0x8A2E01: call    bhkRefObject_UpdateHavokObject
 0x8A2E06: mov     ecx, [esi+8]
 0x8A2E09: lea     eax, [ebx+20h]
 0x8A2E0C: push    eax
 0x8A2E0D: call    sub_8AA1A0
 0x8A2E12: mov     ecx, esi
-0x8A2E14: call    sub_89F570
+0x8A2E14: call    bhkRefObject_UpdateHavokObject
 0x8A2E19: mov     ecx, [esi+8]
 0x8A2E1C: test    ecx, ecx
 0x8A2E1E: jz      short loc_8A2E79

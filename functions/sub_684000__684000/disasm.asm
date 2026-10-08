@@ -14,9 +14,9 @@
 0x684022: mov     [esp+60h+var_4E], al
 0x684026: call    sub_5E1E90
 0x68402B: test    al, al
-0x68402D: lea     ecx, [edi+14h]
+0x68402D: lea     ecx, [edi+14h]; this
 0x684030: setz    [esp+60h+var_4D]
-0x684035: call    sub_42B410
+0x684035: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x68403A: mov     ebx, eax
 0x68403C: test    ebx, ebx
 0x68403E: jz      short loc_684058
@@ -55,17 +55,17 @@
 0x6840B1: cmp     dword ptr [eax+34h], 0
 0x6840B5: jnz     short loc_6840D2
 0x6840B7: mov     ecx, ebp
-0x6840B9: call    sub_6899C0
+0x6840B9: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x6840BE: mov     ecx, ds:0B333A0h
 0x6840C4: push    eax
 0x6840C5: call    sub_43F840
 0x6840CA: test    al, al
 0x6840CC: jz      loc_684393
 0x6840D2: mov     ecx, ebx
-0x6840D4: call    sub_6899C0
+0x6840D4: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x6840D9: mov     ecx, ebp
 0x6840DB: mov     edi, eax
-0x6840DD: call    sub_6899C0
+0x6840DD: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x6840E2: fld     dword ptr [eax]
 0x6840E4: fsub    dword ptr [edi]
 0x6840E6: lea     ecx, [esp+60h+var_C]
@@ -77,14 +77,14 @@
 0x6840F9: fld     dword ptr [eax+8]
 0x6840FC: fsub    dword ptr [edi+8]
 0x6840FF: fstp    [esp+64h+var_4]
-0x684103: call    sub_683CB0
+0x684103: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x684108: add     esp, 4
 0x68410B: fstp    [esp+60h+var_4C]
 0x68410F: mov     ecx, ebp
-0x684111: call    sub_6899C0
+0x684111: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x684116: mov     ecx, esi
 0x684118: mov     edi, eax
-0x68411A: call    sub_6899C0
+0x68411A: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x68411F: fld     dword ptr [eax]
 0x684121: fsub    dword ptr [edi]
 0x684123: lea     edx, [esp+60h+var_48]
@@ -98,7 +98,7 @@
 0x68413D: fsub    dword ptr [edi+8]
 0x684140: push    eax
 0x684141: fstp    [esp+68h+var_34]
-0x684145: call    sub_683CB0
+0x684145: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x68414A: fstp    [esp+68h+var_68]; float
 0x68414D: push    ecx
 0x68414E: fld     [esp+6Ch+var_4C]
@@ -110,10 +110,10 @@
 0x684163: mov     ecx, ebx
 0x684165: fld     [esp+60h+var_40]
 0x684169: fstp    [esp+60h+var_40]
-0x68416D: call    sub_6899C0
+0x68416D: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x684172: mov     ecx, esi
 0x684174: mov     edi, eax
-0x684176: call    sub_6899C0
+0x684176: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x68417B: fld     dword ptr [eax]
 0x68417D: fsub    dword ptr [edi]
 0x68417F: lea     ecx, [esp+60h+var_48]
@@ -127,7 +127,7 @@
 0x684197: fld     dword ptr [eax+8]
 0x68419A: fsub    dword ptr [edi+8]
 0x68419D: fstp    [esp+68h+var_28]
-0x6841A1: call    sub_683CB0
+0x6841A1: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x6841A6: fstp    [esp+68h+var_68]; float
 0x6841A9: push    ecx
 0x6841AA: fld     [esp+6Ch+var_4C]
@@ -180,17 +180,17 @@
 0x684253: cmp     dword ptr [eax+34h], 0
 0x684257: jnz     short loc_684274
 0x684259: mov     ecx, ebp
-0x68425B: call    sub_6899C0
+0x68425B: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x684260: mov     ecx, ds:0B333A0h
 0x684266: push    eax
 0x684267: call    sub_43F840
 0x68426C: test    al, al
 0x68426E: jz      loc_68436F
 0x684274: mov     ecx, ebp
-0x684276: call    sub_6899C0
+0x684276: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x68427B: mov     ecx, esi
 0x68427D: mov     edi, eax
-0x68427F: call    sub_6899C0
+0x68427F: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x684284: fld     dword ptr [eax]
 0x684286: fsub    dword ptr [edi]
 0x684288: fstp    [esp+60h+var_24]
@@ -210,7 +210,7 @@
 0x6842B6: fstp    [esp+68h+var_1C]
 0x6842BA: mov     eax, [esp+68h+var_1C]
 0x6842BE: mov     [esp+68h+var_34], eax
-0x6842C2: call    sub_683CB0
+0x6842C2: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x6842C7: fstp    [esp+68h+var_68]; float
 0x6842CA: fld     [esp+68h+var_4C]
 0x6842CE: push    ecx
@@ -222,10 +222,10 @@
 0x6842E0: mov     ecx, ebx
 0x6842E2: fld     [esp+60h+var_40]
 0x6842E6: fstp    [esp+60h+var_40]
-0x6842EA: call    sub_6899C0
+0x6842EA: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x6842EF: mov     ecx, esi
 0x6842F1: mov     edi, eax
-0x6842F3: call    sub_6899C0
+0x6842F3: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x6842F8: fld     dword ptr [eax]
 0x6842FA: fsub    dword ptr [edi]
 0x6842FC: fstp    [esp+60h+var_18]
@@ -245,7 +245,7 @@
 0x68432D: lea     ecx, [esp+64h+var_30]
 0x684331: push    ecx
 0x684332: mov     [esp+68h+var_28], edx
-0x684336: call    sub_683CB0
+0x684336: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x68433B: fstp    [esp+68h+var_68]; float
 0x68433E: fld     [esp+68h+var_4C]
 0x684342: push    ecx

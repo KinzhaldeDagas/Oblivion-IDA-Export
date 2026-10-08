@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x9A402D",
-    "line": "call    NiObjectNET_GetExtraData",
+    "line": "call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x9A404A",
-    "line": "cmp     byte_B4295B, 0",
+    "line": "cmp     g_D3DXParameterDispatchInitialized, 0",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x9A4058",
-    "line": "call    sub_783C70",
+    "line": "call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x9A4068",
-    "line": "cmp     dword_B428D8[ebx*4], eax",
+    "line": "cmp     g_D3DXParameterClassDispatch[ebx*4], eax",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x9A4092",
-    "line": "cmp     byte_B4295B, 0",
+    "line": "cmp     g_D3DXParameterDispatchInitialized, 0",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x9A409E",
-    "line": "call    sub_783C70",
+    "line": "call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x9A40AE",
-    "line": "cmp     dword_B428D8[ebx*4], eax",
+    "line": "cmp     g_D3DXParameterClassDispatch[ebx*4], eax",
     "mnemonic": "cmp",
     "size": 7
   },

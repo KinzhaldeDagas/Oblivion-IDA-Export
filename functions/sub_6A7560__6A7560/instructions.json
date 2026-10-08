@@ -193,13 +193,13 @@
   },
   {
     "ea": "0x6A75C9",
-    "line": "push    ebp",
+    "line": "push    ebp; object",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A75CA",
-    "line": "call    sub_480340",
+    "line": "call    NiAVObject_FindBhkCollisionObjectRecursive; Returns the first bhk collision object found on object or recursively beneath its NiNode children. This is structural traversal, independent of node names.",
     "mnemonic": "call",
     "size": 5
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x6A7658",
-    "line": "push    offset dword_B35288",
+    "line": "push    0B35288h",
     "mnemonic": "push",
     "size": 5
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x6A76A9",
-    "line": "fstp    [esp+54h+var_54]; float",
+    "line": "fstp    [esp+54h+elapsedSeconds]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -907,7 +907,7 @@
   },
   {
     "ea": "0x6A7769",
-    "line": "fstp    [esp+54h+var_54]; float",
+    "line": "fstp    [esp+54h+elapsedSeconds]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1021,25 +1021,25 @@
   },
   {
     "ea": "0x6A77AE",
-    "line": "fstp    [esp+54h+var_54]; float",
+    "line": "fstp    [esp+54h+elapsedSeconds]; elapsedSeconds",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6A77B1",
-    "line": "push    ecx; int",
+    "line": "push    ecx; effectShader",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A77B2",
-    "line": "push    edx; int",
+    "line": "push    edx; targetReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A77B3",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1111,19 +1111,19 @@
   },
   {
     "ea": "0x6A77D1",
-    "line": "push    esi",
+    "line": "push    esi; effect",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A77D2",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x6A77D7",
-    "line": "call    sub_678D30",
+    "line": "call    ActorProcessManager_RegisterTempEffect; [Verified] ActorProcessManager_RegisterTempEffect increments the effect reference and routes GetTypeID 4-6 into extendedTempEffects (+0x48), all other IDs into activeTempEffects (+0x40). Vtable evidence confirms decals 0/1 and particles 2 use the active list. Fallout divergence: its BGSDecalManager updates distinct simple-decal and emitter collections instead of using this per-actor temp-effect routing; one-to-one equivalence is Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1279,7 +1279,7 @@
   },
   {
     "ea": "0x6A7812",
-    "line": "call    ActiveEffect_Base_Remove",
+    "line": "call    ActiveEffect_Base_Remove; Verified termination API: sets bTerminated=1. When its flush flag is true, immediately invokes ActiveEffect_Base_ProcessEffect to run termination cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1336,5 +1336,107 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C6290",
+    "line": "mov     eax, [ebp-34h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C6293",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C6294",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C6299",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C629A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C629B",
+    "line": "mov     eax, [ebp-34h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C629E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C629F",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C62A4",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C62A5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C62A6",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C62AA",
+    "line": "lea     eax, [edx-40h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C62AD",
+    "line": "mov     ecx, [edx-44h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C62B0",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C62B2",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C62B7",
+    "line": "mov     eax, offset stru_AEE87C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C62BC",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

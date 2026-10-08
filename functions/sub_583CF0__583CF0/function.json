@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 2,
+  "chunks": [
+    [
+      "0x583CF0",
+      "0x583D46"
+    ]
+  ],
+  "chunks_sha256": "6f004842ad7895483165054178e2fd8f2fcbe967dcf4fdb1f2d79140686fb69f",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "Verified: finds timer by opaque owner/index pointer, unlinks and frees only the timer node. Used by NewTimer and fade cancellation.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_583CF0",
+  "display_name": "InterfaceManager::ClearTimer",
   "end_ea": "0x583D46",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_583CF0",
+  "name": "InterfaceManager::ClearTimer",
   "segment": ".text",
   "sha256": "6f004842ad7895483165054178e2fd8f2fcbe967dcf4fdb1f2d79140686fb69f",
   "size": 86,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x583CF0",
-  "type": "void __cdecl(int)",
+  "total_chunk_size": 86,
+  "type": "void __cdecl(void *index)",
   "xrefs_from_count": 31,
   "xrefs_to_count": 2
 }

@@ -3,7 +3,7 @@
 0x69F192: push    1; a2
 0x69F194: mov     esi, ecx
 0x69F196: mov     bl, 1
-0x69F198: call    TESObjectREFR_GetParentCell
+0x69F198: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x69F19D: mov     ecx, ds:0B333A0h
 0x69F1A3: push    eax; a1
 0x69F1A4: call    TESObjectCELL_IsProcessLevel?LowHigh

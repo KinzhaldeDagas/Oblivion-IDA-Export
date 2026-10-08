@@ -1,4 +1,4 @@
-0x7A2620: sub     esp, 0Ch
+0x7A2620: sub     esp, 0Ch; CTreeEngine::FreeTransientData. Releases compact trunk branch, leaf LOD vectors, branch-info arrays, and related transient generator state, then clears CTreeEngine+0x21.
 0x7A2623: push    edi
 0x7A2624: mov     edi, ecx
 0x7A2626: cmp     byte ptr [edi+21h], 0
@@ -11,9 +11,9 @@
 0x7A2638: cmp     esi, ebx
 0x7A263A: jz      short loc_7A264C
 0x7A263C: mov     ecx, esi
-0x7A263E: call    sub_790D00
+0x7A263E: call    OB_CBranch_cleanup_010201A0; Compact CBranch cleanup: frees vertex storage, recursively destroys children, and clears child/flare vectors.
 0x7A2643: push    esi
-0x7A2644: call    FormHeapFree
+0x7A2644: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7A2649: add     esp, 4
 0x7A264C: cmp     [edi+0C0h], ebx
 0x7A2652: mov     [edi+58h], ebx
@@ -105,13 +105,13 @@
 0x7A2764: jz      short loc_7A2783
 0x7A2766: mov     ecx, [eax-4]
 0x7A2769: lea     esi, [eax-4]
-0x7A276C: push    offset sub_794EB0; void (__thiscall *)(void *)
+0x7A276C: push    offset OB_stVector4_DestroyThiscall_010201A0; void (__thiscall *)(void *)
 0x7A2771: push    ecx; int
 0x7A2772: push    10h; unsigned int
 0x7A2774: push    eax; void *
 0x7A2775: call    $LN21
 0x7A277A: push    esi
-0x7A277B: call    FormHeapFree
+0x7A277B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7A2780: add     esp, 4
 0x7A2783: mov     dword ptr [edi+0D4h], 0
 0x7A278D: xor     esi, esi
@@ -136,10 +136,10 @@
 0x7A27BB: mov     ebx, [edx+esi*4]
 0x7A27BE: test    ebx, ebx
 0x7A27C0: jz      short loc_7A27D2
-0x7A27C2: mov     ecx, ebx
-0x7A27C4: call    sub_7A7800
+0x7A27C2: mov     ecx, ebx; this
+0x7A27C4: call    OB_SIdvBranchInfo_Dtor_010201A0; Each branch-info pointer is destructed through OB_SIdvBranchInfo_Dtor before the enclosing 0x74 record is freed, proving per-record ownership of the nine optional spline pointers.
 0x7A27C9: push    ebx
-0x7A27CA: call    FormHeapFree
+0x7A27CA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7A27CF: add     esp, 4
 0x7A27D2: mov     ecx, [edi+64h]
 0x7A27D5: test    ecx, ecx

@@ -1,1 +1,1 @@
-ProxyFileInfo_0
+typedef tagProxyFileInfo_0 ProxyFileInfo_0;

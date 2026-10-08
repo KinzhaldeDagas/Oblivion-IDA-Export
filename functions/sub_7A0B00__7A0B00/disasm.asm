@@ -1,18 +1,18 @@
-0x7A0B00: push    esi
-0x7A0B01: mov     esi, [esp+4+arg_0]
+0x7A0B00: push    esi; stdcall cleanup thunk for one st_vector<SFrondGuide> element; used by exception unwind in the outer guide-LOD vector helpers.
+0x7A0B01: mov     esi, [esp+4+value]
 0x7A0B05: mov     eax, [esi+4]
 0x7A0B08: test    eax, eax
 0x7A0B0A: jz      short loc_7A0B28
-0x7A0B0C: mov     ecx, [esp+4+arg_0]
+0x7A0B0C: mov     ecx, [esp+4+value]
 0x7A0B10: mov     edx, [esi+8]
 0x7A0B13: push    ecx
 0x7A0B14: push    esi
-0x7A0B15: push    edx
-0x7A0B16: push    eax
-0x7A0B17: call    sub_79E150
+0x7A0B15: push    edx; last
+0x7A0B16: push    eax; first
+0x7A0B17: call    OB_SFrondGuide_DestroyRange_010201A0; Destroys every compact SFrondGuide in [first,last), freeing each embedded SFrondVertex vector.
 0x7A0B1C: mov     eax, [esi+4]
 0x7A0B1F: push    eax
-0x7A0B20: call    FormHeapFree
+0x7A0B20: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7A0B25: add     esp, 14h
 0x7A0B28: mov     dword ptr [esi+4], 0
 0x7A0B2F: mov     dword ptr [esi+8], 0

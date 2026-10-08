@@ -1,19 +1,32 @@
 {
-  "callees_count": 12,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 4,
+  "chunks": [
+    [
+      "0x9A92E0",
+      "0x9A95E3"
+    ]
+  ],
+  "chunks_sha256": "bcefb741bede29a16a2ee7d60c30145341db5feeee15a068a09ba1ad4fa719bf",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_9A92E0",
+  "comment_repeatable": "DX11 mapped-float provenance (2026-09-28):9A92E0 does NOT always return entry+30 directly. size(+28)/stride(+2C) counts1/2/3 broadcast or fill a scratch float4;8/9/12 expand matrices into scratch. Counts4 and16 pass the pointer through. Other counts pass through only when stride==4 and component count is divisible by4. A source-address provenance resolver must reject/bypass scratch-expansion cases rather than treating every mapped source as a direct float4 array.\nDX11 mapped-value implementation 2026-10-01: component count is unsigned DataSize(+28)/DataStride(+2C), using integer quotient. Class1 scalar zero-extends one source byte into a DWORD BOOL; class3 scalar/pair/triple copies integer words and uses integer1 for triple W. Other scalar/pair/triple paths expand floats with W=1.0 for triples. Matrix8/9/12 paths use float loads regardless of class, fill a 16-float scratch result and zero the remaining row/components (not an identity row). Counts4/16 and fallback stride4/divisible-by4 return the original source pointer without float load/store conversion. A port must distinguish those raw bits from x87-expanded signaling NaNs, which are quieted. Counts exceeding the scratch span can expose prior shared scratch values and are not qualified by current-source bytes alone. Source addresses remain borrowed mutable provenance; freshness/ownership must be established separately per current writer.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 79,
+  "display_name": "NiD3DShaderConstantMap_ConvertMappedValue",
   "end_ea": "0x9A95E3",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_9A92E0",
+  "name": "NiD3DShaderConstantMap_ConvertMappedValue",
   "segment": ".text",
   "sha256": "bcefb741bede29a16a2ee7d60c30145341db5feeee15a068a09ba1ad4fa719bf",
   "size": 771,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x9A92E0",
-  "type": "int *__stdcall(int)",
+  "total_chunk_size": 771,
+  "type": "const void *__stdcall(const NiD3DShaderConstantMapEntry *entry)",
   "xrefs_from_count": 289,
   "xrefs_to_count": 4
 }

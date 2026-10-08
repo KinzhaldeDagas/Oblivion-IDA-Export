@@ -1,19 +1,32 @@
 {
-  "callees_count": 18,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_77AC90",
+  "chunks": [
+    [
+      "0x77AC90",
+      "0x77AE03"
+    ]
+  ],
+  "chunks_sha256": "39231a30a00289fc7ffc93e9976f0b9ae85f1d8e00de9f8496c0c1a393c9a1c7",
+  "comment_regular": "Resolve NiTexture to D3D texture and report render-data creation, actual mip-count>1, and NPOT/special dimensions.",
+  "comment_repeatable": "Resolve NiTexture to D3D texture and report render-data creation, actual mip-count>1, and NPOT/special dimensions.\nDX11 GPU-world verified 2026-09-30: texture+24 renderer-data; source table A883C4, rendered table A88464. Width/height accessors read data+54/+58; NPOT true for zero or non-power-of-two dimensions. Rendered +18 identity branch returns GetTexture early with hasMultipleMipLevels still false, regardless of stored levels. Ordinary source +18/+20 return zero, +1C returns this; data+50 nonnull AND texture+40 nonzero skips upload. Otherwise source creation/upload side effects require a separate publication path. Ordinary mip count data+5C >1 only after source branch. Captured COM association is not lifetime ownership.\nDX11 additional classes verified 2026-09-30: NiDX9DynamicTextureData table A8A92C: +18 returns0, +20 returns this; resolver then returns GetTexture early with hasMultipleMipLevels still0. Base NiDX9TextureData table A89F54: +18,+20,+1C all return0; no upload path, reads levels+5C then returns texture+50, including null. Neither branch reads source texture flag+40. Both share width+54, height+58, texture+50 accessors. Code and dispatch checked before capture; COM lifetime remains separate.\nDX11 independent ordinary texture resources 2026-09-30: rechecked77AC90 against its existing resident source/rendered/dynamic/base profiles. A fresh property-selected NiTexture may be resolved from texture+24/data+50 without consulting old stage+4. Source requires nonnull native backing and texture+40 upload-current flag; otherwise native creation/upload remains an explicit unsatisfied obligation. Native association capture and DX11 publication/lifetime acquisition must be separate; neither observing data+50 nor holding a DX11 view proves the NiTexture association remains current across scene mutations.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_NiDX9TextureManager_ResolveTextureForStage_010201A0",
   "end_ea": "0x77AE03",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_77AC90",
+  "name": "OB_NiDX9TextureManager_ResolveTextureForStage_010201A0",
   "segment": ".text",
   "sha256": "39231a30a00289fc7ffc93e9976f0b9ae85f1d8e00de9f8496c0c1a393c9a1c7",
   "size": 371,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x77AC90",
-  "type": "int __thiscall(_DWORD **this, int, _BYTE *, bool *, bool *)",
+  "total_chunk_size": 371,
+  "type": "void *__thiscall(void *this, void *texture, unsigned __int8 *renderDataCreated, unsigned __int8 *hasMultipleMipLevels, unsigned __int8 *needsNPOTFallback)",
   "xrefs_from_count": 162,
   "xrefs_to_count": 1
 }

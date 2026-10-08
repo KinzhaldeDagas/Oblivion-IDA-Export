@@ -10,7 +10,6 @@
 0x4FD442: add     ecx, 50h ; 'P'
 0x4FD445: jz      loc_4FD4F5
 0x4FD44B: jmp     short loc_4FD450
-0x4FD44D: align 10h
 0x4FD450: mov     esi, [ecx+4]
 0x4FD453: test    esi, esi
 0x4FD455: jnz     short loc_4FD45F

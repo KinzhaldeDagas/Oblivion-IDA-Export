@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x628220",
+      "0x628239"
+    ]
+  ],
+  "chunks_sha256": "3c392c158b7f27ac9b19735d8408729301af171b51b5e936aa303f92e6bc09fd",
+  "comment_regular": "Stores the 16-bit current action at HighProcess+0x1F4 and its BSAnimGroupSequence pointer at +0x1F8; returns the stored action in AX.",
+  "comment_repeatable": "Stores the 16-bit current action at HighProcess+0x1F4 and its BSAnimGroupSequence pointer at +0x1F8; returns the stored action in AX.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "HighProcess::SetCurrentAction",
   "end_ea": "0x628239",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "HighProcess::SetCurrentAction",
   "segment": ".text",
   "sha256": "3c392c158b7f27ac9b19735d8408729301af171b51b5e936aa303f92e6bc09fd",
   "size": 25,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x628220",
-  "type": "int __thiscall(HighProcess *this, SInt16 a2, BSAnimGroupSequence *a3)",
+  "total_chunk_size": 25,
+  "type": "ActorCurrentAction __thiscall(HighProcess *this, ActorCurrentAction action, BSAnimGroupSequence *sequence)",
   "xrefs_from_count": 4,
   "xrefs_to_count": 1
 }

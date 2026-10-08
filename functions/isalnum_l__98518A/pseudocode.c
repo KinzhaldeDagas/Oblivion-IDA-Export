@@ -5,12 +5,12 @@ int __cdecl _isalnum_l(int C, _locale_t Locale)
   int v4; // [esp+8h] [ebp-8h]
   char v5; // [esp+Ch] [ebp-4h]
 
-  _LocaleUpdate::_LocaleUpdate((_LocaleUpdate *)&v3, (struct localeinfo_struct *)Locale);
-  if ( v3.locinfo->mb_cur_max <= 1 )
-    result = v3.locinfo->pctype[C] & 0x107;
+  _LocaleUpdate::_LocaleUpdate((_LocaleUpdate *)&v3, (struct localeinfo_struct *)Locale); /*0x985196*/
+  if ( v3.locinfo->mb_cur_max <= 1 ) /*0x9851a5*/
+    result = v3.locinfo->pctype[C] & 0x107; /*0x9851ca*/
   else
-    result = _isctype_l(C, 0x107, (_locale_t)&v3);
-  if ( v5 )
-    *(_DWORD *)(v4 + 0x70) &= ~2u;
-  return result;
+    result = _isctype_l(C, 0x107, (_locale_t)&v3); /*0x9851b3*/
+  if ( v5 ) /*0x9851d3*/
+    *(_DWORD *)(v4 + 0x70) &= ~2u; /*0x9851d8*/
+  return result; /*0x9851dc*/
 }

@@ -34,13 +34,13 @@
 0x4AE287: jnz     loc_4AE46D
 0x4AE28D: cmp     dword ptr [esi-8], 0
 0x4AE291: jz      loc_4AE46D
-0x4AE297: mov     ecx, offset TimeGlobals
-0x4AE29C: call    sub_402DC0
+0x4AE297: mov     ecx, 0B332E0h
+0x4AE29C: call    TimeGlobals_GetSeasonIndex; Maps GameMonth 0..11 to a four-season index: 0 for 2..4, 1 for 5..7, 2 for 8..10, 3 for 11/0/1. Used to select seasonal chance data.
 0x4AE2A1: mov     bl, [eax+esi-4]
 0x4AE2A5: test    bl, bl
 0x4AE2A7: jbe     loc_4AE46D
 0x4AE2AD: push    0; Seed
-0x4AE2AF: call    GetRandomLargeInteger?
+0x4AE2AF: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x4AE2B4: cdq
 0x4AE2B5: mov     ecx, 64h ; 'd'
 0x4AE2BA: idiv    ecx
@@ -125,11 +125,11 @@
 0x4AE3AB: mov     ecx, edi
 0x4AE3AD: call    eax
 0x4AE3AF: jmp     short loc_4AE3C2
-0x4AE3B1: mov     ecx, [esp+28h+arg_4]
-0x4AE3B5: push    1
-0x4AE3B7: push    ebx
-0x4AE3B8: push    ebp
-0x4AE3B9: call    TESObjectREFR_AddItem_Abbrev
+0x4AE3B1: mov     ecx, [esp+28h+arg_4]; this
+0x4AE3B5: push    1; count
+0x4AE3B7: push    ebx; extraList
+0x4AE3B8: push    ebp; item
+0x4AE3B9: call    TESObjectREFR_AddItem_Abbrev; Short TESObjectREFR AddItem wrapper: emits the inventory event and delegates item, ExtraDataList, and count to ContainerExtraData_AddItem.
 0x4AE3BE: mov     edi, [esp+28h+arg_4]
 0x4AE3C2: cmp     edi, ds:0B333C4h
 0x4AE3C8: jnz     loc_4AE499
@@ -173,11 +173,11 @@
 0x4AE44A: mov     ecx, esi; this
 0x4AE44C: call    sub_6B73E0
 0x4AE451: push    esi
-0x4AE452: call    FormHeapFree
+0x4AE452: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4AE457: add     esp, 4
 0x4AE45A: push    edi
 0x4AE45B: mov     [esp+2Ch+var_4], 0FFFFFFFFh
-0x4AE463: call    FormHeapFree
+0x4AE463: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4AE468: add     esp, 4
 0x4AE46B: jmp     short loc_4AE499
 0x4AE46D: cmp     edi, ds:0B333C4h
@@ -206,3 +206,22 @@
 0x4AE4B5: pop     ebx
 0x4AE4B6: add     esp, 14h
 0x4AE4B9: retn    14h
+0x9B2CA0: mov     eax, [ebp-14h]
+0x9B2CA3: push    eax
+0x9B2CA4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B2CA9: pop     ecx
+0x9B2CAA: retn
+0x9B2CAB: mov     eax, [ebp-14h]
+0x9B2CAE: push    eax
+0x9B2CAF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B2CB4: pop     ecx
+0x9B2CB5: retn
+0x9B2CB6: lea     ecx, [ebp-14h]; void *
+0x9B2CB9: jmp     BSStringT_Clear
+0x9B2CBE: mov     edx, [esp+arg_4]
+0x9B2CC2: lea     eax, [edx-18h]
+0x9B2CC5: mov     ecx, [edx-1Ch]
+0x9B2CC8: xor     ecx, eax
+0x9B2CCA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B2CCF: mov     eax, offset stru_ADEB28
+0x9B2CD4: jmp     ___CxxFrameHandler3

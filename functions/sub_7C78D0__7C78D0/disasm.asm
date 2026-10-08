@@ -1,4 +1,4 @@
-0x7C78D0: push    0FFFFFFFFh
+0x7C78D0: push    0FFFFFFFFh; Oblivion ShadowSceneNode visibility/ranking pass: culls full lights against the current camera, updates per-light visibility/score state, partitions viable lights into active handling, and enforces configured shadow-light budgets.
 0x7C78D2: push    offset SEH_7C78D0
 0x7C78D7: mov     eax, large fs:0
 0x7C78DD: push    eax
@@ -21,9 +21,9 @@
 0x7C7911: mov     ecx, [ebp+0E8h]
 0x7C7917: test    ecx, ecx
 0x7C7919: jz      loc_7C79C0
-0x7C791F: jmp     short loc_7C7925
+0x7C791F: jmp     short loc_7C7925; MEF PERF 2026-10-07: PERF-12 Verified orphan-prune cost: traversal already has current list position in ECX, payload in [ECX+8], and saves successor at7C792F. Removal at7C79B0 discards this positional knowledge and searches again from head through7C77C0/7D5F80. For K retained distinct payloads followed by D orphan payloads, comparison count is D*(K+1), assuming no intervening list mutation.
 0x7C7921: mov     ecx, [esp+4Ch+var_34]
-0x7C7925: mov     esi, [ecx+8]
+0x7C7925: mov     esi, [ecx+8]; MEF PERF 2026-10-07: PERF-12 Verified orphan-prune cost: traversal already has current list position in ECX, payload in [ECX+8], and saves successor at7C792F. Removal at7C79B0 discards this positional knowledge and searches again from head through7C77C0/7D5F80. For K retained distinct payloads followed by D orphan payloads, comparison count is D*(K+1), assuming no intervening list mutation.
 0x7C7928: test    esi, esi
 0x7C792A: lea     eax, [ecx+8]
 0x7C792D: mov     ecx, [ecx]
@@ -32,11 +32,11 @@
 0x7C7939: lea     edx, [esp+4Ch+var_30]
 0x7C793D: push    edx
 0x7C793E: mov     ecx, esi
-0x7C7940: call    sub_405AD0
+0x7C7940: call    ShadowSceneLight_GetLightRef
 0x7C7945: mov     ebx, [eax]
 0x7C7947: mov     eax, [esp+4Ch+var_30]
 0x7C794B: test    eax, eax
-0x7C794D: jz      short loc_7C7972
+0x7C794D: jz      short loc_7C7972; MEF PERF 2026-10-07: PERF-12 Verified selection: null backing source branches to removal; otherwise DWORD source+4==1 also removes. This is orphan cleanup, not rejection by camera bounds or ordinary invisibility. Loop is skipped when owner+12C is nonzero.
 0x7C794F: mov     ebp, eax
 0x7C7951: add     eax, 4
 0x7C7954: push    eax; lpAddend
@@ -51,34 +51,34 @@
 0x7C796A: mov     ecx, ebp
 0x7C796C: call    edx
 0x7C796E: mov     ebp, [esp+4Ch+var_38]
-0x7C7972: test    ebx, ebx
+0x7C7972: test    ebx, ebx; MEF PERF 2026-10-07: PERF-12 Verified selection: null backing source branches to removal; otherwise DWORD source+4==1 also removes. This is orphan cleanup, not rejection by camera bounds or ordinary invisibility. Loop is skipped when owner+12C is nonzero.
 0x7C7974: jz      short loc_7C79AD
 0x7C7976: cmp     dword ptr [ebx+4], 1
 0x7C797A: jz      short loc_7C79AD
 0x7C797C: cmp     byte ptr [esi+104h], 0
 0x7C7983: jz      short loc_7C798D
-0x7C7985: push    esi
-0x7C7986: mov     ecx, ebp
-0x7C7988: call    sub_7C6020
+0x7C7985: push    esi; light
+0x7C7986: mov     ecx, ebp; self
+0x7C7988: call    ShadowSceneNode_RefreshMovedPointLightSource; Refresh a moved backing NiPointLight: require +0xFC, +0x104, and normal +0xF4 state; compare cached +0x108..+0x110 against light world position, then rebuild/relink if moved.
 0x7C798D: cmp     byte ptr [esi+0F4h], 0
 0x7C7994: jz      short loc_7C799F
-0x7C7996: call    sub_405A80
+0x7C7996: call    BSShaderManager_IsShadowMappingReady; [Verified] Returns true only when BSShaderPackageVersion (RendererGlobalState+0xAF) >= 3 and BSShaderFeatureMask (RendererGlobalState+0xA7) contains native shadow-map bit 0x10. The version comparison independently corroborates the selector field read by GetShaderProgramPackageIndex.
 0x7C799B: test    al, al
 0x7C799D: jnz     short loc_7C79B5
 0x7C799F: mov     eax, [esp+4Ch+a2]
 0x7C79A3: push    eax
 0x7C79A4: mov     ecx, esi
-0x7C79A6: call    ShadowSceneLight_CullProcess
+0x7C79A6: call    ShadowSceneLight_CullProcess; Visible/cull path calls ShadowSceneLight_CullProcess at its true entry 0x007D6390.
 0x7C79AB: jmp     short loc_7C79B5
 0x7C79AD: push    esi
 0x7C79AE: mov     ecx, ebp
-0x7C79B0: call    sub_7C77C0
+0x7C79B0: call    ShadowSceneNode_RemoveFullLight; MEF PERF 2026-10-07: PERF-12 candidate scoped CALL patch (not approved): thiscall owner=EBP, light=ESI pushed at7C79AD, successor stored at [ESP+18] before argument push ([ESP+20] at callee entry). Preserve successor, selection, callbacks, stack and full-loop order. Original whole visibility body includes rendering; do not replace/skip it to optimize cleanup. Candidate position must remain valid and native first-occurrence semantics must be preserved.
 0x7C79B5: cmp     [esp+4Ch+var_34], 0
 0x7C79BA: jnz     loc_7C7921
 0x7C79C0: push    edi
 0x7C79C1: mov     ecx, ebp
-0x7C79C3: call    sub_7C71B0
-0x7C79C8: mov     eax, ds:0B43124h
+0x7C79C3: call    ShadowSceneNode_ReorderFullLightsByCameraScore; After visible/cull updates, reorder the full list by native camera-relative score.
+0x7C79C8: mov     eax, ds:0B43124h; V165 receiver audit (2026-09-19, authoritative Oblivion): control reaches this suffix only after the full-light mutation/cull loop and the ReorderFullLightsByCameraScore call at 7C79C3, or after the native 12C skip branch. The function then performs camera/fog setup, visible traversal and accumulator Flush before returning. A whole-call CullFullLights writer therefore spans rendering; this boundary alone is not permission to waive writer exclusion.
 0x7C79CD: cmp     eax, edi
 0x7C79CF: mov     cl, [ebp+11Ch]
 0x7C79D5: mov     ds:0B42F30h, cl
@@ -102,7 +102,7 @@
 0x7C7A01: mov     ds:0B43124h, edi
 0x7C7A07: jz      short loc_7C7A13
 0x7C7A09: lea     ecx, [edi+4]
-0x7C7A0C: push    ecx; lpAddend
+0x7C7A0C: push    ecx; w
 0x7C7A0D: call    dword ptr ds:0A28078h
 0x7C7A13: cmp     dword ptr ds:0B42F48h, 0
 0x7C7A1A: jnz     short loc_7C7A8A
@@ -122,7 +122,7 @@
 0x7C7A49: mov     ebx, [ecx+8]
 0x7C7A4C: push    esi; a2
 0x7C7A4D: mov     [esp+50h+var_4], 0FFFFFFFFh
-0x7C7A55: call    NiDX9Renderer__SetShaderAccumulator
+0x7C7A55: call    NiDX9Renderer__SetShaderAccumulator;
 0x7C7A5A: mov     edx, [esi]
 0x7C7A5C: mov     eax, [edx+4Ch]
 0x7C7A5F: push    edi
@@ -131,14 +131,14 @@
 0x7C7A64: mov     ecx, [esp+4Ch+a2]
 0x7C7A68: push    ecx; a2
 0x7C7A69: mov     ecx, ebp; this
-0x7C7A6B: call    NiNode__OnVisible
+0x7C7A6B: call    NiNode__OnVisible; Retail NiNode OnVisible entry; visible nonempty child arrays recurse through ordinary child traversal.
 0x7C7A70: mov     edx, [esi]
 0x7C7A72: mov     eax, [edx+50h]
 0x7C7A75: mov     ecx, esi
 0x7C7A77: call    eax
 0x7C7A79: mov     ecx, ds:0B3F928h; this
 0x7C7A7F: push    ebx; a2
-0x7C7A80: call    NiDX9Renderer__SetShaderAccumulator
+0x7C7A80: call    NiDX9Renderer__SetShaderAccumulator;
 0x7C7A85: jmp     loc_7C7DA1
 0x7C7A8A: cmp     byte ptr ds:0B42E86h, 1
 0x7C7A91: jnz     short loc_7C7AB4
@@ -176,16 +176,16 @@
 0x7C7B1C: mov     [eax+4], ecx
 0x7C7B1F: mov     ecx, [esp+5Ch+var_10]
 0x7C7B23: mov     [eax+8], edx
-0x7C7B26: push    1Ch
+0x7C7B26: push    1Ch; slot
 0x7C7B28: mov     [eax+0Ch], ecx
-0x7C7B2B: call    sub_7ECAE0
+0x7C7B2B: call    OB_BSShader_SetSharedFloat4Constant_010201A0; Shader global table helper: store four dwords at dword_B46498 + 0x10 * index.
 0x7C7B30: fld     dword ptr [edi+64h]
 0x7C7B33: fstp    [esp+60h+var_28]
 0x7C7B37: add     esp, 4
 0x7C7B3A: fld     dword ptr [edi+70h]
 0x7C7B3D: mov     eax, esp
 0x7C7B3F: fstp    [esp+5Ch+var_24]
-0x7C7B43: push    1Dh
+0x7C7B43: push    1Dh; slot
 0x7C7B45: fld     dword ptr [edi+7Ch]
 0x7C7B48: fstp    [esp+60h+var_20]
 0x7C7B4C: fld     [esp+60h+var_28]
@@ -204,14 +204,14 @@
 0x7C7B7A: fstp    [esp+60h+var_10]
 0x7C7B7E: mov     ecx, [esp+60h+var_10]
 0x7C7B82: mov     [eax+0Ch], ecx
-0x7C7B85: call    sub_7ECAE0
+0x7C7B85: call    OB_BSShader_SetSharedFloat4Constant_010201A0; Shader global table helper: store four dwords at dword_B46498 + 0x10 * index.
 0x7C7B8A: fld     dword ptr [edi+6Ch]
 0x7C7B8D: fstp    [esp+60h+var_28]
 0x7C7B91: add     esp, 4
 0x7C7B94: fld     dword ptr [edi+78h]
 0x7C7B97: mov     eax, esp
 0x7C7B99: fstp    [esp+5Ch+var_24]
-0x7C7B9D: push    1Eh
+0x7C7B9D: push    1Eh; slot
 0x7C7B9F: fld     dword ptr [edi+84h]
 0x7C7BA5: fstp    [esp+60h+var_20]
 0x7C7BA9: fld     [esp+60h+var_28]
@@ -230,11 +230,11 @@
 0x7C7BD7: fstp    [esp+60h+var_10]
 0x7C7BDB: mov     ecx, [esp+60h+var_10]
 0x7C7BDF: mov     [eax+0Ch], ecx
-0x7C7BE2: call    sub_7ECAE0
+0x7C7BE2: call    OB_BSShader_SetSharedFloat4Constant_010201A0; Shader global table helper: store four dwords at dword_B46498 + 0x10 * index.
 0x7C7BE7: add     esp, 14h
 0x7C7BEA: push    1
 0x7C7BEC: mov     ecx, ebp
-0x7C7BEE: call    NiNode_GetNiPropertyByID
+0x7C7BEE: call    NiNode_GetNiPropertyByID; Fog render consumer decode: ShadowSceneNode reads node property type 1 fog property; B333E4 reaches this path through root/sky property attachment.
 0x7C7BF3: test    eax, eax
 0x7C7BF5: jz      loc_7C7CAB
 0x7C7BFB: fld     dword ptr [eax+2Ch]
@@ -254,7 +254,7 @@
 0x7C7C2C: fstp    [esp+4Ch+var_1C]
 0x7C7C30: mov     eax, [esp+4Ch+var_1C]
 0x7C7C34: fld     [esp+4Ch+var_2C]
-0x7C7C38: mov     ds:0B46638h, eax
+0x7C7C38: mov     ds:0B46638h, eax; Fog render consumer decode: ShadowSceneNode shared FogParam B45E14[0x209..0x20C] = (fogEnd, fogEnd - fogStart, 0, 0).
 0x7C7C3D: fstp    [esp+4Ch+var_18]
 0x7C7C41: mov     ecx, [esp+4Ch+var_18]
 0x7C7C45: fldz
@@ -273,7 +273,7 @@
 0x7C7C7C: fld     [esp+4Ch+var_20]
 0x7C7C80: mov     edx, [esp+4Ch+var_18]
 0x7C7C84: fstp    [esp+4Ch+var_14]
-0x7C7C88: mov     ds:0B46648h, ecx
+0x7C7C88: mov     ds:0B46648h, ecx; Fog render consumer decode: ShadowSceneNode shared FogColor B45E14[0x20D..0x210] = (fog.r, fog.g, fog.b, 0).
 0x7C7C8E: mov     eax, [esp+4Ch+var_14]
 0x7C7C92: mov     ds:0B4664Ch, edx
 0x7C7C98: fstp    [esp+4Ch+var_10]
@@ -288,7 +288,7 @@
 0x7C7CC1: fmulp   st(2), st
 0x7C7CC3: faddp   st(1), st
 0x7C7CC5: fstp    dword ptr ds:0B460B8h
-0x7C7CCB: call    InitBSShaderAccumulator
+0x7C7CCB: call    BSShaderAccumulator_GetOrCreateGlobal
 0x7C7CD0: mov     esi, eax
 0x7C7CD2: test    esi, esi
 0x7C7CD4: mov     [esp+4Ch+var_2C], esi
@@ -313,7 +313,7 @@
 0x7C7D16: mov     ecx, ds:0B3F928h; this
 0x7C7D1C: push    esi; a2
 0x7C7D1D: mov     byte ptr [esp+50h+var_4], 2
-0x7C7D22: call    NiDX9Renderer__SetShaderAccumulator
+0x7C7D22: call    NiDX9Renderer__SetShaderAccumulator;
 0x7C7D27: mov     edx, [esi]
 0x7C7D29: mov     eax, [edx+4Ch]
 0x7C7D2C: push    edi
@@ -323,15 +323,15 @@
 0x7C7D35: push    ecx; a2
 0x7C7D36: mov     ecx, [esp+50h+var_38]; this
 0x7C7D3A: mov     byte ptr [esi+21E0h], 1
-0x7C7D41: call    NiNode__OnVisible
+0x7C7D41: call    NiNode__OnVisible; V165 receiver audit: NiNode::OnVisible is called from inside ShadowSceneNode_VisibleCullAndRankFullLights (hook kind CullFullLights), after native light cull/reorder and accumulator BeginAccumulation. The whole-call observer writer is still active during this traversal and the following accumulator Flush.
 0x7C7D46: mov     byte ptr [esi+21E1h], 1
 0x7C7D4D: mov     edx, [esi]
 0x7C7D4F: mov     eax, [edx+50h]
 0x7C7D52: mov     ecx, esi
-0x7C7D54: call    eax
+0x7C7D54: call    eax; V165 receiver audit: indirect call is BSShaderAccumulator vtable+50 = 7AE070 Flush. Proven constructor store at 7ABE67 installs vtable A8CC5C; dword A8CCAC is 7AE070. Ordinary Flush uses vtable+60 -> 7AC9A0 FlushPassBucket, which calls 7A9820 at 7ACDE4/7ACECC. Thus native material draws occur before hooked CullFullLights returns; blanket writer exclusion around the full 7C78D0 call blocks their receiver captures.
 0x7C7D56: mov     ecx, ds:0B3F928h; this
 0x7C7D5C: push    ebp; a2
-0x7C7D5D: call    NiDX9Renderer__SetShaderAccumulator
+0x7C7D5D: call    NiDX9Renderer__SetShaderAccumulator;
 0x7C7D62: test    ebp, ebp
 0x7C7D64: mov     byte ptr [esp+4Ch+var_4], 1
 0x7C7D69: jz      short loc_7C7D84
@@ -364,3 +364,19 @@
 0x7C7DB0: pop     ebx
 0x7C7DB1: add     esp, 38h
 0x7C7DB4: retn    4
+0x9CE840: mov     eax, [ebp-2Ch]
+0x9CE843: push    eax
+0x9CE844: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CE849: pop     ecx
+0x9CE84A: retn
+0x9CE84B: lea     ecx, [ebp-2Ch]; slot
+0x9CE84E: jmp     NiPointerSlot_Release
+0x9CE853: lea     ecx, [ebp-34h]; slot
+0x9CE856: jmp     NiPointerSlot_Release
+0x9CE85B: mov     edx, [esp+arg_4]
+0x9CE85F: lea     eax, [edx-3Ch]
+0x9CE862: mov     ecx, [edx-40h]
+0x9CE865: xor     ecx, eax
+0x9CE867: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CE86C: mov     eax, offset stru_AF77BC
+0x9CE871: jmp     ___CxxFrameHandler3

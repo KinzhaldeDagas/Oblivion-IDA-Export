@@ -52,9 +52,9 @@
 0x45CD20: jz      short loc_45CD6C
 0x45CD22: mov     eax, [eax]
 0x45CD24: mov     ecx, ds:0B33B00h
-0x45CD2A: push    eax
-0x45CD2B: push    edi
-0x45CD2C: call    sub_4535A0
+0x45CD2A: push    eax; changeFlags
+0x45CD2B: push    edi; form
+0x45CD2C: call    SaveLoad_NormalizeFormChangeFlags; Verified: starts with created-form flag adjustment, then normalizes flags by runtime type/state. For TESObjectREFR it checks inventory/process/package/death/persistence and location; bit31 is set when reference location differs from its starting location. For TESObjectCELL it validates light/terrain-related flags and classifies exterior grid coordinates. Callers include UnloadForm, ResetFormForLoad, save/load consistency passes. Do not assign names to remaining individual bits without further use tracing.
 0x45CD31: test    eax, eax
 0x45CD33: jnz     short loc_45CD8B
 0x45CD35: fild    [esp+214h+var_204]

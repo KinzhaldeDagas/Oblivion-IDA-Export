@@ -1,1 +1,5 @@
-exception_ptr
+struct exception_ptr
+{
+EXCEPTION_RECORD_0 *rec;
+int *ref;
+};

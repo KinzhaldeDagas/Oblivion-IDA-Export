@@ -40,7 +40,6 @@
 0x541812: mov     eax, ecx
 0x541814: movzx   edx, si
 0x541817: jmp     short loc_541820
-0x541819: align 10h
 0x541820: mov     ebx, ds:0B25AE0h
 0x541826: mov     [eax], ebx
 0x541828: mov     ebx, ds:0B25AE4h

@@ -1,13 +1,13 @@
-float *__thiscall sub_6FF290(float *this, _DWORD **a2)
+NiObject *__thiscall sub_6FF290(const char **this, _DWORD **a2)
 {
-  float *v3; // eax
-  float *v4; // esi
+  NiObject *v3; // eax
+  NiObject *v4; // esi
 
-  v3 = (float *)FormHeapAlloc(0x3Cu);
-  v4 = 0;
-  if ( v3 )
-    v4 = sub_6FEEE0(v3);
-  sub_752C40(this, (int)v4, a2);
-  v4[8] = *(this + 8);
-  return v4;
+  v3 = (NiObject *)FormHeapAlloc(0x3Cu); /*0x6ff2b7*/
+  v4 = 0; /*0x6ff2c3*/
+  if ( v3 ) /*0x6ff2cb*/
+    v4 = sub_6FEEE0(v3); /*0x6ff2d4*/
+  sub_752C40(this, (int)v4, a2); /*0x6ff2e6*/
+  v4[4].__vftable = *((NiObjectVtbl **)this + 8); /*0x6ff2ee*/
+  return v4; /*0x6ff2f3*/
 }

@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "bhkRefObject_vtbl",
+  "definition": "struct /*VFT*/ bhkRefObject_vtbl\n{\nvoid (__thiscall *SetObject)(bhkRefObject *__hidden this, hkRefObject *hkObject);\nvoid (__thiscall *Unk_14)(bhkRefObject *__hidden this);\n}\n",
   "id": 18374686479672049127,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetObject",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(bhkRefObject *__hidden this, hkRefObject *hkObject)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_14",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(bhkRefObject *__hidden this)"
     }
   ],
   "name": "bhkRefObject_vtbl",
+  "ordinal": 9364,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 8
 }

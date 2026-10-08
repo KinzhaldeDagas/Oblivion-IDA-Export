@@ -1,7 +1,7 @@
 0x6FEE40: push    ebx
 0x6FEE41: mov     ebx, ecx
-0x6FEE43: lea     ecx, [ebx+58h]
-0x6FEE46: call    sub_477EF0
+0x6FEE43: lea     ecx, [ebx+58h]; this
+0x6FEE46: call    NiTObjectArray_ClearAndRelease; Clears a ref-counted NiT object-pointer array: releases every non-null element, nulls entries, and resets end/count words to zero. At bow release it is invoked on ArrowBone+0xAC, thereby releasing all ArrowBone children including the held Arrow:0 clone.
 0x6FEE4B: mov     ecx, [ebx+50h]
 0x6FEE4E: test    ecx, ecx
 0x6FEE50: jz      short loc_6FEEA9
@@ -18,12 +18,11 @@
 0x6FEE65: push    ecx
 0x6FEE66: mov     ecx, edi; this
 0x6FEE68: fstp    [esp+14h+a2]; a2
-0x6FEE6B: call    NiAVObject_UpdateNiAVObject
+0x6FEE6B: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x6FEE70: movzx   esi, word ptr [edi+0B6h]
 0x6FEE77: test    esi, esi
 0x6FEE79: jz      short loc_6FEEA7
 0x6FEE7B: jmp     short loc_6FEE80
-0x6FEE7D: align 10h
 0x6FEE80: movzx   eax, word ptr [edi+0B6h]
 0x6FEE87: sub     esi, 1
 0x6FEE8A: cmp     eax, esi

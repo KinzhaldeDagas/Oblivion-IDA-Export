@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x784FF0",
+      "0x785046"
+    ]
+  ],
+  "chunks_sha256": "ef8d6e96cf23d492d17b9efd33f5397181e5aee42bc0720eb1e95f36d6259c54",
+  "comment_regular": "Destroys a cache-map subtree. Recurses through right children while iterating down the left spine; releases heap-backed string storage when capacity>=16, then frees each 0x30-byte node.",
+  "comment_repeatable": "Destroys a cache-map subtree. Recurses through right children while iterating down the left spine; releases heap-backed string storage when capacity>=16, then frees each 0x30-byte node.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_784FF0",
+  "display_name": "OB_stBezierSplineCacheMap_DestroySubtree_010201A0",
   "end_ea": "0x785046",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_784FF0",
+  "name": "OB_stBezierSplineCacheMap_DestroySubtree_010201A0",
   "segment": ".text",
   "sha256": "ef8d6e96cf23d492d17b9efd33f5397181e5aee42bc0720eb1e95f36d6259c54",
   "size": 86,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x784FF0",
-  "type": "void __stdcall(unsigned int *)",
+  "total_chunk_size": 86,
+  "type": "void __stdcall(OB_stBezierSplineCacheNode_010201A0 *root)",
   "xrefs_from_count": 40,
   "xrefs_to_count": 3
 }

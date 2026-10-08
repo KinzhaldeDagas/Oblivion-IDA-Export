@@ -1,4 +1,4 @@
 BOOL __thiscall Actor_IsPlayer(TESObjectREFR *this)
 {
-  return this == (TESObjectREFR *)TESDataHandler_g_PlayerRef;
+  return this == (TESObjectREFR *)reference; /*0x5e04eb*/
 }

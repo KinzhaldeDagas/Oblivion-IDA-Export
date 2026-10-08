@@ -11,41 +11,41 @@ void __cdecl sub_5A64B0(int a1)
   float v9; // [esp+8h] [ebp-Ch]
   float v10; // [esp+8h] [ebp-Ch]
 
-  OpenMenuTile = (_DWORD *)Menu_GetOpenMenuTile(0x3EC);
-  v2 = OpenMenuTile;
-  if ( OpenMenuTile )
+  OpenMenuTile = (_DWORD *)Menu_GetOpenMenuTile(0x3EC); /*0x5a64b6*/
+  v2 = OpenMenuTile; /*0x5a64bb*/
+  if ( OpenMenuTile ) /*0x5a64c2*/
   {
-    ParentMenu = (void *)Tile_GetParentMenu(OpenMenuTile);
-    v4 = OblivionDynamicCast(
+    ParentMenu = (void *)Tile_GetParentMenu(OpenMenuTile); /*0x5a64d9*/
+    v4 = OblivionDynamicCast( /*0x5a64e4*/
            ParentMenu,
            0,
            (struct _s_RTTICompleteObjectLocator *)&Menu `RTTI Type Descriptor',
            &HUDMainMenu `RTTI Type Descriptor',
            0);
-    if ( v4 )
+    if ( v4 ) /*0x5a64eb*/
     {
-      if ( *(_BYTE *)(a1 + 0xC) )
+      if ( *(_BYTE *)(a1 + 0xC) ) /*0x5a64f5*/
       {
-        if ( *(_DWORD *)a1 == dword_B3B340 )
-          return;
-        dword_B3B340 = *(_DWORD *)a1;
+        if ( *(_DWORD *)a1 == dword_B3B0B4[0xA3] ) /*0x5a6504*/
+          return; /*0x5a6504*/
+        dword_B3B0B4[0xA3] = *(_DWORD *)a1; /*0x5a6510*/
       }
-      v5 = *(char **)(a1 + 4);
-      if ( v5 )
+      v5 = *(char **)(a1 + 4); /*0x5a6515*/
+      if ( v5 ) /*0x5a651c*/
       {
-        Tile_SetString(v2, (_DWORD *)0xFB6, v5);
-        v9 = flt_A41304;
-        v8 = flt_A6BED0;
-        Float = Tile_GetFloat(v2, 0xFB5);
-        sub_589980(v2, 0xFB5, Float, v8, v9);
-        v4[0x1D] = GetTickCount() + 0x1388;
+        Tile_SetString(v2, (_DWORD *)0xFB6, v5); /*0x5a6524*/
+        v9 = flt_A41304; /*0x5a6532*/
+        v8 = flt_A6BED0; /*0x5a653e*/
+        Float = Tile_GetFloat(v2, 0xFB5); /*0x5a654c*/
+        sub_589980(v2, 0xFB5, Float, v8, v9); /*0x5a6556*/
+        v4[0x1D] = GetTickCount() + 0x1388; /*0x5a6566*/
       }
       else
       {
-        v10 = flt_A41304;
-        v7 = Tile_GetFloat(v2, 0xFB5);
-        sub_589980(v2, 0xFB5, v7, 0.0, v10);
-        v4[0x1D] = 0;
+        v10 = flt_A41304; /*0x5a6575*/
+        v7 = Tile_GetFloat(v2, 0xFB5); /*0x5a6589*/
+        sub_589980(v2, 0xFB5, v7, 0.0, v10); /*0x5a6593*/
+        v4[0x1D] = 0; /*0x5a6598*/
       }
     }
   }

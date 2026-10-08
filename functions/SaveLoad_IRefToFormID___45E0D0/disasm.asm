@@ -1,5 +1,5 @@
-0x45E0D0: push    ebx
-0x45E0D1: mov     ebx, [esp+4+arg_0]
+0x45E0D0: push    ebx; Maps a full FormID to its compact save-game IRef index: returns an existing array index or appends the FormID and returns the new index. Created IDs (0xFFxxxxxx) pass through unchanged. This is FormID->IRef, despite the former reversed name.
+0x45E0D1: mov     ebx, [esp+4+formID]
 0x45E0D5: push    esi
 0x45E0D6: mov     esi, ecx
 0x45E0D8: mov     ecx, ds:0B33A98h
@@ -18,12 +18,12 @@
 0x45E0F9: jbe     short loc_45E10E
 0x45E0FB: mov     edx, [esi+4]
 0x45E0FE: mov     edi, edi
-0x45E100: cmp     [edx], ebx
+0x45E100: cmp     [edx], ebx; MEF PERF 2026-09-08: PERF-3 exact linear probe: CMP[EDX],EBX, increment indexEAX and pointerEDX by4 until used-sizeECX. No auxiliary index participates in this body. A side index must store the lowest matching position, not reorder or deduplicate the authoritative array.
 0x45E102: jz      short loc_45E178
 0x45E104: add     eax, 1
 0x45E107: add     edx, 4
 0x45E10A: cmp     eax, ecx
-0x45E10C: jb      short loc_45E100
+0x45E10C: jb      short loc_45E100; MEF PERF 2026-09-08: PERF-3 exact linear probe: CMP[EDX],EBX, increment indexEAX and pointerEDX by4 until used-sizeECX. No auxiliary index participates in this body. A side index must store the lowest matching position, not reorder or deduplicate the authoritative array.
 0x45E10E: push    edi
 0x45E10F: mov     edi, ecx
 0x45E111: cmp     edi, [esi+8]
@@ -32,7 +32,7 @@
 0x45E119: add     eax, edi
 0x45E11B: push    eax
 0x45E11C: mov     ecx, esi
-0x45E11E: call    sub_452910
+0x45E11E: call    NiTLargeArray_Resize32; MEF SAVE AUDIT 2026-10-08: PERF-19 Verified save-side growth: missing non-created FormID and full numeric array request used+grow. Ctor capacity100/grow50; v57 PerfLookupIDCore retains identical increment while making publication transactional. PERF4 reservation applies to count-known LOAD, not this append. Do not re-report PERF3 lookup scans as still present in supported v57 path.
 0x45E123: cmp     edi, [esi+0Ch]
 0x45E126: jb      short loc_45E144
 0x45E128: test    ebx, ebx

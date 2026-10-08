@@ -1,4 +1,4 @@
-0x469CD0: mov     eax, [esp+arg_0]
+0x469CD0: mov     eax, [esp+arg_0]; 3DTheft decode: TESFullName_GetNameForForm only dynamic-casts the passed form to TESFullName and returns its raw name/EmptyString; it does not apply worldspace fallback.
 0x469CD4: push    0; int
 0x469CD6: push    offset ??_R0?AVTESFullName@@@8; struct TypeDescriptor *
 0x469CDB: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *

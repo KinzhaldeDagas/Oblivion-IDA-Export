@@ -9,6 +9,6 @@ void __usercall sub_5B1410(
         double a8@<st1>,
         double a9@<st0>)
 {
-  if ( InterfaceManager_MenuModeHasFocus(0x3FE) )
-    sub_5C1F70(a1, a2, a3, a4, a5, a6, a7, a8, a9);
+  if ( InterfaceManager_MenuModeHasFocus(0x3FE) ) /*0x5b1415*/
+    Input_ProcessQuickSlotHotkeys(a1, a2, a3, a4, a5, a6, a7, a8, a9); /*0x5b1421*/
 }

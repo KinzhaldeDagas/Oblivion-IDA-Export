@@ -1,301 +1,301 @@
-void __usercall sub_4C8680(signed int a1@<ecx>, double a2@<st2>, double a3@<st1>, double a4@<st0>)
+void __usercall sub_4C8680(signed int a1@<ecx>, double a2@<st0>)
 {
-  int v6; // ecx
+  int v5; // ecx
   unsigned int YCoordinate; // edi
-  _DWORD *v8; // eax
+  _DWORD *v7; // eax
   int i; // ebx
-  int v10; // edi
-  unsigned int v11; // ecx
-  unsigned int v12; // esi
-  bool v13; // zf
-  float *v14; // ecx
-  double v15; // st7
+  int v9; // edi
+  unsigned int v10; // ecx
+  unsigned int v11; // esi
+  bool v12; // zf
+  float *v13; // ecx
+  double v14; // st7
   UInt32 refID; // esi
-  char v17; // al
-  int v18; // ebx
-  int v19; // ecx
-  __int64 v20; // rax
-  char *v21; // esi
-  UInt32 v22; // eax
+  char v16; // al
+  int v17; // ebx
+  int v18; // ecx
+  __int64 v19; // rax
+  char *v20; // esi
+  UInt32 v21; // eax
   TESObjectCELL *flags; // ecx
-  UInt32 v24; // eax
+  UInt32 v23; // eax
   int XCoordinate; // eax
-  TESObjectCELL *v26; // ecx
-  double v27; // st7
-  int v28; // ebx
-  int v29; // eax
-  int v30; // ebx
-  int v31; // ecx
+  TESObjectCELL *v25; // ecx
+  double v26; // st7
+  int v27; // ebx
+  int v28; // eax
+  int v29; // ebx
+  int v30; // ecx
   int j; // esi
-  unsigned int v33; // eax
-  bool v34; // zf
-  UInt32 v35; // ecx
-  int v36; // edx
-  UInt32 v37; // eax
-  int v38; // ecx
-  UInt32 v39; // eax
-  int v40; // ebx
+  unsigned int v32; // eax
+  bool v33; // zf
+  UInt32 v34; // ecx
+  int v35; // edx
+  UInt32 v36; // eax
+  int v37; // ecx
+  UInt32 v38; // eax
+  int v39; // ebx
+  int v40; // eax
   int v41; // eax
-  int v42; // eax
-  UInt32 v43; // edx
-  int v44; // esi
-  unsigned __int16 v45; // di
+  UInt32 v42; // edx
+  int v43; // esi
+  unsigned __int16 v44; // di
+  size_t v45; // [esp-4h] [ebp-225Ch]
   size_t v46; // [esp-4h] [ebp-225Ch]
   size_t v47; // [esp-4h] [ebp-225Ch]
-  size_t v48; // [esp-4h] [ebp-225Ch]
-  unsigned int v49; // [esp+10h] [ebp-2248h]
-  char v50; // [esp+10h] [ebp-2248h]
-  BOOL v51; // [esp+10h] [ebp-2248h]
-  unsigned __int8 v52; // [esp+10h] [ebp-2248h]
-  BOOL v53; // [esp+14h] [ebp-2244h]
+  unsigned int v48; // [esp+10h] [ebp-2248h]
+  char v49; // [esp+10h] [ebp-2248h]
+  BOOL v50; // [esp+10h] [ebp-2248h]
+  unsigned __int8 v51; // [esp+10h] [ebp-2248h]
+  BOOL v52; // [esp+14h] [ebp-2244h]
+  int v53; // [esp+14h] [ebp-2244h]
   int v54; // [esp+14h] [ebp-2244h]
-  int v55; // [esp+14h] [ebp-2244h]
   int k; // [esp+14h] [ebp-2244h]
-  float v57; // [esp+18h] [ebp-2240h]
-  TESForm *v58; // [esp+1Ch] [ebp-223Ch]
+  float v56; // [esp+18h] [ebp-2240h]
+  TESForm *v57; // [esp+1Ch] [ebp-223Ch]
+  int v58; // [esp+20h] [ebp-2238h]
   int v59; // [esp+20h] [ebp-2238h]
-  int v60; // [esp+20h] [ebp-2238h]
   int m; // [esp+24h] [ebp-2234h]
-  int v62; // [esp+28h] [ebp-2230h] BYREF
-  unsigned __int8 v63; // [esp+2Ch] [ebp-222Ch]
-  __int16 v64; // [esp+2Eh] [ebp-222Ah]
-  int v65; // [esp+30h] [ebp-2228h] BYREF
-  unsigned __int8 v66; // [esp+34h] [ebp-2224h]
-  __int16 v67; // [esp+36h] [ebp-2222h]
+  int v61; // [esp+28h] [ebp-2230h] BYREF
+  unsigned __int8 v62; // [esp+2Ch] [ebp-222Ch]
+  __int16 v63; // [esp+2Eh] [ebp-222Ah]
+  int v64; // [esp+30h] [ebp-2228h] BYREF
+  unsigned __int8 v65; // [esp+34h] [ebp-2224h]
+  __int16 v66; // [esp+36h] [ebp-2222h]
   __int16 Src; // [esp+38h] [ebp-2220h] BYREF
-  char v69[2]; // [esp+3Ah] [ebp-221Eh]
-  float v70[785]; // [esp+3Ch] [ebp-221Ch]
-  int v71[32]; // [esp+C80h] [ebp-15D8h]
-  int v72[1090]; // [esp+D00h] [ebp-1558h]
-  float v73; // [esp+1E08h] [ebp-450h] BYREF
-  char v74[1096]; // [esp+1E0Ch] [ebp-44Ch] BYREF
+  char v68[2]; // [esp+3Ah] [ebp-221Eh]
+  float v69[785]; // [esp+3Ch] [ebp-221Ch]
+  int v70[32]; // [esp+C80h] [ebp-15D8h]
+  int v71[1090]; // [esp+D00h] [ebp-1558h]
+  float v72; // [esp+1E08h] [ebp-450h] BYREF
+  char v73[1096]; // [esp+1E0Ch] [ebp-44Ch] BYREF
   int savedregs; // [esp+2258h] [ebp+0h] BYREF
 
-  v6 = *(_DWORD *)(a1 + 0x1C);
-  YCoordinate = a1 + 0x1C;
-  v58 = (TESForm *)a1;
-  if ( (v6 & 7) != 0 && ((v6 & 8) != 0 || (v8 = *(_DWORD **)(a1 + 0x24)) != 0 && v8[1] && v8[2] && v8[3]) )
+  v5 = *(_DWORD *)(a1 + 0x1C); /*0x4c86a2*/
+  YCoordinate = a1 + 0x1C; /*0x4c86a9*/
+  v57 = (TESForm *)a1; /*0x4c86ac*/
+  if ( (v5 & 7) != 0 && ((v5 & 8) != 0 || (v7 = *(_DWORD **)(a1 + 0x24)) != 0 && v7[1] && v7[2] && v7[3]) ) /*0x4c86da*/
   {
-    if ( (v6 & 0x10) == 0 )
-      sub_4C8210(a1, a2, a3, a4);
-    TESForm_InitializeFormRecord((TESForm *)a1, (char)&savedregs);
-    LODWORD(v46) = 4;
-    TESForm_PutFormRecordChunkData(0x41544144, (void *)(a1 + 0x1C), v46);
-    if ( (*(_BYTE *)YCoordinate & 1) != 0 )
+    if ( (v5 & 0x10) == 0 ) /*0x4c86e7*/
+      sub_4C8210(a1, a2); /*0x4c86eb*/
+    TESForm_InitializeFormRecord((TESForm *)a1, (char)&savedregs); /*0x4c86f2*/
+    LODWORD(v45) = 4; /*0x4c86f7*/
+    TESForm_PutFormRecordChunkData(0x41544144, (void *)(a1 + 0x1C), v45); /*0x4c86ff*/
+    if ( (*(_BYTE *)YCoordinate & 1) != 0 ) /*0x4c870a*/
     {
-      for ( i = 0; i < 4; ++i )
+      for ( i = 0; i < 4; ++i ) /*0x4c8710*/
       {
-        v10 = 0;
-        v49 = 0;
-        v11 = 0;
-        do
+        v9 = 0; /*0x4c8738*/
+        v48 = 0; /*0x4c8742*/
+        v10 = 0; /*0x4c8746*/
+        do /*0x4c885d*/
         {
-          v12 = 0x10 * (i / 2 + i % 2 + 0x20 * (i / 2)) + v11 + 0x10 * (v11 / 0x11);
-          v53 = 0;
-          if ( v11 / 0x11 == 0x10 )
-            v53 = i / 2 != 1;
-          if ( v11 % 0x11 == 0x10 )
-            v13 = i % 2 == 1;
+          v11 = 0x10 * (i / 2 + i % 2 + 0x20 * (i / 2)) + v10 + 0x10 * (v10 / 0x11); /*0x4c8761*/
+          v52 = 0; /*0x4c8768*/
+          if ( v10 / 0x11 == 0x10 ) /*0x4c8770*/
+            v52 = i / 2 != 1; /*0x4c8781*/
+          if ( v10 % 0x11 == 0x10 ) /*0x4c8797*/
+            v12 = i % 2 == 1; /*0x4c8799*/
           else
-            v13 = !v53;
-          if ( v13 )
+            v12 = !v52; /*0x4c87a0*/
+          if ( v12 ) /*0x4c87a5*/
           {
-            v62 = (int)*(float *)(*(_DWORD *)(*(_DWORD *)(v58[1].member.refID + 4) + 4 * i) + v10 + 8);
-            v14 = (float *)(v10 + *(_DWORD *)(*(_DWORD *)(v58[1].member.refID + 8) + 4 * i));
-            v72[v12] = v62 >> 3;
-            sub_43F350(v14);
-            v54 = 3 * v12;
-            v15 = dbl_A46298;
-            v69[v54 - 2] = Double_To_SInt32(v15);
-            refID = v58[1].member.refID;
-            v69[v54 - 1] = Double_To_SInt32(v15);
-            v17 = Double_To_SInt32(v15 * *(float *)(*(_DWORD *)(*(_DWORD *)(refID + 8) + 4 * i) + v10 + 8));
-            v11 = v49;
-            v69[v54] = v17;
+            v61 = (int)*(float *)(*(_DWORD *)(*(_DWORD *)(v57[1].member.refID + 4) + 4 * i) + v9 + 8); /*0x4c87c4*/
+            v13 = (float *)(v9 + *(_DWORD *)(*(_DWORD *)(v57[1].member.refID + 8) + 4 * i)); /*0x4c87d8*/
+            v71[v11] = v61 >> 3; /*0x4c87da*/
+            Vector3_NormalizeInPlace(v13); /*0x4c87e1*/
+            v53 = 3 * v11; /*0x4c8801*/
+            v14 = dbl_A46298; /*0x4c8807*/
+            v68[v53 - 2] = Double_To_SInt32(v14); /*0x4c8812*/
+            refID = v57[1].member.refID; /*0x4c8816*/
+            v68[v53 - 1] = Double_To_SInt32(v14); /*0x4c882e*/
+            v16 = Double_To_SInt32(v14 * *(float *)(*(_DWORD *)(*(_DWORD *)(refID + 8) + 4 * i) + v9 + 8)); /*0x4c883c*/
+            v10 = v48; /*0x4c8845*/
+            v68[v53] = v16; /*0x4c8849*/
           }
-          ++v11;
-          v10 += 0xC;
-          v49 = v11;
+          ++v10; /*0x4c884d*/
+          v9 += 0xC; /*0x4c8850*/
+          v48 = v10; /*0x4c8859*/
         }
-        while ( v10 < 0xD8C );
+        while ( v9 < 0xD8C ); /*0x4c885d*/
       }
-      LODWORD(v47) = 0xCC3;
-      TESForm_PutFormRecordChunkData(0x4C4D4E56, &Src, v47);
-      v18 = v72[0];
-      v73 = (float)v72[0];
-      v50 = 0;
-      v19 = 0;
-      do
+      LODWORD(v46) = 0xCC3; /*0x4c886f*/
+      TESForm_PutFormRecordChunkData(0x4C4D4E56, &Src, v46); /*0x4c887e*/
+      v17 = v71[0]; /*0x4c888a*/
+      v72 = (float)v71[0]; /*0x4c8894*/
+      v49 = 0; /*0x4c889b*/
+      v18 = 0; /*0x4c88a0*/
+      do /*0x4c8920*/
       {
-        v20 = v72[v19] - v18;
-        if ( (int)((HIDWORD(v20) ^ v20) - HIDWORD(v20)) < 0x80 )
+        v19 = v71[v18] - v17; /*0x4c88ad*/
+        if ( (int)((HIDWORD(v19) ^ v19) - HIDWORD(v19)) < 0x80 ) /*0x4c88b7*/
         {
-          v21 = &v74[v19];
-          v74[v19] = LOBYTE(v72[v19]) - v18;
+          v20 = &v73[v18]; /*0x4c88da*/
+          v73[v18] = LOBYTE(v71[v18]) - v17; /*0x4c88e3*/
         }
         else
         {
-          v50 = 1;
-          v21 = &v74[v19];
-          if ( v72[v19] <= v18 )
-            *v21 = 0x81;
+          v49 = 1; /*0x4c88bb*/
+          v20 = &v73[v18]; /*0x4c88c0*/
+          if ( v71[v18] <= v17 ) /*0x4c88c7*/
+            *v20 = 0x81; /*0x4c88ce*/
           else
-            *v21 = 0x7F;
+            *v20 = 0x7F; /*0x4c88c9*/
         }
-        v62 = v19 + 1;
-        YCoordinate = 0x21;
-        if ( (v19 + 1) % 0x21 )
+        v61 = v18 + 1; /*0x4c88e8*/
+        YCoordinate = 0x21; /*0x4c88ed*/
+        if ( (v18 + 1) % 0x21 ) /*0x4c88f2*/
         {
-          if ( v50 )
-            v18 += *v21;
+          if ( v49 ) /*0x4c8906*/
+            v17 += *v20; /*0x4c8914*/
           else
-            v18 = v72[v19];
+            v17 = v71[v18]; /*0x4c8908*/
         }
         else
         {
-          v18 = v71[v19];
+          v17 = v70[v18]; /*0x4c88f8*/
         }
-        v19 = v62;
+        v18 = v61; /*0x4c8916*/
       }
-      while ( v62 < 0x441 );
-      LODWORD(v48) = 0x448;
-      TESForm_PutFormRecordChunkData(0x54474856, &v73, v48);
-      if ( v50 )
+      while ( v61 < 0x441 ); /*0x4c8920*/
+      LODWORD(v47) = 0x448; /*0x4c8922*/
+      TESForm_PutFormRecordChunkData(0x54474856, &v72, v47); /*0x4c8934*/
+      if ( v49 ) /*0x4c8941*/
       {
-        v22 = v58[1].member.refID;
-        if ( v22 )
+        v21 = v57[1].member.refID; /*0x4c8947*/
+        if ( v21 ) /*0x4c894c*/
         {
-          YCoordinate = *(_DWORD *)(v22 + 0x9C);
+          YCoordinate = *(_DWORD *)(v21 + 0x9C); /*0x4c894e*/
         }
         else
         {
-          flags = (TESObjectCELL *)v58[1].member.flags;
-          if ( flags )
-            YCoordinate = TESObjectCELL_GetYCoordinate(flags);
+          flags = (TESObjectCELL *)v57[1].member.flags; /*0x4c8956*/
+          if ( flags ) /*0x4c895b*/
+            YCoordinate = TESObjectCELL_GetYCoordinate(flags); /*0x4c8962*/
           else
-            YCoordinate = 0;
+            YCoordinate = 0; /*0x4c8966*/
         }
-        v24 = v58[1].member.refID;
-        if ( v24 )
+        v23 = v57[1].member.refID; /*0x4c8968*/
+        if ( v23 ) /*0x4c896d*/
         {
-          XCoordinate = *(_DWORD *)(v24 + 0x98);
+          XCoordinate = *(_DWORD *)(v23 + 0x98); /*0x4c896f*/
         }
         else
         {
-          v26 = (TESObjectCELL *)v58[1].member.flags;
-          if ( v26 )
-            XCoordinate = TESObjectCELL_GetXCoordinate(v26);
+          v25 = (TESObjectCELL *)v57[1].member.flags; /*0x4c8977*/
+          if ( v25 ) /*0x4c897c*/
+            XCoordinate = TESObjectCELL_GetXCoordinate(v25); /*0x4c897e*/
           else
-            XCoordinate = 0;
+            XCoordinate = 0; /*0x4c8985*/
         }
-        PrintError(
+        PrintError( /*0x4c898e*/
           "Error saving land height Data for cell (%i, %i). Error correction attempted.\r\n",
           XCoordinate,
           YCoordinate);
       }
     }
-    if ( (v58[1].member.type & 2) != 0 )
+    if ( (v57[1].member.type & 2) != 0 ) /*0x4c89a0*/
     {
-      v27 = dbl_A3DDD8;
-      v28 = 0;
-      v55 = 0;
-      do
+      v26 = dbl_A3DDD8; /*0x4c89a6*/
+      v27 = 0; /*0x4c89ac*/
+      v54 = 0; /*0x4c89ae*/
+      do /*0x4c8b00*/
       {
-        v29 = v28 / 2;
-        v59 = v28 / 2;
-        v30 = v28 % 2;
-        v31 = 0x10 * (v29 + v30 + 0x20 * v29);
-        YCoordinate = 0;
-        v62 = v31;
-        for ( j = 0; j < 0x1210; j += 0x10 )
+        v28 = v27 / 2; /*0x4c89b7*/
+        v58 = v27 / 2; /*0x4c89bf*/
+        v29 = v27 % 2; /*0x4c89c9*/
+        v30 = 0x10 * (v28 + v29 + 0x20 * v28); /*0x4c89d3*/
+        YCoordinate = 0; /*0x4c89d6*/
+        v61 = v30; /*0x4c89dc*/
+        for ( j = 0; j < 0x1210; j += 0x10 ) /*0x4c89e0*/
         {
-          v33 = v31 + YCoordinate + 0x10 * (YCoordinate / 0x11);
-          v51 = 0;
-          if ( YCoordinate / 0x11 == 0x10 )
-            v51 = v59 != 1;
-          if ( YCoordinate % 0x11 == 0x10 )
-            v34 = v30 == 1;
+          v32 = v30 + YCoordinate + 0x10 * (YCoordinate / 0x11); /*0x4c89f3*/
+          v50 = 0; /*0x4c89f8*/
+          if ( YCoordinate / 0x11 == 0x10 ) /*0x4c8a00*/
+            v50 = v58 != 1; /*0x4c8a11*/
+          if ( YCoordinate % 0x11 == 0x10 ) /*0x4c8a27*/
+            v33 = v29 == 1; /*0x4c8a29*/
           else
-            v34 = !v51;
-          if ( v34 )
+            v33 = !v50; /*0x4c8a30*/
+          if ( v33 ) /*0x4c8a39*/
           {
-            v35 = v58[1].member.refID;
-            v36 = 3 * v33;
-            v69[v36 - 2] = (int)(*(float *)(*(_DWORD *)(*(_DWORD *)(v35 + 0xC) + 4 * v55) + j) * v27);
-            v69[v36 - 1] = (int)(*(float *)(*(_DWORD *)(*(_DWORD *)(v35 + 0xC) + 4 * v55) + j + 4) * v27);
-            v69[v36] = (int)(*(float *)(*(_DWORD *)(*(_DWORD *)(v35 + 0xC) + 4 * v55) + j + 8) * v27);
-            v31 = v62;
+            v34 = v57[1].member.refID; /*0x4c8a47*/
+            v35 = 3 * v32; /*0x4c8a4a*/
+            v68[v35 - 2] = (int)(*(float *)(*(_DWORD *)(*(_DWORD *)(v34 + 0xC) + 4 * v54) + j) * v26); /*0x4c8a73*/
+            v68[v35 - 1] = (int)(*(float *)(*(_DWORD *)(*(_DWORD *)(v34 + 0xC) + 4 * v54) + j + 4) * v26); /*0x4c8aa6*/
+            v68[v35] = (int)(*(float *)(*(_DWORD *)(*(_DWORD *)(v34 + 0xC) + 4 * v54) + j + 8) * v26); /*0x4c8ad8*/
+            v30 = v61; /*0x4c8adc*/
           }
-          ++YCoordinate;
+          ++YCoordinate; /*0x4c8ae7*/
         }
-        v28 = v55 + 1;
-        v55 = v28;
+        v27 = v54 + 1; /*0x4c8af6*/
+        v54 = v27; /*0x4c8afc*/
       }
-      while ( v28 < 4 );
-      LODWORD(v47) = 0xCC3;
-      TESForm_PutFormRecordChunkData(0x524C4356, &Src, v47);
+      while ( v27 < 4 ); /*0x4c8b00*/
+      LODWORD(v46) = 0xCC3; /*0x4c8b06*/
+      TESForm_PutFormRecordChunkData(0x524C4356, &Src, v46); /*0x4c8b17*/
     }
-    if ( (v58[1].member.type & 4) != 0 )
+    if ( (v57[1].member.type & 4) != 0 ) /*0x4c8b29*/
     {
-      sub_4C0290(v58, YCoordinate);
-      v52 = 0;
-      for ( k = 0x20; k < 0x30; k += 4 )
+      sub_4C0290(v57, YCoordinate); /*0x4c8b33*/
+      v51 = 0; /*0x4c8b38*/
+      for ( k = 0x20; k < 0x30; k += 4 ) /*0x4c8b40*/
       {
-        v37 = v58[1].member.refID;
-        v38 = *(_DWORD *)(v37 + k);
-        v39 = k + v37;
-        if ( v38 )
+        v36 = v57[1].member.refID; /*0x4c8b54*/
+        v37 = *(_DWORD *)(v36 + k); /*0x4c8b5b*/
+        v38 = k + v36; /*0x4c8b5e*/
+        if ( v37 ) /*0x4c8b62*/
         {
-          if ( v38 != dword_B35BE4 )
+          if ( v37 != unk_B35BE4 ) /*0x4c8b6a*/
           {
-            v63 = v52;
-            v64 = 0xFFFF;
-            LODWORD(v47) = 8;
-            v62 = *(_DWORD *)(*(_DWORD *)v39 + 0xC);
-            TESForm_PutFormRecordChunkData(0x54585442, &v62, v47);
+            v62 = v51; /*0x4c8b70*/
+            v63 = 0xFFFF; /*0x4c8b74*/
+            LODWORD(v46) = 8; /*0x4c8b80*/
+            v61 = *(_DWORD *)(*(_DWORD *)v38 + 0xC); /*0x4c8b8c*/
+            TESForm_PutFormRecordChunkData(0x54585442, &v61, v46); /*0x4c8b90*/
           }
         }
-        if ( *(_DWORD *)(k + v58[1].member.refID + 0x10) )
+        if ( *(_DWORD *)(k + v57[1].member.refID + 0x10) ) /*0x4c8b9b*/
         {
-          v40 = 0;
-          v60 = 0;
-          do
+          v39 = 0; /*0x4c8ba6*/
+          v59 = 0; /*0x4c8ba8*/
+          do /*0x4c8cb9*/
           {
-            v41 = *(_DWORD *)(*(_DWORD *)(k + v58[1].member.refID + 0x10) + 4 * v40);
-            if ( v41 )
+            v40 = *(_DWORD *)(*(_DWORD *)(k + v57[1].member.refID + 0x10) + 4 * v39); /*0x4c8bbf*/
+            if ( v40 ) /*0x4c8bc4*/
             {
-              v13 = v41 == dword_B35BE4;
-              v66 = v52;
-              v67 = v40;
-              if ( v13 )
-                v42 = 0;
+              v12 = v40 == unk_B35BE4; /*0x4c8bca*/
+              v65 = v51; /*0x4c8bd4*/
+              v66 = v39; /*0x4c8bdb*/
+              if ( v12 ) /*0x4c8be0*/
+                v41 = 0; /*0x4c8be7*/
               else
-                v42 = *(_DWORD *)(v41 + 0xC);
-              LODWORD(v47) = 8;
-              v65 = v42;
-              TESForm_PutFormRecordChunkData(0x54585441, &v65, v47);
-              v43 = v58[1].member.refID;
-              v44 = 0;
-              for ( m = 0; m < 0x121; ++m )
+                v41 = *(_DWORD *)(v40 + 0xC); /*0x4c8be2*/
+              LODWORD(v46) = 8; /*0x4c8be9*/
+              v64 = v41; /*0x4c8bf5*/
+              TESForm_PutFormRecordChunkData(0x54585441, &v64, v46); /*0x4c8bf9*/
+              v42 = v57[1].member.refID; /*0x4c8c04*/
+              v43 = 0; /*0x4c8c0a*/
+              for ( m = 0; m < 0x121; ++m ) /*0x4c8c0c*/
               {
-                if ( *(_DWORD *)(v43 + k + 0x20) )
+                if ( *(_DWORD *)(v42 + k + 0x20) ) /*0x4c8c14*/
                 {
-                  if ( v52 < 4u && (unsigned __int16)m < 0x121u )
+                  if ( v51 < 4u && (unsigned __int16)m < 0x121u ) /*0x4c8c2d*/
                   {
-                    v45 = v40;
-                    if ( (unsigned __int16)v40 < 8u )
+                    v44 = v39; /*0x4c8c2f*/
+                    if ( (unsigned __int16)v39 < 8u ) /*0x4c8c36*/
                     {
-                      if ( v43 )
+                      if ( v42 ) /*0x4c8c3a*/
                       {
-                        if ( *(_DWORD *)(v43 + 4 * v52 + 0x40) )
+                        if ( *(_DWORD *)(v42 + 4 * v51 + 0x40) ) /*0x4c8c3f*/
                         {
-                          v40 = v60;
-                          v57 = *(float *)(*(_DWORD *)(*(_DWORD *)(v43 + 4 * v52 + 0x40) + 4 * (unsigned __int16)m)
-                                         + 4 * v45);
-                          if ( v57 > 0.0 )
+                          v39 = v59; /*0x4c8c52*/
+                          v56 = *(float *)(*(_DWORD *)(*(_DWORD *)(v42 + 4 * v51 + 0x40) + 4 * (unsigned __int16)m) /*0x4c8c5c*/
+                                         + 4 * v44);
+                          if ( v56 > 0.0 ) /*0x4c8c6b*/
                           {
-                            v70[2 * v44] = v57;
-                            *(_WORD *)&v69[8 * v44++ - 2] = m;
+                            v69[2 * v43] = v56; /*0x4c8c6d*/
+                            *(_WORD *)&v68[8 * v43++ - 2] = m; /*0x4c8c71*/
                           }
                         }
                       }
@@ -303,20 +303,20 @@ void __usercall sub_4C8680(signed int a1@<ecx>, double a2@<st2>, double a3@<st1>
                   }
                 }
               }
-              if ( v44 )
+              if ( v43 ) /*0x4c8c93*/
               {
-                LODWORD(v47) = 8 * v44;
-                TESForm_PutFormRecordChunkData(0x54585456, &Src, v47);
+                LODWORD(v46) = 8 * v43; /*0x4c8c9c*/
+                TESForm_PutFormRecordChunkData(0x54585456, &Src, v46); /*0x4c8ca7*/
               }
             }
-            v60 = ++v40;
+            v59 = ++v39; /*0x4c8cb5*/
           }
-          while ( v40 < 8 );
+          while ( v39 < 8 ); /*0x4c8cb9*/
         }
-        ++v52;
+        ++v51; /*0x4c8cc3*/
       }
     }
-    TESForm_FinalizeFormRecord(v58);
-    sub_46B370();
+    TESForm_FinalizeFormRecord(v57); /*0x4c8cdc*/
+    TESForm_CompressSaveBuffer(); /*0x4c8ce1*/
   }
 }

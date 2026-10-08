@@ -23,4 +23,4 @@
 0x6A87E5: fstp    [esp+4+var_4]; int
 0x6A87E8: mov     ecx, edi; int
 0x6A87EA: push    eax; int
-0x6A87EB: call    Actor_Kill
+0x6A87EB: call    Actor_Kill; ODismemberment: candidate future death/kill integration point after visual/state pipeline is stable.

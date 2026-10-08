@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
-  "callers_count": 8,
-  "comment_regular": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 13,
+  "chunks": [
+    [
+      "0x7262A0",
+      "0x726311"
+    ]
+  ],
+  "chunks_sha256": "0395b3740b9e78a7c23a524bc4da1dc114c4bb2ac5e4a4b9e00bf3ec403b6b74",
+  "comment_regular": "\n\n[2026-10-03 ABI] Verified thiscall seven stack arguments, AL bool, ret 0x1C. Rejects vertex count unequal to this+0xC; descriptor index is bounded by this+0x10 and descriptor array is this+0x14. Fallout SetDataStream 0x82BF8D50 corroborates index/block/offset/type/count/unit-size/stride roles.\n\n\nSpeedTreeOBSE v165 VERIFIED extension contract: stream index is bounded by object+10, descriptor array at+14 has0x1C stride, vertex count must equal WORD+C. No fixed four-stream cap in this setter. Plugin constructs5-stream AGD and declares index4 with block offset64*vertexCount,4 components and16-byte element/stride.\nSpeedTreeOBSE v168: six-stream owned AGD uses stream5, float4, block offset80*vertexCount,16-byte stride. Existing generic bounds accept this only when object stream count is6. Isolated native copy/free tests passed at96 bytes/vertex; game allocation/descriptor integration remains UNVERIFIED.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7262A0",
+  "display_name": "OB_NiAdditionalGeometryData_SetDataStream_010201A0",
   "end_ea": "0x726311",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7262A0",
+  "name": "OB_NiAdditionalGeometryData_SetDataStream_010201A0",
   "segment": ".text",
   "sha256": "0395b3740b9e78a7c23a524bc4da1dc114c4bb2ac5e4a4b9e00bf3ec403b6b74",
   "size": 113,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7262A0",
-  "type": "char __thiscall(int this, unsigned int, unsigned int, int, int, unsigned __int16, int, int)",
+  "total_chunk_size": 113,
+  "type": "bool __thiscall(void *this, unsigned int streamIndex, unsigned int blockIndex, unsigned int blockOffset, unsigned int type, unsigned __int16 vertexCount, unsigned int elementSize, unsigned int stride)",
   "xrefs_from_count": 42,
   "xrefs_to_count": 13
 }

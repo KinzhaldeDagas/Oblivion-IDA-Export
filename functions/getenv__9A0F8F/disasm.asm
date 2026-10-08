@@ -1,6 +1,6 @@
-0x9A0F8F: cmp     dword_BABC08, 0
+0x9A0F8F: cmp     dword ptr unk_BABC08, 0
 0x9A0F96: push    esi
-0x9A0F97: mov     esi, dword_BA9DB4
+0x9A0F97: mov     esi, dword ptr unk_BA9DB4
 0x9A0F9D: jnz     short loc_9A0FA3
 0x9A0F9F: xor     eax, eax
 0x9A0FA1: pop     esi
@@ -9,12 +9,12 @@
 0x9A0FA5: push    ebx
 0x9A0FA6: push    edi
 0x9A0FA7: jnz     short loc_9A0FC4
-0x9A0FA9: cmp     dword_BA9DBC, esi
+0x9A0FA9: cmp     dword ptr unk_BA9DBC, esi
 0x9A0FAF: jz      short loc_9A1002
 0x9A0FB1: call    ___wtomb_environ
 0x9A0FB6: test    eax, eax
 0x9A0FB8: jnz     short loc_9A1002
-0x9A0FBA: mov     esi, dword_BA9DB4
+0x9A0FBA: mov     esi, dword ptr unk_BA9DB4
 0x9A0FC0: test    esi, esi
 0x9A0FC2: jz      short loc_9A1002
 0x9A0FC4: mov     ebx, [esp+0Ch+VarName]

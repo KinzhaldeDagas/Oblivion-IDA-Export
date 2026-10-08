@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x644493",
-    "line": "call    sub_452A60",
+    "line": "call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x6444A2",
-    "line": "call    sub_452A60",
+    "line": "call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x644510",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -829,7 +829,7 @@
   },
   {
     "ea": "0x644518",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x64452E",
-    "line": "fstp    qword ptr [esp+60h+var_44+4]",
+    "line": "fstp    qword ptr [esp+60h+sourceRef+4]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -877,7 +877,7 @@
   },
   {
     "ea": "0x644537",
-    "line": "fcomp   qword ptr [esp+60h+var_44+4]",
+    "line": "fcomp   qword ptr [esp+60h+sourceRef+4]",
     "mnemonic": "fcomp",
     "size": 4
   },
@@ -931,7 +931,7 @@
   },
   {
     "ea": "0x644556",
-    "line": "fstp    qword ptr [esp+60h+var_44+4]",
+    "line": "fstp    qword ptr [esp+60h+sourceRef+4]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -943,7 +943,7 @@
   },
   {
     "ea": "0x64455F",
-    "line": "fsubr   qword ptr [esp+60h+var_44+4]",
+    "line": "fsubr   qword ptr [esp+60h+sourceRef+4]",
     "mnemonic": "fsubr",
     "size": 4
   },
@@ -973,13 +973,13 @@
   },
   {
     "ea": "0x64456E",
-    "line": "fstp    [esp+64h+var_44+4]",
+    "line": "fstp    [esp+64h+sourceRef+4]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x644572",
-    "line": "fld     [esp+64h+var_44+4]",
+    "line": "fld     [esp+64h+sourceRef+4]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1195,13 +1195,13 @@
   },
   {
     "ea": "0x6445EB",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6445ED",
-    "line": "call    ExtraDataList_GetReferencePointer",
+    "line": "call    ExtraDataList_GetReferencePointer; Return the TESObjectREFR payload from ExtraReferencePointer type 0x22, or null. Provenance only: callers still select EntryData by exact TESForm first.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1219,13 +1219,13 @@
   },
   {
     "ea": "0x6445F6",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6445F8",
-    "line": "call    ExtraDataList_GetReferencePointer",
+    "line": "call    ExtraDataList_GetReferencePointer; Return the TESObjectREFR payload from ExtraReferencePointer type 0x22, or null. Provenance only: callers still select EntryData by exact TESForm first.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1345,7 +1345,7 @@
   },
   {
     "ea": "0x644633",
-    "line": "call    sub_452A60",
+    "line": "call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1495,7 +1495,7 @@
   },
   {
     "ea": "0x64467B",
-    "line": "mov     [esp+60h+var_44+4], edx",
+    "line": "mov     [esp+60h+sourceRef+4], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1669,19 +1669,19 @@
   },
   {
     "ea": "0x6446D5",
-    "line": "mov     [esp+64h+var_38], ecx",
+    "line": "mov     [esp+64h+destinationPosition.x], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6446D9",
-    "line": "mov     [esp+64h+var_34], edx",
+    "line": "mov     [esp+64h+destinationPosition.y], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6446DD",
-    "line": "mov     [esp+64h+var_30], eax",
+    "line": "mov     [esp+64h+destinationPosition.z], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1711,7 +1711,7 @@
   },
   {
     "ea": "0x6446ED",
-    "line": "fld     [esp+60h+var_38]",
+    "line": "fld     [esp+60h+destinationPosition.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1723,7 +1723,7 @@
   },
   {
     "ea": "0x6446F3",
-    "line": "fld     [esp+60h+var_34]",
+    "line": "fld     [esp+60h+destinationPosition.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1735,7 +1735,7 @@
   },
   {
     "ea": "0x6446FA",
-    "line": "fld     [esp+60h+var_30]",
+    "line": "fld     [esp+60h+destinationPosition.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1765,7 +1765,7 @@
   },
   {
     "ea": "0x644709",
-    "line": "mov     ecx, [esp+60h+var_44+4]",
+    "line": "mov     ecx, [esp+60h+sourceRef+4]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1795,7 +1795,7 @@
   },
   {
     "ea": "0x644719",
-    "line": "call    sub_452A60",
+    "line": "call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1843,7 +1843,7 @@
   },
   {
     "ea": "0x644731",
-    "line": "call    sub_452A60",
+    "line": "call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2053,7 +2053,7 @@
   },
   {
     "ea": "0x644797",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2077,13 +2077,13 @@
   },
   {
     "ea": "0x6447A6",
-    "line": "fstp    [esp+60h+var_44]",
+    "line": "fstp    [esp+60h+sourceRef]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6447AA",
-    "line": "mov     [esp+60h+var_44+4], eax",
+    "line": "mov     [esp+60h+sourceRef+4], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2137,7 +2137,7 @@
   },
   {
     "ea": "0x6447CA",
-    "line": "lea     eax, [esp+64h+var_38]",
+    "line": "lea     eax, [esp+64h+destinationPosition]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2203,7 +2203,7 @@
   },
   {
     "ea": "0x6447E8",
-    "line": "lea     ecx, [esp+60h+var_20]",
+    "line": "lea     ecx, [esp+60h+var_20]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2215,43 +2215,43 @@
   },
   {
     "ea": "0x6447EE",
-    "line": "call    sub_68A9F0",
+    "line": "call    PathLow_ctor; Verified PathLow constructor: installs the PathLow vtable at +0, initializes the BSSimpleList at +4/+8 to empty, copies unk_B3A458 to +0x0C, and sets byte +0x10 to 1. +0x0C and byte +0x10 semantics remain Unknown.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6447F3",
-    "line": "push    ebp",
+    "line": "push    ebp; destinationWorldspace",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6447F4",
-    "line": "push    ebx",
+    "line": "push    ebx; destinationCell",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6447F5",
-    "line": "lea     ecx, [esp+68h+var_38]",
+    "line": "lea     ecx, [esp+68h+destinationPosition]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6447F9",
-    "line": "push    ecx",
+    "line": "push    ecx; destinationPosition",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6447FA",
-    "line": "push    edi",
+    "line": "push    edi; sourceRef",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6447FB",
-    "line": "lea     ecx, [esp+70h+var_20]",
+    "line": "lea     ecx, [esp+70h+var_20]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2263,25 +2263,25 @@
   },
   {
     "ea": "0x644807",
-    "line": "call    sub_68B030",
+    "line": "call    TravelPath_BuildToDestination; Verified top-level TravelPath build sequence: select the destination's smallest containing interior/exterior SubSpace (fallback to supplied cell/worldspace), call TravelPath_BuildRoute with the source reference and positions, then, on success, augment the route with TESRoad surface samples.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x64480C",
-    "line": "push    edi",
+    "line": "push    edi; sourceRef",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x64480D",
-    "line": "lea     ecx, [esp+64h+var_20]",
+    "line": "lea     ecx, [esp+64h+var_20]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x644811",
-    "line": "call    sub_68A760",
+    "line": "call    TravelPath_ComputeDistance; Verified TravelPath_ComputeDistance sums Euclidean segments from sourceRef->GetPos through each TravelPathNode_GetPosition. For a type-0 teleport node, the segment endpoint is the linked door's TeleportData xyz marker; after consuming that node, the next segment starts at the current door's own TeleportData xyz (its destination marker). Type-1 nodes use owned position payloads; ordinary references use GetPos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2299,85 +2299,85 @@
   },
   {
     "ea": "0x64481D",
-    "line": "push    ebp",
+    "line": "push    ebp; destinationWorldspace",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x64481E",
-    "line": "push    ebx",
+    "line": "push    ebx; destinationCell",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x64481F",
-    "line": "lea     edx, [esp+68h+var_38]",
+    "line": "lea     edx, [esp+68h+destinationPosition]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x644823",
-    "line": "push    edx",
+    "line": "push    edx; destinationPosition",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x644824",
-    "line": "push    eax",
+    "line": "push    eax; sourceRef",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x644825",
-    "line": "lea     ecx, [esp+70h+var_20]",
+    "line": "lea     ecx, [esp+70h+var_20]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x644829",
-    "line": "mov     [esp+70h+var_44], eax",
+    "line": "mov     [esp+70h+sourceRef], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x64482D",
-    "line": "call    sub_68B030",
+    "line": "call    TravelPath_BuildToDestination; Verified top-level TravelPath build sequence: select the destination's smallest containing interior/exterior SubSpace (fallback to supplied cell/worldspace), call TravelPath_BuildRoute with the source reference and positions, then, on success, augment the route with TESRoad surface samples.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x644832",
-    "line": "mov     eax, [esp+60h+var_44]",
+    "line": "mov     eax, [esp+60h+sourceRef]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x644836",
-    "line": "push    eax",
+    "line": "push    eax; sourceRef",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x644837",
-    "line": "lea     ecx, [esp+64h+var_20]",
+    "line": "lea     ecx, [esp+64h+var_20]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x64483B",
-    "line": "call    sub_68A760",
+    "line": "call    TravelPath_ComputeDistance; Verified TravelPath_ComputeDistance sums Euclidean segments from sourceRef->GetPos through each TravelPathNode_GetPosition. For a type-0 teleport node, the segment endpoint is the linked door's TeleportData xyz marker; after consuming that node, the next segment starts at the current door's own TeleportData xyz (its destination marker). Type-1 nodes use owned position payloads; ordinary references use GetPos.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x644840",
-    "line": "fstp    [esp+60h+var_44]",
+    "line": "fstp    [esp+60h+sourceRef]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x644844",
-    "line": "lea     ecx, [esp+60h+var_20]",
+    "line": "lea     ecx, [esp+60h+var_20]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2389,7 +2389,7 @@
   },
   {
     "ea": "0x644850",
-    "line": "call    sub_68AA10",
+    "line": "call    PathLow_dtor; Verified PathLow destructor: restores the PathLow vtable and frees/clears owned TravelPathNode records through TravelPath_ClearNodes. This routine does not free the containing object.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2473,7 +2473,7 @@
   },
   {
     "ea": "0x644879",
-    "line": "fild    [esp+60h+var_44+4]",
+    "line": "fild    [esp+60h+sourceRef+4]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -2509,7 +2509,7 @@
   },
   {
     "ea": "0x64488A",
-    "line": "fld     [esp+60h+var_44]",
+    "line": "fld     [esp+60h+sourceRef]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2539,7 +2539,7 @@
   },
   {
     "ea": "0x644897",
-    "line": "fild    [esp+60h+var_44+4]",
+    "line": "fild    [esp+60h+sourceRef+4]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -2719,7 +2719,7 @@
   },
   {
     "ea": "0x6448E9",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2782,5 +2782,59 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C4260",
+    "line": "lea     ecx, [ebp-20h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C4263",
+    "line": "jmp     PathLow_dtor; Verified PathLow destructor: restores the PathLow vtable and frees/clears owned TravelPathNode records through TravelPath_ClearNodes. This routine does not free the containing object.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4268",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C426C",
+    "line": "lea     eax, [edx-50h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C426F",
+    "line": "mov     ecx, [edx-54h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C4272",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C4274",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4279",
+    "line": "mov     eax, offset stru_AECC4C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C427E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

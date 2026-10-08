@@ -7,9 +7,9 @@
 0x5D6A92: call    sub_57DE50
 0x5D6A97: fld1
 0x5D6A99: mov     ecx, [esi+30h]; this
-0x5D6A9C: fstp    [esp+8+a2]; a3
-0x5D6A9F: push    0FA1h; a2
-0x5D6AA4: call    Tile_SetFloat
+0x5D6A9C: fstp    [esp+8+a2]; value
+0x5D6A9F: push    0FA1h; propertyCode
+0x5D6AA4: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D6AA9: mov     al, [esi+4Ch]
 0x5D6AAC: test    al, al
 0x5D6AAE: jz      short loc_5D6ABD
@@ -24,7 +24,7 @@
 0x5D6AD1: mov     ecx, [esi+28h]
 0x5D6AD4: push    0FB5h
 0x5D6AD9: call    Tile_GetFloat
-0x5D6ADE: call    Double_To_SInt32
+0x5D6ADE: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5D6AE3: fld1
 0x5D6AE5: mov     edx, ds:0B333C4h
 0x5D6AEB: mov     ds:0B3B730h, eax
@@ -42,14 +42,14 @@
 0x5D6B1D: push    ecx
 0x5D6B1E: fld     dword ptr ds:0A379B4h
 0x5D6B24: mov     ecx, [esi+40h]; this
-0x5D6B27: fstp    [esp+8+a2]; a3
+0x5D6B27: fstp    [esp+8+a2]; value
 0x5D6B2A: mov     byte ptr ds:0B3B728h, 1
-0x5D6B31: push    0FC9h; a2
-0x5D6B36: call    Tile_SetFloat
+0x5D6B31: push    0FC9h; propertyCode
+0x5D6B36: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D6B3B: mov     eax, ds:0B333C4h
 0x5D6B40: cmp     byte ptr [eax+6E5h], 0
 0x5D6B47: jnz     short loc_5D6BB0
-0x5D6B49: mov     ecx, offset ActorProcessManager_ptr
+0x5D6B49: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x5D6B4E: call    sub_676D30
 0x5D6B53: pop     esi
 0x5D6B54: retn    8
@@ -59,9 +59,9 @@
 0x5D6B5E: call    sub_57DE50
 0x5D6B63: fld1
 0x5D6B65: mov     ecx, [esp+8+arg_4]; this
-0x5D6B69: fstp    [esp+8+a2]; a3
-0x5D6B6C: push    0FA1h; a2
-0x5D6B71: call    Tile_SetFloat
+0x5D6B69: fstp    [esp+8+a2]; value
+0x5D6B6C: push    0FA1h; propertyCode
+0x5D6B71: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D6B76: mov     ecx, ds:0B333C4h; this
 0x5D6B7C: call    PlayerCharacter__IsSleeping?
 0x5D6B81: test    al, al

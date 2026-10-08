@@ -10,10 +10,10 @@
 0x689C24: mov     edi, [esi]
 0x689C26: test    edi, edi
 0x689C28: jz      short loc_689C3A
-0x689C2A: mov     ecx, edi
-0x689C2C: call    sub_68B1C0
+0x689C2A: mov     ecx, edi; this
+0x689C2C: call    TravelPathNode_FreeOwnedPosition; Verified frees only the owned position payload when kind==1; it does not free the TravelPathNode record itself and does not release reference-kind payloads.
 0x689C31: push    edi
-0x689C32: call    FormHeapFree
+0x689C32: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x689C37: add     esp, 4
 0x689C3A: mov     eax, [esi+4]
 0x689C3D: test    eax, eax
@@ -24,7 +24,7 @@
 0x689C48: mov     edx, [eax]
 0x689C4A: push    eax
 0x689C4B: mov     [esi], edx
-0x689C4D: call    FormHeapFree
+0x689C4D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x689C52: add     esp, 4
 0x689C55: pop     esi
 0x689C56: retn

@@ -1,7 +1,7 @@
-PathMiddleHigh *__thiscall PathMiddleHigh::`scalar deleting destructor'(PathMiddleHigh *this, char a2)
+NiDX92DBufferData **__thiscall PathMiddleHigh::`scalar deleting destructor'(NiDX92DBufferData **this, char a2)
 {
-  PathMiddleHigh::~PathMiddleHigh(this);
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  PathMiddleHigh::~PathMiddleHigh(this); /*0x68b423*/
+  if ( (a2 & 1) != 0 ) /*0x68b42d*/
+    FormHeapFree((unsigned int)this); /*0x68b430*/
+  return this; /*0x68b43a*/
 }

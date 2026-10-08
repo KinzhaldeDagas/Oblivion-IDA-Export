@@ -26,102 +26,102 @@ void __userpurge sub_726C63(signed int a1@<ebx>, int a2@<ebp>, int a3)
   int v25; // [esp-10h] [ebp-10h] BYREF
   unsigned int v26; // [esp-4h] [ebp-4h]
 
-  v19 = *(_DWORD *)(a1 + 0x21C);
-  v3 = *(void (__cdecl **)(int, int, int, int *, int))(v19 + 4);
-  v24 = 2;
-  v3(v19, a2 + 0xC, 2, &v24, 1);
-  v4 = *(void (__cdecl **)(int, int, int, int *, int))(*(_DWORD *)(a1 + 0x21C) + 4);
-  v5 = (unsigned int *)(a2 + 0x10);
-  v18 = *(_DWORD *)(a1 + 0x21C);
-  v24 = 4;
-  v4(v18, a2 + 0x10, 4, &v24, 1);
-  v6 = *(_DWORD *)(a2 + 0x10);
+  v19 = *(_DWORD *)(a1 + 0x21C); /*0x726c76*/
+  v3 = *(void (__cdecl **)(int, int, int, int *, int))(v19 + 4); /*0x726c77*/
+  v24 = 2; /*0x726c7a*/
+  v3(v19, a2 + 0xC, 2, &v24, 1); /*0x726c82*/
+  v4 = *(void (__cdecl **)(int, int, int, int *, int))(*(_DWORD *)(a1 + 0x21C) + 4); /*0x726c8a*/
+  v5 = (unsigned int *)(a2 + 0x10); /*0x726c96*/
+  v18 = *(_DWORD *)(a1 + 0x21C); /*0x726c9a*/
+  v24 = 4; /*0x726c9b*/
+  v4(v18, a2 + 0x10, 4, &v24, 1); /*0x726ca3*/
+  v6 = *(_DWORD *)(a2 + 0x10); /*0x726ca5*/
   if ( v6 )
   {
     v7 = (void *)FormHeapAlloc((0x1C * (unsigned __int64)(unsigned int)v6) >> 0x20 != 0 ? 0xFFFFFFFF : 0x1C * v6);
-    v24 = (int)v7;
-    v26 = 0;
-    if ( v7 )
+    v24 = (int)v7; /*0x726cc9*/
+    v26 = 0; /*0x726ccf*/
+    if ( v7 ) /*0x726cd7*/
     {
-      sub_401080(v7, 0x1C, v6, (void *(__thiscall *)(void *))sub_53D910);
-      v8 = v24;
+      sub_401080(v7, 0x1C, v6, (void *(__thiscall *)(void *))sub_53D910); /*0x726ce2*/
+      v8 = v24; /*0x726ce7*/
     }
     else
     {
-      v8 = 0;
+      v8 = 0; /*0x726ced*/
     }
-    v9 = 0;
-    v10 = *v5 == 0;
-    v26 = 0xFFFFFFFF;
-    *(_DWORD *)(a2 + 0x14) = v8;
-    if ( !v10 )
+    v9 = 0; /*0x726cef*/
+    v10 = *v5 == 0; /*0x726cf1*/
+    v26 = 0xFFFFFFFF; /*0x726cf3*/
+    *(_DWORD *)(a2 + 0x14) = v8; /*0x726cfb*/
+    if ( !v10 ) /*0x726cfe*/
     {
-      v24 = 0;
-      do
+      v24 = 0; /*0x726d00*/
+      do /*0x726d1b*/
       {
-        sub_726510((char *)(v24 + *(_DWORD *)(a2 + 0x14)), a1);
-        v24 += 0x1C;
-        ++v9;
+        sub_726510((char *)(v24 + *(_DWORD *)(a2 + 0x14)), a1); /*0x726d0c*/
+        v24 += 0x1C; /*0x726d11*/
+        ++v9; /*0x726d16*/
       }
-      while ( v9 < *v5 );
+      while ( v9 < *v5 ); /*0x726d1b*/
     }
   }
-  v11 = *(_DWORD *)(a1 + 0x21C);
-  v23 = 0;
-  v20 = v11;
-  v12 = *(void (__cdecl **)(int, unsigned int *, int, int *, int))(v11 + 4);
-  v24 = 4;
-  v12(v20, &v23, 4, &v24, 1);
-  NiTArray_SetSize((unsigned __int16 *)(a2 + 0x1C), v23);
-  for ( i = 0; i < v23; ++i )
+  v11 = *(_DWORD *)(a1 + 0x21C); /*0x726d1d*/
+  v23 = 0; /*0x726d31*/
+  v20 = v11; /*0x726d39*/
+  v12 = *(void (__cdecl **)(int, unsigned int *, int, int *, int))(v11 + 4); /*0x726d3a*/
+  v24 = 4; /*0x726d3d*/
+  v12(v20, &v23, 4, &v24, 1); /*0x726d45*/
+  NiTArray_SetSize((unsigned __int16 *)(a2 + 0x1C), v23); /*0x726d54*/
+  for ( i = 0; i < v23; ++i ) /*0x726d5f*/
   {
-    v14 = *(void (__cdecl **)(int, char *, int, int *, int))(*(_DWORD *)(a1 + 0x21C) + 4);
-    v21 = *(_DWORD *)(a1 + 0x21C);
-    v25 = 1;
-    v14(v21, &v22, 1, &v25, 1);
-    if ( !v22 )
+    v14 = *(void (__cdecl **)(int, char *, int, int *, int))(*(_DWORD *)(a1 + 0x21C) + 4); /*0x726d7d*/
+    v21 = *(_DWORD *)(a1 + 0x21C); /*0x726d87*/
+    v25 = 1; /*0x726d88*/
+    v14(v21, &v22, 1, &v25, 1); /*0x726d90*/
+    if ( !v22 ) /*0x726d9a*/
     {
-      if ( i < *(unsigned __int16 *)(a2 + 0x26) )
+      if ( i < *(unsigned __int16 *)(a2 + 0x26) ) /*0x726e28*/
       {
-        if ( *(_DWORD *)(*(_DWORD *)(a2 + 0x20) + 4 * i) )
-          --*(_WORD *)(a2 + 0x28);
+        if ( *(_DWORD *)(*(_DWORD *)(a2 + 0x20) + 4 * i) ) /*0x726e36*/
+          --*(_WORD *)(a2 + 0x28); /*0x726e3c*/
       }
       else
       {
-        *(_WORD *)(a2 + 0x26) = i + 1;
+        *(_WORD *)(a2 + 0x26) = i + 1; /*0x726e2d*/
       }
-      *(_DWORD *)(*(_DWORD *)(a2 + 0x20) + 4 * i) = 0;
-      continue;
+      *(_DWORD *)(*(_DWORD *)(a2 + 0x20) + 4 * i) = 0; /*0x726e45*/
+      continue; /*0x726e45*/
     }
-    v15 = (_DWORD *)(*(int (__thiscall **)(int))(*(_DWORD *)a2 + 0x50))(a2);
-    sub_7266D0(v15, a3, i, *(_DWORD *)(a2 + 0x14), *(_DWORD *)(a2 + 0x10), *(_WORD *)(a2 + 0xC));
-    if ( i < *(unsigned __int16 *)(a2 + 0x26) )
+    v15 = (_DWORD *)(*(int (__thiscall **)(int))(*(_DWORD *)a2 + 0x50))(a2); /*0x726db0*/
+    sub_7266D0(v15, a3, i, *(_DWORD *)(a2 + 0x14), *(_DWORD *)(a2 + 0x10), *(_WORD *)(a2 + 0xC)); /*0x726dc1*/
+    if ( i < *(unsigned __int16 *)(a2 + 0x26) ) /*0x726dcc*/
     {
-      if ( !v15 )
+      if ( !v15 ) /*0x726dec*/
       {
-        if ( *(_DWORD *)(*(_DWORD *)(a2 + 0x20) + 4 * i) )
-          --*(_WORD *)(a2 + 0x28);
+        if ( *(_DWORD *)(*(_DWORD *)(a2 + 0x20) + 4 * i) ) /*0x726e0a*/
+          --*(_WORD *)(a2 + 0x28); /*0x726e10*/
 LABEL_18:
-        *(_DWORD *)(*(_DWORD *)(a2 + 0x20) + 4 * i) = v15;
-        a1 = a3;
-        continue;
+        *(_DWORD *)(*(_DWORD *)(a2 + 0x20) + 4 * i) = v15; /*0x726e16*/
+        a1 = a3; /*0x726e1c*/
+        continue; /*0x726e20*/
       }
-      v17 = *(_DWORD *)(a2 + 0x20);
-      if ( *(_DWORD *)(v17 + 4 * i) )
-        goto LABEL_18;
-      ++*(_WORD *)(a2 + 0x28);
-      *(_DWORD *)(v17 + 4 * i) = v15;
-      a1 = a3;
+      v17 = *(_DWORD *)(a2 + 0x20); /*0x726dee*/
+      if ( *(_DWORD *)(v17 + 4 * i) ) /*0x726df1*/
+        goto LABEL_18; /*0x726df5*/
+      ++*(_WORD *)(a2 + 0x28); /*0x726df7*/
+      *(_DWORD *)(v17 + 4 * i) = v15; /*0x726dfe*/
+      a1 = a3; /*0x726e01*/
     }
     else
     {
-      *(_WORD *)(a2 + 0x26) = i + 1;
-      if ( !v15 )
-        goto LABEL_18;
-      v16 = *(_DWORD *)(a2 + 0x20);
-      ++*(_WORD *)(a2 + 0x28);
-      *(_DWORD *)(v16 + 4 * i) = v15;
-      a1 = a3;
+      *(_WORD *)(a2 + 0x26) = i + 1; /*0x726dd3*/
+      if ( !v15 ) /*0x726dd7*/
+        goto LABEL_18; /*0x726dd7*/
+      v16 = *(_DWORD *)(a2 + 0x20); /*0x726dd9*/
+      ++*(_WORD *)(a2 + 0x28); /*0x726ddc*/
+      *(_DWORD *)(v16 + 4 * i) = v15; /*0x726de1*/
+      a1 = a3; /*0x726de4*/
     }
   }
 }

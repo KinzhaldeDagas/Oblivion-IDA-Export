@@ -1,5 +1,5 @@
-0x786E90: fld     dword ptr [ecx]
-0x786E92: mov     edx, [esp+arg_0]
+0x786E90: fld     dword ptr [ecx]; Oblivion 1.2.0.416: exact component-wise stVec3 inequality. RT4.1 inline operator!= corroborates the three OR comparisons.
+0x786E92: mov     edx, [esp+other]
 0x786E96: fld     dword ptr [edx]
 0x786E98: fucompp
 0x786E9A: fnstsw  ax

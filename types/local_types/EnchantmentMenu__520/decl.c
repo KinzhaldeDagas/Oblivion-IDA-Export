@@ -1,1 +1,1 @@
-EnchantmentMenu
+struct EnchantmentMenu;

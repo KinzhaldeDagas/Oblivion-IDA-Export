@@ -1,8 +1,8 @@
-0x784140: mov     eax, [esp+arg_0]
-0x784144: mov     edx, [esp+arg_4]
+0x784140: mov     eax, [esp+first]; Oblivion 1.2.0.416: assigns one six-dword value across [first,last); shared 0x18-byte vector primitive.
+0x784144: mov     edx, [esp+last]
 0x784148: cmp     eax, edx
 0x78414A: jz      short locret_78417B
-0x78414C: mov     ecx, [esp+arg_8]
+0x78414C: mov     ecx, [esp+value]
 0x784150: push    esi
 0x784151: mov     esi, [ecx]
 0x784153: mov     [eax], esi

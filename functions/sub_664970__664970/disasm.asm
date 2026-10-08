@@ -1,4 +1,4 @@
-0x664970: push    ebx
+0x664970: push    ebx; Returns the selected attribute's skill-increase count from the oldest queued eight-byte attribute-bonus bucket. The queue preserves separate bonus sets when multiple player levels are pending.
 0x664971: push    esi
 0x664972: push    edi
 0x664973: mov     edi, ecx
@@ -47,13 +47,13 @@
 0x6649E8: jnz     short loc_6649D7
 0x6649EA: cmp     esi, ebx
 0x6649EC: jz      short loc_664A10
-0x6649EE: mov     ecx, [esp+0Ch+arg_0]
+0x6649EE: mov     ecx, [esp+0Ch+attributeAV]
 0x6649F2: xor     eax, eax
 0x6649F4: cmp     ecx, 7
 0x6649F7: ja      short loc_664A12
 0x6649F9: push    ecx
 0x6649FA: push    ebx
-0x6649FB: call    ActorValue_GetGroupOffsetFromAV
+0x6649FB: call    ActorValue_GetGroupOffsetFromAV; RealArenaTraining fidelity pass: ActorValue_GetGroupOffsetFromAV(group, actorValue). Player skill-progress code calls this with group 2 before indexing player skillExp/requiredSkillExp.
 0x664A00: add     esp, 8
 0x664A03: movsx   eax, al
 0x664A06: movsx   eax, byte ptr [eax+esi]

@@ -74,12 +74,12 @@
 0x8DB798: movaps  xmm0, xmmword ptr [esi+10h]
 0x8DB79C: mov     ecx, edi
 0x8DB79E: movaps  xmmword ptr [eax+10h], xmm0
-0x8DB7A2: call    sub_8ABCE0
+0x8DB7A2: call    sub_8ABCE0; TES4 authoritative: resolves a contact point through the hit collidable/entity transform to compare contact positions between manifold entries.
 0x8DB7A7: lea     eax, [esp+80h+var_50]
 0x8DB7AB: push    eax
 0x8DB7AC: push    esi
 0x8DB7AD: mov     ecx, ebx
-0x8DB7AF: call    sub_8ABCE0
+0x8DB7AF: call    sub_8ABCE0; TES4 authoritative: resolves a contact point through the hit collidable/entity transform to compare contact positions between manifold entries.
 0x8DB7B4: fld     dword ptr [ebx+5Ch]
 0x8DB7B7: fmul    dword ptr [edi+5Ch]
 0x8DB7BA: movaps  xmm0, [esp+80h+var_50]

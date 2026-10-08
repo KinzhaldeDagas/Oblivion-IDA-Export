@@ -7,7 +7,7 @@
 0x7C2DFC: push    eax
 0x7C2DFD: push    ebx
 0x7C2DFE: mov     esi, ecx
-0x7C2E00: call    sub_7ECB10
+0x7C2E00: call    j_BSShaderProperty_CopyCloneMembers
 0x7C2E05: mov     edi, [ebx+0A0h]
 0x7C2E0B: cmp     edi, [esi+0A0h]
 0x7C2E11: mov     ebp, ds:0A2807Ch

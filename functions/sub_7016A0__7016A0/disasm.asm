@@ -1,4 +1,4 @@
-0x7016A0: push    esi
+0x7016A0: push    esi; MEF PERF 2026-10-08: PERF-17 slot destructor: reads pointer from slot, decrements payload+4 and invokes deleting destructor only on zero count. Generic pointer-slot release, not specifically NiD3DVertexShader; prototype corrected to void** slot. Required for native array-header destruction compatibility.
 0x7016A1: mov     esi, [ecx]
 0x7016A3: test    esi, esi
 0x7016A5: jz      short loc_7016C3

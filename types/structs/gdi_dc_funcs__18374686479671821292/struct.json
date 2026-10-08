@@ -1,802 +1,1215 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "gdi_dc_funcs",
+  "definition": "struct __declspec(align(8)) gdi_dc_funcs\n{\nINT (*pAbortDoc)(PHYSDEV) __offset(OFF64|AUTO);\nBOOL (*pAbortPath)(PHYSDEV) __offset(OFF64|AUTO);\nBOOL (*pAlphaBlend)(PHYSDEV, bitblt_coords *, PHYSDEV, bitblt_coords *, BLENDFUNCTION) __offset(OFF64|AUTO);\nBOOL (*pAngleArc)(PHYSDEV, INT, INT, DWORD, FLOAT, FLOAT) __offset(OFF64|AUTO);\nBOOL (*pArc)(PHYSDEV, INT, INT, INT, INT, INT, INT, INT, INT) __offset(OFF64|AUTO);\nBOOL (*pArcTo)(PHYSDEV, INT, INT, INT, INT, INT, INT, INT, INT) __offset(OFF64|AUTO);\nBOOL (*pBeginPath)(PHYSDEV) __offset(OFF64|AUTO);\nDWORD (*pBlendImage)(PHYSDEV, BITMAPINFO *, const gdi_image_bits *, bitblt_coords *, bitblt_coords *, BLENDFUNCTION) __offset(OFF64|AUTO);\nBOOL (*pChord)(PHYSDEV, INT, INT, INT, INT, INT, INT, INT, INT) __offset(OFF64|AUTO);\nBOOL (*pCloseFigure)(PHYSDEV) __offset(OFF64|AUTO);\nBOOL (*pCreateCompatibleDC)(PHYSDEV, PHYSDEV *) __offset(OFF64|AUTO);\nBOOL (*pCreateDC)(PHYSDEV *, LPCWSTR, LPCWSTR, LPCWSTR, const DEVMODEW *) __offset(OFF64|AUTO);\nBOOL (*pDeleteDC)(PHYSDEV) __offset(OFF64|AUTO);\nBOOL (*pDeleteObject)(PHYSDEV, HGDIOBJ) __offset(OFF64|AUTO);\nDWORD (*pDeviceCapabilities)(LPSTR, LPCSTR, LPCSTR, WORD, LPSTR, LPDEVMODEA) __offset(OFF64|AUTO);\nBOOL (*pEllipse)(PHYSDEV, INT, INT, INT, INT) __offset(OFF64|AUTO);\nINT (*pEndDoc)(PHYSDEV) __offset(OFF64|AUTO);\nINT (*pEndPage)(PHYSDEV) __offset(OFF64|AUTO);\nBOOL (*pEndPath)(PHYSDEV) __offset(OFF64|AUTO);\nBOOL (*pEnumFonts)(PHYSDEV, LPLOGFONTW, FONTENUMPROCW, LPARAM_0) __offset(OFF64|AUTO);\nINT (*pEnumICMProfiles)(PHYSDEV, ICMENUMPROCW, LPARAM_0) __offset(OFF64|AUTO);\nINT (*pExcludeClipRect)(PHYSDEV, INT, INT, INT, INT) __offset(OFF64|AUTO);\nINT (*pExtDeviceMode)(LPSTR, HWND, LPDEVMODEA, LPSTR, LPSTR, LPDEVMODEA, LPSTR, DWORD) __offset(OFF64|AUTO);\nINT (*pExtEscape)(PHYSDEV, INT, INT, LPCVOID, INT, LPVOID) __offset(OFF64|AUTO);\nBOOL (*pExtFloodFill)(PHYSDEV, INT, INT, COLORREF, UINT) __offset(OFF64|AUTO);\nINT (*pExtSelectClipRgn)(PHYSDEV, HRGN, INT) __offset(OFF64|AUTO);\nBOOL (*pExtTextOut)(PHYSDEV, INT, INT, UINT, const RECT *, LPCWSTR, UINT, const INT *) __offset(OFF64|AUTO);\nBOOL (*pFillPath)(PHYSDEV) __offset(OFF64|AUTO);\nBOOL (*pFillRgn)(PHYSDEV, HRGN, HBRUSH) __offset(OFF64|AUTO);\nBOOL (*pFlattenPath)(PHYSDEV) __offset(OFF64|AUTO);\nBOOL (*pFontIsLinked)(PHYSDEV) __offset(OFF64|AUTO);\nBOOL (*pFrameRgn)(PHYSDEV, HRGN, HBRUSH, INT, INT) __offset(OFF64|AUTO);\nBOOL (*pGdiComment)(PHYSDEV, UINT, const BYTE *) __offset(OFF64|AUTO);\nUINT (*pGetBoundsRect)(PHYSDEV, RECT *, UINT) __offset(OFF64|AUTO);\nBOOL (*pGetCharABCWidths)(PHYSDEV, UINT, UINT, LPABC) __offset(OFF64|AUTO);\nBOOL (*pGetCharABCWidthsI)(PHYSDEV, UINT, UINT, WORD *, LPABC) __offset(OFF64|AUTO);\nBOOL (*pGetCharWidth)(PHYSDEV, UINT, UINT, LPINT) __offset(OFF64|AUTO);\nBOOL (*pGetCharWidthInfo)(PHYSDEV, void *) __offset(OFF64|AUTO);\nINT (*pGetDeviceCaps)(PHYSDEV, INT) __offset(OFF64|AUTO);\nBOOL (*pGetDeviceGammaRamp)(PHYSDEV, LPVOID) __offset(OFF64|AUTO);\nDWORD (*pGetFontData)(PHYSDEV, DWORD, DWORD, LPVOID, DWORD) __offset(OFF64|AUTO);\nBOOL (*pGetFontRealizationInfo)(PHYSDEV, void *) __offset(OFF64|AUTO);\nDWORD (*pGetFontUnicodeRanges)(PHYSDEV, LPGLYPHSET) __offset(OFF64|AUTO);\nDWORD (*pGetGlyphIndices)(PHYSDEV, LPCWSTR, INT, LPWORD, DWORD) __offset(OFF64|AUTO);\nDWORD (*pGetGlyphOutline)(PHYSDEV, UINT, UINT, LPGLYPHMETRICS, DWORD, LPVOID, const MAT2 *) __offset(OFF64|AUTO);\nBOOL (*pGetICMProfile)(PHYSDEV, LPDWORD, LPWSTR) __offset(OFF64|AUTO);\nDWORD (*pGetImage)(PHYSDEV, BITMAPINFO *, gdi_image_bits *, bitblt_coords *) __offset(OFF64|AUTO);\nDWORD (*pGetKerningPairs)(PHYSDEV, DWORD, LPKERNINGPAIR) __offset(OFF64|AUTO);\nCOLORREF (*pGetNearestColor)(PHYSDEV, COLORREF) __offset(OFF64|AUTO);\nUINT (*pGetOutlineTextMetrics)(PHYSDEV, UINT, LPOUTLINETEXTMETRICW) __offset(OFF64|AUTO);\nCOLORREF (*pGetPixel)(PHYSDEV, INT, INT) __offset(OFF64|AUTO);\nUINT (*pGetSystemPaletteEntries)(PHYSDEV, UINT, UINT, LPPALETTEENTRY) __offset(OFF64|AUTO);\nUINT (*pGetTextCharsetInfo)(PHYSDEV, LPFONTSIGNATURE, DWORD) __offset(OFF64|AUTO);\nBOOL (*pGetTextExtentExPoint)(PHYSDEV, LPCWSTR, INT, LPINT) __offset(OFF64|AUTO);\nBOOL (*pGetTextExtentExPointI)(PHYSDEV, const WORD *, INT, LPINT) __offset(OFF64|AUTO);\nINT (*pGetTextFace)(PHYSDEV, INT, LPWSTR) __offset(OFF64|AUTO);\nBOOL (*pGetTextMetrics)(PHYSDEV, TEXTMETRICW *) __offset(OFF64|AUTO);\nBOOL (*pGradientFill)(PHYSDEV, TRIVERTEX *, ULONG, void *, ULONG, ULONG) __offset(OFF64|AUTO);\nINT (*pIntersectClipRect)(PHYSDEV, INT, INT, INT, INT) __offset(OFF64|AUTO);\nBOOL (*pInvertRgn)(PHYSDEV, HRGN) __offset(OFF64|AUTO);\nBOOL (*pLineTo)(PHYSDEV, INT, INT) __offset(OFF64|AUTO);\nBOOL (*pModifyWorldTransform)(PHYSDEV, const XFORM *, DWORD) __offset(OFF64|AUTO);\nBOOL (*pMoveTo)(PHYSDEV, INT, INT) __offset(OFF64|AUTO);\nINT (*pOffsetClipRgn)(PHYSDEV, INT, INT) __offset(OFF64|AUTO);\nBOOL (*pOffsetViewportOrgEx)(PHYSDEV, INT, INT, POINT *) __offset(OFF64|AUTO);\nBOOL (*pOffsetWindowOrgEx)(PHYSDEV, INT, INT, POINT *) __offset(OFF64|AUTO);\nBOOL (*pPaintRgn)(PHYSDEV, HRGN) __offset(OFF64|AUTO);\nBOOL (*pPatBlt)(PHYSDEV, bitblt_coords *, DWORD) __offset(OFF64|AUTO);\nBOOL (*pPie)(PHYSDEV, INT, INT, INT, INT, INT, INT, INT, INT) __offset(OFF64|AUTO);\nBOOL (*pPolyBezier)(PHYSDEV, const POINT *, DWORD) __offset(OFF64|AUTO);\nBOOL (*pPolyBezierTo)(PHYSDEV, const POINT *, DWORD) __offset(OFF64|AUTO);\nBOOL (*pPolyDraw)(PHYSDEV, const POINT *, const BYTE *, DWORD) __offset(OFF64|AUTO);\nBOOL (*pPolyPolygon)(PHYSDEV, const POINT *, const INT *, UINT) __offset(OFF64|AUTO);\nBOOL (*pPolyPolyline)(PHYSDEV, const POINT *, const DWORD *, DWORD) __offset(OFF64|AUTO);\nBOOL (*pPolygon)(PHYSDEV, const POINT *, INT) __offset(OFF64|AUTO);\nBOOL (*pPolyline)(PHYSDEV, const POINT *, INT) __offset(OFF64|AUTO);\nBOOL (*pPolylineTo)(PHYSDEV, const POINT *, INT) __offset(OFF64|AUTO);\nDWORD (*pPutImage)(PHYSDEV, HRGN, BITMAPINFO *, const gdi_image_bits *, bitblt_coords *, bitblt_coords *, DWORD) __offset(OFF64|AUTO);\nUINT (*pRealizeDefaultPalette)(PHYSDEV) __offset(OFF64|AUTO);\nUINT (*pRealizePalette)(PHYSDEV, HPALETTE, BOOL) __offset(OFF64|AUTO);\nBOOL (*pRectangle)(PHYSDEV, INT, INT, INT, INT) __offset(OFF64|AUTO);\nHDC (*pResetDC)(PHYSDEV, const DEVMODEW *) __offset(OFF64|AUTO);\nBOOL (*pRestoreDC)(PHYSDEV, INT) __offset(OFF64|AUTO);\nBOOL (*pRoundRect)(PHYSDEV, INT, INT, INT, INT, INT, INT) __offset(OFF64|AUTO);\nINT (*pSaveDC)(PHYSDEV) __offset(OFF64|AUTO);\nBOOL (*pScaleViewportExtEx)(PHYSDEV, INT, INT, INT, INT, SIZE *) __offset(OFF64|AUTO);\nBOOL (*pScaleWindowExtEx)(PHYSDEV, INT, INT, INT, INT, SIZE *) __offset(OFF64|AUTO);\nHBITMAP (*pSelectBitmap)(PHYSDEV, HBITMAP) __offset(OFF64|AUTO);\nHBRUSH (*pSelectBrush)(PHYSDEV, HBRUSH, const brush_pattern *) __offset(OFF64|AUTO);\nBOOL (*pSelectClipPath)(PHYSDEV, INT) __offset(OFF64|AUTO);\nHFONT (*pSelectFont)(PHYSDEV, HFONT, UINT *) __offset(OFF64|AUTO);\nHPALETTE (*pSelectPalette)(PHYSDEV, HPALETTE, BOOL) __offset(OFF64|AUTO);\nHPEN (*pSelectPen)(PHYSDEV, HPEN, const brush_pattern *) __offset(OFF64|AUTO);\nINT (*pSetArcDirection)(PHYSDEV, INT) __offset(OFF64|AUTO);\nCOLORREF (*pSetBkColor)(PHYSDEV, COLORREF) __offset(OFF64|AUTO);\nINT (*pSetBkMode)(PHYSDEV, INT) __offset(OFF64|AUTO);\nUINT (*pSetBoundsRect)(PHYSDEV, RECT *, UINT) __offset(OFF64|AUTO);\nCOLORREF (*pSetDCBrushColor)(PHYSDEV, COLORREF) __offset(OFF64|AUTO);\nCOLORREF (*pSetDCPenColor)(PHYSDEV, COLORREF) __offset(OFF64|AUTO);\nINT (*pSetDIBitsToDevice)(PHYSDEV, INT, INT, DWORD, DWORD, INT, INT, UINT, UINT, LPCVOID, BITMAPINFO *, UINT) __offset(OFF64|AUTO);\nvoid (*pSetDeviceClipping)(PHYSDEV, HRGN) __offset(OFF64|AUTO);\nBOOL (*pSetDeviceGammaRamp)(PHYSDEV, LPVOID) __offset(OFF64|AUTO);\nDWORD (*pSetLayout)(PHYSDEV, DWORD) __offset(OFF64|AUTO);\nINT (*pSetMapMode)(PHYSDEV, INT) __offset(OFF64|AUTO);\nDWORD (*pSetMapperFlags)(PHYSDEV, DWORD) __offset(OFF64|AUTO);\nCOLORREF (*pSetPixel)(PHYSDEV, INT, INT, COLORREF) __offset(OFF64|AUTO);\nINT (*pSetPolyFillMode)(PHYSDEV, INT) __offset(OFF64|AUTO);\nINT (*pSetROP2)(PHYSDEV, INT) __offset(OFF64|AUTO);\nINT (*pSetRelAbs)(PHYSDEV, INT) __offset(OFF64|AUTO);\nINT (*pSetStretchBltMode)(PHYSDEV, INT) __offset(OFF64|AUTO);\nUINT (*pSetTextAlign)(PHYSDEV, UINT) __offset(OFF64|AUTO);\nINT (*pSetTextCharacterExtra)(PHYSDEV, INT) __offset(OFF64|AUTO);\nCOLORREF (*pSetTextColor)(PHYSDEV, COLORREF) __offset(OFF64|AUTO);\nBOOL (*pSetTextJustification)(PHYSDEV, INT, INT) __offset(OFF64|AUTO);\nBOOL (*pSetViewportExtEx)(PHYSDEV, INT, INT, SIZE *) __offset(OFF64|AUTO);\nBOOL (*pSetViewportOrgEx)(PHYSDEV, INT, INT, POINT *) __offset(OFF64|AUTO);\nBOOL (*pSetWindowExtEx)(PHYSDEV, INT, INT, SIZE *) __offset(OFF64|AUTO);\nBOOL (*pSetWindowOrgEx)(PHYSDEV, INT, INT, POINT *) __offset(OFF64|AUTO);\nBOOL (*pSetWorldTransform)(PHYSDEV, const XFORM *) __offset(OFF64|AUTO);\nINT (*pStartDoc)(PHYSDEV, const DOCINFOW *) __offset(OFF64|AUTO);\nINT (*pStartPage)(PHYSDEV) __offset(OFF64|AUTO);\nBOOL (*pStretchBlt)(PHYSDEV, bitblt_coords *, PHYSDEV, bitblt_coords *, DWORD) __offset(OFF64|AUTO);\nINT (*pStretchDIBits)(PHYSDEV, INT, INT, INT, INT, INT, INT, INT, INT, const void *, BITMAPINFO *, UINT, DWORD) __offset(OFF64|AUTO);\nBOOL (*pStrokeAndFillPath)(PHYSDEV) __offset(OFF64|AUTO);\nBOOL (*pStrokePath)(PHYSDEV) __offset(OFF64|AUTO);\nBOOL (*pUnrealizePalette)(HPALETTE) __offset(OFF64|AUTO);\nBOOL (*pWidenPath)(PHYSDEV) __offset(OFF64|AUTO);\nNTSTATUS (*pD3DKMTCheckVidPnExclusiveOwnership)(const D3DKMT_CHECKVIDPNEXCLUSIVEOWNERSHIP *) __offset(OFF64|AUTO);\nNTSTATUS (*pD3DKMTSetVidPnSourceOwner)(const D3DKMT_SETVIDPNSOURCEOWNER *) __offset(OFF64|AUTO);\nopengl_funcs *(*wine_get_wgl_driver)(PHYSDEV, UINT) __offset(OFF64|AUTO);\nconst vulkan_funcs *(*wine_get_vulkan_driver)(PHYSDEV, UINT) __offset(OFF64|AUTO);\nUINT priority;\n}\n",
   "id": 18374686479671821292,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pAbortDoc",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "INT (*)(PHYSDEV)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pAbortPath",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pAlphaBlend",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, bitblt_coords *, PHYSDEV, bitblt_coords *, BLENDFUNCTION)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pAngleArc",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, INT, INT, DWORD, FLOAT, FLOAT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pArc",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, INT, INT, INT, INT, INT, INT, INT, INT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pArcTo",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, INT, INT, INT, INT, INT, INT, INT, INT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pBeginPath",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pBlendImage",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "DWORD (*)(PHYSDEV, BITMAPINFO *, const gdi_image_bits *, bitblt_coords *, bitblt_coords *, BLENDFUNCTION)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pChord",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, INT, INT, INT, INT, INT, INT, INT, INT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pCloseFigure",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pCreateCompatibleDC",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, PHYSDEV *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pCreateDC",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV *, LPCWSTR, LPCWSTR, LPCWSTR, const DEVMODEW *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pDeleteDC",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pDeleteObject",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, HGDIOBJ)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pDeviceCapabilities",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "DWORD (*)(LPSTR, LPCSTR, LPCSTR, WORD, LPSTR, LPDEVMODEA)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pEllipse",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, INT, INT, INT, INT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pEndDoc",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "INT (*)(PHYSDEV)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pEndPage",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 4
+      "size": 4,
+      "type": "INT (*)(PHYSDEV)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pEndPath",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pEnumFonts",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 4
+      "offset_hex": "0x4C",
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, LPLOGFONTW, FONTENUMPROCW, LPARAM_0)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pEnumICMProfiles",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 4
+      "size": 4,
+      "type": "INT (*)(PHYSDEV, ICMENUMPROCW, LPARAM_0)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pExcludeClipRect",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 4
+      "size": 4,
+      "type": "INT (*)(PHYSDEV, INT, INT, INT, INT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pExtDeviceMode",
       "offset": 88,
       "offset_hex": "0x58",
-      "size": 4
+      "size": 4,
+      "type": "INT (*)(LPSTR, HWND, LPDEVMODEA, LPSTR, LPSTR, LPDEVMODEA, LPSTR, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pExtEscape",
       "offset": 92,
-      "offset_hex": "0x5c",
-      "size": 4
+      "offset_hex": "0x5C",
+      "size": 4,
+      "type": "INT (*)(PHYSDEV, INT, INT, LPCVOID, INT, LPVOID)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pExtFloodFill",
       "offset": 96,
       "offset_hex": "0x60",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, INT, INT, COLORREF, UINT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pExtSelectClipRgn",
       "offset": 100,
       "offset_hex": "0x64",
-      "size": 4
+      "size": 4,
+      "type": "INT (*)(PHYSDEV, HRGN, INT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pExtTextOut",
       "offset": 104,
       "offset_hex": "0x68",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, INT, INT, UINT, const RECT *, LPCWSTR, UINT, const INT *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pFillPath",
       "offset": 108,
-      "offset_hex": "0x6c",
-      "size": 4
+      "offset_hex": "0x6C",
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pFillRgn",
       "offset": 112,
       "offset_hex": "0x70",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, HRGN, HBRUSH)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pFlattenPath",
       "offset": 116,
       "offset_hex": "0x74",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pFontIsLinked",
       "offset": 120,
       "offset_hex": "0x78",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pFrameRgn",
       "offset": 124,
-      "offset_hex": "0x7c",
-      "size": 4
+      "offset_hex": "0x7C",
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, HRGN, HBRUSH, INT, INT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pGdiComment",
       "offset": 128,
       "offset_hex": "0x80",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, UINT, const BYTE *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pGetBoundsRect",
       "offset": 132,
       "offset_hex": "0x84",
-      "size": 4
+      "size": 4,
+      "type": "UINT (*)(PHYSDEV, RECT *, UINT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pGetCharABCWidths",
       "offset": 136,
       "offset_hex": "0x88",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, UINT, UINT, LPABC)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pGetCharABCWidthsI",
       "offset": 140,
-      "offset_hex": "0x8c",
-      "size": 4
+      "offset_hex": "0x8C",
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, UINT, UINT, WORD *, LPABC)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pGetCharWidth",
       "offset": 144,
       "offset_hex": "0x90",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, UINT, UINT, LPINT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pGetCharWidthInfo",
       "offset": 148,
       "offset_hex": "0x94",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, void *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pGetDeviceCaps",
       "offset": 152,
       "offset_hex": "0x98",
-      "size": 4
+      "size": 4,
+      "type": "INT (*)(PHYSDEV, INT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pGetDeviceGammaRamp",
       "offset": 156,
-      "offset_hex": "0x9c",
-      "size": 4
+      "offset_hex": "0x9C",
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, LPVOID)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pGetFontData",
       "offset": 160,
-      "offset_hex": "0xa0",
-      "size": 4
+      "offset_hex": "0xA0",
+      "size": 4,
+      "type": "DWORD (*)(PHYSDEV, DWORD, DWORD, LPVOID, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pGetFontRealizationInfo",
       "offset": 164,
-      "offset_hex": "0xa4",
-      "size": 4
+      "offset_hex": "0xA4",
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, void *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pGetFontUnicodeRanges",
       "offset": 168,
-      "offset_hex": "0xa8",
-      "size": 4
+      "offset_hex": "0xA8",
+      "size": 4,
+      "type": "DWORD (*)(PHYSDEV, LPGLYPHSET)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pGetGlyphIndices",
       "offset": 172,
-      "offset_hex": "0xac",
-      "size": 4
+      "offset_hex": "0xAC",
+      "size": 4,
+      "type": "DWORD (*)(PHYSDEV, LPCWSTR, INT, LPWORD, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pGetGlyphOutline",
       "offset": 176,
-      "offset_hex": "0xb0",
-      "size": 4
+      "offset_hex": "0xB0",
+      "size": 4,
+      "type": "DWORD (*)(PHYSDEV, UINT, UINT, LPGLYPHMETRICS, DWORD, LPVOID, const MAT2 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pGetICMProfile",
       "offset": 180,
-      "offset_hex": "0xb4",
-      "size": 4
+      "offset_hex": "0xB4",
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, LPDWORD, LPWSTR)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pGetImage",
       "offset": 184,
-      "offset_hex": "0xb8",
-      "size": 4
+      "offset_hex": "0xB8",
+      "size": 4,
+      "type": "DWORD (*)(PHYSDEV, BITMAPINFO *, gdi_image_bits *, bitblt_coords *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pGetKerningPairs",
       "offset": 188,
-      "offset_hex": "0xbc",
-      "size": 4
+      "offset_hex": "0xBC",
+      "size": 4,
+      "type": "DWORD (*)(PHYSDEV, DWORD, LPKERNINGPAIR)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pGetNearestColor",
       "offset": 192,
-      "offset_hex": "0xc0",
-      "size": 4
+      "offset_hex": "0xC0",
+      "size": 4,
+      "type": "COLORREF (*)(PHYSDEV, COLORREF)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pGetOutlineTextMetrics",
       "offset": 196,
-      "offset_hex": "0xc4",
-      "size": 4
+      "offset_hex": "0xC4",
+      "size": 4,
+      "type": "UINT (*)(PHYSDEV, UINT, LPOUTLINETEXTMETRICW)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pGetPixel",
       "offset": 200,
-      "offset_hex": "0xc8",
-      "size": 4
+      "offset_hex": "0xC8",
+      "size": 4,
+      "type": "COLORREF (*)(PHYSDEV, INT, INT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pGetSystemPaletteEntries",
       "offset": 204,
-      "offset_hex": "0xcc",
-      "size": 4
+      "offset_hex": "0xCC",
+      "size": 4,
+      "type": "UINT (*)(PHYSDEV, UINT, UINT, LPPALETTEENTRY)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pGetTextCharsetInfo",
       "offset": 208,
-      "offset_hex": "0xd0",
-      "size": 4
+      "offset_hex": "0xD0",
+      "size": 4,
+      "type": "UINT (*)(PHYSDEV, LPFONTSIGNATURE, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pGetTextExtentExPoint",
       "offset": 212,
-      "offset_hex": "0xd4",
-      "size": 4
+      "offset_hex": "0xD4",
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, LPCWSTR, INT, LPINT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pGetTextExtentExPointI",
       "offset": 216,
-      "offset_hex": "0xd8",
-      "size": 4
+      "offset_hex": "0xD8",
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, const WORD *, INT, LPINT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pGetTextFace",
       "offset": 220,
-      "offset_hex": "0xdc",
-      "size": 4
+      "offset_hex": "0xDC",
+      "size": 4,
+      "type": "INT (*)(PHYSDEV, INT, LPWSTR)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pGetTextMetrics",
       "offset": 224,
-      "offset_hex": "0xe0",
-      "size": 4
+      "offset_hex": "0xE0",
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, TEXTMETRICW *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pGradientFill",
       "offset": 228,
-      "offset_hex": "0xe4",
-      "size": 4
+      "offset_hex": "0xE4",
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, TRIVERTEX *, ULONG, void *, ULONG, ULONG)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pIntersectClipRect",
       "offset": 232,
-      "offset_hex": "0xe8",
-      "size": 4
+      "offset_hex": "0xE8",
+      "size": 4,
+      "type": "INT (*)(PHYSDEV, INT, INT, INT, INT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pInvertRgn",
       "offset": 236,
-      "offset_hex": "0xec",
-      "size": 4
+      "offset_hex": "0xEC",
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, HRGN)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pLineTo",
       "offset": 240,
-      "offset_hex": "0xf0",
-      "size": 4
+      "offset_hex": "0xF0",
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, INT, INT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pModifyWorldTransform",
       "offset": 244,
-      "offset_hex": "0xf4",
-      "size": 4
+      "offset_hex": "0xF4",
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, const XFORM *, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pMoveTo",
       "offset": 248,
-      "offset_hex": "0xf8",
-      "size": 4
+      "offset_hex": "0xF8",
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, INT, INT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pOffsetClipRgn",
       "offset": 252,
-      "offset_hex": "0xfc",
-      "size": 4
+      "offset_hex": "0xFC",
+      "size": 4,
+      "type": "INT (*)(PHYSDEV, INT, INT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pOffsetViewportOrgEx",
       "offset": 256,
       "offset_hex": "0x100",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, INT, INT, POINT *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pOffsetWindowOrgEx",
       "offset": 260,
       "offset_hex": "0x104",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, INT, INT, POINT *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pPaintRgn",
       "offset": 264,
       "offset_hex": "0x108",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, HRGN)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pPatBlt",
       "offset": 268,
-      "offset_hex": "0x10c",
-      "size": 4
+      "offset_hex": "0x10C",
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, bitblt_coords *, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pPie",
       "offset": 272,
       "offset_hex": "0x110",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, INT, INT, INT, INT, INT, INT, INT, INT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pPolyBezier",
       "offset": 276,
       "offset_hex": "0x114",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, const POINT *, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pPolyBezierTo",
       "offset": 280,
       "offset_hex": "0x118",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, const POINT *, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pPolyDraw",
       "offset": 284,
-      "offset_hex": "0x11c",
-      "size": 4
+      "offset_hex": "0x11C",
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, const POINT *, const BYTE *, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pPolyPolygon",
       "offset": 288,
       "offset_hex": "0x120",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, const POINT *, const INT *, UINT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pPolyPolyline",
       "offset": 292,
       "offset_hex": "0x124",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, const POINT *, const DWORD *, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pPolygon",
       "offset": 296,
       "offset_hex": "0x128",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, const POINT *, INT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pPolyline",
       "offset": 300,
-      "offset_hex": "0x12c",
-      "size": 4
+      "offset_hex": "0x12C",
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, const POINT *, INT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pPolylineTo",
       "offset": 304,
       "offset_hex": "0x130",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, const POINT *, INT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pPutImage",
       "offset": 308,
       "offset_hex": "0x134",
-      "size": 4
+      "size": 4,
+      "type": "DWORD (*)(PHYSDEV, HRGN, BITMAPINFO *, const gdi_image_bits *, bitblt_coords *, bitblt_coords *, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pRealizeDefaultPalette",
       "offset": 312,
       "offset_hex": "0x138",
-      "size": 4
+      "size": 4,
+      "type": "UINT (*)(PHYSDEV)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pRealizePalette",
       "offset": 316,
-      "offset_hex": "0x13c",
-      "size": 4
+      "offset_hex": "0x13C",
+      "size": 4,
+      "type": "UINT (*)(PHYSDEV, HPALETTE, BOOL)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pRectangle",
       "offset": 320,
       "offset_hex": "0x140",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, INT, INT, INT, INT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pResetDC",
       "offset": 324,
       "offset_hex": "0x144",
-      "size": 4
+      "size": 4,
+      "type": "HDC (*)(PHYSDEV, const DEVMODEW *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pRestoreDC",
       "offset": 328,
       "offset_hex": "0x148",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, INT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pRoundRect",
       "offset": 332,
-      "offset_hex": "0x14c",
-      "size": 4
+      "offset_hex": "0x14C",
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, INT, INT, INT, INT, INT, INT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pSaveDC",
       "offset": 336,
       "offset_hex": "0x150",
-      "size": 4
+      "size": 4,
+      "type": "INT (*)(PHYSDEV)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pScaleViewportExtEx",
       "offset": 340,
       "offset_hex": "0x154",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, INT, INT, INT, INT, SIZE *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pScaleWindowExtEx",
       "offset": 344,
       "offset_hex": "0x158",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, INT, INT, INT, INT, SIZE *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pSelectBitmap",
       "offset": 348,
-      "offset_hex": "0x15c",
-      "size": 4
+      "offset_hex": "0x15C",
+      "size": 4,
+      "type": "HBITMAP (*)(PHYSDEV, HBITMAP)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pSelectBrush",
       "offset": 352,
       "offset_hex": "0x160",
-      "size": 4
+      "size": 4,
+      "type": "HBRUSH (*)(PHYSDEV, HBRUSH, const brush_pattern *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pSelectClipPath",
       "offset": 356,
       "offset_hex": "0x164",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, INT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pSelectFont",
       "offset": 360,
       "offset_hex": "0x168",
-      "size": 4
+      "size": 4,
+      "type": "HFONT (*)(PHYSDEV, HFONT, UINT *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pSelectPalette",
       "offset": 364,
-      "offset_hex": "0x16c",
-      "size": 4
+      "offset_hex": "0x16C",
+      "size": 4,
+      "type": "HPALETTE (*)(PHYSDEV, HPALETTE, BOOL)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pSelectPen",
       "offset": 368,
       "offset_hex": "0x170",
-      "size": 4
+      "size": 4,
+      "type": "HPEN (*)(PHYSDEV, HPEN, const brush_pattern *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pSetArcDirection",
       "offset": 372,
       "offset_hex": "0x174",
-      "size": 4
+      "size": 4,
+      "type": "INT (*)(PHYSDEV, INT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pSetBkColor",
       "offset": 376,
       "offset_hex": "0x178",
-      "size": 4
+      "size": 4,
+      "type": "COLORREF (*)(PHYSDEV, COLORREF)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pSetBkMode",
       "offset": 380,
-      "offset_hex": "0x17c",
-      "size": 4
+      "offset_hex": "0x17C",
+      "size": 4,
+      "type": "INT (*)(PHYSDEV, INT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pSetBoundsRect",
       "offset": 384,
       "offset_hex": "0x180",
-      "size": 4
+      "size": 4,
+      "type": "UINT (*)(PHYSDEV, RECT *, UINT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pSetDCBrushColor",
       "offset": 388,
       "offset_hex": "0x184",
-      "size": 4
+      "size": 4,
+      "type": "COLORREF (*)(PHYSDEV, COLORREF)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pSetDCPenColor",
       "offset": 392,
       "offset_hex": "0x188",
-      "size": 4
+      "size": 4,
+      "type": "COLORREF (*)(PHYSDEV, COLORREF)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pSetDIBitsToDevice",
       "offset": 396,
-      "offset_hex": "0x18c",
-      "size": 4
+      "offset_hex": "0x18C",
+      "size": 4,
+      "type": "INT (*)(PHYSDEV, INT, INT, DWORD, DWORD, INT, INT, UINT, UINT, LPCVOID, BITMAPINFO *, UINT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pSetDeviceClipping",
       "offset": 400,
       "offset_hex": "0x190",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(PHYSDEV, HRGN)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pSetDeviceGammaRamp",
       "offset": 404,
       "offset_hex": "0x194",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, LPVOID)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pSetLayout",
       "offset": 408,
       "offset_hex": "0x198",
-      "size": 4
+      "size": 4,
+      "type": "DWORD (*)(PHYSDEV, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pSetMapMode",
       "offset": 412,
-      "offset_hex": "0x19c",
-      "size": 4
+      "offset_hex": "0x19C",
+      "size": 4,
+      "type": "INT (*)(PHYSDEV, INT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pSetMapperFlags",
       "offset": 416,
-      "offset_hex": "0x1a0",
-      "size": 4
+      "offset_hex": "0x1A0",
+      "size": 4,
+      "type": "DWORD (*)(PHYSDEV, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pSetPixel",
       "offset": 420,
-      "offset_hex": "0x1a4",
-      "size": 4
+      "offset_hex": "0x1A4",
+      "size": 4,
+      "type": "COLORREF (*)(PHYSDEV, INT, INT, COLORREF)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pSetPolyFillMode",
       "offset": 424,
-      "offset_hex": "0x1a8",
-      "size": 4
+      "offset_hex": "0x1A8",
+      "size": 4,
+      "type": "INT (*)(PHYSDEV, INT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pSetROP2",
       "offset": 428,
-      "offset_hex": "0x1ac",
-      "size": 4
+      "offset_hex": "0x1AC",
+      "size": 4,
+      "type": "INT (*)(PHYSDEV, INT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pSetRelAbs",
       "offset": 432,
-      "offset_hex": "0x1b0",
-      "size": 4
+      "offset_hex": "0x1B0",
+      "size": 4,
+      "type": "INT (*)(PHYSDEV, INT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pSetStretchBltMode",
       "offset": 436,
-      "offset_hex": "0x1b4",
-      "size": 4
+      "offset_hex": "0x1B4",
+      "size": 4,
+      "type": "INT (*)(PHYSDEV, INT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pSetTextAlign",
       "offset": 440,
-      "offset_hex": "0x1b8",
-      "size": 4
+      "offset_hex": "0x1B8",
+      "size": 4,
+      "type": "UINT (*)(PHYSDEV, UINT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pSetTextCharacterExtra",
       "offset": 444,
-      "offset_hex": "0x1bc",
-      "size": 4
+      "offset_hex": "0x1BC",
+      "size": 4,
+      "type": "INT (*)(PHYSDEV, INT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pSetTextColor",
       "offset": 448,
-      "offset_hex": "0x1c0",
-      "size": 4
+      "offset_hex": "0x1C0",
+      "size": 4,
+      "type": "COLORREF (*)(PHYSDEV, COLORREF)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pSetTextJustification",
       "offset": 452,
-      "offset_hex": "0x1c4",
-      "size": 4
+      "offset_hex": "0x1C4",
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, INT, INT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pSetViewportExtEx",
       "offset": 456,
-      "offset_hex": "0x1c8",
-      "size": 4
+      "offset_hex": "0x1C8",
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, INT, INT, SIZE *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pSetViewportOrgEx",
       "offset": 460,
-      "offset_hex": "0x1cc",
-      "size": 4
+      "offset_hex": "0x1CC",
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, INT, INT, POINT *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pSetWindowExtEx",
       "offset": 464,
-      "offset_hex": "0x1d0",
-      "size": 4
+      "offset_hex": "0x1D0",
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, INT, INT, SIZE *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pSetWindowOrgEx",
       "offset": 468,
-      "offset_hex": "0x1d4",
-      "size": 4
+      "offset_hex": "0x1D4",
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, INT, INT, POINT *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pSetWorldTransform",
       "offset": 472,
-      "offset_hex": "0x1d8",
-      "size": 4
+      "offset_hex": "0x1D8",
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, const XFORM *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pStartDoc",
       "offset": 476,
-      "offset_hex": "0x1dc",
-      "size": 4
+      "offset_hex": "0x1DC",
+      "size": 4,
+      "type": "INT (*)(PHYSDEV, const DOCINFOW *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pStartPage",
       "offset": 480,
-      "offset_hex": "0x1e0",
-      "size": 4
+      "offset_hex": "0x1E0",
+      "size": 4,
+      "type": "INT (*)(PHYSDEV)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pStretchBlt",
       "offset": 484,
-      "offset_hex": "0x1e4",
-      "size": 4
+      "offset_hex": "0x1E4",
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV, bitblt_coords *, PHYSDEV, bitblt_coords *, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pStretchDIBits",
       "offset": 488,
-      "offset_hex": "0x1e8",
-      "size": 4
+      "offset_hex": "0x1E8",
+      "size": 4,
+      "type": "INT (*)(PHYSDEV, INT, INT, INT, INT, INT, INT, INT, INT, const void *, BITMAPINFO *, UINT, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pStrokeAndFillPath",
       "offset": 492,
-      "offset_hex": "0x1ec",
-      "size": 4
+      "offset_hex": "0x1EC",
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pStrokePath",
       "offset": 496,
-      "offset_hex": "0x1f0",
-      "size": 4
+      "offset_hex": "0x1F0",
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pUnrealizePalette",
       "offset": 500,
-      "offset_hex": "0x1f4",
-      "size": 4
+      "offset_hex": "0x1F4",
+      "size": 4,
+      "type": "BOOL (*)(HPALETTE)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pWidenPath",
       "offset": 504,
-      "offset_hex": "0x1f8",
-      "size": 4
+      "offset_hex": "0x1F8",
+      "size": 4,
+      "type": "BOOL (*)(PHYSDEV)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pD3DKMTCheckVidPnExclusiveOwnership",
       "offset": 508,
-      "offset_hex": "0x1fc",
-      "size": 4
+      "offset_hex": "0x1FC",
+      "size": 4,
+      "type": "NTSTATUS (*)(const D3DKMT_CHECKVIDPNEXCLUSIVEOWNERSHIP *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pD3DKMTSetVidPnSourceOwner",
       "offset": 512,
       "offset_hex": "0x200",
-      "size": 4
+      "size": 4,
+      "type": "NTSTATUS (*)(const D3DKMT_SETVIDPNSOURCEOWNER *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "wine_get_wgl_driver",
       "offset": 516,
       "offset_hex": "0x204",
-      "size": 4
+      "size": 4,
+      "type": "opengl_funcs *(*)(PHYSDEV, UINT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "wine_get_vulkan_driver",
       "offset": 520,
       "offset_hex": "0x208",
-      "size": 4
+      "size": 4,
+      "type": "const vulkan_funcs *(*)(PHYSDEV, UINT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "priority",
       "offset": 524,
-      "offset_hex": "0x20c",
-      "size": 4
+      "offset_hex": "0x20C",
+      "size": 4,
+      "type": "UINT"
     }
   ],
   "name": "gdi_dc_funcs",
+  "ordinal": 974,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 528
 }

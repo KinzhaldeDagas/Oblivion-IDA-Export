@@ -35,7 +35,7 @@
 0x6185FD: fsubr   qword ptr ds:0A309F0h
 0x618603: fdiv    dword ptr ds:0B36C78h
 0x618609: fstp    [esp+28h+var_10]
-0x61860D: call    GetRandomLargeInteger?
+0x61860D: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x618612: fld     [esp+28h+var_10]
 0x618616: mov     ecx, eax
 0x618618: mov     eax, 51EB851Fh
@@ -104,7 +104,7 @@
 0x6186E4: push    edx; int
 0x6186E5: push    1
 0x6186E7: mov     ecx, esi; this
-0x6186E9: call    Actor_GetFatigueFraction
+0x6186E9: call    Actor_GetFatigueFraction; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.
 0x6186EE: mov     eax, [esi]
 0x6186F0: mov     edx, [eax+284h]
 0x6186F6: push    ecx
@@ -180,7 +180,7 @@
 0x6187C2: fstp    [esp+24h+var_10]
 0x6187C6: fldz
 0x6187C8: fst     [esp+24h+var_C]
-0x6187CC: fstp    dword ptr [esp+24h+var_14]
+0x6187CC: fstp    [esp+24h+var_14]
 0x6187D0: call    edx
 0x6187D2: movzx   eax, byte ptr [eax+17Ch]
 0x6187D9: mov     edx, [esi]
@@ -192,7 +192,7 @@
 0x6187E9: mov     ecx, esi
 0x6187EB: call    eax
 0x6187ED: mov     ecx, eax
-0x6187EF: call    sub_616980
+0x6187EF: call    CombatController_SelectAttackSpellByMode
 0x6187F4: mov     edx, [esi]
 0x6187F6: mov     ebx, eax
 0x6187F8: mov     eax, [edx+330h]
@@ -213,7 +213,7 @@
 0x618828: mov     ecx, esi
 0x61882A: call    edx
 0x61882C: mov     ecx, eax
-0x61882E: call    sub_616980
+0x61882E: call    CombatController_SelectAttackSpellByMode
 0x618833: mov     ebx, eax
 0x618835: mov     eax, [esi]
 0x618837: mov     edx, [eax+330h]
@@ -268,7 +268,7 @@
 0x6188D4: call    eax
 0x6188D6: cmp     dword ptr [eax+80h], 0
 0x6188DD: jz      short loc_618948
-0x6188DF: fld     dword ptr [esp+20h+var_14]
+0x6188DF: fld     [esp+20h+var_14]
 0x6188E3: mov     edx, [esi]
 0x6188E5: fld     dword ptr [esp+20h+var_1C+4]
 0x6188E9: mov     ecx, esi
@@ -282,7 +282,7 @@
 0x618902: mov     ecx, [ecx]
 0x618904: add     ecx, 0Ch
 0x618907: call    EffectItemList_GetSchoolAV
-0x61890C: fld     dword ptr [esp+20h+var_14]
+0x61890C: fld     [esp+20h+var_14]
 0x618910: fstp    dword ptr [esp+20h+var_1C+4]
 0x618914: jmp     short loc_618925
 0x618916: call    eax
@@ -337,7 +337,7 @@
 0x6189AF: mov     ecx, esi
 0x6189B1: call    eax
 0x6189B3: mov     ecx, eax
-0x6189B5: call    sub_6162D0
+0x6189B5: call    CombatController_RemoveTarget
 0x6189BA: pop     edi
 0x6189BB: pop     esi
 0x6189BC: add     esp, 1Ch
@@ -351,4 +351,4 @@
 0x6189CE: mov     ecx, esi; int
 0x6189D0: pop     esi
 0x6189D1: add     esp, 1Ch
-0x6189D4: jmp     sub_5EAE70
+0x6189D4: jmp     sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.

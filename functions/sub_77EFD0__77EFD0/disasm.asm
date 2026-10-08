@@ -1,4 +1,4 @@
-0x77EFD0: cmp     dword ptr ds:0B428A8h, 0
+0x77EFD0: cmp     dword ptr ds:0B428A8h, 0; MoonSugarEffect decode: pixel analog of 77EFA0. Removes wrapper from shaderProgramFactory+0x1C by key from wrapper base vtable +0x04.
 0x77EFD7: jz      short locret_77EFFF
 0x77EFD9: mov     ecx, [esp+arg_0]
 0x77EFDD: test    ecx, ecx

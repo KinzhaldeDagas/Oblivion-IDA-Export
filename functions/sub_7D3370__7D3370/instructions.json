@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7D3370",
-    "line": "push    ebx",
+    "line": "push    ebx; Set per-source projected-light mode at +0xF4. A mode change may discard/release shadow map +0x114; this selector is not actor-only.",
     "mnemonic": "push",
     "size": 1
   },
@@ -121,13 +121,13 @@
   },
   {
     "ea": "0x7D33B2",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D33B3",
-    "line": "call    BSTextureManager_DiscardShadowMap",
+    "line": "call    BSTextureManager__ReturnFrustumShadowTexture; Oblivion frustum-shadow pool return. Finds the texture in the used pool, appends it to the unused shadowMaps list, removes the used-list node, and balances strong references.",
     "mnemonic": "call",
     "size": 5
   },

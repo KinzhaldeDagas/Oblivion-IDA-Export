@@ -1,4 +1,4 @@
-BSStringT *sub_A06A20()
+NiRTTI *sub_A06A20()
 {
-  return sub_70E220((BSStringT *)dword_B3E350, "NiColorData", (int)dword_B3F684);
+  return NiRTTI_Constructor(&stru_B3E350, "NiColorData", &stru_B3F684); /*0xa06a34*/
 }

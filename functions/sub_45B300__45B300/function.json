@@ -1,19 +1,36 @@
 {
-  "callees_count": 47,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 35,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_45B300",
+  "chunks": [
+    [
+      "0x45B300",
+      "0x45B669"
+    ],
+    [
+      "0x9AE2C0",
+      "0x9AE349"
+    ]
+  ],
+  "chunks_sha256": "8f15e9e8fef2fd1a8ac488b4dcc7b38b64a0b74c83e58ff9894a051b132abaac",
+  "comment_regular": "MEF v56 lifetime audit: bounded instruction scan452000..467000 and follow-up callees identify owner ID-array writers in ctor45B300, destroy453250, mappings45E0D0/45E180, load45E3D0 and reset462080. Other+74/+78 hits were reads or vtable displacements. Constructor wrapper suspends/invalidates auxiliary indices before/after native body with SEH finally; original prolog trampoline and EAX retained.",
+  "comment_repeatable": "Verified: TES_constr calls this initializer. Constructs the currentChangesMap at manager+0 and the interior/exterior maps; incomingChangesMap at +4 is populated per LoadGame and promoted by TESSaveLoadGame_ReconcileExistingChanges.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "TESSaveLoadGame_Initialize",
   "end_ea": "0x45B669",
+  "evidence_confidence": "Unknown",
   "flags": 21572,
   "has_pseudocode": true,
-  "name": "sub_45B300",
+  "name": "TESSaveLoadGame_Initialize",
   "segment": ".text",
   "sha256": "5a6e1457836fa9ea2d891cb1d9e365dba094e05f3aff19ee6a0b1b6e32575d97",
   "size": 873,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x45B300",
-  "type": "int __thiscall(int this)",
-  "xrefs_from_count": 298,
+  "total_chunk_size": 1010,
+  "type": "TESSaveLoadGame_SerializationView *__thiscall(TESSaveLoadGame_SerializationView *self)",
+  "xrefs_from_count": 357,
   "xrefs_to_count": 1
 }

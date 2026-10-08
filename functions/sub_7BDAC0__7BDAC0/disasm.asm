@@ -13,7 +13,7 @@
 0x7BDAE3: mov     edi, [esp+1Ch+arg_0]
 0x7BDAE7: push    4
 0x7BDAE9: mov     ecx, edi
-0x7BDAEB: call    NiNode_GetNiPropertyByID
+0x7BDAEB: call    NiNode_GetNiPropertyByID;
 0x7BDAF0: mov     esi, eax
 0x7BDAF2: test    esi, esi
 0x7BDAF4: jz      short loc_7BDB43
@@ -62,7 +62,7 @@
 0x7BDB6D: push    esi; a2
 0x7BDB6E: mov     ecx, edi; this
 0x7BDB70: mov     [esp+20h+var_4], 0FFFFFFFFh
-0x7BDB78: call    sub_405680
+0x7BDB78: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x7BDB7D: mov     edx, [esi]
 0x7BDB7F: mov     eax, [edx+58h]
 0x7BDB82: push    edi
@@ -94,3 +94,15 @@
 0x7BDBC2: pop     esi
 0x7BDBC3: add     esp, 10h
 0x7BDBC6: retn    4
+0x9CA7E0: mov     eax, [ebp-10h]
+0x9CA7E3: push    eax
+0x9CA7E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA7E9: pop     ecx
+0x9CA7EA: retn
+0x9CA7EB: mov     edx, [esp+arg_4]
+0x9CA7EF: lea     eax, [edx-0Ch]
+0x9CA7F2: mov     ecx, [edx-10h]
+0x9CA7F5: xor     ecx, eax
+0x9CA7F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA7FC: mov     eax, offset stru_AF2E8C
+0x9CA801: jmp     ___CxxFrameHandler3

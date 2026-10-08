@@ -1,19 +1,32 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x747E80",
+      "0x747F35"
+    ]
+  ],
+  "chunks_sha256": "24068c350b55998f29d3dd01860f3ceaf4b59d406782648d901e10237768a925",
+  "comment_regular": "MEF PLAN 2026-09-07: Assembly confirms thiscall(self,destination,count), RET8; EBP and EDI are saved registers assigned local values. fread uses elementSize1; returned EAX counts copied bytes. Short reads return fewer bytes, closed stream returns0; destination may remain partly/uninitialized. Cached builder must require exact count. Prior type retained in ledger.",
+  "comment_repeatable": "MEF SAVE AUDIT 2026-10-08: SR-1 standard native reader: closed/read-disabled returns0. Buffered/direct fread paths return actual count, clamp copied amount to bytes obtained, and leave destination tail untouched on short read. BSFile4302B0 only advances logical position by returned bytes. No exception/zero-fill guarantee established by this chain.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "NiFile_DirectRead",
   "end_ea": "0x747F35",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "NiFile_DirectRead",
   "segment": ".text",
   "sha256": "24068c350b55998f29d3dd01860f3ceaf4b59d406782648d901e10237768a925",
   "size": 181,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x747E80",
-  "type": "unsigned int __userpurge@<eax>(int this@<ecx>, FILE *@<ebp>, int@<edi>, char *Dst, size_t Count)",
+  "total_chunk_size": 181,
+  "type": "unsigned int __thiscall(void *self, void *destination, unsigned int byteCount)",
   "xrefs_from_count": 84,
   "xrefs_to_count": 3
 }

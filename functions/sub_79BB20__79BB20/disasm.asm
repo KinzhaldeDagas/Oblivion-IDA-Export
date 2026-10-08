@@ -1,4 +1,4 @@
-0x79BB20: push    0FFFFFFFFh
+0x79BB20: push    0FFFFFFFFh; Rotates the SFrondGuide range [first,middle) with [middle,last). Uses a greatest-common-divisor cycle decomposition and deep guide movement so embedded vertex-vector ownership remains valid.
 0x79BB22: push    offset SEH_79BB20
 0x79BB27: mov     eax, large fs:0
 0x79BB2D: push    eax
@@ -12,12 +12,12 @@
 0x79BB3C: push    eax
 0x79BB3D: lea     eax, [esp+54h+var_C]
 0x79BB41: mov     large fs:0, eax
-0x79BB47: mov     ecx, [esp+54h+arg_4]
-0x79BB4B: mov     ebp, [esp+54h+arg_0]
+0x79BB47: mov     ecx, [esp+54h+middle]
+0x79BB4B: mov     ebp, [esp+54h+first]
 0x79BB4F: sub     ecx, ebp
 0x79BB51: mov     eax, 2AAAAAABh
 0x79BB56: imul    ecx
-0x79BB58: mov     ecx, [esp+54h+arg_8]
+0x79BB58: mov     ecx, [esp+54h+last]
 0x79BB5C: sar     edx, 3
 0x79BB5F: mov     ebx, edx
 0x79BB61: sub     ecx, ebp
@@ -31,13 +31,13 @@
 0x79BB77: add     ecx, edx
 0x79BB79: test    ebx, ebx
 0x79BB7B: mov     eax, ecx
-0x79BB7D: mov     [esp+54h+arg_4], eax
+0x79BB7D: mov     [esp+54h+middle], eax
 0x79BB81: mov     edi, ebx
 0x79BB83: jz      short loc_79BB96
 0x79BB85: cdq
 0x79BB86: idiv    edi
-0x79BB88: mov     [esp+54h+arg_4], edi
-0x79BB8C: mov     eax, [esp+54h+arg_4]
+0x79BB88: mov     [esp+54h+middle], edi
+0x79BB8C: mov     eax, [esp+54h+middle]
 0x79BB90: test    edx, edx
 0x79BB92: mov     edi, edx
 0x79BB94: jnz     short loc_79BB85
@@ -52,12 +52,11 @@
 0x79BBB2: mov     [esp+54h+var_40], esi
 0x79BBB6: lea     ebp, [eax+ebp+14h]
 0x79BBBA: jmp     short loc_79BBC4
-0x79BBBC: align 10h
 0x79BBC0: mov     esi, [esp+54h+var_40]
 0x79BBC4: lea     edi, [ebp-14h]
-0x79BBC7: push    edi
-0x79BBC8: lea     ecx, [esp+58h+var_3C]
-0x79BBCC: call    sub_79AD70
+0x79BBC7: push    edi; source
+0x79BBC8: lea     ecx, [esp+58h+source]; this
+0x79BBCC: call    OB_stVector_SFrondVertex_CopyCtor_010201A0; Oblivion-authoritative copy construction for the 16-byte vector wrapper embedded at SFrondGuide+0x00. Allocates capacity for the exact source count and deep-copies 0x38-byte SFrondVertex records; scalar guide fields are copied separately by callers.
 0x79BBD1: fld     dword ptr [ebp-4]
 0x79BBD4: mov     cl, [ebp+4]
 0x79BBD7: fstp    [esp+54h+var_2C]
@@ -75,17 +74,17 @@
 0x79BC02: fld     dword ptr [ebp+10h]
 0x79BC05: fstp    [esp+54h+var_18]
 0x79BC09: lea     eax, [esi+ebp-14h]
-0x79BC0D: cmp     eax, [esp+54h+arg_8]
-0x79BC11: mov     esi, [esp+54h+arg_0]
+0x79BC0D: cmp     eax, [esp+54h+last]
+0x79BC11: mov     esi, [esp+54h+first]
 0x79BC15: mov     [esp+54h+var_4], 0
 0x79BC1D: jz      short loc_79BC21
 0x79BC1F: mov     esi, eax
 0x79BC21: lea     ecx, [ebp-14h]
 0x79BC24: cmp     esi, ecx
 0x79BC26: jz      short loc_79BC98
-0x79BC28: push    esi
-0x79BC29: mov     ecx, edi
-0x79BC2B: call    sub_79B160
+0x79BC28: push    esi; source
+0x79BC29: mov     ecx, edi; this
+0x79BC2B: call    OB_stVector_SFrondVertex_CopyAssign_010201A0; Oblivion-authoritative copy assignment for the SFrondGuide vertex vector at +0x00. Reuses existing 0x38-byte-element capacity when possible, otherwise frees/reserves and deep-copies the source range.
 0x79BC30: fld     dword ptr [esi+10h]
 0x79BC33: fstp    dword ptr [edi+10h]
 0x79BC36: fld     dword ptr [esi+14h]
@@ -102,7 +101,7 @@
 0x79BC57: mov     [edi+28h], eax
 0x79BC5A: mov     ecx, [esi+2Ch]
 0x79BC5D: mov     [edi+2Ch], ecx
-0x79BC60: mov     ecx, [esp+54h+arg_8]
+0x79BC60: mov     ecx, [esp+54h+last]
 0x79BC64: sub     ecx, esi
 0x79BC66: mov     eax, 2AAAAAABh
 0x79BC6B: imul    ecx
@@ -119,14 +118,14 @@
 0x79BC85: sub     ecx, eax
 0x79BC87: lea     esi, [ecx+ecx*2]
 0x79BC8A: shl     esi, 4
-0x79BC8D: add     esi, [esp+54h+arg_0]
+0x79BC8D: add     esi, [esp+54h+first]
 0x79BC91: lea     eax, [ebp-14h]
 0x79BC94: cmp     esi, eax
 0x79BC96: jnz     short loc_79BC28
-0x79BC98: lea     edx, [esp+54h+var_3C]
-0x79BC9C: push    edx
-0x79BC9D: mov     ecx, edi
-0x79BC9F: call    sub_79B160
+0x79BC98: lea     edx, [esp+54h+source]
+0x79BC9C: push    edx; source
+0x79BC9D: mov     ecx, edi; this
+0x79BC9F: call    OB_stVector_SFrondVertex_CopyAssign_010201A0; Oblivion-authoritative copy assignment for the SFrondGuide vertex vector at +0x00. Reuses existing 0x38-byte-element capacity when possible, otherwise frees/reserves and deep-copies the source range.
 0x79BCA4: fld     [esp+54h+var_2C]
 0x79BCA8: mov     al, [esp+54h+var_24]
 0x79BCAC: fstp    dword ptr [edi+10h]
@@ -136,7 +135,7 @@
 0x79BCBB: fstp    dword ptr [edi+14h]
 0x79BCBE: fld     [esp+54h+var_20]
 0x79BCC2: mov     [edi+18h], al
-0x79BCC5: mov     eax, [esp+54h+var_38]
+0x79BCC5: mov     eax, [esp+54h+source.begin]
 0x79BCC9: fstp    dword ptr [edi+1Ch]
 0x79BCCC: test    eax, eax
 0x79BCCE: fld     [esp+54h+var_1C]
@@ -148,13 +147,13 @@
 0x79BCE2: mov     [esp+54h+var_4], 0FFFFFFFFh
 0x79BCEA: jz      short loc_79BCF5
 0x79BCEC: push    eax
-0x79BCED: call    FormHeapFree
+0x79BCED: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x79BCF2: add     esp, 4
-0x79BCF5: mov     eax, [esp+54h+arg_4]
+0x79BCF5: mov     eax, [esp+54h+middle]
 0x79BCF9: sub     eax, 1
 0x79BCFC: sub     ebp, 30h ; '0'
 0x79BCFF: test    eax, eax
-0x79BD01: mov     [esp+54h+arg_4], eax
+0x79BD01: mov     [esp+54h+middle], eax
 0x79BD05: jg      loc_79BBC0
 0x79BD0B: mov     ecx, [esp+54h+var_C]
 0x79BD0F: mov     large fs:0, ecx
@@ -165,3 +164,12 @@
 0x79BD1A: pop     ebx
 0x79BD1B: add     esp, 40h
 0x79BD1E: retn
+0x9CC300: lea     ecx, [ebp-3Ch]; this
+0x9CC303: jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.
+0x9CC308: mov     edx, [esp+middle]
+0x9CC30C: lea     eax, [edx-44h]
+0x9CC30F: mov     ecx, [edx-48h]
+0x9CC312: xor     ecx, eax
+0x9CC314: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CC319: mov     eax, offset stru_AF5458
+0x9CC31E: jmp     ___CxxFrameHandler3

@@ -2,7 +2,7 @@
 0x782C61: push    edi
 0x782C62: mov     esi, ecx
 0x782C64: xor     edi, edi
-0x782C66: push    offset NiRefObject_objcount; lpAddend
+0x782C66: push    0B3FD64h; lpAddend
 0x782C6B: mov     dword ptr [esi], offset ??_7NiRefObject@@6B@; const NiRefObject::`vftable'
 0x782C71: mov     [esi+4], edi
 0x782C74: call    dword ptr ds:0A28078h
@@ -18,7 +18,7 @@
 0x782C96: mov     [esi+1Ch], edi
 0x782C99: mov     [esi+20h], edi
 0x782C9C: mov     [esi+24h], edi
-0x782C9F: call    sub_782BF0
+0x782C9F: call    sub_782BF0; MoonSugarEffect decode: NiD3DShaderProgram renderer attachment. Stores renderer at +0x20, AddRefs renderer device/resource at +0x1C, and caches renderer state pointer at +0x24.
 0x782CA4: pop     edi
 0x782CA5: mov     eax, esi
 0x782CA7: pop     esi

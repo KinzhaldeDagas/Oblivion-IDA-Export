@@ -1,15 +1,15 @@
-0x4E4080: push    0FFFFFFFFh
+0x4E4080: push    0FFFFFFFFh; TESObjectREFR vtable GenerateNiNode base implementation. Native ABI has no stack/x87 inputs and returns the generated NiNode*. Prior ST0/ST1/ST2 parameters were decompiler artifacts.
 0x4E4082: push    offset TESObjectREFR_GenerateNiNode_SEH
 0x4E4087: mov     eax, large fs:0
 0x4E408D: push    eax
 0x4E408E: sub     esp, 48h
-0x4E4091: push    ebx
-0x4E4092: push    ebp
-0x4E4093: push    esi
-0x4E4094: push    edi; int
+0x4E4091: push    ebx; float
+0x4E4092: push    ebp; float
+0x4E4093: push    esi; float
+0x4E4094: push    edi; float
 0x4E4095: mov     eax, ds:0B30AACh
 0x4E409A: xor     eax, esp
-0x4E409C: push    eax; int
+0x4E409C: push    eax; float
 0x4E409D: lea     eax, [esp+68h+var_C]
 0x4E40A1: mov     large fs:0, eax
 0x4E40A7: mov     ebp, ecx
@@ -25,7 +25,7 @@
 0x4E40C7: mov     ebx, [ebp+3Ch]
 0x4E40CA: xor     edi, edi
 0x4E40CC: cmp     ebx, edi
-0x4E40CE: mov     [esp+68h+var_50], ebx
+0x4E40CE: mov     [esp+68h+var_50], ebx; float
 0x4E40D2: jz      short loc_4E40DE
 0x4E40D4: lea     eax, [ebx+4]
 0x4E40D7: push    eax; lpAddend
@@ -46,9 +46,9 @@
 0x4E4107: lea     ecx, [esp+6Ch+var_50]; this
 0x4E410B: call    NiSmartPointer_Set??
 0x4E4110: mov     ebx, [esp+68h+var_50]
-0x4E4114: push    ebx
-0x4E4115: mov     ecx, ebp
-0x4E4117: call    sub_4D7D10
+0x4E4114: push    ebx; node
+0x4E4115: mov     ecx, ebp; this
+0x4E4117: call    MobileObject_SetNiNode; Verified MobileObject node setter: invokes the reference's pre-node-update virtual, releases any old NiNode reference, stores the new node in TESObjectREFR+0x40, and AddRefs it. Used by both normal Set3D and the queued distant-tree attach path.
 0x4E411C: push    ebx
 0x4E411D: call    sub_4D9800
 0x4E4122: add     esp, 4
@@ -62,7 +62,7 @@
 0x4E413E: test    al, al
 0x4E4140: jz      short loc_4E41C0
 0x4E4142: mov     [esp+68h+Src], edi
-0x4E4146: mov     word ptr [esp+68h+var_44], di
+0x4E4146: mov     word ptr [esp+68h+var_44], di; float
 0x4E414B: mov     word ptr [esp+68h+var_44+2], di
 0x4E4150: mov     ecx, [ebp+1Ch]
 0x4E4153: mov     eax, [ecx+0Ch]
@@ -89,7 +89,7 @@
 0x4E4192: mov     esi, [ebp+0]
 0x4E4195: push    eax
 0x4E4196: mov     ecx, ebp
-0x4E4198: mov     [esp+6Ch+var_4C], ebp
+0x4E4198: mov     [esp+6Ch+var_4C], ebp; float
 0x4E419C: add     esi, 274h
 0x4E41A2: call    sub_625850
 0x4E41A7: mov     edx, [esi]
@@ -102,7 +102,7 @@
 0x4E41BC: mov     esi, [esp+68h+var_54]
 0x4E41C0: push    offset dword_A7D0EC
 0x4E41C5: mov     ecx, ebx
-0x4E41C7: call    NiObjectNET_GetExtraData
+0x4E41C7: call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.
 0x4E41CC: cmp     eax, edi
 0x4E41CE: jz      short loc_4E41FA
 0x4E41D0: mov     eax, [eax+0Ch]
@@ -125,7 +125,7 @@
 0x4E4201: test    al, al
 0x4E4203: jz      short loc_4E4235
 0x4E4205: push    edi; Seed
-0x4E4206: call    GetRandomLargeInteger?
+0x4E4206: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x4E420B: cdq
 0x4E420C: mov     ecx, 3E8h
 0x4E4211: idiv    ecx
@@ -134,14 +134,14 @@
 0x4E421B: fdiv    qword ptr ds:0A309F0h
 0x4E4221: fstp    [esp+6Ch+var_54]
 0x4E4225: fld     [esp+6Ch+var_54]
-0x4E4229: fstp    [esp+6Ch+var_6C]; float
+0x4E4229: fstp    [esp+6Ch+easeOutTime]; float
 0x4E422C: push    ebx; int
 0x4E422D: call    sub_4DE3C0
 0x4E4232: add     esp, 8
 0x4E4235: cmp     byte ptr [esi+4], 21h ; '!'
 0x4E4239: jnz     short loc_4E4244
-0x4E423B: push    ebx
-0x4E423C: call    sub_480770
+0x4E423B: push    ebx; rootNode
+0x4E423C: call    NiNode_RemoveScbChildAlongFadeNodeChain; Standalone reference 3D generation strips Scb only when the base form type is WEAP (0x21). An AMMO-backed projectile proxy does not enter this WEAP-only branch.
 0x4E4241: add     esp, 4
 0x4E4244: mov     edx, [ebp+2Ch]
 0x4E4247: mov     [ebx+54h], edx
@@ -172,13 +172,13 @@
 0x4E428C: push    ecx
 0x4E428D: mov     ecx, ebx; this
 0x4E428F: fstp    [esp+70h+a2]; a2
-0x4E4292: call    NiAVObject_UpdateNiAVObject
+0x4E4292: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x4E4297: fldz
 0x4E4299: push    0; a3
 0x4E429B: push    ecx
 0x4E429C: mov     ecx, ebx; this
 0x4E429E: fstp    [esp+70h+a2]; a2
-0x4E42A1: call    NiAVObject_UpdateNiAVObject
+0x4E42A1: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x4E42A6: push    1
 0x4E42A8: push    1
 0x4E42AA: push    1
@@ -208,9 +208,9 @@
 0x4E42ED: add     esp, 8
 0x4E42F0: push    offset off_A3CEB0
 0x4E42F5: mov     ecx, ebx
-0x4E42F7: call    NiObjectNET_GetExtraData
+0x4E42F7: call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.
 0x4E42FC: push    eax
-0x4E42FD: push    offset dword_B35ACC
+0x4E42FD: push    offset stru_B35ACC
 0x4E4302: call    NiRTTI_Cast
 0x4E4307: add     esp, 8
 0x4E430A: test    eax, eax
@@ -232,7 +232,7 @@
 0x4E4336: push    eax
 0x4E4337: mov     ecx, ebx
 0x4E4339: mov     byte ptr [esp+6Ch+var_4], 0
-0x4E433E: call    NiNode_AddNiExtraData
+0x4E433E: call    NiObjectNET_AddExtraData; Pass269 ABI and ownership proof: NiObjectNET::AddExtraData consumes one stack argument with RET 4 and also expects owning object in ECX/EBX at this build's callsites. The plugin wrapper must not execute caller-side ADD ESP,4.
 0x4E4343: push    ebx
 0x4E4344: call    sub_7B8910
 0x4E4349: mov     eax, [ebp+1Ch]
@@ -254,25 +254,25 @@
 0x4E4382: call    edx
 0x4E4384: lea     esi, [ebp+44h]
 0x4E4387: mov     ecx, esi; this
-0x4E4389: mov     [esp+68h+var_54], esi
+0x4E4389: mov     [esp+68h+var_54], esi; float
 0x4E438D: call    ExtraDataList_GetTeleport
 0x4E4392: test    eax, eax
 0x4E4394: jz      short loc_4E43BF
 0x4E4396: mov     ecx, esi; this
 0x4E4398: call    ExtraDataList_GetTeleport
 0x4E439D: mov     ecx, eax
-0x4E439F: call    sub_42B460
+0x4E439F: call    sub_42B460; ExtraTeleport_GetTargetCell-style helper: returns parent cell of ExtraTeleport+0 target ref if present.
 0x4E43A4: test    eax, eax
 0x4E43A6: jz      short loc_4E43BF
 0x4E43A8: mov     ecx, esi; this
 0x4E43AA: call    ExtraDataList_GetTeleport
 0x4E43AF: push    1
 0x4E43B1: mov     ecx, eax
-0x4E43B3: call    sub_42B460
+0x4E43B3: call    sub_42B460; ExtraTeleport_GetTargetCell-style helper: returns parent cell of ExtraTeleport+0 target ref if present.
 0x4E43B8: mov     ecx, eax
 0x4E43BA: call    sub_4CCA60
 0x4E43BF: mov     ecx, ebp; int
-0x4E43C1: call    sub_4E3490
+0x4E43C1: call    Actor_SetupAnimationData; CustomAnimSupport decode: actor animation setup creates ActorAnimData, loads default animation data, then for living NPC/CREA actors calls 0x476080 to load actor-base KFFZ entries from <model-dir>\SpecialAnims.
 0x4E43C6: mov     ecx, ebp; this
 0x4E43C8: call    TESObjectREFR_GetScale
 0x4E43CD: fstp    [esp+68h+Src]
@@ -280,7 +280,7 @@
 0x4E43D5: mov     eax, [ebx]
 0x4E43D7: mov     edx, [eax+50h]
 0x4E43DA: fabs
-0x4E43DC: fstp    [esp+68h+Src]
+0x4E43DC: fstp    [esp+68h+Src]; float
 0x4E43E0: mov     ecx, ebx
 0x4E43E2: fld     [esp+68h+Src]
 0x4E43E6: fstp    dword ptr [ebx+60h]
@@ -315,10 +315,10 @@
 0x4E4436: call    edx
 0x4E4438: mov     ecx, [ebp+1Ch]
 0x4E443B: push    ebp
-0x4E443C: call    sub_528550
+0x4E443C: call    TESNPC_RefreshFaceGenForActor3D
 0x4E4441: mov     esi, [esp+68h+var_54]
 0x4E4445: mov     ecx, ebx; this
-0x4E4447: call    NiAVObject_InitializePropertyState
+0x4E4447: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x4E444C: mov     eax, [ebp+0]
 0x4E444F: mov     edx, [eax+190h]
 0x4E4455: mov     ecx, ebp
@@ -350,7 +350,7 @@
 0x4E4496: mov     ecx, [esp+68h+var_4C]
 0x4E449A: test    ecx, ecx
 0x4E449C: jz      short loc_4E44A3
-0x4E449E: call    sub_6258D0
+0x4E449E: call    sub_6258D0; BloodOnDeath decode 2026-05-26: vanilla creature/dismember helper resolves named Bip01 limb bones through the actor animation node manager. Confirmed anchors: Bip01 L UpperArm, Bip01 R UpperArm, Bip01 Head; use named Bip01 runtime bones for per-limb death blood.
 0x4E44A3: mov     eax, [ebp+0]
 0x4E44A6: mov     edx, [eax+198h]
 0x4E44AC: push    0
@@ -366,11 +366,11 @@
 0x4E44C9: jz      loc_4E4605
 0x4E44CF: mov     eax, [ebp+0]
 0x4E44D2: mov     edx, [eax+164h]
-0x4E44D8: push    20h ; ' '
+0x4E44D8: push    20h ; ' '; encodedKey
 0x4E44DA: mov     ecx, ebp
 0x4E44DC: call    edx
-0x4E44DE: mov     ecx, eax
-0x4E44E0: call    sub_470D00
+0x4E44DE: mov     ecx, eax; this
+0x4E44E0: call    ActorAnimData_HasAnimKey; Returns whether ActorAnimData +0x9C contains an entry for the encoded animation key. Presence test only; it does not select or play a sequence.
 0x4E44E5: test    al, al
 0x4E44E7: jz      loc_4E4605
 0x4E44ED: mov     eax, [ebp+0]
@@ -379,11 +379,11 @@
 0x4E44F8: call    edx
 0x4E44FA: fldz
 0x4E44FC: push    ecx
-0x4E44FD: fstp    [esp+6Ch+var_6C]; float
+0x4E44FD: fstp    [esp+6Ch+easeOutTime]; easeOutTime
 0x4E4500: mov     esi, eax
-0x4E4502: push    5; int
-0x4E4504: mov     ecx, esi
-0x4E4506: call    sub_470FC0
+0x4E4502: push    5; slot
+0x4E4504: mov     ecx, esi; this
+0x4E4506: call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.
 0x4E450B: fldz
 0x4E450D: push    0FFFFFFFFh
 0x4E450F: push    ecx
@@ -392,10 +392,10 @@
 0x4E4515: push    20h ; ' '
 0x4E4517: push    0
 0x4E4519: mov     ecx, esi
-0x4E451B: call    sub_474AB0
-0x4E4520: push    0
-0x4E4522: mov     ecx, esi
-0x4E4524: call    sub_4706E0
+0x4E451B: call    ActorAnimData_RestorePlaySavedSlot; Restores one saved active slot by resolving the encoded key in +0x9C, selecting its sequence entry, replaying it, and restoring the saved slot clock/state.
+0x4E4520: push    0; slotSelector
+0x4E4522: mov     ecx, esi; this
+0x4E4524: call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].
 0x4E4529: mov     edi, eax
 0x4E452B: test    edi, edi
 0x4E452D: jz      loc_4E4605
@@ -412,36 +412,36 @@
 0x4E4550: fld     [esp+70h+Src]
 0x4E4554: fstp    dword ptr [edi+48h]
 0x4E4557: fld     dword ptr [edi+30h]
-0x4E455A: fstp    [esp+70h+Src]
+0x4E455A: fstp    [esp+70h+Src]; float
 0x4E455E: fld     [esp+70h+Src]
-0x4E4562: fstp    [esp+70h+var_6C]; float
+0x4E4562: fstp    [esp+70h+easeOutTime]; explicitTimeOrMinusOne
 0x4E4566: fldz
-0x4E4568: fstp    [esp+70h+a2]; float
-0x4E456B: push    ebp; int
-0x4E456C: call    sub_476D10
+0x4E4568: fstp    [esp+70h+a2]; deltaTime
+0x4E456B: push    ebp; ownerActor
+0x4E456C: call    ActorAnimData_Update; Oblivion ActorAnimData scheduler with exact native ABI: this in ECX plus three 4-byte stack arguments, retn 0x0C. ownerActor is at [EBP+8]; all surveyed callers pass the owning Actor/Player, but the native body never dereferences it, so an interior hook's use of that value is a caller-derived contract. deltaTime at [EBP+0x0C] advances ActorAnimData time +0x94 and sequence offsets. explicitTimeOrMinusOne at [EBP+0x10] uses -1.0 for normal ticking; any other value drives an explicit-time scene update/early return. The function drains deferred KF models, maintains power/idle state, samples five slots, and advances required-note templates (class 4 terminal index 3; class 7 terminal index 4).
 0x4E4571: push    ebp; a2
 0x4E4572: mov     ecx, esi; this
-0x4E4574: call    sub_474510
+0x4E4574: call    ActorAnimData_ApplyToActor; Applies actor-dependent scene/node state through 0x471C00 and then calls ActorAnimData::ApplyActorAnimData. Called during NiNode generation, animation updates, body toggles, resurrection/fast travel, and first-person transitions.
 0x4E4579: jmp     loc_4E4605
 0x4E457E: mov     edi, [edi+68h]
-0x4E4581: push    1; ArgList
-0x4E4583: mov     ecx, edi
-0x4E4585: call    sub_51AE20
+0x4E4581: push    1; noteIndex
+0x4E4583: mov     ecx, edi; this
+0x4E4585: call    TESAnimGroup_GetRequiredNoteTime; Returns a 32-bit required-note time from TESAnimGroup +0x10 by zero-based note index after validating count, storage, and QNaN. Invalid entries report an error and return 0.0f.
 0x4E458A: sub     esp, 8
-0x4E458D: fstp    [esp+70h+var_6C]; float
+0x4E458D: fstp    [esp+70h+easeOutTime]; explicitTimeOrMinusOne
 0x4E4591: mov     ecx, esi; this
 0x4E4593: fldz
-0x4E4595: fstp    [esp+70h+a2]; float
-0x4E4598: push    ebp; int
-0x4E4599: call    sub_476D10
+0x4E4595: fstp    [esp+70h+a2]; deltaTime
+0x4E4598: push    ebp; ownerActor
+0x4E4599: call    ActorAnimData_Update; Oblivion ActorAnimData scheduler with exact native ABI: this in ECX plus three 4-byte stack arguments, retn 0x0C. ownerActor is at [EBP+8]; all surveyed callers pass the owning Actor/Player, but the native body never dereferences it, so an interior hook's use of that value is a caller-derived contract. deltaTime at [EBP+0x0C] advances ActorAnimData time +0x94 and sequence offsets. explicitTimeOrMinusOne at [EBP+0x10] uses -1.0 for normal ticking; any other value drives an explicit-time scene update/early return. The function drains deferred KF models, maintains power/idle state, samples five slots, and advances required-note templates (class 4 terminal index 3; class 7 terminal index 4).
 0x4E459E: push    ebp; a2
 0x4E459F: mov     ecx, esi; this
-0x4E45A1: call    sub_474510
+0x4E45A1: call    ActorAnimData_ApplyToActor; Applies actor-dependent scene/node state through 0x471C00 and then calls ActorAnimData::ApplyActorAnimData. Called during NiNode generation, animation updates, body toggles, resurrection/fast travel, and first-person transitions.
 0x4E45A6: fld     dword ptr [ebp+28h]
 0x4E45A9: push    ecx
-0x4E45AA: lea     ecx, [esp+6Ch+var_30]
-0x4E45AE: fstp    [esp+6Ch+var_6C]; float
-0x4E45B1: call    NiMatrix33_InitRotationTransform
+0x4E45AA: lea     ecx, [esp+6Ch+var_30]; this
+0x4E45AE: fstp    [esp+6Ch+easeOutTime]; angleZ
+0x4E45B1: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x4E45B6: fldz
 0x4E45B8: fst     [esp+68h+Src]
 0x4E45BC: lea     eax, [esp+68h+Src]
@@ -467,7 +467,7 @@
 0x4E45F7: push    eax; int
 0x4E45F8: push    ebx; int
 0x4E45F9: mov     [esp+7Ch+var_40], edx
-0x4E45FD: call    sub_8AB440
+0x4E45FD: call    sub_8AB440; ODismemberment: recursive post-death Havok force/blend helper. Finds bhkBlendCollisionObject, bhkBlendController, bhkForceController, and bhkConstraint objects; suitable only for existing collision-enabled subtrees, not arbitrary detached art.
 0x4E4602: add     esp, 14h
 0x4E4605: mov     edx, [ebp+0]
 0x4E4608: mov     eax, [edx+198h]
@@ -523,3 +523,19 @@
 0x4E468B: pop     ebx
 0x4E468C: add     esp, 54h
 0x4E468F: retn
+0x9B5C90: lea     ecx, [ebp-50h]; slot
+0x9B5C93: jmp     NiPointerSlot_Release
+0x9B5C98: lea     ecx, [ebp-48h]; void *
+0x9B5C9B: jmp     BSStringT_Clear
+0x9B5CA0: mov     eax, [ebp-48h]
+0x9B5CA3: push    eax
+0x9B5CA4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B5CA9: pop     ecx
+0x9B5CAA: retn
+0x9B5CAB: mov     edx, [esp+arg_4]
+0x9B5CAF: lea     eax, [edx-58h]
+0x9B5CB2: mov     ecx, [edx-5Ch]
+0x9B5CB5: xor     ecx, eax
+0x9B5CB7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B5CBC: mov     eax, offset stru_AE0C60
+0x9B5CC1: jmp     ___CxxFrameHandler3

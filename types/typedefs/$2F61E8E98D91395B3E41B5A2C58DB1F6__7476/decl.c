@@ -1,1 +1,30 @@
-$2F61E8E98D91395B3E41B5A2C58DB1F6
+struct $2F61E8E98D91395B3E41B5A2C58DB1F6
+{
+WCHAR_0 dmDeviceName[32];
+WORD dmSpecVersion;
+WORD dmDriverVersion;
+WORD dmSize;
+WORD dmDriverExtra;
+DWORD dmFields;
+$F6AE2C8209B3F8FB4E265F03FC89D224 u1;
+__int16 dmColor;
+__int16 dmDuplex;
+__int16 dmYResolution;
+__int16 dmTTOption;
+__int16 dmCollate;
+WCHAR_0 dmFormName[32];
+WORD dmLogPixels;
+DWORD dmBitsPerPel;
+DWORD dmPelsWidth;
+DWORD dmPelsHeight;
+$D1F703E461D6815F25454A92424A7B4A u2;
+DWORD dmDisplayFrequency;
+DWORD dmICMMethod;
+DWORD dmICMIntent;
+DWORD dmMediaType;
+DWORD dmDitherType;
+DWORD dmReserved1;
+DWORD dmReserved2;
+DWORD dmPanningWidth;
+DWORD dmPanningHeight;
+};

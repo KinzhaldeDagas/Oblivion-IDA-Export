@@ -1,19 +1,32 @@
 {
-  "callees_count": 16,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x668B30",
+      "0x668C27"
+    ]
+  ],
+  "chunks_sha256": "d30a957f1a045dcc5ea6cf7a811dfbece3a3ea06d14d3925ed57f280f6e6df7e",
+  "comment_regular": "Normal skill-use award levels only when accumulated progress is strictly greater than the requirement, consumes at most one requirement per call, and carries all excess progress (including the 99->100 transition).",
+  "comment_repeatable": "Normal skill-use award levels only when accumulated progress is strictly greater than the requirement, consumes at most one requirement per call, and carries all excess progress (including the 99->100 transition).",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "Player_IncreaseSkillExperience?",
+  "display_name": "Player_AddSkillUseProgress",
   "end_ea": "0x668C27",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "Player_IncreaseSkillExperience?",
+  "name": "Player_AddSkillUseProgress",
   "segment": ".text",
   "sha256": "d30a957f1a045dcc5ea6cf7a811dfbece3a3ea06d14d3925ed57f280f6e6df7e",
   "size": 247,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x668B30",
-  "type": "int __userpurge@<eax>(int@<ecx>, char bl0@<bl>, int@<edi>, double@<st2>, double@<st1>, int, float, float *, char)",
+  "total_chunk_size": 247,
+  "type": "void __thiscall(PlayerCharacter *this, SkillActorValue actorValue, float progressDelta, TESSkill_RecordView *skill, bool suppressFeedbackAndDeferredTracking)",
   "xrefs_from_count": 100,
   "xrefs_to_count": 1
 }

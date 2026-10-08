@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7F2130",
+      "0x7F214D"
+    ]
+  ],
+  "chunks_sha256": "568287eabcf7571072879ae2815f785a5fddf6b476081454710e9f8b01b1c85a",
+  "comment_regular": "PPLighting-property virtual +0xAC. Writes STSPData.streamData and vertex-count/ownership gate through property +0xF0.\n\nSpeedTreeShaderPPLightingProperty STSPData setter: writes data pointer +0x08 and count word +0x0C in the referenced STSPData.",
+  "comment_repeatable": "SpeedTreeShaderPPLightingProperty STSPData setter: writes data pointer +0x08 and count word +0x0C in the referenced STSPData.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7F2130",
+  "display_name": "OB_SpeedTreeShaderPPLightingProperty_SetSTSPData_010201A0",
   "end_ea": "0x7F214D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7F2130",
+  "name": "OB_SpeedTreeShaderPPLightingProperty_SetSTSPData_010201A0",
   "segment": ".text",
   "sha256": "568287eabcf7571072879ae2815f785a5fddf6b476081454710e9f8b01b1c85a",
   "size": 29,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7F2130",
-  "type": "int __thiscall(_DWORD *this, int, __int16)",
+  "total_chunk_size": 29,
+  "type": "int __thiscall(OB_SpeedTreeShaderPPLightingProperty_010201A0 *this, int streamData, unsigned __int16 vertexCount)",
   "xrefs_from_count": 8,
   "xrefs_to_count": 2
 }

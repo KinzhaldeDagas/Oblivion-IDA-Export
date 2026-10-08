@@ -1,4 +1,4 @@
-0x8AB440: push    ebp
+0x8AB440: push    ebp; ODismemberment: recursive post-death Havok force/blend helper. Finds bhkBlendCollisionObject, bhkBlendController, bhkForceController, and bhkConstraint objects; suitable only for existing collision-enabled subtrees, not arbitrary detached art.
 0x8AB441: mov     ebp, esp
 0x8AB443: and     esp, 0FFFFFFF0h
 0x8AB446: sub     esp, 54h
@@ -16,7 +16,7 @@
 0x8AB467: mov     [esp+60h+var_48], 0
 0x8AB46F: jz      loc_8AB6F5
 0x8AB475: push    ebx
-0x8AB476: call    sub_497420
+0x8AB476: call    NiAVObject_GetBhkBlendCollisionObject; ODismemberment: authoritative blend-collision getter. Reuses NiAVObject_GetBhkCollisionObject and accepts objects whose class chain includes bhkBlendCollisionObject.
 0x8AB47B: mov     edi, eax
 0x8AB47D: add     esp, 4
 0x8AB480: test    edi, edi
@@ -39,7 +39,7 @@
 0x8AB4AD: shr     eax, 8
 0x8AB4B0: and     eax, 1Fh
 0x8AB4B3: fld     dword ptr ds:0B2EEE8h[eax*4]
-0x8AB4BA: push    offset dword_BA7F3C
+0x8AB4BA: push    0BA7F3Ch
 0x8AB4BF: mov     ecx, ebx
 0x8AB4C1: fstp    [esp+64h+var_50]
 0x8AB4C5: call    sub_700010
@@ -110,7 +110,7 @@
 0x8AB5AA: fstp    [esp+64h+var_64]
 0x8AB5AD: call    edx
 0x8AB5AF: mov     ebx, [esp+60h+var_44]
-0x8AB5B3: push    offset unk_BA8000
+0x8AB5B3: push    0BA8000h
 0x8AB5B8: mov     ecx, ebx
 0x8AB5BA: call    sub_700010
 0x8AB5BF: test    eax, eax
@@ -133,7 +133,7 @@
 0x8AB5F8: add     esp, 8
 0x8AB5FB: push    eax; int
 0x8AB5FC: push    ebx; int
-0x8AB5FD: call    sub_8B8590
+0x8AB5FD: call    sub_8B8590; ODismemberment: creates or updates a bhkForceController on a NiObjectNET target, derives scaled force from the provided vector, and starts the controller.
 0x8AB602: add     esp, 0Ch
 0x8AB605: jmp     loc_8AB69D
 0x8AB60A: mov     eax, [edi]
@@ -144,7 +144,7 @@
 0x8AB615: call    edx
 0x8AB617: jmp     loc_8AB69D
 0x8AB61C: push    ebx
-0x8AB61D: call    sub_47FAC0
+0x8AB61D: call    NiAVObject_GetBhkCollisionObject; ODismemberment: authoritative NiAVObject collision getter. Reads NiAVObject+0xA8 and accepts objects whose class chain includes bhkCollisionObject.
 0x8AB622: add     esp, 4
 0x8AB625: test    eax, eax
 0x8AB627: jz      short loc_8AB69D
@@ -212,7 +212,7 @@
 0x8AB6DC: push    ebx; int
 0x8AB6DD: push    ecx; int
 0x8AB6DE: push    eax; int
-0x8AB6DF: call    sub_8AB440
+0x8AB6DF: call    sub_8AB440; ODismemberment: recursive post-death Havok force/blend helper. Finds bhkBlendCollisionObject, bhkBlendController, bhkForceController, and bhkConstraint objects; suitable only for existing collision-enabled subtrees, not arbitrary detached art.
 0x8AB6E4: movzx   eax, word ptr [edi+0B6h]
 0x8AB6EB: add     esi, 1
 0x8AB6EE: add     esp, 14h

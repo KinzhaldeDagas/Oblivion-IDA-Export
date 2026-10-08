@@ -1,19 +1,32 @@
 {
-  "callees_count": 25,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 0,
+  "chunks": [
+    [
+      "0x9A97B0",
+      "0x9A9900"
+    ]
+  ],
+  "chunks_sha256": "e650780f5faa0b4a7b0b0e240c48db0c57f77120652dd99261322468f135f28b",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "Verified 2026-09-30 with Oblivion x86 and comparative Fallout symbols: this is SortByEnabled, not a constant-map reset. Map+10 is the entry pointer array; +14 capacity, +16 end/size, +18 live count and +1A grow are ushort fields of the array at+0C. For size>1 it swaps byte+8==1 entries into the earliest disabled position using 9A9670 and temporary NiPointer references. Enabled relative order is preserved for canonical bool flags; disabled-tail order is not stable, and later selector re-enabling can change overlapping-write order. Outer null entries are skipped, but the inner disabled search dereferences its entry. Fallout 8222E5C8 SortByEnabled calls 8222E5F8 SortListByEnabled for two arrays and uses nonzero enabled tests/direct pointer swaps; Oblivion has one array, outer equality-to-1 and explicit reference accounting. Base vtable AB2A4C and VS/PS tables AB2BAC/AB297C use this method at+48.\nDX11 map permutation audit 2026-10-01: 9A97B0 retains the current entry in a temporary NiPointer while9A9670 exchanges two nonnull array positions. With valid owning-array reference counts, neither displaced entry reaches zero and the completed sort preserves the pointer multiset, each entry reference count, array end/live/capacity/grow. This permits a final bulk permutation with unchanged ownership under an exclusive native map-write/lifetime interval; no native AddRef/Release/destructor calls may run under a private metadata gate. A partial write must roll back all attempted slots before the interval is released. This equivalence does not cover active-map pointer replacement, arbitrary insertion/removal or untracked concurrent readers.\nDX11 writer ABI audit 2026-10-01: thiscall/zero arguments/RET0 SortByEnabled mutates entry ordering. This is a metadata writer even when it does not allocate/free. A completed sort must revoke older bucket capture epochs; a new read phase may then recapture.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 10,
-  "display_name": "sub_9A97B0",
+  "display_name": "NiD3DShaderConstantMap_SortByEnabled",
   "end_ea": "0x9A9900",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_9A97B0",
+  "name": "NiD3DShaderConstantMap_SortByEnabled",
   "segment": ".text",
   "sha256": "e650780f5faa0b4a7b0b0e240c48db0c57f77120652dd99261322468f135f28b",
   "size": 336,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x9A97B0",
-  "type": "void __thiscall(unsigned __int16 *this)",
+  "total_chunk_size": 336,
+  "type": "void __thiscall(NiD3DShaderConstantMap *this)",
   "xrefs_from_count": 151,
   "xrefs_to_count": 3
 }

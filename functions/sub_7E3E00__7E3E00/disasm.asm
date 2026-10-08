@@ -29,12 +29,12 @@
 0x7E3E4C: lea     ebx, [edi+84h]
 0x7E3E52: push    ebp
 0x7E3E53: mov     ebp, [eax]
-0x7E3E55: push    ecx; a2
+0x7E3E55: push    ecx; texture
 0x7E3E56: mov     ecx, ebp; this
-0x7E3E58: call    sub_76C910
-0x7E3E5D: push    3
-0x7E3E5F: mov     ecx, ebp
-0x7E3E61: call    sub_7715E0
+0x7E3E58: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
+0x7E3E5D: push    3; preset
+0x7E3E5F: mov     ecx, ebp; this
+0x7E3E61: call    NiD3DTextureStage_ApplyAddressModePreset; Apply one native address-preset row to a NiD3DTextureStage: D3DSAMP_ADDRESSU (1) and D3DSAMP_ADDRESSV (2). Lighting30 SimpleShadow uses preset 0 = CLAMP/CLAMP.
 0x7E3E66: fld     dword ptr [esi+0F8h]
 0x7E3E6C: fstp    dword ptr [edi+0B4h]
 0x7E3E72: fld     dword ptr [esi+84h]
@@ -121,67 +121,67 @@
 0x7E4034: mov     ds:0B4600Ch, eax
 0x7E4039: mov     edx, [esi+6Ch]
 0x7E403C: shl     eax, 5
-0x7E403F: push    eax; Size
+0x7E403F: push    eax; byteCount
 0x7E4040: mov     eax, [edi+80h]
-0x7E4046: push    edx; Src
-0x7E4047: push    eax; Dst
-0x7E4048: call    _memcpy
+0x7E4046: push    edx; source
+0x7E4047: push    eax; destination
+0x7E4048: call    _memcpy;
 0x7E404D: mov     ebp, [ebx]
 0x7E404F: mov     ecx, [esi+0FCh]
 0x7E4055: add     esp, 0Ch
 0x7E4058: cmp     dword ptr [ebp+30h], 0
 0x7E405C: mov     [esp+10h+arg_C], ecx
 0x7E4060: jnz     short loc_7E406A
-0x7E4062: call    sub_772DF0
+0x7E4062: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x7E4067: mov     [ebp+30h], eax
 0x7E406A: mov     edx, [esp+10h+arg_C]
 0x7E406E: mov     ecx, [ebp+30h]
 0x7E4071: push    0
 0x7E4073: push    edx
 0x7E4074: push    13h
-0x7E4076: call    sub_772CD0
+0x7E4076: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x7E407B: mov     ebp, [ebx]
 0x7E407D: cmp     dword ptr [ebp+30h], 0
 0x7E4081: mov     eax, [esi+100h]
 0x7E4087: mov     [esp+10h+arg_C], eax
 0x7E408B: jnz     short loc_7E4095
-0x7E408D: call    sub_772DF0
+0x7E408D: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x7E4092: mov     [ebp+30h], eax
 0x7E4095: mov     ecx, [esp+10h+arg_C]
 0x7E4099: push    0
 0x7E409B: push    ecx
 0x7E409C: mov     ecx, [ebp+30h]
 0x7E409F: push    14h
-0x7E40A1: call    sub_772CD0
+0x7E40A1: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x7E40A6: mov     ebp, [ebx]
 0x7E40A8: cmp     dword ptr [ebp+30h], 0
 0x7E40AC: mov     edx, [esi+104h]
 0x7E40B2: mov     [esp+10h+arg_C], edx
 0x7E40B6: jnz     short loc_7E40C0
-0x7E40B8: call    sub_772DF0
+0x7E40B8: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x7E40BD: mov     [ebp+30h], eax
 0x7E40C0: mov     eax, [esp+10h+arg_C]
 0x7E40C4: mov     ecx, [ebp+30h]
 0x7E40C7: push    1
 0x7E40C9: push    eax
 0x7E40CA: push    0ABh ; '«'
-0x7E40CF: call    sub_772CD0
+0x7E40CF: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x7E40D4: mov     ebp, [ebx]
 0x7E40D6: cmp     dword ptr [ebp+30h], 0
 0x7E40DA: mov     esi, [esi+108h]
 0x7E40E0: jnz     short loc_7E40EA
-0x7E40E2: call    sub_772DF0
+0x7E40E2: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x7E40E7: mov     [ebp+30h], eax
 0x7E40EA: mov     ecx, [ebp+30h]
 0x7E40ED: push    0
 0x7E40EF: push    esi
 0x7E40F0: push    17h
-0x7E40F2: call    sub_772CD0
+0x7E40F2: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x7E40F7: mov     ecx, [edi+38h]
-0x7E40FA: push    ebx
-0x7E40FB: push    ecx
-0x7E40FC: lea     ecx, [edi+40h]
-0x7E40FF: call    sub_76CE40
+0x7E40FA: push    ebx; value
+0x7E40FB: push    ecx; index
+0x7E40FC: lea     ecx, [edi+40h]; this
+0x7E40FF: call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.
 0x7E4104: add     dword ptr [edi+38h], 1
 0x7E4108: pop     ebp
 0x7E4109: pop     edi

@@ -1,18 +1,31 @@
 {
-  "callees_count": 17,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x42C970",
+      "0x42CA54"
+    ]
+  ],
+  "chunks_sha256": "dfe1d5db7a02d997d9c9097a1d0ddfcc47ac5cfe494fa418e053a59a9ed77dff",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "MEF PERF 2026-09-07: Reachability qualification for PERF-1: WinMain calls this retained-name discard pass at40EB72. It applies INI/header retention policy and can call42C0D0 with keepOffsets=false, clearing cached bit20h and both filename owners. Thus streaming with neither table retained is an intentional reachable configuration, not just a hypothetical branch.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 4,
   "display_name": "ArchiveManager_DisacrdAllBSARetainedFilenames",
   "end_ea": "0x42CA54",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "ArchiveManager_DisacrdAllBSARetainedFilenames",
   "segment": ".text",
   "sha256": "dfe1d5db7a02d997d9c9097a1d0ddfcc47ac5cfe494fa418e053a59a9ed77dff",
   "size": 228,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x42C970",
+  "total_chunk_size": 228,
   "type": "void()",
   "xrefs_from_count": 92,
   "xrefs_to_count": 1

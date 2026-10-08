@@ -55,7 +55,7 @@
 0x4FABD0: movsx   eax, dx
 0x4FABD3: push    ebp; int
 0x4FABD4: push    eax; int
-0x4FABD5: call    Script_GetRefVariableByIndex
+0x4FABD5: call    Script_GetRefVariableByIndex; Hot Reload OBSE decode: Script ref-variable lookup. Uses globals B361B0/B361B4/B361B8/B09E1C as a last-ref cache.
 0x4FABDA: test    eax, eax
 0x4FABDC: mov     [esp+34h+var_18], eax
 0x4FABE0: jz      loc_4FADDE
@@ -118,12 +118,12 @@
 0x4FAC7A: add     eax, 0FFFFFFCFh
 0x4FAC7D: cmp     eax, 2
 0x4FAC80: ja      short loc_4FACCD
-0x4FAC82: lea     ecx, [ebp+44h]
-0x4FAC85: call    ExtraDataList_GetReferencePointer
+0x4FAC82: lea     ecx, [ebp+44h]; this
+0x4FAC85: call    ExtraDataList_GetReferencePointer; Return the TESObjectREFR payload from ExtraReferencePointer type 0x22, or null. Provenance only: callers still select EntryData by exact TESForm first.
 0x4FAC8A: test    eax, eax
 0x4FAC8C: jz      short loc_4FACC2
-0x4FAC8E: lea     ecx, [ebp+44h]
-0x4FAC91: call    ExtraDataList_GetReferencePointer
+0x4FAC8E: lea     ecx, [ebp+44h]; this
+0x4FAC91: call    ExtraDataList_GetReferencePointer; Return the TESObjectREFR payload from ExtraReferencePointer type 0x22, or null. Provenance only: callers still select EntryData by exact TESForm first.
 0x4FAC96: mov     edx, [ebp+0]
 0x4FAC99: mov     [esp+34h+var_10], eax
 0x4FAC9D: mov     eax, [ebp+0Ch]
@@ -190,7 +190,7 @@
 0x4FAD3D: add     eax, 4
 0x4FAD40: push    ecx; a1
 0x4FAD41: mov     [esi], eax
-0x4FAD43: call    ScriptRunner_LookupCommandByOpcode
+0x4FAD43: call    ScriptRunner_LookupCommandInfoByOpcode; TES4 authoritative: vanilla command lookup. Supports opcode ranges 0x100..0x182 at 0xB0B420 and 0x1000..0x1170 at 0xB0C8C0; each CommandInfo record is 0x28 bytes.
 0x4FAD48: add     esp, 4
 0x4FAD4B: test    eax, eax
 0x4FAD4D: jz      loc_4FADDE
@@ -221,7 +221,7 @@
 0x4FAD90: push    esi; a3
 0x4FAD91: push    edi; a2
 0x4FAD92: push    edx; a1
-0x4FAD93: call    Script_ExtractArgs
+0x4FAD93: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x4FAD98: add     esp, 1Ch
 0x4FAD9B: pop     ebx
 0x4FAD9C: pop     edi
@@ -278,9 +278,9 @@
 0x4FAE0D: mov     edx, [esp+34h+var_1C]
 0x4FAE11: movsx   eax, cx
 0x4FAE14: mov     ecx, [esp+34h+var_20]; this
-0x4FAE18: push    edx; a3
-0x4FAE19: push    eax; ArgList
-0x4FAE1A: call    sub_4FA110
+0x4FAE18: push    edx; sourceScript
+0x4FAE19: push    eax; variableID
+0x4FAE1A: call    ScriptEventList__GetVariableValue; ScriptEventList::GetVariableValue scans `m_vars` for Var.id == variableID and returns Var.data. A single global last-list/last-ID/Var cache accelerates repeated CTDA and script lookups; a cache miss with no variable logs an error and returns 0.
 0x4FAE1F: mov     ecx, [esp+34h+var_24]
 0x4FAE23: fstp    qword ptr [ecx]
 0x4FAE25: mov     ecx, [esp+34h+var_4]

@@ -11,7 +11,7 @@
 0x47CA46: test    eax, eax
 0x47CA48: jz      short loc_47CA5E
 0x47CA4A: lea     ebx, [ebx+0]
-0x47CA50: cmp     eax, offset dword_B3CD7C
+0x47CA50: cmp     eax, offset stru_B3CD7C
 0x47CA55: jz      short loc_47CA84
 0x47CA57: mov     eax, [eax+4]
 0x47CA5A: test    eax, eax

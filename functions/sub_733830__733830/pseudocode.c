@@ -1,4 +1,4 @@
 void __thiscall sub_733830(_DWORD *this)
 {
-  *(this + 2) = 0;
+  *(this + 2) = 0; /*0x733830*/
 }

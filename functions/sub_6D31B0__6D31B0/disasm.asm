@@ -1,4 +1,4 @@
-0x6D31B0: push    ebx
+0x6D31B0: push    ebx; Finds the sorted insertion index for a requested key time using the registered record stride. Returns false when an exact timestamp already exists, preventing duplicate boundary insertion.
 0x6D31B1: mov     ebx, [esp+4+arg_8]
 0x6D31B5: test    ebx, ebx
 0x6D31B7: push    esi

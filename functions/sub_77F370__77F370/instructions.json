@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x77F419",
-    "line": "mov     [esp+118h+var_10C], eax",
+    "line": "mov     [esp+118h+data], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -349,19 +349,19 @@
   },
   {
     "ea": "0x77F423",
-    "line": "push    ecx; Str2",
+    "line": "push    ecx; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x77F424",
-    "line": "push    eax; Str1",
+    "line": "push    eax; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x77F425",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,25 +403,25 @@
   },
   {
     "ea": "0x77F437",
-    "line": "lea     edx, [esp+118h+var_10C]",
+    "line": "lea     edx, [esp+118h+data]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x77F43B",
-    "line": "push    edx",
+    "line": "push    edx; data",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x77F43C",
-    "line": "lea     ecx, [ebx+8]",
+    "line": "lea     ecx, [ebx+8]; list",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x77F43F",
-    "line": "call    sub_776690",
+    "line": "call    NiTPointerList_RemoveByData; [Verified] Generic NiTPointerList remove-by-data helper. Scans node payloads for the supplied pointer, then delegates removal of the matching node to NiTPointerList_RemoveNode. The decal-list path calls it with the DECAL_DATA* payload address.",
     "mnemonic": "call",
     "size": 5
   },

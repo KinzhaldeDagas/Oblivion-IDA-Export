@@ -2,7 +2,7 @@
 0x614194: mov     ecx, [esp+arg_4]
 0x614198: mov     eax, [eax+4]
 0x61419B: mov     ecx, [ecx+4]
-0x61419E: cmp     eax, ecx
+0x61419E: cmp     eax, ecx; TargetInfo +0x04 is compared as signed SInt32 (JLE/SETL); larger values sort first.
 0x6141A0: jle     short loc_6141A6
 0x6141A2: or      eax, 0FFFFFFFFh
 0x6141A5: retn

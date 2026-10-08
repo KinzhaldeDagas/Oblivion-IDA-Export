@@ -1,17 +1,18 @@
-void __thiscall sub_4B7A20(TESForm *this)
+// Verified TESObjectDOOR destructor helper calls TESObjectDOOR_ClearRandomTeleportSpaceList, then clears TESForm component references.
+void __thiscall TESObjectDOOR_ClearRandomTeleportSpacesAndComponents(TESObjectDOOR *this)
 {
-  int v2; // edi
+  struct TESObjectDOOR_RandomTeleportSpaceNode *next; // edi
 
-  if ( *((_DWORD *)this + 0x1B) )
+  if ( this->super.randomTeleport.next ) /*0x4b7a23*/
   {
-    do
+    do /*0x4b7a44*/
     {
-      v2 = *(_DWORD *)(*((_DWORD *)this + 0x1B) + 4);
-      FormHeapFree(*((_DWORD *)this + 0x1B));
-      *((_DWORD *)this + 0x1B) = v2;
+      next = this->super.randomTeleport.next->next; /*0x4b7a33*/
+      FormHeapFree((unsigned int)this->super.randomTeleport.next); /*0x4b7a37*/
+      this->super.randomTeleport.next = next; /*0x4b7a41*/
     }
-    while ( v2 );
+    while ( next ); /*0x4b7a44*/
   }
-  *((_DWORD *)this + 0x1A) = 0;
-  j_TESForm_ClearComponentReferences(this);
+  this->super.randomTeleport.space = 0; /*0x4b7a47*/
+  j_TESForm_ClearComponentReferences((TESForm *)this); /*0x4b7a51*/
 }

@@ -10,18 +10,18 @@ int __userpurge sub_43FFF0@<eax>(
   unsigned int i; // esi
   void **v9; // ecx
 
-  v6 = 0;
-  for ( i = 0; i < uExteriorCellBuffer; ++i )
+  v6 = 0; /*0x43fff8*/
+  for ( i = 0; i < uExteriorCellBuffer; ++i ) /*0x43fffc*/
   {
-    v9 = (void **)(*(this + 0xF) + 4 * i);
-    if ( *v9 )
+    v9 = (void **)(*(this + 0xF) + 4 * i); /*0x44000f*/
+    if ( *v9 ) /*0x44000b*/
     {
-      if ( a5 && *v9 )
+      if ( a5 && *v9 ) /*0x44001b*/
       {
-        switch ( *((_BYTE *)*v9 + 0x26) )
+        switch ( *((_BYTE *)*v9 + 0x26) ) /*0x44002d*/
         {
-          case 5:
-          case 6:
+          case 5: /*0x44002d*/
+          case 6: /*0x44002d*/
             continue;
           default:
             goto LABEL_7;
@@ -30,14 +30,14 @@ int __userpurge sub_43FFF0@<eax>(
       else
       {
 LABEL_7:
-        if ( !sub_4CA030(*v9) && (!a6 || TESObjectCELL_GetWorldSpace(*(TESObjectCELL **)(*(this + 0xF) + 4 * i)) == a6) )
+        if ( !sub_4CA030(*v9) && (!a6 || TESObjectCELL_GetWorldSpace(*(TESObjectCELL **)(*(this + 0xF) + 4 * i)) == a6) ) /*0x440050*/
         {
-          sub_447BA0(st5_0, st6_0, a4, *(TESObjectCELL **)(*(this + 0xF) + 4 * i));
-          *(_DWORD *)(*(this + 0xF) + 4 * i) = 0;
-          ++v6;
+          TESObjectCELL_Deactivate(st5_0, st6_0, a4, *(TESObjectCELL **)(*(this + 0xF) + 4 * i)); /*0x44005f*/
+          *(_DWORD *)(*(this + 0xF) + 4 * i) = 0; /*0x440067*/
+          ++v6; /*0x44006e*/
         }
       }
     }
   }
-  return v6;
+  return v6; /*0x440076*/
 }

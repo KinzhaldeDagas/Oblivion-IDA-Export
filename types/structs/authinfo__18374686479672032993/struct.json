@@ -1,64 +1,108 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "authinfo",
+  "definition": "struct authinfo\n{\nDWORD scheme;\n__declspec(align(8)) CredHandle cred;\nCtxtHandle ctx;\nTimeStamp exp;\nULONG attr;\nULONG max_token;\nchar *data;\nunsigned int data_len;\nBOOL finished;\n}\n",
   "id": 18374686479672032993,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "scheme",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cred",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 16
+      "size": 16,
+      "type": "CredHandle"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ctx",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 16
+      "size": 16,
+      "type": "CtxtHandle"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "exp",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 8
+      "size": 8,
+      "type": "TimeStamp"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "attr",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "max_token",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "data",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "char *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "data_len",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "unsigned int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "finished",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     }
   ],
   "name": "authinfo",
+  "ordinal": 3329,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 72
 }

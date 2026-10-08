@@ -89,7 +89,7 @@
 0x84633E: call    dword ptr ds:0A28078h
 0x846344: mov     ecx, [esp+40h+var_2C]
 0x846348: push    esi
-0x846349: push    ebp
+0x846349: push    ebp; z
 0x84634A: call    sub_848FA0
 0x84634F: mov     ecx, [edi+24h]
 0x846352: mov     esi, [ecx+8]
@@ -144,7 +144,7 @@
 0x8463CC: mov     [ebx+4], ebp
 0x8463CF: jz      short loc_8463DB
 0x8463D1: add     ebp, 4
-0x8463D4: push    ebp; lpAddend
+0x8463D4: push    ebp; w
 0x8463D5: call    dword ptr ds:0A28078h
 0x8463DB: mov     esi, [esp+40h+var_28]
 0x8463DF: fld1
@@ -193,9 +193,9 @@
 0x84645D: mov     [eax+8], ecx
 0x846460: fstp    [esp+50h+var_10]
 0x846464: mov     edx, [esp+50h+var_10]
-0x846468: push    2
+0x846468: push    2; slot
 0x84646A: mov     [eax+0Ch], edx
-0x84646D: call    sub_7ECAE0
+0x84646D: call    OB_BSShader_SetSharedFloat4Constant_010201A0; Shader global table helper: store four dwords at dword_B46498 + 0x10 * index.
 0x846472: add     esp, 14h
 0x846475: cmp     esi, 8
 0x846478: jnz     short loc_846484
@@ -241,29 +241,29 @@
 0x8464EF: mov     [eax+8], ecx
 0x8464F2: fstp    [esp+50h+var_10]
 0x8464F6: mov     edx, [esp+50h+var_10]
-0x8464FA: push    3
+0x8464FA: push    3; slot
 0x8464FC: mov     [eax+0Ch], edx
-0x8464FF: call    sub_7ECAE0
+0x8464FF: call    OB_BSShader_SetSharedFloat4Constant_010201A0; Shader global table helper: store four dwords at dword_B46498 + 0x10 * index.
 0x846504: add     esp, 14h
-0x846507: cmp     byte ptr [esp+40h+arg_10], 0
+0x846507: cmp     byte ptr [esp+40h+value], 0
 0x84650C: jz      short loc_84654D
 0x84650E: mov     ebx, 1
 0x846513: add     [edi+60h], ebx
-0x846516: mov     [esp+40h+arg_10], edi
+0x846516: mov     [esp+40h+value], edi
 0x84651A: mov     esi, [esp+40h+var_2C]
 0x84651E: mov     ecx, [esi+38h]
-0x846521: lea     eax, [esp+40h+arg_10]
-0x846525: push    eax
-0x846526: push    ecx
-0x846527: lea     ecx, [esi+40h]
+0x846521: lea     eax, [esp+40h+value]
+0x846525: push    eax; value
+0x846526: push    ecx; index
+0x846527: lea     ecx, [esi+40h]; this
 0x84652A: mov     [esp+48h+var_4], 0
-0x846532: call    sub_76CE40
+0x846532: call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.
 0x846537: or      eax, 0FFFFFFFFh
 0x84653A: add     [edi+60h], eax
 0x84653D: mov     [esp+40h+var_4], eax
 0x846541: jnz     short loc_84654A
 0x846543: mov     ecx, edi
-0x846545: call    sub_7604D0
+0x846545: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x84654A: add     [esi+38h], ebx
 0x84654D: mov     ecx, dword ptr [esp+40h+var_C]
 0x846551: mov     large fs:0, ecx
@@ -274,3 +274,12 @@
 0x84655C: pop     ebx
 0x84655D: add     esp, 2Ch
 0x846560: retn    14h
+0x9D32A0: lea     ecx, [ebp+14h]; void *
+0x9D32A3: jmp     sub_4027D0
+0x9D32A8: mov     edx, [esp+arg_4]
+0x9D32AC: lea     eax, [edx-30h]
+0x9D32AF: mov     ecx, [edx-34h]
+0x9D32B2: xor     ecx, eax
+0x9D32B4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D32B9: mov     eax, offset stru_AFB6E4
+0x9D32BE: jmp     ___CxxFrameHandler3

@@ -97,13 +97,13 @@
   },
   {
     "ea": "0x6A082B",
-    "line": "mov     edi, [esp+24h+arg_4]",
+    "line": "mov     edi, [esp+24h+ownerActiveEffect]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6A082F",
-    "line": "mov     eax, [esp+24h+arg_0]",
+    "line": "mov     eax, [esp+24h+targetReference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -163,19 +163,19 @@
   },
   {
     "ea": "0x6A084F",
-    "line": "mov     [esi+34h], ebx",
+    "line": "mov     [esi+34h], ebx; Verified (Oblivion): the owner-based constructor sets effectShader_34 from EffectSetting::effectShader at +0x78. EffectSetting_LinkForm resolves that field as TESEffectShader* using Oblivion RTTI, and the shader effect update compares it with Magic_GetLifeDetectedShader.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x6A0852",
-    "line": "mov     ecx, [edi+8]",
+    "line": "mov     ecx, [edi+8]; magicItem",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x6A0855",
-    "line": "push    ebx",
+    "line": "push    ebx; effectIndex",
     "mnemonic": "push",
     "size": 1
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x6A085B",
-    "line": "call    MagicItem_GetFXEffect",
+    "line": "call    MagicItem_GetFXEffect; Verified (Oblivion): MagicItem_GetFXEffect returns the effect's EffectSetting pointer; MagicShaderHitEffect constructors/PostLink dereference its +0x78 EffectSetting::effectShader field.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x6A0862",
-    "line": "mov     ecx, [eax+78h]",
+    "line": "mov     ecx, [eax+78h]; Verified (Oblivion): owner-based shader constructor obtains EffectSetting from MagicItem_GetFXEffect and copies its typed TESEffectShader* effectShader field (+0x78) into effectShader_34.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x6A08DA",
-    "line": "mov     [esi+28h], bl",
+    "line": "mov     [esi+28h], bl; Verified (Oblivion): ordinary owner-based shader effects initialize bWeaponEnchantment_28 to false; Process_UpdateWeaponEnchantmentShader sets it to true only for effects created from an equipped item's enchantment shader.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x6A08E9",
-    "line": "mov     [esi+2Ch], ecx",
+    "line": "mov     [esi+2Ch], ecx; Verified (Oblivion): effectCode_2C is copied from EffectSetting::effectCode at +0x98. The DIAR and DIWE values are each mapped by startup factory registrations to DisintegrateArmorEffect_Make and DisintegrateWeaponEffect_Make respectively.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x6A08EF",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -571,13 +571,13 @@
   },
   {
     "ea": "0x6A08FA",
-    "line": "push    ebx",
+    "line": "push    ebx; Verified (Oblivion): perspectiveState_44 is set only for the player based on the selected node's flag bit; the visual-target helper later uses it to select actor skin/node perspective.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A08FB",
-    "line": "call    PlayerCharacter_GetPlayerNode",
+    "line": "call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -595,19 +595,19 @@
   },
   {
     "ea": "0x6A0904",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x6A090A",
-    "line": "push    ebx",
+    "line": "push    ebx; firstPerson",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A090B",
-    "line": "call    PlayerCharacter_GetPlayerNode",
+    "line": "call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -826,5 +826,113 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C5ED0",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5ED3",
+    "line": "jmp     MagicHitEffect_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5ED8",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5EDB",
+    "line": "add     ecx, 3Ch ; '<'; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5EDE",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5EE3",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5EE6",
+    "line": "add     ecx, 40h ; '@'; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5EE9",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5EEE",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5EF1",
+    "line": "add     ecx, 48h ; 'H'; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5EF4",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5EF9",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C5EFD",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5F00",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5F03",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C5F05",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5F0A",
+    "line": "mov     eax, offset stru_AEE584",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5F0F",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -22,7 +22,7 @@
 0x89308E: mov     [esp+28h+var_4], 6
 0x893096: mov     dword ptr [esi+3C0h], 0
 0x8930A0: jz      short loc_8930A9
-0x8930A2: call    sub_8AC0C0
+0x8930A2: call    bhkCollisionWrapper_GetHavokObject; bhk collision wrapper accessor: returns stored low-level Havok object pointer at wrapper+0x30.
 0x8930A7: jmp     short loc_8930AB
 0x8930A9: xor     eax, eax
 0x8930AB: mov     eax, [eax+8]
@@ -65,7 +65,7 @@
 0x893121: push    edx
 0x893122: push    eax
 0x893123: call    sub_8A75D0
-0x893128: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x893128: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x89312D: push    2; int
 0x89312F: push    4; unsigned int
 0x893131: lea     ecx, [esi+374h]
@@ -120,3 +120,71 @@
 0x8931CD: pop     ebp
 0x8931CE: add     esp, 18h
 0x8931D1: retn
+0x8901C0: mov     dword ptr [ecx], offset ??_7hkCharacterProxyListener@@6B@; const hkCharacterProxyListener::`vftable'
+0x8901C6: retn
+0x8D2490: mov     edx, ecx
+0x8D2492: mov     eax, [edx+8]
+0x8D2495: test    eax, eax
+0x8D2497: js      short locret_8D24D1
+0x8D2499: mov     ecx, ds:0BA9DE4h
+0x8D249F: push    esi
+0x8D24A0: mov     esi, large fs:2Ch
+0x8D24A7: mov     ecx, [esi+ecx*4]
+0x8D24AA: mov     ecx, [ecx+19Ch]
+0x8D24B0: test    ecx, ecx
+0x8D24B2: pop     esi
+0x8D24B3: jnz     short loc_8D24BB
+0x8D24B5: mov     ecx, ds:0BA7D9Ch
+0x8D24BB: mov     edx, [edx]
+0x8D24BD: and     eax, 3FFFFFFFh
+0x8D24C2: lea     eax, [eax+eax*2]
+0x8D24C5: push    14h
+0x8D24C7: shl     eax, 4
+0x8D24CA: push    eax
+0x8D24CB: push    edx
+0x8D24CC: call    sub_8A75D0
+0x8D24D1: retn
+0x9D6350: mov     ecx, [ebp-10h]; this
+0x9D6353: jmp     ??1bhkCharacterProxy@@UAE@XZ; bhkCharacterProxy::~bhkCharacterProxy(void)
+0x9D6358: cmp     dword ptr [ebp-10h], 0
+0x9D635C: jz      loc_9D6372
+0x9D6362: mov     eax, [ebp-10h]
+0x9D6365: add     eax, 1E0h
+0x9D636A: mov     [ebp-14h], eax
+0x9D636D: jmp     loc_9D6379
+0x9D6372: mov     dword ptr [ebp-14h], 0
+0x9D6379: mov     ecx, [ebp-14h]
+0x9D637C: jmp     sub_88D340
+0x9D6381: cmp     dword ptr [ebp-10h], 0
+0x9D6385: jz      loc_9D639B
+0x9D638B: mov     eax, [ebp-10h]
+0x9D638E: add     eax, 1F0h
+0x9D6393: mov     [ebp-18h], eax
+0x9D6396: jmp     loc_9D63A2
+0x9D639B: mov     dword ptr [ebp-18h], 0
+0x9D63A2: mov     ecx, [ebp-18h]
+0x9D63A5: jmp     loc_8901C0
+0x9D63AA: mov     ecx, [ebp-10h]
+0x9D63AD: add     ecx, 364h; slot
+0x9D63B3: jmp     NiPointerSlot_Release
+0x9D63B8: mov     ecx, [ebp-10h]
+0x9D63BB: add     ecx, 368h; slot
+0x9D63C1: jmp     NiPointerSlot_Release
+0x9D63C6: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9D63CB: push    2; int
+0x9D63CD: push    4; unsigned int
+0x9D63CF: mov     eax, [ebp-10h]
+0x9D63D2: add     eax, 374h
+0x9D63D7: push    eax; void *
+0x9D63D8: call    $LN21
+0x9D63DD: retn
+0x9D63DE: mov     ecx, [ebp-10h]
+0x9D63E1: add     ecx, 3BCh
+0x9D63E7: jmp     loc_8D2490
+0x9D63EC: mov     edx, [esp+arg_4]
+0x9D63F0: lea     eax, [edx-18h]
+0x9D63F3: mov     ecx, [edx-1Ch]
+0x9D63F6: xor     ecx, eax
+0x9D63F8: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D63FD: mov     eax, offset stru_AFE26C
+0x9D6402: jmp     ___CxxFrameHandler3

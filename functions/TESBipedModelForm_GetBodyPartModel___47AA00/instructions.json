@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x47AA00",
-    "line": "push    ebx",
+    "line": "push    ebx; ODismemberment: biped slot attach/replace path can rebuild loaded 3D; plugin state must be reapplied after equipment/body changes.",
     "mnemonic": "push",
     "size": 1
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x47AA68",
-    "line": "push    0",
+    "line": "push    0; newModelData",
     "mnemonic": "push",
     "size": 2
   },
@@ -247,25 +247,25 @@
   },
   {
     "ea": "0x47AA71",
-    "line": "push    1",
+    "line": "push    1; replaceMetadata",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x47AA73",
-    "line": "push    edi",
+    "line": "push    edi; slot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x47AA74",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x47AA76",
-    "line": "call    sub_478780",
+    "line": "call    ActorSkinInfo_ClearOrReplaceEquipmentSlot; ActorSkinInfo equipment-slot teardown/replacement. Slot is exactly {TESForm*, TESModel*, NiAVObject*}; native code removes loaded 3D from shadow/parent ownership, releases loader/scene state, clears object3D, and optionally replaces form/model metadata. Known slots include rings, amulet, WEAP, AMMO, shield, and light. External Crossbow contrast after this native ownership behavior: retained raw controller/target pointers are invalidated when the owning WeaponObject graph is torn down; pointer equality alone is not a lifetime or generation check. Current removal/reset erases tracking without restoring original controller timing state, and target mismatch leaves null-controller tombstones instead of generation-validating/rescanning.",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,31 +475,31 @@
   },
   {
     "ea": "0x47AAD5",
-    "line": "push    0",
+    "line": "push    0; newModelData",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x47AAD7",
-    "line": "push    1",
+    "line": "push    1; replaceMetadata",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x47AAD9",
-    "line": "push    edi",
+    "line": "push    edi; slot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x47AADA",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x47AADC",
-    "line": "call    sub_478780",
+    "line": "call    ActorSkinInfo_ClearOrReplaceEquipmentSlot; ActorSkinInfo equipment-slot teardown/replacement. Slot is exactly {TESForm*, TESModel*, NiAVObject*}; native code removes loaded 3D from shadow/parent ownership, releases loader/scene state, clears object3D, and optionally replaces form/model metadata. Known slots include rings, amulet, WEAP, AMMO, shield, and light. External Crossbow contrast after this native ownership behavior: retained raw controller/target pointers are invalidated when the owning WeaponObject graph is torn down; pointer equality alone is not a lifetime or generation check. Current removal/reset erases tracking without restoring original controller timing state, and target mismatch leaves null-controller tombstones instead of generation-validating/rescanning.",
     "mnemonic": "call",
     "size": 5
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x47AB4B",
-    "line": "push    0",
+    "line": "push    0; newModelData",
     "mnemonic": "push",
     "size": 2
   },
@@ -775,25 +775,25 @@
   },
   {
     "ea": "0x47AB51",
-    "line": "push    1",
+    "line": "push    1; replaceMetadata",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x47AB53",
-    "line": "push    edi",
+    "line": "push    edi; slot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x47AB54",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x47AB56",
-    "line": "call    sub_478780",
+    "line": "call    ActorSkinInfo_ClearOrReplaceEquipmentSlot; ActorSkinInfo equipment-slot teardown/replacement. Slot is exactly {TESForm*, TESModel*, NiAVObject*}; native code removes loaded 3D from shadow/parent ownership, releases loader/scene state, clears object3D, and optionally replaces form/model metadata. Known slots include rings, amulet, WEAP, AMMO, shield, and light. External Crossbow contrast after this native ownership behavior: retained raw controller/target pointers are invalidated when the owning WeaponObject graph is torn down; pointer equality alone is not a lifetime or generation check. Current removal/reset erases tracking without restoring original controller timing state, and target mismatch leaves null-controller tombstones instead of generation-validating/rescanning.",
     "mnemonic": "call",
     "size": 5
   },

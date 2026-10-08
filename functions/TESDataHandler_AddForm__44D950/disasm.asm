@@ -1,5 +1,5 @@
 0x44D950: push    esi
-0x44D951: mov     esi, [esp+4+arg_0]
+0x44D951: mov     esi, [esp+4+form]
 0x44D955: test    esi, esi
 0x44D957: push    edi
 0x44D958: mov     edi, ecx
@@ -18,7 +18,7 @@
 0x44D982: mov     ecx, [edi+0BCh]; jumptable 0044D97B case 47
 0x44D988: push    esi
 0x44D989: add     ecx, 4
-0x44D98C: call    BSSimpleList_PushFront
+0x44D98C: call    BSSimpleList_PushFront; Verified: TESRegion forms are inserted into the handler's owned embedded TESRegionList at TESDataHandler +0xBC.
 0x44D991: pop     ebx
 0x44D992: pop     edi
 0x44D993: mov     al, 1
@@ -106,7 +106,7 @@
 0x44DA46: retn    4
 0x44DA49: push    esi; jumptable 0044D97B case 46
 0x44DA4A: lea     ecx, [edi+14h]
-0x44DA4D: call    BSSimpleList_PushFront
+0x44DA4D: call    BSSimpleList_PushFront; Verified: Climate forms are registered at TESDataHandler +0x14; type 0x2E confirmed in TESClimate ctor.
 0x44DA52: pop     ebx
 0x44DA53: pop     edi
 0x44DA54: mov     al, 1
@@ -114,7 +114,7 @@
 0x44DA57: retn    4
 0x44DA5A: push    esi; jumptable 0044D97B case 45
 0x44DA5B: lea     ecx, [edi+1Ch]
-0x44DA5E: call    BSSimpleList_PushFront
+0x44DA5E: call    BSSimpleList_PushFront; Verified: Weather forms are registered at TESDataHandler +0x1C.
 0x44DA63: pop     ebx
 0x44DA64: pop     edi
 0x44DA65: mov     al, 1
@@ -138,7 +138,7 @@
 0x44DA8A: retn    4
 0x44DA8D: push    esi; jumptable 0044D97B case 4
 0x44DA8E: lea     ecx, [edi+74h]
-0x44DA91: call    BSSimpleList_PushFront
+0x44DA91: call    BSSimpleList_PushFront; Verified: switch case 4 is TESGlobal (raw ctor byte at 4F9604); inserts TESGlobal* into the DataHandler listGlobals head at +0x74.
 0x44DA96: pop     ebx
 0x44DA97: pop     edi
 0x44DA98: mov     al, 1
@@ -211,7 +211,7 @@
 0x44DB3D: test    esi, esi
 0x44DB3F: jz      loc_44DC0B
 0x44DB45: mov     ecx, esi; this
-0x44DB47: call    TESObjectREFR_GetParentCell
+0x44DB47: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x44DB4C: mov     ebx, eax
 0x44DB4E: test    ebx, ebx
 0x44DB50: jnz     short loc_44DB61
@@ -221,7 +221,7 @@
 0x44DB5D: jnz     short loc_44DBB0
 0x44DB5F: jmp     short loc_44DB6C
 0x44DB61: mov     ecx, ebx; this
-0x44DB63: call    TESObjectCELL_IsInterior
+0x44DB63: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x44DB68: test    al, al
 0x44DB6A: jnz     short loc_44DBAC
 0x44DB6C: mov     edx, [esi]
@@ -247,9 +247,9 @@
 0x44DBAA: mov     ebx, eax
 0x44DBAC: test    ebx, ebx
 0x44DBAE: jz      short loc_44DC0B
-0x44DBB0: push    esi; Concurrency::details::SchedulerBase *
-0x44DBB1: mov     ecx, ebx
-0x44DBB3: call    sub_4D35D0
+0x44DBB0: push    esi; reference
+0x44DBB1: mov     ecx, ebx; this
+0x44DBB3: call    TESObjectCELL_AddReference; Verified: persistent-cell AddReference updates the WorldSpace coordinate/fallback persistent-reference index (+0x64) through TESWorldSpace_IndexReference. Ordinary cell additions do not index there. This routine does not populate the separate SubSpace spatial index at +0x60.
 0x44DBB8: mov     ecx, esi
 0x44DBBA: call    sub_4DB3C0
 0x44DBBF: test    al, al

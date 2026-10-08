@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x472C00",
-    "line": "push    esi",
+    "line": "push    esi; Attaches a played BSAnimGroupSequence to a ready AnimIdle. Requires phase +0x00 == 1, stores the sequence at +0x10, advances phase to 2 (active), and for dispatch mode +0x04 == 3 starts actor high-process action 0x0B.",
     "mnemonic": "push",
     "size": 1
   },
@@ -103,25 +103,25 @@
   },
   {
     "ea": "0x472C2C",
-    "line": "push    ecx",
+    "line": "push    ecx; sequence",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x472C2D",
-    "line": "mov     ecx, [esi+28h]",
+    "line": "mov     ecx, [esi+28h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x472C30",
-    "line": "push    0Bh",
+    "line": "push    0Bh; action",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x472C32",
-    "line": "call    HighPRocess_DoAction?????",
+    "line": "call    Actor_SetCurrentActionWithBowVisualCleanup; Void Actor action-transition wrapper. Performs transition-specific bow/held-arrow visual cleanup, then commits action and sequence through process vtable +0x2D8. It has no success/result contract; callers/plugins must not consume EAX, so Crossbow's UInt32 HighProcessDoActionFn typedef is incorrect. Meaningful current-action state is HighProcess-only: HighProcess +0x2D0/+0x2D8 read/store +0x1F4/+0x1F8, while MiddleHigh returns None (-1) and its setter is a no-op; Crossbow's process-level-0 action filter therefore matches Oblivion. External Crossbow state-machine contrast: Equip-as-Cocked/first-shot-loaded is plugin policy, repeated action 4 while Reloading can flip state to Cocked and rebuild controller tracking, and interruption/cancellation actions are not modeled, leaving stale Reloading/Cocked phases.",
     "mnemonic": "call",
     "size": 5
   },

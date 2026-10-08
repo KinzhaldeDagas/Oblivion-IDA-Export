@@ -10,7 +10,7 @@
 0x74FAA2: call    edx
 0x74FAA4: test    eax, eax
 0x74FAA6: jz      short loc_74FAB6
-0x74FAA8: cmp     eax, offset dword_B3E7E8
+0x74FAA8: cmp     eax, offset stru_B3E7E8
 0x74FAAD: jz      short loc_74FAF7
 0x74FAAF: mov     eax, [eax+4]
 0x74FAB2: test    eax, eax
@@ -22,7 +22,7 @@
 0x74FABE: jnz     short loc_74FB0C
 0x74FAC0: mov     eax, [edi+48h]
 0x74FAC3: push    eax
-0x74FAC4: push    offset dword_B3EA50
+0x74FAC4: push    offset stru_B3EA50
 0x74FAC9: call    NiRTTI_Cast
 0x74FACE: mov     esi, eax
 0x74FAD0: add     esp, 8

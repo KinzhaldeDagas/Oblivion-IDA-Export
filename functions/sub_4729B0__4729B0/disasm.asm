@@ -1,9 +1,9 @@
-0x4729B0: mov     edx, [esp+arg_0]
+0x4729B0: mov     edx, [esp+arg_0]; Resolves an encoded animation key through the ActorAnimData map at +0x9C, selects the entry's sequence, and returns its TESAnimGroup pointer from sequence +0x68; returns null when the key is absent.
 0x4729B4: mov     ecx, [ecx+9Ch]
 0x4729BA: lea     eax, [esp+arg_0]
 0x4729BE: push    eax
 0x4729BF: push    edx
-0x4729C0: call    sub_470960
+0x4729C0: call    ActorAnimData_FindAnimMapEntry; CustomAnimSupport decode: anim-map lookup helper used by playback, validators, and save/load restore to test an encoded group key.
 0x4729C5: test    al, al
 0x4729C7: jz      short loc_4729DC
 0x4729C9: mov     ecx, [esp+arg_0]

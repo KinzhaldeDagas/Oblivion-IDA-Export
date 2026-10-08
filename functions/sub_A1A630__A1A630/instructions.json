@@ -1,7 +1,7 @@
 [
   {
     "ea": "0xA1A630",
-    "line": "push    offset flt_B3524C",
+    "line": "push    0B3524Ch",
     "mnemonic": "push",
     "size": 5
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0xA1A63F",
-    "line": "mov     eax, dword_B35250",
+    "line": "mov     eax, ds:0B35250h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0xA1A64E",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

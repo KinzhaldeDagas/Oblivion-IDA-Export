@@ -1,1 +1,7 @@
-MAT2
+struct MAT2
+{
+FIXED eM11;
+FIXED eM12;
+FIXED eM21;
+FIXED eM22;
+};

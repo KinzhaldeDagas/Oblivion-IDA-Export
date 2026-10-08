@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x62B0CB",
-    "line": "call    ExtraDataList__GetExtraXTarget",
+    "line": "call    ExtraDataList_GetXTarget; Returns the TESObjectREFR target stored by ExtraXTarget (type 0x4D), or null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,19 +247,19 @@
   },
   {
     "ea": "0x62B0EA",
-    "line": "push    2",
+    "line": "push    2; effectIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x62B0EC",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; magicItem",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62B0EE",
-    "line": "call    MagicItem_GetFXEffect",
+    "line": "call    MagicItem_GetFXEffect; Verified (Oblivion): MagicItem_GetFXEffect returns the effect's EffectSetting pointer; MagicShaderHitEffect constructors/PostLink dereference its +0x78 EffectSetting::effectShader field.",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x62B156",
-    "line": "call    sub_5E0660",
+    "line": "call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.",
     "mnemonic": "call",
     "size": 5
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x62B1DC",
-    "line": "call    sub_6132D0",
+    "line": "call    Combat_CalculateBallisticPitch; Low ballistic-pitch solver. It forms the quadratic in cos^2(theta), selects the larger valid root for the low arc, and returns a signed acos(sqrt(root)); invalid trajectories return the engine fallback angle.",
     "mnemonic": "call",
     "size": 5
   },
@@ -781,7 +781,7 @@
   },
   {
     "ea": "0x62B21B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x62B221",
-    "line": "call    sub_4A9720",
+    "line": "call    Actor_GetAimPitch; Returns Actor rotation X as the native aim-pitch value used by projectile launch, impact, input, dialogue-camera, and magic-projectile paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -943,13 +943,13 @@
   },
   {
     "ea": "0x62B273",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62B275",
-    "line": "call    sub_4A9720",
+    "line": "call    Actor_GetAimPitch; Returns Actor rotation X as the native aim-pitch value used by projectile launch, impact, input, dialogue-camera, and magic-projectile paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1183,7 +1183,7 @@
   },
   {
     "ea": "0x62B2F3",
-    "line": "call    sub_683CB0",
+    "line": "call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1429,7 +1429,7 @@
   },
   {
     "ea": "0x62B36B",
-    "line": "call    sub_5E05F0",
+    "line": "call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1753,7 +1753,7 @@
   },
   {
     "ea": "0x62B406",
-    "line": "call    sub_5F25F0",
+    "line": "call    sub_5F25F0; Fast-travel loop player AV update: magicka regeneration/active magic adjustment over travel time.",
     "mnemonic": "call",
     "size": 5
   },

@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x68A1E3",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x68A1E8",
-    "line": "jmp     sub_68B0F0",
+    "line": "jmp     TravelPathNode_GetReference; Verified returns payload as TESObjectREFR* only when kind==0 (reference node); returns null for position nodes or other kinds.",
     "mnemonic": "jmp",
     "size": 5
   }

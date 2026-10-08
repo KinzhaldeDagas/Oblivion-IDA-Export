@@ -1,4 +1,4 @@
-0x4F1240: push    ecx
+0x4F1240: push    ecx; Verified: the special TESFormVtbl +0x38 CreateDuplicateForm override clones worldspace cells and persistentCell but does not build +0x60. Full plugin/game loading later reconstructs +0x60 via TESDataHandler_LoadFiles; Candidate concern is only for queries made after duplication and before any full-load reconstruction. Whether that interval occurs in live callers is Unknown.
 0x4F1241: mov     eax, [esp+4+a2]
 0x4F1245: push    ebx
 0x4F1246: push    ebp
@@ -12,7 +12,7 @@
 0x4F125B: push    ebp; cloneMap
 0x4F125C: push    eax; a2
 0x4F125D: mov     ebx, ecx
-0x4F125F: call    TESForm_Clone
+0x4F125F: call    TESForm_Clone; Verified ordinary form-clone path: allocates via TESForm_CreateDynamic, invokes the destination CopyFrom virtual, restores EditorID and records the cloneMap entry. This does not dispatch CreateDuplicateForm; WorldSpace's deep cell/persistent-cell clone is a separate +0x38 virtual path.
 0x4F1264: push    eax; void *
 0x4F1265: call    OblivionDynamicCast
 0x4F126A: mov     edi, eax
@@ -27,7 +27,6 @@
 0x4F1283: mov     edx, [edx+8]
 0x4F1286: mov     esi, edx
 0x4F1288: jmp     short loc_4F1290
-0x4F128A: align 10h
 0x4F1290: cmp     dword ptr [esi], 0
 0x4F1293: jnz     loc_4F13C1
 0x4F1299: add     eax, 1
@@ -40,14 +39,14 @@
 0x4F12AB: jz      short loc_4F131B
 0x4F12AD: lea     ecx, [ecx+0]
 0x4F12B0: lea     ecx, [esp+14h+cloneMap]
-0x4F12B4: push    ecx
-0x4F12B5: mov     ecx, [ebx+30h]
-0x4F12B8: lea     edx, [esp+18h+var_4]
-0x4F12BC: push    edx
+0x4F12B4: push    ecx; valueOut
+0x4F12B5: mov     ecx, [ebx+30h]; self
+0x4F12B8: lea     edx, [esp+18h+keyOut]
+0x4F12BC: push    edx; keyOut
 0x4F12BD: lea     eax, [esp+1Ch+a2]
-0x4F12C1: push    eax
+0x4F12C1: push    eax; position
 0x4F12C2: mov     [esp+20h+cloneMap], 0
-0x4F12CA: call    sub_452600
+0x4F12CA: call    NiTMap_U32Pointer_GetNextEntry
 0x4F12CF: mov     ecx, [esp+14h+cloneMap]
 0x4F12D3: test    ecx, ecx
 0x4F12D5: jz      short loc_4F1314
@@ -71,9 +70,9 @@
 0x4F1306: push    1
 0x4F1308: mov     ecx, esi
 0x4F130A: call    eax
-0x4F130C: push    esi
-0x4F130D: mov     ecx, edi
-0x4F130F: call    sub_4EFEF0
+0x4F130C: push    esi; cell
+0x4F130D: mov     ecx, edi; this
+0x4F130F: call    TESWorldSpace_RegisterExteriorCell; Verified: external cell registration separates one quest-item exterior cell into persistentCell; normal exterior cells are stored in cellMap under packed signed X/Y.
 0x4F1314: cmp     [esp+14h+a2], 0
 0x4F1319: jnz     short loc_4F12B0
 0x4F131B: mov     ecx, [ebx+34h]
@@ -99,12 +98,12 @@
 0x4F134E: mov     eax, [edx+90h]
 0x4F1354: push    1
 0x4F1356: call    eax
-0x4F1358: mov     ecx, [edi+34h]
+0x4F1358: mov     ecx, [edi+34h]; persistentCell
 0x4F135B: test    ecx, ecx
 0x4F135D: jz      short loc_4F1365
-0x4F135F: push    edi
-0x4F1360: call    sub_4D3A00
-0x4F1365: mov     ecx, [ebx+54h]
+0x4F135F: push    edi; destinationWorldSpace
+0x4F1360: call    TESWorldSpace_DistributePersistentCellReferences; Verified clone-path call: after cloning the WorldSpace persistentCell, CreateDuplicateForm calls TESWorldSpace_DistributePersistentCellReferences to attach its references to cloned cells. No SubSpace index rebuild occurs in this call path.
+0x4F1365: mov     ecx, [ebx+54h]; Verified WorldSpace duplication clones the TESRoad at +0x54, releases any destination road, assigns the clone, and resets its owning WorldSpace backpointer at TESRoad+0x2C. The serialized ROAD loader similarly attaches through TESWorldSpace_SetRoad and writes this owner pointer.
 0x4F1368: test    ecx, ecx
 0x4F136A: jz      short loc_4F13B7
 0x4F136C: mov     edx, [ecx]

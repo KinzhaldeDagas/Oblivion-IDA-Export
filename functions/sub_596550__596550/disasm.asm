@@ -17,7 +17,7 @@
 0x596582: fmul    qword ptr ds:0A309F0h
 0x596588: add     esp, 14h
 0x59658B: mov     esi, eax
-0x59658D: call    Double_To_SInt32
+0x59658D: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x596592: cmp     [esi+30h], eax
 0x596595: mov     [esp+8+var_4], eax
 0x596599: jz      short loc_5965B3
@@ -25,9 +25,9 @@
 0x59659F: push    ecx
 0x5965A0: mov     ecx, [esi+2Ch]; this
 0x5965A3: mov     [esi+30h], eax
-0x5965A6: fstp    [esp+0Ch+a2]; a3
-0x5965A9: push    0FAFh; a2
-0x5965AE: call    Tile_SetFloat
+0x5965A6: fstp    [esp+0Ch+a2]; value
+0x5965A9: push    0FAFh; propertyCode
+0x5965AE: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5965B3: pop     esi
 0x5965B4: pop     ecx
 0x5965B5: retn

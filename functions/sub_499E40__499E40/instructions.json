@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x499E40",
-    "line": "mov     ecx, ds:0B333A0h",
+    "line": "mov     ecx, ds:0B333A0h; Pass205: Water-related callsite included in pass-data producer verification; cross-check before naming high-level field semantics.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x499ED5",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },

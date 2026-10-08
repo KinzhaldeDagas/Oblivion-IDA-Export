@@ -1,19 +1,19 @@
-int __thiscall sub_8C8460(void *this, int a2)
+int __thiscall sub_8C8460(void *this, float *a2)
 {
-  int v4[4]; // [esp+14h] [ebp-30h] BYREF
-  int v5[7]; // [esp+24h] [ebp-20h] BYREF
+  __int128 v4; // [esp+14h] [ebp-30h] BYREF
+  __int128 v5; // [esp+24h] [ebp-20h] BYREF
 
-  if ( a2 )
+  if ( a2 ) /*0x8c847d*/
   {
-    v4[0] = *(int *)(a2 + 0x20);
-    v4[1] = *(int *)(a2 + 0x24);
-    v4[2] = *(int *)(a2 + 0x28);
-    v4[3] = *(int *)(a2 + 0x2C);
-    v5[0] = *(int *)(a2 + 0x10);
-    v5[1] = *(int *)(a2 + 0x14);
-    v5[2] = *(int *)(a2 + 0x18);
-    v5[3] = *(int *)(a2 + 0x1C);
-    sub_8C82D0(this, (int)v5, (int)v4, *(float *)(a2 + 0x30));
+    *(float *)&v4 = a2[8]; /*0x8c8483*/
+    *((float *)&v4 + 1) = a2[9]; /*0x8c8492*/
+    *((float *)&v4 + 2) = a2[0xA]; /*0x8c8499*/
+    *((float *)&v4 + 3) = a2[0xB]; /*0x8c84a0*/
+    *(float *)&v5 = a2[4]; /*0x8c84a7*/
+    *((float *)&v5 + 1) = a2[5]; /*0x8c84ae*/
+    *((float *)&v5 + 2) = a2[6]; /*0x8c84b5*/
+    *((float *)&v5 + 3) = a2[7]; /*0x8c84bc*/
+    sub_8C82D0(this, &v5, &v4, a2[0xC]); /*0x8c84ca*/
   }
-  return (*(int (__thiscall **)(void *, int))(*(_DWORD *)this + 0x7C))(this, a2);
+  return (*(int (__thiscall **)(void *, float *))(*(_DWORD *)this + 0x7C))(this, a2); /*0x8c84d9*/
 }

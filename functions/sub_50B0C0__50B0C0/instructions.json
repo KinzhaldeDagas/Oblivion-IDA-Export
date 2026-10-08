@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x50B11E",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x50B18C",
-    "line": "fstp    dword ptr ds:0B42EA8h",
+    "line": "fstp    dword ptr ds:0B42EA8h; SetHDRParam command writes fTreeDimmer directly with no clamp. Its local default is 0, so a successful omitted/zero argument can set c10 to zero and remove directional diffuse (ambient remains).",
     "mnemonic": "fstp",
     "size": 6
   },

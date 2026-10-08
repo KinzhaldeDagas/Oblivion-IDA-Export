@@ -1,4 +1,4 @@
-0x5E5640: cmp     dword ptr [ecx+58h], 0
+0x5E5640: cmp     dword ptr [ecx+58h], 0; Process vfunc +0x2D0 in range 2..5 guard used by Player_OnInput jump gate with Acrobatics mastery. Treat as an action/movement lock signal when deciding climb eligibility.
 0x5E5644: jz      short loc_5E5660
 0x5E5646: mov     ecx, [ecx+58h]
 0x5E5649: mov     eax, [ecx]

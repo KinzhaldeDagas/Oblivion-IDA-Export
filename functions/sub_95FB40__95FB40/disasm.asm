@@ -9,7 +9,6 @@
 0x95FB50: mov     ebx, [esp+10h+arg_10]
 0x95FB54: mov     ebp, [esp+10h+arg_C]
 0x95FB58: jmp     short loc_95FB60
-0x95FB5A: align 10h
 0x95FB60: mov     ecx, [esp+10h+arg_8]
 0x95FB64: fld     [esp+10h+arg_0]
 0x95FB68: mov     eax, [edi+8]

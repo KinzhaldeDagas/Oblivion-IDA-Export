@@ -1,4 +1,4 @@
-0x7D6940: push    0FFFFFFFFh
+0x7D6940: push    0FFFFFFFFh; Remove one receiver geometry from both the property-side shadow-light association and the light-local object list.
 0x7D6942: push    offset SEH_7E5B50
 0x7D6947: mov     eax, large fs:0
 0x7D694D: push    eax
@@ -12,10 +12,10 @@
 0x7D695A: lea     eax, [esp+20h+var_C]
 0x7D695E: mov     large fs:0, eax
 0x7D6964: mov     edi, ecx
-0x7D6966: mov     ebx, [esp+20h+arg_0]
+0x7D6966: mov     ebx, [esp+20h+payload]
 0x7D696A: push    4
 0x7D696C: mov     ecx, ebx
-0x7D696E: call    NiNode_GetNiPropertyByID
+0x7D696E: call    NiNode_GetNiPropertyByID;
 0x7D6973: mov     esi, eax
 0x7D6975: test    esi, esi
 0x7D6977: jz      short loc_7D69AE
@@ -40,21 +40,21 @@
 0x7D69A4: jz      short loc_7D69AE
 0x7D69A6: push    edi
 0x7D69A7: mov     ecx, eax
-0x7D69A9: call    sub_7EE720
+0x7D69A9: call    BSShaderProperty_RemoveShadowLight; Remove the paired ShadowSceneLight association from BSShaderProperty+0x6C.
 0x7D69AE: test    ebx, ebx
-0x7D69B0: mov     [esp+20h+arg_0], ebx
+0x7D69B0: mov     [esp+20h+payload], ebx
 0x7D69B4: jz      short loc_7D69C0
 0x7D69B6: add     ebx, 4
 0x7D69B9: push    ebx; lpAddend
 0x7D69BA: call    dword ptr ds:0A28078h
-0x7D69C0: lea     eax, [esp+20h+arg_0]
-0x7D69C4: push    eax
-0x7D69C5: lea     ecx, [esp+24h+var_10]
-0x7D69C9: push    ecx
-0x7D69CA: lea     ecx, [edi+0E4h]
+0x7D69C0: lea     eax, [esp+20h+payload]
+0x7D69C4: push    eax; payload
+0x7D69C5: lea     ecx, [esp+24h+result]
+0x7D69C9: push    ecx; result
+0x7D69CA: lea     ecx, [edi+0E4h]; self
 0x7D69D0: mov     [esp+28h+var_4], 0
-0x7D69D8: call    sub_7D5F80
-0x7D69DD: mov     eax, [esp+20h+var_10]
+0x7D69D8: call    NiTRefPointerList__RemoveFirstByValue; MEF PERF 2026-10-07 PASS2: PERF-13 positional removal gate: this full-list RemoveFirstByValue call occurs AFTER property-side RemoveShadowLight7D69A9. That operation and refcount/destructor callbacks must remain ordered. A captured stale node is usable only with lifetime/mutation proof and matching first-occurrence semantics. Duplicates require fallback, not arbitrary current-node removal.
+0x7D69DD: mov     eax, [esp+20h+result]
 0x7D69E1: test    eax, eax
 0x7D69E3: mov     edi, ds:0A2807Ch
 0x7D69E9: jz      short loc_7D6A05
@@ -71,7 +71,7 @@
 0x7D69FF: push    1
 0x7D6A01: mov     ecx, esi
 0x7D6A03: call    eax
-0x7D6A05: mov     esi, [esp+20h+arg_0]
+0x7D6A05: mov     esi, [esp+20h+payload]
 0x7D6A09: test    esi, esi
 0x7D6A0B: mov     [esp+20h+var_4], 0FFFFFFFFh
 0x7D6A13: jz      short loc_7D6A29
@@ -93,3 +93,12 @@
 0x7D6A37: pop     ebx
 0x7D6A38: add     esp, 10h
 0x7D6A3B: retn    4
+0x9CF800: lea     ecx, [ebp+4]; slot
+0x9CF803: jmp     NiPointerSlot_Release
+0x9CF808: mov     edx, [esp+arg_4]
+0x9CF80C: lea     eax, [edx-10h]
+0x9CF80F: mov     ecx, [edx-14h]
+0x9CF812: xor     ecx, eax
+0x9CF814: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CF819: mov     eax, offset stru_AF8414
+0x9CF81E: jmp     ___CxxFrameHandler3

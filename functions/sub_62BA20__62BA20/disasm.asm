@@ -96,14 +96,14 @@
 0x62BB1D: jz      short loc_62BB75
 0x62BB1F: cmp     eax, ds:0B333C4h
 0x62BB25: mov     ecx, [eax+58h]
-0x62BB28: mov     ecx, [ecx+8]
+0x62BB28: mov     ecx, [ecx+8]; self
 0x62BB2B: mov     byte ptr [esp+60h+arg_0], 1
 0x62BB30: jz      short loc_62BB75
 0x62BB32: test    ecx, ecx
 0x62BB34: jz      short loc_62BB45
 0x62BB36: cmp     byte ptr [ecx+20h], 1
 0x62BB3A: jz      short loc_62BB75
-0x62BB3C: call    sub_5660A0
+0x62BB3C: call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).
 0x62BB41: test    al, al
 0x62BB43: jnz     short loc_62BB75
 0x62BB45: mov     edx, [esi]
@@ -116,7 +116,7 @@
 0x62BB5B: mov     ecx, ebp
 0x62BB5D: call    ContainerEntryExtraData_DestroyDataTable
 0x62BB62: push    ebp
-0x62BB63: call    FormHeapFree
+0x62BB63: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x62BB68: add     esp, 4
 0x62BB6B: pop     edi
 0x62BB6C: pop     esi
@@ -168,7 +168,7 @@
 0x62BBFF: mov     ebp, [esi+2Ch]
 0x62BC02: mov     ecx, [ebx+28h]
 0x62BC05: mov     dword ptr [esp+60h+var_40], ebp
-0x62BC09: call    sub_452A60
+0x62BC09: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x62BC0E: test    eax, eax
 0x62BC10: mov     [esp+60h+var_44], eax
 0x62BC14: jg      short loc_62BC1E
@@ -179,9 +179,9 @@
 0x62BC29: fild    [esp+60h+var_44]
 0x62BC2D: jmp     short loc_62BC53
 0x62BC2F: mov     ecx, edi; this
-0x62BC31: call    TESObjectREFR_GetParentCell
+0x62BC31: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x62BC36: mov     ecx, eax; this
-0x62BC38: call    TESObjectCELL_IsInterior
+0x62BC38: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x62BC3D: test    al, al
 0x62BC3F: jz      short loc_62BC49
 0x62BC41: fld     dword ptr ds:0B36AA0h
@@ -288,7 +288,7 @@
 0x62BDA1: test    eax, eax
 0x62BDA3: jz      short loc_62BDD6
 0x62BDA5: mov     ecx, eax
-0x62BDA7: call    sub_472EA0
+0x62BDA7: call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.
 0x62BDAC: test    al, al
 0x62BDAE: jnz     short loc_62BDD6
 0x62BDB0: mov     esi, dword ptr [esp+60h+var_50]
@@ -297,7 +297,7 @@
 0x62BDBC: mov     ecx, esi
 0x62BDBE: call    ContainerEntryExtraData_DestroyDataTable
 0x62BDC3: push    esi
-0x62BDC4: call    FormHeapFree
+0x62BDC4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x62BDC9: add     esp, 4
 0x62BDCC: pop     edi
 0x62BDCD: pop     esi
@@ -322,12 +322,12 @@
 0x62BE02: test    ebx, ebx
 0x62BE04: mov     dword ptr [esp+60h+var_40], 0
 0x62BE0C: jz      short loc_62BE27
-0x62BE0E: mov     ecx, ebx
-0x62BE10: call    ExtraDataList_GetReferencePointer
+0x62BE0E: mov     ecx, ebx; this
+0x62BE10: call    ExtraDataList_GetReferencePointer; Return the TESObjectREFR payload from ExtraReferencePointer type 0x22, or null. Provenance only: callers still select EntryData by exact TESForm first.
 0x62BE15: test    eax, eax
 0x62BE17: jz      short loc_62BE27
-0x62BE19: mov     ecx, ebx
-0x62BE1B: call    ExtraDataList_GetReferencePointer
+0x62BE19: mov     ecx, ebx; this
+0x62BE1B: call    ExtraDataList_GetReferencePointer; Return the TESObjectREFR payload from ExtraReferencePointer type 0x22, or null. Provenance only: callers still select EntryData by exact TESForm first.
 0x62BE20: mov     edx, [eax+0Ch]
 0x62BE23: mov     dword ptr [esp+60h+var_40], edx
 0x62BE27: mov     eax, [esp+60h+var_48]
@@ -366,7 +366,7 @@
 0x62BE92: test    eax, eax
 0x62BE94: jz      short loc_62BEA1
 0x62BE96: mov     ecx, eax
-0x62BE98: call    sub_472EA0
+0x62BE98: call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.
 0x62BE9D: test    al, al
 0x62BE9F: jz      short loc_62BE7D
 0x62BEA1: mov     eax, dword ptr [esp+60h+var_40]
@@ -375,7 +375,7 @@
 0x62BEAD: mov     ecx, [ecx+28h]
 0x62BEB0: mov     ebp, [edx+8]
 0x62BEB3: push    eax
-0x62BEB4: call    sub_452A60
+0x62BEB4: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x62BEB9: mov     ecx, [esp+64h+arg_0]
 0x62BEBD: push    eax
 0x62BEBE: push    ebx
@@ -445,7 +445,7 @@
 0x62BF82: jnz     short loc_62BF92
 0x62BF84: mov     ecx, [esp+60h+var_48]
 0x62BF88: mov     ecx, [ecx+28h]
-0x62BF8B: call    sub_452A60
+0x62BF8B: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x62BF90: mov     ebp, eax
 0x62BF92: cmp     byte ptr [esi+25Dh], 0
 0x62BF99: jnz     short loc_62BFCE
@@ -460,7 +460,7 @@
 0x62BFB4: mov     ecx, ebx
 0x62BFB6: call    ContainerEntryExtraData_DestroyDataTable
 0x62BFBB: push    ebx
-0x62BFBC: call    FormHeapFree
+0x62BFBC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x62BFC1: add     esp, 4
 0x62BFC4: pop     edi
 0x62BFC5: pop     esi
@@ -475,7 +475,7 @@
 0x62BFDA: test    eax, eax
 0x62BFDC: jz      short loc_62BFED
 0x62BFDE: mov     ecx, eax
-0x62BFE0: call    sub_472EA0
+0x62BFE0: call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.
 0x62BFE5: test    al, al
 0x62BFE7: jz      loc_62BE7D
 0x62BFED: mov     ecx, [esp+60h+arg_0]
@@ -494,7 +494,7 @@
 0x62C00C: mov     byte ptr [esi+25Dh], 0
 0x62C013: call    ContainerEntryExtraData_DestroyDataTable
 0x62C018: push    ebp
-0x62C019: call    FormHeapFree
+0x62C019: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x62C01E: mov     ebx, [esp+64h+var_38]
 0x62C022: add     esp, 4
 0x62C025: mov     ecx, ebx
@@ -537,7 +537,7 @@
 0x62C098: cmp     eax, ebp
 0x62C09A: jz      short loc_62C0A5
 0x62C09C: push    eax
-0x62C09D: call    FormHeapFree
+0x62C09D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x62C0A2: add     esp, 4
 0x62C0A5: mov     ecx, [esp+60h+var_44]; this
 0x62C0A9: cmp     ecx, ebp
@@ -551,7 +551,7 @@
 0x62C0C1: mov     ecx, [edx+28h]
 0x62C0C4: mov     ebp, [ebx+8]
 0x62C0C7: push    eax
-0x62C0C8: call    sub_452A60
+0x62C0C8: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x62C0CD: mov     ecx, [esp+64h+var_44]
 0x62C0D1: mov     edx, [esp+64h+arg_0]
 0x62C0D5: push    eax
@@ -620,7 +620,7 @@
 0x62C19A: jnz     short loc_62C1AA
 0x62C19C: mov     ecx, [esp+60h+var_48]
 0x62C1A0: mov     ecx, [ecx+28h]
-0x62C1A3: call    sub_452A60
+0x62C1A3: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x62C1A8: mov     ebp, eax
 0x62C1AA: mov     eax, dword ptr [esp+60h+var_50]
 0x62C1AE: mov     ecx, [esp+60h+arg_0]
@@ -637,7 +637,7 @@
 0x62C1C7: mov     ecx, ebx
 0x62C1C9: call    ContainerEntryExtraData_DestroyDataTable
 0x62C1CE: push    ebx
-0x62C1CF: call    FormHeapFree
+0x62C1CF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x62C1D4: add     esp, 4
 0x62C1D7: jmp     loc_62C051
 0x62C1DC: mov     eax, [esi+8]
@@ -655,8 +655,8 @@
 0x62C202: test    al, 1
 0x62C204: jz      short loc_62C20B
 0x62C206: mov     byte ptr [esp+60h+arg_0], 0
-0x62C20B: mov     ecx, edi
-0x62C20D: call    sub_5E32D0
+0x62C20B: mov     ecx, edi; this
+0x62C20D: call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.
 0x62C212: test    al, al
 0x62C214: mov     ecx, edi; this
 0x62C216: jz      short loc_62C23E
@@ -739,8 +739,8 @@
 0x62C2E2: mov     eax, [ecx]
 0x62C2E4: mov     edx, [eax+184h]
 0x62C2EA: call    edx
-0x62C2EC: mov     ecx, eax
-0x62C2EE: call    sub_5660A0
+0x62C2EC: mov     ecx, eax; self
+0x62C2EE: call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).
 0x62C2F3: test    al, al
 0x62C2F5: jz      short loc_62C288
 0x62C2F7: mov     ecx, [ebp+58h]
@@ -762,7 +762,7 @@
 0x62C328: mov     ecx, ebp
 0x62C32A: call    eax
 0x62C32C: mov     ecx, ebp
-0x62C32E: call    sub_5E05B0
+0x62C32E: call    sub_5E05B0; Checks process movement flags low nibble via vfunc +0x2C0. Player input uses this alongside swimming/sneaking skill progression; useful as a broad movement-mode guard.
 0x62C333: test    al, al
 0x62C335: jz      short loc_62C33E
 0x62C337: mov     ecx, ebp
@@ -881,14 +881,14 @@
 0x62C496: jnp     short loc_62C4BD
 0x62C498: cmp     ebp, ds:0B333C4h
 0x62C49E: jz      short loc_62C4FF
-0x62C4A0: mov     ecx, ebp
-0x62C4A2: call    sub_5E0380
+0x62C4A0: mov     ecx, ebp; this
+0x62C4A2: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x62C4A7: test    eax, eax
 0x62C4A9: jz      short loc_62C4FF
-0x62C4AB: mov     ecx, ebp
-0x62C4AD: call    sub_5E0380
-0x62C4B2: mov     ecx, eax
-0x62C4B4: call    sub_567770
+0x62C4AB: mov     ecx, ebp; this
+0x62C4AD: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
+0x62C4B2: mov     ecx, eax; this
+0x62C4B4: call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.
 0x62C4B9: test    al, al
 0x62C4BB: jz      short loc_62C4FF
 0x62C4BD: cmp     byte ptr [esi+0D0h], 0
@@ -921,7 +921,7 @@
 0x62C50E: push    edi
 0x62C50F: mov     ecx, ebx
 0x62C511: call    sub_5677B0
-0x62C516: call    Double_To_SInt32
+0x62C516: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x62C51B: mov     [esp+60h+var_34], eax
 0x62C51F: push    0; char
 0x62C521: add     eax, eax
@@ -978,7 +978,7 @@
 0x62C59F: cmp     byte ptr [esp+60h+arg_0], 0
 0x62C5A4: jz      short loc_62C5BC
 0x62C5A6: lea     ecx, [esp+60h+var_24]
-0x62C5AA: call    sub_404C90
+0x62C5AA: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x62C5AF: fld     [esp+60h+var_44]
 0x62C5B3: fcompp
 0x62C5B5: fnstsw  ax

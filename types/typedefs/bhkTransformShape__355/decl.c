@@ -1,1 +1,1 @@
-bhkTransformShape
+struct bhkTransformShape;

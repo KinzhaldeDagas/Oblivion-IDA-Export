@@ -21,7 +21,6 @@
 0x453BD5: mov     [edi], si
 0x453BD8: lea     edx, [eax+1]
 0x453BDB: jmp     short loc_453BE0
-0x453BDD: align 10h
 0x453BE0: mov     cl, [eax]
 0x453BE2: add     eax, 1
 0x453BE5: test    cl, cl
@@ -132,7 +131,6 @@
 0x453D62: cmp     eax, 19h
 0x453D65: jnb     short loc_453DA0
 0x453D67: jmp     short loc_453D70
-0x453D69: align 10h
 0x453D70: lea     edi, [esp+arg_24]
 0x453D74: add     edi, 0FFFFFFFFh
 0x453D77: mov     al, [edi+1]
@@ -143,7 +141,6 @@
 0x453D85: mov     [edi], si
 0x453D88: lea     edx, [eax+1]
 0x453D8B: jmp     short loc_453D90
-0x453D8D: align 10h
 0x453D90: mov     cl, [eax]
 0x453D92: add     eax, 1
 0x453D95: test    cl, cl
@@ -232,7 +229,6 @@
 0x453E96: cmp     eax, 19h
 0x453E99: jnb     short loc_453ED0
 0x453E9B: jmp     short loc_453EA0
-0x453E9D: align 10h
 0x453EA0: lea     edi, [esp+4+arg_20]
 0x453EA4: add     edi, 0FFFFFFFFh
 0x453EA7: mov     al, [edi+1]
@@ -243,7 +239,6 @@
 0x453EB5: mov     [edi], si
 0x453EB8: lea     edx, [eax+1]
 0x453EBB: jmp     short loc_453EC0
-0x453EBD: align 10h
 0x453EC0: mov     cl, [eax]
 0x453EC2: add     eax, 1
 0x453EC5: test    cl, cl
@@ -342,7 +337,6 @@
 0x453FF2: cmp     eax, 19h
 0x453FF5: jnb     short loc_454030
 0x453FF7: jmp     short loc_454000
-0x453FF9: align 10h
 0x454000: lea     edi, [esp+4+arg_20]
 0x454004: add     edi, 0FFFFFFFFh
 0x454007: mov     al, [edi+1]
@@ -353,7 +347,6 @@
 0x454015: mov     [edi], si
 0x454018: lea     edx, [eax+1]
 0x45401B: jmp     short loc_454020
-0x45401D: align 10h
 0x454020: mov     cl, [eax]
 0x454022: add     eax, 1
 0x454025: test    cl, cl
@@ -454,7 +447,6 @@
 0x454155: mov     [edi], si
 0x454158: lea     edx, [eax+1]
 0x45415B: jmp     short loc_454160
-0x45415D: align 10h
 0x454160: mov     cl, [eax]
 0x454162: add     eax, 1
 0x454165: test    cl, cl
@@ -565,7 +557,6 @@
 0x4542B2: cmp     eax, 19h
 0x4542B5: jnb     short loc_4542F0
 0x4542B7: jmp     short loc_4542C0
-0x4542B9: align 10h
 0x4542C0: lea     edi, [esp+arg_24]
 0x4542C4: add     edi, 0FFFFFFFFh
 0x4542C7: mov     al, [edi+1]
@@ -576,7 +567,6 @@
 0x4542D5: mov     [edi], si
 0x4542D8: lea     edx, [eax+1]
 0x4542DB: jmp     short loc_4542E0
-0x4542DD: align 10h
 0x4542E0: mov     cl, [eax]
 0x4542E2: add     eax, 1
 0x4542E5: test    cl, cl
@@ -671,7 +661,6 @@
 0x454405: mov     [edi], si
 0x454408: lea     edx, [eax+1]
 0x45440B: jmp     short loc_454410
-0x45440D: align 10h
 0x454410: mov     cl, [eax]
 0x454412: add     eax, 1
 0x454415: test    cl, cl
@@ -749,7 +738,6 @@
 0x4544F3: cmp     eax, 19h
 0x4544F6: jnb     short loc_454530
 0x4544F8: jmp     short loc_454500
-0x4544FA: align 10h
 0x454500: lea     edi, [esp+4+arg_20]
 0x454504: add     edi, 0FFFFFFFFh
 0x454507: mov     al, [edi+1]
@@ -760,7 +748,6 @@
 0x454515: mov     [edi], si
 0x454518: lea     edx, [eax+1]
 0x45451B: jmp     short loc_454520
-0x45451D: align 10h
 0x454520: mov     cl, [eax]
 0x454522: add     eax, 1
 0x454525: test    cl, cl
@@ -851,7 +838,6 @@
 0x454625: mov     [edi], si
 0x454628: lea     edx, [eax+1]
 0x45462B: jmp     short loc_454630
-0x45462D: align 10h
 0x454630: mov     cl, [eax]
 0x454632: add     eax, 1
 0x454635: test    cl, cl
@@ -934,7 +920,6 @@
 0x454726: cmp     eax, 19h
 0x454729: jnb     short loc_454760
 0x45472B: jmp     short loc_454730
-0x45472D: align 10h
 0x454730: lea     edi, [esp+4+arg_20]
 0x454734: add     edi, 0FFFFFFFFh
 0x454737: mov     al, [edi+1]
@@ -945,7 +930,6 @@
 0x454745: mov     [edi], si
 0x454748: lea     edx, [eax+1]
 0x45474B: jmp     short loc_454750
-0x45474D: align 10h
 0x454750: mov     cl, [eax]
 0x454752: add     eax, 1
 0x454755: test    cl, cl
@@ -1035,7 +1019,6 @@
 0x454862: cmp     eax, 19h
 0x454865: jnb     short loc_4548A0
 0x454867: jmp     short loc_454870
-0x454869: align 10h
 0x454870: lea     edi, [esp+arg_24]
 0x454874: add     edi, 0FFFFFFFFh
 0x454877: mov     al, [edi+1]
@@ -1046,7 +1029,6 @@
 0x454885: mov     [edi], si
 0x454888: lea     edx, [eax+1]
 0x45488B: jmp     short loc_454890
-0x45488D: align 10h
 0x454890: mov     cl, [eax]
 0x454892: add     eax, 1
 0x454895: test    cl, cl
@@ -1129,7 +1111,6 @@
 0x454982: cmp     eax, 19h
 0x454985: jnb     short loc_4549C0
 0x454987: jmp     short loc_454990
-0x454989: align 10h
 0x454990: lea     edi, [esp+4+arg_20]
 0x454994: add     edi, 0FFFFFFFFh
 0x454997: mov     al, [edi+1]
@@ -1140,7 +1121,6 @@
 0x4549A5: mov     [edi], si
 0x4549A8: lea     edx, [eax+1]
 0x4549AB: jmp     short loc_4549B0
-0x4549AD: align 10h
 0x4549B0: mov     cl, [eax]
 0x4549B2: add     eax, 1
 0x4549B5: test    cl, cl
@@ -1223,7 +1203,6 @@
 0x454AA2: cmp     eax, 19h
 0x454AA5: jnb     short loc_454AE0
 0x454AA7: jmp     short loc_454AB0
-0x454AA9: align 10h
 0x454AB0: lea     edi, [esp+4+arg_20]
 0x454AB4: add     edi, 0FFFFFFFFh
 0x454AB7: mov     al, [edi+1]
@@ -1234,7 +1213,6 @@
 0x454AC5: mov     [edi], si
 0x454AC8: lea     edx, [eax+1]
 0x454ACB: jmp     short loc_454AD0
-0x454ACD: align 10h
 0x454AD0: mov     cl, [eax]
 0x454AD2: add     eax, 1
 0x454AD5: test    cl, cl
@@ -1327,7 +1305,6 @@
 0x454BE2: cmp     eax, 19h
 0x454BE5: jnb     short loc_454C20
 0x454BE7: jmp     short loc_454BF0
-0x454BE9: align 10h
 0x454BF0: lea     edi, [esp+4+arg_20]
 0x454BF4: add     edi, 0FFFFFFFFh
 0x454BF7: mov     al, [edi+1]
@@ -1338,7 +1315,6 @@
 0x454C05: mov     [edi], si
 0x454C08: lea     edx, [eax+1]
 0x454C0B: jmp     short loc_454C10
-0x454C0D: align 10h
 0x454C10: mov     cl, [eax]
 0x454C12: add     eax, 1
 0x454C15: test    cl, cl
@@ -1431,7 +1407,6 @@
 0x454D15: mov     [edi], si
 0x454D18: lea     edx, [eax+1]
 0x454D1B: jmp     short loc_454D20
-0x454D1D: align 10h
 0x454D20: mov     cl, [eax]
 0x454D22: add     eax, 1
 0x454D25: test    cl, cl
@@ -1522,7 +1497,6 @@
 0x454E25: mov     [edi], si
 0x454E28: lea     edx, [eax+1]
 0x454E2B: jmp     short loc_454E30
-0x454E2D: align 10h
 0x454E30: mov     cl, [eax]
 0x454E32: add     eax, 1
 0x454E35: test    cl, cl
@@ -1601,7 +1575,6 @@
 0x454F12: cmp     eax, 19h
 0x454F15: jnb     short loc_454F50
 0x454F17: jmp     short loc_454F20
-0x454F19: align 10h
 0x454F20: lea     edi, [esp+4+arg_20]
 0x454F24: add     edi, 0FFFFFFFFh
 0x454F27: mov     al, [edi+1]
@@ -1612,7 +1585,6 @@
 0x454F35: mov     [edi], si
 0x454F38: lea     edx, [eax+1]
 0x454F3B: jmp     short loc_454F40
-0x454F3D: align 10h
 0x454F40: mov     cl, [eax]
 0x454F42: add     eax, 1
 0x454F45: test    cl, cl
@@ -1705,7 +1677,6 @@
 0x455045: mov     [edi], si
 0x455048: lea     edx, [eax+1]
 0x45504B: jmp     short loc_455050
-0x45504D: align 10h
 0x455050: mov     cl, [eax]
 0x455052: add     eax, 1
 0x455055: test    cl, cl
@@ -1791,7 +1762,6 @@
 0x455145: mov     [edi], si
 0x455148: lea     edx, [eax+1]
 0x45514B: jmp     short loc_455150
-0x45514D: align 10h
 0x455150: mov     cl, [eax]
 0x455152: add     eax, 1
 0x455155: test    cl, cl
@@ -1872,7 +1842,6 @@
 0x455232: cmp     eax, 19h
 0x455235: jnb     short loc_455270
 0x455237: jmp     short loc_455240
-0x455239: align 10h
 0x455240: lea     edi, [esp+arg_24]
 0x455244: add     edi, 0FFFFFFFFh
 0x455247: mov     al, [edi+1]
@@ -1883,7 +1852,6 @@
 0x455255: mov     [edi], si
 0x455258: lea     edx, [eax+1]
 0x45525B: jmp     short loc_455260
-0x45525D: align 10h
 0x455260: mov     cl, [eax]
 0x455262: add     eax, 1
 0x455265: test    cl, cl
@@ -1967,7 +1935,6 @@
 0x455352: cmp     eax, 19h
 0x455355: jnb     short loc_455390
 0x455357: jmp     short loc_455360
-0x455359: align 10h
 0x455360: lea     edi, [esp+4+arg_20]
 0x455364: add     edi, 0FFFFFFFFh
 0x455367: mov     al, [edi+1]
@@ -1978,7 +1945,6 @@
 0x455375: mov     [edi], si
 0x455378: lea     edx, [eax+1]
 0x45537B: jmp     short loc_455380
-0x45537D: align 10h
 0x455380: mov     cl, [eax]
 0x455382: add     eax, 1
 0x455385: test    cl, cl
@@ -2068,7 +2034,6 @@
 0x455492: cmp     eax, 19h
 0x455495: jnb     short loc_4554D0
 0x455497: jmp     short loc_4554A0
-0x455499: align 10h
 0x4554A0: lea     edi, [esp+arg_24]
 0x4554A4: add     edi, 0FFFFFFFFh
 0x4554A7: mov     al, [edi+1]
@@ -2079,7 +2044,6 @@
 0x4554B5: mov     [edi], si
 0x4554B8: lea     edx, [eax+1]
 0x4554BB: jmp     short loc_4554C0
-0x4554BD: align 10h
 0x4554C0: mov     cl, [eax]
 0x4554C2: add     eax, 1
 0x4554C5: test    cl, cl
@@ -2192,7 +2156,6 @@
 0x4555F6: cmp     eax, 19h
 0x4555F9: jnb     short loc_455630
 0x4555FB: jmp     short loc_455600
-0x4555FD: align 10h
 0x455600: lea     edi, [esp+4+arg_20]
 0x455604: add     edi, 0FFFFFFFFh
 0x455607: mov     al, [edi+1]
@@ -2203,7 +2166,6 @@
 0x455615: mov     [edi], si
 0x455618: lea     edx, [eax+1]
 0x45561B: jmp     short loc_455620
-0x45561D: align 10h
 0x455620: mov     cl, [eax]
 0x455622: add     eax, 1
 0x455625: test    cl, cl
@@ -2282,7 +2244,6 @@
 0x455705: mov     [edi], si
 0x455708: lea     edx, [eax+1]
 0x45570B: jmp     short loc_455710
-0x45570D: align 10h
 0x455710: mov     cl, [eax]
 0x455712: add     eax, 1
 0x455715: test    cl, cl
@@ -2404,7 +2365,6 @@
 0x455895: mov     [edi], si
 0x455898: lea     edx, [eax+1]
 0x45589B: jmp     short loc_4558A0
-0x45589D: align 10h
 0x4558A0: mov     cl, [eax]
 0x4558A2: add     eax, 1
 0x4558A5: test    cl, cl
@@ -2481,7 +2441,6 @@
 0x455975: mov     [edi], si
 0x455978: lea     edx, [eax+1]
 0x45597B: jmp     short loc_455980
-0x45597D: align 10h
 0x455980: mov     cl, [eax]
 0x455982: add     eax, 1
 0x455985: test    cl, cl
@@ -2581,7 +2540,6 @@
 0x455AA5: mov     [edi], si
 0x455AA8: lea     edx, [eax+1]
 0x455AAB: jmp     short loc_455AB0
-0x455AAD: align 10h
 0x455AB0: mov     cl, [eax]
 0x455AB2: add     eax, 1
 0x455AB5: test    cl, cl
@@ -2672,7 +2630,6 @@
 0x455BC2: cmp     eax, 19h
 0x455BC5: jnb     short loc_455C00
 0x455BC7: jmp     short loc_455BD0
-0x455BC9: align 10h
 0x455BD0: lea     edi, [esp+4+arg_20]
 0x455BD4: add     edi, 0FFFFFFFFh
 0x455BD7: mov     al, [edi+1]
@@ -2683,7 +2640,6 @@
 0x455BE5: mov     [edi], si
 0x455BE8: lea     edx, [eax+1]
 0x455BEB: jmp     short loc_455BF0
-0x455BED: align 10h
 0x455BF0: mov     cl, [eax]
 0x455BF2: add     eax, 1
 0x455BF5: test    cl, cl
@@ -2819,7 +2775,6 @@
 0x455D83: cmp     eax, 19h
 0x455D86: jnb     short loc_455DC0
 0x455D88: jmp     short loc_455D90
-0x455D8A: align 10h
 0x455D90: lea     edi, [esp+4+arg_20]
 0x455D94: add     edi, 0FFFFFFFFh
 0x455D97: mov     al, [edi+1]
@@ -2830,7 +2785,6 @@
 0x455DA5: mov     [edi], si
 0x455DA8: lea     edx, [eax+1]
 0x455DAB: jmp     short loc_455DB0
-0x455DAD: align 10h
 0x455DB0: mov     cl, [eax]
 0x455DB2: add     eax, 1
 0x455DB5: test    cl, cl
@@ -2907,7 +2861,6 @@
 0x455E85: mov     [edi], si
 0x455E88: lea     edx, [eax+1]
 0x455E8B: jmp     short loc_455E90
-0x455E8D: align 10h
 0x455E90: mov     cl, [eax]
 0x455E92: add     eax, 1
 0x455E95: test    cl, cl
@@ -2997,7 +2950,6 @@
 0x455FA2: cmp     eax, 19h
 0x455FA5: jnb     short loc_455FE0
 0x455FA7: jmp     short loc_455FB0
-0x455FA9: align 10h
 0x455FB0: lea     edi, [esp+4+arg_20]
 0x455FB4: add     edi, 0FFFFFFFFh
 0x455FB7: mov     al, [edi+1]
@@ -3008,7 +2960,6 @@
 0x455FC5: mov     [edi], si
 0x455FC8: lea     edx, [eax+1]
 0x455FCB: jmp     short loc_455FD0
-0x455FCD: align 10h
 0x455FD0: mov     cl, [eax]
 0x455FD2: add     eax, 1
 0x455FD5: test    cl, cl
@@ -3091,7 +3042,6 @@
 0x4560C2: cmp     eax, 19h
 0x4560C5: jnb     short loc_456100
 0x4560C7: jmp     short loc_4560D0
-0x4560C9: align 10h
 0x4560D0: lea     edi, [esp+4+arg_20]
 0x4560D4: add     edi, 0FFFFFFFFh
 0x4560D7: mov     al, [edi+1]
@@ -3102,7 +3052,6 @@
 0x4560E5: mov     [edi], si
 0x4560E8: lea     edx, [eax+1]
 0x4560EB: jmp     short loc_4560F0
-0x4560ED: align 10h
 0x4560F0: mov     cl, [eax]
 0x4560F2: add     eax, 1
 0x4560F5: test    cl, cl
@@ -3193,7 +3142,6 @@
 0x4561F5: mov     [edi], si
 0x4561F8: lea     edx, [eax+1]
 0x4561FB: jmp     short loc_456200
-0x4561FD: align 10h
 0x456200: mov     cl, [eax]
 0x456202: add     eax, 1
 0x456205: test    cl, cl
@@ -3280,7 +3228,6 @@
 0x456302: cmp     eax, 19h
 0x456305: jnb     short loc_456340
 0x456307: jmp     short loc_456310
-0x456309: align 10h
 0x456310: lea     edi, [esp+4+arg_20]
 0x456314: add     edi, 0FFFFFFFFh
 0x456317: mov     al, [edi+1]
@@ -3291,7 +3238,6 @@
 0x456325: mov     [edi], si
 0x456328: lea     edx, [eax+1]
 0x45632B: jmp     short loc_456330
-0x45632D: align 10h
 0x456330: mov     cl, [eax]
 0x456332: add     eax, 1
 0x456335: test    cl, cl
@@ -3374,7 +3320,6 @@
 0x456422: cmp     eax, 19h
 0x456425: jnb     short loc_456460
 0x456427: jmp     short loc_456430
-0x456429: align 10h
 0x456430: lea     edi, [esp+4+arg_20]
 0x456434: add     edi, 0FFFFFFFFh
 0x456437: mov     al, [edi+1]
@@ -3385,7 +3330,6 @@
 0x456445: mov     [edi], si
 0x456448: lea     edx, [eax+1]
 0x45644B: jmp     short loc_456450
-0x45644D: align 10h
 0x456450: mov     cl, [eax]
 0x456452: add     eax, 1
 0x456455: test    cl, cl
@@ -3475,7 +3419,6 @@
 0x456555: mov     [edi], si
 0x456558: lea     edx, [eax+1]
 0x45655B: jmp     short loc_456560
-0x45655D: align 10h
 0x456560: mov     cl, [eax]
 0x456562: add     eax, 1
 0x456565: test    cl, cl
@@ -3568,7 +3511,6 @@
 0x456665: mov     [edi], si
 0x456668: lea     edx, [eax+1]
 0x45666B: jmp     short loc_456670
-0x45666D: align 10h
 0x456670: mov     cl, [eax]
 0x456672: add     eax, 1
 0x456675: test    cl, cl
@@ -3659,7 +3601,6 @@
 0x456775: mov     [edi], si
 0x456778: lea     edx, [eax+1]
 0x45677B: jmp     short loc_456780
-0x45677D: align 10h
 0x456780: mov     cl, [eax]
 0x456782: add     eax, 1
 0x456785: test    cl, cl
@@ -3750,7 +3691,6 @@
 0x456885: mov     [edi], si
 0x456888: lea     edx, [eax+1]
 0x45688B: jmp     short loc_456890
-0x45688D: align 10h
 0x456890: mov     cl, [eax]
 0x456892: add     eax, 1
 0x456895: test    cl, cl
@@ -3833,7 +3773,6 @@
 0x456982: cmp     eax, 19h
 0x456985: jnb     short loc_4569C0
 0x456987: jmp     short loc_456990
-0x456989: align 10h
 0x456990: lea     edi, [esp+4+arg_20]
 0x456994: add     edi, 0FFFFFFFFh
 0x456997: mov     al, [edi+1]
@@ -3844,7 +3783,6 @@
 0x4569A5: mov     [edi], si
 0x4569A8: lea     edx, [eax+1]
 0x4569AB: jmp     short loc_4569B0
-0x4569AD: align 10h
 0x4569B0: mov     cl, [eax]
 0x4569B2: add     eax, 1
 0x4569B5: test    cl, cl
@@ -3927,7 +3865,6 @@
 0x456AA2: cmp     eax, 19h
 0x456AA5: jnb     short loc_456AE0
 0x456AA7: jmp     short loc_456AB0
-0x456AA9: align 10h
 0x456AB0: lea     edi, [esp+4+arg_20]
 0x456AB4: add     edi, 0FFFFFFFFh
 0x456AB7: mov     al, [edi+1]
@@ -3938,7 +3875,6 @@
 0x456AC5: mov     [edi], si
 0x456AC8: lea     edx, [eax+1]
 0x456ACB: jmp     short loc_456AD0
-0x456ACD: align 10h
 0x456AD0: mov     cl, [eax]
 0x456AD2: add     eax, 1
 0x456AD5: test    cl, cl
@@ -4027,7 +3963,6 @@
 0x456BE3: cmp     eax, 19h
 0x456BE6: jnb     short loc_456C20
 0x456BE8: jmp     short loc_456BF0
-0x456BEA: align 10h
 0x456BF0: lea     edi, [esp+4+arg_20]
 0x456BF4: add     edi, 0FFFFFFFFh
 0x456BF7: mov     al, [edi+1]
@@ -4038,7 +3973,6 @@
 0x456C05: mov     [edi], si
 0x456C08: lea     edx, [eax+1]
 0x456C0B: jmp     short loc_456C10
-0x456C0D: align 10h
 0x456C10: mov     cl, [eax]
 0x456C12: add     eax, 1
 0x456C15: test    cl, cl
@@ -4135,7 +4069,6 @@
 0x456D32: cmp     eax, 19h
 0x456D35: jnb     short loc_456D70
 0x456D37: jmp     short loc_456D40
-0x456D39: align 10h
 0x456D40: lea     edi, [esp+4+arg_20]
 0x456D44: add     edi, 0FFFFFFFFh
 0x456D47: mov     al, [edi+1]
@@ -4146,7 +4079,6 @@
 0x456D55: mov     [edi], si
 0x456D58: lea     edx, [eax+1]
 0x456D5B: jmp     short loc_456D60
-0x456D5D: align 10h
 0x456D60: mov     cl, [eax]
 0x456D62: add     eax, 1
 0x456D65: test    cl, cl
@@ -4229,7 +4161,6 @@
 0x456E52: cmp     eax, 19h
 0x456E55: jnb     short loc_456E90
 0x456E57: jmp     short loc_456E60
-0x456E59: align 10h
 0x456E60: lea     edi, [esp+4+arg_20]
 0x456E64: add     edi, 0FFFFFFFFh
 0x456E67: mov     al, [edi+1]
@@ -4240,7 +4171,6 @@
 0x456E75: mov     [edi], si
 0x456E78: lea     edx, [eax+1]
 0x456E7B: jmp     short loc_456E80
-0x456E7D: align 10h
 0x456E80: mov     cl, [eax]
 0x456E82: add     eax, 1
 0x456E85: test    cl, cl
@@ -4325,7 +4255,6 @@
 0x456F72: cmp     eax, 19h
 0x456F75: jnb     short loc_456FB0
 0x456F77: jmp     short loc_456F80
-0x456F79: align 10h
 0x456F80: lea     edi, [esp+4+arg_20]
 0x456F84: add     edi, 0FFFFFFFFh
 0x456F87: mov     al, [edi+1]
@@ -4336,7 +4265,6 @@
 0x456F95: mov     [edi], si
 0x456F98: lea     edx, [eax+1]
 0x456F9B: jmp     short loc_456FA0
-0x456F9D: align 10h
 0x456FA0: mov     cl, [eax]
 0x456FA2: add     eax, 1
 0x456FA5: test    cl, cl
@@ -4422,7 +4350,6 @@
 0x457095: mov     [edi], si
 0x457098: lea     edx, [eax+1]
 0x45709B: jmp     short loc_4570A0
-0x45709D: align 10h
 0x4570A0: mov     cl, [eax]
 0x4570A2: add     eax, 1
 0x4570A5: test    cl, cl
@@ -4505,7 +4432,6 @@
 0x457192: cmp     eax, 19h
 0x457195: jnb     short loc_4571D0
 0x457197: jmp     short loc_4571A0
-0x457199: align 10h
 0x4571A0: lea     edi, [esp+4+arg_20]
 0x4571A4: add     edi, 0FFFFFFFFh
 0x4571A7: mov     al, [edi+1]
@@ -4516,7 +4442,6 @@
 0x4571B5: mov     [edi], si
 0x4571B8: lea     edx, [eax+1]
 0x4571BB: jmp     short loc_4571C0
-0x4571BD: align 10h
 0x4571C0: mov     cl, [eax]
 0x4571C2: add     eax, 1
 0x4571C5: test    cl, cl
@@ -4600,7 +4525,6 @@
 0x4572B2: cmp     eax, 19h
 0x4572B5: jnb     short loc_4572F0
 0x4572B7: jmp     short loc_4572C0
-0x4572B9: align 10h
 0x4572C0: lea     edi, [esp+4+arg_20]
 0x4572C4: add     edi, 0FFFFFFFFh
 0x4572C7: mov     al, [edi+1]
@@ -4611,7 +4535,6 @@
 0x4572D5: mov     [edi], si
 0x4572D8: lea     edx, [eax+1]
 0x4572DB: jmp     short loc_4572E0
-0x4572DD: align 10h
 0x4572E0: mov     cl, [eax]
 0x4572E2: add     eax, 1
 0x4572E5: test    cl, cl
@@ -4695,7 +4618,6 @@
 0x4573D2: cmp     eax, 19h
 0x4573D5: jnb     short loc_457410
 0x4573D7: jmp     short loc_4573E0
-0x4573D9: align 10h
 0x4573E0: lea     edi, [esp+4+arg_20]
 0x4573E4: add     edi, 0FFFFFFFFh
 0x4573E7: mov     al, [edi+1]
@@ -4706,7 +4628,6 @@
 0x4573F5: mov     [edi], si
 0x4573F8: lea     edx, [eax+1]
 0x4573FB: jmp     short loc_457400
-0x4573FD: align 10h
 0x457400: mov     cl, [eax]
 0x457402: add     eax, 1
 0x457405: test    cl, cl
@@ -4802,7 +4723,6 @@
 0x457512: cmp     eax, 19h
 0x457515: jnb     short loc_457550
 0x457517: jmp     short loc_457520
-0x457519: align 10h
 0x457520: lea     edi, [esp+4+arg_20]
 0x457524: add     edi, 0FFFFFFFFh
 0x457527: mov     al, [edi+1]
@@ -4813,7 +4733,6 @@
 0x457535: mov     [edi], si
 0x457538: lea     edx, [eax+1]
 0x45753B: jmp     short loc_457540
-0x45753D: align 10h
 0x457540: mov     cl, [eax]
 0x457542: add     eax, 1
 0x457545: test    cl, cl
@@ -4859,11 +4778,11 @@
 0x4575B8: test    esi, esi
 0x4575BA: jz      short loc_4575D1
 0x4575BC: mov     ecx, esi
-0x4575BE: call    sub_41FC70
+0x4575BE: call    ExtraDataList_GetTrespassPackage; Returns the TrespassPackage stored in ExtraTresPassPackage, or null.
 0x4575C3: test    eax, eax
 0x4575C5: jz      short loc_4575D1
 0x4575C7: mov     ecx, esi
-0x4575C9: call    sub_41FC70
+0x4575C9: call    ExtraDataList_GetTrespassPackage; Returns the TrespassPackage stored in ExtraTresPassPackage, or null.
 0x4575CE: mov     edi, [eax+0Ch]
 0x4575D1: cmp     [esp+arg_174], 0
 0x4575D9: jz      short loc_4575F3
@@ -4905,7 +4824,6 @@
 0x457642: cmp     eax, 19h
 0x457645: jnb     short loc_457680
 0x457647: jmp     short loc_457650
-0x457649: align 10h
 0x457650: lea     edi, [esp+4+arg_20]
 0x457654: add     edi, 0FFFFFFFFh
 0x457657: mov     al, [edi+1]
@@ -4916,7 +4834,6 @@
 0x457665: mov     [edi], si
 0x457668: lea     edx, [eax+1]
 0x45766B: jmp     short loc_457670
-0x45766D: align 10h
 0x457670: mov     cl, [eax]
 0x457672: add     eax, 1
 0x457675: test    cl, cl
@@ -4986,12 +4903,12 @@
 0x457742: mov     [esp+arg_5C], edx
 0x457746: mov     [esp+arg_60], ax
 0x45774B: jz      short loc_457771
-0x45774D: mov     ecx, ebx
-0x45774F: call    sub_5E4080
+0x45774D: mov     ecx, ebx; this
+0x45774F: call    Actor__GetCurrentPackageTypeName; Returns TESPackageNames[currentPackage->members.type] when Actor.process and process.currentPackage exist; otherwise null.
 0x457754: test    eax, eax
 0x457756: jz      short loc_457771
-0x457758: mov     ecx, ebx
-0x45775A: call    sub_5E4080
+0x457758: mov     ecx, ebx; this
+0x45775A: call    Actor__GetCurrentPackageTypeName; Returns TESPackageNames[currentPackage->members.type] when Actor.process and process.currentPackage exist; otherwise null.
 0x45775F: lea     edx, [esp+arg_58]
 0x457763: mov     cl, [eax]
 0x457765: mov     [edx], cl
@@ -5032,7 +4949,6 @@
 0x4577C2: cmp     eax, 19h
 0x4577C5: jnb     short loc_457800
 0x4577C7: jmp     short loc_4577D0
-0x4577C9: align 10h
 0x4577D0: lea     edi, [esp+4+arg_20]
 0x4577D4: add     edi, 0FFFFFFFFh
 0x4577D7: mov     al, [edi+1]
@@ -5043,7 +4959,6 @@
 0x4577E5: mov     [edi], si
 0x4577E8: lea     edx, [eax+1]
 0x4577EB: jmp     short loc_4577F0
-0x4577ED: align 10h
 0x4577F0: mov     cl, [eax]
 0x4577F2: add     eax, 1
 0x4577F5: test    cl, cl
@@ -5133,7 +5048,6 @@
 0x4578F5: mov     [edi], si
 0x4578F8: lea     edx, [eax+1]
 0x4578FB: jmp     short loc_457900
-0x4578FD: align 10h
 0x457900: mov     cl, [eax]
 0x457902: add     eax, 1
 0x457905: test    cl, cl
@@ -5216,7 +5130,6 @@
 0x4579F2: cmp     eax, 19h
 0x4579F5: jnb     short loc_457A30
 0x4579F7: jmp     short loc_457A00
-0x4579F9: align 10h
 0x457A00: lea     edi, [esp+4+arg_20]
 0x457A04: add     edi, 0FFFFFFFFh
 0x457A07: mov     al, [edi+1]
@@ -5227,7 +5140,6 @@
 0x457A15: mov     [edi], si
 0x457A18: lea     edx, [eax+1]
 0x457A1B: jmp     short loc_457A20
-0x457A1D: align 10h
 0x457A20: mov     cl, [eax]
 0x457A22: add     eax, 1
 0x457A25: test    cl, cl
@@ -5311,7 +5223,6 @@
 0x457B12: cmp     eax, 19h
 0x457B15: jnb     short loc_457B50
 0x457B17: jmp     short loc_457B20
-0x457B19: align 10h
 0x457B20: lea     edi, [esp+4+arg_20]
 0x457B24: add     edi, 0FFFFFFFFh
 0x457B27: mov     al, [edi+1]
@@ -5322,7 +5233,6 @@
 0x457B35: mov     [edi], si
 0x457B38: lea     edx, [eax+1]
 0x457B3B: jmp     short loc_457B40
-0x457B3D: align 10h
 0x457B40: mov     cl, [eax]
 0x457B42: add     eax, 1
 0x457B45: test    cl, cl
@@ -5413,7 +5323,6 @@
 0x457C45: mov     [edi], si
 0x457C48: lea     edx, [eax+1]
 0x457C4B: jmp     short loc_457C50
-0x457C4D: align 10h
 0x457C50: mov     cl, [eax]
 0x457C52: add     eax, 1
 0x457C55: test    cl, cl
@@ -5512,7 +5421,6 @@
 0x457D65: mov     [edi], si
 0x457D68: lea     edx, [eax+1]
 0x457D6B: jmp     short loc_457D70
-0x457D6D: align 10h
 0x457D70: mov     cl, [eax]
 0x457D72: add     eax, 1
 0x457D75: test    cl, cl
@@ -5603,7 +5511,6 @@
 0x457E75: mov     [edi], si
 0x457E78: lea     edx, [eax+1]
 0x457E7B: jmp     short loc_457E80
-0x457E7D: align 10h
 0x457E80: mov     cl, [eax]
 0x457E82: add     eax, 1
 0x457E85: test    cl, cl
@@ -5688,7 +5595,6 @@
 0x457F72: cmp     eax, 19h
 0x457F75: jnb     short loc_457FB0
 0x457F77: jmp     short loc_457F80
-0x457F79: align 10h
 0x457F80: lea     edi, [esp+4+arg_20]
 0x457F84: add     edi, 0FFFFFFFFh
 0x457F87: mov     al, [edi+1]
@@ -5699,7 +5605,6 @@
 0x457F95: mov     [edi], si
 0x457F98: lea     edx, [eax+1]
 0x457F9B: jmp     short loc_457FA0
-0x457F9D: align 10h
 0x457FA0: mov     cl, [eax]
 0x457FA2: add     eax, 1
 0x457FA5: test    cl, cl
@@ -5737,7 +5642,6 @@
 0x458004: mov     edi, [esp+arg_C]
 0x458008: add     edi, 0FFFFFFFFh
 0x45800B: jmp     short loc_458010
-0x45800D: align 10h
 0x458010: mov     al, [edi+1]
 0x458013: add     edi, 1
 0x458016: test    al, al
@@ -5787,7 +5691,6 @@
 0x458095: mov     [edi], si
 0x458098: lea     edx, [eax+1]
 0x45809B: jmp     short loc_4580A0
-0x45809D: align 10h
 0x4580A0: mov     cl, [eax]
 0x4580A2: add     eax, 1
 0x4580A5: test    cl, cl
@@ -5881,7 +5784,6 @@
 0x4581A5: mov     [edi], si
 0x4581A8: lea     edx, [eax+1]
 0x4581AB: jmp     short loc_4581B0
-0x4581AD: align 10h
 0x4581B0: mov     cl, [eax]
 0x4581B2: add     eax, 1
 0x4581B5: test    cl, cl
@@ -5975,7 +5877,6 @@
 0x4582B5: mov     [edi], si
 0x4582B8: lea     edx, [eax+1]
 0x4582BB: jmp     short loc_4582C0
-0x4582BD: align 10h
 0x4582C0: mov     cl, [eax]
 0x4582C2: add     eax, 1
 0x4582C5: test    cl, cl
@@ -6067,7 +5968,6 @@
 0x4583C5: mov     [edi], si
 0x4583C8: lea     edx, [eax+1]
 0x4583CB: jmp     short loc_4583D0
-0x4583CD: align 10h
 0x4583D0: mov     cl, [eax]
 0x4583D2: add     eax, 1
 0x4583D5: test    cl, cl
@@ -6149,7 +6049,6 @@
 0x4584B6: cmp     eax, 19h
 0x4584B9: jnb     short loc_4584F0
 0x4584BB: jmp     short loc_4584C0
-0x4584BD: align 10h
 0x4584C0: lea     edi, [esp+4+arg_20]
 0x4584C4: add     edi, 0FFFFFFFFh
 0x4584C7: mov     al, [edi+1]
@@ -6160,7 +6059,6 @@
 0x4584D5: mov     [edi], si
 0x4584D8: lea     edx, [eax+1]
 0x4584DB: jmp     short loc_4584E0
-0x4584DD: align 10h
 0x4584E0: mov     cl, [eax]
 0x4584E2: add     eax, 1
 0x4584E5: test    cl, cl
@@ -6252,7 +6150,6 @@
 0x4585E5: mov     [edi], si
 0x4585E8: lea     edx, [eax+1]
 0x4585EB: jmp     short loc_4585F0
-0x4585ED: align 10h
 0x4585F0: mov     cl, [eax]
 0x4585F2: add     eax, 1
 0x4585F5: test    cl, cl
@@ -6336,7 +6233,6 @@
 0x4586E2: cmp     eax, 19h
 0x4586E5: jnb     short loc_458720
 0x4586E7: jmp     short loc_4586F0
-0x4586E9: align 10h
 0x4586F0: lea     edi, [esp+4+arg_20]
 0x4586F4: add     edi, 0FFFFFFFFh
 0x4586F7: mov     al, [edi+1]
@@ -6347,7 +6243,6 @@
 0x458705: mov     [edi], si
 0x458708: lea     edx, [eax+1]
 0x45870B: jmp     short loc_458710
-0x45870D: align 10h
 0x458710: mov     cl, [eax]
 0x458712: add     eax, 1
 0x458715: test    cl, cl
@@ -6429,7 +6324,6 @@
 0x4587F2: cmp     eax, 19h
 0x4587F5: jnb     short loc_458830
 0x4587F7: jmp     short loc_458800
-0x4587F9: align 10h
 0x458800: lea     edi, [esp+4+arg_20]
 0x458804: add     edi, 0FFFFFFFFh
 0x458807: mov     al, [edi+1]
@@ -6440,7 +6334,6 @@
 0x458815: mov     [edi], si
 0x458818: lea     edx, [eax+1]
 0x45881B: jmp     short loc_458820
-0x45881D: align 10h
 0x458820: mov     cl, [eax]
 0x458822: add     eax, 1
 0x458825: test    cl, cl
@@ -6487,7 +6380,6 @@
 0x4588A6: mov     eax, ebx
 0x4588A8: add     eax, 0FFFFFFFFh
 0x4588AB: jmp     short loc_4588B0
-0x4588AD: align 10h
 0x4588B0: mov     cl, [eax+1]
 0x4588B3: add     eax, 1
 0x4588B6: test    cl, cl
@@ -6542,7 +6434,6 @@
 0x458955: mov     [edi], si
 0x458958: lea     edx, [eax+1]
 0x45895B: jmp     short loc_458960
-0x45895D: align 10h
 0x458960: mov     cl, [eax]
 0x458962: add     eax, 1
 0x458965: test    cl, cl
@@ -6634,7 +6525,6 @@
 0x458A65: mov     [edi], si
 0x458A68: lea     edx, [eax+1]
 0x458A6B: jmp     short loc_458A70
-0x458A6D: align 10h
 0x458A70: mov     cl, [eax]
 0x458A72: add     eax, 1
 0x458A75: test    cl, cl
@@ -6732,7 +6622,6 @@
 0x458B95: mov     [edi], si
 0x458B98: lea     edx, [eax+1]
 0x458B9B: jmp     short loc_458BA0
-0x458B9D: align 10h
 0x458BA0: mov     cl, [eax]
 0x458BA2: add     eax, 1
 0x458BA5: test    cl, cl
@@ -6801,7 +6690,6 @@
 0x458C65: add     esp, 0Ch
 0x458C68: lea     edx, [eax+1]
 0x458C6B: jmp     short loc_458C70
-0x458C6D: align 10h
 0x458C70: mov     cl, [eax]
 0x458C72: add     eax, 1
 0x458C75: test    cl, cl
@@ -6811,7 +6699,6 @@
 0x458C82: cmp     eax, 19h
 0x458C85: jnb     short loc_458CC0
 0x458C87: jmp     short loc_458C90
-0x458C89: align 10h
 0x458C90: lea     edi, [esp+4+arg_20]
 0x458C94: add     edi, 0FFFFFFFFh
 0x458C97: mov     al, [edi+1]
@@ -6822,7 +6709,6 @@
 0x458CA5: mov     [edi], si
 0x458CA8: lea     edx, [eax+1]
 0x458CAB: jmp     short loc_458CB0
-0x458CAD: align 10h
 0x458CB0: mov     cl, [eax]
 0x458CB2: add     eax, 1
 0x458CB5: test    cl, cl
@@ -6914,7 +6800,6 @@
 0x458DB5: mov     [edi], si
 0x458DB8: lea     edx, [eax+1]
 0x458DBB: jmp     short loc_458DC0
-0x458DBD: align 10h
 0x458DC0: mov     cl, [eax]
 0x458DC2: add     eax, 1
 0x458DC5: test    cl, cl

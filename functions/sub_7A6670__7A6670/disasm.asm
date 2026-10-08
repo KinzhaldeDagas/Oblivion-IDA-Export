@@ -1,4 +1,4 @@
-0x7A6670: fld1
+0x7A6670: fld1; Oblivion stTransform::LoadIdentity. Writes the 4x4 identity matrix in place; called after CWindMatrices allocates/constructs each global wind transform.
 0x7A6672: fst     dword ptr [ecx]
 0x7A6674: fldz
 0x7A6676: fst     dword ptr [ecx+4]

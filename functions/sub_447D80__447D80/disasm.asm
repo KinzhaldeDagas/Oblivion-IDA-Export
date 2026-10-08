@@ -5,7 +5,6 @@
 0x447D87: test    esi, esi
 0x447D89: jz      short loc_447DA4
 0x447D8B: jmp     short loc_447D90
-0x447D8D: align 10h
 0x447D90: mov     ecx, [esi]
 0x447D92: test    ecx, ecx
 0x447D94: jz      short loc_447DA4

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7FB250",
-    "line": "push    ebx",
+    "line": "push    ebx; Oblivion Lighting30Shader initialization/reset: initializes the base shader, releases SM3 program tables and 54 pooled passes, then seeds repeated constant blocks from the engine's default color/vector.",
     "mnemonic": "push",
     "size": 1
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x7FB254",
-    "line": "call    sub_8025F0",
+    "line": "call    sub_8025F0; Generic BSShader initialization used by SpeedTreeFrondShader vtable +0x84: sets renderer, invokes setup/check virtuals, and allocates one pass slot through sub_76CCA0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x7FB25F",
-    "line": "mov     edi, offset dword_B47288",
+    "line": "mov     edi, offset unk_B47288",
     "mnemonic": "mov",
     "size": 5
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x7FB289",
-    "line": "cmp     edi, offset dword_B47308",
+    "line": "cmp     edi, offset unk_B47308",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x7FB293",
-    "line": "mov     esi, ds:dword_B46ED8[edi]",
+    "line": "mov     esi, dword ptr ds:unk_B46ED8[edi]",
     "mnemonic": "mov",
     "size": 6
   },
@@ -259,13 +259,13 @@
   },
   {
     "ea": "0x7FB2B5",
-    "line": "mov     ds:dword_B46ED8[edi], ebx",
+    "line": "mov     dword ptr ds:unk_B46ED8[edi], ebx",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x7FB2BB",
-    "line": "mov     esi, ds:dword_B46C20[edi]",
+    "line": "mov     esi, dword ptr ds:unk_B46C20[edi]",
     "mnemonic": "mov",
     "size": 6
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x7FB2DD",
-    "line": "mov     ds:dword_B46C20[edi], ebx",
+    "line": "mov     dword ptr ds:unk_B46C20[edi], ebx",
     "mnemonic": "mov",
     "size": 6
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x7FB2EE",
-    "line": "mov     esi, offset dword_B473D0",
+    "line": "mov     esi, offset unk_B473D0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x7FB301",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x7FB30B",
-    "line": "cmp     esi, offset dword_B474A8",
+    "line": "cmp     esi, offset unk_B474A8",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x7FB340",
-    "line": "mov     esi, offset dword_B46CC8",
+    "line": "mov     esi, offset unk_B46CC8",
     "mnemonic": "mov",
     "size": 5
   },
@@ -547,13 +547,13 @@
   },
   {
     "ea": "0x7FB368",
-    "line": "mov     esi, offset dword_B46F78",
+    "line": "mov     esi, offset flt_B46F78",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x7FB36D",
-    "line": "mov     edi, offset dword_B46F88",
+    "line": "mov     edi, offset unk_B46F88",
     "mnemonic": "mov",
     "size": 5
   },

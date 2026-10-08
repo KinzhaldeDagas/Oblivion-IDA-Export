@@ -11,7 +11,7 @@
 0x77C3F3: mov     eax, [esp+110h+arg_4]
 0x77C3FA: push    eax
 0x77C3FB: mov     ecx, esi
-0x77C3FD: call    sub_452A60
+0x77C3FD: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x77C402: push    eax; ArgList
 0x77C403: push    offset aSD_5; "%s%d"
 0x77C408: lea     ecx, [esp+11Ch+DstBuf]

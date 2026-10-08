@@ -1,18 +1,18 @@
 char sub_77BC40()
 {
-  _DWORD *v0; // eax
+  int v0; // eax
 
-  v0 = (_DWORD *)FormHeapAlloc(8u);
-  if ( v0 )
+  v0 = FormHeapAlloc(8u); /*0x77bc42*/
+  if ( v0 ) /*0x77bc4c*/
   {
-    *v0 = &NiD3DShaderProgramCreatorHLSL::`vftable';
-    v0[1] = 0;
-    dword_B428C8 = (int)v0;
-    return sub_77F720("hlsl", (int)v0);
+    *(_DWORD *)v0 = &NiD3DShaderProgramCreatorHLSL::`vftable'; /*0x77bc4f*/
+    *(_DWORD *)(v0 + 4) = 0; /*0x77bc55*/
+    unk_B428C8 = v0; /*0x77bc61*/
+    return sub_77F720("hlsl", (TESForm *)v0); /*0x77bc66*/
   }
   else
   {
-    dword_B428C8 = 0;
-    return sub_77F720("hlsl", 0);
+    unk_B428C8 = 0; /*0x77bc77*/
+    return sub_77F720("hlsl", 0); /*0x77bc7c*/
   }
 }

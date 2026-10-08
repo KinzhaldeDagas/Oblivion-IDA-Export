@@ -1,4 +1,4 @@
-int __stdcall sub_51EAF0(void *a1, size_t a2)
+void __userpurge sub_51EAF0(int a1@<ecx>, ActorBaseSaveChangeMask a2, size_t a3)
 {
-  return sub_51C710(a1, a2);
+  TESCreature_LoadModified((TESCreature *)(a1 - 0x68), a2, a3); /*0x51eaf3*/
 }

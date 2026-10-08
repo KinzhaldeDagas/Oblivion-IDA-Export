@@ -1,1 +1,1 @@
-DC
+typedef tagDC DC;

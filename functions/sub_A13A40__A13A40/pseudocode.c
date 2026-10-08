@@ -1,4 +1,4 @@
-BSStringT *sub_A13A40()
+NiRTTI *sub_A13A40()
 {
-  return sub_70E220((BSStringT *)dword_BA8404, "bhkHeightFieldShape", (int)dword_BA7D78);
+  return NiRTTI_Constructor(&stru_BA8404, "bhkHeightFieldShape", &stru_BA7D78); /*0xa13a54*/
 }

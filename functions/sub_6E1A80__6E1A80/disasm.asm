@@ -10,7 +10,7 @@
 0x6E1A97: mov     eax, [esp+4+arg_8]
 0x6E1A9B: mov     [ecx+24h], edx
 0x6E1A9E: mov     [ecx+14h], eax
-0x6E1AA1: mov     al, ds:byte_B3D3EE[eax]
+0x6E1AA1: mov     al, byte ptr ds:unk_B3D3EE[eax]
 0x6E1AA7: mov     [ecx+1Dh], al
 0x6E1AAA: pop     ebx
 0x6E1AAB: retn    0Ch

@@ -1,1 +1,1 @@
-IMediaObjectVtbl_0
+typedef IMediaObjectVtbl IMediaObjectVtbl_0;

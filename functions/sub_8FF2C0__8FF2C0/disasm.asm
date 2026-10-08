@@ -50,7 +50,6 @@
 0x8FF377: test    eax, eax
 0x8FF379: jz      short loc_8FF389
 0x8FF37B: jmp     short loc_8FF380
-0x8FF37D: align 10h
 0x8FF380: mov     edx, eax
 0x8FF382: mov     eax, [edx+0Ch]
 0x8FF385: test    eax, eax
@@ -495,7 +494,7 @@
 0x8FF91D: test    ecx, ecx
 0x8FF91F: mov     edx, [ebp+arg_10]
 0x8FF922: mov     ebx, [edx]
-0x8FF924: movaps  xmm0, xmmword ptr [esp+170h+var_130]
+0x8FF924: movaps  xmm0, [esp+170h+var_130]
 0x8FF929: mov     eax, [ebp+arg_C]
 0x8FF92C: movaps  xmmword ptr [ebx], xmm0
 0x8FF92F: movaps  xmm0, xmmword ptr [eax]

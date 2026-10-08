@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x76E0B0",
-    "line": "sub     esp, 20h",
+    "line": "sub     esp, 20h; Creates NiDX9ImplicitDepthStencilBufferData around IDirect3DDevice9::GetDepthStencilSurface. Reads the surface description, creates or attaches the parent Ni2DBuffer, and records the surface in the renderer's depth/stencil binding cache.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x76E0C8",
-    "line": "push    offset NiRefObject_objcount; lpAddend",
+    "line": "push    0B3FD64h; lpAddend",
     "mnemonic": "push",
     "size": 5
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x76E0EF",
-    "line": "mov     eax, [esp+2Ch+arg_0]",
+    "line": "mov     eax, [esp+2Ch+device]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x76E14E",
-    "line": "mov     edi, [esp+34h+arg_4]",
+    "line": "mov     edi, [esp+34h+parentBuffer]",
     "mnemonic": "mov",
     "size": 4
   },

@@ -1,1 +1,1 @@
-enum_emh_data_0
+typedef enum_emh_data enum_emh_data_0;

@@ -1,4 +1,4 @@
-0x671620: push    ebp
+0x671620: push    ebp; Player input update. Native ABI is PlayerCharacter in ECX plus one float deltaTime stack argument.
 0x671621: mov     ebp, esp
 0x671623: and     esp, 0FFFFFFF0h
 0x671626: sub     esp, 94h
@@ -20,7 +20,7 @@
 0x67165D: mov     byte ptr [esp+0A0h+var_94+7], 0
 0x671662: call    sub_667520
 0x671667: mov     ecx, ebx; this
-0x671669: call    MobileObject_GetCharProxy
+0x671669: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x67166E: test    eax, eax
 0x671670: jz      short loc_67169B
 0x671672: mov     eax, [eax+1F4h]
@@ -29,7 +29,7 @@
 0x67167D: jz      short loc_67169B
 0x67167F: cmp     byte ptr [ebx+115h], 0
 0x671686: jnz     short loc_6716A2
-0x671688: mov     ecx, offset ActorProcessManager_ptr
+0x671688: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x67168D: call    sub_6768C0
 0x671692: mov     byte ptr [ebx+115h], 1
 0x671699: jmp     short loc_6716A2
@@ -82,8 +82,8 @@
 0x67172D: fnstsw  ax
 0x67172F: test    ah, 1
 0x671732: jnz     short loc_671746
-0x671734: mov     ecx, offset ActorProcessManager_ptr
-0x671739: call    sub_67A230
+0x671734: mov     ecx, (offset qword_B3BB2C+1D4h)
+0x671739: call    ProcessLists_SortActorDistanceCandidatesAndTrim; MEF LARGE PERF 2026-09-08: PERF-7 cadence qualification: player+618 countdown gates sort-and-trim67A230. On expiry resets fromB36CE0; otherwise subtracts frame deltaB33E9C. Initializer9E8590 registers fSortActorDistanceListTimer default3.0. This is periodic, not an unconditional per-frame sort.
 0x67173E: fld     dword ptr ds:0B36CE0h
 0x671744: jmp     short loc_671752
 0x671746: fld     dword ptr [ebx+618h]
@@ -105,11 +105,11 @@
 0x671786: push    1; float
 0x671788: mov     ecx, ebx; int
 0x67178A: mov     byte ptr [ebx+71Fh], 0
-0x671791: call    sub_66FF10
+0x671791: call    PlayerCharacter_ProcessQueuedWorldspaceMove; Early Player_OnInput queued-worldspace move path gated by PlayerCharacter+0x71F. It can run before the internal 0x672F08 call-site and is followed by an early ActivateRef return if PlayerCharacter+0x5C4 is set.
 0x671796: mov     ecx, [ebx+5C4h]
 0x67179C: test    ecx, ecx
 0x67179E: jz      short loc_6717BB
-0x6717A0: push    1
+0x6717A0: push    1; Early Player_OnInput ActivateRef return path. An internal 0x672F08 call-site hook will not run on this frame; a vtable post-wrapper around Player_OnInput will still run after this return.
 0x6717A2: push    0
 0x6717A4: push    0
 0x6717A6: push    ebx
@@ -134,12 +134,12 @@
 0x6717E0: call    eax
 0x6717E2: mov     ecx, [ebx+58h]
 0x6717E5: mov     edx, [ecx]
-0x6717E7: mov     eax, [edx+36Ch]
+0x6717E7: mov     eax, [edx+36Ch]; TES4 authoritative: Player_OnInput reads process GetSitSleepState (+0x36C). If state == 4 and GetMountedHorse succeeds, player movement flags are taken from the horse process.
 0x6717ED: call    eax
 0x6717EF: cmp     eax, 4
 0x6717F2: jnz     short loc_67180F
 0x6717F4: mov     edx, [ebx]
-0x6717F6: mov     eax, [edx+380h]
+0x6717F6: mov     eax, [edx+380h]; TES4 authoritative: Player_OnInput Actor vtable +0x380 GetMountedHorse. Mounted player input switches to the horse process for movement flags.
 0x6717FC: mov     ecx, ebx
 0x6717FE: call    eax
 0x671800: mov     edi, eax
@@ -154,13 +154,13 @@
 0x67181A: call    eax
 0x67181C: mov     ecx, ebx
 0x67181E: movzx   esi, ax
-0x671821: call    Actor_IsSneaking
+0x671821: call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.
 0x671826: test    al, al
 0x671828: jz      short loc_67189B
 0x67182A: test    edi, edi
 0x67182C: jnz     short loc_67189B
 0x67182E: mov     ecx, ebx
-0x671830: call    sub_5E05B0
+0x671830: call    sub_5E05B0; Checks process movement flags low nibble via vfunc +0x2C0. Player input uses this alongside swimming/sneaking skill progression; useful as a broad movement-mode guard.
 0x671835: test    al, al
 0x671837: jz      short loc_67189B
 0x671839: cmp     dword ptr ds:0B3B368h, 3
@@ -180,7 +180,7 @@
 0x671870: push    edi
 0x671871: push    1Fh
 0x671873: mov     ecx, ebx
-0x671875: call    eax
+0x671875: call    eax; Periodic on-foot sneaking award: Sneak (0x1F), useValue0, identity scale (0.0). Mounted state is excluded before this call.
 0x671877: fldz
 0x671879: fstp    dword ptr [ebx+5A4h]
 0x67187F: jmp     loc_671949
@@ -188,14 +188,14 @@
 0x67188A: fadd    dword ptr [ebx+5A4h]
 0x671890: fstp    dword ptr [ebx+5A4h]
 0x671896: jmp     loc_671949
-0x67189B: mov     ecx, ebx
-0x67189D: call    Actor_IsSwimming
+0x67189B: mov     ecx, ebx; this
+0x67189D: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x6718A2: test    al, al
 0x6718A4: jz      short loc_6718F8
 0x6718A6: test    edi, edi
 0x6718A8: jnz     short loc_6718F8
 0x6718AA: mov     ecx, ebx
-0x6718AC: call    sub_5E05B0
+0x6718AC: call    sub_5E05B0; Checks process movement flags low nibble via vfunc +0x2C0. Player input uses this alongside swimming/sneaking skill progression; useful as a broad movement-mode guard.
 0x6718B1: test    al, al
 0x6718B3: jz      short loc_6718F8
 0x6718B5: fld1
@@ -211,7 +211,7 @@
 0x6718D2: push    1
 0x6718D4: push    0Dh
 0x6718D6: mov     ecx, ebx
-0x6718D8: call    eax
+0x6718D8: call    eax; Periodic swimming award: Athletics (0x0D), useValue1, identity scale (0.0).
 0x6718DA: fldz
 0x6718DC: fstp    dword ptr [ebx+5A0h]
 0x6718E2: jmp     short loc_671949
@@ -224,7 +224,7 @@
 0x671900: test    edi, edi
 0x671902: jnz     short loc_671949
 0x671904: mov     ecx, ebx
-0x671906: call    sub_5E05B0
+0x671906: call    sub_5E05B0; Checks process movement flags low nibble via vfunc +0x2C0. Player input uses this alongside swimming/sneaking skill progression; useful as a broad movement-mode guard.
 0x67190B: test    al, al
 0x67190D: jz      short loc_671949
 0x67190F: fld1
@@ -240,7 +240,7 @@
 0x67192C: push    edi
 0x67192D: push    0Dh
 0x67192F: mov     ecx, ebx
-0x671931: call    eax
+0x671931: call    eax; Periodic on-foot movement-flag 0x200 award: Athletics (0x0D), useValue0, identity scale (0.0). Mounted state is excluded before this call.
 0x671933: fldz
 0x671935: jmp     short loc_671943
 0x671937: fld     dword ptr [ebx+59Ch]
@@ -265,22 +265,22 @@
 0x67197F: mov     ecx, [esp+0A4h+var_7C]; this
 0x671983: push    0; whichDevice
 0x671985: mov     [esp+0A8h+var_84], eax
-0x671989: call    InputGlobals__GetJoystickAxisMovement
+0x671989: call    InputGlobals__GetJoystickAxisMovement; [Controller decode 2026-07-09] Player_OnInput: reads joystick 0 horizontal-look axis selected by iJoystickLookLeftRight.
 0x67198E: mov     [esp+0A0h+var_68], eax
 0x671992: fild    [esp+0A0h+var_68]
-0x671996: fmul    dword ptr ds:0B14F08h
-0x67199C: call    Double_To_SInt32
+0x671996: fmul    dword ptr ds:0B14F08h; [Controller decode 2026-07-09] Player_OnInput: scales horizontal joystick look by fJoystickLookLRMult.
+0x67199C: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x6719A1: mov     edx, ds:0B14ED8h
 0x6719A7: mov     ecx, [esp+0A0h+var_7C]; this
 0x6719AB: push    edx; a3
 0x6719AC: add     esi, eax
 0x6719AE: push    0; whichDevice
 0x6719B0: mov     dword ptr [esp+0A8h+var_38+4], esi
-0x6719B4: call    InputGlobals__GetJoystickAxisMovement
+0x6719B4: call    InputGlobals__GetJoystickAxisMovement; [Controller decode 2026-07-09] Player_OnInput: reads joystick 0 vertical-look axis selected by iJoystickLookUpDown.
 0x6719B9: mov     [esp+0A0h+var_68], eax
 0x6719BD: fild    [esp+0A0h+var_68]
-0x6719C1: fmul    dword ptr ds:0B14F00h
-0x6719C7: call    Double_To_SInt32
+0x6719C1: fmul    dword ptr ds:0B14F00h; [Controller decode 2026-07-09] Player_OnInput: scales vertical joystick look by fJoystickLookUDMult.
+0x6719C7: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x6719CC: add     edi, eax
 0x6719CE: cmp     byte ptr [ebx+748h], 0
 0x6719D5: mov     dword ptr [esp+0A0h+var_38], edi
@@ -290,7 +290,7 @@
 0x6719DF: mov     dword ptr [esp+0A0h+var_38+4], esi
 0x6719E3: mov     dword ptr [esp+0A0h+var_38], edi
 0x6719E7: mov     [esp+0A0h+var_84], edi
-0x6719EB: cmp     byte ptr ds:0B14F38h, 0
+0x6719EB: cmp     byte ptr ds:0B14F38h, 0; [Controller decode 2026-07-09] Player_OnInput: applies bInvertYValues to combined mouse/joystick vertical look.
 0x6719F2: jz      short loc_6719FA
 0x6719F4: neg     edi
 0x6719F6: mov     dword ptr [esp+0A0h+var_38], edi
@@ -377,8 +377,8 @@
 0x671B1D: mov     ecx, ebx
 0x671B1F: call    edx
 0x671B21: fstp    dword ptr ds:0B3BAC8h
-0x671B27: mov     ecx, ebx
-0x671B29: call    sub_4A9720
+0x671B27: mov     ecx, ebx; this
+0x671B29: call    Actor_GetAimPitch; Returns Actor rotation X as the native aim-pitch value used by projectile launch, impact, input, dialogue-camera, and magic-projectile paths.
 0x671B2E: fstp    dword ptr ds:0B3BAC4h
 0x671B34: cmp     byte ptr ds:0B3BB04h, 0
 0x671B3B: jz      loc_671C44
@@ -393,7 +393,7 @@
 0x671B60: fmul    st(1), st
 0x671B62: fld     dword ptr ds:0B36B88h
 0x671B68: fmulp   st(2), st
-0x671B6A: fld     [ebp+arg_0]
+0x671B6A: fld     [ebp+deltaTime]
 0x671B6D: fld     st
 0x671B6F: fmulp   st(3), st
 0x671B71: fld     dword ptr ds:0B3BB28h
@@ -445,7 +445,7 @@
 0x671C23: jz      loc_671E16
 0x671C29: cmp     byte ptr ds:0B14E88h, 0
 0x671C30: jz      loc_671E16
-0x671C36: call    sub_5ACE20
+0x671C36: call    LevelUpMenu_Open
 0x671C3B: pop     edi
 0x671C3C: pop     esi
 0x671C3D: pop     ebx
@@ -470,11 +470,11 @@
 0x671C76: jmp     short loc_671C7D
 0x671C78: or      [esp+0A0h+var_8C], 20h
 0x671C7D: mov     ecx, ebx; this
-0x671C7F: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x671C7F: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x671C84: test    eax, eax
 0x671C86: jnz     loc_671D7F
 0x671C8C: mov     ecx, ebx
-0x671C8E: call    Actor_GetCurrentAction
+0x671C8E: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x671C93: cmp     eax, 8
 0x671C96: jz      loc_671D7F
 0x671C9C: cmp     byte ptr [ebx+71Dh], 0
@@ -556,7 +556,7 @@
 0x671DBC: call    sub_66A670
 0x671DC1: mov     ecx, ebx
 0x671DC3: call    sub_65E900
-0x671DC8: fld     [ebp+arg_0]
+0x671DC8: fld     [ebp+deltaTime]
 0x671DCB: cmp     byte ptr [ebx+588h], 0
 0x671DD2: push    ecx
 0x671DD3: setz    al
@@ -564,7 +564,7 @@
 0x671DD9: mov     ecx, ebx; this
 0x671DDB: mov     [ebx+588h], al
 0x671DE1: call    sub_603CA0
-0x671DE6: fld     [ebp+arg_0]
+0x671DE6: fld     [ebp+deltaTime]
 0x671DE9: cmp     byte ptr [ebx+588h], 0
 0x671DF0: setz    cl
 0x671DF3: mov     [ebx+588h], cl
@@ -588,7 +588,7 @@
 0x671E26: push    1; a3
 0x671E28: push    8; a2
 0x671E2A: mov     ecx, esi; this
-0x671E2C: call    InputGlobals__QueryControlState
+0x671E2C: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x671E31: test    eax, eax
 0x671E33: jz      short loc_671E73
 0x671E35: mov     ecx, ebx
@@ -598,7 +598,7 @@
 0x671E40: cmp     byte ptr [ebx+5C0h], 0
 0x671E47: jnz     short loc_671E73
 0x671E49: mov     ecx, ebx
-0x671E4B: call    Actor_GetCurrentAction
+0x671E4B: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x671E50: cmp     eax, 0FFFFFFFFh
 0x671E53: jnz     short loc_671E73
 0x671E55: mov     ecx, [ebx+58h]
@@ -615,7 +615,7 @@
 0x671E73: push    1; a3
 0x671E75: push    0Bh; a2
 0x671E77: mov     ecx, esi; this
-0x671E79: call    InputGlobals__QueryControlState
+0x671E79: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x671E7E: test    eax, eax
 0x671E80: jz      short loc_671E92
 0x671E82: cmp     byte ptr [ebx+58Bh], 0
@@ -624,7 +624,7 @@
 0x671E92: push    1; a3
 0x671E94: push    0Ch; a2
 0x671E96: mov     ecx, esi; this
-0x671E98: call    InputGlobals__QueryControlState
+0x671E98: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x671E9D: test    eax, eax
 0x671E9F: jz      short loc_671EB1
 0x671EA1: cmp     byte ptr [ebx+58Ch], 0
@@ -635,25 +635,25 @@
 0x671EBA: push    0; a3
 0x671EBC: push    0; a2
 0x671EBE: mov     ecx, esi; this
-0x671EC0: call    InputGlobals__QueryControlState
+0x671EC0: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x671EC5: test    eax, eax
 0x671EC7: jnz     short loc_671F05
 0x671EC9: push    eax; a3
 0x671ECA: push    1; a2
 0x671ECC: mov     ecx, esi; this
-0x671ECE: call    InputGlobals__QueryControlState
+0x671ECE: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x671ED3: test    eax, eax
 0x671ED5: jnz     short loc_671F05
 0x671ED7: push    eax; a3
 0x671ED8: push    3; a2
 0x671EDA: mov     ecx, esi; this
-0x671EDC: call    InputGlobals__QueryControlState
+0x671EDC: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x671EE1: test    eax, eax
 0x671EE3: jnz     short loc_671EF3
 0x671EE5: push    eax; a3
 0x671EE6: push    2; a2
 0x671EE8: mov     ecx, esi; this
-0x671EEA: call    InputGlobals__QueryControlState
+0x671EEA: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x671EEF: test    eax, eax
 0x671EF1: jz      short loc_671EFA
 0x671EF3: cmp     [esp+0A0h+var_4C], 0
@@ -668,7 +668,7 @@
 0x671F13: push    1; a3
 0x671F15: push    9; a2
 0x671F17: mov     ecx, esi; this
-0x671F19: call    InputGlobals__QueryControlState
+0x671F19: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x671F1E: test    eax, eax
 0x671F20: jz      short loc_671F85
 0x671F22: mov     eax, [ebx]
@@ -691,11 +691,11 @@
 0x671F50: test    al, al
 0x671F52: jnz     short loc_671F85
 0x671F54: mov     ecx, ebx; this
-0x671F56: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x671F56: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x671F5B: cmp     eax, 5
 0x671F5E: jz      short loc_671F85
 0x671F60: mov     ecx, ebx; this
-0x671F62: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x671F62: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x671F67: cmp     eax, 3
 0x671F6A: jz      short loc_671F85
 0x671F6C: mov     eax, 400h
@@ -747,7 +747,7 @@
 0x672020: jnz     short loc_672033
 0x672022: lea     ecx, [esp+0A0h+var_64]
 0x672026: fstp    [esp+0A0h+var_5C]
-0x67202A: call    sub_43F350
+0x67202A: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x67202F: fstp    st
 0x672031: jmp     short loc_672053
 0x672033: fstp    st
@@ -760,11 +760,11 @@
 0x672053: cmp     dword ptr [ebx+57Ch], 2
 0x67205A: mov     [esp+0A0h+var_85], 0
 0x67205F: jnz     short loc_672073
-0x672061: fld     [ebp+arg_0]
+0x672061: fld     [ebp+deltaTime]
 0x672064: push    ecx
 0x672065: mov     ecx, ebx
 0x672067: fstp    [esp+0A4h+duration]; float
-0x67206A: call    sub_66DFD0
+0x67206A: call    Player_UpdateGrabObjectAttackControl
 0x67206F: mov     [esp+0A0h+var_85], al
 0x672073: mov     ecx, ebx
 0x672075: call    sub_663740
@@ -773,22 +773,22 @@
 0x672084: push    edx; a3
 0x672085: push    0; whichDevice
 0x672087: mov     ecx, edi; this
-0x672089: call    InputGlobals__GetJoystickAxisMovement
+0x672089: call    InputGlobals__GetJoystickAxisMovement; [Controller decode 2026-07-09] Player_OnInput: reads joystick 0 strafe axis selected by iJoystickMoveLeftRight.
 0x67208E: mov     [esp+0A0h+var_78], eax
 0x672092: fild    [esp+0A0h+var_78]
-0x672096: fmul    dword ptr ds:0B14EF8h
-0x67209C: call    Double_To_SInt32
+0x672096: fmul    dword ptr ds:0B14EF8h; [Controller decode 2026-07-09] Player_OnInput: scales strafe joystick axis by fJoystickMoveLRMult.
+0x67209C: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x6720A1: mov     esi, eax
 0x6720A3: mov     eax, ds:0B14EC8h
 0x6720A8: push    eax; a3
 0x6720A9: push    0; whichDevice
 0x6720AB: mov     ecx, edi; this
-0x6720AD: call    InputGlobals__GetJoystickAxisMovement
+0x6720AD: call    InputGlobals__GetJoystickAxisMovement; [Controller decode 2026-07-09] Player_OnInput: reads joystick 0 forward/back axis selected by iJoystickMoveFrontBack.
 0x6720B2: mov     [esp+0A0h+var_78], eax
 0x6720B6: fild    [esp+0A0h+var_78]
-0x6720BA: fmul    dword ptr ds:0B14EF0h
-0x6720C0: call    Double_To_SInt32
-0x6720C5: test    esi, esi
+0x6720BA: fmul    dword ptr ds:0B14EF0h; [Controller decode 2026-07-09] Player_OnInput: scales forward/back joystick axis by fJoystickMoveFBMult.
+0x6720C0: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
+0x6720C5: test    esi, esi; [Controller decode 2026-07-09] Player_OnInput: synthesizes left/right movement control presses from signed strafe axis.
 0x6720C7: mov     [esp+0A0h+var_68], eax
 0x6720CB: jz      short loc_672118
 0x6720CD: jle     short loc_6720D3
@@ -838,7 +838,7 @@
 0x672151: jmp     short loc_67218B
 0x672153: or      [esp+0A0h+var_8C], 8
 0x672158: jmp     short loc_67218B
-0x67215A: mov     eax, [esp+0A0h+var_68]
+0x67215A: mov     eax, [esp+0A0h+var_68]; [Controller decode 2026-07-09] Player_OnInput: synthesizes forward/back movement control presses from signed forward/back axis.
 0x67215E: test    eax, eax
 0x672160: jz      short loc_67218B
 0x672162: jge     short loc_672168
@@ -874,37 +874,37 @@
 0x6721C4: jz      short loc_6721F6
 0x6721C6: mov     edi, [esp+0A8h+var_7C]
 0x6721CA: mov     ecx, edi; this
-0x6721CC: call    InputGlobals__QueryControlState
+0x6721CC: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x6721D1: test    eax, eax
 0x6721D3: jnz     short loc_67221F
 0x6721D5: push    eax; a3
 0x6721D6: push    0Ah; a2
 0x6721D8: mov     ecx, edi; this
-0x6721DA: call    InputGlobals__QueryControlState
+0x6721DA: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x6721DF: test    eax, eax
 0x6721E1: jnz     short loc_67221F
 0x6721E3: push    0Ah; controlId
 0x6721E5: mov     ecx, edi; this
-0x6721E7: call    InputGlobals__SendControlPress
+0x6721E7: call    InputGlobals__SendControlPress; TES4 authoritative: AlwaysRun/run-control path sets movement flag 0x200 before directional movement bits are assembled.
 0x6721EC: or      [esp+0A0h+var_8C], 200h
 0x6721F4: jmp     short loc_672223
 0x6721F6: mov     esi, [esp+0A8h+var_7C]
 0x6721FA: mov     ecx, esi; this
-0x6721FC: call    InputGlobals__QueryControlState
+0x6721FC: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x672201: test    eax, eax
 0x672203: jnz     short loc_672213
 0x672205: push    eax; a3
 0x672206: push    0Ah; a2
 0x672208: mov     ecx, esi; this
-0x67220A: call    InputGlobals__QueryControlState
+0x67220A: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x67220F: test    eax, eax
 0x672211: jz      short loc_67221F
 0x672213: or      [esp+0A0h+var_8C], 200h
 0x67221B: mov     edi, esi
 0x67221D: jmp     short loc_672223
 0x67221F: mov     edi, [esp+0A0h+var_7C]
-0x672223: mov     ecx, ebx
-0x672225: call    sub_5E65B0
+0x672223: mov     ecx, ebx; TES4 authoritative: Player_OnInput calls sub_5E65B0, then multiplies the result by analog input magnitude flt_B14E58 before directional movement vectors are assembled.
+0x672225: call    sub_5E65B0; Authoritative actor movement speed selector: process flags +0x2C0 choose run (0x200), swim (0x800), fly-speed (0x2000); when those are absent it falls through to ordinary walk speed. AI callers may supply a movement vector without direction bits.
 0x67222A: fstp    [esp+0A0h+var_78]
 0x67222E: cmp     byte ptr [ebx+748h], 0
 0x672235: fld     dword ptr ds:0B14E58h
@@ -935,13 +935,13 @@
 0x672295: push    1; a3
 0x672297: push    0; a2
 0x672299: mov     ecx, edi; this
-0x67229B: call    InputGlobals__QueryControlState
+0x67229B: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x6722A0: test    eax, eax
 0x6722A2: jnz     short loc_6722B1
 0x6722A4: push    eax; a3
 0x6722A5: push    eax; a2
 0x6722A6: mov     ecx, edi; this
-0x6722A8: call    InputGlobals__QueryControlState
+0x6722A8: call    InputGlobals__QueryControlState; TES4 authoritative: logical control 0 contributes movement bit 0x1 and adds one direction vector into the movement intent.
 0x6722AD: test    eax, eax
 0x6722AF: jz      short loc_6722EC
 0x6722B1: fld     [esp+0A0h+var_58.x]
@@ -956,19 +956,19 @@
 0x6722D6: fadd    [esp+0A0h+var_5C]
 0x6722DA: fstp    [esp+0A0h+var_58.z]
 0x6722DE: jnz     short loc_6722E5
-0x6722E0: or      eax, 100h
+0x6722E0: or      eax, 100h; TES4 authoritative: Player_OnInput sets movement flag 0x100 for directional input only when run flag 0x200 is not set, then ORs forward bit 0x1.
 0x6722E5: or      eax, 1
 0x6722E8: mov     [esp+0A0h+var_8C], eax
 0x6722EC: push    1; a3
 0x6722EE: push    1; a2
 0x6722F0: mov     ecx, edi; this
-0x6722F2: call    InputGlobals__QueryControlState
+0x6722F2: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x6722F7: test    eax, eax
 0x6722F9: jnz     short loc_672309
 0x6722FB: push    eax; a3
 0x6722FC: push    1; a2
 0x6722FE: mov     ecx, edi; this
-0x672300: call    InputGlobals__QueryControlState
+0x672300: call    InputGlobals__QueryControlState; TES4 authoritative: logical control 1 contributes movement bit 0x2 and subtracts the same direction vector.
 0x672305: test    eax, eax
 0x672307: jz      short loc_672344
 0x672309: fld     [esp+0A0h+var_58.x]
@@ -989,13 +989,13 @@
 0x672344: push    1; a3
 0x672346: push    2; a2
 0x672348: mov     ecx, edi; this
-0x67234A: call    InputGlobals__QueryControlState
+0x67234A: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x67234F: test    eax, eax
 0x672351: jnz     short loc_672361
 0x672353: push    eax; a3
 0x672354: push    2; a2
 0x672356: mov     ecx, edi; this
-0x672358: call    InputGlobals__QueryControlState
+0x672358: call    InputGlobals__QueryControlState; TES4 authoritative: logical control 2 contributes movement bit 0x4 and subtracts the strafe direction vector.
 0x67235D: test    eax, eax
 0x67235F: jz      short loc_67239C
 0x672361: fld     [esp+0A0h+var_58.x]
@@ -1016,13 +1016,13 @@
 0x67239C: push    1; a3
 0x67239E: push    3; a2
 0x6723A0: mov     ecx, edi; this
-0x6723A2: call    InputGlobals__QueryControlState
+0x6723A2: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x6723A7: test    eax, eax
 0x6723A9: jnz     short loc_6723B9
 0x6723AB: push    eax; a3
 0x6723AC: push    3; a2
 0x6723AE: mov     ecx, edi; this
-0x6723B0: call    InputGlobals__QueryControlState
+0x6723B0: call    InputGlobals__QueryControlState; TES4 authoritative: logical control 3 contributes movement bit 0x8 and adds the strafe direction vector.
 0x6723B5: test    eax, eax
 0x6723B7: jz      short loc_6723F6
 0x6723B9: fld     [esp+0A0h+var_58.x]
@@ -1050,7 +1050,7 @@
 0x67240D: mov     [esp+0A0h+var_8C], eax
 0x672411: jz      short loc_67248B
 0x672413: fild    dword ptr ds:0B37520h
-0x672419: fld     [ebp+arg_0]
+0x672419: fld     [ebp+deltaTime]
 0x67241C: fld     st
 0x67241E: fmulp   st(2), st
 0x672420: fld     dword ptr ds:0B3BCECh
@@ -1087,7 +1087,7 @@
 0x672493: test    al, 8
 0x672495: jz      short loc_67250B
 0x672497: fild    dword ptr ds:0B37520h
-0x67249D: fld     [ebp+arg_0]
+0x67249D: fld     [ebp+deltaTime]
 0x6724A0: fld     st
 0x6724A2: fmulp   st(2), st
 0x6724A4: fld     dword ptr ds:0B3BCE8h
@@ -1127,15 +1127,15 @@
 0x672521: mov     [esp+0A0h+var_8C], eax
 0x672525: push    eax
 0x672526: mov     eax, [edx+2C8h]
-0x67252C: call    eax
+0x67252C: call    eax; TES4 authoritative: writes assembled player movement/action bitmask v232 to process vfunc +0x2C4/Unk_B1 before ordinary jump handling.
 0x67252E: test    byte ptr [esp+0A0h+var_8C], 1
 0x672533: jz      short loc_672581
 0x672535: test    byte ptr [esp+0A0h+var_8C], 3Eh
-0x67253A: jnz     short loc_672581
+0x67253A: jnz     short loc_672581; TES4 authoritative: queued-object/player movement path only allows immediate jump when movement bit 0x1 is set and bits 0x3E are clear.
 0x67253C: push    1; a3
 0x67253E: push    0Dh; a2
 0x672540: mov     ecx, edi; this
-0x672542: call    InputGlobals__QueryControlState
+0x672542: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x672547: test    eax, eax
 0x672549: jz      short loc_672581
 0x67254B: mov     edx, [ebx]
@@ -1145,7 +1145,7 @@
 0x672557: test    al, al
 0x672559: jnz     short loc_672581
 0x67255B: mov     ecx, esi; this
-0x67255D: call    MobileObject_GetCharProxy
+0x67255D: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x672562: mov     ecx, [eax+1F4h]
 0x672568: shr     ecx, 0Ah
 0x67256B: test    cl, 1
@@ -1155,8 +1155,8 @@
 0x672578: mov     ecx, esi
 0x67257A: call    eax
 0x67257C: mov     byte ptr [esp+0A0h+var_94+7], 1
-0x672581: mov     ecx, ebx
-0x672583: call    sub_4A9720
+0x672581: mov     ecx, ebx; this
+0x672583: call    Actor_GetAimPitch; Returns Actor rotation X as the native aim-pitch value used by projectile launch, impact, input, dialogue-camera, and magic-projectile paths.
 0x672588: push    ecx
 0x672589: mov     ecx, esi; int
 0x67258B: fstp    [esp+0A4h+duration]; float
@@ -1173,7 +1173,7 @@
 0x6725AE: mov     al, [ebx+588h]
 0x6725B4: mov     edx, [ebx]
 0x6725B6: mov     byte ptr [esp+0A0h+var_48+1], al
-0x6725BA: mov     eax, [edx+19Ch]
+0x6725BA: mov     eax, [edx+19Ch]; TES4 authoritative: Player action gate calls TESObjectREFR vtable +0x19C GetKnockedState; nonzero suppresses normal action handling.
 0x6725C0: mov     ecx, ebx
 0x6725C2: mov     byte ptr [ebx+588h], 1
 0x6725C9: call    eax
@@ -1182,22 +1182,22 @@
 0x6725D3: cmp     [ebx+5C0h], al
 0x6725D9: jnz     loc_672B9B
 0x6725DF: mov     edx, [ebx]
-0x6725E1: mov     eax, [edx+1A0h]
+0x6725E1: mov     eax, [edx+1A0h]; TES4 authoritative: Player action gate calls TESObjectREFR vtable +0x1A0 HasFatigue; true suppresses normal action handling.
 0x6725E7: mov     ecx, ebx
 0x6725E9: call    eax
 0x6725EB: test    al, al
 0x6725ED: jnz     loc_672B9B
 0x6725F3: mov     ecx, ebx; this
-0x6725F5: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x6725F5: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x6725FA: test    eax, eax
 0x6725FC: jnz     loc_672B9B
 0x672602: mov     ecx, ebx
-0x672604: call    Actor_GetCurrentAction
+0x672604: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x672609: cmp     eax, 8
 0x67260C: jz      loc_672B9B
 0x672612: mov     ecx, [ebx+58h]
 0x672615: mov     edx, [ecx]
-0x672617: mov     eax, [edx+36Ch]
+0x672617: mov     eax, [edx+36Ch]; TES4 authoritative: Player action gate calls process GetSitSleepState (+0x36C); any nonzero sit/sleep state suppresses ordinary action handling.
 0x67261D: call    eax
 0x67261F: test    eax, eax
 0x672621: jnz     loc_672B9B
@@ -1216,8 +1216,8 @@
 0x672657: jz      short loc_672662
 0x672659: cmp     byte ptr ds:0B3BB05h, 0
 0x672660: jz      short loc_672674
-0x672662: mov     ecx, ebx
-0x672664: call    Actor_ProcessControlAttack
+0x672662: mov     ecx, ebx; this
+0x672664: call    PlayerCharacter_ProcessAttackControl; Sole direct caller: Player_OnInput invokes PlayerCharacter_ProcessAttackControl with ECX=PlayerCharacter, pushes no arguments, and consumes only AL.
 0x672669: test    al, al
 0x67266B: jz      short loc_672686
 0x67266D: mov     byte ptr [esp+0A0h+var_94+7], 1
@@ -1228,13 +1228,13 @@
 0x672686: push    1; a3
 0x672688: push    6; a2
 0x67268A: mov     ecx, edi; this
-0x67268C: call    InputGlobals__QueryControlState
+0x67268C: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x672691: test    eax, eax
 0x672693: jnz     short loc_6726A7
 0x672695: push    eax; a3
 0x672696: push    6; a2
 0x672698: mov     ecx, edi; this
-0x67269A: call    InputGlobals__QueryControlState
+0x67269A: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x67269F: test    eax, eax
 0x6726A1: jz      loc_6727DD
 0x6726A7: mov     ecx, [ebx+58h]
@@ -1246,7 +1246,7 @@
 0x6726BD: cmp     byte ptr ds:0B1501Ch, 0
 0x6726C4: jz      loc_6727B7
 0x6726CA: mov     ecx, ebx
-0x6726CC: call    Actor_GetCurrentAction
+0x6726CC: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x6726D1: cmp     eax, 5
 0x6726D4: jnz     loc_6727B7
 0x6726DA: mov     byte ptr ds:0B3BAEAh, 1
@@ -1263,7 +1263,7 @@
 0x672709: mov     ecx, offset g_DefaulFOV
 0x67270E: call    GameSetting_GetSafeFloatPointer
 0x672713: fld     dword ptr [eax]
-0x672715: mov     ecx, offset flt_B370A0
+0x672715: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+3C8h)
 0x67271A: fstp    qword ptr [esp+0A0h+var_78]
 0x67271E: call    GameSetting_GetSafeFloatPointer
 0x672723: fld     dword ptr [eax]
@@ -1277,21 +1277,21 @@
 0x672740: fstp    [esp+0A0h+var_78]
 0x672744: call    GameSetting_GetSafeFloatPointer
 0x672749: fld     dword ptr [eax]
-0x67274B: mov     ecx, offset flt_B370A8
+0x67274B: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+3D0h)
 0x672750: fsub    dword ptr [ebx+598h]
 0x672756: fdiv    [esp+0A0h+var_78]
 0x67275A: fstp    qword ptr [esp+0A0h+var_78]
 0x67275E: call    GameSetting_GetSafeFloatPointer
 0x672763: fld     dword ptr [eax]
 0x672765: fmul    qword ptr [esp+0A0h+var_78]
-0x672769: mov     ecx, offset flt_B370B0
+0x672769: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+3D8h)
 0x67276E: fstp    qword ptr [esp+0A0h+var_78]
 0x672772: call    GameSetting_GetSafeFloatPointer
 0x672777: fld     dword ptr [eax]
 0x672779: fadd    qword ptr [esp+0A0h+var_78]
 0x67277D: fstp    dword ptr ds:0B3BAFCh
 0x672783: jmp     loc_672821
-0x672788: mov     ecx, offset flt_B370B0
+0x672788: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+3D8h)
 0x67278D: call    GameSetting_GetSafeFloatPointer
 0x672792: fld     dword ptr ds:0B3BAFCh
 0x672798: fld     dword ptr [eax]
@@ -1299,7 +1299,7 @@
 0x67279C: fnstsw  ax
 0x67279E: test    ah, 5
 0x6727A1: jp      short loc_672821
-0x6727A3: mov     ecx, offset flt_B370B0
+0x6727A3: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+3D8h)
 0x6727A8: call    GameSetting_GetSafeFloatPointer
 0x6727AD: fld     dword ptr [eax]
 0x6727AF: fstp    dword ptr ds:0B3BAFCh
@@ -1316,13 +1316,13 @@
 0x6727DD: push    2; a3
 0x6727DF: push    6; a2
 0x6727E1: mov     ecx, edi; this
-0x6727E3: call    InputGlobals__QueryControlState
+0x6727E3: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x6727E8: test    eax, eax
 0x6727EA: jnz     short loc_6727FA
 0x6727EC: push    eax; a3
 0x6727ED: push    6; a2
 0x6727EF: mov     ecx, edi; this
-0x6727F1: call    InputGlobals__QueryControlState
+0x6727F1: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x6727F6: test    eax, eax
 0x6727F8: jnz     short loc_672821
 0x6727FA: mov     byte ptr ds:0B3BAEAh, 0
@@ -1332,9 +1332,9 @@
 0x67280C: call    eax
 0x67280E: cmp     eax, 6
 0x672811: jnz     short loc_672821
-0x672813: push    0; float
-0x672815: mov     ecx, ebx
-0x672817: call    sub_5F4AE0
+0x672813: push    0; shouldBlock
+0x672815: mov     ecx, ebx; this
+0x672817: call    Actor_UpdateBlockingState; Starts or stops the actor blocking animation/current-action state and mirrors the result to CombatController byte +0x49. Native ABI is Actor in ECX plus one shouldBlock byte.
 0x67281C: mov     byte ptr [esp+0A0h+var_94+7], 1
 0x672821: mov     ecx, ebx
 0x672823: call    Player_GetCurrentMagicItem
@@ -1349,29 +1349,29 @@
 0x672845: push    1; a3
 0x672847: push    7; a2
 0x672849: mov     ecx, edi; this
-0x67284B: call    InputGlobals__QueryControlState
+0x67284B: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x672850: test    eax, eax
 0x672852: jnz     short loc_672866
 0x672854: push    eax; a3
 0x672855: push    7; a2
 0x672857: mov     ecx, edi; this
-0x672859: call    InputGlobals__QueryControlState
+0x672859: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x67285E: test    eax, eax
 0x672860: jz      loc_67291E
 0x672866: mov     ecx, ebx
-0x672868: call    Actor_GetCurrentAction
+0x672868: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x67286D: cmp     eax, 2
 0x672870: jz      loc_67291E
 0x672876: mov     ecx, ebx
-0x672878: call    Actor_GetCurrentAction
+0x672878: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x67287D: cmp     eax, 4
 0x672880: jz      loc_67291E
 0x672886: mov     ecx, ebx
-0x672888: call    Actor_GetCurrentAction
+0x672888: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x67288D: cmp     eax, 5
 0x672890: jz      loc_67291E
 0x672896: mov     ecx, ebx
-0x672898: call    Actor_GetCurrentAction
+0x672898: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x67289D: cmp     eax, 3
 0x6728A0: jz      short loc_67291E
 0x6728A2: mov     eax, [ebx+628h]
@@ -1424,7 +1424,7 @@
 0x672941: push    1; a3
 0x672943: push    0Dh; a2
 0x672945: mov     ecx, edi; this
-0x672947: call    InputGlobals__QueryControlState
+0x672947: call    InputGlobals__QueryControlState; TES4 authoritative player jump gate: requires logical control 0xD just pressed (QueryControlState mode 1). Continuous climbing should not rely only on this one-frame edge.
 0x67294C: test    eax, eax
 0x67294E: jz      loc_672B94
 0x672954: mov     eax, [ebx]
@@ -1435,35 +1435,35 @@
 0x672962: jnz     loc_672B94
 0x672968: mov     eax, [ebx]
 0x67296A: mov     edx, [eax+164h]
-0x672970: push    3
+0x672970: push    3; slot
 0x672972: mov     ecx, ebx
 0x672974: call    edx
-0x672976: mov     ecx, eax
-0x672978: call    ActorAnimData_GetAnimGroupFromField8Value
+0x672976: mov     ecx, eax; this
+0x672978: call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.
 0x67297D: push    eax
-0x67297E: call    sub_51ACC0
+0x67297E: call    AnimGroup_UsesPowerOrCastNoteTemplate; Returns true when the encoded key is not group 0xFF and its fixed group record uses note-template class 5. In Oblivion's 43 records that is AttackPower..AttackRightPower plus CastSelf/Touch/Target and their Alt variants.
 0x672983: add     esp, 4
 0x672986: test    al, al
 0x672988: jnz     loc_672B94
 0x67298E: mov     ecx, ebx
-0x672990: call    Actor_GetCurrentAction
+0x672990: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x672995: cmp     eax, 9
 0x672998: jz      loc_672B94
 0x67299E: mov     ecx, ebx
-0x6729A0: call    sub_5E5640
+0x6729A0: call    Actor_IsCurrentActionInRange2To5; Process vfunc +0x2D0 in range 2..5 guard used by Player_OnInput jump gate with Acrobatics mastery. Treat as an action/movement lock signal when deciding climb eligibility.
 0x6729A5: test    al, al
 0x6729A7: jz      short loc_6729BA
-0x6729A9: push    1Ah
-0x6729AB: mov     ecx, ebx
-0x6729AD: call    Actor_GetSkillMasteryLevel
+0x6729A9: push    1Ah; actorValue
+0x6729AB: mov     ecx, ebx; this
+0x6729AD: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x6729B2: test    eax, eax
-0x6729B4: jle     loc_672B94
+0x6729B4: jle     loc_672B94; TES4 authoritative player jump rejection: blocks jump for anim-group type 5, current action 9, or action range 2..5 when Acrobatics mastery for AV 0x1A is <= 0.
 0x6729BA: mov     ecx, ebx
-0x6729BC: call    sub_5EC180
+0x6729BC: call    MobileObject_IsJumpSuppressedByFallAnimOrInAir; Returns true for swimming/falling style animation groups 0x28..0x2A, or if current character state id == 2 InAir. Player jump path uses this to suppress normal jump handling.
 0x6729C1: test    al, al
 0x6729C3: jnz     short loc_6729D5
-0x6729C5: mov     ecx, ebx
-0x6729C7: call    Actor_IsSwimming
+0x6729C5: mov     ecx, ebx; this
+0x6729C7: call    Actor_IsSwimming; TES4 authoritative player jump setup: sub_5EC180 (jump/fall anim or char state InAir) and Actor_IsSwimming both clear v244, suppressing normal jump/fatigue handling.
 0x6729CC: test    al, al
 0x6729CE: mov     byte ptr [esp+0A0h+var_80+3], 1
 0x6729D3: jz      short loc_6729DA
@@ -1472,42 +1472,42 @@
 0x6729DC: push    6; a2
 0x6729DE: mov     ecx, edi; this
 0x6729E0: mov     byte ptr [esp+0A8h+var_94+7], 0
-0x6729E5: call    InputGlobals__QueryControlState
+0x6729E5: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x6729EA: test    eax, eax
 0x6729EC: mov     ecx, ebx
-0x6729EE: setnz   byte ptr [esp+0A0h+var_48+3]
-0x6729F3: call    Actor_IsBlocking
+0x6729EE: setnz   byte ptr [esp+0A0h+var_48+3]; TES4 authoritative: logical control 6 held is tested on the jump/block branch; control 6 is the block path in nearby code.
+0x6729F3: call    Actor_IsBlocking; TES4 authoritative: Actor_IsBlocking checks current action 6. Script-driven Climbing should reject this unless a block-climb interaction is explicitly designed.
 0x6729F8: cmp     byte ptr [esp+0A0h+var_48+3], 0
 0x6729FD: mov     byte ptr [esp+0A0h+var_48+2], al
 0x672A01: jz      short loc_672A79
-0x672A03: call    sub_579540
+0x672A03: call    sub_579540; Interface/menu cursor state helper used by Player_OnInput jump/acrobatic branch. Player-only climb activation should avoid triggering while this UI mode is active.
 0x672A08: test    eax, eax
 0x672A0A: jnz     short loc_672A4F
-0x672A0C: push    1Ah
-0x672A0E: mov     ecx, ebx
-0x672A10: call    Actor_GetSkillMasteryLevel
+0x672A0C: push    1Ah; actorValue
+0x672A0E: mov     ecx, ebx; this
+0x672A10: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x672A15: cmp     eax, 2
-0x672A18: jl      short loc_672A4F
+0x672A18: jl      short loc_672A4F; TES4 authoritative: while control 6 is held, advanced Acrobatics dodge/jump path is allowed only when menu/cursor helper 0x579540 is false and mastery >= 2.
 0x672A1A: mov     eax, [esp+0A0h+var_8C]
 0x672A1E: or      eax, 0Fh
 0x672A21: test    ax, ax
 0x672A24: jz      short loc_672A4F
 0x672A26: mov     ecx, ebx; this
-0x672A28: call    MobileObject_GetCharProxy
+0x672A28: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x672A2D: lea     ecx, [eax+1E0h]
-0x672A33: call    sub_88D370
+0x672A33: call    hkCharacterContext_GetStateId; hkCharacterContext state id accessor used by controller update; proxy+0x1E0 context stores current state id at +0x0C.
 0x672A38: test    eax, eax
 0x672A3A: jnz     short loc_672AA0
 0x672A3C: mov     ecx, [esp+0A0h+var_8C]
 0x672A40: push    ecx
 0x672A41: mov     ecx, ebx
-0x672A43: call    sub_5F5050
+0x672A43: call    sub_5F5050; TES4 authoritative: player Acrobatics dodge-style action. Chooses anim group 0xB..0xE from movement flags and starts current action 9.
 0x672A48: cmp     eax, 0FFh
 0x672A4D: jmp     short loc_672A9B
 0x672A4F: cmp     byte ptr [esp+0A0h+var_48+2], 0
 0x672A54: jnz     short loc_672AA0
 0x672A56: mov     ecx, ebx; this
-0x672A58: call    MobileObject_GetCharProxy
+0x672A58: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x672A5D: mov     edx, [eax+1F4h]
 0x672A63: shr     edx, 0Ah
 0x672A66: test    dl, 1
@@ -1518,7 +1518,7 @@
 0x672A75: call    edx
 0x672A77: jmp     short loc_672A99
 0x672A79: mov     ecx, ebx; this
-0x672A7B: call    MobileObject_GetCharProxy
+0x672A7B: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x672A80: mov     eax, [eax+1F4h]
 0x672A86: shr     eax, 0Ah
 0x672A89: test    al, 1
@@ -1527,7 +1527,7 @@
 0x672A8F: mov     eax, [edx+1B8h]
 0x672A95: mov     ecx, ebx
 0x672A97: call    eax
-0x672A99: test    eax, eax
+0x672A99: test    eax, eax; TES4 authoritative: actual player Jump virtual call after the input/action gates. This ultimately reaches actor jump setup at 0x65AB40 for ordinary jumps.
 0x672A9B: setnz   byte ptr [esp+0A0h+var_94+7]
 0x672AA0: mov     ecx, ebx
 0x672AA2: call    sub_66A670
@@ -1536,7 +1536,7 @@
 0x672AAE: cmp     byte ptr [esp+0A0h+var_94+7], 0
 0x672AB3: jz      loc_672B8F
 0x672AB9: mov     ecx, ebx; this
-0x672ABB: call    MobileObject_GetCharProxy
+0x672ABB: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x672AC0: mov     ecx, [eax+1F4h]
 0x672AC6: shr     ecx, 0Ah
 0x672AC9: test    cl, 1
@@ -1549,7 +1549,7 @@
 0x672ADC: push    0
 0x672ADE: push    1Ah
 0x672AE0: mov     ecx, ebx
-0x672AE2: call    eax
+0x672AE2: call    eax; Jump input award: Acrobatics (0x1A), useValue0, identity scale (0.0).
 0x672AE4: cmp     byte ptr [esp+0A0h+var_94+7], 0
 0x672AE9: jz      loc_672B8F
 0x672AEF: mov     edx, [ebx]
@@ -1570,18 +1570,18 @@
 0x672B20: call    Calc_FatigueJumpMultiplier?
 0x672B25: fstp    [esp+0A4h+var_84]
 0x672B29: add     esp, 4
-0x672B2C: push    1Ah
-0x672B2E: mov     ecx, ebx
-0x672B30: call    Actor_GetSkillMasteryLevel
+0x672B2C: push    1Ah; actorValue
+0x672B2E: mov     ecx, ebx; this
+0x672B30: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x672B35: cmp     eax, 3
 0x672B38: jl      short loc_672B4E
-0x672B3A: mov     ecx, offset fPerkJumpFatigueExpertMult
+0x672B3A: mov     ecx, 0B37510h
 0x672B3F: call    GameSetting_GetSafeFloatPointer
 0x672B44: fld     [esp+0A0h+var_84]
 0x672B48: fmul    dword ptr [eax]
 0x672B4A: fstp    [esp+0A0h+var_84]
 0x672B4E: mov     ecx, ebx; this
-0x672B50: call    MobileObject_GetCharProxy
+0x672B50: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x672B55: mov     ecx, [eax+1F4h]
 0x672B5B: shr     ecx, 0Ah
 0x672B5E: test    cl, 1
@@ -1595,15 +1595,15 @@
 0x672B72: jnz     short loc_672B8D
 0x672B74: push    ecx
 0x672B75: fchs
-0x672B77: mov     ecx, ebx
-0x672B79: fstp    [esp+0A4h+duration]; float
-0x672B7C: call    Actor_ModFatigue?
+0x672B77: mov     ecx, ebx; this
+0x672B79: fstp    [esp+0A4h+duration]; delta
+0x672B7C: call    Actor_ApplyNegativeFatigueDeltaClamped; Applies only a negative Fatigue delta. Requires the actor AV path, reads Fatigue AV 0x0A, clamps damage so Fatigue cannot fall below zero, then calls the actor DamageAV float virtual. Nonnegative deltas and actors with no positive Fatigue are ignored.
 0x672B81: mov     byte ptr [esp+0A0h+var_94+7], 1
-0x672B86: call    sub_5C1F70
+0x672B86: call    Input_ProcessQuickSlotHotkeys
 0x672B8B: jmp     short loc_672BD6
 0x672B8D: fstp    st
 0x672B8F: mov     byte ptr [esp+0A0h+var_94+7], 1
-0x672B94: call    sub_5C1F70
+0x672B94: call    Input_ProcessQuickSlotHotkeys
 0x672B99: jmp     short loc_672BD6
 0x672B9B: mov     ecx, [ebx+58h]
 0x672B9E: mov     edx, [ecx]
@@ -1617,7 +1617,7 @@
 0x672BBA: call    eax
 0x672BBC: cmp     eax, 4
 0x672BBF: jnz     short loc_672BC8
-0x672BC1: call    sub_5C1F70
+0x672BC1: call    Input_ProcessQuickSlotHotkeys
 0x672BC6: jmp     short loc_672BD6
 0x672BC8: cmp     byte ptr ds:0B3B43Dh, 0
 0x672BCF: jz      short loc_672BD6
@@ -1625,7 +1625,7 @@
 0x672BD6: push    1; a3
 0x672BD8: push    10h; a2
 0x672BDA: mov     ecx, edi; this
-0x672BDC: call    InputGlobals__QueryControlState
+0x672BDC: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x672BE1: test    eax, eax
 0x672BE3: jz      loc_672D94
 0x672BE9: cmp     byte ptr [ebx+5C0h], 0
@@ -1678,7 +1678,7 @@
 0x672C89: push    ecx
 0x672C8A: mov     ecx, ebx; this
 0x672C8C: fstp    [esp+0A4h+duration]; float
-0x672C8F: call    TESObjectREFR_GetParentCell
+0x672C8F: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x672C94: mov     edx, [ebx]
 0x672C96: push    eax; int
 0x672C97: mov     eax, [edx+174h]
@@ -1699,7 +1699,7 @@
 0x672CC1: jmp     loc_672D8C
 0x672CC6: mov     ecx, ds:0B333C4h; this
 0x672CCC: call    sub_4D8B90
-0x672CD1: mov     ecx, offset ActorProcessManager_ptr
+0x672CD1: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x672CD6: push    eax
 0x672CD7: call    ActorProcessManager__AreHostilesNEarby
 0x672CDC: test    al, al
@@ -1715,19 +1715,19 @@
 0x672CF9: add     esp, 10h
 0x672CFC: jmp     loc_672D94
 0x672D01: mov     ecx, ds:0B333C4h; this
-0x672D07: call    MobileObject_GetCharProxy
+0x672D07: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x672D0C: lea     ecx, [eax+1E0h]
-0x672D12: call    sub_88D370
+0x672D12: call    hkCharacterContext_GetStateId; hkCharacterContext state id accessor used by controller update; proxy+0x1E0 context stores current state id at +0x0C.
 0x672D17: cmp     eax, 1
 0x672D1A: jz      short loc_672D79
 0x672D1C: mov     ecx, ds:0B333C4h; this
-0x672D22: call    MobileObject_GetCharProxy
+0x672D22: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x672D27: lea     ecx, [eax+1E0h]
-0x672D2D: call    sub_88D370
+0x672D2D: call    hkCharacterContext_GetStateId; hkCharacterContext state id accessor used by controller update; proxy+0x1E0 context stores current state id at +0x0C.
 0x672D32: cmp     eax, 2
 0x672D35: jz      short loc_672D79
 0x672D37: mov     ecx, ds:0B333C4h; this
-0x672D3D: call    TESObjectREFR_GetParentCell
+0x672D3D: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x672D42: mov     ecx, eax
 0x672D44: call    sub_4CA6A0
 0x672D49: test    al, al
@@ -1740,7 +1740,7 @@
 0x672D5E: push    0
 0x672D60: push    edx
 0x672D61: jmp     short loc_672D8C
-0x672D63: mov     ecx, offset ActorProcessManager_ptr
+0x672D63: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x672D68: call    sub_676EE0
 0x672D6D: push    0; a4
 0x672D6F: call    ShowSleepWaitMenu
@@ -1779,7 +1779,7 @@
 0x672DCD: fld     dword ptr [esi+94h]
 0x672DD3: fstp    dword ptr [eax+94h]
 0x672DD9: mov     ecx, [esp+0A0h+var_4C]
-0x672DDD: fld     [ebp+arg_0]
+0x672DDD: fld     [ebp+deltaTime]
 0x672DE0: mov     edx, [ecx]
 0x672DE2: mov     eax, [edx+228h]
 0x672DE8: push    ecx
@@ -1788,11 +1788,11 @@
 0x672DEE: mov     byte ptr [ebx+588h], 1
 0x672DF5: fld     dword ptr ds:0B14E5Ch
 0x672DFB: sub     esp, 8
-0x672DFE: fstp    [esp+0A8h+duration]; int
-0x672E02: mov     ecx, ebx
+0x672DFE: fstp    [esp+0A8h+duration]; arg1
+0x672E02: mov     ecx, ebx; this
 0x672E04: fld     dword ptr ds:0B14E58h
-0x672E0A: fstp    [esp+0A8h+anonymous_0+4]; float
-0x672E0D: call    Actor_ProcessAction
+0x672E0A: fstp    [esp+0A8h+arg0+4]; arg0
+0x672E0D: call    Actor_ProcessAction; Player input path pushes the live actor pointer immediately before Actor_ProcessAction; the callee has only two float stack arguments and receives Actor* in ECX.
 0x672E12: cmp     byte ptr [ebx+594h], 0
 0x672E19: mov     cl, byte ptr [esp+0A0h+var_48+1]
 0x672E1D: mov     [ebx+588h], cl
@@ -1812,20 +1812,20 @@
 0x672E52: test    dl, 1
 0x672E55: jnz     short loc_672E8C
 0x672E57: mov     ecx, ebx; this
-0x672E59: call    MobileObject_GetCharProxy
+0x672E59: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x672E5E: mov     esi, eax
 0x672E60: test    esi, esi
 0x672E62: jz      short loc_672E83
 0x672E64: lea     eax, [esp+0A0h+var_58]
 0x672E68: push    eax; a2
 0x672E69: mov     ecx, esi; this
-0x672E6B: call    sub_452A10
+0x672E6B: call    sub_452A10; TES4 authoritative: converts TES/world NiPoint3 into Havok units with hkFactor, then writes proxy position through 0x891560.
 0x672E70: mov     esi, [esi+8]
 0x672E73: test    esi, esi
 0x672E75: jz      short loc_672E83
-0x672E77: push    offset stru_BA7A40; a2
+0x672E77: push    offset unk_BA7A40; a2
 0x672E7C: mov     ecx, esi; this
-0x672E7E: call    sub_8AC0B0
+0x672E7E: call    sub_8AC0B0; TES4 authoritative: writes proxy velocity vector back into bhk collision object+0x10. Climbing/Slowfall velocity edits must happen before these calls or must write both proxy+0x2E0 and object+0x10 after the fact.
 0x672E83: push    1
 0x672E85: mov     ecx, ebx
 0x672E87: call    sub_46A9C0
@@ -1841,7 +1841,7 @@
 0x672EA7: mov     ecx, ebx
 0x672EA9: fstp    [esp+0A4h+var_78]
 0x672EAD: fld     [esp+0A4h+var_78]
-0x672EB1: fmul    [ebp+arg_0]
+0x672EB1: fmul    [ebp+deltaTime]
 0x672EB4: fstp    [esp+0A4h+var_70]
 0x672EB8: fld     [esp+0A4h+var_30]
 0x672EBC: fldz
@@ -1853,8 +1853,8 @@
 0x672ECE: fadd    [esp+0A4h+var_70]
 0x672ED2: fstp    [esp+0A4h+var_5C]
 0x672ED6: call    edx
-0x672ED8: mov     ecx, ebx; void *
-0x672EDA: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x672ED8: mov     ecx, ebx; this
+0x672EDA: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x672EDF: mov     esi, [esp+0A0h+var_44]
 0x672EE3: mov     ecx, [ebx+58h]
 0x672EE6: mov     edx, [ecx]
@@ -1868,9 +1868,9 @@
 0x672EFD: mov     eax, [edx+2CCh]
 0x672F03: push    ebx
 0x672F04: call    eax
-0x672F06: mov     ecx, ebx; int
-0x672F08: call    sub_6714E0
-0x672F0D: cmp     dword ptr [esp+0A0h+var_38+4], 0
+0x672F06: mov     ecx, ebx; Per-frame Player_OnInput point immediately before queued player moves are processed. EBX is PlayerCharacter; ECX is loaded from EBX for PlayerCharacter_ProcessQueuedMoveIfAllowed.
+0x672F08: call    PlayerCharacter_ProcessQueuedMoveIfAllowed; Narrow next-frame scheduler call-site. Patch the original 5-byte call to a wrapper that calls 0x6714E0, then processes pending encounter while EBX is still PlayerCharacter. Earlier than a vtable post-wrapper, but misses Player_OnInput early-return paths.
+0x672F0D: cmp     dword ptr [esp+0A0h+var_38+4], 0; Return point after queued-move processing in Player_OnInput. For encounter scheduling this is after vanilla move/teleport queues have settled; patching here directly must preserve flags for the following cmp/jcc sequence.
 0x672F12: jnz     short loc_672F22
 0x672F14: cmp     dword ptr [esp+0A0h+var_38], 0
 0x672F19: jnz     short loc_672F22
@@ -1880,7 +1880,7 @@
 0x672F27: push    1; a3
 0x672F29: push    1Ah; a2
 0x672F2B: mov     ecx, edi; this
-0x672F2D: call    InputGlobals__QueryControlState
+0x672F2D: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x672F32: test    eax, eax
 0x672F34: jz      short loc_672F41
 0x672F36: mov     ecx, ds:0B33B00h
@@ -1888,7 +1888,7 @@
 0x672F41: push    1; a3
 0x672F43: push    1Bh; a2
 0x672F45: mov     ecx, edi; this
-0x672F47: call    InputGlobals__QueryControlState
+0x672F47: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x672F4C: test    eax, eax
 0x672F4E: jz      short loc_672F5B
 0x672F50: mov     ecx, ds:0B33B00h
@@ -1896,19 +1896,19 @@
 0x672F5B: push    1; a3
 0x672F5D: push    0Eh; a2
 0x672F5F: mov     ecx, edi; this
-0x672F61: call    InputGlobals__QueryControlState
+0x672F61: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x672F66: test    eax, eax
 0x672F68: jnz     loc_673020
 0x672F6E: push    eax; a3
 0x672F6F: push    0Eh; a2
 0x672F71: mov     ecx, edi; this
-0x672F73: call    InputGlobals__QueryControlState
+0x672F73: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x672F78: test    eax, eax
 0x672F7A: jnz     loc_673020
 0x672F80: push    2; a3
 0x672F82: push    0Eh; a2
 0x672F84: mov     ecx, edi; this
-0x672F86: call    InputGlobals__QueryControlState
+0x672F86: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x672F8B: test    eax, eax
 0x672F8D: jnz     short loc_672FA7
 0x672F8F: cmp     ds:0B3BB04h, al
@@ -1945,7 +1945,7 @@
 0x673017: fldz
 0x673019: mov     byte ptr [esp+0A0h+var_94+7], 1
 0x67301E: jmp     short loc_673070
-0x673020: call    InterfaceManager_IsMenuMode
+0x673020: call    InterfaceManager_IsMenuMode; Player_OnInput uses InterfaceManager_IsMenuMode later for input handling. A 0x672F08 scheduler runs before this check, so the plugin handler should call 0x578F60 itself if it must avoid spawning while a menu remains open.
 0x673025: test    al, al
 0x673027: jnz     short loc_673076
 0x673029: mov     ecx, offset unk_B36B50
@@ -1966,15 +1966,15 @@
 0x67305F: mov     byte ptr ds:0B14E4Dh, 1
 0x673066: call    ToggleBody
 0x67306B: jmp     short loc_673076
-0x67306D: fadd    [ebp+arg_0]
+0x67306D: fadd    [ebp+deltaTime]
 0x673070: fstp    dword ptr ds:0B3BCE0h
 0x673076: push    1; a3
 0x673078: push    5; a2
 0x67307A: mov     ecx, edi; this
-0x67307C: call    InputGlobals__QueryControlState
+0x67307C: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x673081: test    eax, eax
 0x673083: jz      loc_67322B
-0x673089: call    InterfaceManager_IsMenuMode
+0x673089: call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.
 0x67308E: test    al, al
 0x673090: jnz     loc_67322B
 0x673096: cmp     [ebx+5C0h], al
@@ -1987,7 +1987,7 @@
 0x6730B0: jnz     loc_67322B
 0x6730B6: cmp     [esp+0A0h+var_85], al
 0x6730BA: jnz     loc_67322B
-0x6730C0: call    sub_579540
+0x6730C0: call    sub_579540; Interface/menu cursor state helper used by Player_OnInput jump/acrobatic branch. Player-only climb activation should avoid triggering while this UI mode is active.
 0x6730C5: mov     esi, eax
 0x6730C7: mov     eax, [ebx]
 0x6730C9: mov     edx, [eax+284h]
@@ -1996,10 +1996,10 @@
 0x6730D3: call    edx
 0x6730D5: test    eax, eax
 0x6730D7: jle     short loc_6730E8
-0x6730D9: push    0
-0x6730DB: push    49564E49h
-0x6730E0: lea     ecx, [ebx+68h]
-0x6730E3: call    sub_6A24B0
+0x6730D9: push    0; casterFilterOrNull
+0x6730DB: push    49564E49h; effectCode
+0x6730E0: lea     ecx, [ebx+68h]; this
+0x6730E3: call    MagicTarget_RemoveActiveEffectsByCode; Removes every nonterminated active effect whose effectCode matches. If casterFilterOrNull is nonnull, only effects from that caster are removed; null matches all casters. Native ABI is thiscall with two stack args and void return; prior ESI/ST0/userpurge inputs were decompiler artifacts.
 0x6730E8: test    esi, esi
 0x6730EA: mov     [esp+0A0h+var_85], 0
 0x6730EF: jz      short loc_67316F
@@ -2064,7 +2064,7 @@
 0x6731A3: test    eax, eax
 0x6731A5: jz      short loc_6731DE
 0x6731A7: mov     ecx, esi; this
-0x6731A9: call    GetTeleportExtraData
+0x6731A9: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x6731AE: test    eax, eax
 0x6731B0: jnz     short loc_6731C4
 0x6731B2: mov     eax, [esi]
@@ -2130,14 +2130,14 @@
 0x67327C: fld     dword ptr [eax]
 0x67327E: mov     ecx, offset unk_B36BA8
 0x673283: fmul    qword ptr ds:0A31C78h
-0x673289: fmul    [ebp+arg_0]
+0x673289: fmul    [ebp+deltaTime]
 0x67328C: fsubp   st(1), st
 0x67328E: fstp    dword ptr ds:0B3BB34h
 0x673294: call    GameSetting_GetSafeFloatPointer
 0x673299: fld     dword ptr [eax]
 0x67329B: mov     ecx, offset unk_B36BB0
 0x6732A0: fmul    qword ptr ds:0A31C78h
-0x6732A6: fmul    [ebp+arg_0]
+0x6732A6: fmul    [ebp+deltaTime]
 0x6732A9: fadd    dword ptr ds:0B3BCDCh
 0x6732AF: fstp    dword ptr ds:0B3BCDCh
 0x6732B5: call    GameSetting_GetSafeFloatPointer
@@ -2165,7 +2165,7 @@
 0x673317: fldz
 0x673319: jmp     short loc_673324
 0x67331B: fld     dword ptr ds:0B3BB08h
-0x673321: fadd    [ebp+arg_0]
+0x673321: fadd    [ebp+deltaTime]
 0x673324: mov     ecx, offset unk_B36B98
 0x673329: fstp    dword ptr ds:0B3BB08h
 0x67332F: call    GameSetting_GetSafeFloatPointer
@@ -2179,9 +2179,9 @@
 0x673347: fst     dword ptr ds:0B3BB34h
 0x67334D: cmp     byte ptr [ebx+588h], 0
 0x673354: jz      short loc_67335F
-0x673356: mov     ecx, ebx
+0x673356: mov     ecx, ebx; this
 0x673358: fstp    st
-0x67335A: call    sub_4A9720
+0x67335A: call    Actor_GetAimPitch; Returns Actor rotation X as the native aim-pitch value used by projectile launch, impact, input, dialogue-camera, and magic-projectile paths.
 0x67335F: fstp    dword ptr ds:0B3BB2Ch
 0x673365: mov     byte ptr ds:0B14E4Dh, 1
 0x67336C: cmp     byte ptr [ebx+588h], 0
@@ -2194,11 +2194,11 @@
 0x67338C: jmp     short loc_673392
 0x67338E: fstp    st(1)
 0x673390: fstp    st
-0x673392: fld     [ebp+arg_0]
+0x673392: fld     [ebp+deltaTime]
 0x673395: push    ecx
 0x673396: mov     ecx, ebx
 0x673398: fstp    [esp+0A4h+duration]; float
-0x67339B: call    sub_671170
+0x67339B: call    Player_ProcessGrabControl
 0x6733A0: mov     ecx, ds:0B3BB1Ch
 0x6733A6: test    ecx, ecx
 0x6733A8: jz      short loc_673418
@@ -2228,7 +2228,7 @@
 0x6733FF: fstp    [esp+0A4h+var_64]
 0x673403: call    sub_4D69A0
 0x673408: mov     ecx, ds:0B3BB1Ch
-0x67340E: push    offset Vector3_InitValue?
+0x67340E: push    offset g_zeroNiPoint3
 0x673413: call    sub_4D9960
 0x673418: cmp     byte ptr ds:0B3BB04h, 0
 0x67341F: jnz     short loc_673440
@@ -2236,7 +2236,7 @@
 0x673428: jnz     short loc_673440
 0x67342A: cmp     byte ptr ds:0B3BB05h, 0
 0x673431: jnz     short loc_673440
-0x673433: call    InterfaceManager_IsMenuMode
+0x673433: call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.
 0x673438: test    al, al
 0x67343A: jnz     short loc_673440
 0x67343C: push    1
@@ -2258,7 +2258,7 @@
 0x673468: test    al, al
 0x67346A: jnz     short loc_673486
 0x67346C: mov     esi, [ebx]
-0x67346E: mov     ecx, offset ActorProcessManager_ptr
+0x67346E: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x673473: call    sub_673B00
 0x673478: mov     eax, [esi+368h]
 0x67347E: push    ecx
@@ -2266,7 +2266,7 @@
 0x673481: fstp    [esp+0A4h+duration]
 0x673484: call    eax
 0x673486: mov     ecx, ebx; this
-0x673488: call    TESObjectREFR_GetAnimData
+0x673488: call    TESObjectREFR_GetAnimData; Return active ActorAnimData for an actor reference. For actor/creature refs with process level 0 or 1, return process+0x17C; otherwise tail-call the ExtraAnim lookup on the reference extra list. Exact return type is ActorAnimData*.
 0x67348D: fld     dword ptr [eax+0BCh]
 0x673493: mov     ecx, [ebx+5CCh]
 0x673499: fstp    dword ptr [ecx+0BCh]
@@ -2274,18 +2274,18 @@
 0x6734A0: fld     dword ptr [eax+0C0h]
 0x6734A6: fstp    dword ptr [ecx+0C0h]
 0x6734AC: mov     ecx, ebx; a1
-0x6734AE: fld     [ebp+arg_0]
+0x6734AE: fld     [ebp+deltaTime]
 0x6734B1: fstp    [esp+0A4h+duration]; a2
 0x6734B4: call    SetAimingZoom
 0x6734B9: cmp     byte ptr [ebx+588h], 0
-0x6734C0: fld     [ebp+arg_0]
+0x6734C0: fld     [ebp+deltaTime]
 0x6734C3: setz    cl
 0x6734C6: mov     [ebx+588h], cl
 0x6734CC: push    ecx
 0x6734CD: mov     ecx, ebx; this
 0x6734CF: fstp    [esp+0A4h+duration]; a2
 0x6734D2: call    sub_603CA0
-0x6734D7: fld     [ebp+arg_0]
+0x6734D7: fld     [ebp+deltaTime]
 0x6734DA: cmp     byte ptr [ebx+588h], 0
 0x6734E1: push    ecx
 0x6734E2: setz    dl
@@ -2330,14 +2330,14 @@
 0x673561: cmp     dword ptr ds:0B3BCD4h, 0
 0x673568: jz      short loc_67357D
 0x67356A: mov     ecx, ebx; this
-0x67356C: call    TESObjectREFR_GetParentCell
+0x67356C: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x673571: cmp     ds:0B3BCD4h, eax
 0x673577: jz      loc_67396A
 0x67357D: mov     ecx, ebx; this
-0x67357F: call    TESObjectREFR_GetParentCell
+0x67357F: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x673584: mov     ecx, ebx; this
 0x673586: mov     ds:0B3BCD4h, eax
-0x67358B: call    TESObjectREFR_GetParentCell
+0x67358B: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x673590: mov     ecx, ds:0B33A1Ch
 0x673596: push    eax
 0x673597: call    sub_43E000
@@ -2410,7 +2410,7 @@
 0x67366B: test    eax, eax
 0x67366D: jnz     short loc_6736AC
 0x67366F: mov     ecx, ebx; int
-0x673671: call    sub_5EAE70
+0x673671: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x673676: cmp     byte ptr [ebx+71Dh], 0
 0x67367D: mov     eax, [ebx]
 0x67367F: mov     edx, [eax+1BCh]
@@ -2512,7 +2512,7 @@
 0x6737AB: fstp    dword ptr ds:0B3BAE0h
 0x6737B1: jmp     short loc_6737B5
 0x6737B3: fstp    st
-0x6737B5: fld     [ebp+arg_0]
+0x6737B5: fld     [ebp+deltaTime]
 0x6737B8: push    ecx
 0x6737B9: mov     ecx, ebx; Actor *
 0x6737BB: fstp    [esp+0A4h+duration]; float
@@ -2536,11 +2536,11 @@
 0x6737FA: fnstsw  ax
 0x6737FC: test    ah, 5
 0x6737FF: jp      loc_6738CF
-0x673805: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x673805: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x67380A: cmp     eax, 2
 0x67380D: jz      short loc_67382C
 0x67380F: mov     ecx, ebx; this
-0x673811: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x673811: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x673816: cmp     eax, 1
 0x673819: jz      short loc_67382C
 0x67381B: fld     dword ptr ds:0A30634h
@@ -2552,7 +2552,7 @@
 0x67383A: fnstsw  ax
 0x67383C: test    ah, 41h
 0x67383F: jnz     short loc_67386D
-0x673841: mov     ecx, offset flt_B36C90
+0x673841: mov     ecx, offset unk_B36C90
 0x673846: call    GameSetting_GetSafeFloatPointer
 0x67384B: mov     ecx, esi
 0x67384D: test    ecx, ecx
@@ -2581,13 +2581,13 @@
 0x6738B1: jz      short loc_6738C4
 0x6738B3: call    sub_5BDA90
 0x6738B8: push    0
-0x6738BA: call    sub_5AEA60
+0x6738BA: call    LoadgameMenu_Open; CharacterSpecificSaves v5 hooks all callers. Its wrapper resets to the character overview, pre-enumerates *g_createdBaseObjList, and prepares exact-name grouping before native menu construction; this covers the native branch that can skip 0x005AEBB6.
 0x6738BF: add     esp, 4
 0x6738C2: jmp     short loc_673935
 0x6738C4: mov     eax, ds:0B33398h
 0x6738C9: mov     byte ptr [eax+1], 1
 0x6738CD: jmp     short loc_673935
-0x6738CF: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x6738CF: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x6738D4: cmp     eax, 2
 0x6738D7: jnz     short loc_673935
 0x6738D9: cmp     byte ptr ds:0B3BB07h, 0
@@ -2618,9 +2618,9 @@
 0x673937: mov     ecx, ebx
 0x673939: call    sub_66B710
 0x67393E: mov     ecx, [esp+0A0h+var_7C]; this
-0x673942: push    1; a3
-0x673944: push    1Bh; a2
-0x673946: call    InputGlobals__QueryControlState
+0x673942: push    1; queryMode
+0x673944: push    1Bh; controlId
+0x673946: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x67394B: test    eax, eax
 0x67394D: jz      short loc_67396A
 0x67394F: mov     ecx, ds:0B33B00h

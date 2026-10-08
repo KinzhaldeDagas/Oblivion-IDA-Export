@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x5B5DF2",
-    "line": "call    sub_578D70",
+    "line": "call    InterfaceManager_ConsumeMessageButton",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x5B5E3B",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x5B5E87",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x5B5EA4",
-    "line": "call    sub_5B5960",
+    "line": "call    sub_5B5960; ContinueFromLastSave decode: post-success main-menu Continue cleanup. Sets tile float 0x1772 on menu 0x414 and jumps to Menu close/transition helper sub_584740.",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,13 +439,13 @@
   },
   {
     "ea": "0x5B5EED",
-    "line": "push    1",
+    "line": "push    1; running",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5B5EEF",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -457,13 +457,13 @@
   },
   {
     "ea": "0x5B5EF8",
-    "line": "call    sub_529820",
+    "line": "call    TESQuest__SetRunning; TESQuest running/active setter used by StartQuest and StopQuest. Runtime bit 0x01 shares QUST DATA's editor label 'Start Game Enabled'; toggling it marks modified flag 0x04.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5B5EFD",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },

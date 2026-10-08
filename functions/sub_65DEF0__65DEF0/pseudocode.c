@@ -1,18 +1,18 @@
-void __thiscall sub_65DEF0(unsigned int *this, int a2)
+void __thiscall sub_65DEF0(int **this, int a2)
 {
   int *v3; // ecx
   _DWORD *v4; // ecx
 
-  v3 = (int *)*(this + 0x16B);
-  if ( v3 )
+  v3 = *(this + 0x16B); /*0x65def3*/
+  if ( v3 ) /*0x65defb*/
   {
-    BSSimpleList_Remove(v3, a2);
-    v4 = (_DWORD *)*(this + 0x16B);
-    if ( !*v4 )
+    BSSimpleList_Remove(v3, a2); /*0x65df02*/
+    v4 = *(this + 0x16B); /*0x65df07*/
+    if ( !*v4 ) /*0x65df0d*/
     {
-      BSSimpleList_Clear(v4);
-      FormHeapFree(*(this + 0x16B));
-      *(this + 0x16B) = 0;
+      BSSimpleList_Clear(v4); /*0x65df12*/
+      FormHeapFree((unsigned int)*(this + 0x16B)); /*0x65df1e*/
+      *(this + 0x16B) = 0; /*0x65df26*/
     }
   }
 }

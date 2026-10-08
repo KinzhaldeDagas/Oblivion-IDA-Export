@@ -1,5 +1,6 @@
-int sub_9EE1A0()
+// Construct/register fSkillUseFactor with Oblivion default 1.0.
+int InitSetting_fSkillUseFactor()
 {
-  GameSetting_ConstrAndReg_float(&flt_B37D98, (int)"fSkillUseFactor", 1.0);
-  return atexit(sub_A20250);
+  GameSetting_ConstrAndReg_float(&g_fSkillUseFactor.value, (int)"fSkillUseFactor", 1.0); /*0x9ee1b0*/
+  return atexit(sub_A20250); /*0x9ee1c0*/
 }

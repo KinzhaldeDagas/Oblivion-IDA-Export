@@ -3,10 +3,10 @@
 0x5E8B84: mov     esi, ecx
 0x5E8B86: mov     eax, [esi]
 0x5E8B88: mov     edx, [eax+164h]
-0x5E8B8E: push    21h ; '!'
+0x5E8B8E: push    21h ; '!'; encodedKey
 0x5E8B90: call    edx
-0x5E8B92: mov     ecx, eax
-0x5E8B94: call    sub_470D00
+0x5E8B92: mov     ecx, eax; this
+0x5E8B94: call    ActorAnimData_HasAnimKey; Returns whether ActorAnimData +0x9C contains an entry for the encoded animation key. Presence test only; it does not select or play a sequence.
 0x5E8B99: test    al, al
 0x5E8B9B: jnz     short loc_5E8BA2
 0x5E8B9D: pop     esi
@@ -33,7 +33,7 @@
 0x5E8BD0: pop     esi
 0x5E8BD1: add     esp, 20h
 0x5E8BD4: retn
-0x5E8BD5: mov     ecx, offset TimeGlobals
+0x5E8BD5: mov     ecx, 0B332E0h
 0x5E8BDA: call    TimeGlobals_GetGameHour
 0x5E8BDF: fstp    [esp+24h+var_10]
 0x5E8BE3: mov     eax, [esi]
@@ -49,17 +49,17 @@
 0x5E8BFF: push    edi
 0x5E8C00: fstp    dword ptr [esp+2Ch+var_1C]
 0x5E8C04: mov     ecx, esi; this
-0x5E8C06: call    TESObjectREFR_GetParentCell
+0x5E8C06: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5E8C0B: mov     edi, eax
 0x5E8C0D: test    edi, edi
 0x5E8C0F: jz      loc_5E8CE2
 0x5E8C15: mov     ecx, edi; this
-0x5E8C17: call    TESObjectCELL_IsInterior
+0x5E8C17: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x5E8C1C: test    al, al
 0x5E8C1E: jz      loc_5E8CE2
 0x5E8C24: push    0
 0x5E8C26: mov     ecx, edi
-0x5E8C28: call    TESObjectCELL_GetMusicType
+0x5E8C28: call    TESObjectCELL_GetMusicType; Verified: resolves the music type for a cell by using region-data ID 7, virtual sound-type lookup, and a position/cell cache; falls back to worldspace music when no region sound type is selected.
 0x5E8C2D: cmp     eax, 2
 0x5E8C30: jnz     loc_5E8D39
 0x5E8C36: mov     ecx, [esi+58h]
@@ -77,7 +77,7 @@
 0x5E8C5B: fld     dword ptr ds:0A2FE7Ch
 0x5E8C61: fstp    [esp+2Ch+var_14]
 0x5E8C65: fld     [esp+2Ch+var_14]
-0x5E8C69: mov     ecx, offset fTorchLightLevelInterior
+0x5E8C69: mov     ecx, 0B37740h
 0x5E8C6E: fsub    dword ptr [esp+2Ch+var_1C]
 0x5E8C72: fstp    qword ptr [esp+2Ch+var_14]
 0x5E8C76: call    GameSetting_GetSafeFloatPointer
@@ -93,11 +93,11 @@
 0x5E8C99: call    edx
 0x5E8C9B: test    eax, eax
 0x5E8C9D: jz      loc_5E8D39
-0x5E8CA3: mov     ecx, offset fTorchLightLevelInterior
+0x5E8CA3: mov     ecx, 0B37740h
 0x5E8CA8: call    GameSetting_GetSafeFloatPointer
 0x5E8CAD: fld     dword ptr [eax]
 0x5E8CAF: fadd    st, st
-0x5E8CB1: mov     ecx, offset fTorchLightLevelInterior
+0x5E8CB1: mov     ecx, 0B37740h
 0x5E8CB6: fstp    [esp+2Ch+var_1C]
 0x5E8CBA: call    GameSetting_GetSafeFloatPointer
 0x5E8CBF: fld     qword ptr [esp+2Ch+var_14]

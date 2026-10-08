@@ -1,4 +1,4 @@
-0x6CE840: sub     esp, 0A4h
+0x6CE840: sub     esp, 0A4h; Oblivion: blends accumulated transforms from each active item's 0x68-byte state record using item+8 normalized weight. Chooses current sample or accumulated delta state, preserves TRS channel validity independently, hemisphere-corrects/normalizes rotation, composes with the cached blend transform at +0x30, and returns false only when every channel remains invalid.
 0x6CE846: fld1
 0x6CE848: mov     eax, ds:0B3F9A8h
 0x6CE84D: mov     edx, ds:0B3F9B0h
@@ -49,7 +49,7 @@
 0x6CE8E5: fnstsw  ax
 0x6CE8E7: test    ah, 44h
 0x6CE8EA: jp      loc_6CEA18
-0x6CE8F0: push    offset Vector3_InitValue?
+0x6CE8F0: push    offset g_zeroNiPoint3
 0x6CE8F5: mov     ecx, edi
 0x6CE8F7: mov     [esp+0B4h+var_9E], 1
 0x6CE8FC: call    sub_471390

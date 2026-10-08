@@ -7,7 +7,7 @@
 0x500F27: cmp     byte ptr ds:0B361ACh, 0
 0x500F2E: jz      short loc_500F51
 0x500F30: cmp     byte ptr ds:0B09F58h, 0
-0x500F37: mov     eax, offset aOn_0
+0x500F37: mov     eax, offset aOn_0; "On"
 0x500F3C: jnz     short loc_500F43
 0x500F3E: mov     eax, offset aOff
 0x500F43: push    eax

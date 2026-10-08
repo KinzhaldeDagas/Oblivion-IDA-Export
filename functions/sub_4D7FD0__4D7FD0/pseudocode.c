@@ -1,4 +1,5 @@
-BSExtraDataVtbl *__thiscall sub_4D7FD0(_BYTE *this)
+// Return the reference's extra-data type 0x49 AttachedLightPayload_Decoded, if present.
+AttachedLightPayload_Decoded *__thiscall TESObjectREFR_GetSpellEffectLightPayload(TESObjectREFR *self)
 {
-  return sub_41E670((ExtraDataList *)(this + 0x44));
+  return (AttachedLightPayload_Decoded *)ExtraDataList_GetSpellEffectLight(&self->member.baseExtraList);
 }

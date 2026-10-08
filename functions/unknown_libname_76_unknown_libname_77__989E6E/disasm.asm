@@ -8,12 +8,12 @@
 0x989E81: jnz     short loc_989EB0
 0x989E83: cmp     [esp+NewSize], eax
 0x989E87: jz      short loc_989EB0
-0x989E89: cmp     dword_BA9E0C, eax
+0x989E89: cmp     dword_BA9E00+0Ch, eax
 0x989E8F: jbe     short loc_989EB0
 0x989E91: push    esi; dwMilliseconds
 0x989E92: call    ds:Sleep
 0x989E98: lea     eax, [esi+3E8h]
-0x989E9E: cmp     eax, dword_BA9E0C
+0x989E9E: cmp     eax, dword_BA9E00+0Ch
 0x989EA4: jbe     short loc_989EA9
 0x989EA6: or      eax, 0FFFFFFFFh
 0x989EA9: cmp     eax, 0FFFFFFFFh

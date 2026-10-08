@@ -39,7 +39,7 @@
 0x67B495: test    eax, eax
 0x67B497: jnz     short loc_67B480
 0x67B499: mov     ecx, esi
-0x67B49B: call    BSSimpleList_Clear
+0x67B49B: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x67B4A0: add     edi, 0FFFFFFFFh
 0x67B4A3: push    edi
 0x67B4A4: push    0
@@ -72,7 +72,7 @@
 0x67B4EC: jns     short loc_67B4B4
 0x67B4EE: pop     ebx
 0x67B4EF: push    ebp
-0x67B4F0: call    FormHeapFree
+0x67B4F0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x67B4F5: add     esp, 4
 0x67B4F8: mov     [esi+8], esi
 0x67B4FB: cmp     dword ptr [esi+4], 0

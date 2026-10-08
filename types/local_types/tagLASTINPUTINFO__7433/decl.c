@@ -1,1 +1,5 @@
-tagLASTINPUTINFO
+struct tagLASTINPUTINFO
+{
+UINT cbSize;
+DWORD dwTime;
+};

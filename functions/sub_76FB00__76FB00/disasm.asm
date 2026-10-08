@@ -1,4 +1,4 @@
-0x76FB00: mov     eax, ecx
+0x76FB00: mov     eax, ecx; MoonSugarEffect decode: vertex declaration element initializer. Clears fields and marks the element disabled with usage/type sentinel values 0xFFFFFFFF and 0x11.
 0x76FB02: xor     ecx, ecx
 0x76FB04: mov     [eax], ecx
 0x76FB06: mov     [eax+4], ecx

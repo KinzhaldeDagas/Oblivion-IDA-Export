@@ -1,4 +1,4 @@
-0x7C5B50: sub     esp, 8
+0x7C5B50: sub     esp, 8; Advance ShadowSceneNode+0x104 saved-next active-light iterator.
 0x7C5B53: push    ebx
 0x7C5B54: xor     ebx, ebx
 0x7C5B56: push    edi
@@ -20,7 +20,7 @@
 0x7C5B82: lea     edx, [esp+18h+var_4]
 0x7C5B86: push    edx
 0x7C5B87: mov     ecx, ebp
-0x7C5B89: call    sub_405AD0
+0x7C5B89: call    ShadowSceneLight_GetLightRef
 0x7C5B8E: or      ebx, 1
 0x7C5B91: cmp     dword ptr [eax], 0
 0x7C5B94: jnz     short loc_7C5B9D

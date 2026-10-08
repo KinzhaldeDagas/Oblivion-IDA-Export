@@ -1,1 +1,1 @@
-0x6B7B90: jmp     sub_6B7450
+0x6B7B90: jmp     Conversation__Destroy

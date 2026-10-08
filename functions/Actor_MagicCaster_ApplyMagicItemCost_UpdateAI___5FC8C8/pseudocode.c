@@ -1,6 +1,6 @@
 int __usercall Actor_MagicCaster_ApplyMagicItemCost_::UpdateAI_@<eax>(
         int a1@<ebp>,
-        int a2@<esi>,
+        void (__thiscall ***a2)(_DWORD)@<esi>,
         double a3@<st0>,
         int a4,
         int a5,
@@ -11,12 +11,12 @@ int __usercall Actor_MagicCaster_ApplyMagicItemCost_::UpdateAI_@<eax>(
         int a10,
         int a11)
 {
-  _DWORD *v11; // eax
+  unsigned int *v11; // eax
 
-  if ( (*(int (__thiscall **)(int))(*(_DWORD *)a1 + 0x330))(a1) )
+  if ( (*(int (__thiscall **)(int))(*(_DWORD *)a1 + 0x330))(a1) ) /*0x5fc8d3*/
   {
-    v11 = (_DWORD *)(*(int (__thiscall **)(int))(*(_DWORD *)a1 + 0x330))(a1);
-    CombatController_ApplyMagicItemCosts__(v11, a2);
+    v11 = (unsigned int *)(*(int (__thiscall **)(int))(*(_DWORD *)a1 + 0x330))(a1); /*0x5fc8e5*/
+    CombatController_ApplyMagicItemCosts__(v11, (int)a2); /*0x5fc8e9*/
   }
   return Actor_MagicCaster_ApplyMagicItemCost_::GetMagickaCost(a2, a3, a4, a5, a6, a7, a8, a9, a10, a11);
 }

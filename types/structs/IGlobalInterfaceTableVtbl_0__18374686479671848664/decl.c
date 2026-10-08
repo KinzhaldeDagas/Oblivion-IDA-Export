@@ -1,1 +1,1 @@
-IGlobalInterfaceTableVtbl_0
+typedef IGlobalInterfaceTableVtbl IGlobalInterfaceTableVtbl_0;

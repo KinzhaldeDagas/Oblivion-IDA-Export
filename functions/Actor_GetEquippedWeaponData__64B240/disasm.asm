@@ -1,4 +1,4 @@
-0x64B240: cmp     [esp+arg_0], 0
+0x64B240: cmp     [esp+requireWorn], 0; Returns HighProcess equippedWeaponData directly, or only when its instance data is marked Worn when requireWorn is nonzero.
 0x64B245: push    esi
 0x64B246: mov     esi, ecx
 0x64B248: jnz     short loc_64B254

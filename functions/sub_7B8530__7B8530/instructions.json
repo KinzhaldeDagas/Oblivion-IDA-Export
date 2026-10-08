@@ -78,12 +78,6 @@
     "size": 2
   },
   {
-    "ea": "0x7B855A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x7B8560",
     "line": "mov     eax, ds:0B42EC0h[esi*4]",
     "mnemonic": "mov",
@@ -193,7 +187,7 @@
   },
   {
     "ea": "0x7B8598",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1903,7 +1897,7 @@
   },
   {
     "ea": "0x7B886E",
-    "line": "call    ImageSpaceShaderList__Destroy",
+    "line": "call    ImageSpaceShaderList__Destroy; MoonSugarEffect decode: ImageSpaceShaderList::Destroy frees list nodes and owned renderTarget/screen quad, clears fallback pointer; it does not release shader objects stored as raw list data.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1915,7 +1909,7 @@
   },
   {
     "ea": "0x7B8874",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1957,7 +1951,7 @@
   },
   {
     "ea": "0x7B888E",
-    "line": "call    BSTextureManager_Delete",
+    "line": "call    BSTextureManager_Delete; MoonSugarEffect decode: BSTextureManager destructor/delete path. Releases available/in-use rendered textures, shadow maps, cached buffers, and manager lists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1969,7 +1963,7 @@
   },
   {
     "ea": "0x7B8894",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2089,7 +2083,7 @@
   },
   {
     "ea": "0x7B88CB",
-    "line": "call    sub_7AB1D0",
+    "line": "call    sub_7AB1D0; MoonSugarEffect decode: mode-4 helper creates/releases global screen-element quads at B42CF8..B42D3C with vertex/z/alpha/stencil/material props; not a Moon Sugar mask API.",
     "mnemonic": "call",
     "size": 5
   },

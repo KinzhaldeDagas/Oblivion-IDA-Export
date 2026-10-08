@@ -4,7 +4,7 @@
 0x49B935: mov     esi, [esp+4Ch+arg_0]
 0x49B939: mov     ebx, ecx
 0x49B93B: mov     ecx, [esi]; this
-0x49B93D: call    TESObjectREFR_GetParentCell
+0x49B93D: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x49B942: test    eax, eax
 0x49B944: jz      loc_49BED9
 0x49B94A: mov     ecx, [esi]
@@ -14,7 +14,7 @@
 0x49B956: test    eax, eax
 0x49B958: jz      loc_49BED9
 0x49B95E: mov     ecx, [esi]; this
-0x49B960: call    TESObjectREFR_GetParentCell
+0x49B960: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x49B965: mov     ecx, eax
 0x49B967: call    TESObjectCELL_GetWaterHeight
 0x49B96C: fstp    [esp+4Ch+var_38]
@@ -35,7 +35,7 @@
 0x49B999: push    ecx
 0x49B99A: fstp    [esp+54h+var_54]; float
 0x49B99D: lea     edi, [ecx+2Ch]
-0x49B9A0: call    TESObjectREFR_GetParentCell
+0x49B9A0: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x49B9A5: mov     ecx, [esi]
 0x49B9A7: push    eax; int
 0x49B9A8: push    edi; int
@@ -169,13 +169,13 @@
 0x49BB35: mov     edx, [esi+20h]
 0x49BB38: mov     ds:0B45F9Ch, edx
 0x49BB3E: mov     ecx, [esi]; this
-0x49BB40: call    TESObjectREFR_GetParentCell
+0x49BB40: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x49BB45: movzx   eax, byte ptr [eax+24h]
 0x49BB49: shr     eax, 1
 0x49BB4B: test    al, 1
 0x49BB4D: jz      short loc_49BB9C
 0x49BB4F: mov     ecx, [esi]; this
-0x49BB51: call    TESObjectREFR_GetParentCell
+0x49BB51: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x49BB56: mov     ecx, eax
 0x49BB58: call    TESObjectCELL_GetWaterHeight
 0x49BB5D: fadd    qword ptr ds:0A2FC80h
@@ -195,7 +195,7 @@
 0x49BB8E: push    ecx
 0x49BB8F: mov     ecx, [esi+4]; this
 0x49BB92: fstp    [esp+58h+a2]; a2
-0x49BB95: call    NiAVObject_UpdateNiAVObject
+0x49BB95: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x49BB9A: jmp     short loc_49BBA4
 0x49BB9C: mov     eax, [esi+4]
 0x49BB9F: or      word ptr [eax+18h], 1
@@ -328,7 +328,7 @@
 0x49BD20: fstp    st
 0x49BD22: mov     ecx, [esi+4]
 0x49BD25: push    4
-0x49BD27: call    NiNode_GetNiPropertyByID
+0x49BD27: call    NiNode_GetNiPropertyByID;
 0x49BD2C: fld     dword ptr [esi+18h]
 0x49BD2F: cmp     byte ptr [esp+54h+arg_4], 0
 0x49BD34: mov     edi, eax
@@ -339,7 +339,7 @@
 0x49BD42: cmp     [esp+54h+var_41], 0
 0x49BD47: jnz     short loc_49BD54
 0x49BD49: mov     ecx, [esi]
-0x49BD4B: call    sub_5E05B0
+0x49BD4B: call    sub_5E05B0; Checks process movement flags low nibble via vfunc +0x2C0. Player input uses this alongside swimming/sneaking skill progression; useful as a broad movement-mode guard.
 0x49BD50: test    al, al
 0x49BD52: jnz     short loc_49BD58
 0x49BD54: xor     al, al
@@ -397,7 +397,7 @@
 0x49BDFF: cmp     dword ptr ds:0B42F48h, 2
 0x49BE06: jl      loc_49BED7
 0x49BE0C: push    14h; a1
-0x49BE0E: call    GetShaderDefinition
+0x49BE0E: call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.
 0x49BE13: add     esp, 4
 0x49BE16: test    eax, eax
 0x49BE18: jz      short loc_49BE1F
@@ -405,10 +405,10 @@
 0x49BE1D: jmp     short loc_49BE21
 0x49BE1F: xor     ebp, ebp
 0x49BE21: lea     edx, [esi+0Ch]
-0x49BE24: push    edx
-0x49BE25: mov     ecx, offset dword_B45FB4
+0x49BE24: push    edx; incoming
+0x49BE25: mov     ecx, (offset OB_ShaderConstantStorage_010201A0+1A0h); this
 0x49BE2A: mov     byte ptr ds:0B45F4Ch, 1
-0x49BE31: call    sub_55E2A0
+0x49BE31: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
 0x49BE36: cmp     byte ptr ds:0B3522Bh, 0
 0x49BE3D: jnz     short loc_49BE5C
 0x49BE3F: mov     eax, ds:0B35220h
@@ -419,7 +419,7 @@
 0x49BE50: fld     dword ptr ds:0A31C80h
 0x49BE56: fstp    dword ptr ds:0B45F40h
 0x49BE5C: push    3
-0x49BE5E: call    nullsub_returnTrue_0arg
+0x49BE5E: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x49BE63: mov     eax, [esi+8]
 0x49BE66: lea     edi, [esi+8]
 0x49BE69: push    eax; a4
@@ -427,13 +427,13 @@
 0x49BE6B: mov     eax, ds:0B43104h
 0x49BE70: push    eax; a2
 0x49BE71: push    ebp; a1
-0x49BE72: call    sub_7B4900
+0x49BE72: call    sub_7B4900; MoonSugarEffect decode: thin wrapper around sub_803570; applies one BSShader through global imageSpaceShaderList fullscreen quad, used by menu/water/canopy/misc paths.
 0x49BE77: push    2
-0x49BE79: call    nullsub_returnTrue_0arg
+0x49BE79: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x49BE7E: add     esp, 18h
-0x49BE81: push    offset dword_B45FA8
-0x49BE86: mov     ecx, edi
-0x49BE88: call    sub_55E2A0
+0x49BE81: push    (offset OB_ShaderConstantStorage_010201A0+194h); incoming
+0x49BE86: mov     ecx, edi; this
+0x49BE88: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
 0x49BE8D: mov     eax, ds:0B45FB4h
 0x49BE92: test    eax, eax
 0x49BE94: jz      short loc_49BEBE

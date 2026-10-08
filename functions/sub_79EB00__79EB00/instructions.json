@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x79EB00",
-    "line": "push    ecx",
+    "line": "push    ecx; Checked single-element insert for st_vector<SFrondTexture>. Preserves the insertion index across possible reallocation, delegates to insert-fill(count=1), then returns an owner/current iterator.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x79EB03",
-    "line": "mov     ebp, [esp+0Ch+arg_8]",
+    "line": "mov     ebp, [esp+0Ch+position]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x79EB2C",
-    "line": "mov     ebx, [esp+14h+arg_4]",
+    "line": "mov     ebx, [esp+14h+expectedOwner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x79EB3D",
-    "line": "mov     ebx, [esp+14h+arg_4]",
+    "line": "mov     ebx, [esp+14h+expectedOwner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -241,44 +241,170 @@
   },
   {
     "ea": "0x79EB63",
-    "line": "mov     ecx, [esp+14h+arg_C]",
+    "line": "mov     ecx, [esp+14h+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79EB67",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79EB68",
-    "line": "push    1",
+    "line": "push    1; count",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x79EB6A",
-    "line": "push    ebp",
+    "line": "push    ebp; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79EB6B",
-    "line": "push    ebx",
+    "line": "push    ebx; expectedOwner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79EB6C",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79EB6E",
-    "line": "call    sub_79E400",
+    "line": "call    OB_stVector_SFrondTexture_InsertFill_010201A0; Oblivion st_vector<SFrondTexture>::insert(position,count,value). Makes an alias-safe value copy, enforces max_size 0x5D1745D, grows capacity by 1.5x when needed, and performs exception-safe deep construction/destruction of 0x2C-byte string-bearing records.",
     "mnemonic": "call",
     "size": 5
+  },
+  {
+    "ea": "0x79EB73",
+    "line": "mov     ebx, [edi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x79EB76",
+    "line": "cmp     ebx, [edi+8]",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x79EB79",
+    "line": "jbe     short loc_79EB80",
+    "mnemonic": "jbe",
+    "size": 2
+  },
+  {
+    "ea": "0x79EB7B",
+    "line": "call    __invalid_parameter_noinfo",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x79EB80",
+    "line": "imul    esi, 2Ch ; ','",
+    "mnemonic": "imul",
+    "size": 3
+  },
+  {
+    "ea": "0x79EB83",
+    "line": "add     esi, ebx",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x79EB85",
+    "line": "cmp     esi, [edi+8]",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x79EB88",
+    "line": "mov     [esp+14h+position], ebx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x79EB8C",
+    "line": "ja      short loc_79EB93",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x79EB8E",
+    "line": "cmp     esi, [edi+4]",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x79EB91",
+    "line": "jnb     short loc_79EB98",
+    "mnemonic": "jnb",
+    "size": 2
+  },
+  {
+    "ea": "0x79EB93",
+    "line": "call    __invalid_parameter_noinfo",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x79EB98",
+    "line": "mov     eax, [esp+14h+result]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x79EB9C",
+    "line": "mov     [eax], edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x79EB9E",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x79EB9F",
+    "line": "mov     [eax+4], esi",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x79EBA2",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x79EBA3",
+    "line": "pop     ebp",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x79EBA4",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x79EBA5",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x79EBA6",
+    "line": "retn    10h",
+    "mnemonic": "retn",
+    "size": 3
   }
 ]

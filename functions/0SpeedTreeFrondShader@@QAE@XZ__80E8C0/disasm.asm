@@ -1,4 +1,4 @@
-0x80E8C0: push    0FFFFFFFFh
+0x80E8C0: push    0FFFFFFFFh; SpeedTreeFrondShader constructor. Current xrefs show construction only from frond shader-definition factory 0x80EE10, not from a TES4 geometry attachment path.
 0x80E8C2: push    offset ??0SpeedTreeFrondShader@@QAE@XZ_SEH
 0x80E8C7: mov     eax, large fs:0
 0x80E8CD: push    eax
@@ -12,7 +12,7 @@
 0x80E8E2: mov     esi, ecx
 0x80E8E4: mov     [esp+18h+var_10], esi
 0x80E8E8: call    ??0BSShader@@QAE@XZ; BSShader::BSShader(void)
-0x80E8ED: push    offset sub_7016A0; a5
+0x80E8ED: push    offset NiPointerSlot_Release; a5
 0x80E8F2: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x80E8F7: push    4; size
 0x80E8F9: push    4; a2
@@ -21,7 +21,7 @@
 0x80E8FF: mov     [esp+2Ch+var_4], 0
 0x80E907: mov     dword ptr [esi], offset ??_7SpeedTreeFrondShader@@6B@; const SpeedTreeFrondShader::`vftable'
 0x80E90D: call    ArrayConstructor
-0x80E912: push    offset sub_7016A0; a5
+0x80E912: push    offset NiPointerSlot_Release; a5
 0x80E917: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x80E91C: push    2; size
 0x80E91E: push    4; a2
@@ -46,3 +46,20 @@
 0x80E97B: pop     esi
 0x80E97C: add     esp, 10h
 0x80E97F: retn
+0x9D0F50: mov     ecx, [ebp-10h]; this
+0x9D0F53: jmp     ??1BSShader@@UAE@XZ;
+0x9D0F58: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9D0F5D: push    4; int
+0x9D0F5F: push    4; unsigned int
+0x9D0F61: mov     eax, [ebp-10h]
+0x9D0F64: add     eax, 7Ch ; '|'
+0x9D0F67: push    eax; void *
+0x9D0F68: call    $LN21
+0x9D0F6D: retn
+0x9D0F6E: mov     edx, [esp+arg_4]
+0x9D0F72: lea     eax, [edx-8]
+0x9D0F75: mov     ecx, [edx-0Ch]
+0x9D0F78: xor     ecx, eax
+0x9D0F7A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D0F7F: mov     eax, offset stru_AF96E8
+0x9D0F84: jmp     ___CxxFrameHandler3

@@ -5,8 +5,8 @@ int __userpurge EffectSetting_LoadForm_::VariableFlagOverrides@<eax>(
         int a4@<edi>,
         int a5)
 {
-  if ( EffectSetting_DisplayedFlagListSize <= 0 )
-    return EffectSetting_LoadForm_::ForcedFlagOverrrides(a2, a3, a4, a1, a5);
+  if ( EffectSetting_DisplayedFlagListSize <= 0 ) /*0x4161b6*/
+    return EffectSetting_LoadForm_::ForcedFlagOverrrides(a2, a3, a4, a1, a5); /*0x4161b6*/
   else
-    return EffectSetting_LoadForm_::VariableFO_LoopBody(0, EffectSetting_DisplayedFlagListSize, a1, a2, a3, a4, a5);
+    return EffectSetting_LoadForm_::VariableFO_LoopBody(0, EffectSetting_DisplayedFlagListSize, a1, a2, a3, a4, a5); /*0x4161b8*/
 }

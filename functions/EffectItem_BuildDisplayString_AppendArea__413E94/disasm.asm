@@ -1,8 +1,8 @@
-0x413E94: mov     eax, sMagicEffectItemFeet
+0x413E94: mov     eax, ds:0B334A0h
 0x413E99: push    eax
 0x413E9A: mov     ecx, esi
-0x413E9C: call    EffectItem_GetArea
-0x413EA1: mov     ecx, sMagicEffectItemIn
+0x413E9C: call    EffectItem_GetArea; Effective area: returns 0 for EffectSetting NoArea (0x200) or Self range (0); otherwise raw EffectItem+0x8 area.
+0x413EA1: mov     ecx, ds:0B33470h
 0x413EA7: push    eax
 0x413EA8: push    ecx
 0x413EA9: lea     edx, [esp+0Ch+arg_20]

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4C97C0",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, dword ptr [esp+group_y]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x4C97C7",
-    "line": "mov     [esp+arg_4], eax",
+    "line": "mov     dword ptr [esp+group_y], eax; group_y",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4C97CB",
-    "line": "mov     ecx, [esp+arg_0]",
+    "line": "mov     ecx, dword ptr [esp+group_x]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,13 +31,13 @@
   },
   {
     "ea": "0x4C97D2",
-    "line": "mov     [esp+arg_0], ecx",
+    "line": "mov     dword ptr [esp+group_x], ecx; group_x",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4C97D6",
-    "line": "jmp     sub_4EF1D0",
+    "line": "jmp     TESObjectCELL_PackExteriorGroupLabel; Verified exact key encoding used by the DistantLOD cell model map: packed label = (signed cellX << 16) | unsigned cellY.",
     "mnemonic": "jmp",
     "size": 5
   }

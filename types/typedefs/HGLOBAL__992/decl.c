@@ -1,1 +1,1 @@
-HGLOBAL
+typedef HANDLE HGLOBAL;

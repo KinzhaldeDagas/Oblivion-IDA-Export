@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x7C3079",
-    "line": "mov     eax, [esp+24h+arg_4]",
+    "line": "mov     eax, [esp+24h+incoming]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -547,31 +547,31 @@
   },
   {
     "ea": "0x7C30DD",
-    "line": "lea     eax, [esp+24h+arg_4]",
+    "line": "lea     eax, [esp+24h+incoming]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7C30E1",
-    "line": "push    eax",
+    "line": "push    eax; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C30E2",
-    "line": "lea     ecx, [edi+8]",
+    "line": "lea     ecx, [edi+8]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7C30E5",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7C30EA",
-    "line": "mov     esi, [esp+24h+arg_4]",
+    "line": "mov     esi, [esp+24h+incoming]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -640,5 +640,59 @@
     "line": "jmp     short loc_7C30B8",
     "mnemonic": "jmp",
     "size": 2
+  },
+  {
+    "ea": "0x9CE3D0",
+    "line": "lea     ecx, [ebp+8]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE3D3",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE3D8",
+    "line": "mov     edx, [esp+incoming]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CE3DC",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE3DF",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE3E2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CE3E4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE3E9",
+    "line": "mov     eax, offset stru_AF73F0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE3EE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

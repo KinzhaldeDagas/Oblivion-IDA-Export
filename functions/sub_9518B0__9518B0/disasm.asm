@@ -27,7 +27,7 @@
 0x9518F7: push    eax
 0x9518F8: lea     ecx, [esp+68h+var_40]
 0x9518FC: movaps  [esp+68h+var_10], xmm0
-0x951901: call    sub_88FD90
+0x951901: call    hkBasis_ProjectVector; TES4 authoritative: basis projection helper, computes local components from basis columns and source vector without translation.
 0x951906: movaps  xmm0, xmmword ptr [ebx+40h]
 0x95190A: movaps  xmm1, [esp+60h+var_40]
 0x95190F: cmpltps xmm1, xmm0

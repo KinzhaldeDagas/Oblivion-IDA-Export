@@ -1,1 +1,1 @@
-WINMM_OpenInfo
+typedef _WINMM_OpenInfo WINMM_OpenInfo;

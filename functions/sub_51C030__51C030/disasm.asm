@@ -1,4 +1,4 @@
-0x51C030: mov     edx, [ecx+38h]
+0x51C030: mov     edx, [ecx+38h]; Oblivion CLAS DATA validator: requires primary attributes to be distinct and each in 0..7, and requires pairwise uniqueness across exactly seven majorSkills entries. It does not range-check major skill AVs and does not validate specialization.
 0x51C033: push    ebx
 0x51C034: push    esi
 0x51C035: mov     esi, [ecx+3Ch]
@@ -10,7 +10,7 @@
 0x51C041: cmp     edx, 7
 0x51C044: ja      short loc_51C04B
 0x51C046: cmp     esi, 7
-0x51C049: jbe     short loc_51C04D
+0x51C049: jbe     short loc_51C04D; Only the two favored attributes are range-checked here (Strength..Luck, 0..7).
 0x51C04B: xor     al, al
 0x51C04D: mov     esi, 1
 0x51C052: lea     edi, [ecx+44h]
@@ -19,7 +19,7 @@
 0x51C059: cmp     esi, 7
 0x51C05C: mov     ecx, esi
 0x51C05E: jge     short loc_51C07A
-0x51C060: lea     edx, [edi+4]
+0x51C060: lea     edx, [edi+4]; Pairwise duplicate scan over majorSkills[0..6]; stored values themselves are not checked against SkillActorValue 0x0C..0x20.
 0x51C063: test    al, al
 0x51C065: jz      short loc_51C07A
 0x51C067: mov     ebx, [edx]

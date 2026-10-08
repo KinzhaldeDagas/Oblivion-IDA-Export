@@ -1,14 +1,14 @@
-0x5418F0: sub     esp, 3Ch
+0x5418F0: sub     esp, 3Ch; Oblivion Sky color synthesis. Interior mode reads TESObjectCELL lighting colors; exterior modes blend current/next TESWeather colors, update Sky color vectors, and publish the active fog color. Fallout was consulted afterward and corroborates the conventional Sky::UpdateColors label.
 0x5418F3: push    esi
 0x5418F4: mov     esi, ecx
-0x5418F6: mov     eax, [esi+0DCh]
+0x5418F6: mov     eax, [esi+0DCh]; Fog default decode: read Sky::unk0DC to choose default, interior, or weather color source branch.
 0x5418FC: test    eax, eax
-0x5418FE: jnz     loc_541A0D
+0x5418FE: jnz     loc_541A0D; Fog default decode: enter mode-0 color initialization branch when Sky::unk0DC == 0.
 0x541904: fld     dword ptr ds:0A3D658h
 0x54190A: fstp    [esp+40h+var_2C]
 0x54190E: mov     eax, [esp+40h+var_2C]
 0x541912: fld     dword ptr ds:0A5247Ch
-0x541918: mov     [esi+6Ch], eax
+0x541918: mov     [esi+6Ch], eax; Fog default decode: initialize Sky color/tint slot group from static defaults for mode 0.
 0x54191B: fst     [esp+40h+var_28]
 0x54191F: mov     ecx, [esp+40h+var_28]
 0x541923: fstp    [esp+40h+var_24]
@@ -20,7 +20,7 @@
 0x54193C: fstp    [esp+40h+var_28]
 0x541940: mov     ecx, [esp+40h+var_28]
 0x541944: fld     dword ptr ds:0A56E94h
-0x54194A: mov     [esi+60h], eax
+0x54194A: mov     [esi+60h], eax; Fog default decode: initialize another Sky color slot group from static defaults for mode 0.
 0x54194D: mov     [esi+74h], edx
 0x541950: fstp    [esp+40h+var_24]
 0x541954: fld     dword ptr ds:0A2FAACh
@@ -31,7 +31,7 @@
 0x541969: fst     [esp+40h+var_28]
 0x54196D: mov     ecx, [esp+40h+var_28]
 0x541971: fstp    [esp+40h+var_24]
-0x541975: mov     [esi+0A8h], eax
+0x541975: mov     [esi+0A8h], eax; Fog default decode: fan default scalar/color constants into additional Sky color mirror slots.
 0x54197B: mov     [esi+54h], eax
 0x54197E: mov     [esi+68h], edx
 0x541981: mov     edx, [esp+40h+var_24]
@@ -40,64 +40,64 @@
 0x54198E: mov     [esi+0B0h], edx
 0x541994: mov     [esi+5Ch], edx
 0x541997: mov     eax, ds:0B3FA90h
-0x54199C: mov     [esi+0B4h], eax
+0x54199C: mov     [esi+0B4h], eax; Fog default decode: load default fog/color red from B3FA90 into Sky active color source.
 0x5419A2: mov     ecx, ds:0B3FA94h
-0x5419A8: mov     [esi+0B8h], ecx
+0x5419A8: mov     [esi+0B8h], ecx; Fog default decode: load default fog/color green from B3FA94 into Sky active color source.
 0x5419AE: mov     edx, ds:0B3FA98h
-0x5419B4: mov     [esi+0BCh], edx
+0x5419B4: mov     [esi+0BCh], edx; Fog default decode: load default fog/color blue from B3FA98 into Sky active color source.
 0x5419BA: mov     eax, [esi+0B4h]
 0x5419C0: mov     ecx, [esi+0B8h]
 0x5419C6: mov     [esi+9Ch], eax
 0x5419CC: mov     [esi+78h], eax
 0x5419CF: mov     [esi+3Ch], eax
-0x5419D2: mov     [esi+48h], eax
+0x5419D2: mov     [esi+48h], eax; Fog default decode: mode-0 default fogColor.r write to Sky+0x48.
 0x5419D5: mov     [esi+90h], eax
 0x5419DB: mov     [esi+0A0h], ecx
 0x5419E1: mov     [esi+7Ch], ecx
 0x5419E4: mov     [esi+40h], ecx
-0x5419E7: mov     [esi+4Ch], ecx
+0x5419E7: mov     [esi+4Ch], ecx; Fog default decode: mode-0 default fogColor.g write to Sky+0x4C.
 0x5419EA: mov     [esi+94h], ecx
 0x5419F0: mov     [esi+0A4h], edx
 0x5419F6: mov     [esi+80h], edx
 0x5419FC: mov     [esi+44h], edx
-0x5419FF: mov     [esi+50h], edx
+0x5419FF: mov     [esi+50h], edx; Fog default decode: mode-0 default fogColor.b write to Sky+0x50.
 0x541A02: mov     [esi+98h], edx
 0x541A08: pop     esi
 0x541A09: add     esp, 3Ch
 0x541A0C: retn
 0x541A0D: cmp     eax, 1
 0x541A10: push    edi
-0x541A11: jnz     loc_541ACF
+0x541A11: jnz     loc_541ACF; Fog interior decode: enters cell-lighting color branch when Sky::unk0DC == 1.
 0x541A17: mov     eax, ds:0B333A0h
 0x541A1C: test    eax, eax
 0x541A1E: jz      loc_541ACF
-0x541A24: mov     ecx, [eax+34h]
+0x541A24: mov     ecx, [eax+34h]; Fog interior decode: reads currentInteriorCell from TES for cell lighting colors.
 0x541A27: test    ecx, ecx
 0x541A29: jz      loc_541ACF
 0x541A2F: lea     eax, [esi+6Ch]
 0x541A32: push    eax
-0x541A33: call    sub_4C9920
+0x541A33: call    sub_4C9920; Fog interior decode: reads LightingData directional color (+0x04 packed RGB) into Sky+0x6C/+0x70/+0x74.
 0x541A38: mov     edx, ds:0B333A0h
 0x541A3E: lea     ecx, [esi+60h]
 0x541A41: push    ecx
 0x541A42: mov     ecx, [edx+34h]
-0x541A45: call    sub_4C98C0
+0x541A45: call    sub_4C98C0; Fog interior decode: reads LightingData ambient color (+0x00 packed RGB) into Sky+0x60/+0x64/+0x68.
 0x541A4A: mov     eax, ds:0B333A0h
 0x541A4F: mov     ecx, [eax+34h]
 0x541A52: lea     edi, [esi+48h]
 0x541A55: push    edi
-0x541A56: call    sub_4C99C0
+0x541A56: call    sub_4C99C0; Fog interior decode: reads LightingData fog color (+0x08 packed RGB) into Sky+0x48/+0x4C/+0x50.
 0x541A5B: mov     ecx, [edi]
 0x541A5D: mov     edx, [edi+4]
 0x541A60: mov     eax, [edi+8]
-0x541A63: mov     [esi+0B4h], ecx
+0x541A63: mov     [esi+0B4h], ecx; Fog interior decode: caches interior fog color red from Sky+0x48 into Sky active color mirrors.
 0x541A69: mov     [esi+9Ch], ecx
 0x541A6F: mov     [esi+78h], ecx
 0x541A72: mov     [esi+0A8h], ecx
 0x541A78: mov     [esi+54h], ecx
 0x541A7B: mov     [esi+3Ch], ecx
 0x541A7E: mov     [esi+90h], ecx
-0x541A84: mov     [esi+0B8h], edx
+0x541A84: mov     [esi+0B8h], edx; Fog interior decode: caches interior fog color green from Sky+0x4C into Sky active color mirrors.
 0x541A8A: mov     [esi+0A0h], edx
 0x541A90: mov     [esi+7Ch], edx
 0x541A93: mov     [esi+0ACh], edx
@@ -105,7 +105,7 @@
 0x541A9C: mov     [esi+40h], edx
 0x541A9F: mov     [esi+94h], edx
 0x541AA5: pop     edi
-0x541AA6: mov     [esi+0BCh], eax
+0x541AA6: mov     [esi+0BCh], eax; Fog interior decode: caches interior fog color blue from Sky+0x50 into Sky active color mirrors.
 0x541AAC: mov     [esi+0A4h], eax
 0x541AB2: mov     [esi+80h], eax
 0x541AB8: mov     [esi+0B0h], eax
@@ -115,22 +115,22 @@
 0x541ACA: pop     esi
 0x541ACB: add     esp, 3Ch
 0x541ACE: retn
-0x541ACF: cmp     dword ptr [esi+10h], 0
+0x541ACF: cmp     dword ptr [esi+10h], 0; Exterior fog-color decode: enters weather color update when Sky::firstWeather exists; builds time-of-day and weather-transition color blends.
 0x541AD3: jz      loc_541DC7
 0x541AD9: push    ebx
 0x541ADA: push    ebp; ArgList
 0x541ADB: mov     ecx, esi
-0x541ADD: call    sub_53FC10
-0x541AE2: fstp    [esp+4Ch+var_3C]
+0x541ADD: call    sub_53FC10; Exterior fog day/night helper: computes adjusted sunrise blend start from climate sunrise minus transition padding.
+0x541AE2: fstp    [esp+4Ch+var_3C]; Fog time-boundary decode: exterior color update consumes adjusted sunrise blend-start from 0x53FC10.
 0x541AE6: mov     ecx, esi
-0x541AE8: call    sub_499180
-0x541AED: fstp    [esp+4Ch+var_38]
+0x541AE8: call    sub_499180; Exterior fog day/night helper: climate day boundary byte (+0x51) cached as normalized time for weather fog interpolation.
+0x541AED: fstp    [esp+4Ch+var_38]; Fog time-boundary decode: exterior color update consumes normalized climate day boundary from 0x499180.
 0x541AF1: mov     ecx, esi
-0x541AF3: call    sub_4991C0
-0x541AF8: fstp    [esp+4Ch+var_34]
+0x541AF3: call    sub_4991C0; Exterior fog day/night helper: climate sunset boundary byte (+0x52) cached as normalized time for weather fog interpolation.
+0x541AF8: fstp    [esp+4Ch+var_34]; Fog time-boundary decode: exterior color update consumes normalized climate sunset boundary from 0x4991C0.
 0x541AFC: mov     ecx, esi
-0x541AFE: call    sub_53FC90
-0x541B03: fstp    [esp+4Ch+var_30]
+0x541AFE: call    sub_53FC90; Exterior fog day/night helper: computes adjusted sunset/night blend end from climate night plus transition padding.
+0x541B03: fstp    [esp+4Ch+var_30]; Fog time-boundary decode: exterior color update consumes adjusted sunset/night blend-end from 0x53FC90.
 0x541B07: fld     [esp+4Ch+var_3C]
 0x541B0B: fld     dword ptr [esi+0D0h]
 0x541B11: fcomp   st(1)
@@ -262,17 +262,17 @@
 0x541CA1: fld     dword ptr [esi+0D8h]
 0x541CA7: fmulp   st(2), st
 0x541CA9: fxch    st(1)
-0x541CAB: fstp    [esp+4Ch+var_10]
+0x541CAB: fstp    [esp+4Ch+var_10]; Fog weather-field decode: firstWeather current-phase color weight = timeWeight * weatherPercent.
 0x541CAF: fmul    dword ptr [esi+0D8h]
-0x541CB5: fstp    [esp+4Ch+var_C]
+0x541CB5: fstp    [esp+4Ch+var_C]; Fog weather-field decode: firstWeather adjacent-phase color weight = adjacentTimeWeight * weatherPercent.
 0x541CB9: fld     dword ptr [esi+0D8h]
-0x541CBF: fsubp   st(2), st
+0x541CBF: fsubp   st(2), st; Fog weather-field decode: second-weather contribution weight base = 1 - weatherPercent.
 0x541CC1: fld     [esp+4Ch+var_8]
 0x541CC5: fmul    st, st(2)
-0x541CC7: fstp    [esp+4Ch+var_8]
+0x541CC7: fstp    [esp+4Ch+var_8]; Fog weather-field decode: secondWeather current-phase color weight = timeWeight * (1 - weatherPercent).
 0x541CCB: fld     [esp+4Ch+var_4]
 0x541CCF: fmulp   st(2), st
-0x541CD1: fxch    st(1)
+0x541CD1: fxch    st(1); Fog weather-field decode: secondWeather adjacent-phase color weight = adjacentTimeWeight * (1 - weatherPercent).
 0x541CD3: fstp    [esp+4Ch+var_4]
 0x541CD7: jmp     short loc_541CF2
 0x541CD9: fstp    st(2)
@@ -281,25 +281,24 @@
 0x541CE4: mov     ebp, ebx
 0x541CE6: jmp     short loc_541C87
 0x541CE8: jmp     short loc_541CF0
-0x541CEA: align 10h
 0x541CF0: fld1
 0x541CF2: mov     eax, [esi+10h]
 0x541CF5: fcomp   dword ptr [esi+0D8h]
 0x541CFB: lea     ecx, [ebp+edi*4+0]
-0x541CFF: lea     ecx, ds:68h[ecx*4]
+0x541CFF: lea     ecx, ds:68h[ecx*4]; Exterior fog-color decode: computes firstWeather color-table offset = 0x68 + 4*(timePhase + 4*colorSlot). colorSlot 1 targets Sky+0x48 fog RGB.
 0x541D06: mov     edx, [ecx+eax]
-0x541D09: mov     [esp+4Ch+var_20], edx
+0x541D09: mov     [esp+4Ch+var_20], edx; Exterior fog-color decode: loads firstWeather packed RGB for current time phase/color slot; slot 1 is exterior fog color.
 0x541D0D: lea     edx, [ebx+edi*4]
 0x541D10: lea     edx, ds:68h[edx*4]
 0x541D17: mov     eax, [edx+eax]
-0x541D1A: mov     [esp+4Ch+var_1C], eax
+0x541D1A: mov     [esp+4Ch+var_1C], eax; Exterior fog-color decode: loads firstWeather packed RGB for adjacent time phase/color slot before interpolation.
 0x541D1E: fnstsw  ax
 0x541D20: test    ah, 41h
 0x541D23: jnz     short loc_541D38
-0x541D25: mov     eax, [esi+14h]
+0x541D25: mov     eax, [esi+14h]; Exterior fog-color decode: secondWeather branch for weather transition color blending.
 0x541D28: mov     ecx, [eax+ecx]
-0x541D2B: mov     edx, [eax+edx]
-0x541D2E: mov     [esp+4Ch+var_18], ecx
+0x541D2B: mov     edx, [eax+edx]; Exterior fog-color decode: loads secondWeather adjacent phase packed RGB for transition blend.
+0x541D2E: mov     [esp+4Ch+var_18], ecx; Exterior fog-color decode: loads secondWeather current phase packed RGB for transition blend.
 0x541D32: mov     [esp+4Ch+var_14], edx
 0x541D36: jmp     short loc_541D42
 0x541D38: xor     eax, eax
@@ -323,7 +322,7 @@
 0x541D77: jnz     short loc_541D83
 0x541D79: fld     dword ptr [esi+0E4h]
 0x541D7F: fstp    [esp+4Ch+var_3C]
-0x541D83: fld     [esp+4Ch+var_3C]
+0x541D83: fld     [esp+4Ch+var_3C]; Exterior fog-color decode: blends packed weather RGB into Sky color vector. When colorSlot == 1, target is Sky+0x48/+0x4C/+0x50 active fog color.
 0x541D87: push    ecx
 0x541D88: fstp    [esp+50h+var_50]; float
 0x541D8B: lea     eax, [esp+50h+var_20]
@@ -332,7 +331,7 @@
 0x541D96: push    eax; int
 0x541D97: push    edx; int
 0x541D98: mov     ecx, esi
-0x541D9A: call    sub_5400E0
+0x541D9A: call    sub_5400E0; Exterior fog-color decode: blends up to four packed weather RGB colors and weights into a Sky RGB vector; caller 0x5418F0 uses colorSlot 1 for active exterior fog color.
 0x541D9F: add     edi, 1
 0x541DA2: cmp     edi, 0Ah
 0x541DA5: jl      loc_541CF0

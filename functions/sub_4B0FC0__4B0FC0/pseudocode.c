@@ -1,27 +1,27 @@
-void *__thiscall sub_4B0FC0(TESForm *this, TESForm *a2)
+float *__thiscall sub_4B0FC0(TESForm *this, TESForm *a2)
 {
-  void *result; // eax
-  int v4; // edi
+  float *result; // eax
+  float *v4; // edi
 
-  result = OblivionDynamicCast(
-             a2,
-             0,
-             (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-             &TESObjectLIGH `RTTI Type Descriptor',
-             0);
-  v4 = (int)result;
-  if ( result )
+  result = (float *)OblivionDynamicCast( /*0x4b0fd8*/
+                      a2,
+                      0,
+                      (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                      &TESObjectLIGH `RTTI Type Descriptor',
+                      0);
+  v4 = result; /*0x4b0fdd*/
+  if ( result ) /*0x4b0fe4*/
   {
-    TESForm_CopyAllComponentsFrom(this, a2);
-    *((_DWORD *)this + 0x1C) = *(_DWORD *)(v4 + 0x70);
-    *((_DWORD *)this + 0x1D) = *(_DWORD *)(v4 + 0x74);
-    *((_DWORD *)this + 0x1E) = *(_DWORD *)(v4 + 0x78);
-    *((_DWORD *)this + 0x1F) = *(_DWORD *)(v4 + 0x7C);
-    *((_DWORD *)this + 0x20) = *(_DWORD *)(v4 + 0x80);
-    *((_DWORD *)this + 0x21) = *(_DWORD *)(v4 + 0x84);
-    *((float *)this + 0x22) = *(float *)(v4 + 0x88);
-    result = *(void **)(v4 + 0x8C);
-    *((_DWORD *)this + 0x23) = result;
+    TESForm_CopyAllComponentsFrom(this, a2); /*0x4b0fe9*/
+    *((float *)this + 0x1C) = v4[0x1C]; /*0x4b0ff1*/
+    *((float *)this + 0x1D) = v4[0x1D]; /*0x4b0ff7*/
+    *((float *)this + 0x1E) = v4[0x1E]; /*0x4b0ffd*/
+    *((float *)this + 0x1F) = v4[0x1F]; /*0x4b1003*/
+    *((float *)this + 0x20) = v4[0x20]; /*0x4b100c*/
+    *((float *)this + 0x21) = v4[0x21]; /*0x4b1018*/
+    *((float *)this + 0x22) = v4[0x22]; /*0x4b1024*/
+    result = *((float **)v4 + 0x23); /*0x4b102a*/
+    *((_DWORD *)this + 0x23) = result; /*0x4b1030*/
   }
-  return result;
+  return result; /*0x4b1036*/
 }

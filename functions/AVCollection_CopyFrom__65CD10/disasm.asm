@@ -2,7 +2,7 @@
 0x65CD11: push    esi
 0x65CD12: mov     ebp, ecx
 0x65CD14: call    AVCollection_ClearArrayAndList
-0x65CD19: mov     esi, [esp+8+arg_0]
+0x65CD19: mov     esi, [esp+8+source]
 0x65CD1D: test    esi, esi
 0x65CD1F: jz      loc_65D13A
 0x65CD25: mov     eax, [esi+0Ch]
@@ -11,26 +11,26 @@
 0x65CD2C: fld     dword ptr [eax+4]
 0x65CD2F: jmp     short loc_65CD33
 0x65CD31: fldz
-0x65CD33: fstp    [esp+8+arg_0]
+0x65CD33: fstp    [esp+8+source]
 0x65CD37: push    ecx
-0x65CD38: fld     [esp+0Ch+arg_0]
-0x65CD3C: mov     ecx, ebp
-0x65CD3E: fstp    [esp+0Ch+var_C]; float
-0x65CD41: push    0Ah; int
-0x65CD43: call    AVCollection_ModAV
+0x65CD38: fld     [esp+0Ch+source]
+0x65CD3C: mov     ecx, ebp; self
+0x65CD3E: fstp    [esp+0Ch+value]; value
+0x65CD41: push    0Ah; actorValue
+0x65CD43: call    AVCollection_SetValue
 0x65CD48: mov     eax, [esi+8]
 0x65CD4B: test    eax, eax
 0x65CD4D: jz      short loc_65CD54
 0x65CD4F: fld     dword ptr [eax+4]
 0x65CD52: jmp     short loc_65CD56
 0x65CD54: fldz
-0x65CD56: fstp    [esp+8+arg_0]
+0x65CD56: fstp    [esp+8+source]
 0x65CD5A: push    ecx
-0x65CD5B: fld     [esp+0Ch+arg_0]
-0x65CD5F: mov     ecx, ebp
-0x65CD61: fstp    [esp+0Ch+var_C]; float
-0x65CD64: push    9; int
-0x65CD66: call    AVCollection_ModAV
+0x65CD5B: fld     [esp+0Ch+source]
+0x65CD5F: mov     ecx, ebp; self
+0x65CD61: fstp    [esp+0Ch+value]; value
+0x65CD64: push    9; actorValue
+0x65CD66: call    AVCollection_SetValue
 0x65CD6B: mov     eax, [esi+10h]
 0x65CD6E: test    eax, eax
 0x65CD70: jz      loc_65D107
@@ -49,8 +49,8 @@
 0x65CD95: fstp    dword ptr [eax+4]
 0x65CD98: jmp     short loc_65CD9C
 0x65CD9A: xor     eax, eax
-0x65CD9C: push    eax
-0x65CD9D: mov     ecx, ebp
+0x65CD9C: push    eax; entry
+0x65CD9D: mov     ecx, ebp; self
 0x65CD9F: call    AVCollection_Add
 0x65CDA4: mov     eax, [esi+10h]
 0x65CDA7: cmp     dword ptr [eax+4], 0
@@ -68,8 +68,8 @@
 0x65CDC8: fstp    dword ptr [eax+4]
 0x65CDCB: jmp     short loc_65CDCF
 0x65CDCD: xor     eax, eax
-0x65CDCF: push    eax
-0x65CDD0: mov     ecx, ebp
+0x65CDCF: push    eax; entry
+0x65CDD0: mov     ecx, ebp; self
 0x65CDD2: call    AVCollection_Add
 0x65CDD7: mov     eax, [esi+10h]
 0x65CDDA: cmp     dword ptr [eax+8], 0
@@ -87,8 +87,8 @@
 0x65CDFB: fstp    dword ptr [eax+4]
 0x65CDFE: jmp     short loc_65CE02
 0x65CE00: xor     eax, eax
-0x65CE02: push    eax
-0x65CE03: mov     ecx, ebp
+0x65CE02: push    eax; entry
+0x65CE03: mov     ecx, ebp; self
 0x65CE05: call    AVCollection_Add
 0x65CE0A: mov     eax, [esi+10h]
 0x65CE0D: cmp     dword ptr [eax+0Ch], 0
@@ -106,8 +106,8 @@
 0x65CE2E: fstp    dword ptr [eax+4]
 0x65CE31: jmp     short loc_65CE35
 0x65CE33: xor     eax, eax
-0x65CE35: push    eax
-0x65CE36: mov     ecx, ebp
+0x65CE35: push    eax; entry
+0x65CE36: mov     ecx, ebp; self
 0x65CE38: call    AVCollection_Add
 0x65CE3D: mov     eax, [esi+10h]
 0x65CE40: cmp     dword ptr [eax+10h], 0
@@ -125,8 +125,8 @@
 0x65CE61: fstp    dword ptr [eax+4]
 0x65CE64: jmp     short loc_65CE68
 0x65CE66: xor     eax, eax
-0x65CE68: push    eax
-0x65CE69: mov     ecx, ebp
+0x65CE68: push    eax; entry
+0x65CE69: mov     ecx, ebp; self
 0x65CE6B: call    AVCollection_Add
 0x65CE70: mov     eax, [esi+10h]
 0x65CE73: cmp     dword ptr [eax+14h], 0
@@ -144,8 +144,8 @@
 0x65CE94: fstp    dword ptr [eax+4]
 0x65CE97: jmp     short loc_65CE9B
 0x65CE99: xor     eax, eax
-0x65CE9B: push    eax
-0x65CE9C: mov     ecx, ebp
+0x65CE9B: push    eax; entry
+0x65CE9C: mov     ecx, ebp; self
 0x65CE9E: call    AVCollection_Add
 0x65CEA3: mov     eax, [esi+10h]
 0x65CEA6: cmp     dword ptr [eax+18h], 0
@@ -163,8 +163,8 @@
 0x65CEC7: fstp    dword ptr [eax+4]
 0x65CECA: jmp     short loc_65CECE
 0x65CECC: xor     eax, eax
-0x65CECE: push    eax
-0x65CECF: mov     ecx, ebp
+0x65CECE: push    eax; entry
+0x65CECF: mov     ecx, ebp; self
 0x65CED1: call    AVCollection_Add
 0x65CED6: mov     eax, [esi+10h]
 0x65CED9: cmp     dword ptr [eax+1Ch], 0
@@ -182,8 +182,8 @@
 0x65CEFA: fstp    dword ptr [eax+4]
 0x65CEFD: jmp     short loc_65CF01
 0x65CEFF: xor     eax, eax
-0x65CF01: push    eax
-0x65CF02: mov     ecx, ebp
+0x65CF01: push    eax; entry
+0x65CF02: mov     ecx, ebp; self
 0x65CF04: call    AVCollection_Add
 0x65CF09: mov     eax, [esi+10h]
 0x65CF0C: cmp     dword ptr [eax+20h], 0
@@ -201,8 +201,8 @@
 0x65CF2D: fstp    dword ptr [eax+4]
 0x65CF30: jmp     short loc_65CF34
 0x65CF32: xor     eax, eax
-0x65CF34: push    eax
-0x65CF35: mov     ecx, ebp
+0x65CF34: push    eax; entry
+0x65CF35: mov     ecx, ebp; self
 0x65CF37: call    AVCollection_Add
 0x65CF3C: mov     eax, [esi+10h]
 0x65CF3F: cmp     dword ptr [eax+24h], 0
@@ -220,8 +220,8 @@
 0x65CF60: fstp    dword ptr [eax+4]
 0x65CF63: jmp     short loc_65CF67
 0x65CF65: xor     eax, eax
-0x65CF67: push    eax
-0x65CF68: mov     ecx, ebp
+0x65CF67: push    eax; entry
+0x65CF68: mov     ecx, ebp; self
 0x65CF6A: call    AVCollection_Add
 0x65CF6F: mov     eax, [esi+10h]
 0x65CF72: cmp     dword ptr [eax+28h], 0
@@ -239,8 +239,8 @@
 0x65CF93: fstp    dword ptr [eax+4]
 0x65CF96: jmp     short loc_65CF9A
 0x65CF98: xor     eax, eax
-0x65CF9A: push    eax
-0x65CF9B: mov     ecx, ebp
+0x65CF9A: push    eax; entry
+0x65CF9B: mov     ecx, ebp; self
 0x65CF9D: call    AVCollection_Add
 0x65CFA2: mov     eax, [esi+10h]
 0x65CFA5: cmp     dword ptr [eax+2Ch], 0
@@ -258,8 +258,8 @@
 0x65CFC6: fstp    dword ptr [eax+4]
 0x65CFC9: jmp     short loc_65CFCD
 0x65CFCB: xor     eax, eax
-0x65CFCD: push    eax
-0x65CFCE: mov     ecx, ebp
+0x65CFCD: push    eax; entry
+0x65CFCE: mov     ecx, ebp; self
 0x65CFD0: call    AVCollection_Add
 0x65CFD5: mov     eax, [esi+10h]
 0x65CFD8: cmp     dword ptr [eax+30h], 0
@@ -277,8 +277,8 @@
 0x65CFF9: fstp    dword ptr [eax+4]
 0x65CFFC: jmp     short loc_65D000
 0x65CFFE: xor     eax, eax
-0x65D000: push    eax
-0x65D001: mov     ecx, ebp
+0x65D000: push    eax; entry
+0x65D001: mov     ecx, ebp; self
 0x65D003: call    AVCollection_Add
 0x65D008: mov     eax, [esi+10h]
 0x65D00B: cmp     dword ptr [eax+34h], 0
@@ -296,8 +296,8 @@
 0x65D02C: fstp    dword ptr [eax+4]
 0x65D02F: jmp     short loc_65D033
 0x65D031: xor     eax, eax
-0x65D033: push    eax
-0x65D034: mov     ecx, ebp
+0x65D033: push    eax; entry
+0x65D034: mov     ecx, ebp; self
 0x65D036: call    AVCollection_Add
 0x65D03B: mov     eax, [esi+10h]
 0x65D03E: cmp     dword ptr [eax+38h], 0
@@ -315,8 +315,8 @@
 0x65D05F: fstp    dword ptr [eax+4]
 0x65D062: jmp     short loc_65D066
 0x65D064: xor     eax, eax
-0x65D066: push    eax
-0x65D067: mov     ecx, ebp
+0x65D066: push    eax; entry
+0x65D067: mov     ecx, ebp; self
 0x65D069: call    AVCollection_Add
 0x65D06E: mov     eax, [esi+10h]
 0x65D071: cmp     dword ptr [eax+3Ch], 0
@@ -334,8 +334,8 @@
 0x65D092: fstp    dword ptr [eax+4]
 0x65D095: jmp     short loc_65D099
 0x65D097: xor     eax, eax
-0x65D099: push    eax
-0x65D09A: mov     ecx, ebp
+0x65D099: push    eax; entry
+0x65D09A: mov     ecx, ebp; self
 0x65D09C: call    AVCollection_Add
 0x65D0A1: mov     eax, [esi+10h]
 0x65D0A4: cmp     dword ptr [eax+40h], 0
@@ -353,8 +353,8 @@
 0x65D0C5: fstp    dword ptr [eax+4]
 0x65D0C8: jmp     short loc_65D0CC
 0x65D0CA: xor     eax, eax
-0x65D0CC: push    eax
-0x65D0CD: mov     ecx, ebp
+0x65D0CC: push    eax; entry
+0x65D0CD: mov     ecx, ebp; self
 0x65D0CF: call    AVCollection_Add
 0x65D0D4: mov     eax, [esi+10h]
 0x65D0D7: cmp     dword ptr [eax+44h], 0
@@ -372,8 +372,8 @@
 0x65D0F8: fstp    dword ptr [eax+4]
 0x65D0FB: jmp     short loc_65D0FF
 0x65D0FD: xor     eax, eax
-0x65D0FF: push    eax
-0x65D100: mov     ecx, ebp
+0x65D0FF: push    eax; entry
+0x65D100: mov     ecx, ebp; self
 0x65D102: call    AVCollection_Add
 0x65D107: push    edi
 0x65D108: mov     edi, [esi]
@@ -390,8 +390,8 @@
 0x65D123: fstp    dword ptr [eax+4]
 0x65D126: jmp     short loc_65D12A
 0x65D128: xor     eax, eax
-0x65D12A: push    eax
-0x65D12B: mov     ecx, ebp
+0x65D12A: push    eax; entry
+0x65D12B: mov     ecx, ebp; self
 0x65D12D: call    AVCollection_Add
 0x65D132: mov     esi, [esi+4]
 0x65D135: test    esi, esi

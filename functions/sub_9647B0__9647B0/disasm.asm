@@ -174,7 +174,7 @@
 0x96498F: pop     ebx
 0x964990: jz      short loc_96499B
 0x964992: mov     ecx, esi
-0x964994: call    sub_43F350
+0x964994: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x964999: fstp    st
 0x96499B: mov     eax, esi
 0x96499D: pop     esi

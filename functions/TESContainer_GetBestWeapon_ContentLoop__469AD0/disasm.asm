@@ -12,9 +12,9 @@
 0x469AEF: add     esp, 14h
 0x469AF2: test    esi, esi
 0x469AF4: jz      short TESContainer_GetBestWeapon___ContentLoop_Next
-0x469AF6: push    esi
-0x469AF7: mov     ecx, ebp
-0x469AF9: call    TESActorBase_GetEquippableItemRating
+0x469AF6: push    esi; item
+0x469AF7: mov     ecx, ebp; this
+0x469AF9: call    TESActorBase_GetEquippableItemRating; Return the base actor's floating equipment desirability/rating for the supplied item. Native return type is float, not double. External ThrowingWeapon damage-doubling/ranged-multiplier and mode 1->2 conversion remain plugin policy; they are not behavior performed by this native evaluator.
 0x469AFE: fstp    [esp+arg_14]
 0x469B02: fld     [esp+arg_14]
 0x469B06: fld     [esp+arg_C]

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5FF5B4",
-    "line": "mov     ecx, [esp+arg_28]",
+    "line": "mov     ecx, [esp+arg_28]; ODismemberment: weapon damage application path; possible future source for attacker/damage context, not yet hit-location aware.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,13 +55,13 @@
   },
   {
     "ea": "0x5FF5D5",
-    "line": "fstp    [esp+4+var_4]; float",
+    "line": "fstp    [esp+4+baseAttackDamage]; baseAttackDamage",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5FF5D8",
-    "line": "call    Calc_DamageToWeapon",
+    "line": "call    Calc_WeaponConditionDamagePerShot; Returns baseAttackDamage * fDamageToWeaponPercentage. The GameSetting storage is 0xB36E10, registered at 0x9E8C70; native default is 0.01. Return ABI is float.",
     "mnemonic": "call",
     "size": 5
   },

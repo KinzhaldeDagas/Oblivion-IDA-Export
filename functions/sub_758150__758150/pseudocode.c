@@ -1,5 +1,5 @@
 // attributes: thunk
-char __thiscall sub_758150(_DWORD *this, int a2)
+char __thiscall j_j_NiTransformController_RegisterStreamables(_DWORD *this, int a2)
 {
-  return sub_6D2280(this, a2);
+  return j_NiTransformController_RegisterStreamables(this, a2);
 }

@@ -14,30 +14,30 @@ int __thiscall sub_759FF0(NiTriBasedGeomData *this, _DWORD *a2)
   int v15; // [esp-Ch] [ebp-1Ch]
   int v16; // [esp+Ch] [ebp-4h] BYREF
 
-  v2 = a2;
-  sub_73F950(this, a2);
-  for ( i = 0; (unsigned __int16)i < this->members.super.m_usVertices; ++i )
-    sub_75F910((char *)(*((_DWORD *)this + 0x17) + 0x1C * (unsigned __int16)i), (signed int)v2);
-  LOBYTE(a2) = *((_DWORD *)this + 0x18) != 0;
-  v11 = v2[0x88];
-  v5 = *(void (__cdecl **)(int, _DWORD **, int, int *, int))(v11 + 8);
-  v16 = 1;
-  v5(v11, &a2, 1, &v16, 1);
-  if ( (_BYTE)a2 )
+  v2 = a2; /*0x759ff4*/
+  sub_73F950(this, a2); /*0x759ffb*/
+  for ( i = 0; (unsigned __int16)i < this->members.super.m_usVertices; ++i ) /*0x75a002*/
+    sub_75F910((char *)(*((_DWORD *)this + 0x17) + 0x1C * (unsigned __int16)i), (signed int)v2); /*0x75a023*/
+  LOBYTE(a2) = *((_DWORD *)this + 0x18) != 0; /*0x75a03f*/
+  v11 = v2[0x88]; /*0x75a050*/
+  v5 = *(void (__cdecl **)(int, _DWORD **, int, int *, int))(v11 + 8); /*0x75a051*/
+  v16 = 1; /*0x75a054*/
+  v5(v11, &a2, 1, &v16, 1); /*0x75a05c*/
+  if ( (_BYTE)a2 ) /*0x75a066*/
   {
-    v15 = 4 * this->members.super.m_usVertices;
-    v6 = *(void (__cdecl **)(int, int, int, int *, int))(v2[0x88] + 8);
-    v14 = *((_DWORD *)this + 0x18);
-    v12 = v2[0x88];
-    v16 = 4;
-    v6(v12, v14, v15, &v16, 1);
+    v15 = 4 * this->members.super.m_usVertices; /*0x75a080*/
+    v6 = *(void (__cdecl **)(int, int, int, int *, int))(v2[0x88] + 8); /*0x75a081*/
+    v14 = *((_DWORD *)this + 0x18); /*0x75a084*/
+    v12 = v2[0x88]; /*0x75a085*/
+    v16 = 4; /*0x75a086*/
+    v6(v12, v14, v15, &v16, 1); /*0x75a08e*/
   }
-  v13 = v2[0x88];
-  v7 = *(void (__cdecl **)(int, char *, int, int *, int))(v13 + 8);
-  v16 = 2;
-  v7(v13, (char *)this + 0x64, 2, &v16, 1);
-  v8 = v2[0x88];
-  v9 = *(int (__cdecl **)(int, char *, int, int *, int))(v8 + 8);
-  v16 = 2;
-  return v9(v8, (char *)this + 0x66, 2, &v16, 1);
+  v13 = v2[0x88]; /*0x75a0aa*/
+  v7 = *(void (__cdecl **)(int, char *, int, int *, int))(v13 + 8); /*0x75a0ab*/
+  v16 = 2; /*0x75a0ae*/
+  v7(v13, (char *)this + 0x64, 2, &v16, 1); /*0x75a0b2*/
+  v8 = v2[0x88]; /*0x75a0b4*/
+  v9 = *(int (__cdecl **)(int, char *, int, int *, int))(v8 + 8); /*0x75a0ba*/
+  v16 = 2; /*0x75a0ca*/
+  return v9(v8, (char *)this + 0x66, 2, &v16, 1); /*0x75a0d3*/
 }

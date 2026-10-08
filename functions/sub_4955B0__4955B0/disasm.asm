@@ -58,7 +58,7 @@
 0x495665: mov     [esp+64h+lParam], eax
 0x495669: test    eax, eax
 0x49566B: mov     [esp+64h+var_2C], 0Dh
-0x495673: mov     [esp+64h+var_1C], offset unk_B34E98
+0x495673: mov     [esp+64h+var_1C], 0B34E98h
 0x49567B: mov     [esp+64h+var_18], 104h
 0x495683: jz      loc_495824
 0x495689: mov     eax, [esi]

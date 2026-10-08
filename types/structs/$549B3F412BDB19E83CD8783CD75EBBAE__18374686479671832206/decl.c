@@ -1,1 +1,47 @@
-$549B3F412BDB19E83CD8783CD75EBBAE
+union $549B3F412BDB19E83CD8783CD75EBBAE
+{
+char cVal;
+USHORT uiVal;
+ULONG ulVal;
+INT intVal;
+UINT uintVal;
+BYTE bVal;
+SHORT iVal;
+LONG lVal;
+FLOAT fltVal;
+DOUBLE dblVal;
+VARIANT_BOOL boolVal;
+SCODE scode;
+DATE date;
+BSTR bstrVal __offset(OFF64|AUTO);
+CY cyVal;
+IUnknown_0 *punkVal __offset(OFF64|AUTO);
+IDispatch_0 *pdispVal __offset(OFF64|AUTO);
+SAFEARRAY *parray __offset(OFF64|AUTO);
+LONGLONG llVal;
+ULONGLONG ullVal;
+char *pcVal __offset(OFF64|AUTO);
+USHORT *puiVal __offset(OFF64|AUTO);
+ULONG *pulVal __offset(OFF64|AUTO);
+INT *pintVal __offset(OFF64|AUTO);
+UINT *puintVal __offset(OFF64|AUTO);
+BYTE *pbVal __offset(OFF64|AUTO);
+SHORT *piVal __offset(OFF64|AUTO);
+LONG *plVal __offset(OFF64|AUTO);
+FLOAT *pfltVal __offset(OFF64|AUTO);
+DOUBLE *pdblVal __offset(OFF64|AUTO);
+VARIANT_BOOL *pboolVal __offset(OFF64|AUTO);
+SCODE *pscode __offset(OFF64|AUTO);
+DATE *pdate __offset(OFF64|AUTO);
+BSTR *pbstrVal __offset(OFF64|AUTO);
+VARIANT *pvarVal __offset(OFF64|AUTO);
+PVOID byref __offset(OFF64|AUTO);
+CY *pcyVal __offset(OFF64|AUTO);
+DECIMAL *pdecVal __offset(OFF64|AUTO);
+IUnknown_0 **ppunkVal __offset(OFF64|AUTO);
+IDispatch_0 **ppdispVal __offset(OFF64|AUTO);
+SAFEARRAY **pparray __offset(OFF64|AUTO);
+LONGLONG *pllVal __offset(OFF64|AUTO);
+ULONGLONG *pullVal __offset(OFF64|AUTO);
+__tagBRECORD brecVal;
+};

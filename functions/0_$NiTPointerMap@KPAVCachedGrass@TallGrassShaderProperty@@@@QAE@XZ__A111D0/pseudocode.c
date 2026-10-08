@@ -1,7 +1,7 @@
 int NiTPointerMap<unsigned long,TallGrassShaderProperty::CachedGrass *>::NiTPointerMap<unsigned long,TallGrassShaderProperty::CachedGrass *>()
 {
-  dword_B2CBCC = FormHeapAlloc(0x94u);
-  _memset(dword_B2CBCC, 0, 4 * dword_B2CBC8);
-  off_B2CBC4 = &NiTPointerMap<unsigned long,TallGrassShaderProperty::CachedGrass *>::`vftable';
-  return atexit(sub_A27580);
+  stru_B2CBC4.buckets = (MEF_U32PointerMapEntry32 **)FormHeapAlloc(0x94u); /*0xa111fc*/
+  _memset((int)stru_B2CBC4.buckets, 0, 4 * stru_B2CBC4.bucketCount); /*0xa11201*/
+  stru_B2CBC4.vtable = &NiTPointerMap<unsigned long,TallGrassShaderProperty::CachedGrass *>::`vftable'; /*0xa1120b*/
+  return atexit(sub_A27580); /*0xa1121d*/
 }

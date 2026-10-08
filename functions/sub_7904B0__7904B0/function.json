@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7904B0",
+      "0x790552"
+    ]
+  ],
+  "chunks_sha256": "e3e135a74b0c2c0c279bf8630507b332c9ef1741c25fabef3aead3b702d0bc1c",
+  "comment_regular": "Selects the fuzzy-volume pivot sample for branch-pointer partitioning. Sorts three candidates for ranges of at most 40 pointers; larger ranges use four three-way sorts over spaced samples (MSVC median-guess strategy).",
+  "comment_repeatable": "Selects the fuzzy-volume pivot sample for branch-pointer partitioning. Sorts three candidates for ranges of at most 40 pointers; larger ranges use four three-way sorts over spaced samples (MSVC median-guess strategy).",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7904B0",
+  "display_name": "OB_BranchPtrVector_MedianGuessByFuzzyVolume_010201A0",
   "end_ea": "0x790552",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7904B0",
+  "name": "OB_BranchPtrVector_MedianGuessByFuzzyVolume_010201A0",
   "segment": ".text",
   "sha256": "e3e135a74b0c2c0c279bf8630507b332c9ef1741c25fabef3aead3b702d0bc1c",
   "size": 162,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7904B0",
-  "type": "void __cdecl(int *, int *, int *)",
+  "total_chunk_size": 162,
+  "type": "void __cdecl(OB_CBranch_010201A0 **first, OB_CBranch_010201A0 **middle, OB_CBranch_010201A0 **last)",
   "xrefs_from_count": 73,
   "xrefs_to_count": 1
 }

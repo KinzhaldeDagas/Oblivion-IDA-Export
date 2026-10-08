@@ -1,5 +1,5 @@
-0x4D6760: push    ebx
-0x4D6761: mov     ebx, [esp+4+arg_0]
+0x4D6760: push    ebx; Verified generic NiTMap lookup helper: hashes the UInt32 key through the map vtable, walks the bucket chain using the map's key comparator, returns false when absent, and on a match writes the low byte of the entry data field to valueOut and returns true. Callers use it for byte/boolean-valued maps, including PlayerCharacter_GetLastSpaceForDoor and cell/worldspace visited or filter maps; this helper does not establish the full map value width.
+0x4D6761: mov     ebx, [esp+4+key]
 0x4D6765: push    esi
 0x4D6766: mov     esi, ecx
 0x4D6768: mov     eax, [esi]
@@ -12,7 +12,6 @@
 0x4D6777: test    edi, edi
 0x4D6779: jz      short loc_4D6798
 0x4D677B: jmp     short loc_4D6780
-0x4D677D: align 10h
 0x4D6780: mov     eax, [edi+4]
 0x4D6783: mov     edx, [esi]
 0x4D6785: mov     edx, [edx+8]
@@ -31,7 +30,7 @@
 0x4D679C: pop     ebx
 0x4D679D: retn    8
 0x4D67A0: mov     al, [edi+8]
-0x4D67A3: mov     ecx, [esp+0Ch+arg_4]
+0x4D67A3: mov     ecx, [esp+0Ch+valueOut]
 0x4D67A7: pop     edi
 0x4D67A8: pop     esi
 0x4D67A9: mov     [ecx], al

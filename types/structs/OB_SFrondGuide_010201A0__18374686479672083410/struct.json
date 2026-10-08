@@ -1,0 +1,117 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "OB_SFrondGuide_010201A0",
+  "definition": "struct OB_SFrondGuide_010201A0\n{\nOB_stVector16_010201A0 vertexVector; ///< Oblivion compact guide storage: direct 16-byte vector of 0x38-byte SFrondVertex records. Local RT 4.1 stock stack-vertex fields are absent.\nfloat guideLength; ///< Computed centerline length.\nfloat radius; ///< Frond radius.\nunsigned __int8 frondMapIndex; ///< Selected frond texture/map index.\nunsigned __int8 pad_19[3];\nfloat offsetAngle; ///< Rotation offset around the guide centerline.\nfloat surfaceArea; ///< Computed surface area used for LOD.\nfloat fuzzySurfaceArea; ///< Randomized surface-area key used for guide LOD ordering.\nunsigned int sharedVertexStartIndex; ///< Start index in shared indexed geometry.\nunsigned int verticesPerGuideVertex; ///< Generated geometry vertices associated with each guide vertex.\n}\n",
+  "id": 18374686479672083410,
+  "is_union": false,
+  "kind": "struct",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Oblivion compact guide storage: direct 16-byte vector of 0x38-byte SFrondVertex records. Local RT 4.1 stock stack-vertex fields are absent.",
+      "name": "vertexVector",
+      "offset": 0,
+      "offset_hex": "0x0",
+      "size": 16,
+      "type": "OB_stVector16_010201A0"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Computed centerline length.",
+      "name": "guideLength",
+      "offset": 16,
+      "offset_hex": "0x10",
+      "size": 4,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Frond radius.",
+      "name": "radius",
+      "offset": 20,
+      "offset_hex": "0x14",
+      "size": 4,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Selected frond texture/map index.",
+      "name": "frondMapIndex",
+      "offset": 24,
+      "offset_hex": "0x18",
+      "size": 1,
+      "type": "unsigned __int8"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "pad_19",
+      "offset": 25,
+      "offset_hex": "0x19",
+      "size": 3,
+      "type": "unsigned __int8[3]"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Rotation offset around the guide centerline.",
+      "name": "offsetAngle",
+      "offset": 28,
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Computed surface area used for LOD.",
+      "name": "surfaceArea",
+      "offset": 32,
+      "offset_hex": "0x20",
+      "size": 4,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Randomized surface-area key used for guide LOD ordering.",
+      "name": "fuzzySurfaceArea",
+      "offset": 36,
+      "offset_hex": "0x24",
+      "size": 4,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Start index in shared indexed geometry.",
+      "name": "sharedVertexStartIndex",
+      "offset": 40,
+      "offset_hex": "0x28",
+      "size": 4,
+      "type": "unsigned int"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Generated geometry vertices associated with each guide vertex.",
+      "name": "verticesPerGuideVertex",
+      "offset": 44,
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "unsigned int"
+    }
+  ],
+  "name": "OB_SFrondGuide_010201A0",
+  "ordinal": 9729,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 48
+}

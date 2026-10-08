@@ -1,1 +1,1 @@
-NiStringsExtraData
+struct NiStringsExtraData;

@@ -1,18 +1,31 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_A1BCC0",
+  "chunks": [
+    [
+      "0xA1BCC0",
+      "0xA1BCCC"
+    ]
+  ],
+  "chunks_sha256": "0efcf3c6086571115ff75d8408519a17e7b5325097bb6756ee2ca1b7af00b220",
+  "comment_regular": "Verified exit cleanup paired with TESPathGrid_InitializeCriticalSection: calls DeleteCriticalSection(&g_PathGridCriticalSection).",
+  "comment_repeatable": "Verified exit cleanup paired with TESPathGrid_InitializeCriticalSection: calls DeleteCriticalSection(&g_PathGridCriticalSection).",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "TESPathGrid_DeleteCriticalSectionAtExit",
   "end_ea": "0xA1BCCC",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_A1BCC0",
+  "name": "TESPathGrid_DeleteCriticalSectionAtExit",
   "segment": ".text",
   "sha256": "0efcf3c6086571115ff75d8408519a17e7b5325097bb6756ee2ca1b7af00b220",
   "size": 12,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0xA1BCC0",
+  "total_chunk_size": 12,
   "type": "void __cdecl()",
   "xrefs_from_count": 5,
   "xrefs_to_count": 1

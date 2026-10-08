@@ -19,7 +19,7 @@
 0x4D41EB: jnz     short loc_4D4239
 0x4D41ED: lea     eax, [esp+20h+var_14]
 0x4D41F1: push    eax
-0x4D41F2: call    sub_4D06C0
+0x4D41F2: call    sub_4D06C0; Cell canopy shadow capture path; sets SpeedTree singleton +0x23, updates wind/time via 0x55FA50, renders shadow texture, then restores state.
 0x4D41F7: mov     ecx, [esp+20h+var_14]; this
 0x4D41FB: mov     [esp+20h+var_4], 1
 0x4D4203: call    BSRenderedTexture__GetInnerTexture
@@ -50,3 +50,19 @@
 0x4D4248: pop     esi
 0x4D4249: add     esp, 14h
 0x4D424C: retn    4
+0x9B56D0: mov     eax, [ebp-10h]
+0x9B56D3: and     eax, 1
+0x9B56D6: jz      locret_9B56E8
+0x9B56DC: and     dword ptr [ebp-10h], 0FFFFFFFEh
+0x9B56E0: mov     ecx, [ebp+4]; slot
+0x9B56E3: jmp     NiPointerSlot_Release
+0x9B56E8: retn
+0x9B56E9: lea     ecx, [ebp-14h]; slot
+0x9B56EC: jmp     NiPointerSlot_Release
+0x9B56F1: mov     edx, [esp+arg_4]
+0x9B56F5: lea     eax, [edx-10h]
+0x9B56F8: mov     ecx, [edx-14h]
+0x9B56FB: xor     ecx, eax
+0x9B56FD: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B5702: mov     eax, offset stru_AE0780
+0x9B5707: jmp     ___CxxFrameHandler3

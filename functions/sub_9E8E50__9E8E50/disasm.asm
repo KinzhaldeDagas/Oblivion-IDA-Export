@@ -1,7 +1,7 @@
 0x9E8E50: fldz
 0x9E8E52: push    ecx
 0x9E8E53: fstp    [esp+4+var_4]; float
-0x9E8E56: mov     ecx, offset fHandDamageStrengthBase
+0x9E8E56: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+188h)
 0x9E8E5B: push    offset aFhanddamagestr; "fHandDamageStrengthBase"
 0x9E8E60: call    GameSetting_ConstrAndReg_float
 0x9E8E65: push    offset sub_A1E3E0; void (__cdecl *)()

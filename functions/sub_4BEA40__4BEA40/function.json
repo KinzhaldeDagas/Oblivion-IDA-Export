@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4BEA40",
+      "0x4BEAD0"
+    ]
+  ],
+  "chunks_sha256": "574483d5e3148f055bd06bdbff8ab4d14337c7bc01707afe2285adbc0cec8b6c",
+  "comment_regular": "Verified: copies the two-byte climate settings at +0x54 as part of the 6-byte data block at +0x50; individual semantics remain Unknown except Sky's use of +0x54 low byte.",
+  "comment_repeatable": "Verified: copies the two-byte climate settings at +0x54 as part of the 6-byte data block at +0x50; individual semantics remain Unknown except Sky's use of +0x54 low byte.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_4BEA40",
+  "display_name": "TESClimate_CopyComponentsFrom",
   "end_ea": "0x4BEAD0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4BEA40",
+  "name": "TESClimate_CopyComponentsFrom",
   "segment": ".text",
   "sha256": "574483d5e3148f055bd06bdbff8ab4d14337c7bc01707afe2285adbc0cec8b6c",
   "size": 144,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4BEA40",
-  "type": "__int16 __thiscall(TESForm *this, void *)",
+  "total_chunk_size": 144,
+  "type": "__int16 __thiscall(TESClimate *this, TESClimate *source)",
   "xrefs_from_count": 61,
   "xrefs_to_count": 1
 }

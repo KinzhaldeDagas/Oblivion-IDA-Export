@@ -1,4 +1,4 @@
-0x4D9C30: sub     esp, 1Ch
+0x4D9C30: sub     esp, 1Ch; Common SaveFormChunks implementation shared by TESObjectREFR/Character(ACHR)/Creature(ACRE). Writes NAME4, ExtraDataList stream, optional XSCL4, empty ONAM when action bit 0x08 is set, then DATA24. Extra widths/order below are authoritative writer normalization, not xEdit assumptions.
 0x4D9C33: push    esi
 0x4D9C34: mov     esi, ecx
 0x4D9C36: call    TESForm_InitializeFormRecord
@@ -13,12 +13,12 @@
 0x4D9C52: lea     eax, [esp+28h+Src]
 0x4D9C56: push    eax; Src
 0x4D9C57: push    454D414Eh; int
-0x4D9C5C: mov     [esp+30h+Src], edx
-0x4D9C60: call    TESForm_PutFormRecordChunkData
+0x4D9C5C: mov     [esp+30h+Src], edx; Verified REFR NAME writer source: serializes `TESObjectREFR.member.baseForm->refID` as a four-byte NAME chunk. The embedded CELL/REFR parser resolves that same NAME chunk into its DistantLOD map key.
+0x4D9C60: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4D9C65: lea     edi, [esi+44h]
 0x4D9C68: add     esp, 0Ch
 0x4D9C6B: mov     ecx, edi
-0x4D9C6D: call    ExtraDataList_Save
+0x4D9C6D: call    ExtraDataList_Save; Verified REFR plugin save path calls ExtraDataList_Save before writing the reference DATA chunk, so an ExtraDistantData XLOD normal is included in the normal REFR record.
 0x4D9C72: fld1
 0x4D9C74: fcomp   dword ptr [esi+38h]
 0x4D9C77: fnstsw  ax
@@ -30,14 +30,14 @@
 0x4D9C85: push    4C435358h
 0x4D9C8A: call    TESForm_PutCurrentChunkData4
 0x4D9C8F: add     esp, 8
-0x4D9C92: push    8
-0x4D9C94: mov     ecx, edi
-0x4D9C96: call    sub_41F830
+0x4D9C92: push    8; mask
+0x4D9C94: mov     ecx, edi; this
+0x4D9C96: call    ExtraDataList_TestActionFlagBits; Test ExtraAction bit 0x08 after all extra chunks; when set, append an empty ONAM at 0x4D9CA5. Thus save output can contain XACT carrying bit 0x08 and the redundant semantic ONAM marker.
 0x4D9C9B: test    al, al
 0x4D9C9D: pop     edi
 0x4D9C9E: jz      short loc_4D9CAD
 0x4D9CA0: push    4D414E4Fh
-0x4D9CA5: call    sub_46BA10
+0x4D9CA5: call    TESForm_AddChunk; Appends a six-byte empty CHUNK header (four-byte chunk ID plus zero 16-bit payload length) to the global TESForm save buffer.
 0x4D9CAA: add     esp, 4
 0x4D9CAD: mov     ecx, [esi+2Ch]
 0x4D9CB0: mov     edx, [esi+30h]
@@ -55,7 +55,7 @@
 0x4D9CD6: push    41544144h; int
 0x4D9CDB: mov     [esp+2Ch+var_8], edx
 0x4D9CDF: mov     [esp+2Ch+var_4], eax
-0x4D9CE3: call    TESForm_PutFormRecordChunkData
+0x4D9CE3: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4D9CE8: add     esp, 0Ch
 0x4D9CEB: mov     ecx, esi; this
 0x4D9CED: call    TESForm_FinalizeFormRecord

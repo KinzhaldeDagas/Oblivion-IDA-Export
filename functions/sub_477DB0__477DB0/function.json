@@ -1,19 +1,36 @@
 {
-  "callees_count": 8,
-  "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_477DB0",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
+  "callers_count": 5,
+  "chunks": [
+    [
+      "0x477DB0",
+      "0x477E48"
+    ],
+    [
+      "0x9AEEB0",
+      "0x9AEED6"
+    ]
+  ],
+  "chunks_sha256": "21460685344c7b4d3385c5213a1c9a508b7cb67c77f182ade38a71173ea6db02",
+  "comment_regular": "Queues a TESIdleForm for playable ActorAnimData processing. If requested slot/type is 0 or 5, forces completion/action mode to 3; allocates and initializes an AnimIdle, stores it at queued slot +0xD0, then immediately attempts ActorAnimData_ProcessQueuedIdleKF for cache-hit/synchronous readiness.",
+  "comment_repeatable": "Queues a TESIdleForm for playable ActorAnimData processing. If requested slot/type is 0 or 5, forces completion/action mode to 3; allocates and initializes an AnimIdle, stores it at queued slot +0xD0, then immediately attempts ActorAnimData_ProcessQueuedIdleKF for cache-hit/synchronous readiness.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "ActorAnimData_QueueIdle",
   "end_ea": "0x477E48",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_477DB0",
+  "name": "ActorAnimData_QueueIdle",
   "segment": ".text",
   "sha256": "7429d2192e647300d9b9948e226ac95ac44517a633f8bd1276ee654ab6fbef6c",
   "size": 152,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x477DB0",
+  "total_chunk_size": 190,
   "type": "char __thiscall(ActorAnimData *this, UInt32, TESObjectREFR *, UInt32, int)",
-  "xrefs_from_count": 56,
+  "xrefs_from_count": 70,
   "xrefs_to_count": 5
 }

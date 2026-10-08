@@ -3,14 +3,14 @@
 0x6A4785: push    eax
 0x6A4786: mov     esi, ecx
 0x6A4788: call    ActiveEffect_Base_LoadEffect
-0x6A478D: mov     ecx, ds:0B33B00h
+0x6A478D: mov     ecx, ds:0B33B00h; self
 0x6A4793: mov     [esp+4+Dst], 0
 0x6A479B: cmp     byte ptr [ecx+7Ch], 2Ah ; '*'
 0x6A479F: jb      short loc_6A47B9
-0x6A47A1: push    2; Size
+0x6A47A1: push    2; byteCount
 0x6A47A3: lea     edx, [esp+8+Dst]
-0x6A47A7: push    edx; Dst
-0x6A47A8: call    SaveLoad_LoadData
+0x6A47A7: push    edx; destination
+0x6A47A8: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x6A47AD: mov     ecx, ds:0B33B00h
 0x6A47B3: cmp     byte ptr [ecx+7Ch], 2Ah ; '*'
 0x6A47B7: jnb     short loc_6A47C3
@@ -33,6 +33,6 @@
 0x6A47F1: retn    4
 0x6A47F4: movzx   eax, word ptr [esp+4+Dst]
 0x6A47F9: push    eax
-0x6A47FA: call    SaveLoad_AdvanceBufferOffset
+0x6A47FA: call    SaveLoad_AdvanceBufferOffset; EnginePatch v2: byte-checked SaveLoad_AdvanceBufferOffset hook. Clamps save cursor movement to active tracked record buffer.
 0x6A47FF: pop     esi
 0x6A4800: retn    4

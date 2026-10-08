@@ -1,1 +1,1 @@
-NiScreenGeometryData
+struct NiScreenGeometryData;

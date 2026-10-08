@@ -19,16 +19,16 @@
 0x6F2090: fld     dword ptr [eax]
 0x6F2092: mov     ecx, [esi+4]
 0x6F2095: test    ecx, ecx
-0x6F2097: fstp    [ebp+var_20]
+0x6F2097: fstp    [ebp+value.m_pLeaf]
 0x6F209A: fld     dword ptr [eax+4]
-0x6F209D: fstp    [ebp+var_1C]
+0x6F209D: fstp    [ebp+value.m_pLeafMatch]
 0x6F20A0: jnz     short loc_6F20A6
 0x6F20A2: xor     eax, eax
 0x6F20A4: jmp     short loc_6F20AE
 0x6F20A6: mov     eax, [esi+0Ch]
 0x6F20A9: sub     eax, ecx
 0x6F20AB: sar     eax, 3
-0x6F20AE: mov     edx, [ebp+arg_8]
+0x6F20AE: mov     edx, [ebp+last]
 0x6F20B1: test    edx, edx
 0x6F20B3: jz      loc_6F22A2
 0x6F20B9: test    ecx, ecx
@@ -42,7 +42,7 @@
 0x6F20CC: sub     ebx, edi
 0x6F20CE: cmp     ebx, edx
 0x6F20D0: jnb     short loc_6F20D7
-0x6F20D2: call    sub_790B90
+0x6F20D2: call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error("vector<T> too long") and throws; used by multiple element specializations after max_size checks.
 0x6F20D7: test    ecx, ecx
 0x6F20D9: jnz     short loc_6F20DF
 0x6F20DB: xor     edi, edi
@@ -86,8 +86,8 @@
 0x6F2132: push    eax; Size
 0x6F2133: mov     [ebp+var_14], eax
 0x6F2136: call    FormHeapAlloc
-0x6F213B: mov     edx, [ebp+arg_8]
-0x6F213E: mov     ebx, [ebp+arg_4]
+0x6F213B: mov     edx, [ebp+last]
+0x6F213E: mov     ebx, [ebp+first]
 0x6F2141: mov     byte ptr [ebp+arg_C], 0
 0x6F2145: mov     ecx, [ebp+arg_C]
 0x6F2148: push    ecx
@@ -101,9 +101,9 @@
 0x6F2153: mov     [ebp+var_18], edi
 0x6F2156: mov     [ebp+var_4], 0
 0x6F215D: call    sub_6F11E0
-0x6F2162: mov     edx, [ebp+arg_8]
+0x6F2162: mov     edx, [ebp+last]
 0x6F2165: add     esp, 1Ch
-0x6F2168: lea     ecx, [ebp+var_20]
+0x6F2168: lea     ecx, [ebp+value]
 0x6F216B: push    ecx
 0x6F216C: push    edx
 0x6F216D: push    eax
@@ -113,7 +113,7 @@
 0x6F2178: mov     byte ptr [ebp+arg_C], 0
 0x6F217C: mov     edx, [ebp+arg_C]
 0x6F217F: push    edx
-0x6F2180: mov     edx, [ebp+arg_8]
+0x6F2180: mov     edx, [ebp+last]
 0x6F2183: push    edx
 0x6F2184: push    esi
 0x6F2185: push    eax
@@ -129,12 +129,12 @@
 0x6F219B: mov     eax, [esi+8]
 0x6F219E: sub     eax, ecx
 0x6F21A0: sar     eax, 3
-0x6F21A3: mov     ebx, [ebp+arg_8]
+0x6F21A3: mov     ebx, [ebp+last]
 0x6F21A6: add     ebx, eax
 0x6F21A8: test    ecx, ecx
 0x6F21AA: jz      short loc_6F21B5
 0x6F21AC: push    ecx
-0x6F21AD: call    FormHeapFree
+0x6F21AD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F21B2: add     esp, 4
 0x6F21B5: mov     eax, [ebp+var_14]
 0x6F21B8: add     eax, edi
@@ -153,13 +153,13 @@
 0x6F21D7: retn    10h
 0x6F21DA: mov     edx, [ebp+var_18]
 0x6F21DD: push    edx
-0x6F21DE: call    FormHeapFree
+0x6F21DE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F21E3: add     esp, 4
 0x6F21E6: push    0
 0x6F21E8: push    0
 0x6F21EA: call    ThrowException??
 0x6F21EF: mov     ebx, [esi+8]
-0x6F21F2: mov     edi, [ebp+arg_4]
+0x6F21F2: mov     edi, [ebp+first]
 0x6F21F5: mov     eax, ebx
 0x6F21F7: sub     eax, edi
 0x6F21F9: sar     eax, 3
@@ -175,9 +175,9 @@
 0x6F2211: call    sub_6F1600
 0x6F2216: mov     eax, [esi+8]
 0x6F2219: mov     edx, eax
-0x6F221B: lea     ecx, [ebp+var_20]
+0x6F221B: lea     ecx, [ebp+value]
 0x6F221E: push    ecx
-0x6F221F: mov     ecx, [ebp+arg_8]
+0x6F221F: mov     ecx, [ebp+last]
 0x6F2222: sub     edx, edi
 0x6F2224: sar     edx, 3
 0x6F2227: sub     ecx, edx
@@ -189,12 +189,12 @@
 0x6F2239: mov     eax, [ebp+arg_C]
 0x6F223C: add     [esi+8], eax
 0x6F223F: mov     esi, [esi+8]
-0x6F2242: lea     ecx, [ebp+var_20]
-0x6F2245: push    ecx
+0x6F2242: lea     ecx, [ebp+value]
+0x6F2245: push    ecx; value
 0x6F2246: sub     esi, eax
-0x6F2248: push    esi
-0x6F2249: push    edi
-0x6F224A: call    sub_7A86F0
+0x6F2248: push    esi; last
+0x6F2249: push    edi; first
+0x6F224A: call    OB_LeafLodEntry_CopyFillRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Assigns one 8-byte SLodEntry value across an initialized destination range; compiler-folded trivial pair helper.
 0x6F224F: add     esp, 0Ch
 0x6F2252: mov     ecx, [ebp+var_C]
 0x6F2255: mov     large fs:0, ecx
@@ -213,21 +213,21 @@
 0x6F2273: mov     [ebp+arg_C], ecx
 0x6F2276: push    eax
 0x6F2277: mov     ecx, esi
-0x6F2279: mov     [ebp+arg_8], eax
+0x6F2279: mov     [ebp+last], eax
 0x6F227C: call    sub_6F1600
-0x6F2281: mov     edx, [ebp+arg_8]
-0x6F2284: push    ebx
-0x6F2285: push    edx
-0x6F2286: push    edi
+0x6F2281: mov     edx, [ebp+last]
+0x6F2284: push    ebx; destinationEnd
+0x6F2285: push    edx; last
+0x6F2286: push    edi; first
 0x6F2287: mov     [esi+8], eax
-0x6F228A: call    sub_7A8750
+0x6F228A: call    OB_LeafLodEntry_CopyBackwardRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Copies 8-byte SLodEntry values backward for in-place vector insertion.
 0x6F228F: mov     ecx, [ebp+arg_C]
-0x6F2292: lea     eax, [ebp+var_20]
-0x6F2295: push    eax
+0x6F2292: lea     eax, [ebp+value]
+0x6F2295: push    eax; value
 0x6F2296: add     ecx, edi
-0x6F2298: push    ecx
-0x6F2299: push    edi
-0x6F229A: call    sub_7A86F0
+0x6F2298: push    ecx; last
+0x6F2299: push    edi; first
+0x6F229A: call    OB_LeafLodEntry_CopyFillRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Assigns one 8-byte SLodEntry value across an initialized destination range; compiler-folded trivial pair helper.
 0x6F229F: add     esp, 18h
 0x6F22A2: mov     ecx, [ebp+var_C]
 0x6F22A5: mov     large fs:0, ecx
@@ -238,3 +238,10 @@
 0x6F22B0: mov     esp, ebp
 0x6F22B2: pop     ebp
 0x6F22B3: retn    10h
+0x9C8820: mov     edx, [esp-4+first]
+0x9C8824: lea     eax, [edx+0Ch]
+0x9C8827: mov     ecx, [edx-24h]
+0x9C882A: xor     ecx, eax
+0x9C882C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C8831: mov     eax, offset stru_AF0E68
+0x9C8836: jmp     ___CxxFrameHandler3

@@ -14,9 +14,9 @@
 0x69E36F: mov     large fs:0, eax
 0x69E375: mov     esi, ecx
 0x69E377: mov     [esp+24h+var_10], esi
-0x69E37B: call    MagicHitEffect_constr
+0x69E37B: call    MagicHitEffect_constr; Verified MagicHitEffect constructor starts from the 24-byte BSTempEffect base, nulls ownerActiveEffect (+0x18) and targetReference (+0x1C), zeros elapsedSeconds (+0x20) and bFinished (+0x24), establishing a 40-byte base layout.
 0x69E380: xor     ebx, ebx
-0x69E382: mov     dword ptr [esi], offset ??_7MagicModelHitEffect@@6B@; const MagicModelHitEffect::`vftable'
+0x69E382: mov     dword ptr [esi], offset ??_7MagicModelHitEffect@@6B@; Verified (Oblivion): constructor initializes a 0x38-byte derived object. Base occupies 0x00..0x27; +0x29 is player third-person state (verified by read/write in visual placement); +0x2C is state-dependent model path/serialized payload; +0x30 is a refcounted NiAVObject model root; +0x34 remains Unknown. Fallout's MagicModelHitEffect is 0x3C and has separate pFilename/spObject/spTarget/LoadedDataSubBuffer members, so its layout cannot be copied onto Oblivion.
 0x69E388: mov     [esp+24h+var_4], ebx
 0x69E38C: mov     [esi+30h], ebx
 0x69E38F: mov     [esi+34h], ebx
@@ -54,7 +54,7 @@
 0x69E3DA: mov     ecx, edi
 0x69E3DC: call    eax
 0x69E3DE: mov     [esi+34h], ebx
-0x69E3E1: mov     [esi+29h], bl
+0x69E3E1: mov     [esi+29h], bl; Verified (Oblivion): derived model byte +0x29 is cleared in construction and later updated/read by model visual placement. Its precise boolean/perspective meaning is Probable.
 0x69E3E4: mov     [esi+2Ch], ebx
 0x69E3E7: mov     [esi+28h], bl
 0x69E3EA: mov     eax, esi
@@ -67,3 +67,18 @@
 0x69E3FB: pop     ebx
 0x69E3FC: add     esp, 10h
 0x69E3FF: retn
+0x9C5D00: mov     ecx, [ebp-10h]
+0x9C5D03: jmp     MagicHitEffect_destr
+0x9C5D08: mov     ecx, [ebp-10h]
+0x9C5D0B: add     ecx, 30h ; '0'; slot
+0x9C5D0E: jmp     NiPointerSlot_Release
+0x9C5D13: mov     ecx, [ebp-10h]
+0x9C5D16: add     ecx, 34h ; '4'; slot
+0x9C5D19: jmp     NiPointerSlot_Release
+0x9C5D1E: mov     edx, [esp+arg_4]
+0x9C5D22: lea     eax, [edx-14h]
+0x9C5D25: mov     ecx, [edx-18h]
+0x9C5D28: xor     ecx, eax
+0x9C5D2A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5D2F: mov     eax, offset stru_AEE3DC
+0x9C5D34: jmp     ___CxxFrameHandler3

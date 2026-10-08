@@ -14,7 +14,7 @@
 0x540F6F: lea     edx, [esp+14h+var_4]
 0x540F73: push    edx
 0x540F74: call    eax
-0x540F76: mov     eax, dword ptr [esp+10h+var_4]
+0x540F76: mov     eax, [esp+10h+var_4]
 0x540F7A: test    eax, eax
 0x540F7C: jz      short loc_540F98
 0x540F7E: mov     esi, eax

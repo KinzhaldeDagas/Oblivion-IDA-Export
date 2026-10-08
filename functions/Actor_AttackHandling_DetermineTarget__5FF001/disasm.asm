@@ -6,7 +6,7 @@
 0x5FF00D: push    ecx
 0x5FF00E: fstp    [esp+4+var_4]; float
 0x5FF011: push    edi; int
-0x5FF012: call    GetActorWithinReach??
+0x5FF012: call    CombatController_FindActorWithinReach
 0x5FF017: add     esp, 8
 0x5FF01A: mov     esi, eax
 0x5FF01C: test    esi, esi
@@ -29,7 +29,7 @@
 0x5FF053: cmp     edi, ds:0B333C4h
 0x5FF059: jnz     short loc_5FF06A
 0x5FF05B: mov     ecx, edi
-0x5FF05D: call    sub_5F9620
+0x5FF05D: call    Actor_ProcessAttackReachProbe; Verified call context: DetermineTarget supplies its two x87 floating inputs to Actor_ProcessAttackReachProbe and uses returned AL as a success/result gate before attack completion. Exact float meanings remain Unknown.
 0x5FF062: test    al, al
 0x5FF064: jnz     Actor_AttackHandling___Done
 0x5FF06A: cmp     [esp+arg_20], 0

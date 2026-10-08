@@ -1,19 +1,36 @@
 {
-  "callees_count": 20,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 11,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_451F80",
+  "chunks": [
+    [
+      "0x451F80",
+      "0x4520EE"
+    ],
+    [
+      "0x9D00B0",
+      "0x9D00E1"
+    ]
+  ],
+  "chunks_sha256": "d1e1282985de1393ab03333211eab996060a96a752b01f32d70b04d9de260808",
+  "comment_regular": "Looks up a TESFile clone by thread ID; if absent, constructs and opens a read-only clone, copies master/index state, assigns the root thread-safe parent, and inserts it into the per-thread map.",
+  "comment_repeatable": "Looks up a TESFile clone by thread ID; if absent, constructs and opens a read-only clone, copies master/index state, assigns the root thread-safe parent, and inserts it into the per-thread map.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "TESFile_GetThreadSafeFileForThread",
   "end_ea": "0x4520EE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_451F80",
+  "name": "TESFile_GetThreadSafeFileForThread",
   "segment": ".text",
   "sha256": "4f06541ab45373fce96dd25793583e98ce25a8705ee498924f9d8eaefc04c163",
   "size": 366,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x451F80",
+  "total_chunk_size": 415,
   "type": "Data *__thiscall(Data *this, int)",
-  "xrefs_from_count": 125,
+  "xrefs_from_count": 144,
   "xrefs_to_count": 1
 }

@@ -34,14 +34,14 @@
 0x4D0C95: sub     esp, 8
 0x4D0C98: mov     dword ptr [esp+0F0h+var_BC+4], ecx
 0x4D0C9C: fstp    [esp+0F0h+var_C8]
-0x4D0CA0: lea     ecx, [esp+0F0h+var_78]
+0x4D0CA0: lea     ecx, [esp+0F0h+right]
 0x4D0CA4: mov     [esp+0F0h+var_C0], edi
 0x4D0CA8: fmulp   st(1), st
 0x4D0CAA: mov     dword ptr [esp+0F0h+var_BC], eax
 0x4D0CAE: mov     [esp+0F0h+var_B4], edx
 0x4D0CB2: fstp    [esp+0F0h+var_D0]
 0x4D0CB6: fld     [esp+0F0h+var_D0]
-0x4D0CBA: fstp    [esp+0F0h+var_E8]; float
+0x4D0CBA: fstp    [esp+0F0h+angleZ]; float
 0x4D0CBE: fld     [esp+0F0h+var_C8]
 0x4D0CC2: fst     [esp+0F0h+var_EC]; float
 0x4D0CC6: fstp    [esp+0F0h+var_F0]; float
@@ -180,25 +180,25 @@
 0x4D0E9F: lea     edi, [esp+0E4h+var_54]
 0x4D0EA6: rep movsd
 0x4D0EA8: push    ecx
-0x4D0EA9: lea     ecx, [esp+0E8h+var_54]
-0x4D0EB0: fstp    [esp+0E8h+var_E8]; float
-0x4D0EB3: call    NiMatrix33_InitRotationTransform
-0x4D0EB8: lea     ecx, [esp+0E4h+var_78]
-0x4D0EBC: push    ecx
-0x4D0EBD: lea     edx, [esp+0E8h+var_30]
-0x4D0EC4: push    edx
-0x4D0EC5: lea     ecx, [esp+0ECh+var_54]
-0x4D0ECC: call    NiMAtrix33_Multiply
+0x4D0EA9: lea     ecx, [esp+0E8h+var_54]; this
+0x4D0EB0: fstp    [esp+0E8h+angleZ]; angleZ
+0x4D0EB3: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
+0x4D0EB8: lea     ecx, [esp+0E4h+right]
+0x4D0EBC: push    ecx; right
+0x4D0EBD: lea     edx, [esp+0E8h+out]
+0x4D0EC4: push    edx; out
+0x4D0EC5: lea     ecx, [esp+0ECh+var_54]; this
+0x4D0ECC: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x4D0ED1: mov     ecx, 9
 0x4D0ED6: mov     esi, eax
-0x4D0ED8: lea     edi, [esp+0E4h+var_78]
+0x4D0ED8: lea     edi, [esp+0E4h+right]
 0x4D0EDC: rep movsd
 0x4D0EDE: mov     esi, [esp+0E4h+var_C8]
 0x4D0EE2: jmp     short loc_4D0EE6
 0x4D0EE4: fstp    st
 0x4D0EE6: lea     edi, [esi+30h]
 0x4D0EE9: mov     ecx, 9
-0x4D0EEE: lea     esi, [esp+0E4h+var_78]
+0x4D0EEE: lea     esi, [esp+0E4h+right]
 0x4D0EF2: rep movsd
 0x4D0EF4: mov     edi, [esp+0E4h+var_C8]
 0x4D0EF8: lea     eax, [esp+0E4h+a2]
@@ -211,13 +211,13 @@
 0x4D0F0C: push    ecx
 0x4D0F0D: mov     ecx, ebp; this
 0x4D0F0F: fstp    [esp+0ECh+var_EC]; a2
-0x4D0F12: call    NiAVObject_UpdateNiAVObject
+0x4D0F12: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x4D0F17: fldz
 0x4D0F19: push    esi; a3
 0x4D0F1A: push    ecx
 0x4D0F1B: fstp    [esp+0ECh+var_EC]; a2
 0x4D0F1E: mov     ecx, edi; this
-0x4D0F20: call    NiAVObject_UpdateNiAVObject
+0x4D0F20: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x4D0F25: mov     eax, [ebx+54h]
 0x4D0F28: test    eax, eax
 0x4D0F2A: mov     [esp+0E4h+var_C9], 0
@@ -273,7 +273,7 @@
 0x4D0FD6: push    eax
 0x4D0FD7: mov     ecx, ebx
 0x4D0FD9: mov     byte ptr ds:0B0727Ch, 0
-0x4D0FE0: call    sub_4D0190
+0x4D0FE0: call    sub_4D0190; MoonSugarEffect decode: canopy/shadow offscreen path constructs culling process with null VisibleGeo and renders through sub_70C0B0 into StartUsingRenderTarget targets, so it uses accumulator-direct culling.
 0x4D0FE5: movzx   ecx, byte ptr [esp+0E4h+var_C4+3]
 0x4D0FEA: xor     ebx, ebx
 0x4D0FEC: cmp     esi, ebx
@@ -387,3 +387,33 @@
 0x4D1120: pop     ebx
 0x4D1121: add     esp, 0D0h
 0x4D1127: retn    0Ch
+0x9B54A0: mov     eax, [ebp-0B0h]
+0x9B54A6: push    eax
+0x9B54A7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B54AC: pop     ecx
+0x9B54AD: retn
+0x9B54AE: lea     ecx, [ebp-0B0h]; slot
+0x9B54B4: jmp     NiPointerSlot_Release
+0x9B54B9: mov     eax, [ebp-9Ch]
+0x9B54BF: push    eax
+0x9B54C0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B54C5: pop     ecx
+0x9B54C6: retn
+0x9B54C7: lea     ecx, [ebp-9Ch]; slot
+0x9B54CD: jmp     NiPointerSlot_Release
+0x9B54D2: lea     ecx, [ebp-0A0h]; slot
+0x9B54D8: jmp     NiPointerSlot_Release
+0x9B54DD: mov     eax, [ebp-98h]
+0x9B54E3: and     eax, 1
+0x9B54E6: jz      locret_9B54FB
+0x9B54EC: and     dword ptr [ebp-98h], 0FFFFFFFEh
+0x9B54F3: mov     ecx, [ebp+4]; slot
+0x9B54F6: jmp     NiPointerSlot_Release
+0x9B54FB: retn
+0x9B54FC: mov     edx, [esp+arg_4]
+0x9B5500: lea     eax, [edx-0D4h]
+0x9B5506: mov     ecx, [edx-0D8h]
+0x9B550C: xor     ecx, eax
+0x9B550E: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B5513: mov     eax, offset stru_AE05C4
+0x9B5518: jmp     ___CxxFrameHandler3

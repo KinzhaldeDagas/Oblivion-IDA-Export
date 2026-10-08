@@ -1,1 +1,1 @@
-NiTriStripsDynamicData
+struct NiTriStripsDynamicData;

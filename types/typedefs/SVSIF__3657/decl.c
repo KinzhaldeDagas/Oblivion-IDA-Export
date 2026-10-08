@@ -1,1 +1,1 @@
-SVSIF
+typedef UINT SVSIF;

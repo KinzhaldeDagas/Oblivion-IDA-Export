@@ -1,4 +1,4 @@
-0x761E60: sub     esp, 10h
+0x761E60: sub     esp, 10h; Oblivion-authoritative: builds the 0x38-byte D3DPRESENT_PARAMETERS block. Chooses framebuffer/depth formats, multisample type/quality, swap effect/backbuffer count, windowed/fullscreen mode, refresh rate, and presentation interval; degrades unsupported requests.
 0x761E63: push    ebx
 0x761E64: mov     ebx, [esp+14h+arg_C]
 0x761E68: mov     eax, ebx
@@ -26,10 +26,10 @@
 0x761EAA: push    0FFh; Src
 0x761EAF: push    offset aCreationFail_3; "Creation failed: Could not find desired"...
 0x761EB4: push    100h; SizeInBytes
-0x761EB9: push    offset byte_B3F828; Dst
+0x761EB9: push    offset unk_B3F828; Dst
 0x761EBE: call    _strncpy_s
 0x761EC3: push    offset aNidx9rendere_7; "NiDX9Renderer::Initialize> No matching "...
-0x761EC8: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x761EC8: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x761ECD: add     esp, 14h
 0x761ED0: pop     esi
 0x761ED1: xor     al, al
@@ -54,17 +54,17 @@
 0x761F03: push    esi
 0x761F04: push    edi
 0x761F05: push    edi
-0x761F06: call    sub_775280
+0x761F06: call    NiDX9DeviceDesc_SelectCompatibleDepthStencilFormat; Select a compatible depth/stencil format from cached DX9 device capabilities. For a surface request above 16 depth bits, normalize the selection target to 24 depth bits and 8 stencil bits.
 0x761F0B: mov     ebp, eax
 0x761F0D: test    ebp, ebp
 0x761F0F: jnz     short loc_761F43
 0x761F11: push    0FFh; Src
 0x761F16: push    offset aCreationFail_4; "Creation failed: Could not find desired"...
 0x761F1B: push    100h; SizeInBytes
-0x761F20: push    offset byte_B3F828; Dst
+0x761F20: push    offset unk_B3F828; Dst
 0x761F25: call    _strncpy_s
 0x761F2A: push    offset aNidx9rendere_8; "NiDX9Renderer::Initialize> No matching "...
-0x761F2F: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x761F2F: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x761F34: add     esp, 14h
 0x761F37: pop     edi
 0x761F38: pop     ebp
@@ -155,11 +155,11 @@
 0x762034: test    eax, eax
 0x762036: jge     short loc_76204E
 0x762038: push    offset aNidx9rendere_9; "NiDX9Renderer::Initialize> Could not su"...
-0x76203D: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x76203D: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x762042: add     esp, 4
 0x762045: mov     dword ptr [esi+10h], 0
 0x76204C: jmp     short loc_76205D
-0x76204E: mov     eax, dword ptr [esp+20h+var_8]
+0x76204E: mov     eax, [esp+20h+var_8]
 0x762052: cmp     eax, [esi+14h]
 0x762055: ja      short loc_76205D
 0x762057: add     eax, 0FFFFFFFFh
@@ -191,7 +191,7 @@
 0x7620A4: push    offset aCreationFail_5; "Creation failed: Could not match desire"...
 0x7620A9: call    sub_761A90
 0x7620AE: push    offset aNidx9render_10; "NiDX9Renderer::Initialize> Could not fi"...
-0x7620B3: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x7620B3: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x7620B8: add     esp, 8
 0x7620BB: pop     edi
 0x7620BC: pop     ebp
@@ -203,7 +203,7 @@
 0x7620C7: cmp     ebp, [edi]
 0x7620C9: jz      short loc_7620D8
 0x7620CB: push    offset aNidx9render_11; "NiDX9Renderer::Initialize> Could not ma"...
-0x7620D0: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x7620D0: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x7620D5: add     esp, 4
 0x7620D8: cmp     dword ptr [esi+20h], 0
 0x7620DC: jz      short loc_7620F1

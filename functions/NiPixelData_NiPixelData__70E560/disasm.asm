@@ -28,13 +28,13 @@
 0x70E5C5: mov     ecx, 11h
 0x70E5CA: mov     esi, ebx
 0x70E5CC: rep movsd
-0x70E5CE: mov     esi, [esp+0E8h+arg_4]
-0x70E5D5: mov     edi, [esp+0E8h+arg_0]
+0x70E5CE: mov     esi, [esp+0E8h+height]
+0x70E5D5: mov     edi, [esp+0E8h+width]
 0x70E5DC: mov     byte ptr [esp+0E8h+var_4], 1
 0x70E5E4: jnz     short loc_70E5F0
-0x70E5E6: push    esi
-0x70E5E7: push    edi
-0x70E5E8: call    sub_70E2F0
+0x70E5E6: push    esi; height
+0x70E5E7: push    edi; width
+0x70E5E8: call    OB_NiPixelData_CalcFullMipLevelCount_010201A0; Returns the complete 2D mip count floor(log2(max(width,height)))+1 for nonzero dimensions.
 0x70E5ED: add     esp, 8
 0x70E5F0: mov     [ebp+60h], eax
 0x70E5F3: mov     eax, [esp+0E8h+arg_10]
@@ -68,7 +68,7 @@
 0x70E64F: imul    ebx, ecx
 0x70E652: imul    ebx, edx
 0x70E655: add     ebx, [esp+eax*4+0E8h+var_CC]
-0x70E659: mov     [esp+eax*4+0E8h+var_4C], ecx
+0x70E659: mov     [esp+eax*4+0E8h+source], ecx
 0x70E660: mov     [esp+eax*4+0E8h+var_C8], ebx
 0x70E664: add     eax, 1
 0x70E667: shr     edi, 1
@@ -88,7 +88,7 @@
 0x70E692: mov     eax, esi
 0x70E694: jnz     short loc_70E69B
 0x70E696: mov     eax, 1
-0x70E69B: mov     [esp+ecx*4+0E8h+var_4C], eax
+0x70E69B: mov     [esp+ecx*4+0E8h+source], eax
 0x70E6A2: imul    eax, edx
 0x70E6A5: shr     eax, 1
 0x70E6A7: add     eax, [esp+ecx*4+0E8h+var_CC]
@@ -117,7 +117,7 @@
 0x70E6E9: mov     ecx, esi
 0x70E6EB: jnz     short loc_70E6F2
 0x70E6ED: mov     ecx, 1
-0x70E6F2: mov     [esp+eax*4+0E8h+var_4C], ecx
+0x70E6F2: mov     [esp+eax*4+0E8h+source], ecx
 0x70E6F9: add     ecx, 3
 0x70E6FC: and     ecx, 0FFFFFFFCh
 0x70E6FF: add     edx, 3
@@ -144,25 +144,25 @@
 0x70E73D: mov     ecx, [ebp+54h]
 0x70E740: add     esi, esi
 0x70E742: add     esi, esi
-0x70E744: push    esi; Size
+0x70E744: push    esi; byteCount
 0x70E745: lea     eax, [esp+0ECh+Src]
-0x70E749: push    eax; Src
-0x70E74A: push    ecx; Dst
-0x70E74B: call    _memcpy
+0x70E749: push    eax; source
+0x70E74A: push    ecx; destination
+0x70E74B: call    _memcpy;
 0x70E750: mov     eax, [ebp+58h]
-0x70E753: push    esi; Size
-0x70E754: lea     edx, [esp+0F8h+var_4C]
-0x70E75B: push    edx; Src
-0x70E75C: push    eax; Dst
-0x70E75D: call    _memcpy
+0x70E753: push    esi; byteCount
+0x70E754: lea     edx, [esp+0F8h+source]
+0x70E75B: push    edx; source
+0x70E75C: push    eax; destination
+0x70E75D: call    _memcpy;
 0x70E762: mov     ecx, [ebp+60h]
 0x70E765: lea     edx, ds:4[ecx*4]
 0x70E76C: mov     ecx, [ebp+5Ch]
-0x70E76F: push    edx; Size
+0x70E76F: push    edx; byteCount
 0x70E770: lea     eax, [esp+104h+var_CC]
-0x70E774: push    eax; Src
-0x70E775: push    ecx; Dst
-0x70E776: call    _memcpy
+0x70E774: push    eax; source
+0x70E775: push    ecx; destination
+0x70E776: call    _memcpy;
 0x70E77B: add     esp, 24h
 0x70E77E: mov     dword ptr [ebp+68h], 1
 0x70E785: mov     eax, ebp
@@ -175,3 +175,15 @@
 0x70E799: pop     ebx
 0x70E79A: add     esp, 0D4h
 0x70E7A0: retn    14h
+0x9C9B00: mov     ecx, [ebp-0D0h]
+0x9C9B06: jmp     NiRefObject_destr
+0x9C9B0B: mov     ecx, [ebp-0D0h]
+0x9C9B11: add     ecx, 4Ch ; 'L'; slot
+0x9C9B14: jmp     NiPointerSlot_Release
+0x9C9B19: mov     edx, [esp+height]
+0x9C9B1D: lea     eax, [edx-0D8h]
+0x9C9B23: mov     ecx, [edx-0DCh]
+0x9C9B29: xor     ecx, eax
+0x9C9B2B: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C9B30: mov     eax, offset stru_AF2330
+0x9C9B35: jmp     ___CxxFrameHandler3

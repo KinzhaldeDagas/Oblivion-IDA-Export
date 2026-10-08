@@ -1,6 +1,6 @@
 0x4E2D60: sub     esp, 1Ch
 0x4E2D63: push    ebx
-0x4E2D64: mov     ebx, [esp+20h+Src]
+0x4E2D64: mov     ebx, dword ptr [esp+20h+Src]
 0x4E2D68: push    ebp
 0x4E2D69: push    esi
 0x4E2D6A: push    edi
@@ -9,23 +9,23 @@
 0x4E2D6E: call    TESForm_SaveModifiedForm
 0x4E2D73: mov     ecx, ds:0B33B00h
 0x4E2D79: xor     edi, edi
-0x4E2D7B: mov     [esp+2Ch+var_18], edi
+0x4E2D7B: mov     [esp+2Ch+source], edi
 0x4E2D7F: mov     ebp, [ecx+14h]
 0x4E2D82: mov     [esp+2Ch+var_1C], edi
-0x4E2D86: call    sub_45A170
+0x4E2D86: call    TESSaveLoadGame_UseSaveGameBlocks
 0x4E2D8B: test    al, al
 0x4E2D8D: jz      short loc_4E2DC2
-0x4E2D8F: mov     ecx, ds:0B33B00h
-0x4E2D95: push    4; Size
+0x4E2D8F: mov     ecx, ds:0B33B00h; self
+0x4E2D95: push    4; byteCount
 0x4E2D97: lea     eax, [esp+30h+Src]
-0x4E2D9B: push    eax; Src
-0x4E2D9C: mov     [esp+34h+Src], 4B4F4C42h
+0x4E2D9B: push    eax; source
+0x4E2D9C: mov     dword ptr [esp+34h+Src], 4B4F4C42h
 0x4E2DA4: call    SaveLoad_SaveData
-0x4E2DA9: mov     ecx, ds:0B33B00h
+0x4E2DA9: mov     ecx, ds:0B33B00h; self
 0x4E2DAF: mov     edx, [ecx+14h]
-0x4E2DB2: push    2; Size
-0x4E2DB4: lea     eax, [esp+30h+var_18]
-0x4E2DB8: push    eax; Src
+0x4E2DB2: push    2; byteCount
+0x4E2DB4: lea     eax, [esp+30h+source]
+0x4E2DB8: push    eax; source
 0x4E2DB9: mov     [esp+34h+var_1C], edx
 0x4E2DBD: call    SaveLoad_SaveData
 0x4E2DC2: test    ebx, 8000000h
@@ -45,7 +45,7 @@
 0x4E2DF1: push    esi
 0x4E2DF2: push    ebx
 0x4E2DF3: lea     ecx, [esi+44h]
-0x4E2DF6: call    ExtraDataList_SaveGame
+0x4E2DF6: call    ExtraDataList_SaveGame; Verified save-game block writer handles dynamic ExtraData records but has no ExtraDistantData/XLOD case. This is distinct from plugin-record serialization, whose ExtraDataList_Save case writes XLOD (12 bytes). Whether omitting it from save-game blocks is intentional static-data policy is Probable, not directly stated.
 0x4E2DFB: test    ebx, 2000000h
 0x4E2E01: jz      short loc_4E2E3D
 0x4E2E03: mov     edx, [esi]
@@ -57,11 +57,11 @@
 0x4E2E13: mov     ecx, esi
 0x4E2E15: call    sub_4E0840
 0x4E2E1A: movzx   ecx, ax
-0x4E2E1D: push    2; a2
+0x4E2E1D: push    2; byteCount
 0x4E2E1F: lea     edx, [esp+30h+Src]
-0x4E2E23: mov     [esp+30h+Src], ecx
-0x4E2E27: push    edx; a1
-0x4E2E28: mov     ecx, esi
+0x4E2E23: mov     dword ptr [esp+30h+Src], ecx
+0x4E2E27: push    edx; source
+0x4E2E28: mov     ecx, esi; self
 0x4E2E2A: call    TESForm_SaveDataToCurrentSaveGame
 0x4E2E2F: cmp     word ptr [esp+2Ch+Src], di
 0x4E2E34: jz      short loc_4E2E3D
@@ -80,11 +80,11 @@
 0x4E2E60: mov     [esp+30h+var_4], edi
 0x4E2E64: call    sub_4E0970
 0x4E2E69: movzx   ecx, ax
-0x4E2E6C: push    2; a2
+0x4E2E6C: push    2; byteCount
 0x4E2E6E: lea     edx, [esp+30h+Src]
-0x4E2E72: mov     [esp+30h+Src], ecx
-0x4E2E76: push    edx; a1
-0x4E2E77: mov     ecx, esi
+0x4E2E72: mov     dword ptr [esp+30h+Src], ecx
+0x4E2E76: push    edx; source
+0x4E2E77: mov     ecx, esi; self
 0x4E2E79: call    TESForm_SaveDataToCurrentSaveGame
 0x4E2E7E: cmp     word ptr [esp+2Ch+Src], di
 0x4E2E83: jz      short loc_4E2E91
@@ -97,10 +97,10 @@
 0x4E2E9B: jb      short loc_4E2EAF
 0x4E2E9D: test    bl, 10h
 0x4E2EA0: jz      short loc_4E2EAF
-0x4E2EA2: push    4; a2
+0x4E2EA2: push    4; byteCount
 0x4E2EA4: lea     edx, [esi+38h]
-0x4E2EA7: push    edx; a1
-0x4E2EA8: mov     ecx, esi
+0x4E2EA7: push    edx; source
+0x4E2EA8: mov     ecx, esi; self
 0x4E2EAA: call    TESForm_SaveDataToCurrentSaveGame
 0x4E2EAF: cmp     byte ptr ds:0B05BACh, 0
 0x4E2EB6: jz      short loc_4E2F1F
@@ -111,7 +111,7 @@
 0x4E2EC8: jz      short loc_4E2F05
 0x4E2ECA: mov     eax, [edi]
 0x4E2ECC: push    eax; a1
-0x4E2ECD: call    TESForm_LookupByFormID
+0x4E2ECD: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4E2ED2: mov     ecx, [edi+5]
 0x4E2ED5: mov     edx, [eax]
 0x4E2ED7: add     esp, 4
@@ -138,7 +138,7 @@
 0x4E2F17: call    sub_40FEC0
 0x4E2F1C: add     esp, 10h
 0x4E2F1F: mov     ecx, ds:0B33B00h
-0x4E2F25: call    sub_45A170
+0x4E2F25: call    TESSaveLoadGame_UseSaveGameBlocks
 0x4E2F2A: test    al, al
 0x4E2F2C: jz      short loc_4E2F61
 0x4E2F2E: mov     edx, ds:0B33B00h

@@ -1,18 +1,18 @@
-void __thiscall sub_4D7880(char *this, int a2)
+// Verified per-reference seed writer. For a TREE form, maps the requested uint32 seed through TESObjectTREE_GetIndexForSeed and stores the byte in ExtraData_Seed. If the tree seed array is empty or the seed is absent, the index is 0xFF; ExtraDataList_SetOrRemoveTreeSeed treats 0xFF as remove, so no concrete per-reference seed is retained. Whether another runtime path populates Oblivion's array remains Unknown.
+void __thiscall TESObjectREFR_SetTreeSeedByValue(TESObjectREFR *this, int seedValue)
 {
-  ExtraDataList *v3; // edi
-  int v4; // eax
-  char v5; // al
+  ExtraDataList *p_baseExtraList; // edi
+  TESForm *v4; // eax
+  signed __int8 seedValuea; // [esp+Ch] [ebp+4h]
 
-  v3 = (ExtraDataList *)(this + 0x44);
-  if ( this != (char *)0xFFFFFFBC
-    && *(_BYTE *)((*(int (__thiscall **)(char *))(*(_DWORD *)this + 0x170))(this) + 4) == 0x1E )
+  p_baseExtraList = &this->member.baseExtraList; /*0x4d7884*/
+  if ( this != (TESObjectREFR *)0xFFFFFFBC && this->vtbl->GetBaseForm(this)->member.type == kFormType_Tree ) /*0x4d7899*/
   {
-    v4 = (*(int (__thiscall **)(char *))(*(_DWORD *)this + 0x170))(this);
-    if ( v4 )
+    v4 = this->vtbl->GetBaseForm(this); /*0x4d78a5*/
+    if ( v4 ) /*0x4d78a9*/
     {
-      v5 = (*(int (__thiscall **)(int, int))(*(_DWORD *)v4 + 0x124))(v4, a2);
-      sub_423BD0(v3, v5);
+      seedValuea = ((int (__thiscall *)(TESForm *, int))v4->vtbl[1].Unk_12)(v4, seedValue); /*0x4d78bc*/
+      ExtraDataList_SetOrRemoveTreeSeed(p_baseExtraList, seedValuea); /*0x4d78c7*/
     }
   }
 }

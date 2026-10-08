@@ -1,1 +1,1 @@
-AlchemyItem
+struct AlchemyItem;

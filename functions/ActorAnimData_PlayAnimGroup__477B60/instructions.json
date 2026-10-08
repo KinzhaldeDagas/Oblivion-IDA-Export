@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x477B60",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; Native group dispatcher. Reads fixed group-table slot (+0x08) and note-template class (+0x0C), normalizing slot aliases 5->0 and 6->3. For note classes 0/1, playImmediately=0 stores only the encoded key at ActorAnimData +0x70[slot] and repeat/action value at +0x7C[slot]; playImmediately=1 clears that queue and plays now. Classes 2..7 play immediately. No queued sequence pointer or path is stored.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x477B64",
-    "line": "mov     ebx, [esp+10h+arg_0]",
+    "line": "mov     ebx, [esp+10h+encodedKey]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x477B6D",
-    "line": "call    sub_51AA00",
+    "line": "call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x477BBC",
-    "line": "mov     eax, [esp+18h+arg_4]; jumptable 00477BB5 cases 0,1",
+    "line": "mov     eax, [esp+18h+playImmediately]; jumptable 00477BB5 cases 0,1",
     "mnemonic": "mov",
     "size": 4
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x477BCA",
-    "line": "mov     ecx, [esp+18h+arg_8]",
+    "line": "mov     ecx, [esp+18h+repeatOrAction]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x477BDE",
-    "line": "call    sub_476260",
+    "line": "call    ActorAnimData_PlayEncodedGroup; CustomAnimSupport hook target: ActorAnimData_PlayEncodedGroup. Resolves encoded key in animsMap, selects single/multiple sequence, then forwards to ActorAnimData_PlaySequence.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x477BEC",
-    "line": "mov     eax, [esp+18h+arg_8]",
+    "line": "mov     eax, [esp+18h+repeatOrAction]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x477C07",
-    "line": "call    sub_476260",
+    "line": "call    ActorAnimData_PlayEncodedGroup; CustomAnimSupport hook target: ActorAnimData_PlayEncodedGroup. Resolves encoded key in animsMap, selects single/multiple sequence, then forwards to ActorAnimData_PlaySequence.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x477C1F",
-    "line": "call    sub_471230",
+    "line": "call    ActorAnimData_SampleAndExtractRootMotion; Samples the actor scene graph while extracting accumulation/root motion. Seeds AccumNode +0x54 from ActorAnimData +0x18, updates RootNode at the requested time, optionally copies the resulting AccumNode translation to the caller, then zeroes AccumNode +0x54. Used after forced play, animation-state restore, and explicit play-group paths.",
     "mnemonic": "call",
     "size": 5
   }

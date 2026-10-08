@@ -1,10 +1,10 @@
-0x6A8C70: push    ebx
+0x6A8C70: push    ebx; Verified VampirismEffect_Link forwards linkContext to ActiveEffect_Base_Link, then RTTI-casts it to Character/Actor before restoring vampire state. Supports the Probable actor-reference context type.
 0x6A8C71: push    esi
 0x6A8C72: push    edi
-0x6A8C73: mov     edi, [esp+0Ch+arg_0]
-0x6A8C77: push    edi
+0x6A8C73: mov     edi, [esp+0Ch+linkContext]
+0x6A8C77: push    edi; linkContext
 0x6A8C78: mov     ebx, ecx
-0x6A8C7A: call    ActiveEffect_Base_Link
+0x6A8C7A: call    ActiveEffect_Base_Link; Verified ActiveEffect link stage resolves saved caster (+0x24), target (+0x20), bound object (+0x30), and hit-effect references (+0x34). The explicit linkContext is Probable TESObjectREFR*/Actor context: Player_LinkModifiedForm passes PlayerCharacter*, NightEyeEffect_Link requires PlayerCharacter*, and VampirismEffect_Link RTTI-casts it to Actor; modified-extra loading passes null.
 0x6A8C7F: push    0; int
 0x6A8C81: push    offset ??_R0?AVCharacter@@@8; struct TypeDescriptor *
 0x6A8C86: push    offset ??_R0?AVActor@@@8; struct _s_RTTICompleteObjectLocator *
@@ -32,7 +32,7 @@
 0x6A8CC1: fld     dword ptr [ebx+18h]
 0x6A8CC4: push    ecx
 0x6A8CC5: mov     ecx, esi
-0x6A8CC7: fstp    [esp+14h+var_14]; float
+0x6A8CC7: fstp    dword ptr [esp+0]; float
 0x6A8CCA: call    sub_60E2E0
 0x6A8CCF: mov     ecx, [esi+58h]
 0x6A8CD2: mov     eax, [ecx]

@@ -71,7 +71,7 @@
 0x45E796: lea     eax, [esp+0AA488h+FindFileData.cFileName]
 0x45E79A: push    eax
 0x45E79B: push    ecx
-0x45E79C: push    offset word_B3F280
+0x45E79C: push    offset unk_B3F280
 0x45E7A1: lea     edx, [esp+0AA494h+var_AA114]
 0x45E7A8: push    offset aSSS_ess; "%s%s%s.ess"
 0x45E7AD: push    edx
@@ -196,3 +196,24 @@
 0x45E928: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x45E92D: add     esp, 0AA474h
 0x45E933: retn
+0x9AE430: mov     eax, [ebp-0AA46Ch]
+0x9AE436: push    eax
+0x9AE437: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AE43C: pop     ecx
+0x9AE43D: retn
+0x9AE43E: mov     eax, [ebp-0AA46Ch]
+0x9AE444: push    eax
+0x9AE445: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AE44A: pop     ecx
+0x9AE44B: retn
+0x9AE44C: mov     edx, [esp+arg_4]
+0x9AE450: lea     eax, [edx-0AA478h]
+0x9AE456: mov     ecx, [edx-0AA47Ch]
+0x9AE45C: xor     ecx, eax
+0x9AE45E: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AE463: add     eax, 10h
+0x9AE466: mov     ecx, [edx-4]
+0x9AE469: xor     ecx, eax
+0x9AE46B: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AE470: mov     eax, offset stru_ADAC94
+0x9AE475: jmp     ___CxxFrameHandler3

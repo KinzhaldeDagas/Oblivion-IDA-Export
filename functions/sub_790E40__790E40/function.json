@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x790E40",
+      "0x790E88"
+    ]
+  ],
+  "chunks_sha256": "22c02c9b9d82b229d0524b92f549504b8a03db777d69544a1e5df8a63e63575d",
+  "comment_regular": "Resets an OB_stVector4 pointer triplet and allocates capacity for exactly the requested number of 4-byte elements while leaving end==begin. Returns false for zero capacity; OB_stVector4_CopyAssign uses it after freeing insufficient storage.",
+  "comment_repeatable": "Resets an OB_stVector4 pointer triplet and allocates capacity for exactly the requested number of 4-byte elements while leaving end==begin. Returns false for zero capacity; OB_stVector4_CopyAssign uses it after freeing insufficient storage.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_790E40",
+  "display_name": "OB_stVector4_AllocateCapacity_010201A0",
   "end_ea": "0x790E88",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_790E40",
+  "name": "OB_stVector4_AllocateCapacity_010201A0",
   "segment": ".text",
   "sha256": "22c02c9b9d82b229d0524b92f549504b8a03db777d69544a1e5df8a63e63575d",
   "size": 72,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x790E40",
-  "type": "char __thiscall(_DWORD *this, int)",
+  "total_chunk_size": 72,
+  "type": "bool __thiscall(OB_stVector4_010201A0 *this, unsigned int capacity)",
   "xrefs_from_count": 30,
   "xrefs_to_count": 1
 }

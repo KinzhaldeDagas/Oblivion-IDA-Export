@@ -14,60 +14,60 @@ unsigned int __thiscall sub_740BC0(_DWORD *this, unsigned __int16 *a2)
   unsigned int v13; // edi
   char *v14; // ebx
 
-  v2 = (NiTArray_NiTexturingPropertyMap *)a2;
-  v3 = this;
-  sub_721730(this, a2);
-  v4 = (unsigned __int16 *)TESOutput_PrintString(*(char **)dword_B401EC);
-  end = v2->end;
-  capacity = v2->capacity;
-  a2 = v4;
-  if ( end >= capacity )
-    NiTArray_SetSize((unsigned __int16 *)v2, end + v2->growSize);
-  NiTArray_SetAt(v2, end, &a2);
-  v7 = (unsigned __int16 *)TESOutput_PrintLabeledUnsignedInt("m_uiSize", v3[3]);
-  v8 = v2->end;
-  v9 = v2->capacity;
-  a2 = v7;
-  if ( v8 >= v9 )
-    NiTArray_SetSize((unsigned __int16 *)v2, v8 + v2->growSize);
-  result = NiTArray_SetAt(v2, v8, &a2);
-  v11 = 0;
-  if ( v3[3] )
+  v2 = (NiTArray_NiTexturingPropertyMap *)a2; /*0x740bc4*/
+  v3 = this; /*0x740bc9*/
+  sub_721730(this, a2); /*0x740bd0*/
+  v4 = (unsigned __int16 *)TESOutput_PrintString((char *)stru_B401EC.name); /*0x740bdb*/
+  end = v2->end; /*0x740be0*/
+  capacity = v2->capacity; /*0x740be4*/
+  a2 = v4; /*0x740bed*/
+  if ( end >= capacity ) /*0x740bf1*/
+    NiTArray_SetSize((unsigned __int16 *)v2, end + v2->growSize); /*0x740bfc*/
+  NiTArray_SetAt(v2, end, &a2); /*0x740c09*/
+  v7 = (unsigned __int16 *)TESOutput_PrintLabeledUnsignedInt("m_uiSize", v3[3]); /*0x740c17*/
+  v8 = v2->end; /*0x740c1c*/
+  v9 = v2->capacity; /*0x740c20*/
+  a2 = v7; /*0x740c29*/
+  if ( v8 >= v9 ) /*0x740c2d*/
+    NiTArray_SetSize((unsigned __int16 *)v2, v8 + v2->growSize); /*0x740c38*/
+  result = NiTArray_SetAt(v2, v8, &a2); /*0x740c45*/
+  v11 = 0; /*0x740c4a*/
+  if ( v3[3] ) /*0x740c4c*/
   {
-    while ( 1 )
+    while ( 1 ) /*0x740c65*/
     {
-      v12 = TESOutput_PrintLabeledSignedInt("m_piValue[i]", *(_DWORD *)(v3[4] + 4 * v11));
-      v13 = v2->end;
-      v14 = v12;
-      if ( v13 >= v2->capacity )
-        NiTArray_SetSize((unsigned __int16 *)v2, v13 + v2->growSize);
-      result = v2->end;
-      if ( v13 < result )
+      v12 = TESOutput_PrintLabeledSignedInt("m_piValue[i]", *(_DWORD *)(v3[4] + 4 * v11)); /*0x740c65*/
+      v13 = v2->end; /*0x740c6a*/
+      v14 = v12; /*0x740c77*/
+      if ( v13 >= v2->capacity ) /*0x740c79*/
+        NiTArray_SetSize((unsigned __int16 *)v2, v13 + v2->growSize); /*0x740c84*/
+      result = v2->end; /*0x740c89*/
+      if ( v13 < result ) /*0x740c8f*/
       {
-        if ( v14 )
+        if ( v14 ) /*0x740ca5*/
         {
-          if ( !*((_DWORD *)&v2->data->vtbl + v13) )
-            ++v2->numObjs;
+          if ( !*((_DWORD *)&v2->data->vtbl + v13) ) /*0x740caa*/
+            ++v2->numObjs; /*0x740cb0*/
         }
         else
         {
-          result = (unsigned int)v2->data;
-          if ( *(_DWORD *)(result + 4 * v13) )
-            --v2->numObjs;
+          result = (unsigned int)v2->data; /*0x740cb7*/
+          if ( *(_DWORD *)(result + 4 * v13) ) /*0x740cba*/
+            --v2->numObjs; /*0x740cc0*/
         }
       }
       else
       {
-        v2->end = v13 + 1;
-        if ( v14 )
-          ++v2->numObjs;
+        v2->end = v13 + 1; /*0x740c96*/
+        if ( v14 ) /*0x740c9a*/
+          ++v2->numObjs; /*0x740c9c*/
       }
-      ++v11;
-      *((_DWORD *)&v2->data->vtbl + v13) = v14;
-      if ( v11 >= *(this + 3) )
-        break;
-      v3 = this;
+      ++v11; /*0x740ccd*/
+      *((_DWORD *)&v2->data->vtbl + v13) = v14; /*0x740cd0*/
+      if ( v11 >= *(this + 3) ) /*0x740cd6*/
+        break; /*0x740cd6*/
+      v3 = this; /*0x740c57*/
     }
   }
-  return result;
+  return result; /*0x740cdc*/
 }

@@ -1,4 +1,4 @@
 __int16 __stdcall sub_6CE1A0(int a1)
 {
-  return 0;
+  return 0; /*0x6ce1a3*/
 }

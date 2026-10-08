@@ -1,5 +1,5 @@
 0xA1A730: push    esi
-0xA1A731: mov     esi, dword_B35410
+0xA1A731: mov     esi, dword ptr unk_B35410
 0xA1A737: test    esi, esi
 0xA1A739: jz      short loc_A1A757
 0xA1A73B: lea     eax, [esi+4]

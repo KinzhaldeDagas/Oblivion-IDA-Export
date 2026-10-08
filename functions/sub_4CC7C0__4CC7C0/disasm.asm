@@ -1,4 +1,4 @@
-0x4CC7C0: push    0FFFFFFFFh
+0x4CC7C0: push    0FFFFFFFFh; Verified DistantLODCellObjectData constructor/layout: three NiTArray<float> subobjects at +0x00/+0x10/+0x20 and recordCount +0x30. The arrays are rotationAnglesXYZ, positions, and scalePercent in that order. Base-object queued transforms apply angles X/Y/Z in radians.
 0x4CC7C2: push    offset SEH_4CC7C0
 0x4CC7C7: mov     eax, large fs:0
 0x4CC7CD: push    eax
@@ -34,3 +34,21 @@
 0x4CC842: pop     ecx
 0x4CC843: add     esp, 10h
 0x4CC846: retn
+0x4BCBC0: mov     eax, [ecx+4]
+0x4BCBC3: push    eax
+0x4BCBC4: mov     dword ptr [ecx], offset ??_7?$NiTArray@M@@6B@; const NiTArray<float>::`vftable'
+0x4BCBCA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x4BCBCF: pop     ecx
+0x4BCBD0: retn
+0x9B51D0: mov     ecx, [ebp-10h]
+0x9B51D3: jmp     loc_4BCBC0
+0x9B51D8: mov     ecx, [ebp-10h]
+0x9B51DB: add     ecx, 10h
+0x9B51DE: jmp     loc_4BCBC0
+0x9B51E3: mov     edx, [esp+arg_4]
+0x9B51E7: lea     eax, [edx-4]
+0x9B51EA: mov     ecx, [edx-8]
+0x9B51ED: xor     ecx, eax
+0x9B51EF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B51F4: mov     eax, offset stru_AE0394
+0x9B51F9: jmp     ___CxxFrameHandler3

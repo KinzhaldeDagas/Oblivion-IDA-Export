@@ -1,1 +1,31 @@
-DATETIME_INFO
+struct __declspec(align(8)) DATETIME_INFO
+{
+HWND hwndSelf;
+HWND hMonthCal;
+HWND hwndNotify;
+HWND hUpdown;
+DWORD dwStyle;
+SYSTEMTIME date;
+BOOL dateValid;
+HWND hwndCheckbut;
+RECT rcClient;
+RECT rcDraw;
+RECT checkbox;
+RECT calbutton;
+BOOL bCalDepressed;
+BOOL bCalHot;
+BOOL bDropdownEnabled;
+int select;
+WCHAR_0 charsEntered[4];
+int nCharsEntered;
+HFONT hFont;
+int nrFieldsAllocated;
+int nrFields;
+int haveFocus;
+int *fieldspec;
+RECT *fieldRect;
+int *buflen;
+WCHAR_0 textbuf[256];
+POINT monthcal_pos;
+int pendingUpdown;
+};

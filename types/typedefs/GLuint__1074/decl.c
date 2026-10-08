@@ -1,1 +1,1 @@
-GLuint
+typedef unsigned int GLuint;

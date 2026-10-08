@@ -1,4 +1,4 @@
-0x778110: push    esi
+0x778110: push    esi; Pass225: Releases NiGeometryBufferData streams, index buffer, stream arrays, and vertex declaration before free.
 0x778111: mov     esi, ecx
 0x778113: cmp     dword ptr [esi+4], 0
 0x778117: jz      short loc_778136
@@ -27,10 +27,10 @@
 0x77814C: mov     dword ptr [esi+30h], 0
 0x778153: mov     eax, [esi+24h]
 0x778156: push    eax
-0x778157: call    FormHeapFree
+0x778157: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x77815C: mov     ecx, [esi+20h]
 0x77815F: push    ecx
-0x778160: call    FormHeapFree
+0x778160: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x778165: mov     esi, [esi+0Ch]
 0x778168: add     esp, 8
 0x77816B: test    esi, esi

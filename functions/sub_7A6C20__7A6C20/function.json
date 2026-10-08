@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7A6C20",
+      "0x7A6CC4"
+    ]
+  ],
+  "chunks_sha256": "98f245f64847fe5f7f9dbc38ecfec42e873a422903692329148b6cb4424f89e4",
+  "comment_regular": "Oblivion binary evidence: copy-returning union of two exact 0x30 stRegion values. Copies the left region including stVec sizes, then takes per-axis minima and maxima for axes 0..2. Sole caller is CLeafGeometry::ComputeExtents. RT 4.1 Region.cpp:16-29 corroborates operator+ after observation.",
+  "comment_repeatable": "Oblivion binary evidence: copy-returning union of two exact 0x30 stRegion values. Copies the left region including stVec sizes, then takes per-axis minima and maxima for axes 0..2. Sole caller is CLeafGeometry::ComputeExtents. RT 4.1 Region.cpp:16-29 corroborates operator+ after observation.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7A6C20",
+  "display_name": "OB_stRegion_UnionCopy_010201A0",
   "end_ea": "0x7A6CC4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7A6C20",
+  "name": "OB_stRegion_UnionCopy_010201A0",
   "segment": ".text",
   "sha256": "98f245f64847fe5f7f9dbc38ecfec42e873a422903692329148b6cb4424f89e4",
   "size": 164,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A6C20",
-  "type": "float *__thiscall(float *this, float *, float *)",
+  "total_chunk_size": 164,
+  "type": "OB_stRegion_010201A0 *__thiscall(const OB_stRegion_010201A0 *this, OB_stRegion_010201A0 *result, const OB_stRegion_010201A0 *right)",
   "xrefs_from_count": 71,
   "xrefs_to_count": 1
 }

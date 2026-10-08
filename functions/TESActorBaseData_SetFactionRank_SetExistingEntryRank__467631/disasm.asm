@@ -9,7 +9,7 @@
 0x467647: mov     edx, [ecx]
 0x467649: push    ecx
 0x46764A: mov     [eax], edx
-0x46764C: call    FormHeapFree
+0x46764C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x467651: add     esp, 4
 0x467654: pop     edi
 0x467655: pop     esi

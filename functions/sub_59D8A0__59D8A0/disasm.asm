@@ -1,4 +1,4 @@
-0x59D8A0: cmp     dword ptr [ecx+28h], 0
+0x59D8A0: cmp     dword ptr [ecx+28h], 0; Verified (Silt Strider pass): checks eleven required Tile pointers at DialogMenu offsets 0x28, 0x2C, 0x34, 0x30, 0x38, 0x3C, 0x40, 0x44, 0x48, 0x50, 0x4C. Does not build topics. Sole caller is 0x59EE57.
 0x59D8A4: jz      short loc_59D8E5
 0x59D8A6: cmp     dword ptr [ecx+2Ch], 0
 0x59D8AA: jz      short loc_59D8E5

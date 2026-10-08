@@ -17,7 +17,7 @@
 0x574AAE: mov     [esp+34h+var_1C], ebx
 0x574AB2: mov     [esp+34h+var_C], ebx
 0x574AB6: mov     [esp+34h+var_24], ebx
-0x574ABA: call    Double_To_SInt32
+0x574ABA: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x574ABF: mov     [esp+34h+var_20], eax
 0x574AC3: movzx   eax, word ptr [esi+4]
 0x574AC7: cmp     ax, 0FFFFh
@@ -70,3 +70,10 @@
 0x574B5D: mov     al, 27h ; '''; jumptable 00574B56 cases 145,146
 0x574B5F: jmp     short def_574B56
 0x574B61: mov     al, 22h ; '"'; jumptable 00574B56 cases 147,148
+0x574DE0: pop     edi
+0x574DE1: pop     esi
+0x574DE2: pop     ebp
+0x574DE3: xor     eax, eax
+0x574DE5: pop     ebx
+0x574DE6: add     esp, 24h
+0x574DE9: retn    14h

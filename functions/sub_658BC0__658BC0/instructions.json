@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x658BC0",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, [esp+owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x658BC5",
-    "line": "mov     ebx, [esp+4+arg_0]",
+    "line": "mov     ebx, [esp+4+changeMask]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,13 +37,13 @@
   },
   {
     "ea": "0x658BCC",
-    "line": "push    eax",
+    "line": "push    eax; owner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x658BCD",
-    "line": "push    ebx",
+    "line": "push    ebx; changeMask",
     "mnemonic": "push",
     "size": 1
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x658BD0",
-    "line": "call    sub_647060",
+    "line": "call    LowProcess_GetSaveSize",
     "mnemonic": "call",
     "size": 5
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x658BDE",
-    "line": "mov     [esp+10h+arg_4], edi",
+    "line": "mov     [esp+10h+owner], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x658BE5",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x658BFA",
-    "line": "mov     [esp+10h+arg_4], edi",
+    "line": "mov     [esp+10h+owner], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x658C00",
-    "line": "lea     ecx, [esi+94h]",
+    "line": "lea     ecx, [esi+94h]; self",
     "mnemonic": "lea",
     "size": 6
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x658C10",
-    "line": "mov     di, word ptr [esp+10h+arg_4]",
+    "line": "mov     di, word ptr [esp+10h+owner]",
     "mnemonic": "mov",
     "size": 5
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x658C31",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },

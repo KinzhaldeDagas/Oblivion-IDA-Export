@@ -4,7 +4,6 @@
 0x8B0D07: jl      short locret_8B0D1D
 0x8B0D09: mov     ecx, [ecx]
 0x8B0D0B: jmp     short loc_8B0D10
-0x8B0D0D: align 10h
 0x8B0D10: cmp     dword ptr [ecx], 0
 0x8B0D13: jnz     short locret_8B0D1D
 0x8B0D15: inc     eax

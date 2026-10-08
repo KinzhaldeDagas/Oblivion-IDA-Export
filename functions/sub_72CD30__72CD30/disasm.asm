@@ -14,7 +14,6 @@
 0x72CD4E: add     edx, 1
 0x72CD51: lea     esi, ds:0[edx*4]
 0x72CD58: jmp     short loc_72CD60
-0x72CD5A: align 10h
 0x72CD60: fld     dword ptr [eax-8]
 0x72CD63: add     eax, 20h ; ' '
 0x72CD66: sub     edx, 1

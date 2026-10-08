@@ -1,29 +1,27 @@
 void *__thiscall sub_7343E0(void (__stdcall **this)(char *), char *Dst, int a3, char *a4)
 {
-  _BYTE *v6; // ebx
+  char *v6; // ebx
   void *result; // eax
-  size_t v8; // [esp-4h] [ebp-5Ch]
-  char *v9; // [esp+10h] [ebp-48h]
-  _BYTE Src[3]; // [esp+14h] [ebp-44h] BYREF
-  char v11[61]; // [esp+17h] [ebp-41h] BYREF
+  char *v8; // [esp+10h] [ebp-48h]
+  char Src[3]; // [esp+14h] [ebp-44h] BYREF
+  char v10[61]; // [esp+17h] [ebp-41h] BYREF
 
-  v6 = Src;
-  if ( *this )
-    ((void (__thiscall *)(void (__stdcall **)(char *), char *))*this)(this, v11);
-  ((void (__thiscall *)(void (__stdcall **)(char *), _BYTE *))*(this + 1))(this, Src);
-  result = a4;
-  if ( a4 )
+  v6 = Src; /*0x7343fc*/
+  if ( *this ) /*0x7343f8*/
+    ((void (__thiscall *)(void (__stdcall **)(char *), char *))*this)(this, v10); /*0x734409*/
+  ((void (__thiscall *)(void (__stdcall **)(char *), char *))*(this + 1))(this, Src); /*0x734415*/
+  result = a4; /*0x73441b*/
+  if ( a4 ) /*0x734425*/
   {
-    v9 = a4;
-    do
+    v8 = a4; /*0x734427*/
+    do /*0x734446*/
     {
-      LODWORD(v8) = 4 * a3;
-      result = memcpy(Dst, v6, v8);
-      Dst = &Dst[(_DWORD)*(this + 3)];
-      v6 += 0x10;
-      --v9;
+      result = memcpy(Dst, v6, 4 * a3); /*0x734433*/
+      Dst = &Dst[(_DWORD)*(this + 3)]; /*0x734438*/
+      v6 += 0x10; /*0x73443e*/
+      --v8; /*0x734441*/
     }
-    while ( v9 );
+    while ( v8 ); /*0x734446*/
   }
-  return result;
+  return result; /*0x734448*/
 }

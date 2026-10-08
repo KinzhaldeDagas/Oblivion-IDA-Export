@@ -1,4 +1,4 @@
-int __usercall EffectItem_Initialize_::InitData@<eax>(
+int __userpurge EffectItem_Initialize_::InitData@<eax>(
         _DWORD *a1@<eax>,
         _DWORD *a2@<esi>,
         int ebx0@<ebx>,
@@ -29,14 +29,14 @@ int __usercall EffectItem_Initialize_::InitData@<eax>(
 {
   int v27; // ecx
 
-  if ( (a1[0x16] & 0x1180000) != 0 )
-    v27 = a1[0x18];
+  if ( (a1[0x16] & 0x1180000) != 0 ) /*0x4147d8*/
+    v27 = a1[0x18]; /*0x4147da*/
   else
-    v27 = 0x48;
-  a2[5] = v27;
-  *((float *)a2 + 8) = -1.0;
-  if ( a1[0x26] == 0x46464553 )
-    return EffectItem_Initialize_::AllocateSCIT(
+    v27 = 0x48; /*0x4147df*/
+  a2[5] = v27; /*0x4147ea*/
+  *((float *)a2 + 8) = -1.0; /*0x4147ed*/
+  if ( a1[0x26] == 0x46464553 ) /*0x4147fa*/
+    return EffectItem_Initialize_::AllocateSCIT( /*0x4147fb*/
              ebx0,
              a2,
              a4,
@@ -64,5 +64,5 @@ int __usercall EffectItem_Initialize_::InitData@<eax>(
              a26,
              a27);
   else
-    return EffectItem_Initialize_::NoSCITBlock();
+    return EffectItem_Initialize_::NoSCITBlock(ebx0, (int)a2, a4); /*0x4147fa*/
 }

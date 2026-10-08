@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x5DAACB",
-    "line": "push    ebp",
+    "line": "push    ebp; lastTile",
     "mnemonic": "push",
     "size": 1
   },
@@ -67,19 +67,19 @@
   },
   {
     "ea": "0x5DAAD1",
-    "line": "push    edx",
+    "line": "push    edx; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DAAD2",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5DAAD4",
-    "line": "call    Menu_CreateTileFromTemplate",
+    "line": "call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.",
     "mnemonic": "call",
     "size": 5
   },
@@ -133,13 +133,13 @@
   },
   {
     "ea": "0x5DAAF0",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DAAF3",
-    "line": "push    0FAAh; a2",
+    "line": "push    0FAAh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x5DAAFA",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,13 +223,13 @@
   },
   {
     "ea": "0x5DAB23",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DAB26",
-    "line": "push    0FB0h; a2",
+    "line": "push    0FB0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x5DAB2D",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x5DAB6F",
-    "line": "push    0",
+    "line": "push    0; lastTile",
     "mnemonic": "push",
     "size": 2
   },
@@ -349,13 +349,13 @@
   },
   {
     "ea": "0x5DAB7A",
-    "line": "push    ecx",
+    "line": "push    ecx; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DAB7B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x5DAB8D",
-    "line": "call    Menu_CreateTileFromTemplate",
+    "line": "call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,13 +439,13 @@
   },
   {
     "ea": "0x5DABA9",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DABAC",
-    "line": "push    0FAAh; a2",
+    "line": "push    0FAAh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x5DABB3",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,13 +523,13 @@
   },
   {
     "ea": "0x5DABD8",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DABDB",
-    "line": "push    0FB0h; a2",
+    "line": "push    0FB0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x5DABE2",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x5DAC18",
-    "line": "push    0",
+    "line": "push    0; lastTile",
     "mnemonic": "push",
     "size": 2
   },
@@ -625,19 +625,19 @@
   },
   {
     "ea": "0x5DAC1F",
-    "line": "push    edx",
+    "line": "push    edx; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DAC20",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5DAC22",
-    "line": "call    Menu_CreateTileFromTemplate",
+    "line": "call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.",
     "mnemonic": "call",
     "size": 5
   },
@@ -691,13 +691,13 @@
   },
   {
     "ea": "0x5DAC3E",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DAC41",
-    "line": "push    0FAAh; a2",
+    "line": "push    0FAAh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x5DAC48",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -823,13 +823,13 @@
   },
   {
     "ea": "0x5DAC8F",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DAC92",
-    "line": "push    0FB0h; a2",
+    "line": "push    0FB0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -841,7 +841,7 @@
   },
   {
     "ea": "0x5DAC99",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -889,7 +889,7 @@
   },
   {
     "ea": "0x5DACBA",
-    "line": "push    0",
+    "line": "push    0; lastTile",
     "mnemonic": "push",
     "size": 2
   },
@@ -901,13 +901,13 @@
   },
   {
     "ea": "0x5DACC1",
-    "line": "push    ecx",
+    "line": "push    ecx; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DACC2",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -919,7 +919,7 @@
   },
   {
     "ea": "0x5DACC8",
-    "line": "call    Menu_CreateTileFromTemplate",
+    "line": "call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.",
     "mnemonic": "call",
     "size": 5
   },
@@ -973,13 +973,13 @@
   },
   {
     "ea": "0x5DACE4",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DACE7",
-    "line": "push    0FAAh; a2",
+    "line": "push    0FAAh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -991,7 +991,7 @@
   },
   {
     "ea": "0x5DACEE",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1057,13 +1057,13 @@
   },
   {
     "ea": "0x5DAD13",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DAD16",
-    "line": "push    0FB0h; a2",
+    "line": "push    0FB0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -1075,7 +1075,7 @@
   },
   {
     "ea": "0x5DAD1D",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1123,7 +1123,7 @@
   },
   {
     "ea": "0x5DAD3E",
-    "line": "push    0",
+    "line": "push    0; lastTile",
     "mnemonic": "push",
     "size": 2
   },
@@ -1135,13 +1135,13 @@
   },
   {
     "ea": "0x5DAD45",
-    "line": "push    ecx",
+    "line": "push    ecx; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DAD46",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1153,7 +1153,7 @@
   },
   {
     "ea": "0x5DAD4C",
-    "line": "call    Menu_CreateTileFromTemplate",
+    "line": "call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1207,13 +1207,13 @@
   },
   {
     "ea": "0x5DAD68",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DAD6B",
-    "line": "push    0FAAh; a2",
+    "line": "push    0FAAh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -1225,7 +1225,7 @@
   },
   {
     "ea": "0x5DAD72",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1291,13 +1291,13 @@
   },
   {
     "ea": "0x5DAD97",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DAD9A",
-    "line": "push    0FB0h; a2",
+    "line": "push    0FB0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -1309,7 +1309,7 @@
   },
   {
     "ea": "0x5DADA1",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1339,7 +1339,7 @@
   },
   {
     "ea": "0x5DADBB",
-    "line": "push    0",
+    "line": "push    0; lastTile",
     "mnemonic": "push",
     "size": 2
   },
@@ -1351,13 +1351,13 @@
   },
   {
     "ea": "0x5DADC2",
-    "line": "push    eax",
+    "line": "push    eax; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DADC3",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1375,7 +1375,7 @@
   },
   {
     "ea": "0x5DADCC",
-    "line": "call    Menu_CreateTileFromTemplate",
+    "line": "call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1429,13 +1429,13 @@
   },
   {
     "ea": "0x5DADE8",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DADEB",
-    "line": "push    0FAAh; a2",
+    "line": "push    0FAAh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -1447,7 +1447,7 @@
   },
   {
     "ea": "0x5DADF2",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1519,13 +1519,13 @@
   },
   {
     "ea": "0x5DAE1B",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DAE1E",
-    "line": "push    0FB0h; a2",
+    "line": "push    0FB0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -1537,7 +1537,7 @@
   },
   {
     "ea": "0x5DAE25",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1576,12 +1576,6 @@
     "line": "jmp     short loc_5DAE44",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x5DAE3F",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 1
   },
   {
     "ea": "0x5DAE40",
@@ -1663,7 +1657,7 @@
   },
   {
     "ea": "0x5DAE6C",
-    "line": "push    0",
+    "line": "push    0; lastTile",
     "mnemonic": "push",
     "size": 2
   },
@@ -1675,19 +1669,19 @@
   },
   {
     "ea": "0x5DAE73",
-    "line": "push    ecx",
+    "line": "push    ecx; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DAE74",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5DAE76",
-    "line": "call    Menu_CreateTileFromTemplate",
+    "line": "call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1741,13 +1735,13 @@
   },
   {
     "ea": "0x5DAE92",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DAE95",
-    "line": "push    0FAAh; a2",
+    "line": "push    0FAAh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -1759,7 +1753,7 @@
   },
   {
     "ea": "0x5DAE9C",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1831,13 +1825,13 @@
   },
   {
     "ea": "0x5DAEC5",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DAEC8",
-    "line": "push    0FB0h; a2",
+    "line": "push    0FB0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -1849,7 +1843,7 @@
   },
   {
     "ea": "0x5DAECF",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1903,7 +1897,7 @@
   },
   {
     "ea": "0x5DAEFA",
-    "line": "push    0",
+    "line": "push    0; lastTile",
     "mnemonic": "push",
     "size": 2
   },
@@ -1915,13 +1909,13 @@
   },
   {
     "ea": "0x5DAF01",
-    "line": "push    ecx",
+    "line": "push    ecx; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DAF02",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1933,7 +1927,7 @@
   },
   {
     "ea": "0x5DAF08",
-    "line": "call    Menu_CreateTileFromTemplate",
+    "line": "call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1987,13 +1981,13 @@
   },
   {
     "ea": "0x5DAF24",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DAF27",
-    "line": "push    0FAAh; a2",
+    "line": "push    0FAAh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -2005,7 +1999,7 @@
   },
   {
     "ea": "0x5DAF2E",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2077,13 +2071,13 @@
   },
   {
     "ea": "0x5DAF57",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DAF5A",
-    "line": "push    0FB0h; a2",
+    "line": "push    0FB0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -2095,7 +2089,7 @@
   },
   {
     "ea": "0x5DAF61",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2125,7 +2119,7 @@
   },
   {
     "ea": "0x5DAF7B",
-    "line": "push    0",
+    "line": "push    0; lastTile",
     "mnemonic": "push",
     "size": 2
   },
@@ -2137,13 +2131,13 @@
   },
   {
     "ea": "0x5DAF82",
-    "line": "push    eax",
+    "line": "push    eax; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DAF83",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -2161,7 +2155,7 @@
   },
   {
     "ea": "0x5DAF8C",
-    "line": "call    Menu_CreateTileFromTemplate",
+    "line": "call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2215,13 +2209,13 @@
   },
   {
     "ea": "0x5DAFA8",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DAFAB",
-    "line": "push    0FAAh; a2",
+    "line": "push    0FAAh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -2233,7 +2227,7 @@
   },
   {
     "ea": "0x5DAFB2",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2305,13 +2299,13 @@
   },
   {
     "ea": "0x5DAFDB",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DAFDE",
-    "line": "push    0FB0h; a2",
+    "line": "push    0FB0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -2323,7 +2317,7 @@
   },
   {
     "ea": "0x5DAFE5",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2353,7 +2347,7 @@
   },
   {
     "ea": "0x5DAFFE",
-    "line": "push    0",
+    "line": "push    0; lastTile",
     "mnemonic": "push",
     "size": 2
   },
@@ -2371,13 +2365,13 @@
   },
   {
     "ea": "0x5DB009",
-    "line": "push    edx",
+    "line": "push    edx; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DB00A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -2389,7 +2383,7 @@
   },
   {
     "ea": "0x5DB00F",
-    "line": "call    Menu_CreateTileFromTemplate",
+    "line": "call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2443,13 +2437,13 @@
   },
   {
     "ea": "0x5DB02B",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB02E",
-    "line": "push    0FAAh; a2",
+    "line": "push    0FAAh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -2461,7 +2455,7 @@
   },
   {
     "ea": "0x5DB035",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2533,13 +2527,13 @@
   },
   {
     "ea": "0x5DB05E",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB061",
-    "line": "push    0FB0h; a2",
+    "line": "push    0FB0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -2551,7 +2545,7 @@
   },
   {
     "ea": "0x5DB068",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2581,7 +2575,7 @@
   },
   {
     "ea": "0x5DB081",
-    "line": "push    0",
+    "line": "push    0; lastTile",
     "mnemonic": "push",
     "size": 2
   },
@@ -2593,13 +2587,13 @@
   },
   {
     "ea": "0x5DB088",
-    "line": "push    ecx",
+    "line": "push    ecx; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DB089",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -2617,7 +2611,7 @@
   },
   {
     "ea": "0x5DB092",
-    "line": "call    Menu_CreateTileFromTemplate",
+    "line": "call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2671,13 +2665,13 @@
   },
   {
     "ea": "0x5DB0AE",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB0B1",
-    "line": "push    0FAAh; a2",
+    "line": "push    0FAAh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -2689,7 +2683,7 @@
   },
   {
     "ea": "0x5DB0B8",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2761,13 +2755,13 @@
   },
   {
     "ea": "0x5DB0E1",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB0E4",
-    "line": "push    0FB0h; a2",
+    "line": "push    0FB0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -2779,7 +2773,7 @@
   },
   {
     "ea": "0x5DB0EB",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2809,7 +2803,7 @@
   },
   {
     "ea": "0x5DB105",
-    "line": "push    0",
+    "line": "push    0; lastTile",
     "mnemonic": "push",
     "size": 2
   },
@@ -2821,13 +2815,13 @@
   },
   {
     "ea": "0x5DB10C",
-    "line": "push    eax",
+    "line": "push    eax; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DB10D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -2845,7 +2839,7 @@
   },
   {
     "ea": "0x5DB116",
-    "line": "call    Menu_CreateTileFromTemplate",
+    "line": "call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2899,13 +2893,13 @@
   },
   {
     "ea": "0x5DB132",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB135",
-    "line": "push    0FAAh; a2",
+    "line": "push    0FAAh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -2917,7 +2911,7 @@
   },
   {
     "ea": "0x5DB13C",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2989,13 +2983,13 @@
   },
   {
     "ea": "0x5DB165",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB168",
-    "line": "push    0FB0h; a2",
+    "line": "push    0FB0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -3007,7 +3001,7 @@
   },
   {
     "ea": "0x5DB16F",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3037,7 +3031,7 @@
   },
   {
     "ea": "0x5DB188",
-    "line": "push    0",
+    "line": "push    0; lastTile",
     "mnemonic": "push",
     "size": 2
   },
@@ -3055,13 +3049,13 @@
   },
   {
     "ea": "0x5DB193",
-    "line": "push    edx",
+    "line": "push    edx; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DB194",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -3073,7 +3067,7 @@
   },
   {
     "ea": "0x5DB199",
-    "line": "call    Menu_CreateTileFromTemplate",
+    "line": "call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3127,13 +3121,13 @@
   },
   {
     "ea": "0x5DB1B5",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB1B8",
-    "line": "push    0FAAh; a2",
+    "line": "push    0FAAh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -3145,7 +3139,7 @@
   },
   {
     "ea": "0x5DB1BF",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3217,13 +3211,13 @@
   },
   {
     "ea": "0x5DB1E8",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB1EB",
-    "line": "push    0FB0h; a2",
+    "line": "push    0FB0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -3235,7 +3229,7 @@
   },
   {
     "ea": "0x5DB1F2",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3265,7 +3259,7 @@
   },
   {
     "ea": "0x5DB20B",
-    "line": "push    0",
+    "line": "push    0; lastTile",
     "mnemonic": "push",
     "size": 2
   },
@@ -3277,13 +3271,13 @@
   },
   {
     "ea": "0x5DB212",
-    "line": "push    ecx",
+    "line": "push    ecx; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DB213",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -3301,7 +3295,7 @@
   },
   {
     "ea": "0x5DB21C",
-    "line": "call    Menu_CreateTileFromTemplate",
+    "line": "call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3355,13 +3349,13 @@
   },
   {
     "ea": "0x5DB238",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB23B",
-    "line": "push    0FAAh; a2",
+    "line": "push    0FAAh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -3373,7 +3367,7 @@
   },
   {
     "ea": "0x5DB242",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3445,13 +3439,13 @@
   },
   {
     "ea": "0x5DB26B",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB26E",
-    "line": "push    0FB0h; a2",
+    "line": "push    0FB0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -3463,7 +3457,7 @@
   },
   {
     "ea": "0x5DB275",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3493,7 +3487,7 @@
   },
   {
     "ea": "0x5DB28F",
-    "line": "push    0",
+    "line": "push    0; lastTile",
     "mnemonic": "push",
     "size": 2
   },
@@ -3505,13 +3499,13 @@
   },
   {
     "ea": "0x5DB296",
-    "line": "push    eax",
+    "line": "push    eax; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DB297",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -3529,7 +3523,7 @@
   },
   {
     "ea": "0x5DB2A0",
-    "line": "call    Menu_CreateTileFromTemplate",
+    "line": "call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3583,13 +3577,13 @@
   },
   {
     "ea": "0x5DB2BC",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB2BF",
-    "line": "push    0FAAh; a2",
+    "line": "push    0FAAh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -3601,7 +3595,7 @@
   },
   {
     "ea": "0x5DB2C6",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3673,13 +3667,13 @@
   },
   {
     "ea": "0x5DB2EF",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB2F2",
-    "line": "push    0FB0h; a2",
+    "line": "push    0FB0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -3691,7 +3685,7 @@
   },
   {
     "ea": "0x5DB2F9",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3721,7 +3715,7 @@
   },
   {
     "ea": "0x5DB312",
-    "line": "push    0",
+    "line": "push    0; lastTile",
     "mnemonic": "push",
     "size": 2
   },
@@ -3739,13 +3733,13 @@
   },
   {
     "ea": "0x5DB31D",
-    "line": "push    edx",
+    "line": "push    edx; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DB31E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -3757,7 +3751,7 @@
   },
   {
     "ea": "0x5DB323",
-    "line": "call    Menu_CreateTileFromTemplate",
+    "line": "call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3811,13 +3805,13 @@
   },
   {
     "ea": "0x5DB33F",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB342",
-    "line": "push    0FAAh; a2",
+    "line": "push    0FAAh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -3829,7 +3823,7 @@
   },
   {
     "ea": "0x5DB349",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3901,13 +3895,13 @@
   },
   {
     "ea": "0x5DB372",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB375",
-    "line": "push    0FB0h; a2",
+    "line": "push    0FB0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -3919,7 +3913,7 @@
   },
   {
     "ea": "0x5DB37C",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3949,7 +3943,7 @@
   },
   {
     "ea": "0x5DB395",
-    "line": "push    0",
+    "line": "push    0; lastTile",
     "mnemonic": "push",
     "size": 2
   },
@@ -3961,13 +3955,13 @@
   },
   {
     "ea": "0x5DB39C",
-    "line": "push    ecx",
+    "line": "push    ecx; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DB39D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -3985,7 +3979,7 @@
   },
   {
     "ea": "0x5DB3A6",
-    "line": "call    Menu_CreateTileFromTemplate",
+    "line": "call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4039,13 +4033,13 @@
   },
   {
     "ea": "0x5DB3C2",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB3C5",
-    "line": "push    0FAAh; a2",
+    "line": "push    0FAAh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -4057,7 +4051,7 @@
   },
   {
     "ea": "0x5DB3CC",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4129,13 +4123,13 @@
   },
   {
     "ea": "0x5DB3F5",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB3F8",
-    "line": "push    0FB0h; a2",
+    "line": "push    0FB0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -4147,7 +4141,7 @@
   },
   {
     "ea": "0x5DB3FF",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4177,7 +4171,7 @@
   },
   {
     "ea": "0x5DB419",
-    "line": "push    0",
+    "line": "push    0; lastTile",
     "mnemonic": "push",
     "size": 2
   },
@@ -4189,13 +4183,13 @@
   },
   {
     "ea": "0x5DB420",
-    "line": "push    eax",
+    "line": "push    eax; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DB421",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -4213,7 +4207,7 @@
   },
   {
     "ea": "0x5DB42A",
-    "line": "call    Menu_CreateTileFromTemplate",
+    "line": "call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4267,13 +4261,13 @@
   },
   {
     "ea": "0x5DB446",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB449",
-    "line": "push    0FAAh; a2",
+    "line": "push    0FAAh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -4285,7 +4279,7 @@
   },
   {
     "ea": "0x5DB450",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4357,13 +4351,13 @@
   },
   {
     "ea": "0x5DB479",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB47C",
-    "line": "push    0FB0h; a2",
+    "line": "push    0FB0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -4375,7 +4369,7 @@
   },
   {
     "ea": "0x5DB483",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4405,7 +4399,7 @@
   },
   {
     "ea": "0x5DB49C",
-    "line": "push    0",
+    "line": "push    0; lastTile",
     "mnemonic": "push",
     "size": 2
   },
@@ -4423,13 +4417,13 @@
   },
   {
     "ea": "0x5DB4A7",
-    "line": "push    edx",
+    "line": "push    edx; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DB4A8",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -4441,7 +4435,7 @@
   },
   {
     "ea": "0x5DB4AD",
-    "line": "call    Menu_CreateTileFromTemplate",
+    "line": "call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4495,13 +4489,13 @@
   },
   {
     "ea": "0x5DB4C9",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB4CC",
-    "line": "push    0FAAh; a2",
+    "line": "push    0FAAh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -4513,7 +4507,7 @@
   },
   {
     "ea": "0x5DB4D3",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4585,13 +4579,13 @@
   },
   {
     "ea": "0x5DB4FC",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB4FF",
-    "line": "push    0FB0h; a2",
+    "line": "push    0FB0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -4603,7 +4597,7 @@
   },
   {
     "ea": "0x5DB506",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4633,7 +4627,7 @@
   },
   {
     "ea": "0x5DB51F",
-    "line": "push    0",
+    "line": "push    0; lastTile",
     "mnemonic": "push",
     "size": 2
   },
@@ -4645,13 +4639,13 @@
   },
   {
     "ea": "0x5DB526",
-    "line": "push    ecx",
+    "line": "push    ecx; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DB527",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -4669,7 +4663,7 @@
   },
   {
     "ea": "0x5DB530",
-    "line": "call    Menu_CreateTileFromTemplate",
+    "line": "call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4723,13 +4717,13 @@
   },
   {
     "ea": "0x5DB54C",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB54F",
-    "line": "push    0FAAh; a2",
+    "line": "push    0FAAh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -4741,7 +4735,7 @@
   },
   {
     "ea": "0x5DB556",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4813,13 +4807,13 @@
   },
   {
     "ea": "0x5DB57F",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB582",
-    "line": "push    0FB0h; a2",
+    "line": "push    0FB0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -4831,7 +4825,7 @@
   },
   {
     "ea": "0x5DB589",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4861,7 +4855,7 @@
   },
   {
     "ea": "0x5DB5A3",
-    "line": "push    0",
+    "line": "push    0; lastTile",
     "mnemonic": "push",
     "size": 2
   },
@@ -4873,13 +4867,13 @@
   },
   {
     "ea": "0x5DB5AA",
-    "line": "push    eax",
+    "line": "push    eax; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DB5AB",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -4897,7 +4891,7 @@
   },
   {
     "ea": "0x5DB5B4",
-    "line": "call    Menu_CreateTileFromTemplate",
+    "line": "call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4951,13 +4945,13 @@
   },
   {
     "ea": "0x5DB5D0",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB5D3",
-    "line": "push    0FAAh; a2",
+    "line": "push    0FAAh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -4969,7 +4963,7 @@
   },
   {
     "ea": "0x5DB5DA",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5041,13 +5035,13 @@
   },
   {
     "ea": "0x5DB603",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB606",
-    "line": "push    0FB0h; a2",
+    "line": "push    0FB0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -5059,7 +5053,7 @@
   },
   {
     "ea": "0x5DB60D",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5089,7 +5083,7 @@
   },
   {
     "ea": "0x5DB626",
-    "line": "push    0",
+    "line": "push    0; lastTile",
     "mnemonic": "push",
     "size": 2
   },
@@ -5107,13 +5101,13 @@
   },
   {
     "ea": "0x5DB631",
-    "line": "push    edx",
+    "line": "push    edx; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DB632",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -5125,7 +5119,7 @@
   },
   {
     "ea": "0x5DB637",
-    "line": "call    Menu_CreateTileFromTemplate",
+    "line": "call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5179,13 +5173,13 @@
   },
   {
     "ea": "0x5DB653",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB656",
-    "line": "push    0FAAh; a2",
+    "line": "push    0FAAh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -5197,7 +5191,7 @@
   },
   {
     "ea": "0x5DB65D",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5269,13 +5263,13 @@
   },
   {
     "ea": "0x5DB686",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB689",
-    "line": "push    0FB0h; a2",
+    "line": "push    0FB0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -5287,7 +5281,7 @@
   },
   {
     "ea": "0x5DB690",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5317,7 +5311,7 @@
   },
   {
     "ea": "0x5DB6A9",
-    "line": "push    0",
+    "line": "push    0; lastTile",
     "mnemonic": "push",
     "size": 2
   },
@@ -5329,13 +5323,13 @@
   },
   {
     "ea": "0x5DB6B0",
-    "line": "push    ecx",
+    "line": "push    ecx; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DB6B1",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -5353,7 +5347,7 @@
   },
   {
     "ea": "0x5DB6BA",
-    "line": "call    Menu_CreateTileFromTemplate",
+    "line": "call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5407,13 +5401,13 @@
   },
   {
     "ea": "0x5DB6D6",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB6D9",
-    "line": "push    0FAAh; a2",
+    "line": "push    0FAAh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -5425,7 +5419,7 @@
   },
   {
     "ea": "0x5DB6E0",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5497,13 +5491,13 @@
   },
   {
     "ea": "0x5DB709",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB70C",
-    "line": "push    0FB0h; a2",
+    "line": "push    0FB0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -5515,7 +5509,7 @@
   },
   {
     "ea": "0x5DB713",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5545,7 +5539,7 @@
   },
   {
     "ea": "0x5DB72D",
-    "line": "push    0",
+    "line": "push    0; lastTile",
     "mnemonic": "push",
     "size": 2
   },
@@ -5557,13 +5551,13 @@
   },
   {
     "ea": "0x5DB734",
-    "line": "push    eax",
+    "line": "push    eax; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DB735",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -5581,7 +5575,7 @@
   },
   {
     "ea": "0x5DB73E",
-    "line": "call    Menu_CreateTileFromTemplate",
+    "line": "call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5635,13 +5629,13 @@
   },
   {
     "ea": "0x5DB75A",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB75D",
-    "line": "push    0FAAh; a2",
+    "line": "push    0FAAh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -5653,7 +5647,7 @@
   },
   {
     "ea": "0x5DB764",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5725,13 +5719,13 @@
   },
   {
     "ea": "0x5DB78D",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB790",
-    "line": "push    0FB0h; a2",
+    "line": "push    0FB0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -5743,7 +5737,7 @@
   },
   {
     "ea": "0x5DB797",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5773,7 +5767,7 @@
   },
   {
     "ea": "0x5DB7B0",
-    "line": "push    0",
+    "line": "push    0; lastTile",
     "mnemonic": "push",
     "size": 2
   },
@@ -5791,13 +5785,13 @@
   },
   {
     "ea": "0x5DB7BB",
-    "line": "push    edx",
+    "line": "push    edx; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DB7BC",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -5809,7 +5803,7 @@
   },
   {
     "ea": "0x5DB7C1",
-    "line": "call    Menu_CreateTileFromTemplate",
+    "line": "call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5863,13 +5857,13 @@
   },
   {
     "ea": "0x5DB7DD",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB7E0",
-    "line": "push    0FAAh; a2",
+    "line": "push    0FAAh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -5881,7 +5875,7 @@
   },
   {
     "ea": "0x5DB7E7",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5953,13 +5947,13 @@
   },
   {
     "ea": "0x5DB810",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB813",
-    "line": "push    0FB0h; a2",
+    "line": "push    0FB0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -5971,7 +5965,7 @@
   },
   {
     "ea": "0x5DB81A",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6001,7 +5995,7 @@
   },
   {
     "ea": "0x5DB833",
-    "line": "push    0",
+    "line": "push    0; lastTile",
     "mnemonic": "push",
     "size": 2
   },
@@ -6013,13 +6007,13 @@
   },
   {
     "ea": "0x5DB83A",
-    "line": "push    ecx",
+    "line": "push    ecx; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DB83B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -6037,7 +6031,7 @@
   },
   {
     "ea": "0x5DB844",
-    "line": "call    Menu_CreateTileFromTemplate",
+    "line": "call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6091,13 +6085,13 @@
   },
   {
     "ea": "0x5DB860",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB863",
-    "line": "push    0FAAh; a2",
+    "line": "push    0FAAh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -6109,7 +6103,7 @@
   },
   {
     "ea": "0x5DB86A",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6181,13 +6175,13 @@
   },
   {
     "ea": "0x5DB893",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB896",
-    "line": "push    0FB0h; a2",
+    "line": "push    0FB0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -6199,7 +6193,7 @@
   },
   {
     "ea": "0x5DB89D",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6229,7 +6223,7 @@
   },
   {
     "ea": "0x5DB8B7",
-    "line": "push    0",
+    "line": "push    0; lastTile",
     "mnemonic": "push",
     "size": 2
   },
@@ -6241,13 +6235,13 @@
   },
   {
     "ea": "0x5DB8BE",
-    "line": "push    eax",
+    "line": "push    eax; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DB8BF",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -6265,7 +6259,7 @@
   },
   {
     "ea": "0x5DB8C8",
-    "line": "call    Menu_CreateTileFromTemplate",
+    "line": "call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6319,13 +6313,13 @@
   },
   {
     "ea": "0x5DB8E4",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB8E7",
-    "line": "push    0FAAh; a2",
+    "line": "push    0FAAh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -6337,7 +6331,7 @@
   },
   {
     "ea": "0x5DB8EE",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6409,13 +6403,13 @@
   },
   {
     "ea": "0x5DB917",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB91A",
-    "line": "push    0FB0h; a2",
+    "line": "push    0FB0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -6427,7 +6421,7 @@
   },
   {
     "ea": "0x5DB921",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6457,7 +6451,7 @@
   },
   {
     "ea": "0x5DB93A",
-    "line": "push    0",
+    "line": "push    0; lastTile",
     "mnemonic": "push",
     "size": 2
   },
@@ -6475,13 +6469,13 @@
   },
   {
     "ea": "0x5DB945",
-    "line": "push    edx",
+    "line": "push    edx; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DB946",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -6493,7 +6487,7 @@
   },
   {
     "ea": "0x5DB94B",
-    "line": "call    Menu_CreateTileFromTemplate",
+    "line": "call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6547,13 +6541,13 @@
   },
   {
     "ea": "0x5DB967",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB96A",
-    "line": "push    0FAAh; a2",
+    "line": "push    0FAAh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -6565,7 +6559,7 @@
   },
   {
     "ea": "0x5DB971",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6637,13 +6631,13 @@
   },
   {
     "ea": "0x5DB99A",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB99D",
-    "line": "push    0FB0h; a2",
+    "line": "push    0FB0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -6655,7 +6649,7 @@
   },
   {
     "ea": "0x5DB9A4",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6685,7 +6679,7 @@
   },
   {
     "ea": "0x5DB9BD",
-    "line": "push    0",
+    "line": "push    0; lastTile",
     "mnemonic": "push",
     "size": 2
   },
@@ -6697,13 +6691,13 @@
   },
   {
     "ea": "0x5DB9C4",
-    "line": "push    ecx",
+    "line": "push    ecx; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DB9C5",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -6721,7 +6715,7 @@
   },
   {
     "ea": "0x5DB9CE",
-    "line": "call    Menu_CreateTileFromTemplate",
+    "line": "call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6775,13 +6769,13 @@
   },
   {
     "ea": "0x5DB9EA",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DB9ED",
-    "line": "push    0FAAh; a2",
+    "line": "push    0FAAh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -6793,7 +6787,7 @@
   },
   {
     "ea": "0x5DB9F4",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6865,13 +6859,13 @@
   },
   {
     "ea": "0x5DBA1D",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DBA20",
-    "line": "push    0FB0h; a2",
+    "line": "push    0FB0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -6883,7 +6877,7 @@
   },
   {
     "ea": "0x5DBA27",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6913,7 +6907,7 @@
   },
   {
     "ea": "0x5DBA41",
-    "line": "push    0",
+    "line": "push    0; lastTile",
     "mnemonic": "push",
     "size": 2
   },
@@ -6925,13 +6919,13 @@
   },
   {
     "ea": "0x5DBA48",
-    "line": "push    eax",
+    "line": "push    eax; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DBA49",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -6943,7 +6937,7 @@
   },
   {
     "ea": "0x5DBA4F",
-    "line": "call    Menu_CreateTileFromTemplate",
+    "line": "call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6997,13 +6991,13 @@
   },
   {
     "ea": "0x5DBA6C",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DBA6F",
-    "line": "push    0FAAh; a2",
+    "line": "push    0FAAh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -7015,7 +7009,7 @@
   },
   {
     "ea": "0x5DBA76",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7087,13 +7081,13 @@
   },
   {
     "ea": "0x5DBA9F",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DBAA2",
-    "line": "push    0FB0h; a2",
+    "line": "push    0FB0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -7105,7 +7099,7 @@
   },
   {
     "ea": "0x5DBAA9",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7129,19 +7123,19 @@
   },
   {
     "ea": "0x5DBAB8",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DBABB",
-    "line": "push    0FB3h; a2",
+    "line": "push    0FB3h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5DBAC0",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7165,19 +7159,19 @@
   },
   {
     "ea": "0x5DBACD",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DBAD0",
-    "line": "push    0FB3h; a2",
+    "line": "push    0FB3h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5DBAD5",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7195,7 +7189,7 @@
   },
   {
     "ea": "0x5DBADD",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -7207,13 +7201,13 @@
   },
   {
     "ea": "0x5DBAE3",
-    "line": "push    0FB3h; a2",
+    "line": "push    0FB3h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5DBAE8",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },

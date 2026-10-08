@@ -1,9 +1,6 @@
-int __thiscall sub_787160(int *this, float a2)
+// CSpeedTreeRT::SetMinimumBudAngle. Writes CTreeEngine leaf-info field +0xB4 when the engine exists.
+void __thiscall CSpeedTreeRT__SetMinimumBudAngle(OB_CSpeedTreeRT_010201A0 *this, float angle)
 {
-  int result; // eax
-
-  result = *this;
-  if ( *this )
-    *(float *)(result + 0xB4) = a2;
-  return result;
+  if ( this->treeEngine ) /*0x787160*/
+    *(float *)(this->treeEngine + 0xB4) = angle; /*0x78716a*/
 }

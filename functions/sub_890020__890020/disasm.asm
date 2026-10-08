@@ -10,7 +10,7 @@
 0x890038: mov     esi, [ebp+arg_4]
 0x89003B: push    edi
 0x89003C: mov     edi, [ebp+arg_8]
-0x89003F: call    sub_8AC0A0
+0x89003F: call    bhkWorldObject_GetLinearVelocityPtr; TES4 authoritative: returns pointer to bhk collision object's velocity vector at object+0x10. 0x896000 copies this into proxy +0x2E0 before state update.
 0x890044: movaps  xmm1, xmmword ptr [eax]
 0x890047: movaps  xmm0, xmmword ptr ds:0BA7A40h
 0x89004E: movaps  [esp+40h+var_20], xmm1
@@ -55,14 +55,14 @@
 0x8900F1: mulps   xmm0, xmm1
 0x8900F4: mov     ecx, esi
 0x8900F6: movaps  [esp+40h+var_30], xmm0
-0x8900FB: call    sub_8AC0A0
+0x8900FB: call    bhkWorldObject_GetLinearVelocityPtr; TES4 authoritative: returns pointer to bhk collision object's velocity vector at object+0x10. 0x896000 copies this into proxy +0x2E0 before state update.
 0x890100: movaps  xmm0, xmmword ptr [eax]
 0x890103: addps   xmm0, [esp+40h+var_30]
 0x890108: lea     ecx, [esp+40h+var_20]
 0x89010C: push    ecx; a2
 0x89010D: mov     ecx, esi; this
 0x89010F: movaps  [esp+44h+var_20], xmm0
-0x890114: call    sub_8AC0B0
+0x890114: call    sub_8AC0B0; TES4 authoritative: writes proxy velocity vector back into bhk collision object+0x10. Climbing/Slowfall velocity edits must happen before these calls or must write both proxy+0x2E0 and object+0x10 after the fact.
 0x890119: mov     ecx, [esp+40h+var_4]
 0x89011D: pop     edi
 0x89011E: pop     esi

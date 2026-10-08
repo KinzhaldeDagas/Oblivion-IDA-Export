@@ -7,31 +7,31 @@
   },
   {
     "ea": "0x5474A1",
-    "line": "mov     eax, [esp+4+arg_4]",
+    "line": "mov     eax, [esp+4+luckValue]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5474A5",
-    "line": "mov     ecx, [esp+4+arg_0]",
+    "line": "mov     ecx, [esp+4+skillValue]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5474A9",
-    "line": "push    eax",
+    "line": "push    eax; luckValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5474AA",
-    "line": "push    ecx",
+    "line": "push    ecx; skillValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5474AB",
-    "line": "call    Calc_LuckModifiedSkill",
+    "line": "call    Calc_LuckModifiedSkill; Block damage reduction uses Calc_LuckModifiedSkill before the formula. AVU replacement must keep fractional skill and the vanilla lower floor while allowing values above 100 to feed the extended formula.",
     "mnemonic": "call",
     "size": 5
   },

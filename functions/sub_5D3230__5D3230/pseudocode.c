@@ -9,10 +9,11 @@ double __usercall sub_5D3230@<st0>(
         double a8@<st0>)
 {
   double result; // st7
+  double v9; // st6
 
-  sub_57DE50(0xB);
-  result = TESSaveLoadGame_SaveGame_(
-             (NiTMap<unsigned int,NiTSimpleList<ExpiredCellData *> *> *)SaveLoad_CurrentSavegame,
+  sub_57DE50(0xB); /*0x5d3232*/
+  result = TESSaveLoadGame_SaveGame_( /*0x5d3246*/
+             (NiTMap<unsigned int,NiTSimpleList<ExpiredCellData *> *> *)g_TESSaveLoadGame,
              a1,
              a2,
              a3,
@@ -24,12 +25,12 @@ double __usercall sub_5D3230@<st0>(
              0,
              0,
              0);
-  if ( Menu_GetOpenMenuTile(0x40F) )
+  if ( Menu_GetOpenMenuTile(0x40F) ) /*0x5d3250*/
   {
-    result = flt_A30634;
-    GameUI_QueueMessage((const char *)dword_B387D0, 0, 1u, flt_A30634);
-    sub_5D2CF0(a6, a7);
-    sub_5BDA20();
+    v9 = kTerrainLODQuadRayDirectionZ; /*0x5d325c*/
+    GameUI_QueueMessage((const char *)stru_B387D0, 0, 1u, kTerrainLODQuadRayDirectionZ); /*0x5d3270*/
+    sub_5D2CF0(a6, v9); /*0x5d3278*/
+    sub_5BDA20(); /*0x5d327d*/
   }
-  return result;
+  return result; /*0x5d3282*/
 }

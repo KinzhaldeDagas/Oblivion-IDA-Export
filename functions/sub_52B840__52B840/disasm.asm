@@ -25,7 +25,7 @@
 0x52B87B: fld1
 0x52B87D: lea     esi, [ebp+29Ch]
 0x52B883: fst     dword ptr [ebp+68h]
-0x52B886: push    esi
+0x52B886: push    esi; destination
 0x52B887: fst     dword ptr [ebp+60h]
 0x52B88A: fst     dword ptr [ebp+6Ch]
 0x52B88D: fstp    dword ptr [ebp+64h]
@@ -37,11 +37,11 @@
 0x52B8AA: mov     [ebp+94h], ebx
 0x52B8B0: mov     [ebp+98h], ebx
 0x52B8B6: mov     [ebp+9Ch], bl
-0x52B8BC: call    sub_5538D0
-0x52B8C1: push    eax
-0x52B8C2: call    sub_5528F0
-0x52B8C7: push    esi
-0x52B8C8: call    sub_552880
+0x52B8BC: call    FaceGenManager_GetDefaultHeadParameters; Returns the FaceGen manager's default head-parameter block at manager+0x08, initializing the manager on demand.
+0x52B8C1: push    eax; source
+0x52B8C2: call    FaceGenHeadParameters_Copy; Deep-copies all four FaceGen matrices, preserving dimensions and engine ownership of destination coefficient buffers.
+0x52B8C7: push    esi; parameters
+0x52B8C8: call    FaceGenHeadParameters_Initialize; Standard FaceGenHeadParameters dimensions: matrix0 50x1, matrix1 30x1, matrix2 50x1, matrix3 untouched. Thus standard initialized active coefficient count is 130, under PF supported 256 cap. Existing elements survive ResizeFill as documented; this routine is not a full zero reset.
 0x52B8CD: add     esp, 0Ch
 0x52B8D0: mov     [ebp+2FCh], bx
 0x52B8D7: lea     edi, [ebp+1B8h]

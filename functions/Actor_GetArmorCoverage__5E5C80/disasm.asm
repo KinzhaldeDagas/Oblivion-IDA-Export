@@ -29,7 +29,7 @@
 0x5E5CC7: mov     ecx, esi
 0x5E5CC9: call    ContainerEntryExtraData_DestroyDataTable
 0x5E5CCE: push    esi
-0x5E5CCF: call    FormHeapFree
+0x5E5CCF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5E5CD4: add     esp, 4
 0x5E5CD7: mov     ecx, edi; this
 0x5E5CD9: call    ExtraDataList_GetContainerChanges
@@ -55,7 +55,7 @@
 0x5E5D14: mov     ecx, esi
 0x5E5D16: call    ContainerEntryExtraData_DestroyDataTable
 0x5E5D1B: push    esi
-0x5E5D1C: call    FormHeapFree
+0x5E5D1C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5E5D21: add     esp, 4
 0x5E5D24: mov     ecx, edi; this
 0x5E5D26: call    ExtraDataList_GetContainerChanges
@@ -81,7 +81,7 @@
 0x5E5D61: mov     ecx, esi
 0x5E5D63: call    ContainerEntryExtraData_DestroyDataTable
 0x5E5D68: push    esi
-0x5E5D69: call    FormHeapFree
+0x5E5D69: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5E5D6E: add     esp, 4
 0x5E5D71: mov     ecx, edi; this
 0x5E5D73: call    ExtraDataList_GetContainerChanges
@@ -107,7 +107,7 @@
 0x5E5DAE: mov     ecx, esi
 0x5E5DB0: call    ContainerEntryExtraData_DestroyDataTable
 0x5E5DB5: push    esi
-0x5E5DB6: call    FormHeapFree
+0x5E5DB6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5E5DBB: add     esp, 4
 0x5E5DBE: mov     ecx, edi; this
 0x5E5DC0: call    ExtraDataList_GetContainerChanges
@@ -133,7 +133,7 @@
 0x5E5DFB: mov     ecx, esi
 0x5E5DFD: call    ContainerEntryExtraData_DestroyDataTable
 0x5E5E02: push    esi
-0x5E5E03: call    FormHeapFree
+0x5E5E03: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5E5E08: add     esp, 4
 0x5E5E0B: mov     ecx, edi; this
 0x5E5E0D: call    ExtraDataList_GetContainerChanges
@@ -159,7 +159,7 @@
 0x5E5E48: mov     ecx, esi
 0x5E5E4A: call    ContainerEntryExtraData_DestroyDataTable
 0x5E5E4F: push    esi
-0x5E5E50: call    FormHeapFree
+0x5E5E50: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5E5E55: add     esp, 4
 0x5E5E58: mov     ecx, [ebx+58h]
 0x5E5E5B: test    ecx, ecx

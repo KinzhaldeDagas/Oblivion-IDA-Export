@@ -1,4 +1,4 @@
-0x7D2280: push    0FFFFFFFFh
+0x7D2280: push    0FFFFFFFFh; Oblivion per-source projection update: examines associated receiver geometry and property pass lists, derives projector direction/range and receiver-dependent projection data, updates light/projector transforms, and invalidates or refreshes affected receiver properties.
 0x7D2282: push    offset ShadowLight_LightProjection?_SEH
 0x7D2287: mov     eax, large fs:0
 0x7D228D: push    eax
@@ -18,10 +18,10 @@
 0x7D22B5: mov     [esp+0F4h+var_DC], ebx
 0x7D22B9: mov     ecx, [esi+130h]
 0x7D22BF: push    offset off_A7D2CC
-0x7D22C4: call    NiObjectNET_GetExtraData
+0x7D22C4: call    NiObjectNET_GetExtraData; Native projection requests BBX extra data from the exact caster root at +0x130; the following retail path assumes the bound object is present.
 0x7D22C9: mov     ecx, [esi+130h]
 0x7D22CF: fld     dword ptr [ecx+88h]
-0x7D22D5: mov     edx, [eax+1Ch]
+0x7D22D5: mov     edx, [eax+1Ch]; [2026-10-03 14:22 CONFIRMED null bound] Targeted trace: caster1D6FAF18, vtableA3F944, name(00028F5E)->Daedroth(00028F5D), BBX resultEAX=0, readable0. FrondRecords=0, frondAttachments=0. Native MOV EDX,[EAX+1C] therefore dereferences001Ch. Earlier four caster samples returned valid BSBound vtableA7D2D4. Active form scan resolves base00028F5D TestCreatureGroveDaedroth to Creatures/Daedroth/Skeleton.NIF. Installed loose skeleton/body are converted Gamebryo20.0.0.5 files without BSBound/BBX bytes. Creature conversion repair is separate scope; no asset or shadow fallback changed by diagnostic.
 0x7D22D8: fadd    dword ptr [eax+0Ch]
 0x7D22DB: mov     [esp+0F4h+var_98], edx
 0x7D22DF: fstp    [esp+0F4h+var_54]
@@ -62,48 +62,48 @@
 0x7D2353: jmp     short loc_7D2359
 0x7D2355: fstp    st(1)
 0x7D2357: fstp    st(1)
-0x7D2359: mov     ebp, [esp+0F4h+arg_0]
+0x7D2359: mov     ebp, [esp+0F4h+self]
 0x7D2360: fstp    [esp+0F4h+var_D0]
 0x7D2364: xor     edi, edi
 0x7D2366: cmp     ebp, ebx
 0x7D2368: mov     [esp+0F4h+var_C0], ebx
 0x7D236C: mov     [esp+0F4h+var_BC], edi
 0x7D2370: jz      short loc_7D238B
-0x7D2372: mov     ecx, ebp
-0x7D2374: call    sub_7ED1A0
-0x7D2379: mov     ecx, ebp
+0x7D2372: mov     ecx, ebp; self
+0x7D2374: call    BSShaderLightingProperty__GetFirstActiveNonShadowLight; Begins Oblivion BSShaderLightingProperty non-shadow-light iteration. Skips lights with frustum-cull value 0xFF or a disabled backing NiLight flag and stores the next list cursor in the property.
+0x7D2379: mov     ecx, ebp; this
 0x7D237B: mov     esi, eax
-0x7D237D: call    sub_7ED5D0
+0x7D237D: call    OB_BSShaderProperty_CountPassListEntriesWithMarker_010201A0; OBLIVION AUTHORITY (2026-08-24): Generic pass-list marker counter used by the SpeedTree leaf program selector. Walks property+0x70 entries and counts nonnull shader objects whose word at +0x118 is not 0x00FF. It does not test ShadowSceneLight disabled byte +0xF4. Result selects point-light shader program bit; it is not a leaf layer/card/LOD index.
 0x7D2382: movzx   edi, ax
 0x7D2385: mov     [esp+0F4h+var_BC], edi
 0x7D2389: jmp     short loc_7D23DB
-0x7D238B: push    ebx
+0x7D238B: push    ebx; index
 0x7D238C: push    ebx
 0x7D238D: call    GetShadowSceneNode
 0x7D2392: add     esp, 4
-0x7D2395: mov     ecx, eax
-0x7D2397: call    sub_7C62D0
+0x7D2395: mov     ecx, eax; light
+0x7D2397: call    ShadowSceneLight_GetObjectGeometryAtIndex
 0x7D239C: cmp     eax, ebx
 0x7D239E: jz      short loc_7D23C4
 0x7D23A0: cmp     [eax+0F4h], bl
 0x7D23A6: jnz     short loc_7D23AB
 0x7D23A8: add     edi, 1
-0x7D23AB: push    edi
+0x7D23AB: push    edi; index
 0x7D23AC: push    ebx
 0x7D23AD: call    GetShadowSceneNode
 0x7D23B2: add     esp, 4
-0x7D23B5: mov     ecx, eax
-0x7D23B7: call    sub_7C62D0
+0x7D23B5: mov     ecx, eax; light
+0x7D23B7: call    ShadowSceneLight_GetObjectGeometryAtIndex
 0x7D23BC: cmp     eax, ebx
 0x7D23BE: jnz     short loc_7D23A0
 0x7D23C0: mov     [esp+0F4h+var_BC], edi
-0x7D23C4: push    ebx
+0x7D23C4: push    ebx; index
 0x7D23C5: push    ebx
 0x7D23C6: mov     [esp+0FCh+var_C0], ebx
 0x7D23CA: call    GetShadowSceneNode
 0x7D23CF: add     esp, 4
-0x7D23D2: mov     ecx, eax
-0x7D23D4: call    sub_7C62D0
+0x7D23D2: mov     ecx, eax; light
+0x7D23D4: call    ShadowSceneLight_GetObjectGeometryAtIndex
 0x7D23D9: mov     esi, eax
 0x7D23DB: cmp     edi, 28h ; '('
 0x7D23DE: jl      short loc_7D23E9
@@ -120,7 +120,7 @@
 0x7D2409: lea     ecx, [esp+0F4h+var_14]
 0x7D2410: push    ecx
 0x7D2411: mov     ecx, esi
-0x7D2413: call    sub_405AD0
+0x7D2413: call    ShadowSceneLight_GetLightRef
 0x7D2418: mov     eax, [eax]
 0x7D241A: fld     dword ptr [eax+88h]
 0x7D2420: fsub    [esp+0F4h+var_54]
@@ -150,7 +150,7 @@
 0x7D2475: lea     ecx, [esp+0F4h+var_60]
 0x7D247C: push    ecx
 0x7D247D: mov     ecx, esi
-0x7D247F: call    sub_405AD0
+0x7D247F: call    ShadowSceneLight_GetLightRef
 0x7D2484: mov     edi, eax
 0x7D2486: fld     [esp+0F4h+var_DC]
 0x7D248A: fld     [esp+0F4h+var_10]
@@ -185,7 +185,7 @@
 0x7D24F2: lea     edx, [esp+0F4h+var_80]
 0x7D24F6: push    edx
 0x7D24F7: mov     ecx, esi
-0x7D24F9: call    sub_405AD0
+0x7D24F9: call    ShadowSceneLight_GetLightRef
 0x7D24FE: mov     edi, eax
 0x7D2500: fld     [esp+0F4h+var_DC]
 0x7D2504: fstp    [esp+0F4h+var_E0]
@@ -212,7 +212,7 @@
 0x7D254F: lea     eax, [esp+0F4h+var_58]
 0x7D2556: push    eax
 0x7D2557: mov     ecx, esi
-0x7D2559: call    sub_405AD0
+0x7D2559: call    ShadowSceneLight_GetLightRef
 0x7D255E: mov     edi, eax
 0x7D2560: fld     [esp+0F4h+var_DC]
 0x7D2564: fstp    [esp+0F4h+var_E0]
@@ -239,7 +239,7 @@
 0x7D25B0: fstp    st
 0x7D25B2: push    ecx
 0x7D25B3: mov     ecx, esi
-0x7D25B5: call    sub_405AD0
+0x7D25B5: call    ShadowSceneLight_GetLightRef
 0x7D25BA: fld     [esp+0F4h+var_DC]
 0x7D25BE: fstp    [esp+0F4h+var_E0]
 0x7D25C2: mov     esi, eax
@@ -340,27 +340,27 @@
 0x7D26D4: fst     dword ptr ds:0B45C30h[eax*4]
 0x7D26DB: fadd    [esp+0F4h+var_90]
 0x7D26DF: fstp    [esp+0F4h+var_90]
-0x7D26E3: cmp     [esp+0F4h+arg_0], 0
+0x7D26E3: cmp     [esp+0F4h+self], 0
 0x7D26EB: jz      short loc_7D26FB
-0x7D26ED: mov     ecx, [esp+0F4h+arg_0]
-0x7D26F4: call    sub_7ED3B0
+0x7D26ED: mov     ecx, [esp+0F4h+self]; self
+0x7D26F4: call    BSShaderLightingProperty__GetNextActiveNonShadowLight; Continues Oblivion BSShaderLightingProperty non-shadow-light iteration using the stored cursor and the same cull/backing-light eligibility filter. Fallout later adds an explicit cast-shadow exclusion absent here.
 0x7D26F9: jmp     short loc_7D2718
 0x7D26FB: mov     eax, [esp+0F4h+var_C0]
 0x7D26FF: add     eax, 1
-0x7D2702: push    eax
+0x7D2702: push    eax; index
 0x7D2703: push    0
 0x7D2705: mov     [esp+0FCh+var_C0], eax
 0x7D2709: call    GetShadowSceneNode
 0x7D270E: add     esp, 4
-0x7D2711: mov     ecx, eax
-0x7D2713: call    sub_7C62D0
+0x7D2711: mov     ecx, eax; light
+0x7D2713: call    ShadowSceneLight_GetObjectGeometryAtIndex
 0x7D2718: mov     esi, eax
 0x7D271A: mov     eax, [esp+0F4h+var_D8]
 0x7D271E: add     eax, 1
 0x7D2721: cmp     eax, edi
 0x7D2723: mov     [esp+0F4h+var_D8], eax
 0x7D2727: jl      loc_7D2401
-0x7D272D: cmp     [esp+0F4h+arg_0], 0
+0x7D272D: cmp     [esp+0F4h+self], 0
 0x7D2735: fldz
 0x7D2737: mov     ecx, ds:0B3F9A8h
 0x7D273D: fstp    [esp+0F4h+var_D8]
@@ -376,16 +376,16 @@
 0x7D276D: mov     [esp+0F4h+var_A4], edx
 0x7D2771: mov     [esp+0F4h+var_A0], eax
 0x7D2775: jz      short loc_7D2785
-0x7D2777: mov     ecx, [esp+0F4h+arg_0]
-0x7D277E: call    sub_7ED1A0
+0x7D2777: mov     ecx, [esp+0F4h+self]; self
+0x7D277E: call    BSShaderLightingProperty__GetFirstActiveNonShadowLight; Begins Oblivion BSShaderLightingProperty non-shadow-light iteration. Skips lights with frustum-cull value 0xFF or a disabled backing NiLight flag and stores the next list cursor in the property.
 0x7D2783: jmp     short loc_7D27A0
-0x7D2785: push    0
+0x7D2785: push    0; index
 0x7D2787: push    0
 0x7D2789: mov     [esp+0FCh+var_C0], 0
 0x7D2791: call    GetShadowSceneNode
 0x7D2796: add     esp, 4
-0x7D2799: mov     ecx, eax
-0x7D279B: call    sub_7C62D0
+0x7D2799: mov     ecx, eax; light
+0x7D279B: call    ShadowSceneLight_GetObjectGeometryAtIndex
 0x7D27A0: push    0
 0x7D27A2: mov     edi, eax
 0x7D27A4: call    GetShadowSceneNode
@@ -393,7 +393,7 @@
 0x7D27AC: lea     ecx, [esp+0F4h+var_60]
 0x7D27B3: push    ecx
 0x7D27B4: mov     ecx, [eax+118h]
-0x7D27BA: call    sub_405AD0
+0x7D27BA: call    ShadowSceneLight_GetLightRef
 0x7D27BF: mov     ebx, [eax]
 0x7D27C1: mov     eax, [esp+0F4h+var_60]
 0x7D27C8: test    eax, eax
@@ -421,7 +421,7 @@
 0x7D280B: fld     dword ptr [ebx+110h]
 0x7D2811: fchs
 0x7D2813: fstp    [esp+0F4h+var_30]
-0x7D281A: call    sub_43F350
+0x7D281A: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x7D281F: fstp    st
 0x7D2821: fldz
 0x7D2823: fcomp   [esp+0F4h+var_90]
@@ -457,7 +457,7 @@
 0x7D28A6: lea     ecx, [esp+0F4h+var_80]
 0x7D28AA: push    ecx
 0x7D28AB: mov     ecx, edi
-0x7D28AD: call    sub_405AD0
+0x7D28AD: call    ShadowSceneLight_GetLightRef
 0x7D28B2: mov     edx, [eax]
 0x7D28B4: fld     dword ptr [edx+0F8h]
 0x7D28BA: mov     eax, [esp+0F4h+var_80]
@@ -488,7 +488,7 @@
 0x7D2907: lea     eax, [esp+0F4h+var_58]
 0x7D290E: push    eax
 0x7D290F: mov     ecx, edi
-0x7D2911: call    sub_405AD0
+0x7D2911: call    ShadowSceneLight_GetLightRef
 0x7D2916: mov     eax, [eax]
 0x7D2918: fld     dword ptr [eax+88h]
 0x7D291E: add     eax, 88h ; 'ˆ'
@@ -517,7 +517,7 @@
 0x7D2979: mov     ecx, ebp
 0x7D297B: call    eax
 0x7D297D: lea     ecx, [esp+0F4h+var_2C]
-0x7D2984: call    sub_43F350
+0x7D2984: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x7D2989: fstp    st
 0x7D298B: fld     dword ptr ds:0B45C30h[esi*4]
 0x7D2992: fld1
@@ -581,7 +581,7 @@
 0x7D2AA3: fld     [esp+0F8h+var_C4]
 0x7D2AA7: fadd    [esp+0F8h+var_B0]
 0x7D2AAB: fstp    [esp+0F8h+var_B0]
-0x7D2AAF: call    sub_405AD0
+0x7D2AAF: call    ShadowSceneLight_GetLightRef
 0x7D2AB4: fld     dword ptr ds:0B45C30h[esi*4]
 0x7D2ABB: mov     edx, [ebx+0ECh]
 0x7D2AC1: fld1
@@ -680,26 +680,26 @@
 0x7D2C61: push    1
 0x7D2C63: mov     ecx, edi
 0x7D2C65: call    eax
-0x7D2C67: mov     ecx, [esp+0F4h+arg_0]
+0x7D2C67: mov     ecx, [esp+0F4h+self]; self
 0x7D2C6E: test    ecx, ecx
 0x7D2C70: jz      short loc_7D2C79
-0x7D2C72: call    sub_7ED3B0
+0x7D2C72: call    BSShaderLightingProperty__GetNextActiveNonShadowLight; Continues Oblivion BSShaderLightingProperty non-shadow-light iteration using the stored cursor and the same cull/backing-light eligibility filter. Fallout later adds an explicit cast-shadow exclusion absent here.
 0x7D2C77: jmp     short loc_7D2C96
 0x7D2C79: mov     eax, [esp+0F4h+var_C0]
 0x7D2C7D: add     eax, 1
-0x7D2C80: push    eax
+0x7D2C80: push    eax; index
 0x7D2C81: push    0
 0x7D2C83: mov     [esp+0FCh+var_C0], eax
 0x7D2C87: call    GetShadowSceneNode
 0x7D2C8C: add     esp, 4
-0x7D2C8F: mov     ecx, eax
-0x7D2C91: call    sub_7C62D0
+0x7D2C8F: mov     ecx, eax; light
+0x7D2C91: call    ShadowSceneLight_GetObjectGeometryAtIndex
 0x7D2C96: add     esi, 1
 0x7D2C99: cmp     esi, [esp+0F4h+var_BC]
 0x7D2C9D: mov     edi, eax
 0x7D2C9F: jl      loc_7D287E
 0x7D2CA5: lea     ecx, [esp+0F4h+var_B8]
-0x7D2CA9: call    sub_43F350
+0x7D2CA9: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x7D2CAE: fstp    st
 0x7D2CB0: fld     [esp+0F4h+var_B0]
 0x7D2CB4: fld     qword ptr ds:0A31C70h
@@ -712,25 +712,25 @@
 0x7D2CC7: fstp    st
 0x7D2CC9: lea     ecx, [esp+0F4h+var_B8]
 0x7D2CCD: fstp    [esp+0F4h+var_B0]
-0x7D2CD1: call    sub_43F350
+0x7D2CD1: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x7D2CD6: fstp    st
 0x7D2CD8: mov     esi, [esp+0F4h+var_AC]
 0x7D2CDC: mov     ecx, [esi+130h]
-0x7D2CE2: fld     dword ptr [ecx+94h]
-0x7D2CE8: fmul    [esp+0F4h+var_D0]
-0x7D2CEC: fld     qword ptr ds:0A3B1B8h
+0x7D2CE2: fld     dword ptr [ecx+94h]; Load source world scale for the BBX maximum-extent calculation.
+0x7D2CE8: fmul    [esp+0F4h+var_D0]; Begin scaled maximum BBX-extent calculation.
+0x7D2CEC: fld     qword ptr ds:0A3B1B8h; Load the retail maximum projected extent constant 256.0.
 0x7D2CF2: fcom    st(1)
 0x7D2CF4: fnstsw  ax
 0x7D2CF6: test    ah, 5
 0x7D2CF9: jp      short loc_7D2CFF
-0x7D2CFB: fstp    st(1)
+0x7D2CFB: fstp    st(1); Clamp the scaled maximum BBX extent to 256.
 0x7D2CFD: jmp     short loc_7D2D01
-0x7D2CFF: fstp    st
+0x7D2CFF: fstp    st; Finish capped extent e = min(max(BBX extents) * source world scale, 256).
 0x7D2D01: fmul    qword ptr ds:0A38618h
 0x7D2D07: mov     eax, [esi+100h]
 0x7D2D0D: add     eax, 54h ; 'T'
 0x7D2D10: mov     edi, 1
-0x7D2D15: fstp    [esp+0F4h+var_AC]
+0x7D2D15: fstp    [esp+0F4h+var_AC]; Compute projector offset as capped extent multiplied by 2.5.
 0x7D2D19: push    edi; a3
 0x7D2D1A: fld     dword ptr [esp+0F8h+var_B8]
 0x7D2D1E: fld     [esp+0F8h+var_AC]
@@ -749,23 +749,23 @@
 0x7D2D4B: fstp    [esp+0F8h+var_50]
 0x7D2D52: mov     edx, [esp+0F8h+var_50]
 0x7D2D59: fld     [esp+0F8h+var_C8]
-0x7D2D5D: mov     [eax], edx
+0x7D2D5D: mov     [eax], edx; Commit backing projector branch local X translation; Y/Z follow at 0x007D2D78/0x007D2D91.
 0x7D2D5F: fadd    [esp+0F8h+var_5C]
 0x7D2D66: fstp    [esp+0F8h+var_4C]
 0x7D2D6D: mov     ecx, [esp+0F8h+var_4C]
 0x7D2D74: fld     [esp+0F8h+var_C4]
-0x7D2D78: mov     [eax+4], ecx
+0x7D2D78: mov     [eax+4], ecx; Commit backing projector branch local Y translation.
 0x7D2D7B: fadd    [esp+0F8h+var_64]
 0x7D2D82: push    ecx
 0x7D2D83: fstp    [esp+0FCh+var_48]
 0x7D2D8A: mov     edx, [esp+0FCh+var_48]
-0x7D2D91: mov     [eax+8], edx
-0x7D2D94: fmul    qword ptr ds:0A3F3A0h
+0x7D2D91: mov     [eax+8], edx; Commit backing projector branch local Z translation.
+0x7D2D94: fmul    qword ptr ds:0A3F3A0h; Compute backing point-light range from projector offset: range = 6 * offset = 15 * capped extent.
 0x7D2D9A: mov     ecx, [esi+100h]; this
-0x7D2DA0: fstp    [esp+0FCh+var_D8]
+0x7D2DA0: fstp    [esp+0FCh+var_D8]; Compute projector range as offset multiplied by 6; with the 256 extent cap, native maximum is 3840.
 0x7D2DA4: fldz
 0x7D2DA6: fstp    [esp+0FCh+a2]; a2
-0x7D2DA9: call    NiAVObject_UpdateNiAVObject
+0x7D2DA9: call    NiAVObject_UpdateNiAVObject; Update the backing NiAVObject after committing projector translation.
 0x7D2DAE: fld     [esp+0F4h+var_A4]
 0x7D2DB2: fld     qword ptr ds:0A91270h
 0x7D2DB8: fmul    st(1), st
@@ -796,24 +796,24 @@
 0x7D2E0A: mov     ecx, [esp+0F4h+var_CC]
 0x7D2E0E: fst     [esp+0F4h+var_C8]
 0x7D2E12: mov     edx, [esp+0F4h+var_C8]
-0x7D2E16: mov     [eax+0ECh], ecx
+0x7D2E16: mov     [eax+0ECh], ecx; Commit native backing-light attenuation component.
 0x7D2E1C: fstp    [esp+0F4h+var_C4]
 0x7D2E20: mov     ecx, [esp+0F4h+var_C4]
 0x7D2E24: fld     [esp+0F4h+var_D8]
-0x7D2E28: mov     [eax+0F0h], edx
+0x7D2E28: mov     [eax+0F0h], edx; Commit native backing-light attenuation component.
 0x7D2E2E: fstp    [esp+0F4h+var_CC]
 0x7D2E32: fldz
 0x7D2E34: mov     edx, [esp+0F4h+var_CC]
-0x7D2E38: mov     [eax+0F4h], ecx
+0x7D2E38: mov     [eax+0F4h], ecx; Commit native backing-light attenuation component.
 0x7D2E3E: fst     [esp+0F4h+var_C8]
 0x7D2E42: mov     eax, [esi+100h]
 0x7D2E48: fstp    [esp+0F4h+var_C4]
 0x7D2E4C: mov     ecx, [esp+0F4h+var_C8]
 0x7D2E50: add     [eax+0B8h], edi
-0x7D2E56: mov     [eax+0F8h], edx
+0x7D2E56: mov     [eax+0F8h], edx; Commit computed projector range to backing NiPointLight+0xF8.
 0x7D2E5C: mov     edx, [esp+0F4h+var_C4]
-0x7D2E60: mov     [eax+0FCh], ecx
-0x7D2E66: mov     [eax+100h], edx
+0x7D2E60: mov     [eax+0FCh], ecx; Zero backing light field +0xFC on the sole normal projection path.
+0x7D2E66: mov     [eax+100h], edx; Zero backing light field +0x100 on the sole normal projection path.
 0x7D2E6C: mov     ecx, [esp+0F4h+var_C]
 0x7D2E73: mov     large fs:0, ecx
 0x7D2E7A: pop     ecx
@@ -822,7 +822,7 @@
 0x7D2E7D: pop     ebp
 0x7D2E7E: pop     ebx
 0x7D2E7F: add     esp, 0E0h
-0x7D2E85: retn    10h
+0x7D2E85: retn    10h; Sole normal projector return; stdcall-style RET 0x10.
 0x7D2E88: fstp    st
 0x7D2E8A: fcom    st(1)
 0x7D2E8C: fnstsw  ax
@@ -830,3 +830,26 @@
 0x7D2E91: jnz     loc_7D2DF0
 0x7D2E97: fstp    st(1)
 0x7D2E99: jmp     loc_7D2DF2
+0x9CEA50: lea     ecx, [ebp-60h]; slot
+0x9CEA53: jmp     NiPointerSlot_Release
+0x9CEA58: mov     eax, [ebp-0DCh]
+0x9CEA5E: and     eax, 1
+0x9CEA61: jz      locret_9CEA76
+0x9CEA67: and     dword ptr [ebp-0DCh], 0FFFFFFFEh
+0x9CEA6E: lea     ecx, [ebp-80h]; slot
+0x9CEA71: jmp     NiPointerSlot_Release
+0x9CEA76: retn
+0x9CEA77: mov     eax, [ebp-0DCh]
+0x9CEA7D: and     eax, 2
+0x9CEA80: jz      locret_9CEA95
+0x9CEA86: and     dword ptr [ebp-0DCh], 0FFFFFFFDh
+0x9CEA8D: lea     ecx, [ebp-58h]; slot
+0x9CEA90: jmp     NiPointerSlot_Release
+0x9CEA95: retn
+0x9CEA96: mov     edx, [esp+arg_4]
+0x9CEA9A: lea     eax, [edx-0E4h]
+0x9CEAA0: mov     ecx, [edx-0E8h]
+0x9CEAA6: xor     ecx, eax
+0x9CEAA8: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CEAAD: mov     eax, offset stru_AF7958
+0x9CEAB2: jmp     ___CxxFrameHandler3

@@ -22,21 +22,21 @@
 0x4DCAF9: jnz     short loc_4DCB22
 0x4DCAFB: test    esi, esi
 0x4DCAFD: jz      short loc_4DCB0C
-0x4DCAFF: mov     ecx, esi
-0x4DCB01: call    sub_478E30
-0x4DCB06: mov     ecx, ds:0B333C4h
+0x4DCAFF: mov     ecx, esi; this
+0x4DCB01: call    ActorSkinInfo_ClearLightSlot; Clear ActorSkinInfo light equipment slot at +0x12C; called by native UnequipLight handling.
+0x4DCB06: mov     ecx, ds:0B333C4h; this
 0x4DCB0C: mov     al, [ecx+588h]
-0x4DCB12: mov     byte ptr [esp+14h+var_4], al
-0x4DCB16: mov     edx, [esp+14h+var_4]
-0x4DCB1A: push    edx
-0x4DCB1B: call    sub_6600D0
+0x4DCB12: mov     [esp+14h+firstPerson], al
+0x4DCB16: mov     edx, dword ptr [esp+14h+firstPerson]
+0x4DCB1A: push    edx; firstPerson
+0x4DCB1B: call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.
 0x4DCB20: mov     esi, eax
 0x4DCB22: test    esi, esi
 0x4DCB24: push    ebx
 0x4DCB25: push    edi
 0x4DCB26: jz      short loc_4DCB34
-0x4DCB28: mov     ecx, esi
-0x4DCB2A: call    sub_478E30
+0x4DCB28: mov     ecx, esi; this
+0x4DCB2A: call    ActorSkinInfo_ClearLightSlot; Clear ActorSkinInfo light equipment slot at +0x12C; called by native UnequipLight handling.
 0x4DCB2F: jmp     loc_4DCC72
 0x4DCB34: mov     eax, ds:0B06570h
 0x4DCB39: mov     edx, [ebp+0]
@@ -49,7 +49,7 @@
 0x4DCB4D: mov     edi, eax
 0x4DCB4F: add     esp, 8
 0x4DCB52: test    edi, edi
-0x4DCB54: mov     [esp+1Ch+var_4], edi
+0x4DCB54: mov     dword ptr [esp+1Ch+firstPerson], edi
 0x4DCB58: mov     [esp+1Ch+var_A], 0
 0x4DCB5D: mov     [esp+1Ch+var_9], 0
 0x4DCB62: jz      loc_4DCC59
@@ -88,7 +88,7 @@
 0x4DCBC6: add     edx, 1
 0x4DCBC9: cmp     ebp, edx
 0x4DCBCB: ja      short loc_4DCB9B
-0x4DCBCD: mov     edi, [esp+1Ch+var_4]
+0x4DCBCD: mov     edi, dword ptr [esp+1Ch+firstPerson]
 0x4DCBD1: mov     ebp, [esp+1Ch+var_8]
 0x4DCBD5: lea     ecx, [ebp+44h]; this
 0x4DCBD8: call    ExtraDataList_GetContainerChanges
@@ -125,39 +125,39 @@
 0x4DCC30: mov     ecx, esi
 0x4DCC32: call    ContainerEntryExtraData_DestroyDataTable
 0x4DCC37: push    esi
-0x4DCC38: call    FormHeapFree
+0x4DCC38: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4DCC3D: add     esp, 4
 0x4DCC40: test    ebx, ebx
 0x4DCC42: jz      short loc_4DCC60
 0x4DCC44: cmp     [esp+1Ch+var_9], 0
 0x4DCC49: jnz     short loc_4DCC72
-0x4DCC4B: lea     ecx, [ebx+0ACh]
-0x4DCC51: call    sub_477EF0
+0x4DCC4B: lea     ecx, [ebx+0ACh]; this
+0x4DCC51: call    NiTObjectArray_ClearAndRelease; Clears a ref-counted NiT object-pointer array: releases every non-null element, nulls entries, and resets end/count words to zero. At bow release it is invoked on ArrowBone+0xAC, thereby releasing all ArrowBone children including the held Arrow:0 clone.
 0x4DCC56: push    ebx
 0x4DCC57: jmp     short loc_4DCC61
 0x4DCC59: xor     ebx, ebx
 0x4DCC5B: jmp     loc_4DCBD5
-0x4DCC60: push    edi
+0x4DCC60: push    edi; object
 0x4DCC61: push    0
 0x4DCC63: call    GetShadowSceneNode
 0x4DCC68: add     esp, 4
-0x4DCC6B: mov     ecx, eax
-0x4DCC6D: call    sub_7C5E70
+0x4DCC6B: mov     ecx, eax; this
+0x4DCC6D: call    ShadowSceneNode_RemoveObjectReceivers; Removes an object's geometry from shadow-light receiver lists under the shadow-scene critical section. It obtains the object's node/container through virtual +0x08 and recurses; it does not detach the object from its parent or clear NiNode children.
 0x4DCC72: lea     ebx, [ebp+44h]
 0x4DCC75: mov     ecx, ebx
-0x4DCC77: call    sub_41E650
+0x4DCC77: call    ExtraDataList_GetLight; Returns the REFR_LIGHT payload from ExtraLight type 0x30; heavily used by TESObjectREF lighting and equipped-light paths.
 0x4DCC7C: mov     edi, eax
 0x4DCC7E: test    edi, edi
 0x4DCC80: jz      short loc_4DCCC9
 0x4DCC82: mov     eax, [edi]
 0x4DCC84: test    eax, eax
 0x4DCC86: jz      short loc_4DCCC2
-0x4DCC88: push    eax
+0x4DCC88: push    eax; backingLight
 0x4DCC89: push    0
 0x4DCC8B: call    GetShadowSceneNode
 0x4DCC90: add     esp, 4
-0x4DCC93: mov     ecx, eax
-0x4DCC95: call    sub_7C7DC0
+0x4DCC93: mov     ecx, eax; self
+0x4DCC95: call    ShadowSceneNode_RemoveFullLightBySource; Find a native full-list ShadowSceneLight whose backing NiLight identity equals the supplied source, then remove that entry.
 0x4DCC9A: mov     esi, [edi]
 0x4DCC9C: test    esi, esi
 0x4DCC9E: jz      short loc_4DCCC2
@@ -174,8 +174,8 @@
 0x4DCCB8: mov     ecx, esi
 0x4DCCBA: call    eax
 0x4DCCBC: mov     dword ptr [edi], 0
-0x4DCCC2: mov     ecx, ebx
-0x4DCCC4: call    sub_41F5B0
+0x4DCCC2: mov     ecx, ebx; self
+0x4DCCC4: call    ExtraDataList_RemoveExtraLight; Remove ordinary attached-light extra-data type 0x30 from this reference extra-data list.
 0x4DCCC9: mov     ecx, [ebp+58h]
 0x4DCCCC: mov     edx, [ecx]
 0x4DCCCE: mov     eax, [edx+344h]

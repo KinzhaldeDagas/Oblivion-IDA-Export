@@ -28,3 +28,12 @@
 0x7339B0: pop     esi
 0x7339B1: add     esp, 10h
 0x7339B4: retn
+0x9CA980: mov     ecx, [ebp-10h]
+0x9CA983: jmp     loc_733860
+0x9CA988: mov     edx, [esp+arg_4]
+0x9CA98C: lea     eax, [edx-8]
+0x9CA98F: mov     ecx, [edx-0Ch]
+0x9CA992: xor     ecx, eax
+0x9CA994: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA999: mov     eax, offset stru_AF300C
+0x9CA99E: jmp     ___CxxFrameHandler3

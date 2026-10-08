@@ -1,4 +1,4 @@
-BSStringT *sub_A0F510()
+NiRTTI *sub_A0F510()
 {
-  return sub_70E220((BSStringT *)dword_B41A28, "NiPSysBombModifier", (int)dword_B40D08);
+  return NiRTTI_Constructor(&stru_B41A28, "NiPSysBombModifier", &stru_B40D08); /*0xa0f524*/
 }

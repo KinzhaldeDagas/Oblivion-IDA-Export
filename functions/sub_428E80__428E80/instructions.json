@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x428E80",
-    "line": "mov     eax, [ecx+0Ch]",
+    "line": "mov     eax, [ecx+0Ch]; Verified: sets only ExtraLockData.flags bit 0x01 (Locked), preserving bit 0x02. LockEffect_Apply first writes bit 0x02, then calls the self/linked-door locked setter to produce flags 0x03.",
     "mnemonic": "mov",
     "size": 3
   },

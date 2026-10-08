@@ -1,1 +1,1 @@
-IConnectionPointVtbl_0
+typedef IConnectionPointVtbl IConnectionPointVtbl_0;

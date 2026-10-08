@@ -29,7 +29,6 @@
 0x4C1532: cmp     [esi+26h], cx
 0x4C1536: jbe     short loc_4C1552
 0x4C1538: jmp     short loc_4C1540
-0x4C153A: align 10h
 0x4C1540: mov     edi, [esi+20h]
 0x4C1543: movzx   edx, ax
 0x4C1546: add     eax, 1
@@ -47,3 +46,12 @@
 0x4C156C: pop     esi
 0x4C156D: add     esp, 10h
 0x4C1570: retn    4
+0x9CA4B0: mov     ecx, [ebp-10h]
+0x9CA4B3: jmp     NiRefObject_destr
+0x9CA4B8: mov     edx, [esp+arg_4]
+0x9CA4BC: lea     eax, [edx-0Ch]
+0x9CA4BF: mov     ecx, [edx-10h]
+0x9CA4C2: xor     ecx, eax
+0x9CA4C4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA4C9: mov     eax, offset stru_AF2BA8
+0x9CA4CE: jmp     ___CxxFrameHandler3

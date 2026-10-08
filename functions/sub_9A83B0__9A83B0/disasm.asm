@@ -1,5 +1,5 @@
 0x9A83B0: push    ecx
-0x9A83B1: cmp     byte_B4295C, 0
+0x9A83B1: cmp     byte ptr unk_B4295C, 0
 0x9A83B8: push    ebx
 0x9A83B9: push    ebp
 0x9A83BA: push    esi

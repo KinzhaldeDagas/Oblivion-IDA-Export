@@ -1,4 +1,4 @@
-0x4BDE80: push    0FFFFFFFFh
+0x4BDE80: push    0FFFFFFFFh; Verified duplicate-cell check: packs exterior coordinates and performs GetAt through map vtable +0x04. Releases the temporary task smart pointer and returns whether that cell already has a DistantLODLoaderTask.
 0x4BDE82: push    offset SEH_4BDE80
 0x4BDE87: mov     eax, large fs:0
 0x4BDE8D: push    eax
@@ -10,23 +10,23 @@
 0x4BDE98: lea     eax, [esp+18h+var_C]
 0x4BDE9C: mov     large fs:0, eax
 0x4BDEA2: mov     esi, ecx
-0x4BDEA4: mov     eax, [esp+18h+arg_4]
-0x4BDEA8: mov     ecx, [esp+18h+arg_0]
-0x4BDEAC: push    eax
-0x4BDEAD: push    ecx
-0x4BDEAE: call    sub_4EF1D0
+0x4BDEA4: mov     eax, dword ptr [esp+18h+group_y]
+0x4BDEA8: mov     ecx, dword ptr [esp+18h+group_x]
+0x4BDEAC: push    eax; group_y
+0x4BDEAD: push    ecx; group_x
+0x4BDEAE: call    TESObjectCELL_PackExteriorGroupLabel; Verified exact key encoding used by the DistantLOD cell model map: packed label = (signed cellX << 16) | unsigned cellY.
 0x4BDEB3: add     esp, 8
-0x4BDEB6: mov     [esp+18h+arg_4], 0
+0x4BDEB6: mov     dword ptr [esp+18h+group_y], 0
 0x4BDEBE: mov     edx, [esi]
 0x4BDEC0: mov     edx, [edx+4]
-0x4BDEC3: lea     ecx, [esp+18h+arg_4]
+0x4BDEC3: lea     ecx, [esp+18h+group_y]
 0x4BDEC7: push    ecx
 0x4BDEC8: push    eax
 0x4BDEC9: mov     ecx, esi
 0x4BDECB: mov     [esp+20h+var_4], 0
 0x4BDED3: call    edx
 0x4BDED5: mov     bl, al
-0x4BDED7: mov     eax, [esp+18h+arg_4]
+0x4BDED7: mov     eax, dword ptr [esp+18h+group_y]
 0x4BDEDB: test    eax, eax
 0x4BDEDD: mov     [esp+18h+var_4], 0FFFFFFFFh
 0x4BDEE5: jz      short loc_4BDF05
@@ -51,3 +51,12 @@
 0x4BDF14: pop     ebx
 0x4BDF15: add     esp, 0Ch
 0x4BDF18: retn    8
+0x9B4470: lea     ecx, [ebp+8]; void *
+0x9B4473: jmp     sub_4BDDC0
+0x9B4478: mov     edx, dword ptr [esp+group_y]
+0x9B447C: lea     eax, [edx-8]
+0x9B447F: mov     ecx, [edx-0Ch]
+0x9B4482: xor     ecx, eax
+0x9B4484: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B4489: mov     eax, offset stru_ADFB38
+0x9B448E: jmp     ___CxxFrameHandler3

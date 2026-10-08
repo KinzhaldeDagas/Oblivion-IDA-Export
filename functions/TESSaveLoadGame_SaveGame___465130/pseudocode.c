@@ -21,11 +21,11 @@ double __userpurge TESSaveLoadGame_SaveGame_@<st0>(
   int v19; // ecx
   void (__cdecl *v20)(const char *, int *, int, int *, int); // ecx
   void (__cdecl *v21)(const char *, int *, int, int *, int); // edx
-  NiTMap_TESCELL *v22; // edx
-  UInt32 m_numBuckets; // ecx
-  UInt32 v24; // eax
-  NiTMap_Entry_TESCELL **m_buckets; // edi
-  NiTMap_Entry_TESCELL **v26; // edx
+  int v22; // edx
+  unsigned int v23; // ecx
+  unsigned int v24; // eax
+  _DWORD *v25; // edi
+  _DWORD *v26; // edx
   NiTMap_Entry_TESCELL *v27; // eax
   NiTMap_TESCELL *v28; // ecx
   UInt32 v29; // ecx
@@ -59,7 +59,7 @@ double __userpurge TESSaveLoadGame_SaveGame_@<st0>(
   void (__cdecl *v58)(const char *, int *, int, int *, int); // ecx
   unsigned int **v59; // ecx
   unsigned int v60; // edi
-  _DWORD *v61; // ebp
+  int *v61; // ebp
   int v62; // [esp-Ch] [ebp-78h]
   float duration; // [esp+0h] [ebp-6Ch]
   int v64; // [esp+4h] [ebp-68h]
@@ -88,351 +88,352 @@ double __userpurge TESSaveLoadGame_SaveGame_@<st0>(
   __int16 v87; // [esp+5Eh] [ebp-Eh]
   unsigned int v88; // [esp+68h] [ebp-4h]
 
-  v13 = a11;
-  if ( (*((_DWORD *)ecx0 + 6) & 0x200) != 0 || sub_452330((char)ecx0, a7, a8, result) || v13 && !strcmp(v13, "autosave") )
+  v13 = a11; /*0x46515c*/
+  if ( (*((_DWORD *)ecx0 + 6) & 0x200) != 0 || sub_452330((char)ecx0, a7, a8, result) || v13 && !strcmp(v13, "autosave") ) /*0x465182*/
   {
-    if ( dword_B3BF80 )
-      sub_683490((_DWORD *)dword_B3BF80);
-    sub_432860((volatile LONG *)ioManager);
-    NiTMap<unsigned int,NiTSimpleList<ExpiredCellData *> *>::NiTMap<unsigned int,NiTSimpleList<ExpiredCellData *> *>(
+    if ( LODWORD(qword_B3BB2C[0x115]) ) /*0x4651a5*/
+      sub_683490((LONG *)LODWORD(qword_B3BB2C[0x115])); /*0x4651b1*/
+    sub_432860((volatile LONG *)MEMORY[0xB33A10]); /*0x4651bc*/
+    NiTMap<unsigned int,NiTSimpleList<ExpiredCellData *> *>::NiTMap<unsigned int,NiTSimpleList<ExpiredCellData *> *>( /*0x4651c3*/
       ecx0,
-      a8);
-    v14 = 0;
-    if ( (*((_DWORD *)ecx0 + 6) & 0x200) == 0 )
-      v14 = Savegame_Rename(ecx0, result, a6, a7, a8, a5, a2, a3, a4, (int)data, v13, 0);
-    if ( (_BYTE)a12 )
+      a8,
+      a7);
+    v14 = 0; /*0x4651ce*/
+    if ( (*((_DWORD *)ecx0 + 6) & 0x200) == 0 ) /*0x4651d3*/
+      v14 = TESSaveLoadGame_ResolveSaveFile(ecx0, result, a6, a7, a8, a5, a2, a3, a4, (int)data, v13, 0);// Save path resolver call. CharacterSpecificSaves qualifies quicksave/autosave stems with the active character name and hash. /*0x4651e3*/
+    if ( (_BYTE)a12 ) /*0x4651ea*/
     {
-      v15 = (NiTPointerMap<unsigned char,BSSimpleList<LoadFormHeader *> *> **)FormHeapAlloc(8u);
-      a12 = (int)v15;
-      v88 = 0;
-      if ( v15 )
-        v16 = sub_45F0F0(v15);
+      v15 = (NiTPointerMap<unsigned char,BSSimpleList<LoadFormHeader *> *> **)FormHeapAlloc(8u); /*0x4651ee*/
+      a12 = (int)v15; /*0x4651f6*/
+      v88 = 0; /*0x4651fc*/
+      if ( v15 ) /*0x465200*/
+        v16 = sub_45F0F0(v15); /*0x465204*/
       else
-        v16 = 0;
-      v88 = 0xFFFFFFFF;
-      *((_DWORD *)ecx0 + 0x10) = v16;
+        v16 = 0; /*0x46520b*/
+      v88 = 0xFFFFFFFF; /*0x46520d*/
+      *((_DWORD *)ecx0 + 0x10) = v16; /*0x465215*/
     }
-    *((_BYTE *)ecx0 + 0x70) = 0;
-    *((_BYTE *)ecx0 + 0x71) = 0x7D;
-    *((_BYTE *)ecx0 + 0x7C) = 0x7D;
-    sub_464AB0((int)ecx0, a6, a7, a8, a5, a2, a3, a4, (int)v14, (int)v13);
-    sub_45C870(ecx0, (int)v14);
-    v18 = (*((_DWORD *)ecx0 + 6) & 0x200) != 0;
-    v17 = (*((_DWORD *)ecx0 + 6) & 0x200) == 0;
-    v66 = 0;
-    if ( v17 )
+    *((_BYTE *)ecx0 + 0x70) = 0; /*0x46521e*/
+    *((_BYTE *)ecx0 + 0x71) = 0x7D; /*0x465222*/
+    *((_BYTE *)ecx0 + 0x7C) = 0x7D; /*0x465225*/
+    sub_464AB0((int)ecx0, a6, a7, a8, a5, a2, a3, a4, (int)v14, (int)v13); /*0x465228*/
+    sub_45C870(ecx0, (int)v14); /*0x465230*/
+    v18 = (*((_DWORD *)ecx0 + 6) & 0x200) != 0; /*0x46523b*/
+    v17 = (*((_DWORD *)ecx0 + 6) & 0x200) == 0; /*0x46523b*/
+    v66 = 0; /*0x46523d*/
+    if ( v17 ) /*0x465241*/
     {
-      v19 = *((_DWORD *)v14 + 0xC);
-      if ( v19 == 0xFFFFFFFF )
-        v19 = *((_DWORD *)v14 + 0x52);
-      v66 = v19;
+      v19 = *((_DWORD *)v14 + 0xC); /*0x465243*/
+      if ( v19 == 0xFFFFFFFF ) /*0x465249*/
+        v19 = *((_DWORD *)v14 + 0x52); /*0x46524b*/
+      v66 = v19; /*0x465251*/
     }
-    v68 = 0;
-    if ( v18 )
+    v68 = 0; /*0x465257*/
+    if ( v18 ) /*0x46525b*/
     {
-      *((_DWORD *)ecx0 + 0x24) += 4;
-    }
-    else
-    {
-      v20 = *((void (__cdecl **)(const char *, int *, int, int *, int))v14 + 2);
-      a12 = 1;
-      v20(v14, &v68, 4, &a12, 1);
-    }
-    if ( (*((_DWORD *)ecx0 + 6) & 0x200) != 0 )
-    {
-      *((_DWORD *)ecx0 + 0x24) += 4;
+      *((_DWORD *)ecx0 + 0x24) += 4; /*0x46525d*/
     }
     else
     {
-      v21 = *((void (__cdecl **)(const char *, int *, int, int *, int))v14 + 2);
-      a12 = 1;
-      v21(v14, &v68, 4, &a12, 1);
+      v20 = *((void (__cdecl **)(const char *, int *, int, int *, int))v14 + 2); /*0x465266*/
+      a12 = 1; /*0x465278*/
+      v20(v14, &v68, 4, &a12, 1); /*0x465283*/
     }
-    sub_462280((int *)ecx0, a7, a8, result, (int)v14);
-    v22 = *(NiTMap_TESCELL **)ecx0;
-    v65 = 0;
-    m_numBuckets = v22->m_numBuckets;
-    v24 = 0;
-    if ( m_numBuckets )
+    if ( (*((_DWORD *)ecx0 + 6) & 0x200) != 0 ) /*0x465291*/
     {
-      m_buckets = v22->m_buckets;
-      v26 = m_buckets;
-      while ( !*v26 )
+      *((_DWORD *)ecx0 + 0x24) += 4; /*0x465293*/
+    }
+    else
+    {
+      v21 = *((void (__cdecl **)(const char *, int *, int, int *, int))v14 + 2); /*0x46529c*/
+      a12 = 1; /*0x4652ae*/
+      v21(v14, &v68, 4, &a12, 1); /*0x4652b9*/
+    }
+    sub_462280((int *)ecx0, a7, a8, result, (int)v14); /*0x4652c1*/
+    v22 = *(_DWORD *)ecx0; /*0x4652c6*/
+    v65 = 0; /*0x4652c9*/
+    v23 = *(_DWORD *)(v22 + 4); /*0x4652cd*/
+    v24 = 0; /*0x4652d0*/
+    if ( v23 ) /*0x4652d4*/
+    {
+      v25 = *(_DWORD **)(v22 + 8); /*0x4652d6*/
+      v26 = v25; /*0x4652d9*/
+      while ( !*v26 ) /*0x4652e3*/
       {
-        ++v24;
-        ++v26;
-        if ( v24 >= m_numBuckets )
-          goto LABEL_29;
+        ++v24; /*0x4652e9*/
+        ++v26; /*0x4652ec*/
+        if ( v24 >= v23 ) /*0x4652f1*/
+          goto LABEL_29; /*0x4652f1*/
       }
-      v27 = m_buckets[v24];
+      v27 = (NiTMap_Entry_TESCELL *)v25[v24]; /*0x46539b*/
     }
     else
     {
 LABEL_29:
-      v27 = 0;
+      v27 = 0; /*0x4652f5*/
     }
-    v71 = v27;
-    while ( v71 )
+    v71 = v27; /*0x4652f9*/
+    while ( v71 ) /*0x4652fd*/
     {
-      v28 = *(NiTMap_TESCELL **)ecx0;
-      v70 = 0;
-      a1 = 0;
-      sub_452600(v28, &v71, (void **)&a1, (TESObjectCELL **)&v70);
-      v29 = a1;
-      if ( a1 )
+      v28 = *(NiTMap_TESCELL **)ecx0; /*0x46530d*/
+      v70 = 0; /*0x465317*/
+      a1 = 0; /*0x46531b*/
+      NiTMap_U32Pointer_GetNextEntry(v28, &v71, (void **)&a1, (TESObjectCELL **)&v70); /*0x46531f*/
+      v29 = a1; /*0x465324*/
+      if ( a1 ) /*0x46532a*/
       {
-        v30 = (unsigned int *)v70;
-        if ( v70 )
+        v30 = (unsigned int *)v70; /*0x465330*/
+        if ( v70 ) /*0x465336*/
         {
-          v31 = *(_DWORD *)(v70 + 4);
-          *((_DWORD *)ecx0 + 5) = v31;
-          v76 = *v30;
-          v32 = *((_BYTE *)ecx0 + 0x7C);
-          v74 = v29;
-          v77 = v32;
-          if ( v31 )
+          v31 = *(_DWORD *)(v70 + 4); /*0x46533c*/
+          *((_DWORD *)ecx0 + 5) = v31; /*0x465341*/
+          v76 = *v30; /*0x465346*/
+          v32 = *((_BYTE *)ecx0 + 0x7C); /*0x46534a*/
+          v74 = v29; /*0x46534d*/
+          v77 = v32; /*0x465351*/
+          if ( v31 ) /*0x465355*/
           {
-            v33 = SaveLoad_CurrentSavegame;
-            data = *(Data **)SaveLoad_CurrentSavegame->unk000[5];
-            v33->unk000[5] += 4;
-            type = BYTE2(data);
-            v34 = SaveLoad_CurrentSavegame;
-            v77 = HIBYTE(data);
-            if ( (v34->flags & 0x200) != 0 )
+            v33 = g_TESSaveLoadGame; /*0x46535b*/
+            data = *(Data **)g_TESSaveLoadGame->unk000[5]; /*0x465365*/
+            v33->unk000[5] += 4; /*0x465369*/
+            type = BYTE2(data); /*0x465375*/
+            v34 = g_TESSaveLoadGame; /*0x465379*/
+            v77 = HIBYTE(data); /*0x46537e*/
+            if ( (v34->flags & 0x200) != 0 ) /*0x465390*/
             {
-              v34[1].unk030[4] += 0xA;
+              v34[1].unk030[4] += 0xA; /*0x465392*/
             }
             else
             {
-              v35 = *((void (__cdecl **)(const char *, unsigned int *, int, int *, int))v14 + 2);
-              v70 = 1;
-              v35(v14, &v74, 0xA, &v70, 1);
+              v35 = *((void (__cdecl **)(const char *, unsigned int *, int, int *, int))v14 + 2); /*0x4653a5*/
+              v70 = 1; /*0x4653b6*/
+              v35(v14, &v74, 0xA, &v70, 1); /*0x4653ba*/
             }
-            v36 = *((_DWORD *)ecx0 + 6);
-            ++v65;
-            if ( (v36 & 0x200) != 0 )
+            v36 = *((_DWORD *)ecx0 + 6); /*0x4653bf*/
+            ++v65; /*0x4653c2*/
+            if ( (v36 & 0x200) != 0 ) /*0x4653cb*/
             {
-              *((_DWORD *)ecx0 + 0x24) += 2;
+              *((_DWORD *)ecx0 + 0x24) += 2; /*0x4653cd*/
             }
             else
             {
-              v37 = *((void (__cdecl **)(const char *, Data **, int, int *, int))v14 + 2);
-              v70 = 1;
-              v37(v14, &data, 2, &v70, 1);
+              v37 = *((void (__cdecl **)(const char *, Data **, int, int *, int))v14 + 2); /*0x4653d6*/
+              v70 = 1; /*0x4653e7*/
+              v37(v14, &data, 2, &v70, 1); /*0x4653eb*/
             }
-            v38 = (__int16)data;
-            if ( (_WORD)data )
+            v38 = (__int16)data; /*0x4653f0*/
+            if ( (_WORD)data ) /*0x4653f7*/
             {
-              if ( (*((_DWORD *)ecx0 + 6) & 0x200) != 0 )
+              if ( (*((_DWORD *)ecx0 + 6) & 0x200) != 0 ) /*0x465405*/
               {
-                *((_DWORD *)ecx0 + 0x24) += (unsigned __int16)data;
+                *((_DWORD *)ecx0 + 0x24) += (unsigned __int16)data; /*0x465407*/
               }
               else
               {
-                v39 = *((void (__cdecl **)(const char *, int, _DWORD, int *, int))v14 + 2);
-                v62 = *((_DWORD *)ecx0 + 5);
-                v70 = 1;
-                v39(v14, v62, (unsigned __int16)data, &v70, 1);
-                v38 = (__int16)data;
+                v39 = *((void (__cdecl **)(const char *, int, _DWORD, int *, int))v14 + 2); /*0x46540f*/
+                v62 = *((_DWORD *)ecx0 + 5); /*0x46541c*/
+                v70 = 1; /*0x46541e*/
+                v39(v14, v62, (unsigned __int16)data, &v70, 1); /*0x465422*/
+                v38 = (__int16)data; /*0x465424*/
               }
             }
-            if ( *((_DWORD *)ecx0 + 0x10) )
+            if ( *((_DWORD *)ecx0 + 0x10) ) /*0x46542e*/
             {
-              v80 = v76;
-              v78 = v74;
-              v79 = type;
-              v82 = v38;
-              v81 = v77;
-              sub_45AD00(&v78);
+              v80 = v76; /*0x465439*/
+              v78 = v74; /*0x465441*/
+              v79 = type; /*0x46544a*/
+              v82 = v38; /*0x465453*/
+              v81 = v77; /*0x46545d*/
+              sub_45AD00(&v78); /*0x465461*/
             }
-            *((_DWORD *)ecx0 + 5) = 0;
+            *((_DWORD *)ecx0 + 5) = 0; /*0x465466*/
           }
           else
           {
-            v40 = TESForm_LookupByFormID(v29);
-            v41 = (PlayerCharacter *)v40;
-            if ( v40 )
+            v40 = TESForm_LookupByFormID(v29); /*0x465473*/
+            v41 = (PlayerCharacter *)v40; /*0x465478*/
+            if ( v40 ) /*0x46547f*/
             {
-              type = v40->member.type;
-              v76 = sub_4535A0(v40, v76);
-              if ( (SaveLoad_CurrentSavegame->flags & 0x200) != 0 )
+              type = v40->member.type; /*0x465490*/
+              v76 = SaveLoad_NormalizeFormChangeFlags(v40, v76); /*0x465499*/
+              if ( (g_TESSaveLoadGame->flags & 0x200) != 0 ) /*0x4654af*/
               {
-                SaveLoad_CurrentSavegame[1].unk030[4] += 0xA;
+                g_TESSaveLoadGame[1].unk030[4] += 0xA; /*0x4654b1*/
               }
               else
               {
-                v42 = *((void (__cdecl **)(const char *, unsigned int *, int, int *, int))v14 + 2);
-                v70 = 1;
-                v42(v14, &v74, 0xA, &v70, 1);
+                v42 = *((void (__cdecl **)(const char *, unsigned int *, int, int *, int))v14 + 2); /*0x4654ba*/
+                v70 = 1; /*0x4654cb*/
+                v42(v14, &v74, 0xA, &v70, 1); /*0x4654cf*/
               }
-              ++v65;
-              *((_DWORD *)ecx0 + 0x21) = &v74;
-              a11 = (char *)(unsigned __int16)v41->vtbl->super.super.super.super.GetSaveSize((TESForm *)v41, v76);
-              v43 = sub_452250(v41, v76);
-              v44 = *((_DWORD *)ecx0 + 6);
-              LOWORD(a11) = v43 + (_WORD)a11;
-              if ( (v44 & 0x200) != 0 )
+              ++v65; /*0x4654d4*/
+              *((_DWORD *)ecx0 + 0x21) = &v74; /*0x4654dc*/
+              a11 = (char *)(unsigned __int16)v41->vtbl->super.super.super.super.GetSaveSize((TESForm *)v41, v76); /*0x4654fb*/
+              v43 = sub_452250(v41, v76); /*0x4654ff*/
+              v44 = *((_DWORD *)ecx0 + 6); /*0x465504*/
+              LOWORD(a11) = v43 + (_WORD)a11; /*0x465507*/
+              if ( (v44 & 0x200) != 0 ) /*0x465512*/
               {
-                *((_DWORD *)ecx0 + 0x24) += 2;
+                *((_DWORD *)ecx0 + 0x24) += 2; /*0x465514*/
               }
               else
               {
-                v45 = *((void (__cdecl **)(const char *, char **, int, int *, int))v14 + 2);
-                v70 = 1;
-                v45(v14, &a11, 2, &v70, 1);
+                v45 = *((void (__cdecl **)(const char *, char **, int, int *, int))v14 + 2); /*0x46551d*/
+                v70 = 1; /*0x46552e*/
+                v45(v14, &a11, 2, &v70, 1); /*0x465532*/
               }
-              if ( (_WORD)a11 )
+              if ( (_WORD)a11 ) /*0x46553f*/
               {
-                v46 = j_MemoryHeap_Alloc(&FormHeap, (char)ecx0, (unsigned __int16)a11 | 0x100000000LL, v64);
-                *((_DWORD *)ecx0 + 5) = v46;
-                if ( !v46 )
-                  sub_404EC0("Could not create save buffer, out of memory.");
-                v47 = *((char **)ecx0 + 5);
-                SaveLoad_SaveFormModifiedFlags__((unsigned int **)ecx0, v41, v76);
-                v41->vtbl->super.super.super.super.SaveGame((TESForm *)v41, v76);
-                if ( &v47[(unsigned __int16)a11] != *((char **)ecx0 + 5) )
-                  (*(void (__thiscall **)(int, const char *))(*(_DWORD *)dword_B34D90 + 0x18))(
-                    dword_B34D90,
+                v46 = j_MemoryHeap_Alloc(&FormHeap, (char)ecx0, (unsigned __int16)a11 | 0x100000000LL, v64); /*0x46554f*/
+                *((_DWORD *)ecx0 + 5) = v46; /*0x465556*/
+                if ( !v46 ) /*0x465559*/
+                  sub_404EC0("Could not create save buffer, out of memory."); /*0x465560*/
+                v47 = *((char **)ecx0 + 5); /*0x46556c*/
+                SaveLoad_SaveFormModifiedFlags__((unsigned int **)ecx0, v41, v76);// Main savegame form-save caller of SaveLoad_SaveFormModifiedFlags??. Provenance capture runs here before OBSE plugin co-save callbacks write SPFX. /*0x465573*/
+                v41->vtbl->super.super.super.super.SaveGame((TESForm *)v41, v76); /*0x465584*/
+                if ( &v47[(unsigned __int16)a11] != *((char **)ecx0 + 5) ) /*0x465590*/
+                  (*(void (__thiscall **)(_DWORD, const char *))(**(_DWORD **)&MEMORY[0xB33E90][0xF00] + 0x18))( /*0x4655a2*/
+                    *(_DWORD *)&MEMORY[0xB33E90][0xF00],
                     "SaveGame() call did not properly fill buffer.");
-                sub_45C4A0(ecx0, (int)v14, (int)v47, (unsigned __int16)a11);
-                MemoryHeap_Free_checked(v47);
-                *((_DWORD *)ecx0 + 5) = 0;
+                sub_45C4A0(ecx0, (int)v14, (int)v47, (unsigned __int16)a11); /*0x4655ae*/
+                MemoryHeap_Free_checked(v47); /*0x4655b9*/
+                *((_DWORD *)ecx0 + 5) = 0; /*0x4655be*/
               }
-              v48 = *((_DWORD *)ecx0 + 0x10);
-              *((_DWORD *)ecx0 + 0x21) = 0;
-              if ( v48 )
+              v48 = *((_DWORD *)ecx0 + 0x10); /*0x4655ca*/
+              *((_DWORD *)ecx0 + 0x21) = 0; /*0x4655cf*/
+              if ( v48 ) /*0x4655d9*/
               {
-                v83 = v74;
-                v85 = v76;
-                v86 = v77;
-                v84 = type;
-                v87 = (__int16)a11;
-                sub_45AD00(&v83);
+                v83 = v74; /*0x4655e3*/
+                v85 = v76; /*0x4655eb*/
+                v86 = v77; /*0x4655f3*/
+                v84 = type; /*0x4655f7*/
+                v87 = (__int16)a11; /*0x465605*/
+                sub_45AD00(&v83); /*0x46560a*/
               }
             }
-            if ( v41 == TESDataHandler_g_PlayerRef )
+            if ( v41 == reference ) /*0x46561c*/
             {
-              v49 = SaveLoad_CurrentSavegame;
-              v74 = 0xFEFFFFFF;
-              if ( (v49->flags & 0x200) != 0 )
+              v49 = g_TESSaveLoadGame; /*0x465622*/
+              v74 = 0xFEFFFFFF; /*0x465627*/
+              if ( (v49->flags & 0x200) != 0 ) /*0x465638*/
               {
-                v49[1].unk030[4] += 0xA;
+                v49[1].unk030[4] += 0xA; /*0x46563a*/
               }
               else
               {
-                v50 = *((void (__cdecl **)(const char *, unsigned int *, int, int *, int))v14 + 2);
-                v70 = 1;
-                v50(v14, &v74, 0xA, &v70, 1);
+                v50 = *((void (__cdecl **)(const char *, unsigned int *, int, int *, int))v14 + 2); /*0x465643*/
+                v70 = 1; /*0x465654*/
+                v50(v14, &v74, 0xA, &v70, 1); /*0x465658*/
               }
-              v51 = *((_DWORD *)ecx0 + 6);
-              ++v65;
-              v72 = 5;
-              if ( (v51 & 0x200) != 0 )
+              v51 = *((_DWORD *)ecx0 + 6); /*0x46565d*/
+              ++v65; /*0x465660*/
+              v72 = 5; /*0x46566a*/
+              if ( (v51 & 0x200) != 0 ) /*0x465672*/
               {
-                *((_DWORD *)ecx0 + 0x24) += 2;
+                *((_DWORD *)ecx0 + 0x24) += 2; /*0x465674*/
               }
               else
               {
-                v52 = *((void (__cdecl **)(const char *, int *, int, int *, int))v14 + 2);
-                v70 = 1;
-                v52(v14, &v72, 2, &v70, 1);
+                v52 = *((void (__cdecl **)(const char *, int *, int, int *, int))v14 + 2); /*0x46567d*/
+                v70 = 1; /*0x46568e*/
+                v52(v14, &v72, 2, &v70, 1); /*0x465692*/
               }
-              _EAX = TESDataHandler_g_PlayerRef;
-              v54 = *((_DWORD *)ecx0 + 6);
-              LOBYTE(a12) = TESDataHandler_g_PlayerRef->isInSEWorld;
-              __asm { fld     dword ptr [eax+700h] }
+              _EAX = reference; /*0x465697*/
+              v54 = *((_DWORD *)ecx0 + 6); /*0x4656a2*/
+              LOBYTE(a12) = reference->isInSEWorld; /*0x4656a5*/
+              __asm { fld     dword ptr [eax+700h] } /*0x4656a9*/
               __asm { fstp    [esp+68h+var_34] }
-              if ( (v54 & 0x200) != 0 )
+              if ( (v54 & 0x200) != 0 ) /*0x4656b9*/
               {
-                ++*((_DWORD *)ecx0 + 0x24);
+                ++*((_DWORD *)ecx0 + 0x24); /*0x4656bb*/
               }
               else
               {
-                v55 = *((void (__cdecl **)(const char *, int *, int, int *, int))v14 + 2);
-                v70 = 1;
-                v55(v14, &a12, 1, &v70, 1);
+                v55 = *((void (__cdecl **)(const char *, int *, int, int *, int))v14 + 2); /*0x4656c3*/
+                v70 = 1; /*0x4656d6*/
+                v55(v14, &a12, 1, &v70, 1); /*0x4656da*/
               }
-              if ( (*((_DWORD *)ecx0 + 6) & 0x200) != 0 )
+              if ( (*((_DWORD *)ecx0 + 6) & 0x200) != 0 ) /*0x4656e7*/
               {
-                *((_DWORD *)ecx0 + 0x24) += 4;
+                *((_DWORD *)ecx0 + 0x24) += 4; /*0x4656e9*/
               }
               else
               {
-                v56 = *((void (__cdecl **)(const char *, float *, int, int *, int))v14 + 2);
-                v70 = 1;
-                v56(v14, &v73, 4, &v70, 1);
+                v56 = *((void (__cdecl **)(const char *, float *, int, int *, int))v14 + 2); /*0x4656f2*/
+                v70 = 1; /*0x465703*/
+                v56(v14, &v73, 4, &v70, 1); /*0x465707*/
               }
             }
           }
         }
       }
     }
-    sub_45FB50(ecx0, (int)v14);
-    v17 = (*((_DWORD *)ecx0 + 6) & 0x200) == 0;
-    v67 = 0;
-    if ( v17 )
+    sub_45FB50(ecx0, (int)v14); /*0x46571a*/
+    v17 = (*((_DWORD *)ecx0 + 6) & 0x200) == 0; /*0x465727*/
+    v67 = 0; /*0x46572a*/
+    if ( v17 ) /*0x46572e*/
     {
-      if ( *((_DWORD *)v14 + 0xC) == 0xFFFFFFFF )
-        v67 = *((_DWORD *)v14 + 0x52);
+      if ( *((_DWORD *)v14 + 0xC) == 0xFFFFFFFF ) /*0x465736*/
+        v67 = *((_DWORD *)v14 + 0x52); /*0x465744*/
       else
-        v67 = *((_DWORD *)v14 + 0xC);
+        v67 = *((_DWORD *)v14 + 0xC); /*0x465738*/
     }
-    sub_45E220(ecx0, (int)v14);
-    if ( (*((_DWORD *)ecx0 + 6) & 0x200) == 0 )
+    SaveLoad_SaveIDArrays(ecx0, (int)v14); /*0x46574b*/
+    if ( (*((_DWORD *)ecx0 + 6) & 0x200) == 0 ) /*0x465758*/
     {
-      (*(void (__thiscall **)(const char *, int, int))(*(_DWORD *)v14 + 0xC))(v14, v66, BSFile_FilePos_Beg);
-      if ( (*((_DWORD *)ecx0 + 6) & 0x200) != 0 )
+      (*(void (__thiscall **)(const char *, int, int))(*(_DWORD *)v14 + 0xC))(v14, v66, BSFile_FilePos_Beg); /*0x46576c*/
+      if ( (*((_DWORD *)ecx0 + 6) & 0x200) != 0 ) /*0x465776*/
       {
-        *((_DWORD *)ecx0 + 0x24) += 4;
-      }
-      else
-      {
-        v57 = *((void (__cdecl **)(const char *, int *, int, int *, int))v14 + 2);
-        a12 = 1;
-        v57(v14, &v67, 4, &a12, 1);
-      }
-      if ( (*((_DWORD *)ecx0 + 6) & 0x200) != 0 )
-      {
-        *((_DWORD *)ecx0 + 0x24) += 4;
+        *((_DWORD *)ecx0 + 0x24) += 4; /*0x465778*/
       }
       else
       {
-        v58 = *((void (__cdecl **)(const char *, int *, int, int *, int))v14 + 2);
-        v66 = 1;
-        v58(v14, &v65, 4, &v66, 1);
+        v57 = *((void (__cdecl **)(const char *, int *, int, int *, int))v14 + 2); /*0x465781*/
+        a12 = 1; /*0x465793*/
+        v57(v14, &v67, 4, &a12, 1); /*0x46579e*/
       }
-    }
-    v59 = *((unsigned int ***)ecx0 + 0x10);
-    if ( v59 )
-    {
-      TESSaveLoadGame_PrintChangeRecords_(v59, v14 + 0x3C);
-      v60 = *((_DWORD *)ecx0 + 0x10);
-      if ( v60 )
+      if ( (*((_DWORD *)ecx0 + 6) & 0x200) != 0 ) /*0x4657ac*/
       {
-        sub_4530A0(*((void (__stdcall *****)(signed int))ecx0 + 0x10));
-        FormHeapFree(v60);
+        *((_DWORD *)ecx0 + 0x24) += 4; /*0x4657ae*/
       }
-      *((_DWORD *)ecx0 + 0x10) = 0;
-    }
-    if ( (*((_DWORD *)ecx0 + 6) & 0x200) == 0 )
-    {
-      NiFile_Flush((int)v14);
-      sub_45A190((void **)ecx0, (char)ecx0, (int)v14);
-      if ( v14 )
+      else
       {
-        v61 = *((_DWORD **)ecx0 + 0x1B);
-        if ( v61 )
-          BSSimpleList_Remove(v61, (int)v14);
-        (**(void (__thiscall ***)(const char *, int))v14)(v14, 1);
+        v58 = *((void (__cdecl **)(const char *, int *, int, int *, int))v14 + 2); /*0x4657b7*/
+        v66 = 1; /*0x4657c9*/
+        v58(v14, &v65, 4, &v66, 1); /*0x4657d1*/
       }
     }
-    sub_432890((volatile LONG *)ioManager);
+    v59 = *((unsigned int ***)ecx0 + 0x10); /*0x4657d6*/
+    if ( v59 ) /*0x4657db*/
+    {
+      TESSaveLoadGame_PrintChangeRecords_(v59, v14 + 0x3C); /*0x4657e1*/
+      v60 = *((_DWORD *)ecx0 + 0x10); /*0x4657e6*/
+      if ( v60 ) /*0x4657eb*/
+      {
+        SaveLoad_ClearReferenceMapState(*((void (__stdcall *****)(signed int))ecx0 + 0x10)); /*0x4657ef*/
+        FormHeapFree(v60); /*0x4657f5*/
+      }
+      *((_DWORD *)ecx0 + 0x10) = 0; /*0x4657fd*/
+    }
+    if ( (*((_DWORD *)ecx0 + 6) & 0x200) == 0 ) /*0x465808*/
+    {
+      NiFile_Flush((int)v14); /*0x46580c*/
+      sub_45A190((void **)ecx0, (char)ecx0, (int)v14); /*0x465814*/
+      if ( v14 ) /*0x46581b*/
+      {
+        v61 = *((int **)ecx0 + 0x1B); /*0x46581d*/
+        if ( v61 ) /*0x465822*/
+          BSSimpleList_Remove(v61, (int)v14); /*0x465827*/
+        (**(void (__thiscall ***)(const char *, int))v14)(v14, 1); /*0x465834*/
+      }
+    }
+    sub_432890((volatile LONG *)MEMORY[0xB33A10]); /*0x46583c*/
   }
   else
   {
-    __asm { fld1 }
+    __asm { fld1 } /*0x465186*/
     __asm { fstp    [esp+6Ch+duration]; duration }
-    GameUI_QueueMessage((const char *)dword_B38788, 0, 1u, duration);
+    GameUI_QueueMessage((const char *)unk_B38788, 0, 1u, duration); /*0x465196*/
   }
-  return result;
+  return result; /*0x465843*/
 }

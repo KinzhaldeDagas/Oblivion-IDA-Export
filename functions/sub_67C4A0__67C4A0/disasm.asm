@@ -23,13 +23,13 @@
 0x67C4DF: mov     ecx, edi; this
 0x67C4E1: mov     [esp+30h+var_20], edx
 0x67C4E5: mov     [esp+30h+var_1C], eax
-0x67C4E9: call    TESObjectREFR_GetParentCell
+0x67C4E9: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x67C4EE: test    eax, eax
 0x67C4F0: jz      short loc_67C50C
 0x67C4F2: mov     ecx, edi; this
-0x67C4F4: call    TESObjectREFR_GetParentCell
+0x67C4F4: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x67C4F9: mov     ecx, eax; this
-0x67C4FB: call    TESObjectCELL_IsInterior
+0x67C4FB: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x67C500: test    al, al
 0x67C502: jz      short loc_67C50C
 0x67C504: fld     dword ptr ds:0B36B20h
@@ -66,7 +66,7 @@
 0x67C57D: mov     [esi+4], edx
 0x67C580: mov     ecx, esi
 0x67C582: mov     [esi+8], eax
-0x67C585: call    sub_43F350
+0x67C585: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x67C58A: fstp    st
 0x67C58C: fld     dword ptr [esi]
 0x67C58E: fld     [esp+30h+arg_4]
@@ -95,17 +95,17 @@
 0x67C5DB: fstp    [esp+30h+var_10]
 0x67C5DF: mov     eax, [esp+30h+var_10]
 0x67C5E3: mov     [esi+8], eax
-0x67C5E6: call    TESObjectREFR_GetParentCell
+0x67C5E6: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x67C5EB: test    eax, eax
 0x67C5ED: jz      short loc_67C640
 0x67C5EF: mov     ecx, edi; this
-0x67C5F1: call    TESObjectREFR_GetParentCell
+0x67C5F1: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x67C5F6: mov     ecx, eax; this
-0x67C5F8: call    TESObjectCELL_IsInterior
+0x67C5F8: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x67C5FD: test    al, al
 0x67C5FF: jz      short loc_67C640
 0x67C601: mov     ecx, edi; this
-0x67C603: call    TESObjectREFR_GetParentCell
+0x67C603: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x67C608: mov     ecx, [esi]
 0x67C60A: mov     edx, [esi+4]
 0x67C60D: push    0; int
@@ -121,7 +121,7 @@
 0x67C625: mov     [eax+8], ecx
 0x67C628: push    edx; int
 0x67C629: mov     ecx, edi
-0x67C62B: call    sub_5E2E20
+0x67C62B: call    Actor_ChoosePathGridSteeringPosition; Verified actor package movement helper. Finds a reachable PathGrid point for the requested destination; if it has outgoing connections, selects the first linked node and chooses a randomized intermediate position along that edge. Handles empty/unavailable PathGrids by falling back to terrain height or the actor's current position. Multiple HighProcess package-action callers establish the steering-position role.
 0x67C630: mov     ecx, [eax]
 0x67C632: mov     [esi], ecx
 0x67C634: mov     edx, [eax+4]

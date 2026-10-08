@@ -1,464 +1,475 @@
-void __thiscall sub_7977D0(_DWORD *this, char a2)
+// OBLIVION AUTHORITY (2026-08-30): CIndexedGeometry::CombineStrips stitches per-LOD unsigned-short index arrays, including parity-dependent degenerates when requested, then replaces lengths/pointers/totals through deep vector assignment. RT4.1 corroborates the algorithm only; its 32-bit contiguous storage differs.
+//
+// [2026-10-02 strip conversion correction] Verified parity-sensitive connector insertion: toggleFaceOrdering adds two connector indices after even source lengths and three after odd lengths. Fallout CIndexedGeometry::CombineStrips 0x828298D8 independently matches this behavior; RT4.1 IndexedGeometry.cpp:90 also preserves parity but uses int indices/paired strip-info storage. Oblivion uses ushort lengths/indices and separate pointer vectors. Triangle-list consumers must advance parity for every source window, including degenerate connector windows, and restart for each distinct strip. SpeedTreeOBSE converter now copies lengths/pointers and each selected strip before converting; it no longer rereads live metadata against an earlier allocation size. Null triangle-bearing strips fail instead of silently producing partial geometry. This is bridge hardening, not a new native synchronization guarantee.
+//
+// [2026-10-03 composite capacity correction] Native composite length is calculated/allocated in a wider integer, then narrowed at797D95/797DE2 when publishing the ushort length. Frond-only caller78CE00 now preflights every LOD including connector counts. Representable composites still use native code. Oversized results use the same 2/3 connector sequence, split with even-offset/two-index overlap, stage all replacement metadata/buffers before publication, and free old owned strips plus POD length/pointer arrays afterward. Branch caller78CDF6 is unchanged. Native commit/unwind behavior still needs game acceptance.
+void __thiscall OB_CIndexedGeometry_CombineStrips_010201A0(
+        OB_CIndexedGeometry_010201A0 *this,
+        unsigned __int8 toggleFaceOrdering)
 {
-  int v3; // eax
+  float *begin; // eax
   unsigned int v4; // ecx
   bool v5; // zf
   unsigned __int16 v6; // bp
   __int16 v7; // bx
-  int v8; // ecx
-  int v9; // edi
-  int v10; // eax
-  int v11; // ecx
-  int v12; // edi
-  int v13; // ecx
+  OB_stVectorUShortPtr_010201A0 *v8; // ecx
+  OB_stVectorUShortPtr_010201A0 *v9; // edi
+  unsigned __int16 **v10; // eax
+  OB_stVectorUShort_010201A0 *v11; // ecx
+  OB_stVectorUShort_010201A0 *v12; // edi
+  unsigned __int16 *v13; // ecx
   unsigned __int16 j; // bp
-  int v15; // ecx
-  int v16; // edi
-  int v17; // eax
+  OB_stVectorUShortPtr_010201A0 *v15; // ecx
+  OB_stVectorUShortPtr_010201A0 *v16; // edi
+  unsigned __int16 **v17; // eax
   unsigned __int16 v18; // ax
-  int v19; // ecx
-  int v20; // edi
-  int v21; // ecx
-  int v22; // ecx
-  int v23; // edi
+  OB_stVectorUShort_010201A0 *v19; // ecx
+  OB_stVectorUShort_010201A0 *v20; // edi
+  unsigned __int16 *v21; // ecx
+  OB_stVectorUShortPtr_010201A0 *v22; // ecx
+  OB_stVectorUShortPtr_010201A0 *v23; // edi
   int v24; // eax
   int v25; // ebp
-  int v26; // ecx
-  int v27; // eax
-  int v28; // ecx
-  int v29; // ecx
-  int v30; // ebx
-  int v31; // ecx
-  int v32; // ecx
-  int v33; // ebx
-  int v34; // ecx
+  OB_stVectorUShortPtr_010201A0 *v26; // ecx
+  OB_stVectorUShortPtr_010201A0 *v27; // eax
+  unsigned __int16 **v28; // ecx
+  OB_stVectorUShort_010201A0 *v29; // ecx
+  OB_stVectorUShort_010201A0 *v30; // ebx
+  unsigned __int16 *v31; // ecx
+  OB_stVectorUShortPtr_010201A0 *v32; // ecx
+  OB_stVectorUShortPtr_010201A0 *v33; // ebx
+  unsigned __int16 **v34; // ecx
   char *v35; // ebx
-  int v36; // eax
+  OB_stVectorUShortPtr_010201A0 *v36; // eax
   int v37; // ecx
   int v38; // eax
-  int v39; // eax
-  int v40; // ecx
+  OB_stVectorUShortPtr_010201A0 *v39; // eax
+  unsigned __int16 **v40; // ecx
   unsigned __int16 v41; // ax
-  int v42; // ecx
-  int v43; // eax
-  int v44; // edx
-  int v45; // ecx
+  OB_stVectorUShortPtr_010201A0 *v42; // ecx
+  OB_stVectorUShortPtr_010201A0 *v43; // eax
+  unsigned __int16 **v44; // edx
+  OB_stVectorUShortPtr_010201A0 *v45; // ecx
   _WORD *v46; // ebx
-  int v47; // eax
-  int v48; // edx
-  int v49; // ecx
+  OB_stVectorUShortPtr_010201A0 *v47; // eax
+  unsigned __int16 **v48; // edx
+  OB_stVectorUShortPtr_010201A0 *v49; // ecx
   _WORD *v50; // ebx
-  int v51; // edi
+  OB_stVectorUShortPtr_010201A0 *v51; // edi
   unsigned int v52; // ebp
-  int v53; // ecx
-  int v54; // eax
-  int v55; // edx
-  int v56; // ecx
+  unsigned __int16 **v53; // ecx
+  OB_stVectorUShortPtr_010201A0 *v54; // eax
+  unsigned __int16 **v55; // edx
+  OB_stVectorUShortPtr_010201A0 *v56; // ecx
   _WORD *v57; // ebx
-  int v58; // edi
+  OB_stVectorUShortPtr_010201A0 *v58; // edi
   unsigned int v59; // ebp
-  int v60; // ecx
-  unsigned int *v61; // edi
-  unsigned int v62; // eax
+  unsigned __int16 **v60; // ecx
+  OB_stVectorUShort_010201A0 *v61; // edi
+  unsigned __int16 *v62; // eax
   unsigned int v63; // edx
-  _WORD *v64; // eax
-  _WORD *v65; // ebp
-  char *v66; // ecx
-  unsigned int v67; // eax
-  char *v68; // edi
+  unsigned __int16 *v64; // eax
+  unsigned __int16 *v65; // ebp
+  OB_stVectorUShortPtr_010201A0 *v66; // ecx
+  unsigned __int16 **v67; // eax
+  OB_stVector4_010201A0 *v68; // edi
   unsigned int v69; // edx
-  int *v70; // eax
-  void *v71; // ebp
-  unsigned int v72; // ecx
-  char *v73; // edi
-  void *v74; // ebx
-  void *v75; // ebp
+  unsigned int *v70; // eax
+  unsigned int *v71; // ebp
+  unsigned int *v72; // ecx
+  OB_stVectorUShort_010201A0 *v73; // edi
+  unsigned __int16 *end; // ebx
+  unsigned __int16 *v75; // ebp
   int v76; // eax
-  char *v77; // ecx
-  void *v78; // ebx
-  char *v79; // edi
-  void *v80; // ebp
+  OB_stVectorUShortPtr_010201A0 *v77; // ecx
+  unsigned __int16 **v78; // ebx
+  OB_stVectorUShortPtr_010201A0 *v79; // edi
+  unsigned __int16 **v80; // ebp
   int v81; // eax
-  unsigned int v82; // ecx
-  char *v83; // esi
-  char *v84; // esi
+  unsigned int *v82; // ecx
+  OB_stVectorUShortPtr_010201A0 *v83; // esi
+  OB_stVectorUShort_010201A0 *v84; // esi
   rsize_t v85; // [esp-Ch] [ebp-8Ch]
   rsize_t v86; // [esp-Ch] [ebp-8Ch]
   unsigned int v87; // [esp-8h] [ebp-88h]
-  _BYTE v88[12]; // [esp-4h] [ebp-84h]
-  char *v89; // [esp-4h] [ebp-84h]
+  unsigned int numDiscreteLodLevels; // [esp-4h] [ebp-84h]
+  rsize_t v89; // [esp+0h] [ebp-80h]
   int i; // [esp+14h] [ebp-6Ch]
   int v91; // [esp+18h] [ebp-68h]
   unsigned __int16 v92; // [esp+1Ch] [ebp-64h]
-  int v93; // [esp+1Ch] [ebp-64h]
+  unsigned int v93; // [esp+1Ch] [ebp-64h]
   char *Dst; // [esp+20h] [ebp-60h]
   int k; // [esp+24h] [ebp-5Ch]
-  int v96; // [esp+2Ch] [ebp-54h] BYREF
-  int v97; // [esp+30h] [ebp-50h] BYREF
-  int v98; // [esp+34h] [ebp-4Ch] BYREF
-  int v99; // [esp+3Ch] [ebp-44h] BYREF
-  int v100; // [esp+44h] [ebp-3Ch] BYREF
-  char *v101; // [esp+48h] [ebp-38h]
-  char *v102; // [esp+4Ch] [ebp-34h]
-  int v103; // [esp+54h] [ebp-2Ch] BYREF
-  char *v104; // [esp+58h] [ebp-28h]
-  char *v105; // [esp+5Ch] [ebp-24h]
-  int v106; // [esp+64h] [ebp-1Ch] BYREF
-  unsigned int v107; // [esp+68h] [ebp-18h]
-  int v108; // [esp+6Ch] [ebp-14h]
-  int v109; // [esp+7Ch] [ebp-4h]
+  unsigned int value; // [esp+2Ch] [ebp-54h] BYREF
+  unsigned __int16 v97[2]; // [esp+30h] [ebp-50h] BYREF
+  OB_stVectorUShortIterator_010201A0 v98; // [esp+34h] [ebp-4Ch] BYREF
+  OB_stVector4Iterator_010201A0 result; // [esp+3Ch] [ebp-44h] BYREF
+  OB_stVector_stVectorUShortPtr_010201A0 v100; // [esp+44h] [ebp-3Ch] BYREF
+  OB_stVector_stVectorUShort_010201A0 source; // [esp+54h] [ebp-2Ch] BYREF
+  OB_stVectorUInt32_010201A0 v102; // [esp+64h] [ebp-1Ch] BYREF
+  int v103; // [esp+7Ch] [ebp-4h]
 
-  v3 = *(this + 0x1B);
-  if ( v3 )
-    v4 = (*(this + 0x1C) - v3) >> 2;
+  begin = this->vertexCoords.begin; /*0x7977f9*/
+  if ( begin ) /*0x797800*/
+    v4 = this->vertexCoords.end - begin; /*0x79780b*/
   else
-    v4 = 0;
+    v4 = 0; /*0x797802*/
   if ( (unsigned __int16)(v4 / 3) )
   {
-    sub_7974F0(&v103, (char *)*((unsigned __int16 *)this + 0x10));
-    v89 = (char *)*((unsigned __int16 *)this + 0x10);
-    v109 = 0;
-    sub_797570(&v100, v89);
-    v87 = *((unsigned __int16 *)this + 0x10);
-    LOBYTE(v109) = 1;
-    v96 = 0;
-    sub_7956B0(&v106, v87, &v96);
-    v5 = *((_WORD *)this + 0x10) == 0;
-    LOBYTE(v109) = 2;
-    v91 = 0;
+    OB_stVector_stVectorUShort_FillCtorEmpty_010201A0(&source, this->numDiscreteLodLevels); /*0x797829*/
+    numDiscreteLodLevels = this->numDiscreteLodLevels; /*0x797832*/
+    v103 = 0; /*0x797837*/
+    OB_stVector_stVectorUShortPtr_FillCtorEmpty_010201A0(&v100, numDiscreteLodLevels); /*0x79783e*/
+    v87 = this->numDiscreteLodLevels; /*0x79784c*/
+    LOBYTE(v103) = 1; /*0x797851*/
+    value = 0; /*0x797859*/
+    OB_stVectorUInt32_FillCtor_010201A0(&v102, v87, &value); /*0x79785d*/
+    v5 = this->numDiscreteLodLevels == 0; /*0x797862*/
+    LOBYTE(v103) = 2; /*0x797866*/
+    v91 = 0; /*0x79786b*/
     if ( !v5 )
     {
-      while ( 1 )
+      while ( 1 ) /*0x797875*/
       {
-        v6 = 0;
-        for ( i = 0; ; i += *(unsigned __int16 *)(*(_DWORD *)(v12 + 4) + 2 * v6++) )
+        v6 = 0; /*0x797875*/
+        for ( i = 0; ; i += v12->begin[v6++] ) /*0x797877*/
         {
-          v7 = v91;
-          if ( (__int16)v91 <= (__int16)0xFFFFFFFF )
-            break;
-          v8 = *(this + 0x13);
-          if ( !v8 || (__int16)v91 >= (unsigned int)((*(this + 0x14) - v8) >> 4) )
-            _invalid_parameter_noinfo();
-          v9 = *(this + 0x13) + 0x10 * (__int16)v91;
-          v10 = *(_DWORD *)(v9 + 4);
-          if ( !v10 || v6 >= (unsigned __int16)((*(_DWORD *)(v9 + 8) - v10) >> 2) )
-            break;
-          v11 = *(this + 0xF);
-          if ( !v11 || (unsigned __int16)v91 >= (unsigned int)((*(this + 0x10) - v11) >> 4) )
-            _invalid_parameter_noinfo();
-          v12 = *(this + 0xF) + 0x10 * (unsigned __int16)v91;
-          v13 = *(_DWORD *)(v12 + 4);
-          if ( !v13 || v6 >= (unsigned int)((*(_DWORD *)(v12 + 8) - v13) >> 1) )
-            _invalid_parameter_noinfo();
+          v7 = v91; /*0x797880*/
+          if ( (__int16)v91 <= (__int16)0xFFFFFFFF ) /*0x797888*/
+            break; /*0x797888*/
+          v8 = this->perLodStrips.begin; /*0x79788e*/
+          if ( !v8 || (__int16)v91 >= (unsigned int)(this->perLodStrips.end - v8) ) /*0x7978a2*/
+            _invalid_parameter_noinfo(); /*0x7978a4*/
+          v9 = &this->perLodStrips.begin[(__int16)v91]; /*0x7978ac*/
+          v10 = v9->begin; /*0x7978af*/
+          if ( !v10 || v6 >= (unsigned __int16)(v9->end - v10) ) /*0x7978c1*/
+            break; /*0x7978c1*/
+          v11 = this->perLodStripLengths.begin; /*0x7978c3*/
+          if ( !v11 || (unsigned __int16)v91 >= (unsigned int)(this->perLodStripLengths.end - v11) ) /*0x7978d7*/
+            _invalid_parameter_noinfo(); /*0x7978d9*/
+          v12 = &this->perLodStripLengths.begin[(unsigned __int16)v91]; /*0x7978e1*/
+          v13 = v12->begin; /*0x7978e7*/
+          if ( !v13 || v6 >= (unsigned int)(v12->end - v13) ) /*0x7978f7*/
+            _invalid_parameter_noinfo(); /*0x7978f9*/
         }
-        if ( i > 0 )
-          break;
-        v96 = (unsigned __int16)v91;
-        if ( !v104 || (unsigned __int16)v91 >= (unsigned int)((v105 - v104) >> 4) )
-          _invalid_parameter_noinfo();
-        v73 = &v104[0x10 * (unsigned __int16)v91];
-        v74 = *((void **)v73 + 2);
-        if ( *((_DWORD *)v73 + 1) > (unsigned int)v74 )
-          _invalid_parameter_noinfo();
-        v75 = *((void **)v73 + 1);
-        if ( (unsigned int)v75 > *((_DWORD *)v73 + 2) )
-          _invalid_parameter_noinfo();
-        if ( v75 != v74 )
+        if ( i > 0 ) /*0x797916*/
+          break; /*0x797916*/
+        value = (unsigned __int16)v91; /*0x797ec3*/
+        if ( !source.begin || (unsigned __int16)v91 >= (unsigned int)(source.end - source.begin) ) /*0x797ed4*/
+          _invalid_parameter_noinfo(); /*0x797ed6*/
+        v73 = &source.begin[(unsigned __int16)v91]; /*0x797ede*/
+        end = v73->end; /*0x797ee2*/
+        if ( v73->begin > end ) /*0x797ee8*/
+          _invalid_parameter_noinfo(); /*0x797eea*/
+        v75 = v73->begin; /*0x797eef*/
+        if ( v75 > v73->end ) /*0x797ef5*/
+          _invalid_parameter_noinfo(); /*0x797ef7*/
+        if ( v75 != end ) /*0x797efe*/
         {
-          v76 = (*((_DWORD *)v73 + 2) - (int)v74) >> 1;
-          v97 = (int)v75 + 2 * v76;
-          if ( v76 > 0 )
+          v76 = v73->end - end; /*0x797f05*/
+          *(_DWORD *)v97 = &v75[v76]; /*0x797f0f*/
+          if ( v76 > 0 ) /*0x797f13*/
           {
-            HIDWORD(v85) = v74;
-            LODWORD(v85) = 2 * v76;
-            memmove_s(v75, v85, (const void *)(2 * v76), *(rsize_t *)&v88[4]);
+            HIDWORD(v85) = end; /*0x797f16*/
+            LODWORD(v85) = 2 * v76; /*0x797f17*/
+            memmove_s(v75, v85, (const void *)(2 * v76), v89); /*0x797f19*/
           }
-          *((_DWORD *)v73 + 2) = v97;
+          v73->end = *(unsigned __int16 **)v97; /*0x797f25*/
         }
-        v77 = v101;
-        if ( !v101 || v96 >= (unsigned int)((v102 - v101) >> 4) )
+        v77 = v100.begin; /*0x797f28*/
+        if ( !v100.begin || value >= v100.end - v100.begin ) /*0x797f3d*/
         {
-          _invalid_parameter_noinfo();
-          v77 = v101;
+          _invalid_parameter_noinfo(); /*0x797f3f*/
+          v77 = v100.begin; /*0x797f44*/
         }
-        v78 = *(void **)&v77[0x10 * v96 + 8];
-        v79 = &v77[0x10 * v96];
-        if ( *((_DWORD *)v79 + 1) > (unsigned int)v78 )
-          _invalid_parameter_noinfo();
-        v80 = *((void **)v79 + 1);
-        if ( (unsigned int)v80 > *((_DWORD *)v79 + 2) )
-          _invalid_parameter_noinfo();
-        if ( v80 != v78 )
+        v78 = v77[value].end; /*0x797f4f*/
+        v79 = &v77[value]; /*0x797f53*/
+        if ( v79->begin > v78 ) /*0x797f58*/
+          _invalid_parameter_noinfo(); /*0x797f5a*/
+        v80 = v79->begin; /*0x797f5f*/
+        if ( v80 > v79->end ) /*0x797f65*/
+          _invalid_parameter_noinfo(); /*0x797f67*/
+        if ( v80 != v78 ) /*0x797f6e*/
         {
-          v81 = (*((_DWORD *)v79 + 2) - (int)v78) >> 2;
-          v97 = (int)v80 + 4 * v81;
-          if ( v81 > 0 )
+          v81 = v79->end - v78; /*0x797f75*/
+          *(_DWORD *)v97 = &v80[v81]; /*0x797f84*/
+          if ( v81 > 0 ) /*0x797f88*/
           {
-            HIDWORD(v86) = v78;
-            LODWORD(v86) = 4 * v81;
-            memmove_s(v80, v86, (const void *)(4 * v81), *(rsize_t *)&v88[4]);
+            HIDWORD(v86) = v78; /*0x797f8b*/
+            LODWORD(v86) = 4 * v81; /*0x797f8c*/
+            memmove_s(v80, v86, (const void *)(4 * v81), v89); /*0x797f8e*/
           }
-          *((_DWORD *)v79 + 2) = v97;
+          v79->end = *(unsigned __int16 ***)v97; /*0x797f9a*/
         }
-        v82 = v107;
-        if ( !v107 || (unsigned __int16)v91 >= (unsigned int)((int)(v108 - v107) >> 2) )
+        v82 = v102.begin; /*0x797f9d*/
+        if ( !v102.begin || (unsigned __int16)v91 >= (unsigned int)(v102.end - v102.begin) ) /*0x797fb5*/
         {
-          _invalid_parameter_noinfo();
-          v82 = v107;
+          _invalid_parameter_noinfo(); /*0x797fb7*/
+          v82 = v102.begin; /*0x797fbc*/
         }
-        v25 = v91;
-        *(_DWORD *)(v82 + 4 * (unsigned __int16)v91) = 0;
+        v25 = v91; /*0x797fc5*/
+        v82[(unsigned __int16)v91] = 0; /*0x797fc9*/
 LABEL_167:
-        v91 = v25 + 1;
-        if ( (unsigned __int16)(v25 + 1) >= *((_WORD *)this + 0x10) )
-          goto LABEL_168;
+        v91 = v25 + 1; /*0x797fd0*/
+        if ( (unsigned __int16)(v25 + 1) >= this->numDiscreteLodLevels ) /*0x797fdb*/
+          goto LABEL_168; /*0x797fdb*/
       }
-      if ( a2 )
+      if ( toggleFaceOrdering ) /*0x797924*/
       {
-        for ( j = 0; ; ++j )
+        for ( j = 0; ; ++j ) /*0x79792a*/
         {
-          if ( v7 <= (__int16)0xFFFFFFFF )
-            goto LABEL_29;
-          v15 = *(this + 0x13);
-          if ( !v15 || v7 >= (unsigned int)((*(this + 0x14) - v15) >> 4) )
-            _invalid_parameter_noinfo();
-          v16 = *(this + 0x13) + 0x10 * v7;
-          v17 = *(_DWORD *)(v16 + 4);
-          if ( v17 )
-            v18 = (*(_DWORD *)(v16 + 8) - v17) >> 2;
+          if ( v7 <= (__int16)0xFFFFFFFF ) /*0x797934*/
+            goto LABEL_29; /*0x797934*/
+          v15 = this->perLodStrips.begin; /*0x797936*/
+          if ( !v15 || v7 >= (unsigned int)(this->perLodStrips.end - v15) ) /*0x79794a*/
+            _invalid_parameter_noinfo(); /*0x79794c*/
+          v16 = &this->perLodStrips.begin[v7]; /*0x797954*/
+          v17 = v16->begin; /*0x797957*/
+          if ( v17 ) /*0x79795c*/
+            v18 = v16->end - v17; /*0x797966*/
           else
 LABEL_29:
-            v18 = 0;
-          if ( j >= v18 - 1 )
-            break;
-          v19 = *(this + 0xF);
-          if ( !v19 || (unsigned __int16)v91 >= (unsigned int)((*(this + 0x10) - v19) >> 4) )
-            _invalid_parameter_noinfo();
-          v20 = *(this + 0xF) + 0x10 * (unsigned __int16)v91;
-          v21 = *(_DWORD *)(v20 + 4);
-          if ( !v21 || j >= (unsigned int)((*(_DWORD *)(v20 + 8) - v21) >> 1) )
-            _invalid_parameter_noinfo();
-          if ( (*(_WORD *)(*(_DWORD *)(v20 + 4) + 2 * j) & 1) != 0 )
-            i += 3;
+            v18 = 0; /*0x79796b*/
+          if ( j >= v18 - 1 ) /*0x797978*/
+            break; /*0x797978*/
+          v19 = this->perLodStripLengths.begin; /*0x79797e*/
+          if ( !v19 || (unsigned __int16)v91 >= (unsigned int)(this->perLodStripLengths.end - v19) ) /*0x797994*/
+            _invalid_parameter_noinfo(); /*0x797996*/
+          v20 = &this->perLodStripLengths.begin[(unsigned __int16)v91]; /*0x79799e*/
+          v21 = v20->begin; /*0x7979a1*/
+          if ( !v21 || j >= (unsigned int)(v20->end - v21) ) /*0x7979b1*/
+            _invalid_parameter_noinfo(); /*0x7979b3*/
+          if ( (v20->begin[j] & 1) != 0 ) /*0x7979cc*/
+            i += 3; /*0x7979df*/
           else
-            i += 2;
-          v7 = v91;
+            i += 2; /*0x7979ce*/
+          v7 = v91; /*0x7979d3*/
         }
       }
       else
       {
-        if ( (__int16)v91 <= (__int16)0xFFFFFFFF )
-          goto LABEL_47;
-        v22 = *(this + 0x13);
-        if ( !v22 || (__int16)v91 >= (unsigned int)((*(this + 0x14) - v22) >> 4) )
-          _invalid_parameter_noinfo();
-        v23 = *(this + 0x13) + 0x10 * (__int16)v91;
-        v24 = *(_DWORD *)(v23 + 4);
-        if ( v24 )
-          LOWORD(v24) = (*(_DWORD *)(v23 + 8) - v24) >> 2;
+        if ( (__int16)v91 <= (__int16)0xFFFFFFFF ) /*0x7979f4*/
+          goto LABEL_47; /*0x7979f4*/
+        v22 = this->perLodStrips.begin; /*0x7979f6*/
+        if ( !v22 || (__int16)v91 >= (unsigned int)(this->perLodStrips.end - v22) ) /*0x797a0a*/
+          _invalid_parameter_noinfo(); /*0x797a0c*/
+        v23 = &this->perLodStrips.begin[(__int16)v91]; /*0x797a14*/
+        v24 = (int)v23->begin; /*0x797a17*/
+        if ( v24 ) /*0x797a1c*/
+          LOWORD(v24) = ((int)v23->end - v24) >> 2; /*0x797a26*/
         else
 LABEL_47:
-          LOWORD(v24) = 0;
-        v24 = (unsigned __int16)v24;
-        if ( (_WORD)v24 )
-          v24 = (unsigned __int16)v24 - 1;
-        i += 2 * v24;
+          LOWORD(v24) = 0; /*0x797a2b*/
+        v24 = (unsigned __int16)v24; /*0x797a2d*/
+        if ( (_WORD)v24 ) /*0x797a32*/
+          v24 = (unsigned __int16)v24 - 1; /*0x797a34*/
+        i += 2 * v24; /*0x797a3e*/
       }
-      v96 = FormHeapAlloc((unsigned int)i >> 0x1F != 0 ? 0xFFFFFFFF : 2 * i);
-      Dst = (char *)v96;
+      value = FormHeapAlloc((unsigned int)i >> 0x1F != 0 ? 0xFFFFFFFF : 2 * i);
+      Dst = (char *)value; /*0x797a63*/
       for ( k = 0; ; ++k )
       {
         while ( 1 )
         {
-          v25 = v91;
-          if ( (__int16)v91 <= (__int16)0xFFFFFFFF )
-            goto LABEL_113;
-          v26 = *(this + 0x13);
-          if ( !v26 || (__int16)v91 >= (unsigned int)((*(this + 0x14) - v26) >> 4) )
-            _invalid_parameter_noinfo();
-          v27 = *(this + 0x13) + 0x10 * (__int16)v91;
-          v28 = *(_DWORD *)(v27 + 4);
-          if ( !v28 || (unsigned __int16)k >= (unsigned __int16)((*(_DWORD *)(v27 + 8) - v28) >> 2) )
+          v25 = v91; /*0x797a6f*/
+          if ( (__int16)v91 <= (__int16)0xFFFFFFFF ) /*0x797a77*/
+            goto LABEL_113; /*0x797a77*/
+          v26 = this->perLodStrips.begin; /*0x797a7d*/
+          if ( !v26 || (__int16)v91 >= (unsigned int)(this->perLodStrips.end - v26) ) /*0x797a95*/
+            _invalid_parameter_noinfo(); /*0x797a97*/
+          v27 = &this->perLodStrips.begin[(__int16)v91]; /*0x797aa1*/
+          v28 = v27->begin; /*0x797aa4*/
+          if ( !v28 || (unsigned __int16)k >= (unsigned __int16)(v27->end - v28) ) /*0x797abc*/
           {
 LABEL_113:
-            v97 = (unsigned __int16)i;
-            if ( !v104 || (unsigned __int16)v91 >= (unsigned int)((v105 - v104) >> 4) )
-              _invalid_parameter_noinfo();
-            v61 = (unsigned int *)&v104[0x10 * (unsigned __int16)v91];
-            v62 = v61[1];
-            if ( v62 )
-              v63 = (int)(v61[2] - v62) >> 1;
+            *(_DWORD *)v97 = (unsigned __int16)i; /*0x797d95*/
+            if ( !source.begin || (unsigned __int16)v91 >= (unsigned int)(source.end - source.begin) ) /*0x797da9*/
+              _invalid_parameter_noinfo(); /*0x797dab*/
+            v61 = &source.begin[(unsigned __int16)v91]; /*0x797db5*/
+            v62 = v61->begin; /*0x797db9*/
+            if ( v62 ) /*0x797dbe*/
+              v63 = v61->end - v62; /*0x797dc9*/
             else
-              v63 = 0;
-            if ( v62 && v63 < (int)(v61[3] - v62) >> 1 )
+              v63 = 0; /*0x797dc0*/
+            if ( v62 && v63 < v61->capacityEnd - v62 ) /*0x797dd8*/
             {
-              v64 = (_WORD *)v61[2];
-              *v64 = i;
-              v61[2] = (unsigned int)(v64 + 1);
-            }
-            else
-            {
-              v65 = (_WORD *)v61[2];
-              if ( v62 > (unsigned int)v65 )
-                _invalid_parameter_noinfo();
-              sub_795A40(v61, (unsigned int **)&v98, v61, v65, (int)&v97);
-              v25 = v91;
-            }
-            v66 = v101;
-            if ( !v101 || (unsigned __int16)v91 >= (unsigned int)((v102 - v101) >> 4) )
-            {
-              _invalid_parameter_noinfo();
-              v66 = v101;
-            }
-            v67 = *(_DWORD *)&v66[0x10 * (unsigned __int16)v91 + 4];
-            v68 = &v66[0x10 * (unsigned __int16)v91];
-            if ( v67 )
-              v69 = (int)(*((_DWORD *)v68 + 2) - v67) >> 2;
-            else
-              v69 = 0;
-            if ( v67 && v69 < (int)(*((_DWORD *)v68 + 3) - v67) >> 2 )
-            {
-              v70 = *((int **)v68 + 2);
-              *v70 = v96;
-              *((_DWORD *)v68 + 2) = v70 + 1;
+              v64 = v61->end; /*0x797dda*/
+              *v64 = i; /*0x797de2*/
+              v61->end = v64 + 1; /*0x797de8*/
             }
             else
             {
-              v71 = *((void **)v68 + 2);
-              if ( v67 > (unsigned int)v71 )
-                _invalid_parameter_noinfo();
-              sub_7A3620(v68, (int)&v99, (int)v68, v71, (int)&v96);
-              v25 = v91;
+              v65 = v61->end; /*0x797ded*/
+              if ( v62 > v65 ) /*0x797df2*/
+                _invalid_parameter_noinfo(); /*0x797df4*/
+              OB_stVectorUShort_InsertOne_010201A0( /*0x797e07*/
+                v61,
+                &v98,
+                (OB_stVectorUShortIterator_010201A0)__PAIR64__((unsigned int)v65, (unsigned int)v61),
+                v97);
+              v25 = v91; /*0x797e0c*/
             }
-            v72 = v107;
-            if ( !v107 || (unsigned __int16)v91 >= (unsigned int)((int)(v108 - v107) >> 2) )
+            v66 = v100.begin; /*0x797e10*/
+            if ( !v100.begin || (unsigned __int16)v91 >= (unsigned int)(v100.end - v100.begin) ) /*0x797e23*/
             {
-              _invalid_parameter_noinfo();
-              v72 = v107;
+              _invalid_parameter_noinfo(); /*0x797e25*/
+              v66 = v100.begin; /*0x797e2a*/
             }
-            *(_DWORD *)(v72 + 4 * (unsigned __int16)v91) = i - 2;
-            goto LABEL_167;
+            v67 = v66[(unsigned __int16)v91].begin; /*0x797e33*/
+            v68 = (OB_stVector4_010201A0 *)&v66[(unsigned __int16)v91]; /*0x797e37*/
+            if ( v67 ) /*0x797e3b*/
+              v69 = ((char *)v68->end - (char *)v67) >> 2; /*0x797e46*/
+            else
+              v69 = 0; /*0x797e3d*/
+            if ( v67 && v69 < ((char *)v68->capacity - (char *)v67) >> 2 ) /*0x797e57*/
+            {
+              v70 = v68->end; /*0x797e59*/
+              *v70 = value; /*0x797e60*/
+              v68->end = v70 + 1; /*0x797e65*/
+            }
+            else
+            {
+              v71 = v68->end; /*0x797e6a*/
+              if ( v67 > (unsigned __int16 **)v71 ) /*0x797e6f*/
+                _invalid_parameter_noinfo(); /*0x797e71*/
+              OB_stVector4_InsertOne_010201A0( /*0x797e84*/
+                v68,
+                &result,
+                (OB_stVector4Iterator_010201A0)__PAIR64__((unsigned int)v71, (unsigned int)v68),
+                &value);
+              v25 = v91; /*0x797e89*/
+            }
+            v72 = v102.begin; /*0x797e8d*/
+            if ( !v102.begin || (unsigned __int16)v91 >= (unsigned int)(v102.end - v102.begin) ) /*0x797ea0*/
+            {
+              _invalid_parameter_noinfo(); /*0x797ea2*/
+              v72 = v102.begin; /*0x797ea7*/
+            }
+            v72[(unsigned __int16)v91] = i - 2; /*0x797eb2*/
+            goto LABEL_167; /*0x797eb5*/
           }
-          v29 = *(this + 0xF);
-          if ( !v29 || (unsigned __int16)v91 >= (unsigned int)((*(this + 0x10) - v29) >> 4) )
-            _invalid_parameter_noinfo();
-          v30 = *(this + 0xF) + 0x10 * (unsigned __int16)v91;
-          v31 = *(_DWORD *)(v30 + 4);
-          if ( !v31 || (unsigned __int16)k >= (unsigned int)((*(_DWORD *)(v30 + 8) - v31) >> 1) )
-            _invalid_parameter_noinfo();
-          v32 = *(this + 0x13);
-          v92 = *(_WORD *)(*(_DWORD *)(v30 + 4) + 2 * (unsigned __int16)k);
-          if ( !v32 || (unsigned __int16)v91 >= (unsigned int)((*(this + 0x14) - v32) >> 4) )
-            _invalid_parameter_noinfo();
-          v33 = *(this + 0x13) + 0x10 * (unsigned __int16)v91;
-          v34 = *(_DWORD *)(v33 + 4);
-          if ( !v34 || (unsigned __int16)k >= (unsigned int)((*(_DWORD *)(v33 + 8) - v34) >> 2) )
-            _invalid_parameter_noinfo();
-          v97 = v92;
-          v93 = 2 * v92;
-          *(_DWORD *)v88 = v93;
-          memcpy(Dst, *(const void **)(*(_DWORD *)(v33 + 4) + 4 * (unsigned __int16)k), *(size_t *)v88);
-          v35 = &Dst[v93];
-          v36 = *(this + 0x13);
-          Dst += v93;
-          if ( !v36 || (v37 = *(this + 0x14) - v36, v38 = (__int16)v91, (__int16)v91 >= (unsigned int)(v37 >> 4)) )
+          v29 = this->perLodStripLengths.begin; /*0x797ac2*/
+          if ( !v29 || (unsigned __int16)v91 >= (unsigned int)(this->perLodStripLengths.end - v29) ) /*0x797ad6*/
+            _invalid_parameter_noinfo(); /*0x797ad8*/
+          v30 = &this->perLodStripLengths.begin[(unsigned __int16)v91]; /*0x797ae7*/
+          v31 = v30->begin; /*0x797aea*/
+          if ( !v31 || (unsigned __int16)k >= (unsigned int)(v30->end - v31) ) /*0x797afa*/
+            _invalid_parameter_noinfo(); /*0x797afc*/
+          v32 = this->perLodStrips.begin; /*0x797b08*/
+          v92 = v30->begin[(unsigned __int16)k]; /*0x797b0d*/
+          if ( !v32 || (unsigned __int16)v91 >= (unsigned int)(this->perLodStrips.end - v32) ) /*0x797b1d*/
+            _invalid_parameter_noinfo(); /*0x797b1f*/
+          v33 = &this->perLodStrips.begin[(unsigned __int16)v91]; /*0x797b29*/
+          v34 = v33->begin; /*0x797b2c*/
+          if ( !v34 || (unsigned __int16)k >= (unsigned int)(v33->end - v34) ) /*0x797b3d*/
+            _invalid_parameter_noinfo(); /*0x797b3f*/
+          *(_DWORD *)v97 = v92; /*0x797b49*/
+          v93 = v92; /*0x797b50*/
+          memcpy(Dst, v33->begin[(unsigned __int16)k], v93 * 2); /*0x797b60*/
+          v35 = &Dst[v93 * 2]; /*0x797b65*/
+          v36 = this->perLodStrips.begin; /*0x797b69*/
+          Dst += v93 * 2; /*0x797b71*/
+          if ( !v36 /*0x797b85*/
+            || (v37 = (char *)this->perLodStrips.end - (char *)v36,
+                v38 = (__int16)v91,
+                (__int16)v91 >= (unsigned int)(v37 >> 4)) )
           {
-            _invalid_parameter_noinfo();
-            v38 = (__int16)v91;
+            _invalid_parameter_noinfo(); /*0x797b87*/
+            v38 = (__int16)v91; /*0x797b8c*/
           }
-          v39 = *(this + 0x13) + 0x10 * v38;
-          v40 = *(_DWORD *)(v39 + 4);
-          v41 = v40 ? (*(_DWORD *)(v39 + 8) - v40) >> 2 : 0;
-          if ( (unsigned __int16)k < v41 - 1 )
-            break;
+          v39 = &this->perLodStrips.begin[v38]; /*0x797b93*/
+          v40 = v39->begin; /*0x797b96*/
+          v41 = v40 ? v39->end - v40 : 0;
+          if ( (unsigned __int16)k < v41 - 1 ) /*0x797bb4*/
+            break; /*0x797bb4*/
 LABEL_112:
-          ++k;
+          ++k; /*0x797d80*/
         }
-        if ( !a2 )
-          break;
-        v42 = *(this + 0x13);
-        if ( !(v97 % 2) )
-          goto LABEL_99;
-        if ( !v42 || (unsigned __int16)v91 >= (unsigned int)((*(this + 0x14) - v42) >> 4) )
-          _invalid_parameter_noinfo();
-        v43 = *(this + 0x13) + 0x10 * (unsigned __int16)v91;
-        v44 = *(_DWORD *)(v43 + 4);
-        v97 = v43;
-        if ( !v44 || (unsigned __int16)k >= (unsigned int)((*(_DWORD *)(v43 + 8) - v44) >> 2) )
+        if ( !toggleFaceOrdering ) /*0x797bc2*/
+          break; /*0x797bc2*/
+        v42 = this->perLodStrips.begin; /*0x797bd9*/
+        if ( !(*(_DWORD *)v97 % 2) ) /*0x797bdc*/
+          goto LABEL_99; /*0x797bdc*/
+        if ( !v42 || (unsigned __int16)v91 >= (unsigned int)(this->perLodStrips.end - v42) ) /*0x797bf0*/
+          _invalid_parameter_noinfo(); /*0x797bf2*/
+        v43 = &this->perLodStrips.begin[(unsigned __int16)v91]; /*0x797bfc*/
+        v44 = v43->begin; /*0x797bff*/
+        *(_DWORD *)v97 = v43; /*0x797c04*/
+        if ( !v44 || (unsigned __int16)k >= (unsigned int)(v43->end - v44) ) /*0x797c14*/
         {
-          _invalid_parameter_noinfo();
-          v43 = v97;
+          _invalid_parameter_noinfo(); /*0x797c16*/
+          v43 = *(OB_stVectorUShortPtr_010201A0 **)v97; /*0x797c1b*/
         }
-        *(_WORD *)v35 = *(_WORD *)(*(_DWORD *)(*(_DWORD *)(v43 + 4) + 4 * (unsigned __int16)k) + v93 - 2);
-        v45 = *(this + 0x13);
-        v46 = v35 + 2;
-        if ( !v45 || (unsigned __int16)v91 >= (unsigned int)((*(this + 0x14) - v45) >> 4) )
-          _invalid_parameter_noinfo();
-        v47 = *(this + 0x13) + 0x10 * (unsigned __int16)v91;
-        v48 = *(_DWORD *)(v47 + 4);
-        v97 = v47;
-        if ( !v48 || (unsigned __int16)k >= (unsigned int)((*(_DWORD *)(v47 + 8) - v48) >> 2) )
+        *(_WORD *)v35 = v43->begin[(unsigned __int16)k][v93 - 1]; /*0x797c2e*/
+        v45 = this->perLodStrips.begin; /*0x797c31*/
+        v46 = v35 + 2; /*0x797c34*/
+        if ( !v45 || (unsigned __int16)v91 >= (unsigned int)(this->perLodStrips.end - v45) ) /*0x797c45*/
+          _invalid_parameter_noinfo(); /*0x797c47*/
+        v47 = &this->perLodStrips.begin[(unsigned __int16)v91]; /*0x797c51*/
+        v48 = v47->begin; /*0x797c54*/
+        *(_DWORD *)v97 = v47; /*0x797c59*/
+        if ( !v48 || (unsigned __int16)k >= (unsigned int)(v47->end - v48) ) /*0x797c69*/
         {
-          _invalid_parameter_noinfo();
-          v47 = v97;
+          _invalid_parameter_noinfo(); /*0x797c6b*/
+          v47 = *(OB_stVectorUShortPtr_010201A0 **)v97; /*0x797c70*/
         }
-        *v46 = *(_WORD *)(*(_DWORD *)(*(_DWORD *)(v47 + 4) + 4 * (unsigned __int16)k) + v93 - 2);
-        v49 = *(this + 0x13);
-        v50 = v46 + 1;
-        if ( !v49 || (unsigned __int16)v91 >= (unsigned int)((*(this + 0x14) - v49) >> 4) )
-          _invalid_parameter_noinfo();
-        v51 = *(this + 0x13) + 0x10 * (unsigned __int16)v91;
-        v52 = (unsigned __int16)k + 1;
-        v53 = *(_DWORD *)(v51 + 4);
-        if ( !v53 || v52 >= (*(_DWORD *)(v51 + 8) - v53) >> 2 )
-          _invalid_parameter_noinfo();
-        *v50 = **(_WORD **)(*(_DWORD *)(v51 + 4) + 4 * v52);
-        Dst = (char *)(v50 + 1);
+        *v46 = v47->begin[(unsigned __int16)k][v93 - 1]; /*0x797c83*/
+        v49 = this->perLodStrips.begin; /*0x797c86*/
+        v50 = v46 + 1; /*0x797c89*/
+        if ( !v49 || (unsigned __int16)v91 >= (unsigned int)(this->perLodStrips.end - v49) ) /*0x797c9a*/
+          _invalid_parameter_noinfo(); /*0x797c9c*/
+        v51 = &this->perLodStrips.begin[(unsigned __int16)v91]; /*0x797ca4*/
+        v52 = (unsigned __int16)k + 1; /*0x797ca7*/
+        v53 = v51->begin; /*0x797caa*/
+        if ( !v53 || v52 >= v51->end - v53 ) /*0x797cbb*/
+          _invalid_parameter_noinfo(); /*0x797cbd*/
+        *v50 = *v51->begin[v52]; /*0x797ccb*/
+        Dst = (char *)(v50 + 1); /*0x797cd6*/
       }
-      v42 = *(this + 0x13);
+      v42 = this->perLodStrips.begin; /*0x797cdf*/
 LABEL_99:
-      if ( !v42 || (unsigned __int16)v91 >= (unsigned int)((*(this + 0x14) - v42) >> 4) )
-        _invalid_parameter_noinfo();
-      v54 = *(this + 0x13) + 0x10 * (unsigned __int16)v91;
-      v55 = *(_DWORD *)(v54 + 4);
-      v97 = v54;
-      if ( !v55 || (unsigned __int16)k >= (unsigned int)((*(_DWORD *)(v54 + 8) - v55) >> 2) )
+      if ( !v42 || (unsigned __int16)v91 >= (unsigned int)(this->perLodStrips.end - v42) ) /*0x797cf0*/
+        _invalid_parameter_noinfo(); /*0x797cf2*/
+      v54 = &this->perLodStrips.begin[(unsigned __int16)v91]; /*0x797cfc*/
+      v55 = v54->begin; /*0x797cff*/
+      *(_DWORD *)v97 = v54; /*0x797d04*/
+      if ( !v55 || (unsigned __int16)k >= (unsigned int)(v54->end - v55) ) /*0x797d14*/
       {
-        _invalid_parameter_noinfo();
-        v54 = v97;
+        _invalid_parameter_noinfo(); /*0x797d16*/
+        v54 = *(OB_stVectorUShortPtr_010201A0 **)v97; /*0x797d1b*/
       }
-      *(_WORD *)v35 = *(_WORD *)(*(_DWORD *)(*(_DWORD *)(v54 + 4) + 4 * (unsigned __int16)k) + v93 - 2);
-      v56 = *(this + 0x13);
-      v57 = v35 + 2;
-      if ( !v56 || (unsigned __int16)v91 >= (unsigned int)((*(this + 0x14) - v56) >> 4) )
-        _invalid_parameter_noinfo();
-      v58 = *(this + 0x13) + 0x10 * (unsigned __int16)v91;
-      v59 = (unsigned __int16)k + 1;
-      v60 = *(_DWORD *)(v58 + 4);
-      if ( !v60 || v59 >= (*(_DWORD *)(v58 + 8) - v60) >> 2 )
-        _invalid_parameter_noinfo();
-      *v57 = **(_WORD **)(*(_DWORD *)(v58 + 4) + 4 * v59);
-      Dst = (char *)(v57 + 1);
-      goto LABEL_112;
+      *(_WORD *)v35 = v54->begin[(unsigned __int16)k][v93 - 1]; /*0x797d2e*/
+      v56 = this->perLodStrips.begin; /*0x797d31*/
+      v57 = v35 + 2; /*0x797d34*/
+      if ( !v56 || (unsigned __int16)v91 >= (unsigned int)(this->perLodStrips.end - v56) ) /*0x797d45*/
+        _invalid_parameter_noinfo(); /*0x797d47*/
+      v58 = &this->perLodStrips.begin[(unsigned __int16)v91]; /*0x797d4f*/
+      v59 = (unsigned __int16)k + 1; /*0x797d52*/
+      v60 = v58->begin; /*0x797d55*/
+      if ( !v60 || v59 >= v58->end - v60 ) /*0x797d66*/
+        _invalid_parameter_noinfo(); /*0x797d68*/
+      *v57 = *v58->begin[v59]; /*0x797d76*/
+      Dst = (char *)(v57 + 1); /*0x797d7c*/
+      goto LABEL_112; /*0x797d7c*/
     }
 LABEL_168:
-    sub_7969B0(this);
-    sub_796BC0(this + 0xE, &v103);
-    sub_796D10(this + 0x12, &v100);
-    sub_785580(this + 0xA, (int)&v106);
-    if ( v107 )
-      FormHeapFree(v107);
-    v83 = v101;
-    if ( v101 )
+    OB_CIndexedGeometry_DeleteIndexData_010201A0(this); /*0x797fe1*/
+    OB_stVector_stVectorUShort_CopyAssign_010201A0(&this->perLodStripLengths, &source); /*0x797ff0*/
+    OB_stVector_stVectorUShortPtr_CopyAssign_010201A0(&this->perLodStrips, &v100); /*0x797ffd*/
+    OB_stVectorUInt32_CopyAssign_010201A0(&this->perLodTriangleCounts, &v102); /*0x79800a*/
+    if ( v102.begin ) /*0x798015*/
+      FormHeapFree((unsigned int)v102.begin); /*0x798018*/
+    v83 = v100.begin; /*0x798020*/
+    if ( v100.begin ) /*0x798026*/
     {
-      sub_794FC0(v101, v102);
-      FormHeapFree((unsigned int)v83);
+      OB_stVector4_DestroyRange_010201A0((OB_stVector4_010201A0 *)v100.begin, (OB_stVector4_010201A0 *)v100.end); /*0x79803b*/
+      FormHeapFree((unsigned int)v83); /*0x798041*/
     }
-    v84 = v104;
-    if ( v104 )
+    v84 = source.begin; /*0x798049*/
+    if ( source.begin ) /*0x79804f*/
     {
-      sub_794FC0(v104, v105);
-      FormHeapFree((unsigned int)v84);
+      OB_stVector4_DestroyRange_010201A0((OB_stVector4_010201A0 *)source.begin, (OB_stVector4_010201A0 *)source.end); /*0x798064*/
+      FormHeapFree((unsigned int)v84); /*0x79806a*/
     }
   }
 }

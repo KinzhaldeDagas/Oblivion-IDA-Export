@@ -1,1 +1,1 @@
-NiColorAlpha
+struct NiColorAlpha;

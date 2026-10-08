@@ -1,4 +1,4 @@
-BSStringT *sub_9E4480()
+NiRTTI *sub_9E4480()
 {
-  return sub_70E220(&stru_B365AC, "WeaponObject", (int)dword_BA7A20);
+  return NiRTTI_Constructor(&stru_B365AC, "WeaponObject", &MEMORY[0xBA7A20]); /*0x9e4494*/
 }

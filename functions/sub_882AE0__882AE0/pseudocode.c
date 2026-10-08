@@ -1,12 +1,18 @@
-NiTPointerList__BSImageSpaceShader *__thiscall sub_882AE0(_DWORD *this, NiGeometry *a2, int a3, _WORD *a4, int a5)
-{
+// HairShaderProperty render-pass producer at vtable +0x5C. Normally constructs Hair selectors 0xE0 (no enabled light) or 0xE1 (active-light path), plus local mode/caster work. If renderer B42F3E is enabled and flags at this+0x1C contain 0x8000 or 0x10000, it delegates to BSShaderPPLightingProperty_BuildRenderPasses; shader-package class >=2 then invokes Hair vtable +0x9C and can emit inherited 0x177/0x178/0x179 records.
+NiTPointerList__BSImageSpaceShader *__thiscall HairShaderProperty_BuildRenderPasses(
+        HairShaderProperty *this,
+        NiGeometry *geometry,
+        int renderFlags,
+        unsigned __int16 *passCount,
+        int emitMode)
+{                                               // Hair conditional fallback gate 1/3: renderer global B42F3E (OB_RendererGlobalState_010201A0+0xA5) must be nonzero. WinMain copies bDoImageSpaceEffect into this byte at 0x40E8CB.
   int v6; // eax
   int v8; // edi
   int v9; // ebx
-  _DWORD *v10; // ebp
-  int v11; // eax
-  int v12; // eax
-  float v13; // ebx
+  float v10; // ebp
+  RenderPass_DecodedLayout *v11; // eax
+  RenderPass_DecodedLayout *v12; // eax
+  ShadowSceneLight *v13; // ebx
   float *v14; // eax
   float v15; // ecx
   float v16; // edx
@@ -24,209 +30,235 @@ NiTPointerList__BSImageSpaceShader *__thiscall sub_882AE0(_DWORD *this, NiGeomet
   float v28; // edx
   float v29; // eax
   int v30; // eax
-  int v31; // eax
-  int v32; // eax
-  int v33; // eax
-  int v34; // eax
+  ShadowSceneLight *v31; // edi
+  ShadowSceneLight *v32; // eax
+  ShadowSceneLight *v33; // eax
+  ShadowSceneLight *NextActiveLight; // eax
+  ShadowSceneLight *v35; // eax
+  RenderPass_DecodedLayout *v36; // eax
+  RenderPass_DecodedLayout *v37; // eax
   NiProperty *NiPropertyByID; // edi
-  bool v36; // zf
-  float v37; // [esp+14h] [ebp-38h]
-  float v38; // [esp+14h] [ebp-38h]
-  float v39; // [esp+18h] [ebp-34h]
-  float v40; // [esp+18h] [ebp-34h]
-  float v41; // [esp+1Ch] [ebp-30h]
-  float v42; // [esp+1Ch] [ebp-30h]
-  float v43; // [esp+1Ch] [ebp-30h]
-  float v44; // [esp+20h] [ebp-2Ch]
-  float v45; // [esp+24h] [ebp-28h] BYREF
-  float v46; // [esp+28h] [ebp-24h]
-  float v47; // [esp+2Ch] [ebp-20h]
+  bool v39; // zf
+  float v40; // [esp+14h] [ebp-38h]
+  float v41; // [esp+14h] [ebp-38h]
+  float v42; // [esp+18h] [ebp-34h]
+  float v43; // [esp+18h] [ebp-34h]
+  float v44; // [esp+1Ch] [ebp-30h]
+  float v45; // [esp+1Ch] [ebp-30h]
+  float v46; // [esp+1Ch] [ebp-30h]
+  float v47; // [esp+20h] [ebp-2Ch]
+  float v48; // [esp+24h] [ebp-28h] BYREF
+  float v49; // [esp+28h] [ebp-24h]
+  float v50; // [esp+2Ch] [ebp-20h]
   float x; // [esp+30h] [ebp-1Ch]
-  float v49; // [esp+34h] [ebp-18h]
-  float v50; // [esp+38h] [ebp-14h]
-  float v51; // [esp+3Ch] [ebp-10h]
-  int v52; // [esp+48h] [ebp-4h]
+  float v52; // [esp+34h] [ebp-18h]
+  float v53; // [esp+38h] [ebp-14h]
+  float v54; // [esp+3Ch] [ebp-10h]
+  int v55; // [esp+48h] [ebp-4h]
 
-  if ( ImageSpaceEffectEnabled )
+  if ( OB_RendererGlobalState_010201A0.pad_00D[0x98] ) /*0x882b09*/
   {
-    v6 = *(this + 7);
-    if ( (v6 & 0x8000) != 0 || (v6 & 0x10000) != 0 )
-      return sub_7D85D0((NiTPointerList__BSImageSpaceShader *)this, a2, a3, a4, a5);
+    v6 = *((_DWORD *)this + 7);                 // Hair conditional fallback gate 2/3: HairShaderProperty flags at this+0x1C must contain 0x8000 or 0x10000; otherwise the local Hair E0/E1 producer remains active. /*0x882b12*/
+    if ( (v6 & 0x8000) != 0 || (v6 & 0x10000) != 0 ) /*0x882b21*/
+      return BSShaderPPLightingProperty_BuildRenderPasses( /*0x882b3e*/
+               (NiTPointerList__BSImageSpaceShader *)this,
+               geometry,
+               renderFlags,
+               passCount,
+               emitMode);                       // Flagged Hair fallback call into base +0x5C. The required Refract/RefractF bit remains set and forces the class>=2 +0x9C early refraction return; class 1 uses +0x98, which has no high-selector construction.
   }
-  v8 = a3 | (LOWORD(dword_B42EAC) << 8);
-  if ( LOWORD(dword_B42EAC) == 5 )
-    return (NiTPointerList__BSImageSpaceShader *)(this + 0xE);
-  if ( LOWORD(dword_B42EAC) == 6 )
+  v8 = renderFlags | (*(unsigned __int16 *)&OB_RendererGlobalState_010201A0.pad_00D[6] << 8); /*0x882b50*/
+  if ( *(_WORD *)&OB_RendererGlobalState_010201A0.pad_00D[6] == 5 ) /*0x882b58*/
+    return (NiTPointerList__BSImageSpaceShader *)((char *)this + 0x38); /*0x882b5d*/
+  if ( *(_WORD *)&OB_RendererGlobalState_010201A0.pad_00D[6] == 6 ) /*0x882b66*/
   {
-    sub_85ABD0((BSTextureManager *)this, (int)a2, a2->member.skinData != 0, 0);
-    return (NiTPointerList__BSImageSpaceShader *)(this + 0x12);
+    sub_85ABD0((BSTextureManager *)this, geometry, geometry->member.skinData != 0, 0); /*0x882b7c*/
+    return (NiTPointerList__BSImageSpaceShader *)((char *)this + 0x48); /*0x882b84*/
   }
-  v9 = a5;
-  if ( *(this + 9) != v8 || !(_BYTE)a5 )
+  v9 = emitMode; /*0x882b8c*/
+  if ( *((_DWORD *)this + 9) != v8 || !(_BYTE)emitMode ) /*0x882b94*/
   {
-    if ( (_BYTE)a5 == 1 )
+    if ( (_BYTE)emitMode == 1 ) /*0x882b9d*/
     {
-      sub_7E24C0((BSShaderProperty *)this);
-      *(this + 9) = v8;
+      BSShaderProperty_ClearRenderPassLists((BSShaderProperty *)this); /*0x882b9f*/
+      *((_DWORD *)this + 9) = v8; /*0x882ba4*/
     }
     else
     {
-      *a4 = 0;
+      *passCount = 0; /*0x882bad*/
     }
-    v10 = *(_DWORD **)(GetShadowSceneNode(*(this + 7) >> 0x1C) + 0x118);
-    if ( (unsigned __int16)sub_7ED600(this) )
+    v10 = *(float *)(GetShadowSceneNode(*((_DWORD *)this + 7) >> 0x1C) + 0x118); /*0x882bc1*/
+    if ( (unsigned __int16)BSShaderLightingProperty__CountFrustumVisibleEnabledLights(this) ) /*0x882bcc*/
     {
-      v13 = COERCE_FLOAT(sub_7ED2A0(this));
-      v14 = (float *)*sub_405AD0(v10, &a3);
-      v15 = v14[0x3B];
-      v16 = v14[0x3C];
-      v17 = v14[0x3D];
-      v45 = v15;
-      v46 = v16;
-      v47 = v17;
-      sub_7016A0((NiD3DVertexShader *)&a3);
-      v44 = sub_8823C0(&v45);
-      y = a2->member.super.m_kWorldBound.Center.y;
-      x = a2->member.super.m_kWorldBound.Center.x;
-      z = a2->member.super.m_kWorldBound.Center.z;
-      v49 = y;
-      Radius = a2->member.super.m_kWorldBound.Radius;
-      v50 = z;
-      v51 = Radius;
-      v21 = (float *)*sub_405AD0((_DWORD *)LODWORD(v13), &a3);
-      sub_7016A0((NiD3DVertexShader *)&a3);
-      v37 = v21[0x22] - x;
-      v39 = v21[0x23] - v49;
-      v41 = v21[0x24] - v50;
-      v45 = v37;
-      v46 = v39;
-      v47 = v41;
-      v22 = sub_404C90(&v45);
-      v23 = v22 - v51;
-      v24 = v23 > 0.0;
-      v25 = 0.0 == v23;
-      v26 = 0.0;
-      if ( v24 || v25 )
+      *(float *)&v13 = COERCE_FLOAT(BSShaderLightingProperty__GetFirstActiveLight(this)); /*0x882c45*/
+      v14 = (float *)*ShadowSceneLight_GetLightRef((_DWORD *)LODWORD(v10), &renderFlags); /*0x882c53*/
+      v15 = v14[0x3B]; /*0x882c55*/
+      v16 = v14[0x3C]; /*0x882c5b*/
+      v17 = v14[0x3D]; /*0x882c61*/
+      v48 = v15; /*0x882c67*/
+      v49 = v16; /*0x882c6f*/
+      v50 = v17; /*0x882c73*/
+      NiPointerSlot_Release((void **)&renderFlags); /*0x882c77*/
+      v47 = sub_8823C0(&v48); /*0x882c85*/
+      y = geometry->member.super.m_kWorldBound.Center.y; /*0x882c90*/
+      x = geometry->member.super.m_kWorldBound.Center.x; /*0x882c93*/
+      z = geometry->member.super.m_kWorldBound.Center.z; /*0x882c97*/
+      v52 = y; /*0x882c9a*/
+      Radius = geometry->member.super.m_kWorldBound.Radius; /*0x882c9e*/
+      v53 = z; /*0x882ca5*/
+      v54 = Radius; /*0x882cac*/
+      v21 = (float *)*ShadowSceneLight_GetLightRef(v13, &renderFlags); /*0x882cb5*/
+      NiPointerSlot_Release((void **)&renderFlags); /*0x882cbb*/
+      v40 = v21[0x22] - x; /*0x882cce*/
+      v42 = v21[0x23] - v52; /*0x882cdc*/
+      v44 = v21[0x24] - v53; /*0x882cea*/
+      v48 = v40; /*0x882cf2*/
+      v49 = v42; /*0x882cfa*/
+      v50 = v44; /*0x882d02*/
+      v22 = NiPoint3_Length(&v48); /*0x882d06*/
+      v23 = v22 - v54; /*0x882d0b*/
+      v24 = v23 > 0.0; /*0x882d11*/
+      v25 = 0.0 == v23; /*0x882d11*/
+      v26 = 0.0; /*0x882d15*/
+      if ( v24 || v25 ) /*0x882d17*/
       {
-        v42 = v21[0x22] - x;
-        v40 = v21[0x23] - v49;
-        v38 = v21[0x24] - v50;
-        v45 = v42;
-        v46 = v40;
-        v47 = v38;
-        v27 = sub_404C90(&v45);
-        v26 = v27 - v51;
+        v45 = v21[0x22] - x; /*0x882d2c*/
+        v43 = v21[0x23] - v52; /*0x882d3a*/
+        v41 = v21[0x24] - v53; /*0x882d48*/
+        v48 = v45; /*0x882d50*/
+        v49 = v43; /*0x882d58*/
+        v50 = v41; /*0x882d60*/
+        v27 = NiPoint3_Length(&v48); /*0x882d64*/
+        v26 = v27 - v54; /*0x882d69*/
       }
-      v43 = v26;
-      v28 = v21[0x3C];
-      v29 = v21[0x3D];
-      v45 = v21[0x3B];
-      v46 = v28;
-      v47 = v29;
-      *(float *)&a3 = sub_8823C0(&v45) * (v43 * (1.0 / v43));
-      if ( *(float *)&a3 >= (double)v44 )
+      v46 = v26; /*0x882d73*/
+      v28 = v21[0x3C]; /*0x882d77*/
+      v29 = v21[0x3D]; /*0x882d7d*/
+      v48 = v21[0x3B]; /*0x882d83*/
+      v49 = v28; /*0x882d8b*/
+      v50 = v29; /*0x882d8f*/
+      *(float *)&renderFlags = sub_8823C0(&v48) * (v46 * (1.0 / v46)); /*0x882da6*/
+      if ( *(float *)&renderFlags >= (double)v47 ) /*0x882db9*/
       {
-        *(this + 7) |= 0x400u;
-        v45 = v13;
-        *(this + 9) = 0;
-        if ( v44 <= 0.0 )
+        *((_DWORD *)this + 7) |= 0x400u; /*0x882e09*/
+        v48 = *(float *)&v13; /*0x882e12*/
+        *((_DWORD *)this + 9) = 0; /*0x882e18*/
+        if ( v47 <= 0.0 ) /*0x882e22*/
         {
-          if ( sub_7ED4B0((int **)this) )
+          NextActiveLight = BSShaderLightingProperty__GetNextActiveLight(this); /*0x882e51*/
+          if ( NextActiveLight ) /*0x882e58*/
           {
-            v32 = sub_7ED4B0((int **)this);
-            *(this + 7) |= 0x800u;
-            *(this + 9) = 0;
-            sub_434980(this, 0x1000, v32 != 0);
+            v10 = *(float *)&NextActiveLight; /*0x882e5c*/
+            v35 = BSShaderLightingProperty__GetNextActiveLight(this); /*0x882e5e*/
+            *((_DWORD *)this + 7) |= 0x800u; /*0x882e63*/
+            v31 = v35; /*0x882e6a*/
+            *((_DWORD *)this + 9) = 0; /*0x882e73*/
+            sub_434980(this, 0x1000, v35 != 0); /*0x882e7c*/
           }
           else
           {
-            *(this + 7) &= 0xFFFFE7FF;
-            *(this + 9) = 0;
+            v10 = 0.0; /*0x882e83*/
+            v31 = 0; /*0x882e85*/
+            *((_DWORD *)this + 7) &= 0xFFFFE7FF; /*0x882e87*/
+            *((_DWORD *)this + 9) = 0; /*0x882e8e*/
           }
         }
         else
         {
-          v31 = sub_7ED4B0((int **)this);
-          *(this + 9) = 0;
-          if ( v31 )
-            *(this + 7) |= 0x1800u;
+          v33 = BSShaderLightingProperty__GetNextActiveLight(this); /*0x882e24*/
+          *((_DWORD *)this + 9) = 0; /*0x882e2b*/
+          if ( v33 ) /*0x882e2e*/
+          {
+            *((_DWORD *)this + 7) |= 0x1800u; /*0x882e30*/
+            v31 = v33; /*0x882e37*/
+          }
           else
-            *(this + 7) = *(this + 7) & 0xFFFFE7FF | 0x800;
+          {
+            v31 = 0; /*0x882e44*/
+            *((_DWORD *)this + 7) = *((_DWORD *)this + 7) & 0xFFFFE7FF | 0x800; /*0x882e4c*/
+          }
         }
       }
       else
       {
-        *(this + 7) &= 0xFFFFE3FF;
-        v30 = *(this + 7);
-        v45 = *(float *)&v10;
-        *(this + 9) = 0;
-        if ( v13 != 0.0 )
+        *((_DWORD *)this + 7) &= 0xFFFFE3FF; /*0x882dbb*/
+        v30 = *((_DWORD *)this + 7); /*0x882dc4*/
+        v31 = 0; /*0x882dc7*/
+        v48 = v10; /*0x882dc9*/
+        v10 = 0.0; /*0x882dcd*/
+        *((_DWORD *)this + 9) = 0; /*0x882dd1*/
+        if ( *(float *)&v13 != 0.0 ) /*0x882dd4*/
         {
-          *(this + 7) = v30 | 0x800;
-          *(this + 9) = 0;
+          v10 = *(float *)&v13; /*0x882ddb*/
+          *((_DWORD *)this + 7) = v30 | 0x800; /*0x882ddd*/
+          *((_DWORD *)this + 9) = 0; /*0x882de0*/
         }
-        if ( sub_7ED4B0((int **)this) )
+        v32 = BSShaderLightingProperty__GetNextActiveLight(this); /*0x882de5*/
+        if ( v32 ) /*0x882dec*/
         {
-          *(this + 7) |= 0x1000u;
-          *(this + 9) = 0;
+          *((_DWORD *)this + 7) |= 0x1000u; /*0x882df2*/
+          v31 = v32; /*0x882df9*/
+          *((_DWORD *)this + 9) = 0; /*0x882dfb*/
         }
       }
-      if ( (_BYTE)a5 == 1 )
+      if ( (_BYTE)emitMode == 1 ) /*0x882e96*/
       {
-        *(float *)&v33 = COERCE_FLOAT(FormHeapAlloc(0x10u));
-        a3 = v33;
-        v52 = 1;
-        if ( *(float *)&v33 == 0.0 )
-          *(float *)&v34 = 0.0;
+        *(float *)&v36 = COERCE_FLOAT(FormHeapAlloc(0x10u)); /*0x882e9a*/
+        renderFlags = (int)v36; /*0x882ea2*/
+        v55 = 1; /*0x882ea8*/
+        if ( *(float *)&v36 == 0.0 ) /*0x882eb0*/
+          *(float *)&v37 = 0.0; /*0x882ed2*/
         else
-          *(float *)&v34 = COERCE_FLOAT(sub_7E2370(v33, (int)a2, 0xE1, 1, 3u, SLODWORD(v45)));
-        a3 = v34;
-        v52 = 0xFFFFFFFF;
-        sub_5B1E20((BSTextureManager *)(this + 0xA), (void **)&a3);
-        v9 = a5;
-        goto LABEL_41;
+          *(float *)&v37 = COERCE_FLOAT(RenderPass_Construct(v36, geometry, 0xE1u, 1u, 3u, v48, v10, v31)); /*0x882ec8*/
+        renderFlags = (int)v37; /*0x882ed4*/
+        v55 = 0xFFFFFFFF; /*0x882ee0*/
+        NiTPointerList__AddTail((BSTextureManager *)((char *)this + 0x28), (void **)&renderFlags); /*0x882ee8*/
+        v9 = emitMode; /*0x882eed*/
+        goto LABEL_41; /*0x882ef1*/
       }
-      v9 = a5;
+      v9 = emitMode; /*0x882ef3*/
     }
-    else if ( (_BYTE)v9 == 1 )
+    else if ( (_BYTE)v9 == 1 ) /*0x882bde*/
     {
-      v11 = FormHeapAlloc(0x10u);
-      a5 = v11;
-      v52 = 0;
-      if ( v11 )
-        *(float *)&v12 = COERCE_FLOAT(sub_7E2370(v11, (int)a2, 0xE0, 1, 1u, (int)v10));
+      v11 = (RenderPass_DecodedLayout *)FormHeapAlloc(0x10u); /*0x882be6*/
+      emitMode = (int)v11; /*0x882bee*/
+      v55 = 0; /*0x882bf4*/
+      if ( v11 ) /*0x882bf8*/
+        *(float *)&v12 = COERCE_FLOAT(RenderPass_Construct(v11, geometry, 0xE0u, 1u, 1u, v10)); /*0x882c0a*/
       else
-        *(float *)&v12 = 0.0;
-      v52 = 0xFFFFFFFF;
-      a3 = v12;
-      sub_5B1E20((BSTextureManager *)(this + 0xA), (void **)&a3);
-      *(this + 7) &= 0xFFFFE3FF;
-      *(this + 9) = 0;
-      goto LABEL_41;
+        *(float *)&v12 = 0.0; /*0x882c14*/
+      v55 = 0xFFFFFFFF; /*0x882c1e*/
+      renderFlags = (int)v12; /*0x882c26*/
+      NiTPointerList__AddTail((BSTextureManager *)((char *)this + 0x28), (void **)&renderFlags); /*0x882c2a*/
+      *((_DWORD *)this + 7) &= 0xFFFFE3FF; /*0x882c2f*/
+      *((_DWORD *)this + 9) = 0; /*0x882c36*/
+      goto LABEL_41; /*0x882c39*/
     }
-    ++*a4;
+    ++*passCount; /*0x882efb*/
 LABEL_41:
-    if ( ShaderPackage >= 3 && (dword_B42F40 & 0x10) != 0 )
+    if ( *(int *)OB_RendererGlobalState_010201A0.shaderPackageVersion_le >= 3 /*0x882f19*/
+      && (OB_RendererGlobalState_010201A0.pad_00D[0x9A] & 0x10) != 0 )
     {
-      if ( (_BYTE)v9 )
+      if ( (_BYTE)v9 ) /*0x882f1d*/
       {
-        NiPropertyByID = NiNode_GetNiPropertyByID((NiNode *)a2, 0);
-        if ( !NiPropertyByID
-          && (NiPropertyByID = *((NiProperty **)*sub_405760(a2, (volatile LONG **)&a3) + 2),
-              sub_7016A0((NiD3DVertexShader *)&a3),
+        NiPropertyByID = NiNode_GetNiPropertyByID((NiNode *)geometry, 0); /*0x882f2c*/
+        if ( !NiPropertyByID /*0x882f5f*/
+          && (NiPropertyByID = *((NiProperty **)*NiGeometry_GetPropertyState(geometry, (NiPropertyState **)&renderFlags)
+                               + 2),
+              NiPointerSlot_Release((void **)&renderFlags),
               !NiPropertyByID)
-          || (v36 = ((int)NiPropertyByID[1].vtbl & 0x200) == 0, LOBYTE(a5) = 1, v36) )
+          || (v39 = ((int)NiPropertyByID[1].vtbl & 0x200) == 0, LOBYTE(emitMode) = 1, v39) )
         {
-          LOBYTE(a5) = 0;
+          LOBYTE(emitMode) = 0; /*0x882f61*/
         }
-        sub_85AAC0(this, (int)a2, a2->member.skinData != 0, a5);
+        BSShaderLightingProperty_AppendMode5CasterPass(this, (int)geometry, geometry->member.skinData != 0, emitMode); /*0x882f79*/
       }
     }
   }
-  if ( *(this + 0x38) )
+  if ( *((_DWORD *)this + 0x38) ) /*0x882f7e*/
   {
-    LOBYTE(a5) = 1;
-    sub_854B70(this, (int)a2, a4, v9, (char *)&a5, 0);
+    LOBYTE(emitMode) = 1; /*0x882f9b*/
+    BSShaderProperty_AppendTextureEffectPass((BSShaderProperty *)this, geometry, passCount, v9, (char *)&emitMode, 0); /*0x882fa0*/
   }
-  return (NiTPointerList__BSImageSpaceShader *)(this + 0xA);
+  return (NiTPointerList__BSImageSpaceShader *)((char *)this + 0x28); /*0x882fa8*/
 }

@@ -1,4 +1,4 @@
-0x88B850: push    ebp
+0x88B850: push    ebp; TES4 authoritative bhkWorld/bhkWorldM raycast implementation. On hit, output normal lives at data+0x30, hitFraction at +0x44, root collidable at +0x50; layer is low 6 bits of filter info at data+0x24.
 0x88B851: mov     ebp, esp
 0x88B853: and     esp, 0FFFFFFF0h
 0x88B856: push    0FFFFFFFFh
@@ -26,7 +26,7 @@
 0x88B8A3: cmp     eax, 9
 0x88B8A6: ja      short def_88B8AF; jumptable 0088B8AF default case, cases 22-25,28
 0x88B8A8: movzx   eax, ds:byte_88BB48[eax]
-0x88B8AF: jmp     ds:jpt_88B8AF[eax*4]; switch jump
+0x88B8AF: jmp     ds:jpt_88B8AF[eax*4]; TES4 authoritative: bhkWorld raycast throttles/counts by input filter layer low 6 bits before running the ray query.
 0x88B8B6: mov     eax, ds:0BA7928h; jumptable 0088B8AF cases 21,27
 0x88B8BB: add     dword ptr ds:0BA7924h, 1
 0x88B8C2: add     eax, 1
@@ -167,7 +167,7 @@
 0x88BAA4: fstp    st
 0x88BAA6: push    esi; a2
 0x88BAA7: mov     ecx, edi; this
-0x88BAA9: call    hkWorld__CastRay
+0x88BAA9: call    hkWorld__CastRay; TES4 authoritative: direct ray path calls hkWorld::CastRay and reports a hit when output root collidable at ray data +0x50 is non-null.
 0x88BAAE: cmp     dword ptr [esi+50h], 0
 0x88BAB2: setnz   [esp+94h+var_79]
 0x88BAB7: mov     al, [esp+94h+var_79]
@@ -206,3 +206,20 @@
 0x88BB2B: mov     esp, ebp
 0x88BB2D: pop     ebp
 0x88BB2E: retn    4
+0x683C10: mov     dword ptr [ecx], offset ??_7hkBroadPhaseCastCollector@@6B@; const hkBroadPhaseCastCollector::`vftable'
+0x683C16: retn
+0x9D5EA0: lea     ecx, [ebp+var_70]
+0x9D5EA3: jmp     loc_683C10
+0x9D5EA8: lea     ecx, [ebp+var_70]
+0x9D5EAB: jmp     loc_683C10
+0x9D5EB0: mov     edx, [esp-4+arg_4]
+0x9D5EB4: lea     eax, [edx-84h]
+0x9D5EBA: mov     ecx, [edx-88h]
+0x9D5EC0: xor     ecx, eax
+0x9D5EC2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D5EC7: add     eax, 0Ch
+0x9D5ECA: mov     ecx, [edx-8]
+0x9D5ECD: xor     ecx, eax
+0x9D5ECF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D5ED4: mov     eax, offset stru_AFDEA0
+0x9D5ED9: jmp     ___CxxFrameHandler3

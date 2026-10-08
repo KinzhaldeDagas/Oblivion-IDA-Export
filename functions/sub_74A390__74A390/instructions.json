@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x74A3A4",
-    "line": "lea     ecx, [esp+1A0h+var_9C]",
+    "line": "lea     ecx, [esp+1A0h+local]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -67,43 +67,43 @@
   },
   {
     "ea": "0x74A3B2",
-    "line": "call    sub_718A80",
+    "line": "call    sub_718A80;",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x74A3B7",
-    "line": "lea     edx, [esp+1A0h+var_9C]",
+    "line": "lea     edx, [esp+1A0h+local]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x74A3BE",
-    "line": "push    edx",
+    "line": "push    edx; local",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x74A3BF",
-    "line": "lea     eax, [esp+1A4h+var_128]",
+    "line": "lea     eax, [esp+1A4h+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x74A3C3",
-    "line": "push    eax",
+    "line": "push    eax; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x74A3C4",
-    "line": "lea     ecx, [ebx+0Ch]",
+    "line": "lea     ecx, [ebx+0Ch]; parent",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x74A3C7",
-    "line": "call    sub_53D7A0",
+    "line": "call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.",
     "mnemonic": "call",
     "size": 5
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x74A3DE",
-    "line": "lea     edi, [esp+1A0h+var_D0]",
+    "line": "lea     edi, [esp+1A0h+parent]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -462,12 +462,6 @@
     "size": 2
   },
   {
-    "ea": "0x74A4AA",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x74A4B0",
     "line": "mov     esi, [esp+1A0h+arg_14]",
     "mnemonic": "mov",
@@ -583,7 +577,7 @@
   },
   {
     "ea": "0x74A4F1",
-    "line": "push    eax",
+    "line": "push    eax; local",
     "mnemonic": "push",
     "size": 1
   },
@@ -595,13 +589,13 @@
   },
   {
     "ea": "0x74A4F9",
-    "line": "push    eax",
+    "line": "push    eax; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x74A4FA",
-    "line": "push    ecx",
+    "line": "push    ecx; local",
     "mnemonic": "push",
     "size": 1
   },
@@ -613,31 +607,31 @@
   },
   {
     "ea": "0x74A502",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x74A503",
-    "line": "lea     ecx, [esp+1B0h+var_D0]",
+    "line": "lea     ecx, [esp+1B0h+parent]; parent",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x74A50A",
-    "line": "call    sub_53D7A0",
+    "line": "call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x74A50F",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; parent",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x74A511",
-    "line": "call    sub_53D7A0",
+    "line": "call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,7 +649,7 @@
   },
   {
     "ea": "0x74A51D",
-    "line": "lea     edi, [esp+1A0h+var_128]",
+    "line": "lea     edi, [esp+1A0h+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -667,7 +661,7 @@
   },
   {
     "ea": "0x74A523",
-    "line": "fld     [esp+1A0h+var_F8]",
+    "line": "fld     [esp+1A0h+out.scale]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -685,7 +679,7 @@
   },
   {
     "ea": "0x74A532",
-    "line": "lea     ecx, [esp+1A4h+var_128]",
+    "line": "lea     ecx, [esp+1A4h+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -703,7 +697,7 @@
   },
   {
     "ea": "0x74A53A",
-    "line": "call    sub_710190",
+    "line": "call    NiMatrix3_ScaleTo",
     "mnemonic": "call",
     "size": 5
   },
@@ -829,7 +823,7 @@
   },
   {
     "ea": "0x74A582",
-    "line": "fadd    [esp+1A0h+var_104]",
+    "line": "fadd    [esp+1A0h+out.pos.x]",
     "mnemonic": "fadd",
     "size": 7
   },
@@ -889,7 +883,7 @@
   },
   {
     "ea": "0x74A5AC",
-    "line": "fadd    [esp+1A0h+var_100]",
+    "line": "fadd    [esp+1A0h+out.pos.y]",
     "mnemonic": "fadd",
     "size": 7
   },
@@ -949,7 +943,7 @@
   },
   {
     "ea": "0x74A5D6",
-    "line": "fadd    [esp+1A0h+var_FC]",
+    "line": "fadd    [esp+1A0h+out.pos.z]",
     "mnemonic": "fadd",
     "size": 7
   },
@@ -961,7 +955,7 @@
   },
   {
     "ea": "0x74A5E1",
-    "line": "fld     [esp+1A0h+var_124]",
+    "line": "fld     [esp+1A0h+out.rot.data+4]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -985,7 +979,7 @@
   },
   {
     "ea": "0x74A5ED",
-    "line": "fld     [esp+1A0h+var_128]",
+    "line": "fld     [esp+1A0h+out.rot.data]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1021,7 +1015,7 @@
   },
   {
     "ea": "0x74A5FD",
-    "line": "fld     [esp+1A0h+var_120]",
+    "line": "fld     [esp+1A0h+out.rot.data+8]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -1075,7 +1069,7 @@
   },
   {
     "ea": "0x74A61A",
-    "line": "fld     [esp+1A0h+var_118]",
+    "line": "fld     [esp+1A0h+out.rot.data+10h]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -1087,7 +1081,7 @@
   },
   {
     "ea": "0x74A623",
-    "line": "fld     [esp+1A0h+var_11C]",
+    "line": "fld     [esp+1A0h+out.rot.data+0Ch]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -1105,7 +1099,7 @@
   },
   {
     "ea": "0x74A62E",
-    "line": "fld     [esp+1A0h+var_114]",
+    "line": "fld     [esp+1A0h+out.rot.data+14h]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -1129,7 +1123,7 @@
   },
   {
     "ea": "0x74A63D",
-    "line": "fld     [esp+1A0h+var_10C]",
+    "line": "fld     [esp+1A0h+out.rot.data+1Ch]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -1141,7 +1135,7 @@
   },
   {
     "ea": "0x74A646",
-    "line": "fld     [esp+1A0h+var_110]",
+    "line": "fld     [esp+1A0h+out.rot.data+18h]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -1165,7 +1159,7 @@
   },
   {
     "ea": "0x74A653",
-    "line": "fmul    [esp+1A0h+var_108]",
+    "line": "fmul    [esp+1A0h+out.rot.data+20h]",
     "mnemonic": "fmul",
     "size": 7
   },
@@ -1441,7 +1435,7 @@
   },
   {
     "ea": "0x74A6FE",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },

@@ -163,23 +163,23 @@
 0x61EDC5: add     esp, 14h
 0x61EDC8: mov     ecx, edi
 0x61EDCA: mov     [esp+124h+var_110], ebp
-0x61EDCE: call    sub_5E3C80
+0x61EDCE: call    sub_5E3C80; Fly-speed branch used by sub_5E65B0 when fly-speed flag 0x2000 is set. Uses Speed actor value and encumbrance, then applies package-target limiting pattern.
 0x61EDD3: sub     esp, 8
 0x61EDD6: mov     ecx, edi
 0x61EDD8: fstp    [esp+12Ch+var_12C]
-0x61EDDB: call    sub_5E3AD0
+0x61EDDB: call    sub_5E3AD0; Swim run-speed branch used by sub_5E65B0 when run 0x200 and swim 0x800 are set. Calls Calc_SwimRunSpeed and applies same package-target limiting pattern.
 0x61EDE0: sub     esp, 8
 0x61EDE3: mov     ecx, edi
 0x61EDE5: fstp    qword ptr [esp+134h+var_134]
-0x61EDE8: call    sub_5E3920
+0x61EDE8: call    sub_5E3920; Swim walk-speed branch used by sub_5E65B0 when swim 0x800 is set without run 0x200. Calls Calc_SwimSpeed and applies same package-target limiting pattern.
 0x61EDED: sub     esp, 8
 0x61EDF0: mov     ecx, edi
 0x61EDF2: fstp    [esp+13Ch+var_13C]
-0x61EDF5: call    sub_5E3750
+0x61EDF5: call    Actor_CalcFastTravelSpeed; Run-speed branch used by sub_5E65B0 when process flag 0x200 is set and swim/fly are absent. Calls Calc_RunSpeed, then may clamp to package target actor's run speed minus close-distance margin.
 0x61EDFA: sub     esp, 8
 0x61EDFD: mov     ecx, edi
 0x61EDFF: fstp    [esp+144h+var_144]
-0x61EE02: call    sub_5E3590
+0x61EE02: call    sub_5E3590; Walk-speed branch used by sub_5E65B0 when run/swim/fly flags are absent. Calls Calc_WalkSpeed, then may clamp to package target actor's walk speed minus close-distance margin.
 0x61EE07: sub     esp, 8
 0x61EE0A: fstp    [esp+14Ch+var_14C]
 0x61EE0D: lea     ecx, [esp+14Ch+var_D8]
@@ -261,7 +261,7 @@
 0x61EF14: mov     ecx, [esp+138h+var_104+4]
 0x61EF18: push    ecx
 0x61EF19: mov     [esp+13Ch+var_4], 0FFFFFFFFh
-0x61EF24: call    FormHeapFree
+0x61EF24: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x61EF29: add     esp, 18h
 0x61EF2C: fild    [esp+124h+var_110]
 0x61EF30: push    0FFFFFFFFh; int
@@ -277,10 +277,10 @@
 0x61EF51: add     ebp, ebx
 0x61EF53: mov     [esp+124h+var_110], ebp
 0x61EF57: push    0; a2
-0x61EF59: mov     ecx, offset ActorProcessManager_ptr; this
-0x61EF5E: call    sub_673A50
+0x61EF59: mov     ecx, (offset qword_B3BB2C+1D4h); this
+0x61EF5E: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x61EF63: mov     ecx, eax; this
-0x61EF65: call    sub_7616D0
+0x61EF65: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x61EF6A: mov     ebp, eax
 0x61EF6C: test    ebp, ebp
 0x61EF6E: jz      loc_61F0C1
@@ -352,7 +352,7 @@
 0x61F03E: add     esp, 14h
 0x61F041: add     [esp+124h+var_110], ebx
 0x61F045: lea     ecx, [esi+44h]
-0x61F048: call    GetExtraDataFollower
+0x61F048: call    ExtraDataList_GetFollowerExtra; Returns ExtraFollower (type 0x23) itself, or null.
 0x61F04D: test    eax, eax
 0x61F04F: jz      short loc_61F0B9
 0x61F051: mov     edi, [eax+0Ch]
@@ -394,10 +394,10 @@
 0x61F0B9: test    ebp, ebp
 0x61F0BB: jnz     loc_61EFA9
 0x61F0C1: push    1; a2
-0x61F0C3: mov     ecx, offset ActorProcessManager_ptr; this
-0x61F0C8: call    sub_673A50
+0x61F0C3: mov     ecx, (offset qword_B3BB2C+1D4h); this
+0x61F0C8: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x61F0CD: mov     ecx, eax; this
-0x61F0CF: call    sub_7616D0
+0x61F0CF: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x61F0D4: mov     ebp, eax
 0x61F0D6: test    ebp, ebp
 0x61F0D8: jz      loc_61F229
@@ -468,7 +468,7 @@
 0x61F1A5: add     esp, 14h
 0x61F1A8: add     [esp+124h+var_110], ebx
 0x61F1AC: lea     ecx, [esi+44h]
-0x61F1AF: call    GetExtraDataFollower
+0x61F1AF: call    ExtraDataList_GetFollowerExtra; Returns ExtraFollower (type 0x23) itself, or null.
 0x61F1B4: test    eax, eax
 0x61F1B6: jz      short loc_61F221
 0x61F1B8: mov     edi, [eax+0Ch]
@@ -511,10 +511,10 @@
 0x61F221: test    ebp, ebp
 0x61F223: jnz     loc_61F113
 0x61F229: push    2; a2
-0x61F22B: mov     ecx, offset ActorProcessManager_ptr; this
-0x61F230: call    sub_673A50
+0x61F22B: mov     ecx, (offset qword_B3BB2C+1D4h); this
+0x61F230: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x61F235: mov     ecx, eax; this
-0x61F237: call    sub_7616D0
+0x61F237: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x61F23C: mov     ebp, eax
 0x61F23E: test    ebp, ebp
 0x61F240: jz      loc_61F391
@@ -586,7 +586,7 @@
 0x61F30E: add     esp, 14h
 0x61F311: add     [esp+124h+var_110], ebx
 0x61F315: lea     ecx, [esi+44h]
-0x61F318: call    GetExtraDataFollower
+0x61F318: call    ExtraDataList_GetFollowerExtra; Returns ExtraFollower (type 0x23) itself, or null.
 0x61F31D: test    eax, eax
 0x61F31F: jz      short loc_61F389
 0x61F321: mov     edi, [eax+0Ch]
@@ -628,10 +628,10 @@
 0x61F389: test    ebp, ebp
 0x61F38B: jnz     loc_61F27B
 0x61F391: push    3; a2
-0x61F393: mov     ecx, offset ActorProcessManager_ptr; this
-0x61F398: call    sub_673A50
+0x61F393: mov     ecx, (offset qword_B3BB2C+1D4h); this
+0x61F398: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x61F39D: mov     ecx, eax; this
-0x61F39F: call    sub_7616D0
+0x61F39F: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x61F3A4: mov     ebp, eax
 0x61F3A6: test    ebp, ebp
 0x61F3A8: jz      loc_61F890
@@ -702,7 +702,7 @@
 0x61F475: add     esp, 14h
 0x61F478: add     [esp+124h+var_110], ebx
 0x61F47C: lea     ecx, [esi+44h]
-0x61F47F: call    GetExtraDataFollower
+0x61F47F: call    ExtraDataList_GetFollowerExtra; Returns ExtraFollower (type 0x23) itself, or null.
 0x61F484: test    eax, eax
 0x61F486: jz      short loc_61F4F1
 0x61F488: mov     edi, [eax+0Ch]
@@ -796,13 +796,13 @@
 0x61F598: push    ebx
 0x61F599: push    1
 0x61F59B: mov     ecx, ebp
-0x61F59D: call    sub_6135F0
+0x61F59D: call    CombatController_GetCurrentTarget
 0x61F5A2: push    eax
 0x61F5A3: push    edi
 0x61F5A4: call    sub_61A090
 0x61F5A9: add     esp, 18h
 0x61F5AC: mov     ecx, ebp
-0x61F5AE: call    sub_6135F0
+0x61F5AE: call    CombatController_GetCurrentTarget
 0x61F5B3: fild    [esp+124h+var_104]
 0x61F5B7: push    0FFFFFFFFh; int
 0x61F5B9: push    3; int
@@ -826,7 +826,7 @@
 0x61F5FE: fild    [esp+134h+var_10C]
 0x61F602: mov     ecx, ebp
 0x61F604: fstp    [esp+134h+var_134]; float
-0x61F607: call    sub_6135F0
+0x61F607: call    CombatController_GetCurrentTarget
 0x61F60C: mov     ecx, eax; this
 0x61F60E: call    TESObjectREFR_GetName
 0x61F613: push    eax; int
@@ -841,7 +841,7 @@
 0x61F62B: push    0
 0x61F62D: push    edi
 0x61F62E: mov     ecx, ebp
-0x61F630: call    sub_6135F0
+0x61F630: call    CombatController_GetCurrentTarget
 0x61F635: push    eax
 0x61F636: call    sub_61A090
 0x61F63B: add     esp, 18h
@@ -1039,3 +1039,16 @@
 0x61F8C0: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x61F8C5: add     esp, 110h
 0x61F8CB: retn
+0x9C3410: lea     ecx, [ebp-100h]; void *
+0x9C3416: jmp     BSStringT_Clear
+0x9C341B: mov     edx, [esp+arg_4]
+0x9C341F: lea     eax, [edx-114h]
+0x9C3425: mov     ecx, [edx-118h]
+0x9C342B: xor     ecx, eax
+0x9C342D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C3432: add     eax, 10h
+0x9C3435: mov     ecx, [edx-4]
+0x9C3438: xor     ecx, eax
+0x9C343A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C343F: mov     eax, offset stru_AEC02C
+0x9C3444: jmp     ___CxxFrameHandler3

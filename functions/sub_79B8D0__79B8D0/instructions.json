@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x79B8D0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Swaps two complete 0x30-byte SFrondGuide records. Uses a temporary deep copy of the embedded vertex vector, assigns both vectors safely, copies all scalar fields, then releases the temporary vector allocation.",
     "mnemonic": "push",
     "size": 2
   },
@@ -85,25 +85,25 @@
   },
   {
     "ea": "0x79B8F7",
-    "line": "mov     esi, [esp+50h+arg_0]",
+    "line": "mov     esi, [esp+50h+left]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79B8FB",
-    "line": "push    esi",
+    "line": "push    esi; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B8FC",
-    "line": "lea     ecx, [esp+54h+var_3C]",
+    "line": "lea     ecx, [esp+54h+source]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x79B900",
-    "line": "call    sub_79AD70",
+    "line": "call    OB_stVector_SFrondVertex_CopyCtor_010201A0; Oblivion-authoritative copy construction for the 16-byte vector wrapper embedded at SFrondGuide+0x00. Allocates capacity for the exact source count and deep-copies 0x38-byte SFrondVertex records; scalar guide fields are copied separately by callers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,19 +205,19 @@
   },
   {
     "ea": "0x79B93D",
-    "line": "mov     edi, [esp+50h+arg_4]",
+    "line": "mov     edi, [esp+50h+right]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79B941",
-    "line": "push    edi",
+    "line": "push    edi; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B942",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x79B94C",
-    "line": "call    sub_79B160",
+    "line": "call    OB_stVector_SFrondVertex_CopyAssign_010201A0; Oblivion-authoritative copy assignment for the SFrondGuide vertex vector at +0x00. Reuses existing 0x38-byte-element capacity when possible, otherwise frees/reserves and deep-copies the source range.",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x79B969",
-    "line": "lea     ecx, [esp+50h+var_3C]",
+    "line": "lea     ecx, [esp+50h+source]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x79B970",
-    "line": "push    ecx",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x79B974",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x79B988",
-    "line": "call    sub_79B160",
+    "line": "call    OB_stVector_SFrondVertex_CopyAssign_010201A0; Oblivion-authoritative copy assignment for the SFrondGuide vertex vector at +0x00. Reuses existing 0x38-byte-element capacity when possible, otherwise frees/reserves and deep-copies the source range.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x79B991",
-    "line": "mov     eax, [esp+50h+var_38]",
+    "line": "mov     eax, [esp+50h+source.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x79B9C6",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -526,5 +526,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CC2A0",
+    "line": "lea     ecx, [ebp-3Ch]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC2A3",
+    "line": "jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC2A8",
+    "line": "mov     edx, [esp+right]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CC2AC",
+    "line": "lea     eax, [edx-40h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC2AF",
+    "line": "mov     ecx, [edx-44h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC2B2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CC2B4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC2B9",
+    "line": "mov     eax, offset stru_AF5400",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC2BE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

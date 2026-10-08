@@ -26,14 +26,14 @@
 0x59FCA7: call    sub_5A2520
 0x59FCAC: fld     dword ptr ds:0A379B4h
 0x59FCB2: push    ecx
-0x59FCB3: fstp    [esp+0Ch+a2]; a3
-0x59FCB6: push    1772h; a2
+0x59FCB3: fstp    [esp+0Ch+a2]; value
+0x59FCB6: push    1772h; propertyCode
 0x59FCBB: mov     ecx, edi; this
-0x59FCBD: call    Tile_SetFloat
+0x59FCBD: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59FCC2: mov     ecx, esi; int
 0x59FCC4: pop     esi
 0x59FCC5: pop     edi
-0x59FCC6: jmp     sub_584740
+0x59FCC6: jmp     Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.
 0x59FCCB: pop     esi
 0x59FCCC: pop     edi
 0x59FCCD: retn

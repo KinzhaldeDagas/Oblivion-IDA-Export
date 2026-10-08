@@ -1,5 +1,5 @@
 int sub_9F7750()
 {
-  GameSetting_ConstrAndReg((int *)dword_B39348, (int)"sHairColor2", (int)"sHairColor2");
-  return atexit(sub_A22DB0);
+  GameSetting_ConstrAndReg(&stru_B39348, "sHairColor2", "sHairColor2"); /*0x9f775f*/
+  return atexit(sub_A22DB0); /*0x9f776f*/
 }

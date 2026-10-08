@@ -59,7 +59,6 @@
 0x49FA08: push    edi
 0x49FA09: jmp     short loc_49FA18
 0x49FA0B: jmp     short loc_49FA10
-0x49FA0D: align 10h
 0x49FA10: fld     [esp+54h+var_38]
 0x49FA14: fld     [esp+54h+var_34]
 0x49FA18: mov     eax, [esp+54h+var_30]
@@ -126,7 +125,7 @@
 0x49FAD0: fstp    [esp+58h+var_58]; float
 0x49FAD3: mov     ecx, [ecx+24h]
 0x49FAD6: push    eax; int
-0x49FAD7: call    sub_6AC420
+0x49FAD7: call    SoundManager_StopRefLoopingSoundsWithFade; Sound manager animation event helper. Finds active sounds associated with a reference, marks/removes loop entries, and either fades/stops or schedules stop based on the passed fade time.
 0x49FADC: jmp     loc_49FCC1
 0x49FAE1: push    0Fh; MaxCount
 0x49FAE3: push    esi; Str2
@@ -138,7 +137,7 @@
 0x49FAF9: mov     edx, [esp+54h+arg_4]
 0x49FAFD: mov     ecx, ds:0B333C4h
 0x49FB03: push    edx
-0x49FB04: call    sub_65DC50
+0x49FB04: call    Player_UpdateSoundDistanceFromRef; Player/reference sound-distance helper. Computes distance from player to target ref and feeds the result into the sound system scaling/update path.
 0x49FB09: jmp     loc_49FCC1
 0x49FB0E: push    0Dh; Val
 0x49FB10: push    esi; Str
@@ -151,7 +150,7 @@
 0x49FB22: mov     ecx, ds:0B33A98h
 0x49FB28: add     esi, 7
 0x49FB2B: push    esi
-0x49FB2C: call    sub_447490
+0x49FB2C: call    SoundMap_ResolveAnimSoundNote; Animation Sound: note resolver. Looks up the note token in global sound map off_B06164 and accepts only entries whose form/type byte is 0x0A; returns the sound entry or 0.
 0x49FB31: test    edi, edi
 0x49FB33: jz      short loc_49FB38
 0x49FB35: mov     byte ptr [edi], 0Dh
@@ -267,7 +266,7 @@
 0x49FCA3: mov     ecx, esi; this
 0x49FCA5: call    sub_6B73E0
 0x49FCAA: push    esi
-0x49FCAB: call    FormHeapFree
+0x49FCAB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x49FCB0: add     esp, 4
 0x49FCB3: mov     ebx, [esp+54h+var_40]
 0x49FCB7: mov     ebp, [esp+54h+arg_0]

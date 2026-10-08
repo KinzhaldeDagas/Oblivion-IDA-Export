@@ -1,10 +1,10 @@
-0x677EC0: sub     esp, 24h
+0x677EC0: sub     esp, 24h; ActorProcessManager high/process list update used during fast-travel time simulation.
 0x677EC3: push    ebp
 0x677EC4: mov     ebp, ecx
 0x677EC6: lea     ecx, [ebp+68h]; this
 0x677EC9: mov     [esp+28h+var_8], ebp
 0x677ECD: mov     byte ptr ds:0B3B935h, 0
-0x677ED4: call    sub_7616D0
+0x677ED4: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x677ED9: fldz
 0x677EDB: xor     edx, edx
 0x677EDD: fstp    [esp+28h+var_24]
@@ -50,7 +50,7 @@
 0x677F5A: cmp     dword ptr [esi+58h], 0
 0x677F5E: jz      loc_678331
 0x677F64: mov     ecx, esi; this
-0x677F66: call    Actor__GetProcessLevel
+0x677F66: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x677F6B: test    eax, eax
 0x677F6D: jnz     loc_678331
 0x677F73: push    eax
@@ -87,7 +87,7 @@
 0x677FC7: call    eax
 0x677FC9: jmp     short loc_678006
 0x677FCB: mov     ecx, esi; this
-0x677FCD: call    MobileObject_GetCharProxy
+0x677FCD: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x677FD2: test    eax, eax
 0x677FD4: jnz     short loc_677FF2
 0x677FD6: mov     edx, [esi]
@@ -117,20 +117,20 @@
 0x67801F: push    ecx
 0x678020: mov     ecx, edi
 0x678022: fstp    [esp+38h+var_38]
-0x678025: call    sub_5F2530
+0x678025: call    sub_5F2530; Fast-travel loop player AV update: clamps/restores health toward base+modifier over travel time.
 0x67802A: fld     dword ptr ds:0A379B4h
 0x678030: push    1; float
 0x678032: push    ecx
 0x678033: mov     ecx, edi
 0x678035: fstp    [esp+3Ch+var_3C]; float
-0x678038: call    sub_5F25F0
+0x678038: call    sub_5F25F0; Fast-travel loop player AV update: magicka regeneration/active magic adjustment over travel time.
 0x67803D: fld     dword ptr ds:0A379B4h
 0x678043: push    ecx
 0x678044: mov     ecx, edi
 0x678046: fstp    [esp+38h+var_38]; float
-0x678049: call    sub_5F2720
+0x678049: call    sub_5F2720; Fast-travel loop player AV update: fatigue regeneration over travel time.
 0x67804E: mov     ecx, esi; this
-0x678050: call    Actor__GetProcessLevel
+0x678050: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x678055: test    eax, eax
 0x678057: jz      short loc_678060
 0x678059: mov     dword ptr [ebp+78h], 0
@@ -141,7 +141,7 @@
 0x67806C: test    eax, eax
 0x67806E: jz      loc_678169
 0x678074: mov     ecx, esi; this
-0x678076: call    Actor__GetProcessLevel
+0x678076: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x67807B: test    eax, eax
 0x67807D: jnz     loc_678169
 0x678083: mov     edx, [esi]
@@ -165,7 +165,7 @@
 0x6780CA: test    ah, 5
 0x6780CD: jp      loc_67815D
 0x6780D3: mov     ecx, esi; this
-0x6780D5: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x6780D5: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x6780DA: cmp     eax, 3
 0x6780DD: jz      short loc_67815D
 0x6780DF: mov     edx, [esi]
@@ -184,7 +184,7 @@
 0x678103: call    eax
 0x678105: test    edi, edi
 0x678107: jz      short loc_678135
-0x678109: mov     ecx, offset flt_B36CD8
+0x678109: mov     ecx, offset g_GameSettingStringPointers_B36CD8
 0x67810E: call    GameSetting_GetSafeFloatPointer
 0x678113: fld     [esp+34h+var_C]
 0x678117: fld     dword ptr [eax]
@@ -195,7 +195,7 @@
 0x678122: push    ecx
 0x678123: fstp    [esp+38h+var_38]
 0x678126: push    edi
-0x678127: mov     ecx, offset ActorProcessManager_ptr
+0x678127: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x67812C: call    sub_674820
 0x678131: jmp     short loc_678135
 0x678133: fstp    st
@@ -220,7 +220,7 @@
 0x678176: mov     [esp+34h+var_10], edi
 0x67817A: jz      loc_678331
 0x678180: mov     ecx, edi
-0x678182: call    GetExtraDataFollower
+0x678182: call    ExtraDataList_GetFollowerExtra; Returns ExtraFollower (type 0x23) itself, or null.
 0x678187: test    eax, eax
 0x678189: mov     [esp+34h+var_C], eax
 0x67818D: jz      loc_678331
@@ -287,7 +287,7 @@
 0x678246: cmp     al, 7
 0x678248: jnz     short loc_6782BE
 0x67824A: mov     ecx, esi; this
-0x67824C: call    Actor__GetProcessLevel
+0x67824C: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x678251: mov     ecx, eax
 0x678253: test    ecx, ecx
 0x678255: jz      short loc_6782C8
@@ -304,7 +304,7 @@
 0x678277: jnz     short loc_6782A8
 0x678279: mov     ebp, [esi+58h]
 0x67827C: mov     edi, [ebp+0]
-0x67827F: mov     ecx, offset TimeGlobals
+0x67827F: mov     ecx, 0B332E0h
 0x678284: add     edi, 1Ch
 0x678287: call    TimeGlobals_GetGameHour
 0x67828C: fsub    qword ptr ds:0A2F928h
@@ -340,19 +340,19 @@
 0x6782E5: jz      short loc_6782F6
 0x6782E7: push    eax
 0x6782E8: mov     ecx, edi
-0x6782EA: call    sub_424D00
+0x6782EA: call    sub_424D00; 3DTheft decode: Remove/unlink follower actor pointer from target ExtraFollower list.
 0x6782EF: mov     esi, [esi+4]
 0x6782F2: test    esi, esi
 0x6782F4: jnz     short loc_6782E1
 0x6782F6: mov     ecx, ebx
-0x6782F8: call    BSSimpleList_Clear
+0x6782F8: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x6782FD: push    ebx
-0x6782FE: call    FormHeapFree
+0x6782FE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x678303: add     esp, 4
 0x678306: mov     ecx, ebp
-0x678308: call    BSSimpleList_Clear
+0x678308: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x67830D: push    ebp
-0x67830E: call    FormHeapFree
+0x67830E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x678313: mov     eax, [esp+38h+var_C]
 0x678317: mov     ecx, [eax+0Ch]
 0x67831A: add     esp, 4
@@ -360,7 +360,7 @@
 0x678322: test    al, al
 0x678324: jz      short loc_67832D
 0x678326: mov     ecx, edi
-0x678328: call    sub_420F00
+0x678328: call    ExtraDataList_RemoveFollowerExtra; Removes ExtraFollower (type 0x23) when present.
 0x67832D: mov     ebp, [esp+34h+var_8]
 0x678331: mov     eax, [ebp+78h]
 0x678334: test    eax, eax
@@ -370,7 +370,7 @@
 0x67833D: mov     [ebp+78h], eax
 0x678340: jnz     short loc_678352
 0x678342: lea     ecx, [ebp+68h]; this
-0x678345: call    sub_7616D0
+0x678345: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x67834A: mov     [ebp+78h], eax
 0x67834D: jmp     short loc_678352
 0x67834F: mov     [ebp+74h], eax

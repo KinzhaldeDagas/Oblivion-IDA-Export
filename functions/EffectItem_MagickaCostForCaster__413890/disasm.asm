@@ -33,13 +33,13 @@
 0x4138E2: push    eax; int
 0x4138E3: push    ecx
 0x4138E4: fstp    [esp+24h+var_24]; float
-0x4138E7: call    Calc_SkillModifiedMagickaCost
+0x4138E7: call    Calc_SkillModifiedMagickaCost; Spell magicka cost uses luck-modified magic skill. AVU replacement must preserve vanilla lower clamp and fractional precision before configurable cap/DR handling.
 0x4138EC: add     esp, 0Ch
 0x4138EF: fstp    [esp+18h+var_C]
 0x4138F3: pop     ebx
 0x4138F4: fld     [esp+14h+var_C]
 0x4138F8: fld     st
-0x4138FA: call    Double_To_SInt32
+0x4138FA: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4138FF: mov     [esp+14h+var_4], eax
 0x413903: fild    [esp+14h+var_4]
 0x413907: pop     edi

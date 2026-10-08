@@ -1,1 +1,1 @@
-IMallocSpyVtbl_0
+typedef IMallocSpyVtbl IMallocSpyVtbl_0;

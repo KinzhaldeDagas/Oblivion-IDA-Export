@@ -1,1 +1,1 @@
-IOleCacheVtbl_0
+typedef IOleCacheVtbl IOleCacheVtbl_0;

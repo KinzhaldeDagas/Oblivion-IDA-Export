@@ -1,1 +1,1 @@
-InputContextData
+typedef tagInputContextData InputContextData;

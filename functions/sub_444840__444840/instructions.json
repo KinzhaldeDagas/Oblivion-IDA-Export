@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x444849",
-    "line": "push    1; ArgList",
+    "line": "push    1; enabled",
     "mnemonic": "push",
     "size": 2
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x444853",
-    "line": "call    sub_65D810",
+    "line": "call    SetGodMode; Sets and returns g_godModeEnabled (0x00B3BB06).",
     "mnemonic": "call",
     "size": 5
   },
@@ -132,12 +132,6 @@
     "size": 2
   },
   {
-    "ea": "0x44488A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x444890",
     "line": "mov     eax, [esp+28h+var_18]",
     "mnemonic": "mov",
@@ -211,7 +205,7 @@
   },
   {
     "ea": "0x4448BB",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,7 +229,7 @@
   },
   {
     "ea": "0x4448CB",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,13 +247,13 @@
   },
   {
     "ea": "0x4448D9",
-    "line": "mov     [esp+28h+var_14], eax",
+    "line": "mov     [esp+28h+cellY], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4448DD",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -289,7 +283,7 @@
   },
   {
     "ea": "0x4448F1",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -421,7 +415,7 @@
   },
   {
     "ea": "0x44492F",
-    "line": "mov     ecx, [esp+28h+var_14]",
+    "line": "mov     ecx, [esp+28h+cellY]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -505,7 +499,7 @@
   },
   {
     "ea": "0x444952",
-    "line": "mov     edi, [esp+28h+var_14]",
+    "line": "mov     edi, [esp+28h+cellY]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -529,13 +523,13 @@
   },
   {
     "ea": "0x444960",
-    "line": "push    edi; signed int",
+    "line": "push    edi; cellY",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x444961",
-    "line": "push    ebp; signed int",
+    "line": "push    ebp; cellX",
     "mnemonic": "push",
     "size": 1
   },
@@ -583,7 +577,7 @@
   },
   {
     "ea": "0x444971",
-    "line": "call    sub_4F1630",
+    "line": "call    TESWorldSpace_LoadExteriorCellAtCoord; Verified: exterior-cell loader checks cellMap first, searches master files using cellOffsetsArray fast path or GRUP/CELL fallback, creates a missing TESObjectCELL, post-fixes it, then attaches worldspace-indexed references.",
     "mnemonic": "call",
     "size": 5
   },

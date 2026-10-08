@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
-  "callers_count": 44,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 81,
+  "chunks": [
+    [
+      "0x7100A0",
+      "0x710185"
+    ]
+  ],
+  "chunks_sha256": "b505c1ab0fdb20c55dc645ffc938f83f94dc806bf33af46efafdc214f9053a76",
+  "comment_regular": "Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
+  "comment_repeatable": "Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "NiMAtrix33_Multiply",
   "end_ea": "0x710185",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "NiMAtrix33_Multiply",
   "segment": ".text",
   "sha256": "b505c1ab0fdb20c55dc645ffc938f83f94dc806bf33af46efafdc214f9053a76",
   "size": 229,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7100A0",
-  "type": "float *__thiscall(float *this, float *, float *)",
+  "total_chunk_size": 229,
+  "type": "NiMatrix33 *__thiscall(NiMatrix33 *this, NiMatrix33 *out, NiMatrix33 *right)",
   "xrefs_from_count": 83,
   "xrefs_to_count": 81
 }

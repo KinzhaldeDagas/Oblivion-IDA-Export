@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x59BD80",
-    "line": "push    ebp",
+    "line": "push    ebp; [Controller decode 2026-07-09] Controls menu update/rebind capture. Displays current bindings, scans joystick 0 physical buttons before POV/D-pad virtual buttons, and writes joystick bindings through scheme 2.",
     "mnemonic": "push",
     "size": 1
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x59BE05",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x59BEAB",
-    "line": "call    InputGlobals__GetJoystickButtonCount",
+    "line": "call    InputGlobals__GetJoystickButtonCount; [Controller decode 2026-07-09] Controls menu display path: compares joystick binding byte against DIDEVCAPS.dwButtons.",
     "mnemonic": "call",
     "size": 5
   },
@@ -835,13 +835,13 @@
   },
   {
     "ea": "0x59BF38",
-    "line": "fstp    [esp+38h+a2]; a3",
+    "line": "fstp    [esp+38h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x59BF3B",
-    "line": "push    0FC9h; a2",
+    "line": "push    0FC9h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -853,7 +853,7 @@
   },
   {
     "ea": "0x59BF42",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -871,13 +871,13 @@
   },
   {
     "ea": "0x59BF4E",
-    "line": "fstp    [esp+38h+a2]; a3",
+    "line": "fstp    [esp+38h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x59BF51",
-    "line": "push    0FCCh; a2",
+    "line": "push    0FCCh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -889,7 +889,7 @@
   },
   {
     "ea": "0x59BF58",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -907,13 +907,13 @@
   },
   {
     "ea": "0x59BF64",
-    "line": "fstp    [esp+38h+a2]; a3",
+    "line": "fstp    [esp+38h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x59BF67",
-    "line": "push    0FCDh; a2",
+    "line": "push    0FCDh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -925,7 +925,7 @@
   },
   {
     "ea": "0x59BF6E",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -943,13 +943,13 @@
   },
   {
     "ea": "0x59BF7A",
-    "line": "fstp    [esp+38h+a2]; a3",
+    "line": "fstp    [esp+38h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x59BF7D",
-    "line": "push    0FCEh; a2",
+    "line": "push    0FCEh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -961,7 +961,7 @@
   },
   {
     "ea": "0x59BF84",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -979,7 +979,7 @@
   },
   {
     "ea": "0x59BF92",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1171,19 +1171,19 @@
   },
   {
     "ea": "0x59C012",
-    "line": "fstp    [esp+38h+a2]; a3",
+    "line": "fstp    [esp+38h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x59C015",
-    "line": "push    0FC9h; a2",
+    "line": "push    0FC9h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x59C01A",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1207,19 +1207,19 @@
   },
   {
     "ea": "0x59C029",
-    "line": "fstp    [esp+38h+a2]; a3",
+    "line": "fstp    [esp+38h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x59C02C",
-    "line": "push    0FC9h; a2",
+    "line": "push    0FC9h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x59C031",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1237,7 +1237,7 @@
   },
   {
     "ea": "0x59C039",
-    "line": "fstp    [esp+38h+a2]; a3",
+    "line": "fstp    [esp+38h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1249,13 +1249,13 @@
   },
   {
     "ea": "0x59C042",
-    "line": "push    0FDDh; a2",
+    "line": "push    0FDDh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x59C047",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1279,19 +1279,19 @@
   },
   {
     "ea": "0x59C056",
-    "line": "fstp    [esp+38h+a2]; a3",
+    "line": "fstp    [esp+38h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x59C059",
-    "line": "push    0FB1h; a2",
+    "line": "push    0FB1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x59C05E",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1315,19 +1315,19 @@
   },
   {
     "ea": "0x59C06D",
-    "line": "fstp    [esp+38h+a2]; a3",
+    "line": "fstp    [esp+38h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x59C070",
-    "line": "push    0FB2h; a2",
+    "line": "push    0FB2h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x59C075",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1351,19 +1351,19 @@
   },
   {
     "ea": "0x59C084",
-    "line": "fstp    [esp+38h+a2]; a3",
+    "line": "fstp    [esp+38h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x59C087",
-    "line": "push    0FB2h; a2",
+    "line": "push    0FB2h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x59C08C",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1411,7 +1411,7 @@
   },
   {
     "ea": "0x59C0B1",
-    "line": "call    InputGlobals__QueryMouseKeyState",
+    "line": "call    InputGlobals__QueryMouseKeyState; TES4 authoritative mouse query modes mirror keyboard for buttons; mouse wheel pseudo-buttons 8/9 return wheel up/down.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1465,19 +1465,19 @@
   },
   {
     "ea": "0x59C0D2",
-    "line": "fstp    [esp+38h+a2]; a3",
+    "line": "fstp    [esp+38h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x59C0D5",
-    "line": "push    0FDDh; a2",
+    "line": "push    0FDDh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x59C0DA",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1501,7 +1501,7 @@
   },
   {
     "ea": "0x59C0EF",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1567,7 +1567,7 @@
   },
   {
     "ea": "0x59C119",
-    "line": "cmp     byte ptr [esi+0D4h], 0",
+    "line": "cmp     byte ptr [esi+0D4h], 0; [Controller decode 2026-07-09] Controls menu rebind capture: scans joystick 0 physical buttons.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -1597,7 +1597,7 @@
   },
   {
     "ea": "0x59C12D",
-    "line": "call    InputGlobals__GetJoystickButtonCount",
+    "line": "call    InputGlobals__GetJoystickButtonCount; [Controller decode 2026-07-09] Controls menu rebind capture: physical-button scan is bounded by DIDEVCAPS.dwButtons.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1645,7 +1645,7 @@
   },
   {
     "ea": "0x59C143",
-    "line": "call    InputGlobals__QueryJoystickButtonState",
+    "line": "call    InputGlobals__QueryJoystickButtonState; TES4 authoritative joystick button query modes mirror keyboard: held/pressed/released/changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1764,12 +1764,6 @@
     "size": 2
   },
   {
-    "ea": "0x59C18A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x59C190",
     "line": "mov     edx, ds:0B33398h",
     "mnemonic": "mov",
@@ -1789,7 +1783,7 @@
   },
   {
     "ea": "0x59C19B",
-    "line": "call    InputGlobals__GetJoystickPOVControlCount",
+    "line": "call    InputGlobals__GetJoystickPOVControlCount; [Controller decode 2026-07-09] Controls menu rebind capture: POV/D-pad scan is bounded by DIDEVCAPS.dwPOVs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1831,13 +1825,13 @@
   },
   {
     "ea": "0x59C1AF",
-    "line": "call    sub_403070",
+    "line": "call    InputGlobals__GetJoystickPOVVirtualButton",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x59C1B4",
-    "line": "mov     edi, eax",
+    "line": "mov     edi, eax; [Controller decode 2026-07-09] Controls menu rebind capture: scans joystick 0 POV virtual buttons 0x20..0x27.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1903,7 +1897,7 @@
   },
   {
     "ea": "0x59C1D6",
-    "line": "call    InputGlobal__RebindControl",
+    "line": "call    InputGlobal__RebindControl; [Controller decode 2026-07-09] Controls menu rebind capture: writes selected logical control using scheme 2, the first joystick/controller binding scheme.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1933,7 +1927,7 @@
   },
   {
     "ea": "0x59C1E6",
-    "line": "xor     eax, eax",
+    "line": "xor     eax, eax; [Controller decode 2026-07-09] Controls menu rebind capture: throttles held POV/D-pad rebinds with dword_B3B0B4[0x76].",
     "mnemonic": "xor",
     "size": 2
   },
@@ -2035,7 +2029,7 @@
   },
   {
     "ea": "0x59C22C",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; [Controller decode 2026-07-09] Controls menu rebind capture: clears selected joystick/controller binding through logical control 0x1D path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2251,7 +2245,7 @@
   },
   {
     "ea": "0x59C29E",
-    "line": "call    InputGlobals__QueryMouseKeyState",
+    "line": "call    InputGlobals__QueryMouseKeyState; TES4 authoritative mouse query modes mirror keyboard for buttons; mouse wheel pseudo-buttons 8/9 return wheel up/down.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2371,7 +2365,7 @@
   },
   {
     "ea": "0x59C2E1",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2569,7 +2563,7 @@
   },
   {
     "ea": "0x59C34F",
-    "line": "call    InputGlobals__QueryKeyboardState",
+    "line": "call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2890,5 +2884,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9BD870",
+    "line": "lea     ecx, [ebp+var_18]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD873",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD878",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BD87C",
+    "line": "lea     eax, [edx-24h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD87F",
+    "line": "mov     ecx, [edx-28h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD882",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BD884",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD889",
+    "line": "mov     eax, offset stru_AE71B4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD88E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

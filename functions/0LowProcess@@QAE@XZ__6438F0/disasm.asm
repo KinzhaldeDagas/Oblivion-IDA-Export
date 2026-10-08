@@ -1,4 +1,4 @@
-0x6438F0: push    0FFFFFFFFh
+0x6438F0: push    0FFFFFFFFh; LowProcess constructor: initializes editorPackage/editorPackProcedure and follow/pathing state, but no currentPackage field used by runtime package assignment.
 0x6438F2: push    offset ??0LowProcess@@QAE@XZ_SEH
 0x6438F7: mov     eax, large fs:0
 0x6438FD: push    eax
@@ -14,14 +14,14 @@
 0x643915: mov     [esp+1Ch+var_10], esi
 0x643919: call    sub_60CD90
 0x64391E: xor     ebx, ebx
-0x643920: mov     dword ptr [esi], offset ??_7LowProcess@@6B@; const LowProcess::`vftable'
+0x643920: mov     dword ptr [esi], offset ??_7LowProcess@@6B@; Verified persistence family:3F0 size,3F4 save,3F8 load,404 revert; base/low/middle-low bodies decoded and MobileObject dispatch confirmed. Probable:3FC InitLoadGame and400 FinishInitLoadGame; derived middle-high/high overrides remain only family-mapped, not fully decoded.
 0x643926: mov     [esi+3Ch], ebx
 0x643929: mov     [esi+40h], ebx
 0x64392C: mov     [esi+4Ch], ebx
 0x64392F: mov     [esi+50h], ebx
 0x643932: mov     [esi+54h], ebx
 0x643935: mov     [esi+58h], ebx
-0x643938: lea     ecx, [esi+70h]
+0x643938: lea     ecx, [esi+70h]; self
 0x64393B: mov     [esp+1Ch+var_4], ebx
 0x64393F: mov     [esi+5Ch], ebx
 0x643942: mov     [esi+60h], ebx
@@ -60,3 +60,12 @@
 0x6439AF: pop     ebx
 0x6439B0: add     esp, 10h
 0x6439B3: retn
+0x9C39C0: mov     ecx, [ebp-10h]
+0x9C39C3: jmp     sub_60CDA0
+0x9C39C8: mov     edx, [esp+arg_4]
+0x9C39CC: lea     eax, [edx-0Ch]
+0x9C39CF: mov     ecx, [edx-10h]
+0x9C39D2: xor     ecx, eax
+0x9C39D4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C39D9: mov     eax, offset stru_AEC530
+0x9C39DE: jmp     ___CxxFrameHandler3

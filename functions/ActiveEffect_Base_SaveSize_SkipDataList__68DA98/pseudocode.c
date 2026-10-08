@@ -1,12 +1,12 @@
 // positive sp value has been detected, the output may be wrong!
 __int16 __stdcall ActiveEffect_Base_SaveSize_::SkipDataList(int a1)
 {
-  char next; // al
+  unsigned __int8 currentVersion; // al
   __int16 v3; // [esp-4h] [ebp-4h]
 
-  next = (char)SaveLoad_CurrentSavegame[1].createdObjectList.next;
-  if ( (unsigned __int8)next < 0x48u )
-    return ActiveEffect_Base_SaveSize_::LowbitUnk14(next, a1);
+  currentVersion = g_TESSaveLoadGame->currentVersion; /*0x68da9e*/
+  if ( currentVersion < 0x48u ) /*0x68daa4*/
+    return ActiveEffect_Base_SaveSize_::LowbitUnk14(currentVersion, a1); /*0x68daa4*/
   else
-    return v3 + 4;
+    return v3 + 4; /*0x68daaa*/
 }

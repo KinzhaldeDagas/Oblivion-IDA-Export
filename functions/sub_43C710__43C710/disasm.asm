@@ -1,11 +1,11 @@
-0x43C710: sub     esp, 20Ch
+0x43C710: sub     esp, 20Ch; Verified QueuedTreeModel vtable QueueMe override (+0x20). If the tree's icon texture name exists, it builds the TESIconTree default-path + texture name and schedules/reuses it as a child texture dependency, then hands off to the queued-model base path. Fallout's named QueuedTreeModel::QueueMe follows the same icon-texture then base-model queue pattern.
 0x43C716: mov     eax, ___security_cookie
 0x43C71B: xor     eax, esp
 0x43C71D: mov     [esp+20Ch+var_4], eax
 0x43C724: push    ebx
 0x43C725: mov     ebx, ecx
 0x43C727: mov     eax, [ebx+3Ch]
-0x43C72A: lea     ecx, [eax+3Ch]
+0x43C72A: lea     ecx, [eax+3Ch]; Verified: optional TESIconTree texture dependency is queued before the tree's TESModel component dependency. Fallout QueueMe follows the same icon-then-model dependency ordering.
 0x43C72D: mov     eax, [ecx+4]
 0x43C730: test    eax, eax
 0x43C732: jz      loc_43C7E9
@@ -48,24 +48,24 @@
 0x43C797: rep movsd
 0x43C799: mov     ecx, eax
 0x43C79B: and     ecx, 3
-0x43C79E: lea     eax, [esp+218h+var_108]
+0x43C79E: lea     eax, [esp+218h+path]
 0x43C7A5: rep movsb
 0x43C7A7: push    eax; int
 0x43C7A8: lea     ecx, [esp+21Ch+Str1]
 0x43C7AC: push    ecx; Str1
-0x43C7AD: call    sub_47D8F0
+0x43C7AD: call    sub_47D8F0; SpeedTreeOBSE 2026-07-14: normalizes texture palette keys in a fixed 256-byte local buffer. Plugin loader inputs are therefore capped at 255 characters.
 0x43C7B2: mov     eax, [ebx+10h]
 0x43C7B5: mov     edx, [ebx+14h]
 0x43C7B8: add     esp, 8
-0x43C7BB: push    ebx
+0x43C7BB: push    ebx; parent
 0x43C7BC: mov     cl, 10h
 0x43C7BE: call    __allshr
-0x43C7C3: mov     ecx, ModelLoaderPtr
+0x43C7C3: mov     ecx, ds:0B33A1Ch
 0x43C7C9: movzx   edx, al
-0x43C7CC: push    edx
-0x43C7CD: lea     eax, [esp+220h+var_108]
-0x43C7D4: push    eax
-0x43C7D5: call    sub_43B0D0
+0x43C7CC: push    edx; priority
+0x43C7CD: lea     eax, [esp+220h+path]
+0x43C7D4: push    eax; path
+0x43C7D5: call    QueuedTexture_QueueOrAttachPath; Verified: QueuedTreeModel_QueueMe schedules/reuses the tree icon texture through QueuedTexture_QueueOrAttachPath before continuing the QueuedModel base queue path.
 0x43C7DA: mov     edx, [ebx]
 0x43C7DC: mov     eax, [edx+28h]
 0x43C7DF: or      byte ptr [ebx+34h], 8

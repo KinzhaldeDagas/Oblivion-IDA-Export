@@ -1,19 +1,36 @@
 {
-  "callees_count": 116,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 52,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 20,
-  "display_name": "sub_528D90",
+  "chunks": [
+    [
+      "0x528D90",
+      "0x529528"
+    ],
+    [
+      "0x9B8340",
+      "0x9B8377"
+    ]
+  ],
+  "chunks_sha256": "d5d5bb1e609d446a9c3c147fd63864bc3b5886e9ca16c31f572a404917ec1cd6",
+  "comment_regular": "Player-specific appearance restore from save (called by Player_LoadModifiedForm at 0x66637F). Reads four FaceGen matrices beginning NPC+0x108; compares values and restores race, hair, eyes, hair length/color and sex. Sets one logical changed flag; compare at 0x52913D skips reconstruction if zero. When changed, compares race model availability and existing 3D: one branch detaches/reconciles face nodes and applies FaceGen render state to both perspectives; other branch rebuilds more actor 3D. Temporarily sets base vampirism AV0x45=0 during rebuild and restores it. None of this alone proves OCO/Blockhead load corruption; capture texture bindings and callback timing.",
+  "comment_repeatable": "Player-specific appearance restore from save (called by Player_LoadModifiedForm at 0x66637F). Reads four FaceGen matrices beginning NPC+0x108; compares values and restores race, hair, eyes, hair length/color and sex. Sets one logical changed flag; compare at 0x52913D skips reconstruction if zero. When changed, compares race model availability and existing 3D: one branch detaches/reconciles face nodes and applies FaceGen render state to both perspectives; other branch rebuilds more actor 3D. Temporarily sets base vampirism AV0x45=0 during rebuild and restores it. None of this alone proves OCO/Blockhead load corruption; capture texture bindings and callback timing.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 45,
+  "display_name": "TESNPC_LoadPlayerAppearanceAndRefreshIfChanged",
   "end_ea": "0x529528",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_528D90",
+  "name": "TESNPC_LoadPlayerAppearanceAndRefreshIfChanged",
   "segment": ".text",
   "sha256": "7b2866d2a462eb3881772ea36a191e3ba64783232be15437193cec6bb4f307c1",
   "size": 1944,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x528D90",
-  "type": "int __fastcall(float *ecx0, int, TESObjectREFR *)",
-  "xrefs_from_count": 749,
+  "total_chunk_size": 1999,
+  "type": "int __fastcall(TESForm *ecx0, int, TESObjectREFR *)",
+  "xrefs_from_count": 765,
   "xrefs_to_count": 1
 }

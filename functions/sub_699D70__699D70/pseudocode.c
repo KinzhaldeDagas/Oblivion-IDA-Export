@@ -1,4 +1,4 @@
-char *sub_699D70()
+NiRTTI *sub_699D70()
 {
-  return dword_BA8030;
+  return &stru_BA8030; /*0x699d75*/
 }

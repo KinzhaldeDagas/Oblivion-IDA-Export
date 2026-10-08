@@ -75,7 +75,7 @@
 0x5FCA1F: push    eax
 0x5FCA20: mov     eax, [edx+39Ch]
 0x5FCA26: mov     ecx, ebp
-0x5FCA28: call    eax
+0x5FCA28: call    eax; Magic-item cost path: ordinary spell/enchantment schools use resolved school AV with useValue0; ingredient/alchemy case uses Alchemy with useValue1. Unsupported/sentinel cases skip the call.
 0x5FCA2A: fldz
 0x5FCA2C: fld     [esp-8+arg_28]
 0x5FCA30: fcom    st(1)
@@ -103,9 +103,9 @@
 0x5FCA65: jnz     short Actor_MagicCaster_ApplyMagicItemCost___Done__
 0x5FCA67: push    ecx
 0x5FCA68: fchs
-0x5FCA6A: mov     ecx, ebp
-0x5FCA6C: fstp    [esp+8+var_8]; float
-0x5FCA6F: call    Actor_ModFatigue?
+0x5FCA6A: mov     ecx, ebp; this
+0x5FCA6C: fstp    [esp+8+delta]; delta
+0x5FCA6F: call    Actor_ApplyNegativeFatigueDeltaClamped; Applies only a negative Fatigue delta. Requires the actor AV path, reads Fatigue AV 0x0A, clamps damage so Fatigue cannot fall below zero, then calls the actor DamageAV float virtual. Nonnegative deltas and actors with no positive Fatigue are ignored.
 0x5FCA74: pop     ebx
 0x5FCA75: pop     ebp
 0x5FCA76: pop     edi

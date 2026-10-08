@@ -9,7 +9,7 @@
 0x6B671F: test    eax, eax
 0x6B6721: jz      short loc_6B672C
 0x6B6723: push    eax
-0x6B6724: call    FormHeapFree
+0x6B6724: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6B6729: add     esp, 4
 0x6B672C: cmp     dword ptr [esi+50h], 0
 0x6B6730: jz      short loc_6B6744

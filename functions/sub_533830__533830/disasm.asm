@@ -67,7 +67,7 @@
 0x5338ED: test    edi, edi
 0x5338EF: jz      short loc_533919
 0x5338F1: mov     ecx, esi
-0x5338F3: call    sub_89F570
+0x5338F3: call    bhkRefObject_UpdateHavokObject
 0x5338F8: mov     eax, [edi]
 0x5338FA: mov     eax, [eax+30h]
 0x5338FD: push    0
@@ -79,7 +79,7 @@
 0x53390A: mov     ecx, edi
 0x53390C: call    eax
 0x53390E: mov     ecx, esi
-0x533910: call    sub_89F570
+0x533910: call    bhkRefObject_UpdateHavokObject
 0x533915: jmp     short loc_533919
 0x533917: fstp    st
 0x533919: mov     eax, [ebx+14h]

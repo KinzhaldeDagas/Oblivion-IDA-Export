@@ -6,7 +6,7 @@
 0x739ECA: push    edi
 0x739ECB: push    esi
 0x739ECC: mov     edi, ecx
-0x739ECE: call    nullsub_returnvVoid_1arg
+0x739ECE: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x739ED3: mov     eax, [esi+220h]
 0x739ED9: mov     edx, [eax+8]
 0x739EDC: push    1

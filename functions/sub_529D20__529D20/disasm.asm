@@ -13,7 +13,7 @@
 0x529D3D: lea     eax, [esp+44h+var_C]
 0x529D41: mov     large fs:0, eax
 0x529D47: mov     edi, ecx
-0x529D49: mov     eax, dword ptr [esp+44h+a2]
+0x529D49: mov     eax, [esp+44h+a2]
 0x529D4D: push    eax; a2
 0x529D4E: call    TESForm_SaveModifiedForm
 0x529D53: mov     ecx, ds:0B33B00h
@@ -25,41 +25,41 @@
 0x529D6C: mov     dword ptr [esp+44h+a1+0Ah], eax
 0x529D70: jz      short loc_529D76
 0x529D72: mov     dword ptr [esp+44h+a1+0Ah], eax
-0x529D76: call    sub_45A170
+0x529D76: call    TESSaveLoadGame_UseSaveGameBlocks
 0x529D7B: test    al, al
 0x529D7D: jz      short loc_529DB2
-0x529D7F: push    4; Size
+0x529D7F: push    4; byteCount
 0x529D81: lea     ecx, [esp+48h+a1+6]
-0x529D85: push    ecx; Src
-0x529D86: mov     ecx, ds:0B33B00h
+0x529D85: push    ecx; source
+0x529D86: mov     ecx, ds:0B33B00h; self
 0x529D8C: mov     dword ptr [esp+4Ch+a1+6], 4B4F4C42h
 0x529D94: call    SaveLoad_SaveData
-0x529D99: mov     ecx, ds:0B33B00h
+0x529D99: mov     ecx, ds:0B33B00h; self
 0x529D9F: mov     edx, [ecx+14h]
-0x529DA2: push    2; Size
+0x529DA2: push    2; byteCount
 0x529DA4: lea     eax, [esp+48h+a1+16h]
-0x529DA8: push    eax; Src
+0x529DA8: push    eax; source
 0x529DA9: mov     dword ptr [esp+4Ch+a1+12h], edx
 0x529DAD: call    SaveLoad_SaveData
-0x529DB2: test    [esp+44h+a2], 4
+0x529DB2: test    byte ptr [esp+44h+a2], 4
 0x529DB7: jz      short loc_529DCE
 0x529DB9: mov     cl, [edi+3Ch]
-0x529DBC: push    1; a2
+0x529DBC: push    1; byteCount
 0x529DBE: lea     edx, [esp+48h+a1+2]
 0x529DC2: mov     [esp+48h+a1+2], cl
-0x529DC6: push    edx; a1
-0x529DC7: mov     ecx, edi
+0x529DC6: push    edx; source
+0x529DC7: mov     ecx, edi; self
 0x529DC9: call    TESForm_SaveDataToCurrentSaveGame
-0x529DCE: test    dword ptr [esp+44h+a2], 10000000h
+0x529DCE: test    [esp+44h+a2], 10000000h
 0x529DD6: jz      loc_529F0B
 0x529DDC: mov     eax, ds:0B33B00h
 0x529DE1: mov     [esp+44h+a1+1], bl
 0x529DE5: mov     ecx, [eax+14h]
-0x529DE8: push    1; a2
+0x529DE8: push    1; byteCount
 0x529DEA: lea     edx, [esp+48h+a1+1]
 0x529DEE: mov     [esp+48h+var_10], ecx
-0x529DF2: push    edx; a1
-0x529DF3: mov     ecx, edi
+0x529DF2: push    edx; source
+0x529DF3: mov     ecx, edi; self
 0x529DF5: call    TESForm_SaveDataToCurrentSaveGame
 0x529DFA: lea     eax, [edi+40h]
 0x529DFD: cmp     eax, ebx
@@ -67,32 +67,31 @@
 0x529E03: jz      loc_529F01
 0x529E09: jmp     short loc_529E14
 0x529E0B: jmp     short loc_529E10
-0x529E0D: align 10h
 0x529E10: mov     eax, dword ptr [esp+44h+a1+6]
 0x529E14: mov     esi, [eax]
 0x529E16: cmp     esi, ebx
 0x529E18: jz      loc_529EF2
 0x529E1E: mov     cl, [esi+1]
 0x529E21: mov     al, [esi]
-0x529E23: push    1; a2
+0x529E23: push    1; byteCount
 0x529E25: lea     edx, [esp+48h+a1+3]
 0x529E29: mov     [esp+48h+a1+4], cl
-0x529E2D: push    edx; a1
-0x529E2E: mov     ecx, edi
+0x529E2D: push    edx; source
+0x529E2E: mov     ecx, edi; self
 0x529E30: mov     [esp+4Ch+a1+3], al
 0x529E34: call    TESForm_SaveDataToCurrentSaveGame
-0x529E39: push    1; a2
+0x529E39: push    1; byteCount
 0x529E3B: lea     eax, [esp+48h+a1+4]
-0x529E3F: push    eax; a1
-0x529E40: mov     ecx, edi
+0x529E3F: push    eax; source
+0x529E40: mov     ecx, edi; self
 0x529E42: call    TESForm_SaveDataToCurrentSaveGame
 0x529E47: mov     ecx, ds:0B33B00h
 0x529E4D: mov     [esp+44h+a1], bl
 0x529E51: mov     edx, [ecx+14h]
-0x529E54: push    1; a2
+0x529E54: push    1; byteCount
 0x529E56: lea     eax, [esp+48h+a1]
-0x529E5A: push    eax; a1
-0x529E5B: mov     ecx, edi
+0x529E5A: push    eax; source
+0x529E5B: mov     ecx, edi; self
 0x529E5D: mov     [esp+4Ch+var_14], edx
 0x529E61: call    TESForm_SaveDataToCurrentSaveGame
 0x529E66: lea     ebp, [esi+4]
@@ -104,30 +103,30 @@
 0x529E75: jz      short loc_529ED8
 0x529E77: mov     cl, [eax+60h]
 0x529E7A: mov     esi, [eax+64h]
-0x529E7D: push    1; a2
+0x529E7D: push    1; byteCount
 0x529E7F: lea     edx, [esp+48h+a1+5]
 0x529E83: mov     [esp+48h+a1+5], cl
-0x529E87: push    edx; a1
-0x529E88: mov     ecx, edi
+0x529E87: push    edx; source
+0x529E88: mov     ecx, edi; self
 0x529E8A: call    TESForm_SaveDataToCurrentSaveGame
 0x529E8F: cmp     esi, ebx
 0x529E91: jz      short loc_529EA3
-0x529E93: mov     ecx, ds:0B33B00h
-0x529E99: push    4; Size
-0x529E9B: push    esi; Src
+0x529E93: mov     ecx, ds:0B33B00h; self
+0x529E99: push    4; byteCount
+0x529E9B: push    esi; source
 0x529E9C: call    SaveLoad_SaveData
 0x529EA1: jmp     short loc_529ED3
 0x529EA3: lea     ecx, [esp+44h+a1+0Eh]
 0x529EA7: call    sub_47D260
-0x529EAC: mov     ecx, ds:0B33B00h
-0x529EB2: push    4; Size
+0x529EAC: mov     ecx, ds:0B33B00h; self
+0x529EB2: push    4; byteCount
 0x529EB4: lea     eax, [esp+48h+a1+0Eh]
-0x529EB8: push    eax; Src
+0x529EB8: push    eax; source
 0x529EB9: mov     [esp+4Ch+var_4], ebx
 0x529EBD: call    SaveLoad_SaveData
-0x529EC2: lea     ecx, [esp+44h+a1+0Eh]; void *
+0x529EC2: lea     ecx, [esp+44h+a1+0Eh]; this
 0x529EC6: mov     [esp+44h+var_4], 0FFFFFFFFh
-0x529ECE: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x529ECE: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x529ED3: add     [esp+44h+a1], 1
 0x529ED8: mov     ebp, [ebp+4]
 0x529EDB: cmp     ebp, ebx
@@ -144,7 +143,7 @@
 0x529F01: mov     al, [esp+44h+a1+1]
 0x529F05: mov     ecx, [esp+44h+var_10]
 0x529F09: mov     [ecx], al
-0x529F0B: test    dword ptr [esp+44h+a2], 8000000h
+0x529F0B: test    [esp+44h+a2], 8000000h
 0x529F13: jz      short loc_529F1D
 0x529F15: mov     ecx, [edi+58h]
 0x529F18: call    ScriptEventList_Save?
@@ -157,7 +156,7 @@
 0x529F35: jz      short loc_529F74
 0x529F37: mov     edx, [edi]
 0x529F39: push    edx; a1
-0x529F3A: call    TESForm_LookupByFormID
+0x529F3A: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x529F3F: mov     ecx, [edi+5]
 0x529F42: mov     edx, [eax]
 0x529F44: add     esp, 4
@@ -184,7 +183,7 @@
 0x529F88: call    sub_40FEC0
 0x529F8D: add     esp, 10h
 0x529F90: mov     ecx, ds:0B33B00h
-0x529F96: call    sub_45A170
+0x529F96: call    TESSaveLoadGame_UseSaveGameBlocks
 0x529F9B: test    al, al
 0x529F9D: jz      short loc_529FD2
 0x529F9F: mov     edx, ds:0B33B00h
@@ -209,3 +208,12 @@
 0x529FE1: pop     ebx
 0x529FE2: add     esp, 30h
 0x529FE5: retn    4
+0x9B83D0: lea     ecx, [ebp-20h]; this
+0x9B83D3: jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x9B83D8: mov     edx, [esp+arg_4]
+0x9B83DC: lea     eax, [edx-34h]
+0x9B83DF: mov     ecx, [edx-38h]
+0x9B83E2: xor     ecx, eax
+0x9B83E4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B83E9: mov     eax, offset stru_AE2AA4
+0x9B83EE: jmp     ___CxxFrameHandler3

@@ -1,4 +1,4 @@
-0x6B7260: mov     eax, ecx
+0x6B7260: mov     eax, ecx; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.
 0x6B7262: mov     ecx, ds:0B3C214h
 0x6B7268: test    ecx, ecx
 0x6B726A: jz      short loc_6B7275

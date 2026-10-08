@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x749992",
-    "line": "mov     esi, [esp+8+arg_0]",
+    "line": "mov     esi, [esp+8+payload]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x7499A5",
-    "line": "mov     [esp+0Ch+arg_0], esi",
+    "line": "mov     [esp+0Ch+payload], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -85,25 +85,25 @@
   },
   {
     "ea": "0x7499B5",
-    "line": "lea     ecx, [esp+0Ch+arg_0]",
+    "line": "lea     ecx, [esp+0Ch+payload]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7499B9",
-    "line": "push    ecx",
+    "line": "push    ecx; payload",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7499BA",
-    "line": "lea     ecx, [ebp+0C4h]",
+    "line": "lea     ecx, [ebp+0C4h]; self",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x7499C0",
-    "line": "call    sub_749800",
+    "line": "call    NiTRefPointerList__AddHead; Pass221: Refcounted NiTPointerList head-insert helper; node+0x08 owns the payload reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x7499F8",
-    "line": "mov     [esp+10h+arg_0], esi",
+    "line": "mov     [esp+10h+payload], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x749A02",
-    "line": "lea     eax, [esp+0Ch+arg_0]",
+    "line": "lea     eax, [esp+0Ch+payload]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x749A0D",
-    "line": "call    sub_7C16B0",
+    "line": "call    NiTRefPointerList__AddTail; Generic refcounted NiT pointer-list AddTail helper. Allocates a node, assigns/increments its object pointer, links it after the old tail, and updates head/tail/count.",
     "mnemonic": "call",
     "size": 5
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x749A45",
-    "line": "mov     [esp+14h+arg_0], esi",
+    "line": "mov     [esp+14h+payload], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x749A4F",
-    "line": "lea     edx, [esp+10h+arg_0]",
+    "line": "lea     edx, [esp+10h+payload]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x749A5B",
-    "line": "call    sub_7C6A20",
+    "line": "call    NiTRefPointerList_InsertBeforePosition",
     "mnemonic": "call",
     "size": 5
   },

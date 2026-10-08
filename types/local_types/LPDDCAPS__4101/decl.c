@@ -1,1 +1,1 @@
-LPDDCAPS
+typedef DDCAPS *LPDDCAPS;

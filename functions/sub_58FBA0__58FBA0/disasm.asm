@@ -18,12 +18,12 @@
 0x58FBD0: mov     ecx, edi
 0x58FBD2: call    Tile_GetFloat
 0x58FBD7: fcomp   qword ptr ds:0A69778h
-0x58FBDD: push    0FA5h
-0x58FBE2: mov     ecx, edi
+0x58FBDD: push    0FA5h; trait
+0x58FBE2: mov     ecx, edi; this
 0x58FBE4: fnstsw  ax
 0x58FBE6: test    ah, 44h
 0x58FBE9: jp      short loc_58FBFC
-0x58FBEB: call    Tile_GetPropertyByCode?
+0x58FBEB: call    Tile__GetOrCreateValue; Verified: sorted trait lookup; if absent allocates 0x1C bytes, constructs Value at 0x589DF0, stores owner Tile at +0 and inserts into Tile value list. Corrects misleading existing-property-only interpretation.
 0x58FBF0: test    eax, eax
 0x58FBF2: jz      short loc_58FC2F
 0x58FBF4: fld     dword ptr ds:0A69770h
@@ -33,16 +33,16 @@
 0x58FC07: fnstsw  ax
 0x58FC09: test    ah, 44h
 0x58FC0C: jp      short loc_58FC2F
-0x58FC0E: push    0FA5h
-0x58FC13: mov     ecx, edi
-0x58FC15: call    Tile_GetPropertyByCode?
+0x58FC0E: push    0FA5h; trait
+0x58FC13: mov     ecx, edi; this
+0x58FC15: call    Tile__GetOrCreateValue; Verified: sorted trait lookup; if absent allocates 0x1C bytes, constructs Value at 0x589DF0, stores owner Tile at +0 and inserts into Tile value list. Corrects misleading existing-property-only interpretation.
 0x58FC1A: test    eax, eax
 0x58FC1C: jz      short loc_58FC2F
 0x58FC1E: fld     dword ptr ds:0A69764h
 0x58FC24: push    ecx
-0x58FC25: mov     ecx, eax
-0x58FC27: fstp    [esp+1Ch+var_1C]; float
-0x58FC2A: call    Tile_Property_SetFloatValue?
+0x58FC25: mov     ecx, eax; this
+0x58FC27: fstp    [esp+1Ch+value]; value
+0x58FC2A: call    Tile__Value__SetFloat; Verified: marks numeric; if changed or string trait 0xFDE, clears string, stores number, clears own expression actions via 0x588930, then CalculateValue(this,true). Same-value ordinary traits bypass clear/evaluation. Unlike Fallout SetFloat, no abClearActions parameter.
 0x58FC2F: mov     bl, ds:0B3B0A2h
 0x58FC35: mov     ecx, edi
 0x58FC37: mov     byte ptr ds:0B3B0A2h, 1
@@ -82,7 +82,6 @@
 0x58FCA3: test    eax, eax
 0x58FCA5: jz      short loc_58FD1A
 0x58FCA7: jmp     short loc_58FCB0
-0x58FCA9: align 10h
 0x58FCB0: mov     edx, [eax+8]
 0x58FCB3: lea     ecx, [eax+8]
 0x58FCB6: movzx   ecx, word ptr [edx+18h]
@@ -140,7 +139,7 @@
 0x58FD45: fld     dword ptr [edi+58h]
 0x58FD48: push    ecx
 0x58FD49: mov     ecx, edi
-0x58FD4B: fstp    [esp+1Ch+var_1C]; float
+0x58FD4B: fstp    [esp+1Ch+value]; float
 0x58FD4E: call    sub_590D20
 0x58FD53: test    ebp, ebp
 0x58FD55: jnz     loc_58FC60
@@ -157,7 +156,7 @@
 0x58FD71: push    ecx
 0x58FD72: fstp    [esp+14h+a2]; a2
 0x58FD75: mov     ecx, [edi+24h]; this
-0x58FD78: call    NiAVObject_UpdateNiAVObject
+0x58FD78: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x58FD7D: pop     edi
 0x58FD7E: add     esp, 8
 0x58FD81: retn    4

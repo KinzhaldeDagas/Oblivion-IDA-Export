@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
-  "callers_count": 11,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 18,
+  "chunks": [
+    [
+      "0x41F830",
+      "0x41F858"
+    ]
+  ],
+  "chunks_sha256": "cc243ee99b36866855237fff7924c84156bb48676e1a93efbaaf0140e79505b9",
+  "comment_regular": "Test ExtraAction flag mask. Missing ExtraAction behaves as default flags byte 1. REFR save calls with 0x08 to decide whether to emit ONAM.",
+  "comment_repeatable": "Test ExtraAction flag mask. Missing ExtraAction behaves as default flags byte 1. REFR save calls with 0x08 to decide whether to emit ONAM.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_41F830",
+  "display_name": "ExtraDataList_TestActionFlagBits",
   "end_ea": "0x41F858",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_41F830",
+  "name": "ExtraDataList_TestActionFlagBits",
   "segment": ".text",
   "sha256": "cc243ee99b36866855237fff7924c84156bb48676e1a93efbaaf0140e79505b9",
   "size": 40,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x41F830",
-  "type": "bool __thiscall(ExtraDataList *this, char)",
+  "total_chunk_size": 40,
+  "type": "bool __thiscall(ExtraDataList *this, unsigned int mask)",
   "xrefs_from_count": 12,
   "xrefs_to_count": 18
 }

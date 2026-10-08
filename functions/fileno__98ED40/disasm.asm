@@ -1,4 +1,4 @@
-0x98ED40: mov     eax, [esp+File]
+0x98ED40: mov     eax, [esp+File]; MEF v56 stream-bound proof uses this native CRT fileno ABI (cdecl FILE*, field+10h), not the DLL CRT's FILE layout. Prefix observers require a nonnull open native FILE and successful4-byte callback before querying its descriptor.
 0x98ED44: push    esi
 0x98ED45: xor     esi, esi
 0x98ED47: cmp     eax, esi

@@ -1,19 +1,32 @@
 {
-  "callees_count": 53,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 16,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 11,
-  "display_name": "sub_7F0380",
+  "chunks": [
+    [
+      "0x7F0380",
+      "0x7F07CB"
+    ]
+  ],
+  "chunks_sha256": "0fb10bd9dffe91cfd612aace7029ca1cb5efdd76f8215aa5140df1653701cd6b",
+  "comment_regular": "\n[Leaf RGB v148 2026-10-08] Project-owned RGB VS variants derive from actual installed packages001/019: preserve position/wind/fog/UV instructions, add COLOR0 v4, replace oT1 lighting output with v4. Fog is duplicated to oD1 for ps1_3: hardware texcoord loses .w, observed in isolated test. Modern PS retains oT2 fog. 34 HAL offscreen draws/973 checks cover all variants, cutout alpha and same-device Reset with retained shader/declaration objects. This proves isolated D3D behavior, NOT Oblivion scene integration or native clone/reset acceptance.\n\nOBLIVION AUTHORITY (2026-08-24): Declares SpeedTree leaf vertex input. v3.z carries a nonnegative packed selector: integer part = corner + 4*leafCardIndex for LeafBase addressing; fractional part = packed-color green/255 (255 forced to 0.99). VS1.1 EXPP.y extracts the fractional component; it is not exponentiation/exp2.",
+  "comment_repeatable": "OBLIVION AUTHORITY (2026-08-24): Declares SpeedTree leaf vertex input. v3.z carries a nonnegative packed selector: integer part = corner + 4*leafCardIndex for LeafBase addressing; fractional part = packed-color green/255 (255 forced to 0.99). VS1.1 EXPP.y extracts the fractional component; it is not exponentiation/exp2.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 14,
+  "display_name": "OB_SpeedTreeLeafShader_LoadPrograms_010201A0",
   "end_ea": "0x7F07CB",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7F0380",
+  "name": "OB_SpeedTreeLeafShader_LoadPrograms_010201A0",
   "segment": ".text",
   "sha256": "0fb10bd9dffe91cfd612aace7029ca1cb5efdd76f8215aa5140df1653701cd6b",
   "size": 1099,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7F0380",
-  "type": "NiD3DShaderProgram *__thiscall(char *this)",
+  "total_chunk_size": 1099,
+  "type": "void *__thiscall(void *self)",
   "xrefs_from_count": 383,
   "xrefs_to_count": 1
 }

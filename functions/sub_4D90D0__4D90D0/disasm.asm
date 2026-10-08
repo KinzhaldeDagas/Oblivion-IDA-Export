@@ -5,7 +5,7 @@
 0x4D90DE: test    al, al
 0x4D90E0: jz      short loc_4D90EE
 0x4D90E2: lea     ecx, [esi+44h]
-0x4D90E5: call    sub_420FD0
+0x4D90E5: call    ExtraDataList_GetLastFinishedSequence; Returns the pointer payload of ExtraLastFinishedSequence (type 0x4A), or null.
 0x4D90EA: test    eax, eax
 0x4D90EC: jnz     short loc_4D90FB
 0x4D90EE: mov     eax, [esp+4+arg_0]

@@ -1,4 +1,4 @@
-0x761BE0: mov     ecx, [esp+arg_4]
+0x761BE0: mov     ecx, [esp+arg_4]; MoonSugarEffect decode: matrix packer without camera-relative translation subtraction. Used for cached skin/world transforms that should keep raw translation.
 0x761BE4: fld     dword ptr [ecx]
 0x761BE6: mov     eax, [esp+arg_0]
 0x761BEA: fld     [esp+arg_C]

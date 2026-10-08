@@ -40,7 +40,6 @@
 0x532FEE: fld     dword ptr ds:0A37448h
 0x532FF4: fstp    [esp+90h+var_74]
 0x532FF8: jmp     short loc_533008
-0x532FFA: align 10h
 0x533000: fstp    st
 0x533002: fld     qword ptr ds:0A39088h
 0x533008: mov     edx, [edi]

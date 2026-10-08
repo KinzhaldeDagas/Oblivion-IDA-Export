@@ -1,19 +1,36 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 19,
-  "display_name": "sub_80E500",
+  "chunks": [
+    [
+      "0x80E500",
+      "0x80E72B"
+    ],
+    [
+      "0x9CA7E0",
+      "0x9CA806"
+    ]
+  ],
+  "chunks_sha256": "f12b51a1b5b9b03a11792c1e816bbcb22345caebee3c41acacaf13b30e1d00ca",
+  "comment_regular": "\n\n[2026-10-03 compiled frond audit] Verified installed STFROND002/003 vertex bytecode consumes c9 as object-space point position and c10.x as radius: length(c9-position)/c10.x then 1-saturate(distance/radius)^2. Constant map binds c9 shader+98, c10 generic light-data slot0, while c7 diffuse uses slot1. Together with transform 0x80DDA0 and sun/local pass ordering this establishes an inconsistent point-light binding for restored sun+local frond passes. Correct slot1 position/radius, including world-to-object radius scale, remains unimplemented. Local SDK Frond.fx is reimplemented and not stock bytecode authority.\n\n[2026-10-03 implemented correction] Verified PUSH at 0x80E668 has pointer operand 0x80E669=B465A8 (generic data slot0). Plugin redirects this frond c10 binding to a persistent float4 containing the object-scaled slot1 radius written by its transform callback. Install must precede definition5 creation because the map retains the pointer. HDR flag B43070 controls native c16 TreeDimmer binding and embedded VS selection.\n\n[2026-10-03 material scalar correction] Verified pointer operands80E598=B46498 for c5 Ambient,80E5C1=B464A8 for c6 Diff0,80E5EA=B464B8 for c7 Diff1. Plugin redirects these three bindings to private per-draw float4 copies. Current tracked frond asset scales RGB ambient by retained30006 and both diffuse sources by30003*30005. Alpha components and shared source globals remain untouched. RT4.1 reference SpeedTreeForest::RenderFronds uses frond*global diffuse scalar; SpeedTreeWrapper scales material ambient separately. Legacy assets without30000 retain identity factors.\n[2026-10-03 shadow motion constant] Native map uses c0..3,5..10,14..33 (c11 shader literal). Plugin wraps vtable+88 to add c12 float4 Frond Self Shadow Motion via AddConstant virtual+18, flags10000007, register12,count1,bytes16,type4, persistent pointer,extra0. The ten-stack-word ABI is verified in9A8660. The added XY offset affects only projected-shadow texture coordinates.\n\n[v149 static mesh integration] Verified frond vertex ABI MVP c0, primary wind c18 (register helper base11), fog c14/c15. Isolated baked-RGB mesh shader uses these constants and native map builder directly; it does not require projected shadow c12. Plugin direct construction must not overwrite global projected-shadow readiness.\n\nPass230: SpeedTree frond vertex map uses shared FogParam/ShadowVolumeFatness 0x00B46638 and FogColor/ShadowVolumeExtrudeDistance 0x00B46648.\nSpeedTreeOBSE v165 shader consumer uses existing native wind constant bank c18..c33 for sequential two-matrix wind; no extra clock advance or constant-map slot is introduced. Reference IndexedGeometry::ComputeWindEffect transforms the first blended point by the second matrix. Missing retained pairs encode old primary wind plus second weight0. Static mesh shader still reads its original primary input and ignores the extra declaration element.\nSpeedTreeOBSE v168 center-wind shaders still use c18..c33 for both wind matrices. Enabled mesh input subtracts the authored local vertex offset, transforms center twice, then restores that unchanged offset. This follows permitted CPU center-wind semantics; exact standard RT4.1 GPU renderer equivalence remains UNVERIFIED. RockMesh local rotation is not yet wired.",
+  "comment_repeatable": "Pass230: SpeedTree frond vertex map uses shared FogParam/ShadowVolumeFatness 0x00B46638 and FogColor/ShadowVolumeExtrudeDistance 0x00B46648.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 28,
+  "display_name": "OB_SpeedTreeFrondShader_BuildConstantMap_010201A0",
   "end_ea": "0x80E72B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_80E500",
+  "name": "OB_SpeedTreeFrondShader_BuildConstantMap_010201A0",
   "segment": ".text",
   "sha256": "d22ff93c2fcb5288debd61b89f77eedc6d5ed4fcb976ac412efa0297e43656fa",
   "size": 555,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x80E500",
+  "total_chunk_size": 593,
   "type": "void __thiscall(int *this)",
-  "xrefs_from_count": 222,
+  "xrefs_from_count": 237,
   "xrefs_to_count": 1
 }

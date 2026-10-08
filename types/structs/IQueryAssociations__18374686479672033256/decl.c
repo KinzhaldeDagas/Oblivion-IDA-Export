@@ -1,1 +1,4 @@
-IQueryAssociations
+struct IQueryAssociations
+{
+const IQueryAssociationsVtbl *lpVtbl;
+};

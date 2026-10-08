@@ -1,1 +1,1 @@
-bad_alloc
+typedef exception bad_alloc;

@@ -43,7 +43,7 @@
 0x585BDE: fstp    [esp+20h+var_10]
 0x585BE2: fld     [esp+20h+var_10]
 0x585BE6: fadd    qword ptr ds:0A30E48h
-0x585BEC: call    Double_To_SInt32
+0x585BEC: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x585BF1: mov     ds:0B13980h, eax
 0x585BF6: mov     eax, esi
 0x585BF8: mov     ecx, [esp+20h+var_C]
@@ -54,3 +54,16 @@
 0x585C06: pop     ebx
 0x585C07: add     esp, 10h
 0x585C0A: retn
+0x9BF260: mov     ecx, [ebp-10h]
+0x9BF263: add     ecx, 4
+0x9BF266: jmp     j_??1?$NiTList@V?$BSStringT@D@@@@UAE@XZ; NiTList<BSStringT<char>>::~NiTList<BSStringT<char>>(void)
+0x9BF26B: mov     ecx, [ebp-10h]
+0x9BF26E: add     ecx, 14h
+0x9BF271: jmp     j_??1?$NiTList@V?$BSStringT@D@@@@UAE@XZ; NiTList<BSStringT<char>>::~NiTList<BSStringT<char>>(void)
+0x9BF276: mov     edx, [esp+arg_4]
+0x9BF27A: lea     eax, [edx-10h]
+0x9BF27D: mov     ecx, [edx-14h]
+0x9BF280: xor     ecx, eax
+0x9BF282: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BF287: mov     eax, offset stru_AE8860
+0x9BF28C: jmp     ___CxxFrameHandler3

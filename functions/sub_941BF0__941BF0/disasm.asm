@@ -23,7 +23,7 @@
 0x941C30: push    eax; int
 0x941C31: call    sub_8BBEE0
 0x941C36: add     esp, 0Ch
-0x941C39: mov     eax, dword ptr [esp+14h+arg_4]
+0x941C39: mov     eax, [esp+14h+arg_4]
 0x941C3D: test    eax, eax
 0x941C3F: jz      short loc_941C54
 0x941C41: push    eax; Args

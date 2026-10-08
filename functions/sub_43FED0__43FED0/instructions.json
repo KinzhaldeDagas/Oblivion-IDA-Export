@@ -235,13 +235,13 @@
   },
   {
     "ea": "0x43FF32",
-    "line": "mov     ecx, esi; this",
+    "line": "mov     ecx, esi; object",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x43FF34",
-    "line": "call    TESObjectCELL_GetNiNode?",
+    "line": "call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.",
     "mnemonic": "call",
     "size": 5
   },
@@ -259,13 +259,13 @@
   },
   {
     "ea": "0x43FF3D",
-    "line": "mov     ecx, esi; this",
+    "line": "mov     ecx, esi; object",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x43FF3F",
-    "line": "call    TESObjectCELL_GetNiNode?",
+    "line": "call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x43FF68",
-    "line": "call    sub_447BA0",
+    "line": "call    TESObjectCELL_Deactivate; Verified TESObjectCELL deactivation path. Removes cell temp effects, lowers its process level, invokes cell teardown, clears pathgrid graph/render resources, removes the scene node and inactive cell forms, then for exteriors asks TESWorldSpace_UnloadExteriorCellIfEligible to either preserve or remove the cell. Nine call sites are in world/cell transition and TES destruction paths; inspect xrefs for the full lifecycle context.",
     "mnemonic": "call",
     "size": 5
   },

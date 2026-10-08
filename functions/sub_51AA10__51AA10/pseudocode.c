@@ -1,35 +1,36 @@
-void __thiscall sub_51AA10(_WORD *this, __int16 a2)
+// Stores the encoded group key at TESAnimGroup +0x08. Using the unsigned low group byte without a bounds check, indexes the fixed 43-record table, reads noteTemplateClass at record +0x0C, counts that class in the note-major required-note matrix (max 5), writes requiredNoteCount at +0x0C, frees the old +0x10 time array, allocates count*4, and zero-fills it to +0.0f. Later KF parsing populates and validates the authored times. Corrected: this initializer does not write QNaNs.
+void __thiscall TESAnimGroup_InitKeyAndRequiredNotes(CAS_TESAnimGroup_Decoded *this, unsigned __int16 groupKey)
 {
-  int v3; // eax
-  _BYTE **v4; // ecx
-  unsigned int v5; // eax
-  int v6; // eax
-  int v7; // [esp-8h] [ebp-Ch]
+  signed int noteCount; // eax
+  _BYTE **templateEntry; // ecx
+  CAS_u32 count; // eax
+  float *newNoteTimes; // eax
+  unsigned int byteCount; // [esp-8h] [ebp-Ch]
 
-  *(this + 4) = a2;
-  v3 = 0;
-  v4 = (_BYTE **)(4 * *(_DWORD *)(0x24 * (unsigned __int8)a2 + 0xB102EC) + 0xB10900);
-  do
+  this->encodedKey = groupKey; /*0x51aa17*/
+  noteCount = 0; /*0x51aa28*/
+  templateEntry = (_BYTE **)(4 * *(_DWORD *)(0x24 * (unsigned __int8)groupKey + 0xB102EC) + 0xB10900); /*0x51aa2a*/
+  do /*0x51aa41*/
   {
-    if ( !**v4 )
-      break;
-    ++v3;
-    v4 += 8;
+    if ( !**templateEntry ) /*0x51aa33*/
+      break; /*0x51aa36*/
+    ++noteCount; /*0x51aa38*/
+    templateEntry += 8; /*0x51aa3b*/
   }
-  while ( v3 < 5 );
-  *((_DWORD *)this + 3) = v3;
-  if ( *((_DWORD *)this + 4) )
-    FormHeapFree(*((_DWORD *)this + 4));
-  v5 = *((_DWORD *)this + 3);
-  if ( v5 )
+  while ( noteCount < 5 ); /*0x51aa41*/
+  this->requiredNoteCount = noteCount; /*0x51aa43*/
+  if ( this->requiredNoteTimes ) /*0x51aa46*/
+    FormHeapFree((unsigned int)this->requiredNoteTimes); /*0x51aa4e*/
+  count = this->requiredNoteCount; /*0x51aa56*/
+  if ( count )
   {
-    v6 = FormHeapAlloc((unsigned __int64)v5 >> 0x1E != 0 ? 0xFFFFFFFF : 4 * v5);
-    v7 = 4 * *((_DWORD *)this + 3);
-    *((_DWORD *)this + 4) = v6;
-    _memset(v6, 0, v7);
+    newNoteTimes = (float *)FormHeapAlloc((unsigned __int64)count >> 0x1E != 0 ? 0xFFFFFFFF : 4 * count);
+    byteCount = 4 * this->requiredNoteCount; /*0x51aa7a*/
+    this->requiredNoteTimes = newNoteTimes; /*0x51aa7e*/
+    _memset((int)newNoteTimes, 0, byteCount); /*0x51aa81*/
   }
   else
   {
-    *((_DWORD *)this + 4) = 0;
+    this->requiredNoteTimes = 0; /*0x51aa8d*/
   }
 }

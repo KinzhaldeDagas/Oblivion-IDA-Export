@@ -1,28 +1,54 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "VS_VERSION_INFO_STRUCT16",
+  "definition": "struct __declspec(align(2)) VS_VERSION_INFO_STRUCT16\n{\nWORD wLength;\nWORD wValueLength;\nCHAR szKey[1];\n}\n",
   "id": 18374686479672046680,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "wLength",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "wValueLength",
       "offset": 2,
       "offset_hex": "0x2",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "szKey",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 1
+      "size": 1,
+      "type": "CHAR[1]"
     }
   ],
   "name": "VS_VERSION_INFO_STRUCT16",
+  "ordinal": 8569,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 6
 }

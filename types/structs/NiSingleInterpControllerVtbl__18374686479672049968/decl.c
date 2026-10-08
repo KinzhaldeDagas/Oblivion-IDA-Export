@@ -1,1 +1,4 @@
-NiSingleInterpControllerVtbl
+struct NiSingleInterpControllerVtbl
+{
+NiInterpControllerVtbl super;
+};

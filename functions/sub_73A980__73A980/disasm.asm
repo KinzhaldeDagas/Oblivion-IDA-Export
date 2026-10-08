@@ -20,14 +20,14 @@
 0x73A9BA: mov     [esp+1Ch+var_4], esi
 0x73A9BE: jz      short loc_73A9C9
 0x73A9C0: mov     ecx, eax; this
-0x73A9C2: call    ??0NiScreenSpaceCamera@@QAE@XZ; NiScreenSpaceCamera::NiScreenSpaceCamera(void)
+0x73A9C2: call    ??0NiScreenSpaceCamera@@QAE@XZ; Pass227: NiScreenSpaceCamera constructor initializes +0x134 screen-texture array with capacity/grow size 5.
 0x73A9C7: mov     esi, eax
 0x73A9C9: mov     eax, [esp+1Ch+arg_0]
 0x73A9CD: push    eax
 0x73A9CE: push    esi
 0x73A9CF: mov     ecx, edi
 0x73A9D1: mov     [esp+24h+var_4], 0FFFFFFFFh
-0x73A9D9: call    sub_73A220
+0x73A9D9: call    sub_73A220; Pass226/227: NiScreenSpaceCamera copy/clone path; copies texture array pointers, not screen-texture records.
 0x73A9DE: mov     eax, esi
 0x73A9E0: mov     ecx, [esp+1Ch+var_C]
 0x73A9E4: mov     large fs:0, ecx
@@ -36,3 +36,15 @@
 0x73A9ED: pop     esi
 0x73A9EE: add     esp, 10h
 0x73A9F1: retn    4
+0x9CA7E0: mov     eax, [ebp-10h]
+0x9CA7E3: push    eax
+0x9CA7E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA7E9: pop     ecx
+0x9CA7EA: retn
+0x9CA7EB: mov     edx, [esp+arg_4]
+0x9CA7EF: lea     eax, [edx-0Ch]
+0x9CA7F2: mov     ecx, [edx-10h]
+0x9CA7F5: xor     ecx, eax
+0x9CA7F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA7FC: mov     eax, offset stru_AF2E8C
+0x9CA801: jmp     ___CxxFrameHandler3

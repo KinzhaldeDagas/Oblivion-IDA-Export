@@ -1,19 +1,36 @@
 {
-  "callees_count": 4,
-  "callers_count": 89,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 179,
+  "chunks": [
+    [
+      "0x405680",
+      "0x40570F"
+    ],
+    [
+      "0x9A9F20",
+      "0x9A9F43"
+    ]
+  ],
+  "chunks_sha256": "a46c63fa4f5ea14ec91b049a7004c3146739ba7dd656368fb0a3e722c1c8c4f8",
+  "comment_regular": "Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.\n\n[2026-10-03 property attachment contract] GetPropertyType is vtable+4C; only IDs<10 are accepted. Local temp NiPointer retains around pointer-list insertion749800. Frond attachment now pins all four new alpha/stencil/texturing/shader properties until attempts finish, verifies local lookup707530 returns the intended property, and consumes unattached factories before destroying any unpublished partial shape. Controlled helper fixture234checks covers failure before/after insertion; arbitrary native exception unwind is not proven.",
+  "comment_repeatable": "Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 6,
   "display_name": "sub_405680",
   "end_ea": "0x40570F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_405680",
   "segment": ".text",
   "sha256": "c35c114b718678f35d19a2edc32e51206b4878c699676ac0d69ba93cf6082a26",
   "size": 143,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x405680",
+  "total_chunk_size": 178,
   "type": "LONG __thiscall(NiNode *this, BSShaderProperty *a2)",
-  "xrefs_from_count": 55,
+  "xrefs_from_count": 66,
   "xrefs_to_count": 179
 }

@@ -1,5 +1,5 @@
 // attributes: thunk
-double __cdecl j_nullsub_returnTrue_0arg()
+bool __cdecl j_nullsub_returnTrue_0arg()
 {
-  return nullsub_returnTrue_0arg();
+  return Cmd_AddAchievement_PC_ReturnTrueNoOp();
 }

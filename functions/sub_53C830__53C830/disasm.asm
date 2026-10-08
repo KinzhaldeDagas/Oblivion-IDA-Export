@@ -13,9 +13,9 @@
 0x53C84D: lea     eax, [esp+68h+var_C]
 0x53C851: mov     large fs:0, eax
 0x53C857: mov     ebp, ecx
-0x53C859: mov     eax, [esp+68h+arg_0]
+0x53C859: mov     eax, [esp+68h+triangleIndices]
 0x53C85D: push    eax
-0x53C85E: call    sub_543D30
+0x53C85E: call    SkyObject__CreateRootNodeAndAttach; Allocates a NiNode, stores it as the sky-object root with refcount ownership, sets flags 0x2 and 0x20, and attaches it to the supplied parent through virtual slot +0x84.
 0x53C863: mov     eax, [esp+68h+Src]
 0x53C867: test    eax, eax
 0x53C869: jnz     short loc_53C870
@@ -26,7 +26,7 @@
 0x53C879: push    30h ; '0'; Size
 0x53C87B: call    FormHeapAlloc
 0x53C880: push    30h ; '0'; Size
-0x53C882: mov     [esp+70h+var_54], eax
+0x53C882: mov     [esp+70h+normals], eax
 0x53C886: call    FormHeapAlloc
 0x53C88B: push    30h ; '0'; Size
 0x53C88D: mov     ebx, eax
@@ -37,19 +37,19 @@
 0x53C89F: fild    dword ptr [ebp+6Ch]
 0x53C8A2: mov     ecx, [ebp+6Ch]
 0x53C8A5: test    ecx, ecx
-0x53C8A7: mov     [esp+78h+var_44], eax
+0x53C8A7: mov     [esp+78h+vertices], eax
 0x53C8AB: jge     short loc_53C8B3
 0x53C8AD: fadd    dword ptr ds:0A2FC78h
-0x53C8B3: fstp    [esp+78h+arg_0]
-0x53C8B7: fld     [esp+78h+arg_0]
+0x53C8B3: fstp    [esp+78h+triangleIndices]
+0x53C8B7: fld     [esp+78h+triangleIndices]
 0x53C8BB: fld     st
 0x53C8BD: fld     qword ptr ds:0A3D360h
 0x53C8C3: fmul    st(1), st
 0x53C8C5: fxch    st(1)
-0x53C8C7: fstp    [esp+78h+arg_0]
+0x53C8C7: fstp    [esp+78h+triangleIndices]
 0x53C8CB: fxch    st(1)
 0x53C8CD: fstp    [esp+78h+Src]
-0x53C8D4: fld     [esp+78h+arg_0]
+0x53C8D4: fld     [esp+78h+triangleIndices]
 0x53C8D8: fstp    [esp+78h+var_40]
 0x53C8DC: mov     edx, [esp+78h+var_40]
 0x53C8E0: fld     [esp+78h+Src]
@@ -67,11 +67,11 @@
 0x53C909: jge     short loc_53C911
 0x53C90B: fadd    dword ptr ds:0A2FC78h
 0x53C911: fmul    st, st(2)
-0x53C913: fstp    [esp+78h+arg_0]
-0x53C917: fld     [esp+78h+arg_0]
-0x53C91B: fst     [esp+78h+arg_0]
+0x53C913: fstp    [esp+78h+triangleIndices]
+0x53C917: fld     [esp+78h+triangleIndices]
+0x53C91B: fst     [esp+78h+triangleIndices]
 0x53C91F: fstp    [esp+78h+Src]
-0x53C926: fld     [esp+78h+arg_0]
+0x53C926: fld     [esp+78h+triangleIndices]
 0x53C92A: fstp    [esp+78h+var_40]
 0x53C92E: mov     edx, [esp+78h+var_40]
 0x53C932: fld     [esp+78h+Src]
@@ -87,11 +87,11 @@
 0x53C958: test    ecx, ecx
 0x53C95A: jge     short loc_53C962
 0x53C95C: fadd    dword ptr ds:0A2FC78h
-0x53C962: fstp    [esp+78h+arg_0]
-0x53C966: fld     [esp+78h+arg_0]
-0x53C96A: fst     [esp+78h+arg_0]
+0x53C962: fstp    [esp+78h+triangleIndices]
+0x53C966: fld     [esp+78h+triangleIndices]
+0x53C96A: fst     [esp+78h+triangleIndices]
 0x53C96E: fstp    [esp+78h+Src]
-0x53C975: fld     [esp+78h+arg_0]
+0x53C975: fld     [esp+78h+triangleIndices]
 0x53C979: fstp    [esp+78h+var_40]
 0x53C97D: mov     edx, [esp+78h+var_40]
 0x53C981: fld     [esp+78h+Src]
@@ -107,12 +107,12 @@
 0x53C9A7: test    ecx, ecx
 0x53C9A9: jge     short loc_53C9B1
 0x53C9AB: fadd    dword ptr ds:0A2FC78h
-0x53C9B1: fstp    [esp+78h+arg_0]
-0x53C9B5: fld     [esp+78h+arg_0]
-0x53C9B9: fst     [esp+78h+arg_0]
+0x53C9B1: fstp    [esp+78h+triangleIndices]
+0x53C9B5: fld     [esp+78h+triangleIndices]
+0x53C9B9: fst     [esp+78h+triangleIndices]
 0x53C9BD: fmul    st, st(2)
 0x53C9BF: fstp    [esp+78h+Src]
-0x53C9C6: fld     [esp+78h+arg_0]
+0x53C9C6: fld     [esp+78h+triangleIndices]
 0x53C9CA: fstp    [esp+78h+var_40]
 0x53C9CE: mov     edx, [esp+78h+var_40]
 0x53C9D2: fld     [esp+78h+Src]
@@ -128,13 +128,13 @@
 0x53C9F8: test    ecx, ecx
 0x53C9FA: jge     short loc_53CA02
 0x53C9FC: fadd    dword ptr ds:0A2FC78h
-0x53CA02: fstp    [esp+78h+arg_0]
-0x53CA06: fld     [esp+78h+arg_0]
+0x53CA02: fstp    [esp+78h+triangleIndices]
+0x53CA06: fld     [esp+78h+triangleIndices]
 0x53CA0A: fld     st
 0x53CA0C: fmul    st, st(3)
-0x53CA0E: fstp    [esp+78h+arg_0]
+0x53CA0E: fstp    [esp+78h+triangleIndices]
 0x53CA12: fstp    [esp+78h+Src]
-0x53CA19: fld     [esp+78h+arg_0]
+0x53CA19: fld     [esp+78h+triangleIndices]
 0x53CA1D: fstp    [esp+78h+var_40]
 0x53CA21: mov     edx, [esp+78h+var_40]
 0x53CA25: fld     [esp+78h+Src]
@@ -151,11 +151,11 @@
 0x53CA4C: jge     short loc_53CA54
 0x53CA4E: fadd    dword ptr ds:0A2FC78h
 0x53CA54: fmul    st, st(2)
-0x53CA56: fstp    [esp+78h+arg_0]
-0x53CA5A: fld     [esp+78h+arg_0]
-0x53CA5E: fst     [esp+78h+arg_0]
+0x53CA56: fstp    [esp+78h+triangleIndices]
+0x53CA5A: fld     [esp+78h+triangleIndices]
+0x53CA5E: fst     [esp+78h+triangleIndices]
 0x53CA62: fstp    [esp+78h+Src]
-0x53CA69: fld     [esp+78h+arg_0]
+0x53CA69: fld     [esp+78h+triangleIndices]
 0x53CA6D: fstp    [esp+78h+var_40]
 0x53CA71: mov     edx, [esp+78h+var_40]
 0x53CA75: fld     [esp+78h+Src]
@@ -171,11 +171,11 @@
 0x53CA9B: test    ecx, ecx
 0x53CA9D: jge     short loc_53CAA5
 0x53CA9F: fadd    dword ptr ds:0A2FC78h
-0x53CAA5: fstp    [esp+78h+arg_0]
-0x53CAA9: fld     [esp+78h+arg_0]
-0x53CAAD: fst     [esp+78h+arg_0]
+0x53CAA5: fstp    [esp+78h+triangleIndices]
+0x53CAA9: fld     [esp+78h+triangleIndices]
+0x53CAAD: fst     [esp+78h+triangleIndices]
 0x53CAB1: fstp    [esp+78h+Src]
-0x53CAB8: fld     [esp+78h+arg_0]
+0x53CAB8: fld     [esp+78h+triangleIndices]
 0x53CABC: fstp    [esp+78h+var_40]
 0x53CAC0: mov     edx, [esp+78h+var_40]
 0x53CAC4: fld     [esp+78h+Src]
@@ -191,14 +191,14 @@
 0x53CAEA: test    ecx, ecx
 0x53CAEC: jge     short loc_53CAF4
 0x53CAEE: fadd    dword ptr ds:0A2FC78h
-0x53CAF4: fstp    [esp+78h+arg_0]
+0x53CAF4: fstp    [esp+78h+triangleIndices]
 0x53CAF8: push    20h ; ' '; Size
-0x53CAFA: fld     [esp+7Ch+arg_0]
-0x53CB01: fst     [esp+7Ch+arg_0]
+0x53CAFA: fld     [esp+7Ch+triangleIndices]
+0x53CB01: fst     [esp+7Ch+triangleIndices]
 0x53CB08: fmulp   st(2), st
 0x53CB0A: fxch    st(1)
 0x53CB0C: fstp    [esp+7Ch+Src]
-0x53CB13: fld     [esp+7Ch+arg_0]
+0x53CB13: fld     [esp+7Ch+triangleIndices]
 0x53CB1A: fstp    [esp+7Ch+var_40]
 0x53CB1E: mov     edx, [esp+7Ch+var_40]
 0x53CB22: fld     [esp+7Ch+Src]
@@ -268,13 +268,13 @@
 0x53CC04: mov     ecx, [esp+84h+var_40]
 0x53CC08: mov     [eax+14h], edx
 0x53CC0B: mov     edx, [esp+84h+var_3C]
-0x53CC0F: mov     [esp+84h+var_4C], eax
+0x53CC0F: mov     [esp+84h+textureCoordinates], eax
 0x53CC13: mov     [eax+18h], ecx
 0x53CC16: mov     [eax+1Ch], edx
 0x53CC19: call    FormHeapAlloc
 0x53CC1E: mov     esi, eax
 0x53CC20: add     esp, 1Ch
-0x53CC23: mov     [esp+68h+arg_0], esi
+0x53CC23: mov     [esp+68h+triangleIndices], esi
 0x53CC27: test    esi, esi
 0x53CC29: mov     [esp+68h+var_4], 0
 0x53CC31: jz      short loc_53CC44
@@ -290,7 +290,7 @@
 0x53CC50: call    FormHeapAlloc
 0x53CC55: mov     edi, eax
 0x53CC57: add     esp, 4
-0x53CC5A: mov     [esp+68h+arg_0], edi
+0x53CC5A: mov     [esp+68h+triangleIndices], edi
 0x53CC5E: test    edi, edi
 0x53CC60: mov     [esp+68h+var_4], 1
 0x53CC68: jz      short loc_53CC7B
@@ -360,9 +360,9 @@
 0x53CD3A: mov     [edi+3Ch], edx
 0x53CD3D: call    FormHeapAlloc
 0x53CD42: push    0Ch; Size
-0x53CD44: mov     [esp+70h+arg_0], eax
+0x53CD44: mov     [esp+70h+triangleIndices], eax
 0x53CD48: call    FormHeapAlloc
-0x53CD4D: mov     ecx, [esp+70h+arg_0]
+0x53CD4D: mov     ecx, [esp+70h+triangleIndices]
 0x53CD51: mov     word ptr [ecx], 0
 0x53CD56: mov     word ptr [ecx+4], 2
 0x53CD5C: mov     word ptr [ecx+6], 2
@@ -385,20 +385,20 @@
 0x53CDAA: test    eax, eax
 0x53CDAC: mov     [esp+68h+var_4], 2
 0x53CDB4: jz      short loc_53CDDA
-0x53CDB6: mov     ecx, [esp+68h+arg_0]
+0x53CDB6: mov     ecx, [esp+68h+triangleIndices]
 0x53CDBA: mov     edx, [esp+68h+Src]
-0x53CDBE: push    ecx
-0x53CDBF: mov     ecx, [esp+6Ch+var_54]
-0x53CDC3: push    2
-0x53CDC5: push    0
-0x53CDC7: push    1
-0x53CDC9: push    edx
-0x53CDCA: push    esi
-0x53CDCB: push    ecx
-0x53CDCC: push    ebx
-0x53CDCD: push    4
-0x53CDCF: mov     ecx, eax
-0x53CDD1: call    sub_7174B0
+0x53CDBE: push    ecx; triangleIndices
+0x53CDBF: mov     ecx, [esp+6Ch+normals]
+0x53CDC3: push    2; triangleCount
+0x53CDC5: push    0; dataFlags
+0x53CDC7: push    1; hasVertexColors
+0x53CDC9: push    edx; textureCoordinates
+0x53CDCA: push    esi; colors
+0x53CDCB: push    ecx; normals
+0x53CDCC: push    ebx; vertices
+0x53CDCD: push    4; vertexCount
+0x53CDCF: mov     ecx, eax; this
+0x53CDD1: call    NiTriShape_ctorWithGeometryData; Verified NiTriShape constructor wrapper: allocate/init NiTriShapeData from caller-supplied vertices, colors and triangle-index buffer; initialize NiTriBasedGeom and install NiTriShape vtable.
 0x53CDD6: mov     esi, eax
 0x53CDD8: jmp     short loc_53CDDC
 0x53CDDA: xor     esi, esi
@@ -434,26 +434,26 @@
 0x53CE31: push    0C0h ; 'À'; Size
 0x53CE36: call    FormHeapAlloc
 0x53CE3B: add     esp, 4
-0x53CE3E: mov     [esp+68h+arg_0], eax
+0x53CE3E: mov     [esp+68h+triangleIndices], eax
 0x53CE42: test    eax, eax
 0x53CE44: mov     ebx, 3
 0x53CE49: mov     [esp+68h+var_4], ebx
 0x53CE4D: jz      short loc_53CE77
 0x53CE4F: mov     ecx, [esp+68h+var_50]
-0x53CE53: mov     edx, [esp+68h+var_4C]
-0x53CE57: push    ecx
+0x53CE53: mov     edx, [esp+68h+textureCoordinates]
+0x53CE57: push    ecx; triangleIndices
 0x53CE58: mov     ecx, [esp+6Ch+var_48]
-0x53CE5C: push    2
-0x53CE5E: push    0
-0x53CE60: push    1
-0x53CE62: push    edx
-0x53CE63: mov     edx, [esp+7Ch+var_44]
-0x53CE67: push    edi
-0x53CE68: push    ecx
-0x53CE69: push    edx
-0x53CE6A: push    4
-0x53CE6C: mov     ecx, eax
-0x53CE6E: call    sub_7174B0
+0x53CE5C: push    2; triangleCount
+0x53CE5E: push    0; dataFlags
+0x53CE60: push    1; hasVertexColors
+0x53CE62: push    edx; textureCoordinates
+0x53CE63: mov     edx, [esp+7Ch+vertices]
+0x53CE67: push    edi; colors
+0x53CE68: push    ecx; normals
+0x53CE69: push    edx; vertices
+0x53CE6A: push    4; vertexCount
+0x53CE6C: mov     ecx, eax; this
+0x53CE6E: call    NiTriShape_ctorWithGeometryData; Verified NiTriShape constructor wrapper: allocate/init NiTriShapeData from caller-supplied vertices, colors and triangle-index buffer; initialize NiTriBasedGeom and install NiTriShape vtable.
 0x53CE73: mov     esi, eax
 0x53CE75: jmp     short loc_53CE79
 0x53CE77: xor     esi, esi
@@ -491,7 +491,7 @@
 0x53CED4: call    FormHeapAlloc
 0x53CED9: mov     esi, eax
 0x53CEDB: add     esp, 4
-0x53CEDE: mov     [esp+68h+arg_0], esi
+0x53CEDE: mov     [esp+68h+triangleIndices], esi
 0x53CEE2: test    esi, esi
 0x53CEE4: mov     [esp+68h+var_4], 4
 0x53CEEC: jz      short loc_53CF07
@@ -503,7 +503,7 @@
 0x53CF05: jmp     short loc_53CF09
 0x53CF07: xor     esi, esi
 0x53CF09: test    esi, esi
-0x53CF0B: mov     [esp+68h+arg_0], esi
+0x53CF0B: mov     [esp+68h+triangleIndices], esi
 0x53CF0F: jz      short loc_53CF1B
 0x53CF11: lea     ecx, [esi+4]
 0x53CF14: push    ecx; lpAddend
@@ -518,7 +518,7 @@
 0x53CF3D: mov     ecx, [ebp+10h]; this
 0x53CF40: push    esi; a2
 0x53CF41: mov     [esp+6Ch+var_4], 5
-0x53CF49: call    sub_405680
+0x53CF49: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x53CF4E: lea     eax, [esi+4]
 0x53CF51: push    eax; lpAddend
 0x53CF52: call    dword ptr ds:0A2807Ch
@@ -557,7 +557,7 @@
 0x53CFC1: push    0DCh ; 'Ü'; Size
 0x53CFC6: call    FormHeapAlloc
 0x53CFCB: add     esp, 4
-0x53CFCE: mov     [esp+68h+arg_0], eax
+0x53CFCE: mov     [esp+68h+triangleIndices], eax
 0x53CFD2: test    eax, eax
 0x53CFD4: mov     [esp+68h+var_4], 6
 0x53CFDC: jz      short loc_53CFEB
@@ -595,7 +595,7 @@
 0x53D02C: push    0DCh ; 'Ü'; Size
 0x53D031: call    FormHeapAlloc
 0x53D036: add     esp, 4
-0x53D039: mov     [esp+68h+arg_0], eax
+0x53D039: mov     [esp+68h+triangleIndices], eax
 0x53D03D: test    eax, eax
 0x53D03F: mov     [esp+68h+var_4], 7
 0x53D047: jz      short loc_53D056
@@ -670,9 +670,9 @@
 0x53D10B: call    eax
 0x53D10D: fld     dword ptr ds:0A3721Ch
 0x53D113: push    ecx
-0x53D114: lea     ecx, [esp+6Ch+var_30]
-0x53D118: fstp    [esp+6Ch+var_6C]; float
-0x53D11B: call    NiMatrix33_InitRotationTransposedTransform???
+0x53D114: lea     ecx, [esp+6Ch+var_30]; this
+0x53D118: fstp    [esp+6Ch+angleX]; angleX
+0x53D11B: call    NiMatrix33_InitRotationXTransposed; Verified matrix coefficients make this an X-axis rotation in the engine's transposed convention: X stays fixed; only the Y/Z submatrix contains sin/cos.
 0x53D120: fldz
 0x53D122: mov     eax, [ebp+10h]
 0x53D125: fst     [esp+68h+var_40]
@@ -707,22 +707,22 @@
 0x53D18B: add     edi, 30h ; '0'
 0x53D18E: mov     ecx, 9
 0x53D193: lea     esi, [esp+68h+var_30]
-0x53D197: push    1
+0x53D197: push    1; arg3
 0x53D199: rep movsd
-0x53D19B: push    0
+0x53D19B: push    0; normalMapBypass
 0x53D19D: mov     eax, [ebp+4]
-0x53D1A0: push    0Ah
-0x53D1A2: push    eax
-0x53D1A3: call    sub_7B8940
+0x53D1A0: push    0Ah; shaderId
+0x53D1A2: push    eax; root
+0x53D1A3: call    BSShaderManager_AssignShadersRecursive; Generic recursive shader assignment wrapper around 0x7B7FC0. In decoded TES4 tree code it is used for branch shader id 4 and simple/default id 1; no stock call with frond shader id 5 was found in this pass.
 0x53D1A8: mov     ecx, [ebp+10h]
 0x53D1AB: add     esp, 10h
 0x53D1AE: push    4
-0x53D1B0: call    NiNode_GetNiPropertyByID
+0x53D1B0: call    NiNode_GetNiPropertyByID;
 0x53D1B5: test    eax, eax
 0x53D1B7: jz      short loc_53D1F2
 0x53D1B9: mov     ecx, [ebp+10h]
 0x53D1BC: push    4
-0x53D1BE: call    NiNode_GetNiPropertyByID
+0x53D1BE: call    NiNode_GetNiPropertyByID;
 0x53D1C3: mov     edx, [eax]
 0x53D1C5: mov     ecx, eax
 0x53D1C7: mov     eax, [edx+54h]
@@ -735,18 +735,18 @@
 0x53D1D8: jz      short loc_53D1F2
 0x53D1DA: mov     ecx, [ebp+10h]
 0x53D1DD: push    4
-0x53D1DF: call    NiNode_GetNiPropertyByID
+0x53D1DF: call    NiNode_GetNiPropertyByID;
 0x53D1E4: test    eax, eax
 0x53D1E6: jz      short loc_53D1F2
 0x53D1E8: mov     dword ptr [eax+88h], 6
 0x53D1F2: mov     ecx, [ebp+14h]
 0x53D1F5: push    4
-0x53D1F7: call    NiNode_GetNiPropertyByID
+0x53D1F7: call    NiNode_GetNiPropertyByID;
 0x53D1FC: test    eax, eax
 0x53D1FE: jz      short loc_53D23B
 0x53D200: mov     ecx, [ebp+14h]
 0x53D203: push    4
-0x53D205: call    NiNode_GetNiPropertyByID
+0x53D205: call    NiNode_GetNiPropertyByID;
 0x53D20A: mov     edx, [eax]
 0x53D20C: mov     ecx, eax
 0x53D20E: mov     eax, [edx+54h]
@@ -760,7 +760,7 @@
 0x53D221: mov     ebp, [ebp+14h]
 0x53D224: push    4
 0x53D226: mov     ecx, ebp
-0x53D228: call    NiNode_GetNiPropertyByID
+0x53D228: call    NiNode_GetNiPropertyByID;
 0x53D22D: test    eax, eax
 0x53D22F: jz      short loc_53D23B
 0x53D231: mov     dword ptr [eax+88h], 7
@@ -773,3 +773,47 @@
 0x53D24A: pop     ebx
 0x53D24B: add     esp, 54h
 0x53D24E: retn    8
+0x9BA3B0: mov     eax, [ebp+4]
+0x9BA3B3: push    eax
+0x9BA3B4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BA3B9: pop     ecx
+0x9BA3BA: retn
+0x9BA3BB: mov     eax, [ebp+4]
+0x9BA3BE: push    eax
+0x9BA3BF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BA3C4: pop     ecx
+0x9BA3C5: retn
+0x9BA3C6: mov     eax, [ebp-40h]
+0x9BA3C9: push    eax
+0x9BA3CA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BA3CF: pop     ecx
+0x9BA3D0: retn
+0x9BA3D1: mov     eax, [ebp+4]
+0x9BA3D4: push    eax
+0x9BA3D5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BA3DA: pop     ecx
+0x9BA3DB: retn
+0x9BA3DC: mov     eax, [ebp+4]
+0x9BA3DF: push    eax
+0x9BA3E0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BA3E5: pop     ecx
+0x9BA3E6: retn
+0x9BA3E7: lea     ecx, [ebp+4]; slot
+0x9BA3EA: jmp     NiPointerSlot_Release
+0x9BA3EF: mov     eax, [ebp+4]
+0x9BA3F2: push    eax
+0x9BA3F3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BA3F8: pop     ecx
+0x9BA3F9: retn
+0x9BA3FA: mov     eax, [ebp+4]
+0x9BA3FD: push    eax
+0x9BA3FE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BA403: pop     ecx
+0x9BA404: retn
+0x9BA405: mov     edx, [esp+Src]
+0x9BA409: lea     eax, [edx-58h]
+0x9BA40C: mov     ecx, [edx-5Ch]
+0x9BA40F: xor     ecx, eax
+0x9BA411: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BA416: mov     eax, offset stru_AE455C
+0x9BA41B: jmp     ___CxxFrameHandler3

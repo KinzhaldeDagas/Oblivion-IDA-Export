@@ -2,7 +2,7 @@
 0x7F35A1: mov     esi, [esp+4+arg_0]
 0x7F35A5: push    edi
 0x7F35A6: push    esi
-0x7F35A7: call    sub_7E28E0
+0x7F35A7: call    sub_7E28E0; Shader/property diagnostic dumper. Prints pass names via BSShaderProperty_GetRenderPassName; BSSM_FRONDS from this path is diagnostic text only.
 0x7F35AC: mov     eax, ds:0B468ECh
 0x7F35B1: push    eax; ArgList
 0x7F35B2: call    TESOutput_PrintString

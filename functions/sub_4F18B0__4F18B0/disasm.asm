@@ -28,9 +28,9 @@
 0x4F1903: push    esi
 0x4F1904: push    ebp; a2
 0x4F1905: mov     ecx, edi; this
-0x4F1907: call    TESForm_GetOverrideFile
+0x4F1907: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x4F190C: mov     ecx, eax
-0x4F190E: call    sub_4520F0
+0x4F190E: call    TESFile_GetThreadSafeFile; Returns the root TESFile on the main thread; on worker threads returns the per-thread clone selected by GetCurrentThreadId via TESFile_GetThreadSafeFileForThread.
 0x4F1913: mov     esi, eax
 0x4F1915: test    esi, esi
 0x4F1917: jz      short loc_4F1938

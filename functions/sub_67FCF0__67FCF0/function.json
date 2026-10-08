@@ -1,19 +1,36 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_67FCF0",
+  "chunks": [
+    [
+      "0x67FCF0",
+      "0x67FD6C"
+    ],
+    [
+      "0x9C74D0",
+      "0x9C74F6"
+    ]
+  ],
+  "chunks_sha256": "0f90866ea7200b513254a62919c816e7f48173390c0bca845f5caf21ed04a377",
+  "comment_regular": "Verified lazy initialization of LowPathSearchGlobals.doorLinkMap: if null, allocates a 0x10-byte outer NiTPointerMap<TESForm*,NiTPointerMap<TESForm*,BSSimpleList<AStarWorldNode*>*>*> with 0xBF buckets. Called from WinMain and after map teardown during save/load reconciliation.",
+  "comment_repeatable": "Verified lazy initialization of LowPathSearchGlobals.doorLinkMap: if null, allocates a 0x10-byte outer NiTPointerMap<TESForm*,NiTPointerMap<TESForm*,BSSimpleList<AStarWorldNode*>*>*> with 0xBF buckets. Called from WinMain and after map teardown during save/load reconciliation.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "TravelPath_EnsureDoorLinkMapInitialized",
   "end_ea": "0x67FD6C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_67FCF0",
+  "name": "TravelPath_EnsureDoorLinkMapInitialized",
   "segment": ".text",
   "sha256": "9c31b3fcc8bce181344d5c6f7346f771bfcd4431b17d52f8172f1f11979c5eb0",
   "size": 124,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x67FCF0",
-  "type": "void()",
-  "xrefs_from_count": 38,
+  "total_chunk_size": 162,
+  "type": "void __cdecl()",
+  "xrefs_from_count": 52,
   "xrefs_to_count": 2
 }

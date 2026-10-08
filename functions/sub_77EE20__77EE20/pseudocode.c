@@ -1,49 +1,49 @@
 void __cdecl sub_77EE20(TESObjectCELL *a1)
 {
-  NiTMap_TESCELL *v1; // ecx
-  UInt32 m_numBuckets; // esi
-  UInt32 v3; // eax
-  NiTMap_Entry_TESCELL **m_buckets; // edx
-  NiTMap_Entry_TESCELL *v5; // eax
-  TESObjectCELL *v6; // [esp+4h] [ebp-Ch] BYREF
-  int v7; // [esp+8h] [ebp-8h] BYREF
-  NiTMap_Entry_TESCELL *v8; // [esp+Ch] [ebp-4h] BYREF
+  MEF_U32PointerMapLayout32 *v1; // ecx
+  unsigned int bucketCount; // esi
+  unsigned int v3; // eax
+  MEF_U32PointerMapEntry32 **buckets; // edx
+  MEF_U32PointerMapEntry32 *v5; // eax
+  void *valueOut; // [esp+4h] [ebp-Ch] BYREF
+  unsigned int keyOut; // [esp+8h] [ebp-8h] BYREF
+  MEF_U32PointerMapEntry32 *position; // [esp+Ch] [ebp-4h] BYREF
 
-  v1 = (NiTMap_TESCELL *)dword_B428AC;
-  if ( dword_B428AC )
+  v1 = (MEF_U32PointerMapLayout32 *)unk_B428AC; /*0x77ee20*/
+  if ( unk_B428AC ) /*0x77ee20*/
   {
-    m_numBuckets = v1->m_numBuckets;
-    v3 = 0;
-    if ( m_numBuckets )
+    bucketCount = v1->bucketCount; /*0x77ee31*/
+    v3 = 0; /*0x77ee34*/
+    if ( bucketCount ) /*0x77ee39*/
     {
-      m_buckets = v1->m_buckets;
-      while ( !*m_buckets )
+      buckets = v1->buckets; /*0x77ee3e*/
+      while ( !*buckets ) /*0x77ee42*/
       {
-        ++v3;
-        ++m_buckets;
-        if ( v3 >= m_numBuckets )
-          goto LABEL_6;
+        ++v3; /*0x77ee44*/
+        ++buckets; /*0x77ee47*/
+        if ( v3 >= bucketCount ) /*0x77ee4c*/
+          goto LABEL_6; /*0x77ee4c*/
       }
-      v5 = v1->m_buckets[v3];
+      v5 = v1->buckets[v3]; /*0x77ee5e*/
     }
     else
     {
 LABEL_6:
-      v5 = 0;
+      v5 = 0; /*0x77ee4e*/
     }
-    v8 = v5;
-    if ( v5 )
+    position = v5; /*0x77ee52*/
+    if ( v5 ) /*0x77ee56*/
     {
-      while ( 1 )
+      while ( 1 ) /*0x77ee78*/
       {
-        v7 = 0;
-        v6 = 0;
-        sub_452600(v1, &v8, (void **)&v7, &v6);
-        if ( a1 == v6 )
-          NiTMap_RemoveAt((_DWORD *)dword_B428AC, v7);
-        if ( !v8 )
-          break;
-        v1 = (NiTMap_TESCELL *)dword_B428AC;
+        keyOut = 0; /*0x77ee78*/
+        valueOut = 0; /*0x77ee7c*/
+        NiTMap_U32Pointer_GetNextEntry(v1, &position, &keyOut, &valueOut); /*0x77ee80*/
+        if ( a1 == valueOut ) /*0x77ee89*/
+          NiTMap_RemoveAt((_DWORD *)unk_B428AC, keyOut); /*0x77ee96*/
+        if ( !position ) /*0x77ee9f*/
+          break; /*0x77ee9f*/
+        v1 = (MEF_U32PointerMapLayout32 *)unk_B428AC; /*0x77ee63*/
       }
     }
   }

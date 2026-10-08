@@ -74,12 +74,12 @@
 0x441E2B: call    sub_88BD60
 0x441E30: cmp     [esp+8+arg_0], 0
 0x441E35: jnz     short loc_441E52
-0x441E37: mov     ecx, offset ActorProcessManager_ptr
+0x441E37: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x441E3C: call    sub_677360
 0x441E41: cmp     byte ptr ds:0B0703Ch, 0
 0x441E48: jz      short loc_441E52
 0x441E4A: mov     ecx, [ebx+54h]
-0x441E4D: call    WaterSurfaceLoop
+0x441E4D: call    WaterSurfaceLoop; Pass202/205: WaterSurfaceLoop. Native producer for persistent water height/depth target and updater of WaterShaderProperty pass-data fields for water grid cells.
 0x441E52: mov     edx, [ebx+10h]
 0x441E55: mov     eax, [edx+1Ch]
 0x441E58: test    eax, eax
@@ -96,7 +96,7 @@
 0x441E7B: push    ecx
 0x441E7C: fstp    [esp+10h+a2]; a2
 0x441E7F: mov     ecx, [ebx+10h]; this
-0x441E82: call    NiAVObject_UpdateNiAVObject
+0x441E82: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x441E87: pop     ebx
 0x441E88: pop     ecx
 0x441E89: retn    8

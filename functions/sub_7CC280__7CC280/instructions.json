@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7CC280",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified (Oblivion): builds ShadowLightShader-owned vertex/pixel constant maps and registers texture-effect U/V at vertex c9/c10, current fill/edge RGBA at pixel c0/c1, and edge-falloff/fVars at pixel c2. ShadowLightShader's vtable slot +0x88 points here; slot +0x38 applies these maps to the active pass's shader programs. This confirms the 0x18C..0x18F passes consume these maps through their active shader owner.",
     "mnemonic": "push",
     "size": 2
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x7CC3A9",
-    "line": "push    offset flt_B44EE8",
+    "line": "push    offset unk_B44EE8",
     "mnemonic": "push",
     "size": 5
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x7CC3CF",
-    "line": "push    offset flt_B44EF8",
+    "line": "push    offset unk_B44EF8",
     "mnemonic": "push",
     "size": 5
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x7CC3FB",
-    "line": "push    offset unk_B46698",
+    "line": "push    (offset flt_B46638+60h)",
     "mnemonic": "push",
     "size": 5
   },
@@ -847,7 +847,7 @@
   },
   {
     "ea": "0x7CC424",
-    "line": "push    offset flt_B454D8",
+    "line": "push    offset unk_B454D8",
     "mnemonic": "push",
     "size": 5
   },
@@ -931,7 +931,7 @@
   },
   {
     "ea": "0x7CC44D",
-    "line": "push    offset flt_B454E8",
+    "line": "push    offset unk_B454E8",
     "mnemonic": "push",
     "size": 5
   },
@@ -1015,7 +1015,7 @@
   },
   {
     "ea": "0x7CC476",
-    "line": "push    offset dword_B44FD8",
+    "line": "push    offset ShadowLightPointLightPos0Constant; Backing vector for ShadowLight PointLightPos0 vertex constant c16. Retail mode-5 caster CTAB names this register LightPosition.",
     "mnemonic": "push",
     "size": 5
   },
@@ -1063,7 +1063,7 @@
   },
   {
     "ea": "0x7CC48F",
-    "line": "push    offset aPointlightpos0",
+    "line": "push    offset aPointlightpos0; Register PointLightPos0 at vertex c16 from B44FD8, four floats; c16.w is the caster projected-depth denominator.",
     "mnemonic": "push",
     "size": 5
   },
@@ -1099,7 +1099,7 @@
   },
   {
     "ea": "0x7CC49F",
-    "line": "push    offset flt_B44FE8",
+    "line": "push    offset unk_B44FE8",
     "mnemonic": "push",
     "size": 5
   },
@@ -1183,7 +1183,7 @@
   },
   {
     "ea": "0x7CC4C8",
-    "line": "push    offset flt_B44FF8",
+    "line": "push    offset unk_B44FF8",
     "mnemonic": "push",
     "size": 5
   },
@@ -1267,7 +1267,7 @@
   },
   {
     "ea": "0x7CC4F1",
-    "line": "push    offset dword_B464A8",
+    "line": "push    (offset flt_B464A0+8)",
     "mnemonic": "push",
     "size": 5
   },
@@ -1351,7 +1351,7 @@
   },
   {
     "ea": "0x7CC51A",
-    "line": "push    offset unk_B464B8",
+    "line": "push    (offset flt_B464A0+18h)",
     "mnemonic": "push",
     "size": 5
   },
@@ -1435,7 +1435,7 @@
   },
   {
     "ea": "0x7CC543",
-    "line": "push    offset unk_B464C8",
+    "line": "push    (offset flt_B464A0+28h)",
     "mnemonic": "push",
     "size": 5
   },
@@ -1519,7 +1519,7 @@
   },
   {
     "ea": "0x7CC56C",
-    "line": "push    offset dword_B46638",
+    "line": "push    offset flt_B46638",
     "mnemonic": "push",
     "size": 5
   },
@@ -1573,7 +1573,7 @@
   },
   {
     "ea": "0x7CC58A",
-    "line": "call    eax",
+    "line": "call    eax; Fog constant-map decode: ShadowLight/shared map declares FogParam | ShadowVolumeFatness at vs c23 from B46638; shared fog vector also has shadow-volume semantics.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1603,7 +1603,7 @@
   },
   {
     "ea": "0x7CC595",
-    "line": "push    offset dword_B46648",
+    "line": "push    (offset flt_B46638+10h)",
     "mnemonic": "push",
     "size": 5
   },
@@ -1657,7 +1657,7 @@
   },
   {
     "ea": "0x7CC5B3",
-    "line": "call    eax",
+    "line": "call    eax; Fog constant-map decode: ShadowLight/shared map declares FogColor | ShadowVolumeExtrudeDistance at vs c24 from B46648; shared fog vector also has shadow-volume semantics.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1687,7 +1687,7 @@
   },
   {
     "ea": "0x7CC5BE",
-    "line": "push    offset flt_B44F08",
+    "line": "push    offset unk_B44F08",
     "mnemonic": "push",
     "size": 5
   },
@@ -1771,7 +1771,7 @@
   },
   {
     "ea": "0x7CC5E7",
-    "line": "push    offset flt_B44F28",
+    "line": "push    offset unk_B44F28",
     "mnemonic": "push",
     "size": 5
   },
@@ -1855,7 +1855,7 @@
   },
   {
     "ea": "0x7CC610",
-    "line": "push    offset unk_B466B8",
+    "line": "push    (offset flt_B46638+80h)",
     "mnemonic": "push",
     "size": 5
   },
@@ -2113,7 +2113,7 @@
   },
   {
     "ea": "0x7CC690",
-    "line": "push    offset flt_B44EE0",
+    "line": "push    offset unk_B44EE0",
     "mnemonic": "push",
     "size": 5
   },
@@ -3109,7 +3109,7 @@
   },
   {
     "ea": "0x7CC889",
-    "line": "call    eax",
+    "line": "call    eax; Fog constant-map decode: caches handle for shared FogParam | ShadowVolumeFatness declaration; handle target is B46638.",
     "mnemonic": "call",
     "size": 2
   },
@@ -3157,7 +3157,7 @@
   },
   {
     "ea": "0x7CC8A2",
-    "line": "call    eax",
+    "line": "call    eax; Fog constant-map decode: caches handle for shared FogColor | ShadowVolumeExtrudeDistance declaration; handle target is B46648.",
     "mnemonic": "call",
     "size": 2
   },
@@ -3553,7 +3553,7 @@
   },
   {
     "ea": "0x7CC974",
-    "line": "push    offset flt_B4615C",
+    "line": "push    offset unk_B4615C",
     "mnemonic": "push",
     "size": 5
   },
@@ -3649,7 +3649,7 @@
   },
   {
     "ea": "0x7CC9A3",
-    "line": "mov     ecx, offset dword_B45060; this",
+    "line": "mov     ecx, offset unk_B45060; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -3685,7 +3685,7 @@
   },
   {
     "ea": "0x7CC9B6",
-    "line": "push    offset flt_B46218",
+    "line": "push    offset unk_B46218",
     "mnemonic": "push",
     "size": 5
   },
@@ -3925,19 +3925,19 @@
   },
   {
     "ea": "0x7CCA37",
-    "line": "push    esi",
+    "line": "push    esi; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7CCA38",
-    "line": "lea     ecx, [ebx+98h]",
+    "line": "lea     ecx, [ebx+98h]; this",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x7CCA3E",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4087,7 +4087,7 @@
   },
   {
     "ea": "0x7CCA8E",
-    "line": "push    offset flt_B44F18",
+    "line": "push    offset unk_B44F18",
     "mnemonic": "push",
     "size": 5
   },
@@ -4171,7 +4171,7 @@
   },
   {
     "ea": "0x7CCAB7",
-    "line": "push    offset dword_B46498",
+    "line": "push    offset flt_B46498",
     "mnemonic": "push",
     "size": 5
   },
@@ -4255,7 +4255,7 @@
   },
   {
     "ea": "0x7CCAE0",
-    "line": "push    offset dword_B464A8",
+    "line": "push    (offset flt_B464A0+8)",
     "mnemonic": "push",
     "size": 5
   },
@@ -4339,7 +4339,7 @@
   },
   {
     "ea": "0x7CCB09",
-    "line": "push    offset unk_B464B8",
+    "line": "push    (offset flt_B464A0+18h)",
     "mnemonic": "push",
     "size": 5
   },
@@ -4423,7 +4423,7 @@
   },
   {
     "ea": "0x7CCB32",
-    "line": "push    offset unk_B464C8",
+    "line": "push    (offset flt_B464A0+28h)",
     "mnemonic": "push",
     "size": 5
   },
@@ -4501,7 +4501,7 @@
   },
   {
     "ea": "0x7CCB58",
-    "line": "push    offset unk_B464D8",
+    "line": "push    (offset flt_B464A0+38h)",
     "mnemonic": "push",
     "size": 5
   },
@@ -4591,7 +4591,7 @@
   },
   {
     "ea": "0x7CCB84",
-    "line": "push    offset dword_B46628",
+    "line": "push    (offset flt_B464A0+188h)",
     "mnemonic": "push",
     "size": 5
   },
@@ -4675,7 +4675,7 @@
   },
   {
     "ea": "0x7CCBAD",
-    "line": "push    offset flt_B46688",
+    "line": "push    (offset flt_B46638+50h)",
     "mnemonic": "push",
     "size": 5
   },
@@ -4759,7 +4759,7 @@
   },
   {
     "ea": "0x7CCBD6",
-    "line": "push    offset dword_B4616C",
+    "line": "push    offset flt_B4616C",
     "mnemonic": "push",
     "size": 5
   },
@@ -4843,7 +4843,7 @@
   },
   {
     "ea": "0x7CCBFF",
-    "line": "push    offset unk_B466A8",
+    "line": "push    (offset flt_B46638+70h)",
     "mnemonic": "push",
     "size": 5
   },
@@ -4891,7 +4891,7 @@
   },
   {
     "ea": "0x7CCC18",
-    "line": "push    offset aStbbcolorconst",
+    "line": "push    offset aStbbcolorconst; Registers shader constant map entry STBBColorConstants using backing globals at B466A8. This supports TES STBB color constants only; it is separate from SpeedTreeRT 360 billboard image selection.",
     "mnemonic": "push",
     "size": 5
   },
@@ -4927,7 +4927,7 @@
   },
   {
     "ea": "0x7CCC28",
-    "line": "push    offset flt_B44EDC",
+    "line": "push    offset unk_B44EDC",
     "mnemonic": "push",
     "size": 5
   },
@@ -5641,7 +5641,7 @@
   },
   {
     "ea": "0x7CCD92",
-    "line": "push    offset flt_B4615C",
+    "line": "push    offset unk_B4615C",
     "mnemonic": "push",
     "size": 5
   },
@@ -5773,7 +5773,7 @@
   },
   {
     "ea": "0x7CCDD4",
-    "line": "push    offset dword_B46198",
+    "line": "push    offset flt_B46198",
     "mnemonic": "push",
     "size": 5
   },
@@ -5881,19 +5881,19 @@
   },
   {
     "ea": "0x7CCE10",
-    "line": "push    esi",
+    "line": "push    esi; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7CCE11",
-    "line": "lea     ecx, [ebx+94h]",
+    "line": "lea     ecx, [ebx+94h]; this",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x7CCE17",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6223,7 +6223,7 @@
   },
   {
     "ea": "0x7CCEC7",
-    "line": "push    offset flt_B44F08",
+    "line": "push    offset unk_B44F08",
     "mnemonic": "push",
     "size": 5
   },
@@ -6307,7 +6307,7 @@
   },
   {
     "ea": "0x7CCEF0",
-    "line": "push    offset flt_B44ED0",
+    "line": "push    offset g_ShadowLight_TextureEffectUOffset",
     "mnemonic": "push",
     "size": 5
   },
@@ -6391,7 +6391,7 @@
   },
   {
     "ea": "0x7CCF19",
-    "line": "push    offset flt_B44ED4",
+    "line": "push    offset g_ShadowLight_TextureEffectVOffset",
     "mnemonic": "push",
     "size": 5
   },
@@ -6559,7 +6559,7 @@
   },
   {
     "ea": "0x7CCF6B",
-    "line": "push    offset dword_B44F78",
+    "line": "push    offset flt_B44F78",
     "mnemonic": "push",
     "size": 5
   },
@@ -6613,7 +6613,7 @@
   },
   {
     "ea": "0x7CCF89",
-    "line": "call    eax",
+    "line": "call    eax; Fog constant-map decode: ShadowLight alternate explicit FogParam at vs c12 uses local/global backing B44F78, not shared B46638.",
     "mnemonic": "call",
     "size": 2
   },
@@ -6643,7 +6643,7 @@
   },
   {
     "ea": "0x7CCF94",
-    "line": "push    offset dword_B44F68",
+    "line": "push    offset flt_B44F68",
     "mnemonic": "push",
     "size": 5
   },
@@ -6697,7 +6697,7 @@
   },
   {
     "ea": "0x7CCFB2",
-    "line": "call    eax",
+    "line": "call    eax; Fog constant-map decode: ShadowLight alternate explicit FogColor at vs c13 uses local/global backing B44F68, not shared B46648.",
     "mnemonic": "call",
     "size": 2
   },
@@ -6847,7 +6847,7 @@
   },
   {
     "ea": "0x7CD005",
-    "line": "push    offset dword_B44F38",
+    "line": "push    offset g_ShadowLight_CurrentFillColor",
     "mnemonic": "push",
     "size": 5
   },
@@ -6931,7 +6931,7 @@
   },
   {
     "ea": "0x7CD02E",
-    "line": "push    offset dword_B44F48",
+    "line": "push    offset g_ShadowLight_CurrentEdgeColor",
     "mnemonic": "push",
     "size": 5
   },
@@ -7015,7 +7015,7 @@
   },
   {
     "ea": "0x7CD057",
-    "line": "push    offset flt_B44F58",
+    "line": "push    offset g_ShadowLight_TextureEffectEdgeFalloff",
     "mnemonic": "push",
     "size": 5
   },
@@ -7069,7 +7069,7 @@
   },
   {
     "ea": "0x7CD075",
-    "line": "call    eax",
+    "line": "call    eax; Verified (Oblivion): ShadowLight pixel constant map registers the 16-byte fVars vector at pixel constant c2. The installed shaderpackage002.sdp SLS2076 CTAB independently describes a float4 fVars at c2, but its program-name/source association conflicts with the current loader table (SLS2076 -> SimpleShadow). CTAB confirms the vector shape only as Candidate corroboration; components z/w remain Unknown.",
     "mnemonic": "call",
     "size": 2
   },
@@ -7126,5 +7126,167 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CE980",
+    "line": "mov     eax, [ebp-10h]; Microsoft VisualC 2-14/net runtime",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE983",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE984",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE989",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE98A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE98B",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE98E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE98F",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE994",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE995",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE996",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE999",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE99A",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE99F",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE9A0",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE9A1",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE9A4",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE9A5",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE9AA",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE9AB",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE9AC",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CE9B0",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE9B3",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE9B6",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CE9B8",
+    "line": "call    @__security_check_cookie@4",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE9BD",
+    "line": "mov     eax, offset stru_AF78C4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE9C2",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

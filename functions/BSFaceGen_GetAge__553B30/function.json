@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
-  "callers_count": 7,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 17,
+  "chunks": [
+    [
+      "0x553B30",
+      "0x553B61"
+    ]
+  ],
+  "chunks_sha256": "1c80d784fba1b5bcfc9f0ab19a6a23a121ae7c93abc1e75781532452e8a8f36f",
+  "comment_regular": "Fan-0 control projection wrapper. matrixChannel 0 projects FaceGen matrix 0 geometry; matrixChannel 1 projects matrix 2 texture.\n\nFan-0 control projection wrapper. matrixChannel 0 projects FaceGen matrix 0; matrixChannel 1 projects FaceGen matrix 2, not matrix 1.",
+  "comment_repeatable": "Fan-0 control projection wrapper. matrixChannel 0 projects FaceGen matrix 0; matrixChannel 1 projects FaceGen matrix 2, not matrix 1.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "BSFaceGen_GetAge",
+  "display_name": "FaceGenHeadParameters_GetControlValue",
   "end_ea": "0x553B61",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "BSFaceGen_GetAge",
+  "name": "FaceGenHeadParameters_GetControlValue",
   "segment": ".text",
   "sha256": "1c80d784fba1b5bcfc9f0ab19a6a23a121ae7c93abc1e75781532452e8a8f36f",
   "size": 49,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x553B30",
-  "type": "void __cdecl(int, signed int, signed int)",
+  "total_chunk_size": 49,
+  "type": "float __cdecl(const FaceGenHeadParameters *parameters, int controlIndex, int matrixChannel)",
   "xrefs_from_count": 16,
   "xrefs_to_count": 17
 }

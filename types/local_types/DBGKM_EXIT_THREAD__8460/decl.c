@@ -1,1 +1,4 @@
-_DBGKM_EXIT_THREAD
+struct _DBGKM_EXIT_THREAD
+{
+NTSTATUS ExitStatus;
+};

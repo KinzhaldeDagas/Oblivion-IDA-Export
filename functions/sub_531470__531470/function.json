@@ -1,19 +1,32 @@
 {
-  "callees_count": 9,
-  "callers_count": 7,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
+  "callers_count": 8,
+  "chunks": [
+    [
+      "0x531470",
+      "0x5314CF"
+    ]
+  ],
+  "chunks_sha256": "9362623ad0569fb49a9329c2195e0b5c93bd9a026e8d6d7666104e7c1d4ca30a",
+  "comment_regular": "Runs the selected INFO result on the speaker. Unless InfoRefusal (0x10), commits SayOnce state globally on the TESTopicInfo itself (spoken=1) and marks that form modified with 0x10000000; this state is not per actor.",
+  "comment_repeatable": "Runs the selected INFO result on the speaker. Unless InfoRefusal (0x10), commits SayOnce state globally on the TESTopicInfo itself (spoken=1) and marks that form modified with 0x10000000; this state is not per actor.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_531470",
+  "display_name": "TESTopicInfo::RunResult",
   "end_ea": "0x5314CF",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_531470",
+  "name": "TESTopicInfo::RunResult",
   "segment": ".text",
   "sha256": "9362623ad0569fb49a9329c2195e0b5c93bd9a026e8d6d7666104e7c1d4ca30a",
   "size": 95,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x531470",
-  "type": "void __userpurge(TESForm *this@<ecx>, double@<st1>, double@<st0>, TESObjectREFR *)",
+  "total_chunk_size": 95,
+  "type": "void __thiscall(OblivionTopicInfo *this, TESObjectREFR *speaker)",
   "xrefs_from_count": 46,
   "xrefs_to_count": 8
 }

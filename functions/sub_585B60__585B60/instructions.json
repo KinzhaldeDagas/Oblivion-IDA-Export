@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x585BEC",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -334,5 +334,83 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9BF260",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BF263",
+    "line": "add     ecx, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BF266",
+    "line": "jmp     j_??1?$NiTList@V?$BSStringT@D@@@@UAE@XZ; NiTList<BSStringT<char>>::~NiTList<BSStringT<char>>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BF26B",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BF26E",
+    "line": "add     ecx, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BF271",
+    "line": "jmp     j_??1?$NiTList@V?$BSStringT@D@@@@UAE@XZ; NiTList<BSStringT<char>>::~NiTList<BSStringT<char>>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BF276",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BF27A",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BF27D",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BF280",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BF282",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BF287",
+    "line": "mov     eax, offset stru_AE8860",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BF28C",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

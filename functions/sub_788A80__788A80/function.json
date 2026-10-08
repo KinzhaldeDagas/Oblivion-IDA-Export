@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x788A80",
+      "0x788AA5"
+    ]
+  ],
+  "chunks_sha256": "19d9a8733123b6c4aace2fdfd4680d6a055e041bfd84110d73109f591bfb162d",
+  "comment_regular": "Oblivion byte-vector copy-backward primitive: computes destinationEnd-(last-first), uses overlap-safe memmove_s for the raw byte span, and returns destination start. Hex-Rays does not decompile this helper; the 17-instruction body is the evidence.",
+  "comment_repeatable": "Oblivion byte-vector copy-backward primitive: computes destinationEnd-(last-first), uses overlap-safe memmove_s for the raw byte span, and returns destination start. Hex-Rays does not decompile this helper; the 17-instruction body is the evidence.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_788A80",
+  "display_name": "OB_stVectorByte_CopyBackwardRange_010201A0",
   "end_ea": "0x788AA5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": false,
-  "name": "sub_788A80",
+  "name": "OB_stVectorByte_CopyBackwardRange_010201A0",
   "segment": ".text",
   "sha256": "19d9a8733123b6c4aace2fdfd4680d6a055e041bfd84110d73109f591bfb162d",
   "size": 37,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x788A80",
-  "type": "int __cdecl(void *Src, int, int)",
+  "total_chunk_size": 37,
+  "type": "unsigned __int8 *__cdecl(const unsigned __int8 *first, const unsigned __int8 *last, unsigned __int8 *destinationEnd)",
   "xrefs_from_count": 18,
   "xrefs_to_count": 1
 }

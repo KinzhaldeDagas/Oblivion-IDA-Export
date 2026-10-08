@@ -1,19 +1,32 @@
 {
-  "callees_count": 18,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7C5D90",
+      "0x7C5E67"
+    ]
+  ],
+  "chunks_sha256": "3ee1a6fee288aaa1a52fd88f37e01b4ce90ce2c1c73d0b3eac14b4de2110aedc",
+  "comment_regular": "Recursively walks a NiNode subtree. For receiver geometry with property ID 4/type 1..10, removes it from every ShadowSceneLight receiver list. For child nodes, recurses.",
+  "comment_repeatable": "Recursively walks a NiNode subtree. For receiver geometry with property ID 4/type 1..10, removes it from every ShadowSceneLight receiver list. For child nodes, recurses.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7C5D90",
+  "display_name": "ShadowSceneNode_RemoveReceiverGeometryRecursive",
   "end_ea": "0x7C5E67",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7C5D90",
+  "name": "ShadowSceneNode_RemoveReceiverGeometryRecursive",
   "segment": ".text",
   "sha256": "3ee1a6fee288aaa1a52fd88f37e01b4ce90ce2c1c73d0b3eac14b4de2110aedc",
   "size": 215,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7C5D90",
-  "type": "unsigned int __thiscall(_DWORD *this, int)",
+  "total_chunk_size": 215,
+  "type": "unsigned int __thiscall(void *this, NiNode *node)",
   "xrefs_from_count": 96,
   "xrefs_to_count": 2
 }

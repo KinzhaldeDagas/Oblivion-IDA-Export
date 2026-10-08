@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 4,
   "callers_count": 6,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x446A10",
+      "0x446A3A"
+    ],
+    [
+      "0x4D4E30",
+      "0x4D4EAD"
+    ]
+  ],
+  "chunks_sha256": "c430e1894c1369e488d0a59afb64cd9e043bc75cd8deb495e7e7787dcebedcfc",
+  "comment_regular": "TES4 authoritative: TES::CastRay. Uses current interior cell's bhkWorld or exterior bhkWorldM; calls bhkWorld raycast vfunc +0x88 with bhkWorldRayCastData. Reusable for climbing wall/ledge probes.",
+  "comment_repeatable": "TES4 authoritative: TES::CastRay. Uses current interior cell's bhkWorld or exterior bhkWorldM; calls bhkWorld raycast vfunc +0x88 with bhkWorldRayCastData. Reusable for climbing wall/ledge probes.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "TES::CastRay",
   "end_ea": "0x446A3A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "TES::CastRay",
   "segment": ".text",
   "sha256": "f8db341f7e7c2510beb7a872757f1764209d53bfe86c3ee197a4addd5a082ad1",
   "size": 42,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x446A10",
-  "type": "NiNode *__thiscall(TES *this, bhkWorldRayCastData *a2)",
-  "xrefs_from_count": 18,
+  "total_chunk_size": 167,
+  "type": "NiAVObject *__thiscall(TES *this, bhkWorldRayCastData *)",
+  "xrefs_from_count": 78,
   "xrefs_to_count": 6
 }

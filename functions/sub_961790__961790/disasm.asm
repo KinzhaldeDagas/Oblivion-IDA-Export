@@ -6,71 +6,71 @@
 0x9617A8: push    ebx
 0x9617A9: push    esi
 0x9617AA: mov     esi, [esp+0BCh+arg_C]
-0x9617B1: fstp    [esp+0BCh+var_94]
+0x9617B1: fstp    [esp+0BCh+out.x]
 0x9617B5: push    edi
 0x9617B6: fld     dword ptr [eax+4]
 0x9617B9: mov     edi, [esp+0C0h+arg_4]
 0x9617C0: fsub    dword ptr [ecx+4]
 0x9617C3: lea     ebx, [edi+10h]
-0x9617C6: fstp    [esp+0C0h+var_90]
+0x9617C6: fstp    [esp+0C0h+out.y]
 0x9617CA: fld     dword ptr [eax+8]
-0x9617CD: mov     eax, [esp+0C0h+var_94]
+0x9617CD: mov     eax, [esp+0C0h+out.x]
 0x9617D1: fsub    dword ptr [ecx+8]
-0x9617D4: mov     ecx, [esp+0C0h+var_90]
-0x9617D8: mov     [esp+0C0h+var_24], eax
-0x9617DF: mov     [esp+0C0h+var_20], ecx
-0x9617E6: fstp    [esp+0C0h+var_8C]
-0x9617EA: mov     edx, [esp+0C0h+var_8C]
+0x9617D4: mov     ecx, [esp+0C0h+out.y]
+0x9617D8: mov     [esp+0C0h+var_24.x], eax
+0x9617DF: mov     [esp+0C0h+var_24.y], ecx
+0x9617E6: fstp    [esp+0C0h+out.z]
+0x9617EA: mov     edx, [esp+0C0h+out.z]
 0x9617EE: fld     dword ptr [esi+4]
-0x9617F1: mov     [esp+0C0h+var_1C], edx
+0x9617F1: mov     [esp+0C0h+var_24.z], edx
 0x9617F8: fsub    dword ptr [edi+4]
 0x9617FB: fstp    [esp+0C0h+var_A0]
 0x9617FF: mov     eax, [esp+0C0h+var_A0]
 0x961803: fld     dword ptr [esi+8]
-0x961806: mov     [esp+0C0h+var_C], eax
+0x961806: mov     [esp+0C0h+other.x], eax
 0x96180D: fsub    dword ptr [edi+8]
 0x961810: fstp    [esp+0C0h+var_9C]
 0x961814: mov     ecx, [esp+0C0h+var_9C]
 0x961818: fld     dword ptr [esi+0Ch]
-0x96181B: mov     [esp+0C0h+var_8], ecx
+0x96181B: mov     [esp+0C0h+other.y], ecx
 0x961822: fsub    dword ptr [edi+0Ch]
 0x961825: fstp    [esp+0C0h+var_98]
 0x961829: mov     edx, [esp+0C0h+var_98]
-0x96182D: fld     [esp+0C0h+var_94]
-0x961831: mov     [esp+0C0h+var_4], edx
+0x96182D: fld     [esp+0C0h+out.x]
+0x961831: mov     [esp+0C0h+other.z], edx
 0x961838: fld     [esp+0C0h+arg_0]
 0x96183F: fld     st
 0x961841: fmulp   st(2), st
 0x961843: fxch    st(1)
 0x961845: fstp    [esp+0C0h+var_64]
-0x961849: fld     [esp+0C0h+var_90]
+0x961849: fld     [esp+0C0h+out.y]
 0x96184D: fmul    st, st(1)
 0x96184F: fstp    [esp+0C0h+var_60]
-0x961853: fmul    [esp+0C0h+var_8C]
+0x961853: fmul    [esp+0C0h+out.z]
 0x961857: fstp    [esp+0C0h+var_5C]
 0x96185B: fld     [esp+0C0h+var_64]
 0x96185F: fld     [esp+0C0h+var_A0]
 0x961863: fld     st
 0x961865: faddp   st(2), st
 0x961867: fxch    st(1)
-0x961869: fstp    [esp+0C0h+var_94]
-0x96186D: mov     eax, [esp+0C0h+var_94]
+0x961869: fstp    [esp+0C0h+out.x]
+0x96186D: mov     eax, [esp+0C0h+out.x]
 0x961871: fld     [esp+0C0h+var_60]
 0x961875: mov     [esp+0C0h+var_18], eax
 0x96187C: fld     [esp+0C0h+var_9C]
 0x961880: fld     st
 0x961882: faddp   st(2), st
 0x961884: fxch    st(1)
-0x961886: fstp    [esp+0C0h+var_90]
-0x96188A: mov     ecx, [esp+0C0h+var_90]
+0x961886: fstp    [esp+0C0h+out.y]
+0x96188A: mov     ecx, [esp+0C0h+out.y]
 0x96188E: fld     [esp+0C0h+var_5C]
 0x961892: mov     [esp+0C0h+var_14], ecx
 0x961899: fld     [esp+0C0h+var_98]
 0x96189D: fld     st
 0x96189F: faddp   st(2), st
 0x9618A1: fxch    st(1)
-0x9618A3: fstp    [esp+0C0h+var_8C]
-0x9618A7: mov     edx, [esp+0C0h+var_8C]
+0x9618A3: fstp    [esp+0C0h+out.z]
+0x9618A7: mov     edx, [esp+0C0h+out.z]
 0x9618AB: fld     dword ptr [esi+10h]
 0x9618AE: mov     [esp+0C0h+var_10], edx
 0x9618B5: fmul    dword ptr [ebx]
@@ -112,15 +112,15 @@
 0x96191A: fmul    st, st(2)
 0x96191C: faddp   st(1), st
 0x96191E: fstp    [esp+0C0h+var_64]
-0x961922: fld     [esp+0C0h+var_94]
+0x961922: fld     [esp+0C0h+out.x]
 0x961926: fld     st
 0x961928: fmul    dword ptr [ebx]
-0x96192A: fld     [esp+0C0h+var_90]
+0x96192A: fld     [esp+0C0h+out.y]
 0x96192E: fld     st
 0x961930: fmul    dword ptr [ebx+4]
 0x961933: faddp   st(2), st
 0x961935: fld     dword ptr [ebx+8]
-0x961938: fmul    [esp+0C0h+var_8C]
+0x961938: fmul    [esp+0C0h+out.z]
 0x96193C: faddp   st(2), st
 0x96193E: fxch    st(1)
 0x961940: fstp    [esp+0C0h+var_58]
@@ -244,7 +244,7 @@
 0x961A83: fmul    dword ptr [eax]
 0x961A85: faddp   st(1), st
 0x961A87: fld     dword ptr [eax+8]
-0x961A8A: fmul    [esp+0C0h+var_8C]
+0x961A8A: fmul    [esp+0C0h+out.z]
 0x961A8E: faddp   st(1), st
 0x961A90: fstp    [esp+0C0h+var_54]
 0x961A94: fld     [esp+0C0h+var_7C]
@@ -367,7 +367,7 @@
 0x961BE6: fmul    dword ptr [ebp+0]
 0x961BE9: faddp   st(1), st
 0x961BEB: fld     dword ptr [ebp+8]
-0x961BEE: fmul    [esp+0C4h+var_8C]
+0x961BEE: fmul    [esp+0C4h+out.z]
 0x961BF2: faddp   st(1), st
 0x961BF4: fstp    [esp+0C4h+var_50]
 0x961BF8: fld     [esp+0C4h+var_70]
@@ -482,7 +482,7 @@
 0x961D3D: fmul    dword ptr [esi+10h]
 0x961D40: faddp   st(1), st
 0x961D42: fld     dword ptr [esi+18h]
-0x961D45: fmul    [esp+0C4h+var_8C]
+0x961D45: fmul    [esp+0C4h+out.z]
 0x961D49: faddp   st(1), st
 0x961D4B: fstp    [esp+0C4h+var_B4]
 0x961D4F: fld     [esp+0C4h+var_B4]
@@ -517,7 +517,7 @@
 0x961D95: fmul    dword ptr [esi+10h]
 0x961D98: faddp   st(1), st
 0x961D9A: fld     dword ptr [esi+18h]
-0x961D9D: fmul    [esp+0C4h+var_8C]
+0x961D9D: fmul    [esp+0C4h+out.z]
 0x961DA1: faddp   st(1), st
 0x961DA3: fstp    [esp+0C4h+var_B4]
 0x961DA7: fld     [esp+0C4h+var_B4]
@@ -560,7 +560,7 @@
 0x961E1A: fmul    dword ptr [ecx]
 0x961E1C: faddp   st(1), st
 0x961E1E: fld     dword ptr [ecx+8]
-0x961E21: fmul    [esp+0C4h+var_8C]
+0x961E21: fmul    [esp+0C4h+out.z]
 0x961E25: faddp   st(1), st
 0x961E27: fstp    [esp+0C4h+var_B4]
 0x961E2B: fld     [esp+0C4h+var_B4]
@@ -605,11 +605,11 @@
 0x961E9A: fld     [esp+0C4h+var_5C]
 0x961E9E: mov     edx, [esp+0C4h+var_28]
 0x961EA5: fld     [esp+0C4h+var_50]
-0x961EA9: fld     [esp+0C4h+var_94]
+0x961EA9: fld     [esp+0C4h+out.x]
 0x961EAD: fld     [esp+0C4h+var_A0]
 0x961EB1: fld     [esp+0C4h+var_9C]
 0x961EB5: fld     [esp+0C4h+var_98]
-0x961EB9: fld     [esp+0C4h+var_90]
+0x961EB9: fld     [esp+0C4h+out.y]
 0x961EBD: fxch    st(3)
 0x961EBF: fxch    st(6)
 0x961EC1: fxch    st(2)
@@ -656,7 +656,7 @@
 0x961F36: fxch    st(2)
 0x961F38: faddp   st(1), st
 0x961F3A: fld     dword ptr [edx+8]
-0x961F3D: fmul    [esp+0C4h+var_8C]
+0x961F3D: fmul    [esp+0C4h+out.z]
 0x961F41: faddp   st(1), st
 0x961F43: fstp    [esp+0C4h+var_B4]
 0x961F47: fld     [esp+0C4h+var_B4]
@@ -1428,12 +1428,12 @@
 0x962767: fstp    st(2)
 0x962769: fstp    st
 0x96276B: fstp    st
-0x96276D: lea     edx, [esp+0C4h+var_C]
-0x962774: push    edx
-0x962775: lea     eax, [esp+0C8h+var_94]
-0x962779: push    eax
-0x96277A: lea     ecx, [esp+0CCh+var_24]
-0x962781: call    sub_498FE0
+0x96276D: lea     edx, [esp+0C4h+other]
+0x962774: push    edx; other
+0x962775: lea     eax, [esp+0C8h+out]
+0x962779: push    eax; out
+0x96277A: lea     ecx, [esp+0CCh+var_24]; this
+0x962781: call    NiPoint3_CrossProduct
 0x962786: mov     ecx, [esp+0C4h+var_A8]
 0x96278A: push    ecx
 0x96278B: lea     ecx, [esp+0C8h+var_24]
@@ -1444,7 +1444,7 @@
 0x9627A3: call    sub_47D9E0
 0x9627A8: fstp    [esp+0C4h+var_98]
 0x9627AC: fld     [esp+0C4h+var_98]
-0x9627B0: lea     edx, [esp+0C4h+var_94]
+0x9627B0: lea     edx, [esp+0C4h+out]
 0x9627B4: fabs
 0x9627B6: push    edx
 0x9627B7: fstp    [esp+0C8h+var_AC]
@@ -1516,7 +1516,7 @@
 0x962891: fstp    [esp+0C4h+var_A0]
 0x962895: fld     [esp+0C4h+var_A0]
 0x962899: mov     ecx, [esp+0C4h+var_A8]
-0x96289D: lea     eax, [esp+0C4h+var_94]
+0x96289D: lea     eax, [esp+0C4h+out]
 0x9628A1: fabs
 0x9628A3: push    eax
 0x9628A4: fstp    [esp+0C8h+var_B4]
@@ -1578,7 +1578,7 @@
 0x96295A: fnstsw  ax
 0x96295C: test    ah, 5
 0x96295F: jnp     loc_962756
-0x962965: lea     ecx, [esp+0C4h+var_94]
+0x962965: lea     ecx, [esp+0C4h+out]
 0x962969: push    ecx
 0x96296A: mov     ecx, ebp
 0x96296C: call    sub_47D9E0
@@ -1650,7 +1650,7 @@
 0x962A4D: call    sub_47D9E0
 0x962A52: fstp    [esp+0C4h+var_98]
 0x962A56: fld     [esp+0C4h+var_98]
-0x962A5A: lea     eax, [esp+0C4h+var_94]
+0x962A5A: lea     eax, [esp+0C4h+out]
 0x962A5E: fabs
 0x962A60: lea     ebx, [esi+10h]
 0x962A63: fstp    [esp+0C4h+var_A4]
@@ -1722,7 +1722,7 @@
 0x962B39: call    sub_47D9E0
 0x962B3E: fstp    [esp+0C4h+var_A0]
 0x962B42: fld     [esp+0C4h+var_A0]
-0x962B46: lea     ecx, [esp+0C4h+var_94]
+0x962B46: lea     ecx, [esp+0C4h+out]
 0x962B4A: fabs
 0x962B4C: push    ecx
 0x962B4D: mov     ecx, ebp
@@ -1786,7 +1786,7 @@
 0x962C07: test    ah, 5
 0x962C0A: jnp     loc_962756
 0x962C10: mov     ecx, [esp+0C4h+var_28]
-0x962C17: lea     edx, [esp+0C4h+var_94]
+0x962C17: lea     edx, [esp+0C4h+out]
 0x962C1B: push    edx
 0x962C1C: call    sub_47D9E0
 0x962C21: fabs

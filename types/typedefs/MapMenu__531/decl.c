@@ -1,1 +1,1 @@
-MapMenu
+struct MapMenu;

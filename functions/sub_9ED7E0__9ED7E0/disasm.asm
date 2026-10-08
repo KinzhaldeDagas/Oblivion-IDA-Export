@@ -2,7 +2,7 @@
 0x9ED7E6: push    ecx
 0x9ED7E7: fstp    [esp+4+var_4]; float
 0x9ED7EA: push    offset aFclothingjew_0; "fClothingJewelryScale"
-0x9ED7EF: mov     ecx, offset flt_B37B98
+0x9ED7EF: mov     ecx, 0B37B98h
 0x9ED7F4: call    GameSetting_ConstrAndReg_float
 0x9ED7F9: push    offset sub_A1FE50; void (__cdecl *)()
 0x9ED7FE: call    _atexit

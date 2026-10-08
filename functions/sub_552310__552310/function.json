@@ -1,19 +1,32 @@
 {
-  "callees_count": 19,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
   "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x552310",
+      "0x5523B2"
+    ]
+  ],
+  "chunks_sha256": "22ec52197ef2cd287c47e764712a97d9ba01f354e495c915fd4853c66a470e91",
+  "comment_regular": "Matrix scalar multiply: out = this * scale. Dimensions and storage are initialized from the source matrix.",
+  "comment_repeatable": "Matrix scalar multiply: out = this * scale. Dimensions and storage are initialized from the source matrix.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_552310",
+  "display_name": "FaceGenMatrix_Scale",
   "end_ea": "0x5523B2",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_552310",
+  "name": "FaceGenMatrix_Scale",
   "segment": ".text",
   "sha256": "22ec52197ef2cd287c47e764712a97d9ba01f354e495c915fd4853c66a470e91",
   "size": 162,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x552310",
-  "type": "_DWORD *__thiscall(int *this, _DWORD *, float)",
+  "total_chunk_size": 162,
+  "type": "FaceGenMatrix *__thiscall(const FaceGenMatrix *this, FaceGenMatrix *out, float scale)",
   "xrefs_from_count": 76,
   "xrefs_to_count": 4
 }

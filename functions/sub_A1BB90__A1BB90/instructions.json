@@ -1,7 +1,7 @@
 [
   {
     "ea": "0xA1BB90",
-    "line": "push    offset dword_B097D0",
+    "line": "push    offset g_iMaxDecalsPerFrame_Display",
     "mnemonic": "push",
     "size": 5
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0xA1BBAE",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

@@ -6,8 +6,8 @@
 0x484708: mov     edi, [esi]
 0x48470A: test    edi, edi
 0x48470C: jz      short loc_48472D
-0x48470E: mov     ecx, edi
-0x484710: call    ExtraDataList_GetOwner
+0x48470E: mov     ecx, edi; this
+0x484710: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x484715: test    eax, eax
 0x484717: jz      short loc_484726
 0x484719: push    0

@@ -1,18 +1,31 @@
 {
-  "callees_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x709EC0",
+      "0x709EDE"
+    ]
+  ],
+  "chunks_sha256": "0d673de86aae46b4b60976c9398352b1d92ff49b532048fbbe66ebe45c15cfe0",
+  "comment_regular": "NiNode upward world-bound propagation (+0x94). Saves the parent, dispatches this node's virtual UpdateWorldBound, then repeats through the parent until the root is reached. NiAVObject_UpdateNiAVObject calls this after the downward pass when its target has a parent.",
+  "comment_repeatable": "NiNode upward world-bound propagation (+0x94). Saves the parent, dispatches this node's virtual UpdateWorldBound, then repeats through the parent until the root is reached. NiAVObject_UpdateNiAVObject calls this after the downward pass when its target has a parent.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_709EC0",
+  "display_name": "NiNode_UpdateParentWorldBounds",
   "end_ea": "0x709EDE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_709EC0",
+  "name": "NiNode_UpdateParentWorldBounds",
   "segment": ".text",
   "sha256": "0d673de86aae46b4b60976c9398352b1d92ff49b532048fbbe66ebe45c15cfe0",
   "size": 30,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x709EC0",
+  "total_chunk_size": 30,
   "type": "int __thiscall(NiNode *this)",
   "xrefs_from_count": 13,
   "xrefs_to_count": 15

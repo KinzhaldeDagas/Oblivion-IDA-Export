@@ -1,19 +1,36 @@
 {
-  "callees_count": 6,
-  "callers_count": 19,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_7174B0",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
+  "callers_count": 20,
+  "chunks": [
+    [
+      "0x7174B0",
+      "0x717551"
+    ],
+    [
+      "0x9D62E0",
+      "0x9D6306"
+    ]
+  ],
+  "chunks_sha256": "8fb7f3607b8d358db2dd7e6d256c75285870ba97ea8d6d75b900219601318d77",
+  "comment_regular": "Verified NiTriShape constructor wrapper: allocate/init NiTriShapeData from caller-supplied vertices, colors and triangle-index buffer; initialize NiTriBasedGeom and install NiTriShape vtable.",
+  "comment_repeatable": "Verified NiTriShape constructor wrapper: allocate/init NiTriShapeData from caller-supplied vertices, colors and triangle-index buffer; initialize NiTriBasedGeom and install NiTriShape vtable.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "NiTriShape_ctorWithGeometryData",
   "end_ea": "0x717551",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7174B0",
+  "name": "NiTriShape_ctorWithGeometryData",
   "segment": ".text",
   "sha256": "69edd1fae845d8d40e0608cc0e3f8cbd20b57ed042d01a3c5d812d90c9742e20",
   "size": 161,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7174B0",
-  "type": "NiAVObject *__thiscall(NiAVObject *this, __int16, int, int, int, int, char, __int16, __int16, UInt16 *)",
-  "xrefs_from_count": 58,
+  "total_chunk_size": 199,
+  "type": "NiAVObject *__thiscall(NiAVObject *this, UInt16 vertexCount, NiPoint3 *vertices, NiPoint3 *normals, NiColorAlpha *colors, void *textureCoordinates, char hasVertexColors, __int16 dataFlags, UInt16 triangleCount, UInt16 *triangleIndices)",
+  "xrefs_from_count": 72,
   "xrefs_to_count": 20
 }

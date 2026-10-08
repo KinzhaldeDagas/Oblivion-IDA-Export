@@ -1,1 +1,1 @@
-INT32
+typedef int INT32;

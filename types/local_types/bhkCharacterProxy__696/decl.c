@@ -1,1 +1,1 @@
-bhkCharacterProxy
+struct bhkCharacterProxy;

@@ -17,11 +17,11 @@
 0x5D4291: push    0FE0h
 0x5D4296: mov     ecx, edi
 0x5D4298: call    Tile_GetFloat
-0x5D429D: call    Double_To_SInt32
+0x5D429D: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5D42A2: mov     ebx, eax
 0x5D42A4: mov     ecx, edi
 0x5D42A6: mov     [esp+1Ch+a3], ebx; a3
-0x5D42AA: call    sub_588D90
+0x5D42AA: call    sub_588D90; AchievementsNative evidence: stock tile depth helper starts with tile depth and adds parent depth for locus ancestors / top menu child; InventoryMenu hover sets focus box depth to this value minus 0.5.
 0x5D42AF: fstp    qword ptr [esp+1Ch+var_8]; a3
 0x5D42B3: mov     ecx, [esi+40h]
 0x5D42B6: push    0FBDh
@@ -31,9 +31,9 @@
 0x5D42C5: mov     ecx, [esi+40h]; this
 0x5D42C8: fstp    [esp+20h+arg_0]
 0x5D42CC: fld     [esp+20h+arg_0]
-0x5D42D0: fstp    [esp+20h+a2]; a3
-0x5D42D3: push    0FABh; a2
-0x5D42D8: call    Tile_SetFloat
+0x5D42D0: fstp    [esp+20h+a2]; value
+0x5D42D3: push    0FABh; propertyCode
+0x5D42D8: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D42DD: lea     eax, [ebx+ebx]
 0x5D42E0: mov     [esp+1Ch+arg_0], eax
 0x5D42E4: fild    [esp+1Ch+arg_0]
@@ -46,9 +46,9 @@
 0x5D42FD: mov     ecx, [esi+40h]; this
 0x5D4300: fstp    [esp+20h+arg_4]
 0x5D4304: fld     [esp+20h+arg_4]
-0x5D4308: fstp    [esp+20h+a2]; a3
-0x5D430B: push    0FCBh; a2
-0x5D4310: call    Tile_SetFloat
+0x5D4308: fstp    [esp+20h+a2]; value
+0x5D430B: push    0FCBh; propertyCode
+0x5D4310: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D4315: push    0FCAh
 0x5D431A: mov     ecx, edi
 0x5D431C: call    Tile_GetFloat
@@ -57,43 +57,43 @@
 0x5D4326: mov     ecx, [esi+40h]; this
 0x5D4329: fstp    [esp+20h+arg_0]
 0x5D432D: fld     [esp+20h+arg_0]
-0x5D4331: fstp    [esp+20h+a2]; a3
-0x5D4334: push    0FCAh; a2
-0x5D4339: call    Tile_SetFloat
+0x5D4331: fstp    [esp+20h+a2]; value
+0x5D4334: push    0FCAh; propertyCode
+0x5D4339: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D433E: fild    [esp+1Ch+a3]
 0x5D4342: mov     ecx, edi
 0x5D4344: fstp    [esp+1Ch+arg_0]
-0x5D4348: call    sub_588C50
+0x5D4348: call    sub_588C50; AchievementsNative evidence: stock tile X helper starts with tile x and adds ancestor x only when ancestor locus is nonzero; use for inventory focus/popup coordinate mimic.
 0x5D434D: fadd    [esp+1Ch+arg_0]
 0x5D4351: push    ecx
 0x5D4352: mov     ecx, [esi+40h]; this
 0x5D4355: fstp    [esp+20h+arg_4]
 0x5D4359: fld     [esp+20h+arg_4]
-0x5D435D: fstp    [esp+20h+a2]; a3
-0x5D4360: push    0FADh; a2
-0x5D4365: call    Tile_SetFloat
+0x5D435D: fstp    [esp+20h+a2]; value
+0x5D4360: push    0FADh; propertyCode
+0x5D4365: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D436A: mov     ecx, edi
-0x5D436C: call    sub_588CF0
+0x5D436C: call    sub_588CF0; AchievementsNative evidence: stock tile Y helper starts with tile y and adds ancestor y only when ancestor locus is nonzero; inventory hover passes this row Y to popup path.
 0x5D4371: fadd    [esp+1Ch+arg_0]
 0x5D4375: push    ecx
 0x5D4376: mov     ecx, [esi+40h]; this
 0x5D4379: fstp    [esp+20h+arg_0]
 0x5D437D: fld     [esp+20h+arg_0]
-0x5D4381: fstp    [esp+20h+a2]; a3
-0x5D4384: push    0FACh; a2
-0x5D4389: call    Tile_SetFloat
+0x5D4381: fstp    [esp+20h+a2]; value
+0x5D4384: push    0FACh; propertyCode
+0x5D4389: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D438E: fld     dword ptr ds:0A379B4h
 0x5D4394: push    ecx
 0x5D4395: mov     ecx, [esi+40h]; this
-0x5D4398: fstp    [esp+20h+a2]; a3
-0x5D439B: push    0FA1h; a2
-0x5D43A0: call    Tile_SetFloat
+0x5D4398: fstp    [esp+20h+a2]; value
+0x5D439B: push    0FA1h; propertyCode
+0x5D43A0: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D43A5: fld     dword ptr ds:0A379B4h
 0x5D43AB: push    ecx
 0x5D43AC: mov     ecx, [esi+40h]; this
-0x5D43AF: fstp    [esp+20h+a2]; a3
-0x5D43B2: push    0FC8h; a2
-0x5D43B7: call    Tile_SetFloat
+0x5D43AF: fstp    [esp+20h+a2]; value
+0x5D43B2: push    0FC8h; propertyCode
+0x5D43B7: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D43BC: pop     ebx
 0x5D43BD: jmp     short loc_5D43D6
 0x5D43BF: mov     ecx, [esi+40h]; this
@@ -101,9 +101,9 @@
 0x5D43C4: jz      short loc_5D43D6
 0x5D43C6: fld1
 0x5D43C8: push    ecx
-0x5D43C9: fstp    [esp+1Ch+var_1C]; a3
-0x5D43CC: push    0FA1h; a2
-0x5D43D1: call    Tile_SetFloat
+0x5D43C9: fstp    [esp+1Ch+var_1C]; value
+0x5D43CC: push    0FA1h; propertyCode
+0x5D43D1: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D43D6: pop     edi
 0x5D43D7: cmp     ebp, 18h
 0x5D43DA: jz      short loc_5D43EB

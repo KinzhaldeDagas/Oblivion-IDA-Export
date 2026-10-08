@@ -1,4 +1,4 @@
-0x709960: push    esi
+0x709960: push    esi; Pass223: Clears default NiMaterialProperty global 0x00B3FAA4.
 0x709961: mov     esi, ds:0B3FAA4h
 0x709967: test    esi, esi
 0x709969: jz      short loc_709991

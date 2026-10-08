@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x51DA52",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+source]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x51DA56",
-    "line": "push    edi",
+    "line": "push    edi; changeMask",
     "mnemonic": "push",
     "size": 1
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x51DA66",
-    "line": "push    1; a2",
+    "line": "push    1; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -61,13 +61,13 @@
   },
   {
     "ea": "0x51DA6E",
-    "line": "push    eax; a1",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x51DA6F",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x51DA76",
-    "line": "push    1; a2",
+    "line": "push    1; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x51DA7E",
-    "line": "push    ecx; a1",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x51DA7F",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x51DA86",
-    "line": "push    1; a2",
+    "line": "push    1; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -121,13 +121,13 @@
   },
   {
     "ea": "0x51DA8E",
-    "line": "push    edx; a1",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x51DA8F",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -163,31 +163,31 @@
   },
   {
     "ea": "0x51DAA7",
-    "line": "push    4",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x51DAA9",
-    "line": "lea     edx, [esp+0Ch+arg_0]",
+    "line": "lea     edx, [esp+0Ch+source]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x51DAAD",
-    "line": "mov     [esp+0Ch+arg_0], ecx",
+    "line": "mov     [esp+0Ch+source], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x51DAB1",
-    "line": "push    edx",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x51DAB2",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },

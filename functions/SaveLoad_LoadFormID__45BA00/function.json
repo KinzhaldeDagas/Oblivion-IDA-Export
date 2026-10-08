@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
-  "callers_count": 38,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 103,
+  "chunks": [
+    [
+      "0x45BA00",
+      "0x45BAB0"
+    ]
+  ],
+  "chunks_sha256": "68481dab1e61104c23f9598122fd50416eedeeb0afd589d576dd601c1a4379a1",
+  "comment_regular": "Verified 2026-10-03: x86 ECX receiver and two 4-byte stack arguments; callee RET 8 (or tail jump to that callee). byteCount is 32-bit; previous 8-byte size_t and inferred extra register/stack arguments distorted callers. Buffer cursor is owner +0x14. Wrapper ECX receiver is replaced by global 0x00B33B00 before tail jump.\nVerified control-flow repair: original body is 0x45BA00..0x45BAB0. Seven falsely separate functions at 0x45BA40/5F/65/74/80/93/A2 are internal branch targets with shared saved registers and RET 8 epilogues; no external entry xrefs found. Labels and preexisting comments retained. Returns true iff a nonzero encoded ID resolves to zero; always advances cursor by byteCount. This changes analysis only, not executable bytes.\n\nEnginePatch v2: byte-checked SaveLoad_LoadFormID hook. Bounded save-buffer copy, then preserves original iref-to-formID translation behavior.",
+  "comment_repeatable": "EnginePatch v2: byte-checked SaveLoad_LoadFormID hook. Bounded save-buffer copy, then preserves original iref-to-formID translation behavior.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "SaveLoad_LoadFormID",
-  "end_ea": "0x45BA3A",
+  "end_ea": "0x45BAB0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "SaveLoad_LoadFormID",
   "segment": ".text",
-  "sha256": "cf2987702928de2b73e1cc39f5182184ea69d18bcb70f46442f3c3b7b55dd5c6",
-  "size": 58,
+  "sha256": "68481dab1e61104c23f9598122fd50416eedeeb0afd589d576dd601c1a4379a1",
+  "size": 176,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x45BA00",
-  "type": "int __cdecl(void *Dst, size_t Size, int, int, int)",
-  "xrefs_from_count": 26,
+  "total_chunk_size": 176,
+  "type": "bool __thiscall(TESSaveLoadGame_SerializationView *self, unsigned int *destination, unsigned int byteCount)",
+  "xrefs_from_count": 75,
   "xrefs_to_count": 103
 }

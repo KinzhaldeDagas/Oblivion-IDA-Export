@@ -1,1 +1,1 @@
-IMessageFilterVtbl_0
+typedef IMessageFilterVtbl IMessageFilterVtbl_0;

@@ -1,1 +1,22 @@
-TESForm::FormFlags
+enum TESForm::FormFlags : __int32
+{
+kFormFlags_FromMaster = 0x1,
+kFormFlags_FromActiveFile = 0x2,
+kFormFlags_Loaded = 0x4,
+kFormFlags_Linked = 0x8,
+kFormFlags_Deleted = 0x20,
+kFormFlags_BorderRegion = 0x40,
+kFormFlags_TurnOffFire = 0x80,
+kFormFlags_NotCastShadows = 0x200,
+kFormFlags_QuestItem = 0x400,
+kFormFlags_InitiallyDisabled = 0x800,
+kFormFlags_Ignored = 0x1000,
+kFormFlags_Harvested = 0x2000,
+kFormFlags_Temporary = 0x4000,
+kFormFlags_VisibleWhenDistant = 0x8000,
+kFormFlags_OffLimits = 0x20000,
+kFormFlags_Compressed = 0x40000,
+kFormFlags_CantWait = 0x80000,
+kFormFlags__SavedInRecord = 0xA8EE0,
+kFormFlags_IgnoresFriendlyHits = 0x100000,
+};

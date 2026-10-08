@@ -1,19 +1,32 @@
 {
-  "callees_count": 7,
-  "callers_count": 16,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 23,
+  "chunks": [
+    [
+      "0x4849C0",
+      "0x484A39"
+    ]
+  ],
+  "chunks_sha256": "bc1fe4f2efaebf2284d95793dea3db5ebf945f97c704cf333d6efec5d30ab2e9",
+  "comment_regular": "Return per-instance ExtraCharge when present; otherwise return the TESEnchantableForm base charge. Returns the sentinel/default when the EntryData form is not enchantable.",
+  "comment_repeatable": "Return per-instance ExtraCharge when present; otherwise return the TESEnchantableForm base charge. Returns the sentinel/default when the EntryData form is not enchantable.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_4849C0",
+  "display_name": "EquippedEntryData_GetCharge",
   "end_ea": "0x484A39",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4849C0",
+  "name": "EquippedEntryData_GetCharge",
   "segment": ".text",
   "sha256": "bc1fe4f2efaebf2284d95793dea3db5ebf945f97c704cf333d6efec5d30ab2e9",
   "size": 121,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4849C0",
-  "type": "double __thiscall(void **this)",
+  "total_chunk_size": 121,
+  "type": "float __thiscall(EntryData *this)",
   "xrefs_from_count": 56,
   "xrefs_to_count": 23
 }

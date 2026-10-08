@@ -31,7 +31,7 @@
 0x7F2F20: fstp    [esp+18h+var_4]
 0x7F2F24: fild    dword ptr [esi+134h]
 0x7F2F2A: fsub    [esp+18h+var_4]
-0x7F2F2E: call    Double_To_SInt32
+0x7F2F2E: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x7F2F33: fldz
 0x7F2F35: mov     [esi+134h], eax
 0x7F2F3B: mov     eax, [esi+14Ch]
@@ -45,7 +45,7 @@
 0x7F2F5B: imul    ecx, eax
 0x7F2F5E: mov     [esp+18h+var_4], ecx
 0x7F2F62: fild    [esp+18h+var_4]
-0x7F2F66: call    Double_To_SInt32
+0x7F2F66: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x7F2F6B: xor     ebp, ebp
 0x7F2F6D: cmp     edi, ebx
 0x7F2F6F: mov     [esi+8Ch], eax

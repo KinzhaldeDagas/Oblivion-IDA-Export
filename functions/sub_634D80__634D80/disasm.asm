@@ -9,7 +9,7 @@
 0x634D92: test    edi, edi
 0x634D94: jz      short loc_634D9F
 0x634D96: push    edi
-0x634D97: call    FormHeapFree
+0x634D97: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x634D9C: add     esp, 4
 0x634D9F: push    edi
 0x634DA0: mov     ecx, esi

@@ -6,7 +6,7 @@
 0x7586D5: mov     edi, [esp+14h+arg_0]
 0x7586D9: push    edi
 0x7586DA: mov     esi, ecx
-0x7586DC: call    nullsub_returnvVoid_1arg
+0x7586DC: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x7586E1: mov     eax, [edi+220h]
 0x7586E7: mov     edx, [eax+8]
 0x7586EA: push    1
@@ -40,7 +40,7 @@
 0x758736: push    ecx
 0x758737: push    edx
 0x758738: push    edi
-0x758739: call    eax ; dword_B3D5C0
+0x758739: call    eax ; unk_B3D5C0
 0x75873B: add     esp, 20h
 0x75873E: mov     ebp, 4
 0x758743: mov     eax, [edi+220h]
@@ -79,7 +79,7 @@
 0x7587A0: push    ecx
 0x7587A1: push    edx
 0x7587A2: push    edi
-0x7587A3: call    eax ; dword_B3D638
+0x7587A3: call    eax ; unk_B3D638
 0x7587A5: add     esp, 20h
 0x7587A8: mov     ebp, 4
 0x7587AD: mov     ecx, [esp+14h+arg_0]

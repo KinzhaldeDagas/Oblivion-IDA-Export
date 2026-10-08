@@ -30,7 +30,7 @@
 0x6A74B2: call    eax
 0x6A74B4: mov     ecx, edi; this
 0x6A74B6: mov     [esp+1Ch+var_4], 0FFFFFFFFh
-0x6A74BE: call    ??1ActiveEffect@@UAE@XZ; ActiveEffect::~ActiveEffect(void)
+0x6A74BE: call    ??1ActiveEffect@@UAE@XZ; Verified ActiveEffect destructor detaches each associated MagicHitEffect by setting bFinished and ownerActiveEffect=null, clears/frees only the HitEffectNode list, and relies on the ActorProcessManager reference added during PostLink to own the BSTempEffect object's later update/removal.
 0x6A74C3: mov     ecx, dword ptr [esp+1Ch+var_C]
 0x6A74C7: mov     large fs:0, ecx
 0x6A74CE: pop     ecx
@@ -38,3 +38,12 @@
 0x6A74D0: pop     esi
 0x6A74D1: add     esp, 10h
 0x6A74D4: retn
+0x9C6260: mov     ecx, [ebp-10h]; this
+0x9C6263: jmp     j_??1VampirismEffect@@UAE@XZ; VampirismEffect::~VampirismEffect(void)
+0x9C6268: mov     edx, [esp+arg_4]
+0x9C626C: lea     eax, [edx-0Ch]
+0x9C626F: mov     ecx, [edx-10h]
+0x9C6272: xor     ecx, eax
+0x9C6274: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C6279: mov     eax, offset stru_AEE848
+0x9C627E: jmp     ___CxxFrameHandler3

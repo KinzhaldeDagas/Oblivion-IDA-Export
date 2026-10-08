@@ -1,4 +1,4 @@
-0x799EE0: mov     eax, [ecx+4]
+0x799EE0: mov     eax, [ecx+4]; Oblivion-authoritative size query for the SFrondVertex vector. Computes (end-begin)/0x38; returns zero when begin is null.
 0x799EE3: test    eax, eax
 0x799EE5: jnz     short loc_799EE8
 0x799EE7: retn

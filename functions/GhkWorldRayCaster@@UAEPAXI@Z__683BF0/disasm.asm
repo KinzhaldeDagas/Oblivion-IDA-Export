@@ -4,7 +4,7 @@
 0x683BF8: mov     dword ptr [esi], offset ??_7hkBroadPhaseCastCollector@@6B@; const hkBroadPhaseCastCollector::`vftable'
 0x683BFE: jz      short loc_683C09
 0x683C00: push    esi
-0x683C01: call    FormHeapFree
+0x683C01: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x683C06: add     esp, 4
 0x683C09: mov     eax, esi
 0x683C0B: pop     esi

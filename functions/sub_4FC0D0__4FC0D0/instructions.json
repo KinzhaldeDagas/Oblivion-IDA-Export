@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4FC0D0",
-    "line": "push    ebp",
+    "line": "push    ebp; Authoritative Oblivion SCPT runtime loader. Stream-replays every chunk: SCHR and SCDA mutate singleton fields (later chunks win); SLSD and SCRO/SCRV append; SCVR names only the latest SLSD created during this call. Unlike TESCS, Oblivion has no SCTX handler. SCHD is also absent.",
     "mnemonic": "push",
     "size": 1
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x4FC105",
-    "line": "mov     [ebp+var_18], 0",
+    "line": "mov     [ebp+var_18], 0; Per-call local-variable cursor starts null. A partial SCVR cannot name an inherited/base variable; leading SCVR is ignored until this invocation sees SLSD.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x4FC120",
-    "line": "call    TESFile_InitializeFormFromRecord",
+    "line": "call    TESFile_InitializeFormFromRecord; Header-only form initialization (type/flags/FormID/source file). Derived Script fields are not cleared here; partial preservation is decided by TESDataHandler_LoadFormRecord before this call.",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x4FC13C",
-    "line": "jg      loc_4FC23D",
+    "line": "jg      loc_4FC23D; Dispatch proof: handled SCPT chunks are EDID, SCDA, SLSD, RNAM, SCRO, SCRV, SCVR, SCHR. There is no comparison for SCHD or SCTX, so both are skipped by GetNextChunk without materialization.",
     "mnemonic": "jg",
     "size": 6
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x4FC183",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,13 +343,13 @@
   },
   {
     "ea": "0x4FC19A",
-    "line": "mov     edi, [esi+254h]",
+    "line": "mov     edi, [esi+254h]; SCDA uses the current chunk's full UInt32 length as the allocation/copy size. There is no agreement check against SCHR.dataLength and no upper bound before allocation.",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4FC1A0",
-    "line": "push    1",
+    "line": "push    1; Even length zero reaches FormHeap allocation; MemoryHeap_Allocate promotes sizes below 8 to 8 on the initialized heap. Thus zero-length SCDA can install a non-null active data pointer.",
     "mnemonic": "push",
     "size": 2
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x4FC1BF",
-    "line": "mov     [eax+30h], ebx",
+    "line": "mov     [eax+30h], ebx; Install new SCDA pointer directly at Script+0x30 before reading. Every repeated SCDA replaces this pointer; the replaced allocation is not freed at this site (last pointer wins, prior pointer leaks).",
     "mnemonic": "mov",
     "size": 3
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x4FC1D5",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Copy the entire SCDA payload into the just-allocated buffer. Allocation/read failures are not checked here; oversized/failed allocations can fault.",
     "mnemonic": "call",
     "size": 5
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x4FC1E2",
-    "line": "push    20h ; ' '; Size",
+    "line": "push    20h ; ' '; Each SLSD allocates a new 0x20-byte VariableInfo and makes it the per-call current variable. Repeated SLSD never replaces/deduplicates an earlier entry.",
     "mnemonic": "push",
     "size": 2
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x4FC1FA",
-    "line": "call    sub_517A80",
+    "line": "call    ScriptVariableInfo_Constructor; Construct 0x20-byte Script VariableInfo: initializes selected runtime fields and empty BSString at +0x18, but does not guarantee every SLSD data byte is initialized before a short/zero chunk read.",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x4FC20E",
-    "line": "call    sub_517A50",
+    "line": "call    ScriptVariableInfo_LoadSLSD; SLSD load calls GetChunkData(max=0x18). Size 0 performs no write; short payloads leave unread constructor/heap state; exactly 24 copies all bytes; >24 logs and truncates to 23 payload bytes plus a forced NUL at byte 23.",
     "mnemonic": "call",
     "size": 5
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x4FC217",
-    "line": "call    BSSimpleList_PushBack",
+    "line": "call    BSSimpleList_PushBack; Append non-null VariableInfo to Script+0x48 with BSSimpleList_PushBack, preserving encounter order. In partial loads this appends to the inherited/base list because list clearing was bypassed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x4FC233",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; RNAM is read through the 4-byte bounded helper into a stack temporary and then discarded; it does not change persistent Script state in Oblivion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x4FC243",
-    "line": "jz      loc_4FC2F0",
+    "line": "jz      loc_4FC2F0; Runtime cases here are SCHR, SCVR, and SCRV. SCTX has no case and is ignored by Oblivion runtime loading.",
     "mnemonic": "jz",
     "size": 6
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x4FC25D",
-    "line": "push    10h; Size",
+    "line": "push    10h; Every SCRO or SCRV allocates a fresh 0x10-byte RefVariable entry; there is no deduplication or replacement.",
     "mnemonic": "push",
     "size": 2
   },
@@ -781,7 +781,7 @@
   },
   {
     "ea": "0x4FC285",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; SCRO/SCRV payload uses GetChunkData(max=4) without size validation. Size 0 leaves the stack value uninitialized; sizes 1..3 overwrite only a prefix; size 4 is exact; >4 becomes three payload bytes plus zero high byte and logs truncation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -829,7 +829,7 @@
   },
   {
     "ea": "0x4FC29F",
-    "line": "call    BSSimpleList_PushBack",
+    "line": "call    BSSimpleList_PushBack; SCRO stores the decoded/malformed 4-byte temporary at RefVariable+8 and appends it to Script+0x40 in encounter order. Partial loads append to inherited references.",
     "mnemonic": "call",
     "size": 5
   },
@@ -871,7 +871,7 @@
   },
   {
     "ea": "0x4FC2B3",
-    "line": "mov     [ebx+0Ch], eax",
+    "line": "mov     [ebx+0Ch], eax; SCRV stores the decoded/malformed 4-byte temporary at RefVariable+0x0C and appends it to the same ordered reference list. SCRO and SCRV share one index sequence.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -895,7 +895,7 @@
   },
   {
     "ea": "0x4FC2C0",
-    "line": "cmp     [ebp+var_18], 0",
+    "line": "cmp     [ebp+var_18], 0; SCVR is acted on only when this loader invocation has already seen an SLSD. The cursor is not consumed after one SCVR, so repeated SCVR chunks keep targeting the same latest variable; a later SLSD retargets it.",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -943,7 +943,7 @@
   },
   {
     "ea": "0x4FC2DB",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; SCVR calls GetChunkData(max=0x200) into alloca(chunkLength). Size 0 supplies no initialized string; <=512 copies exact bytes and relies on payload NUL termination; >512 copies 511 bytes and forces byte 511 to NUL.",
     "mnemonic": "call",
     "size": 5
   },
@@ -973,7 +973,7 @@
   },
   {
     "ea": "0x4FC2E9",
-    "line": "call    BSStringT_Set",
+    "line": "call    BSStringT_Set; Set name on the latest per-call VariableInfo. BSStringT_Set replaces/frees its previous name, so repeated SCVR is last-name-wins.",
     "mnemonic": "call",
     "size": 5
   },
@@ -985,7 +985,7 @@
   },
   {
     "ea": "0x4FC2F0",
-    "line": "push    0; a4",
+    "line": "push    0; SCHR is copied with max=0 directly into Script+0x18. Size 0 is a no-op; a short SCHR overlays only its prefix (retaining prior tail on partial loads); repeated chunks overwrite in order; oversized chunks spill past ScriptInfo into following Script fields.",
     "mnemonic": "push",
     "size": 2
   },
@@ -1009,7 +1009,7 @@
   },
   {
     "ea": "0x4FC2F8",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Each SCHR copies into the same ScriptInfo storage at Script+0x18; later SCHR overwrites earlier header bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1069,7 +1069,7 @@
   },
   {
     "ea": "0x4FC319",
-    "line": "cmp     dword ptr [ebx+30h], 0",
+    "line": "cmp     dword ptr [ebx+30h], 0; Compiled-state test is only Script.data != NULL after replay. SCTX is irrelevant. Missing SCDA on a partial record retains a base pointer and avoids the warning; zero-length SCDA can also be non-null because allocation still occurs.",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -1222,5 +1222,95 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B6BD0",
+    "line": "mov     eax, [ebp+var_18]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B6BD3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B6BD4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B6BD9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B6BDA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B6BDB",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B6BDF",
+    "line": "lea     eax, [edx+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B6BE2",
+    "line": "mov     ecx, [edx-24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B6BE5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B6BE7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B6BEC",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B6BEF",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B6BF1",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B6BF6",
+    "line": "mov     eax, offset stru_AE1950",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B6BFB",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

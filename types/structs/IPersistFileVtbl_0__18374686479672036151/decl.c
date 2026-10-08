@@ -1,1 +1,1 @@
-IPersistFileVtbl_0
+typedef IPersistFileVtbl IPersistFileVtbl_0;

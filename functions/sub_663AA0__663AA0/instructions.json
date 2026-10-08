@@ -120,12 +120,6 @@
     "size": 2
   },
   {
-    "ea": "0x663ADC",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 4
-  },
-  {
     "ea": "0x663AE0",
     "line": "mov     ecx, [esp+28h+var_C]",
     "mnemonic": "mov",
@@ -391,19 +385,19 @@
   },
   {
     "ea": "0x663B5B",
-    "line": "mov     ecx, [esp+28h+var_4]",
+    "line": "mov     ecx, [esp+28h+var_4]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x663B5F",
-    "line": "push    eax",
+    "line": "push    eax; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x663B60",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -853,7 +847,7 @@
   },
   {
     "ea": "0x663C32",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -871,7 +865,7 @@
   },
   {
     "ea": "0x663C3C",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

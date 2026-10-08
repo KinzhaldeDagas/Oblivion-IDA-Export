@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x790AB0",
-    "line": "push    esi",
+    "line": "push    esi; Completes heap sort for a CBranch pointer range by repeatedly moving the root to the shrinking tail and adjusting the remaining fuzzy-volume heap.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790AB1",
-    "line": "mov     esi, [esp+4+arg_4]",
+    "line": "mov     esi, [esp+4+end]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x790AB6",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x790AD2",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -103,19 +103,19 @@
   },
   {
     "ea": "0x790AD9",
-    "line": "push    edx",
+    "line": "push    edx; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790ADA",
-    "line": "push    0",
+    "line": "push    0; holeIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x790ADC",
-    "line": "push    edi",
+    "line": "push    edi; begin",
     "mnemonic": "push",
     "size": 1
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x790AE1",
-    "line": "call    sub_7903B0",
+    "line": "call    OB_BranchPtrVector_AdjustHeapByFuzzyVolume_010201A0; MSVC adjust-heap primitive for CBranch pointers: selects a child by fuzzyBranchVolume, sifts the hole downward, then delegates to the heap-push helper. Used by make-heap and sort-heap.",
     "mnemonic": "call",
     "size": 5
   },

@@ -70,7 +70,7 @@
 0x4D1204: push    eax
 0x4D1205: call    edx
 0x4D1207: push    esi
-0x4D1208: call    FormHeapFree
+0x4D1208: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4D120D: add     esp, 4
 0x4D1210: mov     ecx, dword ptr [esp+28h+var_C]
 0x4D1214: mov     large fs:0, ecx
@@ -81,3 +81,12 @@
 0x4D121F: pop     ebx
 0x4D1220: add     esp, 14h
 0x4D1223: retn    4
+0x9B5BD0: lea     ecx, [ebp-14h]; void *
+0x9B5BD3: jmp     BSStringT_Clear
+0x9B5BD8: mov     edx, [esp+arg_4]
+0x9B5BDC: lea     eax, [edx-18h]
+0x9B5BDF: mov     ecx, [edx-1Ch]
+0x9B5BE2: xor     ecx, eax
+0x9B5BE4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B5BE9: mov     eax, offset stru_AE0BB4
+0x9B5BEE: jmp     ___CxxFrameHandler3

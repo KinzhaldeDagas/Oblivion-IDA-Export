@@ -1,1 +1,5 @@
-_M128A
+struct _M128A
+{
+ULONGLONG Low;
+LONGLONG High;
+};

@@ -1,19 +1,36 @@
 {
-  "callees_count": 20,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "BSTextureManager_ReserveShadowMaps",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x7C2710",
+      "0x7C2860"
+    ],
+    [
+      "0x9CE2D0",
+      "0x9CE2FB"
+    ]
+  ],
+  "chunks_sha256": "6c75ca14b6021b339dde98461bd2059143721f76dc756505a6e3f8882021cbb2",
+  "comment_regular": "Oblivion frustum-shadow pool reservation. Creates default render target type 0x17, attaches the shared shadow depth-stencil, and adds each texture to the unused shadowMaps list.\n\nResizes Oblivion's unused frustum-shadow texture pool only while the used pool is empty. New render targets receive the shared shadow depth-stencil; removed targets are detached and returned through the general texture manager.",
+  "comment_repeatable": "Oblivion frustum-shadow pool reservation. Creates default render target type 0x17, attaches the shared shadow depth-stencil, and adds each texture to the unused shadowMaps list.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "BSTextureManager__ReserveFrustumShadowTextures",
   "end_ea": "0x7C2860",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "BSTextureManager_ReserveShadowMaps",
+  "name": "BSTextureManager__ReserveFrustumShadowTextures",
   "segment": ".text",
   "sha256": "68e3c7f97d43f244e267c1a548d6ac3885eafe5e38c54852db03bfdd51560ebd",
   "size": 336,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7C2710",
-  "type": "BSRenderedTexture *__thiscall(BSTextureManager *this, NiDX9Renderer *, BSRenderedTexture *)",
-  "xrefs_from_count": 134,
+  "total_chunk_size": 379,
+  "type": "void __thiscall(BSTextureManager *this, NiDX9Renderer *renderer, unsigned int desiredCount)",
+  "xrefs_from_count": 147,
   "xrefs_to_count": 2
 }

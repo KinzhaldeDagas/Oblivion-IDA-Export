@@ -1,19 +1,18 @@
-void *__thiscall sub_6B7BB0(_DWORD *this)
+// Resolve the DialogueItem.speaker value, temporarily holding a saved FormID, back to TESObjectREFR*. No INFO condition, selection, response, or result work occurs.
+void __thiscall DialogueItem::InitLoadGame(DialogueItemView *this)
 {
-  void *result; // eax
+  TESObjectREFR *speaker; // eax
   TESForm *v3; // eax
 
-  result = (void *)*(this + 6);
-  if ( result )
+  speaker = this->speaker; /*0x6b7bb3*/
+  if ( speaker ) /*0x6b7bb8*/
   {
-    v3 = TESForm_LookupByFormID((UInt32)result);
-    result = OblivionDynamicCast(
-               v3,
-               0,
-               (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-               (struct TypeDescriptor *)&TESObjectREFR `RTTI Type Descriptor',
-               0);
-    *(this + 6) = result;
+    v3 = TESForm_LookupByFormID((UInt32)speaker); /*0x6b7bc9*/
+    this->speaker = (TESObjectREFR *)OblivionDynamicCast( /*0x6b7bda*/
+                                       v3,
+                                       0,
+                                       (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                                       (struct TypeDescriptor *)&TESObjectREFR `RTTI Type Descriptor',
+                                       0);
   }
-  return result;
 }

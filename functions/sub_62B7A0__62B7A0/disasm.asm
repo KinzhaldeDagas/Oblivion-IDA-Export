@@ -40,7 +40,7 @@
 0x62B805: mov     ecx, [ebx+28h]
 0x62B808: test    ecx, ecx
 0x62B80A: jz      short loc_62B81B
-0x62B80C: call    sub_452A60
+0x62B80C: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x62B811: mov     [esp+1Ch+arg_0], eax
 0x62B815: fild    [esp+1Ch+arg_0]
 0x62B819: jmp     short loc_62B834
@@ -147,7 +147,7 @@
 0x62B931: test    eax, eax
 0x62B933: jz      short loc_62B94D
 0x62B935: mov     ecx, eax
-0x62B937: call    sub_472EA0
+0x62B937: call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.
 0x62B93C: test    al, al
 0x62B93E: jnz     short loc_62B94D
 0x62B940: mov     eax, [esi]
@@ -195,7 +195,7 @@
 0x62B9AE: test    eax, eax
 0x62B9B0: jz      short loc_62BA0A
 0x62B9B2: mov     ecx, eax
-0x62B9B4: call    sub_472EA0
+0x62B9B4: call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.
 0x62B9B9: test    al, al
 0x62B9BB: jz      short loc_62BA0A
 0x62B9BD: mov     eax, [esi]

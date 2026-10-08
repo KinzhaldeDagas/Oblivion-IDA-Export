@@ -1,1 +1,1 @@
-CADBL
+typedef tagCADBL CADBL;

@@ -1,1 +1,1 @@
-CAC
+typedef tagCAC CAC;

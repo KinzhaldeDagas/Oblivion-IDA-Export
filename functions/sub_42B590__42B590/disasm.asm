@@ -1,4 +1,4 @@
-0x42B590: sub     esp, 0Ch
+0x42B590: sub     esp, 0Ch; TeleportData constructor initializes linkedDoor=NULL and all six transform floats to FLT_MAX sentinels. Any XTEL immediately replaces them from a fresh zeroed scratch in TeleportData_LoadXTEL.
 0x42B593: fld     ds:flt_A35BE0
 0x42B599: mov     eax, ecx
 0x42B59B: fst     [esp+0Ch+var_C]

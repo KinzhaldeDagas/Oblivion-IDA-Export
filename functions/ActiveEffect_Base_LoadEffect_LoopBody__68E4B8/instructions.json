@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x68E4B8",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x68E4BE",
-    "line": "push    1; Size",
+    "line": "push    1; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -19,13 +19,13 @@
   },
   {
     "ea": "0x68E4C4",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x68E4C5",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x68E4EB",
-    "line": "jmp     short ActiveEffect_Base_LoadEffect___LoadHitEffect",
+    "line": "jmp     short ActiveEffect_Base_LoadEffect___LoadHitEffect; Verified ActiveEffect LoadEffect reconstructs type 5 MagicModelHitEffect or type 6 MagicShaderHitEffect, invokes the per-object load callback, and attaches each pointer in an allocated 8-byte HitEffectNode at ActiveEffect+0x34.",
     "mnemonic": "jmp",
     "size": 2
   }

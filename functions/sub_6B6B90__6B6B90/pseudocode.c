@@ -5,15 +5,15 @@ double __thiscall sub_6B6B90(_DWORD *this)
   double v4; // st6
   float v6; // [esp+8h] [ebp-4h] BYREF
 
-  v2 = *(this + 0x14) == 0;
-  v6 = 0.0;
-  if ( !v2 )
-    (*(void (__stdcall **)(_DWORD, float *))(*(_DWORD *)*(this + 0x14) + 0x20))(*(this + 0x14), &v6);
-  v3 = (double)SLODWORD(v6);
-  if ( v6 < 0.0 )
-    v3 = v3 + flt_A2FC78;
-  v4 = (double)(int)*(this + 0x10);
-  if ( (int)*(this + 0x10) < 0 )
-    v4 = v4 + flt_A2FC78;
-  return (float)(v3 / v4);
+  v2 = *(this + 0x14) == 0; /*0x6b6b94*/
+  v6 = 0.0; /*0x6b6b98*/
+  if ( !v2 ) /*0x6b6ba0*/
+    (*(void (__stdcall **)(_DWORD, float *))(*(_DWORD *)*(this + 0x14) + 0x20))(*(this + 0x14), &v6); /*0x6b6bb0*/
+  v3 = (double)SLODWORD(v6); /*0x6b6bb6*/
+  if ( v6 < 0.0 ) /*0x6b6bbc*/
+    v3 = v3 + flt_A2FC78; /*0x6b6bbe*/
+  v4 = (double)(int)*(this + 0x10); /*0x6b6bc7*/
+  if ( (int)*(this + 0x10) < 0 ) /*0x6b6bcc*/
+    v4 = v4 + flt_A2FC78; /*0x6b6bce*/
+  return (float)(v3 / v4); /*0x6b6bdd*/
 }

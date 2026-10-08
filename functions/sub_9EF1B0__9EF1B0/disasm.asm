@@ -2,7 +2,7 @@
 0x9EF1B6: push    ecx
 0x9EF1B7: fstp    [esp+4+var_4]; float
 0x9EF1BA: push    offset aFmagicteleki_3; "fMagicTelekinesisThrow"
-0x9EF1BF: mov     ecx, offset fMagicTelekinesisThrow
+0x9EF1BF: mov     ecx, (offset flt_B37ED0+178h)
 0x9EF1C4: call    GameSetting_ConstrAndReg_float
 0x9EF1C9: push    offset sub_A207B0; void (__cdecl *)()
 0x9EF1CE: call    _atexit

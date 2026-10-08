@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4EA450",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified map base layout is the NiTPointerMap<int, TESTerrainLODQuadRoot*> embedded at TESWorldSpace+0x38: vtable +0, bucketCount +4, buckets +8, itemCount +0xC. Constructor uses 37 buckets; the adjacent TESWorldSpace fields are outside this 0x10-byte map.",
     "mnemonic": "push",
     "size": 2
   },
@@ -526,5 +526,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9B6120",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B6123",
+    "line": "jmp     ??1?$NiTPointerMap@HPAVTESTerrainLODQuadRoot@@@@UAE@XZ; NiTPointerMap<int,TESTerrainLODQuadRoot *>::~NiTPointerMap<int,TESTerrainLODQuadRoot *>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B6128",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B612C",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B612F",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B6132",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B6134",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B6139",
+    "line": "mov     eax, offset stru_AE1064",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B613E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

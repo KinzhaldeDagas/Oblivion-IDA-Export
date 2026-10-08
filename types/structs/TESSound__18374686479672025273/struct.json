@@ -1,64 +1,108 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "TESSound",
+  "definition": "struct TESSound\n{\nTESBoundObject super;\nTESSoundFile soundFile;\nUInt8 minAttenuation;\nUInt8 maxAttenuation;\nUInt8 frequencyAdjust;\nUInt8 unk9;\nUInt32 soundFlags;\nUInt16 staticAttenuation;\nUInt16 unk12;\n}\n",
   "id": 18374686479672025273,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00053.",
       "name": "super",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 36
+      "size": 36,
+      "type": "TESBoundObject"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00054.",
       "name": "soundFile",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 20
+      "size": 20,
+      "type": "TESSoundFile"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00055.",
       "name": "minAttenuation",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 1
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00056.",
       "name": "maxAttenuation",
       "offset": 57,
       "offset_hex": "0x39",
-      "size": 1
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00057.",
       "name": "frequencyAdjust",
       "offset": 58,
-      "offset_hex": "0x3a",
-      "size": 1
+      "offset_hex": "0x3A",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00058.",
       "name": "unk9",
       "offset": 59,
-      "offset_hex": "0x3b",
-      "size": 1
+      "offset_hex": "0x3B",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00059.",
       "name": "soundFlags",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000510.",
       "name": "staticAttenuation",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 2
+      "size": 2,
+      "type": "UInt16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000511.",
       "name": "unk12",
       "offset": 66,
       "offset_hex": "0x42",
-      "size": 2
+      "size": 2,
+      "type": "UInt16"
     }
   ],
   "name": "TESSound",
+  "ordinal": 460,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 68
 }

@@ -1,4 +1,4 @@
-0x48AA10: push    0FFFFFFFFh
+0x48AA10: push    0FFFFFFFFh; Mutate ExtraContainerChanges from a live world reference. The routine resolves sourceRef->GetBaseForm(), copies the reference ExtraDataList, and inserts that base form. Consequently, ordinary pickup of an AMMO-backed thrown projectile returns proxy AMMO unless the companion intercepts this distinct path.
 0x48AA12: push    offset SEH_48AA10
 0x48AA17: mov     eax, large fs:0
 0x48AA1D: push    eax
@@ -28,7 +28,7 @@
 0x48AA5F: mov     eax, [esi]
 0x48AA61: mov     edx, [eax+170h]
 0x48AA67: mov     ecx, esi
-0x48AA69: call    edx
+0x48AA69: call    edx; Resolve sourceRef->GetBaseForm() for the inventory entry. This proves world pickup preserves the projectile reference's AMMO proxy base and bypasses form-based ContainerExtraData_AddItem.
 0x48AA6B: mov     ecx, [ebx]
 0x48AA6D: cmp     ecx, edi
 0x48AA6F: mov     ebp, eax
@@ -76,8 +76,8 @@
 0x48AAEA: mov     ecx, edi
 0x48AAEC: fstp    [esp+30h+var_30]; float
 0x48AAEF: call    sub_423A30
-0x48AAF4: mov     ecx, edi
-0x48AAF6: call    ExtraDataList_GetOwner
+0x48AAF4: mov     ecx, edi; this
+0x48AAF6: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48AAFB: mov     ecx, ds:0B333C4h
 0x48AB01: cmp     eax, ecx
 0x48AB03: jnz     short loc_48AB2A
@@ -118,7 +118,7 @@
 0x48AB6A: call    edx
 0x48AB6C: cmp     ebp, eax
 0x48AB6E: jz      short loc_48AB77
-0x48AB70: cmp     byte ptr [esp+2Ch+arg_C], 0
+0x48AB70: cmp     [esp+2Ch+forceWorn], 0
 0x48AB75: jz      short loc_48AB82
 0x48AB77: push    0
 0x48AB79: push    1
@@ -126,15 +126,15 @@
 0x48AB7D: call    SetWorn
 0x48AB82: test    ebx, ebx
 0x48AB84: jz      loc_48AD2A
-0x48AB8A: mov     ebp, [esp+2Ch+arg_4]
+0x48AB8A: mov     ebp, [esp+2Ch+count]
 0x48AB8E: add     [ebx+4], ebp
 0x48AB91: mov     ecx, esi; this
-0x48AB93: call    TESObjectREFR_IsPersistent?
+0x48AB93: call    TESObjectREFR_IsPersistent
 0x48AB98: test    al, al
 0x48AB9A: jz      short loc_48ABF1
-0x48AB9C: push    esi
-0x48AB9D: mov     ecx, edi
-0x48AB9F: call    ExtraDataList_SetReferencePointer
+0x48AB9C: push    esi; reference
+0x48AB9D: mov     ecx, edi; this
+0x48AB9F: call    ExtraDataList_SetReferencePointer; Set or create ExtraReferencePointer (type 0x22) in one logical function, now merged through 0x41FAF4. This extra preserves persistent-reference provenance inside an already form-keyed inventory entry; it does not override EntryData.type or sourceRef->baseForm and therefore cannot restore a thrown proxy AMMO to its source WEAP.
 0x48ABA4: cmp     ebp, 1
 0x48ABA7: jle     short loc_48ABB1
 0x48ABA9: push    ebp
@@ -172,16 +172,16 @@
 0x48AC09: jz      loc_48ACA6
 0x48AC0F: test    edi, edi
 0x48AC11: jz      short loc_48AC1F
-0x48AC13: push    esi
-0x48AC14: mov     ecx, edi
-0x48AC16: call    ExtraDataList_CompareListForContainer
+0x48AC13: push    esi; other
+0x48AC14: mov     ecx, edi; this
+0x48AC16: call    ExtraDataList_CompareListForContainer; Asymmetric container-stack compatibility check (__thiscall, retn 4). Scans only 'other'. Returns true when the lists must remain distinct: other contains Script (0x12) or Ownership (0x27), this lacks a matching extra-data type, or that type's virtual CompareTo reports a difference. Count (0x2A) is deliberately ignored because callers merge counts separately. Returns false only when every relevant node in other is compatible.
 0x48AC1B: test    al, al
 0x48AC1D: jz      short loc_48AC24
 0x48AC1F: mov     ebp, [ebp+4]
 0x48AC22: jmp     short loc_48AC56
 0x48AC24: mov     ecx, esi
 0x48AC26: call    ExtraDataList_GetExtraCount
-0x48AC2B: add     ax, word ptr [esp+2Ch+arg_4]
+0x48AC2B: add     ax, word ptr [esp+2Ch+count]
 0x48AC30: mov     ecx, esi
 0x48AC32: push    eax
 0x48AC33: call    ExtraDataList_SetExtraCount
@@ -258,29 +258,29 @@
 0x48AD03: mov     ecx, [ebx]
 0x48AD05: test    ecx, ecx
 0x48AD07: jz      short loc_48AD0E
-0x48AD09: call    BSSimpleList_Clear
+0x48AD09: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x48AD0E: mov     ecx, [ebx]
 0x48AD10: push    ecx
-0x48AD11: call    FormHeapFree
+0x48AD11: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48AD16: push    ebx
 0x48AD17: mov     dword ptr [ebx], 0
-0x48AD1D: call    FormHeapFree
+0x48AD1D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48AD22: add     esp, 8
 0x48AD25: jmp     loc_48AE15
 0x48AD2A: push    0Ch; Size
 0x48AD2C: call    FormHeapAlloc
 0x48AD31: mov     ebp, eax
 0x48AD33: add     esp, 4
-0x48AD36: mov     [esp+2Ch+arg_C], ebp
+0x48AD36: mov     dword ptr [esp+2Ch+forceWorn], ebp
 0x48AD3A: test    ebp, ebp
-0x48AD3C: mov     ebx, [esp+2Ch+arg_4]
+0x48AD3C: mov     ebx, [esp+2Ch+count]
 0x48AD40: mov     dword ptr [esp+2Ch+var_4], 1
 0x48AD48: jz      short loc_48AD63
 0x48AD4A: mov     edx, [esi]
 0x48AD4C: mov     eax, [edx+170h]
 0x48AD52: push    ebx
 0x48AD53: mov     ecx, esi
-0x48AD55: call    eax
+0x48AD55: call    eax; Reference-add path resolves sourceRef->GetBaseForm() again for the EntryData path; instance extras do not replace this form key.
 0x48AD57: push    eax
 0x48AD58: mov     ecx, ebp
 0x48AD5A: call    ContainerEntryExtraData_constr
@@ -294,12 +294,12 @@
 0x48AD73: mov     ecx, edi
 0x48AD75: call    ExtraDataList_SetExtraCount
 0x48AD7A: mov     ecx, esi; this
-0x48AD7C: call    TESObjectREFR_IsPersistent?
+0x48AD7C: call    TESObjectREFR_IsPersistent
 0x48AD81: test    al, al
 0x48AD83: jz      short loc_48ADB0
-0x48AD85: push    esi
-0x48AD86: mov     ecx, edi
-0x48AD88: call    ExtraDataList_SetReferencePointer
+0x48AD85: push    esi; reference
+0x48AD86: mov     ecx, edi; this
+0x48AD88: call    ExtraDataList_SetReferencePointer; Set or create ExtraReferencePointer (type 0x22) in one logical function, now merged through 0x41FAF4. This extra preserves persistent-reference provenance inside an already form-keyed inventory entry; it does not override EntryData.type or sourceRef->baseForm and therefore cannot restore a thrown proxy AMMO to its source WEAP.
 0x48AD8D: cmp     dword ptr [ebp+0], 0
 0x48AD91: jnz     short loc_48ADEA
 0x48AD93: push    8; Size
@@ -359,3 +359,20 @@
 0x48AE24: pop     ebx
 0x48AE25: add     esp, 18h
 0x48AE28: retn    10h
+0x9AFD30: mov     eax, [ebp-10h]
+0x9AFD33: push    eax
+0x9AFD34: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFD39: pop     ecx
+0x9AFD3A: retn
+0x9AFD3B: mov     eax, [ebp+10h]
+0x9AFD3E: push    eax
+0x9AFD3F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFD44: pop     ecx
+0x9AFD45: retn
+0x9AFD46: mov     edx, [esp+count]
+0x9AFD4A: lea     eax, [edx-1Ch]
+0x9AFD4D: mov     ecx, [edx-20h]
+0x9AFD50: xor     ecx, eax
+0x9AFD52: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AFD57: mov     eax, offset stru_ADC1D8
+0x9AFD5C: jmp     ___CxxFrameHandler3

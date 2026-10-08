@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x678510",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; 3DTheft decode 2026-05-16: frame-loop actor process manager scheduled update dispatch before the second maintenance pass.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x678556",
-    "line": "call    sub_673B10",
+    "line": "call    sub_673B10; ActorProcessManager accumulates a fractional fast-travel/update remainder in flt_B3BCF0; NaN/large values are reset to 0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x678569",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x678608",
-    "line": "call    sub_673C10",
+    "line": "call    sub_673C10; ActorProcessManager process-level-3 list update used during fast-travel time simulation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x678633",
-    "line": "call    sub_673E90",
+    "line": "call    sub_673E90; ActorProcessManager process-level-2 list update used during fast-travel time simulation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x678655",
-    "line": "call    sub_674200",
+    "line": "call    sub_674200; ActorProcessManager process-level-1 list update used during fast-travel time simulation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -685,7 +685,7 @@
   },
   {
     "ea": "0x678677",
-    "line": "call    sub_677EC0",
+    "line": "call    sub_677EC0; ActorProcessManager high/process list update used during fast-travel time simulation.",
     "mnemonic": "call",
     "size": 5
   },

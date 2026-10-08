@@ -7,7 +7,7 @@
 0x98EBEE: pop     ecx
 0x98EBEF: jz      short loc_98EC3E
 0x98EBF1: cmp     esi, 1
-0x98EBF4: mov     eax, dword_BAAAC0
+0x98EBF4: mov     eax, dword ptr unk_BAAAC0
 0x98EBF9: jnz     short loc_98EC01
 0x98EBFB: test    byte ptr [eax+54h], 1
 0x98EBFF: jnz     short loc_98EC0C
@@ -42,7 +42,7 @@
 0x98EC4B: imul    esi, 28h ; '('
 0x98EC4E: sar     eax, 5
 0x98EC51: test    edi, edi
-0x98EC53: mov     eax, dword_BAAAC0[eax*4]
+0x98EC53: mov     eax, dword ptr unk_BAAAC0[eax*4]
 0x98EC5A: pop     ecx
 0x98EC5B: mov     byte ptr [eax+esi+4], 0
 0x98EC60: jz      short loc_98EC6E

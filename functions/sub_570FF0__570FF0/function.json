@@ -1,10 +1,18 @@
 {
   "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 33,
   "callers_count": 0,
+  "chunks": [
+    [
+      "0x570FF0",
+      "0x5713ED"
+    ]
+  ],
   "chunks_sha256": "7d81f7f851a04b13045a0ef4507d1117ab26c2d96299df4c4bb0a80c7c346973",
   "comment_regular": "Verified: BSTempEffectParticle save-load restoration path. Reads base temp-effect state, path, transform, position, scale and optional controller data; reloads and clones the NIF, attaches it under the cell node, initializes properties/controllers, and returns failure when base/model/controller restoration fails.",
   "comment_repeatable": "Verified: BSTempEffectParticle save-load restoration path. Reads base temp-effect state, path, transform, position, scale and optional controller data; reloads and clones the NIF, attaches it under the cell node, initializes properties/controllers, and returns failure when base/model/controller restoration fails.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 13,
   "display_name": "BSTempEffectParticle_LoadGame",
   "end_ea": "0x5713ED",
@@ -15,6 +23,7 @@
   "segment": ".text",
   "sha256": "7d81f7f851a04b13045a0ef4507d1117ab26c2d96299df4c4bb0a80c7c346973",
   "size": 1021,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x570FF0",
   "total_chunk_size": 1021,
   "type": "bool __thiscall(BSTempEffectParticle *self)",

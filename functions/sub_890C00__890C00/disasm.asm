@@ -1,4 +1,4 @@
-0x890C00: push    0FFFFFFFFh
+0x890C00: push    0FFFFFFFFh; TES4 authoritative: initializes shared bhk character state table. Slots observed: 0=OnGround, 1=Jumping, 2=InAir, 4=Flying, 5=Swimming, 6=Projectile. No Climbing state is constructed here.
 0x890C02: push    offset SEH_890C00
 0x890C07: mov     eax, large fs:0
 0x890C0D: push    eax
@@ -258,3 +258,43 @@
 0x890F63: pop     ebx
 0x890F64: add     esp, 10h
 0x890F67: retn    4
+0x9D6240: mov     ecx, [ebp-10h]
+0x9D6243: add     ecx, 8Ch ; 'Œ'; slot
+0x9D6249: jmp     NiPointerSlot_Release
+0x9D624E: mov     eax, [ebp+4]
+0x9D6251: push    eax
+0x9D6252: call    sub_8903B0
+0x9D6257: pop     ecx
+0x9D6258: retn
+0x9D6259: mov     eax, [ebp+4]
+0x9D625C: push    eax
+0x9D625D: call    sub_8903B0
+0x9D6262: pop     ecx
+0x9D6263: retn
+0x9D6264: mov     eax, [ebp+4]
+0x9D6267: push    eax
+0x9D6268: call    sub_8903B0
+0x9D626D: pop     ecx
+0x9D626E: retn
+0x9D626F: mov     eax, [ebp+4]
+0x9D6272: push    eax
+0x9D6273: call    sub_8903B0
+0x9D6278: pop     ecx
+0x9D6279: retn
+0x9D627A: mov     eax, [ebp+4]
+0x9D627D: push    eax
+0x9D627E: call    sub_8903B0
+0x9D6283: pop     ecx
+0x9D6284: retn
+0x9D6285: mov     eax, [ebp+4]
+0x9D6288: push    eax
+0x9D6289: call    sub_8903B0
+0x9D628E: pop     ecx
+0x9D628F: retn
+0x9D6290: mov     edx, [esp+arg_4]
+0x9D6294: lea     eax, [edx-14h]
+0x9D6297: mov     ecx, [edx-18h]
+0x9D629A: xor     ecx, eax
+0x9D629C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D62A1: mov     eax, offset stru_AFE18C
+0x9D62A6: jmp     ___CxxFrameHandler3

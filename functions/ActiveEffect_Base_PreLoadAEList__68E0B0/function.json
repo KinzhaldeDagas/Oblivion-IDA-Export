@@ -1,18 +1,31 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x68E0B0",
+      "0x68E0DF"
+    ]
+  ],
+  "chunks_sha256": "3a9f8efdc792d3b96476f8a4e811cdbc55674d16b8f790c11ee4395bbdb09ffb",
+  "comment_regular": "Verified pre-load lifecycle hook: before list restoration, iterates current ActiveEffects and calls vtable slot +0x20 with the supplied load context. This is the preLoad slot in ActiveEffectVtbl; LockEffect and OpenEffect use the shared no-op.",
+  "comment_repeatable": "Verified pre-load lifecycle hook: before list restoration, iterates current ActiveEffects and calls vtable slot +0x20 with the supplied load context. This is the preLoad slot in ActiveEffectVtbl; LockEffect and OpenEffect use the shared no-op.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "ActiveEffect_Base_PreLoadAEList",
   "end_ea": "0x68E0DF",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "ActiveEffect_Base_PreLoadAEList",
   "segment": ".text",
   "sha256": "3a9f8efdc792d3b96476f8a4e811cdbc55674d16b8f790c11ee4395bbdb09ffb",
   "size": 47,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x68E0B0",
+  "total_chunk_size": 47,
   "type": "int __cdecl(_DWORD *, int)",
   "xrefs_from_count": 25,
   "xrefs_to_count": 2

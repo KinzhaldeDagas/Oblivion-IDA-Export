@@ -1,1 +1,1 @@
-NiSwitchStringExtraData
+struct NiSwitchStringExtraData;

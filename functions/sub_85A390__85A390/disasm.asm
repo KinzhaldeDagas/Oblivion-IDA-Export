@@ -14,16 +14,16 @@
 0x85A3B1: mov     large fs:0, eax
 0x85A3B7: mov     edi, ecx
 0x85A3B9: mov     [esp+48h+var_30], edi
-0x85A3BD: mov     ebx, [esp+48h+arg_0]
+0x85A3BD: mov     ebx, [esp+48h+vtable]
 0x85A3C1: push    4
 0x85A3C3: mov     ecx, ebx
 0x85A3C5: mov     [esp+4Ch+var_34], 0
-0x85A3CD: call    NiNode_GetNiPropertyByID
+0x85A3CD: call    NiNode_GetNiPropertyByID;
 0x85A3D2: mov     ebp, [esp+48h+arg_4]
 0x85A3D6: lea     eax, [esp+48h+var_1C]
 0x85A3DA: push    eax
 0x85A3DB: mov     ecx, ebp
-0x85A3DD: call    sub_405AD0
+0x85A3DD: call    ShadowSceneLight_GetLightRef
 0x85A3E2: mov     eax, [esp+48h+var_1C]
 0x85A3E6: test    eax, eax
 0x85A3E8: jz      short loc_85A408
@@ -67,13 +67,13 @@
 0x85A44F: mov     [esp+48h+var_2C], edx
 0x85A453: cmp     byte ptr ds:0B42E86h, 0
 0x85A45A: jnz     loc_85AA0C
-0x85A460: mov     ecx, edi
-0x85A462: call    sub_7ED2A0
+0x85A460: mov     ecx, edi; this
+0x85A462: call    BSShaderLightingProperty__GetFirstActiveLight; Seeds the embedded light-list cursor from property +0x70 and returns the first usable ShadowSceneLight. Oblivion rejects frustumCull == 0xFF, backing-light AppCulled, and light byte +0xF4 == 1. Fallout was consulted afterward only for the conventional GetFirstActiveLight label; its later implementation lacks Oblivion's +0xF4 rejection.
 0x85A467: test    eax, eax
 0x85A469: mov     [esp+48h+arg_18], eax
 0x85A46D: jz      loc_85A70E
-0x85A473: mov     ecx, [esp+48h+var_30]
-0x85A477: call    sub_7ED4B0
+0x85A473: mov     ecx, [esp+48h+var_30]; this
+0x85A477: call    BSShaderLightingProperty__GetNextActiveLight; Advances the embedded cursor at property +0x7C and returns the next usable ShadowSceneLight under Oblivion's three gates: frustumCull != 0xFF, backing NiLight not AppCulled, and byte +0xF4 != 1. Fallout corroborates the method label but not the extra Oblivion gate.
 0x85A47C: mov     edi, ds:0A2807Ch
 0x85A482: mov     ebp, eax
 0x85A484: test    ebp, ebp
@@ -81,7 +81,7 @@
 0x85A488: lea     eax, [esp+48h+var_1C]
 0x85A48C: push    eax
 0x85A48D: mov     ecx, ebp
-0x85A48F: call    sub_405AD0
+0x85A48F: call    ShadowSceneLight_GetLightRef
 0x85A494: mov     ecx, [eax]
 0x85A496: fld     dword ptr [ecx+0ECh]
 0x85A49C: or      [esp+48h+var_34], 1
@@ -123,8 +123,8 @@
 0x85A506: push    1
 0x85A508: mov     ecx, esi
 0x85A50A: call    eax
-0x85A50C: mov     ecx, [esp+48h+var_30]
-0x85A510: call    sub_7ED4B0
+0x85A50C: mov     ecx, [esp+48h+var_30]; this
+0x85A510: call    BSShaderLightingProperty__GetNextActiveLight; Advances the embedded cursor at property +0x7C and returns the next usable ShadowSceneLight under Oblivion's three gates: frustumCull != 0xFF, backing NiLight not AppCulled, and byte +0xF4 != 1. Fallout corroborates the method label but not the extra Oblivion gate.
 0x85A515: test    bl, bl
 0x85A517: jnz     loc_85A482
 0x85A51D: mov     edi, eax
@@ -133,7 +133,7 @@
 0x85A523: lea     ecx, [esp+48h+var_28]
 0x85A527: push    ecx
 0x85A528: mov     ecx, edi
-0x85A52A: call    sub_405AD0
+0x85A52A: call    ShadowSceneLight_GetLightRef
 0x85A52F: mov     ecx, [eax]
 0x85A531: fld     dword ptr [ecx+0ECh]
 0x85A537: or      [esp+48h+var_34], 2
@@ -177,15 +177,15 @@
 0x85A5AC: call    edx
 0x85A5AE: test    bl, bl
 0x85A5B0: jz      short loc_85A5C0
-0x85A5B2: mov     ecx, [esp+48h+var_30]
-0x85A5B6: call    sub_7ED4B0
+0x85A5B2: mov     ecx, [esp+48h+var_30]; this
+0x85A5B6: call    BSShaderLightingProperty__GetNextActiveLight; Advances the embedded cursor at property +0x7C and returns the next usable ShadowSceneLight under Oblivion's three gates: frustumCull != 0xFF, backing NiLight not AppCulled, and byte +0xF4 != 1. Fallout corroborates the method label but not the extra Oblivion gate.
 0x85A5BB: jmp     loc_85A51D
 0x85A5C0: cmp     [esp+48h+arg_18], 0
 0x85A5C5: jz      short loc_85A61F
 0x85A5C7: mov     ecx, [esp+48h+arg_18]
 0x85A5CB: lea     eax, [esp+48h+var_24]
 0x85A5CF: push    eax
-0x85A5D0: call    sub_405AD0
+0x85A5D0: call    ShadowSceneLight_GetLightRef
 0x85A5D5: mov     ecx, [eax]
 0x85A5D7: fld     dword ptr [ecx+0ECh]
 0x85A5DD: or      [esp+48h+var_34], 4
@@ -244,13 +244,13 @@
 0x85A68A: push    ebp
 0x85A68B: push    ecx
 0x85A68C: movzx   ecx, byte ptr [edx]
-0x85A68F: mov     edx, [esp+54h+arg_0]
-0x85A693: push    3
-0x85A695: push    ecx
-0x85A696: push    169h
-0x85A69B: push    edx
-0x85A69C: push    eax
-0x85A69D: call    sub_7E2370
+0x85A68F: mov     edx, [esp+54h+vtable]
+0x85A693: push    3; lightCount
+0x85A695: push    ecx; byte6
+0x85A696: push    169h; selector
+0x85A69B: push    edx; geometry
+0x85A69C: push    eax; outPass
+0x85A69D: call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.
 0x85A6A2: add     esp, 20h
 0x85A6A5: mov     edi, eax
 0x85A6A7: jmp     short loc_85A6AB
@@ -279,17 +279,17 @@
 0x85A6EF: jmp     short loc_85A6F9
 0x85A6F1: mov     eax, [esp+48h+arg_8]
 0x85A6F5: add     word ptr [eax], 1
-0x85A6F9: mov     ecx, [esp+48h+var_30]
-0x85A6FD: call    sub_7ED4B0
+0x85A6F9: mov     ecx, [esp+48h+var_30]; this
+0x85A6FD: call    BSShaderLightingProperty__GetNextActiveLight; Advances the embedded cursor at property +0x7C and returns the next usable ShadowSceneLight under Oblivion's three gates: frustumCull != 0xFF, backing NiLight not AppCulled, and byte +0xF4 != 1. Fallout corroborates the method label but not the extra Oblivion gate.
 0x85A702: test    eax, eax
 0x85A704: mov     [esp+48h+arg_18], eax
 0x85A708: jnz     loc_85A473
 0x85A70E: cmp     [esp+48h+var_2C], 0
 0x85A713: mov     [esp+48h+var_28], 0
 0x85A71B: jle     loc_85AA0C
-0x85A721: mov     ecx, [esp+48h+arg_0]
+0x85A721: mov     ecx, [esp+48h+vtable]
 0x85A725: push    4
-0x85A727: call    NiNode_GetNiPropertyByID
+0x85A727: call    NiNode_GetNiPropertyByID;
 0x85A72C: mov     ecx, [esp+48h+var_28]
 0x85A730: mov     edx, [eax]
 0x85A732: add     ecx, 1
@@ -300,20 +300,20 @@
 0x85A742: call    eax
 0x85A744: test    eax, eax
 0x85A746: jz      loc_85A9FA
-0x85A74C: mov     ecx, [esp+48h+var_30]
-0x85A750: call    sub_7ED2A0
+0x85A74C: mov     ecx, [esp+48h+var_30]; this
+0x85A750: call    BSShaderLightingProperty__GetFirstActiveLight; Seeds the embedded light-list cursor from property +0x70 and returns the first usable ShadowSceneLight. Oblivion rejects frustumCull == 0xFF, backing-light AppCulled, and light byte +0xF4 == 1. Fallout was consulted afterward only for the conventional GetFirstActiveLight label; its later implementation lacks Oblivion's +0xF4 rejection.
 0x85A755: test    eax, eax
 0x85A757: mov     [esp+48h+arg_18], eax
 0x85A75B: jz      loc_85A9FA
-0x85A761: mov     ecx, [esp+48h+var_30]
-0x85A765: call    sub_7ED4B0
+0x85A761: mov     ecx, [esp+48h+var_30]; this
+0x85A765: call    BSShaderLightingProperty__GetNextActiveLight; Advances the embedded cursor at property +0x7C and returns the next usable ShadowSceneLight under Oblivion's three gates: frustumCull != 0xFF, backing NiLight not AppCulled, and byte +0xF4 != 1. Fallout corroborates the method label but not the extra Oblivion gate.
 0x85A76A: test    eax, eax
 0x85A76C: mov     [esp+48h+var_1C], eax
 0x85A770: jz      short loc_85A7C8
 0x85A772: lea     ecx, [esp+48h+var_18]
 0x85A776: push    ecx
 0x85A777: mov     ecx, eax
-0x85A779: call    sub_405AD0
+0x85A779: call    ShadowSceneLight_GetLightRef
 0x85A77E: mov     ecx, [eax]
 0x85A780: fld     dword ptr [ecx+0ECh]
 0x85A786: or      [esp+48h+var_34], 8
@@ -358,15 +358,15 @@
 0x85A7FA: test    bl, bl
 0x85A7FC: jnz     loc_85A761
 0x85A802: mov     ebp, [esp+48h+var_30]
-0x85A806: mov     ecx, ebp
-0x85A808: call    sub_7ED4B0
+0x85A806: mov     ecx, ebp; this
+0x85A808: call    BSShaderLightingProperty__GetNextActiveLight; Advances the embedded cursor at property +0x7C and returns the next usable ShadowSceneLight under Oblivion's three gates: frustumCull != 0xFF, backing NiLight not AppCulled, and byte +0xF4 != 1. Fallout corroborates the method label but not the extra Oblivion gate.
 0x85A80D: mov     edi, eax
 0x85A80F: test    edi, edi
 0x85A811: jz      short loc_85A869
 0x85A813: lea     eax, [esp+48h+var_24]
 0x85A817: push    eax
 0x85A818: mov     ecx, edi
-0x85A81A: call    sub_405AD0
+0x85A81A: call    ShadowSceneLight_GetLightRef
 0x85A81F: mov     ecx, [eax]
 0x85A821: fld     dword ptr [ecx+0ECh]
 0x85A827: or      [esp+48h+var_34], 10h
@@ -415,7 +415,7 @@
 0x85A8AD: lea     ecx, [esp+48h+var_20]
 0x85A8B1: push    ecx
 0x85A8B2: mov     ecx, [esp+4Ch+arg_18]
-0x85A8B6: call    sub_405AD0
+0x85A8B6: call    ShadowSceneLight_GetLightRef
 0x85A8BB: mov     ecx, [eax]
 0x85A8BD: fld     dword ptr [ecx+0ECh]
 0x85A8C3: or      [esp+48h+var_34], 20h
@@ -476,13 +476,13 @@
 0x85A972: mov     ecx, [esp+50h+arg_10]
 0x85A976: push    edx
 0x85A977: movzx   edx, byte ptr [ecx]
-0x85A97A: mov     ecx, [esp+54h+arg_0]
-0x85A97E: push    3
-0x85A980: push    edx
-0x85A981: push    172h
-0x85A986: push    ecx
-0x85A987: push    eax
-0x85A988: call    sub_7E2370
+0x85A97A: mov     ecx, [esp+54h+vtable]
+0x85A97E: push    3; lightCount
+0x85A980: push    edx; byte6
+0x85A981: push    172h; selector
+0x85A986: push    ecx; geometry
+0x85A987: push    eax; outPass
+0x85A988: call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.
 0x85A98D: add     esp, 20h
 0x85A990: mov     edi, eax
 0x85A992: jmp     short loc_85A996
@@ -513,8 +513,8 @@
 0x85A9DD: jmp     short loc_85A9E7
 0x85A9DF: mov     eax, [esp+48h+arg_8]
 0x85A9E3: add     word ptr [eax], 1
-0x85A9E7: mov     ecx, ebp
-0x85A9E9: call    sub_7ED4B0
+0x85A9E7: mov     ecx, ebp; this
+0x85A9E9: call    BSShaderLightingProperty__GetNextActiveLight; Advances the embedded cursor at property +0x7C and returns the next usable ShadowSceneLight under Oblivion's three gates: frustumCull != 0xFF, backing NiLight not AppCulled, and byte +0xF4 != 1. Fallout corroborates the method label but not the extra Oblivion gate.
 0x85A9EE: test    eax, eax
 0x85A9F0: mov     [esp+48h+arg_18], eax
 0x85A9F4: jnz     loc_85A761
@@ -535,13 +535,13 @@
 0x85AA35: mov     ecx, [esp+48h+arg_10]
 0x85AA39: push    edx
 0x85AA3A: movzx   edx, byte ptr [ecx]
-0x85AA3D: mov     ecx, [esp+4Ch+arg_0]
-0x85AA41: push    1
-0x85AA43: push    edx
-0x85AA44: push    176h
-0x85AA49: push    ecx
-0x85AA4A: push    eax
-0x85AA4B: call    sub_7E2370
+0x85AA3D: mov     ecx, [esp+4Ch+vtable]
+0x85AA41: push    1; lightCount
+0x85AA43: push    edx; byte6
+0x85AA44: push    176h; selector
+0x85AA49: push    ecx; geometry
+0x85AA4A: push    eax; outPass
+0x85AA4B: call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.
 0x85AA50: add     esp, 18h
 0x85AA53: mov     edi, eax
 0x85AA55: jmp     short loc_85AA59
@@ -580,3 +580,25 @@
 0x85AAB9: pop     ebx
 0x85AABA: add     esp, 34h
 0x85AABD: retn    1Ch
+0x9D44C0: mov     eax, [ebp-14h]
+0x9D44C3: push    eax
+0x9D44C4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D44C9: pop     ecx
+0x9D44CA: retn
+0x9D44CB: mov     eax, [ebp-10h]
+0x9D44CE: push    eax
+0x9D44CF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D44D4: pop     ecx
+0x9D44D5: retn
+0x9D44D6: mov     eax, [ebp+10h]
+0x9D44D9: push    eax
+0x9D44DA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D44DF: pop     ecx
+0x9D44E0: retn
+0x9D44E1: mov     edx, [esp+arg_4]
+0x9D44E5: lea     eax, [edx-38h]
+0x9D44E8: mov     ecx, [edx-3Ch]
+0x9D44EB: xor     ecx, eax
+0x9D44ED: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D44F2: mov     eax, offset stru_AFC570
+0x9D44F7: jmp     ___CxxFrameHandler3

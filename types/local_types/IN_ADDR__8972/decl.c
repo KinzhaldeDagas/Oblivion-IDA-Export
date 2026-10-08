@@ -1,1 +1,1 @@
-IN_ADDR
+typedef in_addr IN_ADDR;

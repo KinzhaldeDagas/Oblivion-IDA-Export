@@ -28,7 +28,7 @@
 0x41114B: push    ecx
 0x41114C: mov     ecx, [esi+0DCh]; this
 0x411152: fstp    [esp+10h+a2]; a2
-0x411155: call    NiAVObject_UpdateNiAVObject
+0x411155: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x41115A: pop     edi
 0x41115B: pop     esi
 0x41115C: retn

@@ -1,39 +1,39 @@
 char __cdecl sub_4F5BB0(TESObjectREFR *a1, int a2, int a3, double *a4)
 {
-  TESObjectREFR *v7; // esi
-  int v8; // eax
+  TESObjectREFR *v4; // esi
+  int v5; // eax
   char *Name; // eax
-  char *v11; // eax
+  char *v8; // eax
 
-  v7 = 0;
-  if ( a1 )
+  v4 = 0; /*0x4f5bb6*/
+  if ( a1 ) /*0x4f5bba*/
   {
-    if ( a1->vtbl->IsActor(a1) )
-      v7 = a1;
+    if ( a1->vtbl->IsActor(a1) ) /*0x4f5bc6*/
+      v4 = a1; /*0x4f5bcc*/
   }
-  *a4 = 0.0;
-  if ( v7 )
+  *a4 = 0.0; /*0x4f5bd6*/
+  if ( v4 ) /*0x4f5bd8*/
   {
-    if ( Actor_IsNPC((Actor *)v7) )
+    if ( Actor_IsNPC((Actor *)v4) ) /*0x4f5bdc*/
     {
-      v8 = (int)v7->vtbl->GetBaseForm(v7);
-      if ( v8 )
+      v5 = (int)v4->vtbl->GetBaseForm(v4); /*0x4f5bef*/
+      if ( v5 ) /*0x4f5bf3*/
       {
-        if ( v8 == dword_B361C4 )
-          *a4 = 1.0;
+        if ( v5 == unk_B361C4 ) /*0x4f5bfb*/
+          *a4 = 1.0; /*0x4f5bff*/
       }
-      if ( IsConsoleMode )
+      if ( MEMORY[0xB361AC] ) /*0x4f5c01*/
       {
-        if ( 0.0 != *a4 )
+        if ( 0.0 != *a4 ) /*0x4f5c15*/
         {
-          Name = TESObjectREFR_GetName(v7);
-          Interface_ConsolePrint("%s  crime victim ", Name);
-          return 1;
+          Name = TESObjectREFR_GetName(v4); /*0x4f5c17*/
+          Interface_ConsolePrint("%s  crime victim ", Name); /*0x4f5c22*/
+          return 1; /*0x4f5c2e*/
         }
-        v11 = TESObjectREFR_GetName(v7);
-        Interface_ConsolePrint("%s  is not a crime victim ", v11);
+        v8 = TESObjectREFR_GetName(v4); /*0x4f5c2f*/
+        Interface_ConsolePrint("%s  is not a crime victim ", v8); /*0x4f5c3a*/
       }
     }
   }
-  return 1;
+  return 1; /*0x4f5c2a*/
 }

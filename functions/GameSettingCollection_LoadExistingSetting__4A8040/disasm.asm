@@ -1,4 +1,4 @@
-0x4A8040: mov     eax, [esp+arg_0]
+0x4A8040: mov     eax, [esp+arg_0]; Verified generic name-keyed collection dispatch: looks up the setting object in the collection map by string key and calls LoadSetting virtual +0x10 when present, then advances to the next setting record.
 0x4A8044: mov     edx, [esp+arg_4]
 0x4A8048: push    ebx
 0x4A8049: push    esi

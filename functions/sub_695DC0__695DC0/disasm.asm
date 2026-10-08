@@ -27,16 +27,16 @@
 0x695E16: test    eax, eax
 0x695E18: jnz     loc_696222
 0x695E1E: mov     ecx, edi; this
-0x695E20: call    MobileObject_GetCharProxy
+0x695E20: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x695E25: mov     ecx, edi; this
 0x695E27: mov     esi, eax
-0x695E29: call    TESObjectREFR_GetParentCell
+0x695E29: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x695E2E: mov     ebx, eax
 0x695E30: test    ebx, ebx
 0x695E32: mov     [esp+104h+var_E4], ebx
 0x695E36: jz      short loc_695E5C
 0x695E38: mov     ecx, ebx; this
-0x695E3A: call    TESObjectCELL_IsInterior
+0x695E3A: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x695E3F: test    al, al
 0x695E41: jz      short loc_695E51
 0x695E43: lea     ecx, [ebx+28h]
@@ -51,7 +51,7 @@
 0x695E66: jnz     loc_6960D9
 0x695E6C: push    1
 0x695E6E: lea     ecx, [esp+108h+var_D0]
-0x695E72: call    sub_890C00
+0x695E72: call    sub_890C00; TES4 authoritative: initializes shared bhk character state table. Slots observed: 0=OnGround, 1=Jumping, 2=InAir, 4=Flying, 5=Swimming, 6=Projectile. No Climbing state is constructed here.
 0x695E77: fld1
 0x695E79: mov     edx, [edi]
 0x695E7B: fstp    [esp+104h+var_54]
@@ -90,7 +90,7 @@
 0x695EF8: push    ecx
 0x695EF9: fstp    [esp+10Ch+var_10C]; float
 0x695EFC: mov     ecx, eax
-0x695EFE: call    sub_532090
+0x695EFE: call    bhkSphereShape_CtorRadius; TES4 authoritative: constructs a bhkSphereShape; if the third byte arg is true, radius is converted from TES/world units to Havok units with hkFactor.
 0x695F03: jmp     short loc_695F07
 0x695F05: xor     eax, eax
 0x695F07: push    eax
@@ -120,7 +120,7 @@
 0x695F58: lea     ecx, [esp+104h+var_E0]
 0x695F5C: push    ecx
 0x695F5D: mov     ecx, esi
-0x695F5F: call    sub_65ABE0
+0x695F5F: call    MobileObject_GetCollisionFilterInfo; Returns actor/proxy collision filter identity by calling 0x57E270 on MobileObject_GetCharProxy(this). Callers keep high 16 bits and OR in the chosen collision layer.
 0x695F64: movzx   eax, word ptr [eax+2]
 0x695F68: shl     eax, 10h
 0x695F6B: or      eax, 7
@@ -130,8 +130,8 @@
 0x695F7C: mov     eax, [edx+154h]
 0x695F82: mov     ecx, esi
 0x695F84: call    eax
-0x695F86: push    eax
-0x695F87: call    sub_480340
+0x695F86: push    eax; object
+0x695F87: call    NiAVObject_FindBhkCollisionObjectRecursive; Returns the first bhk collision object found on object or recursively beneath its NiNode children. This is structural traversal, independent of node names.
 0x695F8C: add     esp, 4
 0x695F8F: test    eax, eax
 0x695F91: jz      short loc_695FF4
@@ -150,8 +150,8 @@
 0x695FB9: mov     edx, [eax+154h]
 0x695FBF: mov     ecx, edi
 0x695FC1: call    edx
-0x695FC3: push    eax
-0x695FC4: call    sub_480340
+0x695FC3: push    eax; object
+0x695FC4: call    NiAVObject_FindBhkCollisionObjectRecursive; Returns the first bhk collision object found on object or recursively beneath its NiNode children. This is structural traversal, independent of node names.
 0x695FC9: add     esp, 4
 0x695FCC: test    eax, eax
 0x695FCE: jz      short loc_695FF4
@@ -200,7 +200,7 @@
 0x696074: or      dword ptr [esi+1F4h], 100000h
 0x69607E: jmp     short loc_69608A
 0x696080: and     dword ptr [esi+1F4h], 0FFEFFFFFh
-0x69608A: or      dword ptr [esi+1F4h], 80000h
+0x69608A: or      dword ptr [esi+1F4h], 80000h; Observed creation-time setter for controller flag 0x80000 in spell/projectile MobileObject character-proxy setup.
 0x696094: push    ecx
 0x696095: mov     eax, esp
 0x696097: lea     edx, [esi+4]
@@ -215,7 +215,7 @@
 0x6960B4: push    edi
 0x6960B5: push    3E8h
 0x6960BA: mov     ecx, esi
-0x6960BC: call    sub_8910F0
+0x6960BC: call    sub_8910F0; Spell/projectile path also stores owner/object pointer under proxy metadata key 0x3E8. Movement discipline hooks must reject non-actors after lookup.
 0x6960C1: lea     ecx, [esp+104h+var_D0]
 0x6960C5: mov     [esp+104h+var_4], 0FFFFFFFFh
 0x6960D0: call    sub_890F70
@@ -230,10 +230,10 @@
 0x6960F1: jmp     short loc_6960F9
 0x6960F3: fld     dword ptr ds:0A6F374h
 0x6960F9: mov     ecx, [esi+8]
-0x6960FC: fstp    dword ptr [esi+318h]
+0x6960FC: fstp    dword ptr [esi+318h]; Spell/projectile proxy setup writes proxy+0x318 from current cell water height; owner key 0x3E8 alone is not actor proof.
 0x696102: test    ecx, ecx
 0x696104: jz      short loc_69610D
-0x696106: call    sub_8AC0C0
+0x696106: call    bhkCollisionWrapper_GetHavokObject; bhk collision wrapper accessor: returns stored low-level Havok object pointer at wrapper+0x30.
 0x69610B: jmp     short loc_69610F
 0x69610D: xor     eax, eax
 0x69610F: mov     eax, [eax+8]
@@ -256,7 +256,7 @@
 0x69614A: mov     ebx, eax
 0x69614C: jz      short loc_696157
 0x69614E: push    0
-0x696150: call    sub_89F6B0
+0x696150: call    sub_89F6B0; Looks up NiObject in proxy/collision metadata map, default key dword_B3FA80 when caller key is null, then NiRTTI_Cast to NiObject. Used by 0x8AFCE0 for root-collidable type 2 hits.
 0x696155: jmp     short loc_696159
 0x696157: xor     eax, eax
 0x696159: cmp     eax, ebx
@@ -283,7 +283,7 @@
 0x696193: push    1; a3
 0x696195: push    6; a2
 0x696197: push    ebx; a1
-0x696198: call    sub_88D070
+0x696198: call    sub_88D070; ODismemberment: bhkBlendCollisionObject traversal entry. Requires bhkBlendCollisionObject or forced flag; queues callback off off_B2E314 with state payload including a2 and a3.
 0x69619D: add     esp, 14h
 0x6961A0: mov     edx, [edi]
 0x6961A2: mov     eax, [edx+174h]
@@ -314,11 +314,11 @@
 0x6961EF: lea     ecx, [esp+104h+a2]
 0x6961F3: push    ecx; a2
 0x6961F4: mov     ecx, esi; this
-0x6961F6: call    sub_452A10
+0x6961F6: call    sub_452A10; TES4 authoritative: converts TES/world NiPoint3 into Havok units with hkFactor, then writes proxy position through 0x891560.
 0x6961FB: lea     edx, [esp+104h+var_E4]
 0x6961FF: push    edx
 0x696200: mov     ecx, esi
-0x696202: call    sub_57E270
+0x696202: call    bhkCharacterProxy_GetCollisionFilterInfo; Reads collision filter info from proxy metadata: proxy+0x364 -> +8 -> +0x14 -> +0x1C. Used to preserve actor identity in raycast filter high 16 bits.
 0x696207: mov     ecx, [esp+104h+var_E4]
 0x69620B: mov     eax, [edi]
 0x69620D: mov     edx, [eax+90h]
@@ -342,3 +342,26 @@
 0x696242: mov     esp, ebp
 0x696244: pop     ebp
 0x696245: retn
+0x9C58F0: lea     ecx, [ebp+var_D0]
+0x9C58F6: jmp     sub_890F70
+0x9C58FB: mov     eax, [ebp+var_E0]
+0x9C5901: push    eax
+0x9C5902: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C5907: pop     ecx
+0x9C5908: retn
+0x9C5909: mov     eax, [ebp+var_E0]
+0x9C590F: push    eax
+0x9C5910: call    sub_6078C0
+0x9C5915: pop     ecx
+0x9C5916: retn
+0x9C5917: mov     edx, [esp-4+arg_4]
+0x9C591B: lea     eax, [edx-0F4h]
+0x9C5921: mov     ecx, [edx-0F8h]
+0x9C5927: xor     ecx, eax
+0x9C5929: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C592E: add     eax, 0Ch
+0x9C5931: mov     ecx, [edx-8]
+0x9C5934: xor     ecx, eax
+0x9C5936: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C593B: mov     eax, offset stru_AEE080
+0x9C5940: jmp     ___CxxFrameHandler3

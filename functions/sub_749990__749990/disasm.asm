@@ -1,21 +1,21 @@
 0x749990: push    ebp
 0x749991: push    esi
-0x749992: mov     esi, [esp+8+arg_0]
+0x749992: mov     esi, [esp+8+payload]
 0x749996: mov     ebp, ecx
 0x749998: push    edi
 0x749999: mov     edi, [ebp+0C8h]
 0x74999F: test    edi, edi
 0x7499A1: jnz     short loc_7499E3
 0x7499A3: test    esi, esi
-0x7499A5: mov     [esp+0Ch+arg_0], esi
+0x7499A5: mov     [esp+0Ch+payload], esi
 0x7499A9: jz      short loc_7499B5
 0x7499AB: lea     eax, [esi+4]
 0x7499AE: push    eax; lpAddend
 0x7499AF: call    dword ptr ds:0A28078h
-0x7499B5: lea     ecx, [esp+0Ch+arg_0]
-0x7499B9: push    ecx
-0x7499BA: lea     ecx, [ebp+0C4h]
-0x7499C0: call    sub_749800
+0x7499B5: lea     ecx, [esp+0Ch+payload]
+0x7499B9: push    ecx; payload
+0x7499BA: lea     ecx, [ebp+0C4h]; self
+0x7499C0: call    NiTRefPointerList__AddHead; Pass221: Refcounted NiTPointerList head-insert helper; node+0x08 owns the payload reference.
 0x7499C5: test    esi, esi
 0x7499C7: jz      short loc_749A27
 0x7499C9: lea     edx, [esi+4]
@@ -38,12 +38,12 @@
 0x7499F2: jnz     short loc_7499E6
 0x7499F4: lea     edi, [esi+4]
 0x7499F7: push    edi; lpAddend
-0x7499F8: mov     [esp+10h+arg_0], esi
+0x7499F8: mov     [esp+10h+payload], esi
 0x7499FC: call    dword ptr ds:0A28078h
-0x749A02: lea     eax, [esp+0Ch+arg_0]
+0x749A02: lea     eax, [esp+0Ch+payload]
 0x749A06: push    eax
 0x749A07: lea     ecx, [ebp+0C4h]
-0x749A0D: call    sub_7C16B0
+0x749A0D: call    NiTRefPointerList__AddTail; Generic refcounted NiT pointer-list AddTail helper. Allocates a node, assigns/increments its object pointer, links it after the old tail, and updates head/tail/count.
 0x749A12: push    edi; lpAddend
 0x749A13: call    dword ptr ds:0A2807Ch
 0x749A19: test    eax, eax
@@ -66,13 +66,13 @@
 0x749A40: push    ebx
 0x749A41: lea     ebx, [esi+4]
 0x749A44: push    ebx; lpAddend
-0x749A45: mov     [esp+14h+arg_0], esi
+0x749A45: mov     [esp+14h+payload], esi
 0x749A49: call    dword ptr ds:0A28078h
-0x749A4F: lea     edx, [esp+10h+arg_0]
+0x749A4F: lea     edx, [esp+10h+payload]
 0x749A53: push    edx
 0x749A54: push    edi
 0x749A55: lea     ecx, [ebp+0C4h]
-0x749A5B: call    sub_7C6A20
+0x749A5B: call    NiTRefPointerList_InsertBeforePosition
 0x749A60: push    ebx; lpAddend
 0x749A61: call    dword ptr ds:0A2807Ch
 0x749A67: pop     ebx

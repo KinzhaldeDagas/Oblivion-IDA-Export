@@ -1,1 +1,1 @@
-LPDWORD
+typedef unsigned int *LPDWORD;

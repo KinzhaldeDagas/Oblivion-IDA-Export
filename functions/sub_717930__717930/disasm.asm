@@ -3,7 +3,7 @@
 0x717935: push    edi
 0x717936: push    esi
 0x717937: mov     edi, ecx
-0x717939: call    NiGeometry__Render
+0x717939: call    NiGeometry__Render; Pass221/222: NiGeometry::Render copies NiGeometry +0xAC NiPropertyState to NiRenderer::propertyState.
 0x71793E: mov     eax, 1
 0x717943: cmp     [esi+200h], eax
 0x717949: jz      short loc_717953

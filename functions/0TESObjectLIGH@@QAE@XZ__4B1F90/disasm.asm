@@ -54,11 +54,11 @@
 0x4B205F: mov     [esi+74h], eax
 0x4B2062: mov     [esi+78h], eax
 0x4B2065: mov     [esi+7Ch], eax
-0x4B2068: mov     [esi+80h], eax
+0x4B2068: mov     [esi+80h], eax; TESObjectLIGH constructor clears DATA field +0x80; record load later normalizes a zero loaded value to 1.0.
 0x4B206E: fstp    dword ptr [esi+88h]
 0x4B2074: fld     dword ptr ds:0A430CCh
 0x4B207A: mov     ecx, esi; this
-0x4B207C: fstp    dword ptr [esi+84h]
+0x4B207C: fstp    dword ptr [esi+84h]; TESObjectLIGH constructor initializes DATA field +0x84 to 90.0; attached-reference shadow registration copies this field as projector FOV.
 0x4B2082: mov     byte ptr [esp+24h+var_4], 5
 0x4B2087: call    j_TESForm_InitializeComponents
 0x4B208C: mov     eax, esi
@@ -71,3 +71,27 @@
 0x4B209D: pop     ebx
 0x4B209E: add     esp, 10h
 0x4B20A1: retn
+0x9B3030: mov     ecx, [ebp-10h]
+0x9B3033: jmp     TESObject_destr
+0x9B3038: mov     ecx, [ebp-10h]
+0x9B303B: add     ecx, 24h ; '$'
+0x9B303E: jmp     TESFullName_Initialize
+0x9B3043: mov     ecx, [ebp-10h]
+0x9B3046: add     ecx, 30h ; '0'; this
+0x9B3049: jmp     ??1TESModel@@UAE@XZ; TESModel::~TESModel(void)
+0x9B304E: mov     ecx, [ebp-10h]
+0x9B3051: add     ecx, 48h ; 'H'; void *
+0x9B3054: jmp     j_TESTexture_destr
+0x9B3059: mov     ecx, [ebp-10h]
+0x9B305C: add     ecx, 60h ; '`'
+0x9B305F: jmp     TESWeightForm_destr
+0x9B3064: mov     ecx, [ebp-10h]
+0x9B3067: add     ecx, 68h ; 'h'
+0x9B306A: jmp     TESValueForm_destr
+0x9B306F: mov     edx, [esp+arg_4]
+0x9B3073: lea     eax, [edx-14h]
+0x9B3076: mov     ecx, [edx-18h]
+0x9B3079: xor     ecx, eax
+0x9B307B: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B3080: mov     eax, offset stru_ADEDB4
+0x9B3085: jmp     ___CxxFrameHandler3

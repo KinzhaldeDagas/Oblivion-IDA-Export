@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E5040",
-    "line": "mov     edx, [ecx+38h]",
+    "line": "mov     edx, [ecx+38h]; Verified clears TESPathGrid.pointsByReference (+0x34), the map from TESObjectREFR* keys to BSSimpleList<TESPathGridPoint*> values. Frees the list nodes and headers, then calls NiTMap_Clear; it does not destroy referenced forms or point objects. Called only by TESPathGrid_ClearPointsAndReferenceMaps while the pathgrid critical section is held.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x4E5069",
-    "line": "mov     [esp+14h+var_8], eax",
+    "line": "mov     [esp+14h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -127,61 +127,61 @@
   },
   {
     "ea": "0x4E5070",
-    "line": "lea     eax, [esp+18h+var_C]",
+    "line": "lea     eax, [esp+18h+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4E5074",
-    "line": "push    eax",
+    "line": "push    eax; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E5075",
-    "line": "lea     ecx, [esp+1Ch+var_4]",
+    "line": "lea     ecx, [esp+1Ch+keyOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4E5079",
-    "line": "push    ecx",
+    "line": "push    ecx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E507A",
-    "line": "lea     edx, [esp+20h+var_8]",
+    "line": "lea     edx, [esp+20h+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4E507E",
-    "line": "push    edx",
+    "line": "push    edx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E507F",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E5081",
-    "line": "mov     [esp+24h+var_C], 0",
+    "line": "mov     [esp+24h+valueOut], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x4E5089",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E508E",
-    "line": "mov     esi, [esp+18h+var_C]",
+    "line": "mov     esi, [esp+18h+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x4E50A7",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x4E50BD",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x4E50C5",
-    "line": "cmp     [esp+18h+var_8], 0",
+    "line": "cmp     [esp+18h+position], 0",
     "mnemonic": "cmp",
     "size": 5
   },

@@ -1,1 +1,1 @@
-BSFaceGenMorph
+struct BSFaceGenMorph;

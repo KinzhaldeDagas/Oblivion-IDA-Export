@@ -1,40 +1,36 @@
-void __cdecl __noreturn sub_795E00(_DWORD *a1, _DWORD *a2, _DWORD *a3)
+// OBLIVION AUTHORITY (2026-08-30): Exception-safe uninitialized move for vector<unsigned short> owners. Constructs empty destinations then swaps their buffers with sources, leaving sources empty; normal return is at 0x795EA8.
+OB_stVectorUShort_010201A0 *__cdecl OB_stVector_stVectorUShort_UninitializedMoveRange_010201A0(
+        OB_stVectorUShort_010201A0 *first,
+        OB_stVectorUShort_010201A0 *last,
+        OB_stVectorUShort_010201A0 *destination)
 {
-  _DWORD *v3; // esi
-  _DWORD *i; // esi
-  int v6; // [esp+0h] [ebp-38h] BYREF
-  char v7[4]; // [esp+10h] [ebp-28h] BYREF
-  unsigned int v8; // [esp+14h] [ebp-24h]
-  int v9; // [esp+18h] [ebp-20h]
-  int v10; // [esp+1Ch] [ebp-1Ch]
-  void *v11; // [esp+20h] [ebp-18h]
-  int v12; // [esp+24h] [ebp-14h]
-  int *v13; // [esp+28h] [ebp-10h]
-  int v14; // [esp+34h] [ebp-4h]
-  int savedregs; // [esp+38h] [ebp+0h] BYREF
+  OB_stVectorUShort_010201A0 *v3; // esi
+  OB_stVector16_010201A0 *i; // esi
+  int v7; // [esp+0h] [ebp-38h] BYREF
+  OB_stVector4_010201A0 v8; // [esp+10h] [ebp-28h] BYREF
+  void *v9; // [esp+20h] [ebp-18h]
+  OB_stVector16_010201A0 *v10; // [esp+24h] [ebp-14h]
+  int *v11; // [esp+28h] [ebp-10h]
+  int v12; // [esp+34h] [ebp-4h]
 
-  v13 = &v6;
-  v3 = a3;
-  v12 = (int)a3;
-  v8 = 0;
-  v9 = 0;
-  v10 = 0;
-  v14 = 1;
-  while ( a1 != a2 )
+  v11 = &v7; /*0x795e28*/
+  v3 = destination; /*0x795e2b*/
+  v10 = (OB_stVector16_010201A0 *)destination; /*0x795e30*/
+  memset(&v8.begin, 0, 0xC); /*0x795e33*/
+  v12 = 1; /*0x795e41*/
+  while ( first != last ) /*0x795e4a*/
   {
-    v11 = v3;
-    LOBYTE(v14) = 2;
-    if ( v3 )
-      sub_795480(v3, (unsigned int)&savedregs, (unsigned int)v3, (int)v7);
-    LOBYTE(v14) = 1;
-    sub_795630(v3, (unsigned int)&savedregs, a1);
-    v3 += 4;
-    a1 += 4;
-    a3 = v3;
+    v9 = v3; /*0x795e4f*/
+    LOBYTE(v12) = 2; /*0x795e54*/
+    if ( v3 ) /*0x795e58*/
+      OB_stVectorUShort_CopyCtor_010201A0(v3, (const OB_stVectorUShort_010201A0 *)&v8); /*0x795e60*/
+    LOBYTE(v12) = 1; /*0x795e68*/
+    OB_stVectorUShort_Swap_010201A0(v3++, first++); /*0x795e6b*/
+    destination = v3; /*0x795e76*/
   }
-  if ( v8 )
-    FormHeapFree(v8);
-  for ( i = (_DWORD *)v12; i != a3; i += 4 )
-    sub_79BFF0(i);
-  ThrowException__(0, 0);
+  if ( v8.begin ) /*0x795ead*/
+    FormHeapFree((unsigned int)v8.begin); /*0x795eb0*/
+  for ( i = v10; i != (OB_stVector16_010201A0 *)destination; ++i ) /*0x795e85*/
+    OB_stVector4_DestroyStdcall_010201A0((OB_stVector4_010201A0 *)i); /*0x795e93*/
+  ThrowException__(0, 0); /*0x795ea3*/
 }

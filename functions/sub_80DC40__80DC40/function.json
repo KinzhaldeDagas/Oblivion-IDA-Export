@@ -1,19 +1,36 @@
 {
-  "callees_count": 19,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 0,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x80DC40",
+      "0x80DD82"
+    ],
+    [
+      "0x9CA420",
+      "0x9CA446"
+    ]
+  ],
+  "chunks_sha256": "6cecfb552bd2c47156b9991e8c623e52c35619d000553c872d38df20c0ee9638",
+  "comment_regular": "HairShader vtable +0x18 node preparation. Ensures property kind 4 has subtype 6: accepts an existing subtype-6 property, otherwise removes it, allocates/constructs HairShaderProperty, attaches it, performs virtual setup/validation, and returns success. This ties HairShader's concrete consumer to HairShaderProperty's producer.",
   "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_80DC40",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "HairShader_EnsureSubtype6PropertyOnNode",
   "end_ea": "0x80DD82",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_80DC40",
+  "name": "HairShader_EnsureSubtype6PropertyOnNode",
   "segment": ".text",
   "sha256": "4358527c92fa3c4a3c2d17a8cedc1795e8cf97c17b2a65d20a33179ed677c718",
   "size": 322,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x80DC40",
-  "type": "bool __stdcall(NiNode *)",
-  "xrefs_from_count": 136,
+  "total_chunk_size": 360,
+  "type": "bool __stdcall(NiNode *node)",
+  "xrefs_from_count": 150,
   "xrefs_to_count": 1
 }

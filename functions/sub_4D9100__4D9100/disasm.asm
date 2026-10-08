@@ -1,19 +1,19 @@
-0x4D9100: sub     esp, 214h
+0x4D9100: sub     esp, 214h; TESObjectREFR single-topic speech path. Selects one INFO with ambient conversation rules, immediately runs its result and AddTopicList, then plays only the first decoded response at this reference. Named from observed Oblivion behavior.
 0x4D9106: mov     eax, ds:0B30AACh
 0x4D910B: xor     eax, esp
 0x4D910D: mov     [esp+214h+var_4], eax
-0x4D9114: mov     eax, [esp+214h+arg_4]
+0x4D9114: mov     eax, [esp+214h+speaker]
 0x4D911B: fldz
 0x4D911D: push    ebp
 0x4D911E: fstp    [esp+218h+var_214]
 0x4D9122: push    esi
-0x4D9123: push    0
-0x4D9125: push    0
-0x4D9127: push    0
+0x4D9123: push    0; conversation
+0x4D9125: push    0; previousTopic
+0x4D9127: push    0; target
 0x4D9129: mov     ebp, ecx
-0x4D912B: mov     ecx, [esp+228h+arg_0]
-0x4D9132: push    eax
-0x4D9133: call    TESTopic__CreateDialogueInfo
+0x4D912B: mov     ecx, [esp+228h+arg_0]; this
+0x4D9132: push    eax; speaker
+0x4D9133: call    TESTopic__CreateDialogueItem; Selects a matching TESTopicInfo and wraps it as a 0x1C DialogueItem containing response list/cursor, INFO, topic, owner quest, and speaker.
 0x4D9138: mov     esi, eax
 0x4D913A: test    esi, esi
 0x4D913C: jz      loc_4D92FB
@@ -24,17 +24,17 @@
 0x4D914D: push    edi
 0x4D914E: mov     edi, [eax+24h]
 0x4D9151: jz      short loc_4D9162
-0x4D9153: push    ebp
-0x4D9154: mov     ecx, ebx
-0x4D9156: call    sub_531470
-0x4D915B: mov     ecx, ebx; int
-0x4D915D: call    sub_5308D0
+0x4D9153: push    ebp; speaker
+0x4D9154: mov     ecx, ebx; this
+0x4D9156: call    TESTopicInfo__RunResult; Reference single-topic speech likewise commits selected INFO state before playing the first response.
+0x4D915B: mov     ecx, ebx; this
+0x4D915D: call    TESTopicInfo__AddTopicList; Adds TESTopicInfo.addedTopics to PlayerCharacter. Pointer-duplicate topics are ignored, each genuinely new topic may show the sTopicAddedText notification outside DialogMenu, and the player's known-topic list is sorted once afterward.
 0x4D9162: test    edi, edi
 0x4D9164: jz      loc_4D92DC
-0x4D916A: mov     ecx, esi
-0x4D916C: call    sub_6B7BA0
-0x4D9171: mov     ecx, esi
-0x4D9173: call    sub_6B7C20
+0x4D916A: mov     ecx, esi; this
+0x4D916C: call    DialogueItem__FirstResponse
+0x4D9171: mov     ecx, esi; this
+0x4D9173: call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.
 0x4D9178: mov     ebx, eax
 0x4D917A: test    ebx, ebx
 0x4D917C: jz      loc_4D92DC

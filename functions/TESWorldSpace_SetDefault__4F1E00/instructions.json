@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4F1E00",
-    "line": "push    ebx",
+    "line": "push    ebx; WRLD/SNAM runtime default verified 2026-10-01: TESWorldSpace::SetDefault explicitly sets music field unk084[4]=0 at0x4F1E53. The TESWorldSpace constructor0x4F2A10 calls SetDefault0x4F1E00 at0x4F2BD7. TESWorldSpace::Load later assigns each reached SNAM candidate at0x4F210C; full absent SNAM is therefore known music enum0 (Default), not unknown.",
     "mnemonic": "push",
     "size": 1
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x4F1E0C",
-    "line": "call    sub_46B660",
+    "line": "call    TESForm_HasBuiltinFormID; Returns true when this TESForm has a built-in FormID in the reserved range 0x00000001..0x000007FF.",
     "mnemonic": "call",
     "size": 5
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x4F1E26",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x4F1E3B",
-    "line": "mov     [esi+84h], eax",
+    "line": "mov     [esi+84h], eax; Authoritative full-WRLD MNAM initial state: SetDefault zeroes the five unk084 dwords; the first four are the 16-byte MNAM field. Short MNAM prefix overlays are therefore exactly reconstructible for a fresh non-partial form, while partial override records inherit prior field bytes.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x4F1E53",
-    "line": "mov     [esi+94h], ebx",
+    "line": "mov     [esi+94h], ebx; Oblivion WRLD default music proof: TESWorldSpace::SetDefault writes dword0 to unk084[4], the SNAM U32, here. Constructor0x4F2A10 invokes SetDefault at0x4F2BD7. A full non-partial WRLD without SNAM therefore has effective enum value0 (Default).",
     "mnemonic": "mov",
     "size": 6
   },

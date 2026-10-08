@@ -47,3 +47,15 @@
 0x926AF8: pop     ebx
 0x926AF9: add     esp, 0Ch
 0x926AFC: retn    8
+0x9D7BF0: mov     eax, [ebp+4]
+0x9D7BF3: push    eax
+0x9D7BF4: call    sub_8A01D0
+0x9D7BF9: pop     ecx
+0x9D7BFA: retn
+0x9D7BFB: mov     edx, [esp+arg_4]
+0x9D7BFF: lea     eax, [edx-0Ch]
+0x9D7C02: mov     ecx, [edx-10h]
+0x9D7C05: xor     ecx, eax
+0x9D7C07: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D7C0C: mov     eax, offset stru_AFF730
+0x9D7C11: jmp     ___CxxFrameHandler3

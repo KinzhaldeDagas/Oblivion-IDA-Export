@@ -42,22 +42,22 @@
 0x5CFBBE: mov     esi, eax
 0x5CFBC0: jmp     short loc_5CFBC4
 0x5CFBC2: xor     esi, esi
-0x5CFBC4: mov     ecx, ebx
-0x5CFBC6: call    TESHealthForm_GetHealth
+0x5CFBC4: mov     ecx, ebx; this
+0x5CFBC6: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x5CFBCB: test    eax, eax
 0x5CFBCD: jnz     short loc_5CFBD8
-0x5CFBCF: push    1
-0x5CFBD1: mov     ecx, ebx
-0x5CFBD3: call    sub_60D020
+0x5CFBCF: push    1; value
+0x5CFBD1: mov     ecx, ebx; this
+0x5CFBD3: call    Shared_SetDwordAtOffset04; Identical-code-folded setter shared by unrelated engine classes: writes value to *(int *)(this+4) and returns value. In EntryData call sites, +0x04 is the canonical signed countDelta; shader/process vtable users give the same bytes unrelated meanings. Do not assign a globally EntryData-specific prototype.
 0x5CFBD8: cmp     esi, ebp
 0x5CFBDA: jz      loc_5CFCC5
 0x5CFBE0: fldz
 0x5CFBE2: push    ecx
-0x5CFBE3: fstp    [esp+34h+a2]; a3
+0x5CFBE3: fstp    [esp+34h+a2]; value
 0x5CFBE6: mov     ecx, edi; this
-0x5CFBE8: push    0FAEh; a2
+0x5CFBE8: push    0FAEh; propertyCode
 0x5CFBED: mov     [esi+44h], ebx
-0x5CFBF0: call    Tile_SetFloat
+0x5CFBF0: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5CFBF5: mov     [esp+30h+var_1C], ebp
 0x5CFBF9: mov     [esp+30h+var_18], bp
 0x5CFBFE: mov     [esp+30h+var_16], bp
@@ -114,10 +114,10 @@
 0x5CFCAB: mov     ecx, esi; int
 0x5CFCAD: call    EnableMenu
 0x5CFCB2: push    ebx
-0x5CFCB3: call    FormHeapFree
+0x5CFCB3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5CFCB8: mov     ecx, [esp+34h+var_1C]
 0x5CFCBC: push    ecx
-0x5CFCBD: call    FormHeapFree
+0x5CFCBD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5CFCC2: add     esp, 8
 0x5CFCC5: mov     eax, edi
 0x5CFCC7: mov     ecx, [esp+30h+var_C]
@@ -129,3 +129,14 @@
 0x5CFCD6: pop     ebx
 0x5CFCD7: add     esp, 1Ch
 0x5CFCDA: retn
+0x9C1CD0: lea     ecx, [ebp-1Ch]; void *
+0x9C1CD3: jmp     BSStringT_Clear
+0x9C1CD8: lea     ecx, [ebp-14h]; void *
+0x9C1CDB: jmp     BSStringT_Clear
+0x9C1CE0: mov     edx, [esp+arg_4]
+0x9C1CE4: lea     eax, [edx-20h]
+0x9C1CE7: mov     ecx, [edx-24h]
+0x9C1CEA: xor     ecx, eax
+0x9C1CEC: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C1CF1: mov     eax, offset stru_AEACD8
+0x9C1CF6: jmp     ___CxxFrameHandler3

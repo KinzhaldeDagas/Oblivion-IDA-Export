@@ -38,7 +38,7 @@
 0x6A4122: call    edx
 0x6A4124: push    4; newDeadState
 0x6A4126: mov     ecx, esi; this
-0x6A4128: call    Actor_HandleDeathSTate????
+0x6A4128: call    Actor_HandleDeathState
 0x6A412D: mov     eax, [esi]
 0x6A412F: mov     edx, [eax+334h]
 0x6A4135: push    1
@@ -133,7 +133,7 @@
 0x6A4238: test    eax, eax
 0x6A423A: jz      short loc_6A4257
 0x6A423C: mov     ecx, esi; int
-0x6A423E: call    sub_4E3490
+0x6A423E: call    Actor_SetupAnimationData; CustomAnimSupport decode: actor animation setup creates ActorAnimData, loads default animation data, then for living NPC/CREA actors calls 0x476080 to load actor-base KFFZ entries from <model-dir>\SpecialAnims.
 0x6A4243: mov     eax, [esi]
 0x6A4245: mov     edx, [eax+154h]
 0x6A424B: mov     ecx, esi
@@ -163,7 +163,7 @@
 0x6A429A: push    edi; a2
 0x6A429B: mov     ecx, esi; this
 0x6A429D: mov     dword ptr [edi+18h], 19h
-0x6A42A4: call    Actor_AddPackage?
+0x6A42A4: call    Actor_AddPackage?; 3DTheft: xrefs ignore this function's return value; use current package/process state after call, not AL/EAX, as the package assignment result.
 0x6A42A9: mov     eax, [esi]
 0x6A42AB: mov     edx, [eax+154h]
 0x6A42B1: mov     ecx, esi
@@ -175,7 +175,7 @@
 0x6A42C1: push    1; a3
 0x6A42C3: push    1; a2
 0x6A42C5: push    esi; a1
-0x6A42C6: call    sub_88D070
+0x6A42C6: call    sub_88D070; ODismemberment: bhkBlendCollisionObject traversal entry. Requires bhkBlendCollisionObject or forced flag; queues callback off off_B2E314 with state payload including a2 and a3.
 0x6A42CB: mov     eax, [esi]
 0x6A42CD: mov     edx, [eax+58h]
 0x6A42D0: add     esp, 10h
@@ -185,7 +185,7 @@
 0x6A42DC: test    eax, eax
 0x6A42DE: jz      short loc_6A432A
 0x6A42E0: push    eax
-0x6A42E1: call    sub_47FAC0
+0x6A42E1: call    NiAVObject_GetBhkCollisionObject; ODismemberment: authoritative NiAVObject collision getter. Reads NiAVObject+0xA8 and accepts objects whose class chain includes bhkCollisionObject.
 0x6A42E6: add     esp, 4
 0x6A42E9: test    eax, eax
 0x6A42EB: jz      short loc_6A4353
@@ -224,7 +224,7 @@
 0x6A4349: retn
 0x6A434A: push    0
 0x6A434C: mov     ecx, ebx
-0x6A434E: call    ActiveEffect_Base_Remove
+0x6A434E: call    ActiveEffect_Base_Remove; Verified termination API: sets bTerminated=1. When its flush flag is true, immediately invokes ActiveEffect_Base_ProcessEffect to run termination cleanup.
 0x6A4353: mov     ecx, [esp+24h+var_C]
 0x6A4357: mov     large fs:0, ecx
 0x6A435E: pop     ecx
@@ -233,3 +233,15 @@
 0x6A4361: pop     ebx
 0x6A4362: add     esp, 14h
 0x6A4365: retn
+0x9C6100: mov     eax, [ebp-14h]
+0x9C6103: push    eax
+0x9C6104: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C6109: pop     ecx
+0x9C610A: retn
+0x9C610B: mov     edx, [esp+arg_4]
+0x9C610F: lea     eax, [edx-14h]
+0x9C6112: mov     ecx, [edx-18h]
+0x9C6115: xor     ecx, eax
+0x9C6117: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C611C: mov     eax, offset stru_AEE708
+0x9C6121: jmp     ___CxxFrameHandler3

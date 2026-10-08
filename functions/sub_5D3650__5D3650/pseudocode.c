@@ -1,4 +1,4 @@
-void __userpurge sub_5D3650(
+void __userpurge SaveMenu_AddSaveRow(
         _DWORD *a1@<ecx>,
         double st0_0@<st7>,
         double a3@<st6>,
@@ -18,7 +18,7 @@ void __userpurge sub_5D3650(
   int i; // edx
   char *v16; // eax
   char v17; // cl
-  char *v18; // eax
+  unsigned __int8 *v18; // eax
   int v19; // eax
   InterfaceManager *Singleton; // eax
   double v21; // st7
@@ -34,63 +34,63 @@ void __userpurge sub_5D3650(
   char v31[256]; // [esp+22Ch] [ebp-110h] BYREF
   int v32; // [esp+338h] [ebp-4h]
 
-  v27 = a1;
-  if ( a11 == 1 )
-    dword_B3B71C = 0;
-  v13 = (TileWindow *)a1[0x12];
-  v26.m_data = 0;
-  v26.m_dataLen = 0;
-  v26.m_bufLen = 0;
-  BSStringT_Set(&v26, "save_game_template", 0);
-  v32 = 0;
-  TileFromTemplate = (BSStringT *)Menu_CreateTileFromTemplate(v27, a7, a8, a9, v13, v26.m_data, 0);
+  v27 = a1; /*0x5d36a3*/
+  if ( a11 == 1 ) /*0x5d36a7*/
+    unk_B3B71C = 0; /*0x5d36a9*/
+  v13 = (TileWindow *)a1[0x12]; /*0x5d36af*/
+  v26.m_data = 0; /*0x5d36bc*/
+  v26.m_dataLen = 0; /*0x5d36c0*/
+  v26.m_bufLen = 0; /*0x5d36c5*/
+  BSStringT_Set(&v26, "save_game_template", 0); /*0x5d36ca*/
+  v32 = 0; /*0x5d36da*/
+  TileFromTemplate = Menu::RenderTemplate(v27, a9, v13, v26.m_data, 0); /*0x5d36e8*/
   if ( a12 )
   {
-    sub_464060(SaveLoad_CurrentSavegame, st0_0, a3, a4, a5, a6, a7, a8, a9, a12, (unsigned int)&v25, v31, v28, Str);
+    sub_464060(g_TESSaveLoadGame, st0_0, a3, a4, a5, a6, a7, a8, a9, a12, (unsigned int)&v25, v31, v28, Str); /*0x5d3711*/
     if ( strlen(v31) )
     {
-      _sprintf(Str2, "%s\n%s: %s", v31, (const char *)dword_B386F8, Str);
-      ++dword_B3B71C;
+      _sprintf(Str2, "%s\n%s: %s", v31, (const char *)stru_B386F8, Str);
+      ++unk_B3B71C; /*0x5d3780*/
     }
     else
     {
-      _sprintf(Str2, "%s %i - %s\n%s: %s", (const char *)dword_B386F0, v25, v28, (const char *)dword_B386F8, Str);
+      _sprintf(Str2, "%s %i - %s\n%s: %s", (const char *)stru_B386F0, v25, v28, (const char *)stru_B386F8, Str);
     }
   }
-  if ( TileFromTemplate )
+  if ( TileFromTemplate ) /*0x5d3789*/
   {
-    a2 = (float)a11;
-    Tile_SetFloat((Tile *)TileFromTemplate, (_DWORD *)0xFAE, a2);
-    for ( i = 0; i < 0x100; ++i )
+    a2 = (float)a11; /*0x5d3799*/
+    Tile_SetFloat((Tile *)TileFromTemplate, (_DWORD *)0xFAE, a2); /*0x5d37a1*/
+    for ( i = 0; i < 0x100; ++i ) /*0x5d37ac*/
     {
-      v16 = &v28[i];
-      v17 = v28[i + Str2 - v28];
-      v28[i] = v17;
-      if ( v17 == 0x20 )
-        *v16 = 0x5F;
-      if ( !*v16 )
-        break;
+      v16 = &v28[i]; /*0x5d37b0*/
+      v17 = v28[i + Str2 - v28]; /*0x5d37b4*/
+      v28[i] = v17; /*0x5d37ba*/
+      if ( v17 == 0x20 ) /*0x5d37bc*/
+        *v16 = 0x5F; /*0x5d37be*/
+      if ( !*v16 ) /*0x5d37c1*/
+        break; /*0x5d37c3*/
     }
-    v29 = 0;
-    BSStringT_Set(TileFromTemplate + 1, v28, 0);
-    Tile_SetString(TileFromTemplate, (_DWORD *)0xFB1, Str2);
-    v25 = a11 + 0x65;
-    a2a = (float)(a11 + 0x65);
-    Tile_SetFloat((Tile *)TileFromTemplate, (_DWORD *)0xFA8, a2a);
-    if ( Str2 && (v18 = (char *)v27[0x14]) != 0 )
-      v19 = _strcmp(v18, Str2);
+    v29 = 0; /*0x5d37d9*/
+    BSStringT_Set(TileFromTemplate + 1, v28, 0); /*0x5d37e0*/
+    Tile_SetString(TileFromTemplate, (_DWORD *)0xFB1, Str2); /*0x5d37ed*/
+    v25 = a11 + 0x65; /*0x5d37fc*/
+    a2a = (float)(a11 + 0x65); /*0x5d3807*/
+    Tile_SetFloat((Tile *)TileFromTemplate, (_DWORD *)0xFA8, a2a); /*0x5d380f*/
+    if ( Str2 && (v18 = (unsigned __int8 *)v27[0x14]) != 0 ) /*0x5d3821*/
+      v19 = CRT_StricmpLocaleDispatch(v18, (unsigned __int8 *)Str2); /*0x5d3825*/
     else
-      v19 = 2 * (Str2 == 0) - 1;
-    if ( !v19 )
+      v19 = 2 * (Str2 == 0) - 1; /*0x5d3836*/
+    if ( !v19 ) /*0x5d383c*/
     {
-      InterfaceManager_GetSingleton(0, 1);
-      Singleton = InterfaceManager_GetSingleton(0, 1);
-      v21 = (double)(int)++Singleton->unk08C;
-      if ( (int)Singleton->unk08C < 0 )
-        v21 = v21 + flt_A2FC78;
-      a2b = v21;
-      Tile_SetFloat((Tile *)TileFromTemplate, (_DWORD *)0xFF0, a2b);
+      InterfaceManager_GetSingleton(0, 1); /*0x5d3841*/
+      Singleton = InterfaceManager_GetSingleton(0, 1); /*0x5d3849*/
+      v21 = (double)(int)++Singleton->unk08C; /*0x5d3855*/
+      if ( (int)Singleton->unk08C < 0 ) /*0x5d3868*/
+        v21 = v21 + flt_A2FC78; /*0x5d386a*/
+      a2b = v21; /*0x5d3873*/
+      Tile_SetFloat((Tile *)TileFromTemplate, (_DWORD *)0xFF0, a2b); /*0x5d387d*/
     }
   }
-  FormHeapFree((unsigned int)v26.m_data);
+  FormHeapFree((unsigned int)v26.m_data); /*0x5d3887*/
 }

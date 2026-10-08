@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x5268D2",
-    "line": "mov     ebx, [esp+8+arg_4]",
+    "line": "mov     ebx, [esp+8+animData]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x5268F0",
-    "line": "mov     esi, [esp+14h+arg_0]",
+    "line": "mov     esi, [esp+14h+actorRef]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x52692E",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -217,13 +217,13 @@
   },
   {
     "ea": "0x526935",
-    "line": "mov     byte ptr [esp+14h+arg_0], 1",
+    "line": "mov     byte ptr [esp+14h+actorRef], 1",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x52693A",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x52695C",
-    "line": "mov     byte ptr [esp+14h+arg_0], 0",
+    "line": "mov     byte ptr [esp+14h+actorRef], 0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x5269AB",
-    "line": "mov     eax, [esp+14h+arg_0]",
+    "line": "mov     eax, [esp+14h+actorRef]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x5269C1",
-    "line": "mov     ebx, [esp+14h+arg_4]",
+    "line": "mov     ebx, [esp+14h+animData]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -565,49 +565,49 @@
   },
   {
     "ea": "0x5269DB",
-    "line": "call    sub_525A70",
+    "line": "call    TESNPC_ReconcileFaceGenNodesForActor; Reconcile TESNPC FaceGen nodes with actor skin/animation state. If both cached FaceGen node pointers are absent, this routine calls TESRace_CreateFaceGenNodes and attaches the new biped/skinned pair.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5269E0",
-    "line": "push    ebx",
+    "line": "push    ebx; animData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5269E1",
-    "line": "push    esi",
+    "line": "push    esi; actorRef",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5269E2",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5269E4",
-    "line": "call    sub_524280",
+    "line": "call    TESNPC_InitWorn; TESNPC::InitWorn (confirmed by native diagnostic strings). Enumerates equipped biped objects: index 9 configures WEAP slot at ActorAnimData+0xDC; index 12 configures AMMO/quiver slot at +0x10C; index 14 configures light/torch.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5269E9",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x5269EF",
-    "line": "push    1",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5269F1",
-    "line": "call    sub_6600D0",
+    "line": "call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.",
     "mnemonic": "call",
     "size": 5
   },

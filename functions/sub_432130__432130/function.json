@@ -1,19 +1,36 @@
 {
-  "callees_count": 5,
-  "callers_count": 11,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 5,
-  "display_name": "sub_432130",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 14,
+  "chunks": [
+    [
+      "0x432130",
+      "0x4321A4"
+    ],
+    [
+      "0x4321AA",
+      "0x432202"
+    ]
+  ],
+  "chunks_sha256": "a1c328fa2155cf12f8ad85ec18b9ee4df689559de23d6b729a8caa4d259d083f",
+  "comment_regular": "Verified generic IOTask cancellation state machine: previous states 0/1/2 atomically transition to 6 and invoke vtable +0x0C with status 0; state 5 transitions to 6 and invokes it with status 1; states 3/4 wait for the worker's state change. Verified local role: state 6 is the cancellation/terminal marker written by IOTask_Cancel. Its canonical enum label remains Unknown.",
+  "comment_repeatable": "Verified generic IOTask cancellation state machine: previous states 0/1/2 atomically transition to 6 and invoke vtable +0x0C with status 0; state 5 transitions to 6 and invokes it with status 1; states 3/4 wait for the worker's state change. Verified local role: state 6 is the cancellation/terminal marker written by IOTask_Cancel. Its canonical enum label remains Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 8,
+  "display_name": "IOTask_Cancel",
   "end_ea": "0x4321A4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_432130",
+  "name": "IOTask_Cancel",
   "segment": ".text",
   "sha256": "97bfafbeef6d95d7e63f648944692dc1506b5a9ccab8d2d1e6a0777df793bb65",
   "size": 116,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x432130",
-  "type": "void __stdcall(volatile LONG *)",
-  "xrefs_from_count": 59,
+  "total_chunk_size": 204,
+  "type": "void __stdcall(IOTask *task)",
+  "xrefs_from_count": 106,
   "xrefs_to_count": 14
 }

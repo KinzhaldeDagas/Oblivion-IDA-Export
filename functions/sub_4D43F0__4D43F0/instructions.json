@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4D43F0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified embedded CELL/REFR parser resolves NAME FormIDs to TESForm* keys, skips disabled refs, converts positions through the root terrain-LOD map, and appends position/rotation/scale arrays. The embedded path does not RTTI-cast the NAME result. Probable: the TESForm key is a TESBoundObject because local REFR save writes NAME from baseForm->refID, external .lod loading explicitly RTTI-casts to TESBoundObject, and cleanup dispatches through the bound-object vtable +0x11C. For triangle hits, the second terrain-pick vector is Probable surface-normal data; the 0.97 cap rationale remains Unknown. It returns 0 after accumulation so override/parent searches continue.",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x4D4419",
-    "line": "cmp     [esp+88h+arg_10], edi",
+    "line": "cmp     [esp+88h+outMap], edi",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x4D4426",
-    "line": "cmp     [esp+88h+arg_4], edi",
+    "line": "cmp     [esp+88h+worldspace], edi",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x4D4433",
-    "line": "mov     ebp, [esp+88h+arg_0]",
+    "line": "mov     ebp, [esp+88h+file]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x4D449C",
-    "line": "call    TESFile__NextGroup",
+    "line": "call    TESFile__NextGroup; MEF v20 fix: TESFile::NextGroup short-GRUP guard. Reject lengths below 0x14 before subtracting the group header and tail-calling TESFile_NextRecord.",
     "mnemonic": "call",
     "size": 5
   },
@@ -354,12 +354,6 @@
     "size": 2
   },
   {
-    "ea": "0x4D44D9",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x4D44E0",
     "line": "test    byte ptr [ebp+244h], 20h",
     "mnemonic": "test",
@@ -379,19 +373,19 @@
   },
   {
     "ea": "0x4D44F1",
-    "line": "push    eax",
+    "line": "push    eax; outRecord",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D44F2",
-    "line": "push    ebp",
+    "line": "push    ebp; file",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D44F3",
-    "line": "call    sub_4D8440",
+    "line": "call    TESWorldSpace_ParseDistantLODReferenceRecord; Verified REFR parser reads XLOD as a 12-byte distant-data normal vector, DATA as six floats (first three base position, last three rotationAnglesXYZ radians), and XSCL as scale. XLOD components are remapped/capped and added to the rounded DATA position. Output scalePercentWithFloorBias is floor(XSCL*100)+0.97; downstream floors/divides by100. Rotation components are applied in X, Y, Z order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -445,7 +439,7 @@
   },
   {
     "ea": "0x4D4514",
-    "line": "mov     ecx, [esp+8Ch+arg_10]",
+    "line": "mov     ecx, [esp+8Ch+outMap]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -493,7 +487,7 @@
   },
   {
     "ea": "0x4D452F",
-    "line": "jnz     short loc_4D4585",
+    "line": "jnz     short loc_4D4585; Verified: looks up or creates DistantLODCellObjectData keyed by the TESForm* resolved from the REFR NAME FormID. The embedded path does not RTTI-check TESBoundObject here.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -541,13 +535,13 @@
   },
   {
     "ea": "0x4D454A",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D454C",
-    "line": "call    sub_4CC7C0",
+    "line": "call    DistantLODCellObjectData_ctor; Verified DistantLODCellObjectData constructor/layout: three NiTArray<float> subobjects at +0x00/+0x10/+0x20 and recordCount +0x30. The arrays are rotationAnglesXYZ, positions, and scalePercent in that order. Base-object queued transforms apply angles X/Y/Z in radians.",
     "mnemonic": "call",
     "size": 5
   },
@@ -565,7 +559,7 @@
   },
   {
     "ea": "0x4D4555",
-    "line": "mov     ecx, [esp+88h+arg_10]; this",
+    "line": "mov     ecx, [esp+88h+outMap]; this",
     "mnemonic": "mov",
     "size": 7
   },
@@ -625,7 +619,7 @@
   },
   {
     "ea": "0x4D4580",
-    "line": "call    NiTMap_SetAt",
+    "line": "call    NiTMap_SetAt; Verified embedded parser inserts DistantLODCellObjectData under the TESForm* resolved by the REFR NAME chunk. Candidate is no longer merely Fallout-based: local REFR serialization and downstream vtable contract raise the bound-object invariant to Probable, but this path has no direct RTTI cast.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,7 +643,7 @@
   },
   {
     "ea": "0x4D4592",
-    "line": "fstp    [esp+88h+var_74]",
+    "line": "fstp    [esp+88h+hitMetadataOut]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -661,19 +655,19 @@
   },
   {
     "ea": "0x4D459C",
-    "line": "mov     dword ptr [esp+88h+var_5C], eax",
+    "line": "mov     [esp+88h+terrainHitPositionOut.x], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4D45A0",
-    "line": "mov     eax, [esp+88h+var_28]",
+    "line": "mov     eax, [esp+88h+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4D45A4",
-    "line": "mov     dword ptr [esp+88h+var_5C+4], ecx",
+    "line": "mov     [esp+88h+terrainHitPositionOut.y], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -685,7 +679,7 @@
   },
   {
     "ea": "0x4D45AC",
-    "line": "mov     [esp+88h+var_54], edx",
+    "line": "mov     [esp+88h+terrainHitPositionOut.z], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -697,79 +691,79 @@
   },
   {
     "ea": "0x4D45B4",
-    "line": "mov     [esp+88h+var_50], eax",
+    "line": "mov     [esp+88h+worldPosition.x], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4D45B8",
-    "line": "mov     [esp+88h+var_4C], ecx",
+    "line": "mov     [esp+88h+worldPosition.y], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4D45BC",
-    "line": "lea     eax, [esp+88h+var_5C]",
+    "line": "lea     eax, [esp+88h+terrainHitPositionOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4D45C0",
-    "line": "push    eax",
+    "line": "push    eax; pickVectorOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D45C1",
-    "line": "lea     ecx, [esp+8Ch+var_74]",
+    "line": "lea     ecx, [esp+8Ch+hitMetadataOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4D45C5",
-    "line": "mov     [esp+8Ch+var_48], edx",
+    "line": "mov     [esp+8Ch+worldPosition.z], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4D45C9",
-    "line": "push    ecx",
+    "line": "push    ecx; hitPointZOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D45CA",
-    "line": "mov     ecx, [esp+90h+arg_4]",
+    "line": "mov     ecx, [esp+90h+worldspace]; worldspace",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x4D45D1",
-    "line": "lea     edx, [esp+90h+var_50]",
+    "line": "lea     edx, [esp+90h+worldPosition]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4D45D5",
-    "line": "push    edx",
+    "line": "push    edx; worldPosition",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D45D6",
-    "line": "call    sub_4EF7E0",
+    "line": "call    TESWorldSpace_GetRootTerrainLODQuadMap; Verified: climbs parentWorldspace to the root TESWorldSpace and returns its embedded terrainLODQuadRoots map at +0x38.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4D45DB",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D45DD",
-    "line": "call    sub_4EB370",
+    "line": "call    TESWorldSpaceTerrainLODQuadMap_ProjectPointToLoadedTerrain; Verified embedded-record conversion consumes hit Z and the auxiliary NiPick vector. Probable: for triangle hits this is a normalized terrain surface normal. It maps each component by 0.5*x+0.5, caps at 0.97, and adds to rounded reference position; the likely purpose is to keep offsets below the next unit boundary, but the exact design reason remains Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -787,19 +781,19 @@
   },
   {
     "ea": "0x4D45EA",
-    "line": "fld     [esp+88h+var_74]",
+    "line": "fld     [esp+88h+hitMetadataOut]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x4D45EE",
-    "line": "fstp    [esp+88h+var_48]",
+    "line": "fstp    [esp+88h+worldPosition.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4D45F2",
-    "line": "fld     [esp+88h+var_48]",
+    "line": "fld     [esp+88h+worldPosition.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -823,7 +817,7 @@
   },
   {
     "ea": "0x4D4602",
-    "line": "fld     [esp+88h+var_4C]",
+    "line": "fld     [esp+88h+worldPosition.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -847,7 +841,7 @@
   },
   {
     "ea": "0x4D4612",
-    "line": "fld     [esp+88h+var_50]",
+    "line": "fld     [esp+88h+worldPosition.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -883,7 +877,7 @@
   },
   {
     "ea": "0x4D462A",
-    "line": "mov     [esp+88h+var_50], edx",
+    "line": "mov     [esp+88h+worldPosition.x], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -907,7 +901,7 @@
   },
   {
     "ea": "0x4D463A",
-    "line": "mov     [esp+88h+var_4C], eax",
+    "line": "mov     [esp+88h+worldPosition.y], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -925,13 +919,13 @@
   },
   {
     "ea": "0x4D4646",
-    "line": "fld     dword ptr [esp+88h+var_5C]",
+    "line": "fld     [esp+88h+terrainHitPositionOut.x]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x4D464A",
-    "line": "mov     [esp+88h+var_48], ecx",
+    "line": "mov     [esp+88h+worldPosition.z], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -961,13 +955,13 @@
   },
   {
     "ea": "0x4D465A",
-    "line": "fstp    dword ptr [esp+88h+var_5C]",
+    "line": "fstp    [esp+88h+terrainHitPositionOut.x]; Verified X component transform: 0.5 * pickVector.x + 0.5, capped at 0.97 when it reaches/exceeds that value. Probable source role is terrain surface-normal X; the cap's design rationale is Unknown.",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4D465E",
-    "line": "fld     dword ptr [esp+88h+var_5C]",
+    "line": "fld     [esp+88h+terrainHitPositionOut.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1015,13 +1009,13 @@
   },
   {
     "ea": "0x4D4679",
-    "line": "fst     dword ptr [esp+88h+var_5C]",
+    "line": "fst     [esp+88h+terrainHitPositionOut.x]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x4D467D",
-    "line": "fld     dword ptr [esp+88h+var_5C+4]",
+    "line": "fld     [esp+88h+terrainHitPositionOut.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1039,13 +1033,13 @@
   },
   {
     "ea": "0x4D4685",
-    "line": "fstp    dword ptr [esp+88h+var_5C+4]",
+    "line": "fstp    [esp+88h+terrainHitPositionOut.y]; Verified Y component transform: 0.5 * pickVector.y + 0.5, capped at 0.97 when it reaches/exceeds that value. Probable source role is terrain surface-normal Y; the cap's design rationale is Unknown.",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4D4689",
-    "line": "fld     dword ptr [esp+88h+var_5C+4]",
+    "line": "fld     [esp+88h+terrainHitPositionOut.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1075,13 +1069,13 @@
   },
   {
     "ea": "0x4D4696",
-    "line": "fst     dword ptr [esp+88h+var_5C+4]",
+    "line": "fst     [esp+88h+terrainHitPositionOut.y]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x4D469A",
-    "line": "fld     [esp+88h+var_54]",
+    "line": "fld     [esp+88h+terrainHitPositionOut.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1099,19 +1093,19 @@
   },
   {
     "ea": "0x4D46A2",
-    "line": "fxch    st(2)",
+    "line": "fxch    st(2); Verified Z component transform: 0.5 * pickVector.z + 0.5, capped at 0.97 when it reaches/exceeds that value. Probable source role is terrain surface-normal Z; the cap's design rationale is Unknown.",
     "mnemonic": "fxch",
     "size": 2
   },
   {
     "ea": "0x4D46A4",
-    "line": "fstp    [esp+88h+var_54]",
+    "line": "fstp    [esp+88h+terrainHitPositionOut.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4D46A8",
-    "line": "fld     [esp+88h+var_54]",
+    "line": "fld     [esp+88h+terrainHitPositionOut.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1141,7 +1135,7 @@
   },
   {
     "ea": "0x4D46B5",
-    "line": "fstp    [esp+88h+var_54]",
+    "line": "fstp    [esp+88h+terrainHitPositionOut.z]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1165,13 +1159,13 @@
   },
   {
     "ea": "0x4D46C1",
-    "line": "fadd    dword ptr [esp+88h+var_5C]",
+    "line": "fadd    [esp+88h+terrainHitPositionOut.x]",
     "mnemonic": "fadd",
     "size": 4
   },
   {
     "ea": "0x4D46C5",
-    "line": "fstp    [esp+88h+var_38]",
+    "line": "fstp    [esp+88h+var_38]; Verified terrain-pick normal components are remapped and added to rounded reference position. Probable rationale: the 0.97 cap keeps the fractional offset below the next 1-unit boundary; the code does not state that rationale explicitly.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1189,13 +1183,13 @@
   },
   {
     "ea": "0x4D46D1",
-    "line": "mov     [esp+88h+var_28], edx",
+    "line": "mov     [esp+88h+value], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4D46D5",
-    "line": "fadd    dword ptr [esp+88h+var_5C+4]",
+    "line": "fadd    [esp+88h+terrainHitPositionOut.y]",
     "mnemonic": "fadd",
     "size": 4
   },
@@ -1225,7 +1219,7 @@
   },
   {
     "ea": "0x4D46E9",
-    "line": "fadd    [esp+88h+var_54]",
+    "line": "fadd    [esp+88h+terrainHitPositionOut.z]",
     "mnemonic": "fadd",
     "size": 4
   },
@@ -1249,7 +1243,7 @@
   },
   {
     "ea": "0x4D46F9",
-    "line": "lea     edx, [esp+88h+var_28]",
+    "line": "lea     edx, [esp+88h+value]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1261,19 +1255,19 @@
   },
   {
     "ea": "0x4D4700",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D4701",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D4703",
-    "line": "call    sub_4D31D0",
+    "line": "call    NiTArray_float_Append; Verified append order: transformed world-space position triples go into DistantLODCellObjectData.positions (+0x10).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1285,19 +1279,19 @@
   },
   {
     "ea": "0x4D470C",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D470D",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D470F",
-    "line": "call    sub_4D31D0",
+    "line": "call    NiTArray_float_Append; Verified NiTArray<float> append helper used for the three DistantLODCellObjectData arrays: grows on capacity exhaustion, appends one float and returns the previous element count/index.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1309,19 +1303,19 @@
   },
   {
     "ea": "0x4D4718",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D4719",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D471B",
-    "line": "call    sub_4D31D0",
+    "line": "call    NiTArray_float_Append; Verified NiTArray<float> append helper used for the three DistantLODCellObjectData arrays: grows on capacity exhaustion, appends one float and returns the previous element count/index.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1333,19 +1327,19 @@
   },
   {
     "ea": "0x4D4724",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D4725",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D4727",
-    "line": "call    sub_4D31D0",
+    "line": "call    NiTArray_float_Append; Verified append order: DistantLODReferenceRecord.rotationAngles triples go into DistantLODCellObjectData.rotationAngles (+0x00).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1357,19 +1351,19 @@
   },
   {
     "ea": "0x4D4730",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D4731",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D4733",
-    "line": "call    sub_4D31D0",
+    "line": "call    NiTArray_float_Append; Verified NiTArray<float> append helper used for the three DistantLODCellObjectData arrays: grows on capacity exhaustion, appends one float and returns the previous element count/index.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1381,19 +1375,19 @@
   },
   {
     "ea": "0x4D473C",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D473D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D473F",
-    "line": "call    sub_4D31D0",
+    "line": "call    NiTArray_float_Append; Verified NiTArray<float> append helper used for the three DistantLODCellObjectData arrays: grows on capacity exhaustion, appends one float and returns the previous element count/index.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1405,19 +1399,19 @@
   },
   {
     "ea": "0x4D4748",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D4749",
-    "line": "lea     ecx, [esi+20h]",
+    "line": "lea     ecx, [esi+20h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x4D474C",
-    "line": "call    sub_4D31D0",
+    "line": "call    NiTArray_float_Append; Verified append order: DistantLODReferenceRecord.scalePercentWithFloorBias is appended to DistantLODCellObjectData.scalePercent (+0x20).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1534,5 +1528,77 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9B5750",
+    "line": "mov     eax, [ebp-60h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5753",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5754",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5759",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B575A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B575B",
+    "line": "mov     edx, [esp+worldspace]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B575F",
+    "line": "lea     eax, [edx-78h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5762",
+    "line": "mov     ecx, [edx-7Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5765",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B5767",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B576C",
+    "line": "mov     eax, offset stru_AE07E0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5771",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -14,7 +14,7 @@
 0x634A51: mov     large fs:0, eax
 0x634A57: mov     edi, ecx
 0x634A59: mov     [esp+28h+var_10], edi
-0x634A5D: mov     dword ptr [edi], offset ??_7HighProcess@@6B@; const HighProcess::`vftable'
+0x634A5D: mov     dword ptr [edi], offset ??_7HighProcess@@6B@; Verified persistence family:3F0 size,3F4 save,3F8 load,404 revert; base/low/middle-low bodies decoded and MobileObject dispatch confirmed. Probable:3FC InitLoadGame and400 FinishInitLoadGame; derived middle-high/high overrides remain only family-mapped, not fully decoded.
 0x634A63: mov     eax, ds:0B333C4h
 0x634A68: mov     eax, [eax+58h]
 0x634A6B: cmp     eax, edi
@@ -77,7 +77,7 @@
 0x634B13: mov     ecx, esi
 0x634B15: call    sub_493B70
 0x634B1A: push    esi
-0x634B1B: call    FormHeapFree
+0x634B1B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x634B20: add     esp, 4
 0x634B23: mov     esi, [edi+18Ch]
 0x634B29: cmp     esi, ebx
@@ -89,7 +89,7 @@
 0x634B42: cmp     eax, ebx
 0x634B44: jz      short loc_634B56
 0x634B46: push    eax
-0x634B47: call    FormHeapFree
+0x634B47: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x634B4C: mov     esi, [esi+4]
 0x634B4F: add     esp, 4
 0x634B52: cmp     esi, ebx
@@ -100,7 +100,7 @@
 0x634B61: mov     eax, [esi+4]
 0x634B64: mov     ebp, [eax+4]
 0x634B67: push    eax
-0x634B68: call    FormHeapFree
+0x634B68: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x634B6D: add     esp, 4
 0x634B70: cmp     ebp, ebx
 0x634B72: mov     [esi+4], ebp
@@ -108,20 +108,20 @@
 0x634B77: mov     [esi], ebx
 0x634B79: mov     eax, [edi+18Ch]
 0x634B7F: push    eax
-0x634B80: call    FormHeapFree
+0x634B80: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x634B85: lea     ecx, [edi+190h]
 0x634B8B: add     esp, 4
 0x634B8E: cmp     [ecx+4], ebx
 0x634B91: jnz     short loc_634B97
 0x634B93: cmp     [ecx], ebx
 0x634B95: jz      short loc_634B9C
-0x634B97: call    BSSimpleList_Clear
+0x634B97: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x634B9C: lea     esi, [edi+220h]
 0x634BA2: mov     ebx, 2
-0x634BA7: mov     ecx, [esi]
+0x634BA7: mov     ecx, [esi]; this
 0x634BA9: test    ecx, ecx
 0x634BAB: jz      short loc_634BE0
-0x634BAD: call    sub_6B7260
+0x634BAD: call    SoundHandle__IsPlaying; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.
 0x634BB2: test    al, al
 0x634BB4: jz      short loc_634BBD
 0x634BB6: mov     ecx, [esi]
@@ -134,7 +134,7 @@
 0x634BCA: mov     ecx, ebp; this
 0x634BCC: call    sub_6B73E0
 0x634BD1: push    ebp
-0x634BD2: call    FormHeapFree
+0x634BD2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x634BD7: add     esp, 4
 0x634BDA: mov     dword ptr [esi], 0
 0x634BE0: add     esi, 4
@@ -147,10 +147,10 @@
 0x634BF6: mov     esi, [edi+250h]
 0x634BFC: test    esi, esi
 0x634BFE: jz      short loc_634C10
-0x634C00: mov     ecx, esi
-0x634C02: call    sub_6B81D0
+0x634C00: mov     ecx, esi; this
+0x634C02: call    DialogueItem__Destroy
 0x634C07: push    esi
-0x634C08: call    FormHeapFree
+0x634C08: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x634C0D: add     esp, 4
 0x634C10: mov     esi, [edi+2A4h]
 0x634C16: test    esi, esi
@@ -160,7 +160,7 @@
 0x634C20: mov     eax, [esi+4]
 0x634C23: mov     ebp, [eax+4]
 0x634C26: push    eax
-0x634C27: call    FormHeapFree
+0x634C27: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x634C2C: add     esp, 4
 0x634C2F: test    ebp, ebp
 0x634C31: mov     [esi+4], ebp
@@ -168,7 +168,7 @@
 0x634C36: mov     dword ptr [esi], 0
 0x634C3C: mov     eax, [edi+2A4h]
 0x634C42: push    eax
-0x634C43: call    FormHeapFree
+0x634C43: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x634C48: add     esp, 4
 0x634C4B: mov     dword ptr [edi+2A4h], 0
 0x634C55: mov     esi, [edi+268h]
@@ -199,3 +199,15 @@
 0x634C9E: pop     ebx
 0x634C9F: add     esp, 14h
 0x634CA2: retn
+0x9C36A0: mov     ecx, [ebp-10h]; this
+0x9C36A3: jmp     ??1MiddleHighProcess@@UAE@XZ; MiddleHighProcess::~MiddleHighProcess(void)
+0x9C36A8: mov     ecx, [ebp-10h]
+0x9C36AB: add     ecx, 268h; slot
+0x9C36B1: jmp     NiPointerSlot_Release
+0x9C36B6: mov     edx, [esp+arg_4]
+0x9C36BA: lea     eax, [edx-18h]
+0x9C36BD: mov     ecx, [edx-1Ch]
+0x9C36C0: xor     ecx, eax
+0x9C36C2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C36C7: mov     eax, offset stru_AEC280
+0x9C36CC: jmp     ___CxxFrameHandler3

@@ -1,18 +1,31 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x41617B",
+      "0x4161AC"
+    ]
+  ],
+  "chunks_sha256": "9f23e9c12f9abb8665ce70af8046a29d0552fdc8bdb4884711f0335ee76986a4",
+  "comment_regular": "Verified (Oblivion): EffectSetting load reads a 0x40-byte data block into EffectSetting+0x58, which includes the effectShader FormID at +0x78. EffectSetting_LinkForm later resolves that slot to a TESEffectShader*.",
+  "comment_repeatable": "Verified (Oblivion): EffectSetting load reads a 0x40-byte data block into EffectSetting+0x58, which includes the effectShader FormID at +0x78. EffectSetting_LinkForm later resolves that slot to a TESEffectShader*.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "EffectSetting_LoadForm:::LoadEffectSetting",
   "end_ea": "0x4161AC",
+  "evidence_confidence": "Unknown",
   "flags": 5120,
   "has_pseudocode": true,
   "name": "EffectSetting_LoadForm:::LoadEffectSetting",
   "segment": ".text",
   "sha256": "9f23e9c12f9abb8665ce70af8046a29d0552fdc8bdb4884711f0335ee76986a4",
   "size": 49,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x41617B",
+  "total_chunk_size": 49,
   "type": "int __usercall@<eax>(int@<ebx>, int@<ebp>, int)",
   "xrefs_from_count": 20,
   "xrefs_to_count": 1

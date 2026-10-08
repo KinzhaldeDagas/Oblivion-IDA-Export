@@ -1,111 +1,104 @@
-void __usercall sub_5DC950(_DWORD *this@<ecx>, double st5_0@<st2>, double a3@<st1>, double a4@<st0>)
+void __usercall sub_5DC950(Menu *this@<ecx>, double st5_0@<st2>, double a3@<st1>, double a4@<st0>)
 {
-  _DWORD *v5; // ebx
-  void *v6; // eax
-  char *v7; // esi
-  int *v8; // eax
-  int v9; // esi
-  char v10; // al
+  Menu *v4; // ebx
+  void *v5; // eax
+  char *v6; // esi
+  int *v7; // eax
+  int v8; // esi
+  char v9; // al
   UINT32 IsFemale; // eax
-  const unsigned __int8 *v12; // eax
-  unsigned int *TileFromTemplate; // eax
-  BSStringT *v14; // edi
-  char *v15; // ebx
+  const unsigned __int8 *v11; // eax
+  Tile *v12; // eax
+  BSStringT *v13; // edi
+  char *v14; // ebx
   int i; // edx
-  char *v17; // eax
-  char v18; // cl
-  UINT32 v19; // eax
-  char *v20; // eax
-  UINT32 v21; // eax
+  char *v16; // eax
+  char v17; // cl
+  UINT32 v18; // eax
+  char *v19; // eax
+  UINT32 v20; // eax
+  char *v21; // eax
   char *v22; // eax
-  char *v23; // eax
   float a2; // [esp+0h] [ebp-124h]
-  int v25; // [esp+14h] [ebp-110h]
-  int *v26; // [esp+18h] [ebp-10Ch]
-  char v28[255]; // [esp+20h] [ebp-104h] BYREF
-  char v29; // [esp+11Fh] [ebp-5h]
+  int v24; // [esp+14h] [ebp-110h]
+  int *v25; // [esp+18h] [ebp-10Ch]
+  char v27[255]; // [esp+20h] [ebp-104h] BYREF
+  char v28; // [esp+11Fh] [ebp-5h]
 
-  v5 = this;
-  v25 = 0;
-  v6 = (void *)((int (__usercall *)@<eax>(PlayerCharacter *@<ecx>, double@<st0>, double@<st1>, double@<st2>))TESDataHandler_g_PlayerRef->vtbl->super.super.super.GetBaseForm)(
-                 TESDataHandler_g_PlayerRef,
+  v4 = this; /*0x5dc968*/
+  v24 = 0; /*0x5dc988*/
+  v5 = (void *)((int (__usercall *)@<eax>(PlayerCharacter *@<ecx>, double@<st0>, double@<st1>, double@<st2>))reference->vtbl->super.super.super.GetBaseForm)( /*0x5dc990*/
+                 reference,
                  a4,
                  a3,
                  st5_0);
-  v7 = (char *)OblivionDynamicCast(
-                 v6,
+  v6 = (char *)OblivionDynamicCast( /*0x5dc998*/
+                 v5,
                  0,
                  (struct _s_RTTICompleteObjectLocator *)&TESBoundObject `RTTI Type Descriptor',
                  &TESNPC `RTTI Type Descriptor',
                  0);
-  if ( v7 )
+  if ( v6 ) /*0x5dc99f*/
   {
-    sub_5893F0((_DWORD *)v5[0x11]);
-    v8 = (int *)(v7 + 0x3C);
-    if ( v7 != (char *)0xFFFFFFC4 )
+    sub_5893F0(*(_DWORD **)&v4[1].members.ownsTemplates); /*0x5dc9a8*/
+    v7 = (int *)(v6 + 0x3C); /*0x5dc9ad*/
+    if ( v6 != (char *)0xFFFFFFC4 ) /*0x5dc9b2*/
     {
-      while ( 1 )
+      while ( 1 ) /*0x5dc9c4*/
       {
-        v9 = *v8;
-        if ( !*v8 )
-          break;
-        v26 = (int *)v8[1];
-        v10 = *(_BYTE *)(*(_DWORD *)v9 + 0x34);
-        if ( (v10 & 8) == 0 && (v10 & 1) == 0 )
+        v8 = *v7; /*0x5dc9c4*/
+        if ( !*v7 ) /*0x5dc9c4*/
+          break; /*0x5dc9c4*/
+        v25 = (int *)v7[1]; /*0x5dc9d3*/
+        v9 = *(_BYTE *)(*(_DWORD *)v8 + 0x34); /*0x5dc9d7*/
+        if ( (v9 & 8) == 0 && (v9 & 1) == 0 ) /*0x5dc9eb*/
         {
-          IsFemale = Actor_IsFemale((Actor *)TESDataHandler_g_PlayerRef);
-          v12 = (const unsigned __int8 *)sub_51F350(*(int **)v9, *(char *)(v9 + 4), IsFemale);
-          if ( _mbscmp(v12, "DUMMY") )
+          IsFemale = Actor_IsFemale((Actor *)reference); /*0x5dc9f7*/
+          v11 = (const unsigned __int8 *)sub_51F350(*(int **)v8, *(char *)(v8 + 4), IsFemale); /*0x5dca04*/
+          if ( _mbscmp(v11, "DUMMY") ) /*0x5dca0f*/
           {
-            TileFromTemplate = Menu_CreateTileFromTemplate(
-                                 v5,
-                                 st5_0,
-                                 a3,
-                                 a4,
-                                 (TileWindow *)v5[0x11],
-                                 "stat_faction_template",
-                                 0);
-            v14 = (BSStringT *)TileFromTemplate;
-            if ( TileFromTemplate )
+            v12 = Menu::RenderTemplate(v4, *(Tile **)&v4[1].members.ownsTemplates, "stat_faction_template", 0); /*0x5dca2c*/
+            v13 = (BSStringT *)v12; /*0x5dca31*/
+            if ( v12 ) /*0x5dca35*/
             {
-              a2 = (float)v25;
-              Tile_SetFloat((Tile *)TileFromTemplate, (_DWORD *)0xFAA, a2);
-              ++v25;
-              v15 = *(char **)(*(_DWORD *)v9 + 0x1C);
-              if ( !v15 )
-                v15 = EmptyString;
-              for ( i = 0; i < 0x100; ++i )
+              a2 = (float)v24; /*0x5dca42*/
+              Tile_SetFloat(v12, 0xFAAu, a2); /*0x5dca4a*/
+              ++v24; /*0x5dca51*/
+              v14 = *(char **)(*(_DWORD *)v8 + 0x1C); /*0x5dca5e*/
+              if ( !v14 ) /*0x5dca60*/
+                v14 = EmptyString; /*0x5dca62*/
+              for ( i = 0; i < 0x100; ++i ) /*0x5dca6d*/
               {
-                v17 = &v28[i];
-                v18 = v28[i + v15 - v28];
-                v28[i] = v18;
-                if ( v18 == 0x20 )
-                  *v17 = 0x5F;
-                if ( !*v17 )
-                  break;
+                v16 = &v27[i]; /*0x5dca71*/
+                v17 = v27[i + v14 - v27]; /*0x5dca75*/
+                v27[i] = v17; /*0x5dca7b*/
+                if ( v17 == 0x20 ) /*0x5dca7d*/
+                  *v16 = 0x5F; /*0x5dca7f*/
+                if ( !*v16 ) /*0x5dca82*/
+                  break; /*0x5dca85*/
               }
-              v29 = 0;
-              BSStringT_Set(v14 + 1, v28, 0);
-              Tile_SetString(v14, (_DWORD *)0xFAF, v15);
-              v19 = Actor_IsFemale((Actor *)TESDataHandler_g_PlayerRef);
-              v20 = (char *)sub_51F350(*(int **)v9, *(char *)(v9 + 4), v19);
-              Tile_SetString(v14, (_DWORD *)0xFB0, v20);
-              v21 = Actor_IsFemale((Actor *)TESDataHandler_g_PlayerRef);
-              v22 = (char *)sub_51F350(*(int **)v9, *(char *)(v9 + 4) + 1, v21);
-              Tile_SetString(v14, (_DWORD *)0xFB1, v22);
-              v23 = sub_51F370(*(int **)v9, *(char *)(v9 + 4));
-              Tile_SetString(v14, (_DWORD *)0xFB2, v23);
-              a4 = fConstant_2;
-              Tile_SetFloat((Tile *)v14, (_DWORD *)0xFB3, fConstant_2);
-              v5 = this;
+              v28 = 0; /*0x5dca9c*/
+              BSStringT_Set(v13 + 1, v27, 0); /*0x5dcaa4*/
+              Tile_SetString(v13, (_DWORD *)0xFAF, v14); /*0x5dcab1*/
+              v18 = Actor_IsFemale((Actor *)reference); /*0x5dcabc*/
+              v19 = (char *)sub_51F350(*(int **)v8, *(char *)(v8 + 4), v18); /*0x5dcac9*/
+              Tile_SetString(v13, (_DWORD *)0xFB0, v19); /*0x5dcad6*/
+              v20 = Actor_IsFemale((Actor *)reference); /*0x5dcae1*/
+              v21 = (char *)sub_51F350(*(int **)v8, *(char *)(v8 + 4) + 1, v20); /*0x5dcaf1*/
+              Tile_SetString(v13, (_DWORD *)0xFB1, v21); /*0x5dcafe*/
+              v22 = sub_51F370(*(int **)v8, *(char *)(v8 + 4)); /*0x5dcb0a*/
+              Tile_SetString(v13, (_DWORD *)0xFB2, v22); /*0x5dcb17*/
+              a4 = fConstant_2; /*0x5dcb1c*/
+              Tile_SetFloat((Tile *)v13, 0xFB3u, fConstant_2); /*0x5dcb2d*/
+              v4 = this; /*0x5dcb32*/
             }
           }
         }
-        if ( !v26 )
-          break;
-        v8 = v26;
+        if ( !v25 ) /*0x5dcb3b*/
+          break; /*0x5dcb3b*/
+        v7 = v25; /*0x5dc9c0*/
       }
     }
-    sub_58FBA0(v5[0x11], st5_0, a3, a4, 0);
+    sub_58FBA0(*(_DWORD *)&v4[1].members.ownsTemplates, st5_0, a3, a4, 0); /*0x5dcb48*/
   }
 }

@@ -101,3 +101,33 @@
 0x553138: pop     ebp
 0x553139: add     esp, 10h
 0x55313C: retn
+0x552FF0: push    offset sub_552E50; void (__thiscall *)(void *)
+0x552FF5: push    4; int
+0x552FF7: push    10h; unsigned int
+0x552FF9: push    ecx; void *
+0x552FFA: call    $LN21
+0x552FFF: retn
+0x9BBEB0: mov     ecx, [ebp-10h]
+0x9BBEB3: jmp     sub_552F40
+0x9BBEB8: mov     ecx, [ebp-10h]
+0x9BBEBB: add     ecx, 88h ; 'ˆ'
+0x9BBEC1: jmp     loc_552FF0
+0x9BBEC6: mov     ecx, [ebp-10h]
+0x9BBEC9: add     ecx, 0C8h ; 'È'
+0x9BBECF: jmp     sub_551FE0
+0x9BBED4: mov     ecx, [ebp-10h]
+0x9BBED7: add     ecx, 0DB0h; slot
+0x9BBEDD: jmp     NiPointerSlot_Release
+0x9BBEE2: mov     ecx, [ebp-10h]
+0x9BBEE5: add     ecx, 0DB4h; slot
+0x9BBEEB: jmp     NiPointerSlot_Release
+0x9BBEF0: mov     ecx, [ebp-10h]
+0x9BBEF3: add     ecx, 0DB8h; slot
+0x9BBEF9: jmp     NiPointerSlot_Release
+0x9BBEFE: mov     edx, [esp+arg_4]
+0x9BBF02: lea     eax, [edx-10h]
+0x9BBF05: mov     ecx, [edx-14h]
+0x9BBF08: xor     ecx, eax
+0x9BBF0A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BBF0F: mov     eax, offset stru_AE5B54
+0x9BBF14: jmp     ___CxxFrameHandler3

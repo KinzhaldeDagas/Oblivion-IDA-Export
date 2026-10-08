@@ -1,4 +1,4 @@
-void __userpurge sub_526230(_DWORD *this@<ecx>, int a2@<edi>, int a3)
+void __thiscall sub_526230(TESForm *this, int a2)
 {
   unsigned int v4; // eax
   unsigned int *v5; // edx
@@ -8,95 +8,86 @@ void __userpurge sub_526230(_DWORD *this@<ecx>, int a2@<edi>, int a3)
   unsigned int v9; // ebp
   bool v10; // zf
   unsigned int v11; // edi
-  _DWORD *v12; // esi
-  int v13; // eax
+  TESForm *v12; // esi
+  UInt32 refID; // eax
   int v14; // eax
   int v15; // eax
   int v16; // eax
-  size_t v17; // [esp-10h] [ebp-40h]
-  size_t v18; // [esp-4h] [ebp-34h]
-  size_t v19; // [esp-4h] [ebp-34h]
-  size_t v20; // [esp-4h] [ebp-34h]
   _BYTE a1[25]; // [esp+7h] [ebp-29h] BYREF
-  int v22; // [esp+20h] [ebp-10h] BYREF
-  float v23; // [esp+24h] [ebp-Ch] BYREF
-  unsigned int v24; // [esp+28h] [ebp-8h]
+  unsigned int v18; // [esp+20h] [ebp-10h] BYREF
+  float source; // [esp+24h] [ebp-Ch] BYREF
+  unsigned int v20; // [esp+28h] [ebp-8h]
 
-  v4 = 0;
-  *(_DWORD *)&a1[0xD] = 0;
-  v5 = this + 0x42;
-  HIDWORD(v17) = a2;
-  do
+  v4 = 0; /*0x526237*/
+  *(_DWORD *)&a1[0xD] = 0; /*0x52623a*/
+  v5 = (unsigned int *)(this + 0xB); /*0x52623e*/
+  do /*0x5262ec*/
   {
-    v6 = 0;
-    *(_DWORD *)&a1[5] = 0;
-    *(_DWORD *)&a1[9] = v5;
-    do
+    v6 = 0; /*0x526245*/
+    *(_DWORD *)&a1[5] = 0; /*0x526247*/
+    *(_DWORD *)&a1[9] = v5; /*0x52624b*/
+    do /*0x5262dc*/
     {
-      v7 = *v5;
-      v8 = v5[1];
-      v9 = 0;
-      v10 = *v5 == 0;
-      v24 = *v5;
-      *(_DWORD *)&a1[1] = v8;
-      if ( !v10 )
+      v7 = *v5; /*0x526250*/
+      v8 = v5[1]; /*0x526252*/
+      v9 = 0; /*0x526255*/
+      v10 = *v5 == 0; /*0x526257*/
+      v20 = *v5; /*0x526259*/
+      *(_DWORD *)&a1[1] = v8; /*0x52625d*/
+      if ( !v10 ) /*0x526261*/
       {
-        do
+        do /*0x5262c9*/
         {
-          v11 = 0;
-          if ( *(_DWORD *)&a1[1] )
+          v11 = 0; /*0x526263*/
+          if ( *(_DWORD *)&a1[1] ) /*0x526269*/
           {
-            v12 = this + 6 * v4 + 6 * v6 + 0x42;
-            do
+            v12 = this + v4 + v6 + 0xB; /*0x526272*/
+            do /*0x5262b2*/
             {
-              v13 = v12[3];
-              if ( !v13 || !((v12[4] - v13) >> 2) )
-                _invalid_parameter_noinfo();
-              LODWORD(v17) = 4;
-              v23 = *(float *)(v12[3] + 4 * (v11 + v9 * v12[1]));
-              TESForm_SaveDataToCurrentSaveGame((TESForm *)&v23, v17);
-              ++v11;
+              refID = v12->member.refID; /*0x526275*/
+              if ( !refID || !((int)((int)v12->member.modlist.data - refID) >> 2) ) /*0x526281*/
+                _invalid_parameter_noinfo(); /*0x526286*/
+              source = *(float *)(v12->member.refID + 4 * (v11 + v9 * *(_DWORD *)&v12->member.type)); /*0x5262a2*/
+              TESForm_SaveDataToCurrentSaveGame(this, &source, 4u); /*0x5262a6*/
+              ++v11; /*0x5262ab*/
             }
-            while ( v11 < *(_DWORD *)&a1[1] );
-            v6 = *(_DWORD *)&a1[5];
-            v7 = v24;
-            v4 = *(_DWORD *)&a1[0xD];
-            v5 = *(unsigned int **)&a1[9];
+            while ( v11 < *(_DWORD *)&a1[1] ); /*0x5262b2*/
+            v6 = *(_DWORD *)&a1[5]; /*0x5262b4*/
+            v7 = v20; /*0x5262b8*/
+            v5 = *(unsigned int **)&a1[9]; /*0x5262bc*/
+            v4 = *(_DWORD *)&a1[0xD]; /*0x5262c0*/
           }
-          ++v9;
+          ++v9; /*0x5262c4*/
         }
-        while ( v9 < v7 );
+        while ( v9 < v7 ); /*0x5262c9*/
       }
-      ++v6;
-      v5 += 6;
-      *(_DWORD *)&a1[5] = v6;
-      *(_DWORD *)&a1[9] = v5;
+      ++v6; /*0x5262cb*/
+      v5 += 6; /*0x5262ce*/
+      *(_DWORD *)&a1[5] = v6; /*0x5262d4*/
+      *(_DWORD *)&a1[9] = v5; /*0x5262d8*/
     }
-    while ( v6 < 2 );
-    v4 += 2;
-    *(_DWORD *)&a1[0xD] = v4;
+    while ( v6 < 2 ); /*0x5262dc*/
+    v4 += 2; /*0x5262e2*/
+    *(_DWORD *)&a1[0xD] = v4; /*0x5262e8*/
   }
-  while ( v4 < 4 );
-  v14 = *(this + 0x3A);
-  *(_DWORD *)&a1[0x11] = 0;
-  if ( v14 )
-    *(_DWORD *)&a1[0x11] = *(_DWORD *)(v14 + 0xC);
-  TESForm_SaveFormIDToCurrentSaveGame((int)&a1[0x11], 4u);
-  v15 = *(this + 0x72);
-  *(_DWORD *)&a1[0x15] = 0;
-  if ( v15 )
-    *(_DWORD *)&a1[0x15] = *(_DWORD *)(v15 + 0xC);
-  TESForm_SaveFormIDToCurrentSaveGame((int)&a1[0x15], 4u);
-  v16 = *(this + 0x74);
-  v22 = 0;
-  if ( v16 )
-    v22 = *(_DWORD *)(v16 + 0xC);
-  TESForm_SaveFormIDToCurrentSaveGame((int)&v22, 4u);
-  LODWORD(v18) = 4;
-  TESForm_SaveDataToCurrentSaveGame((TESForm *)(this + 0x73), v18);
-  LODWORD(v19) = 4;
-  TESForm_SaveDataToCurrentSaveGame((TESForm *)(this + 0x7A), v19);
-  a1[0] = TESActorBase_IsFemale(this) == 1;
-  LODWORD(v20) = 1;
-  TESForm_SaveDataToCurrentSaveGame((TESForm *)a1, v20);
+  while ( v4 < 4 ); /*0x5262ec*/
+  v14 = *((_DWORD *)this + 0x3A); /*0x5262f2*/
+  *(_DWORD *)&a1[0x11] = 0; /*0x5262fa*/
+  if ( v14 ) /*0x526302*/
+    *(_DWORD *)&a1[0x11] = *(_DWORD *)(v14 + 0xC); /*0x526307*/
+  TESForm_SaveFormIDToCurrentSaveGame(this, (const unsigned int *)&a1[0x11], 4u); /*0x526314*/
+  v15 = *((_DWORD *)this + 0x72); /*0x526319*/
+  *(_DWORD *)&a1[0x15] = 0; /*0x526323*/
+  if ( v15 ) /*0x526327*/
+    *(_DWORD *)&a1[0x15] = *(_DWORD *)(v15 + 0xC); /*0x52632c*/
+  TESForm_SaveFormIDToCurrentSaveGame(this, (const unsigned int *)&a1[0x15], 4u); /*0x526339*/
+  v16 = *((_DWORD *)this + 0x74); /*0x52633e*/
+  v18 = 0; /*0x526345*/
+  if ( v16 ) /*0x52634d*/
+    v18 = *(_DWORD *)(v16 + 0xC); /*0x526352*/
+  TESForm_SaveFormIDToCurrentSaveGame(this, &v18, 4u); /*0x52635f*/
+  TESForm_SaveDataToCurrentSaveGame(this, (char *)this + 0x1CC, 4u); /*0x52636f*/
+  TESForm_SaveDataToCurrentSaveGame(this, (char *)this + 0x1E8, 4u); /*0x52637f*/
+  a1[0] = TESActorBase_IsFemale(this) == 1; /*0x526395*/
+  TESForm_SaveDataToCurrentSaveGame(this, a1, 1u); /*0x5263a2*/
 }

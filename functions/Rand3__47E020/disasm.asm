@@ -1,4 +1,4 @@
-0x47E020: cmp     byte ptr ds:0B069C3h, 0
+0x47E020: cmp     byte ptr ds:0B069C3h, 0; Engine RNG upper-bound helper: returns max*rand()/0x7FFF after lazy time seed.
 0x47E027: jz      short loc_47E040
 0x47E029: push    0; Time
 0x47E02B: call    __time64

@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x98FBB1",
-    "line": "mov     dword_BAA614, eax",
+    "line": "mov     dword_BA9E10+804h, eax",
     "mnemonic": "mov",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x98FBB9",
-    "line": "mov     dword_BAA618, eax",
+    "line": "mov     dword_BA9E10+808h, eax",
     "mnemonic": "mov",
     "size": 5
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x98FBC1",
-    "line": "mov     dword_BAA61C, eax",
+    "line": "mov     dword_BA9E10+80Ch, eax",
     "mnemonic": "mov",
     "size": 5
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x98FBD5",
-    "line": "mov     word_BAA608[eax*2], cx",
+    "line": "mov     word ptr dword_BA9E10+7F8h[eax*2], cx",
     "mnemonic": "mov",
     "size": 8
   },
@@ -634,5 +634,71 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x98FC5A",
+    "line": "cmp     eax, 0FFFFFFFFh",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x98FC5D",
+    "line": "jnz     short __setmbcp___$LN28_2",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x98FC5F",
+    "line": "cmp     ebx, offset dword_B31390",
+    "mnemonic": "cmp",
+    "size": 6
+  },
+  {
+    "ea": "0x98FC65",
+    "line": "jz      short loc_98FC6E",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x98FC67",
+    "line": "push    ebx; Memory",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x98FC68",
+    "line": "call    _free",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x98FC6D",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x98FC6E",
+    "line": "call    __errno",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x98FC73",
+    "line": "mov     dword ptr [eax], 16h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x98FC79",
+    "line": "jmp     short __setmbcp___$LN28_2",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x98FC7B",
+    "line": "and     [ebp+var_20], 0",
+    "mnemonic": "and",
+    "size": 4
   }
 ]

@@ -14,7 +14,6 @@
 0x7472E3: add     esp, 0Ch
 0x7472E6: mov     eax, 12h
 0x7472EB: jmp     short loc_7472F0
-0x7472ED: align 10h
 0x7472F0: movzx   ecx, ds:byte_A849FC[eax]
 0x7472F7: cmp     word ptr [esi+ecx*4+0A76h], 0
 0x747300: jnz     short loc_74736D

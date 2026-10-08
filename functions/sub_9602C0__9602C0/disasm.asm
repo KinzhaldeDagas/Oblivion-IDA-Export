@@ -34,8 +34,8 @@
 0x960334: xor     al, al
 0x960336: add     esp, 54h
 0x960339: retn
-0x96033A: lea     ecx, [esp+54h+var_48]
-0x96033E: call    sub_4E7DE0
+0x96033A: lea     ecx, [esp+54h+var_48]; this
+0x96033E: call    PathGraphNode_GetConnections; Verified graph-node connection-list accessor: returns this+0x20. TESPathGrid and TESRoad graph code both traverse this as a BSSimpleList of adjacency pointers.
 0x960343: cmp     [esp+54h+arg_1C], 0
 0x960348: mov     edx, [eax]
 0x96034A: mov     ecx, [esp+54h+arg_18]

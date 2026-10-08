@@ -1,4 +1,4 @@
-0x768D60: sub     esp, 8
+0x768D60: sub     esp, 8; End the current target group without unbinding it. Color buffers whose class predicate at vtable+0x24 is true are queued once for PresentScene vtable+0x28 processing. NiDX9TextureBufferData returns false, so the R32F shadow map is neither queued, copied, nor resolved.
 0x768D63: push    ebp
 0x768D64: mov     ebp, ecx
 0x768D66: mov     ecx, [ebp+87Ch]
@@ -13,7 +13,6 @@
 0x768D82: push    ebx
 0x768D83: push    edi
 0x768D84: jmp     short loc_768D90
-0x768D86: align 10h
 0x768D90: mov     ecx, [ebp+87Ch]
 0x768D96: mov     eax, [ecx]
 0x768D98: mov     edx, [eax+80h]
@@ -28,7 +27,7 @@
 0x768DAE: call    edx
 0x768DB0: test    eax, eax
 0x768DB2: jz      short loc_768DC6
-0x768DB4: cmp     eax, offset unk_B42654
+0x768DB4: cmp     eax, offset stru_B42654
 0x768DB9: jz      loc_768E7B
 0x768DBF: mov     eax, [eax+4]
 0x768DC2: test    eax, eax
@@ -41,7 +40,7 @@
 0x768DD0: mov     eax, [esi]
 0x768DD2: mov     edx, [eax+24h]
 0x768DD5: mov     ecx, esi
-0x768DD7: call    edx
+0x768DD7: call    edx; Ask this color-buffer class whether it requires deferred presentation-boundary processing.
 0x768DD9: test    al, al
 0x768DDB: jz      short loc_768E51
 0x768DDD: lea     edi, [esi+4]
@@ -77,7 +76,7 @@
 0x768E2C: lea     eax, [esp+18h+var_4]
 0x768E30: push    eax
 0x768E31: lea     ecx, [ebp+8F4h]
-0x768E37: call    sub_7C16B0
+0x768E37: call    NiTRefPointerList__AddTail; Queue a qualifying buffer once with strong-reference ownership for PresentScene processing.
 0x768E3C: push    edi; lpAddend
 0x768E3D: call    dword ptr ds:0A2807Ch
 0x768E43: test    eax, eax
@@ -98,7 +97,7 @@
 0x768E6B: jb      loc_768D90
 0x768E71: pop     edi
 0x768E72: pop     ebx
-0x768E73: pop     esi
+0x768E73: pop     esi; Target end returns after deferred-list bookkeeping; it does not unbind color/depth surfaces, clear currentRTGroup, or restore viewport/scissor state.
 0x768E74: mov     al, 1
 0x768E76: pop     ebp
 0x768E77: add     esp, 8

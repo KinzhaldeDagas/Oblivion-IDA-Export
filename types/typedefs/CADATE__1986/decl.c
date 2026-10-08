@@ -1,1 +1,1 @@
-CADATE
+typedef tagCADATE CADATE;

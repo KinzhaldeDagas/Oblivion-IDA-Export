@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x8AB7BE",
-    "line": "call    sub_715F40",
+    "line": "call    NiTimeController_LoadBinary; Load persistent NiTimeController state: flags +0x08, frequency/phase/key bounds, and target/next links. Legacy migration clears flag bit 0x20 before stream version 0x0A01006D. Runtime time caches and update bytes are constructor state, not serialized.",
     "mnemonic": "call",
     "size": 5
   },
@@ -202,12 +202,6 @@
     "line": "jmp     short loc_8AB820",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x8AB813",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
   },
   {
     "ea": "0x8AB820",

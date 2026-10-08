@@ -1,19 +1,32 @@
 {
-  "callees_count": 16,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4F7FA0",
+      "0x4F8041"
+    ]
+  ],
+  "chunks_sha256": "e6fe417e07264c03f4c351a68cf9c29de7ea764e23c150135ce9b50b4e3d322a",
+  "comment_regular": "GetIsCurrentPackage_Eval requires an actor subject and Package parameter (form type 0x3D). It reads the subject's current package; for a temporary-override package it prefers the actor's ExtraPackage when present, then pointer-compares against the parameter.",
+  "comment_repeatable": "GetIsCurrentPackage_Eval requires an actor subject and Package parameter (form type 0x3D). It reads the subject's current package; for a temporary-override package it prefers the actor's ExtraPackage when present, then pointer-compares against the parameter.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_4F7FA0",
+  "display_name": "GetIsCurrentPackage_Eval",
   "end_ea": "0x4F8041",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4F7FA0",
+  "name": "GetIsCurrentPackage_Eval",
   "segment": ".text",
   "sha256": "e6fe417e07264c03f4c351a68cf9c29de7ea764e23c150135ce9b50b4e3d322a",
   "size": 161,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4F7FA0",
-  "type": "char __cdecl(_DWORD *, int, int, double *)",
+  "total_chunk_size": 161,
+  "type": "char __cdecl(TESObjectREFR *subject, TESPackage *package, TESForm *param2, double *value)",
   "xrefs_from_count": 80,
-  "xrefs_to_count": 2
+  "xrefs_to_count": 1
 }

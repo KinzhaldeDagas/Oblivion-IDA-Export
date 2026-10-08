@@ -1,1 +1,5 @@
-_complex
+struct _complex
+{
+double x;
+double y;
+};

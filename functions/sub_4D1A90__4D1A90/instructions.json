@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4D1A90",
-    "line": "push    ebx",
+    "line": "push    ebx; Verified per-cell tree-model 3D cleanup (not billboard construction): iterates TREE references, casts current NiNode to RTTI BSTreeNode, follows BSTreeNode.treeModel (+0xDC), and checks BSTreeModel.trunkLength (+0x50). Removes the reference 3D and clears the probable HasTemp3D flag when the node/model data is invalid or trunkLength lies in [lowerBound,upperBound). Length units are Unknown.",
     "mnemonic": "push",
     "size": 1
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x4D1A95",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x4D1AF6",
-    "line": "push    offset BSTreeNode",
+    "line": "push    0B3A02Ch",
     "mnemonic": "push",
     "size": 5
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x4D1B13",
-    "line": "call    edx",
+    "line": "call    edx; Verified: BSTreeNode vtable slot +0x9C resolves through Shared_GetDwordAtOffsetDC to BSTreeNode.treeModel (+0xDC), not a distant billboard node.",
     "mnemonic": "call",
     "size": 2
   },
@@ -337,13 +337,13 @@
   },
   {
     "ea": "0x4D1B37",
-    "line": "fld     dword ptr [eax+50h]",
+    "line": "fld     dword ptr [eax+50h]; Verified data flow: BSTreeNode's virtual getter at vtable +0x9C returns its BSTreeModel; the value tested at returned model+0x50 is BSTreeModel.trunkLength, assigned by BSTreeModel_InitFromBase from CSpeedTreeRT_GetTrunkLength.",
     "mnemonic": "fld",
     "size": 3
   },
   {
     "ea": "0x4D1B3A",
-    "line": "fld     [esp+10h+arg_0]",
+    "line": "fld     [esp+10h+minimumDistance]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x4D1B56",
-    "line": "fld     [esp+10h+arg_4]",
+    "line": "fld     [esp+10h+maximumDistance]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x4D1B61",
-    "line": "jnp     short loc_4D1B7A",
+    "line": "jnp     short loc_4D1B7A; Verified interval predicate: removes the reference 3D when the BSTreeModel.trunkLength value is in [lowerBound,upperBound), after the BSTreeNode/manager/model checks have passed.",
     "mnemonic": "jnp",
     "size": 2
   },
@@ -457,25 +457,25 @@
   },
   {
     "ea": "0x4D1B6F",
-    "line": "call    edx",
+    "line": "call    edx; Verified action for selected/invalid tree model: TESObjectREFR::Set3D(reference, nullptr) removes the current 3D; the following call clears the probable HasTemp3D flag.",
     "mnemonic": "call",
     "size": 2
   },
   {
     "ea": "0x4D1B71",
-    "line": "push    0",
+    "line": "push    0; enabled",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4D1B73",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D1B75",
-    "line": "call    sub_4D7010",
+    "line": "call    TESObjectREFR_SetTemp3DFlag; Verified: after removing a BSTreeNode 3D selected by invalid-node checks or the trunkLength interval, clears the probable HasTemp3D flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x4D1B88",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },

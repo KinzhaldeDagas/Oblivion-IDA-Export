@@ -1,4 +1,5 @@
-int __cdecl Calc_DetectionLevel_::CalcSoundFactor(
+// Combines movement/boot noise, distance attenuation, LOS and running multipliers, then scales the audible contribution by fSneakSoundsMult while preserving the stronger accumulated contribution.
+int __cdecl Calc_DetectionLevel_ApplySoundFactor(
         int a1,
         float a2,
         int a3,
@@ -22,9 +23,9 @@ int __cdecl Calc_DetectionLevel_::CalcSoundFactor(
 {
   int v23; // [esp+20h] [ebp+20h]
 
-  __asm
+  __asm /*0x5464ae*/
   {
-    fld     [esp+arg_4C]
+    fld     [esp+arg_4C]; Combines movement/boot noise, distance attenuation, LOS and running multipliers, then scales the audible contribution by fSneakSoundsMult while preserving the stronger accumulated contribution.
     fmul    [esp+arg_1C]
     fadd    dword ptr [esp+0]
     fld     [esp+arg_8]
@@ -40,9 +41,9 @@ int __cdecl Calc_DetectionLevel_::CalcSoundFactor(
     fcom    [esp+arg_1C]
     fnstsw  ax
   }
-  if ( (_AX & 0x4100) == 0 )
-    __asm { fst     [esp+arg_1C] }
-  return Calc_DetectionLevel_::CalcLightFactor(
+  if ( (_AX & 0x4100) == 0 ) /*0x5464e0*/
+    __asm { fst     [esp+arg_1C] } /*0x5464e2*/
+  return Calc_DetectionLevel_ApplyLightFactor(
            a1,
            a2,
            a3,

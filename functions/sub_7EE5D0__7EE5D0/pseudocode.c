@@ -1,3 +1,4 @@
+// BloodOnDeath decode 2026-05-30: shader-property diagnostic dump; no spawn, lifetime, or projection cap is enforced here.
 unsigned int __thiscall sub_7EE5D0(float *this, unsigned __int16 *a2)
 {
   NiTArray_NiTexturingPropertyMap *v2; // esi
@@ -18,45 +19,45 @@ unsigned int __thiscall sub_7EE5D0(float *this, unsigned __int16 *a2)
   unsigned int v18; // edi
   unsigned int v19; // ecx
 
-  v2 = (NiTArray_NiTexturingPropertyMap *)a2;
-  sub_7E28E0(this, a2);
-  v4 = (unsigned __int16 *)TESOutput_PrintString(*(char **)dword_B4618C);
-  end = v2->end;
-  capacity = v2->capacity;
-  a2 = v4;
-  if ( end >= capacity )
-    NiTArray_SetSize((unsigned __int16 *)v2, end + v2->growSize);
-  NiTArray_SetAt(v2, end, &a2);
-  v7 = (unsigned __int16 *)TESOutput_PrintLabeledUnsignedShort("number of lights", *((_DWORD *)this + 0x1E));
-  v8 = v2->end;
-  v9 = v2->capacity;
-  a2 = v7;
-  if ( v8 >= v9 )
-    NiTArray_SetSize((unsigned __int16 *)v2, v8 + v2->growSize);
-  NiTArray_SetAt(v2, v8, &a2);
-  v10 = sub_7ED5D0(this);
-  v11 = (unsigned __int16 *)TESOutput_PrintLabeledUnsignedShort("active lights", v10);
-  v12 = v2->end;
-  v13 = v2->capacity;
-  a2 = v11;
-  if ( v12 >= v13 )
-    NiTArray_SetSize((unsigned __int16 *)v2, v12 + v2->growSize);
-  NiTArray_SetAt(v2, v12, &a2);
-  if ( *((_DWORD *)this + 0x23) )
+  v2 = (NiTArray_NiTexturingPropertyMap *)a2; /*0x7ee5d2*/
+  sub_7E28E0(this, a2); /*0x7ee5da*/
+  v4 = (unsigned __int16 *)TESOutput_PrintString((char *)LODWORD(OB_ShaderConstantStorage_010201A0[0xDE])); /*0x7ee5e5*/
+  end = v2->end; /*0x7ee5ea*/
+  capacity = v2->capacity; /*0x7ee5ee*/
+  a2 = v4; /*0x7ee5f7*/
+  if ( end >= capacity ) /*0x7ee5fb*/
+    NiTArray_SetSize((unsigned __int16 *)v2, end + v2->growSize); /*0x7ee606*/
+  NiTArray_SetAt(v2, end, &a2); /*0x7ee613*/
+  v7 = (unsigned __int16 *)TESOutput_PrintLabeledUnsignedShort("number of lights", *((_DWORD *)this + 0x1E)); /*0x7ee621*/
+  v8 = v2->end; /*0x7ee626*/
+  v9 = v2->capacity; /*0x7ee62a*/
+  a2 = v7; /*0x7ee633*/
+  if ( v8 >= v9 ) /*0x7ee637*/
+    NiTArray_SetSize((unsigned __int16 *)v2, v8 + v2->growSize); /*0x7ee642*/
+  NiTArray_SetAt(v2, v8, &a2); /*0x7ee64f*/
+  v10 = OB_BSShaderProperty_CountPassListEntriesWithMarker_010201A0(this); /*0x7ee656*/
+  v11 = (unsigned __int16 *)TESOutput_PrintLabeledUnsignedShort("active lights", v10); /*0x7ee661*/
+  v12 = v2->end; /*0x7ee666*/
+  v13 = v2->capacity; /*0x7ee66a*/
+  a2 = v11; /*0x7ee673*/
+  if ( v12 >= v13 ) /*0x7ee677*/
+    NiTArray_SetSize((unsigned __int16 *)v2, v12 + v2->growSize); /*0x7ee682*/
+  NiTArray_SetAt(v2, v12, &a2); /*0x7ee68f*/
+  if ( *((_DWORD *)this + 0x23) ) /*0x7ee694*/
   {
-    v14 = (unsigned __int16 *)TESOutput_PrintLabeledUnsignedInt("number of decals", *((_DWORD *)this + 0x23));
-    v15 = v2->end;
-    v16 = v2->capacity;
-    a2 = v14;
-    if ( v15 >= v16 )
-      NiTArray_SetSize((unsigned __int16 *)v2, v15 + v2->growSize);
-    NiTArray_SetAt(v2, v15, &a2);
+    v14 = (unsigned __int16 *)TESOutput_PrintLabeledUnsignedInt("number of decals", *((_DWORD *)this + 0x23));// BloodOnDeath decode: "number of decals" is diagnostic shader-property state, not a trail density cap. /*0x7ee6a4*/
+    v15 = v2->end; /*0x7ee6a9*/
+    v16 = v2->capacity; /*0x7ee6ad*/
+    a2 = v14; /*0x7ee6b6*/
+    if ( v15 >= v16 ) /*0x7ee6ba*/
+      NiTArray_SetSize((unsigned __int16 *)v2, v15 + v2->growSize); /*0x7ee6c5*/
+    NiTArray_SetAt(v2, v15, &a2); /*0x7ee6d2*/
   }
-  v17 = (unsigned __int16 *)TESOutput_PrintLabeledUnsignedInt("Reference ID", *((_DWORD *)this + 0x26));
-  v18 = v2->end;
-  v19 = v2->capacity;
-  a2 = v17;
-  if ( v18 >= v19 )
-    NiTArray_SetSize((unsigned __int16 *)v2, v18 + v2->growSize);
-  return NiTArray_SetAt(v2, v18, &a2);
+  v17 = (unsigned __int16 *)TESOutput_PrintLabeledUnsignedInt("Reference ID", *((_DWORD *)this + 0x26)); /*0x7ee6e3*/
+  v18 = v2->end; /*0x7ee6e8*/
+  v19 = v2->capacity; /*0x7ee6ec*/
+  a2 = v17; /*0x7ee6f5*/
+  if ( v18 >= v19 ) /*0x7ee6f9*/
+    NiTArray_SetSize((unsigned __int16 *)v2, v18 + v2->growSize); /*0x7ee704*/
+  return NiTArray_SetAt(v2, v18, &a2); /*0x7ee716*/
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0xA1B630",
-    "line": "mov     eax, dword_B082F4",
+    "line": "mov     eax, stru_B082F0.data; MEF PERF 2026-10-08: Verified strong-pointer16 array used by TESBoundObject_Create3DImpl4B39F7; clear4B26D5 and remove4D9849 are also observed. Its entire lifetime/population not sealed. Generic AddFirstEmpty patch must not assume every caller is a NiNode child array.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0xA1B637",
-    "line": "mov     off_B082F0, offset ??_7?$NiTArray@V?$NiPointer@VNiAVObject@@@@@@6B@; const NiTArray<NiPointer<NiAVObject>>::`vftable' ...",
+    "line": "mov     stru_B082F0._vtbl, offset ??_7?$NiTArray@V?$NiPointer@VNiAVObject@@@@@@6B@; MEF PERF 2026-10-08: Verified strong-pointer16 array used by TESBoundObject_Create3DImpl4B39F7; clear4B26D5 and remove4D9849 are also observed. Its entire lifetime/population not sealed. Generic AddFirstEmpty patch must not assume every caller is a NiNode child array.",
     "mnemonic": "mov",
     "size": 10
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0xA1B64A",
-    "line": "push    offset sub_7016A0; void (__thiscall *)(void *)",
+    "line": "push    offset NiPointerSlot_Release; void (__thiscall *)(void *)",
     "mnemonic": "push",
     "size": 5
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0xA1B659",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

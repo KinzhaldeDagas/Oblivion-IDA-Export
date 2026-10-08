@@ -1,1 +1,1 @@
-TESObjectBOOK
+struct TESObjectBOOK;

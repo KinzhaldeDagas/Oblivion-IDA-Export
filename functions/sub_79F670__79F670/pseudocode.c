@@ -1,27 +1,31 @@
-void __thiscall __noreturn sub_79F670(unsigned int *this, int a2)
+// OBLIVION AUTHORITY (2026-08-30): push_back for vector<vector<float>>. Deep-copy-constructs an inner vector directly when capacity exists; otherwise delegates to checked insert-one. Boundary corrected through ret 4 at 0x79F6F1.
+void __thiscall OB_stVector_stVectorFloat_PushBack_010201A0(
+        OB_stVector_stVectorFloat_010201A0 *this,
+        const OB_stVectorFloat_010201A0 *value)
 {
-  unsigned int v3; // edx
+  OB_stVectorFloat_010201A0 *begin; // edx
   unsigned int v4; // ecx
-  char *v5; // edi
-  char *v6; // edi
-  int v7; // [esp+8h] [ebp-8h] BYREF
+  OB_stVectorFloat_010201A0 *end; // edi
+  OB_stVectorFloat_010201A0 *v6; // edi
+  OB_stVectorIterator_stVectorFloat_010201A0 result; // [esp+8h] [ebp-8h] BYREF
 
-  v3 = *(this + 1);
-  if ( v3 )
-    v4 = (int)(*(this + 2) - v3) >> 4;
+  begin = this->begin; /*0x79f676*/
+  if ( begin ) /*0x79f67c*/
+    v4 = this->end - begin; /*0x79f687*/
   else
-    v4 = 0;
-  if ( v3 )
+    v4 = 0; /*0x79f67e*/
+  if ( begin && v4 < this->capacityEnd - begin ) /*0x79f698*/
   {
-    if ( v4 < (int)(*(this + 3) - v3) >> 4 )
-    {
-      v5 = (char *)*(this + 2);
-      LOBYTE(v7) = 0;
-      sub_79BF40(v5, 1u, a2);
-    }
+    end = this->end; /*0x79f6a2*/
+    LOBYTE(result.owner) = 0; /*0x79f6a5*/
+    OB_stVector_stVectorFloat_UninitializedFillN_010201A0(end, 1u, value); /*0x79f6b5*/
+    this->end = end + 1; /*0x79f6c0*/
   }
-  v6 = (char *)*(this + 2);
-  if ( v3 > (unsigned int)v6 )
-    _invalid_parameter_noinfo();
-  sub_79F150(this, (int)&v7, this, v6, a2);
+  else
+  {
+    v6 = this->end; /*0x79f6cb*/
+    if ( begin > v6 ) /*0x79f6d0*/
+      _invalid_parameter_noinfo(); /*0x79f6d2*/
+    OB_stVector_stVectorFloat_InsertOne_010201A0(this, &result, this, v6, value); /*0x79f6e5*/
+  }
 }

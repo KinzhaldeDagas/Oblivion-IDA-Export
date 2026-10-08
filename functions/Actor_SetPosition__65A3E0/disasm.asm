@@ -13,18 +13,18 @@
 0x65A3FD: mov     ecx, esi; this
 0x65A3FF: call    TESObjectREFR_SetPosition
 0x65A404: mov     ecx, esi; this
-0x65A406: call    MobileObject_GetCharProxy
+0x65A406: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x65A40B: mov     esi, eax
 0x65A40D: test    esi, esi
 0x65A40F: jz      short loc_65A44A
 0x65A411: push    edi; a2
 0x65A412: mov     ecx, esi; this
-0x65A414: call    sub_452A10
+0x65A414: call    sub_452A10; TES4 authoritative: converts TES/world NiPoint3 into Havok units with hkFactor, then writes proxy position through 0x891560.
 0x65A419: mov     ecx, [esi+8]; this
 0x65A41C: test    ecx, ecx
 0x65A41E: jz      short loc_65A42A
-0x65A420: push    offset stru_BA7A40; a2
-0x65A425: call    sub_8AC0B0
+0x65A420: push    offset unk_BA7A40; a2
+0x65A425: call    sub_8AC0B0; TES4 authoritative: writes proxy velocity vector back into bhk collision object+0x10. Climbing/Slowfall velocity edits must happen before these calls or must write both proxy+0x2E0 and object+0x10 after the fact.
 0x65A42A: mov     edx, [esi+1F4h]
 0x65A430: fldz
 0x65A432: shr     edx, 7

@@ -27,10 +27,10 @@
 0x61D508: mov     eax, [esi+3Ch]
 0x61D50B: push    ebp; a5
 0x61D50C: mov     ebp, [esp+0Ch+a3]
-0x61D510: push    0; a4
-0x61D512: push    ebp; a3
-0x61D513: push    eax; a2
-0x61D514: call    TESObjectREFR_GetDistanceBetween?
+0x61D510: push    0; useActorProjection
+0x61D512: push    ebp; to
+0x61D513: push    eax; from
+0x61D514: call    TESObjectREFR_GetSurfaceDistance; Three-argument cdecl routine: returns float surface distance from 'from' to 'to'. All 24 callers push exactly from, to, and useActorProjection then reclaim 0x0C. The prior EDI register argument, fourth stack byte, and double return were analysis pollution.
 0x61D519: fcomp   qword ptr ds:0A529C0h
 0x61D51F: add     esp, 0Ch
 0x61D522: fnstsw  ax
@@ -47,17 +47,17 @@
 0x61D539: push    1
 0x61D53B: mov     ecx, esi
 0x61D53D: add     edi, 318h
-0x61D543: call    sub_6135F0
+0x61D543: call    CombatController_GetCurrentTarget
 0x61D548: push    eax
 0x61D549: mov     eax, [edi]
 0x61D54B: mov     ecx, ebx
 0x61D54D: call    eax
-0x61D54F: mov     ecx, [esi+3Ch]
+0x61D54F: mov     ecx, [esi+3Ch]; this
 0x61D552: push    0; int
 0x61D554: push    offset ??_R0?AVFleePackage@@@8; struct TypeDescriptor *
 0x61D559: push    offset ??_R0?AVTESPackage@@@8; struct _s_RTTICompleteObjectLocator *
 0x61D55E: push    0; int
-0x61D560: call    sub_5E0380
+0x61D560: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x61D565: push    eax; void *
 0x61D566: call    OblivionDynamicCast
 0x61D56B: add     esp, 14h

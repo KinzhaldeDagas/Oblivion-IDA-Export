@@ -1,70 +1,63 @@
-__int16 __usercall sub_4DA7F0@<ax>(int a1@<ecx>, int a2@<edi>, int a3@<esi>, int a4, float a5)
+__int16 __cdecl sub_4DA7F0(int source, float a2)
 {
-  TESSaveLoad *v5; // ecx
+  int v0; // ecx
+  TESSaveLoadGame_SerializationView *v5; // ecx
   unsigned int v6; // edi
-  _WORD *v7; // ebp
+  unsigned __int8 *bufferCursor; // ebp
   unsigned int v8; // eax
   int v9; // ebx
   int v10; // esi
   const char *v11; // eax
   char v12; // dl
   unsigned int v13; // eax
-  TESSaveLoad *v14; // ecx
-  size_t v16; // [esp+0h] [ebp-18h]
-  size_t v17; // [esp+0h] [ebp-18h]
-  size_t v18; // [esp+4h] [ebp-14h]
+  TESSaveLoadGame_SerializationView *v14; // ecx
   int Src; // [esp+14h] [ebp-4h] BYREF
 
-  Src = a1;
-  if ( flt_A30634 == a5 )
-    a5 = flt_B33A30;
-  v5 = SaveLoad_CurrentSavegame;
-  HIDWORD(v18) = a2;
-  LODWORD(v18) = 2;
-  v6 = 0;
-  Src = 0;
-  v7 = (_WORD *)v5->unk000[5];
-  LOWORD(v8) = (unsigned __int16)SaveLoad_SaveData((int)v5, &Src, v18);
-  v9 = a4;
-  if ( !a4 )
+  Src = v0; /*0x4da7f0*/
+  if ( kTerrainLODQuadRayDirectionZ == a2 ) /*0x4da800*/
+    a2 = ::source; /*0x4da808*/
+  v5 = g_TESSaveLoadGame; /*0x4da80c*/
+  v6 = 0; /*0x4da81b*/
+  Src = 0; /*0x4da81d*/
+  bufferCursor = v5->bufferCursor; /*0x4da821*/
+  LOWORD(v8) = (unsigned __int16)SaveLoad_SaveData(v5, &Src, 2u); /*0x4da825*/
+  v9 = source; /*0x4da82a*/
+  if ( !source ) /*0x4da830*/
   {
-    LOWORD(v8) = Src;
-    *v7 = Src;
-    return v8;
+    LOWORD(v8) = Src; /*0x4da8d8*/
+    *(_WORD *)bufferCursor = Src; /*0x4da8de*/
+    return v8; /*0x4da8de*/
   }
-  if ( (*(_BYTE *)(a4 + 8) & 8) != 0 )
+  if ( (*(_BYTE *)(source + 8) & 8) != 0 ) /*0x4da83f*/
   {
-    if ( !*(_WORD *)(a4 + 0x46) )
+    if ( !*(_WORD *)(source + 0x46) ) /*0x4da845*/
     {
-      *v7 = Src;
-      return v8;
+      *(_WORD *)bufferCursor = Src; /*0x4da8d0*/
+      return v8; /*0x4da8d7*/
     }
-    HIDWORD(v16) = a3;
-    do
+    do /*0x4da8b9*/
     {
-      v10 = *(_DWORD *)(*(_DWORD *)(v9 + 0x40) + 4 * v6);
-      if ( v10 )
+      v10 = *(_DWORD *)(*(_DWORD *)(v9 + 0x40) + 4 * v6); /*0x4da853*/
+      if ( v10 ) /*0x4da858*/
       {
-        if ( *(_DWORD *)(v10 + 0x44) )
+        if ( *(_DWORD *)(v10 + 0x44) ) /*0x4da85a*/
         {
-          v11 = *(const char **)(v10 + 8);
-          v12 = (_BYTE)v11 + 1;
-          v13 = (unsigned int)&v11[strlen(v11) + 1];
-          v14 = SaveLoad_CurrentSavegame;
-          LOBYTE(a4) = v13 - v12;
-          LODWORD(v16) = 1;
-          SaveLoad_SaveData((int)v14, &a4, v16);
-          LODWORD(v17) = (unsigned __int8)a4;
-          SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, *(void **)(v10 + 8), v17);
-          sub_49F570((float *)v10, a5);
-          ++Src;
+          v11 = *(const char **)(v10 + 8); /*0x4da860*/
+          v12 = (_BYTE)v11 + 1; /*0x4da863*/
+          v13 = (unsigned int)&v11[strlen(v11) + 1]; /*0x4da86d*/
+          v14 = g_TESSaveLoadGame; /*0x4da86f*/
+          LOBYTE(source) = v13 - v12; /*0x4da877*/
+          SaveLoad_SaveData(v14, &source, 1u); /*0x4da882*/
+          SaveLoad_SaveData(g_TESSaveLoadGame, *(const void **)(v10 + 8), (unsigned __int8)source); /*0x4da897*/
+          BSAnimGroupSequence_SaveState((float *)v10, a2); /*0x4da8a6*/
+          ++Src; /*0x4da8ab*/
         }
       }
-      v8 = *(unsigned __int16 *)(v9 + 0x46);
-      ++v6;
+      v8 = *(unsigned __int16 *)(v9 + 0x46); /*0x4da8b0*/
+      ++v6; /*0x4da8b4*/
     }
-    while ( v6 < v8 );
+    while ( v6 < v8 ); /*0x4da8b9*/
   }
-  *v7 = Src;
-  return v8;
+  *(_WORD *)bufferCursor = Src; /*0x4da8c2*/
+  return v8; /*0x4da8c9*/
 }

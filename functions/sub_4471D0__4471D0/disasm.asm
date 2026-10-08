@@ -62,9 +62,9 @@
 0x447284: push    ebx
 0x447285: mov     ecx, esi
 0x447287: call    sub_4C9AC0
-0x44728C: push    esi
-0x44728D: mov     ecx, ebp
-0x44728F: call    sub_4EFEF0
+0x44728C: push    esi; cell
+0x44728D: mov     ecx, ebp; this
+0x44728F: call    TESWorldSpace_RegisterExteriorCell; Verified: external cell registration separates one quest-item exterior cell into persistentCell; normal exterior cells are stored in cellMap under packed signed X/Y.
 0x447294: test    al, al
 0x447296: jnz     short loc_4472AB
 0x447298: test    esi, esi
@@ -102,3 +102,15 @@
 0x4472F7: pop     ebx
 0x4472F8: add     esp, 10h
 0x4472FB: retn    10h
+0x9AD670: mov     eax, [ebp+10h]
+0x9AD673: push    eax
+0x9AD674: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AD679: pop     ecx
+0x9AD67A: retn
+0x9AD67B: mov     edx, [esp+arg_4]
+0x9AD67F: lea     eax, [edx-14h]
+0x9AD682: mov     ecx, [edx-18h]
+0x9AD685: xor     ecx, eax
+0x9AD687: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AD68C: mov     eax, offset stru_ADA1C8
+0x9AD691: jmp     ___CxxFrameHandler3

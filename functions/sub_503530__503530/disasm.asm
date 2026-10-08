@@ -15,7 +15,7 @@
 0x503555: push    edx; a3
 0x503556: push    eax; a2
 0x503557: push    ecx; a1
-0x503558: call    Script_ExtractArgs
+0x503558: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x50355D: add     esp, 20h
 0x503560: test    al, al
 0x503562: jnz     short loc_503566
@@ -28,7 +28,7 @@
 0x503574: push    0
 0x503576: push    eax
 0x503577: push    ecx
-0x503578: call    sub_4F6FC0
+0x503578: call    GetIsSex_Eval; GetIsSex_Eval (index 70 / opcode 0x1046): requires TESNPC BaseForm; Sex parameter (typeID 0x12) is compared with TESActorBase_IsFemale (0 male, 1 female), yielding numeric 1 or 0.
 0x50357D: add     esp, 10h
 0x503580: pop     ecx
 0x503581: retn

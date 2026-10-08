@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6B92C0",
-    "line": "push    ecx",
+    "line": "push    ecx; Player-menu post-response transition. AddTopicList is unconditional for a processed INFO. Only INFOGENERAL/D7 without RunForRumors skips Goodbye handling and RunResult; INFOGENERAL always rebuilds from player known topics instead of following INFO links. The 0x40 flag has no effect on ordinary topics.",
     "mnemonic": "push",
     "size": 1
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x6B92E0",
-    "line": "cmp     [ecx+20h], bl",
+    "line": "cmp     [ecx+20h], bl; Recognize the MenuTopic as stock INFOGENERAL/Rumors (D7); only this topic type gives flag 0x40 RunForRumors special meaning.",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -133,13 +133,13 @@
   },
   {
     "ea": "0x6B92F4",
-    "line": "mov     bl, 1",
+    "line": "mov     bl, 1; skipInfoGeneralResult = INFOGENERAL && !RunForRumors. Natural completion still calls AddTopicList, but skips Goodbye/RunResult and returns false; AdvanceTopicResponse consequently clears closePending. A clicked Goodbye remains parked globally for eventual DialogMenu::Close.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6B92F6",
-    "line": "cmp     [esp+10h+arg_0], 0",
+    "line": "cmp     [esp+10h+processCurrentInfo], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -247,13 +247,13 @@
   },
   {
     "ea": "0x6B9326",
-    "line": "cmp     [esp+10h+arg_4], 0",
+    "line": "cmp     [esp+10h+clearAll], 0; clearAll=false preserves the head MenuTopic and removes later choices. Native callers use this mode; clearAll=true would remove the seed and prevent FillTopicList from repopulating the manager.",
     "mnemonic": "cmp",
     "size": 5
   },
   {
     "ea": "0x6B932B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -277,13 +277,13 @@
   },
   {
     "ea": "0x6B9333",
-    "line": "push    0",
+    "line": "push    0; clearAll",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6B9335",
-    "line": "call    sub_6B9250",
+    "line": "call    MenuTopicManager__ClearData; ClearData owns ordinary MenuTopics but deliberately does not destroy isInfoGeneralTopic entries. Those are actor-specific caches owned by ExtraInfoGeneralTopic (0x59).",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,13 +301,13 @@
   },
   {
     "ea": "0x6B933E",
-    "line": "mov     ecx, edi; int",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6B9340",
-    "line": "call    sub_5308D0",
+    "line": "call    TESTopicInfo__AddTopicList; Commit INFO.addedTopics before testing RunForRumors or Goodbye. Added topics enter PlayerCharacter.knownTopics even when INFOGENERAL without RunForRumors skips RunResult and normal continuation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x6B9347",
-    "line": "jnz     short loc_6B9369",
+    "line": "jnz     short loc_6B9369; INFOGENERAL without RunForRumors bypasses both Goodbye and RunResult during natural response completion. This does not cancel a Goodbye INFO parked by DoClick; close-time handling ignores RunForRumors.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x6B934D",
-    "line": "jnz     short loc_6B9360",
+    "line": "jnz     short loc_6B9360; Oblivion's player-menu close test here uses INFO flag Goodbye (bit 0x01), then returns to the caller's close path. Fallout additionally classifies stock D4/GOODBYE topic as natural goodbye in DialogMenu::SetGoodbyeState (x4y6:0x8252E850); no D4 topic-ID test occurs in this Oblivion decision.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -343,19 +343,19 @@
   },
   {
     "ea": "0x6B9352",
-    "line": "push    edx",
+    "line": "push    edx; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B9353",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6B9355",
-    "line": "call    sub_531470",
+    "line": "call    TESTopicInfo__RunResult; Oblivion's ordinary player-dialogue result call is reached after the current response list is exhausted. Fallout's manager has separate ProcessCurrentTopic/TIRS_BEGIN at selection time (x4y6:0x825E75A8) and a later TIRS_END call in DialogMenu::LoadNextScreen (x4y6:0x82530700). Oblivion RunResult has no phase argument; do not import those Fallout timing phases.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x6B9375",
-    "line": "jnz     short loc_6B937F",
+    "line": "jnz     short loc_6B937F; After INFOGENERAL completion, always rebuild from PlayerCharacter.knownTopics, regardless of INFOGENERAL's linkedTo list. Ordinary selected topics with hasLinkedTopics instead use that INFO's linkedTo list.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x6B937A",
-    "line": "add     eax, 8",
+    "line": "add     eax, 8; Use TESTopicInfo linkedTopics when the entry exposes linked choices and a response has not already consumed the path.",
     "mnemonic": "add",
     "size": 3
   },
@@ -457,25 +457,25 @@
   },
   {
     "ea": "0x6B9384",
-    "line": "add     eax, 5E4h",
+    "line": "add     eax, 5E4h; Known-topic source used for every INFOGENERAL/Rumors completion and for ordinary topics without linked choices.",
     "mnemonic": "add",
     "size": 5
   },
   {
     "ea": "0x6B9389",
-    "line": "push    eax",
+    "line": "push    eax; topics",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B938A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6B938C",
-    "line": "call    sub_6B9010",
+    "line": "call    MenuTopicManager__FillTopicList; Oblivion appends eligible ordinary MenuTopics in input-list order and performs no topic-priority sort here. Fallout's corresponding FillTopicList (x4y6:0x825E8740) sorts non-choice lists with PrioritySort (0x825E7390) by TESTopic priority; choice lists keep authored order. In Oblivion, the known-topic source is already sorted by display name in PlayerCharacter::AddKnownTopics, while INFO.linkedTo retains its own list order.",
     "mnemonic": "call",
     "size": 5
   },

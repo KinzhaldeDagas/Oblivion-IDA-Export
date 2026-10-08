@@ -1,4 +1,4 @@
-0x65D560: xor     eax, eax
+0x65D560: xor     eax, eax; Clear all 21 per-skill advance counters for both major and non-major skills. Raw skillExp[21], requiredSkillExp[21], lifetime skill-increase statistics, and majorSkillAdvances are separate and are not cleared here.
 0x65D562: mov     [ecx+188h], eax
 0x65D568: mov     [ecx+18Ch], eax
 0x65D56E: mov     [ecx+190h], eax

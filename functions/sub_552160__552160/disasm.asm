@@ -30,9 +30,9 @@
 0x5521AF: push    ecx
 0x5521B0: mov     ecx, esi; int
 0x5521B2: mov     [esp+28h+var_4], ebp
-0x5521B6: fstp    [esp+28h+var_28]; int
+0x5521B6: fstp    dword ptr [esp+28h+var_28]; int
 0x5521B9: push    edx; int
-0x5521BA: call    sub_527160
+0x5521BA: call    FaceGenFloatVector_ResizeFill; Vector resize: retain existing prefix, erase surplus elements when shrinking, fill only newly inserted elements when growing. Equal size does not overwrite coefficients. Matrix dimension products must already be valid; no recovery from rows*columns overflow.
 0x5521BF: mov     eax, [esi+4]
 0x5521C2: cmp     eax, ebp
 0x5521C4: jz      short loc_552225
@@ -68,10 +68,10 @@
 0x552213: mov     ecx, [esi+4]
 0x552216: add     eax, eax
 0x552218: add     eax, eax
-0x55221A: push    eax; Size
-0x55221B: push    ebx; Src
-0x55221C: push    ecx; Dst
-0x55221D: call    _memcpy
+0x55221A: push    eax; byteCount
+0x55221B: push    ebx; source
+0x55221C: push    ecx; destination
+0x55221D: call    _memcpy;
 0x552222: add     esp, 0Ch
 0x552225: mov     eax, edi
 0x552227: mov     ecx, [esp+24h+var_C]
@@ -83,3 +83,13 @@
 0x552236: pop     ebx
 0x552237: add     esp, 10h
 0x55223A: retn    4
+0x9BBD00: mov     ecx, [ebp-10h]
+0x9BBD03: add     ecx, 8; this
+0x9BBD06: jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.
+0x9BBD0B: mov     edx, [esp+arg_4]
+0x9BBD0F: lea     eax, [edx-14h]
+0x9BBD12: mov     ecx, [edx-18h]
+0x9BBD15: xor     ecx, eax
+0x9BBD17: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BBD1C: mov     eax, offset stru_AE5A10
+0x9BBD21: jmp     ___CxxFrameHandler3

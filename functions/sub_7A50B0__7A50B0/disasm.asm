@@ -1,7 +1,7 @@
-0x7A50B0: mov     ecx, [esp+arg_8]
+0x7A50B0: mov     ecx, [esp+end]; Projects a vertex onto the infinite line through start/end; the optimized Oblivion ABI omits the unused CProjectedShadow this pointer.
 0x7A50B4: sub     esp, 18h
 0x7A50B7: push    esi
-0x7A50B8: mov     esi, [esp+1Ch+arg_4]
+0x7A50B8: mov     esi, [esp+1Ch+start]
 0x7A50BC: fld     dword ptr [esi]
 0x7A50BE: fld     dword ptr [ecx]
 0x7A50C0: fucompp
@@ -21,7 +21,7 @@
 0x7A50E2: test    ah, 44h
 0x7A50E5: jp      short loc_7A5102
 0x7A50E7: mov     ecx, [esi]
-0x7A50E9: mov     eax, [esp+1Ch+arg_0]
+0x7A50E9: mov     eax, [esp+1Ch+outPoint]
 0x7A50ED: mov     edx, [esi+4]
 0x7A50F0: mov     [eax], ecx
 0x7A50F2: mov     ecx, [esi+8]
@@ -32,16 +32,16 @@
 0x7A50FF: retn    10h
 0x7A5102: fld     dword ptr [ecx]
 0x7A5104: fsub    dword ptr [esi]
-0x7A5106: fstp    [esp+1Ch+var_18]
+0x7A5106: fstp    [esp+1Ch+var_18.x]
 0x7A510A: fld     dword ptr [ecx+4]
 0x7A510D: fsub    dword ptr [esi+4]
-0x7A5110: fstp    [esp+1Ch+var_14]
+0x7A5110: fstp    [esp+1Ch+var_18.y]
 0x7A5114: fld     dword ptr [ecx+8]
-0x7A5117: lea     ecx, [esp+1Ch+var_18]
+0x7A5117: lea     ecx, [esp+1Ch+var_18]; this
 0x7A511B: fsub    dword ptr [esi+8]
-0x7A511E: fstp    [esp+1Ch+var_10]
-0x7A5122: call    sub_78ED70
-0x7A5127: mov     eax, [esp+1Ch+arg_C]
+0x7A511E: fstp    [esp+1Ch+var_18.z]
+0x7A5122: call    OB_NormalizeVec3_010201A0; Normalizes one OB_stVec3 in place as v *= 1/sqrt(dot(v,v)); the binary has no zero-length guard. Used by CBranch::MakeLeaf and projected-shadow closest-point code. RT4.1 IdvVector.h corroborates stVec3::Normalize.
+0x7A5127: mov     eax, [esp+1Ch+vertex]
 0x7A512B: fld     dword ptr [eax]
 0x7A512D: fsub    dword ptr [esi]
 0x7A512F: fstp    [esp+1Ch+var_C]
@@ -49,27 +49,27 @@
 0x7A5136: fsub    dword ptr [esi+4]
 0x7A5139: fstp    [esp+1Ch+var_8]
 0x7A513D: fld     dword ptr [eax+8]
-0x7A5140: mov     eax, [esp+1Ch+arg_0]
+0x7A5140: mov     eax, [esp+1Ch+outPoint]
 0x7A5144: fsub    dword ptr [esi+8]
 0x7A5147: fstp    [esp+1Ch+var_4]
 0x7A514B: fld     [esp+1Ch+var_C]
-0x7A514F: fld     [esp+1Ch+var_18]
+0x7A514F: fld     [esp+1Ch+var_18.x]
 0x7A5153: fld     st
 0x7A5155: fmulp   st(2), st
 0x7A5157: fld     [esp+1Ch+var_8]
-0x7A515B: fld     [esp+1Ch+var_14]
+0x7A515B: fld     [esp+1Ch+var_18.y]
 0x7A515F: fld     st
 0x7A5161: fmulp   st(2), st
 0x7A5163: fxch    st(3)
 0x7A5165: faddp   st(1), st
 0x7A5167: fld     [esp+1Ch+var_4]
-0x7A516B: fld     [esp+1Ch+var_10]
+0x7A516B: fld     [esp+1Ch+var_18.z]
 0x7A516F: fld     st
 0x7A5171: fmulp   st(2), st
 0x7A5173: fxch    st(2)
 0x7A5175: faddp   st(1), st
-0x7A5177: fstp    [esp+1Ch+arg_4]
-0x7A517B: fld     [esp+1Ch+arg_4]
+0x7A5177: fstp    [esp+1Ch+start]
+0x7A517B: fld     [esp+1Ch+start]
 0x7A517F: fld     st
 0x7A5181: fmulp   st(3), st
 0x7A5183: fxch    st(2)

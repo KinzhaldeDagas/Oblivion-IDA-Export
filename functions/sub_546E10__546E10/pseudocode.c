@@ -13,56 +13,56 @@ signed __int16 __cdecl sub_546E10(_DWORD *a1, float a2, float a3, float a4, floa
   float v19; // [esp+2Ch] [ebp+18h]
   float v20; // [esp+2Ch] [ebp+18h]
 
-  if ( LOBYTE(a3) )
-    v8 = sub_4A9E30(a1);
+  if ( LOBYTE(a3) ) /*0x546e23*/
+    v8 = sub_4A9E30(a1); /*0x546e25*/
   else
-    v8 = sub_4A9E70(a1);
-  v16 = v8;
-  v9 = LOBYTE(a2);
-  v17 = (double)(GetRandomLargeInteger_(0) % 5 + 1) * (v16 * flt_B36D88);
-  if ( LOBYTE(a2) )
-    v10 = sub_4A9EB0(a1);
+    v8 = sub_4A9E70(a1); /*0x546e2c*/
+  v16 = v8; /*0x546e33*/
+  v9 = LOBYTE(a2); /*0x546e44*/
+  v17 = (double)(Game_RandomLargeInteger(0) % 5 + 1) * (v16 * g_GameSettingStringPointers_B36CD8[0x2C]); /*0x546e66*/
+  if ( LOBYTE(a2) ) /*0x546e6a*/
+    v10 = sub_4A9EB0(a1); /*0x546e6c*/
   else
-    v10 = sub_4A9EF0(a1);
-  v14 = v10;
-  v15 = (double)(GetRandomLargeInteger_(0) % 5 + 1) * (v14 * flt_B36D88);
-  if ( v9 )
+    v10 = sub_4A9EF0(a1); /*0x546e73*/
+  v14 = v10; /*0x546e7a*/
+  v15 = (double)(Game_RandomLargeInteger(0) % 5 + 1) * (v14 * g_GameSettingStringPointers_B36CD8[0x2C]); /*0x546ea7*/
+  if ( v9 ) /*0x546eab*/
   {
-    if ( a7 )
+    if ( a7 ) /*0x546eb2*/
     {
-      v17 = flt_B36D98 * v17;
-      v15 = flt_B36D98 * v15;
+      v17 = g_GameSettingStringPointers_B36CD8[0x30] * v17; /*0x546ec0*/
+      v15 = g_GameSettingStringPointers_B36CD8[0x30] * v15; /*0x546ec8*/
     }
   }
-  if ( (a8 & 2) != 0 )
-    v17 = 0.0;
-  if ( (a8 & 1) != 0 )
-    v15 = 0.0;
-  if ( LOBYTE(a6) )
-    v11 = flt_B36D80;
+  if ( (a8 & 2) != 0 ) /*0x546ed5*/
+    v17 = 0.0; /*0x546ed7*/
+  if ( (a8 & 1) != 0 ) /*0x546ede*/
+    v15 = 0.0; /*0x546ee0*/
+  if ( LOBYTE(a6) ) /*0x546eed*/
+    v11 = g_GameSettingStringPointers_B36CD8[0x2A]; /*0x546eef*/
   else
-    v11 = 1.0;
-  v19 = v11;
-  v20 = (double)(GetRandomLargeInteger_(0) % 5 + 1) * (v19 * flt_B36D88);
-  v12 = v20;
-  if ( v15 <= (double)v17 && v12 < v17 )
-    return 2;
-  if ( dbl_A2FAA0 * a5 > a4 )
-    return 2;
-  if ( v17 < (double)v15 && v15 > v12 && a5 * dbl_A563D0 < a4 )
-    return 1;
-  v18 = (float)(GetRandomLargeInteger_(0) % 0x64);
-  if ( (double)(*(char (__thiscall **)(_DWORD *))(*a1 + 0xE4))(a1) >= v18 )
+    v11 = 1.0; /*0x546ef7*/
+  v19 = v11; /*0x546efb*/
+  v20 = (double)(Game_RandomLargeInteger(0) % 5 + 1) * (v19 * g_GameSettingStringPointers_B36CD8[0x2C]); /*0x546f26*/
+  v12 = v20; /*0x546f36*/
+  if ( v15 <= (double)v17 && v12 < v17 ) /*0x546f45*/
+    return 2; /*0x546f87*/
+  if ( dbl_A2FAA0 * a5 > a4 ) /*0x546f5e*/
+    return 2; /*0x546f75*/
+  if ( v17 < (double)v15 && v15 > v12 && a5 * kFaceGenVariationScale1_5 < a4 ) /*0x546fad*/
+    return 1; /*0x546fba*/
+  v18 = (float)(Game_RandomLargeInteger(0) % 0x64); /*0x546feb*/
+  if ( (double)(*(char (__thiscall **)(_DWORD *))(*a1 + 0xE4))(a1) >= v18 ) /*0x54700d*/
   {
-    if ( (double)(GetRandomLargeInteger_(0) % 0x64) > flt_A58590 )
+    if ( (double)(Game_RandomLargeInteger(0) % 0x64) > flt_A58590 ) /*0x547034*/
     {
-      if ( (a8 & 8) == 0 )
-        return 8;
+      if ( (a8 & 8) == 0 ) /*0x54704a*/
+        return 8; /*0x547057*/
     }
-    else if ( (a8 & 4) == 0 )
+    else if ( (a8 & 4) == 0 ) /*0x547039*/
     {
-      return 4;
+      return 4; /*0x547046*/
     }
   }
-  return 0;
+  return 0; /*0x546f72*/
 }

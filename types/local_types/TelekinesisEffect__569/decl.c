@@ -1,1 +1,1 @@
-TelekinesisEffect
+struct TelekinesisEffect;

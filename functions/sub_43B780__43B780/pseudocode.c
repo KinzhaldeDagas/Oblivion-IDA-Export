@@ -1,17 +1,24 @@
-_DWORD **__stdcall sub_43B780(_DWORD **a1, int a2, int a3, unsigned __int8 a4, volatile LONG *a5, int a6)
+// QueuedTreeModel allocation wrapper. Allocates 0x40-byte entry, calls 0x4376A0, attaches queued children, then schedules via vtable slot +0x20.
+QueuedTreeModel_OblivionLayout **__stdcall QueuedTreeModel_CreateAndQueue(
+        QueuedTreeModel_OblivionLayout **outTask,
+        TESObjectREFR *reference,
+        TESObjectTREE_OblivionLayout_080_NiTArrayVerified *tree,
+        unsigned __int8 priority,
+        IOTask *parent,
+        int unknownArg)
 {
-  _DWORD *v6; // eax
-  _DWORD *v7; // eax
+  QueuedTreeModel_OblivionLayout *v6; // eax
+  QueuedTreeModel_OblivionLayout *v7; // eax
 
-  v6 = (_DWORD *)FormHeapAlloc(0x40u);
-  if ( v6 )
-    v7 = sub_4376A0(v6, a2, a3, a4, a6);
+  v6 = (QueuedTreeModel_OblivionLayout *)FormHeapAlloc(0x40u);// Verified: queued tree model task allocation is 0x40 bytes and uses the local QueuedTreeModel_OblivionLayout. Fallout's task implementation follows the same scheduling role but its layout is PPC-specific and must not share Oblivion offsets. /*0x43b7b6*/
+  if ( v6 ) /*0x43b7cc*/
+    v7 = QueuedTreeModel_ctor(v6, reference, tree, priority, unknownArg); /*0x43b7e4*/
   else
-    v7 = 0;
-  *a1 = v7;
-  if ( v7 )
-    InterlockedIncrement(v7 + 2);
-  sub_43AC40((QueuedChildren **)*a1, a5);
-  (*(void (__thiscall **)(_DWORD))(**a1 + 0x20))(*a1);
-  return a1;
+    v7 = 0; /*0x43b7eb*/
+  *outTask = v7; /*0x43b7f3*/
+  if ( v7 ) /*0x43b7f5*/
+    InterlockedIncrement((volatile LONG *)&v7->queuedBase_000_02B[8]); /*0x43b7fb*/
+  sub_43AC40((QueuedChildren **)*outTask, (volatile LONG *)parent); /*0x43b818*/
+  (*(void (__thiscall **)(QueuedTreeModel_OblivionLayout *))(*(_DWORD *)(*outTask)->queuedBase_000_02B + 0x20))(*outTask); /*0x43b824*/
+  return outTask; /*0x43b828*/
 }

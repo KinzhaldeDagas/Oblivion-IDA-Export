@@ -8,7 +8,6 @@
 0x748279: push    ebx
 0x74827A: push    edi
 0x74827B: jmp     short loc_748280
-0x74827D: align 10h
 0x748280: xor     ebx, ebx
 0x748282: test    ebp, ebp
 0x748284: jbe     short loc_7482DF

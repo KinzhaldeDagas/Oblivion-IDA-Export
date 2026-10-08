@@ -100,7 +100,6 @@
 0x93C210: lea     edx, [esp+70h+var_30]
 0x93C214: xor     ecx, ecx
 0x93C216: jmp     short loc_93C220
-0x93C218: align 10h
 0x93C220: movaps  xmm0, xmmword ptr [edx]
 0x93C223: fld     dword ptr ds:0A2FAA8h
 0x93C229: mulps   xmm0, xmm0

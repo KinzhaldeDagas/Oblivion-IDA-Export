@@ -1,4 +1,4 @@
-0x67EB60: mov     eax, ds:0B15450h
+0x67EB60: mov     eax, ds:0B15450h; Verified shared graph route test used from actor package, combat, PathGrid selection, and fast-travel surface construction. It accepts a valid direct segment; if straight-segment validation fails, it invokes actor-aware connected-point A*.
 0x67EB65: push    ebx
 0x67EB66: push    esi
 0x67EB67: mov     esi, ecx
@@ -20,7 +20,7 @@
 0x67EBA1: mov     [esi+24h], eax
 0x67EBA4: mov     [esi+28h], eax
 0x67EBA7: call    sub_67D7B0
-0x67EBAC: mov     eax, [esp+8+arg_0]
+0x67EBAC: mov     eax, [esp+8+start]
 0x67EBB0: mov     ecx, [eax]
 0x67EBB2: mov     [esi], ecx
 0x67EBB4: mov     edx, [eax+4]
@@ -28,7 +28,7 @@
 0x67EBBA: mov     eax, [eax+8]
 0x67EBBD: mov     [esi+8], eax
 0x67EBC0: fld     dword ptr [esi]
-0x67EBC2: mov     eax, [esp+8+arg_4]
+0x67EBC2: mov     eax, [esp+8+end]
 0x67EBC6: mov     ecx, [eax]
 0x67EBC8: mov     [esi+0Ch], ecx
 0x67EBCB: mov     edx, [eax+4]
@@ -53,18 +53,18 @@
 0x67EBFC: fnstsw  ax
 0x67EBFE: test    ah, 44h
 0x67EC01: jnp     short loc_67EC2F
-0x67EC03: mov     ecx, [esp+8+arg_C]
+0x67EC03: mov     ecx, [esp+8+extraCost]
 0x67EC07: push    edi
-0x67EC08: mov     edi, [esp+0Ch+arg_8]
-0x67EC0C: push    ecx; float
-0x67EC0D: push    edi; int
-0x67EC0E: mov     ecx, esi
-0x67EC10: call    sub_67E160
+0x67EC08: mov     edi, [esp+0Ch+actor]
+0x67EC0C: push    ecx; strictMode
+0x67EC0D: push    edi; actor
+0x67EC0E: mov     ecx, esi; segmentQuery
+0x67EC10: call    ConnectedPointGraph_TestStraightSegment; Verified direct-segment test used before actor-aware A*. It locates PathGrid nodes near both endpoints, rejects/defers segments based on distance, water-state mismatch and actor collision-height checks, and reports whether graph fallback should be attempted. Exact meaning of several geometric thresholds remains Unknown.
 0x67EC15: test    al, al
 0x67EC17: jz      short loc_67EC27
-0x67EC19: push    edi
-0x67EC1A: mov     ecx, esi
-0x67EC1C: call    sub_67E8D0
+0x67EC19: push    edi; actor
+0x67EC1A: mov     ecx, esi; searchContext
+0x67EC1C: call    ConnectedPointGraph_FindActorAwarePath; Verified actor-aware A* over graph-node adjacency. It uses TESConnectedPoint_ComputeActorAwareEdgeCost, skips candidates whose PathGrid linkedPointsDisabled bit 0x20 is set, and applies an additional actor-specific path filter. Its pathgrid caller selects a reachable point for actor movement.
 0x67EC21: pop     edi
 0x67EC22: pop     esi
 0x67EC23: pop     ebx

@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x689F8F",
-    "line": "mov     [esp+68h+var_48], ecx",
+    "line": "mov     [esp+68h+start.x], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -295,13 +295,13 @@
   },
   {
     "ea": "0x689F9E",
-    "line": "push    ecx; int",
+    "line": "push    ecx; vertexColor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x689F9F",
-    "line": "mov     [esp+6Ch+var_44], edx",
+    "line": "mov     [esp+6Ch+start.y], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -337,25 +337,25 @@
   },
   {
     "ea": "0x689FB5",
-    "line": "mov     [esp+70h+var_40], eax",
+    "line": "mov     [esp+70h+start.z], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x689FB9",
-    "line": "fstp    [esp+70h+var_70]; float",
+    "line": "fstp    [esp+70h+scale]; scale",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x689FBC",
-    "line": "call    sub_47FD30",
+    "line": "call    NiTriShape_CreateOctahedronGeometry; Verified generic NiTriShape geometry factory, used by PathGrid rendering and multiple other callers. It builds six octahedron vertices (four ±scale X/Y equatorial points and two ±scale*sqrt(2) Z poles), repeats a supplied NiColorAlpha for all six, writes 24 u16 indices for eight triangular faces, and returns a NiTriShape. This constructs a filled octahedron surface; wireframe is a separate scene property.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x689FC1",
-    "line": "mov     edx, [esp+70h+var_48]",
+    "line": "mov     edx, [esp+70h+start.x]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x689FC8",
-    "line": "mov     ecx, [esp+70h+var_44]",
+    "line": "mov     ecx, [esp+70h+start.y]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x689FCF",
-    "line": "mov     edx, [esp+70h+var_40]",
+    "line": "mov     edx, [esp+70h+start.z]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -475,13 +475,13 @@
   },
   {
     "ea": "0x68A001",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x68A003",
-    "line": "call    sub_68B110",
+    "line": "call    TravelPathNode_GetPosition; Verified TravelPathNode_GetPosition returns a stored NiPoint3* for kind 1; for kind 0, returns reference GetPos unless the ref has TeleportData, in which case it returns the linked door's TeleportData xyz marker. Null payloads and unrecognized kinds return g_zeroNiPoint3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x68A012",
-    "line": "mov     [esp+68h+var_54], ecx",
+    "line": "mov     [esp+68h+end.x], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -535,13 +535,13 @@
   },
   {
     "ea": "0x68A021",
-    "line": "push    ecx; int",
+    "line": "push    ecx; vertexColor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x68A022",
-    "line": "mov     [esp+6Ch+var_50], edx",
+    "line": "mov     [esp+6Ch+end.y], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -577,25 +577,25 @@
   },
   {
     "ea": "0x68A038",
-    "line": "mov     [esp+70h+var_4C], eax",
+    "line": "mov     [esp+70h+end.z], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x68A03C",
-    "line": "fstp    [esp+70h+var_70]; float",
+    "line": "fstp    [esp+70h+scale]; scale",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x68A03F",
-    "line": "call    sub_47FD30",
+    "line": "call    NiTriShape_CreateOctahedronGeometry; Verified generic NiTriShape geometry factory, used by PathGrid rendering and multiple other callers. It builds six octahedron vertices (four ±scale X/Y equatorial points and two ±scale*sqrt(2) Z poles), repeats a supplied NiColorAlpha for all six, writes 24 u16 indices for eight triangular faces, and returns a NiTriShape. This constructs a filled octahedron surface; wireframe is a separate scene property.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x68A044",
-    "line": "mov     edx, [esp+70h+var_54]",
+    "line": "mov     edx, [esp+70h+end.x]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x68A055",
-    "line": "mov     eax, [esp+70h+var_50]",
+    "line": "mov     eax, [esp+70h+end.y]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x68A064",
-    "line": "mov     ecx, [esp+70h+var_4C]",
+    "line": "mov     ecx, [esp+70h+end.z]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -667,13 +667,13 @@
   },
   {
     "ea": "0x68A06C",
-    "line": "push    edx",
+    "line": "push    edx; endColor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x68A06D",
-    "line": "lea     eax, [esp+74h+var_54]",
+    "line": "lea     eax, [esp+74h+end]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x68A07C",
-    "line": "push    eax",
+    "line": "push    eax; end",
     "mnemonic": "push",
     "size": 1
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x68A089",
-    "line": "push    ecx",
+    "line": "push    ecx; startColor",
     "mnemonic": "push",
     "size": 1
   },
@@ -733,19 +733,19 @@
   },
   {
     "ea": "0x68A08E",
-    "line": "lea     edx, [esp+7Ch+var_48]",
+    "line": "lea     edx, [esp+7Ch+start]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x68A092",
-    "line": "push    edx",
+    "line": "push    edx; start",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x68A093",
-    "line": "call    sub_47F070",
+    "line": "call    NiLines_CreateSegment; Verified generic NiLines_CreateSegment: copies two endpoint positions and two per-vertex colors, supplies line flags [1,0], and returns a two-vertex NiLines segment. TESPathGrid_RebuildRenderedGraph calls it for adjacency edges.",
     "mnemonic": "call",
     "size": 5
   },
@@ -865,37 +865,37 @@
   },
   {
     "ea": "0x68A0CC",
-    "line": "mov     eax, [esp+68h+var_54]",
+    "line": "mov     eax, [esp+68h+end.x]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x68A0D0",
-    "line": "mov     ecx, [esp+68h+var_50]",
+    "line": "mov     ecx, [esp+68h+end.y]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x68A0D4",
-    "line": "mov     edx, [esp+68h+var_4C]",
+    "line": "mov     edx, [esp+68h+end.z]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x68A0D8",
-    "line": "mov     [esp+68h+var_48], eax",
+    "line": "mov     [esp+68h+start.x], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x68A0DC",
-    "line": "mov     [esp+68h+var_44], ecx",
+    "line": "mov     [esp+68h+start.y], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x68A0E0",
-    "line": "mov     [esp+68h+var_40], edx",
+    "line": "mov     [esp+68h+start.z], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -976,5 +976,77 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C5280",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5283",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C5284",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5289",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C528A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C528B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C528F",
+    "line": "lea     eax, [edx-58h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5292",
+    "line": "mov     ecx, [edx-5Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5295",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C5297",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C529C",
+    "line": "mov     eax, offset stru_AEDA90",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C52A1",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

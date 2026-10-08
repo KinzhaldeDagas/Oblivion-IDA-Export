@@ -1,4 +1,4 @@
-0x777F10: push    esi
+0x777F10: push    esi; Pass225/226: Tests whether NiGeometryBufferData is live: stream count nonzero and every VBChip has a D3D vertex buffer.
 0x777F11: mov     esi, [ecx+1Ch]
 0x777F14: test    esi, esi
 0x777F16: jnz     short loc_777F1C

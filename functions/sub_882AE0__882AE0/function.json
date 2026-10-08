@@ -1,19 +1,36 @@
 {
-  "callees_count": 70,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 33,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_882AE0",
+  "chunks": [
+    [
+      "0x882AE0",
+      "0x882FBE"
+    ],
+    [
+      "0x9D5810",
+      "0x9D5841"
+    ]
+  ],
+  "chunks_sha256": "18a8d58ae5210bf5eefcba13e6b59fbd1b2385ee90faae4085763011269538b8",
+  "comment_regular": "HairShaderProperty render-pass producer at vtable +0x5C. Normally constructs Hair selectors 0xE0 (no enabled light) or 0xE1 (active-light path), plus local mode/caster work. If renderer B42F3E is enabled and flags at this+0x1C contain 0x8000 or 0x10000, it delegates to BSShaderPPLightingProperty_BuildRenderPasses; shader-package class >=2 then invokes Hair vtable +0x9C and can emit inherited 0x177/0x178/0x179 records.\n\nExact Hair vtable +0x5C builder. Ordinary Hair emits 0xE0/0xE1. Only ImageSpaceEffectEnabled plus Refract/RefractF delegates to the base +0x5C builder; class 1 then emits refraction 0x160..0x162 and other class-1 passes, while class >=2 emits 0x160..0x162 and returns. Hair cannot reach 0x177..0x17A.",
+  "comment_repeatable": "Exact Hair vtable +0x5C builder. Ordinary Hair emits 0xE0/0xE1. Only ImageSpaceEffectEnabled plus Refract/RefractF delegates to the base +0x5C builder; class 1 then emits refraction 0x160..0x162 and other class-1 passes, while class >=2 emits 0x160..0x162 and returns. Hair cannot reach 0x177..0x17A.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "HairShaderProperty_BuildRenderPasses",
   "end_ea": "0x882FBE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_882AE0",
+  "name": "HairShaderProperty_BuildRenderPasses",
   "segment": ".text",
   "sha256": "44b3c5f6d7eb4e56296e07b596005e4b16e3497191a084bfa38836f04d729fc6",
   "size": 1246,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x882AE0",
-  "type": "NiTPointerList__BSImageSpaceShader *__thiscall(_DWORD *this, NiGeometry *, int, _WORD *, int)",
-  "xrefs_from_count": 425,
+  "total_chunk_size": 1295,
+  "type": "NiTPointerList__BSImageSpaceShader *__thiscall(HairShaderProperty *this, NiGeometry *geometry, int renderFlags, unsigned __int16 *passCount, int emitMode)",
+  "xrefs_from_count": 444,
   "xrefs_to_count": 1
 }

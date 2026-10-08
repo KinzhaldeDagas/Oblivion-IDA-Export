@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x473AA0",
-    "line": "fldz",
+    "line": "fldz; Whole ActorAnimData sequence reset. Clears all active slots, deactivates current/controller sequences, restores current and queued key sentinels, resets root motion and idle ownership, clears controlled-block links, then runs the controller-sequence reset/rebind phase. Not safe as scoped replacement cleanup.",
     "mnemonic": "fldz",
     "size": 2
   },
@@ -19,13 +19,13 @@
   },
   {
     "ea": "0x473AA4",
-    "line": "fstp    [esp+8+var_8]; float",
+    "line": "fstp    [esp+8+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x473AA7",
-    "line": "push    4; int",
+    "line": "push    4; slot",
     "mnemonic": "push",
     "size": 2
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x473AAB",
-    "line": "call    sub_470FC0",
+    "line": "call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -55,25 +55,25 @@
   },
   {
     "ea": "0x473AB3",
-    "line": "fstp    [esp+8+var_8]; float",
+    "line": "fstp    [esp+8+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x473AB6",
-    "line": "push    0; int",
+    "line": "push    0; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x473AB8",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x473ABA",
-    "line": "call    sub_470FC0",
+    "line": "call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -91,25 +91,25 @@
   },
   {
     "ea": "0x473AC2",
-    "line": "fstp    [esp+8+var_8]; float",
+    "line": "fstp    [esp+8+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x473AC5",
-    "line": "push    1; int",
+    "line": "push    1; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x473AC7",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x473AC9",
-    "line": "call    sub_470FC0",
+    "line": "call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -127,25 +127,25 @@
   },
   {
     "ea": "0x473AD1",
-    "line": "fstp    [esp+8+var_8]; float",
+    "line": "fstp    [esp+8+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x473AD4",
-    "line": "push    2; int",
+    "line": "push    2; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x473AD6",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x473AD8",
-    "line": "call    sub_470FC0",
+    "line": "call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,19 +229,19 @@
   },
   {
     "ea": "0x473B01",
-    "line": "fstp    [esp+8+var_8]; float",
+    "line": "fstp    [esp+8+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x473B04",
-    "line": "push    eax; int",
+    "line": "push    eax; sequence",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x473B05",
-    "line": "call    sub_470B50",
+    "line": "call    BSAnimGroupSequence_Deactivate; BSAnimGroupSequence deactivation wrapper. Delegates to NiControllerSequence_Deactivate with the secondary stop flag forced to zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,13 +283,13 @@
   },
   {
     "ea": "0x473B1F",
-    "line": "fstp    [esp+8+var_8]; float",
+    "line": "fstp    [esp+8+easeOutTime]; float",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x473B22",
-    "line": "call    sub_6C4480",
+    "line": "call    NiControllerManager_DeactivateTransitionSources; Walks the controller manager's active sequence list and deactivates every sequence in native state 4 (transition source) using the caller-supplied ease-out time.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x473B29",
-    "line": "push    0; char",
+    "line": "push    0; transition",
     "mnemonic": "push",
     "size": 2
   },
@@ -313,19 +313,19 @@
   },
   {
     "ea": "0x473B2C",
-    "line": "fstp    [esp+0Ch+var_C]; float",
+    "line": "fstp    [esp+0Ch+var_C]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x473B2F",
-    "line": "mov     ecx, [esi+0ACh]",
+    "line": "mov     ecx, [esi+0ACh]; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x473B35",
-    "line": "call    sub_6C9CB0",
+    "line": "call    NiControllerSequence_Deactivate; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x473B5B",
-    "line": "call    sub_4728C0",
+    "line": "call    ActorAnimData_ResetRootMotion; Resets ActorAnimData root-motion state: zeroes the cached accumulation vector at +0x18, restores the accumulation/root node transform fields, then finds the matching accumulation controllers and resets them. Used before sequence play and by full actor/animation reset paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x473B72",
-    "line": "call    sub_472ED0",
+    "line": "call    AnimIdle_DestroyAndRelease; Destroys one ActorAnimData-owned AnimIdle slot. Resolves the idle KF encoded key from KFModel +0x08, removes the matching sequence from the controller manager/map entry where appropriate, runs AnimIdle_CleanupLoadedResources, frees the 0x2C-byte holder, nulls the caller slot, and balances native references.",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x473B8F",
-    "line": "call    sub_472ED0",
+    "line": "call    AnimIdle_DestroyAndRelease; Destroys one ActorAnimData-owned AnimIdle slot. Resolves the idle KF encoded key from KFModel +0x08, removes the matching sequence from the controller manager/map entry where appropriate, runs AnimIdle_CleanupLoadedResources, frees the 0x2C-byte holder, nulls the caller slot, and balances native references.",
     "mnemonic": "call",
     "size": 5
   },
@@ -469,19 +469,19 @@
   },
   {
     "ea": "0x473B97",
-    "line": "fstp    [esp+0Ch+var_C]; float",
+    "line": "fstp    [esp+0Ch+var_C]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x473B9A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x473B9C",
-    "line": "push    4; int",
+    "line": "push    4; slot",
     "mnemonic": "push",
     "size": 2
   },
@@ -499,13 +499,13 @@
   },
   {
     "ea": "0x473BAE",
-    "line": "call    sub_470FC0",
+    "line": "call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x473BB3",
-    "line": "mov     ecx, [esi+98h]",
+    "line": "mov     ecx, [esi+98h]; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -541,13 +541,13 @@
   },
   {
     "ea": "0x473BC1",
-    "line": "fstp    [esp+8+var_8]; float",
+    "line": "fstp    [esp+8+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x473BC4",
-    "line": "call    sub_4715C0",
+    "line": "call    NiControllerManager_DeactivateAllSequences; Iterates all controller-manager sequence slots and deactivates each sequence with the supplied ease-out time and transition flag zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x473BD7",
-    "line": "call    sub_4730B0",
+    "line": "call    sub_4730B0; Walks every controller-manager sequence, RTTI-filters to the Oblivion animation-group sequence class, and clears the +8 pointer in each 0x10-byte controlled-block record through 0x49F520. Kept conservatively unnamed because the exact field type is not yet recovered.",
     "mnemonic": "call",
     "size": 5
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x473BE0",
-    "line": "call    sub_473200",
+    "line": "call    ActorAnimData_ResetControllerSequences; Controller-sequence reset/rebind phase. Clears active slots 4/0/1/2, deactivates the queued/current blend sequence, restores key/state sentinels, removes a controller object from the actor root, then rebinds or repairs every non-__TempBlendSequence__ manager sequence according to the flag. This is whole-object reset logic, not a per-key cleanup API.",
     "mnemonic": "call",
     "size": 5
   },

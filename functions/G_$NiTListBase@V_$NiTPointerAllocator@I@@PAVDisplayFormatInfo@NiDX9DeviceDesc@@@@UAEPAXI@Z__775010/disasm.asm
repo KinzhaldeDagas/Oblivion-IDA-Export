@@ -4,7 +4,7 @@
 0x775018: mov     dword ptr [esi], offset ??_7?$NiTListBase@V?$NiTPointerAllocator@I@@PAVDisplayFormatInfo@NiDX9DeviceDesc@@@@6B@; const NiTListBase<NiTPointerAllocator<uint>,NiDX9DeviceDesc::DisplayFormatInfo *>::`vftable'
 0x77501E: jz      short loc_775029
 0x775020: push    esi
-0x775021: call    FormHeapFree
+0x775021: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x775026: add     esp, 4
 0x775029: mov     eax, esi
 0x77502B: pop     esi

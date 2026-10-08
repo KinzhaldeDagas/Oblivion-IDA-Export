@@ -1,29 +1,29 @@
-0x621B40: sub     esp, 1Ch
+0x621B40: sub     esp, 1Ch; Six-argument cdecl combat-choice evaluator. skipFleeAndYieldEvaluation nonzero skips the entire flee/yield block; allowYieldEvaluation gates only the yield portion when that block runs. These are control flags, not allowYield/hasYieldIdle. Any additional throwing-weapon scoring multipliers are external emulation policy, not observed here.
 0x621B43: fld     dword ptr ds:0A30634h
 0x621B49: push    ebx
 0x621B4A: push    ebp
 0x621B4B: fstp    [esp+24h+var_18]
 0x621B4F: push    esi
-0x621B50: mov     esi, [esp+28h+arg_0]
+0x621B50: mov     esi, [esp+28h+actor]
 0x621B54: push    edi
 0x621B55: mov     ecx, esi
 0x621B57: mov     dword ptr [esp+2Ch+var_14], 0Dh
-0x621B5F: call    sub_5E0F50
+0x621B5F: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x621B64: mov     edx, [eax]
 0x621B66: mov     ecx, eax
 0x621B68: mov     eax, [edx+16Ch]
 0x621B6E: push    40h ; '@'
 0x621B70: call    eax
-0x621B72: mov     ecx, esi
+0x621B72: mov     ecx, esi; this
 0x621B74: mov     byte ptr [esp+2Ch+var_1C+2], al
-0x621B78: call    Actor_IsSwimming
+0x621B78: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x621B7D: mov     edx, [esi]
 0x621B7F: mov     byte ptr [esp+2Ch+var_1C+1], al
 0x621B83: mov     eax, [edx+330h]
 0x621B89: mov     ecx, esi
 0x621B8B: call    eax
 0x621B8D: test    eax, eax
-0x621B8F: mov     edi, [esp+2Ch+arg_8]
+0x621B8F: mov     edi, [esp+2Ch+target]
 0x621B93: jz      short loc_621BEA
 0x621B95: mov     edx, [esi]
 0x621B97: mov     eax, [edx+330h]
@@ -31,27 +31,27 @@
 0x621B9F: call    eax
 0x621BA1: mov     edi, eax
 0x621BA3: mov     ecx, edi
-0x621BA5: call    sub_6135F0
+0x621BA5: call    CombatController_GetCurrentTarget
 0x621BAA: test    eax, eax
 0x621BAC: jz      short loc_621BDE
 0x621BAE: mov     ecx, edi
-0x621BB0: call    sub_6135F0
-0x621BB5: mov     ecx, eax
-0x621BB7: call    Actor_IsSwimming
+0x621BB0: call    CombatController_GetCurrentTarget
+0x621BB5: mov     ecx, eax; this
+0x621BB7: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x621BBC: test    al, al
 0x621BBE: jz      short loc_621BDE
-0x621BC0: mov     ecx, [edi+3Ch]
-0x621BC3: call    Actor_IsSwimming
+0x621BC0: mov     ecx, [edi+3Ch]; this
+0x621BC3: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x621BC8: test    al, al
 0x621BCA: jnz     short loc_621BDE
 0x621BCC: mov     ecx, [edi+3Ch]
 0x621BCF: call    Actor_CanFightInWater
 0x621BD4: test    al, al
 0x621BD6: jnz     short loc_621BDE
-0x621BD8: mov     byte ptr [esp+2Ch+arg_0], al
+0x621BD8: mov     byte ptr [esp+2Ch+actor], al
 0x621BDC: jmp     short loc_621C1E
 0x621BDE: mov     cl, [edi+174h]
-0x621BE4: mov     byte ptr [esp+2Ch+arg_0], cl
+0x621BE4: mov     byte ptr [esp+2Ch+actor], cl
 0x621BE8: jmp     short loc_621C1E
 0x621BEA: mov     ecx, [esi+58h]
 0x621BED: test    ecx, ecx
@@ -68,14 +68,14 @@
 0x621C05: push    edi; int
 0x621C06: push    0; int
 0x621C08: mov     ecx, esi; int
-0x621C0A: call    sub_5F2820
+0x621C0A: call    Actor_LineOfSight; Oblivion actor line-of-sight query used by detection, combat reach, tactical refresh, and ray-cast script paths. Performs cell/world-space and Havok visibility tests and can report the viewed actor segment through the output parameter. Fallout corroborates the Actor::LineOfSight family name only.
 0x621C0F: push    eax
 0x621C10: push    edi
 0x621C11: push    esi
 0x621C12: call    sub_617590
 0x621C17: add     esp, 0Ch
-0x621C1A: mov     byte ptr [esp+2Ch+arg_0], al
-0x621C1E: mov     ebx, [esp+2Ch+arg_4]
+0x621C1A: mov     byte ptr [esp+2Ch+actor], al
+0x621C1E: mov     ebx, [esp+2Ch+equippedEntry]
 0x621C22: test    ebx, ebx
 0x621C24: jz      short loc_621C2C
 0x621C26: mov     dword ptr [esp+2Ch+var_14+4], ebx
@@ -120,9 +120,9 @@
 0x621C9E: mov     eax, [ebp+64h]
 0x621CA1: test    eax, eax
 0x621CA3: jz      short loc_621CD0
-0x621CA5: mov     ecx, ebx
+0x621CA5: mov     ecx, ebx; this
 0x621CA7: lea     edi, [eax+24h]
-0x621CAA: call    sub_4849C0
+0x621CAA: call    EquippedEntryData_GetCharge; Return per-instance ExtraCharge when present; otherwise return the TESEnchantableForm base charge. Returns the sentinel/default when the EntryData form is not enchantable.
 0x621CAF: fstp    [esp+2Ch+var_8]
 0x621CB3: mov     edx, [edi]
 0x621CB5: mov     eax, [edx]
@@ -154,12 +154,12 @@
 0x621CFE: jmp     short loc_621D4F
 0x621D00: xor     ebp, ebp
 0x621D02: jmp     loc_621C69
-0x621D07: push    1
-0x621D09: push    0
-0x621D0B: push    11h
-0x621D0D: mov     ecx, esi
+0x621D07: push    1; forceWeaponPrefix
+0x621D09: push    0; weaponEntryDataArg
+0x621D0B: push    11h; groupID
+0x621D0D: mov     ecx, esi; this
 0x621D0F: xor     bl, bl
-0x621D11: call    Actor_LoadAnimGroup?
+0x621D11: call    Actor_LoadAnimGroup_; Builds an initial encoded key from live actor movement/weapon state and requested fixed group ID, then returns ActorAnimData_ResolveAnimKeyFallback's concrete playable key or sentinel 0x00FF when no ActorAnimData exists.
 0x621D16: movzx   edi, ax
 0x621D19: test    di, di
 0x621D1C: jz      short loc_621D47
@@ -174,7 +174,7 @@
 0x621D38: push    ecx
 0x621D39: push    edi
 0x621D3A: mov     ecx, eax
-0x621D3C: call    sub_470960
+0x621D3C: call    ActorAnimData_FindAnimMapEntry; CustomAnimSupport decode: anim-map lookup helper used by playback, validators, and save/load restore to test an encoded group key.
 0x621D41: test    al, al
 0x621D43: jz      short loc_621D47
 0x621D45: mov     bl, 1
@@ -189,9 +189,9 @@
 0x621D63: jz      loc_621E33
 0x621D69: cmp     byte ptr [esp+2Ch+var_1C+3], 0
 0x621D6E: jz      loc_621E33
-0x621D74: cmp     [esp+2Ch+arg_4], 0
+0x621D74: cmp     [esp+2Ch+equippedEntry], 0
 0x621D79: jz      short loc_621D8B
-0x621D7B: mov     edx, [esp+2Ch+arg_4]
+0x621D7B: mov     edx, [esp+2Ch+equippedEntry]
 0x621D7F: push    edx
 0x621D80: push    esi
 0x621D81: call    sub_612A90
@@ -249,8 +249,8 @@
 0x621E1C: fldz
 0x621E1E: mov     dword ptr [esp+2Ch+var_14], 0Dh
 0x621E26: fstp    [esp+2Ch+var_18]
-0x621E2A: mov     ecx, ebp
-0x621E2C: call    TESObjectWEAP_GetWeaponSkillAV
+0x621E2A: mov     ecx, ebp; this
+0x621E2C: call    TESObjectWEAP_GetWeaponSkillAV; Sidecar decode: combat selection obtains candidate weapon native skill AV before comparing weapon skill against hand-to-hand.
 0x621E31: mov     ebx, eax
 0x621E33: test    edi, edi
 0x621E35: jz      short loc_621E6F
@@ -267,7 +267,7 @@
 0x621E50: retn
 0x621E51: cmp     dword ptr [edi+6Ch], 0Bh
 0x621E55: jz      short loc_621E6F
-0x621E57: cmp     byte ptr [esp+2Ch+arg_0], 0
+0x621E57: cmp     byte ptr [esp+2Ch+actor], 0
 0x621E5C: mov     ebp, dword ptr [esp+2Ch+var_14]
 0x621E60: jnz     short loc_621E89
 0x621E62: cmp     ebp, 1
@@ -275,7 +275,7 @@
 0x621E67: fldz
 0x621E69: fstp    [esp+2Ch+var_18]
 0x621E6D: jmp     short loc_621E7A
-0x621E6F: cmp     byte ptr [esp+2Ch+arg_0], 0
+0x621E6F: cmp     byte ptr [esp+2Ch+actor], 0
 0x621E74: mov     ebp, dword ptr [esp+2Ch+var_14]
 0x621E78: jnz     short loc_621E89
 0x621E7A: mov     ecx, esi; this
@@ -284,17 +284,17 @@
 0x621E83: jz      loc_621F5E
 0x621E89: test    edi, edi
 0x621E8B: fldz
-0x621E8D: fstp    [esp+2Ch+arg_4]
+0x621E8D: fstp    [esp+2Ch+equippedEntry]
 0x621E91: jz      short loc_621EEE
 0x621E93: movzx   eax, byte ptr [edi+17Ch]
 0x621E9A: push    eax
 0x621E9B: push    3
-0x621E9D: lea     ecx, [esp+34h+arg_4]
+0x621E9D: lea     ecx, [esp+34h+equippedEntry]
 0x621EA1: push    ecx
 0x621EA2: mov     ecx, edi
-0x621EA4: call    sub_616980
+0x621EA4: call    CombatController_SelectAttackSpellByMode
 0x621EA9: mov     ecx, eax
-0x621EAB: fld     [esp+2Ch+arg_4]
+0x621EAB: fld     [esp+2Ch+equippedEntry]
 0x621EAF: mov     [edi+7Ch], ecx
 0x621EB2: fld     [esp+2Ch+var_18]
 0x621EB6: fcomp   st(1)
@@ -324,14 +324,14 @@
 0x621EF8: push    0; int
 0x621EFA: mov     ecx, esi
 0x621EFC: call    eax
-0x621EFE: mov     [esp+34h+arg_4], eax
-0x621F02: fild    [esp+34h+arg_4]
+0x621EFE: mov     [esp+34h+equippedEntry], eax
+0x621F02: fild    [esp+34h+equippedEntry]
 0x621F06: push    ecx
 0x621F07: fstp    [esp+38h+var_38]; float
 0x621F0A: call    sub_546C60
-0x621F0F: fstp    [esp+38h+arg_4]
+0x621F0F: fstp    [esp+38h+equippedEntry]
 0x621F13: add     esp, 0Ch
-0x621F16: fld     [esp+2Ch+arg_4]
+0x621F16: fld     [esp+2Ch+equippedEntry]
 0x621F1A: fld     [esp+2Ch+var_18]
 0x621F1E: fcompp
 0x621F20: fnstsw  ax
@@ -341,7 +341,7 @@
 0x621F2C: jz      short loc_621F5E
 0x621F2E: cmp     ebx, 0FFFFFFFFh
 0x621F31: jz      short loc_621F54
-0x621F33: mov     edx, [esi]
+0x621F33: mov     edx, [esi]; Sidecar hook boundary: player weapon-vs-hand-to-hand comparison must use effective exclusive Blade/Spear sidecar skill without writing synthetic AVs.
 0x621F35: mov     eax, [edx+284h]
 0x621F3B: push    ebx
 0x621F3C: mov     ecx, esi
@@ -354,7 +354,7 @@
 0x621F4E: call    eax
 0x621F50: cmp     eax, ebx
 0x621F52: jle     short loc_621F5E
-0x621F54: fld     [esp+2Ch+arg_4]
+0x621F54: fld     [esp+2Ch+equippedEntry]
 0x621F58: xor     ebp, ebp
 0x621F5A: fstp    [esp+2Ch+var_18]
 0x621F5E: test    edi, edi
@@ -364,12 +364,12 @@
 0x621F69: movzx   ecx, byte ptr [edi+17Ch]
 0x621F70: fldz
 0x621F72: push    ecx
-0x621F73: fstp    [esp+30h+arg_4]
+0x621F73: fstp    [esp+30h+equippedEntry]
 0x621F77: push    4
-0x621F79: lea     edx, [esp+34h+arg_4]
+0x621F79: lea     edx, [esp+34h+equippedEntry]
 0x621F7D: push    edx
 0x621F7E: mov     ecx, edi
-0x621F80: call    sub_616980
+0x621F80: call    CombatController_SelectAttackSpellByMode
 0x621F85: cmp     byte ptr [esp+2Ch+var_1C+2], 0
 0x621F8A: mov     ecx, eax
 0x621F8C: mov     [edi+80h], ecx
@@ -378,7 +378,7 @@
 0x621F96: jmp     short loc_621FA0
 0x621F98: cmp     dword ptr [esp+2Ch+var_14+4], 0
 0x621F9D: setz    dl
-0x621FA0: fld     [esp+2Ch+arg_4]
+0x621FA0: fld     [esp+2Ch+equippedEntry]
 0x621FA4: fld     [esp+2Ch+var_18]
 0x621FA8: fcomp   st(1)
 0x621FAA: fnstsw  ax
@@ -420,20 +420,20 @@
 0x622015: mov     ecx, [eax]
 0x622017: add     ecx, 0Ch
 0x62201A: call    EffectItemList_GetSchoolAV
-0x62201F: cmp     [esp+2Ch+arg_10], 0
+0x62201F: cmp     [esp+2Ch+flag0], 0
 0x622024: jnz     loc_62215C
 0x62202A: mov     edx, [esi]
 0x62202C: mov     eax, [edx+284h]
 0x622032: push    22h ; '"'
 0x622034: mov     ecx, esi
 0x622036: call    eax
-0x622038: push    eax
+0x622038: push    eax; Combat choice reads actor Confidence, current/base Health, calls AI_CalculateFleeScore, and selects mode 7 only when score beats the current choice and fAICombatFleeScoreThreshold and combat style does not set FleeingDisabled (0x20).
 0x622039: push    8
 0x62203B: mov     ecx, esi
 0x62203D: call    Actor_GetBaseCalcAVi
 0x622042: mov     edx, [esi]
-0x622044: mov     [esp+30h+arg_4], eax
-0x622048: fild    [esp+30h+arg_4]
+0x622044: mov     [esp+30h+equippedEntry], eax
+0x622048: fild    [esp+30h+equippedEntry]
 0x62204C: mov     eax, [edx+288h]
 0x622052: push    ecx
 0x622053: fstp    [esp+34h+var_34]; int
@@ -442,9 +442,9 @@
 0x62205A: call    eax
 0x62205C: push    ecx
 0x62205D: fstp    [esp+3Ch+var_3C]; float
-0x622060: call    sub_546CC0
+0x622060: call    AI_CalculateFleeScore; Exact flee score: fAIFleeConfBase + confidence*fAIFleeConfMult + (1-currentHealth/baseHealth)*fAIFleeHealthMult. Vanilla defaults: 40 - 0.5*confidence + 20*missingHealthFraction.
 0x622065: mov     edx, [esi]
-0x622067: fstp    [esp+3Ch+arg_0]
+0x622067: fstp    [esp+3Ch+actor]
 0x62206B: mov     eax, [edx+25Ch]
 0x622071: add     esp, 0Ch
 0x622074: mov     ecx, esi
@@ -452,8 +452,8 @@
 0x622078: test    al, al
 0x62207A: jz      short loc_622082
 0x62207C: fldz
-0x62207E: fstp    [esp+2Ch+arg_4]
-0x622082: fld     [esp+2Ch+arg_4]
+0x62207E: fstp    [esp+2Ch+equippedEntry]
+0x622082: fld     [esp+2Ch+equippedEntry]
 0x622086: fld     [esp+2Ch+var_18]
 0x62208A: fcomp   st(1)
 0x62208C: fnstsw  ax
@@ -465,7 +465,7 @@
 0x62209D: test    ah, 5
 0x6220A0: jp      short loc_6220CC
 0x6220A2: mov     ecx, esi
-0x6220A4: call    sub_5E0F50
+0x6220A4: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x6220A9: mov     edx, [eax]
 0x6220AB: mov     ecx, eax
 0x6220AD: mov     eax, [edx+16Ch]
@@ -473,18 +473,18 @@
 0x6220B5: call    eax
 0x6220B7: test    al, al
 0x6220B9: jnz     short loc_6220CC
-0x6220BB: fld     [esp+2Ch+arg_4]
+0x6220BB: fld     [esp+2Ch+equippedEntry]
 0x6220BF: mov     ebp, 7
 0x6220C4: fstp    [esp+2Ch+var_18]
 0x6220C8: jmp     short loc_6220CC
 0x6220CA: fstp    st
-0x6220CC: cmp     [esp+2Ch+arg_14], 0
+0x6220CC: cmp     [esp+2Ch+flag1], 0
 0x6220D1: jz      loc_62215C
-0x6220D7: mov     edi, [esp+2Ch+arg_8]
+0x6220D7: mov     edi, [esp+2Ch+target]
 0x6220DB: cmp     edi, ds:0B333C4h
 0x6220E1: jnz     short loc_62215C
 0x6220E3: mov     ecx, esi
-0x6220E5: call    sub_5E0F50
+0x6220E5: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x6220EA: mov     edx, [eax]
 0x6220EC: mov     ecx, eax
 0x6220EE: mov     eax, [edx+16Ch]
@@ -503,14 +503,14 @@
 0x622112: push    21h ; '!'; int
 0x622114: mov     ecx, esi
 0x622116: call    eax
-0x622118: fld     [esp+30h+arg_4]
+0x622118: fld     [esp+30h+equippedEntry]
 0x62211C: push    eax; int
 0x62211D: push    ecx
 0x62211E: fstp    [esp+38h+var_38]; float
 0x622121: call    sub_546D10
-0x622126: fstp    [esp+38h+arg_4]
+0x622126: fstp    [esp+38h+equippedEntry]
 0x62212A: add     esp, 0Ch
-0x62212D: fld     [esp+2Ch+arg_4]
+0x62212D: fld     [esp+2Ch+equippedEntry]
 0x622131: fld     [esp+2Ch+var_18]
 0x622135: fcompp
 0x622137: fnstsw  ax
@@ -523,10 +523,10 @@
 0x622149: call    eax
 0x62214B: test    al, al
 0x62214D: jz      short loc_62215C
-0x62214F: fld     [esp+2Ch+arg_4]
+0x62214F: fld     [esp+2Ch+equippedEntry]
 0x622153: mov     ebp, 5
 0x622158: fstp    [esp+2Ch+var_18]
-0x62215C: mov     eax, [esp+2Ch+arg_C]
+0x62215C: mov     eax, [esp+2Ch+outScore]
 0x622160: test    eax, eax
 0x622162: jz      short loc_62216A
 0x622164: fld     [esp+2Ch+var_18]

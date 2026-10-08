@@ -28,7 +28,7 @@
 0x564AD5: jz      short loc_564AEA
 0x564AD7: mov     eax, [esi+10h]
 0x564ADA: push    eax
-0x564ADB: push    offset dword_BA7F78
+0x564ADB: push    offset stru_BA7F78
 0x564AE0: call    NiRTTI_Cast
 0x564AE5: add     esp, 8
 0x564AE8: mov     edi, eax
@@ -53,3 +53,12 @@
 0x564B1D: pop     esi
 0x564B1E: add     esp, 10h
 0x564B21: retn
+0x9BD550: lea     ecx, [ebp-10h]; slot
+0x9BD553: jmp     NiPointerSlot_Release
+0x9BD558: mov     edx, [esp+arg_4]
+0x9BD55C: lea     eax, [edx-0Ch]
+0x9BD55F: mov     ecx, [edx-10h]
+0x9BD562: xor     ecx, eax
+0x9BD564: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BD569: mov     eax, offset stru_AE6EF8
+0x9BD56E: jmp     ___CxxFrameHandler3

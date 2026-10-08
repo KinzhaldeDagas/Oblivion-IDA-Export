@@ -54,7 +54,7 @@
 0x5B5925: mov     ecx, edi; this
 0x5B5927: mov     byte ptr [eax+94h], 1
 0x5B592E: mov     [esp+1Ch+var_4], 0FFFFFFFFh
-0x5B5936: call    ??1Menu@@UAE@XZ; Menu::~Menu(void)
+0x5B5936: call    ??1Menu@@UAE@XZ; Verified template ownership: Menu+0x1C byte gates freeing registered template objects; linked list nodes +8/+0xC always removed. Updated MenuMembr preserves size0x24; with vtable Menu total0x28. ReadFile0x5904EF sets Menu ownsTemplates=1 and BuildStorage ownsSubTemplates=0.
 0x5B593B: mov     ecx, [esp+1Ch+var_C]
 0x5B593F: mov     large fs:0, ecx
 0x5B5946: pop     ecx
@@ -62,3 +62,12 @@
 0x5B5948: pop     esi
 0x5B5949: add     esp, 10h
 0x5B594C: retn
+0x9C1FB0: mov     ecx, [ebp-10h]; this
+0x9C1FB3: jmp     ??1Menu@@UAE@XZ; Verified template ownership: Menu+0x1C byte gates freeing registered template objects; linked list nodes +8/+0xC always removed. Updated MenuMembr preserves size0x24; with vtable Menu total0x28. ReadFile0x5904EF sets Menu ownsTemplates=1 and BuildStorage ownsSubTemplates=0.
+0x9C1FB8: mov     edx, [esp+arg_4]
+0x9C1FBC: lea     eax, [edx-0Ch]
+0x9C1FBF: mov     ecx, [edx-10h]
+0x9C1FC2: xor     ecx, eax
+0x9C1FC4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C1FC9: mov     eax, offset stru_AEAF30
+0x9C1FCE: jmp     ___CxxFrameHandler3

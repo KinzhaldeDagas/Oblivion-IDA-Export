@@ -9,6 +9,6 @@
 0x7809AA: jnz     short loc_7809B2
 0x7809AC: mov     dword ptr [ecx], 0
 0x7809B2: push    eax
-0x7809B3: call    FormHeapFree
+0x7809B3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7809B8: pop     ecx
 0x7809B9: retn

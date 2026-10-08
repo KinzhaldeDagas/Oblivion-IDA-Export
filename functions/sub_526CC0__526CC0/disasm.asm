@@ -1,2 +1,2 @@
-0x526CC0: sub     ecx, 68h ; 'h'
-0x526CC3: jmp     sub_525380
+0x526CC0: sub     ecx, 68h ; 'h'; self
+0x526CC3: jmp     TESNPC_LoadModifiedForm

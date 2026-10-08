@@ -1,6 +1,5 @@
 int sub_9FE510()
 {
-  qword_B3BB2C = *(_QWORD *)&Vector3_InitValue_;
-  flt_B3BB34 = dword_B3F9B0;
-  return LODWORD(Vector3_InitValue_);
+  *(NiPoint3 *)qword_B3BB2C = g_zeroNiPoint3; /*0x9fe521*/
+  return LODWORD(g_zeroNiPoint3.x); /*0x9fe532*/
 }

@@ -1,4 +1,4 @@
-0x7876A0: mov     eax, [ecx+4]
+0x7876A0: mov     eax, [ecx+4]; Oblivion checked-vector size helper for 0x54-byte SIdvLeafTexture records: returns (end-begin)/0x54 or zero for null storage.
 0x7876A3: test    eax, eax
 0x7876A5: jnz     short loc_7876A8
 0x7876A7: retn

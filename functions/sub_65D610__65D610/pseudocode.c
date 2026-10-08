@@ -1,6 +1,6 @@
-int __thiscall sub_65D610(int this)
+// Clear Combat/Magic/Stealth specialization advance bytes. Normal character level-up does not call this wholesale reset; class/race finalization does.
+void __thiscall Player_ClearSpecializationAdvanceCounts(PlayerCharacter *this)
 {
-  *(_WORD *)(this + 0x5B8) = 0;
-  *(_BYTE *)(this + 0x5BA) = 0;
-  return 0;
+  this->combatAndMagicAdvanceCounts = 0; /*0x65d612*/
+  this->stealthAdvanceCount = 0; /*0x65d619*/
 }

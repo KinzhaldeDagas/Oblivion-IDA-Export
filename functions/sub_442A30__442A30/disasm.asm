@@ -1,9 +1,9 @@
-0x442A30: sub     esp, 0Ch
+0x442A30: sub     esp, 0Ch; Oblivion TES cell-node visibility controller. Updates the six-bit node mask and applies AppCulled to loaded interior/exterior cell categories. Categories are identified by Oblivion's own console command as Actor, Marker, Land Quad, Water Quad, Static Quad, and Active Quad. ShadowPass temporarily hides Actor (0) and Water Quad (3), then restores their prior mask states. Fallout was consulted only afterward and corroborates the conventional TES::ShowCellNode name.
 0x442A33: push    ebx
-0x442A34: mov     bl, [esp+10h+arg_4]
+0x442A34: mov     bl, [esp+10h+show]
 0x442A38: test    bl, bl
 0x442A3A: mov     [esp+10h+var_8], ecx
-0x442A3E: mov     ecx, [esp+10h+arg_0]
+0x442A3E: mov     ecx, [esp+10h+nodeCategory]
 0x442A42: jnz     short loc_442A53
 0x442A44: mov     eax, 1
 0x442A49: shl     eax, cl
@@ -34,7 +34,7 @@
 0x442A9D: pop     ebx
 0x442A9E: add     esp, 0Ch
 0x442AA1: retn    0Ch
-0x442AA4: mov     al, byte ptr [esp+10h+arg_8]
+0x442AA4: mov     al, [esp+10h+activeExteriorCellsOnly]
 0x442AA8: neg     al
 0x442AAA: push    ebp
 0x442AAB: push    esi
@@ -58,16 +58,16 @@
 0x442AE9: mov     ebx, [edx+eax*4]
 0x442AEC: test    ebx, ebx
 0x442AEE: jz      def_442B03; jumptable 00442B03 default case, case 3
-0x442AF4: cmp     [esp+1Ch+arg_0], 5; switch 6 cases
+0x442AF4: cmp     [esp+1Ch+nodeCategory], 5; switch 6 cases
 0x442AF9: ja      def_442B03; jumptable 00442B03 default case, case 3
-0x442AFF: mov     eax, [esp+1Ch+arg_0]
+0x442AFF: mov     eax, [esp+1Ch+nodeCategory]
 0x442B03: jmp     ds:jpt_442B03[eax*4]; switch jump
 0x442B0A: mov     ecx, ebx; jumptable 00442B03 cases 0,1
-0x442B0C: call    TESObjectCELL_GetNiNode?
+0x442B0C: call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.
 0x442B11: test    eax, eax
 0x442B13: jz      short loc_442B2F
 0x442B15: movzx   edx, word ptr [eax+0B6h]
-0x442B1C: mov     ecx, [esp+1Ch+arg_0]
+0x442B1C: mov     ecx, [esp+1Ch+nodeCategory]
 0x442B20: cmp     edx, ecx
 0x442B22: jbe     short loc_442B2F
 0x442B24: mov     eax, [eax+0B0h]
@@ -76,7 +76,7 @@
 0x442B2F: xor     eax, eax
 0x442B31: test    eax, eax
 0x442B33: jz      def_442B03; jumptable 00442B03 default case, case 3
-0x442B39: cmp     [esp+1Ch+arg_4], 0
+0x442B39: cmp     [esp+1Ch+show], 0
 0x442B3E: jnz     short loc_442B47
 0x442B40: or      word ptr [eax+18h], 1
 0x442B45: jmp     short def_442B03; jumptable 00442B03 default case, case 3
@@ -87,9 +87,8 @@
 0x442B54: xor     edi, edi
 0x442B56: mov     esi, 8
 0x442B5B: jmp     short loc_442B60
-0x442B5D: align 10h
-0x442B60: mov     ecx, ebx; this
-0x442B62: call    TESObjectCELL_GetNiNode?
+0x442B60: mov     ecx, ebx; object
+0x442B62: call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.
 0x442B67: test    eax, eax
 0x442B69: jz      short loc_442B9C
 0x442B6B: movzx   ecx, word ptr [eax+0B6h]
@@ -109,7 +108,7 @@
 0x442B9C: xor     eax, eax
 0x442B9E: test    eax, eax
 0x442BA0: jz      short loc_442BB6
-0x442BA2: cmp     [esp+1Ch+arg_4], 0
+0x442BA2: cmp     [esp+1Ch+show], 0
 0x442BA7: jnz     short loc_442BB0
 0x442BA9: or      word ptr [eax+18h], 1
 0x442BAE: jmp     short loc_442BB6
@@ -123,11 +122,11 @@
 0x442BC8: cmp     eax, [esp+1Ch+var_4]
 0x442BCC: mov     [esp+1Ch+var_C], eax
 0x442BD0: jl      loc_442AD0
-0x442BD6: cmp     byte ptr [esp+1Ch+arg_8], 0
+0x442BD6: cmp     [esp+1Ch+activeExteriorCellsOnly], 0
 0x442BDB: jnz     loc_442CEB
-0x442BE1: mov     [esp+1Ch+arg_8], 0
+0x442BE1: mov     dword ptr [esp+1Ch+activeExteriorCellsOnly], 0
 0x442BE9: lea     esp, [esp+0]
-0x442BF0: mov     eax, [esp+1Ch+arg_8]
+0x442BF0: mov     eax, dword ptr [esp+1Ch+activeExteriorCellsOnly]
 0x442BF4: cmp     eax, ds:0B051DCh
 0x442BFA: jge     loc_442E15
 0x442C00: mov     ecx, [esp+1Ch+var_8]
@@ -135,12 +134,12 @@
 0x442C07: mov     ebx, [edx+eax*4]
 0x442C0A: test    ebx, ebx
 0x442C0C: jz      def_442C1F; jumptable 00442C1F default case, case 3
-0x442C12: mov     esi, [esp+1Ch+arg_0]
+0x442C12: mov     esi, [esp+1Ch+nodeCategory]
 0x442C16: cmp     esi, 5; switch 6 cases
 0x442C19: ja      def_442C1F; jumptable 00442C1F default case, case 3
 0x442C1F: jmp     ds:jpt_442C1F[esi*4]; switch jump
 0x442C26: mov     ecx, ebx; jumptable 00442C1F cases 0,1
-0x442C28: call    TESObjectCELL_GetNiNode?
+0x442C28: call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.
 0x442C2D: test    eax, eax
 0x442C2F: jz      short loc_442C47
 0x442C31: movzx   ecx, word ptr [eax+0B6h]
@@ -152,20 +151,20 @@
 0x442C47: xor     eax, eax
 0x442C49: test    eax, eax
 0x442C4B: jz      def_442C1F; jumptable 00442C1F default case, case 3
-0x442C51: cmp     [esp+1Ch+arg_4], 0
+0x442C51: cmp     [esp+1Ch+show], 0
 0x442C56: jnz     short loc_442C64
 0x442C58: or      word ptr [eax+18h], 1
-0x442C5D: add     [esp+1Ch+arg_8], 1
+0x442C5D: add     dword ptr [esp+1Ch+activeExteriorCellsOnly], 1
 0x442C62: jmp     short loc_442BF0
 0x442C64: and     word ptr [eax+18h], 0FFFEh
-0x442C6A: add     [esp+1Ch+arg_8], 1
+0x442C6A: add     dword ptr [esp+1Ch+activeExteriorCellsOnly], 1
 0x442C6F: jmp     loc_442BF0
 0x442C74: mov     ebp, esi; jumptable 00442C1F cases 2,4,5
 0x442C76: add     ebp, 0FFFFFFFEh
 0x442C79: xor     edi, edi
 0x442C7B: mov     esi, 8
-0x442C80: mov     ecx, ebx; this
-0x442C82: call    TESObjectCELL_GetNiNode?
+0x442C80: mov     ecx, ebx; object
+0x442C82: call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.
 0x442C87: test    eax, eax
 0x442C89: jz      short loc_442CBC
 0x442C8B: movzx   ecx, word ptr [eax+0B6h]
@@ -185,7 +184,7 @@
 0x442CBC: xor     eax, eax
 0x442CBE: test    eax, eax
 0x442CC0: jz      short loc_442CD6
-0x442CC2: cmp     [esp+1Ch+arg_4], 0
+0x442CC2: cmp     [esp+1Ch+show], 0
 0x442CC7: jnz     short loc_442CD0
 0x442CC9: or      word ptr [eax+18h], 1
 0x442CCE: jmp     short loc_442CD6
@@ -194,7 +193,7 @@
 0x442CD9: add     edi, 1
 0x442CDC: cmp     esi, 18h
 0x442CDF: jl      short loc_442C80
-0x442CE1: add     [esp+1Ch+arg_8], 1; jumptable 00442C1F default case, case 3
+0x442CE1: add     dword ptr [esp+1Ch+activeExteriorCellsOnly], 1; jumptable 00442C1F default case, case 3
 0x442CE6: jmp     loc_442BF0
 0x442CEB: mov     eax, ds:0B06A2Ch
 0x442CF0: xor     ebp, ebp
@@ -203,7 +202,7 @@
 0x442CF8: jnb     loc_442E15
 0x442CFE: xor     edi, edi
 0x442D00: cmp     edi, eax
-0x442D02: mov     [esp+1Ch+arg_8], edi
+0x442D02: mov     dword ptr [esp+1Ch+activeExteriorCellsOnly], edi
 0x442D06: jnb     loc_442E0D
 0x442D0C: mov     eax, ds:0B333A0h
 0x442D11: mov     ecx, [eax+8]
@@ -213,12 +212,12 @@
 0x442D1B: mov     ebx, [eax]
 0x442D1D: test    ebx, ebx
 0x442D1F: jz      def_442D32; jumptable 00442D32 default case, case 3
-0x442D25: mov     esi, [esp+1Ch+arg_0]
+0x442D25: mov     esi, [esp+1Ch+nodeCategory]
 0x442D29: cmp     esi, 5; switch 6 cases
 0x442D2C: ja      def_442D32; jumptable 00442D32 default case, case 3
 0x442D32: jmp     ds:jpt_442D32[esi*4]; switch jump
 0x442D39: mov     ecx, ebx; jumptable 00442D32 cases 0,1
-0x442D3B: call    TESObjectCELL_GetNiNode?
+0x442D3B: call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.
 0x442D40: test    eax, eax
 0x442D42: jz      short loc_442D5A
 0x442D44: movzx   ecx, word ptr [eax+0B6h]
@@ -230,7 +229,7 @@
 0x442D5A: xor     eax, eax
 0x442D5C: test    eax, eax
 0x442D5E: jz      def_442D32; jumptable 00442D32 default case, case 3
-0x442D64: cmp     [esp+1Ch+arg_4], 0
+0x442D64: cmp     [esp+1Ch+show], 0
 0x442D69: jnz     short loc_442D7A
 0x442D6B: or      word ptr [eax+18h], 1
 0x442D70: mov     eax, ds:0B06A2Ch
@@ -243,8 +242,8 @@
 0x442D8D: lea     ebp, [esi-2]; jumptable 00442D32 cases 2,4,5
 0x442D90: xor     edi, edi
 0x442D92: mov     esi, 8
-0x442D97: mov     ecx, ebx; this
-0x442D99: call    TESObjectCELL_GetNiNode?
+0x442D97: mov     ecx, ebx; object
+0x442D99: call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.
 0x442D9E: test    eax, eax
 0x442DA0: jz      short loc_442DD3
 0x442DA2: movzx   ecx, word ptr [eax+0B6h]
@@ -264,7 +263,7 @@
 0x442DD3: xor     eax, eax
 0x442DD5: test    eax, eax
 0x442DD7: jz      short loc_442DED
-0x442DD9: cmp     [esp+1Ch+arg_4], 0
+0x442DD9: cmp     [esp+1Ch+show], 0
 0x442DDE: jnz     short loc_442DE7
 0x442DE0: or      word ptr [eax+18h], 1
 0x442DE5: jmp     short loc_442DED
@@ -273,7 +272,7 @@
 0x442DF0: add     edi, 1
 0x442DF3: cmp     esi, 18h
 0x442DF6: jl      short loc_442D97
-0x442DF8: mov     edi, [esp+1Ch+arg_8]
+0x442DF8: mov     edi, dword ptr [esp+1Ch+activeExteriorCellsOnly]
 0x442DFC: mov     ebp, [esp+1Ch+var_8]
 0x442E00: mov     eax, ds:0B06A2Ch; jumptable 00442D32 default case, case 3
 0x442E05: add     edi, 1

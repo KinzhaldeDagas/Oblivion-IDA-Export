@@ -17,10 +17,10 @@
 0x701D70: mov     eax, [esi+34h]
 0x701D73: push    eax
 0x701D74: mov     [esp+24h+var_4], 1
-0x701D7C: call    FormHeapFree
+0x701D7C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x701D81: mov     eax, [esi+38h]
 0x701D84: push    eax
-0x701D85: call    FormHeapFree
+0x701D85: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x701D8A: mov     edi, [esi+3Ch]
 0x701D8D: mov     ebp, ds:0A2807Ch
 0x701D93: add     esp, 8
@@ -66,3 +66,15 @@
 0x701DFA: pop     ebp
 0x701DFB: add     esp, 10h
 0x701DFE: retn
+0x9C9440: mov     ecx, [ebp-10h]; this
+0x9C9443: jmp     ??1NiTexture@@UAE@XZ; NiTexture::~NiTexture(void)
+0x9C9448: mov     ecx, [ebp-10h]
+0x9C944B: add     ecx, 3Ch ; '<'; slot
+0x9C944E: jmp     NiPointerSlot_Release
+0x9C9453: mov     edx, [esp+arg_4]
+0x9C9457: lea     eax, [edx-10h]
+0x9C945A: mov     ecx, [edx-14h]
+0x9C945D: xor     ecx, eax
+0x9C945F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C9464: mov     eax, offset stru_AF1D1C
+0x9C9469: jmp     ___CxxFrameHandler3

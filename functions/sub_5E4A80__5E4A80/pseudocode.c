@@ -5,9 +5,9 @@ int __thiscall sub_5E4A80(TESObjectREFR *this)
   int v5; // edi
   _BYTE *v6; // esi
 
-  if ( this == (TESObjectREFR *)TESDataHandler_g_PlayerRef && GetGodMode() )
-    return 0;
-  v3 = *((_DWORD *)this + 0x16);
+  if ( this == (TESObjectREFR *)reference && GetGodMode() ) /*0x5e4a8b*/
+    return 0; /*0x5e4a94*/
+  v3 = *((_DWORD *)this + 0x16); /*0x5e4a98*/
   if ( v3
     && (v4 = (*(int (__thiscall **)(int, int))(*(_DWORD *)v3 + 0xEC))(v3, 1), (v5 = v4) != 0)
     && (v6 = *(_BYTE **)(v4 + 8)) != 0
@@ -19,6 +19,6 @@ int __thiscall sub_5E4A80(TESObjectREFR *this)
   }
   else
   {
-    return 0;
+    return 0; /*0x5e4aee*/
   }
 }

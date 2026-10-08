@@ -58,3 +58,23 @@
 0x4EE891: pop     esi
 0x4EE892: add     esp, 10h
 0x4EE895: retn
+0x9B66F0: mov     ecx, [ebp-10h]; this
+0x9B66F3: jmp     TESForm_destr
+0x9B66F8: push    offset TESTexture_destr; void (__thiscall *)(void *)
+0x9B66FD: push    2; int
+0x9B66FF: push    0Ch; unsigned int
+0x9B6701: mov     eax, [ebp-10h]
+0x9B6704: add     eax, 18h
+0x9B6707: push    eax; void *
+0x9B6708: call    $LN21
+0x9B670D: retn
+0x9B670E: mov     ecx, [ebp-10h]
+0x9B6711: add     ecx, 30h ; '0'; this
+0x9B6714: jmp     ??1TESModel@@UAE@XZ; TESModel::~TESModel(void)
+0x9B6719: mov     edx, [esp+arg_4]
+0x9B671D: lea     eax, [edx-8]
+0x9B6720: mov     ecx, [edx-0Ch]
+0x9B6723: xor     ecx, eax
+0x9B6725: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B672A: mov     eax, offset stru_AE1574
+0x9B672F: jmp     ___CxxFrameHandler3

@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x70325D",
-    "line": "call    sub_71FBB0",
+    "line": "call    NiTriShapeData_Construct; Default-construct NiTriShapeData with empty triangle and shared-normal storage.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1264,5 +1264,59 @@
     "line": "retn    24h ; '$'",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C94A0",
+    "line": "mov     ecx, [ebp-1Ch]; self",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C94A3",
+    "line": "jmp     NiTriShapeData_Destruct; Destroy NiTriShapeData triangle indices, linked shared-normal index-pool blocks, and the per-entry shared-normal array.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C94A8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C94AC",
+    "line": "lea     eax, [edx-20h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C94AF",
+    "line": "mov     ecx, [edx-24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C94B2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C94B4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C94B9",
+    "line": "mov     eax, offset stru_AF1D74",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C94BE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

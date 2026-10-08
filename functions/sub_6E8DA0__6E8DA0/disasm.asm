@@ -6,7 +6,7 @@
 0x6E8DAC: call    edx
 0x6E8DAE: test    eax, eax
 0x6E8DB0: jz      short loc_6E8DC0
-0x6E8DB2: cmp     eax, offset dword_B3FAB0
+0x6E8DB2: cmp     eax, offset parent
 0x6E8DB7: jz      short loc_6E8DC3
 0x6E8DB9: mov     eax, [eax+4]
 0x6E8DBC: test    eax, eax

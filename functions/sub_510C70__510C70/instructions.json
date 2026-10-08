@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x510CAD",
-    "line": "lea     ecx, [esp+50h+var_38]",
+    "line": "lea     ecx, [esp+50h+segmentQuery]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -121,13 +121,13 @@
   },
   {
     "ea": "0x510CBD",
-    "line": "push    0; float",
+    "line": "push    0; extraCost",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x510CBF",
-    "line": "push    eax; int",
+    "line": "push    eax; actor",
     "mnemonic": "push",
     "size": 1
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x510CDA",
-    "line": "push    eax; int",
+    "line": "push    eax; end",
     "mnemonic": "push",
     "size": 1
   },
@@ -187,19 +187,19 @@
   },
   {
     "ea": "0x510CE3",
-    "line": "push    eax; int",
+    "line": "push    eax; start",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x510CE4",
-    "line": "lea     ecx, [esp+60h+var_38]",
+    "line": "lea     ecx, [esp+60h+segmentQuery]; segmentQuery",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x510CE8",
-    "line": "call    sub_67EB60",
+    "line": "call    ConnectedPointGraph_CanTraverseSegment; Verified shared graph route test used from actor package, combat, PathGrid selection, and fast-travel surface construction. It accepts a valid direct segment; if straight-segment validation fails, it invokes actor-aware connected-point A*.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x510D06",
-    "line": "lea     ecx, [esp+58h+var_38]",
+    "line": "lea     ecx, [esp+58h+segmentQuery]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x510D0F",
-    "line": "call    sub_67E3D0",
+    "line": "call    sub_67E3D0; Verified route-surface consumer follows the graph-node predecessor pointer at +0x0C, emits TeleportData at each connected point's +0x14 position, and transfers water/SubSpace flags to route-node metadata.",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x510DBF",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x510DE9",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x510DFF",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x510E3A",
-    "line": "lea     ecx, [esp+50h+var_38]; void *",
+    "line": "lea     ecx, [esp+50h+segmentQuery]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -787,7 +787,7 @@
   },
   {
     "ea": "0x510E46",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -832,5 +832,101 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9B6F70",
+    "line": "lea     ecx, [ebp-38h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B6F73",
+    "line": "jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B6F78",
+    "line": "lea     ecx, [ebp-40h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B6F7B",
+    "line": "jmp     sub_68C9B0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B6F80",
+    "line": "mov     eax, [ebp-44h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B6F83",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B6F84",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B6F89",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B6F8A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B6F8B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B6F8F",
+    "line": "lea     eax, [edx-40h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B6F92",
+    "line": "mov     ecx, [edx-44h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B6F95",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B6F97",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B6F9C",
+    "line": "mov     eax, offset stru_AE1C70",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B6FA1",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

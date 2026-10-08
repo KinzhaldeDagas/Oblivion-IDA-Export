@@ -1,4 +1,5 @@
-void __stdcall TESForm_SaveDataToCurrentSaveGame(TESForm *a1, size_t a2)
+// Verified 2026-10-03: x86 ECX receiver and two 4-byte stack arguments; callee RET 8 (or tail jump to that callee). byteCount is 32-bit; previous 8-byte size_t and inferred extra register/stack arguments distorted callers. Buffer cursor is owner +0x14. Wrapper ECX receiver is replaced by global 0x00B33B00 before tail jump.
+void *__thiscall TESForm_SaveDataToCurrentSaveGame(TESForm *self, const void *source, unsigned int byteCount)
 {
-  SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, a1, a2);
+  return SaveLoad_SaveData(g_TESSaveLoadGame, source, byteCount);
 }

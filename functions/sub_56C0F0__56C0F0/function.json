@@ -1,10 +1,22 @@
 {
   "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
   "callers_count": 3,
+  "chunks": [
+    [
+      "0x56C0F0",
+      "0x56C180"
+    ],
+    [
+      "0x9C7530",
+      "0x9C7553"
+    ]
+  ],
   "chunks_sha256": "83bb5eb5d750a2b88bbd6bf31eaaca9e2b326731ce7d60dfae962507b00ef50a",
   "comment_regular": "[Verified] DECAL_DATA_ReleaseOwnedReferences decrements/releases sourceTexture_00 and targetShaderProperty_48. Directly confirmed by its DECAL_DATA-list owner and by BSTempEffectDecal/BSTempEffectGeometryDecal destructors, which free a 0x4C payload immediately afterward.",
   "comment_repeatable": "[Verified] DECAL_DATA_ReleaseOwnedReferences decrements/releases sourceTexture_00 and targetShaderProperty_48. Directly confirmed by its DECAL_DATA-list owner and by BSTempEffectDecal/BSTempEffectGeometryDecal destructors, which free a 0x4C payload immediately afterward.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 3,
   "display_name": "DECAL_DATA_ReleaseOwnedReferences",
   "end_ea": "0x56C180",
@@ -15,6 +27,7 @@
   "segment": ".text",
   "sha256": "c5aadc23ac052b15002a91f477ff9d0719c615ff8b069feb7ee487300b65c7a3",
   "size": 144,
+  "source_annotation_confidence": "Verified",
   "start_ea": "0x56C0F0",
   "total_chunk_size": 179,
   "type": "void __thiscall(DECAL_DATA *this)",

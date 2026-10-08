@@ -1,1 +1,1 @@
-hkEntityListener
+struct hkEntityListener;

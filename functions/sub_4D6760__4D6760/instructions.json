@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x4D6760",
-    "line": "push    ebx",
+    "line": "push    ebx; Verified generic NiTMap lookup helper: hashes the UInt32 key through the map vtable, walks the bucket chain using the map's key comparator, returns false when absent, and on a match writes the low byte of the entry data field to valueOut and returns true. Callers use it for byte/boolean-valued maps, including PlayerCharacter_GetLastSpaceForDoor and cell/worldspace visited or filter maps; this helper does not establish the full map value width.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D6761",
-    "line": "mov     ebx, [esp+4+arg_0]",
+    "line": "mov     ebx, [esp+4+key]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -82,12 +82,6 @@
     "line": "jmp     short loc_4D6780",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x4D677D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x4D6780",
@@ -199,7 +193,7 @@
   },
   {
     "ea": "0x4D67A3",
-    "line": "mov     ecx, [esp+0Ch+arg_4]",
+    "line": "mov     ecx, [esp+0Ch+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },

@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x5D9771",
-    "line": "call    sub_578D70",
+    "line": "call    InterfaceManager_ConsumeMessageButton",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,19 +211,19 @@
   },
   {
     "ea": "0x5D97A4",
-    "line": "push    2",
+    "line": "push    2; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5D97A6",
-    "line": "push    5",
+    "line": "push    5; topicType",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5D97A8",
-    "line": "call    TESTopic__GEtTopic",
+    "line": "call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x5D986F",
-    "line": "call    edx",
+    "line": "call    edx; Spell purchase: Mercantile (0x1D), useValue0, scale = trunc(PlayerCharacter+0x11C / 100).",
     "mnemonic": "call",
     "size": 2
   },

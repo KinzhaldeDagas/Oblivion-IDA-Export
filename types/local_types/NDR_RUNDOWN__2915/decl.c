@@ -1,1 +1,1 @@
-NDR_RUNDOWN
+typedef void (*NDR_RUNDOWN)(void *);

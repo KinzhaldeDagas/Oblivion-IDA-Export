@@ -1,292 +1,287 @@
-void __thiscall sub_7A3C80(float *this)
+// Flattens branch tree, ranks by volume/large-branch retention/fuzziness, then emits branch LOD strips through OB_CBranch_ComputeLod_010201A0.
+void __thiscall OB_CTreeEngine_BuildBranchLods_010201A0(OB_CTreeEngine_010201A0 *this)
 {
-  float *v1; // ebx
+  OB_CTreeEngine_010201A0 *v1; // ebx
   unsigned int v2; // ebp
-  _DWORD *v3; // edi
-  _DWORD *v4; // ecx
-  int v5; // eax
-  int v6; // esi
-  int v7; // eax
+  unsigned int *v3; // edi
+  OB_CBranch_010201A0 *trunkBranch; // ecx
+  OB_CIndexedGeometry_010201A0 *branchGeometry; // eax
+  float *begin; // esi
+  OB_stVectorFloat_010201A0 *p_vertexCoords; // eax
   unsigned int v8; // edx
   unsigned int v9; // esi
-  unsigned int v10; // esi
+  unsigned int *v10; // esi
   double v11; // st7
-  int v12; // edi
-  unsigned int v13; // ecx
-  char *v14; // edx
-  char *v15; // ecx
-  char *v16; // ebx
-  _DWORD *v17; // edi
-  unsigned int v18; // ecx
-  char *v19; // esi
-  char *v20; // esi
+  unsigned int *capacity; // edi
+  unsigned int *end; // ecx
+  unsigned int *v14; // edx
+  unsigned int *v15; // ecx
+  unsigned int *v16; // ebx
+  unsigned int *v17; // edi
+  unsigned int *v18; // ecx
+  unsigned int *v19; // esi
+  unsigned int *v20; // esi
   int v21; // eax
   double v22; // st7
-  _DWORD *v23; // ecx
+  unsigned int *v23; // ecx
   unsigned int v24; // esi
-  unsigned int v25; // ecx
-  _DWORD *v26; // edi
-  _DWORD *v27; // ebp
+  unsigned int *v25; // ecx
+  const unsigned int *v26; // edi
+  unsigned int *v27; // ebp
   float v28; // esi
   float v29; // ebx
-  float *v30; // edi
+  OB_CTreeEngine_010201A0 *v30; // edi
   double v31; // st7
   double v32; // st7
   signed int v33; // ebp
   unsigned int v34; // esi
-  _DWORD *v35; // edi
+  unsigned int *v35; // edi
   unsigned int j; // esi
-  _DWORD *v37; // ecx
-  rsize_t v38; // [esp-4h] [ebp-78h]
-  rsize_t v39; // [esp+8h] [ebp-6Ch]
-  char v40; // [esp+23h] [ebp-51h] BYREF
-  float v41; // [esp+24h] [ebp-50h]
-  float *v42; // [esp+28h] [ebp-4Ch]
+  unsigned int *v37; // ecx
+  OB_stVector4Iterator_010201A0 _FFFFFFFC; // [esp-4h] [ebp-78h]
+  rsize_t _FFFFFFFCa; // [esp-4h] [ebp-78h]
+  OB_stVector4Iterator_010201A0 _FFFFFFFCb; // [esp-4h] [ebp-78h]
+  rsize_t v41; // [esp+8h] [ebp-6Ch]
+  OB_stRandom_010201A0 v42; // [esp+23h] [ebp-51h] BYREF
+  float v43; // [esp+24h] [ebp-50h]
+  OB_CTreeEngine_010201A0 *v44; // [esp+28h] [ebp-4Ch]
   float i; // [esp+2Ch] [ebp-48h]
-  float v44; // [esp+30h] [ebp-44h]
-  float v45; // [esp+34h] [ebp-40h]
-  float v46; // [esp+38h] [ebp-3Ch]
-  int v47[2]; // [esp+3Ch] [ebp-38h] BYREF
-  int v48; // [esp+44h] [ebp-30h] BYREF
-  void *v49; // [esp+48h] [ebp-2Ch]
-  unsigned int v50; // [esp+4Ch] [ebp-28h]
-  int v51; // [esp+50h] [ebp-24h]
-  int v52; // [esp+54h] [ebp-20h] BYREF
-  unsigned int v53; // [esp+58h] [ebp-1Ch]
-  void *Src; // [esp+5Ch] [ebp-18h]
-  int v55; // [esp+60h] [ebp-14h]
-  int v56; // [esp+70h] [ebp-4h]
+  float v46; // [esp+30h] [ebp-44h]
+  float maxBranchVolumePercent; // [esp+34h] [ebp-40h]
+  float Uniform_010201A0; // [esp+38h] [ebp-3Ch]
+  OB_stVector4Iterator_010201A0 result; // [esp+3Ch] [ebp-38h] BYREF
+  OB_stVector4_010201A0 v50; // [esp+44h] [ebp-30h] BYREF
+  OB_stVector4_010201A0 v51; // [esp+54h] [ebp-20h] BYREF
+  int v52; // [esp+70h] [ebp-4h]
 
-  v1 = this;
-  v42 = this;
-  v2 = 0;
-  v3 = 0;
-  v49 = 0;
-  v50 = 0;
-  v51 = 0;
-  v4 = *((_DWORD **)this + 0x16);
-  v56 = 0;
-  if ( v4 )
+  v1 = this; /*0x7a3cad*/
+  v44 = this; /*0x7a3caf*/
+  v2 = 0; /*0x7a3cb3*/
+  v3 = 0; /*0x7a3cb5*/
+  memset(&v50.begin, 0, 0xC); /*0x7a3cb7*/
+  trunkBranch = this->trunkBranch; /*0x7a3cc3*/
+  v52 = 0; /*0x7a3cc8*/
+  if ( trunkBranch ) /*0x7a3ccc*/
   {
-    v5 = *((_DWORD *)v1 + 0x17);
-    v6 = *(_DWORD *)(v5 + 0x6C);
-    v7 = v5 + 0x68;
-    if ( v6 )
-      v8 = (*(_DWORD *)(v7 + 8) - v6) >> 2;
+    branchGeometry = v1->branchGeometry; /*0x7a3cce*/
+    begin = branchGeometry->vertexCoords.begin; /*0x7a3cd1*/
+    p_vertexCoords = &branchGeometry->vertexCoords; /*0x7a3cd4*/
+    if ( begin ) /*0x7a3cd9*/
+      v8 = p_vertexCoords->end - begin; /*0x7a3ce4*/
     else
-      v8 = 0;
-    if ( (unsigned __int16)(v8 / 3) )
+      v8 = 0; /*0x7a3cdb*/
+    if ( (unsigned __int16)(v8 / 3) ) /*0x7a3cee*/
     {
-      sub_7917E0(v4, (unsigned int *)&v48);
-      v3 = v49;
+      OB_CBranch_BuildBranchVector_010201A0(trunkBranch, &v50.allocatorState); /*0x7a3cfa*/
+      v3 = v50.begin; /*0x7a3cff*/
     }
   }
-  v44 = 0.0;
-  v9 = 0;
-  for ( i = 0.0; v9 < sub_78FA80(&v48); ++v9 )
+  v46 = 0.0; /*0x7a3d09*/
+  v9 = 0; /*0x7a3d0d*/
+  for ( i = 0.0; v9 < OB_stVector4_Size_010201A0(&v50); ++v9 ) /*0x7a3d13*/
   {
-    if ( !v3 || v9 >= (int)(v50 - (_DWORD)v3) >> 2 )
+    if ( !v3 || v9 >= v50.end - v3 ) /*0x7a3d2b*/
     {
-      _invalid_parameter_noinfo();
-      v3 = v49;
+      _invalid_parameter_noinfo(); /*0x7a3d2d*/
+      v3 = v50.begin; /*0x7a3d32*/
     }
-    v41 = *(float *)(v3[v9] + 0x28);
-    v44 = v41 + v44;
-    if ( i < (double)v41 )
-      i = v41;
+    v43 = *(float *)(v3[v9] + 0x28); /*0x7a3d3c*/
+    v46 = v43 + v46; /*0x7a3d4a*/
+    if ( i < (double)v43 ) /*0x7a3d59*/
+      i = v43; /*0x7a3d5b*/
   }
-  sub_78EAF0(&v40);
-  v10 = 0;
-  v11 = 1.0 - v1[0x3B];
-  v12 = 0;
-  v53 = 0;
-  Src = 0;
-  v55 = 0;
-  v45 = v11;
-  v13 = v50;
-  v14 = (char *)v49;
-  LOBYTE(v56) = 2;
-  while ( v14 && v2 < (int)(v13 - (_DWORD)v14) >> 2 )
+  OB_stRandom_ctor_010201A0(&v42); /*0x7a3d77*/
+  v10 = 0; /*0x7a3d84*/
+  v11 = 1.0 - v1->largeBranchPercent; /*0x7a3d86*/
+  capacity = 0; /*0x7a3d88*/
+  memset(&v51.begin, 0, 0xC); /*0x7a3d8a*/
+  maxBranchVolumePercent = v11; /*0x7a3d96*/
+  end = v50.end; /*0x7a3d9a*/
+  v14 = v50.begin; /*0x7a3d9e*/
+  LOBYTE(v52) = 2; /*0x7a3da2*/
+  while ( v14 && v2 < end - v14 ) /*0x7a3db8*/
   {
-    v41 = *(float *)(*(_DWORD *)&v14[4 * v2] + 0x28);
-    if ( v45 * i >= v41 )
+    v43 = *(float *)(v14[v2] + 0x28); /*0x7a3dc4*/
+    if ( maxBranchVolumePercent * i >= v43 ) /*0x7a3ddb*/
     {
-      v46 = sub_78EA00(0.0, v1[0x3A]);
-      v22 = v46;
-      v46 = 1.0 - v46;
-      v41 = v22 * i + v46 * v41;
-      if ( v41 <= 0.0 )
-        v41 = 0.0;
-      v23 = v49;
-      if ( !v49 || v2 >= (int)(v50 - (_DWORD)v49) >> 2 )
+      Uniform_010201A0 = OB_stRandom_GetUniform_010201A0(&v42, 0.0, v1->branchReductionFuzziness); /*0x7a3edb*/
+      v22 = Uniform_010201A0; /*0x7a3edf*/
+      Uniform_010201A0 = 1.0 - Uniform_010201A0; /*0x7a3ee9*/
+      v43 = v22 * i + Uniform_010201A0 * v43; /*0x7a3efd*/
+      if ( v43 <= 0.0 ) /*0x7a3f0c*/
+        v43 = 0.0; /*0x7a3f0e*/
+      v23 = v50.begin; /*0x7a3f16*/
+      if ( !v50.begin || v2 >= v50.end - v50.begin ) /*0x7a3f29*/
       {
-        _invalid_parameter_noinfo();
-        v23 = v49;
+        _invalid_parameter_noinfo(); /*0x7a3f2b*/
+        v23 = v50.begin; /*0x7a3f30*/
       }
-      *(float *)(v23[v2] + 0x2C) = v41;
-      v13 = v50;
-      v14 = (char *)v49;
-      v12 = v55;
-      v10 = v53;
-      ++v2;
+      *(float *)(v23[v2] + 0x2C) = v43; /*0x7a3f3b*/
+      end = v50.end; /*0x7a3f3e*/
+      v14 = v50.begin; /*0x7a3f42*/
+      capacity = v51.capacity; /*0x7a3f46*/
+      v10 = v51.begin; /*0x7a3f4a*/
+      ++v2; /*0x7a3f4e*/
     }
     else
     {
-      if ( v2 >= (int)(v13 - (_DWORD)v14) >> 2 )
+      if ( v2 >= end - v14 ) /*0x7a3dec*/
       {
-        _invalid_parameter_noinfo();
-        v14 = (char *)v49;
-        v12 = v55;
-        v10 = v53;
+        _invalid_parameter_noinfo(); /*0x7a3dee*/
+        v14 = v50.begin; /*0x7a3df3*/
+        capacity = v51.capacity; /*0x7a3df7*/
+        v10 = v51.begin; /*0x7a3dfb*/
       }
-      v15 = (char *)Src;
-      v16 = &v14[4 * v2];
-      if ( v10 && (int)((int)Src - v10) >> 2 < (unsigned int)((int)(v12 - v10) >> 2) )
+      v15 = v51.end; /*0x7a3e01*/
+      v16 = &v14[v2]; /*0x7a3e05*/
+      if ( v10 && v51.end - v10 < (unsigned int)(capacity - v10) ) /*0x7a3e18*/
       {
-        *(_DWORD *)Src = *(_DWORD *)v16;
-        Src = v15 + 4;
+        *v51.end = *v16; /*0x7a3e21*/
+        v51.end = v15 + 1; /*0x7a3e23*/
       }
       else
       {
-        v17 = Src;
-        if ( v10 > (unsigned int)Src )
-          _invalid_parameter_noinfo();
-        sub_7A3620((unsigned int *)&v52, (unsigned int **)v47, (unsigned int *)&v52, v17, v16);
+        v17 = v51.end; /*0x7a3e2b*/
+        if ( v10 > v51.end ) /*0x7a3e2d*/
+          _invalid_parameter_noinfo(); /*0x7a3e2f*/
+        _FFFFFFFC.current = v17; /*0x7a3e35*/
+        _FFFFFFFC.owner = &v51; /*0x7a3e3a*/
+        OB_stVector4_InsertOne_010201A0(&v51, &result, _FFFFFFFC, v16); /*0x7a3e44*/
       }
-      v14 = (char *)v49;
-      v18 = v50;
-      v19 = (char *)v49;
-      if ( (unsigned int)v49 > v50 )
+      v14 = v50.begin; /*0x7a3e49*/
+      v18 = v50.end; /*0x7a3e4d*/
+      v19 = v50.begin; /*0x7a3e53*/
+      if ( v50.begin > v50.end ) /*0x7a3e55*/
       {
-        _invalid_parameter_noinfo();
-        v18 = v50;
-        v14 = (char *)v49;
+        _invalid_parameter_noinfo(); /*0x7a3e57*/
+        v18 = v50.end; /*0x7a3e5c*/
+        v14 = v50.begin; /*0x7a3e60*/
       }
-      v20 = &v19[4 * v2];
-      if ( (unsigned int)v20 > v18 || v20 < v14 )
+      v20 = &v19[v2]; /*0x7a3e64*/
+      if ( v20 > v18 || v20 < v14 ) /*0x7a3e6d*/
       {
-        _invalid_parameter_noinfo();
-        v18 = v50;
-        v14 = (char *)v49;
+        _invalid_parameter_noinfo(); /*0x7a3e6f*/
+        v18 = v50.end; /*0x7a3e74*/
+        v14 = v50.begin; /*0x7a3e78*/
       }
-      v21 = (int)(v18 - (_DWORD)(v20 + 4)) >> 2;
-      if ( v21 > 0 )
+      v21 = v18 - (v20 + 1); /*0x7a3e83*/
+      if ( v21 > 0 ) /*0x7a3e88*/
       {
-        HIDWORD(v38) = v20 + 4;
-        LODWORD(v38) = 4 * v21;
-        memmove_s(v20, v38, (const void *)v38, v39);
-        v18 = v50;
-        v14 = (char *)v49;
+        HIDWORD(_FFFFFFFCa) = v20 + 1; /*0x7a3e8f*/
+        LODWORD(_FFFFFFFCa) = 4 * v21; /*0x7a3e90*/
+        memmove_s(v20, _FFFFFFFCa, (const void *)_FFFFFFFCa, v41); /*0x7a3e92*/
+        v18 = v50.end; /*0x7a3e97*/
+        v14 = v50.begin; /*0x7a3e9b*/
       }
-      v1 = v42;
-      v12 = v55;
-      v10 = v53;
-      v13 = v18 - 4;
-      v50 = v13;
+      v1 = v44; /*0x7a3ea2*/
+      capacity = v51.capacity; /*0x7a3ea6*/
+      v10 = v51.begin; /*0x7a3eaa*/
+      end = v18 + 0xFFFFFFFF; /*0x7a3eae*/
+      v50.end = end; /*0x7a3eb4*/
     }
   }
-  sub_791410((int)&v48);
-  sub_791410((int)&v52);
-  v24 = 0;
-  if ( sub_78FA80(&v52) )
+  OB_CBranch_SortBranchVector_010201A0((int)v10, (int)&v50); /*0x7a3f5b*/
+  OB_CBranch_SortBranchVector_010201A0((int)v10, (int)&v51); /*0x7a3f65*/
+  v24 = 0; /*0x7a3f71*/
+  if ( OB_stVector4_Size_010201A0(&v51) ) /*0x7a3f73*/
   {
-    do
+    do /*0x7a3fd1*/
     {
-      v25 = v53;
-      if ( !v53 || v24 >= (int)((int)Src - v53) >> 2 )
+      v25 = v51.begin; /*0x7a3f80*/
+      if ( !v51.begin || v24 >= v51.end - v51.begin ) /*0x7a3f93*/
       {
-        _invalid_parameter_noinfo();
-        v25 = v53;
+        _invalid_parameter_noinfo(); /*0x7a3f95*/
+        v25 = v51.begin; /*0x7a3f9a*/
       }
-      v26 = (_DWORD *)(v25 + 4 * v24);
-      v27 = v49;
-      if ( (unsigned int)v49 > v50 )
-        _invalid_parameter_noinfo();
-      sub_7A3620((unsigned int *)&v48, (unsigned int **)v47, (unsigned int *)&v48, v27, v26);
-      ++v24;
+      v26 = &v25[v24]; /*0x7a3fa6*/
+      v27 = v50.begin; /*0x7a3fa9*/
+      if ( v50.begin > v50.end ) /*0x7a3fab*/
+        _invalid_parameter_noinfo(); /*0x7a3fad*/
+      _FFFFFFFCb.current = v27; /*0x7a3fb3*/
+      _FFFFFFFCb.owner = &v50; /*0x7a3fb4*/
+      OB_stVector4_InsertOne_010201A0(&v50, &result, _FFFFFFFCb, v26); /*0x7a3fbe*/
+      ++v24; /*0x7a3fc7*/
     }
-    while ( v24 < sub_78FA80(&v52) );
-    v1 = v42;
+    while ( v24 < OB_stVector4_Size_010201A0(&v51) ); /*0x7a3fd1*/
+    v1 = v44; /*0x7a3fd3*/
   }
-  v28 = v1[0x1C];
-  v29 = 0.0;
-  v41 = v28;
-  if ( v28 != 0.0 )
+  v28 = *(float *)&v1->branchLodCount; /*0x7a3fd7*/
+  v29 = 0.0; /*0x7a3fda*/
+  v43 = v28; /*0x7a3fde*/
+  if ( v28 != 0.0 ) /*0x7a3fe2*/
   {
-    while ( 1 )
+    while ( 1 ) /*0x7a3ff6*/
     {
-      v30 = v42;
-      if ( v29 == 0.0 )
-        sub_794630(*((_DWORD **)v42 + 0x17), 0);
-      if ( SLODWORD(v28) >= 2 )
+      v30 = v44; /*0x7a3ff6*/
+      if ( v29 == 0.0 ) /*0x7a3ffa*/
+        OB_CIndexedGeometry_DeleteLodStrip_010201A0(v44->branchGeometry, 0); /*0x7a4000*/
+      if ( SLODWORD(v28) >= 2 ) /*0x7a4008*/
       {
-        v45 = v30[0x38];
-        v46 = v29;
-        v32 = (double)SLODWORD(v29);
-        if ( v29 < 0.0 )
-          v32 = v32 + flt_A2FC78;
-        v46 = v32 / (double)(LODWORD(v28) - 1);
-        v31 = v45 + (v30[0x37] - v45) * v46;
+        maxBranchVolumePercent = v30->maxBranchVolumePercent; /*0x7a4018*/
+        Uniform_010201A0 = v29; /*0x7a401c*/
+        v32 = (double)SLODWORD(v29); /*0x7a4020*/
+        if ( v29 < 0.0 ) /*0x7a4024*/
+          v32 = v32 + flt_A2FC78; /*0x7a4026*/
+        Uniform_010201A0 = v32 / (double)(LODWORD(v28) - 1); /*0x7a4037*/
+        v31 = maxBranchVolumePercent + (v30->minBranchVolumePercent - maxBranchVolumePercent) * Uniform_010201A0; /*0x7a404f*/
       }
       else
       {
-        v31 = 1.0;
+        v31 = 1.0; /*0x7a400a*/
       }
-      i = v31;
-      v33 = 0;
-      v34 = 0;
-      v46 = i * v44;
-      i = 0.0;
-      if ( sub_78FA80(&v48) )
+      i = v31; /*0x7a4051*/
+      v33 = 0; /*0x7a405d*/
+      v34 = 0; /*0x7a4063*/
+      Uniform_010201A0 = i * v46; /*0x7a4065*/
+      i = 0.0; /*0x7a406b*/
+      if ( OB_stVector4_Size_010201A0(&v50) ) /*0x7a406f*/
       {
-        v35 = v49;
-        do
+        v35 = v50.begin; /*0x7a4078*/
+        do /*0x7a40ce*/
         {
-          if ( v46 <= (double)i )
-            break;
-          if ( !v35 || v34 >= (int)(v50 - (_DWORD)v35) >> 2 )
+          if ( Uniform_010201A0 <= (double)i ) /*0x7a408b*/
+            break; /*0x7a408b*/
+          if ( !v35 || v34 >= v50.end - v35 ) /*0x7a409c*/
           {
-            _invalid_parameter_noinfo();
-            v35 = v49;
+            _invalid_parameter_noinfo(); /*0x7a409e*/
+            v35 = v50.begin; /*0x7a40a3*/
           }
-          v45 = *(float *)(v35[v34] + 0x28);
-          ++v33;
-          ++v34;
-          i = v45 + i;
+          maxBranchVolumePercent = *(float *)(v35[v34] + 0x28); /*0x7a40b1*/
+          ++v33; /*0x7a40b5*/
+          ++v34; /*0x7a40bc*/
+          i = maxBranchVolumePercent + i; /*0x7a40c3*/
         }
-        while ( v34 < sub_78FA80(&v48) );
-        v30 = v42;
+        while ( v34 < OB_stVector4_Size_010201A0(&v50) ); /*0x7a40ce*/
+        v30 = v44; /*0x7a40d0*/
       }
-      sub_794A90(*((_DWORD *)v30 + 0x17), LOWORD(v29));
-      if ( v29 != 0.0 || v33 )
+      OB_CIndexedGeometry_ResetStripCounter_010201A0(v30->branchGeometry, LOWORD(v29)); /*0x7a40d8*/
+      if ( v29 != 0.0 || v33 ) /*0x7a40e3*/
       {
-        for ( j = 0; (int)j < v33; ++j )
+        for ( j = 0; (int)j < v33; ++j ) /*0x7a40f6*/
         {
-          v37 = v49;
-          if ( !v49 || j >= (int)(v50 - (_DWORD)v49) >> 2 )
+          v37 = v50.begin; /*0x7a40f8*/
+          if ( !v50.begin || j >= v50.end - v50.begin ) /*0x7a410b*/
           {
-            _invalid_parameter_noinfo();
-            v37 = v49;
+            _invalid_parameter_noinfo(); /*0x7a410d*/
+            v37 = v50.begin; /*0x7a4112*/
           }
-          sub_78F420(v37[j], LOWORD(v29), *((_DWORD **)v30 + 0x17));
+          OB_CBranch_ComputeLod_010201A0((OB_CBranch_010201A0 *)v37[j], LOWORD(v29), v30->branchGeometry); /*0x7a411e*/
         }
       }
       else
       {
-        sub_796100(*((_DWORD **)v30 + 0x17), 0, 0, 0);
+        OB_CIndexedGeometry_AddStrip_010201A0(v30->branchGeometry, 0, 0, 0); /*0x7a40eb*/
       }
-      if ( ++LODWORD(v29) >= LODWORD(v41) )
-        break;
-      v28 = v41;
+      if ( ++LODWORD(v29) >= LODWORD(v43) ) /*0x7a4131*/
+        break; /*0x7a4131*/
+      v28 = v43; /*0x7a3ff0*/
     }
   }
-  if ( v53 )
-    FormHeapFree(v53);
-  v53 = 0;
-  Src = 0;
-  v55 = 0;
-  LOBYTE(v56) = 0;
-  TESTexture::ClearComponentReferences(&v40);
-  if ( v49 )
-    FormHeapFree((unsigned int)v49);
+  if ( v51.begin ) /*0x7a413f*/
+    FormHeapFree((unsigned int)v51.begin); /*0x7a4142*/
+  memset(&v51.begin, 0, 0xC); /*0x7a414e*/
+  LOBYTE(v52) = 0; /*0x7a415a*/
+  Shared_NoOpVirtual_60D0A0(&v42); /*0x7a415f*/
+  if ( v50.begin ) /*0x7a416a*/
+    FormHeapFree((unsigned int)v50.begin); /*0x7a416d*/
 }

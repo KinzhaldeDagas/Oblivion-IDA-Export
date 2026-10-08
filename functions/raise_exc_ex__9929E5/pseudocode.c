@@ -1,183 +1,191 @@
-unsigned int __cdecl _raise_exc_ex(ULONG_PTR Arguments, DWORD dwExceptionCode, int a3, float *a4, float *a5, int a6)
+int __usercall _raise_exc_ex@<eax>(
+        __int16 a1@<fpstat>,
+        ULONG_PTR Arguments,
+        DWORD dwExceptionCode,
+        int a4,
+        float *a5,
+        float *a6,
+        int a7)
 {
-  char v6; // cl
-  unsigned int *v7; // esi
-  char v8; // al
-  int v9; // eax
-  unsigned int *v10; // eax
-  unsigned int v11; // ecx
-  int v12; // eax
-  unsigned int *v13; // eax
-  unsigned int v14; // ecx
-  float *v15; // edi
-  int v16; // ecx
-  int v17; // eax
-  int v18; // eax
+  char v7; // cl
+  unsigned int *v8; // esi
+  char v9; // al
+  int v10; // eax
+  unsigned int *v11; // eax
+  unsigned int v12; // ecx
+  int v13; // eax
+  unsigned int *v14; // eax
+  unsigned int v15; // ecx
+  float *v16; // edi
+  __int16 v17; // fps
+  int v18; // ecx
   int v19; // eax
-  unsigned int v20; // eax
+  int v20; // eax
   int v21; // eax
-  int v22; // eax
-  unsigned int result; // eax
+  unsigned int v22; // eax
+  int v23; // eax
+  int v24; // eax
+  int result; // eax
 
-  v6 = dwExceptionCode;
-  *(_DWORD *)(Arguments + 4) = 0;
-  *(_DWORD *)(Arguments + 8) = 0;
-  *(_DWORD *)(Arguments + 0xC) = 0;
-  if ( (v6 & 0x10) != 0 )
+  v7 = dwExceptionCode; /*0x9929eb*/
+  *(_DWORD *)(Arguments + 4) = 0; /*0x9929f3*/
+  *(_DWORD *)(Arguments + 8) = 0; /*0x9929fb*/
+  *(_DWORD *)(Arguments + 0xC) = 0; /*0x992a05*/
+  if ( (v7 & 0x10) != 0 ) /*0x992a08*/
   {
-    *(_DWORD *)(Arguments + 4) |= 1u;
-    dwExceptionCode = 0xC000008F;
+    *(_DWORD *)(Arguments + 4) |= 1u; /*0x992a0d*/
+    dwExceptionCode = 0xC000008F; /*0x992a10*/
   }
-  if ( (v6 & 2) != 0 )
+  if ( (v7 & 2) != 0 ) /*0x992a1a*/
   {
-    *(_DWORD *)(Arguments + 4) |= 2u;
-    dwExceptionCode = 0xC0000093;
+    *(_DWORD *)(Arguments + 4) |= 2u; /*0x992a1f*/
+    dwExceptionCode = 0xC0000093; /*0x992a23*/
   }
-  if ( (v6 & 1) != 0 )
+  if ( (v7 & 1) != 0 ) /*0x992a2c*/
   {
-    *(_DWORD *)(Arguments + 4) |= 4u;
-    dwExceptionCode = 0xC0000091;
+    *(_DWORD *)(Arguments + 4) |= 4u; /*0x992a31*/
+    dwExceptionCode = 0xC0000091; /*0x992a35*/
   }
-  if ( (v6 & 4) != 0 )
+  if ( (v7 & 4) != 0 ) /*0x992a3f*/
   {
-    *(_DWORD *)(Arguments + 4) |= 8u;
-    dwExceptionCode = 0xC000008E;
+    *(_DWORD *)(Arguments + 4) |= 8u; /*0x992a44*/
+    dwExceptionCode = 0xC000008E; /*0x992a48*/
   }
-  if ( (v6 & 8) != 0 )
+  if ( (v7 & 8) != 0 ) /*0x992a52*/
   {
-    *(_DWORD *)(Arguments + 4) |= 0x10u;
-    dwExceptionCode = 0xC0000090;
+    *(_DWORD *)(Arguments + 4) |= 0x10u; /*0x992a57*/
+    dwExceptionCode = 0xC0000090; /*0x992a5b*/
   }
-  v7 = (unsigned int *)HIDWORD(Arguments);
-  *(_DWORD *)(Arguments + 8) ^= (*(_DWORD *)(Arguments + 8) ^ ~(0x10 * *(_DWORD *)HIDWORD(Arguments))) & 0x10;
-  *(_DWORD *)(Arguments + 8) ^= (*(_DWORD *)(Arguments + 8) ^ ~(2 * *v7)) & 8;
-  *(_DWORD *)(Arguments + 8) ^= (*(_DWORD *)(Arguments + 8) ^ ~(*v7 >> 1)) & 4;
-  *(_DWORD *)(Arguments + 8) ^= (*(_DWORD *)(Arguments + 8) ^ ~(*v7 >> 3)) & 2;
-  *(_DWORD *)(Arguments + 8) ^= (*(_DWORD *)(Arguments + 8) ^ ~(*v7 >> 5)) & 1;
-  v8 = _statfp();
-  if ( (v8 & 1) != 0 )
-    *(_DWORD *)(Arguments + 0xC) |= 0x10u;
-  if ( (v8 & 4) != 0 )
-    *(_DWORD *)(Arguments + 0xC) |= 8u;
-  if ( (v8 & 8) != 0 )
-    *(_DWORD *)(Arguments + 0xC) |= 4u;
-  if ( (v8 & 0x10) != 0 )
-    *(_DWORD *)(Arguments + 0xC) |= 2u;
-  if ( (v8 & 0x20) != 0 )
-    *(_DWORD *)(Arguments + 0xC) |= 1u;
-  v9 = *v7 & 0xC00;
-  switch ( v9 )
+  v8 = (unsigned int *)HIDWORD(Arguments); /*0x992a62*/
+  *(_DWORD *)(Arguments + 8) ^= (*(_DWORD *)(Arguments + 8) ^ ~(0x10 * *(_DWORD *)HIDWORD(Arguments))) & 0x10; /*0x992a75*/
+  *(_DWORD *)(Arguments + 8) ^= (*(_DWORD *)(Arguments + 8) ^ ~(2 * *v8)) & 8; /*0x992a87*/
+  *(_DWORD *)(Arguments + 8) ^= (*(_DWORD *)(Arguments + 8) ^ ~(*v8 >> 1)) & 4; /*0x992a99*/
+  *(_DWORD *)(Arguments + 8) ^= (*(_DWORD *)(Arguments + 8) ^ ~(*v8 >> 3)) & 2; /*0x992aac*/
+  *(_DWORD *)(Arguments + 8) ^= (*(_DWORD *)(Arguments + 8) ^ ~(*v8 >> 5)) & 1; /*0x992abe*/
+  v9 = _statfp(a1); /*0x992ac1*/
+  if ( (v9 & 1) != 0 ) /*0x992ac8*/
+    *(_DWORD *)(Arguments + 0xC) |= 0x10u; /*0x992acd*/
+  if ( (v9 & 4) != 0 ) /*0x992ad3*/
+    *(_DWORD *)(Arguments + 0xC) |= 8u; /*0x992ad8*/
+  if ( (v9 & 8) != 0 ) /*0x992ade*/
+    *(_DWORD *)(Arguments + 0xC) |= 4u; /*0x992ae3*/
+  if ( (v9 & 0x10) != 0 ) /*0x992ae9*/
+    *(_DWORD *)(Arguments + 0xC) |= 2u; /*0x992aee*/
+  if ( (v9 & 0x20) != 0 ) /*0x992af4*/
+    *(_DWORD *)(Arguments + 0xC) |= 1u; /*0x992af9*/
+  v10 = *v8 & 0xC00; /*0x992b03*/
+  switch ( v10 ) /*0x992b05*/
   {
-    case 0:
-      *(_DWORD *)Arguments &= 0xFFFFFFFC;
-      break;
-    case 0x400:
-      v10 = (unsigned int *)Arguments;
-      v11 = *(_DWORD *)Arguments & 0xFFFFFFFC | 1;
-      goto LABEL_27;
-    case 0x800:
-      v10 = (unsigned int *)Arguments;
-      v11 = *(_DWORD *)Arguments & 0xFFFFFFFC | 2;
+    case 0: /*0x992b05*/
+      *(_DWORD *)Arguments &= 0xFFFFFFFC; /*0x992b3f*/
+      break; /*0x992b3f*/
+    case 0x400: /*0x992b05*/
+      v11 = (unsigned int *)Arguments; /*0x992b30*/
+      v12 = *(_DWORD *)Arguments & 0xFFFFFFFC | 1; /*0x992b38*/
+      goto LABEL_27; /*0x992b3a*/
+    case 0x800: /*0x992b05*/
+      v11 = (unsigned int *)Arguments; /*0x992b21*/
+      v12 = *(_DWORD *)Arguments & 0xFFFFFFFC | 2; /*0x992b29*/
 LABEL_27:
-      *v10 = v11;
-      break;
-    case 0xC00:
-      *(_DWORD *)Arguments |= 3u;
+      *v11 = v12; /*0x992b2c*/
+      break; /*0x992b2e*/
+    case 0xC00: /*0x992b05*/
+      *(_DWORD *)Arguments |= 3u; /*0x992b1c*/
       break;
   }
-  v12 = *v7 & 0x300;
-  switch ( v12 )
+  v13 = *v8 & 0x300; /*0x992b42*/
+  switch ( v13 ) /*0x992b4b*/
   {
-    case 0:
-      v13 = (unsigned int *)Arguments;
-      v14 = *(_DWORD *)Arguments & 0xFFFFFFE3 | 8;
-      goto LABEL_36;
-    case 0x200:
-      v13 = (unsigned int *)Arguments;
-      v14 = *(_DWORD *)Arguments & 0xFFFFFFE3 | 4;
+    case 0: /*0x992b4b*/
+      v14 = (unsigned int *)Arguments; /*0x992b6d*/
+      v15 = *(_DWORD *)Arguments & 0xFFFFFFE3 | 8; /*0x992b75*/
+      goto LABEL_36; /*0x992b75*/
+    case 0x200: /*0x992b4b*/
+      v14 = (unsigned int *)Arguments; /*0x992b60*/
+      v15 = *(_DWORD *)Arguments & 0xFFFFFFE3 | 4; /*0x992b68*/
 LABEL_36:
-      *v13 = v14;
-      break;
-    case 0x300:
-      *(_DWORD *)Arguments &= 0xFFFFFFE3;
+      *v14 = v15; /*0x992b78*/
+      break; /*0x992b78*/
+    case 0x300: /*0x992b4b*/
+      *(_DWORD *)Arguments &= 0xFFFFFFE3; /*0x992b5b*/
       break;
   }
-  *(_DWORD *)Arguments ^= (*(_DWORD *)Arguments ^ (0x20 * a3)) & 0x1FFE0;
-  *(_DWORD *)(Arguments + 0x20) |= 1u;
-  v15 = a5;
-  if ( a6 )
+  *(_DWORD *)Arguments ^= (*(_DWORD *)Arguments ^ (0x20 * a4)) & 0x1FFE0; /*0x992b7a*/
+  *(_DWORD *)(Arguments + 0x20) |= 1u; /*0x992b90*/
+  v16 = a6; /*0x992b99*/
+  if ( a7 ) /*0x992b9c*/
   {
-    *(_DWORD *)(Arguments + 0x20) &= 0xFFFFFFE1;
-    *(float *)(Arguments + 0x10) = *a4;
-    *(_DWORD *)(Arguments + 0x60) |= 1u;
-    *(_DWORD *)(Arguments + 0x60) &= 0xFFFFFFE1;
-    *(float *)(Arguments + 0x50) = *v15;
+    *(_DWORD *)(Arguments + 0x20) &= 0xFFFFFFE1; /*0x992b9e*/
+    *(float *)(Arguments + 0x10) = *a5; /*0x992baa*/
+    *(_DWORD *)(Arguments + 0x60) |= 1u; /*0x992bb0*/
+    *(_DWORD *)(Arguments + 0x60) &= 0xFFFFFFE1; /*0x992bb6*/
+    *(float *)(Arguments + 0x50) = *v16; /*0x992bbf*/
   }
   else
   {
-    *(_DWORD *)(Arguments + 0x20) = *(_DWORD *)(Arguments + 0x20) & 0xFFFFFFE1 | 2;
-    *(double *)(Arguments + 0x10) = *(double *)a4;
-    *(_DWORD *)(Arguments + 0x60) |= 1u;
-    *(_DWORD *)(Arguments + 0x60) = *(_DWORD *)(Arguments + 0x60) & 0xFFFFFFE1 | 2;
-    *(double *)(Arguments + 0x50) = *(double *)v15;
+    *(_DWORD *)(Arguments + 0x20) = *(_DWORD *)(Arguments + 0x20) & 0xFFFFFFE1 | 2; /*0x992bcd*/
+    *(double *)(Arguments + 0x10) = *(double *)a5; /*0x992bd8*/
+    *(_DWORD *)(Arguments + 0x60) |= 1u; /*0x992bde*/
+    *(_DWORD *)(Arguments + 0x60) = *(_DWORD *)(Arguments + 0x60) & 0xFFFFFFE1 | 2; /*0x992bed*/
+    *(double *)(Arguments + 0x50) = *(double *)v16; /*0x992bf5*/
   }
-  _clrfp();
-  RaiseException(dwExceptionCode, 0, 1u, &Arguments);
-  v16 = Arguments;
-  if ( (*(_BYTE *)(Arguments + 8) & 0x10) != 0 )
-    *v7 &= ~1u;
-  if ( (*(_BYTE *)(v16 + 8) & 8) != 0 )
-    *v7 &= ~4u;
-  if ( (*(_BYTE *)(v16 + 8) & 4) != 0 )
-    *v7 &= ~8u;
-  if ( (*(_BYTE *)(v16 + 8) & 2) != 0 )
-    *v7 &= ~0x10u;
-  if ( (*(_BYTE *)(v16 + 8) & 1) != 0 )
-    *v7 &= ~0x20u;
-  v17 = *(_DWORD *)v16 & 3;
-  if ( !v17 )
+  _clrfp(v17); /*0x992bf8*/
+  RaiseException(dwExceptionCode, 0, 1u, &Arguments); /*0x992c07*/
+  v18 = Arguments; /*0x992c0d*/
+  if ( (*(_BYTE *)(Arguments + 8) & 0x10) != 0 ) /*0x992c14*/
+    *v8 &= ~1u; /*0x992c16*/
+  if ( (*(_BYTE *)(v18 + 8) & 8) != 0 ) /*0x992c1d*/
+    *v8 &= ~4u; /*0x992c1f*/
+  if ( (*(_BYTE *)(v18 + 8) & 4) != 0 ) /*0x992c26*/
+    *v8 &= ~8u; /*0x992c28*/
+  if ( (*(_BYTE *)(v18 + 8) & 2) != 0 ) /*0x992c2f*/
+    *v8 &= ~0x10u; /*0x992c31*/
+  if ( (*(_BYTE *)(v18 + 8) & 1) != 0 ) /*0x992c37*/
+    *v8 &= ~0x20u; /*0x992c39*/
+  v19 = *(_DWORD *)v18 & 3; /*0x992c3e*/
+  if ( !v19 ) /*0x992c4a*/
   {
-    *v7 &= 0xFFFFF3FF;
-    goto LABEL_59;
+    *v8 &= 0xFFFFF3FF; /*0x992c7b*/
+    goto LABEL_59; /*0x992c7b*/
   }
-  v18 = v17 - 1;
-  if ( !v18 )
+  v20 = v19 - 1; /*0x992c4c*/
+  if ( !v20 ) /*0x992c4d*/
   {
-    v20 = *v7 & 0xFFFFF3FF | 0x400;
-    goto LABEL_56;
+    v22 = *v8 & 0xFFFFF3FF | 0x400; /*0x992c74*/
+    goto LABEL_56; /*0x992c79*/
   }
-  v19 = v18 - 1;
-  if ( !v19 )
+  v21 = v20 - 1; /*0x992c4f*/
+  if ( !v21 ) /*0x992c50*/
   {
-    v20 = *v7 & 0xFFFFF3FF | 0x800;
+    v22 = *v8 & 0xFFFFF3FF | 0x800; /*0x992c64*/
 LABEL_56:
-    *v7 = v20;
-    goto LABEL_59;
+    *v8 = v22; /*0x992c69*/
+    goto LABEL_59; /*0x992c6b*/
   }
-  if ( v19 == 1 )
-    *v7 |= 0xC00u;
+  if ( v21 == 1 ) /*0x992c53*/
+    *v8 |= 0xC00u; /*0x992c55*/
 LABEL_59:
-  v21 = (*(_DWORD *)v16 >> 2) & 7;
-  if ( !v21 )
+  v23 = (*(_DWORD *)v18 >> 2) & 7; /*0x992c7d*/
+  if ( !v23 ) /*0x992c87*/
   {
-    result = *v7 & 0xFFFFF0FF | 0x300;
-    goto LABEL_65;
+    result = *v8 & 0xFFFFF0FF | 0x300; /*0x992ca2*/
+    goto LABEL_65; /*0x992ca2*/
   }
-  v22 = v21 - 1;
-  if ( !v22 )
+  v24 = v23 - 1; /*0x992c89*/
+  if ( !v24 ) /*0x992c8a*/
   {
-    result = *v7 & 0xFFFFF1FF | 0x200;
+    result = *v8 & 0xFFFFF1FF | 0x200; /*0x992c97*/
 LABEL_65:
-    *v7 = result;
-    goto LABEL_66;
+    *v8 = result; /*0x992ca7*/
+    goto LABEL_66; /*0x992ca7*/
   }
-  result = v22 - 1;
-  if ( !result )
-    *v7 &= 0xFFFFF3FF;
+  result = v24 - 1; /*0x992c8c*/
+  if ( !result ) /*0x992c8d*/
+    *v8 &= 0xFFFFF3FF; /*0x992c8f*/
 LABEL_66:
-  if ( a6 )
-    *v15 = *(float *)(v16 + 0x50);
+  if ( a7 ) /*0x992cac*/
+    *v16 = *(float *)(v18 + 0x50); /*0x992cb1*/
   else
-    *(double *)v15 = *(double *)(v16 + 0x50);
-  return result;
+    *(double *)v16 = *(double *)(v18 + 0x50); /*0x992cb8*/
+  return result; /*0x992cba*/
 }

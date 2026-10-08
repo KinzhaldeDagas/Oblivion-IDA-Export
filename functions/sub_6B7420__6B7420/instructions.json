@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6B7420",
-    "line": "mov     edx, [esp+arg_0]",
+    "line": "mov     edx, [esp+speaker]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x6B7427",
-    "line": "mov     ecx, [esp+4+arg_4]",
+    "line": "mov     ecx, [esp+4+target]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,37 +49,37 @@
   },
   {
     "ea": "0x6B7435",
-    "line": "mov     eax, [esp+4+arg_8]",
+    "line": "mov     eax, [esp+4+startingTopic]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6B7439",
-    "line": "push    eax",
+    "line": "push    eax; startingTopic",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B743A",
-    "line": "push    esi",
+    "line": "push    esi; conversation",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B743B",
-    "line": "push    ecx",
+    "line": "push    ecx; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B743C",
-    "line": "push    edx",
+    "line": "push    edx; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B743D",
-    "line": "call    sub_52F830",
+    "line": "call    TESTopic__CreateConversation; Build an ambient NPC Conversation (maximum 100 DialogueItems). Null start resolves HELLO D2. INFO selection uses conversation links/ANY D3 and Random rules; selected linkedTo topics drive continuation. GOODBYE D4 is only a recovery topic after two failed item creations. NoRumors, INFOGENERAL caching, RunForRumors, and player-menu Goodbye closure are not consulted.",
     "mnemonic": "call",
     "size": 5
   },

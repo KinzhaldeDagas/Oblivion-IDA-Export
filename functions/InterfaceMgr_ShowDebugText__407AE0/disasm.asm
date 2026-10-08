@@ -17,7 +17,7 @@
 0x407B12: push    eax; Format
 0x407B13: lea     eax, [esp+544h+var_C]
 0x407B1A: mov     large fs:0, eax
-0x407B20: cmp     byte_B3BD9A, 0
+0x407B20: cmp     byte ptr qword_B3BB2C+26Eh, 0
 0x407B27: mov     edi, ecx
 0x407B29: jnz     loc_40C0CA
 0x407B2F: mov     esi, 1
@@ -26,41 +26,41 @@
 0x407B3A: add     esp, 4
 0x407B3D: cmp     byte ptr [eax+31h], 0
 0x407B41: jg      short loc_407B55
-0x407B43: cmp     srcObj, 0
+0x407B43: cmp     dword ptr ds:0B333B4h, 0
 0x407B4A: jz      short loc_407B55
-0x407B4C: mov     IsConsoleOpen, 0
+0x407B4C: mov     byte ptr ds:0B33415h, 0
 0x407B53: jmp     short loc_407BB1
 0x407B55: call    sub_579440
 0x407B5A: test    eax, eax
 0x407B5C: jz      short loc_407B74
-0x407B5E: cmp     eax, TESDataHandler_g_PlayerRef
-0x407B64: mov     srcObj, eax
+0x407B5E: cmp     eax, dword ptr reference
+0x407B64: mov     ds:0B333B4h, eax
 0x407B69: setz    cl
-0x407B6C: mov     byte_B33414, cl
+0x407B6C: mov     byte ptr unk_B33414, cl
 0x407B72: jmp     short loc_407BAA
-0x407B74: cmp     IsConsoleOpen, 0
-0x407B7B: mov     ecx, TESDataHandler_g_PlayerRef
+0x407B74: cmp     byte ptr ds:0B33415h, 0
+0x407B7B: mov     ecx, dword ptr reference
 0x407B81: jnz     short loc_407BA4
-0x407B83: mov     eax, srcObj
+0x407B83: mov     eax, ds:0B333B4h
 0x407B88: test    eax, eax
 0x407B8A: jz      short loc_407BA4
 0x407B8C: cmp     eax, ecx
 0x407B8E: jnz     short loc_407B99
-0x407B90: cmp     byte_B33414, 0
+0x407B90: cmp     byte ptr unk_B33414, 0
 0x407B97: jz      short loc_407BA4
 0x407B99: push    eax
 0x407B9A: call    sub_57C980
 0x407B9F: add     esp, 4
 0x407BA2: jmp     short loc_407BAA
-0x407BA4: mov     srcObj, ecx
-0x407BAA: mov     IsConsoleOpen, 1
+0x407BA4: mov     ds:0B333B4h, ecx
+0x407BAA: mov     byte ptr ds:0B33415h, 1
 0x407BB1: call    GetInterfaceSingleton0x50
 0x407BB6: test    al, al
 0x407BB8: jz      loc_40C0CA
 0x407BBE: mov     ecx, [edi+20h]; this
 0x407BC1: push    esi; a3
 0x407BC2: push    46h ; 'F'; a2
-0x407BC4: call    InputGlobals__QueryKeyboardState
+0x407BC4: call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.
 0x407BC9: test    eax, eax
 0x407BCB: jz      short loc_407C0A
 0x407BCD: push    esi
@@ -71,13 +71,13 @@
 0x407BDD: mov     ecx, [edi+20h]; this
 0x407BE0: push    0; a3
 0x407BE2: push    2Ah ; '*'; a2
-0x407BE4: call    InputGlobals__QueryKeyboardState
+0x407BE4: call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.
 0x407BE9: test    eax, eax
 0x407BEB: jnz     short loc_407C04
 0x407BED: mov     ecx, [edi+20h]; this
 0x407BF0: push    eax; a3
 0x407BF1: push    36h ; '6'; a2
-0x407BF3: call    InputGlobals__QueryKeyboardState
+0x407BF3: call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.
 0x407BF8: test    eax, eax
 0x407BFA: jnz     short loc_407C04
 0x407BFC: add     iDebugText, esi
@@ -91,7 +91,7 @@
 0x407C1F: cmp     eax, 21h ; '!'
 0x407C22: jl      short loc_407C2E
 0x407C24: mov     iDebugText, 0
-0x407C2E: mov     edx, srcObj
+0x407C2E: mov     edx, ds:0B333B4h
 0x407C34: push    0; int
 0x407C36: push    offset ??_R0?AVActor@@@8; struct TypeDescriptor *
 0x407C3B: push    offset ??_R0?AVTESObjectREFR@@@8; struct _s_RTTICompleteObjectLocator *
@@ -113,20 +113,20 @@
 0x407C6D: fstp    [esp+544h+var_500]
 0x407C71: fld     [esp+544h+var_500]
 0x407C75: fadd    ds:dbl_A30E48
-0x407C7B: call    Double_To_SInt32
-0x407C80: mov     edx, dword_B33EA4
+0x407C7B: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
+0x407C80: mov     edx, ds:0B33EA4h
 0x407C86: mov     ebx, eax
 0x407C88: mov     eax, iDebugTextTopBottomOffset
 0x407C8D: add     eax, ebx
-0x407C8F: cmp     dword_B33410, edx
+0x407C8F: cmp     dword ptr unk_B33410, edx
 0x407C95: mov     [esp+544h+var_50C], eax
 0x407C99: mov     [esp+544h+var_510], eax
-0x407C9D: mov     eax, Seed
+0x407C9D: mov     eax, ds:0B33EA0h
 0x407CA2: jz      short loc_407CAE
 0x407CA4: mov     ecx, eax
-0x407CA6: mov     dword_B33410, edx
+0x407CA6: mov     dword ptr unk_B33410, edx
 0x407CAC: jmp     short loc_407CB4
-0x407CAE: mov     ecx, dword_B3340C
+0x407CAE: mov     ecx, dword ptr unk_B3340C
 0x407CB4: mov     edx, eax
 0x407CB6: sub     edx, ecx
 0x407CB8: test    edx, edx
@@ -135,14 +135,14 @@
 0x407CC2: jge     short loc_407CCA
 0x407CC4: fadd    ds:flt_A2FC78
 0x407CCA: fmul    ds:dbl_A30E40
-0x407CD0: add     word_B33408, 1
-0x407CD8: mov     dword_B3340C, eax
-0x407CDD: fstp    [esp+544h+var_508]
-0x407CE1: fld     flt_B33404
-0x407CE7: fadd    [esp+544h+var_508]
-0x407CEB: fstp    flt_B33404
+0x407CD0: add     word ptr unk_B33408, 1
+0x407CD8: mov     dword ptr unk_B3340C, eax
+0x407CDD: fstp    [esp+544h+triangleCount]
+0x407CE1: fld     dword ptr unk_B33404
+0x407CE7: fadd    [esp+544h+triangleCount]
+0x407CEB: fstp    dword ptr unk_B33404
 0x407CF1: fld1
-0x407CF3: fcomp   flt_B33404
+0x407CF3: fcomp   dword ptr unk_B33404
 0x407CF9: fnstsw  ax
 0x407CFB: test    ah, 41h
 0x407CFE: jp      short loc_407D69
@@ -161,20 +161,20 @@
 0x407D26: add     esp, 4
 0x407D29: mov     ecx, eax
 0x407D2B: call    sub_571820
-0x407D30: fld     flt_B33404
-0x407D36: mov     si, word_B33408
+0x407D30: fld     dword ptr unk_B33404
+0x407D36: mov     si, word ptr unk_B33408
 0x407D3D: push    ecx
 0x407D3E: fst     qword ptr [esp+548h+var_4E8.m_data]
 0x407D42: fstp    [esp+548h+var_548]; float
-0x407D45: mov     word_B33400, si
+0x407D45: mov     word ptr unk_B33400, si
 0x407D4C: call    FloatFloor
 0x407D51: fsubr   qword ptr [esp+548h+var_4E8.m_data]
 0x407D55: add     esp, 4
-0x407D58: mov     word_B33408, 0
-0x407D61: fstp    flt_B33404
+0x407D58: mov     word ptr unk_B33408, 0
+0x407D61: fstp    dword ptr unk_B33404
 0x407D67: jmp     short loc_407D70
-0x407D69: mov     si, word_B33400
-0x407D70: mov     eax, fromiUpdateType
+0x407D69: mov     si, word ptr unk_B33400
+0x407D70: mov     eax, flt_BA790C+0Ch
 0x407D75: cmp     eax, 0Ah
 0x407D78: jz      short loc_407D8E
 0x407D7A: push    eax
@@ -187,7 +187,7 @@
 0x407D8E: fld     flt_B2E2EC
 0x407D94: fld1
 0x407D96: fdivrp  st(1), st
-0x407D98: call    Double_To_SInt32
+0x407D98: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x407D9D: push    eax
 0x407D9E: movsx   edx, si
 0x407DA1: push    edx
@@ -203,8 +203,8 @@
 0x407DC4: sub     ecx, iDebugTextLeftRightOffset
 0x407DCA: sub     esp, 8
 0x407DCD: fstp    [esp+554h+Format+4]; float
-0x407DD1: mov     [esp+554h+var_508], ecx
-0x407DD5: fild    [esp+554h+var_508]
+0x407DD1: mov     [esp+554h+triangleCount], ecx
+0x407DD5: fild    [esp+554h+triangleCount]
 0x407DD9: lea     edx, [esp+554h+Dest]
 0x407DE0: fstp    [esp+554h+Format]; float
 0x407DE3: push    edx; int
@@ -215,7 +215,7 @@
 0x407DF5: cmp     eax, 20h; switch 33 cases
 0x407DF8: ja      InterfaceMgr_ShowDebugText___def_407DFE; jumptable 00407DFE default case, case 12
 0x407DFE: jmp     ds:jpt_407DFE[eax*4]; switch jump
-0x407E05: mov     ecx, srcObj; jumptable 00407DFE case 31
+0x407E05: mov     ecx, ds:0B333B4h; jumptable 00407DFE case 31
 0x407E0B: test    ecx, ecx
 0x407E0D: jz      loc_408B84
 0x407E13: mov     eax, [ecx]
@@ -223,7 +223,7 @@
 0x407E1B: call    edx
 0x407E1D: test    al, al
 0x407E1F: jz      loc_408B84
-0x407E25: mov     eax, srcObj
+0x407E25: mov     eax, ds:0B333B4h
 0x407E2A: push    0; int
 0x407E2C: push    offset ??_R0?AVActor@@@8; struct TypeDescriptor *
 0x407E31: push    offset ??_R0?AVTESObjectREFR@@@8; struct _s_RTTICompleteObjectLocator *
@@ -247,8 +247,8 @@
 0x407E68: sub     ecx, iDebugTextLeftRightOffset
 0x407E6E: sub     esp, 8
 0x407E71: fstp    [esp+554h+Format+4]; float
-0x407E75: mov     [esp+554h+var_508], ecx
-0x407E79: fild    [esp+554h+var_508]
+0x407E75: mov     [esp+554h+triangleCount], ecx
+0x407E79: fild    [esp+554h+triangleCount]
 0x407E7D: mov     ecx, esi; this
 0x407E7F: mov     dword ptr [esp+554h+var_4E8.m_dataLen], edx
 0x407E83: mov     [esp+554h+var_4E0], eax
@@ -259,15 +259,15 @@
 0x407E95: add     [esp+558h+var_50C], ebx
 0x407E99: add     esp, 14h
 0x407E9C: mov     ecx, esi; this
-0x407E9E: call    TESObjectREFR_GetParentCell
+0x407E9E: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x407EA3: mov     ecx, esi; this
 0x407EA5: mov     edi, eax
 0x407EA7: call    TESObjectREFR_GetWorldSpace
 0x407EAC: test    edi, edi
-0x407EAE: mov     [esp+544h+var_508], eax
+0x407EAE: mov     [esp+544h+triangleCount], eax
 0x407EB2: jz      short loc_407F18
 0x407EB4: mov     ecx, edi; this
-0x407EB6: call    TESObjectCELL_IsInterior
+0x407EB6: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x407EBB: test    al, al
 0x407EBD: jz      short loc_407F18
 0x407EBF: mov     edx, [edi]
@@ -289,12 +289,12 @@
 0x407EF6: fstp    [esp+554h+Format+4]
 0x407EFA: sub     edx, iDebugTextLeftRightOffset
 0x407F00: lea     eax, [esp+554h+Dest]
-0x407F07: mov     [esp+554h+var_508], edx
-0x407F0B: fild    [esp+554h+var_508]
+0x407F07: mov     [esp+554h+triangleCount], edx
+0x407F0B: fild    [esp+554h+triangleCount]
 0x407F0F: fstp    [esp+554h+Format]
 0x407F12: push    eax
 0x407F13: jmp     loc_407FD8
-0x407F18: mov     ecx, [esp+544h+var_508]
+0x407F18: mov     ecx, [esp+544h+triangleCount]
 0x407F1C: test    ecx, ecx
 0x407F1E: jz      short loc_407F91
 0x407F20: fld     dword ptr [esp+544h+var_4E8.m_dataLen]
@@ -304,10 +304,10 @@
 0x407F30: fistp   [esp+544h+var_500]
 0x407F34: mov     edx, [esp+544h+var_500]
 0x407F38: mov     eax, [ecx]
-0x407F3A: mov     [esp+544h+var_508], edx
+0x407F3A: mov     [esp+544h+triangleCount], edx
 0x407F3E: mov     edx, [eax+0D4h]
 0x407F44: call    edx
-0x407F46: mov     ecx, [esp+544h+var_508]
+0x407F46: mov     ecx, [esp+544h+triangleCount]
 0x407F4A: sar     edi, 0Ch
 0x407F4D: push    edi
 0x407F4E: sar     ecx, 0Ch
@@ -326,8 +326,8 @@
 0x407F78: mov     ecx, 500h
 0x407F7D: fstp    [esp+554h+Format+4]
 0x407F81: sub     ecx, iDebugTextLeftRightOffset
-0x407F87: mov     [esp+554h+var_508], ecx
-0x407F8B: fild    [esp+554h+var_508]
+0x407F87: mov     [esp+554h+triangleCount], ecx
+0x407F8B: fild    [esp+554h+triangleCount]
 0x407F8F: jmp     short loc_407FCD
 0x407F91: push    offset aActorLocUnknow; "Actor Loc: UNKNOWN"
 0x407F96: lea     eax, [esp+548h+Dest]
@@ -342,8 +342,8 @@
 0x407FB6: mov     ecx, 500h
 0x407FBB: fstp    [esp+554h+Format+4]; float
 0x407FBF: sub     ecx, iDebugTextLeftRightOffset
-0x407FC5: mov     [esp+554h+var_508], ecx
-0x407FC9: fild    [esp+554h+var_508]
+0x407FC5: mov     [esp+554h+triangleCount], ecx
+0x407FC9: fild    [esp+554h+triangleCount]
 0x407FCD: lea     edx, [esp+554h+Dest]
 0x407FD4: fstp    [esp+554h+Format]; float
 0x407FD7: push    edx; int
@@ -370,8 +370,8 @@
 0x408023: sub     ecx, iDebugTextLeftRightOffset
 0x408029: sub     esp, 8
 0x40802C: fstp    [esp+554h+Format+4]; float
-0x408030: mov     [esp+554h+var_508], ecx
-0x408034: fild    [esp+554h+var_508]
+0x408030: mov     [esp+554h+triangleCount], ecx
+0x408034: fild    [esp+554h+triangleCount]
 0x408038: lea     edx, [esp+554h+Dest]
 0x40803F: fstp    [esp+554h+Format]; float
 0x408042: push    edx; int
@@ -397,8 +397,8 @@
 0x40808B: sub     ecx, iDebugTextLeftRightOffset
 0x408091: sub     esp, 8
 0x408094: fstp    [esp+554h+Format+4]; float
-0x408098: mov     [esp+554h+var_508], ecx
-0x40809C: fild    [esp+554h+var_508]
+0x408098: mov     [esp+554h+triangleCount], ecx
+0x40809C: fild    [esp+554h+triangleCount]
 0x4080A0: lea     edx, [esp+554h+Dest]
 0x4080A7: fstp    [esp+554h+Format]; float
 0x4080AA: push    edx; int
@@ -429,8 +429,8 @@
 0x408104: sub     edx, iDebugTextLeftRightOffset
 0x40810A: sub     esp, 8
 0x40810D: fstp    [esp+554h+Format+4]; float
-0x408111: mov     [esp+554h+var_508], edx
-0x408115: fild    [esp+554h+var_508]
+0x408111: mov     [esp+554h+triangleCount], edx
+0x408115: fild    [esp+554h+triangleCount]
 0x408119: lea     eax, [esp+554h+Dest]
 0x408120: fstp    [esp+554h+Format]; float
 0x408123: push    eax; int
@@ -456,8 +456,8 @@
 0x408162: mov     edx, 500h
 0x408167: fstp    [esp+554h+Format+4]
 0x40816B: sub     edx, iDebugTextLeftRightOffset
-0x408171: mov     [esp+554h+var_508], edx
-0x408175: fild    [esp+554h+var_508]
+0x408171: mov     [esp+554h+triangleCount], edx
+0x408175: fild    [esp+554h+triangleCount]
 0x408179: jmp     short loc_4081B0
 0x40817B: push    offset aOverallPathi_0; "Overall Pathing Status: Active"
 0x408180: push    0C8h ; 'È'; Count
@@ -471,8 +471,8 @@
 0x408199: mov     edx, 500h
 0x40819E: fstp    [esp+554h+Format+4]; float
 0x4081A2: sub     edx, iDebugTextLeftRightOffset
-0x4081A8: mov     [esp+554h+var_508], edx
-0x4081AC: fild    [esp+554h+var_508]
+0x4081A8: mov     [esp+554h+triangleCount], edx
+0x4081AC: fild    [esp+554h+triangleCount]
 0x4081B0: lea     eax, [esp+554h+Dest]
 0x4081B7: fstp    [esp+554h+Format]; float
 0x4081BA: push    eax; int
@@ -496,8 +496,8 @@
 0x4081FD: sub     edx, iDebugTextLeftRightOffset
 0x408203: sub     esp, 8
 0x408206: fstp    [esp+554h+Format+4]; float
-0x40820A: mov     [esp+554h+var_508], edx
-0x40820E: fild    [esp+554h+var_508]
+0x40820A: mov     [esp+554h+triangleCount], edx
+0x40820E: fild    [esp+554h+triangleCount]
 0x408212: lea     eax, [esp+554h+Dest]
 0x408219: fstp    [esp+554h+Format]; float
 0x40821C: push    eax; int
@@ -509,8 +509,8 @@
 0x408230: test    eax, eax
 0x408232: mov     [esp+544h+var_500], eax
 0x408236: jnz     short loc_408243
-0x408238: mov     ecx, esi
-0x40823A: call    sub_4D8AF0
+0x408238: mov     ecx, esi; this
+0x40823A: call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.
 0x40823F: mov     [esp+544h+var_500], eax
 0x408243: mov     ecx, [esp+544h+var_500]
 0x408247: push    0; int
@@ -549,8 +549,8 @@
 0x4082B3: fstp    [esp+554h+Format+4]
 0x4082B7: sub     ecx, iDebugTextLeftRightOffset
 0x4082BD: lea     edx, [esp+554h+Dest]
-0x4082C4: mov     [esp+554h+var_508], ecx
-0x4082C8: fild    [esp+554h+var_508]
+0x4082C4: mov     [esp+554h+triangleCount], ecx
+0x4082C8: fild    [esp+554h+triangleCount]
 0x4082CC: fstp    [esp+554h+Format]
 0x4082CF: push    edx
 0x4082D0: jmp     loc_40836B
@@ -574,8 +574,8 @@
 0x40830B: mov     edx, 500h
 0x408310: fstp    [esp+554h+Format+4]
 0x408314: sub     edx, iDebugTextLeftRightOffset
-0x40831A: mov     [esp+554h+var_508], edx
-0x40831E: fild    [esp+554h+var_508]
+0x40831A: mov     [esp+554h+triangleCount], edx
+0x40831E: fild    [esp+554h+triangleCount]
 0x408322: jmp     short loc_408360
 0x408324: push    offset aFinalTargetL_1; "Final Target Loc: UNKNOWN"
 0x408329: lea     ecx, [esp+548h+Dest]
@@ -590,8 +590,8 @@
 0x408349: mov     edx, 500h
 0x40834E: fstp    [esp+554h+Format+4]; float
 0x408352: sub     edx, iDebugTextLeftRightOffset
-0x408358: mov     [esp+554h+var_508], edx
-0x40835C: fild    [esp+554h+var_508]
+0x408358: mov     [esp+554h+triangleCount], edx
+0x40835C: fild    [esp+554h+triangleCount]
 0x408360: lea     eax, [esp+554h+Dest]
 0x408367: fstp    [esp+554h+Format]; float
 0x40836A: push    eax; int
@@ -626,8 +626,8 @@
 0x4083D3: sub     edx, iDebugTextLeftRightOffset
 0x4083D9: sub     esp, 8
 0x4083DC: fstp    [esp+554h+Format+4]; float
-0x4083E0: mov     [esp+554h+var_508], edx
-0x4083E4: fild    [esp+554h+var_508]
+0x4083E0: mov     [esp+554h+triangleCount], edx
+0x4083E4: fild    [esp+554h+triangleCount]
 0x4083E8: lea     eax, [esp+554h+Dest]
 0x4083EF: fstp    [esp+554h+Format]; float
 0x4083F2: push    eax; int
@@ -662,8 +662,8 @@
 0x40845B: sub     edx, iDebugTextLeftRightOffset
 0x408461: sub     esp, 8
 0x408464: fstp    [esp+554h+Format+4]; float
-0x408468: mov     [esp+554h+var_508], edx
-0x40846C: fild    [esp+554h+var_508]
+0x408468: mov     [esp+554h+triangleCount], edx
+0x40846C: fild    [esp+554h+triangleCount]
 0x408470: lea     eax, [esp+554h+Dest]
 0x408477: fstp    [esp+554h+Format]; float
 0x40847A: push    eax; int
@@ -692,8 +692,8 @@
 0x4084CC: sub     edx, iDebugTextLeftRightOffset
 0x4084D2: sub     esp, 8
 0x4084D5: fstp    [esp+554h+Format+4]; float
-0x4084D9: mov     [esp+554h+var_508], edx
-0x4084DD: fild    [esp+554h+var_508]
+0x4084D9: mov     [esp+554h+triangleCount], edx
+0x4084DD: fild    [esp+554h+triangleCount]
 0x4084E1: lea     eax, [esp+554h+Dest]
 0x4084E8: fstp    [esp+554h+Format]; float
 0x4084EB: push    eax; int
@@ -734,8 +734,8 @@
 0x408565: sub     edx, iDebugTextLeftRightOffset
 0x40856B: sub     esp, 8
 0x40856E: fstp    [esp+554h+Format+4]; float
-0x408572: mov     [esp+554h+var_508], edx
-0x408576: fild    [esp+554h+var_508]
+0x408572: mov     [esp+554h+triangleCount], edx
+0x408576: fild    [esp+554h+triangleCount]
 0x40857A: lea     eax, [esp+554h+Dest]
 0x408581: fstp    [esp+554h+Format]; float
 0x408584: push    eax; int
@@ -764,8 +764,8 @@
 0x4085D6: sub     edx, iDebugTextLeftRightOffset
 0x4085DC: sub     esp, 8
 0x4085DF: fstp    [esp+554h+Format+4]; float
-0x4085E3: mov     [esp+554h+var_508], edx
-0x4085E7: fild    [esp+554h+var_508]
+0x4085E3: mov     [esp+554h+triangleCount], edx
+0x4085E7: fild    [esp+554h+triangleCount]
 0x4085EB: lea     eax, [esp+554h+Dest]
 0x4085F2: fstp    [esp+554h+Format]; float
 0x4085F5: push    eax; int
@@ -778,16 +778,16 @@
 0x408609: call    eax
 0x40860B: test    al, al
 0x40860D: jnz     InterfaceMgr_ShowDebugText___def_407DFE; jumptable 00407DFE default case, case 12
-0x408613: mov     ecx, esi
-0x408615: call    sub_4A9720
-0x40861A: fstp    [esp+544h+var_508]
-0x40861E: mov     ecx, offset flt_B3A498
+0x408613: mov     ecx, esi; this
+0x408615: call    Actor_GetAimPitch; Returns Actor rotation X as the native aim-pitch value used by projectile launch, impact, input, dialogue-camera, and magic-projectile paths.
+0x40861A: fstp    [esp+544h+triangleCount]
+0x40861E: mov     ecx, offset unk_B3A498
 0x408623: call    GameSetting_GetSafeFloatPointer
 0x408628: fld     dword ptr [eax]
 0x40862A: sub     esp, 10h
 0x40862D: fstp    qword ptr [esp+554h+Format+8]
 0x408631: lea     ecx, [esp+554h+Dest]
-0x408638: fld     [esp+554h+var_508]
+0x408638: fld     [esp+554h+triangleCount]
 0x40863C: fstp    qword ptr [esp+554h+Format]; Format
 0x40863F: push    offset aFailureTime_2f; "Failure Time: %.2f / %.2f"
 0x408644: push    0C8h ; 'È'; Count
@@ -801,8 +801,8 @@
 0x40865F: sub     edx, iDebugTextLeftRightOffset
 0x408665: sub     esp, 8
 0x408668: fstp    [esp+554h+Format+4]; float
-0x40866C: mov     [esp+554h+var_508], edx
-0x408670: fild    [esp+554h+var_508]
+0x40866C: mov     [esp+554h+triangleCount], edx
+0x408670: fild    [esp+554h+triangleCount]
 0x408674: lea     eax, [esp+554h+Dest]
 0x40867B: fstp    [esp+554h+Format]; float
 0x40867E: push    eax; int
@@ -837,8 +837,8 @@
 0x4086E9: sub     ecx, iDebugTextLeftRightOffset
 0x4086EF: sub     esp, 8
 0x4086F2: fstp    [esp+554h+Format+4]; float
-0x4086F6: mov     [esp+554h+var_508], ecx
-0x4086FA: fild    [esp+554h+var_508]
+0x4086F6: mov     [esp+554h+triangleCount], ecx
+0x4086FA: fild    [esp+554h+triangleCount]
 0x4086FE: lea     edx, [esp+554h+Dest]
 0x408705: fstp    [esp+554h+Format]; float
 0x408708: push    edx; int
@@ -862,8 +862,8 @@
 0x408745: mov     ecx, 500h
 0x40874A: fstp    [esp+554h+Format+4]
 0x40874E: sub     ecx, iDebugTextLeftRightOffset
-0x408754: mov     [esp+554h+var_508], ecx
-0x408758: fild    [esp+554h+var_508]
+0x408754: mov     [esp+554h+triangleCount], ecx
+0x408758: fild    [esp+554h+triangleCount]
 0x40875C: jmp     short loc_4087DC
 0x40875E: mov     ecx, esi
 0x408760: call    sub_684780
@@ -882,8 +882,8 @@
 0x40878E: mov     ecx, 500h
 0x408793: fstp    [esp+554h+Format+4]
 0x408797: sub     ecx, iDebugTextLeftRightOffset
-0x40879D: mov     [esp+554h+var_508], ecx
-0x4087A1: fild    [esp+554h+var_508]
+0x40879D: mov     [esp+554h+triangleCount], ecx
+0x4087A1: fild    [esp+554h+triangleCount]
 0x4087A5: jmp     short loc_4087DC
 0x4087A7: push    offset aHighPathingS_1; "High Pathing Status: Pathing"
 0x4087AC: push    0C8h ; 'È'; Count
@@ -897,8 +897,8 @@
 0x4087C5: mov     ecx, 500h
 0x4087CA: fstp    [esp+554h+Format+4]; float
 0x4087CE: sub     ecx, iDebugTextLeftRightOffset
-0x4087D4: mov     [esp+554h+var_508], ecx
-0x4087D8: fild    [esp+554h+var_508]
+0x4087D4: mov     [esp+554h+triangleCount], ecx
+0x4087D8: fild    [esp+554h+triangleCount]
 0x4087DC: lea     edx, [esp+554h+Dest]
 0x4087E3: fstp    [esp+554h+Format]; float
 0x4087E6: push    edx; int
@@ -906,7 +906,7 @@
 0x4087EC: add     [esp+558h+var_50C], ebx
 0x4087F0: add     esp, 14h
 0x4087F3: mov     ecx, esi
-0x4087F5: call    HighProcess__GetUnk030
+0x4087F5: call    HighProcess__GetUnk030; MoonSugarEffect decode: NiD3DVertexShader D3D handle getter. Returns wrapper +0x30 IDirect3DVertexShader9*, which NiD3DPass::sub_75FBA0 passes to NiDX9RenderState::SetVertexShader.
 0x4087FA: mov     esi, eax
 0x4087FC: test    esi, esi
 0x4087FE: jz      loc_4089DF
@@ -923,8 +923,8 @@
 0x40882B: sub     ecx, iDebugTextLeftRightOffset
 0x408831: sub     esp, 8
 0x408834: fstp    [esp+554h+Format+4]; float
-0x408838: mov     [esp+554h+var_508], ecx
-0x40883C: fild    [esp+554h+var_508]
+0x408838: mov     [esp+554h+triangleCount], ecx
+0x40883C: fild    [esp+554h+triangleCount]
 0x408840: lea     edx, [esp+554h+Dest]
 0x408847: fstp    [esp+554h+Format]; float
 0x40884A: push    edx; int
@@ -948,8 +948,8 @@
 0x40888D: sub     edx, iDebugTextLeftRightOffset
 0x408893: sub     esp, 8
 0x408896: fstp    [esp+554h+Format+4]; float
-0x40889A: mov     [esp+554h+var_508], edx
-0x40889E: fild    [esp+554h+var_508]
+0x40889A: mov     [esp+554h+triangleCount], edx
+0x40889E: fild    [esp+554h+triangleCount]
 0x4088A2: lea     eax, [esp+554h+Dest]
 0x4088A9: fstp    [esp+554h+Format]; float
 0x4088AC: push    eax; int
@@ -958,8 +958,8 @@
 0x4088B6: add     esp, 14h
 0x4088B9: mov     ecx, esi
 0x4088BB: call    sub_680CC0
-0x4088C0: fstp    [esp+544h+var_508]
-0x4088C4: fld     [esp+544h+var_508]
+0x4088C0: fstp    [esp+544h+triangleCount]
+0x4088C4: fld     [esp+544h+triangleCount]
 0x4088C8: sub     esp, 8
 0x4088CB: fstp    qword ptr [esp+54Ch+Format+8]; Format
 0x4088CE: push    offset aAvoidanceWaitT; "Avoidance Wait Time: %.2f"
@@ -975,18 +975,18 @@
 0x4088F5: sub     edx, iDebugTextLeftRightOffset
 0x4088FB: sub     esp, 8
 0x4088FE: fstp    [esp+554h+Format+4]; float
-0x408902: mov     [esp+554h+var_508], edx
-0x408906: fild    [esp+554h+var_508]
+0x408902: mov     [esp+554h+triangleCount], edx
+0x408906: fild    [esp+554h+triangleCount]
 0x40890A: lea     eax, [esp+554h+Dest]
 0x408911: fstp    [esp+554h+Format]; float
 0x408914: push    eax; int
 0x408915: call    InterfaceMgr_DebugTextLine
 0x40891A: add     [esp+558h+var_50C], ebx
 0x40891E: add     esp, 14h
-0x408921: mov     ecx, esi
-0x408923: call    sub_4A9720
-0x408928: fstp    [esp+544h+var_508]
-0x40892C: fld     [esp+544h+var_508]
+0x408921: mov     ecx, esi; this
+0x408923: call    Actor_GetAimPitch; Returns Actor rotation X as the native aim-pitch value used by projectile launch, impact, input, dialogue-camera, and magic-projectile paths.
+0x408928: fstp    [esp+544h+triangleCount]
+0x40892C: fld     [esp+544h+triangleCount]
 0x408930: sub     esp, 8
 0x408933: fstp    qword ptr [esp+54Ch+Format+8]; Format
 0x408936: push    offset aAvoidanceAngli; "Avoidance Angling Time: %.2f"
@@ -1002,8 +1002,8 @@
 0x40895D: sub     edx, iDebugTextLeftRightOffset
 0x408963: sub     esp, 8
 0x408966: fstp    [esp+554h+Format+4]; float
-0x40896A: mov     [esp+554h+var_508], edx
-0x40896E: fild    [esp+554h+var_508]
+0x40896A: mov     [esp+554h+triangleCount], edx
+0x40896E: fild    [esp+554h+triangleCount]
 0x408972: lea     eax, [esp+554h+Dest]
 0x408979: fstp    [esp+554h+Format]; float
 0x40897C: push    eax; int
@@ -1012,8 +1012,8 @@
 0x408986: add     esp, 14h
 0x408989: mov     ecx, esi
 0x40898B: call    sub_680CF0
-0x408990: fstp    [esp+544h+var_508]
-0x408994: fld     [esp+544h+var_508]
+0x408990: fstp    [esp+544h+triangleCount]
+0x408994: fld     [esp+544h+triangleCount]
 0x408998: sub     esp, 8
 0x40899B: fstp    qword ptr [esp+54Ch+Format+8]; Format
 0x40899E: push    offset aAvoidanceAvoid; "Avoidance Avoid Time: %.2f"
@@ -1029,8 +1029,8 @@
 0x4089C3: mov     edx, 500h
 0x4089C8: fstp    [esp+554h+Format+4]
 0x4089CC: sub     edx, iDebugTextLeftRightOffset
-0x4089D2: mov     [esp+554h+var_508], edx
-0x4089D6: fild    [esp+554h+var_508]
+0x4089D2: mov     [esp+554h+triangleCount], edx
+0x4089D6: fild    [esp+554h+triangleCount]
 0x4089DA: jmp     loc_408BC0
 0x4089DF: push    offset aNoAvoidance; "NO AVOIDANCE"
 0x4089E4: lea     ecx, [esp+548h+Dest]
@@ -1045,8 +1045,8 @@
 0x408A04: mov     edx, 500h
 0x408A09: fstp    [esp+554h+Format+4]
 0x408A0D: sub     edx, iDebugTextLeftRightOffset
-0x408A13: mov     [esp+554h+var_508], edx
-0x408A17: fild    [esp+554h+var_508]
+0x408A13: mov     [esp+554h+triangleCount], edx
+0x408A17: fild    [esp+554h+triangleCount]
 0x408A1B: jmp     loc_408BC0
 0x408A20: push    offset aMiddleHighPath; "MIDDLE HIGH PATH SYSTEM ONLY"
 0x408A25: push    0C8h ; 'È'; Count
@@ -1060,8 +1060,8 @@
 0x408A3E: mov     edx, 500h
 0x408A43: fstp    [esp+554h+Format+4]
 0x408A47: sub     edx, iDebugTextLeftRightOffset
-0x408A4D: mov     [esp+554h+var_508], edx
-0x408A51: fild    [esp+554h+var_508]
+0x408A4D: mov     [esp+554h+triangleCount], edx
+0x408A51: fild    [esp+554h+triangleCount]
 0x408A55: jmp     loc_408BC0
 0x408A5A: push    offset aPathingSystemH; "PATHING SYSTEM HAS NO HIGH PATH"
 0x408A5F: lea     ecx, [esp+548h+Dest]
@@ -1076,8 +1076,8 @@
 0x408A7F: mov     edx, 500h
 0x408A84: fstp    [esp+554h+Format+4]
 0x408A88: sub     edx, iDebugTextLeftRightOffset
-0x408A8E: mov     [esp+554h+var_508], edx
-0x408A92: fild    [esp+554h+var_508]
+0x408A8E: mov     [esp+554h+triangleCount], edx
+0x408A92: fild    [esp+554h+triangleCount]
 0x408A96: jmp     loc_408BC0
 0x408A9B: push    offset aLowPathSystemO; "LOW PATH SYSTEM ONLY"
 0x408AA0: push    0C8h ; 'È'; Count
@@ -1091,8 +1091,8 @@
 0x408AB9: mov     edx, 500h
 0x408ABE: fstp    [esp+554h+Format+4]
 0x408AC2: sub     edx, iDebugTextLeftRightOffset
-0x408AC8: mov     [esp+554h+var_508], edx
-0x408ACC: fild    [esp+554h+var_508]
+0x408AC8: mov     [esp+554h+triangleCount], edx
+0x408ACC: fild    [esp+554h+triangleCount]
 0x408AD0: jmp     loc_408BC0
 0x408AD5: push    offset aPathingSyste_0; "PATHING SYSTEM HAS NO LOW PATH"
 0x408ADA: push    0C8h ; 'È'; Count
@@ -1106,8 +1106,8 @@
 0x408AF3: mov     edx, 500h
 0x408AF8: fstp    [esp+554h+Format+4]
 0x408AFC: sub     edx, iDebugTextLeftRightOffset
-0x408B02: mov     [esp+554h+var_508], edx
-0x408B06: fild    [esp+554h+var_508]
+0x408B02: mov     [esp+554h+triangleCount], edx
+0x408B06: fild    [esp+554h+triangleCount]
 0x408B0A: jmp     loc_408BC0
 0x408B0F: push    offset aNoPathingSyste; "NO PATHING SYSTEM"
 0x408B14: push    0C8h ; 'È'; Count
@@ -1121,8 +1121,8 @@
 0x408B2D: mov     edx, 500h
 0x408B32: fstp    [esp+554h+Format+4]
 0x408B36: sub     edx, iDebugTextLeftRightOffset
-0x408B3C: mov     [esp+554h+var_508], edx
-0x408B40: fild    [esp+554h+var_508]
+0x408B3C: mov     [esp+554h+triangleCount], edx
+0x408B40: fild    [esp+554h+triangleCount]
 0x408B44: jmp     short loc_408BC0
 0x408B46: push    offset aNoBaseProcess; "NO BASE PROCESS"
 0x408B4B: lea     ecx, [esp+548h+Dest]
@@ -1137,8 +1137,8 @@
 0x408B6B: mov     edx, 500h
 0x408B70: fstp    [esp+554h+Format+4]
 0x408B74: sub     edx, iDebugTextLeftRightOffset
-0x408B7A: mov     [esp+554h+var_508], edx
-0x408B7E: fild    [esp+554h+var_508]
+0x408B7A: mov     [esp+554h+triangleCount], edx
+0x408B7E: fild    [esp+554h+triangleCount]
 0x408B82: jmp     short loc_408BC0
 0x408B84: push    offset aNoPathingDataF; "NO PATHING DATA FOR REF"
 0x408B89: lea     ecx, [esp+548h+Dest]
@@ -1153,8 +1153,8 @@
 0x408BA9: mov     edx, 500h
 0x408BAE: fstp    [esp+554h+Format+4]; float
 0x408BB2: sub     edx, iDebugTextLeftRightOffset
-0x408BB8: mov     [esp+554h+var_508], edx
-0x408BBC: fild    [esp+554h+var_508]
+0x408BB8: mov     [esp+554h+triangleCount], edx
+0x408BBC: fild    [esp+554h+triangleCount]
 0x408BC0: lea     eax, [esp+554h+Dest]
 0x408BC7: fstp    [esp+554h+Format]; float
 0x408BCA: push    eax; int
@@ -1162,7 +1162,7 @@
 0x408BD0: add     esp, 14h
 0x408BD3: add     [esp+544h+var_50C], ebx
 0x408BD7: jmp     InterfaceMgr_ShowDebugText___def_407DFE; jumptable 00407DFE default case, case 12
-0x408BDC: mov     ecx, offset TimeGlobals; jumptable 00407DFE case 0
+0x408BDC: mov     ecx, 0B332E0h; jumptable 00407DFE case 0
 0x408BE1: mov     [esp+544h+var_4B4], offset aSunday; "Sunday"
 0x408BEC: mov     [esp+544h+var_4B0], offset aMonday; "Monday"
 0x408BF7: mov     [esp+544h+var_4AC], offset aTuesday; "Tuesday"
@@ -1190,14 +1190,14 @@
 0x408C70: call    InterfaceMgr_DebugTextLine
 0x408C75: add     [esp+558h+var_510], ebx
 0x408C79: add     esp, 14h
-0x408C7C: mov     ecx, offset TimeGlobals
+0x408C7C: mov     ecx, 0B332E0h
 0x408C81: call    TimeGlobals_GetGameYear
 0x408C86: push    eax
-0x408C87: mov     ecx, offset TimeGlobals
+0x408C87: mov     ecx, 0B332E0h
 0x408C8C: call    TimeGlobals_GetGameDay
 0x408C91: movsx   ecx, al
 0x408C94: push    ecx
-0x408C95: mov     ecx, offset TimeGlobals
+0x408C95: mov     ecx, 0B332E0h
 0x408C9A: call    TimeGlobals_GetGameMonth
 0x408C9F: push    eax
 0x408CA0: lea     edx, [esp+550h+Dest]
@@ -1217,25 +1217,25 @@
 0x408CD5: call    InterfaceMgr_DebugTextLine
 0x408CDA: add     [esp+558h+var_510], ebx
 0x408CDE: add     esp, 14h
-0x408CE1: mov     ecx, offset TimeGlobals
+0x408CE1: mov     ecx, 0B332E0h
 0x408CE6: call    TimeGlobals_GetGameHour
-0x408CEB: fstp    [esp+544h+var_508]
-0x408CEF: fld     [esp+544h+var_508]
+0x408CEB: fstp    [esp+544h+triangleCount]
+0x408CEF: fld     [esp+544h+triangleCount]
 0x408CF3: fld     st
-0x408CF5: call    Double_To_SInt32
+0x408CF5: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x408CFA: movsx   esi, al
-0x408CFD: mov     [esp+544h+var_508], esi
-0x408D01: fisub   [esp+544h+var_508]
+0x408CFD: mov     [esp+544h+triangleCount], esi
+0x408D01: fisub   [esp+544h+triangleCount]
 0x408D05: fld     ds:dbl_A2FCC8
 0x408D0B: fmul    st(1), st
 0x408D0D: fld     st(1)
-0x408D0F: call    Double_To_SInt32
+0x408D0F: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x408D14: movsx   edi, al
-0x408D17: mov     [esp+544h+var_508], edi
-0x408D1B: fild    [esp+544h+var_508]
+0x408D17: mov     [esp+544h+triangleCount], edi
+0x408D1B: fild    [esp+544h+triangleCount]
 0x408D1F: fsubp   st(2), st
 0x408D21: fmulp   st(1), st
-0x408D23: call    Double_To_SInt32
+0x408D23: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x408D28: movsx   ecx, al
 0x408D2B: push    ecx
 0x408D2C: push    edi
@@ -1255,8 +1255,8 @@
 0x408D5F: fstp    [esp+554h+Format]; float
 0x408D62: push    eax; int
 0x408D63: call    InterfaceMgr_DebugTextLine
-0x408D68: fild    Seed
-0x408D6E: mov     ecx, Seed
+0x408D68: fild    dword ptr ds:0B33EA0h
+0x408D6E: mov     ecx, ds:0B33EA0h
 0x408D74: add     [esp+558h+var_510], ebx
 0x408D78: add     esp, 14h
 0x408D7B: test    ecx, ecx
@@ -1267,37 +1267,37 @@
 0x408D8F: fld     [esp+544h+var_500]
 0x408D93: fld     ds:dbl_A2F938
 0x408D99: fdivr   st, st(1)
-0x408D9B: call    Double_To_SInt32
+0x408D9B: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x408DA0: fld     ds:dbl_A2FCC8
 0x408DA6: fdiv    st(1), st
 0x408DA8: mov     [esp+544h+var_4CD], al
 0x408DAC: fxch    st(1)
-0x408DAE: fstp    [esp+544h+var_508]
-0x408DB2: fld     [esp+544h+var_508]
+0x408DAE: fstp    [esp+544h+triangleCount]
+0x408DB2: fld     [esp+544h+triangleCount]
 0x408DB6: fxch    st(1)
 0x408DB8: call    unknown_libname_14
-0x408DBD: fstp    [esp+544h+var_508]
-0x408DC1: fld     [esp+544h+var_508]
-0x408DC5: call    Double_To_SInt32
+0x408DBD: fstp    [esp+544h+triangleCount]
+0x408DC1: fld     [esp+544h+triangleCount]
+0x408DC5: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x408DCA: fld     [esp+544h+var_500]
 0x408DCE: fld     ds:dbl_A2FCC8
 0x408DD4: mov     [esp+544h+var_4CE], al
 0x408DD8: call    unknown_libname_14
-0x408DDD: fstp    [esp+544h+var_508]
-0x408DE1: fld     [esp+544h+var_508]
-0x408DE5: call    Double_To_SInt32
-0x408DEA: fld     flt_B33E9C
+0x408DDD: fstp    [esp+544h+triangleCount]
+0x408DE1: fld     [esp+544h+triangleCount]
+0x408DE5: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
+0x408DEA: fld     dword ptr ds:0B33E9Ch
 0x408DF0: sub     esp, 8
 0x408DF3: fstp    qword ptr [esp+54Ch+Format+8]
 0x408DF6: mov     [esp+54Ch+var_4CF], al
 0x408DFA: fld     [esp+54Ch+var_500]
 0x408DFE: fld     st
 0x408E00: fxch    st(1)
-0x408E02: call    Double_To_SInt32
-0x408E07: mov     [esp+54Ch+var_508], eax
-0x408E0B: fisub   [esp+54Ch+var_508]
+0x408E02: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
+0x408E07: mov     [esp+54Ch+triangleCount], eax
+0x408E0B: fisub   [esp+54Ch+triangleCount]
 0x408E0F: fmul    ds:fCostant_100
-0x408E15: call    Double_To_SInt32
+0x408E15: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x408E1A: movsx   edx, [esp+54Ch+var_4CF]
 0x408E1F: movsx   ecx, [esp+54Ch+var_4CD]
 0x408E24: push    eax
@@ -1320,7 +1320,7 @@
 0x408E61: fstp    [esp+554h+Format]; float
 0x408E64: push    eax; int
 0x408E65: call    InterfaceMgr_DebugTextLine
-0x408E6A: mov     ecx, TESDataHandler_g_PlayerRef
+0x408E6A: mov     ecx, dword ptr reference
 0x408E70: add     [esp+558h+var_510], ebx
 0x408E74: add     esp, 14h
 0x408E77: test    ecx, ecx
@@ -1332,7 +1332,7 @@
 0x408E8B: mov     edx, [eax+4]
 0x408E8E: mov     eax, [eax+8]
 0x408E91: mov     dword ptr [esp+544h+var_4F4], ecx
-0x408E95: mov     ecx, TES
+0x408E95: mov     ecx, ds:0B333A0h
 0x408E9B: mov     edi, [ecx+34h]
 0x408E9E: xor     esi, esi
 0x408EA0: test    edi, edi
@@ -1341,7 +1341,7 @@
 0x408EAA: jnz     short loc_408EDC
 0x408EAC: call    TES__GetCurrentWorldspace
 0x408EB1: fld     dword ptr [esp+544h+var_4F4+4]
-0x408EB5: mov     ecx, TESDataHandler
+0x408EB5: mov     ecx, g_TESDataHandler; Verified singleton pointer: allocated as TESDataHandler (0xCE0 bytes) and published at TES_constr 441B8A; passed to LoadFiles and form APIs; TES_destr 446915 destroys and clears it. Field +0x74 is the Global list head used by TESSaveLoadGame_LoadGlobalValues; surrounding layout remains Unknown.
 0x408EBB: push    edi; int
 0x408EBC: mov     esi, eax
 0x408EBE: push    esi; int
@@ -1354,10 +1354,10 @@
 0x408ED4: test    edi, edi
 0x408ED6: jz      loc_40903B
 0x408EDC: mov     ecx, edi; this
-0x408EDE: call    TESObjectCELL_IsInterior
+0x408EDE: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x408EE3: test    al, al
 0x408EE5: jz      short loc_408F12
-0x408EE7: mov     ecx, TES
+0x408EE7: mov     ecx, ds:0B333A0h
 0x408EED: mov     ecx, [ecx+34h]
 0x408EF0: mov     edx, [ecx]
 0x408EF2: mov     eax, [edx+0D4h]
@@ -1454,7 +1454,7 @@
 0x409027: lea     ecx, [esp+544h+var_4E8]; void *
 0x40902B: mov     [esp+544h+var_4], 0FFFFFFFFh
 0x409036: call    BSStringT_Clear
-0x40903B: mov     esi, srcObj
+0x40903B: mov     esi, ds:0B333B4h
 0x409041: test    esi, esi
 0x409043: jz      InterfaceMgr_ShowDebugText___def_407DFE; jumptable 00407DFE default case, case 12
 0x409049: mov     edx, [esi]
@@ -1472,8 +1472,8 @@
 0x40906E: sub     ecx, iDebugTextLeftRightOffset
 0x409074: sub     esp, 8
 0x409077: fstp    [esp+554h+Format+4]; float
-0x40907B: mov     [esp+554h+var_508], ecx
-0x40907F: fild    [esp+554h+var_508]
+0x40907B: mov     [esp+554h+triangleCount], ecx
+0x40907F: fild    [esp+554h+triangleCount]
 0x409083: mov     ecx, esi; this
 0x409085: mov     dword ptr [esp+554h+var_4F4+4], edx
 0x409089: mov     [esp+554h+var_4EC], eax
@@ -1508,8 +1508,8 @@
 0x4090EC: sub     edx, iDebugTextLeftRightOffset
 0x4090F2: sub     esp, 8
 0x4090F5: fstp    [esp+554h+Format+4]; float
-0x4090F9: mov     [esp+554h+var_508], edx
-0x4090FD: fild    [esp+554h+var_508]
+0x4090F9: mov     [esp+554h+triangleCount], edx
+0x4090FD: fild    [esp+554h+triangleCount]
 0x409101: lea     eax, [esp+554h+Dest]
 0x409108: fstp    [esp+554h+Format]; float
 0x40910B: push    eax; int
@@ -1535,8 +1535,8 @@
 0x409154: sub     edx, iDebugTextLeftRightOffset
 0x40915A: sub     esp, 8
 0x40915D: fstp    [esp+554h+Format+4]; float
-0x409161: mov     [esp+554h+var_508], edx
-0x409165: fild    [esp+554h+var_508]
+0x409161: mov     [esp+554h+triangleCount], edx
+0x409165: fild    [esp+554h+triangleCount]
 0x409169: lea     eax, [esp+554h+Dest]
 0x409170: fstp    [esp+554h+Format]; float
 0x409173: push    eax; int
@@ -1557,7 +1557,7 @@
 0x4091A5: push    eax; a1
 0x4091A6: call    NiObjectNET_LookupObjectByName
 0x4091AB: push    eax
-0x4091AC: push    offset dword_B3FAB0
+0x4091AC: push    offset parent
 0x4091B1: call    NiRTTI_Cast
 0x4091B6: add     esp, 10h
 0x4091B9: test    eax, eax
@@ -1589,15 +1589,15 @@
 0x40921F: sub     ecx, iDebugTextLeftRightOffset
 0x409225: sub     esp, 8
 0x409228: fstp    [esp+554h+Format+4]; float
-0x40922C: mov     [esp+554h+var_508], ecx
-0x409230: fild    [esp+554h+var_508]
+0x40922C: mov     [esp+554h+triangleCount], ecx
+0x409230: fild    [esp+554h+triangleCount]
 0x409234: lea     edx, [esp+554h+Dest]
 0x40923B: fstp    [esp+554h+Format]; float
 0x40923E: push    edx; int
 0x40923F: call    InterfaceMgr_DebugTextLine
 0x409244: add     esp, 14h
 0x409247: add     [esp+544h+var_50C], ebx
-0x40924B: mov     ecx, g_worldScenegraph; this
+0x40924B: mov     ecx, g_WorldSceneReceiverRoot; this
 0x409251: call    SceneGraph_GetChildNiAvNodeVtbl
 0x409256: test    eax, eax
 0x409258: jz      loc_4092E8
@@ -1628,8 +1628,8 @@
 0x4092BC: sub     ecx, iDebugTextLeftRightOffset
 0x4092C2: sub     esp, 8
 0x4092C5: fstp    [esp+554h+Format+4]; float
-0x4092C9: mov     [esp+554h+var_508], ecx
-0x4092CD: fild    [esp+554h+var_508]
+0x4092C9: mov     [esp+554h+triangleCount], ecx
+0x4092CD: fild    [esp+554h+triangleCount]
 0x4092D1: lea     edx, [esp+554h+Dest]
 0x4092D8: fstp    [esp+554h+Format]; float
 0x4092DB: push    edx; int
@@ -1637,19 +1637,19 @@
 0x4092E1: add     esp, 14h
 0x4092E4: add     [esp+544h+var_50C], ebx
 0x4092E8: mov     ecx, esi; this
-0x4092EA: call    TESObjectREFR_GetParentCell
+0x4092EA: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x4092EF: test    eax, eax
 0x4092F1: jz      loc_409379
 0x4092F7: mov     ecx, esi; this
-0x4092F9: call    TESObjectREFR_GetParentCell
+0x4092F9: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x4092FE: mov     ecx, esi; this
 0x409300: mov     edi, eax
-0x409302: call    TESObjectREFR_GetParentCell
+0x409302: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x409307: mov     ecx, eax; this
 0x409309: call    TESObjectCELL_GetYCoordinate
 0x40930E: push    eax
 0x40930F: mov     ecx, esi; this
-0x409311: call    TESObjectREFR_GetParentCell
+0x409311: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x409316: mov     ecx, eax; this
 0x409318: call    TESObjectCELL_GetXCoordinate
 0x40931D: push    eax
@@ -1670,8 +1670,8 @@
 0x40934D: sub     ecx, iDebugTextLeftRightOffset
 0x409353: sub     esp, 8
 0x409356: fstp    [esp+554h+Format+4]; float
-0x40935A: mov     [esp+554h+var_508], ecx
-0x40935E: fild    [esp+554h+var_508]
+0x40935A: mov     [esp+554h+triangleCount], ecx
+0x40935E: fild    [esp+554h+triangleCount]
 0x409362: lea     edx, [esp+554h+Dest]
 0x409369: fstp    [esp+554h+Format]; float
 0x40936C: push    edx; int
@@ -1690,7 +1690,7 @@
 0x409399: test    al, 1
 0x40939B: jnz     InterfaceMgr_ShowDebugText___def_407DFE; jumptable 00407DFE default case, case 12
 0x4093A1: mov     ecx, edi; this
-0x4093A3: call    Actor__GetProcessLevel
+0x4093A3: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x4093A8: push    eax
 0x4093A9: lea     edx, [esp+548h+Dest]
 0x4093B0: push    offset aLevelD; "Level %d"
@@ -1704,33 +1704,33 @@
 0x4093CB: sub     eax, iDebugTextLeftRightOffset
 0x4093D1: sub     esp, 8
 0x4093D4: fstp    [esp+554h+Format+4]; float
-0x4093D8: mov     [esp+554h+var_508], eax
-0x4093DC: fild    [esp+554h+var_508]
+0x4093D8: mov     [esp+554h+triangleCount], eax
+0x4093DC: fild    [esp+554h+triangleCount]
 0x4093E0: lea     ecx, [esp+554h+Dest]
 0x4093E7: fstp    [esp+554h+Format]; float
 0x4093EA: push    ecx; int
 0x4093EB: call    InterfaceMgr_DebugTextLine
 0x4093F0: add     [esp+558h+var_50C], ebx
 0x4093F4: add     esp, 14h
-0x4093F7: mov     ecx, edi
-0x4093F9: call    sub_5E0380
+0x4093F7: mov     ecx, edi; this
+0x4093F9: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x4093FE: test    eax, eax
 0x409400: jz      short loc_409464
-0x409402: mov     ecx, edi
-0x409404: call    sub_5E0380
+0x409402: mov     ecx, edi; this
+0x409404: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x409409: mov     ecx, eax
 0x40940B: call    TESForm__GetEditorNameLen
 0x409410: test    eax, eax
-0x409412: mov     ecx, edi
+0x409412: mov     ecx, edi; this
 0x409414: jz      short loc_409447
-0x409416: call    sub_5E0380
+0x409416: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x40941B: mov     edx, [eax]
 0x40941D: mov     ecx, eax
 0x40941F: mov     eax, [edx+0D4h]
 0x409425: call    eax
 0x409427: push    eax
-0x409428: mov     ecx, edi
-0x40942A: call    sub_5E4080
+0x409428: mov     ecx, edi; this
+0x40942A: call    Actor__GetCurrentPackageTypeName; Returns TESPackageNames[currentPackage->members.type] when Actor.process and process.currentPackage exist; otherwise null.
 0x40942F: push    eax
 0x409430: lea     ecx, [esp+54Ch+Dest]
 0x409437: push    offset aPackageSS; "Package %s (%s)"
@@ -1738,7 +1738,7 @@
 0x40943D: call    __sprintf
 0x409442: add     esp, 10h
 0x409445: jmp     short loc_409479
-0x409447: call    sub_5E4080
+0x409447: call    Actor__GetCurrentPackageTypeName; Returns TESPackageNames[currentPackage->members.type] when Actor.process and process.currentPackage exist; otherwise null.
 0x40944C: push    eax
 0x40944D: lea     edx, [esp+548h+Dest]
 0x409454: push    offset aPackageS; "Package %s"
@@ -1758,8 +1758,8 @@
 0x409486: sub     ecx, iDebugTextLeftRightOffset
 0x40948C: sub     esp, 8
 0x40948F: fstp    [esp+554h+Format+4]; float
-0x409493: mov     [esp+554h+var_508], ecx
-0x409497: fild    [esp+554h+var_508]
+0x409493: mov     [esp+554h+triangleCount], ecx
+0x409497: fild    [esp+554h+triangleCount]
 0x40949B: lea     edx, [esp+554h+Dest]
 0x4094A2: fstp    [esp+554h+Format]; float
 0x4094A5: push    edx; int
@@ -1770,17 +1770,17 @@
 0x4094B4: mov     edx, [eax+180h]
 0x4094BA: add     esp, 14h
 0x4094BD: call    edx
-0x4094BF: mov     ecx, edi
+0x4094BF: mov     ecx, edi; this
 0x4094C1: mov     esi, eax
-0x4094C3: call    sub_5E0380
+0x4094C3: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x4094C8: test    eax, eax
 0x4094CA: jz      short loc_409504
-0x4094CC: mov     ecx, edi
-0x4094CE: call    sub_5E0380
+0x4094CC: mov     ecx, edi; this
+0x4094CE: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x4094D3: cmp     dword ptr [eax+18h], 0FFFFFFFFh
 0x4094D7: jz      short loc_409504
-0x4094D9: mov     ecx, edi
-0x4094DB: call    sub_5E0380
+0x4094D9: mov     ecx, edi; this
+0x4094DB: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x4094E0: mov     eax, [eax+18h]
 0x4094E3: mov     ecx, off_B152B0[eax*4]
 0x4094EA: mov     edx, [ecx+esi*4]
@@ -1803,8 +1803,8 @@
 0x40952B: sub     eax, iDebugTextLeftRightOffset
 0x409531: sub     esp, 8
 0x409534: fstp    [esp+554h+Format+4]; float
-0x409538: mov     [esp+554h+var_508], eax
-0x40953C: fild    [esp+554h+var_508]
+0x409538: mov     [esp+554h+triangleCount], eax
+0x40953C: fild    [esp+554h+triangleCount]
 0x409540: lea     ecx, [esp+554h+Dest]
 0x409547: fstp    [esp+554h+Format]; float
 0x40954A: push    ecx; int
@@ -1816,8 +1816,8 @@
 0x40955E: mov     esi, eax
 0x409560: test    esi, esi
 0x409562: jz      short loc_40957A
-0x409564: mov     ecx, esi
-0x409566: call    sub_5660A0
+0x409564: mov     ecx, esi; self
+0x409566: call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).
 0x40956B: test    al, al
 0x40956D: jnz     short loc_40957A
 0x40956F: mov     ecx, esi
@@ -1860,8 +1860,8 @@
 0x4095E6: sub     eax, iDebugTextLeftRightOffset
 0x4095EC: sub     esp, 8
 0x4095EF: fstp    [esp+554h+Format+4]; float
-0x4095F3: mov     [esp+554h+var_508], eax
-0x4095F7: fild    [esp+554h+var_508]
+0x4095F3: mov     [esp+554h+triangleCount], eax
+0x4095F7: fild    [esp+554h+triangleCount]
 0x4095FB: lea     ecx, [esp+554h+Dest]
 0x409602: fstp    [esp+554h+Format]; float
 0x409605: push    ecx; int
@@ -1896,8 +1896,8 @@
 0x40966C: sub     eax, iDebugTextLeftRightOffset
 0x409672: sub     esp, 8
 0x409675: fstp    [esp+554h+Format+4]; float
-0x409679: mov     [esp+554h+var_508], eax
-0x40967D: fild    [esp+554h+var_508]
+0x409679: mov     [esp+554h+triangleCount], eax
+0x40967D: fild    [esp+554h+triangleCount]
 0x409681: lea     ecx, [esp+554h+Dest]
 0x409688: fstp    [esp+554h+Format]; float
 0x40968B: push    ecx; int
@@ -1923,8 +1923,8 @@
 0x4096CE: sub     edx, iDebugTextLeftRightOffset
 0x4096D4: sub     esp, 8
 0x4096D7: fstp    [esp+554h+Format+4]; float
-0x4096DB: mov     [esp+554h+var_508], edx
-0x4096DF: fild    [esp+554h+var_508]
+0x4096DB: mov     [esp+554h+triangleCount], edx
+0x4096DF: fild    [esp+554h+triangleCount]
 0x4096E3: lea     eax, [esp+554h+Dest]
 0x4096EA: fstp    [esp+554h+Format]; float
 0x4096ED: push    eax; int
@@ -1941,10 +1941,10 @@
 0x40970F: mov     ecx, [eax+0Ch]
 0x409712: mov     edx, [esi]
 0x409714: mov     eax, [edx+4D4h]
-0x40971A: mov     [esp+544h+var_508], ecx
+0x40971A: mov     [esp+544h+triangleCount], ecx
 0x40971E: mov     ecx, esi
 0x409720: call    eax
-0x409722: mov     ecx, [esp+544h+var_508]
+0x409722: mov     ecx, [esp+544h+triangleCount]
 0x409726: push    eax
 0x409727: push    ecx
 0x409728: mov     ecx, edi
@@ -1975,8 +1975,8 @@
 0x40977E: sub     ecx, iDebugTextLeftRightOffset
 0x409784: sub     esp, 8
 0x409787: fstp    [esp+554h+Format+4]; float
-0x40978B: mov     [esp+554h+var_508], ecx
-0x40978F: fild    [esp+554h+var_508]
+0x40978B: mov     [esp+554h+triangleCount], ecx
+0x40978F: fild    [esp+554h+triangleCount]
 0x409793: lea     edx, [esp+554h+Dest]
 0x40979A: fstp    [esp+554h+Format]; float
 0x40979D: push    edx; int
@@ -2004,22 +2004,22 @@
 0x4097EB: sub     ecx, iDebugTextLeftRightOffset
 0x4097F1: sub     esp, 8
 0x4097F4: fstp    [esp+554h+Format+4]; float
-0x4097F8: mov     [esp+554h+var_508], ecx
-0x4097FC: fild    [esp+554h+var_508]
+0x4097F8: mov     [esp+554h+triangleCount], ecx
+0x4097FC: fild    [esp+554h+triangleCount]
 0x409800: lea     edx, [esp+554h+Dest]
 0x409807: fstp    [esp+554h+Format]; float
 0x40980A: push    edx; int
 0x40980B: call    InterfaceMgr_DebugTextLine
 0x409810: add     esp, 14h
 0x409813: jmp     InterfaceMgr_ShowDebugText___def_407DFE; jumptable 00407DFE default case, case 12
-0x409818: mov     ecx, srcObj; jumptable 00407DFE case 1
+0x409818: mov     ecx, ds:0B333B4h; jumptable 00407DFE case 1
 0x40981E: test    ecx, ecx
 0x409820: jz      loc_40A5E2
 0x409826: mov     eax, [ecx]
 0x409828: mov     edx, [eax+164h]
 0x40982E: call    edx
 0x409830: test    eax, eax
-0x409832: mov     ecx, srcObj; this
+0x409832: mov     ecx, ds:0B333B4h; this
 0x409838: jz      loc_40A5E2
 0x40983E: fild    [esp+544h+var_510]
 0x409842: push    0FFFFFFFFh; int
@@ -2490,7 +2490,7 @@
 0x409F07: mov     [eax+6], dl
 0x409F0A: mov     esi, [esp+544h+var_504]
 0x409F0E: mov     ecx, esi
-0x409F10: call    Actor_GetCurrentAction
+0x409F10: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x409F15: cmp     eax, 0FFFFFFFFh
 0x409F18: jz      short loc_409F94
 0x409F1A: lea     eax, [esp+544h+Dest]
@@ -2508,8 +2508,8 @@
 0x409F4C: mov     [eax+8], cx
 0x409F50: mov     ecx, esi
 0x409F52: mov     [eax+0Ah], dl
-0x409F55: call    Actor_GetCurrentAction
-0x409F5A: mov     eax, off_B14C80[eax*4]; "Equip Weapon"
+0x409F55: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
+0x409F5A: mov     eax, ActorCurrentActionNameTable[eax*4]
 0x409F61: mov     esi, eax
 0x409F63: mov     cl, [eax]
 0x409F65: add     eax, 1
@@ -2530,10 +2530,10 @@
 0x409F8E: rep movsb
 0x409F90: mov     esi, [esp+544h+var_504]
 0x409F94: mov     ecx, esi; this
-0x409F96: mov     [esp+544h+var_4B4], offset aOnground; "OnGround"
+0x409F96: mov     [esp+544h+var_4B4], offset aOnground; Debug state label table begins: slots 0..10 map to strings OnGround, Jumping, InAir, Climbing, Flying, Swimming, Projectile, UserState2..5. This table is display-only; actual state table init at 0x890C00 skips slot 3 Climbing.
 0x409FA1: mov     [esp+544h+var_4B0], offset aJumping; "Jumping"
 0x409FAC: mov     [esp+544h+var_4AC], offset aInair; "InAir"
-0x409FB7: mov     [esp+544h+var_4A8], offset aClimbing; "Climbing"
+0x409FB7: mov     [esp+544h+var_4A8], offset aClimbing; Display-only label for state id 3 = "Climbing". Xrefs show this is the only reference to the Climbing string; no bhkCharacterStateClimbing constructor is observed.
 0x409FC2: mov     [esp+544h+var_4A4], offset aFlying; "Flying"
 0x409FCD: mov     [esp+544h+var_4A0], offset aSwimming; "Swimming"
 0x409FD8: mov     [esp+544h+var_49C], offset aProjectile; "Projectile"
@@ -2541,7 +2541,7 @@
 0x409FEE: mov     [esp+544h+var_494], offset aUserstate3; "UserState3"
 0x409FF9: mov     [esp+544h+var_490], offset aUserstate4; "UserState4"
 0x40A004: mov     [esp+544h+var_48C], offset aUserstate5; "UserState5"
-0x40A00F: call    MobileObject_GetCharProxy
+0x40A00F: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x40A014: mov     edi, eax
 0x40A016: test    edi, edi
 0x40A018: jz      short loc_40A094
@@ -2559,8 +2559,8 @@
 0x40A043: mov     dl, ds:byte_A306E0
 0x40A049: mov     [ecx+8], eax
 0x40A04C: mov     [ecx+0Ch], dl
-0x40A04F: lea     ecx, [edi+1E0h]
-0x40A055: call    sub_88D370
+0x40A04F: lea     ecx, [edi+1E0h]; Debug text reads current character state id via sub_88D370(proxy+0x1E0) and indexes the local label table; it does not prove the state exists in the runtime state table.
+0x40A055: call    hkCharacterContext_GetStateId; hkCharacterContext state id accessor used by controller update; proxy+0x1E0 context stores current state id at +0x0C.
 0x40A05A: mov     eax, [esp+eax*4+544h+var_4B4]
 0x40A061: mov     esi, eax
 0x40A063: mov     cl, [eax]
@@ -2628,8 +2628,8 @@
 0x40A135: call    InterfaceMgr_DebugTextLine
 0x40A13A: add     esp, 14h
 0x40A13D: add     [esp+544h+var_510], ebx
-0x40A141: mov     ecx, srcObj
-0x40A147: mov     eax, TESDataHandler_g_PlayerRef
+0x40A141: mov     ecx, ds:0B333B4h
+0x40A147: mov     eax, dword ptr reference
 0x40A14C: cmp     ecx, eax
 0x40A14E: mov     [esp+544h+var_500], 1
 0x40A156: jnz     loc_40A22D
@@ -2637,8 +2637,7 @@
 0x40A163: jnz     short loc_40A175
 0x40A165: mov     [esp+544h+var_500], 2
 0x40A16D: jmp     short loc_40A175
-0x40A16F: align 10h
-0x40A170: mov     eax, TESDataHandler_g_PlayerRef
+0x40A170: mov     eax, dword ptr reference
 0x40A175: cmp     ecx, eax
 0x40A177: jnz     loc_40A22D
 0x40A17D: cmp     dword ptr [eax+5D8h], 0
@@ -2666,9 +2665,9 @@
 0x40A1E8: add     esp, 0Ch
 0x40A1EB: cmp     esi, 2
 0x40A1EE: setz    cl
-0x40A1F1: push    ecx; a2
-0x40A1F2: mov     ecx, TESDataHandler_g_PlayerRef; this
-0x40A1F8: call    Player_GetAnimData
+0x40A1F1: push    ecx; firstPerson
+0x40A1F2: mov     ecx, dword ptr reference; this
+0x40A1F8: call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.
 0x40A1FD: mov     edi, eax
 0x40A1FF: fild    [esp+544h+var_510]
 0x40A203: push    0FFFFFFFFh; int
@@ -2688,37 +2687,37 @@
 0x40A235: call    edx
 0x40A237: mov     edi, eax
 0x40A239: xor     esi, esi
-0x40A23B: mov     [esp+544h+var_4F8], esi
+0x40A23B: mov     [esp+544h+slot], esi
 0x40A23F: nop
-0x40A240: push    esi
-0x40A241: mov     ecx, edi
-0x40A243: call    sub_4706E0
+0x40A240: push    esi; slotSelector
+0x40A241: mov     ecx, edi; this
+0x40A243: call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].
 0x40A248: test    eax, eax
-0x40A24A: mov     [esp+544h+var_508], eax
+0x40A24A: mov     [esp+544h+triangleCount], eax
 0x40A24E: jz      loc_40A2F2
-0x40A254: mov     eax, [esp+544h+var_4F8]
-0x40A258: push    eax
-0x40A259: mov     ecx, edi
-0x40A25B: call    ActorAnimData_GetAnimGroupFromField8Value
-0x40A260: mov     ecx, [esp+544h+var_508]
+0x40A254: mov     eax, [esp+544h+slot]
+0x40A258: push    eax; slot
+0x40A259: mov     ecx, edi; this
+0x40A25B: call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.
+0x40A260: mov     ecx, [esp+544h+triangleCount]
 0x40A264: movzx   esi, ax
 0x40A267: mov     eax, [ecx+0Ch]
 0x40A26A: push    eax
 0x40A26B: push    esi
-0x40A26C: call    sub_51AA00
+0x40A26C: call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.
 0x40A271: lea     edx, [eax+eax*8]
-0x40A274: mov     eax, animGroupInfos_ptr[edx*4]
+0x40A274: mov     eax, animGroupInfos_ptr[edx*4]; Debug display callsite hit in animation search set; peripheral UI text output, not an animation-state owner.
 0x40A27B: add     esp, 4
 0x40A27E: push    eax
 0x40A27F: push    esi
-0x40A280: call    sub_51A9E0
+0x40A280: call    AnimKey_GetWeaponPrefix; Final name: AnimKey_GetWeaponPrefix. Returns (encoded key >> 8) & 0xF.
 0x40A285: mov     ecx, off_B102C8[eax*4]
 0x40A28C: add     esp, 4
 0x40A28F: push    ecx
 0x40A290: push    esi
-0x40A291: call    sub_51A9D0
+0x40A291: call    AnimKey_GetMovementPrefix; Final name: AnimKey_GetMovementPrefix. Returns encoded key >> 12.
 0x40A296: mov     edx, off_B102B8[eax*4]
-0x40A29D: mov     eax, [esp+554h+var_4F8]
+0x40A29D: mov     eax, [esp+554h+slot]
 0x40A2A1: mov     ecx, off_B108EC[eax*4]; "LowerBody"
 0x40A2A8: add     esp, 4
 0x40A2AB: push    edx
@@ -2738,27 +2737,27 @@
 0x40A2DE: fstp    [esp+554h+Format]; float
 0x40A2E1: push    eax; int
 0x40A2E2: call    InterfaceMgr_DebugTextLine
-0x40A2E7: mov     esi, [esp+558h+var_4F8]
+0x40A2E7: mov     esi, [esp+558h+slot]
 0x40A2EB: add     esp, 14h
 0x40A2EE: add     [esp+544h+var_510], ebx
 0x40A2F2: add     esi, 1
 0x40A2F5: cmp     esi, 5
-0x40A2F8: mov     [esp+544h+var_4F8], esi
+0x40A2F8: mov     [esp+544h+slot], esi
 0x40A2FC: jl      loc_40A240
-0x40A302: mov     ecx, dword ptr Vector3_InitValue?
-0x40A308: mov     edx, dword ptr Vector3_InitValue?+4
-0x40A30E: mov     eax, dword_B3F9B0
+0x40A302: mov     ecx, g_zeroNiPoint3.x
+0x40A308: mov     edx, g_zeroNiPoint3.y
+0x40A30E: mov     eax, g_zeroNiPoint3.z
 0x40A313: xor     esi, esi
 0x40A315: cmp     [esp+544h+var_504], esi
 0x40A319: mov     dword ptr [esp+544h+var_4F4], ecx
 0x40A31D: mov     dword ptr [esp+544h+var_4F4+4], edx
 0x40A321: mov     [esp+544h+var_4EC], eax
 0x40A325: jz      loc_40A3C6
-0x40A32B: push    esi
-0x40A32C: mov     ecx, edi
-0x40A32E: call    ActorAnimData_GetAnimGroupFromField8Value
+0x40A32B: push    esi; slot
+0x40A32C: mov     ecx, edi; this
+0x40A32E: call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.
 0x40A333: push    eax
-0x40A334: call    sub_51AA00
+0x40A334: call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.
 0x40A339: mov     esi, [esp+548h+var_504]
 0x40A33D: mov     ecx, [esi+58h]
 0x40A340: mov     edx, [ecx]
@@ -2771,7 +2770,7 @@
 0x40A355: test    ax, 800h
 0x40A359: jz      short loc_40A364
 0x40A35B: mov     ecx, esi
-0x40A35D: call    sub_5E3AD0
+0x40A35D: call    sub_5E3AD0; Swim run-speed branch used by sub_5E65B0 when run 0x200 and swim 0x800 are set. Calls Calc_SwimRunSpeed and applies same package-target limiting pattern.
 0x40A362: jmp     short loc_40A3BF
 0x40A364: mov     ecx, [esi+58h]
 0x40A367: mov     edx, [ecx]
@@ -2780,15 +2779,15 @@
 0x40A371: test    ax, 2000h
 0x40A375: mov     ecx, [esp+544h+var_504]
 0x40A379: jz      short loc_40A382
-0x40A37B: call    sub_5E3C80
+0x40A37B: call    sub_5E3C80; Fly-speed branch used by sub_5E65B0 when fly-speed flag 0x2000 is set. Uses Speed actor value and encumbrance, then applies package-target limiting pattern.
 0x40A380: jmp     short loc_40A3BF
-0x40A382: call    sub_5E3750
+0x40A382: call    Actor_CalcFastTravelSpeed; Run-speed branch used by sub_5E65B0 when process flag 0x200 is set and swim/fly are absent. Calls Calc_RunSpeed, then may clamp to package target actor's run speed minus close-distance margin.
 0x40A387: jmp     short loc_40A3BF
 0x40A389: call    eax
 0x40A38B: test    ax, 800h
 0x40A38F: jz      short loc_40A39C
 0x40A391: mov     ecx, [esp+544h+var_504]
-0x40A395: call    sub_5E3920
+0x40A395: call    sub_5E3920; Swim walk-speed branch used by sub_5E65B0 when swim 0x800 is set without run 0x200. Calls Calc_SwimSpeed and applies same package-target limiting pattern.
 0x40A39A: jmp     short loc_40A3BF
 0x40A39C: mov     ecx, [esi+58h]
 0x40A39F: mov     edx, [ecx]
@@ -2797,40 +2796,40 @@
 0x40A3A9: test    ax, 2000h
 0x40A3AD: mov     ecx, [esp+544h+var_504]
 0x40A3B1: jz      short loc_40A3BA
-0x40A3B3: call    sub_5E3C80
+0x40A3B3: call    sub_5E3C80; Fly-speed branch used by sub_5E65B0 when fly-speed flag 0x2000 is set. Uses Speed actor value and encumbrance, then applies package-target limiting pattern.
 0x40A3B8: jmp     short loc_40A3BF
-0x40A3BA: call    sub_5E3590
-0x40A3BF: call    Double_To_SInt32
+0x40A3BA: call    sub_5E3590; Walk-speed branch used by sub_5E65B0 when run/swim/fly flags are absent. Calls Calc_WalkSpeed, then may clamp to package target actor's walk speed minus close-distance margin.
+0x40A3BF: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x40A3C4: mov     esi, eax
-0x40A3C6: push    0
-0x40A3C8: mov     ecx, edi
-0x40A3CA: call    ActorAnimData_GetAnimGroupFromField8Value
-0x40A3CF: mov     edx, srcObj
+0x40A3C6: push    0; slot
+0x40A3C8: mov     ecx, edi; this
+0x40A3CA: call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.
+0x40A3CF: mov     edx, ds:0B333B4h
 0x40A3D5: push    0
 0x40A3D7: movzx   ecx, ax
 0x40A3DA: push    0
 0x40A3DC: push    edx
 0x40A3DD: lea     eax, [esp+550h+var_4F4]
-0x40A3E1: mov     [esp+550h+var_508], ecx
+0x40A3E1: mov     [esp+550h+triangleCount], ecx
 0x40A3E5: push    eax
 0x40A3E6: mov     ecx, edi
-0x40A3E8: call    sub_4723A0
+0x40A3E8: call    ActorAnimData_GetMovementVector; Computes the actor movement vector from ActorAnimData +0x0C/+0x10/+0x14. For non-creature ground-movement groups, clamps the vector by TESAnimGroup root-motion magnitude scaled by +0xBC and, when the blend sequence at +0xAC is active, +0xC0; optionally transforms the result and can suppress Z.
 0x40A3ED: lea     ecx, [esp+544h+var_4F4]
 0x40A3F1: fld     dword ptr [edi+0C0h]
-0x40A3F7: fstp    [esp+544h+var_4F8]
+0x40A3F7: fstp    [esp+544h+slot]
 0x40A3FB: fld     dword ptr [edi+0BCh]
 0x40A401: fstp    [esp+544h+var_4D4]
 0x40A405: fld     dword ptr [edi+94h]
-0x40A40B: fstp    [esp+544h+var_4FC]
-0x40A40F: call    sub_404C90
-0x40A414: mov     ecx, [esp+544h+var_508]
+0x40A40B: fstp    [esp+544h+secondaryGeometryCount]
+0x40A40F: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
+0x40A414: mov     ecx, [esp+544h+triangleCount]
 0x40A418: sub     esp, 8
 0x40A41B: fstp    qword ptr [esp+54Ch+Format+8]
 0x40A41E: push    esi
 0x40A41F: push    ecx
 0x40A420: mov     ecx, edi
 0x40A422: call    sub_472330
-0x40A427: fld     [esp+550h+var_4F8]
+0x40A427: fld     [esp+550h+slot]
 0x40A42B: movsx   edx, ax
 0x40A42E: push    edx
 0x40A42F: sub     esp, 18h
@@ -2838,7 +2837,7 @@
 0x40A439: fstp    qword ptr [esp+56Ch+var_55C]
 0x40A43D: fld     [esp+56Ch+var_4D4]
 0x40A444: fstp    qword ptr [esp+56Ch+var_564]
-0x40A448: fld     [esp+56Ch+var_4FC]
+0x40A448: fld     [esp+56Ch+secondaryGeometryCount]
 0x40A44C: fstp    [esp+56Ch+var_56C]
 0x40A44F: push    offset aTime_2fMove_1f; "time %.2f move %.1f attack %.1f speed %"...
 0x40A454: push    eax
@@ -2856,16 +2855,16 @@
 0x40A47D: call    InterfaceMgr_DebugTextLine
 0x40A482: add     [esp+558h+var_510], ebx
 0x40A486: add     esp, 14h
-0x40A489: mov     ecx, edi
-0x40A48B: call    sub_474BD0
+0x40A489: mov     ecx, edi; this
+0x40A48B: call    ActorAnimData_FindFirstActiveAnimGroupSequence; Convenience wrapper returning the first active BSAnimGroupSequence from ActorAnimData.
 0x40A490: mov     esi, eax
 0x40A492: test    esi, esi
 0x40A494: jz      loc_40A5D1
 0x40A49A: lea     ebx, [ebx+0]
 0x40A4A0: mov     eax, [esi+14h]
-0x40A4A3: fld     ds:flt_A30634
+0x40A4A3: fld     ds:kTerrainLODQuadRayDirectionZ
 0x40A4A9: mov     ecx, [eax+8]
-0x40A4AC: fstp    [esp+544h+var_4F8]
+0x40A4AC: fstp    [esp+544h+slot]
 0x40A4B0: test    ecx, ecx
 0x40A4B2: jz      short loc_40A4C7
 0x40A4B4: movzx   eax, byte ptr [eax+0Ch]
@@ -2873,14 +2872,14 @@
 0x40A4BB: jnb     short loc_40A4C7
 0x40A4BD: push    eax
 0x40A4BE: call    sub_404E90
-0x40A4C3: fstp    [esp+544h+var_4F8]
+0x40A4C3: fstp    [esp+544h+slot]
 0x40A4C7: fld     dword ptr [edi+94h]
 0x40A4CD: push    ecx
-0x40A4CE: fstp    [esp+548h+var_4FC]
+0x40A4CE: fstp    [esp+548h+secondaryGeometryCount]
 0x40A4D2: mov     ecx, esi
-0x40A4D4: fld     [esp+548h+var_4FC]
+0x40A4D4: fld     [esp+548h+secondaryGeometryCount]
 0x40A4D8: fstp    [esp+548h+var_548]; float
-0x40A4DB: call    sub_49F4A0
+0x40A4DB: call    BSAnimGroupSequence_SampleUpdate; Samples a BSAnimGroupSequence only while native controller state +0x44 is 1, 2, or 3. Passes sequence +0x48 plus ActorAnimData scheduler time +0x94 to NiControllerSequence_AdvanceTime with commit enabled.
 0x40A4E0: fld     ds:flt_A7DEB4
 0x40A4E6: mov     ecx, [esi+44h]
 0x40A4E9: mov     edx, [esi+8]
@@ -2893,14 +2892,14 @@
 0x40A4FF: mov     eax, [esi+24h]
 0x40A502: mov     eax, off_B02C74[eax*4]; "LOOP"
 0x40A509: jp      short loc_40A53E
-0x40A50B: fld     [esp+54Ch+var_4F8]
-0x40A50F: mov     [esp+54Ch+var_4FC], edx
+0x40A50B: fld     [esp+54Ch+slot]
+0x40A50F: mov     [esp+54Ch+secondaryGeometryCount], edx
 0x40A513: fstp    qword ptr [esp+54Ch+Format+8]
 0x40A516: push    eax
 0x40A517: push    ecx
-0x40A518: push    esi
-0x40A519: call    sub_470CE0
-0x40A51E: mov     edx, [esp+558h+var_4FC]
+0x40A518: push    esi; sequence
+0x40A519: call    BSAnimGroupSequence_GetDuration; Returns zero for null; otherwise returns BSAnimGroupSequence end time (+0x30) minus start time (+0x2C).
+0x40A51E: mov     edx, [esp+558h+secondaryGeometryCount]
 0x40A522: push    ecx
 0x40A523: fstp    qword ptr [esp+55Ch+var_55C]
 0x40A526: push    edx
@@ -2912,19 +2911,19 @@
 0x40A53C: jmp     short loc_40A593
 0x40A53E: fld     dword ptr [edi+94h]
 0x40A544: mov     [esp+54Ch+var_4D4], edx
-0x40A548: fstp    [esp+54Ch+var_4FC]
-0x40A54C: fld     [esp+54Ch+var_4F8]
+0x40A548: fstp    [esp+54Ch+secondaryGeometryCount]
+0x40A54C: fld     [esp+54Ch+slot]
 0x40A550: fstp    qword ptr [esp+54Ch+Format+8]
 0x40A553: push    eax
 0x40A554: push    ecx
-0x40A555: push    esi
-0x40A556: call    sub_470CE0
+0x40A555: push    esi; sequence
+0x40A556: call    BSAnimGroupSequence_GetDuration; Returns zero for null; otherwise returns BSAnimGroupSequence end time (+0x30) minus start time (+0x2C).
 0x40A55B: sub     esp, 8
 0x40A55E: fstp    qword ptr [esp+560h+var_55C]
 0x40A562: mov     ecx, esi
-0x40A564: fld     [esp+560h+var_4FC]
+0x40A564: fld     [esp+560h+secondaryGeometryCount]
 0x40A568: fstp    [esp+560h+var_564+4]; float
-0x40A56B: call    sub_49F4A0
+0x40A56B: call    BSAnimGroupSequence_SampleUpdate; Samples a BSAnimGroupSequence only while native controller state +0x44 is 1, 2, or 3. Passes sequence +0x48 plus ActorAnimData scheduler time +0x94 to NiControllerSequence_AdvanceTime with commit enabled.
 0x40A570: mov     edx, [esp+55Ch+var_4D4]
 0x40A577: sub     esp, 8
 0x40A57A: fstp    qword ptr [esp+564h+var_564]
@@ -2946,20 +2945,20 @@
 0x40A5B3: call    InterfaceMgr_DebugTextLine
 0x40A5B8: add     [esp+558h+var_510], ebx
 0x40A5BC: add     esp, 14h
-0x40A5BF: push    esi
-0x40A5C0: mov     ecx, edi
-0x40A5C2: call    sub_472690
+0x40A5BF: push    esi; after
+0x40A5C0: mov     ecx, edi; this
+0x40A5C2: call    ActorAnimData_FindNextActiveAnimGroupSequence; Iterates the controller manager sequence array, filters to BSAnimGroupSequence RTTI, and returns the first active sequence or the next active sequence after the supplied pointer.
 0x40A5C7: mov     esi, eax
 0x40A5C9: test    esi, esi
 0x40A5CB: jnz     loc_40A4A0
 0x40A5D1: sub     [esp+544h+var_500], 1
-0x40A5D6: mov     ecx, srcObj
+0x40A5D6: mov     ecx, ds:0B333B4h
 0x40A5DC: jnz     loc_40A170
 0x40A5E2: cmp     [esp+544h+var_504], 0
 0x40A5E7: jnz     InterfaceMgr_ShowDebugText___def_407DFE; jumptable 00407DFE default case, case 12
 0x40A5ED: mov     esi, ecx
 0x40A5EF: test    esi, esi
-0x40A5F1: mov     [esp+544h+var_4F8], esi
+0x40A5F1: mov     [esp+544h+slot], esi
 0x40A5F5: jz      InterfaceMgr_ShowDebugText___def_407DFE; jumptable 00407DFE default case, case 12
 0x40A5FB: xor     eax, eax
 0x40A5FD: mov     [esp+544h+var_504], eax
@@ -2973,35 +2972,35 @@
 0x40A613: jz      loc_40A81B
 0x40A619: mov     edx, [esi]
 0x40A61B: mov     eax, [edx+154h]
-0x40A621: push    0
+0x40A621: push    0; index
 0x40A623: mov     ecx, esi
 0x40A625: call    eax
-0x40A627: mov     ecx, eax
-0x40A629: call    sub_405790
+0x40A627: mov     ecx, eax; this
+0x40A629: call    NiNode_GetChildAtIndex
 0x40A62E: test    eax, eax
 0x40A630: jz      loc_40A81B
 0x40A636: mov     edx, [esi]
 0x40A638: mov     eax, [edx+154h]
-0x40A63E: push    0
+0x40A63E: push    0; index
 0x40A640: mov     ecx, esi
 0x40A642: call    eax
-0x40A644: mov     ecx, eax
-0x40A646: call    sub_405790
+0x40A644: mov     ecx, eax; this
+0x40A646: call    NiNode_GetChildAtIndex
 0x40A64B: cmp     dword ptr [eax+0Ch], 0
 0x40A64F: jz      loc_40A81B
-0x40A655: mov     ecx, [esp+544h+var_4F8]
+0x40A655: mov     ecx, [esp+544h+slot]
 0x40A659: mov     edx, [ecx]
 0x40A65B: mov     eax, [edx+154h]
-0x40A661: push    0
+0x40A661: push    0; index
 0x40A663: call    eax
-0x40A665: mov     ecx, eax
-0x40A667: call    sub_405790
+0x40A665: mov     ecx, eax; this
+0x40A667: call    NiNode_GetChildAtIndex
 0x40A66C: mov     eax, [eax+0Ch]
 0x40A66F: push    eax
 0x40A670: push    offset stru_B3CAC0
 0x40A675: call    NiRTTI_Cast
 0x40A67A: mov     edi, eax
-0x40A67C: mov     [esp+54Ch+var_508], edi
+0x40A67C: mov     [esp+54Ch+triangleCount], edi
 0x40A680: jmp     short loc_40A6B3
 0x40A682: cmp     eax, 1
 0x40A685: jnz     loc_40A823
@@ -3018,7 +3017,7 @@
 0x40A6A3: push    offset stru_B3CAC0
 0x40A6A8: call    NiRTTI_Cast
 0x40A6AD: mov     edi, eax
-0x40A6AF: mov     [esp+54Ch+var_508], eax
+0x40A6AF: mov     [esp+54Ch+triangleCount], eax
 0x40A6B3: add     esp, 8
 0x40A6B6: test    edi, edi
 0x40A6B8: jz      loc_40A81B
@@ -3032,11 +3031,11 @@
 0x40A6DD: jz      loc_40A7DF
 0x40A6E3: cmp     dword ptr [esi+44h], 0
 0x40A6E7: jz      loc_40A7DF
-0x40A6ED: fld     flt_B33A30
+0x40A6ED: fld     dword ptr source
 0x40A6F3: push    ecx
 0x40A6F4: mov     ecx, esi
 0x40A6F6: fstp    [esp+548h+var_548]; float
-0x40A6F9: call    sub_49F4A0
+0x40A6F9: call    BSAnimGroupSequence_SampleUpdate; Samples a BSAnimGroupSequence only while native controller state +0x44 is 1, 2, or 3. Passes sequence +0x48 plus ActorAnimData scheduler time +0x94 to NiControllerSequence_AdvanceTime with commit enabled.
 0x40A6FE: fld     ds:flt_A7DEB4
 0x40A704: mov     ecx, [esi+44h]
 0x40A707: fchs
@@ -3064,21 +3063,21 @@
 0x40A74C: fld     dword ptr [esi+30h]
 0x40A74F: mov     eax, [esi+24h]
 0x40A752: mov     edx, off_B02C74[eax*4]; "LOOP"
-0x40A759: fstp    [esp+544h+var_4FC]
+0x40A759: fstp    [esp+544h+secondaryGeometryCount]
 0x40A75D: fld     dword ptr [esi+2Ch]
 0x40A760: mov     eax, off_B02C58[ecx*4]; "INACTIVE"
 0x40A767: mov     edi, [esi+8]
 0x40A76A: fstp    [esp+544h+var_4D4]
-0x40A76E: fld     [esp+544h+var_4FC]
+0x40A76E: fld     [esp+544h+secondaryGeometryCount]
 0x40A772: push    edx
 0x40A773: fsub    [esp+548h+var_4D4]
 0x40A777: push    eax
 0x40A778: sub     esp, 0Ch
 0x40A77B: mov     ecx, esi
 0x40A77D: fstp    qword ptr [esp+558h+Format]
-0x40A781: fld     flt_B33A30
+0x40A781: fld     dword ptr source
 0x40A787: fstp    [esp+558h+var_55C+4]; float
-0x40A78A: call    sub_49F4A0
+0x40A78A: call    BSAnimGroupSequence_SampleUpdate; Samples a BSAnimGroupSequence only while native controller state +0x44 is 1, 2, or 3. Passes sequence +0x48 plus ActorAnimData scheduler time +0x94 to NiControllerSequence_AdvanceTime with commit enabled.
 0x40A78F: sub     esp, 8
 0x40A792: fstp    qword ptr [esp+55Ch+var_55C]
 0x40A795: push    edi
@@ -3086,7 +3085,7 @@
 0x40A79D: push    offset aSTime_2f_2fS_0; "'%s' time %.2f/%.2f state %s/%s"
 0x40A7A2: push    ecx
 0x40A7A3: call    __sprintf
-0x40A7A8: mov     edi, [esp+568h+var_508]
+0x40A7A8: mov     edi, [esp+568h+triangleCount]
 0x40A7AC: add     esp, 24h
 0x40A7AF: fild    [esp+544h+var_510]
 0x40A7B3: push    0FFFFFFFFh; int
@@ -3117,14 +3116,14 @@
 0x40A80F: call    InterfaceMgr_DebugTextLine
 0x40A814: add     esp, 14h
 0x40A817: add     [esp+544h+var_510], ebx
-0x40A81B: mov     esi, [esp+544h+var_4F8]
+0x40A81B: mov     esi, [esp+544h+slot]
 0x40A81F: mov     eax, [esp+544h+var_504]
 0x40A823: add     eax, 1
 0x40A826: cmp     eax, 2
 0x40A829: mov     [esp+544h+var_504], eax
 0x40A82D: jl      loc_40A601
 0x40A833: jmp     InterfaceMgr_ShowDebugText___def_407DFE; jumptable 00407DFE default case, case 12
-0x40A838: mov     ecx, dword_B3BF80; jumptable 00407DFE case 30
+0x40A838: mov     ecx, dword ptr unk_B3BF80; jumptable 00407DFE case 30
 0x40A83E: test    ecx, ecx
 0x40A840: jz      InterfaceMgr_ShowDebugText___def_407DFE; jumptable 00407DFE default case, case 12
 0x40A846: lea     edx, [esp+544h+var_50C]
@@ -3134,7 +3133,7 @@
 0x40A850: push    ebx
 0x40A851: call    sub_682A90
 0x40A856: jmp     InterfaceMgr_ShowDebugText___def_407DFE; jumptable 00407DFE default case, case 12
-0x40A85B: mov     ecx, dword_B35B90; jumptable 00407DFE case 4
+0x40A85B: mov     ecx, dword ptr unk_B35B90; jumptable 00407DFE case 4
 0x40A861: test    ecx, ecx
 0x40A863: jz      InterfaceMgr_ShowDebugText___def_407DFE; jumptable 00407DFE default case, case 12
 0x40A869: lea     edx, [esp+544h+var_50C]
@@ -3147,7 +3146,7 @@
 0x40A87E: push    0; jumptable 00407DFE case 2
 0x40A880: lea     ecx, [esp+548h+var_50C]
 0x40A884: push    ecx
-0x40A885: mov     ecx, ModelLoaderPtr
+0x40A885: mov     ecx, ds:0B33A1Ch
 0x40A88B: lea     edx, [esp+54Ch+var_510]
 0x40A88F: push    edx
 0x40A890: push    ebx
@@ -3158,7 +3157,7 @@
 0x40A8A1: push    eax
 0x40A8A2: lea     ecx, [esp+54Ch+var_510]
 0x40A8A6: push    ecx
-0x40A8A7: mov     ecx, ModelLoaderPtr
+0x40A8A7: mov     ecx, ds:0B33A1Ch
 0x40A8AD: push    ebx
 0x40A8AE: call    sub_435600
 0x40A8B3: jmp     InterfaceMgr_ShowDebugText___def_407DFE; jumptable 00407DFE default case, case 12
@@ -3175,7 +3174,7 @@
 0x40A8D7: cmp     byte ptr [eax+31h], 0
 0x40A8DB: jg      loc_40C0CA
 0x40A8E1: jmp     InterfaceMgr_ShowDebugText___def_407DFE; jumptable 00407DFE default case, case 12
-0x40A8E6: mov     eax, srcObj; jumptable 00407DFE case 6
+0x40A8E6: mov     eax, ds:0B333B4h; jumptable 00407DFE case 6
 0x40A8EB: lea     ecx, [esp+544h+var_50C]
 0x40A8EF: push    ecx
 0x40A8F0: lea     edx, [esp+548h+var_510]
@@ -3185,7 +3184,7 @@
 0x40A8F7: call    sub_61EB80
 0x40A8FC: add     esp, 10h
 0x40A8FF: jmp     InterfaceMgr_ShowDebugText___def_407DFE; jumptable 00407DFE default case, case 12
-0x40A904: mov     eax, srcObj; jumptable 00407DFE case 8
+0x40A904: mov     eax, ds:0B333B4h; jumptable 00407DFE case 8
 0x40A909: lea     ecx, [esp+544h+var_50C]
 0x40A90D: push    ecx
 0x40A90E: lea     edx, [esp+548h+var_510]
@@ -3195,7 +3194,7 @@
 0x40A915: call    Magic_ShowDebugText
 0x40A91A: add     esp, 10h
 0x40A91D: jmp     InterfaceMgr_ShowDebugText___def_407DFE; jumptable 00407DFE default case, case 12
-0x40A922: mov     eax, srcObj; jumptable 00407DFE case 9
+0x40A922: mov     eax, ds:0B333B4h; jumptable 00407DFE case 9
 0x40A927: lea     ecx, [esp+544h+var_50C]
 0x40A92B: push    ecx
 0x40A92C: lea     edx, [esp+548h+var_510]
@@ -3210,10 +3209,10 @@
 0x40A945: lea     edx, [esp+548h+var_510]
 0x40A949: push    edx
 0x40A94A: push    ebx
-0x40A94B: call    sub_666BB0
+0x40A94B: call    DebugOverlay_DrawPlayerSkillProgression; Oblivion player-progression debug panel: enumerates all 21 native skills, labels only strict TESClass matches as 'Major', and prints each value, per-skill advance count, usage/required usage, aggregate major advances, readiness, attribute-bonus buckets, and specialization counters. Non-majors receive no separate 'Minor' label.
 0x40A950: add     esp, 0Ch
 0x40A953: jmp     InterfaceMgr_ShowDebugText___def_407DFE; jumptable 00407DFE default case, case 12
-0x40A958: mov     edx, srcObj; jumptable 00407DFE case 7
+0x40A958: mov     edx, ds:0B333B4h; jumptable 00407DFE case 7
 0x40A95E: lea     eax, [esp+544h+var_50C]
 0x40A962: push    eax
 0x40A963: lea     ecx, [esp+548h+var_510]
@@ -3233,7 +3232,7 @@
 0x40A986: call    sub_6A9110
 0x40A98B: add     esp, 10h
 0x40A98E: jmp     InterfaceMgr_ShowDebugText___def_407DFE; jumptable 00407DFE default case, case 12
-0x40A993: mov     edx, srcObj; jumptable 00407DFE case 29
+0x40A993: mov     edx, ds:0B333B4h; jumptable 00407DFE case 29
 0x40A999: lea     eax, [esp+544h+var_50C]
 0x40A99D: push    eax
 0x40A99E: lea     ecx, [esp+548h+var_510]
@@ -3243,37 +3242,37 @@
 0x40A9A5: call    sub_45CC60
 0x40A9AA: add     esp, 10h
 0x40A9AD: jmp     InterfaceMgr_ShowDebugText___def_407DFE; jumptable 00407DFE default case, case 12
-0x40A9B2: lea     eax, [esp+544h+var_4C4]; jumptable 00407DFE case 13
-0x40A9B9: push    eax
+0x40A9B2: lea     eax, [esp+544h+sunOcclusionWaitFrames]; jumptable 00407DFE case 13
+0x40A9B9: push    eax; sunOcclusionWaitFrames
 0x40A9BA: lea     ecx, [esp+548h+var_4E8]
-0x40A9BE: push    ecx
-0x40A9BF: lea     edx, [esp+54Ch+var_4C0]
-0x40A9C6: push    edx
-0x40A9C7: lea     eax, [esp+550h+var_4B8]
-0x40A9CE: push    eax
-0x40A9CF: lea     ecx, [esp+554h+var_4BC]
-0x40A9D6: push    ecx
+0x40A9BE: push    ecx; boundVolumeWaitLoops
+0x40A9BF: lea     edx, [esp+54Ch+occlusionWaitLoops]
+0x40A9C6: push    edx; occlusionWaitLoops
+0x40A9C7: lea     eax, [esp+550h+occlusionTriangleCount]
+0x40A9CE: push    eax; occlusionTriangleCount
+0x40A9CF: lea     ecx, [esp+554h+occlusionGeometryCount]
+0x40A9D6: push    ecx; occlusionGeometryCount
 0x40A9D7: lea     edx, [esp+558h+var_504]
-0x40A9DB: push    edx
-0x40A9DC: lea     eax, [esp+55Ch+var_4F8]
-0x40A9E0: push    eax
+0x40A9DB: push    edx; queueMemoryStatistic
+0x40A9DC: lea     eax, [esp+55Ch+slot]
+0x40A9E0: push    eax; trianglePassCount
 0x40A9E1: lea     ecx, [esp+560h+var_500]
-0x40A9E5: push    ecx
-0x40A9E6: lea     edx, [esp+564h+var_508]
-0x40A9EA: push    edx
-0x40A9EB: lea     eax, [esp+568h+var_4FC]
-0x40A9EF: push    eax
+0x40A9E5: push    ecx; passCount
+0x40A9E6: lea     edx, [esp+564h+triangleCount]
+0x40A9EA: push    edx; triangleCount
+0x40A9EB: lea     eax, [esp+568h+secondaryGeometryCount]
+0x40A9EF: push    eax; secondaryGeometryCount
 0x40A9F0: lea     ecx, [esp+56Ch+var_4D4]
-0x40A9F7: push    ecx
-0x40A9F8: call    sub_4048B0
-0x40A9FD: call    InitBSShaderAccumulator
-0x40AA02: mov     edx, dword_B42064
+0x40A9F7: push    ecx; geometryCount
+0x40A9F8: call    Renderer_CopyStatisticsCounters; Verified 2026-09-30: copies 11 DWORD counters to caller outputs in the order named in this prototype, returns the last counter in EAX. Caller InterfaceMgr_ShowDebugText at40A9F8 labels outputs Geometry (%d secondary), Tri, Pass, TriPasses, QueueMem, Occlusion Geom/tri/wait loops, bound-volume wait loops and sun-occlusion wait frames. QueueMemory units and the second Geometry subcategory are not further inferred here.
+0x40A9FD: call    BSShaderAccumulator_GetOrCreateGlobal
+0x40AA02: mov     edx, dword ptr unk_B42064
 0x40AA08: mov     edi, [esp+570h+var_4D4]
-0x40AA0F: mov     ecx, dword_B42054
+0x40AA0F: mov     ecx, dword ptr unk_B42054
 0x40AA15: mov     esi, eax
-0x40AA17: mov     eax, dword_B3FAB8
+0x40AA17: mov     eax, dword ptr unk_B3FAB8
 0x40AA1C: add     eax, edx
-0x40AA1E: mov     edx, [esp+570h+var_4FC]
+0x40AA1E: mov     edx, [esp+570h+secondaryGeometryCount]
 0x40AA22: push    edx
 0x40AA23: push    edi
 0x40AA24: mov     [esp+578h+var_4CC], eax
@@ -3294,28 +3293,28 @@
 0x40AA66: push    ecx; int
 0x40AA67: call    InterfaceMgr_DebugTextLine
 0x40AA6C: add     [esp+558h+var_510], ebx
-0x40AA70: mov     eax, [esp+558h+var_508]
+0x40AA70: mov     eax, [esp+558h+triangleCount]
 0x40AA74: add     esp, 14h
 0x40AA77: test    edi, edi
 0x40AA79: jbe     short loc_40AAA7
 0x40AA7B: mov     edx, eax
 0x40AA7D: test    edx, edx
-0x40AA7F: mov     [esp+544h+var_4FC], edx
-0x40AA83: fild    [esp+544h+var_4FC]
+0x40AA7F: mov     [esp+544h+secondaryGeometryCount], edx
+0x40AA83: fild    [esp+544h+secondaryGeometryCount]
 0x40AA87: jge     short loc_40AA8F
 0x40AA89: fadd    ds:flt_A2FC78
 0x40AA8F: mov     ecx, edi
 0x40AA91: test    ecx, ecx
-0x40AA93: mov     [esp+544h+var_4FC], ecx
-0x40AA97: fild    [esp+544h+var_4FC]
+0x40AA93: mov     [esp+544h+secondaryGeometryCount], ecx
+0x40AA97: fild    [esp+544h+secondaryGeometryCount]
 0x40AA9B: jge     short loc_40AAA3
 0x40AA9D: fadd    ds:flt_A2FC78
 0x40AAA3: fdivp   st(1), st
 0x40AAA5: jmp     short loc_40AAA9
 0x40AAA7: fldz
 0x40AAA9: sub     esp, 8
-0x40AAAC: fstp    [esp+54Ch+var_4FC]
-0x40AAB0: fld     [esp+54Ch+var_4FC]
+0x40AAAC: fstp    [esp+54Ch+secondaryGeometryCount]
+0x40AAB0: fld     [esp+54Ch+secondaryGeometryCount]
 0x40AAB4: lea     edx, [esp+54Ch+Dest]
 0x40AABB: fstp    qword ptr [esp+54Ch+Format+8]
 0x40AABE: push    eax
@@ -3340,21 +3339,21 @@
 0x40AAFF: jbe     short loc_40AB2B
 0x40AB01: mov     ecx, eax
 0x40AB03: test    ecx, ecx
-0x40AB05: mov     [esp+544h+var_4FC], ecx
-0x40AB09: fild    [esp+544h+var_4FC]
+0x40AB05: mov     [esp+544h+secondaryGeometryCount], ecx
+0x40AB09: fild    [esp+544h+secondaryGeometryCount]
 0x40AB0D: jge     short loc_40AB15
 0x40AB0F: fadd    ds:flt_A2FC78
 0x40AB15: test    edi, edi
-0x40AB17: mov     [esp+544h+var_4FC], edi
-0x40AB1B: fild    [esp+544h+var_4FC]
+0x40AB17: mov     [esp+544h+secondaryGeometryCount], edi
+0x40AB1B: fild    [esp+544h+secondaryGeometryCount]
 0x40AB1F: jge     short loc_40AB27
 0x40AB21: fadd    ds:flt_A2FC78
 0x40AB27: fdivp   st(1), st
 0x40AB29: jmp     short loc_40AB2D
 0x40AB2B: fldz
 0x40AB2D: sub     esp, 8
-0x40AB30: fstp    [esp+54Ch+var_4FC]
-0x40AB34: fld     [esp+54Ch+var_4FC]
+0x40AB30: fstp    [esp+54Ch+secondaryGeometryCount]
+0x40AB34: fld     [esp+54Ch+secondaryGeometryCount]
 0x40AB38: lea     edx, [esp+54Ch+Dest]
 0x40AB3F: fstp    qword ptr [esp+54Ch+Format+8]
 0x40AB42: push    eax
@@ -3372,7 +3371,7 @@
 0x40AB6D: fstp    [esp+554h+Format]; float
 0x40AB70: push    eax; int
 0x40AB71: call    InterfaceMgr_DebugTextLine
-0x40AB76: mov     ecx, [esp+558h+var_4F8]
+0x40AB76: mov     ecx, [esp+558h+slot]
 0x40AB7A: add     [esp+558h+var_510], ebx
 0x40AB7E: push    ecx
 0x40AB7F: lea     edx, [esp+55Ch+Dest]
@@ -3399,8 +3398,8 @@
 0x40ABCF: fmul    ds:dbl_A30550
 0x40ABD5: add     esp, 0Ch
 0x40ABD8: lea     edx, [esp+54Ch+Dest]
-0x40ABDF: fstp    [esp+54Ch+var_4FC]
-0x40ABE3: fld     [esp+54Ch+var_4FC]
+0x40ABDF: fstp    [esp+54Ch+secondaryGeometryCount]
+0x40ABE3: fld     [esp+54Ch+secondaryGeometryCount]
 0x40ABE7: fstp    qword ptr [esp+54Ch+Format+8]
 0x40ABEA: push    offset aQueuemem_2fKb; "QueueMem %.2f kb"
 0x40ABEF: push    edx
@@ -3459,9 +3458,9 @@
 0x40ACC0: fstp    [esp+554h+Format]; float
 0x40ACC3: push    ecx; int
 0x40ACC4: call    InterfaceMgr_DebugTextLine
-0x40ACC9: mov     edx, [esp+558h+var_4C0]
-0x40ACD0: mov     eax, [esp+558h+var_4B8]
-0x40ACD7: mov     ecx, [esp+558h+var_4BC]
+0x40ACC9: mov     edx, [esp+558h+occlusionWaitLoops]
+0x40ACD0: mov     eax, [esp+558h+occlusionTriangleCount]
+0x40ACD7: mov     ecx, [esp+558h+occlusionGeometryCount]
 0x40ACDE: add     [esp+558h+var_510], ebx
 0x40ACE2: push    edx
 0x40ACE3: push    eax
@@ -3481,7 +3480,7 @@
 0x40AD16: fstp    [esp+554h+Format]; float
 0x40AD19: push    eax; int
 0x40AD1A: call    InterfaceMgr_DebugTextLine
-0x40AD1F: mov     ecx, [esp+558h+var_4C4]
+0x40AD1F: mov     ecx, [esp+558h+sunOcclusionWaitFrames]
 0x40AD26: add     [esp+558h+var_510], ebx
 0x40AD2A: push    ecx
 0x40AD2B: lea     edx, [esp+55Ch+Dest]
@@ -3543,7 +3542,7 @@
 0x40ADFB: add     esp, 14h
 0x40ADFE: test    esi, esi
 0x40AE00: jz      short loc_40AE74
-0x40AE02: mov     ecx, srcObj
+0x40AE02: mov     ecx, ds:0B333B4h
 0x40AE08: test    ecx, ecx
 0x40AE0A: jz      short loc_40AE74
 0x40AE0C: mov     edx, [ecx]
@@ -3551,8 +3550,8 @@
 0x40AE14: call    eax
 0x40AE16: test    al, al
 0x40AE18: jz      short loc_40AE74
-0x40AE1A: mov     eax, srcObj
-0x40AE1F: cmp     eax, TESDataHandler_g_PlayerRef
+0x40AE1A: mov     eax, ds:0B333B4h
+0x40AE1F: cmp     eax, dword ptr reference
 0x40AE25: jz      short loc_40AE74
 0x40AE27: mov     eax, [eax+0Ch]
 0x40AE2A: push    eax
@@ -3604,8 +3603,8 @@
 0x40AECF: fstp    [esp+554h+Format]; float
 0x40AED2: push    ecx; int
 0x40AED3: call    InterfaceMgr_DebugTextLine
-0x40AED8: mov     edx, dword_B4334C
-0x40AEDE: mov     eax, dword_B43348
+0x40AED8: mov     edx, dword ptr unk_B4334C
+0x40AEDE: mov     eax, dword ptr unk_B43348
 0x40AEE3: add     [esp+558h+var_510], ebx
 0x40AEE7: push    edx
 0x40AEE8: push    eax
@@ -3624,8 +3623,8 @@
 0x40AF1A: fstp    [esp+554h+Format]; float
 0x40AF1D: push    edx; int
 0x40AF1E: call    InterfaceMgr_DebugTextLine
-0x40AF23: mov     eax, dword_B42D60
-0x40AF28: mov     ecx, dword_B42D5C
+0x40AF23: mov     eax, dword ptr unk_B42D60
+0x40AF28: mov     ecx, dword ptr unk_B42D5C
 0x40AF2E: add     [esp+558h+var_510], ebx
 0x40AF32: push    eax
 0x40AF33: push    ecx
@@ -3665,7 +3664,7 @@
 0x40AFAE: call    InterfaceMgr_DebugTextLine
 0x40AFB3: add     [esp+558h+var_510], ebx
 0x40AFB7: add     esp, 14h
-0x40AFBA: cmp     word_B33408, 0
+0x40AFBA: cmp     word ptr unk_B33408, 0
 0x40AFC2: jnz     InterfaceMgr_ShowDebugText___def_407DFE; jumptable 00407DFE default case, case 12
 0x40AFC8: push    1
 0x40AFCA: call    GetGlobalScriptStateObj??
@@ -3677,12 +3676,12 @@
 0x40AFE8: push    0
 0x40AFEA: push    eax
 0x40AFEB: call    __memset
-0x40AFF0: mov     edi, dword_B3F700
+0x40AFF0: mov     edi, dword ptr unk_B3F700
 0x40AFF6: add     esp, 0Ch
 0x40AFF9: test    edi, edi
 0x40AFFB: jz      loc_40B0A7
 0x40B001: push    edi
-0x40B002: push    offset dword_B3F95C
+0x40B002: push    offset stru_B3F95C
 0x40B007: call    NiRTTI__IsObjectOfRTTIType
 0x40B00C: add     esp, 8
 0x40B00F: test    al, al
@@ -3737,10 +3736,9 @@
 0x40B0B2: lea     ecx, [eax+14h]
 0x40B0B5: cmp     eax, ecx
 0x40B0B7: mov     [esp+544h+var_500], eax
-0x40B0BB: mov     [esp+544h+var_4C4], ecx
+0x40B0BB: mov     [esp+544h+sunOcclusionWaitFrames], ecx
 0x40B0C2: jge     InterfaceMgr_ShowDebugText___def_407DFE; jumptable 00407DFE default case, case 12
 0x40B0C8: jmp     short loc_40B0D0
-0x40B0CA: align 10h
 0x40B0D0: mov     esi, [esp+eax*4+544h+var_430]
 0x40B0D7: test    esi, esi
 0x40B0D9: jz      loc_40B178
@@ -3791,7 +3789,7 @@
 0x40B15D: fstp    [esp+554h+Format]; float
 0x40B160: push    edx; int
 0x40B161: call    InterfaceMgr_DebugTextLine
-0x40B166: mov     ecx, [esp+558h+var_4C4]
+0x40B166: mov     ecx, [esp+558h+sunOcclusionWaitFrames]
 0x40B16D: mov     eax, [esp+558h+var_500]
 0x40B171: add     esp, 14h
 0x40B174: add     [esp+544h+var_510], ebx
@@ -3800,7 +3798,7 @@
 0x40B17D: mov     [esp+544h+var_500], eax
 0x40B181: jl      loc_40B0D0
 0x40B187: jmp     InterfaceMgr_ShowDebugText___def_407DFE; jumptable 00407DFE default case, case 12
-0x40B18C: mov     esi, dword_B3C21C; jumptable 00407DFE case 24
+0x40B18C: mov     esi, dword ptr unk_B3C21C; jumptable 00407DFE case 24
 0x40B192: test    esi, esi
 0x40B194: jnz     short loc_40B1C5
 0x40B196: lea     eax, [esp+544h+Dest]
@@ -3833,7 +3831,7 @@
 0x40B1FC: call    InterfaceMgr_DebugTextLine
 0x40B201: add     [esp+558h+var_510], ebx
 0x40B205: add     esp, 14h
-0x40B208: cmp     word_B33408, 0
+0x40B208: cmp     word ptr unk_B33408, 0
 0x40B210: jnz     InterfaceMgr_ShowDebugText___def_407DFE; jumptable 00407DFE default case, case 12
 0x40B216: push    1
 0x40B218: call    GetGlobalScriptStateObj??
@@ -3853,7 +3851,7 @@
 0x40B24A: push    eax
 0x40B24B: call    sub_6B9750
 0x40B250: jmp     InterfaceMgr_ShowDebugText___def_407DFE; jumptable 00407DFE default case, case 12
-0x40B255: mov     esi, dword_B3C21C; jumptable 00407DFE case 25
+0x40B255: mov     esi, dword ptr unk_B3C21C; jumptable 00407DFE case 25
 0x40B25B: test    esi, esi
 0x40B25D: jnz     short loc_40B299
 0x40B25F: lea     ecx, [esp+544h+Dest]
@@ -3889,7 +3887,7 @@
 0x40B2D3: call    InterfaceMgr_DebugTextLine
 0x40B2D8: add     [esp+558h+var_510], ebx
 0x40B2DC: add     esp, 14h
-0x40B2DF: cmp     word_B33408, 0
+0x40B2DF: cmp     word ptr unk_B33408, 0
 0x40B2E7: jnz     InterfaceMgr_ShowDebugText___def_407DFE; jumptable 00407DFE default case, case 12
 0x40B2ED: push    1
 0x40B2EF: call    GetGlobalScriptStateObj??
@@ -3913,10 +3911,10 @@
 0x40B335: jmp     short loc_40B339
 0x40B337: xor     eax, eax
 0x40B339: push    eax
-0x40B33A: lea     ecx, [esp+548h+var_508]
+0x40B33A: lea     ecx, [esp+548h+triangleCount]
 0x40B33E: call    sub_405070
 0x40B343: push    esi
-0x40B344: mov     esi, [esp+548h+var_508]
+0x40B344: mov     esi, [esp+548h+triangleCount]
 0x40B348: mov     ecx, esi
 0x40B34A: mov     [esp+548h+var_4], 2
 0x40B355: call    sub_6B9D10
@@ -3935,9 +3933,9 @@
 0x40B37F: push    edx
 0x40B380: mov     ecx, esi
 0x40B382: call    sub_6B9750
-0x40B387: lea     ecx, [esp+544h+var_508]; this
+0x40B387: lea     ecx, [esp+544h+triangleCount]; slot
 0x40B38B: mov     [esp+544h+var_4], 0FFFFFFFFh
-0x40B396: call    sub_7016A0
+0x40B396: call    NiPointerSlot_Release
 0x40B39B: jmp     InterfaceMgr_ShowDebugText___def_407DFE; jumptable 00407DFE default case, case 12
 0x40B3A0: lea     eax, [esp+544h+Dest]; jumptable 00407DFE case 26
 0x40B3A7: push    offset aHeapStats; "HEAP STATS"
@@ -3956,7 +3954,7 @@
 0x40B3D5: call    InterfaceMgr_DebugTextLine
 0x40B3DA: add     [esp+558h+var_510], ebx
 0x40B3DE: add     esp, 14h
-0x40B3E1: cmp     word_B33408, 0
+0x40B3E1: cmp     word ptr unk_B33408, 0
 0x40B3E9: jnz     InterfaceMgr_ShowDebugText___def_407DFE; jumptable 00407DFE default case, case 12
 0x40B3EF: push    1
 0x40B3F1: call    GetGlobalScriptStateObj??
@@ -4506,7 +4504,7 @@
 0x40BBD5: fstp    [esp+554h+Format]; float
 0x40BBD8: push    ecx; int
 0x40BBD9: call    InterfaceMgr_DebugTextLine
-0x40BBDE: mov     ecx, TES
+0x40BBDE: mov     ecx, ds:0B333A0h
 0x40BBE4: lea     edx, [ebx+ebx*4]
 0x40BBE7: add     edx, edx
 0x40BBE9: add     esp, 14h
@@ -4516,7 +4514,7 @@
 0x40BBF7: xor     esi, esi
 0x40BBF9: cmp     eax, edi
 0x40BBFB: jbe     short loc_40BC15
-0x40BBFD: mov     ecx, TES
+0x40BBFD: mov     ecx, ds:0B333A0h
 0x40BC03: mov     ecx, [ecx+3Ch]
 0x40BC06: cmp     [ecx], edi
 0x40BC08: jz      short loc_40BC0D
@@ -4558,14 +4556,14 @@
 0x40BC8F: fstp    [esp+554h+Format]; float
 0x40BC92: push    eax; int
 0x40BC93: call    InterfaceMgr_DebugTextLine
-0x40BC98: mov     ecx, TES
+0x40BC98: mov     ecx, ds:0B333A0h
 0x40BC9E: add     [esp+558h+var_510], ebx
 0x40BCA2: add     esp, 14h
 0x40BCA5: call    sub_43FD30
 0x40BCAA: xor     esi, esi
 0x40BCAC: cmp     eax, edi
 0x40BCAE: jbe     short loc_40BCCF
-0x40BCB0: mov     ecx, TES
+0x40BCB0: mov     ecx, ds:0B333A0h
 0x40BCB6: mov     ecx, [ecx+38h]
 0x40BCB9: lea     esp, [esp+0]
 0x40BCC0: cmp     [ecx], edi
@@ -4612,14 +4610,14 @@
 0x40BD56: add     esp, 14h
 0x40BD59: lea     edx, [ecx+ebx*2]
 0x40BD5C: push    edi; a2
-0x40BD5D: mov     ecx, offset ActorProcessManager_ptr; this
+0x40BD5D: mov     ecx, (offset qword_B3BB2C+1D4h); this
 0x40BD62: mov     [esp+548h+var_510], edx
 0x40BD66: mov     [esp+548h+var_500], edi
-0x40BD6A: mov     [esp+548h+var_4F8], edi
+0x40BD6A: mov     [esp+548h+slot], edi
 0x40BD6E: mov     [esp+548h+var_504], edi
-0x40BD72: call    sub_673A50
+0x40BD72: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x40BD77: mov     ecx, eax; this
-0x40BD79: call    sub_7616D0
+0x40BD79: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x40BD7E: mov     esi, eax
 0x40BD80: cmp     esi, edi
 0x40BD82: jz      short loc_40BDC4
@@ -4642,7 +4640,7 @@
 0x40BDB2: call    edx
 0x40BDB4: test    al, al
 0x40BDB6: jz      short loc_40BDBD
-0x40BDB8: add     [esp+544h+var_4F8], 1
+0x40BDB8: add     [esp+544h+slot], 1
 0x40BDBD: mov     esi, [esi+4]
 0x40BDC0: test    esi, esi
 0x40BDC2: jnz     short loc_40BD84
@@ -4684,8 +4682,8 @@
 0x40BE4B: add     [esp+558h+var_510], ebx
 0x40BE4F: add     esp, 14h
 0x40BE52: push    1; a2
-0x40BE54: mov     ecx, offset ActorProcessManager_ptr; this
-0x40BE59: call    sub_673A50
+0x40BE54: mov     ecx, (offset qword_B3BB2C+1D4h); this
+0x40BE59: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x40BE5E: mov     edi, eax
 0x40BE60: lea     eax, [esp+544h+Dest]
 0x40BE67: push    offset aMiddleHighActo; "Middle High Actors"
@@ -4705,7 +4703,7 @@
 0x40BE9A: add     esp, 14h
 0x40BE9D: mov     ecx, edi; this
 0x40BE9F: xor     esi, esi
-0x40BEA1: call    sub_7616D0
+0x40BEA1: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x40BEA6: test    eax, eax
 0x40BEA8: jz      short loc_40BEBF
 0x40BEAA: lea     ebx, [ebx+0]
@@ -4750,7 +4748,7 @@
 0x40BF3B: fstp    [esp+554h+Format]; float
 0x40BF3E: push    eax; int
 0x40BF3F: call    InterfaceMgr_DebugTextLine
-0x40BF44: mov     ecx, [esp+558h+var_4F8]
+0x40BF44: mov     ecx, [esp+558h+slot]
 0x40BF48: push    ecx
 0x40BF49: lea     edx, [esp+55Ch+Dest]
 0x40BF50: push    offset aI; "%i"
@@ -4809,7 +4807,7 @@
 0x40C018: add     esp, 14h
 0x40C01B: add     [esp+544h+var_510], ebx
 0x40C01F: mov     esi, [esp+544h+var_510]; jumptable 00407DFE default case, case 12
-0x40C023: cmp     esi, dword_B333FC
+0x40C023: cmp     esi, dword ptr unk_B333FC
 0x40C029: mov     edi, [esp+544h+var_50C]
 0x40C02D: jge     short loc_40C067
 0x40C02F: nop
@@ -4825,12 +4823,12 @@
 0x40C052: mov     eax, [esp+558h+var_510]
 0x40C056: add     eax, ebx
 0x40C058: add     esp, 14h
-0x40C05B: cmp     eax, dword_B333FC
+0x40C05B: cmp     eax, dword ptr unk_B333FC
 0x40C061: mov     [esp+544h+var_510], eax
 0x40C065: jl      short loc_40C030
 0x40C067: mov     edx, [esp+544h+var_50C]
-0x40C06B: cmp     edx, dword_B333F8
-0x40C071: mov     dword_B333FC, esi
+0x40C06B: cmp     edx, dword ptr unk_B333F8
+0x40C071: mov     dword ptr unk_B333FC, esi
 0x40C077: jge     short loc_40C0C4
 0x40C079: lea     esp, [esp+0]
 0x40C080: fild    [esp+544h+var_50C]
@@ -4848,10 +4846,10 @@
 0x40C0AF: mov     eax, [esp+558h+var_50C]
 0x40C0B3: add     eax, ebx
 0x40C0B5: add     esp, 14h
-0x40C0B8: cmp     eax, dword_B333F8
+0x40C0B8: cmp     eax, dword ptr unk_B333F8
 0x40C0BE: mov     [esp+544h+var_50C], eax
 0x40C0C2: jl      short loc_40C080
-0x40C0C4: mov     dword_B333F8, edi
+0x40C0C4: mov     dword ptr unk_B333F8, edi
 0x40C0CA: mov     ecx, dword ptr [esp+544h+var_C]
 0x40C0D1: mov     large fs:0, ecx
 0x40C0D8: pop     ecx
@@ -4864,3 +4862,23 @@
 0x40C0EA: mov     esp, ebp
 0x40C0EC: pop     ebp
 0x40C0ED: retn
+0x9AA090: lea     ecx, [ebp+var_4E8]; void *
+0x9AA096: jmp     BSStringT_Clear
+0x9AA09B: mov     eax, [ebp+var_4E8.m_data]
+0x9AA0A1: push    eax
+0x9AA0A2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AA0A7: pop     ecx
+0x9AA0A8: retn
+0x9AA0A9: lea     ecx, [ebp+triangleCount]; slot
+0x9AA0AF: jmp     NiPointerSlot_Release
+0x9AA0B4: mov     edx, [esp-4+arg_4]
+0x9AA0B8: lea     eax, [edx-534h]
+0x9AA0BE: mov     ecx, [edx-538h]
+0x9AA0C4: xor     ecx, eax
+0x9AA0C6: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AA0CB: add     eax, 0Ch
+0x9AA0CE: mov     ecx, [edx-38h]
+0x9AA0D1: xor     ecx, eax
+0x9AA0D3: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AA0D8: mov     eax, offset stru_AD70E0
+0x9AA0DD: jmp     ___CxxFrameHandler3

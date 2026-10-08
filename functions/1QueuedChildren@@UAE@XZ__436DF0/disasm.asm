@@ -28,7 +28,7 @@
 0x436E4F: push    esi; void *
 0x436E50: call    $LN21
 0x436E55: push    edi
-0x436E56: call    FormHeapFree
+0x436E56: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x436E5B: add     esp, 4
 0x436E5E: mov     ecx, [esp+1Ch+var_C]
 0x436E62: mov     large fs:0, ecx
@@ -37,3 +37,29 @@
 0x436E6B: pop     esi
 0x436E6C: add     esp, 10h
 0x436E6F: retn
+0x436800: mov     eax, [ecx+4]
+0x436803: test    eax, eax
+0x436805: mov     dword ptr [ecx], offset ??_7?$NiTArray@V?$NiPointer@VQueuedFile@@@@@@6B@; const NiTArray<NiPointer<QueuedFile>>::`vftable'
+0x43680B: jz      short locret_43682C
+0x43680D: mov     ecx, [eax-4]
+0x436810: push    esi
+0x436811: lea     esi, [eax-4]
+0x436814: push    offset sub_4BDDC0; void (__thiscall *)(void *)
+0x436819: push    ecx; int
+0x43681A: push    4; unsigned int
+0x43681C: push    eax; void *
+0x43681D: call    $LN21
+0x436822: push    esi
+0x436823: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x436828: add     esp, 4
+0x43682B: pop     esi
+0x43682C: retn
+0x9AC360: mov     ecx, [ebp-10h]
+0x9AC363: jmp     loc_436800
+0x9AC368: mov     edx, [esp+arg_4]
+0x9AC36C: lea     eax, [edx-0Ch]
+0x9AC36F: mov     ecx, [edx-10h]
+0x9AC372: xor     ecx, eax
+0x9AC374: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AC379: mov     eax, offset stru_AD9034
+0x9AC37E: jmp     ___CxxFrameHandler3

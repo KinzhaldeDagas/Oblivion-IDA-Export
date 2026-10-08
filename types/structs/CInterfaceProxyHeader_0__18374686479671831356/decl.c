@@ -1,1 +1,1 @@
-CInterfaceProxyHeader_0
+typedef tagCInterfaceProxyHeader_0 CInterfaceProxyHeader_0;

@@ -1,1 +1,1 @@
-IOleCommandTargetVtbl_0
+typedef IOleCommandTargetVtbl IOleCommandTargetVtbl_0;

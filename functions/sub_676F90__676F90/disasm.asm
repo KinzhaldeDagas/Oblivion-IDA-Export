@@ -6,7 +6,6 @@
 0x676F95: mov     [esp+14h+var_4], ecx
 0x676F99: xor     ebx, ebx
 0x676F9B: jmp     short loc_676FA0
-0x676F9D: align 10h
 0x676FA0: mov     eax, [esp+14h+var_4]
 0x676FA4: mov     ebp, [eax+ebx*4+28h]
 0x676FA8: mov     edi, ebp
@@ -20,14 +19,14 @@
 0x676FBB: mov     esi, [edi]
 0x676FBD: test    esi, esi
 0x676FBF: jz      short loc_676FD7
-0x676FC1: mov     eax, [esp+14h+arg_0]
+0x676FC1: mov     eax, [esp+14h+actor]
 0x676FC5: cmp     [esi+0Ch], eax
 0x676FC8: jz      short loc_676FE0
 0x676FCA: cmp     [esi+8], eax
 0x676FCD: jz      short loc_676FE0
-0x676FCF: push    eax
-0x676FD0: mov     ecx, esi
-0x676FD2: call    sub_607110
+0x676FCF: push    eax; actor
+0x676FD0: mov     ecx, esi; self
+0x676FD2: call    Crime_RemoveWitness
 0x676FD7: mov     edi, [edi+4]
 0x676FDA: test    edi, edi
 0x676FDC: jnz     short loc_676FB0
@@ -35,10 +34,10 @@
 0x676FE0: push    esi
 0x676FE1: mov     ecx, ebp
 0x676FE3: call    BSSimpleList_Remove
-0x676FE8: mov     ecx, esi
-0x676FEA: call    sub_605E80
+0x676FE8: mov     ecx, esi; self
+0x676FEA: call    Crime_Destructor
 0x676FEF: push    esi
-0x676FF0: call    FormHeapFree
+0x676FF0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x676FF5: add     esp, 4
 0x676FF8: xor     ebx, ebx
 0x676FFA: add     ebx, 1

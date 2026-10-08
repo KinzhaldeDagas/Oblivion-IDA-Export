@@ -56,7 +56,7 @@
 0x69DE49: mov     eax, [ecx+8]
 0x69DE4C: fdiv    qword ptr ds:0A3DDD8h
 0x69DE52: add     dword ptr [eax+0B8h], 1
-0x69DE59: push    0
+0x69DE59: push    0; optionalContext
 0x69DE5B: fstp    [esp+10h+arg_0]
 0x69DE5F: fld     [esp+10h+var_C]
 0x69DE63: fld     [esp+10h+arg_0]
@@ -76,16 +76,16 @@
 0x69DE97: mov     edx, [esp+10h+var_4]
 0x69DE9B: mov     [eax+0F4h], edx
 0x69DEA1: lea     eax, [ecx+8]
-0x69DEA4: mov     ecx, [ecx+4]
-0x69DEA7: push    eax
-0x69DEA8: call    sub_4B22E0
+0x69DEA4: mov     ecx, [ecx+4]; self
+0x69DEA7: push    eax; payload
+0x69DEA8: call    TESObjectLIGH_UpdateAttachedLightPayload; Casting-VFX attached-light update; the wrapper receives optionalContext=null.
 0x69DEAD: add     esp, 0Ch
 0x69DEB0: retn    4
 0x69DEB3: lea     eax, [ecx+8]
 0x69DEB6: fstp    st
-0x69DEB8: mov     ecx, [ecx+4]
-0x69DEBB: push    0
-0x69DEBD: push    eax
-0x69DEBE: call    sub_4B22E0
+0x69DEB8: mov     ecx, [ecx+4]; self
+0x69DEBB: push    0; optionalContext
+0x69DEBD: push    eax; payload
+0x69DEBE: call    TESObjectLIGH_UpdateAttachedLightPayload; Casting-VFX attached-light update; the wrapper receives optionalContext=null.
 0x69DEC3: add     esp, 0Ch
 0x69DEC6: retn    4

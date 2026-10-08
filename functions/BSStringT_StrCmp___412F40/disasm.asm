@@ -7,9 +7,9 @@
 0x412F4E: jz      short loc_412F8D
 0x412F50: cmp     [esp+arg_4], 0
 0x412F55: jz      short loc_412F64
-0x412F57: push    ecx; Str2
-0x412F58: push    eax; Str1
-0x412F59: call    __strcmp
+0x412F57: push    ecx; right
+0x412F58: push    eax; left
+0x412F59: call    CRT_StricmpLocaleDispatch
 0x412F5E: add     esp, 8
 0x412F61: retn    8
 0x412F64: mov     dl, [eax]

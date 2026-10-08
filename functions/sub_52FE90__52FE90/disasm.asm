@@ -1,4 +1,4 @@
-0x52FE90: push    0FFFFFFFFh
+0x52FE90: push    0FFFFFFFFh; Ensures every stock registry slot has a runtime TESTopic. Missing slots are allocated, assigned the slot's fixed FormID and name as editor ID/full name, then registered with the DataHandler and editor-ID map. Thus GREETING/HELLO/ANY/GOODBYE/INFO GENERAL and the other stock topics are synthesized from this Oblivion table when absent.
 0x52FE92: push    offset SEH_6E16A0
 0x52FE97: mov     eax, large fs:0
 0x52FE9D: push    eax
@@ -24,7 +24,6 @@
 0x52FEDC: lea     ebp, ds:0B111B8h[eax*4]
 0x52FEE3: xor     edi, edi
 0x52FEE5: jmp     short loc_52FEF0
-0x52FEE7: align 10h
 0x52FEF0: mov     edx, [ebp+0]
 0x52FEF3: cmp     [edi+edx], ebx
 0x52FEF6: jnz     loc_52FFDF
@@ -116,3 +115,15 @@
 0x530014: pop     ebx
 0x530015: add     esp, 1Ch
 0x530018: retn
+0x9C33E0: mov     eax, [ebp-10h]
+0x9C33E3: push    eax
+0x9C33E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C33E9: pop     ecx
+0x9C33EA: retn
+0x9C33EB: mov     edx, [esp+arg_4]
+0x9C33EF: lea     eax, [edx-20h]
+0x9C33F2: mov     ecx, [edx-24h]
+0x9C33F5: xor     ecx, eax
+0x9C33F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C33FC: mov     eax, offset stru_AEC000
+0x9C3401: jmp     ___CxxFrameHandler3

@@ -10,7 +10,6 @@
 0x662726: add     esi, 30h ; '0'
 0x662729: jz      short loc_66274A
 0x66272B: jmp     short loc_662730
-0x66272D: align 10h
 0x662730: mov     eax, [esi]
 0x662732: test    eax, eax
 0x662734: jz      short loc_66274A

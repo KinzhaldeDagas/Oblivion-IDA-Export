@@ -10,11 +10,11 @@
 0x61D6C9: cmp     [esi+70h], ebx
 0x61D6CC: jz      loc_61D7D7
 0x61D6D2: push    edi
-0x61D6D3: call    sub_6135F0
+0x61D6D3: call    CombatController_GetCurrentTarget
 0x61D6D8: test    eax, eax
 0x61D6DA: jz      loc_61D798
 0x61D6E0: mov     ecx, [esi+3Ch]
-0x61D6E3: call    sub_5E0F50
+0x61D6E3: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x61D6E8: mov     edx, [eax]
 0x61D6EA: mov     ecx, eax
 0x61D6EC: mov     eax, [edx+154h]
@@ -24,10 +24,10 @@
 0x61D6FC: test    ah, 41h
 0x61D6FF: jnz     loc_61D798
 0x61D705: mov     ecx, [esi+3Ch]
-0x61D708: call    sub_5E0F50
+0x61D708: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x61D70D: mov     ecx, esi
 0x61D70F: mov     edi, eax
-0x61D711: call    sub_615980
+0x61D711: call    CombatController_GetCachedTargetSurfaceDistance; Returns CombatController cached target surface distance at +0x184, computing it once when negative. The inherited EDI low-byte input belongs to this private compiler ABI and is deliberately retained.
 0x61D716: fstp    [esp+18h+var_8]
 0x61D71A: mov     edx, [edi]
 0x61D71C: mov     eax, [edx+154h]
@@ -46,7 +46,7 @@
 0x61D749: cmp     byte ptr [esi+1ADh], 0
 0x61D750: jnz     loc_61D7D6
 0x61D756: mov     ecx, [esi+3Ch]
-0x61D759: call    sub_5E0F50
+0x61D759: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x61D75E: mov     ecx, offset unk_B37298
 0x61D763: mov     edi, eax
 0x61D765: call    GameSetting_GetSafeFloatPointer
@@ -60,7 +60,7 @@
 0x61D77F: mov     ecx, esi
 0x61D781: fld     dword ptr [ebx]
 0x61D783: fstp    [esp+20h+var_20]; float
-0x61D786: call    sub_6135F0
+0x61D786: call    CombatController_GetCurrentTarget
 0x61D78B: push    eax; int
 0x61D78C: mov     ecx, esi
 0x61D78E: call    sub_61CAA0

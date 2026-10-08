@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x452CF0",
+      "0x452D09"
+    ]
+  ],
+  "chunks_sha256": "5e8f8d7575b75a14a1c3db2681282e279315ffc6a04aa56671275eafd5e5ff41",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "\nVerified: calls 452C90 then assigns entry+4; does not free prior buffer. LoadGame caller 466829; LoadForm consumes +4 at 463854/46386D. Probable homolog Fallout 825EDDB0.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_452CF0",
+  "display_name": "ChangesMap_SetChangeBuffer",
   "end_ea": "0x452D09",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_452CF0",
+  "name": "ChangesMap_SetChangeBuffer",
   "segment": ".text",
   "sha256": "5e8f8d7575b75a14a1c3db2681282e279315ffc6a04aa56671275eafd5e5ff41",
   "size": 25,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x452CF0",
-  "type": "_DWORD *__thiscall(_DWORD *this, _DWORD *, int, int)",
+  "total_chunk_size": 25,
+  "type": "OblivionChangeData *__thiscall(ChangesMap *self, unsigned int formID, unsigned int flags, unsigned __int8 *buffer)",
   "xrefs_from_count": 8,
   "xrefs_to_count": 1
 }

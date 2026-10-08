@@ -1,19 +1,32 @@
 {
-  "callees_count": 19,
-  "callers_count": 14,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
+  "callers_count": 15,
+  "chunks": [
+    [
+      "0x6C9BA0",
+      "0x6C9CA3"
+    ]
+  ],
+  "chunks_sha256": "08d386d9897368e0914f0278b07393bacc10799a59a6e9cdbeb032fe1ea0c5f2",
+  "comment_regular": "Native controller-sequence activation state machine. Rejects an already-active sequence, validates optional time-sync compatibility, records activation parameters, and queues the active sequence with its manager.",
+  "comment_repeatable": "Native controller-sequence activation state machine. Rejects an already-active sequence, validates optional time-sync compatibility, records activation parameters, and queues the active sequence with its manager.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6C9BA0",
+  "display_name": "NiControllerSequence_Activate",
   "end_ea": "0x6C9CA3",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6C9BA0",
+  "name": "NiControllerSequence_Activate",
   "segment": ".text",
   "sha256": "08d386d9897368e0914f0278b07393bacc10799a59a6e9cdbeb032fe1ea0c5f2",
   "size": 259,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6C9BA0",
-  "type": "char __thiscall(float *this, char arg0, char, float, float, int, NiD3DPass *)",
+  "total_chunk_size": 259,
+  "type": "char __thiscall(NiControllerSequence *this, char priority, char startOver, float weight, float easeInTime, NiControllerSequence *timeSyncSequence, char transition)",
   "xrefs_from_count": 103,
   "xrefs_to_count": 15
 }

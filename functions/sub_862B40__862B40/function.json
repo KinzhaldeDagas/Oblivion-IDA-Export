@@ -1,19 +1,32 @@
 {
-  "callees_count": 109,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 53,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x862B40",
+      "0x863327"
+    ]
+  ],
+  "chunks_sha256": "0a75c9d9148f0cef5c851b154f399592d01c2771b4b706e4f3d313371ce5371a",
+  "comment_regular": "Resolve an Oblivion Lighting30 selector to its pooled NiD3DPass and configure stages. The switch accepts concrete selectors only through 0x15F. SimpleShadow 0x14E..0x151 resolve to pools[36..39]; mode-5 casters 0x154/0x155 resolve to pools[42]/[43]. The default path returns null, so stock inherited selectors 0x177..0x17A cannot create a Lighting30 pass.\n\nLighting30 selector resolver upper bound is 0x15F. This is a consumer-domain fact, not producer reachability: exact Lighting30's native +0x5C builder stays within it, including refraction 0x156..0x158.",
+  "comment_repeatable": "Lighting30 selector resolver upper bound is 0x15F. This is a consumer-domain fact, not producer reachability: exact Lighting30's native +0x5C builder stays within it, including refraction 0x156..0x158.\nDX11 ordinary pixel-choice audit 2026-09-30: selectors12D..146 have base PS indices [0,0,2,4,6,6,8,8,0,0,4,8,8,10,10,12,14,16,16,18,18,10,10,14,18,18], plus boolean variant. Each uses its pass slot B46F28+4*selector. Full resolver includes default epilogue through863327 and 51-entry jump table863328..8633F4. Some cases additionally bind property/global textures or write environment constants; PS selection alone does not qualify those side effects.\nDX11 bounded resolver side-effect observations 2026-09-30: ordinary 12F/13C also copy four property values to shared environment scratch and set pass stage-array elements4/5 from global B430F8 and a property texture member (raw property offset not yet qualified here). 131/132/13E/13F set stage-array elements4/5 using property virtual+88(1) and+8C(1). 133/134/138/139/140/141/145/146 set stage-array element6 using property virtual+90(0). Array element numbers are not proof of each stage object sampler index. These effects are NOT implemented by the new PS-selection-only reader; no texture getter purity/lifetime inference is made.\nDX11 ordinary texture construction 2026-09-30: completed previous raw-offset observation. For selectors12F/13C, property+F0..FC raw four DWORDs feed B46F98..B46FA4, stage-array element4 gets B430F8, element5 gets property+104 (load at862E9D). 131/132/13E/13F use virtual+88(1)/+8C(1) for elements4/5, without normal default. 133/134/138/139/140/141/145/146 use virtual+90(0) for element6. These assignments precede the common base0/normal1 assignments in7FF4A0. Array index differs from the actual sampler DWORD at stage+0; assignment observations do not imply texture resource ownership or untouched-stage defaults.\nSource-state audit 2026-10-01: selectors12F and13C copy four raw DWORDs from BSShaderProperty+F0..FC to B46F98..FA4 (pixel ConstantGroup row2). Other ordinary12D..146 selector branches leave that row unchanged. Captured texture-selection extraWords already supply the write values; non-environment occurrences must preserve the current source row, not regenerate zeros.\nDX11 ordered ownership audit 2026-10-01: ordinary resolver assigns selected pixel program before environment/layer/glow auxiliary textures. Common diffuse/normal assignment follows in SetupRenderPass. Shared stage objects can alias different array indices; do not independently count each index as a separate NiPointer owner. Source extraWords environment writes remain a separate ConstantGroup effect.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_862B40",
-  "end_ea": "0x86331F",
+  "display_name": "Lighting30Shader_ResolveSelectorStages",
+  "end_ea": "0x863327",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_862B40",
+  "name": "Lighting30Shader_ResolveSelectorStages",
   "segment": ".text",
-  "sha256": "7eecec3418bd5d0c46381d63a2b9bccfe10d1c0e6e0de4c3dcc532f1877e47bd",
-  "size": 2015,
+  "sha256": "0a75c9d9148f0cef5c851b154f399592d01c2771b4b706e4f3d313371ce5371a",
+  "size": 2023,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x862B40",
-  "type": "NiD3DPassVtbl **__userpurge@<eax>(double@<st0>, signed int, _DWORD *, int)",
-  "xrefs_from_count": 837,
+  "total_chunk_size": 2023,
+  "type": "NiD3DPass *__thiscall(NiD3DShader *this, unsigned int selector, BSShaderProperty *property, unsigned int variant)",
+  "xrefs_from_count": 841,
   "xrefs_to_count": 2
 }

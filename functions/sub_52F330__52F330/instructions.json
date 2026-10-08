@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x52F330",
-    "line": "push    ecx",
+    "line": "push    ecx; Stable descending sort of TESTopic.questInfoEntries by TESQuest.priority (+0x3D). Higher-priority running quests are scanned first by SelectInfoForSpeaker; equal priorities preserve their prior insertion order.",
     "mnemonic": "push",
     "size": 1
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x52F399",
-    "line": "jle     short loc_52F39F",
+    "line": "jle     short loc_52F39F; Swap adjacent quest buckets only when the following quest has strictly greater priority, making the descending sort stable for equal-priority quests.",
     "mnemonic": "jle",
     "size": 2
   },

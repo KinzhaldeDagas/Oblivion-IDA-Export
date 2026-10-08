@@ -1,19 +1,36 @@
 {
-  "callees_count": 24,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 19,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7A7610",
+  "chunks": [
+    [
+      "0x7A7610",
+      "0x7A77F7"
+    ],
+    [
+      "0x9CCDB0",
+      "0x9CCE0D"
+    ]
+  ],
+  "chunks_sha256": "3393ec61f7986ce6dc71922ab10b96194072e14852062985fe2ed2707d26d7cc",
+  "comment_regular": "\n\n[v153 root default correction] Native constructor writes diffuseSTileAbsolute=1 at7A7658, matching RT4.1 StructsInfo.h STexCoordControls default. Plugin root adapter had defaultfalse; corrected totrue. Explicit parsed6015=false still overrides. No native constructor patch was needed.\n\nCompact stock SIdvBranchInfo constructor. Initializes core branch fields, diffuse texcoord controls, flare defaults at +0x24..+0x4C, and default spline pointers.",
+  "comment_repeatable": "Compact stock SIdvBranchInfo constructor. Initializes core branch fields, diffuse texcoord controls, flare defaults at +0x24..+0x4C, and default spline pointers.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_SIdvBranchInfo_ctor_010201A0",
   "end_ea": "0x7A77F7",
+  "evidence_confidence": "Unknown",
   "flags": 21572,
   "has_pseudocode": true,
-  "name": "sub_7A7610",
+  "name": "OB_SIdvBranchInfo_ctor_010201A0",
   "segment": ".text",
   "sha256": "d4efc255d7f9cb39cc004420d0e507e805d1f2313a417e6fdd9a46205a97b9e9",
   "size": 487,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A7610",
-  "type": "float *__thiscall(float *this)",
-  "xrefs_from_count": 169,
+  "total_chunk_size": 580,
+  "type": "OB_SIdvBranchInfo_010201A0 *__thiscall(OB_SIdvBranchInfo_010201A0 *this)",
+  "xrefs_from_count": 208,
   "xrefs_to_count": 1
 }

@@ -1,1 +1,1 @@
-hkPhantom
+struct hkPhantom;

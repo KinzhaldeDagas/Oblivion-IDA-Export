@@ -13,25 +13,25 @@
 0x4DC913: jnz     short loc_4DC93C
 0x4DC915: test    edi, edi
 0x4DC917: jz      short loc_4DC926
-0x4DC919: mov     ecx, edi
-0x4DC91B: call    sub_478DD0
-0x4DC920: mov     ecx, ds:0B333C4h
+0x4DC919: mov     ecx, edi; this
+0x4DC91B: call    ActorSkinInfo_ClearShieldSlot; Clear ActorSkinInfo shield equipment slot at +0x11C ({form, model, object3D}); this is biped slot 13 teardown.
+0x4DC920: mov     ecx, ds:0B333C4h; this
 0x4DC926: mov     al, [ecx+588h]
-0x4DC92C: mov     byte ptr [esp+0Ch+var_4], al
-0x4DC930: mov     edx, [esp+0Ch+var_4]
-0x4DC934: push    edx
-0x4DC935: call    sub_6600D0
+0x4DC92C: mov     [esp+0Ch+firstPerson], al
+0x4DC930: mov     edx, dword ptr [esp+0Ch+firstPerson]
+0x4DC934: push    edx; firstPerson
+0x4DC935: call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.
 0x4DC93A: mov     edi, eax
 0x4DC93C: mov     eax, [esi]
 0x4DC93E: mov     edx, [eax+190h]
 0x4DC944: mov     ecx, esi
-0x4DC946: mov     [esp+0Ch+var_4], 0
+0x4DC946: mov     dword ptr [esp+0Ch+firstPerson], 0
 0x4DC94E: call    edx
 0x4DC950: test    al, al
 0x4DC952: jz      short loc_4DC998
 0x4DC954: mov     ecx, [esi+58h]
 0x4DC957: test    ecx, ecx
-0x4DC959: mov     [esp+0Ch+var_4], esi
+0x4DC959: mov     dword ptr [esp+0Ch+firstPerson], esi
 0x4DC95D: jz      short loc_4DC998
 0x4DC95F: mov     eax, [ecx]
 0x4DC961: mov     edx, [eax+2D0h]
@@ -46,18 +46,18 @@
 0x4DC97C: jz      short loc_4DC98D
 0x4DC97E: fldz
 0x4DC980: push    ecx
-0x4DC981: fstp    [esp+10h+var_10]; float
-0x4DC984: mov     ecx, eax
-0x4DC986: push    1; int
-0x4DC988: call    sub_470FC0
-0x4DC98D: push    0
-0x4DC98F: push    0FFFFFFFFh
-0x4DC991: mov     ecx, esi
-0x4DC993: call    HighPRocess_DoAction?????
+0x4DC981: fstp    [esp+10h+easeOutTime]; easeOutTime
+0x4DC984: mov     ecx, eax; this
+0x4DC986: push    1; slot
+0x4DC988: call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.
+0x4DC98D: push    0; sequence
+0x4DC98F: push    0FFFFFFFFh; action
+0x4DC991: mov     ecx, esi; this
+0x4DC993: call    Actor_SetCurrentActionWithBowVisualCleanup; Void Actor action-transition wrapper. Performs transition-specific bow/held-arrow visual cleanup, then commits action and sequence through process vtable +0x2D8. It has no success/result contract; callers/plugins must not consume EAX, so Crossbow's UInt32 HighProcessDoActionFn typedef is incorrect. Meaningful current-action state is HighProcess-only: HighProcess +0x2D0/+0x2D8 read/store +0x1F4/+0x1F8, while MiddleHigh returns None (-1) and its setter is a no-op; Crossbow's process-level-0 action filter therefore matches Oblivion. External Crossbow state-machine contrast: Equip-as-Cocked/first-shot-loaded is plugin policy, repeated action 4 while Reloading can flip state to Cocked and rebuild controller tracking, and interruption/cancellation actions are not modeled, leaving stale Reloading/Cocked phases.
 0x4DC998: test    edi, edi
 0x4DC99A: jz      short loc_4DC9A8
-0x4DC99C: mov     ecx, edi
-0x4DC99E: call    sub_478DD0
+0x4DC99C: mov     ecx, edi; this
+0x4DC99E: call    ActorSkinInfo_ClearShieldSlot; Clear ActorSkinInfo shield equipment slot at +0x11C ({form, model, object3D}); this is biped slot 13 teardown.
 0x4DC9A3: jmp     loc_4DCA7C
 0x4DC9A8: mov     eax, ds:0B0656Ch
 0x4DC9AD: mov     edx, [esi]
@@ -86,18 +86,18 @@
 0x4DC9E7: jmp     short loc_4DC9ED
 0x4DC9E9: xor     edi, edi
 0x4DC9EB: xor     bl, bl
-0x4DC9ED: push    ebp
+0x4DC9ED: push    ebp; object
 0x4DC9EE: push    0
 0x4DC9F0: call    GetShadowSceneNode
 0x4DC9F5: add     esp, 4
-0x4DC9F8: mov     ecx, eax
-0x4DC9FA: call    sub_7C5E70
+0x4DC9F8: mov     ecx, eax; this
+0x4DC9FA: call    ShadowSceneNode_RemoveObjectReceivers; Removes an object's geometry from shadow-light receiver lists under the shadow-scene critical section. It obtains the object's node/container through virtual +0x08 and recurses; it does not detach the object from its parent or clear NiNode children.
 0x4DC9FF: test    edi, edi
 0x4DCA01: jz      short loc_4DCA12
 0x4DCA03: test    bl, bl
 0x4DCA05: jz      short loc_4DCA12
-0x4DCA07: lea     ecx, [edi+0ACh]
-0x4DCA0D: call    sub_477EF0
+0x4DCA07: lea     ecx, [edi+0ACh]; this
+0x4DCA0D: call    NiTObjectArray_ClearAndRelease; Clears a ref-counted NiT object-pointer array: releases every non-null element, nulls entries, and resets end/count words to zero. At bow release it is invoked on ArrowBone+0xAC, thereby releasing all ArrowBone children including the held Arrow:0 clone.
 0x4DCA12: lea     ecx, [esi+44h]; this
 0x4DCA15: call    ExtraDataList_GetContainerChanges
 0x4DCA1A: test    eax, eax
@@ -132,11 +132,11 @@
 0x4DCA6A: mov     ecx, edi
 0x4DCA6C: call    ContainerEntryExtraData_DestroyDataTable
 0x4DCA71: push    edi
-0x4DCA72: call    FormHeapFree
+0x4DCA72: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4DCA77: add     esp, 4
 0x4DCA7A: pop     ebp
 0x4DCA7B: pop     ebx
-0x4DCA7C: mov     edi, [esp+0Ch+var_4]
+0x4DCA7C: mov     edi, dword ptr [esp+0Ch+firstPerson]
 0x4DCA80: test    edi, edi
 0x4DCA82: jz      short loc_4DCAA1
 0x4DCA84: cmp     [esp+0Ch+arg_0], 0

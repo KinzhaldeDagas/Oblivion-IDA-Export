@@ -1,4 +1,4 @@
-0x4EECE0: push    esi
+0x4EECE0: push    esi; Verified: performs weighted TESWeather selection using each entry's selectionWeight, random roll modulo sum, and cumulative ranges. First zero-weight entry may be chosen because of the initial 0xFFFFFFFF accumulator; later zero-weight entries are skipped.
 0x4EECE1: mov     esi, ecx
 0x4EECE3: push    edi
 0x4EECE4: xor     edi, edi
@@ -6,10 +6,10 @@
 0x4EECE8: mov     eax, esi
 0x4EECEA: jz      short loc_4EED46
 0x4EECEC: lea     esp, [esp+0]
-0x4EECF0: mov     ecx, [eax]
+0x4EECF0: mov     ecx, [eax]; Exterior fog source: first pass walks weather/weight list entries.
 0x4EECF2: test    ecx, ecx
 0x4EECF4: jz      short loc_4EECFB
-0x4EECF6: mov     ecx, [ecx+4]
+0x4EECF6: mov     ecx, [ecx+4]; Exterior fog source: add entry weight into total weather selection weight.
 0x4EECF9: jmp     short loc_4EECFD
 0x4EECFB: xor     ecx, ecx
 0x4EECFD: mov     eax, [eax+4]
@@ -20,14 +20,14 @@
 0x4EED08: jz      short loc_4EED46
 0x4EED0A: push    ebx
 0x4EED0B: push    eax; Seed
-0x4EED0C: call    GetRandomLargeInteger?
+0x4EED0C: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x4EED11: xor     edx, edx
-0x4EED13: div     edi
+0x4EED13: div     edi; Exterior fog source: random roll modulo total weather weight.
 0x4EED15: add     esp, 4
 0x4EED18: xor     edi, edi
 0x4EED1A: or      ebx, 0FFFFFFFFh
 0x4EED1D: lea     ecx, [ecx+0]
-0x4EED20: mov     ecx, [esi]
+0x4EED20: mov     ecx, [esi]; Exterior fog source: second pass walks list to find the selected weighted bucket.
 0x4EED22: test    ecx, ecx
 0x4EED24: jz      short loc_4EED35
 0x4EED26: mov     eax, [ecx+4]
@@ -46,7 +46,7 @@
 0x4EED41: mov     eax, [ecx]
 0x4EED43: pop     edi
 0x4EED44: pop     esi
-0x4EED45: retn
+0x4EED45: retn; Exterior fog source: return selected TESWeather pointer, or null if list/weights failed.
 0x4EED46: pop     edi
 0x4EED47: xor     eax, eax
 0x4EED49: pop     esi

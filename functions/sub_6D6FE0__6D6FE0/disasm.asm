@@ -4,7 +4,7 @@
 0x6D6FE8: push    edi
 0x6D6FE9: push    esi
 0x6D6FEA: mov     edi, ecx
-0x6D6FEC: call    sub_6ECB70
+0x6D6FEC: call    j_NiSingleInterpController_LoadBinary
 0x6D6FF1: mov     eax, [esi+21Ch]
 0x6D6FF7: push    1
 0x6D6FF9: lea     ecx, [esp+14h+var_8]

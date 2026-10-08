@@ -219,3 +219,18 @@
 0x6CA434: call    eax
 0x6CA436: xor     al, al
 0x6CA438: jmp     short loc_6CA3E5
+0x9C76E0: lea     ecx, [ebp-330h]; slot
+0x9C76E6: jmp     NiPointerSlot_Release
+0x9C76EB: lea     ecx, [ebp-330h]; slot
+0x9C76F1: jmp     NiPointerSlot_Release
+0x9C76F6: mov     edx, [esp+arg_4]
+0x9C76FA: lea     eax, [edx-338h]
+0x9C7700: mov     ecx, [edx-33Ch]
+0x9C7706: xor     ecx, eax
+0x9C7708: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C770D: add     eax, 10h
+0x9C7710: mov     ecx, [edx-4]
+0x9C7713: xor     ecx, eax
+0x9C7715: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C771A: mov     eax, offset stru_AEFB1C
+0x9C771F: jmp     ___CxxFrameHandler3

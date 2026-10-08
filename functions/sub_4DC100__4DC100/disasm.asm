@@ -53,7 +53,7 @@
 0x4DC196: mov     ecx, esi
 0x4DC198: call    eax
 0x4DC19A: push    esi
-0x4DC19B: mov     ecx, offset ActorProcessManager_ptr
+0x4DC19B: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x4DC1A0: call    sub_674E10
 0x4DC1A5: mov     eax, [esi+40h]
 0x4DC1A8: mov     ecx, ds:0B333A0h
@@ -90,7 +90,7 @@
 0x4DC201: push    0; a3
 0x4DC203: push    ecx
 0x4DC204: fstp    [esp+10h+a2]; a2
-0x4DC207: call    NiAVObject_UpdateNiAVObject
+0x4DC207: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x4DC20C: mov     edx, [esi]
 0x4DC20E: mov     eax, [edx+148h]
 0x4DC214: mov     ecx, esi
@@ -114,7 +114,7 @@
 0x4DC243: test    eax, eax
 0x4DC245: jle     short loc_4DC24F
 0x4DC247: lea     ecx, [esi+44h]
-0x4DC24A: call    sub_4212E0
+0x4DC24A: call    ExtraDataList_RemoveSavedMovementData; Removes the combined Oblivion ExtraSavedMovementData record (type 0x4B).
 0x4DC24F: mov     eax, [esi+40h]
 0x4DC252: test    eax, eax
 0x4DC254: jz      short loc_4DC26A

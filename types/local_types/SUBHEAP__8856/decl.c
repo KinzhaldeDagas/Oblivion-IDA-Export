@@ -1,1 +1,1 @@
-SUBHEAP
+typedef tagSUBHEAP SUBHEAP;

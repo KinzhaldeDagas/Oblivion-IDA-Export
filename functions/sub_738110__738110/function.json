@@ -1,19 +1,32 @@
 {
-  "callees_count": 14,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x738110",
+      "0x7383BE"
+    ]
+  ],
+  "chunks_sha256": "6ca355aeb984c706425e34b34e6e0abdf6b6fe2473d7e3a1ebd07c2c38cb2d88",
+  "comment_regular": "NiTriShapeData::UpdateNormals. Allocate/zero normal storage, accumulate one normalized face normal per triangle into its vertices, propagate contributions through the duplicate-vertex table, normalize all vertex results, and mark normals dirty. On NBT format data the allocator clears three vector planes but this routine repopulates only normals.\n\nNiTriShapeData normal rebuild: clears storage, accumulates normalized triangle directions (including shared-normal groups), normalizes vertices and ORs dirty flags +0x2E with 2. Prettier Faces RefreshMorphedGeometryData relies on this dirty write correctly; no duplicate write needed. NBT exclusion required because allocator clears three planes.",
+  "comment_repeatable": "NiTriShapeData normal rebuild: clears storage, accumulates normalized triangle directions (including shared-normal groups), normalizes vertices and ORs dirty flags +0x2E with 2. Prettier Faces RefreshMorphedGeometryData relies on this dirty write correctly; no duplicate write needed. NBT exclusion required because allocator clears three planes.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_738110",
+  "display_name": "NiTriShapeData_UpdateNormals",
   "end_ea": "0x7383BE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_738110",
+  "name": "NiTriShapeData_UpdateNormals",
   "segment": ".text",
   "sha256": "6ca355aeb984c706425e34b34e6e0abdf6b6fe2473d7e3a1ebd07c2c38cb2d88",
   "size": 686,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x738110",
-  "type": "float *__thiscall(int this)",
+  "total_chunk_size": 686,
+  "type": "void __thiscall(NiTriShapeData *self)",
   "xrefs_from_count": 249,
   "xrefs_to_count": 3
 }

@@ -1,4 +1,4 @@
-0x4211E0: push    0FFFFFFFFh
+0x4211E0: push    0FFFFFFFFh; Gets/creates Oblivion ExtraSavedMovementData and stores its saved-Havok-data pointer; runtime diagnostic confirms the field purpose.
 0x4211E2: push    offset SEH_8C8970
 0x4211E7: mov     eax, large fs:0
 0x4211ED: push    eax
@@ -32,12 +32,12 @@
 0x421236: mov     [esp+20h+var_4], 0FFFFFFFFh
 0x42123E: mov     esi, eax
 0x421240: call    BaseExtraList_AddExtra
-0x421245: mov     eax, SaveLoad_CurrentSavegame
+0x421245: mov     eax, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.
 0x42124A: cmp     byte ptr [eax+7Ch], 24h ; '$'
 0x42124E: jb      short loc_42129E
 0x421250: cmp     dword ptr [esi+18h], 0
 0x421254: jz      short loc_421283
-0x421256: mov     ecx, dword_B34D90
+0x421256: mov     ecx, ds:0B34D90h
 0x42125C: mov     edx, [ecx]
 0x42125E: mov     eax, [edx+18h]
 0x421261: push    offset aSetsavedhavokd; "SetSavedHavokData() is being called whe"...
@@ -69,3 +69,15 @@
 0x4212B2: pop     esi
 0x4212B3: add     esp, 10h
 0x4212B6: retn    4
+0x9CA7E0: mov     eax, [ebp-10h]
+0x9CA7E3: push    eax
+0x9CA7E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA7E9: pop     ecx
+0x9CA7EA: retn
+0x9CA7EB: mov     edx, [esp+arg_4]
+0x9CA7EF: lea     eax, [edx-0Ch]
+0x9CA7F2: mov     ecx, [edx-10h]
+0x9CA7F5: xor     ecx, eax
+0x9CA7F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA7FC: mov     eax, offset stru_AF2E8C
+0x9CA801: jmp     ___CxxFrameHandler3

@@ -7,7 +7,7 @@
   },
   {
     "ea": "0x65C9B1",
-    "line": "mov     esi, [esp+4+arg_0]",
+    "line": "mov     esi, [esp+4+entry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x65C9DF",
-    "line": "mov     ecx, [ecx+0Ch]",
+    "line": "mov     ecx, [ecx+0Ch]; self",
     "mnemonic": "mov",
     "size": 3
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x65C9EA",
-    "line": "mov     [esp+arg_0], eax",
+    "line": "mov     [esp+entry], eax; actorValue",
     "mnemonic": "mov",
     "size": 4
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x65C9FA",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

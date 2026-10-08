@@ -4,15 +4,15 @@
 0x8A4745: push    esi
 0x8A4746: xor     ebx, ebx
 0x8A4748: push    edi
-0x8A4749: mov     [esp+18h+var_4], ebx
+0x8A4749: mov     [esp+18h+outData], ebx
 0x8A474D: xor     ebp, ebp
 0x8A474F: lea     edi, [ecx+10h]
 0x8A4752: test    edi, edi
 0x8A4754: jz      short loc_8A476F
-0x8A4756: lea     eax, [esp+18h+var_4]
-0x8A475A: push    eax
-0x8A475B: mov     ecx, edi
-0x8A475D: call    sub_677C70
+0x8A4756: lea     eax, [esp+18h+outData]
+0x8A475A: push    eax; outData
+0x8A475B: mov     ecx, edi; this
+0x8A475D: call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.
 0x8A4762: or      ebx, 1
 0x8A4765: cmp     dword ptr [eax], 0
 0x8A4768: mov     [esp+18h+var_5], 1
@@ -20,7 +20,7 @@
 0x8A476F: mov     [esp+18h+var_5], 0
 0x8A4774: test    bl, 1
 0x8A4777: jz      short loc_8A47A0
-0x8A4779: mov     esi, [esp+18h+var_4]
+0x8A4779: mov     esi, [esp+18h+outData]
 0x8A477D: and     ebx, 0FFFFFFFEh
 0x8A4780: test    esi, esi
 0x8A4782: jz      short loc_8A47A0

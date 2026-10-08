@@ -13,7 +13,7 @@
 0x89768A: mov     eax, [eax+8]
 0x89768D: test    eax, eax
 0x89768F: jz      short loc_8976A2
-0x897691: push    offset dword_BA7B80
+0x897691: push    offset stru_BA7B80
 0x897696: lea     ecx, [esp+18h+var_8]
 0x89769A: push    ecx
 0x89769B: mov     ecx, eax
@@ -30,8 +30,8 @@
 0x8976B7: jz      short loc_8976C5
 0x8976B9: push    edx
 0x8976BA: push    edi
-0x8976BB: push    offset dword_BA7B80
-0x8976C0: call    sub_8BC750
+0x8976BB: push    offset stru_BA7B80
+0x8976C0: call    sub_8BC750; Insert helper for collision metadata key/value map. If key absent, appends 0x10-byte entry {key, unknown, valueLow, valueHigh}.
 0x8976C5: pop     edi
 0x8976C6: pop     esi
 0x8976C7: pop     ebx

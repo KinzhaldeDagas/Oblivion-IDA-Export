@@ -1,4 +1,4 @@
-0x42CC00: sub     esp, 0Ch
+0x42CC00: sub     esp, 0Ch; MEF PERF 2026-09-07: Performance audit: cached live flag20h gives direct buffer+offset lookup. Streamed modes allocate256 bytes per call; retained offsets seek directly, while no-offset mode seeks table start and rescans all preceding names. Do not describe all modes as quadratic. Prototype/name established from Oblivion body, not Fallout.
 0x42CC03: push    esi
 0x42CC04: mov     esi, ecx
 0x42CC06: test    byte ptr [esi+194h], 20h
@@ -24,7 +24,7 @@
 0x42CC4F: cmp     eax, ebp
 0x42CC51: jz      short loc_42CC62
 0x42CC53: push    eax
-0x42CC54: call    FormHeapFree
+0x42CC54: call    FormHeapFree; MEF PERF 2026-09-07: PERF-1 secondary allocator churn: every streamed lookup frees prior owner+1A0 buffer if nonnull, zeroes owner, then allocates256 at42CC6E. N streamed calls from empty owner allocateN times/freeN-1 before destruction. A scoped enumeration scratch buffer can avoid repeated allocations without changing persistent cache policy.
 0x42CC59: add     esp, 4
 0x42CC5C: mov     [esi+1A0h], ebp
 0x42CC62: push    edi
@@ -48,7 +48,7 @@
 0x42CC9C: test    al, al
 0x42CC9E: mov     eax, ds:BSFile_FilePos_Beg
 0x42CCA3: push    eax
-0x42CCA4: jz      loc_42CD2B
+0x42CCA4: jz      loc_42CD2B; MEF PERF 2026-09-07: Verified PERF-1: no-retained-offset branch always loads archive+188h and seeks from beginning at42CD34; no incremental filename cursor/cache survives this call. Repeated increasing file-index requests rescan prefixes, even within the same folder.
 0x42CCAA: mov     ecx, [esi+1A4h]
 0x42CCB0: mov     eax, [esp+20h+arg_0]
 0x42CCB4: mov     ecx, [ecx+eax*4]
@@ -96,7 +96,7 @@
 0x42CD24: pop     esi
 0x42CD25: add     esp, 0Ch
 0x42CD28: retn    8
-0x42CD2B: mov     ecx, [esi+188h]
+0x42CD2B: mov     ecx, [esi+188h]; MEF PERF 2026-09-07: Verified PERF-1: no-retained-offset branch always loads archive+188h and seeks from beginning at42CD34; no incremental filename cursor/cache survives this call. Repeated increasing file-index requests rescan prefixes, even within the same folder.
 0x42CD31: push    ecx
 0x42CD32: mov     ecx, esi
 0x42CD34: call    edx
@@ -118,7 +118,7 @@
 0x42CD62: push    edx
 0x42CD63: push    esi
 0x42CD64: mov     [esp+30h+var_8], ebx
-0x42CD68: call    eax
+0x42CD68: call    eax; MEF PERF 2026-09-07: PERF-1 preceding-folder skip makes one callback invocation per name byte includingNUL. With P bytes in earlier folders, each selected name in this folder repeats P logical byte reads. These are callback/CPU operations, not proof of physical disk reads.
 0x42CD6A: add     esp, 14h
 0x42CD6D: cmp     byte ptr [esp+1Ch+arg_0], 0
 0x42CD72: jnz     short loc_42CD54
@@ -145,7 +145,7 @@
 0x42CDB2: push    eax
 0x42CDB3: push    esi
 0x42CDB4: mov     [esp+30h+arg_4], ebx
-0x42CDB8: call    ecx
+0x42CDB8: call    ecx; MEF PERF 2026-09-07: PERF-1 same-folder skip rescans fileCountBeforeTarget names on every getter. One folder,N selected entries, fixed encoded name lengthL includingNUL => L*N*(N+1)/2 logical byte callbacks for all names including target reads. Existing EOF-hang correctness issue must be addressed before performance replacement.
 0x42CDBA: add     esp, 14h
 0x42CDBD: cmp     byte ptr [esp+1Ch+arg_0], 0
 0x42CDC2: jnz     short loc_42CDA4

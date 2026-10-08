@@ -1,23 +1,23 @@
 char __cdecl sub_4F7220(int a1, int a2, int a3, double *a4)
 {
-  int v7; // eax
+  int v4; // eax
 
-  v7 = 0;
-  *a4 = 0.0;
-  if ( a2 )
+  v4 = 0; /*0x4f722b*/
+  *a4 = 0.0; /*0x4f722d*/
+  if ( a2 ) /*0x4f7231*/
   {
-    if ( (unsigned int)*(unsigned __int8 *)(a2 + 4) - 0x31 <= 2 )
-      v7 = a2;
+    if ( (unsigned int)*(unsigned __int8 *)(a2 + 4) - 0x31 <= 2 ) /*0x4f723d*/
+      v4 = a2; /*0x4f723f*/
   }
-  if ( a1 )
+  if ( a1 ) /*0x4f7247*/
   {
-    if ( v7 )
+    if ( v4 ) /*0x4f724b*/
     {
-      if ( a1 == v7 )
-        *a4 = 1.0;
+      if ( a1 == v4 ) /*0x4f724f*/
+        *a4 = 1.0; /*0x4f7253*/
     }
   }
-  if ( IsConsoleMode )
-    Interface_ConsolePrint("GetIsRef >> %0.2f", *a4);
-  return 1;
+  if ( MEMORY[0xB361AC] ) /*0x4f7255*/
+    Interface_ConsolePrint("GetIsRef >> %0.2f", *a4); /*0x4f726b*/
+  return 1; /*0x4f7275*/
 }

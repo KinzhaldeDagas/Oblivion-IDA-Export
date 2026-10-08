@@ -11,11 +11,11 @@
 0x642B59: lea     eax, [esp+1Ch+var_C]
 0x642B5D: mov     large fs:0, eax
 0x642B63: mov     esi, ecx
-0x642B65: mov     [esp+1Ch+var_10], 0
+0x642B65: mov     [esp+1Ch+task], 0
 0x642B6D: mov     eax, [esi]
 0x642B6F: mov     edi, [esp+1Ch+arg_0]
 0x642B73: mov     edx, [eax+4]
-0x642B76: lea     ecx, [esp+1Ch+var_10]
+0x642B76: lea     ecx, [esp+1Ch+task]
 0x642B7A: push    ecx
 0x642B7B: push    edi
 0x642B7C: mov     ecx, esi
@@ -28,11 +28,11 @@
 0x642B91: push    edi
 0x642B92: mov     ecx, esi
 0x642B94: call    edx
-0x642B96: mov     eax, [esp+1Ch+var_10]
+0x642B96: mov     eax, [esp+1Ch+task]
 0x642B9A: mov     ecx, ds:0B33A10h
-0x642BA0: push    eax
-0x642BA1: call    sub_432130
-0x642BA6: mov     esi, [esp+1Ch+var_10]
+0x642BA0: push    eax; task
+0x642BA1: call    IOTask_Cancel; Verified generic IOTask cancellation state machine: previous states 0/1/2 atomically transition to 6 and invoke vtable +0x0C with status 0; state 5 transitions to 6 and invokes it with status 1; states 3/4 wait for the worker's state change. Verified local role: state 6 is the cancellation/terminal marker written by IOTask_Cancel. Its canonical enum label remains Unknown.
+0x642BA6: mov     esi, [esp+1Ch+task]
 0x642BAA: test    esi, esi
 0x642BAC: mov     [esp+1Ch+var_4], 0FFFFFFFFh
 0x642BB4: jz      short loc_642BD2
@@ -55,3 +55,12 @@
 0x642BDF: pop     esi
 0x642BE0: add     esp, 10h
 0x642BE3: retn    4
+0x9AC610: lea     ecx, [ebp-10h]; void *
+0x9AC613: jmp     sub_4BDDC0
+0x9AC618: mov     edx, [esp+arg_4]
+0x9AC61C: lea     eax, [edx-0Ch]
+0x9AC61F: mov     ecx, [edx-10h]
+0x9AC622: xor     ecx, eax
+0x9AC624: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AC629: mov     eax, offset stru_AD92D8
+0x9AC62E: jmp     ___CxxFrameHandler3

@@ -10,7 +10,6 @@
 0x904E72: push    ebp
 0x904E73: mov     ebp, [esp+10h+arg_4]
 0x904E77: jmp     short loc_904E80
-0x904E79: align 10h
 0x904E80: mov     eax, [edi+0Ch]
 0x904E83: mov     ecx, [eax+esi*8+4]
 0x904E87: mov     eax, [esp+10h+arg_0]

@@ -11,16 +11,15 @@ int __usercall AlchMenu_Create_::HandleRERT@<eax>(
   ExtraDataList ***v8; // [esp-110h] [ebp-114h]
   char v9[260]; // [esp-104h] [ebp-108h] BYREF
 
-  if ( v8 )
+  if ( v8 ) /*0x593a4e*/
   {
-    v5 = sub_4851B0(v8, (TESObjectREFR *)TESDataHandler_g_PlayerRef);
-    _sprintf(v9, "%s\\%s", "Icons", v5);
-    Tile_SetString(*(_DWORD **)(a2 + 0x3C), (_DWORD *)0xFE6, v9);
-    a5 = fConstant_2;
-    Tile_SetFloat(*(Tile **)(a2 + 0x3C), (_DWORD *)0xFA1, fConstant_2);
+    v5 = sub_4851B0(v8, (TESObjectREFR *)reference); /*0x593a56*/
+    _sprintf(v9, "%s\\%s", "Icons", v5); /*0x593a6b*/
+    Tile_SetString(*(_DWORD **)(a2 + 0x3C), (_DWORD *)0xFE6, v9); /*0x593a80*/
+    Tile_SetFloat(*(Tile **)(a2 + 0x3C), 0xFA1u, fConstant_2); /*0x593a97*/
   }
-  sub_57FF20(*(BSStringT **)(a2 + 0xA0), (char *)dword_B38900);
-  sub_593710((char **)a2);
-  EnableMenu(a1, a3, a4, a5, 0);
-  return v7;
+  sub_57FF20(*(BSStringT **)(a2 + 0xA0), (char *)stru_B38900.value); /*0x593aa8*/
+  sub_593710((char **)a2); /*0x593aaf*/
+  EnableMenu(a1, a3, a4, a5, 0); /*0x593ab8*/
+  return v7; /*0x593aee*/
 }

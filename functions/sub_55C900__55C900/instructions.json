@@ -48,12 +48,6 @@
     "size": 2
   },
   {
-    "ea": "0x55C90D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x55C910",
     "line": "lea     eax, [edi-8]; switch 9 cases",
     "mnemonic": "lea",
@@ -709,19 +703,19 @@
   },
   {
     "ea": "0x55CA34",
-    "line": "push    ecx",
+    "line": "push    ecx; vertices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x55CA35",
-    "line": "push    edx",
+    "line": "push    edx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x55CA36",
-    "line": "call    sub_5508F0",
+    "line": "call    NiGeometry_RestoreFaceGenBaseVertices; Copy authored FaceGen base positions into a writable strided vertex stream and mark only the position channel dirty.",
     "mnemonic": "call",
     "size": 5
   },

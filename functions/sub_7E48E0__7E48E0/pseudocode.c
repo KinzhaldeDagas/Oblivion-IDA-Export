@@ -7,32 +7,32 @@ int sub_7E48E0()
   double v4; // st7
   float v5; // [esp+0h] [ebp-4h]
 
-  result = dword_B46044;
-  if ( !dword_B46044 )
+  result = unk_B46044; /*0x7e48e1*/
+  if ( !unk_B46044 )
   {
-    v1 = sub_7E2D60();
+    v1 = sub_7E2D60(); /*0x7e48f0*/
     result = FormHeapAlloc((unsigned __int64)(4 * v1) >> 0x1E != 0 ? 0xFFFFFFFF : 0x10 * v1);
-    v2 = 0;
-    dword_B46044 = result;
-    if ( v1 )
+    v2 = 0; /*0x7e4912*/
+    unk_B46044 = result; /*0x7e4916*/
+    if ( v1 ) /*0x7e491b*/
     {
-      v3 = result + 8;
-      do
+      v3 = result + 8; /*0x7e491d*/
+      do /*0x7e4950*/
       {
-        v4 = (double)v2;
-        if ( v2 < 0 )
-          v4 = v4 + flt_A2FC78;
-        v5 = v4;
-        ++v2;
-        v3 += 0x10;
-        *(float *)(v3 - 0x18) = v5;
-        *(float *)(v3 - 0x14) = v5;
-        *(float *)(v3 - 0x10) = v5;
-        *(float *)(v3 - 0xC) = v5;
+        v4 = (double)v2; /*0x7e4928*/
+        if ( v2 < 0 ) /*0x7e492c*/
+          v4 = v4 + flt_A2FC78; /*0x7e492e*/
+        v5 = v4; /*0x7e4934*/
+        ++v2; /*0x7e4938*/
+        v3 += 0x10; /*0x7e493f*/
+        *(float *)(v3 - 0x18) = v5; /*0x7e4944*/
+        *(float *)(v3 - 0x14) = v5; /*0x7e4947*/
+        *(float *)(v3 - 0x10) = v5; /*0x7e494a*/
+        *(float *)(v3 - 0xC) = v5; /*0x7e494d*/
       }
-      while ( v2 < v1 );
-      return dword_B46044;
+      while ( v2 < v1 ); /*0x7e4950*/
+      return unk_B46044; /*0x7e4952*/
     }
   }
-  return result;
+  return result; /*0x7e4959*/
 }

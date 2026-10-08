@@ -16,7 +16,7 @@
 0x8A3442: and     al, 3Fh
 0x8A3444: cmp     al, 8
 0x8A3446: jnz     short loc_8A346C
-0x8A3448: call    sub_89F570
+0x8A3448: call    bhkRefObject_UpdateHavokObject
 0x8A344D: mov     eax, [esp+0Ch+arg_0]
 0x8A3451: push    0
 0x8A3453: push    1
@@ -24,7 +24,7 @@
 0x8A3456: mov     ecx, esi
 0x8A3458: call    sub_8A9AB0
 0x8A345D: mov     ecx, edi
-0x8A345F: call    sub_89F570
+0x8A345F: call    bhkRefObject_UpdateHavokObject
 0x8A3464: pop     edi
 0x8A3465: pop     esi
 0x8A3466: mov     al, 1
@@ -50,7 +50,7 @@
 0x8A349C: test    ah, 44h
 0x8A349F: jnp     short loc_8A34AF
 0x8A34A1: mov     ecx, edi
-0x8A34A3: call    sub_89F570
+0x8A34A3: call    bhkRefObject_UpdateHavokObject
 0x8A34A8: push    0
 0x8A34AA: push    1
 0x8A34AC: push    ebx

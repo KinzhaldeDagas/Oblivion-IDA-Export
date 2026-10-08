@@ -1,4 +1,4 @@
 bool __thiscall TESFile_IsLoaded(Data *this)
 {
-  return (this->fileFlags & kFlag_Loaded) != 0;
+  return (this->fileFlags & kFlag_Loaded) != 0; /*0x44facb*/
 }

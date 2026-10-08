@@ -1,21 +1,16 @@
-int __cdecl ValueModifierEffect_Clone_::AllocateEffect(int a1, int a2, int a3, int a4)
+void __thiscall ValueModifierEffect_Clone_::AllocateEffect(void *this)
 {
-  int v4; // ecx
-  int v5; // esi
-  ActiveEffect *v6; // eax
-  int v7; // edi
-  int v8; // eax
-  ActiveEffect *v10; // [esp+Ch] [ebp+Ch]
+  ActiveEffect *v2; // eax
+  int v3; // edi
+  int v4; // eax
 
-  v5 = v4;
-  v6 = (ActiveEffect *)FormHeapAlloc(0x3Cu);
-  v10 = v6;
-  v7 = 0;
-  if ( v6 )
+  v2 = (ActiveEffect *)FormHeapAlloc(0x3Cu); /*0x6a8377*/
+  v3 = 0; /*0x6a8383*/
+  if ( v2 ) /*0x6a838b*/
   {
-    ValueModifierEffect_constr(v6, *(MagicCaster **)(v5 + 0x24), *(MagicItem **)(v5 + 8), *(EffectItem **)(v5 + 0xC));
-    v7 = v8;
+    ValueModifierEffect_constr(v2, *((MagicCaster **)this + 9), *((MagicItem **)this + 2), *((EffectItem **)this + 3)); /*0x6a839b*/
+    v3 = v4; /*0x6a83a0*/
   }
-  (*(void (__cdecl **)(int))(*(_DWORD *)v5 + 0x2C))(v7);
-  return ValueModifierEffect_Clone_::Epilogue(a1, a2, v10, a4);
+  (*(void (__cdecl **)(int))(*(_DWORD *)this + 0x2C))(v3); /*0x6a83b2*/
+  ValueModifierEffect_Clone_::Epilogue(); /*0x6a83b5*/
 }

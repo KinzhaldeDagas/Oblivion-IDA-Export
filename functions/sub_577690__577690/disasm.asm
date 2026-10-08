@@ -21,7 +21,7 @@
 0x5776DC: mov     dword ptr [esi+18h], 1
 0x5776E3: mov     ecx, [esi+1Ch]
 0x5776E6: push    ecx
-0x5776E7: call    FormHeapFree
+0x5776E7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5776EC: add     esp, 4
 0x5776EF: push    20h ; ' '
 0x5776F1: mov     ecx, esi

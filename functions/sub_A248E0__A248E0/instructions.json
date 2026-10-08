@@ -1,7 +1,7 @@
 [
   {
     "ea": "0xA248E0",
-    "line": "push    offset unk_B13618",
+    "line": "push    offset fXenonMenuStickSpeedMaxMod; [Controller decode 2026-07-10] atexit cleanup for registered Xenon-era Controls INI setting.",
     "mnemonic": "push",
     "size": 5
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0xA248EF",
-    "line": "mov     eax, off_B1361C; \"fXenonMenuStickSpeedMaxMod:Controls\"",
+    "line": "mov     eax, fXenonMenuStickSpeedMaxModSettingName",
     "mnemonic": "mov",
     "size": 5
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0xA248FE",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

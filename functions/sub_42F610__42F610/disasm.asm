@@ -1,10 +1,10 @@
-0x42F610: sub     esp, 448h
+0x42F610: sub     esp, 448h; MEF data-streaming pass: archive list builder uses fixed 0x8000 heap buffer and case-sensitive .esp-associated BSA discovery. Decoded as future policy/bounds improvement candidate, not included in narrow compatibility patch.
 0x42F616: mov     eax, ___security_cookie
 0x42F61B: xor     eax, esp
 0x42F61D: mov     [esp+448h+var_4], eax
 0x42F624: push    48h ; 'H'
 0x42F626: push    0
-0x42F628: push    offset FirstLoadedArchiveByType
+0x42F628: push    0B338E8h
 0x42F62D: call    __memset
 0x42F632: add     esp, 0Ch
 0x42F635: cmp     bUseArchives_Archive, 0
@@ -37,10 +37,10 @@
 0x42F68F: nop
 0x42F690: lea     ecx, FileExtensionInfoList[ebx]
 0x42F696: lea     ebp, ds:0[esi*8]
-0x42F69D: push    ecx; Str2
+0x42F69D: push    ecx; right
 0x42F69E: lea     edx, FileExtensionInfoList[ebp]
-0x42F6A4: push    edx; Str1
-0x42F6A5: call    __strcmp
+0x42F6A4: push    edx; left
+0x42F6A5: call    CRT_StricmpLocaleDispatch
 0x42F6AA: add     esp, 8
 0x42F6AD: test    eax, eax
 0x42F6AF: jge     short loc_42F6B5
@@ -73,7 +73,7 @@
 0x42F725: push    8000h
 0x42F72A: mov     ecx, offset FormHeap
 0x42F72F: call    j_MemoryHeap_Alloc
-0x42F734: mov     ecx, sArchiveList_Archive
+0x42F734: mov     ecx, sArchiveList_Archive; MEF v46 Oblivion-verified archive startup OOM guard: fixed 0x8000 buffer allocation returned in EAX is unchecked. Failure sets result byte [ESP+13]=0 and rejoins timing/log epilogue at 0x42F9BE before fopen/findfirst.
 0x42F73A: mov     ebp, eax
 0x42F73C: mov     edx, ebp
 0x42F73E: mov     edi, edi
@@ -83,7 +83,7 @@
 0x42F747: add     edx, 1
 0x42F74A: test    al, al
 0x42F74C: jnz     short loc_42F740
-0x42F74E: push    offset AppDataPath
+0x42F74E: push    (offset destination+10Ch)
 0x42F753: lea     eax, [esp+45Ch+Filename]
 0x42F75A: push    offset aSplugins_txt; "%sPlugins.txt"
 0x42F75F: push    eax
@@ -91,7 +91,7 @@
 0x42F765: lea     ecx, [esp+464h+Filename]
 0x42F76C: push    offset Mode; "r"
 0x42F771: push    ecx; Filename
-0x42F772: call    _fopen
+0x42F772: call    _fopen; Performance/resource decode: Oblivion opens Plugins.txt here but sub_42F610 has no fclose. Decode-only pending complete CRT-handle cleanup integration.
 0x42F777: mov     esi, eax
 0x42F779: add     esp, 14h
 0x42F77C: test    esi, esi
@@ -119,7 +119,7 @@
 0x42F7D5: lea     eax, [esp+458h+Buf]
 0x42F7DC: push    offset a_esp_0; ".esp"
 0x42F7E1: push    eax; Str
-0x42F7E2: call    _strstr
+0x42F7E2: call    _strstr; MEF candidate verification 2026-05-30: master archive list builder matches only '.esp' via strstr before rewriting to '*.bsa'. Policy-changing candidate, not a narrow correction.
 0x42F7E7: add     esp, 8
 0x42F7EA: test    eax, eax
 0x42F7EC: jz      loc_42F922
@@ -157,20 +157,20 @@
 0x42F869: push    eax; lpFileName
 0x42F86A: rep movsb
 0x42F86C: call    __findfirst64i32
-0x42F871: mov     ebx, eax
+0x42F871: mov     ebx, eax; MEF v50 resolved: _findfirst64i32 returns the raw FindFirstFileA handle in EBX; the completion/error path at 0x42F916 now calls Win32 FindClose(EBX). Initial INVALID_HANDLE_VALUE bypasses that hook.
 0x42F873: add     esp, 8
 0x42F876: cmp     ebx, 0FFFFFFFFh
 0x42F879: jz      loc_42F91E
 0x42F87F: nop
-0x42F880: mov     eax, ebp
+0x42F880: mov     eax, ebp; MEF v49 Oblivion-verified archive-list length scan. EAX becomes strlen(EBP) at 0x42F88E; the following vanilla newline probe requires length >= 2.
 0x42F882: lea     edx, [eax+1]
 0x42F885: mov     cl, [eax]
 0x42F887: add     eax, 1
 0x42F88A: test    cl, cl
 0x42F88C: jnz     short loc_42F885
 0x42F88E: sub     eax, edx
-0x42F890: cmp     byte ptr [eax+ebp-2], 0Ah
-0x42F895: jnz     short loc_42F8AF
+0x42F890: cmp     byte ptr [eax+ebp-2], 0Ah; MEF v49 verified under-read: vanilla reads [EBP+strlen-2] without proving strlen >= 2. Empty/one-byte sArchiveList values read before the 0x8000 buffer. Guard length < 2 and skip CR/LF trim to 0x42F8AF; otherwise replay this compare and continue 0x42F895.
+0x42F895: jnz     short loc_42F8AF; MEF v49 normal-length continuation after replayed LF comparison. Existing branch preserves vanilla CR/LF trimming for strlen >= 2.
 0x42F897: mov     eax, ebp
 0x42F899: lea     edx, [eax+1]
 0x42F89C: lea     esp, [esp+0]
@@ -180,13 +180,13 @@
 0x42F8A7: jnz     short loc_42F8A0
 0x42F8A9: sub     eax, edx
 0x42F8AB: mov     [eax+ebp-2], cl
-0x42F8AF: mov     eax, ebp
+0x42F8AF: mov     eax, ebp; MEF v49 short-list continuation: append/enumeration path is safe for strlen < 2 once the invalid [EBP+length-2] newline probe is skipped.
 0x42F8B1: add     eax, 0FFFFFFFFh
 0x42F8B4: mov     cl, [eax+1]
 0x42F8B7: add     eax, 1
 0x42F8BA: test    cl, cl
 0x42F8BC: jnz     short loc_42F8B4
-0x42F8BE: mov     cx, ds:word_A36130
+0x42F8BE: mov     cx, ds:word_A36130; MEF v47 Oblivion-verified bounded archive append: append literal ', ' plus current 260-byte find-data name only if full NUL-terminated result fits fixed 0x8000 buffer. On rejection leave buffer unchanged, clear result byte, continue same findnext at 0x42F90E.
 0x42F8C5: mov     [eax], cx
 0x42F8C8: mov     dl, ds:byte_A36132
 0x42F8CE: mov     [eax+2], dl
@@ -214,19 +214,19 @@
 0x42F908: and     ecx, 3
 0x42F90B: push    ebx; hFindFile
 0x42F90C: rep movsb
-0x42F90E: call    __findnext64i32
+0x42F90E: call    __findnext64i32; MEF v47 continuation preserves Oblivion _findnext64i32(handle=EBX, finddata=&[ESP+28]) loop after bounded append.
 0x42F913: add     esp, 8
-0x42F916: test    eax, eax
+0x42F916: test    eax, eax; MEF v50 Oblivion-verified archive search-handle lifetime fix. EAX is _findnext64i32 result: zero repeats at 0x42F880; nonzero ends this search and EBX still owns the raw FindFirstFileA HANDLE. Close EBX with FindClose, then continue 0x42F91E. The invalid-handle findfirst path already branches directly to 0x42F91E.
 0x42F918: jz      loc_42F880
-0x42F91E: mov     esi, [esp+458h+var_444]
+0x42F91E: mov     esi, [esp+458h+var_444]; MEF v50 continuation after successful enumeration handle is closed. Direct failure from _findfirst64i32 reaches here with EBX == INVALID_HANDLE_VALUE and requires no close.
 0x42F922: push    esi; File
 0x42F923: call    _feof
 0x42F928: add     esp, 4
 0x42F92B: test    eax, eax
 0x42F92D: jz      loc_42F7A0
-0x42F933: push    offset byte_A319FC; unsigned __int8 *
+0x42F933: push    offset asc_A319FC; MEF v48 Oblivion-verified Plugins.txt lifetime fix: ESI is fopen result (or null) and is no longer used after enumeration. fclose nonnull ESI, then replay mbstok delimiter/EBP arguments at 0x42F939.
 0x42F938: push    ebp; unsigned __int8 *
-0x42F939: call    __mbstok
+0x42F939: call    __mbstok; MEF v48 continuation: Plugins.txt has been closed; archive-list tokenization and load order remain unchanged.
 0x42F93E: add     esp, 8
 0x42F941: test    eax, eax
 0x42F943: jz      short loc_42F9B3
@@ -243,7 +243,7 @@
 0x42F95A: push    0
 0x42F95C: push    0
 0x42F95E: push    ecx
-0x42F95F: call    ArchiveManager_LoadArchive
+0x42F95F: call    ArchiveManager_LoadArchive; MEF PLAN 2026-09-07: Sole recorded direct LoadArchive caller: testsEAX at42F967; NULL skips category indexing via42F99B, nonnull may assign pointer to B338E8[type] at42F98A. Therefore normal factoryNULL failure is already tolerated, but returned success after failed list append can create category/global-list inconsistency.
 0x42F964: add     esp, 0Ch
 0x42F967: test    eax, eax
 0x42F969: jz      short loc_42F99B
@@ -253,15 +253,15 @@
 0x42F975: shl     edx, cl
 0x42F977: test    [eax+174h], dx
 0x42F97E: jz      short loc_42F991
-0x42F980: cmp     FirstLoadedArchiveByType[ecx*4], 0
+0x42F980: cmp     dword ptr ds:0B338E8h[ecx*4], 0
 0x42F988: jnz     short loc_42F991
-0x42F98A: mov     FirstLoadedArchiveByType[ecx*4], eax
+0x42F98A: mov     ds:0B338E8h[ecx*4], eax
 0x42F991: add     ecx, 1
 0x42F994: cmp     ecx, 9
 0x42F997: jl      short loc_42F970
 0x42F999: jmp     short loc_42F9A0
 0x42F99B: mov     [esp+458h+var_445], 0
-0x42F9A0: push    offset byte_A319FC; unsigned __int8 *
+0x42F9A0: push    offset asc_A319FC; unsigned __int8 *
 0x42F9A5: push    0; unsigned __int8 *
 0x42F9A7: call    __mbstok
 0x42F9AC: add     esp, 8

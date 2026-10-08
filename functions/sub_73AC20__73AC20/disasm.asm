@@ -13,27 +13,27 @@
 0x73AC3D: lea     eax, [esp+48h+var_C]
 0x73AC41: mov     large fs:0, eax
 0x73AC47: mov     esi, ecx
-0x73AC49: mov     edi, [esp+48h+arg_0]
+0x73AC49: mov     edi, [esp+48h+stream]
 0x73AC4D: mov     eax, [edi+0D8h]
 0x73AC53: cmp     eax, 0A00010Fh
-0x73AC58: push    edi
+0x73AC58: push    edi; stream
 0x73AC59: jnb     short loc_73AC62
 0x73AC5B: call    sub_729450
 0x73AC60: jmp     short loc_73AC67
-0x73AC62: call    sub_71FEC0
+0x73AC62: call    NiTriShapeData_Load; Load NiTriShapeData triangle indices and its serialized shared-normal table. The table is an array of 8-byte {UInt16 count, UInt16* indices} entries backed by linked index-pool blocks.
 0x73AC67: mov     eax, [edi+21Ch]
 0x73AC6D: push    1
 0x73AC6F: lea     ecx, [esp+4Ch+var_1C]
 0x73AC73: push    ecx
 0x73AC74: push    1
-0x73AC76: lea     edx, [esp+54h+arg_0]
+0x73AC76: lea     edx, [esp+54h+stream]
 0x73AC7A: push    edx
 0x73AC7B: push    eax
 0x73AC7C: mov     eax, [eax+4]
 0x73AC7F: mov     [esp+5Ch+var_1C], 1
 0x73AC87: call    eax
 0x73AC89: add     esp, 14h
-0x73AC8C: cmp     byte ptr [esp+48h+arg_0], 0
+0x73AC8C: cmp     byte ptr [esp+48h+stream], 0
 0x73AC91: mov     ebx, 2
 0x73AC96: setnz   cl
 0x73AC99: mov     [esi+58h], cl
@@ -310,18 +310,18 @@
 0x73AFC3: mov     eax, [esi+8]
 0x73AFC6: push    eax
 0x73AFC7: mov     [esp+4Ch+var_18], esi
-0x73AFCB: call    FormHeapFree
+0x73AFCB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x73AFD0: mov     cx, word ptr [esp+4Ch+var_2C]
 0x73AFD5: mov     [esi+4], cx
 0x73AFD9: mov     [esi+8], ebx
 0x73AFDC: mov     edx, [esi+0Ch]
 0x73AFDF: push    edx
-0x73AFE0: call    FormHeapFree
+0x73AFE0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x73AFE5: mov     eax, [esp+50h+var_20]
 0x73AFE9: mov     [esi+0Ch], eax
 0x73AFEC: mov     ecx, [esi+10h]
 0x73AFEF: push    ecx
-0x73AFF0: call    FormHeapFree
+0x73AFF0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x73AFF5: mov     edx, [esp+54h+var_1C]
 0x73AFF9: add     esp, 0Ch
 0x73AFFC: mov     [esi+10h], edx
@@ -349,3 +349,15 @@
 0x73B046: pop     ebx
 0x73B047: add     esp, 34h
 0x73B04A: retn    4
+0x9CACC0: mov     eax, [ebp-18h]
+0x9CACC3: push    eax
+0x9CACC4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CACC9: pop     ecx
+0x9CACCA: retn
+0x9CACCB: mov     edx, [esp+arg_4]
+0x9CACCF: lea     eax, [edx-38h]
+0x9CACD2: mov     ecx, [edx-3Ch]
+0x9CACD5: xor     ecx, eax
+0x9CACD7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CACDC: mov     eax, offset stru_AF32FC
+0x9CACE1: jmp     ___CxxFrameHandler3

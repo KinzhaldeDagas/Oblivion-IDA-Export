@@ -1,1 +1,1 @@
-SC_ACTION
+typedef _SC_ACTION SC_ACTION;

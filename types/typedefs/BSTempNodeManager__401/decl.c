@@ -1,1 +1,1 @@
-BSTempNodeManager
+struct BSTempNodeManager;

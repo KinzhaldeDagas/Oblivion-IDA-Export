@@ -74,13 +74,13 @@
 0x4DEA3F: test    al, al
 0x4DEA41: jz      short loc_4DEA4F
 0x4DEA43: mov     ecx, edi; this
-0x4DEA45: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x4DEA45: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x4DEA4A: cmp     eax, 6
 0x4DEA4D: jnz     short loc_4DEAB9; jumptable 004DE9B3 case 23
 0x4DEA4F: test    edi, edi
 0x4DEA51: jz      short loc_4DEA75
-0x4DEA53: mov     ecx, edi
-0x4DEA55: call    sub_5E0F30
+0x4DEA53: mov     ecx, edi; this
+0x4DEA55: call    Actor__IsSleeping; Returns true exactly when Actor.process exists and GetSleepState() == kSitSleep_Sleeping (9). This is a SitSleep-state test, not a combat/procedure test.
 0x4DEA5A: test    al, al
 0x4DEA5C: jz      short loc_4DEA75
 0x4DEA5E: mov     ecx, ds:0B333C4h
@@ -92,7 +92,7 @@
 0x4DEA73: pop     esi
 0x4DEA74: retn
 0x4DEA75: mov     ecx, ds:0B333C4h
-0x4DEA7B: call    Actor_IsSneaking
+0x4DEA7B: call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.
 0x4DEA80: test    al, al
 0x4DEA82: jnz     loc_4DEB98; jumptable 004DE9B3 cases 19,20,22,25,27,31,33,34,38-40,43
 0x4DEA88: test    edi, edi
@@ -117,7 +117,7 @@
 0x4DEABF: pop     esi
 0x4DEAC0: retn
 0x4DEAC1: mov     ecx, esi
-0x4DEAC3: call    sub_4D74D0
+0x4DEAC3: call    TESObjectREFR_HasHorseCreatureBase; 0x4D74D0: Travel-horse target predicate decoded 2026-09-05: reference base pointer+0x1C must be nonnull; GetBaseForm virtual slot+0x170 yields typebyte0x24 CREA; creature byte+0x104 must equal4 (horse). XHRS resolver invokes this at0x426681 after target REFR cast. TESCS peer0x53F310 uses ref+0x28, vslot+0x19C, creature+0x138.
 0x4DEAC8: test    al, al
 0x4DEACA: jz      loc_4DEB8B; jumptable 004DE9B3 case 26
 0x4DEAD0: mov     edx, [esi]

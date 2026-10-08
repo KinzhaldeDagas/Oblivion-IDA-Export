@@ -1,4 +1,4 @@
-0x6C5FC0: sub     esp, 0Ch
+0x6C5FC0: sub     esp, 0Ch; NiControllerSequence time advance. Computes scaled time from input, last input +0x34, accumulated/scaled time +0x38, and frequency +0x28; wraps cycle type 0 or clamps other cycle types to start/end +0x2C/+0x30. When commit is true, stores +0x34, +0x38, and resulting local time +0x3C; otherwise returns the computed local time without mutation.
 0x6C5FC3: push    esi
 0x6C5FC4: mov     esi, ecx
 0x6C5FC6: fld     dword ptr [esi+38h]

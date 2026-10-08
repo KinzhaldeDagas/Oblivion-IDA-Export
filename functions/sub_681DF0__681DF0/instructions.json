@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x681E3D",
-    "line": "call    sub_6899C0",
+    "line": "call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,19 +169,19 @@
   },
   {
     "ea": "0x681E51",
-    "line": "mov     [esp+0E4h+var_B4], ecx",
+    "line": "mov     [esp+0E4h+start.x], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x681E55",
-    "line": "mov     [esp+0E4h+var_B0], edx",
+    "line": "mov     [esp+0E4h+start.y], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x681E59",
-    "line": "mov     [esp+0E4h+var_AC], eax",
+    "line": "mov     [esp+0E4h+start.z], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x681EC7",
-    "line": "call    sub_4E70B0",
+    "line": "call    DebugRender_GetOrCreateVertexColorProperty; Verified shared debug property getter/creator, used by PathGrid debug rendering and the registered TestSeenData/TestLocalMap visualization commands, plus other debug-geometry callers. Lazily constructs NiVertexColorProperty, sets its observed render flags, stores the refcounted global g_DebugRenderVertexColorProperty and returns it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x681ECF",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x681F1B",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -733,13 +733,13 @@
   },
   {
     "ea": "0x681F83",
-    "line": "lea     ecx, [ebx+0ACh]",
+    "line": "lea     ecx, [ebx+0ACh]; this",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x681F89",
-    "line": "call    sub_477EF0",
+    "line": "call    NiTObjectArray_ClearAndRelease; Clears a ref-counted NiT object-pointer array: releases every non-null element, nulls entries, and resets end/count words to zero. At bow release it is invoked on ArrowBone+0xAC, thereby releasing all ArrowBone children including the held Arrow:0 clone.",
     "mnemonic": "call",
     "size": 5
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x681FA1",
-    "line": "fld     [esp+0E4h+var_B0]",
+    "line": "fld     [esp+0E4h+start.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x681FAC",
-    "line": "fld     [esp+0E4h+var_AC]",
+    "line": "fld     [esp+0E4h+start.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -811,7 +811,7 @@
   },
   {
     "ea": "0x681FB7",
-    "line": "fld     [esp+0E4h+var_B4]",
+    "line": "fld     [esp+0E4h+start.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x681FD6",
-    "line": "call    sub_683CB0",
+    "line": "call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).",
     "mnemonic": "call",
     "size": 5
   },
@@ -889,7 +889,7 @@
   },
   {
     "ea": "0x681FE5",
-    "line": "fstp    [esp+0E8h+var_E8]; float",
+    "line": "fstp    [esp+0E8h+angleZ]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1117,7 +1117,7 @@
   },
   {
     "ea": "0x68206C",
-    "line": "call    sub_5E05F0",
+    "line": "call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1165,7 +1165,7 @@
   },
   {
     "ea": "0x682086",
-    "line": "call    sub_5E05F0",
+    "line": "call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1303,7 +1303,7 @@
   },
   {
     "ea": "0x6820CA",
-    "line": "fstp    [esp+0E8h+var_E8]; float",
+    "line": "fstp    [esp+0E8h+angleZ]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1783,13 +1783,13 @@
   },
   {
     "ea": "0x6821BC",
-    "line": "fstp    [esp+0E4h+var_C4]",
+    "line": "fstp    [esp+0E4h+end.x]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6821C0",
-    "line": "mov     eax, [esp+0E4h+var_C4]",
+    "line": "mov     eax, [esp+0E4h+end.x]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1801,25 +1801,25 @@
   },
   {
     "ea": "0x6821C8",
-    "line": "fst     [esp+0E4h+var_C0]",
+    "line": "fst     [esp+0E4h+end.y]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x6821CC",
-    "line": "mov     ecx, [esp+0E4h+var_C0]",
+    "line": "mov     ecx, [esp+0E4h+end.y]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6821D0",
-    "line": "fst     [esp+0E4h+var_BC]",
+    "line": "fst     [esp+0E4h+end.z]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x6821D4",
-    "line": "mov     edx, [esp+0E4h+var_BC]",
+    "line": "mov     edx, [esp+0E4h+end.z]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1879,25 +1879,25 @@
   },
   {
     "ea": "0x6821F6",
-    "line": "fst     [esp+0E4h+var_C4]",
+    "line": "fst     [esp+0E4h+end.x]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x6821FA",
-    "line": "mov     ecx, [esp+0E4h+var_C4]",
+    "line": "mov     ecx, [esp+0E4h+end.x]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6821FE",
-    "line": "fstp    [esp+0E4h+var_C0]",
+    "line": "fstp    [esp+0E4h+end.y]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x682202",
-    "line": "mov     edx, [esp+0E4h+var_C0]",
+    "line": "mov     edx, [esp+0E4h+end.y]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1909,13 +1909,13 @@
   },
   {
     "ea": "0x68220A",
-    "line": "fst     [esp+0E4h+var_BC]",
+    "line": "fst     [esp+0E4h+end.z]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x68220E",
-    "line": "mov     eax, [esp+0E4h+var_BC]",
+    "line": "mov     eax, [esp+0E4h+end.z]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2119,7 +2119,7 @@
   },
   {
     "ea": "0x68228D",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2167,7 +2167,7 @@
   },
   {
     "ea": "0x6822A3",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2263,7 +2263,7 @@
   },
   {
     "ea": "0x6822DD",
-    "line": "fstp    [esp+0F0h+var_E8]; float",
+    "line": "fstp    [esp+0F0h+angleZ]; angleZ",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2275,13 +2275,13 @@
   },
   {
     "ea": "0x6822E4",
-    "line": "lea     ecx, [esp+0E8h+var_30]",
+    "line": "lea     ecx, [esp+0E8h+var_30]; this",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x6822EB",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2395,7 +2395,7 @@
   },
   {
     "ea": "0x68232F",
-    "line": "mov     [esp+0E4h+var_B4], ecx",
+    "line": "mov     [esp+0E4h+start.x], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2407,7 +2407,7 @@
   },
   {
     "ea": "0x682336",
-    "line": "mov     [esp+0E4h+var_B0], edx",
+    "line": "mov     [esp+0E4h+start.y], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2425,13 +2425,13 @@
   },
   {
     "ea": "0x68233F",
-    "line": "mov     [esp+0E4h+var_AC], eax",
+    "line": "mov     [esp+0E4h+start.z], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x682343",
-    "line": "call    sub_5E0660",
+    "line": "call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2443,13 +2443,13 @@
   },
   {
     "ea": "0x68234E",
-    "line": "fadd    [esp+0E4h+var_AC]",
+    "line": "fadd    [esp+0E4h+start.z]",
     "mnemonic": "fadd",
     "size": 4
   },
   {
     "ea": "0x682352",
-    "line": "fstp    [esp+0E4h+var_AC]",
+    "line": "fstp    [esp+0E4h+start.z]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2473,7 +2473,7 @@
   },
   {
     "ea": "0x682360",
-    "line": "push    ecx",
+    "line": "push    ecx; endColor",
     "mnemonic": "push",
     "size": 1
   },
@@ -2485,7 +2485,7 @@
   },
   {
     "ea": "0x682365",
-    "line": "lea     edx, [esp+0E8h+var_C4]",
+    "line": "lea     edx, [esp+0E8h+end]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2497,7 +2497,7 @@
   },
   {
     "ea": "0x68236B",
-    "line": "push    edx",
+    "line": "push    edx; end",
     "mnemonic": "push",
     "size": 1
   },
@@ -2521,7 +2521,7 @@
   },
   {
     "ea": "0x68237E",
-    "line": "push    eax",
+    "line": "push    eax; startColor",
     "mnemonic": "push",
     "size": 1
   },
@@ -2533,31 +2533,31 @@
   },
   {
     "ea": "0x682383",
-    "line": "lea     ecx, [esp+0F0h+var_B4]",
+    "line": "lea     ecx, [esp+0F0h+start]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x682387",
-    "line": "fadd    [esp+0F0h+var_B4]",
+    "line": "fadd    [esp+0F0h+start.x]",
     "mnemonic": "fadd",
     "size": 4
   },
   {
     "ea": "0x68238B",
-    "line": "push    ecx",
+    "line": "push    ecx; start",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x68238C",
-    "line": "fstp    [esp+0F4h+var_C4]",
+    "line": "fstp    [esp+0F4h+end.x]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x682390",
-    "line": "fld     [esp+0F4h+var_B0]",
+    "line": "fld     [esp+0F4h+start.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2569,7 +2569,7 @@
   },
   {
     "ea": "0x682398",
-    "line": "fstp    [esp+0F4h+var_C0]",
+    "line": "fstp    [esp+0F4h+end.y]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2581,13 +2581,13 @@
   },
   {
     "ea": "0x6823A0",
-    "line": "fadd    [esp+0F4h+var_AC]",
+    "line": "fadd    [esp+0F4h+start.z]",
     "mnemonic": "fadd",
     "size": 4
   },
   {
     "ea": "0x6823A4",
-    "line": "fstp    [esp+0F4h+var_BC]",
+    "line": "fstp    [esp+0F4h+end.z]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2623,7 +2623,7 @@
   },
   {
     "ea": "0x6823BD",
-    "line": "call    sub_47F070",
+    "line": "call    NiLines_CreateSegment; Verified generic NiLines_CreateSegment: copies two endpoint positions and two per-vertex colors, supplies line flags [1,0], and returns a two-vertex NiLines segment. TESPathGrid_RebuildRenderedGraph calls it for adjacency edges.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2683,7 +2683,7 @@
   },
   {
     "ea": "0x6823D8",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2731,7 +2731,7 @@
   },
   {
     "ea": "0x6823EE",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2848,5 +2848,107 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C4C70",
+    "line": "mov     eax, [ebp-0D0h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C4C76",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C4C77",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4C7C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C4C7D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C4C7E",
+    "line": "mov     eax, [ebp-0D0h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C4C84",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C4C85",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4C8A",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C4C8B",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C4C8C",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C4C90",
+    "line": "lea     eax, [edx-0D4h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C4C96",
+    "line": "mov     ecx, [edx-0D8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C4C9C",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C4C9E",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4CA3",
+    "line": "mov     eax, offset stru_AED55C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4CA8",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

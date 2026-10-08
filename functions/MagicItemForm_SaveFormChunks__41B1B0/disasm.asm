@@ -24,7 +24,7 @@
 0x41B1E5: mov     ecx, esi
 0x41B1E7: call    edx
 0x41B1E9: push    eax; int
-0x41B1EA: call    TESForm_PutFormRecordChunkData
+0x41B1EA: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x41B1EF: add     esp, 0Ch
 0x41B1F2: lea     ecx, [edi+24h]
 0x41B1F5: call    EffectItemList_Save

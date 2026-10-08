@@ -14,7 +14,7 @@
 0x8A23F3: add     eax, edx
 0x8A23F5: mov     [eax-1], cl
 0x8A23F8: mov     ecx, eax
-0x8A23FA: call    sub_564B70
+0x8A23FA: call    OB_bhkTransformShapeCinfo_InitIdentity_010201A0; 2026-05-18 73000 consumer decode: initializes bhkTransformShape cinfo used for single sphere/box placement. Layout observed by 0x8A2160: +0x04 child hk shape pointer, +0x10 4x4 transform. Stock sets identity rotation and translation zero before 0x565510 writes translation at +0x40..+0x4C.
 0x8A23FF: cmp     dword ptr [esi+8], 0
 0x8A2403: mov     [esi+0Ch], eax
 0x8A2406: jz      short loc_8A2410

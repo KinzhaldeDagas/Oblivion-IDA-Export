@@ -15,7 +15,6 @@
 0x927CA8: jle     short loc_927CE9
 0x927CAA: push    edi
 0x927CAB: jmp     short loc_927CB0
-0x927CAD: align 10h
 0x927CB0: mov     eax, [esi+1Ch]
 0x927CB3: mov     ecx, [eax+ebx*4]
 0x927CB6: mov     edx, [ecx+0B0h]

@@ -1,18 +1,31 @@
 {
-  "callees_count": 13,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x7D2FF0",
+      "0x7D31A5"
+    ]
+  ],
+  "chunks_sha256": "52161d9a24c368ce1997ab6474d6092e8d2d914b1196113e1e3d5e0d31c6e05a",
+  "comment_regular": "Compute and cache the camera-relative full-list ranking value at ShadowSceneLight+0xD0.",
+  "comment_repeatable": "Compute and cache the camera-relative full-list ranking value at ShadowSceneLight+0xD0.\n\nMEF LARGE PERF 2026-09-08: PERF-6 scoring has real side effects: computes camera/radius/color-dependent float score and writes light+D0; optional sqrt/distance attenuation and float stores are part of behavior. Preserve special light call plus one call per list entry, order and floating-point rounding. Do not skip whole ranking routine, cache across cameras or substitute squared-distance math.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7D2FF0",
+  "display_name": "ShadowSceneLight_ComputeCameraRelativeScore",
   "end_ea": "0x7D31A5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7D2FF0",
+  "name": "ShadowSceneLight_ComputeCameraRelativeScore",
   "segment": ".text",
   "sha256": "52161d9a24c368ce1997ab6474d6092e8d2d914b1196113e1e3d5e0d31c6e05a",
   "size": 437,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7D2FF0",
+  "total_chunk_size": 437,
   "type": "double __thiscall(int this, float *)",
   "xrefs_from_count": 139,
   "xrefs_to_count": 2

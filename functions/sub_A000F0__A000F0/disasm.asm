@@ -6,6 +6,6 @@
 0xA00102: fadd    st, st
 0xA00104: fld1
 0xA00106: fdivrp  st(1), st
-0xA00108: fstp    flt_B3C204
+0xA00108: fstp    dword_B3C180+84h
 0xA0010E: pop     ecx
 0xA0010F: retn

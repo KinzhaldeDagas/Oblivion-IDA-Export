@@ -2,7 +2,7 @@
 0x6588C1: push    ebx
 0x6588C2: push    esi
 0x6588C3: mov     esi, ecx
-0x6588C5: mov     ecx, offset TimeGlobals
+0x6588C5: mov     ecx, 0B332E0h
 0x6588CA: call    TimeGlobals_GetGameHour
 0x6588CF: fstp    [esp+0Ch+var_4]
 0x6588D3: mov     ebx, [esp+0Ch+arg_4]
@@ -11,17 +11,17 @@
 0x6588DB: cmp     dword ptr [esi+8], 0
 0x6588DF: jz      short loc_6588F2
 0x6588E1: fld     [esp+0Ch+var_4]
-0x6588E5: call    Double_To_SInt32
+0x6588E5: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x6588EA: cmp     [esi+90h], eax
 0x6588F0: jz      short loc_658918
 0x6588F2: mov     eax, [esp+0Ch+arg_0]
 0x6588F6: push    ebx
 0x6588F7: push    eax
 0x6588F8: mov     ecx, esi
-0x6588FA: call    sub_649340
+0x6588FA: call    sub_649340; RadiantAI: package refresh/reselection bridge. If no current package, calls 0x648E40 to choose one; validates procedure row, checks duration/package flags, can end/reset packages, then calls 0x648E40 again for reselection.
 0x6588FF: fld     [esp+0Ch+var_4]
 0x658903: mov     bl, al
-0x658905: call    Double_To_SInt32
+0x658905: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x65890A: mov     [esi+90h], eax
 0x658910: pop     esi
 0x658911: mov     al, bl

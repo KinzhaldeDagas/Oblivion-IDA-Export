@@ -1,1 +1,1 @@
-SmallBlockChainStream_0
+typedef SmallBlockChainStream SmallBlockChainStream_0;

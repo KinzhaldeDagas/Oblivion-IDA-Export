@@ -1,1 +1,1 @@
-BSTR
+typedef OLECHAR *BSTR;

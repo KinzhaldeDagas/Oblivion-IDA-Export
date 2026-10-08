@@ -1,1 +1,1 @@
-GLint64
+typedef INT64 GLint64;

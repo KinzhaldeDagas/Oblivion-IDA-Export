@@ -11,10 +11,10 @@
 0x7488F6: mov     eax, [esi+0Ch]
 0x7488F9: add     eax, ecx
 0x7488FB: mov     ecx, [esp+8+Dst]
-0x7488FF: push    edi; Size
-0x748900: push    eax; Src
-0x748901: push    ecx; Dst
-0x748902: call    _memcpy
+0x7488FF: push    edi; byteCount
+0x748900: push    eax; source
+0x748901: push    ecx; destination
+0x748902: call    _memcpy;
 0x748907: add     [esi+10h], edi
 0x74890A: add     esp, 0Ch
 0x74890D: mov     eax, edi

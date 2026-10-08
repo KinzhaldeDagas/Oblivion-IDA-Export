@@ -30,9 +30,9 @@
 0x58BE1C: mov     eax, [eax]
 0x58BE1E: test    eax, eax
 0x58BE20: jz      short loc_58BE2E
-0x58BE22: push    ecx; Str2
-0x58BE23: push    eax; Str1
-0x58BE24: call    __strcmp
+0x58BE22: push    ecx; right
+0x58BE23: push    eax; left
+0x58BE24: call    CRT_StricmpLocaleDispatch
 0x58BE29: add     esp, 8
 0x58BE2C: jmp     short loc_58BE39
 0x58BE2E: xor     eax, eax
@@ -93,9 +93,9 @@
 0x58BEC0: jz      short loc_58BECF
 0x58BEC2: cmp     edi, edx
 0x58BEC4: jz      short loc_58BECF
-0x58BEC6: push    0
-0x58BEC8: mov     ecx, edi
-0x58BECA: call    DoActionEnumeration
+0x58BEC6: push    0; forceUpdate
+0x58BEC8: mov     ecx, edi; this
+0x58BECA: call    Tile__Value__CalculateValue; Verified: receiver is 0x1C-byte Tile::Value, NOT Tile. Reads owner at +0, numeric value +4, trait code +0x18, expression head pointer +0x10. Native SetFloat 0x58CA00 and dependency propagation 0x58BDD0 pass Value pointers. Fallout named analogue 0x8220BFF0. Local SDK Tile::DoActionEnumeration incorrectly passes Tile* to this address; plugin direct calls are invalid-receiver calls.
 0x58BECF: mov     esi, [esi+14h]
 0x58BED2: test    esi, esi
 0x58BED4: mov     edx, edi

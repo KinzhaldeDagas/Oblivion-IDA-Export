@@ -1,6 +1,6 @@
 0x674F70: push    ebx
 0x674F71: push    ebp
-0x674F72: mov     ebp, [esp+8+arg_0]
+0x674F72: mov     ebp, [esp+8+target]
 0x674F76: push    esi
 0x674F77: push    edi
 0x674F78: lea     edi, [ecx+28h]
@@ -20,10 +20,10 @@
 0x674F9C: jnz     short loc_674FB8
 0x674F9E: push    esi
 0x674F9F: call    BSSimpleList_Remove
-0x674FA4: mov     ecx, esi
-0x674FA6: call    sub_605E80
+0x674FA4: mov     ecx, esi; self
+0x674FA6: call    Crime_Destructor
 0x674FAB: push    esi
-0x674FAC: call    FormHeapFree
+0x674FAC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x674FB1: mov     ecx, [edi]
 0x674FB3: add     esp, 4
 0x674FB6: mov     eax, ecx

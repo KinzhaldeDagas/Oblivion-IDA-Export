@@ -5,11 +5,11 @@
 0x68BD48: mov     esi, ecx
 0x68BD4A: jz      short loc_68BD96
 0x68BD4C: push    ebx
-0x68BD4D: mov     ebx, [esp+0Ch+arg_4]
-0x68BD51: push    ebx
+0x68BD4D: mov     ebx, [esp+0Ch+other]
+0x68BD51: push    ebx; other
 0x68BD52: call    sub_68A160
-0x68BD57: mov     ecx, eax
-0x68BD59: call    sub_8AA390
+0x68BD57: mov     ecx, eax; this
+0x68BD59: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x68BD5E: test    al, al
 0x68BD60: jnz     short loc_68BD6F
 0x68BD62: mov     eax, [esi]

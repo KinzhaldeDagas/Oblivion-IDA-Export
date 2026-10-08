@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x67EDA0",
+      "0x67EDB6"
+    ]
+  ],
+  "chunks_sha256": "bccebbb2bb56cc42539ab3d189530ed393df0bdad7c4a89c57ec5ac21acc9c6b",
+  "comment_regular": "Verified resets graph-node scratch state: clears F/G/H at +0/+4/+8, predecessor at +0x0C, and masks flags at +0x10 with 0x68, preserving bits 0x08/0x20/0x40 while clearing the other transient bits.",
+  "comment_repeatable": "Verified resets graph-node scratch state: clears F/G/H at +0/+4/+8, predecessor at +0x0C, and masks flags at +0x10 with 0x68, preserving bits 0x08/0x20/0x40 while clearing the other transient bits.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_67EDA0",
+  "display_name": "GraphNode_ResetTransientSearchState",
   "end_ea": "0x67EDB6",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_67EDA0",
+  "name": "GraphNode_ResetTransientSearchState",
   "segment": ".text",
   "sha256": "bccebbb2bb56cc42539ab3d189530ed393df0bdad7c4a89c57ec5ac21acc9c6b",
   "size": 22,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x67EDA0",
-  "type": "void __thiscall(_BYTE *this)",
+  "total_chunk_size": 22,
+  "type": "void __thiscall(TESConnectedPoint *this)",
   "xrefs_from_count": 6,
   "xrefs_to_count": 2
 }

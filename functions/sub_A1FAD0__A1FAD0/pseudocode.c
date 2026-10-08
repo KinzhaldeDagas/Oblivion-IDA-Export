@@ -1,4 +1,4 @@
 void __cdecl sub_A1FAD0()
 {
-  GameSetting_destr((int *)&fPotionMortPestleMult);
+  GameSetting_destr((int *)&MEMORY[0xB37998][0x10]); /*0xa1fad5*/
 }

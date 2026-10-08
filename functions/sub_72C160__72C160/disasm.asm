@@ -114,7 +114,6 @@
 0x72C2A5: mov     [esp+28h+var_18], edi
 0x72C2A9: jbe     short loc_72C2C3
 0x72C2AB: jmp     short loc_72C2B0
-0x72C2AD: align 10h
 0x72C2B0: mov     ecx, [ebx+14h]
 0x72C2B3: mov     edx, [ecx+eax*4]
 0x72C2B6: mov     ecx, [edx+8]
@@ -186,7 +185,7 @@
 0x72C379: mov     edi, [esp+28h+var_18]
 0x72C37D: jb      loc_72C2E0
 0x72C383: push    edi
-0x72C384: call    FormHeapFree
+0x72C384: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x72C389: add     esp, 4
 0x72C38C: mov     ecx, [esp+28h+var_4]
 0x72C390: pop     edi

@@ -1,30 +1,31 @@
-void __thiscall sub_7A5B70(unsigned int *this)
+// SIdvLeafInfo destruction frees rocking/vertex/texcoord tables, then destroys and frees the typed compact leaf-texture vector.
+void __thiscall OB_SIdvLeafInfo_dtor_010201A0(OB_SIdvLeafInfo_010201A0 *this)
 {
   bool v2; // zf
-  signed int i; // edi
-  int v4; // eax
-  _DWORD *v5; // esi
+  int i; // edi
+  OB_SIdvLeafTexture_010201A0 *begin; // eax
+  OB_stVector_SIdvLeafTexture_010201A0 *p_leafTextures; // esi
 
-  FormHeapFree(*(this + 0x13));
-  v2 = *(this + 0x11) == 0;
-  *(this + 0x13) = 0;
-  if ( !v2 )
+  FormHeapFree((unsigned int)this->rockingTimeOffsets); /*0x7a5b79*/
+  v2 = this->leafVertexTables == 0; /*0x7a5b83*/
+  this->rockingTimeOffsets = 0; /*0x7a5b86*/
+  if ( !v2 ) /*0x7a5b89*/
   {
-    for ( i = 0; i < (int)*(this + 0xF); ++i )
-      FormHeapFree(*(_DWORD *)(*(this + 0x11) + 4 * i));
-    FormHeapFree(*(this + 0x11));
-    *(this + 0x11) = 0;
+    for ( i = 0; i < this->leafLodLevelCount; ++i ) /*0x7a5b91*/
+      FormHeapFree((unsigned int)this->leafVertexTables[i]); /*0x7a5b9a*/
+    FormHeapFree((unsigned int)this->leafVertexTables); /*0x7a5bae*/
+    this->leafVertexTables = 0; /*0x7a5bb6*/
   }
-  FormHeapFree(*(this + 0x12));
-  *(this + 0x12) = 0;
-  v4 = *(this + 5);
-  v5 = this + 4;
-  if ( v4 )
+  FormHeapFree((unsigned int)this->leafTexcoordTable); /*0x7a5bbe*/
+  this->leafTexcoordTable = 0; /*0x7a5bc3*/
+  begin = this->leafTextures.begin; /*0x7a5bc6*/
+  p_leafTextures = &this->leafTextures; /*0x7a5bc9*/
+  if ( begin ) /*0x7a5bd1*/
   {
-    sub_7A36B0(v4, v5[2]);
-    FormHeapFree(v5[1]);
+    OB_SIdvLeafTexture_DestroyRange_010201A0(begin, p_leafTextures->end); /*0x7a5bde*/
+    FormHeapFree((unsigned int)p_leafTextures->begin); /*0x7a5be7*/
   }
-  v5[1] = 0;
-  v5[2] = 0;
-  v5[3] = 0;
+  p_leafTextures->begin = 0; /*0x7a5bef*/
+  p_leafTextures->end = 0; /*0x7a5bf2*/
+  p_leafTextures->capacityEnd = 0; /*0x7a5bf5*/
 }

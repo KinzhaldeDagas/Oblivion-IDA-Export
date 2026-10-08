@@ -1,1 +1,1 @@
-GOFFSET
+typedef tagGOFFSET GOFFSET;

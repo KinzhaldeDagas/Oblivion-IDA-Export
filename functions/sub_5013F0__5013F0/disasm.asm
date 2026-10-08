@@ -4,7 +4,7 @@
 0x501401: mov     ds:0B3BDA0h, al
 0x501406: jz      short loc_501429
 0x501408: test    al, al
-0x50140A: mov     eax, offset aOn_0
+0x50140A: mov     eax, offset aOn_0; "On"
 0x50140F: jnz     short loc_501416
 0x501411: mov     eax, offset aOff
 0x501416: push    eax
@@ -14,7 +14,7 @@
 0x501426: add     esp, 8
 0x501429: test    al, al
 0x50142B: jnz     short loc_501437
-0x50142D: mov     ecx, offset ActorProcessManager_ptr
+0x50142D: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x501432: call    sub_675880
 0x501437: mov     al, 1
 0x501439: retn

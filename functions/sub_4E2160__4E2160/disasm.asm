@@ -6,11 +6,11 @@
 0x4E216C: push    ebx
 0x4E216D: push    esi
 0x4E216E: push    edi
-0x4E216F: call    sub_452A60
+0x4E216F: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x4E2174: mov     esi, eax
 0x4E2176: push    esi
 0x4E2177: mov     [esp+84h+var_24], esi
-0x4E217B: call    sub_4DC270
+0x4E217B: call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.
 0x4E2180: mov     ebx, eax
 0x4E2182: add     esp, 4
 0x4E2185: test    ebx, ebx
@@ -70,7 +70,7 @@
 0x4E2258: test    eax, eax
 0x4E225A: jnz     loc_4E23BB
 0x4E2260: mov     ecx, edi; this
-0x4E2262: call    TESObjectCELL_IsInterior
+0x4E2262: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x4E2267: test    al, al
 0x4E2269: jz      loc_4E2300
 0x4E226F: push    ebx; TESObjectREFR *
@@ -79,23 +79,23 @@
 0x4E2278: push    2
 0x4E227A: push    eax
 0x4E227B: mov     ecx, edi
-0x4E227D: call    sub_441800
+0x4E227D: call    sub_441800; ODismemberment authority: loaded cell effect child lookup by quadrant/index; hit particles use index 3 after sub_4C9BE0(ref).
 0x4E2282: test    eax, eax
 0x4E2284: jz      loc_4E249C
 0x4E228A: mov     ecx, [eax+20h]
 0x4E228D: mov     edx, [eax+24h]
-0x4E2290: mov     [esp+80h+var_10], ecx
+0x4E2290: mov     [esp+80h+var_10.x], ecx
 0x4E2294: mov     ecx, [eax+28h]
-0x4E2297: mov     [esp+80h+var_C], edx
+0x4E2297: mov     [esp+80h+var_10.y], edx
 0x4E229B: mov     edx, [eax+2Ch]
-0x4E229E: mov     [esp+80h+var_8], ecx
-0x4E22A2: push    offset Vector3_InitValue?
-0x4E22A7: lea     ecx, [esp+84h+var_10]
+0x4E229E: mov     [esp+80h+var_10.z], ecx
+0x4E22A2: push    offset g_zeroNiPoint3; other
+0x4E22A7: lea     ecx, [esp+84h+var_10]; this
 0x4E22AB: mov     [esp+84h+var_4], edx
-0x4E22B2: call    sub_8AA390
+0x4E22B2: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x4E22B7: test    al, al
 0x4E22B9: jz      loc_4E249C
-0x4E22BF: fld     [esp+80h+var_8]
+0x4E22BF: fld     [esp+80h+var_10.z]
 0x4E22C3: fld     st
 0x4E22C5: fsub    dword ptr [esi+90h]
 0x4E22CB: fld     [esp+80h+var_4]
@@ -205,7 +205,7 @@
 0x4E2419: push    ecx
 0x4E241A: mov     ecx, edi; this
 0x4E241C: fstp    [esp+88h+X]; a2
-0x4E241F: call    NiAVObject_UpdateNiAVObject
+0x4E241F: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x4E2424: mov     edi, [ebp+arg_0]
 0x4E2427: mov     ecx, [edi+10h]
 0x4E242A: test    ecx, ecx
@@ -314,18 +314,18 @@
 0x4E2565: call    sub_4DE1C0
 0x4E256A: add     esp, 4
 0x4E256D: lea     ecx, [ebx+44h]
-0x4E2570: call    sub_41E650
+0x4E2570: call    ExtraDataList_GetLight; Returns the REFR_LIGHT payload from ExtraLight type 0x30; heavily used by TESObjectREF lighting and equipped-light paths.
 0x4E2575: test    eax, eax
 0x4E2577: jz      short loc_4E2591
 0x4E2579: mov     eax, [eax]
 0x4E257B: test    eax, eax
 0x4E257D: jz      short loc_4E2591
-0x4E257F: push    eax
+0x4E257F: push    eax; backingLight
 0x4E2580: push    0
 0x4E2582: call    GetShadowSceneNode
 0x4E2587: add     esp, 4
-0x4E258A: mov     ecx, eax
-0x4E258C: call    sub_7C7DC0
+0x4E258A: mov     ecx, eax; self
+0x4E258C: call    ShadowSceneNode_RemoveFullLightBySource; Find a native full-list ShadowSceneLight whose backing NiLight identity equals the supplied source, then remove that entry.
 0x4E2591: mov     ecx, ds:0B333A0h
 0x4E2597: cmp     dword ptr [ecx+34h], 0
 0x4E259B: jnz     loc_4E2686

@@ -1,6 +1,6 @@
 bool __thiscall sub_74F160(float *this, float *a2)
 {
-  return sub_752CD0(this, (int)a2)
+  return sub_752CD0((NiTriBasedGeomData *)this, (int)a2) /*0x74f228*/
       && *(this + 6) == a2[6]
       && *(this + 7) == a2[7]
       && *(this + 8) == a2[8]

@@ -21,7 +21,7 @@
 0x60E7EA: call    Actor_GetActorBaseForm
 0x60E7EF: push    eax
 0x60E7F0: mov     ecx, edi
-0x60E7F2: call    sub_48BDA0
+0x60E7F2: call    sub_48BDA0; Sidecar NPC decode: deeper equippable-item selector carries actor/base interface context used by weapon rating paths. Wrapper must forward four stack args unchanged while pushing/popping owner context.
 0x60E7F7: mov     ebx, eax
 0x60E7F9: cmp     dword ptr [esi+58h], 0
 0x60E7FD: jz      short loc_60E814
@@ -62,8 +62,8 @@
 0x60E866: mov     edi, eax
 0x60E868: test    edi, edi
 0x60E86A: jz      short loc_60E894
-0x60E86C: mov     ecx, edi
-0x60E86E: call    TESHealthForm_GetHealth
+0x60E86C: mov     ecx, edi; this
+0x60E86E: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x60E873: test    eax, eax
 0x60E875: jge     short loc_60E879
 0x60E877: neg     eax
@@ -79,7 +79,7 @@
 0x60E88B: push    eax
 0x60E88C: push    ecx
 0x60E88D: mov     ecx, esi
-0x60E88F: call    Actor_EquipItem
+0x60E88F: call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.
 0x60E894: pop     edi
 0x60E895: pop     esi
 0x60E896: mov     eax, ebx

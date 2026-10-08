@@ -1,1 +1,5 @@
-_D3DLOCKED_RECT
+struct _D3DLOCKED_RECT
+{
+INT Pitch;
+void *pBits;
+};

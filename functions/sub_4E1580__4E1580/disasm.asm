@@ -21,7 +21,7 @@
 0x4E15C3: mov     edx, [eax+168h]
 0x4E15C9: mov     [esp+154h+var_134], ebx
 0x4E15CD: call    edx
-0x4E15CF: mov     ecx, offset TimeInfo
+0x4E15CF: mov     ecx, 0B33E90h
 0x4E15D4: mov     esi, eax
 0x4E15D6: call    OsGlobalsTime__UpdatetimeInfo
 0x4E15DB: mov     eax, [ebp+0]
@@ -31,12 +31,12 @@
 0x4E15E8: test    eax, eax
 0x4E15EA: jz      short loc_4E15F3
 0x4E15EC: mov     ecx, eax
-0x4E15EE: call    sub_4728C0
+0x4E15EE: call    ActorAnimData_ResetRootMotion; Resets ActorAnimData root-motion state: zeroes the cached accumulation vector at +0x18, restores the accumulation/root node transform fields, then finds the matching accumulation controllers and resets them. Used before sequence play and by full actor/animation reset paths.
 0x4E15F3: mov     eax, [ebp+1Ch]
 0x4E15F6: movzx   eax, byte ptr [eax+4]
 0x4E15FA: sub     eax, 23h ; '#'
 0x4E15FD: mov     ecx, [ebp+3Ch]
-0x4E1600: mov     [esp+154h+var_138], ecx
+0x4E1600: mov     [esp+154h+skeletonRoot], ecx
 0x4E1604: jz      loc_4E189F
 0x4E160A: sub     eax, 1
 0x4E160D: jnz     loc_4E18AF
@@ -50,8 +50,8 @@
 0x4E1630: call    eax
 0x4E1632: test    al, al
 0x4E1634: jz      short loc_4E165F
-0x4E1636: mov     ecx, ebp
-0x4E1638: call    sub_5E0380
+0x4E1636: mov     ecx, ebp; this
+0x4E1638: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x4E163D: test    eax, eax
 0x4E163F: jz      short loc_4E165F
 0x4E1641: mov     eax, [eax+1Ch]
@@ -87,14 +87,13 @@
 0x4E1695: mov     ecx, ebx
 0x4E1697: call    sub_51E240
 0x4E169C: lea     ecx, [ebx+0ECh]
-0x4E16A2: call    sub_6899C0
+0x4E16A2: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x4E16A7: mov     edi, eax
 0x4E16A9: test    edi, edi
 0x4E16AB: mov     [esp+154h+var_13C], edi
 0x4E16AF: jz      loc_4E189B
 0x4E16B5: jmp     short loc_4E16C4
 0x4E16B7: jmp     short loc_4E16C0
-0x4E16B9: align 10h
 0x4E16C0: mov     edi, [esp+154h+var_13C]
 0x4E16C4: cmp     dword ptr [edi+4], 0
 0x4E16C8: jnz     short loc_4E16D3
@@ -131,7 +130,7 @@
 0x4E1728: push    0
 0x4E172A: lea     edx, [esp+160h+Str]
 0x4E172E: push    edx
-0x4E172F: call    sub_439EB0
+0x4E172F: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
 0x4E1734: mov     esi, eax
 0x4E1736: test    esi, esi
 0x4E1738: jz      loc_4E188C
@@ -140,8 +139,8 @@
 0x4E1747: mov     ecx, ebp
 0x4E1749: call    edx
 0x4E174B: fstp    [esp+154h+var_140]
-0x4E174F: lea     ecx, [esp+154h+var_130]
-0x4E1753: call    sub_478B90
+0x4E174F: lea     ecx, [esp+154h+var_130]; this
+0x4E1753: call    OB_NiCloningProcess_ctor
 0x4E1758: fld     [esp+154h+var_140]
 0x4E175C: fst     [esp+154h+var_118]
 0x4E1760: fst     [esp+154h+var_11C]
@@ -172,7 +171,7 @@
 0x4E17B7: mov     esi, eax
 0x4E17B9: push    esi
 0x4E17BA: call    sub_471B80
-0x4E17BF: mov     edx, [esp+158h+var_138]
+0x4E17BF: mov     edx, [esp+158h+skeletonRoot]
 0x4E17C3: add     esp, 4
 0x4E17C6: push    offset aBip01; "Bip01"
 0x4E17CB: push    edx
@@ -201,21 +200,21 @@
 0x4E17FF: mov     ecx, edi
 0x4E1801: mov     eax, [edx+84h]
 0x4E1807: call    eax
-0x4E1809: mov     ecx, [esp+154h+var_138]
+0x4E1809: mov     ecx, [esp+154h+skeletonRoot]
 0x4E180D: push    0
 0x4E180F: push    esi
 0x4E1810: push    ecx
 0x4E1811: call    sub_478EC0
 0x4E1816: add     esp, 0Ch
 0x4E1819: jmp     short loc_4E1831
-0x4E181B: mov     edx, [esp+154h+var_138]
-0x4E181F: push    0
-0x4E1821: push    0FFFFFFFFh
-0x4E1823: push    0
-0x4E1825: push    0
-0x4E1827: push    esi
-0x4E1828: push    edx
-0x4E1829: call    sub_479140
+0x4E181B: mov     edx, [esp+154h+skeletonRoot]
+0x4E181F: push    0; unusedTrailing
+0x4E1821: push    0FFFFFFFFh; modelType
+0x4E1823: push    0; unusedContext
+0x4E1825: push    0; sourceModelRoot
+0x4E1827: push    esi; modelRoot
+0x4E1828: push    edx; skeletonRoot
+0x4E1829: call    AttachModelUsingPrnExtraData; Six-argument cdecl helper (all ten native callers push 6 arguments; unusedContext and unusedTrailing are not read). Reads NiStringExtraData 'Prn' from sourceModelRoot, falling back to modelRoot; resolves that exact parent in skeletonRoot and attaches modelRoot. For modelType==7 it forces Prn string byte 6 to 'L' for lookup, then writes it back to 'R'. It then finds exact-name 'Scb' inside modelRoot and attaches that object separately to the same parent, reparenting Scb as modelRoot's sibling before refreshing property/effect state. Missing creature parents invoke the narrow FadeNode-chain Scb removal. Every exit returns the bool result of sub_88D000(modelRoot,1,1), which is not proven to be general attachment success.
 0x4E182E: add     esp, 18h
 0x4E1831: mov     esi, [esp+154h+var_140]
 0x4E1835: test    esi, esi
@@ -267,7 +266,7 @@
 0x4E18BB: mov     ecx, ebp
 0x4E18BD: call    eax
 0x4E18BF: mov     bl, al
-0x4E18C1: mov     ecx, offset TimeInfo
+0x4E18C1: mov     ecx, 0B33E90h
 0x4E18C6: call    sub_47D0F0
 0x4E18CB: mov     al, bl
 0x4E18CD: mov     ecx, [esp+154h+var_C]
@@ -282,3 +281,18 @@
 0x4E18E9: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x4E18EE: add     esp, 140h
 0x4E18F4: retn
+0x9B5B80: lea     ecx, [ebp-130h]
+0x9B5B86: jmp     sub_4781A0
+0x9B5B8B: lea     ecx, [ebp-140h]; slot
+0x9B5B91: jmp     NiPointerSlot_Release
+0x9B5B96: mov     edx, [esp+arg_4]
+0x9B5B9A: lea     eax, [edx-144h]
+0x9B5BA0: mov     ecx, [edx-148h]
+0x9B5BA6: xor     ecx, eax
+0x9B5BA8: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B5BAD: add     eax, 10h
+0x9B5BB0: mov     ecx, [edx-4]
+0x9B5BB3: xor     ecx, eax
+0x9B5BB5: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B5BBA: mov     eax, offset stru_AE0B88
+0x9B5BBF: jmp     ___CxxFrameHandler3

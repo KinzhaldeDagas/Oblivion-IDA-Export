@@ -1,1 +1,1 @@
-RpcPacket
+typedef _RpcPacket RpcPacket;

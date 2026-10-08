@@ -10,4 +10,4 @@
 0x6A854B: mov     edx, [ecx+58h]
 0x6A854E: shr     edx, 1
 0x6A8550: test    dl, 1
-0x6A8553: jz      short ValueModifierEffect_ModifyAV___CalcEffectiveMagnitude
+0x6A8553: jz      short ValueModifierEffect_ModifyAV___CalcEffectiveMagnitude; OBMEFix 2026-06-01 verification: vanilla ValueModifierEffect negative damage clamp. If amount < 0 and actorValue is not Fatigue, engine reads current AV and clamps the amount so current+amount does not go below zero before the virtual DamageAV_F call at +0x2A4.

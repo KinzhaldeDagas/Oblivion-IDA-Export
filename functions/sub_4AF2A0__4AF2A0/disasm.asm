@@ -27,7 +27,7 @@
 0x4AF2E3: push    edi
 0x4AF2E4: mov     ecx, ebx
 0x4AF2E6: mov     [esi+1Ch], eax
-0x4AF2E9: call    TESFile_InitializeFormFromRecord
+0x4AF2E9: call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.
 0x4AF2EE: push    0; a2
 0x4AF2F0: mov     ecx, edi; this
 0x4AF2F2: call    TESForm_SetIsLinked
@@ -47,7 +47,7 @@
 0x4AF321: push    esi; Dst
 0x4AF322: push    ebx; a2
 0x4AF323: mov     ecx, edi; this
-0x4AF325: call    TESForm_LoadGenericComponents
+0x4AF325: call    TESForm_LoadGenericComponents; Generic fixed-prefix/component DATA overlay. Copies min(chunk_length,fixed_prefix_size), then updates later components only when their starting offset is below chunk_length; omitted suffix components retain prior in-memory values.
 0x4AF32A: jmp     short loc_4AF37E
 0x4AF32C: mov     eax, [ebx+254h]
 0x4AF332: call    __alloca?
@@ -56,7 +56,7 @@
 0x4AF33E: push    eax; Dst
 0x4AF33F: mov     ecx, ebx; a1
 0x4AF341: mov     [ebp+var_8], eax
-0x4AF344: call    TESFile_GetChunkData
+0x4AF344: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4AF349: mov     ecx, [ebp+var_8]
 0x4AF34C: mov     eax, [edi]
 0x4AF34E: mov     edx, [eax+0D8h]

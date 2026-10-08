@@ -1,9 +1,9 @@
-0x788AE0: mov     edx, [esp+arg_4]
+0x788AE0: mov     edx, [esp+count]; Oblivion collision-vector uninitialized fill-N primitive: constructs count trivial 28-byte records by copying the supplied value and returns one-past-last.
 0x788AE4: test    edx, edx
 0x788AE6: jbe     short locret_788B0F
-0x788AE8: mov     eax, [esp+arg_0]
+0x788AE8: mov     eax, [esp+destination]
 0x788AEC: push    ebx
-0x788AED: mov     ebx, [esp+4+arg_8]
+0x788AED: mov     ebx, [esp+4+value]
 0x788AF1: push    esi
 0x788AF2: push    edi
 0x788AF3: test    eax, eax

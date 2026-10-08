@@ -1,7 +1,7 @@
 0x9E95A0: fld1
 0x9E95A2: push    ecx
 0x9E95A3: fstp    [esp+4+var_4]; float
-0x9E95A6: mov     ecx, offset fKnockbackAgilBase
+0x9E95A6: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+2D0h)
 0x9E95AB: push    offset aFknockbackagil; "fKnockbackAgilBase"
 0x9E95B0: call    GameSetting_ConstrAndReg_float
 0x9E95B5: push    offset sub_A1E670; void (__cdecl *)()

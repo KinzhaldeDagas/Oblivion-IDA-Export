@@ -1,1 +1,1 @@
-service_start_info
+typedef service_start_info_t service_start_info;

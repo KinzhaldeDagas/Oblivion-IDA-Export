@@ -1,4 +1,4 @@
-0x4688B0: cmp     dword ptr [ecx+8], 0
+0x4688B0: cmp     dword ptr [ecx+8], 0; CustomAnimSupport decode: TESAnimation has-any helper; true when the embedded list is non-empty.
 0x4688B4: jnz     short loc_4688BF
 0x4688B6: cmp     dword ptr [ecx+4], 0
 0x4688BA: jnz     short loc_4688BF

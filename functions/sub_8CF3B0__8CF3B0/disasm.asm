@@ -1,4 +1,4 @@
-0x8CF3B0: push    ebp
+0x8CF3B0: push    ebp; TES4 authoritative: OnGround state update. Uses desired movement at proxy+0x290, calls shared velocity solver, applies ground/contact velocity projection, and compares current z against water height +0x318 for gravity correction.
 0x8CF3B1: mov     ebp, esp
 0x8CF3B3: and     esp, 0FFFFFFF0h
 0x8CF3B6: sub     esp, 0C8h
@@ -49,7 +49,7 @@
 0x8CF48E: fstp    [esp+0D8h+var_34]
 0x8CF495: fld     dword ptr ds:0A3F3D8h
 0x8CF49B: fstp    [esp+0D8h+var_30]
-0x8CF4A2: call    sub_91F430
+0x8CF4A2: call    bhkCharacterState_SolveVelocityToTarget; OnGround low-speed solver setup: response=1.0, basis slots use proxy+0x2C0/+0x2B0/+0x2B0, desired local velocity is swizzled from proxy+0x290, maxDelta=100000, reference=proxy+0x280.
 0x8CF4A7: add     esp, 8
 0x8CF4AA: jmp     loc_8CF683
 0x8CF4AF: movaps  xmm0, xmmword ptr [edi]
@@ -78,7 +78,7 @@
 0x8CF52A: fstp    [esp+0D8h+var_34]
 0x8CF531: fld     dword ptr ds:0A3F3D8h
 0x8CF537: fstp    [esp+0D8h+var_30]
-0x8CF53E: call    sub_91F430
+0x8CF53E: call    bhkCharacterState_SolveVelocityToTarget; MorrowindMovements: OnGround solver consumes desired vector from proxy+0x290 and writes solved velocity to proxy+0x2E0. Desired-vector scaling may need a post-solve cap because projection/reference velocity can preserve horizontal speed.
 0x8CF543: movaps  xmm1, xmmword ptr [esi+2B0h]
 0x8CF54A: movaps  xmm2, xmmword ptr [edi]
 0x8CF54D: movaps  xmm0, xmm1
@@ -127,17 +127,17 @@
 0x8CF5F5: mulps   xmm1, xmm0
 0x8CF5F8: push    edx
 0x8CF5F9: mov     ecx, esi
-0x8CF5FB: movaps  xmmword ptr [edi], xmm1
-0x8CF5FE: call    sub_891440
+0x8CF5FB: movaps  xmmword ptr [edi], xmm1; MorrowindMovements: final OnGround velocity in proxy+0x2E0 is multiplied by proxy+0x324 before water/gravity correction; post-state hook can cap horizontal solved velocity after this vanilla output exists.
+0x8CF5FE: call    bhkCharacterController_ReadRelativePosition; TES4 authoritative: reads current proxy position. Gets collision object transform at 0x8AC070, subtracts metadata/world transform basis offset, returns Havok-unit position.
 0x8CF603: movaps  xmm0, [esp+0D0h+var_A0]
 0x8CF608: shufps  xmm0, xmm0, 0AAh ; 'ª'
 0x8CF60C: movss   dword ptr [esp+0D0h+var_B0], xmm0
 0x8CF612: fld     dword ptr [esp+0D0h+var_B0]
-0x8CF616: fld     dword ptr [esi+318h]
+0x8CF616: fld     dword ptr [esi+318h]; OnGround state compares current position z against proxy+0x318 water height before applying gravity correction.
 0x8CF61C: fcompp
 0x8CF61E: fnstsw  ax
 0x8CF620: test    ah, 5
-0x8CF623: jp      short loc_8CF683
+0x8CF623: jp      short loc_8CF683; TES4 authoritative OnGround: position read is only compared against proxy+0x318 water height for gravity correction; not a ledge/clearance test.
 0x8CF625: mov     eax, [esi]
 0x8CF627: mov     edx, [eax+58h]
 0x8CF62A: mov     ecx, esi
@@ -169,7 +169,7 @@
 0x8CF683: cmp     dword ptr [esi+2A0h], 0Bh
 0x8CF68A: jz      short loc_8CF693
 0x8CF68C: mov     ecx, esi
-0x8CF68E: call    sub_890720
+0x8CF68E: call    sub_890720; MorrowindMovements: commits pending state at proxy+0x2A0 into hkCharacterContext state slot proxy+0x1EC, then resets pending state to sentinel 0x0B. Use +0x1EC as active state when +0x2A0 is sentinel.
 0x8CF693: mov     ecx, [esp+0D0h+var_4]
 0x8CF69A: pop     edi
 0x8CF69B: pop     esi

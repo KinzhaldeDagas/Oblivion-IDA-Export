@@ -1,19 +1,32 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x643810",
+      "0x64388E"
+    ]
+  ],
+  "chunks_sha256": "1bf884cbd033d4d9adf32b77dd59714ead73de70528222fa1641fca20e437420",
+  "comment_regular": "Probable lifecycle phase naming: vtable3FC=InitLoadGame,400=FinishInitLoadGame supported by neighboring save/load/revert roles and Fallout BaseProcess FinishInitLoadGame8265D168 exact actor/no-package/procedure==-1 test. Verified local behavior: 60D780 resolves deferred package and bounds procedure;643810 resolves follow/other references;60CF80 evaluates package for nonplayer actor with missing package and procedure==-1. RET12 proves three stack args. Full external phase scheduling remains Unknown.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 4,
-  "display_name": "LowProcess_LinkMagicData?",
+  "display_name": "LowProcess_InitLoadGame",
   "end_ea": "0x64388E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "LowProcess_LinkMagicData?",
+  "name": "LowProcess_InitLoadGame",
   "segment": ".text",
   "sha256": "1bf884cbd033d4d9adf32b77dd59714ead73de70528222fa1641fca20e437420",
   "size": 126,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x643810",
-  "type": "void *__thiscall(UInt32 *this, int, int, int)",
+  "total_chunk_size": 126,
+  "type": "void __thiscall(LowProcess *self, unsigned int changeMask, unsigned int currentFlags, MobileObject *owner)",
   "xrefs_from_count": 57,
   "xrefs_to_count": 3
 }

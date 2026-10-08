@@ -1,20 +1,14 @@
-void __userpurge sub_611B00(
-        _DWORD *this@<ecx>,
-        char a2@<bpl>,
-        double a3@<st2>,
-        double a4@<st1>,
-        double a5@<st0>,
-        int a6)
+void __thiscall sub_611B00(_DWORD *this, int a2)
 {
   unsigned int v7; // esi
 
-  v7 = *(this + 0x41);
-  if ( v7 )
+  v7 = *(this + 0x41); /*0x611b09*/
+  if ( v7 ) /*0x611b11*/
   {
-    if ( v7 == a6 )
-      return;
-    sub_47AB80((char *)*(this + 0x41), a2, a3, a4, a5);
-    FormHeapFree(v7);
+    if ( v7 == a2 ) /*0x611b15*/
+      return; /*0x611b15*/
+    sub_47AB80((ActorSkinInfo *)*(this + 0x41)); /*0x611b19*/
+    FormHeapFree(v7); /*0x611b1f*/
   }
-  *(this + 0x41) = a6;
+  *(this + 0x41) = a2; /*0x611b27*/
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x798300",
-    "line": "push    ebx",
+    "line": "push    ebx; Copies LOD 0's generated leaf-card vertex table into the persistent vertex-program billboard table; entryCount is returned in floats.",
     "mnemonic": "push",
     "size": 1
   },
@@ -121,25 +121,25 @@
   },
   {
     "ea": "0x798333",
-    "line": "push    esi; Size",
+    "line": "push    esi; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x798334",
-    "line": "push    edx; Src",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x798335",
-    "line": "push    ebx; Dst",
+    "line": "push    ebx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x798336",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x79833E",
-    "line": "mov     eax, [esp+18h+arg_0]",
+    "line": "mov     eax, [esp+18h+entryCount]",
     "mnemonic": "mov",
     "size": 4
   },

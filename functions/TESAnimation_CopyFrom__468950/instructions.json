@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x468950",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+arg_0]; CustomAnimSupport decode: TESAnimation copy; clears destination and re-adds source strings through normal deduping append.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x46898C",
-    "line": "call    TESAnimation_AddAnimation",
+    "line": "call    TESAnimation_AddAnimation; CustomAnimSupport decode: append KFFZ string if absent; heap-copies strlen+1 bytes.",
     "mnemonic": "call",
     "size": 5
   },

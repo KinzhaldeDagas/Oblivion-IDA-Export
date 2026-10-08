@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x6AAAB5",
-    "line": "mov     eax, [esp+4+arg_8]; jumptable 006AAAAE case 3",
+    "line": "mov     eax, [esp+4+destination]; jumptable 006AAAAE case 3",
     "mnemonic": "mov",
     "size": 4
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x6AAB22",
-    "line": "mov     ecx, [esi+30h]",
+    "line": "mov     ecx, [esi+30h]; self",
     "mnemonic": "mov",
     "size": 3
   },
@@ -307,31 +307,31 @@
   },
   {
     "ea": "0x6AAB32",
-    "line": "mov     edx, [esp+4+arg_C]",
+    "line": "mov     edx, [esp+4+byteCount]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6AAB36",
-    "line": "mov     eax, [esp+4+arg_8]",
+    "line": "mov     eax, [esp+4+destination]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6AAB3A",
-    "line": "push    edx",
+    "line": "push    edx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6AAB3B",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6AAB3C",
-    "line": "call    ReadFile??",
+    "line": "call    Archive_ReadBytes",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x6AAB48",
-    "line": "mov     ecx, [esp+4+arg_C]; jumptable 006AAAAE case 2",
+    "line": "mov     ecx, [esp+4+byteCount]; jumptable 006AAAAE case 2",
     "mnemonic": "mov",
     "size": 4
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x6AAB82",
-    "line": "mov     eax, [esp+0Ch+arg_8]",
+    "line": "mov     eax, [esp+0Ch+destination]",
     "mnemonic": "mov",
     "size": 4
   },

@@ -4,9 +4,9 @@ void __userpurge def_619DD6(char a1@<bl>, int a2@<ebp>, int a3@<edi>, int *a4@<e
   TESForm *ActorBaseForm; // eax
   double v8; // st7
   int v9; // eax
-  int *SafeFloatPointer; // eax
-  TESObjectREFR **v11; // eax
-  TESObjectREFR **v12; // esi
+  float *SafeFloatPointer; // eax
+  Actor **v11; // eax
+  Actor **v12; // esi
   int v13; // edi
   _DWORD *v14; // esi
   int v15; // eax
@@ -17,50 +17,50 @@ void __userpurge def_619DD6(char a1@<bl>, int a2@<ebp>, int a3@<edi>, int *a4@<e
   int Health; // [esp+1Ch] [ebp+4h]
   int v21; // [esp+1Ch] [ebp+4h]
 
-  if ( a1 || sub_615520(a2) >= a5 )
+  if ( a1 || CombatController_GetDesiredCombatDistance((void *)a2) >= (double)a5 ) /*0x619e4a*/
   {
-    v19 = *(float *)(a3 + 0xC);
-    ActorBaseForm = Actor_GetActorBaseForm(*(Actor **)(a2 + 0x3C), 0);
-    Health = TESActorBase_GetHealth(ActorBaseForm);
-    v18 = (float)Health;
-    v17 = (float)(*(int (__thiscall **)(int *))(*a4 + 0x284))(a4);
-    BaseCalcAVf = Actor_GetBaseCalcAVf(a4, a1, a3, (int)a4, 8);
-    v8 = sub_547910(BaseCalcAVf, v17, COERCE_FLOAT(8), v18, v19);
-    v9 = Double_To_SInt32(v8);
-    *(_DWORD *)(a3 + 4) = v9;
-    if ( (_BYTE)Health )
+    v19 = *(float *)(a3 + 0xC); /*0x619e69*/
+    ActorBaseForm = Actor_GetActorBaseForm(*(Actor **)(a2 + 0x3C), 0); /*0x619e6e*/
+    Health = TESActorBase_GetHealth(ActorBaseForm); /*0x619e7a*/
+    v18 = (float)Health; /*0x619e8b*/
+    v17 = (float)(*(int (__thiscall **)(int *))(*a4 + 0x284))(a4); /*0x619e9f*/
+    BaseCalcAVf = Actor_GetBaseCalcAVf(a4, a1, a3, (int)a4, 8); /*0x619eaa*/
+    v8 = sub_547910(BaseCalcAVf, v17, COERCE_FLOAT(8), v18, v19); /*0x619ead*/
+    v9 = Double_To_SInt32(v8); /*0x619eb5*/
+    *(_DWORD *)(a3 + 4) = v9; /*0x619ebf*/
+    if ( (_BYTE)Health ) /*0x619ec2*/
     {
-      *(_BYTE *)(a3 + 8) = 0;
-      v21 = v9;
-      SafeFloatPointer = GameSetting_GetSafeFloatPointer((int *)&unk_B372C0);
-      *(_DWORD *)(a3 + 4) = Double_To_SInt32((double)v21 * *(float *)SafeFloatPointer);
+      *(_BYTE *)(a3 + 8) = 0; /*0x619ec9*/
+      v21 = v9; /*0x619ecd*/
+      SafeFloatPointer = GameSetting_GetSafeFloatPointer(unk_B372C0); /*0x619ed1*/
+      *(_DWORD *)(a3 + 4) = Double_To_SInt32((double)v21 * *SafeFloatPointer); /*0x619ee1*/
     }
   }
   else
   {
-    *(_DWORD *)(a3 + 4) = 0xFFFFFFFF;
+    *(_DWORD *)(a3 + 4) = 0xFFFFFFFF; /*0x619e4c*/
   }
-  if ( (int *)sub_6135F0(a2) == a4 )
+  if ( (int *)CombatController_GetCurrentTarget(a2) == a4 ) /*0x619eed*/
   {
-    v11 = sub_6758E0((int)a4, 0xC, 1);
-    v12 = v11;
-    if ( v11 )
+    v11 = sub_6758E0((ActorProcessManager *)&qword_B3BB2C[0x75], (TESObjectREFR *)a4, 0xC, 1); /*0x619ef9*/
+    v12 = v11; /*0x619efe*/
+    if ( v11 ) /*0x619f02*/
     {
-      v13 = BSSimpleList_Count(v11);
-      BSSimpleList_Clear(v12);
-      FormHeapFree((unsigned int)v12);
-      if ( v13 > 2 )
+      v13 = BSSimpleList_Count(v11); /*0x619f0d*/
+      BSSimpleList_Clear(v12); /*0x619f0f*/
+      FormHeapFree((unsigned int)v12); /*0x619f15*/
+      if ( v13 > 2 ) /*0x619f20*/
       {
-        v14 = *(_DWORD **)(a2 + 0x40);
-        if ( (unsigned int)BSSimpleList_Count(v14) > 1 )
+        v14 = *(_DWORD **)(a2 + 0x40); /*0x619f22*/
+        if ( (unsigned int)BSSimpleList_Count(v14) > 1 ) /*0x619f2f*/
         {
-          v15 = v14[1];
-          if ( (double)*(int *)(*(_DWORD *)v15 + 4) != flt_A30634 )
-            *(_DWORD *)(*(_DWORD *)v15 + 4) += dword_B36C70;
+          v15 = v14[1]; /*0x619f31*/
+          if ( (double)*(int *)(*(_DWORD *)v15 + 4) != kTerrainLODQuadRayDirectionZ ) /*0x619f4c*/
+            *(_DWORD *)(*(_DWORD *)v15 + 4) += stru_B36C70.value; /*0x619f55*/
         }
       }
     }
   }
-  if ( a7 )
-    sub_619C90((_DWORD *)a2);
+  if ( a7 ) /*0x619f74*/
+    CombatController_UpdateTargetRetentionAndSort((_DWORD *)a2); /*0x619f78*/
 }

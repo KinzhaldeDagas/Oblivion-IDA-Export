@@ -1,1 +1,1 @@
-ScriptShapeData
+typedef ScriptShapeDataTag ScriptShapeData;

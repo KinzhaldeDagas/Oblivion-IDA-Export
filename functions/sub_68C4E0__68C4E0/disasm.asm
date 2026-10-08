@@ -31,7 +31,6 @@
 0x68C535: mov     ebp, esi
 0x68C537: mov     bl, byte ptr [esp+24h+arg_8]
 0x68C53B: jmp     short loc_68C540
-0x68C53D: align 10h
 0x68C540: push    14h; Size
 0x68C542: call    FormHeapAlloc
 0x68C547: add     esp, 4
@@ -43,9 +42,9 @@
 0x68C558: mov     ecx, eax
 0x68C55A: call    sub_68CB30
 0x68C55F: mov     esi, eax
-0x68C561: mov     ecx, edi
+0x68C561: mov     ecx, edi; this
 0x68C563: mov     [esp+24h+var_4], 0FFFFFFFFh
-0x68C56B: call    sub_4BEF40
+0x68C56B: call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.
 0x68C570: push    eax
 0x68C571: mov     ecx, esi
 0x68C573: call    TeleportData__SetTeleportPosition
@@ -54,18 +53,18 @@
 0x68C57C: call    sub_68CA30
 0x68C581: test    bl, bl
 0x68C583: jnz     short loc_68C594
-0x68C585: mov     ecx, edi
-0x68C587: call    sub_4E8040
+0x68C585: mov     ecx, edi; this
+0x68C587: call    PathGraphNode_IsPreferred; Verified preferred-node predicate: reads the least-significant bit of the Z float at graph-node+0x1C. The registered fPathPreferredPointBonus setting applies a bonus to this marked point for non-creature actors.
 0x68C58C: mov     ecx, esi
 0x68C58E: push    eax
 0x68C58F: call    sub_68CA60
-0x68C594: mov     ecx, edi
-0x68C596: call    sub_67ECF0
+0x68C594: mov     ecx, edi; this
+0x68C596: call    GraphNode_IsBelowWaterFlagSet; Verified returns stateFlags bit 0x08, the PathGrid loader's below-water point flag.
 0x68C59B: mov     ecx, esi
 0x68C59D: push    eax
 0x68C59E: call    sub_68CA90
-0x68C5A3: mov     ecx, edi
-0x68C5A5: call    sub_67ED20
+0x68C5A3: mov     ecx, edi; this
+0x68C5A5: call    PathGraphNode_IsUnderwaterCacheSet; Verified returns stateFlags bit 0x10, used as an actor-specific cached underwater result.
 0x68C5AA: mov     ecx, esi
 0x68C5AC: push    eax
 0x68C5AD: call    sub_68CAC0
@@ -102,3 +101,15 @@
 0x68C606: pop     ebx
 0x68C607: add     esp, 10h
 0x68C60A: retn    0Ch
+0x9C53C0: mov     eax, [ebp+0Ch]
+0x9C53C3: push    eax
+0x9C53C4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C53C9: pop     ecx
+0x9C53CA: retn
+0x9C53CB: mov     edx, [esp+arg_4]
+0x9C53CF: lea     eax, [edx-14h]
+0x9C53D2: mov     ecx, [edx-18h]
+0x9C53D5: xor     ecx, eax
+0x9C53D7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C53DC: mov     eax, offset stru_AEDBA8
+0x9C53E1: jmp     ___CxxFrameHandler3

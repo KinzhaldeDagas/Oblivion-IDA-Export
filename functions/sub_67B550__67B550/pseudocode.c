@@ -1,4 +1,4 @@
-__int16 __thiscall sub_67B550(_DWORD *this)
+__int16 __thiscall sub_67B550(TESPackage *this)
 {
-  return sub_567D20(this) + 0x14;
+  return TESPackage_GetSaveSize(this) + 0x14; /*0x67b559*/
 }

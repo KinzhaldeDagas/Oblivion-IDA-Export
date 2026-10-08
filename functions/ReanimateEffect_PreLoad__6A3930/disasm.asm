@@ -3,7 +3,7 @@
 0x6A3932: mov     edi, [esp+8+arg_0]
 0x6A3936: push    edi
 0x6A3937: mov     esi, ecx
-0x6A3939: call    nullsub_returnvVoid_1arg
+0x6A3939: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x6A393E: cmp     dword ptr [esi+3Ch], 32h ; '2'
 0x6A3942: jge     short loc_6A3975
 0x6A3944: test    edi, edi

@@ -15,7 +15,6 @@
 0x537D64: test    ebp, ebp
 0x537D66: jle     short loc_537DDF
 0x537D68: jmp     short loc_537D70
-0x537D6A: align 10h
 0x537D70: mov     eax, ds:0B333A0h
 0x537D75: fld     dword ptr ds:0A3B888h
 0x537D7B: mov     ecx, [eax+8]

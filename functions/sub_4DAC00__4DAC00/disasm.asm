@@ -14,7 +14,7 @@
 0x4DAC1F: call    eax
 0x4DAC21: test    eax, eax
 0x4DAC23: jz      short loc_4DAC38
-0x4DAC25: cmp     eax, offset unk_B365AC
+0x4DAC25: cmp     eax, offset stru_B365AC
 0x4DAC2A: jz      short loc_4DAC35
 0x4DAC2C: mov     eax, [eax+4]
 0x4DAC2F: test    eax, eax
@@ -22,7 +22,7 @@
 0x4DAC33: jmp     short loc_4DAC38
 0x4DAC35: or      byte ptr [edi], 8
 0x4DAC38: mov     ecx, ebp
-0x4DAC3A: call    sub_452A60
+0x4DAC3A: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x4DAC3F: cmp     ebp, [edi+10h]
 0x4DAC42: mov     ebx, eax
 0x4DAC44: jz      short loc_4DAC65
@@ -51,7 +51,7 @@
 0x4DAC81: call    edx
 0x4DAC83: test    eax, eax
 0x4DAC85: jz      short loc_4DAC95
-0x4DAC87: cmp     eax, offset dword_B35288
+0x4DAC87: cmp     eax, 0B35288h
 0x4DAC8C: jz      short loc_4DACE0
 0x4DAC8E: mov     eax, [eax+4]
 0x4DAC91: test    eax, eax
@@ -60,7 +60,7 @@
 0x4DAC98: test    eax, eax
 0x4DAC9A: jz      short loc_4DACE0
 0x4DAC9C: push    eax
-0x4DAC9D: push    offset dword_BA7D84
+0x4DAC9D: push    offset stru_BA7D84
 0x4DACA2: call    NiRTTI_Cast
 0x4DACA7: add     esp, 8
 0x4DACAA: test    eax, eax

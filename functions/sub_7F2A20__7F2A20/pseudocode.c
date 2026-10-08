@@ -1,4 +1,4 @@
-char *sub_7F2A20()
+NiRTTI *sub_7F2A20()
 {
-  return dword_B468EC;
+  return &stru_B468EC; /*0x7f2a25*/
 }

@@ -61,13 +61,13 @@
   },
   {
     "ea": "0x4EA68B",
-    "line": "mov     eax, [esp+8+arg_4]",
+    "line": "mov     eax, dword ptr [esp+8+createIfMissing]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4EA68F",
-    "line": "push    eax",
+    "line": "push    eax; createIfMissing",
     "mnemonic": "push",
     "size": 1
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x4EA69B",
-    "line": "fstp    [esp+14h+var_14]; double",
+    "line": "fstp    qword ptr [esp+14h+var_14]; double",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x4EA6AE",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x4EA6B7",
-    "line": "push    eax",
+    "line": "push    eax; quadY",
     "mnemonic": "push",
     "size": 1
   },
@@ -175,25 +175,25 @@
   },
   {
     "ea": "0x4EA6CE",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4EA6D3",
-    "line": "push    eax",
+    "line": "push    eax; quadX",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4EA6D4",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4EA6D6",
-    "line": "call    sub_4EA580",
+    "line": "call    TESWorldSpaceTerrainLODQuadMap_GetOrCreateRoot; Verified quad-root lookup/creation: accepts signed 16-bit quadX/quadY, packs them as (quadX << 16) | uint16(quadY), and optionally allocates/inserts a TESTerrainLODQuadRoot containing quad data, owner map, and coordinates.",
     "mnemonic": "call",
     "size": 5
   },

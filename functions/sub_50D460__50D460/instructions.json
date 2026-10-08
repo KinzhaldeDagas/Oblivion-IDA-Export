@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x50D490",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x50D4AA",
-    "line": "mov     [eax+5A9h], dl",
+    "line": "mov     [eax+5A9h], dl; EnableFastTravel script command writes PlayerCharacter+0x5A9 (BYTE1 unk5A8). PlayerCharacter_CanStartFastTravel requires this byte nonzero.",
     "mnemonic": "mov",
     "size": 6
   },

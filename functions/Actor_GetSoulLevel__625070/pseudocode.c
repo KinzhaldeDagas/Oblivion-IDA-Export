@@ -1,4 +1,4 @@
 UInt32 __thiscall Actor::GetSoulLevel(Actor *this)
 {
-  return this->members.super.process->GetSoulLevelAndCache(this->members.super.process, this);
+  return this->members.super.process->GetSoulLevelAndCache(this->members.super.process, this); /*0x625080*/
 }

@@ -1,1 +1,1 @@
-NiTriStrips
+struct NiTriStrips;

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x680790",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+space]; Verified endpoint filter: rejects references with deleted bit 0x20; disabled bit 0x800 is rejected unless the verified allow-disabled-doors policy is set. The independent CalcLowPathToPoint diagnostic names 0x800 '-Disabled'.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x6807BC",
-    "line": "call    sub_67F0E0",
+    "line": "call    TravelPath_GetAllowDisabledDoors; Verified: reads policy byte 2 at qword_B3BB2C[0xBA]. TravelPathSpaceDoorLink_IsEligibleInSpace permits references with the disabled bit (0x800) when this flag is true.",
     "mnemonic": "call",
     "size": 5
   },

@@ -4,9 +4,9 @@
 0x61FEF5: call    sub_6150E0
 0x61FEFA: test    al, al
 0x61FEFC: jnz     short loc_61FF3A
-0x61FEFE: mov     ecx, esi
+0x61FEFE: mov     ecx, esi; this
 0x61FF00: mov     byte ptr [esi+17Fh], 1
-0x61FF07: call    sub_61C6E0
+0x61FF07: call    ActorMovement_BuildPathGridWaypointList; Verified actor movement path helper called by CombatController_UpdateMovementAndReachability and other movement callers. Finds a reachable PathGrid node near the actor, checks distance and line of sight, collects enabled linked-point positions into the actor's waypoint list, then updates the movement path. Owner class layout remains Unknown.
 0x61FF0C: test    al, al
 0x61FF0E: jnz     short loc_61FF3A
 0x61FF10: push    0Fh

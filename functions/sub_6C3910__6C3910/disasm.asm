@@ -23,5 +23,5 @@
 0x6C394E: push    0
 0x6C3950: push    0
 0x6C3952: push    0
-0x6C3954: call    sub_6E1F60
+0x6C3954: call    NiTransformData_SetScaleKeys; Oblivion NiTransformData scale-key ownership setter. Destroys previous keys +0x28 through the destructor table indexed by type +0x18, then installs count +0x0C, pointer +0x28, type +0x18, and table-derived stride +0x1E. Null pointer or zero count clears the channel fields.
 0x6C3959: retn    4

@@ -1,19 +1,32 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4D8050",
+      "0x4D80B4"
+    ]
+  ],
+  "chunks_sha256": "b1494602e04136ea6fe895f5caa72c0456588cd164f48b98ab4bb74f516b54ed",
+  "comment_regular": "For a TESObjectREFR whose base form is TESObjectLIGH, update both ordinary extra-light type 0x30 and spell-effect extra-light type 0x49 payloads from the same base LIGH data. The actor-owned transient LGHT payload uses the same type 0x49 storage but its parent base form is not TESObjectLIGH.",
+  "comment_repeatable": "For a TESObjectREFR whose base form is TESObjectLIGH, update both ordinary ExtraLight type 0x30 and spell-effect ExtraLight type 0x49 payloads through the same native source-light state routine. Both calls pass optionalContext=null. Actor-owned transient spell-effect lights may share type 0x49 storage but are not converted into static caster admission.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "TESObjectREF_UpdateLights",
+  "display_name": "TESObjectREFR_UpdateAttachedLightPayloads",
   "end_ea": "0x4D80B4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "TESObjectREF_UpdateLights",
+  "name": "TESObjectREFR_UpdateAttachedLightPayloads",
   "segment": ".text",
   "sha256": "b1494602e04136ea6fe895f5caa72c0456588cd164f48b98ab4bb74f516b54ed",
   "size": 100,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4D8050",
-  "type": "char __thiscall(TESChildCELL *this)",
+  "total_chunk_size": 100,
+  "type": "char __thiscall(TESObjectREFR *self)",
   "xrefs_from_count": 52,
   "xrefs_to_count": 8
 }

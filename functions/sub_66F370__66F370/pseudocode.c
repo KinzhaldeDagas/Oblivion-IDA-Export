@@ -1,11 +1,11 @@
-void __userpurge sub_66F370(
-        double a1@<st7>,
-        double a2@<st4>,
-        double a3@<st3>,
-        double a4@<st2>,
-        double a5@<st1>,
-        double a6@<st6>,
-        double a7@<st0>,
+void __userpurge PlayerCharacter_RelocateToFastTravelTarget(
+        double a1@<st4>,
+        double a2@<st3>,
+        double a3@<st2>,
+        double a4@<st1>,
+        double a5@<st6>,
+        double a6@<st0>,
+        double a7@<st5>,
         void (__thiscall *a8)(NiAVObject *this, NiMatrix33 *Mat, NiPoint3 *Trn, bool OnLeft),
         NiAVObject *(__thiscall *a9)(NiAVObject *this, const char *Name),
         void *(__thiscall *a10)(NiAVObject *this),
@@ -17,29 +17,35 @@ void __userpurge sub_66F370(
 {
   TESForm *CellAtCellCoord; // eax
 
-  if ( a14 )
+  if ( a14 ) /*0x66f379*/
   {
-    if ( dword_B35B90 )
-      sub_4BE5A0((_DWORD *)dword_B35B90);
-    if ( dword_B35B8C )
-      sub_4BD980((_DWORD *)dword_B35B8C);
-    CellAtCellCoord = (TESForm *)TESWorldSpace::GetCellAtCellCoord(
+    if ( unk_B35B90 ) /*0x66f37f*/
+      sub_4BE5A0((_DWORD *)unk_B35B90); /*0x66f389*/
+    if ( g_DistantLODLoaderTasksByCell ) /*0x66f38e*/
+      sub_4BD980((_DWORD *)g_DistantLODLoaderTasksByCell); /*0x66f398*/
+    CellAtCellCoord = (TESForm *)TESWorldSpace::GetCellAtCellCoord( /*0x66f3bf*/
                                    a14,
                                    (int)*(float *)&a8 >> 0xC,
                                    (int)*(float *)&a9 >> 0xC);
-    if ( CellAtCellCoord
-      || (CellAtCellCoord = sub_4F1630(a14, a4, a5, a7, (int)*(float *)&a8 >> 0xC, (int)*(float *)&a9 >> 0xC)) != 0 )
+    if ( CellAtCellCoord /*0x66f3d3*/
+      || (CellAtCellCoord = TESWorldSpace_LoadExteriorCellAtCoord(
+                              a14,
+                              a3,
+                              a4,
+                              a6,
+                              (int)*(float *)&a8 >> 0xC,
+                              (int)*(float *)&a9 >> 0xC)) != 0 )// Exterior cell coordinate conversion uses signed arithmetic shift by 12 after float-to-int, so cell size is 4096 world units and negative coordinates round via signed integer conversion then SAR.
     {
-      sub_66EAF0(
-        (TESObjectREFR *)TESDataHandler_g_PlayerRef,
-        a7,
+      PlayerCharacter_ChangeCellAndPosition( /*0x66f413*/
+        (TESObjectREFR *)reference,
+        a6,
+        a2,
         a3,
         a4,
-        a5,
-        a1,
-        a2,
-        a6,
         *(float *)&a9,
+        a1,
+        a5,
+        a7,
         a8,
         a9,
         a10,

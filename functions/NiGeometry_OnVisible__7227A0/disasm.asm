@@ -1,4 +1,4 @@
-0x7227A0: push    ecx; a2
+0x7227A0: push    ecx; Culling.dll audit 2026-06-05: NiGeometry::OnVisible returns NiCullingProcess::OnVisible result; hooks must preserve EAX even though vanilla 0x70DFB0 ignores it.
 0x7227A1: mov     ecx, [esp+4+arg_0]; this
-0x7227A5: call    NiCullingProcess__OnVisible
+0x7227A5: call    NiCullingProcess__OnVisible; CULLING code correction 2026-09-27: verified E8 F6 B9 FE FF to 0x70E1A0. Prior push ECX supplies geometry; mov ECX,[ESP+8] supplies process. Thiscall target consumes one stack argument (RET 4) and returns opaque EAX; a fastcall adapter may use unused EDX and must preserve this stack/EAX behavior. Entry observer is after the known geometry guard, not final GPU observation.
 0x7227AA: retn    4

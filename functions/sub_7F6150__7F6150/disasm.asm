@@ -1,4 +1,4 @@
-0x7F6150: movzx   eax, [esp+arg_4]
+0x7F6150: movzx   eax, word ptr [esp+arg_4]
 0x7F6155: cmp     eax, 168h
 0x7F615A: jg      short loc_7F61C9
 0x7F615C: jz      short loc_7F61AA

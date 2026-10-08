@@ -18,11 +18,11 @@
 0x699E3E: jz      short loc_699E96
 0x699E40: mov     edx, [esi]
 0x699E42: mov     eax, [edx+30h]
-0x699E45: push    0
+0x699E45: push    0; effectIndex
 0x699E47: mov     ecx, esi
 0x699E49: call    eax
-0x699E4B: mov     ecx, eax
-0x699E4D: call    MagicItem_GetFXEffect
+0x699E4B: mov     ecx, eax; magicItem
+0x699E4D: call    MagicItem_GetFXEffect; Verified (Oblivion): MagicItem_GetFXEffect returns the effect's EffectSetting pointer; MagicShaderHitEffect constructors/PostLink dereference its +0x78 EffectSetting::effectShader field.
 0x699E52: test    eax, eax
 0x699E54: jz      short loc_699E96
 0x699E56: movzx   ecx, word ptr [eax+20h]

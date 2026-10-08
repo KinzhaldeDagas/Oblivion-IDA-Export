@@ -1,19 +1,20 @@
-int __thiscall sub_4B3400(int *this, int a3)
+// Verified: replaces global TESTextureList cache value keyed by this form's FormID; clears/frees prior value before storing new parsed list.
+int __thiscall TESObjectTREE_ReplaceTextureHashCache(TESObjectTREE *this, TESTextureList *newList)
 {
   int v3; // eax
-  _DWORD *v4; // edi
-  _DWORD *v6; // [esp+4h] [ebp-4h] BYREF
+  TESTextureList *v4; // edi
+  TESTextureList *v6; // [esp+4h] [ebp-4h] BYREF
 
-  v3 = *(this + 3);
-  v6 = 0;
-  if ( NiTMap_GetAt(&off_B08310, v3, &v6) )
+  v3 = *((_DWORD *)this + 3); /*0x4b3404*/
+  v6 = 0; /*0x4b3412*/
+  if ( NiTMap_GetAt(&g_TESObjectTREETextureHashCache, v3, &v6) ) /*0x4b341a*/
   {
-    v4 = v6;
-    if ( v6 )
+    v4 = v6; /*0x4b3424*/
+    if ( v6 ) /*0x4b342a*/
     {
-      sub_46D450(v6);
-      FormHeapFree((unsigned int)v4);
+      TESTextureList_Clear(v6); /*0x4b342e*/
+      FormHeapFree((unsigned int)v4); /*0x4b3434*/
     }
   }
-  return NiTMap_SetAt(&off_B08310, *(this + 3), a3);
+  return NiTMap_SetAt(&g_TESObjectTREETextureHashCache, *((_DWORD *)this + 3), (int)newList); /*0x4b3450*/
 }

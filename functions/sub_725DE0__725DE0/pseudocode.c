@@ -1,76 +1,74 @@
-_DWORD *__thiscall sub_725DE0(_DWORD *this, int a2, _DWORD *a3, int a4)
+void __thiscall sub_725DE0(_DWORD *this, int a2, int a3, int a4)
 {
-  _DWORD *result; // eax
-
-  result = a3;
-  switch ( *(this + 1) )
+  switch ( *(this + 1) ) /*0x725dfe*/
   {
-    case 1:
-    case 5:
-    case 9:
+    case 1: /*0x725dfe*/
+    case 5: /*0x725dfe*/
+    case 9: /*0x725dfe*/
       goto LABEL_5;
-    case 2:
-    case 6:
-    case 0xA:
+    case 2: /*0x725dfe*/
+    case 6: /*0x725dfe*/
+    case 0xA: /*0x725dfe*/
       goto LABEL_4;
-    case 3:
-    case 7:
-    case 0xB:
+    case 3: /*0x725dfe*/
+    case 7: /*0x725dfe*/
+    case 0xB: /*0x725dfe*/
       goto LABEL_3;
-    case 4:
-    case 8:
-    case 0xC:
-      *(_DWORD *)(a2 + 4 * (*a3)++) = 4;
+    case 4: /*0x725dfe*/
+    case 8: /*0x725dfe*/
+    case 0xC: /*0x725dfe*/
+      *(_DWORD *)(a2 + 4 * (*(_DWORD *)a3)++) = 4; /*0x725e07*/
 LABEL_3:
-      *(_DWORD *)(a2 + 4 * (*a3)++) = 4;
+      *(_DWORD *)(a2 + 4 * (*(_DWORD *)a3)++) = 4; /*0x725e11*/
 LABEL_4:
-      *(_DWORD *)(a2 + 4 * (*a3)++) = 4;
+      *(_DWORD *)(a2 + 4 * (*(_DWORD *)a3)++) = 4; /*0x725e1d*/
 LABEL_5:
-      *(_DWORD *)(a2 + 4 * (*a3)++) = 4;
-      return result;
-    case 0xD:
-    case 0x11:
+      *(_DWORD *)(a2 + 4 * (*(_DWORD *)a3)++) = 4; /*0x725e29*/
+      return; /*0x725e35*/
+    case 0xD: /*0x725dfe*/
+    case 0x11: /*0x725dfe*/
       goto LABEL_9;
-    case 0xE:
-    case 0x12:
+    case 0xE: /*0x725dfe*/
+    case 0x12: /*0x725dfe*/
       goto LABEL_8;
-    case 0xF:
-    case 0x13:
+    case 0xF: /*0x725dfe*/
+    case 0x13: /*0x725dfe*/
       goto LABEL_7;
-    case 0x10:
-    case 0x14:
-      *(_DWORD *)(a2 + 4 * (*a3)++) = 2;
+    case 0x10: /*0x725dfe*/
+    case 0x14: /*0x725dfe*/
+      *(_DWORD *)(a2 + 4 * (*(_DWORD *)a3)++) = 2; /*0x725e3a*/
 LABEL_7:
-      *(_DWORD *)(a2 + 4 * (*a3)++) = 2;
+      *(_DWORD *)(a2 + 4 * (*(_DWORD *)a3)++) = 2; /*0x725e44*/
 LABEL_8:
-      *(_DWORD *)(a2 + 4 * (*a3)++) = 2;
+      *(_DWORD *)(a2 + 4 * (*(_DWORD *)a3)++) = 2; /*0x725e50*/
 LABEL_9:
-      *(_DWORD *)(a2 + 4 * (*a3)++) = 2;
-      return result;
-    case 0x15:
-    case 0x19:
-    case 0x1D:
+      *(_DWORD *)(a2 + 4 * (*(_DWORD *)a3)++) = 2; /*0x725e5c*/
+      return; /*0x725e68*/
+    case 0x15: /*0x725dfe*/
+    case 0x19: /*0x725dfe*/
+    case 0x1D: /*0x725dfe*/
       goto LABEL_13;
-    case 0x16:
-    case 0x1A:
-    case 0x1E:
+    case 0x16: /*0x725dfe*/
+    case 0x1A: /*0x725dfe*/
+    case 0x1E: /*0x725dfe*/
       goto LABEL_12;
-    case 0x17:
-    case 0x1B:
-    case 0x1F:
+    case 0x17: /*0x725dfe*/
+    case 0x1B: /*0x725dfe*/
+    case 0x1F: /*0x725dfe*/
       goto LABEL_11;
-    case 0x18:
-    case 0x1C:
-    case 0x20:
-      *(_DWORD *)(a2 + 4 * (*a3)++) = 1;
+    case 0x18: /*0x725dfe*/
+    case 0x1C: /*0x725dfe*/
+    case 0x20: /*0x725dfe*/
+      *(_DWORD *)(a2 + 4 * (*(_DWORD *)a3)++) = 1; /*0x725e6d*/
 LABEL_11:
-      *(_DWORD *)(a2 + 4 * (*a3)++) = 1;
+      *(_DWORD *)(a2 + 4 * (*(_DWORD *)a3)++) = 1; /*0x725e77*/
 LABEL_12:
-      *(_DWORD *)(a2 + 4 * (*a3)++) = 1;
+      *(_DWORD *)(a2 + 4 * (*(_DWORD *)a3)++) = 1; /*0x725e83*/
 LABEL_13:
-      *(_DWORD *)(a2 + 4 * (*a3)++) = 1;
-      return (_DWORD *)def_725DFE(a2, a3, a4);
+      *(_DWORD *)(a2 + 4 * (*(_DWORD *)a3)++) = 1; /*0x725e8f*/
+      def_725DFE(a2, a3, a4); /*0x725e99*/
+      return;
     default:
-      JUMPOUT(0x725E9B);
+      JUMPOUT(0x725E9B); /*0x725e9b*/
   }
 }

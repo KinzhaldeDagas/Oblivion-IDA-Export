@@ -1,37 +1,23 @@
-void __userpurge sub_5DA8C0(
-        int this@<ecx>,
-        double st5_0@<st2>,
-        double st6_0@<st1>,
-        double st7_0@<st0>,
-        char *a5,
-        int a6,
-        int a7)
+void __thiscall sub_5DA8C0(int this, char *arg0, int a3, int a4)
 {
-  unsigned int *TileFromTemplate; // eax
-  double v8; // st7
-  unsigned int *v9; // esi
+  Tile *v7; // eax
+  double v8; // st4
+  Tile *v9; // esi
   double v10; // st7
   float a2; // [esp+0h] [ebp-8h]
   float a2a; // [esp+0h] [ebp-8h]
 
-  TileFromTemplate = Menu_CreateTileFromTemplate(
-                       (_DWORD *)this,
-                       st5_0,
-                       st6_0,
-                       st7_0,
-                       *(TileWindow **)(this + 0x4C),
-                       "stat_misc_template",
-                       0);
-  v8 = (double)a7;
-  v9 = TileFromTemplate;
-  if ( a7 < 0 )
-    v8 = v8 + flt_A2FC78;
-  a2 = v8;
-  Tile_SetFloat((Tile *)TileFromTemplate, (_DWORD *)0xFAA, a2);
-  Tile_SetString(v9, (_DWORD *)0xFAF, a5);
-  v10 = (double)a6;
-  if ( a6 < 0 )
-    v10 = v10 + flt_A2FC78;
-  a2a = v10;
-  Tile_SetFloat((Tile *)v9, (_DWORD *)0xFB0, a2a);
+  v7 = Menu::RenderTemplate((Menu *)this, *(Tile **)(this + 0x4C), "stat_misc_template", 0); /*0x5da8cc*/
+  v8 = (double)a4; /*0x5da8d1*/
+  v9 = v7; /*0x5da8db*/
+  if ( a4 < 0 ) /*0x5da8dd*/
+    v8 = v8 + flt_A2FC78; /*0x5da8df*/
+  a2 = v8; /*0x5da8e6*/
+  Tile_SetFloat(v7, 0xFAAu, a2); /*0x5da8f0*/
+  Tile_SetString(v9, (_DWORD *)0xFAF, arg0); /*0x5da901*/
+  v10 = (double)a3; /*0x5da906*/
+  if ( a3 < 0 ) /*0x5da910*/
+    v10 = v10 + flt_A2FC78; /*0x5da912*/
+  a2a = v10; /*0x5da919*/
+  Tile_SetFloat(v9, 0xFB0u, a2a); /*0x5da923*/
 }

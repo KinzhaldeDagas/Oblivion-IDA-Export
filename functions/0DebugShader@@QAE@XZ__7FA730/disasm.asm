@@ -15,7 +15,7 @@
 0x7FA757: mov     esi, ecx
 0x7FA759: mov     [esp+28h+var_10], esi
 0x7FA75D: call    ??0BSShader@@QAE@XZ; BSShader::BSShader(void)
-0x7FA762: push    offset sub_7016A0; a5
+0x7FA762: push    offset NiPointerSlot_Release; a5
 0x7FA767: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x7FA76C: push    10h; size
 0x7FA76E: push    4; a2
@@ -108,3 +108,29 @@
 0x7FA86B: pop     ebx
 0x7FA86C: add     esp, 14h
 0x7FA86F: retn
+0x9D04C0: mov     ecx, [ebp-10h]; this
+0x9D04C3: jmp     ??1BSShader@@UAE@XZ;
+0x9D04C8: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9D04CD: push    10h; int
+0x9D04CF: push    4; unsigned int
+0x9D04D1: mov     eax, [ebp-10h]
+0x9D04D4: add     eax, 7Ch ; '|'
+0x9D04D7: push    eax; void *
+0x9D04D8: call    $LN21
+0x9D04DD: retn
+0x9D04DE: mov     ecx, [ebp-10h]
+0x9D04E1: add     ecx, 0BCh ; '¼'; slot
+0x9D04E7: jmp     NiPointerSlot_Release
+0x9D04EC: mov     ecx, [ebp-10h]
+0x9D04EF: add     ecx, 0C0h ; 'À'; slot
+0x9D04F5: jmp     NiPointerSlot_Release
+0x9D04FA: mov     ecx, [ebp-10h]
+0x9D04FD: add     ecx, 0C4h ; 'Ä'; slot
+0x9D0503: jmp     NiPointerSlot_Release
+0x9D0508: mov     edx, [esp+arg_4]
+0x9D050C: lea     eax, [edx-18h]
+0x9D050F: mov     ecx, [edx-1Ch]
+0x9D0512: xor     ecx, eax
+0x9D0514: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D0519: mov     eax, offset stru_AF8E8C
+0x9D051E: jmp     ___CxxFrameHandler3

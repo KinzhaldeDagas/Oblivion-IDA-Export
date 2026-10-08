@@ -1,1 +1,1 @@
-MIB_IFROW
+typedef _MIB_IFROW MIB_IFROW;

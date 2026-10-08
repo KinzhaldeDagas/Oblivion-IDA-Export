@@ -8,7 +8,7 @@
 0x77BFC6: pop     esi
 0x77BFC7: retn    0Ch
 0x77BFCA: push    ebp; ArgList
-0x77BFCB: mov     ebp, dword ptr [esp+8+ArgList]
+0x77BFCB: mov     ebp, [esp+8+ArgList]
 0x77BFCF: test    ebp, ebp
 0x77BFD1: jz      loc_77C068
 0x77BFD7: cmp     byte ptr [ebp+0], 0

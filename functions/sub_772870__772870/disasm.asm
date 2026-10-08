@@ -25,7 +25,7 @@
 0x7728A9: add     esp, 4
 0x7728AC: cmp     eax, edi
 0x7728AE: jz      short loc_7728C3
-0x7728B0: push    offset sub_7726A0
+0x7728B0: push    offset NiD3DRenderStateGroup_InitializeEmpty;
 0x7728B5: push    esi
 0x7728B6: lea     edi, [eax+4]
 0x7728B9: push    14h

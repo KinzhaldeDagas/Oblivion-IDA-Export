@@ -1,4 +1,4 @@
-char *sub_74CC10()
+NiRTTI *sub_74CC10()
 {
-  return dword_B40944;
+  return &stru_B40944; /*0x74cc15*/
 }

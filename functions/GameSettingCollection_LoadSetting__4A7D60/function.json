@@ -1,18 +1,31 @@
 {
-  "callees_count": 18,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4A7D60",
+      "0x4A7E09"
+    ]
+  ],
+  "chunks_sha256": "1c282b4e6c4c34ba0e10d722d934409f7a01d72a2ecac333281d29bfa7a0bd55",
+  "comment_regular": "Verified generic TESFile GameSettingCollection value loader. On a DATA chunk it branches by the registered setting's type; string-valued settings are read and passed to Setting_SetStringValue. This proves named settings can be updated through the generic file-record path, not that a blood-particle effect selects Extra1/Extra2.",
+  "comment_repeatable": "Verified generic TESFile GameSettingCollection value loader. On a DATA chunk it branches by the registered setting's type; string-valued settings are read and passed to Setting_SetStringValue. This proves named settings can be updated through the generic file-record path, not that a blood-particle effect selects Extra1/Extra2.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "GameSettingCollection_LoadSetting",
   "end_ea": "0x4A7E09",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
   "name": "GameSettingCollection_LoadSetting",
   "segment": ".text",
   "sha256": "1c282b4e6c4c34ba0e10d722d934409f7a01d72a2ecac333281d29bfa7a0bd55",
   "size": 169,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4A7D60",
+  "total_chunk_size": 169,
   "type": "char __thiscall(Data **this, int)",
   "xrefs_from_count": 77,
   "xrefs_to_count": 1

@@ -6,5 +6,5 @@
 0x5FF6FF: mov     ecx, ebp
 0x5FF701: call    eax
 0x5FF703: push    eax
-0x5FF704: call    Script_AddEventToExtraScript
+0x5FF704: call    Script_AddEventToExtraScript; RealArenaTraining decode pass: projectile OnHitWith script event in actor attack handling, not the arrow projectile collision routine used for TargetHay01 static hits.
 0x5FF709: jmp     Actor_AttackHandling___RunOnHitByScript_

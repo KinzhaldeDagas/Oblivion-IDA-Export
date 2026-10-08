@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4027A0",
-    "line": "push    esi",
+    "line": "push    esi; Destroys every registered small MemoryPool; invoked during FormHeap shutdown.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x4027A4",
-    "line": "mov     edi, g_HeapPoolsBySize[esi]",
+    "line": "mov     edi, [esi+0B33080h]",
     "mnemonic": "mov",
     "size": 6
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x4027B0",
-    "line": "call    sub_402400",
+    "line": "call    MemoryPool_Destroy; Destroys one small allocation pool: releases its 4 KiB pages, removes its registry entry, clears page metadata, frees its table, and deletes its lock.",
     "mnemonic": "call",
     "size": 5
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x4027B6",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

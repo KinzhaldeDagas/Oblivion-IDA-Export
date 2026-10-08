@@ -2,8 +2,8 @@ _DWORD *__thiscall sub_46E460(_DWORD *this)
 {
   _DWORD *result; // eax
 
-  result = (_DWORD *)*(this + 1);
-  if ( result )
-    return TESForm_PutCurrentChunkData4(0x4D414E52, result[3]);
-  return result;
+  result = (_DWORD *)*(this + 1); /*0x46e460*/
+  if ( result ) /*0x46e465*/
+    return TESForm_PutCurrentChunkData4(0x4D414E52, result[3]); /*0x46e470*/
+  return result; /*0x46e478*/
 }

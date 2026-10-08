@@ -1,40 +1,72 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "GethitShader",
+  "definition": "struct GethitShader\n{\nBSImageSpaceShader super;\nUInt32 Unk90;\nNiD3DVertexShader *Vertex[3];\nNiD3DPixelShader *Pixel[3];\nUInt32 UnkA8[2];\n}\n",
   "id": 18374686479672025350,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "super",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 144
+      "size": 144,
+      "type": "BSImageSpaceShader"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk90",
       "offset": 144,
       "offset_hex": "0x90",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Vertex",
       "offset": 148,
       "offset_hex": "0x94",
-      "size": 12
+      "size": 12,
+      "type": "NiD3DVertexShader *[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Pixel",
       "offset": 160,
-      "offset_hex": "0xa0",
-      "size": 12
+      "offset_hex": "0xA0",
+      "size": 12,
+      "type": "NiD3DPixelShader *[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "UnkA8",
       "offset": 172,
-      "offset_hex": "0xac",
-      "size": 8
+      "offset_hex": "0xAC",
+      "size": 8,
+      "type": "UInt32[2]"
     }
   ],
   "name": "GethitShader",
+  "ordinal": 661,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 180
 }

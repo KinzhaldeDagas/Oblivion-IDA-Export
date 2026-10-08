@@ -3,7 +3,7 @@
 0x65BE73: mov     eax, [edi+10h]
 0x65BE76: test    eax, eax
 0x65BE78: jz      AVCollection_RemoveArrayNode___def_65BE93; jumptable 0065BE93 default case, cases 1-3,9,10,12,14-25,27-32,34,35,37-39,42-45,50-55
-0x65BE7E: movsx   ecx, [esp+4+arg_0]
+0x65BE7E: movsx   ecx, byte ptr [esp+4+actorValue]
 0x65BE83: cmp     ecx, 38h; switch 57 cases
 0x65BE86: ja      AVCollection_RemoveArrayNode___def_65BE93; jumptable 0065BE93 default case, cases 1-3,9,10,12,14-25,27-32,34,35,37-39,42-45,50-55
 0x65BE8C: movzx   ecx, ds:byte_65BFD4[ecx]
@@ -42,7 +42,7 @@
 0x65BEE8: jmp     short AVCollection_RemoveArrayNode___CheckIfArrayEmpty; jumptable 0065BE93 case 8
 0x65BEEA: add     eax, 44h ; 'D'; jumptable 0065BE93 case 13
 0x65BEED: push    eax; jumptable 0065BE93 case 8
-0x65BEEE: mov     ecx, edi
+0x65BEEE: mov     ecx, edi; slot
 0x65BEF0: call    AVCollection_DeallocArrayNode
 0x65BEF5: push    esi
 0x65BEF6: mov     esi, [edi+10h]
@@ -84,9 +84,12 @@
 0x65BF66: jnz     short AVCollection_RemoveArrayNode___Done_
 0x65BF68: test    esi, esi
 0x65BF6A: jz      short loc_65BF7C
-0x65BF6C: mov     ecx, esi
+0x65BF6C: mov     ecx, esi; self
 0x65BF6E: call    AVCollection_DeleteArray
 0x65BF73: push    esi
-0x65BF74: call    FormHeapFree
+0x65BF74: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x65BF79: add     esp, 4
 0x65BF7C: mov     dword ptr [edi+10h], 0
+0x65BF83: pop     esi
+0x65BF84: pop     edi; jumptable 0065BE93 default case, cases 1-3,9,10,12,14-25,27-32,34,35,37-39,42-45,50-55
+0x65BF85: retn    4

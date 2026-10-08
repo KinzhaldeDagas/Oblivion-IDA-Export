@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x9EDC00",
-    "line": "push    23793h",
+    "line": "push    23793h; defaultValue",
     "mnemonic": "push",
     "size": 5
   },
@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x9EDC0A",
-    "line": "mov     ecx, offset iClassAssassin",
+    "line": "mov     ecx, 0B37C58h; self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x9EDC0F",
-    "line": "call    GameSetting_ConstrAndReg",
+    "line": "call    GameSetting_ConstrAndReg; Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.",
     "mnemonic": "call",
     "size": 5
   },

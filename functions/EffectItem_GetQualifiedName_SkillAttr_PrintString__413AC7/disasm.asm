@@ -1,5 +1,5 @@
 0x413AC7: push    ecx
-0x413AC8: call    ActorValue_GetName
+0x413AC8: call    ActorValue_GetName; Return the localized actor-value display name through g_actorValueNameSettings. Native skills occupy the contiguous SkillActorValue range 0x0C..0x20.
 0x413ACD: mov     edx, [esp+4+arg_C]
 0x413AD1: push    eax
 0x413AD2: push    esi

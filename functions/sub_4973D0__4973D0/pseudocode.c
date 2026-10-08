@@ -1,13 +1,11 @@
 void *__thiscall sub_4973D0(unsigned __int8 *Dst)
 {
   void *v2; // eax
-  size_t v4; // [esp-4h] [ebp-8h]
-  size_t v5; // [esp-4h] [ebp-8h]
+  unsigned int v4; // [esp-4h] [ebp-8h]
 
-  LODWORD(v4) = 1;
-  SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, Dst, v4);
+  SaveLoad_LoadData(g_TESSaveLoadGame, Dst, 1u); /*0x4973dc*/
   v2 = (void *)FormHeapAlloc((0x1C * (unsigned __int64)*Dst) >> 0x20 != 0 ? 0xFFFFFFFF : 0x1C * *Dst);
-  LODWORD(v5) = 0x1C * *Dst;
-  *((_DWORD *)Dst + 1) = v2;
-  return SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, v2, v5);
+  v4 = 0x1C * *Dst; /*0x49740d*/
+  *((_DWORD *)Dst + 1) = v2; /*0x49740e*/
+  return SaveLoad_LoadData(g_TESSaveLoadGame, v2, v4); /*0x49741d*/
 }

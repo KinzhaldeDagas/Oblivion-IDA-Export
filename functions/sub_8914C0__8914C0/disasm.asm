@@ -25,13 +25,13 @@
 0x891511: push    edx
 0x891512: lea     ecx, [esp+78h+var_60]
 0x891516: movaps  [esp+78h+var_20], xmm0
-0x89151B: call    sub_88FE00
+0x89151B: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x891520: mov     ecx, [esi+8]
 0x891523: test    ecx, ecx
 0x891525: jz      short loc_89152E
-0x891527: call    sub_8AC070
+0x891527: call    bhkCollisionWrapper_GetPositionPtr; Returns low-level Havok object position pointer: *(wrapper+0x30 + 0x1C) + 0x30.
 0x89152C: jmp     short loc_891533
-0x89152E: mov     eax, offset stru_BA7A40
+0x89152E: mov     eax, offset unk_BA7A40
 0x891533: movaps  xmm0, xmmword ptr [eax]
 0x891536: movaps  xmm1, [esp+70h+var_60]
 0x89153B: mov     ecx, [esp+70h+var_4]

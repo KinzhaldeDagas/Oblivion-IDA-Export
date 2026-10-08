@@ -4,11 +4,11 @@ _DWORD *__thiscall sub_6F1630(char **this)
   char *v3; // edi
   int v5; // [esp+Ch] [ebp-8h] BYREF
 
-  v2 = *(this + 2);
-  if ( *(this + 1) > v2 )
-    _invalid_parameter_noinfo();
-  v3 = *(this + 1);
-  if ( v3 > *(this + 2) )
-    _invalid_parameter_noinfo();
-  return sub_6F1470(this, &v5, (int)this, v3, (int)this, v2);
+  v2 = *(this + 2); /*0x6f1637*/
+  if ( *(this + 1) > v2 ) /*0x6f163e*/
+    _invalid_parameter_noinfo(); /*0x6f1640*/
+  v3 = *(this + 1); /*0x6f1645*/
+  if ( v3 > *(this + 2) ) /*0x6f164b*/
+    _invalid_parameter_noinfo(); /*0x6f164d*/
+  return sub_6F1470(this, &v5, (int)this, v3, (int)this, v2); /*0x6f1662*/
 }

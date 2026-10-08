@@ -1,5 +1,5 @@
-0xA1BCD0: push    esi
-0xA1BCD1: mov     esi, dword_B35F8C
+0xA1BCD0: push    esi; Verified module cleanup wrapper decrements/releases g_DebugRenderVertexColorProperty if present.
+0xA1BCD1: mov     esi, g_DebugRenderVertexColorProperty
 0xA1BCD7: test    esi, esi
 0xA1BCD9: jz      short loc_A1BCF7
 0xA1BCDB: lea     eax, [esi+4]

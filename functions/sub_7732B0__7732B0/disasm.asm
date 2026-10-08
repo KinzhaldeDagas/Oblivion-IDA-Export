@@ -1,5 +1,5 @@
-0x7732B0: push    ebx
-0x7732B1: mov     ebx, [esp+4+arg_0]
+0x7732B0: push    ebx; Oblivion draw-time texture-stage application: exactly eight tracked D3DTSS slots; no sampler LOD or texture-factor state.
+0x7732B1: mov     ebx, [esp+4+stage]
 0x7732B5: push    ebp
 0x7732B6: push    esi
 0x7732B7: mov     ebp, ecx
@@ -35,7 +35,7 @@
 0x77330F: add     esi, 1
 0x773312: add     edi, 4
 0x773315: cmp     esi, 8
-0x773318: jl      short loc_7732C0
+0x773318: jl      short loc_7732C0; Draw-time texture-stage group iterates exactly eight stage states: COLOROP/ARG1/ARG2, ALPHAOP/ARG1/ARG2, BUMPENVMAT00, TEXTURETRANSFORMFLAGS.
 0x77331A: pop     edi
 0x77331B: pop     esi
 0x77331C: pop     ebp

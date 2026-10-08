@@ -1,29 +1,28 @@
-void __userpurge sub_59EAA0(int a1@<ecx>, double st6_0@<st1>, Unk1C *a3)
+// Starts the first DialogueResponse of an externally supplied DialogueItem; if the item has no responses, returns to the normal topic-list advance path.
+void __thiscall DialogMenu::PlayDialogueItem(DialogMenu *this, DialogueItemView *item)
 {
-  char **v6; // edi
-  double v7; // st7
+  char **Current; // edi
   float a2; // [esp+8h] [ebp-Ch]
 
-  Tile_SetFloat(*(Tile **)(a1 + 0x38), (_DWORD *)0xFA1, 1.0);
-  if ( a3 )
+  Tile_SetFloat(*((Tile **)this + 0xE), 0xFA1u, 1.0); /*0x59eab2*/
+  if ( item ) /*0x59eabd*/
   {
-    if ( sub_6B7BA0(a3) )
+    if ( DialogueItem::FirstResponse(item) ) /*0x59eac5*/
     {
-      v6 = (char **)sub_6B7C20(a3);
-      (*(void (__stdcall **)(_DWORD, char **))(**(_DWORD **)(a1 + 0x60) + 0x304))(0.0, v6);
-      *(float *)(a1 + 0x84) = fConstant_2;
-      *(_DWORD *)(a1 + 0x80) = 2;
-      a2 = (float)((byte_B13200 != 0) + 1);
-      Tile_SetFloat(*(Tile **)(a1 + 0x2C), (_DWORD *)0xFA1, a2);
-      Tile_SetString(*(_DWORD **)(a1 + 0x2C), (_DWORD *)0xFDE, *v6);
-      Tile_SetFloat(*(Tile **)(a1 + 0x3C), (_DWORD *)0xFA1, 1.0);
+      Current = (char **)DialogueListCursor::GetCurrent((DialogueListCursorView *)item); /*0x59eade*/
+      (*(void (__stdcall **)(_DWORD, char **))(**((_DWORD **)this + 0x18) + 0x304))(0.0, Current); /*0x59eaed*/
+      *((float *)this + 0x21) = fConstant_2; /*0x59eaf7*/
+      *((_DWORD *)this + 0x20) = 2; /*0x59eafd*/
+      a2 = (float)((byte_B13200 != 0) + 1); /*0x59eb1f*/
+      Tile_SetFloat(*((Tile **)this + 0xB), 0xFA1u, a2); /*0x59eb27*/
+      Tile_SetString(*((_DWORD **)this + 0xB), (_DWORD *)0xFDE, *Current); /*0x59eb37*/
+      Tile_SetFloat(*((Tile **)this + 0xF), 0xFA1u, 1.0); /*0x59eb4a*/
     }
     else
     {
-      v7 = fConstant_2;
-      Tile_SetFloat(*(Tile **)(a1 + 0x3C), (_DWORD *)0xFA1, fConstant_2);
-      sub_59E2B0((int *)a1, 1);
-      sub_59EA10(a1, 1.0, st6_0, v7, 1, 0);
+      Tile_SetFloat(*((Tile **)this + 0xF), 0xFA1u, fConstant_2); /*0x59eb66*/
+      DialogMenu::RefreshActionAvailability(this, 1); /*0x59eb6f*/
+      DialogMenu::AdvanceTopicList(this, 1, 0); /*0x59eb7a*/
     }
   }
 }

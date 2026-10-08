@@ -1,31 +1,29 @@
 void sub_5AC990()
 {
-  int v0; // [esp+0h] [ebp-24h]
-
-  switch ( (unsigned __int16)Actor_GetLevel((Actor *)TESDataHandler_g_PlayerRef, v0) )
+  switch ( Actor_GetLevel((Actor *)reference) ) /*0x5ac9ed*/
   {
-    case 1u:
-    case 3u:
-    case 4u:
-    case 6u:
-    case 7u:
-    case 9u:
-    case 0xAu:
-    case 0xCu:
-    case 0xDu:
-    case 0xFu:
-    case 0x10u:
-    case 0x12u:
-    case 0x13u:
-      JUMPOUT(0x5ACABF);
-    case 2u:
-    case 5u:
-    case 8u:
-    case 0xBu:
-    case 0xEu:
-    case 0x11u:
-      JUMPOUT(0x5ACABE);
+    case 1: /*0x5ac9ed*/
+    case 3: /*0x5ac9ed*/
+    case 4: /*0x5ac9ed*/
+    case 6: /*0x5ac9ed*/
+    case 7: /*0x5ac9ed*/
+    case 9: /*0x5ac9ed*/
+    case 0xA: /*0x5ac9ed*/
+    case 0xC: /*0x5ac9ed*/
+    case 0xD: /*0x5ac9ed*/
+    case 0xF: /*0x5ac9ed*/
+    case 0x10: /*0x5ac9ed*/
+    case 0x12: /*0x5ac9ed*/
+    case 0x13: /*0x5ac9ed*/
+      JUMPOUT(0x5ACABF); /*0x5acabf*/
+    case 2: /*0x5ac9ed*/
+    case 5: /*0x5ac9ed*/
+    case 8: /*0x5ac9ed*/
+    case 0xB: /*0x5ac9ed*/
+    case 0xE: /*0x5ac9ed*/
+    case 0x11: /*0x5ac9ed*/
+      JUMPOUT(0x5ACABE); /*0x5acabe*/
     default:
-      JUMPOUT(0x5ACAB7);
+      JUMPOUT(0x5ACAB7); /*0x5acab7*/
   }
 }

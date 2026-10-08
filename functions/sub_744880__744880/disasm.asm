@@ -136,7 +136,6 @@
 0x744A55: add     eax, 0FFFFFFFEh
 0x744A58: mov     [esi+70h], eax
 0x744A5B: jmp     short loc_744A60
-0x744A5D: align 10h
 0x744A60: add     [esi+64h], ebp
 0x744A63: mov     edx, [esi+64h]
 0x744A66: cmp     edx, edi
@@ -199,10 +198,10 @@
 0x744B12: jz      short loc_744B49
 0x744B14: mov     edx, [eax+10h]
 0x744B17: mov     eax, [edi+0Ch]
-0x744B1A: push    ebx; Size
-0x744B1B: push    edx; Src
-0x744B1C: push    eax; Dst
-0x744B1D: call    _memcpy
+0x744B1A: push    ebx; byteCount
+0x744B1B: push    edx; source
+0x744B1C: push    eax; destination
+0x744B1D: call    _memcpy;
 0x744B22: mov     eax, [edi+1Ch]
 0x744B25: add     [edi+0Ch], ebx
 0x744B28: add     [eax+10h], ebx
@@ -273,10 +272,10 @@
 0x744BF5: jz      short loc_744C2C
 0x744BF7: mov     ecx, [eax+10h]
 0x744BFA: mov     edx, [edi+0Ch]
-0x744BFD: push    ebx; Size
-0x744BFE: push    ecx; Src
-0x744BFF: push    edx; Dst
-0x744C00: call    _memcpy
+0x744BFD: push    ebx; byteCount
+0x744BFE: push    ecx; source
+0x744BFF: push    edx; destination
+0x744C00: call    _memcpy;
 0x744C05: mov     eax, [edi+1Ch]
 0x744C08: add     [edi+0Ch], ebx
 0x744C0B: add     [eax+10h], ebx

@@ -1,4 +1,4 @@
-0x6B7840: push    0FFFFFFFFh
+0x6B7840: push    0FFFFFFFFh; Recreates the serialized DialogueItem list and restores Conversation.currentItemNode from its UInt16 index. It does not call TESTopic::CreateConversation or run INFO results.
 0x6B7842: push    offset SEH_6B7E50
 0x6B7847: mov     eax, large fs:0
 0x6B784D: push    eax
@@ -15,16 +15,16 @@
 0x6B7867: mov     ebp, ecx
 0x6B7869: mov     ecx, ds:0B33B00h
 0x6B786F: xor     ebx, ebx
-0x6B7871: mov     [esp+3Ch+var_24], ebx
+0x6B7871: mov     [esp+3Ch+destination], ebx
 0x6B7875: mov     [esp+3Ch+var_20], ebx
-0x6B7879: call    sub_45A170
+0x6B7879: call    TESSaveLoadGame_UseSaveGameBlocks
 0x6B787E: test    al, al
 0x6B7880: jz      loc_6B7923
-0x6B7886: mov     ecx, ds:0B33B00h
-0x6B788C: push    4; Size
+0x6B7886: mov     ecx, ds:0B33B00h; self
+0x6B788C: push    4; byteCount
 0x6B788E: lea     eax, [esp+40h+Dst]
-0x6B7892: push    eax; Dst
-0x6B7893: call    SaveLoad_LoadData
+0x6B7892: push    eax; destination
+0x6B7893: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x6B7898: cmp     [esp+3Ch+Dst], 4B4F4C42h
 0x6B78A0: jz      short loc_6B790A
 0x6B78A2: mov     eax, ds:0B33B00h
@@ -33,7 +33,7 @@
 0x6B78AF: jz      short loc_6B78EE
 0x6B78B1: mov     ecx, [esi]
 0x6B78B3: push    ecx; a1
-0x6B78B4: call    TESForm_LookupByFormID
+0x6B78B4: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x6B78B9: mov     edx, [esi+5]
 0x6B78BC: movzx   ecx, byte ptr [esi+9]
 0x6B78C0: add     esp, 4
@@ -59,18 +59,18 @@
 0x6B78FD: push    offset aLoadgameBuff_0; "LoadGame Buffer error: Block Header is "...
 0x6B7902: call    PrintError
 0x6B7907: add     esp, 10h
-0x6B790A: mov     ecx, ds:0B33B00h
+0x6B790A: mov     ecx, ds:0B33B00h; self
 0x6B7910: mov     eax, [ecx+14h]
-0x6B7913: push    2; Size
-0x6B7915: lea     edx, [esp+40h+var_24]
-0x6B7919: push    edx; Dst
+0x6B7913: push    2; byteCount
+0x6B7915: lea     edx, [esp+40h+destination]
+0x6B7919: push    edx; destination
 0x6B791A: mov     [esp+44h+var_20], eax
-0x6B791E: call    SaveLoad_LoadData
-0x6B7923: mov     ecx, ds:0B33B00h
-0x6B7929: push    2; Size
+0x6B791E: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
+0x6B7923: mov     ecx, ds:0B33B00h; self
+0x6B7929: push    2; byteCount
 0x6B792B: lea     eax, [esp+40h+var_28]
-0x6B792F: push    eax; Dst
-0x6B7930: call    SaveLoad_LoadData
+0x6B792F: push    eax; destination
+0x6B7930: call    SaveLoad_LoadData; EngineFix analysis 2026-05-07: Dialogue Conversation outer saved count; each entry calls sub_6B7E50, which consumes at least 18 bytes even with zero nested choices. Candidate clamp to remaining / 18 after verifying caller constraints.
 0x6B7935: cmp     [esp+3Ch+var_28], bx
 0x6B793A: mov     [esp+3Ch+var_1C], ebx
 0x6B793E: jbe     loc_6B79CB
@@ -78,17 +78,17 @@
 0x6B7946: call    FormHeapAlloc
 0x6B794B: add     esp, 4
 0x6B794E: mov     [esp+3Ch+var_10], eax
-0x6B7952: cmp     eax, ebx
+0x6B7952: cmp     eax, ebx; EngineFix implementation 2026-05-07: Dialogue Conversation outer entry allocation-failure hook. If the 0x1C object allocation fails, discard one full serialized conversation entry (nested choices, selected index, four FormIDs), restore SEH state, and resume loop tail.
 0x6B7954: mov     [esp+3Ch+var_4], ebx
 0x6B7958: jz      short loc_6B7965
-0x6B795A: mov     ecx, eax
-0x6B795C: call    sub_6B7BE0
+0x6B795A: mov     ecx, eax; this
+0x6B795C: call    DialogueItem__InitializeEmpty
 0x6B7961: mov     edi, eax
 0x6B7963: jmp     short loc_6B7967
 0x6B7965: xor     edi, edi
-0x6B7967: mov     ecx, edi
+0x6B7967: mov     ecx, edi; this
 0x6B7969: mov     [esp+3Ch+var_4], 0FFFFFFFFh
-0x6B7971: call    sub_6B7E50
+0x6B7971: call    DialogueItem__LoadGame; Rebuilds serialized response objects and internal response cursor; resolves INFO/topic/ownerQuest immediately and leaves speaker as a FormID for InitLoadGame. Does not collect live responses or run results.
 0x6B7976: cmp     edi, ebx
 0x6B7978: jz      short loc_6B79B3
 0x6B797A: cmp     [ebp+4], ebx
@@ -120,17 +120,17 @@
 0x6B79BF: cmp     eax, ecx
 0x6B79C1: mov     [esp+3Ch+var_1C], eax
 0x6B79C5: jb      loc_6B7944
-0x6B79CB: mov     ecx, ds:0B33B00h
-0x6B79D1: push    2; Size
-0x6B79D3: lea     edx, [esp+40h+var_14]
-0x6B79D7: push    edx; Dst
-0x6B79D8: call    SaveLoad_LoadData
-0x6B79DD: mov     eax, [esp+3Ch+var_14]
+0x6B79CB: mov     ecx, ds:0B33B00h; self
+0x6B79D1: push    2; byteCount
+0x6B79D3: lea     edx, [esp+40h+index]
+0x6B79D7: push    edx; destination
+0x6B79D8: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
+0x6B79DD: mov     eax, dword ptr [esp+3Ch+index]
 0x6B79E1: cmp     ax, 0FFFFh
 0x6B79E5: jz      short loc_6B7A11
-0x6B79E7: push    eax
-0x6B79E8: mov     ecx, ebp
-0x6B79EA: call    sub_6B7560
+0x6B79E7: push    eax; index
+0x6B79E8: mov     ecx, ebp; this
+0x6B79EA: call    Conversation__GetDialogueItemByIndex
 0x6B79EF: cmp     ebp, ebx
 0x6B79F1: mov     ecx, ebp
 0x6B79F3: jz      short loc_6B7A14
@@ -149,7 +149,7 @@
 0x6B7A0F: jmp     short loc_6B7A14
 0x6B7A11: mov     [ebp+8], ebx
 0x6B7A14: mov     ecx, ds:0B33B00h
-0x6B7A1A: call    sub_45A170
+0x6B7A1A: call    TESSaveLoadGame_UseSaveGameBlocks
 0x6B7A1F: test    al, al
 0x6B7A21: jz      loc_6B7B47
 0x6B7A27: mov     ecx, ds:0B33B00h
@@ -159,8 +159,8 @@
 0x6B7A38: jz      loc_6B7AF9
 0x6B7A3E: mov     eax, [edi]
 0x6B7A40: push    eax; a1
-0x6B7A41: call    TESForm_LookupByFormID
-0x6B7A46: movzx   edx, word ptr [esp+40h+var_24]
+0x6B7A41: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
+0x6B7A46: movzx   edx, word ptr [esp+40h+destination]
 0x6B7A4B: mov     ebx, [esp+40h+var_20]
 0x6B7A4F: mov     ecx, eax
 0x6B7A51: lea     eax, [edx+ebx]
@@ -174,7 +174,7 @@
 0x6B7A65: push    edx
 0x6B7A66: mov     edx, [eax+0D4h]
 0x6B7A6C: call    edx
-0x6B7A6E: movzx   ecx, word ptr [esp+44h+var_24]
+0x6B7A6E: movzx   ecx, word ptr [esp+44h+destination]
 0x6B7A73: push    eax
 0x6B7A74: mov     eax, [edi]
 0x6B7A76: push    eax
@@ -204,7 +204,7 @@
 0x6B7AB8: mov     eax, [edx+0D4h]
 0x6B7ABE: call    eax
 0x6B7AC0: mov     ecx, [edi]
-0x6B7AC2: movzx   edx, word ptr [esp+44h+var_24]
+0x6B7AC2: movzx   edx, word ptr [esp+44h+destination]
 0x6B7AC7: push    eax
 0x6B7AC8: push    ecx
 0x6B7AC9: push    0FBh ; 'û'
@@ -224,7 +224,7 @@
 0x6B7AF4: pop     ebx
 0x6B7AF5: add     esp, 28h
 0x6B7AF8: retn
-0x6B7AF9: movzx   eax, word ptr [esp+3Ch+var_24]
+0x6B7AF9: movzx   eax, word ptr [esp+3Ch+destination]
 0x6B7AFE: mov     edi, [esp+3Ch+var_20]
 0x6B7B02: lea     edx, [eax+edi]
 0x6B7B05: cmp     esi, edx
@@ -258,3 +258,15 @@
 0x6B7B56: pop     ebx
 0x6B7B57: add     esp, 28h
 0x6B7B5A: retn
+0x9C6E70: mov     eax, [ebp-10h]
+0x9C6E73: push    eax
+0x9C6E74: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C6E79: pop     ecx
+0x9C6E7A: retn
+0x9C6E7B: mov     edx, [esp+arg_4]
+0x9C6E7F: lea     eax, [edx-2Ch]
+0x9C6E82: mov     ecx, [edx-30h]
+0x9C6E85: xor     ecx, eax
+0x9C6E87: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C6E8C: mov     eax, offset stru_AEF300
+0x9C6E91: jmp     ___CxxFrameHandler3

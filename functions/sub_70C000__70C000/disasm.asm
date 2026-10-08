@@ -1,4 +1,4 @@
-0x70C000: push    0FFFFFFFFh
+0x70C000: push    0FFFFFFFFh; MoonSugarEffect decode: after culling, calls accumulator prepare with camera, renders visible geo list, then flushes accumulator. Confirms sub_70C0B0 is camera->cull->submit boundary.
 0x70C002: push    offset SEH_7020F0
 0x70C007: mov     eax, large fs:0
 0x70C00D: push    eax
@@ -13,7 +13,7 @@
 0x70C023: mov     eax, ds:0B3F928h
 0x70C028: test    eax, eax
 0x70C02A: jz      short loc_70C09D
-0x70C02C: mov     edi, [esp+1Ch+arg_0]
+0x70C02C: mov     edi, [esp+1Ch+camera]
 0x70C030: test    edi, edi
 0x70C032: jz      short loc_70C09D
 0x70C034: mov     esi, [eax+8]
@@ -30,17 +30,17 @@
 0x70C057: mov     eax, [edx+4Ch]
 0x70C05A: push    edi
 0x70C05B: mov     ecx, esi
-0x70C05D: call    eax
-0x70C05F: mov     ecx, [esp+1Ch+arg_4]
-0x70C063: push    ecx
-0x70C064: call    sub_70BF30
+0x70C05D: call    eax; Nested begin is harmless here because +0x2268 is already pending from the producer.
+0x70C05F: mov     ecx, [esp+1Ch+visibleArray]
+0x70C063: push    ecx; visibleArray
+0x70C064: call    NiRenderer_SubmitVisibleGeometryArray; CULLING code correction 2026-09-27: verified E8 C7 FE FF to 0x70BF30, cdecl one array pointer. Current candidate observes this consumer entry only within the two decoded render caller scopes, using copied planes after Process cleared Camera. It never rejects or edits array contents; accumulator acceptance and render outcomes remain unresolved.
 0x70C069: add     esp, 4
 0x70C06C: test    esi, esi
 0x70C06E: jz      short loc_70C079
 0x70C070: mov     edx, [esi]
 0x70C072: mov     eax, [edx+50h]
 0x70C075: mov     ecx, esi
-0x70C077: call    eax
+0x70C077: call    eax; Nested flush occurs before producer sets +0x21E1, so it does not dispatch; the producer performs the ready flush afterward.
 0x70C079: test    esi, esi
 0x70C07B: mov     [esp+1Ch+var_4], 0FFFFFFFFh
 0x70C083: jz      short loc_70C09D
@@ -61,3 +61,12 @@
 0x70C0AA: pop     esi
 0x70C0AB: add     esp, 10h
 0x70C0AE: retn
+0x9BD550: lea     ecx, [ebp-10h]; slot
+0x9BD553: jmp     NiPointerSlot_Release
+0x9BD558: mov     edx, [esp+arg_4]
+0x9BD55C: lea     eax, [edx-0Ch]
+0x9BD55F: mov     ecx, [edx-10h]
+0x9BD562: xor     ecx, eax
+0x9BD564: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BD569: mov     eax, offset stru_AE6EF8
+0x9BD56E: jmp     ___CxxFrameHandler3

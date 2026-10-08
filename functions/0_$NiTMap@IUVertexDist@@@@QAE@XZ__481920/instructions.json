@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x481920",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Native nearest-normal stitch stores primary and optional secondary target per source, copies normalized source normal, optionally displaces vertices, and marks target dirty flags |=3. Prettier Faces extends coincident shared-normal groups afterward. 1.19.8 code audit: reject nonfinite squared distances and nonfinite copied normals before group propagation; old distance>epsilon test accepted NaN. This is a plugin guard correction; malformed-asset occurrence in game has not been demonstrated.",
     "mnemonic": "push",
     "size": 2
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x48199C",
-    "line": "mov     ebp, [esp+134h+arg_0]",
+    "line": "mov     ebp, [esp+134h+sourceGeometry]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x4819B6",
-    "line": "mov     esi, [esp+134h+arg_4]",
+    "line": "mov     esi, [esp+134h+targetGeometry]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x481A24",
-    "line": "call    sub_4802E0",
+    "line": "call    NiGeometry_AllocateWorldVertices",
     "mnemonic": "call",
     "size": 5
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x481A37",
-    "line": "call    sub_4802E0",
+    "line": "call    NiGeometry_AllocateWorldVertices",
     "mnemonic": "call",
     "size": 5
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x481A48",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x481A8D",
-    "line": "call    sub_718A80",
+    "line": "call    sub_718A80;",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,19 +655,19 @@
   },
   {
     "ea": "0x481A95",
-    "line": "push    ecx",
+    "line": "push    ecx; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x481A96",
-    "line": "lea     edx, [esp+138h+var_64]",
+    "line": "lea     edx, [esp+138h+out]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x481A9D",
-    "line": "push    edx",
+    "line": "push    edx; out",
     "mnemonic": "push",
     "size": 1
   },
@@ -697,13 +697,13 @@
   },
   {
     "ea": "0x481AAD",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x481AAF",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -769,7 +769,7 @@
   },
   {
     "ea": "0x481AE0",
-    "line": "fld     [esp+134h+arg_8]",
+    "line": "fld     [esp+134h+maxDistance]; A negative maxDistance means unbounded nearest-vertex search; FaceGen supplies 0.1.",
     "mnemonic": "fld",
     "size": 7
   },
@@ -877,7 +877,7 @@
   },
   {
     "ea": "0x481B1A",
-    "line": "call    sub_4121A0",
+    "line": "call    sub_4121A0; Transform the target vertex into source geometry space and measure distance to each source vertex.",
     "mnemonic": "call",
     "size": 5
   },
@@ -889,7 +889,7 @@
   },
   {
     "ea": "0x481B21",
-    "line": "call    sub_404C90",
+    "line": "call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1069,7 +1069,7 @@
   },
   {
     "ea": "0x481B7E",
-    "line": "call    sub_47DB90",
+    "line": "call    NiTMap_UInt_VertexDist_Get; VertexDist map is keyed by source vertex. Each 20-byte node stores key, primary target index, one secondary target index, and nearest distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1129,7 +1129,7 @@
   },
   {
     "ea": "0x481BA3",
-    "line": "call    sub_47DF40",
+    "line": "call    FloatNearlyEqualAbsolute; Treat target distances within 0.001 as coincident. The replacement stores the new target plus only the previous primary target; any earlier secondary target is discarded.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1183,7 +1183,7 @@
   },
   {
     "ea": "0x481BBD",
-    "line": "jmp     short loc_481BDE",
+    "line": "jmp     short loc_481BDE; Equal-distance insertion rotates two target slots. Targets are visited in ascending index order, so only the final two coincident target indices survive; earlier UV-split targets are dropped.",
     "mnemonic": "jmp",
     "size": 2
   },
@@ -1279,7 +1279,7 @@
   },
   {
     "ea": "0x481BEA",
-    "line": "call    sub_47DAD0",
+    "line": "call    NiTMap_UInt_VertexDist_Set",
     "mnemonic": "call",
     "size": 5
   },
@@ -1309,7 +1309,7 @@
   },
   {
     "ea": "0x481C01",
-    "line": "mov     ebp, [esp+134h+arg_0]",
+    "line": "mov     ebp, [esp+134h+sourceGeometry]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1321,7 +1321,7 @@
   },
   {
     "ea": "0x481C0C",
-    "line": "call    sub_6A9030",
+    "line": "call    NiTMapBase_GetFirstNode",
     "mnemonic": "call",
     "size": 5
   },
@@ -1393,7 +1393,7 @@
   },
   {
     "ea": "0x481C35",
-    "line": "call    sub_47DBF0",
+    "line": "call    NiTMap_UInt_VertexDist_GetNext; Enumerate one VertexDist record: source index, primary target index, optional secondary target index, distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1459,7 +1459,7 @@
   },
   {
     "ea": "0x481C59",
-    "line": "call    sub_7101F0",
+    "line": "call    sub_7101F0; Transform the matched source normal into target geometry space.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1543,7 +1543,7 @@
   },
   {
     "ea": "0x481C82",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Normalize the copied target normal before storing it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1567,7 +1567,7 @@
   },
   {
     "ea": "0x481C91",
-    "line": "jnb     short loc_481CAD",
+    "line": "jnb     short loc_481CAD; Copy the source normal to the one optional secondary target only. VertexDist cannot represent additional coincident targets.",
     "mnemonic": "jnb",
     "size": 2
   },
@@ -1627,19 +1627,19 @@
   },
   {
     "ea": "0x481CAD",
-    "line": "cmp     [esp+134h+arg_10], 0",
+    "line": "cmp     [esp+134h+copyTangents], 0",
     "mnemonic": "cmp",
     "size": 8
   },
   {
     "ea": "0x481CB5",
-    "line": "jz      loc_481D3C",
+    "line": "jz      loc_481D3C; Optional position-offset path: move matched source and target vertices by 10 units along their normals. Disabled by the FaceGen head builder.",
     "mnemonic": "jz",
     "size": 6
   },
   {
     "ea": "0x481CBB",
-    "line": "mov     eax, [esp+134h+arg_0]",
+    "line": "mov     eax, [esp+134h+sourceGeometry]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1891,7 +1891,7 @@
   },
   {
     "ea": "0x481D47",
-    "line": "cmp     [esp+134h+arg_10], 0",
+    "line": "cmp     [esp+134h+copyTangents], 0",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -1909,7 +1909,7 @@
   },
   {
     "ea": "0x481D56",
-    "line": "mov     edx, [esp+134h+arg_0]",
+    "line": "mov     edx, [esp+134h+sourceGeometry]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1921,13 +1921,13 @@
   },
   {
     "ea": "0x481D63",
-    "line": "or      [eax+2Eh], cx",
+    "line": "or      [eax+2Eh], cx; Mark vertex/normal geometry channels dirty after normal copying and any optional position offsets.",
     "mnemonic": "or",
     "size": 4
   },
   {
     "ea": "0x481D67",
-    "line": "mov     eax, [esp+134h+arg_4]",
+    "line": "mov     eax, [esp+134h+targetGeometry]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1945,7 +1945,7 @@
   },
   {
     "ea": "0x481D78",
-    "line": "mov     ebp, [esp+134h+arg_0]",
+    "line": "mov     ebp, [esp+134h+sourceGeometry]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1963,7 +1963,7 @@
   },
   {
     "ea": "0x481D84",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1981,7 +1981,7 @@
   },
   {
     "ea": "0x481D8E",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2024,6 +2024,60 @@
   {
     "ea": "0x481DB4",
     "line": "jmp     loc_481A66",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF630",
+    "line": "lea     ecx, [ebp-10Ch]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9AF636",
+    "line": "jmp     ??1?$NiTMap@IUVertexDist@@@@UAE@XZ; NiTMap<uint,VertexDist>::~NiTMap<uint,VertexDist>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF63B",
+    "line": "mov     edx, [esp+targetGeometry]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AF63F",
+    "line": "lea     eax, [edx-124h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9AF645",
+    "line": "mov     ecx, [edx-128h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9AF64B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AF64D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF652",
+    "line": "mov     eax, offset stru_ADBBCC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF657",
+    "line": "jmp     ___CxxFrameHandler3",
     "mnemonic": "jmp",
     "size": 5
   }

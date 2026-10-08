@@ -1,4 +1,4 @@
-TESActorBase *__thiscall sub_51EAA0(char *this, char a2)
+TESCreature *__thiscall sub_51EAA0(char *this, unsigned int a2)
 {
-  return sub_51ED00((TESActorBase *)(this + 0xFFFFFF54), a2);
+  return TESCreature_ScalarDeletingDestructor((TESCreature *)(this + 0xFFFFFF54), a2);
 }

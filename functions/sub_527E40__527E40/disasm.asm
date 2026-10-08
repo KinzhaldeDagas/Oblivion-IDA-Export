@@ -1,4 +1,4 @@
-0x527E40: push    ebp
+0x527E40: push    ebp; CustomAnimSupport decode: NPC_ loader dispatches KFFZ to TESAnimation_LoadAnimationChunk at 0x5284BB.
 0x527E41: mov     ebp, esp
 0x527E43: sub     esp, 60h
 0x527E46: mov     eax, ds:0B30AACh
@@ -20,7 +20,7 @@
 0x527E73: push    esi
 0x527E74: mov     ecx, ebx
 0x527E76: mov     [esi+1ECh], eax
-0x527E7C: call    TESFile_InitializeFormFromRecord
+0x527E7C: call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.
 0x527E81: xor     edi, edi
 0x527E83: push    edi; a2
 0x527E84: mov     ecx, esi; this
@@ -87,7 +87,7 @@
 0x527F5F: mov     dword ptr [ebp+anonymous_0+3], eax
 0x527F62: mov     [ebp+var_8], ax
 0x527F66: mov     [ebp+var_6], al
-0x527F69: call    TESForm_LoadGenericComponents
+0x527F69: call    TESForm_LoadGenericComponents; Generic fixed-prefix/component DATA overlay. Copies min(chunk_length,fixed_prefix_size), then updates later components only when their starting offset is below chunk_length; omitted suffix components retain prior in-memory values.
 0x527F6E: mov     edx, [ebp+a1.member.modlist.next+1]
 0x527F71: mov     eax, dword ptr [ebp+var_18+1]
 0x527F74: mov     ecx, dword ptr [ebp+var_18+5]
@@ -108,7 +108,7 @@
 0x527FB5: push    edx; Dst
 0x527FB6: push    ebx; a2
 0x527FB7: mov     ecx, esi; this
-0x527FB9: call    TESForm_LoadGenericComponents
+0x527FB9: call    TESForm_LoadGenericComponents; Generic fixed-prefix/component DATA overlay. Copies min(chunk_length,fixed_prefix_size), then updates later components only when their starting offset is below chunk_length; omitted suffix components retain prior in-memory values.
 0x527FBE: jmp     def_5280F6; jumptable 005280F6 default case, cases 1296125511,1296125514,1296125515,1296125517-1296125521
 0x527FC3: mov     eax, [esi+0Ch]
 0x527FC6: mov     edx, [esi]
@@ -136,7 +136,7 @@
 0x528017: push    ecx
 0x528018: mov     ecx, ebx
 0x52801A: mov     [ebp+a1.member.modlist.data], edi
-0x52801D: call    TESFile_GetChunkData4
+0x52801D: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x528022: mov     edx, [ebp+a1.member.modlist.data]
 0x528025: push    edx
 0x528026: lea     ecx, [esi+68h]
@@ -148,7 +148,7 @@
 0x528040: push    200h; a4
 0x528045: push    edi; Dst
 0x528046: mov     ecx, ebx; a1
-0x528048: call    TESFile_GetChunkData
+0x528048: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x52804D: mov     eax, [esi]
 0x52804F: mov     edx, [eax+0D8h]
 0x528055: push    edi
@@ -160,7 +160,7 @@
 0x528064: push    eax
 0x528065: mov     ecx, ebx
 0x528067: mov     [ebp+a1.member.modlist.data], edi
-0x52806A: call    TESFile_GetChunkData4
+0x52806A: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x52806F: mov     ecx, [ebp+a1.member.modlist.data]
 0x528072: mov     [esi+0C8h], ecx
 0x528078: push    esi
@@ -174,14 +174,14 @@
 0x52809F: lea     edx, [esi+0A0h]
 0x5280A5: push    ebx
 0x5280A6: push    edx
-0x5280A7: call    TESFullname_Load
+0x5280A7: call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.
 0x5280AC: add     esp, 8
 0x5280AF: jmp     def_5280F6; jumptable 005280F6 default case, cases 1296125511,1296125514,1296125515,1296125517-1296125521
 0x5280B4: lea     eax, [ebp+a1.member.modlist]
 0x5280B7: push    eax
 0x5280B8: mov     ecx, ebx
 0x5280BA: mov     [ebp+a1.member.modlist.data], edi
-0x5280BD: call    TESFile_GetChunkData4
+0x5280BD: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x5280C2: mov     ecx, [ebp+a1.member.modlist.data]
 0x5280C5: mov     [esi+104h], ecx
 0x5280CB: jmp     def_5280F6; jumptable 005280F6 default case, cases 1296125511,1296125514,1296125515,1296125517-1296125521
@@ -200,7 +200,7 @@
 0x528107: lea     eax, [ebp+Dst]
 0x52810A: push    eax; Dst
 0x52810B: mov     ecx, ebx; a1
-0x52810D: call    TESFile_GetChunkData
+0x52810D: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x528112: mov     ecx, [ebp+var_3C]
 0x528115: mov     edx, dword ptr [ebp+Dst]
 0x528118: push    ecx
@@ -212,7 +212,7 @@
 0x52812A: push    eax
 0x52812B: mov     ecx, ebx
 0x52812D: mov     [ebp+a1.member.modlist.data], edi
-0x528130: call    TESFile_GetChunkData4
+0x528130: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x528135: mov     ecx, [ebp+a1.member.modlist.data]
 0x528138: mov     [esi+38h], ecx
 0x52813B: jmp     def_5280F6; jumptable 005280F6 default case, cases 1296125511,1296125514,1296125515,1296125517-1296125521
@@ -220,18 +220,18 @@
 0x528143: push    edx
 0x528144: mov     ecx, ebx
 0x528146: mov     [ebp+a1.member.modlist.data], edi
-0x528149: call    TESFile_GetChunkData4
+0x528149: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x52814E: mov     eax, [ebp+a1.member.modlist.data]
 0x528151: mov     [esi+0E8h], eax
 0x528157: jmp     def_5280F6; jumptable 005280F6 default case, cases 1296125511,1296125514,1296125515,1296125517-1296125521
 0x52815C: lea     ecx, [ebp+a1.member]; jumptable 005280F6 case 1296125512
 0x52815F: push    ecx
 0x528160: mov     ecx, ebx
-0x528162: call    TESFile_GetChunkData4
+0x528162: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x528167: lea     edx, [ebp+a1.member]
 0x52816A: push    ebx; a2
 0x52816B: push    edx; a1
-0x52816C: call    TESForm_ResolveFormID
+0x52816C: call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.
 0x528171: mov     eax, dword ptr [ebp+a1.member.type]
 0x528174: mov     ecx, ds:0B33A98h
 0x52817A: add     esp, 8
@@ -264,7 +264,7 @@
 0x5281CE: lea     edx, [ebp+a1.member.flags]; jumptable 005280F6 case 1296125516
 0x5281D1: push    edx
 0x5281D2: mov     ecx, ebx
-0x5281D4: call    TESFile_GetChunkData4
+0x5281D4: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x5281D9: fldz
 0x5281DB: fld     [ebp+a1.member.flags]
 0x5281DE: fcom    st(1)
@@ -294,11 +294,11 @@
 0x52822A: lea     eax, [ebp+a1]; jumptable 005280F6 case 1296125509
 0x52822D: push    eax
 0x52822E: mov     ecx, ebx
-0x528230: call    TESFile_GetChunkData4
+0x528230: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x528235: lea     ecx, [ebp+a1]
 0x528238: push    ebx; a2
 0x528239: push    ecx; a1
-0x52823A: call    TESForm_ResolveFormID
+0x52823A: call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.
 0x52823F: mov     edx, [ebp+a1.vtbl]
 0x528242: mov     ecx, ds:0B33A98h
 0x528248: add     esp, 8
@@ -338,7 +338,7 @@
 0x5282BC: lea     edx, [ebp+var_4C]
 0x5282BF: push    edx
 0x5282C0: mov     ecx, ebx
-0x5282C2: call    TESFile_GetChunkData4
+0x5282C2: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x5282C7: mov     ecx, [ebp+var_4C]
 0x5282CA: mov     eax, [esi]
 0x5282CC: mov     edx, [eax+124h]
@@ -363,7 +363,7 @@
 0x528312: lea     eax, [ebp+var_48]
 0x528315: push    eax; Dst
 0x528316: mov     ecx, ebx; a1
-0x528318: call    TESFile_GetChunkData
+0x528318: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x52831D: lea     edi, [esi+44h]
 0x528320: push    0
 0x528322: mov     ecx, edi
@@ -378,7 +378,7 @@
 0x52833E: push    edx
 0x52833F: mov     ecx, ebx
 0x528341: mov     [ebp+a1.member.modlist.data], edi
-0x528344: call    TESFile_GetChunkData4
+0x528344: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x528349: mov     eax, [ebp+a1.member.modlist.data]
 0x52834C: push    eax
 0x52834D: lea     ecx, [esi+54h]
@@ -387,7 +387,7 @@
 0x52835A: lea     ecx, [esi+1E8h]
 0x528360: push    ecx
 0x528361: mov     ecx, ebx
-0x528363: call    TESFile_GetChunkData4
+0x528363: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x528368: jmp     def_5280F6; jumptable 005280F6 default case, cases 1296125511,1296125514,1296125515,1296125517-1296125521
 0x52836D: cmp     eax, 53424341h
 0x528372: jnz     def_5280F6; jumptable 005280F6 default case, cases 1296125511,1296125514,1296125515,1296125517-1296125521
@@ -395,7 +395,7 @@
 0x52837A: lea     edx, [esi+28h]
 0x52837D: push    edx; Dst
 0x52837E: mov     ecx, ebx; a1
-0x528380: call    TESFile_GetChunkData
+0x528380: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x528385: jmp     def_5280F6; jumptable 005280F6 default case, cases 1296125511,1296125514,1296125515,1296125517-1296125521
 0x52838A: xor     ecx, ecx
 0x52838C: jmp     short loc_5283DF
@@ -414,7 +414,7 @@
 0x5283BE: lea     eax, [ebp+var_5C]
 0x5283C1: push    eax; Dst
 0x5283C2: mov     ecx, ebx; a1
-0x5283C4: call    TESFile_GetChunkData
+0x5283C4: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x5283C9: lea     ecx, [ebp+var_5C]
 0x5283CC: push    ecx
 0x5283CD: lea     ecx, [esi+68h]
@@ -436,7 +436,7 @@
 0x528401: mov     [ebp+var_34], eax
 0x528404: mov     [edi], eax
 0x528406: mov     dword ptr [edi+4], 1
-0x52840D: call    sub_527160
+0x52840D: call    FaceGenFloatVector_ResizeFill; Vector resize: retain existing prefix, erase surplus elements when shrinking, fill only newly inserted elements when growing. Equal size does not overwrite coefficients. Matrix dimension products must already be valid; no recovery from rows*columns overflow.
 0x528412: mov     eax, [ebp+a1.member.modlist.data]
 0x528415: call    __alloca?
 0x52841A: mov     ecx, [ebp+a1.member.modlist.data]
@@ -452,7 +452,7 @@
 0x528434: push    edx; a4
 0x528435: push    eax; Dst
 0x528436: mov     ecx, ebx; a1
-0x528438: call    TESFile_GetChunkData
+0x528438: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x52843D: xor     eax, eax
 0x52843F: cmp     [ebp+var_34], eax
 0x528442: mov     [ebp+a1.member.modlist.data], eax
@@ -478,10 +478,10 @@
 0x52847B: jb      short loc_528447
 0x52847D: mov     ebx, [ebp+var_50]
 0x528480: lea     eax, [esi+168h]
-0x528486: push    eax
+0x528486: push    eax; destination
 0x528487: lea     ecx, [esi+108h]
-0x52848D: push    ecx
-0x52848E: call    sub_5528F0
+0x52848D: push    ecx; source
+0x52848E: call    FaceGenHeadParameters_Copy; Deep-copies all four FaceGen matrices, preserving dimensions and engine ownership of destination coefficient buffers.
 0x528493: add     esp, 8
 0x528496: xor     edi, edi
 0x528498: jmp     short def_5280F6; jumptable 005280F6 default case, cases 1296125511,1296125514,1296125515,1296125517-1296125521
@@ -491,12 +491,12 @@
 0x5284A2: call    TESModel_Load
 0x5284A7: add     esp, 8
 0x5284AA: jmp     short def_5280F6; jumptable 005280F6 default case, cases 1296125511,1296125514,1296125515,1296125517-1296125521
-0x5284AC: cmp     eax, 5A46464Bh
+0x5284AC: cmp     eax, 5A46464Bh; CustomAnimSupport evidence: NPC_ load dispatcher branch tests KFFZ chunk before TESAnimation_LoadAnimationChunk call.
 0x5284B1: jnz     short def_5280F6; jumptable 005280F6 default case, cases 1296125511,1296125514,1296125515,1296125517-1296125521
 0x5284B3: lea     ecx, [esi+94h]
 0x5284B9: push    ebx
 0x5284BA: push    ecx
-0x5284BB: call    TESAnimation_LoadAnimationChunk
+0x5284BB: call    TESAnimation_LoadAnimationChunk; CustomAnimSupport xref: NPC_ load branch calls TESAnimation_LoadAnimationChunk for KFFZ.
 0x5284C0: mov     ecx, ebx; jumptable 005280F6 default case, cases 1296125511,1296125514,1296125515,1296125517-1296125521
 0x5284C2: call    TESFile_GetNextChunk
 0x5284C7: test    al, al
@@ -516,7 +516,7 @@
 0x5284F4: test    eax, eax
 0x5284F6: jnz     short loc_528504
 0x5284F8: mov     ecx, ds:0B333C4h; this
-0x5284FE: push    esi; a2
+0x5284FE: push    esi; baseForm
 0x5284FF: call    TESObjectREFR_SetBaseForm
 0x528504: mov     al, 1
 0x528506: lea     esp, [ebp-6Ch]

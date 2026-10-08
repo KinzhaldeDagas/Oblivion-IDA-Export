@@ -1,18 +1,31 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 2,
-  "callers_count": 1,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x45ABE0",
+      "0x45AC2E"
+    ]
+  ],
+  "chunks_sha256": "b64dda59070a6a852f0b2a58bcd472b66ce635c839e75b20f87cb0a698f198e3",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "MEF PERF 2026-10-02 PASS2: Verified: NumericIDBufferMap constructs bucketCount+4=37, buckets+8=148-byte zeroed allocation, entryCount+C=0, final vtable A3A350. Four owner fields54/58/5C/60 receive these objects in45B300. No assertion that external code never resizes later. Fallout82601D20 agrees on constructor shape after Oblivion observation; platform allocator differs.\nMEF v57 IMPLEMENTED 2026-10-08: PERF-11 ctor entry invalidates recycled-owner auxiliary identities before native initialization. Paired dtor45AC30 pre-invalidation and global mutation epoch close native map lifetime. Source buckets/keys and first-node order are authoritative, never rehashed.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
   "display_name": "NumericIDBufferMap::NumericIDBufferMap(void)",
   "end_ea": "0x45AC2E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??0NumericIDBufferMap@@QAE@XZ",
   "segment": ".text",
   "sha256": "b64dda59070a6a852f0b2a58bcd472b66ce635c839e75b20f87cb0a698f198e3",
   "size": 78,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x45ABE0",
+  "total_chunk_size": 78,
   "type": "NumericIDBufferMap *__thiscall(NumericIDBufferMap *__hidden this)",
   "xrefs_from_count": 30,
   "xrefs_to_count": 4

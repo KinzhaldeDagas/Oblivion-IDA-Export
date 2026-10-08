@@ -1,15 +1,13 @@
+// Pass223: Clears default NiRendererSpecificProperty global 0x00B401D8.
 void sub_73FF80()
 {
-  int v0; // esi
+  float v0; // esi
 
-  v0 = dword_B401D8;
-  if ( dword_B401D8 )
+  v0 = MEMORY[0xB3F9B0][0x20A]; /*0x73ff81*/
+  if ( LODWORD(MEMORY[0xB3F9B0][0x20A]) ) /*0x73ff81*/
   {
-    if ( !InterlockedDecrement((volatile LONG *)(v0 + 4)) )
-    {
-      if ( v0 )
-        (**(void (__thiscall ***)(int, int))v0)(v0, 1);
-    }
-    dword_B401D8 = 0;
+    if ( !InterlockedDecrement((volatile LONG *)(LODWORD(v0) + 4)) && v0 != 0.0 ) /*0x73ff9b*/
+      (**(void (__thiscall ***)(float, int))LODWORD(v0))(COERCE_FLOAT(LODWORD(v0)), 1); /*0x73ffa5*/
+    MEMORY[0xB3F9B0][0x20A] = 0.0; /*0x73ffa7*/
   }
 }

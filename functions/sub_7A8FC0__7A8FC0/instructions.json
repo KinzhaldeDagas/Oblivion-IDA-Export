@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A8FC0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; OBLIVION AUTHORITY (2026-08-24): Builds a lower explicit leaf LOD from selected source-leaf pairs. Clones the first leaf, averages pair positions, decodes and averages their packed RGB, then calls CBillboardLeaf::SetColor with applyDimming=false. This avoids applying colorScaleByte a second time.",
     "mnemonic": "push",
     "size": 2
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x7A9003",
-    "line": "mov     ecx, offset unk_B42CA0",
+    "line": "mov     ecx, offset stru_B42CA0; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x7A900C",
-    "line": "call    sub_78EAF0",
+    "line": "call    OB_stRandom_ctor_010201A0; Oblivion stRandom constructor. The class has no per-instance generator state; if the shared SIdvRandomImpl state is not initialized, it invokes Reseed(-1).",
     "mnemonic": "call",
     "size": 5
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x7A901E",
-    "line": "mov     ebx, [esp+74h+arg_0]",
+    "line": "mov     ebx, [esp+74h+result]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -271,13 +271,13 @@
   },
   {
     "ea": "0x7A905A",
-    "line": "fstp    [esp+7Ch+var_78]; float",
+    "line": "fstp    [esp+7Ch+maxValue]; maxValue",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A905E",
-    "line": "mov     ecx, offset unk_B42CA0",
+    "line": "mov     ecx, offset stru_B42CA0; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -289,13 +289,13 @@
   },
   {
     "ea": "0x7A9065",
-    "line": "fstp    [esp+7Ch+var_7C]; float",
+    "line": "fstp    [esp+7Ch+minValue]; minValue",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7A9068",
-    "line": "call    sub_78EA00",
+    "line": "call    OB_stRandom_GetUniform_010201A0; Oblivion stRandom::GetUniform. Returns minValue + (maxValue - minValue) * SIdvRandomImpl::m_cUniform.Next(). Used throughout spline, branch, frond, tree, leaf-LOD, and seed generation paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x7A9077",
-    "line": "jp      loc_7A920F",
+    "line": "jp      loc_7A920F; BuildNewLeaves emits this pair only when randomUniform(0,1) > leafReductionPercentage; retention/removal is independent of texture index and color.",
     "mnemonic": "jp",
     "size": 6
   },
@@ -349,13 +349,13 @@
   },
   {
     "ea": "0x7A9087",
-    "line": "mov     ecx, [edi]",
+    "line": "mov     ecx, [edi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A9089",
-    "line": "call    sub_7A7E50",
+    "line": "call    OB_CBillboardLeaf_Clone_010201A0; For each retained pair, clones the primary/first leaf. Full copy preserves its raw textureIndexByte (including mirror bit), colorScaleByte, normal, wind, and other metadata; the match's identity fields are not adopted.",
     "mnemonic": "call",
     "size": 5
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x7A9115",
-    "line": "shr     esi, 1",
+    "line": "shr     esi, 1; Uses only the cloned primary leaf's raw textureIndexByte>>1 to select SIdvLeafTexture origin/size for position adjustment. The matching leaf's texture record is ignored.",
     "mnemonic": "shr",
     "size": 2
   },
@@ -853,55 +853,55 @@
   },
   {
     "ea": "0x7A9194",
-    "line": "lea     ecx, [esp+74h+var_24]",
+    "line": "lea     ecx, [esp+74h+outRgb]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A9198",
-    "line": "push    ecx",
+    "line": "push    ecx; outColor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A9199",
-    "line": "mov     ecx, [edi+4]",
+    "line": "mov     ecx, [edi+4]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A919C",
-    "line": "call    sub_7A7EC0",
+    "line": "call    OB_CBillboardLeaf_GetColor_010201A0; OBLIVION AUTHORITY (2026-08-24): First GetColor call decodes the second source leaf's packed +0x14 RGB bytes to floats in [0,1].",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A91A1",
-    "line": "mov     ecx, [edi]",
+    "line": "mov     ecx, [edi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A91A3",
-    "line": "lea     edx, [esp+74h+var_18]",
+    "line": "lea     edx, [esp+74h+outColor]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A91A7",
-    "line": "push    edx",
+    "line": "push    edx; outColor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A91A8",
-    "line": "mov     esi, eax",
+    "line": "mov     esi, eax; OBLIVION AUTHORITY (2026-08-24): Preserve pointer returned by first GetColor call; the actual second GetColor call follows at 0x7A91AA.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A91AA",
-    "line": "call    sub_7A7EC0",
+    "line": "call    OB_CBillboardLeaf_GetColor_010201A0; OBLIVION AUTHORITY (2026-08-24): Second GetColor call decodes the first source leaf; 0x7A91AF..0x7A91F4 averages all three channels by exact 0.5 before SetColor(false).",
     "mnemonic": "call",
     "size": 5
   },
@@ -919,13 +919,13 @@
   },
   {
     "ea": "0x7A91B3",
-    "line": "push    0",
+    "line": "push    0; applyDimming",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7A91B5",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -967,13 +967,13 @@
   },
   {
     "ea": "0x7A91CB",
-    "line": "lea     eax, [esp+78h+var_30]",
+    "line": "lea     eax, [esp+78h+rgb]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A91CF",
-    "line": "push    eax",
+    "line": "push    eax; color",
     "mnemonic": "push",
     "size": 1
   },
@@ -1009,7 +1009,7 @@
   },
   {
     "ea": "0x7A91E2",
-    "line": "fstp    [esp+7Ch+var_30]",
+    "line": "fstp    [esp+7Ch+rgb]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1045,7 +1045,7 @@
   },
   {
     "ea": "0x7A91F8",
-    "line": "call    sub_7A7F10",
+    "line": "call    OB_CBillboardLeaf_SetColor_010201A0; [RT4.1 parity v147 2026-10-08] Hooked exact E813EDFFFF call to7A7F10 SetColor. For active retained28000 generation context, wrapper changes applyDimming totrue to match SourceCode/LeafLod.cpp BuildNewLeaves default SetColor argument. Other calls retain incoming flag. End-to-end LOD appearance remains UNVERIFIED.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1057,25 +1057,25 @@
   },
   {
     "ea": "0x7A9201",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A9202",
-    "line": "mov     ecx, [esp+78h+arg_0]",
+    "line": "mov     ecx, [esp+78h+result]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A9206",
-    "line": "call    sub_791770",
+    "line": "call    OB_stVector4_PushBack_010201A0; Pushes one 4-byte value into an OB_stVector4. Writes directly at end when capacity remains, otherwise calls the checked insert-one helper. Oblivion uses it for CBranch pointers and other pointer-sized SpeedTree lists.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A920B",
-    "line": "mov     ebx, [esp+74h+arg_0]",
+    "line": "mov     ebx, [esp+74h+result]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1168,5 +1168,113 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CCEE0",
+    "line": "mov     eax, dword ptr unk_B42CA4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCEE5",
+    "line": "and     eax, 0FFFFFFFEh",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCEE8",
+    "line": "mov     dword ptr unk_B42CA4, eax",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCEED",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CCEEE",
+    "line": "mov     eax, [ebp-5Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCEF1",
+    "line": "and     eax, 1",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCEF4",
+    "line": "jz      locret_9CCF06",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9CCEFA",
+    "line": "and     dword ptr [ebp-5Ch], 0FFFFFFFEh",
+    "mnemonic": "and",
+    "size": 4
+  },
+  {
+    "ea": "0x9CCEFE",
+    "line": "mov     ecx, [ebp+4]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCF01",
+    "line": "jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCF06",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CCF07",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CCF0B",
+    "line": "lea     eax, [edx-64h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCF0E",
+    "line": "mov     ecx, [edx-68h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCF11",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CCF13",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCF18",
+    "line": "mov     eax, offset stru_AF6330",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCF1D",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

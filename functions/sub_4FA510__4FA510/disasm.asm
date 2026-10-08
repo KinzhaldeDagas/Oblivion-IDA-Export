@@ -1,4 +1,4 @@
-0x4FA510: fldz
+0x4FA510: fldz; Script full-load initializer: zeros ScriptInfo at +0x18..+0x28, text/data pointers +0x2C/+0x30 and runtime fields. TESDataHandler deliberately skips this for PARTIAL records.
 0x4FA512: xor     eax, eax
 0x4FA514: mov     [ecx+18h], eax
 0x4FA517: mov     [ecx+1Ch], eax

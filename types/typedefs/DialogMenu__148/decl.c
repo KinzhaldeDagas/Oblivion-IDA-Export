@@ -1,1 +1,1 @@
-DialogMenu
+struct DialogMenu;

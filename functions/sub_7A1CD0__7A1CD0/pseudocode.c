@@ -1,320 +1,328 @@
-unsigned int __thiscall sub_7A1CD0(_DWORD *this, int a2, int a3)
+// CFrondEngine::Compute used by CSpeedTreeRT::Compute; builds stock frond indexed geometry before TES4 later deletes unconsumed frond geometry.
+//
+// [2026-10-03 geometry limits] Verified Compute rejects only vertex total >0xFFFF (frond vertices exceed %d diagnostic), not >0x7FFF. Fallout CFrondEngine::Compute 0x82832380 corroborates the same boundary. Plugin removed its unsupported signed-half-range cap; native vertex count and index slots remain unsigned WORD.
+//
+// [2026-10-03 material ownership] Builds shared vertices from highest-LOD guide set: engine+18 outer vector, first inner vector contains 0x30-byte guides. Lower LOD index generation reuses these starts. Use LOD0 guides, not the pre-pruning root guide vector, to prove full vertex/material association. Plugin now verifies exact nonoverlapping coverage of the exported coordinate buffer and retains one map byte per vertex through cache/clone/free. Uniform referenced triangle sets use their proven map index for texture lookup; multi-map shape partitioning is still pending.
+unsigned int __thiscall OB_CFrondEngine_Compute_010201A0(
+        OB_CFrondEngine_010201A0 *this,
+        OB_CIndexedGeometry_010201A0 *frondGeometry,
+        int lightingEngine)
 {
-  unsigned int v4; // ebx
-  int v5; // ebp
-  int v6; // eax
-  int v7; // eax
-  int v8; // edx
-  int v9; // eax
-  int v10; // eax
-  int v11; // edi
-  int v12; // eax
-  int v13; // eax
-  int v14; // edx
-  int v15; // eax
-  unsigned int v16; // edx
-  int v17; // eax
-  int v18; // edi
-  int v19; // eax
-  int v20; // eax
-  int v21; // edx
-  int v22; // eax
-  int v23; // eax
-  _DWORD *v24; // eax
-  int v25; // eax
-  unsigned int v26; // ebx
+  int v4; // edi
+  unsigned int v5; // ebx
+  int v6; // ebp
+  OB_stVector_SFrondGuide_010201A0 *begin; // eax
+  OB_stVector_SFrondGuide_010201A0 *v8; // eax
+  OB_SFrondGuide_010201A0 *v9; // edx
+  int frondType; // eax
+  OB_stVector_SFrondGuide_010201A0 *v11; // eax
+  OB_stVector_SFrondGuide_010201A0 *v12; // edi
+  OB_SFrondGuide_010201A0 *v13; // eax
+  OB_SFrondGuide_010201A0 *v14; // eax
+  void *v15; // edx
+  OB_SFrondGuide_010201A0 *v16; // eax
+  unsigned int v17; // edx
+  OB_stVector_SFrondGuide_010201A0 *v18; // eax
+  OB_stVector_SFrondGuide_010201A0 *v19; // edi
+  OB_SFrondGuide_010201A0 *v20; // eax
+  OB_SFrondGuide_010201A0 *v21; // eax
+  void *v22; // edx
+  OB_SFrondGuide_010201A0 *v23; // eax
+  int v24; // eax
+  OB_stString28_010201A0 *v25; // eax
+  int v26; // eax
+  unsigned int v27; // ebx
   int i; // ebp
-  int v28; // eax
-  int v29; // eax
-  int v30; // edx
-  int v31; // eax
-  int v32; // edi
+  OB_stVector_SFrondGuide_010201A0 *v29; // eax
+  OB_stVector_SFrondGuide_010201A0 *v30; // eax
+  OB_SFrondGuide_010201A0 *v31; // edx
+  OB_stVector_SFrondGuide_010201A0 *v32; // eax
   int v33; // eax
   int j; // edi
-  int v35; // ecx
-  unsigned int result; // eax
+  OB_stVector_SFrondGuide_010201A0 *v35; // ecx
+  unsigned int v36; // eax
   unsigned int v37; // ebx
-  int v38; // ecx
-  int v39; // eax
-  int v40; // edx
-  int v41; // eax
-  int v42; // edi
-  int v43; // eax
-  int v44; // ecx
-  int v45; // ebp
-  int v46; // edi
-  int v47; // eax
-  int v48; // ecx
-  int v49; // edi
-  int v50; // eax
-  int v51; // eax
-  _DWORD *v52; // edi
-  int v53; // ebp
-  int v54; // eax
+  OB_stVector_SFrondGuide_010201A0 *v38; // ecx
+  OB_stVector_SFrondGuide_010201A0 *v39; // eax
+  OB_SFrondGuide_010201A0 *v40; // edx
+  OB_stVector_SFrondGuide_010201A0 *v41; // eax
+  OB_stVector_SFrondGuide_010201A0 *v42; // edi
+  OB_SFrondGuide_010201A0 *v43; // eax
+  OB_stVector_SFrondGuide_010201A0 *v44; // ecx
+  OB_SFrondGuide_010201A0 *v45; // ebp
+  OB_stVector_SFrondGuide_010201A0 *v46; // edi
+  OB_SFrondGuide_010201A0 *v47; // eax
+  OB_stVector_SFrondGuide_010201A0 *v48; // ecx
+  OB_stVector_SFrondGuide_010201A0 *v49; // edi
+  OB_SFrondGuide_010201A0 *v50; // eax
+  OB_stVector_SFrondGuide_010201A0 *v51; // eax
+  OB_SFrondGuide_010201A0 *v52; // edi
+  OB_stVector_SFrondGuide_010201A0 *v53; // ebp
+  OB_SFrondGuide_010201A0 *v54; // eax
   unsigned int v55; // ebx
   int m; // ebp
-  int v57; // eax
-  int v58; // eax
-  int v59; // edx
-  int v60; // eax
-  int v61; // edi
-  int v62; // eax
+  OB_stVector_SFrondGuide_010201A0 *v57; // eax
+  OB_stVector_SFrondGuide_010201A0 *v58; // eax
+  OB_SFrondGuide_010201A0 *v59; // edx
+  OB_stVector_SFrondGuide_010201A0 *v60; // eax
+  int v61; // eax
   int n; // ebp
-  int v64; // ecx
-  unsigned int v65; // ebx
-  int v66; // ecx
-  int v67; // eax
-  int v68; // edx
-  int v69; // ecx
-  int v70; // edi
-  int v71; // eax
-  int v72; // eax
-  _DWORD *v73; // edi
-  int v74; // ebp
-  int v75; // eax
-  rsize_t v76; // [esp-4h] [ebp-B8h]
-  int v77; // [esp+14h] [ebp-A0h]
+  OB_stVector_SFrondGuide_010201A0 *v63; // ecx
+  unsigned int v64; // ebx
+  OB_stVector_SFrondGuide_010201A0 *v65; // ecx
+  OB_stVector_SFrondGuide_010201A0 *v66; // eax
+  OB_SFrondGuide_010201A0 *v67; // edx
+  OB_stVector_SFrondGuide_010201A0 *v68; // ecx
+  OB_stVector_SFrondGuide_010201A0 *v69; // edi
+  OB_SFrondGuide_010201A0 *v70; // eax
+  OB_stVector_SFrondGuide_010201A0 *v71; // eax
+  OB_stVector_SFrondGuide_010201A0 *v72; // ebp
+  OB_SFrondGuide_010201A0 *v73; // eax
+  int v74; // [esp+14h] [ebp-A0h]
   int k; // [esp+14h] [ebp-A0h]
   int ii; // [esp+14h] [ebp-A0h]
-  int v80; // [esp+18h] [ebp-9Ch]
-  int v81; // [esp+18h] [ebp-9Ch]
-  int v82; // [esp+20h] [ebp-94h] BYREF
-  char v83; // [esp+24h] [ebp-90h]
-  int v84; // [esp+34h] [ebp-80h]
-  int v85; // [esp+38h] [ebp-7Ch]
-  int v86; // [esp+3Ch] [ebp-78h] BYREF
-  char v87; // [esp+40h] [ebp-74h]
-  int v88; // [esp+50h] [ebp-64h]
-  int v89; // [esp+54h] [ebp-60h]
-  _BYTE v90[40]; // [esp+58h] [ebp-5Ch] BYREF
-  _BYTE v91[40]; // [esp+80h] [ebp-34h] BYREF
-  int v92; // [esp+B0h] [ebp-4h]
+  int v77; // [esp+18h] [ebp-9Ch]
+  int v78; // [esp+18h] [ebp-9Ch]
+  OB_stString28_010201A0 result; // [esp+20h] [ebp-94h] BYREF
+  OB_stString28_010201A0 details; // [esp+3Ch] [ebp-78h] BYREF
+  OB_IdvFileError_010201A0 v81; // [esp+58h] [ebp-5Ch] BYREF
+  OB_IdvFileError_010201A0 v82; // [esp+80h] [ebp-34h] BYREF
+  int v83; // [esp+B0h] [ebp-4h]
 
-  *(this + 1) = a3;
-  *this = a2;
-  v77 = 0;
-  sub_7A1660(this);
-  v4 = 0;
-  v5 = 0;
-  while ( 1 )
+  this->lightingEngine = (OB_CLightingEngine_010201A0 *)lightingEngine; /*0x7a1d0d*/
+  v4 = 0; /*0x7a1d10*/
+  this->indexedGeometry = frondGeometry; /*0x7a1d14*/
+  v74 = 0; /*0x7a1d16*/
+  OB_CFrondEngine_BuildGuideLods_010201A0(this); /*0x7a1d1a*/
+  v5 = 0; /*0x7a1d1f*/
+  v6 = 0; /*0x7a1d21*/
+  while ( 1 ) /*0x7a1d23*/
   {
-    v6 = *(this + 7);
-    if ( !v6 || !((*(this + 8) - v6) >> 4) )
-      _invalid_parameter_noinfo();
-    v7 = *(this + 7);
-    v8 = *(_DWORD *)(v7 + 4);
-    if ( !v8 || v4 >= (*(_DWORD *)(v7 + 8) - v8) / 0x30 )
-      break;
-    v9 = *(this + 0xA);
-    if ( v9 )
+    begin = this->guideLodVectorWrapper.begin; /*0x7a1d23*/
+    if ( !begin || !(this->guideLodVectorWrapper.end - begin) ) /*0x7a1d2f*/
+      _invalid_parameter_noinfo(v5, 0, (int)this); /*0x7a1d34*/
+    v8 = this->guideLodVectorWrapper.begin; /*0x7a1d39*/
+    v9 = v8->begin; /*0x7a1d3c*/
+    if ( !v9 || v5 >= v8->end - v9 ) /*0x7a1d5f*/
+      break; /*0x7a1d5f*/
+    frondType = this->frondType; /*0x7a1d65*/
+    if ( frondType ) /*0x7a1d6a*/
     {
-      if ( v9 != 1 )
+      if ( frondType != 1 ) /*0x7a1d73*/
       {
-        LODWORD(v76) = 0x2A;
-        v85 = 0xF;
-        v84 = 0;
-        v83 = 0;
-        sub_414500(&v82, 0, "default reached in CFrondEngine::Compute()", v76);
-        v92 = 0;
-        sub_789190((std::exception *)v90, &v82, 0);
-        ThrowException__((int)v90, &_TI3_AVIdvFileError__);
+        result.capacity = 0xF; /*0x7a1ea6*/
+        result.size = 0; /*0x7a1eae*/
+        result.storage.inlineData[0] = 0; /*0x7a1eb2*/
+        OB_stString28_AssignBytes_010201A0(&result, "default reached in CFrondEngine::Compute()", 0x2Au); /*0x7a1eb7*/
+        v83 = 0; /*0x7a1ec6*/
+        OB_IdvFileError_Ctor_010201A0(&v81, &result, 0); /*0x7a1ecd*/
+        ThrowException__((DWORD)&v81, &_TI3_AVIdvFileError__); /*0x7a1edc*/
       }
-      v10 = *(this + 7);
-      if ( !v10 || !((*(this + 8) - v10) >> 4) )
-        _invalid_parameter_noinfo();
-      v11 = *(this + 7);
-      v12 = *(_DWORD *)(v11 + 4);
-      if ( !v12 || v4 >= (*(_DWORD *)(v11 + 8) - v12) / 0x30 )
-        _invalid_parameter_noinfo();
-      v13 = *(_DWORD *)(v11 + 4);
-      v14 = *(_DWORD *)(v13 + v5 + 4);
-      v15 = v5 + v13;
-      if ( v14 )
+      v11 = this->guideLodVectorWrapper.begin; /*0x7a1d79*/
+      if ( !v11 || !(this->guideLodVectorWrapper.end - v11) ) /*0x7a1d85*/
+        _invalid_parameter_noinfo(v5, 0, (int)this); /*0x7a1d8a*/
+      v12 = this->guideLodVectorWrapper.begin; /*0x7a1d8f*/
+      v13 = v12->begin; /*0x7a1d92*/
+      if ( !v13 || v5 >= v12->end - v13 ) /*0x7a1db1*/
+        _invalid_parameter_noinfo(v5, (int)v12, (int)this); /*0x7a1db3*/
+      v14 = v12->begin; /*0x7a1db8*/
+      v15 = v14[v6].vertexVector.begin; /*0x7a1dbb*/
+      v16 = &v14[v6]; /*0x7a1dbf*/
+      if ( v15 ) /*0x7a1dc3*/
       {
-        v16 = (int)((unsigned __int64)(0x92492493LL * (*(_DWORD *)(v15 + 8) - v14)) >> 0x20) >> 5;
-        v77 += (v16 + (v16 >> 0x1F)) * (2 * *(this + 0xD) - 1);
+        v17 = (int)((unsigned __int64)(0x92492493LL * ((char *)v16->vertexVector.end - (char *)v15)) >> 0x20) >> 5; /*0x7a1df0*/
+        v74 += (v17 + (v17 >> 0x1F)) * (2 * this->profileSegmentCount - 1); /*0x7a1e04*/
       }
-      ++v4;
-      v5 += 0x30;
+      ++v5; /*0x7a1dd5*/
+      ++v6; /*0x7a1dd8*/
+      v4 = 0; /*0x7a1ddb*/
     }
     else
     {
-      v17 = *(this + 7);
-      if ( !v17 || !((*(this + 8) - v17) >> 4) )
-        _invalid_parameter_noinfo();
-      v18 = *(this + 7);
-      v19 = *(_DWORD *)(v18 + 4);
-      if ( !v19 || v4 >= (*(_DWORD *)(v18 + 8) - v19) / 0x30 )
-        _invalid_parameter_noinfo();
-      v20 = *(_DWORD *)(v18 + 4);
-      v21 = *(_DWORD *)(v20 + v5 + 4);
-      v22 = v5 + v20;
-      if ( v21 )
-        v23 = (*(_DWORD *)(v22 + 8) - v21) / 0x38;
+      v18 = this->guideLodVectorWrapper.begin; /*0x7a1e15*/
+      if ( !v18 || !(this->guideLodVectorWrapper.end - v18) ) /*0x7a1e21*/
+        _invalid_parameter_noinfo(v5, 0, (int)this); /*0x7a1e26*/
+      v19 = this->guideLodVectorWrapper.begin; /*0x7a1e2b*/
+      v20 = v19->begin; /*0x7a1e2e*/
+      if ( !v20 || v5 >= v19->end - v20 ) /*0x7a1e4d*/
+        _invalid_parameter_noinfo(v5, (int)v19, (int)this); /*0x7a1e4f*/
+      v21 = v19->begin; /*0x7a1e54*/
+      v22 = v21[v6].vertexVector.begin; /*0x7a1e57*/
+      v23 = &v21[v6]; /*0x7a1e5b*/
+      if ( v22 ) /*0x7a1e5f*/
+        v24 = ((char *)v23->vertexVector.end - (char *)v22) / 0x38; /*0x7a1e7b*/
       else
-        v23 = 0;
-      ++v4;
-      v5 += 0x30;
-      v77 += 2 * v23 * *(this + 0xB);
+        v24 = 0; /*0x7a1e61*/
+      ++v5; /*0x7a1e8a*/
+      ++v6; /*0x7a1e8d*/
+      v74 += 2 * v24 * this->bladeCount; /*0x7a1e90*/
+      v4 = 0; /*0x7a1e94*/
     }
   }
-  if ( v77 > 0xFFFF )
+  if ( v74 > 0xFFFF ) /*0x7a1ee9*/
   {
-    v24 = (_DWORD *)sub_7A54A0((int)&v82, "frond vertices exceed %d", 0xFFFF);
-    v92 = 1;
-    sub_6F7DD0((std::exception *)v90, v24);
-    ThrowException__((int)v90, &_TI2_AVruntime_error_std__);
+    v25 = OB_IdvFormatString_010201A0(&result, "frond vertices exceed %d", 0xFFFF); /*0x7a1ef9*/
+    v83 = 1; /*0x7a1f06*/
+    OB_std_runtime_error_CtorFromString_010201A0((OB_std_runtime_error_010201A0 *)&v81, v25); /*0x7a1f11*/
+    ThrowException__((DWORD)&v81, &_TI2_AVruntime_error_std__); /*0x7a1f20*/
   }
-  sub_798090((_DWORD *)*this, *((_WORD *)this + 0x28));
-  v25 = *(this + 0xA);
-  if ( v25 )
+  OB_CIndexedGeometry_SetNumLodLevels_010201A0(this->indexedGeometry, this->frondLodCount); /*0x7a1f2c*/
+  v26 = this->frondType; /*0x7a1f31*/
+  if ( v26 )
   {
-    if ( v25 != 1 )
+    if ( v26 != 1 ) /*0x7a1f3f*/
     {
-      LODWORD(v76) = 0x2A;
-      v89 = 0xF;
-      v88 = 0;
-      v87 = 0;
-      sub_414500(&v86, 0, "default reached in CFrondEngine::Compute()", v76);
-      v92 = 2;
-      sub_789190((std::exception *)v91, &v86, 0);
-      ThrowException__((int)v91, &_TI3_AVIdvFileError__);
+      details.capacity = 0xF; /*0x7a1f4c*/
+      details.size = 0; /*0x7a1f54*/
+      details.storage.inlineData[0] = 0; /*0x7a1f58*/
+      OB_stString28_AssignBytes_010201A0(&details, "default reached in CFrondEngine::Compute()", 0x2Au); /*0x7a1f5d*/
+      v83 = 2; /*0x7a1f6f*/
+      OB_IdvFileError_Ctor_010201A0(&v82, &details, 0); /*0x7a1f7a*/
+      ThrowException__((DWORD)&v82, &_TI3_AVIdvFileError__); /*0x7a1f8c*/
     }
-    v26 = 0;
-    for ( i = 0; ; i += 0x30 )
+    v27 = 0; /*0x7a1f91*/
+    for ( i = 0; ; i += 0x30 ) /*0x7a1f93*/
     {
-      v28 = *(this + 7);
-      if ( !v28 || !((*(this + 8) - v28) >> 4) )
-        _invalid_parameter_noinfo();
-      v29 = *(this + 7);
-      v30 = *(_DWORD *)(v29 + 4);
-      if ( !v30 || v26 >= (*(_DWORD *)(v29 + 8) - v30) / 0x30 )
-        break;
-      v31 = *(this + 7);
-      if ( !v31 || !((*(this + 8) - v31) >> 4) )
-        _invalid_parameter_noinfo();
-      v32 = *(this + 7);
-      v33 = *(_DWORD *)(v32 + 4);
-      if ( !v33 || v26 >= (*(_DWORD *)(v32 + 8) - v33) / 0x30 )
-        _invalid_parameter_noinfo();
-      sub_79FD10((void **)this, i + *(_DWORD *)(v32 + 4));
-      ++v26;
+      v29 = this->guideLodVectorWrapper.begin; /*0x7a1f95*/
+      if ( !v29 || !(this->guideLodVectorWrapper.end - v29) ) /*0x7a1fa1*/
+        _invalid_parameter_noinfo(v27, v4, (int)this); /*0x7a1fa6*/
+      v30 = this->guideLodVectorWrapper.begin; /*0x7a1fab*/
+      v31 = v30->begin; /*0x7a1fae*/
+      if ( !v31 || v27 >= v30->end - v31 ) /*0x7a1fcd*/
+        break; /*0x7a1fcd*/
+      v32 = this->guideLodVectorWrapper.begin; /*0x7a1fcf*/
+      if ( !v32 || !(this->guideLodVectorWrapper.end - v32) ) /*0x7a1fdb*/
+        _invalid_parameter_noinfo(v27, v4, (int)this); /*0x7a1fe0*/
+      v4 = (int)this->guideLodVectorWrapper.begin; /*0x7a1fe5*/
+      v33 = *(_DWORD *)(v4 + 4); /*0x7a1fe8*/
+      if ( !v33 || v27 >= (*(_DWORD *)(v4 + 8) - v33) / 0x30 ) /*0x7a2007*/
+        _invalid_parameter_noinfo(v27, v4, (int)this); /*0x7a2009*/
+      OB_CFrondEngine_BuildExtrusionVertices_010201A0(this, (OB_SFrondGuide_010201A0 *)(i + *(_DWORD *)(v4 + 4))); /*0x7a2016*/
+      ++v27; /*0x7a201b*/
     }
     for ( j = 0; ; ++j )
     {
-      v35 = *(this + 7);
-      v80 = j;
-      result = v35 ? (*(this + 8) - v35) >> 4 : 0;
-      if ( (unsigned __int16)j >= result )
-        break;
-      sub_794A90(*this, j);
-      v37 = 0;
-      for ( k = 0; ; k += 0x30 )
+      v35 = this->guideLodVectorWrapper.begin; /*0x7a2028*/
+      v77 = j; /*0x7a202d*/
+      v36 = v35 ? this->guideLodVectorWrapper.end - v35 : 0;
+      if ( (unsigned __int16)j >= v36 ) /*0x7a2044*/
+        break; /*0x7a2044*/
+      OB_CIndexedGeometry_ResetStripCounter_010201A0(this->indexedGeometry, j); /*0x7a204d*/
+      v37 = 0; /*0x7a2052*/
+      for ( k = 0; ; ++k ) /*0x7a2054*/
       {
-        v38 = *(this + 7);
-        if ( !v38 || (unsigned __int16)j >= (unsigned int)((*(this + 8) - v38) >> 4) )
-          _invalid_parameter_noinfo();
-        v39 = *(this + 7) + 0x10 * (unsigned __int16)j;
-        v40 = *(_DWORD *)(v39 + 4);
-        if ( !v40 || v37 >= (*(_DWORD *)(v39 + 8) - v40) / 0x30 )
-          break;
-        v41 = *(this + 7);
-        if ( !v41 || !((*(this + 8) - v41) >> 4) )
-          _invalid_parameter_noinfo();
-        v42 = *(this + 7);
-        v43 = *(_DWORD *)(v42 + 4);
-        if ( !v43 || v37 >= (*(_DWORD *)(v42 + 8) - v43) / 0x30 )
-          _invalid_parameter_noinfo();
-        v44 = *(this + 7);
-        v45 = k + *(_DWORD *)(v42 + 4);
-        if ( !v44 || (unsigned __int16)v80 >= (unsigned int)((*(this + 8) - v44) >> 4) )
-          _invalid_parameter_noinfo();
-        v46 = *(this + 7) + 0x10 * (unsigned __int16)v80;
-        v47 = *(_DWORD *)(v46 + 4);
-        if ( !v47 || v37 >= (*(_DWORD *)(v46 + 8) - v47) / 0x30 )
-          _invalid_parameter_noinfo();
-        *(_DWORD *)(k + *(_DWORD *)(v46 + 4) + 0x2C) = *(_DWORD *)(v45 + 0x2C);
-        v48 = *(this + 7);
-        if ( !v48 || (unsigned __int16)v80 >= (unsigned int)((*(this + 8) - v48) >> 4) )
-          _invalid_parameter_noinfo();
-        v49 = *(this + 7) + 0x10 * (unsigned __int16)v80;
-        v50 = *(_DWORD *)(v49 + 4);
-        if ( !v50 || v37 >= (*(_DWORD *)(v49 + 8) - v50) / 0x30 )
-          _invalid_parameter_noinfo();
-        v51 = *(this + 7);
-        v52 = (_DWORD *)(k + *(_DWORD *)(v49 + 4));
-        if ( !v51 || !((*(this + 8) - v51) >> 4) )
-          _invalid_parameter_noinfo();
-        v53 = *(this + 7);
-        v54 = *(_DWORD *)(v53 + 4);
-        if ( !v54 || v37 >= (*(_DWORD *)(v53 + 8) - v54) / 0x30 )
-          _invalid_parameter_noinfo();
-        sub_79A450(this, (unsigned __int16)v80, *(_DWORD *)(k + *(_DWORD *)(v53 + 4) + 0x28), v52);
-        j = v80;
-        ++v37;
+        v38 = this->guideLodVectorWrapper.begin; /*0x7a2058*/
+        if ( !v38 || (unsigned __int16)j >= (unsigned int)(this->guideLodVectorWrapper.end - v38) ) /*0x7a206c*/
+          _invalid_parameter_noinfo(v37, j, (int)this); /*0x7a206e*/
+        v39 = &this->guideLodVectorWrapper.begin[(unsigned __int16)j]; /*0x7a2079*/
+        v40 = v39->begin; /*0x7a207c*/
+        if ( !v40 || v37 >= v39->end - v40 ) /*0x7a209f*/
+          break; /*0x7a209f*/
+        v41 = this->guideLodVectorWrapper.begin; /*0x7a20a5*/
+        if ( !v41 || !(this->guideLodVectorWrapper.end - v41) ) /*0x7a20b1*/
+          _invalid_parameter_noinfo(v37, j, (int)this); /*0x7a20b6*/
+        v42 = this->guideLodVectorWrapper.begin; /*0x7a20bb*/
+        v43 = v42->begin; /*0x7a20be*/
+        if ( !v43 || v37 >= v42->end - v43 ) /*0x7a20dd*/
+          _invalid_parameter_noinfo(v37, (int)v42, (int)this); /*0x7a20df*/
+        v44 = this->guideLodVectorWrapper.begin; /*0x7a20e7*/
+        v45 = &v42->begin[k]; /*0x7a20ea*/
+        if ( !v44 || (unsigned __int16)v77 >= (unsigned int)(this->guideLodVectorWrapper.end - v44) ) /*0x7a2101*/
+          _invalid_parameter_noinfo(v37, (int)v42, (int)this); /*0x7a2103*/
+        v46 = &this->guideLodVectorWrapper.begin[(unsigned __int16)v77]; /*0x7a2110*/
+        v47 = v46->begin; /*0x7a2113*/
+        if ( !v47 || v37 >= v46->end - v47 ) /*0x7a2132*/
+          _invalid_parameter_noinfo(v37, (int)v46, (int)this); /*0x7a2134*/
+        v46->begin[k].verticesPerGuideVertex = v45->verticesPerGuideVertex; /*0x7a2143*/
+        v48 = this->guideLodVectorWrapper.begin; /*0x7a2147*/
+        if ( !v48 || (unsigned __int16)v77 >= (unsigned int)(this->guideLodVectorWrapper.end - v48) ) /*0x7a215d*/
+          _invalid_parameter_noinfo(v37, (int)v46, (int)this); /*0x7a215f*/
+        v49 = &this->guideLodVectorWrapper.begin[(unsigned __int16)v77]; /*0x7a216c*/
+        v50 = v49->begin; /*0x7a216f*/
+        if ( !v50 || v37 >= v49->end - v50 ) /*0x7a218e*/
+          _invalid_parameter_noinfo(v37, (int)v49, (int)this); /*0x7a2190*/
+        v51 = this->guideLodVectorWrapper.begin; /*0x7a2198*/
+        v52 = &v49->begin[k]; /*0x7a219b*/
+        if ( !v51 || !(this->guideLodVectorWrapper.end - v51) ) /*0x7a21a8*/
+          _invalid_parameter_noinfo(v37, (int)v52, (int)this); /*0x7a21ad*/
+        v53 = this->guideLodVectorWrapper.begin; /*0x7a21b2*/
+        v54 = v53->begin; /*0x7a21b5*/
+        if ( !v54 || v37 >= v53->end - v54 ) /*0x7a21d4*/
+          _invalid_parameter_noinfo(v37, (int)v52, (int)this); /*0x7a21d6*/
+        OB_CFrondEngine_ComputeExtrusion_010201A0( /*0x7a21f0*/
+          (int *)this,
+          (unsigned __int16)v77,
+          v53->begin[k].sharedVertexStartIndex,
+          v52);
+        j = v77; /*0x7a21f5*/
+        ++v37; /*0x7a21f9*/
       }
     }
   }
   else
   {
-    v55 = 0;
-    for ( m = 0; ; m += 0x30 )
+    v55 = 0; /*0x7a220e*/
+    for ( m = 0; ; m += 0x30 ) /*0x7a2210*/
     {
-      v57 = *(this + 7);
-      if ( !v57 || !((*(this + 8) - v57) >> 4) )
-        _invalid_parameter_noinfo();
-      v58 = *(this + 7);
-      v59 = *(_DWORD *)(v58 + 4);
-      if ( !v59 || v55 >= (*(_DWORD *)(v58 + 8) - v59) / 0x30 )
-        break;
-      v60 = *(this + 7);
-      if ( !v60 || !((*(this + 8) - v60) >> 4) )
-        _invalid_parameter_noinfo();
-      v61 = *(this + 7);
-      v62 = *(_DWORD *)(v61 + 4);
-      if ( !v62 || v55 >= (*(_DWORD *)(v61 + 8) - v62) / 0x30 )
-        _invalid_parameter_noinfo();
-      sub_79C540((char **)this, m + *(_DWORD *)(v61 + 4));
-      ++v55;
+      v57 = this->guideLodVectorWrapper.begin; /*0x7a2212*/
+      if ( !v57 || !(this->guideLodVectorWrapper.end - v57) ) /*0x7a221e*/
+        _invalid_parameter_noinfo(v55, v4, (int)this); /*0x7a2223*/
+      v58 = this->guideLodVectorWrapper.begin; /*0x7a2228*/
+      v59 = v58->begin; /*0x7a222b*/
+      if ( !v59 || v55 >= v58->end - v59 ) /*0x7a224a*/
+        break; /*0x7a224a*/
+      v60 = this->guideLodVectorWrapper.begin; /*0x7a224c*/
+      if ( !v60 || !(this->guideLodVectorWrapper.end - v60) ) /*0x7a2258*/
+        _invalid_parameter_noinfo(v55, v4, (int)this); /*0x7a225d*/
+      v4 = (int)this->guideLodVectorWrapper.begin; /*0x7a2262*/
+      v61 = *(_DWORD *)(v4 + 4); /*0x7a2265*/
+      if ( !v61 || v55 >= (*(_DWORD *)(v4 + 8) - v61) / 0x30 ) /*0x7a2284*/
+        _invalid_parameter_noinfo(v55, v4, (int)this); /*0x7a2286*/
+      OB_CFrondEngine_BuildBladeVertices_010201A0( /*0x7a2293*/
+        &this->indexedGeometry,
+        v4,
+        (OB_stVector16_010201A0 *)(m + *(_DWORD *)(v4 + 4)));
+      ++v55; /*0x7a2298*/
     }
     for ( n = 0; ; ++n )
     {
-      v64 = *(this + 7);
-      v65 = 0;
-      v81 = n;
-      result = v64 ? (*(this + 8) - v64) >> 4 : 0;
-      if ( (unsigned __int16)n >= result )
-        break;
-      sub_794A90(*this, n);
-      for ( ii = 0; ; ii += 0x30 )
+      v63 = this->guideLodVectorWrapper.begin; /*0x7a22a5*/
+      v64 = 0; /*0x7a22a8*/
+      v78 = n; /*0x7a22ac*/
+      v36 = v63 ? this->guideLodVectorWrapper.end - v63 : 0;
+      if ( (unsigned __int16)n >= v36 ) /*0x7a22c3*/
+        break; /*0x7a22c3*/
+      OB_CIndexedGeometry_ResetStripCounter_010201A0(this->indexedGeometry, n); /*0x7a22cc*/
+      for ( ii = 0; ; ++ii ) /*0x7a22d1*/
       {
-        v66 = *(this + 7);
-        if ( !v66 || (unsigned __int16)n >= (unsigned int)((*(this + 8) - v66) >> 4) )
-          _invalid_parameter_noinfo();
-        v67 = *(this + 7) + 0x10 * (unsigned __int16)n;
-        v68 = *(_DWORD *)(v67 + 4);
-        if ( !v68 || v65 >= (*(_DWORD *)(v67 + 8) - v68) / 0x30 )
-          break;
-        v69 = *(this + 7);
-        if ( !v69 || (unsigned __int16)n >= (unsigned int)((*(this + 8) - v69) >> 4) )
-          _invalid_parameter_noinfo();
-        v70 = *(this + 7) + 0x10 * (unsigned __int16)n;
-        v71 = *(_DWORD *)(v70 + 4);
-        if ( !v71 || v65 >= (*(_DWORD *)(v70 + 8) - v71) / 0x30 )
-          _invalid_parameter_noinfo();
-        v72 = *(this + 7);
-        v73 = (_DWORD *)(ii + *(_DWORD *)(v70 + 4));
-        if ( !v72 || !((*(this + 8) - v72) >> 4) )
-          _invalid_parameter_noinfo();
-        v74 = *(this + 7);
-        v75 = *(_DWORD *)(v74 + 4);
-        if ( !v75 || v65 >= (*(_DWORD *)(v74 + 8) - v75) / 0x30 )
-          _invalid_parameter_noinfo();
-        sub_79A390(this, v81, *(_DWORD *)(ii + *(_DWORD *)(v74 + 4) + 0x28), v73);
-        n = v81;
-        ++v65;
+        v65 = this->guideLodVectorWrapper.begin; /*0x7a22d5*/
+        if ( !v65 || (unsigned __int16)n >= (unsigned int)(this->guideLodVectorWrapper.end - v65) ) /*0x7a22e9*/
+          _invalid_parameter_noinfo(v64, v4, (int)this); /*0x7a22eb*/
+        v4 = (unsigned __int16)n; /*0x7a22f0*/
+        v66 = &this->guideLodVectorWrapper.begin[(unsigned __int16)n]; /*0x7a22f8*/
+        v67 = v66->begin; /*0x7a22fb*/
+        if ( !v67 || v64 >= v66->end - v67 ) /*0x7a231e*/
+          break; /*0x7a231e*/
+        v68 = this->guideLodVectorWrapper.begin; /*0x7a2324*/
+        if ( !v68 || (unsigned __int16)n >= (unsigned int)(this->guideLodVectorWrapper.end - v68) ) /*0x7a2335*/
+          _invalid_parameter_noinfo(v64, (unsigned __int16)n, (int)this); /*0x7a2337*/
+        v69 = &this->guideLodVectorWrapper.begin[(unsigned __int16)n]; /*0x7a233f*/
+        v70 = v69->begin; /*0x7a2342*/
+        if ( !v70 || v64 >= v69->end - v70 ) /*0x7a2361*/
+          _invalid_parameter_noinfo(v64, (int)v69, (int)this); /*0x7a2363*/
+        v71 = this->guideLodVectorWrapper.begin; /*0x7a236b*/
+        v4 = (int)&v69->begin[ii]; /*0x7a236e*/
+        if ( !v71 || !(this->guideLodVectorWrapper.end - v71) ) /*0x7a237b*/
+          _invalid_parameter_noinfo(v64, v4, (int)this); /*0x7a2380*/
+        v72 = this->guideLodVectorWrapper.begin; /*0x7a2385*/
+        v73 = v72->begin; /*0x7a2388*/
+        if ( !v73 || v64 >= v72->end - v73 ) /*0x7a23a7*/
+          _invalid_parameter_noinfo(v64, v4, (int)this); /*0x7a23a9*/
+        OB_CFrondEngine_ComputeBlade_010201A0(this, v78, v72->begin[ii].sharedVertexStartIndex, (_DWORD *)v4); /*0x7a23c3*/
+        n = v78; /*0x7a23c8*/
+        ++v64; /*0x7a23cc*/
       }
     }
   }
-  return result;
+  return v36; /*0x7a23e1*/
 }

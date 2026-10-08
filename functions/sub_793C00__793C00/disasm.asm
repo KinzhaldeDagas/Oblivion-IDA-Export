@@ -1,9 +1,9 @@
-0x793C00: mov     eax, [esp+arg_0]
+0x793C00: mov     eax, [esp+treeEngineWindInfo]; Oblivion-local CWindEngine::Init for the 0x1C-byte SIdvWindInfo record. Copies leafFactors.x/y, computes leafFrequency = leafFactors.y * strength * kFrequencyScale and leafThrow = leafFactors.x * strength * kThrowScale, then stores strength. This routine does not read the intervening leafOscillation vector; later source is used only to name the observed record fields.
 0x793C04: fld     dword ptr [eax]
 0x793C06: fstp    dword ptr [ecx+18h]
 0x793C09: fld     dword ptr [eax+4]
-0x793C0C: fstp    [esp+arg_0]
-0x793C10: fld     [esp+arg_0]
+0x793C0C: fstp    [esp+treeEngineWindInfo]
+0x793C10: fld     [esp+treeEngineWindInfo]
 0x793C14: fst     dword ptr [ecx+1Ch]
 0x793C17: fld     dword ptr [eax+18h]
 0x793C1A: fmul    qword ptr ds:0A49310h

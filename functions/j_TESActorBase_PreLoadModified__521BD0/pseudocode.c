@@ -1,5 +1,5 @@
 // attributes: thunk
-int __thiscall j_TESActorBase_PreLoadModified(_DWORD *this, int a2)
+void __thiscall j_TESActorBase_PreLoadModified(TESActorBase *self, unsigned int changeMask)
 {
-  return TESActorBase_PreLoadModified(this, a2);
+  TESActorBase_PreLoadModified(self, changeMask); /*0x521bd0*/
 }

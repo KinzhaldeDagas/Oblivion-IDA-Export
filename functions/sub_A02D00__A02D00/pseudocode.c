@@ -1,4 +1,4 @@
-BSStringT *sub_A02D00()
+NiRTTI *sub_A02D00()
 {
-  return sub_70E220((BSStringT *)dword_B3CD1C, "NiBlendAccumTransformInterpolator", (int)dword_B3CC5C);
+  return NiRTTI_Constructor(&stru_B3CD1C, "NiBlendAccumTransformInterpolator", &stru_B3CC5C); /*0xa02d14*/
 }

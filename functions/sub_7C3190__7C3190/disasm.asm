@@ -21,7 +21,7 @@
 0x7C31BC: mov     dword ptr [edi+8], 0
 0x7C31C3: push    edi
 0x7C31C4: lea     ecx, [ebx+0Ch]
-0x7C31C7: call    sub_44D880
+0x7C31C7: call    NiTListNodePool_Release; Return one 12-byte NiTList node to Oblivion's synchronized global node pool. The caller must already have handled or cleared node+0x08 payload ownership.
 0x7C31CC: pop     edi
 0x7C31CD: pop     esi
 0x7C31CE: pop     ebx

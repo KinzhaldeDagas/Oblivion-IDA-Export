@@ -1,8 +1,9 @@
-int __cdecl sub_523AF0(int a1, int a2, float *a3)
+// std::fill specialization for float: assigns *value across [first,last) and returns last. Shipped Oblivion callers use it for initialized portions of vector<float> growth/reuse.
+float *__cdecl OB_stVectorFloat_CopyFillRange_010201A0(float *first, float *last, const float *value)
 {
-  int result; // eax
+  float *cursor; // eax
 
-  for ( result = a1; result != a2; *(float *)(result - 4) = *a3 )
-    result += 4;
-  return result;
+  for ( cursor = first; cursor != last; cursor[0xFFFFFFFF] = *value ) /*0x523afa*/
+    ++cursor; /*0x523b02*/
+  return cursor; /*0x523b0c*/
 }

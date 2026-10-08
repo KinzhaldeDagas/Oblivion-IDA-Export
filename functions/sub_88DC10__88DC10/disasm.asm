@@ -199,3 +199,25 @@
 0x88DF1D: mov     esp, ebp
 0x88DF1F: pop     ebp
 0x88DF20: retn
+0x683C10: mov     dword ptr [ecx], offset ??_7hkBroadPhaseCastCollector@@6B@; const hkBroadPhaseCastCollector::`vftable'
+0x683C16: retn
+0x9D5FD0: push    offset sub_4F5E90; void (__thiscall *)(void *)
+0x9D5FD5: push    9; int
+0x9D5FD7: push    40h ; '@'; unsigned int
+0x9D5FD9: lea     eax, [ebp+a1]
+0x9D5FDF: push    eax; void *
+0x9D5FE0: call    $LN21
+0x9D5FE5: retn
+0x9D5FE6: lea     ecx, [ebp+var_460]
+0x9D5FEC: jmp     loc_683C10
+0x9D5FF1: mov     edx, [esp-4+arg_4]
+0x9D5FF5: lea     eax, [edx-4A4h]
+0x9D5FFB: mov     ecx, [edx-4A8h]
+0x9D6001: xor     ecx, eax
+0x9D6003: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D6008: add     eax, 0Ch
+0x9D600B: mov     ecx, [edx-8]
+0x9D600E: xor     ecx, eax
+0x9D6010: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D6015: mov     eax, offset stru_AFDFB4
+0x9D601A: jmp     ___CxxFrameHandler3

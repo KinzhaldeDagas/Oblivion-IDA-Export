@@ -1,19 +1,32 @@
 {
-  "callees_count": 14,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x680930",
+      "0x6809F3"
+    ]
+  ],
+  "chunks_sha256": "534621db059a9bd6fe091251b1b17b6d07a69f63c17b8d10f8311252a2d8125b",
+  "comment_regular": "Verified: writes fitness at +0 of the 0x10-byte TravelPathSearchState selected by the link's 16-bit searchNodeIndex. Non-finite/NaN fitness is logged and clamped to 0.",
+  "comment_repeatable": "Verified: writes fitness at +0 of the 0x10-byte TravelPathSearchState selected by the link's 16-bit searchNodeIndex. Non-finite/NaN fitness is logged and clamped to 0.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_680930",
+  "display_name": "TravelPath_SearchState_SetFitness",
   "end_ea": "0x6809F3",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_680930",
+  "name": "TravelPath_SearchState_SetFitness",
   "segment": ".text",
   "sha256": "534621db059a9bd6fe091251b1b17b6d07a69f63c17b8d10f8311252a2d8125b",
   "size": 195,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x680930",
-  "type": "float *__thiscall(unsigned __int16 *this, float)",
+  "total_chunk_size": 195,
+  "type": "TravelPathSearchState *__thiscall(TravelPathSpaceDoorLink *node, float fitness)",
   "xrefs_from_count": 75,
   "xrefs_to_count": 2
 }

@@ -1,12 +1,12 @@
-0x7B4160: sub     esp, 114h
+0x7B4160: sub     esp, 114h; Builds a sibling texture variant path. Keeps the original extension, truncates the basename at its final underscore after the last separator, appends the requested suffix, and prefixes Data\\ for relative paths.
 0x7B4166: mov     eax, ds:0B30AACh
 0x7B416B: xor     eax, esp
 0x7B416D: mov     [esp+114h+var_4], eax
-0x7B4174: mov     eax, [esp+114h+arg_4]
+0x7B4174: mov     eax, [esp+114h+sourcePath]
 0x7B417B: push    ebx
-0x7B417C: mov     ebx, [esp+118h+arg_0]
+0x7B417C: mov     ebx, [esp+118h+outPath]
 0x7B4183: push    ebp
-0x7B4184: mov     ebp, [esp+11Ch+arg_8]
+0x7B4184: mov     ebp, [esp+11Ch+suffix]
 0x7B418B: push    esi
 0x7B418C: lea     edx, [esp+120h+Str]
 0x7B4190: push    edi

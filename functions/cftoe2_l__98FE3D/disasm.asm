@@ -129,7 +129,7 @@
 0x98FF72: add     [esi], al
 0x98FF74: mov     eax, edx
 0x98FF76: add     [esi+1], al
-0x98FF79: test    byte_BAA7BC, 1
+0x98FF79: test    byte ptr dword_BA9E10+9ACh, 1
 0x98FF80: jz      short loc_98FF96
 0x98FF82: cmp     byte ptr [ecx], 30h ; '0'
 0x98FF85: jnz     short loc_98FF96

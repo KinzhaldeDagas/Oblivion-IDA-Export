@@ -6,10 +6,10 @@
 0x5D61DC: mov     ecx, [esp+4+arg_4]
 0x5D61E0: push    0FB0h
 0x5D61E5: call    Tile_GetFloat
-0x5D61EA: call    Double_To_SInt32
+0x5D61EA: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5D61EF: push    eax
 0x5D61F0: mov     ecx, esi
-0x5D61F2: call    sub_5D5B40
+0x5D61F2: call    SkillsMenu_UpdateDetails; Native SkillsMenu detail refresh. Resolve the selected native skill AV, then populate the menu from its Oblivion TESSkill description and icon.
 0x5D61F7: push    4; int
 0x5D61F9: call    sub_57DE50
 0x5D61FE: add     esp, 4

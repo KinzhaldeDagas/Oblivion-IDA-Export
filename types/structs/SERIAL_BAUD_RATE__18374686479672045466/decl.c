@@ -1,1 +1,4 @@
-_SERIAL_BAUD_RATE
+struct _SERIAL_BAUD_RATE
+{
+ULONG BaudRate;
+};

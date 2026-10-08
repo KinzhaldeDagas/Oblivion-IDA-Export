@@ -58,7 +58,7 @@
 0x6AA258: fstp    [esp+8+arg_4]
 0x6AA25C: fld     [esp+8+arg_4]
 0x6AA260: fmul    qword ptr ds:0A77098h
-0x6AA266: call    Double_To_SInt32
+0x6AA266: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x6AA26B: mov     edx, [edi+1Ch]
 0x6AA26E: push    eax
 0x6AA26F: push    esi

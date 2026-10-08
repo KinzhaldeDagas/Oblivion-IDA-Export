@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x4DC19B",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x4DC207",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x4DC24A",
-    "line": "call    sub_4212E0",
+    "line": "call    ExtraDataList_RemoveSavedMovementData; Removes the combined Oblivion ExtraSavedMovementData record (type 0x4B).",
     "mnemonic": "call",
     "size": 5
   },

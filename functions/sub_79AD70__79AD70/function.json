@@ -1,19 +1,36 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 8,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_79AD70",
+  "chunks": [
+    [
+      "0x79AD70",
+      "0x79AE3A"
+    ],
+    [
+      "0x9CC1F0",
+      "0x9CC20B"
+    ]
+  ],
+  "chunks_sha256": "df64f8608533c90ccda602b70c10eff57c597e94062e3897a4f07ca131338815",
+  "comment_regular": "Oblivion-authoritative copy construction for the 16-byte vector wrapper embedded at SFrondGuide+0x00. Allocates capacity for the exact source count and deep-copies 0x38-byte SFrondVertex records; scalar guide fields are copied separately by callers.\nSpeedTreeOBSE v164 VERIFIED: all8 direct copy-constructor callsites observed are intercepted for the parallel two-influence guide data. Native copies 0x38-byte SFrondVertex records; no second weight/group exists in those records. Metadata must follow vector object identity through copy construction, not vertex-buffer pointer or XYZ.",
+  "comment_repeatable": "Oblivion-authoritative copy construction for the 16-byte vector wrapper embedded at SFrondGuide+0x00. Allocates capacity for the exact source count and deep-copies 0x38-byte SFrondVertex records; scalar guide fields are copied separately by callers.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_stVector_SFrondVertex_CopyCtor_010201A0",
   "end_ea": "0x79AE3A",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_79AD70",
+  "name": "OB_stVector_SFrondVertex_CopyCtor_010201A0",
   "segment": ".text",
   "sha256": "9301e70f650aee5270d8a9cbcfd95413efd2b71a9d1c267e34fe03cf946a945d",
   "size": 202,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x79AD70",
-  "type": "_DWORD *__thiscall(_DWORD *this, int)",
-  "xrefs_from_count": 84,
+  "total_chunk_size": 229,
+  "type": "OB_stVector16_010201A0 *__thiscall(OB_stVector16_010201A0 *this, const OB_stVector16_010201A0 *source)",
+  "xrefs_from_count": 93,
   "xrefs_to_count": 8
 }

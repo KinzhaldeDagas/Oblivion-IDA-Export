@@ -1,4 +1,4 @@
-0x613780: push    esi
+0x613780: push    esi; Returns the combat actor's weapon-skill level as an integer. Actor paths read the relevant actor value; creature fallback converts its floating calculation to SInt32 before returning EAX.
 0x613781: mov     esi, ecx
 0x613783: mov     ecx, [esi+3Ch]; this
 0x613786: push    edi
@@ -17,7 +17,7 @@
 0x6137A7: pop     esi
 0x6137A8: retn
 0x6137A9: mov     ecx, esi
-0x6137AB: call    sub_612D60
+0x6137AB: call    CombatController_GetEquippedWeaponForm
 0x6137B0: test    eax, eax
 0x6137B2: jz      short loc_613805
 0x6137B4: push    ebx
@@ -25,9 +25,9 @@
 0x6137B8: mov     edi, [ebx]
 0x6137BA: mov     ecx, esi
 0x6137BC: add     edi, 284h
-0x6137C2: call    sub_612D60
-0x6137C7: mov     ecx, eax
-0x6137C9: call    TESObjectWEAP_GetWeaponSkillAV
+0x6137C2: call    CombatController_GetEquippedWeaponForm
+0x6137C7: mov     ecx, eax; this
+0x6137C9: call    TESObjectWEAP_GetWeaponSkillAV; Sidecar hook boundary: replace player-facing combat score with the effective exclusive Blade/Spear sidecar level while preserving the native weapon AV return elsewhere.
 0x6137CE: push    eax
 0x6137CF: mov     eax, [edi]
 0x6137D1: mov     ecx, ebx
@@ -50,7 +50,7 @@
 0x6137F9: call    sub_624FC0
 0x6137FE: pop     edi
 0x6137FF: pop     esi
-0x613800: jmp     Double_To_SInt32
+0x613800: jmp     Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x613805: mov     eax, edi
 0x613807: pop     edi
 0x613808: pop     esi

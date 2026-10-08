@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x4B2102",
-    "line": "mov     [ebp+var_20], esi",
+    "line": "mov     [ebp+slot], esi",
     "mnemonic": "mov",
     "size": 3
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x4B2107",
-    "line": "mov     edi, [ebp+arg_0]",
+    "line": "mov     edi, [ebp+reference]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -244,12 +244,6 @@
     "line": "jmp     short loc_4B2150",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x4B214D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x4B2150",
@@ -577,13 +571,13 @@
   },
   {
     "ea": "0x4B21DD",
-    "line": "lea     ecx, [ebp+var_3C]",
+    "line": "lea     ecx, [ebp+var_3C]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x4B21E0",
-    "line": "call    sub_478B90",
+    "line": "call    OB_NiCloningProcess_ctor",
     "mnemonic": "call",
     "size": 5
   },
@@ -889,13 +883,13 @@
   },
   {
     "ea": "0x4B226D",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4B2272",
-    "line": "mov     edi, [ebp+arg_0]",
+    "line": "mov     edi, [ebp+reference]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -907,25 +901,25 @@
   },
   {
     "ea": "0x4B2278",
-    "line": "push    esi",
+    "line": "push    esi; referenceRoot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B2279",
-    "line": "push    edi",
+    "line": "push    edi; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B227A",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B227C",
-    "line": "call    sub_4B1600",
+    "line": "call    TESObjectLIGH_ConfigureReferencePointLight; Create/find and configure the NiPointLight attached to a TESObjectLIGH reference. lightFlags_7C bit 0x20 ('Off by default') suppresses the normal non-actor path; bit 0x04 ('Negative') negates RGB. The routine registers the source with ShadowSceneNode and seeds attenuation/dimmer, but does not read editor bits 0x200/0x400 and does not admit shadow casters.",
     "mnemonic": "call",
     "size": 5
   },
@@ -937,7 +931,7 @@
   },
   {
     "ea": "0x4B2283",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1126,5 +1120,89 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B3090",
+    "line": "lea     ecx, [ebp+slot]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3093",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3098",
+    "line": "lea     ecx, [ebp+var_3C]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B309B",
+    "line": "jmp     sub_4781A0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B30A0",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B30A4",
+    "line": "lea     eax, [edx+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B30A7",
+    "line": "mov     ecx, [edx-64h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B30AA",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B30AC",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B30B1",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B30B4",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B30B6",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B30BB",
+    "line": "mov     eax, offset stru_ADEE18",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B30C0",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

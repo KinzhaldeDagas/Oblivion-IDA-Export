@@ -1,4 +1,4 @@
-0x6D62D0: push    ebp
+0x6D62D0: push    ebp; Oblivion NiTransformInterpolator constant-track collapse. Moves constant translation/rotation/scale into cached transform +0x0C, clears their NiTransformData tracks, and releases data +0x2C if all counts become zero. Multi-key equality collapse is restricted to numeric types 1 and 5; one-key tracks always collapse, while rotation type 4 is not treated as the ordinary one-key quaternion case.
 0x6D62D1: mov     ebp, esp
 0x6D62D3: and     esp, 0FFFFFFC0h
 0x6D62D6: sub     esp, 70h
@@ -36,15 +36,15 @@
 0x6D634A: push    eax
 0x6D634B: push    eax
 0x6D634C: mov     ecx, esi
-0x6D634E: call    sub_6E1F00
+0x6D634E: call    NiTransformData_SetTranslationKeys; Oblivion NiTransformData translation-key ownership setter. Destroys previous keys +0x24 through the destructor table indexed by type +0x14, then installs count +0x0A, pointer +0x24, type +0x14, and table-derived stride +0x1D. Null pointer or zero count clears the channel fields.
 0x6D6353: jmp     short loc_6D63B6
 0x6D6355: cmp     eax, 1
 0x6D6358: mov     edx, [ebp+4]
-0x6D635B: mov     [esp+80h+var_30], edx
+0x6D635B: mov     [esp+80h+other.x], edx
 0x6D635F: mov     edx, [ebp+8]
-0x6D6362: mov     [esp+80h+var_2C], edx
+0x6D6362: mov     [esp+80h+other.y], edx
 0x6D6366: mov     edx, [ebp+0Ch]
-0x6D6369: mov     [esp+80h+var_28], edx
+0x6D6369: mov     [esp+80h+other.z], edx
 0x6D636D: jz      loc_6D6419
 0x6D6373: cmp     ecx, 1
 0x6D6376: jz      short loc_6D637D
@@ -57,10 +57,10 @@
 0x6D638A: jnb     loc_6D6411
 0x6D6390: movzx   ecx, byte ptr [esi+1Dh]
 0x6D6394: imul    ecx, edi
-0x6D6397: lea     eax, [esp+80h+var_30]
-0x6D639B: push    eax
-0x6D639C: lea     ecx, [ecx+ebp+4]
-0x6D63A0: call    sub_8AA390
+0x6D6397: lea     eax, [esp+80h+other]
+0x6D639B: push    eax; other
+0x6D639C: lea     ecx, [ecx+ebp+4]; this
+0x6D63A0: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x6D63A5: test    al, al
 0x6D63A7: jz      short loc_6D63AB
 0x6D63A9: xor     bl, bl
@@ -88,7 +88,7 @@
 0x6D63E8: push    ebp
 0x6D63E9: push    ebp
 0x6D63EA: push    ebp
-0x6D63EB: call    sub_6E1E90
+0x6D63EB: call    NiTransformData_SetRotationKeys; Oblivion NiTransformData rotation-key ownership setter. Destroys the previous +0x20 array via the destructor table indexed by type +0x10; type 4 first destroys its three nested scalar-axis tracks. Installs count +8, pointer +0x20, type +0x10, and table-derived stride +0x1C, or clears all four fields for null/zero input.
 0x6D63F0: fld     dword ptr [ebx+1Ch]
 0x6D63F3: fld     dword ptr ds:0A7DEB4h
 0x6D63F9: fchs
@@ -106,17 +106,17 @@
 0x6D641B: push    0
 0x6D641D: push    0
 0x6D641F: mov     ecx, esi
-0x6D6421: call    sub_6E1F00
-0x6D6426: lea     edx, [esp+80h+var_30]
+0x6D6421: call    NiTransformData_SetTranslationKeys; Oblivion NiTransformData translation-key ownership setter. Destroys previous keys +0x24 through the destructor table indexed by type +0x14, then installs count +0x0A, pointer +0x24, type +0x14, and table-derived stride +0x1D. Null pointer or zero count clears the channel fields.
+0x6D6426: lea     edx, [esp+80h+other]
 0x6D642A: push    edx
 0x6D642B: jmp     short loc_6D63CE
 0x6D642D: cmp     ebp, 1
 0x6D6430: mov     edx, [edi+4]
-0x6D6433: mov     [esp+80h+var_30], edx
+0x6D6433: mov     [esp+80h+other.x], edx
 0x6D6437: mov     edx, [edi+8]
-0x6D643A: mov     [esp+80h+var_2C], edx
+0x6D643A: mov     [esp+80h+other.y], edx
 0x6D643E: mov     edx, [edi+0Ch]
-0x6D6441: mov     [esp+80h+var_28], edx
+0x6D6441: mov     [esp+80h+other.z], edx
 0x6D6445: mov     edx, [edi+10h]
 0x6D6448: mov     [esp+80h+var_24], edx
 0x6D644C: jnz     short loc_6D6457
@@ -128,10 +128,10 @@
 0x6D645F: jnz     short loc_6D64D9
 0x6D6461: fld     [esp+80h+var_24]
 0x6D6465: mov     bl, 1
-0x6D6467: fld     [esp+80h+var_28]
+0x6D6467: fld     [esp+80h+other.z]
 0x6D646B: mov     esi, 1
-0x6D6470: fld     [esp+80h+var_2C]
-0x6D6474: fld     [esp+80h+var_30]
+0x6D6470: fld     [esp+80h+other.y]
+0x6D6474: fld     [esp+80h+other.x]
 0x6D6478: cmp     esi, ebp
 0x6D647A: jnb     loc_6D6515
 0x6D6480: movzx   eax, byte ptr [ecx+1Ch]
@@ -190,7 +190,7 @@
 0x6D650B: push    esi
 0x6D650C: push    esi
 0x6D650D: push    esi
-0x6D650E: call    sub_6E1F60
+0x6D650E: call    NiTransformData_SetScaleKeys; Oblivion NiTransformData scale-key ownership setter. Destroys previous keys +0x28 through the destructor table indexed by type +0x18, then installs count +0x0C, pointer +0x28, type +0x18, and table-derived stride +0x1E. Null pointer or zero count clears the channel fields.
 0x6D6513: jmp     short loc_6D6589
 0x6D6515: test    bl, bl
 0x6D6517: fstp    st(3)
@@ -202,8 +202,8 @@
 0x6D6525: push    0
 0x6D6527: push    0
 0x6D6529: push    0
-0x6D652B: call    sub_6E1E90
-0x6D6530: lea     ecx, [esp+80h+var_30]
+0x6D652B: call    NiTransformData_SetRotationKeys; Oblivion NiTransformData rotation-key ownership setter. Destroys the previous +0x20 array via the destructor table indexed by type +0x10; type 4 first destroys its three nested scalar-axis tracks. Installs count +8, pointer +0x20, type +0x10, and table-derived stride +0x1C, or clears all four fields for null/zero input.
+0x6D6530: lea     ecx, [esp+80h+other]
 0x6D6534: push    ecx
 0x6D6535: jmp     short loc_6D64F1
 0x6D6537: cmp     esi, 1
@@ -299,11 +299,11 @@
 0x6D663D: push    0
 0x6D663F: push    0
 0x6D6641: push    0
-0x6D6643: call    sub_6E1F60
+0x6D6643: call    NiTransformData_SetScaleKeys; Oblivion NiTransformData scale-key ownership setter. Destroys previous keys +0x28 through the destructor table indexed by type +0x18, then installs count +0x0C, pointer +0x28, type +0x18, and table-derived stride +0x1E. Null pointer or zero count clears the channel fields.
 0x6D6648: jmp     loc_6D65A4
 0x6D664D: push    0
 0x6D664F: fstp    st
 0x6D6651: push    0
 0x6D6653: push    0
-0x6D6655: call    sub_6E1F60
+0x6D6655: call    NiTransformData_SetScaleKeys; Oblivion NiTransformData scale-key ownership setter. Destroys previous keys +0x28 through the destructor table indexed by type +0x18, then installs count +0x0C, pointer +0x28, type +0x18, and table-derived stride +0x1E. Null pointer or zero count clears the channel fields.
 0x6D665A: jmp     loc_6D65A4

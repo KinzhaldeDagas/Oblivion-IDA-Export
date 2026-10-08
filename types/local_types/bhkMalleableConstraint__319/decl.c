@@ -1,1 +1,1 @@
-bhkMalleableConstraint
+struct bhkMalleableConstraint;

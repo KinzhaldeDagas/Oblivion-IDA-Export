@@ -21,11 +21,11 @@
 0x6A4007: test    al, al
 0x6A4009: jz      short loc_6A4029
 0x6A400B: mov     ecx, esi; this
-0x6A400D: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x6A400D: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x6A4012: cmp     eax, 4
 0x6A4015: jz      short loc_6A4029
 0x6A4017: mov     ecx, esi; this
-0x6A4019: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x6A4019: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x6A401E: cmp     eax, 6
 0x6A4021: jz      short loc_6A4029
 0x6A4023: mov     al, 1

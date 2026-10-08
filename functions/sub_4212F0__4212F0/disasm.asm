@@ -1,4 +1,4 @@
-0x4212F0: push    esi
+0x4212F0: push    esi; If saved-attached-animation data exists, frees it and replaces it with a six-byte initialized {4,0,0} word buffer. Observed in Oblivion door default-open/open/close paths.
 0x4212F1: push    4Bh ; 'K'; a2
 0x4212F3: call    BaseExtraList_GetExtraData
 0x4212F8: mov     esi, eax

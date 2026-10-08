@@ -8,29 +8,29 @@ void __cdecl sub_508A20(
         int a7,
         UInt32 *a8)
 {
-  Data *v11; // eax
-  UInt16 v12[2]; // [esp+14h] [ebp-204h] BYREF
+  Data *v8; // eax
+  UInt16 v9[2]; // [esp+14h] [ebp-204h] BYREF
 
-  LOBYTE(v12[0]) = 0;
-  if ( Script_ExtractArgs(a1, a2, a8, a4, argC, a5, l, v12) )
+  LOBYTE(v9[0]) = 0; /*0x508a7d*/
+  if ( Script_ExtractArgs(a1, a2, a8, a4, argC, a5, l, v9) )
   {
-    if ( LOBYTE(v12[0]) )
+    if ( LOBYTE(v9[0]) )
     {
-      v11 = (Data *)sub_447C50((int *)TESDataHandler, (char *)v12);
-      if ( v11 )
+      v8 = (Data *)sub_447C50((int *)g_TESDataHandler, (char *)v9); /*0x508abd*/
+      if ( v8 )
       {
-        *(_BYTE *)(TESDataHandler + 0xCD4) = 1;
-        TESFile_Close(v11);
-        *(_BYTE *)(TESDataHandler + 0xCD4) = 0;
-        if ( IsConsoleMode )
-          Interface_ConsolePrint("Closed file '%s'.", (const char *)v12);
+        g_TESDataHandler->activeFileState.unknownAfterActiveFileState[2] = 1; /*0x508acc*/
+        TESFile_Close(v8); /*0x508ad5*/
+        g_TESDataHandler->activeFileState.unknownAfterActiveFileState[2] = 0; /*0x508ae0*/
+        if ( MEMORY[0xB361AC] ) /*0x508ae7*/
+          Interface_ConsolePrint("Closed file '%s'.", (const char *)v9); /*0x508afa*/
       }
-      else if ( IsConsoleMode )
+      else if ( MEMORY[0xB361AC] )
       {
-        Interface_ConsolePrint("ERR: Could not find file '%s'.", (const char *)v12);
+        Interface_ConsolePrint("ERR: Could not find file '%s'.", (const char *)v9);
       }
     }
-    else if ( IsConsoleMode )
+    else if ( MEMORY[0xB361AC] )
     {
       Interface_ConsolePrint("ERR: No Filename.");
     }

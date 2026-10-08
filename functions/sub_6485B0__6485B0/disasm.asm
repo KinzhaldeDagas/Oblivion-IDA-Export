@@ -75,7 +75,7 @@
 0x6486A2: push    ecx; int
 0x6486A3: push    1
 0x6486A5: mov     ecx, edi; this
-0x6486A7: call    Actor_GetFatigueFraction
+0x6486A7: call    Actor_GetFatigueFraction; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.
 0x6486AC: mov     edx, [edi]
 0x6486AE: mov     eax, [edx+284h]
 0x6486B4: push    ecx
@@ -165,7 +165,7 @@
 0x6487AD: push    0
 0x6487AF: push    3
 0x6487B1: lea     ecx, [esi+24h]
-0x6487B4: call    EffectItemList_GetStrongestItem
+0x6487B4: call    EffectItemList_GetStrongestItem; this=EffectItemList; args are rangeFilter (0 self,1 touch,2 target,3 any) and requireArea. Returns effective (flag 0x400000 clear) qualifying item with greatest truncated MagickaCostForCaster(item,null).
 0x6487B9: mov     eax, [eax+10h]
 0x6487BC: cmp     eax, 2
 0x6487BF: jnz     short loc_64883C
@@ -324,16 +324,16 @@
 0x648995: test    al, al
 0x648997: jz      short loc_6489A0
 0x648999: mov     ecx, edi; int
-0x64899B: call    sub_5EAE70
+0x64899B: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x6489A0: sub     esi, 1
 0x6489A3: jnz     loc_6488D0
 0x6489A9: mov     ecx, [esp+2Ch+var_10]
 0x6489AD: test    ecx, ecx
 0x6489AF: jz      short loc_6489D3
-0x6489B1: call    BSSimpleList_Clear
+0x6489B1: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x6489B6: mov     ecx, [esp+2Ch+var_10]
 0x6489BA: push    ecx
-0x6489BB: call    FormHeapFree
+0x6489BB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6489C0: add     esp, 4
 0x6489C3: pop     edi
 0x6489C4: pop     esi
@@ -341,7 +341,7 @@
 0x6489C6: add     esp, 20h
 0x6489C9: retn    8
 0x6489CC: mov     ecx, edi; int
-0x6489CE: call    sub_5EAE70
+0x6489CE: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x6489D3: pop     edi
 0x6489D4: pop     esi
 0x6489D5: pop     ebp

@@ -22,7 +22,7 @@
 0x452CC0: push    ebx; a2
 0x452CC1: mov     ecx, edi; this
 0x452CC3: call    NiTMap_SetAt
-0x452CC8: mov     ecx, [esp+0Ch+arg_4]
+0x452CC8: mov     ecx, [esp+0Ch+flags]
 0x452CCC: mov     [esi], ecx
 0x452CCE: mov     eax, esi
 0x452CD0: pop     esi
@@ -30,7 +30,7 @@
 0x452CD2: pop     ebx
 0x452CD3: retn    8
 0x452CD6: mov     eax, [esp+8+a2]
-0x452CDA: mov     edx, [esp+8+arg_4]
+0x452CDA: mov     edx, [esp+8+flags]
 0x452CDE: pop     edi
 0x452CDF: mov     [eax], edx
 0x452CE1: pop     ebx

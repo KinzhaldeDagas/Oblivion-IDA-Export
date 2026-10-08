@@ -4,7 +4,7 @@
 0x648C69: call    NiTMap_Clear
 0x648C6E: mov     eax, [esi+8]
 0x648C71: push    eax
-0x648C72: call    FormHeapFree
+0x648C72: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x648C77: add     esp, 4
 0x648C7A: pop     esi
 0x648C7B: retn

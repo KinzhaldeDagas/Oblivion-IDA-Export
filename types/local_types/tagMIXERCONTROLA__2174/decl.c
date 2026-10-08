@@ -1,1 +1,12 @@
-tagMIXERCONTROLA
+struct tagMIXERCONTROLA
+{
+DWORD cbStruct;
+DWORD dwControlID;
+DWORD dwControlType;
+DWORD fdwControl;
+DWORD cMultipleItems;
+CHAR szShortName[16];
+CHAR szName[64];
+$569F45455C1F15ECEE036E4DC065904E Bounds;
+$CF1547848D4CB86C97F65F4AF297261F Metrics;
+};

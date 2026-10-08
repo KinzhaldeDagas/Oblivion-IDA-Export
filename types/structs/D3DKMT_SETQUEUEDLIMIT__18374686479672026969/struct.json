@@ -1,28 +1,54 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_D3DKMT_SETQUEUEDLIMIT",
+  "definition": "struct _D3DKMT_SETQUEUEDLIMIT\n{\nD3DKMT_HANDLE hDevice;\nD3DKMT_QUEUEDLIMIT_TYPE Type;\n$7538D86270C21422F88B2A8019EA213F _anon_0;\n}\n",
   "id": 18374686479672026969,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hDevice",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "D3DKMT_HANDLE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Type",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "D3DKMT_QUEUEDLIMIT_TYPE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "_anon_0",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 8
+      "size": 8,
+      "type": "$7538D86270C21422F88B2A8019EA213F"
     }
   ],
   "name": "_D3DKMT_SETQUEUEDLIMIT",
+  "ordinal": 1281,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 16
 }

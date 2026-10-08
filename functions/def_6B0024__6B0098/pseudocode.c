@@ -1,44 +1,40 @@
-int __cdecl def_6B0024(
-        int a1,
-        float a2,
-        float a3,
+void __usercall def_6B0024(
+        int *a1@<ecx>,
+        int *a2@<esi>,
+        int a3,
         float a4,
         float a5,
         float a6,
         float a7,
-        int a8,
-        int a9,
-        int a10,
-        float a11,
-        float a12,
-        float a13,
-        float a14,
-        float a15,
-        float a16)
+        float a8,
+        float a9,
+        float a10,
+        int a11,
+        int a12)
 {
-  int *v16; // ecx
+  int *v12; // eax
 
-  switch ( a10 )
+  switch ( a12 ) /*0x6b00a4*/
   {
-    case 0xFFFFFFFF:
-      PlaySound___(v16, "WPNBlockHand", 0x4102, 1);
-      break;
-    case 0:
-    case 1:
-      PlaySound___(v16, "WPNBlockBlade", 0x4102, 1);
-      break;
-    case 2:
-    case 3:
-      PlaySound___(v16, "WPNBlockBlunt", 0x4102, 1);
-      break;
-    case 4:
-      PlaySound___(v16, "WPNBlockStaff", 0x4102, 1);
-      break;
-    case 5:
-      PlaySound___(v16, "WPNBlockBow", 0x4102, 1);
-      break;
+    case 0xFFFFFFFF: /*0x6b00a4*/
+      v12 = PlaySound___(a1, "WPNBlockHand", 0x4102, 1); /*0x6b00b7*/
+      break; /*0x6b00b7*/
+    case 0: /*0x6b00a4*/
+    case 1: /*0x6b00a4*/
+      v12 = PlaySound___(a1, "WPNBlockBlade", 0x4102, 1); /*0x6b00c5*/
+      break; /*0x6b00c5*/
+    case 2: /*0x6b00a4*/
+    case 3: /*0x6b00a4*/
+      v12 = PlaySound___(a1, "WPNBlockBlunt", 0x4102, 1); /*0x6b00d3*/
+      break; /*0x6b00d3*/
+    case 4: /*0x6b00a4*/
+      v12 = PlaySound___(a1, "WPNBlockStaff", 0x4102, 1); /*0x6b00e1*/
+      break; /*0x6b00e1*/
+    case 5: /*0x6b00a4*/
+      v12 = PlaySound___(a1, "WPNBlockBow", 0x4102, 1); /*0x6b00ef*/
+      break; /*0x6b00ef*/
     default:
-      JUMPOUT(0x6B00F6);
+      JUMPOUT(0x6B00F6); /*0x6b00f6*/
   }
-  return def_6B00A4(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16);
+  def_6B00A4(v12, a2, a3, a4, a5, a6, a7, a8, a9, a10); /*0x6b00f5*/
 }

@@ -21,7 +21,7 @@
 0x8C370A: push    ebx
 0x8C370B: call    sub_8E8270
 0x8C3710: mov     edx, [esi]
-0x8C3712: mov     eax, dword ptr [esp+18h+var_4]
+0x8C3712: mov     eax, [esp+18h+var_4]
 0x8C3716: mov     edx, [edx+64h]
 0x8C3719: add     esp, 8
 0x8C371C: push    eax

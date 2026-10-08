@@ -3,20 +3,20 @@ char __cdecl sub_50A340(int a1, int a2, unsigned int *a3, int a4, int a5, int a6
   int v7; // eax
   unsigned __int8 *v8; // edi
 
-  *a7 = 0.0;
-  if ( !a3 )
-    return 1;
-  if ( !(*(unsigned __int8 (__thiscall **)(unsigned int *))(*a3 + 0x190))(a3) )
-    return 1;
-  if ( !TESDataHandler_IsFormIDCreated_(a3[3]) )
-    return 1;
-  v7 = (*(int (__thiscall **)(unsigned int *))(*a3 + 0x170))(a3);
-  if ( !TESDataHandler_IsFormIDCreated_(*(_DWORD *)(v7 + 0xC)) )
-    return 1;
-  v8 = (unsigned __int8 *)(*(int (__thiscall **)(unsigned int *))(*a3 + 0x170))(a3);
-  (*(void (__thiscall **)(unsigned int *, int))(*a3 + 0x10))(a3, 1);
-  sub_449D20((char *)TESDataHandler, v8);
-  if ( v8 )
-    (*(void (__thiscall **)(unsigned __int8 *, int))(*(_DWORD *)v8 + 0x10))(v8, 1);
-  return 0;
+  *a7 = 0.0; /*0x50a347*/
+  if ( !a3 ) /*0x50a34f*/
+    return 1; /*0x50a34f*/
+  if ( !(*(unsigned __int8 (__thiscall **)(unsigned int *))(*a3 + 0x190))(a3) ) /*0x50a35b*/
+    return 1; /*0x50a35b*/
+  if ( !TESDataHandler_IsFormIDCreated_(a3[3]) ) /*0x50a36b*/
+    return 1; /*0x50a36b*/
+  v7 = (*(int (__thiscall **)(unsigned int *))(*a3 + 0x170))(a3); /*0x50a37e*/
+  if ( !TESDataHandler_IsFormIDCreated_(*(_DWORD *)(v7 + 0xC)) ) /*0x50a38a*/
+    return 1; /*0x50a3cd*/
+  v8 = (unsigned __int8 *)(*(int (__thiscall **)(unsigned int *))(*a3 + 0x170))(a3); /*0x50a3a2*/
+  (*(void (__thiscall **)(unsigned int *, int))(*a3 + 0x10))(a3, 1); /*0x50a3ab*/
+  sub_449D20((char *)g_TESDataHandler, v8); /*0x50a3b4*/
+  if ( v8 ) /*0x50a3bb*/
+    (*(void (__thiscall **)(unsigned __int8 *, int))(*(_DWORD *)v8 + 0x10))(v8, 1); /*0x50a3c6*/
+  return 0; /*0x50a3cb*/
 }

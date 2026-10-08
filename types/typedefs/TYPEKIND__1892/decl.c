@@ -1,1 +1,1 @@
-TYPEKIND
+typedef tagTYPEKIND TYPEKIND;

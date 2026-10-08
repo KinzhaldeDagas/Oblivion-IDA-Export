@@ -3,7 +3,7 @@
 0x45BDE4: push    ebp
 0x45BDE5: push    esi
 0x45BDE6: push    edi; int
-0x45BDE7: mov     edi, [esp+18h+arg_0]
+0x45BDE7: mov     edi, [esp+18h+form]
 0x45BDEB: xor     esi, esi
 0x45BDED: lea     eax, [edi+10h]
 0x45BDF0: test    eax, eax
@@ -31,7 +31,7 @@
 0x45BE2E: jz      short loc_45BE51
 0x45BE30: test    esi, esi
 0x45BE32: jz      short loc_45BE51
-0x45BE34: test    [esp+18h+arg_8], 0Ch
+0x45BE34: test    [esp+18h+mode], 0Ch
 0x45BE39: mov     ecx, ebp
 0x45BE3B: setnz   al
 0x45BE3E: push    eax
@@ -39,7 +39,7 @@
 0x45BE40: call    sub_45BB30
 0x45BE45: test    al, al
 0x45BE47: jz      short loc_45BE51
-0x45BE49: and     [esp+18h+arg_4], 7FFFFFF3h
+0x45BE49: and     [esp+18h+changeFlags], 7FFFFFF3h
 0x45BE51: push    0; int
 0x45BE53: push    offset ??_R0?AVActor@@@8; struct TypeDescriptor *
 0x45BE58: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
@@ -51,7 +51,7 @@
 0x45BE6A: test    esi, esi
 0x45BE6C: jz      short loc_45BE7C
 0x45BE6E: mov     ecx, esi; int
-0x45BE70: call    sub_5EAE70
+0x45BE70: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x45BE75: mov     ecx, esi
 0x45BE77: call    sub_5E9690
 0x45BE7C: test    ebx, ebx
@@ -79,7 +79,7 @@
 0x45BEB3: pop     ebx
 0x45BEB4: add     esp, 8
 0x45BEB7: retn    0Ch
-0x45BEBA: cmp     [esp+18h+arg_4], 0
+0x45BEBA: cmp     [esp+18h+changeFlags], 0
 0x45BEBF: jz      loc_45C010
 0x45BEC5: cmp     [esp+18h+var_8], 0
 0x45BECA: jz      loc_45C010
@@ -89,7 +89,7 @@
 0x45BEDD: test    ebx, ebx
 0x45BEDF: jz      short loc_45BEEC
 0x45BEE1: mov     ecx, ebx; this
-0x45BEE3: call    TESObjectREFR_IsPersistent?
+0x45BEE3: call    TESObjectREFR_IsPersistent
 0x45BEE8: test    al, al
 0x45BEEA: jz      short loc_45BEFA
 0x45BEEC: cmp     esi, 28h ; '('
@@ -120,11 +120,11 @@
 0x45BF35: call    sub_5F0410
 0x45BF3A: push    0FFFFFFFFh; a2
 0x45BF3C: mov     ecx, edi; this
-0x45BF3E: call    TESForm_GetOverrideFile
+0x45BF3E: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x45BF43: test    eax, eax
 0x45BF45: jz      loc_45BFFE
 0x45BF4B: mov     ecx, eax
-0x45BF4D: call    sub_4520F0
+0x45BF4D: call    TESFile_GetThreadSafeFile; Returns the root TESFile on the main thread; on worker threads returns the per-thread clone selected by GetCurrentThreadId via TESFile_GetThreadSafeFileForThread.
 0x45BF52: mov     ebp, eax
 0x45BF54: test    ebp, ebp
 0x45BF56: jz      loc_45BFFE
@@ -159,10 +159,10 @@
 0x45BFBF: mov     edi, [esp+18h+var_4]
 0x45BFC3: mov     byte ptr [esi+184h], 1
 0x45BFCA: or      dword ptr [edi+18h], 4
-0x45BFCE: mov     ecx, ds:0B33A98h
-0x45BFD4: push    0
-0x45BFD6: push    ebp
-0x45BFD7: call    TESDataHandler_LoadFormRecord
+0x45BFCE: mov     ecx, ds:0B33A98h; dataHandler
+0x45BFD4: push    0; firstFileLowFormFilter
+0x45BFD6: push    ebp; file
+0x45BFD7: call    TESDataHandler_LoadFormRecord; Verified TESDataHandler_LoadFormRecord behavior: when activeFileState.retainActiveFile is nonzero, newly loaded cells receive TESForm::SetFromActiveFile(1). This matches the flag's file-retention use; the flag's writer remains Unknown.
 0x45BFDC: and     dword ptr [edi+18h], 0FFFFFFFBh
 0x45BFE0: mov     eax, [esp+18h+var_8]
 0x45BFE4: pop     edi

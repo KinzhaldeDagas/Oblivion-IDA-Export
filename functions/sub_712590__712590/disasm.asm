@@ -1,4 +1,4 @@
-0x712590: mov     eax, [esp+arg_4]
+0x712590: mov     eax, [esp+arg_4]; Fog decode: generic NIF property factory registration helper; startup uses it to register "NiFogProperty" factory 0x740E90.
 0x712594: mov     ecx, [esp+arg_0]
 0x712598: push    eax
 0x712599: push    ecx

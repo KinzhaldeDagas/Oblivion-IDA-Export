@@ -1,4 +1,4 @@
-0x551140: cmp     byte ptr ds:0B39D80h, 0
+0x551140: cmp     byte ptr ds:0B39D80h, 0; Generic precache helper: takes caller-supplied shader definition id and precaches one geometry. Dynamic shader id path, not a SpeedTree tree-builder-specific frond consumer.
 0x551147: jz      locret_5511CD
 0x55114D: mov     ecx, [esp+arg_0]
 0x551151: test    ecx, ecx
@@ -10,7 +10,7 @@
 0x55115D: mov     esi, eax
 0x55115F: mov     eax, [esp+4+a1]
 0x551163: push    eax; a1
-0x551164: call    GetShaderDefinition
+0x551164: call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.
 0x551169: add     esp, 4
 0x55116C: test    eax, eax
 0x55116E: jz      short loc_5511CC
@@ -38,6 +38,6 @@
 0x5511BE: call    edx
 0x5511C0: mov     ecx, ds:0B3F928h
 0x5511C6: pop     esi
-0x5511C7: jmp     sub_769030
+0x5511C7: jmp     sub_769030; MoonSugarEffect decode: BeginScene prepack flush. Iterates renderer PrePackObjects, locks/stages shared VB ranges, uses declaration/default/skinned packers, rebuilds IBs, unlocks, clears the map, and heap-frees temporary entries. Plugin mask passes should not borrow this renderer-owned queue/lifetime.
 0x5511CC: pop     esi
 0x5511CD: retn

@@ -1,1 +1,1 @@
-XSTATE
+typedef _XSTATE XSTATE;

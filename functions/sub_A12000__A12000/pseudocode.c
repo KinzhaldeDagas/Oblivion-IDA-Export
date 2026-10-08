@@ -1,4 +1,4 @@
-BSStringT *sub_A12000()
+NiRTTI *sub_A12000()
 {
-  return sub_70E220((BSStringT *)dword_B478A0, "HairShaderProperty", (int)dword_B45DA8);
+  return NiRTTI_Constructor(&stru_B478A0, "HairShaderProperty", &NiRTTI_BSShaderPPLightingProperty); /*0xa12014*/
 }

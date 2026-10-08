@@ -1,108 +1,111 @@
-void __cdecl sub_55FA50(float *a1, char a2)
+//
+// [2026-10-03 projected shadow motion] Native !skipTimeAndWindUpdate encloses sole55E060 call at55FC50. This follows sampling Sky.windSpeed (or zero for interiors) into manager+1C. Plugin wraps this call to advance RT4.1 reference self-shadow phase by strength*40*delta. Extra camera updates taking skip branch do not advance it. Native camera/wind behavior preserved.
+// Verified 2026-10-07: source NiCamera forward column is offsets+64/+70/+7C; BSTreeManager negates it (A3D360=-1.0) before passing to SpeedTree SetCamera. Directional generated atlases use camera-to-tree forward azimuth; record this convention explicitly when adapting the native far billboard basis.
+void __cdecl BSTreeManager_Update(NiCamera *camera, bool skipTimeAndWindUpdate)
 {
   double v2; // rt0
   TES *v3; // ecx
   Sky *sky; // eax
-  _DWORD *v5; // eax
+  BSFogProperty *FogProperty; // eax
   int v6; // esi
   int v7; // edi
   int v8; // ebx
-  _DWORD *v9; // eax
-  _DWORD *v10; // eax
-  _DWORD *v11; // eax
+  NiMaterialProperty *materialProperty; // eax
+  NiMaterialProperty *v10; // eax
+  NiMaterialProperty *v11; // eax
   double v12; // st7
   double v13; // st7
   float v14; // [esp+14h] [ebp-24h]
   float v15; // [esp+18h] [ebp-20h]
   float v16; // [esp+1Ch] [ebp-1Ch]
-  float v17[3]; // [esp+20h] [ebp-18h] BYREF
-  float v18[3]; // [esp+2Ch] [ebp-Ch] BYREF
-  float windSpeed; // [esp+40h] [ebp+8h]
+  float direction3[3]; // [esp+20h] [ebp-18h] BYREF
+  float position3[3]; // [esp+2Ch] [ebp-Ch] BYREF
+  float skipTimeAndWindUpdatea; // [esp+40h] [ebp+8h]
 
-  if ( !a2 )
+  if ( !skipTimeAndWindUpdate ) /*0x55fa5a*/
   {
-    flt_B39F18 = flt_B33E9C + flt_B39F18;
-    sub_78D3F0(flt_B39F18);
+    *(float *)&dword_B39F14[1] = *(float *)&MEMORY[0xB33E90][0xC] + *(float *)&dword_B39F14[1]; /*0x55fa69*/
+    CSpeedTreeRT__SetTime(*(float *)&dword_B39F14[1]); /*0x55fa78*/
   }
-  if ( a1 )
+  if ( camera ) /*0x55fa86*/
   {
-    v18[0] = a1[0x22];
-    v18[1] = a1[0x23];
-    v18[2] = a1[0x24];
-    v2 = dbl_A3D360;
-    v14 = a1[0x19] * v2;
-    v15 = a1[0x1C] * v2;
-    v16 = v2 * a1[0x1F];
-    v17[0] = v14;
-    v17[1] = v15;
-    v17[2] = v16;
-    sub_78D140(v18, v17);
+    position3[0] = camera->members.super.m_worldTransform.pos.x; /*0x55fa96*/
+    position3[1] = camera->members.super.m_worldTransform.pos.y; /*0x55faa0*/
+    position3[2] = camera->members.super.m_worldTransform.pos.z; /*0x55faaa*/
+    v2 = dbl_A3D360; /*0x55fad5*/
+    v14 = camera->members.super.m_worldTransform.rot.data[0][0] * v2; /*0x55fad7*/
+    v15 = camera->members.super.m_worldTransform.rot.data[1][0] * v2; /*0x55fae1*/
+    v16 = v2 * camera->members.super.m_worldTransform.rot.data[2][0]; /*0x55fae9*/
+    direction3[0] = v14; /*0x55faf1*/
+    direction3[1] = v15; /*0x55faf9*/
+    direction3[2] = v16; /*0x55fb01*/
+    CSpeedTreeRT__SetCamera(position3, direction3); /*0x55fb05*/
   }
-  if ( !a2 )
+  if ( !skipTimeAndWindUpdate ) /*0x55fb0f*/
   {
-    v3 = TES;
-    if ( TES )
+    v3 = MEMORY[0xB333A0]; /*0x55fb15*/
+    if ( MEMORY[0xB333A0] ) /*0x55fb15*/
     {
-      sky = v3->sky;
-      if ( sky )
+      sky = v3->sky; /*0x55fb23*/
+      if ( sky ) /*0x55fb28*/
       {
-        if ( v3->currentInteriorCell )
+        if ( v3->currentInteriorCell ) /*0x55fb2e*/
         {
-          if ( !dword_B39E04 )
-            sub_55F750(0);
-          *(float *)(dword_B39E04 + 0x1C) = 0.0;
+          if ( !g_BSTreeManager_Instance ) /*0x55fb34*/
+            BSTreeManager_Create(0); /*0x55fb3f*/
+          g_BSTreeManager_Instance->windSpeed = 0.0; /*0x55fb4f*/
         }
         else
         {
-          windSpeed = sky->windSpeed;
-          if ( !dword_B39E04 )
-            sub_55F750(0);
-          *(float *)(dword_B39E04 + 0x1C) = windSpeed;
+          skipTimeAndWindUpdatea = sky->windSpeed; /*0x55fb61*/
+          if ( !g_BSTreeManager_Instance ) /*0x55fb54*/
+            BSTreeManager_Create(0); /*0x55fb69*/
+          g_BSTreeManager_Instance->windSpeed = skipTimeAndWindUpdatea; /*0x55fb7a*/
         }
-        if ( *(_DWORD *)(dword_B39E04 + 0xC) )
+        if ( g_BSTreeManager_Instance->materialProperty ) /*0x55fb83*/
         {
-          if ( sub_53FB50(TES->sky) )
+          if ( Sky_GetFogProperty(MEMORY[0xB333A0]->sky) ) /*0x55fb96*/
           {
-            v5 = (_DWORD *)sub_53FB50(TES->sky);
-            v6 = v5[8];
-            v7 = v5[9];
-            v8 = v5[0xA];
-            if ( !dword_B39E04 )
-              sub_55F750(0);
-            v9 = *(_DWORD **)(dword_B39E04 + 0xC);
-            ++v9[0x15];
-            v9[7] = v6;
-            v9[8] = v7;
-            v9[9] = v8;
-            if ( !dword_B39E04 )
-              sub_55F750(0);
-            v10 = *(_DWORD **)(dword_B39E04 + 0xC);
-            ++v10[0x15];
-            v10[0xA] = v6;
-            v10[0xB] = v7;
-            v10[0xC] = v8;
-            if ( !dword_B39E04 )
-              sub_55F750(0);
-            v11 = *(_DWORD **)(dword_B39E04 + 0xC);
-            ++v11[0x15];
-            v11[0x10] = v6;
-            v11[0x11] = v7;
-            v11[0x12] = v8;
+            FogProperty = Sky_GetFogProperty(MEMORY[0xB333A0]->sky); /*0x55fbad*/
+            v6 = *((_DWORD *)FogProperty + 8); /*0x55fbb9*/
+            v7 = *((_DWORD *)FogProperty + 9); /*0x55fbbc*/
+            v8 = *((_DWORD *)FogProperty + 0xA); /*0x55fbbf*/
+            if ( !g_BSTreeManager_Instance ) /*0x55fbb2*/
+              BSTreeManager_Create(0); /*0x55fbc6*/
+            materialProperty = g_BSTreeManager_Instance->materialProperty; /*0x55fbd4*/
+            ++*((_DWORD *)materialProperty + 0x15); /*0x55fbd7*/
+            *((_DWORD *)materialProperty + 7) = v6; /*0x55fbdb*/
+            *((_DWORD *)materialProperty + 8) = v7; /*0x55fbde*/
+            *((_DWORD *)materialProperty + 9) = v8; /*0x55fbe1*/
+            if ( !g_BSTreeManager_Instance ) /*0x55fbe4*/
+              BSTreeManager_Create(0); /*0x55fbef*/
+            v10 = g_BSTreeManager_Instance->materialProperty; /*0x55fbfd*/
+            ++*((_DWORD *)v10 + 0x15); /*0x55fc00*/
+            *((_DWORD *)v10 + 0xA) = v6; /*0x55fc04*/
+            *((_DWORD *)v10 + 0xB) = v7; /*0x55fc07*/
+            *((_DWORD *)v10 + 0xC) = v8; /*0x55fc0a*/
+            if ( !g_BSTreeManager_Instance ) /*0x55fc0d*/
+              BSTreeManager_Create(0); /*0x55fc18*/
+            v11 = g_BSTreeManager_Instance->materialProperty; /*0x55fc25*/
+            ++*((_DWORD *)v11 + 0x15); /*0x55fc28*/
+            *((_DWORD *)v11 + 0x10) = v6; /*0x55fc2c*/
+            *((_DWORD *)v11 + 0x11) = v7; /*0x55fc2f*/
+            *((_DWORD *)v11 + 0x12) = v8; /*0x55fc33*/
           }
         }
       }
     }
-    if ( !dword_B39E04 )
-      sub_55F750(0);
-    sub_55E060((float *)dword_B39E04);
+    if ( !g_BSTreeManager_Instance ) /*0x55fc37*/
+      BSTreeManager_Create(0); /*0x55fc42*/
+    BSTreeManager_UpdateWindMatrices(g_BSTreeManager_Instance); /*0x55fc50*/
   }
-  v12 = (double)dword_B12630;
-  if ( dword_B12630 < 0 )
-    v12 = v12 + flt_A2FC78;
-  flt_B44F04 = v12;
-  v13 = 0.0;
-  if ( flt_B12638 < 0.0 || (v13 = flt_B12638, v13 <= 1.0) )
-    flt_B2D860 = v13;
+  v12 = (double)iCanopyShadowScale_SpeedTree; /*0x55fc5b*/
+  if ( iCanopyShadowScale_SpeedTree < 0 ) /*0x55fc63*/
+    v12 = v12 + flt_A2FC78; /*0x55fc65*/
+  g_CanopyShadowProjectionScale = v12;          // Verified Oblivion dataflow: iCanopyShadowScale.value is converted from signed integer to float (negative values receive a correction constant) and stored in g_CanopyShadowProjectionScale. Fallout's homolog stores the same setting into ShadowProjTransform.w, making that destination role Probable. /*0x55fc6b*/
+  v13 = 0.0; /*0x55fc72*/
+  if ( fCanopyShadowGrassMult_SpeedTree < 0.0 || (v13 = fCanopyShadowGrassMult_SpeedTree, v13 <= 1.0) ) /*0x55fc8e*/
+    g_TallGrassProjectionShadowMultiplier = v13;// Verified: clamps fCanopyShadowGrassMult.value into [0,1] and stores the result in g_TallGrassProjectionShadowMultiplier. Fallout's named homolog is TallGrassShader::fProjShadowMult; exact Oblivion consumer remains Unknown. /*0x55fc9e*/
   else
-    flt_B2D860 = 1.0;
+    g_TallGrassProjectionShadowMultiplier = 1.0; /*0x55fc92*/
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0xA24550",
-    "line": "push    offset aRia9Uj",
+    "line": "push    offset fXenonMenuMouseXYMult; [Controller decode 2026-07-10] atexit cleanup for registered Xenon-era Controls INI setting.",
     "mnemonic": "push",
     "size": 5
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0xA2455F",
-    "line": "mov     eax, off_B13584; \"fXenonMenuMouseXYMult:Controls\"",
+    "line": "mov     eax, fXenonMenuMouseXYMultSettingName",
     "mnemonic": "mov",
     "size": 5
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0xA2456E",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

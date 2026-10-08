@@ -1,4 +1,4 @@
-0x7ED4B0: sub     esp, 8
+0x7ED4B0: sub     esp, 8; Advances the embedded cursor at property +0x7C and returns the next usable ShadowSceneLight under Oblivion's three gates: frustumCull != 0xFF, backing NiLight not AppCulled, and byte +0xF4 != 1. Fallout corroborates the method label but not the extra Oblivion gate.
 0x7ED4B3: push    ebx
 0x7ED4B4: push    ebp
 0x7ED4B5: push    esi
@@ -21,7 +21,7 @@
 0x7ED4E6: lea     edx, [esp+18h+var_4]
 0x7ED4EA: push    edx
 0x7ED4EB: mov     ecx, edi
-0x7ED4ED: call    sub_405AD0
+0x7ED4ED: call    ShadowSceneLight_GetLightRef
 0x7ED4F2: mov     eax, [eax]
 0x7ED4F4: or      [esp+18h+var_8], 1
 0x7ED4F9: test    byte ptr [eax+18h], 1
@@ -58,7 +58,7 @@
 0x7ED551: lea     edx, [esp+18h+var_4]
 0x7ED555: push    edx
 0x7ED556: mov     ecx, edi
-0x7ED558: call    sub_405AD0
+0x7ED558: call    ShadowSceneLight_GetLightRef
 0x7ED55D: mov     eax, [eax]
 0x7ED55F: or      [esp+18h+var_8], 2
 0x7ED564: test    byte ptr [eax+18h], 1

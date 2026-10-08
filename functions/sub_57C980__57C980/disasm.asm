@@ -87,7 +87,7 @@
 0x57CA9E: mov     ecx, eax
 0x57CAA0: call    sub_57CF50
 0x57CAA5: push    edi
-0x57CAA6: call    FormHeapFree
+0x57CAA6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x57CAAB: add     esp, 4
 0x57CAAE: mov     ecx, [esp+24h+var_C]
 0x57CAB2: mov     large fs:0, ecx
@@ -96,3 +96,12 @@
 0x57CABB: pop     esi
 0x57CABC: add     esp, 18h
 0x57CABF: retn
+0x9B7140: lea     ecx, [ebp-14h]; void *
+0x9B7143: jmp     BSStringT_Clear
+0x9B7148: mov     edx, [esp+arg_4]
+0x9B714C: lea     eax, [edx-14h]
+0x9B714F: mov     ecx, [edx-18h]
+0x9B7152: xor     ecx, eax
+0x9B7154: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B7159: mov     eax, offset stru_AE1DB4
+0x9B715E: jmp     ___CxxFrameHandler3

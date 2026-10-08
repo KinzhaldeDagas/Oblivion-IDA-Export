@@ -1,12 +1,14 @@
 int __cdecl fflush(FILE *File)
 {
-  if ( !File )
+  int v1; // ebp
+
+  if ( !File ) /*0x9887f5*/
   {
-    flsall(0);
-    JUMPOUT(0x988827);
+    flsall(0); /*0x9887f8*/
+    JUMPOUT(0x988827); /*0x988827*/
   }
-  _lock_file(File);
-  _fflush_nolock(File);
-  _unlock_file();
-  return fflush_::_LN9_5();
+  _lock_file((_RTL_CRITICAL_SECTION_0 *)File); /*0x988803*/
+  _fflush_nolock(File); /*0x98880f*/
+  _unlock_file((_RTL_CRITICAL_SECTION_0 *)File); /*0x988830*/
+  return fflush_::_LN9_5(v1);
 }

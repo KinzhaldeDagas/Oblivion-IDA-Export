@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x95C530",
-    "line": "sub     esp, 2F0h",
+    "line": "sub     esp, 2F0h; Verified geometry-hit path: computes intersection point/distance and fills the 0x44-byte NiPickRecord. When requested, its +0x28 vector is either a normalized triangle face normal (NiPoint3_CrossProduct of edge vectors) or an interpolated vertex normal; no-normal cases write zero.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x95C570",
-    "line": "cmp     eax, offset dword_B3FD04",
+    "line": "cmp     eax, offset stru_B3FD04",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x95C57F",
-    "line": "push    offset dword_B3FCD4",
+    "line": "push    offset stru_B3FCD4",
     "mnemonic": "push",
     "size": 5
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x95C633",
-    "line": "call    sub_710250",
+    "line": "call    NiPoint3_MultiplyMatrix3",
     "mnemonic": "call",
     "size": 5
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x95C65F",
-    "line": "fstp    [esp+318h+var_2C4]",
+    "line": "fstp    [esp+318h+self]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x95C677",
-    "line": "fld     [esp+318h+var_2C4]",
+    "line": "fld     [esp+318h+self]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x95C682",
-    "line": "call    sub_710250",
+    "line": "call    NiPoint3_MultiplyMatrix3",
     "mnemonic": "call",
     "size": 5
   },
@@ -763,19 +763,19 @@
   },
   {
     "ea": "0x95C6E4",
-    "line": "mov     [esp+300h+var_1FC], eax",
+    "line": "mov     [esp+300h+outVertices.data], eax",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x95C6EB",
-    "line": "mov     [esp+300h+var_1F8], eax",
+    "line": "mov     [esp+300h+outVertices.stride], eax",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x95C6F2",
-    "line": "mov     byte ptr [esp+300h+var_1F4], al",
+    "line": "mov     [esp+300h+outVertices.unknown08], al",
     "mnemonic": "mov",
     "size": 7
   },
@@ -799,7 +799,7 @@
   },
   {
     "ea": "0x95C703",
-    "line": "mov     [esp+300h+var_2C4], ebp",
+    "line": "mov     [esp+300h+self], ebp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -865,37 +865,37 @@
   },
   {
     "ea": "0x95C71F",
-    "line": "push    1",
+    "line": "push    1; writeAccess",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x95C721",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x95C723",
-    "line": "call    sub_728AB0",
+    "line": "call    NiGeometryData_LockVertexStream; Returns false immediately for an already-locked stream. Otherwise records bool argument at +0x3D and sets locked byte +0x3C. Additional-data branch: true argument invokes sub_7261D0 at acquisition; false invokes sub_726190 and later sub_7261D0 on unlock. Do not infer operation semantics from old writeAccess label alone.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x95C728",
-    "line": "lea     ecx, [esp+300h+var_1FC]",
+    "line": "lea     ecx, [esp+300h+outVertices]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x95C72F",
-    "line": "push    ecx",
+    "line": "push    ecx; outVertices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x95C730",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -907,7 +907,7 @@
   },
   {
     "ea": "0x95C736",
-    "line": "call    sub_728B60",
+    "line": "call    NiGeometryData_GetLockedVertexStream; Return the locked vertex pointer and stride. Additional geometry may provide an alternate writable stream that does not alias m_pkVertex; otherwise the function returns m_pkVertex with 12-byte stride.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1027,13 +1027,13 @@
   },
   {
     "ea": "0x95C77E",
-    "line": "mov     ecx, [esp+300h+var_1F8]",
+    "line": "mov     ecx, [esp+300h+outVertices.stride]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x95C785",
-    "line": "mov     edx, [esp+300h+var_1FC]",
+    "line": "mov     edx, [esp+300h+outVertices.data]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1561,19 +1561,19 @@
   },
   {
     "ea": "0x95C8F7",
-    "line": "push    esi",
+    "line": "push    esi; pickedObject",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x95C8F8",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x95C8FA",
-    "line": "call    sub_95A2D0",
+    "line": "call    NiPickRecord_Initialize; Verified NiPickRecord initialization for the 0x44-byte record: retains the picked object at +0, clears/releases the secondary reference at +4, and zeros tail fields +0x34..+0x40. It does not initialize the intersection point, distance, or +0x28 normal fields; pick paths populate those selectively, so bounds-only records may leave the normal unavailable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1939,7 +1939,7 @@
   },
   {
     "ea": "0x95CA15",
-    "line": "mov     ecx, [esp+300h+var_2C4]",
+    "line": "mov     ecx, [esp+300h+self]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2875,7 +2875,7 @@
   },
   {
     "ea": "0x95CC9D",
-    "line": "mov     ecx, [esp+300h+var_2C4]",
+    "line": "mov     ecx, [esp+300h+self]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3811,7 +3811,7 @@
   },
   {
     "ea": "0x95CF6F",
-    "line": "mov     [esp+300h+var_220], eax",
+    "line": "mov     [esp+300h+var_220.x], eax",
     "mnemonic": "mov",
     "size": 7
   },
@@ -3859,7 +3859,7 @@
   },
   {
     "ea": "0x95CF92",
-    "line": "mov     [esp+300h+var_21C], ecx",
+    "line": "mov     [esp+300h+var_220.y], ecx",
     "mnemonic": "mov",
     "size": 7
   },
@@ -3907,7 +3907,7 @@
   },
   {
     "ea": "0x95CFB5",
-    "line": "mov     [esp+300h+var_218], edx",
+    "line": "mov     [esp+300h+var_220.z], edx",
     "mnemonic": "mov",
     "size": 7
   },
@@ -3937,7 +3937,7 @@
   },
   {
     "ea": "0x95CFC8",
-    "line": "mov     [esp+300h+var_130], eax",
+    "line": "mov     [esp+300h+other.x], eax",
     "mnemonic": "mov",
     "size": 7
   },
@@ -3949,13 +3949,13 @@
   },
   {
     "ea": "0x95CFD6",
-    "line": "lea     eax, [esp+300h+var_130]",
+    "line": "lea     eax, [esp+300h+other]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x95CFDD",
-    "line": "push    eax",
+    "line": "push    eax; other",
     "mnemonic": "push",
     "size": 1
   },
@@ -3973,7 +3973,7 @@
   },
   {
     "ea": "0x95CFE6",
-    "line": "mov     [esp+304h+var_12C], ecx",
+    "line": "mov     [esp+304h+other.y], ecx",
     "mnemonic": "mov",
     "size": 7
   },
@@ -3985,19 +3985,19 @@
   },
   {
     "ea": "0x95CFF4",
-    "line": "lea     ecx, [esp+304h+var_B0]",
+    "line": "lea     ecx, [esp+304h+out]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x95CFFB",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x95CFFC",
-    "line": "lea     ecx, [esp+308h+var_220]",
+    "line": "lea     ecx, [esp+308h+var_220]; this",
     "mnemonic": "lea",
     "size": 7
   },
@@ -4015,13 +4015,13 @@
   },
   {
     "ea": "0x95D011",
-    "line": "mov     [esp+308h+var_128], edx",
+    "line": "mov     [esp+308h+other.z], edx",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x95D018",
-    "line": "call    sub_498FE0",
+    "line": "call    NiPoint3_CrossProduct; Verified face-normal fallback: NiPoint3_CrossProduct computes the cross product of two triangle edges to form the hit surface normal.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4069,7 +4069,7 @@
   },
   {
     "ea": "0x95D035",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Verified NiPick geometry path normalizes the computed or interpolated surface normal before writing the record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4183,13 +4183,13 @@
   },
   {
     "ea": "0x95D076",
-    "line": "mov     [esi+28h], eax",
+    "line": "mov     [esi+28h], eax; Verified triangle pick writes the normalized surface-normal X component to NiPickRecord +0x28.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x95D079",
-    "line": "mov     [esi+2Ch], ecx",
+    "line": "mov     [esi+2Ch], ecx; Verified triangle pick writes the normalized surface-normal Y component to NiPickRecord +0x2C.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -4231,7 +4231,7 @@
   },
   {
     "ea": "0x95D095",
-    "line": "mov     [esi+30h], edx",
+    "line": "mov     [esi+30h], edx; Verified triangle pick writes the normalized surface-normal Z component to NiPickRecord +0x30; absent-normal geometry paths write zero.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -4249,7 +4249,7 @@
   },
   {
     "ea": "0x95D0A2",
-    "line": "mov     ecx, [esp+300h+var_2C4]",
+    "line": "mov     ecx, [esp+300h+self]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5317,7 +5317,7 @@
   },
   {
     "ea": "0x95D37C",
-    "line": "mov     ebp, [esp+300h+var_2C4]",
+    "line": "mov     ebp, [esp+300h+self]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5335,13 +5335,13 @@
   },
   {
     "ea": "0x95D387",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x95D389",
-    "line": "call    sub_728B20",
+    "line": "call    NiGeometryData_UnlockVertexStream; Corrected audit: if locked, checks additional-data virtual predicate +0x4C; calls sub_7261D0(additional,0) only when saved lock-mode byte +0x3D is ZERO, then clears locked byte +0x3C. Earlier description as committing a write lock was unsupported/opposite to this branch. Exact additional-data operation remains unresolved.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5401,13 +5401,13 @@
   },
   {
     "ea": "0x95D3A8",
-    "line": "mov     ecx, [esp+300h+var_2C4]",
+    "line": "mov     ecx, [esp+300h+self]; self",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x95D3AC",
-    "line": "call    sub_728B20",
+    "line": "call    NiGeometryData_UnlockVertexStream; Corrected audit: if locked, checks additional-data virtual predicate +0x4C; calls sub_7261D0(additional,0) only when saved lock-mode byte +0x3D is ZERO, then clears locked byte +0x3C. Earlier description as committing a write lock was unsupported/opposite to this branch. Exact additional-data operation remains unresolved.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5725,19 +5725,19 @@
   },
   {
     "ea": "0x95D466",
-    "line": "push    esi",
+    "line": "push    esi; pickedObject",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x95D467",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x95D469",
-    "line": "call    sub_95A2D0",
+    "line": "call    NiPickRecord_Initialize; Verified NiPickRecord initialization for the 0x44-byte record: retains the picked object at +0, clears/releases the secondary reference at +4, and zeros tail fields +0x34..+0x40. It does not initialize the intersection point, distance, or +0x28 normal fields; pick paths populate those selectively, so bounds-only records may leave the normal unavailable.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,113 +1,113 @@
 NiTPointerList_Node_void *__thiscall sub_853720(
         _DWORD *this,
-        int a2,
+        void *vtable,
         int a3,
         NiTPointerList_Node_void *a4,
-        int a5,
+        RenderPass_DecodedLayout *a5,
         char *a6,
         char a7,
         char a8,
         int a9,
         char a10)
 {
-  char *v11; // esi
-  int v12; // eax
-  int v13; // eax
-  int v14; // eax
-  int v15; // eax
-  int v16; // eax
-  int v17; // eax
-  int v18; // eax
+  unsigned __int8 *v11; // esi
+  RenderPass_DecodedLayout *v12; // eax
+  RenderPass_DecodedLayout *v13; // eax
+  RenderPass_DecodedLayout *v14; // eax
+  RenderPass_DecodedLayout *v15; // eax
+  RenderPass_DecodedLayout *v16; // eax
+  RenderPass_DecodedLayout *v17; // eax
+  RenderPass_DecodedLayout *v18; // eax
   NiTPointerList_Node_void *result; // eax
 
-  v11 = a6;
-  if ( a7 )
+  v11 = (unsigned __int8 *)a6; /*0x853749*/
+  if ( a7 ) /*0x85374d*/
   {
-    if ( a8 )
+    if ( a8 ) /*0x8538a1*/
     {
-      if ( (_BYTE)a5 != 1 )
-        goto LABEL_26;
-      v18 = FormHeapAlloc(0x10u);
-      a5 = v18;
-      if ( v18 )
+      if ( (_BYTE)a5 != 1 ) /*0x8538ed*/
+        goto LABEL_26; /*0x8538ed*/
+      v18 = (RenderPass_DecodedLayout *)FormHeapAlloc(0x10u); /*0x8538f1*/
+      a5 = v18; /*0x8538f9*/
+      if ( v18 ) /*0x853907*/
       {
-        v13 = sub_7E2370(v18, a2, 0xE5, *v11, 1u, a3);
-        goto LABEL_25;
+        v13 = RenderPass_Construct(v18, vtable, 0xE5u, *v11, 1u, a3); /*0x85391f*/
+        goto LABEL_25; /*0x853927*/
       }
     }
     else
     {
-      if ( (_BYTE)a5 != 1 )
-        goto LABEL_26;
-      v17 = FormHeapAlloc(0x10u);
-      a5 = v17;
-      if ( v17 )
+      if ( (_BYTE)a5 != 1 ) /*0x8538a8*/
+        goto LABEL_26; /*0x8538a8*/
+      v17 = (RenderPass_DecodedLayout *)FormHeapAlloc(0x10u); /*0x8538b0*/
+      a5 = v17; /*0x8538b8*/
+      if ( v17 ) /*0x8538c6*/
       {
-        v13 = sub_7E2370(v17, a2, 0xE4, *v11, 1u, a3);
-        goto LABEL_25;
+        v13 = RenderPass_Construct(v17, vtable, 0xE4u, *v11, 1u, a3); /*0x8538de*/
+        goto LABEL_25; /*0x8538e6*/
       }
     }
-    goto LABEL_24;
+    goto LABEL_24; /*0x8538c6*/
   }
-  if ( a8 )
+  if ( a8 ) /*0x853758*/
   {
-    if ( a10 )
+    if ( a10 ) /*0x853802*/
     {
-      if ( (_BYTE)a5 != 1 )
-        goto LABEL_26;
-      v16 = FormHeapAlloc(0x10u);
-      a5 = v16;
-      if ( v16 )
+      if ( (_BYTE)a5 != 1 ) /*0x853855*/
+        goto LABEL_26; /*0x853855*/
+      v16 = (RenderPass_DecodedLayout *)FormHeapAlloc(0x10u); /*0x85385d*/
+      a5 = v16; /*0x853865*/
+      if ( v16 ) /*0x853873*/
       {
-        v13 = sub_7E2370(v16, a2, 0xE7, *v11, 1u, a3);
-        goto LABEL_25;
+        v13 = RenderPass_Construct(v16, vtable, 0xE7u, *v11, 1u, a3); /*0x85388f*/
+        goto LABEL_25; /*0x853897*/
       }
     }
     else
     {
-      if ( (_BYTE)a5 != 1 )
-        goto LABEL_26;
-      v15 = FormHeapAlloc(0x10u);
-      a5 = v15;
-      if ( v15 )
+      if ( (_BYTE)a5 != 1 ) /*0x853809*/
+        goto LABEL_26; /*0x853809*/
+      v15 = (RenderPass_DecodedLayout *)FormHeapAlloc(0x10u); /*0x853811*/
+      a5 = v15; /*0x853819*/
+      if ( v15 ) /*0x853827*/
       {
-        v13 = sub_7E2370(v15, a2, 0xE3, *v11, 1u, a3);
-        goto LABEL_25;
+        v13 = RenderPass_Construct(v15, vtable, 0xE3u, *v11, 1u, a3); /*0x853843*/
+        goto LABEL_25; /*0x85384b*/
       }
     }
-    goto LABEL_24;
+    goto LABEL_24; /*0x853827*/
   }
-  if ( a10 )
+  if ( a10 ) /*0x853763*/
   {
-    if ( (_BYTE)a5 != 1 )
-      goto LABEL_26;
-    v14 = FormHeapAlloc(0x10u);
-    a5 = v14;
-    if ( v14 )
+    if ( (_BYTE)a5 != 1 ) /*0x8537b6*/
+      goto LABEL_26; /*0x8537b6*/
+    v14 = (RenderPass_DecodedLayout *)FormHeapAlloc(0x10u); /*0x8537be*/
+    a5 = v14; /*0x8537c6*/
+    if ( v14 ) /*0x8537d4*/
     {
-      v13 = sub_7E2370(v14, a2, 0xE6, *v11, 1u, a3);
-      goto LABEL_25;
+      v13 = RenderPass_Construct(v14, vtable, 0xE6u, *v11, 1u, a3); /*0x8537f0*/
+      goto LABEL_25; /*0x8537f8*/
     }
 LABEL_24:
-    v13 = 0;
-    goto LABEL_25;
+    v13 = 0; /*0x853929*/
+    goto LABEL_25; /*0x853929*/
   }
-  if ( (_BYTE)a5 != 1 )
+  if ( (_BYTE)a5 != 1 ) /*0x85376a*/
   {
 LABEL_26:
-    result = a4;
-    ++LOWORD(a4->next);
-    goto LABEL_27;
+    result = a4; /*0x853946*/
+    ++LOWORD(a4->next); /*0x85394a*/
+    goto LABEL_27; /*0x85394a*/
   }
-  v12 = FormHeapAlloc(0x10u);
-  a5 = v12;
-  if ( !v12 )
-    goto LABEL_24;
-  v13 = sub_7E2370(v12, a2, 0xE2, *v11, 1u, a3);
+  v12 = (RenderPass_DecodedLayout *)FormHeapAlloc(0x10u); /*0x853772*/
+  a5 = v12; /*0x85377a*/
+  if ( !v12 ) /*0x853788*/
+    goto LABEL_24; /*0x853788*/
+  v13 = RenderPass_Construct(v12, vtable, 0xE2u, *v11, 1u, a3); /*0x8537a4*/
 LABEL_25:
-  a5 = v13;
-  result = sub_5B1E20((BSTextureManager *)(this + 0xA), (void **)&a5);
+  a5 = v13; /*0x85392b*/
+  result = NiTPointerList__AddTail((BSTextureManager *)(this + 0xA), (void **)&a5); /*0x85393f*/
 LABEL_27:
-  *v11 = 0;
-  return result;
+  *v11 = 0; /*0x85394e*/
+  return result; /*0x853951*/
 }

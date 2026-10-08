@@ -1,5 +1,5 @@
 0x9A16B5: push    esi
-0x9A16B6: mov     esi, dword_BA9DB4
+0x9A16B6: mov     esi, dword ptr unk_BA9DB4
 0x9A16BC: jmp     short loc_9A16E0
 0x9A16BE: push    edi; size_t
 0x9A16BF: push    eax; unsigned __int8 *
@@ -19,13 +19,13 @@
 0x9A16E2: test    eax, eax
 0x9A16E4: jnz     short loc_9A16BE
 0x9A16E6: mov     eax, esi
-0x9A16E8: sub     eax, dword_BA9DB4
+0x9A16E8: sub     eax, dword ptr unk_BA9DB4
 0x9A16EE: pop     esi
 0x9A16EF: sar     eax, 2
 0x9A16F2: neg     eax
 0x9A16F4: retn
 0x9A16F5: mov     eax, esi
-0x9A16F7: sub     eax, dword_BA9DB4
+0x9A16F7: sub     eax, dword ptr unk_BA9DB4
 0x9A16FD: pop     esi
 0x9A16FE: sar     eax, 2
 0x9A1701: retn

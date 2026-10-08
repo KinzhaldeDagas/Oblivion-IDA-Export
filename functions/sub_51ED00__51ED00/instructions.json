@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x51ED03",
-    "line": "call    sub_51E9A0",
+    "line": "call    TESCreature_Destructor",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x51ED08",
-    "line": "test    [esp+4+arg_0], 1",
+    "line": "test    byte ptr [esp+4+flags], 1",
     "mnemonic": "test",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x51ED10",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

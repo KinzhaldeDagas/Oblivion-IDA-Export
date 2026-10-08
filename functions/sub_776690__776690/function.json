@@ -1,10 +1,18 @@
 {
   "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
   "callers_count": 19,
+  "chunks": [
+    [
+      "0x776690",
+      "0x7766D2"
+    ]
+  ],
   "chunks_sha256": "e7c42551d61ee75e15a8e48f87c5b66cdac8cfb6dab24a44513794b644fc10aa",
   "comment_regular": "[Verified] Generic NiTPointerList remove-by-data helper. Scans node payloads for the supplied pointer, then delegates removal of the matching node to NiTPointerList_RemoveNode. The decal-list path calls it with the DECAL_DATA* payload address.",
   "comment_repeatable": "[Verified] Generic NiTPointerList remove-by-data helper. Scans node payloads for the supplied pointer, then delegates removal of the matching node to NiTPointerList_RemoveNode. The decal-list path calls it with the DECAL_DATA* payload address.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "NiTPointerList_RemoveByData",
   "end_ea": "0x7766D2",
@@ -15,6 +23,7 @@
   "segment": ".text",
   "sha256": "e7c42551d61ee75e15a8e48f87c5b66cdac8cfb6dab24a44513794b644fc10aa",
   "size": 66,
+  "source_annotation_confidence": "Verified",
   "start_ea": "0x776690",
   "total_chunk_size": 66,
   "type": "void *__thiscall(void *list, void **data)",

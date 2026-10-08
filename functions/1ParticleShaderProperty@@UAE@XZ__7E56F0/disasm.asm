@@ -32,17 +32,17 @@
 0x7E574C: call    eax
 0x7E574E: mov     dword ptr [esi+10Ch], 0
 0x7E5758: lea     edi, [esi+110h]
-0x7E575E: mov     ecx, edi
-0x7E5760: call    sub_477EF0
+0x7E575E: mov     ecx, edi; this
+0x7E5760: call    NiTObjectArray_ClearAndRelease; Clears a ref-counted NiT object-pointer array: releases every non-null element, nulls entries, and resets end/count words to zero. At bow release it is invoked on ArrowBone+0xAC, thereby releasing all ArrowBone children including the held Arrow:0 clone.
 0x7E5765: mov     eax, [esi+6Ch]
 0x7E5768: push    eax
-0x7E5769: call    FormHeapFree
+0x7E5769: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7E576E: add     esp, 4
 0x7E5771: sub     dword ptr ds:0B46048h, 1
 0x7E5778: jnz     short loc_7E5793
 0x7E577A: mov     ecx, ds:0B46044h
 0x7E5780: push    ecx
-0x7E5781: call    FormHeapFree
+0x7E5781: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7E5786: add     esp, 4
 0x7E5789: mov     dword ptr ds:0B46044h, 0
 0x7E5793: mov     dword ptr [edi], offset ??_7?$NiTArray@V?$NiPointer@VNiAVObject@@@@@@6B@; const NiTArray<NiPointer<NiAVObject>>::`vftable'
@@ -51,14 +51,14 @@
 0x7E579E: mov     byte ptr [esp+20h+var_4], 1
 0x7E57A3: jz      short loc_7E57C2
 0x7E57A5: mov     edx, [edi-4]
-0x7E57A8: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x7E57A8: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x7E57AD: lea     ebp, [edi-4]
 0x7E57B0: push    edx; int
 0x7E57B1: push    4; unsigned int
 0x7E57B3: push    edi; void *
 0x7E57B4: call    $LN21
 0x7E57B9: push    ebp
-0x7E57BA: call    FormHeapFree
+0x7E57BA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7E57BF: add     esp, 4
 0x7E57C2: mov     edi, [esi+10Ch]
 0x7E57C8: test    edi, edi
@@ -87,3 +87,35 @@
 0x7E580A: pop     ebp
 0x7E580B: add     esp, 10h
 0x7E580E: retn
+0x4B2E30: mov     eax, [ecx+4]
+0x4B2E33: test    eax, eax
+0x4B2E35: mov     dword ptr [ecx], offset ??_7?$NiTArray@V?$NiPointer@VNiAVObject@@@@@@6B@; const NiTArray<NiPointer<NiAVObject>>::`vftable'
+0x4B2E3B: jz      short locret_4B2E5C
+0x4B2E3D: mov     ecx, [eax-4]
+0x4B2E40: push    esi
+0x4B2E41: lea     esi, [eax-4]
+0x4B2E44: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x4B2E49: push    ecx; int
+0x4B2E4A: push    4; unsigned int
+0x4B2E4C: push    eax; void *
+0x4B2E4D: call    $LN21
+0x4B2E52: push    esi
+0x4B2E53: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x4B2E58: add     esp, 4
+0x4B2E5B: pop     esi
+0x4B2E5C: retn
+0x9CF7C0: mov     ecx, [ebp-10h]; this
+0x9CF7C3: jmp     ??1BSShaderProperty@@UAE@XZ; BSShaderProperty::~BSShaderProperty(void)
+0x9CF7C8: mov     ecx, [ebp-10h]
+0x9CF7CB: add     ecx, 10Ch; slot
+0x9CF7D1: jmp     NiPointerSlot_Release
+0x9CF7D6: mov     ecx, [ebp-10h]
+0x9CF7D9: add     ecx, 110h
+0x9CF7DF: jmp     loc_4B2E30
+0x9CF7E4: mov     edx, [esp+arg_4]
+0x9CF7E8: lea     eax, [edx-10h]
+0x9CF7EB: mov     ecx, [edx-14h]
+0x9CF7EE: xor     ecx, eax
+0x9CF7F0: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CF7F5: mov     eax, offset stru_AF83E8
+0x9CF7FA: jmp     ___CxxFrameHandler3

@@ -1,4 +1,4 @@
-0x7C5A10: push    ebx
+0x7C5A10: push    ebx; Strong-own the exact caster/source root at ShadowSceneLight+0x130.
 0x7C5A11: push    esi
 0x7C5A12: mov     ebx, ecx
 0x7C5A14: mov     esi, [ebx+130h]

@@ -39,3 +39,17 @@
 0x7363E4: pop     ebx
 0x7363E5: add     esp, 10h
 0x7363E8: retn
+0x733860: mov     dword ptr [ecx], offset ??_7NiImageReader@@6B@; const NiImageReader::`vftable'
+0x733866: add     ecx, 80h ; '€'
+0x73386C: push    ecx; lpCriticalSection
+0x73386D: call    dword ptr ds:0A28068h
+0x733873: retn
+0x9CAA90: mov     ecx, [ebp-10h]
+0x9CAA93: jmp     loc_733860
+0x9CAA98: mov     edx, [esp+arg_4]
+0x9CAA9C: lea     eax, [edx-10h]
+0x9CAA9F: mov     ecx, [edx-14h]
+0x9CAAA2: xor     ecx, eax
+0x9CAAA4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CAAA9: mov     eax, offset stru_AF30F0
+0x9CAAAE: jmp     ___CxxFrameHandler3

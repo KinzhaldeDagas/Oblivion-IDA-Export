@@ -9,22 +9,22 @@ char __usercall sub_505020@<al>(
         int a8,
         double *a9)
 {
-  int v11; // eax
-  int v12; // eax
+  int v9; // eax
+  int v10; // eax
 
-  if ( a5 )
+  if ( a5 ) /*0x505027*/
   {
-    if ( (*(int (__thiscall **)(int))(*(_DWORD *)a5 + 0x154))(a5) )
+    if ( (*(int (__thiscall **)(int))(*(_DWORD *)a5 + 0x154))(a5) ) /*0x505033*/
     {
-      v11 = (*(int (__thiscall **)(int))(*(_DWORD *)a5 + 0x154))(a5);
-      if ( v11 )
+      v9 = (*(int (__thiscall **)(int))(*(_DWORD *)a5 + 0x154))(a5); /*0x505043*/
+      if ( v9 ) /*0x50504b*/
       {
-        v12 = (*(int (__usercall **)@<eax>(int@<ecx>, double@<st0>, double@<st1>))(*(_DWORD *)v11 + 8))(v11, a2, a1);
-        *a9 = (double)(unsigned __int8)sub_4DE1C0((int)a9, v12);
+        v10 = (*(int (__usercall **)@<eax>(int@<ecx>, double@<st0>, double@<st1>))(*(_DWORD *)v9 + 8))(v9, a2, a1); /*0x505054*/
+        *a9 = (double)(unsigned __int8)sub_4DE1C0((int)a9, v10); /*0x50506a*/
       }
-      if ( IsConsoleMode )
-        Interface_ConsolePrint("RemoveFlames >> %0.2f", *a9);
+      if ( MEMORY[0xB361AC] ) /*0x50506c*/
+        Interface_ConsolePrint("RemoveFlames >> %0.2f", *a9); /*0x505082*/
     }
   }
-  return 1;
+  return 1; /*0x50508c*/
 }

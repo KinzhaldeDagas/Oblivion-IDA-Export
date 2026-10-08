@@ -1,7 +1,7 @@
 0x98C3FE: push    8
 0x98C400: push    offset stru_AFFE28
 0x98C405: call    __SEH_prolog4
-0x98C40A: push    dword_BA9E28
+0x98C40A: push    dword_BA9E10+18h
 0x98C410: call    __decode_pointer
 0x98C415: pop     ecx
 0x98C416: test    eax, eax

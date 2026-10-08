@@ -1,1 +1,4 @@
-mta_cookie
+struct mta_cookie
+{
+list entry;
+};

@@ -1,4 +1,4 @@
-0x4CE320: push    ecx
+0x4CE320: push    ecx; Verified scene-node teardown: temporarily sets cellProcessLevel=1, detaches the cell NiNode from its parent, clears/releases its child array, releases the NiNode and cell extra-data component, then resets cellProcessLevel to 0.
 0x4CE321: push    esi
 0x4CE322: push    edi
 0x4CE323: mov     edi, ecx
@@ -17,7 +17,7 @@
 0x4CE347: lea     edx, [esp+14h+var_4]
 0x4CE34B: push    edx
 0x4CE34C: call    eax
-0x4CE34E: mov     eax, dword ptr [esp+10h+var_4]
+0x4CE34E: mov     eax, [esp+10h+var_4]
 0x4CE352: test    eax, eax
 0x4CE354: jz      short loc_4CE373
 0x4CE356: push    ebp
@@ -35,8 +35,8 @@
 0x4CE36E: mov     ecx, ebp
 0x4CE370: call    eax
 0x4CE372: pop     ebp
-0x4CE373: lea     ecx, [esi+0ACh]
-0x4CE379: call    sub_477EF0
+0x4CE373: lea     ecx, [esi+0ACh]; this
+0x4CE379: call    NiTObjectArray_ClearAndRelease; Clears a ref-counted NiT object-pointer array: releases every non-null element, nulls entries, and resets end/count words to zero. At bow release it is invoked on ArrowBone+0xAC, thereby releasing all ArrowBone children including the held Arrow:0 clone.
 0x4CE37E: mov     esi, [edi+54h]
 0x4CE381: test    esi, esi
 0x4CE383: jz      short loc_4CE3A4

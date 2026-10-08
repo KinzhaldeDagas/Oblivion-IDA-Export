@@ -1,19 +1,32 @@
 {
-  "callees_count": 19,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4CABC0",
+      "0x4CACD6"
+    ]
+  ],
+  "chunks_sha256": "1a859d274008284072b3f0688ae2caf81476b998449f20dd6bf493820c2893ce",
+  "comment_regular": "Verified return predicate: returns true only for an NPC actor in a cell with direct XOWN, no XGLB, and neither Public nor TempPublic bit set; guards return false. With an NPC owner it returns true when the actor's base form differs; with a faction owner it returns true when actor rank is below the cell's XRNK requirement (absent XRNK defaults to rank 0). Other owner types and non-NPC actors return false. This is an ownership-restriction check; the calling script-condition identity remains Unknown.",
+  "comment_repeatable": "Verified return predicate: returns true only for an NPC actor in a cell with direct XOWN, no XGLB, and neither Public nor TempPublic bit set; guards return false. With an NPC owner it returns true when the actor's base form differs; with a faction owner it returns true when actor rank is below the cell's XRNK requirement (absent XRNK defaults to rank 0). Other owner types and non-NPC actors return false. This is an ownership-restriction check; the calling script-condition identity remains Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 6,
-  "display_name": "sub_4CABC0",
+  "display_name": "TESObjectCELL_IsActorOwnershipRestricted",
   "end_ea": "0x4CACD6",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4CABC0",
+  "name": "TESObjectCELL_IsActorOwnershipRestricted",
   "segment": ".text",
   "sha256": "1a859d274008284072b3f0688ae2caf81476b998449f20dd6bf493820c2893ce",
   "size": 278,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4CABC0",
-  "type": "bool __thiscall(ExtraDataList *this, Actor *)",
+  "total_chunk_size": 278,
+  "type": "bool __thiscall(TESObjectCELL *cell, Actor *actor)",
   "xrefs_from_count": 128,
   "xrefs_to_count": 1
 }

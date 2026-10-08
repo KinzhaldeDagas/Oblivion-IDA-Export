@@ -1,19 +1,32 @@
 {
-  "callees_count": 10,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7A51C0",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x7A51C0",
+      "0x7A5461"
+    ]
+  ],
+  "chunks_sha256": "0187574085839c97a720a64b4fb107090a2a7fe87f501149f389a3ede109e2bf",
+  "comment_regular": "Oblivion projected-shadow UV generator. Projects each indexed vertex along parsed right/up axes, optionally applies the six-float remap, and appends the resulting pair to CIndexedGeometry::shadowTexcoords.",
+  "comment_repeatable": "Oblivion projected-shadow UV generator. Projects each indexed vertex along parsed right/up axes, optionally applies the six-float remap, and appends the resulting pair to CIndexedGeometry::shadowTexcoords.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 39,
+  "display_name": "OB_CProjectedShadow_ComputeTexCoords_010201A0",
   "end_ea": "0x7A5461",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "sub_7A51C0",
+  "name": "OB_CProjectedShadow_ComputeTexCoords_010201A0",
   "segment": ".text",
   "sha256": "0187574085839c97a720a64b4fb107090a2a7fe87f501149f389a3ede109e2bf",
   "size": 673,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A51C0",
-  "type": "unsigned int __thiscall(float *this, int, float, float, float, float, float *)",
-  "xrefs_from_count": 225,
+  "total_chunk_size": 673,
+  "type": "void __thiscall(OB_CProjectedShadow_010201A0 *this, OB_CIndexedGeometry_010201A0 *geometry, float centerX, float centerY, float centerZ, float radius, const float *shadowCoordRemap)",
+  "xrefs_from_count": 264,
   "xrefs_to_count": 3
 }

@@ -1,1 +1,1 @@
-NiOBBLeaf
+struct NiOBBLeaf;

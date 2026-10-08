@@ -1,1 +1,1 @@
-IRpcStubBuffer_0
+typedef IRpcStubBuffer IRpcStubBuffer_0;

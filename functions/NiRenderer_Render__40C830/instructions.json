@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x40C85D",
-    "line": "mov     ecx, TES",
+    "line": "mov     ecx, ds:0B333A0h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x40C868",
-    "line": "mov     byte_B33395, 1",
+    "line": "mov     byte ptr unk_B33395, 1",
     "mnemonic": "mov",
     "size": 7
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x40C87B",
-    "line": "mov     edx, g_worldScenegraph",
+    "line": "mov     edx, g_WorldSceneReceiverRoot; Verified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x40C8A2",
-    "line": "mov     edx, g_worldScenegraph",
+    "line": "mov     edx, g_WorldSceneReceiverRoot; Verified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x40C8D3",
-    "line": "mov     eax, g_worldScenegraph",
+    "line": "mov     eax, g_WorldSceneReceiverRoot; Verified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x40C8DE",
-    "line": "mov     ecx, TES",
+    "line": "mov     ecx, ds:0B333A0h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -337,19 +337,19 @@
   },
   {
     "ea": "0x40C8EA",
-    "line": "push    esi; a3",
+    "line": "push    esi; secondaryRoot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x40C8EB",
-    "line": "push    eax; a2",
+    "line": "push    eax; primaryRoot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x40C8EC",
-    "line": "call    CombinedWaterRelfectionPAsses",
+    "line": "call    WaterManager_RenderCombinedReflectionPasses; NiRenderer main render calls WaterManager_RenderCombinedReflectionPasses with the world reflection root and ShadowSceneNode; this is the authoritative caller establishing WaterManager ownership.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x40C8F7",
-    "line": "mov     eax, dword_B3F940",
+    "line": "mov     eax, dword ptr g_NiParallelUpdateTaskManager; Verified pointer, not a universal threading-enable boolean: 404D60 waits on manager+198 and adjusts counter+190; 404DD0 reads pending flag+1B0. NiRenderer_Render checks it at 40C8F7/40D059; main update checks it at 40DB4E/40DEC6. Null excludes this parallel update manager, but does not prove all IO, resource-reference, pool or external writer exclusion for a DX11 bucket transaction.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x40C90A",
-    "line": "call    sub_701AD0",
+    "line": "call    NiParallelUpdateTaskManager_SubmitSignalTask; 3DTheft decode 2026-05-16: if manager exists, calls manager vfunc +0x60 with args (1, manager+0x19C, 0, 0), then clears byte +0x1B0. manager+0x19C is the observed embedded signal-task argument.",
     "mnemonic": "call",
     "size": 5
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x40C911",
-    "line": "call    sub_404D60",
+    "line": "call    NiParallelUpdateTaskManager_WaitForSignal; [Verified] On semaphore timeout or pending-count boundary, sets bNiParallelWaitFallback_0B3F944 and waits indefinitely on g_NiParallelUpdateTaskManager's semaphore. BSTECreateTask_Run observes the byte and skips the wrapped Initialize call while fallback wait is active.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,31 +427,31 @@
   },
   {
     "ea": "0x40C91B",
-    "line": "call    ShadowPass",
+    "line": "call    ShadowPass; NiRenderer_Render invokes retail ShadowPass here. Normal world traversal follows later at 0x0040CCD3.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x40C920",
-    "line": "mov     eax, g_worldScenegraph",
+    "line": "mov     eax, g_WorldSceneReceiverRoot; Verified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x40C925",
-    "line": "mov     ebp, g_Renderer",
+    "line": "mov     ebp, dword ptr renderer",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x40C92B",
-    "line": "mov     ecx, TESDataHandler_g_PlayerRef",
+    "line": "mov     ecx, dword ptr reference; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x40C931",
-    "line": "mov     [esp+54h+var_34], eax",
+    "line": "mov     [esp+54h+sceneRoot], eax; MoonSugarEffect decode: NiRenderer_Render stores g_worldScenegraph in var_34 and g_worldScenegraph->cullingProcess (+0xE4) in var_30 for the world render path.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -463,13 +463,13 @@
   },
   {
     "ea": "0x40C93B",
-    "line": "push    1",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x40C93D",
-    "line": "mov     [esp+58h+var_30], eax",
+    "line": "mov     [esp+58h+cullingProcess], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x40C945",
-    "line": "call    PlayerCharacter_GetPlayerNode",
+    "line": "call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x40C95F",
-    "line": "mov     eax, g_worldScenegraph",
+    "line": "mov     eax, g_WorldSceneReceiverRoot; Verified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x40C97A",
-    "line": "mov     ecx, dword_B333D8",
+    "line": "mov     ecx, dword ptr root",
     "mnemonic": "mov",
     "size": 6
   },
@@ -643,19 +643,19 @@
   },
   {
     "ea": "0x40C99F",
-    "line": "mov     ecx, dword_B333D8; this",
+    "line": "mov     ecx, dword ptr root; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x40C9A5",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x40C9AA",
-    "line": "mov     eax, g_worldScenegraph",
+    "line": "mov     eax, g_WorldSceneReceiverRoot; Verified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x40C9C5",
-    "line": "mov     ecx, dword_B333DC",
+    "line": "mov     ecx, dword ptr unk_B333DC",
     "mnemonic": "mov",
     "size": 6
   },
@@ -775,13 +775,13 @@
   },
   {
     "ea": "0x40C9EA",
-    "line": "mov     ecx, dword_B333DC; this",
+    "line": "mov     ecx, dword ptr unk_B333DC; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x40C9F0",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -799,7 +799,7 @@
   },
   {
     "ea": "0x40C9FE",
-    "line": "cmp     iMultisample, esi",
+    "line": "cmp     ds:0B34FC0h, esi",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x40CA09",
-    "line": "cmp     ImageSpaceEffectEnabled, 0",
+    "line": "cmp     OB_RendererGlobalState_010201A0.pad_00D+98h, 0",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -829,7 +829,7 @@
   },
   {
     "ea": "0x40CA14",
-    "line": "mov     [esp+54h+var_38], edi",
+    "line": "mov     [esp+54h+texture], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -841,13 +841,13 @@
   },
   {
     "ea": "0x40CA1E",
-    "line": "mov     ecx, g_textureManager; this",
+    "line": "mov     ecx, dword ptr OB_RendererGlobalState_010201A0.pad_0B3+4; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x40CA24",
-    "line": "push    4; a3",
+    "line": "push    4; MoonSugarEffect decode: image-space source path requests default render target type 4 from BSTextureManager.",
     "mnemonic": "push",
     "size": 2
   },
@@ -859,7 +859,7 @@
   },
   {
     "ea": "0x40CA27",
-    "line": "call    BSTextureManager_GetDefaultRenderTarget",
+    "line": "call    BSTextureManager_GetDefaultRenderTarget; Oblivion default rendered-target acquisition. Resolves dimensions, D3D format, auxiliary value, and flags for the target type, then obtains a matching cached or newly created BSRenderedTexture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -877,7 +877,7 @@
   },
   {
     "ea": "0x40CA30",
-    "line": "mov     [esp+54h+var_38], edi",
+    "line": "mov     [esp+54h+texture], edi; MoonSugarEffect decode: var_38 now holds the full-scene BSRenderedTexture used as image-space source.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -925,7 +925,7 @@
   },
   {
     "ea": "0x40CA43",
-    "line": "call    NiRenderer_BeginScene",
+    "line": "call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1735,7 +1735,7 @@
   },
   {
     "ea": "0x40CBCD",
-    "line": "mov     ecx, g_worldScenegraph",
+    "line": "mov     ecx, g_WorldSceneReceiverRoot; Verified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1849,7 +1849,7 @@
   },
   {
     "ea": "0x40CC21",
-    "line": "call    BSRenderedTexture__UseTextureToRender",
+    "line": "call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1867,7 +1867,7 @@
   },
   {
     "ea": "0x40CC29",
-    "line": "call    NiRenderer_BeginScene",
+    "line": "call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1909,7 +1909,7 @@
   },
   {
     "ea": "0x40CC41",
-    "line": "call    BSRenderedTexture__UseTextureToRender",
+    "line": "call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1927,7 +1927,7 @@
   },
   {
     "ea": "0x40CC49",
-    "line": "call    NiRenderer_BeginScene",
+    "line": "call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1951,7 +1951,7 @@
   },
   {
     "ea": "0x40CC54",
-    "line": "call    NiRenderer_BeginScene1",
+    "line": "call    NiRenderer_BeginScene1; Oblivion BeginScene internal path: establishes SceneState1 when required and starts the supplied or default render-target group.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1963,7 +1963,7 @@
   },
   {
     "ea": "0x40CC5C",
-    "line": "cmp     byte_B42CD8, 0",
+    "line": "cmp     byte ptr unk_B42CD8, 0",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -1975,13 +1975,13 @@
   },
   {
     "ea": "0x40CC65",
-    "line": "mov     byte_B42CD8, 0",
+    "line": "mov     byte ptr unk_B42CD8, 0",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x40CC6C",
-    "line": "mov     byte_B42CD9, 1",
+    "line": "mov     byte ptr unk_B42CD9, 1",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1999,25 +1999,25 @@
   },
   {
     "ea": "0x40CC7F",
-    "line": "mov     eax, TES",
+    "line": "mov     eax, ds:0B333A0h",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x40CC84",
-    "line": "mov     byte_B42CDE, cl",
+    "line": "mov     byte ptr unk_B42CDE, cl",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x40CC8A",
-    "line": "mov     byte_B42CDF, 1",
+    "line": "mov     byte ptr unk_B42CDF, 1",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x40CC91",
-    "line": "mov     byte_B42CE0, dl",
+    "line": "mov     byte ptr unk_B42CE0, dl",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2101,13 +2101,13 @@
   },
   {
     "ea": "0x40CCC0",
-    "line": "mov     edx, [esp+54h+var_30]",
+    "line": "mov     edx, [esp+54h+cullingProcess]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x40CCC4",
-    "line": "mov     ecx, [esp+54h+var_34]",
+    "line": "mov     ecx, [esp+54h+sceneRoot]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2119,31 +2119,31 @@
   },
   {
     "ea": "0x40CCCE",
-    "line": "push    0",
+    "line": "push    0; visibleArray",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x40CCD0",
-    "line": "push    edx",
+    "line": "push    edx; cullingProcess",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x40CCD1",
-    "line": "push    ecx",
+    "line": "push    ecx; sceneRoot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x40CCD2",
-    "line": "push    eax",
+    "line": "push    eax; camera",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x40CCD3",
-    "line": "call    sub_70C0B0",
+    "line": "call    NiRenderer_CullAndRenderScene; Normal world traversal occurs after the earlier native ShadowPass call at 0x0040C91B.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2185,19 +2185,19 @@
   },
   {
     "ea": "0x40CCE8",
-    "line": "cmp     ImageSpaceEffectEnabled, 0",
+    "line": "cmp     OB_RendererGlobalState_010201A0.pad_00D+98h, 0",
     "mnemonic": "cmp",
     "size": 7
   },
   {
     "ea": "0x40CCEF",
-    "line": "mov     byte_B42CDE, 0",
+    "line": "mov     byte ptr unk_B42CDE, 0",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x40CCF6",
-    "line": "mov     byte_B42CDF, 0",
+    "line": "mov     byte ptr unk_B42CDF, 0",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2209,7 +2209,7 @@
   },
   {
     "ea": "0x40CCFF",
-    "line": "cmp     enableRefraction, 0",
+    "line": "cmp     OB_ShaderPassControl_010201A0.refractionPassEnabled, 0; [Verified] NiRenderer_Render gates its additional refraction render-target pass on OB_ShaderPassControl.refractionPassEnabled, after the renderer mode and capability checks.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -2221,7 +2221,7 @@
   },
   {
     "ea": "0x40CD08",
-    "line": "cmp     ShaderPackage, esi",
+    "line": "cmp     dword ptr OB_RendererGlobalState_010201A0.shaderPackageVersion_le, esi",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -2233,7 +2233,7 @@
   },
   {
     "ea": "0x40CD10",
-    "line": "mov     eax, g_worldScenegraph",
+    "line": "mov     eax, g_WorldSceneReceiverRoot; Verified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2257,7 +2257,7 @@
   },
   {
     "ea": "0x40CD22",
-    "line": "call    BSRenderedTexture__UseTextureToRender",
+    "line": "call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2275,7 +2275,7 @@
   },
   {
     "ea": "0x40CD29",
-    "line": "call    InitBSShaderAccumulator",
+    "line": "call    BSShaderAccumulator_GetOrCreateGlobal",
     "mnemonic": "call",
     "size": 5
   },
@@ -2287,7 +2287,7 @@
   },
   {
     "ea": "0x40CD30",
-    "line": "call    EndTargetGroup",
+    "line": "call    EndTargetGroup; MoonSugarEffect build 24: EndTargetGroup xref to Lighting30 selector. Calls 0x007FD260 for 0x159+ and 0x156+ special routes after setting up render targets; used only to label selector routes, not as plugin-owned rendering.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2317,13 +2317,13 @@
   },
   {
     "ea": "0x40CD44",
-    "line": "call    InitBSShaderAccumulator",
+    "line": "call    BSShaderAccumulator_GetOrCreateGlobal",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x40CD49",
-    "line": "cmp     byte_B42CDB, 0",
+    "line": "cmp     byte ptr unk_B42CDB, 0",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -2383,7 +2383,7 @@
   },
   {
     "ea": "0x40CD69",
-    "line": "call    NiRenderer_BeginScene",
+    "line": "call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2419,13 +2419,13 @@
   },
   {
     "ea": "0x40CD83",
-    "line": "call    InitBSShaderAccumulator",
+    "line": "call    BSShaderAccumulator_GetOrCreateGlobal",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x40CD88",
-    "line": "cmp     byte_B42CDB, 0",
+    "line": "cmp     byte ptr unk_B42CDB, 0",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -2437,7 +2437,7 @@
   },
   {
     "ea": "0x40CD95",
-    "line": "mov     ecx, g_worldScenegraph",
+    "line": "mov     ecx, g_WorldSceneReceiverRoot; Verified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2497,7 +2497,7 @@
   },
   {
     "ea": "0x40CDBD",
-    "line": "call    InitBSShaderAccumulator",
+    "line": "call    BSShaderAccumulator_GetOrCreateGlobal",
     "mnemonic": "call",
     "size": 5
   },
@@ -2659,7 +2659,7 @@
   },
   {
     "ea": "0x40CE1B",
-    "line": "call    NiDX9Renderer__SetShaderAccumulator",
+    "line": "call    NiDX9Renderer__SetShaderAccumulator;",
     "mnemonic": "call",
     "size": 5
   },
@@ -2695,19 +2695,19 @@
   },
   {
     "ea": "0x40CE2A",
-    "line": "mov     ecx, [esp+54h+var_34]",
+    "line": "mov     ecx, [esp+54h+sceneRoot]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x40CE2E",
-    "line": "mov     edx, [esp+54h+var_30]",
+    "line": "mov     edx, [esp+54h+cullingProcess]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x40CE32",
-    "line": "push    0",
+    "line": "push    0; visibleArray",
     "mnemonic": "push",
     "size": 2
   },
@@ -2731,25 +2731,25 @@
   },
   {
     "ea": "0x40CE45",
-    "line": "push    edx",
+    "line": "push    edx; cullingProcess",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x40CE46",
-    "line": "push    ecx",
+    "line": "push    ecx; sceneRoot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x40CE47",
-    "line": "push    eax",
+    "line": "push    eax; camera",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x40CE48",
-    "line": "call    sub_70C0B0",
+    "line": "call    NiRenderer_CullAndRenderScene; MoonSugarEffect build 15: patched by plugin to RenderWorldCameraSwayHook for second main-world accumulator pass. Same cdecl stack as native sub_70C0B0; caller still executes add esp,10h.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2839,7 +2839,7 @@
   },
   {
     "ea": "0x40CE79",
-    "line": "call    NiDX9Renderer__SetShaderAccumulator",
+    "line": "call    NiDX9Renderer__SetShaderAccumulator;",
     "mnemonic": "call",
     "size": 5
   },
@@ -2857,7 +2857,7 @@
   },
   {
     "ea": "0x40CE85",
-    "line": "mov     ecx, g_worldScenegraph",
+    "line": "mov     ecx, g_WorldSceneReceiverRoot; Verified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2869,13 +2869,13 @@
   },
   {
     "ea": "0x40CE91",
-    "line": "mov     ecx, [esp+54h+var_38]; this",
+    "line": "mov     ecx, [esp+54h+texture]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x40CE95",
-    "line": "call    BSRenderedTexture__UseTextureToRender",
+    "line": "call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2893,7 +2893,7 @@
   },
   {
     "ea": "0x40CE9C",
-    "line": "call    InitBSShaderAccumulator",
+    "line": "call    BSShaderAccumulator_GetOrCreateGlobal",
     "mnemonic": "call",
     "size": 5
   },
@@ -2905,7 +2905,7 @@
   },
   {
     "ea": "0x40CEA3",
-    "line": "call    EndTargetGroup",
+    "line": "call    EndTargetGroup; MoonSugarEffect build 24: EndTargetGroup xref to Lighting30 selector. Calls 0x007FD260 for 0x159+ and 0x156+ special routes after setting up render targets; used only to label selector routes, not as plugin-owned rendering.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3013,19 +3013,19 @@
   },
   {
     "ea": "0x40CED7",
-    "line": "cmp     ImageSpaceEffectEnabled, 0",
+    "line": "cmp     OB_RendererGlobalState_010201A0.pad_00D+98h, 0",
     "mnemonic": "cmp",
     "size": 7
   },
   {
     "ea": "0x40CEDE",
-    "line": "jz      loc_40CFDC",
+    "line": "jz      loc_40CFDC; DeferredRendering image-space gate: ProcessImageSpaceShader only runs when ImageSpaceEffectEnabled is true. Plugin forces this global with UseHDR so Bloom+HDR list composition can execute.",
     "mnemonic": "jz",
     "size": 6
   },
   {
     "ea": "0x40CEE4",
-    "line": "mov     ecx, g_Renderer",
+    "line": "mov     ecx, dword ptr renderer",
     "mnemonic": "mov",
     "size": 6
   },
@@ -3055,13 +3055,13 @@
   },
   {
     "ea": "0x40CEFC",
-    "line": "call    NiRenderer_EndScene",
+    "line": "call    NiRenderer_EndScene; Oblivion EndScene wrapper: drain the complete render-target stack, end the active group, and end the D3D scene only when this wrapper owned SceneState2.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x40CF01",
-    "line": "mov     ecx, g_Renderer",
+    "line": "mov     ecx, dword ptr renderer",
     "mnemonic": "mov",
     "size": 6
   },
@@ -3127,7 +3127,7 @@
   },
   {
     "ea": "0x40CF23",
-    "line": "mov     ecx, [esp+54h+var_38]; this",
+    "line": "mov     ecx, [esp+54h+texture]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3181,7 +3181,7 @@
   },
   {
     "ea": "0x40CF3D",
-    "line": "mov     edx, g_Renderer",
+    "line": "mov     edx, dword ptr renderer",
     "mnemonic": "mov",
     "size": 6
   },
@@ -3259,7 +3259,7 @@
   },
   {
     "ea": "0x40CF63",
-    "line": "mov     edx, [esp+54h+var_38]",
+    "line": "mov     edx, [esp+54h+texture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3289,7 +3289,7 @@
   },
   {
     "ea": "0x40CF6E",
-    "line": "call    ProcessImageSpaceShader",
+    "line": "call    ProcessImageSpaceShader; MoonSugarEffect hook site: ProcessImageSpaceShader(renderer, var_38 source, a2 destination). This is a full-frame color post-process input, not per-object data.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3301,7 +3301,7 @@
   },
   {
     "ea": "0x40CF75",
-    "line": "mov     ecx, g_worldScenegraph",
+    "line": "mov     ecx, g_WorldSceneReceiverRoot; MoonSugarEffect decode: after image-space processing, camera viewport fields at +0x110..+0x11C are reset to full viewport values.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -3403,13 +3403,13 @@
   },
   {
     "ea": "0x40CFC3",
-    "line": "mov     ecx, [esp+54h+var_38]; this",
+    "line": "mov     ecx, [esp+54h+texture]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x40CFC7",
-    "line": "call    BSRenderedTexture__UseTextureToRender",
+    "line": "call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3427,7 +3427,7 @@
   },
   {
     "ea": "0x40CFCF",
-    "line": "call    NiRenderer_BeginScene",
+    "line": "call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3463,7 +3463,7 @@
   },
   {
     "ea": "0x40CFE4",
-    "line": "call    NiRenderer_EndScene",
+    "line": "call    NiRenderer_EndScene; Oblivion EndScene wrapper: drain the complete render-target stack, end the active group, and end the D3D scene only when this wrapper owned SceneState2.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3481,7 +3481,7 @@
   },
   {
     "ea": "0x40CFF0",
-    "line": "mov     ecx, g_Renderer",
+    "line": "mov     ecx, dword ptr renderer",
     "mnemonic": "mov",
     "size": 6
   },
@@ -3589,7 +3589,7 @@
   },
   {
     "ea": "0x40D023",
-    "line": "mov     edx, g_Renderer",
+    "line": "mov     edx, dword ptr renderer",
     "mnemonic": "mov",
     "size": 6
   },
@@ -3661,7 +3661,7 @@
   },
   {
     "ea": "0x40D045",
-    "line": "mov     eax, [esp+54h+var_38]",
+    "line": "mov     eax, [esp+54h+texture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3679,25 +3679,25 @@
   },
   {
     "ea": "0x40D04D",
-    "line": "mov     ecx, g_textureManager; this",
+    "line": "mov     ecx, dword ptr OB_RendererGlobalState_010201A0.pad_0B3+4; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x40D053",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x40D054",
-    "line": "call    sub_7C1EE0",
+    "line": "call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x40D059",
-    "line": "mov     esi, dword_B3F940",
+    "line": "mov     esi, dword ptr g_NiParallelUpdateTaskManager; Verified pointer, not a universal threading-enable boolean: 404D60 waits on manager+198 and adjusts counter+190; 404DD0 reads pending flag+1B0. NiRenderer_Render checks it at 40C8F7/40D059; main update checks it at 40DB4E/40DEC6. Null excludes this parallel update manager, but does not prove all IO, resource-reference, pool or external writer exclusion for a DX11 bucket transaction.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -3769,7 +3769,7 @@
   },
   {
     "ea": "0x40D080",
-    "line": "cmp     RenderWindowNiNode, 0",
+    "line": "cmp     dword ptr ds:0B42CF4h, 0",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -3781,7 +3781,7 @@
   },
   {
     "ea": "0x40D08D",
-    "line": "mov     ecx, dword_B3339C",
+    "line": "mov     ecx, dword ptr unk_B3339C",
     "mnemonic": "mov",
     "size": 6
   },
@@ -3817,7 +3817,7 @@
   },
   {
     "ea": "0x40D09F",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3889,7 +3889,7 @@
   },
   {
     "ea": "0x40D0CB",
-    "line": "mov     ecx, RenderWindowNiNode",
+    "line": "mov     ecx, ds:0B42CF4h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -3967,13 +3967,13 @@
   },
   {
     "ea": "0x40D0F8",
-    "line": "mov     dword_B3339C, eax",
+    "line": "mov     dword ptr unk_B3339C, eax",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x40D0FD",
-    "line": "mov     eax, RenderWindowNiNode",
+    "line": "mov     eax, ds:0B42CF4h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -4075,13 +4075,13 @@
   },
   {
     "ea": "0x40D12C",
-    "line": "mov     RenderWindowNiNode, 0",
+    "line": "mov     dword ptr ds:0B42CF4h, 0",
     "mnemonic": "mov",
     "size": 10
   },
   {
     "ea": "0x40D136",
-    "line": "mov     byte_B33395, 0",
+    "line": "mov     byte ptr unk_B33395, 0",
     "mnemonic": "mov",
     "size": 7
   },
@@ -4138,5 +4138,89 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AA150",
+    "line": "lea     ecx, [ebp-24h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AA153",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AA158",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AA15B",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AA15C",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AA161",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AA162",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AA163",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AA167",
+    "line": "lea     eax, [edx-44h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AA16A",
+    "line": "mov     ecx, [edx-48h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AA16D",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AA16F",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AA174",
+    "line": "mov     eax, offset stru_AD7178",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AA179",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

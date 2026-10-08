@@ -1,7 +1,7 @@
 [
   {
     "ea": "0xA19350",
-    "line": "push    offset byte_B06DB4",
+    "line": "push    offset bForce1XShaders; [Verified] Removes bForce1XShaders from the setting list and frees its owned name string when the string has heap-owned marker 0x53.",
     "mnemonic": "push",
     "size": 5
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0xA1935F",
-    "line": "mov     eax, off_B06DB8; \"bForce1XShaders:Display\"",
+    "line": "mov     eax, bForce1XShadersSettingName",
     "mnemonic": "mov",
     "size": 5
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0xA1936E",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

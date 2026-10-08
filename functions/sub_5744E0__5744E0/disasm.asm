@@ -42,11 +42,11 @@
 0x57456F: add     esp, 4
 0x574572: mov     ecx, edi
 0x574574: call    edx
-0x574576: push    eax
+0x574576: push    eax; byteCount
 0x574577: mov     eax, [esi+38h]
-0x57457A: push    eax
-0x57457B: mov     ecx, edi
-0x57457D: call    ReadFile??
+0x57457A: push    eax; destination
+0x57457B: mov     ecx, edi; self
+0x57457D: call    Archive_ReadBytes
 0x574582: mov     edx, [edi]
 0x574584: mov     eax, [edx]
 0x574586: push    1
@@ -292,7 +292,7 @@
 0x574892: mov     ecx, [esi+38h]
 0x574895: mov     eax, [ecx+4]
 0x574898: cmp     eax, 8
-0x57489B: jle     short loc_5748B6
+0x57489B: jle     short loc_5748B6; Oblivion font format limit: at most 8 .tex atlas textures per .fnt; this is a texture-count limit, not an atlas width/height limit.
 0x57489D: mov     edx, [esi+4]
 0x5748A0: push    eax
 0x5748A1: push    8
@@ -336,7 +336,7 @@
 0x574923: push    eax
 0x574924: push    edi
 0x574925: mov     [esp+450h+var_420], 1
-0x57492D: call    ecx
+0x57492D: call    ecx; Reads atlas width and height from the .tex header dynamically.
 0x57492F: push    70h ; 'p'; Size
 0x574931: call    FormHeapAlloc
 0x574936: add     esp, 18h
@@ -353,7 +353,7 @@
 0x57495A: push    ecx
 0x57495B: mov     ecx, eax
 0x57495D: call    NiPixelData__NiPixelData
-0x574962: mov     ebp, eax
+0x574962: mov     ebp, eax; Creates one-level 32-bit NiPixelData at the dimensions read from the .tex file.
 0x574964: mov     eax, [esp+43Ch+var_418]
 0x574968: imul    eax, [esp+43Ch+var_414]
 0x57496D: mov     edx, [ebp+5Ch]
@@ -370,7 +370,7 @@
 0x574985: push    edi
 0x574986: mov     [esp+450h+var_4], 0FFFFFFFFh
 0x574991: mov     [esp+450h+var_41C], 1
-0x574999: call    eax
+0x574999: call    eax; Reads width*height*4 raw atlas bytes; no fixed atlas dimension observed.
 0x57499B: push    30h ; '0'; Size
 0x57499D: call    FormHeapAlloc
 0x5749A2: add     esp, 18h
@@ -380,14 +380,14 @@
 0x5749B6: jz      short loc_5749C4
 0x5749B8: push    ebp
 0x5749B9: mov     ecx, eax
-0x5749BB: call    sub_704800
+0x5749BB: call    NiTexturingProperty_CreateFromSourceTexture
 0x5749C0: mov     ebp, eax
 0x5749C2: jmp     short loc_5749C6
 0x5749C4: xor     ebp, ebp
 0x5749C6: push    1; a2
 0x5749C8: mov     ecx, ebp; this
 0x5749CA: mov     [esp+440h+var_4], 0FFFFFFFFh
-0x5749D5: call    sub_405900
+0x5749D5: call    NiTexturingProperty_SetBaseMapFilterMode; Sets base-map filter mode to 1 (NiTexturingProperty::Map::Bilerp). Font atlases have a single mip level.
 0x5749DA: push    ebp; a2
 0x5749DB: mov     ebp, [esp+440h+var_424]
 0x5749DF: mov     ecx, ebp; this
@@ -445,3 +445,24 @@
 0x574A7A: mov     ecx, edi
 0x574A7C: call    eax
 0x574A7E: jmp     short loc_574A15
+0x9BE230: mov     eax, [ebp-41Ch]
+0x9BE236: push    eax
+0x9BE237: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BE23C: pop     ecx
+0x9BE23D: retn
+0x9BE23E: mov     eax, [ebp-420h]
+0x9BE244: push    eax
+0x9BE245: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BE24A: pop     ecx
+0x9BE24B: retn
+0x9BE24C: mov     edx, [esp+arg_4]
+0x9BE250: lea     eax, [edx-42Ch]
+0x9BE256: mov     ecx, [edx-430h]
+0x9BE25C: xor     ecx, eax
+0x9BE25E: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BE263: add     eax, 10h
+0x9BE266: mov     ecx, [edx-4]
+0x9BE269: xor     ecx, eax
+0x9BE26B: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BE270: mov     eax, offset stru_AE7A00
+0x9BE275: jmp     ___CxxFrameHandler3

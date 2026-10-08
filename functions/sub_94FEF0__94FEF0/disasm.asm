@@ -745,7 +745,6 @@
 0x950926: inc     eax
 0x950927: mov     [esp+80h+var_50], eax
 0x95092B: jmp     short loc_950930
-0x95092D: align 10h
 0x950930: mov     eax, [esp+80h+var_58]
 0x950934: movaps  xmm0, xmmword ptr [eax]
 0x950937: subps   xmm0, xmm3

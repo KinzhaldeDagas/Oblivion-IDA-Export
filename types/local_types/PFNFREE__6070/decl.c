@@ -1,1 +1,1 @@
-PFNFREE
+typedef void (*PFNFREE)(void *);

@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 2,
   "callers_count": 2,
+  "chunks": [
+    [
+      "0x58BCD0",
+      "0x58BD44"
+    ],
+    [
+      "0x9BF870",
+      "0x9BF89E"
+    ]
+  ],
+  "chunks_sha256": "7505105488355365d4d389f04f6d4e1f01b73a60046a80302c1a7e96910523ed",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "TileTemplateItem_constr",
+  "comment_repeatable": "Verified 2026-10-07: this is TileTemplate initialization, not TileTemplateItem (old name corrected). Constructor initializes BSStringT name+0, storage+8, NiTList vtable+0xC/head+0x10/tail+0x14/count+0x18. Allocation0x1C at BuildStorage constructor corroborates size. Fallout template is0x14 due NiFixedString and different list layout.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "Tile::TileTemplate::Initialize",
   "end_ea": "0x58BD44",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
-  "name": "TileTemplateItem_constr",
+  "name": "Tile::TileTemplate::Initialize",
   "segment": ".text",
   "sha256": "e10e7fe16678a15e3fa903e670ca50c752719170a53efda8fc266c04fe9f9791",
   "size": 116,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x58BCD0",
-  "type": "int __thiscall(int this, char *, int)",
-  "xrefs_from_count": 38,
+  "total_chunk_size": 162,
+  "type": "OblivionTileTemplate *__thiscall(OblivionTileTemplate *this, const char *name, OblivionTileBuildStorage *storage)",
+  "xrefs_from_count": 52,
   "xrefs_to_count": 2
 }

@@ -1,58 +1,99 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "__m128i",
+  "definition": "union __declspec(align(16)) __m128i\n{\n__int8 m128i_i8[16];\n__int16 m128i_i16[8];\n__int32 m128i_i32[4];\n__int64 m128i_i64[2];\nunsigned __int8 m128i_u8[16];\nunsigned __int16 m128i_u16[8];\nunsigned __int32 m128i_u32[4];\nunsigned __int64 m128i_u64[2];\n}\n",
   "id": 18374686479672025400,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "m128i_i8",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "__int8[16]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "m128i_i16",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "__int16[8]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "m128i_i32",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "__int32[4]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "m128i_i64",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "__int64[2]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "m128i_u8",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "unsigned __int8[16]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "m128i_u16",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "unsigned __int16[8]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "m128i_u32",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "unsigned __int32[4]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "m128i_u64",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "unsigned __int64[2]"
     }
   ],
   "name": "__m128i",
+  "ordinal": 759,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 16
 }

@@ -18,7 +18,7 @@
 0x5A92A1: mov     ecx, ebx
 0x5A92A3: call    sub_5A9060
 0x5A92A8: push    ebx
-0x5A92A9: call    FormHeapFree
+0x5A92A9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5A92AE: add     esp, 4
 0x5A92B1: mov     esi, [esi+4]
 0x5A92B4: test    esi, esi
@@ -30,7 +30,7 @@
 0x5A92C0: mov     eax, [edi+4]
 0x5A92C3: mov     esi, [eax+4]
 0x5A92C6: push    eax
-0x5A92C7: call    FormHeapFree
+0x5A92C7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5A92CC: add     esp, 4
 0x5A92CF: test    esi, esi
 0x5A92D1: mov     [edi+4], esi
@@ -42,16 +42,16 @@
 0x5A92E9: call    Tile_SetString
 0x5A92EE: fld1
 0x5A92F0: push    ecx
-0x5A92F1: fstp    [esp+10h+a2]; a3
+0x5A92F1: fstp    [esp+10h+a2]; value
 0x5A92F4: mov     ecx, [ebp+34h]; this
-0x5A92F7: push    0FB0h; a2
-0x5A92FC: call    Tile_SetFloat
+0x5A92F7: push    0FB0h; propertyCode
+0x5A92FC: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A9301: fld1
 0x5A9303: push    ecx
-0x5A9304: fstp    [esp+10h+a2]; a3
+0x5A9304: fstp    [esp+10h+a2]; value
 0x5A9307: mov     ecx, [ebp+34h]; this
-0x5A930A: push    0FA1h; a2
-0x5A930F: call    Tile_SetFloat
+0x5A930A: push    0FA1h; propertyCode
+0x5A930F: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A9314: pop     edi
 0x5A9315: pop     esi
 0x5A9316: mov     ecx, ebp

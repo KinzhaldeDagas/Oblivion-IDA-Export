@@ -1,28 +1,27 @@
-_DWORD *__userpurge sub_439050@<eax>(
-        _DWORD *this@<ecx>,
-        int a2@<ebx>,
-        _DWORD *a3,
-        int a4,
-        char *Dst,
-        int a6,
-        char *Src)
+// OBLIVION AUTHORITY (2026-08-30): Checked erase-range core for vectors of trivial 4-byte elements. Validates iterator owners, shifts the suffix with memmove_s, updates end, and returns the resulting iterator; directly clears CIndexedGeometry triangle totals.
+OB_stVector4Iterator_010201A0 *__thiscall OB_stVector4_EraseRange_010201A0(
+        OB_stVector4_010201A0 *this,
+        OB_stVector4Iterator_010201A0 *result,
+        OB_stVector4Iterator_010201A0 first,
+        OB_stVector4Iterator_010201A0 last)
 {
-  int v8; // eax
-  char *v9; // ebx
-  rsize_t v11; // [esp-4h] [ebp-10h]
+  int v4; // ebx
+  int v5; // esi
+  int v7; // eax
+  unsigned int *v8; // ebx
+  rsize_t v10; // [esp-4h] [ebp-10h]
 
-  if ( !a4 || a4 != a6 )
-    _invalid_parameter_noinfo();
-  if ( Dst != Src )
+  if ( !first.owner || first.owner != last.owner ) /*0x439061*/
+    _invalid_parameter_noinfo(v4, (int)this, v5); /*0x439063*/
+  if ( first.current != last.current ) /*0x439072*/
   {
-    v8 = (*(this + 2) - (int)Src) >> 2;
-    LODWORD(v11) = a2;
-    v9 = &Dst[4 * v8];
-    if ( v8 > 0 )
-      memmove_s(Dst, __PAIR64__((unsigned int)Src, 4 * v8), (const void *)(4 * v8), v11);
-    *(this + 2) = v9;
+    v7 = this->end - last.current; /*0x439079*/
+    LODWORD(v10) = v4; /*0x439085*/
+    v8 = &first.current[v7]; /*0x439086*/
+    if ( v7 > 0 ) /*0x439089*/
+      memmove_s(first.current, __PAIR64__((unsigned int)last.current, 4 * v7), (const void *)(4 * v7), v10); /*0x43908f*/
+    this->end = v8; /*0x439097*/
   }
-  a3[1] = Dst;
-  *a3 = a4;
-  return a3;
+  *result = first; /*0x4390a0*/
+  return result; /*0x43909f*/
 }

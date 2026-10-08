@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4DBEA0",
-    "line": "push    esi",
+    "line": "push    esi; Verified inverse lock-state helper: if this reference has an ExtraLock wrapper, clears its locked bit; otherwise follows the linked-door reference and clears that wrapper's locked bit. It then marks the owning reference or linked door modified with mask 0x40.",
     "mnemonic": "push",
     "size": 1
   },
@@ -85,13 +85,13 @@
   },
   {
     "ea": "0x4DBEC1",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DBEC3",
-    "line": "call    sub_42B410",
+    "line": "call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,25 +109,25 @@
   },
   {
     "ea": "0x4DBECC",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DBECE",
-    "line": "call    sub_42B410",
+    "line": "call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4DBED3",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; doorReference",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DBED5",
-    "line": "call    sub_4D77D0",
+    "line": "call    TESObjectREFR_FindLockExtraOnLinkedDoorChain; Verified wrapper lookup: follows linked-door references until it finds an ExtraLock wrapper, returning that wrapper or null when the chain ends without lock data.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,19 +145,19 @@
   },
   {
     "ea": "0x4DBEDE",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DBEE0",
-    "line": "call    sub_428E90",
+    "line": "call    ExtraLock_ClearLockedFlag; Verified: clears only ExtraLockData.flags bit 0x01 (Locked), preserving bit 0x02. OpenEffect uses this after its lock-category test; this preserves LockEffect's bit-0x02 ownership marker.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4DBEE5",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x4DBEE9",
-    "line": "jmp     sub_4D9070",
+    "line": "jmp     TESObjectREFR_MarkLockDataAsModified; Verified modified-state propagation: if this reference has lock data, calls TESFormVtbl::MarkAsModified with mask 0x40; otherwise, if its linked-door chain has lock data, marks that linked-door reference with the same mask.",
     "mnemonic": "jmp",
     "size": 5
   },

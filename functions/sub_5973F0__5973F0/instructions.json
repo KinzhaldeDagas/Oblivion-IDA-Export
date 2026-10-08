@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5973F0",
-    "line": "push    ebx",
+    "line": "push    ebx; Commit an Oblivion custom class. Copies staged specialization and two favored attributes, then performs exactly seven TESClass_SetMajorSkillAV calls from ClassMenu+0x68..+0x80. No minor-selection phase, minor writeback, duplicate validation, or eighth slot follows.",
     "mnemonic": "push",
     "size": 1
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x597407",
-    "line": "call    TESClass_IsPlayable",
+    "line": "call    TESClass_IsPlayable; TESClass_IsPlayable reads classFlags at +0x60 bit 0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -67,19 +67,19 @@
   },
   {
     "ea": "0x597410",
-    "line": "mov     ecx, [esi+40h]",
+    "line": "mov     ecx, [esi+40h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x597413",
-    "line": "push    1",
+    "line": "push    1; playable",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x597415",
-    "line": "call    sub_51BED0",
+    "line": "call    TESClass_SetPlayable; Sets or clears the TESClass playable flag; ClassMenu custom-class commit forces the chosen custom class playable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,19 +157,19 @@
   },
   {
     "ea": "0x59743D",
-    "line": "mov     ecx, [esi+40h]",
+    "line": "mov     ecx, [esi+40h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x597440",
-    "line": "push    edx",
+    "line": "push    edx; Custom-class commit writes staged favored attribute 2.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x597441",
-    "line": "call    sub_60E0D0",
+    "line": "call    Shared_SetDwordAtOffset40; In this call context, Shared_SetDwordAtOffset40 writes the staged specialization to TESClass+0x40 in the fixed CLAS DATA payload.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,19 +181,19 @@
   },
   {
     "ea": "0x597449",
-    "line": "mov     ecx, [esi+40h]",
+    "line": "mov     ecx, [esi+40h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x59744C",
-    "line": "push    eax",
+    "line": "push    eax; attribute",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x59744D",
-    "line": "call    sub_51C0D0",
+    "line": "call    TESClass_SetPrimaryAttribute1; Stores the first favored/primary attribute in the fixed CLAS DATA payload.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,19 +205,19 @@
   },
   {
     "ea": "0x597455",
-    "line": "push    ecx",
+    "line": "push    ecx; attribute",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x597456",
-    "line": "mov     ecx, [esi+40h]",
+    "line": "mov     ecx, [esi+40h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x597459",
-    "line": "call    sub_51C0E0",
+    "line": "call    TESClass_SetPrimaryAttribute2; Stores the second favored/primary attribute in the fixed CLAS DATA payload.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,25 +277,25 @@
   },
   {
     "ea": "0x597479",
-    "line": "mov     ecx, [esi+40h]",
+    "line": "mov     ecx, [esi+40h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x59747C",
-    "line": "push    eax",
+    "line": "push    eax; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x59747D",
-    "line": "push    edi",
+    "line": "push    edi; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x59747E",
-    "line": "call    sub_51C0F0",
+    "line": "call    TESClass_SetMajorSkillAV; Each staged major is filtered to SkillActorValue 0x0C..0x20 by TESClass_SetMajorSkillAV. Invalid values are silently ignored; the setter does not detect duplicates.",
     "mnemonic": "call",
     "size": 5
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x5974A9",
-    "line": "push    offset sub_596C20",
+    "line": "push    offset TESClass_CompareNameNoCase; Case-insensitive TESClass full-name comparator used to keep the playable class list sorted.",
     "mnemonic": "push",
     "size": 5
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x5974C1",
-    "line": "call    sub_596CF0",
+    "line": "call    ClassMenu_RefreshClassDetails; Refreshes the committed class display after the fixed seven-major writeback. The native refresh exposes only seven major names/AVs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x5974CA",
-    "line": "call    sub_597340",
+    "line": "call    ClassMenu_RebuildClassList; Rebuilds the ClassMenu list from TESDataHandler classes, includes only playable classes, sorts/displays them by name, and optionally activates the current class row.",
     "mnemonic": "call",
     "size": 5
   },

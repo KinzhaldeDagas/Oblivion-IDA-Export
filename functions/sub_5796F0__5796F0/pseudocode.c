@@ -2,15 +2,15 @@ char sub_5796F0()
 {
   InterfaceManager *Singleton; // eax
 
-  if ( InterfaceManager_GetSingleton(0, 1)
+  if ( InterfaceManager_GetSingleton(0, 1) /*0x57974a*/
     && InterfaceManager_GetSingleton(0, 1)->cursor
     && InterfaceManager_GetSingleton(0, 1)->menuRoot
     && (Singleton = InterfaceManager_GetSingleton(0, 1), Tile_GetFloat(Singleton->menuRoot, 0xFAE) == fConstant_2) )
   {
-    return InterfaceManager_GetSingleton(0, 1)->unk0C0[7];
+    return InterfaceManager_GetSingleton(0, 1)->unk0C0[7]; /*0x579755*/
   }
   else
   {
-    return 0;
+    return 0; /*0x57975f*/
   }
 }

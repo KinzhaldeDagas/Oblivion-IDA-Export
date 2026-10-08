@@ -1,4 +1,4 @@
-0x715D80: push    ebx
+0x715D80: push    ebx; Copies flags and timing values through +0x24. Remaps target +0x30 through the clone map only when runtime types match, and clones the refcounted next-controller chain at +0x34. Runtime cache +0x28 and update/force bytes are not copied here.
 0x715D81: mov     ebx, [esp+4+arg_4]
 0x715D85: push    esi
 0x715D86: push    edi

@@ -1,10 +1,11 @@
-int __thiscall sub_7ED180(_DWORD *this)
+ShadowSceneLight_DecodedLayout *__thiscall BSShaderLightingProperty_GetNextLightUnfiltered(
+        MEF_LightingPropertyIterationView32 *self)
 {
-  _DWORD *v1; // eax
+  MEF_RefListNode32 *cursor_7C; // eax
 
-  if ( !*(this + 0x1F) )
-    return 0;
-  v1 = (_DWORD *)*(this + 0x1F);
-  *(this + 0x1F) = *v1;
-  return v1[2];
+  if ( !self->cursor_7C ) /*0x7ed180*/
+    return 0; /*0x7ed192*/
+  cursor_7C = self->cursor_7C; /*0x7ed186*/
+  self->cursor_7C = cursor_7C->next; /*0x7ed18b*/
+  return (ShadowSceneLight_DecodedLayout *)cursor_7C->payload; /*0x7ed191*/
 }

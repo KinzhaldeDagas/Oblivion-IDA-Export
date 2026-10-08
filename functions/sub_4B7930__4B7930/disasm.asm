@@ -1,4 +1,4 @@
-0x4B7930: mov     eax, [esp+arg_0]
+0x4B7930: mov     eax, [esp+space]; Verified spatial-form predicate: false for null; true for form type 0x35 (TESWorldSpace); for form type 0x30 it RTTI-casts to TESObjectCELL and returns true only for interior cells; false otherwise. Probable domain role: accept only spaces allowed as random teleport destinations.
 0x4B7934: push    ebx
 0x4B7935: xor     bl, bl
 0x4B7937: test    eax, eax
@@ -21,7 +21,7 @@
 0x4B7964: test    eax, eax
 0x4B7966: jz      short loc_4B7975
 0x4B7968: mov     ecx, eax; this
-0x4B796A: call    TESObjectCELL_IsInterior
+0x4B796A: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x4B796F: test    al, al
 0x4B7971: mov     al, 1
 0x4B7973: jnz     short loc_4B7977

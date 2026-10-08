@@ -22,7 +22,7 @@
 0x5C5B45: xor     edi, edi
 0x5C5B47: mov     [esp+30h+var_18], esp
 0x5C5B4B: push    edi; a3
-0x5C5B4C: push    eax; a2
+0x5C5B4C: push    eax; categoryName
 0x5C5B4D: mov     [ecx], edi
 0x5C5B4F: mov     [ecx+4], di
 0x5C5B53: mov     [ecx+6], di
@@ -38,9 +38,9 @@
 0x5C5B72: mov     [ecx+4], di
 0x5C5B76: mov     [ecx+6], di
 0x5C5B7A: call    BSStringT_Set
-0x5C5B7F: mov     ecx, esi
+0x5C5B7F: mov     ecx, esi; this
 0x5C5B81: mov     [esp+38h+var_4], 0FFFFFFFFh
-0x5C5B89: call    sub_5C3440
+0x5C5B89: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C5B8E: fild    dword ptr [esi+870h]
 0x5C5B94: mov     ecx, eax
 0x5C5B96: fstp    [esp+28h+var_14]
@@ -56,7 +56,7 @@
 0x5C5BBA: fstp    [esp+30h+var_28]; float
 0x5C5BBE: mov     dword ptr [esp+30h+var_14], esp
 0x5C5BC2: push    edi; a3
-0x5C5BC3: push    eax; a2
+0x5C5BC3: push    eax; categoryName
 0x5C5BC4: mov     [ecx], edi
 0x5C5BC6: mov     [ecx+4], di
 0x5C5BCA: mov     [ecx+6], di
@@ -72,9 +72,9 @@
 0x5C5BED: mov     [ecx+4], di
 0x5C5BF1: mov     [ecx+6], di
 0x5C5BF5: call    BSStringT_Set
-0x5C5BFA: mov     ecx, esi
+0x5C5BFA: mov     ecx, esi; this
 0x5C5BFC: mov     [esp+38h+var_4], 0FFFFFFFFh
-0x5C5C04: call    sub_5C3440
+0x5C5C04: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C5C09: push    eax; int
 0x5C5C0A: mov     ecx, esi
 0x5C5C0C: call    sub_5C2B50
@@ -85,3 +85,14 @@
 0x5C5C1E: pop     esi
 0x5C5C1F: add     esp, 18h
 0x5C5C22: retn
+0x9C1800: mov     ecx, [ebp-18h]; void *
+0x9C1803: jmp     BSStringT_Clear
+0x9C1808: mov     ecx, [ebp-14h]; void *
+0x9C180B: jmp     BSStringT_Clear
+0x9C1810: mov     edx, [esp+arg_4]
+0x9C1814: lea     eax, [edx-14h]
+0x9C1817: mov     ecx, [edx-18h]
+0x9C181A: xor     ecx, eax
+0x9C181C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C1821: mov     eax, offset stru_AEA838
+0x9C1826: jmp     ___CxxFrameHandler3

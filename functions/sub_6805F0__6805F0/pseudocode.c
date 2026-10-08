@@ -1,10 +1,11 @@
-void sub_6805F0()
+// Verified: frees LowPathSearchGlobals.states and resets its pointer, stateCapacity, and nextFreeStateIndex.
+void TravelPath_FreeSearchStateTable()
 {
-  if ( dword_B3BF00 )
+  if ( LODWORD(qword_B3BB2C[0xF5]) ) /*0x6805f0*/
   {
-    FormHeapFree((unsigned int)dword_B3BF00);
-    dword_B3BF00 = 0;
-    word_B3BF04 = 0;
-    word_B3BF08 = 0;
+    FormHeapFree(LODWORD(qword_B3BB2C[0xF5])); /*0x6805fa*/
+    qword_B3BB2C[0xF5] = 0.0; /*0x680602*/
+    LOWORD(qword_B3BB2C[0xF6]) = 0; /*0x68060c*/
+    LOWORD(qword_B3BB2C[0xF7]) = 0; /*0x680615*/
   }
 }

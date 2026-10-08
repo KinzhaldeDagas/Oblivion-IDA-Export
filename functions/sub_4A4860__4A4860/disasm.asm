@@ -1,5 +1,5 @@
 0x4A4860: push    esi
-0x4A4861: mov     esi, [esp+4+arg_0]
+0x4A4861: mov     esi, [esp+4+data]
 0x4A4865: test    esi, esi
 0x4A4867: jz      short loc_4A487D
 0x4A4869: mov     eax, [esi]

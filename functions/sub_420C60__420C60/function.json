@@ -1,19 +1,36 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_420C60",
+  "chunks": [
+    [
+      "0x420C60",
+      "0x420D1D"
+    ],
+    [
+      "0x9D62E0",
+      "0x9D6306"
+    ]
+  ],
+  "chunks_sha256": "f5f36a8202bc4da33a2107e844799ece9f108b8430b4d16968c4b29db7908246",
+  "comment_regular": "Sets north rotation; 0.0 removes type 0x4C, otherwise updates or creates ExtraNorthRotation.",
+  "comment_repeatable": "Sets north rotation; 0.0 removes type 0x4C, otherwise updates or creates ExtraNorthRotation.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "ExtraDataList_SetNorthRotation",
   "end_ea": "0x420D1D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_420C60",
+  "name": "ExtraDataList_SetNorthRotation",
   "segment": ".text",
   "sha256": "63493d2d5591050badd620e3383cae00219c3b023bf3fc30a0f56dfa7a914587",
   "size": 189,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x420C60",
-  "type": "BSExtraData *__thiscall(ExtraDataList *this, BSExtraDataVtbl *)",
-  "xrefs_from_count": 66,
+  "total_chunk_size": 227,
+  "type": "void __thiscall(ExtraDataList *this, float northRotation)",
+  "xrefs_from_count": 80,
   "xrefs_to_count": 1
 }

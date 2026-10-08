@@ -3,7 +3,7 @@
 0x74DD22: mov     esi, [esp+8+arg_0]
 0x74DD26: push    esi
 0x74DD27: mov     ebx, ecx
-0x74DD29: call    nullsub_returnvVoid_1arg
+0x74DD29: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x74DD2E: cmp     dword ptr [esi+0D8h], 0A010000h
 0x74DD38: ja      short loc_74DD52
 0x74DD3A: movzx   eax, word ptr [ebx+22h]

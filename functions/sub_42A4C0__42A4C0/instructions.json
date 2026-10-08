@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x42A4C0",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; Verified 0x18-byte Oblivion ExtraDistantData: EType byte +4 is 0x18, next pointer +8, and normal_00C occupies +0x0C..+0x17. The constructor's default normal is (0,0,0.97); this matches Fallout's LandNormal offset +0x0C and default vector, while the EType differs (Oblivion 0x18, Fallout 0x13).",
     "mnemonic": "sub",
     "size": 3
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x42A4D5",
-    "line": "fld     ds:flt_A34F5C",
+    "line": "fld     ds:kDistantLODNormalLimit_097",
     "mnemonic": "fld",
     "size": 6
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x42A4FA",
-    "line": "mov     [eax+14h], ecx",
+    "line": "mov     [eax+14h], ecx; Verified initializes ExtraDistantData.normal_00C.z at +0x14 to 0.97; this is the default +Z normal component, not a separate unknown scalar.",
     "mnemonic": "mov",
     "size": 3
   },

@@ -1,39 +1,39 @@
 int *__thiscall sub_5A5810(_DWORD *this, unsigned int a2)
 {
-  int **v6; // eax
-  int *v7; // esi
-  bool v8; // zf
-  int v9; // eax
-  _DWORD *v10; // ecx
+  _DWORD **v3; // eax
+  _DWORD *v4; // esi
+  bool v5; // zf
+  int v6; // eax
+  _DWORD *v7; // ecx
 
-  if ( a2 >= this[3] )
-    return 0;
-  v6 = (int **)(this[1] + 4 * a2);
-  v7 = *v6;
-  v8 = *v6 == 0;
-  *v6 = 0;
-  if ( !v8 )
-    --this[4];
-  v9 = this[3] - 1;
-  if ( a2 == v9 )
-    this[3] = v9;
-  if ( v7 )
+  if ( a2 >= *(this + 3) ) /*0x5a5817*/
+    return 0; /*0x5a5819*/
+  v3 = (_DWORD **)(*(this + 1) + 4 * a2); /*0x5a5821*/
+  v4 = *v3; /*0x5a5825*/
+  v5 = *v3 == 0; /*0x5a5827*/
+  *v3 = 0; /*0x5a5829*/
+  if ( !v5 ) /*0x5a582f*/
+    --*(this + 4); /*0x5a5831*/
+  v6 = *(this + 3) - 1; /*0x5a5838*/
+  if ( a2 == v6 ) /*0x5a583d*/
+    *(this + 3) = v6; /*0x5a583f*/
+  if ( v4 ) /*0x5a5844*/
   {
-    v10 = (_DWORD *)v7[1];
-    if ( v10 )
+    v7 = (_DWORD *)v4[1]; /*0x5a5846*/
+    if ( v7 ) /*0x5a584b*/
     {
-      BSSimpleList_Clear(v10);
-      FormHeapFree(v7[1]);
+      BSSimpleList_Clear(v7); /*0x5a584d*/
+      FormHeapFree(v4[1]); /*0x5a5856*/
     }
-    if ( *v7 )
+    if ( *v4 ) /*0x5a585e*/
     {
-      sub_58DA70(*v7);
-      if ( !byte_B3A6D4 )
+      Tile::Release((Tile *)*v4); /*0x5a5864*/
+      if ( !unk_B3A6D4 ) /*0x5a5869*/
       {
-        if ( *v7 )
-          (**(void (__thiscall ***)(int, int))*v7)(*v7, 1);
+        if ( *v4 ) /*0x5a5872*/
+          (**(void (__thiscall ***)(_DWORD, int))*v4)(*v4, 1); /*0x5a587e*/
       }
     }
   }
-  return v7;
+  return v4; /*0x5a581b*/
 }

@@ -1,19 +1,19 @@
 [
   {
     "ea": "0x7A8E90",
-    "line": "mov     eax, [esp+arg_18]",
+    "line": "mov     eax, [esp+value]; OBLIVION AUTHORITY (2026-08-30): Validates the begin/end debug iterators and dispatches the packed vector<bool> range fill.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A8E94",
-    "line": "mov     ecx, [esp+arg_10]",
+    "line": "mov     ecx, [esp+last.word]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A8E98",
-    "line": "mov     edx, [esp+arg_14]",
+    "line": "mov     edx, [esp+last.bitOffset]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,13 +31,13 @@
   },
   {
     "ea": "0x7A8E9E",
-    "line": "mov     edi, [esp+8+arg_C]",
+    "line": "mov     edi, [esp+8+last.owner]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A8EA2",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x7A8EBD",
-    "line": "mov     eax, [esp+18h+arg_4]",
+    "line": "mov     eax, [esp+18h+first.word]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A8EC1",
-    "line": "mov     ecx, [esp+18h+arg_8]",
+    "line": "mov     ecx, [esp+18h+first.bitOffset]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x7A8EC7",
-    "line": "mov     edi, [esp+18h+arg_0]",
+    "line": "mov     edi, [esp+18h+first.owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x7A8EE7",
-    "line": "call    sub_7A8CA0",
+    "line": "call    OB_stVectorBool_FillRangeCore_010201A0; OBLIVION AUTHORITY (2026-08-30): Fills a vector<bool> iterator range one packed bit at a time, setting or clearing the selected bit in each 32-bit word.",
     "mnemonic": "call",
     "size": 5
   },

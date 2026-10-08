@@ -1,1 +1,1 @@
-IStorage_0
+typedef IStorage IStorage_0;

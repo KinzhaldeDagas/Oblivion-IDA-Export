@@ -21,7 +21,7 @@
 0x7819DB: mov     [esi+30h], edi
 0x7819DE: mov     [esi+34h], edi
 0x7819E1: mov     [esp+18h+var_4], edi
-0x7819E5: mov     [esp+18h+var_8], edi
+0x7819E5: mov     [esp+18h+bytecode], edi
 0x7819E9: mov     [esp+18h+var_C], edi
 0x7819ED: jnz     short loc_7819F7
 0x7819EF: mov     [esp+18h+arg_C], offset aMain; "main"
@@ -37,7 +37,7 @@
 0x781A16: lea     eax, [esp+1Ch+var_4]
 0x781A1A: push    eax
 0x781A1B: mov     eax, [esp+20h+arg_C]
-0x781A1F: lea     ecx, [esp+20h+var_8]
+0x781A1F: lea     ecx, [esp+20h+bytecode]
 0x781A23: push    ecx
 0x781A24: mov     ecx, [esp+24h+arg_4]
 0x781A28: push    edx
@@ -61,13 +61,13 @@
 0x781A4A: add     esp, 0Ch
 0x781A4D: retn    14h
 0x781A50: push    ebp
-0x781A51: mov     ebp, [esp+1Ch+var_8]
-0x781A55: push    ebp
+0x781A51: mov     ebp, [esp+1Ch+bytecode]
+0x781A55: push    ebp; bytecode
 0x781A56: mov     ecx, ebx
-0x781A58: call    sub_783C30
+0x781A58: call    NiDX9Renderer__CreatePixelShader; Calls IDirect3DDevice9::CreatePixelShader for compiled DWORD bytecode and reports a failed HRESULT.
 0x781A5D: mov     edi, eax
 0x781A5F: test    edi, edi
-0x781A61: mov     eax, dword ptr [esp+1Ch+ArgList]
+0x781A61: mov     eax, [esp+1Ch+ArgList]
 0x781A65: push    eax; ArgList
 0x781A66: jnz     short loc_781A8E
 0x781A68: push    offset aFailedCreatepi; "Failed CreatePixelShader call on %s\n"

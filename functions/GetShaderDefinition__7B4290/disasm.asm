@@ -1,4 +1,4 @@
-0x7B4290: push    esi
+0x7B4290: push    esi; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.
 0x7B4291: mov     esi, [esp+4+arg_0]
 0x7B4295: cmp     esi, 1Bh
 0x7B4298: ja      loc_7B44A4
@@ -22,17 +22,17 @@
 0x7B42E8: pop     esi
 0x7B42E9: retn
 0x7B42EA: push    1; jumptable 007B42B9 case 4
-0x7B42EC: call    GetShaderDefinition
+0x7B42EC: call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.
 0x7B42F1: add     esp, 4
-0x7B42F4: call    sub_810B90
+0x7B42F4: call    OB_CreateSpeedTreeBranchShaderDefinition_010201A0; Creates ShaderDefinition for SpeedTree branch shader (GetShaderDefinition id 4): declaration id 6, SpeedTreeBranchShader object, branch lighting/TREE program sets.
 0x7B42F9: mov     ds:0B42EC0h[esi*4], eax
 0x7B4300: pop     esi
 0x7B4301: retn
-0x7B4302: call    sub_80EE10; jumptable 007B42B9 case 5
+0x7B4302: call    OB_SpeedTreeFrondShader_CreateDefinition_010201A0; SpeedTree frond shader definition dispatch: GetShaderDefinition case 5 calls 0x80EE10. Oblivion evidence only.
 0x7B4307: mov     ds:0B42EC0h[esi*4], eax
 0x7B430E: pop     esi
 0x7B430F: retn
-0x7B4310: call    sub_7F1410; jumptable 007B42B9 case 6
+0x7B4310: call    OB_CreateSpeedTreeLeafShaderDefinition_010201A0; jumptable 007B42B9 case 6
 0x7B4315: mov     ds:0B42EC0h[esi*4], eax
 0x7B431C: pop     esi
 0x7B431D: retn
@@ -47,7 +47,7 @@
 0x7B4341: pop     esi
 0x7B4342: retn
 0x7B4343: cmp     ds:0B43070h, cl; jumptable 007B42B9 case 8
-0x7B4349: jz      short loc_7B4359
+0x7B4349: jz      short loc_7B4359; [Verified] GetShaderDefinition creates the HDRShader definition (ID 8) only when RendererGlobalState+0x1D7 is nonzero; this independently confirms the field's HDR-mode behavior.
 0x7B434B: call    HdrShader
 0x7B4350: mov     ds:0B42EC0h[esi*4], eax
 0x7B4357: pop     esi
@@ -104,7 +104,7 @@
 0x7B4406: retn
 0x7B4407: cmp     dword ptr ds:0B42F48h, 2; jumptable 007B42B9 case 21
 0x7B440E: jl      loc_7B4359
-0x7B4414: call    RefractionShader
+0x7B4414: call    RefractionShader; MoonSugarEffect decode: RefractionShader definition uses the same two-element image-space declaration as Copy/Hit/NightEye, then allocates, initializes, loads, builds, and refcounts its concrete shader.
 0x7B4419: mov     ds:0B42EC0h[esi*4], eax
 0x7B4420: pop     esi
 0x7B4421: retn
@@ -130,9 +130,9 @@
 0x7B446C: mov     ds:0B42EC0h[esi*4], eax
 0x7B4473: pop     esi
 0x7B4474: retn
-0x7B4475: cmp     ds:0B42EA5h, cl; jumptable 007B42B9 case 26
+0x7B4475: cmp     ds:0B42EA5h, cl; [Verified] RendererGlobalState+0xC gates creation of ShaderDefinition ID 0x1A (Lighting30); the same byte changes package variants in GetShaderProgramPackageIndex. [Unknown] Its originating setting/configuration name is not established.
 0x7B447B: jz      loc_7B4359
-0x7B4481: call    LighteningShaders?
+0x7B4481: call    Lighting30ShaderDefinition_Create; Create the concrete Lighting30 ShaderDefinition and Lighting30Shader for definition ID 0x1A.
 0x7B4486: mov     ds:0B42EC0h[esi*4], eax
 0x7B448D: pop     esi
 0x7B448E: retn

@@ -18,7 +18,7 @@
 0x666846: mov     ecx, ebx
 0x666848: call    ContainerEntryExtraData_DestroyDataTable
 0x66684D: push    ebx
-0x66684E: call    FormHeapFree
+0x66684E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x666853: add     esp, 4
 0x666856: push    edi
 0x666857: mov     ecx, esi

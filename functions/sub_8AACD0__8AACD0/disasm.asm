@@ -5,7 +5,7 @@
 0x8AACD7: push    edi
 0x8AACD8: push    ebp
 0x8AACD9: mov     edi, ecx
-0x8AACDB: call    sub_716050
+0x8AACDB: call    NiTimeController_SaveBinary; Saves the first manager-controlled controller found in the next chain, then flags +0x08, frequency +0x0C, phase +0x10, low/high key times +0x14/+0x18, and target +0x30. Runtime caches are not serialized.
 0x8AACE0: mov     eax, [edi+50h]
 0x8AACE3: push    1
 0x8AACE5: lea     ecx, [esp+14h+var_4]
@@ -26,7 +26,6 @@
 0x8AAD14: push    ebx
 0x8AAD15: xor     ebx, ebx
 0x8AAD17: jmp     short loc_8AAD20
-0x8AAD19: align 10h
 0x8AAD20: mov     edx, [edi+44h]
 0x8AAD23: mov     eax, [ebp+220h]
 0x8AAD29: push    1

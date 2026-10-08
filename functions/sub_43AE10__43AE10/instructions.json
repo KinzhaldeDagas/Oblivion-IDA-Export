@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x43AE10",
-    "line": "sub     esp, 24h",
+    "line": "sub     esp, 24h; Verified shared queued-reference callback: the same implementation appears in QueuedReference, QueuedTree, QueuedCharacter, QueuedCreature, and QueuedPlayer vtables. It stores the generated NiNode on the reference, refreshes/attaches its 3D, then sets bit 0x80000; off-main-thread calls enqueue AttachDistant3DTask. Fallout's named QueuedReference::AttachDistant3D follows the same flow and calls TESObjectREFR::SetHasTemp3D.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x43AE28",
-    "line": "mov     ebp, [esp+34h+arg_0]",
+    "line": "mov     ebp, [esp+34h+node]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -181,13 +181,13 @@
   },
   {
     "ea": "0x43AE63",
-    "line": "fstp    [esp+34h+arg_0]",
+    "line": "fstp    [esp+34h+node]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x43AE67",
-    "line": "fld     [esp+34h+arg_0]",
+    "line": "fld     [esp+34h+node]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x43AE6E",
-    "line": "mov     ecx, OSGlobals",
+    "line": "mov     ecx, ds:0B33398h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -229,19 +229,19 @@
   },
   {
     "ea": "0x43AE81",
-    "line": "mov     ecx, [ebx+20h]",
+    "line": "mov     ecx, [ebx+20h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x43AE84",
-    "line": "push    ebp",
+    "line": "push    ebp; node",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x43AE85",
-    "line": "call    sub_4D7D10",
+    "line": "call    MobileObject_SetNiNode; Verified MobileObject node setter: invokes the reference's pre-node-update virtual, releases any old NiNode reference, stores the new node in TESObjectREFR+0x40, and AddRefs it. Used by both normal Set3D and the queued distant-tree attach path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x43AE91",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x43AE99",
-    "line": "mov     ecx, TES; ecx0",
+    "line": "mov     ecx, ds:0B333A0h; ecx0",
     "mnemonic": "mov",
     "size": 6
   },
@@ -301,19 +301,19 @@
   },
   {
     "ea": "0x43AEA6",
-    "line": "mov     ecx, [ebx+20h]",
+    "line": "mov     ecx, [ebx+20h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x43AEA9",
-    "line": "push    1",
+    "line": "push    1; enabled",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x43AEAB",
-    "line": "call    sub_4D7010",
+    "line": "call    TESObjectREFR_SetTemp3DFlag; Verified: after assigning the generated NiNode and refreshing cell attachment, the shared QueuedReference_AttachDistant3D callback sets bit 0x80000. Probable role is HasTemp3D, matching Fallout's named setter.",
     "mnemonic": "call",
     "size": 5
   },
@@ -421,13 +421,13 @@
   },
   {
     "ea": "0x43AEDC",
-    "line": "mov     [esi+18h], edi",
+    "line": "mov     [esi+18h], edi; Verified AttachDistant3DTask layout: constructor stores the TESObjectREFR at task+0x18 and the generated NiNode at task+0x1C; Run transfers this node to the reference on the main thread.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x43AEDF",
-    "line": "mov     [esi+1Ch], ebp",
+    "line": "mov     [esi+1Ch], ebp; Verified: task+0x1C holds the AddRef'd NiNode awaiting main-thread assignment to TESObjectREFR.niNode.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x43AEFF",
-    "line": "mov     esi, ModelLoaderPtr",
+    "line": "mov     esi, ds:0B33A1Ch",
     "mnemonic": "mov",
     "size": 6
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x43AF08",
-    "line": "mov     [esp+38h+arg_0], esp",
+    "line": "mov     [esp+38h+node], esp",
     "mnemonic": "mov",
     "size": 4
   },

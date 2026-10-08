@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x794630",
-    "line": "push    ebx",
+    "line": "push    ebx; Oblivion legacy CIndexedGeometry::DeleteLodStrip. Frees and nulls every heap strip pointer for one LOD while retaining the outer per-LOD vector.",
     "mnemonic": "push",
     "size": 1
   },
@@ -42,14 +42,8 @@
     "size": 2
   },
   {
-    "ea": "0x79463A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x794640",
-    "line": "mov     di, [esp+10h+arg_0]",
+    "line": "mov     di, [esp+10h+lodLevel]",
     "mnemonic": "mov",
     "size": 5
   },
@@ -361,7 +355,7 @@
   },
   {
     "ea": "0x7946CF",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

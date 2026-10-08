@@ -1,9 +1,6 @@
-unsigned int __thiscall sub_65D5F0(_BYTE *this, unsigned int a2)
+// Increment the Combat, Magic, or Stealth advance byte from TESSkill::specialization. This counter is independent of class major membership.
+void __thiscall Player_IncrementSpecializationAdvanceCount(PlayerCharacter *this, SkillSpecialization specialization)
 {
-  unsigned int result; // eax
-
-  result = a2;
-  if ( a2 <= 2 )
-    ++*(this + a2 + 0x5B8);
-  return result;
+  if ( (unsigned int)specialization <= kSkillSpecialization_Stealth ) /*0x65d5f7*/
+    ++*((_BYTE *)&this->combatAndMagicAdvanceCounts + specialization); /*0x65d5f9*/
 }

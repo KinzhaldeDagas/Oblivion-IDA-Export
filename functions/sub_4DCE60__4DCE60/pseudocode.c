@@ -1,41 +1,41 @@
 void __userpurge sub_4DCE60(
-        Actor *a1@<ecx>,
+        TESObjectREFR *a1@<ecx>,
         double a2@<st0>,
         double st5_0@<st2>,
         double a4@<st1>,
         int a5@<ebp>,
-        _DWORD *a6,
+        _DWORD *firstPerson,
         char a7)
 {
-  int v9; // eax
-  PlayerCharacter *v10; // ecx
-  int v11; // edi
-  int v12; // ebx
+  ActorSkinInfo *v8; // eax
+  PlayerCharacter *v9; // ecx
+  ActorSkinInfo *SkinInfoByPerspective; // edi
+  int v11; // ebx
 
-  if ( a1->members.super.super.niNode )
+  if ( a1->member.niNode ) /*0x4dce63*/
   {
-    v9 = ((int (__thiscall *)(Actor *))a1->vtbl->super.super.Unk_5A)(a1);
-    v10 = TESDataHandler_g_PlayerRef;
-    v11 = v9;
-    v12 = 1;
-    if ( a1 == (Actor *)TESDataHandler_g_PlayerRef )
-      v12 = 2;
-    while ( 1 )
+    v8 = a1->vtbl->GetActiveSkinInfo(a1); /*0x4dce78*/
+    v9 = reference; /*0x4dce7a*/
+    SkinInfoByPerspective = v8; /*0x4dce82*/
+    v11 = 1; /*0x4dce84*/
+    if ( a1 == (TESObjectREFR *)reference ) /*0x4dce89*/
+      v11 = 2; /*0x4dce8b*/
+    while ( 1 ) /*0x4dce9c*/
     {
-      if ( a1 == (Actor *)v10 && v12 == 1 )
-        v11 = sub_6600D0(v10, v10->isThirdPerson);
-      if ( v11 )
-        sub_47A640(v11, st5_0, a4, a2, a6, a7);
+      if ( a1 == (TESObjectREFR *)v9 && v11 == 1 ) /*0x4dcea3*/
+        SkinInfoByPerspective = Actor_GetSkinInfoByPerspective((Actor *)v9, v9->isThirdPerson); /*0x4dceb9*/
+      if ( SkinInfoByPerspective ) /*0x4dcebd*/
+        sub_47A640((int)SkinInfoByPerspective, st5_0, a4, a2, firstPerson, a7); /*0x4dcec7*/
       else
-        PrintError("Creatures are not allowed to wear rings.");
-      if ( !--v12 )
-        break;
-      v10 = TESDataHandler_g_PlayerRef;
+        PrintError("Creatures are not allowed to wear rings."); /*0x4dced3*/
+      if ( !--v11 ) /*0x4dcede*/
+        break; /*0x4dcede*/
+      v9 = reference; /*0x4dce96*/
     }
-    if ( a1->vtbl->super.super.IsActor((TESObjectREFR *)a1) )
+    if ( a1->vtbl->IsActor(a1) ) /*0x4dceea*/
     {
-      sub_5EA1A0((int)a1, a5, (_DWORD *)a1->members.super.super.niNode);
-      sub_5EE1B0(a1, a2);
+      sub_5EA1A0((int)a1, a5, (_DWORD *)a1->member.niNode); /*0x4dcef9*/
+      sub_5EE1B0((Actor *)a1, a2); /*0x4dcf00*/
     }
   }
 }

@@ -21,20 +21,20 @@
 0x781094: mov     edx, [eax+48h]
 0x781097: mov     ecx, esi
 0x781099: call    edx
-0x78109B: push    0
-0x78109D: mov     [esp+14h+var_4], eax
+0x78109B: push    0; unused6
+0x78109D: mov     [esp+14h+unused2], eax
 0x7810A1: mov     eax, [esi]
 0x7810A3: mov     edx, [eax+38h]
-0x7810A6: push    0
-0x7810A8: push    0
+0x7810A6: push    0; unused5
+0x7810A8: push    0; unused4
 0x7810AA: mov     ecx, esi
 0x7810AC: call    edx
-0x7810AE: push    eax
-0x7810AF: lea     eax, [esp+20h+var_4]
-0x7810B3: push    eax
-0x7810B4: push    edi
+0x7810AE: push    eax; unused3
+0x7810AF: lea     eax, [esp+20h+unused2]
+0x7810B3: push    eax; unused2
+0x7810B4: push    edi; bytecode
 0x7810B5: mov     ecx, ebx
-0x7810B7: call    sub_783BF0
+0x7810B7: call    NiDX9Renderer__CreateVertexShader; Calls IDirect3DDevice9::CreateVertexShader for compiled DWORD bytecode and reports a failed HRESULT.
 0x7810BC: test    eax, eax
 0x7810BE: jz      short loc_781089
 0x7810C0: mov     edx, [esi]

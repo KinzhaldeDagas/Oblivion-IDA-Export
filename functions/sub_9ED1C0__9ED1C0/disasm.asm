@@ -2,7 +2,7 @@
 0x9ED1C6: push    ecx
 0x9ED1C7: fstp    [esp+4+var_4]; float
 0x9ED1CA: push    offset aFbuoyancyglass; "fBuoyancyGlass"
-0x9ED1CF: mov     ecx, offset flt_B37A90
+0x9ED1CF: mov     ecx, 0B37A90h
 0x9ED1D4: call    GameSetting_ConstrAndReg_float
 0x9ED1D9: push    offset sub_A1FC40; void (__cdecl *)()
 0x9ED1DE: call    _atexit

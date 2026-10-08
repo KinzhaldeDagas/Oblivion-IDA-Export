@@ -1,4 +1,4 @@
-0x9EC350: fld     ds:flt_A30634
+0x9EC350: fld     ds:kTerrainLODQuadRayDirectionZ
 0x9EC356: push    ecx
 0x9EC357: fstp    [esp+4+var_4]; float
 0x9EC35A: push    offset aFpersbullyinte; "fPersBullyIntel"

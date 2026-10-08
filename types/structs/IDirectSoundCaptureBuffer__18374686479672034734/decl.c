@@ -1,1 +1,4 @@
-IDirectSoundCaptureBuffer
+struct IDirectSoundCaptureBuffer
+{
+const IDirectSoundCaptureBufferVtbl *lpVtbl;
+};

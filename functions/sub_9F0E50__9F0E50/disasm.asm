@@ -1,4 +1,4 @@
-0x9F0E50: fld     ds:flt_A3D65C
+0x9F0E50: fld     ds:kHeadBodyNormalMatchRadius
 0x9F0E56: push    ecx
 0x9F0E57: fstp    [esp+4+var_4]; float
 0x9F0E5A: push    offset aFinventorydrop; "fInventoryDropTimer"

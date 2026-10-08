@@ -63,7 +63,7 @@
 0x77028A: mov     [esp+28h+var_4], ecx
 0x77028E: mov     edi, edi
 0x770290: fld     dword ptr [ebx]
-0x770292: call    Double_To_SInt32
+0x770292: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x770297: mov     [edi], ax
 0x77029A: add     edi, 2
 0x77029D: add     ebx, 4

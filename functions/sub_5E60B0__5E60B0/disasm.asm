@@ -4,7 +4,7 @@
 0x5E60B9: call    edx
 0x5E60BB: push    offset off_A3FA90
 0x5E60C0: mov     ecx, eax
-0x5E60C2: call    NiObjectNET_GetExtraData
+0x5E60C2: call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.
 0x5E60C7: mov     esi, eax
 0x5E60C9: test    esi, esi
 0x5E60CB: jz      short loc_5E6101
@@ -15,7 +15,7 @@
 0x5E60D6: test    eax, eax
 0x5E60D8: jz      short loc_5E60EE
 0x5E60DA: lea     ebx, [ebx+0]
-0x5E60E0: cmp     eax, offset dword_B35294
+0x5E60E0: cmp     eax, 0B35294h
 0x5E60E5: jz      short loc_5E60FD
 0x5E60E7: mov     eax, [eax+4]
 0x5E60EA: test    eax, eax

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4B86C0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified Fallout corroboration for this Oblivion helper pair: Fallout's FindRandomTeleportTarget calls PlayerCharacter::GetLastSpaceForDoor before selecting among the door's RandomTeleports, avoids the previous index when possible, and calls SetLastSpaceForDoor with the selected index. Oblivion independently proves its helper pair operates on the same per-door remembered-space behavior; only this behavior is treated as shared.",
     "mnemonic": "push",
     "size": 2
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x4B86E7",
-    "line": "mov     [esp+54h+var_3C], ecx",
+    "line": "mov     [esp+54h+door], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x4B8710",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x4B871B",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x4B8722",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x4B872D",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x4B874D",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,19 +313,19 @@
   },
   {
     "ea": "0x4B8758",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4B875D",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B875F",
-    "line": "call    sub_42B410",
+    "line": "call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,31 +349,31 @@
   },
   {
     "ea": "0x4B876A",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4B876F",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B8771",
-    "line": "call    sub_42B410",
+    "line": "call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4B8776",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B8778",
-    "line": "call    sub_4D8AF0",
+    "line": "call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x4B8794",
-    "line": "mov     edx, [esp+54h+var_3C]",
+    "line": "mov     edx, [esp+54h+door]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -631,19 +631,19 @@
   },
   {
     "ea": "0x4B87F2",
-    "line": "push    eax",
+    "line": "push    eax; existingTeleportDoorOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B87F3",
-    "line": "push    ecx",
+    "line": "push    ecx; destinationSpace",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B87F4",
-    "line": "push    edi",
+    "line": "push    edi; ownerSpace",
     "mnemonic": "push",
     "size": 1
   },
@@ -655,13 +655,13 @@
   },
   {
     "ea": "0x4B87F9",
-    "line": "call    sub_4CB070",
+    "line": "call    DoorTeleport_FindRandomDestinationDoor; Verified call edge: DoorTeleport_SelectRandomDestinationDoor receives the matched listed space, current WorldSpace, and an output for an already-linked teleport door.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4B87FE",
-    "line": "mov     edx, [esp+60h+var_3C]",
+    "line": "mov     edx, [esp+60h+door]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -685,7 +685,7 @@
   },
   {
     "ea": "0x4B880B",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x4B8814",
-    "line": "push    edx",
+    "line": "push    edx; door",
     "mnemonic": "push",
     "size": 1
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x4B8819",
-    "line": "call    sub_663EB0",
+    "line": "call    PlayerCharacter_GetLastSpaceForDoor; Verified cross-reference: reads the player's remembered last-space index for this source door before random destination selection; the selected space is compared against this value to avoid an immediate repeat when possible.",
     "mnemonic": "call",
     "size": 5
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x4B8843",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -937,7 +937,7 @@
   },
   {
     "ea": "0x4B888C",
-    "line": "mov     eax, [esp+54h+var_3C]",
+    "line": "mov     eax, [esp+54h+door]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -976,12 +976,6 @@
     "line": "jmp     short loc_4B88A0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x4B889D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x4B88A0",
@@ -1075,7 +1069,7 @@
   },
   {
     "ea": "0x4B88C0",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1123,25 +1117,25 @@
   },
   {
     "ea": "0x4B88DD",
-    "line": "push    eax",
+    "line": "push    eax; existingTeleportDoorOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B88DE",
-    "line": "push    ecx",
+    "line": "push    ecx; destinationSpace",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B88DF",
-    "line": "push    edx",
+    "line": "push    edx; ownerSpace",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B88E0",
-    "line": "call    sub_4CB070",
+    "line": "call    DoorTeleport_FindRandomDestinationDoor; Verified call edge: DoorTeleport_SelectRandomDestinationDoor receives a randomly selected listed destination space and returns a random eligible destination door; caller tracks existing ExtraTeleport candidates and avoids a repeated space.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1303,7 +1297,7 @@
   },
   {
     "ea": "0x4B8939",
-    "line": "mov     ecx, [esp+54h+var_3C]",
+    "line": "mov     ecx, [esp+54h+door]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1327,7 +1321,7 @@
   },
   {
     "ea": "0x4B8944",
-    "line": "call    RemoveExtraTeleportFromDoorRef",
+    "line": "call    RemoveExtraTeleportFromDoorRef; Verified teleport-extra removal hook: before removing linked-door metadata, it removes the corresponding AStarWorldNode from the low-path space maps; then it clears teleport metadata from the linked door and this reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1387,7 +1381,7 @@
   },
   {
     "ea": "0x4B8966",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1417,7 +1411,7 @@
   },
   {
     "ea": "0x4B8973",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1477,7 +1471,7 @@
   },
   {
     "ea": "0x4B8993",
-    "line": "call    sub_4CBE50",
+    "line": "call    sub_4CBE50; Verified cell object-list processing: door references with ExtraTeleport are checked for a nonempty TESObjectDOOR.randomTeleport list; if present, RemoveExtraTeleportFromDoorRef removes reciprocal low-path indexing before save/load reset/post-fixup. The nested gate has been verified as a randomTeleport-list nonempty check.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1537,31 +1531,31 @@
   },
   {
     "ea": "0x4B89BB",
-    "line": "mov     eax, [esp+54h+var_3C]",
+    "line": "mov     eax, [esp+54h+door]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4B89BF",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4B89C5",
-    "line": "push    edi",
+    "line": "push    edi; spaceIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B89C6",
-    "line": "push    eax",
+    "line": "push    eax; door",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B89C7",
-    "line": "call    sub_663EE0",
+    "line": "call    PlayerCharacter_SetLastSpaceForDoor; Verified cross-reference: commits the chosen destination-space index to the PlayerCharacter per-door last-space map after candidate selection.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1642,5 +1636,71 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B3C30",
+    "line": "lea     ecx, [ebp-2Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3C33",
+    "line": "jmp     ??1?$NiTPointerMap@H_N@@UAE@XZ; NiTPointerMap<int,bool>::~NiTPointerMap<int,bool>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3C38",
+    "line": "lea     ecx, [ebp-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3C3B",
+    "line": "jmp     ??1?$NiTPointerMap@PAVTESObjectCELL@@_N@@UAE@XZ; NiTPointerMap<TESObjectCELL *,bool>::~NiTPointerMap<TESObjectCELL *,bool>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3C40",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B3C44",
+    "line": "lea     eax, [edx-44h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3C47",
+    "line": "mov     ecx, [edx-48h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3C4A",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B3C4C",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3C51",
+    "line": "mov     eax, offset stru_ADF5AC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3C56",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

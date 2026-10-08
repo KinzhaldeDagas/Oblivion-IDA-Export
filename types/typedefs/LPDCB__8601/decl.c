@@ -1,1 +1,1 @@
-LPDCB
+typedef tagDCB *LPDCB;

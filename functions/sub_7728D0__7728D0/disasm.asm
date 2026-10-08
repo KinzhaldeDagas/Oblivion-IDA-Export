@@ -20,7 +20,7 @@
 0x772901: add     esp, 4
 0x772904: test    esi, esi
 0x772906: jz      short loc_772921
-0x772908: push    offset sub_772690
+0x772908: push    offset NiD3DRSEntry_InitializeEmpty;
 0x77290D: push    edi
 0x77290E: push    10h
 0x772910: push    esi

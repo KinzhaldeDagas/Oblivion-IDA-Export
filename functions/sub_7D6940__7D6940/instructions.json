@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7D6940",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Remove one receiver geometry from both the property-side shadow-light association and the light-local object list.",
     "mnemonic": "push",
     "size": 2
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x7D6966",
-    "line": "mov     ebx, [esp+20h+arg_0]",
+    "line": "mov     ebx, [esp+20h+payload]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x7D696E",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x7D69A9",
-    "line": "call    sub_7EE720",
+    "line": "call    BSShaderProperty_RemoveShadowLight; Remove the paired ShadowSceneLight association from BSShaderProperty+0x6C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x7D69B0",
-    "line": "mov     [esp+20h+arg_0], ebx",
+    "line": "mov     [esp+20h+payload], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -295,31 +295,31 @@
   },
   {
     "ea": "0x7D69C0",
-    "line": "lea     eax, [esp+20h+arg_0]",
+    "line": "lea     eax, [esp+20h+payload]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7D69C4",
-    "line": "push    eax",
+    "line": "push    eax; payload",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D69C5",
-    "line": "lea     ecx, [esp+24h+var_10]",
+    "line": "lea     ecx, [esp+24h+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7D69C9",
-    "line": "push    ecx",
+    "line": "push    ecx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D69CA",
-    "line": "lea     ecx, [edi+0E4h]",
+    "line": "lea     ecx, [edi+0E4h]; self",
     "mnemonic": "lea",
     "size": 6
   },
@@ -331,13 +331,13 @@
   },
   {
     "ea": "0x7D69D8",
-    "line": "call    sub_7D5F80",
+    "line": "call    NiTRefPointerList__RemoveFirstByValue; MEF PERF 2026-10-07 PASS2: PERF-13 positional removal gate: this full-list RemoveFirstByValue call occurs AFTER property-side RemoveShadowLight7D69A9. That operation and refcount/destructor callbacks must remain ordered. A captured stale node is usable only with lifetime/mutation proof and matching first-occurrence semantics. Duplicates require fallback, not arbitrary current-node removal.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7D69DD",
-    "line": "mov     eax, [esp+20h+var_10]",
+    "line": "mov     eax, [esp+20h+result]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x7D6A05",
-    "line": "mov     esi, [esp+20h+arg_0]",
+    "line": "mov     esi, [esp+20h+payload]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -568,5 +568,59 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CF800",
+    "line": "lea     ecx, [ebp+4]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CF803",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CF808",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CF80C",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CF80F",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CF812",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CF814",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CF819",
+    "line": "mov     eax, offset stru_AF8414",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CF81E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -33,11 +33,11 @@
 0x559ACA: call    sub_558610
 0x559ACF: mov     ecx, [edi+8]
 0x559AD2: add     esp, 0Ch
-0x559AD5: push    ecx
+0x559AD5: push    ecx; end
 0x559AD6: mov     esi, eax
-0x559AD8: push    esi
+0x559AD8: push    esi; begin
 0x559AD9: mov     ecx, edi
-0x559ADB: call    sub_557740
+0x559ADB: call    FaceGenEgtBasisRecordArray_Destruct; Destroy the three owned image-channel vectors at +0x10 in every 64-byte EGT basis record.
 0x559AE0: mov     [edi+8], esi
 0x559AE3: mov     ebx, [ebp+1Ch]
 0x559AE6: cmp     [ebp+18h], ebx
@@ -58,12 +58,12 @@
 0x559B0F: mov     ebx, eax
 0x559B11: mov     eax, [esi+8]
 0x559B14: add     esp, 0Ch
-0x559B17: push    eax
-0x559B18: push    ebx
+0x559B17: push    eax; end
+0x559B18: push    ebx; begin
 0x559B19: mov     ecx, esi
-0x559B1B: call    sub_557740
+0x559B1B: call    FaceGenEgtBasisRecordArray_Destruct; Destroy the three owned image-channel vectors at +0x10 in every 64-byte EGT basis record.
 0x559B20: mov     [esi+8], ebx
-0x559B23: push    offset sub_557B30; void (__thiscall *)(void *)
+0x559B23: push    offset FaceGenEgtBasisBank_Destruct; void (__thiscall *)(void *)
 0x559B28: push    2; int
 0x559B2A: push    10h; unsigned int
 0x559B2C: push    edi; void *
@@ -78,3 +78,18 @@
 0x559B49: pop     ebx
 0x559B4A: add     esp, 10h
 0x559B4D: retn
+0x9BC900: push    offset FaceGenEgtBasisBank_Destruct; void (__thiscall *)(void *)
+0x9BC905: push    2; int
+0x9BC907: push    10h; unsigned int
+0x9BC909: mov     eax, [ebp-10h]
+0x9BC90C: add     eax, 4
+0x9BC90F: push    eax; void *
+0x9BC910: call    $LN21
+0x9BC915: retn
+0x9BC916: mov     edx, [esp+arg_4]
+0x9BC91A: lea     eax, [edx-14h]
+0x9BC91D: mov     ecx, [edx-18h]
+0x9BC920: xor     ecx, eax
+0x9BC922: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BC927: mov     eax, offset stru_AE64CC
+0x9BC92C: jmp     ___CxxFrameHandler3

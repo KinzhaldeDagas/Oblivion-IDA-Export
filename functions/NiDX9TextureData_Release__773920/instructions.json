@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x77394D",
-    "line": "call    edx",
+    "line": "call    edx; Texture renderer-data destruction first invokes NiDX9RenderState::RemoveTexture with the base texture at 773942, then native base-texture Release here, then clears dTexture at 77394F. Capture native lifetime before final Release; the pointer may be destroyed/reused before this call returns. Surface aliases may independently retain native parent resources and require separate lifetime tracking.",
     "mnemonic": "call",
     "size": 2
   },

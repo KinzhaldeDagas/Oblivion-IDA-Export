@@ -1,1 +1,1 @@
-BoundItemEffect
+struct BoundItemEffect;

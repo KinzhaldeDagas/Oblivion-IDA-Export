@@ -1,8 +1,8 @@
-0x9FA680: fld     ds:flt_A67558
+0x9FA680: fld     ds:flt_A67558; Verified registration: fPathSpaceExitPenalty defaults to 20000.0; actor-aware graph edge cost adds it when adjacent points differ in SubSpace membership (bit 0x40).
 0x9FA686: push    ecx
 0x9FA687: fstp    [esp+4+var_4]; float
 0x9FA68A: push    offset aFpathspaceexit; "fPathSpaceExitPenalty"
-0x9FA68F: mov     ecx, offset flt_B3A428
+0x9FA68F: mov     ecx, offset g_fPathSpaceExitPenalty
 0x9FA694: call    GameSetting_ConstrAndReg_float
 0x9FA699: push    offset sub_A24080; void (__cdecl *)()
 0x9FA69E: call    _atexit

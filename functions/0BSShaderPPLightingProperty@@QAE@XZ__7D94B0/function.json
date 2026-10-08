@@ -1,19 +1,36 @@
 {
-  "callees_count": 47,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 13,
   "callers_count": 8,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
+  "chunks": [
+    [
+      "0x7D94B0",
+      "0x7D97CF"
+    ],
+    [
+      "0x9CEEF0",
+      "0x9CEF50"
+    ]
+  ],
+  "chunks_sha256": "598211a821a057939e4aad37ae3c0ffdd6bbe8d070d6da51478f87df93bd0c91",
+  "comment_regular": "Verified (Oblivion): BSShaderPPLightingProperty constructor initializes the reference-counted TextureEffectData slot at this+0xE0 (DWORD index 0x38) to null. TextureEffectProperty_SetData replaces that same offset; BSShaderPPLightingProperty destructor releases and clears it before chaining to BSShaderLightingProperty. Fallout's typed property layout calls the member spTexEffectData at the same +0xE0 offset.",
+  "comment_repeatable": "Verified (Oblivion): BSShaderPPLightingProperty constructor initializes the reference-counted TextureEffectData slot at this+0xE0 (DWORD index 0x38) to null. TextureEffectProperty_SetData replaces that same offset; BSShaderPPLightingProperty destructor releases and clears it before chaining to BSShaderLightingProperty. Fallout's typed property layout calls the member spTexEffectData at the same +0xE0 offset.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
   "display_name": "BSShaderPPLightingProperty::BSShaderPPLightingProperty(void)",
   "end_ea": "0x7D97CF",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??0BSShaderPPLightingProperty@@QAE@XZ",
   "segment": ".text",
   "sha256": "3f0ec7cd55be5190465dc92967a809ac091d4f021e621cf9b48215404797e2c8",
   "size": 799,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7D94B0",
+  "total_chunk_size": 895,
   "type": "BSShaderPPLightingProperty *__thiscall(BSShaderPPLightingProperty *__hidden this)",
-  "xrefs_from_count": 300,
+  "xrefs_from_count": 332,
   "xrefs_to_count": 8
 }

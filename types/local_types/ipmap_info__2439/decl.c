@@ -1,1 +1,5 @@
-ipmap_info
+struct ipmap_info
+{
+int ip;
+int state;
+};

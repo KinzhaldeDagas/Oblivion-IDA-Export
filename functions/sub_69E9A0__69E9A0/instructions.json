@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x69E9A0",
-    "line": "push    ecx",
+    "line": "push    ecx; Verified MagicModelHitEffect InitializeVisual resolves its target and model path, requires the SpecialIdle_HitEffect controller sequence, loads/attaches the model, and activates the sequence. Returns false when target/model/sequence setup fails.",
     "mnemonic": "push",
     "size": 1
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x69EA18",
-    "line": "call    sub_439EB0",
+    "line": "call    ModelLoader_LoadModelData; Verified (Oblivion): derived field +0x2C is read as the model path and passed to ModelLoader_LoadModelData. During load it temporarily stores the serialized payload pointer before PostLink replaces it with this model path; treat +0x2C as a state-dependent payload/path slot, not a permanently stable char*.",
     "mnemonic": "call",
     "size": 5
   },
@@ -307,13 +307,13 @@
   },
   {
     "ea": "0x69EA3B",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x69EA3D",
-    "line": "call    sub_4715A0",
+    "line": "call    NiControllerManager_FindSequenceByName; Looks up a NiControllerSequence by name in the controller manager name map at +0x58; returns null on miss.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x69EA5C",
-    "line": "call    NiSmartPointer_Set??",
+    "line": "call    NiSmartPointer_Set??; Verified (Oblivion): loaded model root is stored in derived field +0x30 through a reference-counted smart-pointer setter; this NiAVObject root is later updated, attached, and positioned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x69EAD2",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,13 +649,13 @@
   },
   {
     "ea": "0x69EAF5",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x69EAF7",
-    "line": "call    sub_4715A0",
+    "line": "call    NiControllerManager_FindSequenceByName; Looks up a NiControllerSequence by name in the controller manager name map at +0x58; returns null on miss.",
     "mnemonic": "call",
     "size": 5
   },
@@ -691,19 +691,19 @@
   },
   {
     "ea": "0x69EB05",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x69EB07",
-    "line": "fstp    [esp+14h+var_14]; float",
+    "line": "fstp    [esp+14h+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x69EB0A",
-    "line": "call    sub_4715C0",
+    "line": "call    NiControllerManager_DeactivateAllSequences; Iterates all controller-manager sequence slots and deactivates each sequence with the supplied ease-out time and transition flag zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x69EB11",
-    "line": "push    0; int",
+    "line": "push    0; timeSyncSequence",
     "mnemonic": "push",
     "size": 2
   },
@@ -727,7 +727,7 @@
   },
   {
     "ea": "0x69EB16",
-    "line": "fstp    [esp+1Ch+a2]; float",
+    "line": "fstp    [esp+1Ch+a2]; easeInTime",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -745,31 +745,31 @@
   },
   {
     "ea": "0x69EB1E",
-    "line": "fstp    [esp+1Ch+var_1C]; float",
+    "line": "fstp    [esp+1Ch+weight]; weight",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x69EB21",
-    "line": "push    0; int",
+    "line": "push    0; startOver",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x69EB23",
-    "line": "push    0; int",
+    "line": "push    0; priority",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x69EB25",
-    "line": "push    ebx; int",
+    "line": "push    ebx; sequence",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x69EB26",
-    "line": "call    sub_470B20",
+    "line": "call    BSAnimGroupSequence_Activate; BSAnimGroupSequence activation wrapper. Delegates to NiControllerSequence_Activate with the final transition flag forced to zero.",
     "mnemonic": "call",
     "size": 5
   },

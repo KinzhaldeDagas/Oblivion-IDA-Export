@@ -6,7 +6,7 @@
 0xA1491D: push    0
 0xA1491F: push    0
 0xA14921: push    40h ; '@'
-0xA14923: push    offset dword_BA8620
+0xA14923: push    offset unk_BA8620
 0xA14928: push    offset aHkpointtoplane; "hkPointToPlaneConstraintData"
 0xA1492D: mov     ecx, offset unk_BA8D28
 0xA14932: call    sub_90D190

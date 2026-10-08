@@ -28,8 +28,8 @@
 0x906820: push    ebx
 0x906821: push    ecx
 0x906822: lea     ecx, [esp+68h+var_5C+0Ch]
-0x906826: call    sub_88FD90
-0x90682B: movaps  xmm1, [esp+60h+var_5C+0Ch]
+0x906826: call    hkBasis_ProjectVector; TES4 authoritative: basis projection helper, computes local components from basis columns and source vector without translation.
+0x90682B: movaps  xmm1, xmmword ptr [esp+60h+var_5C+0Ch]
 0x906830: movaps  xmm3, xmmword ptr [esi]
 0x906833: xorps   xmm0, xmm0
 0x906836: movaps  xmm2, xmm0

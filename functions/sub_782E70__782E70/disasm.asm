@@ -1,14 +1,14 @@
-0x782E70: push    ebx
-0x782E71: mov     ebx, [esp+4+arg_4]
+0x782E70: push    ebx; DirectX10OBSE authority: Oblivion NiD3DPixelShader constant setter. Dispatches typed constant entries to D3D SetPixelShaderConstantB/I/F via vtable +0x1C4/+0x1BC/+0x1B4; bridge hooks setters and now seeds active native PS constants after create/reset.
+0x782E71: mov     ebx, [esp+4+sourceOverride]
 0x782E75: test    ebx, ebx
 0x782E77: push    ebp
 0x782E78: push    esi
 0x782E79: push    edi
-0x782E7A: mov     edi, [esp+10h+arg_0]
+0x782E7A: mov     edi, [esp+10h+entry]
 0x782E7E: mov     ebp, ecx
 0x782E80: jnz     short loc_782E85
 0x782E82: mov     ebx, [edi+30h]
-0x782E85: mov     esi, [esp+10h+arg_8]
+0x782E85: mov     esi, [esp+10h+countOverride]
 0x782E89: test    esi, esi
 0x782E8B: jnz     short loc_782E99
 0x782E8D: mov     esi, [edi+20h]
@@ -17,10 +17,10 @@
 0x782E94: mov     esi, 1
 0x782E99: cmp     byte ptr ds:0B4295Bh, 0
 0x782EA0: mov     eax, [edi+14h]
-0x782EA3: mov     [esp+10h+arg_4], eax
+0x782EA3: mov     [esp+10h+sourceOverride], eax
 0x782EA7: jnz     short loc_782EB2
-0x782EA9: call    sub_783C70
-0x782EAE: mov     eax, [esp+10h+arg_4]
+0x782EA9: call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.
+0x782EAE: mov     eax, [esp+10h+sourceOverride]
 0x782EB2: mov     edi, [edi+1Ch]
 0x782EB5: mov     ebp, [ebp+24h]
 0x782EB8: and     eax, 0FFh

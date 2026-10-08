@@ -1,1 +1,4 @@
-IDirect3DViewport
+struct IDirect3DViewport
+{
+IDirect3DViewportVtbl *lpVtbl;
+};

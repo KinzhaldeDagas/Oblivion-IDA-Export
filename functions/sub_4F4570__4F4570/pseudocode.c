@@ -1,21 +1,21 @@
-char __usercall sub_4F4570@<al>(char a1@<bpl>, double a2@<st1>, double a3@<st0>, int a4, int a5, int a6, double *a7)
+char __cdecl sub_4F4570(int a1, int a2, int a3, double *a4)
 {
   double IsMenuMode; // st7
 
-  *a7 = 0.0;
-  if ( a5 )
+  *a4 = 0.0; /*0x4f4577*/
+  if ( a2 ) /*0x4f4580*/
   {
-    if ( !InterfaceManager_MenuModeHasFocus(a1, 0.0, a2, a3, a5) )
-      goto LABEL_6;
-    IsMenuMode = 1.0;
+    if ( !InterfaceManager_MenuModeHasFocus(a2) ) /*0x4f459f*/
+      goto LABEL_6; /*0x4f459f*/
+    IsMenuMode = 1.0; /*0x4f45a1*/
   }
   else
   {
-    IsMenuMode = (double)(unsigned __int8)InterfaceManager_IsMenuMode();
+    IsMenuMode = (double)(unsigned __int8)InterfaceManager_IsMenuMode(); /*0x4f458e*/
   }
-  *a7 = IsMenuMode;
+  *a4 = IsMenuMode; /*0x4f45a3*/
 LABEL_6:
-  if ( IsConsoleMode )
-    Interface_ConsolePrint("MenuMode %d >> %0.2f", a5, *a7);
-  return 1;
+  if ( MEMORY[0xB361AC] ) /*0x4f45a5*/
+    Interface_ConsolePrint("MenuMode %d >> %0.2f", a2, *a4); /*0x4f45bc*/
+  return 1; /*0x4f45c4*/
 }

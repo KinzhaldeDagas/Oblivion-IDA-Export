@@ -1,64 +1,108 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_NLS_FORMAT_NODE",
+  "definition": "struct _NLS_FORMAT_NODE\n{\nLCID lcid;\nDWORD dwFlags;\nDWORD dwCodePage;\nNUMBERFMTW fmt;\nCURRENCYFMTW cyfmt;\nLPWSTR lppszStrings[57];\nWCHAR_0 szShortAM[2];\nWCHAR_0 szShortPM[2];\n_NLS_FORMAT_NODE *next;\n}\n",
   "id": 18374686479672046824,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lcid",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "LCID"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwFlags",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwCodePage",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fmt",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 24
+      "size": 24,
+      "type": "NUMBERFMTW"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cyfmt",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 32
+      "size": 32,
+      "type": "CURRENCYFMTW"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lppszStrings",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 228
+      "size": 228,
+      "type": "LPWSTR[57]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "szShortAM",
       "offset": 300,
-      "offset_hex": "0x12c",
-      "size": 4
+      "offset_hex": "0x12C",
+      "size": 4,
+      "type": "WCHAR_0[2]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "szShortPM",
       "offset": 304,
       "offset_hex": "0x130",
-      "size": 4
+      "size": 4,
+      "type": "WCHAR_0[2]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "next",
       "offset": 308,
       "offset_hex": "0x134",
-      "size": 4
+      "size": 4,
+      "type": "_NLS_FORMAT_NODE *"
     }
   ],
   "name": "_NLS_FORMAT_NODE",
+  "ordinal": 8624,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 312
 }

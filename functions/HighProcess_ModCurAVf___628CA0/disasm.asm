@@ -1,12 +1,12 @@
 0x628CA0: fld     [esp+arg_8]
-0x628CA4: mov     eax, [esp+arg_0]
+0x628CA4: mov     eax, [esp+context]
 0x628CA8: push    esi
 0x628CA9: push    edi
-0x628CAA: mov     edi, [esp+8+arg_4]
+0x628CAA: mov     edi, [esp+8+actorValue]
 0x628CAE: push    ecx
-0x628CAF: fstp    [esp+0Ch+var_C]; float
-0x628CB2: push    edi; int
-0x628CB3: push    eax; int
+0x628CAF: fstp    [esp+0Ch+delta]; delta
+0x628CB2: push    edi; actorValue
+0x628CB3: push    eax; context
 0x628CB4: mov     esi, ecx
 0x628CB6: call    MiddleProcess_ModAVfCur
 0x628CBB: cmp     edi, 0Bh

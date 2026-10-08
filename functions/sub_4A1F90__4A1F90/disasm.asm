@@ -1,6 +1,6 @@
 0x4A1F90: push    ecx
 0x4A1F91: push    esi
-0x4A1F92: push    offset CriticalSection; lpCriticalSection
+0x4A1F92: push    0B35380h; lpCriticalSection
 0x4A1F97: mov     esi, ecx
 0x4A1F99: call    dword ptr ds:0A2806Ch
 0x4A1F9F: call    dword ptr ds:0A2808Ch
@@ -23,7 +23,7 @@
 0x4A1FD9: sub     dword ptr ds:0B353FCh, 1
 0x4A1FE0: jnz     short loc_4A1FEC
 0x4A1FE2: mov     dword ptr ds:0B353F8h, 0
-0x4A1FEC: push    offset CriticalSection; lpCriticalSection
+0x4A1FEC: push    0B35380h; lpCriticalSection
 0x4A1FF1: call    dword ptr ds:0A28074h
 0x4A1FF7: pop     esi
 0x4A1FF8: pop     ecx

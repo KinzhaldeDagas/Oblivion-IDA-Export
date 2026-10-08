@@ -103,12 +103,12 @@
 0x5773C6: jz      short loc_5773E5
 0x5773C8: mov     edx, [edi+1Ch]
 0x5773CB: push    edx
-0x5773CC: call    FormHeapFree
+0x5773CC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5773D1: push    edi
 0x5773D2: mov     [edi+1Ch], ebx
 0x5773D5: mov     [edi+22h], bx
 0x5773D9: mov     [edi+20h], bx
-0x5773DD: call    FormHeapFree
+0x5773DD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5773E2: add     esp, 8
 0x5773E5: mov     eax, ebp
 0x5773E7: mov     ecx, dword ptr [esp+30h+var_C]
@@ -327,12 +327,12 @@
 0x57765A: lea     eax, [esp+30h+arg_0]
 0x57765E: push    eax
 0x57765F: mov     ecx, esi
-0x577661: call    sub_6AA320
+0x577661: call    NiTList_AddHead; NiTList AddHead helper. Allocates a node, stores payload at +0x08, installs it as the list head, repairs the previous head/backlink or empty-list tail, and increments count. Repeated per-light calls reverse the source iterator order.
 0x577666: jmp     short loc_577674
 0x577668: lea     ecx, [esp+30h+arg_0]
 0x57766C: push    ecx
 0x57766D: mov     ecx, esi
-0x57766F: call    sub_5B1E20
+0x57766F: call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.
 0x577674: mov     ecx, [esi+30h]
 0x577677: mov     eax, [ecx+10h]
 0x57767A: mov     esi, [esi+10h]
@@ -342,3 +342,30 @@
 0x577683: mov     [ecx+10h], eax
 0x577686: xor     eax, eax
 0x577688: jmp     loc_5773E7
+0x9BE4C0: mov     eax, [ebp+8]
+0x9BE4C3: push    eax
+0x9BE4C4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BE4C9: pop     ecx
+0x9BE4CA: retn
+0x9BE4CB: mov     eax, [ebp+8]
+0x9BE4CE: push    eax
+0x9BE4CF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BE4D4: pop     ecx
+0x9BE4D5: retn
+0x9BE4D6: mov     eax, [ebp+8]
+0x9BE4D9: push    eax
+0x9BE4DA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BE4DF: pop     ecx
+0x9BE4E0: retn
+0x9BE4E1: mov     eax, [ebp+8]
+0x9BE4E4: push    eax
+0x9BE4E5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BE4EA: pop     ecx
+0x9BE4EB: retn
+0x9BE4EC: mov     edx, [esp+arg_4]
+0x9BE4F0: lea     eax, [edx-20h]
+0x9BE4F3: mov     ecx, [edx-24h]
+0x9BE4F6: xor     ecx, eax
+0x9BE4F8: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BE4FD: mov     eax, offset stru_AE7C28
+0x9BE502: jmp     ___CxxFrameHandler3

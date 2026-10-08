@@ -2,7 +2,7 @@
 0x9EB786: push    ecx
 0x9EB787: fstp    [esp+4+var_4]; float
 0x9EB78A: push    offset aFbarterhagglem; "fBarterHaggleMax"
-0x9EB78F: mov     ecx, offset fBarterHaggleMax
+0x9EB78F: mov     ecx, (offset flt_B37528+0A0h)
 0x9EB794: call    GameSetting_ConstrAndReg_float
 0x9EB799: push    offset sub_A1F2B0; void (__cdecl *)()
 0x9EB79E: call    _atexit

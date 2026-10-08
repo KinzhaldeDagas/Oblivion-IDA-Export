@@ -20,7 +20,6 @@
 0x8F8E34: sub     eax, ecx
 0x8F8E36: mov     esi, 2
 0x8F8E3B: jmp     short loc_8F8E40
-0x8F8E3D: align 10h
 0x8F8E40: movaps  xmm0, xmmword ptr [ecx]
 0x8F8E43: movaps  xmm5, xmm0
 0x8F8E46: shufps  xmm5, xmm0, 0AAh ; 'ª'

@@ -23,7 +23,6 @@
 0x434C32: mov     ebx, ds:InterlockedDecrement
 0x434C38: lea     edi, [ecx+4]
 0x434C3B: jmp     short loc_434C40
-0x434C3D: align 10h
 0x434C40: push    edi; lpAddend
 0x434C41: sub     esi, 1
 0x434C44: call    ebx ; InterlockedDecrement

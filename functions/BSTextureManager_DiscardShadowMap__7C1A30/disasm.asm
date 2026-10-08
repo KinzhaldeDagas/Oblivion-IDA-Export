@@ -1,4 +1,4 @@
-0x7C1A30: push    0FFFFFFFFh
+0x7C1A30: push    0FFFFFFFFh; Returns a frustum shadow texture in Oblivion: finds it in the used pool, appends it to the unused pool, removes the original used-list node, and balances temporary strong references.
 0x7C1A32: push    offset SEH_8A47C0
 0x7C1A37: mov     eax, large fs:0
 0x7C1A3D: push    eax
@@ -13,14 +13,14 @@
 0x7C1A4D: lea     eax, [esp+28h+var_C]
 0x7C1A51: mov     large fs:0, eax
 0x7C1A57: mov     ebx, ecx
-0x7C1A59: cmp     [esp+28h+arg_0], 0
+0x7C1A59: cmp     [esp+28h+texture], 0
 0x7C1A5E: jz      loc_7C1B36
 0x7C1A64: xor     esi, esi
 0x7C1A66: mov     [esp+28h+var_10], esi
 0x7C1A6A: mov     edi, [ebx+34h]
 0x7C1A6D: test    edi, edi
 0x7C1A6F: mov     [esp+28h+var_4], esi
-0x7C1A73: mov     [esp+28h+var_14], edi
+0x7C1A73: mov     [esp+28h+position], edi
 0x7C1A77: jz      loc_7C1B12
 0x7C1A7D: mov     ebp, ds:0A28078h
 0x7C1A83: cmp     esi, [edi+8]
@@ -44,27 +44,27 @@
 0x7C1AAF: lea     ecx, [esi+4]
 0x7C1AB2: push    ecx; lpAddend
 0x7C1AB3: call    ebp ; InterlockedIncrement
-0x7C1AB5: cmp     esi, [esp+28h+arg_0]
+0x7C1AB5: cmp     esi, [esp+28h+texture]
 0x7C1AB9: jz      short loc_7C1AC7
 0x7C1ABB: mov     edi, [edi]
 0x7C1ABD: test    edi, edi
 0x7C1ABF: jnz     short loc_7C1A83
-0x7C1AC1: mov     [esp+28h+var_14], edi
+0x7C1AC1: mov     [esp+28h+position], edi
 0x7C1AC5: jmp     short loc_7C1B12
 0x7C1AC7: test    edi, edi
-0x7C1AC9: mov     [esp+28h+var_14], edi
+0x7C1AC9: mov     [esp+28h+position], edi
 0x7C1ACD: jz      short loc_7C1B12
 0x7C1ACF: lea     edx, [esp+28h+var_10]
 0x7C1AD3: push    edx
 0x7C1AD4: lea     ecx, [ebx+20h]
-0x7C1AD7: call    sub_7C16B0
-0x7C1ADC: lea     eax, [esp+28h+var_14]
-0x7C1AE0: push    eax
-0x7C1AE1: lea     ecx, [esp+2Ch+arg_0]
-0x7C1AE5: push    ecx
-0x7C1AE6: lea     ecx, [ebx+30h]
-0x7C1AE9: call    sub_7C17D0
-0x7C1AEE: mov     edi, [esp+28h+arg_0]
+0x7C1AD7: call    NiTRefPointerList__AddTail; Generic refcounted NiT pointer-list AddTail helper. Allocates a node, assigns/increments its object pointer, links it after the old tail, and updates head/tail/count.
+0x7C1ADC: lea     eax, [esp+28h+position]
+0x7C1AE0: push    eax; position
+0x7C1AE1: lea     ecx, [esp+2Ch+texture]
+0x7C1AE5: push    ecx; result
+0x7C1AE6: lea     ecx, [ebx+30h]; self
+0x7C1AE9: call    NiTRefPointerList__RemovePosition; Generic refcounted NiT pointer-list RemovePosition helper handling head, tail and middle nodes while returning a strong payload reference and preserving list links/count.
+0x7C1AEE: mov     edi, [esp+28h+texture]
 0x7C1AF2: test    edi, edi
 0x7C1AF4: jz      short loc_7C1B12
 0x7C1AF6: lea     edx, [edi+4]
@@ -101,3 +101,12 @@
 0x7C1B45: pop     ebx
 0x7C1B46: add     esp, 14h
 0x7C1B49: retn    4
+0x9D6B30: lea     ecx, [ebp-10h]; slot
+0x9D6B33: jmp     NiPointerSlot_Release
+0x9D6B38: mov     edx, [esp+arg_4]
+0x9D6B3C: lea     eax, [edx-18h]
+0x9D6B3F: mov     ecx, [edx-1Ch]
+0x9D6B42: xor     ecx, eax
+0x9D6B44: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D6B49: mov     eax, offset stru_AFE890
+0x9D6B4E: jmp     ___CxxFrameHandler3

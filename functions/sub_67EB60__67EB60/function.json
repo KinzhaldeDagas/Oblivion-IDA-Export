@@ -1,19 +1,32 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 7,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x67EB60",
+      "0x67EC36"
+    ]
+  ],
+  "chunks_sha256": "ac067df05875c8381fcb658548b13d7284521f1b7b19e4dfed10a4f11a3d00ab",
+  "comment_regular": "Verified shared graph route test used from actor package, combat, PathGrid selection, and fast-travel surface construction. It accepts a valid direct segment; if straight-segment validation fails, it invokes actor-aware connected-point A*.",
+  "comment_repeatable": "Verified shared graph route test used from actor package, combat, PathGrid selection, and fast-travel surface construction. It accepts a valid direct segment; if straight-segment validation fails, it invokes actor-aware connected-point A*.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_67EB60",
+  "display_name": "ConnectedPointGraph_CanTraverseSegment",
   "end_ea": "0x67EC36",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_67EB60",
+  "name": "ConnectedPointGraph_CanTraverseSegment",
   "segment": ".text",
   "sha256": "ac067df05875c8381fcb658548b13d7284521f1b7b19e4dfed10a4f11a3d00ab",
   "size": 214,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x67EB60",
-  "type": "char __thiscall(float *this, float *, float *, TESObjectREFR *, float)",
+  "total_chunk_size": 214,
+  "type": "bool __thiscall(float *segmentQuery, const NiPoint3 *start, const NiPoint3 *end, TESObjectREFR *actor, float extraCost)",
   "xrefs_from_count": 84,
   "xrefs_to_count": 7
 }

@@ -1,4 +1,4 @@
-0x68EB53: push    40h ; '@'; Size
+0x68EB53: push    40h ; '@'; Verified allocation for CUPA: creates the shared CureEffect class and passes internal MgefCode PARA to CureEffect_constr_MgefCode; exact internal subtype naming beyond the direct constructor call remains Unknown.
 0x68EB55: call    FormHeapAlloc
 0x68EB5A: add     esp, 4
 0x68EB5D: mov     [esp+arg_60], eax

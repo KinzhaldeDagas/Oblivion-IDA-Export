@@ -1,19 +1,32 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x726200",
+      "0x72629F"
+    ]
+  ],
+  "chunks_sha256": "71d938d09098251bd9cb1171b755d10cb5215fbe209b24facb1af34ef2d10e7c",
+  "comment_regular": "\n\n[2026-10-03 VERIFIED remove block] thiscall(index,bool clearStreams),AL result,RET8. Rejects missing/out-of-range slot; invokes block Free vtable+0C withNULL, then directly FormHeapFree(block); clears NiTArray entry; optionally zeroes all descriptor fields+4..18 for matching block index. Unlike Fallout, this Oblivion block has no virtual deleting-destructor slot. Native-code teardown fixture132checks exercises complete destruction and confirms ownership flags protect borrowed source.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_726200",
+  "display_name": "OB_NiAdditionalGeometryData_RemoveDataBlock",
   "end_ea": "0x72629F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_726200",
+  "name": "OB_NiAdditionalGeometryData_RemoveDataBlock",
   "segment": ".text",
   "sha256": "71d938d09098251bd9cb1171b755d10cb5215fbe209b24facb1af34ef2d10e7c",
   "size": 159,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x726200",
-  "type": "char __thiscall(int this, unsigned int, char)",
+  "total_chunk_size": 159,
+  "type": "bool __thiscall(void *this, unsigned int blockIndex, bool clearStreams)",
   "xrefs_from_count": 74,
   "xrefs_to_count": 1
 }

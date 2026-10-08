@@ -5,7 +5,7 @@
 0x43DE09: push    esi
 0x43DE0A: mov     cl, 10h
 0x43DE0C: call    __allshr
-0x43DE11: mov     ecx, TESDataHandler_g_PlayerRef
+0x43DE11: mov     ecx, dword ptr reference
 0x43DE17: movzx   eax, al
 0x43DE1A: push    eax
 0x43DE1B: call    sub_662F60

@@ -27,11 +27,11 @@
 0x56882F: mov     eax, [eax+8]
 0x568832: mov     ecx, edi; this
 0x568834: mov     [esp+16Ch+var_150], eax
-0x568838: call    GetTeleportExtraData
+0x568838: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x56883D: test    eax, eax
 0x56883F: jz      short loc_56885C
-0x568841: mov     ecx, edi
-0x568843: call    sub_4D76F0
+0x568841: mov     ecx, edi; this
+0x568843: call    TESObjectREFR_GetLinkedTeleportMarkerPosition; Verified linked-door marker resolver: read this door's TeleportData, follow its linkedDoor pointer, fetch the linked door's TeleportData, then return a pointer to that record's xyz fields at +4. Return g_zeroNiPoint3 when the source data or linked-door target is missing.
 0x568848: mov     ecx, [eax]
 0x56884A: mov     [esp+16Ch+var_158], ecx
 0x56884E: mov     edx, [eax+4]
@@ -43,12 +43,12 @@
 0x56885F: call    TESObjectREFR_GetWorldSpace
 0x568864: mov     ecx, edi; this
 0x568866: mov     [esp+170h+var_160], eax
-0x56886A: call    TESObjectREFR_GetParentCell
+0x56886A: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x56886F: mov     ebp, eax
 0x568871: test    ebp, ebp
 0x568873: jz      short loc_568882
 0x568875: mov     ecx, ebp; this
-0x568877: call    TESObjectCELL_IsInterior
+0x568877: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x56887C: test    al, al
 0x56887E: jnz     short loc_568882
 0x568880: xor     ebp, ebp
@@ -57,12 +57,12 @@
 0x568885: call    TESObjectREFR_GetWorldSpace
 0x56888A: mov     ecx, esi; this
 0x56888C: mov     [esp+174h+var_140], eax
-0x568890: call    TESObjectREFR_GetParentCell
+0x568890: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x568895: mov     ebx, eax
 0x568897: test    ebx, ebx
 0x568899: jz      short loc_5688AA
 0x56889B: mov     ecx, ebx; this
-0x56889D: call    TESObjectCELL_IsInterior
+0x56889D: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x5688A2: test    al, al
 0x5688A4: jnz     loc_568961
 0x5688AA: test    ebp, ebp
@@ -74,7 +74,7 @@
 0x5688C4: push    2
 0x5688C6: push    esi
 0x5688C7: call    sub_5677B0
-0x5688CC: call    Double_To_SInt32
+0x5688CC: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5688D1: mov     edx, [esi]
 0x5688D3: mov     ebp, eax
 0x5688D5: mov     eax, [edx+174h]
@@ -165,13 +165,13 @@
 0x5689E2: mov     ecx, edi
 0x5689E4: call    eax
 0x5689E6: push    eax
-0x5689E7: call    sub_46D5C0
+0x5689E7: call    sub_46D5C0; Collision/model radius-ish helper used by PlaceAtMe after a ray hit. It dynamic-casts a form to TESModel and reads +0x0C, otherwise resolves from TESObjectREFR via 0x4694A0; result scales the normalized hit vector before final placement point.
 0x5689EC: add     esp, 4
-0x5689EF: call    Double_To_SInt32
+0x5689EF: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5689F4: mov     [esp+170h+var_158], eax
 0x5689F8: fild    [esp+170h+var_158]
 0x5689FC: fadd    qword ptr ds:0A46E48h
-0x568A02: call    Double_To_SInt32
+0x568A02: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x568A07: mov     ebp, eax
 0x568A09: jmp     short loc_568A39
 0x568A0B: mov     eax, [edx+170h]
@@ -260,7 +260,7 @@
 0x568B09: fld     [esp+174h+var_150]
 0x568B0D: fsub    dword ptr [eax+8]
 0x568B10: fstp    [esp+174h+var_134]
-0x568B14: call    sub_404C90
+0x568B14: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x568B19: fcomp   qword ptr ds:0A309F0h
 0x568B1F: fnstsw  ax
 0x568B21: test    ah, 5
@@ -282,7 +282,7 @@
 0x568B52: cmp     eax, esi
 0x568B54: jnz     short loc_568B83
 0x568B56: lea     ecx, [esp+174h+var_14C]
-0x568B5A: call    sub_404C90
+0x568B5A: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x568B5F: sub     esp, 8
 0x568B62: fstp    qword ptr [esp+17Ch+var_180+4]
 0x568B65: push    ebp

@@ -1,1 +1,1 @@
-ShadowLightShader
+struct ShadowLightShader;

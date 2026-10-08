@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x46B4CB",
-    "line": "jz      short loc_46B4D2",
+    "line": "jz      short loc_46B4D2; Oblivion outer save/tombstone branch verified 2026-10-01: TESForm_SaveForm tests PARTIAL flag0x4000 here and returns false at0x46B4CD without invoking the virtual form writer. Otherwise deleted flag0x20 selects TESFile_WriteEmptyFormRecord at0x46B4E1 then closes; it never invokes TESWorldSpace_WriteRecord. A deleted WRLD emits no SNAM/payload, and partial+deleted is skipped. Non-deleted WRLD zero/nonzero SNAM policy is at TESWorldSpace_WriteRecord0x4F1214.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x46B4E8",
-    "line": "call    sub_450A80",
+    "line": "call    TESFile_CloseForm; Closes the current form record: increments formCount, writes the final payload length into the saved record header, seeks back to its header offset, and rewrites the 0x14-byte header.",
     "mnemonic": "call",
     "size": 5
   },

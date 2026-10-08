@@ -24,9 +24,9 @@
 0x5C0206: mov     esi, eax
 0x5C0208: call    InterfaceManager_GetDepth
 0x5C020D: fstp    [esp+0Ch+arg_0]
-0x5C0211: mov     ecx, [esi+68h]; TileWindow *
+0x5C0211: mov     ecx, [esi+68h]; this
 0x5C0214: push    offset aDataMenusDia_3; "Data\\Menus\\dialog\\persuasion_menu.xm"...
-0x5C0219: call    Menu_LoadXML
+0x5C0219: call    Tile__ReadFile; Verified: SDK ReadXML entry. Builds named tree under receiver via 0x590330, connects/evaluates traits via 0x58CF40, registers subtemplates with owning Menu, frees build storage, refreshes returned subtree via 0x58FBA0. Returns first created tile. Fallout analogue 0x827E2588; cache/cleanup differs.
 0x5C021E: mov     edi, eax
 0x5C0220: mov     ecx, edi
 0x5C0222: call    Tile_GetParentMenu
@@ -65,58 +65,58 @@
 0x5C0294: jp      short loc_5C02AA
 0x5C0296: fld     [esp+0Ch+arg_0]
 0x5C029A: push    ecx
-0x5C029B: fstp    [esp+10h+var_10]; a3
-0x5C029E: push    0FABh; a2
+0x5C029B: fstp    [esp+10h+var_10]; value
+0x5C029E: push    0FABh; propertyCode
 0x5C02A3: mov     ecx, edi; this
-0x5C02A5: call    Tile_SetFloat
+0x5C02A5: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5C02AA: mov     ecx, [esi+0A8h]
 0x5C02B0: push    0FB5h
 0x5C02B5: mov     [esi+0D8h], ebx
 0x5C02BB: call    Tile_GetFloat
-0x5C02C0: call    Double_To_SInt32
+0x5C02C0: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5C02C5: mov     ecx, [esi+0A8h]
 0x5C02CB: push    0FB6h
 0x5C02D0: mov     [esi+0DCh], eax
 0x5C02D6: call    Tile_GetFloat
-0x5C02DB: call    Double_To_SInt32
+0x5C02DB: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5C02E0: mov     ecx, [esi+0A8h]
 0x5C02E6: push    0FB7h
 0x5C02EB: mov     [esi+0E0h], eax
 0x5C02F1: call    Tile_GetFloat
-0x5C02F6: call    Double_To_SInt32
+0x5C02F6: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5C02FB: mov     ecx, [esi+0A8h]
 0x5C0301: push    0FB4h
 0x5C0306: mov     [esi+0E4h], eax
 0x5C030C: call    Tile_GetFloat
-0x5C0311: call    Double_To_SInt32
+0x5C0311: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5C0316: fld1
 0x5C0318: push    ecx
-0x5C0319: fstp    [esp+10h+var_10]; a3
+0x5C0319: fstp    [esp+10h+var_10]; value
 0x5C031C: mov     ecx, [esi+0BCh]; this
-0x5C0322: push    0FAFh; a2
+0x5C0322: push    0FAFh; propertyCode
 0x5C0327: mov     [esi+0E8h], eax
-0x5C032D: call    Tile_SetFloat
-0x5C0332: push    25h ; '%'
-0x5C0334: push    3
+0x5C032D: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
+0x5C0332: push    25h ; '%'; index
+0x5C0334: push    3; topicType
 0x5C0336: mov     dword ptr [esi+84h], 0
-0x5C0340: call    TESTopic__GEtTopic
+0x5C0340: call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.
 0x5C0345: mov     ecx, ds:0B333C4h
 0x5C034B: mov     edx, [esi+0D8h]
 0x5C0351: add     esp, 8
-0x5C0354: push    0
-0x5C0356: push    0
-0x5C0358: push    ecx
-0x5C0359: push    edx
-0x5C035A: mov     ecx, eax
-0x5C035C: call    TESTopic__CreateDialogueInfo
+0x5C0354: push    0; conversation
+0x5C0356: push    0; previousTopic
+0x5C0358: push    ecx; target
+0x5C0359: push    edx; speaker
+0x5C035A: mov     ecx, eax; this
+0x5C035C: call    TESTopic__CreateDialogueItem; Selects a matching TESTopicInfo and wraps it as a 0x1C DialogueItem containing response list/cursor, INFO, topic, owner quest, and speaker.
 0x5C0361: mov     ebx, eax
 0x5C0363: test    ebx, ebx
 0x5C0365: jz      loc_5C0402
 0x5C036B: push    ebp
-0x5C036C: mov     ecx, ebx
-0x5C036E: call    sub_6B7BA0
-0x5C0373: mov     ecx, ebx
-0x5C0375: call    sub_6B7C20
+0x5C036C: mov     ecx, ebx; this
+0x5C036E: call    DialogueItem__FirstResponse
+0x5C0373: mov     ecx, ebx; this
+0x5C0375: call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.
 0x5C037A: mov     ebp, eax
 0x5C037C: test    ebp, ebp
 0x5C037E: jz      short loc_5C03F1
@@ -150,10 +150,10 @@
 0x5C03E8: push    ebp; string
 0x5C03E9: call    GameUI_QueueMessage
 0x5C03EE: add     esp, 10h
-0x5C03F1: mov     ecx, ebx
-0x5C03F3: call    sub_6B81D0
+0x5C03F1: mov     ecx, ebx; this
+0x5C03F3: call    DialogueItem__Destroy
 0x5C03F8: push    ebx
-0x5C03F9: call    FormHeapFree
+0x5C03F9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5C03FE: add     esp, 4
 0x5C0401: pop     ebp
 0x5C0402: mov     byte ptr [esi+8Ch], 0

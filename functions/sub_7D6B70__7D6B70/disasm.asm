@@ -1,4 +1,4 @@
-0x7D6B70: push    ecx
+0x7D6B70: push    ecx; Return the current top render-target-group stack entry, or null when the stack is empty.
 0x7D6B71: xor     ecx, ecx
 0x7D6B73: mov     [esp+4+var_4], ecx
 0x7D6B76: mov     eax, ds:0B45D74h

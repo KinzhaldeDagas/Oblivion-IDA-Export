@@ -1,5 +1,5 @@
 0x5E7BE0: add     ecx, 44h ; 'D'
-0x5E7BE3: call    GetExtraDataFollower
+0x5E7BE3: call    ExtraDataList_GetFollowerExtra; Returns ExtraFollower (type 0x23) itself, or null.
 0x5E7BE8: test    eax, eax
 0x5E7BEA: jz      short locret_5E7C2E
 0x5E7BEC: push    edi

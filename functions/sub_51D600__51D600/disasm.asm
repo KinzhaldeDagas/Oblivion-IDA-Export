@@ -1,4 +1,4 @@
-0x51D600: sub     esp, 0D0h
+0x51D600: sub     esp, 0D0h; [Controller decode 2026-07-09] Non-player QueryControlState consumer: Block control 6 held for alternate activation/yield message.
 0x51D606: mov     eax, ds:0B30AACh
 0x51D60B: xor     eax, esp
 0x51D60D: mov     [esp+0D0h+var_4], eax
@@ -81,7 +81,7 @@
 0x51D701: mov     ecx, [ecx+20h]; this
 0x51D704: push    0; a3
 0x51D706: push    6; a2
-0x51D708: call    InputGlobals__QueryControlState
+0x51D708: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x51D70D: test    eax, eax
 0x51D70F: jz      short loc_51D6DE
 0x51D711: fld     dword ptr ds:0A30634h
@@ -217,7 +217,7 @@
 0x51D87A: cmp     byte ptr [eax+20h], 16h
 0x51D87E: jnz     short loc_51D887
 0x51D880: mov     ecx, ebx; int
-0x51D882: call    sub_5EAE70
+0x51D882: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x51D887: cmp     edi, ds:0B333C4h
 0x51D88D: jnz     short loc_51D8D6
 0x51D88F: mov     edx, [ebx]
@@ -351,12 +351,12 @@
 0x51DA0F: call    edx
 0x51DA11: mov     al, 1
 0x51DA13: jmp     loc_51D6E0
-0x51DA18: mov     ecx, edi
-0x51DA1A: call    sub_5E0380
+0x51DA18: mov     ecx, edi; this
+0x51DA1A: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x51DA1F: test    eax, eax
 0x51DA21: jz      short loc_51DA40
-0x51DA23: mov     ecx, edi
-0x51DA25: call    sub_5E0380
+0x51DA23: mov     ecx, edi; this
+0x51DA25: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x51DA2A: cmp     byte ptr [eax+20h], 1
 0x51DA2E: jz      short loc_51DA40
 0x51DA30: mov     ecx, [edi+58h]

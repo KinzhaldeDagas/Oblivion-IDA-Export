@@ -1,20 +1,21 @@
-float *__thiscall sub_787070(_DWORD *this, float a2, float a3, float a4)
+// CSpeedTreeRT::SetTreePosition. Oblivion writes STreeInstanceData position for instances, otherwise CTreeEngine::cameraPosition/current tree position storage; exact method name corroborated only after observing this split.
+void __thiscall CSpeedTreeRT__SetTreePosition(OB_CSpeedTreeRT_010201A0 *this, float x, float y, float z)
 {
-  float *result; // eax
+  float *instanceData; // eax
+  float *v5; // eax
 
-  result = (float *)*(this + 0xD);
-  if ( result )
+  instanceData = (float *)this->instanceData; /*0x787070*/
+  if ( instanceData ) /*0x78707c*/
   {
-    result[1] = a2;
-    result[2] = a3;
-    result[3] = a4;
+    instanceData[1] = x; /*0x78707e*/
+    instanceData[2] = y; /*0x787085*/
+    instanceData[3] = z; /*0x78708c*/
   }
   else
   {
-    result = (float *)(*this + 4);
-    *result = a2;
-    result[1] = a3;
-    result[2] = a4;
+    v5 = (float *)(this->treeEngine + 4); /*0x7870ad*/
+    *v5 = x; /*0x7870b0*/
+    v5[1] = y; /*0x7870ba*/
+    v5[2] = z; /*0x7870bd*/
   }
-  return result;
 }

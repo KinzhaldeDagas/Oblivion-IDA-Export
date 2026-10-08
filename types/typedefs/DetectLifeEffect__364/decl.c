@@ -1,1 +1,1 @@
-DetectLifeEffect
+struct DetectLifeEffect;

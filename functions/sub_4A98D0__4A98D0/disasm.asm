@@ -1,4 +1,4 @@
-0x4A98D0: cmp     ecx, offset dword_B35788
+0x4A98D0: cmp     ecx, offset unk_B35788
 0x4A98D6: fld     [esp+arg_4]
 0x4A98DA: jz      short loc_4A9910
 0x4A98DC: fld     st

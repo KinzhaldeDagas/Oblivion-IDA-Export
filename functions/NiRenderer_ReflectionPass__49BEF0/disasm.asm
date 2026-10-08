@@ -22,7 +22,7 @@
 0x49BF38: jz      loc_49CA34
 0x49BF3E: cmp     byte ptr ds:0B42F3Eh, 0
 0x49BF45: jz      loc_49CA34
-0x49BF4B: mov     ebx, [ebp+arg_0]
+0x49BF4B: mov     ebx, [ebp+primaryRoot]
 0x49BF4E: cmp     ebx, edi
 0x49BF50: jz      loc_49CA34
 0x49BF56: cmp     [esi], edi
@@ -130,7 +130,7 @@
 0x49C0DF: lea     eax, [esp+2ECh+var_248]
 0x49C0E6: fstp    [esp+2ECh+var_264]
 0x49C0ED: push    eax
-0x49C0EE: call    sub_710250
+0x49C0EE: call    NiPoint3_MultiplyMatrix3
 0x49C0F3: fld     dword ptr [ebx+6Ch]
 0x49C0F6: fstp    [esp+2F0h+var_278]
 0x49C0FA: add     esp, 0Ch
@@ -195,7 +195,7 @@
 0x49C1C1: push    edx
 0x49C1C2: lea     eax, [esp+2ECh+var_29C]
 0x49C1C6: push    eax
-0x49C1C7: call    sub_710250
+0x49C1C7: call    NiPoint3_MultiplyMatrix3
 0x49C1CC: fld     [esp+2F0h+var_294]
 0x49C1D0: fadd    [esp+2F0h+var_2B4]
 0x49C1D4: mov     eax, [esi]
@@ -222,10 +222,10 @@
 0x49C221: mov     eax, [esi]
 0x49C223: fstp    dword ptr [eax+60h]
 0x49C226: mov     ecx, [esi+4]; this
-0x49C229: call    BSRenderedTexture__UseTextureToRender
+0x49C229: call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.
 0x49C22E: push    eax; a2
 0x49C22F: push    7; a1
-0x49C231: call    NiRenderer_BeginScene
+0x49C231: call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.
 0x49C236: mov     ecx, ds:0B3F928h
 0x49C23C: mov     eax, [esi]
 0x49C23E: mov     edi, 1
@@ -250,7 +250,7 @@
 0x49C281: push    edi; a3
 0x49C282: push    ecx
 0x49C283: fstp    dword ptr [esp+2ECh+var_2F0+4]; a2
-0x49C286: call    NiAVObject_UpdateNiAVObject
+0x49C286: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x49C28B: mov     eax, ds:0B35230h
 0x49C290: mov     cl, [eax+18h]
 0x49C293: or      [eax+18h], di
@@ -267,17 +267,17 @@
 0x49C2BA: mov     esi, edi
 0x49C2BC: push    esi
 0x49C2BD: call    sub_7B2130
-0x49C2C2: mov     ecx, ds:0B333C4h
+0x49C2C2: mov     ecx, ds:0B333C4h; this
 0x49C2C8: add     esp, 4
-0x49C2CB: push    esi
+0x49C2CB: push    esi; firstPerson
 0x49C2CC: mov     byte ptr [esp+2E8h+var_25C], al
-0x49C2D3: call    PlayerCharacter_GetPlayerNode
+0x49C2D3: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x49C2D8: mov     al, [eax+18h]
-0x49C2DB: mov     ecx, ds:0B333C4h
+0x49C2DB: mov     ecx, ds:0B333C4h; this
 0x49C2E1: and     al, 1
-0x49C2E3: push    esi
+0x49C2E3: push    esi; firstPerson
 0x49C2E4: mov     [esp+2E8h+var_2B6], al
-0x49C2E8: call    PlayerCharacter_GetPlayerNode
+0x49C2E8: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x49C2ED: fldz
 0x49C2EF: or      [eax+18h], si
 0x49C2F3: mov     ecx, ds:0B333A0h
@@ -299,7 +299,7 @@
 0x49C328: mov     [ebx+5Ch], ecx
 0x49C32B: fstp    dword ptr [esp+2ECh+var_2F0+4]; a2
 0x49C32E: mov     ecx, ebx; this
-0x49C330: call    NiAVObject_UpdateNiAVObject
+0x49C330: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x49C335: mov     eax, ds:0B36094h
 0x49C33A: test    eax, eax
 0x49C33C: mov     byte ptr [esp+2E4h+var_2C8+2], 0
@@ -326,7 +326,7 @@
 0x49C38A: fstp    [esp+2ECh+var_2D0]
 0x49C38E: add     esp, 8
 0x49C391: fld     [esp+2E4h+var_2D0]
-0x49C395: call    Double_To_SInt32
+0x49C395: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x49C39A: mov     [esp+2E4h+var_2C4], eax
 0x49C39E: xor     edi, edi
 0x49C3A0: cmp     edi, esi
@@ -356,14 +356,14 @@
 0x49C3EA: jb      short loc_49C40B
 0x49C3EC: test    esi, esi
 0x49C3EE: jz      short loc_49C40B
-0x49C3F0: mov     ecx, [esi]; this
+0x49C3F0: mov     ecx, [esi]; object
 0x49C3F2: test    ecx, ecx
 0x49C3F4: jz      short loc_49C40B
-0x49C3F6: call    TESObjectCELL_GetNiNode?
+0x49C3F6: call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.
 0x49C3FB: test    eax, eax
 0x49C3FD: jz      short loc_49C40B
-0x49C3FF: mov     ecx, [esi]; this
-0x49C401: call    TESObjectCELL_GetNiNode?
+0x49C3FF: mov     ecx, [esi]; object
+0x49C401: call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.
 0x49C406: or      word ptr [eax+18h], 1
 0x49C40B: add     [esp+2E4h+var_2CC], 1
 0x49C410: mov     esi, ds:0B06A2Ch
@@ -377,7 +377,7 @@
 0x49C42F: mov     edx, [ecx]
 0x49C431: mov     [esp+2E4h+var_4], 1
 0x49C43C: mov     dword ptr [esp+2E4h+a2+0Ch], edx
-0x49C443: call    InitBSShaderAccumulator
+0x49C443: call    BSShaderAccumulator_GetOrCreateGlobal
 0x49C448: mov     esi, ds:0A28078h
 0x49C44E: mov     edi, eax
 0x49C450: test    edi, edi
@@ -424,39 +424,39 @@
 0x49C4BE: call    dword ptr ds:0A28078h
 0x49C4C4: mov     esi, [esp+2E4h+var_2C0]
 0x49C4C8: mov     edi, [esp+2E4h+var_2D0]
-0x49C4CC: mov     byte ptr ds:0B42CE8h, 1
+0x49C4CC: mov     byte ptr ds:0B42CE8h, 1; Enter water-reflection accumulation: set g_bWaterReflectionPassActive after swapping in the dedicated reflection accumulator and immediately before BeginAccumulation plus reflected scene traversal. This is the sole set-to-one write.
 0x49C4D3: mov     eax, [esi]
 0x49C4D5: mov     edx, [edi]
 0x49C4D7: push    eax
 0x49C4D8: mov     eax, [edx+4Ch]
 0x49C4DB: mov     ecx, edi
-0x49C4DD: call    eax
+0x49C4DD: call    eax; Call BSShaderAccumulator vtable +0x4C BeginAccumulation with the reflection camera while g_bWaterReflectionPassActive is set.
 0x49C4DF: mov     byte ptr [edi+21E0h], 1
 0x49C4E6: mov     eax, [esi]
 0x49C4E8: mov     ecx, ds:0B3F928h
 0x49C4EE: push    eax
-0x49C4EF: call    SetCameraViewProj
+0x49C4EF: call    SetCameraViewProj; MoonSugarEffect build 16: after temporary camera sway is restored, plugin calls SetCameraViewProj(g_Renderer, restoredCamera) to reset renderer camera globals/view/projection/viewport to the original camera state.
 0x49C4F4: mov     eax, [esi]
 0x49C4F6: add     eax, 0ECh ; 'ì'
 0x49C4FB: push    eax; a2
 0x49C4FC: lea     ecx, [esp+2E8h+a2]; this
-0x49C503: call    NiCullingProcess__SetFrustum
+0x49C503: call    NiCullingProcess__SetFrustum; Oblivion NiCullingProcess::SetFrustum copies the camera frustum, rebuilds six culling planes, and sets the active-plane mask to 0x3F.
 0x49C508: lea     ecx, [esp+2E4h+a2]
 0x49C50F: push    ecx; a2
 0x49C510: mov     ecx, ebx; this
-0x49C512: call    NiAVObject_Render
+0x49C512: call    NiAVObject_Render; Retail visibility dispatch honors NiAVObject AppCulled flag bit 0 before OnVisible traversal.
 0x49C517: mov     edx, ds:0B43104h
 0x49C51D: mov     eax, [edx+280h]
 0x49C523: mov     ecx, ds:0B3F928h
 0x49C529: mov     [esp+2E4h+var_2B0], eax
 0x49C52D: mov     eax, [esi]
 0x49C52F: push    eax
-0x49C530: call    SetCameraViewProj
+0x49C530: call    SetCameraViewProj; MoonSugarEffect build 16: after temporary camera sway is restored, plugin calls SetCameraViewProj(g_Renderer, restoredCamera) to reset renderer camera globals/view/projection/viewport to the original camera state.
 0x49C535: mov     esi, [esi]
 0x49C537: add     esi, 0ECh ; 'ì'
 0x49C53D: push    esi; a2
 0x49C53E: lea     ecx, [esp+2E8h+a2]; this
-0x49C545: call    NiCullingProcess__SetFrustum
+0x49C545: call    NiCullingProcess__SetFrustum; Oblivion NiCullingProcess::SetFrustum copies the camera frustum, rebuilds six culling planes, and sets the active-plane mask to 0x3F.
 0x49C54A: mov     eax, ds:0B43104h
 0x49C54F: lea     esi, [eax+980h]
 0x49C555: mov     ecx, 10h
@@ -588,11 +588,11 @@
 0x49C75F: mov     ecx, [ebp+arg_4]; this
 0x49C762: lea     eax, [esp+2E4h+a2]
 0x49C769: push    eax; a2
-0x49C76A: call    NiAVObject_Render
+0x49C76A: call    NiAVObject_Render; Retail visibility dispatch honors NiAVObject AppCulled flag bit 0 before OnVisible traversal.
 0x49C76F: mov     ecx, [esp+2E4h+var_2D0]
 0x49C773: mov     edx, [ecx]
 0x49C775: mov     eax, [edx+50h]
-0x49C778: call    eax
+0x49C778: call    eax; Call the dedicated reflection accumulator's vtable +0x50 Flush before restoring the renderer's previous accumulator and clearing the reflection flag.
 0x49C77A: mov     ecx, ds:0B43104h
 0x49C780: mov     ecx, [ecx+8ACh]
 0x49C786: mov     edx, [ecx]
@@ -617,7 +617,7 @@
 0x49C7C9: mov     esi, [edi+8]
 0x49C7CC: add     edi, 8
 0x49C7CF: cmp     esi, [esp+2E4h+var_2CC]
-0x49C7D3: jz      short loc_49C809
+0x49C7D3: jz      short WaterManager_LeaveReflectionAccumulation
 0x49C7D5: test    esi, esi
 0x49C7D7: jz      short loc_49C7F5
 0x49C7D9: lea     eax, [esi+4]
@@ -635,13 +635,13 @@
 0x49C7F5: mov     eax, [esp+2E4h+var_2CC]
 0x49C7F9: test    eax, eax
 0x49C7FB: mov     [edi], eax
-0x49C7FD: jz      short loc_49C809
+0x49C7FD: jz      short WaterManager_LeaveReflectionAccumulation
 0x49C7FF: add     eax, 4
 0x49C802: push    eax; lpAddend
 0x49C803: call    dword ptr ds:0A28078h
-0x49C809: mov     byte ptr ds:0B42CE8h, 0
+0x49C809: mov     byte ptr ds:0B42CE8h, 0; Leave water-reflection accumulation: clear g_bWaterReflectionPassActive only after the reflection accumulator was flushed and the previous renderer accumulator restored. This is the sole clear write.
 0x49C810: mov     dword ptr [esp+2E4h+a2+0Ch], 0
-0x49C81B: call    NiRenderer_EndScene
+0x49C81B: call    NiRenderer_EndScene; Oblivion EndScene wrapper: drain the complete render-target stack, end the active group, and end the D3D scene only when this wrapper owned SceneState2.
 0x49C820: cmp     [esp+2E4h+var_2B5], 0
 0x49C825: mov     eax, ds:0B35230h
 0x49C82A: mov     edi, 1
@@ -673,10 +673,10 @@
 0x49C880: mov     [ebx+5Ch], ecx
 0x49C883: fstp    dword ptr [esp+2ECh+var_2F0+4]; a2
 0x49C886: mov     ecx, ebx; this
-0x49C888: call    NiAVObject_UpdateNiAVObject
-0x49C88D: mov     ecx, ds:0B333C4h
-0x49C893: push    edi
-0x49C894: call    PlayerCharacter_GetPlayerNode
+0x49C888: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
+0x49C88D: mov     ecx, ds:0B333C4h; this
+0x49C893: push    edi; firstPerson
+0x49C894: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x49C899: cmp     [esp+2E4h+var_2B6], 0
 0x49C89E: jz      short loc_49C8A6
 0x49C8A0: or      [eax+18h], di
@@ -716,14 +716,14 @@
 0x49C905: jb      short loc_49C927
 0x49C907: test    edi, edi
 0x49C909: jz      short loc_49C927
-0x49C90B: mov     ecx, [edi]; this
+0x49C90B: mov     ecx, [edi]; object
 0x49C90D: test    ecx, ecx
 0x49C90F: jz      short loc_49C927
-0x49C911: call    TESObjectCELL_GetNiNode?
+0x49C911: call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.
 0x49C916: test    eax, eax
 0x49C918: jz      short loc_49C927
-0x49C91A: mov     ecx, [edi]; this
-0x49C91C: call    TESObjectCELL_GetNiNode?
+0x49C91A: mov     ecx, [edi]; object
+0x49C91C: call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.
 0x49C921: and     word ptr [eax+18h], 0FFFEh
 0x49C927: add     ebx, 1
 0x49C92A: jmp     short loc_49C8D0
@@ -811,7 +811,7 @@
 0x49CA1B: call    eax
 0x49CA1D: lea     ecx, [esp+2E4h+a2]; this
 0x49CA24: mov     [esp+2E4h+var_4], 0FFFFFFFFh
-0x49CA2F: call    ??1BSCullingProcess@@UAE@XZ; BSCullingProcess::~BSCullingProcess(void)
+0x49CA2F: call    ??1BSCullingProcess@@UAE@XZ; Oblivion BSCullingProcess destructor restores its base culling-process state; no separate visible-array allocation is released here.
 0x49CA34: mov     ecx, dword ptr [esp+2E4h+var_C]
 0x49CA3B: mov     large fs:0, ecx
 0x49CA42: pop     ecx

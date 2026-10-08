@@ -52,7 +52,6 @@
 0x905A31: mov     edi, [ebp+arg_8]
 0x905A34: mov     [esp+250h+var_230], eax
 0x905A38: jmp     short loc_905A40
-0x905A3A: align 10h
 0x905A40: mov     ecx, [esp+250h+var_238]
 0x905A44: mov     edx, [esi]
 0x905A46: lea     eax, [esp+250h+var_210]

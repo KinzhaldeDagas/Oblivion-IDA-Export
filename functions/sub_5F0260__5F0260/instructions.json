@@ -22,5 +22,203 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x5EA790",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5EA791",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5EA793",
+    "line": "mov     eax, [esi+2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5EA796",
+    "line": "mov     ecx, [esi+30h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5EA799",
+    "line": "mov     edx, [esi+34h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5EA79C",
+    "line": "mov     [esi+0E8h], eax",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x5EA7A2",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5EA7A4",
+    "line": "mov     [esi+0ECh], ecx",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x5EA7AA",
+    "line": "mov     [esi+0F0h], edx",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x5EA7B0",
+    "line": "mov     edx, [eax+1E0h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x5EA7B6",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5EA7B8",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x5EA7BA",
+    "line": "fstp    dword ptr [esi+0F4h]",
+    "mnemonic": "fstp",
+    "size": 6
+  },
+  {
+    "ea": "0x5EA7C0",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5EA7C2",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5EA7C7",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5EA7C9",
+    "line": "jz      short loc_5EA7EC",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5EA7CB",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5EA7CD",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5EA7D2",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5EA7D4",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5EA7D9",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5EA7DB",
+    "line": "jz      short loc_5EA7EC",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5EA7DD",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5EA7DF",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5EA7E4",
+    "line": "mov     [esi+0F8h], eax",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x5EA7EA",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5EA7EB",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x5EA7EC",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5EA7EE",
+    "line": "call    TESObjectREFR_GetWorldSpace",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5EA7F3",
+    "line": "mov     [esi+0F8h], eax",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x5EA7F9",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5EA7FA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
   }
 ]

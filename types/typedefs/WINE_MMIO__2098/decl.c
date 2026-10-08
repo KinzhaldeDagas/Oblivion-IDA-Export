@@ -1,1 +1,1 @@
-WINE_MMIO
+typedef tagWINE_MMIO WINE_MMIO;

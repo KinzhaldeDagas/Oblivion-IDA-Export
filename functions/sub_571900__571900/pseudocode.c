@@ -1,29 +1,20 @@
-NiAVObject *__userpurge sub_571900@<eax>(
-        char bp0@<bpl>,
-        double st5_0@<st2>,
-        double st6_0@<st1>,
-        double st7_0@<st0>,
-        char *a2,
-        float a6,
-        float a7,
-        int a8,
-        int a9)
+NiAVObject *__stdcall sub_571900(char *a2, float arg4, float a3, int a4, int a5)
 {
   int GlobalScriptStateObj; // eax
-  double v11; // st7
-  int v12; // ebp
-  NiNode *v13; // eax
-  NiAVObject *v14; // esi
-  __int16 v15; // ax
-  int v16; // edx
+  int v11; // ebp
+  NiNode *v12; // eax
+  NiAVObject *v13; // esi
+  __int16 v14; // ax
+  int v15; // edx
+  int v16; // edi
   int v17; // edi
-  int v18; // edi
-  int Singleton; // eax
-  float *v20; // eax
-  InterfaceManager *v21; // eax
-  float v22; // [esp+0h] [ebp-70h]
-  float v23; // [esp+4h] [ebp-6Ch]
-  float v24; // [esp+8h] [ebp-68h]
+  _DWORD *Singleton; // eax
+  float *v19; // eax
+  InterfaceManager *v20; // eax
+  float v21; // [esp+0h] [ebp-70h]
+  int v22; // [esp+4h] [ebp-6Ch]
+  float v23; // [esp+8h] [ebp-68h]
+  double v24; // [esp+Ch] [ebp-64h]
   float v25; // [esp+18h] [ebp-58h]
   int v30; // [esp+3Ch] [ebp-34h]
   int v31; // [esp+3Ch] [ebp-34h]
@@ -40,15 +31,15 @@ NiAVObject *__userpurge sub_571900@<eax>(
   int v43; // [esp+6Ch] [ebp-4h]
   int v46; // [esp+80h] [ebp+10h]
 
-  if ( !*a2 )
-    return 0;
-  GlobalScriptStateObj = GetGlobalScriptStateObj__(1);
-  if ( (!GlobalScriptStateObj || *(char *)(GlobalScriptStateObj + 0x31) <= 0)
+  if ( !*a2 ) /*0x57192d*/
+    return 0; /*0x57192d*/
+  GlobalScriptStateObj = GetGlobalScriptStateObj__(1); /*0x57193a*/
+  if ( (!GlobalScriptStateObj || *(char *)(GlobalScriptStateObj + 0x31) <= 0) /*0x571956*/
     && !InterfaceManager_GetSingleton(0, 1)->debugTextOn )
   {
-    return 0;
+    return 0; /*0x571931*/
   }
-  __asm
+  __asm /*0x57195b*/
   {
     fild    dword ptr ds:0B06C50h
     fidiv   dword ptr ds:0B06C4Ch
@@ -59,72 +50,72 @@ NiAVObject *__userpurge sub_571900@<eax>(
     fmul    [esp+50h+var_3C]
     fstp    [esp+50h+arg_4]
   }
-  sub_57D7F0();
-  __asm
+  UI_GetVirtualScreenHeight(); /*0x571983*/
+  __asm /*0x571988*/
   {
     fsub    [esp+50h+arg_8]
     fstp    [esp+50h+var_34]
   }
-  v11 = sub_57D7F0();
-  __asm { fmul    qword ptr ds:0A2FAA0h }
-  v12 = 1;
-  __asm
+  UI_GetVirtualScreenHeight(); /*0x571990*/
+  __asm { fmul    qword ptr ds:0A2FAA0h } /*0x571995*/
+  v11 = 1; /*0x5719a2*/
+  __asm /*0x5719a7*/
   {
     fsubr   [esp+50h+var_34]
     fstp    [esp+50h+arg_8]
   }
-  if ( a8 == 3 )
+  if ( a4 == 3 ) /*0x5719af*/
   {
-    v12 = 4;
+    v11 = 4; /*0x5719b1*/
   }
-  else if ( a8 == 2 )
+  else if ( a4 == 2 ) /*0x5719bb*/
   {
-    v12 = 2;
+    v11 = 2; /*0x5719bd*/
   }
-  v40 = 0;
-  v13 = (NiNode *)FormHeapAlloc(0xDCu);
-  v43 = 0;
-  if ( v13 )
-    v14 = (NiAVObject *)NiNode::NiNode(v13, 0);
+  v40 = 0; /*0x5719c4*/
+  v12 = (NiNode *)FormHeapAlloc(0xDCu); /*0x5719c8*/
+  v43 = 0; /*0x5719d6*/
+  if ( v12 ) /*0x5719da*/
+    v13 = (NiAVObject *)NiNode::NiNode(v12, 0); /*0x5719e4*/
   else
-    v14 = 0;
-  v15 = word_B12DAE;
-  v16 = *(_DWORD *)&rDebugTextColor_Menu;
-  v17 = (unsigned __int8)BYTE1(*(_DWORD *)&rDebugTextColor_Menu);
-  v46 = (unsigned __int8)HIBYTE(word_B12DAE);
-  v43 = 0xFFFFFFFF;
-  __asm { fild    [esp+50h+arg_C] }
+    v13 = 0; /*0x5719e8*/
+  v14 = word_B12DAE; /*0x5719ea*/
+  v15 = *(_DWORD *)&rDebugTextColor_Menu; /*0x5719f0*/
+  v16 = (unsigned __int8)BYTE1(*(_DWORD *)&rDebugTextColor_Menu); /*0x5719fb*/
+  v46 = (unsigned __int8)HIBYTE(word_B12DAE); /*0x5719fe*/
+  v43 = 0xFFFFFFFF; /*0x571a02*/
+  __asm { fild    [esp+50h+arg_C] } /*0x571a0a*/
   __asm
   {
     fld     qword ptr ds:0A3DDD8h
     fdiv    st(1), st
   }
-  v30 = (unsigned __int8)v15;
-  __asm
+  v30 = (unsigned __int8)v14; /*0x571a26*/
+  __asm /*0x571a2a*/
   {
     fxch    st(1)
     fstp    [esp+50h+arg_C]
     fild    dword ptr [esp+50h+var_34]
   }
   __asm { fdiv    st, st(1) }
-  v31 = v17;
-  __asm
+  v31 = v16; /*0x571a40*/
+  __asm /*0x571a44*/
   {
     fstp    [esp+50h+var_3C]
     fild    dword ptr [esp+50h+var_34]
   }
   __asm { fdiv    st, st(1) }
-  v32 = (unsigned __int8)v16;
-  __asm
+  v32 = (unsigned __int8)v15; /*0x571a58*/
+  __asm /*0x571a5c*/
   {
     fstp    [esp+50h+var_38]
     fild    dword ptr [esp+50h+var_34]
   }
   __asm { fdivrp  st(1), st }
-  v41.m_data = 0;
-  v41.m_dataLen = 0;
-  v41.m_bufLen = 0;
-  __asm
+  v41.m_data = 0; /*0x571a78*/
+  v41.m_dataLen = 0; /*0x571a7c*/
+  v41.m_bufLen = 0; /*0x571a81*/
+  __asm /*0x571a86*/
   {
     fstp    dword ptr [esp+58h+var_34]
     fld     [esp+58h+arg_C]
@@ -136,60 +127,53 @@ NiAVObject *__userpurge sub_571900@<eax>(
     fld     dword ptr [esp+58h+var_34]
     fstp    [esp+58h+var_10]
   }
-  BSStringT_Set(&v41, a2, 0);
-  v18 = a9;
-  v43 = 1;
-  if ( !a9 )
-    v18 = dword_B12DB4;
-  Singleton = FontManager_GetSingleton(v11, st6_0, st5_0);
-  __asm { fldz }
-  __asm { fst     [esp+70h+var_68]; float }
+  BSStringT_Set(&v41, a2, 0); /*0x571aaa*/
+  v17 = a5; /*0x571aaf*/
+  v43 = 1; /*0x571ab5*/
+  if ( !a5 ) /*0x571abd*/
+    v17 = dword_B12DB4; /*0x571abf*/
+  Singleton = FontManager_GetSingleton(); /*0x571ac5*/
+  __asm { fldz } /*0x571aca*/
+  HIDWORD(v24) = &v40; /*0x571adc*/
+  LODWORD(v24) = &v41; /*0x571ae1*/
+  __asm { fst     [esp+70h+var_68]; float } /*0x571ae5*/
   __asm
   {
     fst     [esp+70h+var_6C]; float
     fstp    [esp+70h+var_70]; float
   }
-  v20 = (float *)sub_575870(
-                   *(_DWORD **)(Singleton + 4 * v18 - 4),
-                   v22,
-                   v23,
-                   v24,
-                   (int)&v41,
-                   (int)&v40,
-                   v12,
-                   (int)v42,
-                   1);
-  __asm { fldz }
+  v19 = (float *)sub_575870((float **)Singleton[v17 - 1], v21, v22, v23, v24, COERCE_DOUBLE(__PAIR64__(v42, v11)), 1); /*0x571af2*/
+  __asm { fldz } /*0x571af7*/
   __asm { fst     dword ptr [esp+54h+var_34] }
   __asm { fst     dword ptr [esp+58h+var_34+4] }
   __asm { fstp    [esp+58h+var_2C] }
-  v20[0x15] = v34;
-  v20[0x16] = v36;
-  v20[0x17] = v38;
-  ((void (__thiscall *)(NiAVObject *, float *, int))v14->vtbl[1].super.super.Destructor)(v14, v20, 1);
-  v14->members.m_flags &= ~1u;
-  if ( InterfaceManager_GetSingleton(0, 1)->unk070 )
+  v19[0x15] = v34; /*0x571b10*/
+  v19[0x16] = v36; /*0x571b17*/
+  v19[0x17] = v38; /*0x571b1a*/
+  ((void (__thiscall *)(NiAVObject *, float *, int))v13->vtbl[1].super.super.Destructor)(v13, v19, 1); /*0x571b27*/
+  v13->members.m_flags &= ~1u; /*0x571b29*/
+  if ( InterfaceManager_GetSingleton(0, 1)->unk070 ) /*0x571b3a*/
   {
-    v21 = InterfaceManager_GetSingleton(0, 1);
-    ((void (__thiscall *)(NiNode *, NiAVObject *, int))v21->unk070->vtbl->AddObject)(v21->unk070, v14, 1);
+    v20 = InterfaceManager_GetSingleton(0, 1); /*0x571b42*/
+    ((void (__thiscall *)(NiNode *, NiAVObject *, int))v20->unk070->vtbl->AddObject)(v20->unk070, v13, 1); /*0x571b58*/
   }
-  __asm
+  __asm /*0x571b5a*/
   {
     fld     [esp+50h+arg_4]
     fstp    dword ptr [esp+50h+var_34]
   }
   __asm { fld     dword ptr ds:0A5A5F8h }
-  v14->members.m_localTransform.pos.x = v35;
-  __asm { fstp    dword ptr [esp+50h+var_34+4] }
+  v13->members.m_localTransform.pos.x = v35; /*0x571b6c*/
+  __asm { fstp    dword ptr [esp+50h+var_34+4] } /*0x571b6f*/
   __asm { fld     [esp+50h+arg_8] }
-  v14->members.m_localTransform.pos.y = v37;
-  __asm { fstp    [esp+50h+var_2C] }
-  v14->members.m_localTransform.pos.z = v39;
-  NiAVObject_InitializePropertyState(v14);
-  NiNode_UpdateDynamicEffectState((NiNode *)v14);
-  __asm { fldz }
-  __asm { fstp    [esp+58h+var_58]; a2 }
-  NiAVObject_UpdateNiAVObject(v14, v25, 1);
-  FormHeapFree((unsigned int)v41.m_data);
-  return v14;
+  v13->members.m_localTransform.pos.y = v37; /*0x571b7b*/
+  __asm { fstp    [esp+50h+var_2C] } /*0x571b7e*/
+  v13->members.m_localTransform.pos.z = v39; /*0x571b88*/
+  NiAVObject_InitializePropertyState(v13); /*0x571b8b*/
+  NiNode_UpdateDynamicEffectState((NiNode *)v13); /*0x571b92*/
+  __asm { fldz } /*0x571b97*/
+  __asm { fstp    [esp+58h+var_5C+4]; a2 }
+  NiAVObject_UpdateNiAVObject(v13, v25, 1); /*0x571ba1*/
+  FormHeapFree((unsigned int)v41.m_data); /*0x571bab*/
+  return v13; /*0x571bb5*/
 }

@@ -1,5 +1,5 @@
 int sub_9F6EB0()
 {
-  GameSetting_ConstrAndReg(&dword_B39120, (int)"sEyestilt", (int)"Eyes tilt inward/outward");
-  return atexit(sub_A22960);
+  GameSetting_ConstrAndReg(&stru_B39120, "sEyestilt", "Eyes tilt inward/outward"); /*0x9f6ebf*/
+  return atexit(sub_A22960); /*0x9f6ecf*/
 }

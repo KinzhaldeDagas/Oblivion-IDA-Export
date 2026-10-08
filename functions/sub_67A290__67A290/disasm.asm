@@ -5,7 +5,7 @@
 0x67A295: push    edi
 0x67A296: lea     ecx, [esi+68h]; this
 0x67A299: mov     [esp+10h+var_4], 0
-0x67A2A1: call    sub_7616D0
+0x67A2A1: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x67A2A6: mov     ebx, eax
 0x67A2A8: mov     eax, [esp+10h+arg_0]
 0x67A2AC: mov     edi, [eax+0Ch]
@@ -76,7 +76,7 @@
 0x67A355: test    esi, esi
 0x67A357: jz      loc_67A3EB
 0x67A35D: mov     ecx, esi; this
-0x67A35F: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x67A35F: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x67A364: cmp     eax, 3
 0x67A367: jz      loc_67A3EB
 0x67A36D: mov     edx, [esi]
@@ -106,7 +106,7 @@
 0x67A3A9: push    edi; int
 0x67A3AA: push    0; int
 0x67A3AC: mov     ecx, esi; int
-0x67A3AE: call    Actor_GetDetectionLevel
+0x67A3AE: call    Actor_GetDetectionLevelAgainstActor; Oblivion authoritative detection pipeline. Computes this detector's level against a target actor: obtains cached/physical LOS and distance, target light, boot weight, movement/running/sneak/combat/underwater/exterior state, Luck-modified Sneak values, detector Blindness AV 0x2D, target Chameleon AV 0x2E, and target Invisibility AV 0x2F; then calls Calc_DetectionLevel and updates the detector's process entry. Positive means detected. Fallout only corroborates the GetDetectionLevelAgainstActor terminology.
 0x67A3B3: test    eax, eax
 0x67A3B5: jle     short loc_67A3EB
 0x67A3B7: cmp     [esp+10h+var_4], 0
@@ -130,9 +130,9 @@
 0x67A3F6: mov     esi, [esp+10h+var_4]
 0x67A3FA: test    esi, esi
 0x67A3FC: jz      short loc_67A417
-0x67A3FE: push    offset sub_673B70
+0x67A3FE: push    offset CompareActorDistanceToPlayer
 0x67A403: mov     ecx, esi
-0x67A405: call    sub_5B27A0
+0x67A405: call    BSSimpleList_SortViaArrayAndRebuild
 0x67A40A: pop     edi
 0x67A40B: mov     eax, esi
 0x67A40D: pop     esi

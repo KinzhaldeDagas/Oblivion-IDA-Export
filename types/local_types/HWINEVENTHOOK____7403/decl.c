@@ -1,1 +1,4 @@
-HWINEVENTHOOK__
+struct HWINEVENTHOOK__
+{
+int unused;
+};

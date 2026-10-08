@@ -14,10 +14,10 @@
 0x42D6EF: mov     large fs:0, eax
 0x42D6F5: mov     esi, ecx
 0x42D6F7: mov     [esp+24h+var_10], esi
-0x42D6FB: mov     eax, [esp+24h+arg_10]
-0x42D6FF: mov     ecx, [esp+24h+arg_C]
+0x42D6FB: mov     eax, dword ptr [esp+24h+arg_C+4]
+0x42D6FF: mov     ecx, dword ptr [esp+24h+arg_C]
 0x42D703: mov     edx, [esp+24h+arg_8]
-0x42D707: mov     ebp, dword ptr [esp+24h+ArgList]
+0x42D707: mov     ebp, [esp+24h+ArgList]
 0x42D70B: push    eax
 0x42D70C: mov     eax, [esp+28h+arg_4]
 0x42D710: push    ecx
@@ -61,7 +61,7 @@
 0x42D78D: push    offset aErrorInitializ; "Error initializing ZLib inflate stream "...
 0x42D792: call    PrintError
 0x42D797: push    edi
-0x42D798: call    FormHeapFree
+0x42D798: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x42D79D: add     esp, 0Ch
 0x42D7A0: mov     dword ptr [esi+15Ch], 0
 0x42D7AA: jmp     short loc_42D7DC
@@ -88,3 +88,12 @@
 0x42D7ED: pop     ebx
 0x42D7EE: add     esp, 10h
 0x42D7F1: retn    14h
+0x9ABB10: mov     ecx, [ebp-10h]; this
+0x9ABB13: jmp     ??1ArchiveFile@@UAE@XZ; ArchiveFile::~ArchiveFile(void)
+0x9ABB18: mov     edx, [esp+arg_4]
+0x9ABB1C: lea     eax, [edx-14h]
+0x9ABB1F: mov     ecx, [edx-18h]
+0x9ABB22: xor     ecx, eax
+0x9ABB24: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9ABB29: mov     eax, offset stru_AD88F8
+0x9ABB2E: jmp     ___CxxFrameHandler3

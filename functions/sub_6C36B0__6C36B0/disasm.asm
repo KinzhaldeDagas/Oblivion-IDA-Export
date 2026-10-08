@@ -1,11 +1,11 @@
-0x6C36B0: push    esi
+0x6C36B0: push    esi; Return true only when an active NiTimeController can reuse its previous interpolation result. Active bit is NiTimeController.flags +0x08 bit 3. On an application-time change, computeScaledTimeOnUpdate +0x2C normally calls virtual ComputeScaledTime and refreshes cachedScaledTime +0x28; forceUpdate +0x38 forces one changed result and is cleared. If +0x2C is zero, report changed without recomputing +0x28.
 0x6C36B1: mov     esi, ecx
 0x6C36B3: mov     al, [esi+8]
 0x6C36B6: shr     al, 3
 0x6C36B9: test    al, 1
 0x6C36BB: jz      short loc_6C3721
 0x6C36BD: fld     dword ptr [esi+20h]
-0x6C36C0: fld     [esp+4+arg_0]
+0x6C36C0: fld     [esp+4+applicationTime]
 0x6C36C4: fld     st
 0x6C36C6: fucomp  st(2)
 0x6C36C8: fnstsw  ax
@@ -19,11 +19,11 @@
 0x6C36DD: mov     edx, [esi]
 0x6C36DF: mov     eax, [edx+64h]
 0x6C36E2: push    ecx
-0x6C36E3: fstp    [esp+8+var_8]
+0x6C36E3: fstp    [esp+8+scaledTime]
 0x6C36E6: call    eax
-0x6C36E8: fstp    [esp+4+arg_0]
+0x6C36E8: fstp    [esp+4+applicationTime]
 0x6C36EC: fld     dword ptr [esi+28h]
-0x6C36EF: fld     [esp+4+arg_0]
+0x6C36EF: fld     [esp+4+applicationTime]
 0x6C36F3: fld     st
 0x6C36F5: fucomp  st(2)
 0x6C36F7: fnstsw  ax

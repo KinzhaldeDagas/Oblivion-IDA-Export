@@ -1,604 +1,604 @@
-_DWORD *__usercall sub_491CE0@<eax>(int a1@<ecx>, double st6_0@<st1>, double a3@<st0>)
+tListEntryData *__usercall sub_491CE0@<eax>(ExtraContainerChanges_Data *a1@<ecx>, double st6_0@<st1>, double a3@<st0>)
 {
-  int v4; // edi
-  TESObjectREFR *v5; // ecx
+  ExtraContainerChanges_Data *v3; // edi
+  TESObjectREFR *owner; // ecx
   TESContainer *Container; // eax
-  bool v7; // zf
+  bool v6; // zf
   TESContainer_Entry *p_list; // eax
-  void *v9; // edi
-  TESForm::ModReferenceList **v10; // eax
-  int v11; // eax
-  int *v12; // ebx
-  void *v13; // ebp
-  tListVoid *next; // edi
-  ExtraDataList *data; // esi
-  double v16; // st5
+  void *v8; // edi
+  TESForm::ModReferenceList **v9; // eax
+  EntryData *EntryForForm; // eax
+  int *v11; // ebx
+  void *v12; // ebp
+  int *extendData; // edi
+  ExtraDataList *v14; // esi
+  double v15; // st5
   int ExtraCount; // ebx
-  int v18; // esi
-  void (__thiscall ***v19)(_DWORD, int); // edi
-  _DWORD *v20; // eax
-  int v21; // eax
-  int v22; // esi
-  ExtraDataList *v23; // ebx
-  ExtraDataList **v24; // edi
-  ExtraDataList **v25; // eax
-  _DWORD *v26; // eax
-  ExtraDataList *v27; // esi
+  int v17; // esi
+  void (__thiscall ***v18)(_DWORD, int); // edi
+  _DWORD *v19; // eax
+  int v20; // eax
+  int v21; // esi
+  ExtraDataList *v22; // ebx
+  ExtraDataList **v23; // edi
+  ExtraDataList **v24; // eax
+  _DWORD *v25; // eax
+  ExtraDataList *v26; // esi
   BSExtraDataVtbl *ExtraScript; // eax
-  char *v29; // eax
+  char *v28; // eax
   char **EventList; // eax
-  TESChildCELL *v31; // eax
-  TESForm *v32; // ebp
-  Script *v33; // eax
-  _DWORD *v34; // eax
+  TESChildCELL *v30; // eax
+  TESForm *v31; // ebp
+  Script *v32; // eax
+  _DWORD *v33; // eax
   int countDelta; // esi
-  tListVoid *extendData; // ebx
-  ExtraDataList *v37; // esi
-  char *v38; // eax
-  char **v39; // eax
-  TESChildCELL *v40; // eax
-  TESForm *v41; // edi
-  Script *v42; // eax
-  int v43; // ebp
-  tListVoid *v44; // ebx
-  _DWORD *v45; // eax
-  ExtraDataList *v46; // esi
-  int v47; // eax
-  char *v48; // eax
-  char **v49; // eax
-  TESChildCELL *v50; // eax
-  TESForm *v51; // edi
-  char **v52; // eax
-  EntryData *v53; // ebp
-  ExtraDataList *v54; // esi
-  int v55; // edi
-  ExtraDataList *v56; // eax
-  int v57; // eax
-  tListVoid *v58; // ebx
-  ExtraDataList *v59; // edi
-  int v60; // edi
-  ExtraDataList *v61; // esi
+  tListVoid *next; // ebx
+  ExtraDataList *data; // esi
+  char *v37; // eax
+  char **v38; // eax
+  TESChildCELL *v39; // eax
+  TESForm *v40; // edi
+  Script *v41; // eax
+  int v42; // ebp
+  tListVoid *v43; // ebx
+  _DWORD *v44; // eax
+  ExtraDataList *v45; // esi
+  BSExtraDataVtbl *v46; // eax
+  char *v47; // eax
+  char **v48; // eax
+  TESChildCELL *v49; // eax
+  TESForm *v50; // edi
+  char **v51; // eax
+  EntryData *v52; // ebp
+  ExtraDataList *v53; // esi
+  int v54; // edi
+  ExtraDataList *v55; // eax
+  int v56; // eax
+  tListVoid *v57; // ebx
+  ExtraDataList *v58; // edi
+  int v59; // edi
+  ExtraDataList *v60; // esi
   int count; // eax
-  int v63; // esi
-  BSSimpleList_VoidPtr *v64; // ebp
-  BSSimpleList_VoidPtr::NodeVoid *v65; // eax
-  ExtraDataList *v66; // edi
-  ExtraDataList *v67; // ebx
+  int v62; // esi
+  BSSimpleList_VoidPtr *v63; // ebp
+  BSSimpleList_VoidPtr::NodeVoid *v64; // eax
+  ExtraDataList *v65; // edi
+  ExtraDataList *v66; // ebx
   BSExtraData *j; // esi
-  tListVoid *v69; // esi
-  _DWORD *result; // eax
-  TESObjectREFR *v71; // ecx
-  int v72; // ebp
+  tListVoid *v68; // esi
+  tListEntryData *result; // eax
+  TESObjectREFR *v70; // ecx
+  EntryData *v71; // ebp
   SInt32 FormCount; // esi
-  TESObjectREFR *v74; // ecx
-  TESContainer *v75; // eax
-  void *v76; // ebx
-  ExtraDataList **v77; // edi
-  ExtraDataList *v78; // esi
-  double v79; // st5
-  int v80; // ebp
-  int v81; // eax
-  int v82; // esi
-  ExtraDataList *v83; // edi
-  ExtraDataList **v84; // edi
-  ExtraDataList **v85; // eax
-  _DWORD *v86; // ebx
-  _DWORD *v87; // eax
-  ExtraDataList *v88; // esi
-  BSExtraDataVtbl *v89; // eax
-  char *v90; // eax
-  char **v91; // eax
-  TESChildCELL *v92; // eax
-  TESForm *v93; // ebp
-  Script *v94; // eax
-  int v95; // eax
-  ExtraDataList **v96; // eax
-  int v97; // edi
-  _DWORD *v98; // eax
-  int v99; // ebx
-  ExtraDataList **v100; // esi
-  int v101; // ecx
-  ExtraDataList **v102; // eax
-  ExtraDataList *v103; // ebp
-  char *v104; // eax
-  char **v105; // eax
-  TESChildCELL *v106; // eax
-  TESForm *v107; // ebx
-  ExtraDataList **v108; // esi
-  ExtraDataList *v109; // edi
-  Script *v110; // esi
-  char **v111; // eax
-  ExtraDataList **v112; // ebx
-  _DWORD *v113; // eax
-  ExtraDataList *v114; // ebp
-  ExtraDataList **v115; // esi
-  ExtraDataList *v116; // edi
-  BSExtraDataVtbl *v117; // eax
-  char *v118; // eax
-  char **v119; // eax
-  TESChildCELL *v120; // eax
-  TESForm *v121; // esi
-  char **v122; // eax
-  ExtraDataList **v123; // eax
-  TESObjectREFR *v124; // ecx
-  SInt32 v125; // ebp
-  TESObjectREFR *v126; // ecx
-  TESContainer *v127; // eax
-  ExtraDataList **v128; // esi
-  ExtraDataList *v129; // ecx
-  ExtraDataList **v130; // esi
-  ExtraDataList **v131; // esi
-  int v132; // edi
-  signed __int16 v133; // ax
-  int v134; // eax
-  ExtraDataList **v135; // edi
-  ExtraDataList *v136; // esi
-  ExtraDataList **v137; // esi
-  ExtraDataList *v138; // edi
-  unsigned int *v139; // ebp
-  unsigned int v140; // esi
-  void (__thiscall ***v141)(_DWORD, int); // edi
-  _DWORD *v142; // eax
-  unsigned int v143; // ebx
-  unsigned int v144; // esi
-  unsigned int v145; // edi
-  signed __int16 v146; // ax
-  ExtraDataList **v147; // edi
-  ExtraDataList **v148; // eax
-  ExtraDataList *v149; // ebp
-  ExtraDataList *v150; // ebx
+  TESObjectREFR *v73; // ecx
+  TESContainer *v74; // eax
+  void *v75; // ebx
+  int *v76; // edi
+  ExtraDataList *v77; // esi
+  double v78; // st5
+  int v79; // ebp
+  int v80; // eax
+  int v81; // esi
+  ExtraDataList *v82; // edi
+  ExtraDataList **v83; // edi
+  ExtraDataList **v84; // eax
+  _DWORD *v85; // ebx
+  _DWORD *v86; // eax
+  ExtraDataList *v87; // esi
+  BSExtraDataVtbl *v88; // eax
+  char *v89; // eax
+  char **v90; // eax
+  TESChildCELL *v91; // eax
+  TESForm *v92; // ebp
+  Script *v93; // eax
+  int v94; // eax
+  ExtraDataList **v95; // eax
+  EntryData *v96; // edi
+  _DWORD *v97; // eax
+  BSExtraDataVtbl *v98; // ebx
+  int *v99; // esi
+  int v100; // ecx
+  int *v101; // eax
+  ExtraDataList *v102; // ebp
+  char *v103; // eax
+  char **v104; // eax
+  TESChildCELL *v105; // eax
+  TESForm *v106; // ebx
+  ExtraDataList **v107; // esi
+  ExtraDataList *v108; // edi
+  Script *v109; // esi
+  char **v110; // eax
+  ExtraDataList **v111; // ebx
+  _DWORD *v112; // eax
+  ExtraDataList *v113; // ebp
+  int *v114; // esi
+  ExtraDataList *v115; // edi
+  BSExtraDataVtbl *v116; // eax
+  char *v117; // eax
+  char **v118; // eax
+  TESChildCELL *v119; // eax
+  TESForm *v120; // esi
+  char **v121; // eax
+  ExtraDataList **v122; // eax
+  TESObjectREFR *v123; // ecx
+  SInt32 v124; // ebp
+  TESObjectREFR *v125; // ecx
+  TESContainer *v126; // eax
+  ExtraDataList **v127; // esi
+  ExtraDataList *v128; // ecx
+  ExtraDataList **v129; // esi
+  int *v130; // esi
+  int v131; // edi
+  signed __int16 v132; // ax
+  SInt32 v133; // eax
+  int *v134; // edi
+  ExtraDataList *v135; // esi
+  int *v136; // esi
+  ExtraDataList *v137; // edi
+  unsigned int *v138; // ebp
+  int *v139; // esi
+  void (__thiscall ***v140)(_DWORD, int); // edi
+  int *v141; // eax
+  unsigned int v142; // ebx
+  unsigned int v143; // esi
+  unsigned int v144; // edi
+  signed __int16 v145; // ax
+  ExtraDataList **v146; // edi
+  ExtraDataList **v147; // eax
+  ExtraDataList *v148; // ebp
+  ExtraDataList *v149; // ebx
   BSExtraData *k; // esi
-  ExtraDataList **v152; // eax
+  ExtraDataList **v151; // eax
   BSExtraData *m_data; // esi
   char **ExtraScriptEventList; // [esp+4h] [ebp-60h]
+  char **v154; // [esp+4h] [ebp-60h]
   char **v155; // [esp+4h] [ebp-60h]
-  char **v156; // [esp+4h] [ebp-60h]
+  EntryData *v156; // [esp+24h] [ebp-40h]
   EntryData *v157; // [esp+24h] [ebp-40h]
-  int v158; // [esp+24h] [ebp-40h]
-  TESForm *type; // [esp+2Ch] [ebp-38h]
-  _BYTE *v161; // [esp+2Ch] [ebp-38h]
+  TESForm *form; // [esp+2Ch] [ebp-38h]
+  TESForm *forma; // [esp+2Ch] [ebp-38h]
   int i; // [esp+30h] [ebp-34h]
-  Script *v163; // [esp+30h] [ebp-34h]
-  int v164; // [esp+30h] [ebp-34h]
-  ExtraDataList *v165; // [esp+30h] [ebp-34h]
-  ExtraDataList **v166; // [esp+30h] [ebp-34h]
-  int v167; // [esp+30h] [ebp-34h]
-  TESContainer_Entry *v168; // [esp+34h] [ebp-30h]
-  ExtraDataList **v169; // [esp+34h] [ebp-30h]
-  Script *v170; // [esp+34h] [ebp-30h]
-  _DWORD *a2; // [esp+38h] [ebp-2Ch]
+  BSExtraDataVtbl *v162; // [esp+30h] [ebp-34h]
+  int v163; // [esp+30h] [ebp-34h]
+  ExtraDataList *v164; // [esp+30h] [ebp-34h]
+  int *v165; // [esp+30h] [ebp-34h]
+  int v166; // [esp+30h] [ebp-34h]
+  TESContainer_Entry *v167; // [esp+34h] [ebp-30h]
+  int *v168; // [esp+34h] [ebp-30h]
+  Script *v169; // [esp+34h] [ebp-30h]
+  tListEntryData *a2; // [esp+38h] [ebp-2Ch]
+  int v171; // [esp+3Ch] [ebp-28h]
   int v172; // [esp+3Ch] [ebp-28h]
-  int v173; // [esp+3Ch] [ebp-28h]
-  int v174; // [esp+40h] [ebp-24h]
+  int v173; // [esp+40h] [ebp-24h]
+  int v174; // [esp+44h] [ebp-20h]
   int v175; // [esp+44h] [ebp-20h]
-  int v176; // [esp+44h] [ebp-20h]
-  int v177; // [esp+48h] [ebp-1Ch]
+  int v176; // [esp+48h] [ebp-1Ch]
   double HealthData; // [esp+4Ch] [ebp-18h]
-  double v179; // [esp+4Ch] [ebp-18h]
+  double v178; // [esp+4Ch] [ebp-18h]
 
-  v4 = a1;
-  v5 = *(TESObjectREFR **)(a1 + 4);
-  if ( v5 )
-    Container = TESObjectREFR_GetContainer(v5);
+  v3 = a1; /*0x491d0d*/
+  owner = a1->owner; /*0x491d13*/
+  if ( owner ) /*0x491d18*/
+    Container = TESObjectREFR_GetContainer(owner); /*0x491d1a*/
   else
-    Container = 0;
-  v7 = &Container->list == 0;
-  p_list = &Container->list;
-  v168 = p_list;
-  if ( !v7 )
+    Container = 0; /*0x491d21*/
+  v6 = &Container->list == 0; /*0x491d23*/
+  p_list = &Container->list; /*0x491d23*/
+  v167 = p_list; /*0x491d26*/
+  if ( !v6 )
   {
     while ( 1 )
     {
-      if ( !p_list->next && !p_list->data )
-        goto LABEL_156;
-      type = p_list->data->type;
-      v9 = OblivionDynamicCast(
-             type,
+      if ( !p_list->next && !p_list->data ) /*0x491d3f*/
+        goto LABEL_156; /*0x491d3f*/
+      form = p_list->data->type; /*0x491d5b*/
+      v8 = OblivionDynamicCast( /*0x491d65*/
+             form,
              0,
              (struct _s_RTTICompleteObjectLocator *)&TESBoundObject `RTTI Type Descriptor',
              &TESLevItem `RTTI Type Descriptor',
              0);
-      v10 = sub_4691B0((TESObjectARMO *)type);
-      if ( !type || v9 || v10 && !TESBipedModelForm_IsPlayable(v10) )
-        goto LABEL_155;
-      ContainerExtraData_GetEntryForForm((_DWORD **)a1, (int)type, 1, 0);
-      v12 = (int *)v11;
-      v157 = (EntryData *)v11;
-      if ( v11 )
+      v9 = sub_4691B0((TESObjectARMO *)form); /*0x491d67*/
+      if ( !form || v8 || v9 && !TESBipedModelForm_IsPlayable(v9) ) /*0x491d85*/
+        goto LABEL_155; /*0x491d8c*/
+      EntryForForm = ContainerExtraData_GetEntryForForm(a1, form, 1, 0); /*0x491d9f*/
+      v11 = (int *)EntryForForm; /*0x491da4*/
+      v156 = EntryForForm; /*0x491da8*/
+      if ( EntryForForm )
       {
-        v13 = OblivionDynamicCast(
-                *(void **)(v11 + 8),
+        v12 = OblivionDynamicCast( /*0x491dc9*/
+                EntryForForm->type,
                 0,
                 (struct _s_RTTICompleteObjectLocator *)&TESBoundObject `RTTI Type Descriptor',
                 &TESHealthForm `RTTI Type Descriptor',
                 0);
-        if ( v13 )
+        if ( v12 ) /*0x491dd0*/
         {
-          next = (tListVoid *)*v12;
-          if ( *v12 )
+          extendData = (int *)*v11; /*0x491dd6*/
+          if ( *v11 ) /*0x491dd6*/
           {
-            do
+            do /*0x491de0*/
             {
-              data = (ExtraDataList *)next->node.data;
-              if ( !next->node.data )
-                break;
-              if ( ExtraDataList_GetHealthData((ExtraDataList *)next->node.data) <= flt_A30634 )
-                goto LABEL_24;
-              HealthData = ExtraDataList_GetHealthData(data);
-              v177 = (*(int (__thiscall **)(void *))(*(_DWORD *)v13 + 0x10))(v13);
-              v16 = (double)v177;
-              if ( v177 < 0 )
-                v16 = v16 + flt_A2FC78;
-              if ( v16 != HealthData )
-                goto LABEL_24;
-              sub_41F610(data);
-              ExtraCount = ExtraDataList_GetExtraCount(data);
-              sub_41F620(data);
-              if ( data->members.m_data )
+              v14 = (ExtraDataList *)*extendData; /*0x491de0*/
+              if ( !*extendData ) /*0x491de4*/
+                break; /*0x491de4*/
+              if ( ExtraDataList_GetHealthData((ExtraDataList *)*extendData) <= kTerrainLODQuadRayDirectionZ ) /*0x491dfc*/
+                goto LABEL_24; /*0x491dfc*/
+              HealthData = ExtraDataList_GetHealthData(v14); /*0x491e05*/
+              v176 = (*(int (__thiscall **)(void *))(*(_DWORD *)v12 + 0x10))(v12); /*0x491e15*/
+              v15 = (double)v176; /*0x491e19*/
+              if ( v176 < 0 ) /*0x491e1d*/
+                v15 = v15 + flt_A2FC78; /*0x491e1f*/
+              if ( v15 != HealthData ) /*0x491e2e*/
+                goto LABEL_24; /*0x491e2e*/
+              sub_41F610(v14); /*0x491e32*/
+              ExtraCount = ExtraDataList_GetExtraCount(v14); /*0x491e40*/
+              sub_41F620(v14); /*0x491e43*/
+              if ( v14->members.m_data ) /*0x491e48*/
               {
-                ExtraDataList_SetExtraCount(data, ExtraCount);
+                ExtraDataList_SetExtraCount(v14, ExtraCount); /*0x491e6b*/
 LABEL_24:
-                next = (tListVoid *)next->node.next;
-                goto LABEL_25;
+                extendData = (int *)extendData[1]; /*0x491e70*/
+                goto LABEL_25; /*0x491e70*/
               }
-              BSSimpleList_Remove(next, (int)data);
-              (*(void (__thiscall **)(ExtraDataList *, int))data->vtbl)(data, 1);
-              next = v157->extendData;
+              BSSimpleList_Remove(extendData, (int)v14); /*0x491e51*/
+              (*(void (__thiscall **)(ExtraDataList *, int))v14->vtbl)(v14, 1); /*0x491e5e*/
+              extendData = (int *)v156->extendData; /*0x491e64*/
 LABEL_25:
-              v12 = (int *)v157;
+              v11 = (int *)v156; /*0x491e73*/
             }
-            while ( next );
+            while ( extendData ); /*0x491de0*/
           }
         }
-        if ( sub_469980((int)type) && *(PlayerCharacter **)(a1 + 4) == TESDataHandler_g_PlayerRef )
+        if ( sub_469980((int)form) && (PlayerCharacter *)a1->owner == reference ) /*0x491e9d*/
         {
-          v18 = *v12;
-          if ( *v12 )
+          v17 = *v11; /*0x491e9f*/
+          if ( *v11 ) /*0x491e9f*/
           {
-            while ( 1 )
+            while ( 1 ) /*0x491ea5*/
             {
-              v19 = *(void (__thiscall ****)(_DWORD, int))v18;
-              if ( !*(_DWORD *)v18 )
-                break;
-              v20 = *(_DWORD **)(v18 + 4);
-              if ( v20 )
+              v18 = *(void (__thiscall ****)(_DWORD, int))v17; /*0x491ea5*/
+              if ( !*(_DWORD *)v17 ) /*0x491ea5*/
+                break; /*0x491ea5*/
+              v19 = *(_DWORD **)(v17 + 4); /*0x491eab*/
+              if ( v19 ) /*0x491eb0*/
               {
-                *(_DWORD *)(v18 + 4) = v20[1];
-                *(_DWORD *)v18 = *v20;
-                FormHeapFree((unsigned int)v20);
+                *(_DWORD *)(v17 + 4) = v19[1]; /*0x491eb5*/
+                *(_DWORD *)v17 = *v19; /*0x491ebb*/
+                FormHeapFree((unsigned int)v19); /*0x491ebd*/
               }
               else
               {
-                *(_DWORD *)v18 = 0;
+                *(_DWORD *)v17 = 0; /*0x491ec7*/
               }
-              if ( v19 )
-                (**v19)(v19, 1);
+              if ( v18 ) /*0x491ecf*/
+                (**v18)(v18, 1); /*0x491ed9*/
             }
           }
         }
-        sub_484F20(v12);
-        if ( v21 )
+        sub_484F20(v11); /*0x491edf*/
+        if ( v20 )
         {
-          v22 = *v12;
-          for ( i = *v12; v22; i = v22 )
+          v21 = *v11; /*0x491eec*/
+          for ( i = *v11; v21; i = v21 )
           {
-            v23 = *(ExtraDataList **)v22;
-            if ( !*(_DWORD *)v22 )
-              break;
-            if ( ExtraDataList_GetExtraScript(*(ExtraDataList **)v22) )
+            v22 = *(ExtraDataList **)v21; /*0x491f00*/
+            if ( !*(_DWORD *)v21 ) /*0x491f00*/
+              break; /*0x491f04*/
+            if ( ExtraDataList_GetExtraScript(*(ExtraDataList **)v21) )
             {
-              v24 = *(ExtraDataList ***)(v22 + 4);
-              while ( v24 )
+              v23 = *(ExtraDataList ***)(v21 + 4); /*0x491f19*/
+              while ( v23 )
               {
-                if ( !*v24 )
-                  break;
-                if ( v23 == *v24 )
+                if ( !*v23 ) /*0x491f24*/
+                  break; /*0x491f28*/
+                if ( v22 == *v23 )
                 {
-                  v25 = (ExtraDataList **)v24[1];
-                  if ( v25 )
+                  v24 = (ExtraDataList **)v23[1]; /*0x491f36*/
+                  if ( v24 ) /*0x491f3b*/
                   {
-                    v24[1] = v25[1];
-                    *v24 = *v25;
-                    FormHeapFree((unsigned int)v25);
+                    v23[1] = v24[1]; /*0x491f40*/
+                    *v23 = *v24; /*0x491f46*/
+                    FormHeapFree((unsigned int)v24); /*0x491f48*/
                   }
                   else
                   {
-                    *v24 = 0;
+                    *v23 = 0; /*0x491f52*/
                   }
-                  v26 = (_DWORD *)FormHeapAlloc(0x14u);
-                  v27 = v26 ? (ExtraDataList *)ExtraDataList_constr(v26) : 0;
-                  ExtraScript = ExtraDataList_GetExtraScript(v23);
-                  ExtraDataList_AddScript(v27, (int)ExtraScript);
-                  v29 = (char *)ExtraDataList_GetExtraScript(v27);
-                  EventList = Script_CreateEventList(v29);
-                  ExtraDataList_SetScriptEventList(v27, (int)EventList);
-                  v31 = (TESChildCELL *)FormHeapAlloc(0x58u);
-                  v32 = v31 ? (TESForm *)TESObjectREFR_constr(v31) : 0;
-                  TESForm_MakeTemporary(v32);
-                  ExtraScriptEventList = (char **)ExtraDataList_GetExtraScriptEventList(v27);
-                  v33 = (Script *)ExtraDataList_GetExtraScript(v23);
-                  a3 = Script_Run(v33, a3, st6_0, (TESObjectREFR *)v32, ExtraScriptEventList, 0, 0);
-                  BSSimpleList_PushBack(v24, (int)v27);
-                  v24 = *(ExtraDataList ***)(i + 4);
-                  v22 = i;
+                  v25 = (_DWORD *)FormHeapAlloc(0x14u); /*0x491f5a*/
+                  v26 = v25 ? (ExtraDataList *)ExtraDataList_constr(v25) : 0;
+                  ExtraScript = ExtraDataList_GetExtraScript(v22); /*0x491f89*/
+                  ExtraDataList_AddScript(v26, ExtraScript); /*0x491f91*/
+                  v28 = (char *)ExtraDataList_GetExtraScript(v26); /*0x491f98*/
+                  EventList = Script_CreateEventList(v28); /*0x491f9f*/
+                  ExtraDataList_SetScriptEventList(v26, (int)EventList); /*0x491fa7*/
+                  v30 = (TESChildCELL *)FormHeapAlloc(0x58u); /*0x491fae*/
+                  v31 = v30 ? (TESForm *)TESObjectREFR_constr(v30) : 0;
+                  TESForm_MakeTemporary(v31); /*0x491fdd*/
+                  ExtraScriptEventList = (char **)ExtraDataList_GetExtraScriptEventList(v26); /*0x491fed*/
+                  v32 = (Script *)ExtraDataList_GetExtraScript(v22); /*0x491ff1*/
+                  a3 = Script_Run(v32, a3, st6_0, (TESObjectREFR *)v31, ExtraScriptEventList, 0, 0); /*0x491ff8*/
+                  BSSimpleList_PushBack(v23, (int)v26); /*0x492000*/
+                  v23 = *(ExtraDataList ***)(i + 4); /*0x492009*/
+                  v21 = i; /*0x49200c*/
                 }
                 else
                 {
-                  v24 = (ExtraDataList **)v24[1];
+                  v23 = (ExtraDataList **)v23[1]; /*0x492010*/
                 }
               }
             }
-            v22 = *(_DWORD *)(v22 + 4);
+            v21 = *(_DWORD *)(v21 + 4); /*0x49201b*/
           }
         }
       }
-      v34 = OblivionDynamicCast(
-              type,
+      v33 = OblivionDynamicCast( /*0x49203d*/
+              form,
               0,
               (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
               &TESScriptableForm `RTTI Type Descriptor',
               0);
-      v163 = v34 ? (Script *)v34[1] : 0;
-      if ( !v157 )
-        break;
-      countDelta = v157->countDelta;
-      if ( countDelta >= 0 )
+      v162 = v33 ? (BSExtraDataVtbl *)v33[1] : 0;
+      if ( !v156 ) /*0x492060*/
+        break; /*0x492060*/
+      countDelta = v156->countDelta; /*0x49207a*/
+      if ( countDelta >= 0 ) /*0x49207f*/
       {
-        if ( v163 )
+        if ( v162 ) /*0x49208a*/
         {
-          extendData = v157->extendData;
-          if ( !v157->extendData || BSSimpleList_IsEmpty((BSSimpleList_VoidPtr *)v157->extendData) )
+          next = v156->extendData; /*0x492094*/
+          if ( !v156->extendData || BSSimpleList_IsEmpty((BSSimpleList_VoidPtr *)v156->extendData) ) /*0x4920a0*/
           {
-            a3 = ExtraContainerChanges_RunScripts((float *)a1, a3, st6_0);
+            a3 = ExtraContainerChanges_RunScripts(a1, a3, st6_0); /*0x49223d*/
           }
           else
           {
-            v172 = countDelta - BSSimpleList_Count(extendData);
-            do
+            v171 = countDelta - BSSimpleList_Count(next); /*0x4920b6*/
+            do /*0x49215d*/
             {
-              v37 = (ExtraDataList *)extendData->node.data;
-              if ( !extendData->node.data )
-                break;
-              if ( !ExtraDataList_GetExtraScript((ExtraDataList *)extendData->node.data) )
+              data = (ExtraDataList *)next->node.data; /*0x4920bf*/
+              if ( !next->node.data ) /*0x4920bf*/
+                break; /*0x4920c3*/
+              if ( !ExtraDataList_GetExtraScript((ExtraDataList *)next->node.data) ) /*0x4920cb*/
               {
-                ExtraDataList_AddScript(v37, (int)v163);
-                v38 = (char *)ExtraDataList_GetExtraScript(v37);
-                v39 = Script_CreateEventList(v38);
-                ExtraDataList_SetScriptEventList(v37, (int)v39);
-                v40 = (TESChildCELL *)FormHeapAlloc(0x58u);
-                if ( v40 )
-                  v41 = (TESForm *)TESObjectREFR_constr(v40);
+                ExtraDataList_AddScript(data, v162); /*0x4920df*/
+                v37 = (char *)ExtraDataList_GetExtraScript(data); /*0x4920e6*/
+                v38 = Script_CreateEventList(v37); /*0x4920ed*/
+                ExtraDataList_SetScriptEventList(data, (int)v38); /*0x4920f5*/
+                v39 = (TESChildCELL *)FormHeapAlloc(0x58u); /*0x4920fc*/
+                if ( v39 ) /*0x49210e*/
+                  v40 = (TESForm *)TESObjectREFR_constr(v39); /*0x492117*/
                 else
-                  v41 = 0;
-                TESForm_MakeTemporary(v41);
-                v155 = (char **)ExtraDataList_GetExtraScriptEventList(v37);
-                sub_484F20((int *)v157);
-                a3 = Script_Run(v42, a3, st6_0, (TESObjectREFR *)v41, v155, 0, 0);
-                if ( v41 )
-                  v41->vtbl->Destroy(v41, 1);
+                  v40 = 0; /*0x49211b*/
+                TESForm_MakeTemporary(v40); /*0x492127*/
+                v154 = (char **)ExtraDataList_GetExtraScriptEventList(data); /*0x49213b*/
+                sub_484F20((int *)v156); /*0x49213d*/
+                a3 = Script_Run(v41, a3, st6_0, (TESObjectREFR *)v40, v154, 0, 0); /*0x492144*/
+                if ( v40 ) /*0x49214b*/
+                  v40->vtbl->Destroy(v40, 1); /*0x492156*/
               }
-              extendData = (tListVoid *)extendData->node.next;
+              next = (tListVoid *)next->node.next; /*0x492158*/
             }
-            while ( extendData );
-            v43 = v172;
-            v44 = v157->extendData;
-            if ( v172 > 0 )
+            while ( next ); /*0x49215d*/
+            v42 = v171; /*0x492163*/
+            v43 = v156->extendData; /*0x49216d*/
+            if ( v171 > 0 ) /*0x49216f*/
             {
-              do
+              do /*0x492231*/
               {
-                v45 = (_DWORD *)FormHeapAlloc(0x14u);
-                if ( v45 )
-                  v46 = (ExtraDataList *)ExtraDataList_constr(v45);
+                v44 = (_DWORD *)FormHeapAlloc(0x14u); /*0x492177*/
+                if ( v44 ) /*0x49218d*/
+                  v45 = (ExtraDataList *)ExtraDataList_constr(v44); /*0x492196*/
                 else
-                  v46 = 0;
-                sub_484F20((int *)v157);
-                ExtraDataList_AddScript(v46, v47);
-                v48 = (char *)ExtraDataList_GetExtraScript(v46);
-                v49 = Script_CreateEventList(v48);
-                ExtraDataList_SetScriptEventList(v46, (int)v49);
-                v50 = (TESChildCELL *)FormHeapAlloc(0x58u);
-                if ( v50 )
-                  v51 = (TESForm *)TESObjectREFR_constr(v50);
+                  v45 = 0; /*0x49219a*/
+                sub_484F20((int *)v156); /*0x4921a8*/
+                ExtraDataList_AddScript(v45, v46); /*0x4921b0*/
+                v47 = (char *)ExtraDataList_GetExtraScript(v45); /*0x4921b7*/
+                v48 = Script_CreateEventList(v47); /*0x4921be*/
+                ExtraDataList_SetScriptEventList(v45, (int)v48); /*0x4921c6*/
+                v49 = (TESChildCELL *)FormHeapAlloc(0x58u); /*0x4921cd*/
+                if ( v49 ) /*0x4921e3*/
+                  v50 = (TESForm *)TESObjectREFR_constr(v49); /*0x4921ec*/
                 else
-                  v51 = 0;
-                TESForm_MakeTemporary(v51);
-                v52 = (char **)ExtraDataList_GetExtraScriptEventList(v46);
-                a3 = Script_Run(v163, a3, st6_0, (TESObjectREFR *)v51, v52, 0, 0);
-                if ( v51 )
-                  v51->vtbl->Destroy(v51, 1);
-                BSSimpleList_PushFront(v44, (int)v46);
-                --v43;
+                  v50 = 0; /*0x4921f0*/
+                TESForm_MakeTemporary(v50); /*0x4921fc*/
+                v51 = (char **)ExtraDataList_GetExtraScriptEventList(v45); /*0x492207*/
+                a3 = Script_Run((Script *)v162, a3, st6_0, (TESObjectREFR *)v50, v51, 0, 0); /*0x492212*/
+                if ( v50 ) /*0x492219*/
+                  v50->vtbl->Destroy(v50, 1); /*0x492224*/
+                BSSimpleList_PushFront(v43, (int)v45); /*0x492229*/
+                --v42; /*0x49222e*/
               }
-              while ( v43 );
+              while ( v42 ); /*0x492231*/
             }
           }
         }
       }
-      if ( type->member.type != kFormType_Ammo )
-        goto LABEL_119;
-      v53 = v157;
-      v54 = 0;
-      if ( *(PlayerCharacter **)(a1 + 4) == TESDataHandler_g_PlayerRef )
+      if ( form->member.type != kFormType_Ammo ) /*0x49224a*/
+        goto LABEL_119; /*0x49224a*/
+      v52 = v156; /*0x492257*/
+      v53 = 0; /*0x49225b*/
+      if ( (PlayerCharacter *)a1->owner == reference ) /*0x492263*/
       {
-        v55 = (int)v157->extendData;
-        while ( v55 )
+        v54 = (int)v156->extendData; /*0x492265*/
+        while ( v54 ) /*0x492265*/
         {
-          v56 = *(ExtraDataList **)v55;
-          if ( !*(_DWORD *)v55 )
-            break;
-          v55 = *(_DWORD *)(v55 + 4);
-          v54 = v56;
-          ExtraDataList_RemoveOwner(v56);
+          v55 = *(ExtraDataList **)v54; /*0x492270*/
+          if ( !*(_DWORD *)v54 ) /*0x492270*/
+            break; /*0x492274*/
+          v54 = *(_DWORD *)(v54 + 4); /*0x492276*/
+          v53 = v55; /*0x492279*/
+          ExtraDataList_RemoveOwner(v55); /*0x49227d*/
         }
       }
-      if ( !(unsigned __int8)ContainerEntryExtraData_HasWorn(v157, 0) || sub_4846D0((TESForm *)v157) )
+      if ( !ContainerEntryExtraData_HasWorn(v156, 0) || sub_4846D0((TESForm *)v156) ) /*0x492295*/
       {
-        if ( !(unsigned __int8)ContainerEntryExtraData_HasWorn(v157, 0) || !sub_4846D0((TESForm *)v157) )
+        if ( !ContainerEntryExtraData_HasWorn(v156, 0) || !sub_4846D0((TESForm *)v156) ) /*0x4922d6*/
         {
-          if ( (unsigned __int8)ContainerEntryExtraData_HasWorn(v157, 0) )
+          if ( ContainerEntryExtraData_HasWorn(v156, 0) ) /*0x49237f*/
           {
-            if ( v157->countDelta < sub_4845D0((int *)v157) )
+            if ( v156->countDelta < sub_4845D0((int *)v156) ) /*0x492394*/
             {
 LABEL_110:
-              v157->countDelta = sub_4845D0((int *)v157);
-              goto LABEL_120;
+              v156->countDelta = sub_4845D0((int *)v156); /*0x49236f*/
+              goto LABEL_120; /*0x492379*/
             }
-            if ( v157->countDelta > sub_4845D0((int *)v157) )
+            if ( v156->countDelta > sub_4845D0((int *)v156) ) /*0x4923a8*/
             {
-              v60 = (int)v157->extendData;
-              while ( v60 )
+              v59 = (int)v156->extendData; /*0x4923aa*/
+              while ( v59 ) /*0x4923aa*/
               {
-                v61 = *(ExtraDataList **)v60;
-                if ( !*(_DWORD *)v60 )
-                  break;
-                v60 = *(_DWORD *)(v60 + 4);
-                if ( ExtraDataList_HasWorn(v61, 0) )
-                  ExtraDataList_SetExtraCount(v61, LOWORD(v157->countDelta));
+                v60 = *(ExtraDataList **)v59; /*0x4923b1*/
+                if ( !*(_DWORD *)v59 ) /*0x4923b1*/
+                  break; /*0x4923b5*/
+                v59 = *(_DWORD *)(v59 + 4); /*0x4923b7*/
+                if ( ExtraDataList_HasWorn(v60, 0) ) /*0x4923be*/
+                  ExtraDataList_SetExtraCount(v60, LOWORD(v156->countDelta)); /*0x4923ce*/
               }
             }
           }
-          goto LABEL_119;
+          goto LABEL_119; /*0x4923d5*/
         }
-        if ( v157->countDelta < 0 )
-          sub_4853B0(v157, 0, 0, 1);
-        if ( InventoryEntryData_Cleanup((ExtraDataList ***)v157) > 1 )
+        if ( v156->countDelta < 0 ) /*0x4922e7*/
+          sub_4853B0(v156, 0, 0, 1); /*0x4922f1*/
+        if ( InventoryEntryData_Cleanup((ExtraDataList ***)v156) > 1 ) /*0x492300*/
         {
-          v58 = v157->extendData;
-          if ( v157->extendData )
+          v57 = v156->extendData; /*0x492302*/
+          if ( v156->extendData ) /*0x492302*/
           {
-            while ( 2 )
+            while ( 2 ) /*0x492310*/
             {
-              v59 = (ExtraDataList *)v58->node.data;
-              if ( !v58->node.data )
-                break;
-              v58 = (tListVoid *)v58->node.next;
-              if ( ExtraDataList_HasWorn(v59, 0) )
+              v58 = (ExtraDataList *)v57->node.data; /*0x492310*/
+              if ( !v57->node.data ) /*0x492314*/
+                break; /*0x492314*/
+              v57 = (tListVoid *)v57->node.next; /*0x492316*/
+              if ( ExtraDataList_HasWorn(v58, 0) ) /*0x49231d*/
               {
-                if ( !v54 )
+                if ( !v53 ) /*0x492328*/
                 {
-                  v54 = v59;
-                  goto LABEL_108;
+                  v53 = v58; /*0x49232a*/
+                  goto LABEL_108; /*0x49232c*/
                 }
 LABEL_107:
-                BaseExtraList_Clear(v54, 1);
-                ExtraDataList_DuplicateListForContainer(v54, (int)v59);
-                SetWorn(v54, 1, 0);
-                BSSimpleList_Clear(&v157->extendData->node.data);
-                BSSimpleList_PushFront(&v157->extendData->node.data, (int)v54);
+                BaseExtraList_Clear(v53, 1); /*0x492332*/
+                ExtraDataList_DuplicateListForContainer(v53, (int)v58); /*0x49233e*/
+                SetWorn(v53, 1, 0); /*0x492349*/
+                BSSimpleList_Clear(&v156->extendData->node.data); /*0x492351*/
+                BSSimpleList_PushFront(&v156->extendData->node.data, (int)v53); /*0x49235a*/
               }
-              else if ( v54 )
+              else if ( v53 ) /*0x492330*/
               {
-                goto LABEL_107;
+                goto LABEL_107; /*0x492330*/
               }
 LABEL_108:
-              if ( !v58 )
-                break;
-              continue;
+              if ( !v57 ) /*0x492361*/
+                break; /*0x492361*/
+              continue; /*0x492361*/
             }
           }
         }
-        if ( v157->countDelta < sub_4845D0((int *)v157) )
-          goto LABEL_110;
+        if ( v156->countDelta < sub_4845D0((int *)v156) ) /*0x49236d*/
+          goto LABEL_110; /*0x49236d*/
 LABEL_119:
-        v53 = v157;
-        goto LABEL_120;
+        v52 = v156; /*0x4923d7*/
+        goto LABEL_120; /*0x4923d7*/
       }
-      v57 = v157->countDelta;
-      if ( v57 <= 0 )
-        goto LABEL_119;
-      if ( v57 >= v168->data->count )
-        v157->countDelta = 0;
+      v56 = v156->countDelta; /*0x49229e*/
+      if ( v56 <= 0 ) /*0x4922a3*/
+        goto LABEL_119; /*0x4922a3*/
+      if ( v56 >= v167->data->count ) /*0x4922b1*/
+        v156->countDelta = 0; /*0x4922b7*/
 LABEL_120:
-      count = v168->data->count;
-      if ( count < 0 )
-        count = -count;
-      if ( v53 )
+      count = v167->data->count; /*0x4923db*/
+      if ( count < 0 ) /*0x4923e5*/
+        count = -count; /*0x4923e7*/
+      if ( v52 ) /*0x4923eb*/
       {
-        v63 = v53->countDelta + count;
-        v164 = v63;
+        v62 = v52->countDelta + count; /*0x4923f0*/
+        v163 = v62; /*0x4923f3*/
       }
       else
       {
-        v164 = count;
-        v63 = count;
+        v163 = count; /*0x4923f9*/
+        v62 = count; /*0x4923fd*/
       }
-      if ( v63 > 0 )
+      if ( v62 > 0 ) /*0x492401*/
       {
-        if ( v157 )
+        if ( v156 ) /*0x49240c*/
         {
-          v64 = (BSSimpleList_VoidPtr *)v157->extendData;
-          if ( v157->extendData )
+          v63 = (BSSimpleList_VoidPtr *)v156->extendData; /*0x492416*/
+          if ( v156->extendData ) /*0x492416*/
           {
-            if ( BSSimpleList_Count(&v157->extendData->node.data) )
+            if ( BSSimpleList_Count(&v156->extendData->node.data) ) /*0x492422*/
             {
-              while ( v63 < (unsigned int)BSSimpleList_Count(v64) )
+              while ( v62 < (unsigned int)BSSimpleList_Count(v63) ) /*0x492438*/
               {
-                v65 = v64->firstNode.next;
-                v66 = (ExtraDataList *)v64->firstNode.data;
-                if ( v65 )
+                v64 = v63->firstNode.next; /*0x492440*/
+                v65 = (ExtraDataList *)v63->firstNode.data; /*0x492445*/
+                if ( v64 ) /*0x492448*/
                 {
-                  v64->firstNode.next = v65->next;
-                  v64->firstNode.data = v65->data;
-                  FormHeapFree((unsigned int)v65);
+                  v63->firstNode.next = v64->next; /*0x49244d*/
+                  v63->firstNode.data = v64->data; /*0x492453*/
+                  FormHeapFree((unsigned int)v64); /*0x492456*/
                 }
                 else
                 {
-                  v64->firstNode.data = 0;
+                  v63->firstNode.data = 0; /*0x492460*/
                 }
-                if ( v66 )
+                if ( v65 ) /*0x492469*/
                 {
-                  v67 = (ExtraDataList *)v64->firstNode.data;
-                  if ( v64->firstNode.data )
+                  v66 = (ExtraDataList *)v63->firstNode.data; /*0x49246b*/
+                  if ( v63->firstNode.data ) /*0x49246b*/
                   {
-                    for ( j = v66->members.m_data; j; j = v66->members.m_data )
+                    for ( j = v65->members.m_data; j; j = v65->members.m_data ) /*0x492477*/
                     {
-                      if ( BaseExtraList_GetExtraData(v67, (ExtraDataType)j->members.type) )
+                      if ( BaseExtraList_GetExtraData(v66, (ExtraDataType)j->members.type) ) /*0x49248e*/
                       {
-                        BaseExtraList_RemoveExtraByPtr(v66, (int)j, 1);
+                        BaseExtraList_RemoveExtraByPtr(v65, (int)j, 1); /*0x49249c*/
                       }
                       else
                       {
-                        BaseExtraList_RemoveExtraByPtr(v66, (int)j, 0);
-                        BaseExtraList_AddExtra(v67, j);
+                        BaseExtraList_RemoveExtraByPtr(v65, (int)j, 0); /*0x4924a6*/
+                        BaseExtraList_AddExtra(v66, j); /*0x4924ae*/
                       }
                     }
                   }
-                  (*(void (__thiscall **)(ExtraDataList *, int))v66->vtbl)(v66, 1);
-                  v63 = v164;
+                  (*(void (__thiscall **)(ExtraDataList *, int))v65->vtbl)(v65, 1); /*0x4924c2*/
+                  v62 = v163; /*0x4924c4*/
                 }
               }
-              if ( BSSimpleList_IsEmpty(v64) )
+              if ( BSSimpleList_IsEmpty(v63) ) /*0x4924d9*/
               {
-                FormHeapFree((unsigned int)v157->extendData);
-                v157->extendData = 0;
+                FormHeapFree((unsigned int)v156->extendData); /*0x4924e9*/
+                v156->extendData = 0; /*0x4924f1*/
               }
               else
               {
-                v64 = (BSSimpleList_VoidPtr *)v157->extendData;
+                v63 = (BSSimpleList_VoidPtr *)v156->extendData; /*0x4924f9*/
               }
-              if ( v64 && v64->firstNode.data )
+              if ( v63 && v63->firstNode.data ) /*0x4924ff*/
               {
-                while ( v64->firstNode.data )
+                while ( v63->firstNode.data ) /*0x49250a*/
                 {
-                  if ( BaseExtraList_Count((ExtraDataList *)v64->firstNode.data) )
+                  if ( BaseExtraList_Count((ExtraDataList *)v63->firstNode.data) ) /*0x49250c*/
                   {
-                    v64 = (BSSimpleList_VoidPtr *)v64->firstNode.next;
+                    v63 = (BSSimpleList_VoidPtr *)v63->firstNode.next; /*0x49252e*/
                   }
                   else
                   {
-                    sub_67F100(v64);
-                    v69 = v157->extendData;
-                    if ( BSSimpleList_IsEmpty((BSSimpleList_VoidPtr *)v157->extendData) )
+                    BSSimpleList_PopHeadWithoutPayloadFree(v63); /*0x492518*/
+                    v68 = v156->extendData; /*0x49251d*/
+                    if ( BSSimpleList_IsEmpty((BSSimpleList_VoidPtr *)v156->extendData) ) /*0x492521*/
                     {
-                      BSSimpleList_Clear(v64);
-                      FormHeapFree((unsigned int)v64);
-                      v157->extendData = 0;
-                      break;
+                      BSSimpleList_Clear(v63); /*0x492539*/
+                      FormHeapFree((unsigned int)v63); /*0x49253f*/
+                      v156->extendData = 0; /*0x492547*/
+                      break; /*0x492547*/
                     }
-                    v64 = (BSSimpleList_VoidPtr *)v69;
+                    v63 = (BSSimpleList_VoidPtr *)v68; /*0x49252a*/
                   }
-                  if ( !v64 )
-                    break;
+                  if ( !v63 ) /*0x492533*/
+                    break; /*0x492533*/
                 }
               }
             }
@@ -606,611 +606,611 @@ LABEL_120:
         }
       }
 LABEL_155:
-      v4 = a1;
-      v168 = v168->next;
-      if ( !v168 )
-        goto LABEL_156;
-      p_list = v168;
+      v3 = a1; /*0x49254d*/
+      v167 = v167->next; /*0x49255a*/
+      if ( !v167 ) /*0x49255e*/
+        goto LABEL_156; /*0x49255e*/
+      p_list = v167; /*0x491d32*/
     }
-    if ( v163 )
-      a3 = ExtraContainerChanges_RunScripts((float *)a1, a3, st6_0);
-    goto LABEL_119;
+    if ( v162 ) /*0x492066*/
+      a3 = ExtraContainerChanges_RunScripts(a1, a3, st6_0); /*0x492070*/
+    goto LABEL_119; /*0x492075*/
   }
 LABEL_156:
-  result = *(_DWORD **)v4;
-  a2 = *(_DWORD **)v4;
-  if ( *(_DWORD *)v4 )
+  result = v3->objList; /*0x492564*/
+  a2 = v3->objList; /*0x492568*/
+  if ( v3->objList )
   {
     while ( 1 )
     {
-      result = a2;
-      if ( !a2[1] && !*a2 )
-        break;
-      v71 = *(TESObjectREFR **)(v4 + 4);
-      v72 = *a2;
-      FormCount = 0;
-      v158 = *a2;
-      if ( v71 )
+      result = a2; /*0x492578*/
+      if ( !a2->node.next && !a2->node.data ) /*0x492582*/
+        break; /*0x492582*/
+      v70 = v3->owner; /*0x49258b*/
+      v71 = a2->node.data; /*0x49258e*/
+      FormCount = 0; /*0x492590*/
+      v157 = a2->node.data; /*0x492594*/
+      if ( v70 ) /*0x492598*/
       {
-        if ( TESObjectREFR_GetContainer(v71) )
+        if ( TESObjectREFR_GetContainer(v70) ) /*0x49259a*/
         {
-          if ( v72 )
+          if ( v71 ) /*0x4925a5*/
           {
-            v74 = *(TESObjectREFR **)(v4 + 4);
-            if ( v74 )
-              v75 = TESObjectREFR_GetContainer(v74);
+            v73 = v3->owner; /*0x4925a7*/
+            if ( v73 ) /*0x4925ac*/
+              v74 = TESObjectREFR_GetContainer(v73); /*0x4925ae*/
             else
-              v75 = 0;
-            FormCount = TESContainer_GetFormCount(v75, *(TESForm **)(v72 + 8));
+              v74 = 0; /*0x4925b5*/
+            FormCount = TESContainer_GetFormCount(v74, v71->type); /*0x4925c2*/
           }
         }
       }
-      v173 = FormCount + *(_DWORD *)(v72 + 4);
-      v76 = OblivionDynamicCast(
-              *(void **)(v72 + 8),
+      v172 = FormCount + v71->countDelta; /*0x4925d5*/
+      v75 = OblivionDynamicCast( /*0x4925e4*/
+              v71->type,
               0,
               (struct _s_RTTICompleteObjectLocator *)&TESBoundObject `RTTI Type Descriptor',
               &TESHealthForm `RTTI Type Descriptor',
               0);
-      if ( v76 )
+      if ( v75 ) /*0x4925eb*/
       {
-        v77 = *(ExtraDataList ***)v72;
-        if ( *(_DWORD *)v72 )
+        v76 = (int *)v71->extendData; /*0x4925f1*/
+        if ( v71->extendData ) /*0x4925f1*/
         {
-          do
+          do /*0x492600*/
           {
-            v78 = *v77;
-            if ( !*v77 )
-              break;
-            if ( ExtraDataList_GetHealthData(*v77) <= flt_A30634 )
-              goto LABEL_178;
-            v179 = ExtraDataList_GetHealthData(v78);
-            v175 = (*(int (__thiscall **)(void *))(*(_DWORD *)v76 + 0x10))(v76);
-            v79 = (double)v175;
-            if ( v175 < 0 )
-              v79 = v79 + flt_A2FC78;
-            if ( v79 != v179 )
-              goto LABEL_178;
-            sub_41F610(v78);
-            v80 = ExtraDataList_GetExtraCount(v78);
-            sub_41F620(v78);
-            if ( v78->members.m_data )
+            v77 = (ExtraDataList *)*v76; /*0x492600*/
+            if ( !*v76 ) /*0x492604*/
+              break; /*0x492604*/
+            if ( ExtraDataList_GetHealthData((ExtraDataList *)*v76) <= kTerrainLODQuadRayDirectionZ ) /*0x49261c*/
+              goto LABEL_178; /*0x49261c*/
+            v178 = ExtraDataList_GetHealthData(v77); /*0x492625*/
+            v174 = (*(int (__thiscall **)(void *))(*(_DWORD *)v75 + 0x10))(v75); /*0x492634*/
+            v78 = (double)v174; /*0x492638*/
+            if ( v174 < 0 ) /*0x49263c*/
+              v78 = v78 + flt_A2FC78; /*0x49263e*/
+            if ( v78 != v178 ) /*0x49264d*/
+              goto LABEL_178; /*0x49264d*/
+            sub_41F610(v77); /*0x492651*/
+            v79 = ExtraDataList_GetExtraCount(v77); /*0x49265f*/
+            sub_41F620(v77); /*0x492662*/
+            if ( v77->members.m_data ) /*0x492667*/
             {
-              ExtraDataList_SetExtraCount(v78, v80);
+              ExtraDataList_SetExtraCount(v77, v79); /*0x49268a*/
 LABEL_178:
-              v77 = (ExtraDataList **)v77[1];
-              goto LABEL_179;
+              v76 = (int *)v76[1]; /*0x49268f*/
+              goto LABEL_179; /*0x49268f*/
             }
-            BSSimpleList_Remove(v77, (int)v78);
-            (*(void (__thiscall **)(ExtraDataList *, int))v78->vtbl)(v78, 1);
-            v77 = *(ExtraDataList ***)v158;
+            BSSimpleList_Remove(v76, (int)v77); /*0x492670*/
+            (*(void (__thiscall **)(ExtraDataList *, int))v77->vtbl)(v77, 1); /*0x49267d*/
+            v76 = (int *)v157->extendData; /*0x492683*/
 LABEL_179:
-            v72 = v158;
+            v71 = v157; /*0x492692*/
           }
-          while ( v77 );
+          while ( v76 ); /*0x492600*/
         }
       }
-      v81 = sub_4845D0((int *)v72);
-      v82 = *(_DWORD *)v72;
-      v176 = v81;
-      v161 = *(_BYTE **)(v72 + 8);
-      if ( *(_DWORD *)v72 )
+      v80 = sub_4845D0((int *)v71); /*0x49269e*/
+      v81 = (int)v71->extendData; /*0x4926a5*/
+      v175 = v80; /*0x4926ad*/
+      forma = v71->type; /*0x4926b1*/
+      if ( v71->extendData ) /*0x4926a5*/
       {
-        while ( 1 )
+        while ( 1 ) /*0x4926c0*/
         {
-          v83 = *(ExtraDataList **)v82;
-          if ( !*(_DWORD *)v82 )
-            goto LABEL_215;
-          if ( ExtraDataList_GetExtraScript(*(ExtraDataList **)v82) )
-            break;
-          v82 = *(_DWORD *)(v82 + 4);
-          if ( !v82 )
-            goto LABEL_215;
+          v82 = *(ExtraDataList **)v81; /*0x4926c0*/
+          if ( !*(_DWORD *)v81 ) /*0x4926c4*/
+            goto LABEL_215; /*0x4926c4*/
+          if ( ExtraDataList_GetExtraScript(*(ExtraDataList **)v81) ) /*0x4926cc*/
+            break; /*0x4926cc*/
+          v81 = *(_DWORD *)(v81 + 4); /*0x4926d5*/
+          if ( !v81 ) /*0x4926da*/
+            goto LABEL_215; /*0x4926da*/
         }
-        if ( ExtraDataList_GetExtraScript(v83) )
+        if ( ExtraDataList_GetExtraScript(v82) ) /*0x4926e3*/
         {
-          v169 = *(ExtraDataList ***)v158;
-          if ( *(_DWORD *)v158 )
+          v168 = (int *)v157->extendData; /*0x4926f8*/
+          if ( v157->extendData ) /*0x4926f8*/
           {
-            do
+            do /*0x49270a*/
             {
-              v165 = *v169;
-              if ( !*v169 )
-                break;
-              if ( ExtraDataList_GetExtraScript(*v169) )
+              v164 = (ExtraDataList *)*v168; /*0x49270a*/
+              if ( !*v168 ) /*0x49270a*/
+                break; /*0x49270a*/
+              if ( ExtraDataList_GetExtraScript((ExtraDataList *)*v168) ) /*0x49271e*/
               {
-                v84 = (ExtraDataList **)v169[1];
-                while ( v84 )
+                v83 = (ExtraDataList **)v168[1]; /*0x49272f*/
+                while ( v83 ) /*0x492734*/
                 {
-                  if ( !*v84 )
-                    break;
-                  if ( v165 == *v84 )
+                  if ( !*v83 ) /*0x49273e*/
+                    break; /*0x49273e*/
+                  if ( v164 == *v83 ) /*0x49274a*/
                   {
-                    v85 = (ExtraDataList **)v84[1];
-                    v86 = v84 + 1;
-                    if ( v85 )
+                    v84 = (ExtraDataList **)v83[1]; /*0x492750*/
+                    v85 = v83 + 1; /*0x492755*/
+                    if ( v84 ) /*0x492758*/
                     {
-                      *v86 = v85[1];
-                      *v84 = *v85;
-                      FormHeapFree((unsigned int)v85);
+                      *v85 = v84[1]; /*0x49275d*/
+                      *v83 = *v84; /*0x492762*/
+                      FormHeapFree((unsigned int)v84); /*0x492764*/
                     }
                     else
                     {
-                      *v84 = 0;
+                      *v83 = 0; /*0x49276e*/
                     }
-                    v87 = (_DWORD *)FormHeapAlloc(0x14u);
-                    if ( v87 )
-                      v88 = (ExtraDataList *)ExtraDataList_constr(v87);
+                    v86 = (_DWORD *)FormHeapAlloc(0x14u); /*0x492776*/
+                    if ( v86 ) /*0x49278c*/
+                      v87 = (ExtraDataList *)ExtraDataList_constr(v86); /*0x492795*/
                     else
-                      v88 = 0;
-                    v89 = ExtraDataList_GetExtraScript(v165);
-                    ExtraDataList_AddScript(v88, (int)v89);
-                    v90 = (char *)ExtraDataList_GetExtraScript(v88);
-                    v91 = Script_CreateEventList(v90);
-                    ExtraDataList_SetScriptEventList(v88, (int)v91);
-                    v92 = (TESChildCELL *)FormHeapAlloc(0x58u);
-                    if ( v92 )
-                      v93 = (TESForm *)TESObjectREFR_constr(v92);
+                      v87 = 0; /*0x492799*/
+                    v88 = ExtraDataList_GetExtraScript(v164); /*0x4927a5*/
+                    ExtraDataList_AddScript(v87, v88); /*0x4927ad*/
+                    v89 = (char *)ExtraDataList_GetExtraScript(v87); /*0x4927b4*/
+                    v90 = Script_CreateEventList(v89); /*0x4927bb*/
+                    ExtraDataList_SetScriptEventList(v87, (int)v90); /*0x4927c3*/
+                    v91 = (TESChildCELL *)FormHeapAlloc(0x58u); /*0x4927ca*/
+                    if ( v91 ) /*0x4927e0*/
+                      v92 = (TESForm *)TESObjectREFR_constr(v91); /*0x4927e9*/
                     else
-                      v93 = 0;
-                    TESForm_MakeTemporary(v93);
-                    v156 = (char **)ExtraDataList_GetExtraScriptEventList(v88);
-                    v94 = (Script *)ExtraDataList_GetExtraScript(v165);
-                    a3 = Script_Run(v94, a3, st6_0, (TESObjectREFR *)v93, v156, 0, 0);
-                    if ( v88 )
+                      v92 = 0; /*0x4927ed*/
+                    TESForm_MakeTemporary(v92); /*0x4927f9*/
+                    v155 = (char **)ExtraDataList_GetExtraScriptEventList(v87); /*0x49280d*/
+                    v93 = (Script *)ExtraDataList_GetExtraScript(v164); /*0x49280f*/
+                    a3 = Script_Run(v93, a3, st6_0, (TESObjectREFR *)v92, v155, 0, 0); /*0x492816*/
+                    if ( v87 ) /*0x49281d*/
                     {
-                      if ( *v86 )
+                      if ( *v85 ) /*0x49281f*/
                       {
-                        v95 = (int)(v84 + 1);
-                        do
+                        v94 = (int)(v83 + 1); /*0x492824*/
+                        do /*0x49282f*/
                         {
-                          v84 = *(ExtraDataList ***)v95;
-                          v7 = *(_DWORD *)(*(_DWORD *)v95 + 4) == 0;
-                          v95 = *(_DWORD *)v95 + 4;
+                          v83 = *(ExtraDataList ***)v94; /*0x492826*/
+                          v6 = *(_DWORD *)(*(_DWORD *)v94 + 4) == 0; /*0x492828*/
+                          v94 = *(_DWORD *)v94 + 4; /*0x49282c*/
                         }
-                        while ( !v7 );
+                        while ( !v6 ); /*0x49282f*/
                       }
-                      if ( *v84 )
+                      if ( *v83 ) /*0x492831*/
                       {
-                        v96 = (ExtraDataList **)FormHeapAlloc(8u);
-                        if ( v96 )
+                        v95 = (ExtraDataList **)FormHeapAlloc(8u); /*0x492838*/
+                        if ( v95 ) /*0x492842*/
                         {
-                          *v96 = v88;
-                          v96[1] = 0;
-                          v84[1] = (ExtraDataList *)v96;
+                          *v95 = v87; /*0x492848*/
+                          v95[1] = 0; /*0x49284a*/
+                          v83[1] = (ExtraDataList *)v95; /*0x492851*/
                         }
                         else
                         {
-                          v84[1] = 0;
+                          v83[1] = 0; /*0x49285f*/
                         }
-                        v84 = (ExtraDataList **)v169[1];
-                        continue;
+                        v83 = (ExtraDataList **)v168[1]; /*0x492854*/
+                        continue; /*0x492857*/
                       }
-                      *v84 = v88;
+                      *v83 = v87; /*0x492867*/
                     }
-                    v84 = (ExtraDataList **)v169[1];
+                    v83 = (ExtraDataList **)v168[1]; /*0x49286d*/
                   }
                   else
                   {
-                    v84 = (ExtraDataList **)v84[1];
+                    v83 = (ExtraDataList **)v83[1]; /*0x492872*/
                   }
                 }
               }
-              v169 = (ExtraDataList **)v169[1];
+              v168 = (int *)v168[1]; /*0x49287d*/
             }
-            while ( v169 );
+            while ( v168 ); /*0x49270a*/
           }
         }
       }
 LABEL_215:
-      v97 = v158;
-      if ( *(int *)(v158 + 4) >= 0 )
+      v96 = v157; /*0x492890*/
+      if ( v157->countDelta >= 0 )
       {
-        v98 = OblivionDynamicCast(
-                *(void **)(v158 + 8),
+        v97 = OblivionDynamicCast( /*0x4928b0*/
+                v157->type,
                 0,
                 (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                 &TESScriptableForm `RTTI Type Descriptor',
                 0);
-        v99 = v98 ? v98[1] : 0;
-        v170 = (Script *)v99;
-        if ( v99 )
+        v98 = v97 ? (BSExtraDataVtbl *)v97[1] : 0;
+        v169 = (Script *)v98; /*0x4928c5*/
+        if ( v98 ) /*0x4928c9*/
         {
-          v100 = *(ExtraDataList ***)v158;
-          v166 = *(ExtraDataList ***)v158;
-          if ( *(_DWORD *)v158 && (v100[1] || *v100) )
+          v99 = (int *)v157->extendData; /*0x4928cf*/
+          v165 = (int *)v157->extendData; /*0x4928d3*/
+          if ( v157->extendData && (v99[1] || *v99) ) /*0x4928e3*/
           {
-            v101 = 0;
-            v102 = *(ExtraDataList ***)v158;
-            do
+            v100 = 0; /*0x4928ef*/
+            v101 = (int *)v157->extendData; /*0x4928f1*/
+            do /*0x492900*/
             {
-              if ( *v102 )
-                ++v101;
-              v102 = (ExtraDataList **)v102[1];
+              if ( *v101 ) /*0x4928f3*/
+                ++v100; /*0x4928f8*/
+              v101 = (int *)v101[1]; /*0x4928fb*/
             }
-            while ( v102 );
-            v174 = *(_DWORD *)(v158 + 4) - v101;
-            do
+            while ( v101 ); /*0x492900*/
+            v173 = v157->countDelta - v100; /*0x492904*/
+            do /*0x4929c3*/
             {
-              v103 = *v100;
-              if ( !*v100 )
-                break;
-              if ( !ExtraDataList_GetExtraScript(*v100) )
+              v102 = (ExtraDataList *)*v99; /*0x492908*/
+              if ( !*v99 ) /*0x492908*/
+                break; /*0x49290c*/
+              if ( !ExtraDataList_GetExtraScript((ExtraDataList *)*v99) ) /*0x492914*/
               {
-                ExtraDataList_AddScript(v103, v99);
-                v104 = (char *)ExtraDataList_GetExtraScript(v103);
-                v105 = Script_CreateEventList(v104);
-                ExtraDataList_SetScriptEventList(v103, (int)v105);
-                v106 = (TESChildCELL *)FormHeapAlloc(0x58u);
-                if ( v106 )
-                  v107 = (TESForm *)TESObjectREFR_constr(v106);
+                ExtraDataList_AddScript(v102, v98); /*0x492924*/
+                v103 = (char *)ExtraDataList_GetExtraScript(v102); /*0x49292b*/
+                v104 = Script_CreateEventList(v103); /*0x492932*/
+                ExtraDataList_SetScriptEventList(v102, (int)v104); /*0x49293a*/
+                v105 = (TESChildCELL *)FormHeapAlloc(0x58u); /*0x492941*/
+                if ( v105 ) /*0x492957*/
+                  v106 = (TESForm *)TESObjectREFR_constr(v105); /*0x492960*/
                 else
-                  v107 = 0;
-                TESForm_MakeTemporary(v107);
-                v108 = *(ExtraDataList ***)v97;
-                if ( *(_DWORD *)v97 )
+                  v106 = 0; /*0x492964*/
+                TESForm_MakeTemporary(v106); /*0x492970*/
+                v107 = (ExtraDataList **)v96->extendData; /*0x492975*/
+                if ( v96->extendData ) /*0x492975*/
                 {
-                  do
+                  do /*0x492980*/
                   {
-                    v109 = *v108;
-                    if ( !*v108 )
-                      break;
-                    if ( ExtraDataList_GetExtraScript(*v108) )
+                    v108 = *v107; /*0x492980*/
+                    if ( !*v107 ) /*0x492980*/
+                      break; /*0x492980*/
+                    if ( ExtraDataList_GetExtraScript(*v107) ) /*0x492988*/
                     {
-                      v110 = (Script *)ExtraDataList_GetExtraScript(v109);
-                      goto LABEL_238;
+                      v109 = (Script *)ExtraDataList_GetExtraScript(v108); /*0x492a07*/
+                      goto LABEL_238; /*0x492a09*/
                     }
-                    v108 = (ExtraDataList **)v108[1];
+                    v107 = (ExtraDataList **)v107[1]; /*0x492991*/
                   }
-                  while ( v108 );
+                  while ( v107 ); /*0x492980*/
                 }
-                v110 = 0;
+                v109 = 0; /*0x492998*/
 LABEL_238:
-                v111 = (char **)ExtraDataList_GetExtraScriptEventList(v103);
-                a3 = Script_Run(v110, a3, st6_0, (TESObjectREFR *)v107, v111, 0, 0);
-                v97 = v158;
-                v99 = (int)v170;
-                v100 = v166;
+                v110 = (char **)ExtraDataList_GetExtraScriptEventList(v102); /*0x49299a*/
+                a3 = Script_Run(v109, a3, st6_0, (TESObjectREFR *)v106, v110, 0, 0); /*0x4929a9*/
+                v96 = v157; /*0x4929ae*/
+                v98 = (BSExtraDataVtbl *)v169; /*0x4929b6*/
+                v99 = v165; /*0x4929b6*/
               }
-              v100 = (ExtraDataList **)v100[1];
-              v166 = v100;
+              v99 = (int *)v99[1]; /*0x4929ba*/
+              v165 = v99; /*0x4929bf*/
             }
-            while ( v100 );
-            v112 = *(ExtraDataList ***)v97;
-            if ( v174 > 0 )
+            while ( v99 ); /*0x4929c3*/
+            v111 = (ExtraDataList **)v96->extendData; /*0x4929cf*/
+            if ( v173 > 0 ) /*0x4929d1*/
             {
-              v167 = v174;
-              do
+              v166 = v173; /*0x4929d7*/
+              do /*0x492af2*/
               {
-                v113 = (_DWORD *)FormHeapAlloc(0x14u);
-                if ( v113 )
-                  v114 = (ExtraDataList *)ExtraDataList_constr(v113);
+                v112 = (_DWORD *)FormHeapAlloc(0x14u); /*0x4929dd*/
+                if ( v112 ) /*0x4929f3*/
+                  v113 = (ExtraDataList *)ExtraDataList_constr(v112); /*0x4929fc*/
                 else
-                  v114 = 0;
-                v115 = *(ExtraDataList ***)v158;
-                if ( *(_DWORD *)v158 )
+                  v113 = 0; /*0x492a0b*/
+                v114 = (int *)v157->extendData; /*0x492a11*/
+                if ( v157->extendData ) /*0x492a11*/
                 {
-                  do
+                  do /*0x492a20*/
                   {
-                    v116 = *v115;
-                    if ( !*v115 )
-                      break;
-                    if ( ExtraDataList_GetExtraScript(*v115) )
+                    v115 = (ExtraDataList *)*v114; /*0x492a20*/
+                    if ( !*v114 ) /*0x492a20*/
+                      break; /*0x492a20*/
+                    if ( ExtraDataList_GetExtraScript((ExtraDataList *)*v114) ) /*0x492a28*/
                     {
-                      v117 = ExtraDataList_GetExtraScript(v116);
-                      goto LABEL_251;
+                      v116 = ExtraDataList_GetExtraScript(v115); /*0x492a7f*/
+                      goto LABEL_251; /*0x492a84*/
                     }
-                    v115 = (ExtraDataList **)v115[1];
+                    v114 = (int *)v114[1]; /*0x492a31*/
                   }
-                  while ( v115 );
+                  while ( v114 ); /*0x492a20*/
                 }
-                v117 = 0;
+                v116 = 0; /*0x492a38*/
 LABEL_251:
-                ExtraDataList_AddScript(v114, (int)v117);
-                v118 = (char *)ExtraDataList_GetExtraScript(v114);
-                v119 = Script_CreateEventList(v118);
-                ExtraDataList_SetScriptEventList(v114, (int)v119);
-                v120 = (TESChildCELL *)FormHeapAlloc(0x58u);
-                if ( v120 )
-                  v121 = (TESForm *)TESObjectREFR_constr(v120);
+                ExtraDataList_AddScript(v113, v116); /*0x492a3a*/
+                v117 = (char *)ExtraDataList_GetExtraScript(v113); /*0x492a44*/
+                v118 = Script_CreateEventList(v117); /*0x492a4b*/
+                ExtraDataList_SetScriptEventList(v113, (int)v118); /*0x492a53*/
+                v119 = (TESChildCELL *)FormHeapAlloc(0x58u); /*0x492a5a*/
+                if ( v119 ) /*0x492a70*/
+                  v120 = (TESForm *)TESObjectREFR_constr(v119); /*0x492a79*/
                 else
-                  v121 = 0;
-                TESForm_MakeTemporary(v121);
-                v122 = (char **)ExtraDataList_GetExtraScriptEventList(v114);
-                a3 = Script_Run(v170, a3, st6_0, (TESObjectREFR *)v121, v122, 0, 0);
-                if ( v121 )
-                  v121->vtbl->Destroy(v121, 1);
-                if ( v114 )
+                  v120 = 0; /*0x492a86*/
+                TESForm_MakeTemporary(v120); /*0x492a92*/
+                v121 = (char **)ExtraDataList_GetExtraScriptEventList(v113); /*0x492a9d*/
+                a3 = Script_Run(v169, a3, st6_0, (TESObjectREFR *)v120, v121, 0, 0); /*0x492aa8*/
+                if ( v120 ) /*0x492aaf*/
+                  v120->vtbl->Destroy(v120, 1); /*0x492aba*/
+                if ( v113 ) /*0x492abe*/
                 {
-                  if ( *v112 )
+                  if ( *v111 ) /*0x492ac0*/
                   {
-                    v123 = (ExtraDataList **)FormHeapAlloc(8u);
-                    if ( v123 )
+                    v122 = (ExtraDataList **)FormHeapAlloc(8u); /*0x492ac7*/
+                    if ( v122 ) /*0x492ad1*/
                     {
-                      *v123 = *v112;
-                      v123[1] = 0;
+                      *v122 = *v111; /*0x492ad5*/
+                      v122[1] = 0; /*0x492ad7*/
                     }
                     else
                     {
-                      v123 = 0;
+                      v122 = 0; /*0x492ae0*/
                     }
-                    v123[1] = v112[1];
-                    v112[1] = (ExtraDataList *)v123;
+                    v122[1] = v111[1]; /*0x492ae5*/
+                    v111[1] = (ExtraDataList *)v122; /*0x492ae8*/
                   }
-                  *v112 = v114;
+                  *v111 = v113; /*0x492aeb*/
                 }
-                --v167;
+                --v166; /*0x492aed*/
               }
-              while ( v167 );
-              v97 = v158;
+              while ( v166 ); /*0x492af2*/
+              v96 = v157; /*0x492af8*/
             }
           }
           else
           {
-            a3 = ExtraContainerChanges_RunScripts((float *)a1, a3, st6_0);
+            a3 = ExtraContainerChanges_RunScripts(a1, a3, st6_0); /*0x492b02*/
           }
         }
       }
-      if ( v161[4] == 0x22 )
+      if ( forma->member.type == kFormType_Ammo ) /*0x492b0f*/
       {
-        v124 = *(TESObjectREFR **)(a1 + 4);
-        v125 = 0;
-        if ( v124 )
+        v123 = a1->owner; /*0x492b19*/
+        v124 = 0; /*0x492b1c*/
+        if ( v123 ) /*0x492b20*/
         {
-          if ( TESObjectREFR_GetContainer(v124) )
+          if ( TESObjectREFR_GetContainer(v123) ) /*0x492b22*/
           {
-            v126 = *(TESObjectREFR **)(a1 + 4);
-            if ( v126 )
-              v127 = TESObjectREFR_GetContainer(v126);
+            v125 = a1->owner; /*0x492b2b*/
+            if ( v125 ) /*0x492b30*/
+              v126 = TESObjectREFR_GetContainer(v125); /*0x492b32*/
             else
-              v127 = 0;
-            v125 = TESContainer_GetFormCount(v127, *(TESForm **)(v97 + 8));
+              v126 = 0; /*0x492b39*/
+            v124 = TESContainer_GetFormCount(v126, v96->type); /*0x492b46*/
           }
         }
-        if ( *(PlayerCharacter **)(a1 + 4) == TESDataHandler_g_PlayerRef )
+        if ( (PlayerCharacter *)a1->owner == reference ) /*0x492b51*/
         {
-          v128 = *(ExtraDataList ***)v97;
-          if ( *(_DWORD *)v97 )
+          v127 = (ExtraDataList **)v96->extendData; /*0x492b53*/
+          if ( v96->extendData ) /*0x492b53*/
           {
-            do
+            do /*0x492b70*/
             {
-              v129 = *v128;
-              if ( !*v128 )
-                break;
-              v128 = (ExtraDataList **)v128[1];
-              ExtraDataList_RemoveOwner(v129);
+              v128 = *v127; /*0x492b60*/
+              if ( !*v127 ) /*0x492b60*/
+                break; /*0x492b64*/
+              v127 = (ExtraDataList **)v127[1]; /*0x492b66*/
+              ExtraDataList_RemoveOwner(v128); /*0x492b69*/
             }
-            while ( v128 );
+            while ( v127 ); /*0x492b70*/
           }
         }
-        v130 = *(ExtraDataList ***)v97;
-        if ( *(_DWORD *)v97 )
+        v129 = (ExtraDataList **)v96->extendData; /*0x492b72*/
+        if ( v96->extendData ) /*0x492b72*/
         {
-          while ( *v130 )
+          while ( *v129 ) /*0x492b84*/
           {
-            if ( ExtraDataList_HasWorn(*v130, 0) )
+            if ( ExtraDataList_HasWorn(*v129, 0) ) /*0x492b8c*/
             {
-              v131 = *(ExtraDataList ***)v158;
-              v132 = 0;
-              if ( *(_DWORD *)v158 )
+              v130 = (int *)v157->extendData; /*0x492ba2*/
+              v131 = 0; /*0x492ba4*/
+              if ( v157->extendData ) /*0x492ba2*/
               {
-                do
+                do /*0x492bbf*/
                 {
-                  if ( !*v131 )
-                    break;
-                  v133 = ExtraDataList_GetExtraCount(*v131);
-                  v131 = (ExtraDataList **)v131[1];
-                  v132 += v133;
+                  if ( !*v130 ) /*0x492baa*/
+                    break; /*0x492bae*/
+                  v132 = ExtraDataList_GetExtraCount((ExtraDataList *)*v130); /*0x492bb0*/
+                  v130 = (int *)v130[1]; /*0x492bb5*/
+                  v131 += v132; /*0x492bbb*/
                 }
-                while ( v131 );
+                while ( v130 ); /*0x492bbf*/
               }
-              v134 = *(_DWORD *)(v158 + 4);
-              if ( v134 + v125 >= v132 )
+              v133 = v157->countDelta; /*0x492bc1*/
+              if ( v133 + v124 >= v131 ) /*0x492bc9*/
               {
-                if ( v134 + v125 > v132 )
+                if ( v133 + v124 > v131 ) /*0x492bd4*/
                 {
-                  v135 = *(ExtraDataList ***)v158;
-                  if ( *(_DWORD *)v158 )
+                  v134 = (int *)v157->extendData; /*0x492bda*/
+                  if ( v157->extendData ) /*0x492bda*/
                   {
-                    do
+                    do /*0x492c08*/
                     {
-                      v136 = *v135;
-                      if ( !*v135 )
-                        break;
-                      v135 = (ExtraDataList **)v135[1];
-                      if ( ExtraDataList_HasWorn(v136, 0) )
-                        ExtraDataList_SetExtraCount(v136, *(unsigned __int16 *)(v158 + 4));
+                      v135 = (ExtraDataList *)*v134; /*0x492be0*/
+                      if ( !*v134 ) /*0x492be0*/
+                        break; /*0x492be4*/
+                      v134 = (int *)v134[1]; /*0x492be6*/
+                      if ( ExtraDataList_HasWorn(v135, 0) ) /*0x492bed*/
+                        ExtraDataList_SetExtraCount(v135, LOWORD(v157->countDelta)); /*0x492c01*/
                     }
-                    while ( v135 );
+                    while ( v134 ); /*0x492c08*/
                   }
                 }
               }
               else
               {
-                *(_DWORD *)(v158 + 4) = v132 - v134 - v125;
+                v157->countDelta = v131 - v133 - v124; /*0x492bcf*/
               }
-              break;
+              break; /*0x492bd2*/
             }
-            v130 = (ExtraDataList **)v130[1];
-            if ( !v130 )
-              break;
+            v129 = (ExtraDataList **)v129[1]; /*0x492b95*/
+            if ( !v129 ) /*0x492b9a*/
+              break; /*0x492b9a*/
           }
         }
       }
-      v137 = *(ExtraDataList ***)v158;
-      if ( *(_DWORD *)v158 )
+      v136 = (int *)v157->extendData; /*0x492c0a*/
+      if ( v157->extendData ) /*0x492c0e*/
       {
-        do
+        do /*0x492c31*/
         {
-          v138 = *v137;
-          if ( !*v137 )
-            break;
-          if ( ExtraDataList_GetExtraScript(*v137) )
-            sub_41F620(v138);
-          v137 = (ExtraDataList **)v137[1];
+          v137 = (ExtraDataList *)*v136; /*0x492c14*/
+          if ( !*v136 ) /*0x492c14*/
+            break; /*0x492c18*/
+          if ( ExtraDataList_GetExtraScript((ExtraDataList *)*v136) ) /*0x492c1c*/
+            sub_41F620(v137); /*0x492c27*/
+          v136 = (int *)v136[1]; /*0x492c2c*/
         }
-        while ( v137 );
+        while ( v136 ); /*0x492c31*/
       }
-      if ( sub_469980((int)v161) && *(PlayerCharacter **)(a1 + 4) == TESDataHandler_g_PlayerRef )
+      if ( sub_469980((int)forma) && (PlayerCharacter *)a1->owner == reference ) /*0x492c51*/
       {
-        v139 = (unsigned int *)v158;
-        v140 = *(_DWORD *)v158;
-        if ( *(_DWORD *)v158 )
+        v138 = (unsigned int *)v157; /*0x492c53*/
+        v139 = (int *)v157->extendData; /*0x492c57*/
+        if ( v157->extendData ) /*0x492c57*/
         {
-          while ( 1 )
+          while ( 1 ) /*0x492c60*/
           {
-            v141 = *(void (__thiscall ****)(_DWORD, int))v140;
-            if ( !*(_DWORD *)v140 )
-              break;
-            v142 = *(_DWORD **)(v140 + 4);
-            if ( v142 )
+            v140 = (void (__thiscall ***)(_DWORD, int))*v139; /*0x492c60*/
+            if ( !*v139 ) /*0x492c60*/
+              break; /*0x492c60*/
+            v141 = (int *)v139[1]; /*0x492c66*/
+            if ( v141 ) /*0x492c6b*/
             {
-              *(_DWORD *)(v140 + 4) = v142[1];
-              *(_DWORD *)v140 = *v142;
-              FormHeapFree((unsigned int)v142);
+              v139[1] = v141[1]; /*0x492c70*/
+              *v139 = *v141; /*0x492c76*/
+              FormHeapFree((unsigned int)v141); /*0x492c78*/
             }
             else
             {
-              *(_DWORD *)v140 = 0;
+              *v139 = 0; /*0x492c82*/
             }
-            if ( v141 )
-              (**v141)(v141, 1);
+            if ( v140 ) /*0x492c8a*/
+              (**v140)(v140, 1); /*0x492c94*/
           }
         }
       }
       else
       {
-        v139 = (unsigned int *)v158;
+        v138 = (unsigned int *)v157; /*0x492c98*/
       }
-      v143 = v173;
-      if ( v173 > (int)0xFFFFFFFF && v173 < v176 )
+      v142 = v172; /*0x492c9c*/
+      if ( v172 > (int)0xFFFFFFFF && v172 < v175 ) /*0x492ca9*/
       {
-        v144 = *v139;
-        if ( *v139 )
+        v143 = *v138; /*0x492cab*/
+        if ( *v138 ) /*0x492cab*/
         {
-          v145 = 0;
-          do
+          v144 = 0; /*0x492cb2*/
+          do /*0x492cc9*/
           {
-            if ( !*(_DWORD *)v144 )
-              break;
-            v146 = ExtraDataList_GetExtraCount(*(ExtraDataList **)v144);
-            v144 = *(_DWORD *)(v144 + 4);
-            v145 += v146;
+            if ( !*(_DWORD *)v143 ) /*0x492cb4*/
+              break; /*0x492cb8*/
+            v145 = ExtraDataList_GetExtraCount(*(ExtraDataList **)v143); /*0x492cba*/
+            v143 = *(_DWORD *)(v143 + 4); /*0x492cbf*/
+            v144 += v145; /*0x492cc5*/
           }
-          while ( v144 );
-          v139[1] = v145;
+          while ( v143 ); /*0x492cc9*/
+          v138[1] = v144; /*0x492ccb*/
         }
       }
-      if ( v173 > 0 )
+      if ( v172 > 0 ) /*0x492cd0*/
       {
-        v147 = (ExtraDataList **)*v139;
-        if ( *v139 )
+        v146 = (ExtraDataList **)*v138; /*0x492cd6*/
+        if ( *v138 ) /*0x492cd6*/
         {
-          if ( *v147 )
+          if ( *v146 ) /*0x492ce1*/
           {
-            if ( v173 < (unsigned int)BSSimpleList_Count((_DWORD *)*v139) )
+            if ( v172 < (unsigned int)BSSimpleList_Count((_DWORD *)*v138) ) /*0x492cf3*/
             {
-              do
+              do /*0x492d87*/
               {
-                v148 = (ExtraDataList **)v147[1];
-                v149 = *v147;
-                if ( v148 )
+                v147 = (ExtraDataList **)v146[1]; /*0x492d00*/
+                v148 = *v146; /*0x492d05*/
+                if ( v147 ) /*0x492d07*/
                 {
-                  v147[1] = v148[1];
-                  *v147 = *v148;
-                  FormHeapFree((unsigned int)v148);
+                  v146[1] = v147[1]; /*0x492d0c*/
+                  *v146 = *v147; /*0x492d12*/
+                  FormHeapFree((unsigned int)v147); /*0x492d14*/
                 }
                 else
                 {
-                  *v147 = 0;
+                  *v146 = 0; /*0x492d1e*/
                 }
-                if ( v149 )
+                if ( v148 ) /*0x492d26*/
                 {
-                  v150 = *v147;
-                  if ( *v147 )
+                  v149 = *v146; /*0x492d28*/
+                  if ( *v146 ) /*0x492d28*/
                   {
-                    for ( k = v149->members.m_data; k; k = v149->members.m_data )
+                    for ( k = v148->members.m_data; k; k = v148->members.m_data ) /*0x492d33*/
                     {
-                      if ( BaseExtraList_GetExtraData(v150, (ExtraDataType)k->members.type) )
+                      if ( BaseExtraList_GetExtraData(v149, (ExtraDataType)k->members.type) ) /*0x492d43*/
                       {
-                        BaseExtraList_RemoveExtraByPtr(v149, (int)k, 1);
+                        BaseExtraList_RemoveExtraByPtr(v148, (int)k, 1); /*0x492d51*/
                       }
                       else
                       {
-                        BaseExtraList_RemoveExtraByPtr(v149, (int)k, 0);
-                        BaseExtraList_AddExtra(v150, k);
+                        BaseExtraList_RemoveExtraByPtr(v148, (int)k, 0); /*0x492d5b*/
+                        BaseExtraList_AddExtra(v149, k); /*0x492d63*/
                       }
                     }
                   }
-                  (*(void (__thiscall **)(ExtraDataList *, int))v149->vtbl)(v149, 1);
-                  v143 = v173;
+                  (*(void (__thiscall **)(ExtraDataList *, int))v148->vtbl)(v148, 1); /*0x492d78*/
+                  v142 = v172; /*0x492d7a*/
                 }
               }
-              while ( v143 < BSSimpleList_Count(v147) );
-              v139 = (unsigned int *)v158;
+              while ( v142 < BSSimpleList_Count(v146) ); /*0x492d87*/
+              v138 = (unsigned int *)v157; /*0x492d8d*/
             }
-            if ( v147[1] || *v147 )
+            if ( v146[1] || *v146 ) /*0x492d97*/
             {
-              v147 = (ExtraDataList **)*v139;
+              v146 = (ExtraDataList **)*v138; /*0x492db1*/
             }
             else
             {
-              FormHeapFree(*v139);
-              *v139 = 0;
+              FormHeapFree(*v138); /*0x492da0*/
+              *v138 = 0; /*0x492da8*/
             }
-            if ( v147 )
+            if ( v146 ) /*0x492db6*/
             {
-              while ( *v147 )
+              while ( *v146 ) /*0x492dc4*/
               {
-                if ( BaseExtraList_Count(*v147) )
+                if ( BaseExtraList_Count(*v146) ) /*0x492dc6*/
                 {
-                  v147 = (ExtraDataList **)v147[1];
+                  v146 = (ExtraDataList **)v146[1]; /*0x492e04*/
                 }
                 else
                 {
-                  v152 = (ExtraDataList **)v147[1];
-                  if ( v152 )
+                  v151 = (ExtraDataList **)v146[1]; /*0x492dd0*/
+                  if ( v151 ) /*0x492dd5*/
                   {
-                    v147[1] = v152[1];
-                    *v147 = *v152;
-                    FormHeapFree((unsigned int)v152);
+                    v146[1] = v151[1]; /*0x492dda*/
+                    *v146 = *v151; /*0x492de0*/
+                    FormHeapFree((unsigned int)v151); /*0x492de2*/
                   }
                   else
                   {
-                    *v147 = 0;
+                    *v146 = 0; /*0x492dec*/
                   }
-                  if ( !*(_DWORD *)(*v139 + 4) && !*(_DWORD *)*v139 )
+                  if ( !*(_DWORD *)(*v138 + 4) && !*(_DWORD *)*v138 ) /*0x492dfe*/
                   {
-                    if ( v147[1] )
+                    if ( v146[1] ) /*0x492e0d*/
                     {
-                      do
+                      do /*0x492e27*/
                       {
-                        m_data = v147[1]->members.m_data;
-                        FormHeapFree((unsigned int)v147[1]);
-                        v147[1] = (ExtraDataList *)m_data;
+                        m_data = v146[1]->members.m_data; /*0x492e16*/
+                        FormHeapFree((unsigned int)v146[1]); /*0x492e1a*/
+                        v146[1] = (ExtraDataList *)m_data; /*0x492e24*/
                       }
-                      while ( m_data );
+                      while ( m_data ); /*0x492e27*/
                     }
-                    *v147 = 0;
-                    FormHeapFree((unsigned int)v147);
-                    *v139 = 0;
-                    break;
+                    *v146 = 0; /*0x492e2a*/
+                    FormHeapFree((unsigned int)v146); /*0x492e30*/
+                    *v138 = 0; /*0x492e38*/
+                    break; /*0x492e38*/
                   }
-                  v147 = (ExtraDataList **)*v139;
+                  v146 = (ExtraDataList **)*v138; /*0x492e00*/
                 }
-                if ( !v147 )
-                  break;
+                if ( !v146 ) /*0x492e09*/
+                  break; /*0x492e09*/
               }
             }
           }
         }
       }
-      a2 = (_DWORD *)a2[1];
-      result = a2;
-      if ( !a2 )
-        break;
-      v4 = a1;
+      a2 = (tListEntryData *)a2->node.next; /*0x492e48*/
+      result = a2; /*0x492e43*/
+      if ( !a2 ) /*0x492e4c*/
+        break; /*0x492e4c*/
+      v3 = a1; /*0x492574*/
     }
   }
-  return result;
+  return result; /*0x492e52*/
 }

@@ -58,7 +58,7 @@
 0x6B6FC8: fstp    [esp+8+arg_0]
 0x6B6FCC: fld     [esp+8+arg_0]
 0x6B6FD0: fmul    qword ptr ds:0A77098h
-0x6B6FD6: call    Double_To_SInt32
+0x6B6FD6: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x6B6FDB: cmp     byte ptr [esi+4Ah], 0
 0x6B6FDF: jnz     short loc_6B7028
 0x6B6FE1: movzx   ecx, word ptr [esi+48h]

@@ -15,10 +15,10 @@
 0x4F8E91: test    al, al
 0x4F8E93: jz      short loc_4F8E97
 0x4F8E95: mov     esi, edi
-0x4F8E97: mov     edi, [esp+0Ch+arg_4]
-0x4F8E9B: push    edi
-0x4F8E9C: lea     ecx, [esi+44h]
-0x4F8E9F: call    sub_420ED0
+0x4F8E97: mov     edi, [esp+0Ch+actor]
+0x4F8E9B: push    edi; actor
+0x4F8E9C: lea     ecx, [esi+44h]; this
+0x4F8E9F: call    ExtraDataList_GetFriendHitCount; Returns the per-actor uint16 friend-hit count, or zero. Confirmed by the Oblivion console path '%s has hit %s ... times'.
 0x4F8EA4: mov     [esp+0Ch+arg_C], eax
 0x4F8EA8: fild    [esp+0Ch+arg_C]
 0x4F8EAC: fstp    qword ptr [ebx]

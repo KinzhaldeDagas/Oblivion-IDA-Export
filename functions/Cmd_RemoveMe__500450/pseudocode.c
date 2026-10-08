@@ -16,64 +16,65 @@ char __usercall Cmd_RemoveMe@<al>(
   int v13; // eax
   int ***ContainerExtraDataForRef; // ebx
   int v15; // eax
-  PlayerCharacterVtbl *vtbl; // ebx
+  TESObjectREFRVtbl *vtbl; // ebx
   int v17; // eax
   double v18; // st7
-  int v19; // edx
-  double v20; // st7
-  UInt16 v22[2]; // [esp+Ch] [ebp-4h] BYREF
+  UInt16 v20[2]; // [esp+Ch] [ebp-4h] BYREF
 
-  v11 = 0;
-  *(_DWORD *)v22 = 0;
-  if ( !Script_ExtractArgs(a1, arg4, a3, a4, a7, a8, l, v22) )
-    return 0;
-  if ( a4 && a7 )
+  v11 = 0; /*0x50047b*/
+  *(_DWORD *)v20 = 0; /*0x50047e*/
+  if ( !Script_ExtractArgs(a1, arg4, a3, a4, a7, a8, l, v20) ) /*0x50048c*/
+    return 0; /*0x50048c*/
+  if ( a4 && a7 ) /*0x50049c*/
   {
-    v12 = (Actor *)OblivionDynamicCast(
+    v12 = (Actor *)OblivionDynamicCast( /*0x5004b5*/
                      a7,
                      0,
                      (struct _s_RTTICompleteObjectLocator *)&TESObjectREFR `RTTI Type Descriptor',
                      &Actor `RTTI Type Descriptor',
                      0);
-    if ( v12 )
+    if ( v12 ) /*0x5004bc*/
     {
-      v13 = ((int (__usercall *)@<eax>(TESObjectREFR *@<ecx>, double@<st0>, double@<st1>))a4->vtbl->GetBaseForm)(
+      v13 = ((int (__usercall *)@<eax>(TESObjectREFR *@<ecx>, double@<st0>, double@<st1>, double@<st2>))a4->vtbl->GetBaseForm)( /*0x5004c8*/
               a4,
               st7_0,
-              a2);
-      if ( Actor_IsObjectEquipped((TESObjectREFR *)v12, v13) )
+              a2,
+              st5_0);
+      if ( Actor_IsObjectEquipped((TESObjectREFR *)v12, v13) ) /*0x5004cd*/
       {
-        Actor_GetActorBaseForm(v12, 0);
-        ContainerExtraDataForRef = (int ***)ContainerExtraData_GetContainerExtraDataForRef(a7);
-        if ( ContainerExtraDataForRef )
+        Actor_GetActorBaseForm(v12, 0); /*0x5004d9*/
+        ContainerExtraDataForRef = (int ***)ContainerExtraData_GetContainerExtraDataForRef(a7); /*0x5004f0*/
+        if ( ContainerExtraDataForRef ) /*0x5004f7*/
         {
-          v15 = ((int (__usercall *)@<eax>(TESObjectREFR *@<ecx>, double@<st0>, double@<st1>))a4->vtbl->GetBaseForm)(
+          v15 = ((int (__usercall *)@<eax>(TESObjectREFR *@<ecx>, double@<st0>, double@<st1>, double@<st2>))a4->vtbl->GetBaseForm)( /*0x500505*/
                   a4,
                   st7_0,
-                  a2);
-          v11 = ExtraContainerChanges_SetEquipped(ContainerExtraDataForRef, v15, 0);
+                  a2,
+                  st5_0);
+          v11 = ExtraContainerChanges_SetEquipped(ContainerExtraDataForRef, v15, 0); /*0x50050f*/
         }
       }
     }
-    vtbl = (PlayerCharacterVtbl *)a7->vtbl;
-    v17 = ((int (__usercall *)@<eax>(TESObjectREFR *@<ecx>, ExtraDataList *, int, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, int, _DWORD, double@<st0>, double@<st1>))a4->vtbl->GetBaseForm)(
+    vtbl = a7->vtbl; /*0x500517*/
+    v17 = ((int (__usercall *)@<eax>(TESObjectREFR *@<ecx>, ExtraDataList *, int, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, int, _DWORD, double@<st0>, double@<st1>, double@<st2>))a4->vtbl->GetBaseForm)( /*0x500531*/
             a4,
             v11,
             1,
             0,
             0,
-            *(_DWORD *)v22,
+            *(_DWORD *)v20,
             0,
             0,
             1,
             0,
             st7_0,
-            a2);
-    v18 = ((double (__thiscall *)(TESObjectREFR *, int))vtbl->super.super.super.RemoveItem)(a7, v17);
-    v20 = sub_665260((TESObjectREFR *)TESDataHandler_g_PlayerRef, v18, v19, (PlayerCharacter *)a4);
-    if ( a7 == (TESObjectREFR *)TESDataHandler_g_PlayerRef )
-      sub_57A3B0((char)v11, st5_0, a2, v20, 0);
-    return 0;
+            a2,
+            st5_0);
+    v18 = ((double (__thiscall *)(TESObjectREFR *, int))vtbl->RemoveItem)(a7, v17); /*0x50053c*/
+    sub_665260((TESObjectREFR *)reference, v18, (PlayerCharacter *)a4); /*0x500545*/
+    if ( a7 == (TESObjectREFR *)reference ) /*0x500551*/
+      sub_57A3B0(st5_0, a2, 0); /*0x500555*/
+    return 0; /*0x500563*/
   }
-  return 1;
+  return 1; /*0x50055d*/
 }

@@ -42,9 +42,44 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_T3InedbibleIngred@<
   float v40; // [esp+14h] [ebp-Ch]
   float v41; // [esp+18h] [ebp-8h]
 
-  if ( (ch0 & 1) != 0 )
-    return MagicCaster_ApplyActiveMagicItem_::EffectLoop_T4InedbibleIngred();
-  __asm { fst     [esp+10h+var_8]; float }
+  if ( (ch0 & 1) != 0 ) /*0x69b3d1*/
+    return MagicCaster_ApplyActiveMagicItem_::EffectLoop_T4InedbibleIngred( /*0x69b3d1*/
+             a1,
+             a2,
+             a3,
+             ebx0,
+             a6,
+             a7,
+             a8,
+             a9,
+             a10,
+             a11,
+             a12,
+             a13,
+             a14,
+             a15,
+             a16,
+             a17,
+             a18,
+             a19,
+             a20,
+             a21,
+             a22,
+             a23,
+             a24,
+             a25,
+             a26,
+             a27,
+             a28,
+             a29,
+             a30,
+             a31,
+             a32,
+             a33,
+             a34,
+             a35,
+             a36);
+  __asm { fst     [esp+10h+var_8]; float } /*0x69b3d8*/
   __asm
   {
     fst     [esp+10h+var_C]; float
@@ -57,12 +92,9 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_T3InedbibleIngred@<
     fld     [esp+20h+arg_2C]
     fstp    [esp+20h+var_20]; float
   }
-  Calc_T3PotionStrength(&a15, v37, v38, 6, 0, v39, v40, v41, 0);
+  Calc_T3PotionStrength(&a15, v37, v38, 6, 0, v39, v40, v41, 0); /*0x69b401*/
   return MagicCaster_ApplyActiveMagicItem_::EffectLoop_InedbibleIngredFinish(
-           a1,
            a2,
-           a3,
-           ebx0,
            a6,
            a7,
            a8,
@@ -76,22 +108,5 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_T3InedbibleIngred@<
            a16,
            a17,
            a18,
-           a19,
-           a20,
-           a21,
-           a22,
-           a23,
-           a24,
-           a25,
-           a26,
-           a27,
-           a28,
-           a29,
-           a30,
-           a31,
-           a32,
-           a33,
-           a34,
-           a35,
-           a36);
+           a19);
 }

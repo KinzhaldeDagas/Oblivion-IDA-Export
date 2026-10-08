@@ -1,1 +1,4 @@
-HCONVLIST__
+struct HCONVLIST__
+{
+int unused;
+};

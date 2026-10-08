@@ -19,7 +19,7 @@
 0x4E1FFB: jz      loc_4E2159
 0x4E2001: push    esi
 0x4E2002: push    edi
-0x4E2003: push    offset unk_B35408
+0x4E2003: push    offset stru_B35408
 0x4E2008: call    NiRTTI_Cast
 0x4E200D: add     esp, 8
 0x4E2010: test    eax, eax
@@ -49,14 +49,14 @@
 0x4E2056: jz      short loc_4E20A7
 0x4E2058: cmp     [esi+0B6h], ax
 0x4E205F: jz      short loc_4E20A7
-0x4E2061: push    eax
-0x4E2062: mov     ecx, esi
-0x4E2064: call    sub_405790
+0x4E2061: push    eax; index
+0x4E2062: mov     ecx, esi; this
+0x4E2064: call    NiNode_GetChildAtIndex
 0x4E2069: test    eax, eax
 0x4E206B: jz      short loc_4E20A7
-0x4E206D: push    0
-0x4E206F: mov     ecx, esi
-0x4E2071: call    sub_405790
+0x4E206D: push    0; index
+0x4E206F: mov     ecx, esi; this
+0x4E2071: call    NiNode_GetChildAtIndex
 0x4E2076: mov     ebp, eax
 0x4E2078: push    ebp
 0x4E2079: call    sub_4A05E0
@@ -65,14 +65,14 @@
 0x4E2083: jnz     short loc_4E20A7
 0x4E2085: cmp     word ptr [esi+0B6h], 1
 0x4E208D: jbe     short loc_4E20A7
-0x4E208F: push    1
-0x4E2091: mov     ecx, esi
-0x4E2093: call    sub_405790
+0x4E208F: push    1; index
+0x4E2091: mov     ecx, esi; this
+0x4E2093: call    NiNode_GetChildAtIndex
 0x4E2098: test    eax, eax
 0x4E209A: jz      short loc_4E20A7
-0x4E209C: push    1
-0x4E209E: mov     ecx, esi
-0x4E20A0: call    sub_405790
+0x4E209C: push    1; index
+0x4E209E: mov     ecx, esi; this
+0x4E20A0: call    NiNode_GetChildAtIndex
 0x4E20A5: mov     ebp, eax
 0x4E20A7: test    ebp, ebp
 0x4E20A9: jz      short loc_4E2112
@@ -80,7 +80,7 @@
 0x4E20AE: test    esi, esi
 0x4E20B0: jz      loc_4E2158
 0x4E20B6: mov     ecx, esi; this
-0x4E20B8: call    TESObjectCELL_IsInterior
+0x4E20B8: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x4E20BD: test    al, al
 0x4E20BF: jz      short loc_4E20CB
 0x4E20C1: lea     ecx, [esi+28h]
@@ -119,7 +119,7 @@
 0x4E211B: test    eax, eax
 0x4E211D: jz      short loc_4E2158
 0x4E211F: nop
-0x4E2120: cmp     eax, offset BSTreeNode
+0x4E2120: cmp     eax, 0B3A02Ch
 0x4E2125: jz      short loc_4E2133
 0x4E2127: mov     eax, [eax+4]
 0x4E212A: test    eax, eax

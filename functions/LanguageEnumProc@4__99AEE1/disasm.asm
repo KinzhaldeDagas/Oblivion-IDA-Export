@@ -30,9 +30,9 @@
 0x99AF32: inc     eax
 0x99AF33: jmp     short loc_99AF90
 0x99AF35: lea     eax, [ebp+LCData]
-0x99AF38: push    eax; Str2
-0x99AF39: push    dword ptr [esi]; Str1
-0x99AF3B: call    __strcmp
+0x99AF38: push    eax; right
+0x99AF39: push    dword ptr [esi]; left
+0x99AF3B: call    CRT_StricmpLocaleDispatch
 0x99AF40: test    eax, eax
 0x99AF42: pop     ecx
 0x99AF43: pop     ecx
@@ -46,9 +46,9 @@
 0x99AF55: cmp     dword ptr [esi+0Ch], 0
 0x99AF59: jz      short loc_99AF85
 0x99AF5B: lea     eax, [ebp+LCData]
-0x99AF5E: push    eax; Str2
-0x99AF5F: push    dword ptr [esi]; Str1
-0x99AF61: call    __strcmp
+0x99AF5E: push    eax; right
+0x99AF5F: push    dword ptr [esi]; left
+0x99AF61: call    CRT_StricmpLocaleDispatch
 0x99AF66: test    eax, eax
 0x99AF68: pop     ecx
 0x99AF69: pop     ecx

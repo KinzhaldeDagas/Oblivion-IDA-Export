@@ -1,1 +1,1 @@
-IParseDisplayNameVtbl_0
+typedef IParseDisplayNameVtbl IParseDisplayNameVtbl_0;

@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x6195B7",
-    "line": "fst     [esp+10h+var_4]",
+    "line": "fst     [esp+10h+outOptimalDistance]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -37,43 +37,43 @@
   },
   {
     "ea": "0x6195BD",
-    "line": "fstp    [esp+10h+var_8]",
+    "line": "fstp    [esp+10h+outMaximumDistance]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6195C1",
-    "line": "lea     eax, [esp+10h+var_8]",
+    "line": "lea     eax, [esp+10h+outMaximumDistance]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6195C5",
-    "line": "push    eax",
+    "line": "push    eax; outMaximumDistance",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6195C6",
-    "line": "lea     ecx, [esp+14h+var_4]",
+    "line": "lea     ecx, [esp+14h+outOptimalDistance]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6195CA",
-    "line": "push    ecx",
+    "line": "push    ecx; outOptimalDistance",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6195CB",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6195CD",
-    "line": "call    sub_6142D0",
+    "line": "call    CombatController_GetRangedDistanceBounds; Combines projectile/spell bounds with TESCombatStyle optimal/max range multipliers (SDK +0x6C/+0x70).",
     "mnemonic": "call",
     "size": 5
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x6195E4",
-    "line": "push    0; a4",
+    "line": "push    0; useActorProjection",
     "mnemonic": "push",
     "size": 2
   },
@@ -127,25 +127,25 @@
   },
   {
     "ea": "0x6195E8",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6195ED",
-    "line": "push    eax; a3",
+    "line": "push    eax; to",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6195EE",
-    "line": "push    edi; a2",
+    "line": "push    edi; from",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6195EF",
-    "line": "call    TESObjectREFR_GetDistanceBetween?",
+    "line": "call    TESObjectREFR_GetSurfaceDistance; Three-argument cdecl routine: returns float surface distance from 'from' to 'to'. All 24 callers push exactly from, to, and useActorProjection then reclaim 0x0C. The prior EDI register argument, fourth stack byte, and double return were analysis pollution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x619603",
-    "line": "fld     [esp+10h+var_8]",
+    "line": "fld     [esp+10h+outMaximumDistance]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x61961E",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },

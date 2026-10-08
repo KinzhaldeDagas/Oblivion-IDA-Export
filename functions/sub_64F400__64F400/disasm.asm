@@ -11,9 +11,9 @@
 0x64F41B: mov     ecx, esi
 0x64F41D: mov     [esp+18h+friendlyFight_], eax
 0x64F421: mov     [esp+18h+var_9], 0
-0x64F426: call    Actor_GetBaseClass
+0x64F426: call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.
 0x64F42B: mov     ecx, eax
-0x64F42D: call    TESClass__IsGuardClass
+0x64F42D: call    TESClass__IsGuardClass; TESClass::IsGuardClass reads classFlags at +0x60 bit 1.
 0x64F432: test    al, al
 0x64F434: jnz     loc_64F5C5
 0x64F43A: mov     ebx, [ebx+3Ch]
@@ -65,7 +65,7 @@
 0x64F4C5: call    eax
 0x64F4C7: push    eax; a2
 0x64F4C8: mov     ecx, esi; this
-0x64F4CA: call    TESObjectREFR_GetParentCell
+0x64F4CA: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x64F4CF: mov     ecx, ds:0B33A98h
 0x64F4D5: push    eax; a1
 0x64F4D6: call    sub_446B90

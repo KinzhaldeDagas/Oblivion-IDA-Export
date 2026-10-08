@@ -1,18 +1,31 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 6,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x547070",
+      "0x54713E"
+    ]
+  ],
+  "chunks_sha256": "c424952d239c2a66ac3b7b00ff63253d90ebfdd6fd78338495395ffcd6242d02",
+  "comment_regular": "Sidecar decode: Calc_WeaponDamage is actor/weapon agnostic after entry; BladeSkillsRestored substitutes only the skill-level argument after consuming the most recent exact source-return/formula-return token from its bounded per-thread stack. Unmatched or overflowed contexts retain native formula inputs.",
+  "comment_repeatable": "Sidecar decode: Calc_WeaponDamage is actor/weapon agnostic after entry; BladeSkillsRestored substitutes only the skill-level argument after consuming the most recent exact source-return/formula-return token from its bounded per-thread stack. Unmatched or overflowed contexts retain native formula inputs.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "Calc_WeaponDamage",
   "end_ea": "0x54713E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "Calc_WeaponDamage",
   "segment": ".text",
   "sha256": "c424952d239c2a66ac3b7b00ff63253d90ebfdd6fd78338495395ffcd6242d02",
   "size": 206,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x547070",
+  "total_chunk_size": 206,
   "type": "double __cdecl(int, int, int, float, int, float, float, float)",
   "xrefs_from_count": 58,
   "xrefs_to_count": 6

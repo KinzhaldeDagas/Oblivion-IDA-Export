@@ -7,7 +7,7 @@
 0x7488C3: jnz     short loc_7488D1
 0x7488C5: mov     eax, [esi+0Ch]
 0x7488C8: push    eax
-0x7488C9: call    FormHeapFree
+0x7488C9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7488CE: add     esp, 4
 0x7488D1: mov     ecx, esi
 0x7488D3: pop     esi

@@ -1,1 +1,1 @@
-CALTYPE
+typedef DWORD CALTYPE;

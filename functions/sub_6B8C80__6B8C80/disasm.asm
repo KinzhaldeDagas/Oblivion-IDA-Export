@@ -1,4 +1,4 @@
-0x6B8C80: push    0FFFFFFFFh
+0x6B8C80: push    0FFFFFFFFh; Initialize an empty MenuTopic for extra-data loading: clear response nodes/cursors and all identity pointers, then initialize an empty display string.
 0x6B8C82: push    offset SEH_6B8C80
 0x6B8C87: mov     eax, large fs:0
 0x6B8C8D: push    eax
@@ -32,3 +32,12 @@
 0x6B8CE3: pop     esi
 0x6B8CE4: add     esp, 10h
 0x6B8CE7: retn
+0x9C6F30: mov     ecx, [ebp-10h]; void *
+0x9C6F33: jmp     BSStringT_Clear
+0x9C6F38: mov     edx, [esp+arg_4]
+0x9C6F3C: lea     eax, [edx-8]
+0x9C6F3F: mov     ecx, [edx-0Ch]
+0x9C6F42: xor     ecx, eax
+0x9C6F44: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C6F49: mov     eax, offset stru_AEF3C0
+0x9C6F4E: jmp     ___CxxFrameHandler3

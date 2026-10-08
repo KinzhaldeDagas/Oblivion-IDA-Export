@@ -1,4 +1,4 @@
-0x517A80: fldz
+0x517A80: fldz; Construct 0x20-byte Script VariableInfo: initializes selected runtime fields and empty BSString at +0x18, but does not guarantee every SLSD data byte is initialized before a short/zero chunk read.
 0x517A82: mov     eax, ecx
 0x517A84: xor     ecx, ecx
 0x517A86: fstp    qword ptr [eax+8]

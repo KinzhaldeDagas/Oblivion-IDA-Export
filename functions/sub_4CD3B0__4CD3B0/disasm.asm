@@ -25,7 +25,7 @@
 0x4CD403: mov     [esp+44h+var_4], esi
 0x4CD407: call    NiTArray_SetSize
 0x4CD40C: push    ebp; a2
-0x4CD40D: mov     ecx, offset stru_B35C80; this
+0x4CD40D: mov     ecx, offset unk_B35C80; this
 0x4CD412: mov     [esp+44h+var_E], 32h ; '2'
 0x4CD419: call    sub_496EA0
 0x4CD41E: lea     edi, [ebp+48h]
@@ -52,7 +52,7 @@
 0x4CD45C: jz      short loc_4CD478
 0x4CD45E: push    0; a2
 0x4CD460: mov     ecx, esi; this
-0x4CD462: call    TESForm_GetOverrideFile
+0x4CD462: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x4CD467: test    eax, eax
 0x4CD469: jz      short loc_4CD478
 0x4CD46B: mov     ecx, eax
@@ -62,7 +62,7 @@
 0x4CD476: xor     bl, bl
 0x4CD478: push    0FFFFFFFFh; a2
 0x4CD47A: mov     ecx, esi; this
-0x4CD47C: call    TESForm_GetOverrideFile
+0x4CD47C: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x4CD481: cmp     [esp+40h+a2], eax
 0x4CD485: jz      short loc_4CD493
 0x4CD487: mov     edx, [esi+8]
@@ -73,7 +73,7 @@
 0x4CD493: test    byte ptr [ebp+24h], 1
 0x4CD497: jnz     short loc_4CD4AD
 0x4CD499: mov     ecx, esi; this
-0x4CD49B: call    TESObjectREFR_IsPersistent?
+0x4CD49B: call    TESObjectREFR_IsPersistent
 0x4CD4A0: test    al, al
 0x4CD4A2: jz      short loc_4CD4AD
 0x4CD4A4: test    dword ptr [ebp+8], 400h
@@ -88,7 +88,7 @@
 0x4CD4C1: test    edi, edi
 0x4CD4C3: jnz     loc_4CD430
 0x4CD4C9: push    ebp; a2
-0x4CD4CA: mov     ecx, offset stru_B35C80; this
+0x4CD4CA: mov     ecx, offset unk_B35C80; this
 0x4CD4CF: call    sub_496F50
 0x4CD4D4: lea     ecx, [esp+40h+var_1C]
 0x4CD4D8: call    sub_521BE0
@@ -170,7 +170,7 @@
 0x4CD5D4: cmp     esi, ebp
 0x4CD5D6: jl      short loc_4CD5C0
 0x4CD5D8: push    ebx
-0x4CD5D9: call    FormHeapFree
+0x4CD5D9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4CD5DE: add     esp, 4
 0x4CD5E1: mov     ecx, dword ptr [esp+40h+var_C]
 0x4CD5E5: mov     large fs:0, ecx
@@ -181,3 +181,18 @@
 0x4CD5F0: pop     ebx
 0x4CD5F1: add     esp, 2Ch
 0x4CD5F4: retn    4
+0x4CA130: mov     eax, [ecx+4]
+0x4CA133: push    eax
+0x4CA134: mov     dword ptr [ecx], offset ??_7?$NiTArray@PAVTESObjectREFR@@@@6B@; const NiTArray<TESObjectREFR *>::`vftable'
+0x4CA13A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x4CA13F: pop     ecx
+0x4CA140: retn
+0x9B52F0: lea     ecx, [ebp-1Ch]
+0x9B52F3: jmp     loc_4CA130
+0x9B52F8: mov     edx, [esp+arg_4]
+0x9B52FC: lea     eax, [edx-30h]
+0x9B52FF: mov     ecx, [edx-34h]
+0x9B5302: xor     ecx, eax
+0x9B5304: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B5309: mov     eax, offset stru_AE049C
+0x9B530E: jmp     ___CxxFrameHandler3

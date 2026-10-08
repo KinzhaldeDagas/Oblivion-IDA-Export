@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x784880",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Oblivion 1.2.0.416: copy-range adapter for 0x18-byte records; returns destination advanced by the source count.",
     "mnemonic": "sub",
     "size": 3
   },
   {
     "ea": "0x784883",
-    "line": "mov     edx, [esp+8+arg_8]",
+    "line": "mov     edx, [esp+8+destination]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x784888",
-    "line": "mov     ebx, [esp+0Ch+arg_0]",
+    "line": "mov     ebx, [esp+0Ch+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x78488D",
-    "line": "mov     esi, [esp+10h+arg_4]",
+    "line": "mov     esi, [esp+10h+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x784892",
-    "line": "mov     edi, [esp+14h+arg_8]",
+    "line": "mov     edi, [esp+14h+destination]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -97,25 +97,25 @@
   },
   {
     "ea": "0x7848AB",
-    "line": "push    edi",
+    "line": "push    edi; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7848AC",
-    "line": "push    esi",
+    "line": "push    esi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7848AD",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7848AE",
-    "line": "call    sub_784180",
+    "line": "call    OB_stVector24_CopyRange_010201A0; Oblivion 1.2.0.416: forward-copies six-dword records from [first,last) and returns the advanced destination.",
     "mnemonic": "call",
     "size": 5
   },

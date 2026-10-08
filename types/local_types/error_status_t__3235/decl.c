@@ -1,1 +1,1 @@
-error_status_t
+typedef ULONG error_status_t;

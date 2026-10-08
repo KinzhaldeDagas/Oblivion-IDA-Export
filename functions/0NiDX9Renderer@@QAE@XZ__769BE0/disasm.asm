@@ -161,13 +161,13 @@
 0x769EB0: mov     [esi+0AC4h], di
 0x769EB7: mov     [esi+0ABCh], edi
 0x769EBD: mov     [esi+0AC8h], ecx
-0x769EC3: mov     ecx, esi
+0x769EC3: mov     ecx, esi; this
 0x769EC5: mov     [esi+0AD0h], di
 0x769ECC: mov     [esi+0AD6h], ax
 0x769ED3: mov     [esi+0AD2h], di
 0x769EDA: mov     [esi+0AD4h], di
 0x769EE1: mov     [esi+0ACCh], edi
-0x769EE7: call    sub_7641A0
+0x769EE7: call    NiDX9Renderer_InitializeStateDefaults; Initialize NiDX9Renderer state defaults, including clear depth 1.0 and clear stencil 0.
 0x769EEC: pop     edi
 0x769EED: mov     eax, esi
 0x769EEF: pop     esi

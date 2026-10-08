@@ -1,44 +1,49 @@
-void __usercall sub_5A2F27(
+double __usercall sub_5A2F27@<st0>(
         TESObjectREFR *ebx0@<ebx>,
-        int edi0@<edi>,
-        _DWORD *a3@<esi>,
+        TESForm *edi0@<edi>,
+        _DWORD *esi0@<esi>,
         double a1@<st2>,
-        double a2@<st1>,
-        double a6@<st0>)
+        double st6_0@<st1>,
+        double a6@<st0>,
+        double a2@<st7>,
+        double a3@<st6>,
+        double a4@<st5>,
+        double a5@<st4>)
 {
-  int v6; // eax
-  BaseExtraList *v7; // ebp
-  int v8; // ecx
-  TESForm *v9; // ecx
+  int v10; // eax
+  BaseExtraList *v11; // ebp
+  int v12; // ecx
+  TESForm *v13; // ecx
   float *ContainerChanges; // eax
 
-  v6 = a3[0xC];
-  v7 = 0;
-  if ( *(TESObjectREFR **)v6 != ebx0 )
-    v7 = **(BaseExtraList ***)v6;
-  ((void (__usercall *)(PlayerCharacter *@<ecx>, _DWORD, BaseExtraList *, int, double@<st0>, double@<st1>))TESDataHandler_g_PlayerRef->vtbl->super.super.super.RemoveItem)(
-    TESDataHandler_g_PlayerRef,
-    *(_DWORD *)(v6 + 8),
-    v7,
+  v10 = esi0[0xC]; /*0x5a2f27*/
+  v11 = 0; /*0x5a2f2c*/
+  if ( *(TESObjectREFR **)v10 != ebx0 ) /*0x5a2f30*/
+    v11 = **(BaseExtraList ***)v10; /*0x5a2f32*/
+  ((void (__usercall *)(PlayerCharacter *@<ecx>, _DWORD, BaseExtraList *, int, double@<st0>, double@<st1>, double@<st2>))reference->vtbl->super.super.super.RemoveItem)( /*0x5a2f51*/
+    reference,
+    *(_DWORD *)(v10 + 8),
+    v11,
     1,
     a6,
-    a2);
-  sub_5C1900();
-  TESObjectREFR_AddItem_Abbrev((TESObjectREFR *)TESDataHandler_g_PlayerRef, edi0, (int)ebx0, 1);
-  v8 = a3[0xB];
-  if ( *(TESObjectREFR **)v8 != ebx0 )
-    v7 = **(BaseExtraList ***)v8;
-  v9 = *(TESForm **)(v8 + 8);
-  if ( v9 == (TESForm *)TESDataHandler_g_AzuraStone )
+    st6_0,
+    a1);
+  PlayerCharacter_ReconcileHotkeysAfterInventoryRemoval(); /*0x5a2f53*/
+  TESObjectREFR_AddItem_Abbrev((TESObjectREFR *)reference, edi0, (ExtraDataList *)ebx0, 1); /*0x5a2f62*/
+  v12 = esi0[0xB]; /*0x5a2f67*/
+  if ( *(TESObjectREFR **)v12 != ebx0 ) /*0x5a2f6e*/
+    v11 = **(BaseExtraList ***)v12; /*0x5a2f70*/
+  v13 = *(TESForm **)(v12 + 8); /*0x5a2f72*/
+  if ( v13 == (TESForm *)MEMORY[0xB35EE4] ) /*0x5a2f7b*/
   {
-    sub_41F650(v7);
+    sub_41F650(v11); /*0x5a2fa3*/
   }
   else
   {
-    TESDataHandler_g_PlayerRef->vtbl->super.super.super.RemoveItem(
-      (TESObjectREFR *)TESDataHandler_g_PlayerRef,
-      v9,
-      v7,
+    reference->vtbl->super.super.super.RemoveItem( /*0x5a2f98*/
+      (TESObjectREFR *)reference,
+      v13,
+      v11,
       1,
       (UInt32)ebx0,
       (UInt32)ebx0,
@@ -47,11 +52,11 @@ void __usercall sub_5A2F27(
       (float *)ebx0,
       1,
       (UInt8)ebx0);
-    sub_5C1900();
+    PlayerCharacter_ReconcileHotkeysAfterInventoryRemoval(); /*0x5a2f9a*/
   }
-  ContainerChanges = (float *)ExtraDataList_GetContainerChanges(&TESDataHandler_g_PlayerRef->super.super.super.super.baseExtraList);
-  sub_491700(ContainerChanges, a1, a2, a6, (TESObjectREFR *)TESDataHandler_g_PlayerRef, a3[0xE], (TESForm *)ebx0);
-  GameUI_QueueMessage((const char *)sEnchantmentSuccess, (UInt32)ebx0, 1u, flt_A31E2C);
-  sub_57DE50(0xB);
-  sub_5A1740(a1, a2);
+  ContainerChanges = (float *)ExtraDataList_GetContainerChanges(&reference->super.super.super.super.baseExtraList); /*0x5a2fb1*/
+  sub_491700(ContainerChanges, a1, st6_0, a6, (TESObjectREFR *)reference, esi0[0xE], (TESForm *)ebx0); /*0x5a2fc4*/
+  GameUI_QueueMessage(MEMORY[0xB389E0].value, (UInt32)ebx0, 1u, flt_A31E2C); /*0x5a2fdc*/
+  sub_57DE50(0xB); /*0x5a2fe3*/
+  return sub_5A1740(a1, a2, a3, a4, a5);
 }

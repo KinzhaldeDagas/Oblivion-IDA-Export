@@ -66,7 +66,7 @@
 0x4F6C15: jz      short loc_4F6C6B
 0x4F6C17: push    eax
 0x4F6C18: push    0Ch
-0x4F6C1A: mov     ecx, offset dword_B3BDB0
+0x4F6C1A: mov     ecx, (offset qword_B3BB2C+284h)
 0x4F6C1F: call    sub_67CF50
 0x4F6C24: mov     ebp, eax
 0x4F6C26: test    ebp, ebp
@@ -90,9 +90,9 @@
 0x4F6C54: jmp     short loc_4F6C5B
 0x4F6C56: mov     byte ptr [esp+18h+responsibility], 1
 0x4F6C5B: mov     ecx, ebx
-0x4F6C5D: call    BSSimpleList_Clear
+0x4F6C5D: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x4F6C62: push    ebx
-0x4F6C63: call    FormHeapFree
+0x4F6C63: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4F6C68: add     esp, 4
 0x4F6C6B: mov     eax, [esi]
 0x4F6C6D: mov     edx, [eax+284h]

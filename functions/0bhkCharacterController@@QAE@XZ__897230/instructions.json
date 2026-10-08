@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x897270",
-    "line": "call    ??0bhkCharacterProxy@@QAE@XZ; bhkCharacterProxy::bhkCharacterProxy(void)",
+    "line": "call    ??0bhkCharacterProxy@@QAE@XZ; bhkCharacterController constructor: initializes default capsule radius/height and cached contact storage before InitFromCinfo builds authoritative geometry.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x89728F",
-    "line": "call    sub_88D310",
+    "line": "call    hkCharacterContext_Init; hkCharacterContext init stores state manager pointer and initial state id; 0x88D370 later returns +0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x897315",
-    "line": "push    offset sub_7016A0; a5",
+    "line": "push    offset NiPointerSlot_Release; a5",
     "mnemonic": "push",
     "size": 5
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x897365",
-    "line": "mov     [esi+3BCh], eax",
+    "line": "mov     [esi+3BCh], eax; TES4 authoritative: allocate cached character contact array, 5 entries * 0x30 bytes. Exposed on proxy at +0x3BC (dword index 0xEF).",
     "mnemonic": "mov",
     "size": 6
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x897370",
-    "line": "mov     [esi+3C4h], eax",
+    "line": "mov     [esi+3C4h], eax; TES4 authoritative: cached contact capacity = 5 entries; capacity word is proxy +0x3C4 (dword index 0xF1).",
     "mnemonic": "mov",
     "size": 6
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x89737C",
-    "line": "fst     dword ptr [esi+3A0h]",
+    "line": "fst     dword ptr [esi+3A0h]; Controller constructor default radius proxy+0x3A0 = 2.0 Havok units until construction info builds the actual shape.",
     "mnemonic": "fst",
     "size": 6
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x89739D",
-    "line": "fstp    dword ptr [esi+3A4h]",
+    "line": "fstp    dword ptr [esi+3A4h]; Controller constructor default capsule height proxy+0x3A4 = 10.0 Havok units until construction info builds the actual shape.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x89740A",
-    "line": "fst     dword ptr [esi+2B0h]",
+    "line": "fst     dword ptr [esi+2B0h]; Constructor initializes proxy+0x2B0 support/up basis vector to (0,0,1,0). State solvers use this as one of their ordinary basis inputs.",
     "mnemonic": "fst",
     "size": 6
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x897424",
-    "line": "fstp    dword ptr [esi+2C0h]",
+    "line": "fstp    dword ptr [esi+2C0h]; Constructor initializes proxy+0x2C0 lateral/forward basis vector to (1,0,0,0). 0x896000 refreshes this movement basis before state dispatch.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -757,13 +757,13 @@
   },
   {
     "ea": "0x897460",
-    "line": "mov     [esi+3C0h], ebx",
+    "line": "mov     [esi+3C0h], ebx; TES4 authoritative: cached contact count initialized to 0 at proxy +0x3C0 (dword index 0xF0).",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x897466",
-    "line": "call    sub_897040",
+    "line": "call    bhkCharacterController_InitFromCinfo; TES4 authoritative: applies character controller construction info, including proxy+0x248 vertical/base offset, world metadata, initial state, movement scalar, gravity, and owner/listener setup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -844,5 +844,365 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x8901C0",
+    "line": "mov     dword ptr [ecx], offset ??_7hkCharacterProxyListener@@6B@; const hkCharacterProxyListener::`vftable'",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x8901C6",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x8D2490",
+    "line": "mov     edx, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x8D2492",
+    "line": "mov     eax, [edx+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x8D2495",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x8D2497",
+    "line": "js      short locret_8D24D1",
+    "mnemonic": "js",
+    "size": 2
+  },
+  {
+    "ea": "0x8D2499",
+    "line": "mov     ecx, ds:0BA9DE4h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x8D249F",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8D24A0",
+    "line": "mov     esi, large fs:2Ch",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x8D24A7",
+    "line": "mov     ecx, [esi+ecx*4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x8D24AA",
+    "line": "mov     ecx, [ecx+19Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x8D24B0",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x8D24B2",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x8D24B3",
+    "line": "jnz     short loc_8D24BB",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x8D24B5",
+    "line": "mov     ecx, ds:0BA7D9Ch",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x8D24BB",
+    "line": "mov     edx, [edx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x8D24BD",
+    "line": "and     eax, 3FFFFFFFh",
+    "mnemonic": "and",
+    "size": 5
+  },
+  {
+    "ea": "0x8D24C2",
+    "line": "lea     eax, [eax+eax*2]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x8D24C5",
+    "line": "push    14h",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x8D24C7",
+    "line": "shl     eax, 4",
+    "mnemonic": "shl",
+    "size": 3
+  },
+  {
+    "ea": "0x8D24CA",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8D24CB",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8D24CC",
+    "line": "call    sub_8A75D0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x8D24D1",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D66B0",
+    "line": "mov     ecx, [ebp+var_34]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D66B3",
+    "line": "jmp     ??1bhkCharacterProxy@@UAE@XZ; bhkCharacterProxy::~bhkCharacterProxy(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D66B8",
+    "line": "mov     ecx, [ebp+var_34]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D66BB",
+    "line": "add     ecx, 1E0h",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9D66C1",
+    "line": "jmp     sub_88D340",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D66C6",
+    "line": "mov     ecx, [ebp+var_34]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D66C9",
+    "line": "add     ecx, 1F0h",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9D66CF",
+    "line": "jmp     loc_8901C0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D66D4",
+    "line": "mov     ecx, [ebp+var_34]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D66D7",
+    "line": "add     ecx, 364h; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9D66DD",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D66E2",
+    "line": "mov     ecx, [ebp+var_34]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D66E5",
+    "line": "add     ecx, 368h; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9D66EB",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D66F0",
+    "line": "push    offset NiPointerSlot_Release; void (__thiscall *)(void *)",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x9D66F5",
+    "line": "push    2; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9D66F7",
+    "line": "push    4; unsigned int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9D66F9",
+    "line": "mov     eax, [ebp+var_34]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D66FC",
+    "line": "add     eax, 374h",
+    "mnemonic": "add",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6701",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D6702",
+    "line": "call    $LN21",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6707",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D6708",
+    "line": "mov     ecx, [ebp+var_34]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D670B",
+    "line": "add     ecx, 3BCh",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9D6711",
+    "line": "jmp     loc_8D2490",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6716",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D671A",
+    "line": "lea     eax, [edx-44h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D671D",
+    "line": "mov     ecx, [edx-48h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D6720",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D6722",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6727",
+    "line": "add     eax, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9D672A",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D672D",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D672F",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6734",
+    "line": "mov     eax, offset stru_AFE4C4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6739",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

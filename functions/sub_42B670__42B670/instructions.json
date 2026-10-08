@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x42B670",
-    "line": "sub     esp, 1Ch",
+    "line": "sub     esp, 1Ch; XTEL loader: verifies current type, zero-initializes 28-byte scratch every call, bounded-read max 28, then copies all seven dwords to TeleportData. Empty therefore clears all; short is prefix+zero; oversized is 27 bytes plus forced final zero; repeats replace rather than prefix-overlay prior data.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x42B6B4",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },

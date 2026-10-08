@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4F90C0",
-    "line": "push    ebp",
+    "line": "push    ebp; TES4 authoritative: bhkWorldRayCastData::SetCastInputTo; scales world-space NiPoint3 into Havok units, writes ray To, resets sentinel vector at +0x60.",
     "mnemonic": "push",
     "size": 1
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x4F90FF",
-    "line": "movaps  xmmword ptr [eax+60h], xmm0",
+    "line": "movaps  xmmword ptr [eax+60h], xmm0; TES4 authoritative: SetCastInputTo resets ray data +0x60 sentinel/all-ones vector after scaling the TES/world endpoint to Havok units.",
     "mnemonic": "movaps",
     "size": 4
   },

@@ -1,15 +1,15 @@
-0x7917E0: push    ecx
+0x7917E0: push    ecx; CBranch::BuildBranchVector. Recurses through m_vChildren at branch+0x08 and follows each SIdvBranch child pointer at element+0x08.
 0x7917E1: push    ebx
 0x7917E2: push    ebp
 0x7917E3: mov     ebp, [esp+0Ch+arg_0]
 0x7917E7: push    esi
 0x7917E8: push    edi
 0x7917E9: mov     esi, ecx
-0x7917EB: lea     eax, [esp+14h+var_4]
-0x7917EF: push    eax
-0x7917F0: mov     ecx, ebp
-0x7917F2: mov     [esp+18h+var_4], esi
-0x7917F6: call    sub_791770
+0x7917EB: lea     eax, [esp+14h+value]
+0x7917EF: push    eax; value
+0x7917F0: mov     ecx, ebp; this
+0x7917F2: mov     [esp+18h+value], esi
+0x7917F6: call    OB_stVector4_PushBack_010201A0; Pushes one 4-byte value into an OB_stVector4. Writes directly at end when capacity remains, otherwise calls the checked insert-one helper. Oblivion uses it for CBranch pointers and other pointer-sized SpeedTree lists.
 0x7917FB: xor     edi, edi
 0x7917FD: xor     ebx, ebx
 0x7917FF: nop
@@ -43,7 +43,7 @@
 0x791845: mov     ecx, [esi+0Ch]
 0x791848: mov     ecx, [ecx+ebx+8]
 0x79184C: push    ebp
-0x79184D: call    sub_7917E0
+0x79184D: call    OB_CBranch_BuildBranchVector_010201A0; Recursively flattens compact CBranch tree into a pointer vector for branch LOD ranking.
 0x791852: add     edi, 1
 0x791855: add     ebx, 0Ch
 0x791858: jmp     short loc_791800

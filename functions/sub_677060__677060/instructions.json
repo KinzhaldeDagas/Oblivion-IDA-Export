@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x677066",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -37,13 +37,13 @@
   },
   {
     "ea": "0x67706A",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x677070",
-    "line": "push    offset flt_B3BCF0; Src",
+    "line": "push    (offset qword_B3BB2C+1C4h); source",
     "mnemonic": "push",
     "size": 5
   },
@@ -72,20 +72,14 @@
     "size": 2
   },
   {
-    "ea": "0x677087",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x677090",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x677096",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -109,7 +103,7 @@
   },
   {
     "ea": "0x6770A7",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -163,13 +157,13 @@
   },
   {
     "ea": "0x6770BE",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6770C0",
-    "line": "call    sub_6062B0",
+    "line": "call    Crime_SaveGame",
     "mnemonic": "call",
     "size": 5
   },

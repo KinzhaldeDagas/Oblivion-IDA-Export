@@ -1,9 +1,14 @@
-char __thiscall sub_557E60(char *this, int a2, int *a3, unsigned int a4)
+// Negative compatibility finding: nonzero maxBasisShapes is clamped to FaceGenEgtBasisBank_GetCount before basis iteration; zero selects min(bankCount,30). Thus PF requesting 50 during randomized refresh does not alone overrun a smaller EGT bank. Precheck separately errors if model basis records exceed matrix 2/3 rows. No bound bug from the raised limit proven.
+bool __thiscall BSFaceGenModel_GenerateMorphTexture(
+        void *this,
+        const FaceGenHeadParameters *parameters,
+        NiTexture **outTexture,
+        unsigned int maxBasisShapes)
 {
-  int v5; // eax
-  Ni2DBuffer *v6; // esi
-  int v7; // edi
-  int v8; // ebx
+  NiTexture *v5; // eax
+  NiTexture *v6; // esi
+  NiTexture *v7; // edi
+  const FaceGenHeadParameters *DefaultHeadParameters; // ebx
   int v9; // esi
   LONG (__stdcall *v10)(volatile LONG *, LONG, LONG); // edi
   LONG v11; // eax
@@ -11,7 +16,7 @@ char __thiscall sub_557E60(char *this, int a2, int *a3, unsigned int a4)
   int v13; // edi
   unsigned int v14; // eax
   int v15; // eax
-  _DWORD *v16; // ebx
+  FaceGenMatrix *v16; // ebx
   unsigned int v17; // esi
   _DWORD *v18; // eax
   BSFaceGenImage *v19; // eax
@@ -19,20 +24,20 @@ char __thiscall sub_557E60(char *this, int a2, int *a3, unsigned int a4)
   _DWORD *v22; // ecx
   unsigned int v23; // esi
   unsigned int v24; // esi
-  unsigned int v25; // esi
-  _DWORD *v26; // ebx
-  char *v27; // ebx
+  unsigned int basisCount; // esi
+  const FaceGenEgtBasisBank *v26; // ebx
+  _DWORD *v27; // ebx
   int v28; // esi
   int v29; // ecx
   int v30; // esi
   int v31; // esi
   int v32; // ecx
   int v33; // esi
-  _DWORD *v34; // esi
-  int v35; // eax
-  char *v36; // ebp
+  int v34; // esi
+  float *begin; // eax
+  _DWORD *v36; // ebp
   int v37; // esi
-  char *v38; // ebx
+  _DWORD *v38; // ebx
   int v39; // esi
   int v40; // ecx
   int v41; // esi
@@ -41,7 +46,7 @@ char __thiscall sub_557E60(char *this, int a2, int *a3, unsigned int a4)
   int v44; // esi
   int v45; // ebp
   int v46; // eax
-  int v47; // ebp
+  int combinedWeight16_16; // ebp
   int v48; // esi
   int v49; // eax
   int *v50; // ebx
@@ -58,7 +63,7 @@ char __thiscall sub_557E60(char *this, int a2, int *a3, unsigned int a4)
   bool v61; // cc
   int v62; // ebp
   unsigned int v63; // esi
-  unsigned int v64; // ecx
+  const FaceGenHeadParameters *v64; // ecx
   int *v65; // eax
   unsigned int v66; // edx
   double v67; // st6
@@ -67,20 +72,20 @@ char __thiscall sub_557E60(char *this, int a2, int *a3, unsigned int a4)
   unsigned int v70; // eax
   double v71; // st6
   UInt32 v72; // ebx
-  Ni2DBuffer *v73; // eax
-  Ni2DBuffer *v74; // esi
-  int v75; // edi
+  NiTexture *v73; // eax
+  NiTexture *v74; // esi
+  NiTexture *v75; // edi
   UInt32 v76; // [esp+28h] [ebp-5Ch] BYREF
   unsigned int v77; // [esp+2Ch] [ebp-58h]
-  char *v78; // [esp+30h] [ebp-54h]
-  unsigned int v79; // [esp+34h] [ebp-50h]
-  unsigned int v80; // [esp+38h] [ebp-4Ch]
+  _DWORD *v78; // [esp+30h] [ebp-54h]
+  unsigned int appliedBasisCount; // [esp+34h] [ebp-50h]
+  int rgbAccumulation16_16; // [esp+38h] [ebp-4Ch]
   unsigned int v81; // [esp+3Ch] [ebp-48h]
-  unsigned int v82; // [esp+40h] [ebp-44h]
-  unsigned int v83; // [esp+44h] [ebp-40h]
+  int v82; // [esp+40h] [ebp-44h]
+  int v83; // [esp+44h] [ebp-40h]
   unsigned int v84; // [esp+48h] [ebp-3Ch]
-  _DWORD *v85; // [esp+4Ch] [ebp-38h]
-  int v86; // [esp+50h] [ebp-34h]
+  FaceGenMatrix *v85; // [esp+4Ch] [ebp-38h]
+  int coordinateFixed8_8; // [esp+50h] [ebp-34h]
   int v87; // [esp+54h] [ebp-30h]
   _DWORD *v88; // [esp+58h] [ebp-2Ch]
   volatile LONG *Destination; // [esp+5Ch] [ebp-28h]
@@ -88,313 +93,314 @@ char __thiscall sub_557E60(char *this, int a2, int *a3, unsigned int a4)
   float v91; // [esp+64h] [ebp-20h]
   int v92[4]; // [esp+68h] [ebp-1Ch] BYREF
   unsigned int v93; // [esp+80h] [ebp-4h]
-  unsigned int v94; // [esp+88h] [ebp+4h]
-  unsigned int v95; // [esp+88h] [ebp+4h]
-  int v96; // [esp+90h] [ebp+Ch]
-  int *v97; // [esp+90h] [ebp+Ch]
+  unsigned int basisIndex; // [esp+88h] [ebp+4h]
+  const FaceGenHeadParameters *parametersa; // [esp+88h] [ebp+4h]
+  unsigned int basisRecordOffset; // [esp+90h] [ebp+Ch]
+  unsigned int maxBasisShapesa; // [esp+90h] [ebp+Ch]
 
-  v78 = this;
-  v76 = 0;
-  v93 = 0;
-  v5 = sub_523D80();
-  v6 = (Ni2DBuffer *)*a3;
-  v7 = v5;
-  if ( *a3 != v5 )
+  v78 = this; /*0x557e89*/
+  v76 = 0; /*0x557e8f*/
+  v93 = 0; /*0x557e93*/
+  v5 = (NiTexture *)sub_523D80(); /*0x557e97*/
+  v6 = *outTexture; /*0x557ea0*/
+  v7 = v5; /*0x557ea2*/
+  if ( *outTexture != v5 ) /*0x557ea6*/
   {
-    if ( v6 )
+    if ( v6 ) /*0x557eaa*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)&v6->members) )
-        (*(void (__thiscall **)(Ni2DBuffer *, int))v6->__vftable)(v6, 1);
+      if ( !InterlockedDecrement((volatile LONG *)&v6->members) ) /*0x557eb0*/
+        v6->__vftable->super.super.Destructor((NiRefObject *)v6, 1); /*0x557ec6*/
     }
-    *a3 = v7;
-    if ( v7 )
-      InterlockedIncrement((volatile LONG *)(v7 + 4));
+    *outTexture = v7; /*0x557eca*/
+    if ( v7 ) /*0x557ecc*/
+      InterlockedIncrement((volatile LONG *)&v7->members); /*0x557ed2*/
   }
-  if ( !*((_DWORD *)this + 3) )
-    return 0;
-  v8 = a2;
-  if ( !a2 )
+  if ( !*((_DWORD *)this + 3) ) /*0x557ed8*/
+    return 0; /*0x557ed8*/
+  DefaultHeadParameters = parameters; /*0x557ee2*/
+  if ( !parameters ) /*0x557ee8*/
   {
-    v8 = sub_5538D0();
-    if ( !v8 )
-      return 0;
+    DefaultHeadParameters = FaceGenManager_GetDefaultHeadParameters(); /*0x557eef*/
+    if ( !DefaultHeadParameters ) /*0x557ef3*/
+      return 0; /*0x557ef3*/
   }
-  if ( !sub_551960((unsigned int **)this) )
+  if ( !sub_551960((unsigned int **)this) ) /*0x557efa*/
   {
-    v9 = *((_DWORD *)this + 3);
-    if ( !*(_DWORD *)(v9 + 8) )
+    v9 = *((_DWORD *)this + 3); /*0x557f06*/
+    if ( !*(_DWORD *)(v9 + 8) ) /*0x557f09*/
     {
-      if ( !BSStringT_GetLen(*((BSStringT **)this + 3)) )
-        goto LABEL_28;
-      *(_DWORD *)(*((_DWORD *)this + 3) + 8) = sub_557C80(*(char **)v9);
+      if ( !BSStringT_GetLen(*((BSStringT **)this + 3)) ) /*0x557f18*/
+        goto LABEL_28; /*0x557f18*/
+      *(_DWORD *)(*((_DWORD *)this + 3) + 8) = BSFaceGenEgtData_CreateFromFile(*(const char **)v9); /*0x557f2c*/
     }
-    if ( *(_DWORD *)(*((_DWORD *)this + 3) + 8) )
-      goto LABEL_15;
+    if ( *(_DWORD *)(*((_DWORD *)this + 3) + 8) ) /*0x557f32*/
+      goto LABEL_15; /*0x557f36*/
 LABEL_28:
-    v93 = 0xFFFFFFFF;
-    sub_7016A0((NiD3DVertexShader *)&v76);
-    return 0;
+    v93 = 0xFFFFFFFF; /*0x55802c*/
+    NiPointerSlot_Release((NiD3DVertexShader *)&v76); /*0x558038*/
+    return 0; /*0x558052*/
   }
 LABEL_15:
-  v10 = InterlockedCompareExchange;
-  Destination = (volatile LONG *)(this + 0x18);
-  v90 = this + 0x18;
-  v11 = v10((volatile LONG *)this + 6, 1, 0);
-  LOBYTE(v91) = v11 == 0;
-  LOBYTE(v93) = 1;
-  if ( v11 )
-    goto LABEL_28;
-  v12 = *(_DWORD *)(*((_DWORD *)this + 3) + 8);
-  if ( !v12 )
+  v10 = InterlockedCompareExchange; /*0x557f3c*/
+  Destination = (volatile LONG *)((char *)this + 0x18); /*0x557f4a*/
+  v90 = (char *)this + 0x18; /*0x557f4e*/
+  v11 = v10((volatile LONG *)this + 6, 1, 0); /*0x557f52*/
+  LOBYTE(v91) = v11 == 0; /*0x557f59*/
+  LOBYTE(v93) = 1; /*0x557f5f*/
+  if ( v11 ) /*0x557f64*/
+    goto LABEL_28; /*0x557f64*/
+  v12 = *(_DWORD *)(*((_DWORD *)this + 3) + 8); /*0x557f6d*/
+  if ( !v12 ) /*0x557f72*/
   {
-    v10((volatile LONG *)this + 6, 0, 1);
-    goto LABEL_28;
+    v10((volatile LONG *)this + 6, 0, 1); /*0x557f78*/
+    goto LABEL_28; /*0x557f7a*/
   }
-  v13 = *(_DWORD *)(sub_556320((_DWORD *)(v12 + 4), 0) + 4);
-  v14 = *(_DWORD *)(sub_556320((_DWORD *)(*(_DWORD *)(*((_DWORD *)this + 3) + 8) + 4), 0) + 8);
-  v77 = v14;
-  if ( !v13 || !v14 )
+  v13 = *((_DWORD *)FaceGenEgtBasisBank_GetAt((FaceGenEgtBasisBank *)(v12 + 4), 0) + 1); /*0x557f8f*/
+  v14 = *((_DWORD *)FaceGenEgtBasisBank_GetAt((FaceGenEgtBasisBank *)(*(_DWORD *)(*((_DWORD *)this + 3) + 8) + 4), 0) + 2); /*0x557f9e*/
+  v77 = v14; /*0x557fa1*/
+  if ( !v13 || !v14 ) /*0x557fa9*/
   {
 LABEL_27:
-    sub_5563B0((int)&v90);
-    goto LABEL_28;
+    sub_5563B0((int)&v90); /*0x558023*/
+    goto LABEL_28; /*0x558027*/
   }
-  v15 = *(_DWORD *)(*((_DWORD *)this + 3) + 8);
-  v16 = (_DWORD *)(v8 + 0x30);
-  v17 = 0;
-  v85 = v16;
-  v18 = (_DWORD *)(v15 + 8);
-  do
+  v15 = *(_DWORD *)(*((_DWORD *)this + 3) + 8); /*0x557fae*/
+  v16 = &DefaultHeadParameters->matrices[2];    // EGT texture generation begins at FaceGen matrix 2 and validates/consumes matrices 2 and 3 as texture-coordinate banks. /*0x557fb1*/
+  v17 = 0; /*0x557fb4*/
+  v85 = v16; /*0x557fb6*/
+  v18 = (_DWORD *)(v15 + 8); /*0x557fba*/
+  do /*0x557fe0*/
   {
-    if ( *v18 && *v16 < (unsigned int)((v18[1] - *v18) >> 6) )
+    if ( *v18 && v16->rows < (v18[1] - *v18) >> 6 ) /*0x557fd2*/
     {
-      PrintError("FaceGen - Tried to apply a coordinate that did not match the EGT basis.");
-      goto LABEL_27;
+      PrintError("FaceGen - Tried to apply a coordinate that did not match the EGT basis."); /*0x55801b*/
+      goto LABEL_27; /*0x55801b*/
     }
-    ++v17;
-    v16 += 6;
-    v18 += 4;
+    ++v17; /*0x557fd4*/
+    ++v16; /*0x557fd7*/
+    v18 += 4; /*0x557fda*/
   }
-  while ( v17 < 2 );
-  *(float *)&v92[3] = 0.0;
-  *(float *)&v92[2] = 0.0;
-  *(float *)&v92[1] = 0.0;
-  *(float *)v92 = 0.0;
-  v19 = (BSFaceGenImage *)FormHeapAlloc(0x24u);
-  LOBYTE(v93) = 2;
-  if ( v19 )
-    v20 = BSFaceGenImage::BSFaceGenImage(v19, 0);
+  while ( v17 < 2 ); /*0x557fe0*/
+  *(float *)&v92[3] = 0.0; /*0x557fe6*/
+  *(float *)&v92[2] = 0.0; /*0x557fea*/
+  *(float *)&v92[1] = 0.0; /*0x557fee*/
+  *(float *)v92 = 0.0; /*0x557ff2*/
+  v19 = (BSFaceGenImage *)FormHeapAlloc(0x24u); /*0x557ff6*/
+  LOBYTE(v93) = 2; /*0x558004*/
+  if ( v19 ) /*0x558009*/
+    v20 = BSFaceGenImage::BSFaceGenImage(v19, 0); /*0x55800f*/
   else
-    v20 = 0;
-  LOBYTE(v93) = 1;
-  NiSmartPointer_Set__((Ni2DBuffer **)&v76, (Ni2DBuffer *)v20);
-  v22 = (_DWORD *)v76;
-  v23 = v77;
-  *(_DWORD *)(v76 + 0x1C) = v13;
-  v22[8] = v23;
-  v24 = v13 * v23;
-  v88 = sub_54E390(v22);
-  sub_54E230(v88, v24, v92);
-  v80 = FormHeapAlloc((unsigned __int64)(3 * v24) >> 0x1E != 0 ? 0xFFFFFFFF : 0xC * v24);
-  _memset(v80, 0, 0xC * v24);
-  v25 = a4;
-  if ( a4 )
+    v20 = 0; /*0x558055*/
+  LOBYTE(v93) = 1; /*0x55805c*/
+  NiSmartPointer_Set__((Ni2DBuffer **)&v76, (Ni2DBuffer *)v20); /*0x558061*/
+  v22 = (_DWORD *)v76; /*0x558066*/
+  v23 = v77; /*0x55806a*/
+  *(_DWORD *)(v76 + 0x1C) = v13; /*0x55806e*/
+  v22[8] = v23; /*0x558071*/
+  v24 = v13 * v23; /*0x558079*/
+  v88 = sub_54E390(v22); /*0x558084*/
+  sub_54E230(v88, v24, v92); /*0x558088*/
+  rgbAccumulation16_16 = FormHeapAlloc((unsigned __int64)(3 * v24) >> 0x1E != 0 ? 0xFFFFFFFF : 0xC * v24);
+  _memset(rgbAccumulation16_16, 0, 0xC * v24); /*0x5580b5*/
+  basisCount = maxBasisShapes; /*0x5580ba*/
+  if ( maxBasisShapes ) /*0x5580c6*/
   {
-    v26 = (_DWORD *)(*(_DWORD *)(*((_DWORD *)v78 + 3) + 8) + 4);
-    v79 = a4;
-    if ( a4 > sub_556300(v26) )
+    v26 = (const FaceGenEgtBasisBank *)(*(_DWORD *)(v78[3] + 8) + 4); /*0x5580d2*/
+    appliedBasisCount = maxBasisShapes; /*0x5580d7*/
+    if ( maxBasisShapes > FaceGenEgtBasisBank_GetCount(v26) ) /*0x5580e2*/
     {
-      v25 = sub_556300(v26);
+      basisCount = FaceGenEgtBasisBank_GetCount(v26); /*0x5580eb*/
 LABEL_36:
-      v79 = v25;
+      appliedBasisCount = basisCount; /*0x558111*/
     }
   }
   else
   {
-    v25 = sub_556300((_DWORD *)(*(_DWORD *)(*((_DWORD *)v78 + 3) + 8) + 4));
-    v79 = v25;
-    if ( v25 > 0x1E )
+    basisCount = FaceGenEgtBasisBank_GetCount((const FaceGenEgtBasisBank *)(*(_DWORD *)(v78[3] + 8) + 4)); /*0x558101*/
+    appliedBasisCount = basisCount; /*0x558106*/
+    if ( basisCount > 0x1E ) /*0x55810a*/
     {
-      v25 = 0x1E;
-      goto LABEL_36;
+      basisCount = 0x1E; /*0x55810c*/
+      goto LABEL_36; /*0x55810c*/
     }
   }
-  v94 = 0;
-  if ( v25 )
+  basisIndex = 0; /*0x558115*/
+  if ( basisCount ) /*0x55811f*/
   {
-    v96 = 0;
-    do
+    basisRecordOffset = 0; /*0x558125*/
+    do /*0x55834b*/
     {
-      v27 = v78;
-      v28 = *(_DWORD *)(*((_DWORD *)v78 + 3) + 8);
-      v29 = *(_DWORD *)(v28 + 8);
-      v30 = v28 + 4;
-      if ( !v29 || v94 >= (*(_DWORD *)(v30 + 8) - v29) >> 6 )
-        _invalid_parameter_noinfo();
-      if ( *(_DWORD *)(*(_DWORD *)(v30 + 4) + v96 + 4) != v13 )
-        sub_6ED6D0((int)"..\\TES Shared\\FaceGen\\BSFaceGenModel.cpp", 0x462);
-      v31 = *(_DWORD *)(*((_DWORD *)v27 + 3) + 8);
-      v32 = *(_DWORD *)(v31 + 8);
-      v33 = v31 + 4;
-      if ( !v32 || v94 >= (*(_DWORD *)(v33 + 8) - v32) >> 6 )
-        _invalid_parameter_noinfo();
-      if ( *(_DWORD *)(*(_DWORD *)(v33 + 4) + v96 + 8) != v77 )
-        sub_6ED6D0((int)"..\\TES Shared\\FaceGen\\BSFaceGenModel.cpp", 0x463);
-      v34 = v85;
-      v35 = v85[3];
-      if ( !v35 || !((v85[4] - v35) >> 2) )
-        _invalid_parameter_noinfo();
-      v86 = Double_To_SInt32(*(float *)(v34[3] + 4 * v94 * v34[1]) * dbl_A3B1B8);
-      if ( v86 )
+      v27 = v78; /*0x558130*/
+      v28 = *(_DWORD *)(v78[3] + 8); /*0x558137*/
+      v29 = *(_DWORD *)(v28 + 8); /*0x55813a*/
+      v30 = v28 + 4; /*0x558141*/
+      if ( !v29 || basisIndex >= (*(_DWORD *)(v30 + 8) - v29) >> 6 ) /*0x558152*/
+        _invalid_parameter_noinfo((int)v78, v13, v30); /*0x558154*/
+      if ( *(_DWORD *)(*(_DWORD *)(v30 + 4) + basisRecordOffset + 4) != v13 ) /*0x558164*/
+        FaceGen_ReportAssertionViolation("..\\TES Shared\\FaceGen\\BSFaceGenModel.cpp", 0x462); /*0x558170*/
+      v31 = *(_DWORD *)(v27[3] + 8); /*0x55817b*/
+      v32 = *(_DWORD *)(v31 + 8); /*0x55817e*/
+      v33 = v31 + 4; /*0x558181*/
+      if ( !v32 || basisIndex >= (*(_DWORD *)(v33 + 8) - v32) >> 6 ) /*0x558192*/
+        _invalid_parameter_noinfo((int)v27, v13, v33); /*0x558194*/
+      if ( *(_DWORD *)(*(_DWORD *)(v33 + 4) + basisRecordOffset + 8) != v77 ) /*0x5581a8*/
+        FaceGen_ReportAssertionViolation("..\\TES Shared\\FaceGen\\BSFaceGenModel.cpp", 0x463); /*0x5581b4*/
+      v34 = (int)v85; /*0x5581bc*/
+      begin = v85->begin; /*0x5581c0*/
+      if ( !begin || !(v85->end - begin) ) /*0x5581cc*/
+        _invalid_parameter_noinfo((int)v27, v13, (int)v85); /*0x5581d1*/
+      coordinateFixed8_8 = Double_To_SInt32(*(float *)(*(_DWORD *)(v34 + 0xC) + 4 * basisIndex * *(_DWORD *)(v34 + 4)) * dbl_A3B1B8); /*0x5581f2*/
+      if ( coordinateFixed8_8 ) /*0x5581f6*/
       {
-        v36 = v78;
-        v37 = *(_DWORD *)(sub_556320((_DWORD *)(*(_DWORD *)(*((_DWORD *)v78 + 3) + 8) + 4), v94) + 0xC);
-        v87 = v37 + *(_DWORD *)(sub_556320((_DWORD *)(*(_DWORD *)(*((_DWORD *)v36 + 3) + 8) + 4), v94) + 4);
-        v81 = 0;
-        v82 = v80;
-        do
+        v36 = v78; /*0x5581fc*/
+        v37 = *((_DWORD *)FaceGenEgtBasisBank_GetAt((FaceGenEgtBasisBank *)(*(_DWORD *)(v78[3] + 8) + 4), basisIndex) + 3); /*0x558219*/
+        v87 = v37 /*0x55822a*/
+            + *((_DWORD *)FaceGenEgtBasisBank_GetAt((FaceGenEgtBasisBank *)(*(_DWORD *)(v36[3] + 8) + 4), basisIndex) + 1);
+        v81 = 0; /*0x558232*/
+        v82 = rgbAccumulation16_16; /*0x55823a*/
+        do /*0x558331*/
         {
-          v38 = v78;
-          v39 = *(_DWORD *)(*((_DWORD *)v78 + 3) + 8);
-          v40 = *(_DWORD *)(v39 + 8);
-          v41 = v39 + 4;
-          if ( !v40 || v94 >= (*(_DWORD *)(v41 + 8) - v40) >> 6 )
-            _invalid_parameter_noinfo();
-          v42 = Double_To_SInt32(*(float *)(*(_DWORD *)(v41 + 4) + v96) * dbl_A3B1B8);
-          v43 = *((_DWORD *)v38 + 3);
-          v44 = *(_DWORD *)(v43 + 8) + 4;
-          v45 = v42;
-          v46 = *(_DWORD *)(*(_DWORD *)(v43 + 8) + 8);
-          v47 = v86 * v45;
-          if ( !v46 || v94 >= (*(_DWORD *)(*(_DWORD *)(v43 + 8) + 0xC) - v46) >> 6 )
-            _invalid_parameter_noinfo();
-          v48 = v96 + *(_DWORD *)(v44 + 4);
-          v49 = *(_DWORD *)(v81 + v48 + 0x14);
-          v50 = (int *)(v81 + v48 + 0x14);
-          if ( !v49 || *(_DWORD *)(v81 + v48 + 0x18) == v49 )
-            _invalid_parameter_noinfo();
-          v51 = *v50;
-          if ( v77 )
+          v38 = v78; /*0x558240*/
+          v39 = *(_DWORD *)(v78[3] + 8); /*0x558247*/
+          v40 = *(_DWORD *)(v39 + 8); /*0x55824a*/
+          v41 = v39 + 4; /*0x55824d*/
+          if ( !v40 || basisIndex >= (*(_DWORD *)(v41 + 8) - v40) >> 6 ) /*0x558260*/
+            _invalid_parameter_noinfo((int)v78, v13, v41); /*0x558262*/
+          v42 = Double_To_SInt32(*(float *)(*(_DWORD *)(v41 + 4) + basisRecordOffset) * dbl_A3B1B8); /*0x558277*/
+          v43 = v38[3]; /*0x55827c*/
+          v44 = *(_DWORD *)(v43 + 8) + 4; /*0x558282*/
+          v45 = v42; /*0x558285*/
+          v46 = *(_DWORD *)(*(_DWORD *)(v43 + 8) + 8); /*0x558287*/
+          combinedWeight16_16 = coordinateFixed8_8 * v45; /*0x55828a*/
+          if ( !v46 || basisIndex >= (*(_DWORD *)(*(_DWORD *)(v43 + 8) + 0xC) - v46) >> 6 ) /*0x55829f*/
+            _invalid_parameter_noinfo((int)v38, v13, v44); /*0x5582a1*/
+          v48 = basisRecordOffset + *(_DWORD *)(v44 + 4); /*0x5582a9*/
+          v49 = *(_DWORD *)(v81 + v48 + 0x14); /*0x5582b1*/
+          v50 = (int *)(v81 + v48 + 0x14); /*0x5582b7*/
+          if ( !v49 || *(_DWORD *)(v81 + v48 + 0x18) == v49 ) /*0x5582c1*/
+            _invalid_parameter_noinfo((int)v50, v13, v48); /*0x5582c5*/
+          v51 = *v50; /*0x5582cf*/
+          if ( v77 ) /*0x5582d1*/
           {
-            v52 = (_DWORD *)v82;
-            v53 = 0xC * v13;
-            v83 = v82;
-            v84 = v77;
-            do
+            v52 = (_DWORD *)v82; /*0x5582d3*/
+            v53 = 0xC * v13; /*0x5582e0*/
+            v83 = v82; /*0x5582e2*/
+            v84 = v77; /*0x5582e6*/
+            do /*0x55831c*/
             {
-              for ( i = 0; i < v13; ++i )
+              for ( i = 0; i < v13; ++i ) /*0x5582f0*/
               {
-                *v52 += v47 * *(char *)(i + v51);
-                v52 += 3;
+                *v52 += combinedWeight16_16 * *(char *)(i + v51); /*0x5582fd*/
+                v52 += 3; /*0x558302*/
               }
-              v51 += v87;
-              v52 = (_DWORD *)(v53 + v83);
-              v55 = v84-- == 1;
-              v83 += v53;
+              v51 += v87; /*0x55830d*/
+              v52 = (_DWORD *)(v53 + v83); /*0x558311*/
+              v55 = v84-- == 1; /*0x558313*/
+              v83 += v53; /*0x558318*/
             }
-            while ( !v55 );
+            while ( !v55 ); /*0x55831c*/
           }
-          v82 += 4;
-          v81 += 0x10;
+          v82 += 4; /*0x558322*/
+          v81 += 0x10; /*0x55832d*/
         }
-        while ( v81 < 0x30 );
+        while ( v81 < 0x30 ); /*0x558331*/
       }
-      v96 += 0x40;
-      ++v94;
+      basisRecordOffset += 0x40; /*0x55833b*/
+      ++basisIndex; /*0x558347*/
     }
-    while ( v94 < v79 );
+    while ( basisIndex < appliedBasisCount ); /*0x55834b*/
   }
-  v56 = dbl_A64AA0;
-  for ( j = 0; j < 3; ++j )
+  v56 = dbl_A64AA0; /*0x558351*/
+  for ( j = 0; j < 3; ++j ) /*0x558357*/
   {
-    v58 = v88;
-    v59 = v88[1];
-    v60 = v59 < v88[2];
-    v61 = v59 <= v88[2];
-    v84 = v59;
-    if ( !v61 )
+    v58 = v88; /*0x558359*/
+    v59 = v88[1]; /*0x55835d*/
+    v60 = v59 < v88[2]; /*0x558360*/
+    v61 = v59 <= v88[2]; /*0x558360*/
+    v84 = v59; /*0x558363*/
+    if ( !v61 ) /*0x558367*/
     {
-      _invalid_parameter_noinfo();
-      v56 = dbl_A64AA0;
-      v60 = v59 < v58[2];
+      _invalid_parameter_noinfo(j, v13, v59); /*0x55836b*/
+      v56 = dbl_A64AA0; /*0x558370*/
+      v60 = v59 < v58[2]; /*0x558376*/
     }
-    if ( !v60 )
+    if ( !v60 ) /*0x558379*/
     {
-      _invalid_parameter_noinfo();
-      v56 = dbl_A64AA0;
+      _invalid_parameter_noinfo(j, v13, v59); /*0x55837d*/
+      v56 = dbl_A64AA0; /*0x558382*/
     }
-    if ( v77 )
+    if ( v77 ) /*0x55838d*/
     {
-      v86 = 0xC * v13;
-      v62 = 0;
-      v87 = 0x10 * v13;
-      v97 = (int *)(v80 + 4 * j);
-      v95 = v84 + 4 * j;
-      v83 = v77;
-      do
+      coordinateFixed8_8 = 0xC * v13; /*0x55839e*/
+      v62 = 0; /*0x5583a4*/
+      v87 = 0x10 * v13; /*0x5583ac*/
+      maxBasisShapesa = rgbAccumulation16_16 + 4 * j; /*0x5583b4*/
+      parametersa = (const FaceGenHeadParameters *)(v84 + 4 * j); /*0x5583bf*/
+      v83 = v77; /*0x5583c3*/
+      do /*0x55845a*/
       {
-        v63 = 0;
-        if ( v13 >= 4 )
+        v63 = 0; /*0x5583c7*/
+        if ( v13 >= 4 ) /*0x5583cc*/
         {
-          v64 = v95;
-          v65 = v97;
-          v66 = ((unsigned int)(v13 - 4) >> 2) + 1;
-          v63 = 4 * v66;
-          do
+          v64 = parametersa; /*0x5583ce*/
+          v65 = (int *)maxBasisShapesa; /*0x5583d2*/
+          v66 = ((unsigned int)(v13 - 4) >> 2) + 1; /*0x5583dc*/
+          v63 = 4 * v66; /*0x5583df*/
+          do /*0x55840e*/
           {
-            v67 = (double)*v65;
-            v65 += 0xC;
-            v64 += 0x40;
-            --v66;
-            *(float *)(v64 - 0x40) = v67 * v56;
-            *(float *)(v64 - 0x30) = (double)v65[0xFFFFFFF7] * v56;
-            *(float *)(v64 - 0x20) = (double)v65[0xFFFFFFFA] * v56;
-            *(float *)(v64 - 0x10) = (double)v65[0xFFFFFFFD] * v56;
+            v67 = (double)*v65; /*0x5583e6*/
+            v65 += 0xC; /*0x5583e8*/
+            v64 = (const FaceGenHeadParameters *)((char *)v64 + 0x40); /*0x5583eb*/
+            --v66; /*0x5583ee*/
+            *(float *)&v64[0xFFFFFFFF].matrices[1].allocator08 = v67 * v56; /*0x5583f3*/
+            *(float *)&v64[0xFFFFFFFF].matrices[2].rows = (double)v65[0xFFFFFFF7] * v56; /*0x5583fb*/
+            *(float *)&v64[0xFFFFFFFF].matrices[2].end = (double)v65[0xFFFFFFFA] * v56; /*0x558403*/
+            *(float *)&v64[0xFFFFFFFF].matrices[3].allocator08 = (double)v65[0xFFFFFFFD] * v56; /*0x55840b*/
           }
-          while ( v66 );
+          while ( v66 ); /*0x55840e*/
         }
-        if ( v63 < v13 )
+        if ( v63 < v13 ) /*0x558412*/
         {
-          v68 = v84 + 4 * (j + 4 * (v63 + v62));
-          v69 = (int *)(v80 + 4 * (v63 + v62 + j + 2 * (v63 + v62)));
-          v70 = v13 - v63;
-          do
+          v68 = v84 + 4 * (j + 4 * (v63 + v62)); /*0x55841e*/
+          v69 = (int *)(rgbAccumulation16_16 + 4 * (v63 + v62 + j + 2 * (v63 + v62))); /*0x55842a*/
+          v70 = v13 - v63; /*0x55842f*/
+          do /*0x558441*/
           {
-            v71 = (double)*v69;
-            v69 += 3;
-            v68 += 0x10;
-            --v70;
-            *(float *)(v68 - 0x10) = v71 * v56;
+            v71 = (double)*v69; /*0x558431*/
+            v69 += 3; /*0x558433*/
+            v68 += 0x10; /*0x558436*/
+            --v70; /*0x558439*/
+            *(float *)(v68 - 0x10) = v71 * v56; /*0x55843e*/
           }
-          while ( v70 );
+          while ( v70 ); /*0x558441*/
         }
-        v95 += v87;
-        v97 = (int *)((char *)v97 + v86);
-        v62 += v13;
-        --v83;
+        parametersa = (const FaceGenHeadParameters *)((char *)parametersa + v87); /*0x55844b*/
+        maxBasisShapesa += coordinateFixed8_8; /*0x55844f*/
+        v62 += v13; /*0x558453*/
+        --v83; /*0x558455*/
       }
-      while ( v83 );
+      while ( v83 ); /*0x55845a*/
     }
   }
-  FormHeapFree(v80);
-  v72 = v76;
-  v73 = sub_54DA40((unsigned int *)v76, flt_A64A9C, flt_A40098, flt_A3D65C, &unk_B26040);
-  v74 = (Ni2DBuffer *)*a3;
-  v75 = (int)v73;
-  if ( (Ni2DBuffer *)*a3 != v73 )
+  FormHeapFree(rgbAccumulation16_16); /*0x558473*/
+  v72 = v76; /*0x55847e*/
+  v73 = (NiTexture *)sub_54DA40((unsigned int *)v76, flt_A64A9C, flt_A40098, kHeadBodyNormalMatchRadius, &unk_B26040); /*0x5584a6*/
+  v74 = *outTexture; /*0x5584af*/
+  v75 = v73; /*0x5584b2*/
+  if ( *outTexture != v73 ) /*0x5584b6*/
   {
-    if ( v74 )
+    if ( v74 ) /*0x5584ba*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)&v74->members) )
-        (*(void (__thiscall **)(Ni2DBuffer *, int))v74->__vftable)(v74, 1);
+      if ( !InterlockedDecrement((volatile LONG *)&v74->members) ) /*0x5584c0*/
+        v74->__vftable->super.super.Destructor((NiRefObject *)v74, 1); /*0x5584d6*/
     }
-    *a3 = v75;
-    if ( v75 )
-      InterlockedIncrement((volatile LONG *)(v75 + 4));
+    *outTexture = v75; /*0x5584da*/
+    if ( v75 ) /*0x5584dd*/
+      InterlockedIncrement((volatile LONG *)&v75->members); /*0x5584e3*/
   }
-  InterlockedCompareExchange(Destination, 0, 1);
-  v93 = 0xFFFFFFFF;
-  if ( !InterlockedDecrement((volatile LONG *)(v72 + 4)) )
-    (**(void (__thiscall ***)(UInt32, int))v72)(v72, 1);
-  return 1;
+  InterlockedCompareExchange(Destination, 0, 1); /*0x5584f2*/
+  v93 = 0xFFFFFFFF; /*0x5584fc*/
+  if ( !InterlockedDecrement((volatile LONG *)(v72 + 4)) ) /*0x558504*/
+    (**(void (__thiscall ***)(UInt32, int))v72)(v72, 1); /*0x558516*/
+  return 1; /*0x55803f*/
 }

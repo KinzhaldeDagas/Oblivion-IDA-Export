@@ -1,19 +1,32 @@
 {
-  "callees_count": 27,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 18,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7A7800",
+      "0x7A78F5"
+    ]
+  ],
+  "chunks_sha256": "14ac0225308e03fe5726fa39d14a2c5301bb3f69e08e44c0bd95aa1cfb4168ad",
+  "comment_regular": "Oblivion binary evidence: destructor for compact 0x74 SIdvBranchInfo. Destroys and frees each of nine optional heap-owned 0x5C stBezierSpline pointers, then nulls all nine fields. CTreeEngine::FreeTransientData is the sole caller and frees the enclosing record afterward.",
+  "comment_repeatable": "Oblivion binary evidence: destructor for compact 0x74 SIdvBranchInfo. Destroys and frees each of nine optional heap-owned 0x5C stBezierSpline pointers, then nulls all nine fields. CTreeEngine::FreeTransientData is the sole caller and frees the enclosing record afterward.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7A7800",
+  "display_name": "OB_SIdvBranchInfo_Dtor_010201A0",
   "end_ea": "0x7A78F5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7A7800",
+  "name": "OB_SIdvBranchInfo_Dtor_010201A0",
   "segment": ".text",
   "sha256": "14ac0225308e03fe5726fa39d14a2c5301bb3f69e08e44c0bd95aa1cfb4168ad",
   "size": 245,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A7800",
-  "type": "void __thiscall(unsigned int *this)",
+  "total_chunk_size": 245,
+  "type": "void __thiscall(OB_SIdvBranchInfo_010201A0 *this)",
   "xrefs_from_count": 116,
   "xrefs_to_count": 1
 }

@@ -28,7 +28,7 @@
 0x9A85FD: cmp     eax, edi
 0x9A85FF: jnb     short loc_9A8611
 0x9A8601: push    ecx
-0x9A8602: call    FormHeapFree
+0x9A8602: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x9A8607: add     esp, 4
 0x9A860A: mov     dword ptr [esi+24h], 0
 0x9A8611: mov     ebp, [esp+0Ch+Src]
@@ -50,7 +50,7 @@
 0x9A8638: retn    4
 0x9A863B: mov     ecx, [esi+24h]
 0x9A863E: push    ecx
-0x9A863F: call    FormHeapFree
+0x9A863F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x9A8644: add     esp, 4
 0x9A8647: mov     dword ptr [esi+24h], 0
 0x9A864E: pop     esi

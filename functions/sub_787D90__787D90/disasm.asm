@@ -1,4 +1,4 @@
-0x787D90: mov     ecx, [ecx+58h]
+0x787D90: mov     ecx, [ecx+58h]; Returns stock collision-object count as vector length divided by compact 0x1C record stride.
 0x787D93: xor     eax, eax
 0x787D95: test    ecx, ecx
 0x787D97: jz      short locret_787DB9

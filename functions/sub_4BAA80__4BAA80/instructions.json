@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4BAA80",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified Oblivion TREE override ignores the rotationAnglesXYZ and cellLODBuffer parameters, then forwards its scalePercent array into the local billboard descriptor. Fallout's AddDistantLOD uses a four-float instance record (position XYZ + fScaleColor) and its own DistantLODGroup shader path; do not transplant Oblivion .lod record layout or world offsets.",
     "mnemonic": "push",
     "size": 2
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x4BAABB",
-    "line": "mov     ebp, [esp+244h+arg_18]",
+    "line": "mov     ebp, [esp+244h+modeOrDistance]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x4BAAC4",
-    "line": "mov     eax, [esp+244h+arg_8]",
+    "line": "mov     eax, [esp+244h+colorValues]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x4BAAD4",
-    "line": "mov     [esp+244h+var_22C], eax",
+    "line": "mov     [esp+244h+scalesOrAngles], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x4BAAEE",
-    "line": "cmp     [esp+244h+arg_C], 0",
+    "line": "cmp     [esp+244h+instanceCount], 0",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x4BAB09",
-    "line": "call    sub_4B9CB0",
+    "line": "call    TESObjectTREE_IsLargeEnoughForDistantLOD; Probable member mapping: float +0x78 behaves like Fallout's TESObjectTREE::BillboardSize.x and +0x7C like BillboardSize.y. Oblivion directly applies the same >200/>350 cutoff pair; Fallout named IsLargeEnoughForDistantLOD uses those exact fields/thresholds. +0x7C also sizes the quad in TESObjectTREE_BuildBillboardQuadData. Roles are strongly supported; names remain inferred across versions.",
     "mnemonic": "call",
     "size": 5
   },
@@ -259,19 +259,19 @@
   },
   {
     "ea": "0x4BAB33",
-    "line": "push    eax",
+    "line": "push    eax; outPath",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BAB34",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4BAB36",
-    "line": "call    sub_4B9C40",
+    "line": "call    OB_TESObjectTREE_BuildBillboardTexturePath_010201A0; Verified from byte construction and referenced model getter: emits 'Textures\\\\Trees\\\\Billboards\\\\' + model path basename through first dot + '.dds'. If model path has no dot, suffix isn't appended; path truncation/long-path handling not established.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x4BAB48",
-    "line": "call    sub_47D8F0",
+    "line": "call    sub_47D8F0; SpeedTreeOBSE 2026-07-14: normalizes texture palette keys in a fixed 256-byte local buffer. Plugin loader inputs are therefore capped at 255 characters.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x4BAB64",
-    "line": "lea     ecx, [esp+248h+var_230]",
+    "line": "lea     ecx, [esp+248h+slot]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x4BAB6D",
-    "line": "cmp     [esp+244h+var_230], edi",
+    "line": "cmp     [esp+244h+slot], edi",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -433,79 +433,79 @@
   },
   {
     "ea": "0x4BAB94",
-    "line": "mov     ecx, [esp+244h+var_22C]",
+    "line": "mov     ecx, [esp+244h+scalesOrAngles]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4BAB98",
-    "line": "mov     edx, [esp+244h+arg_C]",
+    "line": "mov     edx, [esp+244h+instanceCount]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x4BAB9F",
-    "line": "push    ecx; void *",
+    "line": "push    ecx; colorValues",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BABA0",
-    "line": "mov     ecx, [esp+248h+arg_14]",
+    "line": "mov     ecx, [esp+248h+placementArg2]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x4BABA7",
-    "line": "push    ebx; Src",
+    "line": "push    ebx; positions",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BABA8",
-    "line": "push    edx; int",
+    "line": "push    edx; instanceCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BABA9",
-    "line": "mov     edx, [esp+250h+arg_10]",
+    "line": "mov     edx, [esp+250h+placementArg1]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x4BABB0",
-    "line": "push    ebp; int",
+    "line": "push    ebp; instancedNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BABB1",
-    "line": "push    ecx; int",
+    "line": "push    ecx; cellKey",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BABB2",
-    "line": "push    edx; int",
+    "line": "push    edx; cellChunk",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BABB3",
-    "line": "push    esi; int",
+    "line": "push    esi; tree",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BABB4",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4BABB6",
-    "line": "call    sub_4BA2D0",
+    "line": "call    DistantTreeBillboardContext_ctor; Verified Oblivion context has a 0x1C-byte payload; Fallout's RTTI-named TREE_BILLBOARD_DATA is also 0x1C bytes and its constructor copies an instanceCount-sized NiPoint3 locations array and float color array. Probable field mapping follows matching argument order and downstream use; Oblivion field semantics are not promoted beyond what its own callsites establish.",
     "mnemonic": "call",
     "size": 5
   },
@@ -553,13 +553,13 @@
   },
   {
     "ea": "0x4BABD3",
-    "line": "call    ??0QueuedTreeBillboard@@QAE@XZ; QueuedTreeBillboard::QueuedTreeBillboard(void)",
+    "line": "call    ??0QueuedTreeBillboard@@QAE@XZ; Verified Oblivion RTTI-backed QueuedTreeBillboard construction; Fallout has the same class RTTI and ModelLoader::QueueTreeBillboard. Layout divergence is directly established: Oblivion task allocation 0x38 with context at +0x30 and queued-texture task kind 4; Fallout allocation 0x40 with TREE_BILLBOARD_DATA pointer at +0x38 and IO_TASK_PRIORITY_LOW.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4BABD8",
-    "line": "lea     ecx, [esp+244h+var_230]; this",
+    "line": "lea     ecx, [esp+244h+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x4BABE7",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,25 +583,25 @@
   },
   {
     "ea": "0x4BABEE",
-    "line": "push    1",
+    "line": "push    1; distantPlane",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4BABF0",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4BABF2",
-    "line": "call    sub_4BA780",
+    "line": "call    sub_4BA780; Verified Oblivion rendering path is a flat billboard DDS attached to STBB NiTriShape and NiBillboardNode. Fallout's QueuedTreeBillboard::CreateBillboard builds the engine's BSTreeModel distant geometry and inserts it through DistantLODShaderProperty::AddDistantLOD; same queued asset workflow, different renderer integration.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4BABF7",
-    "line": "lea     ecx, [esp+244h+var_230]; this",
+    "line": "lea     ecx, [esp+244h+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x4BAC08",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x4BAC1A",
-    "line": "mov     edx, [esp+244h+arg_C]",
+    "line": "mov     edx, [esp+244h+instanceCount]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x4BAC24",
-    "line": "mov     eax, [esp+244h+var_22C]",
+    "line": "mov     eax, [esp+244h+scalesOrAngles]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x4BAC29",
-    "line": "mov     edx, [esp+248h+arg_14]",
+    "line": "mov     edx, [esp+248h+placementArg2]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -685,7 +685,7 @@
   },
   {
     "ea": "0x4BAC31",
-    "line": "mov     eax, [esp+24Ch+arg_10]",
+    "line": "mov     eax, [esp+24Ch+placementArg1]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -868,5 +868,113 @@
     "line": "retn    20h ; ' '",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B3F40",
+    "line": "lea     ecx, [ebp-230h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B3F46",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3F4B",
+    "line": "mov     eax, [ebp-21Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B3F51",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B3F52",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3F57",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B3F58",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B3F59",
+    "line": "mov     edx, [esp+unusedArg2]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B3F5D",
+    "line": "lea     eax, [edx-234h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B3F63",
+    "line": "mov     ecx, [edx-238h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B3F69",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B3F6B",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3F70",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3F73",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3F76",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B3F78",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3F7D",
+    "line": "mov     eax, offset stru_ADF798",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3F82",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

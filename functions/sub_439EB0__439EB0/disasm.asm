@@ -1,4 +1,4 @@
-0x439EB0: push    0FFFFFFFFh
+0x439EB0: push    0FFFFFFFFh; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
 0x439EB2: push    offset SEH_439EB0
 0x439EB7: mov     eax, large fs:0
 0x439EBD: push    eax
@@ -22,7 +22,7 @@
 0x439EEF: call    eax
 0x439EF1: test    al, al
 0x439EF3: jnz     loc_439FA2
-0x439EF9: mov     edi, ioManager
+0x439EF9: mov     edi, ds:0B33A10h
 0x439EFF: call    ds:GetCurrentThreadId
 0x439F05: cmp     eax, [edi+30h]
 0x439F08: jz      short loc_439F15
@@ -46,12 +46,12 @@
 0x439F38: or      [esp+58h+var_10], 20h
 0x439F3D: lea     ecx, [esp+58h+var_44]
 0x439F41: mov     [esp+58h+var_4], 0
-0x439F49: call    sub_439400
+0x439F49: call    QueuedTexture_LoadModelStream; Queued texture/model stream loader. Checks model-loader cache for the requested path, otherwise opens archive/loose file data and builds the stream-backed object.
 0x439F4E: lea     ecx, [esp+58h+var_44]
 0x439F52: call    sub_4395D0
 0x439F57: test    bl, bl
 0x439F59: jz      short loc_439F66
-0x439F5B: mov     ecx, ioManager
+0x439F5B: mov     ecx, ds:0B33A10h
 0x439F61: call    sub_432890
 0x439F66: mov     eax, [esp+58h+var_1C]
 0x439F6A: test    eax, eax
@@ -63,8 +63,8 @@
 0x439F7E: call    ds:InterlockedDecrement
 0x439F84: mov     ecx, [esp+58h+var_24]
 0x439F88: push    ecx
-0x439F89: mov     [esp+5Ch+var_44], offset ??_7QueuedFileEntry@@6B@; const QueuedFileEntry::`vftable'
-0x439F91: call    FormHeapFree
+0x439F89: mov     [esp+5Ch+var_44.vtbl], offset ??_7QueuedFileEntry@@6B@; const QueuedFileEntry::`vftable'
+0x439F91: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x439F96: add     esp, 4
 0x439F99: lea     ecx, [esp+58h+var_44]; this
 0x439F9D: call    ??1QueuedMagicItem@@UAE@XZ; QueuedMagicItem::~QueuedMagicItem(void)
@@ -93,3 +93,28 @@
 0x439FE0: pop     ebx
 0x439FE1: add     esp, 48h
 0x439FE4: retn    10h
+0x437320: push    esi
+0x437321: mov     esi, ecx
+0x437323: mov     eax, [esi+28h]
+0x437326: test    eax, eax
+0x437328: jz      short loc_437334
+0x43732A: add     eax, 4
+0x43732D: push    eax; lpAddend
+0x43732E: call    ds:InterlockedDecrement
+0x437334: mov     eax, [esi+20h]
+0x437337: push    eax
+0x437338: mov     dword ptr [esi], offset ??_7QueuedFileEntry@@6B@; const QueuedFileEntry::`vftable'
+0x43733E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x437343: add     esp, 4
+0x437346: mov     ecx, esi; this
+0x437348: pop     esi
+0x437349: jmp     ??1QueuedMagicItem@@UAE@XZ; QueuedMagicItem::~QueuedMagicItem(void)
+0x9AC900: lea     ecx, [ebp-44h]
+0x9AC903: jmp     loc_437320
+0x9AC908: mov     edx, [esp+arg_4]
+0x9AC90C: lea     eax, [edx-48h]
+0x9AC90F: mov     ecx, [edx-4Ch]
+0x9AC912: xor     ecx, eax
+0x9AC914: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AC919: mov     eax, offset stru_AD9590
+0x9AC91E: jmp     ___CxxFrameHandler3

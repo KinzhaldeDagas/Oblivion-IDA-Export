@@ -1,4 +1,4 @@
-0x4F8300: fldz
+0x4F8300: fldz; HasMagicEffect evaluator: validates thisObj as a magic target, gets MagicTarget through vfunc +0x124, then queries MagicTarget_HasEffect(effectCode).
 0x4F8302: push    esi
 0x4F8303: mov     esi, [esp+4+arg_0]
 0x4F8307: test    esi, esi
@@ -31,7 +31,7 @@
 0x4F8353: jz      short loc_4F836A
 0x4F8355: fld     qword ptr [edi]
 0x4F8357: sub     esp, 8
-0x4F835A: fstp    [esp+10h+var_10]
+0x4F835A: fstp    qword ptr [esp+10h+var_10]
 0x4F835D: push    offset aHasMagicEffect0_2f; "Has Magic Effect >> %0.2f"
 0x4F8362: call    Interface_ConsolePrint
 0x4F8367: add     esp, 0Ch

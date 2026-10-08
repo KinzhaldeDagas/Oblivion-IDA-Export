@@ -1,46 +1,81 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "RPC_HTTP_TRANSPORT_CREDENTIALS_A",
+  "definition": "typedef _RPC_HTTP_TRANSPORT_CREDENTIALS_A RPC_HTTP_TRANSPORT_CREDENTIALS_A\n",
   "id": 18374686479672032734,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "TransportCredentials",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "SEC_WINNT_AUTH_IDENTITY_A *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Flags",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AuthenticationTarget",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "NumberOfAuthnSchemes",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AuthnSchemes",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "ULONG *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ServerCertificateSubject",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "unsigned __int8 *"
     }
   ],
   "name": "RPC_HTTP_TRANSPORT_CREDENTIALS_A",
+  "ordinal": 3208,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 24
 }

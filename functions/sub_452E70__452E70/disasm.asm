@@ -1,4 +1,4 @@
-0x452E70: push    ebx
+0x452E70: push    ebx; MEF SAVE AUDIT 2026-10-08: Save audit negative claim: interior pending-reference insertion preserves embedded head and pushes new IDs in constant list-link work. It does not append by repeated tail traversal. Exterior performance finding is consumer world-list filtering, not producer PushFront complexity.
 0x452E71: mov     ebx, [esp+4+a2]
 0x452E75: push    esi
 0x452E76: push    edi
@@ -30,7 +30,7 @@
 0x452EB8: call    NiTMap_SetAt
 0x452EBD: jmp     short loc_452EC3
 0x452EBF: mov     esi, [esp+0Ch+a2]
-0x452EC3: mov     edi, [esp+0Ch+arg_4]
+0x452EC3: mov     edi, [esp+0Ch+referenceID]
 0x452EC7: test    edi, edi
 0x452EC9: jz      short loc_452F07
 0x452ECB: cmp     dword ptr [esi], 0

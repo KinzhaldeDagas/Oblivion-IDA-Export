@@ -8,7 +8,7 @@ void __cdecl FindHandlerForForeignException(
         struct _s_HandlerType *a7,
         struct _s_CatchableType *a8)
 {
-  _DWORD *v8; // edi
+  PVOID *v8; // edi
   int v9; // esi
   TryBlockMapEntry *i; // edi
   int v11; // eax
@@ -16,29 +16,29 @@ void __cdecl FindHandlerForForeignException(
   unsigned int v13; // [esp+4h] [ebp-8h] BYREF
   unsigned int v14; // [esp+8h] [ebp-4h] BYREF
 
-  if ( a1->ExceptionCode != 0x80000003 )
+  if ( a1->ExceptionCode != 0x80000003 ) /*0x98b5bb*/
   {
-    if ( !*(_DWORD *)(_getptd() + 0x80)
-      || (v8 = (_DWORD *)(_getptd() + 0x80), *v8 == _encoded_null())
+    if ( !_getptd()[0x20] /*0x98b5ff*/
+      || (v8 = (PVOID *)(_getptd() + 0x20), *v8 == _encoded_null())
       || a1->ExceptionCode == 0xE0434F4D
-      || !unknown_libname_10(a1, a2, (int)a3, (int)a4, (int)a5, (int)a7, (int)a8) )
+      || !unknown_libname_10(a1, (int (__usercall **)@<eax>(int@<ebp>))a2, (int)a3, (int)a4, (int)a5, (int)a7, (int)a8) )
     {
-      if ( !a5->nTryBlocks )
-        _inconsistency();
-      v9 = a6;
-      for ( i = _GetRangeOfTrysToCheck(a5, (int)a7, a6, &v14, &v13); v14 < v13; ++i )
+      if ( !a5->nTryBlocks ) /*0x98b612*/
+        _inconsistency(); /*0x98b618*/
+      v9 = a6; /*0x98b61d*/
+      for ( i = _GetRangeOfTrysToCheck(a5, (int)a7, a6, &v14, &v13); v14 < v13; ++i ) /*0x98b63d*/
       {
-        if ( v9 >= i->tryLow && v9 <= i->tryHigh )
+        if ( v9 >= i->tryLow && v9 <= i->tryHigh ) /*0x98b647*/
         {
-          v11 = (int)i->pHandlerArray + 0x10 * i->nCatches;
-          v12 = *(_DWORD *)(v11 - 0xC);
-          if ( (!v12 || !*(_BYTE *)(v12 + 8)) && (*(_BYTE *)(v11 - 0x10) & 0x40) == 0 )
+          v11 = (int)i->pHandlerArray + 0x10 * i->nCatches; /*0x98b652*/
+          v12 = *(_DWORD *)(v11 - 0xC); /*0x98b654*/
+          if ( (!v12 || !*(_BYTE *)(v12 + 8)) && (*(_BYTE *)(v11 - 0x10) & 0x40) == 0 ) /*0x98b667*/
           {
-            CatchIt((int *)(v11 - 0x10), &i->tryLow, a2, (EXCEPTION_RECORD *)a1, a3, a4, a5, 0, a7, a8);
-            v9 = a6;
+            CatchIt((int *)(v11 - 0x10), &i->tryLow, a2, (EXCEPTION_RECORD *)a1, a3, a4, a5, 0, a7, a8); /*0x98b680*/
+            v9 = a6; /*0x98b685*/
           }
         }
-        ++v14;
+        ++v14; /*0x98b68b*/
       }
     }
   }

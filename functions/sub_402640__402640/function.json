@@ -1,18 +1,31 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x402640",
+      "0x402733"
+    ]
+  ],
+  "chunks_sha256": "63bdc5b32830c2688b789cecaf889514f2c909d3b98595feb0de46dd98a007f0",
+  "comment_regular": "Scans one MemoryPool for empty 4 KiB pages, unlinks each page's entries from its free list, VirtualFree's the page, and clears page metadata.",
+  "comment_repeatable": "Scans one MemoryPool for empty 4 KiB pages, unlinks each page's entries from its free list, VirtualFree's the page, and clears page metadata.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 5,
-  "display_name": "sub_402640",
+  "display_name": "MemoryPool_FreeUnusedPages",
   "end_ea": "0x402733",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_402640",
+  "name": "MemoryPool_FreeUnusedPages",
   "segment": ".text",
   "sha256": "63bdc5b32830c2688b789cecaf889514f2c909d3b98595feb0de46dd98a007f0",
   "size": 243,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x402640",
+  "total_chunk_size": 243,
   "type": "int __usercall@<eax>(_DWORD *this@<ecx>, DWORD@<edi>)",
   "xrefs_from_count": 83,
   "xrefs_to_count": 1

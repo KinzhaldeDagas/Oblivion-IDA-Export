@@ -1,1 +1,36 @@
-IDirect3DDevice2Vtbl
+struct IDirect3DDevice2Vtbl
+{
+HRESULT (__stdcall *QueryInterface)(IDirect3DDevice2 *This, const IID *const riid, LPVOID *ppvObj) __offset(OFF64|AUTO);
+ULONG (__stdcall *AddRef)(IDirect3DDevice2 *This) __offset(OFF64|AUTO);
+ULONG (__stdcall *Release)(IDirect3DDevice2 *This) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetCaps)(IDirect3DDevice2 *This, LPD3DDEVICEDESC, LPD3DDEVICEDESC) __offset(OFF64|AUTO);
+HRESULT (__stdcall *SwapTextureHandles)(IDirect3DDevice2 *This, LPDIRECT3DTEXTURE2, LPDIRECT3DTEXTURE2) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetStats)(IDirect3DDevice2 *This, LPD3DSTATS) __offset(OFF64|AUTO);
+HRESULT (__stdcall *AddViewport)(IDirect3DDevice2 *This, LPDIRECT3DVIEWPORT2) __offset(OFF64|AUTO);
+HRESULT (__stdcall *DeleteViewport)(IDirect3DDevice2 *This, LPDIRECT3DVIEWPORT2) __offset(OFF64|AUTO);
+HRESULT (__stdcall *NextViewport)(IDirect3DDevice2 *This, LPDIRECT3DVIEWPORT2, LPDIRECT3DVIEWPORT2 *, DWORD) __offset(OFF64|AUTO);
+HRESULT (__stdcall *EnumTextureFormats)(IDirect3DDevice2 *This, LPD3DENUMTEXTUREFORMATSCALLBACK, LPVOID) __offset(OFF64|AUTO);
+HRESULT (__stdcall *BeginScene)(IDirect3DDevice2 *This) __offset(OFF64|AUTO);
+HRESULT (__stdcall *EndScene)(IDirect3DDevice2 *This) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetDirect3D)(IDirect3DDevice2 *This, LPDIRECT3D2 *) __offset(OFF64|AUTO);
+HRESULT (__stdcall *SetCurrentViewport)(IDirect3DDevice2 *This, LPDIRECT3DVIEWPORT2) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetCurrentViewport)(IDirect3DDevice2 *This, LPDIRECT3DVIEWPORT2 *) __offset(OFF64|AUTO);
+HRESULT (__stdcall *SetRenderTarget)(IDirect3DDevice2 *This, LPDIRECTDRAWSURFACE, DWORD) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetRenderTarget)(IDirect3DDevice2 *This, LPDIRECTDRAWSURFACE *) __offset(OFF64|AUTO);
+HRESULT (__stdcall *Begin)(IDirect3DDevice2 *This, D3DPRIMITIVETYPE, D3DVERTEXTYPE, DWORD) __offset(OFF64|AUTO);
+HRESULT (__stdcall *BeginIndexed)(IDirect3DDevice2 *This, D3DPRIMITIVETYPE, D3DVERTEXTYPE, LPVOID, DWORD, DWORD) __offset(OFF64|AUTO);
+HRESULT (__stdcall *Vertex)(IDirect3DDevice2 *This, LPVOID) __offset(OFF64|AUTO);
+HRESULT (__stdcall *Index)(IDirect3DDevice2 *This, WORD) __offset(OFF64|AUTO);
+HRESULT (__stdcall *End)(IDirect3DDevice2 *This, DWORD) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetRenderState)(IDirect3DDevice2 *This, D3DRENDERSTATETYPE, LPDWORD) __offset(OFF64|AUTO);
+HRESULT (__stdcall *SetRenderState)(IDirect3DDevice2 *This, D3DRENDERSTATETYPE, DWORD) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetLightState)(IDirect3DDevice2 *This, D3DLIGHTSTATETYPE, LPDWORD) __offset(OFF64|AUTO);
+HRESULT (__stdcall *SetLightState)(IDirect3DDevice2 *This, D3DLIGHTSTATETYPE, DWORD) __offset(OFF64|AUTO);
+HRESULT (__stdcall *SetTransform)(IDirect3DDevice2 *This, D3DTRANSFORMSTATETYPE, LPD3DMATRIX) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetTransform)(IDirect3DDevice2 *This, D3DTRANSFORMSTATETYPE, LPD3DMATRIX) __offset(OFF64|AUTO);
+HRESULT (__stdcall *MultiplyTransform)(IDirect3DDevice2 *This, D3DTRANSFORMSTATETYPE, LPD3DMATRIX) __offset(OFF64|AUTO);
+HRESULT (__stdcall *DrawPrimitive)(IDirect3DDevice2 *This, D3DPRIMITIVETYPE, D3DVERTEXTYPE, LPVOID, DWORD, DWORD) __offset(OFF64|AUTO);
+HRESULT (__stdcall *DrawIndexedPrimitive)(IDirect3DDevice2 *This, D3DPRIMITIVETYPE, D3DVERTEXTYPE, LPVOID, DWORD, LPWORD, DWORD, DWORD) __offset(OFF64|AUTO);
+HRESULT (__stdcall *SetClipStatus)(IDirect3DDevice2 *This, LPD3DCLIPSTATUS) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetClipStatus)(IDirect3DDevice2 *This, LPD3DCLIPSTATUS) __offset(OFF64|AUTO);
+};

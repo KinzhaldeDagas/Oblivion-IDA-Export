@@ -1,12 +1,12 @@
-void __thiscall LightEffect::~LightEffect(ActiveEffect *this)
+void __thiscall LightEffect::~LightEffect(LightEffect_DecodedLayout *self)
 {
-  int v2; // esi
+  NiLight *transientPointLight_38; // esi
 
-  v2 = *((_DWORD *)this + 0xE);
-  if ( v2 )
+  transientPointLight_38 = self->transientPointLight_38; /*0x6944e9*/
+  if ( transientPointLight_38 ) /*0x6944f6*/
   {
-    if ( !InterlockedDecrement((volatile LONG *)(v2 + 4)) )
-      (**(void (__thiscall ***)(int, int))v2)(v2, 1);
+    if ( !InterlockedDecrement((volatile LONG *)&transientPointLight_38->members) ) /*0x6944fc*/
+      transientPointLight_38->vtbl->super.super.Destructor((NiRefObject *)transientPointLight_38, 1); /*0x694512*/
   }
-  ActiveEffect::~ActiveEffect(this);
+  ActiveEffect::~ActiveEffect(&self->base_00); /*0x69451e*/
 }

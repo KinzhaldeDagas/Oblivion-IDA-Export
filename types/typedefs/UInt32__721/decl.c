@@ -1,1 +1,1 @@
-UInt32
+typedef unsigned int UInt32;

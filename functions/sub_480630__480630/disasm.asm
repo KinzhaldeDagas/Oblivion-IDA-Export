@@ -29,7 +29,7 @@
 0x480682: test    ecx, ecx
 0x480684: jz      short loc_4806C0
 0x480686: push    4
-0x480688: call    NiNode_GetNiPropertyByID
+0x480688: call    NiNode_GetNiPropertyByID;
 0x48068D: mov     esi, eax
 0x48068F: test    esi, esi
 0x480691: jz      short loc_4806C0

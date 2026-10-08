@@ -1,4 +1,4 @@
-0x7ACF40: sub     esp, 0Ch
+0x7ACF40: sub     esp, 0Ch; MoonSugarEffect decode: drains immediate geometry groups/nodes during accumulator flush, interleaving queued RenderPass lists by depth and using sub_7A9820 for property-owned shader IDs.
 0x7ACF43: mov     eax, ds:0B3F928h
 0x7ACF48: push    ebp
 0x7ACF49: push    esi
@@ -41,10 +41,10 @@
 0x7ACFAD: push    1
 0x7ACFAF: push    ebx
 0x7ACFB0: mov     ecx, edi
-0x7ACFB2: call    sub_7ABAC0
+0x7ACFB2: call    BSShaderAccumulator_DrainRenderPassList; Pass249 runtime correction: decoded native RenderPassListDrain call, but do not patch this callsite. The seven-callsite rendered-reference transaction repeatedly caused the identical world-load StackHash access violation. Preserve the native call.
 0x7ACFB7: push    ebx
 0x7ACFB8: mov     dword ptr [ebx], offset ??_7?$BSTPersistentList@V?$NiTPointerAllocator@I@@PAVRenderPass@BSShaderProperty@@@@6B@; const BSTPersistentList<NiTPointerAllocator<uint>,BSShaderProperty::RenderPass *>::`vftable'
-0x7ACFBE: call    FormHeapFree
+0x7ACFBE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7ACFC3: mov     ecx, [edi+50h]
 0x7ACFC6: mov     eax, [ecx]
 0x7ACFC8: lea     esi, [edi+4Ch]
@@ -70,7 +70,7 @@
 0x7ACFFC: xor     ebx, ebx
 0x7ACFFE: push    4
 0x7AD000: mov     ecx, esi
-0x7AD002: call    NiNode_GetNiPropertyByID
+0x7AD002: call    NiNode_GetNiPropertyByID;
 0x7AD007: cmp     eax, ebp
 0x7AD009: jz      loc_7AD104
 0x7AD00F: mov     edx, [eax]
@@ -90,7 +90,7 @@
 0x7AD03C: jmp     loc_7AD137
 0x7AD041: mov     eax, [edi+21C4h]
 0x7AD047: cmp     eax, ebp
-0x7AD049: mov     [esp+1Ch+var_8], eax
+0x7AD049: mov     [esp+1Ch+node], eax
 0x7AD04D: jz      loc_7AD11E
 0x7AD053: mov     ebp, [eax+8]
 0x7AD056: test    ebp, ebp
@@ -118,7 +118,7 @@
 0x7AD096: movzx   eax, word ptr [ebp+4]
 0x7AD09A: push    1
 0x7AD09C: push    eax
-0x7AD09D: call    sub_7D1320
+0x7AD09D: call    sub_7D1320; MoonSugarEffect decode: native shader-id selector for standard shader property families. Updates program/pass render-state choices and constants for hardcoded IDs before object render.
 0x7AD0A2: jmp     short loc_7AD0BE
 0x7AD0A4: mov     edx, [esi]
 0x7AD0A6: mov     eax, [edx+1Ch]
@@ -129,7 +129,7 @@
 0x7AD0B2: movzx   ecx, word ptr [ebp+4]
 0x7AD0B6: push    1
 0x7AD0B8: push    ecx
-0x7AD0B9: call    sub_7FD260
+0x7AD0B9: call    Lighting30Shader_SelectRenderPass; Oblivion Lighting30 selector activation. Selectors outside 0x15E/0x15F restore the main constant maps, derive row selector-0x12A, rewrite automatic vertex/pixel-constant enable flags from B46988/B46A60, and apply a route render-state group. SimpleShadow selectors 0x14E..0x151 use valid rows and route group 7. Stock one-light selectors 0x177..0x17A are not rejected here: they derive rows 0x4D..0x50 and use the generic route-group-0 path. The later per-geometry resolver is the actual validity gate; every later selector activation deterministically rewrites these flags before its draw.
 0x7AD0BE: mov     ecx, [esi+30h]
 0x7AD0C1: mov     edx, [ecx]
 0x7AD0C3: mov     eax, [edx+48h]
@@ -140,17 +140,17 @@
 0x7AD0D0: mov     eax, [edx+48h]
 0x7AD0D3: call    eax
 0x7AD0D5: movzx   ecx, word ptr [ebp+4]
-0x7AD0D9: push    ecx; float
-0x7AD0DA: push    ebp; int
+0x7AD0D9: push    ecx; selector
+0x7AD0DA: push    ebp; entry
 0x7AD0DB: mov     ecx, edi
-0x7AD0DD: call    sub_7A9820
-0x7AD0E2: lea     edx, [esp+1Ch+var_8]
-0x7AD0E6: push    edx
-0x7AD0E7: lea     ecx, [edi+21C0h]
-0x7AD0ED: call    sub_7AA860
+0x7AD0DD: call    BSShaderAccumulator_DrawRenderPass; Submit one accumulated Oblivion RenderPass. Publishes selector/current entry, dispatches each light pointer, then invokes geometry render virtual +0x84 exactly once. It does not prevalidate the Lighting30 selector; invalid 0x177..0x17A records are suppressed later by SetupRenderPass leaving PassCount zero. Valid SimpleShadow compatibility records each have lightCount=1, so eligible lights remain separate receiver draws.
+0x7AD0E2: lea     edx, [esp+1Ch+node]
+0x7AD0E6: push    edx; node
+0x7AD0E7: lea     ecx, [edi+21C0h]; list
+0x7AD0ED: call    NiTPointerList_RemoveNode; [Verified] Generic NiTPointerList node-removal helper. Unlinks the supplied node, updates head/tail and neighboring links, invokes the list's FreeNode vfunc, decrements item count, and returns the removed node's data pointer.
 0x7AD0F2: xor     eax, eax
 0x7AD0F4: test    eax, eax
-0x7AD0F6: mov     [esp+1Ch+var_8], eax
+0x7AD0F6: mov     [esp+1Ch+node], eax
 0x7AD0FA: jnz     loc_7AD053
 0x7AD100: xor     ebp, ebp
 0x7AD102: jmp     short loc_7AD11E

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x9A61E0",
-    "line": "cmp     [esp+arg_8], 0",
+    "line": "cmp     [esp+geometry], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x9A61F3",
-    "line": "mov     edx, [esp+4+arg_30]",
+    "line": "mov     edx, [esp+4+cache]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x9A61FA",
-    "line": "mov     esi, [esp+8+arg_4]",
+    "line": "mov     esi, [esp+8+entry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x9A620E",
-    "line": "mov     ebp, [esp+10h+arg_28]",
+    "line": "mov     ebp, [esp+10h+passIndex]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x9A622F",
-    "line": "mov     ecx, [esp+0Ch+arg_8]",
+    "line": "mov     ecx, [esp+0Ch+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x9A6234",
-    "line": "call    NiObjectNET_GetExtraData",
+    "line": "call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x9A623D",
-    "line": "push    esi",
+    "line": "push    esi; entry",
     "mnemonic": "push",
     "size": 1
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x9A6240",
-    "line": "call    sub_9A92E0",
+    "line": "call    NiD3DShaderConstantMap_ConvertMappedValue; DX11 mapped-float provenance (2026-09-28):9A92E0 does NOT always return entry+30 directly. size(+28)/stride(+2C) counts1/2/3 broadcast or fill a scratch float4;8/9/12 expand matrices into scratch. Counts4 and16 pass the pointer through. Other counts pass through only when stride==4 and component count is divisible by4. A source-address provenance resolver must reject/bypass scratch-expansion cases rather than treating every mapped source as a direct float4 array.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x9A6270",
-    "line": "cmp     byte_B4295B, 0",
+    "line": "cmp     g_D3DXParameterDispatchInitialized, 0",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x9A627C",
-    "line": "call    sub_783C70",
+    "line": "call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x9A6287",
-    "line": "cmp     dword_B428D8[ebx*4], 9",
+    "line": "cmp     g_D3DXParameterClassDispatch[ebx*4], 9",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x9A6291",
-    "line": "mov     ecx, [esp+0Ch+arg_0]",
+    "line": "mov     ecx, [esp+0Ch+shaderProgram]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x9A62B3",
-    "line": "cmp     byte_B4295B, 0",
+    "line": "cmp     g_D3DXParameterDispatchInitialized, 0",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x9A62BF",
-    "line": "call    sub_783C70",
+    "line": "call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x9A62CA",
-    "line": "cmp     dword_B428D8[ebx*4], 6",
+    "line": "cmp     g_D3DXParameterClassDispatch[ebx*4], 6",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -685,7 +685,7 @@
   },
   {
     "ea": "0x9A6321",
-    "line": "mov     ecx, [esp+0Ch+arg_0]",
+    "line": "mov     ecx, [esp+0Ch+shaderProgram]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -811,7 +811,7 @@
   },
   {
     "ea": "0x9A634E",
-    "line": "mov     ecx, [esp+0Ch+arg_0]",
+    "line": "mov     ecx, [esp+0Ch+shaderProgram]",
     "mnemonic": "mov",
     "size": 4
   },

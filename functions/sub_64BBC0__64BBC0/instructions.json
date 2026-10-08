@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x64BBC0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; 3DTheft release decode 2026-05-18: MiddleHighProcess StartCombatPackage returns success/failure as AL and owns active combat-controller/package setup. No observed Actor::EvaluatePackage call is required after this vfunc.",
     "mnemonic": "push",
     "size": 2
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x64BBF9",
-    "line": "mov     esi, [esp+5Ch+arg_0]",
+    "line": "mov     esi, [esp+5Ch+actor]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x64BBFF",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x64BC08",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x64BC49",
-    "line": "call    sub_646020",
+    "line": "call    LowProcess_CreateCombatPackage; 3DTheft release decode 2026-05-18: low-process combat fallback creates CombatLow package and calls Actor_AddPackage_(actor, package, 0, 1), returning AL success. No separate forced EvaluatePackage observed at caller boundary.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x64BC74",
-    "line": "call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)",
+    "line": "call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x64BC84",
-    "line": "call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)",
+    "line": "call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.",
     "mnemonic": "call",
     "size": 5
   },
@@ -607,19 +607,19 @@
   },
   {
     "ea": "0x64BCF4",
-    "line": "push    1",
+    "line": "push    1; allowYieldEvaluation",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x64BCF6",
-    "line": "fstp    [esp+60h+arg_0]",
+    "line": "fstp    [esp+60h+actor]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x64BCFA",
-    "line": "push    eax",
+    "line": "push    eax; skipFleeAndYieldEvaluation",
     "mnemonic": "push",
     "size": 1
   },
@@ -631,19 +631,19 @@
   },
   {
     "ea": "0x64BD01",
-    "line": "lea     ecx, [esp+64h+arg_0]",
+    "line": "lea     ecx, [esp+64h+actor]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x64BD05",
-    "line": "push    ecx",
+    "line": "push    ecx; outScore",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x64BD06",
-    "line": "push    ebp",
+    "line": "push    ebp; target",
     "mnemonic": "push",
     "size": 1
   },
@@ -667,19 +667,19 @@
   },
   {
     "ea": "0x64BD0D",
-    "line": "push    eax",
+    "line": "push    eax; equippedEntry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x64BD0E",
-    "line": "push    esi",
+    "line": "push    esi; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x64BD0F",
-    "line": "call    sub_621B40",
+    "line": "call    CombatSelection_EvaluateWeaponVsHandToHand; Six-argument cdecl combat-choice evaluator. skipFleeAndYieldEvaluation nonzero skips the entire flee/yield block; allowYieldEvaluation gates only the yield portion when that block runs. These are control flags, not allowYield/hasYieldIdle. Any additional throwing-weapon scoring multipliers are external emulation policy, not observed here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -703,7 +703,7 @@
   },
   {
     "ea": "0x64BD20",
-    "line": "mov     ecx, offset flt_B37038",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+360h); Combat-package entry calls CombatSelection_EvaluateWeaponVsHandToHand; when it returns flee mode 7, its output score is compared with live fAICombatFleeScoreThreshold before normal combat admission.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x64BD2A",
-    "line": "fld     [esp+5Ch+arg_0]",
+    "line": "fld     [esp+5Ch+actor]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -823,13 +823,13 @@
   },
   {
     "ea": "0x64BD59",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x64BD5B",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1057,13 +1057,13 @@
   },
   {
     "ea": "0x64BDE2",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x64BDE4",
-    "line": "call    Actor_IsSwimming",
+    "line": "call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1273,7 +1273,7 @@
   },
   {
     "ea": "0x64BE52",
-    "line": "lea     ecx, [esp+5Ch+var_38]",
+    "line": "lea     ecx, [esp+5Ch+segmentQuery]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1297,13 +1297,13 @@
   },
   {
     "ea": "0x64BE64",
-    "line": "push    0; float",
+    "line": "push    0; extraCost",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x64BE66",
-    "line": "push    esi; int",
+    "line": "push    esi; actor",
     "mnemonic": "push",
     "size": 1
   },
@@ -1333,7 +1333,7 @@
   },
   {
     "ea": "0x64BE75",
-    "line": "push    eax; int",
+    "line": "push    eax; end",
     "mnemonic": "push",
     "size": 1
   },
@@ -1357,19 +1357,19 @@
   },
   {
     "ea": "0x64BE80",
-    "line": "push    eax; int",
+    "line": "push    eax; start",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x64BE81",
-    "line": "lea     ecx, [esp+6Ch+var_38]",
+    "line": "lea     ecx, [esp+6Ch+segmentQuery]; segmentQuery",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x64BE85",
-    "line": "call    sub_67EB60",
+    "line": "call    ConnectedPointGraph_CanTraverseSegment; Verified shared graph route test used from actor package, combat, PathGrid selection, and fast-travel surface construction. It accepts a valid direct segment; if straight-segment validation fails, it invokes actor-aware connected-point A*.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1393,7 +1393,7 @@
   },
   {
     "ea": "0x64BE8F",
-    "line": "lea     ecx, [esp+60h+var_38]; int",
+    "line": "lea     ecx, [esp+60h+segmentQuery]; int",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1417,7 +1417,7 @@
   },
   {
     "ea": "0x64BE9C",
-    "line": "lea     ecx, [esp+5Ch+var_38]; void *",
+    "line": "lea     ecx, [esp+5Ch+segmentQuery]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1429,7 +1429,7 @@
   },
   {
     "ea": "0x64BEA8",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1495,7 +1495,7 @@
   },
   {
     "ea": "0x64BEC5",
-    "line": "lea     ecx, [esp+5Ch+var_38]; void *",
+    "line": "lea     ecx, [esp+5Ch+segmentQuery]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1507,13 +1507,13 @@
   },
   {
     "ea": "0x64BED1",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x64BED6",
-    "line": "mov     ecx, [edi+8]",
+    "line": "mov     ecx, [edi+8]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1531,7 +1531,7 @@
   },
   {
     "ea": "0x64BEDD",
-    "line": "call    sub_567770",
+    "line": "call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1609,7 +1609,7 @@
   },
   {
     "ea": "0x64BF02",
-    "line": "lea     eax, [esp+64h+var_44]",
+    "line": "lea     eax, [esp+64h+pointXYZ]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1927,7 +1927,7 @@
   },
   {
     "ea": "0x64BFC3",
-    "line": "mov     [esp+5Ch+var_44], ecx",
+    "line": "mov     [esp+5Ch+pointXYZ], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1957,25 +1957,25 @@
   },
   {
     "ea": "0x64BFD5",
-    "line": "lea     ecx, [esp+5Ch+var_44]",
+    "line": "lea     ecx, [esp+5Ch+pointXYZ]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x64BFD9",
-    "line": "push    ecx",
+    "line": "push    ecx; pointXYZ",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x64BFDA",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x64BFDC",
-    "line": "call    sub_4D7E30",
+    "line": "call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2419,7 +2419,7 @@
   },
   {
     "ea": "0x64C0BF",
-    "line": "call    sub_5E6C60",
+    "line": "call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2683,7 +2683,7 @@
   },
   {
     "ea": "0x64C145",
-    "line": "mov     ecx, offset dword_B3BDB0",
+    "line": "mov     ecx, (offset qword_B3BB2C+284h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2839,7 +2839,7 @@
   },
   {
     "ea": "0x64C19C",
-    "line": "mov     ecx, offset dword_B3BDB0",
+    "line": "mov     ecx, (offset qword_B3BB2C+284h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2923,7 +2923,7 @@
   },
   {
     "ea": "0x64C1C0",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2935,7 +2935,7 @@
   },
   {
     "ea": "0x64C1C6",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2971,7 +2971,7 @@
   },
   {
     "ea": "0x64C1DA",
-    "line": "mov     ecx, offset dword_B3BDB0",
+    "line": "mov     ecx, (offset qword_B3BB2C+284h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -3067,7 +3067,7 @@
   },
   {
     "ea": "0x64C20F",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3085,7 +3085,7 @@
   },
   {
     "ea": "0x64C21C",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3211,7 +3211,7 @@
   },
   {
     "ea": "0x64C260",
-    "line": "call    sub_67CBC0",
+    "line": "call    sub_67CBC0; RadiantAI cut/beta review: active combat-package path constructs SpectatorPackage state via sub_67CBC0 at 0x64C260.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3241,7 +3241,7 @@
   },
   {
     "ea": "0x64C26C",
-    "line": "mov     ecx, offset dword_B3BDB0",
+    "line": "mov     ecx, (offset qword_B3BB2C+284h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -3295,7 +3295,7 @@
   },
   {
     "ea": "0x64C28F",
-    "line": "call    sub_67CDB0",
+    "line": "call    sub_67CDB0; MiddleHighProcess_StartCombatPackage builds package/list entries for combat target; sub_67CDB0 appends actor/target entries with priority/alert state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3355,7 +3355,7 @@
   },
   {
     "ea": "0x64C2AA",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3367,7 +3367,7 @@
   },
   {
     "ea": "0x64C2B0",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3674,6 +3674,90 @@
   {
     "ea": "0x64C344",
     "line": "jmp     loc_64BEAF",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3AD0",
+    "line": "lea     ecx, [ebp-38h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3AD3",
+    "line": "jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3AD8",
+    "line": "mov     eax, [ebp+24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3ADB",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3ADC",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3AE1",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3AE2",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3AE3",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C3AE7",
+    "line": "lea     eax, [edx-4Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3AEA",
+    "line": "mov     ecx, [edx-50h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3AED",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C3AEF",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3AF4",
+    "line": "mov     eax, offset stru_AEC63C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3AF9",
+    "line": "jmp     ___CxxFrameHandler3",
     "mnemonic": "jmp",
     "size": 5
   }

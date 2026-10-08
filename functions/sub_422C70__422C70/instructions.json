@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x422C70",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Create the actor-owned ExtraInfoGeneralTopic (extra type 0x59) or replace its raw MenuTopic pointer. The extra-data destructor owns and frees the stored 0x28-byte MenuTopic object.",
     "mnemonic": "push",
     "size": 2
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x422CBD",
-    "line": "push    ecx",
+    "line": "push    ecx; menuTopic",
     "mnemonic": "push",
     "size": 1
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x422CC0",
-    "line": "call    ??0ExtraInfoGeneralTopic@@QAE@XZ; ExtraInfoGeneralTopic::ExtraInfoGeneralTopic(void)",
+    "line": "call    ExtraInfoGeneralTopic__Constructor; Construct the actor's type-0x59 cache entry and transfer ownership of the supplied MenuTopic pointer to it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x422CF0",
-    "line": "mov     [eax+0Ch], edx",
+    "line": "mov     [eax+0Ch], edx; On an existing ExtraInfoGeneralTopic, Oblivion replaces the cached MenuTopic pointer without destroying the prior object. Fallout's analogous setter (x4y6:0x82276370) performs the same raw pointer assignment; this is a shared pattern, not a version-specific behavior change.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -280,5 +280,77 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D62E0",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D62E3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D62E4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D62E9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D62EA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D62EB",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D62EF",
+    "line": "lea     eax, [edx-8]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D62F2",
+    "line": "mov     ecx, [edx-0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D62F5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D62F7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D62FC",
+    "line": "mov     eax, offset stru_AFE21C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6301",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

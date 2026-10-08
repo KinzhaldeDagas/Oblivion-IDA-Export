@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4DB7D0",
-    "line": "push    ebx",
+    "line": "push    ebx; Verified effective ownership-condition global lookup: use this reference's XGLB first, then the linked door's XGLB, then the parent cell's XGLB. Fallout's TESObjectREFR::GetOwnershipGlobal has the same fallback sequence. This is distinct from TESObjectREFR_GetOwner's owner-form inheritance.",
     "mnemonic": "push",
     "size": 1
   },
@@ -31,13 +31,13 @@
   },
   {
     "ea": "0x4DB7D8",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DB7DA",
-    "line": "call    sub_41E7D0",
+    "line": "call    ExtraDataList_GetGlobal; Verified accessor: returns the TESGlobal* in ExtraGlobal (extra type 0x28/XGLB), or null if the extra is absent.",
     "mnemonic": "call",
     "size": 5
   },
@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x4DB7F2",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DB7F4",
-    "line": "call    sub_42B410",
+    "line": "call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.",
     "mnemonic": "call",
     "size": 5
   },
@@ -115,25 +115,25 @@
   },
   {
     "ea": "0x4DB7FD",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DB7FF",
-    "line": "call    sub_42B410",
+    "line": "call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4DB804",
-    "line": "lea     ecx, [eax+44h]",
+    "line": "lea     ecx, [eax+44h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x4DB807",
-    "line": "call    sub_41E7D0",
+    "line": "call    ExtraDataList_GetGlobal; Verified accessor: returns the TESGlobal* in ExtraGlobal (extra type 0x28/XGLB), or null if the extra is absent.",
     "mnemonic": "call",
     "size": 5
   },
@@ -226,5 +226,17 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x4CA980",
+    "line": "add     ecx, 28h ; '('; this",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4CA983",
+    "line": "jmp     ExtraDataList_GetGlobal; Verified accessor: returns the TESGlobal* in ExtraGlobal (extra type 0x28/XGLB), or null if the extra is absent.",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

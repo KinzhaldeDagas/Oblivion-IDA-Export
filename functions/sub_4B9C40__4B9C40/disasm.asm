@@ -1,5 +1,5 @@
-0x4B9C40: push    esi
-0x4B9C41: mov     esi, [esp+4+arg_0]
+0x4B9C40: push    esi; Verified from byte construction and referenced model getter: emits 'Textures\\Trees\\Billboards\\' + model path basename through first dot + '.dds'. If model path has no dot, suffix isn't appended; path truncation/long-path handling not established.
+0x4B9C41: mov     esi, [esp+4+outPath]
 0x4B9C45: mov     edx, offset aTexturesTreesB; "Textures\\Trees\\Billboards"
 0x4B9C4A: mov     al, 54h ; 'T'
 0x4B9C4C: sub     edx, esi

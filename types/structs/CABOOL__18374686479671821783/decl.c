@@ -1,1 +1,1 @@
-CABOOL
+typedef tagCABOOL CABOOL;

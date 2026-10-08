@@ -46,7 +46,7 @@
 0x7BD47F: mov     eax, [esp+48h+var_14]
 0x7BD483: fldz
 0x7BD485: mov     ds:0B43170h, eax
-0x7BD48A: mov     eax, [esp+48h+arg_C]
+0x7BD48A: mov     eax, [esp+48h+value]
 0x7BD48E: fst     [esp+48h+var_10]
 0x7BD492: mov     ecx, [esp+48h+var_10]
 0x7BD496: mov     ds:0B43174h, ecx
@@ -76,7 +76,7 @@
 0x7BD4E8: cmp     ecx, 2
 0x7BD4EB: jz      short loc_7BD50F
 0x7BD4ED: sub     ecx, esi
-0x7BD4EF: mov     byte ptr [esp+48h+arg_C], 1
+0x7BD4EF: mov     byte ptr [esp+48h+value], 1
 0x7BD4F4: jz      short loc_7BD52F
 0x7BD4F6: sub     ecx, 3
 0x7BD4F9: jz      short loc_7BD524
@@ -85,7 +85,7 @@
 0x7BD504: mov     esi, [edi+0B8h]
 0x7BD50A: jmp     loc_7BD691
 0x7BD50F: cmp     eax, 3
-0x7BD512: mov     byte ptr [esp+48h+arg_C], 0
+0x7BD512: mov     byte ptr [esp+48h+value], 0
 0x7BD517: jnz     short loc_7BD53A
 0x7BD519: mov     esi, [edi+0B4h]
 0x7BD51F: jmp     loc_7BD691
@@ -104,7 +104,7 @@
 0x7BD554: mov     eax, [edi+88h]
 0x7BD55A: push    eax; a2
 0x7BD55B: mov     ecx, esi; this
-0x7BD55D: call    sub_7AECB0
+0x7BD55D: call    NiD3DPass_SetVertexShader; Reference-counted NiD3DPass vertex-shader setter. Replaces pass+0x58 and AddRefs the new NiD3DVertexShader.
 0x7BD562: mov     eax, [edi+0A8h]
 0x7BD568: jmp     loc_7BD602
 0x7BD56D: cmp     ecx, 3
@@ -118,11 +118,11 @@
 0x7BD592: jz      short loc_7BD5C5
 0x7BD594: mov     eax, [edi+94h]
 0x7BD59A: push    eax; a2
-0x7BD59B: call    sub_7AECB0
+0x7BD59B: call    NiD3DPass_SetVertexShader; Reference-counted NiD3DPass vertex-shader setter. Replaces pass+0x58 and AddRefs the new NiD3DVertexShader.
 0x7BD5A0: mov     eax, [edi+9Ch]
 0x7BD5A6: mov     ecx, [edi+70h]; this
-0x7BD5A9: push    eax; a2
-0x7BD5AA: call    sub_7AEC60
+0x7BD5A9: push    eax; shader
+0x7BD5AA: call    NiD3DPass_SetPixelShader; Reference-counted NiD3DPass pixel-shader setter. Replaces pass+0x44 and AddRefs the new NiD3DPixelShader.
 0x7BD5AF: fld     dword ptr ds:0B4314Ch
 0x7BD5B5: fchs
 0x7BD5B7: fdiv    qword ptr ds:0A49318h
@@ -130,7 +130,7 @@
 0x7BD5C3: jmp     short loc_7BD60B
 0x7BD5C5: mov     eax, [edi+90h]
 0x7BD5CB: push    eax; a2
-0x7BD5CC: call    sub_7AECB0
+0x7BD5CC: call    NiD3DPass_SetVertexShader; Reference-counted NiD3DPass vertex-shader setter. Replaces pass+0x58 and AddRefs the new NiD3DVertexShader.
 0x7BD5D1: mov     eax, [edi+98h]
 0x7BD5D7: jmp     short loc_7BD602
 0x7BD5D9: test    ebp, ebp
@@ -138,25 +138,25 @@
 0x7BD5DD: jz      short loc_7BD5F3
 0x7BD5DF: mov     eax, [edi+80h]
 0x7BD5E5: push    eax; a2
-0x7BD5E6: call    sub_7AECB0
+0x7BD5E6: call    NiD3DPass_SetVertexShader; Reference-counted NiD3DPass vertex-shader setter. Replaces pass+0x58 and AddRefs the new NiD3DVertexShader.
 0x7BD5EB: mov     eax, [edi+98h]
 0x7BD5F1: jmp     short loc_7BD602
 0x7BD5F3: mov     eax, [edi+7Ch]
 0x7BD5F6: push    eax; a2
-0x7BD5F7: call    sub_7AECB0
+0x7BD5F7: call    NiD3DPass_SetVertexShader; Reference-counted NiD3DPass vertex-shader setter. Replaces pass+0x58 and AddRefs the new NiD3DVertexShader.
 0x7BD5FC: mov     eax, [edi+0A0h]
 0x7BD602: mov     ecx, [edi+70h]; this
-0x7BD605: push    eax; a2
-0x7BD606: call    sub_7AEC60
+0x7BD605: push    eax; shader
+0x7BD606: call    NiD3DPass_SetPixelShader; Reference-counted NiD3DPass pixel-shader setter. Replaces pass+0x44 and AddRefs the new NiD3DPixelShader.
 0x7BD60B: cmp     dword ptr [esi+30h], 0
 0x7BD60F: jnz     short loc_7BD619
-0x7BD611: call    sub_772DF0
+0x7BD611: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x7BD616: mov     [esi+30h], eax
 0x7BD619: mov     ecx, [esi+30h]
 0x7BD61C: push    0
 0x7BD61E: push    1
 0x7BD620: push    1Bh
-0x7BD622: call    sub_772CD0
+0x7BD622: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x7BD627: mov     eax, [ebx+88h]
 0x7BD62D: cmp     eax, 5
 0x7BD630: jz      short loc_7BD657
@@ -164,35 +164,35 @@
 0x7BD634: jz      short loc_7BD657
 0x7BD636: cmp     eax, 6
 0x7BD639: jz      short loc_7BD657
-0x7BD63B: push    0
-0x7BD63D: push    5
-0x7BD63F: push    13h
-0x7BD641: mov     ecx, esi
-0x7BD643: call    sub_76C730
-0x7BD648: push    0
-0x7BD64A: push    6
-0x7BD64C: push    14h
-0x7BD64E: mov     ecx, esi
-0x7BD650: call    sub_76C730
+0x7BD63B: push    0; restore
+0x7BD63D: push    5; value
+0x7BD63F: push    13h; state
+0x7BD641: mov     ecx, esi; this
+0x7BD643: call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.
+0x7BD648: push    0; restore
+0x7BD64A: push    6; value
+0x7BD64C: push    14h; state
+0x7BD64E: mov     ecx, esi; this
+0x7BD650: call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.
 0x7BD655: jmp     short loc_7BD68F
 0x7BD657: cmp     dword ptr [esi+30h], 0
 0x7BD65B: jnz     short loc_7BD665
-0x7BD65D: call    sub_772DF0
+0x7BD65D: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x7BD662: mov     [esi+30h], eax
 0x7BD665: mov     ecx, [esi+30h]
 0x7BD668: push    0
 0x7BD66A: push    5
 0x7BD66C: push    13h
-0x7BD66E: call    sub_772CD0
+0x7BD66E: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x7BD673: cmp     dword ptr [esi+30h], 0
 0x7BD677: jnz     short loc_7BD681
-0x7BD679: call    sub_772DF0
+0x7BD679: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x7BD67E: mov     [esi+30h], eax
 0x7BD681: mov     ecx, [esi+30h]
 0x7BD684: push    0
 0x7BD686: push    2
 0x7BD688: push    14h
-0x7BD68A: call    sub_772CD0
+0x7BD68A: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x7BD68F: fldz
 0x7BD691: cmp     dword ptr [ebx+88h], 3
 0x7BD698: jnz     short loc_7BD6B0
@@ -282,43 +282,43 @@
 0x7BD814: mov     eax, [ebp+8]
 0x7BD817: mov     ecx, [esi+24h]
 0x7BD81A: mov     ecx, [ecx]; this
-0x7BD81C: push    eax; a2
-0x7BD81D: call    sub_76C910
+0x7BD81C: push    eax; texture
+0x7BD81D: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
 0x7BD822: movzx   eax, byte ptr [ebp+5]
 0x7BD826: mov     edx, [esi+24h]
-0x7BD829: mov     ecx, [edx]
+0x7BD829: mov     ecx, [edx]; this
 0x7BD82B: and     eax, 0Fh
-0x7BD82E: push    eax
-0x7BD82F: call    sub_771640
+0x7BD82E: push    eax; filterPreset
+0x7BD82F: call    NiD3DTextureStage_ApplyFilterPreset; Apply one native filter-preset row to a NiD3DTextureStage: D3DSAMP_MAGFILTER (5) from row.MAG, D3DSAMP_MINFILTER (6) from row.MIN, and D3DSAMP_MIPFILTER (7) from row.MIP. Lighting30 SimpleShadow uses preset 1 = MIN/MAG LINEAR, MIP NONE.
 0x7BD834: movzx   edx, word ptr [ebp+4]
 0x7BD838: mov     ecx, [esi+24h]
-0x7BD83B: mov     ecx, [ecx]
+0x7BD83B: mov     ecx, [ecx]; this
 0x7BD83D: shr     edx, 0Ch
 0x7BD840: and     edx, 3
-0x7BD843: push    edx
-0x7BD844: call    sub_7715E0
-0x7BD849: cmp     byte ptr [esp+48h+arg_C], 0
+0x7BD843: push    edx; preset
+0x7BD844: call    NiD3DTextureStage_ApplyAddressModePreset; Apply one native address-preset row to a NiD3DTextureStage: D3DSAMP_ADDRESSU (1) and D3DSAMP_ADDRESSV (2). Lighting30 SimpleShadow uses preset 0 = CLAMP/CLAMP.
+0x7BD849: cmp     byte ptr [esp+48h+value], 0
 0x7BD84E: jnz     short loc_7BD891
 0x7BD850: cmp     dword ptr [ebx+88h], 3
 0x7BD857: jnz     short loc_7BD891
 0x7BD859: mov     eax, [ebx+7Ch]
 0x7BD85C: mov     ecx, [esi+24h]
 0x7BD85F: mov     ecx, [ecx+4]; this
-0x7BD862: push    eax; a2
-0x7BD863: call    sub_76C910
+0x7BD862: push    eax; texture
+0x7BD863: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
 0x7BD868: movzx   eax, byte ptr [ebp+5]
 0x7BD86C: mov     edx, [esi+24h]
-0x7BD86F: mov     ecx, [edx+4]
+0x7BD86F: mov     ecx, [edx+4]; this
 0x7BD872: and     eax, 0Fh
-0x7BD875: push    eax
-0x7BD876: call    sub_771640
+0x7BD875: push    eax; filterPreset
+0x7BD876: call    NiD3DTextureStage_ApplyFilterPreset; Apply one native filter-preset row to a NiD3DTextureStage: D3DSAMP_MAGFILTER (5) from row.MAG, D3DSAMP_MINFILTER (6) from row.MIN, and D3DSAMP_MIPFILTER (7) from row.MIP. Lighting30 SimpleShadow uses preset 1 = MIN/MAG LINEAR, MIP NONE.
 0x7BD87B: movzx   edx, word ptr [ebp+4]
 0x7BD87F: mov     ecx, [esi+24h]
-0x7BD882: mov     ecx, [ecx+4]
+0x7BD882: mov     ecx, [ecx+4]; this
 0x7BD885: shr     edx, 0Ch
 0x7BD888: and     edx, 3
-0x7BD88B: push    edx
-0x7BD88C: call    sub_7715E0
+0x7BD88B: push    edx; preset
+0x7BD88C: call    NiD3DTextureStage_ApplyAddressModePreset; Apply one native address-preset row to a NiD3DTextureStage: D3DSAMP_ADDRESSU (1) and D3DSAMP_ADDRESSV (2). Lighting30 SimpleShadow uses preset 0 = CLAMP/CLAMP.
 0x7BD891: cmp     [esp+48h+var_31], 0
 0x7BD896: jz      short loc_7BD8AD
 0x7BD898: mov     ecx, esi
@@ -330,17 +330,17 @@
 0x7BD8A9: mov     ecx, eax
 0x7BD8AB: call    edx
 0x7BD8AD: test    esi, esi
-0x7BD8AF: mov     [esp+48h+arg_C], esi
+0x7BD8AF: mov     [esp+48h+value], esi
 0x7BD8B3: mov     ebx, 1
 0x7BD8B8: jz      short loc_7BD8BD
 0x7BD8BA: add     [esi+60h], ebx
 0x7BD8BD: mov     ecx, [edi+38h]
-0x7BD8C0: lea     eax, [esp+48h+arg_C]
-0x7BD8C4: push    eax
-0x7BD8C5: push    ecx
-0x7BD8C6: lea     ecx, [edi+40h]
+0x7BD8C0: lea     eax, [esp+48h+value]
+0x7BD8C4: push    eax; value
+0x7BD8C5: push    ecx; index
+0x7BD8C6: lea     ecx, [edi+40h]; this
 0x7BD8C9: mov     [esp+50h+var_4], 0
-0x7BD8D1: call    sub_76CE40
+0x7BD8D1: call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.
 0x7BD8D6: or      eax, 0FFFFFFFFh
 0x7BD8D9: test    esi, esi
 0x7BD8DB: mov     [esp+48h+var_4], eax
@@ -348,7 +348,7 @@
 0x7BD8E1: add     [esi+60h], eax
 0x7BD8E4: jnz     short loc_7BD8ED
 0x7BD8E6: mov     ecx, esi
-0x7BD8E8: call    sub_7604D0
+0x7BD8E8: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x7BD8ED: add     [edi+38h], ebx
 0x7BD8F0: xor     eax, eax
 0x7BD8F2: mov     ecx, [esp+48h+var_C]
@@ -360,3 +360,12 @@
 0x7BD901: pop     ebx
 0x7BD902: add     esp, 34h
 0x7BD905: retn    1Ch
+0x9CDEB0: lea     ecx, [ebp+10h]; void *
+0x9CDEB3: jmp     sub_4027D0
+0x9CDEB8: mov     edx, [esp+arg_4]
+0x9CDEBC: lea     eax, [edx-38h]
+0x9CDEBF: mov     ecx, [edx-3Ch]
+0x9CDEC2: xor     ecx, eax
+0x9CDEC4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CDEC9: mov     eax, offset stru_AF6F74
+0x9CDECE: jmp     ___CxxFrameHandler3

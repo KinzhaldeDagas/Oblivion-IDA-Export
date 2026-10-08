@@ -4,27 +4,27 @@ signed int __thiscall sub_723930(_WORD *this)
   int v3; // ebx
   signed int result; // eax
 
-  v2 = 0;
-  if ( *(this + 0x5B) )
+  v2 = 0; /*0x723934*/
+  if ( *(this + 0x5B) ) /*0x723936*/
   {
-    do
+    do /*0x7239a0*/
     {
-      v3 = *(_DWORD *)(*((_DWORD *)this + 0x2C) + 4 * v2);
-      if ( v3 )
+      v3 = *(_DWORD *)(*((_DWORD *)this + 0x2C) + 4 * v2); /*0x723946*/
+      if ( v3 ) /*0x72394b*/
       {
-        if ( *(_DWORD *)(*((_DWORD *)this + 0x3C) + 4 * v2) != *((_DWORD *)this + 0x3A) )
+        if ( *(_DWORD *)(*((_DWORD *)this + 0x3C) + 4 * v2) != *((_DWORD *)this + 0x3A) ) /*0x723962*/
         {
-          NiTArray_SetAt((NiTArray_NiTexturingPropertyMap *)(this + 0x76), v2, (_DWORD *)this + 0x3A);
-          (*(void (__thiscall **)(int, _DWORD, bool))(*(_DWORD *)v3 + 0x60))(
+          NiTArray_SetAt((NiTArray_NiTexturingPropertyMap *)(this + 0x76), v2, (_DWORD *)this + 0x3A); /*0x72396c*/
+          (*(void (__thiscall **)(int, _DWORD, bool))(*(_DWORD *)v3 + 0x60))( /*0x723992*/
             v3,
             *((float *)this + 0x39),
             (*(_BYTE *)(this + 0x6E) & 2) != 0);
         }
       }
-      result = (unsigned __int16)*(this + 0x5B);
-      ++v2;
+      result = (unsigned __int16)*(this + 0x5B); /*0x723994*/
+      ++v2; /*0x72399b*/
     }
-    while ( v2 < result );
+    while ( v2 < result ); /*0x7239a0*/
   }
-  return result;
+  return result; /*0x7239a3*/
 }

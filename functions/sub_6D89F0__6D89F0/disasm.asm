@@ -50,7 +50,7 @@
 0x6D8A8D: mov     edx, [eax+208h]
 0x6D8A93: mov     eax, [edx+ecx*4]
 0x6D8A96: push    eax
-0x6D8A97: push    offset unk_B3DB20
+0x6D8A97: push    offset stru_B3DB20
 0x6D8A9C: call    NiRTTI_Cast
 0x6D8AA1: add     esp, 8
 0x6D8AA4: push    eax; a2
@@ -114,3 +114,19 @@
 0x6D8B48: pop     ebp
 0x6D8B49: add     esp, 14h
 0x6D8B4C: retn
+0x9C7D00: lea     ecx, [ebp-14h]; slot
+0x9C7D03: jmp     NiPointerSlot_Release
+0x9C7D08: mov     eax, [ebp-10h]
+0x9C7D0B: and     eax, 1
+0x9C7D0E: jz      locret_9C7D20
+0x9C7D14: and     dword ptr [ebp-10h], 0FFFFFFFEh
+0x9C7D18: mov     ecx, [ebp+4]; slot
+0x9C7D1B: jmp     NiPointerSlot_Release
+0x9C7D20: retn
+0x9C7D21: mov     edx, [esp+arg_4]
+0x9C7D25: lea     eax, [edx-14h]
+0x9C7D28: mov     ecx, [edx-18h]
+0x9C7D2B: xor     ecx, eax
+0x9C7D2D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C7D32: mov     eax, offset stru_AF00A0
+0x9C7D37: jmp     ___CxxFrameHandler3

@@ -1,1 +1,1 @@
-0x6B80C0: jmp     sub_5308E0
+0x6B80C0: jmp     TESResponseList__Clear; Destroy every TESResponse and responseText owned by this list. CollectResponses creates a clone first, so this cleanup releases the caller's temporary snapshot without clearing the shared global cache.

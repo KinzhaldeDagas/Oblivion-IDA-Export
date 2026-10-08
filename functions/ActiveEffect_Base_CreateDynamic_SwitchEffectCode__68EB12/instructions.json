@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x68EB12",
-    "line": "mov     ecx, [esi+1Ch]",
+    "line": "mov     ecx, [esi+1Ch]; Verified (Oblivion): only the unregistered-code fallback is handled here. Registered DIWE/DIAR codes are dispatched through NiTMap_AECreatorFuncs before this fallback switch.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -19,13 +19,13 @@
   },
   {
     "ea": "0x68EB20",
-    "line": "jg      ActiveEffect_Base_CreateDynamic___SwitchEffectCodes_2",
+    "line": "jg      ActiveEffect_Base_CreateDynamic___SwitchEffectCodes_2; Verified nested FourCC mappings CUPO -> Alloc_CurePoison, CUDI -> Alloc_CureDisease, and ABSK -> the downstream AbsorbEffect selector.",
     "mnemonic": "jg",
     "size": 6
   },
   {
     "ea": "0x68EB26",
-    "line": "jz      short ActiveEffect_Base_CreateDynamic___Alloc_Shield",
+    "line": "jz      short ActiveEffect_Base_CreateDynamic___Alloc_Shield; Verified (Oblivion fallback code): FRSH and SHLD both allocate ShieldEffect; registered codes in NiTMap are handled before this switch.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x68EB2D",
-    "line": "jg      short ActiveEffect_Base_CreateDynamic___SwitchEffectCode_2",
+    "line": "jg      short ActiveEffect_Base_CreateDynamic___SwitchEffectCode_2; Verified fallback FourCC mappings FISH and LISH to ShieldEffect. Nonmatching codes in this range continue to CheckUseCreature.",
     "mnemonic": "jg",
     "size": 2
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x68EB3A",
-    "line": "jz      ActiveEffect_Base_CreateDynamic___Alloc_Absorb",
+    "line": "jz      ActiveEffect_Base_CreateDynamic___Alloc_Absorb; Verified (Oblivion fallback codes): ABHE and ABFA select AbsorbEffect; CUPA selects the CureEffect paralysis constructor path. The code names and dispatched classes are direct; the hidden internal subtype values remain Unknown unless separately commented.",
     "mnemonic": "jz",
     "size": 6
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x68EB45",
-    "line": "jz      short ActiveEffect_Base_CreateDynamic___Alloc_CureParalysis",
+    "line": "jz      short ActiveEffect_Base_CreateDynamic___Alloc_CureParalysis; Verified allocation for CUPA: creates the shared CureEffect class and passes internal MgefCode PARA to CureEffect_constr_MgefCode; exact internal subtype naming beyond the direct constructor call remains Unknown.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x68EB4E",
-    "line": "jmp     ActiveEffect_Base_CreateDynamic___CheckUseCreature",
+    "line": "jmp     ActiveEffect_Base_CreateDynamic___CheckUseCreature; Verified generic effect fallback: EffectSetting flag 0x40000 selects SummonCreatureEffect; otherwise dispatch continues through weapon/value-modifier handling. Other bits remain Unknown.",
     "mnemonic": "jmp",
     "size": 5
   }

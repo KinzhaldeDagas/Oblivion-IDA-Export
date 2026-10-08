@@ -11,7 +11,7 @@
 0x64813B: mov     eax, [edi+18h]
 0x64813E: push    ebx
 0x64813F: push    eax
-0x648140: call    sub_673980
+0x648140: call    sub_673980; 3DTheft: returns package procedure row length for procedureArrayIndex. Rows used here include Follow row 7 and Flee row 0x13.
 0x648145: mov     edx, [esi]
 0x648147: mov     ebx, eax
 0x648149: mov     eax, [edx+180h]

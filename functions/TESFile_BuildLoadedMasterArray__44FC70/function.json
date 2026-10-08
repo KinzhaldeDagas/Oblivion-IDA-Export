@@ -1,18 +1,31 @@
 {
-  "callees_count": 17,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
+  "callers_count": 5,
+  "chunks": [
+    [
+      "0x44FC70",
+      "0x44FD57"
+    ]
+  ],
+  "chunks_sha256": "6af4cb8cd20492b636b6dc66ab01655d0ab0daadbd9f7cb59d787ff02361a716",
+  "comment_regular": "MEF v56 indexed master resolver: zero-initialized output, checked allocation, first-wins candidate index for >=8 masters in default CRT locale. Other locales/long names/aux OOM use original comparator search. Locale rechecked after indexed lookup; diagnostics invalidate snapshot. Missing/null or inconsistent lists returnfalse safely. Supersedes44FCBF interior hook while retaining its signature.",
+  "comment_repeatable": "MEF PERF 2026-09-08: Verified PERF-5: BuildLoadedMasterArray frees/reallocates per-file result array, then for each master name restarts candidate TESFile list from head44FCE6. Names compare through CRT_StricmpLocaleDispatch at44FCFE. For M masters among P candidates, up to M*P string comparisons per invocation; no runtime duration claimed.\n\nMEF v57 VERIFY 2026-10-08: VERIFIED PERF-5 ABI qualification: native diagnostic argument tests only its low byte; v57 PerfMasterEntry currently tests the full forwarded DWORD. All four observed native callsites use canonical values:44F4A4 PUSH1,452052 PUSH0,44A64A/44A6F0 PUSHEBX with EBX zeroed44A30D and reset44A6D1. Thus no observed native-triggered difference; noncanonical padding from external callers is a conditional compatibility hardening item.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
   "display_name": "TESFile_BuildLoadedMasterArray",
   "end_ea": "0x44FD57",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "TESFile_BuildLoadedMasterArray",
   "segment": ".text",
   "sha256": "6af4cb8cd20492b636b6dc66ab01655d0ab0daadbd9f7cb59d787ff02361a716",
   "size": 231,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x44FC70",
+  "total_chunk_size": 231,
   "type": "char __thiscall(Data *this, int *a2, char a3)",
   "xrefs_from_count": 100,
   "xrefs_to_count": 5

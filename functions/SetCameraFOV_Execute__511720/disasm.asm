@@ -16,7 +16,7 @@
 0x511748: push    eax; a2
 0x511749: push    ecx; a1
 0x51174A: mov     [esp+28h+var_8], 0FFFFFFFFh
-0x511752: call    Script_ExtractArgs
+0x511752: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x511757: add     esp, 20h
 0x51175A: test    al, al
 0x51175C: jnz     short loc_511762
@@ -47,7 +47,7 @@
 0x5117A7: push    ecx
 0x5117A8: mov     ecx, ds:0B333CCh; this
 0x5117AE: fstp    [esp+10h+a2]; a2
-0x5117B1: call    SetCameraFOV_0
+0x5117B1: call    SetCameraFOV_0; MoonSugarEffect decode: SetCameraFOV_0 rebuilds SceneGraph camera frustum, max far/near ratio, camera LODAdjust, and leaves persistent camera state. Avoid for per-frame Moon Sugar wobble.
 0x5117B6: fld     [esp+8+var_4]
 0x5117BA: push    ecx
 0x5117BB: fstp    [esp+0Ch+var_C]; float

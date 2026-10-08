@@ -1,34 +1,34 @@
-_DWORD *__cdecl sub_70BE70(int a1, int a2, int a3)
+NiObject *__cdecl sub_70BE70(NiObjectVtbl *a1, UInt32 a2, int a3)
 {
-  _DWORD *v3; // eax
-  _DWORD *v4; // esi
-  int v5; // edi
+  NiObject *v3; // eax
+  NiObject *v4; // esi
+  NiObjectVtbl *vftable; // edi
 
-  v3 = (_DWORD *)FormHeapAlloc(0x18u);
-  v4 = v3;
-  if ( v3 )
+  v3 = (NiObject *)FormHeapAlloc(0x18u); /*0x70be96*/
+  v4 = v3; /*0x70be9b*/
+  if ( v3 ) /*0x70beae*/
   {
-    sub_731EA0(v3);
-    *v4 = &NiDepthStencilBuffer::`vftable';
-    v4[5] = 0;
+    sub_731EA0(v3); /*0x70beb2*/
+    v4->__vftable = (NiObjectVtbl *)&NiDepthStencilBuffer::`vftable'; /*0x70beb7*/
+    v4[2].members.m_uiRefCount = 0; /*0x70bebd*/
   }
   else
   {
-    v4 = 0;
+    v4 = 0; /*0x70bec6*/
   }
-  v4[2] = a1;
-  v4[3] = a2;
-  v5 = v4[4];
-  if ( v5 != a3 )
+  v4[1].__vftable = a1; /*0x70bed4*/
+  v4[1].members.m_uiRefCount = a2; /*0x70bed7*/
+  vftable = v4[2].__vftable; /*0x70beda*/
+  if ( vftable != (NiObjectVtbl *)a3 ) /*0x70bee7*/
   {
-    if ( v5 )
+    if ( vftable ) /*0x70beeb*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)(v5 + 4)) )
-        (**(void (__thiscall ***)(int, int))v5)(v5, 1);
+      if ( !InterlockedDecrement((volatile LONG *)&vftable->GetType) ) /*0x70bef1*/
+        (*(void (__thiscall **)(NiObjectVtbl *, int))vftable->super.Destructor)(vftable, 1); /*0x70bf07*/
     }
-    v4[4] = a3;
-    if ( a3 )
-      InterlockedIncrement((volatile LONG *)(a3 + 4));
+    v4[2].__vftable = (NiObjectVtbl *)a3; /*0x70bf0b*/
+    if ( a3 ) /*0x70bf0e*/
+      InterlockedIncrement((volatile LONG *)(a3 + 4)); /*0x70bf14*/
   }
-  return v4;
+  return v4; /*0x70bf1c*/
 }

@@ -3,5 +3,5 @@
 0x55CBF7: jz      short loc_55CBFF
 0x55CBF9: add     eax, 88h ; 'ˆ'
 0x55CBFE: retn
-0x55CBFF: mov     eax, offset Vector3_InitValue?
+0x55CBFF: mov     eax, offset g_zeroNiPoint3
 0x55CC04: retn

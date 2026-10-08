@@ -14,7 +14,7 @@
 0x699782: push    eax
 0x699783: lea     ecx, [esp+44h+var_2C]
 0x699787: push    ecx
-0x699788: call    sub_43F3E0
+0x699788: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x69978D: fld     [esp+48h+var_2C]
 0x699791: fsub    [ebp+arg_4]
 0x699794: add     esp, 4
@@ -30,18 +30,18 @@
 0x6997B7: fstp    [esp+44h+var_44]; float
 0x6997BA: push    0; int
 0x6997BC: push    0; int
-0x6997BE: call    sub_43F350
+0x6997BE: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x6997C3: push    ecx
 0x6997C4: mov     ecx, edi
 0x6997C6: fstp    [esp+50h+var_50]; float
-0x6997C9: call    EffectItem_GetArea
+0x6997C9: call    EffectItem_GetArea; Effective area: returns 0 for EffectSetting NoArea (0x200) or Self range (0); otherwise raw EffectItem+0x8 area.
 0x6997CE: mov     [esp+50h+var_30], eax
 0x6997D2: fild    [esp+50h+var_30]
 0x6997D6: fmul    dword ptr ds:0B37DB8h
-0x6997DC: call    Double_To_SInt32
+0x6997DC: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x6997E1: fld     [ebp+arg_14]
 0x6997E4: push    eax; int
-0x6997E5: call    Double_To_SInt32
+0x6997E5: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x6997EA: push    eax; int
 0x6997EB: call    Calc_MagicExplosionSize?
 0x6997F0: fstp    [esp+58h+var_30]

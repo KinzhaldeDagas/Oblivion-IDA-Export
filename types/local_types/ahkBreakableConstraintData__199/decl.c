@@ -1,1 +1,1 @@
-ahkBreakableConstraintData
+struct ahkBreakableConstraintData;

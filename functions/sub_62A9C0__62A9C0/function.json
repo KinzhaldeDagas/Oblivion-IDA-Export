@@ -1,18 +1,31 @@
 {
-  "callees_count": 103,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 39,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
+  "chunks": [
+    [
+      "0x62A9C0",
+      "0x62B064"
+    ]
+  ],
+  "chunks_sha256": "583f8a6f562a7098ace3a5830e8f4136bcdb69ed0d0ebc0fa72b0d15a1dc9232",
+  "comment_regular": "3DTheft decode 2026-05-18: HighProcess vtable +0x1A4 SayTopic implementation. Uses Actor+0xE4 or process+0x258 as dialogue target, creates TESTopic dialogue info, calls Actor::InitDialogue, sets dialogue timer/state fields (0x21C/0x228/0x278/0x22C), and may turn/target actor; it does not call Actor_AddPackage or EvaluatePackage.",
+  "comment_repeatable": "3DTheft decode 2026-05-18: HighProcess vtable +0x1A4 SayTopic implementation. Uses Actor+0xE4 or process+0x258 as dialogue target, creates TESTopic dialogue info, calls Actor::InitDialogue, sets dialogue timer/state fields (0x21C/0x228/0x278/0x22C), and may turn/target actor; it does not call Actor_AddPackage or EvaluatePackage.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
   "display_name": "sub_62A9C0",
   "end_ea": "0x62B064",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_62A9C0",
   "segment": ".text",
   "sha256": "583f8a6f562a7098ace3a5830e8f4136bcdb69ed0d0ebc0fa72b0d15a1dc9232",
   "size": 1700,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x62A9C0",
+  "total_chunk_size": 1700,
   "type": "void __thiscall(HighProcess *this, Actor *a2, TESTopic *a3, bool a4, UInt8 a5, char a6)",
   "xrefs_from_count": 588,
   "xrefs_to_count": 1

@@ -3,8 +3,8 @@
 0x7F68C2: push    ebp
 0x7F68C3: movzx   ebp, word ptr [esp+0Ch+arg_0]
 0x7F68C8: add     ebp, ebp
-0x7F68CA: mov     eax, ss:dword_B43490[ebp+ebp]
-0x7F68D1: mov     ebx, ss:dword_B43B20[ebp+ebp]
+0x7F68CA: mov     eax, dword ptr ss:unk_B43490[ebp+ebp]
+0x7F68D1: mov     ebx, dword ptr ss:unk_B43B20[ebp+ebp]
 0x7F68D8: add     ebp, ebp
 0x7F68DA: push    esi
 0x7F68DB: push    edi
@@ -81,11 +81,11 @@
 0x7F69A7: mov     eax, [ecx]
 0x7F69A9: mov     edx, [eax+48h]
 0x7F69AC: call    edx
-0x7F69AE: mov     eax, ss:dword_B44840[ebp]
-0x7F69B4: mov     edx, ss:dword_B441B0[ebp]
+0x7F69AE: mov     eax, dword ptr ss:unk_B44840[ebp]
+0x7F69B4: mov     edx, dword ptr ss:unk_B441B0[ebp]
 0x7F69BA: mov     [esp+14h+arg_0], eax
 0x7F69BE: mov     ecx, 1
-0x7F69C3: mov     esi, offset dword_B45518
+0x7F69C3: mov     esi, offset unk_B45518
 0x7F69C8: mov     ebp, 11h
 0x7F69CD: lea     ecx, [ecx+0]
 0x7F69D0: mov     edi, [esi]

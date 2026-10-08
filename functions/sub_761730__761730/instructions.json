@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x761730",
-    "line": "sub     esp, 10h",
+    "line": "sub     esp, 10h; Oblivion string and behavior identify NiDX9RenderedTextureData::CreateSurf. Selects D3D format/usage/pool from NiRenderedTexture settings, creates a one-level texture or render-target surface, records exact byte size, and updates renderer video-memory accounting.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -445,13 +445,13 @@
   },
   {
     "ea": "0x7617F7",
-    "line": "push    eax",
+    "line": "push    eax; hresult",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7617F8",
-    "line": "call    sub_7736F0",
+    "line": "call    D3D9_HResultToString; Maps common COM/D3D9 HRESULT values to diagnostic names, including DEVICELOST, DEVICENOTRESET, INVALIDCALL, OUTOFVIDEOMEMORY, and format/state failures.",
     "mnemonic": "call",
     "size": 5
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x761803",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },

@@ -91,26 +91,26 @@
 0x631FD0: mov     [esp+24h+var_4], 1
 0x631FD8: jz      short loc_631FE3
 0x631FDA: mov     ecx, eax
-0x631FDC: call    TESPackage_TargetData_constr
+0x631FDC: call    TESPackage_TargetData_constr; 3DTheft decode: TESPackage_TargetData constructor initializes targetType=2, target/object=0, count=0.
 0x631FE1: mov     ebp, eax
 0x631FE3: push    ebp
 0x631FE4: mov     ecx, esi
 0x631FE6: mov     [esp+28h+var_4], ebx
-0x631FEA: call    TESPackage_SetTarget
+0x631FEA: call    TESPackage_SetTarget; 3DTheft decode: TESPackage_SetTarget allocates package->target when needed, copies a 0x0C TargetData record, and leaves later callers to set target type/ref/count fields.
 0x631FEF: test    ebp, ebp
 0x631FF1: jz      short loc_632003
-0x631FF3: mov     ecx, ebp; void *
-0x631FF5: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x631FF3: mov     ecx, ebp; this
+0x631FF5: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x631FFA: push    ebp
-0x631FFB: call    FormHeapFree
+0x631FFB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x632000: add     esp, 4
 0x632003: mov     ecx, [esi+28h]
 0x632006: push    0
-0x632008: call    TESPackage_TargetData_SetType
+0x632008: call    TESPackage_TargetData_SetType; 3DTheft decode: TargetData_SetType writes targetType and clears the target/object field for refr/base/type target modes.
 0x63200D: mov     ecx, ds:0B333C4h
 0x632013: push    ecx
 0x632014: mov     ecx, [esi+28h]
-0x632017: call    TeSPackage_TargetData_SetTargetREFR
+0x632017: call    TeSPackage_TargetData_SetTargetREFR; 3DTheft decode: TargetData_SetTargetREFR only writes the reference field when targetType is 0 (reference target). It does not set count.
 0x63201C: mov     bl, [esp+24h+arg_4]
 0x632020: test    bl, bl
 0x632022: mov     ecx, [esi+28h]
@@ -124,7 +124,7 @@
 0x63203B: push    1; a3
 0x63203D: push    esi; a2
 0x63203E: mov     dword ptr [esi+18h], 7
-0x632045: call    Actor_AddPackage?
+0x632045: call    Actor_AddPackage?; 3DTheft: xrefs ignore this function's return value; use current package/process state after call, not AL/EAX, as the package assignment result.
 0x63204A: mov     edx, [edi]
 0x63204C: mov     eax, ds:0B333C4h
 0x632051: mov     edx, [edx+484h]
@@ -149,3 +149,20 @@
 0x632085: pop     ebx
 0x632086: add     esp, 10h
 0x632089: retn    8
+0x9C57A0: mov     eax, [ebp-10h]
+0x9C57A3: push    eax
+0x9C57A4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C57A9: pop     ecx
+0x9C57AA: retn
+0x9C57AB: mov     eax, [ebp-10h]
+0x9C57AE: push    eax
+0x9C57AF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C57B4: pop     ecx
+0x9C57B5: retn
+0x9C57B6: mov     edx, [esp+arg_4]
+0x9C57BA: lea     eax, [edx-14h]
+0x9C57BD: mov     ecx, [edx-18h]
+0x9C57C0: xor     ecx, eax
+0x9C57C2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C57C7: mov     eax, offset stru_AEDF40
+0x9C57CC: jmp     ___CxxFrameHandler3

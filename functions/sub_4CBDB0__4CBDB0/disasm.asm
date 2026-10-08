@@ -1,10 +1,10 @@
-0x4CBDB0: cmp     [esp+arg_0], 0
+0x4CBDB0: cmp     [esp+outDoors], 0; Verified: scans cell object references, filters out references with deleted/disabled flags, then collects door references whose ExtraTeleport exists or whose TESObjectDOOR.randomTeleport list is nonempty. This list feeds teleport-link processing.
 0x4CBDB5: push    ebx
 0x4CBDB6: mov     ebx, ecx
 0x4CBDB8: jz      loc_4CBE4A
 0x4CBDBE: push    edi
 0x4CBDBF: push    ebx; a2
-0x4CBDC0: mov     ecx, offset stru_B35C80; this
+0x4CBDC0: mov     ecx, offset unk_B35C80; this
 0x4CBDC5: call    sub_496EA0
 0x4CBDCA: lea     edi, [ebx+48h]
 0x4CBDCD: test    edi, edi
@@ -36,14 +36,14 @@
 0x4CBE11: call    eax
 0x4CBE13: mov     ecx, esi; this
 0x4CBE15: mov     ebp, eax
-0x4CBE17: call    GetTeleportExtraData
+0x4CBE17: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x4CBE1C: test    eax, eax
 0x4CBE1E: jnz     short loc_4CBE2B
-0x4CBE20: mov     ecx, ebp
-0x4CBE22: call    sub_4B78E0
+0x4CBE20: mov     ecx, ebp; this
+0x4CBE22: call    TESObjectDOOR_HasRandomTeleportSpaces; Verified mechanics: returns true iff either pointer in the 8-byte TESObjectDOOR.randomTeleport BSSimpleList head is nonzero. Probable domain meaning: the door has at least one random-teleport destination space, supported by the membership and destination-selection callers.
 0x4CBE27: test    al, al
 0x4CBE29: jz      short loc_4CBE35
-0x4CBE2B: mov     ecx, [esp+10h+arg_0]
+0x4CBE2B: mov     ecx, [esp+10h+outDoors]
 0x4CBE2F: push    esi
 0x4CBE30: call    BSSimpleList_PushFront
 0x4CBE35: mov     edi, [edi+4]
@@ -52,7 +52,7 @@
 0x4CBE3C: pop     esi
 0x4CBE3D: pop     ebp
 0x4CBE3E: push    ebx; a2
-0x4CBE3F: mov     ecx, offset stru_B35C80; this
+0x4CBE3F: mov     ecx, offset unk_B35C80; this
 0x4CBE44: call    sub_496F50
 0x4CBE49: pop     edi
 0x4CBE4A: pop     ebx

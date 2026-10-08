@@ -1,4 +1,4 @@
 BOOL __thiscall sub_4F9A20(_DWORD *this)
 {
-  return !*(this + 0xC) && !*(this + 0xB);
+  return !*(this + 0xC) && !*(this + 0xB); /*0x4f9a31*/
 }

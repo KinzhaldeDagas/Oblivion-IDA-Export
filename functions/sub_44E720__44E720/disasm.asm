@@ -26,15 +26,15 @@
 0x44E77B: cmp     ds:0B055A4h, bl
 0x44E781: jz      short loc_44E78E
 0x44E783: mov     ecx, ds:0B33398h
-0x44E789: call    sub_40D160
+0x44E789: call    MenuBackground_CaptureWorldToTexture
 0x44E78E: cmp     ds:0B0558Ch, bl
 0x44E794: jz      short loc_44E7A8
 0x44E796: push    offset aModelModelBoun; "Model\tModel Bound\tDisplay Triangle Co"...
 0x44E79B: push    offset aTestmodelsColl; "TestModels - Collision Info.xls"
-0x44E7A0: call    nullsub_return0_0arg
+0x44E7A0: call    nullsub_return0_0arg; [Verified] Shared zero-return leaf. BSTempEffectDecal vtable 0xA6822C uses it at +0x54 for GetTypeID 0 and also in other slots; many unrelated vtables reuse this target. Class meaning must be established from the owning vtable and caller.
 0x44E7A5: add     esp, 8
-0x44E7A8: mov     ecx, [edi]
-0x44E7AA: call    TESHealthForm_GetHealth
+0x44E7A8: mov     ecx, [edi]; this
+0x44E7AA: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x44E7AF: mov     esi, eax
 0x44E7B1: cmp     esi, ebx
 0x44E7B3: mov     [esp+6C4h+var_680], esi
@@ -144,3 +144,29 @@
 0x44E8FA: mov     ecx, [esp+6C8h+var_694]
 0x44E8FE: call    TESBipedModelForm_GetBipedModel
 0x44E903: mov     edi, eax
+0x9ADD20: mov     eax, [ebp+var_68C]
+0x9ADD26: push    eax
+0x9ADD27: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADD2C: pop     ecx
+0x9ADD2D: retn
+0x9ADD2E: mov     eax, [ebp+var_68C]
+0x9ADD34: push    eax
+0x9ADD35: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADD3A: pop     ecx
+0x9ADD3B: retn
+0x9ADD3C: mov     eax, [ebp+var_68C]
+0x9ADD42: push    eax
+0x9ADD43: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADD48: pop     ecx
+0x9ADD49: retn
+0x9ADD4A: mov     edx, [esp-4+arg_4]
+0x9ADD4E: lea     eax, [edx-6B4h]
+0x9ADD54: mov     ecx, [edx-6B8h]
+0x9ADD5A: xor     ecx, eax
+0x9ADD5C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9ADD61: add     eax, 0Ch
+0x9ADD64: mov     ecx, [edx-38h]
+0x9ADD67: xor     ecx, eax
+0x9ADD69: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9ADD6E: mov     eax, offset stru_ADA688
+0x9ADD73: jmp     ___CxxFrameHandler3

@@ -138,3 +138,36 @@
 0x8A19F9: pop     ebx
 0x8A19FA: add     esp, 30h
 0x8A19FD: retn    4
+0x536DD0: mov     edx, ecx
+0x536DD2: mov     eax, [edx+8]
+0x536DD5: test    eax, eax
+0x536DD7: js      short locret_536E0F
+0x536DD9: mov     ecx, ds:0BA9DE4h
+0x536DDF: push    esi
+0x536DE0: mov     esi, large fs:2Ch
+0x536DE7: mov     ecx, [esi+ecx*4]
+0x536DEA: mov     ecx, [ecx+19Ch]
+0x536DF0: test    ecx, ecx
+0x536DF2: pop     esi
+0x536DF3: jnz     short loc_536DFB
+0x536DF5: mov     ecx, ds:0BA7D9Ch
+0x536DFB: mov     edx, [edx]
+0x536DFD: and     eax, 3FFFFFFFh
+0x536E02: add     eax, eax
+0x536E04: push    14h
+0x536E06: add     eax, eax
+0x536E08: push    eax
+0x536E09: push    edx
+0x536E0A: call    sub_8A75D0
+0x536E0F: retn
+0x9D69C0: lea     ecx, [ebp-18h]
+0x9D69C3: jmp     loc_536DD0
+0x9D69C8: lea     ecx, [ebp-24h]
+0x9D69CB: jmp     loc_536DD0
+0x9D69D0: mov     edx, [esp+arg_4]
+0x9D69D4: lea     eax, [edx-34h]
+0x9D69D7: mov     ecx, [edx-38h]
+0x9D69DA: xor     ecx, eax
+0x9D69DC: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D69E1: mov     eax, offset stru_AFE75C
+0x9D69E6: jmp     ___CxxFrameHandler3

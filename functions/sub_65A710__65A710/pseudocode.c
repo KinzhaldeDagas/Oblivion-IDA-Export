@@ -2,24 +2,24 @@ float *__thiscall sub_65A710(Actor *this, float *a2)
 {
   bhkCharacterProxy *CharProxy; // eax
   float *result; // eax
-  __m128 *v4; // eax
+  __m128 *LinearVelocityPtr; // eax
 
-  CharProxy = MobileObject_GetCharProxy((MobileObject *)this);
-  if ( CharProxy )
+  CharProxy = MobileObject_GetCharProxy((MobileObject *)this); /*0x65a710*/
+  if ( CharProxy ) /*0x65a717*/
   {
-    result = *((float **)CharProxy + 2);
-    if ( result )
+    result = *((float **)CharProxy + 2); /*0x65a719*/
+    if ( result ) /*0x65a71e*/
     {
-      v4 = (__m128 *)sub_8AC0A0((char *)result);
-      return sub_43F3E0(a2, v4);
+      LinearVelocityPtr = (__m128 *)bhkWorldObject_GetLinearVelocityPtr((char *)result); /*0x65a722*/
+      return HavokVector_ToWorldVector(a2, LinearVelocityPtr); /*0x65a72d*/
     }
   }
   else
   {
-    *a2 = Vector3_InitValue_;
-    a2[1] = *(&Vector3_InitValue_ + 1);
-    a2[2] = dword_B3F9B0;
-    return a2;
+    *a2 = g_zeroNiPoint3.x; /*0x65a742*/
+    a2[1] = g_zeroNiPoint3.y; /*0x65a74a*/
+    a2[2] = g_zeroNiPoint3.z; /*0x65a753*/
+    return a2; /*0x65a73e*/
   }
-  return result;
+  return result; /*0x65a735*/
 }

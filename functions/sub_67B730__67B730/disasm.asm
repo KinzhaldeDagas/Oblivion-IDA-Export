@@ -4,7 +4,7 @@
 0x67B734: mov     ecx, ds:0B33B00h
 0x67B73A: push    edi
 0x67B73B: xor     edi, edi
-0x67B73D: call    sub_45A170
+0x67B73D: call    TESSaveLoadGame_UseSaveGameBlocks
 0x67B742: test    al, al
 0x67B744: jz      short loc_67B74B
 0x67B746: mov     edi, 6
@@ -58,7 +58,7 @@
 0x67B7D9: jz      short loc_67B81C
 0x67B7DB: mov     edx, [esi]
 0x67B7DD: push    edx; a1
-0x67B7DE: call    TESForm_LookupByFormID
+0x67B7DE: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x67B7E3: mov     ecx, [esi+5]
 0x67B7E6: mov     edx, [eax]
 0x67B7E8: add     esp, 4

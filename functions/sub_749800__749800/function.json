@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
-  "callers_count": 7,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 9,
+  "chunks": [
+    [
+      "0x749800",
+      "0x749884"
+    ]
+  ],
+  "chunks_sha256": "cf64ecc9f829d1f95c58c96707d37dfe92278b34c6af907f3c25dff6f40c338c",
+  "comment_regular": "Pass221: Refcounted NiTPointerList head-insert helper; node+0x08 owns the payload reference.",
+  "comment_repeatable": "Pass221: Refcounted NiTPointerList head-insert helper; node+0x08 owns the payload reference.\n\nMEF PERF 2026-10-07 PASS2: PERF-13 typed AddHead proof: node allocated through list vtable+4, payload strong-owned at node+8, links set as new head with old head.previous updated, empty-list tail set, count incremented. Returned EAX is previous head, not a success boolean. Native allocation failure contract not changed by analysis.\nMEF v57 IMPLEMENTED 2026-10-08: v57 ref-list AddHead mutation wrapper tracks inserted node after native work; receiver pending-tail scopes treat new head nodes as accepted prefix, outside searchable tail. Private cache entries are borrowed; payload AddRef remains native.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_749800",
+  "display_name": "NiTRefPointerList__AddHead",
   "end_ea": "0x749884",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_749800",
+  "name": "NiTRefPointerList__AddHead",
   "segment": ".text",
   "sha256": "cf64ecc9f829d1f95c58c96707d37dfe92278b34c6af907f3c25dff6f40c338c",
   "size": 132,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x749800",
-  "type": "int __thiscall(_DWORD *this, int *)",
+  "total_chunk_size": 132,
+  "type": "MEF_RefListNode32 *__thiscall(MEF_RefList32 *self, void **payload)",
   "xrefs_from_count": 60,
   "xrefs_to_count": 9
 }

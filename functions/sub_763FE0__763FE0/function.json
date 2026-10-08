@@ -1,18 +1,31 @@
 {
-  "callees_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 4,
+  "chunks": [
+    [
+      "0x763FE0",
+      "0x764033"
+    ]
+  ],
+  "chunks_sha256": "ea2d4781109c7a0216ab4955e5af83391ec4a26184a7843ace6ca2874620f118",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "DX11 concurrency audit 2026-09-24, OblivionNew verified: enters renderer critical section at this+0x80, records thread at +0xF8 and nesting at +0xFC; on first entry calls vtable+0x128. Then enters precache section at this+0x100, with thread/nesting at +0x178/+0x17C. Lock order is renderer then precache. Inspected NiDX9Renderer vtable A88EA4 has no-op 60D0A0 in +0x128/+0x12C; that does not remove these direct critical-section acquisitions.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 4,
-  "display_name": "sub_763FE0",
+  "display_name": "NiDX9Renderer_EnterRendererAndPrecache",
   "end_ea": "0x764033",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_763FE0",
+  "name": "NiDX9Renderer_EnterRendererAndPrecache",
   "segment": ".text",
   "sha256": "ea2d4781109c7a0216ab4955e5af83391ec4a26184a7843ace6ca2874620f118",
   "size": 83,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x763FE0",
+  "total_chunk_size": 83,
   "type": "DWORD __thiscall(NiDX9Renderer *this)",
   "xrefs_from_count": 35,
   "xrefs_to_count": 4

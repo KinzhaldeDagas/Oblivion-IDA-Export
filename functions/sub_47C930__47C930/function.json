@@ -1,19 +1,32 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 12,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x47C930",
+      "0x47C98E"
+    ]
+  ],
+  "chunks_sha256": "f758edf73f89fdb31e22cb2ee97de80f202bc1a6279b783c994f978b4ca6675e",
+  "comment_regular": "\nGPU world census audit 2026-09-27: assembly confirms local property-list head at object+9C, entry next+0 and property+8; property controller at +0C; object controller at +0C and next controller at +34. Collect both object/property chains and detect cycles under the same externally proved native read scope.\n\nUpdate one NiAVObject's property controllers and attached NiTimeController chain. If requested, walk the property list at NiAVObject+0x9C and invoke property virtual +0x50 when its controller pointer is non-null. Always walk NiObjectNET.controller at object+0x0C through NiTimeController.next at +0x34 and invoke controller virtual Update +0x54 with applicationTime. No Active-bit prefilter occurs here: NiTimeController.flags+0x08 bit 3 only affects time-cache logic inside the controller. External Crossbow consequence after this Oblivion decode: temporarily clearing the base Active bit inside an already-entered morph hook will not by itself stop the next scene traversal, but pointer discovery still cannot make a graph that is not traversed dispatch Update.",
+  "comment_repeatable": "Update one NiAVObject's property controllers and attached NiTimeController chain. If requested, walk the property list at NiAVObject+0x9C and invoke property virtual +0x50 when its controller pointer is non-null. Always walk NiObjectNET.controller at object+0x0C through NiTimeController.next at +0x34 and invoke controller virtual Update +0x54 with applicationTime. No Active-bit prefilter occurs here: NiTimeController.flags+0x08 bit 3 only affects time-cache logic inside the controller. External Crossbow consequence after this Oblivion decode: temporarily clearing the base Active bit inside an already-entered morph hook will not by itself stop the next scene traversal, but pointer discovery still cannot make a graph that is not traversed dispatch Update.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_47C930",
+  "display_name": "NiAVObject_UpdatePropertiesAndControllers",
   "end_ea": "0x47C98E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_47C930",
+  "name": "NiAVObject_UpdatePropertiesAndControllers",
   "segment": ".text",
   "sha256": "f758edf73f89fdb31e22cb2ee97de80f202bc1a6279b783c994f978b4ca6675e",
   "size": 94,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x47C930",
-  "type": "_DWORD *__thiscall(_DWORD *this, float, char)",
+  "total_chunk_size": 94,
+  "type": "void __thiscall(NiAVObject *this, float applicationTime, bool updateProperties)",
   "xrefs_from_count": 45,
   "xrefs_to_count": 12
 }

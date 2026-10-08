@@ -2,11 +2,11 @@ bool __thiscall sub_41D740(BSExtraData *this, BSExtraData *a2)
 {
   _DWORD *v3; // esi
 
-  v3 = OblivionDynamicCast(
+  v3 = OblivionDynamicCast( /*0x41d75d*/
          a2,
          0,
          (struct _s_RTTICompleteObjectLocator *)&BSExtraData `RTTI Type Descriptor',
          &ExtraCellClimate `RTTI Type Descriptor',
          0);
-  return !v3 || BSExtraData_CompareTo(this, a2) || v3[3] != *((_DWORD *)this + 3);
+  return !v3 || BSExtraData_CompareTo(this, a2) || v3[3] != *((_DWORD *)this + 3); /*0x41d766*/
 }

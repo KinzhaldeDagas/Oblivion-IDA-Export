@@ -1,430 +1,657 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "LISTVIEW_INFO",
+  "definition": "typedef tagLISTVIEW_INFO LISTVIEW_INFO\n",
   "id": 18374686479672041428,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hwndSelf",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "rcList",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 16
+      "size": 16,
+      "type": "RECT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "notifyFormat",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 2
+      "size": 2,
+      "type": "SHORT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hwndNotify",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "notify_mask",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "uCallbackMask",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hwndToolTip",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nItemCount",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hdpaItems",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "HDPA"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hdpaItemIds",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "HDPA"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hdpaPosX",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "HDPA"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hdpaPosY",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "HDPA"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "selectionRanges",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "RANGES"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nSelectionMark",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nHotItem",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hdpaColumns",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 4
+      "size": 4,
+      "type": "HDPA"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "colRectsDirty",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 4
+      "offset_hex": "0x4C",
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "selected_column",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bNoItemMetrics",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nItemHeight",
       "offset": 88,
       "offset_hex": "0x58",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nItemWidth",
       "offset": 92,
-      "offset_hex": "0x5c",
-      "size": 4
+      "offset_hex": "0x5C",
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwStyle",
       "offset": 96,
       "offset_hex": "0x60",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwLvExStyle",
       "offset": 100,
       "offset_hex": "0x64",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "uView",
       "offset": 104,
       "offset_hex": "0x68",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hwndEdit",
       "offset": 108,
-      "offset_hex": "0x6c",
-      "size": 4
+      "offset_hex": "0x6C",
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "EditWndProc",
       "offset": 112,
       "offset_hex": "0x70",
-      "size": 4
+      "size": 4,
+      "type": "WNDPROC_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nEditLabelItem",
       "offset": 116,
       "offset_hex": "0x74",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "itemEdit",
       "offset": 120,
       "offset_hex": "0x78",
-      "size": 8
+      "size": 8,
+      "type": "DELAYED_ITEM_EDIT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "himlNormal",
       "offset": 128,
       "offset_hex": "0x80",
-      "size": 4
+      "size": 4,
+      "type": "HIMAGELIST"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "himlSmall",
       "offset": 132,
       "offset_hex": "0x84",
-      "size": 4
+      "size": 4,
+      "type": "HIMAGELIST"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "himlState",
       "offset": 136,
       "offset_hex": "0x88",
-      "size": 4
+      "size": 4,
+      "type": "HIMAGELIST"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "iconSize",
       "offset": 140,
-      "offset_hex": "0x8c",
-      "size": 8
+      "offset_hex": "0x8C",
+      "size": 8,
+      "type": "SIZE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "autoSpacing",
       "offset": 148,
       "offset_hex": "0x94",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "iconSpacing",
       "offset": 152,
       "offset_hex": "0x98",
-      "size": 8
+      "size": 8,
+      "type": "SIZE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "iconStateSize",
       "offset": 160,
-      "offset_hex": "0xa0",
-      "size": 8
+      "offset_hex": "0xA0",
+      "size": 8,
+      "type": "SIZE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "currIconPos",
       "offset": 168,
-      "offset_hex": "0xa8",
-      "size": 8
+      "offset_hex": "0xA8",
+      "size": 8,
+      "type": "POINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hwndHeader",
       "offset": 176,
-      "offset_hex": "0xb0",
-      "size": 4
+      "offset_hex": "0xB0",
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "xTrackLine",
       "offset": 180,
-      "offset_hex": "0xb4",
-      "size": 4
+      "offset_hex": "0xB4",
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bMarqueeSelect",
       "offset": 184,
-      "offset_hex": "0xb8",
-      "size": 4
+      "offset_hex": "0xB8",
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bScrolling",
       "offset": 188,
-      "offset_hex": "0xbc",
-      "size": 4
+      "offset_hex": "0xBC",
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "marqueeRect",
       "offset": 192,
-      "offset_hex": "0xc0",
-      "size": 16
+      "offset_hex": "0xC0",
+      "size": 16,
+      "type": "RECT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "marqueeDrawRect",
       "offset": 208,
-      "offset_hex": "0xd0",
-      "size": 16
+      "offset_hex": "0xD0",
+      "size": 16,
+      "type": "RECT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "marqueeOrigin",
       "offset": 224,
-      "offset_hex": "0xe0",
-      "size": 8
+      "offset_hex": "0xE0",
+      "size": 8,
+      "type": "POINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bFocus",
       "offset": 232,
-      "offset_hex": "0xe8",
-      "size": 4
+      "offset_hex": "0xE8",
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nFocusedItem",
       "offset": 236,
-      "offset_hex": "0xec",
-      "size": 4
+      "offset_hex": "0xEC",
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "rcFocus",
       "offset": 240,
-      "offset_hex": "0xf0",
-      "size": 16
+      "offset_hex": "0xF0",
+      "size": 16,
+      "type": "RECT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hBkBrush",
       "offset": 256,
       "offset_hex": "0x100",
-      "size": 4
+      "size": 4,
+      "type": "HBRUSH"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "clrBk",
       "offset": 260,
       "offset_hex": "0x104",
-      "size": 4
+      "size": 4,
+      "type": "COLORREF"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "clrText",
       "offset": 264,
       "offset_hex": "0x108",
-      "size": 4
+      "size": 4,
+      "type": "COLORREF"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "clrTextBk",
       "offset": 268,
-      "offset_hex": "0x10c",
-      "size": 4
+      "offset_hex": "0x10C",
+      "size": 4,
+      "type": "COLORREF"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hDefaultFont",
       "offset": 272,
       "offset_hex": "0x110",
-      "size": 4
+      "size": 4,
+      "type": "HFONT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hFont",
       "offset": 276,
       "offset_hex": "0x114",
-      "size": 4
+      "size": 4,
+      "type": "HFONT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ntmHeight",
       "offset": 280,
       "offset_hex": "0x118",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ntmMaxCharWidth",
       "offset": 284,
-      "offset_hex": "0x11c",
-      "size": 4
+      "offset_hex": "0x11C",
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nEllipsisWidth",
       "offset": 288,
       "offset_hex": "0x120",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bLButtonDown",
       "offset": 292,
       "offset_hex": "0x124",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bDragging",
       "offset": 296,
       "offset_hex": "0x128",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ptClickPos",
       "offset": 300,
-      "offset_hex": "0x12c",
-      "size": 8
+      "offset_hex": "0x12C",
+      "size": 8,
+      "type": "POINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nLButtonDownItem",
       "offset": 308,
       "offset_hex": "0x134",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwHoverTime",
       "offset": 312,
       "offset_hex": "0x138",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hHotCursor",
       "offset": 316,
-      "offset_hex": "0x13c",
-      "size": 4
+      "offset_hex": "0x13C",
+      "size": 4,
+      "type": "HCURSOR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cWheelRemainder",
       "offset": 320,
       "offset_hex": "0x140",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lastKeyPressTimestamp",
       "offset": 324,
       "offset_hex": "0x144",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "charCode",
       "offset": 328,
       "offset_hex": "0x148",
-      "size": 8
+      "size": 8,
+      "type": "WPARAM_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nSearchParamLength",
       "offset": 336,
       "offset_hex": "0x150",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "szSearchParam",
       "offset": 340,
       "offset_hex": "0x154",
-      "size": 520
+      "size": 520,
+      "type": "WCHAR_0[260]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bIsDrawing",
       "offset": 860,
-      "offset_hex": "0x35c",
-      "size": 4
+      "offset_hex": "0x35C",
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nMeasureItemHeight",
       "offset": 864,
       "offset_hex": "0x360",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "redraw",
       "offset": 868,
       "offset_hex": "0x364",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "iVersion",
       "offset": 872,
       "offset_hex": "0x368",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     }
   ],
   "name": "LISTVIEW_INFO",
+  "ordinal": 6344,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 880
 }

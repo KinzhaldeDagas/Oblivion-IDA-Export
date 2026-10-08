@@ -1,4 +1,4 @@
-0x4BC710: mov     eax, [esp+arg_0]
+0x4BC710: mov     eax, [esp+arg_0]; Verified virtual compare routine returns bool; returns mismatch for non-TESSubSpace input or inherited component differences, then compares the three dimension fields for inequality.
 0x4BC714: sub     esp, 18h
 0x4BC717: push    esi
 0x4BC718: push    edi
@@ -31,26 +31,26 @@
 0x4BC762: fild    [esp+20h+arg_0]
 0x4BC766: mov     [esp+20h+arg_0], edx
 0x4BC76A: movzx   edx, word ptr [edi+26h]
-0x4BC76E: fstp    [esp+20h+var_18]
+0x4BC76E: fstp    [esp+20h+other.x]
 0x4BC772: fild    [esp+20h+arg_0]
 0x4BC776: mov     [esp+20h+arg_0], eax
 0x4BC77A: movzx   eax, word ptr [edi+28h]
-0x4BC77E: fstp    [esp+20h+var_14]
+0x4BC77E: fstp    [esp+20h+other.y]
 0x4BC782: fild    [esp+20h+arg_0]
 0x4BC786: mov     [esp+20h+arg_0], ecx
-0x4BC78A: lea     ecx, [esp+20h+var_18]
-0x4BC78E: fstp    [esp+20h+var_10]
-0x4BC792: push    ecx
+0x4BC78A: lea     ecx, [esp+20h+other]
+0x4BC78E: fstp    [esp+20h+other.z]
+0x4BC792: push    ecx; other
 0x4BC793: fild    [esp+24h+arg_0]
 0x4BC797: mov     [esp+24h+arg_0], edx
-0x4BC79B: lea     ecx, [esp+24h+var_C]
-0x4BC79F: fstp    [esp+24h+var_C]
+0x4BC79B: lea     ecx, [esp+24h+var_C]; this
+0x4BC79F: fstp    [esp+24h+var_C.x]
 0x4BC7A3: fild    [esp+24h+arg_0]
 0x4BC7A7: mov     [esp+24h+arg_0], eax
-0x4BC7AB: fstp    [esp+24h+var_8]
+0x4BC7AB: fstp    [esp+24h+var_C.y]
 0x4BC7AF: fild    [esp+24h+arg_0]
-0x4BC7B3: fstp    [esp+24h+var_4]
-0x4BC7B7: call    sub_8AA390
+0x4BC7B3: fstp    [esp+24h+var_C.z]
+0x4BC7B7: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x4BC7BC: test    al, al
 0x4BC7BE: pop     edi
 0x4BC7BF: setnz   al

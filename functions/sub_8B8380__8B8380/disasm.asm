@@ -11,7 +11,7 @@
 0x8B839A: test    eax, eax
 0x8B839C: jz      short loc_8B83FA
 0x8B839E: push    eax
-0x8B839F: call    sub_497420
+0x8B839F: call    NiAVObject_GetBhkBlendCollisionObject; ODismemberment: authoritative blend-collision getter. Reuses NiAVObject_GetBhkCollisionObject and accepts objects whose class chain includes bhkBlendCollisionObject.
 0x8B83A4: mov     ecx, eax
 0x8B83A6: add     esp, 4
 0x8B83A9: test    ecx, ecx

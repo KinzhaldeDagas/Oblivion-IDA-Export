@@ -1,4 +1,4 @@
-0x793B40: fldz
+0x793B40: fldz; Initializes the exact Oblivion CWindEngine per-instance defaults: strength 0.25, method fields 2, rocking enabled, matrix span 4, leaf factors/scalars 1, and angle pointers/count zero. Unlike RT4.1's constructor, this Oblivion body contains no wind-matrix resize or reference-count side effects.
 0x793B42: mov     eax, ecx
 0x793B44: fst     dword ptr [eax]
 0x793B46: mov     ecx, 2

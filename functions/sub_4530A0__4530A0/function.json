@@ -1,19 +1,32 @@
 {
-  "callees_count": 25,
-  "callers_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x4530A0",
+      "0x4531A8"
+    ]
+  ],
+  "chunks_sha256": "3991f416bcf2128f9b7bf2b87bf1472459d69ae19b911d4e47a4748f4b1a4d17",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "\nVerified: clears/deletes primary map and frees nested ID lists, then frees secondary serialized-buffer list; callers SaveGame 4657EF and LoadGame 465AAA/4669BA. Owner layout/prototype beyond observed pointers remains Candidate; retain void *.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_4530A0",
+  "display_name": "SaveLoad_ClearReferenceMapState",
   "end_ea": "0x4531A8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4530A0",
+  "name": "SaveLoad_ClearReferenceMapState",
   "segment": ".text",
   "sha256": "3991f416bcf2128f9b7bf2b87bf1472459d69ae19b911d4e47a4748f4b1a4d17",
   "size": 264,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4530A0",
-  "type": "void __thiscall(void (__stdcall ****this)(signed int))",
+  "total_chunk_size": 264,
+  "type": "void __thiscall(void *owner)",
   "xrefs_from_count": 120,
   "xrefs_to_count": 3
 }

@@ -1,13 +1,13 @@
-0x64AF90: push    esi
+0x64AF90: push    esi; 3DTheft: BaseProcess::SetCurrentPackage implementation. Writes currentPackage and resets currentPackProcedure to first row slot; clearing a dynamic package can destroy it.
 0x64AF91: push    edi
 0x64AF92: mov     edi, [esp+8+a2]
 0x64AF96: test    edi, edi
 0x64AF98: mov     esi, ecx
 0x64AF9A: jz      short loc_64AFAF
-0x64AF9C: mov     ecx, [esi+0C0h]
+0x64AF9C: mov     ecx, [esi+0C0h]; self
 0x64AFA2: test    ecx, ecx
 0x64AFA4: jz      short loc_64AFF9
-0x64AFA6: call    sub_5660A0
+0x64AFA6: call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).
 0x64AFAB: test    al, al
 0x64AFAD: jz      short loc_64AFF9
 0x64AFAF: cmp     dword ptr [esi+0C0h], 0
@@ -19,9 +19,9 @@
 0x64AFC7: test    al, al
 0x64AFC9: jz      short loc_64AFDF
 0x64AFCB: mov     eax, [esi+0C0h]
-0x64AFD1: mov     ecx, ds:0B33B00h
-0x64AFD7: push    eax
-0x64AFD8: call    sub_45C7A0
+0x64AFD1: mov     ecx, ds:0B33B00h; self
+0x64AFD7: push    eax; form
+0x64AFD8: call    TESSaveLoadGame_DeleteForm
 0x64AFDD: jmp     short loc_64AFF2
 0x64AFDF: mov     ecx, [esi+0C0h]
 0x64AFE5: test    ecx, ecx

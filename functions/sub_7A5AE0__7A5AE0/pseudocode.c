@@ -1,4 +1,8 @@
-int __cdecl sub_7A5AE0(int a1, int a2, int a3)
+// Typed wrapper for backward SIdvLeafTexture copy assignment.
+OB_SIdvLeafTexture_010201A0 *__cdecl OB_stVector_SIdvLeafTexture_CopyAssignRangeBackwardThunk_010201A0(
+        OB_SIdvLeafTexture_010201A0 *first,
+        OB_SIdvLeafTexture_010201A0 *last,
+        OB_SIdvLeafTexture_010201A0 *destinationEnd)
 {
-  return sub_7A5A50(a1, a2, a3);
+  return OB_SIdvLeafTexture_CopyAssignRangeBackward_010201A0(first, last, destinationEnd); /*0x7a5b0a*/
 }

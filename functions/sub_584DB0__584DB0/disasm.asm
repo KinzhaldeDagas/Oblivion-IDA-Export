@@ -48,11 +48,11 @@
 0x584E37: test    eax, eax
 0x584E39: jz      short loc_584E44
 0x584E3B: push    eax
-0x584E3C: call    FormHeapFree
+0x584E3C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x584E41: add     esp, 4
 0x584E44: push    edi
 0x584E45: mov     dword ptr [edi+4], 0
-0x584E4C: call    FormHeapFree
+0x584E4C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x584E51: add     esp, 4
 0x584E54: test    esi, esi
 0x584E56: jnz     short loc_584DE0
@@ -102,10 +102,10 @@
 0x584EDE: xor     esi, esi
 0x584EE0: test    edi, edi
 0x584EE2: jz      short loc_584EF4
-0x584EE4: mov     ecx, edi
-0x584EE6: call    sub_58CDB0
+0x584EE4: mov     ecx, edi; this
+0x584EE6: call    Tile__BuildStorage__Destroy; Verified: destroys main template unconditionally; subtemplate objects only when ownsSubTemplates is true; always frees subtemplate list links. ReadFile transfers subtemplate ownership to Menu before destroying storage. No savegame serialization in this teardown path.
 0x584EEB: push    edi
-0x584EEC: call    FormHeapFree
+0x584EEC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x584EF1: add     esp, 4
 0x584EF4: test    esi, esi
 0x584EF6: jnz     short loc_584E90

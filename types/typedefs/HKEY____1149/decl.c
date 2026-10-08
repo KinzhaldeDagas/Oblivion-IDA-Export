@@ -1,1 +1,4 @@
-HKEY__
+struct HKEY__
+{
+int unused;
+};

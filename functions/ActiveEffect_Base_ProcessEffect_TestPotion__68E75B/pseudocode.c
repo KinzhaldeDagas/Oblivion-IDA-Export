@@ -8,13 +8,13 @@ int __usercall ActiveEffect_Base_ProcessEffect_::TestPotion@<eax>(
 {
   int v6; // eax
 
-  if ( (*(int (__thiscall **)(_DWORD))(**(_DWORD **)(a3 + 8) + 0x18))(*(_DWORD *)(a3 + 8)) == 7
+  if ( (*(int (__thiscall **)(_DWORD))(**(_DWORD **)(a3 + 8) + 0x18))(*(_DWORD *)(a3 + 8)) == 7 /*0x68e76f*/
     && (v6 = *(_DWORD *)(a3 + 8)) != 0 )
   {
-    return ActiveEffect_Base_ProcessEffect_::TestEdible(v6 - 0x24, a1, a2, a3, a4, a5, a6);
+    return ActiveEffect_Base_ProcessEffect_::TestEdible(v6 - 0x24, a1, a2, a3, a4, a5, a6); /*0x68e774*/
   }
   else
   {
-    return ActiveEffect_Base_ProcessEffect_::TestEdible(0, a1, a2, a3, a4, a5, a6);
+    return ActiveEffect_Base_ProcessEffect_::TestEdible(0, a1, a2, a3, a4, a5, a6); /*0x68e777*/
   }
 }

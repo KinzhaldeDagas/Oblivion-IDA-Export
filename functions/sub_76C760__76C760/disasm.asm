@@ -3,8 +3,8 @@
 0x76C763: mov     eax, [esi+64h]
 0x76C766: push    eax
 0x76C767: mov     dword ptr [esi], offset ??_7NiD3DDefaultShader@@6B@; const NiD3DDefaultShader::`vftable'
-0x76C76D: call    FormHeapFree
+0x76C76D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x76C772: add     esp, 4
 0x76C775: mov     ecx, esi; this
 0x76C777: pop     esi
-0x76C778: jmp     ??1NiD3DShader@@UAE@XZ; NiD3DShader::~NiD3DShader(void)
+0x76C778: jmp     ??1NiD3DShader@@UAE@XZ;

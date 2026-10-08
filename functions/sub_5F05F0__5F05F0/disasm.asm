@@ -20,8 +20,8 @@
 0x5F061D: mov     edx, [eax+154h]
 0x5F0623: mov     ecx, ebp
 0x5F0625: call    edx
-0x5F0627: push    eax
-0x5F0628: call    sub_480340
+0x5F0627: push    eax; object
+0x5F0628: call    NiAVObject_FindBhkCollisionObjectRecursive; Returns the first bhk collision object found on object or recursively beneath its NiNode children. This is structural traversal, independent of node names.
 0x5F062D: add     esp, 4
 0x5F0630: test    eax, eax
 0x5F0632: jz      short loc_5F0643

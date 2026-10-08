@@ -1,4 +1,4 @@
-0x51AF00: movzx   eax, byte ptr [ecx+8]
+0x51AF00: movzx   eax, byte ptr [ecx+8]; Member form of the native idle-group classifier. Reads the low group byte from the encoded key at TESAnimGroup +0x08 and returns true only for Idle, DynamicIdle, BlockIdle, or TorchIdle.
 0x51AF04: and     eax, 0FFh
 0x51AF09: cmp     eax, 21h; switch 34 cases
 0x51AF0C: ja      short def_51AF15; jumptable 0051AF15 default case, cases 2-26,28-32

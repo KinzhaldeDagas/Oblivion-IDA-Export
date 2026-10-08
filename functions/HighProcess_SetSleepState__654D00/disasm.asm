@@ -120,8 +120,8 @@
 0x654E5B: and     [eax+18h], di
 0x654E5F: test    ebp, ebp
 0x654E61: jz      short loc_654E75
-0x654E63: mov     ecx, ebp
-0x654E65: call    sub_4A9720
+0x654E63: mov     ecx, ebp; this
+0x654E65: call    Actor_GetAimPitch; Returns Actor rotation X as the native aim-pitch value used by projectile launch, impact, input, dialogue-camera, and magic-projectile paths.
 0x654E6A: push    ecx
 0x654E6B: mov     ecx, ebp; int
 0x654E6D: fstp    [esp+14h+var_14]; float

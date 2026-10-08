@@ -19,7 +19,7 @@
 0x430417: call    NiFile_Flush
 0x43041C: mov     ecx, [esi+18h]
 0x43041F: push    ecx
-0x430420: call    FormHeapFree
+0x430420: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x430425: add     esp, 4
 0x430428: push    edi; HINSTANCE
 0x430429: mov     ecx, offset FormHeap

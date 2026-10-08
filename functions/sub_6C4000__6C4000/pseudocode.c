@@ -1,7 +1,15 @@
-char __stdcall sub_6C4000(int a1, _DWORD *a2, float a3, int a4, char a5, float a6, int a7)
+// Cross-fades from an active source sequence to an inactive destination: deactivates the source with the requested ease time, then activates the destination with the same transition time and caller-supplied priority/start/weight/time-sync values. Returns false unless source is active and destination inactive.
+char __stdcall NiControllerSequence_CrossFade(
+        NiControllerSequence *a1,
+        NiControllerSequence *a2,
+        float easeOutTime,
+        char priority,
+        char startOver,
+        float weight,
+        NiControllerSequence *timeSyncSequence)
 {
-  if ( !*(_DWORD *)(a1 + 0x44) || a2[0x11] )
-    return 0;
-  sub_6C9CB0(a1, a3, 0);
-  return sub_6C9BA0(a2, a4, a5, a6, a3, a7, 0);
+  if ( !*((_DWORD *)a1 + 0x11) || *((_DWORD *)a2 + 0x11) ) /*0x6c400f*/
+    return 0; /*0x6c4052*/
+  NiControllerSequence_Deactivate(a1, easeOutTime, 0); /*0x6c401f*/
+  return NiControllerSequence_Activate(a2, priority, startOver, weight, easeOutTime, timeSyncSequence, 0); /*0x6c404e*/
 }

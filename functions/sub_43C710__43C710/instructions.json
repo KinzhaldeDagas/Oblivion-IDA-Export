@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x43C710",
-    "line": "sub     esp, 20Ch",
+    "line": "sub     esp, 20Ch; Verified QueuedTreeModel vtable QueueMe override (+0x20). If the tree's icon texture name exists, it builds the TESIconTree default-path + texture name and schedules/reuses it as a child texture dependency, then hands off to the queued-model base path. Fallout's named QueuedTreeModel::QueueMe follows the same icon-texture then base-model queue pattern.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x43C72A",
-    "line": "lea     ecx, [eax+3Ch]",
+    "line": "lea     ecx, [eax+3Ch]; Verified: optional TESIconTree texture dependency is queued before the tree's TESModel component dependency. Fallout QueueMe follows the same icon-then-model dependency ordering.",
     "mnemonic": "lea",
     "size": 3
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x43C79E",
-    "line": "lea     eax, [esp+218h+var_108]",
+    "line": "lea     eax, [esp+218h+path]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x43C7AD",
-    "line": "call    sub_47D8F0",
+    "line": "call    sub_47D8F0; SpeedTreeOBSE 2026-07-14: normalizes texture palette keys in a fixed 256-byte local buffer. Plugin loader inputs are therefore capped at 255 characters.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x43C7BB",
-    "line": "push    ebx",
+    "line": "push    ebx; parent",
     "mnemonic": "push",
     "size": 1
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x43C7C3",
-    "line": "mov     ecx, ModelLoaderPtr",
+    "line": "mov     ecx, ds:0B33A1Ch",
     "mnemonic": "mov",
     "size": 6
   },
@@ -385,25 +385,25 @@
   },
   {
     "ea": "0x43C7CC",
-    "line": "push    edx",
+    "line": "push    edx; priority",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x43C7CD",
-    "line": "lea     eax, [esp+220h+var_108]",
+    "line": "lea     eax, [esp+220h+path]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x43C7D4",
-    "line": "push    eax",
+    "line": "push    eax; path",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x43C7D5",
-    "line": "call    sub_43B0D0",
+    "line": "call    QueuedTexture_QueueOrAttachPath; Verified: QueuedTreeModel_QueueMe schedules/reuses the tree icon texture through QueuedTexture_QueueOrAttachPath before continuing the QueuedModel base queue path.",
     "mnemonic": "call",
     "size": 5
   },

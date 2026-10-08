@@ -1,1 +1,1 @@
-CASCODE
+typedef tagCASCODE CASCODE;

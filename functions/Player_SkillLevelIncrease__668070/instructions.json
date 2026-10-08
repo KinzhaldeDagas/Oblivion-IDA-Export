@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x668070",
-    "line": "sub     esp, 204h",
+    "line": "sub     esp, 204h; Single Oblivion skill-level increase. Optionally consume exactly one old requirement, increment the base skill, recalculate its next requirement, update universal counters/buckets, and enter the level-progress branch only for a strict TESClass major match.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -49,13 +49,13 @@
   },
   {
     "ea": "0x668089",
-    "line": "add     dword ptr [esi+660h], 1",
+    "line": "add     dword ptr [esi+660h], 1; Increment the lifetime skill-increase misc statistic for every level gained, including purchased training and non-major skills.",
     "mnemonic": "add",
     "size": 7
   },
   {
     "ea": "0x668090",
-    "line": "cmp     [esp+210h+arg_4], 0",
+    "line": "cmp     [esp+210h+skipProgressConsumption], 0; skipProgressConsumption is true for purchased training; training leaves existing raw skillExp untouched.",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -67,13 +67,13 @@
   },
   {
     "ea": "0x668099",
-    "line": "mov     edi, [esp+214h+arg_0]",
+    "line": "mov     edi, [esp+214h+skill]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x6680A0",
-    "line": "jnz     loc_668129",
+    "line": "jnz     loc_668129; Normal skill level-up path operates on the fixed 21-skill Oblivion AV range 0x0C..0x20.",
     "mnemonic": "jnz",
     "size": 6
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x6680BA",
-    "line": "call    ActorValue_GetGroupOffsetFromAV",
+    "line": "call    ActorValue_GetGroupOffsetFromAV; Map the TESSkill native actor value to skillExp index 0..20.",
     "mnemonic": "call",
     "size": 5
   },
@@ -163,13 +163,13 @@
   },
   {
     "ea": "0x6680D4",
-    "line": "push    edi",
+    "line": "push    edi; skill",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6680D5",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x6680DB",
-    "line": "call    sub_65FAD0",
+    "line": "call    Player_GetRequiredSkillProgress; Fetch the old precomputed requirement before changing the base skill.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x6680E7",
-    "line": "fstp    dword ptr [esp+214h+var_200]",
+    "line": "fstp    dword ptr [esp+214h+var_200]; Carry progress as oldProgress - oldRequirement; this consumes exactly one threshold.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x668100",
-    "line": "fstp    dword ptr [esp+214h+var_200]",
+    "line": "fstp    dword ptr [esp+214h+var_200]; Clamp a negative remainder to 0; positive excess is preserved.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x668113",
-    "line": "call    ActorValue_GetGroupOffsetFromAV",
+    "line": "call    ActorValue_GetGroupOffsetFromAV; RealArenaTraining fidelity pass: ActorValue_GetGroupOffsetFromAV(group, actorValue). Player skill-progress code calls this with group 2 before indexing player skillExp/requiredSkillExp.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,19 +337,19 @@
   },
   {
     "ea": "0x66812C",
-    "line": "push    eax",
+    "line": "push    eax; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x66812D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x66812F",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x668149",
-    "line": "add     ebx, 1",
+    "line": "add     ebx, 1; Increase the base skill value by exactly one. This operation itself is identical for major and non-major skills.",
     "mnemonic": "add",
     "size": 3
   },
@@ -451,13 +451,13 @@
   },
   {
     "ea": "0x66815F",
-    "line": "push    ebp; a2",
+    "line": "push    ebp; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x668160",
-    "line": "call    sub_57A6F0",
+    "line": "call    UI_UpdateActorValueDisplays; UI_UpdateActorValueDisplays(actorValue), called by player base-AV setters/modifiers after changing base form values.",
     "mnemonic": "call",
     "size": 5
   },
@@ -469,25 +469,25 @@
   },
   {
     "ea": "0x668168",
-    "line": "push    1",
+    "line": "push    1; updatePlayerUI",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x66816A",
-    "line": "push    ebp",
+    "line": "push    ebp; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x66816B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x66816D",
-    "line": "call    sub_5E2670",
+    "line": "call    Player_OnActorValueBaseChanged; Handles player base actor-value changes. For native skill AVs, optional UI refresh also recalculates required experience for all 21 skills; major/non-major membership affects the recomputed requirement through TESClass_IsMajorSkillAV.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,19 +499,19 @@
   },
   {
     "ea": "0x668175",
-    "line": "push    eax",
+    "line": "push    eax; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x668176",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x668178",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,13 +523,13 @@
   },
   {
     "ea": "0x668180",
-    "line": "push    ecx; float",
+    "line": "push    ecx; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x668181",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x668185",
-    "line": "call    sub_663C50",
+    "line": "call    Player_RecalculateRequiredSkillExperience; Recompute the next required-use threshold at the new base value, including specialization and strict major/non-major multipliers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x66818D",
-    "line": "add     dword ptr [esi+edx*4+158h], 1",
+    "line": "add     dword ptr [esi+edx*4+158h], 1; Increment this native skill's lifetime advance counter for every increase, irrespective of class membership.",
     "mnemonic": "add",
     "size": 8
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x66819C",
-    "line": "mov     eax, [edi+34h]",
+    "line": "mov     eax, [edi+34h]; Increment the skill's Combat/Magic/Stealth specialization counter for every increase, irrespective of class membership.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x6681A4",
-    "line": "add     byte ptr [esi+eax+5B8h], 1",
+    "line": "add     byte ptr [esi+eax+5B8h], 1; Increments the specialization advance byte for the skill's Combat/Magic/Stealth specialization, independently of major-skill membership.",
     "mnemonic": "add",
     "size": 8
   },
@@ -595,19 +595,19 @@
   },
   {
     "ea": "0x6681AF",
-    "line": "push    eax",
+    "line": "push    eax; governingAttribute",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6681B0",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6681B2",
-    "line": "call    sub_6648D0",
+    "line": "call    Player_IncrementAttributeBonus; Increment the current governing-attribute bonus bucket for every increase before any major-only bucket rollover.",
     "mnemonic": "call",
     "size": 5
   },
@@ -625,7 +625,7 @@
   },
   {
     "ea": "0x6681C2",
-    "line": "call    Actor_GetBaseClass",
+    "line": "call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,25 +655,25 @@
   },
   {
     "ea": "0x6681D4",
-    "line": "push    eax",
+    "line": "push    eax; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6681D5",
-    "line": "call    Actor_GetBaseClass",
+    "line": "call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6681DA",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6681DC",
-    "line": "call    sub_51C090",
+    "line": "call    TESClass_IsMajorSkillAV; Strict seven-slot TESClass membership is the only gate into major level progress. False means the full non-major/minor path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -691,13 +691,13 @@
   },
   {
     "ea": "0x6681E5",
-    "line": "add     dword ptr [esi+184h], 1",
+    "line": "add     dword ptr [esi+184h], 1; Major-only: increment PlayerCharacter::majorSkillAdvances.",
     "mnemonic": "add",
     "size": 7
   },
   {
     "ea": "0x6681EC",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x6681F3",
-    "line": "call    sub_65FB30",
+    "line": "call    Player_MaybeStartNextAttributeBonusBucket; Major-only: after the attribute increment, start a new bonus bucket at each g_iLevelUpSkillCount multiple.",
     "mnemonic": "call",
     "size": 5
   },
@@ -835,7 +835,7 @@
   },
   {
     "ea": "0x668240",
-    "line": "jl      loc_668309",
+    "line": "jl      loc_668309; Only a major increase can reach the readiness test; compare cumulative majorSkillAdvances against g_iLevelUpSkillCount.",
     "mnemonic": "jl",
     "size": 6
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x668251",
-    "line": "cmp     [esp+214h+arg_8], 0",
+    "line": "cmp     [esp+214h+showFeedback], 0",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -889,7 +889,7 @@
   },
   {
     "ea": "0x66826B",
-    "line": "cmp     [esp+214h+arg_8], 0",
+    "line": "cmp     [esp+214h+showFeedback], 0",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -931,13 +931,13 @@
   },
   {
     "ea": "0x66828C",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x66828E",
-    "line": "call    sub_52EA90",
+    "line": "call    TESSkill_GetName; Resolve the native Oblivion TESSkill display name for the combined skill-increased/rest-and-meditate message.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1135,7 +1135,7 @@
   },
   {
     "ea": "0x6682F5",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1147,7 +1147,7 @@
   },
   {
     "ea": "0x6682FD",
-    "line": "mov     byte ptr [esi+1DCh], 1",
+    "line": "mov     byte ptr [esi+1DCh], 1; Set PlayerCharacter::bCanLevelUp once a major increase reaches the configured threshold, regardless of whether feedback is shown.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1159,7 +1159,7 @@
   },
   {
     "ea": "0x668309",
-    "line": "cmp     [esp+214h+arg_8], 0",
+    "line": "cmp     [esp+214h+showFeedback], 0; Non-major increases and majors below the threshold may show the ordinary skill-increased message but cannot set bCanLevelUp here.",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -1189,13 +1189,13 @@
   },
   {
     "ea": "0x668324",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x668326",
-    "line": "call    sub_52EA90",
+    "line": "call    TESSkill_GetName; Resolve the native Oblivion TESSkill display name for the ordinary skill-increased message.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1309,13 +1309,13 @@
   },
   {
     "ea": "0x668362",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x668364",
-    "line": "call    sub_6B7260",
+    "line": "call    SoundHandle__IsPlaying; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1369,7 +1369,7 @@
   },
   {
     "ea": "0x66837E",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1441,7 +1441,7 @@
   },
   {
     "ea": "0x6683A5",
-    "line": "jz      short loc_66841F",
+    "line": "jz      short loc_66841F; Mastery-threshold feedback depends only on the new skill value and applies equally to major and non-major skills.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -1495,19 +1495,19 @@
   },
   {
     "ea": "0x6683BD",
-    "line": "push    ebp",
+    "line": "push    ebp; mastery",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6683BE",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6683C0",
-    "line": "call    TESSKill_GetMasteryDescription",
+    "line": "call    TESSkill_GetMasteryDescription; Return a mastery-specific SKIL description. Novice uses the shared novice text; Apprentice through Master use the four descriptions stored at TESSkill+0x40..+0x58; invalid ranks return empty.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1561,13 +1561,13 @@
   },
   {
     "ea": "0x6683D6",
-    "line": "call    sub_57B370",
+    "line": "call    sub_57B370; Native skill-mastery perk presentation entry that opens skill_perk.xml with typed varargs. Synthetic Medium Armor mastery feedback should use this path, with ordinary HUD text only as fallback.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6683DB",
-    "line": "mov     edi, [edi+2Ch]",
+    "line": "mov     edi, [edi+2Ch]; Blade (0x0E), Blunt (0x10), and Hand to Hand (0x11) mastery changes also rebuild power-attack animation groups; major status is not tested.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1609,13 +1609,13 @@
   },
   {
     "ea": "0x6683EE",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6683F0",
-    "line": "call    TESObjectREFR_GetAnimData",
+    "line": "call    TESObjectREFR_GetAnimData; Return active ActorAnimData for an actor reference. For actor/creature refs with process level 0 or 1, return process+0x17C; otherwise tail-call the ExtraAnim lookup on the reference extra list. Exact return type is ActorAnimData*.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1633,7 +1633,7 @@
   },
   {
     "ea": "0x6683F9",
-    "line": "call    sub_471990",
+    "line": "call    ActorAnimData_RemovePowerAttackGroups; Remove all power-attack animation groups (0x16-0x1A) across movement 0-3 and weapon 0-5 from ActorAnimData before rebuilding the dynamic power-attack list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1657,7 +1657,7 @@
   },
   {
     "ea": "0x668403",
-    "line": "call    sub_476410",
+    "line": "call    ActorAnimData_RebuildPowerAttackKFList; Native Oblivion power-attack rebuild: clears groups 0x16..0x1A, generates movement/weapon/mastery filename candidates, probes the model loader, and installs parsed native power groups. No dynamic weapon type or override registry is consulted.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1675,7 +1675,7 @@
   },
   {
     "ea": "0x668410",
-    "line": "call    sub_471990",
+    "line": "call    ActorAnimData_RemovePowerAttackGroups; Remove all power-attack animation groups (0x16-0x1A) across movement 0-3 and weapon 0-5 from ActorAnimData before rebuilding the dynamic power-attack list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1699,13 +1699,13 @@
   },
   {
     "ea": "0x66841A",
-    "line": "call    sub_476410",
+    "line": "call    ActorAnimData_RebuildPowerAttackKFList; Native Oblivion power-attack rebuild: clears groups 0x16..0x1A, generates movement/weapon/mastery filename candidates, probes the model loader, and installs parsed native power groups. No dynamic weapon type or override registry is consulted.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x66841F",
-    "line": "call    sub_57A7D0",
+    "line": "call    UI_RefreshStatsMenuActorValues",
     "mnemonic": "call",
     "size": 5
   },

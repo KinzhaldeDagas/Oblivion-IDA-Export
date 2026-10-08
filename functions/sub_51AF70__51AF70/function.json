@@ -1,19 +1,32 @@
 {
-  "callees_count": 74,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 27,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x51AF70",
+      "0x51B442"
+    ]
+  ],
+  "chunks_sha256": "5b1a80fd620b84866c81656b6c13930697a732cfde07e661403811e128dd822a",
+  "comment_regular": "Dispatches parsed TESAnimGroup events whose timestamps are crossed between previous and current sequence time, including wrap-around. Sound records have a non-null +0x0C sound entry; Enum records use the +0x04 ID and packed source-text position at +0x08. This is reached from ActorAnimData's sampled-slot update.",
+  "comment_repeatable": "Dispatches parsed TESAnimGroup events whose timestamps are crossed between previous and current sequence time, including wrap-around. Sound records have a non-null +0x0C sound entry; Enum records use the +0x04 ID and packed source-text position at +0x08. This is reached from ActorAnimData's sampled-slot update.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 11,
-  "display_name": "sub_51AF70",
+  "display_name": "TESAnimGroup_DispatchTextKeyEvents",
   "end_ea": "0x51B442",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
-  "has_pseudocode": false,
-  "name": "sub_51AF70",
+  "has_pseudocode": true,
+  "name": "TESAnimGroup_DispatchTextKeyEvents",
   "segment": ".text",
   "sha256": "5b1a80fd620b84866c81656b6c13930697a732cfde07e661403811e128dd822a",
   "size": 1234,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x51AF70",
-  "type": "int __stdcall(int, float, float, int)",
+  "total_chunk_size": 1234,
+  "type": "unsigned int __userpurge@<eax>(int@<ecx>, unsigned int@<esi>, TESObjectREFR *, float, float, int)",
   "xrefs_from_count": 464,
   "xrefs_to_count": 1
 }

@@ -1,4 +1,4 @@
-BSStringT *sub_A13E40()
+NiRTTI *sub_A13E40()
 {
-  return sub_70E220(&stru_BA851C, "bhkPoweredHingeConstraint", (int)&stru_BA7D50);
+  return NiRTTI_Constructor(&stru_BA851C, "bhkPoweredHingeConstraint", &MEMORY[0xBA7D50]); /*0xa13e54*/
 }

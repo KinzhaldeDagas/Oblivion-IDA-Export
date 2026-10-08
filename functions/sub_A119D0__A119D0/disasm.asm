@@ -2,7 +2,7 @@
 0xA119D5: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0xA119DA: push    1; size
 0xA119DC: push    4; a2
-0xA119DE: push    offset dword_B46704; a1
+0xA119DE: push    (offset flt_B46638+0CCh); a1
 0xA119E3: call    ArrayConstructor
 0xA119E8: push    offset sub_A277D0; void (__cdecl *)()
 0xA119ED: call    _atexit

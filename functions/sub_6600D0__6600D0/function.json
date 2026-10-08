@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
-  "callers_count": 30,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 38,
+  "chunks": [
+    [
+      "0x6600D0",
+      "0x6600E9"
+    ]
+  ],
+  "chunks_sha256": "141d30e0ae64457bbd2eef4c5785072025a5c3b3ef69629a7e908c90bd92c100",
+  "comment_regular": "Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.",
+  "comment_repeatable": "Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6600D0",
+  "display_name": "Actor_GetSkinInfoByPerspective",
   "end_ea": "0x6600E9",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6600D0",
+  "name": "Actor_GetSkinInfoByPerspective",
   "segment": ".text",
   "sha256": "141d30e0ae64457bbd2eef4c5785072025a5c3b3ef69629a7e908c90bd92c100",
   "size": 25,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6600D0",
-  "type": "int __thiscall(_DWORD *this, char)",
+  "total_chunk_size": 25,
+  "type": "ActorSkinInfo *__thiscall(Actor *this, bool firstPerson)",
   "xrefs_from_count": 5,
   "xrefs_to_count": 38
 }

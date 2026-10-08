@@ -1,5 +1,5 @@
-BSExtraData *__usercall sub_670F50@<eax>(
-        TESObjectREFR *a1@<ecx>,
+BSExtraData *__usercall PlayerCharacter_MoveToExtraTeleportTarget@<eax>(
+        PlayerCharacter *a1@<ecx>,
         double a2@<st7>,
         double a3@<st4>,
         double a4@<st3>,
@@ -9,76 +9,76 @@ BSExtraData *__usercall sub_670F50@<eax>(
         double a8@<st5>)
 {
   BSExtraData *result; // eax
-  int v10; // esi
-  int v11; // eax
-  void (__thiscall *v12)(NiAVObject *, NiMatrix33 *, NiPoint3 *, bool); // ebx
-  float v13; // ebp
+  BSExtraData *v10; // esi
+  NiPoint3 *LinkedTeleportMarkerPosition; // eax
+  void (__thiscall *x_low)(NiAVObject *, NiMatrix33 *, NiPoint3 *, bool); // ebx
+  float y; // ebp
   float *v14; // eax
   double v15; // st7
   TESWorldSpace *WorldSpace; // eax
-  TESObjectCELL *ParentCell; // eax
+  TESObjectCELL *DwordAtOffset40; // eax
   TESObjectCELL *v18; // esi
   float v19; // [esp+10h] [ebp-2Ch]
   float v20; // [esp+14h] [ebp-28h]
   int v21; // [esp+18h] [ebp-24h]
   int v22; // [esp+1Ch] [ebp-20h]
   int v23; // [esp+20h] [ebp-1Ch]
-  float v24; // [esp+24h] [ebp-18h]
-  float v25; // [esp+2Ch] [ebp-10h]
+  float x; // [esp+24h] [ebp-18h]
+  float z; // [esp+2Ch] [ebp-10h]
   float v26[3]; // [esp+30h] [ebp-Ch] BYREF
 
-  result = sub_420190(&a1->member.baseExtraList);
-  v10 = (int)result;
-  if ( result )
+  result = ExtraDataList_GetOblivionEntry(&a1->super.super.super.super.baseExtraList); /*0x670f5c*/
+  v10 = result; /*0x670f61*/
+  if ( result ) /*0x670f65*/
   {
-    if ( result[2].vtbl )
+    if ( result[2].vtbl ) /*0x670f6b*/
     {
-      sub_675D50(a1, 0);
-      sub_4D76F0(*(_BYTE **)(v10 + 0x18));
-      v12 = *(void (__thiscall **)(NiAVObject *, NiMatrix33 *, NiPoint3 *, bool))v11;
-      v13 = *(float *)(v11 + 4);
-      v25 = *(float *)(v11 + 8);
-      v24 = *(float *)v11;
-      v14 = (float *)(*(int (__thiscall **)(_DWORD))(**(_DWORD **)(v10 + 0x18) + 0x174))(*(_DWORD *)(v10 + 0x18));
-      v19 = v14[1] - v13;
-      v20 = v14[2] - v25;
-      v26[0] = *v14 - v24;
-      v26[1] = v19;
-      v26[2] = v20;
-      *(float *)&v21 = 0.0;
-      *(float *)&v22 = 0.0;
-      v15 = sub_683CB0(v26);
-      *(float *)&v23 = v15;
-      WorldSpace = TESObjectREFR_GetWorldSpace(*(TESObjectREFR **)(v10 + 0x18));
-      if ( WorldSpace )
+      sub_675D50((ActorProcessManager *)&qword_B3BB2C[0x75], a1, 0); /*0x670f7d*/
+      LinkedTeleportMarkerPosition = TESObjectREFR_GetLinkedTeleportMarkerPosition((TESObjectREFR *)v10[2].vtbl); /*0x670f85*/
+      x_low = (void (__thiscall *)(NiAVObject *, NiMatrix33 *, NiPoint3 *, bool))LODWORD(LinkedTeleportMarkerPosition->x); /*0x670f8a*/
+      y = LinkedTeleportMarkerPosition->y; /*0x670f8c*/
+      z = LinkedTeleportMarkerPosition->z; /*0x670f97*/
+      x = LinkedTeleportMarkerPosition->x; /*0x670fa1*/
+      v14 = (float *)(*((int (__thiscall **)(BSExtraDataVtbl *))v10[2].vtbl->Destructor + 0x5D))(v10[2].vtbl); /*0x670fa9*/
+      v19 = v14[1] - y; /*0x670fb7*/
+      v20 = v14[2] - z; /*0x670fc2*/
+      v26[0] = *v14 - x; /*0x670fcc*/
+      v26[1] = v19; /*0x670fd4*/
+      v26[2] = v20; /*0x670fdc*/
+      *(float *)&v21 = 0.0; /*0x670fe2*/
+      *(float *)&v22 = 0.0; /*0x670fe6*/
+      v15 = Vector3_CalculateHeadingRadiansXY(v26); /*0x670fea*/
+      *(float *)&v23 = v15; /*0x670fef*/
+      WorldSpace = TESObjectREFR_GetWorldSpace((TESObjectREFR *)v10[2].vtbl); /*0x670ff9*/
+      if ( WorldSpace ) /*0x671000*/
       {
-        sub_66F370(
-          a2,
+        PlayerCharacter_RelocateToFastTravelTarget( /*0x671031*/
           a3,
           a4,
           a5,
           a6,
           a7,
           v15,
-          v12,
-          (NiAVObject *(__thiscall *)(NiAVObject *, const char *))LODWORD(v13),
-          (void *(__thiscall *)(NiAVObject *))LODWORD(v25),
+          a8,
+          x_low,
+          (NiAVObject *(__thiscall *)(NiAVObject *, const char *))LODWORD(y),
+          (void *(__thiscall *)(NiAVObject *))LODWORD(z),
           v21,
           v22,
           v23,
           WorldSpace,
-          0);
-        return (BSExtraData *)sub_4D8E60((int *)a1, 0);
+          0);                                   // Direct relocation helper call through PlayerCharacter vtable method using an extra-data target reference. This bypasses PlayerCharacter_FastTravelCore/Sky fast-travel flag path.
+        return (BSExtraData *)sub_4D8E60((int *)a1, 0); /*0x67103a*/
       }
       else
       {
-        ParentCell = TESObjectREFR_GetParentCell(*(TESObjectREFR **)(v10 + 0x18));
-        v18 = ParentCell;
-        if ( ParentCell )
+        DwordAtOffset40 = (TESObjectCELL *)Shared_GetDwordAtOffset40(v10[2].vtbl); /*0x67104a*/
+        v18 = DwordAtOffset40; /*0x67104f*/
+        if ( DwordAtOffset40 ) /*0x671053*/
         {
-          if ( TESObjectCELL_IsInterior(ParentCell) )
-            sub_66EAF0(
-              a1,
+          if ( TESObjectCELL_IsInterior(DwordAtOffset40) ) /*0x671057*/
+            PlayerCharacter_ChangeCellAndPosition( /*0x67108f*/
+              (TESObjectREFR *)a1,
               v15,
               a4,
               a5,
@@ -87,18 +87,18 @@ BSExtraData *__usercall sub_670F50@<eax>(
               a3,
               a7,
               a8,
-              v12,
-              (NiAVObject *(__thiscall *)(NiAVObject *, const char *))LODWORD(v13),
-              (void *(__thiscall *)(NiAVObject *))LODWORD(v25),
+              x_low,
+              (NiAVObject *(__thiscall *)(NiAVObject *, const char *))LODWORD(y),
+              (void *(__thiscall *)(NiAVObject *))LODWORD(z),
               v21,
               v22,
               v23,
               v18,
               0);
         }
-        return (BSExtraData *)sub_4D8E60((int *)a1, 0);
+        return (BSExtraData *)sub_4D8E60((int *)a1, 0); /*0x671098*/
       }
     }
   }
-  return result;
+  return result; /*0x67103f*/
 }

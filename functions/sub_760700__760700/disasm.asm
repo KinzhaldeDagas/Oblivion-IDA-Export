@@ -1,10 +1,10 @@
-0x760700: sub     esp, 8
+0x760700: sub     esp, 8; DX10OBSE resource decode: NiDX9SourceTextureData creates D3DPOOL_MANAGED IDirect3DTexture9 using converted D3DFORMAT, mip-skip policy, width/height, and level count.
 0x760703: push    ebp
 0x760704: push    esi
 0x760705: mov     esi, ecx
 0x760707: lea     eax, [esi+0Ch]
-0x76070A: push    eax
-0x76070B: call    sub_76BEF0
+0x76070A: push    eax; pixelFormat
+0x76070B: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x760710: mov     ebp, [esp+14h+arg_0]
 0x760714: mov     ecx, [ebp+54h]
 0x760717: mov     edx, [ecx]
@@ -38,7 +38,7 @@
 0x76075B: mov     dword ptr [esi+5Ch], 1
 0x760762: jmp     short loc_76076A
 0x760764: mov     ecx, [ebp+60h]
-0x760767: mov     [esi+5Ch], ecx
+0x760767: mov     [esi+5Ch], ecx; Authoritative Oblivion texture path: for supported power-of-two sources, NiDX9SourceTextureData takes the converted NiPixelData stored mip-level count from +0x60; it does not force a base-only texture.
 0x76076A: mov     ecx, ds:0B42050h
 0x760770: push    ebx
 0x760771: push    edi
@@ -70,7 +70,7 @@
 0x7607B3: lea     ebx, [esp+1Ch+var_8]
 0x7607B7: push    ebx
 0x7607B8: mov     ebx, [esp+20h+var_4]
-0x7607BC: push    1
+0x7607BC: push    1; Out of Memory Fix target: original source texture CreateTexture args push D3DPOOL_MANAGED / Usage=0. Plugin detours this block to use D3DPOOL_DEFAULT with D3DUSAGE_DYNAMIC.
 0x7607BE: push    ebx
 0x7607BF: push    0
 0x7607C1: mov     [esi+70h], ecx
@@ -85,7 +85,7 @@
 0x7607DE: mov     edx, [edx+5Ch]
 0x7607E1: push    ecx
 0x7607E2: push    eax
-0x7607E3: call    edx
+0x7607E3: call    edx; CreateTexture receives Levels = sourceLevelCount - rendererLevelsSkipped. A complete generated DDS mip chain therefore becomes real D3D9 texture levels.
 0x7607E5: test    eax, eax
 0x7607E7: pop     edi
 0x7607E8: pop     ebx
@@ -114,11 +114,11 @@
 0x76082D: pop     ebp
 0x76082E: add     esp, 8
 0x760831: retn    4
-0x760834: push    eax
-0x760835: call    sub_7736F0
+0x760834: push    eax; hresult
+0x760835: call    D3D9_HResultToString; Maps common COM/D3D9 HRESULT values to diagnostic names, including DEVICELOST, DEVICENOTRESET, INVALIDCALL, OUTOFVIDEOMEMORY, and format/state failures.
 0x76083A: push    eax
 0x76083B: push    offset aNidx9sourcetex; "NiDX9SourceTextureData::CreateSurf> Fai"...
-0x760840: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x760840: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x760845: add     esp, 0Ch
 0x760848: mov     dword ptr [esi+50h], 0
 0x76084F: pop     esi

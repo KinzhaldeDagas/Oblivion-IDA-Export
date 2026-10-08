@@ -16,57 +16,57 @@ void __cdecl sub_42EC70(char **a1, char *Str1, const char *a3, int a4)
   int v17[2]; // [esp+10h] [ebp-110h] BYREF
   char Str[260]; // [esp+18h] [ebp-108h] BYREF
 
-  v4 = Str1;
-  if ( ArchiveList )
+  v4 = Str1; /*0x42ec93*/
+  if ( MEMORY[0xB338E0] ) /*0x42ec9e*/
   {
-    if ( *Str1 == 0x5C )
-      v4 = Str1 + 1;
-    LODWORD(v14) = 5;
-    if ( !strncmp(v4, "Data\\", v14) || (LODWORD(v15) = 5, !strncmp(v4, "data\\", v15)) )
-      v4 += 5;
-    strcpy(Str, a3);
-    v5 = strrchr(Str, 0x5C);
-    if ( v5 )
-      v5[1] = 0;
-    FileTypemask = a4;
-    if ( a4 == 0xFFFF )
-      FileTypemask = ArchiveManager_GetFileTypemask(&v4[strlen(v4) - 3]);
-    v7 = 0;
-    HashFilePAth(v4, (int)v17, (int)v16);
-    v8 = a1;
-    v9 = 0;
-    for ( i = a1; i; i = (char **)i[1] )
+    if ( *Str1 == 0x5C ) /*0x42eca7*/
+      v4 = Str1 + 1; /*0x42eca9*/
+    LODWORD(v14) = 5; /*0x42ecac*/
+    if ( !strncmp(v4, "Data\\", v14) || (LODWORD(v15) = 5, !strncmp(v4, "data\\", v15)) ) /*0x42ecc8*/
+      v4 += 5; /*0x42ecd4*/
+    strcpy(Str, a3); /*0x42ecd7*/
+    v5 = strrchr(Str, 0x5C); /*0x42ecf7*/
+    if ( v5 ) /*0x42ed01*/
+      v5[1] = 0; /*0x42ed03*/
+    FileTypemask = a4; /*0x42ed08*/
+    if ( a4 == 0xFFFF ) /*0x42ed15*/
+      FileTypemask = ArchiveManager_GetFileTypemask(&v4[strlen(v4) - 3]); /*0x42ed38*/
+    v7 = 0; /*0x42ed47*/
+    HashFilePAth(v4, (int)v17, (int)v16); /*0x42ed49*/
+    v8 = a1; /*0x42ed4e*/
+    v9 = 0; /*0x42ed55*/
+    for ( i = a1; i; i = (char **)i[1] ) /*0x42ed5b*/
     {
-      if ( *i )
-        ++v9;
+      if ( *i ) /*0x42ed60*/
+        ++v9; /*0x42ed64*/
     }
-    v11 = ArchiveList;
-    if ( ArchiveList )
+    v11 = MEMORY[0xB338E0]; /*0x42ed6e*/
+    if ( MEMORY[0xB338E0] ) /*0x42ed76*/
     {
-      do
+      do /*0x42edad*/
       {
-        v12 = *(_DWORD *)v11;
-        if ( *(_DWORD *)v11 )
+        v12 = *(_DWORD *)v11; /*0x42ed78*/
+        if ( *(_DWORD *)v11 ) /*0x42ed78*/
         {
-          if ( (FileTypemask & *(_WORD *)(v12 + 0x174)) != 0 )
+          if ( (FileTypemask & *(_WORD *)(v12 + 0x174)) != 0 ) /*0x42ed85*/
           {
-            v13 = sub_42DB50(v12, v9, v7, (unsigned int *)v17, v16, v8, Str);
-            v8 = a1;
-            v7 = v13;
+            v13 = sub_42DB50(v12, v9, v7, (unsigned int *)v17, v16, v8, Str); /*0x42ed9a*/
+            v8 = a1; /*0x42ed9f*/
+            v7 = v13; /*0x42eda6*/
           }
         }
-        v11 = *(_DWORD *)(v11 + 4);
+        v11 = *(_DWORD *)(v11 + 4); /*0x42eda8*/
       }
-      while ( v11 );
-      if ( v7 )
+      while ( v11 ); /*0x42edad*/
+      if ( v7 ) /*0x42edb1*/
       {
-        if ( v9 )
+        if ( v9 ) /*0x42edb5*/
         {
-          do
-            FormHeapFree(v7[v11++]);
-          while ( v11 < v9 );
+          do /*0x42edc8*/
+            FormHeapFree(v7[v11++]); /*0x42edbb*/
+          while ( v11 < v9 ); /*0x42edc8*/
         }
-        FormHeapFree((unsigned int)v7);
+        FormHeapFree((unsigned int)v7); /*0x42edcb*/
       }
     }
   }

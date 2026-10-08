@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x633CB0",
-    "line": "push    ebp",
+    "line": "push    ebp; 3DTheft release decode 2026-05-18: HighProcess vfunc +0x228 returns success/failure as AL. It may trigger SayTopic warning for package type 0x1D, then delegates to MiddleHighProcess_StartCombatPackage; caller should honor return value and should not force Actor::EvaluatePackage after it.",
     "mnemonic": "push",
     "size": 1
   },
@@ -121,19 +121,19 @@
   },
   {
     "ea": "0x633CDD",
-    "line": "push    1",
+    "line": "push    1; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x633CDF",
-    "line": "push    4",
+    "line": "push    4; topicType",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x633CE1",
-    "line": "call    TESTopic__GEtTopic",
+    "line": "call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,13 +427,13 @@
   },
   {
     "ea": "0x633D77",
-    "line": "mov     ecx, edi; this",
+    "line": "mov     ecx, edi; reference",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x633D79",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,25 +451,25 @@
   },
   {
     "ea": "0x633D82",
-    "line": "push    1",
+    "line": "push    1; useFactionOwnership",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x633D84",
-    "line": "push    ebp",
+    "line": "push    ebp; actorReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x633D85",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; reference",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x633D87",
-    "line": "call    TESOBjectREFR_IsOwnedBy",
+    "line": "call    TESObjectREFR_IsOwnedBy; Verified ownership predicate and flag meaning: resolve the effective owner; accept exact equality with the actor's template/base form. When the owner differs, a nonzero ownership-global value can permit the access. With useFactionOwnership=true, a Faction owner is instead checked against the actor base's faction rank and the reference's effective required rank; callers passing false skip that faction-rank path. Direct callers include many `true` paths and ContainerExtraData_RemoveForm's item-sweep call with false. Fallout's TESObjectREFR::IsAnOwner/DoorLock::IsAnOwner also expose a `useFaction` boolean, but its implementation uses actor faction membership and has different rank/global handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -487,13 +487,13 @@
   },
   {
     "ea": "0x633D90",
-    "line": "mov     ecx, ebp; this",
+    "line": "mov     ecx, ebp; reference",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x633D92",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -511,25 +511,25 @@
   },
   {
     "ea": "0x633D9B",
-    "line": "push    1",
+    "line": "push    1; useFactionOwnership",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x633D9D",
-    "line": "push    edi",
+    "line": "push    edi; actorReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x633D9E",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; reference",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x633DA0",
-    "line": "call    TESOBjectREFR_IsOwnedBy",
+    "line": "call    TESObjectREFR_IsOwnedBy; Verified ownership predicate and flag meaning: resolve the effective owner; accept exact equality with the actor's template/base form. When the owner differs, a nonzero ownership-global value can permit the access. With useFactionOwnership=true, a Faction owner is instead checked against the actor base's faction rank and the reference's effective required rank; callers passing false skip that faction-rank path. Direct callers include many `true` paths and ContainerExtraData_RemoveForm's item-sweep call with false. Fallout's TESObjectREFR::IsAnOwner/DoorLock::IsAnOwner also expose a `useFaction` boolean, but its implementation uses actor faction membership and has different rank/global handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -589,7 +589,7 @@
   },
   {
     "ea": "0x633DB9",
-    "line": "mov     eax, dword ptr [esp+0Ch+arg_1C]",
+    "line": "mov     eax, [esp+0Ch+arg_1C]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x633DDD",
-    "line": "call    sub_64BBC0",
+    "line": "call    MiddleHighProcess_StartCombatPackage; 3DTheft release decode 2026-05-18: MiddleHighProcess StartCombatPackage returns success/failure as AL and owns active combat-controller/package setup. No observed Actor::EvaluatePackage call is required after this vfunc.",
     "mnemonic": "call",
     "size": 5
   },

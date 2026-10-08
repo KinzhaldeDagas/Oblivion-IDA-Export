@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8ABF70",
-    "line": "push    ebp",
+    "line": "push    ebp; TES4 authoritative: computes contact-match error from normal difference, contact plane/fraction difference, and resolved collidable-space point difference.",
     "mnemonic": "push",
     "size": 1
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x8ABF79",
-    "line": "mov     eax, [ebp+arg_0]",
+    "line": "mov     eax, [ebp+candidate]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x8ABF87",
-    "line": "mov     esi, [ebp+arg_4]",
+    "line": "mov     esi, [ebp+manifoldEntry]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x8ABF8E",
-    "line": "mulps   xmm0, xmm1",
+    "line": "mulps   xmm0, xmm1; Compares candidate and manifold contact normals through dot(normalA, normalB).",
     "mnemonic": "mulps",
     "size": 3
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x8ABFD9",
-    "line": "fsub    dword ptr [esi+1Ch]",
+    "line": "fsub    dword ptr [esi+1Ch]; Includes squared difference between contact normal.w / distance fields in the match error.",
     "mnemonic": "fsub",
     "size": 3
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x8ABFF5",
-    "line": "call    sub_8ABCE0",
+    "line": "call    sub_8ABCE0; TES4 authoritative: resolves a contact point through the hit collidable/entity transform to compare contact positions between manifold entries.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x8AC01F",
-    "line": "call    sub_8ABCE0",
+    "line": "call    sub_8ABCE0; TES4 authoritative: resolves a contact point through the hit collidable/entity transform to compare contact positions between manifold entries.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x8AC029",
-    "line": "subps   xmm0, [esp+30h+var_10]",
+    "line": "subps   xmm0, [esp+30h+var_10]; Includes squared resolved collidable-space point delta in the match error when collidable transform data is available.",
     "mnemonic": "subps",
     "size": 5
   },

@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 4,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_4BCAC0",
+  "chunks": [
+    [
+      "0x4BCAC0",
+      "0x4BCB3A"
+    ],
+    [
+      "0x9C38F0",
+      "0x9C3913"
+    ]
+  ],
+  "chunks_sha256": "ca2e2feb4652e7b60ea3b88881d1c5626c6b6d7dfd9c23fd4d444b4089b4c170",
+  "comment_regular": "Verified task constructor for external .lod files: initializes the same owner/payload fields, sets the supplied DistantLOD\\\\<EditorID>_X_Y.lod path, and marks queued-file state for opening on the worker.",
+  "comment_repeatable": "Verified task constructor for external .lod files: initializes the same owner/payload fields, sets the supplied DistantLOD\\\\<EditorID>_X_Y.lod path, and marks queued-file state for opening on the worker.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "DistantLODLoaderTask_ctorExternalLodFile",
   "end_ea": "0x4BCB3A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4BCAC0",
+  "name": "DistantLODLoaderTask_ctorExternalLodFile",
   "segment": ".text",
   "sha256": "2274d4bdb6b56a814f4980d7d93e5cb4e0cebf2f1d734365c1b3213f8828214d",
   "size": 122,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4BCAC0",
-  "type": "IOTask *__thiscall(IOTask *this, const char *, unsigned __int8, int, int)",
-  "xrefs_from_count": 41,
+  "total_chunk_size": 157,
+  "type": "IOTask *__thiscall(IOTask *this, const char *lodPath, unsigned __int8 priority, LockFreeMap *ownerMap, DistantLODLoaderTaskData *taskData)",
+  "xrefs_from_count": 52,
   "xrefs_to_count": 1
 }

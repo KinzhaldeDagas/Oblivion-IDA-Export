@@ -1,18 +1,11 @@
-char __userpurge sub_695A50@<al>(
-        Concurrency::details::SchedulerBase *a1@<ecx>,
-        char a2@<bpl>,
-        double a3@<st2>,
-        double a4@<st1>,
-        double a5@<st0>,
-        int a6,
-        int a7)
+char __thiscall sub_695A50(Concurrency::details::SchedulerBase *this, int a2, int a3)
 {
-  TESObjectCELL *ParentCell; // eax
+  TESObjectCELL *DwordAtOffset40; // eax
   int v9; // eax
   unsigned int v10; // edi
   int v11; // ebx
   int (__thiscall *v12)(Concurrency::details::SchedulerBase *); // eax
-  float *v13; // eax
+  NiControllerManager *SequenceByName; // eax
   float *v14; // ebx
   int v15; // edi
   int v16; // eax
@@ -23,76 +16,76 @@ char __userpurge sub_695A50@<al>(
   float v22; // [esp+28h] [ebp+8h]
   float v23; // [esp+28h] [ebp+8h]
 
-  sub_69F1E0((int *)a1, a2, a3, a4, a5, a6, a7);
-  sub_695010((MagicBallProjectile *)a1);
-  ParentCell = TESObjectREFR_GetParentCell((TESObjectREFR *)a1);
-  sub_4D35D0(ParentCell, a3, a4, a5, (TESObjectREFR *)a1);
-  if ( *((_DWORD *)a1 + 0x20) != 2 )
+  sub_69F1E0((TESObjectREFR *)this, a2, a3); /*0x695a81*/
+  MagicBallProjectile_PlaySpecialIdle((MagicBallProjectile *)this); /*0x695a88*/
+  DwordAtOffset40 = (TESObjectCELL *)Shared_GetDwordAtOffset40(this); /*0x695a90*/
+  TESObjectCELL_AddReference(DwordAtOffset40, (TESObjectREFR *)this); /*0x695a97*/
+  if ( *((_DWORD *)this + 0x20) != 2 ) /*0x695aa3*/
   {
-    v9 = *((_DWORD *)a1 + 0x1D);
-    if ( *(_DWORD *)(v9 + 0x84) )
+    v9 = *((_DWORD *)this + 0x1D); /*0x695aa5*/
+    if ( *(_DWORD *)(v9 + 0x84) ) /*0x695aa8*/
     {
-      v10 = *((_DWORD *)a1 + 0x22);
-      v11 = *(_DWORD *)(*(_DWORD *)(v9 + 0x84) + 0xC);
-      if ( v10 )
+      v10 = *((_DWORD *)this + 0x22); /*0x695ab1*/
+      v11 = *(_DWORD *)(*(_DWORD *)(v9 + 0x84) + 0xC); /*0x695abf*/
+      if ( v10 ) /*0x695ac2*/
       {
-        sub_6B73E0(*((_DWORD **)a1 + 0x22));
-        FormHeapFree(v10);
-        *((_DWORD *)a1 + 0x22) = 0;
+        sub_6B73E0(*((_DWORD **)this + 0x22)); /*0x695ac6*/
+        FormHeapFree(v10); /*0x695acc*/
+        *((_DWORD *)this + 0x22) = 0; /*0x695ad4*/
       }
-      *((_DWORD *)a1 + 0x22) = sub_65AC50(a1, v11, 1, 0x102, 1);
+      *((_DWORD *)this + 0x22) = sub_65AC50(this, v11, 1, 0x102, 1); /*0x695aef*/
     }
   }
-  if ( (*(int (__thiscall **)(Concurrency::details::SchedulerBase *))(*(_DWORD *)a1 + 0x154))(a1) )
+  if ( (*(int (__thiscall **)(Concurrency::details::SchedulerBase *))(*(_DWORD *)this + 0x154))(this) ) /*0x695aff*/
   {
-    v22 = fabs(*((float *)a1 + 0x21));
-    *(float *)((*(int (__thiscall **)(Concurrency::details::SchedulerBase *))(*(_DWORD *)a1 + 0x154))(a1) + 0x60) = v22;
+    v22 = fabs(*((float *)this + 0x21)); /*0x695b21*/
+    *(float *)((*(int (__thiscall **)(Concurrency::details::SchedulerBase *))(*(_DWORD *)this + 0x154))(this) + 0x60) = v22; /*0x695b29*/
   }
-  v12 = *(int (__thiscall **)(Concurrency::details::SchedulerBase *))(*(_DWORD *)a1 + 0x154);
-  v21 = *((float *)a1 + 0x23);
-  *((_DWORD *)a1 + 0x23) = 0;
-  v13 = (float *)v12(a1);
-  if ( v13 )
+  v12 = *(int (__thiscall **)(Concurrency::details::SchedulerBase *))(*(_DWORD *)this + 0x154); /*0x695b34*/
+  v21 = *((float *)this + 0x23); /*0x695b3a*/
+  *((_DWORD *)this + 0x23) = 0; /*0x695b40*/
+  SequenceByName = (NiControllerManager *)v12(this); /*0x695b4a*/
+  if ( SequenceByName ) /*0x695b4e*/
   {
-    v13 = *((float **)a1 + 0x1D);
-    if ( *((_DWORD *)v13 + 0x1C) )
+    SequenceByName = *((NiControllerManager **)this + 0x1D); /*0x695b54*/
+    if ( *((_DWORD *)SequenceByName + 0x1C) ) /*0x695b57*/
     {
-      v14 = (float *)FormHeapAlloc(0x1Cu);
-      if ( v14 )
+      v14 = (float *)FormHeapAlloc(0x1Cu); /*0x695b68*/
+      if ( v14 ) /*0x695b7b*/
       {
-        v15 = *(_DWORD *)(*(_DWORD *)(*((_DWORD *)a1 + 0x1D) + 0x70) + 0xC);
-        v16 = (*(int (__thiscall **)(Concurrency::details::SchedulerBase *))(*(_DWORD *)a1 + 0x154))(a1);
-        v13 = MagicCaster_CastingVFX_constr(v14, v15, v16);
+        v15 = *(_DWORD *)(*(_DWORD *)(*((_DWORD *)this + 0x1D) + 0x70) + 0xC); /*0x695b85*/
+        v16 = (*(int (__thiscall **)(Concurrency::details::SchedulerBase *))(*(_DWORD *)this + 0x154))(this); /*0x695b90*/
+        SequenceByName = (NiControllerManager *)MagicCaster_CastingVFX_constr(v14, v15, v16); /*0x695b96*/
       }
       else
       {
-        v13 = 0;
+        SequenceByName = 0; /*0x695b9d*/
       }
-      v17 = *((_DWORD *)a1 + 0x20) == 2;
-      *((_DWORD *)a1 + 0x23) = v13;
-      if ( v17 )
+      v17 = *((_DWORD *)this + 0x20) == 2; /*0x695b9f*/
+      *((_DWORD *)this + 0x23) = SequenceByName; /*0x695bae*/
+      if ( v17 ) /*0x695bb4*/
       {
-        if ( v13 )
+        if ( SequenceByName ) /*0x695bb8*/
         {
-          v18 = (*(int (__thiscall **)(Concurrency::details::SchedulerBase *))(*(_DWORD *)a1 + 0x154))(a1);
-          if ( v18 )
-            v19 = *(NiObject **)(v18 + 0xC);
+          v18 = (*(int (__thiscall **)(Concurrency::details::SchedulerBase *))(*(_DWORD *)this + 0x154))(this); /*0x695bc4*/
+          if ( v18 ) /*0x695bc8*/
+            v19 = *(NiObject **)(v18 + 0xC); /*0x695bca*/
           else
-            v19 = 0;
-          v13 = (float *)NiRTTI_Cast(&stru_B3CAC0, v19);
-          if ( v13 )
+            v19 = 0; /*0x695bcf*/
+          SequenceByName = (NiControllerManager *)NiRTTI_Cast((BSStringT *)&stru_B3CAC0, v19); /*0x695bd7*/
+          if ( SequenceByName ) /*0x695be1*/
           {
-            v13 = (float *)sub_4715A0(v13, (int)"SpecialIdle_AreaEffect");
-            if ( v13 )
+            SequenceByName = NiControllerManager_FindSequenceByName(SequenceByName, "SpecialIdle_AreaEffect"); /*0x695bea*/
+            if ( SequenceByName ) /*0x695bf1*/
             {
-              v23 = v13[0xC] * dbl_A31C70;
-              LOBYTE(v13) = MagicCaster_CastingVFX_ClearSomething___(*((_DWORD *)a1 + 0x23), 0, v23);
-              *(float *)(*((_DWORD *)a1 + 0x23) + 0x10) = v21;
+              v23 = *((float *)SequenceByName + 0xC) * dbl_A31C70; /*0x695c03*/
+              LOBYTE(SequenceByName) = MagicCaster_CastingVFX_ClearSomething___(*((_DWORD *)this + 0x23), 0, v23); /*0x695c10*/
+              *(float *)(*((_DWORD *)this + 0x23) + 0x10) = v21; /*0x695c1f*/
             }
           }
         }
       }
     }
   }
-  return (char)v13;
+  return (char)SequenceByName; /*0x695c22*/
 }

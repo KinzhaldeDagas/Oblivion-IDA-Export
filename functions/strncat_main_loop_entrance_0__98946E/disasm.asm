@@ -35,3 +35,9 @@
 0x9894C2: pop     esi
 0x9894C3: pop     edi
 0x9894C4: retn
+0x98945A: mov     [edi], dl
+0x98945C: mov     eax, [esp+arg_C]
+0x989460: pop     ebx
+0x989461: pop     esi
+0x989462: pop     edi
+0x989463: retn

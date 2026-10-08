@@ -1,4 +1,4 @@
-0x7E28E0: push    ebx
+0x7E28E0: push    ebx; Shader/property diagnostic dumper. Prints pass names via BSShaderProperty_GetRenderPassName; BSSM_FRONDS from this path is diagnostic text only.
 0x7E28E1: push    ebp
 0x7E28E2: push    esi
 0x7E28E3: mov     esi, [esp+0Ch+arg_0]
@@ -273,7 +273,7 @@
 0x7E2C14: jz      short loc_7E2C53
 0x7E2C16: movzx   eax, word ptr [eax+4]
 0x7E2C1A: push    eax
-0x7E2C1B: call    BSShaderProperty_GetRenderPassName
+0x7E2C1B: call    BSShaderProperty_GetRenderPassName; Generic shader/render-pass name table. Case 0x0F returns BSSM_FRONDS, but this is only a pass-name mapping; it does not attach frond geometry or request SpeedTreeFrondShader.
 0x7E2C20: push    eax; int
 0x7E2C21: push    offset aFpass; " Fpass"
 0x7E2C26: call    TESOutput_PrintLabeledString
@@ -293,7 +293,7 @@
 0x7E2C51: jmp     short loc_7E2C8E
 0x7E2C53: movzx   ecx, word ptr [eax+4]
 0x7E2C57: push    ecx
-0x7E2C58: call    BSShaderProperty_GetRenderPassName
+0x7E2C58: call    BSShaderProperty_GetRenderPassName; Generic shader/render-pass name table. Case 0x0F returns BSSM_FRONDS, but this is only a pass-name mapping; it does not attach frond geometry or request SpeedTreeFrondShader.
 0x7E2C5D: push    eax; int
 0x7E2C5E: push    offset aPass; "  pass"
 0x7E2C63: call    TESOutput_PrintLabeledString

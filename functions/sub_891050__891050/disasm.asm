@@ -21,7 +21,7 @@
 0x891095: jz      short loc_8910A2
 0x891097: push    1
 0x891099: mov     ecx, eax
-0x89109B: call    sub_890C00
+0x89109B: call    sub_890C00; TES4 authoritative: initializes shared bhk character state table. Slots observed: 0=OnGround, 1=Jumping, 2=InAir, 4=Flying, 5=Swimming, 6=Projectile. No Climbing state is constructed here.
 0x8910A0: jmp     short loc_8910A4
 0x8910A2: xor     eax, eax
 0x8910A4: cmp     dword ptr [esi+8], 0
@@ -43,3 +43,15 @@
 0x8910DC: pop     esi
 0x8910DD: add     esp, 10h
 0x8910E0: retn    4
+0x9D62E0: mov     eax, [ebp-10h]
+0x9D62E3: push    eax
+0x9D62E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D62E9: pop     ecx
+0x9D62EA: retn
+0x9D62EB: mov     edx, [esp+arg_4]
+0x9D62EF: lea     eax, [edx-8]
+0x9D62F2: mov     ecx, [edx-0Ch]
+0x9D62F5: xor     ecx, eax
+0x9D62F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D62FC: mov     eax, offset stru_AFE21C
+0x9D6301: jmp     ___CxxFrameHandler3

@@ -1,4 +1,4 @@
 int sub_43FD20()
 {
-  return uExteriorCellBuffer;
+  return uExteriorCellBuffer; /*0x43fd25*/
 }

@@ -1,10 +1,10 @@
 ahkCharacterProxy *__thiscall ahkCharacterProxy::`scalar deleting destructor'(ahkCharacterProxy *this, char a2)
 {
-  ahkCharacterProxy::~ahkCharacterProxy(this);
-  if ( (a2 & 1) != 0 )
-    (*(void (__stdcall **)(ahkCharacterProxy *, _DWORD, int))(*(_DWORD *)dword_BA7D98 + 0x14))(
+  ahkCharacterProxy::~ahkCharacterProxy(this); /*0x8b9d33*/
+  if ( (a2 & 1) != 0 ) /*0x8b9d3d*/
+    (*(void (__stdcall **)(ahkCharacterProxy *, _DWORD, int))(*(_DWORD *)unk_BA7D98 + 0x14))( /*0x8b9d52*/
       this,
       *((unsigned __int16 *)this + 2),
       0x31);
-  return this;
+  return this; /*0x8b9d56*/
 }

@@ -4,7 +4,7 @@
 0x55A0A8: mov     dword ptr [esi], offset ??_7BSFaceGenMorph@@6B@; const BSFaceGenMorph::`vftable'
 0x55A0AE: jz      short loc_55A0B9
 0x55A0B0: push    esi
-0x55A0B1: call    FormHeapFree
+0x55A0B1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x55A0B6: add     esp, 4
 0x55A0B9: mov     eax, esi
 0x55A0BB: pop     esi

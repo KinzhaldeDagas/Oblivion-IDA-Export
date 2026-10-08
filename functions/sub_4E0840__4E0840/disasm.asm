@@ -1,7 +1,7 @@
 0x4E0840: push    esi
 0x4E0841: mov     esi, ecx
 0x4E0843: lea     ecx, [esi+44h]
-0x4E0846: call    sub_4211C0
+0x4E0846: call    ExtraDataList_GetSavedAttachedAnimation; Returns ExtraSavedMovementData's saved-attached-animation pointer, or null.
 0x4E084B: test    eax, eax
 0x4E084D: jz      short loc_4E0854
 0x4E084F: xor     ax, ax
@@ -19,9 +19,9 @@
 0x4E0870: jz      short loc_4E0890
 0x4E0872: cmp     [ecx+0Ch], eax
 0x4E0875: jz      short loc_4E0890
-0x4E0877: push    eax
-0x4E0878: mov     ecx, esi
-0x4E087A: call    sub_405790
+0x4E0877: push    eax; index
+0x4E0878: mov     ecx, esi; this
+0x4E087A: call    NiNode_GetChildAtIndex
 0x4E087F: mov     eax, [eax+0Ch]
 0x4E0882: push    eax
 0x4E0883: push    offset stru_B3CAC0

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x895190",
-    "line": "push    ebp",
+    "line": "push    ebp; TES4 authoritative: builds/updates controller collision shapes and derived geometry fields from construction info; not a per-frame climb API.",
     "mnemonic": "push",
     "size": 1
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x8951ED",
-    "line": "mov     eax, [edi+8Ch]",
+    "line": "mov     eax, [edi+8Ch]; cinfo+0x8C optional prebuilt shape/wrapper; when present it is installed directly at proxy+0x374 and radius is read from it.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x89526A",
-    "line": "mov     eax, [edi+70h]",
+    "line": "mov     eax, [edi+70h]; cinfo+0x70 source object/root used to derive controller shape bounds when no prebuilt shape is supplied.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x8952B6",
-    "line": "call    sub_4707B0",
+    "line": "call    sub_4707B0; cinfo+0x98 scale feeds source-object bounds extraction for controller shape construction.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1717,7 +1717,7 @@
   },
   {
     "ea": "0x8955A4",
-    "line": "fxch    st(3)",
+    "line": "fxch    st(3); cinfo+0x4C contributes to persistent active shape vertical offset proxy+0x314 in this build branch.",
     "mnemonic": "fxch",
     "size": 2
   },
@@ -1735,7 +1735,7 @@
   },
   {
     "ea": "0x8955AE",
-    "line": "fst     dword ptr [esi+314h]",
+    "line": "fst     dword ptr [esi+314h]; Stores persistent active shape vertical offset at proxy+0x314 during controller shape build.",
     "mnemonic": "fst",
     "size": 6
   },
@@ -1747,7 +1747,7 @@
   },
   {
     "ea": "0x8955BA",
-    "line": "fstp    dword ptr [esi+348h]",
+    "line": "fstp    dword ptr [esi+348h]; Build-time writes same vertical offset into proxy+0x348; runtime update refreshes +0x348 from +0x314 before state dispatch.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -1771,7 +1771,7 @@
   },
   {
     "ea": "0x8955C8",
-    "line": "jp      short loc_8955D1",
+    "line": "jp      short loc_8955D1; cinfo+0x50 is a mutable construction field tested before being replaced by a Havok-scaled branch value; high-level name unresolved.",
     "mnemonic": "jp",
     "size": 2
   },
@@ -1819,43 +1819,43 @@
   },
   {
     "ea": "0x8955DC",
-    "line": "mov     [esp+114h+var_D0], ebx",
+    "line": "mov     [esp+114h+info.material], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x8955E0",
-    "line": "mov     [esp+114h+var_CC], ebx",
+    "line": "mov     [esp+114h+info.childHkShapes], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x8955E4",
-    "line": "mov     [esp+114h+var_C8], ebx",
+    "line": "mov     [esp+114h+info.childCount], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x8955E8",
-    "line": "mov     [esp+114h+var_C4], eax",
+    "line": "mov     [esp+114h+info.childCapacityFlags], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x8955EC",
-    "line": "mov     [esp+114h+var_C0], ebx",
+    "line": "mov     [esp+114h+info.childFilters], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x8955F0",
-    "line": "mov     [esp+114h+var_BC], ebx",
+    "line": "mov     [esp+114h+info.filterCount], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x8955F4",
-    "line": "mov     [esp+114h+var_B8], eax",
+    "line": "mov     [esp+114h+info.filterCapacityFlags], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2137,7 +2137,7 @@
   },
   {
     "ea": "0x8956AE",
-    "line": "call    sub_404C90",
+    "line": "call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2725,7 +2725,7 @@
   },
   {
     "ea": "0x895840",
-    "line": "mov     edx, [esp+114h+var_C4]",
+    "line": "mov     edx, [esp+114h+info.childCapacityFlags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2737,7 +2737,7 @@
   },
   {
     "ea": "0x89584A",
-    "line": "cmp     [esp+114h+var_C8], edx",
+    "line": "cmp     [esp+114h+info.childCount], edx",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -2749,7 +2749,7 @@
   },
   {
     "ea": "0x895850",
-    "line": "lea     eax, [esp+114h+var_CC]",
+    "line": "lea     eax, [esp+114h+info.childHkShapes]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2779,13 +2779,13 @@
   },
   {
     "ea": "0x89585F",
-    "line": "mov     edx, [esp+114h+var_C8]",
+    "line": "mov     edx, [esp+114h+info.childCount]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x895863",
-    "line": "mov     ecx, [esp+114h+var_CC]",
+    "line": "mov     ecx, [esp+114h+info.childHkShapes]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2803,7 +2803,7 @@
   },
   {
     "ea": "0x89586E",
-    "line": "add     [esp+114h+var_C8], 1",
+    "line": "add     [esp+114h+info.childCount], 1",
     "mnemonic": "add",
     "size": 5
   },
@@ -2839,7 +2839,7 @@
   },
   {
     "ea": "0x89587E",
-    "line": "mov     eax, [esp+114h+var_C4]",
+    "line": "mov     eax, [esp+114h+info.childCapacityFlags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2851,7 +2851,7 @@
   },
   {
     "ea": "0x895887",
-    "line": "cmp     [esp+114h+var_C8], eax",
+    "line": "cmp     [esp+114h+info.childCount], eax",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -2863,7 +2863,7 @@
   },
   {
     "ea": "0x89588D",
-    "line": "lea     ecx, [esp+114h+var_CC]",
+    "line": "lea     ecx, [esp+114h+info.childHkShapes]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2893,13 +2893,13 @@
   },
   {
     "ea": "0x89589C",
-    "line": "mov     eax, [esp+114h+var_C8]",
+    "line": "mov     eax, [esp+114h+info.childCount]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x8958A0",
-    "line": "mov     edx, [esp+114h+var_CC]",
+    "line": "mov     edx, [esp+114h+info.childHkShapes]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2917,7 +2917,7 @@
   },
   {
     "ea": "0x8958AB",
-    "line": "add     [esp+114h+var_C8], 1",
+    "line": "add     [esp+114h+info.childCount], 1",
     "mnemonic": "add",
     "size": 5
   },
@@ -2953,7 +2953,7 @@
   },
   {
     "ea": "0x8958BB",
-    "line": "mov     ecx, [esp+114h+var_C4]",
+    "line": "mov     ecx, [esp+114h+info.childCapacityFlags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2965,7 +2965,7 @@
   },
   {
     "ea": "0x8958C5",
-    "line": "cmp     [esp+114h+var_C8], ecx",
+    "line": "cmp     [esp+114h+info.childCount], ecx",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -2977,7 +2977,7 @@
   },
   {
     "ea": "0x8958CB",
-    "line": "lea     edx, [esp+114h+var_CC]",
+    "line": "lea     edx, [esp+114h+info.childHkShapes]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3007,13 +3007,13 @@
   },
   {
     "ea": "0x8958DA",
-    "line": "mov     ecx, [esp+114h+var_C8]",
+    "line": "mov     ecx, [esp+114h+info.childCount]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x8958DE",
-    "line": "mov     eax, [esp+114h+var_CC]",
+    "line": "mov     eax, [esp+114h+info.childHkShapes]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3025,13 +3025,13 @@
   },
   {
     "ea": "0x8958E5",
-    "line": "mov     edx, [esp+114h+var_B8]",
+    "line": "mov     edx, [esp+114h+info.filterCapacityFlags]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x8958E9",
-    "line": "add     [esp+114h+var_C8], 1",
+    "line": "add     [esp+114h+info.childCount], 1",
     "mnemonic": "add",
     "size": 5
   },
@@ -3043,7 +3043,7 @@
   },
   {
     "ea": "0x8958F4",
-    "line": "cmp     [esp+114h+var_BC], edx",
+    "line": "cmp     [esp+114h+info.filterCount], edx",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -3055,7 +3055,7 @@
   },
   {
     "ea": "0x8958FA",
-    "line": "lea     eax, [esp+114h+var_C0]",
+    "line": "lea     eax, [esp+114h+info.childFilters]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3085,13 +3085,13 @@
   },
   {
     "ea": "0x895909",
-    "line": "mov     ecx, [esp+114h+var_C0]",
+    "line": "mov     ecx, [esp+114h+info.childFilters]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x89590D",
-    "line": "mov     edx, [esp+114h+var_BC]",
+    "line": "mov     edx, [esp+114h+info.filterCount]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3103,13 +3103,13 @@
   },
   {
     "ea": "0x895918",
-    "line": "mov     eax, [esp+114h+var_BC]",
+    "line": "mov     eax, [esp+114h+info.filterCount]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x89591C",
-    "line": "mov     ecx, [esp+114h+var_B8]",
+    "line": "mov     ecx, [esp+114h+info.filterCapacityFlags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3133,7 +3133,7 @@
   },
   {
     "ea": "0x89592B",
-    "line": "mov     [esp+114h+var_BC], eax",
+    "line": "mov     [esp+114h+info.filterCount], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3145,7 +3145,7 @@
   },
   {
     "ea": "0x895931",
-    "line": "lea     edx, [esp+114h+var_C0]",
+    "line": "lea     edx, [esp+114h+info.childFilters]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3175,13 +3175,13 @@
   },
   {
     "ea": "0x895940",
-    "line": "mov     eax, [esp+114h+var_C0]",
+    "line": "mov     eax, [esp+114h+info.childFilters]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x895944",
-    "line": "mov     ecx, [esp+114h+var_BC]",
+    "line": "mov     ecx, [esp+114h+info.filterCount]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3193,13 +3193,13 @@
   },
   {
     "ea": "0x89594F",
-    "line": "mov     eax, [esp+114h+var_BC]",
+    "line": "mov     eax, [esp+114h+info.filterCount]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x895953",
-    "line": "mov     edx, [esp+114h+var_B8]",
+    "line": "mov     edx, [esp+114h+info.filterCapacityFlags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3223,7 +3223,7 @@
   },
   {
     "ea": "0x895962",
-    "line": "mov     [esp+114h+var_BC], eax",
+    "line": "mov     [esp+114h+info.filterCount], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3235,7 +3235,7 @@
   },
   {
     "ea": "0x895968",
-    "line": "lea     eax, [esp+114h+var_C0]",
+    "line": "lea     eax, [esp+114h+info.childFilters]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3265,13 +3265,13 @@
   },
   {
     "ea": "0x895977",
-    "line": "mov     edx, [esp+114h+var_BC]",
+    "line": "mov     edx, [esp+114h+info.filterCount]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x89597B",
-    "line": "mov     ecx, [esp+114h+var_C0]",
+    "line": "mov     ecx, [esp+114h+info.childFilters]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3283,7 +3283,7 @@
   },
   {
     "ea": "0x895986",
-    "line": "add     [esp+114h+var_BC], 1",
+    "line": "add     [esp+114h+info.filterCount], 1",
     "mnemonic": "add",
     "size": 5
   },
@@ -3337,25 +3337,25 @@
   },
   {
     "ea": "0x8959AF",
-    "line": "lea     ecx, [esp+114h+var_D0]",
+    "line": "lea     ecx, [esp+114h+info]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x8959B3",
-    "line": "push    ecx",
+    "line": "push    ecx; info",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8959B4",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8959B6",
-    "line": "call    sub_890410",
+    "line": "call    OB_bhkListShape_CtorFromCinfo_010201A0",
     "mnemonic": "call",
     "size": 5
   },
@@ -3427,7 +3427,7 @@
   },
   {
     "ea": "0x8959E7",
-    "line": "lea     ecx, [esp+114h+var_D0]",
+    "line": "lea     ecx, [esp+114h+info]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3499,7 +3499,7 @@
   },
   {
     "ea": "0x895A20",
-    "line": "fstp    dword ptr [esi+340h]",
+    "line": "fstp    dword ptr [esi+340h]; Stores shape-local horizontal offset X at proxy+0x340 in Havok units.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -3517,7 +3517,7 @@
   },
   {
     "ea": "0x895A2F",
-    "line": "fstp    dword ptr [esi+344h]",
+    "line": "fstp    dword ptr [esi+344h]; Stores shape-local horizontal offset Y at proxy+0x344 in Havok units.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -3607,7 +3607,7 @@
   },
   {
     "ea": "0x895A63",
-    "line": "fstp    [esp+114h+var_100]",
+    "line": "fstp    [esp+114h+var_100]; cinfo+0x4C contributes to persistent active shape vertical offset proxy+0x314 in the alternate build branch.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -3619,7 +3619,7 @@
   },
   {
     "ea": "0x895A6B",
-    "line": "fst     dword ptr [esi+314h]",
+    "line": "fst     dword ptr [esi+314h]; Stores persistent active shape vertical offset at proxy+0x314 for the alternate shape-build branch.",
     "mnemonic": "fst",
     "size": 6
   },
@@ -3631,7 +3631,7 @@
   },
   {
     "ea": "0x895A77",
-    "line": "fstp    dword ptr [esi+348h]",
+    "line": "fstp    dword ptr [esi+348h]; Build-time writes alternate vertical offset into proxy+0x348; runtime update refreshes +0x348 from +0x314 before state dispatch.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -3661,7 +3661,7 @@
   },
   {
     "ea": "0x895A87",
-    "line": "jp      short loc_895A90",
+    "line": "jp      short loc_895A90; cinfo+0x50 is a mutable construction field tested before being replaced by a Havok-scaled branch value; high-level name unresolved.",
     "mnemonic": "jp",
     "size": 2
   },
@@ -4405,7 +4405,7 @@
   },
   {
     "ea": "0x895C35",
-    "line": "cmp     byte ptr [edi+85h], 0",
+    "line": "cmp     byte ptr [edi+85h], 0; cinfo+0x85 selects the shared/alternate secondary shape path; exact high-level flag name unresolved.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -4513,7 +4513,7 @@
   },
   {
     "ea": "0x895C76",
-    "line": "mov     ecx, offset dword_BA7A64; this",
+    "line": "mov     ecx, offset unk_BA7A64; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -4525,19 +4525,19 @@
   },
   {
     "ea": "0x895C80",
-    "line": "push    offset dword_BA7A64",
+    "line": "push    offset unk_BA7A64; incoming",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x895C85",
-    "line": "lea     ecx, [esi+378h]",
+    "line": "lea     ecx, [esi+378h]; this",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x895C8B",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4693,13 +4693,13 @@
   },
   {
     "ea": "0x895CE8",
-    "line": "fst     dword ptr [esi+3A0h]",
+    "line": "fst     dword ptr [esi+3A0h]; Stores controller capsule radius at proxy+0x3A0 in Havok units.",
     "mnemonic": "fst",
     "size": 6
   },
   {
     "ea": "0x895CEE",
-    "line": "fstp    dword ptr [esi+3A8h]",
+    "line": "fstp    dword ptr [esi+3A8h]; Stores duplicate/secondary controller capsule radius at proxy+0x3A8 in Havok units.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -4717,7 +4717,7 @@
   },
   {
     "ea": "0x895CFA",
-    "line": "fstp    dword ptr [esi+3A4h]",
+    "line": "fstp    dword ptr [esi+3A4h]; Stores controller capsule height at proxy+0x3A4 in Havok units.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -4747,7 +4747,7 @@
   },
   {
     "ea": "0x895D0C",
-    "line": "fstp    dword ptr [esi+33Ch]",
+    "line": "fstp    dword ptr [esi+33Ch]; Stores derived shape span/diameter-like scalar at proxy+0x33C in Havok units; exact high-level cinfo meaning still unresolved.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -4813,13 +4813,13 @@
   },
   {
     "ea": "0x895D2E",
-    "line": "call    sub_894940",
+    "line": "call    bhkCharacterController_SetShapeType",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x895D33",
-    "line": "cmp     byte ptr [edi+84h], 0",
+    "line": "cmp     byte ptr [edi+84h], 0; cinfo+0x84 enables optional secondary shape construction using proxy+0x248 as vertical/base offset.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -5428,5 +5428,275 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D65B0",
+    "line": "lea     ecx, [ebp+info]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9D65B6",
+    "line": "jmp     sub_893510",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D65BB",
+    "line": "mov     eax, [ebp+var_100]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9D65C1",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D65C2",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D65C7",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D65C8",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D65C9",
+    "line": "mov     eax, [ebp+var_9C]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9D65CF",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D65D0",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D65D5",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D65D6",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D65D7",
+    "line": "mov     eax, [ebp+var_9C]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9D65DD",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D65DE",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D65E3",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D65E4",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D65E5",
+    "line": "mov     eax, [ebp+var_9C]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9D65EB",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D65EC",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D65F1",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D65F2",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D65F3",
+    "line": "mov     eax, [ebp+var_9C]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9D65F9",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D65FA",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D65FF",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D6600",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D6601",
+    "line": "lea     ecx, [ebp+var_60]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D6604",
+    "line": "jmp     sub_8A5090",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6609",
+    "line": "mov     eax, [ebp+var_9C]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9D660F",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D6610",
+    "line": "call    sub_6078C0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6615",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D6616",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D6617",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D661B",
+    "line": "lea     eax, [edx-104h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9D6621",
+    "line": "mov     ecx, [edx-108h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9D6627",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D6629",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D662E",
+    "line": "add     eax, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9D6631",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D6634",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D6636",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D663B",
+    "line": "mov     eax, offset stru_AFE400",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6640",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

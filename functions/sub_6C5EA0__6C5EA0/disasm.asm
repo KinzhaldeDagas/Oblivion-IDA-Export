@@ -13,13 +13,13 @@
 0x6C5EB6: call    __memset
 0x6C5EBB: mov     eax, [esi+0Ch]
 0x6C5EBE: mov     ecx, [esi+8]
-0x6C5EC1: push    eax; Size
-0x6C5EC2: push    ecx; Src
-0x6C5EC3: push    ebx; Dst
-0x6C5EC4: call    _memcpy
+0x6C5EC1: push    eax; byteCount
+0x6C5EC2: push    ecx; source
+0x6C5EC3: push    ebx; destination
+0x6C5EC4: call    _memcpy;
 0x6C5EC9: mov     edx, [esi+8]
 0x6C5ECC: push    edx
-0x6C5ECD: call    FormHeapFree
+0x6C5ECD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6C5ED2: add     esp, 20h
 0x6C5ED5: mov     [esi+0Ch], edi
 0x6C5ED8: pop     edi

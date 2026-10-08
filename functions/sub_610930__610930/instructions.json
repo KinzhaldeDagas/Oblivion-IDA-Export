@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x610930",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; RadiantAI: attack crime side-effect path. Builds crime type 3 record and witness response.",
     "mnemonic": "push",
     "size": 2
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x6109A4",
-    "line": "call    sub_5E6C60",
+    "line": "call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x610A0F",
-    "line": "call    sub_5E6C60",
+    "line": "call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x610A3C",
-    "line": "call    sub_5E6C60",
+    "line": "call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x610A6A",
-    "line": "call    Actor_IsSneaking",
+    "line": "call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.",
     "mnemonic": "call",
     "size": 5
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x610A99",
-    "line": "call    sub_6070B0",
+    "line": "call    sub_6070B0; RadiantAI: crime event record constructor. type field at +4: observed 0=steal item, 1=pickpocket, 2=trespass, 3=attack, 4=murder, 5=horse theft.",
     "mnemonic": "call",
     "size": 5
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x610ABD",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -751,7 +751,7 @@
   },
   {
     "ea": "0x610AD3",
-    "line": "call    sub_5E6C60",
+    "line": "call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1021,7 +1021,7 @@
   },
   {
     "ea": "0x610B5E",
-    "line": "mov     ecx, [ebx+8]; this",
+    "line": "mov     ecx, [ebx+8]; reference",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1033,7 +1033,7 @@
   },
   {
     "ea": "0x610B63",
-    "line": "mov     byte ptr [esp+29Ch+var_270], 0",
+    "line": "mov     [esp+29Ch+useBase], 0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1045,7 +1045,7 @@
   },
   {
     "ea": "0x610B6A",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1063,7 +1063,7 @@
   },
   {
     "ea": "0x610B73",
-    "line": "mov     byte ptr [esp+29Ch+var_270], 1",
+    "line": "mov     [esp+29Ch+useBase], 1",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1087,7 +1087,7 @@
   },
   {
     "ea": "0x610B84",
-    "line": "call    sub_5E6C60",
+    "line": "call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1105,31 +1105,31 @@
   },
   {
     "ea": "0x610B8D",
-    "line": "mov     ecx, [esp+29Ch+var_270]",
+    "line": "mov     ecx, dword ptr [esp+29Ch+useBase]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x610B91",
-    "line": "push    ecx",
+    "line": "push    ecx; useBase",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x610B92",
-    "line": "push    esi",
+    "line": "push    esi; observer",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x610B93",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x610B95",
-    "line": "call    sub_605F60",
+    "line": "call    Crime_GetDispositionPenalty",
     "mnemonic": "call",
     "size": 5
   },
@@ -1213,7 +1213,7 @@
   },
   {
     "ea": "0x610BC0",
-    "line": "call    sub_5E6C60",
+    "line": "call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1339,13 +1339,13 @@
   },
   {
     "ea": "0x610BFB",
-    "line": "push    0Bh",
+    "line": "push    0Bh; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x610BFD",
-    "line": "push    2",
+    "line": "push    2; topicType",
     "mnemonic": "push",
     "size": 2
   },
@@ -1357,7 +1357,7 @@
   },
   {
     "ea": "0x610C05",
-    "line": "call    TESTopic__GEtTopic",
+    "line": "call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1501,13 +1501,13 @@
   },
   {
     "ea": "0x610C5A",
-    "line": "push    8",
+    "line": "push    8; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x610C5C",
-    "line": "push    2",
+    "line": "push    2; topicType",
     "mnemonic": "push",
     "size": 2
   },
@@ -1519,7 +1519,7 @@
   },
   {
     "ea": "0x610C64",
-    "line": "call    TESTopic__GEtTopic",
+    "line": "call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1711,19 +1711,19 @@
   },
   {
     "ea": "0x610CB2",
-    "line": "push    ebp",
+    "line": "push    ebp; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x610CB3",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x610CB5",
-    "line": "call    sub_605F00",
+    "line": "call    Crime_AddWitness",
     "mnemonic": "call",
     "size": 5
   },
@@ -1837,13 +1837,13 @@
   },
   {
     "ea": "0x610CFC",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x610CFE",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1861,13 +1861,13 @@
   },
   {
     "ea": "0x610D07",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x610D09",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1981,7 +1981,7 @@
   },
   {
     "ea": "0x610D44",
-    "line": "mov     ecx, offset dword_B3BDB0",
+    "line": "mov     ecx, (offset qword_B3BB2C+284h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2155,7 +2155,7 @@
   },
   {
     "ea": "0x610D93",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2173,7 +2173,7 @@
   },
   {
     "ea": "0x610D9D",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2221,13 +2221,13 @@
   },
   {
     "ea": "0x610DBC",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x610DBE",
-    "line": "call    sub_605F30",
+    "line": "call    Crime_GetWitnessCount",
     "mnemonic": "call",
     "size": 5
   },
@@ -2245,13 +2245,13 @@
   },
   {
     "ea": "0x610DC7",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x610DC9",
-    "line": "call    sub_605E80",
+    "line": "call    Crime_Destructor",
     "mnemonic": "call",
     "size": 5
   },
@@ -2263,7 +2263,7 @@
   },
   {
     "ea": "0x610DCF",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2365,19 +2365,19 @@
   },
   {
     "ea": "0x610E06",
-    "line": "push    ebx",
+    "line": "push    ebx; crime",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x610E07",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x610E0C",
-    "line": "call    sub_675B30",
+    "line": "call    ActorProcessManager_AddCrime",
     "mnemonic": "call",
     "size": 5
   },
@@ -2395,13 +2395,13 @@
   },
   {
     "ea": "0x610E17",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x610E19",
-    "line": "call    sub_605E80",
+    "line": "call    Crime_Destructor",
     "mnemonic": "call",
     "size": 5
   },
@@ -2413,7 +2413,7 @@
   },
   {
     "ea": "0x610E1F",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2533,7 +2533,7 @@
   },
   {
     "ea": "0x610E63",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2545,7 +2545,7 @@
   },
   {
     "ea": "0x610E69",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2563,7 +2563,7 @@
   },
   {
     "ea": "0x610E72",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2644,5 +2644,101 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C31E0",
+    "line": "mov     eax, [ebp-274h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C31E6",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C31E7",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C31EC",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C31ED",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C31EE",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C31F2",
+    "line": "lea     eax, [edx-28Ch]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C31F8",
+    "line": "mov     ecx, [edx-290h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C31FE",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C3200",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3205",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3208",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C320B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C320D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3212",
+    "line": "mov     eax, offset stru_AEBE54",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3217",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

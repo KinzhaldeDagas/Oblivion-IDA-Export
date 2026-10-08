@@ -1,4 +1,4 @@
-0x547590: fild    [esp+arg_0]
+0x547590: fild    [esp+arg_0]; ODismemberment combat decode: block fatigue cost formula using fFatigueBlockSkill*, fFatigueBlock*, and block amount.
 0x547594: fmul    dword ptr ds:0B37008h
 0x54759A: fadd    dword ptr ds:0B37000h
 0x5475A0: fstp    [esp+arg_0]

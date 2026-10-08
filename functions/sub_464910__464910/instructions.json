@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x464910",
-    "line": "mov     eax, ds:0B33398h",
+    "line": "mov     eax, ds:0B33398h; Verified: called by TESObjectCELL_LinkForm at 4CDA22. Requires save-load flag bit 0; loads the cell via LoadForm then restores references indexed for that cell. Interior path drains cellID->referenceID list. Exterior path selects worldspace map, scans records by exact cell X/Y, restores matching references, and removes consumed records/empty containers. Probable Fallout homolog BGSSaveLoadReferencesMap::LoadReferencesForCell 825F9CB8; Fallout derives a cell-coordinate key and reads an ID array, while Oblivion linearly scans linked records per worldspace.",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x464915",
-    "line": "sub     esp, 10h",
+    "line": "sub     esp, 10h; MEF v58 PERF18 consumer scope: wrapper at464910 tracks TLS depth and invalidates on abnormal unwind; nested consumers refuse indexing, preventing callback-time cache publication during outer restoration. Top-level negative queries can reuse state across normal invocations. AddReference, map ctor/dtor scopes suspend queries; existing generic-map/pressure observers invalidate before native work.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x464942",
-    "line": "mov     esi, [esp+18h+arg_0]",
+    "line": "mov     esi, [esp+18h+cell]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x464955",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -271,19 +271,19 @@
   },
   {
     "ea": "0x464987",
-    "line": "push    eax",
+    "line": "push    eax; referenceID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x464988",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x46498A",
-    "line": "call    sub_463D70",
+    "line": "call    TESSaveLoadGame_RestoreChangedReference;  Verified: keyed lookup of ChangeData by reference FormID. If flags bit 1 is set, copies a 36-byte initial-reference record from savedFormBuffer+4, resolves the two embedded FormIDs, creates the reference, and calls LoadForm unless RTTI identifies MagicProjectile (which it immediately deletes). Otherwise negative flags select the 44-byte moved-reference record; resolves primary/fallback location IDs, reconstructs from source-location override files, loads, then removes the reference ID from manager deferred list. Probable Fallout homolog BGSSaveLoadReferencesMap::LoadChangedReference at 825F9840; both classify a saved ref, consume its change-map buffer, create/move and load it. Verified divergence: Oblivion uses 36/44-byte records and FormID table; Fallout uses compact initial-data structs and BGS numeric ID indices. Verified: created data copy size 0x24; source is owned ChangeData buffer after 4-byte header. Payload structure attached as OblivionCreatedReferenceInitialData. Verified flag classification: Chan",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x46499B",
-    "line": "mov     edx, [esp+1Ch+arg_0]",
+    "line": "mov     edx, [esp+1Ch+cell]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x4649AD",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x4649B3",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x4649DB",
-    "line": "call    NiTMap_GetAt",
+    "line": "call    NiTMap_GetAt; MEF SAVE AUDIT 2026-10-08: PERF-18 partition boundary: map key is worldspace FormID, not cell coordinates. Initial head comes from this GetAt on owner+C; same world's unrelated pending references are revisited for each loaded cell. Auxiliary index must include worldspace plus both signed stored coordinate words, not merely cellFormID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x464A05",
-    "line": "mov     eax, edi",
+    "line": "mov     eax, edi; MEF v58 PERF18 staged query bridge: after cell LoadForm/map lookup/coordinate getters; EBX=owner,EDI=list, X=[ESP+18],Y=[ESP+1C]. Only a proven absent coordinate pair skips to464A74 with EAX=list. Positive/refused cases replay MOV EAX,EDI/TEST/JZ and continue464A0B. Preserve x87/XMM state; list cleanup and saved EBP remain native. Two bounded main-thread TLS coordinate tables own no engine nodes/records.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -541,19 +541,13 @@
   },
   {
     "ea": "0x464A0B",
-    "line": "jmp     short loc_464A10",
+    "line": "jmp     short loc_464A10; MEF SAVE AUDIT 2026-10-08: PERF-18 full-list scan: each nonnull record tested at+4 X and+8 Y; match restores ID at+0, unlinks/frees record, then loop continues rather than stopping after one match. Preserve native match order, duplicate records and initial LoadForm return contribution.",
     "mnemonic": "jmp",
     "size": 2
   },
   {
-    "ea": "0x464A0D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x464A10",
-    "line": "mov     esi, [edi]",
+    "line": "mov     esi, [edi]; MEF SAVE AUDIT 2026-10-08: PERF-18 full-list scan: each nonnull record tested at+4 X and+8 Y; match restores ID at+0, unlinks/frees record, then loop continues rather than stopping after one match. Preserve native match order, duplicate records and initial LoadForm return contribution.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -613,19 +607,19 @@
   },
   {
     "ea": "0x464A2A",
-    "line": "push    ecx",
+    "line": "push    ecx; referenceID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x464A2B",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x464A2D",
-    "line": "call    sub_463D70",
+    "line": "call    TESSaveLoadGame_RestoreChangedReference;  Verified: keyed lookup of ChangeData by reference FormID. If flags bit 1 is set, copies a 36-byte initial-reference record from savedFormBuffer+4, resolves the two embedded FormIDs, creates the reference, and calls LoadForm unless RTTI identifies MagicProjectile (which it immediately deletes). Otherwise negative flags select the 44-byte moved-reference record; resolves primary/fallback location IDs, reconstructs from source-location override files, loads, then removes the reference ID from manager deferred list. Probable Fallout homolog BGSSaveLoadReferencesMap::LoadChangedReference at 825F9840; both classify a saved ref, consume its change-map buffer, create/move and load it. Verified divergence: Oblivion uses 36/44-byte records and FormID table; Fallout uses compact initial-data structs and BGS numeric ID indices. Verified: created data copy size 0x24; source is owned ChangeData buffer after 4-byte header. Payload structure attached as OblivionCreatedReferenceInitialData. Verified flag classification: Chan",
     "mnemonic": "call",
     "size": 5
   },
@@ -661,7 +655,7 @@
   },
   {
     "ea": "0x464A3E",
-    "line": "call    BSSimpleList_Remove",
+    "line": "call    BSSimpleList_Remove; MEF SAVE AUDIT 2026-10-08: PERF-18 negative subclaim: ECX=previous node EBP, not world-list head. For a well-formed unique record-pointer list, matching successor is reached locally; do not multiply cost by another whole-list scan. Head branch464A53 promotes successor inline. Restore callback464A2D runs BEFORE unlink/free, so borrowed positions need a mutation/lifetime contract.",
     "mnemonic": "call",
     "size": 5
   },
@@ -679,7 +673,7 @@
   },
   {
     "ea": "0x464A47",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -703,7 +697,7 @@
   },
   {
     "ea": "0x464A53",
-    "line": "call    sub_67F100",
+    "line": "call    BSSimpleList_PopHeadWithoutPayloadFree; Verified generic BSSimpleList head removal helper: advances the inline first-node header to its successor and frees the detached list node; if there is no successor, clears the head data pointer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -715,7 +709,7 @@
   },
   {
     "ea": "0x464A59",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -751,13 +745,13 @@
   },
   {
     "ea": "0x464A6A",
-    "line": "jnz     short loc_464A10",
+    "line": "jnz     short loc_464A10; MEF SAVE AUDIT 2026-10-08: PERF-18 full-list scan: each nonnull record tested at+4 X and+8 Y; match restores ID at+0, unlinks/frees record, then loop continues rather than stopping after one match. Preserve native match order, duplicate records and initial LoadForm return contribution.",
     "mnemonic": "jnz",
     "size": 2
   },
   {
     "ea": "0x464A6C",
-    "line": "mov     esi, [esp+20h+arg_0]",
+    "line": "mov     esi, [esp+20h+cell]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -847,7 +841,7 @@
   },
   {
     "ea": "0x464A98",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

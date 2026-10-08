@@ -3,7 +3,6 @@
 0x447137: test    esi, esi
 0x447139: jz      short loc_447152
 0x44713B: jmp     short loc_447140
-0x44713D: align 10h
 0x447140: mov     ecx, [esi]
 0x447142: test    ecx, ecx
 0x447144: jz      short loc_447152

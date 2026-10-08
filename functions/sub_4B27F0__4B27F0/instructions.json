@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4B27F0",
-    "line": "sub     esp, 10Ch",
+    "line": "sub     esp, 10Ch; Verified cell-unload cleanup: walks BASE_DISTANT_DATA entries, derives each model path, calls QueuedModelLoader_RemoveModel(path, count), frees list nodes/data, then removes the packed-cell map entry.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x4B2805",
-    "line": "mov     ebx, [esp+110h+arg_0]",
+    "line": "mov     ebx, [esp+110h+packedExteriorCellLabel]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x4B2812",
-    "line": "mov     ecx, offset off_B08300",
+    "line": "mov     ecx, offset g_DistantLODCellModelUsageMap",
     "mnemonic": "mov",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x4B2872",
-    "line": "call    QueuedModelLoader_RemoveModel",
+    "line": "call    QueuedModelLoader_RemoveModel; Verified decrements the queued model loader's per-path reference usage by this cell's stored usageCount.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x4B2878",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x4B2892",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x4B28AF",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -391,13 +391,13 @@
   },
   {
     "ea": "0x4B28B8",
-    "line": "mov     ecx, offset off_B08300",
+    "line": "mov     ecx, offset g_DistantLODCellModelUsageMap",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x4B28BD",
-    "line": "call    NiTMap_RemoveAt",
+    "line": "call    NiTMap_RemoveAt; Verified removes the per-cell usage map entry after all listed model paths have been decremented. Fallout's counterpart tracks cell keys under object-keyed DistantLOD shader cache entries and uses RemoveAllDistantLOD/ClearStaticMaps; keep the ownership direction distinct.",
     "mnemonic": "call",
     "size": 5
   },

@@ -35,18 +35,18 @@
 0x5D9DFE: mov     ecx, esi
 0x5D9E00: call    Tile_GetFloat
 0x5D9E05: fstp    [esp+20h+var_4]
-0x5D9E09: call    sub_57D7F0
+0x5D9E09: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x5D9E0E: fstp    [esp+20h+var_10]
-0x5D9E12: call    sub_57D7F0
+0x5D9E12: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x5D9E17: fmul    qword ptr ds:0A2FAA0h
 0x5D9E1D: fadd    dword ptr [edi+28h]
 0x5D9E20: fsubr   [esp+20h+var_10]
-0x5D9E24: call    Double_To_SInt32
+0x5D9E24: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5D9E29: mov     dword ptr [esp+20h+var_10], eax
 0x5D9E2D: fild    dword ptr [esp+20h+var_10]
 0x5D9E31: mov     ecx, esi
 0x5D9E33: fstp    dword ptr [esp+20h+var_10]
-0x5D9E37: call    sub_588CF0
+0x5D9E37: call    sub_588CF0; AchievementsNative evidence: stock tile Y helper starts with tile y and adds ancestor y only when ancestor locus is nonzero; inventory hover passes this row Y to popup path.
 0x5D9E3C: fsubr   dword ptr [esp+20h+var_10]
 0x5D9E40: push    0FCAh
 0x5D9E45: mov     ecx, esi
@@ -57,18 +57,18 @@
 0x5D9E5A: fnstsw  ax
 0x5D9E5C: test    ah, 5
 0x5D9E5F: jnp     short loc_5D9EBF
-0x5D9E61: call    sub_57D7F0
+0x5D9E61: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x5D9E66: fstp    [esp+20h+var_10]
-0x5D9E6A: call    sub_57D7F0
+0x5D9E6A: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x5D9E6F: fmul    qword ptr ds:0A2FAA0h
 0x5D9E75: fadd    dword ptr [edi+28h]
 0x5D9E78: fsubr   [esp+20h+var_10]
-0x5D9E7C: call    Double_To_SInt32
+0x5D9E7C: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5D9E81: mov     dword ptr [esp+20h+var_10], eax
 0x5D9E85: fild    dword ptr [esp+20h+var_10]
 0x5D9E89: mov     ecx, esi
 0x5D9E8B: fstp    dword ptr [esp+20h+var_10]
-0x5D9E8F: call    sub_588CF0
+0x5D9E8F: call    sub_588CF0; AchievementsNative evidence: stock tile Y helper starts with tile y and adds ancestor y only when ancestor locus is nonzero; inventory hover passes this row Y to popup path.
 0x5D9E94: fsubr   dword ptr [esp+20h+var_10]
 0x5D9E98: push    0FCAh
 0x5D9E9D: mov     ecx, esi
@@ -82,18 +82,18 @@
 0x5D9EB4: test    ah, 41h
 0x5D9EB7: jnz     loc_5D9F64
 0x5D9EBD: fstp    st
-0x5D9EBF: call    sub_57D7F0
+0x5D9EBF: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x5D9EC4: fstp    [esp+20h+var_10]
-0x5D9EC8: call    sub_57D7F0
+0x5D9EC8: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x5D9ECD: fmul    qword ptr ds:0A2FAA0h
 0x5D9ED3: fadd    dword ptr [edi+28h]
 0x5D9ED6: fsubr   [esp+20h+var_10]
-0x5D9EDA: call    Double_To_SInt32
+0x5D9EDA: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5D9EDF: mov     dword ptr [esp+20h+var_10], eax
 0x5D9EE3: fild    dword ptr [esp+20h+var_10]
 0x5D9EE7: mov     ecx, esi
 0x5D9EE9: fstp    dword ptr [esp+20h+var_10]
-0x5D9EED: call    sub_588CF0
+0x5D9EED: call    sub_588CF0; AchievementsNative evidence: stock tile Y helper starts with tile y and adds ancestor y only when ancestor locus is nonzero; inventory hover passes this row Y to popup path.
 0x5D9EF2: fsubr   dword ptr [esp+20h+var_10]
 0x5D9EF6: push    0FCAh
 0x5D9EFB: mov     ecx, esi
@@ -107,18 +107,18 @@
 0x5D9F12: test    ah, 41h
 0x5D9F15: jz      short loc_5D9F64
 0x5D9F17: fstp    st
-0x5D9F19: call    sub_57D7F0
+0x5D9F19: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x5D9F1E: fstp    [esp+20h+var_10]
-0x5D9F22: call    sub_57D7F0
+0x5D9F22: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x5D9F27: fmul    qword ptr ds:0A2FAA0h
 0x5D9F2D: fadd    dword ptr [edi+28h]
 0x5D9F30: fsubr   [esp+20h+var_10]
-0x5D9F34: call    Double_To_SInt32
+0x5D9F34: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5D9F39: mov     dword ptr [esp+20h+var_10], eax
 0x5D9F3D: fild    dword ptr [esp+20h+var_10]
 0x5D9F41: mov     ecx, esi
 0x5D9F43: fstp    dword ptr [esp+20h+var_10]
-0x5D9F47: call    sub_588CF0
+0x5D9F47: call    sub_588CF0; AchievementsNative evidence: stock tile Y helper starts with tile y and adds ancestor y only when ancestor locus is nonzero; inventory hover passes this row Y to popup path.
 0x5D9F4C: fsubr   dword ptr [esp+20h+var_10]
 0x5D9F50: push    0FCAh
 0x5D9F55: mov     ecx, esi
@@ -129,9 +129,9 @@
 0x5D9F65: fstp    [esp+24h+var_10]
 0x5D9F69: fld     dword ptr ds:0A6B1F0h
 0x5D9F6F: mov     ecx, esi; this
-0x5D9F71: fstp    [esp+24h+a2]; a3
-0x5D9F74: push    0FB3h; a2
-0x5D9F79: call    Tile_SetFloat
+0x5D9F71: fstp    [esp+24h+a2]; value
+0x5D9F74: push    0FB3h; propertyCode
+0x5D9F79: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D9F7E: fld     [esp+20h+var_8]
 0x5D9F82: fld     [esp+20h+var_4]
 0x5D9F86: fld     st
@@ -142,20 +142,20 @@
 0x5D9F92: fadd    qword ptr ds:0A2FAA0h
 0x5D9F98: fstp    [esp+20h+var_4]
 0x5D9F9C: fld     [esp+20h+var_4]
-0x5D9FA0: call    Double_To_SInt32
+0x5D9FA0: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5D9FA5: mov     [esp+20h+var_4], eax
 0x5D9FA9: fild    [esp+20h+var_4]
 0x5D9FAD: push    ecx
 0x5D9FAE: mov     ecx, esi; this
-0x5D9FB0: fstp    [esp+24h+a2]; a3
-0x5D9FB3: push    0FB3h; a2
-0x5D9FB8: call    Tile_SetFloat
+0x5D9FB0: fstp    [esp+24h+a2]; value
+0x5D9FB3: push    0FB3h; propertyCode
+0x5D9FB8: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D9FBD: fldz
 0x5D9FBF: push    ecx
-0x5D9FC0: fstp    [esp+24h+a2]; a3
-0x5D9FC3: push    0FB3h; a2
+0x5D9FC0: fstp    [esp+24h+a2]; value
+0x5D9FC3: push    0FB3h; propertyCode
 0x5D9FC8: mov     ecx, esi; this
-0x5D9FCA: call    Tile_SetFloat
+0x5D9FCA: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D9FCF: pop     edi
 0x5D9FD0: pop     esi
 0x5D9FD1: pop     ebx

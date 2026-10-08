@@ -1,11 +1,11 @@
-int __thiscall sub_7BD3D0(SkyShader *this, int a2, int a3, int a4, _DWORD *a5, int a6, int a7, int a8)
+int __thiscall sub_7BD3D0(SkyShader *this, int a2, int a3, int a4, NiD3DPass *a5, int a6, int a7, int a8)
 {
   double v9; // st7
-  _DWORD *v10; // eax
-  int v11; // ebx
+  NiD3DPass *v10; // eax
+  UInt32 StageCount; // ebx
   int v12; // ecx
   int v13; // ebp
-  int v14; // eax
+  float v14; // eax
   UInt32 Unk070; // esi
   int v16; // ecx
   NiD3DPixelShader *v17; // eax
@@ -30,200 +30,209 @@ int __thiscall sub_7BD3D0(SkyShader *this, int a2, int a3, int a4, _DWORD *a5, i
   int v38; // [esp+24h] [ebp-24h]
   int v39; // [esp+28h] [ebp-20h]
 
-  this->super.__vftable->super.RemoveShaderPassesMaybe((NiD3DShader *)this);
-  *(float *)&v37 = *(float *)&dword_B46658 - CameraWorldTranslate;
-  *(float *)&v38 = *(float *)&dword_B4665C - flt_B3F930;
-  *(float *)&v39 = *(float *)&dword_B46660 - flt_B3F934;
-  dword_B43168 = v37;
-  dword_B4316C = v38;
-  v9 = 0.0;
-  dword_B43170 = v39;
-  v10 = a5;
-  *(float *)&dword_B43174 = 0.0;
-  v11 = v10[6];
-  v12 = *(_DWORD *)(v11 + 0x88);
-  if ( v12 == 2 || v12 == 4 )
-    v13 = 0;
+  this->super.__vftable->super.RemoveShaderPassesMaybe((NiD3DShader *)this); /*0x7bd401*/
+  *(float *)&v37 = flt_B46638[8] - MEMORY[0xB3F92C]; /*0x7bd42f*/
+  *(float *)&v38 = flt_B46638[9] - unk_B3F930; /*0x7bd441*/
+  *(float *)&v39 = flt_B46638[0xA] - unk_B3F934; /*0x7bd44f*/
+  flt_B43168 = *(float *)&v37; /*0x7bd463*/
+  flt_B4316C = *(float *)&v38; /*0x7bd475*/
+  v9 = 0.0; /*0x7bd483*/
+  flt_B43170 = *(float *)&v39; /*0x7bd485*/
+  v10 = a5; /*0x7bd48a*/
+  flt_B43174 = 0.0; /*0x7bd496*/
+  StageCount = v10->StageCount; /*0x7bd49c*/
+  v12 = *(_DWORD *)(StageCount + 0x88); /*0x7bd49f*/
+  if ( v12 == 2 || v12 == 4 ) /*0x7bd4b0*/
+    v13 = 0; /*0x7bd4b2*/
   else
-    v13 = **(_DWORD **)(v10[8] + 0x20);
-  v36 = v10[2];
-  v14 = dword_B42E90;
-  Unk070 = 0;
-  if ( dword_B42E90 == 0x17D || (v35 = 0, v14 == 0x19C) )
-    v35 = 1;
-  if ( v14 == 0x19D && v12 != 2 )
+    v13 = **((_DWORD **)v10->Stages._vtbl + 8); /*0x7bd4b9*/
+  v36 = *(_DWORD *)&v10->Name[4]; /*0x7bd4be*/
+  v14 = unk_B42E90; /*0x7bd4c2*/
+  Unk070 = 0; /*0x7bd4c7*/
+  if ( LODWORD(unk_B42E90) == 0x17D || (v35 = 0, LODWORD(v14) == 0x19C) ) /*0x7bd4da*/
+    v35 = 1; /*0x7bd4dc*/
+  if ( LODWORD(v14) == 0x19D && v12 != 2 ) /*0x7bd4eb*/
   {
-    LOBYTE(a5) = 1;
-    if ( v12 )
+    LOBYTE(a5) = 1; /*0x7bd4ef*/
+    if ( v12 ) /*0x7bd4f4*/
     {
-      v16 = v12 - 3;
-      if ( v16 )
+      v16 = v12 - 3; /*0x7bd4f6*/
+      if ( v16 ) /*0x7bd4f9*/
       {
-        if ( v16 == 1 )
-          Unk070 = this->unkAC[3];
+        if ( v16 == 1 ) /*0x7bd4fe*/
+          Unk070 = this->unkAC[3]; /*0x7bd504*/
       }
       else
       {
-        Unk070 = this->unkAC[5];
+        Unk070 = this->unkAC[5]; /*0x7bd524*/
       }
     }
     else
     {
-      Unk070 = this->unkAC[4];
+      Unk070 = this->unkAC[4]; /*0x7bd52f*/
     }
-    goto LABEL_42;
+    goto LABEL_42; /*0x7bd50a*/
   }
-  LOBYTE(a5) = 0;
-  if ( v14 == 3 )
+  LOBYTE(a5) = 0; /*0x7bd512*/
+  if ( LODWORD(v14) == 3 ) /*0x7bd517*/
   {
-    Unk070 = this->unkAC[2];
-    goto LABEL_42;
+    Unk070 = this->unkAC[2]; /*0x7bd519*/
+    goto LABEL_42; /*0x7bd51f*/
   }
-  if ( v12 == 1 )
+  if ( v12 == 1 ) /*0x7bd53d*/
   {
-    Unk070 = this->unkAC[0];
-    goto LABEL_42;
+    Unk070 = this->unkAC[0]; /*0x7bd53f*/
+    goto LABEL_42; /*0x7bd545*/
   }
-  Unk070 = this->super.member.Unk070;
-  if ( v12 == 5 )
+  Unk070 = this->super.member.Unk070; /*0x7bd54f*/
+  if ( v12 == 5 ) /*0x7bd552*/
   {
-    sub_7AECB0((NiD3DPass *)Unk070, this->Vertex[3]);
-    v17 = this->Pixel[4];
+    NiD3DPass_SetVertexShader((NiD3DPass *)Unk070, this->Vertex[3]); /*0x7bd55d*/
+    v17 = this->Pixel[4]; /*0x7bd562*/
 LABEL_29:
-    sub_7AEC60((NiD3DPassVtbl **)this->super.member.Unk070, v17);
-    goto LABEL_30;
+    NiD3DPass_SetPixelShader((NiD3DPass *)this->super.member.Unk070, v17); /*0x7bd602*/
+    goto LABEL_30; /*0x7bd606*/
   }
-  if ( v12 != 3 )
+  if ( v12 != 3 ) /*0x7bd570*/
   {
-    v19 = (NiD3DPass *)this->super.member.Unk070;
-    if ( v13 )
+    v19 = (NiD3DPass *)this->super.member.Unk070; /*0x7bd5db*/
+    if ( v13 ) /*0x7bd5dd*/
     {
-      sub_7AECB0(v19, this->Vertex[1]);
-      v17 = this->Pixel[0];
+      NiD3DPass_SetVertexShader(v19, this->Vertex[1]); /*0x7bd5e6*/
+      v17 = this->Pixel[0]; /*0x7bd5eb*/
     }
     else
     {
-      sub_7AECB0(v19, this->Vertex[0]);
-      v17 = this->Pixel[2];
+      NiD3DPass_SetVertexShader(v19, this->Vertex[0]); /*0x7bd5f7*/
+      v17 = this->Pixel[2]; /*0x7bd5fc*/
     }
-    goto LABEL_29;
+    goto LABEL_29; /*0x7bd5f1*/
   }
-  v18 = (NiD3DPass *)this->super.member.Unk070;
-  this->unkDC[0] = *(UInt32 *)(4 * *(unsigned __int16 *)(v11 + 0x84) + 0xB4315C);
-  if ( !IsSkyShaderFade )
+  v18 = (NiD3DPass *)this->super.member.Unk070; /*0x7bd583*/
+  this->unkDC[0] = *(UInt32 *)(4 * *(unsigned __int16 *)(StageCount + 0x84) + 0xB4315C); /*0x7bd585*/
+  if ( !MEMORY[0xB43164] ) /*0x7bd592*/
   {
-    sub_7AECB0(v18, this->Vertex[5]);
-    v17 = this->Pixel[0];
-    goto LABEL_29;
+    NiD3DPass_SetVertexShader(v18, this->Vertex[5]); /*0x7bd5cc*/
+    v17 = this->Pixel[0]; /*0x7bd5d1*/
+    goto LABEL_29; /*0x7bd5d7*/
   }
-  sub_7AECB0(v18, this->Vertex[6]);
-  sub_7AEC60((NiD3DPassVtbl **)this->super.member.Unk070, this->Pixel[1]);
-  *(float *)&dword_B43170 = -flt_B4314C / dbl_A49318;
+  NiD3DPass_SetVertexShader(v18, this->Vertex[6]); /*0x7bd59b*/
+  NiD3DPass_SetPixelShader((NiD3DPass *)this->super.member.Unk070, this->Pixel[1]); /*0x7bd5aa*/
+  flt_B43170 = -unk_B4314C / dbl_A49318; /*0x7bd5bd*/
 LABEL_30:
-  if ( !*(_DWORD *)(Unk070 + 0x30) )
-    *(_DWORD *)(Unk070 + 0x30) = sub_772DF0();
-  sub_772CD0(*(_DWORD **)(Unk070 + 0x30), 0x1B, 1, 0);
-  v20 = *(_DWORD *)(v11 + 0x88);
-  if ( v20 == 5 || !v20 || v20 == 6 )
+  if ( !*(_DWORD *)(Unk070 + 0x30) ) /*0x7bd60b*/
+    *(_DWORD *)(Unk070 + 0x30) = NiD3DRenderStateGroupPool_Acquire(); /*0x7bd616*/
+  NiD3DRenderStateGroup_SetRenderState(*(_DWORD **)(Unk070 + 0x30), 0x1B, 1, 0); /*0x7bd622*/
+  v20 = *(_DWORD *)(StageCount + 0x88); /*0x7bd627*/
+  if ( v20 == 5 || !v20 || v20 == 6 ) /*0x7bd639*/
   {
-    if ( !*(_DWORD *)(Unk070 + 0x30) )
-      *(_DWORD *)(Unk070 + 0x30) = sub_772DF0();
-    sub_772CD0(*(_DWORD **)(Unk070 + 0x30), 0x13, 5, 0);
-    if ( !*(_DWORD *)(Unk070 + 0x30) )
-      *(_DWORD *)(Unk070 + 0x30) = sub_772DF0();
-    sub_772CD0(*(_DWORD **)(Unk070 + 0x30), 0x14, 2, 0);
+    if ( !*(_DWORD *)(Unk070 + 0x30) ) /*0x7bd657*/
+      *(_DWORD *)(Unk070 + 0x30) = NiD3DRenderStateGroupPool_Acquire(); /*0x7bd662*/
+    NiD3DRenderStateGroup_SetRenderState(*(_DWORD **)(Unk070 + 0x30), 0x13, 5, 0); /*0x7bd66e*/
+    if ( !*(_DWORD *)(Unk070 + 0x30) ) /*0x7bd673*/
+      *(_DWORD *)(Unk070 + 0x30) = NiD3DRenderStateGroupPool_Acquire(); /*0x7bd67e*/
+    NiD3DRenderStateGroup_SetRenderState(*(_DWORD **)(Unk070 + 0x30), 0x14, 2, 0); /*0x7bd68a*/
   }
   else
   {
-    sub_76C730((_DWORD *)Unk070, 0x13, 5, 0);
-    sub_76C730((_DWORD *)Unk070, 0x14, 6, 0);
+    NiD3DPass_SetRenderState((NiD3DPass *)Unk070, 0x13, 5u, 0); /*0x7bd643*/
+    NiD3DPass_SetRenderState((NiD3DPass *)Unk070, 0x14, 6u, 0); /*0x7bd650*/
   }
-  v9 = 0.0;
+  v9 = 0.0; /*0x7bd68f*/
 LABEL_42:
-  if ( *(_DWORD *)(v11 + 0x88) == 3 )
-    this->unkDC[1] = *(UInt32 *)(v11 + 0x80);
+  if ( *(_DWORD *)(StageCount + 0x88) == 3 ) /*0x7bd698*/
+    this->unkDC[1] = *(UInt32 *)(StageCount + 0x80); /*0x7bd6a8*/
   else
-    *(float *)&this->unkDC[1] = v9;
-  if ( UseHDR )
-    *(float *)&this->unkDC[2] = flt_B2C73C + (flt_B2C740 - flt_B2C73C) * ((*(float *)(v11 + 0x80) - 0.0) / (1.0 - 0.0));
-  switch ( *(_DWORD *)(v11 + 0x88) )
+    *(float *)&this->unkDC[1] = v9; /*0x7bd6b0*/
+  if ( OB_RendererGlobalState_010201A0[0x1D7] ) /*0x7bd6b6*/
+    *(float *)&this->unkDC[2] = flt_B2C73C /*0x7bd6ed*/
+                              + (flt_B2C740 - flt_B2C73C) * ((*(float *)(StageCount + 0x80) - 0.0) / (1.0 - 0.0));
+  switch ( *(_DWORD *)(StageCount + 0x88) ) /*0x7bd709*/
   {
-    case 0:
-    case 1:
-    case 3:
-    case 5:
-    case 6:
-    case 7:
-      LODWORD(qword_B43178) = *(_DWORD *)(v11 + 0x6C);
-      HIDWORD(qword_B43178) = *(_DWORD *)(v11 + 0x70);
-      dword_B43180 = *(_DWORD *)(v11 + 0x74);
-      dword_B43184 = *(_DWORD *)(v11 + 0x78);
-      break;
-    case 2:
-      v21 = HIDWORD(qword_B431A8);
-      v22 = dword_B431B0;
-      LODWORD(qword_B43178) = qword_B431A8;
-      v23 = dword_B431B4;
-      HIDWORD(qword_B43178) = v21;
-      v24 = qword_B431B8;
-      dword_B43180 = v22;
-      v25 = HIDWORD(qword_B431B8);
-      dword_B43184 = v23;
-      v26 = dword_B431C0;
-      LODWORD(qword_B43188) = v24;
-      v27 = dword_B431C4;
-      HIDWORD(qword_B43188) = v25;
-      v28 = qword_B431C8;
-      dword_B43190 = v26;
-      v29 = HIDWORD(qword_B431C8);
-      dword_B43194 = v27;
-      v30 = dword_B431D0;
-      LODWORD(qword_B43198) = v28;
-      v31 = dword_B431D4;
-      HIDWORD(qword_B43198) = v29;
-      dword_B431A0 = v30;
-      dword_B431A4 = v31;
-      break;
+    case 0: /*0x7bd709*/
+    case 1: /*0x7bd709*/
+    case 3: /*0x7bd709*/
+    case 5: /*0x7bd709*/
+    case 6: /*0x7bd709*/
+    case 7: /*0x7bd709*/
+      LODWORD(qword_B43178[0]) = *(_DWORD *)(StageCount + 0x6C); /*0x7bd715*/
+      HIDWORD(qword_B43178[0]) = *(_DWORD *)(StageCount + 0x70); /*0x7bd71d*/
+      LODWORD(qword_B43178[1]) = *(_DWORD *)(StageCount + 0x74); /*0x7bd726*/
+      HIDWORD(qword_B43178[1]) = *(_DWORD *)(StageCount + 0x78); /*0x7bd72f*/
+      break; /*0x7bd734*/
+    case 2: /*0x7bd709*/
+      v21 = HIDWORD(qword_B43178[6]); /*0x7bd741*/
+      v22 = qword_B43178[7]; /*0x7bd747*/
+      LODWORD(qword_B43178[0]) = qword_B43178[6]; /*0x7bd74c*/
+      v23 = HIDWORD(qword_B43178[7]); /*0x7bd752*/
+      HIDWORD(qword_B43178[0]) = v21; /*0x7bd758*/
+      v24 = qword_B43178[8]; /*0x7bd75e*/
+      LODWORD(qword_B43178[1]) = v22; /*0x7bd764*/
+      v25 = HIDWORD(qword_B43178[8]); /*0x7bd769*/
+      HIDWORD(qword_B43178[1]) = v23; /*0x7bd76e*/
+      v26 = qword_B43178[9]; /*0x7bd774*/
+      LODWORD(qword_B43178[2]) = v24; /*0x7bd77a*/
+      v27 = HIDWORD(qword_B43178[9]); /*0x7bd780*/
+      HIDWORD(qword_B43178[2]) = v25; /*0x7bd786*/
+      v28 = qword_B43178[0xA]; /*0x7bd78b*/
+      LODWORD(qword_B43178[3]) = v26; /*0x7bd790*/
+      v29 = HIDWORD(qword_B43178[0xA]); /*0x7bd796*/
+      HIDWORD(qword_B43178[3]) = v27; /*0x7bd79c*/
+      v30 = qword_B43178[0xB]; /*0x7bd7a2*/
+      LODWORD(qword_B43178[4]) = v28; /*0x7bd7a8*/
+      v31 = HIDWORD(qword_B43178[0xB]); /*0x7bd7ad*/
+      HIDWORD(qword_B43178[4]) = v29; /*0x7bd7b2*/
+      LODWORD(qword_B43178[5]) = v30; /*0x7bd7b8*/
+      HIDWORD(qword_B43178[5]) = v31; /*0x7bd7be*/
+      break; /*0x7bd7c3*/
     default:
-      *(float *)&qword_B43178 = v9;
-      *((float *)&qword_B43178 + 1) = v9;
-      *(float *)&dword_B43180 = v9;
-      *(float *)&dword_B43184 = 1.0;
-      *(float *)&qword_B43188 = v9;
-      *((float *)&qword_B43188 + 1) = v9;
-      *(float *)&dword_B43190 = v9;
-      *(float *)&qword_B43198 = v9;
-      *((float *)&qword_B43198 + 1) = v9;
-      *(float *)&dword_B431A0 = v9;
-      break;
+      *(float *)qword_B43178 = v9; /*0x7bd7c5*/
+      *((float *)qword_B43178 + 1) = v9; /*0x7bd7cb*/
+      *(float *)&qword_B43178[1] = v9; /*0x7bd7d1*/
+      *((float *)&qword_B43178[1] + 1) = 1.0; /*0x7bd7d9*/
+      *(float *)&qword_B43178[2] = v9; /*0x7bd7df*/
+      *((float *)&qword_B43178[2] + 1) = v9; /*0x7bd7e5*/
+      *(float *)&qword_B43178[3] = v9; /*0x7bd7eb*/
+      *(float *)&qword_B43178[4] = v9; /*0x7bd7f1*/
+      *((float *)&qword_B43178[4] + 1) = v9; /*0x7bd7f7*/
+      *(float *)&qword_B43178[5] = v9; /*0x7bd7fd*/
+      break; /*0x7bd7fd*/
   }
-  this->super.__vftable->Unk094((BSShader *)this, Unk070);
-  if ( v13 )
+  this->super.__vftable->Unk094((BSShader *)this, Unk070); /*0x7bd80e*/
+  if ( v13 ) /*0x7bd812*/
   {
-    sub_76C910(**(_DWORD ***)(Unk070 + 0x24), *(NiRenderedTexture **)(v13 + 8));
-    sub_771640(**(_DWORD ****)(Unk070 + 0x24), *(_BYTE *)(v13 + 5) & 0xF);
-    sub_7715E0(**(_DWORD ****)(Unk070 + 0x24), (*(unsigned __int16 *)(v13 + 4) >> 0xC) & 3);
-    if ( !(_BYTE)a5 && *(_DWORD *)(v11 + 0x88) == 3 )
+    NiD3DTextureStage_SetTexture(**(NiD3DTextureStage ***)(Unk070 + 0x24), *(NiRenderedTexture **)(v13 + 8)); /*0x7bd81d*/
+    NiD3DTextureStage_ApplyFilterPreset(**(NiD3DTextureStage ***)(Unk070 + 0x24), *(_BYTE *)(v13 + 5) & 0xF); /*0x7bd82f*/
+    NiD3DTextureStage_ApplyAddressModePreset( /*0x7bd844*/
+      **(NiD3DTextureStage ***)(Unk070 + 0x24),
+      (*(unsigned __int16 *)(v13 + 4) >> 0xC) & 3);
+    if ( !(_BYTE)a5 && *(_DWORD *)(StageCount + 0x88) == 3 ) /*0x7bd857*/
     {
-      sub_76C910(*(_DWORD **)(*(_DWORD *)(Unk070 + 0x24) + 4), *(NiRenderedTexture **)(v11 + 0x7C));
-      sub_771640(*(_DWORD ***)(*(_DWORD *)(Unk070 + 0x24) + 4), *(_BYTE *)(v13 + 5) & 0xF);
-      sub_7715E0(*(_DWORD ***)(*(_DWORD *)(Unk070 + 0x24) + 4), (*(unsigned __int16 *)(v13 + 4) >> 0xC) & 3);
+      NiD3DTextureStage_SetTexture( /*0x7bd863*/
+        *(NiD3DTextureStage **)(*(_DWORD *)(Unk070 + 0x24) + 4),
+        *(NiRenderedTexture **)(StageCount + 0x7C));
+      NiD3DTextureStage_ApplyFilterPreset( /*0x7bd876*/
+        *(NiD3DTextureStage **)(*(_DWORD *)(Unk070 + 0x24) + 4),
+        *(_BYTE *)(v13 + 5) & 0xF);
+      NiD3DTextureStage_ApplyAddressModePreset( /*0x7bd88c*/
+        *(NiD3DTextureStage **)(*(_DWORD *)(Unk070 + 0x24) + 4),
+        (*(unsigned __int16 *)(v13 + 4) >> 0xC) & 3);
     }
   }
-  if ( v35 )
+  if ( v35 ) /*0x7bd896*/
   {
-    v32 = sub_75F9D0();
-    ((void (__thiscall *)(NiDX9RenderState *, int))v32->vtbl->SetAlpha)(v32, v36);
+    v32 = sub_75F9D0(); /*0x7bd89a*/
+    ((void (__thiscall *)(NiDX9RenderState *, int))v32->vtbl->SetAlpha)(v32, v36); /*0x7bd8ab*/
   }
-  a5 = (_DWORD *)Unk070;
-  if ( Unk070 )
-    ++*(_DWORD *)(Unk070 + 0x60);
-  sub_76CE40(&this->super.member.super.Passes, (NiD3DPass *)this->super.member.super.PassCount, (NiD3DPass **)&a5);
-  if ( Unk070 )
+  a5 = (NiD3DPass *)Unk070; /*0x7bd8af*/
+  if ( Unk070 ) /*0x7bd8b8*/
+    ++*(_DWORD *)(Unk070 + 0x60); /*0x7bd8ba*/
+  NiTArray_NiD3DPass_SetAt(&this->super.member.super.Passes, this->super.member.super.PassCount, &a5); /*0x7bd8d1*/
+  if ( Unk070 ) /*0x7bd8df*/
   {
-    if ( (*(_DWORD *)(Unk070 + 0x60))-- == 1 )
-      sub_7604D0((NiD3DPass *)Unk070);
+    if ( (*(_DWORD *)(Unk070 + 0x60))-- == 1 ) /*0x7bd8e1*/
+      NiD3DPass_ReleaseToPool((NiD3DPass *)Unk070); /*0x7bd8e8*/
   }
-  ++this->super.member.super.PassCount;
-  return 0;
+  ++this->super.member.super.PassCount; /*0x7bd8ed*/
+  return 0; /*0x7bd8f2*/
 }

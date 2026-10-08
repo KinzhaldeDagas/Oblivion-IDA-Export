@@ -1,1 +1,1 @@
-CBillboardLeaf
+struct CBillboardLeaf;

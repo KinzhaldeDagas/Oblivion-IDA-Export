@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x6EE130",
-    "line": "push    ecx",
+    "line": "push    ecx; Returns out = this * (1/divisor) through FaceGenMatrix_Scale. No zero/finite divisor guard here. FanControls precompute supplies vector length after its own assertion.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6EE131",
-    "line": "fld     [esp+4+arg_4]",
+    "line": "fld     [esp+4+divisor]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x6EE138",
-    "line": "mov     esi, [esp+8+arg_0]",
+    "line": "mov     esi, [esp+8+out]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,31 +49,31 @@
   },
   {
     "ea": "0x6EE147",
-    "line": "fstp    [esp+0Ch+arg_4]",
+    "line": "fstp    [esp+0Ch+divisor]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6EE14B",
-    "line": "fld     [esp+0Ch+arg_4]",
+    "line": "fld     [esp+0Ch+divisor]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x6EE14F",
-    "line": "fstp    [esp+0Ch+var_C]; float",
+    "line": "fstp    [esp+0Ch+scale]; scale",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6EE152",
-    "line": "push    esi; int",
+    "line": "push    esi; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6EE153",
-    "line": "call    sub_552310",
+    "line": "call    FaceGenMatrix_Scale; Matrix scalar multiply: out = this * scale. Dimensions and storage are initialized from the source matrix.",
     "mnemonic": "call",
     "size": 5
   },

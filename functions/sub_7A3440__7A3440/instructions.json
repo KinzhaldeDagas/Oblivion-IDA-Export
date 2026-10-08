@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x7A3440",
-    "line": "push    esi",
+    "line": "push    esi; Destroys one compact SIdvLeafTexture by releasing its filename only when the 28-byte small string is heap-backed.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A3441",
-    "line": "mov     esi, [esp+4+arg_0]",
+    "line": "mov     esi, [esp+4+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x7A344F",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

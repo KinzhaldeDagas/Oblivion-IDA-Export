@@ -43,18 +43,17 @@
 0x76E681: mov     [esp+1Ch+var_8], ecx
 0x76E685: jmp     short loc_76E694
 0x76E687: jmp     short loc_76E690
-0x76E689: align 10h
 0x76E690: mov     eax, [esp+1Ch+arg_0]
 0x76E694: mov     ecx, [edi+14h]
 0x76E697: movzx   edx, bp
 0x76E69A: movzx   eax, word ptr [eax+edx*2]
 0x76E69E: imul    eax, [esp+1Ch+var_8]
-0x76E6A3: push    ecx; Size
+0x76E6A3: push    ecx; byteCount
 0x76E6A4: lea     eax, [ebx+eax*4]
-0x76E6A7: push    eax; Src
-0x76E6A8: push    esi; Dst
+0x76E6A7: push    eax; source
+0x76E6A8: push    esi; destination
 0x76E6A9: add     ebp, 1
-0x76E6AC: call    _memcpy
+0x76E6AC: call    _memcpy;
 0x76E6B1: mov     edx, [edi+1Ch]
 0x76E6B4: add     esi, [edi+20h]
 0x76E6B7: add     [esp+28h+var_C], edx
@@ -86,10 +85,10 @@
 0x76E709: jbe     loc_76E7E7
 0x76E70F: nop
 0x76E710: mov     ecx, [edi+14h]
-0x76E713: push    ecx; Size
-0x76E714: push    ebx; Src
-0x76E715: push    esi; Dst
-0x76E716: call    _memcpy
+0x76E713: push    ecx; byteCount
+0x76E714: push    ebx; source
+0x76E715: push    esi; destination
+0x76E716: call    _memcpy;
 0x76E71B: mov     eax, [esp+28h+var_8]
 0x76E71F: movzx   ecx, word ptr [edi+8]
 0x76E723: mov     edx, [esp+28h+arg_0]

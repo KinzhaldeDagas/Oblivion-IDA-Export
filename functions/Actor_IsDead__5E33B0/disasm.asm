@@ -1,4 +1,4 @@
-0x5E33B0: cmp     [esp+arg_0], 0
+0x5E33B0: cmp     [esp+arg_0], 0; ODismemberment: Actor_IsDead vtable +0x198. Arg 0 treats dead states 1, 2, and essential protected state 6 as dead; arg 1 only treats 1/2 as dead.
 0x5E33B5: mov     eax, [ecx+0B0h]
 0x5E33BB: jz      short loc_5E33CC
 0x5E33BD: cmp     eax, 2

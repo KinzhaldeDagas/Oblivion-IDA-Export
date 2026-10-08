@@ -1,1 +1,1 @@
-NiBSPNode
+struct NiBSPNode;

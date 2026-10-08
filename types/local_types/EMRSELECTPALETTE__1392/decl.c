@@ -1,1 +1,5 @@
-EMRSELECTPALETTE
+struct EMRSELECTPALETTE
+{
+EMR emr;
+DWORD ihPal;
+};

@@ -1,25 +1,25 @@
 [
   {
     "ea": "0x5F4816",
-    "line": "mov     ecx, [esp+arg_10]",
+    "line": "mov     ecx, [esp+arg_10]; AVU decode: ingredient wortcraft Alchemy branch. Loads MagicCaster pointer from stack, subtracts 0x5C to recover owning Actor, pushes AV 0x13, then calls Actor_GetLuckModifiedBaseAV.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5F481A",
-    "line": "push    13h",
+    "line": "push    13h; actorValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F481C",
-    "line": "add     ecx, 0FFFFFFA4h",
+    "line": "add     ecx, 0FFFFFFA4h; this",
     "mnemonic": "add",
     "size": 3
   },
   {
     "ea": "0x5F481F",
-    "line": "call    Actor_GetLuckModifiedBaseAV",
+    "line": "call    Actor_GetLuckModifiedBaseAV; AVU hook site: wortcraft effective Alchemy. ECX is already owning Actor after MagicCaster-0x5C adjustment; stack arg is AV 0x13 Alchemy. Return is ST0 and callee cleans 4 bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x5F4838",
-    "line": "call    Calc_WortcraftAlchemyFactor",
+    "line": "call    Calc_WortcraftAlchemyFactor; AVU decode: Calc_WortcraftAlchemyFactor(effectiveAlchemy) returns fWortalchmult * effectiveAlchemy * fWortStrMult.",
     "mnemonic": "call",
     "size": 5
   },
@@ -81,6 +81,42 @@
     "ea": "0x5F483F",
     "line": "add     esp, 4",
     "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5F4842",
+    "line": "pop     edi; jumptable 005F475F default case, cases 1,4,7",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5F4843",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5F4844",
+    "line": "mov     al, 1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5F4846",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5F4847",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5F484A",
+    "line": "retn    10h",
+    "mnemonic": "retn",
     "size": 3
   }
 ]

@@ -53,7 +53,7 @@
 0x5F07DD: push    1
 0x5F07DF: mov     ecx, esi
 0x5F07E1: mov     dword ptr [eax+3Ch], 0
-0x5F07E8: call    ActiveEffect_Base_Remove
+0x5F07E8: call    ActiveEffect_Base_Remove; Verified termination API: sets bTerminated=1. When its flush flag is true, immediately invokes ActiveEffect_Base_ProcessEffect to run termination cleanup.
 0x5F07ED: mov     [esp+10h+var_1], 1
 0x5F07F2: mov     edi, [edi+4]
 0x5F07F5: test    edi, edi

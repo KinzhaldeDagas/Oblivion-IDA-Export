@@ -1,18 +1,18 @@
-char __userpurge sub_644050@<al>(TESPackage **this@<ecx>, double a2@<st1>, Actor *a3)
+double __userpurge sub_644050@<st0>(TESPackage **this@<ecx>, double a2@<st2>, double result@<st0>, Actor *a4)
 {
-  TESPackage *v4; // ecx
-  char v5; // al
+  TESPackage *v6; // ecx
+  char v7; // al
 
-  v4 = *(this + 2);
-  if ( !v4 || (sub_566DC0(v4, flt_A30634, a2, a3, 0, flt_A30634), v5) )
+  v6 = *(this + 2); /*0x644053*/
+  if ( !v6 /*0x644073*/
+    || (result = sub_566DC0(v6, result, kTerrainLODQuadRayDirectionZ, a2, a4, 0, kTerrainLODQuadRayDirectionZ), v7) )
   {
-    if ( ((*(this + 2))->members.packageFlags & 4) != 0 )
-      (*(void (__thiscall **)(TESPackage **, Actor *, int))&(*this)[6].members.type)(this, a3, 1);
-    return 0;
+    if ( ((*(this + 2))->members.packageFlags & 4) != 0 ) /*0x644097*/
+      (*(void (__thiscall **)(TESPackage **, Actor *, int))&(*this)[6].members.type)(this, a4, 1); /*0x6440a6*/
   }
   else
   {
-    (*(void (__thiscall **)(TESPackage **, Actor *, unsigned int))&(*this)[6].members.type)(this, a3, 0xFFFFFFFF);
-    return 0;
+    (*(void (__thiscall **)(TESPackage **, Actor *, unsigned int))&(*this)[6].members.type)(this, a4, 0xFFFFFFFF); /*0x644082*/
   }
+  return result; /*0x644084*/
 }

@@ -1,4 +1,4 @@
-0x68E966: mov     ecx, [esi+20h]
+0x68E966: mov     ecx, [esi+20h]; Verified target-death path: for actor targets, marks bTerminated unless the EffectSetting flag 0x10000000 suppresses death termination; then runs the common termination check.
 0x68E969: mov     edx, [ecx]
 0x68E96B: mov     eax, [edx+0Ch]
 0x68E96E: call    eax

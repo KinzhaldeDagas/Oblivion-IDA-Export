@@ -1,19 +1,36 @@
 {
-  "callees_count": 12,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_795ED0",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x795ED0",
+      "0x795FAF"
+    ],
+    [
+      "0x9CBE60",
+      "0x9CBE94"
+    ]
+  ],
+  "chunks_sha256": "c68ba05b8f1635d39f7fab5d4f01f0a66e3bb6270b5ee07712bdcb3ee0a718dc",
+  "comment_regular": "OBLIVION AUTHORITY (2026-08-30): Exception-safe uninitialized move of 0x10-byte vector owners. Constructs empty destinations, swaps begin/end/capacity ownership from each source, leaves sources empty, returns destinationFirst+count, and destroys the constructed prefix only on unwind. The prior noreturn annotation was false.",
+  "comment_repeatable": "OBLIVION AUTHORITY (2026-08-30): Exception-safe uninitialized move of 0x10-byte vector owners. Constructs empty destinations, swaps begin/end/capacity ownership from each source, leaves sources empty, returns destinationFirst+count, and destroys the constructed prefix only on unwind. The prior noreturn annotation was false.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "OB_stVector4_UninitializedMoveRange_010201A0",
   "end_ea": "0x795FAF",
-  "flags": 21521,
+  "evidence_confidence": "Unknown",
+  "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_795ED0",
+  "name": "OB_stVector4_UninitializedMoveRange_010201A0",
   "segment": ".text",
   "sha256": "8cf83c2d46ce4e509618696d08cf93862b7e42f609932ba2911fea25490d42cb",
   "size": 223,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x795ED0",
-  "type": "void __cdecl __noreturn(_DWORD *, _DWORD *, _DWORD *)",
-  "xrefs_from_count": 93,
+  "total_chunk_size": 275,
+  "type": "OB_stVector4_010201A0 *__cdecl(OB_stVector4_010201A0 *first, OB_stVector4_010201A0 *last, OB_stVector4_010201A0 *destinationFirst)",
+  "xrefs_from_count": 115,
   "xrefs_to_count": 3
 }

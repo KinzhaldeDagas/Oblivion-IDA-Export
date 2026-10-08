@@ -40,7 +40,7 @@
 0x6173B2: jnz     loc_617560; jumptable 00617362 cases 1,4,5
 0x6173B8: push    0
 0x6173BA: mov     ecx, ebx
-0x6173BC: call    sub_41A610
+0x6173BC: call    MagicItem_LoadVFXModels; MagicItem VFX model preload path. Walks spell art and effect-item VFX model references and asks the model loader to load/cache required art resources.
 0x6173C1: mov     al, [esp+14h+var_1]
 0x6173C5: pop     ebp
 0x6173C6: pop     ebx
@@ -71,7 +71,7 @@
 0x617411: jz      short loc_617440
 0x617413: push    edi
 0x617414: mov     ecx, esi
-0x617416: call    sub_615220
+0x617416: call    CombatController_ShouldHoldFireForAllies; Scroll/book cast path: ally-safety true aborts use and falls back to default combat behavior.
 0x61741B: test    al, al
 0x61741D: jnz     loc_617560; jumptable 00617362 cases 1,4,5
 0x617423: mov     ecx, [esi+3Ch]
@@ -91,7 +91,7 @@
 0x617453: mov     ecx, [ebp+64h]
 0x617456: push    0
 0x617458: add     ecx, 18h
-0x61745B: call    sub_41A610
+0x61745B: call    MagicItem_LoadVFXModels; MagicItem VFX model preload path. Walks spell art and effect-item VFX model references and asks the model loader to load/cache required art resources.
 0x617460: mov     al, [esp+14h+var_1]
 0x617464: pop     ebp
 0x617465: pop     ebx
@@ -114,12 +114,12 @@
 0x617491: push    eax
 0x617492: push    edi
 0x617493: mov     ecx, esi
-0x617495: call    sub_613BB0
+0x617495: call    CombatController_CanUseSpellAgainstCurrentTarget
 0x61749A: test    al, al
 0x61749C: jz      loc_617560; jumptable 00617362 cases 1,4,5
 0x6174A2: push    edi
 0x6174A3: mov     ecx, esi
-0x6174A5: call    sub_615220
+0x6174A5: call    CombatController_ShouldHoldFireForAllies; Spell cast path: ally-safety true prevents MagicCaster_CastMagicItem.
 0x6174AA: test    al, al
 0x6174AC: jnz     loc_617560; jumptable 00617362 cases 1,4,5
 0x6174B2: mov     ecx, [esp+14h+arg_4]
@@ -157,7 +157,7 @@
 0x61751C: jnz     short loc_617560; jumptable 00617362 cases 1,4,5
 0x61751E: mov     ecx, [edi]
 0x617520: push    0
-0x617522: call    sub_41A610
+0x617522: call    MagicItem_LoadVFXModels; MagicItem VFX model preload path. Walks spell art and effect-item VFX model references and asks the model loader to load/cache required art resources.
 0x617527: mov     al, [esp+14h+var_1]
 0x61752B: pop     ebp
 0x61752C: pop     ebx

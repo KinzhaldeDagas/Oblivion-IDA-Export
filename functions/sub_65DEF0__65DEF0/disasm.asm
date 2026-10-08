@@ -9,10 +9,10 @@
 0x65DF07: mov     ecx, [esi+5ACh]
 0x65DF0D: cmp     dword ptr [ecx], 0
 0x65DF10: jnz     short loc_65DF30
-0x65DF12: call    BSSimpleList_Clear
+0x65DF12: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x65DF17: mov     ecx, [esi+5ACh]
 0x65DF1D: push    ecx
-0x65DF1E: call    FormHeapFree
+0x65DF1E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x65DF23: add     esp, 4
 0x65DF26: mov     dword ptr [esi+5ACh], 0
 0x65DF30: pop     esi

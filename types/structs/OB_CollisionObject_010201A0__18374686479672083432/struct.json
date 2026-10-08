@@ -1,0 +1,54 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "OB_CollisionObject_010201A0",
+  "definition": "struct OB_CollisionObject_010201A0\n{\nint type; ///< 0 sphere, 1 capsule, 2 box in stock parser/export path.\nfloat position[3]; ///< Three floats.\nfloat dimensions[3]; ///< Sphere uses first component; capsule/box use additional dimensions. No rotation fields in 0x1C stride.\n}\n",
+  "id": 18374686479672083432,
+  "is_union": false,
+  "kind": "struct",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "0 sphere, 1 capsule, 2 box in stock parser/export path.",
+      "name": "type",
+      "offset": 0,
+      "offset_hex": "0x0",
+      "size": 4,
+      "type": "int"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Three floats.",
+      "name": "position",
+      "offset": 4,
+      "offset_hex": "0x4",
+      "size": 12,
+      "type": "float[3]"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Sphere uses first component; capsule/box use additional dimensions. No rotation fields in 0x1C stride.",
+      "name": "dimensions",
+      "offset": 16,
+      "offset_hex": "0x10",
+      "size": 12,
+      "type": "float[3]"
+    }
+  ],
+  "name": "OB_CollisionObject_010201A0",
+  "ordinal": 9732,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 28
+}

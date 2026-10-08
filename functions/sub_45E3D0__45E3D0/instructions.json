@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x45E3D0",
-    "line": "sub     esp, 118h",
+    "line": "sub     esp, 118h; MEF v56 load wrapper preserves native body/return and suspends auxiliary ID caches during clear/remap/population. Finally invalidates and releases suspension. Existing count/read/required-allocation error behavior is not relabeled as a new bool-abort protocol; caller465C28 remains unchanged.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x45E3E5",
-    "line": "mov     ebx, [esp+11Ch+arg_0]",
+    "line": "mov     ebx, [esp+11Ch+file]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x45E3F0",
-    "line": "mov     eax, [ebp+74h]",
+    "line": "mov     eax, [ebp+74h]; MEF PERF 2026-09-08: PERF-3/PERF-4 load begins by clearing both ID arrays and resetting used/nonzero counts, while retaining capacity. It repopulates all slots from file after load-order remapping. An auxiliary FormID index must invalidate/rebuild across this load; duplicate or zero remaps preserve first-index semantics.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -265,13 +265,13 @@
   },
   {
     "ea": "0x45E44E",
-    "line": "call    edx",
+    "line": "call    edx; MEF PERF 2026-09-08: Verified PERF-4 count-known loading: file callback reads the Numeric ID array count before entering the item loop; total resides at main-body[ESP+1Ch]. Current code nevertheless grows by fixed step at45E4CD rather than reserving total capacity. Callback completion/remaining-file validation must be sealed before trusting this count for preallocation.",
     "mnemonic": "call",
     "size": 2
   },
   {
     "ea": "0x45E450",
-    "line": "add     esp, 14h",
+    "line": "add     esp, 14h; MEF v56 numeric prefix observer preserves displaced ADDESP14/CMP and records only EAX==4 complete count reads from native BSFile read mode. Context is keyed by native frame; a new numeric prefix invalidates stale contexts for that reused frame. Source extent is queried without seeking via native CRT descriptor layout +GetFileSizeEx.",
     "mnemonic": "add",
     "size": 3
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x45E496",
-    "line": "jnb     short loc_45E4B3",
+    "line": "jnb     short loc_45E4B3; MEF PERF 2026-09-08: PERF-3 equality/lifetime constraint: invalid/missing load-order mappings become zero in the ID-array loader. Different serialized IDs can map to the same value; a rebuilt side index must preserve the first occurrence exactly, including zero, and must not silently compact the array.",
     "mnemonic": "jnb",
     "size": 2
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x45E4A1",
-    "line": "jz      short loc_45E4B3",
+    "line": "jz      short loc_45E4B3; MEF PERF 2026-09-08: PERF-3 equality/lifetime constraint: invalid/missing load-order mappings become zero in the ID-array loader. Different serialized IDs can map to the same value; a rebuilt side index must preserve the first occurrence exactly, including zero, and must not silently compact the array.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x45E4B3",
-    "line": "xor     eax, eax",
+    "line": "xor     eax, eax; MEF PERF 2026-09-08: PERF-3 equality/lifetime constraint: invalid/missing load-order mappings become zero in the ID-array loader. Different serialized IDs can map to the same value; a rebuilt side index must preserve the first occurrence exactly, including zero, and must not silently compact the array.",
     "mnemonic": "xor",
     "size": 2
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x45E4CD",
-    "line": "call    sub_452910",
+    "line": "call    NiTLargeArray_Resize32; MEF v56 reserve CALL bridge reads total atcalleeESP+24h and originalrequestESP+4, preserves registers withPUSHAD/POPAD, RET4. Verifies position=start+4*(index+1), count/extent and rounded-capacity arithmetic. Large buffer allocated/copied/zeroed privately, then published after snapshot/generation recheck. Refusal invokes original requested resize, never returns too-small capacity as success.",
     "mnemonic": "call",
     "size": 5
   },
@@ -751,13 +751,13 @@
   },
   {
     "ea": "0x45E53E",
-    "line": "call    eax",
+    "line": "call    eax; MEF PERF 2026-09-08: PERF-4 second count is read before the worldspace item loop (main-body[ESP+18h]); default growth1 still triggers repeated prefix copies45E5BD. No need to speculate a total count from loop progress; require a fully initialized validated count and checked4*count before reserve.",
     "mnemonic": "call",
     "size": 2
   },
   {
     "ea": "0x45E540",
-    "line": "xor     edi, edi",
+    "line": "xor     edi, edi; MEF v56 worldspace prefix observer preserves XOR EDI,EDI/ADDESP14 and captures the independently read count. Source proof requires native BSFile/430050 callback, open FILE, exact4-byte prefix and sufficient physical file extent. Malformed/unknown bounds disable optional bulk reservation.",
     "mnemonic": "xor",
     "size": 2
   },
@@ -1033,7 +1033,7 @@
   },
   {
     "ea": "0x45E5BD",
-    "line": "call    sub_452910",
+    "line": "call    NiTLargeArray_Resize32; MEF v56 worldspace reserve bridge uses totalcalleeESP+20h and same checked-reserve protocol as numeric. First growth can reserve final original-step-rounded capacity once. Source/callback/allocation refusal uses the original requested resize; no new silent LoadGame abort/status.",
     "mnemonic": "call",
     "size": 5
   },

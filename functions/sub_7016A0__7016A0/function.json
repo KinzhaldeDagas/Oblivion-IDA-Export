@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
-  "callers_count": 594,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 1457,
+  "chunks": [
+    [
+      "0x7016A0",
+      "0x7016C5"
+    ]
+  ],
+  "chunks_sha256": "c3e3d026451f453f1a42ebef7ce288f92a67d3c9fbdc2f13360d06969d0c1ef0",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "MEF PERF 2026-10-08: PERF-17 slot destructor: reads pointer from slot, decrements payload+4 and invokes deleting destructor only on zero count. Generic pointer-slot release, not specifically NiD3DVertexShader; prototype corrected to void** slot. Required for native array-header destruction compatibility.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7016A0",
+  "display_name": "NiPointerSlot_Release",
   "end_ea": "0x7016C5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7016A0",
+  "name": "NiPointerSlot_Release",
   "segment": ".text",
   "sha256": "c3e3d026451f453f1a42ebef7ce288f92a67d3c9fbdc2f13360d06969d0c1ef0",
   "size": 37,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7016A0",
-  "type": "void __thiscall(NiD3DVertexShader *this)",
+  "total_chunk_size": 37,
+  "type": "void __thiscall(void **slot)",
   "xrefs_from_count": 20,
   "xrefs_to_count": 1460
 }

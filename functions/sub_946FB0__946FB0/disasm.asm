@@ -217,7 +217,6 @@
 0x947264: test    al, al
 0x947266: jz      short loc_9472E5
 0x947268: jmp     short loc_947270
-0x94726A: align 10h
 0x947270: mov     ecx, [esp+70h+var_30]
 0x947274: mov     eax, [esp+70h+var_34]
 0x947278: and     ecx, 3FFFFFFFh
@@ -436,7 +435,6 @@
 0x947515: jle     short loc_947553
 0x947517: mov     ebp, [esp+70h+var_5C]
 0x94751B: jmp     short loc_947520
-0x94751D: align 10h
 0x947520: mov     ecx, [esp+70h+var_44]
 0x947524: mov     edx, [esp+70h+var_50]
 0x947528: mov     esi, [ecx+edi*4]

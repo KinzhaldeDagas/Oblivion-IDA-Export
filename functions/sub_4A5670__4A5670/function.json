@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 4,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_4A5670",
+  "chunks": [
+    [
+      "0x4A5670",
+      "0x4A56E5"
+    ],
+    [
+      "0x9B28C0",
+      "0x9B28EE"
+    ]
+  ],
+  "chunks_sha256": "5cef20c45dd16e312058796d5afdc0c8fac997c1def85af47402881660caf413",
+  "comment_regular": "Verified: copy/merge constructor copies TESRegionData base fields and EntryData list from source Weather data; this is not the RDWT parser.",
+  "comment_repeatable": "Verified: copy/merge constructor copies TESRegionData base fields and EntryData list from source Weather data; this is not the RDWT parser.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "TESRegionDataWeather_CopyFrom",
   "end_ea": "0x4A56E5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4A5670",
+  "name": "TESRegionDataWeather_CopyFrom",
   "segment": ".text",
   "sha256": "6444a3824eb3a230b50886a4d5f0a07cff6a12e48dd389570ec028d3df2ceb89",
   "size": 117,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4A5670",
-  "type": "_DWORD *__thiscall(_BYTE *this, int)",
-  "xrefs_from_count": 42,
+  "total_chunk_size": 163,
+  "type": "TESRegionDataWeather *__thiscall(TESRegionDataWeather *this, TESRegionDataWeather *source)",
+  "xrefs_from_count": 56,
   "xrefs_to_count": 1
 }

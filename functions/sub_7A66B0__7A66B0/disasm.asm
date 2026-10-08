@@ -1,4 +1,4 @@
-0x7A66B0: fld1
+0x7A66B0: fld1; Initializes a 0x40-byte row-major SpeedTree transform to identity.
 0x7A66B2: mov     eax, ecx
 0x7A66B4: fst     dword ptr [eax]
 0x7A66B6: fldz

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E8E80",
-    "line": "mov     edx, [ecx+20h]",
+    "line": "mov     edx, [ecx+20h]; Verified: iterates every connected-point list bucket and calls sub_67EDA0 on each node. That helper clears coordinate/temporary fields and masks the flag byte at +0x10; exact field meanings remain Unknown.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x4E8EA9",
-    "line": "mov     [esp+14h+var_8], eax",
+    "line": "mov     [esp+14h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -127,61 +127,61 @@
   },
   {
     "ea": "0x4E8EB0",
-    "line": "lea     eax, [esp+14h+var_C]",
+    "line": "lea     eax, [esp+14h+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4E8EB4",
-    "line": "push    eax",
+    "line": "push    eax; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E8EB5",
-    "line": "lea     ecx, [esp+18h+var_4]",
+    "line": "lea     ecx, [esp+18h+keyOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4E8EB9",
-    "line": "push    ecx",
+    "line": "push    ecx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E8EBA",
-    "line": "lea     edx, [esp+1Ch+var_8]",
+    "line": "lea     edx, [esp+1Ch+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4E8EBE",
-    "line": "push    edx",
+    "line": "push    edx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E8EBF",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E8EC1",
-    "line": "mov     [esp+20h+var_C], 0",
+    "line": "mov     [esp+20h+valueOut], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x4E8EC9",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E8ECE",
-    "line": "mov     esi, [esp+14h+var_C]",
+    "line": "mov     esi, [esp+14h+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -223,13 +223,13 @@
   },
   {
     "ea": "0x4E8EE1",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E8EE3",
-    "line": "call    sub_67EDA0",
+    "line": "call    GraphNode_ResetTransientSearchState; Verified resets graph-node scratch state: clears F/G/H at +0/+4/+8, predecessor at +0x0C, and masks flags at +0x10 with 0x68, preserving bits 0x08/0x20/0x40 while clearing the other transient bits.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x4E8EEF",
-    "line": "cmp     [esp+14h+var_8], 0",
+    "line": "cmp     [esp+14h+position], 0",
     "mnemonic": "cmp",
     "size": 5
   },

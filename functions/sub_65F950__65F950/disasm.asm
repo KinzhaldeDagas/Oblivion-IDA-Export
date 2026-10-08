@@ -30,16 +30,16 @@
 0x65F99C: mov     ecx, edi
 0x65F99E: call    sub_47AB80
 0x65F9A3: push    edi
-0x65F9A4: call    FormHeapFree
+0x65F9A4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x65F9A9: add     esp, 4
 0x65F9AC: mov     edi, [esi+5CCh]
 0x65F9B2: cmp     edi, ebx
 0x65F9B4: mov     [esi+5C8h], ebx
 0x65F9BA: jz      short loc_65F9CC
 0x65F9BC: mov     ecx, edi; this
-0x65F9BE: call    DisposeActorAnimData
+0x65F9BE: call    DisposeActorAnimData; Destroys ActorAnimData-owned state. Releases current/queued/cleanup idles; deactivates and releases the controller manager; deleting-destructs every +0x9C animation-map entry; frees the +0xB8 pending-KF linked list; clears/destroys the map; and nulls the accumulation node. Confirms map entries and pending-KF nodes are ActorAnimData-owned.
 0x65F9C3: push    edi
-0x65F9C4: call    FormHeapFree
+0x65F9C4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x65F9C9: add     esp, 4
 0x65F9CC: mov     [esi+5CCh], ebx
 0x65F9D2: mov     edi, [esi+5D0h]

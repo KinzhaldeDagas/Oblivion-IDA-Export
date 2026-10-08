@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x42C0E7",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x42C114",
-    "line": "mov     eax, [esi+1A4h]",
+    "line": "mov     eax, [esi+1A4h]; MEF PLAN 2026-09-07: Revalidated in current authoritative IDB. Filename cleanup iterates exactly owner+164h folderCount slots under nonNULL owner+1A4h and frees every pointer, then frees top array. It does not inspect cached bit20h or track initialized slots. Private builder needsNULL-initialized local slots/explicit initialized count and cannot publish partial arrays; NULL owner pointers make normal failure destruction safe.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x42C11E",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x42C138",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

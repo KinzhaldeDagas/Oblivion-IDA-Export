@@ -19,13 +19,13 @@
 0x6FE81D: jz      short loc_6FE83C
 0x6FE81F: mov     ecx, [eax-4]
 0x6FE822: lea     edi, [eax-4]
-0x6FE825: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x6FE825: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x6FE82A: push    ecx; int
 0x6FE82B: push    4; unsigned int
 0x6FE82D: push    eax; void *
 0x6FE82E: call    $LN21
 0x6FE833: push    edi
-0x6FE834: call    FormHeapFree
+0x6FE834: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6FE839: add     esp, 4
 0x6FE83C: mov     ecx, esi; this
 0x6FE83E: mov     [esp+1Ch+var_4], 0FFFFFFFFh
@@ -37,3 +37,12 @@
 0x6FE858: pop     esi
 0x6FE859: add     esp, 10h
 0x6FE85C: retn
+0x9C92C0: mov     ecx, [ebp-10h]; this
+0x9C92C3: jmp     j_??1NiPSysFieldModifier@@UAE@XZ; NiPSysFieldModifier::~NiPSysFieldModifier(void)
+0x9C92C8: mov     edx, [esp+arg_4]
+0x9C92CC: lea     eax, [edx-0Ch]
+0x9C92CF: mov     ecx, [edx-10h]
+0x9C92D2: xor     ecx, eax
+0x9C92D4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C92D9: mov     eax, offset stru_AF1BC8
+0x9C92DE: jmp     ___CxxFrameHandler3

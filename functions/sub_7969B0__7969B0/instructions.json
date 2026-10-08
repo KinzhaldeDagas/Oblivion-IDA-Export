@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7969B0",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; OBLIVION AUTHORITY (2026-08-30): CIndexedGeometry::DeleteIndexData frees every owned unsigned-short strip buffer, nulls the pointer slots, clears each inner pointer vector, then empties the per-LOD strip container.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x796A58",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -918,12 +918,6 @@
     "size": 2
   },
   {
-    "ea": "0x796B6E",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 2
-  },
-  {
     "ea": "0x796B70",
     "line": "mov     eax, [esp+1Ch+var_4]",
     "mnemonic": "mov",
@@ -931,19 +925,19 @@
   },
   {
     "ea": "0x796B74",
-    "line": "push    edi",
+    "line": "push    edi; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x796B75",
-    "line": "lea     ecx, [eax+edi]",
+    "line": "lea     ecx, [eax+edi]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x796B78",
-    "line": "call    sub_79B2F0",
+    "line": "call    OB_stVector4_CopyAssign_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded copy assignment for a 0x10-byte vector owner with four-byte elements. Handles self-assignment, empty source, capacity reuse, initialized/uninitialized tails, and reallocation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1021,7 +1015,7 @@
   },
   {
     "ea": "0x796B97",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

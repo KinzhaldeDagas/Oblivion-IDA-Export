@@ -1,19 +1,36 @@
 {
-  "callees_count": 18,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7C54E0",
+  "chunks": [
+    [
+      "0x7C54E0",
+      "0x7C55F7"
+    ],
+    [
+      "0x9B3B90",
+      "0x9B3BC1"
+    ]
+  ],
+  "chunks_sha256": "c75ddab9b8c5caaf1e0a940f7d295cdf3b223e57e81f409594bd6fee104b7826",
+  "comment_regular": "SkyShaderProperty vtable +0x5C RenderPass builder. In its ordinary state it constructs selector 0x17D (or 0x19C for state 1) and may add 0x19D. During water-reflection accumulation, AccumulateGeometry's SkyShader/SkyShaderProperty fast path directly draws only selector 0x17D and suppresses the other returned passes.",
+  "comment_repeatable": "SkyShaderProperty vtable +0x5C RenderPass builder. In its ordinary state it constructs selector 0x17D (or 0x19C for state 1) and may add 0x19D. During water-reflection accumulation, AccumulateGeometry's SkyShader/SkyShaderProperty fast path directly draws only selector 0x17D and suppresses the other returned passes.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "SkyShaderProperty_BuildRenderPasses",
   "end_ea": "0x7C55F7",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7C54E0",
+  "name": "SkyShaderProperty_BuildRenderPasses",
   "segment": ".text",
   "sha256": "d5e5546fe0a7cf820dc08440b27971d85db35e6e03abe98865336276d8c18f6a",
   "size": 279,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7C54E0",
-  "type": "_DWORD *__thiscall(_DWORD *this, int, int, int, int)",
-  "xrefs_from_count": 103,
+  "total_chunk_size": 328,
+  "type": "NiTList_NiProperty *__thiscall(BSShaderProperty *this, NiGeometry *geometry, int rendererState, _WORD *outContext, int emit)",
+  "xrefs_from_count": 122,
   "xrefs_to_count": 1
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x58E3B0",
-    "line": "sub     esp, 10h",
+    "line": "sub     esp, 10h; AchievementsNative evidence: navigation trait resolver handles prev/next/xlist cases by listindex and target eligibility; use for inventory-style row navigation semantics, not as proof of mouse wheel dispatch.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x58E3B9",
-    "line": "mov     edi, [esp+20h+arg_0]",
+    "line": "mov     edi, [esp+20h+maxFocus]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x58E41C",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -328,12 +328,6 @@
     "line": "jmp     short loc_58E450",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x58E44A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
   },
   {
     "ea": "0x58E450",
@@ -535,7 +529,7 @@
   },
   {
     "ea": "0x58E4AB",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Verified next candidate: listindex converted to integer; must be strictly > current and strictly < best. Equal-index siblings cannot be next from one another; equal-best candidates retain first encountered child-list candidate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -673,7 +667,7 @@
   },
   {
     "ea": "0x58E508",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -961,7 +955,7 @@
   },
   {
     "ea": "0x58E58C",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Verified prev candidate: integer listindex strictly < current and > best. Gaps in engine topic ordinals do not require compacting listindex for navigation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1045,13 +1039,13 @@
   },
   {
     "ea": "0x58E5BC",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x58E5BE",
-    "line": "call    sub_58E7D0",
+    "line": "call    Tile__RequestNavigationScroll; Verified descriptive name: resolves parent xscroll trait 0xFF5, then pulses resolved target user5 (0xFB3) with sentinel, selected tile xscroll value, then zero. Navigation resolution has scroll side effects; not a pure lookup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1141,7 +1135,7 @@
   },
   {
     "ea": "0x58E5E8",
-    "line": "mov     [esp+20h+arg_0], 0",
+    "line": "mov     [esp+20h+maxFocus], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -1267,7 +1261,7 @@
   },
   {
     "ea": "0x58E634",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1285,7 +1279,7 @@
   },
   {
     "ea": "0x58E63D",
-    "line": "mov     [esp+20h+arg_0], edi",
+    "line": "mov     [esp+20h+maxFocus], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1309,7 +1303,7 @@
   },
   {
     "ea": "0x58E647",
-    "line": "cmp     [esp+20h+arg_0], ebx",
+    "line": "cmp     [esp+20h+maxFocus], ebx",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -1321,19 +1315,19 @@
   },
   {
     "ea": "0x58E64D",
-    "line": "mov     esi, [esp+20h+arg_0]",
+    "line": "mov     esi, [esp+20h+maxFocus]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x58E651",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x58E653",
-    "line": "call    sub_58E7D0",
+    "line": "call    Tile__RequestNavigationScroll; Verified descriptive name: resolves parent xscroll trait 0xFF5, then pulses resolved target user5 (0xFB3) with sentinel, selected tile xscroll value, then zero. Navigation resolution has scroll side effects; not a pure lookup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1441,7 +1435,7 @@
   },
   {
     "ea": "0x58E684",
-    "line": "mov     [esp+20h+arg_0], 80000000h",
+    "line": "mov     [esp+20h+maxFocus], 80000000h",
     "mnemonic": "mov",
     "size": 8
   },
@@ -1453,19 +1447,19 @@
   },
   {
     "ea": "0x58E691",
-    "line": "push    eax",
+    "line": "push    eax; root",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58E692",
-    "line": "lea     eax, [esp+24h+arg_0]",
+    "line": "lea     eax, [esp+24h+maxFocus]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x58E696",
-    "line": "push    eax",
+    "line": "push    eax; maxFocus",
     "mnemonic": "push",
     "size": 1
   },
@@ -1495,13 +1489,13 @@
   },
   {
     "ea": "0x58E6A3",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x58E6A5",
-    "line": "call    sub_57DA90",
+    "line": "call    InterfaceManager__ScanForMaxFocus; AchievementsNative evidence: default UI hit-test recursively scans visible/non-hidden target tiles, chooses highest depth, and tie-breaks list items by lower listindex; use active/mouseover tile evidence before cursor-sprite coordinate fallbacks.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1567,7 +1561,7 @@
   },
   {
     "ea": "0x58E6C2",
-    "line": "jp      loc_58E772",
+    "line": "jp      loc_58E772; Verified explicit navigation link: follows action opcode0x7EB and reference crosslinks to source Value, writes source trait through output pointer and returns source owner Tile. Does not reinterpret the numeric value as a Tile address.",
     "mnemonic": "jp",
     "size": 6
   },
@@ -1585,7 +1579,7 @@
   },
   {
     "ea": "0x58E6CD",
-    "line": "mov     [esp+20h+arg_0], 0",
+    "line": "mov     [esp+20h+maxFocus], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -1717,7 +1711,7 @@
   },
   {
     "ea": "0x58E71D",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1735,7 +1729,7 @@
   },
   {
     "ea": "0x58E726",
-    "line": "mov     [esp+20h+arg_0], edi",
+    "line": "mov     [esp+20h+maxFocus], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1759,7 +1753,7 @@
   },
   {
     "ea": "0x58E730",
-    "line": "cmp     [esp+20h+arg_0], ebx",
+    "line": "cmp     [esp+20h+maxFocus], ebx",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -1831,7 +1825,7 @@
   },
   {
     "ea": "0x58E75A",
-    "line": "mov     [esp+20h+arg_0], 80000000h",
+    "line": "mov     [esp+20h+maxFocus], 80000000h",
     "mnemonic": "mov",
     "size": 8
   },
@@ -1849,7 +1843,7 @@
   },
   {
     "ea": "0x58E768",
-    "line": "lea     ecx, [esp+24h+arg_0]",
+    "line": "lea     ecx, [esp+24h+maxFocus]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1867,7 +1861,7 @@
   },
   {
     "ea": "0x58E772",
-    "line": "mov     ecx, [ecx+10h]",
+    "line": "mov     ecx, [ecx+10h]; Verified explicit navigation link: follows action opcode0x7EB and reference crosslinks to source Value, writes source trait through output pointer and returns source owner Tile. Does not reinterpret the numeric value as a Tile address.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -2017,7 +2011,7 @@
   },
   {
     "ea": "0x58E7B1",
-    "line": "mov     edx, [esp+20h+arg_4]",
+    "line": "mov     edx, [esp+20h+resolvedTrait]",
     "mnemonic": "mov",
     "size": 4
   },

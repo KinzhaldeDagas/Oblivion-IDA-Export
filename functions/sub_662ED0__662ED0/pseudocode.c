@@ -1,8 +1,4 @@
-OSGlobals *sub_662ED0()
+void __cdecl sub_662ED0()
 {
-  OSGlobals *result; // eax
-
-  result = OSGlobals;
-  OSGlobals->exitToMainMenu = 1;
-  return result;
+  MEMORY[0xB33398]->exitToMainMenu = 1; /*0x662ed5*/
 }

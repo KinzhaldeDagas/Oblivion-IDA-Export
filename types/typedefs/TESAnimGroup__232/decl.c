@@ -1,1 +1,1 @@
-TESAnimGroup
+struct TESAnimGroup;

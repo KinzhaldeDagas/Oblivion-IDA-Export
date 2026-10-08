@@ -1,5 +1,5 @@
-0x4F8B90: mov     ecx, [esp+arg_4]
-0x4F8B94: call    TESObjectCELL_GetOwner
+0x4F8B90: mov     ecx, [esp+cell]; cell
+0x4F8B94: call    TESObjectCELL_GetOwner; Verified Oblivion getter: returns only the direct XOWN/ExtraOwnership form stored in the cell extra list at cell+8. Unlike Fallout TESObjectCELL::GetOwner, it does not fall back to an encounter-zone owner.
 0x4F8B99: mov     ecx, [esp+arg_8]
 0x4F8B9D: cmp     eax, ecx
 0x4F8B9F: mov     eax, [esp+arg_C]

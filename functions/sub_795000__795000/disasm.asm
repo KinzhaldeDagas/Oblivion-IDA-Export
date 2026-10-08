@@ -1,4 +1,4 @@
-0x795000: mov     eax, [esp+arg_0]
+0x795000: mov     eax, [esp+count]; OBLIVION AUTHORITY (2026-08-30): Initializes raw storage for a 4-byte-element vector used here by CIndexedGeometry triangle counts/colors. Resets the triplet, checks max_size, allocates count*4, and returns success.
 0x795004: push    esi
 0x795005: mov     esi, ecx
 0x795007: xor     ecx, ecx
@@ -12,7 +12,7 @@
 0x795019: retn    4
 0x79501C: cmp     eax, 0FFFFFFFFh
 0x79501F: jbe     short loc_795026
-0x795021: call    sub_790B90
+0x795021: call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error("vector<T> too long") and throws; used by multiple element specializations after max_size checks.
 0x795026: push    edi
 0x795027: lea     edi, ds:0[eax*4]
 0x79502E: push    edi; Size

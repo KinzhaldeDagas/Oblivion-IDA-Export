@@ -7,9 +7,9 @@
 0x526A3E: jb      short loc_526A4E
 0x526A40: movzx   ecx, word ptr [esi+0Eh]
 0x526A44: add     ecx, edi
-0x526A46: push    ecx
-0x526A47: mov     ecx, esi
-0x526A49: call    sub_523B10
+0x526A46: push    ecx; capacity
+0x526A47: mov     ecx, esi; self
+0x526A49: call    NiTObjectArray_Resize16
 0x526A4E: mov     edx, [esp+8+arg_0]
 0x526A52: push    edx
 0x526A53: push    edi

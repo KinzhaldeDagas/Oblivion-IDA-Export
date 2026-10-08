@@ -1,14 +1,14 @@
 0x739A00: sub     esp, 24h
 0x739A03: push    ebx
 0x739A04: push    esi
-0x739A05: mov     esi, [esp+2Ch+arg_0]
+0x739A05: mov     esi, [esp+2Ch+stream]
 0x739A09: mov     ebx, ecx
-0x739A0B: push    esi
+0x739A0B: push    esi; stream
 0x739A0C: mov     [esp+30h+var_10], ebx
-0x739A10: call    sub_7201B0
+0x739A10: call    NiTriShapeData_Save; Save NiTriShapeData triangle indices and serialize each shared-normal entry as a UInt16 count followed by that entry's UInt16 vertex indices.
 0x739A15: mov     al, [ebx+58h]
 0x739A18: push    1
-0x739A1A: lea     ecx, [esp+30h+arg_0]
+0x739A1A: lea     ecx, [esp+30h+stream]
 0x739A1E: push    ecx
 0x739A1F: mov     [esp+34h+var_21], al
 0x739A23: mov     eax, [esi+220h]
@@ -17,12 +17,12 @@
 0x739A2F: push    edx
 0x739A30: push    eax
 0x739A31: mov     eax, [eax+8]
-0x739A34: mov     [esp+40h+arg_0], 1
+0x739A34: mov     [esp+40h+stream], 1
 0x739A3C: call    eax
 0x739A3E: movzx   ecx, word ptr [ebx+6Ah]
 0x739A42: mov     eax, [esi+220h]
 0x739A48: push    1
-0x739A4A: lea     edx, [esp+44h+arg_0]
+0x739A4A: lea     edx, [esp+44h+stream]
 0x739A4E: push    edx
 0x739A4F: mov     [esp+48h+var_1C], ecx
 0x739A53: mov     edx, [eax+8]
@@ -30,7 +30,7 @@
 0x739A58: lea     ecx, [esp+4Ch+var_1C]
 0x739A5C: push    ecx
 0x739A5D: push    eax
-0x739A5E: mov     [esp+54h+arg_0], 4
+0x739A5E: mov     [esp+54h+stream], 4
 0x739A66: call    edx
 0x739A68: xor     eax, eax
 0x739A6A: add     esp, 28h
@@ -50,14 +50,14 @@
 0x739A94: mov     [esp+34h+var_20], 0
 0x739A9C: mov     eax, [esi+220h]
 0x739AA2: push    1
-0x739AA4: lea     ecx, [esp+38h+arg_0]
+0x739AA4: lea     ecx, [esp+38h+stream]
 0x739AA8: push    ecx
 0x739AA9: push    2
 0x739AAB: lea     edx, [esp+40h+var_20]
 0x739AAF: push    edx
 0x739AB0: push    eax
 0x739AB1: mov     eax, [eax+8]
-0x739AB4: mov     [esp+48h+arg_0], 2
+0x739AB4: mov     [esp+48h+stream], 2
 0x739ABC: call    eax
 0x739ABE: add     esp, 14h
 0x739AC1: cmp     word ptr [esp+34h+var_20], 0
@@ -73,18 +73,18 @@
 0x739AE6: setnz   cl
 0x739AE9: lea     edx, [esp+38h+var_8]
 0x739AED: push    edx
-0x739AEE: mov     byte ptr [esp+3Ch+arg_0], cl
+0x739AEE: mov     byte ptr [esp+3Ch+stream], cl
 0x739AF2: mov     [esp+3Ch+var_14], eax
 0x739AF6: mov     eax, [esi+220h]
 0x739AFC: mov     edx, [eax+8]
 0x739AFF: push    1
-0x739B01: lea     ecx, [esp+40h+arg_0]
+0x739B01: lea     ecx, [esp+40h+stream]
 0x739B05: push    ecx
 0x739B06: push    eax
 0x739B07: mov     [esp+48h+var_8], 1
 0x739B0F: call    edx
 0x739B11: add     esp, 14h
-0x739B14: cmp     byte ptr [esp+34h+arg_0], 0
+0x739B14: cmp     byte ptr [esp+34h+stream], 0
 0x739B19: jz      short loc_739B3D
 0x739B1B: xor     ebp, ebp
 0x739B1D: cmp     word ptr [esp+34h+var_20], bp

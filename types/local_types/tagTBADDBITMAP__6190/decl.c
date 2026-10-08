@@ -1,1 +1,5 @@
-tagTBADDBITMAP
+struct tagTBADDBITMAP
+{
+HINSTANCE hInst;
+UINT_PTR_0 nID;
+};

@@ -1,1 +1,1 @@
-ParallaxShader
+struct ParallaxShader;

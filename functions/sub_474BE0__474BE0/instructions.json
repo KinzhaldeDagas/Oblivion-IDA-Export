@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x474BE0",
-    "line": "push    esi",
+    "line": "push    esi; Native first-person source-sync helper. Resolves encodedKey in this ActorAnimData, rejects single map entries through vtable +0x0C, finds the first case-sensitive last-backslash suffix match in an AnimSequenceMultiple, and calls ActorAnimData_PlaySequence. Returns zero on any miss.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x474BE2",
-    "line": "mov     edi, [esp+8+arg_4]",
+    "line": "mov     edi, [esp+8+encodedKey]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x474BE6",
-    "line": "cmp     di, 0FFh",
+    "line": "cmp     di, 0FFh; Only the low 16 bits are the encoded animation key; native sentinel group 0x00FF is rejected before map lookup.",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x474BF5",
-    "line": "lea     eax, [esp+8+arg_4]",
+    "line": "lea     eax, [esp+8+encodedKey]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x474BFB",
-    "line": "call    sub_470960",
+    "line": "call    ActorAnimData_FindAnimMapEntry; CustomAnimSupport decode: anim-map lookup helper used by playback, validators, and save/load restore to test an encoded group key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x474C05",
-    "line": "mov     ebx, [esp+0Ch+arg_4]",
+    "line": "mov     ebx, [esp+0Ch+encodedKey]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x474C10",
-    "line": "call    eax",
+    "line": "call    eax; Virtual +0x0C entry-kind predicate: AnimSequenceSingle returns true and is rejected; AnimSequenceMultiple returns false and is eligible for basename sync.",
     "mnemonic": "call",
     "size": 2
   },
@@ -127,25 +127,25 @@
   },
   {
     "ea": "0x474C16",
-    "line": "mov     ecx, [esp+0Ch+arg_0]",
+    "line": "mov     ecx, [esp+0Ch+sourceSequence]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x474C1A",
-    "line": "push    ecx",
+    "line": "push    ecx; sourceSequence",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x474C1B",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x474C1D",
-    "line": "call    sub_470C40",
+    "line": "call    AnimSequenceMultiple_FindBySourceBasename; Multiple-entry-only source match. Selection is first list-order candidate with exact case-sensitive final-backslash suffix equality.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,31 +193,31 @@
   },
   {
     "ea": "0x474C2E",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; slotSelector",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x474C30",
-    "line": "push    edi",
+    "line": "push    edi; encodedKey",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x474C31",
-    "line": "push    eax",
+    "line": "push    eax; sequence",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x474C32",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x474C34",
-    "line": "call    sub_474530",
+    "line": "call    ActorAnimData_PlaySequence; Matched first-person sequence is played directly, bypassing ActorAnimData_PlayEncodedGroup/random selection.",
     "mnemonic": "call",
     "size": 5
   },

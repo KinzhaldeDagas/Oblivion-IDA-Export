@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7844A0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Oblivion compact stBezierSpline control-curve sampler. Constructs a 2D result, clamps percent to [0,1], returns the terminal control point at the final segment, otherwise cubic-interpolates four splinePoints records. Sole caller is CreateEvenlySpacedPoints.",
     "mnemonic": "push",
     "size": 2
   },
@@ -103,19 +103,19 @@
   },
   {
     "ea": "0x7844CF",
-    "line": "mov     esi, [esp+54h+arg_0]",
+    "line": "mov     esi, [esp+54h+result]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7844D3",
-    "line": "push    2",
+    "line": "push    2; size",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7844D5",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x7844DB",
-    "line": "call    sub_78E570",
+    "line": "call    OB_stVec_ctor_size_010201A0; Oblivion stVec(size) constructor: zeros all five float slots, clamps only sizes greater than 5 down to 5, and stores the resulting logical size. Exact body corroborated by RT4.1 Vec.cpp.",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x78451A",
-    "line": "fld     [esp+54h+arg_4]",
+    "line": "fld     [esp+54h+percent]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -265,13 +265,13 @@
   },
   {
     "ea": "0x78452D",
-    "line": "fstp    [esp+54h+arg_4]",
+    "line": "fstp    [esp+54h+percent]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x784531",
-    "line": "fld     [esp+54h+arg_4]",
+    "line": "fld     [esp+54h+percent]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x784544",
-    "line": "fstp    [esp+54h+arg_4]",
+    "line": "fstp    [esp+54h+percent]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -331,19 +331,19 @@
   },
   {
     "ea": "0x784553",
-    "line": "fmul    [esp+54h+arg_4]",
+    "line": "fmul    [esp+54h+percent]",
     "mnemonic": "fmul",
     "size": 4
   },
   {
     "ea": "0x784557",
-    "line": "fstp    [esp+54h+arg_4]",
+    "line": "fstp    [esp+54h+percent]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x78455B",
-    "line": "fld     [esp+54h+arg_4]",
+    "line": "fld     [esp+54h+percent]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x784563",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x7845C1",
-    "line": "fld     [esp+54h+arg_4]",
+    "line": "fld     [esp+54h+percent]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -727,7 +727,7 @@
   },
   {
     "ea": "0x784622",
-    "line": "fstp    [esp+58h+var_58]; float",
+    "line": "fstp    [esp+58h+t]; t",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -739,49 +739,49 @@
   },
   {
     "ea": "0x784628",
-    "line": "push    ecx",
+    "line": "push    ecx; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x784629",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x78462B",
-    "line": "call    sub_784000",
+    "line": "call    OB_stVector_stVec_At_010201A0; Oblivion checked accessor for the compact 16-byte vector of 0x18-byte stVec elements. Validates index against (end-begin)/0x18 and returns begin + index*0x18.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x784630",
-    "line": "push    eax; int",
+    "line": "push    eax; p3",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x784631",
-    "line": "push    ebx",
+    "line": "push    ebx; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x784632",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x784634",
-    "line": "call    sub_784000",
+    "line": "call    OB_stVector_stVec_At_010201A0; Oblivion checked accessor for the compact 16-byte vector of 0x18-byte stVec elements. Validates index against (end-begin)/0x18 and returns begin + index*0x18.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x784639",
-    "line": "push    eax; int",
+    "line": "push    eax; p2",
     "mnemonic": "push",
     "size": 1
   },
@@ -793,25 +793,25 @@
   },
   {
     "ea": "0x78463D",
-    "line": "push    edx",
+    "line": "push    edx; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78463E",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x784640",
-    "line": "call    sub_784000",
+    "line": "call    OB_stVector_stVec_At_010201A0; Oblivion checked accessor for the compact 16-byte vector of 0x18-byte stVec elements. Validates index against (end-begin)/0x18 and returns begin + index*0x18.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x784645",
-    "line": "push    eax; int",
+    "line": "push    eax; p1",
     "mnemonic": "push",
     "size": 1
   },
@@ -823,25 +823,25 @@
   },
   {
     "ea": "0x784649",
-    "line": "push    eax",
+    "line": "push    eax; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78464A",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x78464C",
-    "line": "call    sub_784000",
+    "line": "call    OB_stVector_stVec_At_010201A0; Oblivion checked accessor for the compact 16-byte vector of 0x18-byte stVec elements. Validates index against (end-begin)/0x18 and returns begin + index*0x18.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x784651",
-    "line": "push    eax; int",
+    "line": "push    eax; p0",
     "mnemonic": "push",
     "size": 1
   },
@@ -853,7 +853,7 @@
   },
   {
     "ea": "0x784656",
-    "line": "push    ecx; int",
+    "line": "push    ecx; result",
     "mnemonic": "push",
     "size": 1
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x784659",
-    "line": "call    sub_783E70",
+    "line": "call    OB_StSpline_CubicBezierInterpolate2D_010201A0; Oblivion cubic Bezier interpolation for the first two components of four stVec control records, implemented by de Casteljau lerps and returned as a 2D stVec. Corroborated by RT4.1 IdvSpline.cpp SplineInterpolate after binary observation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -937,7 +937,7 @@
   },
   {
     "ea": "0x78467D",
-    "line": "lea     ecx, [esp+54h+var_24]; void *",
+    "line": "lea     ecx, [esp+54h+var_24]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -949,13 +949,13 @@
   },
   {
     "ea": "0x784684",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x784689",
-    "line": "fld     [esp+54h+arg_4]",
+    "line": "fld     [esp+54h+percent]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1072,5 +1072,89 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CAF10",
+    "line": "mov     eax, [ebp-34h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAF13",
+    "line": "and     eax, 1",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAF16",
+    "line": "jz      locret_9CAF28",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9CAF1C",
+    "line": "and     dword ptr [ebp-34h], 0FFFFFFFEh",
+    "mnemonic": "and",
+    "size": 4
+  },
+  {
+    "ea": "0x9CAF20",
+    "line": "mov     ecx, [ebp+4]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAF23",
+    "line": "jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CAF28",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CAF29",
+    "line": "mov     edx, [esp+percent]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CAF2D",
+    "line": "lea     eax, [edx-44h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAF30",
+    "line": "mov     ecx, [edx-48h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAF33",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CAF35",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CAF3A",
+    "line": "mov     eax, offset stru_AF353C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CAF3F",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x66C200",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; Reinitializes post-character-generation skill progression: resets skill-increase statistics/buckets, recomputes required progress for all 21 skills, clears native skill progress and specialization counters, then replays deferred chargen usage. Major/minor behavior during replay comes from the same TESClass seven-slot predicate.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -37,19 +37,19 @@
   },
   {
     "ea": "0x66C209",
-    "line": "mov     dword ptr [esi+660h], 0",
+    "line": "mov     dword ptr [esi+660h], 0; Start chargen reclassification: reset the skill-increase misc statistic and current attribute-bonus bucket before replay.",
     "mnemonic": "mov",
     "size": 10
   },
   {
     "ea": "0x66C213",
-    "line": "call    sub_65FBB0",
+    "line": "call    Player_ConsumeOldestAttributeBonusBucket; Consumes and frees the oldest (tail) attribute-bonus bucket after a player level-up, then ensures a current bucket remains available. New buckets are pushed at the front, so pending levels are resolved FIFO.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x66C218",
-    "line": "xor     edi, edi",
+    "line": "xor     edi, edi; Rebuild requiredSkillExp for all 21 native skills using the final class's specialization and seven-major membership.",
     "mnemonic": "xor",
     "size": 2
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x66C223",
-    "line": "call    ActorValue_GetAVFromGroupOffset",
+    "line": "call    ActorValue_GetAVFromGroupOffset; mwMediumArmor: Oblivion group 2 maps skill offset to actor value by adding 0x0C. OpenMW/Morrowind skill index 2 is MediumArmor, but Oblivion offset 2 becomes actor value 0x0E (Blade). Do not pass Morrowind skill indexes directly through this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -85,19 +85,19 @@
   },
   {
     "ea": "0x66C22B",
-    "line": "push    eax; float",
+    "line": "push    eax; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x66C22C",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x66C22E",
-    "line": "call    sub_663C50",
+    "line": "call    Player_RecalculateRequiredSkillExperience; Skill-use requirement recalculation evaluates the curve with the raw skill level, including level 0; only an exactly-zero computed result is replaced with 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -121,13 +121,13 @@
   },
   {
     "ea": "0x66C23B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x66C23D",
-    "line": "call    sub_668030",
+    "line": "call    Player_ClearAllSkillProgress; Clear all accumulated skillExp[21] before replaying the deferred chargen-use totals under the final class.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x66C244",
-    "line": "mov     [esi+5B8h], ax",
+    "line": "mov     [esi+5B8h], ax; Reset the packed Combat and Magic specialization advance counters before replaying deferred chargen skill use; Stealth is reset separately at 0x66C24B.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x66C251",
-    "line": "mov     edi, 0Ch",
+    "line": "mov     edi, 0Ch; Replay each of the 21 deferred chargen progress totals from PlayerCharacter::deferredCharGenSkillUsage.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x66C259",
-    "line": "call    ActorValue_GetGroupOffsetFromAV",
+    "line": "call    ActorValue_GetGroupOffsetFromAV; RealArenaTraining fidelity pass: ActorValue_GetGroupOffsetFromAV(group, actorValue). Player skill-progress code calls this with group 2 before indexing player skillExp/requiredSkillExp.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x66C28D",
-    "line": "jp      short loc_66C29F",
+    "line": "jp      short loc_66C29F; Replay in chunks no larger than 1.0 progress. This permits repeated threshold checks and skill-level side effects for large deferred totals.",
     "mnemonic": "jp",
     "size": 2
   },
@@ -361,13 +361,13 @@
   },
   {
     "ea": "0x66C2BD",
-    "line": "call    ActorValue_GetGroupOffsetFromAV",
+    "line": "call    ActorValue_GetGroupOffsetFromAV; RealArenaTraining fidelity pass: ActorValue_GetGroupOffsetFromAV(group, actorValue). Player skill-progress code calls this with group 2 before indexing player skillExp/requiredSkillExp.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x66C2C2",
-    "line": "mov     ecx, ds:0B33A98h",
+    "line": "mov     ecx, ds:0B33A98h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -379,13 +379,13 @@
   },
   {
     "ea": "0x66C2CB",
-    "line": "push    eax",
+    "line": "push    eax; skillIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x66C2CC",
-    "line": "call    TESDataHandler_GetTESSkillByCode",
+    "line": "call    TESDataHandler_GetTESSkillByCode; Return one of exactly 21 inline Oblivion TESSkill records. Reject skillIndex > 20; otherwise return TESDataHandler+0xD8+(skillIndex*0x60).",
     "mnemonic": "call",
     "size": 5
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x66C2EE",
-    "line": "call    ActorValue_GetGroupOffsetFromAV",
+    "line": "call    ActorValue_GetGroupOffsetFromAV; RealArenaTraining fidelity pass: ActorValue_GetGroupOffsetFromAV(group, actorValue). Player skill-progress code calls this with group 2 before indexing player skillExp/requiredSkillExp.",
     "mnemonic": "call",
     "size": 5
   },
@@ -589,7 +589,7 @@
   },
   {
     "ea": "0x66C333",
-    "line": "call    ActorValue_GetGroupOffsetFromAV",
+    "line": "call    ActorValue_GetGroupOffsetFromAV; RealArenaTraining fidelity pass: ActorValue_GetGroupOffsetFromAV(group, actorValue). Player skill-progress code calls this with group 2 before indexing player skillExp/requiredSkillExp.",
     "mnemonic": "call",
     "size": 5
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x66C351",
-    "line": "call    Actor_GetBaseClass",
+    "line": "call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x66C35A",
-    "line": "mov     eax, [ebp+2Ch]",
+    "line": "mov     eax, [ebp+2Ch]; Use TESSkill_Data::actorValue to fetch the rebuilt requirement belonging to this skill.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -703,7 +703,7 @@
   },
   {
     "ea": "0x66C36E",
-    "line": "call    ActorValue_GetGroupOffsetFromAV",
+    "line": "call    ActorValue_GetGroupOffsetFromAV; RealArenaTraining fidelity pass: ActorValue_GetGroupOffsetFromAV(group, actorValue). Player skill-progress code calls this with group 2 before indexing player skillExp/requiredSkillExp.",
     "mnemonic": "call",
     "size": 5
   },
@@ -775,49 +775,49 @@
   },
   {
     "ea": "0x66C39B",
-    "line": "jp      short loc_66C3A9",
+    "line": "jp      short loc_66C3A9; The replay uses the same strict accumulated-progress > required test as live skill use; any resulting major/non-major accounting occurs in Player_SkillLevelIncrease.",
     "mnemonic": "jp",
     "size": 2
   },
   {
     "ea": "0x66C39D",
-    "line": "push    0",
+    "line": "push    0; showFeedback",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x66C39F",
-    "line": "push    0",
+    "line": "push    0; skipProgressConsumption",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x66C3A1",
-    "line": "push    ebp",
+    "line": "push    ebp; skill",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x66C3A2",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x66C3A4",
-    "line": "call    Player_SkillLevelIncrease",
+    "line": "call    Player_SkillLevelIncrease; Single Oblivion skill-level increase. Optionally consume exactly one old requirement, increment the base skill, recalculate its next requirement, update universal counters/buckets, and enter the level-progress branch only for a strict TESClass major match.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x66C3A9",
-    "line": "push    edi; a2",
+    "line": "push    edi; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x66C3AA",
-    "line": "call    sub_57A6F0",
+    "line": "call    UI_UpdateActorValueDisplays; UI_UpdateActorValueDisplays(actorValue), called by player base-AV setters/modifiers after changing base form values.",
     "mnemonic": "call",
     "size": 5
   },

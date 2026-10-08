@@ -1,5 +1,5 @@
-0x5BCDD0: push    ebx
-0x5BCDD1: mov     ebx, [esp+4+arg_0]
+0x5BCDD0: push    ebx; Verified aPortable: ID >=4 writes InterfaceManager+0xB0 = ID + MessageMenu+0x60 - 4 then closes message. Constructor slots 34..58 hold ten buttons, +5C callback and +60 base index. Fallout MessageMenu::DoClick 8256B008 likewise publishes result then invokes callback/clears queue; Oblivion defers callback via destructor and InterfaceManager+0xB4.
+0x5BCDD1: mov     ebx, [esp+4+buttonID]
 0x5BCDD5: cmp     ebx, 2
 0x5BCDD8: push    edi
 0x5BCDD9: mov     edi, ecx

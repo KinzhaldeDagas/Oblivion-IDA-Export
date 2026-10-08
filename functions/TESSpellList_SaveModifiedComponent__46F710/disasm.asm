@@ -1,40 +1,40 @@
 0x46F710: sub     esp, 10h
-0x46F713: test    byte ptr [esp+10h+arg_0], 20h
+0x46F713: test    byte ptr [esp+10h+changeMask], 20h
 0x46F718: push    edi
 0x46F719: mov     edi, ecx
 0x46F71B: jz      loc_46F8CE
 0x46F721: cmp     byte ptr ds:0B05BACh, 0
 0x46F728: mov     ecx, ds:0B33B00h
-0x46F72E: mov     [esp+14h+var_4], 0
+0x46F72E: mov     [esp+14h+source], 0
 0x46F736: mov     eax, [ecx+14h]
 0x46F739: mov     [esp+14h+var_C], 0
 0x46F741: mov     [esp+14h+var_10], eax
 0x46F745: jz      short loc_46F74B
 0x46F747: mov     [esp+14h+var_10], eax
-0x46F74B: call    sub_45A170
+0x46F74B: call    TESSaveLoadGame_UseSaveGameBlocks
 0x46F750: test    al, al
 0x46F752: jz      short loc_46F787
-0x46F754: mov     ecx, ds:0B33B00h
-0x46F75A: push    4; Size
+0x46F754: mov     ecx, ds:0B33B00h; self
+0x46F75A: push    4; byteCount
 0x46F75C: lea     eax, [esp+18h+Src]
-0x46F760: push    eax; Src
+0x46F760: push    eax; source
 0x46F761: mov     [esp+1Ch+Src], 4B4F4C42h
 0x46F769: call    SaveLoad_SaveData
-0x46F76E: mov     ecx, ds:0B33B00h
+0x46F76E: mov     ecx, ds:0B33B00h; self
 0x46F774: mov     edx, [ecx+14h]
-0x46F777: push    2; Size
-0x46F779: lea     eax, [esp+18h+var_4]
-0x46F77D: push    eax; Src
+0x46F777: push    2; byteCount
+0x46F779: lea     eax, [esp+18h+source]
+0x46F77D: push    eax; source
 0x46F77E: mov     [esp+1Ch+var_C], edx
 0x46F782: call    SaveLoad_SaveData
-0x46F787: mov     ecx, ds:0B33B00h
+0x46F787: mov     ecx, ds:0B33B00h; self
 0x46F78D: push    ebp
 0x46F78E: push    esi
-0x46F78F: push    2; Size
-0x46F791: lea     edx, [esp+20h+arg_0]
-0x46F795: mov     [esp+20h+arg_0], 0
+0x46F78F: push    2; byteCount
+0x46F791: lea     edx, [esp+20h+changeMask]
+0x46F795: mov     [esp+20h+changeMask], 0
 0x46F79D: mov     ebp, [ecx+14h]
-0x46F7A0: push    edx; Src
+0x46F7A0: push    edx; source
 0x46F7A1: call    SaveLoad_SaveData
 0x46F7A6: lea     esi, [edi+4]
 0x46F7A9: test    esi, esi
@@ -44,13 +44,13 @@
 0x46F7B2: test    eax, eax
 0x46F7B4: jz      short loc_46F7D4
 0x46F7B6: mov     eax, [eax+0Ch]
-0x46F7B9: push    4
+0x46F7B9: push    4; byteCount
 0x46F7BB: lea     ecx, [esp+20h+Src]
-0x46F7BF: push    ecx
-0x46F7C0: mov     ecx, ds:0B33B00h
+0x46F7BF: push    ecx; source
+0x46F7C0: mov     ecx, ds:0B33B00h; self
 0x46F7C6: mov     [esp+24h+Src], eax
-0x46F7CA: call    SaveLoad_SaveFormID
-0x46F7CF: add     [esp+1Ch+arg_0], 1
+0x46F7CA: call    SaveLoad_SaveFormID; Writes an array of FormIDs to the save buffer. When IRef encoding is enabled, each full FormID is first converted to a compact IRef via SaveLoad_FormIDToIRef.
+0x46F7CF: add     [esp+1Ch+changeMask], 1
 0x46F7D4: mov     esi, [esi+4]
 0x46F7D7: test    esi, esi
 0x46F7D9: jnz     short loc_46F7B0
@@ -61,17 +61,17 @@
 0x46F7E4: test    eax, eax
 0x46F7E6: jz      short loc_46F806
 0x46F7E8: mov     edx, [eax+0Ch]
-0x46F7EB: mov     ecx, ds:0B33B00h
-0x46F7F1: push    4
+0x46F7EB: mov     ecx, ds:0B33B00h; self
+0x46F7F1: push    4; byteCount
 0x46F7F3: lea     eax, [esp+20h+Src]
-0x46F7F7: push    eax
+0x46F7F7: push    eax; source
 0x46F7F8: mov     [esp+24h+Src], edx
-0x46F7FC: call    SaveLoad_SaveFormID
-0x46F801: add     [esp+1Ch+arg_0], 1
+0x46F7FC: call    SaveLoad_SaveFormID; Writes an array of FormIDs to the save buffer. When IRef encoding is enabled, each full FormID is first converted to a compact IRef via SaveLoad_FormIDToIRef.
+0x46F801: add     [esp+1Ch+changeMask], 1
 0x46F806: mov     esi, [esi+4]
 0x46F809: test    esi, esi
 0x46F80B: jnz     short loc_46F7E2
-0x46F80D: mov     cx, word ptr [esp+1Ch+arg_0]
+0x46F80D: mov     cx, word ptr [esp+1Ch+changeMask]
 0x46F812: mov     [ebp+0], cx
 0x46F816: cmp     byte ptr ds:0B05BACh, 0
 0x46F81D: jz      short loc_46F88A
@@ -82,7 +82,7 @@
 0x46F82F: jz      short loc_46F86E
 0x46F831: mov     edx, [edi]
 0x46F833: push    edx; a1
-0x46F834: call    TESForm_LookupByFormID
+0x46F834: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x46F839: mov     ecx, [edi+5]
 0x46F83C: mov     edx, [eax]
 0x46F83E: add     esp, 4
@@ -109,7 +109,7 @@
 0x46F882: call    sub_40FEC0
 0x46F887: add     esp, 10h
 0x46F88A: mov     ecx, ds:0B33B00h
-0x46F890: call    sub_45A170
+0x46F890: call    TESSaveLoadGame_UseSaveGameBlocks
 0x46F895: test    al, al
 0x46F897: jz      short loc_46F8CC
 0x46F899: mov     edx, ds:0B33B00h

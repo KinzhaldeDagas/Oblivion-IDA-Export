@@ -1,4 +1,4 @@
-char *sub_74DEA0()
+NiRTTI *sub_74DEA0()
 {
-  return dword_B40AA4;
+  return &stru_B40AA4; /*0x74dea5*/
 }

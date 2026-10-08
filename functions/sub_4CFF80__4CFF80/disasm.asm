@@ -5,7 +5,7 @@
 0x4CFF94: push    esi; Format
 0x4CFF95: mov     esi, [esp+10Ch+arg_0]
 0x4CFF9C: push    0; a2
-0x4CFF9E: call    TESForm_GetOverrideFile
+0x4CFF9E: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x4CFFA3: test    eax, eax
 0x4CFFA5: jz      short loc_4CFFFE
 0x4CFFA7: add     eax, 1Ch

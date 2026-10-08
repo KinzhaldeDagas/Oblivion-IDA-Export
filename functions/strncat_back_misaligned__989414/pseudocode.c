@@ -9,22 +9,26 @@ int __usercall strncat_::back_misaligned@<eax>(
         int a7)
 {
   char v7; // dl
+  char v8; // bl
+  unsigned int v9; // ecx
 
-  do
+  do /*0x98942d*/
   {
-    v7 = *a3++;
-    if ( !v7 )
+    v7 = *a3++; /*0x989414*/
+    if ( !v7 ) /*0x98941b*/
     {
-      *a2 = 0;
-      return a4;
+      *a2 = 0; /*0x98945a*/
+      return a4; /*0x989463*/
     }
-    *a2++ = v7;
-    if ( !--a1 )
-      return strncat_::empty_counter();
+    *a2++ = v7; /*0x98941d*/
+    if ( !--a1 ) /*0x989425*/
+      return strncat_::empty_counter(0, a2); /*0x989425*/
   }
-  while ( ((unsigned __int8)a3 & 3) != 0 );
-  if ( a1 >> 2 )
-    return strncat_::main_loop_entrance_0(a4, a5, a6, a7);
+  while ( ((unsigned __int8)a3 & 3) != 0 ); /*0x98942d*/
+  v8 = a1; /*0x98942f*/
+  v9 = a1 >> 2; /*0x989431*/
+  if ( v9 ) /*0x989434*/
+    return strncat_::main_loop_entrance_0(v9, v8, (int)a2, (int *)a3, a4, a5, a6, a7); /*0x989434*/
   else
-    return strncat_::tail_loop_start_0();
+    return strncat_::tail_loop_start_0(v8); /*0x989435*/
 }

@@ -41,8 +41,8 @@
 0x4B2A8A: push    esi
 0x4B2A8B: call    GetFormModelPAth
 0x4B2A90: add     esp, 4
-0x4B2A93: push    eax; Str1
-0x4B2A94: call    __strcmp
+0x4B2A93: push    eax; left
+0x4B2A94: call    CRT_StricmpLocaleDispatch
 0x4B2A99: add     esp, 8
 0x4B2A9C: test    eax, eax
 0x4B2A9E: jnz     short def_4B2A22; jumptable 004B2A22 default case, cases 19-23,25,27,29-40

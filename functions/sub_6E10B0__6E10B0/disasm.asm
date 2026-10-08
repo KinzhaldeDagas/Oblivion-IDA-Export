@@ -18,7 +18,6 @@
 0x6E10E6: mov     eax, edi
 0x6E10E8: lea     edx, [eax+1]
 0x6E10EB: jmp     short loc_6E10F0
-0x6E10ED: align 10h
 0x6E10F0: mov     cl, [eax]
 0x6E10F2: add     eax, 1
 0x6E10F5: test    cl, cl
@@ -85,3 +84,12 @@
 0x6E1190: pop     ebx
 0x6E1191: add     esp, 0Ch
 0x6E1194: retn    0Ch
+0x9C8060: lea     ecx, [ebp+0Ch]; slot
+0x9C8063: jmp     NiPointerSlot_Release
+0x9C8068: mov     edx, [esp+arg_4]
+0x9C806C: lea     eax, [edx-10h]
+0x9C806F: mov     ecx, [edx-14h]
+0x9C8072: xor     ecx, eax
+0x9C8074: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C8079: mov     eax, offset stru_AF0364
+0x9C807E: jmp     ___CxxFrameHandler3

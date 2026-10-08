@@ -1,1 +1,4 @@
-HDRVR__
+struct HDRVR__
+{
+int unused;
+};

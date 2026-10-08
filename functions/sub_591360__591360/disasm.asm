@@ -24,7 +24,7 @@
 0x5913BA: mov     [esp+134h+var_4], 1
 0x5913C5: mov     edi, ds:0B35300h
 0x5913CB: mov     [esp+134h+var_120], esi
-0x5913CF: mov     eax, [esp+134h+arg_18]
+0x5913CF: mov     eax, [esp+134h+slot]
 0x5913D6: cmp     eax, esi
 0x5913D8: mov     byte ptr [esp+134h+var_4], 3
 0x5913E0: jnz     loc_59154C
@@ -75,9 +75,9 @@
 0x59146C: mov     ebx, 1
 0x591471: push    ebx; char
 0x591472: lea     ecx, [esp+138h+ArgList]
-0x591476: push    offset dword_B256D0; int
+0x591476: push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0; int
 0x59147B: push    ecx; Src
-0x59147C: call    NiSourceTexture__LoadTextureByFilename
+0x59147C: call    NiSourceTexture__LoadTextureByFilename; SpeedTreeOBSE 2026-07-14: generic NiSourceTexture creation preserves default pixel/alpha/mipmap preferences. Suitable for authored DDS/TGA composite candidates resolved through engine resources.
 0x591481: add     esp, 0Ch
 0x591484: push    eax; a2
 0x591485: lea     ecx, [esp+138h+var_120]; this
@@ -92,16 +92,16 @@
 0x5914A5: mov     esi, [esp+13Ch+var_11C]
 0x5914A9: add     esp, 8
 0x5914AC: mov     dword ptr [esi], 0
-0x5914B2: lea     ecx, [esp+134h+var_120]; this
+0x5914B2: lea     ecx, [esp+134h+var_120]; slot
 0x5914B6: mov     [esp+134h+var_118], ebx
 0x5914BA: mov     byte ptr [esp+134h+var_4], 2
-0x5914C2: call    sub_7016A0
+0x5914C2: call    NiPointerSlot_Release
 0x5914C7: mov     byte ptr [esp+134h+var_4], bl
 0x5914CE: lea     ecx, [esp+134h+arg_8]; void *
 0x5914D5: call    BSStringT_Clear
-0x5914DA: lea     ecx, [esp+134h+arg_18]; this
+0x5914DA: lea     ecx, [esp+134h+slot]; slot
 0x5914E1: mov     byte ptr [esp+134h+var_4], 0
-0x5914E9: call    sub_7016A0
+0x5914E9: call    NiPointerSlot_Release
 0x5914EE: mov     eax, esi
 0x5914F0: jmp     loc_5915D3
 0x5914F5: test    edi, edi
@@ -125,10 +125,10 @@
 0x591526: push    eax
 0x591527: mov     ecx, esi
 0x591529: call    sub_4A19F0
-0x59152E: lea     ecx, [esp+134h+var_120]; this
+0x59152E: lea     ecx, [esp+134h+var_120]; slot
 0x591532: mov     [esp+134h+var_118], ebx
 0x591536: mov     byte ptr [esp+134h+var_4], 2
-0x59153E: call    sub_7016A0
+0x59153E: call    NiPointerSlot_Release
 0x591543: mov     byte ptr [esp+134h+var_4], bl
 0x59154A: jmp     short loc_5914CE
 0x59154C: mov     esi, eax
@@ -159,8 +159,8 @@
 0x591598: call    edx
 0x59159A: mov     eax, [esp+134h+arg_8]
 0x5915A1: push    eax
-0x5915A2: call    FormHeapFree
-0x5915A7: mov     esi, [esp+138h+arg_18]
+0x5915A2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x5915A7: mov     esi, [esp+138h+slot]
 0x5915AE: add     esp, 4
 0x5915B1: test    esi, esi
 0x5915B3: mov     byte ptr [esp+134h+var_4], 0
@@ -188,3 +188,27 @@
 0x5915EF: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x5915F4: add     esp, 120h
 0x5915FA: retn
+0x9BFB10: lea     ecx, [ebp+1Ch]; slot
+0x9BFB13: jmp     NiPointerSlot_Release
+0x9BFB18: lea     ecx, [ebp+0Ch]; void *
+0x9BFB1B: jmp     BSStringT_Clear
+0x9BFB20: lea     ecx, [ebp-120h]; slot
+0x9BFB26: jmp     NiPointerSlot_Release
+0x9BFB2B: mov     eax, [ebp-118h]
+0x9BFB31: and     eax, 1
+0x9BFB34: jz      locret_9BFB4C
+0x9BFB3A: and     dword ptr [ebp-118h], 0FFFFFFFEh
+0x9BFB41: mov     ecx, [ebp-11Ch]; slot
+0x9BFB47: jmp     NiPointerSlot_Release
+0x9BFB4C: retn
+0x9BFB4D: mov     edx, [esp+Source]
+0x9BFB51: lea     eax, [edx-124h]
+0x9BFB57: mov     ecx, [edx-128h]
+0x9BFB5D: xor     ecx, eax
+0x9BFB5F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BFB64: add     eax, 10h
+0x9BFB67: mov     ecx, [edx-4]
+0x9BFB6A: xor     ecx, eax
+0x9BFB6C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BFB71: mov     eax, offset stru_AE8FD0
+0x9BFB76: jmp     ___CxxFrameHandler3

@@ -14,7 +14,7 @@
 0x501DA4: jz      short loc_501DC1
 0x501DA6: push    0
 0x501DA8: push    esi
-0x501DA9: mov     ecx, offset ActorProcessManager_ptr
+0x501DA9: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x501DAE: call    sub_675D50
 0x501DB3: mov     eax, [esi]
 0x501DB5: mov     edx, [eax+340h]

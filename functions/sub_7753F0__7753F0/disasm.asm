@@ -134,16 +134,15 @@
 0x77555E: add     edi, 1
 0x775561: cmp     edi, 10h
 0x775564: jb      short loc_7754F4
-0x775566: mov     dword ptr [esp+44h+var_24], ebx
+0x775566: mov     [esp+44h+var_24], ebx
 0x77556A: mov     ebx, [esp+44h+a3]
-0x77556E: mov     eax, offset dword_B29944
+0x77556E: mov     eax, offset D3DDepthStencilFormatCandidates
 0x775573: sub     eax, ebx
 0x775575: mov     byte ptr [esp+44h+arg_0], 0
 0x77557A: mov     [esp+44h+var_C], eax
 0x77557E: mov     [esp+44h+var_18], 9
 0x775586: jmp     short loc_775594
 0x775588: jmp     short loc_775590
-0x77558A: align 10h
 0x775590: mov     eax, [esp+44h+var_C]
 0x775594: mov     edi, [eax+ebx]
 0x775597: mov     ecx, [esp+44h+arg_C]
@@ -183,7 +182,6 @@
 0x7755EE: mov     edi, 1
 0x7755F3: mov     [esp+44h+var_1C], 10h
 0x7755FB: jmp     short loc_775600
-0x7755FD: align 10h
 0x775600: lea     ecx, [edi-1]
 0x775603: mov     ebp, 1
 0x775608: shl     ebp, cl
@@ -212,7 +210,7 @@
 0x77563E: mov     [ebx+1], dl
 0x775641: or      [ebx+2], bp
 0x775645: mov     eax, ebp
-0x775647: or      eax, dword ptr [esp+44h+var_24]
+0x775647: or      eax, [esp+44h+var_24]
 0x77564B: jz      short loc_775680
 0x77564D: mov     eax, [esp+44h+var_20]
 0x775651: mov     ecx, [esi]
@@ -254,7 +252,7 @@
 0x7756BD: jmp     short loc_7756CC
 0x7756BF: mov     edx, [esp+44h+a3]
 0x7756C3: push    edx
-0x7756C4: call    FormHeapFree
+0x7756C4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7756C9: add     esp, 4
 0x7756CC: mov     ebx, [esp+44h+var_2C]
 0x7756D0: mov     edi, [esp+44h+var_28]

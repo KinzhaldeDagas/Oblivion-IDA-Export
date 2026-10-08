@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x790B00",
-    "line": "mov     ecx, ds:0B429E4h",
+    "line": "mov     ecx, ds:0B429E4h; Source-match: CBranch::ClearBranchInfo/static branch-info clear helper. Clears the global/static branch info vector used by branch parsing/compute.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x790B29",
-    "line": "mov     esi, offset dword_B429DC",
+    "line": "mov     esi, offset lastOwner",
     "mnemonic": "mov",
     "size": 5
   },
@@ -103,55 +103,55 @@
   },
   {
     "ea": "0x790B37",
-    "line": "push    ebx; Src",
+    "line": "push    ebx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790B38",
-    "line": "push    esi; int",
+    "line": "push    esi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790B39",
-    "line": "push    edi; Dst",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790B3A",
-    "line": "mov     eax, offset dword_B429DC",
+    "line": "mov     eax, offset lastOwner",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x790B3F",
-    "line": "push    eax; int",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790B40",
-    "line": "lea     eax, [esp+24h+var_8]",
+    "line": "lea     eax, [esp+24h+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x790B44",
-    "line": "push    eax; int",
+    "line": "push    eax; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790B45",
-    "line": "mov     ecx, offset dword_B429DC",
+    "line": "mov     ecx, offset lastOwner; this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x790B4A",
-    "line": "call    sub_439050",
+    "line": "call    OB_stVector4_EraseRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Checked erase-range core for vectors of trivial 4-byte elements. Validates iterator owners, shifts the suffix with memmove_s, updates end, and returns the resulting iterator; directly clears CIndexedGeometry triangle totals.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x69EE30",
-    "line": "push    ebx",
+    "line": "push    ebx; Verified (Oblivion): model save receives owner ActiveEffect* and target TESObjectREFR*, writes base data, then a 16-bit length and serialized NiStreamable model resource payload. Fallout instead serializes controller-manager save data.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x69EE32",
-    "line": "mov     ebp, [esp+8+arg_0]",
+    "line": "mov     ebp, [esp+8+contextA]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,13 +37,13 @@
   },
   {
     "ea": "0x69EE3C",
-    "line": "push    edi",
+    "line": "push    edi; targetReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x69EE3D",
-    "line": "push    ebp",
+    "line": "push    ebp; ownerActiveEffect",
     "mnemonic": "push",
     "size": 1
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x69EE40",
-    "line": "call    sub_69DBB0",
+    "line": "call    MagicHitEffect_SaveExtraData; Verified (Oblivion): base SaveExtraData receives owner ActiveEffect* and target TESObjectREFR*, writes base elapsedSeconds + finished flag, and writes durationSeconds from version 0x72.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x69EE7D",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -181,13 +181,13 @@
   },
   {
     "ea": "0x69EE83",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x69EE84",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x69EE9F",
-    "line": "fstp    [esp+10h+arg_0]",
+    "line": "fstp    [esp+10h+contextA]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -367,13 +367,13 @@
   },
   {
     "ea": "0x69EEE7",
-    "line": "fstp    [esp+10h+arg_0]",
+    "line": "fstp    [esp+10h+contextA]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x69EEEB",
-    "line": "fld     [esp+10h+arg_0]",
+    "line": "fld     [esp+10h+contextA]",
     "mnemonic": "fld",
     "size": 4
   },

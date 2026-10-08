@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 4,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x523370",
+      "0x5233CA"
+    ]
+  ],
+  "chunks_sha256": "152b99146df535c74202e65ba8077530d55f2aa3c1638ebab16838af314c8d2e",
+  "comment_regular": "Verified: after parent serialization, mask 0x200 writes 21 skill bytes at +0xEC. Mask 0x400 writes combatStyle(+0x1E4) FormID, or zero for NULL. Divergence within Oblivion: creature save 0x51DA50 dereferences combatStyle unconditionally.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_523370",
+  "display_name": "TESNPC_SaveModified",
   "end_ea": "0x5233CA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
-  "has_pseudocode": false,
-  "name": "sub_523370",
+  "has_pseudocode": true,
+  "name": "TESNPC_SaveModified",
   "segment": ".text",
   "sha256": "152b99146df535c74202e65ba8077530d55f2aa3c1638ebab16838af314c8d2e",
   "size": 90,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x523370",
-  "type": "",
+  "total_chunk_size": 90,
+  "type": "void __thiscall(TESNPC *self, ActorBaseSaveChangeMask changeMask)",
   "xrefs_from_count": 34,
   "xrefs_to_count": 5
 }

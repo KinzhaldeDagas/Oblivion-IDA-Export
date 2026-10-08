@@ -1,1 +1,4 @@
-SkyObjectMembr
+struct SkyObjectMembr
+{
+NiNode *rootNode;
+};

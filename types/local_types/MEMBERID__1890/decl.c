@@ -1,1 +1,1 @@
-MEMBERID
+typedef DISPID MEMBERID;

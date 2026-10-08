@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 3,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_7F1810",
+  "chunks": [
+    [
+      "0x7F1810",
+      "0x7F1899"
+    ],
+    [
+      "0x9CFDD0",
+      "0x9CFDF3"
+    ]
+  ],
+  "chunks_sha256": "d94e598370ea41042d333ddde22c43a175797266d69311674b780b8f098edeab",
+  "comment_regular": "STLSPData ctor. Allocates and zeroes the 0x300-byte leaf constant table at +0x08 and clears initial leaf globals.\n\n[2026-10-02 Fallout comparative pass]\nVerified: NiRefObject-derived 0x20-byte owner (allocated by 0x5622B0); vtable 0xA929C0. Allocates/zeros 0x300 bytes at +8; zeros only +0x0C,+0x10,+0x14. +0x18/+0x1C are NOT initialized here. Fallout STLSPData ctor 0x828CDB60 matches this limited initialization.\n\nSTLSPData ctor: allocates 0x300-byte shared leaf shader data buffer at +0x08 and clears scalar fields +0x0C..+0x14.",
+  "comment_repeatable": "STLSPData ctor: allocates 0x300-byte shared leaf shader data buffer at +0x08 and clears scalar fields +0x0C..+0x14.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
+  "display_name": "OB_STLSPData_ctor_010201A0",
   "end_ea": "0x7F1899",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
-  "name": "sub_7F1810",
+  "name": "OB_STLSPData_ctor_010201A0",
   "segment": ".text",
   "sha256": "699714923ca5924b3455748e1afa55332be6ca15a5a568a0d5b8d54fe2a55b68",
   "size": 137,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7F1810",
-  "type": "float *__thiscall(float *this)",
-  "xrefs_from_count": 43,
+  "total_chunk_size": 172,
+  "type": "OB_STLSPData_010201A0 *__thiscall(OB_STLSPData_010201A0 *this)",
+  "xrefs_from_count": 54,
   "xrefs_to_count": 1
 }

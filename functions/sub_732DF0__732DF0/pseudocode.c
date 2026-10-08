@@ -1,5 +1,5 @@
 void __thiscall sub_732DF0(NiGeometryData *this)
 {
-  this->__vftable = (NiGeometryDataVtbl *)&NiTriBasedGeomData::`vftable';
-  NiGeometryData::~NiGeometryData(this);
+  this->__vftable = (NiGeometryDataVtbl *)&NiTriBasedGeomData::`vftable'; /*0x732df0*/
+  NiGeometryData::~NiGeometryData(this); /*0x732df6*/
 }

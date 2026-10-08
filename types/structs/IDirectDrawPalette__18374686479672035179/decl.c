@@ -1,1 +1,4 @@
-IDirectDrawPalette
+struct IDirectDrawPalette
+{
+IDirectDrawPaletteVtbl *lpVtbl;
+};

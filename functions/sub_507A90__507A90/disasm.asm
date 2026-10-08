@@ -3,12 +3,12 @@
 0x507A96: mov     esi, [eax+10h]
 0x507A99: push    0FFFFFFFFh; a2
 0x507A9B: mov     ecx, esi; this
-0x507A9D: call    TESForm_GetOverrideFile
+0x507A9D: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x507AA2: test    eax, eax
 0x507AA4: jz      short loc_507AD7
 0x507AA6: push    edi
 0x507AA7: mov     ecx, eax
-0x507AA9: call    sub_4520F0
+0x507AA9: call    TESFile_GetThreadSafeFile; Returns the root TESFile on the main thread; on worker threads returns the per-thread clone selected by GetCurrentThreadId via TESFile_GetThreadSafeFileForThread.
 0x507AAE: mov     edi, eax
 0x507AB0: push    0
 0x507AB2: push    0

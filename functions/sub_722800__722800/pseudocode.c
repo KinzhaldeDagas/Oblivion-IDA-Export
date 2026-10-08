@@ -1,4 +1,4 @@
-char *sub_722800()
+NiRTTI *sub_722800()
 {
-  return dword_B3FD5C;
+  return &stru_B3FD5C; /*0x722805*/
 }

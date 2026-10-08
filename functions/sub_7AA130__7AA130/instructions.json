@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x7AA1B8",
-    "line": "call    GetShaderDefinition",
+    "line": "call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x7AA1C7",
-    "line": "call    sub_7D1320",
+    "line": "call    sub_7D1320; MoonSugarEffect decode: native shader-id selector for standard shader property families. Updates program/pass render-state choices and constants for hardcoded IDs before object render.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,13 +355,13 @@
   },
   {
     "ea": "0x7AA1ED",
-    "line": "call    edx",
+    "line": "call    edx; DX11 migration audit: IDirect3DQuery9::Issue(BEGIN=2), vtable +0x18. Encloses the game geometry draw at 0x7AA216, then END at 0x7AA225.",
     "mnemonic": "call",
     "size": 2
   },
   {
     "ea": "0x7AA1EF",
-    "line": "mov     eax, [esp+30h+arg_0]",
+    "line": "mov     eax, [esp+30h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -379,43 +379,43 @@
   },
   {
     "ea": "0x7AA1F6",
-    "line": "push    esi",
+    "line": "push    esi; lightCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7AA1F7",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7AA1F9",
-    "line": "push    3",
+    "line": "push    3; selector",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7AA1FB",
-    "line": "push    eax",
+    "line": "push    eax; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7AA1FC",
-    "line": "lea     ecx, [esp+44h+var_1C]",
+    "line": "lea     ecx, [esp+44h+outPass]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7AA200",
-    "line": "push    ecx",
+    "line": "push    ecx; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7AA201",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,19 +427,19 @@
   },
   {
     "ea": "0x7AA209",
-    "line": "push    3; float",
+    "line": "push    3; selector",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7AA20B",
-    "line": "lea     edx, [esp+34h+var_1C]",
+    "line": "lea     edx, [esp+34h+outPass]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7AA20F",
-    "line": "push    edx; int",
+    "line": "push    edx; entry",
     "mnemonic": "push",
     "size": 1
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x7AA216",
-    "line": "call    sub_7A9820",
+    "line": "call    BSShaderAccumulator_DrawRenderPass; Submit one accumulated Oblivion RenderPass. Publishes selector/current entry, dispatches each light pointer, then invokes geometry render virtual +0x84 exactly once. It does not prevalidate the Lighting30 selector; invalid 0x177..0x17A records are suppressed later by SetupRenderPass leaving PassCount zero. Valid SimpleShadow compatibility records each have lightCount=1, so eligible lights remain separate receiver draws.",
     "mnemonic": "call",
     "size": 5
   },
@@ -493,13 +493,13 @@
   },
   {
     "ea": "0x7AA225",
-    "line": "call    edx",
+    "line": "call    edx; DX11 migration audit: IDirect3DQuery9::Issue(END=1), vtable +0x18, after selector-3 client geometry draw. Helper shadow/lighting passes are not part of this native bracket.",
     "mnemonic": "call",
     "size": 2
   },
   {
     "ea": "0x7AA227",
-    "line": "lea     ecx, [esp+30h+var_1C]",
+    "line": "lea     ecx, [esp+30h+outPass]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x7AA240",
-    "line": "call    sub_7E2400",
+    "line": "call    RenderPass_Destroy; Destroy the members of one RenderPass: clear selector, free the owned light-pointer array, clear byte +0x09 and array pointer. This function does not free the 0x10-byte RenderPass record itself and does not release the raw geometry/light objects.",
     "mnemonic": "call",
     "size": 5
   },
@@ -610,5 +610,59 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CD070",
+    "line": "lea     ecx, [ebp-1Ch]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD073",
+    "line": "jmp     RenderPass_Destroy; Destroy the members of one RenderPass: clear selector, free the owned light-pointer array, clear byte +0x09 and array pointer. This function does not free the 0x10-byte RenderPass record itself and does not release the raw geometry/light objects.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD078",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CD07C",
+    "line": "lea     eax, [edx-20h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD07F",
+    "line": "mov     ecx, [edx-24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD082",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CD084",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD089",
+    "line": "mov     eax, offset stru_AF644C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD08E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

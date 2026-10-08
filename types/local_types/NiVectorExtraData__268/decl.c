@@ -1,1 +1,1 @@
-NiVectorExtraData
+struct NiVectorExtraData;

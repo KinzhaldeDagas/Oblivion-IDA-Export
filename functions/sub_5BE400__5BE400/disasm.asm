@@ -77,25 +77,25 @@
 0x5BE4C7: push    24h ; '$'; jumptable 005BE413 case 5
 0x5BE4C9: jmp     short loc_5BE4CD
 0x5BE4CB: push    25h ; '%'; jumptable 005BE413 case 6
-0x5BE4CD: push    3
-0x5BE4CF: call    TESTopic__GEtTopic
+0x5BE4CD: push    3; topicType
+0x5BE4CF: call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.
 0x5BE4D4: add     esp, 8
 0x5BE4D7: mov     ecx, ds:0B333C4h; jumptable 005BE413 default case, case 4
 0x5BE4DD: mov     edx, [ebx+0D8h]
-0x5BE4E3: push    0
-0x5BE4E5: push    0
-0x5BE4E7: push    ecx
-0x5BE4E8: push    edx
-0x5BE4E9: mov     ecx, eax
-0x5BE4EB: call    TESTopic__CreateDialogueInfo
+0x5BE4E3: push    0; conversation
+0x5BE4E5: push    0; previousTopic
+0x5BE4E7: push    ecx; target
+0x5BE4E8: push    edx; speaker
+0x5BE4E9: mov     ecx, eax; this
+0x5BE4EB: call    TESTopic__CreateDialogueItem; Selects a matching TESTopicInfo and wraps it as a 0x1C DialogueItem containing response list/cursor, INFO, topic, owner quest, and speaker.
 0x5BE4F0: mov     edi, eax
 0x5BE4F2: test    edi, edi
 0x5BE4F4: jz      loc_5BE590
 0x5BE4FA: push    esi
-0x5BE4FB: mov     ecx, edi
-0x5BE4FD: call    sub_6B7BA0
-0x5BE502: mov     ecx, edi
-0x5BE504: call    sub_6B7C20
+0x5BE4FB: mov     ecx, edi; this
+0x5BE4FD: call    DialogueItem__FirstResponse
+0x5BE502: mov     ecx, edi; this
+0x5BE504: call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.
 0x5BE509: mov     esi, eax
 0x5BE50B: test    esi, esi
 0x5BE50D: jz      short loc_5BE57F
@@ -129,10 +129,10 @@
 0x5BE576: push    esi; string
 0x5BE577: call    GameUI_QueueMessage
 0x5BE57C: add     esp, 10h
-0x5BE57F: mov     ecx, edi
-0x5BE581: call    sub_6B81D0
+0x5BE57F: mov     ecx, edi; this
+0x5BE581: call    DialogueItem__Destroy
 0x5BE586: push    edi
-0x5BE587: call    FormHeapFree
+0x5BE587: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5BE58C: add     esp, 4
 0x5BE58F: pop     esi
 0x5BE590: pop     edi

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4A67B0",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Verified: converts world XYZ input to a 2D point and delegates region-data selection for that location.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x4A67B6",
-    "line": "lea     ecx, [esp+0Ch+var_8]",
+    "line": "lea     ecx, [esp+0Ch+worldXY]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -31,37 +31,37 @@
   },
   {
     "ea": "0x4A67BF",
-    "line": "fld     [esp+0Ch+arg_4]",
+    "line": "fld     [esp+0Ch+worldX]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x4A67C3",
-    "line": "mov     eax, [esp+0Ch+arg_10]",
+    "line": "mov     eax, [esp+0Ch+worldspace]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4A67C7",
-    "line": "fstp    [esp+0Ch+var_8]",
+    "line": "fstp    [esp+0Ch+worldXY]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4A67CB",
-    "line": "mov     edx, [esp+0Ch+arg_0]",
+    "line": "mov     edx, [esp+0Ch+dataID]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4A67CF",
-    "line": "fld     [esp+0Ch+arg_8]",
+    "line": "fld     [esp+0Ch+worldY]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x4A67D3",
-    "line": "push    eax",
+    "line": "push    eax; worldspace",
     "mnemonic": "push",
     "size": 1
   },
@@ -73,31 +73,31 @@
   },
   {
     "ea": "0x4A67D8",
-    "line": "lea     ecx, [esp+10h+var_8]",
+    "line": "lea     ecx, [esp+10h+worldXY]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4A67DC",
-    "line": "push    ecx",
+    "line": "push    ecx; worldXY",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4A67DD",
-    "line": "push    edx",
+    "line": "push    edx; dataID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4A67DE",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4A67E0",
-    "line": "call    sub_4A6460",
+    "line": "call    TESRegionList_SelectDataForLocation",
     "mnemonic": "call",
     "size": 5
   },

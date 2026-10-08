@@ -1,4 +1,4 @@
-0x78BFB0: push    ebp
+0x78BFB0: push    ebp; CSpeedTreeRT::ComputeLodLevel. For instances, temporarily applies instance position to the shared tree engine, computes/stores instance LOD, then restores parent position and LOD; base trees compute directly.
 0x78BFB1: mov     ebp, esp
 0x78BFB3: push    0FFFFFFFFh
 0x78BFB5: push    offset SEH_78BFB0
@@ -32,8 +32,8 @@
 0x78C008: mov     [eax+8], edx
 0x78C00B: mov     ecx, [ecx+0Ch]
 0x78C00E: mov     [eax+0Ch], ecx
-0x78C011: mov     ecx, [esi]
-0x78C013: call    sub_7A2440
+0x78C011: mov     ecx, [esi]; this
+0x78C013: call    CTreeEngine__ComputeLod; CTreeEngine::ComputeLod-style helper. Computes LOD from global camera position against tree position and near/far LOD limits at +0x44/+0x40, clamps to [0,1], stores at +0x14.
 0x78C018: fstp    [ebp+var_14]
 0x78C01B: mov     edx, [esi+34h]
 0x78C01E: fld     [ebp+var_14]
@@ -56,8 +56,8 @@
 0x78C04A: mov     esp, ebp
 0x78C04C: pop     ebp
 0x78C04D: retn
-0x78C04E: mov     ecx, [esi]
-0x78C050: call    sub_7A2440
+0x78C04E: mov     ecx, [esi]; this
+0x78C050: call    CTreeEngine__ComputeLod; CTreeEngine::ComputeLod-style helper. Computes LOD from global camera position against tree position and near/far LOD limits at +0x44/+0x40, clamps to [0,1], stores at +0x14.
 0x78C055: fstp    st
 0x78C057: mov     ecx, [ebp+var_C]
 0x78C05A: mov     large fs:0, ecx
@@ -75,8 +75,8 @@
 0x78C073: push    eax
 0x78C074: push    offset aCspeedtreertCo; "CSpeedTreeRT::ComputeLodLevel"
 0x78C079: push    offset aSFailedS; "%s - failed [%s]"
-0x78C07E: lea     esi, [ebp+var_44]
-0x78C081: call    sub_7A54A0
+0x78C07E: lea     esi, [ebp+result]; result
+0x78C081: call    OB_IdvFormatString_010201A0; Oblivion binary evidence: IdvFormatString. Formats variadic arguments with vsprintf into a 1024-byte stack buffer, constructs the hidden-result 28-byte SSO string, assigns strlen(buffer) bytes, and returns the result pointer in EAX. SpeedTreeRT 4.1 IdvGlobals.h:77-93 corroborates the name and fixed buffer only after observation.
 0x78C086: add     esp, 0Ch
 0x78C089: cmp     dword ptr [eax+18h], 10h
 0x78C08D: mov     byte ptr [ebp+var_4], 2
@@ -84,11 +84,11 @@
 0x78C093: mov     eax, [eax+4]
 0x78C096: jmp     short loc_78C09B
 0x78C098: add     eax, 4
-0x78C09B: push    eax; Src
-0x78C09C: call    sub_7895E0
+0x78C09B: push    eax; error
+0x78C09C: call    CSpeedTreeRT__SetError; Oblivion binary evidence: CSpeedTreeRT static error setter. Assigns the NUL-terminated input into the sole 28-byte global error string at 0xB2B614. After observation, SpeedTreeRT 4.1 SpeedTreeRT.cpp:2671-2677 corroborates SetError and g_strError.
 0x78C0A1: add     esp, 4
-0x78C0A4: lea     ecx, [ebp+var_44]
-0x78C0A7: call    sub_79AB00
+0x78C0A4: lea     ecx, [ebp+result]; this
+0x78C0A7: call    OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
 0x78C0AC: mov     eax, offset loc_78C0B2
 0x78C0B1: retn
 0x78C0B2: mov     ecx, [ebp+var_C]
@@ -102,8 +102,8 @@
 0x78C0C3: retn
 0x78C0C4: push    offset aCspeedtreertCo; "CSpeedTreeRT::ComputeLodLevel"
 0x78C0C9: push    offset aSThrewAnUnknow; "%s - threw an unknown system exception"
-0x78C0CE: lea     esi, [ebp+var_60]
-0x78C0D1: call    sub_7A54A0
+0x78C0CE: lea     esi, [ebp+var_60]; result
+0x78C0D1: call    OB_IdvFormatString_010201A0; Oblivion binary evidence: IdvFormatString. Formats variadic arguments with vsprintf into a 1024-byte stack buffer, constructs the hidden-result 28-byte SSO string, assigns strlen(buffer) bytes, and returns the result pointer in EAX. SpeedTreeRT 4.1 IdvGlobals.h:77-93 corroborates the name and fixed buffer only after observation.
 0x78C0D6: add     esp, 8
 0x78C0D9: cmp     dword ptr [eax+18h], 10h
 0x78C0DD: mov     byte ptr [ebp+var_4], 3
@@ -111,10 +111,21 @@
 0x78C0E3: mov     eax, [eax+4]
 0x78C0E6: jmp     short loc_78C0EB
 0x78C0E8: add     eax, 4
-0x78C0EB: push    eax; Src
-0x78C0EC: call    sub_7895E0
+0x78C0EB: push    eax; error
+0x78C0EC: call    CSpeedTreeRT__SetError; Oblivion binary evidence: CSpeedTreeRT static error setter. Assigns the NUL-terminated input into the sole 28-byte global error string at 0xB2B614. After observation, SpeedTreeRT 4.1 SpeedTreeRT.cpp:2671-2677 corroborates SetError and g_strError.
 0x78C0F1: add     esp, 4
-0x78C0F4: lea     ecx, [ebp+var_60]
-0x78C0F7: call    sub_79AB00
+0x78C0F4: lea     ecx, [ebp+var_60]; this
+0x78C0F7: call    OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
 0x78C0FC: mov     eax, offset loc_78C03C
 0x78C101: retn
+0x9CB770: lea     ecx, [ebp+result]; this
+0x9CB773: jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
+0x9CB778: lea     ecx, [ebp+var_60]; this
+0x9CB77B: jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
+0x9CB780: mov     edx, [esp-4+arg_4]
+0x9CB784: lea     eax, [edx+0Ch]
+0x9CB787: mov     ecx, [edx-64h]
+0x9CB78A: xor     ecx, eax
+0x9CB78C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CB791: mov     eax, offset stru_AF42B4
+0x9CB796: jmp     ___CxxFrameHandler3

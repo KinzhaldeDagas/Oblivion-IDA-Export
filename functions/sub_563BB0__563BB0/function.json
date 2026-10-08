@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 3,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 4,
-  "display_name": "sub_563BB0",
+  "chunks": [
+    [
+      "0x563BB0",
+      "0x563C41"
+    ],
+    [
+      "0x9BD450",
+      "0x9BD473"
+    ]
+  ],
+  "chunks_sha256": "de1be3473db2c362c53518ba024282b0594efdf3c2b98c912680dd6d361ffe79",
+  "comment_regular": "2026-05-18 73000 consumer decode: constructs bhkCapsuleShape from radius and two endpoints in cinfo. Stock 0x565510 makes endpoints vertical/+Z; sidecar rotation for capsules would need rotated endpoints or a transform-wrapper replacement.",
+  "comment_repeatable": "2026-05-18 73000 consumer decode: constructs bhkCapsuleShape from radius and two endpoints in cinfo. Stock 0x565510 makes endpoints vertical/+Z; sidecar rotation for capsules would need rotated endpoints or a transform-wrapper replacement.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "OB_bhkCapsuleShape_CtorFromCinfo_010201A0",
   "end_ea": "0x563C41",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_563BB0",
+  "name": "OB_bhkCapsuleShape_CtorFromCinfo_010201A0",
   "segment": ".text",
   "sha256": "61e4f96148e1c2e39f16bd6dcddabcea52fd201235c6d19f311c90d3189720c1",
   "size": 145,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x563BB0",
-  "type": "bhkRefObject *__thiscall(bhkRefObject *this, int)",
-  "xrefs_from_count": 46,
+  "total_chunk_size": 180,
+  "type": "bhkRefObject *__thiscall(bhkRefObject *self, const OB_CollisionCapsuleCinfo_010201A0 *info)",
+  "xrefs_from_count": 57,
   "xrefs_to_count": 2
 }

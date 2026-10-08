@@ -33,7 +33,7 @@
 0x5AEE54: push    0FAEh
 0x5AEE59: mov     ecx, ebx
 0x5AEE5B: call    Tile_GetFloat
-0x5AEE60: call    Double_To_SInt32
+0x5AEE60: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5AEE65: xor     edx, edx
 0x5AEE67: test    esi, esi
 0x5AEE69: mov     [edi+4Ch], edx

@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x58CC62",
-    "line": "mov     ebp, [esp+8+arg_4]",
+    "line": "mov     ebp, [esp+8+trait]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x58CCB0",
-    "line": "mov     ebx, [esp+18h+arg_0]",
+    "line": "mov     ebx, [esp+18h+source]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -187,19 +187,19 @@
   },
   {
     "ea": "0x58CCC5",
-    "line": "fstp    [esp+14h+arg_4]",
+    "line": "fstp    [esp+14h+trait]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x58CCC9",
-    "line": "fld     [esp+14h+arg_4]",
+    "line": "fld     [esp+14h+trait]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x58CCCD",
-    "line": "mov     ecx, [esp+14h+arg_8]",
+    "line": "mov     ecx, [esp+14h+action]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -259,13 +259,13 @@
   },
   {
     "ea": "0x58CCE8",
-    "line": "push    ebp",
+    "line": "push    ebp; trait",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58CCE9",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x58CCEE",
-    "line": "call    Tile_GetPropertyByCode?",
+    "line": "call    Tile__GetOrCreateValue; Verified: sorted trait lookup; if absent allocates 0x1C bytes, constructs Value at 0x589DF0, stores owner Tile at +0 and inserts into Tile value list. Corrects misleading existing-property-only interpretation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,19 +325,19 @@
   },
   {
     "ea": "0x58CD09",
-    "line": "mov     ecx, [esp+14h+var_4]",
+    "line": "mov     ecx, [esp+14h+var_4]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x58CD0D",
-    "line": "mov     [eax+14h], esi",
+    "line": "mov     [eax+14h], esi; Verified dependency binding: source Value reaction chain points to destination action. XML selector name is not stored here or re-resolved during subsequent property propagation.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x58CD10",
-    "line": "push    0",
+    "line": "push    0; forceUpdate",
     "mnemonic": "push",
     "size": 2
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x58CD15",
-    "line": "call    DoActionEnumeration",
+    "line": "call    Tile__Value__CalculateValue; Verified: receiver is 0x1C-byte Tile::Value, NOT Tile. Reads owner at +0, numeric value +4, trait code +0x18, expression head pointer +0x10. Native SetFloat 0x58CA00 and dependency propagation 0x58BDD0 pass Value pointers. Fallout named analogue 0x8220BFF0. Local SDK Tile::DoActionEnumeration incorrectly passes Tile* to this address; plugin direct calls are invalid-receiver calls.",
     "mnemonic": "call",
     "size": 5
   },

@@ -2,7 +2,7 @@
 0x42E2D6: mov     eax, ___security_cookie
 0x42E2DB: xor     eax, esp
 0x42E2DD: mov     [esp+174h+var_4], eax
-0x42E2E4: mov     eax, ArchiveInvalidatedDirPAths
+0x42E2E4: mov     eax, ds:0B33934h
 0x42E2E9: push    edi
 0x42E2EA: mov     edi, ecx
 0x42E2EC: xor     ecx, ecx
@@ -10,7 +10,7 @@
 0x42E2F0: mov     [esp+178h+var_16C], edi
 0x42E2F4: mov     [esp+178h+var_174], ecx
 0x42E2F8: jnz     short loc_42E31A
-0x42E2FA: cmp     ArchiveInvalidateFilenames, ecx
+0x42E2FA: cmp     ds:0B33930h, ecx
 0x42E300: jnz     short loc_42E31A
 0x42E302: xor     eax, eax
 0x42E304: pop     edi
@@ -33,7 +33,7 @@
 0x42E34A: push    ebp
 0x42E34B: mov     [esp+184h+var_168], ecx
 0x42E34F: jmp     short loc_42E358
-0x42E351: mov     eax, ArchiveInvalidatedDirPAths
+0x42E351: mov     eax, ds:0B33934h
 0x42E356: mov     edi, edx
 0x42E358: mov     ebp, [edi+178h]
 0x42E35E: add     ebp, [esp+184h+var_168]
@@ -75,7 +75,7 @@
 0x42E3D0: mov     ecx, edi
 0x42E3D2: mov     [esp+188h+FindFileData.dwFileAttributes], eax
 0x42E3D6: call    Archive_LoadFolderNames
-0x42E3DB: mov     ecx, eax
+0x42E3DB: mov     ecx, eax; MEF v39 caller proof: Archive_InvalidateOlderFiles immediately performs a strlen-like scan on Archive_LoadFolderNames result without null/length guard.
 0x42E3DD: lea     ecx, [ecx+0]
 0x42E3E0: mov     dl, [eax]
 0x42E3E2: add     eax, 1
@@ -108,9 +108,8 @@
 0x42E42C: jbe     loc_42E4F6
 0x42E432: mov     [esp+184h+var_160], esi
 0x42E436: jmp     short loc_42E440
-0x42E438: align 10h
 0x42E440: mov     edx, [ebp+0Ch]
-0x42E443: mov     eax, ArchiveInvalidateFilenames
+0x42E443: mov     eax, ds:0B33930h
 0x42E448: add     edx, [esp+184h+var_160]
 0x42E44C: test    eax, eax
 0x42E44E: jz      loc_42E4DD

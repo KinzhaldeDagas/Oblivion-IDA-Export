@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x444386",
-    "line": "call    sub_4E9F40",
+    "line": "call    sub_4E9F40; Fog decode: returns global far-plane/clamp mode flag unk_B3608F; when false, non-water 0x541DD0 paths clamp fogEnd to GetFarPlane.",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,19 +157,19 @@
   },
   {
     "ea": "0x444392",
-    "line": "mov     ecx, [ebp+4]",
+    "line": "mov     ecx, [ebp+4]; gridDistantArray",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x444395",
-    "line": "push    eax",
+    "line": "push    eax; worldspace",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x444396",
-    "line": "call    sub_483D60",
+    "line": "call    DistantLOD_UpdateExteriorGrid; Verified mode routing: WorldSpace mask bit 0x1 is the tree channel and is gated by bDisplayLODTrees; bit 0x2 is the building/object channel and is gated by bDisplayLODBuildings plus the per-cell LOD map. Local state value 4 is an internal combined-update state that can downgrade to 1 or 2; it is not the .cmp LandLOD mask bit.",
     "mnemonic": "call",
     "size": 5
   },
@@ -250,12 +250,6 @@
     "line": "jmp     short loc_4443D0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x4443CD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x4443D0",
@@ -403,7 +397,7 @@
   },
   {
     "ea": "0x444412",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,7 +535,7 @@
   },
   {
     "ea": "0x444453",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -865,7 +859,7 @@
   },
   {
     "ea": "0x444513",
-    "line": "call    sub_57B950",
+    "line": "call    sub_57B950; Fast-travel UI/progress update helper called once per simulated travel-time step before relocation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1063,7 +1057,7 @@
   },
   {
     "ea": "0x444595",
-    "line": "call    sub_45FDA0",
+    "line": "call    TESSaveLoadGame_FinalizeLoadedForms",
     "mnemonic": "call",
     "size": 5
   },
@@ -1363,7 +1357,7 @@
   },
   {
     "ea": "0x444646",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1435,7 +1429,7 @@
   },
   {
     "ea": "0x444669",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1459,7 +1453,7 @@
   },
   {
     "ea": "0x444678",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1519,7 +1513,7 @@
   },
   {
     "ea": "0x444699",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },

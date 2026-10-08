@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 8,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x65CA60",
+      "0x65CAF4"
+    ]
+  ],
+  "chunks_sha256": "ed06ad6b0d4bc2027e8c47143d4ebdcd2338906a5021afe4430e29326d832167",
+  "comment_regular": "Verified 2026-10-04: reunited falsely separated internal blocks with original function. All entry xrefs to merged blocks are same-body branches/fallthroughs, with shared saved registers/stack and RET cleanup. Existing labels/comments preserved; analysis-only change. Prior fragmentation warning superseded for this body.\nVerified: formerly AVCollection_ModAVLimited. Existing node gets value+delta; if allowPositive==0 and result>0, clamps to zero. Zero result invokes Remove. Missing node with nonzero delta is allocated/inserted WITHOUT this clamp. RET12 proves three stack args, not the prior fabricated extra parameters. Probable homolog Fallout AdjustModifier 0x826B7298, but Fallout enum includes an additional clamp direction and zero-retention option absent here.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "AVCollection_ModAVLimited",
-  "end_ea": "0x65CA74",
+  "display_name": "AVCollection_AdjustValue",
+  "end_ea": "0x65CAF4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "AVCollection_ModAVLimited",
+  "name": "AVCollection_AdjustValue",
   "segment": ".text",
-  "sha256": "1f53d60400c405ee9c105fc6055458d287c7d0fba862b8aeaa8d625ceb0879ec",
-  "size": 20,
+  "sha256": "ed06ad6b0d4bc2027e8c47143d4ebdcd2338906a5021afe4430e29326d832167",
+  "size": 148,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x65CA60",
-  "type": "int __userpurge@<eax>(_DWORD *this@<ecx>, int, int, int, float, int)",
-  "xrefs_from_count": 11,
+  "total_chunk_size": 148,
+  "type": "void __thiscall(AVCollection *self, int actorValue, float delta, unsigned int allowPositive)",
+  "xrefs_from_count": 66,
   "xrefs_to_count": 8
 }

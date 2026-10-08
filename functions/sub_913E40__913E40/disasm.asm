@@ -41,7 +41,7 @@
 0x913EAB: sub     dword ptr ds:0BA83FCh, 1
 0x913EB2: jnz     short loc_913EBE
 0x913EB4: mov     dword ptr ds:0BA83F8h, 0
-0x913EBE: push    offset stru_BA8380; lpCriticalSection
+0x913EBE: push    offset unk_BA8380; lpCriticalSection
 0x913EC3: call    dword ptr ds:0A28074h
 0x913EC9: mov     ecx, [esp+40h+var_4]
 0x913ECD: pop     edi

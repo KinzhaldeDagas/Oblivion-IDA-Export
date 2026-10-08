@@ -1,3 +1,4 @@
+// Verified allocation path for CUPO: creates the shared CureEffect class and calls CureEffect_constr_MagicType with subtype value 3.
 int __cdecl ActiveEffect_Base_CreateDynamic_::Alloc_CurePoison(
         int a1,
         int a2,
@@ -28,9 +29,9 @@ int __cdecl ActiveEffect_Base_CreateDynamic_::Alloc_CurePoison(
 {
   ActiveEffect *v26; // eax
 
-  v26 = (ActiveEffect *)FormHeapAlloc(0x40u);
-  if ( v26 )
-    return ActiveEffect_Base_CreateDynamic_::Constr_CurePD(
+  v26 = (ActiveEffect *)FormHeapAlloc(0x40u); /*0x68ec22*/
+  if ( v26 ) /*0x68ec38*/
+    return ActiveEffect_Base_CreateDynamic_::Constr_CurePD( /*0x68ec40*/
              v26,
              a1,
              a2,
@@ -59,7 +60,7 @@ int __cdecl ActiveEffect_Base_CreateDynamic_::Alloc_CurePoison(
              (int)v26,
              a26);
   else
-    return ActiveEffect_Base_CreateDynamic_::Return_0(
+    return ActiveEffect_Base_CreateDynamic_::Return_0( /*0x68ec38*/
              a1,
              a2,
              a3,
@@ -84,5 +85,6 @@ int __cdecl ActiveEffect_Base_CreateDynamic_::Alloc_CurePoison(
              a22,
              a23,
              a24,
-             0);
+             0,
+             a26);
 }

@@ -1,19 +1,32 @@
 {
-  "callees_count": 12,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 9,
+  "chunks": [
+    [
+      "0x45E0D0",
+      "0x45E17D"
+    ]
+  ],
+  "chunks_sha256": "0f35e795841be43fa4a0885436d57eacbe388454dfa58d0922510c3d21fba27c",
+  "comment_regular": "Maps a full FormID to its compact save-game IRef index: returns an existing array index or appends the FormID and returns the new index. Created IDs (0xFFxxxxxx) pass through unchanged. This is FormID->IRef, despite the former reversed name.\nMEF v56 implementation: coherent first-index auxiliary table for numeric IDs. Created>=FF000000h pass through; zero/duplicates preserve lowest index. Small arrays scan directly; larger tables use bounded private process-heap hash storage. Checked append publishes only stable array state. Auxiliary/refusal paths call native trampoline; no invented zero index. No private cache lock spans engine allocation/free.",
+  "comment_repeatable": "Maps a full FormID to its compact save-game IRef index: returns an existing array index or appends the FormID and returns the new index. Created IDs (0xFFxxxxxx) pass through unchanged. This is FormID->IRef, despite the former reversed name.\n\nMEF PERF 2026-09-08: Verified PERF-3: non-created FormID lookup searches owner+74h array from index0 on every call and appends on miss. For K preexisting slots and N distinct absent IDs, comparisons=K*N+N*(N-1)/2; repeated hit at indexj costsj+1. Keep first matching index, existing order, zero entries and created-ID passthrough. No runtime timing claim.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "SaveLoad_IRefToFormID?",
+  "display_name": "SaveLoad_FormIDToIRef",
   "end_ea": "0x45E17D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "SaveLoad_IRefToFormID?",
+  "name": "SaveLoad_FormIDToIRef",
   "segment": ".text",
   "sha256": "0f35e795841be43fa4a0885436d57eacbe388454dfa58d0922510c3d21fba27c",
   "size": 173,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x45E0D0",
-  "type": "unsigned int __thiscall(unsigned int **this, unsigned int)",
+  "total_chunk_size": 173,
+  "type": "unsigned int __thiscall(TESSaveLoadGame_SerializationView *self, unsigned int formID)",
   "xrefs_from_count": 81,
   "xrefs_to_count": 9
 }

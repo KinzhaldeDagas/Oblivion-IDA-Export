@@ -1,4 +1,5 @@
-double __cdecl sub_6132D0(float a1, float a2, float a3, float a4)
+// Low ballistic-pitch solver. It forms the quadratic in cos^2(theta), selects the larger valid root for the low arc, and returns a signed acos(sqrt(root)); invalid trajectories return the engine fallback angle.
+double __cdecl Combat_CalculateBallisticPitch(float a1, float a2, float a3, float a4)
 {
   double v4; // st7
   double v5; // st6
@@ -16,31 +17,31 @@ double __cdecl sub_6132D0(float a1, float a2, float a3, float a4)
   float v20; // [esp+14h] [ebp+10h]
   float v21; // [esp+14h] [ebp+10h]
 
-  v19 = a1 * a4 * a1 / (a3 * (a3 + a3));
-  v4 = a1 * a1;
-  v10 = a2 * a2 + v4;
-  v5 = a2 * (dbl_A3F400 * v19) - v4;
-  v6 = v19;
-  v20 = v5;
-  v16 = v6 * v6;
-  v17 = v20 * v20 - v16 * (v10 * dbl_A3C800);
-  if ( v17 < 0.0 )
-    return (float)(flt_B3F9A4 * dbl_A3C770);
-  v18 = sqrt(v17);
-  v7 = v10 + v10;
-  v11 = (v18 - v20) / v7;
-  v21 = (-v20 - v18) / v7;
-  v8 = v11;
-  if ( v21 >= (double)v11 )
-    v11 = v21;
-  if ( v11 < 0.0 || v11 > 1.0 )
+  v19 = a1 * a4 * a1 / (a3 * (a3 + a3)); /*0x6132e8*/
+  v4 = a1 * a1; /*0x6132ec*/
+  v10 = a2 * a2 + v4; /*0x6132f8*/
+  v5 = a2 * (kFaceGenPolarNegativeTwo * v19) - v4; /*0x61330e*/
+  v6 = v19; /*0x61330e*/
+  v20 = v5; /*0x613310*/
+  v16 = v6 * v6; /*0x613320*/
+  v17 = v20 * v20 - v16 * (v10 * dbl_A3C800); /*0x613336*/
+  if ( v17 < 0.0 ) /*0x613349*/
+    return (float)(unk_B3F9A4 * dbl_A3C770); /*0x613349*/
+  v18 = sqrt(v17); /*0x613354*/
+  v7 = v10 + v10; /*0x613364*/
+  v11 = (v18 - v20) / v7; /*0x613378*/
+  v21 = (-v20 - v18) / v7; /*0x613382*/
+  v8 = v11; /*0x613386*/
+  if ( v21 >= (double)v11 ) /*0x613395*/
+    v11 = v21; /*0x61339f*/
+  if ( v11 < 0.0 || v11 > 1.0 ) /*0x6133bd*/
   {
-    return (float)(flt_B3F9A4 * dbl_A3C770);
+    return (float)(unk_B3F9A4 * dbl_A3C770); /*0x613409*/
   }
   else
   {
-    v12 = sqrt(v8);
-    v13 = sub_612820(v12);
-    return (float)(sub_537770(a2) * v13);
+    v12 = sqrt(v8); /*0x6133c4*/
+    v13 = sub_612820(v12); /*0x6133d5*/
+    return (float)(sub_537770(a2) * v13); /*0x6133f0*/
   }
 }

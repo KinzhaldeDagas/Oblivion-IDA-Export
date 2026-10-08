@@ -1,1 +1,10 @@
-IEnumSTATPROPSTGVtbl
+struct IEnumSTATPROPSTGVtbl
+{
+HRESULT_0 (*QueryInterface)(IEnumSTATPROPSTG_0 *, const IID *const, void **);
+ULONG (*AddRef)(IEnumSTATPROPSTG_0 *);
+ULONG (*Release)(IEnumSTATPROPSTG_0 *);
+HRESULT_0 (*Next)(IEnumSTATPROPSTG_0 *, ULONG, STATPROPSTG *, ULONG *);
+HRESULT_0 (*Skip)(IEnumSTATPROPSTG_0 *, ULONG);
+HRESULT_0 (*Reset)(IEnumSTATPROPSTG_0 *);
+HRESULT_0 (*Clone)(IEnumSTATPROPSTG_0 *, IEnumSTATPROPSTG_0 **);
+};

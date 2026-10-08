@@ -1,9 +1,9 @@
-0x79A890: push    ebx
-0x79A891: mov     ebx, [esp+4+arg_0]
+0x79A890: push    ebx; Overlap-safe backward copy/assignment of initialized 0x38-byte SFrondVertex records from [first,last) into the range ending at destinationLast.
+0x79A891: mov     ebx, [esp+4+first]
 0x79A895: push    ebp
 0x79A896: push    esi
-0x79A897: mov     esi, [esp+0Ch+arg_4]
-0x79A89B: mov     ebp, [esp+0Ch+arg_8]
+0x79A897: mov     esi, [esp+0Ch+last]
+0x79A89B: mov     ebp, [esp+0Ch+destinationLast]
 0x79A89F: mov     ecx, esi
 0x79A8A1: sub     ecx, ebx
 0x79A8A3: mov     eax, 92492493h

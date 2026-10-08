@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x79C020",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Thin backward-copy wrapper for overlap-safe SFrondGuide range assignment; returns destination start.",
     "mnemonic": "sub",
     "size": 3
   },
   {
     "ea": "0x79C023",
-    "line": "mov     edx, [esp+8+arg_8]",
+    "line": "mov     edx, [esp+8+destinationLast]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x79C028",
-    "line": "mov     ebx, [esp+0Ch+arg_0]",
+    "line": "mov     ebx, [esp+0Ch+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x79C02D",
-    "line": "mov     esi, [esp+10h+arg_4]",
+    "line": "mov     esi, [esp+10h+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x79C032",
-    "line": "mov     edi, [esp+14h+arg_8]",
+    "line": "mov     edi, [esp+14h+destinationLast]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -97,25 +97,25 @@
   },
   {
     "ea": "0x79C04B",
-    "line": "push    edi",
+    "line": "push    edi; destinationLast",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79C04C",
-    "line": "push    esi",
+    "line": "push    esi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79C04D",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79C04E",
-    "line": "call    sub_79B860",
+    "line": "call    OB_SFrondGuide_CopyAssignRangeBackward_010201A0; Overlap-safe backward copy-assignment of compact SFrondGuide records. Deep-assigns each embedded SFrondVertex vector before copying scalar fields.",
     "mnemonic": "call",
     "size": 5
   },

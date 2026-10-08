@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x707470",
-    "line": "push    esi",
+    "line": "push    esi; Fog property propagation decode: direct single-property insertion helper; formula would place fog kind 1 at state +0x0C, but stock native callsites are screen-texture non-fog inserts.",
     "mnemonic": "push",
     "size": 1
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x707488",
-    "line": "jg      short loc_70749D",
+    "line": "jg      short loc_70749D; Fog property propagation decode: direct insertion uses the same kind guard as 0x7077D0; fog kind 1 would pass.",
     "mnemonic": "jg",
     "size": 2
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x707498",
-    "line": "call    NiSmartPointer_Set??",
+    "line": "call    NiSmartPointer_Set??; Fog property propagation decode: direct insertion target is state +0x08 + 4*kind; fog kind 1 would be state +0x0C.",
     "mnemonic": "call",
     "size": 5
   },

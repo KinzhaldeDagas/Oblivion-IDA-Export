@@ -1,19 +1,32 @@
 {
-  "callees_count": 8,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x437E60",
+      "0x437EEF"
+    ]
+  ],
+  "chunks_sha256": "9c86ccd96e39fdccb622e9c5b3e47f0fbdc4394573dffddea5fca4b6670c3f41",
+  "comment_regular": "Verified QueuedTree vtable override at slot +0x30, homologous in role to Fallout QueuedTree::UseDistant3D. Oblivion builds a NiTriShape/STBB billboard and NiBillboardNode through TESObjectTREE_BuildDistantBillboard(false), applies shader properties, then invokes the owning queued-tree callback. Fallout instead builds TESObjectTREE distant geometry and prepares a DistantLOD shader object. This is not a QueuedTreeBillboard method.",
+  "comment_repeatable": "Verified QueuedTree vtable override at slot +0x30, homologous in role to Fallout QueuedTree::UseDistant3D. Oblivion builds a NiTriShape/STBB billboard and NiBillboardNode through TESObjectTREE_BuildDistantBillboard(false), applies shader properties, then invokes the owning queued-tree callback. Fallout instead builds TESObjectTREE distant geometry and prepares a DistantLOD shader object. This is not a QueuedTreeBillboard method.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_437E60",
+  "display_name": "QueuedTree_UseDistant3D",
   "end_ea": "0x437EEF",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_437E60",
+  "name": "QueuedTree_UseDistant3D",
   "segment": ".text",
   "sha256": "9c86ccd96e39fdccb622e9c5b3e47f0fbdc4394573dffddea5fca4b6670c3f41",
   "size": 143,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x437E60",
-  "type": "unsigned int *__thiscall(_DWORD **this)",
+  "total_chunk_size": 143,
+  "type": "void *__thiscall(QueuedTreeBillboard *this)",
   "xrefs_from_count": 55,
   "xrefs_to_count": 1
 }

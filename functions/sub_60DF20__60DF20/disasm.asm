@@ -52,26 +52,26 @@
 0x60DFAC: cmp     dword ptr [eax+44h], 1
 0x60DFB0: jz      short loc_60E001
 0x60DFB2: push    offset aClose; "Close"
-0x60DFB7: mov     ecx, esi
-0x60DFB9: call    sub_4715A0
+0x60DFB7: mov     ecx, esi; this
+0x60DFB9: call    NiControllerManager_FindSequenceByName; Looks up a NiControllerSequence by name in the controller manager name map at +0x58; returns null on miss.
 0x60DFBE: test    eax, eax
 0x60DFC0: jz      short loc_60E001
 0x60DFC2: cmp     dword ptr [eax+44h], 1
 0x60DFC6: jz      short loc_60E001
 0x60DFC8: and     word ptr [ebp+8], 0FFF7h
 0x60DFCE: push    edi
-0x60DFCF: call    sub_4DC270
+0x60DFCF: call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.
 0x60DFD4: mov     esi, eax
 0x60DFD6: add     esp, 4
 0x60DFD9: test    esi, esi
 0x60DFDB: jz      short loc_60E001
 0x60DFDD: push    offset unk_A2F830; lpCriticalSection
-0x60DFE2: mov     ecx, offset stru_B3B880
+0x60DFE2: mov     ecx, offset unk_B3B880
 0x60DFE7: call    NiEnterCriticalSection
 0x60DFEC: push    esi
-0x60DFED: mov     ecx, offset dword_B3B800
+0x60DFED: mov     ecx, offset unk_B3B800
 0x60DFF2: call    BSSimpleList_PushFront
-0x60DFF7: mov     ecx, offset stru_B3B880; lpCriticalSection
+0x60DFF7: mov     ecx, offset unk_B3B880; lpCriticalSection
 0x60DFFC: call    NiLeaveCriticalSection_0
 0x60E001: pop     esi
 0x60E002: pop     edi

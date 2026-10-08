@@ -199,13 +199,13 @@
   },
   {
     "ea": "0x65FE10",
-    "line": "lea     ecx, [esp+38h+var_20]",
+    "line": "lea     ecx, [esp+38h+var_20]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x65FE14",
-    "line": "call    sub_68A9F0",
+    "line": "call    PathLow_ctor; Verified PathLow constructor: installs the PathLow vtable at +0, initializes the BSSimpleList at +4/+8 to empty, copies unk_B3A458 to +0x0C, and sets byte +0x10 to 1. +0x0C and byte +0x10 semantics remain Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x65FE28",
-    "line": "push    eax",
+    "line": "push    eax; destinationWorldspace",
     "mnemonic": "push",
     "size": 1
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x65FE2B",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x65FE32",
-    "line": "push    eax",
+    "line": "push    eax; destinationCell",
     "mnemonic": "push",
     "size": 1
   },
@@ -283,25 +283,25 @@
   },
   {
     "ea": "0x65FE43",
-    "line": "push    eax",
+    "line": "push    eax; destinationPosition",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x65FE44",
-    "line": "push    ecx",
+    "line": "push    ecx; sourceRef",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x65FE45",
-    "line": "lea     ecx, [esp+48h+var_20]",
+    "line": "lea     ecx, [esp+48h+var_20]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x65FE49",
-    "line": "call    sub_68B030",
+    "line": "call    TravelPath_BuildToDestination; Verified top-level TravelPath build sequence: select the destination's smallest containing interior/exterior SubSpace (fallback to supplied cell/worldspace), call TravelPath_BuildRoute with the source reference and positions, then, on success, augment the route with TESRoad surface samples.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,19 +325,19 @@
   },
   {
     "ea": "0x65FE58",
-    "line": "push    edx",
+    "line": "push    edx; sourceRef",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x65FE59",
-    "line": "lea     ecx, [esp+3Ch+var_20]",
+    "line": "lea     ecx, [esp+3Ch+var_20]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x65FE5D",
-    "line": "call    sub_68A760",
+    "line": "call    TravelPath_ComputeDistance; Verified TravelPath_ComputeDistance sums Euclidean segments from sourceRef->GetPos through each TravelPathNode_GetPosition. For a type-0 teleport node, the segment endpoint is the linked door's TeleportData xyz marker; after consuming that node, the next segment starts at the current door's own TeleportData xyz (its destination marker). Type-1 nodes use owned position payloads; ordinary references use GetPos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x65FE81",
-    "line": "lea     ecx, [esp+38h+var_20]",
+    "line": "lea     ecx, [esp+38h+var_20]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x65FE8D",
-    "line": "call    sub_68AA10",
+    "line": "call    PathLow_dtor; Verified PathLow destructor: restores the PathLow vtable and frees/clears owned TravelPathNode records through TravelPath_ClearNodes. This routine does not free the containing object.",
     "mnemonic": "call",
     "size": 5
   },
@@ -469,19 +469,19 @@
   },
   {
     "ea": "0x65FEA9",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x65FEAE",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x65FEB0",
-    "line": "call    sub_42B410",
+    "line": "call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x65FEBB",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -676,5 +676,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C3D50",
+    "line": "lea     ecx, [ebp-20h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3D53",
+    "line": "jmp     PathLow_dtor; Verified PathLow destructor: restores the PathLow vtable and frees/clears owned TravelPathNode records through TravelPath_ClearNodes. This routine does not free the containing object.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3D58",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C3D5C",
+    "line": "lea     eax, [edx-28h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3D5F",
+    "line": "mov     ecx, [edx-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3D62",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C3D64",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3D69",
+    "line": "mov     eax, offset stru_AEC86C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3D6E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

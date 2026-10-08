@@ -1,1 +1,1 @@
-BlockChainStream_0
+typedef BlockChainStream BlockChainStream_0;

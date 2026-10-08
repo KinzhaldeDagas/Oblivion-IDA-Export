@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x64B3A0",
-    "line": "push    ebp",
+    "line": "push    ebp; Writes a caller-supplied TES/world velocity vector into the low-level collision object after scaling by hkFactor. Used by save/load restore and by the swept-hit listener to zero object velocity on selected layer hits.",
     "mnemonic": "push",
     "size": 1
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x64B3E9",
-    "line": "call    sub_8AC0B0",
+    "line": "call    sub_8AC0B0; TES4 authoritative: writes proxy velocity vector back into bhk collision object+0x10. Climbing/Slowfall velocity edits must happen before these calls or must write both proxy+0x2E0 and object+0x10 after the fact.",
     "mnemonic": "call",
     "size": 5
   },

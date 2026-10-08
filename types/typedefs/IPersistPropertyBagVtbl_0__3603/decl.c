@@ -1,1 +1,1 @@
-IPersistPropertyBagVtbl_0
+typedef IPersistPropertyBagVtbl IPersistPropertyBagVtbl_0;

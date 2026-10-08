@@ -1,19 +1,36 @@
 {
-  "callees_count": 31,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 15,
   "callers_count": 7,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
+  "chunks": [
+    [
+      "0x7291E0",
+      "0x729368"
+    ],
+    [
+      "0x9C9EB0",
+      "0x9C9EDE"
+    ]
+  ],
+  "chunks_sha256": "15d4b8ffc4e2aa08dfdc14d813ace2fc6eaf4859d08a3f1e330046081184302f",
+  "comment_regular": "\n[2026-10-05 actor shadow coverage audit] Archived gameplay log ending 2026-10-04 22:21:20 repeatedly rejects player root 1E514668 on data address 1D7B39E4, current type5/TriShapeData vtable A7F5A4, exact diagnostic tag mask00100000. Renderer SiteId GeometryDataDestructor=19 maps to tag20/bit20, i.e. this destructor entry. This proves recorded destructor history at the same address, not the same allocation incarnation; address reuse is a supported hypothesis, not a proven allocation trace. Current NativeBindPositionObserver CoordinateMutation holds ActiveEntries before callback, through CallDestructor and SEH finally; ActorMetadataBusy had omitted this counted activity. A source candidate adds foreign bind exclusion and queues exact invalidations from that counted callback using the existing metadata gate/owner-drain mechanism, while preserving unscoped foreign history. No Bloom history is cleared, no old actor pose reused, and native producer/domain/owning-edge/refcount/code proofs remain mandatory. The coun",
+  "comment_repeatable": "\nDX11 production binding audit 2026-10-01: this data mutation/destruction site uses NativeBindPositionObserver in the installed routing, NOT NativeActorWriteObservers generic prelude. Its cache invalidation fanout must therefore notify GPU-world GeometryData dependencies directly. The renderer now does this through ActorBindInvalidated before Original, followed by a short poseMetadataGate barrier outside observer/store/ledger locks. That barrier protects an in-progress CPU capture/commit from mutation/free. SetData/destructor adapters still tail-jump after the prelude: a zero ActiveEntries count is NOT proof of native completion or independent lifetime acquisition. Unknown foreign tails remain subject to the existing conservative lifetime policy.\nDX11 observer update 2026-10-01, superseding the earlier PRE-only/tail-jump implementation note: the plugin bind SetData and data-destructor adapters now invoke Original exactly once on a copied argument frame, retain activity through native completion and SEH unwind, and restore all captured GPR/EFLAGS/FX outputs with verified RET1C/RET0. The source-proof Invocation retains the real entering caller return address; Original sees an adapter continuation. No completion callback dereferences the possibly destroyed object. This closes an activity-count gap, not general scene/resource lifetime, pool or reference-writer authority; a zero count still does not authorize quiescent hook replacement or object access.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
   "display_name": "NiGeometryData::~NiGeometryData(void)",
   "end_ea": "0x729368",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
   "name": "??1NiGeometryData@@UAE@XZ",
   "segment": ".text",
   "sha256": "992f408fcb6aee7848378b9dfade07238171ca6d859df20098b31fad8a1f5ffb",
   "size": 392,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7291E0",
+  "total_chunk_size": 438,
   "type": "void __thiscall(NiGeometryData *__hidden this)",
-  "xrefs_from_count": 164,
+  "xrefs_from_count": 178,
   "xrefs_to_count": 7
 }

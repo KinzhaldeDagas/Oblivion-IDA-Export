@@ -23,7 +23,7 @@
 0x4A2F0E: mov     [esp+20h+var_4], 0
 0x4A2F16: jz      short loc_4A2F21
 0x4A2F18: mov     ecx, eax; this
-0x4A2F1A: call    ??0TESRegion@@QAE@XZ; TESRegion::TESRegion(void)
+0x4A2F1A: call    TESRegion_ctor; Verified: constructs TESRegion (FormType 0x2F), allocates owned 12-byte TESRegionDataList at +0x18 (ownsData=1), allocates 8-byte region-area list head at +0x1C, zeros worldspace +0x20 and cached weather +0x24, initializes float +0x28 to flt_A30634.
 0x4A2F1F: jmp     short loc_4A2F23
 0x4A2F21: xor     eax, eax
 0x4A2F23: mov     [esp+20h+var_4], 0FFFFFFFFh
@@ -76,3 +76,15 @@
 0x4A2FA3: pop     ebx
 0x4A2FA4: add     esp, 0Ch
 0x4A2FA7: retn    4
+0x9C6200: mov     eax, [ebp+4]
+0x9C6203: push    eax
+0x9C6204: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C6209: pop     ecx
+0x9C620A: retn
+0x9C620B: mov     edx, [esp+arg_4]
+0x9C620F: lea     eax, [edx-10h]
+0x9C6212: mov     ecx, [edx-14h]
+0x9C6215: xor     ecx, eax
+0x9C6217: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C621C: mov     eax, offset stru_AEE7E8
+0x9C6221: jmp     ___CxxFrameHandler3

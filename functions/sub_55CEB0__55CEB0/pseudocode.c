@@ -1,4 +1,4 @@
 char __thiscall sub_55CEB0(_BYTE *this)
 {
-  return *(this + 0x108);
+  return *(this + 0x108); /*0x55ceb6*/
 }

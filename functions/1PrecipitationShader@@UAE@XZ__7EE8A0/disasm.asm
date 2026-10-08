@@ -15,7 +15,7 @@
 0x7EE8C8: mov     dword ptr [ecx], offset ??_7PrecipitationShader@@6B@; const PrecipitationShader::`vftable'
 0x7EE8CE: mov     ebp, ds:0A2807Ch
 0x7EE8D4: mov     [esp+20h+var_4], 1
-0x7EE8DC: mov     edi, offset dword_B466E0
+0x7EE8DC: mov     edi, (offset flt_B46638+0A8h)
 0x7EE8E1: mov     esi, [edi]
 0x7EE8E3: test    esi, esi
 0x7EE8E5: jz      short loc_7EE905
@@ -33,9 +33,9 @@
 0x7EE8FD: call    eax
 0x7EE8FF: mov     dword ptr [edi], 0
 0x7EE905: add     edi, 4
-0x7EE908: cmp     edi, offset unk_B466F0
+0x7EE908: cmp     edi, (offset flt_B46638+0B8h)
 0x7EE90E: jl      short loc_7EE8E1
-0x7EE910: mov     edi, offset dword_B46708
+0x7EE910: mov     edi, (offset flt_B46638+0D0h)
 0x7EE915: mov     esi, [edi]
 0x7EE917: test    esi, esi
 0x7EE919: jz      short loc_7EE939
@@ -53,7 +53,7 @@
 0x7EE931: call    eax
 0x7EE933: mov     dword ptr [edi], 0
 0x7EE939: add     edi, 4
-0x7EE93C: cmp     edi, offset dword_B46710
+0x7EE93C: cmp     edi, (offset flt_B46638+0D8h)
 0x7EE942: jl      short loc_7EE915
 0x7EE944: mov     eax, ds:0B46704h
 0x7EE949: or      edi, 0FFFFFFFFh
@@ -62,7 +62,7 @@
 0x7EE950: add     [eax+60h], edi
 0x7EE953: mov     ecx, eax
 0x7EE955: jnz     short loc_7EE95C
-0x7EE957: call    sub_7604D0
+0x7EE957: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x7EE95C: mov     dword ptr ds:0B46704h, 0
 0x7EE966: mov     ecx, [esp+20h+var_10]
 0x7EE96A: mov     esi, [ecx+0ACh]
@@ -83,7 +83,7 @@
 0x7EE98F: call    edx
 0x7EE991: mov     ecx, [esp+20h+var_10]; this
 0x7EE995: mov     [esp+20h+var_4], edi
-0x7EE999: call    ??1BSShader@@UAE@XZ; BSShader::~BSShader(void)
+0x7EE999: call    ??1BSShader@@UAE@XZ;
 0x7EE99E: mov     ecx, dword ptr [esp+20h+var_C]
 0x7EE9A2: mov     large fs:0, ecx
 0x7EE9A9: pop     ecx
@@ -92,3 +92,15 @@
 0x7EE9AC: pop     ebp
 0x7EE9AD: add     esp, 10h
 0x7EE9B0: retn
+0x9CFC30: mov     ecx, [ebp-10h]; this
+0x9CFC33: jmp     ??1BSShader@@UAE@XZ;
+0x9CFC38: mov     ecx, [ebp-10h]
+0x9CFC3B: add     ecx, 0ACh ; '¬'; slot
+0x9CFC41: jmp     NiPointerSlot_Release
+0x9CFC46: mov     edx, [esp+arg_4]
+0x9CFC4A: lea     eax, [edx-10h]
+0x9CFC4D: mov     ecx, [edx-14h]
+0x9CFC50: xor     ecx, eax
+0x9CFC52: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CFC57: mov     eax, offset stru_AF878C
+0x9CFC5C: jmp     ___CxxFrameHandler3

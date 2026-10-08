@@ -1,1 +1,1 @@
-bhkBinaryAction
+struct bhkBinaryAction;

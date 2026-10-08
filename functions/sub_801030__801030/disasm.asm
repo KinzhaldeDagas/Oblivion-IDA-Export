@@ -23,7 +23,7 @@
 0x801083: push    eax; Dir
 0x801084: lea     ecx, [esp+2C8h+Drive]
 0x801088: push    ecx; Drive
-0x801089: push    offset FullPath; FullPath
+0x801089: push    (offset OB_RendererGlobalState_010201A0.pad_0B3+1Ch); FullPath
 0x80108E: call    __splitpath
 0x801093: lea     eax, [esp+2D0h+Dir]
 0x80109A: add     esp, 28h

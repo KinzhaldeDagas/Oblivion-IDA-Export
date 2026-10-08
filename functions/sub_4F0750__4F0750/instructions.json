@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x4F076E",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x4F077B",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -115,13 +115,13 @@
   },
   {
     "ea": "0x4F0789",
-    "line": "push    ebp; signed int",
+    "line": "push    ebp; cellY",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F078A",
-    "line": "push    edi; signed int",
+    "line": "push    edi; cellX",
     "mnemonic": "push",
     "size": 1
   },
@@ -840,12 +840,6 @@
     "size": 2
   },
   {
-    "ea": "0x4F091A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x4F0920",
     "line": "cmp     edi, 7FFFh",
     "mnemonic": "cmp",
@@ -1378,12 +1372,6 @@
     "line": "jmp     short loc_4F0A60",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x4F0A5A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
   },
   {
     "ea": "0x4F0A60",
@@ -2038,12 +2026,6 @@
     "line": "jmp     short loc_4F0BD0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x4F0BC9",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
   },
   {
     "ea": "0x4F0BD0",

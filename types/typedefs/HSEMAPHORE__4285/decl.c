@@ -1,1 +1,1 @@
-HSEMAPHORE
+typedef unsigned int HSEMAPHORE;

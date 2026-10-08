@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 5,
+  "chunks": [
+    [
+      "0x790350",
+      "0x7903A8"
+    ]
+  ],
+  "chunks_sha256": "0085dbe24701671f5c2cdec10d87e28b9c8b4b6c8af47c9a413b7c976d786701",
+  "comment_regular": "Orders three CBranch pointers using the float at CBranch+0x2C (fuzzyBranchVolume), implementing the descending-volume comparator used by the branch LOD sort.",
+  "comment_repeatable": "Orders three CBranch pointers using the float at CBranch+0x2C (fuzzyBranchVolume), implementing the descending-volume comparator used by the branch LOD sort.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_790350",
+  "display_name": "OB_BranchPtrVector_Sort3ByFuzzyVolume_010201A0",
   "end_ea": "0x7903A8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_790350",
+  "name": "OB_BranchPtrVector_Sort3ByFuzzyVolume_010201A0",
   "segment": ".text",
   "sha256": "0085dbe24701671f5c2cdec10d87e28b9c8b4b6c8af47c9a413b7c976d786701",
   "size": 88,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x790350",
-  "type": "void __cdecl(int *, int *, int *)",
+  "total_chunk_size": 88,
+  "type": "void __cdecl(OB_CBranch_010201A0 **first, OB_CBranch_010201A0 **middle, OB_CBranch_010201A0 **last)",
   "xrefs_from_count": 42,
   "xrefs_to_count": 5
 }

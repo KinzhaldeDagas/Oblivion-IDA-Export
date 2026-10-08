@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x9EA110",
-    "line": "push    offset aEffectsSkeleto; \"Effects\\\\skeletonBloodSpray.nif\"",
+    "line": "push    offset aEffectsSkeleto; Verified sBloodParticleExtra2 default registration is Effects\\skeletonBloodSpray.nif at string-setting slot 0x13A. The setting is inserted in g_GameSettingsByName and is reachable through generic name-keyed settings-file/SetGameSetting paths. No direct reference from the inspected Actor/TESCreature blood-particle resolution or particle-spawn callers was found; runtime selection/use remains Unknown.",
     "mnemonic": "push",
     "size": 5
   },
@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x9EA11A",
-    "line": "mov     ecx, offset dword_B371C0",
+    "line": "mov     ecx, offset stru_B371C0; self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x9EA11F",
-    "line": "call    GameSetting_ConstrAndReg",
+    "line": "call    GameSetting_ConstrAndReg; Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.",
     "mnemonic": "call",
     "size": 5
   },

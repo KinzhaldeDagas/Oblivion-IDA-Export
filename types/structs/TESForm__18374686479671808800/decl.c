@@ -1,1 +1,5 @@
-TESForm
+struct TESForm
+{
+TESFormVtbl *vtbl;
+TESFormMembr member;
+};

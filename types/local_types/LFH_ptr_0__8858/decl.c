@@ -1,1 +1,1 @@
-LFH_ptr_0
+typedef LFH_ptr LFH_ptr_0;

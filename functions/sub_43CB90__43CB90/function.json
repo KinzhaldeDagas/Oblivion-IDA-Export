@@ -1,19 +1,32 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x43CB90",
+      "0x43CC18"
+    ]
+  ],
+  "chunks_sha256": "c3a3e63cb36cb9def866b5f14de73dd8d888e8bfc66b603a0a0943c266d50e5b",
+  "comment_regular": "Verified QueuedTree vtable QueueModels override (+0x2C). Reads its reference at +0x20, gets the base TESObjectTREE, computes a form-specific LOD multiplier with TESForm_GetLODMult, optionally substitutes value 6 when TESObjectREFR_HasVisibleDistantFlag is true, then attaches a QueuedTreeModel child with the same reference/tree and inherited priority. Probable visible-distant association is supported by Fallout's named getter and identical 0x8000 check; Oblivion helper does not test the base form bit.",
+  "comment_repeatable": "Verified QueuedTree vtable QueueModels override (+0x2C). Reads its reference at +0x20, gets the base TESObjectTREE, computes a form-specific LOD multiplier with TESForm_GetLODMult, optionally substitutes value 6 when TESObjectREFR_HasVisibleDistantFlag is true, then attaches a QueuedTreeModel child with the same reference/tree and inherited priority. Probable visible-distant association is supported by Fallout's named getter and identical 0x8000 check; Oblivion helper does not test the base form bit.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 3,
-  "display_name": "sub_43CB90",
+  "display_name": "QueuedTree_QueueModels",
   "end_ea": "0x43CC18",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_43CB90",
+  "name": "QueuedTree_QueueModels",
   "segment": ".text",
   "sha256": "c3a3e63cb36cb9def866b5f14de73dd8d888e8bfc66b603a0a0943c266d50e5b",
   "size": 136,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x43CB90",
-  "type": "_DWORD *__thiscall(volatile LONG *this)",
+  "total_chunk_size": 136,
+  "type": "QueuedTreeModel_OblivionLayout *__thiscall(QueuedTree_OblivionLayout *this)",
   "xrefs_from_count": 68,
   "xrefs_to_count": 1
 }

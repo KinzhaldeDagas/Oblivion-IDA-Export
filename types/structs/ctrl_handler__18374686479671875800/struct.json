@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "ctrl_handler",
+  "definition": "struct ctrl_handler\n{\nPHANDLER_ROUTINE func __offset(OFF64|AUTO);\nctrl_handler *next __offset(OFF64|AUTO);\n}\n",
   "id": 18374686479671875800,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "func",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "PHANDLER_ROUTINE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "next",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "ctrl_handler *"
     }
   ],
   "name": "ctrl_handler",
+  "ordinal": 7942,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 8
 }

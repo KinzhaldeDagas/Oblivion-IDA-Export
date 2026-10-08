@@ -1,88 +1,144 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "EMFDRV_PDEVICE",
+  "definition": "struct __declspec(align(8)) EMFDRV_PDEVICE\n{\ngdi_physdev dev;\ngdi_physdev pathdev;\nENHMETAHEADER *emh;\nUINT handles_size;\nUINT cur_handles;\nHGDIOBJ *handles;\nHANDLE hFile;\nHBRUSH dc_brush;\nHPEN dc_pen;\nINT restoring;\nINT modifying_transform;\nBOOL path;\nINT dev_caps[122];\n}\n",
   "id": 18374686479672027423,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dev",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 12
+      "size": 12,
+      "type": "gdi_physdev"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pathdev",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 12
+      "offset_hex": "0xC",
+      "size": 12,
+      "type": "gdi_physdev"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "emh",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "ENHMETAHEADER *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "handles_size",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cur_handles",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "handles",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "HGDIOBJ *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hFile",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "HANDLE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dc_brush",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "HBRUSH"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dc_pen",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "HPEN"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "restoring",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "modifying_transform",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "path",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dev_caps",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 488
+      "size": 488,
+      "type": "INT[122]"
     }
   ],
   "name": "EMFDRV_PDEVICE",
+  "ordinal": 1437,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 552
 }

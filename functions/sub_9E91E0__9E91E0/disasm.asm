@@ -2,7 +2,7 @@
 0x9E91E6: push    ecx
 0x9E91E7: fstp    [esp+4+var_4]; float
 0x9E91EA: push    offset aFblockamountha; "fBlockAmountHandToHandMult"
-0x9E91EF: mov     ecx, offset fBlockAmountHandToHandMult
+0x9E91EF: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+230h)
 0x9E91F4: call    GameSetting_ConstrAndReg_float
 0x9E91F9: push    offset sub_A1E530; void (__cdecl *)()
 0x9E91FE: call    _atexit

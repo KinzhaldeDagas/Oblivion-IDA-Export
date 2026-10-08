@@ -18,7 +18,7 @@
 0x4615AE: jz      loc_461648
 0x4615B4: mov     esi, [ebp+0]
 0x4615B7: push    esi; a1
-0x4615B8: call    TESForm_LookupByFormID
+0x4615B8: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4615BD: add     esp, 4
 0x4615C0: test    eax, eax
 0x4615C2: jz      short loc_4615D0
@@ -26,13 +26,13 @@
 0x4615CA: push    eax
 0x4615CB: call    sub_449D20
 0x4615D0: push    esi; a1
-0x4615D1: call    TESForm_LookupByFormID
+0x4615D1: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4615D6: add     esp, 4
 0x4615D9: test    eax, eax
 0x4615DB: jz      short loc_4615E7
-0x4615DD: push    eax
-0x4615DE: mov     ecx, edi
-0x4615E0: call    sub_45C7A0
+0x4615DD: push    eax; form
+0x4615DE: mov     ecx, edi; self
+0x4615E0: call    TESSaveLoadGame_DeleteForm
 0x4615E5: jmp     short loc_46163D
 0x4615E7: mov     eax, ds:0B33B00h
 0x4615EC: mov     ecx, [eax+18h]
@@ -59,7 +59,7 @@
 0x461626: mov     ecx, offset FormHeap
 0x46162B: call    MemoryHeap_Free_checked
 0x461630: push    ebx
-0x461631: call    FormHeapFree
+0x461631: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x461636: add     esp, 4
 0x461639: mov     ebx, [esp+1Ch+var_8]
 0x46163D: mov     ebp, [ebp+4]
@@ -71,7 +71,7 @@
 0x461650: mov     eax, [ebx+4]
 0x461653: mov     esi, [eax+4]
 0x461656: push    eax
-0x461657: call    FormHeapFree
+0x461657: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x46165C: add     esp, 4
 0x46165F: test    esi, esi
 0x461661: mov     [ebx+4], esi

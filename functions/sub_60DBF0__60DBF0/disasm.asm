@@ -46,10 +46,10 @@
 0x60DC70: jz      short loc_60DC7F
 0x60DC72: mov     ecx, eax
 0x60DC74: fstp    st
-0x60DC76: call    sub_8AC0A0
+0x60DC76: call    bhkWorldObject_GetLinearVelocityPtr; TES4 authoritative: returns pointer to bhk collision object's velocity vector at object+0x10. 0x896000 copies this into proxy +0x2E0 before state update.
 0x60DC7B: fldz
 0x60DC7D: jmp     short loc_60DC84
-0x60DC7F: mov     eax, offset stru_BA7A40
+0x60DC7F: mov     eax, offset unk_BA7A40
 0x60DC84: movaps  xmm0, xmmword ptr [eax]
 0x60DC87: fst     [esp+40h+var_20]
 0x60DC8B: fst     [esp+40h+var_20+4]
@@ -60,14 +60,14 @@
 0x60DC9D: movaps  xmm0, xmmword ptr [esp+40h+var_20]
 0x60DCA2: movaps  xmmword ptr [esi], xmm0
 0x60DCA5: jmp     short loc_60DCD3
-0x60DCA7: push    eax
+0x60DCA7: push    eax; collidable
 0x60DCA8: fstp    st
-0x60DCAA: call    sub_8AFCE0
+0x60DCAA: call    bhkCollidable_ResolveNiAVObject; TES4 authoritative: resolves Havok collidable/contact reference to a NiAVObject when possible. Handles collidable type 1 directly and type 2 with a fallback through v5+0x0C.
 0x60DCAF: add     esp, 4
 0x60DCB2: test    eax, eax
 0x60DCB4: jz      short loc_60DCD1
 0x60DCB6: push    eax
-0x60DCB7: call    sub_4DC270
+0x60DCB7: call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.
 0x60DCBC: add     esp, 4
 0x60DCBF: test    eax, eax
 0x60DCC1: jz      short loc_60DCD1
@@ -99,9 +99,9 @@
 0x60DD12: test    eax, eax
 0x60DD14: jz      short loc_60DD1F
 0x60DD16: mov     ecx, eax
-0x60DD18: call    sub_8AC0A0
+0x60DD18: call    bhkWorldObject_GetLinearVelocityPtr; TES4 authoritative: returns pointer to bhk collision object's velocity vector at object+0x10. 0x896000 copies this into proxy +0x2E0 before state update.
 0x60DD1D: jmp     short loc_60DD24
-0x60DD1F: mov     eax, offset stru_BA7A40
+0x60DD1F: mov     eax, offset unk_BA7A40
 0x60DD24: fldz
 0x60DD26: movaps  xmm0, xmmword ptr [eax]
 0x60DD29: fst     [esp+40h+var_20]

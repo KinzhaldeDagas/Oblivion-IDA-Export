@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 5,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x79B120",
+      "0x79B15B"
+    ]
+  ],
+  "chunks_sha256": "4a7f8f360baa47bd76be34007fe01f5041140b24ec2e45a5580758d89894387e",
+  "comment_regular": "Destroys [first,last) SFrondTexture records at 0x2C-byte stride by releasing each embedded filename string.",
+  "comment_repeatable": "Destroys [first,last) SFrondTexture records at 0x2C-byte stride by releasing each embedded filename string.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_79B120",
+  "display_name": "OB_SFrondTexture_DestroyRange_010201A0",
   "end_ea": "0x79B15B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_79B120",
+  "name": "OB_SFrondTexture_DestroyRange_010201A0",
   "segment": ".text",
   "sha256": "4a7f8f360baa47bd76be34007fe01f5041140b24ec2e45a5580758d89894387e",
   "size": 59,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x79B120",
-  "type": "void __cdecl(_DWORD *, _DWORD *)",
+  "total_chunk_size": 59,
+  "type": "void __cdecl(OB_SFrondTexture_010201A0 *first, OB_SFrondTexture_010201A0 *last)",
   "xrefs_from_count": 27,
   "xrefs_to_count": 5
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7ABDE0",
-    "line": "push    esi",
+    "line": "push    esi; MoonSugarEffect decode: BSTPersistentList append helper. Reuses a free node or allocates one, stores payload at node+8, links at tail, increments count.",
     "mnemonic": "push",
     "size": 1
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x7ABDED",
-    "line": "call    sub_44D810",
+    "line": "call    NiTListNodePool_Acquire; Acquire one zeroed 12-byte NiTList node from Oblivion's synchronized global node pool, replenishing the pool when empty. This allocates list-node storage only; it does not allocate or retain a list payload.",
     "mnemonic": "call",
     "size": 5
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x7ABDF9",
-    "line": "mov     edx, [esp+4+arg_0]",
+    "line": "mov     edx, [esp+4+payloadAddress]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x7ABDFF",
-    "line": "mov     [eax+8], ecx",
+    "line": "mov     [eax+8], ecx; Accumulator tail append stores the existing RenderPass pointer verbatim at node+0x08. No copy, ownership transfer, or reference count occurs.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x7ABE0B",
-    "line": "mov     [eax+4], edx",
+    "line": "mov     [eax+4], edx; Link the new node after the current tail; this preserves caller traversal order inside accumulator selector buckets.",
     "mnemonic": "mov",
     "size": 3
   },

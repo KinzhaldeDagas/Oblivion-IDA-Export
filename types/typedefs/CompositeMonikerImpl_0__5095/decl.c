@@ -1,1 +1,1 @@
-CompositeMonikerImpl_0
+typedef CompositeMonikerImpl CompositeMonikerImpl_0;

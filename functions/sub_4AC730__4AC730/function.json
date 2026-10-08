@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x4AC730",
+      "0x4AC73D"
+    ]
+  ],
+  "chunks_sha256": "318c4347bbdf3a577598bad9569c794c7c7a3c3fd535ad4962f52dcfc225ef68",
+  "comment_regular": "Verified (Oblivion): tests (TESEffectShader::Data.cFlags at TESEffectShader+0x18) & mask. Direct callers establish 0x08 suppresses the particle-property path at MagicShaderHitEffect_InitializeVisual (callsite 0x6A1926), and 0x01 suppresses creation/setup of TextureEffectData (callsite 0x6A1B7C). Fallout's matching IsFlagSet helper also reads Data+0x18, but its larger EffectShaderData layout differs; Fallout similarity is corroborative only.",
+  "comment_repeatable": "Verified (Oblivion): tests (TESEffectShader::Data.cFlags at TESEffectShader+0x18) & mask. Direct callers establish 0x08 suppresses the particle-property path at MagicShaderHitEffect_InitializeVisual (callsite 0x6A1926), and 0x01 suppresses creation/setup of TextureEffectData (callsite 0x6A1B7C). Fallout's matching IsFlagSet helper also reads Data+0x18, but its larger EffectShaderData layout differs; Fallout similarity is corroborative only.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4AC730",
+  "display_name": "TESEffectShader_HasFlagBits",
   "end_ea": "0x4AC73D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4AC730",
+  "name": "TESEffectShader_HasFlagBits",
   "segment": ".text",
   "sha256": "318c4347bbdf3a577598bad9569c794c7c7a3c3fd535ad4962f52dcfc225ef68",
   "size": 13,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4AC730",
-  "type": "bool __thiscall(_BYTE *this, unsigned __int8)",
+  "total_chunk_size": 13,
+  "type": "bool __thiscall(TESEffectShader *this, unsigned __int8 mask)",
   "xrefs_from_count": 3,
   "xrefs_to_count": 4
 }

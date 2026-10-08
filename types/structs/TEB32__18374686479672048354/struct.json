@@ -1,538 +1,819 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_TEB32",
+  "definition": "struct _TEB32\n{\nNT_TIB32 Tib;\nULONG EnvironmentPointer;\nCLIENT_ID32 ClientId;\nULONG ActiveRpcHandle;\nULONG ThreadLocalStoragePointer;\nULONG Peb;\nULONG LastErrorValue;\nULONG CountOfOwnedCriticalSections;\nULONG CsrClientThread;\nULONG Win32ThreadInfo;\nULONG User32Reserved[26];\nULONG UserReserved[5];\nULONG WOW32Reserved;\nULONG CurrentLocale;\nULONG FpSoftwareStatusRegister;\nULONG ReservedForDebuggerInstrumentation[16];\nULONG SystemReserved1[26];\nchar PlaceholderCompatibilityMode;\nchar PlaceholderReserved[11];\nDWORD ProxiedProcessId;\nACTIVATION_CONTEXT_STACK32 ActivationContextStack;\nUCHAR WorkingOnBehalfOfTicket[8];\nLONG ExceptionCode;\nULONG ActivationContextStackPointer;\nULONG InstrumentationCallbackSp;\nULONG InstrumentationCallbackPreviousPc;\nULONG InstrumentationCallbackPreviousSp;\nBOOLEAN InstrumentationCallbackDisabled;\nBYTE SpareBytes1[23];\nULONG TxFsContext;\nULONG GdiTebBatch[312];\nCLIENT_ID32 RealClientId;\nULONG GdiCachedProcessHandle;\nULONG GdiClientPID;\nULONG GdiClientTID;\nULONG GdiThreadLocaleInfo;\nULONG Win32ClientInfo[62];\nULONG glDispatchTable[233];\nULONG glReserved1[29];\nULONG glReserved2;\nULONG glSectionInfo;\nULONG glSection;\nULONG glTable;\nULONG glCurrentRC;\nULONG glContext;\nULONG LastStatusValue;\nUNICODE_STRING32 StaticUnicodeString;\nWCHAR_0 StaticUnicodeBuffer[261];\nULONG DeallocationStack;\nULONG TlsSlots[64];\nLIST_ENTRY32 TlsLinks;\nULONG Vdm;\nULONG ReservedForNtRpc;\nULONG DbgSsReserved[2];\nULONG HardErrorDisabled;\nULONG Instrumentation[16];\nULONG WinSockData;\nULONG GdiBatchCount;\nULONG Spare2;\nULONG GuaranteedStackBytes;\nULONG ReservedForPerf;\nULONG ReservedForOle;\nULONG WaitingOnLoaderLock;\nULONG Reserved5[3];\nULONG TlsExpansionSlots;\nULONG ImpersonationLocale;\nULONG IsImpersonating;\nULONG NlsCache;\nULONG ShimData;\nULONG HeapVirtualAffinity;\nULONG CurrentTransactionHandle;\nULONG ActiveFrame;\nULONG FlsSlots;\nULONG PreferredLanguages;\nULONG UserPrefLanguages;\nULONG MergedPrefLanguages;\nULONG MuiImpersonation;\nUSHORT CrossTebFlags;\nUSHORT SameTebFlags;\nULONG TxnScopeEnterCallback;\nULONG TxnScopeExitCallback;\nULONG TxnScopeContext;\nULONG LockCount;\nLONG WowTebOffset;\nULONG ResourceRetValue;\nULONG ReservedForWdf;\nULONGLONG ReservedForCrt;\nGUID EffectiveContainerId;\n}\n",
   "id": 18374686479672048354,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Tib",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 28
+      "size": 28,
+      "type": "NT_TIB32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "EnvironmentPointer",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ClientId",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 8
+      "size": 8,
+      "type": "CLIENT_ID32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ActiveRpcHandle",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ThreadLocalStoragePointer",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Peb",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "LastErrorValue",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CountOfOwnedCriticalSections",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CsrClientThread",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Win32ThreadInfo",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "User32Reserved",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 104
+      "size": 104,
+      "type": "ULONG[26]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "UserReserved",
       "offset": 172,
-      "offset_hex": "0xac",
-      "size": 20
+      "offset_hex": "0xAC",
+      "size": 20,
+      "type": "ULONG[5]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "WOW32Reserved",
       "offset": 192,
-      "offset_hex": "0xc0",
-      "size": 4
+      "offset_hex": "0xC0",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CurrentLocale",
       "offset": 196,
-      "offset_hex": "0xc4",
-      "size": 4
+      "offset_hex": "0xC4",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "FpSoftwareStatusRegister",
       "offset": 200,
-      "offset_hex": "0xc8",
-      "size": 4
+      "offset_hex": "0xC8",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ReservedForDebuggerInstrumentation",
       "offset": 204,
-      "offset_hex": "0xcc",
-      "size": 64
+      "offset_hex": "0xCC",
+      "size": 64,
+      "type": "ULONG[16]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SystemReserved1",
       "offset": 268,
-      "offset_hex": "0x10c",
-      "size": 104
+      "offset_hex": "0x10C",
+      "size": 104,
+      "type": "ULONG[26]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "PlaceholderCompatibilityMode",
       "offset": 372,
       "offset_hex": "0x174",
-      "size": 1
+      "size": 1,
+      "type": "char"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "PlaceholderReserved",
       "offset": 373,
       "offset_hex": "0x175",
-      "size": 11
+      "size": 11,
+      "type": "char[11]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ProxiedProcessId",
       "offset": 384,
       "offset_hex": "0x180",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ActivationContextStack",
       "offset": 388,
       "offset_hex": "0x184",
-      "size": 24
+      "size": 24,
+      "type": "ACTIVATION_CONTEXT_STACK32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "WorkingOnBehalfOfTicket",
       "offset": 412,
-      "offset_hex": "0x19c",
-      "size": 8
+      "offset_hex": "0x19C",
+      "size": 8,
+      "type": "UCHAR[8]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ExceptionCode",
       "offset": 420,
-      "offset_hex": "0x1a4",
-      "size": 4
+      "offset_hex": "0x1A4",
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ActivationContextStackPointer",
       "offset": 424,
-      "offset_hex": "0x1a8",
-      "size": 4
+      "offset_hex": "0x1A8",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "InstrumentationCallbackSp",
       "offset": 428,
-      "offset_hex": "0x1ac",
-      "size": 4
+      "offset_hex": "0x1AC",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "InstrumentationCallbackPreviousPc",
       "offset": 432,
-      "offset_hex": "0x1b0",
-      "size": 4
+      "offset_hex": "0x1B0",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "InstrumentationCallbackPreviousSp",
       "offset": 436,
-      "offset_hex": "0x1b4",
-      "size": 4
+      "offset_hex": "0x1B4",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "InstrumentationCallbackDisabled",
       "offset": 440,
-      "offset_hex": "0x1b8",
-      "size": 1
+      "offset_hex": "0x1B8",
+      "size": 1,
+      "type": "BOOLEAN"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SpareBytes1",
       "offset": 441,
-      "offset_hex": "0x1b9",
-      "size": 23
+      "offset_hex": "0x1B9",
+      "size": 23,
+      "type": "BYTE[23]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "TxFsContext",
       "offset": 464,
-      "offset_hex": "0x1d0",
-      "size": 4
+      "offset_hex": "0x1D0",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GdiTebBatch",
       "offset": 468,
-      "offset_hex": "0x1d4",
-      "size": 1248
+      "offset_hex": "0x1D4",
+      "size": 1248,
+      "type": "ULONG[312]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RealClientId",
       "offset": 1716,
-      "offset_hex": "0x6b4",
-      "size": 8
+      "offset_hex": "0x6B4",
+      "size": 8,
+      "type": "CLIENT_ID32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GdiCachedProcessHandle",
       "offset": 1724,
-      "offset_hex": "0x6bc",
-      "size": 4
+      "offset_hex": "0x6BC",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GdiClientPID",
       "offset": 1728,
-      "offset_hex": "0x6c0",
-      "size": 4
+      "offset_hex": "0x6C0",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GdiClientTID",
       "offset": 1732,
-      "offset_hex": "0x6c4",
-      "size": 4
+      "offset_hex": "0x6C4",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GdiThreadLocaleInfo",
       "offset": 1736,
-      "offset_hex": "0x6c8",
-      "size": 4
+      "offset_hex": "0x6C8",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Win32ClientInfo",
       "offset": 1740,
-      "offset_hex": "0x6cc",
-      "size": 248
+      "offset_hex": "0x6CC",
+      "size": 248,
+      "type": "ULONG[62]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "glDispatchTable",
       "offset": 1988,
-      "offset_hex": "0x7c4",
-      "size": 932
+      "offset_hex": "0x7C4",
+      "size": 932,
+      "type": "ULONG[233]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "glReserved1",
       "offset": 2920,
-      "offset_hex": "0xb68",
-      "size": 116
+      "offset_hex": "0xB68",
+      "size": 116,
+      "type": "ULONG[29]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "glReserved2",
       "offset": 3036,
-      "offset_hex": "0xbdc",
-      "size": 4
+      "offset_hex": "0xBDC",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "glSectionInfo",
       "offset": 3040,
-      "offset_hex": "0xbe0",
-      "size": 4
+      "offset_hex": "0xBE0",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "glSection",
       "offset": 3044,
-      "offset_hex": "0xbe4",
-      "size": 4
+      "offset_hex": "0xBE4",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "glTable",
       "offset": 3048,
-      "offset_hex": "0xbe8",
-      "size": 4
+      "offset_hex": "0xBE8",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "glCurrentRC",
       "offset": 3052,
-      "offset_hex": "0xbec",
-      "size": 4
+      "offset_hex": "0xBEC",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "glContext",
       "offset": 3056,
-      "offset_hex": "0xbf0",
-      "size": 4
+      "offset_hex": "0xBF0",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "LastStatusValue",
       "offset": 3060,
-      "offset_hex": "0xbf4",
-      "size": 4
+      "offset_hex": "0xBF4",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "StaticUnicodeString",
       "offset": 3064,
-      "offset_hex": "0xbf8",
-      "size": 8
+      "offset_hex": "0xBF8",
+      "size": 8,
+      "type": "UNICODE_STRING32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "StaticUnicodeBuffer",
       "offset": 3072,
-      "offset_hex": "0xc00",
-      "size": 522
+      "offset_hex": "0xC00",
+      "size": 522,
+      "type": "WCHAR_0[261]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DeallocationStack",
       "offset": 3596,
-      "offset_hex": "0xe0c",
-      "size": 4
+      "offset_hex": "0xE0C",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "TlsSlots",
       "offset": 3600,
-      "offset_hex": "0xe10",
-      "size": 256
+      "offset_hex": "0xE10",
+      "size": 256,
+      "type": "ULONG[64]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "TlsLinks",
       "offset": 3856,
-      "offset_hex": "0xf10",
-      "size": 8
+      "offset_hex": "0xF10",
+      "size": 8,
+      "type": "LIST_ENTRY32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Vdm",
       "offset": 3864,
-      "offset_hex": "0xf18",
-      "size": 4
+      "offset_hex": "0xF18",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ReservedForNtRpc",
       "offset": 3868,
-      "offset_hex": "0xf1c",
-      "size": 4
+      "offset_hex": "0xF1C",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DbgSsReserved",
       "offset": 3872,
-      "offset_hex": "0xf20",
-      "size": 8
+      "offset_hex": "0xF20",
+      "size": 8,
+      "type": "ULONG[2]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "HardErrorDisabled",
       "offset": 3880,
-      "offset_hex": "0xf28",
-      "size": 4
+      "offset_hex": "0xF28",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Instrumentation",
       "offset": 3884,
-      "offset_hex": "0xf2c",
-      "size": 64
+      "offset_hex": "0xF2C",
+      "size": 64,
+      "type": "ULONG[16]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "WinSockData",
       "offset": 3948,
-      "offset_hex": "0xf6c",
-      "size": 4
+      "offset_hex": "0xF6C",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GdiBatchCount",
       "offset": 3952,
-      "offset_hex": "0xf70",
-      "size": 4
+      "offset_hex": "0xF70",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Spare2",
       "offset": 3956,
-      "offset_hex": "0xf74",
-      "size": 4
+      "offset_hex": "0xF74",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GuaranteedStackBytes",
       "offset": 3960,
-      "offset_hex": "0xf78",
-      "size": 4
+      "offset_hex": "0xF78",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ReservedForPerf",
       "offset": 3964,
-      "offset_hex": "0xf7c",
-      "size": 4
+      "offset_hex": "0xF7C",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ReservedForOle",
       "offset": 3968,
-      "offset_hex": "0xf80",
-      "size": 4
+      "offset_hex": "0xF80",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "WaitingOnLoaderLock",
       "offset": 3972,
-      "offset_hex": "0xf84",
-      "size": 4
+      "offset_hex": "0xF84",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Reserved5",
       "offset": 3976,
-      "offset_hex": "0xf88",
-      "size": 12
+      "offset_hex": "0xF88",
+      "size": 12,
+      "type": "ULONG[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "TlsExpansionSlots",
       "offset": 3988,
-      "offset_hex": "0xf94",
-      "size": 4
+      "offset_hex": "0xF94",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ImpersonationLocale",
       "offset": 3992,
-      "offset_hex": "0xf98",
-      "size": 4
+      "offset_hex": "0xF98",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IsImpersonating",
       "offset": 3996,
-      "offset_hex": "0xf9c",
-      "size": 4
+      "offset_hex": "0xF9C",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "NlsCache",
       "offset": 4000,
-      "offset_hex": "0xfa0",
-      "size": 4
+      "offset_hex": "0xFA0",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ShimData",
       "offset": 4004,
-      "offset_hex": "0xfa4",
-      "size": 4
+      "offset_hex": "0xFA4",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "HeapVirtualAffinity",
       "offset": 4008,
-      "offset_hex": "0xfa8",
-      "size": 4
+      "offset_hex": "0xFA8",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CurrentTransactionHandle",
       "offset": 4012,
-      "offset_hex": "0xfac",
-      "size": 4
+      "offset_hex": "0xFAC",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ActiveFrame",
       "offset": 4016,
-      "offset_hex": "0xfb0",
-      "size": 4
+      "offset_hex": "0xFB0",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "FlsSlots",
       "offset": 4020,
-      "offset_hex": "0xfb4",
-      "size": 4
+      "offset_hex": "0xFB4",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "PreferredLanguages",
       "offset": 4024,
-      "offset_hex": "0xfb8",
-      "size": 4
+      "offset_hex": "0xFB8",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "UserPrefLanguages",
       "offset": 4028,
-      "offset_hex": "0xfbc",
-      "size": 4
+      "offset_hex": "0xFBC",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "MergedPrefLanguages",
       "offset": 4032,
-      "offset_hex": "0xfc0",
-      "size": 4
+      "offset_hex": "0xFC0",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "MuiImpersonation",
       "offset": 4036,
-      "offset_hex": "0xfc4",
-      "size": 4
+      "offset_hex": "0xFC4",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CrossTebFlags",
       "offset": 4040,
-      "offset_hex": "0xfc8",
-      "size": 2
+      "offset_hex": "0xFC8",
+      "size": 2,
+      "type": "USHORT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SameTebFlags",
       "offset": 4042,
-      "offset_hex": "0xfca",
-      "size": 2
+      "offset_hex": "0xFCA",
+      "size": 2,
+      "type": "USHORT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "TxnScopeEnterCallback",
       "offset": 4044,
-      "offset_hex": "0xfcc",
-      "size": 4
+      "offset_hex": "0xFCC",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "TxnScopeExitCallback",
       "offset": 4048,
-      "offset_hex": "0xfd0",
-      "size": 4
+      "offset_hex": "0xFD0",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "TxnScopeContext",
       "offset": 4052,
-      "offset_hex": "0xfd4",
-      "size": 4
+      "offset_hex": "0xFD4",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "LockCount",
       "offset": 4056,
-      "offset_hex": "0xfd8",
-      "size": 4
+      "offset_hex": "0xFD8",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "WowTebOffset",
       "offset": 4060,
-      "offset_hex": "0xfdc",
-      "size": 4
+      "offset_hex": "0xFDC",
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ResourceRetValue",
       "offset": 4064,
-      "offset_hex": "0xfe0",
-      "size": 4
+      "offset_hex": "0xFE0",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ReservedForWdf",
       "offset": 4068,
-      "offset_hex": "0xfe4",
-      "size": 4
+      "offset_hex": "0xFE4",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ReservedForCrt",
       "offset": 4072,
-      "offset_hex": "0xfe8",
-      "size": 8
+      "offset_hex": "0xFE8",
+      "size": 8,
+      "type": "ULONGLONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "EffectiveContainerId",
       "offset": 4080,
-      "offset_hex": "0xff0",
-      "size": 16
+      "offset_hex": "0xFF0",
+      "size": 16,
+      "type": "GUID"
     }
   ],
   "name": "_TEB32",
+  "ordinal": 9037,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 4096
 }

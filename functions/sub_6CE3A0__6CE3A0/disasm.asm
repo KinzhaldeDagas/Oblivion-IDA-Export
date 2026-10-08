@@ -1,9 +1,9 @@
-0x6CE3A0: push    esi
+0x6CE3A0: push    esi; Equality requires equal NiTimeController base state and null-symmetric interpolator state; two non-null interpolators compare through their virtual IsEqual slot (+0x2C).
 0x6CE3A1: push    edi
 0x6CE3A2: mov     edi, [esp+8+arg_0]
 0x6CE3A6: push    edi
 0x6CE3A7: mov     esi, ecx
-0x6CE3A9: call    sub_6D0540
+0x6CE3A9: call    NiInterpController_IsEqual; NiInterpController equality thunk delegates to NiTimeController_IsEqual.
 0x6CE3AE: test    al, al
 0x6CE3B0: jnz     short loc_6CE3B9
 0x6CE3B2: pop     edi

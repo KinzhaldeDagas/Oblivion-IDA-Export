@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x795510",
-    "line": "push    esi",
+    "line": "push    esi; OBLIVION AUTHORITY (2026-08-30): Deep copy assignment for vector<unsigned short>, with self/empty/reuse/reallocate paths and exact end repair.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x795512",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+source]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x795534",
-    "line": "call    sub_794F40",
+    "line": "call    OB_stVectorUShort_Clear_010201A0; OBLIVION AUTHORITY (2026-08-30): Clears vector<unsigned short> while retaining capacity by reducing end to begin.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,25 +199,25 @@
   },
   {
     "ea": "0x795558",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x795559",
-    "line": "push    ebp; int",
+    "line": "push    ebp; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79555A",
-    "line": "push    ebx; Src",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79555B",
-    "line": "call    sub_794E00",
+    "line": "call    OB_stVectorUShort_CopyRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Copies the half-open unsigned-short range [first,last) into initialized destination storage with memmove_s and returns destination plus the copied element count.",
     "mnemonic": "call",
     "size": 5
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x7955BB",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -493,19 +493,19 @@
   },
   {
     "ea": "0x7955BF",
-    "line": "push    ebx; int",
+    "line": "push    ebx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7955C0",
-    "line": "push    edx; Src",
+    "line": "push    edx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7955C1",
-    "line": "call    sub_794E00",
+    "line": "call    OB_stVectorUShort_CopyRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Copies the half-open unsigned-short range [first,last) into initialized destination storage with memmove_s and returns destination plus the copied element count.",
     "mnemonic": "call",
     "size": 5
   },
@@ -529,19 +529,19 @@
   },
   {
     "ea": "0x7955CF",
-    "line": "push    edx; Dst",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7955D0",
-    "line": "push    eax; int",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7955D1",
-    "line": "push    ebx; Src",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x7955D4",
-    "line": "call    sub_794E80",
+    "line": "call    OB_stVectorUShort_UninitializedCopyRange_010201A0",
     "mnemonic": "call",
     "size": 5
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x7955EA",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -679,19 +679,19 @@
   },
   {
     "ea": "0x795604",
-    "line": "push    eax",
+    "line": "push    eax; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x795605",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x795607",
-    "line": "call    sub_795260",
+    "line": "call    OB_stVectorUShort_Buy_010201A0; OBLIVION AUTHORITY (2026-08-30): Initializes raw vector<unsigned short> storage, enforcing the 0x7FFFFFFF element limit and allocating count*2.",
     "mnemonic": "call",
     "size": 5
   },
@@ -727,19 +727,19 @@
   },
   {
     "ea": "0x795619",
-    "line": "push    ecx; Dst",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79561A",
-    "line": "push    edx; int",
+    "line": "push    edx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79561B",
-    "line": "push    eax; Src",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -751,7 +751,7 @@
   },
   {
     "ea": "0x79561E",
-    "line": "call    sub_794E80",
+    "line": "call    OB_stVectorUShort_UninitializedCopyRange_010201A0",
     "mnemonic": "call",
     "size": 5
   },

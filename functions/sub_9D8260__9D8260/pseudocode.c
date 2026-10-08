@@ -1,4 +1,4 @@
 int sub_9D8260()
 {
-  return atexit(sub_A16640);
+  return atexit(sub_A16640); /*0x9d826b*/
 }

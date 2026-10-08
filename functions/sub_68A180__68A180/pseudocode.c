@@ -1,10 +1,10 @@
-int __thiscall sub_68A180(_DWORD *this)
+TESObjectREFR *__thiscall sub_68A180(const TravelPathNode **this)
 {
-  _BYTE *v1; // ecx
+  const TravelPathNode *v1; // ecx
 
-  v1 = (_BYTE *)*(this + 1);
-  if ( v1 )
-    return sub_68B0F0(v1);
+  v1 = *(this + 1); /*0x68a180*/
+  if ( v1 ) /*0x68a185*/
+    return TravelPathNode_GetReference(v1); /*0x68a187*/
   else
-    return 0;
+    return 0; /*0x68a18c*/
 }

@@ -1,19 +1,32 @@
 {
-  "callees_count": 18,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x550330",
+      "0x550422"
+    ]
+  ],
+  "chunks_sha256": "1b8251025787f8d9c43943f6cec478fd734eb9fcc12999e163dae016a4da2ddb",
+  "comment_regular": "Exact FaceGen matrix equality: dimensions must match and all coefficient bytes are compared.",
+  "comment_repeatable": "Exact FaceGen matrix equality: dimensions must match and all coefficient bytes are compared.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_550330",
+  "display_name": "FaceGenMatrix_Equals",
   "end_ea": "0x550422",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_550330",
+  "name": "FaceGenMatrix_Equals",
   "segment": ".text",
   "sha256": "1b8251025787f8d9c43943f6cec478fd734eb9fcc12999e163dae016a4da2ddb",
   "size": 242,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x550330",
-  "type": "bool __thiscall(int *this, _DWORD *)",
+  "total_chunk_size": 242,
+  "type": "bool __thiscall(const FaceGenMatrix *this, const FaceGenMatrix *right)",
   "xrefs_from_count": 111,
   "xrefs_to_count": 1
 }

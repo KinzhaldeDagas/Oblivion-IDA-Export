@@ -1,4 +1,4 @@
-0x58D2F0: push    0FFFFFFFFh
+0x58D2F0: push    0FFFFFFFFh; Probable 2026-10-07: TileTemplate::AddPair role, supported by all seven callers in ParseFile, item construction and lexical normalization, plus Fallout named0x827DF340. Not renamed this pass: full rewrite branches/command semantics remain unexamined. Highest-value next parser target.
 0x58D2F2: push    offset SEH_58D2F0
 0x58D2F7: mov     eax, large fs:0
 0x58D2FD: push    eax
@@ -13,15 +13,15 @@
 0x58D30D: lea     eax, [esp+28h+var_C]
 0x58D311: mov     large fs:0, eax
 0x58D317: mov     [esp+28h+var_10], ecx
-0x58D31B: cmp     byte ptr [esp+28h+arg_C], 0
+0x58D31B: cmp     [esp+28h+preserveStrings], 0
 0x58D320: fldz
 0x58D322: mov     esi, [esp+28h+Src]
 0x58D326: fstp    [esp+28h+var_14]
 0x58D32A: jnz     short loc_58D34E
 0x58D32C: push    esi; unsigned __int8 *
 0x58D32D: call    TileStringToStringID
-0x58D332: mov     [esp+2Ch+arg_C], eax
-0x58D336: fild    [esp+2Ch+arg_C]
+0x58D332: mov     dword ptr [esp+2Ch+preserveStrings], eax
+0x58D336: fild    dword ptr [esp+2Ch+preserveStrings]
 0x58D33A: add     esp, 4
 0x58D33D: fstp    [esp+28h+var_14]
 0x58D341: fldz
@@ -31,34 +31,34 @@
 0x58D34C: jp      short loc_58D36A
 0x58D34E: cmp     byte ptr [esi], 5Fh ; '_'
 0x58D351: jnz     short loc_58D36A
-0x58D353: push    0FFFFFFFFh; int
-0x58D355: push    esi; unsigned __int8 *
-0x58D356: call    sub_58B040
-0x58D35B: mov     [esp+30h+arg_C], eax
-0x58D35F: fild    [esp+30h+arg_C]
+0x58D353: push    0FFFFFFFFh; requestedID
+0x58D355: push    esi; name
+0x58D356: call    Tile__AddUserTrait
+0x58D35B: mov     dword ptr [esp+30h+preserveStrings], eax
+0x58D35F: fild    dword ptr [esp+30h+preserveStrings]
 0x58D363: add     esp, 8
 0x58D366: fstp    [esp+28h+var_14]
 0x58D36A: push    18h; Size
 0x58D36C: call    FormHeapAlloc
 0x58D371: mov     edi, eax
 0x58D373: add     esp, 4
-0x58D376: mov     [esp+28h+arg_C], edi
+0x58D376: mov     dword ptr [esp+28h+preserveStrings], edi
 0x58D37A: test    edi, edi
 0x58D37C: mov     [esp+28h+var_4], 0
 0x58D384: jz      short loc_58D3AC
-0x58D386: mov     eax, [esp+28h+arg_8]
+0x58D386: mov     eax, [esp+28h+sourceLine]
 0x58D38A: fld     [esp+28h+var_14]
-0x58D38E: push    eax; int
+0x58D38E: push    eax; sourceLine
 0x58D38F: fld     st
-0x58D391: call    Double_To_SInt32
-0x58D396: push    eax; int
-0x58D397: push    esi; int
+0x58D391: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
+0x58D396: push    eax; argument
+0x58D397: push    esi; text
 0x58D398: push    ecx
-0x58D399: mov     ecx, [esp+38h+arg_0]
-0x58D39D: fstp    [esp+38h+var_38]; float
-0x58D3A0: push    ecx; int
-0x58D3A1: mov     ecx, edi
-0x58D3A3: call    sub_589FA0
+0x58D399: mov     ecx, [esp+38h+command]
+0x58D39D: fstp    [esp+38h+number]; number
+0x58D3A0: push    ecx; command
+0x58D3A1: mov     ecx, edi; this
+0x58D3A3: call    Tile__TileTemplateItem__Initialize; Verified: 0x18-byte parsed item fields command+0,number+4,BSStringT text+8,contextual argument+0x10,line+0x14. BuildAndNameTree writes createdTile into argument for tile-begin; ConnectTraits reads trait there for property/action commands. sourceLine comes from ParseFile newline counter. Remaining command-dependent interpretations Unknown.
 0x58D3A8: mov     ebp, eax
 0x58D3AA: jmp     short loc_58D3AE
 0x58D3AC: xor     ebp, ebp
@@ -123,7 +123,7 @@
 0x58D452: fld     [esp+28h+var_14]
 0x58D456: fstp    dword ptr [ebp+4]
 0x58D459: fld     [esp+28h+var_14]
-0x58D45D: call    Double_To_SInt32
+0x58D45D: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x58D462: mov     [ebp+10h], eax
 0x58D465: mov     edx, [esp+28h+var_10]
 0x58D469: mov     eax, [edx+14h]
@@ -143,7 +143,7 @@
 0x58D48C: test    eax, eax
 0x58D48E: jz      short loc_58D493
 0x58D490: mov     edi, [eax+8]
-0x58D493: mov     eax, [esp+28h+arg_0]
+0x58D493: mov     eax, [esp+28h+command]
 0x58D497: cmp     eax, 0BBAh
 0x58D49C: jnz     loc_58D56D
 0x58D4A2: test    ebx, ebx
@@ -156,7 +156,7 @@
 0x58D4BE: fnstsw  ax
 0x58D4C0: test    ah, 44h
 0x58D4C3: jp      loc_58D5CD
-0x58D4C9: mov     ecx, [edx+8]
+0x58D4C9: mov     ecx, [edx+8]; this
 0x58D4CC: cmp     dword ptr [ecx+0Ch], 0
 0x58D4D0: jz      short loc_58D4E7
 0x58D4D2: push    offset aCanTHaveNested; "Can't have nested template definitions "...
@@ -166,8 +166,8 @@
 0x58D4E3: xor     ebx, ebx
 0x58D4E5: jmp     short loc_58D513
 0x58D4E7: mov     edi, [esp+28h+Src]
-0x58D4EB: push    edi
-0x58D4EC: call    sub_58BC80
+0x58D4EB: push    edi; name
+0x58D4EC: call    Tile__BuildStorage__GetSubTemplateByName; Verified: walks BuildStorage subTemplates and compares BSStringT names case-insensitively; returns match or NULL. Called by AddPair when entering named template. Fallout named analogue0x827DBEF8.
 0x58D4F1: mov     esi, [esp+28h+var_10]
 0x58D4F5: mov     ecx, [esi+8]
 0x58D4F8: mov     [ecx+0Ch], eax
@@ -175,9 +175,9 @@
 0x58D4FE: xor     ebx, ebx
 0x58D500: cmp     [edx+0Ch], ebx
 0x58D503: jnz     short loc_58D513
-0x58D505: push    edi
-0x58D506: mov     ecx, edx
-0x58D508: call    sub_58CE30
+0x58D505: push    edi; name
+0x58D506: mov     ecx, edx; this
+0x58D508: call    Tile__BuildStorage__NewSubTemplate; Verified: allocates0x1C template, Initialize(name,storage), appends to embedded subtemplate list, returns template. Used by AddPair when name lookup fails. Fallout named analogue0x827DED28 allocates0x14 template.
 0x58D50D: mov     ecx, [esi+8]
 0x58D510: mov     [ecx+0Ch], eax
 0x58D513: mov     eax, [esi+14h]
@@ -200,12 +200,12 @@
 0x58D53D: jz      short loc_58D55C
 0x58D53F: mov     ecx, [edi+8]
 0x58D542: push    ecx
-0x58D543: call    FormHeapFree
+0x58D543: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x58D548: push    edi
 0x58D549: mov     [edi+8], ebx
 0x58D54C: mov     [edi+0Eh], bx
 0x58D550: mov     [edi+0Ch], bx
-0x58D554: call    FormHeapFree
+0x58D554: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x58D559: add     esp, 8
 0x58D55C: cmp     ebp, ebx
 0x58D55E: jz      loc_58D943
@@ -228,13 +228,13 @@
 0x58D5A3: jz      loc_58D943
 0x58D5A9: mov     eax, [ebp+8]
 0x58D5AC: push    eax
-0x58D5AD: call    FormHeapFree
+0x58D5AD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x58D5B2: xor     eax, eax
 0x58D5B4: push    ebp
 0x58D5B5: mov     [ebp+8], eax
 0x58D5B8: mov     [ebp+0Eh], ax
 0x58D5BC: mov     [ebp+0Ch], ax
-0x58D5C0: call    FormHeapFree
+0x58D5C0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x58D5C5: add     esp, 8
 0x58D5C8: jmp     loc_58D943
 0x58D5CD: cmp     ecx, 0Ah
@@ -260,12 +260,12 @@
 0x58D60A: jz      loc_58D943
 0x58D610: mov     edx, [ebp+8]
 0x58D613: push    edx
-0x58D614: call    FormHeapFree
+0x58D614: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x58D619: push    ebp
 0x58D61A: mov     [ebp+8], esi
 0x58D61D: mov     [ebp+0Eh], si
 0x58D621: mov     [ebp+0Ch], si
-0x58D625: call    FormHeapFree
+0x58D625: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x58D62A: add     esp, 8
 0x58D62D: jmp     loc_58D943
 0x58D632: mov     esi, edx
@@ -335,7 +335,7 @@
 0x58D715: call    PrintError
 0x58D71A: add     esp, 4
 0x58D71D: fld     dword ptr [esi+4]
-0x58D720: call    Double_To_SInt32
+0x58D720: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x58D725: mov     [esi+10h], eax
 0x58D728: fld     dword ptr [ebx+4]
 0x58D72B: fstp    dword ptr [esi+4]
@@ -353,21 +353,21 @@
 0x58D74D: jz      short loc_58D76C
 0x58D74F: mov     eax, [esi+8]
 0x58D752: push    eax
-0x58D753: call    FormHeapFree
+0x58D753: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x58D758: push    esi
 0x58D759: mov     [esi+8], edi
 0x58D75C: mov     [esi+0Eh], di
 0x58D760: mov     [esi+0Ch], di
-0x58D764: call    FormHeapFree
+0x58D764: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x58D769: add     esp, 8
 0x58D76C: mov     ecx, [ebp+8]
 0x58D76F: push    ecx
-0x58D770: call    FormHeapFree
+0x58D770: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x58D775: push    ebp
 0x58D776: mov     [ebp+8], edi
 0x58D779: mov     [ebp+0Eh], di
 0x58D77D: mov     [ebp+0Ch], di
-0x58D781: call    FormHeapFree
+0x58D781: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x58D786: add     esp, 8
 0x58D789: jmp     loc_58D943
 0x58D78E: cmp     ecx, 0BBCh
@@ -387,7 +387,7 @@
 0x58D7C9: jp      loc_58D87F
 0x58D7CF: fld     dword ptr [edi+4]
 0x58D7D2: mov     dword ptr [edi], 3Ch ; '<'
-0x58D7D8: call    Double_To_SInt32
+0x58D7D8: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x58D7DD: mov     [edi+10h], eax
 0x58D7E0: fld     dword ptr [ebx+4]
 0x58D7E3: add     esi, 8
@@ -404,13 +404,13 @@
 0x58D804: jz      short loc_58D827
 0x58D806: mov     edx, [esi+8]
 0x58D809: push    edx
-0x58D80A: call    FormHeapFree
+0x58D80A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x58D80F: xor     ebx, ebx
 0x58D811: push    esi
 0x58D812: mov     [esi+8], ebx
 0x58D815: mov     [esi+0Eh], bx
 0x58D819: mov     [esi+0Ch], bx
-0x58D81D: call    FormHeapFree
+0x58D81D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x58D822: add     esp, 8
 0x58D825: jmp     short loc_58D829
 0x58D827: xor     ebx, ebx
@@ -421,23 +421,23 @@
 0x58D834: jz      short loc_58D853
 0x58D836: mov     eax, [esi+8]
 0x58D839: push    eax
-0x58D83A: call    FormHeapFree
+0x58D83A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x58D83F: push    esi
 0x58D840: mov     [esi+8], ebx
 0x58D843: mov     [esi+0Eh], bx
 0x58D847: mov     [esi+0Ch], bx
-0x58D84B: call    FormHeapFree
+0x58D84B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x58D850: add     esp, 8
 0x58D853: cmp     ebp, ebx
 0x58D855: jz      loc_58D943
 0x58D85B: mov     ecx, [ebp+8]
 0x58D85E: push    ecx
-0x58D85F: call    FormHeapFree
+0x58D85F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x58D864: mov     [ebp+8], ebx
 0x58D867: mov     [ebp+0Eh], bx
 0x58D86B: push    ebp
 0x58D86C: mov     [ebp+0Ch], bx
-0x58D870: call    FormHeapFree
+0x58D870: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x58D875: add     esp, 8
 0x58D878: jmp     loc_58D943
 0x58D87D: fstp    st
@@ -510,3 +510,15 @@
 0x58D952: pop     ebx
 0x58D953: add     esp, 14h
 0x58D956: retn    10h
+0x9BF900: mov     eax, [ebp+10h]
+0x9BF903: push    eax
+0x9BF904: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BF909: pop     ecx
+0x9BF90A: retn
+0x9BF90B: mov     edx, [esp+Src]
+0x9BF90F: lea     eax, [edx-18h]
+0x9BF912: mov     ecx, [edx-1Ch]
+0x9BF915: xor     ecx, eax
+0x9BF917: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BF91C: mov     eax, offset stru_AE8DDC
+0x9BF921: jmp     ___CxxFrameHandler3

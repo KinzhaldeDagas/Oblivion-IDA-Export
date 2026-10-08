@@ -1,19 +1,32 @@
 {
-  "callees_count": 21,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4A4890",
+      "0x4A49E1"
+    ]
+  ],
+  "chunks_sha256": "966ca10c5b679ca84882a0c3d24feec0fe24f04d757de92d1d80e2946188d562",
+  "comment_regular": "Verified (Oblivion): dispatches RDAT/RDMD/RDNL/RDWT/RDSD/RDSG/RDGS chunks to factory-created region data and virtual loaders. Fallout has additional data IDs/layouts; those are not assumed here.",
+  "comment_repeatable": "Verified (Oblivion): dispatches RDAT/RDMD/RDNL/RDWT/RDSD/RDSG/RDGS chunks to factory-created region data and virtual loaders. Fallout has additional data IDs/layouts; those are not assumed here.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4A4890",
+  "display_name": "TESRegionDataManager_LoadRegionDataRecord",
   "end_ea": "0x4A49E1",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4A4890",
+  "name": "TESRegionDataManager_LoadRegionDataRecord",
   "segment": ".text",
   "sha256": "966ca10c5b679ca84882a0c3d24feec0fe24f04d757de92d1d80e2946188d562",
   "size": 337,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4A4890",
-  "type": "char __thiscall(_DWORD *this, Data *, int)",
+  "total_chunk_size": 337,
+  "type": "char __thiscall(TESRegionDataManager *this, Data *file, TESRegion *region)",
   "xrefs_from_count": 135,
   "xrefs_to_count": 1
 }

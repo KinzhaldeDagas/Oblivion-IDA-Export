@@ -55,13 +55,13 @@
 0x76E54D: movzx   ecx, word ptr [ecx+edx*2]
 0x76E551: imul    ecx, [esp+24h+var_8]
 0x76E556: mov     edx, [esi+14h]
-0x76E559: push    edx; Size
+0x76E559: push    edx; byteCount
 0x76E55A: lea     ecx, [ebp+ecx*4+0]
-0x76E55E: push    ecx; Src
+0x76E55E: push    ecx; source
 0x76E55F: add     eax, 1
-0x76E562: push    ebx; Dst
+0x76E562: push    ebx; destination
 0x76E563: mov     [esp+30h+var_4], eax
-0x76E567: call    _memcpy
+0x76E567: call    _memcpy;
 0x76E56C: mov     eax, [esi+18h]
 0x76E56F: add     esp, 0Ch
 0x76E572: test    di, di
@@ -93,10 +93,10 @@
 0x76E5B8: jbe     short loc_76E603
 0x76E5BA: lea     ebx, [ebx+0]
 0x76E5C0: mov     edx, [esi+14h]
-0x76E5C3: push    edx; Size
-0x76E5C4: push    ebp; Src
-0x76E5C5: push    ebx; Dst
-0x76E5C6: call    _memcpy
+0x76E5C3: push    edx; byteCount
+0x76E5C4: push    ebp; source
+0x76E5C5: push    ebx; destination
+0x76E5C6: call    _memcpy;
 0x76E5CB: mov     edx, [esi+14h]
 0x76E5CE: add     esp, 0Ch
 0x76E5D1: add     edx, ebx

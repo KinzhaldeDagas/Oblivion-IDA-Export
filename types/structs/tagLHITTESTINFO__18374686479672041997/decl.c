@@ -1,1 +1,5 @@
-tagLHITTESTINFO
+struct tagLHITTESTINFO
+{
+POINT pt;
+LITEM item;
+};

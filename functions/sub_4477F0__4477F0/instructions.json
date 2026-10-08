@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x447803",
-    "line": "call    TESForm_GetQuestItem",
+    "line": "call    TESForm_GetQuestItem; TESForm_GetQuestItem: returns TESForm flags bit 0x400. Plugin IsStealableForm uses this, so quest items are skipped before RemoveItem.",
     "mnemonic": "call",
     "size": 5
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x44782C",
-    "line": "push    eax; signed int",
+    "line": "push    eax; cellY",
     "mnemonic": "push",
     "size": 1
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x44783A",
-    "line": "push    eax; signed int",
+    "line": "push    eax; cellX",
     "mnemonic": "push",
     "size": 1
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x447861",
-    "line": "call    TESForm_GetQuestItem",
+    "line": "call    TESForm_GetQuestItem; TESForm_GetQuestItem: returns TESForm flags bit 0x400. Plugin IsStealableForm uses this, so quest items are skipped before RemoveItem.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x447880",
-    "line": "push    eax; signed int",
+    "line": "push    eax; cellY",
     "mnemonic": "push",
     "size": 1
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x447888",
-    "line": "push    eax; signed int",
+    "line": "push    eax; cellX",
     "mnemonic": "push",
     "size": 1
   },

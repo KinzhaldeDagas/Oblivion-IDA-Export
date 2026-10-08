@@ -12,7 +12,6 @@
 0x496E07: test    esi, esi
 0x496E09: jz      short loc_496E28
 0x496E0B: jmp     short loc_496E10
-0x496E0D: align 10h
 0x496E10: mov     eax, [esi+4]
 0x496E13: mov     edx, [edi]
 0x496E15: mov     edx, [edx+8]

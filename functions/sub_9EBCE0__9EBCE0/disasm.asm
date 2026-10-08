@@ -2,7 +2,7 @@
 0x9EBCE6: push    ecx
 0x9EBCE7: fstp    [esp+4+var_4]; float
 0x9EBCEA: push    offset aFcrimedisptres; "fCrimeDispTresspass"
-0x9EBCEF: mov     ecx, offset flt_B376E0
+0x9EBCEF: mov     ecx, offset g_fCrimeDispTresspass_Value; Verified crime setting value used by605F60/606140; registration 0x9ebce0 contains matching GMST key. This is value storage, not a complete Setting object declaration.
 0x9EBCF4: call    GameSetting_ConstrAndReg_float
 0x9EBCF9: push    offset sub_A1F4E0; void (__cdecl *)()
 0x9EBCFE: call    _atexit

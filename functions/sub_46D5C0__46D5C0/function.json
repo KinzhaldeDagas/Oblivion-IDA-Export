@@ -1,18 +1,31 @@
 {
-  "callees_count": 5,
-  "callers_count": 8,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
+  "callers_count": 12,
+  "chunks": [
+    [
+      "0x46D5C0",
+      "0x46D609"
+    ]
+  ],
+  "chunks_sha256": "3efe14e915aefa06d608d6fb8d827f464bf5f0aefe78f85d3a03e23d3026ae05",
+  "comment_regular": "Collision/model radius-ish helper used by PlaceAtMe after a ray hit. It dynamic-casts a form to TESModel and reads +0x0C, otherwise resolves from TESObjectREFR via 0x4694A0; result scales the normalized hit vector before final placement point.",
+  "comment_repeatable": "Collision/model radius-ish helper used by PlaceAtMe after a ray hit. It dynamic-casts a form to TESModel and reads +0x0C, otherwise resolves from TESObjectREFR via 0x4694A0; result scales the normalized hit vector before final placement point.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 4,
   "display_name": "sub_46D5C0",
   "end_ea": "0x46D609",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_46D5C0",
   "segment": ".text",
   "sha256": "3efe14e915aefa06d608d6fb8d827f464bf5f0aefe78f85d3a03e23d3026ae05",
   "size": 73,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x46D5C0",
+  "total_chunk_size": 73,
   "type": "double __cdecl(void *)",
   "xrefs_from_count": 36,
   "xrefs_to_count": 12

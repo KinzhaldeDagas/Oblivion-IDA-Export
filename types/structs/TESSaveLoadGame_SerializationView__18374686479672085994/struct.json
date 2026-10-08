@@ -1,0 +1,198 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "TESSaveLoadGame_SerializationView",
+  "definition": "struct TESSaveLoadGame_SerializationView\n{\nChangesMap *currentChangesMap; ///< Verified: pre-load/current ChangeData map. Existing entries are consulted and reconciled during loading; sub464440 replaces this pointer with the incoming map after finalization.\nChangesMap *incomingChangesMap; ///< Verified: incoming/staged ChangeData map. LoadGame allocates at 465B19, writes loaded flags/buffers at 46665C/466829; sub464440 promotes it into currentChangesMap and clears this slot.\nInteriorCellNewReferencesMap *interiorNewReferencesMap;\nExteriorCellNewReferencesMap *exteriorNewReferencesMap;\nExteriorCellNewReferencesMap *exteriorCellChangesMap;\nunsigned __int8 *bufferCursor;\nunsigned int flags;\nunsigned __int8 unknown1C[20];\nSaveLoadDeferredFormNode deferredDeleteList;\nunsigned __int8 unknown38[12];\nunsigned int resetSelector;\nunsigned __int8 unknown48[44];\nNiTLargeArrayUInt32 *irefTable;\nNiTLargeArrayUInt32 *worldspaceIDArray;\nunsigned __int8 currentVersion;\nunsigned __int8 useIrefEncoding;\nunsigned __int8 unknown7E[2];\nvoid *currentlyLoadingFormHeader;\nvoid *currentlySavingFormHeader;\n}\n",
+  "id": 18374686479672085994,
+  "is_union": false,
+  "kind": "struct",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified: pre-load/current ChangeData map. Existing entries are consulted and reconciled during loading; sub464440 replaces this pointer with the incoming map after finalization.",
+      "name": "currentChangesMap",
+      "offset": 0,
+      "offset_hex": "0x0",
+      "size": 4,
+      "type": "ChangesMap *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified: incoming/staged ChangeData map. LoadGame allocates at 465B19, writes loaded flags/buffers at 46665C/466829; sub464440 promotes it into currentChangesMap and clears this slot.",
+      "name": "incomingChangesMap",
+      "offset": 4,
+      "offset_hex": "0x4",
+      "size": 4,
+      "type": "ChangesMap *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "interiorNewReferencesMap",
+      "offset": 8,
+      "offset_hex": "0x8",
+      "size": 4,
+      "type": "InteriorCellNewReferencesMap *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "exteriorNewReferencesMap",
+      "offset": 12,
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "ExteriorCellNewReferencesMap *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "exteriorCellChangesMap",
+      "offset": 16,
+      "offset_hex": "0x10",
+      "size": 4,
+      "type": "ExteriorCellNewReferencesMap *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "bufferCursor",
+      "offset": 20,
+      "offset_hex": "0x14",
+      "size": 4,
+      "type": "unsigned __int8 *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "flags",
+      "offset": 24,
+      "offset_hex": "0x18",
+      "size": 4,
+      "type": "unsigned int"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "unknown1C",
+      "offset": 28,
+      "offset_hex": "0x1C",
+      "size": 20,
+      "type": "unsigned __int8[20]"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "deferredDeleteList",
+      "offset": 48,
+      "offset_hex": "0x30",
+      "size": 8,
+      "type": "SaveLoadDeferredFormNode"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "unknown38",
+      "offset": 56,
+      "offset_hex": "0x38",
+      "size": 12,
+      "type": "unsigned __int8[12]"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "resetSelector",
+      "offset": 68,
+      "offset_hex": "0x44",
+      "size": 4,
+      "type": "unsigned int"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "unknown48",
+      "offset": 72,
+      "offset_hex": "0x48",
+      "size": 44,
+      "type": "unsigned __int8[44]"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "irefTable",
+      "offset": 116,
+      "offset_hex": "0x74",
+      "size": 4,
+      "type": "NiTLargeArrayUInt32 *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "worldspaceIDArray",
+      "offset": 120,
+      "offset_hex": "0x78",
+      "size": 4,
+      "type": "NiTLargeArrayUInt32 *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "currentVersion",
+      "offset": 124,
+      "offset_hex": "0x7C",
+      "size": 1,
+      "type": "unsigned __int8"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "useIrefEncoding",
+      "offset": 125,
+      "offset_hex": "0x7D",
+      "size": 1,
+      "type": "unsigned __int8"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "unknown7E",
+      "offset": 126,
+      "offset_hex": "0x7E",
+      "size": 2,
+      "type": "unsigned __int8[2]"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "currentlyLoadingFormHeader",
+      "offset": 128,
+      "offset_hex": "0x80",
+      "size": 4,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "currentlySavingFormHeader",
+      "offset": 132,
+      "offset_hex": "0x84",
+      "size": 4,
+      "type": "void *"
+    }
+  ],
+  "name": "TESSaveLoadGame_SerializationView",
+  "ordinal": 9958,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 136
+}

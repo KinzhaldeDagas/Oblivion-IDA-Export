@@ -1,4 +1,4 @@
-0x8BC750: mov     edx, [ecx+48h]
+0x8BC750: mov     edx, [ecx+48h]; Insert helper for collision metadata key/value map. If key absent, appends 0x10-byte entry {key, unknown, valueLow, valueHigh}.
 0x8BC753: push    esi
 0x8BC754: xor     eax, eax
 0x8BC756: test    edx, edx

@@ -1,19 +1,36 @@
 {
-  "callees_count": 63,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 21,
   "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7D7AD0",
+  "chunks": [
+    [
+      "0x7D7AD0",
+      "0x7D7F7E"
+    ],
+    [
+      "0x9CEDE0",
+      "0x9CEE1C"
+    ]
+  ],
+  "chunks_sha256": "26f89e35b28bf228d843d28979f08c5ce978140b62af11c0de69238110ad668b",
+  "comment_regular": "[Verified] BSShaderPPLightingProperty clone-field copier. Calls BSShaderProperty_CopyCloneMembers, resizes/copies the three NiPointer arrays and scalar fields in the PP-lighting extension, and retains refcounted members. It does not copy the inherited BSShaderLightingProperty decal list at +0x80.",
+  "comment_repeatable": "[Verified] BSShaderPPLightingProperty clone-field copier. Calls BSShaderProperty_CopyCloneMembers, resizes/copies the three NiPointer arrays and scalar fields in the PP-lighting extension, and retains refcounted members. It does not copy the inherited BSShaderLightingProperty decal list at +0x80.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "BSShaderPPLightingProperty_CopyCloneMembers",
   "end_ea": "0x7D7F7E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7D7AD0",
+  "name": "BSShaderPPLightingProperty_CopyCloneMembers",
   "segment": ".text",
   "sha256": "d10b059aa27f6a39c96e5394b4ea1f9358492ba075d5f36c7404f1b3116f1da0",
   "size": 1198,
+  "source_annotation_confidence": "Verified",
   "start_ea": "0x7D7AD0",
-  "type": "int __thiscall(_WORD *this, int, int)",
-  "xrefs_from_count": 424,
+  "total_chunk_size": 1258,
+  "type": "void __thiscall(BSShaderPPLightingProperty *this, BSShaderPPLightingProperty *clone, void *cloneProcess)",
+  "xrefs_from_count": 448,
   "xrefs_to_count": 4
 }

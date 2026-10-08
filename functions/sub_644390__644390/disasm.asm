@@ -90,12 +90,12 @@
 0x64448C: mov     ecx, [edx+28h]
 0x64448F: test    ecx, ecx
 0x644491: jz      short loc_6444AB
-0x644493: call    sub_452A60
+0x644493: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x644498: test    eax, eax
 0x64449A: jz      short loc_6444AB
 0x64449C: mov     eax, [esi+8]
 0x64449F: mov     ecx, [eax+28h]
-0x6444A2: call    sub_452A60
+0x6444A2: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x6444A7: mov     [esp+60h+var_4C], eax
 0x6444AB: cmp     dword ptr [esi+2Ch], 0
 0x6444AF: jz      short loc_6444D4
@@ -134,17 +134,17 @@
 0x644508: push    ebx
 0x644509: jmp     loc_6448E9
 0x64450E: push    3Ah ; ':'; a1
-0x644510: call    TESForm_LookupByFormID
+0x644510: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x644515: add     esp, 4
-0x644518: mov     ecx, offset TimeGlobals
+0x644518: mov     ecx, 0B332E0h
 0x64451D: mov     ebx, eax
 0x64451F: call    TimeGlobals_GetGameHour
 0x644524: fstp    [esp+60h+var_4C]
 0x644528: fld     [esp+60h+var_4C]
 0x64452C: mov     ecx, edi; this
-0x64452E: fstp    qword ptr [esp+60h+var_44+4]
+0x64452E: fstp    qword ptr [esp+60h+sourceRef+4]
 0x644532: call    sub_6599B0; Noope the struct asosciated to the this pointer is bigger
-0x644537: fcomp   qword ptr [esp+60h+var_44+4]
+0x644537: fcomp   qword ptr [esp+60h+sourceRef+4]
 0x64453B: fnstsw  ax
 0x64453D: test    ah, 41h
 0x644540: jnz     short loc_644550
@@ -153,15 +153,15 @@
 0x64454C: fstp    [esp+60h+var_4C]
 0x644550: fld     [esp+60h+var_4C]
 0x644554: mov     ecx, edi; this
-0x644556: fstp    qword ptr [esp+60h+var_44+4]
+0x644556: fstp    qword ptr [esp+60h+sourceRef+4]
 0x64455A: call    sub_6599B0; Noope the struct asosciated to the this pointer is bigger
-0x64455F: fsubr   qword ptr [esp+60h+var_44+4]
+0x64455F: fsubr   qword ptr [esp+60h+sourceRef+4]
 0x644563: push    ecx
 0x644564: mov     ecx, [esi+8]
 0x644567: fstp    [esp+64h+var_4C]
 0x64456B: fld     dword ptr [ebx+24h]
-0x64456E: fstp    [esp+64h+var_44+4]
-0x644572: fld     [esp+64h+var_44+4]
+0x64456E: fstp    [esp+64h+sourceRef+4]
+0x644572: fld     [esp+64h+sourceRef+4]
 0x644576: fdivr   qword ptr ds:0A2F938h
 0x64457C: fmul    [esp+64h+var_4C]
 0x644580: fstp    [esp+64h+var_4C]
@@ -197,12 +197,12 @@
 0x6445DF: test    ebx, ebx
 0x6445E1: mov     [esp+60h+var_48], 0
 0x6445E9: jz      short loc_644604
-0x6445EB: mov     ecx, ebx
-0x6445ED: call    ExtraDataList_GetReferencePointer
+0x6445EB: mov     ecx, ebx; this
+0x6445ED: call    ExtraDataList_GetReferencePointer; Return the TESObjectREFR payload from ExtraReferencePointer type 0x22, or null. Provenance only: callers still select EntryData by exact TESForm first.
 0x6445F2: test    eax, eax
 0x6445F4: jz      short loc_644604
-0x6445F6: mov     ecx, ebx
-0x6445F8: call    ExtraDataList_GetReferencePointer
+0x6445F6: mov     ecx, ebx; this
+0x6445F8: call    ExtraDataList_GetReferencePointer; Return the TESObjectREFR payload from ExtraReferencePointer type 0x22, or null. Provenance only: callers still select EntryData by exact TESForm first.
 0x6445FD: mov     ecx, [eax+0Ch]
 0x644600: mov     [esp+60h+var_48], ecx
 0x644604: mov     ecx, [ebp+24h]
@@ -222,7 +222,7 @@
 0x64462C: mov     ecx, [ebp+28h]
 0x64462F: mov     ebp, [edx+8]
 0x644632: push    eax
-0x644633: call    sub_452A60
+0x644633: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x644638: mov     ecx, [esp+64h+var_4C]
 0x64463C: push    eax
 0x64463D: push    ebx
@@ -247,7 +247,7 @@
 0x64466E: test    ecx, ecx
 0x644670: mov     edx, [ebp+28h]
 0x644673: mov     [esp+60h+var_48], 0
-0x64467B: mov     [esp+60h+var_44+4], edx
+0x64467B: mov     [esp+60h+sourceRef+4], edx
 0x64467F: jz      loc_644709
 0x644685: call    sub_5697E0
 0x64468A: mov     ebx, eax
@@ -276,28 +276,28 @@
 0x6446CD: mov     edx, [eax+4]
 0x6446D0: mov     eax, [eax+8]
 0x6446D3: push    0Ch; Size
-0x6446D5: mov     [esp+64h+var_38], ecx
-0x6446D9: mov     [esp+64h+var_34], edx
-0x6446DD: mov     [esp+64h+var_30], eax
+0x6446D5: mov     [esp+64h+destinationPosition.x], ecx
+0x6446D9: mov     [esp+64h+destinationPosition.y], edx
+0x6446DD: mov     [esp+64h+destinationPosition.z], eax
 0x6446E1: call    FormHeapAlloc
 0x6446E6: add     esp, 4
 0x6446E9: test    eax, eax
 0x6446EB: jz      short loc_644703
-0x6446ED: fld     [esp+60h+var_38]
+0x6446ED: fld     [esp+60h+destinationPosition.x]
 0x6446F1: fstp    dword ptr [eax]
-0x6446F3: fld     [esp+60h+var_34]
+0x6446F3: fld     [esp+60h+destinationPosition.y]
 0x6446F7: fstp    dword ptr [eax+4]
-0x6446FA: fld     [esp+60h+var_30]
+0x6446FA: fld     [esp+60h+destinationPosition.z]
 0x6446FE: fstp    dword ptr [eax+8]
 0x644701: jmp     short loc_644705
 0x644703: xor     eax, eax
 0x644705: mov     [esp+60h+var_48], eax
-0x644709: mov     ecx, [esp+60h+var_44+4]
+0x644709: mov     ecx, [esp+60h+sourceRef+4]
 0x64470D: call    sub_569E60
 0x644712: test    eax, eax
 0x644714: jnz     short loc_64471E
 0x644716: mov     ecx, [ebp+28h]
-0x644719: call    sub_452A60
+0x644719: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x64471E: mov     eax, [esp+60h+var_48]
 0x644722: mov     edx, [esp+60h+arg_0]
 0x644726: mov     ecx, [ebp+28h]
@@ -305,7 +305,7 @@
 0x64472C: mov     ebp, [edi]
 0x64472E: push    0
 0x644730: push    eax
-0x644731: call    sub_452A60
+0x644731: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x644736: mov     ecx, [esp+68h+var_4C]
 0x64473A: mov     edx, [ebp+2C8h]
 0x644740: push    eax
@@ -340,12 +340,12 @@
 0x64478F: push    2
 0x644791: push    edi
 0x644792: call    sub_5677B0
-0x644797: call    Double_To_SInt32
+0x644797: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x64479C: fldz
 0x64479E: cmp     dword ptr [esi+2Ch], 0
 0x6447A2: fst     [esp+60h+var_48]
-0x6447A6: fstp    [esp+60h+var_44]
-0x6447AA: mov     [esp+60h+var_44+4], eax
+0x6447A6: fstp    [esp+60h+sourceRef]
+0x6447AA: mov     [esp+60h+sourceRef+4], eax
 0x6447AE: jz      loc_644897
 0x6447B4: mov     ecx, [esi+2Ch]
 0x6447B7: mov     eax, [ecx]
@@ -354,7 +354,7 @@
 0x6447C1: test    al, al
 0x6447C3: jz      loc_644855
 0x6447C9: push    edi
-0x6447CA: lea     eax, [esp+64h+var_38]
+0x6447CA: lea     eax, [esp+64h+destinationPosition]
 0x6447CE: push    eax
 0x6447CF: mov     ecx, ebp
 0x6447D1: call    sub_566B30
@@ -365,38 +365,38 @@
 0x6447DF: mov     ecx, ebp
 0x6447E1: mov     ebx, eax
 0x6447E3: call    sub_566940
-0x6447E8: lea     ecx, [esp+60h+var_20]
+0x6447E8: lea     ecx, [esp+60h+var_20]; this
 0x6447EC: mov     ebp, eax
-0x6447EE: call    sub_68A9F0
-0x6447F3: push    ebp
-0x6447F4: push    ebx
-0x6447F5: lea     ecx, [esp+68h+var_38]
-0x6447F9: push    ecx
-0x6447FA: push    edi
-0x6447FB: lea     ecx, [esp+70h+var_20]
+0x6447EE: call    PathLow_ctor; Verified PathLow constructor: installs the PathLow vtable at +0, initializes the BSSimpleList at +4/+8 to empty, copies unk_B3A458 to +0x0C, and sets byte +0x10 to 1. +0x0C and byte +0x10 semantics remain Unknown.
+0x6447F3: push    ebp; destinationWorldspace
+0x6447F4: push    ebx; destinationCell
+0x6447F5: lea     ecx, [esp+68h+destinationPosition]
+0x6447F9: push    ecx; destinationPosition
+0x6447FA: push    edi; sourceRef
+0x6447FB: lea     ecx, [esp+70h+var_20]; this
 0x6447FF: mov     [esp+70h+var_4], 0
-0x644807: call    sub_68B030
-0x64480C: push    edi
-0x64480D: lea     ecx, [esp+64h+var_20]
-0x644811: call    sub_68A760
+0x644807: call    TravelPath_BuildToDestination; Verified top-level TravelPath build sequence: select the destination's smallest containing interior/exterior SubSpace (fallback to supplied cell/worldspace), call TravelPath_BuildRoute with the source reference and positions, then, on success, augment the route with TESRoad surface samples.
+0x64480C: push    edi; sourceRef
+0x64480D: lea     ecx, [esp+64h+var_20]; this
+0x644811: call    TravelPath_ComputeDistance; Verified TravelPath_ComputeDistance sums Euclidean segments from sourceRef->GetPos through each TravelPathNode_GetPosition. For a type-0 teleport node, the segment endpoint is the linked door's TeleportData xyz marker; after consuming that node, the next segment starts at the current door's own TeleportData xyz (its destination marker). Type-1 nodes use owned position payloads; ordinary references use GetPos.
 0x644816: fstp    [esp+60h+var_48]
 0x64481A: mov     eax, [esi+2Ch]
-0x64481D: push    ebp
-0x64481E: push    ebx
-0x64481F: lea     edx, [esp+68h+var_38]
-0x644823: push    edx
-0x644824: push    eax
-0x644825: lea     ecx, [esp+70h+var_20]
-0x644829: mov     [esp+70h+var_44], eax
-0x64482D: call    sub_68B030
-0x644832: mov     eax, [esp+60h+var_44]
-0x644836: push    eax
-0x644837: lea     ecx, [esp+64h+var_20]
-0x64483B: call    sub_68A760
-0x644840: fstp    [esp+60h+var_44]
-0x644844: lea     ecx, [esp+60h+var_20]
+0x64481D: push    ebp; destinationWorldspace
+0x64481E: push    ebx; destinationCell
+0x64481F: lea     edx, [esp+68h+destinationPosition]
+0x644823: push    edx; destinationPosition
+0x644824: push    eax; sourceRef
+0x644825: lea     ecx, [esp+70h+var_20]; this
+0x644829: mov     [esp+70h+sourceRef], eax
+0x64482D: call    TravelPath_BuildToDestination; Verified top-level TravelPath build sequence: select the destination's smallest containing interior/exterior SubSpace (fallback to supplied cell/worldspace), call TravelPath_BuildRoute with the source reference and positions, then, on success, augment the route with TESRoad surface samples.
+0x644832: mov     eax, [esp+60h+sourceRef]
+0x644836: push    eax; sourceRef
+0x644837: lea     ecx, [esp+64h+var_20]; this
+0x64483B: call    TravelPath_ComputeDistance; Verified TravelPath_ComputeDistance sums Euclidean segments from sourceRef->GetPos through each TravelPathNode_GetPosition. For a type-0 teleport node, the segment endpoint is the linked door's TeleportData xyz marker; after consuming that node, the next segment starts at the current door's own TeleportData xyz (its destination marker). Type-1 nodes use owned position payloads; ordinary references use GetPos.
+0x644840: fstp    [esp+60h+sourceRef]
+0x644844: lea     ecx, [esp+60h+var_20]; this
 0x644848: mov     [esp+60h+var_4], 0FFFFFFFFh
-0x644850: call    sub_68AA10
+0x644850: call    PathLow_dtor; Verified PathLow destructor: restores the PathLow vtable and frees/clears owned TravelPathNode records through TravelPath_ClearNodes. This routine does not free the containing object.
 0x644855: cmp     dword ptr [esi+2Ch], 0
 0x644859: jz      short loc_644897
 0x64485B: mov     ecx, [esi+2Ch]
@@ -410,18 +410,18 @@
 0x644871: push    ecx
 0x644872: mov     ecx, edi
 0x644874: call    TesObjectREF_GetDistance
-0x644879: fild    [esp+60h+var_44+4]
+0x644879: fild    [esp+60h+sourceRef+4]
 0x64487D: fcompp
 0x64487F: fnstsw  ax
 0x644881: test    ah, 41h
 0x644884: jz      short loc_644897
 0x644886: fld     [esp+60h+var_48]
-0x64488A: fld     [esp+60h+var_44]
+0x64488A: fld     [esp+60h+sourceRef]
 0x64488E: fcompp
 0x644890: fnstsw  ax
 0x644892: test    ah, 5
 0x644895: jp      short loc_6448D9
-0x644897: fild    [esp+60h+var_44+4]
+0x644897: fild    [esp+60h+sourceRef+4]
 0x64489B: mov     ecx, [esi+8]
 0x64489E: mov     ebx, [esi]
 0x6448A0: sub     esp, 8
@@ -451,7 +451,7 @@
 0x6448E1: mov     ecx, esi
 0x6448E3: call    ContainerEntryExtraData_DestroyDataTable
 0x6448E8: push    esi
-0x6448E9: call    FormHeapFree
+0x6448E9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6448EE: add     esp, 4
 0x6448F1: mov     ecx, dword ptr [esp+60h+var_C]
 0x6448F5: mov     large fs:0, ecx
@@ -462,3 +462,12 @@
 0x644900: pop     ebx
 0x644901: add     esp, 4Ch
 0x644904: retn    4
+0x9C4260: lea     ecx, [ebp-20h]; this
+0x9C4263: jmp     PathLow_dtor; Verified PathLow destructor: restores the PathLow vtable and frees/clears owned TravelPathNode records through TravelPath_ClearNodes. This routine does not free the containing object.
+0x9C4268: mov     edx, [esp+arg_4]
+0x9C426C: lea     eax, [edx-50h]
+0x9C426F: mov     ecx, [edx-54h]
+0x9C4272: xor     ecx, eax
+0x9C4274: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C4279: mov     eax, offset stru_AECC4C
+0x9C427E: jmp     ___CxxFrameHandler3

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4EC870",
-    "line": "push    ecx",
+    "line": "push    ecx; Verified geometric distance helper computes 2D Euclidean distance from a point to the axis-aligned square [quadOriginX,quadOriginX+quadWidth] x [quadOriginY,quadOriginY+quadWidth].",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,13 +19,13 @@
   },
   {
     "ea": "0x4EC876",
-    "line": "fld     [esp+4+arg_C]",
+    "line": "fld     [esp+4+pointX]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x4EC87A",
-    "line": "fld     [esp+4+arg_0]",
+    "line": "fld     [esp+4+quadOriginX]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x4EC882",
-    "line": "fld     [esp+4+arg_8]",
+    "line": "fld     [esp+4+quadWidth]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -169,19 +169,19 @@
   },
   {
     "ea": "0x4EC8B2",
-    "line": "fstp    [esp+4+arg_8]",
+    "line": "fstp    [esp+4+quadWidth]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4EC8B6",
-    "line": "fld     [esp+4+arg_10]",
+    "line": "fld     [esp+4+pointY]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x4EC8BA",
-    "line": "fld     [esp+4+arg_4]",
+    "line": "fld     [esp+4+quadOriginY]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x4EC8D4",
-    "line": "fstp    [esp+4+arg_8]",
+    "line": "fstp    [esp+4+quadWidth]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x4EC8DE",
-    "line": "fstp    [esp+4+arg_8]",
+    "line": "fstp    [esp+4+quadWidth]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x4EC8E8",
-    "line": "fld     [esp+4+arg_8]",
+    "line": "fld     [esp+4+quadWidth]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -331,13 +331,13 @@
   },
   {
     "ea": "0x4EC8F7",
-    "line": "fstp    [esp+4+arg_8]",
+    "line": "fstp    [esp+4+quadWidth]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4EC8FB",
-    "line": "fld     [esp+4+arg_8]",
+    "line": "fld     [esp+4+quadWidth]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -349,13 +349,13 @@
   },
   {
     "ea": "0x4EC904",
-    "line": "fstp    [esp+4+arg_8]",
+    "line": "fstp    [esp+4+quadWidth]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4EC908",
-    "line": "fld     [esp+4+arg_8]",
+    "line": "fld     [esp+4+quadWidth]",
     "mnemonic": "fld",
     "size": 4
   },

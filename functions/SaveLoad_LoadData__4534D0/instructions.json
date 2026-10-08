@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4534D0",
-    "line": "push    esi",
+    "line": "push    esi; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "push",
     "size": 1
   },
@@ -37,25 +37,25 @@
   },
   {
     "ea": "0x4534DF",
-    "line": "push    edi; Size",
+    "line": "push    edi; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4534E0",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4534E1",
-    "line": "push    ecx; Dst",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4534E2",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy; EngineIssues review: central save-record LoadData memcpy reads from save cursor and advances it without an active record-buffer bounds check.",
     "mnemonic": "call",
     "size": 5
   },

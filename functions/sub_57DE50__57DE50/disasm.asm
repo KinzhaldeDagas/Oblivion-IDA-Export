@@ -153,7 +153,7 @@
 0x57E0AE: mov     ecx, esi; this
 0x57E0B0: call    sub_6B73E0
 0x57E0B5: push    esi
-0x57E0B6: call    FormHeapFree
+0x57E0B6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x57E0BB: add     esp, 4
 0x57E0BE: pop     esi
 0x57E0BF: retn; jumptable 0057DE71 default case

@@ -1,1 +1,1 @@
-IMEINFO
+typedef _tagIMEINFO IMEINFO;

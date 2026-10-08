@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x434CB0",
-    "line": "sub     esp, 118h",
+    "line": "sub     esp, 118h; QueuedFileEntry archive lookup helper. Hashes copied path at +0x20 and stores resolved archive/file entry pointer at +0x24.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x434CE0",
-    "line": "mov     ecx, ModelLoaderPtr",
+    "line": "mov     ecx, ds:0B33A1Ch",
     "mnemonic": "mov",
     "size": 6
   },

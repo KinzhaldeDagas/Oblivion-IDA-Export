@@ -1,4 +1,4 @@
-0x798CC0: push    0FFFFFFFFh
+0x798CC0: push    0FFFFFFFFh; OBLIVION AUTHORITY (2026-08-24): True CLeafGeometry::InitLods entry (range 0x798CC0..0x799318). Iterates every explicit leaf LOD and copies each CBillboardLeaf+0x14 packed color into that LOD's SLodGeometry+0x24 packedColors array.
 0x798CC2: push    offset SEH_798CC0
 0x798CC7: mov     eax, large fs:0
 0x798CCD: push    eax
@@ -45,8 +45,8 @@
 0x798D4B: cmp     eax, ebx
 0x798D4D: mov     [esp+2Ch+var_4], ebx
 0x798D51: jz      short loc_798D6B
-0x798D53: push    offset sub_7981E0; a5
-0x798D58: push    offset sub_7981C0; a4
+0x798D53: push    offset OB_CLeafGeometry_SLodGeometry_dtor_010201A0; a5
+0x798D58: push    offset OB_SLodGeometry_ctor_010201A0; a4
 0x798D5D: push    esi; size
 0x798D5E: lea     ebx, [eax+4]
 0x798D61: push    44h ; 'D'; a2
@@ -106,7 +106,7 @@
 0x798E05: movzx   edx, byte ptr [ecx+40h]
 0x798E09: mov     ecx, eax
 0x798E0B: test    ecx, ecx
-0x798E0D: mov     [esp+2Ch+var_10], edx
+0x798E0D: mov     [esp+2Ch+var_10], edx; InitLods reads CBillboardLeaf texture index byte (+0x40) to address the per-LOD leaf vertex table.
 0x798E11: jz      short loc_798E1F
 0x798E13: mov     eax, [esi+8]
 0x798E16: sub     eax, ecx
@@ -289,7 +289,7 @@
 0x79901A: xor     ebx, ebx
 0x79901C: add     esp, 4
 0x79901F: cmp     [edi+0Ch], bx
-0x799023: mov     [edi+10h], eax
+0x799023: mov     [edi+10h], eax; Allocates SLodGeometry+0x10 alternate-index byte array once during CLeafGeometry InitLods, called only from first successful CSpeedTreeRT::Compute.
 0x799026: jbe     short loc_79905A
 0x799028: mov     ecx, [esi+4]
 0x79902B: test    ecx, ecx
@@ -304,7 +304,7 @@
 0x799043: mov     ecx, [eax+ebx*4]
 0x799046: mov     al, [ecx+40h]
 0x799049: mov     edx, [edi+10h]
-0x79904C: mov     [ebx+edx], al
+0x79904C: mov     [ebx+edx], al; Copies each CBillboardLeaf+0x40 alternate texture-index byte into the persistent SLodGeometry+0x10 array. Later GetGeometry and cache invalidation do not modify this array.
 0x79904F: movzx   ecx, word ptr [edi+0Ch]
 0x799053: add     ebx, 1
 0x799056: cmp     ebx, ecx
@@ -380,7 +380,7 @@
 0x79911E: movzx   edx, byte ptr [ecx+40h]
 0x799122: mov     eax, [edi+1Ch]
 0x799125: shl     edx, 5
-0x799128: add     edx, [ebp+14h]
+0x799128: add     edx, [ebp+14h]; InitLods selects each card's authored 8-float texcoord table by its alternate texture index: m_pLeafTexCoords + 0x20 * index.
 0x79912B: add     ebx, 1
 0x79912E: mov     [eax+ebx*4-4], edx
 0x799132: movzx   ecx, word ptr [edi+0Ch]
@@ -398,7 +398,7 @@
 0x799154: xor     ebx, ebx
 0x799156: add     esp, 4
 0x799159: cmp     [edi+0Ch], bx
-0x79915D: mov     [edi+24h], eax
+0x79915D: mov     [edi+24h], eax; Allocate one packedColors dword per leaf in this LOD at SLodGeometry+0x24.
 0x799160: jbe     short loc_799194
 0x799162: mov     ecx, [esi+4]
 0x799165: test    ecx, ecx
@@ -413,7 +413,7 @@
 0x79917D: mov     ecx, [eax+ebx*4]
 0x799180: mov     eax, [ecx+14h]
 0x799183: mov     edx, [edi+24h]
-0x799186: mov     [edx+ebx*4], eax
+0x799186: mov     [edx+ebx*4], eax; Copy CBillboardLeaf+0x14 packedColor into this LOD's SLodGeometry+0x24 array. This is the authoritative source later sampled by the leaf builder.
 0x799189: movzx   ecx, word ptr [edi+0Ch]
 0x79918D: add     ebx, 1
 0x799190: cmp     ebx, ecx
@@ -550,3 +550,15 @@
 0x799312: pop     ebx
 0x799313: add     esp, 18h
 0x799316: retn    8
+0x9B8CE0: mov     eax, [ebp-10h]
+0x9B8CE3: push    eax
+0x9B8CE4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B8CE9: pop     ecx
+0x9B8CEA: retn
+0x9B8CEB: mov     edx, [esp+a2]
+0x9B8CEF: lea     eax, [edx-1Ch]
+0x9B8CF2: mov     ecx, [edx-20h]
+0x9B8CF5: xor     ecx, eax
+0x9B8CF7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B8CFC: mov     eax, offset stru_AE3140
+0x9B8D01: jmp     ___CxxFrameHandler3

@@ -1,4 +1,4 @@
-0x78A390: sub     esp, 0Ch
+0x78A390: sub     esp, 0Ch; Oblivion frond export mirrors the 0x3C branch output layout and independently publishes diffuse UVs, projected-shadow UVs, and one wind weight/index stream.
 0x78A393: push    esi
 0x78A394: mov     esi, ecx
 0x78A396: mov     eax, [esi+60h]
@@ -75,7 +75,7 @@
 0x78A456: jnz     short loc_78A45D
 0x78A458: call    __invalid_parameter_noinfo
 0x78A45D: mov     edi, [edi+8Ch]
-0x78A463: mov     [ebx+54h], edi
+0x78A463: mov     [ebx+54h], edi; Frond GetGeometry export writes SGeometry output +0x54 pointer slot; not the CSpeedTreeRT+0x54 360 image-count gate.
 0x78A466: mov     edi, [esi+60h]
 0x78A469: mov     eax, [edi+9Ch]
 0x78A46F: test    eax, eax
@@ -193,30 +193,30 @@
 0x78A5D7: jnz     short loc_78A5EA
 0x78A5D9: fld     dword ptr ds:0A30634h
 0x78A5DF: push    ecx
-0x78A5E0: mov     ecx, esi
-0x78A5E2: fstp    [esp+1Ch+var_1C]; float
-0x78A5E5: call    sub_787C70
+0x78A5E0: mov     ecx, esi; this
+0x78A5E2: fstp    [esp+1Ch+lod]; lod
+0x78A5E5: call    CSpeedTreeRT__GetDiscreteFrondLodLevel; Maps normalized/current tree LOD to the Oblivion frond selector count stored on CSpeedTreeRT.
 0x78A5EA: movzx   edi, ax
 0x78A5ED: movsx   eax, di
 0x78A5F0: mov     [ebx+3Ch], eax
-0x78A5F3: mov     ecx, [esi+60h]
-0x78A5F6: push    edi
-0x78A5F7: call    sub_7886C0
+0x78A5F3: mov     ecx, [esi+60h]; this
+0x78A5F6: push    edi; lodLevel
+0x78A5F7: call    OB_CIndexedGeometry_GetNumStrips_010201A0; Oblivion CIndexedGeometry::GetNumStrips: rejects negative LODs, checked-indexes perLodStrips, and returns the selected inner ushort-vector size. RT4.1 exposes the same accessor contract.
 0x78A5FC: mov     [ebx+40h], ax
-0x78A600: mov     ecx, [esi+60h]
-0x78A603: push    edi
-0x78A604: call    sub_788720
+0x78A600: mov     ecx, [esi+60h]; this
+0x78A603: push    edi; lodLevel
+0x78A604: call    OB_CIndexedGeometry_GetStripLengths_010201A0; Oblivion CIndexedGeometry::GetStripLengths: validates LOD range and inner vector state, then returns the selected ushort strip-length buffer or null.
 0x78A609: mov     [ebx+44h], eax
-0x78A60C: mov     ecx, [esi+60h]
-0x78A60F: push    edi
-0x78A610: call    sub_7945B0
+0x78A60C: mov     ecx, [esi+60h]; this
+0x78A60F: push    edi; lodLevel
+0x78A610: call    OB_CIndexedGeometry_GetStripsPointer_010201A0; Oblivion CIndexedGeometry::GetStripsPointer. Returns the selected LOD's inner array of ushort strip pointers, or null when no strips are present.
 0x78A615: mov     [ebx+48h], eax
 0x78A618: cmp     byte ptr ds:0B4297Ch, 0
 0x78A61F: jz      loc_78A6FD
 0x78A625: mov     eax, [esi]
 0x78A627: fld     dword ptr ds:0A30634h
 0x78A62D: mov     cx, [eax+0C0h]
-0x78A634: fstp    [esp+18h+var_C]
+0x78A634: fstp    [esp+18h+highAlpha]
 0x78A638: add     cx, 1
 0x78A63C: movzx   edi, cx
 0x78A63F: mov     ecx, [esi+34h]
@@ -230,36 +230,36 @@
 0x78A65A: fstp    [esp+18h+MaxCount]
 0x78A65E: mov     [esp+18h+var_8], edx
 0x78A662: lea     eax, [esp+18h+MaxCount]
-0x78A666: push    eax; int
+0x78A666: push    eax; lowLod
 0x78A667: fild    [esp+1Ch+var_8]
 0x78A66B: lea     ecx, [esp+1Ch+Src]
-0x78A66F: push    ecx; int
-0x78A670: lea     edx, [esp+20h+var_4]
+0x78A66F: push    ecx; highLod
+0x78A670: lea     edx, [esp+20h+lowAlpha]
 0x78A674: fstp    [esp+20h+var_8]
-0x78A678: push    edx; int
+0x78A678: push    edx; lowAlpha
 0x78A679: fld     [esp+24h+var_8]
-0x78A67D: lea     eax, [esp+24h+var_C]
-0x78A681: push    eax; int
+0x78A67D: lea     eax, [esp+24h+highAlpha]
+0x78A681: push    eax; highAlpha
 0x78A682: sub     esp, 10h
-0x78A685: fstp    [esp+38h+var_2C]; float
+0x78A685: fstp    [esp+38h+targetAlpha]; targetAlpha
 0x78A689: fld     dword ptr [esi+20h]
-0x78A68C: fstp    [esp+38h+var_30]; float
+0x78A68C: fstp    [esp+38h+curveExponent]; curveExponent
 0x78A690: fld     dword ptr [esi+28h]
-0x78A693: fstp    [esp+38h+var_34]; float
+0x78A693: fstp    [esp+38h+transitionFactor]; transitionFactor
 0x78A697: fld     dword ptr [esi+1Ch]
-0x78A69A: fstp    [esp+38h+var_38]; float
-0x78A69D: push    edi; int
+0x78A69A: fstp    [esp+38h+overlapRadius]; overlapRadius
+0x78A69D: push    edi; lodCount
 0x78A69E: fld     [esp+3Ch+MaxCount]
 0x78A6A2: push    ecx
-0x78A6A3: fstp    [esp+40h+var_40]; float
-0x78A6A6: call    sub_787220
+0x78A6A3: fstp    [esp+40h+lodLevel]; lodLevel
+0x78A6A6: call    CSpeedTreeRT__GetTransitionValues; 2026-05-26 SpeedTreeOBSE: shared stock LOD fade/index resolver. Plugin calls it unmodified for candidate 75002 transition-radius and 75005 transition-factor comparisons; optional writes are limited to caller-side SGeometry+0x38 under explicit INI gates. Not patched.
 0x78A6AB: movsx   ecx, word ptr [esp+40h+Src]
 0x78A6B0: movzx   eax, di
 0x78A6B3: lea     edx, [eax-2]
 0x78A6B6: add     esp, 28h
 0x78A6B9: cmp     ecx, edx
 0x78A6BB: jnz     short loc_78A6CD
-0x78A6BD: fld     [esp+18h+var_C]
+0x78A6BD: fld     [esp+18h+highAlpha]
 0x78A6C1: pop     edi
 0x78A6C2: fstp    dword ptr [ebx+74h]
 0x78A6C5: pop     ebx
@@ -295,7 +295,7 @@
 0x78A712: retn    8
 0x78A715: pop     esi
 0x78A716: add     esp, 0Ch
-0x78A719: mov     [esp+MaxCount], 44h ; 'D'; MaxCount
+0x78A719: mov     [esp+MaxCount], 44h ; 'D'; count
 0x78A721: mov     [esp+Src], offset aNoFrondGeometr; "no frond geometry exists, possible prio"...
-0x78A729: mov     ecx, offset dword_B2B614
-0x78A72E: jmp     sub_414500
+0x78A729: mov     ecx, offset OB_g_strError_010201A0; this
+0x78A72E: jmp     OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.

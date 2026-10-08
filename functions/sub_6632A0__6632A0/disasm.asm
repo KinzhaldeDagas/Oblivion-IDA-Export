@@ -14,7 +14,7 @@
 0x6632C5: push    esi
 0x6632C6: call    sub_4533F0
 0x6632CB: mov     edx, [esi]
-0x6632CD: mov     [esp+8+var_4], eax
+0x6632CD: mov     [esp+8+source], eax
 0x6632D1: push    eax
 0x6632D2: mov     eax, [edx+4Ch]
 0x6632D5: mov     ecx, esi
@@ -24,17 +24,17 @@
 0x6632DF: add     ecx, 4
 0x6632E2: push    ecx
 0x6632E3: mov     ecx, ds:0B33B00h
-0x6632E9: call    sub_453500
-0x6632EE: push    4; a2
-0x6632F0: lea     edx, [esp+0Ch+var_4]
-0x6632F4: push    edx; a1
-0x6632F5: mov     ecx, esi
+0x6632E9: call    sub_453500; EnginePatch v1: save-buffer allocation hook used to track record buffer base/end for later savegame parser count clamps.
+0x6632EE: push    4; byteCount
+0x6632F0: lea     edx, [esp+0Ch+source]
+0x6632F4: push    edx; source
+0x6632F5: mov     ecx, esi; self
 0x6632F7: mov     [esi+70Ch], eax
 0x6632FD: call    TESForm_SaveDataToCurrentSaveGame
 0x663302: mov     eax, ds:0B33B00h
 0x663307: mov     byte ptr [eax+7Dh], 0
 0x66330B: mov     edx, [esi]
-0x66330D: mov     eax, [esp+8+var_4]
+0x66330D: mov     eax, [esp+8+source]
 0x663311: mov     edx, [edx+50h]
 0x663314: push    eax
 0x663315: mov     ecx, esi

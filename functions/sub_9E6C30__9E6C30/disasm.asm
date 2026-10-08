@@ -2,7 +2,7 @@
 0x9E6C36: push    ecx
 0x9E6C37: fstp    [esp+4+var_4]; float
 0x9E6C3A: push    offset aFfightfrienddi; "fFightFriendDispBase"
-0x9E6C3F: mov     ecx, offset fFightFriendDispBase
+0x9E6C3F: mov     ecx, (offset flt_B36778+0F8h)
 0x9E6C44: call    GameSetting_ConstrAndReg_float
 0x9E6C49: push    offset sub_A1D800; void (__cdecl *)()
 0x9E6C4E: call    _atexit

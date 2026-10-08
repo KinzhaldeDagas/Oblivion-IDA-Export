@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x981C6B",
-    "line": "cmp     dword ptr ds:0AA3E84h, 0",
+    "line": "cmp     dword ptr ds:0AA3E84h, 0; Verified (Oblivion CRT): CRT_InitializeGlobals runs _initterm_e and then iterates function pointers in g_CppGlobalInitializersBegin..End before later startup. The inspected initializer ranges contain no direct pointers to ActiveEffect_Register_*_Factory or ActiveEffectCreatorMap_GlobalCtor; invocation of those routines is Unknown.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x981C83",
-    "line": "push    [esp+arg_0]",
+    "line": "push    [esp+initializeCRTGlobals]",
     "mnemonic": "push",
     "size": 4
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x981CB4",
-    "line": "mov     esi, offset unk_A283D0",
+    "line": "mov     esi, offset g_CppGlobalInitializersBegin",
     "mnemonic": "mov",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x981CBB",
-    "line": "mov     edi, offset dword_A2F77C",
+    "line": "mov     edi, offset g_CppGlobalInitializersEnd",
     "mnemonic": "mov",
     "size": 5
   },

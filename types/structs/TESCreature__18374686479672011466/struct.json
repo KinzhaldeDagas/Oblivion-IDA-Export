@@ -1,124 +1,198 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "TESCreature",
+  "definition": "struct TESCreature\n{\nTESActorBaseVtbl *__vtable;\nTESActorBaseMembr super;\nTESAttackDamageForm attackDamage;\nTESModelList modelList;\nTESCreature::SoundData soundData;\nUInt8 type;\nUInt8 combatSkill;\nUInt8 magicSkill;\nUInt8 stealthSkill;\nUInt8 soulLevel;\nUInt8 unkB;\nUInt8 attackReach;\nUInt8 unkD;\nfloat turningSpeed;\nfloat footWeight;\nfloat baseScale;\nTESCombatStyle *combatStyle;\nTESModel bloodSpray; ///< Verified: constructor 0x51EB80, initializer 0x51C7B0, destructor 0x51E9A0 and loader 0x51DD00 establish this component. NAM0; model getter used unless NoBloodSpray; empty path falls back to sBloodParticleDefault.\nTESTexture bloodDecal; ///< Verified: constructor 0x51EB80, initializer 0x51C7B0, destructor 0x51E9A0 and loader 0x51DD00 establish this component. NAM1; texture getter used unless NoBloodDecal; empty path falls back to sBloodTextureDefault.\n}\n",
   "id": 18374686479672011466,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00053.",
       "name": "__vtable",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "TESActorBaseVtbl *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00054.",
       "name": "super",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 224
+      "size": 224,
+      "type": "TESActorBaseMembr"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00055.",
       "name": "attackDamage",
       "offset": 228,
-      "offset_hex": "0xe4",
-      "size": 8
+      "offset_hex": "0xE4",
+      "size": 8,
+      "type": "TESAttackDamageForm"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00056.",
       "name": "modelList",
       "offset": 236,
-      "offset_hex": "0xec",
-      "size": 20
+      "offset_hex": "0xEC",
+      "size": 20,
+      "type": "TESModelList"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00057.",
       "name": "soundData",
       "offset": 256,
       "offset_hex": "0x100",
-      "size": 4
+      "size": 4,
+      "type": "TESCreature::SoundData"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00058.",
       "name": "type",
       "offset": 260,
       "offset_hex": "0x104",
-      "size": 1
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00059.",
       "name": "combatSkill",
       "offset": 261,
       "offset_hex": "0x105",
-      "size": 1
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000510.",
       "name": "magicSkill",
       "offset": 262,
       "offset_hex": "0x106",
-      "size": 1
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000511.",
       "name": "stealthSkill",
       "offset": 263,
       "offset_hex": "0x107",
-      "size": 1
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000512.",
       "name": "soulLevel",
       "offset": 264,
       "offset_hex": "0x108",
-      "size": 1
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000513.",
       "name": "unkB",
       "offset": 265,
       "offset_hex": "0x109",
-      "size": 1
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000514.",
       "name": "attackReach",
       "offset": 266,
-      "offset_hex": "0x10a",
-      "size": 1
+      "offset_hex": "0x10A",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000515.",
       "name": "unkD",
       "offset": 267,
-      "offset_hex": "0x10b",
-      "size": 1
+      "offset_hex": "0x10B",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000516.",
       "name": "turningSpeed",
       "offset": 268,
-      "offset_hex": "0x10c",
-      "size": 4
+      "offset_hex": "0x10C",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000517.",
       "name": "footWeight",
       "offset": 272,
       "offset_hex": "0x110",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000518.",
       "name": "baseScale",
       "offset": 276,
       "offset_hex": "0x114",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000519.",
       "name": "combatStyle",
       "offset": 280,
       "offset_hex": "0x118",
-      "size": 4
+      "size": 4,
+      "type": "TESCombatStyle *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified: constructor 0x51EB80, initializer 0x51C7B0, destructor 0x51E9A0 and loader 0x51DD00 establish this component. NAM0; model getter used unless NoBloodSpray; empty path falls back to sBloodParticleDefault.",
       "name": "bloodSpray",
       "offset": 284,
-      "offset_hex": "0x11c",
-      "size": 24
+      "offset_hex": "0x11C",
+      "size": 24,
+      "type": "TESModel"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified: constructor 0x51EB80, initializer 0x51C7B0, destructor 0x51E9A0 and loader 0x51DD00 establish this component. NAM1; texture getter used unless NoBloodDecal; empty path falls back to sBloodTextureDefault.",
       "name": "bloodDecal",
       "offset": 308,
       "offset_hex": "0x134",
-      "size": 12
+      "size": 12,
+      "type": "TESTexture"
     }
   ],
   "name": "TESCreature",
+  "ordinal": 9685,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 320
 }

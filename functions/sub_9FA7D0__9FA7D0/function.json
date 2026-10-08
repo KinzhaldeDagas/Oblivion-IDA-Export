@@ -1,18 +1,31 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
+  "chunks": [
+    [
+      "0x9FA7D0",
+      "0x9FA7F5"
+    ]
+  ],
+  "chunks_sha256": "122d1a7aac9a47a880d2037ffbcd654ec30c15131c7b9f3ed15e3982660d859d",
+  "comment_regular": "Verified: registers GameSetting float fRoadPointReachDistance with default 500.0. No direct use of this setting is established in TESRoad_FindNearestConnectedPointInNearbyCells, whose dbl_A3A5B0 is the FLT_MAX sentinel; keep the relationship Candidate until a consumer is found.",
+  "comment_repeatable": "Verified: registers GameSetting float fRoadPointReachDistance with default 500.0. No direct use of this setting is established in TESRoad_FindNearestConnectedPointInNearbyCells, whose dbl_A3A5B0 is the FLT_MAX sentinel; keep the relationship Candidate until a consumer is found.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
   "display_name": "sub_9FA7D0",
   "end_ea": "0x9FA7F5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_9FA7D0",
   "segment": ".text",
   "sha256": "122d1a7aac9a47a880d2037ffbcd654ec30c15131c7b9f3ed15e3982660d859d",
   "size": 37,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x9FA7D0",
+  "total_chunk_size": 37,
   "type": "int()",
   "xrefs_from_count": 15,
   "xrefs_to_count": 0

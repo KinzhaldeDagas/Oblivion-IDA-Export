@@ -1,4 +1,4 @@
-0x680550: movzx   ecx, word ptr [ecx]
+0x680550: movzx   ecx, word ptr [ecx]; Verified: tests state flag bit 0x01. Probable interpretation: link has been discovered/entered into the search; the flag remains set after expansion.
 0x680553: xor     eax, eax
 0x680555: cmp     cx, ds:0B3BF04h
 0x68055C: jnb     short loc_68056A

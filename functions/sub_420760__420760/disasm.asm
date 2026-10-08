@@ -1,4 +1,4 @@
-0x420760: push    24h ; '$'; a2
+0x420760: push    24h ; '$'; Returns the form stored in ExtraLevCreaModifier type 0x24.
 0x420762: call    BaseExtraList_GetExtraData
 0x420767: test    eax, eax
 0x420769: jz      short loc_42076F

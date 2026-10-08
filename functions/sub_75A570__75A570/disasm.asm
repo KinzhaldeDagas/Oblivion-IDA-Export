@@ -16,7 +16,6 @@
 0x75A591: cmp     [edi+48h], si
 0x75A595: jbe     short loc_75A613
 0x75A597: jmp     short loc_75A5A0
-0x75A599: align 10h
 0x75A5A0: mov     eax, [ebx+10h]
 0x75A5A3: fld     dword ptr [eax+0E8h]
 0x75A5A9: mov     ecx, [ebx+18h]

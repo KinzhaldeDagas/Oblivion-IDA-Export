@@ -55,21 +55,21 @@
 0x6F2B29: cmp     edi, [esi+8]
 0x6F2B2C: jbe     short loc_6F2B33
 0x6F2B2E: call    __invalid_parameter_noinfo
-0x6F2B33: mov     [esp+18h+var_4], edi
+0x6F2B33: mov     [esp+18h+result.current], edi
 0x6F2B37: lea     edi, [edi+ebx*4]
 0x6F2B3A: cmp     edi, [esi+8]
 0x6F2B3D: ja      short loc_6F2B44
 0x6F2B3F: cmp     edi, [esi+4]
 0x6F2B42: jnb     short loc_6F2B49
 0x6F2B44: call    __invalid_parameter_noinfo
-0x6F2B49: push    ebp; Src
-0x6F2B4A: push    esi; int
-0x6F2B4B: push    edi; Dst
-0x6F2B4C: push    esi; int
-0x6F2B4D: lea     ecx, [esp+28h+var_8]
-0x6F2B51: push    ecx; int
-0x6F2B52: mov     ecx, esi
-0x6F2B54: call    sub_439050
+0x6F2B49: push    ebp; last
+0x6F2B4A: push    esi; last
+0x6F2B4B: push    edi; first
+0x6F2B4C: push    esi; first
+0x6F2B4D: lea     ecx, [esp+28h+result]
+0x6F2B51: push    ecx; result
+0x6F2B52: mov     ecx, esi; this
+0x6F2B54: call    OB_stVector4_EraseRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Checked erase-range core for vectors of trivial 4-byte elements. Validates iterator owners, shifts the suffix with memmove_s, updates end, and returns the resulting iterator; directly clears CIndexedGeometry triangle totals.
 0x6F2B59: pop     edi
 0x6F2B5A: pop     esi
 0x6F2B5B: pop     ebp

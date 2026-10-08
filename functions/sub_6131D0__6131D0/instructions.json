@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6131D0",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; Computes the absolute XY heading difference from actor to target, normalizes across the 360-degree boundary, optionally returns degrees, and tests it against the combat-facing threshold game setting.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x6131D5",
-    "line": "mov     esi, [esp+14h+arg_0]",
+    "line": "mov     esi, [esp+14h+actor]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x6131E8",
-    "line": "mov     ecx, [esp+18h+arg_4]",
+    "line": "mov     ecx, [esp+18h+target]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x6131FE",
-    "line": "fstp    [esp+18h+arg_0]",
+    "line": "fstp    [esp+18h+actor]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x613208",
-    "line": "fstp    [esp+18h+arg_4]",
+    "line": "fstp    [esp+18h+target]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x613219",
-    "line": "fld     [esp+1Ch+arg_0]",
+    "line": "fld     [esp+1Ch+actor]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x613221",
-    "line": "fld     [esp+1Ch+arg_4]",
+    "line": "fld     [esp+1Ch+target]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x613229",
-    "line": "call    sub_683CB0",
+    "line": "call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x613230",
-    "line": "fstp    [esp+1Ch+arg_0]",
+    "line": "fstp    [esp+1Ch+actor]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -223,19 +223,19 @@
   },
   {
     "ea": "0x613241",
-    "line": "fsub    [esp+18h+arg_0]",
+    "line": "fsub    [esp+18h+actor]",
     "mnemonic": "fsub",
     "size": 4
   },
   {
     "ea": "0x613245",
-    "line": "fstp    [esp+18h+arg_0]",
+    "line": "fstp    [esp+18h+actor]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x613249",
-    "line": "fld     [esp+18h+arg_0]",
+    "line": "fld     [esp+18h+actor]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -247,13 +247,13 @@
   },
   {
     "ea": "0x61324F",
-    "line": "fstp    [esp+18h+arg_0]",
+    "line": "fstp    [esp+18h+actor]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x613253",
-    "line": "fld     [esp+18h+arg_0]",
+    "line": "fld     [esp+18h+actor]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x61325D",
-    "line": "fstp    [esp+18h+arg_0]",
+    "line": "fstp    [esp+18h+actor]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x613267",
-    "line": "fld     [esp+18h+arg_0]",
+    "line": "fld     [esp+18h+actor]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -319,13 +319,13 @@
   },
   {
     "ea": "0x61327C",
-    "line": "fstp    [esp+18h+arg_0]",
+    "line": "fstp    [esp+18h+actor]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x613280",
-    "line": "fld     [esp+18h+arg_0]",
+    "line": "fld     [esp+18h+actor]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -337,25 +337,25 @@
   },
   {
     "ea": "0x613286",
-    "line": "fstp    [esp+18h+arg_0]",
+    "line": "fstp    [esp+18h+actor]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x61328A",
-    "line": "fld     [esp+18h+arg_0]",
+    "line": "fld     [esp+18h+actor]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x61328E",
-    "line": "fstp    [esp+18h+arg_0]",
+    "line": "fstp    [esp+18h+actor]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x613292",
-    "line": "fld     [esp+18h+arg_0]",
+    "line": "fld     [esp+18h+actor]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x6132A7",
-    "line": "mov     eax, [esp+18h+arg_8]",
+    "line": "mov     eax, [esp+18h+outAngleDegrees]",
     "mnemonic": "mov",
     "size": 4
   },

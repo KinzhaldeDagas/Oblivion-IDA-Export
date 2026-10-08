@@ -191,7 +191,7 @@
 0x5E93E0: lea     edi, [ebp+24h]
 0x5E93E3: push    3
 0x5E93E5: mov     ecx, edi
-0x5E93E7: call    EffectItemList_GetStrongestItem
+0x5E93E7: call    EffectItemList_GetStrongestItem; this=EffectItemList; args are rangeFilter (0 self,1 touch,2 target,3 any) and requireArea. Returns effective (flag 0x400000 clear) qualifying item with greatest truncated MagickaCostForCaster(item,null).
 0x5E93EC: mov     ecx, [esp+54h+var_34]
 0x5E93F0: mov     esi, ebp
 0x5E93F2: neg     esi

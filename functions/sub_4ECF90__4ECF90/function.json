@@ -1,19 +1,32 @@
 {
-  "callees_count": 13,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4ECF90",
+      "0x4ED0C2"
+    ]
+  ],
+  "chunks_sha256": "af1e386fc92665f58c339f26581e187aa5d4d879657104e9868c71141a404fa1",
+  "comment_regular": "Verified generated-texture retrieval: resolves the color and `_FN` normal DDS through the texture manager into task fields +0x40/+0x44, then submits the task to IOManager when dependencies are ready.",
+  "comment_repeatable": "Verified generated-texture retrieval: resolves the color and `_FN` normal DDS through the texture manager into task fields +0x40/+0x44, then submits the task to IOManager when dependencies are ready.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_4ECF90",
+  "display_name": "TerrainLODQuadLoadTask_RetrieveGeneratedTextures",
   "end_ea": "0x4ED0C2",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4ECF90",
+  "name": "TerrainLODQuadLoadTask_RetrieveGeneratedTextures",
   "segment": ".text",
   "sha256": "af1e386fc92665f58c339f26581e187aa5d4d879657104e9868c71141a404fa1",
   "size": 306,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4ECF90",
-  "type": "void __thiscall(int this)",
+  "total_chunk_size": 306,
+  "type": "void __thiscall(TerrainLODQuadLoadTask_OblivionLayout_048Verified *this)",
   "xrefs_from_count": 105,
   "xrefs_to_count": 1
 }

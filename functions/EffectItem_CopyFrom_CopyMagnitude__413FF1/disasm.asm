@@ -8,7 +8,7 @@
 0x414002: jmp     short loc_414007
 0x414004: mov     eax, [edi+4]
 0x414007: mov     ecx, [esi+1Ch]
-0x41400A: fld     ds:flt_A30634
+0x41400A: fld     ds:kTerrainLODQuadRayDirectionZ
 0x414010: mov     edx, [ecx+58h]
 0x414013: shr     edx, 8
 0x414016: test    dl, 1

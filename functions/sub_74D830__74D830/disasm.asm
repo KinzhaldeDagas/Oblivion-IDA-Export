@@ -1,5 +1,5 @@
 0x74D830: movzx   edx, word ptr [ecx+7Eh]
-0x74D834: mov     eax, [esp+arg_0]
+0x74D834: mov     eax, [esp+element]
 0x74D838: cmp     eax, edx
 0x74D83A: jnb     short locret_74D8B3
 0x74D83C: mov     ecx, [ecx+78h]
@@ -16,20 +16,20 @@
 0x74D855: mov     ebp, [esp+0Ch+arg_4]
 0x74D859: push    esi
 0x74D85A: lea     ebx, [ebx+0]
-0x74D860: mov     ecx, ebp
-0x74D862: call    sub_700900
+0x74D860: mov     ecx, ebp; this
+0x74D862: call    NiObject_CloneWithPointerMap; Clones a loaded NiObject with a temporary pointer map and runs clone post-processing; the returned scene object is distinct from its source.
 0x74D867: mov     esi, eax
 0x74D869: test    esi, esi
-0x74D86B: mov     [esp+10h+arg_0], esi
+0x74D86B: mov     [esp+10h+element], esi
 0x74D86F: jz      short loc_74D87B
 0x74D871: lea     edx, [esi+4]
 0x74D874: push    edx; lpAddend
 0x74D875: call    dword ptr ds:0A28078h
-0x74D87B: lea     eax, [esp+10h+arg_0]
-0x74D87F: push    eax
-0x74D880: push    edi
-0x74D881: mov     ecx, ebx
-0x74D883: call    sub_4B34E0
+0x74D87B: lea     eax, [esp+10h+element]
+0x74D87F: push    eax; element
+0x74D880: push    edi; index
+0x74D881: mov     ecx, ebx; self
+0x74D883: call    NiTObjectArray_SetAt
 0x74D888: test    esi, esi
 0x74D88A: jz      short loc_74D8A4
 0x74D88C: lea     ecx, [esi+4]

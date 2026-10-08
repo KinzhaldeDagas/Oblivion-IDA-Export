@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x6A09AB",
-    "line": "mov     eax, [esp+24h+arg_0]",
+    "line": "mov     eax, [esp+24h+targetReference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x6A09CD",
-    "line": "mov     ecx, [esp+24h+arg_4]",
+    "line": "mov     ecx, [esp+24h+effectShader]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x6A0A55",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -517,13 +517,13 @@
   },
   {
     "ea": "0x6A0A60",
-    "line": "push    ebx",
+    "line": "push    ebx; firstPerson",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A0A61",
-    "line": "call    PlayerCharacter_GetPlayerNode",
+    "line": "call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,19 +541,19 @@
   },
   {
     "ea": "0x6A0A6A",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x6A0A70",
-    "line": "push    ebx",
+    "line": "push    ebx; firstPerson",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A0A71",
-    "line": "call    PlayerCharacter_GetPlayerNode",
+    "line": "call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,13 +583,13 @@
   },
   {
     "ea": "0x6A0A83",
-    "line": "mov     [esi+44h], bl",
+    "line": "mov     [esi+44h], bl; Verified (Oblivion): alternate shader constructor accepts an explicit effect shader at +0x34 and elapsedSeconds at base +0x08, initializes +0x2C to 0xFFFFFFFF, and derives +0x44 from the player's selected node. TESEffectShader* +0x34 is Probable as the common field type, corroborated by the owner-based constructor and the matching Fallout constructor signature.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x6A0A86",
-    "line": "fld     [esp+24h+arg_8]",
+    "line": "fld     [esp+24h+elapsedSeconds]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -700,5 +700,113 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C5ED0",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5ED3",
+    "line": "jmp     MagicHitEffect_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5ED8",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5EDB",
+    "line": "add     ecx, 3Ch ; '<'; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5EDE",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5EE3",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5EE6",
+    "line": "add     ecx, 40h ; '@'; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5EE9",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5EEE",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5EF1",
+    "line": "add     ecx, 48h ; 'H'; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5EF4",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5EF9",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C5EFD",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5F00",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5F03",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C5F05",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5F0A",
+    "line": "mov     eax, offset stru_AEE584",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5F0F",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

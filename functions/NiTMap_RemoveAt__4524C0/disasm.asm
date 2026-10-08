@@ -1,4 +1,4 @@
-0x4524C0: push    ebx
+0x4524C0: push    ebx; MEF PERF 2026-10-02 PASS2: Verified removal searches hash bucket, unlinks matching node, calls virtual clear+10 and release+18, decrements count. Normal drain iterates and removes bucket head; nested lookup/removal does not itself establish quadratic drain work.
 0x4524C1: push    ebp
 0x4524C2: mov     ebp, [esp+8+arg_0]
 0x4524C6: push    esi

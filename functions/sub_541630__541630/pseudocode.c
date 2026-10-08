@@ -14,83 +14,83 @@ void __cdecl sub_541630(int a1, float a2, float a3, float a4, int a5)
   int v16; // edi
   int v17; // eax
 
-  v5 = a1;
-  if ( a1 )
+  v5 = a1; /*0x541633*/
+  if ( a1 ) /*0x54163a*/
   {
-    v6 = 0;
-    if ( *(_WORD *)(a1 + 0xB6) )
+    v6 = 0; /*0x541647*/
+    if ( *(_WORD *)(a1 + 0xB6) ) /*0x541640*/
     {
-      v7 = a5;
-      while ( 1 )
+      v7 = a5; /*0x541653*/
+      while ( 1 ) /*0x541663*/
       {
-        v8 = *(_DWORD **)(*(_DWORD *)(v5 + 0xB0) + 4 * v6);
-        if ( v8 )
-          break;
+        v8 = *(_DWORD **)(*(_DWORD *)(v5 + 0xB0) + 4 * v6); /*0x541663*/
+        if ( v8 ) /*0x541668*/
+          break; /*0x541668*/
 LABEL_21:
-        if ( *(unsigned __int16 *)(v5 + 0xB6) <= (unsigned int)++v6 )
-          return;
+        if ( *(unsigned __int16 *)(v5 + 0xB6) <= (unsigned int)++v6 ) /*0x541781*/
+          return; /*0x541781*/
       }
-      if ( !(*(int (__thiscall **)(_DWORD *))(*v8 + 0x10))(v8) )
+      if ( !(*(int (__thiscall **)(_DWORD *))(*v8 + 0x10))(v8) ) /*0x541679*/
       {
-        v17 = (*(int (__thiscall **)(_DWORD *))(*v8 + 8))(v8);
-        if ( v17 )
-          sub_541630(v17, a2, a3, a4, v7);
-        goto LABEL_21;
+        v17 = (*(int (__thiscall **)(_DWORD *))(*v8 + 8))(v8); /*0x54174c*/
+        if ( v17 ) /*0x541750*/
+          sub_541630(v17, a2, a3, a4, v7); /*0x54176d*/
+        goto LABEL_21; /*0x54176d*/
       }
-      v9 = v8[0x2D];
-      v10 = *(_DWORD *)(v9 + 0x24);
-      v11 = *(_WORD *)(v9 + 8);
-      if ( !v10 )
+      v9 = v8[0x2D]; /*0x54167f*/
+      v10 = *(_DWORD *)(v9 + 0x24); /*0x541685*/
+      v11 = *(_WORD *)(v9 + 8); /*0x54168a*/
+      if ( !v10 ) /*0x54168e*/
       {
-        sub_7287C0(v9, 0);
-        v10 = *(_DWORD *)(v8[0x2D] + 0x24);
-        if ( !v11 )
+        sub_7287C0(v9, 0); /*0x541693*/
+        v10 = *(_DWORD *)(v8[0x2D] + 0x24); /*0x5416a1*/
+        if ( !v11 ) /*0x5416a4*/
         {
 LABEL_17:
-          v16 = v8[0x2D];
-          v5 = a1;
-          if ( v16 )
-            *(_WORD *)(v16 + 0x2E) |= 4u;
-          goto LABEL_21;
+          v16 = v8[0x2D]; /*0x541730*/
+          v5 = a1; /*0x541738*/
+          if ( v16 ) /*0x54173c*/
+            *(_WORD *)(v16 + 0x2E) |= 4u; /*0x54173e*/
+          goto LABEL_21; /*0x541743*/
         }
-        v12 = *(_DWORD **)(v8[0x2D] + 0x24);
-        v13 = v11;
-        do
+        v12 = *(_DWORD **)(v8[0x2D] + 0x24); /*0x5416aa*/
+        v13 = v11; /*0x5416ac*/
+        do /*0x5416d9*/
         {
-          *v12 = dword_B25AE0;
-          v12[1] = dword_B25AE4;
-          v12[2] = dword_B25AE8;
-          v12[3] = dword_B25AEC;
-          v12 += 4;
-          --v13;
+          *v12 = dword_B25AE0; /*0x5416b6*/
+          v12[1] = dword_B25AE4; /*0x5416be*/
+          v12[2] = dword_B25AE8; /*0x5416c7*/
+          v12[3] = dword_B25AEC; /*0x5416d0*/
+          v12 += 4; /*0x5416d3*/
+          --v13; /*0x5416d6*/
         }
-        while ( v13 );
-        v7 = a5;
+        while ( v13 ); /*0x5416d9*/
+        v7 = a5; /*0x5416db*/
       }
-      if ( v11 )
+      if ( v11 ) /*0x5416e2*/
       {
-        v14 = (float *)(v10 + 8);
-        v15 = v11;
-        do
+        v14 = (float *)(v10 + 8); /*0x5416e8*/
+        v15 = v11; /*0x5416ef*/
+        do /*0x541728*/
         {
-          if ( (_BYTE)v7 )
+          if ( (_BYTE)v7 ) /*0x5416f8*/
           {
-            v14[0xFFFFFFFE] = v14[0xFFFFFFFE] + a2;
-            v14[0xFFFFFFFF] = v14[0xFFFFFFFF] + a3;
-            *v14 = *v14 + a4;
+            v14[0xFFFFFFFE] = v14[0xFFFFFFFE] + a2; /*0x5416ff*/
+            v14[0xFFFFFFFF] = v14[0xFFFFFFFF] + a3; /*0x541707*/
+            *v14 = *v14 + a4; /*0x54170e*/
           }
           else
           {
-            v14[0xFFFFFFFE] = a2;
-            v14[0xFFFFFFFF] = a3;
-            *v14 = a4;
+            v14[0xFFFFFFFE] = a2; /*0x541712*/
+            v14[0xFFFFFFFF] = a3; /*0x541717*/
+            *v14 = a4; /*0x54171c*/
           }
-          v14 += 4;
-          --v15;
+          v14 += 4; /*0x541722*/
+          --v15; /*0x541725*/
         }
-        while ( v15 );
+        while ( v15 ); /*0x541728*/
       }
-      goto LABEL_17;
+      goto LABEL_17; /*0x541728*/
     }
   }
 }

@@ -5,7 +5,7 @@
 0x68DDC9: push    esi
 0x68DDCA: push    edi
 0x68DDCB: xor     esi, esi
-0x68DDCD: call    sub_45A170
+0x68DDCD: call    TESSaveLoadGame_UseSaveGameBlocks
 0x68DDD2: test    al, al
 0x68DDD4: jz      short loc_68DDDB
 0x68DDD6: mov     esi, 6

@@ -1,4 +1,4 @@
-0x7D6A80: push    esi
+0x7D6A80: push    esi; Locked target-group begin wrapper: require an active scene and no ready target, lock the renderer, bind/clear the group, then set IsReady on success.
 0x7D6A81: mov     esi, ecx
 0x7D6A83: mov     eax, 1
 0x7D6A88: cmp     [esi+200h], eax
@@ -15,14 +15,14 @@
 0x7D6AAC: test    edi, edi
 0x7D6AAE: jnz     short loc_7D6AC4
 0x7D6AB0: push    offset aNirendererBegi; "NiRenderer::BeginUsingRenderTargetGroup"...
-0x7D6AB5: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x7D6AB5: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x7D6ABA: add     esp, 4
 0x7D6ABD: pop     edi
 0x7D6ABE: xor     al, al
 0x7D6AC0: pop     esi
 0x7D6AC1: retn    8
 0x7D6AC4: push    ebx
-0x7D6AC5: call    NiDX9Renderer__LockRender
+0x7D6AC5: call    NiDX9Renderer__LockRender;
 0x7D6ACA: mov     ecx, [esp+0Ch+clearFlags]
 0x7D6ACE: mov     eax, [esi]
 0x7D6AD0: mov     edx, [eax+148h]
@@ -39,7 +39,7 @@
 0x7D6AEB: pop     esi
 0x7D6AEC: retn    8
 0x7D6AEF: mov     ecx, esi; this
-0x7D6AF1: call    NiDX9Renderer__UnLockRender
+0x7D6AF1: call    NiDX9Renderer__UnLockRender;
 0x7D6AF6: mov     al, bl
 0x7D6AF8: pop     ebx
 0x7D6AF9: pop     edi

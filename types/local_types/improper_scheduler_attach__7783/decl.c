@@ -1,1 +1,1 @@
-improper_scheduler_attach
+typedef exception improper_scheduler_attach;

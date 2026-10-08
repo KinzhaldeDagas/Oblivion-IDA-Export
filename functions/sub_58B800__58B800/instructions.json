@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x58B800",
-    "line": "sub     esp, 804h",
+    "line": "sub     esp, 804h; Silt Strider consequence: injected NorthernUI row uses sibling() in y expression. With AddHead attachment and pre-existing children, source is the prior head child. It is not the previous visible row by listindex. Single-child self-reference is a conditional cycle risk; actual NorthernUI parent contents must be checked.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x58B816",
-    "line": "mov     esi, [esp+80Ch+arg_0]",
+    "line": "mov     esi, [esp+80Ch+target]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -49,19 +49,19 @@
   },
   {
     "ea": "0x58B81E",
-    "line": "mov     edi, [esp+810h+arg_4]",
+    "line": "mov     edi, [esp+810h+selector]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x58B825",
-    "line": "lea     eax, [esp+810h+var_804]",
+    "line": "lea     eax, [esp+810h+name]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x58B829",
-    "line": "push    eax",
+    "line": "push    eax; parameter",
     "mnemonic": "push",
     "size": 1
   },
@@ -73,19 +73,19 @@
   },
   {
     "ea": "0x58B82C",
-    "line": "push    edi",
+    "line": "push    edi; text",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58B82D",
-    "line": "mov     [esp+818h+var_804], bl",
+    "line": "mov     [esp+818h+name], bl",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x58B831",
-    "line": "call    sub_588FC0",
+    "line": "call    Tile__TextToTraitAndParam; Verified: splits selector at parentheses, puts parameter text in supplied buffer, converts selector token through TileStringToStringID. GetTileByName uses result 0x138C for sibling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x58B8B7",
-    "line": "cmp     [esp+810h+var_804], bl; jumptable 0058B896 case 5004",
+    "line": "cmp     [esp+810h+name], bl; jumptable 0058B896 case 5004",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x58B8D6",
-    "line": "cmp     [eax+8], esi",
+    "line": "cmp     [eax+8], esi; Verified sibling() lookup: scan parent list, advance next before checking successful match; return next node data if present, else wrap to head. Hidden/target/listindex traits are never read. Single child resolves itself, which can create an expression cycle.",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x58B8E2",
-    "line": "jnz     short loc_58B8D6",
+    "line": "jnz     short loc_58B8D6; Verified sibling() lookup: scan parent list, advance next before checking successful match; return next node data if present, else wrap to head. Hidden/target/listindex traits are never read. Single child resolves itself, which can create an expression cycle.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x58B940",
-    "line": "lea     ecx, [esp+810h+var_804]",
+    "line": "lea     ecx, [esp+810h+name]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -625,7 +625,7 @@
   },
   {
     "ea": "0x58B946",
-    "line": "call    __mbsicmp",
+    "line": "call    __mbsicmp; Verified sibling(name): immediate parent children only, case-insensitive string match, no visibility/navigation filtering.",
     "mnemonic": "call",
     "size": 5
   },
@@ -829,7 +829,7 @@
   },
   {
     "ea": "0x58B9A6",
-    "line": "mov     al, [esp+810h+var_804]; jumptable 0058B896 case 5005",
+    "line": "mov     al, [esp+810h+name]; jumptable 0058B896 case 5005",
     "mnemonic": "mov",
     "size": 4
   },
@@ -955,25 +955,25 @@
   },
   {
     "ea": "0x58B9DE",
-    "line": "lea     eax, [esp+810h+var_804]",
+    "line": "lea     eax, [esp+810h+name]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x58B9E2",
-    "line": "push    eax; unsigned __int8 *",
+    "line": "push    eax; name",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58B9E3",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x58B9E5",
-    "line": "call    sub_589930",
+    "line": "call    Tile_FindDescendantByName",
     "mnemonic": "call",
     "size": 5
   },

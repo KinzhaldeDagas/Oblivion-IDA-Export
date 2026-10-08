@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A5740",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Allocates and initializes the SIdvLeafInfo runtime tables: random rocking-group time offsets, 16 floats per texture-orientation texcoord block, and zeroed per-LOD leaf-card vertex tables.",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x7A5769",
-    "line": "mov     ebx, [esp+20h+arg_0]",
+    "line": "mov     ebx, [esp+20h+leafTextureCount]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x7A5789",
-    "line": "lea     ecx, [esp+20h+arg_0]",
+    "line": "lea     ecx, [esp+20h+leafTextureCount]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x7A5790",
-    "line": "call    sub_78EAF0",
+    "line": "call    OB_stRandom_ctor_010201A0; Oblivion stRandom constructor. The class has no per-instance generator state; if the shared SIdvRandomImpl state is not initialized, it invokes Reseed(-1).",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,13 +211,13 @@
   },
   {
     "ea": "0x7A57A9",
-    "line": "fstp    [esp+28h+var_24]; float",
+    "line": "fstp    [esp+28h+maxValue]; maxValue",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A57AD",
-    "line": "lea     ecx, [esp+28h+arg_0]",
+    "line": "lea     ecx, [esp+28h+leafTextureCount]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -229,13 +229,13 @@
   },
   {
     "ea": "0x7A57B3",
-    "line": "fstp    [esp+28h+var_28]; float",
+    "line": "fstp    [esp+28h+minValue]; minValue",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7A57B6",
-    "line": "call    sub_78EA00",
+    "line": "call    OB_stRandom_GetUniform_010201A0; Oblivion stRandom::GetUniform. Returns minValue + (maxValue - minValue) * SIdvRandomImpl::m_cUniform.Next(). Used throughout spline, branch, frond, tree, leaf-LOD, and seed generation paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -883,7 +883,7 @@
   },
   {
     "ea": "0x7A58DE",
-    "line": "lea     ecx, [esp+20h+arg_0]; void *",
+    "line": "lea     ecx, [esp+20h+leafTextureCount]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -895,7 +895,7 @@
   },
   {
     "ea": "0x7A58EA",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -952,5 +952,59 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CCBB0",
+    "line": "lea     ecx, [ebp+4]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCBB3",
+    "line": "jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCBB8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CCBBC",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCBBF",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCBC2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CCBC4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCBC9",
+    "line": "mov     eax, offset stru_AF5F30",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCBCE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

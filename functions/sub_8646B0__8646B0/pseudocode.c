@@ -1,5 +1,5 @@
 // attributes: thunk
-NiAVObject *__stdcall sub_8646B0(int a1)
+NiGeometry *__thiscall j_OB_NiTriShape_CreateClone(void *this, void *cloningProcess)
 {
-  return sub_717710(a1);
+  return (NiGeometry *)OB_NiTriShape_CreateClone(this, cloningProcess);
 }

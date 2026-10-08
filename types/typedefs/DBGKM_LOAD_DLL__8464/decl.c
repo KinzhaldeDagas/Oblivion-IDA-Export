@@ -1,1 +1,8 @@
-_DBGKM_LOAD_DLL
+struct _DBGKM_LOAD_DLL
+{
+HANDLE FileHandle;
+PVOID BaseOfDll;
+ULONG DebugInfoFileOffset;
+ULONG DebugInfoSize;
+PVOID NamePointer;
+};

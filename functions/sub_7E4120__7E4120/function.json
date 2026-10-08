@@ -1,19 +1,36 @@
 {
-  "callees_count": 29,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7E4120",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 18,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x7E4120",
+      "0x7E44BC"
+    ],
+    [
+      "0x9CF740",
+      "0x9CF77C"
+    ]
+  ],
+  "chunks_sha256": "b9be80bc539b7de7e1c116d39eed73f80af22eaee742a28e77d75356d8f4033d",
+  "comment_regular": "Verified (Oblivion): lazily creates and caches a NiTriShape template with particle geometry data; NiNode_CreateAttachedParticleShaderProperty clones this template before asking BSShaderManager_AssignShadersRecursive to assign shader properties.",
+  "comment_repeatable": "Verified (Oblivion): lazily creates and caches a NiTriShape template with particle geometry data; NiNode_CreateAttachedParticleShaderProperty clones this template before asking BSShaderManager_AssignShadersRecursive to assign shader properties.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "ParticleShaderProperty_CreateTemplateGeometry",
   "end_ea": "0x7E44BC",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7E4120",
+  "name": "ParticleShaderProperty_CreateTemplateGeometry",
   "segment": ".text",
   "sha256": "a0b13ac5c178c2d3a1dac9bc9771b0aa44f6778ec9f876a42f4c46856d9d59a8",
   "size": 924,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7E4120",
-  "type": "int()",
-  "xrefs_from_count": 313,
+  "total_chunk_size": 984,
+  "type": "NiTriShape *__cdecl()",
+  "xrefs_from_count": 337,
   "xrefs_to_count": 2
 }

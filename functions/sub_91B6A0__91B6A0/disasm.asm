@@ -136,7 +136,6 @@
 0x91B847: test    eax, eax
 0x91B849: jle     short loc_91B86A
 0x91B84B: jmp     short loc_91B850
-0x91B84D: align 10h
 0x91B850: mov     eax, [esp+244h+var_234]
 0x91B854: mov     ecx, [eax+esi*4]
 0x91B857: test    ecx, ecx

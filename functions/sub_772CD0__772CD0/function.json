@@ -1,19 +1,32 @@
 {
-  "callees_count": 13,
-  "callers_count": 77,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
+  "callers_count": 2759,
+  "chunks": [
+    [
+      "0x772CD0",
+      "0x772DED"
+    ]
+  ],
+  "chunks_sha256": "c7dac8634effbe1b8a38238a08ea0232610e02a97eb1cbb6599a8a4214b758da",
+  "comment_regular": "Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
+  "comment_repeatable": "Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.\nDX11 refresh verification: updates existing state value in place; when save-list category differs, removes/reinserts at opposite list head. Never append a refreshed bias write blindly after the captured program: preserve existing unique non-saving node position or reject ambiguous ordering.\nDX11 state-group audit 2026-10-01: existing entry updates value in place; a save-category change unlinks and inserts the same node at the destination head. Removal helpers clear links, including when destination is empty. Absent ID consumes entry pool B427AC (growing via772A80 if empty); group/node allocation is a separate lifecycle requirement. Ordinary168/175/195 all request no-save, so only first updates can alter links; later calls only change values. Under exclusive observer/writer ownership, final metadata can coalesce to last accepted bias values while per-draw DX11 programs keep each occurrence value.\nDX11 pool audit 2026-10-01: missing entries use the same first/last pool pop from B427AC, then overwrite all16 bytes of node state/value/next/previous before linking at list head. Old free-node links may be stale and must not be traversed. Available-stock adoption can be modeled as guarded CPU stores only under exclusive pool writer/observer ownership; growth remains separate.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_772CD0",
+  "display_name": "NiD3DRenderStateGroup_SetRenderState",
   "end_ea": "0x772DED",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_772CD0",
+  "name": "NiD3DRenderStateGroup_SetRenderState",
   "segment": ".text",
   "sha256": "c7dac8634effbe1b8a38238a08ea0232610e02a97eb1cbb6599a8a4214b758da",
   "size": 285,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x772CD0",
-  "type": "char __thiscall(_DWORD *this, int, int, unsigned __int8)",
+  "total_chunk_size": 285,
+  "type": "char __thiscall(OblivionRenderStateGroupPrefix *this, unsigned int state, unsigned int, unsigned __int8)",
   "xrefs_from_count": 121,
   "xrefs_to_count": 2759
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7C6310",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Oblivion mode-3 cube-face path: own target type 0x18, position the cube camera at the source, render one face or all faces, and preserve the source cull bit.",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x7C633D",
-    "line": "mov     ebx, [esp+28h+arg_0]",
+    "line": "mov     ebx, [esp+28h+source]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x7C6352",
-    "line": "mov     byte ptr [esp+28h+arg_0], al",
+    "line": "mov     byte ptr [esp+28h+source], al",
     "mnemonic": "mov",
     "size": 4
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x7C637D",
-    "line": "call    ??0BSCubeMapCamera@@QAE@XZ; BSCubeMapCamera::BSCubeMapCamera(void)",
+    "line": "call    ??0BSCubeMapCamera@@QAE@XZ; BSCubeMapCamera constructor: initializes mode +0x124, six face references +0x128..+0x13C, render/scene fields, cube frustum, and image-space shader list +0x14C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x7C6398",
-    "line": "mov     dword ptr [eax+124h], 3",
+    "line": "mov     dword ptr [eax+124h], 3; Select BSCubeMapCamera render mode 3. This is distinct from mode 0 used by special shadow object-list rendering.",
     "mnemonic": "mov",
     "size": 10
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x7C63CB",
-    "line": "cmp     [esp+28h+arg_8], 0",
+    "line": "cmp     [esp+28h+releasePreviousTarget], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -355,13 +355,13 @@
   },
   {
     "ea": "0x7C63DC",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C63DD",
-    "line": "call    sub_7C1EE0",
+    "line": "call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.",
     "mnemonic": "call",
     "size": 5
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x7C63F1",
-    "line": "call    BSTextureManager_GetDefaultRenderTarget",
+    "line": "call    BSTextureManager_GetDefaultRenderTarget; Oblivion default rendered-target acquisition. Resolves dimensions, D3D format, auxiliary value, and flags for the target type, then obtains a matching cached or newly created BSRenderedTexture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x7C642B",
-    "line": "mov     [edi+120h], eax",
+    "line": "mov     [edi+120h], eax; Strong-own default rendered-target type 0x18 at ShadowSceneNode+0x120.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -853,7 +853,7 @@
   },
   {
     "ea": "0x7C64CD",
-    "line": "cmp     [esp+28h+arg_8], 0",
+    "line": "cmp     [esp+28h+releasePreviousTarget], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -883,7 +883,7 @@
   },
   {
     "ea": "0x7C64DD",
-    "line": "mov     eax, [ebp+128h]",
+    "line": "mov     eax, [ebp+128h]; Use ShadowSceneNode+0x128 as the current mode-3 cube face index when rendering incrementally.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -895,7 +895,7 @@
   },
   {
     "ea": "0x7C64E6",
-    "line": "mov     [ebp+128h], edx",
+    "line": "mov     [ebp+128h], edx; Advance the persistent cube-face index; the function resets it after six faces.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1039,7 +1039,7 @@
   },
   {
     "ea": "0x7C652D",
-    "line": "cmp     byte ptr [esp+28h+arg_0], 0",
+    "line": "cmp     byte ptr [esp+28h+source], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1093,7 +1093,7 @@
   },
   {
     "ea": "0x7C654E",
-    "line": "mov     dword ptr [ebp+128h], 0",
+    "line": "mov     dword ptr [ebp+128h], 0; After six incremental faces, reset ShadowSceneNode+0x128 to face zero.",
     "mnemonic": "mov",
     "size": 10
   },
@@ -1156,5 +1156,77 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B5200",
+    "line": "mov     eax, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5203",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5204",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5209",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B520A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B520B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B520F",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5212",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5215",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B5217",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B521C",
+    "line": "mov     eax, offset stru_AE03C0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5221",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

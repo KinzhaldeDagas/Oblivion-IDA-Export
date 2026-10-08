@@ -1,4 +1,4 @@
-0x808190: sub     esp, 0B04h
+0x808190: sub     esp, 0B04h; MoonSugarEffect decode: ParallaxShader pixel-program loader. Loads 0x1A base PAR2*.pso variants into this+0x12C and, for ShaderPackage >=5, 4 extra variants into this+0x194.
 0x808196: mov     eax, ds:0B30AACh
 0x80819B: xor     eax, esp
 0x80819D: mov     [esp+0B04h+var_4], eax
@@ -456,7 +456,7 @@
 0x808C8E: push    ebp; int
 0x808C8F: lea     edx, [esp+0B28h+FileName]
 0x808C96: push    edx; lpFileName
-0x808C97: call    CreatePixelShader
+0x808C97: call    CreatePixelShader; Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.
 0x808C9C: mov     edi, eax
 0x808C9E: mov     eax, [esp+0B14h+var_B04]
 0x808CA2: mov     esi, [eax]
@@ -518,7 +518,7 @@
 0x808D5E: push    ebp; int
 0x808D5F: lea     edx, [esp+0B28h+FileName]
 0x808D66: push    edx; lpFileName
-0x808D67: call    CreatePixelShader
+0x808D67: call    CreatePixelShader; Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.
 0x808D6C: mov     edi, eax
 0x808D6E: mov     eax, [esp+0B14h+var_B04]
 0x808D72: mov     esi, [eax]

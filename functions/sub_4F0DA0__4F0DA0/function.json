@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x4F0DA0",
+      "0x4F0DD1"
+    ]
+  ],
+  "chunks_sha256": "fa9c092d9718cd94738db6e838a55a5640c8be9412ff835033a6ca1b9e77fce1",
+  "comment_regular": "Verified cell-LOD filter: if +0xD8 cellLODMapLoaded is set, checks the +0xC8 CellsWithLODObjects map for the packed cell coordinate; otherwise returns true as a permissive fallback.",
+  "comment_repeatable": "Verified cell-LOD filter: if +0xD8 cellLODMapLoaded is set, checks the +0xC8 CellsWithLODObjects map for the packed cell coordinate; otherwise returns true as a permissive fallback.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4F0DA0",
+  "display_name": "TESWorldSpace_PassesCellLODFilter",
   "end_ea": "0x4F0DD1",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4F0DA0",
+  "name": "TESWorldSpace_PassesCellLODFilter",
   "segment": ".text",
   "sha256": "fa9c092d9718cd94738db6e838a55a5640c8be9412ff835033a6ca1b9e77fce1",
   "size": 49,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4F0DA0",
-  "type": "char __thiscall(int this, __int16, unsigned __int16)",
+  "total_chunk_size": 49,
+  "type": "bool __thiscall(TESWorldSpace *this, __int16 cellX, unsigned __int16 cellY)",
   "xrefs_from_count": 14,
   "xrefs_to_count": 3
 }

@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x58FAFB",
-    "line": "jnz     short loc_58FB09",
+    "line": "jnz     short loc_58FB09; Verified: compare InterfaceManager +0x88 (focus pointer used by SetCurrentFocusTarget) with this; clear on match at 0x58FB11. Thus deleting an old topic clears matching focus before native post-build default-focus selection.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x58FB09",
-    "line": "cmp     [eax+88h], esi",
+    "line": "cmp     [eax+88h], esi; Verified: compare InterfaceManager +0x88 (focus pointer used by SetCurrentFocusTarget) with this; clear on match at 0x58FB11. Thus deleting an old topic clears matching focus before native post-build default-focus selection.",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -205,13 +205,13 @@
   },
   {
     "ea": "0x58FB29",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x58FB2B",
-    "line": "call    sub_58DA70",
+    "line": "call    Tile__Release; Verified: marks subtree release-in-progress (+5), clears matching interface active/drag references, marks released (+4), detaches parent, destroys each Value, detaches model, then deletes children. Native loop at 0x58DA90 advances child iterator EDX before call; pseudocode may omit this advance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x58FB42",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x58FB6D",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -418,5 +418,101 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9BF9C0",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BF9C3",
+    "line": "add     ecx, 8; void *",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BF9C6",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BF9CB",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BF9CE",
+    "line": "add     ecx, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BF9D1",
+    "line": "jmp     j_??1?$NiTList@PAVValue@Tile@@@@UAE@XZ; NiTList<Tile::Value *>::~NiTList<Tile::Value *>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BF9D6",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BF9D9",
+    "line": "add     ecx, 30h ; '0'",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BF9DC",
+    "line": "jmp     j_??1?$NiTList@PAVTile@@@@UAE@XZ; NiTList<Tile *>::~NiTList<Tile *>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BF9E1",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BF9E5",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BF9E8",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BF9EB",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BF9ED",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BF9F2",
+    "line": "mov     eax, offset stru_AE8E90",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BF9F7",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

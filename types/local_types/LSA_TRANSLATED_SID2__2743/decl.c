@@ -1,1 +1,7 @@
-_LSA_TRANSLATED_SID2
+struct _LSA_TRANSLATED_SID2
+{
+SID_NAME_USE Use;
+PSID Sid;
+LONG DomainIndex;
+ULONG Flags;
+};

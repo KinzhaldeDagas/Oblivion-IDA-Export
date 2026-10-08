@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8AC530",
-    "line": "push    ebp",
+    "line": "push    ebp; TES4 authoritative: after a new cast hit, computes remaining time/move fraction from the first collector hit and blends the cast endpoint toward the hit point.",
     "mnemonic": "push",
     "size": 1
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x8AC53A",
-    "line": "mov     edx, [ebp+arg_0]",
+    "line": "mov     edx, [ebp+moveVec]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x8AC585",
-    "line": "mov     eax, [ebp+arg_4]",
+    "line": "mov     eax, [ebp+collector]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x8AC5F8",
-    "line": "mov     ecx, [ebp+arg_8]",
+    "line": "mov     ecx, [ebp+targetPos]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x8AC608",
-    "line": "mov     eax, [ebp+arg_C]",
+    "line": "mov     eax, [ebp+currentPos]",
     "mnemonic": "mov",
     "size": 3
   },

@@ -28,7 +28,6 @@
 0x92FC13: mov     [esp+90h+var_64], ebx
 0x92FC17: mov     [esp+90h+var_68], edx
 0x92FC1B: jmp     short loc_92FC20
-0x92FC1D: align 10h
 0x92FC20: cmp     edx, eax
 0x92FC22: mov     [esp+90h+var_70], edx
 0x92FC26: jge     loc_930015

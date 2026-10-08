@@ -1,1 +1,1 @@
-IEnumContextPropsVtbl_0
+typedef IEnumContextPropsVtbl IEnumContextPropsVtbl_0;

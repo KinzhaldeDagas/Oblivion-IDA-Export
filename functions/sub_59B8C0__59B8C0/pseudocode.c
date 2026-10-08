@@ -1,30 +1,27 @@
-char sub_59B8C0()
+// [Controller decode 2026-07-09] Reset-defaults confirmation callback. Resets currently selected scheme and marks bindings dirty for label refresh.
+void __cdecl ControlsMenu::ConfirmResetDefaultsCallback()
 {
-  _DWORD *v4; // eax
   _DWORD *OpenMenuTile; // eax
   void *ParentMenu; // eax
-  _DWORD *v7; // esi
+  _DWORD *v2; // esi
 
-  LOBYTE(v4) = sub_578D70();
-  if ( (_BYTE)v4 == 2 )
+  if ( InterfaceManager_ConsumeMessageButton() == 2 ) /*0x59b8c7*/
   {
-    OpenMenuTile = (_DWORD *)Menu_GetOpenMenuTile(0x3FD);
-    if ( OpenMenuTile )
-      ParentMenu = (void *)Tile_GetParentMenu(OpenMenuTile);
+    OpenMenuTile = (_DWORD *)Menu_GetOpenMenuTile(0x3FD); /*0x59b8ce*/
+    if ( OpenMenuTile ) /*0x59b8d8*/
+      ParentMenu = (void *)Tile_GetParentMenu(OpenMenuTile); /*0x59b8dc*/
     else
-      ParentMenu = 0;
-    v4 = OblivionDynamicCast(
+      ParentMenu = 0; /*0x59b8e3*/
+    v2 = OblivionDynamicCast( /*0x59b8fa*/
            ParentMenu,
            0,
            (struct _s_RTTICompleteObjectLocator *)&Menu `RTTI Type Descriptor',
            &ControlsMenu `RTTI Type Descriptor',
            0);
-    v7 = v4;
-    if ( v4 )
+    if ( v2 ) /*0x59b901*/
     {
-      LOBYTE(v4) = InputGlobals::ResetControlMap((DIDEVCAPS *)OSGlobals->input, v4[0x17]);
-      *((_BYTE *)v7 + 0xD4) = 1;
+      InputGlobals::ResetControlMap((DIDEVCAPS *)MEMORY[0xB33398]->input, v2[0x17]); /*0x59b910*/
+      *((_BYTE *)v2 + 0xD4) = 1; /*0x59b915*/
     }
   }
-  return (char)v4;
 }

@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x774AE0",
+      "0x774B9F"
+    ]
+  ],
+  "chunks_sha256": "0f7dd145500ebdab3866b01674ba81d30b5874607d31d7997186f1bf791db76a",
+  "comment_regular": "Map D3D depth/stencil formats to their depth-bit and stencil-bit counts for compatibility ranking.",
+  "comment_repeatable": "Map D3D depth/stencil formats to their depth-bit and stencil-bit counts for compatibility ranking.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_774AE0",
+  "display_name": "D3DDepthStencilFormat_GetBitCounts",
   "end_ea": "0x774B9F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_774AE0",
+  "name": "D3DDepthStencilFormat_GetBitCounts",
   "segment": ".text",
   "sha256": "0f7dd145500ebdab3866b01674ba81d30b5874607d31d7997186f1bf791db76a",
   "size": 191,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x774AE0",
-  "type": "_DWORD *__cdecl(int, _DWORD *, _DWORD *)",
+  "total_chunk_size": 191,
+  "type": "void __cdecl(D3DFORMAT format, unsigned int *depthBits, unsigned int *stencilBits)",
   "xrefs_from_count": 46,
   "xrefs_to_count": 1
 }

@@ -1,9 +1,9 @@
 int __usercall Actor_AttackHandling_::RunOnHitByScript_@<eax>(
         int a1@<edi>,
         int a2@<esi>,
-        int ebp0@<ebp>,
-        double st5_0@<st2>,
-        double st6_0@<st1>,
+        int a3,
+        int a4,
+        int a5,
         int a6,
         int a7,
         int a8,
@@ -20,17 +20,14 @@ int __usercall Actor_AttackHandling_::RunOnHitByScript_@<eax>(
         int a19,
         int a20,
         int a21,
-        int a22,
-        int a23,
-        int a24,
-        float a25)
+        float a22)
 {
   return Actor_AttackHandling_::RunOnHitByScript(
            a1,
            a2,
-           ebp0,
-           st5_0,
-           st6_0,
+           a3,
+           a4,
+           a5,
            a6,
            a7,
            a8,
@@ -47,8 +44,5 @@ int __usercall Actor_AttackHandling_::RunOnHitByScript_@<eax>(
            a19,
            a20,
            a21,
-           a22,
-           a23,
-           a24,
-           a25);
+           a22);
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5D6390",
-    "line": "sub     esp, 10h",
+    "line": "sub     esp, 10h; Creates the shared SkillsMenu. In class-skill mode (mode 0), associates the open ClassMenu, sets selectionCap=7 at SkillsMenu+0x44, populates all 21 native skills, and preselects the seven staged ClassMenu major AVs.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x5D63CA",
-    "line": "mov     ecx, [esi+68h]; TileWindow *",
+    "line": "mov     ecx, [esi+68h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x5D63D2",
-    "line": "call    Menu_LoadXML",
+    "line": "call    Tile__ReadFile; Verified: SDK ReadXML entry. Builds named tree under receiver via 0x590330, connects/evaluates traits via 0x58CF40, registers subtemplates with owning Menu, frees build storage, refreshes returned subtree via 0x58FBA0. Returns first created tile. Fallout analogue 0x827E2588; cache/cleanup differs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -565,13 +565,13 @@
   },
   {
     "ea": "0x5D64A1",
-    "line": "fstp    [esp+28h+a2]; a3",
+    "line": "fstp    [esp+28h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5D64A4",
-    "line": "push    0FABh; a2",
+    "line": "push    0FABh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x5D64AB",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -721,19 +721,19 @@
   },
   {
     "ea": "0x5D64F1",
-    "line": "fstp    [esp+28h+a2]; a3",
+    "line": "fstp    [esp+28h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5D64F4",
-    "line": "push    0FB6h; a2",
+    "line": "push    0FB6h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5D64F9",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -763,19 +763,19 @@
   },
   {
     "ea": "0x5D6509",
-    "line": "fstp    [esp+28h+a2]; a3",
+    "line": "fstp    [esp+28h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5D650C",
-    "line": "push    0FB6h; a2",
+    "line": "push    0FB6h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5D6511",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -859,7 +859,7 @@
   },
   {
     "ea": "0x5D6543",
-    "line": "fstp    [esp+28h+a2]; a3",
+    "line": "fstp    [esp+28h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -871,13 +871,13 @@
   },
   {
     "ea": "0x5D6548",
-    "line": "push    0FB1h; a2",
+    "line": "push    0FB1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5D654D",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -889,7 +889,7 @@
   },
   {
     "ea": "0x5D6555",
-    "line": "jz      short sub_5D6573",
+    "line": "jz      short SkillsMenu_PopulateSkillRows; Populates all 21 native skill rows, sorted by actor-value name. When invoked from ClassMenu, preselection is delegated to SkillsMenu_PreselectClassMenuValues.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -925,7 +925,7 @@
   },
   {
     "ea": "0x5D656A",
-    "line": "mov     dword ptr [esi+44h], 7",
+    "line": "mov     dword ptr [esi+44h], 7; Native custom-class skill picker sets selectionCap to exactly 7. This is a single major-skill selection phase; Oblivion has no native minor-skill picker phase.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -933,6 +933,750 @@
     "ea": "0x5D6571",
     "line": "jmp     short loc_5D6585",
     "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x5D6646",
+    "line": "cmp     eax, 1",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x5D6649",
+    "line": "jnz     loc_5D670F",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x5D664F",
+    "line": "fld1",
+    "mnemonic": "fld1",
+    "size": 2
+  },
+  {
+    "ea": "0x5D6651",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5D6652",
+    "line": "fstp    [esp+28h+a2]; value",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x5D6655",
+    "line": "mov     ecx, ebx; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5D6657",
+    "line": "push    0FB1h; propertyCode",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5D665C",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5D6661",
+    "line": "cmp     [esi+4Ch], ebp",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x5D6664",
+    "line": "jz      short loc_5D6681",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5D6666",
+    "line": "mov     eax, ds:0B38638h",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x5D666B",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5D666C",
+    "line": "push    0FB3h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5D6671",
+    "line": "mov     ecx, ebx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5D6673",
+    "line": "call    Tile_SetString",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5D6678",
+    "line": "mov     dword ptr [esi+44h], 2",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x5D667F",
+    "line": "jmp     short SkillsMenu_PopulateAttributeRows",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x5D6681",
+    "line": "fld1",
+    "mnemonic": "fld1",
+    "size": 2
+  },
+  {
+    "ea": "0x5D6683",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5D6684",
+    "line": "fstp    [esp+28h+a2]; value",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x5D6687",
+    "line": "mov     ecx, ebx; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5D6689",
+    "line": "push    0FB2h; propertyCode",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5D668E",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5D670F",
+    "line": "cmp     eax, 2",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x5D6712",
+    "line": "jnz     short loc_5D6776",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x5D6714",
+    "line": "fld     dword ptr ds:0A379B4h",
+    "mnemonic": "fld",
+    "size": 6
+  },
+  {
+    "ea": "0x5D671A",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5D671B",
+    "line": "fstp    [esp+28h+a2]; value",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x5D671E",
+    "line": "push    0FB1h; propertyCode",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5D6723",
+    "line": "mov     ecx, ebx; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5D6725",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5D672A",
+    "line": "mov     eax, ds:0B38640h",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x5D672F",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5D6730",
+    "line": "push    0FB3h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5D6735",
+    "line": "mov     ecx, ebx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5D6737",
+    "line": "call    Tile_SetString",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5D673C",
+    "line": "mov     ecx, ds:0B385D8h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x5D6742",
+    "line": "push    ebp",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5D6743",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5D6744",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5D6746",
+    "line": "call    SkillsMenu_CreateSkillRow; Sidecar decode: creates chargen skill row; writes skill/AV to tile trait 0xFB0 and selection state to 0xFB1.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5D674B",
+    "line": "mov     edx, ds:0B385E0h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x5D6751",
+    "line": "push    1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5D6753",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5D6754",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5D6756",
+    "line": "call    SkillsMenu_CreateSkillRow; Sidecar decode: creates chargen skill row; writes skill/AV to tile trait 0xFB0 and selection state to 0xFB1.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5D675B",
+    "line": "mov     eax, ds:0B385E8h",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x5D6760",
+    "line": "push    2",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5D6762",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5D6763",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5D6765",
+    "line": "call    SkillsMenu_CreateSkillRow; Sidecar decode: creates chargen skill row; writes skill/AV to tile trait 0xFB0 and selection state to 0xFB1.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5D676A",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5D676C",
+    "line": "call    SkillsMenu_PreselectClassMenuValues; Preselects SkillsMenu rows for its current mode. Mode 0 reads exactly seven ClassMenu skill AVs at +0x68..+0x80; mode 1 reads two attributes; mode 2 reads specialization. Selected rows use tile trait 0xFB1==2.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5D6771",
+    "line": "jmp     loc_5D662A",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x5D6776",
+    "line": "cmp     eax, 3",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x5D6779",
+    "line": "jnz     loc_5D662A",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x5D677F",
+    "line": "fld     dword ptr ds:0A46C30h",
+    "mnemonic": "fld",
+    "size": 6
+  },
+  {
+    "ea": "0x5D6785",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5D6786",
+    "line": "fstp    [esp+28h+a2]; value",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x5D6789",
+    "line": "push    0FB1h; propertyCode",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5D678E",
+    "line": "mov     ecx, ebx; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5D6790",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5D6795",
+    "line": "fld1",
+    "mnemonic": "fld1",
+    "size": 2
+  },
+  {
+    "ea": "0x5D6797",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5D6798",
+    "line": "fstp    [esp+28h+a2]; value",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x5D679B",
+    "line": "push    0FB2h; propertyCode",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5D67A0",
+    "line": "mov     ecx, ebx; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5D67A2",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5D67A7",
+    "line": "mov     ecx, ds:0B333C4h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x5D67AD",
+    "line": "mov     edx, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5D67AF",
+    "line": "mov     eax, [edx+268h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x5D67B5",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x5D67B7",
+    "line": "mov     edi, ds:0B33A98h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x5D67BD",
+    "line": "add     edi, 8Ch ; 'Œ'",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x5D67C3",
+    "line": "mov     [esp+24h+var_C], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5D67C7",
+    "line": "jz      loc_5D6626",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x5D67CD",
+    "line": "lea     ecx, [ecx+0]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x5D67D0",
+    "line": "cmp     dword ptr [edi+4], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x5D67D4",
+    "line": "jnz     short loc_5D67DB",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x5D67D6",
+    "line": "cmp     dword ptr [edi], 0",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x5D67D9",
+    "line": "jz      short loc_5D680C",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5D67DB",
+    "line": "mov     ebx, [edi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5D67DD",
+    "line": "mov     eax, [ebx+1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5D67E0",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5D67E2",
+    "line": "mov     ecx, [ebx+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5D67E5",
+    "line": "jnz     short loc_5D67EC",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x5D67E7",
+    "line": "mov     eax, offset EmptyString",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x5D67EC",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5D67ED",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5D67EE",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5D67F0",
+    "line": "call    SkillsMenu_CreateSkillRow; Sidecar decode: creates chargen skill row; writes skill/AV to tile trait 0xFB0 and selection state to 0xFB1.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5D67F5",
+    "line": "test    ebp, ebp",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5D67F7",
+    "line": "jz      short loc_5D67FF",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5D67F9",
+    "line": "cmp     [esp+24h+var_C], ebx",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x5D67FD",
+    "line": "jnz     short loc_5D6801",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x5D67FF",
+    "line": "mov     ebp, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5D6801",
+    "line": "mov     edi, [edi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5D6804",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5D6806",
+    "line": "mov     ebx, [esp+24h+var_14]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5D680A",
+    "line": "jnz     short loc_5D67D0",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x5D680C",
+    "line": "test    ebp, ebp",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5D680E",
+    "line": "jz      loc_5D6626",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x5D6814",
+    "line": "mov     edi, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5D6816",
+    "line": "push    ebp",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5D6817",
+    "line": "push    0FA8h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5D681C",
+    "line": "mov     ecx, ebp",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5D681E",
+    "line": "add     edi, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5D6821",
+    "line": "call    Tile_GetFloat",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5D6826",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5D682B",
+    "line": "mov     edx, [edi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5D682D",
+    "line": "push    eax; a3",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5D682E",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5D6830",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x5D6832",
+    "line": "fld     dword ptr ds:0A379B4h",
+    "mnemonic": "fld",
+    "size": 6
+  },
+  {
+    "ea": "0x5D6838",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5D6839",
+    "line": "fstp    [esp+30h+a3]; value",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x5D683C",
+    "line": "push    0FF0h; propertyCode",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5D6841",
+    "line": "mov     ecx, ebp; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5D6843",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5D6848",
+    "line": "jmp     loc_5D6626",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x5D684D",
+    "line": "cmp     [edi+4], ebp",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x5D6850",
+    "line": "jz      short loc_5D685C",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5D6852",
+    "line": "mov     eax, [edi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5D6854",
+    "line": "mov     edx, [eax]",
+    "mnemonic": "mov",
     "size": 2
   }
 ]

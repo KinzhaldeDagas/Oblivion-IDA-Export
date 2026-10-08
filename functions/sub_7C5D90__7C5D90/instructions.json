@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7C5D90",
-    "line": "push    ecx",
+    "line": "push    ecx; Recursively walks a NiNode subtree. For receiver geometry with property ID 4/type 1..10, removes it from every ShadowSceneLight receiver list. For child nodes, recurses.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x7C5D93",
-    "line": "mov     ebp, [esp+0Ch+arg_0]",
+    "line": "mov     ebp, [esp+0Ch+node]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x7C5DD8",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x7C5E2D",
-    "line": "call    sub_7D6940",
+    "line": "call    ShadowSceneLight_RemoveReceiverGeometry; Remove one receiver geometry from both the property-side shadow-light association and the light-local object list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -409,19 +409,19 @@
   },
   {
     "ea": "0x7C5E43",
-    "line": "mov     ecx, [esp+14h+var_4]",
+    "line": "mov     ecx, [esp+14h+var_4]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7C5E47",
-    "line": "push    eax",
+    "line": "push    eax; node",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C5E48",
-    "line": "call    sub_7C5D90",
+    "line": "call    ShadowSceneNode_RemoveReceiverGeometryRecursive; Recursively walks a NiNode subtree. For receiver geometry with property ID 4/type 1..10, removes it from every ShadowSceneLight receiver list. For child nodes, recurses.",
     "mnemonic": "call",
     "size": 5
   },

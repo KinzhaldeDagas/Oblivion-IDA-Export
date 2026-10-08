@@ -1,16 +1,15 @@
-void __thiscall sub_6B7C30(int this)
+// Deferred ambient INFO commit. When INFO exists and ImmediateResult is clear, expose addedTopics and then run the result on DialogueItem.speaker at response-list exhaustion. Goodbye and RunForRumors are ignored; interruption before exhaustion drops this deferred commit.
+void __thiscall DialogueItem::RunResult(DialogueItemView *this)
 {
-  double v1; // st6
-  double v2; // st7
-  int v4; // ecx
+  OblivionTopicInfo *info; // ecx
 
-  v4 = *(_DWORD *)(this + 0xC);
-  if ( v4 )
-  {
-    if ( (*(_BYTE *)(v4 + 0x25) & 8) == 0 )
+  info = this->info; /*0x6b7c33*/
+  if ( info ) /*0x6b7c38*/
+  {                                             // ImmediateResult alone suppresses deferred ambient commit because it was already performed during CreateConversation. This test does not inspect Goodbye or RunForRumors.
+    if ( (info->flags & 8) == 0 ) /*0x6b7c43*/
     {
-      sub_5308D0(v4);
-      sub_531470(*(TESForm **)(this + 0xC), v1, v2, *(TESObjectREFR **)(this + 0x18));
+      TESTopicInfo::AddTopicList(info);         // Deferred ambient ordering is AddTopicList first, then RunResult. This is the reverse of CreateConversation's ImmediateResult ordering. /*0x6b7c45*/
+      TESTopicInfo::RunResult(this->info, this->speaker);// Run the deferred result on this DialogueItem's actual routed speaker, unlike ImmediateResult which uses the original conversation initiator. /*0x6b7c51*/
     }
   }
 }

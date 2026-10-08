@@ -1,4 +1,4 @@
-0x789FE0: sub     esp, 0Ch
+0x789FE0: sub     esp, 0Ch; Oblivion branch export is authoritative: publishes the legacy single wind stream plus distinct diffuse and projected-shadow UV streams into a 0x3C indexed-geometry output block.
 0x789FE3: push    esi
 0x789FE4: mov     esi, ecx
 0x789FE6: mov     eax, [esi+4]
@@ -193,30 +193,30 @@
 0x78A227: jnz     short loc_78A23A
 0x78A229: fld     dword ptr ds:0A30634h
 0x78A22F: push    ecx
-0x78A230: mov     ecx, esi
-0x78A232: fstp    [esp+1Ch+var_1C]; float
-0x78A235: call    sub_787C10
+0x78A230: mov     ecx, esi; this
+0x78A232: fstp    [esp+1Ch+lod]; lod
+0x78A235: call    CSpeedTreeRT__GetDiscreteBranchLodLevel; Maps normalized/current tree LOD to an Oblivion discrete branch LOD; -1.0 selects instance or base-tree current LOD.
 0x78A23A: movzx   ebx, ax
 0x78A23D: movsx   eax, bx
 0x78A240: mov     [edi], eax
-0x78A242: mov     ecx, [esi+4]
-0x78A245: push    ebx
-0x78A246: call    sub_7886C0
+0x78A242: mov     ecx, [esi+4]; this
+0x78A245: push    ebx; lodLevel
+0x78A246: call    OB_CIndexedGeometry_GetNumStrips_010201A0; Oblivion CIndexedGeometry::GetNumStrips: rejects negative LODs, checked-indexes perLodStrips, and returns the selected inner ushort-vector size. RT4.1 exposes the same accessor contract.
 0x78A24B: mov     [edi+4], ax
-0x78A24F: mov     ecx, [esi+4]
-0x78A252: push    ebx
-0x78A253: call    sub_788720
+0x78A24F: mov     ecx, [esi+4]; this
+0x78A252: push    ebx; lodLevel
+0x78A253: call    OB_CIndexedGeometry_GetStripLengths_010201A0; Oblivion CIndexedGeometry::GetStripLengths: validates LOD range and inner vector state, then returns the selected ushort strip-length buffer or null.
 0x78A258: mov     [edi+8], eax
-0x78A25B: mov     ecx, [esi+4]
-0x78A25E: push    ebx
-0x78A25F: call    sub_7945B0
+0x78A25B: mov     ecx, [esi+4]; this
+0x78A25E: push    ebx; lodLevel
+0x78A25F: call    OB_CIndexedGeometry_GetStripsPointer_010201A0; Oblivion CIndexedGeometry::GetStripsPointer. Returns the selected LOD's inner array of ushort strip pointers, or null when no strips are present.
 0x78A264: mov     [edi+0Ch], eax
 0x78A267: cmp     byte ptr ds:0B4297Ch, 0
 0x78A26E: jz      loc_78A34B
 0x78A274: mov     eax, [esi]
 0x78A276: fld     dword ptr ds:0A30634h
 0x78A27C: mov     cx, [eax+0C0h]
-0x78A283: fstp    [esp+18h+var_C]
+0x78A283: fstp    [esp+18h+highAlpha]
 0x78A287: add     cx, 1
 0x78A28B: movzx   ebx, cx
 0x78A28E: mov     ecx, [esi+34h]
@@ -230,36 +230,36 @@
 0x78A2A9: fstp    [esp+18h+MaxCount]
 0x78A2AD: mov     [esp+18h+var_8], edx
 0x78A2B1: lea     eax, [esp+18h+MaxCount]
-0x78A2B5: push    eax; int
+0x78A2B5: push    eax; lowLod
 0x78A2B6: fild    [esp+1Ch+var_8]
 0x78A2BA: lea     ecx, [esp+1Ch+Src]
-0x78A2BE: push    ecx; int
-0x78A2BF: lea     edx, [esp+20h+var_4]
+0x78A2BE: push    ecx; highLod
+0x78A2BF: lea     edx, [esp+20h+lowAlpha]
 0x78A2C3: fstp    [esp+20h+var_8]
-0x78A2C7: push    edx; int
+0x78A2C7: push    edx; lowAlpha
 0x78A2C8: fld     [esp+24h+var_8]
-0x78A2CC: lea     eax, [esp+24h+var_C]
-0x78A2D0: push    eax; int
+0x78A2CC: lea     eax, [esp+24h+highAlpha]
+0x78A2D0: push    eax; highAlpha
 0x78A2D1: sub     esp, 10h
-0x78A2D4: fstp    [esp+38h+var_2C]; float
+0x78A2D4: fstp    [esp+38h+targetAlpha]; targetAlpha
 0x78A2D8: fld     dword ptr [esi+20h]
-0x78A2DB: fstp    [esp+38h+var_30]; float
+0x78A2DB: fstp    [esp+38h+curveExponent]; curveExponent
 0x78A2DF: fld     dword ptr [esi+28h]
-0x78A2E2: fstp    [esp+38h+var_34]; float
+0x78A2E2: fstp    [esp+38h+transitionFactor]; transitionFactor
 0x78A2E6: fld     dword ptr [esi+1Ch]
-0x78A2E9: fstp    [esp+38h+var_38]; float
-0x78A2EC: push    ebx; int
+0x78A2E9: fstp    [esp+38h+overlapRadius]; overlapRadius
+0x78A2EC: push    ebx; lodCount
 0x78A2ED: fld     [esp+3Ch+MaxCount]
 0x78A2F1: push    ecx
-0x78A2F2: fstp    [esp+40h+var_40]; float
-0x78A2F5: call    sub_787220
+0x78A2F2: fstp    [esp+40h+lodLevel]; lodLevel
+0x78A2F5: call    CSpeedTreeRT__GetTransitionValues; 2026-05-26 SpeedTreeOBSE: shared stock LOD fade/index resolver. Plugin calls it unmodified for candidate 75002 transition-radius and 75005 transition-factor comparisons; optional writes are limited to caller-side SGeometry+0x38 under explicit INI gates. Not patched.
 0x78A2FA: movsx   ecx, word ptr [esp+40h+Src]
 0x78A2FF: movzx   eax, bx
 0x78A302: lea     edx, [eax-2]
 0x78A305: add     esp, 28h
 0x78A308: cmp     ecx, edx
 0x78A30A: jnz     short loc_78A31C
-0x78A30C: fld     [esp+18h+var_C]
+0x78A30C: fld     [esp+18h+highAlpha]
 0x78A310: fstp    dword ptr [edi+38h]
 0x78A313: pop     edi
 0x78A314: pop     ebx
@@ -295,7 +295,7 @@
 0x78A360: retn    8
 0x78A363: pop     esi
 0x78A364: add     esp, 0Ch
-0x78A367: mov     [esp+MaxCount], 46h ; 'F'; MaxCount
+0x78A367: mov     [esp+MaxCount], 46h ; 'F'; count
 0x78A36F: mov     [esp+Src], offset aNoBranchGeomet; "no branch geometry exists, possible pri"...
-0x78A377: mov     ecx, offset dword_B2B614
-0x78A37C: jmp     sub_414500
+0x78A377: mov     ecx, offset OB_g_strError_010201A0; this
+0x78A37C: jmp     OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.

@@ -1,63 +1,63 @@
-unsigned int __thiscall NiTArray_AddItem_(unsigned int *this, _DWORD *a2)
+unsigned int __thiscall NiTLargeArray_RawPointer_AddFirstEmpty(MEF_RawPointerArray32 *self, void **element)
 {
   unsigned int result; // eax
-  unsigned int v4; // edi
-  _DWORD *v5; // edx
-  _DWORD *v6; // ecx
-  int v7; // edx
+  unsigned int usedEnd; // edi
+  void **data; // edx
+  void **v6; // ecx
+  void **v7; // edx
 
-  if ( !*a2 )
-    return 0xFFFFFFFF;
-  v4 = *(this + 3);
-  result = 0;
-  if ( v4 )
+  if ( !*element ) /*0x449076*/
+    return 0xFFFFFFFF; /*0x449086*/
+  usedEnd = self->usedEnd; /*0x44908a*/
+  result = 0; /*0x44908d*/
+  if ( usedEnd ) /*0x449091*/
   {
-    v5 = (_DWORD *)*(this + 1);
-    v6 = v5;
-    while ( *v6 )
+    data = self->data; /*0x449093*/
+    v6 = data; /*0x449096*/
+    while ( *v6 ) /*0x44909b*/
     {
-      ++result;
-      ++v6;
-      if ( result >= v4 )
-        goto LABEL_7;
+      ++result; /*0x44909d*/
+      ++v6; /*0x4490a0*/
+      if ( result >= usedEnd ) /*0x4490a5*/
+        goto LABEL_7; /*0x4490a5*/
     }
-    v5[result] = *a2;
-    ++*(this + 4);
+    data[result] = *element; /*0x4490e1*/
+    ++self->occupiedCount; /*0x4490e4*/
   }
   else
   {
 LABEL_7:
-    if ( v4 >= *(this + 2) )
-      sub_452910(this, v4 + *(this + 5));
-    if ( v4 < *(this + 3) )
+    if ( usedEnd >= self->capacity ) /*0x4490aa*/
+      NiTLargeArray_Resize32((unsigned int *)self, usedEnd + self->growBy); /*0x4490b4*/
+    if ( usedEnd < self->usedEnd ) /*0x4490bc*/
     {
-      if ( *a2 )
+      if ( *element ) /*0x4490ee*/
       {
-        v7 = *(this + 1);
-        if ( !*(_DWORD *)(v7 + 4 * v4) )
+        v7 = self->data; /*0x4490f4*/
+        if ( !v7[usedEnd] ) /*0x4490f7*/
         {
-          ++*(this + 4);
-          *(_DWORD *)(v7 + 4 * v4) = *a2;
-          return v4;
+          ++self->occupiedCount; /*0x4490fd*/
+          v7[usedEnd] = *element; /*0x449106*/
+          return usedEnd; /*0x44910f*/
         }
       }
-      else if ( *(_DWORD *)(*(this + 1) + 4 * v4) )
+      else if ( self->data[usedEnd] ) /*0x449115*/
       {
-        --*(this + 4);
+        --self->occupiedCount; /*0x44911b*/
       }
     }
     else
     {
-      *(this + 3) = v4 + 1;
-      if ( *a2 )
+      self->usedEnd = usedEnd + 1; /*0x4490c1*/
+      if ( *element ) /*0x4490c4*/
       {
-        ++*(this + 4);
-        *(_DWORD *)(*(this + 1) + 4 * v4) = *a2;
-        return v4;
+        ++self->occupiedCount; /*0x4490ca*/
+        self->data[usedEnd] = *element; /*0x4490d4*/
+        return usedEnd; /*0x4490dd*/
       }
     }
-    *(_DWORD *)(*(this + 1) + 4 * v4) = *a2;
-    return v4;
+    self->data[usedEnd] = *element; /*0x449125*/
+    return usedEnd; /*0x449128*/
   }
-  return result;
+  return result; /*0x449080*/
 }

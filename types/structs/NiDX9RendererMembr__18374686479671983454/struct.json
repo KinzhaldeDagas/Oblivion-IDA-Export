@@ -1,670 +1,1017 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "NiDX9RendererMembr",
+  "definition": "struct __declspec(align(4)) NiDX9RendererMembr\n{\nNiRendererMembr super;\nUInt32 pad210[28];\nIDirect3DDevice9 *device;\nD3DCAPS9 caps;\nHANDLE deviceWindow;\nHANDLE focusWindow;\nchar rendererInfo[512];\nUInt32 adapterIdx;\nUInt32 d3dDevType;\nUInt32 d3dDevFlags;\nUInt8 softwareVertexProcessing;\nUInt8 mixedVertexProcessing;\nUInt8 pad5CA[2];\nvoid *adapterDesc;\nvoid *deviceDesc;\nD3DCOLOR clearColor;\nfloat clearDepth;\nUInt32 clearStencil;\nUInt32 rendFlags;\nchar behavior[32];\nNiTMap_void PrePackObjects;\nUInt32 pad624[13];\nNiPoint3 camRight;\nNiPoint3 camUp;\nNiPoint3 modelCamRight;\nNiPoint3 modelCamUp;\nfloat NearDepth;\nfloat DepthRange;\nD3DMATRIX identityMatrix;\nD3DVIEWPORT9 viewport;\nUInt32 HWBones;\nUInt32 MaxStreams;\nUInt32 Unk6E0;\nUInt32 Unk6E4;\nUInt8 pad6E8;\nUInt8 unk6E9;\nUInt8 pad6EA[2];\nUInt32 ResetCounter;\nUInt8 lostDevice;\nUInt8 pad6F1[3];\nUnk6F4 unk6F4[4];\nUInt32 DefaultTextureFormat[4];\nNiPixelData *DefaultTextureData[4];\nUInt32 unk874;\nNiRenderTargetGroup *defaultRTGroup;\nNiRenderTargetGroup *currentRTGroup;\nNiRenderTargetGroup *currentscreenRTGroup;\nNiTMap_void screenRTGroups;\nUInt32 unk894;\nUInt8 unk898;\nUInt8 pad899[3];\nNiObject *unk89C;\nNiGeometryGroupManager *geometryGroupMgr;\nNiGeometryGroup *unsharedGeometryGroup;\nNiGeometryGroup *dynamicGeometryGroup;\nNiDX9RenderState *renderState;\nNiDX9VertexBufferManager *vertexBufferMgr;\nNiDX9IndexBufferManager *indexBufferMgr;\nNiDX9TextureManager *textureMgr;\nNiDX9LightManager *lightMgr;\nNiTMap_void renderedTextures;\nNiTMap_void renderedCubeMaps;\nNiTMap_void dynamicTextures;\nNiTexture *ClipperImage;\nNiTList_void atDisplayFrame;\nNiTList_void shaderInterfaces;\nUInt32 Unk914;\nUInt32 Unk918;\nUInt32 Unk91C;\nUInt32 Unk920;\nUInt32 Unk924;\nUInt32 Unk928;\nUInt32 Unk92C;\nUInt32 Unk930;\nUInt32 Unk934;\nUInt32 Unk938;\nUInt32 Unk93C;\nD3DXMATRIX worldMatrix;\nD3DXMATRIX viewMatrix;\nD3DXMATRIX projMatrix;\nD3DXMATRIX invViewMatrix;\nUInt32 ScreenTextureVerts;\nNiColorAlpha *ScreenTextureColors;\nUInt32 ScreenTextureTexCoords;\nUInt16 unkA4C;\nUInt8 unkA4E[2];\nUInt16 *ScreenTextureIndices;\nUInt32 NumScreenTextureIndices;\nUInt32 width;\nUInt32 height;\nUInt32 flags;\nUInt32 windowDevice;\nUInt32 windowFocus;\nUInt32 adapterType;\nUInt32 deviceType;\nFrameBufferFormat frameBufferFormat;\nDepthStencilFormat depthStencilFormat;\nPresentationInterval presentationInterval;\nSwapEffect swapEffect;\nFrameBufferMode frameBufferMode;\nUInt32 backBufferCount;\nRefreshRate refreshRate;\nUInt8 unkA90;\nUInt8 padA91[3];\nNiD3DShader *defaultShader;\nNiTArray_void unkA98;\nNiTArray_void unkAA8;\nNiTArray_void lostDeviceCallbacks;\nNiTArray_void lostDeviceCallbacksRefcons;\nUInt32 padAD0[10];\n}\n",
   "id": 18374686479671983454,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "super",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 524
+      "size": 524,
+      "type": "NiRendererMembr"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad210",
       "offset": 524,
-      "offset_hex": "0x20c",
-      "size": 112
+      "offset_hex": "0x20C",
+      "size": 112,
+      "type": "UInt32[28]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "device",
       "offset": 636,
-      "offset_hex": "0x27c",
-      "size": 4
+      "offset_hex": "0x27C",
+      "size": 4,
+      "type": "IDirect3DDevice9 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "caps",
       "offset": 640,
       "offset_hex": "0x280",
-      "size": 304
+      "size": 304,
+      "type": "D3DCAPS9"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "deviceWindow",
       "offset": 944,
-      "offset_hex": "0x3b0",
-      "size": 4
+      "offset_hex": "0x3B0",
+      "size": 4,
+      "type": "HANDLE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "focusWindow",
       "offset": 948,
-      "offset_hex": "0x3b4",
-      "size": 4
+      "offset_hex": "0x3B4",
+      "size": 4,
+      "type": "HANDLE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "rendererInfo",
       "offset": 952,
-      "offset_hex": "0x3b8",
-      "size": 512
+      "offset_hex": "0x3B8",
+      "size": 512,
+      "type": "char[512]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "adapterIdx",
       "offset": 1464,
-      "offset_hex": "0x5b8",
-      "size": 4
+      "offset_hex": "0x5B8",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "d3dDevType",
       "offset": 1468,
-      "offset_hex": "0x5bc",
-      "size": 4
+      "offset_hex": "0x5BC",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "d3dDevFlags",
       "offset": 1472,
-      "offset_hex": "0x5c0",
-      "size": 4
+      "offset_hex": "0x5C0",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "softwareVertexProcessing",
       "offset": 1476,
-      "offset_hex": "0x5c4",
-      "size": 1
+      "offset_hex": "0x5C4",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "mixedVertexProcessing",
       "offset": 1477,
-      "offset_hex": "0x5c5",
-      "size": 1
+      "offset_hex": "0x5C5",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad5CA",
       "offset": 1478,
-      "offset_hex": "0x5c6",
-      "size": 2
+      "offset_hex": "0x5C6",
+      "size": 2,
+      "type": "UInt8[2]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "adapterDesc",
       "offset": 1480,
-      "offset_hex": "0x5c8",
-      "size": 4
+      "offset_hex": "0x5C8",
+      "size": 4,
+      "type": "void *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "deviceDesc",
       "offset": 1484,
-      "offset_hex": "0x5cc",
-      "size": 4
+      "offset_hex": "0x5CC",
+      "size": 4,
+      "type": "void *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "clearColor",
       "offset": 1488,
-      "offset_hex": "0x5d0",
-      "size": 4
+      "offset_hex": "0x5D0",
+      "size": 4,
+      "type": "D3DCOLOR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "clearDepth",
       "offset": 1492,
-      "offset_hex": "0x5d4",
-      "size": 4
+      "offset_hex": "0x5D4",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "clearStencil",
       "offset": 1496,
-      "offset_hex": "0x5d8",
-      "size": 4
+      "offset_hex": "0x5D8",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "rendFlags",
       "offset": 1500,
-      "offset_hex": "0x5dc",
-      "size": 4
+      "offset_hex": "0x5DC",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "behavior",
       "offset": 1504,
-      "offset_hex": "0x5e0",
-      "size": 32
+      "offset_hex": "0x5E0",
+      "size": 32,
+      "type": "char[32]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "PrePackObjects",
       "offset": 1536,
       "offset_hex": "0x600",
-      "size": 16
+      "size": 16,
+      "type": "NiTMap_void"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad624",
       "offset": 1552,
       "offset_hex": "0x610",
-      "size": 52
+      "size": 52,
+      "type": "UInt32[13]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "camRight",
       "offset": 1604,
       "offset_hex": "0x644",
-      "size": 12
+      "size": 12,
+      "type": "NiPoint3"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "camUp",
       "offset": 1616,
       "offset_hex": "0x650",
-      "size": 12
+      "size": 12,
+      "type": "NiPoint3"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "modelCamRight",
       "offset": 1628,
-      "offset_hex": "0x65c",
-      "size": 12
+      "offset_hex": "0x65C",
+      "size": 12,
+      "type": "NiPoint3"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "modelCamUp",
       "offset": 1640,
       "offset_hex": "0x668",
-      "size": 12
+      "size": 12,
+      "type": "NiPoint3"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "NearDepth",
       "offset": 1652,
       "offset_hex": "0x674",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DepthRange",
       "offset": 1656,
       "offset_hex": "0x678",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "identityMatrix",
       "offset": 1660,
-      "offset_hex": "0x67c",
-      "size": 64
+      "offset_hex": "0x67C",
+      "size": 64,
+      "type": "D3DMATRIX"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "viewport",
       "offset": 1724,
-      "offset_hex": "0x6bc",
-      "size": 24
+      "offset_hex": "0x6BC",
+      "size": 24,
+      "type": "D3DVIEWPORT9"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "HWBones",
       "offset": 1748,
-      "offset_hex": "0x6d4",
-      "size": 4
+      "offset_hex": "0x6D4",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "MaxStreams",
       "offset": 1752,
-      "offset_hex": "0x6d8",
-      "size": 4
+      "offset_hex": "0x6D8",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk6E0",
       "offset": 1756,
-      "offset_hex": "0x6dc",
-      "size": 4
+      "offset_hex": "0x6DC",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk6E4",
       "offset": 1760,
-      "offset_hex": "0x6e0",
-      "size": 4
+      "offset_hex": "0x6E0",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad6E8",
       "offset": 1764,
-      "offset_hex": "0x6e4",
-      "size": 1
+      "offset_hex": "0x6E4",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk6E9",
       "offset": 1765,
-      "offset_hex": "0x6e5",
-      "size": 1
+      "offset_hex": "0x6E5",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad6EA",
       "offset": 1766,
-      "offset_hex": "0x6e6",
-      "size": 2
+      "offset_hex": "0x6E6",
+      "size": 2,
+      "type": "UInt8[2]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ResetCounter",
       "offset": 1768,
-      "offset_hex": "0x6e8",
-      "size": 4
+      "offset_hex": "0x6E8",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lostDevice",
       "offset": 1772,
-      "offset_hex": "0x6ec",
-      "size": 1
+      "offset_hex": "0x6EC",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad6F1",
       "offset": 1773,
-      "offset_hex": "0x6ed",
-      "size": 3
+      "offset_hex": "0x6ED",
+      "size": 3,
+      "type": "UInt8[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk6F4",
       "offset": 1776,
-      "offset_hex": "0x6f0",
-      "size": 352
+      "offset_hex": "0x6F0",
+      "size": 352,
+      "type": "Unk6F4[4]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DefaultTextureFormat",
       "offset": 2128,
       "offset_hex": "0x850",
-      "size": 16
+      "size": 16,
+      "type": "UInt32[4]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DefaultTextureData",
       "offset": 2144,
       "offset_hex": "0x860",
-      "size": 16
+      "size": 16,
+      "type": "NiPixelData *[4]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk874",
       "offset": 2160,
       "offset_hex": "0x870",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "defaultRTGroup",
       "offset": 2164,
       "offset_hex": "0x874",
-      "size": 4
+      "size": 4,
+      "type": "NiRenderTargetGroup *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "currentRTGroup",
       "offset": 2168,
       "offset_hex": "0x878",
-      "size": 4
+      "size": 4,
+      "type": "NiRenderTargetGroup *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "currentscreenRTGroup",
       "offset": 2172,
-      "offset_hex": "0x87c",
-      "size": 4
+      "offset_hex": "0x87C",
+      "size": 4,
+      "type": "NiRenderTargetGroup *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "screenRTGroups",
       "offset": 2176,
       "offset_hex": "0x880",
-      "size": 16
+      "size": 16,
+      "type": "NiTMap_void"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk894",
       "offset": 2192,
       "offset_hex": "0x890",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk898",
       "offset": 2196,
       "offset_hex": "0x894",
-      "size": 1
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad899",
       "offset": 2197,
       "offset_hex": "0x895",
-      "size": 3
+      "size": 3,
+      "type": "UInt8[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk89C",
       "offset": 2200,
       "offset_hex": "0x898",
-      "size": 4
+      "size": 4,
+      "type": "NiObject *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "geometryGroupMgr",
       "offset": 2204,
-      "offset_hex": "0x89c",
-      "size": 4
+      "offset_hex": "0x89C",
+      "size": 4,
+      "type": "NiGeometryGroupManager *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unsharedGeometryGroup",
       "offset": 2208,
-      "offset_hex": "0x8a0",
-      "size": 4
+      "offset_hex": "0x8A0",
+      "size": 4,
+      "type": "NiGeometryGroup *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dynamicGeometryGroup",
       "offset": 2212,
-      "offset_hex": "0x8a4",
-      "size": 4
+      "offset_hex": "0x8A4",
+      "size": 4,
+      "type": "NiGeometryGroup *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "renderState",
       "offset": 2216,
-      "offset_hex": "0x8a8",
-      "size": 4
+      "offset_hex": "0x8A8",
+      "size": 4,
+      "type": "NiDX9RenderState *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "vertexBufferMgr",
       "offset": 2220,
-      "offset_hex": "0x8ac",
-      "size": 4
+      "offset_hex": "0x8AC",
+      "size": 4,
+      "type": "NiDX9VertexBufferManager *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "indexBufferMgr",
       "offset": 2224,
-      "offset_hex": "0x8b0",
-      "size": 4
+      "offset_hex": "0x8B0",
+      "size": 4,
+      "type": "NiDX9IndexBufferManager *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "textureMgr",
       "offset": 2228,
-      "offset_hex": "0x8b4",
-      "size": 4
+      "offset_hex": "0x8B4",
+      "size": 4,
+      "type": "NiDX9TextureManager *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lightMgr",
       "offset": 2232,
-      "offset_hex": "0x8b8",
-      "size": 4
+      "offset_hex": "0x8B8",
+      "size": 4,
+      "type": "NiDX9LightManager *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "renderedTextures",
       "offset": 2236,
-      "offset_hex": "0x8bc",
-      "size": 16
+      "offset_hex": "0x8BC",
+      "size": 16,
+      "type": "NiTMap_void"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "renderedCubeMaps",
       "offset": 2252,
-      "offset_hex": "0x8cc",
-      "size": 16
+      "offset_hex": "0x8CC",
+      "size": 16,
+      "type": "NiTMap_void"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dynamicTextures",
       "offset": 2268,
-      "offset_hex": "0x8dc",
-      "size": 16
+      "offset_hex": "0x8DC",
+      "size": 16,
+      "type": "NiTMap_void"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ClipperImage",
       "offset": 2284,
-      "offset_hex": "0x8ec",
-      "size": 4
+      "offset_hex": "0x8EC",
+      "size": 4,
+      "type": "NiTexture *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "atDisplayFrame",
       "offset": 2288,
-      "offset_hex": "0x8f0",
-      "size": 16
+      "offset_hex": "0x8F0",
+      "size": 16,
+      "type": "NiTList_void"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "shaderInterfaces",
       "offset": 2304,
       "offset_hex": "0x900",
-      "size": 16
+      "size": 16,
+      "type": "NiTList_void"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk914",
       "offset": 2320,
       "offset_hex": "0x910",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk918",
       "offset": 2324,
       "offset_hex": "0x914",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk91C",
       "offset": 2328,
       "offset_hex": "0x918",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk920",
       "offset": 2332,
-      "offset_hex": "0x91c",
-      "size": 4
+      "offset_hex": "0x91C",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk924",
       "offset": 2336,
       "offset_hex": "0x920",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk928",
       "offset": 2340,
       "offset_hex": "0x924",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk92C",
       "offset": 2344,
       "offset_hex": "0x928",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk930",
       "offset": 2348,
-      "offset_hex": "0x92c",
-      "size": 4
+      "offset_hex": "0x92C",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk934",
       "offset": 2352,
       "offset_hex": "0x930",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk938",
       "offset": 2356,
       "offset_hex": "0x934",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk93C",
       "offset": 2360,
       "offset_hex": "0x938",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "worldMatrix",
       "offset": 2364,
-      "offset_hex": "0x93c",
-      "size": 64
+      "offset_hex": "0x93C",
+      "size": 64,
+      "type": "D3DXMATRIX"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "viewMatrix",
       "offset": 2428,
-      "offset_hex": "0x97c",
-      "size": 64
+      "offset_hex": "0x97C",
+      "size": 64,
+      "type": "D3DXMATRIX"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "projMatrix",
       "offset": 2492,
-      "offset_hex": "0x9bc",
-      "size": 64
+      "offset_hex": "0x9BC",
+      "size": 64,
+      "type": "D3DXMATRIX"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "invViewMatrix",
       "offset": 2556,
-      "offset_hex": "0x9fc",
-      "size": 64
+      "offset_hex": "0x9FC",
+      "size": 64,
+      "type": "D3DXMATRIX"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ScreenTextureVerts",
       "offset": 2620,
-      "offset_hex": "0xa3c",
-      "size": 4
+      "offset_hex": "0xA3C",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ScreenTextureColors",
       "offset": 2624,
-      "offset_hex": "0xa40",
-      "size": 4
+      "offset_hex": "0xA40",
+      "size": 4,
+      "type": "NiColorAlpha *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ScreenTextureTexCoords",
       "offset": 2628,
-      "offset_hex": "0xa44",
-      "size": 4
+      "offset_hex": "0xA44",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unkA4C",
       "offset": 2632,
-      "offset_hex": "0xa48",
-      "size": 2
+      "offset_hex": "0xA48",
+      "size": 2,
+      "type": "UInt16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unkA4E",
       "offset": 2634,
-      "offset_hex": "0xa4a",
-      "size": 2
+      "offset_hex": "0xA4A",
+      "size": 2,
+      "type": "UInt8[2]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ScreenTextureIndices",
       "offset": 2636,
-      "offset_hex": "0xa4c",
-      "size": 4
+      "offset_hex": "0xA4C",
+      "size": 4,
+      "type": "UInt16 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "NumScreenTextureIndices",
       "offset": 2640,
-      "offset_hex": "0xa50",
-      "size": 4
+      "offset_hex": "0xA50",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "width",
       "offset": 2644,
-      "offset_hex": "0xa54",
-      "size": 4
+      "offset_hex": "0xA54",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "height",
       "offset": 2648,
-      "offset_hex": "0xa58",
-      "size": 4
+      "offset_hex": "0xA58",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "flags",
       "offset": 2652,
-      "offset_hex": "0xa5c",
-      "size": 4
+      "offset_hex": "0xA5C",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "windowDevice",
       "offset": 2656,
-      "offset_hex": "0xa60",
-      "size": 4
+      "offset_hex": "0xA60",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "windowFocus",
       "offset": 2660,
-      "offset_hex": "0xa64",
-      "size": 4
+      "offset_hex": "0xA64",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "adapterType",
       "offset": 2664,
-      "offset_hex": "0xa68",
-      "size": 4
+      "offset_hex": "0xA68",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "deviceType",
       "offset": 2668,
-      "offset_hex": "0xa6c",
-      "size": 4
+      "offset_hex": "0xA6C",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "frameBufferFormat",
       "offset": 2672,
-      "offset_hex": "0xa70",
-      "size": 4
+      "offset_hex": "0xA70",
+      "size": 4,
+      "type": "FrameBufferFormat"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "depthStencilFormat",
       "offset": 2676,
-      "offset_hex": "0xa74",
-      "size": 4
+      "offset_hex": "0xA74",
+      "size": 4,
+      "type": "DepthStencilFormat"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "presentationInterval",
       "offset": 2680,
-      "offset_hex": "0xa78",
-      "size": 4
+      "offset_hex": "0xA78",
+      "size": 4,
+      "type": "PresentationInterval"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "swapEffect",
       "offset": 2684,
-      "offset_hex": "0xa7c",
-      "size": 4
+      "offset_hex": "0xA7C",
+      "size": 4,
+      "type": "SwapEffect"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "frameBufferMode",
       "offset": 2688,
-      "offset_hex": "0xa80",
-      "size": 4
+      "offset_hex": "0xA80",
+      "size": 4,
+      "type": "FrameBufferMode"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "backBufferCount",
       "offset": 2692,
-      "offset_hex": "0xa84",
-      "size": 4
+      "offset_hex": "0xA84",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "refreshRate",
       "offset": 2696,
-      "offset_hex": "0xa88",
-      "size": 4
+      "offset_hex": "0xA88",
+      "size": 4,
+      "type": "RefreshRate"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unkA90",
       "offset": 2700,
-      "offset_hex": "0xa8c",
-      "size": 1
+      "offset_hex": "0xA8C",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "padA91",
       "offset": 2701,
-      "offset_hex": "0xa8d",
-      "size": 3
+      "offset_hex": "0xA8D",
+      "size": 3,
+      "type": "UInt8[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "defaultShader",
       "offset": 2704,
-      "offset_hex": "0xa90",
-      "size": 4
+      "offset_hex": "0xA90",
+      "size": 4,
+      "type": "NiD3DShader *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unkA98",
       "offset": 2708,
-      "offset_hex": "0xa94",
-      "size": 16
+      "offset_hex": "0xA94",
+      "size": 16,
+      "type": "NiTArray_void"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unkAA8",
       "offset": 2724,
-      "offset_hex": "0xaa4",
-      "size": 16
+      "offset_hex": "0xAA4",
+      "size": 16,
+      "type": "NiTArray_void"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lostDeviceCallbacks",
       "offset": 2740,
-      "offset_hex": "0xab4",
-      "size": 16
+      "offset_hex": "0xAB4",
+      "size": 16,
+      "type": "NiTArray_void"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lostDeviceCallbacksRefcons",
       "offset": 2756,
-      "offset_hex": "0xac4",
-      "size": 16
+      "offset_hex": "0xAC4",
+      "size": 16,
+      "type": "NiTArray_void"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "padAD0",
       "offset": 2772,
-      "offset_hex": "0xad4",
-      "size": 40
+      "offset_hex": "0xAD4",
+      "size": 40,
+      "type": "UInt32[10]"
     }
   ],
   "name": "NiDX9RendererMembr",
+  "ordinal": 9156,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 2812
 }

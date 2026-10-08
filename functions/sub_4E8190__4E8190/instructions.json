@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E8190",
-    "line": "push    ecx",
+    "line": "push    ecx; Verified TESPathGridPoint_ClearRenderNode handles the per-point NiNode* at +0x28: clears/releases child objects, removes the node from its parent when attached, releases the returned parent reference, and nulls the field. This is the corrected interpretation of the former unknown28 field.",
     "mnemonic": "push",
     "size": 1
   },
@@ -37,13 +37,13 @@
   },
   {
     "ea": "0x4E819B",
-    "line": "lea     ecx, [eax+0ACh]",
+    "line": "lea     ecx, [eax+0ACh]; this",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x4E81A1",
-    "line": "call    sub_477EF0",
+    "line": "call    NiTObjectArray_ClearAndRelease; Verified here: clear/release the NiNode child-object array at point->renderNode+0xAC. The next block detaches that renderNode from its parent if present, releases the returned reference, and nulls the point field.",
     "mnemonic": "call",
     "size": 5
   },

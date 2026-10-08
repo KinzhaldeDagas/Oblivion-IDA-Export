@@ -1,0 +1,117 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "NiGeomMorpherController",
+  "definition": "struct NiGeomMorpherController\n{\nNiTimeController super;\nunsigned __int16 morphFlags; ///< Separate serialized NiGeomMorpherController flag word. Native runtime use proven here: bit 0 optionally invokes the target geometry update after committing morph weights. This is not NiTimeController.flags (+0x08); other bits remain semantically unproven.\nunsigned __int16 pad3E;\nNiTArray_float morphWeights;\nNiMorphData *morphData;\nNiInterpolator **interpolators;\nunsigned __int8 weightsDirty; ///< Dirty latch: when set, Update samples interpolators and later commits current morph weights, then CommitDirtyMorphWeights clears it.\nunsigned __int8 leaveTargetBaseIntact; ///< For morph target 0, selects base weight 0 instead of 1 when no interpolator sample is used.\nunsigned __int8 forceSampleUnchangedTime; ///< Forces Update to mark weights dirty even when cached controller time is otherwise unchanged.\nunsigned __int8 targetSetPending; ///< SetTarget pending latch used while rebuilding target-dependent morph storage.\n}\n",
+  "id": 18374686479672050402,
+  "is_union": false,
+  "kind": "struct",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "super",
+      "offset": 0,
+      "offset_hex": "0x0",
+      "size": 60,
+      "type": "NiTimeController"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Separate serialized NiGeomMorpherController flag word. Native runtime use proven here: bit 0 optionally invokes the target geometry update after committing morph weights. This is not NiTimeController.flags (+0x08); other bits remain semantically unproven.",
+      "name": "morphFlags",
+      "offset": 60,
+      "offset_hex": "0x3C",
+      "size": 2,
+      "type": "unsigned __int16"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "pad3E",
+      "offset": 62,
+      "offset_hex": "0x3E",
+      "size": 2,
+      "type": "unsigned __int16"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "morphWeights",
+      "offset": 64,
+      "offset_hex": "0x40",
+      "size": 16,
+      "type": "NiTArray_float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "morphData",
+      "offset": 80,
+      "offset_hex": "0x50",
+      "size": 4,
+      "type": "NiMorphData *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "interpolators",
+      "offset": 84,
+      "offset_hex": "0x54",
+      "size": 4,
+      "type": "NiInterpolator **"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Dirty latch: when set, Update samples interpolators and later commits current morph weights, then CommitDirtyMorphWeights clears it.",
+      "name": "weightsDirty",
+      "offset": 88,
+      "offset_hex": "0x58",
+      "size": 1,
+      "type": "unsigned __int8"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "For morph target 0, selects base weight 0 instead of 1 when no interpolator sample is used.",
+      "name": "leaveTargetBaseIntact",
+      "offset": 89,
+      "offset_hex": "0x59",
+      "size": 1,
+      "type": "unsigned __int8"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Forces Update to mark weights dirty even when cached controller time is otherwise unchanged.",
+      "name": "forceSampleUnchangedTime",
+      "offset": 90,
+      "offset_hex": "0x5A",
+      "size": 1,
+      "type": "unsigned __int8"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "SetTarget pending latch used while rebuilding target-dependent morph storage.",
+      "name": "targetSetPending",
+      "offset": 91,
+      "offset_hex": "0x5B",
+      "size": 1,
+      "type": "unsigned __int8"
+    }
+  ],
+  "name": "NiGeomMorpherController",
+  "ordinal": 577,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 92
+}

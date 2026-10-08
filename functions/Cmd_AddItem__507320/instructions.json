@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x507383",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x5073EB",
-    "line": "push    eax",
+    "line": "push    eax; int",
     "mnemonic": "push",
     "size": 1
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x5073F5",
-    "line": "call    TESLeveledList_CalcLeveledForm",
+    "line": "call    TESLeveledList_CalcLeveledForm; CustomAnimSupport decode: leveled-list resolver evidence with chance/level/random/container logic; not used as deterministic animation target list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x507436",
-    "line": "lea     ecx, [esp+38h+var_1C]; this",
+    "line": "lea     ecx, [esp+3Ch+a3]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -565,13 +565,13 @@
   },
   {
     "ea": "0x50743F",
-    "line": "lea     ecx, [esp+34h+var_1C]",
+    "line": "lea     ecx, [esp+38h+a3]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x507443",
-    "line": "mov     [esp+34h+unk], 0FFFFFFFFh",
+    "line": "mov     [esp+38h+var_8], 0FFFFFFFFh",
     "mnemonic": "mov",
     "size": 8
   },
@@ -589,7 +589,7 @@
   },
   {
     "ea": "0x507452",
-    "line": "mov     ecx, [esp+34h+var_C]",
+    "line": "mov     ecx, [esp+38h+var_1C.list.next]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -634,5 +634,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9B6DC0",
+    "line": "lea     ecx, [ebp-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B6DC3",
+    "line": "jmp     TESContainer_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B6DC8",
+    "line": "mov     edx, [esp+a2]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B6DCC",
+    "line": "lea     eax, [edx-24h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B6DCF",
+    "line": "mov     ecx, [edx-28h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B6DD2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B6DD4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B6DD9",
+    "line": "mov     eax, offset stru_AE1AE4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B6DDE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,17 +1,11 @@
 int __thiscall sub_42B500(_DWORD *this)
 {
-  size_t v3; // [esp+0h] [ebp-Ch]
-  size_t v4; // [esp+0h] [ebp-Ch]
-  size_t v5; // [esp+0h] [ebp-Ch]
-  int v6; // [esp+0h] [ebp-Ch]
-  _BYTE Dst[4]; // [esp+8h] [ebp-4h] BYREF
+  int v3; // [esp+0h] [ebp-Ch]
+  unsigned int Dst; // [esp+8h] [ebp-4h] BYREF
 
-  LODWORD(v3) = 0xC;
-  SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, this + 1, v3);
-  LODWORD(v4) = 0xC;
-  SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, this + 4, v4);
-  LODWORD(v5) = 4;
-  SaveLoad_LoadFormID(Dst, v5);
-  *this = v6;
-  return v6;
+  SaveLoad_LoadData(g_TESSaveLoadGame, this + 1, 0xCu); /*0x42b510*/
+  SaveLoad_LoadData(g_TESSaveLoadGame, this + 4, 0xCu); /*0x42b521*/
+  SaveLoad_LoadFormID(g_TESSaveLoadGame, &Dst, 4u); /*0x42b533*/
+  *this = v3; /*0x42b53c*/
+  return v3; /*0x42b53e*/
 }

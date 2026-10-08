@@ -1,5 +1,5 @@
-0x7A3580: push    ebx
-0x7A3581: mov     ebx, [esp+4+arg_0]
+0x7A3580: push    ebx; Oblivion binary evidence: compiler-folded copy constructor for the exact 0x10 four-byte vector layout. Allocates count*4 bytes, memmoves the source range, then initializes begin/end/capacity. Pointer-vector copies are intentionally shallow; pointed-object ownership remains with higher-level tree/LOD code.
+0x7A3581: mov     ebx, [esp+4+source]
 0x7A3585: mov     eax, [ebx+4]
 0x7A3588: push    esi
 0x7A3589: push    edi
@@ -19,10 +19,10 @@
 0x7A35A9: jz      short loc_7A360D
 0x7A35AB: cmp     esi, 3FFFFFFFh
 0x7A35B1: jbe     short loc_7A35B8
-0x7A35B3: call    sub_790B90
+0x7A35B3: call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error("vector<T> too long") and throws; used by multiple element specializations after max_size checks.
 0x7A35B8: push    ecx
-0x7A35B9: push    esi; char *
-0x7A35BA: call    sub_78FB60
+0x7A35B9: push    esi; count
+0x7A35BA: call    OB_stVector4_Allocate_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded allocator for vectors with 4-byte elements. Validates count*4 overflow, throws bad_alloc on overflow, and allocates through FormHeapAlloc; FindPairs uses it for vector<bool>'s uint32 backing words.
 0x7A35BF: mov     [edi+4], eax
 0x7A35C2: mov     [edi+8], eax
 0x7A35C5: lea     eax, [eax+esi*4]

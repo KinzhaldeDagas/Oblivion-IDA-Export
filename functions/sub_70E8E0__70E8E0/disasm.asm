@@ -4,7 +4,7 @@
 0x70E8E6: push    edi
 0x70E8E7: push    esi
 0x70E8E8: mov     edi, ecx
-0x70E8EA: call    nullsub_returnvVoid_1arg
+0x70E8EA: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x70E8EF: mov     ecx, esi
 0x70E8F1: call    sub_7124A0
 0x70E8F6: mov     esi, [edi+4Ch]

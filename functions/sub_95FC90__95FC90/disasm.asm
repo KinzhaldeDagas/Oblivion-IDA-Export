@@ -9,7 +9,6 @@
 0x95FCA0: mov     ebx, [esp+10h+arg_24]
 0x95FCA4: mov     ebp, [esp+10h+arg_20]
 0x95FCA8: jmp     short loc_95FCB0
-0x95FCAA: align 10h
 0x95FCB0: mov     ecx, [esp+10h+arg_1C]
 0x95FCB4: fld     [esp+10h+arg_0]
 0x95FCB8: mov     edx, [esp+10h+arg_18]

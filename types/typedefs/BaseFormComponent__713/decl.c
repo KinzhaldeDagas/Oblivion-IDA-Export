@@ -1,1 +1,4 @@
-BaseFormComponent
+struct BaseFormComponent
+{
+BaseFormComponentVtbl *vtbl;
+};

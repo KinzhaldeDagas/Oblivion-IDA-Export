@@ -35,10 +35,10 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::CheckCasterNiNode__@<eax>(
 {
   int v33; // eax
 
-  HIBYTE(a7) = 0;
-  v33 = (*(int (__thiscall **)(int))(*(_DWORD *)a2 + 0x24))(a2);
-  if ( !v33 || !*(_WORD *)(v33 + 0xB8) || a32 )
-    return MagicCaster_ApplyActiveMagicItem_::GetTargetREFR(
+  HIBYTE(a7) = 0; /*0x69b130*/
+  v33 = (*(int (__thiscall **)(int))(*(_DWORD *)a2 + 0x24))(a2); /*0x69b135*/
+  if ( !v33 || !*(_WORD *)(v33 + 0xB8) || a32 ) /*0x69b14a*/
+    return MagicCaster_ApplyActiveMagicItem_::GetTargetREFR( /*0x69b14a*/
              a1,
              a2,
              a3,
@@ -72,7 +72,7 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::CheckCasterNiNode__@<eax>(
              a31,
              a32,
              a33);
-  HIBYTE(a7) = 1;
+  HIBYTE(a7) = 1; /*0x69b14c*/
   return MagicCaster_ApplyActiveMagicItem_::GetTargetREFR(
            a1,
            a2,

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6C5C70",
-    "line": "mov     eax, [esp+arg_10]",
+    "line": "mov     eax, [esp+arg_10]; Creates or reuses a __TempBlendSequence__ for the current pose, then transitions from that temporary pose to the requested destination sequence through 0x6C9D30. ActorAnimData_PlaySequence uses this for player/camera-visible roots when a normal cross-fade cannot be used.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x6C5C7B",
-    "line": "call    sub_6C5860",
+    "line": "call    NiControllerManager_GetOrCreateTempBlendSequence; Obtains an inactive __TempBlendSequence__ with enough controlled blocks or allocates one, rebuilds it from the destination/optional source pose, resets it, and registers it with the controller manager. This temporary sequence is manager-owned transition scaffolding.",
     "mnemonic": "call",
     "size": 5
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x6C5CA8",
-    "line": "call    sub_6C9D30",
+    "line": "call    sub_6C9D30; Internal temporary-pose transition: activates the generated pose sequence, activates the destination with ease-in, deactivates the pose over that interval, and aligns normalized timing fields. Called by NiControllerManager_BlendFromPose.",
     "mnemonic": "call",
     "size": 5
   },

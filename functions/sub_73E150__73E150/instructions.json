@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x73E150",
-    "line": "sub     esp, 20h",
+    "line": "sub     esp, 20h; Pass225/226: NiScreenTexture copy helper; copies records, smart-copies +0x14 texturing property, and preserves +0x18 pending mask.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x73E1F0",
-    "line": "call    sub_73DD70",
+    "line": "call    sub_73DD70; Pass226: NiScreenTexture record capacity helper; reallocates/copies 0x1C-byte records. Stock xrefs are load/copy only and do not set +0x18.",
     "mnemonic": "call",
     "size": 5
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x73E275",
-    "line": "mov     [ebx+18h], cx",
+    "line": "mov     [ebx+18h], cx; Pass226: NiScreenTexture copy helper copies source +0x18 pending mask to destination.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x73E297",
-    "line": "mov     [ebx+18h], ax",
+    "line": "mov     [ebx+18h], ax; Pass226: NiScreenTexture copy helper stores preserved +0x18 mask after record/property copy.",
     "mnemonic": "mov",
     "size": 4
   },

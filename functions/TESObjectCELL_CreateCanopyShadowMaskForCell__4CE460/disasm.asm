@@ -1,4 +1,4 @@
-0x4CE460: push    ebp
+0x4CE460: push    ebp; Create/update the native cell canopy-shadow mask.
 0x4CE461: mov     ebp, [esp+4+arg_0]
 0x4CE465: test    ebp, ebp
 0x4CE467: push    esi
@@ -18,7 +18,7 @@
 0x4CE49F: mov     byte ptr ds:0B3FF00h, 1
 0x4CE4A6: mov     dword ptr ds:0B2752Ch, 32h ; '2'
 0x4CE4B0: mov     byte ptr ds:0B27530h, 0
-0x4CE4B7: call    CreateNiRenderedTexture
+0x4CE4B7: call    CreateNiRenderedTexture; DX10OBSE resource decode: creates NiRenderedTexture and asks the renderer to create its render-data texture; native render targets can later be sampled through the same stage/sampler SetTexture route.
 0x4CE4BC: mov     edi, [esp+1Ch+arg_8]
 0x4CE4C0: add     esp, 10h
 0x4CE4C3: mov     [esi], eax
@@ -31,7 +31,7 @@
 0x4CE4D9: lea     ecx, [ebp+28h]
 0x4CE4DC: call    sub_424440
 0x4CE4E1: push    3
-0x4CE4E3: call    nullsub_returnTrue_0arg
+0x4CE4E3: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x4CE4E8: mov     edx, [esi]
 0x4CE4EA: mov     ecx, [edx+24h]
 0x4CE4ED: mov     eax, [ecx]
@@ -59,7 +59,7 @@
 0x4CE51C: push    ecx
 0x4CE51D: call    __memset
 0x4CE522: push    2
-0x4CE524: call    nullsub_returnTrue_0arg
+0x4CE524: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x4CE529: add     esp, 10h
 0x4CE52C: pop     edi
 0x4CE52D: pop     esi

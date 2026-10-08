@@ -14,7 +14,7 @@
 0x7B1C8F: mov     large fs:0, eax
 0x7B1C95: mov     esi, ecx
 0x7B1C97: mov     [esp+24h+var_10], esi
-0x7B1C9B: call    ??0BSImageSpaceShader@@QAE@XZ; BSImageSpaceShader::BSImageSpaceShader(void)
+0x7B1C9B: call    ??0BSImageSpaceShader@@QAE@XZ; MoonSugarEffect decode: BSImageSpaceShader base ctor calls BSShader ctor, sets vtable, clears source texture +0x7C and scalar fields +0x80..+0x8C.
 0x7B1CA0: push    offset sub_4027D0; a5
 0x7B1CA5: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x7B1CAA: push    1; size
@@ -25,7 +25,7 @@
 0x7B1CB7: mov     [esp+38h+var_4], ebp
 0x7B1CBB: mov     dword ptr [esi], offset ??_7MenuBGShader@@6B@; const MenuBGShader::`vftable'
 0x7B1CC1: call    ArrayConstructor
-0x7B1CC6: push    offset sub_7016A0; a5
+0x7B1CC6: push    offset NiPointerSlot_Release; a5
 0x7B1CCB: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x7B1CD0: push    1; size
 0x7B1CD2: push    4; a2
@@ -33,7 +33,7 @@
 0x7B1CDA: push    edi; a1
 0x7B1CDB: mov     byte ptr [esp+38h+var_4], 1
 0x7B1CE0: call    ArrayConstructor
-0x7B1CE5: push    offset sub_7016A0; a5
+0x7B1CE5: push    offset NiPointerSlot_Release; a5
 0x7B1CEA: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x7B1CEF: push    1; size
 0x7B1CF1: push    4; a2
@@ -82,7 +82,7 @@
 0x7B1D75: jz      short loc_7B1D8C
 0x7B1D77: add     dword ptr [ecx+60h], 0FFFFFFFFh
 0x7B1D7B: jnz     short loc_7B1D82
-0x7B1D7D: call    sub_7604D0
+0x7B1D7D: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x7B1D82: mov     dword ptr [esi+94h], 0
 0x7B1D8C: mov     byte ptr [esi+20h], 1
 0x7B1D90: mov     edi, [esi+0B4h]
@@ -111,3 +111,39 @@
 0x7B1DD1: pop     ebx
 0x7B1DD2: add     esp, 10h
 0x7B1DD5: retn
+0x9CD7D0: mov     ecx, [ebp-10h]; this
+0x9CD7D3: jmp     ??1BSImageSpaceShader@@UAE@XZ; MoonSugarEffect decode: BSImageSpaceShader dtor releases source BSRenderedTexture at +0x7C, clears +0x80..+0x8C, then calls BSShader dtor.
+0x9CD7D8: push    offset sub_4027D0; void (__thiscall *)(void *)
+0x9CD7DD: push    1; int
+0x9CD7DF: push    4; unsigned int
+0x9CD7E1: mov     eax, [ebp-10h]
+0x9CD7E4: add     eax, 94h ; '”'
+0x9CD7E9: push    eax; void *
+0x9CD7EA: call    $LN21
+0x9CD7EF: retn
+0x9CD7F0: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9CD7F5: push    1; int
+0x9CD7F7: push    4; unsigned int
+0x9CD7F9: mov     eax, [ebp-10h]
+0x9CD7FC: add     eax, 98h ; '˜'
+0x9CD801: push    eax; void *
+0x9CD802: call    $LN21
+0x9CD807: retn
+0x9CD808: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9CD80D: push    1; int
+0x9CD80F: push    4; unsigned int
+0x9CD811: mov     eax, [ebp-10h]
+0x9CD814: add     eax, 9Ch ; 'œ'
+0x9CD819: push    eax; void *
+0x9CD81A: call    $LN21
+0x9CD81F: retn
+0x9CD820: mov     ecx, [ebp-10h]
+0x9CD823: add     ecx, 0B4h ; '´'; slot
+0x9CD829: jmp     NiPointerSlot_Release
+0x9CD82E: mov     edx, [esp+arg_4]
+0x9CD832: lea     eax, [edx-14h]
+0x9CD835: mov     ecx, [edx-18h]
+0x9CD838: xor     ecx, eax
+0x9CD83A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CD83F: mov     eax, offset stru_AF6A38
+0x9CD844: jmp     ___CxxFrameHandler3

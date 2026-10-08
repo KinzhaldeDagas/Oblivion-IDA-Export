@@ -1,1 +1,1 @@
-TESHair
+struct TESHair;

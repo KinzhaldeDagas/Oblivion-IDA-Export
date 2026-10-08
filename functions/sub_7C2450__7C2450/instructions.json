@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7C2450",
-    "line": "sub     esp, 38h",
+    "line": "sub     esp, 38h; MoonSugarEffect decode: texture-manager render-target prewarm/release. Allocates/retrieves common HDR/image-space/default surfaces then returns them to the manager cache with sub_7C1EE0.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -55,43 +55,43 @@
   },
   {
     "ea": "0x7C246B",
-    "line": "push    ebx; a7",
+    "line": "push    ebx; aux",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C246C",
-    "line": "push    71h ; 'q'; a6",
+    "line": "push    71h ; 'q'; d3dFormat",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7C246E",
-    "line": "push    24h ; '$'; a5",
+    "line": "push    24h ; '$'; targetFlags",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7C2470",
-    "line": "push    1; a4",
+    "line": "push    1; height",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7C2472",
-    "line": "push    1; a3",
+    "line": "push    1; width",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7C2474",
-    "line": "push    eax; a2",
+    "line": "push    eax; renderer",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C2475",
-    "line": "call    NiRenderer_GetRenderedSurface",
+    "line": "call    BSTextureManager_GetOrCreateRenderedTexture; Oblivion BSTextureManager cache lookup/allocation. Reuses a matching BSRenderedTexture by size, format, auxiliary value, and flags or creates one, then moves the resource to the in-use list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -103,37 +103,37 @@
   },
   {
     "ea": "0x7C2480",
-    "line": "push    ebx; a7",
+    "line": "push    ebx; aux",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C2481",
-    "line": "push    71h ; 'q'; a6",
+    "line": "push    71h ; 'q'; d3dFormat",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7C2483",
-    "line": "push    24h ; '$'; a5",
+    "line": "push    24h ; '$'; targetFlags",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7C2485",
-    "line": "push    1; a4",
+    "line": "push    1; height",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7C2487",
-    "line": "push    1; a3",
+    "line": "push    1; width",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7C2489",
-    "line": "push    ecx; a2",
+    "line": "push    ecx; renderer",
     "mnemonic": "push",
     "size": 1
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x7C2490",
-    "line": "call    NiRenderer_GetRenderedSurface",
+    "line": "call    BSTextureManager_GetOrCreateRenderedTexture; Oblivion BSTextureManager cache lookup/allocation. Reuses a matching BSRenderedTexture by size, format, auxiliary value, and flags or creates one, then moves the resource to the in-use list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -163,37 +163,37 @@
   },
   {
     "ea": "0x7C249B",
-    "line": "push    ebx; a7",
+    "line": "push    ebx; aux",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C249C",
-    "line": "push    71h ; 'q'; a6",
+    "line": "push    71h ; 'q'; d3dFormat",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7C249E",
-    "line": "push    24h ; '$'; a5",
+    "line": "push    24h ; '$'; targetFlags",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7C24A0",
-    "line": "push    1; a4",
+    "line": "push    1; height",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7C24A2",
-    "line": "push    1; a3",
+    "line": "push    1; width",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7C24A4",
-    "line": "push    edx; a2",
+    "line": "push    edx; renderer",
     "mnemonic": "push",
     "size": 1
   },
@@ -211,31 +211,31 @@
   },
   {
     "ea": "0x7C24AB",
-    "line": "call    NiRenderer_GetRenderedSurface",
+    "line": "call    BSTextureManager_GetOrCreateRenderedTexture; Oblivion BSTextureManager cache lookup/allocation. Reuses a matching BSRenderedTexture by size, format, auxiliary value, and flags or creates one, then moves the resource to the in-use list.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7C24B0",
-    "line": "push    ebx; a7",
+    "line": "push    ebx; aux",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C24B1",
-    "line": "push    71h ; 'q'; a6",
+    "line": "push    71h ; 'q'; d3dFormat",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7C24B3",
-    "line": "push    26h ; '&'; a5",
+    "line": "push    26h ; '&'; targetFlags",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7C24B5",
-    "line": "push    4; a4",
+    "line": "push    4; height",
     "mnemonic": "push",
     "size": 2
   },
@@ -253,13 +253,13 @@
   },
   {
     "ea": "0x7C24C0",
-    "line": "push    4; a3",
+    "line": "push    4; width",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7C24C2",
-    "line": "push    eax; a2",
+    "line": "push    eax; renderer",
     "mnemonic": "push",
     "size": 1
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x7C24C5",
-    "line": "call    NiRenderer_GetRenderedSurface",
+    "line": "call    BSTextureManager_GetOrCreateRenderedTexture; Oblivion BSTextureManager cache lookup/allocation. Reuses a matching BSRenderedTexture by size, format, auxiliary value, and flags or creates one, then moves the resource to the in-use list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,37 +283,37 @@
   },
   {
     "ea": "0x7C24D0",
-    "line": "push    ebx; a7",
+    "line": "push    ebx; aux",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C24D1",
-    "line": "push    71h ; 'q'; a6",
+    "line": "push    71h ; 'q'; d3dFormat",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7C24D3",
-    "line": "push    26h ; '&'; a5",
+    "line": "push    26h ; '&'; targetFlags",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7C24D5",
-    "line": "push    10h; a4",
+    "line": "push    10h; height",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7C24D7",
-    "line": "push    10h; a3",
+    "line": "push    10h; width",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7C24D9",
-    "line": "push    ecx; a2",
+    "line": "push    ecx; renderer",
     "mnemonic": "push",
     "size": 1
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x7C24E0",
-    "line": "call    NiRenderer_GetRenderedSurface",
+    "line": "call    BSTextureManager_GetOrCreateRenderedTexture; Oblivion BSTextureManager cache lookup/allocation. Reuses a matching BSRenderedTexture by size, format, auxiliary value, and flags or creates one, then moves the resource to the in-use list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,37 +343,37 @@
   },
   {
     "ea": "0x7C24EB",
-    "line": "push    ebx; a7",
+    "line": "push    ebx; aux",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C24EC",
-    "line": "push    71h ; 'q'; a6",
+    "line": "push    71h ; 'q'; d3dFormat",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7C24EE",
-    "line": "push    26h ; '&'; a5",
+    "line": "push    26h ; '&'; targetFlags",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7C24F0",
-    "line": "push    40h ; '@'; a4",
+    "line": "push    40h ; '@'; height",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7C24F2",
-    "line": "push    40h ; '@'; a3",
+    "line": "push    40h ; '@'; width",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7C24F4",
-    "line": "push    edx; a2",
+    "line": "push    edx; renderer",
     "mnemonic": "push",
     "size": 1
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x7C24FB",
-    "line": "call    NiRenderer_GetRenderedSurface",
+    "line": "call    BSTextureManager_GetOrCreateRenderedTexture; Oblivion BSTextureManager cache lookup/allocation. Reuses a matching BSRenderedTexture by size, format, auxiliary value, and flags or creates one, then moves the resource to the in-use list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x7C250E",
-    "line": "call    BSTextureManager_GetDefaultRenderTarget",
+    "line": "call    BSTextureManager_GetDefaultRenderTarget; Oblivion default rendered-target acquisition. Resolves dimensions, D3D format, auxiliary value, and flags for the target type, then obtains a matching cached or newly created BSRenderedTexture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x7C2521",
-    "line": "call    BSTextureManager_GetDefaultRenderTarget",
+    "line": "call    BSTextureManager_GetDefaultRenderTarget; Oblivion default rendered-target acquisition. Resolves dimensions, D3D format, auxiliary value, and flags for the target type, then obtains a matching cached or newly created BSRenderedTexture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x7C2535",
-    "line": "call    BSTextureManager_GetDefaultRenderTarget",
+    "line": "call    BSTextureManager_GetDefaultRenderTarget; Oblivion default rendered-target acquisition. Resolves dimensions, D3D format, auxiliary value, and flags for the target type, then obtains a matching cached or newly created BSRenderedTexture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x7C2558",
-    "line": "call    BSTextureManager_GetDefaultRenderTarget",
+    "line": "call    BSTextureManager_GetDefaultRenderTarget; Oblivion default rendered-target acquisition. Resolves dimensions, D3D format, auxiliary value, and flags for the target type, then obtains a matching cached or newly created BSRenderedTexture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -775,37 +775,37 @@
   },
   {
     "ea": "0x7C25C2",
-    "line": "push    ebx; a7",
+    "line": "push    ebx; aux",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C25C3",
-    "line": "push    ebx; a6",
+    "line": "push    ebx; d3dFormat",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C25C4",
-    "line": "push    26h ; '&'; a5",
+    "line": "push    26h ; '&'; targetFlags",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7C25C6",
-    "line": "push    eax; a4",
+    "line": "push    eax; height",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C25C7",
-    "line": "push    ebp; a3",
+    "line": "push    ebp; width",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C25C8",
-    "line": "push    edi; a2",
+    "line": "push    edi; renderer",
     "mnemonic": "push",
     "size": 1
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x7C25CB",
-    "line": "call    NiRenderer_GetRenderedSurface",
+    "line": "call    BSTextureManager_GetOrCreateRenderedTexture; Oblivion BSTextureManager cache lookup/allocation. Reuses a matching BSRenderedTexture by size, format, auxiliary value, and flags or creates one, then moves the resource to the in-use list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -931,7 +931,7 @@
   },
   {
     "ea": "0x7C2605",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1027,7 +1027,7 @@
   },
   {
     "ea": "0x7C2631",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1045,7 +1045,7 @@
   },
   {
     "ea": "0x7C263E",
-    "line": "push    ebx; a7",
+    "line": "push    ebx; aux",
     "mnemonic": "push",
     "size": 1
   },
@@ -1057,7 +1057,7 @@
   },
   {
     "ea": "0x7C2642",
-    "line": "push    ebx; a6",
+    "line": "push    ebx; d3dFormat",
     "mnemonic": "push",
     "size": 1
   },
@@ -1069,25 +1069,25 @@
   },
   {
     "ea": "0x7C264A",
-    "line": "push    ecx; a5",
+    "line": "push    ecx; targetFlags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C264B",
-    "line": "push    eax; a4",
+    "line": "push    eax; height",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C264C",
-    "line": "push    ebp; a3",
+    "line": "push    ebp; width",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C264D",
-    "line": "push    edi; a2",
+    "line": "push    edi; renderer",
     "mnemonic": "push",
     "size": 1
   },
@@ -1099,7 +1099,7 @@
   },
   {
     "ea": "0x7C2650",
-    "line": "call    NiRenderer_GetRenderedSurface",
+    "line": "call    BSTextureManager_GetOrCreateRenderedTexture; Oblivion BSTextureManager cache lookup/allocation. Reuses a matching BSRenderedTexture by size, format, auxiliary value, and flags or creates one, then moves the resource to the in-use list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1201,7 +1201,7 @@
   },
   {
     "ea": "0x7C2684",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1297,7 +1297,7 @@
   },
   {
     "ea": "0x7C26B0",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1315,7 +1315,7 @@
   },
   {
     "ea": "0x7C26BD",
-    "line": "push    ebx; a7",
+    "line": "push    ebx; aux",
     "mnemonic": "push",
     "size": 1
   },
@@ -1327,7 +1327,7 @@
   },
   {
     "ea": "0x7C26C1",
-    "line": "push    ebx; a6",
+    "line": "push    ebx; d3dFormat",
     "mnemonic": "push",
     "size": 1
   },
@@ -1339,25 +1339,25 @@
   },
   {
     "ea": "0x7C26C9",
-    "line": "push    ecx; a5",
+    "line": "push    ecx; targetFlags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C26CA",
-    "line": "push    eax; a4",
+    "line": "push    eax; height",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C26CB",
-    "line": "push    ebp; a3",
+    "line": "push    ebp; width",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C26CC",
-    "line": "push    edi; a2",
+    "line": "push    edi; renderer",
     "mnemonic": "push",
     "size": 1
   },
@@ -1369,7 +1369,7 @@
   },
   {
     "ea": "0x7C26CF",
-    "line": "call    NiRenderer_GetRenderedSurface",
+    "line": "call    BSTextureManager_GetOrCreateRenderedTexture; Oblivion BSTextureManager cache lookup/allocation. Reuses a matching BSRenderedTexture by size, format, auxiliary value, and flags or creates one, then moves the resource to the in-use list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1398,12 +1398,6 @@
     "size": 2
   },
   {
-    "ea": "0x7C26DD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x7C26E0",
     "line": "mov     eax, [esp+edi*4+44h+a2]",
     "mnemonic": "mov",
@@ -1423,7 +1417,7 @@
   },
   {
     "ea": "0x7C26E8",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
@@ -1435,7 +1429,7 @@
   },
   {
     "ea": "0x7C26EB",
-    "line": "call    sub_7C1EE0",
+    "line": "call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.",
     "mnemonic": "call",
     "size": 5
   },

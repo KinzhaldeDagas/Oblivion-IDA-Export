@@ -22,24 +22,24 @@
 0x4DC5F7: jnz     short loc_4DC620
 0x4DC5F9: test    esi, esi
 0x4DC5FB: jz      short loc_4DC60A
-0x4DC5FD: mov     ecx, esi
-0x4DC5FF: call    sub_478CE0
-0x4DC604: mov     ecx, ds:0B333C4h
+0x4DC5FD: mov     ecx, esi; this
+0x4DC5FF: call    ActorSkinInfo_ClearWeaponSlot; Clears ActorSkinInfo weapon form/model/3D state and, when the owning non-creature still has its weapon out, schedules the appropriate ActorAnimData equipment refresh. ActorSkinInfo and ActorAnimData are distinct objects.
+0x4DC604: mov     ecx, ds:0B333C4h; this
 0x4DC60A: mov     al, [ecx+588h]
-0x4DC610: mov     byte ptr [esp+14h+var_C], al
-0x4DC614: mov     edx, [esp+14h+var_C]
-0x4DC618: push    edx
-0x4DC619: call    sub_6600D0
+0x4DC610: mov     [esp+14h+firstPerson], al
+0x4DC614: mov     edx, dword ptr [esp+14h+firstPerson]
+0x4DC618: push    edx; firstPerson
+0x4DC619: call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.
 0x4DC61E: mov     esi, eax
 0x4DC620: test    esi, esi
 0x4DC622: mov     eax, [esp+14h+var_4]
 0x4DC626: push    ebx
 0x4DC627: push    edi
 0x4DC628: mov     edi, [eax+58h]
-0x4DC62B: mov     [esp+1Ch+var_C], edi
+0x4DC62B: mov     dword ptr [esp+1Ch+firstPerson], edi
 0x4DC62F: jz      short loc_4DC63D
-0x4DC631: mov     ecx, esi
-0x4DC633: call    sub_478CE0
+0x4DC631: mov     ecx, esi; this
+0x4DC633: call    ActorSkinInfo_ClearWeaponSlot; Clears ActorSkinInfo weapon form/model/3D state and, when the owning non-creature still has its weapon out, schedules the appropriate ActorAnimData equipment refresh. ActorSkinInfo and ActorAnimData are distinct objects.
 0x4DC638: jmp     loc_4DC75A
 0x4DC63D: xor     bl, bl
 0x4DC63F: test    edi, edi
@@ -81,7 +81,7 @@
 0x4DC6A9: mov     edi, offset aBow
 0x4DC6AE: mov     ecx, 4
 0x4DC6B3: repe cmpsb
-0x4DC6B5: mov     edi, [esp+1Ch+var_C]
+0x4DC6B5: mov     edi, dword ptr [esp+1Ch+firstPerson]
 0x4DC6B9: jz      short loc_4DC6E2
 0x4DC6BB: add     edx, 1
 0x4DC6BE: cmp     ebx, edx
@@ -137,7 +137,7 @@
 0x4DC74A: mov     ecx, esi
 0x4DC74C: call    ContainerEntryExtraData_DestroyDataTable
 0x4DC751: push    esi
-0x4DC752: call    FormHeapFree
+0x4DC752: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4DC757: add     esp, 4
 0x4DC75A: test    edi, edi
 0x4DC75C: jz      loc_4DC885
@@ -150,18 +150,18 @@
 0x4DC772: test    esi, esi
 0x4DC774: jz      short loc_4DC7A7
 0x4DC776: push    3
-0x4DC778: call    nullsub_returnTrue_0arg
+0x4DC778: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x4DC77D: add     esp, 4
-0x4DC780: push    esi
+0x4DC780: push    esi; object
 0x4DC781: push    0
 0x4DC783: call    GetShadowSceneNode
 0x4DC788: add     esp, 4
-0x4DC78B: mov     ecx, eax
-0x4DC78D: call    sub_7C5E70
-0x4DC792: lea     ecx, [esi+0ACh]
-0x4DC798: call    sub_477EF0
+0x4DC78B: mov     ecx, eax; this
+0x4DC78D: call    ShadowSceneNode_RemoveObjectReceivers; Removes an object's geometry from shadow-light receiver lists under the shadow-scene critical section. It obtains the object's node/container through virtual +0x08 and recurses; it does not detach the object from its parent or clear NiNode children.
+0x4DC792: lea     ecx, [esi+0ACh]; this
+0x4DC798: call    NiTObjectArray_ClearAndRelease; Clears a ref-counted NiT object-pointer array: releases every non-null element, nulls entries, and resets end/count words to zero. At bow release it is invoked on ArrowBone+0xAC, thereby releasing all ArrowBone children including the held Arrow:0 clone.
 0x4DC79D: push    2
-0x4DC79F: call    nullsub_returnTrue_0arg
+0x4DC79F: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x4DC7A4: add     esp, 4
 0x4DC7A7: mov     edx, [edi]
 0x4DC7A9: mov     eax, [edx+134h]
@@ -197,18 +197,18 @@
 0x4DC803: ja      short loc_4DC7D0
 0x4DC805: jmp     short loc_4DC840
 0x4DC807: push    3
-0x4DC809: call    nullsub_returnTrue_0arg
+0x4DC809: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x4DC80E: add     esp, 4
-0x4DC811: push    ebx
+0x4DC811: push    ebx; object
 0x4DC812: push    0
 0x4DC814: call    GetShadowSceneNode
 0x4DC819: add     esp, 4
-0x4DC81C: mov     ecx, eax
-0x4DC81E: call    sub_7C5E70
-0x4DC823: lea     ecx, [ebx+0ACh]
-0x4DC829: call    sub_477EF0
+0x4DC81C: mov     ecx, eax; this
+0x4DC81E: call    ShadowSceneNode_RemoveObjectReceivers; Removes an object's geometry from shadow-light receiver lists under the shadow-scene critical section. It obtains the object's node/container through virtual +0x08 and recurses; it does not detach the object from its parent or clear NiNode children.
+0x4DC823: lea     ecx, [ebx+0ACh]; this
+0x4DC829: call    NiTObjectArray_ClearAndRelease; Clears a ref-counted NiT object-pointer array: releases every non-null element, nulls entries, and resets end/count words to zero. At bow release it is invoked on ArrowBone+0xAC, thereby releasing all ArrowBone children including the held Arrow:0 clone.
 0x4DC82E: push    2
-0x4DC830: call    nullsub_returnTrue_0arg
+0x4DC830: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x4DC835: mov     edi, [esp+1Ch+var_8]
 0x4DC839: mov     ebp, [esp+1Ch+var_4]
 0x4DC83D: add     esp, 4
@@ -221,18 +221,18 @@
 0x4DC850: test    esi, esi
 0x4DC852: jz      short loc_4DC885
 0x4DC854: push    3
-0x4DC856: call    nullsub_returnTrue_0arg
+0x4DC856: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x4DC85B: add     esp, 4
-0x4DC85E: push    esi
+0x4DC85E: push    esi; object
 0x4DC85F: push    0
 0x4DC861: call    GetShadowSceneNode
 0x4DC866: add     esp, 4
-0x4DC869: mov     ecx, eax
-0x4DC86B: call    sub_7C5E70
-0x4DC870: lea     ecx, [esi+0ACh]
-0x4DC876: call    sub_477EF0
+0x4DC869: mov     ecx, eax; this
+0x4DC86B: call    ShadowSceneNode_RemoveObjectReceivers; Removes an object's geometry from shadow-light receiver lists under the shadow-scene critical section. It obtains the object's node/container through virtual +0x08 and recurses; it does not detach the object from its parent or clear NiNode children.
+0x4DC870: lea     ecx, [esi+0ACh]; this
+0x4DC876: call    NiTObjectArray_ClearAndRelease; Clears a ref-counted NiT object-pointer array: releases every non-null element, nulls entries, and resets end/count words to zero. At bow release it is invoked on ArrowBone+0xAC, thereby releasing all ArrowBone children including the held Arrow:0 clone.
 0x4DC87B: push    2
-0x4DC87D: call    nullsub_returnTrue_0arg
+0x4DC87D: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x4DC882: add     esp, 4
 0x4DC885: mov     esi, [esp+1Ch+var_4]
 0x4DC889: mov     ecx, [esi+58h]

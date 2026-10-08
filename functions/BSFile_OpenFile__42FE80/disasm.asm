@@ -75,7 +75,7 @@
 0x42FF46: mov     eax, [esi+0Ch]
 0x42FF49: push    eax; Size
 0x42FF4A: call    FormHeapAlloc
-0x42FF4F: add     esp, 4
+0x42FF4F: add     esp, 4; MEF v41 verified BSFile open-buffer OOM guard: success replays test BL and stores buffer; failure stores null at +0x18, clears open-success byte +0x24, and returns through 0x42FF74 before preload/later buffered I/O can use null.
 0x42FF52: test    bl, bl
 0x42FF54: mov     [esi+18h], eax
 0x42FF57: jz      short loc_42FF74
@@ -89,7 +89,7 @@
 0x42FF6B: cmp     eax, [esi+0Ch]
 0x42FF6E: jz      short loc_42FF74
 0x42FF70: mov     byte ptr [esi+24h], 0
-0x42FF74: mov     al, [esi+24h]
+0x42FF74: mov     al, [esi+24h]; MEF v41 allocation-failure continuation returns BSFile +0x24 status through the normal EBX/ESI/EBP epilogue.
 0x42FF77: pop     ebx
 0x42FF78: pop     esi
 0x42FF79: pop     ebp

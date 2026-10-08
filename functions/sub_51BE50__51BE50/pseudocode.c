@@ -1,7 +1,8 @@
-int __cdecl sub_51BE50(unsigned int a1)
+// Oblivion-native checked attribute-name lookup. Validates an attribute actor value before returning its localized display name.
+const char *__cdecl ActorValue_GetAttributeNameChecked(UInt32 actorValue)
 {
-  if ( a1 > 7 )
-    return 0;
+  if ( actorValue > 7 ) /*0x51be57*/
+    return 0; /*0x51be62*/
   else
-    return ActorValue_GetName(a1);
+    return (const char *)ActorValue_GetName(actorValue); /*0x51be5d*/
 }

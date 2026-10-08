@@ -5,7 +5,7 @@
 0x412D0E: test    byte ptr [esp+4+arg_0], 1
 0x412D13: jz      short loc_412D1E
 0x412D15: push    esi
-0x412D16: call    FormHeapFree
+0x412D16: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x412D1B: add     esp, 4
 0x412D1E: mov     eax, esi
 0x412D20: pop     esi

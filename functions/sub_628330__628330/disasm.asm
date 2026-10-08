@@ -20,7 +20,7 @@
 0x62836B: mov     eax, [eax+8]
 0x62836E: mov     ecx, edi; this
 0x628370: mov     [esp+14h+var_4], eax
-0x628374: call    TESObjectREFR_GetParentCell
+0x628374: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x628379: mov     ecx, eax
 0x62837B: call    TESObjectCELL_GetWaterHeight
 0x628380: fadd    qword ptr ds:0A3F470h

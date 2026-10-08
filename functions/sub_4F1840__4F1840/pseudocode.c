@@ -1,22 +1,23 @@
-void __thiscall sub_4F1840(TESWorldSpace *this, TESForm *a2)
+// Verified exterior-cell removal gate. Requires the cell to belong to this WorldSpace; clears inactive forms in either branch. If the cell has no winning override or its winner is a master file, unloads it from save state, removes it from TESWorldSpace's cell map, and destroys it; otherwise it leaves the overridden cell registered.
+void __thiscall TESWorldSpace_UnloadExteriorCellIfEligible(TESWorldSpace *this, TESObjectCELL *cell)
 {
   Data *OverrideFile; // eax
 
-  if ( a2 )
+  if ( cell ) /*0x4f184a*/
   {
-    if ( TESObjectCELL_GetWorldSpace((TESObjectCELL *)a2) == this )
+    if ( TESObjectCELL_GetWorldSpace(cell) == this ) /*0x4f1855*/
     {
-      OverrideFile = TESForm_GetOverrideFile(a2, 0xFFFFFFFF);
-      if ( !OverrideFile || TESFile_GetIsMaster(OverrideFile) )
+      OverrideFile = TESForm_GetOverrideFile((TESForm *)cell, 0xFFFFFFFF); /*0x4f185b*/
+      if ( !OverrideFile || TESFile_GetIsMaster(OverrideFile) ) /*0x4f1866*/
       {
-        sub_4D1570((TESObjectCELL *)a2);
-        sub_463A90(SaveLoad_CurrentSavegame, a2);
-        TESWorldSpace_RemoveCellFromCellMap(this, (TESObjectCELL *)a2);
-        a2->vtbl->Destroy(a2, 1);
+        TESObjectCELL_ClearInactiveRuntimeForms(cell); /*0x4f187d*/
+        TESSaveLoadGame_UnloadForm(g_TESSaveLoadGame, (TESForm *)cell); /*0x4f1889*/
+        TESWorldSpace_RemoveCellFromCellMap(this, cell); /*0x4f1891*/
+        cell->vtbl->Destroy((TESForm *)cell, 1); /*0x4f189f*/
       }
       else
       {
-        sub_4D1570((TESObjectCELL *)a2);
+        TESObjectCELL_ClearInactiveRuntimeForms(cell); /*0x4f1871*/
       }
     }
   }

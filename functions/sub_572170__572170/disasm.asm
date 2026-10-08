@@ -1,5 +1,5 @@
 0x572170: sub     esp, 0Ch
-0x572173: call    InterfaceManager_IsMenuMode
+0x572173: call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.
 0x572178: test    al, al
 0x57217A: jnz     loc_5723D6
 0x572180: push    ebx
@@ -39,10 +39,10 @@
 0x5721E8: mov     eax, [eax+88h]
 0x5721EE: add     esp, 8
 0x5721F1: push    edx
-0x5721F2: lea     edx, [esp+20h+var_4]
+0x5721F2: lea     edx, [esp+20h+node]
 0x5721F6: push    edx
 0x5721F7: call    eax
-0x5721F9: mov     eax, [esp+1Ch+var_4]
+0x5721F9: mov     eax, [esp+1Ch+node]
 0x5721FD: cmp     eax, ebp
 0x5721FF: jz      short loc_57221F
 0x572201: mov     edi, eax
@@ -80,7 +80,7 @@
 0x57224B: fstp    dword ptr [esi-8]
 0x57224E: mov     ecx, [esi+4]
 0x572251: push    ecx
-0x572252: call    FormHeapFree
+0x572252: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x572257: fld     dword ptr ds:0A30634h
 0x57225D: mov     [esi+4], ebp
 0x572260: mov     [esi+0Ah], bp
@@ -104,7 +104,7 @@
 0x57229F: jnb     short loc_5722F8
 0x5722A1: mov     ecx, [esp+1Ch+var_C]
 0x5722A5: mov     eax, [ecx+15E4h]
-0x5722AB: add     ecx, 15E0h
+0x5722AB: add     ecx, 15E0h; list
 0x5722B1: cmp     eax, ebp
 0x5722B3: jz      short loc_5722C5
 0x5722B5: cmp     esi, [eax+8]
@@ -116,18 +116,18 @@
 0x5722C3: jnz     short loc_5722B5
 0x5722C5: xor     edi, edi
 0x5722C7: cmp     edi, ebp
-0x5722C9: mov     [esp+1Ch+var_4], edi
+0x5722C9: mov     [esp+1Ch+node], edi
 0x5722CD: jz      short loc_5722DB
-0x5722CF: lea     eax, [esp+1Ch+var_4]
-0x5722D3: push    eax
-0x5722D4: call    sub_7AA860
+0x5722CF: lea     eax, [esp+1Ch+node]
+0x5722D3: push    eax; node
+0x5722D4: call    NiTPointerList_RemoveNode; [Verified] Generic NiTPointerList node-removal helper. Unlinks the supplied node, updates head/tail and neighboring links, invokes the list's FreeNode vfunc, decrements item count, and returns the removed node's data pointer.
 0x5722D9: mov     esi, eax
 0x5722DB: cmp     esi, ebp
 0x5722DD: jz      loc_5723CA
 0x5722E3: mov     ecx, esi; void *
 0x5722E5: call    sub_571DF0
 0x5722EA: push    esi
-0x5722EB: call    FormHeapFree
+0x5722EB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5722F0: add     esp, 4
 0x5722F3: jmp     loc_5723CA
 0x5722F8: fldz
@@ -137,8 +137,8 @@
 0x572302: jp      loc_5723C8
 0x572308: fld     dword ptr [esi+18h]
 0x57230B: fsub    dword ptr ds:0B33E9Ch
-0x572311: fstp    [esp+1Ch+var_4]
-0x572315: fld     [esp+1Ch+var_4]
+0x572311: fstp    [esp+1Ch+node]
+0x572315: fld     [esp+1Ch+node]
 0x572319: fst     dword ptr [esi+18h]
 0x57231C: fcompp
 0x57231E: fnstsw  ax
@@ -198,9 +198,9 @@
 0x5723AE: jnz     short loc_5723A0
 0x5723B0: xor     edi, edi
 0x5723B2: cmp     edi, ebp
-0x5723B4: mov     [esp+1Ch+var_4], edi
+0x5723B4: mov     [esp+1Ch+node], edi
 0x5723B8: jz      loc_5722DB
-0x5723BE: lea     edx, [esp+1Ch+var_4]
+0x5723BE: lea     edx, [esp+1Ch+node]
 0x5723C2: push    edx
 0x5723C3: jmp     loc_5722D4
 0x5723C8: fstp    st

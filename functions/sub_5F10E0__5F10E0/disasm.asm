@@ -1,4 +1,4 @@
-0x5F10E0: sub     esp, 8
+0x5F10E0: sub     esp, 8; MEF v57 IMPLEMENTED 2026-10-08: v57 actor gate: native player position getter uses process+2C0 movement callback; audited zero/word-return implementations allow stable direct-position branch. Swimming/movement800 or custom callbacks disable membership indexing before native distance call. No virtual call omitted.
 0x5F10E3: push    esi
 0x5F10E4: mov     esi, ecx
 0x5F10E6: cmp     dword ptr [esi+58h], 0
@@ -29,23 +29,23 @@
 0x5F1135: mov     ecx, [esi+34h]
 0x5F1138: mov     [eax+8], ecx
 0x5F113B: mov     ecx, esi; this
-0x5F113D: call    TESObjectREFR_GetParentCell
+0x5F113D: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5F1142: test    eax, eax
 0x5F1144: jz      loc_5F11D6
 0x5F114A: mov     ecx, esi; this
-0x5F114C: call    TESObjectREFR_GetParentCell
+0x5F114C: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5F1151: movzx   edx, byte ptr [eax+24h]
 0x5F1155: shr     edx, 1
 0x5F1157: test    dl, 1
 0x5F115A: jz      short loc_5F11D6
 0x5F115C: mov     ecx, esi; this
-0x5F115E: call    TESObjectREFR_GetParentCell
+0x5F115E: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5F1163: mov     ecx, eax
 0x5F1165: call    TESObjectCELL_GetWaterHeight
 0x5F116A: fsub    qword ptr ds:0A3F3F0h
 0x5F1170: mov     ecx, esi
 0x5F1172: fstp    [esp+0Ch+var_4]
-0x5F1176: call    sub_5E0660
+0x5F1176: call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.
 0x5F117B: fmul    qword ptr ds:0A31C70h
 0x5F1181: mov     edx, ds:0B3B7C4h
 0x5F1187: lea     ecx, [edx+edx*2]

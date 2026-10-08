@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7E4800",
+      "0x7E48DA"
+    ]
+  ],
+  "chunks_sha256": "80ad35520869f6e395bed49e8536236056d697df136f1a47554cc869a5efc021",
+  "comment_regular": "Verified (Oblivion): resets every 0x20-byte particle slot to the inactive sentinel, seeds per-slot lifetime factors from fParticleLifetime_84/fParticleLifeVar_88, sets activeParticleCount_7C to zero, and initializes simulationTime_F8 to newTime. Fallout's RewindTimer instead shifts birth times of already active particles; the lifecycle behavior diverges.",
+  "comment_repeatable": "Verified (Oblivion): resets every 0x20-byte particle slot to the inactive sentinel, seeds per-slot lifetime factors from fParticleLifetime_84/fParticleLifeVar_88, sets activeParticleCount_7C to zero, and initializes simulationTime_F8 to newTime. Fallout's RewindTimer instead shifts birth times of already active particles; the lifecycle behavior diverges.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7E4800",
+  "display_name": "ParticleShaderProperty_ResetParticleStateAtTime",
   "end_ea": "0x7E48DA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7E4800",
+  "name": "ParticleShaderProperty_ResetParticleStateAtTime",
   "segment": ".text",
   "sha256": "80ad35520869f6e395bed49e8536236056d697df136f1a47554cc869a5efc021",
   "size": 218,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7E4800",
-  "type": "int __thiscall(float *this, float)",
+  "total_chunk_size": 218,
+  "type": "int __thiscall(ParticleShaderProperty *this, float newTime)",
   "xrefs_from_count": 63,
   "xrefs_to_count": 2
 }

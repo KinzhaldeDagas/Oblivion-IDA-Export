@@ -50,7 +50,7 @@
 0x4A19BC: pop     edi
 0x4A19BD: push    ebp
 0x4A19BE: mov     ecx, esi
-0x4A19C0: call    sub_717690
+0x4A19C0: call    sub_717690; MoonSugarEffect decode: NiGeometry/NiScreenElements render entry. Calls NiGeometry::Render to set renderer states, then active-scene path calls NiDX9Renderer vtable +0x160, which resolves to RenderTriGeometries, not the final DrawPrimitive shortcut.
 0x4A19C5: test    bl, bl
 0x4A19C7: jz      short loc_4A19E1
 0x4A19C9: mov     eax, [ebp+280h]

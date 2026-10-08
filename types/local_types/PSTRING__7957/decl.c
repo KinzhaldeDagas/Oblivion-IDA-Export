@@ -1,1 +1,1 @@
-PSTRING
+typedef _STRING *PSTRING;

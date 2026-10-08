@@ -1,19 +1,32 @@
 {
-  "callees_count": 60,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 12,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_6D62D0",
+  "chunks": [
+    [
+      "0x6D62D0",
+      "0x6D665F"
+    ]
+  ],
+  "chunks_sha256": "fc79cdef737569959333a566efdb7c43f4fa346925b0b4ef3c6b92002301c4d2",
+  "comment_regular": "Oblivion NiTransformInterpolator constant-track collapse. Moves constant translation/rotation/scale into cached transform +0x0C, clears their NiTransformData tracks, and releases data +0x2C if all counts become zero. Multi-key equality collapse is restricted to numeric types 1 and 5; one-key tracks always collapse, while rotation type 4 is not treated as the ordinary one-key quaternion case.",
+  "comment_repeatable": "Oblivion NiTransformInterpolator constant-track collapse. Moves constant translation/rotation/scale into cached transform +0x0C, clears their NiTransformData tracks, and releases data +0x2C if all counts become zero. Multi-key equality collapse is restricted to numeric types 1 and 5; one-key tracks always collapse, while rotation type 4 is not treated as the ordinary one-key quaternion case.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 9,
+  "display_name": "NiTransformInterpolator_CollapseConstantTracks",
   "end_ea": "0x6D665F",
+  "evidence_confidence": "Unknown",
   "flags": 23552,
   "has_pseudocode": true,
-  "name": "sub_6D62D0",
+  "name": "NiTransformInterpolator_CollapseConstantTracks",
   "segment": ".text",
   "sha256": "fc79cdef737569959333a566efdb7c43f4fa346925b0b4ef3c6b92002301c4d2",
   "size": 911,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6D62D0",
+  "total_chunk_size": 911,
   "type": "void __thiscall(float *this)",
-  "xrefs_from_count": 361,
+  "xrefs_from_count": 370,
   "xrefs_to_count": 1
 }

@@ -18,33 +18,32 @@
 0x520FCD: jb      short loc_520FC0
 0x520FCF: xor     eax, eax
 0x520FD1: test    eax, eax
-0x520FD3: mov     [esp+18h+var_C], eax
+0x520FD3: mov     [esp+18h+position], eax
 0x520FD7: jz      loc_521092
 0x520FDD: push    ebx
 0x520FDE: push    ebp
 0x520FDF: nop
-0x520FE0: lea     eax, [esp+20h+var_10]
-0x520FE4: push    eax
-0x520FE5: lea     ecx, [esp+24h+var_8]
-0x520FE9: push    ecx
-0x520FEA: lea     edx, [esp+28h+var_C]
-0x520FEE: push    edx
-0x520FEF: mov     ecx, edi
-0x520FF1: mov     [esp+2Ch+var_10], 0
-0x520FF9: call    sub_452600
-0x520FFE: mov     ecx, [esp+20h+var_10]
+0x520FE0: lea     eax, [esp+20h+valueOut]
+0x520FE4: push    eax; valueOut
+0x520FE5: lea     ecx, [esp+24h+keyOut]
+0x520FE9: push    ecx; keyOut
+0x520FEA: lea     edx, [esp+28h+position]
+0x520FEE: push    edx; position
+0x520FEF: mov     ecx, edi; self
+0x520FF1: mov     [esp+2Ch+valueOut], 0
+0x520FF9: call    NiTMap_U32Pointer_GetNextEntry
+0x520FFE: mov     ecx, [esp+20h+valueOut]
 0x521002: test    ecx, ecx
 0x521004: jz      loc_521085
 0x52100A: mov     eax, [ecx+0Ch]
 0x52100D: xor     ebp, ebp
 0x52100F: test    eax, eax
-0x521011: mov     [esp+20h+var_8], eax
+0x521011: mov     [esp+20h+keyOut], eax
 0x521015: jbe     short loc_521085
 0x521017: jmp     short loc_521024
 0x521019: mov     eax, [esi+eax*4]
 0x52101C: jmp     short loc_520FD1
-0x52101E: align 10h
-0x521020: mov     ecx, [esp+20h+var_10]
+0x521020: mov     ecx, [esp+20h+valueOut]
 0x521024: push    0; int
 0x521026: push    offset ??_R0?AVTESIdleForm@@@8; struct TypeDescriptor *
 0x52102B: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
@@ -78,10 +77,10 @@
 0x521074: cmp     esi, ebx
 0x521076: jb      short loc_521060
 0x521078: add     ebp, 1
-0x52107B: cmp     ebp, [esp+20h+var_8]
+0x52107B: cmp     ebp, [esp+20h+keyOut]
 0x52107F: jb      short loc_521020
 0x521081: mov     edi, [esp+20h+var_4]
-0x521085: cmp     [esp+20h+var_C], 0
+0x521085: cmp     [esp+20h+position], 0
 0x52108A: jnz     loc_520FE0
 0x521090: pop     ebp
 0x521091: pop     ebx

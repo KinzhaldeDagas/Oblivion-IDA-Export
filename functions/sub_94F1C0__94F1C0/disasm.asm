@@ -26,13 +26,13 @@
 0x94F209: lea     eax, [esp+104h+var_80]
 0x94F210: lea     ecx, [esi+50h]
 0x94F213: push    eax
-0x94F214: call    sub_88FCC0
+0x94F214: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x94F219: lea     edx, [ebx+20h]
 0x94F21C: push    edx
 0x94F21D: lea     eax, [esp+104h+var_40]
 0x94F224: lea     ecx, [esi+40h]
 0x94F227: push    eax
-0x94F228: call    sub_88FCC0
+0x94F228: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x94F22D: mov     ecx, [ebp+arg_8]
 0x94F230: push    ecx
 0x94F231: mov     ecx, esi
@@ -46,13 +46,13 @@
 0x94F247: lea     eax, [esi+90h]
 0x94F24D: push    eax
 0x94F24E: lea     ecx, [esp+108h+var_A0]
-0x94F252: call    sub_88FE00
+0x94F252: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x94F257: add     ebx, 80h ; '€'
 0x94F25D: push    ebx
 0x94F25E: lea     eax, [esi+90h]
 0x94F264: push    eax
 0x94F265: lea     ecx, [esp+108h+var_90]
-0x94F269: call    sub_88FE00
+0x94F269: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x94F26E: mov     eax, [ebp+arg_8]
 0x94F271: mov     edx, [edi]
 0x94F273: push    eax
@@ -180,7 +180,7 @@
 0x94F404: lea     ecx, [esi+60h]
 0x94F407: push    ecx
 0x94F408: lea     ecx, [esp+108h+var_D0]
-0x94F40C: call    sub_88FE00
+0x94F40C: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x94F411: fld     dword ptr [esi]
 0x94F413: movaps  xmm2, [esp+100h+var_D0]
 0x94F418: fmul    dword ptr ds:0A3D65Ch

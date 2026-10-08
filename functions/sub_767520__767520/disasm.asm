@@ -1,4 +1,4 @@
-0x767520: mov     eax, [esp+arg_8]
+0x767520: mov     eax, [esp+arg_8]; Oblivion hardware-skinned geometry pass loop. Applies the same caster pass state, constants, buffers, and programs for every skin partition, then issues DrawIndexedPrimitive before pass finish/advance.
 0x767524: sub     esp, 1Ch
 0x767527: test    eax, eax
 0x767529: push    esi
@@ -20,7 +20,7 @@
 0x767558: jz      short loc_767574
 0x76755A: mov     eax, [eax+0BCh]
 0x767560: push    eax
-0x767561: push    offset NiD3DShaderInterfaceString
+0x767561: push    0B42858h
 0x767566: call    NiRTTI_Cast
 0x76756B: mov     ebx, eax
 0x76756D: add     esp, 8
@@ -31,7 +31,7 @@
 0x76757E: mov     ecx, [esi+10h]
 0x767581: mov     edi, [edi+28h]
 0x767584: mov     edx, [ebx]
-0x767586: mov     edx, [edx+28h]
+0x767586: mov     edx, [edx+28h]; Skinned path NiD3DShader vtable +0x28: render preflight.
 0x767589: push    ebp
 0x76758A: mov     ebp, [esp+2Ch+arg_10]
 0x76758E: push    ebp
@@ -60,24 +60,24 @@
 0x7675C0: mov     ecx, [esp+3Ch+arg_0]
 0x7675C4: push    edi
 0x7675C5: push    edx
-0x7675C6: mov     edx, [eax+2Ch]
+0x7675C6: mov     edx, [eax+2Ch]; Skinned geometry invokes the selected concrete NiD3DShader vtable +0x2C. Conditional Hair high selectors take Hair's reset-plus-default no-pass path; Lighting30 high selectors also queue no pass.
 0x7675C9: push    ecx
 0x7675CA: mov     ecx, ebx
 0x7675CC: call    edx
 0x7675CE: mov     eax, [esp+20h]
 0x7675D2: mov     ecx, [eax+8]
 0x7675D5: mov     edx, [ebx]
-0x7675D7: mov     eax, [edx+48h]
+0x7675D7: mov     eax, [edx+48h]; Skinned path vtable +0x48: begin pass loop.
 0x7675DA: mov     [esp+20h], ecx
 0x7675DE: mov     ecx, ebx
-0x7675E0: call    eax
+0x7675E0: call    eax; Skinned BeginPassLoop guard: PassCount zero skips every skin-partition pass and DrawIndexedPrimitive. This proves no draw for both Lighting30 high records and conditionally reachable Hair high records.
 0x7675E2: test    eax, eax
 0x7675E4: jz      loc_7677CE
 0x7675EA: lea     ebx, [ebx+0]
 0x7675F0: mov     eax, [esp+20h+arg_18]
 0x7675F4: mov     ecx, [esi+10h]
 0x7675F7: mov     edx, [ebx]
-0x7675F9: mov     edx, [edx+30h]
+0x7675F9: mov     edx, [edx+30h]; Skinned path vtable +0x30: apply current pass state/stages.
 0x7675FC: push    ebp
 0x7675FD: push    eax
 0x7675FE: mov     eax, [esi+0Ch]
@@ -102,7 +102,7 @@
 0x76763B: mov     [esp+20h+var_4], 0
 0x767643: jbe     loc_7677B3
 0x767649: mov     ebp, [esp+20h+arg_0]
-0x76764D: lea     ecx, [ecx+0]; void *
+0x76764D: lea     ecx, [ecx+0]; this
 0x767650: cmp     ebx, [esi+0A94h]
 0x767656: jnz     short loc_767677
 0x767658: movzx   eax, word ptr [ebp+20h]
@@ -110,14 +110,14 @@
 0x767662: jbe     short loc_767677
 0x767664: push    eax
 0x767665: push    offset aDrawskinnedpri; "DrawSkinnedPrimitive> Cannot render par"...
-0x76766A: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x76766A: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x76766F: add     esp, 8
 0x767672: jmp     loc_767797
 0x767677: mov     eax, [esp+20h+arg_1C]
 0x76767B: mov     ecx, [esp+20h+arg_18]
 0x76767F: mov     edi, [ebp+28h]
 0x767682: mov     edx, [ebx]
-0x767684: mov     edx, [edx+34h]
+0x767684: mov     edx, [edx+34h]; Skinned path vtable +0x34: write constants including skin/object shadow transforms.
 0x767687: push    eax
 0x767688: mov     eax, [esi+10h]
 0x76768B: push    ecx
@@ -135,7 +135,7 @@
 0x7676A1: mov     ecx, [esi+0Ch]
 0x7676A4: mov     eax, [ebx]
 0x7676A6: mov     edx, [esp+2Ch+arg_0]
-0x7676AA: mov     eax, [eax+3Ch]
+0x7676AA: mov     eax, [eax+3Ch]; Skinned path vtable +0x3C: bind geometry buffers.
 0x7676AD: push    ecx
 0x7676AE: push    edi
 0x7676AF: push    ebp
@@ -148,7 +148,7 @@
 0x7676BF: mov     eax, [esp+2Ch+arg_10]
 0x7676C3: mov     ecx, [esp+2Ch+arg_C]
 0x7676C7: mov     edx, [ebx]
-0x7676C9: mov     edx, [edx+38h]
+0x7676C9: mov     edx, [edx+38h]; Skinned path vtable +0x38: bind programs and apply constant maps.
 0x7676CC: push    eax
 0x7676CD: mov     eax, [esi+10h]
 0x7676D0: push    ecx
@@ -162,13 +162,13 @@
 0x7676E0: push    eax
 0x7676E1: push    ecx
 0x7676E2: mov     ecx, ebx
-0x7676E4: call    edx
+0x7676E4: call    edx; MoonSugarEffect build 40 decode: native skinned SetupShaderPrograms call. Replacement must occur after this call and after the 0x7676F7 constant-manager flush so Oblivion bone constants/pass state remain authoritative.
 0x7676E6: mov     eax, [esi+8ACh]
 0x7676EC: mov     ecx, [eax+0FF0h]
 0x7676F2: mov     edx, [ecx]
 0x7676F4: mov     eax, [edx+4]
-0x7676F7: call    eax
-0x7676F9: xor     eax, eax
+0x7676F7: call    eax; Oblivion DX9 constant-manager +4 is a no-op; uploads already occurred through constant maps.
+0x7676F9: xor     eax, eax; MoonSugarEffect build 40 fidelity hook: hardware-skinned post-SetupShaderPrograms/post-constant-flush draw window. OBSE hook re-emits xor eax,eax; cmp [edi+44h],eax, then returns to 0x7676FE. Runtime args: esi=NiDX9Renderer, ebx=active NiD3DShaderInterface, [esp+0x30]=original NiGeometry*, ebp=current skin partition, edi=partition buffer data.
 0x7676FB: cmp     [edi+44h], eax
 0x7676FE: mov     [esp+20h+var_C], eax
 0x767702: mov     [esp+20h+var_8], eax
@@ -186,7 +186,7 @@
 0x767727: mov     ecx, edx
 0x767729: mov     eax, [esi+280h]
 0x76772F: mov     edx, [eax]
-0x767731: mov     edx, [edx+148h]
+0x767731: mov     edx, [edx+148h]; Actual D3D DrawIndexedPrimitive for a hardware-skin partition.
 0x767737: push    ecx
 0x767738: mov     ecx, [esp+24h+var_C]
 0x76773C: push    ecx
@@ -198,7 +198,7 @@
 0x767748: mov     ecx, [esp+34h+arg_4]
 0x76774C: push    ecx
 0x76774D: push    eax
-0x76774E: call    edx
+0x76774E: call    edx; Final hardware-skinned caster partition draw after the same pass-state, alpha-test, constant, stage, and program setup.
 0x767750: mov     eax, [esp+20h+var_C]
 0x767754: mov     ecx, [esp+20h+var_10]
 0x767758: lea     edx, [eax+ecx+2]
@@ -211,7 +211,7 @@
 0x767770: mov     ecx, [esp+20h+arg_1C]
 0x767774: mov     edx, [esp+20h+arg_18]
 0x767778: mov     eax, [ebx]
-0x76777A: mov     eax, [eax+40h]
+0x76777A: mov     eax, [eax+40h]; Skinned path vtable +0x40: finish current pass/partition.
 0x76777D: push    ecx
 0x76777E: mov     ecx, [esi+10h]
 0x767781: push    edx
@@ -236,7 +236,7 @@
 0x7677B3: mov     eax, [esp+20h+arg_10]
 0x7677B7: and     word ptr [eax+2Eh], 0F000h
 0x7677BD: mov     edx, [ebx]
-0x7677BF: mov     eax, [edx+4Ch]
+0x7677BF: mov     eax, [edx+4Ch]; Skinned path vtable +0x4C: advance pass loop.
 0x7677C2: mov     ecx, ebx
 0x7677C4: call    eax
 0x7677C6: test    eax, eax
@@ -244,7 +244,7 @@
 0x7677CE: mov     eax, [esp+20h+arg_18]
 0x7677D2: mov     ecx, [esi+10h]
 0x7677D5: mov     edx, [ebx]
-0x7677D7: mov     edx, [edx+44h]
+0x7677D7: mov     edx, [edx+44h]; Skinned path vtable +0x44: end shader submission.
 0x7677DA: push    ebp
 0x7677DB: push    eax
 0x7677DC: mov     eax, [esi+0Ch]
@@ -256,7 +256,7 @@
 0x7677EA: push    ecx
 0x7677EB: push    eax
 0x7677EC: mov     ecx, ebx
-0x7677EE: call    edx
+0x7677EE: call    edx; Skinned path always calls shader vtable +0x44 finish after setup, including the zero-pass invalid-selector path.
 0x7677F0: mov     esi, [esi+8ACh]
 0x7677F6: mov     eax, [esi]
 0x7677F8: mov     edx, [eax+0FCh]

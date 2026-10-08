@@ -26,3 +26,12 @@
 0x4440B6: pop     esi
 0x4440B7: add     esp, 10h
 0x4440BA: retn    8
+0x9AB570: mov     ecx, [ebp-10h]
+0x9AB573: jmp     loc_403BC0
+0x9AB578: mov     edx, [esp+arg_4]
+0x9AB57C: lea     eax, [edx-8]
+0x9AB57F: mov     ecx, [edx-0Ch]
+0x9AB582: xor     ecx, eax
+0x9AB584: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AB589: mov     eax, offset stru_AD8444
+0x9AB58E: jmp     ___CxxFrameHandler3

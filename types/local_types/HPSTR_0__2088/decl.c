@@ -1,1 +1,1 @@
-HPSTR_0
+typedef LPSTR HPSTR_0;

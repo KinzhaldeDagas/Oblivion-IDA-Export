@@ -18,7 +18,7 @@
 0x6F9ADF: mov     eax, [esi+0Ch]
 0x6F9AE2: push    eax
 0x6F9AE3: mov     dword ptr [esi+8], offset ??_7?$NiTArray@PAVNiAVObject@@@@6B@; const NiTArray<NiAVObject *>::`vftable'
-0x6F9AEA: call    FormHeapFree
+0x6F9AEA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F9AEF: add     esp, 4
 0x6F9AF2: mov     ecx, esi
 0x6F9AF4: pop     esi

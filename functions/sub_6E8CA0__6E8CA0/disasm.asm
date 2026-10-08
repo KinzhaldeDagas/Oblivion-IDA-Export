@@ -31,7 +31,7 @@
 0x6E8CE8: xor     edi, edi
 0x6E8CEA: mov     eax, [esi]
 0x6E8CEC: push    eax
-0x6E8CED: call    FormHeapFree
+0x6E8CED: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6E8CF2: add     esp, 4
 0x6E8CF5: mov     [esi], edi
 0x6E8CF7: mov     [esi+4], ebp

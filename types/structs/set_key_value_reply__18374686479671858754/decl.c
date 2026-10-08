@@ -1,1 +1,4 @@
-set_key_value_reply
+struct set_key_value_reply
+{
+reply_header __header;
+};

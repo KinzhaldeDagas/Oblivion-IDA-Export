@@ -12,8 +12,7 @@
 0x53AC8F: jb      loc_53AD36
 0x53AC95: xor     eax, eax
 0x53AC97: jmp     short loc_53ACA0
-0x53AC99: align 10h
-0x53ACA0: mov     cl, byte ptr ds:word_B3F280[eax]
+0x53ACA0: mov     cl, byte ptr ds:unk_B3F280[eax]
 0x53ACA6: mov     [esp+eax+108h+var_108], cl
 0x53ACA9: add     eax, 1
 0x53ACAC: test    cl, cl
@@ -30,7 +29,6 @@
 0x53ACC6: sub     eax, edx
 0x53ACC8: add     edi, 0FFFFFFFFh
 0x53ACCB: jmp     short loc_53ACD0
-0x53ACCD: align 10h
 0x53ACD0: mov     cl, [edi+1]
 0x53ACD3: add     edi, 1
 0x53ACD6: test    cl, cl

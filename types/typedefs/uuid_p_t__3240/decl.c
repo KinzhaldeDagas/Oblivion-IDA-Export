@@ -1,1 +1,1 @@
-uuid_p_t
+typedef GUID *uuid_p_t;

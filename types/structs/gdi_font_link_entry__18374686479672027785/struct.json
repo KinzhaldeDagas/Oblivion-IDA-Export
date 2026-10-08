@@ -1,28 +1,54 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "gdi_font_link_entry",
+  "definition": "struct gdi_font_link_entry\n{\nlist entry;\nFONTSIGNATURE fs;\nWCHAR_0 family_name[32];\n}\n",
   "id": 18374686479672027785,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "entry",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "list"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fs",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 24
+      "size": 24,
+      "type": "FONTSIGNATURE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "family_name",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 64
+      "size": 64,
+      "type": "WCHAR_0[32]"
     }
   ],
   "name": "gdi_font_link_entry",
+  "ordinal": 1525,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 96
 }

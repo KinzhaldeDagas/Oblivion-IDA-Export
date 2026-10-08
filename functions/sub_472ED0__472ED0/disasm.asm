@@ -1,4 +1,4 @@
-0x472ED0: push    0FFFFFFFFh
+0x472ED0: push    0FFFFFFFFh; Destroys one ActorAnimData-owned AnimIdle slot. Resolves the idle KF encoded key from KFModel +0x08, removes the matching sequence from the controller manager/map entry where appropriate, runs AnimIdle_CleanupLoadedResources, frees the 0x2C-byte holder, nulls the caller slot, and balances native references.
 0x472ED2: push    offset SEH_6C4C20
 0x472ED7: mov     eax, large fs:0
 0x472EDD: push    eax
@@ -27,15 +27,15 @@
 0x472F1E: mov     eax, [eax+8]
 0x472F21: cmp     eax, ebp
 0x472F23: jz      short loc_472F62
-0x472F25: mov     ecx, eax
-0x472F27: call    TESActorBaseData_GetMagicka
+0x472F25: mov     ecx, eax; object
+0x472F27: call    Shared_GetWordAtOffset08; TESAnimGroup encoded key accessor: returns 16-bit group key at TESAnimGroup +0x08.
 0x472F2C: movzx   eax, ax
 0x472F2F: lea     ecx, [esp+2Ch+var_14]
 0x472F33: push    ecx
 0x472F34: mov     ecx, [ebx+9Ch]
 0x472F3A: push    eax
 0x472F3B: mov     [esp+34h+var_18], eax
-0x472F3F: call    sub_470960
+0x472F3F: call    ActorAnimData_FindAnimMapEntry; CustomAnimSupport decode: anim-map lookup helper used by playback, validators, and save/load restore to test an encoded group key.
 0x472F44: mov     esi, [esp+2Ch+var_14]
 0x472F48: test    esi, esi
 0x472F4A: jz      short loc_472F62
@@ -71,7 +71,7 @@
 0x472F95: lea     ecx, [esp+30h+var_14]
 0x472F99: push    ecx
 0x472F9A: mov     ecx, edi
-0x472F9C: call    sub_6C4A10
+0x472F9C: call    KeyframeManager_RemoveSequence; CustomAnimSupport decode: removes a sequence from the keyframe manager during live sequence pruning/cleanup.
 0x472FA1: mov     eax, [esp+2Ch+var_14]
 0x472FA5: test    eax, eax
 0x472FA7: jz      short loc_473004
@@ -95,7 +95,7 @@
 0x472FD3: push    ebp
 0x472FD4: lea     edx, [esp+30h+var_14]
 0x472FD8: push    edx
-0x472FD9: call    sub_6C4A10
+0x472FD9: call    KeyframeManager_RemoveSequence; CustomAnimSupport decode: removes a sequence from the keyframe manager during live sequence pruning/cleanup.
 0x472FDE: mov     eax, [esp+2Ch+var_14]
 0x472FE2: test    eax, eax
 0x472FE4: jz      short loc_473004
@@ -117,9 +117,9 @@
 0x47300A: test    edi, edi
 0x47300C: jz      short loc_47301E
 0x47300E: mov     ecx, edi
-0x473010: call    sub_4729F0
+0x473010: call    AnimIdle_CleanupLoadedResources; AnimIdle owned-resource cleanup. Detaches/releases the two actor-bound resources at +0x1C/+0x20, releases the loaded model/path and sequence references, cleans removed controllers, and cancels matching actor high-process action 0x0B before releasing the held sequence.
 0x473015: push    edi
-0x473016: call    FormHeapFree
+0x473016: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x47301B: add     esp, 4
 0x47301E: test    esi, esi
 0x473020: mov     ecx, [esp+2Ch+arg_0]
@@ -128,7 +128,7 @@
 0x47302C: mov     edx, [esp+2Ch+var_18]
 0x473030: mov     ecx, [ebx+9Ch]
 0x473036: push    edx
-0x473037: call    sub_4708B0
+0x473037: call    ActorAnimData_RemoveAnimMapEntry; CustomAnimSupport decode: removes an encoded-key entry from ActorAnimData.animsMap; used by scoped live-sequence cleanup.
 0x47303C: mov     eax, [esi]
 0x47303E: mov     edx, [eax+4]
 0x473041: push    0
@@ -147,7 +147,7 @@
 0x47305B: mov     eax, [esp+2Ch+var_18]
 0x47305F: mov     ecx, [ebx+9Ch]
 0x473065: push    eax
-0x473066: call    sub_4708B0
+0x473066: call    ActorAnimData_RemoveAnimMapEntry; CustomAnimSupport decode: removes an encoded-key entry from ActorAnimData.animsMap; used by scoped live-sequence cleanup.
 0x47306B: test    ebp, ebp
 0x47306D: mov     [esp+2Ch+var_4], 0FFFFFFFFh
 0x473075: jz      short loc_473090
@@ -170,3 +170,12 @@
 0x47309F: pop     ebx
 0x4730A0: add     esp, 18h
 0x4730A3: retn    4
+0x9D6B00: lea     ecx, [ebp-10h]; slot
+0x9D6B03: jmp     NiPointerSlot_Release
+0x9D6B08: mov     edx, [esp+arg_4]
+0x9D6B0C: lea     eax, [edx-1Ch]
+0x9D6B0F: mov     ecx, [edx-20h]
+0x9D6B12: xor     ecx, eax
+0x9D6B14: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D6B19: mov     eax, offset stru_AFE864
+0x9D6B1E: jmp     ___CxxFrameHandler3

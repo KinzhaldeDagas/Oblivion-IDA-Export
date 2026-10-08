@@ -1,18 +1,31 @@
 {
-  "callees_count": 3,
-  "callers_count": 21,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 22,
+  "chunks": [
+    [
+      "0x57E270",
+      "0x57E2C6"
+    ]
+  ],
+  "chunks_sha256": "f42fc749a98ea44c88fa40b4707dfe1b6dc05719eab2f123f890eb3de7133f0d",
+  "comment_regular": "Reads collision filter info from proxy metadata: proxy+0x364 -> +8 -> +0x14 -> +0x1C. Used to preserve actor identity in raycast filter high 16 bits.",
+  "comment_repeatable": "Reads collision filter info from proxy metadata: proxy+0x364 -> +8 -> +0x14 -> +0x1C. Used to preserve actor identity in raycast filter high 16 bits.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_57E270",
+  "display_name": "bhkCharacterProxy_GetCollisionFilterInfo",
   "end_ea": "0x57E2C6",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_57E270",
+  "name": "bhkCharacterProxy_GetCollisionFilterInfo",
   "segment": ".text",
   "sha256": "f42fc749a98ea44c88fa40b4707dfe1b6dc05719eab2f123f890eb3de7133f0d",
   "size": 86,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x57E270",
+  "total_chunk_size": 86,
   "type": "_DWORD *__thiscall(_DWORD *this, _DWORD *)",
   "xrefs_from_count": 32,
   "xrefs_to_count": 22

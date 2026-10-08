@@ -1,195 +1,204 @@
-void __usercall sub_6116D0(int a1@<ecx>, int a2@<ebp>, int a3@<edi>, int a4@<esi>)
+// Character current-package cleanup. DialoguePackage receives special two-participant cleanup: stop active playback, detach both actors, restore saved ExtraPackage state where present, reset procedure state, and destroy the one shared dynamic package/owned Conversation.
+void __thiscall Character::CleanupCurrentPackage(Character *this)
 {
-  int v4; // ebx
-  _DWORD *v5; // ecx
-  _BYTE *v6; // eax
-  NiDX9TextureData *v7; // eax
-  NiDX9TextureData *v8; // edi
-  Actor *Levels; // esi
-  Actor *v10; // edi
+  int v1; // edi
+  int v2; // esi
+  Character *v3; // ebx
+  _DWORD *v4; // ecx
+  _BYTE *v5; // eax
+  DialoguePackageRuntimeView *v6; // eax
+  DialoguePackageRuntimeView *v7; // edi
+  Actor *Speaker; // esi
+  Actor *Target; // edi
+  ActorAnimData *v10; // eax
   ActorAnimData *v11; // eax
-  ActorAnimData *v12; // eax
   LowProcess *process; // ecx
-  LowProcess *v14; // ecx
+  LowProcess *v13; // ecx
+  LowProcess *v14; // ebx
   LowProcess *v15; // ebx
-  LowProcess *v16; // ebx
-  void (__thiscall **v17)(_DWORD *, BSExtraData *); // ebp
-  BSExtraData *v18; // eax
+  void (__thiscall **v16)(_DWORD *, BSExtraData *); // ebp
+  BSExtraData *PackageExtraTarget; // eax
   ActorVtbl *vtbl; // ebp
-  int v20; // eax
+  int v19; // eax
   void (__thiscall **p_Unk_09)(TESForm *, int); // ebp
-  int v22; // eax
-  LowProcess *v23; // ebp
-  LowProcess *v24; // ebx
-  _DWORD *v25; // ebx
-  void (__thiscall **v26)(_DWORD *, BSExtraData *); // ebp
-  BSExtraData *v27; // eax
-  ActorVtbl *v28; // ebp
-  int v29; // eax
-  void (__thiscall **v30)(_DWORD *, int); // ebp
-  int v31; // eax
-  LowProcess *v32; // eax
-  LowProcess *v33; // ecx
-  int v34; // esi
-  _DWORD *v38; // [esp+44h] [ebp-8h]
-  TESForm *v39; // [esp+48h] [ebp-4h]
+  int v21; // eax
+  LowProcess *v22; // ebp
+  LowProcess *v23; // ebx
+  _DWORD *v24; // ebx
+  void (__thiscall **v25)(_DWORD *, BSExtraData *); // ebp
+  BSExtraData *v26; // eax
+  ActorVtbl *v27; // ebp
+  int v28; // eax
+  void (__thiscall **v29)(_DWORD *, int); // ebp
+  int v30; // eax
+  LowProcess *v31; // eax
+  LowProcess *v32; // ecx
+  int v33; // esi
+  int v34; // [esp+34h] [ebp-18h]
+  int v35; // [esp+38h] [ebp-14h]
+  _DWORD *v37; // [esp+44h] [ebp-8h]
+  TESForm *v38; // [esp+48h] [ebp-4h]
   Actor *retaddr; // [esp+4Ch] [ebp+0h]
-  _DWORD *v41; // [esp+50h] [ebp+4h]
+  _DWORD *v40; // [esp+50h] [ebp+4h]
 
-  v4 = a1;
-  if ( *(_DWORD *)(a1 + 0x58) )
+  v3 = this; /*0x6116d4*/
+  if ( this->member.super.super.process ) /*0x6116d6*/
   {
-    if ( !sub_45A500(SaveLoad_CurrentSavegame) )
+    if ( !sub_45A500(g_TESSaveLoadGame) ) /*0x6116ea*/
     {
-      v5 = *(_DWORD **)(v4 + 0x58);
-      v6 = (_BYTE *)v5[2];
-      if ( v6 && v6[0x20] == 0x12 )
+      v4 = &v3->member.super.super.process->__vftable; /*0x6116f7*/
+      v5 = (_BYTE *)v4[2]; /*0x6116fa*/
+      v35 = v2; /*0x6116ff*/
+      if ( v5 && v5[0x20] == 0x12 ) /*0x61170a*/
       {
-        v7 = (NiDX9TextureData *)OblivionDynamicCast(
-                                   v6,
-                                   0,
-                                   (struct _s_RTTICompleteObjectLocator *)&TESPackage `RTTI Type Descriptor',
-                                   &DialoguePackage `RTTI Type Descriptor',
-                                   0);
-        v8 = v7;
-        v39 = (TESForm *)v7;
-        if ( v7 )
+        v34 = v1; /*0x611710*/
+        v6 = (DialoguePackageRuntimeView *)OblivionDynamicCast( /*0x611720*/
+                                             v5,
+                                             0,
+                                             (struct _s_RTTICompleteObjectLocator *)&TESPackage `RTTI Type Descriptor',
+                                             &DialoguePackage `RTTI Type Descriptor',
+                                             0);
+        v7 = v6; /*0x611725*/
+        v38 = (TESForm *)v6; /*0x61172c*/
+        if ( v6 ) /*0x611730*/
         {
-          if ( v7->PixelFormat.Components[2].eRepresentation )
-            sub_625D70(v7);
-          Levels = (Actor *)NiDX9TextureData::GetLevels(v8);
-          v10 = (Actor *)sub_779480(v8);
-          sub_642B40(&unk_B3BD7C, (int)Levels);
-          sub_642B40(&unk_B3BD7C, (int)v10);
-          if ( Levels )
-            Levels->members.super.process->Unk_129(Levels->members.super.process);
-          if ( v10 )
-            v10->members.super.process->Unk_129(v10->members.super.process);
-          if ( Levels )
+          if ( v6->activeSoundHandle ) /*0x611736*/
+            DialoguePackage::StopActiveSpeakerDialogue(v6); /*0x61173e*/
+          Speaker = DialoguePackage::GetSpeaker(v7); /*0x61174c*/
+          Target = DialoguePackage::GetTarget(v7); /*0x611759*/
+          sub_642B40(&qword_B3BB2C[0x94], (int)Speaker); /*0x61175b*/
+          sub_642B40(&qword_B3BB2C[0x94], (int)Target); /*0x611766*/
+          if ( Speaker ) /*0x61176d*/
+            Speaker->members.super.process->Unk_129(Speaker->members.super.process); /*0x61177a*/
+          if ( Target ) /*0x61177e*/
+            Target->members.super.process->Unk_129(Target->members.super.process); /*0x61178b*/
+          if ( Speaker ) /*0x61178f*/
           {
-            if ( v10 )
+            if ( Target ) /*0x611793*/
             {
-              ((void (__thiscall *)(LowProcess *, Actor *))Levels->members.super.process->Unk_11F)(
-                Levels->members.super.process,
-                v10);
-              ((void (__thiscall *)(LowProcess *, Actor *))v10->members.super.process->Unk_11F)(
-                v10->members.super.process,
-                Levels);
-              *(float *)&Levels->members.unk0E8[6] = 1.0;
-              *(float *)&v10->members.unk0E8[6] = 1.0;
-              ((void (__thiscall *)(LowProcess *, _DWORD))Levels->members.super.process->Unk_95)(
-                Levels->members.super.process,
+              ((void (__thiscall *)(LowProcess *, Actor *))Speaker->members.super.process->Unk_11F)( /*0x6117a1*/
+                Speaker->members.super.process,
+                Target);
+              ((void (__thiscall *)(LowProcess *, Actor *))Target->members.super.process->Unk_11F)( /*0x6117af*/
+                Target->members.super.process,
+                Speaker);
+              *(float *)&Speaker->members.unk0E8[6] = 1.0; /*0x6117b3*/
+              *(float *)&Target->members.unk0E8[6] = 1.0; /*0x6117bb*/
+              ((void (__thiscall *)(LowProcess *, _DWORD))Speaker->members.super.process->Unk_95)( /*0x6117cc*/
+                Speaker->members.super.process,
                 0);
-              ((void (__thiscall *)(LowProcess *, _DWORD))v10->members.super.process->Unk_95)(
-                v10->members.super.process,
+              ((void (__thiscall *)(LowProcess *, _DWORD))Target->members.super.process->Unk_95)( /*0x6117db*/
+                Target->members.super.process,
                 0);
             }
           }
-          v11 = (ActorAnimData *)((int (__thiscall *)(Actor *, int, int))Levels->vtbl->super.super.GetAnimData)(
-                                   Levels,
-                                   a3,
-                                   a4);
-          if ( v11 )
-            sub_475440(v11, 1, 0);
-          v12 = v10->vtbl->super.super.GetAnimData((TESObjectREFR *)v10);
-          if ( v12 )
-            sub_475440(v12, 1, 0);
-          process = Levels->members.super.process;
-          if ( process )
-            ((void (__thiscall *)(LowProcess *, _DWORD))process->Unk_77)(process, 0);
-          v14 = v10->members.super.process;
-          if ( v14 )
-            ((void (__thiscall *)(LowProcess *, _DWORD))v14->Unk_77)(v14, 0);
-          sub_5E0380(v10);
-          sub_5E0380(Levels);
-          ((void (__thiscall *)(Actor *, int, int))Levels->vtbl->super.super.super.ClearModified)(Levels, 0x30000, a2);
-          if ( ExtraDataList::GetExtraPackage(&Levels->members.super.super.baseExtraList) )
+          v10 = (ActorAnimData *)((int (__thiscall *)(Actor *, int, int))Speaker->vtbl->super.super.GetAnimData)( /*0x6117e7*/
+                                   Speaker,
+                                   v34,
+                                   v35);
+          if ( v10 ) /*0x6117eb*/
+            ActorAnimData_CleanupOrPromoteQueuedIdles(v10, 1, 0); /*0x6117f3*/
+          v11 = Target->vtbl->super.super.GetAnimData((TESObjectREFR *)Target); /*0x611802*/
+          if ( v11 ) /*0x611806*/
+            ActorAnimData_CleanupOrPromoteQueuedIdles(v11, 1, 0); /*0x61180e*/
+          process = Speaker->members.super.process; /*0x611813*/
+          if ( process ) /*0x611818*/
+            ((void (__thiscall *)(LowProcess *, _DWORD))process->Unk_77)(process, 0); /*0x611824*/
+          v13 = Target->members.super.process; /*0x611826*/
+          if ( v13 ) /*0x61182b*/
+            ((void (__thiscall *)(LowProcess *, _DWORD))v13->Unk_77)(v13, 0); /*0x611837*/
+          Actor::GetCurrentPackage(Target); /*0x61183c*/
+          Actor::GetCurrentPackage(Speaker); /*0x611843*/
+          Speaker->vtbl->super.super.super.ClearModified((TESForm *)Speaker, 0x30000); /*0x611854*/
+          if ( ExtraDataList::GetExtraPackage(&Speaker->members.super.super.baseExtraList) ) /*0x61185b*/
           {
-            v15 = Levels->members.super.process;
-            v15->editorPackage = (TESPackage *)ExtraDataList::GetExtraPackage(&Levels->members.super.super.baseExtraList);
-            sub_5E8DE0(retaddr, Levels->members.super.process->editorPackage);
-            v16 = Levels->members.super.process;
-            v16->editorPackProcedure = sub_41FB40(&Levels->members.super.super.baseExtraList);
-            v41 = &Levels->members.super.process->__vftable;
-            v17 = (void (__thiscall **)(_DWORD *, BSExtraData *))(*v41 + 0xD0);
-            v18 = sub_41FB60(&retaddr->members.super.super.baseExtraList);
-            (*v17)(v41, v18);
-            vtbl = Levels->vtbl;
-            LOBYTE(v20) = sub_41FB80(&retaddr->members.super.super.baseExtraList);
-            ((void (__thiscall *)(Actor *, int))vtbl->super.super.Unk_5F)(Levels, v20);
-            v39 = (TESForm *)Levels->members.super.process;
-            p_Unk_09 = (void (__thiscall **)(TESForm *, int))&v39->vtbl[4].Unk_09;
-            LOBYTE(v22) = sub_41FBA0(&retaddr->members.super.super.baseExtraList);
-            (*p_Unk_09)(v39, v22);
-            sub_4246D0(&Levels->members.super.super.baseExtraList);
-            if ( !*(_BYTE *)(TESDataHandler + 0xCD4) )
-              Levels->members.super.process->Unk_06(Levels->members.super.process, (UInt32)Levels, 1);
-            v4 = a1;
+            v14 = Speaker->members.super.process; /*0x611868*/
+            v14->editorPackage = (TESPackage *)ExtraDataList::GetExtraPackage(&Speaker->members.super.super.baseExtraList); /*0x611872*/
+            sub_5E8DE0(retaddr, Speaker->members.super.process->editorPackage); /*0x611880*/
+            v15 = Speaker->members.super.process; /*0x611885*/
+            v15->editorPackProcedure = ExtraDataList_GetPackageExtraIndex(&Speaker->members.super.super.baseExtraList); /*0x61188f*/
+            v40 = &Speaker->members.super.process->__vftable; /*0x6118a0*/
+            v16 = (void (__thiscall **)(_DWORD *, BSExtraData *))(*v40 + 0xD0); /*0x6118a4*/
+            PackageExtraTarget = ExtraDataList_GetPackageExtraTarget(&retaddr->members.super.super.baseExtraList); /*0x6118aa*/
+            (*v16)(v40, PackageExtraTarget); /*0x6118b7*/
+            vtbl = Speaker->vtbl; /*0x6118b9*/
+            LOBYTE(v19) = ExtraDataList_GetPackageExtraComplete(&retaddr->members.super.super.baseExtraList); /*0x6118bd*/
+            ((void (__thiscall *)(Actor *, int))vtbl->super.super.SetProcedureCompleted)(Speaker, v19); /*0x6118cb*/
+            v38 = (TESForm *)Speaker->members.super.process; /*0x6118d4*/
+            p_Unk_09 = (void (__thiscall **)(TESForm *, int))&v38->vtbl[4].Unk_09; /*0x6118d8*/
+            LOBYTE(v21) = ExtraDataList_GetPackageExtraActivate(&retaddr->members.super.super.baseExtraList); /*0x6118de*/
+            (*p_Unk_09)(v38, v21); /*0x6118eb*/
+            sub_4246D0(&Speaker->members.super.super.baseExtraList); /*0x6118f0*/
+            if ( !*(_BYTE *)(g_TESDataHandler + 0xCD4) ) /*0x6118fa*/
+              Speaker->members.super.process->Unk_06(Speaker->members.super.process, (UInt32)Speaker, 1); /*0x61190e*/
+            v3 = this; /*0x611910*/
           }
           else
           {
-            Levels->members.super.process->editorPackage = 0;
-            Levels->members.super.process->editorPackProcedure = kProcedure_TRAVEL;
-            Levels->members.super.process->SetUnk02C(Levels->members.super.process, 0);
-            ((void (__thiscall *)(Actor *, _DWORD))Levels->vtbl->super.super.Unk_5F)(Levels, 0);
-            Levels->members.super.process->SetUnk01C(Levels->members.super.process, 0);
-            if ( !*(_BYTE *)(TESDataHandler + 0xCD4) )
-              Levels->members.super.process->Unk_06(Levels->members.super.process, (UInt32)Levels, 1);
+            Speaker->members.super.process->editorPackage = 0; /*0x6119d1*/
+            Speaker->members.super.process->editorPackProcedure = kProcedure_TRAVEL; /*0x6119d7*/
+            Speaker->members.super.process->SetUnk02C(Speaker->members.super.process, 0); /*0x6119e6*/
+            ((void (__thiscall *)(Actor *, _DWORD))Speaker->vtbl->super.super.SetProcedureCompleted)(Speaker, 0); /*0x6119f3*/
+            Speaker->members.super.process->SetUnk01C(Speaker->members.super.process, 0); /*0x611a01*/
+            if ( !*(_BYTE *)(g_TESDataHandler + 0xCD4) ) /*0x611a08*/
+              Speaker->members.super.process->Unk_06(Speaker->members.super.process, (UInt32)Speaker, 1); /*0x611a20*/
           }
-          if ( sub_5E6B40(v10) )
+          if ( Actor_IsInDialogueProcedure(Target) ) /*0x611916*/
           {
-            v10->vtbl->super.super.super.ClearModified((TESForm *)v10, 0x30000);
-            if ( ExtraDataList::GetExtraPackage(&v10->members.super.super.baseExtraList) )
+            Target->vtbl->super.super.super.ClearModified((TESForm *)Target, 0x30000); /*0x61192f*/
+            if ( ExtraDataList::GetExtraPackage(&Target->members.super.super.baseExtraList) ) /*0x611936*/
             {
-              v23 = v10->members.super.process;
-              v23->editorPackage = (TESPackage *)ExtraDataList::GetExtraPackage(&v10->members.super.super.baseExtraList);
-              sub_5E8DE0((Actor *)v4, v10->members.super.process->editorPackage);
-              v24 = v10->members.super.process;
-              v24->editorPackProcedure = sub_41FB40(&v10->members.super.super.baseExtraList);
-              v25 = &v10->members.super.process->__vftable;
-              v26 = (void (__thiscall **)(_DWORD *, BSExtraData *))(*v25 + 0xD0);
-              v27 = sub_41FB60(&v10->members.super.super.baseExtraList);
-              (*v26)(v25, v27);
-              v28 = v10->vtbl;
-              LOBYTE(v29) = sub_41FB80((ExtraDataList *)(a1 + 0x44));
-              ((void (__thiscall *)(Actor *, int))v28->super.super.Unk_5F)(v10, v29);
-              v38 = &v10->members.super.process->__vftable;
-              v30 = (void (__thiscall **)(_DWORD *, int))(*v38 + 0x394);
-              LOBYTE(v31) = sub_41FBA0((ExtraDataList *)(a1 + 0x44));
-              (*v30)(v38, v31);
-              sub_4246D0(&v10->members.super.super.baseExtraList);
+              v22 = Target->members.super.process; /*0x611943*/
+              v22->editorPackage = (TESPackage *)ExtraDataList::GetExtraPackage(&Target->members.super.super.baseExtraList); /*0x61194d*/
+              sub_5E8DE0((Actor *)v3, Target->members.super.process->editorPackage); /*0x611959*/
+              v23 = Target->members.super.process; /*0x61195e*/
+              v23->editorPackProcedure = ExtraDataList_GetPackageExtraIndex(&Target->members.super.super.baseExtraList); /*0x611968*/
+              v24 = &Target->members.super.process->__vftable; /*0x61196b*/
+              v25 = (void (__thiscall **)(_DWORD *, BSExtraData *))(*v24 + 0xD0); /*0x611972*/
+              v26 = ExtraDataList_GetPackageExtraTarget(&Target->members.super.super.baseExtraList); /*0x611978*/
+              (*v25)(v24, v26); /*0x611983*/
+              v27 = Target->vtbl; /*0x611989*/
+              LOBYTE(v28) = ExtraDataList_GetPackageExtraComplete(&this->member.super.super.super.baseExtraList); /*0x611990*/
+              ((void (__thiscall *)(Actor *, int))v27->super.super.SetProcedureCompleted)(Target, v28); /*0x61199e*/
+              v37 = &Target->members.super.process->__vftable; /*0x6119a7*/
+              v29 = (void (__thiscall **)(_DWORD *, int))(*v37 + 0x394); /*0x6119ab*/
+              LOBYTE(v30) = ExtraDataList_GetPackageExtraActivate(&this->member.super.super.super.baseExtraList); /*0x6119b1*/
+              (*v29)(v37, v30); /*0x6119be*/
+              sub_4246D0(&Target->members.super.super.baseExtraList); /*0x6119c2*/
             }
             else
             {
-              v32 = v10->members.super.process;
-              if ( v32 )
+              v31 = Target->members.super.process; /*0x611a27*/
+              if ( v31 ) /*0x611a2e*/
               {
-                v32->editorPackage = 0;
-                v10->members.super.process->editorPackProcedure = kProcedure_TRAVEL;
-                v10->members.super.process->SetUnk02C(v10->members.super.process, 0);
-                ((void (__thiscall *)(Actor *, _DWORD))v10->vtbl->super.super.Unk_5F)(v10, 0);
-                v10->members.super.process->SetUnk01C(v10->members.super.process, 0);
+                v31->editorPackage = 0; /*0x611a30*/
+                Target->members.super.process->editorPackProcedure = kProcedure_TRAVEL; /*0x611a36*/
+                Target->members.super.process->SetUnk02C(Target->members.super.process, 0); /*0x611a45*/
+                ((void (__thiscall *)(Actor *, _DWORD))Target->vtbl->super.super.SetProcedureCompleted)(Target, 0); /*0x611a52*/
+                Target->members.super.process->SetUnk01C(Target->members.super.process, 0); /*0x611a60*/
               }
             }
-            v33 = v10->members.super.process;
-            if ( v33 )
+            v32 = Target->members.super.process; /*0x611a62*/
+            if ( v32 ) /*0x611a67*/
             {
-              if ( !*(_BYTE *)(TESDataHandler + 0xCD4) )
-                v33->Unk_06(v33, (UInt32)v10, 1);
+              if ( !*(_BYTE *)(g_TESDataHandler + 0xCD4) ) /*0x611a6f*/
+                v32->Unk_06(v32, (UInt32)Target, 1); /*0x611a80*/
             }
           }
-          if ( sub_45A500(SaveLoad_CurrentSavegame) )
-            sub_45C7A0((char *)SaveLoad_CurrentSavegame, v39);
+          if ( sub_45A500(g_TESSaveLoadGame) ) /*0x611a88*/
+            TESSaveLoadGame_DeleteForm((char *)g_TESSaveLoadGame, v38); /*0x611a9d*/
           else
-            v39->vtbl->Destroy(v39, 1);
+            v38->vtbl->Destroy(v38, 1); /*0x611ab4*/
         }
       }
       else
       {
-        v34 = (*(int (__thiscall **)(_DWORD *, int))(*v5 + 0x4C8))(v5, 4);
-        (*(void (__thiscall **)(_DWORD))(**(_DWORD **)(v4 + 0x58) + 0x4A8))(*(_DWORD *)(v4 + 0x58));
-        (*(void (__thiscall **)(_DWORD, int))(**(_DWORD **)(v4 + 0x58) + 0x480))(*(_DWORD *)(v4 + 0x58), v34);
-        *(float *)(v4 + 0x100) = 1.0;
+        v33 = (*(int (__thiscall **)(_DWORD *, int))(*v4 + 0x4C8))(v4, 4); /*0x611ace*/
+        v3->member.super.super.process->Unk_129(v3->member.super.super.process); /*0x611ad6*/
+        ((void (__thiscall *)(LowProcess *, int))v3->member.super.super.process->Unk_11F)( /*0x611ae4*/
+          v3->member.super.super.process,
+          v33);
+        *(float *)&v3->member.super.unk0E8[6] = 1.0; /*0x611ae9*/
       }
     }
   }

@@ -1,19 +1,36 @@
 {
-  "callees_count": 38,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 25,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
+  "chunks": [
+    [
+      "0x627490",
+      "0x627657"
+    ],
+    [
+      "0x9C3660",
+      "0x9C3699"
+    ]
+  ],
+  "chunks_sha256": "59dd0628b785db2a5d34e611ce7839119e5ceb22831ae79239fae3140f6aeb10",
+  "comment_regular": "3DTheft: dynamic FleePackage constructor. With (sourceRef,0,0), builds a flee package targeted against sourceRef, marks dynamic, sets procedureArrayIndex=0x13, and initializes extended fields through offset 0x65.",
+  "comment_repeatable": "3DTheft: dynamic FleePackage constructor. With (sourceRef,0,0), builds a flee package targeted against sourceRef, marks dynamic, sets procedureArrayIndex=0x13, and initializes extended fields through offset 0x65.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
   "display_name": "FleePackage::FleePackage(void)",
   "end_ea": "0x627657",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??0FleePackage@@QAE@XZ",
   "segment": ".text",
   "sha256": "606e602f731571f225436d651c31530e884bd59732a159cbd4f42ab0d5b06286",
   "size": 455,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x627490",
+  "total_chunk_size": 512,
   "type": "FleePackage *__thiscall(FleePackage *this, int, int, int)",
-  "xrefs_from_count": 185,
+  "xrefs_from_count": 206,
   "xrefs_to_count": 2
 }

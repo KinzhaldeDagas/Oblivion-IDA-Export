@@ -18,7 +18,7 @@
 0x780106: jb      short loc_7800F2
 0x780108: xor     edi, edi
 0x78010A: lea     ebx, [ebx+0]
-0x780110: mov     ecx, ds:dword_B427CC[edi]
+0x780110: mov     ecx, dword ptr ds:unk_B427CC[edi]
 0x780116: mov     eax, [esi]
 0x780118: mov     edx, [eax+0D8h]
 0x78011E: push    ecx

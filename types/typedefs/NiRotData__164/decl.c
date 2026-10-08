@@ -1,1 +1,1 @@
-NiRotData
+struct NiRotData;

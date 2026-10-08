@@ -1,27 +1,30 @@
-int *__thiscall sub_7ABDE0(_DWORD *this, int *a2)
+// BSTPersistentList tail append. Reuses a local free node or acquires one, stores the caller's payload pointer verbatim at node+0x08, links at tail, and increments count. For accumulator RenderPass buckets this creates a non-owning pointer borrow; it does not copy, retain, or destroy the RenderPass.
+BSTPersistentListPointerNode *__thiscall BSTPersistentList_AppendTailReusingFreeNode(
+        BSTPersistentListPointer *this,
+        void *const *payloadAddress)
 {
-  int *result; // eax
-  _DWORD *v4; // ecx
+  BSTPersistentListPointerNode *result; // eax
+  BSTPersistentListPointerNode *tail; // ecx
 
-  result = (int *)*(this + 3);
-  if ( result )
-    *(this + 3) = *result;
+  result = this->freeHead; /*0x7abde3*/
+  if ( result ) /*0x7abde8*/
+    this->freeHead = result->next; /*0x7abdf6*/
   else
-    result = sub_44D810();
-  result[2] = *a2;
-  *result = 0;
-  result[1] = *(this + 2);
-  v4 = (_DWORD *)*(this + 2);
-  if ( v4 )
+    result = NiTListNodePool_Acquire(); /*0x7abded*/
+  result->payload = *payloadAddress;            // Accumulator tail append stores the existing RenderPass pointer verbatim at node+0x08. No copy, ownership transfer, or reference count occurs. /*0x7abdff*/
+  result->next = 0; /*0x7abe02*/
+  result->previous = this->tail; /*0x7abe0b*/
+  tail = this->tail; /*0x7abe0e*/
+  if ( tail ) /*0x7abe13*/
   {
-    *v4 = result;
-    ++*(this + 4);
+    tail->next = result; /*0x7abe15*/
+    ++this->count; /*0x7abe17*/
   }
   else
   {
-    ++*(this + 4);
-    *(this + 1) = result;
+    ++this->count; /*0x7abe22*/
+    this->head = result; /*0x7abe26*/
   }
-  *(this + 2) = result;
-  return result;
+  this->tail = result; /*0x7abe1b*/
+  return result; /*0x7abe1e*/
 }

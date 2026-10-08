@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x5149A4",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x514A98",
-    "line": "call    EffectItemList_GetStrongestItem",
+    "line": "call    EffectItemList_GetStrongestItem; OBMEFix 2026-06-01 continued correction: vanilla AddSpell icon block is a call-compatible site. OBME's source uses writeRelPaddedCall and its handler returns with retn 8, so a later E9 at this address is not accepted as a fresh OBME handler. OBMEFix may reassert its padded call over a later jump only after it has already cached a verified OBME.dll call target.",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x514AA3",
-    "line": "cmp     eax, ebx",
+    "line": "cmp     eax, ebx; OBMEFix 2026-06-01 continued correction: OBME/OBMEFix return path after the padded call/NOP block. EAX must be a const char* icon path before this null-only check; empty paths still format as Icons\\\\ and can preserve a stale HUD icon.",
     "mnemonic": "cmp",
     "size": 2
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x514AD9",
-    "line": "call    QueueUIMessage",
+    "line": "call    QueueUIMessage; AddSpell player notification is queued here after formatting the message text and icon path. Icon argument comes from the 0x00514A98 path; OBMEFix must provide a non-empty relative icon path when OBME's replacement lookup returns blank.",
     "mnemonic": "call",
     "size": 5
   },
@@ -988,5 +988,71 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9B7170",
+    "line": "lea     ecx, [ebp-14h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B7173",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7178",
+    "line": "lea     ecx, [ebp-1Ch]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B717B",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7180",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B7184",
+    "line": "lea     eax, [edx-20h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B7187",
+    "line": "mov     ecx, [edx-24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B718A",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B718C",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7191",
+    "line": "mov     eax, offset stru_AE1DE8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7196",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

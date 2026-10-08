@@ -1,172 +1,270 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "InputGlobal",
+  "definition": "struct __declspec(align(4)) InputGlobal\n{\nUInt32 flags; ///< [Controller decode 2026-07-09] bit0 joystick/controller present, bit1 mouse, bit2 keyboard, bit3 background mouse.\nIDirectInput8 *dinputInterface; ///< [Controller decode 2026-07-09] Root IDirectInput8 interface.\nIDirectInputDevice8 *joystickInterfaces[8]; ///< [Controller decode 2026-07-09] IDirectInputDevice8*[8] for enumerated DirectInput joystick/gamepad devices.\nIDirectInputDevice8 *keyboardInterface; ///< [Controller decode 2026-07-09] IDirectInputDevice8* using keyboard data format.\nIDirectInputDevice8 *mouseInterface; ///< [Controller decode 2026-07-09] IDirectInputDevice8* using mouse data format.\nJoystickDeviceState joystickDeviceStates[8]; ///< [Controller decode 2026-07-09] JoystickDeviceState[8]; executable uses 0xA0 stride per device.\nUInt8 unk03B0[384];\nDIDEVICEINSTANCE joystickDevices[8]; ///< [Controller decode 2026-07-09] DIDEVICEINSTANCE[8] copies from DirectInput EnumDevices callback; stride 0x244.\nDIDEVCAPS joystickDevCaps[8]; ///< [Controller decode 2026-07-09] DIDEVCAPS[8] filled by GetCapabilities; dwButtons/dwPOVs feed Controls menu display and capture.\nJoystickObjectsInfo joystickObjectInfo[8]; ///< [Controller decode 2026-07-09] JoystickObjectsInfo[8] axis/POV object metadata from EnumObjects.\nUInt32 numJoysticks; ///< [Controller decode 2026-07-09] Count of accepted DirectInput joystick/gamepad devices, max 8.\nUInt8 CurrentKeyState[256]; ///< [Controller decode 2026-07-09] Current 256-byte DirectInput keyboard state.\nUInt8 PreviousKeyState[256]; ///< [Controller decode 2026-07-09] Previous 256-byte DirectInput keyboard state.\nUnk1AF4 mouseDeviceCaps; ///< [Controller decode 2026-07-09] DIDEVCAPS-sized mouse capability block; dwSize is set to 0x2C before GetCapabilities.\nDIMOUSESTATE2 CurrentMouseState; ///< [Controller decode 2026-07-09] Current DIMOUSESTATE2.\nDIMOUSESTATE2 PreviousMouseState; ///< [Controller decode 2026-07-09] Previous DIMOUSESTATE2.\nUInt32 oldMouseButtonSwap; ///< [Controller decode 2026-07-09] SwapMouseButton state captured during initialization.\nUInt32 doubleClickTime; ///< [Controller decode 2026-07-09] GetDoubleClickTime result used for mouse button double-click detection.\nUInt8 mouseDoubleClickFlags[8]; ///< [Controller decode 2026-07-09] Mouse double-click flags for buttons 0..7; not joystick/controller state.\nUInt32 mouseButtonPressTimestamps[8]; ///< [Controller decode 2026-07-09] Mouse button press timestamps used to detect double-clicks; not joystick/controller state.\nUInt32 unk1B78;\nUInt16 unk1B7C;\nUInt8 KeyboardInputControls[29]; ///< [Controller decode 2026-07-09] 29-byte keyboard binding block; INI packed byte value >> 16.\nUInt8 MouseInputControls[29]; ///< [Controller decode 2026-07-09] 29-byte mouse binding block; INI packed byte value >> 8.\nUInt8 JoystickInputControls[29]; ///< [Controller decode 2026-07-09] 29-byte first-joystick/controller binding block; INI packed byte value & 0xFF.\nUInt8 AlwaysRunControlBoh; ///< [Controller decode 2026-07-09] Adjacent default joystick byte set by ResetControlMap; outside persisted 29-row JoystickInputControls block.\nUInt8 pad1BD6[2];\n}\n",
   "id": 18374686479671809060,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "[Controller decode 2026-07-09] bit0 joystick/controller present, bit1 mouse, bit2 keyboard, bit3 background mouse.",
       "name": "flags",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "[Controller decode 2026-07-09] Root IDirectInput8 interface.",
       "name": "dinputInterface",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "IDirectInput8 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "[Controller decode 2026-07-09] IDirectInputDevice8*[8] for enumerated DirectInput joystick/gamepad devices.",
       "name": "joystickInterfaces",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 32
+      "size": 32,
+      "type": "IDirectInputDevice8 *[8]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "[Controller decode 2026-07-09] IDirectInputDevice8* using keyboard data format.",
       "name": "keyboardInterface",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "IDirectInputDevice8 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "[Controller decode 2026-07-09] IDirectInputDevice8* using mouse data format.",
       "name": "mouseInterface",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "IDirectInputDevice8 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "[Controller decode 2026-07-09] JoystickDeviceState[8]; executable uses 0xA0 stride per device.",
       "name": "joystickDeviceStates",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 896
+      "size": 896,
+      "type": "JoystickDeviceState[8]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk03B0",
       "offset": 944,
-      "offset_hex": "0x3b0",
-      "size": 384
+      "offset_hex": "0x3B0",
+      "size": 384,
+      "type": "UInt8[384]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "[Controller decode 2026-07-09] DIDEVICEINSTANCE[8] copies from DirectInput EnumDevices callback; stride 0x244.",
       "name": "joystickDevices",
       "offset": 1328,
       "offset_hex": "0x530",
-      "size": 4640
+      "size": 4640,
+      "type": "DIDEVICEINSTANCE[8]"
     },
     {
-      "name": "joysticDevCaps",
+      "annotation_confidence": "Unknown",
+      "comment": "[Controller decode 2026-07-09] DIDEVCAPS[8] filled by GetCapabilities; dwButtons/dwPOVs feed Controls menu display and capture.",
+      "name": "joystickDevCaps",
       "offset": 5968,
       "offset_hex": "0x1750",
-      "size": 352
+      "size": 352,
+      "type": "DIDEVCAPS[8]"
     },
     {
-      "name": "devInfo",
+      "annotation_confidence": "Unknown",
+      "comment": "[Controller decode 2026-07-09] JoystickObjectsInfo[8] axis/POV object metadata from EnumObjects.",
+      "name": "joystickObjectInfo",
       "offset": 6320,
-      "offset_hex": "0x18b0",
-      "size": 64
+      "offset_hex": "0x18B0",
+      "size": 64,
+      "type": "JoystickObjectsInfo[8]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "[Controller decode 2026-07-09] Count of accepted DirectInput joystick/gamepad devices, max 8.",
       "name": "numJoysticks",
       "offset": 6384,
-      "offset_hex": "0x18f0",
-      "size": 4
+      "offset_hex": "0x18F0",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "[Controller decode 2026-07-09] Current 256-byte DirectInput keyboard state.",
       "name": "CurrentKeyState",
       "offset": 6388,
-      "offset_hex": "0x18f4",
-      "size": 256
+      "offset_hex": "0x18F4",
+      "size": 256,
+      "type": "UInt8[256]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "[Controller decode 2026-07-09] Previous 256-byte DirectInput keyboard state.",
       "name": "PreviousKeyState",
       "offset": 6644,
-      "offset_hex": "0x19f4",
-      "size": 256
+      "offset_hex": "0x19F4",
+      "size": 256,
+      "type": "UInt8[256]"
     },
     {
-      "name": "unk1AF4",
+      "annotation_confidence": "Unknown",
+      "comment": "[Controller decode 2026-07-09] DIDEVCAPS-sized mouse capability block; dwSize is set to 0x2C before GetCapabilities.",
+      "name": "mouseDeviceCaps",
       "offset": 6900,
-      "offset_hex": "0x1af4",
-      "size": 44
+      "offset_hex": "0x1AF4",
+      "size": 44,
+      "type": "Unk1AF4"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "[Controller decode 2026-07-09] Current DIMOUSESTATE2.",
       "name": "CurrentMouseState",
       "offset": 6944,
-      "offset_hex": "0x1b20",
-      "size": 20
+      "offset_hex": "0x1B20",
+      "size": 20,
+      "type": "DIMOUSESTATE2"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "[Controller decode 2026-07-09] Previous DIMOUSESTATE2.",
       "name": "PreviousMouseState",
       "offset": 6964,
-      "offset_hex": "0x1b34",
-      "size": 20
+      "offset_hex": "0x1B34",
+      "size": 20,
+      "type": "DIMOUSESTATE2"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "[Controller decode 2026-07-09] SwapMouseButton state captured during initialization.",
       "name": "oldMouseButtonSwap",
       "offset": 6984,
-      "offset_hex": "0x1b48",
-      "size": 4
+      "offset_hex": "0x1B48",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "[Controller decode 2026-07-09] GetDoubleClickTime result used for mouse button double-click detection.",
       "name": "doubleClickTime",
       "offset": 6988,
-      "offset_hex": "0x1b4c",
-      "size": 4
+      "offset_hex": "0x1B4C",
+      "size": 4,
+      "type": "UInt32"
     },
     {
-      "name": "unk1B50",
+      "annotation_confidence": "Unknown",
+      "comment": "[Controller decode 2026-07-09] Mouse double-click flags for buttons 0..7; not joystick/controller state.",
+      "name": "mouseDoubleClickFlags",
       "offset": 6992,
-      "offset_hex": "0x1b50",
-      "size": 8
+      "offset_hex": "0x1B50",
+      "size": 8,
+      "type": "UInt8[8]"
     },
     {
-      "name": "unk1B58",
+      "annotation_confidence": "Unknown",
+      "comment": "[Controller decode 2026-07-09] Mouse button press timestamps used to detect double-clicks; not joystick/controller state.",
+      "name": "mouseButtonPressTimestamps",
       "offset": 7000,
-      "offset_hex": "0x1b58",
-      "size": 32
+      "offset_hex": "0x1B58",
+      "size": 32,
+      "type": "UInt32[8]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk1B78",
       "offset": 7032,
-      "offset_hex": "0x1b78",
-      "size": 4
+      "offset_hex": "0x1B78",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk1B7C",
       "offset": 7036,
-      "offset_hex": "0x1b7c",
-      "size": 2
+      "offset_hex": "0x1B7C",
+      "size": 2,
+      "type": "UInt16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "[Controller decode 2026-07-09] 29-byte keyboard binding block; INI packed byte value >> 16.",
       "name": "KeyboardInputControls",
       "offset": 7038,
-      "offset_hex": "0x1b7e",
-      "size": 29
+      "offset_hex": "0x1B7E",
+      "size": 29,
+      "type": "UInt8[29]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "[Controller decode 2026-07-09] 29-byte mouse binding block; INI packed byte value >> 8.",
       "name": "MouseInputControls",
       "offset": 7067,
-      "offset_hex": "0x1b9b",
-      "size": 29
+      "offset_hex": "0x1B9B",
+      "size": 29,
+      "type": "UInt8[29]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "[Controller decode 2026-07-09] 29-byte first-joystick/controller binding block; INI packed byte value & 0xFF.",
       "name": "JoystickInputControls",
       "offset": 7096,
-      "offset_hex": "0x1bb8",
-      "size": 29
+      "offset_hex": "0x1BB8",
+      "size": 29,
+      "type": "UInt8[29]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "[Controller decode 2026-07-09] Adjacent default joystick byte set by ResetControlMap; outside persisted 29-row JoystickInputControls block.",
       "name": "AlwaysRunControlBoh",
       "offset": 7125,
-      "offset_hex": "0x1bd5",
-      "size": 1
+      "offset_hex": "0x1BD5",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad1BD6",
       "offset": 7126,
-      "offset_hex": "0x1bd6",
-      "size": 2
+      "offset_hex": "0x1BD6",
+      "size": 2,
+      "type": "UInt8[2]"
     }
   ],
   "name": "InputGlobal",
+  "ordinal": 743,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 7128
 }

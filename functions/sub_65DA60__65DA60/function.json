@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x65DA60",
+      "0x65DAB5"
+    ]
+  ],
+  "chunks_sha256": "5776c4c3af53ef0568223ac1397a580582f0540cc8509ef2acad074da9074560",
+  "comment_regular": "Player override of vtable +0x1E0. Returns base rotation.z plus PlayerCharacter+0x61C, with one wrap by 2*pi (0xA3D5B0 = 6.283185...) into the expected angular interval. Native ABI return is float.",
+  "comment_repeatable": "Player override of vtable +0x1E0. Returns base rotation.z plus PlayerCharacter+0x61C, with one wrap by 2*pi (0xA3D5B0 = 6.283185...) into the expected angular interval. Native ABI return is float.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_65DA60",
+  "display_name": "PlayerCharacter_GetZRotation",
   "end_ea": "0x65DAB5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_65DA60",
+  "name": "PlayerCharacter_GetZRotation",
   "segment": ".text",
   "sha256": "5776c4c3af53ef0568223ac1397a580582f0540cc8509ef2acad074da9074560",
   "size": 85,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x65DA60",
-  "type": "double __thiscall(MobileObject *this)",
+  "total_chunk_size": 85,
+  "type": "float __thiscall(PlayerCharacter *this)",
   "xrefs_from_count": 34,
   "xrefs_to_count": 1
 }

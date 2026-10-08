@@ -1,4 +1,4 @@
-0x798300: push    ebx
+0x798300: push    ebx; Copies LOD 0's generated leaf-card vertex table into the persistent vertex-program billboard table; entryCount is returned in floats.
 0x798301: push    edi
 0x798302: mov     edi, ecx
 0x798304: movzx   eax, word ptr [edi+1Ch]
@@ -18,12 +18,12 @@
 0x798329: mov     edx, [ecx]
 0x79832B: push    esi
 0x79832C: lea     esi, ds:0[eax*4]
-0x798333: push    esi; Size
-0x798334: push    edx; Src
-0x798335: push    ebx; Dst
-0x798336: call    _memcpy
+0x798333: push    esi; byteCount
+0x798334: push    edx; source
+0x798335: push    ebx; destination
+0x798336: call    _memcpy;
 0x79833B: sub     esi, [edi+18h]
-0x79833E: mov     eax, [esp+18h+arg_0]
+0x79833E: mov     eax, [esp+18h+entryCount]
 0x798342: add     esp, 0Ch
 0x798345: add     esi, ebx
 0x798347: sar     esi, 2

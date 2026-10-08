@@ -35,7 +35,7 @@
 0x5E840F: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x5E8414: push    0; int
 0x5E8416: push    eax; a1
-0x5E8417: call    TESForm_LookupByFormID
+0x5E8417: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x5E841C: add     esp, 4
 0x5E841F: push    eax; void *
 0x5E8420: call    OblivionDynamicCast
@@ -53,15 +53,15 @@
 0x5E8440: mov     edx, [eax]
 0x5E8442: push    eax
 0x5E8443: mov     [esi], edx
-0x5E8445: call    FormHeapFree
+0x5E8445: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5E844A: add     esp, 4
 0x5E844D: push    ebp
-0x5E844E: call    FormHeapFree
+0x5E844E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5E8453: add     esp, 4
 0x5E8456: jmp     short loc_5E8484
 0x5E8458: push    ebp
 0x5E8459: mov     dword ptr [esi], 0
-0x5E845F: call    FormHeapFree
+0x5E845F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5E8464: add     esp, 4
 0x5E8467: jmp     short loc_5E8484
 0x5E8469: push    ebp
@@ -69,7 +69,7 @@
 0x5E846C: call    BSSimpleList_Remove
 0x5E8471: mov     esi, [ebx+4]
 0x5E8474: push    ebp
-0x5E8475: call    FormHeapFree
+0x5E8475: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5E847A: add     esp, 4
 0x5E847D: jmp     short loc_5E8484
 0x5E847F: mov     ebx, esi
@@ -99,7 +99,7 @@
 0x5E84D9: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x5E84DE: push    ebp; int
 0x5E84DF: push    eax; a1
-0x5E84E0: call    TESForm_LookupByFormID
+0x5E84E0: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x5E84E5: add     esp, 4
 0x5E84E8: push    eax; void *
 0x5E84E9: call    OblivionDynamicCast
@@ -131,10 +131,10 @@
 0x5E852F: cmp     bl, al
 0x5E8531: jz      short loc_5E8553
 0x5E8533: mov     ecx, [edi+0D4h]; this
-0x5E8539: call    TESObjectREFR_GetParentCell
+0x5E8539: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5E853E: mov     ecx, edi; this
 0x5E8540: mov     esi, eax
-0x5E8542: call    TESObjectREFR_GetParentCell
+0x5E8542: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5E8547: cmp     esi, eax
 0x5E8549: jz      short loc_5E8553
 0x5E854B: mov     [edi+0D4h], ebp
@@ -166,7 +166,7 @@
 0x5E85A7: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x5E85AC: push    0; int
 0x5E85AE: push    eax; a1
-0x5E85AF: call    TESForm_LookupByFormID
+0x5E85AF: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x5E85B4: add     esp, 4
 0x5E85B7: push    eax; void *
 0x5E85B8: call    OblivionDynamicCast
@@ -184,15 +184,15 @@
 0x5E85DA: mov     ecx, [eax]
 0x5E85DC: push    eax
 0x5E85DD: mov     [esi], ecx
-0x5E85DF: call    FormHeapFree
+0x5E85DF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5E85E4: add     esp, 4
 0x5E85E7: push    ebp
-0x5E85E8: call    FormHeapFree
+0x5E85E8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5E85ED: add     esp, 4
 0x5E85F0: jmp     short loc_5E861E
 0x5E85F2: push    ebp
 0x5E85F3: mov     dword ptr [esi], 0
-0x5E85F9: call    FormHeapFree
+0x5E85F9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5E85FE: add     esp, 4
 0x5E8601: jmp     short loc_5E861E
 0x5E8603: push    ebp
@@ -200,7 +200,7 @@
 0x5E8606: call    BSSimpleList_Remove
 0x5E860B: mov     esi, [ebx+4]
 0x5E860E: push    ebp
-0x5E860F: call    FormHeapFree
+0x5E860F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5E8614: add     esp, 4
 0x5E8617: jmp     short loc_5E861E
 0x5E8619: mov     ebx, esi
@@ -219,7 +219,7 @@
 0x5E8641: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x5E8646: push    ebp; int
 0x5E8647: push    eax; a1
-0x5E8648: call    TESForm_LookupByFormID
+0x5E8648: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x5E864D: add     esp, 4
 0x5E8650: push    eax; void *
 0x5E8651: call    OblivionDynamicCast
@@ -238,7 +238,7 @@
 0x5E867C: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x5E8681: push    ebp; int
 0x5E8682: push    eax; a1
-0x5E8683: call    TESForm_LookupByFormID
+0x5E8683: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x5E8688: add     esp, 4
 0x5E868B: push    eax; void *
 0x5E868C: call    OblivionDynamicCast
@@ -257,7 +257,7 @@
 0x5E86BE: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x5E86C3: push    ebp; int
 0x5E86C4: push    eax; a1
-0x5E86C5: call    TESForm_LookupByFormID
+0x5E86C5: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x5E86CA: add     esp, 4
 0x5E86CD: push    eax; void *
 0x5E86CE: call    OblivionDynamicCast
@@ -274,11 +274,11 @@
 0x5E86F6: test    eax, eax
 0x5E86F8: jz      loc_5E87DB
 0x5E86FE: mov     ecx, edi; this
-0x5E8700: call    TESObjectREFR_GetParentCell
+0x5E8700: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5E8705: test    eax, eax
 0x5E8707: mov     ecx, edi; this
 0x5E8709: jz      short loc_5E872B
-0x5E870B: call    TESObjectREFR_GetParentCell
+0x5E870B: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5E8710: cmp     byte ptr [eax+26h], 6
 0x5E8714: jnz     loc_5E87DB
 0x5E871A: mov     edx, [edi]
@@ -286,7 +286,7 @@
 0x5E8722: mov     ecx, edi
 0x5E8724: call    eax
 0x5E8726: jmp     loc_5E87DB
-0x5E872B: call    TESObjectREFR_IsPersistent?
+0x5E872B: call    TESObjectREFR_IsPersistent
 0x5E8730: test    al, al
 0x5E8732: jz      loc_5E87DB
 0x5E8738: mov     ecx, edi; this
@@ -333,9 +333,9 @@
 0x5E87BA: shr     ecx, 1
 0x5E87BC: and     cl, 1
 0x5E87BF: mov     byte ptr [esp+2Ch+arg_0], cl
-0x5E87C3: push    edi; Concurrency::details::SchedulerBase *
-0x5E87C4: mov     ecx, esi
-0x5E87C6: call    sub_4D35D0
+0x5E87C3: push    edi; reference
+0x5E87C4: mov     ecx, esi; this
+0x5E87C6: call    TESObjectCELL_AddReference; Verified: persistent-cell AddReference updates the WorldSpace coordinate/fallback persistent-reference index (+0x64) through TESWorldSpace_IndexReference. Ordinary cell additions do not index there. This routine does not populate the separate SubSpace spatial index at +0x60.
 0x5E87CB: mov     edx, [esp+2Ch+arg_0]
 0x5E87CF: mov     ecx, ds:0B33B00h
 0x5E87D5: push    edx
@@ -358,7 +358,7 @@
 0x5E8807: mov     [esp+2Ch+var_4], ebp
 0x5E880B: jz      short loc_5E8816
 0x5E880D: mov     ecx, eax; this
-0x5E880F: call    ??0LowProcess@@QAE@XZ; LowProcess::LowProcess(void)
+0x5E880F: call    ??0LowProcess@@QAE@XZ; LowProcess constructor: initializes editorPackage/editorPackProcedure and follow/pathing state, but no currentPackage field used by runtime package assignment.
 0x5E8814: jmp     short loc_5E8818
 0x5E8816: xor     eax, eax
 0x5E8818: mov     ecx, edi
@@ -390,3 +390,15 @@
 0x5E8867: pop     ebx
 0x5E8868: add     esp, 18h
 0x5E886B: retn    8
+0x9C25F0: mov     eax, [ebp+4]
+0x9C25F3: push    eax
+0x9C25F4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C25F9: pop     ecx
+0x9C25FA: retn
+0x9C25FB: mov     edx, [esp+arg_4]
+0x9C25FF: lea     eax, [edx-1Ch]
+0x9C2602: mov     ecx, [edx-20h]
+0x9C2605: xor     ecx, eax
+0x9C2607: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C260C: mov     eax, offset stru_AEB4AC
+0x9C2611: jmp     ___CxxFrameHandler3

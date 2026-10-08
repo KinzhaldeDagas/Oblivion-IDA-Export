@@ -3,13 +3,13 @@
 0x44D347: mov     eax, [eax+8]
 0x44D34A: push    ebx
 0x44D34B: push    esi
-0x44D34C: push    0
+0x44D34C: push    0; referenceFormIDOrZero
 0x44D34E: mov     esi, ecx
-0x44D350: mov     ecx, [esi+0CDCh]
-0x44D356: push    1
-0x44D358: push    eax
+0x44D350: mov     ecx, [esi+0CDCh]; this
+0x44D356: push    1; unusedAlwaysOne
+0x44D358: push    eax; form
 0x44D359: mov     [esp+24h+var_4], esi
-0x44D35D: call    ContainerExtraData_GetEntryForForm
+0x44D35D: call    ContainerExtraData_GetEntryForForm; Find EntryData for an exact TESForm in ExtraContainerChanges. Native ABI is three stack arguments and retn 0x0C. The middle Boolean is not read; callers conventionally pass true. If referenceFormIDOrZero is nonzero, require an extend-data list whose ExtraReferencePointer target has that form ID; otherwise return the form entry directly.
 0x44D362: mov     ebx, eax
 0x44D364: test    ebx, ebx
 0x44D366: jz      short loc_44D3CB
@@ -20,7 +20,6 @@
 0x44D376: push    ebp
 0x44D377: push    edi
 0x44D378: jmp     short loc_44D384
-0x44D37A: align 10h
 0x44D380: mov     eax, [esp+20h+var_C]
 0x44D384: test    eax, eax
 0x44D386: jnz     short loc_44D3D3
@@ -29,15 +28,15 @@
 0x44D38E: mov     edx, [esp+20h+arg_8]
 0x44D392: push    edx
 0x44D393: mov     ecx, esi
-0x44D395: call    sub_448F40
+0x44D395: call    sub_448F40; Verified caller path: ensures the actor's barter ContainerChanges exists, merges the actor and merchant-container changes, then calls TESObjectCELL_AddOwnedReferencesToBarterContainer for the actor's current cell. This anchors the ownership predicate's false faction-ownership argument to barter inventory construction.
 0x44D39A: mov     eax, [esp+20h+arg_0]
 0x44D39E: mov     eax, [eax+8]
-0x44D3A1: mov     ecx, [esi+0CDCh]
-0x44D3A7: push    0
-0x44D3A9: push    1
-0x44D3AB: push    eax
+0x44D3A1: mov     ecx, [esi+0CDCh]; this
+0x44D3A7: push    0; referenceFormIDOrZero
+0x44D3A9: push    1; unusedAlwaysOne
+0x44D3AB: push    eax; form
 0x44D3AC: mov     byte ptr [esp+2Ch+var_10+3], 1
-0x44D3B1: call    ContainerExtraData_GetEntryForForm
+0x44D3B1: call    ContainerExtraData_GetEntryForForm; Find EntryData for an exact TESForm in ExtraContainerChanges. Native ABI is three stack arguments and retn 0x0C. The middle Boolean is not read; callers conventionally pass true. If referenceFormIDOrZero is nonzero, require an extend-data list whose ExtraReferencePointer target has that form ID; otherwise return the form entry directly.
 0x44D3B6: mov     ebx, eax
 0x44D3B8: test    ebx, ebx
 0x44D3BA: jz      short loc_44D3C9
@@ -62,8 +61,8 @@
 0x44D3EE: test    ebp, ebp
 0x44D3F0: mov     [esp+20h+var_8], ebp
 0x44D3F4: jle     loc_44D5F8
-0x44D3FA: mov     ecx, edi
-0x44D3FC: call    sub_41E790
+0x44D3FA: mov     ecx, edi; this
+0x44D3FC: call    ExtraDataList_GetOriginalReference; Return the TESObjectREFR payload stored in ExtraOriginalReference type 0x26. It cannot redirect an AMMO-keyed inventory entry to a WEAP form.
 0x44D401: mov     esi, eax
 0x44D403: mov     eax, [esp+20h+arg_4]
 0x44D407: cmp     eax, ebp
@@ -111,11 +110,11 @@
 0x44D47E: mov     byte ptr [esp+20h+var_10+2], 1
 0x44D483: jz      short loc_44D4BF
 0x44D485: mov     ecx, [ebx+8]
-0x44D488: push    0
-0x44D48A: push    1
-0x44D48C: push    ecx
-0x44D48D: mov     ecx, eax
-0x44D48F: call    ContainerExtraData_GetEntryForForm
+0x44D488: push    0; referenceFormIDOrZero
+0x44D48A: push    1; unusedAlwaysOne
+0x44D48C: push    ecx; form
+0x44D48D: mov     ecx, eax; this
+0x44D48F: call    ContainerExtraData_GetEntryForForm; Find EntryData for an exact TESForm in ExtraContainerChanges. Native ABI is three stack arguments and retn 0x0C. The middle Boolean is not read; callers conventionally pass true. If referenceFormIDOrZero is nonzero, require an extend-data list whose ExtraReferencePointer target has that form ID; otherwise return the form entry directly.
 0x44D494: test    eax, eax
 0x44D496: jz      short loc_44D4BF
 0x44D498: mov     eax, [eax]
@@ -140,11 +139,11 @@
 0x44D4CD: test    eax, eax
 0x44D4CF: jz      short loc_44D50F
 0x44D4D1: mov     ecx, [ebx+8]
-0x44D4D4: push    0
-0x44D4D6: push    1
-0x44D4D8: push    ecx
-0x44D4D9: mov     ecx, eax
-0x44D4DB: call    ContainerExtraData_GetEntryForForm
+0x44D4D4: push    0; referenceFormIDOrZero
+0x44D4D6: push    1; unusedAlwaysOne
+0x44D4D8: push    ecx; form
+0x44D4D9: mov     ecx, eax; this
+0x44D4DB: call    ContainerExtraData_GetEntryForForm; Find EntryData for an exact TESForm in ExtraContainerChanges. Native ABI is three stack arguments and retn 0x0C. The middle Boolean is not read; callers conventionally pass true. If referenceFormIDOrZero is nonzero, require an extend-data list whose ExtraReferencePointer target has that form ID; otherwise return the form entry directly.
 0x44D4E0: test    eax, eax
 0x44D4E2: jz      short loc_44D50F
 0x44D4E4: mov     eax, [eax]

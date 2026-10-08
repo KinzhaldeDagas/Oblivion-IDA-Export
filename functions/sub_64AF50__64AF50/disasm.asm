@@ -1,4 +1,4 @@
-0x64AF50: push    esi
+0x64AF50: push    esi; RadiantAI 2026-07-12: HighProcess vtable +0xD0 target setter. Stores target in follow, sets compressed flag, and invokes fallback when follow and unk0D0 are null.
 0x64AF51: push    edi
 0x64AF52: mov     edi, [esp+8+arg_0]
 0x64AF56: test    edi, edi

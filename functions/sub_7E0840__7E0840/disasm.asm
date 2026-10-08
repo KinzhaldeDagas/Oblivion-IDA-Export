@@ -13,7 +13,6 @@
 0x7E085A: mov     byte ptr [esp+28h+a2], 1
 0x7E085F: jle     short loc_7E08DC
 0x7E0861: jmp     short loc_7E0870
-0x7E0863: align 10h
 0x7E0870: lea     edx, ds:1[eax*4]
 0x7E0877: mov     eax, [ebx+0F8h]
 0x7E087D: mov     ecx, [eax+esi*4]

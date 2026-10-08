@@ -9,14 +9,14 @@
 0x592FCE: mov     ecx, [esi+2Ch]
 0x592FD1: push    0FD3h
 0x592FD6: call    Tile_GetFloat
-0x592FDB: call    Double_To_SInt32
+0x592FDB: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x592FE0: mov     ecx, [esi+0A0h]
 0x592FE6: push    eax
 0x592FE7: call    sub_57D2D0
 0x592FEC: mov     ecx, [esi+2Ch]
 0x592FEF: push    0FD4h
 0x592FF4: call    Tile_GetFloat
-0x592FF9: call    Double_To_SInt32
+0x592FF9: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x592FFE: mov     ecx, [esi+0A0h]
 0x593004: push    eax
 0x593005: call    sub_583DD0

@@ -1,7 +1,9 @@
-BOOL __thiscall sub_59FF10(Tile **this, int a2, int a3)
+BOOL __thiscall sub_59FF10(int (__thiscall ***this)(Tile **), int a2, int a3)
 {
-  int v8; // edi
+  int v4; // edi
 
-  v8 = (*((int (__thiscall **)(Tile **))*this + 0xD))(this);
-  return sub_578FE0() == v8 && a2 == 9 && InterfaceManager_GetSingleton(0, 0)->altActiveTile == this[0xF];
+  v4 = (*this)[0xD]((Tile **)this); /*0x59ff1b*/
+  return sub_578FE0() == v4 /*0x59ff44*/
+      && a2 == 9
+      && (int (__thiscall **)(Tile **))InterfaceManager_GetSingleton(0, 0)->altActiveTile == *(this + 0xF);
 }

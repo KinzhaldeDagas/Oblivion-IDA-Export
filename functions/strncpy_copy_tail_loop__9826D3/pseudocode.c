@@ -1,22 +1,15 @@
-int __usercall strncpy_::copy_tail_loop@<eax>(
-        int a1@<ebx>,
-        _BYTE *a2@<edi>,
-        char *a3@<esi>,
-        int a4,
-        int a5,
-        int a6,
-        int a7)
+int __usercall strncpy_::copy_tail_loop@<eax>(int a1@<ebx>, _BYTE *a2@<edi>, char *a3@<esi>, int a4, int a5)
 {
-  char v7; // al
+  char v5; // al
 
-  while ( 1 )
+  while ( 1 ) /*0x9826d3*/
   {
-    v7 = *a3++;
-    *a2++ = v7;
-    if ( !v7 )
-      break;
-    if ( !--a1 )
-      return strncpy_::fill_tail_end1(a4, a5, a6, a7);
+    v5 = *a3++; /*0x9826d3*/
+    *a2++ = v5; /*0x9826d8*/
+    if ( !v5 ) /*0x9826df*/
+      break; /*0x9826df*/
+    if ( !--a1 ) /*0x9826e4*/
+      return strncpy_::fill_tail_end1(a4); /*0x9826e5*/
   }
-  return strncpy_::fill_tail_zero_bytes();
+  return strncpy_::fill_tail_zero_bytes(0, a1, a2, a4, a5);
 }

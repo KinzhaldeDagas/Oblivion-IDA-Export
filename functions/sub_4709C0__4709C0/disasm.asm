@@ -1,4 +1,4 @@
-0x4709C0: mov     edx, [esp+arg_4]
+0x4709C0: mov     edx, [esp+arg_4]; Advances an encoded-key map iterator. Returns the current UInt16 key and AnimSequenceBase payload, then moves along the collision chain or to the next non-empty bucket.
 0x4709C4: push    esi
 0x4709C5: push    edi
 0x4709C6: mov     edi, [esp+8+arg_0]

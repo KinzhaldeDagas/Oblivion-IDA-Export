@@ -91,14 +91,14 @@
 0x94DC72: push    eax; int
 0x94DC73: lea     ecx, [esp+68h+var_30]
 0x94DC77: movaps  [esp+68h+var_40], xmm1
-0x94DC7C: call    sub_8B1B00
+0x94DC7C: call    hkQuaternion_SetAxisAngleScaled; Builds a quaternion from an axis vector and scaled angle: vector part = axis*sin(angleScale), w = cos(angleScale). Used by 0x896000 while refreshing movement basis.
 0x94DC81: fild    dword ptr [esi+80h]
 0x94DC87: push    ecx
 0x94DC88: lea     ecx, [esp+64h+var_20]
 0x94DC8C: fdivr   dword ptr ds:0A46B14h
 0x94DC92: fstp    [esp+64h+var_64]; float
 0x94DC95: push    edi; int
-0x94DC96: call    sub_8B1B00
+0x94DC96: call    hkQuaternion_SetAxisAngleScaled; Builds a quaternion from an axis vector and scaled angle: vector part = axis*sin(angleScale), w = cos(angleScale). Used by 0x896000 while refreshing movement basis.
 0x94DC9B: fld     dword ptr [esp+60h+var_30+0Ch]
 0x94DC9F: fmul    dword ptr [esp+60h+var_30+0Ch]
 0x94DCA3: movaps  xmm0, [esp+60h+var_30]

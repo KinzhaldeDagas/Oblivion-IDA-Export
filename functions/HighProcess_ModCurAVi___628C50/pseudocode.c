@@ -1,15 +1,12 @@
-int __thiscall HighProcess_ModCurAVi_(float *this, int a2, int a3, signed int a4)
+void __thiscall HighProcess_ModCurAVi_(MiddleLowProcess *this, int context, int actorValue, signed int delta)
 {
-  int result; // eax
-
-  result = MiddleProcess_ModAViCur(this, a2, a3, a4);
-  if ( a3 == 0xB )
+  MiddleProcess_ModAViCur(this, context, actorValue, delta); /*0x628c65*/
+  if ( actorValue == 0xB ) /*0x628c6d*/
   {
-    *(this + 0xA5) = flt_A30634;
+    *((float *)this + 0xA5) = kTerrainLODQuadRayDirectionZ; /*0x628c89*/
   }
-  else if ( a3 == 0x30 )
+  else if ( actorValue == 0x30 ) /*0x628c72*/
   {
-    *(this + 0xA6) = NAN;
+    *((_DWORD *)this + 0xA6) = 0xFFFFFFFF; /*0x628c75*/
   }
-  return result;
 }

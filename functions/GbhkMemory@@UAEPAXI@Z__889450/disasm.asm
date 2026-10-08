@@ -4,7 +4,7 @@
 0x889458: mov     dword ptr [esi], offset ??_7hkMemory@@6B@; const hkMemory::`vftable'
 0x88945E: jz      short loc_889469
 0x889460: push    esi
-0x889461: call    FormHeapFree
+0x889461: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x889466: add     esp, 4
 0x889469: mov     eax, esi
 0x88946B: pop     esi

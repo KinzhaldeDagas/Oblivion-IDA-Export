@@ -1,19 +1,36 @@
 {
-  "callees_count": 32,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 17,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_851CA0",
+  "chunks": [
+    [
+      "0x851CA0",
+      "0x851E63"
+    ],
+    [
+      "0x9D3360",
+      "0x9D3383"
+    ]
+  ],
+  "chunks_sha256": "fc1e8a8bd677dab7335f27fa4910e9750fc9b9579b965d51eae1a7a8dd5ecb8e",
+  "comment_regular": "Verified (Oblivion): shared by ShadowLight, Skin, and Hair setup for selector 0x18C. It binds TextureEffectData's texture and render-state fields into the pass template; the active shader's owned pixel/vertex constant maps are then applied by NiD3DShader_SetupShaderPrograms. ShadowLight's vtable owner is confirmed to build/apply maps from the texture-effect globals.",
+  "comment_repeatable": "Verified (Oblivion): shared by ShadowLight, Skin, and Hair setup for selector 0x18C. It binds TextureEffectData's texture and render-state fields into the pass template; the active shader's owned pixel/vertex constant maps are then applied by NiD3DShader_SetupShaderPrograms. ShadowLight's vtable owner is confirmed to build/apply maps from the texture-effect globals.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "NiD3DPassArray_AddTextureEffectPass1x",
   "end_ea": "0x851E63",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
-  "name": "sub_851CA0",
+  "name": "NiD3DPassArray_AddTextureEffectPass1x",
   "segment": ".text",
   "sha256": "3b830096511a1bcb82d49bfe252101fa4d6b03fca51966c40a643c500755673d",
   "size": 451,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x851CA0",
-  "type": "void __thiscall(NiTArray_NiD3DPass *this, NiGeometry *, int, int, NiD3DPass *)",
-  "xrefs_from_count": 179,
+  "total_chunk_size": 486,
+  "type": "void __thiscall(NiTArray_NiD3DPass *this, NiGeometry *geometry, int arg3, int arg4, BSShaderProperty *shaderProperty)",
+  "xrefs_from_count": 190,
   "xrefs_to_count": 3
 }

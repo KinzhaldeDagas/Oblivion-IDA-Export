@@ -37,7 +37,7 @@
 0x57A143: call    Tile_GetParentMenu
 0x57A148: test    eax, eax
 0x57A14A: jz      short loc_57A16F
-0x57A14C: call    sub_5B91E0
+0x57A14C: call    TravelPath_DebugRouteToPoint; Verified travel-path diagnostic: called from WorldMapMenu interaction paths, repeatedly builds low-level routes to candidate points, prints each travel/door/coordinate segment, total distance and estimated game hours, reports 'No Path found' on failure, and adds a debug line render. Exact UI action name remains Unknown.
 0x57A151: test    eax, eax
 0x57A153: jz      short loc_57A16F
 0x57A155: push    0; float

@@ -1,1 +1,1 @@
-SpeedTreeLeafShader
+struct SpeedTreeLeafShader;

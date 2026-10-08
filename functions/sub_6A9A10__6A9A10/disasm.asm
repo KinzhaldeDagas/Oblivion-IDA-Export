@@ -6,7 +6,7 @@
 0x6A9A1D: mov     ecx, [edx+4]
 0x6A9A20: xor     eax, eax
 0x6A9A22: test    ecx, ecx
-0x6A9A24: mov     [esp+14h+var_C], 0
+0x6A9A24: mov     [esp+14h+valueOut], 0
 0x6A9A2C: jbe     short loc_6A9A42
 0x6A9A2E: mov     esi, [edx+8]
 0x6A9A31: mov     edx, esi
@@ -18,18 +18,18 @@
 0x6A9A40: jb      short loc_6A9A33
 0x6A9A42: xor     eax, eax
 0x6A9A44: test    eax, eax
-0x6A9A46: mov     [esp+14h+var_8], eax
+0x6A9A46: mov     [esp+14h+position], eax
 0x6A9A4A: jz      short loc_6A9A99
 0x6A9A4C: lea     esp, [esp+0]
-0x6A9A50: lea     eax, [esp+14h+var_C]
-0x6A9A54: push    eax
-0x6A9A55: lea     ecx, [esp+18h+var_4]
-0x6A9A59: push    ecx
-0x6A9A5A: mov     ecx, [edi+300h]
-0x6A9A60: lea     edx, [esp+1Ch+var_8]
-0x6A9A64: push    edx
-0x6A9A65: call    sub_452600
-0x6A9A6A: mov     ecx, [esp+14h+var_C]
+0x6A9A50: lea     eax, [esp+14h+valueOut]
+0x6A9A54: push    eax; valueOut
+0x6A9A55: lea     ecx, [esp+18h+keyOut]
+0x6A9A59: push    ecx; keyOut
+0x6A9A5A: mov     ecx, [edi+300h]; self
+0x6A9A60: lea     edx, [esp+1Ch+position]
+0x6A9A64: push    edx; position
+0x6A9A65: call    NiTMap_U32Pointer_GetNextEntry
+0x6A9A6A: mov     ecx, [esp+14h+valueOut]
 0x6A9A6E: mov     eax, [ecx]
 0x6A9A70: test    al, 10h
 0x6A9A72: jz      short loc_6A9A92
@@ -43,7 +43,7 @@
 0x6A9A88: mov     eax, [esi+eax*4]
 0x6A9A8B: jmp     short loc_6A9A44
 0x6A9A8D: call    sub_6B6AA0
-0x6A9A92: cmp     [esp+14h+var_8], 0
+0x6A9A92: cmp     [esp+14h+position], 0
 0x6A9A97: jnz     short loc_6A9A50
 0x6A9A99: pop     edi
 0x6A9A9A: pop     esi

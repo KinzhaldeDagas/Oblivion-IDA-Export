@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x85C3F2",
-    "line": "cmp     byte ptr [esp+24h+arg_10], 0",
+    "line": "cmp     byte ptr [esp+24h+value], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x85C401",
-    "line": "mov     [esp+24h+arg_10], esi",
+    "line": "mov     [esp+24h+value], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -331,25 +331,25 @@
   },
   {
     "ea": "0x85C408",
-    "line": "lea     ecx, [esp+24h+arg_10]",
+    "line": "lea     ecx, [esp+24h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x85C40C",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x85C40D",
-    "line": "push    edx",
+    "line": "push    edx; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x85C40E",
-    "line": "lea     ecx, [ebx+40h]",
+    "line": "lea     ecx, [ebx+40h]; this",
     "mnemonic": "lea",
     "size": 3
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x85C419",
-    "line": "call    sub_76CE40",
+    "line": "call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x85C42C",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -460,5 +460,59 @@
     "line": "retn    14h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D45B0",
+    "line": "lea     ecx, [ebp+14h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D45B3",
+    "line": "jmp     sub_4027D0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D45B8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D45BC",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D45BF",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D45C2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D45C4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D45C9",
+    "line": "mov     eax, offset stru_AFC640",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D45CE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

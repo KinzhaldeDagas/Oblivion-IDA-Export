@@ -23,7 +23,6 @@
 0x8B4063: mov     [esp+70h+var_64], edx
 0x8B4067: mov     [esp+70h+var_54], eax
 0x8B406B: jmp     short loc_8B4070
-0x8B406D: align 10h
 0x8B4070: mov     edx, [esp+70h+var_64]
 0x8B4074: mov     eax, [ebx+0Ch]
 0x8B4077: mov     edi, [ebp+arg_4]

@@ -4,55 +4,57 @@ unsigned int _setenvp()
   int v1; // edi
   char **v3; // edi
   char *i; // esi
-  UInt32 v5; // ebp
-  char *v6; // eax
-  errno_t v7; // eax
-  int v8; // edx
-  int v9; // ecx
+  int v5; // eax
+  UInt32 v6; // ebp
+  char *v7; // eax
+  errno_t v8; // eax
+  int v9; // edx
+  int v10; // ecx
 
-  if ( !dword_BABC14 )
-    __initmbctable();
-  v0 = dword_BA9DF8;
-  v1 = 0;
-  if ( !dword_BA9DF8 )
-    return 0xFFFFFFFF;
-  while ( *v0 )
+  if ( !unk_BABC14 ) /*0x99778d*/
+    __initmbctable(); /*0x99778f*/
+  v0 = unk_BA9DF8; /*0x997794*/
+  v1 = 0; /*0x99779a*/
+  if ( !unk_BA9DF8 ) /*0x99779e*/
+    return 0xFFFFFFFF; /*0x99779e*/
+  while ( *v0 ) /*0x9977bc*/
   {
-    if ( *v0 != 0x3D )
-      ++v1;
-    v0 += strlen(v0) + 1;
+    if ( *v0 != 0x3D ) /*0x9977aa*/
+      ++v1; /*0x9977ac*/
+    v0 += strlen(v0) + 1; /*0x9977b4*/
   }
-  v3 = (char **)unknown_libname_74();
-  dword_BA9DB4 = v3;
-  if ( !v3 )
-    return 0xFFFFFFFF;
-  for ( i = dword_BA9DF8; ; i += v5 )
+  v3 = (char **)unknown_libname_74(v1 + 1, 4); /*0x9977c7*/
+  unk_BA9DB4 = v3; /*0x9977cd*/
+  if ( !v3 ) /*0x9977d3*/
+    return 0xFFFFFFFF; /*0x9977a3*/
+  for ( i = unk_BA9DF8; ; i += v6 ) /*0x9977d5*/
   {
-    if ( !*i )
+    if ( !*i ) /*0x99781e*/
     {
-      free(dword_BA9DF8);
-      dword_BA9DF8 = 0;
-      *v3 = 0;
-      dword_BABC08 = 1;
-      return 0;
+      free(unk_BA9DF8); /*0x997828*/
+      unk_BA9DF8 = 0; /*0x99782d*/
+      *v3 = 0; /*0x997833*/
+      unk_BABC08 = 1; /*0x997835*/
+      return 0; /*0x997846*/
     }
-    v5 = strlen(i) + 1;
-    if ( *i != 0x3D )
-      break;
+    v5 = strlen(i); /*0x9977df*/
+    v6 = v5 + 1; /*0x9977e6*/
+    if ( *i != 0x3D ) /*0x9977eb*/
+      break; /*0x9977eb*/
 LABEL_16:
-    ;
+    ; /*0x99781c*/
   }
-  v6 = (char *)unknown_libname_74();
-  *v3 = v6;
-  if ( v6 )
+  v7 = (char *)unknown_libname_74(v5 + 1, 1); /*0x9977f0*/
+  *v3 = v7; /*0x9977f9*/
+  if ( v7 ) /*0x9977fb*/
   {
-    v7 = strcpy_s(v6, v5, i);
-    if ( v7 )
-      _invoke_watson(v7, v8, v9, 0, (int)v3, (int)i);
-    ++v3;
-    goto LABEL_16;
+    v8 = strcpy_s(v7, v6, i); /*0x997800*/
+    if ( v8 ) /*0x99780a*/
+      _invoke_watson(v8, v9, v10, 0, (int)v3, (int)i); /*0x997811*/
+    ++v3; /*0x997819*/
+    goto LABEL_16; /*0x997819*/
   }
-  free(dword_BA9DB4);
-  dword_BA9DB4 = 0;
-  return 0xFFFFFFFF;
+  free(unk_BA9DB4); /*0x99784d*/
+  unk_BA9DB4 = 0; /*0x997852*/
+  return 0xFFFFFFFF; /*0x997843*/
 }

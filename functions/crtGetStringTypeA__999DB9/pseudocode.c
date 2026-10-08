@@ -13,9 +13,9 @@ int __cdecl __crtGetStringTypeA(
   int v10; // [esp+8h] [ebp-8h]
   char v11; // [esp+Ch] [ebp-4h]
 
-  _LocaleUpdate::_LocaleUpdate((_LocaleUpdate *)v9, a1);
-  result = __crtGetStringTypeA_stat(dwInfoType, lpMultiByteStr, cbMultiByte, lpCharType, CodePage, Locale, a8);
-  if ( v11 )
-    *(_DWORD *)(v10 + 0x70) &= ~2u;
-  return result;
+  _LocaleUpdate::_LocaleUpdate((_LocaleUpdate *)v9, a1); /*0x999dc5*/
+  result = __crtGetStringTypeA_stat(dwInfoType, lpMultiByteStr, cbMultiByte, lpCharType, CodePage, Locale, a8); /*0x999de2*/
+  if ( v11 ) /*0x999dee*/
+    *(_DWORD *)(v10 + 0x70) &= ~2u; /*0x999df3*/
+  return result; /*0x999df7*/
 }

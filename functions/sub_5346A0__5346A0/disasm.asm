@@ -123,7 +123,7 @@
 0x534808: push    eax
 0x534809: lea     eax, [esp+520h+var_404]
 0x534810: push    eax
-0x534811: call    nullsub_return0_0arg
+0x534811: call    nullsub_return0_0arg; [Verified] Shared zero-return leaf. BSTempEffectDecal vtable 0xA6822C uses it at +0x54 for GetTypeID 0 and also in other slots; many unrelated vtables reuse this target. Class meaning must be established from the owning vtable and caller.
 0x534816: add     esp, 0Ch
 0x534819: cmp     eax, 5
 0x53481C: jnz     short loc_534836

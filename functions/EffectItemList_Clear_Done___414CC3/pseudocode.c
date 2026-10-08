@@ -1,4 +1,4 @@
-int EffectItemList_Clear_::Done_()
+void EffectItemList_Clear_::Done_()
 {
-  return EffectItemList_Clear_::Done();
+  EffectItemList_Clear_::Done(); /*0x414cc3*/
 }

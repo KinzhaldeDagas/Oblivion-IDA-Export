@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x68E8A1",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x68E8AA",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x68E8BA",
-    "line": "call    MagicHitEffect?_BuildHitVFXList",
+    "line": "call    MagicHitEffect_BuildHitVFXList; Verified (Oblivion): queued hit VFX are replayed through MagicHitEffect_BuildHitVFXList, reusing the same model-then-shader factory path.",
     "mnemonic": "call",
     "size": 5
   },

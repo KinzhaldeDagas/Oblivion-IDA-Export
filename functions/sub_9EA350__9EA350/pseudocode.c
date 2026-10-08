@@ -1,5 +1,5 @@
 int sub_9EA350()
 {
-  GameSetting_ConstrAndReg(&dword_B37238, (int)"iPerkBlockStaggerChance", 5);
-  return atexit(sub_A1EB90);
+  GameSetting_ConstrAndReg(&MEMORY[0xB37238], "iPerkBlockStaggerChance", (const char *)5); /*0x9ea35c*/
+  return atexit(sub_A1EB90); /*0x9ea36c*/
 }

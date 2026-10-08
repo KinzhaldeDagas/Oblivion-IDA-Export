@@ -1,1 +1,1 @@
-IQueryInfo_0
+typedef IQueryInfo IQueryInfo_0;

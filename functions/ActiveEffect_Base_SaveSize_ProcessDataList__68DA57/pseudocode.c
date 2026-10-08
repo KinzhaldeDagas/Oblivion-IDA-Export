@@ -2,9 +2,9 @@ int __usercall ActiveEffect_Base_SaveSize_::ProcessDataList@<eax>(int a1@<edi>, 
 {
   _DWORD *v4; // esi
 
-  v4 = *(_DWORD **)(a1 + 0x34);
-  if ( v4 )
-    return ActiveEffect_Base_SaveSize_::LoopTest(v4, 0x1D);
+  v4 = *(_DWORD **)(a1 + 0x34); /*0x68da58*/
+  if ( v4 ) /*0x68da65*/
+    return ActiveEffect_Base_SaveSize_::LoopTest(v4, 0x1D); /*0x68da6d*/
   else
-    return ActiveEffect_Base_SaveSize_::DoneDataList(0x1D);
+    return ActiveEffect_Base_SaveSize_::DoneDataList(0x1D); /*0x68da65*/
 }

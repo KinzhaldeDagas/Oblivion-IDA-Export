@@ -1,5 +1,6 @@
-_BYTE *__thiscall sub_7A66F0(_BYTE *this)
+// Initializes a legacy 0x34-byte CSimpleBillboard cache by clearing only its valid byte.
+OB_CSimpleBillboard_010201A0 *__thiscall OB_CSimpleBillboard_ctor_010201A0(OB_CSimpleBillboard_010201A0 *this)
 {
-  *(this + 0x30) = 0;
-  return this;
+  this->valid = 0; /*0x7a66f2*/
+  return this; /*0x7a66f6*/
 }

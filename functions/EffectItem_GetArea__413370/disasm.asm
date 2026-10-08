@@ -1,4 +1,4 @@
-0x413370: mov     eax, [ecx+1Ch]
+0x413370: mov     eax, [ecx+1Ch]; Effective area: returns 0 for EffectSetting NoArea (0x200) or Self range (0); otherwise raw EffectItem+0x8 area.
 0x413373: mov     edx, [eax+58h]
 0x413376: shr     edx, 9
 0x413379: test    dl, 1

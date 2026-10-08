@@ -1,19 +1,32 @@
 {
-  "callees_count": 13,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x76DF70",
+      "0x76E0A5"
+    ]
+  ],
+  "chunks_sha256": "fe0bf4dbf1a53bae8e9cc59ecdd2d4d3be9c711cb939ccbfed69cd9106958aee",
+  "comment_regular": "\nVerified Oblivion factory, not an empty constructor: allocates0x50, initializes base, copies0x38-byte D3DPRESENT_PARAMETERS to+0x14, stores/AddRefs IDirect3DDevice9 at+0x4C, obtains RT0 via device slot38 and attaches to Ni2DBuffer. Corrects previous erroneous0x54 type with phantom format pointer at+0x14. MSVC COL ACCD44 has offset0; vtableA8997C confirms class. Evidence aligns Recreate76D6F0 and ReleaseResources76DC50.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 4,
-  "display_name": "NiDX9ImplicitBufferData::NiDX9ImplicitBufferData(void)",
+  "display_name": "NiDX9ImplicitBufferData_Create",
   "end_ea": "0x76E0A5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "??0NiDX9ImplicitBufferData@@QAE@XZ",
+  "name": "NiDX9ImplicitBufferData_Create",
   "segment": ".text",
   "sha256": "fe0bf4dbf1a53bae8e9cc59ecdd2d4d3be9c711cb939ccbfed69cd9106958aee",
   "size": 309,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x76DF70",
-  "type": "NiDX9ImplicitBufferData *__cdecl(UINT, NiPixelFormat *Src, Ni2DBuffer **)",
+  "total_chunk_size": 309,
+  "type": "NiDX9ImplicitBufferData *__cdecl(IDirect3DDevice9 *device, const D3DPRESENT_PARAMETERS *parameters, Ni2DBuffer **parentBuffer)",
   "xrefs_from_count": 133,
   "xrefs_to_count": 1
 }

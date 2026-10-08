@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x796320",
-    "line": "push    ebp",
+    "line": "push    ebp; Legacy TexCoord0 writer: stores diffuse S/T, optionally retains original CAD S/T plus map index, and applies the global T-flip only to the exported diffuse layer.",
     "mnemonic": "push",
     "size": 1
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x796345",
-    "line": "mov     bx, word ptr [esp+0Ch+arg_4]",
+    "line": "mov     bx, [esp+0Ch+mapIndex]",
     "mnemonic": "mov",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x796374",
-    "line": "call    sub_527160",
+    "line": "call    FaceGenFloatVector_ResizeFill; Vector resize: retain existing prefix, erase surplus elements when shrinking, fill only newly inserted elements when growing. Equal size does not overwrite coefficients. Matrix dimension products must already be valid; no recovery from rows*columns overflow.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x796390",
-    "line": "lea     ecx, [esi+0D8h]; int",
+    "line": "lea     ecx, [esi+0D8h]; this",
     "mnemonic": "lea",
     "size": 6
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x7963A1",
-    "line": "push    0; int",
+    "line": "push    0; fillValue",
     "mnemonic": "push",
     "size": 2
   },
@@ -289,13 +289,13 @@
   },
   {
     "ea": "0x7963A6",
-    "line": "push    eax; int",
+    "line": "push    eax; newSize",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7963A7",
-    "line": "call    sub_6EF4B0",
+    "line": "call    OB_stVectorByte_ResizeFill_010201A0; Oblivion body: resizes a byte vector; erases a checked suffix when shrinking and delegates to byte insert-fill with the supplied byte when growing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x7963D2",
-    "line": "call    sub_527160",
+    "line": "call    FaceGenFloatVector_ResizeFill; Vector resize: retain existing prefix, erase surplus elements when shrinking, fill only newly inserted elements when growing. Equal size does not overwrite coefficients. Matrix dimension products must already be valid; no recovery from rows*columns overflow.",
     "mnemonic": "call",
     "size": 5
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x796436",
-    "line": "mov     ebx, [esp+10h+arg_0]",
+    "line": "mov     ebx, [esp+10h+diffuseST]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x796479",
-    "line": "mov     ebx, [esp+10h+arg_0]",
+    "line": "mov     ebx, [esp+10h+diffuseST]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -751,7 +751,7 @@
   },
   {
     "ea": "0x7964A3",
-    "line": "call    sub_787680",
+    "line": "call    CSpeedTreeRT__GetTextureFlip; CIndexedGeometry diffuse UV insertion uses the same global texture-flip accessor; with Oblivion's startup value true, stored T is -inputT while retained original CAD texcoords remain unflipped.",
     "mnemonic": "call",
     "size": 5
   },
@@ -787,7 +787,7 @@
   },
   {
     "ea": "0x7964B5",
-    "line": "fstp    [esp+10h+arg_4]",
+    "line": "fstp    dword ptr [esp+10h+mapIndex]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -871,7 +871,7 @@
   },
   {
     "ea": "0x7964DA",
-    "line": "fld     [esp+8+arg_4]",
+    "line": "fld     dword ptr [esp+8+mapIndex]",
     "mnemonic": "fld",
     "size": 4
   },

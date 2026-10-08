@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x462080",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; MEF v56 reset wrapper invalidates indices before/after native reset, including same-pointer/same-capacity contents changes. Header readback alone is insufficient. Generic array setter/resize entries are also intercepted; no cache mutex held across native reset callbacks.",
     "mnemonic": "push",
     "size": 2
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x4620C1",
-    "line": "mov     [esp+20h+var_10], eax",
+    "line": "mov     [esp+20h+value], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -175,13 +175,13 @@
   },
   {
     "ea": "0x4620CD",
-    "line": "mov     ecx, eax; this",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4620CF",
-    "line": "call    ??0InteriorCellNewReferencesMap@@QAE@XZ; InteriorCellNewReferencesMap::InteriorCellNewReferencesMap(void)",
+    "line": "call    InteriorCellNewReferencesMap_ctor;",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x4620FB",
-    "line": "mov     [esp+20h+var_10], eax",
+    "line": "mov     [esp+20h+value], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -301,13 +301,13 @@
   },
   {
     "ea": "0x46210B",
-    "line": "mov     ecx, eax; this",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x46210D",
-    "line": "call    ??0ExteriorCellNewReferencesMap@@QAE@XZ; ExteriorCellNewReferencesMap::ExteriorCellNewReferencesMap(void)",
+    "line": "call    ExteriorCellNewReferencesMap_ctor;",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x462136",
-    "line": "mov     [esp+20h+var_10], eax",
+    "line": "mov     [esp+20h+value], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -421,13 +421,13 @@
   },
   {
     "ea": "0x462146",
-    "line": "mov     ecx, eax; this",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x462148",
-    "line": "call    ??0ExteriorCellNewReferencesMap@@QAE@XZ; ExteriorCellNewReferencesMap::ExteriorCellNewReferencesMap(void)",
+    "line": "call    ExteriorCellNewReferencesMap_ctor;",
     "mnemonic": "call",
     "size": 5
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x462167",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x462180",
-    "line": "mov     eax, [esi+74h]",
+    "line": "mov     eax, [esi+74h]; MEF PERF 2026-09-08: PERF-3 invalidation boundary: reset clears owner+74h slots and used/nonzero counts, then inserts zero at index0; owner+78h reset follows4621C8. Storage/capacity may remain unchanged. Cache keyed only by owner/data pointer or current length is insufficient to detect all resets.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -625,7 +625,7 @@
   },
   {
     "ea": "0x4621AA",
-    "line": "mov     [esp+20h+var_10], ebx",
+    "line": "mov     [esp+20h+value], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -655,37 +655,37 @@
   },
   {
     "ea": "0x4621B6",
-    "line": "call    sub_452910",
+    "line": "call    NiTLargeArray_Resize32",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4621BB",
-    "line": "lea     ecx, [esp+20h+var_10]",
+    "line": "lea     ecx, [esp+20h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4621BF",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4621C0",
-    "line": "push    ebx",
+    "line": "push    ebx; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4621C1",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4621C3",
-    "line": "call    sub_446C50",
+    "line": "call    NiTLargeArray32_SetSlot",
     "mnemonic": "call",
     "size": 5
   },
@@ -769,7 +769,7 @@
   },
   {
     "ea": "0x4621EC",
-    "line": "mov     [esp+20h+var_10], ebx",
+    "line": "mov     [esp+20h+value], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -799,37 +799,37 @@
   },
   {
     "ea": "0x4621F8",
-    "line": "call    sub_452910",
+    "line": "call    NiTLargeArray_Resize32",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4621FD",
-    "line": "lea     ecx, [esp+20h+var_10]",
+    "line": "lea     ecx, [esp+20h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x462201",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x462202",
-    "line": "push    ebx",
+    "line": "push    ebx; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x462203",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x462205",
-    "line": "call    sub_446C50",
+    "line": "call    NiTLargeArray32_SetSlot",
     "mnemonic": "call",
     "size": 5
   },
@@ -880,5 +880,137 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C2A70",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2A73",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C2A74",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2A79",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C2A7A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C2A7B",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2A7E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C2A7F",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2A84",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C2A85",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C2A86",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2A89",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C2A8A",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2A8F",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C2A90",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C2A91",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C2A95",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2A98",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2A9B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C2A9D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2AA2",
+    "line": "mov     eax, offset stru_AEB830",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2AA7",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

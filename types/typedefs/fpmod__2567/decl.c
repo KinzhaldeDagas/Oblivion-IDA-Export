@@ -1,1 +1,9 @@
-fpmod
+enum fpmod : __int32
+{
+FP_ROUND_ZERO = 0x0,
+FP_ROUND_DOWN = 0x1,
+FP_ROUND_EVEN = 0x2,
+FP_ROUND_UP = 0x3,
+FP_VAL_INFINITY = 0x4,
+FP_VAL_NAN = 0x5,
+};

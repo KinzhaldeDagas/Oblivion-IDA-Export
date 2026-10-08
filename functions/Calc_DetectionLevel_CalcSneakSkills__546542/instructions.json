@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x546542",
-    "line": "mov     eax, 64h ; 'd'",
+    "line": "mov     eax, 64h ; 'd'; Oblivion Sneak-skill stage. Vanilla caps both detector and target Luck-modified Sneak values at 100, subtracts the target's concealment term from the detector term, and scales by fSneakSkillMult. Existing AVU patch context is preserved conceptually: its patch skips the two vanilla caps.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x54655D",
-    "line": "fild    [esp+arg_10]",
+    "line": "fild    [esp+arg_10]; Calc_DetectionLevel::CalcSneakSkills starts applying detector/target sneak factors after the vanilla 100 caps.",
     "mnemonic": "fild",
     "size": 4
   },

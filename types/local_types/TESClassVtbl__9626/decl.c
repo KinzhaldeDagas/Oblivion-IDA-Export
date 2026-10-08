@@ -1,1 +1,4 @@
-TESClassVtbl
+struct TESClassVtbl
+{
+TESFormVtbl super;
+};

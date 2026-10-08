@@ -1,4 +1,4 @@
-0x5FF7C9: mov     edx, [esi]
+0x5FF7C9: mov     edx, [esi]; ODismemberment combat decode: Hex-Rays failed here. This tail applies target blocking, block reduction, block/shield/weapon damage, armor durability damage and hit/block sounds, then dispatches hit visuals and calls target vtbl+0x220 Actor_OnPhysicalHit with final health/fatigue damage before post-hit stagger/knockdown/disarm handling.
 0x5FF7CB: mov     eax, [edx+1A0h]
 0x5FF7D1: mov     ecx, esi
 0x5FF7D3: call    eax
@@ -7,7 +7,7 @@
 0x5FF7D9: test    bl, bl
 0x5FF7DB: jnz     short loc_5FF7EC
 0x5FF7DD: mov     ecx, esi
-0x5FF7DF: call    Actor_IsBlocking
+0x5FF7DF: call    Actor_IsBlocking; Actor_IsBlocking: process current-action vfunc +0x2D0 equals 6. Player jump path treats this specially; climb activation should reject or require explicit design override while blocking.
 0x5FF7E4: mov     bl, al
 0x5FF7E6: mov     byte ptr [esp+arg_18+2], bl
 0x5FF7EA: jmp     short loc_5FF7F5
@@ -34,11 +34,11 @@
 0x5FF829: test    bl, bl
 0x5FF82B: mov     byte ptr [esp+arg_10+3], 0
 0x5FF830: jz      loc_5FFBE3
-0x5FF836: mov     ecx, [esp+arg_1C]
-0x5FF83A: push    0
-0x5FF83C: push    ecx
-0x5FF83D: push    esi
-0x5FF83E: call    sub_6131D0
+0x5FF836: mov     ecx, [esp+target]
+0x5FF83A: push    0; outAngleDegrees
+0x5FF83C: push    ecx; target
+0x5FF83D: push    esi; actor
+0x5FF83E: call    Actor_IsFacingReferenceWithinCombatAngle; Computes the absolute XY heading difference from actor to target, normalizes across the 360-degree boundary, optionally returns degrees, and tests it against the combat-facing threshold game setting.
 0x5FF843: add     esp, 0Ch
 0x5FF846: test    al, al
 0x5FF848: jz      loc_5FFBE3
@@ -55,9 +55,9 @@
 0x5FF86C: push    1
 0x5FF86E: call    eax
 0x5FF870: test    eax, eax
-0x5FF872: mov     byte ptr [esp+arg_1C], 1
+0x5FF872: mov     byte ptr [esp+target], 1
 0x5FF877: jnz     short loc_5FF87E
-0x5FF879: mov     byte ptr [esp+arg_1C], 0
+0x5FF879: mov     byte ptr [esp+target], 0
 0x5FF87E: cmp     [esp+arg_70], 0
 0x5FF883: jz      short loc_5FF894
 0x5FF885: cmp     [esp+arg_28], 0
@@ -67,11 +67,11 @@
 0x5FF890: fldz
 0x5FF892: jmp     short loc_5FF8CF
 0x5FF894: mov     ecx, dword ptr [esp+arg_70]
-0x5FF898: mov     edx, [esp+arg_1C]
-0x5FF89C: push    ecx; char
+0x5FF898: mov     edx, [esp+target]
+0x5FF89C: push    ecx; Block mitigation path: Calc_BlockDamageReduction uses Block AV 0x0F, actor fatigue fraction, shield/weapon/hand-to-hand block mode, and fBlock* settings.
 0x5FF89D: push    edx; float
 0x5FF89E: mov     ecx, esi; this
-0x5FF8A0: call    Actor_GetFatigueFraction
+0x5FF8A0: call    Actor_GetFatigueFraction; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.
 0x5FF8A5: mov     eax, [esi]
 0x5FF8A7: mov     edx, [eax+284h]
 0x5FF8AD: push    ecx
@@ -91,7 +91,7 @@
 0x5FF8CF: mov     eax, [edi]
 0x5FF8D1: fstp    [esp+arg_2C]
 0x5FF8D5: fld     [esp+arg_2C]
-0x5FF8D9: mov     edx, [eax+3B4h]
+0x5FF8D9: mov     edx, [eax+3B4h]; Calls attacker vtbl+0x3B4 Actor_HandleBlockedHitDamage(attacker, target, rawDamage, blockReduction, blockHitVector): logs block percent, damages blocking item, applies block fatigue loss, and may play shield/weapon break handling.
 0x5FF8DF: push    ebp
 0x5FF8E0: push    esi
 0x5FF8E1: sub     esp, 8
@@ -107,7 +107,7 @@
 0x5FF8FD: fstp    st(1)
 0x5FF8FF: test    ah, 41h
 0x5FF902: jnz     short loc_5FF912
-0x5FF904: fld1
+0x5FF904: fld1; If block reduction is positive, final health damage is scaled by (1.0 - blockReduction) before armor/hit/damage application.
 0x5FF906: fsubrp  st(1), st
 0x5FF908: fmul    [esp+arg_14]
 0x5FF90C: fstp    [esp+arg_14]
@@ -119,7 +119,7 @@
 0x5FF91F: movsx   ebx, byte ptr [eax+90h]
 0x5FF926: jmp     short loc_5FF92B
 0x5FF928: or      ebx, 0FFFFFFFFh
-0x5FF92B: cmp     byte ptr [esp+arg_1C], 0
+0x5FF92B: cmp     byte ptr [esp+target], 0
 0x5FF930: mov     dword ptr [esp+arg_4C], ebx
 0x5FF934: jz      loc_5FFA21
 0x5FF93A: cmp     dword ptr [esi+58h], 0
@@ -168,7 +168,7 @@
 0x5FF9BA: mov     ecx, dword ptr [esp+1Ch+arg_4C]
 0x5FF9BE: push    ebx
 0x5FF9BF: push    ecx
-0x5FF9C0: call    sub_6AFFF0
+0x5FF9C0: call    Combat_PlayBlockHitSound; ODismemberment combat decode: block-hit sound router. Chooses WPNBlockHand/Blade/Blunt/Staff/Bow or enchanted hit variants, then routes through the same positioned sound tail as weapon hit audio.
 0x5FF9C5: jmp     loc_5FFB8E
 0x5FF9CA: mov     edx, [esi]
 0x5FF9CC: mov     eax, [edx+174h]
@@ -199,13 +199,13 @@
 0x5FFA10: mov     [ecx+4], edx
 0x5FFA13: push    ebx
 0x5FFA14: mov     [ecx+8], eax
-0x5FFA17: call    sub_6AFFF0
+0x5FFA17: call    Combat_PlayBlockHitSound; ODismemberment combat decode: block-hit sound router. Chooses WPNBlockHand/Blade/Blunt/Staff/Bow or enchanted hit variants, then routes through the same positioned sound tail as weapon hit audio.
 0x5FFA1C: jmp     loc_5FFB8E
 0x5FFA21: cmp     [esp+arg_70], 0
 0x5FFA26: jz      loc_5FFB05
-0x5FFA2C: push    0Fh
-0x5FFA2E: mov     ecx, esi
-0x5FFA30: call    Actor_GetSkillMasteryLevel
+0x5FFA2C: push    0Fh; actorValue
+0x5FFA2E: mov     ecx, esi; this
+0x5FFA30: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x5FFA35: cmp     eax, 2
 0x5FFA38: jl      loc_5FFB05
 0x5FFA3E: cmp     dword ptr [esi+58h], 0
@@ -276,7 +276,7 @@
 0x5FFAF3: mov     [ecx+4], edx
 0x5FFAF6: push    0FFFFFFFFh
 0x5FFAF8: mov     [ecx+8], eax
-0x5FFAFB: call    sub_6AFFF0
+0x5FFAFB: call    Combat_PlayBlockHitSound; ODismemberment combat decode: block-hit sound router. Chooses WPNBlockHand/Blade/Blunt/Staff/Bow or enchanted hit variants, then routes through the same positioned sound tail as weapon hit audio.
 0x5FFB00: jmp     loc_5FFB8E
 0x5FFB05: cmp     dword ptr [esi+58h], 0
 0x5FFB09: jz      loc_5FFB96
@@ -369,7 +369,7 @@
 0x5FFC10: test    ah, 5
 0x5FFC13: jp      loc_5FFD28
 0x5FFC19: mov     ecx, esi
-0x5FFC1B: call    sub_5E5A00
+0x5FFC1B: call    Actor_SelectArmorOrShieldForHitDamage; ODismemberment combat decode: selects a random equipped armor/shield/container entry for durability damage using iArmorDamage* chances, falling back to equipped weapon entry if no armor entry is chosen.
 0x5FFC20: mov     ebp, eax
 0x5FFC22: test    ebp, ebp
 0x5FFC24: jz      loc_5FFCFF
@@ -381,15 +381,15 @@
 0x5FFC39: test    al, al
 0x5FFC3B: jz      short loc_5FFC56
 0x5FFC3D: mov     ecx, edi
-0x5FFC3F: call    Actor_IsBlocking
+0x5FFC3F: call    Actor_IsBlocking; Actor_IsBlocking: process current-action vfunc +0x2D0 equals 6. Player jump path treats this specially; climb activation should reject or require explicit design override while blocking.
 0x5FFC44: test    al, al
 0x5FFC46: jz      short loc_5FFC6D
-0x5FFC48: push    0Fh
-0x5FFC4A: mov     ecx, edi
-0x5FFC4C: call    Actor_GetSkillMasteryLevel
+0x5FFC48: push    0Fh; actorValue
+0x5FFC4A: mov     ecx, edi; this
+0x5FFC4C: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x5FFC51: cmp     eax, 2
 0x5FFC54: jge     short loc_5FFC6D
-0x5FFC56: mov     eax, [esi]
+0x5FFC56: mov     eax, [esi]; Oblivion combat durability boundary: calls target Actor vtable +0x2C4 with the selected armor entry and damage.
 0x5FFC58: fld     [esp+arg_30]
 0x5FFC5C: mov     edx, [eax+2C4h]
 0x5FFC62: push    0
@@ -405,7 +405,7 @@
 0x5FFC79: jz      short loc_5FFCA4
 0x5FFC7B: cmp     byte ptr [ecx+4], 14h
 0x5FFC7F: jnz     short loc_5FFCA4
-0x5FFC81: call    TESObjectARMO_ISHeavyArmor
+0x5FFC81: call    TESObjectARMO_ISHeavyArmor; Oblivion armor classification branch: TESObjectARMO_ISHeavyArmor selects HeavyArmor; otherwise LightArmor.
 0x5FFC86: fldz
 0x5FFC88: push    ecx
 0x5FFC89: fstp    [esp+4+var_4]
@@ -418,8 +418,8 @@
 0x5FFC9C: push    1Bh
 0x5FFC9E: jmp     short loc_5FFCA2
 0x5FFCA0: push    12h
-0x5FFCA2: call    edx
-0x5FFCA4: cmp     [esp+arg_28], 0
+0x5FFCA2: call    edx; Qualifying armor hit: HeavyArmor (0x12) or LightArmor (0x1B), useValue0, identity scale (0.0).
+0x5FFCA4: cmp     [esp+arg_28], 0; Immediate return site from combat armor-use Actor::ModExperience dispatch at 0x5FFCA2. Medium Armor sidecar XP transactions must be consumed only from this return address with useType/useIndex 0; mismatches fail closed to vanilla.
 0x5FFCA9: jz      short loc_5FFCB8
 0x5FFCAB: mov     eax, [esp+arg_28]
 0x5FFCAF: movsx   ebx, byte ptr [eax+90h]
@@ -446,7 +446,7 @@
 0x5FFCED: mov     ecx, ebp
 0x5FFCEF: call    ContainerEntryExtraData_DestroyDataTable
 0x5FFCF4: push    ebp
-0x5FFCF5: call    FormHeapFree
+0x5FFCF5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5FFCFA: add     esp, 4
 0x5FFCFD: jmp     short loc_5FFD69
 0x5FFCFF: cmp     byte ptr [esp+arg_10+3], 0
@@ -501,15 +501,15 @@
 0x5FFD88: jz      short loc_5FFD8E
 0x5FFD8A: test    ebx, ebx
 0x5FFD8C: jnz     short loc_5FFDA1
-0x5FFD8E: mov     ecx, [esp+arg_20]
+0x5FFD8E: mov     ecx, [esp+arg_20]; this
 0x5FFD92: test    ecx, ecx
 0x5FFD94: jz      loc_5FFEB5
-0x5FFD9A: call    TESWorldSpace_GetParentWorldpsace
+0x5FFD9A: call    Shared_GetPointerAtOffset7C; Shared four-byte accessor returning *(this+0x7C). Verified contexts include TESWorldSpace::parentWorldspace and ArrowProjectile::arrowEnch; class-specific naming is unsafe.
 0x5FFD9F: jmp     short loc_5FFDB3
-0x5FFDA1: mov     ecx, [esp+arg_20]
+0x5FFDA1: mov     ecx, [esp+arg_20]; this
 0x5FFDA5: test    ecx, ecx
 0x5FFDA7: jz      short loc_5FFDB0
-0x5FFDA9: call    TESWorldSpace_GetParentWorldpsace
+0x5FFDA9: call    Shared_GetPointerAtOffset7C; Shared four-byte accessor returning *(this+0x7C). Verified contexts include TESWorldSpace::parentWorldspace and ArrowProjectile::arrowEnch; class-specific naming is unsafe.
 0x5FFDAE: jmp     short loc_5FFDB3
 0x5FFDB0: mov     eax, [eax+64h]
 0x5FFDB3: test    eax, eax
@@ -517,20 +517,20 @@
 0x5FFDB7: lea     ebp, [eax+18h]
 0x5FFDBA: test    ebp, ebp
 0x5FFDBC: jnz     short loc_5FFDFB
-0x5FFDBE: mov     ecx, [esp+arg_20]
+0x5FFDBE: mov     ecx, [esp+arg_20]; this
 0x5FFDC2: test    ecx, ecx
 0x5FFDC4: jz      short loc_5FFDE1
-0x5FFDC6: call    sub_607400
+0x5FFDC6: call    ArrowProjectile_GetBowEnchantment; Post-hit combat path queries projectile-held bow enchantment when a projectile object is supplied.
 0x5FFDCB: test    eax, eax
 0x5FFDCD: jz      short loc_5FFDD6
 0x5FFDCF: lea     ebp, [eax+18h]
 0x5FFDD2: test    ebp, ebp
 0x5FFDD4: jnz     short loc_5FFDFB
-0x5FFDD6: mov     ecx, [esp+arg_20]
-0x5FFDDA: call    sub_607410
+0x5FFDD6: mov     ecx, [esp+arg_20]; this
+0x5FFDDA: call    ArrowProjectile_GetPoison; If no projectile bow enchantment is selected, query projectile-held poison for post-hit magic application.
 0x5FFDDF: jmp     short loc_5FFDE8
-0x5FFDE1: mov     ecx, ebx
-0x5FFDE3: call    sub_484DF0
+0x5FFDE1: mov     ecx, ebx; this
+0x5FFDE3: call    EquippedEntryData_GetPoison; Return the AlchemyItem poison attached to this EntryData's first ExtraDataList stack, or NULL. EntryData layout is extendData@+0, countDelta@+4, type@+8.
 0x5FFDE8: test    eax, eax
 0x5FFDEA: jz      loc_5FFEB5
 0x5FFDF0: lea     ebp, [eax+24h]
@@ -540,8 +540,8 @@
 0x5FFE00: jz      short loc_5FFE4A
 0x5FFE02: cmp     [esp+arg_20], 0
 0x5FFE07: jnz     loc_5FFEB5
-0x5FFE0D: mov     ecx, ebx
-0x5FFE0F: call    sub_4849C0
+0x5FFE0D: mov     ecx, ebx; this
+0x5FFE0F: call    EquippedEntryData_GetCharge; Return per-instance ExtraCharge when present; otherwise return the TESEnchantableForm base charge. Returns the sentinel/default when the EntryData form is not enchantable.
 0x5FFE14: fstp    [esp+arg_3C]
 0x5FFE18: mov     eax, [ebp+0Ch]
 0x5FFE1B: mov     edx, [eax]
@@ -619,9 +619,9 @@
 0x5FFEF0: mov     bl, [esp+arg_70]
 0x5FFEF4: test    bl, bl
 0x5FFEF6: jz      short loc_5FFF0A
-0x5FFEF8: push    11h
-0x5FFEFA: mov     ecx, esi
-0x5FFEFC: call    Actor_GetSkillMasteryLevel
+0x5FFEF8: push    11h; actorValue
+0x5FFEFA: mov     ecx, esi; this
+0x5FFEFC: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x5FFF01: cmp     eax, 2
 0x5FFF04: jge     loc_600528
 0x5FFF0A: cmp     [esp+arg_20], 0
@@ -632,13 +632,13 @@
 0x5FFF1A: jz      short loc_5FFF52
 0x5FFF1C: cmp     [esp+arg_28], 0
 0x5FFF21: jz      short loc_5FFF52
-0x5FFF23: push    0Fh
-0x5FFF25: mov     ecx, esi
-0x5FFF27: call    Actor_GetSkillMasteryLevel
+0x5FFF23: push    0Fh; actorValue
+0x5FFF25: mov     ecx, esi; this
+0x5FFF27: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x5FFF2C: cmp     eax, 2
 0x5FFF2F: jl      short loc_5FFF52
 0x5FFF31: push    0; Seed
-0x5FFF33: call    GetRandomLargeInteger?
+0x5FFF33: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x5FFF38: cdq
 0x5FFF39: mov     ecx, 64h ; 'd'
 0x5FFF3E: idiv    ecx
@@ -646,7 +646,7 @@
 0x5FFF43: cmp     edx, ds:0B37250h
 0x5FFF49: jg      short loc_5FFF52
 0x5FFF4B: mov     ecx, edi
-0x5FFF4D: call    sub_5F4F00
+0x5FFF4D: call    Actor_PlayStaggerAnimGroup
 0x5FFF52: cmp     byte ptr [esp+arg_48+3], 0
 0x5FFF57: jnz     loc_6000B4
 0x5FFF5D: mov     ebp, [esi]
@@ -654,7 +654,7 @@
 0x5FFF62: lea     edx, [esp+a2]
 0x5FFF66: push    edx; a2
 0x5FFF67: mov     ecx, edi; this
-0x5FFF69: call    sub_5E6A40
+0x5FFF69: call    Actor_GetWeaponTipLocalPointForHit; ODismemberment combat decode: returns a local-space weapon/reach point for hit visuals. Uses actor GetNiNode, equipped weapon combat distance, named weapon node lookup, and native transform helpers. Attack tail passes this as one of Actor_HandleHitVisualEffects' vector inputs.
 0x5FFF6E: push    eax
 0x5FFF6F: mov     eax, [ebx]
 0x5FFF71: mov     edx, [eax+310h]
@@ -666,7 +666,7 @@
 0x5FFF86: sub     esp, 8
 0x5FFF89: fstp    [esp+0Ch+var_8]
 0x5FFF8D: mov     ecx, esi
-0x5FFF8F: fld     [esp+0Ch+arg_18]
+0x5FFF8F: fld     [esp+0Ch+arg_18]; OBSE-side hook target via vtable +0x398: record target/attacker/final damage and transform the supplied weapon/reach local point through the attacker root to estimate nearest target limb before original hit visuals run.
 0x5FFF93: fstp    [esp+0Ch+var_C]
 0x5FFF96: push    edi
 0x5FFF97: call    eax
@@ -678,10 +678,10 @@
 0x5FFFA7: test    eax, eax
 0x5FFFA9: jle     loc_6000B4
 0x5FFFAF: fld     [esp+arg_58]
-0x5FFFB3: call    Double_To_SInt32
+0x5FFFB3: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5FFFB8: push    eax
 0x5FFFB9: mov     ecx, esi; this
-0x5FFFBB: call    Actor_GetFatigueFraction
+0x5FFFBB: call    Actor_GetFatigueFraction; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.
 0x5FFFC0: mov     edx, [esi]
 0x5FFFC2: mov     eax, [edx+284h]
 0x5FFFC8: push    ecx
@@ -712,22 +712,22 @@
 0x60000A: call    eax
 0x60000C: mov     ecx, eax
 0x60000E: call    sub_4121A0
-0x600013: mov     ecx, offset fKnockbackForceMax
+0x600013: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+2F0h)
 0x600018: call    GameSetting_GetSafeFloatPointer
-0x60001D: fld     [esp+arg_1C]
+0x60001D: fld     [esp+target]
 0x600021: fld     dword ptr [eax]
 0x600023: fcompp
 0x600025: fnstsw  ax
 0x600027: test    ah, 5
 0x60002A: jp      short loc_60003C
-0x60002C: mov     ecx, offset fKnockbackForceMax
+0x60002C: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+2F0h)
 0x600031: call    GameSetting_GetSafeFloatPointer
 0x600036: fld     dword ptr [eax]
-0x600038: fstp    [esp+arg_1C]
+0x600038: fstp    [esp+target]
 0x60003C: lea     ecx, [esp+arg_3C]
-0x600040: call    sub_43F350
+0x600040: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x600045: fstp    st
-0x600047: fld     [esp+arg_1C]
+0x600047: fld     [esp+target]
 0x60004B: fld     st
 0x60004D: fmul    dword ptr [esp+arg_3C]
 0x600051: fstp    [esp+arg_64]
@@ -743,11 +743,11 @@
 0x60007B: fstp    [esp+arg_6C]
 0x60007F: mov     eax, [esp+arg_6C]
 0x600083: mov     [esp+arg_9C], eax
-0x60008A: call    MobileObject_GetCharProxy
+0x60008A: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x60008F: mov     ebx, eax
 0x600091: test    ebx, ebx
 0x600093: jz      short loc_6000B4
-0x600095: mov     ecx, offset fKnockbackTime
+0x600095: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+2F8h)
 0x60009A: call    GameSetting_GetSafeFloatPointer
 0x60009F: fld     dword ptr [eax]
 0x6000A1: push    ecx
@@ -755,7 +755,7 @@
 0x6000A9: fstp    [esp+4+var_4]; float
 0x6000AC: push    ecx; int
 0x6000AD: mov     ecx, ebx
-0x6000AF: call    sub_8907A0
+0x6000AF: call    bhkCharacterController_SetTransientPushVector; Blocking/attack handling calls transient push setter with fKnockbackTime; confirms +0x2F0/+0x300 are knockback/push semantics.
 0x6000B4: cmp     esi, ds:0B333C4h
 0x6000BA: jnz     loc_60057C
 0x6000C0: push    0
@@ -776,7 +776,7 @@
 0x6000F3: test    ah, 41h
 0x6000F6: jnz     short loc_60013C
 0x6000F8: push    8
-0x6000FA: call    ActorValue_GetName
+0x6000FA: call    ActorValue_GetName; Return the localized actor-value display name through g_actorValueNameSettings. Native skills occupy the contiguous SkillActorValue range 0x0C..0x20.
 0x6000FF: add     esp, 4
 0x600102: push    eax
 0x600103: mov     eax, [esi]
@@ -803,7 +803,7 @@
 0x600144: test    ah, 5
 0x600147: jp      short loc_600193
 0x600149: push    0Ah
-0x60014B: call    ActorValue_GetName
+0x60014B: call    ActorValue_GetName; Return the localized actor-value display name through g_actorValueNameSettings. Native skills occupy the contiguous SkillActorValue range 0x0C..0x20.
 0x600150: add     esp, 4
 0x600153: push    eax
 0x600154: mov     eax, [esi]
@@ -834,7 +834,7 @@
 0x6001A2: push    esi
 0x6001A3: call    Player_UpdateHUDHealthBarTarget?
 0x6001A8: add     esp, 4
-0x6001AB: mov     eax, [esi]
+0x6001AB: mov     eax, [esi]; ODismemberment: attack tail checks target vtable +0x198 Actor_IsDead(0) after hit visuals and before Actor_OnPhysicalHit stack setup. Plugin hit capture mirrors this to avoid post-death corpse hits overwriting captured limb context.
 0x6001AD: mov     edx, [eax+198h]
 0x6001B3: push    0
 0x6001B5: mov     ecx, esi
@@ -847,14 +847,14 @@
 0x6001C8: setz    bl
 0x6001CB: sub     esp, 8
 0x6001CE: fstp    [esp+0Ch+var_8]
-0x6001D2: mov     ecx, esi
+0x6001D2: mov     ecx, esi; ODismemberment: stack setup for Actor_OnPhysicalHit vtable +0x220; first float is attack tail arg_14, second float is arg_38, attacker is pushed before the reserved float slots.
 0x6001D4: fld     [esp+0Ch+arg_14]
 0x6001D8: fstp    [esp+0Ch+var_C]
-0x6001DB: call    edx
+0x6001DB: call    edx; ODismemberment: attack tail calls target vtable +0x220 Actor_OnPhysicalHit; AL is stored as the death result. Hook can use this result as a post-call fallback if the earlier Actor_Kill pre-ragdoll hook did not consume.
 0x6001DD: test    bl, bl
 0x6001DF: mov     byte ptr [esp+arg_18+3], al
 0x6001E3: jz      short loc_60020D
-0x6001E5: test    al, al
+0x6001E5: test    al, al; ODismemberment: after Actor_OnPhysicalHit, AL true means the target is dead. Nonfatal hit preview is plugin-only validation; faithful automatic dismemberment remains gated to this death result or Actor_Kill pre-ragdoll state.
 0x6001E7: jz      short loc_600218
 0x6001E9: cmp     [esp+arg_20], 0
 0x6001EE: jnz     short loc_60020D
@@ -868,8 +868,8 @@
 0x600202: fstp    [esp+4+var_4]; float
 0x600205: push    esi; int
 0x600206: mov     ecx, edi
-0x600208: call    sub_5F0EE0
-0x60020D: cmp     byte ptr [esp+arg_18+3], 0
+0x600208: call    Actor_ApplyHitPhysicsImpulseToTarget
+0x60020D: cmp     byte ptr [esp+arg_18+3], 0; ODismemberment: death result byte gates the remaining nonlethal post-hit handling. If nonzero, Oblivion skips toward cleanup; if zero, knockdown/stagger/disarm/paralyze logic can continue.
 0x600212: jnz     loc_5FFEDF
 0x600218: fldz
 0x60021A: fcomp   [esp+arg_38]
@@ -890,10 +890,10 @@
 0x600248: mov     byte ptr [esp+arg_10+3], 1
 0x60024D: jmp     short loc_60028E
 0x60024F: fld     [esp+arg_58]
-0x600253: call    Double_To_SInt32
+0x600253: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x600258: push    eax; int
 0x600259: mov     ecx, esi; this
-0x60025B: call    Actor_GetFatigueFraction
+0x60025B: call    Actor_GetFatigueFraction; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.
 0x600260: mov     eax, [esi]
 0x600262: mov     edx, [eax+284h]
 0x600268: push    ecx
@@ -908,7 +908,7 @@
 0x60027D: mov     ecx, esi
 0x60027F: call    edx
 0x600281: push    eax; int
-0x600282: call    sub_5475D0
+0x600282: call    Calc_CheckKnockdownChance; Nonlethal knockdown chance path: Calc_CheckKnockdownChance uses agility/luck/fatigue/damage through fKnockdown* settings and can mark the target for knockdown/stagger handling.
 0x600287: add     esp, 10h
 0x60028A: mov     byte ptr [esp+arg_10+3], al
 0x60028E: mov     eax, [edi]
@@ -919,13 +919,13 @@
 0x60029C: jz      short loc_6002BE
 0x60029E: mov     eax, [edi]
 0x6002A0: mov     edx, [eax+164h]
-0x6002A6: push    3
+0x6002A6: push    3; slot
 0x6002A8: mov     ecx, edi
 0x6002AA: call    edx
-0x6002AC: mov     ecx, eax
-0x6002AE: call    ActorAnimData_GetAnimGroupFromField8Value
+0x6002AC: mov     ecx, eax; this
+0x6002AE: call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.
 0x6002B3: push    eax
-0x6002B4: call    sub_51AA00
+0x6002B4: call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.
 0x6002B9: add     esp, 4
 0x6002BC: jmp     short loc_6002C3
 0x6002BE: mov     eax, 0FFh
@@ -944,10 +944,10 @@
 0x6002E4: xor     bl, bl
 0x6002E6: jmp     short loc_6002EA
 0x6002E8: mov     bl, 1
-0x6002EA: mov     eax, [esp+arg_60]
-0x6002EE: push    eax
-0x6002EF: mov     ecx, edi
-0x6002F1: call    Actor_GetSkillMasteryLevel
+0x6002EA: mov     eax, [esp+actorValue]
+0x6002EE: push    eax; actorValue
+0x6002EF: mov     ecx, edi; this
+0x6002F1: call    Actor_GetSkillMasteryLevel; Sidecar hook boundary: Expert backward/sweeping post-hit mastery gate (native knockdown path). Effective equipped sidecar weapon mastery is substituted here.
 0x6002F6: cmp     eax, 3
 0x6002F9: jl      loc_600410
 0x6002FF: push    4
@@ -956,7 +956,7 @@
 0x600308: test    eax, eax
 0x60030A: jle     loc_600410
 0x600310: push    0; Seed
-0x600312: call    GetRandomLargeInteger?
+0x600312: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x600317: cdq
 0x600318: mov     ecx, 64h ; 'd'
 0x60031D: idiv    ecx
@@ -969,10 +969,10 @@
 0x600333: mov     byte ptr [esp+arg_10+3], 1
 0x600338: test    bl, bl
 0x60033A: jz      short loc_6003A4
-0x60033C: mov     edx, [esp+arg_60]
-0x600340: push    edx
-0x600341: mov     ecx, edi
-0x600343: call    Actor_GetSkillMasteryLevel
+0x60033C: mov     edx, [esp+actorValue]
+0x600340: push    edx; actorValue
+0x600341: mov     ecx, edi; this
+0x600343: call    Actor_GetSkillMasteryLevel; Sidecar hook boundary: Master forward/rushing post-hit mastery gate (native paralyze path). Effective equipped sidecar weapon mastery is substituted here.
 0x600348: cmp     eax, 4
 0x60034B: jnz     short loc_6003A4
 0x60034D: cmp     ebp, ds:0B37248h
@@ -1014,7 +1014,7 @@
 0x6003B2: fld     dword ptr ds:0A3D8F0h
 0x6003B8: push    ecx
 0x6003B9: fstp    [esp+4+var_4]; float
-0x6003BC: call    sub_547770
+0x6003BC: call    Calc_DeathForceFromDamage; ODismemberment combat decode: maps hit/death damage magnitude into a force scalar using fDeathForceDamageMin/Max and fDeathForceForceMin/Max.
 0x6003C1: mov     ecx, [esp+4+arg_20]
 0x6003C5: fstp    dword ptr [esp+4+arg_3C]
 0x6003C9: add     esp, 4
@@ -1051,17 +1051,17 @@
 0x600424: call    edx
 0x600426: mov     dword ptr [esp+arg_3C], eax
 0x60042A: fild    dword ptr [esp+arg_3C]
-0x60042E: mov     eax, [esp+arg_60]
+0x60042E: mov     eax, [esp+actorValue]
 0x600432: push    eax
 0x600433: fdivr   [esp+4+arg_4C]
 0x600437: push    esi
 0x600438: mov     ecx, edi
 0x60043A: fstp    dword ptr [esp+8+arg_3C]
-0x60043E: call    sub_5FC090
+0x60043E: call    Actor_AttemptAttackDisarmPerkOnHit; Attack disarm perk path after damage: attacker attempts disarm against target using the current attack skill/mastery and iPerkAttackDisarmChance.
 0x600443: cmp     byte ptr [esp+arg_10+3], 0
 0x600448: mov     bl, al
 0x60044A: jnz     short loc_600498
-0x60044C: mov     ecx, offset unk_B36F58
+0x60044C: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+280h)
 0x600451: call    GameSetting_GetSafeFloatPointer
 0x600456: fld     dword ptr [esp+arg_3C]
 0x60045A: fld     dword ptr [eax]
@@ -1070,11 +1070,11 @@
 0x600460: test    ah, 5
 0x600463: jnp     short loc_600498
 0x600465: push    0; Seed
-0x600467: call    GetRandomLargeInteger?
+0x600467: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x60046C: mov     dword ptr [esp+4+arg_3C], eax
 0x600470: fild    dword ptr [esp+4+arg_3C]
 0x600474: add     esp, 4
-0x600477: mov     ecx, offset unk_B36F50
+0x600477: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+278h)
 0x60047C: fdiv    qword ptr ds:0A3D5A8h
 0x600482: fstp    [esp+arg_3C]
 0x600486: call    GameSetting_GetSafeFloatPointer
@@ -1103,10 +1103,10 @@
 0x6004C8: call    eax
 0x6004CA: test    al, al
 0x6004CC: jnz     short loc_600514
-0x6004CE: push    0
-0x6004D0: push    edi
-0x6004D1: push    esi
-0x6004D2: call    sub_6131D0
+0x6004CE: push    0; outAngleDegrees
+0x6004D0: push    edi; target
+0x6004D1: push    esi; actor
+0x6004D2: call    Actor_IsFacingReferenceWithinCombatAngle; Computes the absolute XY heading difference from actor to target, normalizes across the 360-degree boundary, optionally returns degrees, and tests it against the combat-facing threshold game setting.
 0x6004D7: add     esp, 0Ch
 0x6004DA: test    al, al
 0x6004DC: jz      short loc_6004E4
@@ -1129,14 +1129,14 @@
 0x600514: test    bl, bl
 0x600516: jz      loc_5FFEDF
 0x60051C: mov     ecx, esi
-0x60051E: call    sub_5F4FD0
+0x60051E: call    Actor_PlayKnockdownAnimGroup
 0x600523: jmp     loc_5FFEDF
 0x600528: cmp     [esp+arg_20], 0
 0x60052D: jz      short loc_600533
 0x60052F: xor     bl, bl
 0x600531: jmp     short loc_60053C
 0x600533: mov     ecx, esi
-0x600535: call    sub_5F3C30
+0x600535: call    Actor_CheckBlockStaggerPerk; ODismemberment combat decode: block stagger perk chance helper using shield/weapon/hand-to-hand state, mastery gate, and iPerkBlockStaggerChance.
 0x60053A: mov     bl, al
 0x60053C: mov     byte ptr [esp+arg_4C], bl
 0x600540: mov     edx, dword ptr [esp+arg_4C]
@@ -1145,19 +1145,19 @@
 0x600547: call    sub_5F4E10
 0x60054C: test    bl, bl
 0x60054E: jnz     short loc_60056A
-0x600550: push    edi
+0x600550: push    edi; Block disarm/stagger path: target-side block perk checks can disarm/stagger the attacker using iPerkBlockDisarmChance/iPerkBlockStaggerChance.
 0x600551: mov     ecx, esi
-0x600553: call    sub_5FC2B0
+0x600553: call    Actor_AttemptBlockDisarmPerkOnHit; ODismemberment combat decode: block-side disarm perk attempt. Uses block/weapon skill mastery and iPerkBlockDisarmChance to make the blocker disarm the attacker.
 0x600558: cmp     [esp+arg_20], 0
 0x60055D: jz      short loc_600563
 0x60055F: test    al, al
 0x600561: jz      short loc_60056A
 0x600563: mov     ecx, edi
-0x600565: call    sub_5F4F00
+0x600565: call    Actor_PlayStaggerAnimGroup
 0x60056A: cmp     esi, ds:0B333C4h
 0x600570: jnz     short loc_60057C
-0x600572: push    1
-0x600574: call    sub_7EB010
+0x600572: push    1; MoonSugarEffect decode: only observed direct trigger of native Gethit effect: player Actor_AttackHandling::Blocking calls sub_7EB010(1).
+0x600574: call    sub_7EB010; MoonSugarEffect decode: triggers native Gethit/double-vision if byte_B2D91C is set. Uses configured blocked/nonblocked offsets and updates flt_B46124/flt_B46120.
 0x600579: add     esp, 4
 0x60057C: mov     ebp, [esi+58h]
 0x60057F: test    ebp, ebp
@@ -1177,5 +1177,5 @@
 0x6005A2: jz      short Actor_AttackHandling___ActorMagicHit
 0x6005A4: push    8
 0x6005A6: push    esi
-0x6005A7: mov     ecx, offset ActorProcessManager_ptr
-0x6005AC: call    TemporaryObjects_PlayMagicShieldShader
+0x6005A7: mov     ecx, (offset qword_B3BB2C+1D4h)
+0x6005AC: call    TemporaryObjects_PlayMagicShieldShader; Final visual cleanup: if target process reports active magic shield state, ActorProcessManager plays the magic shield shader before ActorMagicHit/done.

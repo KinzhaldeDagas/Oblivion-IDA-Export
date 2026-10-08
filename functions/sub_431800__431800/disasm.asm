@@ -44,7 +44,6 @@
 0x431896: mov     eax, edx
 0x431898: lea     esi, [eax+1]
 0x43189B: jmp     short loc_4318A0
-0x43189D: align 10h
 0x4318A0: mov     cl, [eax]
 0x4318A2: add     eax, 1
 0x4318A5: test    cl, cl

@@ -1,1 +1,1 @@
-OID
+typedef ID OID;

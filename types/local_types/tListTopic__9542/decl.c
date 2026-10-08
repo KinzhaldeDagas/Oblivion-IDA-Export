@@ -1,1 +1,4 @@
-tListTopic
+struct tListTopic
+{
+NodeTopic node;
+};

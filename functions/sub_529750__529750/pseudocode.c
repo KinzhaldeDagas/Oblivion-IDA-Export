@@ -1,4 +1,4 @@
-int __thiscall sub_529750(unsigned __int8 *this)
+UInt8 __thiscall TESQuest::GetCurrentStage(TESQuest *this)
 {
-  return *(this + 0x5C);
+  return this->currentStage; /*0x529754*/
 }

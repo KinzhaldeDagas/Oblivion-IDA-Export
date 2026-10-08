@@ -1,4 +1,4 @@
-0x471210: mov     eax, [ecx+0CCh]
+0x471210: mov     eax, [ecx+0CCh]; Returns true when ActorAnimData current idle (+0xCC) exists and its phase field is 2. Mounted/action callers treat this as the active idle phase.
 0x471216: test    eax, eax
 0x471218: jnz     short loc_47121D
 0x47121A: xor     al, al

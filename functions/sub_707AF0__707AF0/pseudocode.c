@@ -5,21 +5,21 @@ char __thiscall sub_707AF0(NiNode *this, int a2)
   NiProperty *data; // ecx
   void *m_spCollision; // ecx
 
-  result = sub_7000F0((NiRenderTargetGroup *)this, a2);
-  if ( result )
+  result = sub_7000F0((NiRenderTargetGroup *)this, a2); /*0x707af9*/
+  if ( result ) /*0x707b00*/
   {
-    start = this->members.super.m_propertyList.start;
-    while ( start )
+    start = this->members.super.m_propertyList.start; /*0x707b08*/
+    while ( start ) /*0x707b10*/
     {
-      data = start->data;
-      start = start->next;
-      if ( data )
-        (*((void (__thiscall **)(NiProperty *, int))data->vtbl + 9))(data, a2);
+      data = start->data; /*0x707b12*/
+      start = start->next; /*0x707b1a*/
+      if ( data ) /*0x707b1c*/
+        (*((void (__thiscall **)(NiProperty *, int))data->vtbl + 9))(data, a2); /*0x707b24*/
     }
-    m_spCollision = this->members.super.m_spCollision;
-    if ( m_spCollision )
-      (*(void (__thiscall **)(void *, int))(*(_DWORD *)m_spCollision + 0x24))(m_spCollision, a2);
-    return 1;
+    m_spCollision = this->members.super.m_spCollision; /*0x707b2a*/
+    if ( m_spCollision ) /*0x707b33*/
+      (*(void (__thiscall **)(void *, int))(*(_DWORD *)m_spCollision + 0x24))(m_spCollision, a2); /*0x707b3b*/
+    return 1; /*0x707b3e*/
   }
-  return result;
+  return result; /*0x707b02*/
 }

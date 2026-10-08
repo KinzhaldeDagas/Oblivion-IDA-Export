@@ -1,7 +1,7 @@
 [
   {
     "ea": "0xA237B0",
-    "line": "push    offset dword_B12630",
+    "line": "push    offset iCanopyShadowScale_SpeedTree; Verified INI setting cleanup removes iCanopyShadowScale from the setting list and frees a dynamically allocated name if applicable.",
     "mnemonic": "push",
     "size": 5
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0xA237BF",
-    "line": "mov     eax, off_B12634; \"iCanopyShadowScale:SpeedTree\"",
+    "line": "mov     eax, iCanopyShadowScale_SpeedTree.name",
     "mnemonic": "mov",
     "size": 5
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0xA237CE",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

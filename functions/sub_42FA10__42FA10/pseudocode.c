@@ -1,19 +1,19 @@
-int __thiscall sub_42FA10(int this, int a2, int a3)
+DWORD __thiscall sub_42FA10(int this, int a2, int a3)
 {
   void *v4; // ecx
-  int result; // eax
+  DWORD result; // eax
 
-  if ( !*(_BYTE *)(this + 4) )
+  if ( !*(_BYTE *)(this + 4) ) /*0x42fa13*/
   {
-    v4 = *(void **)(this + 0xC);
-    if ( v4 )
+    v4 = *(void **)(this + 0xC); /*0x42fa19*/
+    if ( v4 ) /*0x42fa1e*/
     {
-      *(_BYTE *)(this + 4) = 1;
-      sub_47CFD0(v4);
-      nullsub_returnvVoid_1arg(a3);
-      sub_47CFA0(*(int **)(this + 0xC), a2);
-      return sub_47CF50(*(struct _RTL_CRITICAL_SECTION ***)(this + 0xC));
+      *(_BYTE *)(this + 4) = 1; /*0x42fa20*/
+      sub_47CFD0(v4); /*0x42fa24*/
+      nullsub_returnvVoid_1arg(a3); /*0x42fa31*/
+      sub_47CFA0(*(int **)(this + 0xC), a2); /*0x42fa3e*/
+      return sub_47CF50(*(struct _RTL_CRITICAL_SECTION ***)(this + 0xC)); /*0x42fa46*/
     }
   }
-  return result;
+  return result; /*0x42fa4b*/
 }

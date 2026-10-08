@@ -13,26 +13,26 @@ int __thiscall sub_706770(char *this, signed int a2)
   int v13; // [esp+8h] [ebp-8h] BYREF
   int v14; // [esp+Ch] [ebp-4h] BYREF
 
-  v2 = a2;
-  sub_700A80((int)this, (int)this, (_DWORD *)a2);
-  v4 = *(int (__cdecl **)(int, char *, int, signed int *, int))(*(_DWORD *)(v2 + 0x220) + 8);
-  v5 = this + 0x18;
-  v11 = *(_DWORD *)(v2 + 0x220);
-  a2 = 2;
-  result = v4(v11, v5, 2, &a2, 1);
-  if ( *(_DWORD *)(v2 + 0xD8) < 0x14010002u )
+  v2 = a2; /*0x706774*/
+  sub_700A80((int)this, (int)this, (_DWORD *)a2); /*0x70677c*/
+  v4 = *(int (__cdecl **)(int, char *, int, signed int *, int))(*(_DWORD *)(v2 + 0x220) + 8); /*0x706787*/
+  v5 = this + 0x18; /*0x706793*/
+  v11 = *(_DWORD *)(v2 + 0x220); /*0x706797*/
+  a2 = 2; /*0x706798*/
+  result = v4(v11, v5, 2, &a2, 1); /*0x7067a0*/
+  if ( *(_DWORD *)(v2 + 0xD8) < 0x14010002u ) /*0x7067af*/
   {
-    v7 = *(unsigned __int16 *)v5;
-    v13 = (v7 >> 4) & 3;
-    v14 = (v7 >> 3) & 1;
-    v8 = *(void (__cdecl **)(int, int *, int, signed int *, int))(*(_DWORD *)(v2 + 0x220) + 8);
-    v12 = *(_DWORD *)(v2 + 0x220);
-    a2 = 4;
-    v8(v12, &v13, 4, &a2, 1);
-    v9 = *(_DWORD *)(v2 + 0x220);
-    v10 = *(int (__cdecl **)(int, int *, int, signed int *, int))(v9 + 8);
-    a2 = 4;
-    return v10(v9, &v14, 4, &a2, 1);
+    v7 = *(unsigned __int16 *)v5; /*0x7067b1*/
+    v13 = (v7 >> 4) & 3; /*0x7067c6*/
+    v14 = (v7 >> 3) & 1; /*0x7067d2*/
+    v8 = *(void (__cdecl **)(int, int *, int, signed int *, int))(*(_DWORD *)(v2 + 0x220) + 8); /*0x7067dc*/
+    v12 = *(_DWORD *)(v2 + 0x220); /*0x7067e5*/
+    a2 = 4; /*0x7067e6*/
+    v8(v12, &v13, 4, &a2, 1); /*0x7067ea*/
+    v9 = *(_DWORD *)(v2 + 0x220); /*0x7067ec*/
+    v10 = *(int (__cdecl **)(int, int *, int, signed int *, int))(v9 + 8); /*0x7067f2*/
+    a2 = 4; /*0x706803*/
+    return v10(v9, &v14, 4, &a2, 1); /*0x706807*/
   }
-  return result;
+  return result; /*0x70680c*/
 }

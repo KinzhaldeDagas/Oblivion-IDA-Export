@@ -1,1 +1,1 @@
-TESIdleForm
+struct TESIdleForm;

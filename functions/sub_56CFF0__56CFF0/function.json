@@ -1,10 +1,22 @@
 {
   "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 28,
   "callers_count": 3,
+  "chunks": [
+    [
+      "0x56CFF0",
+      "0x56D47C"
+    ],
+    [
+      "0x9BDAD0",
+      "0x9BDB22"
+    ]
+  ],
   "chunks_sha256": "66db0c070f21f17b034e2762c17bd278ee18bb42050c2755d5a40cb73a4a484c",
   "comment_regular": "Verified common generated-geometry builder used by both Initialize branches and by LoadGame. Calls sub_7174B0 to create a NiTriShape from projected mesh arrays, constructs skin data/instance/partition and shader state, attaches the result under sourceParentNode (+0x30), stores generatedGeometry (+0x1C), and stores the persistent targetGeometry (+0x20).",
   "comment_repeatable": "Verified common generated-geometry builder used by both Initialize branches and by LoadGame. Calls sub_7174B0 to create a NiTriShape from projected mesh arrays, constructs skin data/instance/partition and shader state, attaches the result under sourceParentNode (+0x30), stores generatedGeometry (+0x1C), and stores the persistent targetGeometry (+0x20).",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 5,
   "display_name": "BSTempEffectGeometryDecal_BuildGeneratedGeometry",
   "end_ea": "0x56D47C",
@@ -15,6 +27,7 @@
   "segment": ".text",
   "sha256": "797f2b21e1e6d1dd8bc449d407b51588f83210997149b21968beece75c339fce",
   "size": 1164,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x56CFF0",
   "total_chunk_size": 1246,
   "type": "void __thiscall(BSTempEffectGeometryDecalLayout_t *this, int arg0, __int16 a3, unsigned __int16 a4, int a5, int a6, unsigned __int16 *a7, int a8)",

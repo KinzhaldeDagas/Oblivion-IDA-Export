@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7CBDC0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; MoonSugarEffect decode: shader definition ID 1 builds the base ShadowLightShader with multiple TES4 declarations; Parallax/Skin copy this shader's constant maps via their vtable +0x88 path.",
     "mnemonic": "push",
     "size": 2
   },
@@ -163,19 +163,19 @@
   },
   {
     "ea": "0x7CBE13",
-    "line": "push    1; StreamCount",
+    "line": "push    1; streamCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7CBE15",
-    "line": "push    6; a2",
+    "line": "push    6; elementCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7CBE17",
-    "line": "push    eax; a1",
+    "line": "push    eax; renderer",
     "mnemonic": "push",
     "size": 1
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x7CBE20",
-    "line": "call    CreateDX9ShaderDeclaration",
+    "line": "call    CreateDX9ShaderDeclaration; Oblivion NiDX9 declaration factory. Allocates a 0x38-byte NiDX9ShaderDeclaration and initializes elementCount internal element records for each streamCount stream.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,25 +349,25 @@
   },
   {
     "ea": "0x7CBE68",
-    "line": "push    1; StreamCount",
+    "line": "push    1; streamCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7CBE6A",
-    "line": "push    8; a2",
+    "line": "push    8; elementCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7CBE6C",
-    "line": "push    ecx; a1",
+    "line": "push    ecx; renderer",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7CBE6D",
-    "line": "call    CreateDX9ShaderDeclaration",
+    "line": "call    CreateDX9ShaderDeclaration; Oblivion NiDX9 declaration factory. Allocates a 0x38-byte NiDX9ShaderDeclaration and initializes elementCount internal element records for each streamCount stream.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,19 +379,19 @@
   },
   {
     "ea": "0x7CBE78",
-    "line": "push    1; StreamCount",
+    "line": "push    1; streamCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7CBE7A",
-    "line": "push    4; a2",
+    "line": "push    4; elementCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7CBE7C",
-    "line": "push    edx; a1",
+    "line": "push    edx; renderer",
     "mnemonic": "push",
     "size": 1
   },
@@ -403,13 +403,13 @@
   },
   {
     "ea": "0x7CBE7F",
-    "line": "call    CreateDX9ShaderDeclaration",
+    "line": "call    CreateDX9ShaderDeclaration; Oblivion NiDX9 declaration factory. Allocates a 0x38-byte NiDX9ShaderDeclaration and initializes elementCount internal element records for each streamCount stream.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7CBE84",
-    "line": "push    1; StreamCount",
+    "line": "push    1; streamCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -427,19 +427,19 @@
   },
   {
     "ea": "0x7CBE8D",
-    "line": "push    8; a2",
+    "line": "push    8; elementCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7CBE8F",
-    "line": "push    eax; a1",
+    "line": "push    eax; renderer",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7CBE90",
-    "line": "call    CreateDX9ShaderDeclaration",
+    "line": "call    CreateDX9ShaderDeclaration; Oblivion NiDX9 declaration factory. Allocates a 0x38-byte NiDX9ShaderDeclaration and initializes elementCount internal element records for each streamCount stream.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2071,7 +2071,7 @@
   },
   {
     "ea": "0x7CC0F2",
-    "line": "cmp     eax, offset dword_B3F684",
+    "line": "cmp     eax, offset stru_B3F684",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -2173,7 +2173,7 @@
   },
   {
     "ea": "0x7CC120",
-    "line": "cmp     eax, offset dword_B3F684",
+    "line": "cmp     eax, offset stru_B3F684",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -2275,7 +2275,7 @@
   },
   {
     "ea": "0x7CC150",
-    "line": "cmp     eax, offset dword_B3F684",
+    "line": "cmp     eax, offset stru_B3F684",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -2371,7 +2371,7 @@
   },
   {
     "ea": "0x7CC175",
-    "line": "cmp     eax, offset dword_B3F684",
+    "line": "cmp     eax, offset stru_B3F684",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -2926,5 +2926,107 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CE940",
+    "line": "mov     eax, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE943",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE944",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE949",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE94A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE94B",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE94E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE94F",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE954",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE955",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE956",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CE95A",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE95D",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE960",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CE962",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE967",
+    "line": "mov     eax, offset stru_AF7880",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE96C",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

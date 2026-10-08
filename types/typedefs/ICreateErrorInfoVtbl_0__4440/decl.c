@@ -1,1 +1,1 @@
-ICreateErrorInfoVtbl_0
+typedef ICreateErrorInfoVtbl ICreateErrorInfoVtbl_0;

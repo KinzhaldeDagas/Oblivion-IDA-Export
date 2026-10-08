@@ -1,6 +1,6 @@
-0x78F250: sub     esp, 18h
-0x78F253: mov     eax, [esp+18h+arg_8]
-0x78F257: mov     ecx, [esp+18h+arg_4]
+0x78F250: sub     esp, 18h; Computes result = start + (end - start) * percent for all three components. CBranch::MakeLeaf passes parent direction, geometric normal, and the leaf texture color-variance scalar. RT4.1 Branch.cpp/IdvVector.h corroborate the VecInterpolate role.
+0x78F253: mov     eax, [esp+18h+end]
+0x78F257: mov     ecx, [esp+18h+start]
 0x78F25B: fld     dword ptr [eax]
 0x78F25D: fsub    dword ptr [ecx]
 0x78F25F: fstp    [esp+18h+var_18]
@@ -8,11 +8,11 @@
 0x78F265: fsub    dword ptr [ecx+4]
 0x78F268: fstp    [esp+18h+var_14]
 0x78F26C: fld     dword ptr [eax+8]
-0x78F26F: mov     eax, [esp+18h+arg_0]
+0x78F26F: mov     eax, [esp+18h+result]
 0x78F273: fsub    dword ptr [ecx+8]
 0x78F276: fstp    [esp+18h+var_10]
 0x78F27A: fld     [esp+18h+var_18]
-0x78F27D: fld     [esp+18h+arg_C]
+0x78F27D: fld     [esp+18h+percent]
 0x78F281: fld     st
 0x78F283: fmulp   st(2), st
 0x78F285: fxch    st(1)

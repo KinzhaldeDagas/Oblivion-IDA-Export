@@ -41,3 +41,15 @@
 0x4AF6AD: pop     ebx
 0x4AF6AE: add     esp, 10h
 0x4AF6B1: retn
+0x9B2DF0: mov     ecx, [ebp-10h]
+0x9B2DF3: jmp     TESObject_destr
+0x9B2DF8: mov     ecx, [ebp-10h]
+0x9B2DFB: add     ecx, 24h ; '$'
+0x9B2DFE: jmp     TESLeveledList_destr
+0x9B2E03: mov     edx, [esp+arg_4]
+0x9B2E07: lea     eax, [edx-10h]
+0x9B2E0A: mov     ecx, [edx-14h]
+0x9B2E0D: xor     ecx, eax
+0x9B2E0F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B2E14: mov     eax, offset stru_ADEC48
+0x9B2E19: jmp     ___CxxFrameHandler3

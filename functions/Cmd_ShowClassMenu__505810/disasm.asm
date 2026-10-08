@@ -2,14 +2,14 @@
 0x505816: test    ecx, ecx
 0x505818: jz      short loc_505844
 0x50581A: push    esi
-0x50581B: call    Actor_GetBaseClass
+0x50581B: call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.
 0x505820: mov     esi, eax
 0x505822: mov     ecx, esi
-0x505824: call    TESClass_IsPlayable
+0x505824: call    TESClass_IsPlayable; TESClass_IsPlayable reads classFlags at +0x60 bit 0.
 0x505829: test    al, al
 0x50582B: jnz     short loc_50583A
-0x50582D: mov     ecx, ds:0B333C4h
-0x505833: call    Actor_GetDefaultClass
+0x50582D: mov     ecx, ds:0B333C4h; this
+0x505833: call    Player_GetDefaultClassRecommendation; Resolve Oblivion's default/recommended class. If the actor already has a non-sentinel class, return it. Otherwise classify all 21 deferred chargen skill-use totals by TESSkill specialization, normalize the three shares to seven implied major slots, and select/cache a preset class.
 0x505838: mov     esi, eax
 0x50583A: push    esi
 0x50583B: call    sub_57AA20

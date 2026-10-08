@@ -28,3 +28,12 @@
 0x5905E3: pop     esi
 0x5905E4: add     esp, 10h
 0x5905E7: retn    8
+0x9BDDF0: mov     ecx, [ebp-10h]
+0x9BDDF3: jmp     NiExtraData_dtor
+0x9BDDF8: mov     edx, [esp+arg_4]
+0x9BDDFC: lea     eax, [edx-8]
+0x9BDDFF: mov     ecx, [edx-0Ch]
+0x9BDE02: xor     ecx, eax
+0x9BDE04: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BDE09: mov     eax, offset stru_AE766C
+0x9BDE0E: jmp     ___CxxFrameHandler3

@@ -1,4 +1,5 @@
-bool __thiscall sub_5E32D0(void *this)
+// Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.
+bool __thiscall Actor::HasNPCBaseForm(Actor *this)
 {
-  return *(_BYTE *)((*(int (__thiscall **)(void *))(*(_DWORD *)this + 0x170))(this) + 4) == 0x23;
+  return this->vtbl->super.super.GetBaseForm(this)->member.type == kFormType_NPC; /*0x5e32e1*/
 }

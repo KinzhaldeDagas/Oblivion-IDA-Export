@@ -15,7 +15,6 @@
 0x933E2F: mov     [esp+20h+var_4], eax
 0x933E33: mov     [esp+20h+var_8], 4
 0x933E3B: jmp     short loc_933E40
-0x933E3D: align 10h
 0x933E40: movzx   ecx, byte ptr [esi]
 0x933E43: cmp     ecx, 6; switch 7 cases
 0x933E46: mov     eax, esi
@@ -43,3 +42,9 @@
 0x933E89: jmp     short loc_933E54
 0x933E8B: movzx   edx, byte ptr [esi+3]; jumptable 00933E4A case 0
 0x933E8F: add     esi, edx
+0x933EB9: pop     edi; jumptable 00933E4A case 1
+0x933EBA: pop     esi
+0x933EBB: pop     ebx
+0x933EBC: mov     esp, ebp
+0x933EBE: pop     ebp
+0x933EBF: retn

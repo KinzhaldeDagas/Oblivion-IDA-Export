@@ -1,1 +1,1 @@
-GLeglClientBufferEXT
+typedef void *GLeglClientBufferEXT;

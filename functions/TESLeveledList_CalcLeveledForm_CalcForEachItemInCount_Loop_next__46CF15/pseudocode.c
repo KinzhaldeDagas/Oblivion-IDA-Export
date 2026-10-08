@@ -23,9 +23,9 @@ int __userpurge TESLeveledList_CalcLeveledForm_::CalcForEachItemInCount_Loop_nex
 {
   int v21; // [esp+1Ch] [ebp+1Ch]
 
-  v21 = a9 - 1;
-  if ( v21 )
-    return TESLeveledList_CalcLeveledForm_::CalcForEachItemInCount_Loop(
+  v21 = a9 - 1; /*0x46cf15*/
+  if ( v21 ) /*0x46cf1a*/
+    return TESLeveledList_CalcLeveledForm_::CalcForEachItemInCount_Loop( /*0x46cf1a*/
              a1,
              a2,
              a3,
@@ -44,7 +44,7 @@ int __userpurge TESLeveledList_CalcLeveledForm_::CalcForEachItemInCount_Loop_nex
              a19,
              a20);
   else
-    return TESLeveledList_CalcLeveledForm_::SetReturnValues(
+    return TESLeveledList_CalcLeveledForm_::SetReturnValues( /*0x46cf20*/
              (int)a1,
              (int)a2,
              a3,

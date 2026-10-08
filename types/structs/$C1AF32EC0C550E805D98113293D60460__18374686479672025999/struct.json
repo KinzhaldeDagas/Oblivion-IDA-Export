@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "$C1AF32EC0C550E805D98113293D60460",
+  "definition": "struct $C1AF32EC0C550E805D98113293D60460\n{\nDWORD fsUsb[4];\nDWORD fsCsb[2];\n}\n",
   "id": 18374686479672025999,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fsUsb",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "DWORD[4]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fsCsb",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 8
+      "size": 8,
+      "type": "DWORD[2]"
     }
   ],
   "name": "$C1AF32EC0C550E805D98113293D60460",
+  "ordinal": 916,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 24
 }

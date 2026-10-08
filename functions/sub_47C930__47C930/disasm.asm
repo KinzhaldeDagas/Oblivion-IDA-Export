@@ -1,4 +1,4 @@
-0x47C930: cmp     [esp+arg_4], 0
+0x47C930: cmp     [esp+updateProperties], 0; Update one NiAVObject's property controllers and attached NiTimeController chain. If requested, walk the property list at NiAVObject+0x9C and invoke property virtual +0x50 when its controller pointer is non-null. Always walk NiObjectNET.controller at object+0x0C through NiTimeController.next at +0x34 and invoke controller virtual Update +0x54 with applicationTime. No Active-bit prefilter occurs here: NiTimeController.flags+0x08 bit 3 only affects time-cache logic inside the controller. External Crossbow consequence after this Oblivion decode: temporarily clearing the base Active bit inside an already-entered morph hook will not by itself stop the next scene traversal, but pointer discovery still cannot make a graph that is not traversed dispatch Update.
 0x47C935: push    esi
 0x47C936: push    edi
 0x47C937: mov     edi, ecx
@@ -14,7 +14,7 @@
 0x47C951: cmp     dword ptr [ecx+0Ch], 0
 0x47C955: jz      short loc_47C966
 0x47C957: mov     eax, [ecx]
-0x47C959: fld     [esp+8+arg_0]
+0x47C959: fld     [esp+8+applicationTime]
 0x47C95D: mov     edx, [eax+50h]
 0x47C960: push    ecx
 0x47C961: fstp    [esp+0Ch+var_C]
@@ -25,12 +25,12 @@
 0x47C96D: test    esi, esi
 0x47C96F: jz      short loc_47C989
 0x47C971: mov     eax, [esi]
-0x47C973: fld     [esp+8+arg_0]
+0x47C973: fld     [esp+8+applicationTime]
 0x47C977: mov     edx, [eax+54h]
 0x47C97A: push    ecx
 0x47C97B: mov     ecx, esi
 0x47C97D: fstp    [esp+0Ch+var_C]
-0x47C980: call    edx
+0x47C980: call    edx; Unconditional controller-chain Update dispatch. Traversal does not test NiTimeController.flags Active bit before calling virtual +0x54.
 0x47C982: mov     esi, [esi+34h]
 0x47C985: test    esi, esi
 0x47C987: jnz     short loc_47C971

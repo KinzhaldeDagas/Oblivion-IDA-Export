@@ -65,9 +65,9 @@
 0x5FABA7: mov     ecx, esi
 0x5FABA9: fstp    [esp+10h+var_10]
 0x5FABAC: call    edx
-0x5FABAE: push    esi
-0x5FABAF: lea     ecx, [esi+44h]
-0x5FABB2: call    sub_420E90
+0x5FABAE: push    esi; actorContext
+0x5FABAF: lea     ecx, [esi+44h]; this
+0x5FABB2: call    ExtraDataList_UpdateFriendHitTimers; Advances every Oblivion friend-hit entry timer by the frame-time delta and removes/frees entries older than the configured friend-hit timer.
 0x5FABB7: mov     ecx, [esi+58h]
 0x5FABBA: mov     eax, [ecx]
 0x5FABBC: mov     edx, [eax+2C0h]
@@ -111,8 +111,8 @@
 0x5FAC3D: mov     ecx, esi
 0x5FAC3F: fstp    [esp+10h+var_8]; float
 0x5FAC43: call    Actor_GetBaseCalcAVi
-0x5FAC48: push    eax
-0x5FAC49: call    Calc_MasteryFromSkill
+0x5FAC48: push    eax; skillValue
+0x5FAC49: call    Calc_MasteryFromSkill; Map a base skill value to Oblivion's five mastery tiers using iSkillApprenticeMin=25, iSkillJourneymanMin=50, iSkillExpertMin=75, and iSkillMasterMin=100.
 0x5FAC4E: add     eax, 0FFFFFFFFh; switch 4 cases
 0x5FAC51: add     esp, 4
 0x5FAC54: cmp     eax, 3
@@ -126,7 +126,7 @@
 0x5FAC73: call    GameSetting_GetSafeFloatPointer
 0x5FAC78: fld     dword ptr [eax]
 0x5FAC7A: jmp     short loc_5FAC9E
-0x5FAC7C: mov     ecx, offset fPerkAthleticsExpertFatigueMult; jumptable 005FAC59 case 3
+0x5FAC7C: mov     ecx, 0B37608h; jumptable 005FAC59 case 3
 0x5FAC81: call    GameSetting_GetSafeFloatPointer
 0x5FAC86: fld     dword ptr [eax]
 0x5FAC88: jmp     short loc_5FAC9E

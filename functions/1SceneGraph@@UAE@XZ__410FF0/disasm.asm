@@ -49,9 +49,9 @@
 0x411085: jz      short loc_411098
 0x411087: mov     eax, [edi]
 0x411089: push    eax
-0x41108A: call    FormHeapFree
+0x41108A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x41108F: push    edi
-0x411090: call    FormHeapFree
+0x411090: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x411095: add     esp, 8
 0x411098: mov     edi, [esi+0DCh]
 0x41109E: test    edi, edi
@@ -80,3 +80,15 @@
 0x4110DC: pop     ebp
 0x4110DD: add     esp, 10h
 0x4110E0: retn
+0x9AAC90: mov     ecx, [ebp-10h]; this
+0x9AAC93: jmp     ??1NiBSPNode@@UAE@XZ; NiBSPNode::~NiBSPNode(void)
+0x9AAC98: mov     ecx, [ebp-10h]
+0x9AAC9B: add     ecx, 0DCh ; 'Ü'; slot
+0x9AACA1: jmp     NiPointerSlot_Release
+0x9AACA6: mov     edx, [esp+arg_4]
+0x9AACAA: lea     eax, [edx-10h]
+0x9AACAD: mov     ecx, [edx-14h]
+0x9AACB0: xor     ecx, eax
+0x9AACB2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AACB7: mov     eax, offset stru_AD7BD0
+0x9AACBC: jmp     ___CxxFrameHandler3

@@ -37,14 +37,14 @@
 0x73BC1D: push    ecx
 0x73BC1E: lea     ecx, [ebp+154h]
 0x73BC24: fstp    [esp+28h+var_28]; float
-0x73BC27: push    offset dword_B258D0; int
+0x73BC27: push    offset stru_B258D0; int
 0x73BC2C: mov     byte ptr [esp+2Ch+var_4], 1
 0x73BC31: call    sub_716DE0
 0x73BC36: fldz
 0x73BC38: push    ecx
 0x73BC39: fstp    [esp+28h+var_28]; float
 0x73BC3C: lea     ecx, [ebp+164h]
-0x73BC42: push    offset dword_B258D0; int
+0x73BC42: push    offset stru_B258D0; int
 0x73BC47: call    sub_716DE0
 0x73BC4C: mov     [ebp+140h], ebx
 0x73BC52: mov     dword ptr [ebp+144h], 3
@@ -61,3 +61,15 @@
 0x73BC7F: pop     ebx
 0x73BC80: add     esp, 10h
 0x73BC83: retn
+0x9CACF0: mov     ecx, [ebp-10h]; this
+0x9CACF3: jmp     ??1NiDynamicEffect@@UAE@XZ; NiDynamicEffect::~NiDynamicEffect(void)
+0x9CACF8: mov     ecx, [ebp-10h]
+0x9CACFB: add     ecx, 13Ch; slot
+0x9CAD01: jmp     NiPointerSlot_Release
+0x9CAD06: mov     edx, [esp+arg_4]
+0x9CAD0A: lea     eax, [edx-14h]
+0x9CAD0D: mov     ecx, [edx-18h]
+0x9CAD10: xor     ecx, eax
+0x9CAD12: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CAD17: mov     eax, offset stru_AF3330
+0x9CAD1C: jmp     ___CxxFrameHandler3

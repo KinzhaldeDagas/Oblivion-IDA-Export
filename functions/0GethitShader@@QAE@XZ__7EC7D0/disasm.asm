@@ -1,4 +1,4 @@
-0x7EC7D0: push    0FFFFFFFFh
+0x7EC7D0: push    0FFFFFFFFh; MoonSugarEffect decode: GethitShader ctor owns 3 vertex programs, 3 pixel programs, two pass slots, and uses base source texture +0x7C.
 0x7EC7D2: push    offset ??0GethitShader@@QAE@XZ_SEH
 0x7EC7D7: mov     eax, large fs:0
 0x7EC7DD: push    eax
@@ -12,8 +12,8 @@
 0x7EC7ED: mov     large fs:0, eax
 0x7EC7F3: mov     esi, ecx
 0x7EC7F5: mov     [esp+1Ch+var_10], esi
-0x7EC7F9: call    ??0BSImageSpaceShader@@QAE@XZ; BSImageSpaceShader::BSImageSpaceShader(void)
-0x7EC7FE: push    offset sub_7016A0; a5
+0x7EC7F9: call    ??0BSImageSpaceShader@@QAE@XZ; MoonSugarEffect decode: BSImageSpaceShader base ctor calls BSShader ctor, sets vtable, clears source texture +0x7C and scalar fields +0x80..+0x8C.
+0x7EC7FE: push    offset NiPointerSlot_Release; a5
 0x7EC803: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x7EC808: push    3; size
 0x7EC80A: push    4; a2
@@ -23,7 +23,7 @@
 0x7EC815: mov     [esp+30h+var_4], edi
 0x7EC819: mov     dword ptr [esi], offset ??_7GethitShader@@6B@; const GethitShader::`vftable'
 0x7EC81F: call    ArrayConstructor
-0x7EC824: push    offset sub_7016A0; a5
+0x7EC824: push    offset NiPointerSlot_Release; a5
 0x7EC829: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x7EC82E: push    3; size
 0x7EC830: push    4; a2
@@ -43,3 +43,20 @@
 0x7EC868: pop     esi
 0x7EC869: add     esp, 10h
 0x7EC86C: retn
+0x9CFB10: mov     ecx, [ebp-10h]; this
+0x9CFB13: jmp     ??1BSImageSpaceShader@@UAE@XZ; MoonSugarEffect decode: BSImageSpaceShader dtor releases source BSRenderedTexture at +0x7C, clears +0x80..+0x8C, then calls BSShader dtor.
+0x9CFB18: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9CFB1D: push    3; int
+0x9CFB1F: push    4; unsigned int
+0x9CFB21: mov     eax, [ebp-10h]
+0x9CFB24: add     eax, 94h ; '”'
+0x9CFB29: push    eax; void *
+0x9CFB2A: call    $LN21
+0x9CFB2F: retn
+0x9CFB30: mov     edx, [esp+arg_4]
+0x9CFB34: lea     eax, [edx-0Ch]
+0x9CFB37: mov     ecx, [edx-10h]
+0x9CFB3A: xor     ecx, eax
+0x9CFB3C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CFB41: mov     eax, offset stru_AF8688
+0x9CFB46: jmp     ___CxxFrameHandler3

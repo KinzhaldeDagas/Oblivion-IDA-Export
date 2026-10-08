@@ -1,1 +1,1 @@
-TileText
+struct TileText;

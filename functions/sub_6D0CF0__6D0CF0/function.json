@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6D0CF0",
+      "0x6D0D2E"
+    ]
+  ],
+  "chunks_sha256": "a7bb9459dbd7a923c17636c20156eae68e6b8483104b61b4026aeebd134f9883",
+  "comment_regular": "If target +0x30 exists and weightsDirty +0x58 is set, applies current morph weights, marks geometry data dirty (flags +0x2E bit 0), optionally invokes the target update when morphFlags +0x3C bit 0 is set, then clears weightsDirty. Semantically void; prior return value was undefined EAX residue on no-op paths.",
+  "comment_repeatable": "If target +0x30 exists and weightsDirty +0x58 is set, applies current morph weights, marks geometry data dirty (flags +0x2E bit 0), optionally invokes the target update when morphFlags +0x3C bit 0 is set, then clears weightsDirty. Semantically void; prior return value was undefined EAX residue on no-op paths.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6D0CF0",
+  "display_name": "NiGeomMorpherController_CommitDirtyMorphWeights",
   "end_ea": "0x6D0D2E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6D0CF0",
+  "name": "NiGeomMorpherController_CommitDirtyMorphWeights",
   "segment": ".text",
   "sha256": "a7bb9459dbd7a923c17636c20156eae68e6b8483104b61b4026aeebd134f9883",
   "size": 62,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6D0CF0",
-  "type": "int __thiscall(int this)",
+  "total_chunk_size": 62,
+  "type": "void __thiscall(NiGeomMorpherController *this)",
   "xrefs_from_count": 25,
   "xrefs_to_count": 1
 }

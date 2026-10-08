@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x423DF0",
-    "line": "push    ebx",
+    "line": "push    ebx; OR action flag mask into existing byte (default byte 1 when absent), creating state as needed. ONAM calls this with 0x08.",
     "mnemonic": "push",
     "size": 1
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x423E0A",
-    "line": "or      ebx, [esp+8+arg_0]",
+    "line": "or      ebx, [esp+8+mask]",
     "mnemonic": "or",
     "size": 4
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x423E22",
-    "line": "call    sub_41EB90",
+    "line": "call    ExtraDataList_GetOrCreateAction; Returns existing ExtraAction type 0x13, or creates one with default action flag byte 1 and null action reference.",
     "mnemonic": "call",
     "size": 5
   },

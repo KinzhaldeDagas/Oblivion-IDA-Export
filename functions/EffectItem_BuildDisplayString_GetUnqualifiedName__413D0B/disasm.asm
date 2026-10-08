@@ -11,5 +11,5 @@
 0x413D2D: mov     ecx, [esp+4+arg_C]
 0x413D31: push    ecx
 0x413D32: mov     byte ptr [esp+8+arg_8C], bl
-0x413D39: call    FormHeapFree
+0x413D39: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x413D3E: add     esp, 4

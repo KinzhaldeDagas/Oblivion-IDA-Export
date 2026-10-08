@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x68EC98",
-    "line": "test    byte ptr [ecx+5Ah], 1",
+    "line": "test    byte ptr [ecx+5Ah], 1; Verified fallback: BoundItemEffect is selected when the effect setting's low flag byte bit 0 or flags word bit 0x20000 is set; otherwise valid value-modifier flags route to ValueModifierEffect. Semantics of the remaining masks are Unknown.",
     "mnemonic": "test",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x68ECA6",
-    "line": "jnz     short ActiveEffect_Base_CreateDynamic___Alloc_BoundItem",
+    "line": "jnz     short ActiveEffect_Base_CreateDynamic___Alloc_BoundItem; Verified (Oblivion): EffectSetting.effectFlags byte bit 0 or dword mask 0x20000 selects BoundItemEffect; other accepted values continue to ValueModifierEffect. Symbolic flag names remain Unknown.",
     "mnemonic": "jnz",
     "size": 2
   },

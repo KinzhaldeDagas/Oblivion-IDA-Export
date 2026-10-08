@@ -24,7 +24,7 @@
 0x64D569: mov     ecx, [ebx+28h]
 0x64D56C: test    ecx, ecx
 0x64D56E: jz      short loc_64D57F
-0x64D570: call    sub_452A60
+0x64D570: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x64D575: mov     [esp+1Ch+arg_0], eax
 0x64D579: fild    [esp+1Ch+arg_0]
 0x64D57D: jmp     short loc_64D598

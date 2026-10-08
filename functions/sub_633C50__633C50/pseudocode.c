@@ -1,19 +1,19 @@
-void __stdcall sub_633C50(PlayerCharacter *a1)
+void __stdcall sub_633C50(Actor *a1)
 {
-  int v1; // eax
-  int v2; // eax
+  CombatController *v1; // eax
+  int CurrentTarget; // eax
 
-  if ( a1 )
+  if ( a1 ) /*0x633c57*/
   {
-    if ( (a1 != TESDataHandler_g_PlayerRef || !LOBYTE(TESDataHandler_g_PlayerRef->unk738))
-      && ((int (__thiscall *)(LowProcess *))a1->super.super.super.process->Unk_110)(a1->super.super.super.process) < dword_B36A70 )
+    if ( (a1 != (Actor *)reference || !LOBYTE(reference->unk738)) /*0x633c7e*/
+      && ((int (__thiscall *)(LowProcess *))a1->members.super.process->Unk_110)(a1->members.super.process) < (int)stru_B36A70.value )
     {
-      v1 = (int)a1->vtbl->super.GetCombatController((Actor *)a1);
-      if ( v1 )
+      v1 = a1->vtbl->GetCombatController(a1); /*0x633c8a*/
+      if ( v1 ) /*0x633c8e*/
       {
-        v2 = sub_6135F0(v1);
-        if ( v2 )
-          (*(void (__thiscall **)(int, PlayerCharacter *, int))(*(_DWORD *)v2 + 0x240))(v2, a1, 1);
+        CurrentTarget = CombatController_GetCurrentTarget((int)v1); /*0x633c92*/
+        if ( CurrentTarget ) /*0x633c99*/
+          (*(void (__thiscall **)(int, Actor *, int))(*(_DWORD *)CurrentTarget + 0x240))(CurrentTarget, a1, 1); /*0x633ca8*/
       }
     }
   }

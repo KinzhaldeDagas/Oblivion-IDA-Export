@@ -5,7 +5,7 @@
 0x7802D4: push    edi
 0x7802D5: mov     esi, ecx
 0x7802D7: xor     edi, edi
-0x7802D9: push    offset NiRefObject_objcount; lpAddend
+0x7802D9: push    0B3FD64h; lpAddend
 0x7802DE: mov     dword ptr [esi], offset ??_7NiRefObject@@6B@; const NiRefObject::`vftable'
 0x7802E4: mov     [esi+4], edi
 0x7802E7: call    dword ptr ds:0A28078h
@@ -16,7 +16,7 @@
 0x7802FE: fst     dword ptr [esi+90h]
 0x780304: lea     ecx, [esi+0F8h]; this
 0x78030A: fstp    dword ptr [esi+94h]
-0x780310: call    sub_7616D0
+0x780310: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x780315: lea     eax, [esi+120h]
 0x78031B: mov     ecx, 0FFh
 0x780320: mov     edx, 7FFFFFFFh
@@ -116,7 +116,7 @@
 0x780463: mov     [esi+38h], edx
 0x780466: mov     ecx, 6
 0x78046B: fnstcw  word ptr [esp+14h+arg_0]
-0x78046F: mov     [esi+5Ch], edx
+0x78046F: mov     [esi+5Ch], edx; NiD3DRenderState alpha-function table entry 4 is D3DCMP_GREATER (5). Tree cutout flags 0x12EC select this entry.
 0x780472: mov     [esi+0ACh], edx
 0x780478: mov     [esi+0CCh], edx
 0x78047E: mov     [esi+20h], edi
@@ -193,7 +193,7 @@
 0x7805E7: or      eax, 0C00h
 0x7805EC: mov     [esp+18h+var_4], eax
 0x7805F0: push    0FFFFh
-0x7805F5: push    offset word_B427E0
+0x7805F5: push    offset unk_B427E0
 0x7805FA: fldcw   word ptr [esp+20h+var_4]
 0x7805FE: mov     dword ptr [esi+8], 0
 0x780605: mov     dword ptr [esi+100h], 8
@@ -212,7 +212,7 @@
 0x780657: mov     [esi+11Ch], ebp
 0x78065D: mov     byte ptr [esi+0FF4h], 0
 0x780664: mov     byte ptr [esi+0FF5h], 0
-0x78066B: call    __memset
+0x78066B: call    __memset; Sampler enum-to-cache initialization. All entries start 0xFFFF; later writes map only D3DSAMP_ADDRESSU(1)->0, ADDRESSV(2)->1, MAGFILTER(5)->2, MINFILTER(6)->3, MIPFILTER(7)->4. MIPMAPLODBIAS(8), MAXMIPLEVEL(9), MAXANISOTROPY(10), and SRGBTEXTURE(11) remain untracked.
 0x780670: add     esp, 0Ch
 0x780673: mov     eax, 4
 0x780678: mov     ds:0B427EAh, ax

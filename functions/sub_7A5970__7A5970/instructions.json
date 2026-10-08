@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x7A5970",
-    "line": "push    esi",
+    "line": "push    esi; Deep-copy assigns one SIdvLeafTexture value across an existing 0x54-stride range.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5971",
-    "line": "mov     esi, [esp+4+arg_0]",
+    "line": "mov     esi, [esp+4+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x7A5976",
-    "line": "mov     edi, [esp+8+arg_4]",
+    "line": "mov     edi, [esp+8+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,25 +43,25 @@
   },
   {
     "ea": "0x7A597F",
-    "line": "mov     ebx, [esp+0Ch+arg_8]",
+    "line": "mov     ebx, [esp+0Ch+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A5983",
-    "line": "push    ebx",
+    "line": "push    ebx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5984",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A5986",
-    "line": "call    sub_7A3470",
+    "line": "call    OB_SIdvLeafTexture_CopyAssign_010201A0; Deep copy-assigns a compact 0x54 SIdvLeafTexture: byte blossom flag, color/variance, owned filename, origin, size, and sizeUsed.",
     "mnemonic": "call",
     "size": 5
   },

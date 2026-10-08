@@ -1,23 +1,23 @@
-char __userpurge sub_6284B0@<al>(int *this@<ecx>, double a2@<st1>, Actor *a3, int a4)
+char __userpurge sub_6284B0@<al>(int *this@<ecx>, double a2@<st1>, double a3@<st2>, double a4@<st0>, Actor *a5, int a6)
 {
-  TESPackage *v5; // edi
-  char v6; // al
-  bool v7; // zf
-  int v8; // eax
+  TESPackage *v7; // edi
+  char v8; // al
+  bool v9; // zf
+  int v10; // eax
 
-  v5 = (TESPackage *)(*(int (__thiscall **)(int *))(*this + 0x184))(this);
-  if ( v5 )
+  v7 = (TESPackage *)(*(int (__usercall **)@<eax>(int *@<ecx>, double@<st0>))(*this + 0x184))(this, a4); /*0x6284be*/
+  if ( v7 ) /*0x6284c2*/
   {
-    (*(void (__thiscall **)(int *, Actor *))(*this + 0x194))(this, a3);
-    sub_566DC0(v5, flt_A30634, a2, a3, 0, flt_A30634);
-    v7 = v6 == 0;
-    v8 = *this;
-    if ( !v7 )
+    (*(void (__thiscall **)(int *, Actor *))(*this + 0x194))(this, a5); /*0x6284d4*/
+    sub_566DC0(v7, kTerrainLODQuadRayDirectionZ, a2, a3, a5, 0, kTerrainLODQuadRayDirectionZ); /*0x6284e5*/
+    v9 = v8 == 0; /*0x6284ea*/
+    v10 = *this; /*0x6284ec*/
+    if ( !v9 ) /*0x6284f1*/
     {
-      (*(void (__thiscall **)(int *, int))(v8 + 0xBC))(this, 1);
-      return 0;
+      (*(void (__thiscall **)(int *, int))(v10 + 0xBC))(this, 1); /*0x6284fb*/
+      return 0; /*0x628501*/
     }
-    (*(void (__thiscall **)(int *, _DWORD))(v8 + 0x17C))(this, 0);
+    (*(void (__thiscall **)(int *, _DWORD))(v10 + 0x17C))(this, 0); /*0x62850c*/
   }
-  return 0;
+  return 0; /*0x6284fd*/
 }

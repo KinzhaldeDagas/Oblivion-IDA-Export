@@ -48,12 +48,6 @@
     "size": 2
   },
   {
-    "ea": "0x676F9D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x676FA0",
     "line": "mov     eax, [esp+14h+var_4]",
     "mnemonic": "mov",
@@ -133,7 +127,7 @@
   },
   {
     "ea": "0x676FC1",
-    "line": "mov     eax, [esp+14h+arg_0]",
+    "line": "mov     eax, [esp+14h+actor]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -163,19 +157,19 @@
   },
   {
     "ea": "0x676FCF",
-    "line": "push    eax",
+    "line": "push    eax; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x676FD0",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x676FD2",
-    "line": "call    sub_607110",
+    "line": "call    Crime_RemoveWitness",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,13 +217,13 @@
   },
   {
     "ea": "0x676FE8",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x676FEA",
-    "line": "call    sub_605E80",
+    "line": "call    Crime_Destructor",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +235,7 @@
   },
   {
     "ea": "0x676FF0",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

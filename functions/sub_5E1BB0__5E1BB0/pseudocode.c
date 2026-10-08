@@ -1,14 +1,15 @@
-int __thiscall sub_5E1BB0(void *this)
+// ODismemberment authority: resolves actor blood decal texture path through actor-base virtual +0x38, falling back below to default sBloodTextureDefault path.
+const char *__thiscall Actor_GetBloodDecalTexturePath(Actor *self)
 {
-  int v2; // ebx
-  int v3; // edi
+  TESForm *v2; // ebx
+  TESForm *v3; // edi
 
-  v2 = 0;
-  v3 = (*(int (__thiscall **)(void *))(*(_DWORD *)this + 0x170))(this);
-  if ( v3 )
+  v2 = 0; /*0x5e1bbd*/
+  v3 = self->vtbl->super.super.GetBaseForm(self); /*0x5e1bc1*/
+  if ( v3 ) /*0x5e1bc5*/
   {
-    if ( (*(unsigned __int8 (__thiscall **)(void *))(*(_DWORD *)this + 0x190))(this) )
-      v2 = v3;
+    if ( self->vtbl->super.super.IsActor((TESObjectREFR *)self) ) /*0x5e1bd1*/
+      v2 = v3; /*0x5e1bd7*/
   }
-  return (*(int (__thiscall **)(int))(*(_DWORD *)(v2 + 0x24) + 0x38))(v2 + 0x24);
+  return (*(const char *(__thiscall **)(UInt32 *))(v2[1].member.refID + 0x38))(&v2[1].member.refID); /*0x5e1be3*/
 }

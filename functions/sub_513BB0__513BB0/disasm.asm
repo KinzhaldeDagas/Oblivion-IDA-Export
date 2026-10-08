@@ -6,7 +6,7 @@
 0x513BC9: test    eax, eax
 0x513BCB: jz      loc_513C63
 0x513BD1: xor     ecx, ecx
-0x513BD3: mov     dl, byte ptr ds:word_B3F280[ecx]
+0x513BD3: mov     dl, byte ptr ds:unk_B3F280[ecx]
 0x513BD9: mov     [esp+ecx+108h+var_108], dl
 0x513BDC: add     ecx, 1
 0x513BDF: test    dl, dl

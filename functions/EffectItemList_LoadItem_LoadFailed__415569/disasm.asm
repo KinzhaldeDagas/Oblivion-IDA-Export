@@ -27,7 +27,7 @@
 0x4155B8: mov     ecx, dword ptr [esp+10h+arg_1C]
 0x4155BC: push    ecx
 0x4155BD: mov     [esp+14h+arg_2C], 0FFFFFFFFh
-0x4155C5: call    FormHeapFree
+0x4155C5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4155CA: add     esp, 14h
 0x4155CD: jmp     short loc_415621
 0x4155CF: test    ebp, ebp
@@ -47,7 +47,7 @@
 0x4155FC: mov     eax, [esp+0Ch+arg_14]
 0x415600: push    eax
 0x415601: mov     [esp+10h+arg_2C], 0FFFFFFFFh
-0x415609: call    FormHeapFree
+0x415609: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x41560E: add     esp, 10h
 0x415611: xor     eax, eax
 0x415613: mov     [esp+arg_14], eax
@@ -56,6 +56,6 @@
 0x415621: mov     ecx, ebx
 0x415623: call    EffectItem_destr
 0x415628: push    ebx
-0x415629: call    FormHeapFree
+0x415629: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x41562E: add     esp, 4
 0x415631: jmp     short EffectItemList_LoadItem___Done

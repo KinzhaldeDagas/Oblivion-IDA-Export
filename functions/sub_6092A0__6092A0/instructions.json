@@ -169,13 +169,13 @@
   },
   {
     "ea": "0x6092EC",
-    "line": "push    ecx",
+    "line": "push    ecx; object",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6092ED",
-    "line": "call    sub_480340",
+    "line": "call    NiAVObject_FindBhkCollisionObjectRecursive; Returns the first bhk collision object found on object or recursively beneath its NiNode children. This is structural traversal, independent of node names.",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x609359",
-    "line": "push    offset dword_BA8018",
+    "line": "push    offset stru_BA8018",
     "mnemonic": "push",
     "size": 5
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x609375",
-    "line": "call    sub_8B1DD0",
+    "line": "call    hkMatrix3_SetFromQuaternion; Converts a quaternion into a 3x3 basis matrix. 0x896000 uses this during per-frame movement basis refresh.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,19 +517,19 @@
   },
   {
     "ea": "0x6093A8",
-    "line": "lea     edi, [esp+170h+var_B8]",
+    "line": "lea     edi, [esp+170h+parent]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x6093AF",
-    "line": "push    edx",
+    "line": "push    edx; local",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6093B0",
-    "line": "lea     eax, [esp+174h+var_84]",
+    "line": "lea     eax, [esp+174h+out]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -541,19 +541,19 @@
   },
   {
     "ea": "0x6093B9",
-    "line": "push    eax",
+    "line": "push    eax; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6093BA",
-    "line": "lea     ecx, [esp+178h+var_B8]",
+    "line": "lea     ecx, [esp+178h+parent]; parent",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x6093C1",
-    "line": "call    sub_53D7A0",
+    "line": "call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.",
     "mnemonic": "call",
     "size": 5
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x6093DC",
-    "line": "fst     [esp+170h+var_F0]",
+    "line": "fst     [esp+170h+var_120.scale]",
     "mnemonic": "fst",
     "size": 7
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x609412",
-    "line": "push    ecx; a4",
+    "line": "push    ecx; local",
     "mnemonic": "push",
     "size": 1
   },
@@ -685,13 +685,13 @@
   },
   {
     "ea": "0x60941E",
-    "line": "push    edx; a3",
+    "line": "push    edx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60941F",
-    "line": "lea     ecx, [esp+178h+var_120]",
+    "line": "lea     ecx, [esp+178h+var_120]; parent",
     "mnemonic": "lea",
     "size": 4
   },
@@ -703,7 +703,7 @@
   },
   {
     "ea": "0x60942A",
-    "line": "call    sub_53D7A0",
+    "line": "call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.",
     "mnemonic": "call",
     "size": 5
   },
@@ -847,7 +847,7 @@
   },
   {
     "ea": "0x609476",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },

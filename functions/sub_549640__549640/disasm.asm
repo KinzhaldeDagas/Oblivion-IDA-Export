@@ -70,3 +70,16 @@
 0x549744: pop     esi
 0x549745: add     esp, 34h
 0x549748: retn    0Ch
+0x9BB560: lea     ecx, [ebp-34h]; this
+0x9BB563: jmp     ??1BSFaceGenKeyframeMultiple@@UAE@XZ; BSFaceGenKeyframeMultiple::~BSFaceGenKeyframeMultiple(void)
+0x9BB568: lea     ecx, [ebp-20h]; this
+0x9BB56B: jmp     ??1BSFaceGenKeyframeMultiple@@UAE@XZ; BSFaceGenKeyframeMultiple::~BSFaceGenKeyframeMultiple(void)
+0x9BB570: lea     ecx, [ebp-20h]; this
+0x9BB573: jmp     ??1BSFaceGenKeyframeMultiple@@UAE@XZ; BSFaceGenKeyframeMultiple::~BSFaceGenKeyframeMultiple(void)
+0x9BB578: mov     edx, [esp+arg_4]
+0x9BB57C: lea     eax, [edx-2Ch]
+0x9BB57F: mov     ecx, [edx-30h]
+0x9BB582: xor     ecx, eax
+0x9BB584: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BB589: mov     eax, offset stru_AE5370
+0x9BB58E: jmp     ___CxxFrameHandler3

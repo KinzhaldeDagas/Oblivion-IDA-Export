@@ -1,4 +1,4 @@
-BSStringT *sub_A0A630()
+NiRTTI *sub_A0A630()
 {
-  return sub_70E220(&stru_B401A4, "NiSortAdjustNode", (int)dword_B3FAB0);
+  return NiRTTI_Constructor(&stru_B401A4, "NiSortAdjustNode", &parent); /*0xa0a644*/
 }

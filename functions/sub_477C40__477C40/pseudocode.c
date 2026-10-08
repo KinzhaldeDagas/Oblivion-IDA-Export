@@ -1,93 +1,94 @@
-void __thiscall sub_477C40(int *this, int a2)
+// Completes an asynchronous AnimIdle KF load. Stores KFModel at +0x08, binds the two actor-specific resources, holds the model reference, and marks phase 1. Completion mode +0x04 values 2/3 process playable queued state (3 also starts action 0x0B); mode 0 performs install-only; unsupported/no-ActorAnimData paths retain or destroy the holder as observed.
+void __thiscall AnimIdle_OnKFLoadComplete(int *this, int a2)
 {
-  int *v6; // edi
-  const char *v7; // eax
+  int *v3; // edi
+  const char *v4; // eax
+  int v5; // eax
+  int v6; // esi
+  int v7; // ebx
   int v8; // eax
-  int v9; // esi
-  int v10; // ebx
-  int v11; // eax
-  int v12; // ecx
-  int v13; // eax
-  ActorAnimData *v14; // eax
-  ActorAnimData *v15; // esi
-  AnimSequenceSingle *v16; // eax
-  TESObjectREFR *v17; // [esp-14h] [ebp-1Ch]
-  int v18; // [esp+4h] [ebp-4h]
+  int v9; // ecx
+  int v10; // eax
+  ActorAnimData *v11; // eax
+  ActorAnimData *v12; // esi
+  AnimSequenceSingle *v13; // eax
+  TESObjectREFR *v14; // [esp-14h] [ebp-1Ch]
+  int v15; // [esp+4h] [ebp-4h]
 
-  this[2] = a2;
-  if ( !a2 )
+  *(this + 2) = a2; /*0x477c4a*/
+  if ( !a2 ) /*0x477c4d*/
   {
-    *this = 0;
-    return;
+    *this = 0; /*0x477da3*/
+    return; /*0x477da3*/
   }
-  v6 = this + 7;
-  v18 = 2;
-  do
+  v3 = this + 7; /*0x477c56*/
+  v15 = 2; /*0x477c59*/
+  do /*0x477ceb*/
   {
-    if ( v6[0xFFFFFFFE] )
+    if ( v3[0xFFFFFFFE] ) /*0x477c61*/
     {
-      if ( this[0xA] )
+      if ( *(this + 0xA) ) /*0x477c67*/
       {
-        v17 = (TESObjectREFR *)this[0xA];
-        v7 = (const char *)(*(int (__thiscall **)(int))(*(_DWORD *)(v6[0xFFFFFFFE] + 0x18) + 0x14))(v6[0xFFFFFFFE] + 0x18);
-        v8 = sub_479450(v7, 0xFFFFFFFF, v17, 0);
-        v9 = *v6;
-        v10 = v8;
-        if ( *v6 != v8 )
+        v14 = (TESObjectREFR *)*(this + 0xA); /*0x477c78*/
+        v4 = (const char *)(*(int (__thiscall **)(int))(*(_DWORD *)(v3[0xFFFFFFFE] + 0x18) + 0x14))(v3[0xFFFFFFFE] + 0x18); /*0x477c7e*/
+        v5 = Actor_LoadCloneAndAttachModel3D(v4, 0xFFFFFFFF, v14, 0); /*0x477c81*/
+        v6 = *v3; /*0x477c86*/
+        v7 = v5; /*0x477c88*/
+        if ( *v3 != v5 ) /*0x477c8f*/
         {
-          if ( v9 )
+          if ( v6 ) /*0x477c93*/
           {
-            if ( !InterlockedDecrement((volatile LONG *)(v9 + 4)) )
-              (**(void (__thiscall ***)(int, int))v9)(v9, 1);
+            if ( !InterlockedDecrement((volatile LONG *)(v6 + 4)) ) /*0x477c99*/
+              (**(void (__thiscall ***)(int, int))v6)(v6, 1); /*0x477caf*/
           }
-          *v6 = v10;
-          if ( v10 )
-            InterlockedIncrement((volatile LONG *)(v10 + 4));
+          *v3 = v7; /*0x477cb3*/
+          if ( v7 ) /*0x477cb5*/
+            InterlockedIncrement((volatile LONG *)(v7 + 4)); /*0x477cbb*/
         }
-        v11 = (*(int (__thiscall **)(int))(*(_DWORD *)this[0xA] + 0x164))(this[0xA]);
-        sub_7165B0((_DWORD *)*v6, *(_DWORD *)(*(_DWORD *)(v11 + 0x98) + 0x7C));
+        v8 = (*(int (__thiscall **)(_DWORD))(*(_DWORD *)*(this + 0xA) + 0x164))(*(this + 0xA)); /*0x477ccc*/
+        sub_7165B0((_DWORD *)*v3, *(_DWORD *)(*(_DWORD *)(v8 + 0x98) + 0x7C)); /*0x477cdb*/
       }
     }
-    ++v6;
-    --v18;
+    ++v3; /*0x477ce3*/
+    --v15; /*0x477ce6*/
   }
-  while ( v18 );
-  InterlockedIncrement((volatile LONG *)(a2 + 0xC));
-  v12 = this[0xA];
-  *this = 1;
-  if ( v12 )
+  while ( v15 ); /*0x477ceb*/
+  InterlockedIncrement((volatile LONG *)(a2 + 0xC)); /*0x477cf9*/
+  v9 = *(this + 0xA); /*0x477cff*/
+  *this = 1; /*0x477d04*/
+  if ( v9 ) /*0x477d0b*/
   {
-    v13 = this[1];
-    if ( v13 == 2 || v13 == 3 )
+    v10 = *(this + 1); /*0x477d0d*/
+    if ( v10 == 2 || v10 == 3 ) /*0x477d18*/
     {
-      v14 = (ActorAnimData *)(*(int (__thiscall **)(int))(*(_DWORD *)v12 + 0x164))(v12);
-      v15 = v14;
-      if ( v14 )
+      v11 = (ActorAnimData *)(*(int (__thiscall **)(int))(*(_DWORD *)v9 + 0x164))(v9); /*0x477d22*/
+      v12 = v11; /*0x477d24*/
+      if ( v11 ) /*0x477d28*/
       {
-        if ( sub_476380(v14) )
+        if ( ActorAnimData_ProcessQueuedIdleKF(v11) ) /*0x477d2c*/
         {
-          if ( this[1] == 3 )
-            HighPRocess_DoAction_____((PlayerCharacter *)this[0xA], 0xB, this[4]);
+          if ( *(this + 1) == 3 ) /*0x477d39*/
+            Actor_SetCurrentActionWithBowVisualCleanup((PlayerCharacter *)*(this + 0xA), 0xB, *(this + 4)); /*0x477d44*/
         }
         else
         {
-          sub_475440(v15, 1, 0);
+          ActorAnimData_CleanupOrPromoteQueuedIdles(v12, 1, 0); /*0x477d57*/
         }
-        return;
+        return; /*0x477d44*/
       }
     }
     else
     {
-      if ( this[1] )
-        return;
-      v16 = (AnimSequenceSingle *)(*(int (__thiscall **)(int))(*(_DWORD *)v12 + 0x164))(v12);
-      if ( v16 )
+      if ( *(this + 1) ) /*0x477d68*/
+        return; /*0x477d6c*/
+      v13 = (AnimSequenceSingle *)(*(int (__thiscall **)(int))(*(_DWORD *)v9 + 0x164))(v9); /*0x477d76*/
+      if ( v13 ) /*0x477d7a*/
       {
-        sub_4753F0(v16);
-        return;
+        ActorAnimData_InstallQueuedIdleOnly(v13); /*0x477d96*/
+        return; /*0x477da0*/
       }
     }
-    sub_4729F0(this);
-    FormHeapFree((unsigned int)this);
+    AnimIdle_CleanupLoadedResources((char *)this); /*0x477d7e*/
+    FormHeapFree((unsigned int)this); /*0x477d84*/
   }
 }

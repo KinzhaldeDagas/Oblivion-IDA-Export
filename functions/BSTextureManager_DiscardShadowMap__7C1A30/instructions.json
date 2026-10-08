@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7C1A30",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Returns a frustum shadow texture in Oblivion: finds it in the used pool, appends it to the unused pool, removes the original used-list node, and balances temporary strong references.",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x7C1A59",
-    "line": "cmp     [esp+28h+arg_0], 0",
+    "line": "cmp     [esp+28h+texture], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x7C1A73",
-    "line": "mov     [esp+28h+var_14], edi",
+    "line": "mov     [esp+28h+position], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x7C1AB5",
-    "line": "cmp     esi, [esp+28h+arg_0]",
+    "line": "cmp     esi, [esp+28h+texture]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x7C1AC1",
-    "line": "mov     [esp+28h+var_14], edi",
+    "line": "mov     [esp+28h+position], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x7C1AC9",
-    "line": "mov     [esp+28h+var_14], edi",
+    "line": "mov     [esp+28h+position], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -355,49 +355,49 @@
   },
   {
     "ea": "0x7C1AD7",
-    "line": "call    sub_7C16B0",
+    "line": "call    NiTRefPointerList__AddTail; Generic refcounted NiT pointer-list AddTail helper. Allocates a node, assigns/increments its object pointer, links it after the old tail, and updates head/tail/count.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7C1ADC",
-    "line": "lea     eax, [esp+28h+var_14]",
+    "line": "lea     eax, [esp+28h+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7C1AE0",
-    "line": "push    eax",
+    "line": "push    eax; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C1AE1",
-    "line": "lea     ecx, [esp+2Ch+arg_0]",
+    "line": "lea     ecx, [esp+2Ch+texture]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7C1AE5",
-    "line": "push    ecx",
+    "line": "push    ecx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C1AE6",
-    "line": "lea     ecx, [ebx+30h]",
+    "line": "lea     ecx, [ebx+30h]; self",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7C1AE9",
-    "line": "call    sub_7C17D0",
+    "line": "call    NiTRefPointerList__RemovePosition; Generic refcounted NiT pointer-list RemovePosition helper handling head, tail and middle nodes while returning a strong payload reference and preserving list links/count.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7C1AEE",
-    "line": "mov     edi, [esp+28h+arg_0]",
+    "line": "mov     edi, [esp+28h+texture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -616,5 +616,59 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D6B30",
+    "line": "lea     ecx, [ebp-10h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D6B33",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6B38",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D6B3C",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D6B3F",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D6B42",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D6B44",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6B49",
+    "line": "mov     eax, offset stru_AFE890",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6B4E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

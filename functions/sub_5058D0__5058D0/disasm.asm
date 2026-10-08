@@ -17,7 +17,7 @@
 0x5058F8: push    edx; a2
 0x5058F9: push    eax; a1
 0x5058FA: mov     dword ptr [esp+28h+var_4], 0
-0x505902: call    Script_ExtractArgs
+0x505902: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x505907: add     esp, 20h
 0x50590A: test    al, al
 0x50590C: jnz     short loc_505911
@@ -30,7 +30,7 @@
 0x50591A: push    0
 0x50591C: push    edx
 0x50591D: push    esi
-0x50591E: call    sub_4F8370
+0x50591E: call    GetIsPlayerBirthsign_Eval; GetIsPlayerBirthsign_Eval compares the Birthsign parameter with the PlayerCharacter's birthsign; its result does not depend on the dialogue speaker.
 0x505923: add     esp, 10h
 0x505926: pop     esi
 0x505927: pop     ecx

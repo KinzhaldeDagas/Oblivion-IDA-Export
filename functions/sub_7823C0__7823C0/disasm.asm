@@ -6,7 +6,7 @@
 0x7823DB: mov     ecx, [esp+114h+arg_8]
 0x7823E2: mov     edx, [esp+114h+arg_C]
 0x7823E9: push    esi
-0x7823EA: mov     esi, dword ptr [esp+118h+ArgList]
+0x7823EA: mov     esi, [esp+118h+ArgList]
 0x7823F1: test    esi, esi
 0x7823F3: mov     dword ptr [eax], 0
 0x7823F9: push    edi; ArgList
@@ -86,7 +86,7 @@
 0x7824D7: cmp     [esp+124h+NumberOfBytesRead], edi
 0x7824DB: jz      short loc_782503
 0x7824DD: push    esi
-0x7824DE: call    FormHeapFree
+0x7824DE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7824E3: add     esp, 4
 0x7824E6: xor     al, al
 0x7824E8: pop     ebp

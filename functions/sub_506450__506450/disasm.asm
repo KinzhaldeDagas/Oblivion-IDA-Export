@@ -17,7 +17,7 @@
 0x50647A: push    edx; a3
 0x50647B: push    eax; a2
 0x50647C: push    ecx; a1
-0x50647D: call    Script_ExtractArgs
+0x50647D: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x506482: add     esp, 20h
 0x506485: test    al, al
 0x506487: jnz     short loc_50648B
@@ -26,7 +26,7 @@
 0x50648B: fld     dword ptr [esp+4+var_4]
 0x50648E: push    ecx
 0x50648F: fstp    [esp+8+var_8]; float
-0x506492: call    sub_7EB080
+0x506492: call    sub_7EB080; CustomAnimSupport evidence: HitShader Enum event ultimately triggers shader/effect strength here.
 0x506497: add     esp, 4
 0x50649A: mov     al, 1
 0x50649C: pop     ecx

@@ -31,3 +31,21 @@
 0x52E6D6: pop     esi
 0x52E6D7: add     esp, 14h
 0x52E6DA: retn
+0x9B8A50: mov     ecx, [ebp-10h]; this
+0x9B8A53: jmp     TESForm_destr
+0x9B8A58: cmp     dword ptr [ebp-10h], 0
+0x9B8A5C: jz      loc_9B8A70
+0x9B8A62: mov     eax, [ebp-10h]
+0x9B8A65: add     eax, 20h ; ' '
+0x9B8A68: mov     [ebp-14h], eax
+0x9B8A6B: jmp     loc_9B8A77
+0x9B8A70: mov     dword ptr [ebp-14h], 0
+0x9B8A77: mov     ecx, [ebp-14h]; void *
+0x9B8A7A: jmp     TESTexture_destr
+0x9B8A7F: mov     edx, [esp+arg_4]
+0x9B8A83: lea     eax, [edx-10h]
+0x9B8A86: mov     ecx, [edx-14h]
+0x9B8A89: xor     ecx, eax
+0x9B8A8B: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B8A90: mov     eax, offset stru_AE2F2C
+0x9B8A95: jmp     ___CxxFrameHandler3

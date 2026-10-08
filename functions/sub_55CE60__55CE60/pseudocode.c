@@ -1,4 +1,4 @@
-char *sub_55CE60()
+NiRTTI *sub_55CE60()
 {
-  return dword_B39DB8;
+  return &stru_B39DB8; /*0x55ce65*/
 }

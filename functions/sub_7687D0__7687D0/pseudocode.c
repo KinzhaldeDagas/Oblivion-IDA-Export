@@ -1,26 +1,26 @@
-bool __thiscall sub_7687D0(int *this, int a2, int a3)
+bool __thiscall sub_7687D0(IDirect3DDevice9 **this, Ni2DBuffer *parentBuffer, void *pixelFormat)
 {
-  int v3; // esi
-  int v5; // edi
-  int v6; // eax
-  int v8; // [esp-Ch] [ebp-18h]
+  Ni2DBuffer *v3; // esi
+  const void *v5; // edi
+  NiRTTI *v6; // eax
+  IDirect3DDevice9 *v8; // [esp-Ch] [ebp-18h]
 
-  v3 = a2;
-  if ( !a2 )
-    return 0;
-  v5 = a3;
-  if ( !a3 )
-    return 0;
-  v6 = (*(int (__thiscall **)(int))(*(_DWORD *)a2 + 4))(a2);
-  if ( !v6 )
-    return 0;
-  while ( (_UNKNOWN *)v6 != &unk_B3FAC0 )
+  v3 = parentBuffer; /*0x7687d2*/
+  if ( !parentBuffer ) /*0x7687db*/
+    return 0; /*0x7687db*/
+  v5 = pixelFormat; /*0x7687dd*/
+  if ( !pixelFormat ) /*0x7687e3*/
+    return 0; /*0x7687e3*/
+  v6 = (NiRTTI *)(*((int (__thiscall **)(Ni2DBuffer *))parentBuffer->__vftable + 1))(parentBuffer); /*0x7687ec*/
+  if ( !v6 ) /*0x7687f0*/
+    return 0; /*0x768800*/
+  while ( v6 != &stru_B3FAC0 ) /*0x7687f7*/
   {
-    v6 = *(_DWORD *)(v6 + 4);
-    if ( !v6 )
-      return 0;
+    v6 = v6->parent; /*0x7687f9*/
+    if ( !v6 ) /*0x7687fe*/
+      return 0; /*0x7687fe*/
   }
-  v8 = *(this + 0xA0);
-  a2 = v3;
-  return sub_76DE00(v8, (_DWORD **)&a2, v5) != 0;
+  v8 = *(this + 0xA0); /*0x768814*/
+  parentBuffer = v3; /*0x768815*/
+  return NiDX9AdditionalDepthStencilBufferData::Create(v8, &parentBuffer, v5) != 0; /*0x768800*/
 }

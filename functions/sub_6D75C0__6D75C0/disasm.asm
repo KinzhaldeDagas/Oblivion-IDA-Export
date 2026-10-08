@@ -1,4 +1,4 @@
-0x6D75C0: push    0FFFFFFFFh
+0x6D75C0: push    0FFFFFFFFh; Deep clone of text keys. Copies count, allocates count 0x08-byte records, copies each float time, and duplicates each owned text string; refuses the specialized copy when runtime type is not exactly NiTextKeyExtraData.
 0x6D75C2: push    offset SEH_6CF490
 0x6D75C7: mov     eax, large fs:0
 0x6D75CD: push    eax
@@ -26,7 +26,7 @@
 0x6D7608: mov     eax, [edx+4]
 0x6D760B: mov     ecx, esi
 0x6D760D: call    eax
-0x6D760F: cmp     eax, offset dword_B3DA08
+0x6D760F: cmp     eax, offset stru_B3DA08
 0x6D7614: setz    al
 0x6D7617: test    al, al
 0x6D7619: jz      loc_6D76AF
@@ -50,8 +50,8 @@
 0x6D764D: cmp     eax, ebx
 0x6D764F: mov     [esp+20h+var_4], ebx
 0x6D7653: jz      short loc_6D766D
-0x6D7655: push    offset sub_6EC6B0; a5
-0x6D765A: push    offset sub_6D73E0; a4
+0x6D7655: push    offset NiTextKey_Destroy; a5
+0x6D765A: push    offset NiTextKey_Construct; a4
 0x6D765F: push    edi; size
 0x6D7660: lea     ebx, [eax+4]
 0x6D7663: push    8; a2
@@ -89,3 +89,15 @@
 0x6D76C1: pop     ebx
 0x6D76C2: add     esp, 0Ch
 0x6D76C5: retn    8
+0x9AFB50: mov     eax, [ebp+8]
+0x9AFB53: push    eax
+0x9AFB54: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFB59: pop     ecx
+0x9AFB5A: retn
+0x9AFB5B: mov     edx, [esp+referenceFormIDOrZero]
+0x9AFB5F: lea     eax, [edx-10h]
+0x9AFB62: mov     ecx, [edx-14h]
+0x9AFB65: xor     ecx, eax
+0x9AFB67: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AFB6C: mov     eax, offset stru_ADC04C
+0x9AFB71: jmp     ___CxxFrameHandler3

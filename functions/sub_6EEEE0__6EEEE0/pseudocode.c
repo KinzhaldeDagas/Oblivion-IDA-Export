@@ -19,51 +19,51 @@ void __thiscall sub_6EEEE0(
   int v17; // edi
   unsigned int v18; // eax
   char *v19; // ebx
-  char *v20; // edi
+  FaceGenMatrix *v20; // edi
   unsigned int v21; // ebx
-  char *v22; // ebp
+  FaceGenMatrix *v22; // ebp
   bool v23; // cc
   _DWORD v24[5]; // [esp+14h] [ebp-14h] BYREF
 
-  v16 = (unsigned int)*(this + 1);
-  v17 = 0;
-  v24[4] = 0;
-  if ( v16 )
-    v18 = (int)&(*(this + 2))[-v16] / 0x34;
+  v16 = (unsigned int)*(this + 1); /*0x6eef09*/
+  v17 = 0; /*0x6eef0c*/
+  v24[4] = 0; /*0x6eef10*/
+  if ( v16 ) /*0x6eef14*/
+    v18 = (int)&(*(this + 2))[-v16] / 0x34; /*0x6eef2e*/
   else
-    v18 = 0;
-  if ( v18 < a2 )
+    v18 = 0; /*0x6eef16*/
+  if ( v18 < a2 ) /*0x6eef36*/
   {
-    if ( v16 )
-      v17 = (int)&(*(this + 2))[-v16] / 0x34;
-    v19 = *(this + 2);
-    if ( v16 > (unsigned int)v19 )
-      _invalid_parameter_noinfo();
-    sub_6EEBC0(this, (int)this, v19, a2 - v17, &a3);
+    if ( v16 ) /*0x6eef3a*/
+      v17 = (int)&(*(this + 2))[-v16] / 0x34; /*0x6eef50*/
+    v19 = *(this + 2); /*0x6eef52*/
+    if ( v16 > (unsigned int)v19 ) /*0x6eef57*/
+      _invalid_parameter_noinfo(); /*0x6eef59*/
+    sub_6EEBC0(this, (int)this, v19, a2 - v17, &a3); /*0x6eef6a*/
   }
-  if ( v16 )
+  if ( v16 ) /*0x6eef73*/
   {
-    v20 = *(this + 2);
-    if ( a2 < (int)&v20[-v16] / 0x34 )
+    v20 = (FaceGenMatrix *)*(this + 2); /*0x6eef75*/
+    if ( a2 < (int)((int)v20 - v16) / 0x34 ) /*0x6eef8f*/
     {
-      if ( v16 > (unsigned int)v20 )
-        _invalid_parameter_noinfo();
-      v21 = (unsigned int)*(this + 1);
-      if ( v21 > (unsigned int)*(this + 2) )
-        _invalid_parameter_noinfo();
-      v22 = (char *)(v21 + 0x34 * a2);
-      v23 = v22 <= *(this + 2);
-      v24[1] = v21;
-      if ( !v23 || v22 < *(this + 1) )
-        _invalid_parameter_noinfo();
-      sub_6EEA10(this, v24, (int)this, v22, (int)this, v20);
+      if ( v16 > (unsigned int)v20 ) /*0x6eef93*/
+        _invalid_parameter_noinfo(); /*0x6eef95*/
+      v21 = (unsigned int)*(this + 1); /*0x6eef9a*/
+      if ( v21 > (unsigned int)*(this + 2) ) /*0x6eefa0*/
+        _invalid_parameter_noinfo(); /*0x6eefa2*/
+      v22 = (FaceGenMatrix *)(v21 + 0x34 * a2); /*0x6eefaa*/
+      v23 = v22 <= (FaceGenMatrix *)*(this + 2); /*0x6eefac*/
+      v24[1] = v21; /*0x6eefaf*/
+      if ( !v23 || v22 < (FaceGenMatrix *)*(this + 1) ) /*0x6eefb8*/
+        _invalid_parameter_noinfo(); /*0x6eefba*/
+      sub_6EEA10(this, v24, (int)this, v22, (int)this, v20); /*0x6eefca*/
     }
   }
-  if ( a15 >= 0x10 )
-    FormHeapFree(a10);
-  a15 = 0xF;
-  a14 = 0;
-  LOBYTE(a10) = 0;
-  if ( a6 )
-    FormHeapFree(a6);
+  if ( a15 >= 0x10 ) /*0x6eefd4*/
+    FormHeapFree(a10); /*0x6eefdb*/
+  a15 = 0xF; /*0x6eefe9*/
+  a14 = 0; /*0x6eeff1*/
+  LOBYTE(a10) = 0; /*0x6eeff9*/
+  if ( a6 ) /*0x6eeffe*/
+    FormHeapFree(a6); /*0x6ef001*/
 }

@@ -103,7 +103,6 @@
 0x89C097: test    eax, eax
 0x89C099: jle     short loc_89C0BD
 0x89C09B: jmp     short loc_89C0A0
-0x89C09D: align 10h
 0x89C0A0: mov     edx, [ebp+0B8h]
 0x89C0A6: mov     eax, [edx+esi*4]
 0x89C0A9: push    ebx

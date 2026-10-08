@@ -6,7 +6,7 @@
 0x9A1165: push    esi
 0x9A1166: xor     esi, esi
 0x9A1168: push    edi
-0x9A1169: mov     edi, dword_BA9DBC
+0x9A1169: mov     edi, dword ptr unk_BA9DBC
 0x9A116F: mov     [ebp+Memory], esi
 0x9A1172: mov     eax, [edi]
 0x9A1174: cmp     eax, esi

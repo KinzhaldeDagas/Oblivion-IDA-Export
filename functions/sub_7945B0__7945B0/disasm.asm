@@ -1,5 +1,5 @@
-0x7945B0: push    esi
-0x7945B1: movzx   esi, [esp+4+arg_0]
+0x7945B0: push    esi; Oblivion CIndexedGeometry::GetStripsPointer. Returns the selected LOD's inner array of ushort strip pointers, or null when no strips are present.
+0x7945B1: movzx   esi, [esp+4+lodLevel]
 0x7945B6: push    edi
 0x7945B7: mov     edi, ecx
 0x7945B9: mov     ecx, [edi+4Ch]

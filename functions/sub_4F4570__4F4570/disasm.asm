@@ -6,7 +6,7 @@
 0x4F457A: mov     edi, [esp+8+arg_4]
 0x4F457E: test    edi, edi
 0x4F4580: jnz     short loc_4F4594
-0x4F4582: call    InterfaceManager_IsMenuMode
+0x4F4582: call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.
 0x4F4587: movzx   eax, al
 0x4F458A: mov     [esp+8+arg_C], eax
 0x4F458E: fild    [esp+8+arg_C]

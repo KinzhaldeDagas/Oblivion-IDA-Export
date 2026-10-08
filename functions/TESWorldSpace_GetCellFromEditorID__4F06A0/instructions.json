@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x4F06D7",
-    "line": "mov     [esp+18h+var_8], eax",
+    "line": "mov     [esp+18h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -169,61 +169,61 @@
   },
   {
     "ea": "0x4F06E4",
-    "line": "lea     eax, [esp+18h+var_C]",
+    "line": "lea     eax, [esp+18h+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4F06E8",
-    "line": "push    eax",
+    "line": "push    eax; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F06E9",
-    "line": "lea     ecx, [esp+1Ch+var_4]",
+    "line": "lea     ecx, [esp+1Ch+keyOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4F06ED",
-    "line": "push    ecx",
+    "line": "push    ecx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F06EE",
-    "line": "mov     ecx, [ebx+30h]",
+    "line": "mov     ecx, [ebx+30h]; self",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x4F06F1",
-    "line": "lea     edx, [esp+20h+var_8]",
+    "line": "lea     edx, [esp+20h+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4F06F5",
-    "line": "push    edx",
+    "line": "push    edx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F06F6",
-    "line": "mov     [esp+24h+var_C], edi",
+    "line": "mov     [esp+24h+valueOut], edi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4F06FA",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4F06FF",
-    "line": "mov     esi, [esp+18h+var_C]",
+    "line": "mov     esi, [esp+18h+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x4F070D",
-    "line": "push    eax; Str2",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
@@ -277,13 +277,13 @@
   },
   {
     "ea": "0x4F0718",
-    "line": "push    eax; Str1",
+    "line": "push    eax; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F0719",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x4F0727",
-    "line": "cmp     [esp+18h+var_8], 0",
+    "line": "cmp     [esp+18h+position], 0",
     "mnemonic": "cmp",
     "size": 5
   },

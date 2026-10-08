@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x403490",
-    "line": "mov     edx, [esp+scheme]",
+    "line": "mov     edx, [esp+scheme]; [Controller decode 2026-07-09] Low-level input query. Scheme 0 keyboard, 1 mouse, 2+ joystick index scheme-2; rejects scheme 0xFF and joystick schemes beyond numJoysticks.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x4034C6",
-    "line": "call    InputGlobals__QueryJoystickButtonState",
+    "line": "call    InputGlobals__QueryJoystickButtonState; TES4 authoritative joystick button query modes mirror keyboard: held/pressed/released/changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x4034D2",
-    "line": "call    sub_403070",
+    "line": "call    InputGlobals__GetJoystickPOVVirtualButton",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x4034F7",
-    "line": "call    InputGlobals__QueryMouseKeyState",
+    "line": "call    InputGlobals__QueryMouseKeyState; TES4 authoritative mouse query modes mirror keyboard for buttons; mouse wheel pseudo-buttons 8/9 return wheel up/down.",
     "mnemonic": "call",
     "size": 5
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x40350A",
-    "line": "call    InputGlobals__QueryKeyboardState",
+    "line": "call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.",
     "mnemonic": "call",
     "size": 5
   },

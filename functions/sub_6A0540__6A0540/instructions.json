@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6A0540",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, [esp+linkContext]; Verified MagicShaderHitEffect +0x84 PostLink callback derives its shader from the owning ActiveEffect's MagicItem when available, restores target attachment, runs Update and returns its bool result. ActiveEffect_Base_PostLink ignores that result and registers the object with ActorProcessManager.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x6A0547",
-    "line": "mov     edi, [esp+0Ch+arg_0]",
+    "line": "mov     edi, [esp+0Ch+ownerActiveEffect]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -67,25 +67,25 @@
   },
   {
     "ea": "0x6A0558",
-    "line": "jz      short loc_6A056C",
+    "line": "jz      short loc_6A056C; Verified (Oblivion): PostLink sets effectShader_34 from EffectSetting::effectShader at +0x78 or the TESEffectShader* fallback. EffectSetting_LinkForm resolves the persisted form ID through a direct TESEffectShader RTTI cast.",
     "mnemonic": "jz",
     "size": 2
   },
   {
     "ea": "0x6A055A",
-    "line": "mov     ecx, [edi+8]",
+    "line": "mov     ecx, [edi+8]; magicItem",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x6A055D",
-    "line": "push    0",
+    "line": "push    0; effectIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6A055F",
-    "line": "call    MagicItem_GetFXEffect",
+    "line": "call    MagicItem_GetFXEffect; Verified (Oblivion): MagicItem_GetFXEffect returns the effect's EffectSetting pointer; MagicShaderHitEffect constructors/PostLink dereference its +0x78 EffectSetting::effectShader field.",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x6A056C",
-    "line": "mov     edx, [esp+0Ch+arg_8]",
+    "line": "mov     edx, [esp+0Ch+fallbackData]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x6A057B",
-    "line": "fstp    [esp+0Ch+arg_4]",
+    "line": "fstp    [esp+0Ch+linkContext]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x6A0586",
-    "line": "fld     [esp+0Ch+arg_4]",
+    "line": "fld     [esp+0Ch+linkContext]",
     "mnemonic": "fld",
     "size": 4
   },

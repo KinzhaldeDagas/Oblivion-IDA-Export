@@ -1,4 +1,4 @@
-0x7997F0: push    0FFFFFFFFh
+0x7997F0: push    0FFFFFFFFh; Oblivion CLeafGeometry::ComputeExtents. Expands the 0x30-byte stRegion using leaf centers and maximum card reach, accounting for billboard orientation and every stored LOD.
 0x7997F2: push    offset SEH_7997F0
 0x7997F7: mov     eax, large fs:0
 0x7997FD: push    eax
@@ -21,9 +21,9 @@
 0x799831: jz      loc_799E7D
 0x799837: cmp     [edi+2Ch], ebp
 0x79983A: jz      loc_799E7D
-0x799840: mov     [esp+104h+var_A8], ebp
-0x799844: mov     [esp+104h+var_A4], ebp
-0x799848: mov     [esp+104h+var_A0], ebp
+0x799840: mov     [esp+104h+var_AC.begin], ebp
+0x799844: mov     [esp+104h+var_AC.end], ebp
+0x799848: mov     [esp+104h+var_AC.capacity], ebp
 0x79984C: cmp     [edi+1Ch], bp
 0x799850: mov     [esp+104h+var_4], ebp
 0x799857: mov     ebx, 1
@@ -51,7 +51,7 @@
 0x799894: fld     dword ptr [ecx+4]
 0x799897: fmul    dword ptr [eax+4]
 0x79989A: fstp    [esp+104h+var_E8]
-0x79989E: fst     [esp+104h+var_EC]
+0x79989E: fst     [esp+104h+value]
 0x7998A2: fld     [esp+104h+var_F0]
 0x7998A6: fld     st
 0x7998A8: fsubr   st, st(4)
@@ -81,14 +81,14 @@
 0x7998ED: mov     eax, [esp+104h+var_F0]
 0x7998F1: sar     eax, 1
 0x7998F3: add     eax, 1FC00000h
-0x7998F8: mov     [esp+104h+var_EC], eax
+0x7998F8: mov     [esp+104h+value], eax
 0x7998FC: jmp     short loc_799900
 0x7998FE: fstp    st(3)
 0x799900: mov     ecx, [edi+20h]
 0x799903: fld     dword ptr [ecx+esi]
 0x799906: add     ecx, esi
-0x799908: fstp    [esp+104h+var_B8]
-0x79990C: fld     [esp+104h+var_B8]
+0x799908: fstp    [esp+104h+var_B8.x]
+0x79990C: fld     [esp+104h+var_B8.x]
 0x799910: fsub    st, st(2)
 0x799912: fmul    st, st
 0x799914: fadd    st, st(5)
@@ -99,14 +99,14 @@
 0x799922: add     edx, 1FC00000h
 0x799928: mov     [esp+104h+var_F0], edx
 0x79992C: fld     [esp+104h+var_F0]
-0x799930: fld     [esp+104h+var_EC]
+0x799930: fld     [esp+104h+value]
 0x799934: fcompp
 0x799936: fnstsw  ax
 0x799938: test    ah, 5
 0x79993B: jp      short loc_799966
 0x79993D: fld     dword ptr [ecx]
-0x79993F: fstp    [esp+104h+var_C4]
-0x799943: fld     [esp+104h+var_C4]
+0x79993F: fstp    [esp+104h+var_C4.x]
+0x799943: fld     [esp+104h+var_C4.x]
 0x799947: fsub    st, st(2)
 0x799949: fmul    st, st
 0x79994B: faddp   st(5), st
@@ -116,7 +116,7 @@
 0x799955: mov     eax, [esp+104h+var_F0]
 0x799959: sar     eax, 1
 0x79995B: add     eax, 1FC00000h
-0x799960: mov     [esp+104h+var_EC], eax
+0x799960: mov     [esp+104h+value], eax
 0x799964: jmp     short loc_799968
 0x799966: fstp    st(4)
 0x799968: mov     edx, [edi+20h]
@@ -140,7 +140,7 @@
 0x79999C: add     eax, 1FC00000h
 0x7999A1: mov     [esp+104h+var_F0], eax
 0x7999A5: fld     [esp+104h+var_F0]
-0x7999A9: fld     [esp+104h+var_EC]
+0x7999A9: fld     [esp+104h+value]
 0x7999AD: fcompp
 0x7999AF: fnstsw  ax
 0x7999B1: test    ah, 5
@@ -163,7 +163,7 @@
 0x7999E1: mov     eax, [esp+104h+var_F0]
 0x7999E5: sar     eax, 1
 0x7999E7: add     eax, 1FC00000h
-0x7999EC: mov     [esp+104h+var_EC], eax
+0x7999EC: mov     [esp+104h+value], eax
 0x7999F0: jmp     short loc_7999F4
 0x7999F2: fstp    st
 0x7999F4: fld     dword ptr [ecx+4]
@@ -179,7 +179,7 @@
 0x799A11: add     edx, 1FC00000h
 0x799A17: mov     [esp+104h+var_F0], edx
 0x799A1B: fld     [esp+104h+var_F0]
-0x799A1F: fld     [esp+104h+var_EC]
+0x799A1F: fld     [esp+104h+value]
 0x799A23: fcompp
 0x799A25: fnstsw  ax
 0x799A27: test    ah, 5
@@ -194,15 +194,15 @@
 0x799A41: mov     eax, [esp+104h+var_F0]
 0x799A45: sar     eax, 1
 0x799A47: add     eax, 1FC00000h
-0x799A4C: mov     [esp+104h+var_EC], eax
+0x799A4C: mov     [esp+104h+value], eax
 0x799A50: jmp     short loc_799A58
 0x799A52: fstp    st(1)
 0x799A54: fstp    st
 0x799A56: fstp    st
-0x799A58: lea     ecx, [esp+104h+var_EC]
-0x799A5C: push    ecx; int
-0x799A5D: lea     ecx, [esp+108h+var_AC]; int
-0x799A61: call    sub_799780
+0x799A58: lea     ecx, [esp+104h+value]
+0x799A5C: push    ecx; value
+0x799A5D: lea     ecx, [esp+108h+var_AC]; this
+0x799A61: call    OB_stVectorFloat_PushBack_010201A0; Append this leaf texture's computed longest origin-to-corner/mesh radius to the local vector<float> used by ComputeExtents. This exact push-back is visible in Oblivion; RT4.1 corroborates the st_vector_float role but uses pre-sizing/index assignment.
 0x799A66: movzx   edx, word ptr [edi+1Ch]
 0x799A6A: add     ebp, ebx
 0x799A6C: add     esi, 0Ch
@@ -214,7 +214,6 @@
 0x799A81: jbe     loc_799E6C
 0x799A87: mov     [esp+104h+var_CC], ebp
 0x799A8B: jmp     short loc_799A90
-0x799A8D: align 10h
 0x799A90: mov     esi, [edi+2Ch]
 0x799A93: add     esi, [esp+104h+var_CC]
 0x799A97: cmp     [esi+0Ch], bp
@@ -223,10 +222,9 @@
 0x799AA5: mov     [esp+104h+var_D0], ebp
 0x799AA9: jmp     short loc_799AB4
 0x799AAB: jmp     short loc_799AB0
-0x799AAD: align 10h
 0x799AB0: mov     esi, [esp+104h+var_E8]
-0x799AB4: lea     ecx, [esp+104h+var_54]
-0x799ABB: call    sub_7A6BB0
+0x799AB4: lea     ecx, [esp+104h+right]; this
+0x799ABB: call    OB_Extents_Init_010201A0; stRegion constructor/helper: initializes min to large positive and max to large negative sentinel values.
 0x799AC0: mov     eax, [esi+18h]
 0x799AC3: add     eax, [esp+104h+var_D0]
 0x799AC7: mov     byte ptr [esp+104h+var_4], bl
@@ -237,188 +235,188 @@
 0x799ADB: fld     dword ptr [eax+8]
 0x799ADE: mov     eax, [esi+10h]
 0x799AE1: movzx   esi, byte ptr [eax+ebp]
-0x799AE5: fstp    [esp+104h+var_EC]
-0x799AE9: mov     eax, [esp+104h+var_A8]
+0x799AE5: fstp    [esp+104h+value]
+0x799AE9: mov     eax, [esp+104h+var_AC.begin]
 0x799AED: shr     esi, 1
 0x799AEF: test    eax, eax
 0x799AF1: jz      short loc_799B00
-0x799AF3: mov     ecx, [esp+104h+var_A4]
+0x799AF3: mov     ecx, [esp+104h+var_AC.end]
 0x799AF7: sub     ecx, eax
 0x799AF9: sar     ecx, 2
 0x799AFC: cmp     esi, ecx
 0x799AFE: jb      short loc_799B09
 0x799B00: call    __invalid_parameter_noinfo
-0x799B05: mov     eax, [esp+104h+var_A8]
+0x799B05: mov     eax, [esp+104h+var_AC.begin]
 0x799B09: fld     dword ptr [eax+esi*4]
-0x799B0C: lea     ecx, [esp+104h+var_6C]
+0x799B0C: lea     ecx, [esp+104h+point]
 0x799B13: fstp    [esp+104h+var_DC]
-0x799B17: push    ecx
+0x799B17: push    ecx; point
 0x799B18: fld     [esp+108h+var_E0]
-0x799B1C: lea     edx, [esp+108h+var_9C]
+0x799B1C: lea     edx, [esp+108h+outRegion]
 0x799B20: fadd    [esp+108h+var_DC]
-0x799B24: push    edx
-0x799B25: lea     ecx, [esp+10Ch+var_54]
-0x799B2C: fstp    [esp+10Ch+var_6C]
+0x799B24: push    edx; outRegion
+0x799B25: lea     ecx, [esp+10Ch+right]; this
+0x799B2C: fstp    [esp+10Ch+point.x]
 0x799B33: fld     [esp+10Ch+var_E4]
-0x799B37: fstp    [esp+10Ch+var_68]
-0x799B3E: fld     [esp+10Ch+var_EC]
-0x799B42: fstp    [esp+10Ch+var_64]
-0x799B49: call    sub_7A6B10
+0x799B37: fstp    [esp+10Ch+point.y]
+0x799B3E: fld     [esp+10Ch+value]
+0x799B42: fstp    [esp+10Ch+point.z]
+0x799B49: call    OB_stRegion_IncludePointCopy_010201A0; Oblivion stRegion point-union operator (source spelling operator^). Copies the 0x30-byte region, then clamps min.xyz downward and max.xyz upward to include one stVec3 point; unused stVec slots and size fields are preserved.
 0x799B4E: mov     ecx, 0Ch
 0x799B53: mov     esi, eax
-0x799B55: lea     edi, [esp+104h+var_54]
+0x799B55: lea     edi, [esp+104h+right]
 0x799B5C: rep movsd
-0x799B5E: lea     ecx, [esp+104h+var_84]; void *
+0x799B5E: lea     ecx, [esp+104h+outRegion.max]; this
 0x799B65: mov     byte ptr [esp+104h+var_4], 2
-0x799B6D: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
-0x799B72: lea     ecx, [esp+104h+var_9C]; void *
+0x799B6D: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x799B72: lea     ecx, [esp+104h+outRegion]; this
 0x799B76: mov     byte ptr [esp+104h+var_4], bl
-0x799B7D: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x799B7D: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x799B82: fld     [esp+104h+var_E0]
 0x799B86: fsub    [esp+104h+var_DC]
 0x799B8A: lea     eax, [esp+104h+var_18]
-0x799B91: push    eax
-0x799B92: lea     ecx, [esp+108h+var_9C]
-0x799B96: fstp    [esp+108h+var_18]
-0x799B9D: push    ecx
+0x799B91: push    eax; point
+0x799B92: lea     ecx, [esp+108h+outRegion]
+0x799B96: fstp    [esp+108h+var_18.x]
+0x799B9D: push    ecx; outRegion
 0x799B9E: fld     [esp+10Ch+var_E4]
-0x799BA2: lea     ecx, [esp+10Ch+var_54]
-0x799BA9: fstp    [esp+10Ch+var_14]
-0x799BB0: fld     [esp+10Ch+var_EC]
-0x799BB4: fstp    [esp+10Ch+var_10]
-0x799BBB: call    sub_7A6B10
+0x799BA2: lea     ecx, [esp+10Ch+right]; this
+0x799BA9: fstp    [esp+10Ch+var_18.y]
+0x799BB0: fld     [esp+10Ch+value]
+0x799BB4: fstp    [esp+10Ch+var_18.z]
+0x799BBB: call    OB_stRegion_IncludePointCopy_010201A0; Oblivion stRegion point-union operator (source spelling operator^). Copies the 0x30-byte region, then clamps min.xyz downward and max.xyz upward to include one stVec3 point; unused stVec slots and size fields are preserved.
 0x799BC0: mov     ecx, 0Ch
 0x799BC5: mov     esi, eax
-0x799BC7: lea     edi, [esp+104h+var_54]
+0x799BC7: lea     edi, [esp+104h+right]
 0x799BCE: rep movsd
-0x799BD0: lea     ecx, [esp+104h+var_84]; void *
+0x799BD0: lea     ecx, [esp+104h+outRegion.max]; this
 0x799BD7: mov     byte ptr [esp+104h+var_4], 3
-0x799BDF: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
-0x799BE4: lea     ecx, [esp+104h+var_9C]; void *
+0x799BDF: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x799BE4: lea     ecx, [esp+104h+outRegion]; this
 0x799BE8: mov     byte ptr [esp+104h+var_4], bl
-0x799BEF: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x799BEF: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x799BF4: fld     [esp+104h+var_E4]
 0x799BF8: fadd    [esp+104h+var_DC]
 0x799BFC: lea     edx, [esp+104h+var_24]
-0x799C03: push    edx
-0x799C04: lea     eax, [esp+108h+var_9C]
+0x799C03: push    edx; point
+0x799C04: lea     eax, [esp+108h+outRegion]
 0x799C08: fstp    dword ptr [esp+108h+var_D8]
-0x799C0C: push    eax
+0x799C0C: push    eax; outRegion
 0x799C0D: fld     [esp+10Ch+var_E0]
-0x799C11: lea     ecx, [esp+10Ch+var_54]
-0x799C18: fstp    [esp+10Ch+var_24]
+0x799C11: lea     ecx, [esp+10Ch+right]; this
+0x799C18: fstp    [esp+10Ch+var_24.x]
 0x799C1F: fld     dword ptr [esp+10Ch+var_D8]
-0x799C23: fstp    [esp+10Ch+var_20]
-0x799C2A: fld     [esp+10Ch+var_EC]
-0x799C2E: fstp    [esp+10Ch+var_1C]
-0x799C35: call    sub_7A6B10
+0x799C23: fstp    [esp+10Ch+var_24.y]
+0x799C2A: fld     [esp+10Ch+value]
+0x799C2E: fstp    [esp+10Ch+var_24.z]
+0x799C35: call    OB_stRegion_IncludePointCopy_010201A0; Oblivion stRegion point-union operator (source spelling operator^). Copies the 0x30-byte region, then clamps min.xyz downward and max.xyz upward to include one stVec3 point; unused stVec slots and size fields are preserved.
 0x799C3A: mov     ecx, 0Ch
 0x799C3F: mov     esi, eax
-0x799C41: lea     edi, [esp+104h+var_54]
+0x799C41: lea     edi, [esp+104h+right]
 0x799C48: rep movsd
-0x799C4A: lea     ecx, [esp+104h+var_84]; void *
+0x799C4A: lea     ecx, [esp+104h+outRegion.max]; this
 0x799C51: mov     byte ptr [esp+104h+var_4], 4
-0x799C59: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
-0x799C5E: lea     ecx, [esp+104h+var_9C]; void *
+0x799C59: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x799C5E: lea     ecx, [esp+104h+outRegion]; this
 0x799C62: mov     byte ptr [esp+104h+var_4], bl
-0x799C69: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x799C69: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x799C6E: fld     [esp+104h+var_E4]
 0x799C72: fsub    [esp+104h+var_DC]
 0x799C76: fstp    dword ptr [esp+104h+var_D8]
 0x799C7A: fld     [esp+104h+var_E0]
-0x799C7E: fstp    [esp+104h+var_60]
+0x799C7E: fstp    [esp+104h+var_60.x]
 0x799C85: fld     dword ptr [esp+104h+var_D8]
 0x799C89: lea     ecx, [esp+104h+var_60]
-0x799C90: fstp    [esp+104h+var_5C]
-0x799C97: push    ecx
-0x799C98: fld     [esp+108h+var_EC]
-0x799C9C: lea     edx, [esp+108h+var_9C]
-0x799CA0: push    edx
-0x799CA1: fstp    [esp+10Ch+var_58]
-0x799CA8: lea     ecx, [esp+10Ch+var_54]
-0x799CAF: call    sub_7A6B10
+0x799C90: fstp    [esp+104h+var_60.y]
+0x799C97: push    ecx; point
+0x799C98: fld     [esp+108h+value]
+0x799C9C: lea     edx, [esp+108h+outRegion]
+0x799CA0: push    edx; outRegion
+0x799CA1: fstp    [esp+10Ch+var_60.z]
+0x799CA8: lea     ecx, [esp+10Ch+right]; this
+0x799CAF: call    OB_stRegion_IncludePointCopy_010201A0; Oblivion stRegion point-union operator (source spelling operator^). Copies the 0x30-byte region, then clamps min.xyz downward and max.xyz upward to include one stVec3 point; unused stVec slots and size fields are preserved.
 0x799CB4: mov     ecx, 0Ch
 0x799CB9: mov     esi, eax
-0x799CBB: lea     edi, [esp+104h+var_54]
+0x799CBB: lea     edi, [esp+104h+right]
 0x799CC2: rep movsd
-0x799CC4: lea     ecx, [esp+104h+var_84]; void *
+0x799CC4: lea     ecx, [esp+104h+outRegion.max]; this
 0x799CCB: mov     byte ptr [esp+104h+var_4], 5
-0x799CD3: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
-0x799CD8: lea     ecx, [esp+104h+var_9C]; void *
+0x799CD3: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x799CD8: lea     ecx, [esp+104h+outRegion]; this
 0x799CDC: mov     byte ptr [esp+104h+var_4], bl
-0x799CE3: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
-0x799CE8: fld     [esp+104h+var_EC]
+0x799CE3: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x799CE8: fld     [esp+104h+value]
 0x799CEC: fadd    [esp+104h+var_DC]
 0x799CF0: lea     eax, [esp+104h+var_C4]
-0x799CF4: push    eax
-0x799CF5: lea     ecx, [esp+108h+var_9C]
+0x799CF4: push    eax; point
+0x799CF5: lea     ecx, [esp+108h+outRegion]
 0x799CF9: fstp    dword ptr [esp+108h+var_D8]
-0x799CFD: push    ecx
+0x799CFD: push    ecx; outRegion
 0x799CFE: fld     [esp+10Ch+var_E0]
-0x799D02: lea     ecx, [esp+10Ch+var_54]
-0x799D09: fstp    [esp+10Ch+var_C4]
+0x799D02: lea     ecx, [esp+10Ch+right]; this
+0x799D09: fstp    [esp+10Ch+var_C4.x]
 0x799D0D: fld     [esp+10Ch+var_E4]
-0x799D11: fstp    [esp+10Ch+var_C0]
+0x799D11: fstp    [esp+10Ch+var_C4.y]
 0x799D15: fld     dword ptr [esp+10Ch+var_D8]
-0x799D19: fstp    [esp+10Ch+var_BC]
-0x799D1D: call    sub_7A6B10
+0x799D19: fstp    [esp+10Ch+var_C4.z]
+0x799D1D: call    OB_stRegion_IncludePointCopy_010201A0; Oblivion stRegion point-union operator (source spelling operator^). Copies the 0x30-byte region, then clamps min.xyz downward and max.xyz upward to include one stVec3 point; unused stVec slots and size fields are preserved.
 0x799D22: mov     ecx, 0Ch
 0x799D27: mov     esi, eax
-0x799D29: lea     edi, [esp+104h+var_54]
+0x799D29: lea     edi, [esp+104h+right]
 0x799D30: rep movsd
-0x799D32: lea     ecx, [esp+104h+var_84]; void *
+0x799D32: lea     ecx, [esp+104h+outRegion.max]; this
 0x799D39: mov     byte ptr [esp+104h+var_4], 6
-0x799D41: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
-0x799D46: lea     ecx, [esp+104h+var_9C]; void *
+0x799D41: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x799D46: lea     ecx, [esp+104h+outRegion]; this
 0x799D4A: mov     byte ptr [esp+104h+var_4], bl
-0x799D51: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
-0x799D56: fld     [esp+104h+var_EC]
+0x799D51: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x799D56: fld     [esp+104h+value]
 0x799D5A: fsub    [esp+104h+var_DC]
 0x799D5E: lea     edx, [esp+104h+var_B8]
-0x799D62: push    edx
-0x799D63: lea     eax, [esp+108h+var_9C]
+0x799D62: push    edx; point
+0x799D63: lea     eax, [esp+108h+outRegion]
 0x799D67: fstp    dword ptr [esp+108h+var_D8]
-0x799D6B: push    eax
+0x799D6B: push    eax; outRegion
 0x799D6C: fld     [esp+10Ch+var_E0]
-0x799D70: lea     ecx, [esp+10Ch+var_54]
-0x799D77: fstp    [esp+10Ch+var_B8]
+0x799D70: lea     ecx, [esp+10Ch+right]; this
+0x799D77: fstp    [esp+10Ch+var_B8.x]
 0x799D7B: fld     [esp+10Ch+var_E4]
-0x799D7F: fstp    [esp+10Ch+var_B4]
+0x799D7F: fstp    [esp+10Ch+var_B8.y]
 0x799D83: fld     dword ptr [esp+10Ch+var_D8]
-0x799D87: fstp    [esp+10Ch+var_B0]
-0x799D8B: call    sub_7A6B10
+0x799D87: fstp    [esp+10Ch+var_B8.z]
+0x799D8B: call    OB_stRegion_IncludePointCopy_010201A0; Oblivion stRegion point-union operator (source spelling operator^). Copies the 0x30-byte region, then clamps min.xyz downward and max.xyz upward to include one stVec3 point; unused stVec slots and size fields are preserved.
 0x799D90: mov     ecx, 0Ch
 0x799D95: mov     esi, eax
-0x799D97: lea     edi, [esp+104h+var_54]
+0x799D97: lea     edi, [esp+104h+right]
 0x799D9E: rep movsd
-0x799DA0: lea     ecx, [esp+104h+var_84]; void *
+0x799DA0: lea     ecx, [esp+104h+outRegion.max]; this
 0x799DA7: mov     byte ptr [esp+104h+var_4], 7
-0x799DAF: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
-0x799DB4: lea     ecx, [esp+104h+var_9C]; void *
+0x799DAF: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x799DB4: lea     ecx, [esp+104h+outRegion]; this
 0x799DB8: mov     byte ptr [esp+104h+var_4], bl
-0x799DBF: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
-0x799DC4: mov     edi, [esp+104h+arg_0]
-0x799DCB: lea     ecx, [esp+104h+var_54]
-0x799DD2: push    ecx
-0x799DD3: lea     edx, [esp+108h+var_9C]
-0x799DD7: push    edx
-0x799DD8: mov     ecx, edi
-0x799DDA: call    sub_7A6C20
+0x799DBF: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x799DC4: mov     edi, [esp+104h+extents]
+0x799DCB: lea     ecx, [esp+104h+right]
+0x799DD2: push    ecx; right
+0x799DD3: lea     edx, [esp+108h+outRegion]
+0x799DD7: push    edx; result
+0x799DD8: mov     ecx, edi; this
+0x799DDA: call    OB_stRegion_UnionCopy_010201A0; Leaf-geometry bounds accumulation unions the current output region with the computed leaf-swing region through OB_stRegion_UnionCopy.
 0x799DDF: mov     ecx, 0Ch
 0x799DE4: mov     esi, eax
 0x799DE6: rep movsd
-0x799DE8: lea     ecx, [esp+104h+var_84]; void *
+0x799DE8: lea     ecx, [esp+104h+outRegion.max]; this
 0x799DEF: mov     byte ptr [esp+104h+var_4], 8
-0x799DF7: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
-0x799DFC: lea     ecx, [esp+104h+var_9C]; void *
+0x799DF7: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x799DFC: lea     ecx, [esp+104h+outRegion]; this
 0x799E00: mov     byte ptr [esp+104h+var_4], bl
-0x799E07: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
-0x799E0C: lea     ecx, [esp+104h+var_3C]; void *
+0x799E07: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x799E0C: lea     ecx, [esp+104h+right.max]; this
 0x799E13: mov     byte ptr [esp+104h+var_4], 9
-0x799E1B: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
-0x799E20: lea     ecx, [esp+104h+var_54]; void *
+0x799E1B: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x799E20: lea     ecx, [esp+104h+right]; this
 0x799E27: mov     byte ptr [esp+104h+var_4], 0
-0x799E2F: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x799E2F: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x799E34: mov     eax, [esp+104h+var_E8]
 0x799E38: movzx   ecx, word ptr [eax+0Ch]
 0x799E3C: add     [esp+104h+var_D0], 0Ch
@@ -434,11 +432,11 @@
 0x799E60: cmp     eax, edx
 0x799E62: mov     [esp+104h+var_F0], eax
 0x799E66: jl      loc_799A90
-0x799E6C: mov     eax, [esp+104h+var_A8]
+0x799E6C: mov     eax, [esp+104h+var_AC.begin]
 0x799E70: cmp     eax, ebp
 0x799E72: jz      short loc_799E7D
 0x799E74: push    eax
-0x799E75: call    FormHeapFree
+0x799E75: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x799E7A: add     esp, 4
 0x799E7D: mov     ecx, [esp+104h+var_C]
 0x799E84: mov     large fs:0, ecx
@@ -449,3 +447,30 @@
 0x799E8F: pop     ebx
 0x799E90: add     esp, 0F0h
 0x799E96: retn    4
+0x9CC130: lea     ecx, [ebp-0ACh]; this
+0x9CC136: jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.
+0x9CC13B: lea     ecx, [ebp-54h]; this
+0x9CC13E: jmp     OB_stRegion_Dtor_010201A0; Oblivion stRegion destructor: invokes the no-op stVec teardown on embedded vectors at +0x18 and +0x00. RT4.1 stRegion's max/min vector composition corroborates the two 24-byte subobjects.
+0x9CC143: lea     ecx, [ebp-9Ch]; this
+0x9CC149: jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x9CC14E: lea     ecx, [ebp-9Ch]; this
+0x9CC154: jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x9CC159: lea     ecx, [ebp-9Ch]; this
+0x9CC15F: jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x9CC164: lea     ecx, [ebp-9Ch]; this
+0x9CC16A: jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x9CC16F: lea     ecx, [ebp-9Ch]; this
+0x9CC175: jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x9CC17A: lea     ecx, [ebp-9Ch]; this
+0x9CC180: jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x9CC185: lea     ecx, [ebp-9Ch]; this
+0x9CC18B: jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x9CC190: lea     ecx, [ebp-54h]; this
+0x9CC193: jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x9CC198: mov     edx, [esp+arg_4]
+0x9CC19C: lea     eax, [edx-0F4h]
+0x9CC1A2: mov     ecx, [edx-0F8h]
+0x9CC1A8: xor     ecx, eax
+0x9CC1AA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CC1AF: mov     eax, offset stru_AF5198
+0x9CC1B4: jmp     ___CxxFrameHandler3

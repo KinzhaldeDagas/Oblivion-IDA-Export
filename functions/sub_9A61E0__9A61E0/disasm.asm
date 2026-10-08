@@ -1,21 +1,21 @@
-0x9A61E0: cmp     [esp+arg_8], 0
+0x9A61E0: cmp     [esp+geometry], 0
 0x9A61E5: push    ebx
 0x9A61E6: mov     ebx, ecx
 0x9A61E8: jnz     short loc_9A61F3
 0x9A61EA: mov     eax, 1
 0x9A61EF: pop     ebx
 0x9A61F0: retn    34h ; '4'
-0x9A61F3: mov     edx, [esp+4+arg_30]
+0x9A61F3: mov     edx, [esp+4+cache]
 0x9A61F7: test    edx, edx
 0x9A61F9: push    esi
-0x9A61FA: mov     esi, [esp+8+arg_4]
+0x9A61FA: mov     esi, [esp+8+entry]
 0x9A61FE: push    edi
 0x9A61FF: jz      short loc_9A622C
 0x9A6201: mov     ecx, ds:dword_AB2908
 0x9A6207: mov     edi, [edx+14h]
 0x9A620A: mov     eax, [edx+1Ch]
 0x9A620D: push    ebp
-0x9A620E: mov     ebp, [esp+10h+arg_28]
+0x9A620E: mov     ebp, [esp+10h+passIndex]
 0x9A6212: shl     ebp, cl
 0x9A6214: lea     eax, [eax+edi*8]
 0x9A6217: or      ebp, [esi+1Ch]
@@ -28,14 +28,14 @@
 0x9A6227: mov     [edx+14h], edi
 0x9A622A: jnz     short loc_9A6256
 0x9A622C: mov     eax, [esi+0Ch]
-0x9A622F: mov     ecx, [esp+0Ch+arg_8]
+0x9A622F: mov     ecx, [esp+0Ch+geometry]
 0x9A6233: push    eax
-0x9A6234: call    NiObjectNET_GetExtraData
+0x9A6234: call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.
 0x9A6239: test    eax, eax
 0x9A623B: jnz     short loc_9A6256
-0x9A623D: push    esi
+0x9A623D: push    esi; entry
 0x9A623E: mov     ecx, ebx
-0x9A6240: call    sub_9A92E0
+0x9A6240: call    NiD3DShaderConstantMap_ConvertMappedValue; DX11 mapped-float provenance (2026-09-28):9A92E0 does NOT always return entry+30 directly. size(+28)/stride(+2C) counts1/2/3 broadcast or fill a scratch float4;8/9/12 expand matrices into scratch. Counts4 and16 pass the pointer through. Other counts pass through only when stride==4 and component count is divisible by4. A source-address provenance resolver must reject/bypass scratch-expansion cases rather than treating every mapped source as a direct float4 array.
 0x9A6245: mov     edi, eax
 0x9A6247: test    edi, edi
 0x9A6249: jnz     short loc_9A6270
@@ -56,14 +56,14 @@
 0x9A6267: mov     eax, 80000040h
 0x9A626C: pop     ebx
 0x9A626D: retn    34h ; '4'
-0x9A6270: cmp     byte_B4295B, 0
+0x9A6270: cmp     g_D3DXParameterDispatchInitialized, 0
 0x9A6277: mov     ebx, [esi+14h]
 0x9A627A: jnz     short loc_9A6281
-0x9A627C: call    sub_783C70
+0x9A627C: call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.
 0x9A6281: and     ebx, 0FFh
-0x9A6287: cmp     dword_B428D8[ebx*4], 9
+0x9A6287: cmp     g_D3DXParameterClassDispatch[ebx*4], 9
 0x9A628F: jnz     short loc_9A62B3
-0x9A6291: mov     ecx, [esp+0Ch+arg_0]
+0x9A6291: mov     ecx, [esp+0Ch+shaderProgram]
 0x9A6295: mov     edx, [ecx]
 0x9A6297: mov     eax, [edx+28h]
 0x9A629A: push    4
@@ -77,12 +77,12 @@
 0x9A62AA: mov     eax, 80000050h
 0x9A62AF: pop     ebx
 0x9A62B0: retn    34h ; '4'
-0x9A62B3: cmp     byte_B4295B, 0
+0x9A62B3: cmp     g_D3DXParameterDispatchInitialized, 0
 0x9A62BA: mov     ebx, [esi+14h]
 0x9A62BD: jnz     short loc_9A62C4
-0x9A62BF: call    sub_783C70
+0x9A62BF: call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.
 0x9A62C4: and     ebx, 0FFh
-0x9A62CA: cmp     dword_B428D8[ebx*4], 6
+0x9A62CA: cmp     g_D3DXParameterClassDispatch[ebx*4], 6
 0x9A62D2: jz      short loc_9A634E
 0x9A62D4: mov     ecx, esi
 0x9A62D6: call    sub_7833A0
@@ -112,7 +112,7 @@
 0x9A6318: call    sub_782DE0
 0x9A631D: test    al, al
 0x9A631F: jz      short loc_9A633F
-0x9A6321: mov     ecx, [esp+0Ch+arg_0]
+0x9A6321: mov     ecx, [esp+0Ch+shaderProgram]
 0x9A6325: mov     edx, [ecx]
 0x9A6327: mov     eax, [edx+28h]
 0x9A632A: push    3
@@ -133,7 +133,7 @@
 0x9A6348: xor     eax, eax
 0x9A634A: pop     ebx
 0x9A634B: retn    34h ; '4'
-0x9A634E: mov     ecx, [esp+0Ch+arg_0]
+0x9A634E: mov     ecx, [esp+0Ch+shaderProgram]
 0x9A6352: mov     edx, [ecx]
 0x9A6354: mov     eax, [edx+28h]
 0x9A6357: push    0

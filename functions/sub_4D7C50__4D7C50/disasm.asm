@@ -14,7 +14,7 @@
 0x4D7C78: jz      short loc_4D7CF1
 0x4D7C7A: mov     ecx, 9
 0x4D7C7F: mov     esi, offset unk_B3FADC
-0x4D7C84: lea     edi, [esp+58h+var_48]
+0x4D7C84: lea     edi, [esp+58h+right]
 0x4D7C88: rep movsd
 0x4D7C8A: mov     ecx, eax
 0x4D7C8C: call    TESActorBase_IsFemale
@@ -28,24 +28,24 @@
 0x4D7CA3: jz      short loc_4D7CC0
 0x4D7CA5: fld1
 0x4D7CA7: fdivrp  st(1), st
-0x4D7CA9: fstp    [esp+5Ch+var_48]
-0x4D7CAD: fld     [esp+5Ch+var_48]
-0x4D7CB1: fstp    [esp+5Ch+var_38]
+0x4D7CA9: fstp    [esp+5Ch+right.data]
+0x4D7CAD: fld     [esp+5Ch+right.data]
+0x4D7CB1: fstp    [esp+5Ch+right.data+10h]
 0x4D7CB5: call    sub_4D6B90
 0x4D7CBA: fld1
 0x4D7CBC: fdivrp  st(1), st
 0x4D7CBE: jmp     short loc_4D7CD1
-0x4D7CC0: fstp    [esp+5Ch+var_48]
-0x4D7CC4: fld     [esp+5Ch+var_48]
-0x4D7CC8: fstp    [esp+5Ch+var_38]
+0x4D7CC0: fstp    [esp+5Ch+right.data]
+0x4D7CC4: fld     [esp+5Ch+right.data]
+0x4D7CC8: fstp    [esp+5Ch+right.data+10h]
 0x4D7CCC: call    sub_4D6B90
-0x4D7CD1: lea     eax, [esp+58h+var_48]
-0x4D7CD5: fstp    [esp+58h+var_28]
-0x4D7CD9: push    eax
-0x4D7CDA: lea     ecx, [esp+5Ch+var_24]
-0x4D7CDE: push    ecx
-0x4D7CDF: mov     ecx, ebp
-0x4D7CE1: call    NiMAtrix33_Multiply
+0x4D7CD1: lea     eax, [esp+58h+right]
+0x4D7CD5: fstp    [esp+58h+right.data+20h]
+0x4D7CD9: push    eax; right
+0x4D7CDA: lea     ecx, [esp+5Ch+out]
+0x4D7CDE: push    ecx; out
+0x4D7CDF: mov     ecx, ebp; this
+0x4D7CE1: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x4D7CE6: mov     ecx, 9
 0x4D7CEB: mov     esi, eax
 0x4D7CED: mov     edi, ebp

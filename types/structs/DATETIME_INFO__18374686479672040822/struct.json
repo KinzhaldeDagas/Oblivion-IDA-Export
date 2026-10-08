@@ -1,178 +1,279 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "DATETIME_INFO",
+  "definition": "struct __declspec(align(8)) DATETIME_INFO\n{\nHWND hwndSelf;\nHWND hMonthCal;\nHWND hwndNotify;\nHWND hUpdown;\nDWORD dwStyle;\nSYSTEMTIME date;\nBOOL dateValid;\nHWND hwndCheckbut;\nRECT rcClient;\nRECT rcDraw;\nRECT checkbox;\nRECT calbutton;\nBOOL bCalDepressed;\nBOOL bCalHot;\nBOOL bDropdownEnabled;\nint select;\nWCHAR_0 charsEntered[4];\nint nCharsEntered;\nHFONT hFont;\nint nrFieldsAllocated;\nint nrFields;\nint haveFocus;\nint *fieldspec;\nRECT *fieldRect;\nint *buflen;\nWCHAR_0 textbuf[256];\nPOINT monthcal_pos;\nint pendingUpdown;\n}\n",
   "id": 18374686479672040822,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hwndSelf",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hMonthCal",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hwndNotify",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hUpdown",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwStyle",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "date",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 16
+      "size": 16,
+      "type": "SYSTEMTIME"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dateValid",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hwndCheckbut",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "rcClient",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 16
+      "offset_hex": "0x2C",
+      "size": 16,
+      "type": "RECT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "rcDraw",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 16
+      "offset_hex": "0x3C",
+      "size": 16,
+      "type": "RECT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "checkbox",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 16
+      "offset_hex": "0x4C",
+      "size": 16,
+      "type": "RECT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "calbutton",
       "offset": 92,
-      "offset_hex": "0x5c",
-      "size": 16
+      "offset_hex": "0x5C",
+      "size": 16,
+      "type": "RECT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bCalDepressed",
       "offset": 108,
-      "offset_hex": "0x6c",
-      "size": 4
+      "offset_hex": "0x6C",
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bCalHot",
       "offset": 112,
       "offset_hex": "0x70",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bDropdownEnabled",
       "offset": 116,
       "offset_hex": "0x74",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "select",
       "offset": 120,
       "offset_hex": "0x78",
-      "size": 4
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "charsEntered",
       "offset": 124,
-      "offset_hex": "0x7c",
-      "size": 8
+      "offset_hex": "0x7C",
+      "size": 8,
+      "type": "WCHAR_0[4]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nCharsEntered",
       "offset": 132,
       "offset_hex": "0x84",
-      "size": 4
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hFont",
       "offset": 136,
       "offset_hex": "0x88",
-      "size": 4
+      "size": 4,
+      "type": "HFONT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nrFieldsAllocated",
       "offset": 140,
-      "offset_hex": "0x8c",
-      "size": 4
+      "offset_hex": "0x8C",
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nrFields",
       "offset": 144,
       "offset_hex": "0x90",
-      "size": 4
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "haveFocus",
       "offset": 148,
       "offset_hex": "0x94",
-      "size": 4
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fieldspec",
       "offset": 152,
       "offset_hex": "0x98",
-      "size": 4
+      "size": 4,
+      "type": "int *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fieldRect",
       "offset": 156,
-      "offset_hex": "0x9c",
-      "size": 4
+      "offset_hex": "0x9C",
+      "size": 4,
+      "type": "RECT *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "buflen",
       "offset": 160,
-      "offset_hex": "0xa0",
-      "size": 4
+      "offset_hex": "0xA0",
+      "size": 4,
+      "type": "int *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "textbuf",
       "offset": 164,
-      "offset_hex": "0xa4",
-      "size": 512
+      "offset_hex": "0xA4",
+      "size": 512,
+      "type": "WCHAR_0[256]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "monthcal_pos",
       "offset": 676,
-      "offset_hex": "0x2a4",
-      "size": 8
+      "offset_hex": "0x2A4",
+      "size": 8,
+      "type": "POINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pendingUpdown",
       "offset": 684,
-      "offset_hex": "0x2ac",
-      "size": 4
+      "offset_hex": "0x2AC",
+      "size": 4,
+      "type": "int"
     }
   ],
   "name": "DATETIME_INFO",
+  "ordinal": 6216,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 688
 }

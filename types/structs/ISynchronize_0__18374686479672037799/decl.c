@@ -1,1 +1,1 @@
-ISynchronize_0
+typedef ISynchronize ISynchronize_0;

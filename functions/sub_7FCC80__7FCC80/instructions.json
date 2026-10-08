@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x7FCC80",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Oblivion Lighting30Shader constant-map builder. The principal SM3 map uses grouped constants; alternate/projected maps explicitly bind FogParam/FogColor, shadow projection, material, eye, light, skinning, and texture-effect data.",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7FCC82",
-    "line": "push    offset SEH_7FCC80",
+    "line": "push    offset MobileObject_LoadModifiedForm_SEH",
     "mnemonic": "push",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x7FCD05",
-    "line": "call    eax",
+    "line": "call    eax; Add automatic main-vertex-map WorldViewProjTranspose at VS c0 (non-skinned matrix c0..c3).",
     "mnemonic": "call",
     "size": 2
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x7FCD45",
-    "line": "mov     ds:0B46B98h, edi",
+    "line": "mov     ds:0B46B98h, edi; Retain the WorldViewProjTranspose constant-map entry for selector-mask activation.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x7FCD6F",
-    "line": "call    eax",
+    "line": "call    eax; Add automatic SkinWorldViewProjTranspose at VS c1 (skinned matrix c1..c4).",
     "mnemonic": "call",
     "size": 2
   },
@@ -523,13 +523,13 @@
   },
   {
     "ea": "0x7FCD80",
-    "line": "mov     ecx, offset dword_B46B9C; this",
+    "line": "mov     ecx, offset unk_B46B9C; this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x7FCD85",
-    "line": "call    NiSmartPointer_Set??",
+    "line": "call    NiSmartPointer_Set??; Retain the SkinWorldViewProjTranspose entry for selector-mask activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x7FCDA2",
-    "line": "call    eax",
+    "line": "call    eax; Add automatic WorldViewTranspose at VS c5.",
     "mnemonic": "call",
     "size": 2
   },
@@ -619,13 +619,13 @@
   },
   {
     "ea": "0x7FCDB3",
-    "line": "mov     ecx, offset dword_B46BA4; this",
+    "line": "mov     ecx, offset unk_B46BA4; this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x7FCDB8",
-    "line": "call    NiSmartPointer_Set??",
+    "line": "call    NiSmartPointer_Set??; Retain the WorldViewTranspose entry for selector-mask activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x7FCDD5",
-    "line": "call    eax",
+    "line": "call    eax; Add automatic SkinWorldViewTranspose at VS c6.",
     "mnemonic": "call",
     "size": 2
   },
@@ -715,13 +715,13 @@
   },
   {
     "ea": "0x7FCDE6",
-    "line": "mov     ecx, offset dword_B46BA8; this",
+    "line": "mov     ecx, offset unk_B46BA8; this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x7FCDEB",
-    "line": "call    NiSmartPointer_Set??",
+    "line": "call    NiSmartPointer_Set??; Retain the SkinWorldViewTranspose entry for selector-mask activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -805,7 +805,7 @@
   },
   {
     "ea": "0x7FCE14",
-    "line": "call    eax",
+    "line": "call    eax; Add automatic BoneMatrix3 at VS c31, count 54 registers (18 affine bone matrices at three float4 registers each).",
     "mnemonic": "call",
     "size": 2
   },
@@ -847,13 +847,13 @@
   },
   {
     "ea": "0x7FCE25",
-    "line": "mov     ecx, offset dword_B46BA0; this",
+    "line": "mov     ecx, offset unk_B46BA0; this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x7FCE2A",
-    "line": "call    NiSmartPointer_Set??",
+    "line": "call    NiSmartPointer_Set??; Retain the BoneMatrix3 entry for selector-mask activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -877,7 +877,7 @@
   },
   {
     "ea": "0x7FCE35",
-    "line": "push    offset flt_B46D68",
+    "line": "push    offset unk_B46D68",
     "mnemonic": "push",
     "size": 5
   },
@@ -937,7 +937,7 @@
   },
   {
     "ea": "0x7FCE59",
-    "line": "call    eax",
+    "line": "call    eax; Add Lighting30 vertex ConstantGroup at VS c10, count 21, backed by global slot 0x3D5.",
     "mnemonic": "call",
     "size": 2
   },
@@ -967,7 +967,7 @@
   },
   {
     "ea": "0x7FCE64",
-    "line": "push    offset flt_B46218",
+    "line": "push    offset unk_B46218",
     "mnemonic": "push",
     "size": 5
   },
@@ -1063,7 +1063,7 @@
   },
   {
     "ea": "0x7FCE96",
-    "line": "mov     ecx, offset dword_B46C14; this",
+    "line": "mov     ecx, offset g_Lighting30_DecalFadeConstantEntry; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1195,7 +1195,7 @@
   },
   {
     "ea": "0x7FCEDB",
-    "line": "mov     ecx, offset dword_B46C18; this",
+    "line": "mov     ecx, offset g_Lighting30_DecalProjectionConstantEntry; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1351,7 +1351,7 @@
   },
   {
     "ea": "0x7FCF30",
-    "line": "push    offset dword_B46F78",
+    "line": "push    offset flt_B46F78; DeferredRendering near-wall fix: native Lighting30 pixel ConstantGroup remains c0..c48. Plugin scratch constants c220-c222 are outside this native group; c222 carries pixel EyePosition c1 plus an enable flag for specular-family deferred position reconstruction.",
     "mnemonic": "push",
     "size": 5
   },
@@ -1405,7 +1405,7 @@
   },
   {
     "ea": "0x7FCF51",
-    "line": "call    eax",
+    "line": "call    eax; Build Lighting30 pixel ConstantGroup at PS c0, count 49, backed by global slot 0x459.",
     "mnemonic": "call",
     "size": 2
   },
@@ -2059,7 +2059,7 @@
   },
   {
     "ea": "0x7FD097",
-    "line": "push    offset dword_B46DA8",
+    "line": "push    offset unk_B46DA8",
     "mnemonic": "push",
     "size": 5
   },
@@ -2113,7 +2113,7 @@
   },
   {
     "ea": "0x7FD0B5",
-    "line": "call    eax",
+    "line": "call    eax; DeferredRendering near-wall audit: primary Lighting30 object/projected vertex shaders observed in Oblivion bytecode do not bind EyePosition here; do not use this vertex c8 map for primary G-buffer position. Specular-family pixel c1 is the authoritative eye source.",
     "mnemonic": "call",
     "size": 2
   },
@@ -2143,7 +2143,7 @@
   },
   {
     "ea": "0x7FD0C0",
-    "line": "push    offset flt_B46B3C",
+    "line": "push    offset unk_B46B3C",
     "mnemonic": "push",
     "size": 5
   },
@@ -2227,7 +2227,7 @@
   },
   {
     "ea": "0x7FD0E9",
-    "line": "push    offset flt_B46B40",
+    "line": "push    offset unk_B46B40",
     "mnemonic": "push",
     "size": 5
   },
@@ -2395,7 +2395,7 @@
   },
   {
     "ea": "0x7FD13B",
-    "line": "push    offset dword_B46B88",
+    "line": "push    offset unk_B46B88",
     "mnemonic": "push",
     "size": 5
   },
@@ -2449,7 +2449,7 @@
   },
   {
     "ea": "0x7FD159",
-    "line": "call    eax",
+    "line": "call    eax; Fog constant-map decode: Lighting30 TexEffect alternate declares FogParam at vs c12 from B45E14[0x35D] / B46B88; writer is 0x7FEE40.",
     "mnemonic": "call",
     "size": 2
   },
@@ -2479,7 +2479,7 @@
   },
   {
     "ea": "0x7FD164",
-    "line": "push    offset dword_B46B78",
+    "line": "push    offset unk_B46B78",
     "mnemonic": "push",
     "size": 5
   },
@@ -2533,7 +2533,7 @@
   },
   {
     "ea": "0x7FD182",
-    "line": "call    eax",
+    "line": "call    eax; Fog constant-map decode: Lighting30 TexEffect alternate declares FogColor at vs c13 from B45E14[0x359] / B46B78; writer is 0x7FEE40.",
     "mnemonic": "call",
     "size": 2
   },
@@ -2683,7 +2683,7 @@
   },
   {
     "ea": "0x7FD1D3",
-    "line": "push    offset dword_B46B48",
+    "line": "push    offset unk_B46B48; Fog decode: Fill Color declaration is serviced by TexEffect writer 0x7FEE40.",
     "mnemonic": "push",
     "size": 5
   },
@@ -2767,7 +2767,7 @@
   },
   {
     "ea": "0x7FD1FC",
-    "line": "push    offset dword_B46B58",
+    "line": "push    offset unk_B46B58; Fog decode: Rim Color declaration is serviced by TexEffect writer 0x7FEE40.",
     "mnemonic": "push",
     "size": 5
   },
@@ -2851,7 +2851,7 @@
   },
   {
     "ea": "0x7FD225",
-    "line": "push    offset flt_B46B68",
+    "line": "push    offset unk_B46B68; Fog decode: fVars declaration is serviced by TexEffect writer 0x7FEE40.",
     "mnemonic": "push",
     "size": 5
   },
@@ -2962,5 +2962,167 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9D05C0",
+    "line": "mov     eax, [ebp-10h]; Microsoft VisualC 2-14/net runtime",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D05C3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D05C4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D05C9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D05CA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D05CB",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D05CE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D05CF",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D05D4",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D05D5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D05D6",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D05D9",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D05DA",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D05DF",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D05E0",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D05E1",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D05E4",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D05E5",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D05EA",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D05EB",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D05EC",
+    "line": "mov     edx, [esp+currentFlags]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D05F0",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D05F3",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D05F6",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D05F8",
+    "line": "call    @__security_check_cookie@4",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D05FD",
+    "line": "mov     eax, offset stru_AF8F64",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0602",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -11,7 +11,6 @@
 0x4530B3: mov     esi, [edx+8]
 0x4530B6: mov     edx, esi
 0x4530B8: jmp     short loc_4530C0
-0x4530BA: align 10h
 0x4530C0: cmp     dword ptr [edx], 0
 0x4530C3: jnz     loc_4531A0
 0x4530C9: add     eax, 1
@@ -40,25 +39,24 @@
 0x453104: mov     edi, [edi+4]
 0x453107: jz      short loc_453112
 0x453109: push    eax
-0x45310A: call    FormHeapFree
+0x45310A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x45310F: add     esp, 4
 0x453112: test    edi, edi
 0x453114: jnz     short loc_453100
 0x453116: cmp     [esi+4], edi
 0x453119: jz      short loc_453136
 0x45311B: jmp     short loc_453120
-0x45311D: align 10h
 0x453120: mov     eax, [esi+4]
 0x453123: mov     edi, [eax+4]
 0x453126: push    eax
-0x453127: call    FormHeapFree
+0x453127: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x45312C: add     esp, 4
 0x45312F: test    edi, edi
 0x453131: mov     [esi+4], edi
 0x453134: jnz     short loc_453120
 0x453136: push    esi
 0x453137: mov     dword ptr [esi], 0
-0x45313D: call    FormHeapFree
+0x45313D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x453142: add     esp, 4
 0x453145: cmp     [esp+18h+var_8], 0
 0x45314A: jnz     short loc_4530E0
@@ -80,16 +78,16 @@
 0x45316B: mov     ecx, offset FormHeap
 0x453170: call    MemoryHeap_Free_checked
 0x453175: push    edi
-0x453176: call    FormHeapFree
+0x453176: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x45317B: add     esp, 4
 0x45317E: mov     esi, [esi+4]
 0x453181: test    esi, esi
 0x453183: jnz     short loc_453161
 0x453185: mov     ecx, [ebx+4]
-0x453188: call    BSSimpleList_Clear
+0x453188: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x45318D: mov     ecx, [ebx+4]
 0x453190: push    ecx
-0x453191: call    FormHeapFree
+0x453191: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x453196: add     esp, 4
 0x453199: pop     edi
 0x45319A: pop     esi

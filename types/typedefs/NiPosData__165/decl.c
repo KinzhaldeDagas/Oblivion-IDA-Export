@@ -1,1 +1,1 @@
-NiPosData
+struct NiPosData;

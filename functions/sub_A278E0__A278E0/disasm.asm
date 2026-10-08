@@ -1,5 +1,5 @@
 0xA278E0: push    esi
-0xA278E1: mov     esi, dword_B474AC
+0xA278E1: mov     esi, dword ptr unk_B474AC
 0xA278E7: test    esi, esi
 0xA278E9: jz      short loc_A27907
 0xA278EB: lea     eax, [esi+4]

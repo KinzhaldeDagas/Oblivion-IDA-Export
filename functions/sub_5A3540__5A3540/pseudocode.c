@@ -1,99 +1,99 @@
-char __usercall sub_5A3540@<al>(double a1@<st2>, double a2@<st1>, double a3@<st0>)
+char __usercall sub_5A3540@<al>(double a1@<st1>, double a2@<st0>)
 {
   void (__thiscall ***OpenMenuTile)(_DWORD, int); // eax
   InterfaceManager *Singleton; // esi
   double Depth; // st7
-  BSStringT *XML; // edi
+  Tile *File; // edi
   int ParentMenu; // eax
-  Menu *v10; // ebx
-  TileMenu *v11; // eax
-  Tile **v12; // esi
-  double v14; // st5
-  double v15; // st6
-  Tile *v16; // ecx
-  Tile *v17; // ecx
-  float v18; // [esp+14h] [ebp-8h]
-  float v19; // [esp+14h] [ebp-8h]
-  float v20; // [esp+18h] [ebp-4h]
-  float v21; // [esp+18h] [ebp-4h]
+  Menu *v8; // ebx
+  TileMenu *v9; // eax
+  Tile **v10; // esi
+  double v12; // st5
+  double v13; // st6
+  Tile *v14; // ecx
+  Tile *v15; // ecx
+  float v16; // [esp+14h] [ebp-8h]
+  float v17; // [esp+14h] [ebp-8h]
+  float v18; // [esp+18h] [ebp-4h]
+  float v19; // [esp+18h] [ebp-4h]
 
-  OpenMenuTile = (void (__thiscall ***)(_DWORD, int))Menu_GetOpenMenuTile(0x3FC);
-  if ( OpenMenuTile )
-    (**OpenMenuTile)(OpenMenuTile, 1);
-  Singleton = InterfaceManager_GetSingleton(0, 1);
-  Depth = InterfaceManager_GetDepth(a3);
-  v18 = Depth;
-  XML = Menu_LoadXML((BSStringT *)Singleton->menuRoot, a1, a2, Depth, "Data\\Menus\\Options\\gameplay_menu.xml");
-  ParentMenu = Tile_GetParentMenu(XML);
-  v10 = (Menu *)ParentMenu;
-  if ( !ParentMenu )
-    return 0;
-  if ( (*(int (__thiscall **)(int))(*(_DWORD *)ParentMenu + 0x34))(ParentMenu) != 0x3FC )
+  OpenMenuTile = (void (__thiscall ***)(_DWORD, int))Menu_GetOpenMenuTile(0x3FC); /*0x5a3548*/
+  if ( OpenMenuTile ) /*0x5a3552*/
+    (**OpenMenuTile)(OpenMenuTile, 1); /*0x5a355c*/
+  Singleton = InterfaceManager_GetSingleton(0, 1); /*0x5a356d*/
+  Depth = InterfaceManager_GetDepth(a2); /*0x5a356f*/
+  v16 = Depth; /*0x5a3574*/
+  File = Tile::ReadFile(Singleton->menuRoot, "Data\\Menus\\Options\\gameplay_menu.xml"); /*0x5a3585*/
+  ParentMenu = Tile_GetParentMenu(File); /*0x5a3589*/
+  v8 = (Menu *)ParentMenu; /*0x5a358e*/
+  if ( !ParentMenu ) /*0x5a3592*/
+    return 0; /*0x5a3592*/
+  if ( (*(int (__thiscall **)(int))(*(_DWORD *)ParentMenu + 0x34))(ParentMenu) != 0x3FC ) /*0x5a35a6*/
   {
-    if ( v10->members.tile )
-      v10->__vftable->Destructor(v10, 1);
-    return 0;
+    if ( v8->members.tile ) /*0x5a37f1*/
+      v8->__vftable->Destructor(v8, 1); /*0x5a37ff*/
+    return 0; /*0x5a3803*/
   }
-  v11 = (TileMenu *)OblivionDynamicCast(
-                      XML,
-                      0,
-                      (struct _s_RTTICompleteObjectLocator *)&Tile `RTTI Type Descriptor',
-                      &TileMenu `RTTI Type Descriptor',
-                      0);
-  Menu_SetTileMenu(v10, a2, Depth, v11);
-  v12 = (Tile **)OblivionDynamicCast(
-                   v10,
+  v9 = (TileMenu *)OblivionDynamicCast( /*0x5a35bb*/
+                     File,
+                     0,
+                     (struct _s_RTTICompleteObjectLocator *)&Tile `RTTI Type Descriptor',
+                     &TileMenu `RTTI Type Descriptor',
+                     0);
+  Menu_SetTileMenu(v8, a1, Depth, v9); /*0x5a35c6*/
+  v10 = (Tile **)OblivionDynamicCast( /*0x5a35df*/
+                   v8,
                    0,
                    (struct _s_RTTICompleteObjectLocator *)&Menu `RTTI Type Descriptor',
                    &GameplayMenu `RTTI Type Descriptor',
                    0);
-  if ( sub_5A3340(v12) )
+  if ( sub_5A3340(v10) ) /*0x5a35e6*/
   {
-    if ( Tile_GetFloat(XML, 0xFA5) == fXMLI_StackingType6006 || Tile_GetFloat(XML, 0xFA5) == fXMLI_NoClickPast )
-      Tile_SetFloat((Tile *)XML, (_DWORD *)0xFAB, v18);
-    v14 = fDifficultyMinValue;
-    v15 = fDifficultyMaxValue - v14;
-    v19 = v15;
-    Tile_SetFloat(v12[0xA], (_DWORD *)0xFAF, fDifficultyMinValue);
-    Tile_SetFloat(v12[0xA], (_DWORD *)0xFB0, fDifficultyMaxValue);
-    v20 = v19 / fCostant_100;
-    Tile_SetFloat(v12[0xA], (_DWORD *)0xFB1, v20);
-    v21 = v19 * dbl_A3C770;
-    Tile_SetFloat(v12[0xA], (_DWORD *)0xFB2, v21);
-    Tile_SetFloat(v12[0xA], (_DWORD *)0xFB3, TESDataHandler_g_PlayerRef->gameDifficultyLevel);
-    Tile_SetFloat(v12[0xA], (_DWORD *)0xFB3, 0.0);
-    v16 = v12[0xD];
-    if ( byte_B13200 )
-      Tile_SetString(v16, (_DWORD *)0xFDE, (char *)sOnButtonText);
+    if ( Tile_GetFloat(File, 0xFA5) == fXMLI_StackingType6006 || Tile_GetFloat(File, 0xFA5) == fXMLI_NoClickPast ) /*0x5a3635*/
+      Tile_SetFloat(File, 0xFABu, v16); /*0x5a3646*/
+    v12 = MEMORY[0xB37A58][0x46]; /*0x5a365b*/
+    v13 = MEMORY[0xB37A58][0x48] - v12; /*0x5a365f*/
+    v17 = v13; /*0x5a3661*/
+    Tile_SetFloat(v10[0xA], 0xFAFu, MEMORY[0xB37A58][0x46]); /*0x5a366d*/
+    Tile_SetFloat(v10[0xA], 0xFB0u, MEMORY[0xB37A58][0x48]); /*0x5a3684*/
+    v18 = v17 / fCostant_100; /*0x5a3697*/
+    Tile_SetFloat(v10[0xA], 0xFB1u, v18); /*0x5a36a7*/
+    v19 = v17 * dbl_A3C770; /*0x5a36ba*/
+    Tile_SetFloat(v10[0xA], 0xFB2u, v19); /*0x5a36ca*/
+    Tile_SetFloat(v10[0xA], 0xFB3u, reference->gameDifficultyLevel); /*0x5a36e7*/
+    Tile_SetFloat(v10[0xA], 0xFB3u, 0.0); /*0x5a36fa*/
+    v14 = v10[0xD]; /*0x5a3706*/
+    if ( byte_B13200 ) /*0x5a36ff*/
+      Tile_SetString(v14, (_DWORD *)0xFDE, (char *)MEMORY[0xB38DA0].value); /*0x5a3712*/
     else
-      Tile_SetString(v16, (_DWORD *)0xFDE, (char *)sOffButtonText);
-    if ( byte_B13208 )
-      Tile_SetString(v12[0xC], (_DWORD *)0xFDE, (char *)sOnButtonText);
+      Tile_SetString(v14, (_DWORD *)0xFDE, (char *)MEMORY[0xB38DA8].value); /*0x5a371f*/
+    if ( byte_B13208 ) /*0x5a3724*/
+      Tile_SetString(v10[0xC], (_DWORD *)0xFDE, (char *)MEMORY[0xB38DA0].value); /*0x5a3734*/
     else
-      Tile_SetString(v12[0xC], (_DWORD *)0xFDE, (char *)sOffButtonText);
-    if ( byte_B13210 )
-      Tile_SetString(v12[0xE], (_DWORD *)0xFDE, (char *)sOnButtonText);
+      Tile_SetString(v10[0xC], (_DWORD *)0xFDE, (char *)MEMORY[0xB38DA8].value); /*0x5a3745*/
+    if ( byte_B13210 ) /*0x5a374a*/
+      Tile_SetString(v10[0xE], (_DWORD *)0xFDE, (char *)MEMORY[0xB38DA0].value); /*0x5a3759*/
     else
-      Tile_SetString(v12[0xE], (_DWORD *)0xFDE, (char *)sOffButtonText);
-    v17 = v12[0xF];
-    if ( byte_B13218 )
-      Tile_SetString(v17, (_DWORD *)0xFDE, (char *)sOnButtonText);
+      Tile_SetString(v10[0xE], (_DWORD *)0xFDE, (char *)MEMORY[0xB38DA8].value); /*0x5a376a*/
+    v15 = v10[0xF]; /*0x5a3776*/
+    if ( byte_B13218 ) /*0x5a376f*/
+      Tile_SetString(v15, (_DWORD *)0xFDE, (char *)MEMORY[0xB38DA0].value); /*0x5a3782*/
     else
-      Tile_SetString(v17, (_DWORD *)0xFDE, (char *)sOffButtonText);
-    if ( byte_B13220 )
-      Tile_SetString(v12[0x10], (_DWORD *)0xFDE, (char *)sOnButtonText);
+      Tile_SetString(v15, (_DWORD *)0xFDE, (char *)MEMORY[0xB38DA8].value); /*0x5a378f*/
+    if ( byte_B13220 ) /*0x5a3794*/
+      Tile_SetString(v10[0x10], (_DWORD *)0xFDE, (char *)MEMORY[0xB38DA0].value); /*0x5a37a4*/
     else
-      Tile_SetString(v12[0x10], (_DWORD *)0xFDE, (char *)sOffButtonText);
-    if ( byte_B13228 )
-      Tile_SetString(v12[0x11], (_DWORD *)0xFDE, (char *)sOnButtonText);
+      Tile_SetString(v10[0x10], (_DWORD *)0xFDE, (char *)MEMORY[0xB38DA8].value); /*0x5a37b5*/
+    if ( byte_B13228 ) /*0x5a37ba*/
+      Tile_SetString(v10[0x11], (_DWORD *)0xFDE, (char *)MEMORY[0xB38DA0].value); /*0x5a37c9*/
     else
-      Tile_SetString(v12[0x11], (_DWORD *)0xFDE, (char *)sOffButtonText);
-    EnableMenu(v10, v14, v15, 0.0, 0);
-    return 1;
+      Tile_SetString(v10[0x11], (_DWORD *)0xFDE, (char *)MEMORY[0xB38DA8].value); /*0x5a37da*/
+    EnableMenu(v8, v12, v13, 0.0, 0); /*0x5a37e3*/
+    return 1; /*0x5a37ea*/
   }
   else
   {
-    PrintError("Gameplay Menu Creation Failed... Are your menu and art resources up to date?");
-    return 0;
+    PrintError("Gameplay Menu Creation Failed... Are your menu and art resources up to date?"); /*0x5a35f4*/
+    return 0; /*0x5a35fe*/
   }
 }

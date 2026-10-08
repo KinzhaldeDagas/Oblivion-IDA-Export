@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_4B2BD0",
+  "chunks": [
+    [
+      "0x4B2BD0",
+      "0x4B2BF4"
+    ]
+  ],
+  "chunks_sha256": "467d46cce951e5c66c62e736e608315178f87b7ae67a016c79985b2a0f7326e0",
+  "comment_regular": "Verified: looks up a TESForm-ID-keyed value in global TESTextureList cache. Shared TESBoundObject distant-LOD updater consumes its return; precise cache role is supporting archive texture resolution for DLOD model instances.",
+  "comment_repeatable": "Verified: looks up a TESForm-ID-keyed value in global TESTextureList cache. Shared TESBoundObject distant-LOD updater consumes its return; precise cache role is supporting archive texture resolution for DLOD model instances.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "TESBoundObject_GetTextureHashCache",
   "end_ea": "0x4B2BF4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4B2BD0",
+  "name": "TESBoundObject_GetTextureHashCache",
   "segment": ".text",
   "sha256": "467d46cce951e5c66c62e736e608315178f87b7ae67a016c79985b2a0f7326e0",
   "size": 36,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4B2BD0",
-  "type": "int __fastcall(int)",
+  "total_chunk_size": 36,
+  "type": "TESTextureList *__fastcall(TESBoundObject *form)",
   "xrefs_from_count": 14,
   "xrefs_to_count": 1
 }

@@ -36,3 +36,15 @@
 0x68603B: pop     esi
 0x68603C: add     esp, 10h
 0x68603F: retn
+0x9C4F10: mov     ecx, [ebp-10h]; this
+0x9C4F13: jmp     ??1PathMiddleHigh@@UAE@XZ; PathMiddleHigh::~PathMiddleHigh(void)
+0x9C4F18: mov     ecx, [ebp-10h]
+0x9C4F1B: add     ecx, 28h ; '('; slot
+0x9C4F1E: jmp     NiPointerSlot_Release
+0x9C4F23: mov     edx, [esp+arg_4]
+0x9C4F27: lea     eax, [edx-8]
+0x9C4F2A: mov     ecx, [edx-0Ch]
+0x9C4F2D: xor     ecx, eax
+0x9C4F2F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C4F34: mov     eax, offset stru_AED798
+0x9C4F39: jmp     ___CxxFrameHandler3

@@ -32,7 +32,7 @@
 0x780CAB: cmp     eax, esi
 0x780CAD: jnb     short loc_780CBF
 0x780CAF: push    ecx
-0x780CB0: call    FormHeapFree
+0x780CB0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x780CB5: add     esp, 4
 0x780CB8: mov     dword ptr [ebp+0Ch], 0
 0x780CBF: cmp     dword ptr [ebp+0Ch], 0
@@ -54,7 +54,7 @@
 0x780CE6: retn    4
 0x780CE9: mov     edx, [ebp+0Ch]
 0x780CEC: push    edx
-0x780CED: call    FormHeapFree
+0x780CED: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x780CF2: add     esp, 4
 0x780CF5: pop     edi
 0x780CF6: pop     esi

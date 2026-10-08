@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x79E0F0",
-    "line": "push    ecx",
+    "line": "push    ecx; st_vector<SFrondTexture> uninitialized-copy thunk: deep-copy-constructs [first,last) into raw destination storage and returns destination end.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E0F1",
-    "line": "mov     edx, [esp+4+arg_8]",
+    "line": "mov     edx, [esp+4+destinationFirst]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x79E0FD",
-    "line": "mov     eax, [esp+8+arg_8]",
+    "line": "mov     eax, [esp+8+destinationFirst]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x79E102",
-    "line": "mov     edx, [esp+0Ch+arg_0]",
+    "line": "mov     edx, [esp+0Ch+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,32 +55,44 @@
   },
   {
     "ea": "0x79E107",
-    "line": "mov     ecx, [esp+10h+arg_4]",
+    "line": "mov     ecx, [esp+10h+last]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79E10B",
-    "line": "push    eax",
+    "line": "push    eax; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E10C",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E10D",
-    "line": "push    edx",
+    "line": "push    edx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E10E",
-    "line": "call    sub_79B470",
+    "line": "call    OB_SFrondTexture_UninitializedCopy_010201A0; Exception-safe uninitialized_copy for SFrondTexture. Normal path placement-copy-constructs [first,last) and returns destination end; the SEH cleanup landing path destroys the constructed prefix and rethrows.",
     "mnemonic": "call",
     "size": 5
+  },
+  {
+    "ea": "0x79E113",
+    "line": "add     esp, 1Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x79E116",
+    "line": "retn    0Ch",
+    "mnemonic": "retn",
+    "size": 3
   }
 ]

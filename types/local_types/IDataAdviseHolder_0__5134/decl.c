@@ -1,1 +1,1 @@
-IDataAdviseHolder_0
+typedef IDataAdviseHolder IDataAdviseHolder_0;

@@ -9,26 +9,26 @@ HINSTANCE *__thiscall ShowDetectorWindow(
         int nWidth,
         int nHeight)
 {
-  int v10; // eax
+  const CHAR *v10; // eax
   const char *v11; // ecx
-  _BYTE *v12; // edx
+  CHAR *v12; // edx
   char v13; // al
 
-  *this = a2;
-  *(this + 1) = a3;
-  *(this + 6) = a4;
-  v10 = FormHeapAlloc(strlen(a5) + 1);
-  *(this + 7) = (LPCSTR)v10;
-  v11 = a5;
-  v12 = (_BYTE *)v10;
-  do
+  *this = a2; /*0x496cc5*/
+  *(this + 1) = a3; /*0x496cc9*/
+  *(this + 6) = a4; /*0x496ccc*/
+  v10 = (const CHAR *)FormHeapAlloc(strlen(a5) + 1); /*0x496ce1*/
+  *(this + 7) = v10; /*0x496ce9*/
+  v11 = a5; /*0x496cec*/
+  v12 = (CHAR *)v10; /*0x496cee*/
+  do /*0x496cfc*/
   {
-    v13 = *v11;
-    *v12++ = *v11++;
+    v13 = *v11; /*0x496cf0*/
+    *v12++ = *v11++; /*0x496cf2*/
   }
-  while ( v13 );
-  sub_495D10(this, X, Y, nWidth, nHeight);
-  *(this + 5) = (LPCSTR)ImageList_LoadImageA((HINSTANCE)*this, (LPCSTR)0xB4, 0x10, 1, 0xFF000000, 0, 0);
-  sub_496C00((int)this, (int)a4, 0);
-  return (HINSTANCE *)this;
+  while ( v13 ); /*0x496cfc*/
+  sub_495D10(this, X, Y, nWidth, nHeight); /*0x496d14*/
+  *(this + 5) = (LPCSTR)ImageList_LoadImageA((HINSTANCE)*this, (LPCSTR)0xB4, 0x10, 1, 0xFF000000, 0, 0); /*0x496d39*/
+  sub_496C00((int)this, (int)a4, 0); /*0x496d3c*/
+  return (HINSTANCE *)this; /*0x496d41*/
 }

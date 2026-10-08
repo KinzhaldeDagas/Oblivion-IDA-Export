@@ -1,4 +1,4 @@
-0x76B160: sub     esp, 4Ch
+0x76B160: sub     esp, 4Ch; Pass224: NiRenderer::RenderScreenTexture vtable slot. Uses cached renderer+0x89C NiPropertyState and transiently swaps slot 6 to NiScreenTexture+0x14.
 0x76B163: push    ebx
 0x76B164: mov     ebx, ecx
 0x76B166: cmp     byte ptr [ebx+6F0h], 0
@@ -24,7 +24,7 @@
 0x76B1B7: test    eax, eax
 0x76B1B9: jz      short loc_76B1C4
 0x76B1BB: mov     ecx, eax
-0x76B1BD: call    sub_7319E0
+0x76B1BD: call    sub_7319E0; Pass222: Constructs 0x30-byte NiPropertyState with ten managed smart-pointer slots at +0x08..+0x2C.
 0x76B1C2: jmp     short loc_76B1C6
 0x76B1C4: xor     eax, eax
 0x76B1C6: push    eax; a2
@@ -45,14 +45,14 @@
 0x76B1F4: mov     [eax+18h], dx
 0x76B1F8: mov     ecx, [ebp+0]
 0x76B1FB: push    eax
-0x76B1FC: call    sub_707470
+0x76B1FC: call    sub_707470; Pass224: RenderScreenTexture inserts custom NiVertexColorProperty into cached state slot 7.
 0x76B201: push    1Ch; Size
 0x76B203: call    FormHeapAlloc
 0x76B208: add     esp, 4
 0x76B20B: test    eax, eax
 0x76B20D: jz      short loc_76B218
-0x76B20F: mov     ecx, eax
-0x76B211: call    sub_47F920
+0x76B20F: mov     ecx, eax; this
+0x76B211: call    NiAlphaProperty_ctor; Constructs a 0x1C NiAlphaProperty over NiObjectNET: installs NiAlphaProperty vtable, initializes flags to 0x00EC and threshold byte to 0.
 0x76B216: jmp     short loc_76B21A
 0x76B218: xor     eax, eax
 0x76B21A: mov     cx, [eax+18h]
@@ -61,7 +61,7 @@
 0x76B228: mov     [eax+18h], cx
 0x76B22C: mov     ecx, [ebp+0]
 0x76B22F: push    eax
-0x76B230: call    sub_707470
+0x76B230: call    sub_707470; Pass224: RenderScreenTexture inserts custom NiAlphaProperty into cached state slot 0.
 0x76B235: push    1Ch; Size
 0x76B237: call    FormHeapAlloc
 0x76B23C: add     esp, 4
@@ -74,11 +74,11 @@
 0x76B24E: and     word ptr [eax+18h], 0FFFCh
 0x76B254: mov     ecx, [ebp+0]
 0x76B257: push    eax
-0x76B258: call    sub_707470
+0x76B258: call    sub_707470; Pass224: RenderScreenTexture inserts custom NiZBufferProperty into cached state slot 9.
 0x76B25D: mov     edx, [esi+14h]
 0x76B260: mov     ecx, [ebp+0]
 0x76B263: push    edx
-0x76B264: call    sub_707470
+0x76B264: call    sub_707470; Pass224: RenderScreenTexture inserts NiScreenTexture +0x14 texturing property into cached state slot 6 for the draw.
 0x76B269: mov     eax, [ebp+0]
 0x76B26C: mov     ecx, [ebx+8A0h]
 0x76B272: mov     [ebx+0Ch], eax
@@ -91,7 +91,7 @@
 0x76B289: call    edx
 0x76B28B: push    esi
 0x76B28C: mov     ecx, ebx
-0x76B28E: call    sub_769B60
+0x76B28E: call    sub_769B60; Pass224/226: Prepares NiScreenTexture +0x1C geometry buffer and rebuilds from records when pending/update flags require it.
 0x76B293: fld1
 0x76B295: mov     eax, ds:0B3F9A8h
 0x76B29A: mov     edx, ds:0B3F9B0h
@@ -115,11 +115,11 @@
 0x76B2DA: push    0
 0x76B2DC: push    0
 0x76B2DE: mov     ecx, ebx
-0x76B2E0: call    sub_7672F0
+0x76B2E0: call    NiDX9Renderer_RenderGeometryNonSkinned; MoonSugarEffect decode: special extra-data/property render path also calls sub_7672F0 with a2/a3/a4 null-ish. Do not patch this call for first Moon Sugar geometry wobble; use RenderTriGeometries call site 0x007694D7 and filter null/screen/skinned geometry.
 0x76B2E5: mov     ecx, ds:0B3F974h
 0x76B2EB: push    ecx
 0x76B2EC: mov     ecx, [ebp+0]
-0x76B2EF: call    sub_707470
+0x76B2EF: call    sub_707470; Pass224: RenderScreenTexture resets cached state slot 6 back to default NiTexturingProperty global 0x00B3F974 after draw.
 0x76B2F4: mov     edx, [esp+5Ch+var_4C]
 0x76B2F8: mov     eax, [esp+5Ch+var_48]
 0x76B2FC: pop     edi

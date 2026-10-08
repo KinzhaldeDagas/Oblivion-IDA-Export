@@ -1,1 +1,1 @@
-unrealize_function
+typedef BOOL (*unrealize_function)(HPALETTE);

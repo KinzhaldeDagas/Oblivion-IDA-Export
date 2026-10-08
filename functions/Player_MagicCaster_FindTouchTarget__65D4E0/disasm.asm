@@ -19,11 +19,11 @@
 0x65D515: fld     dword ptr [esp+14h+var_8]
 0x65D519: fstp    [esp+14h+var_14]; float
 0x65D51C: push    eax; int
-0x65D51D: call    GetActorWithinReach??
+0x65D51D: call    CombatController_FindActorWithinReach
 0x65D522: add     esp, 8
 0x65D525: test    eax, eax
 0x65D527: jnz     short loc_65D532
-0x65D529: call    sub_579540
+0x65D529: call    sub_579540; Interface/menu cursor state helper used by Player_OnInput jump/acrobatic branch. Player-only climb activation should avoid triggering while this UI mode is active.
 0x65D52E: test    eax, eax
 0x65D530: jz      short loc_65D543
 0x65D532: mov     edx, [eax]

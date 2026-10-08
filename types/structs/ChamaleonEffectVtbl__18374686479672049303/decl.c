@@ -1,1 +1,4 @@
-ChamaleonEffectVtbl
+struct ChamaleonEffectVtbl
+{
+ValueModifierEffectVtbl *super;
+};

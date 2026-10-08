@@ -8,7 +8,7 @@ void __userpurge sub_5D4420(
         int a7)
 {
   Tile *v7; // esi
-  double v9; // st7
+  double VirtualScreenHeight; // st7
   double Float; // st7
   _DWORD *a2; // [esp+0h] [ebp-1Ch]
   float a2a; // [esp+0h] [ebp-1Ch]
@@ -17,38 +17,38 @@ void __userpurge sub_5D4420(
   int v24; // [esp+20h] [ebp+4h]
   int v29; // [esp+20h] [ebp+4h]
 
-  if ( a6 == 0xA )
+  if ( a6 == 0xA ) /*0x5d442b*/
   {
-    v7 = *(Tile **)(a1 + 0x44);
+    v7 = *(Tile **)(a1 + 0x44); /*0x5d443b*/
   }
   else
   {
-    if ( a6 != 0xB )
-      return;
-    v7 = *(Tile **)(a1 + 0x4C);
+    if ( a6 != 0xB ) /*0x5d4430*/
+      return; /*0x5d4430*/
+    v7 = *(Tile **)(a1 + 0x4C); /*0x5d4436*/
   }
-  _EDI = InterfaceManager_GetSingleton(0, 1);
-  Tile_GetFloat(v7, 0xFB0);
-  __asm { fstp    [esp+1Ch+var_10] }
-  Tile_GetFloat(v7, 0xFAF);
-  __asm { fstp    [esp+1Ch+a3]; a3 }
-  sub_57D7F0();
-  __asm { fstp    [esp+1Ch+var_8] }
-  v9 = sub_57D7F0();
-  __asm
+  _EDI = InterfaceManager_GetSingleton(0, 1); /*0x5d4452*/
+  Tile_GetFloat(v7, 0xFB0); /*0x5d4454*/
+  __asm { fstp    [esp+1Ch+var_10] } /*0x5d4459*/
+  Tile_GetFloat(v7, 0xFAF); /*0x5d4464*/
+  __asm { fstp    [esp+1Ch+a3]; a3 } /*0x5d4469*/
+  UI_GetVirtualScreenHeight(); /*0x5d446d*/
+  __asm { fstp    [esp+1Ch+var_8] } /*0x5d4472*/
+  VirtualScreenHeight = UI_GetVirtualScreenHeight(); /*0x5d4476*/
+  __asm /*0x5d447b*/
   {
     fmul    qword ptr ds:0A2FAA0h
     fadd    dword ptr [edi+28h]
     fsubr   [esp+1Ch+var_8]
   }
-  v24 = Double_To_SInt32(v9);
-  __asm { fild    [esp+1Ch+arg_0] }
+  v24 = Double_To_SInt32(VirtualScreenHeight); /*0x5d448d*/
+  __asm { fild    [esp+1Ch+arg_0] } /*0x5d4491*/
   __asm { fstp    [esp+1Ch+arg_0] }
-  sub_588CF0(v7);
-  __asm { fsubr   [esp+1Ch+arg_0] }
+  sub_588CF0(v7); /*0x5d449b*/
+  __asm { fsubr   [esp+1Ch+arg_0] } /*0x5d44a0*/
   __asm { fstp    [esp+20h+var_8] }
-  Float = Tile_GetFloat(v7, 0xFCA);
-  __asm { fdivr   [esp+1Ch+var_8] }
+  Float = Tile_GetFloat(v7, 0xFCA); /*0x5d44af*/
+  __asm { fdivr   [esp+1Ch+var_8] } /*0x5d44b4*/
   __asm
   {
     fstp    [esp+18h+arg_0]
@@ -58,9 +58,9 @@ void __userpurge sub_5D4420(
     fnstsw  ax
     fldz
   }
-  if ( __SETP__(HIBYTE(_AX) & 5, 0) )
+  if ( __SETP__(HIBYTE(_AX) & 5, 0) ) /*0x5d44c9*/
   {
-    __asm
+    __asm /*0x5d44ce*/
     {
       fstp    st
       fstp    st
@@ -69,18 +69,18 @@ void __userpurge sub_5D4420(
   }
   else
   {
-    __asm
+    __asm /*0x5d44d8*/
     {
       fstp    st(2)
       fcomp   st(1)
       fnstsw  ax
     }
-    if ( (_AX & 0x4100) != 0 )
-      __asm { fstp    [esp+18h+arg_0] }
+    if ( (_AX & 0x4100) != 0 ) /*0x5d44e1*/
+      __asm { fstp    [esp+18h+arg_0] } /*0x5d44e3*/
     else
-      __asm { fstp    st }
+      __asm { fstp    st } /*0x5d44e9*/
   }
-  __asm
+  __asm /*0x5d44eb*/
   {
     fld     [esp+18h+var_10]
     fsub    [esp+18h+a3]
@@ -91,8 +91,8 @@ void __userpurge sub_5D4420(
     fld     [esp+18h+arg_0]
     fld     st
   }
-  v29 = Double_To_SInt32(Float);
-  __asm
+  v29 = Double_To_SInt32(Float); /*0x5d450e*/
+  __asm /*0x5d4512*/
   {
     fild    [esp+18h+arg_0]
     fstp    [esp+18h+arg_0]
@@ -103,9 +103,9 @@ void __userpurge sub_5D4420(
     fcomp   qword ptr ds:0A2FC68h
     fnstsw  ax
   }
-  if ( (_AX & 0x100) != 0 )
-    __asm { fsub    qword ptr ds:0A2F928h }
-  __asm { fstp    [esp+18h+arg_0] }
+  if ( (_AX & 0x100) != 0 ) /*0x5d452f*/
+    __asm { fsub    qword ptr ds:0A2F928h } /*0x5d4531*/
+  __asm { fstp    [esp+18h+arg_0] } /*0x5d4537*/
   __asm
   {
     fld     [esp+1Ch+arg_0]
@@ -115,10 +115,10 @@ void __userpurge sub_5D4420(
     fnstsw  ax
     fstp    [esp+1Ch+a2]; float
   }
-  if ( __SETP__(HIBYTE(_AX) & 0x41, 0) )
+  if ( __SETP__(HIBYTE(_AX) & 0x41, 0) ) /*0x5d4552*/
   {
-    FloatFloor(*(float *)&a2);
-    __asm
+    FloatFloor(*(float *)&a2); /*0x5d455f*/
+    __asm /*0x5d4564*/
     {
       fadd    qword ptr ds:0A2F928h
       fadd    [esp+1Ch+a3]
@@ -127,21 +127,21 @@ void __userpurge sub_5D4420(
   }
   else
   {
-    FloatFloor(*(float *)&a2);
-    __asm { fstp    qword ptr [esp+1Ch+var_10] }
+    FloatFloor(*(float *)&a2); /*0x5d4554*/
+    __asm { fstp    qword ptr [esp+1Ch+var_10] } /*0x5d4559*/
   }
-  __asm { fld     dword ptr ds:0A6B1F0h }
-  __asm { fstp    [esp+1Ch+a2]; a3 }
-  Tile_SetFloat(v7, (_DWORD *)0xFB3, a2a);
-  __asm
+  __asm { fld     dword ptr ds:0A6B1F0h } /*0x5d4572*/
+  __asm { fstp    [esp+1Ch+a2]; value }
+  Tile_SetFloat(v7, 0xFB3u, a2a); /*0x5d4586*/
+  __asm /*0x5d458b*/
   {
     fld     qword ptr [esp+18h+var_10]
     fstp    [esp+18h+arg_0]
   }
   __asm { fld     [esp+1Ch+arg_0] }
-  __asm { fstp    [esp+1Ch+a2]; a3 }
-  Tile_SetFloat(v7, (_DWORD *)0xFB3, a2b);
-  __asm { fldz }
-  __asm { fstp    [esp+1Ch+a2]; a3 }
-  Tile_SetFloat(v7, (_DWORD *)0xFB3, a2c);
+  __asm { fstp    [esp+1Ch+a2]; value }
+  Tile_SetFloat(v7, 0xFB3u, a2b); /*0x5d45a2*/
+  __asm { fldz } /*0x5d45a7*/
+  __asm { fstp    [esp+1Ch+a2]; value }
+  Tile_SetFloat(v7, 0xFB3u, a2c); /*0x5d45b4*/
 }

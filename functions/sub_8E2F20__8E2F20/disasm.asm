@@ -394,7 +394,6 @@
 0x8E341F: xor     ecx, ecx
 0x8E3421: mov     ebx, 0FFFFFFFCh
 0x8E3426: jmp     short loc_8E3430
-0x8E3428: align 10h
 0x8E3430: fld     dword ptr [esp+ecx+110h+var_10]
 0x8E3437: fmul    dword ptr [edx]
 0x8E3439: fst     [esp+110h+var_E8]
@@ -571,7 +570,6 @@
 0x8E3712: test    ah, 41h
 0x8E3715: jz      loc_8E38F5
 0x8E371B: jmp     short loc_8E3720
-0x8E371D: align 10h
 0x8E3720: mov     edi, [esp+ebx*4+110h+var_98]
 0x8E3724: mov     dl, [edi]
 0x8E3726: mov     cl, byte ptr [esp+ebx*4+110h+var_1C]
@@ -650,7 +648,6 @@
 0x8E3819: mov     cl, byte ptr [esp+edi*4+110h+var_3C]
 0x8E3820: mov     byte ptr [esp+110h+var_E4+3], cl
 0x8E3824: jmp     short loc_8E3830
-0x8E3826: align 10h
 0x8E3830: mov     edx, [esp+110h+var_F8]
 0x8E3834: mov     eax, [esp+edx*4+110h+var_8C]
 0x8E383B: mov     dl, [eax]

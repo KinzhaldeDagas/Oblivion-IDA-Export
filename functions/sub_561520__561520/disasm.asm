@@ -1,4 +1,4 @@
-0x561520: push    ebx
+0x561520: push    ebx; Verified render-resource cleanup: frees six per-LOD arrays; releases billboardShape_STBB (+0x1C), leafShaderStreamData (+0x20), texture properties/textures (+0x34..+0x3C), collisionShape (+0x40), and other array smart pointers. CSpeedTreeRT and baseModel are released separately by BSTreeModel_dtor.
 0x561521: push    ebp
 0x561522: push    esi
 0x561523: mov     esi, ecx
@@ -9,13 +9,13 @@
 0x56152D: jz      short loc_56154F
 0x56152F: mov     ecx, [eax-4]
 0x561532: lea     edi, [eax-4]
-0x561535: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x561535: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x56153A: push    ecx; int
 0x56153B: push    4; unsigned int
 0x56153D: push    eax; void *
 0x56153E: call    $LN21
 0x561543: push    edi
-0x561544: call    FormHeapFree
+0x561544: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x561549: add     esp, 4
 0x56154C: mov     [esi+14h], ebx
 0x56154F: mov     eax, [esi+18h]
@@ -23,16 +23,16 @@
 0x561554: jz      short loc_561576
 0x561556: mov     edx, [eax-4]
 0x561559: lea     edi, [eax-4]
-0x56155C: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x56155C: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x561561: push    edx; int
 0x561562: push    4; unsigned int
 0x561564: push    eax; void *
 0x561565: call    $LN21
 0x56156A: push    edi
-0x56156B: call    FormHeapFree
+0x56156B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x561570: add     esp, 4
 0x561573: mov     [esi+18h], ebx
-0x561576: mov     edi, [esi+1Ch]
+0x561576: mov     edi, [esi+1Ch]; Verified: ClearModel releases the STBB billboardShape pointer at model+0x1C and clears the slot.
 0x561579: cmp     edi, ebx
 0x56157B: mov     ebp, ds:0A2807Ch
 0x561581: jz      short loc_56159E
@@ -70,13 +70,13 @@
 0x5615C5: jz      short loc_5615E7
 0x5615C7: mov     ecx, [eax-4]
 0x5615CA: lea     edi, [eax-4]
-0x5615CD: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x5615CD: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x5615D2: push    ecx; int
 0x5615D3: push    4; unsigned int
 0x5615D5: push    eax; void *
 0x5615D6: call    $LN21
 0x5615DB: push    edi
-0x5615DC: call    FormHeapFree
+0x5615DC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5615E1: add     esp, 4
 0x5615E4: mov     [esi+24h], ebx
 0x5615E7: mov     eax, [esi+28h]
@@ -84,13 +84,13 @@
 0x5615EC: jz      short loc_56160E
 0x5615EE: mov     edx, [eax-4]
 0x5615F1: lea     edi, [eax-4]
-0x5615F4: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x5615F4: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x5615F9: push    edx; int
 0x5615FA: push    4; unsigned int
 0x5615FC: push    eax; void *
 0x5615FD: call    $LN21
 0x561602: push    edi
-0x561603: call    FormHeapFree
+0x561603: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x561608: add     esp, 4
 0x56160B: mov     [esi+28h], ebx
 0x56160E: mov     eax, [esi+2Ch]
@@ -98,13 +98,13 @@
 0x561613: jz      short loc_561635
 0x561615: mov     ecx, [eax-4]
 0x561618: lea     edi, [eax-4]
-0x56161B: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x56161B: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x561620: push    ecx; int
 0x561621: push    4; unsigned int
 0x561623: push    eax; void *
 0x561624: call    $LN21
 0x561629: push    edi
-0x56162A: call    FormHeapFree
+0x56162A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x56162F: add     esp, 4
 0x561632: mov     [esi+2Ch], ebx
 0x561635: mov     eax, [esi+30h]
@@ -112,13 +112,13 @@
 0x56163A: jz      short loc_56165C
 0x56163C: mov     edx, [eax-4]
 0x56163F: lea     edi, [eax-4]
-0x561642: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x561642: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x561647: push    edx; int
 0x561648: push    4; unsigned int
 0x56164A: push    eax; void *
 0x56164B: call    $LN21
 0x561650: push    edi
-0x561651: call    FormHeapFree
+0x561651: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x561656: add     esp, 4
 0x561659: mov     [esi+30h], ebx
 0x56165C: mov     edi, [esi+34h]

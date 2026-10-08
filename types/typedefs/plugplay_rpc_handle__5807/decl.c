@@ -1,1 +1,1 @@
-plugplay_rpc_handle
+typedef void *plugplay_rpc_handle;

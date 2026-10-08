@@ -2,7 +2,7 @@
 0x9EB726: push    ecx
 0x9EB727: fstp    [esp+4+var_4]; float
 0x9EB72A: push    offset aFbartersellmul; "fBarterSellMult"
-0x9EB72F: mov     ecx, offset fBarterSellMult
+0x9EB72F: mov     ecx, (offset flt_B37528+90h)
 0x9EB734: call    GameSetting_ConstrAndReg_float
 0x9EB739: push    offset sub_A1F290; void (__cdecl *)()
 0x9EB73E: call    _atexit

@@ -1,1 +1,1 @@
-tagWDML_SIDE
+typedef WDML_SIDE tagWDML_SIDE;

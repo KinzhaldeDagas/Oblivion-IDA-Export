@@ -1,12 +1,12 @@
 int __usercall MagicCaster_ApplyActiveMagicItem_::EffectItemLoop_Before@<eax>(
-        int a1@<esi>,
+        char *a1@<esi>,
         TESObjectREFR *ebx0@<ebx>,
         int a3,
         int a4,
         int a5,
         int a6,
         int a7,
-        int a8,
+        TESObjectREFR *a8,
         int a9,
         int a10,
         int a11,
@@ -37,9 +37,9 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectItemLoop_Before@<eax>(
   bool v34; // zf
   int v35; // eax
 
-  v33 = (*(int (__thiscall **)(int))(*(_DWORD *)a1 + 0x30))(a1);
-  if ( !v33 )
-    return MagicCaster_ApplyActiveMagicItem_::GetVFXInfo(
+  v33 = (*(int (__thiscall **)(char *))(*(_DWORD *)a1 + 0x30))(a1); /*0x69b242*/
+  if ( !v33 ) /*0x69b246*/
+    return MagicCaster_ApplyActiveMagicItem_::GetVFXInfo( /*0x69b246*/
              a1,
              ebx0,
              a3,
@@ -57,12 +57,12 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectItemLoop_Before@<eax>(
              a15,
              a16,
              a17,
-             a18,
-             a19,
+             *(double *)&a18,
+             *(float *)&a19,
              a20,
-             a21,
-             a22,
-             a23,
+             *(float *)&a21,
+             *(float *)&a22,
+             *(float *)&a23,
              a24,
              a25,
              a26,
@@ -73,11 +73,11 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectItemLoop_Before@<eax>(
              a31,
              a32,
              a33);
-  v34 = v33 == 0xFFFFFFF4;
-  v35 = v33 + 0xC;
-  a15 = v35;
-  if ( v34 )
-    return MagicCaster_ApplyActiveMagicItem_::GetVFXInfo(
+  v34 = v33 == 0xFFFFFFF4; /*0x69b24c*/
+  v35 = v33 + 0xC; /*0x69b24c*/
+  a15 = v35; /*0x69b24f*/
+  if ( v34 ) /*0x69b253*/
+    return MagicCaster_ApplyActiveMagicItem_::GetVFXInfo( /*0x69b246*/
              a1,
              ebx0,
              a3,
@@ -95,12 +95,12 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectItemLoop_Before@<eax>(
              a15,
              a16,
              a17,
-             a18,
-             a19,
+             *(double *)&a18,
+             *(float *)&a19,
              a20,
-             a21,
-             a22,
-             a23,
+             *(float *)&a21,
+             *(float *)&a22,
+             *(float *)&a23,
              a24,
              a25,
              a26,
@@ -112,16 +112,16 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectItemLoop_Before@<eax>(
              a32,
              a33);
   else
-    return MagicCaster_ApplyActiveMagicItem_::EffectLoop_Body(
+    return MagicCaster_ApplyActiveMagicItem_::EffectLoop_Body( /*0x69b25b*/
              v35,
-             a1,
+             (int *)a1,
              ebx0,
              a3,
              a4,
              a5,
              a6,
              a7,
-             a8,
+             (int)a8,
              a9,
              a10,
              a11,

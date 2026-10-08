@@ -1,19 +1,32 @@
 {
-  "callees_count": 12,
-  "callers_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x452E70",
+      "0x452F0D"
+    ]
+  ],
+  "chunks_sha256": "3f37ffe0c9528e17950b68e5e1afc3b36a64717cec94004454979b9d16f3fae9",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "\nVerified: map lookup keyed by cell FormID, stores a reference FormID; on additional insert, preserves old inline ID in an 8-byte overflow node and pushes new ID to head. Callers: UnloadForm 463C26, LoadGame 466065/46627A. Probable Fallout class homolog from matching named constructor 82601B90 (37-bucket uint->BSSimpleList<uint> map); Fallout container implementation differs, so only architecture-level homolog.\nVerified return: callers ignore result; return is allocator/helper artifact and is not a stable semantic result.\n\nMEF SAVE AUDIT 2026-10-08: Save audit negative claim: interior pending-reference insertion preserves embedded head and pushes new IDs in constant list-link work. It does not append by repeated tail traversal. Exterior performance finding is consumer world-list filtering, not producer PushFront complexity.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_452E70",
+  "display_name": "InteriorCellNewReferencesMap_AddReferenceID",
   "end_ea": "0x452F0D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_452E70",
+  "name": "InteriorCellNewReferencesMap_AddReferenceID",
   "segment": ".text",
   "sha256": "3f37ffe0c9528e17950b68e5e1afc3b36a64717cec94004454979b9d16f3fae9",
   "size": 157,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x452E70",
-  "type": "char __thiscall(_DWORD *this, int *, int)",
+  "total_chunk_size": 157,
+  "type": "void __thiscall(InteriorCellNewReferencesMap *self, unsigned int cellFormID, unsigned int referenceID)",
   "xrefs_from_count": 70,
   "xrefs_to_count": 3
 }

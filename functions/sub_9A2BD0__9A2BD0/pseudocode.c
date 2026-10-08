@@ -13,62 +13,62 @@ LABEL_13:
     {
       case 3:
       case 4:
-        v10 = 1.0 / flt_BAAA80;
-        flt_BAAA60 = flt_BAAA70[0] * v10;
-        flt_BAAA64 = flt_BAAA74[0] * v10;
-        flt_BAAA68 = flt_BAAA78[0] * v10;
-        flt_BAAA6C = v10 * flt_BAAA7C;
+        v10 = 1.0 / unk_BAAA80; /*0x9a2d80*/
+        unk_BAAA60 = unk_BAAA70[0] * v10; /*0x9a2d94*/
+        unk_BAAA64 = unk_BAAA74[0] * v10; /*0x9a2da2*/
+        unk_BAAA68 = unk_BAAA78[0] * v10; /*0x9a2db0*/
+        unk_BAAA6C = v10 * unk_BAAA7C; /*0x9a2dbc*/
         result = (*(unsigned __int8 (__thiscall **)(int, int, float *, _DWORD))(*(_DWORD *)a1 + 0x30))(
                    a1,
                    a2,
-                   &flt_BAAA60,
+                   &unk_BAAA60,
                    0) != 0
                ? 0
                : 0x80000050;
-        break;
+        break; /*0x9a2dda*/
       case 7:
       case 0xA:
-        flt_BAAA60 = flt_BAAA70[0] / flt_BAAA80;
-        flt_BAAA64 = flt_BAAA74[0] / flt_BAAA84;
-        flt_BAAA68 = flt_BAAA78[0] / flt_BAAA88;
-        flt_BAAA6C = flt_BAAA7C / flt_BAAA8C;
-        v7 = (*(int (__thiscall **)(int, int, float *, _DWORD))(*(_DWORD *)a1 + 0x30))(a1, a2, &flt_BAAA60, 0);
+        unk_BAAA60 = unk_BAAA70[0] / unk_BAAA80; /*0x9a2df0*/
+        unk_BAAA64 = unk_BAAA74[0] / unk_BAAA84; /*0x9a2e02*/
+        unk_BAAA68 = unk_BAAA78[0] / unk_BAAA88; /*0x9a2e14*/
+        unk_BAAA6C = unk_BAAA7C / unk_BAAA8C; /*0x9a2e26*/
+        v7 = (*(int (__thiscall **)(int, int, float *, _DWORD))(*(_DWORD *)a1 + 0x30))(a1, a2, &unk_BAAA60, 0); /*0x9a2e2c*/
         return v7 != 0 ? 0 : 0x80000050;
       default:
         return 1;
     }
-    return result;
+    return result; /*0x9a2dda*/
   }
-  if ( a3 != 9 )
+  if ( a3 != 9 ) /*0x9a2be3*/
   {
-    if ( a3 != 0xA )
-      return 1;
-    goto LABEL_13;
+    if ( a3 != 0xA ) /*0x9a2be8*/
+      return 1; /*0x9a2bf6*/
+    goto LABEL_13; /*0x9a2be8*/
   }
-  if ( a4 < 3 || a4 > 4 )
-    return 1;
-  v9 = 1.0 / flt_BAAA80;
-  v8[0] = flt_BAA9E0[0] * v9;
-  v8[1] = flt_BAA9E4 * v9;
-  v8[2] = flt_BAA9E8 * v9;
-  v8[3] = flt_BAA9EC * v9;
-  v8[4] = flt_BAA9F0 * v9;
-  v8[5] = flt_BAA9F4 * v9;
-  v8[6] = flt_BAA9F8 * v9;
-  v8[7] = flt_BAA9FC * v9;
-  v8[8] = flt_BAAA00 * v9;
-  v8[9] = flt_BAAA04 * v9;
-  v8[0xA] = flt_BAAA08 * v9;
-  v8[0xB] = flt_BAAA0C * v9;
-  v8[0xC] = flt_BAAA10 * v9;
-  v8[0xD] = flt_BAAA14 * v9;
-  v8[0xE] = flt_BAAA18 * v9;
-  v8[0xF] = v9 * flt_BAAA1C;
-  qmemcpy(&unk_BAA950, v8, 0x40u);
-  if ( LOBYTE(a5) )
-    D3DXMatrixInverse_0((int)&unk_BAA950, 0, (int)&unk_BAA950);
-  if ( a6 )
-    D3DXMatrixTranspose_0((int)&unk_BAA950, (int)&unk_BAA950);
-  v7 = (*(int (__thiscall **)(int, int, void *, _DWORD))(*(_DWORD *)a1 + 0x30))(a1, a2, &unk_BAA950, 0);
+  if ( a4 < 3 || a4 > 4 ) /*0x9a2c05*/
+    return 1; /*0x9a2c05*/
+  v9 = 1.0 / unk_BAAA80; /*0x9a2c26*/
+  v8[0] = unk_BAA9E0[0] * v9; /*0x9a2c3a*/
+  v8[1] = unk_BAA9E4 * v9; /*0x9a2c46*/
+  v8[2] = unk_BAA9E8 * v9; /*0x9a2c52*/
+  v8[3] = unk_BAA9EC * v9; /*0x9a2c5e*/
+  v8[4] = unk_BAA9F0 * v9; /*0x9a2c6a*/
+  v8[5] = unk_BAA9F4 * v9; /*0x9a2c76*/
+  v8[6] = unk_BAA9F8 * v9; /*0x9a2c82*/
+  v8[7] = unk_BAA9FC * v9; /*0x9a2c8e*/
+  v8[8] = unk_BAAA00 * v9; /*0x9a2c9a*/
+  v8[9] = unk_BAAA04 * v9; /*0x9a2ca6*/
+  v8[0xA] = unk_BAAA08 * v9; /*0x9a2cb2*/
+  v8[0xB] = unk_BAAA0C * v9; /*0x9a2cbe*/
+  v8[0xC] = unk_BAAA10 * v9; /*0x9a2cca*/
+  v8[0xD] = unk_BAAA14 * v9; /*0x9a2cd6*/
+  v8[0xE] = unk_BAAA18 * v9; /*0x9a2ce2*/
+  v8[0xF] = v9 * unk_BAAA1C; /*0x9a2cec*/
+  qmemcpy(&unk_BAA950, v8, 0x40u); /*0x9a2cf0*/
+  if ( LOBYTE(a5) ) /*0x9a2cf4*/
+    D3DXMatrixInverse_0((int)&unk_BAA950, 0, (int)&unk_BAA950); /*0x9a2d02*/
+  if ( a6 ) /*0x9a2d0c*/
+    D3DXMatrixTranspose_0((int)&unk_BAA950, (int)&unk_BAA950); /*0x9a2d18*/
+  v7 = (*(int (__thiscall **)(int, int, void *, _DWORD))(*(_DWORD *)a1 + 0x30))(a1, a2, &unk_BAA950, 0); /*0x9a2d32*/
   return v7 != 0 ? 0 : 0x80000050;
 }

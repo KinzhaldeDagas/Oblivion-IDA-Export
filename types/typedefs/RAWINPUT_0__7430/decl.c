@@ -1,1 +1,1 @@
-RAWINPUT_0
+typedef tagRAWINPUT_0 RAWINPUT_0;

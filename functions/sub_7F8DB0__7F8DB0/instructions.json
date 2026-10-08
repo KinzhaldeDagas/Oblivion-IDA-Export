@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7F8DB0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Pass205: Object-batch render path calls shader virtual +0x2C with NiPropertyState returned by sub_405760(geometry).",
     "mnemonic": "push",
     "size": 2
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x7F8DE5",
-    "line": "mov     edi, [esp+98h+arg_4]",
+    "line": "mov     edi, [esp+98h+shaderIndex]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x7F8E24",
-    "line": "mov     [esp+98h+var_78], ecx",
+    "line": "mov     [esp+98h+renderEntry], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x7F8E56",
-    "line": "lea     edx, [esp+98h+var_5C]",
+    "line": "lea     edx, [esp+98h+output]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -301,19 +301,19 @@
   },
   {
     "ea": "0x7F8E5E",
-    "line": "push    edx",
+    "line": "push    edx; output",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7F8E5F",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7F8E61",
-    "line": "call    sub_405760",
+    "line": "call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x7F8E68",
-    "line": "mov     eax, [esp+98h+var_5C]",
+    "line": "mov     eax, [esp+98h+output]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x7F8E8E",
-    "line": "movzx   eax, word ptr [esp+98h+arg_4]",
+    "line": "movzx   eax, word ptr [esp+98h+shaderIndex]",
     "mnemonic": "movzx",
     "size": 8
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x7F8EA4",
-    "line": "mov     eax, [esp+98h+var_78]",
+    "line": "mov     eax, [esp+98h+renderEntry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -457,31 +457,31 @@
   },
   {
     "ea": "0x7F8EAD",
-    "line": "call    sub_7ECB20",
+    "line": "call    OB_BSShader_ResetLightConstantSlots_010201A0; Oblivion Lighting30 light-bank reset: clears eight diffuse/color slots to (0,0,0,1) and eight source/data slots to (0.001,0,0,0); it does not clear ambient c5.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7F8EB2",
-    "line": "mov     ecx, [esp+98h+var_78]",
+    "line": "mov     ecx, [esp+98h+renderEntry]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7F8EB6",
-    "line": "mov     edx, [esp+98h+arg_4]",
+    "line": "mov     edx, [esp+98h+shaderIndex]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x7F8EBD",
-    "line": "push    0",
+    "line": "push    0; previousRenderEntry",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F8EBF",
-    "line": "push    edi",
+    "line": "push    edi; lightingProperty",
     "mnemonic": "push",
     "size": 1
   },
@@ -493,13 +493,13 @@
   },
   {
     "ea": "0x7F8EC4",
-    "line": "push    ecx",
+    "line": "push    ecx; renderEntry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7F8EC5",
-    "line": "push    edx",
+    "line": "push    edx; shaderIndex",
     "mnemonic": "push",
     "size": 1
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x7F8EC8",
-    "line": "call    sub_7F60F0",
+    "line": "call    OB_BSShader_RebuildRenderEntryLightConstants_010201A0",
     "mnemonic": "call",
     "size": 5
   },
@@ -1153,7 +1153,7 @@
   },
   {
     "ea": "0x7F9003",
-    "line": "mov     [esp+98h+var_78], eax",
+    "line": "mov     [esp+98h+renderEntry], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1189,7 +1189,7 @@
   },
   {
     "ea": "0x7F9015",
-    "line": "mov     ecx, [esp+98h+var_78]",
+    "line": "mov     ecx, [esp+98h+renderEntry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1375,7 +1375,7 @@
   },
   {
     "ea": "0x7F906D",
-    "line": "mov     [esp+98h+var_78], eax",
+    "line": "mov     [esp+98h+renderEntry], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1411,7 +1411,7 @@
   },
   {
     "ea": "0x7F907F",
-    "line": "mov     ecx, [esp+98h+var_78]",
+    "line": "mov     ecx, [esp+98h+renderEntry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1759,7 +1759,7 @@
   },
   {
     "ea": "0x7F9117",
-    "line": "mov     eax, [esp+98h+arg_4]",
+    "line": "mov     eax, [esp+98h+shaderIndex]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1795,7 +1795,7 @@
   },
   {
     "ea": "0x7F9135",
-    "line": "mov     [esp+9Ch+var_5C], ecx",
+    "line": "mov     [esp+9Ch+output], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1897,7 +1897,7 @@
   },
   {
     "ea": "0x7F9169",
-    "line": "call    eax",
+    "line": "call    eax; Direct device write: sampler 0 D3DSAMP_MIPMAPLODBIAS = fLocalTreeMipMapLODBias:SpeedTree (runtime copy at 0xB430A8; default -0.25). This bypasses the NiDX9 sampler cache.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1926,12 +1926,6 @@
     "size": 2
   },
   {
-    "ea": "0x7F9179",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x7F9180",
     "line": "mov     eax, [esp+98h+var_74]",
     "mnemonic": "mov",
@@ -1957,7 +1951,7 @@
   },
   {
     "ea": "0x7F918B",
-    "line": "movzx   ecx, word ptr [esp+98h+arg_4]",
+    "line": "movzx   ecx, word ptr [esp+98h+shaderIndex]",
     "mnemonic": "movzx",
     "size": 8
   },
@@ -1993,13 +1987,13 @@
   },
   {
     "ea": "0x7F91AA",
-    "line": "push    ecx",
+    "line": "push    ecx; output",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7F91AB",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -2017,7 +2011,7 @@
   },
   {
     "ea": "0x7F91B5",
-    "line": "call    sub_405760",
+    "line": "call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2041,7 +2035,7 @@
   },
   {
     "ea": "0x7F91C2",
-    "line": "mov     [esp+98h+var_78], esi",
+    "line": "mov     [esp+98h+renderEntry], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2179,7 +2173,7 @@
   },
   {
     "ea": "0x7F9202",
-    "line": "cmp     [esp+98h+var_5C], edi",
+    "line": "cmp     [esp+98h+output], edi",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -2263,7 +2257,7 @@
   },
   {
     "ea": "0x7F9238",
-    "line": "mov     edx, [esp+98h+arg_4]",
+    "line": "mov     edx, [esp+98h+shaderIndex]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2341,13 +2335,13 @@
   },
   {
     "ea": "0x7F925D",
-    "line": "mov     ecx, [esp+98h+var_78]",
+    "line": "mov     ecx, [esp+98h+renderEntry]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7F9261",
-    "line": "mov     edx, [esp+98h+arg_4]",
+    "line": "mov     edx, [esp+98h+shaderIndex]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2473,7 +2467,7 @@
   },
   {
     "ea": "0x7F9296",
-    "line": "mov     eax, [esp+0A4h+var_78]",
+    "line": "mov     eax, [esp+0A4h+renderEntry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2551,7 +2545,7 @@
   },
   {
     "ea": "0x7F92C3",
-    "line": "mov     [esp+98h+var_5C], eax",
+    "line": "mov     [esp+98h+output], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2587,7 +2581,7 @@
   },
   {
     "ea": "0x7F92D5",
-    "line": "mov     ecx, [esp+98h+var_5C]",
+    "line": "mov     ecx, [esp+98h+output]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2629,7 +2623,7 @@
   },
   {
     "ea": "0x7F92E5",
-    "line": "mov     ecx, [esp+98h+var_78]",
+    "line": "mov     ecx, [esp+98h+renderEntry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2707,7 +2701,7 @@
   },
   {
     "ea": "0x7F9303",
-    "line": "call    sub_765480",
+    "line": "call    NiDX9Renderer_SetModelTransform; MoonSugar build 39: common non-skinned transform upload has many shader-family xrefs (generic, water, grass, precipitation, SpeedTree, LOD, GeometryDecal, Lighting30). Do not globally detour for Moon Sugar; use scoped caller/hook windows.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2791,7 +2785,7 @@
   },
   {
     "ea": "0x7F932D",
-    "line": "mov     ecx, [esp+98h+arg_4]",
+    "line": "mov     ecx, [esp+98h+shaderIndex]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2875,13 +2869,13 @@
   },
   {
     "ea": "0x7F9356",
-    "line": "mov     ecx, [esp+98h+var_78]",
+    "line": "mov     ecx, [esp+98h+renderEntry]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7F935A",
-    "line": "mov     edx, [esp+98h+arg_4]",
+    "line": "mov     edx, [esp+98h+shaderIndex]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2953,7 +2947,7 @@
   },
   {
     "ea": "0x7F9378",
-    "line": "call    sub_765480",
+    "line": "call    NiDX9Renderer_SetModelTransform; MoonSugar build 39: common non-skinned transform upload has many shader-family xrefs (generic, water, grass, precipitation, SpeedTree, LOD, GeometryDecal, Lighting30). Do not globally detour for Moon Sugar; use scoped caller/hook windows.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3007,7 +3001,7 @@
   },
   {
     "ea": "0x7F9392",
-    "line": "mov     [esp+98h+var_5C], edi",
+    "line": "mov     [esp+98h+output], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3031,13 +3025,13 @@
   },
   {
     "ea": "0x7F93A7",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7F93A9",
-    "line": "call    sub_7A9C30",
+    "line": "call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3181,7 +3175,7 @@
   },
   {
     "ea": "0x7F93EF",
-    "line": "mov     ecx, dword ptr [esp+98h+var_C]",
+    "line": "mov     ecx, dword ptr [esp+98h+var_C]; Balanced normal completion reset for the local-tree bias path: direct sampler 0 MIPMAPLODBIAS=0.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -3232,5 +3226,119 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D0350",
+    "line": "lea     ecx, [ebp-60h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0353",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0358",
+    "line": "lea     ecx, [ebp-60h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D035B",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0360",
+    "line": "lea     ecx, [ebp-64h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0363",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0368",
+    "line": "lea     ecx, [ebp-64h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D036B",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0370",
+    "line": "lea     ecx, [ebp-64h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0373",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0378",
+    "line": "lea     ecx, [ebp-54h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D037B",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0380",
+    "line": "mov     edx, [esp+shaderIndex]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D0384",
+    "line": "lea     eax, [edx-88h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9D038A",
+    "line": "mov     ecx, [edx-8Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9D0390",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D0392",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0397",
+    "line": "mov     eax, offset stru_AF8D5C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D039C",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

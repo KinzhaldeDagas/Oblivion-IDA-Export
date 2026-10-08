@@ -1,1 +1,4 @@
-HMIDIOUT__
+struct HMIDIOUT__
+{
+int unused;
+};

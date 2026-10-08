@@ -1,7 +1,7 @@
-0x471130: mov     ecx, ds:0B33B00h
+0x471130: mov     ecx, ds:0B33B00h; Computes variable AnimIdle serialized size, including optional idle form/phase data and optional BSAnimGroupSequence state with version-dependent payload size.
 0x471136: push    esi
 0x471137: xor     esi, esi
-0x471139: call    sub_45A170
+0x471139: call    TESSaveLoadGame_UseSaveGameBlocks
 0x47113E: test    al, al
 0x471140: jz      short loc_471147
 0x471142: mov     esi, 6
@@ -16,7 +16,7 @@
 0x47115E: test    ecx, ecx
 0x471160: mov     edx, 0Dh
 0x471165: jz      short loc_471173
-0x471167: call    sub_49F550
+0x471167: call    BSAnimGroupSequence_GetSaveStateSize; Returns native serialized BSAnimGroupSequence state size: 20 bytes for save versions >= 0x71, otherwise 24 bytes.
 0x47116C: add     ax, 0Eh
 0x471170: movzx   edx, ax
 0x471173: add     esi, edx
@@ -29,7 +29,7 @@
 0x47118C: jz      short loc_4711CE
 0x47118E: mov     ecx, [edi]
 0x471190: push    ecx; a1
-0x471191: call    TESForm_LookupByFormID
+0x471191: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x471196: mov     edx, [edi+5]
 0x471199: add     esp, 4
 0x47119C: push    offset a__TesSharedAni; "..\\TES Shared\\Animation.cpp"

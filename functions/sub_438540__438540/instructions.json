@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x438540",
-    "line": "push    ecx",
+    "line": "push    ecx; Releases a model-loader path reference. Used by AnimIdle/queued-loader cleanup when a KF/model reference is no longer needed.",
     "mnemonic": "push",
     "size": 1
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x43859F",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

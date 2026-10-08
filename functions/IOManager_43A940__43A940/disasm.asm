@@ -161,3 +161,19 @@
 0x43AB0A: mov     dword ptr [edi], 0
 0x43AB10: mov     esi, [esp+30h+var_14]
 0x43AB14: jmp     short loc_43AABC
+0x9AC9C0: lea     ecx, [ebp-14h]; void *
+0x9AC9C3: jmp     sub_4BDDC0
+0x9AC9C8: mov     eax, [ebp-10h]
+0x9AC9CB: and     eax, 1
+0x9AC9CE: jz      locret_9AC9E0
+0x9AC9D4: and     dword ptr [ebp-10h], 0FFFFFFFEh
+0x9AC9D8: mov     ecx, [ebp+4]; void *
+0x9AC9DB: jmp     sub_4BDDC0
+0x9AC9E0: retn
+0x9AC9E1: mov     edx, [esp+arg_4]
+0x9AC9E5: lea     eax, [edx-20h]
+0x9AC9E8: mov     ecx, [edx-24h]
+0x9AC9EB: xor     ecx, eax
+0x9AC9ED: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AC9F2: mov     eax, offset stru_AD9650
+0x9AC9F7: jmp     ___CxxFrameHandler3

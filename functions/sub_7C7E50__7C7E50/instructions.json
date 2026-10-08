@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7C7E50",
-    "line": "push    esi",
+    "line": "push    esi; Remove full-list lights, free list nodes, reset partition anchors, and reset the active list.",
     "mnemonic": "push",
     "size": 1
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x7C7E6E",
-    "line": "call    sub_7C77C0",
+    "line": "call    ShadowSceneNode_RemoveFullLight; Remove one ShadowSceneLight from the full-list owner with native refcount/list cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x7C7E7D",
-    "line": "call    NiTPointerList__FreeAllNodes",
+    "line": "call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.",
     "mnemonic": "call",
     "size": 5
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x7C7E88",
-    "line": "call    NiTPointerList__FreeAllNodes",
+    "line": "call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x7C7EA5",
-    "line": "jmp     sub_7C7880",
+    "line": "jmp     ShadowSceneNode_ResetActiveLightList; Remove active-list payloads, free list nodes, and clear partition anchors/counters.",
     "mnemonic": "jmp",
     "size": 5
   }

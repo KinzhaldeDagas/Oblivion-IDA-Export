@@ -1,4 +1,5 @@
-char *sub_7EE4E0()
+// Oblivion virtual GetRTTI for BSShaderLightingProperty. Returns NiRTTI_BSShaderLightingProperty (B4618C).
+const NiRTTI *__thiscall BSShaderLightingProperty_GetRTTI(BSShaderLightingProperty *this)
 {
-  return dword_B4618C;
+  return &NiRTTI_BSShaderLightingProperty; /*0x7ee4e5*/
 }

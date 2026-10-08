@@ -1,19 +1,32 @@
 {
-  "callees_count": 166,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_620290",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 77,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x620290",
+      "0x620C30"
+    ]
+  ],
+  "chunks_sha256": "e82d32e7036f9a818125e2265c7cd2cec202f8fa271330fff33392ab3c1f1079",
+  "comment_regular": "Evaluates close-combat alternatives while mode +0x74 is 3: caches target surface distance, checks desired range and animation/action state, scores equipped-weapon, magic, and unarmed choices, then starts an action or changes combat mode. Its caller supplies one stack flag that is unused in this build; apparent EBX/EBP/EDI/x87 parameters were decompiler artifacts.",
+  "comment_repeatable": "Evaluates close-combat alternatives while mode +0x74 is 3: caches target surface distance, checks desired range and animation/action state, scores equipped-weapon, magic, and unarmed choices, then starts an action or changes combat mode. Its caller supplies one stack flag that is unused in this build; apparent EBX/EBP/EDI/x87 parameters were decompiler artifacts.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "CombatController_EvaluateCloseCombatOptions",
   "end_ea": "0x620C30",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_620290",
+  "name": "CombatController_EvaluateCloseCombatOptions",
   "segment": ".text",
   "sha256": "e82d32e7036f9a818125e2265c7cd2cec202f8fa271330fff33392ab3c1f1079",
   "size": 2464,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x620290",
-  "type": "void __userpurge(int@<ecx>, int@<ebx>, int@<ebp>, int@<edi>, float, int, float)",
+  "total_chunk_size": 2464,
+  "type": "void __thiscall(void *this, int unusedModeFlag)",
   "xrefs_from_count": 961,
   "xrefs_to_count": 2
 }

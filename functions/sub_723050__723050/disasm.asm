@@ -1,4 +1,4 @@
-0x723050: push    0FFFFFFFFh
+0x723050: push    0FFFFFFFFh; Common NiGeometry clone post-process. Resolves the destination through the clone map, handles geometry-data cloning/sharing, and rebuilds shader/property state only when the source geometry has a shader; a source-null shader leaves the clone shader/property state null.
 0x723052: push    offset SEH_723050
 0x723057: mov     eax, large fs:0
 0x72305D: push    eax
@@ -15,7 +15,7 @@
 0x723077: mov     esi, ecx
 0x723079: mov     ebp, [esp+28h+a2]
 0x72307D: push    ebp
-0x72307E: call    sub_707AB0
+0x72307E: call    sub_707AB0; Pass227: Base object-map/reference collection called before NiScreenSpaceCamera child array traversal.
 0x723083: mov     ecx, [ebp+0]
 0x723086: lea     eax, [esp+28h+a2]
 0x72308A: push    eax
@@ -50,7 +50,7 @@
 0x7230E5: mov     edx, [eax+38h]
 0x7230E8: push    ebp
 0x7230E9: call    edx
-0x7230EB: push    offset stru_B3FA00; lpCriticalSection
+0x7230EB: push    offset unk_B3FA00; lpCriticalSection
 0x7230F0: call    dword ptr ds:0A2806Ch
 0x7230F6: call    dword ptr ds:0A2808Ch
 0x7230FC: mov     ebx, 1
@@ -63,7 +63,7 @@
 0x72311C: mov     eax, [ecx]
 0x72311E: mov     edx, [eax+4]
 0x723121: call    edx
-0x723123: cmp     eax, offset unk_B40124
+0x723123: cmp     eax, offset stru_B40124
 0x723128: setz    al
 0x72312B: test    al, al
 0x72312D: jz      short loc_72318D
@@ -79,7 +79,7 @@
 0x72314C: mov     ebp, eax
 0x72314E: mov     ecx, [esi+0BCh]
 0x723154: mov     [esp+28h+var_4], 0FFFFFFFFh
-0x72315C: call    sub_452A60
+0x72315C: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x723161: push    eax; Src
 0x723162: mov     ecx, ebp
 0x723164: call    sub_738630
@@ -93,9 +93,9 @@
 0x723183: call    NiSmartPointer_Set??
 0x723188: jmp     loc_72326E
 0x72318D: mov     eax, [esi+0BCh]
-0x723193: push    eax; a2
+0x723193: push    eax; shader
 0x723194: mov     ecx, edi; this
-0x723196: call    sub_4EC910
+0x723196: call    NiGeometry_SetShader; NiGeometry shader smart-pointer setter: releases the old BSShader, stores the new shader, and AddRefs it when the pointer changes.
 0x72319B: mov     ecx, [esi+0BCh]
 0x7231A1: mov     eax, [ecx]
 0x7231A3: mov     edx, [eax+18h]
@@ -118,7 +118,7 @@
 0x7231DA: jz      short loc_7231E6
 0x7231DC: push    esi
 0x7231DD: mov     ecx, eax
-0x7231DF: call    sub_731620
+0x7231DF: call    sub_731620; Fog property propagation decode: NiPropertyState copy constructor preserves all ten slots, including inherited fog slot +0x0C.
 0x7231E4: jmp     short loc_7231E8
 0x7231E6: xor     eax, eax
 0x7231E8: push    ebp
@@ -127,11 +127,11 @@
 0x7231EE: push    ecx
 0x7231EF: mov     ecx, edi
 0x7231F1: mov     byte ptr [esp+34h+var_4], bl
-0x7231F5: call    sub_7077D0
-0x7231FA: push    eax
-0x7231FB: lea     ecx, [edi+0ACh]
+0x7231F5: call    sub_7077D0; Fog property propagation decode: NiAVObject local-property merge helper; property kind 1 writes BSFogProperty/NiFogProperty to NiPropertyState +0x0C.
+0x7231FA: push    eax; incoming
+0x7231FB: lea     ecx, [edi+0ACh]; this
 0x723201: mov     byte ptr [esp+2Ch+var_4], 3
-0x723206: call    sub_55E2A0
+0x723206: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
 0x72320B: mov     eax, [esp+28h+var_14]
 0x72320F: cmp     eax, ebp
 0x723211: mov     ebp, ds:0A2807Ch
@@ -179,7 +179,7 @@
 0x72326E: sub     ds:0B3FA7Ch, ebx
 0x723274: jnz     short loc_723280
 0x723276: mov     dword ptr ds:0B3FA78h, 0
-0x723280: push    offset stru_B3FA00; lpCriticalSection
+0x723280: push    offset unk_B3FA00; lpCriticalSection
 0x723285: call    dword ptr ds:0A28074h
 0x72328B: mov     ecx, [esp+28h+var_C]
 0x72328F: mov     large fs:0, ecx
@@ -190,3 +190,24 @@
 0x72329A: pop     ebx
 0x72329B: add     esp, 14h
 0x72329E: retn    4
+0x9CA3D0: mov     eax, [ebp+4]
+0x9CA3D3: push    eax
+0x9CA3D4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA3D9: pop     ecx
+0x9CA3DA: retn
+0x9CA3DB: lea     ecx, [ebp+4]; slot
+0x9CA3DE: jmp     NiPointerSlot_Release
+0x9CA3E3: mov     eax, [ebp-10h]
+0x9CA3E6: push    eax
+0x9CA3E7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA3EC: pop     ecx
+0x9CA3ED: retn
+0x9CA3EE: lea     ecx, [ebp-14h]; slot
+0x9CA3F1: jmp     NiPointerSlot_Release
+0x9CA3F6: mov     edx, [esp+arg_4]
+0x9CA3FA: lea     eax, [edx-18h]
+0x9CA3FD: mov     ecx, [edx-1Ch]
+0x9CA400: xor     ecx, eax
+0x9CA402: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA407: mov     eax, offset stru_AF2AF8
+0x9CA40C: jmp     ___CxxFrameHandler3

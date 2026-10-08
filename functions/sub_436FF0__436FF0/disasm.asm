@@ -4,7 +4,7 @@
 0x436FF4: cmp     dword ptr [esi+24h], 0
 0x436FF8: jz      short loc_437041
 0x436FFA: push    edi
-0x436FFB: push    offset dword_B33A14; lpAddend
+0x436FFB: push    offset unk_B33A14; lpAddend
 0x437000: call    ds:InterlockedIncrement
 0x437006: mov     edx, [esi+14h]
 0x437009: movzx   edi, ax

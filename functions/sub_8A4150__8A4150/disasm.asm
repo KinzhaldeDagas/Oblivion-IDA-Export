@@ -34,3 +34,12 @@
 0x8A41DF: pop     esi
 0x8A41E0: add     esp, 14h
 0x8A41E3: retn
+0x9D6A90: mov     ecx, [ebp-14h]; this
+0x9D6A93: jmp     ??1bhkEntity@@UAE@XZ; bhkEntity::~bhkEntity(void)
+0x9D6A98: mov     edx, [esp+arg_4]
+0x9D6A9C: lea     eax, [edx-0Ch]
+0x9D6A9F: mov     ecx, [edx-10h]
+0x9D6AA2: xor     ecx, eax
+0x9D6AA4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D6AA9: mov     eax, offset stru_AFE80C
+0x9D6AAE: jmp     ___CxxFrameHandler3

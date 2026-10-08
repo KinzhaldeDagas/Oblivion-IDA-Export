@@ -1,18 +1,31 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7730A0",
+      "0x7730F4"
+    ]
+  ],
+  "chunks_sha256": "a293e154dd364d3d45533b5adb1825e62c32a6d106788b85128d4346a4bf8bf8",
+  "comment_regular": "DX10OBSE mesh-texturing decode: D3D texture-stage state lookup. Uses B427E0 state-to-slot table; returns override/current value plus source flag when state is tracked by the stage state group.",
+  "comment_repeatable": "DX10OBSE mesh-texturing decode: D3D texture-stage state lookup. Uses B427E0 state-to-slot table; returns override/current value plus source flag when state is tracked by the stage state group.\nDX11 verified: state11 uses WORD B427E0+22 inverse slot; slot>=8 => absent. Override flag group+5C+slot wins with DWORD +3C+4slot, else base flag+2C+slot with DWORD +C+4slot. Unset leaves caller stage-index default.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "sub_7730A0",
   "end_ea": "0x7730F4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_7730A0",
   "segment": ".text",
   "sha256": "a293e154dd364d3d45533b5adb1825e62c32a6d106788b85128d4346a4bf8bf8",
   "size": 84,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7730A0",
+  "total_chunk_size": 84,
   "type": "char __thiscall(_DWORD *this, int, _DWORD *, _BYTE *)",
   "xrefs_from_count": 25,
   "xrefs_to_count": 2

@@ -1,19 +1,36 @@
 {
-  "callees_count": 9,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_79B470",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x79B470",
+      "0x79B502"
+    ],
+    [
+      "0x9CC230",
+      "0x9CC24B"
+    ]
+  ],
+  "chunks_sha256": "6699d1db5c93dd69e82e7c44b1986d5710b332b4a4a92ef3b0da04c7da3b6c55",
+  "comment_regular": "Exception-safe uninitialized_copy for SFrondTexture. Normal path placement-copy-constructs [first,last) and returns destination end; the SEH cleanup landing path destroys the constructed prefix and rethrows.",
+  "comment_repeatable": "Exception-safe uninitialized_copy for SFrondTexture. Normal path placement-copy-constructs [first,last) and returns destination end; the SEH cleanup landing path destroys the constructed prefix and rethrows.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_SFrondTexture_UninitializedCopy_010201A0",
   "end_ea": "0x79B502",
-  "flags": 21521,
+  "evidence_confidence": "Unknown",
+  "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_79B470",
+  "name": "OB_SFrondTexture_UninitializedCopy_010201A0",
   "segment": ".text",
   "sha256": "278c696a989299e008d7bb29108c83aee9c9dc8895e34cec100804fcdcddf32e",
   "size": 146,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x79B470",
-  "type": "void __cdecl __noreturn(int, int, _DWORD *)",
-  "xrefs_from_count": 62,
+  "total_chunk_size": 173,
+  "type": "OB_SFrondTexture_010201A0 *__cdecl(const OB_SFrondTexture_010201A0 *first, const OB_SFrondTexture_010201A0 *last, OB_SFrondTexture_010201A0 *destinationFirst)",
+  "xrefs_from_count": 71,
   "xrefs_to_count": 3
 }

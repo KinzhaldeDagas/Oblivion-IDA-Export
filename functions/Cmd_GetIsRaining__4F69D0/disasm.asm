@@ -1,7 +1,7 @@
 0x4F69D0: push    ecx
 0x4F69D1: call    Sky_CreateOrGetGlobalObject
 0x4F69D6: mov     ecx, eax
-0x4F69D8: call    sub_4F5ED0
+0x4F69D8: call    Sky_IsRainingByWeatherFlags; GetIsRaining delegates to Sky rain-state helper 0x4F5ED0 rather than comparing weather FormIDs.
 0x4F69DD: test    al, al
 0x4F69DF: jz      short loc_4F69E5
 0x4F69E1: fld1

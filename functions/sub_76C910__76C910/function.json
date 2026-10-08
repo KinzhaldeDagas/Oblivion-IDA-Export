@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
-  "callers_count": 42,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 295,
+  "chunks": [
+    [
+      "0x76C910",
+      "0x76C957"
+    ]
+  ],
+  "chunks_sha256": "af3b5a66a700a67f316eceed800d43a194467272c8395b87fe9446d6fa004e85",
+  "comment_regular": "Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.",
+  "comment_repeatable": "Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.\nDX11 ordinary texture construction 2026-09-30: full 47h-byte body verified. Writes stage+4 only when identity differs; decrements old NiTexture refcount+4/deletes at zero and increments new refcount+4. Read-only assignment reconstruction does not perform these native lifetime transfers.\nDX11 shared-pass audit 2026-10-01: parameter type corrected to NiTexture*, matching the stage Texture member and ordinary diffuse/normal/environment/glow inputs. This is not rendered-texture-only. Each actual stage object owns one reference even if multiple pass array indices alias it; apply all assignments in call order, accounting for the latest projected stage+4 value. Equal-pointer assignment does not touch refcounts.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_76C910",
+  "display_name": "NiD3DTextureStage_SetTexture",
   "end_ea": "0x76C957",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_76C910",
+  "name": "NiD3DTextureStage_SetTexture",
   "segment": ".text",
   "sha256": "af3b5a66a700a67f316eceed800d43a194467272c8395b87fe9446d6fa004e85",
   "size": 71,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x76C910",
-  "type": "void __thiscall(_DWORD *this, NiRenderedTexture *a2)",
+  "total_chunk_size": 71,
+  "type": "void __thiscall(NiD3DTextureStage *this, NiTexture *texture)",
   "xrefs_from_count": 36,
   "xrefs_to_count": 295
 }

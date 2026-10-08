@@ -19,11 +19,11 @@
 0x4C8FE2: mov     dword ptr [esp+10h+ArgList], ecx
 0x4C8FE6: push    0FFFFFFFFh; a2
 0x4C8FE8: mov     ecx, edi; this
-0x4C8FEA: call    TESForm_GetOverrideFile
+0x4C8FEA: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x4C8FEF: push    eax; a2
 0x4C8FF0: lea     edx, [esp+14h+ArgList]
 0x4C8FF4: push    edx; a1
-0x4C8FF5: call    TESForm_ResolveFormID
+0x4C8FF5: call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.
 0x4C8FFA: mov     eax, dword ptr [esp+18h+ArgList]
 0x4C8FFE: add     esp, 8
 0x4C9001: push    0; int
@@ -31,7 +31,7 @@
 0x4C9008: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x4C900D: push    0; int
 0x4C900F: push    eax; a1
-0x4C9010: call    TESForm_LookupByFormID
+0x4C9010: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4C9015: add     esp, 4
 0x4C9018: push    eax; void *
 0x4C9019: call    OblivionDynamicCast
@@ -66,7 +66,7 @@
 0x4C906A: mov     edx, [eax]
 0x4C906C: push    eax
 0x4C906D: mov     [esi], edx
-0x4C906F: call    FormHeapFree
+0x4C906F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4C9074: add     esp, 4
 0x4C9077: jmp     short loc_4C9088
 0x4C9079: mov     dword ptr [esi], 0

@@ -1,5 +1,5 @@
-int __cdecl EffectItem_BuildDisplayString_::ClearArgString(
-        int a1,
+int __thiscall EffectItem_BuildDisplayString_::ClearArgString(
+        void *this,
         int a2,
         int a3,
         int a4,
@@ -37,51 +37,15 @@ int __cdecl EffectItem_BuildDisplayString_::ClearArgString(
         int a36,
         int a37,
         int a38,
-        int a39)
+        int a39,
+        int a40)
 {
-  *(_DWORD *)a39 = 0;
-  *(_WORD *)(a39 + 4) = 0;
-  *(_WORD *)(a39 + 6) = 0;
-  FormHeapFree(0);
-  *(_DWORD *)a39 = 0;
-  *(_WORD *)(a39 + 6) = 0;
-  *(_WORD *)(a39 + 4) = 0;
-  return EffectItem_BuildDisplayString_::CheckNameQualifier(
-           a1,
-           a2,
-           a3,
-           a4,
-           a5,
-           a6,
-           1,
-           a39,
-           a9,
-           a10,
-           a11,
-           a12,
-           a13,
-           a14,
-           a15,
-           a16,
-           a17,
-           a18,
-           a19,
-           a20,
-           a21,
-           a22,
-           a23,
-           a24,
-           a25,
-           a26,
-           a27,
-           a28,
-           a29,
-           a30,
-           a31,
-           a32,
-           a33,
-           a34,
-           a35,
-           a36,
-           0);
+  *(_DWORD *)a40 = 0; /*0x413c28*/
+  *(_WORD *)(a40 + 4) = 0; /*0x413c2a*/
+  *(_WORD *)(a40 + 6) = 0; /*0x413c2e*/
+  FormHeapFree(0); /*0x413c43*/
+  *(_DWORD *)a40 = 0; /*0x413c48*/
+  *(_WORD *)(a40 + 6) = 0; /*0x413c4a*/
+  *(_WORD *)(a40 + 4) = 0; /*0x413c4e*/
+  return EffectItem_BuildDisplayString_::CheckNameQualifier((int)this);
 }

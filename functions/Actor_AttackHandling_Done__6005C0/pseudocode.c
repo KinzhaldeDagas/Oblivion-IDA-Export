@@ -1,5 +1,5 @@
 // positive sp value has been detected, the output may be wrong!
 void __stdcall Actor_AttackHandling_::Done(int a1, int a2, int a3)
 {
-  ;
+  ; /*0x6005c0*/
 }

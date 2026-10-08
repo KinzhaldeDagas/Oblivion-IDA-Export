@@ -1,9 +1,9 @@
-0x71AC10: sub     esp, 8
+0x71AC10: sub     esp, 8; MoonSugarEffect decode: BSShaderAccumulator visible-array consumer (+0x54). Iterates {data,count}; direct-renders disallowed/flagged geometry, otherwise appends geometry into accumulator group list for normal material-owned flush.
 0x71AC13: mov     eax, ds:0B3F928h
 0x71AC18: push    ebx
 0x71AC19: push    ebp
 0x71AC1A: mov     ebx, ecx
-0x71AC1C: mov     ecx, [esp+10h+arg_0]
+0x71AC1C: mov     ecx, [esp+10h+visibleArray]
 0x71AC20: push    esi
 0x71AC21: mov     esi, [ecx+4]
 0x71AC24: xor     ebp, ebp
@@ -12,7 +12,7 @@
 0x71AC2C: mov     [esp+14h+var_8], esi
 0x71AC30: jbe     loc_71ACCD
 0x71AC36: push    edi
-0x71AC37: mov     edx, [esp+18h+arg_0]
+0x71AC37: mov     edx, [esp+18h+visibleArray]
 0x71AC3B: mov     eax, [edx]
 0x71AC3D: mov     edi, [eax+ebp*4]
 0x71AC40: mov     ecx, [edi+0ACh]

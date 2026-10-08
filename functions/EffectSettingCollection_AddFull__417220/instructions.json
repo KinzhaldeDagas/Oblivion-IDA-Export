@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x41732C",
-    "line": "push    3Ch ; '<'; MaxCount",
+    "line": "push    3Ch ; '<'; count",
     "mnemonic": "push",
     "size": 2
   },
@@ -451,31 +451,31 @@
   },
   {
     "ea": "0x417333",
-    "line": "lea     ecx, [esp+0ACh+var_94]",
+    "line": "lea     ecx, [esp+0ACh+var_94]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x417337",
-    "line": "mov     [esp+0ACh+var_7C], 0Fh",
+    "line": "mov     [esp+0ACh+var_94.capacity], 0Fh",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x41733F",
-    "line": "mov     [esp+0ACh+var_80], 0",
+    "line": "mov     [esp+0ACh+var_94.size], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x417347",
-    "line": "mov     [esp+0ACh+var_90], 0",
+    "line": "mov     byte ptr [esp+0ACh+var_94.storage], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x41734C",
-    "line": "call    sub_414500",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
     "mnemonic": "call",
     "size": 5
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x4173DC",
-    "line": "mov     ecx, offset EffectSettingCollection; this",
+    "line": "mov     ecx, 0B33508h; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -730,5 +730,101 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9AB400",
+    "line": "mov     eax, [ebp-98h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9AB406",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AB407",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AB40C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AB40D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AB40E",
+    "line": "lea     ecx, [ebp-28h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AB411",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AB416",
+    "line": "lea     ecx, [ebp-94h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9AB41C",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AB421",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AB425",
+    "line": "lea     eax, [edx-94h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9AB42B",
+    "line": "mov     ecx, [edx-98h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9AB431",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AB433",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AB438",
+    "line": "mov     eax, offset stru_AD8304",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AB43D",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

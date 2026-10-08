@@ -23,7 +23,7 @@
 0x7568E9: test    eax, eax
 0x7568EB: jz      short loc_7568FE
 0x7568ED: lea     ecx, [ecx+0]
-0x7568F0: cmp     eax, offset dword_B40AA4
+0x7568F0: cmp     eax, offset stru_B40AA4
 0x7568F5: jz      short loc_756905
 0x7568F7: mov     eax, [eax+4]
 0x7568FA: test    eax, eax

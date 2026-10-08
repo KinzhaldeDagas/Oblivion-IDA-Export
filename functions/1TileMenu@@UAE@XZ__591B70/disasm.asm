@@ -1,4 +1,4 @@
-0x591B70: push    0FFFFFFFFh
+0x591B70: push    0FFFFFFFFh; Verified lifecycle from UpdateMenuFades 0x584255: clears Menu_OpenMenuArray[classID-0x3E9], calls Menu_SetTileMenu(menu,NULL), then invokes Menu deleting destructor with flag 1. This establishes ownership: TileMenu root owns the Menu during teardown.
 0x591B72: push    offset ??1TileMenu@@UAE@XZ_SEH
 0x591B77: mov     eax, large fs:0
 0x591B7D: push    eax
@@ -38,8 +38,8 @@
 0x591BEA: call    eax
 0x591BEC: cmp     byte ptr [esi+4], 0
 0x591BF0: jnz     short loc_591BF9
-0x591BF2: mov     ecx, esi
-0x591BF4: call    sub_58DA70
+0x591BF2: mov     ecx, esi; this
+0x591BF4: call    Tile__Release; Verified: marks subtree release-in-progress (+5), clears matching interface active/drag references, marks released (+4), detaches parent, destroys each Value, detaches model, then deletes children. Native loop at 0x58DA90 advances child iterator EDX before call; pseudocode may omit this advance.
 0x591BF9: mov     ecx, esi; this
 0x591BFB: mov     [esp+1Ch+var_4], 0FFFFFFFFh
 0x591C03: call    ??1TileRect@@UAE@XZ; TileRect::~TileRect(void)
@@ -49,3 +49,12 @@
 0x591C14: pop     esi
 0x591C15: add     esp, 14h
 0x591C18: retn
+0x9BFBF0: mov     ecx, [ebp-10h]; this
+0x9BFBF3: jmp     ??1TileRect@@UAE@XZ; TileRect::~TileRect(void)
+0x9BFBF8: mov     edx, [esp+arg_4]
+0x9BFBFC: lea     eax, [edx-0Ch]
+0x9BFBFF: mov     ecx, [edx-10h]
+0x9BFC02: xor     ecx, eax
+0x9BFC04: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BFC09: mov     eax, offset stru_AE9058
+0x9BFC0E: jmp     ___CxxFrameHandler3

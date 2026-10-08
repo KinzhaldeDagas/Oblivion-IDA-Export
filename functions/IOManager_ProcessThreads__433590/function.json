@@ -1,19 +1,36 @@
 {
-  "callees_count": 28,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 15,
+  "chunks": [
+    [
+      "0x433590",
+      "0x433754"
+    ],
+    [
+      "0x9ABF80",
+      "0x9ABFAB"
+    ]
+  ],
+  "chunks_sha256": "ffb9b270414df782006ca16c1d0be60e6dd404445363ab12c9e5098cb6d86bb8",
+  "comment_regular": "MEF data-streaming pass: IOManager post-process pump uses QPC deadline and configured millisecond budget. Left unchanged; budget tuning needs runtime profiling and is not an IDA-proven engine bug.",
+  "comment_repeatable": "MEF data-streaming pass: IOManager post-process pump uses QPC deadline and configured millisecond budget. Left unchanged; budget tuning needs runtime profiling and is not an IDA-proven engine bug.\n\nMEF PERF 2026-09-07: Performance audit negative result: QPC deadline uses64-bit budget arithmetic and checks elapsed budget after completed task callbacks. No new timer defect established in this pass. Raising budgets would be scheduling policy and needs runtime profiling, not a verified bug patch.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 27,
   "display_name": "IOManager_ProcessThreads",
   "end_ea": "0x433754",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "IOManager_ProcessThreads",
   "segment": ".text",
   "sha256": "5aaa89a75ef57c9dc4e91727930839bc854f6ac93ef2c45da8e419d04a2ecb1b",
   "size": 452,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x433590",
+  "total_chunk_size": 495,
   "type": "volatile LONG **__thiscall(IOManager *this)",
-  "xrefs_from_count": 209,
+  "xrefs_from_count": 222,
   "xrefs_to_count": 2
 }

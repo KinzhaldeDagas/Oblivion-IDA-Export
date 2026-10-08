@@ -1,1 +1,1 @@
-PFN_SC_NOTIFY_CALLBACK
+typedef void (*PFN_SC_NOTIFY_CALLBACK)(void *);

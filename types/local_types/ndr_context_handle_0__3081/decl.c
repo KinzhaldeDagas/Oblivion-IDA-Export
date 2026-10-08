@@ -1,1 +1,1 @@
-ndr_context_handle_0
+typedef ndr_context_handle ndr_context_handle_0;

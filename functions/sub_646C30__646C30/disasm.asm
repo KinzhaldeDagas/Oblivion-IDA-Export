@@ -19,8 +19,8 @@
 0x646C69: jnz     short loc_646C9E
 0x646C6B: test    ebx, ebx
 0x646C6D: jz      loc_646DDE
-0x646C73: mov     ecx, ebx
-0x646C75: call    sub_567770
+0x646C73: mov     ecx, ebx; this
+0x646C75: call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.
 0x646C7A: test    al, al
 0x646C7C: jz      short loc_646C9E
 0x646C7E: lea     ebp, [edi+44h]
@@ -28,10 +28,10 @@
 0x646C83: call    ExtraDataList__GetExtraPackage
 0x646C88: mov     ecx, ebp
 0x646C8A: mov     ebx, eax
-0x646C8C: call    sub_41FB40
+0x646C8C: call    ExtraDataList_GetPackageExtraIndex; Returns ExtraPackage's package index field, or zero when absent.
 0x646C91: mov     ecx, ebp
 0x646C93: mov     [esp+58h+arg_0], eax
-0x646C97: call    sub_41FB60
+0x646C97: call    ExtraDataList_GetPackageExtraTarget; Returns ExtraPackage's target TESObjectREFR pointer, or null.
 0x646C9C: mov     ebp, eax
 0x646C9E: test    ebx, ebx
 0x646CA0: jz      loc_646DDE

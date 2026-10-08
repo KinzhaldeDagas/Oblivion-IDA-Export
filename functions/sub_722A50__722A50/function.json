@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x722A50",
+      "0x722A8B"
+    ]
+  ],
+  "chunks_sha256": "cd453b8ff7ba758858a5c5cf5436e114b39777cce6d4607407cf42d359ad346c",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "2026-10-08 verified Oblivion behavior: ECX geometry, raw stack modelData, RET4. Null modelData returns without mutation. Non-null reads collision at+A8, invokes vtable+54 then+50 with no stack arguments, then assigns geometryData+B4 through smart pointer helper. Correspondence to decoded Fallout/Xenon NiGeometry::SetModelData8224D988 is strong by control/call/data flow, but Fallout UpdateWorldData receives an update-data argument whereas Oblivion does not; offsets/ABI are not transplanted. Collision/destructor callbacks forbid treating this as an isolated pointer store. V265 keeps complete-call exclusion and old-pose revocation; only fresh subsequent owner proofs may publish.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_722A50",
+  "display_name": "NiGeometry_SetModelData",
   "end_ea": "0x722A8B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_722A50",
+  "name": "NiGeometry_SetModelData",
   "segment": ".text",
   "sha256": "cd453b8ff7ba758858a5c5cf5436e114b39777cce6d4607407cf42d359ad346c",
   "size": 59,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x722A50",
-  "type": "_DWORD *__thiscall(NiGeometry *this, NiGeometryData *a2)",
+  "total_chunk_size": 59,
+  "type": "void __thiscall(NiGeometry *self, NiGeometryData *modelData)",
   "xrefs_from_count": 24,
   "xrefs_to_count": 5
 }

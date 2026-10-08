@@ -2,7 +2,7 @@
 0x6760D1: push    edi
 0x6760D2: add     ecx, 68h ; 'h'; this
 0x6760D5: xor     bl, bl
-0x6760D7: call    sub_7616D0
+0x6760D7: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x6760DC: mov     edi, eax
 0x6760DE: test    edi, edi
 0x6760E0: jz      loc_67618D
@@ -50,7 +50,7 @@
 0x676158: mov     ecx, esi
 0x67615A: call    edx
 0x67615C: mov     ecx, eax
-0x67615E: call    sub_6135F0
+0x67615E: call    CombatController_GetCurrentTarget
 0x676163: cmp     eax, ebp
 0x676165: jnz     short loc_67617E
 0x676167: mov     eax, [esi]
@@ -58,3 +58,13 @@
 0x67616F: mov     ecx, esi
 0x676171: call    edx
 0x676173: mov     ecx, eax
+0x67617E: mov     bl, 1
+0x676180: mov     edi, [edi+4]
+0x676183: test    edi, edi
+0x676185: jnz     loc_6760F0
+0x67618B: pop     esi
+0x67618C: pop     ebp
+0x67618D: pop     edi
+0x67618E: mov     al, bl
+0x676190: pop     ebx
+0x676191: retn    4

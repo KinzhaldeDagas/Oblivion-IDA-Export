@@ -1,11 +1,11 @@
-0x4BE9D0: push    ebx
+0x4BE9D0: push    ebx; Verified: saves Climate WLS(T) weather list from +0x30, two textures at +0x38, model at +0x18, and 6-byte climate data at +0x50.
 0x4BE9D1: push    esi
 0x4BE9D2: push    edi
 0x4BE9D3: mov     ebx, ecx
 0x4BE9D5: call    TESForm_InitializeFormRecord
 0x4BE9DA: push    54534C57h
 0x4BE9DF: lea     ecx, [ebx+30h]
-0x4BE9E2: call    sub_4EEB30
+0x4BE9E2: call    OblivionTESWeatherList_SaveChunk; Verified: serializes each Oblivion weather entry as TESWeather FormID plus uint32 selectionWeight at +4; shared by climate WLS(T) and region RDWT.
 0x4BE9E7: xor     esi, esi
 0x4BE9E9: lea     edi, [ebx+38h]
 0x4BE9EC: lea     esp, [esp+0]
@@ -26,7 +26,7 @@
 0x4BEA22: lea     ecx, [ebx+50h]
 0x4BEA25: push    ecx; Src
 0x4BEA26: push    4D414E54h; int
-0x4BEA2B: call    TESForm_PutFormRecordChunkData
+0x4BEA2B: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4BEA30: add     esp, 0Ch
 0x4BEA33: pop     edi
 0x4BEA34: pop     esi

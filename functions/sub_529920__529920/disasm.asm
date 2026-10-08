@@ -25,8 +25,8 @@
 0x52996A: jnz     short loc_529971
 0x52996C: cmp     dword ptr [esi], 0
 0x52996F: jz      short loc_52997F
-0x529971: mov     ecx, [esi]; void *
-0x529973: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x529971: mov     ecx, [esi]; this
+0x529973: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x529978: mov     esi, [esi+4]
 0x52997B: test    esi, esi
 0x52997D: jnz     short loc_529966
@@ -37,8 +37,8 @@
 0x52998A: jnz     short loc_529991
 0x52998C: cmp     dword ptr [esi], 0
 0x52998F: jz      short loc_52999F
-0x529991: mov     ecx, [esi]; void *
-0x529993: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x529991: mov     ecx, [esi]; this
+0x529993: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x529998: mov     esi, [esi+4]
 0x52999B: test    esi, esi
 0x52999D: jnz     short loc_529986

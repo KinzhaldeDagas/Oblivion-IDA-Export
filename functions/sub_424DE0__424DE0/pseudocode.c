@@ -1,16 +1,16 @@
-void __thiscall sub_424DE0(ExtraDataList *this, const char *a2)
+void __userpurge sub_424DE0(ExtraDataList *this@<ecx>, char a2@<bpl>, const char *a3)
 {
-  ExtraLastFinishedSequence *v3; // eax
+  ExtraLastFinishedSequence *v4; // eax
   BSExtraData *FinishedSequence; // eax
 
-  BaseExtraList_RemoveExtraByType(this, 0x4Au);
-  if ( a2 )
+  BaseExtraList_RemoveExtraByType(this, 0x4Au); /*0x424e06*/
+  if ( a3 ) /*0x424e11*/
   {
-    v3 = (ExtraLastFinishedSequence *)FormHeapAlloc(0x10u);
-    if ( v3 )
-      FinishedSequence = (BSExtraData *)ExtraLastFinishedSequence::ExtraLastFinishedSequence(v3, a2);
+    v4 = (ExtraLastFinishedSequence *)FormHeapAlloc(0x10u); /*0x424e15*/
+    if ( v4 ) /*0x424e2b*/
+      FinishedSequence = (BSExtraData *)ExtraLastFinishedSequence::ExtraLastFinishedSequence(v4, a2, a3); /*0x424e30*/
     else
-      FinishedSequence = 0;
-    BaseExtraList_AddExtra(this, FinishedSequence);
+      FinishedSequence = 0; /*0x424e37*/
+    BaseExtraList_AddExtra(this, FinishedSequence); /*0x424e44*/
   }
 }

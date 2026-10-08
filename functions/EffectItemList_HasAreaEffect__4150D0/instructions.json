@@ -90,12 +90,6 @@
     "size": 2
   },
   {
-    "ea": "0x4150ED",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x4150F0",
     "line": "test    bl, bl",
     "mnemonic": "test",
@@ -133,7 +127,7 @@
   },
   {
     "ea": "0x4150FD",
-    "line": "call    EffectItem_GetArea",
+    "line": "call    EffectItem_GetArea; Effective area: returns 0 for EffectSetting NoArea (0x200) or Self range (0); otherwise raw EffectItem+0x8 area.",
     "mnemonic": "call",
     "size": 5
   },

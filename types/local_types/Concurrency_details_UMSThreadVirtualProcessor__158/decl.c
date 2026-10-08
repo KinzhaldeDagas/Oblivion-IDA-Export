@@ -1,1 +1,1 @@
-Concurrency::details::UMSThreadVirtualProcessor
+struct Concurrency::details::UMSThreadVirtualProcessor;

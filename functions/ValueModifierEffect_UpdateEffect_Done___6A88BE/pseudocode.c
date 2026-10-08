@@ -1,4 +1,4 @@
-int __stdcall ValueModifierEffect_UpdateEffect_::Done_(int a1)
+void __stdcall ValueModifierEffect_UpdateEffect_::Done_(int a1)
 {
-  return ValueModifierEffect_UpdateEffect_::Done(a1);
+  ValueModifierEffect_UpdateEffect_::Done(a1); /*0x6a88be*/
 }

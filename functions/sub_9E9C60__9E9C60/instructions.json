@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x9E9C60",
-    "line": "push    0Fh",
+    "line": "push    0Fh; defaultValue",
     "mnemonic": "push",
     "size": 2
   },
@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x9E9C67",
-    "line": "mov     ecx, offset dword_B370D0",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+3F8h); self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x9E9C6C",
-    "line": "call    GameSetting_ConstrAndReg",
+    "line": "call    GameSetting_ConstrAndReg; Register integer game setting iArrowMaxRefCount with default value 15. This pass does not yet assign its exact pruning caller.",
     "mnemonic": "call",
     "size": 5
   },

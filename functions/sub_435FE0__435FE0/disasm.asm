@@ -20,10 +20,10 @@
 0x43600C: mov     edx, [ecx+4]
 0x43600F: mov     ebx, eax
 0x436011: lea     eax, ds:0[ebp*4]
-0x436018: push    eax; Size
-0x436019: push    edx; Src
-0x43601A: push    ebx; Dst
-0x43601B: call    _memcpy
+0x436018: push    eax; byteCount
+0x436019: push    edx; source
+0x43601A: push    ebx; destination
+0x43601B: call    _memcpy;
 0x436020: xor     ecx, ecx
 0x436022: add     esp, 10h
 0x436025: cmp     [edi+1Ch], ecx
@@ -50,14 +50,14 @@
 0x43605A: push    edx
 0x43605B: call    eax
 0x43605D: push    esi
-0x43605E: call    FormHeapFree
+0x43605E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x436063: add     esp, 4
 0x436066: xor     ecx, ecx
 0x436068: cmp     [edi+1Ch], ecx
 0x43606B: jnz     short loc_436033
 0x43606D: pop     esi
 0x43606E: push    ebx
-0x43606F: call    FormHeapFree
+0x43606F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x436074: mov     ecx, [esp+18h+var_8]
 0x436078: mov     edx, [esp+18h+var_4]
 0x43607C: add     esp, 4

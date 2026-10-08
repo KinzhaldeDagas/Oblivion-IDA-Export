@@ -1,4 +1,4 @@
-0x4E3490: push    0FFFFFFFFh
+0x4E3490: push    0FFFFFFFFh; CustomAnimSupport decode: actor animation setup creates ActorAnimData, loads default animation data, then for living NPC/CREA actors calls 0x476080 to load actor-base KFFZ entries from <model-dir>\SpecialAnims.
 0x4E3492: push    offset SEH_4E3490
 0x4E3497: mov     eax, large fs:0
 0x4E349D: push    eax
@@ -6,13 +6,13 @@
 0x4E34A4: mov     eax, ds:0B30AACh
 0x4E34A9: xor     eax, esp
 0x4E34AB: mov     [esp+22Ch+var_10], eax
-0x4E34B2: push    ebx
-0x4E34B3: push    ebp
-0x4E34B4: push    esi
-0x4E34B5: push    edi
+0x4E34B2: push    ebx; float
+0x4E34B3: push    ebp; float
+0x4E34B4: push    esi; float
+0x4E34B5: push    edi; float
 0x4E34B6: mov     eax, ds:0B30AACh
 0x4E34BB: xor     eax, esp
-0x4E34BD: push    eax
+0x4E34BD: push    eax; float
 0x4E34BE: lea     eax, [esp+240h+var_C]
 0x4E34C5: mov     large fs:0, eax
 0x4E34CB: mov     ebp, ecx
@@ -33,7 +33,7 @@
 0x4E34F4: mov     ebx, eax
 0x4E34F6: push    0
 0x4E34F8: mov     ecx, ebp
-0x4E34FA: mov     [esp+244h+var_21C], ebx
+0x4E34FA: mov     [esp+244h+var_21C], ebx; float
 0x4E34FE: mov     [esp+244h+var_224], 0
 0x4E3506: call    sub_4D83B0
 0x4E350B: test    edi, edi
@@ -44,7 +44,7 @@
 0x4E351B: jnz     loc_4E3F06
 0x4E3521: mov     esi, [ebp+1Ch]
 0x4E3524: cmp     byte ptr [esi+4], 23h ; '#'
-0x4E3528: mov     [esp+240h+var_228], esi
+0x4E3528: mov     [esp+240h+var_228], esi; float
 0x4E352C: jz      short loc_4E3536
 0x4E352E: mov     ecx, esi
 0x4E3530: cmp     byte ptr [ecx+4], 24h ; '$'
@@ -97,9 +97,9 @@
 0x4E35C8: mov     edx, [edi+0B0h]
 0x4E35CE: cmp     dword ptr [edx], 0
 0x4E35D1: jz      loc_4E37FD
-0x4E35D7: push    0
-0x4E35D9: mov     ecx, edi
-0x4E35DB: call    sub_405790
+0x4E35D7: push    0; index
+0x4E35D9: mov     ecx, edi; this
+0x4E35DB: call    NiNode_GetChildAtIndex
 0x4E35E0: cmp     dword ptr [eax+0Ch], 0
 0x4E35E4: jz      loc_4E37FD
 0x4E35EA: mov     eax, [ebp+0]
@@ -107,9 +107,9 @@
 0x4E35F0: push    2000000h
 0x4E35F5: mov     ecx, ebp
 0x4E35F7: call    edx
-0x4E35F9: push    0
-0x4E35FB: mov     ecx, edi
-0x4E35FD: call    sub_405790
+0x4E35F9: push    0; index
+0x4E35FB: mov     ecx, edi; this
+0x4E35FD: call    NiNode_GetChildAtIndex
 0x4E3602: mov     eax, [eax+0Ch]
 0x4E3605: push    eax
 0x4E3606: push    offset stru_B3CAC0
@@ -152,7 +152,7 @@
 0x4E3685: call    sub_45A500
 0x4E368A: lea     ecx, [ebp+44h]
 0x4E368D: mov     byte ptr [esp+240h+var_21C], al
-0x4E3691: call    sub_420FD0
+0x4E3691: call    ExtraDataList_GetLastFinishedSequence; Returns the pointer payload of ExtraLastFinishedSequence (type 0x4A), or null.
 0x4E3696: test    eax, eax
 0x4E3698: jz      short loc_4E36A7
 0x4E369A: mov     ecx, ds:0B33B00h
@@ -181,14 +181,14 @@
 0x4E36E1: mov     [esp+244h+var_229], 1
 0x4E36E6: call    sub_45A530
 0x4E36EB: mov     ecx, ds:0B102E0h
-0x4E36F1: push    ecx
-0x4E36F2: mov     ecx, esi
-0x4E36F4: call    sub_4715A0
+0x4E36F1: push    ecx; name
+0x4E36F2: mov     ecx, esi; this
+0x4E36F4: call    NiControllerManager_FindSequenceByName; Looks up a NiControllerSequence by name in the controller manager name map at +0x58; returns null on miss.
 0x4E36F9: mov     edx, ds:0B10328h
-0x4E36FF: push    edx
-0x4E3700: mov     ecx, esi
+0x4E36FF: push    edx; name
+0x4E3700: mov     ecx, esi; this
 0x4E3702: mov     edi, eax
-0x4E3704: call    sub_4715A0
+0x4E3704: call    NiControllerManager_FindSequenceByName; Looks up a NiControllerSequence by name in the controller manager name map at +0x58; returns null on miss.
 0x4E3709: test    edi, edi
 0x4E370B: mov     ebx, eax
 0x4E370D: jnz     short loc_4E3783
@@ -199,22 +199,22 @@
 0x4E371E: fldz
 0x4E3720: or      word ptr [esi+8], 8
 0x4E3725: push    ecx
-0x4E3726: fstp    dword ptr [esp+244h+var_244]; float
-0x4E3729: mov     ecx, esi
-0x4E372B: call    sub_4715C0
+0x4E3726: fstp    dword ptr [esp+244h+var_244]; easeOutTime
+0x4E3729: mov     ecx, esi; this
+0x4E372B: call    NiControllerManager_DeactivateAllSequences; Iterates all controller-manager sequence slots and deactivates each sequence with the supplied ease-out time and transition flag zero.
 0x4E3730: fldz
 0x4E3732: mov     eax, [esi+40h]
 0x4E3735: mov     edi, [eax]
-0x4E3737: push    ebx; int
+0x4E3737: push    ebx; timeSyncSequence
 0x4E3738: sub     esp, 8
-0x4E373B: fstp    [esp+24Ch+a2]; float
+0x4E373B: fstp    [esp+24Ch+a2]; easeInTime
 0x4E373F: mov     ecx, esi
 0x4E3741: fld1
-0x4E3743: fstp    [esp+24Ch+var_24C]; float
-0x4E3746: push    ebx; int
-0x4E3747: push    ebx; int
-0x4E3748: push    edi; int
-0x4E3749: call    sub_470B20
+0x4E3743: fstp    [esp+24Ch+weight]; weight
+0x4E3746: push    ebx; startOver
+0x4E3747: push    ebx; priority
+0x4E3748: push    edi; sequence
+0x4E3749: call    BSAnimGroupSequence_Activate; BSAnimGroupSequence activation wrapper. Delegates to NiControllerSequence_Activate with the final transition flag forced to zero.
 0x4E374E: fld     dword ptr ds:0A7DEB4h
 0x4E3754: fchs
 0x4E3756: push    1; a3
@@ -223,27 +223,27 @@
 0x4E375C: fld     dword ptr [edi+2Ch]
 0x4E375F: mov     ecx, [esp+248h+var_220]; this
 0x4E3763: fstp    [esp+248h+a2]; a2
-0x4E3766: call    NiAVObject_UpdateNiAVObject
+0x4E3766: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x4E376B: fldz
 0x4E376D: push    ecx
-0x4E376E: mov     ecx, esi
-0x4E3770: fstp    dword ptr [esp+244h+var_244]; float
-0x4E3773: call    sub_4715C0
+0x4E376E: mov     ecx, esi; this
+0x4E3770: fstp    dword ptr [esp+244h+var_244]; easeOutTime
+0x4E3773: call    NiControllerManager_DeactivateAllSequences; Iterates all controller-manager sequence slots and deactivates each sequence with the supplied ease-out time and transition flag zero.
 0x4E3778: and     word ptr [esi+8], 0FFF7h
 0x4E377E: jmp     loc_4E3E4B
 0x4E3783: cmp     dword ptr [edi+24h], 0
 0x4E3787: jnz     short loc_4E37B2
 0x4E3789: fldz
-0x4E378B: push    0; int
+0x4E378B: push    0; timeSyncSequence
 0x4E378D: sub     esp, 8
-0x4E3790: fstp    [esp+24Ch+a2]; float
+0x4E3790: fstp    [esp+24Ch+a2]; easeInTime
 0x4E3794: fld1
 0x4E3796: mov     ecx, esi
-0x4E3798: fstp    [esp+24Ch+var_24C]; float
-0x4E379B: push    0; int
-0x4E379D: push    0; int
-0x4E379F: push    edi; int
-0x4E37A0: call    sub_470B20
+0x4E3798: fstp    [esp+24Ch+weight]; weight
+0x4E379B: push    0; startOver
+0x4E379D: push    0; priority
+0x4E379F: push    edi; sequence
+0x4E37A0: call    BSAnimGroupSequence_Activate; BSAnimGroupSequence activation wrapper. Delegates to NiControllerSequence_Activate with the final transition flag forced to zero.
 0x4E37A5: fld     dword ptr ds:0A7DEB4h
 0x4E37AB: fchs
 0x4E37AD: fstp    dword ptr [edi+48h]
@@ -258,16 +258,16 @@
 0x4E37C9: test    ebx, ebx
 0x4E37CB: jz      loc_4E3E4B
 0x4E37D1: fldz
-0x4E37D3: push    0; int
+0x4E37D3: push    0; timeSyncSequence
 0x4E37D5: sub     esp, 8
-0x4E37D8: fstp    [esp+24Ch+a2]; float
+0x4E37D8: fstp    [esp+24Ch+a2]; easeInTime
 0x4E37DC: fld1
 0x4E37DE: mov     ecx, esi
-0x4E37E0: fstp    [esp+24Ch+var_24C]; float
-0x4E37E3: push    0; int
-0x4E37E5: push    0; int
-0x4E37E7: push    ebx; int
-0x4E37E8: call    sub_470B20
+0x4E37E0: fstp    [esp+24Ch+weight]; weight
+0x4E37E3: push    0; startOver
+0x4E37E5: push    0; priority
+0x4E37E7: push    ebx; sequence
+0x4E37E8: call    BSAnimGroupSequence_Activate; BSAnimGroupSequence activation wrapper. Delegates to NiControllerSequence_Activate with the final transition flag forced to zero.
 0x4E37ED: fld     dword ptr ds:0A7DEB4h
 0x4E37F3: fchs
 0x4E37F5: fstp    dword ptr [ebx+48h]
@@ -289,7 +289,7 @@
 0x4E3826: mov     [esp+240h+var_4], 0
 0x4E3831: jz      short loc_4E383C
 0x4E3833: mov     ecx, eax
-0x4E3835: call    NewActorAnimData
+0x4E3835: call    NewActorAnimData; Allocates and initializes ActorAnimData. Creates the +0x9C 0x65-bucket UInt16 animation-key map; nulls manager/root/accumulation, active-slot, pending-KF, and sequence pointers; initializes current/queued keys to 0xFFFF:0xFFFF, action arrays to -1, update state +0x90 to 0xFF, and blend scales +0xBC/+0xC0 to 1.0.
 0x4E383A: jmp     short loc_4E383E
 0x4E383C: xor     eax, eax
 0x4E383E: push    eax
@@ -333,14 +333,14 @@
 0x4E38BC: call    eax
 0x4E38BE: mov     ecx, ds:0B33A1Ch
 0x4E38C4: push    eax; char *
-0x4E38C5: call    sub_435830
+0x4E38C5: call    BuildKFListForModelDirectory; Builds a KF path list for a model directory. Feeds ModelLoader KF discovery used by actor animation setup and generated attack/idle lists.
 0x4E38CA: mov     edi, eax
 0x4E38CC: jmp     loc_4E3A18
 0x4E38D1: mov     ecx, ds:0A2FFB8h
 0x4E38D7: mov     dx, ds:0A2FFBCh
 0x4E38DE: lea     eax, [esp+240h+Str]
 0x4E38E2: mov     dword ptr [esp+240h+Str], ecx
-0x4E38E6: mov     [esp+240h+var_214], dx
+0x4E38E6: mov     word ptr [esp+240h+var_214], dx
 0x4E38EB: add     eax, 0FFFFFFFFh
 0x4E38EE: mov     edi, edi
 0x4E38F0: mov     cl, [eax+1]
@@ -413,7 +413,7 @@
 0x4E39BF: lea     ecx, [esp+248h+Str]
 0x4E39C3: push    ecx; Str
 0x4E39C4: mov     ecx, ds:0B33A1Ch
-0x4E39CA: call    sub_434850
+0x4E39CA: call    ModelLoader_BuildFileListWithArchives; Thin wrapper over ModelLoader_BuildFileListWildcard with archive lookup enabled. Power-attack/KF discovery uses this to enumerate candidate model paths.
 0x4E39CF: mov     edx, ds:0A370D0h
 0x4E39D5: mov     [esi], edx
 0x4E39D7: mov     edi, eax
@@ -433,14 +433,14 @@
 0x4E3A04: lea     ecx, [esp+248h+Str]
 0x4E3A08: push    ecx; Str
 0x4E3A09: mov     ecx, ds:0B33A1Ch
-0x4E3A0F: call    sub_434850
+0x4E3A0F: call    ModelLoader_BuildFileListWithArchives; Thin wrapper over ModelLoader_BuildFileListWildcard with archive lookup enabled. Power-attack/KF discovery uses this to enumerate candidate model paths.
 0x4E3A14: mov     esi, [esp+240h+var_228]
 0x4E3A18: push    ebp; int
 0x4E3A19: push    ebx; int
 0x4E3A1A: mov     ebx, [esp+248h+var_224]
 0x4E3A1E: push    edi; int
 0x4E3A1F: mov     ecx, ebx; this
-0x4E3A21: call    Menu_PickIdles??
+0x4E3A21: call    Menu_PickIdles; Menu_PickIdles loader. Loads candidate idle KF paths from a list, filters power attacks for menu/player contexts, installs valid sequences, and initializes the selected idle sequence on the target node.
 0x4E3A26: test    al, al
 0x4E3A28: jnz     short loc_4E3A48
 0x4E3A2A: mov     eax, [esi+0Ch]
@@ -462,7 +462,7 @@
 0x4E3A5C: mov     edi, [esp+240h+var_228]
 0x4E3A60: lea     esi, [edi+94h]
 0x4E3A66: mov     ecx, esi
-0x4E3A68: call    TESAnimation_HasAnimations
+0x4E3A68: call    TESAnimation_HasAnimations; TESAnimation has any entries: returns embedded list first data pointer nonzero.
 0x4E3A6D: test    al, al
 0x4E3A6F: jz      short loc_4E3ABE
 0x4E3A71: mov     edx, [edi+0ACh]
@@ -484,13 +484,13 @@
 0x4E3AA3: test    eax, eax
 0x4E3AA5: jz      short loc_4E3ABE
 0x4E3AA7: lea     edx, [esp+240h+Str]
-0x4E3AAB: push    edx
+0x4E3AAB: push    edx; modelDirectory
 0x4E3AAC: mov     ecx, esi
 0x4E3AAE: mov     byte ptr [eax], 0
-0x4E3AB1: call    sub_6899C0
-0x4E3AB6: push    eax
-0x4E3AB7: mov     ecx, ebx
-0x4E3AB9: call    sub_476080
+0x4E3AB1: call    EmbeddedList_GetHead; Creature special anim load: get TESAnimation list head and load entries from <model dir>\SpecialAnims.
+0x4E3AB6: push    eax; kffzEntries
+0x4E3AB7: mov     ecx, ebx; this
+0x4E3AB9: call    ActorAnimData_LoadKFFZSpecialAnims; Creature branch: the first of exactly two direct ActorAnimData_LoadKFFZSpecialAnims call sites; reached only for a living creature after default animation setup.
 0x4E3ABE: test    ebx, ebx
 0x4E3AC0: jz      loc_4E3E4B
 0x4E3AC6: mov     ecx, ebx
@@ -507,7 +507,7 @@
 0x4E3AEF: mov     [esp+240h+var_4], 1
 0x4E3AFA: jz      short loc_4E3B05
 0x4E3AFC: mov     ecx, eax
-0x4E3AFE: call    NewActorAnimData
+0x4E3AFE: call    NewActorAnimData; Allocates and initializes ActorAnimData. Creates the +0x9C 0x65-bucket UInt16 animation-key map; nulls manager/root/accumulation, active-slot, pending-KF, and sequence pointers; initializes current/queued keys to 0xFFFF:0xFFFF, action arrays to -1, update state +0x90 to 0xFF, and blend scales +0xBC/+0xC0 to 1.0.
 0x4E3B03: jmp     short loc_4E3B07
 0x4E3B05: xor     eax, eax
 0x4E3B07: push    eax
@@ -516,14 +516,14 @@
 0x4E3B15: call    sub_4D83B0
 0x4E3B1A: mov     ecx, [ebp+3Ch]
 0x4E3B1D: test    ecx, ecx
-0x4E3B1F: mov     [esp+240h+var_224], eax
+0x4E3B1F: mov     [esp+240h+var_224], eax; float
 0x4E3B23: jz      short loc_4E3B36
 0x4E3B25: mov     eax, [ecx]
 0x4E3B27: mov     edx, [eax+8]
 0x4E3B2A: call    edx
 0x4E3B2C: mov     ebx, eax
 0x4E3B2E: test    ebx, ebx
-0x4E3B30: mov     [esp+240h+var_220], ebx
+0x4E3B30: mov     [esp+240h+var_220], ebx; float
 0x4E3B34: jnz     short loc_4E3B5B
 0x4E3B36: mov     ecx, [esp+240h+var_228]
 0x4E3B3A: mov     eax, [ecx+0Ch]
@@ -552,14 +552,14 @@
 0x4E3B8B: call    edx
 0x4E3B8D: mov     ecx, ds:0B33A1Ch
 0x4E3B93: push    eax; char *
-0x4E3B94: call    sub_435830
+0x4E3B94: call    BuildKFListForModelDirectory; Builds a KF path list for a model directory. Feeds ModelLoader KF discovery used by actor animation setup and generated attack/idle lists.
 0x4E3B99: mov     edi, eax
 0x4E3B9B: jmp     loc_4E3CE8
 0x4E3BA0: mov     eax, ds:0A2FFB8h
 0x4E3BA5: mov     cx, ds:0A2FFBCh
-0x4E3BAC: mov     dword ptr [esp+240h+Str], eax
+0x4E3BAC: mov     dword ptr [esp+240h+Str], eax; float
 0x4E3BB0: lea     eax, [esp+240h+Str]
-0x4E3BB4: mov     [esp+240h+var_214], cx
+0x4E3BB4: mov     word ptr [esp+240h+var_214], cx; float
 0x4E3BB9: add     eax, 0FFFFFFFFh
 0x4E3BBC: lea     esp, [esp+0]
 0x4E3BC0: mov     cl, [eax+1]
@@ -590,7 +590,6 @@
 0x4E3C16: add     esp, 4
 0x4E3C19: mov     ecx, eax
 0x4E3C1B: jmp     short loc_4E3C20
-0x4E3C1D: align 10h
 0x4E3C20: mov     dl, [eax]
 0x4E3C22: add     eax, 1
 0x4E3C25: test    dl, dl
@@ -633,7 +632,7 @@
 0x4E3C8F: lea     ecx, [esp+248h+Str]
 0x4E3C93: push    ecx; Str
 0x4E3C94: mov     ecx, ds:0B33A1Ch
-0x4E3C9A: call    sub_434850
+0x4E3C9A: call    ModelLoader_BuildFileListWithArchives; Thin wrapper over ModelLoader_BuildFileListWildcard with archive lookup enabled. Power-attack/KF discovery uses this to enumerate candidate model paths.
 0x4E3C9F: mov     edx, ds:0A370D0h
 0x4E3CA5: mov     [esi], edx
 0x4E3CA7: mov     edi, eax
@@ -653,13 +652,13 @@
 0x4E3CD4: lea     ecx, [esp+248h+Str]
 0x4E3CD8: push    ecx; Str
 0x4E3CD9: mov     ecx, ds:0B33A1Ch
-0x4E3CDF: call    sub_434850
+0x4E3CDF: call    ModelLoader_BuildFileListWithArchives; Thin wrapper over ModelLoader_BuildFileListWildcard with archive lookup enabled. Power-attack/KF discovery uses this to enumerate candidate model paths.
 0x4E3CE4: mov     esi, [esp+240h+var_228]
 0x4E3CE8: mov     ecx, [esp+240h+var_224]; this
 0x4E3CEC: push    ebp; int
 0x4E3CED: push    ebx; int
 0x4E3CEE: push    edi; int
-0x4E3CEF: call    Menu_PickIdles??
+0x4E3CEF: call    Menu_PickIdles; Menu_PickIdles loader. Loads candidate idle KF paths from a list, filters power attacks for menu/player contexts, installs valid sequences, and initializes the selected idle sequence on the target node.
 0x4E3CF4: test    al, al
 0x4E3CF6: jnz     short loc_4E3D16
 0x4E3CF8: mov     eax, [esi+0Ch]
@@ -681,35 +680,35 @@
 0x4E3D2A: mov     edi, [esp+240h+var_228]
 0x4E3D2E: lea     esi, [edi+94h]
 0x4E3D34: mov     ecx, esi
-0x4E3D36: call    TESAnimation_HasAnimations
+0x4E3D36: call    TESAnimation_HasAnimations; TESAnimation has any entries: returns embedded list first data pointer nonzero.
 0x4E3D3B: test    al, al
 0x4E3D3D: jz      short loc_4E3D97
 0x4E3D3F: mov     edx, [edi+0ACh]
 0x4E3D45: mov     eax, [edx+14h]
 0x4E3D48: lea     ecx, [edi+0ACh]
 0x4E3D4E: call    eax
-0x4E3D50: lea     edx, [esp+240h+var_114]
+0x4E3D50: lea     edx, [esp+240h+modelDirectory]
 0x4E3D57: mov     cl, [eax]
 0x4E3D59: mov     [edx], cl
 0x4E3D5B: add     eax, 1
 0x4E3D5E: add     edx, 1
 0x4E3D61: test    cl, cl
 0x4E3D63: jnz     short loc_4E3D57
-0x4E3D65: lea     ecx, [esp+240h+var_114]
+0x4E3D65: lea     ecx, [esp+240h+modelDirectory]
 0x4E3D6C: push    5Ch ; '\'; Ch
 0x4E3D6E: push    ecx; Str
 0x4E3D6F: call    _strrchr
 0x4E3D74: add     esp, 8
 0x4E3D77: test    eax, eax
 0x4E3D79: jz      short loc_4E3D97
-0x4E3D7B: lea     edx, [esp+240h+var_114]
-0x4E3D82: push    edx
+0x4E3D7B: lea     edx, [esp+240h+modelDirectory]
+0x4E3D82: push    edx; modelDirectory
 0x4E3D83: mov     ecx, esi
 0x4E3D85: mov     byte ptr [eax], 0
-0x4E3D88: call    sub_6899C0
-0x4E3D8D: mov     ecx, [esp+244h+var_224]
-0x4E3D91: push    eax
-0x4E3D92: call    sub_476080
+0x4E3D88: call    EmbeddedList_GetHead; NPC special anim load: get TESAnimation list head and load entries from <model dir>\SpecialAnims.
+0x4E3D8D: mov     ecx, [esp+244h+var_224]; this
+0x4E3D91: push    eax; kffzEntries
+0x4E3D92: call    ActorAnimData_LoadKFFZSpecialAnims; NPC/player actor-base branch: the second of exactly two direct ActorAnimData_LoadKFFZSpecialAnims call sites; loads the base model KFFZ list, not PlayerCharacter::firstPersonAnimData.
 0x4E3D97: mov     esi, [ebp+58h]
 0x4E3D9A: test    esi, esi
 0x4E3D9C: jz      loc_4E3E2B
@@ -724,11 +723,11 @@
 0x4E3DBA: push    1
 0x4E3DBC: mov     ecx, esi
 0x4E3DBE: call    edx
-0x4E3DC0: mov     ecx, ds:0B333C4h
+0x4E3DC0: mov     ecx, ds:0B333C4h; this
 0x4E3DC6: cmp     ebp, ecx
 0x4E3DC8: jnz     short loc_4E3E04
-0x4E3DCA: push    1
-0x4E3DCC: call    sub_6600D0
+0x4E3DCA: push    1; firstPerson
+0x4E3DCC: call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.
 0x4E3DD1: mov     ebx, [esp+240h+var_21C]
 0x4E3DD5: cmp     ebx, eax
 0x4E3DD7: jnz     short loc_4E3E08
@@ -736,9 +735,9 @@
 0x4E3DDC: mov     esi, [edi]
 0x4E3DDE: mov     ecx, ds:0B333C4h; this
 0x4E3DE4: push    ebp
-0x4E3DE5: push    1; a2
+0x4E3DE5: push    1; firstPerson
 0x4E3DE7: add     esi, 150h
-0x4E3DED: call    Player_GetAnimData
+0x4E3DED: call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.
 0x4E3DF2: push    eax
 0x4E3DF3: push    ebx
 0x4E3DF4: mov     ecx, ebp
@@ -752,9 +751,9 @@
 0x4E3E08: mov     edi, [ebp+58h]
 0x4E3E0B: mov     esi, [edi]
 0x4E3E0D: push    ebp
-0x4E3E0E: mov     ecx, ebp
+0x4E3E0E: mov     ecx, ebp; this
 0x4E3E10: add     esi, 150h
-0x4E3E16: call    TESObjectREFR_GetAnimData
+0x4E3E16: call    TESObjectREFR_GetAnimData; Return active ActorAnimData for an actor reference. For actor/creature refs with process level 0 or 1, return process+0x17C; otherwise tail-call the ExtraAnim lookup on the reference extra list. Exact return type is ActorAnimData*.
 0x4E3E1B: push    eax
 0x4E3E1C: push    ebx
 0x4E3E1D: mov     ecx, ebp
@@ -768,11 +767,11 @@
 0x4E3E31: jz      short loc_4E3E4B
 0x4E3E33: fld     dword ptr ds:0A30634h
 0x4E3E39: sub     esp, 8
-0x4E3E3C: fstp    dword ptr [esp+248h+var_244]; float
+0x4E3E3C: fstp    dword ptr [esp+248h+var_244]; explicitTimeOrMinusOne
 0x4E3E40: fldz
-0x4E3E42: fstp    [esp+248h+a2]; float
-0x4E3E45: push    ebp; int
-0x4E3E46: call    sub_476D10
+0x4E3E42: fstp    [esp+248h+a2]; deltaTime
+0x4E3E45: push    ebp; ownerActor
+0x4E3E46: call    ActorAnimData_Update; Oblivion ActorAnimData scheduler with exact native ABI: this in ECX plus three 4-byte stack arguments, retn 0x0C. ownerActor is at [EBP+8]; all surveyed callers pass the owning Actor/Player, but the native body never dereferences it, so an interior hook's use of that value is a caller-derived contract. deltaTime at [EBP+0x0C] advances ActorAnimData time +0x94 and sequence offsets. explicitTimeOrMinusOne at [EBP+0x10] uses -1.0 for normal ticking; any other value drives an explicit-time scene update/early return. The function drains deferred KF models, maintains power/idle state, samples five slots, and advances required-note templates (class 4 terminal index 3; class 7 terminal index 4).
 0x4E3E4B: mov     eax, [ebp+0]
 0x4E3E4E: mov     edx, [eax+190h]
 0x4E3E54: mov     ecx, ebp
@@ -810,22 +809,22 @@
 0x4E3EA8: cmp     ebp, ecx
 0x4E3EAA: jnz     short loc_4E3EC2
 0x4E3EAC: mov     edi, [esi]
-0x4E3EAE: push    1; a2
+0x4E3EAE: push    1; firstPerson
 0x4E3EB0: add     edi, 114h
-0x4E3EB6: call    Player_GetAnimData
+0x4E3EB6: call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.
 0x4E3EBB: push    eax
 0x4E3EBC: mov     eax, [edi]
 0x4E3EBE: mov     ecx, esi
 0x4E3EC0: call    eax
 0x4E3EC2: mov     ecx, [esp+240h+var_220]
-0x4E3EC6: push    offset dword_B3CD7C
+0x4E3EC6: push    offset stru_B3CD7C
 0x4E3ECB: call    sub_700010
 0x4E3ED0: test    eax, eax
 0x4E3ED2: jz      short loc_4E3ED9
 0x4E3ED4: or      word ptr [eax+8], 40h
 0x4E3ED9: lea     esi, [ebp+44h]
 0x4E3EDC: mov     ecx, esi
-0x4E3EDE: call    sub_41E620
+0x4E3EDE: call    ExtraDataList_GetAnimation; Returns ExtraAnim (type 0x34). Confirmed by Actor_SetupAnimationData consumer and ExtraDataList_SetAnimation ownership behavior.
 0x4E3EE3: test    eax, eax
 0x4E3EE5: jz      short loc_4E3F06
 0x4E3EE7: cmp     [esp+240h+var_224], 0
@@ -835,7 +834,7 @@
 0x4E3EF3: push    ecx
 0x4E3EF4: mov     ecx, [ebp+3Ch]; this
 0x4E3EF7: fstp    [esp+248h+a2]; a2
-0x4E3EFA: call    NiAVObject_UpdateNiAVObject
+0x4E3EFA: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x4E3EFF: mov     ecx, esi
 0x4E3F01: call    sub_41F5A0
 0x4E3F06: mov     ecx, dword ptr [esp+240h+var_C]
@@ -850,3 +849,24 @@
 0x4E3F22: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x4E3F27: add     esp, 22Ch
 0x4E3F2D: retn
+0x9B5C40: mov     eax, [ebp-21Ch]
+0x9B5C46: push    eax
+0x9B5C47: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B5C4C: pop     ecx
+0x9B5C4D: retn
+0x9B5C4E: mov     eax, [ebp-220h]
+0x9B5C54: push    eax
+0x9B5C55: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B5C5A: pop     ecx
+0x9B5C5B: retn
+0x9B5C5C: mov     edx, [esp+arg_4]
+0x9B5C60: lea     eax, [edx-230h]
+0x9B5C66: mov     ecx, [edx-234h]
+0x9B5C6C: xor     ecx, eax
+0x9B5C6E: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B5C73: add     eax, 10h
+0x9B5C76: mov     ecx, [edx-4]
+0x9B5C79: xor     ecx, eax
+0x9B5C7B: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B5C80: mov     eax, offset stru_AE0C24
+0x9B5C85: jmp     ___CxxFrameHandler3

@@ -1,11 +1,11 @@
 bool __thiscall sub_683AA0(int this)
 {
-  BSExtraData *v1; // esi
-  NiDX92DBufferData *v2; // eax
+  TeleportData *v1; // esi
+  TESObjectREFR *LinkedDoor; // eax
 
-  v1 = (BSExtraData *)(this + 0x14);
-  if ( !sub_42B410((BSExtraData *)(this + 0x14)) )
-    return 0;
-  v2 = (NiDX92DBufferData *)sub_42B410(v1);
-  return NiDX92DBufferData::GetSurfaceData(v2) == 0;
+  v1 = (TeleportData *)(this + 0x14); /*0x683aa1*/
+  if ( !TeleportData_GetLinkedDoor((TeleportData *)(this + 0x14)) ) /*0x683aa6*/
+    return 0; /*0x683ac6*/
+  LinkedDoor = TeleportData_GetLinkedDoor(v1); /*0x683ab1*/
+  return NiDX92DBufferData::GetSurfaceData((NiDX92DBufferData *)LinkedDoor) == 0; /*0x683ac4*/
 }

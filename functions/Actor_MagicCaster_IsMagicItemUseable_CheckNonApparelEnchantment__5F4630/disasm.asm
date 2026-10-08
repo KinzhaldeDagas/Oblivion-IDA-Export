@@ -11,4 +11,4 @@
 0x5F464D: cmp     dword ptr [eax+34h], 3
 0x5F4651: setnz   al
 0x5F4654: test    al, al
-0x5F4656: jz      Actor_MagicCaster_IsMagicItemUseable___SetFailureCode
+0x5F4656: jz      Actor_MagicCaster_IsMagicItemUseable___SetFailureCode; UCWUS pipeline note: current plugin patch NOPs this apparel-enchantment rejection branch when UCWUSSetEnginePatchEnabled 1 is called. This only permits apparel enchantments to proceed; it does not own cast charge/equip/recharge state.

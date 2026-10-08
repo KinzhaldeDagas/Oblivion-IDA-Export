@@ -1,1 +1,4 @@
-tagFOCUS_EVENT_RECORD
+struct tagFOCUS_EVENT_RECORD
+{
+BOOL bSetFocus;
+};

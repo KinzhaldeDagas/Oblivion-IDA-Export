@@ -6,7 +6,7 @@
 0x65A78B: push    ebx
 0x65A78C: push    edi
 0x65A78D: mov     esi, ecx
-0x65A78F: call    TESObjectREFR_LinkModifiedForm
+0x65A78F: call    TESObjectREFR_LinkModifiedForm; Verified enable-state linking: reads ExtraEnableStateParent's bit 0x800, applies inverse mode when configured, and propagates the resulting disabled state to the reference through TESForm_SetDisabledFlag. It removes 3D when either disabled bit 0x800 or deleted bit 0x20 is set.
 0x65A794: cmp     dword ptr [esi+58h], 0
 0x65A798: jz      short loc_65A7AA
 0x65A79A: mov     ecx, [esi+58h]

@@ -24,7 +24,6 @@
 0x48E9E0: mov     [esp+30h+var_1C], eax
 0x48E9E4: jz      loc_48ED3A
 0x48E9EA: jmp     short loc_48E9F4
-0x48E9EC: align 10h
 0x48E9F0: mov     eax, [esp+30h+var_1C]
 0x48E9F4: mov     ebx, [eax]
 0x48E9F6: xor     esi, esi
@@ -92,8 +91,8 @@
 0x48EAA2: mov     ebx, [ebp+0]
 0x48EAA5: test    ebx, ebx
 0x48EAA7: jz      short loc_48EAC2
-0x48EAA9: mov     ecx, ebx
-0x48EAAB: call    sub_41E790
+0x48EAA9: mov     ecx, ebx; this
+0x48EAAB: call    ExtraDataList_GetOriginalReference; Return the TESObjectREFR payload stored in ExtraOriginalReference type 0x26. It cannot redirect an AMMO-keyed inventory entry to a WEAP form.
 0x48EAB0: test    eax, eax
 0x48EAB2: jz      short loc_48EABB
 0x48EAB4: mov     ecx, ebx
@@ -140,7 +139,7 @@
 0x48EB20: mov     ecx, [esi]
 0x48EB22: test    ecx, ecx
 0x48EB24: jz      loc_48ED0C
-0x48EB2A: call    BSSimpleList_Clear
+0x48EB2A: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x48EB2F: jmp     loc_48ED0C
 0x48EB34: mov     ecx, edi
 0x48EB36: call    sub_4845D0
@@ -171,14 +170,13 @@
 0x48EB7A: mov     edi, [edi]
 0x48EB7C: test    edi, edi
 0x48EB7E: jz      loc_48ECD0
-0x48EB84: mov     ebx, [esp+30h+arg_4]
+0x48EB84: mov     ebx, [esp+30h+originalReference]
 0x48EB88: jmp     short loc_48EB90
-0x48EB8A: align 10h
-0x48EB90: mov     ecx, [edi]
+0x48EB90: mov     ecx, [edi]; this
 0x48EB92: test    ecx, ecx
 0x48EB94: jz      loc_48ECD0
-0x48EB9A: push    ebx
-0x48EB9B: call    sub_41E710
+0x48EB9A: push    ebx; originalReference
+0x48EB9B: call    ExtraDataList_SetOriginalReferenceExtra; Set ExtraOriginalReference (type 0x26) to a live TESObjectREFR. This provenance is used for synthetic/reference projections, is excluded by relevant copy paths, and is never interpreted by pickup as a base-form override.
 0x48EBA0: mov     eax, [edi]
 0x48EBA2: mov     ecx, [esi]
 0x48EBA4: push    eax
@@ -186,10 +184,10 @@
 0x48EBAA: mov     edi, [edi+4]
 0x48EBAD: test    edi, edi
 0x48EBAF: jnz     short loc_48EB90
-0x48EBB1: mov     ecx, [esp+30h+arg_0]
-0x48EBB5: push    1
-0x48EBB7: push    esi
-0x48EBB8: call    ContainerExtraData_AddEntry
+0x48EBB1: mov     ecx, [esp+30h+arg_0]; this
+0x48EBB5: push    1; destroyEntryIfMerged
+0x48EBB7: push    esi; entry
+0x48EBB8: call    ContainerExtraData_AddEntry; Merge or append a complete EntryData into ExtraContainerChanges. Native ABI is two stack arguments (entry, destroyEntryIfMerged) and retn 0x08; all 14 callers pass exactly two. If a matching form entry exists, it merges counts/extra-data chains and conditionally destroys the supplied entry; otherwise it appends that entry directly. Return register has no contract.
 0x48EBBD: jmp     loc_48ED23
 0x48EBC2: xor     edi, edi
 0x48EBC4: push    edi
@@ -207,16 +205,16 @@
 0x48EBE6: mov     ecx, eax
 0x48EBE8: call    ExtraDataList_constr
 0x48EBED: mov     edi, eax
-0x48EBEF: mov     edx, [esp+30h+arg_4]
+0x48EBEF: mov     edx, [esp+30h+originalReference]
 0x48EBF3: push    edx
 0x48EBF4: jmp     loc_48ECAE
 0x48EBF9: mov     ecx, [esi]
 0x48EBFB: cmp     ecx, edi
 0x48EBFD: jz      short loc_48EC04
-0x48EBFF: call    BSSimpleList_Clear
+0x48EBFF: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x48EC04: mov     eax, [esi]
 0x48EC06: push    eax
-0x48EC07: call    FormHeapFree
+0x48EC07: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48EC0C: mov     [esi], edi
 0x48EC0E: jmp     loc_48ED1A
 0x48EC13: cmp     dword ptr [edi], 0
@@ -267,11 +265,11 @@
 0x48ECA3: mov     edi, eax
 0x48ECA5: jmp     short loc_48ECA9
 0x48ECA7: xor     edi, edi
-0x48ECA9: mov     eax, [esp+30h+arg_4]
-0x48ECAD: push    eax
-0x48ECAE: mov     ecx, edi
+0x48ECA9: mov     eax, [esp+30h+originalReference]
+0x48ECAD: push    eax; originalReference
+0x48ECAE: mov     ecx, edi; this
 0x48ECB0: mov     [esp+34h+var_4], 0FFFFFFFFh
-0x48ECB8: call    sub_41E710
+0x48ECB8: call    ExtraDataList_SetOriginalReferenceExtra; Set ExtraOriginalReference (type 0x26) to a live TESObjectREFR. This provenance is used for synthetic/reference projections, is excluded by relevant copy paths, and is never interpreted by pickup as a base-form override.
 0x48ECBD: mov     eax, [esi+4]
 0x48ECC0: push    eax
 0x48ECC1: mov     ecx, edi
@@ -279,10 +277,10 @@
 0x48ECC8: mov     ecx, [esi]
 0x48ECCA: push    edi
 0x48ECCB: call    BSSimpleList_PushFront
-0x48ECD0: mov     ecx, [esp+30h+arg_0]
-0x48ECD4: push    1
-0x48ECD6: push    esi
-0x48ECD7: call    ContainerExtraData_AddEntry
+0x48ECD0: mov     ecx, [esp+30h+arg_0]; this
+0x48ECD4: push    1; destroyEntryIfMerged
+0x48ECD6: push    esi; entry
+0x48ECD7: call    ContainerExtraData_AddEntry; Merge or append a complete EntryData into ExtraContainerChanges. Native ABI is two stack arguments (entry, destroyEntryIfMerged) and retn 0x08; all 14 callers pass exactly two. If a matching form entry exists, it merges counts/extra-data chains and conditionally destroys the supplied entry; otherwise it appends that entry directly. Return register has no contract.
 0x48ECDC: jmp     short loc_48ED23
 0x48ECDE: mov     edi, [esi]
 0x48ECE0: test    edi, edi
@@ -293,7 +291,7 @@
 0x48ECF0: mov     eax, [edi+4]
 0x48ECF3: mov     ebp, [eax+4]
 0x48ECF6: push    eax
-0x48ECF7: call    FormHeapFree
+0x48ECF7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48ECFC: add     esp, 4
 0x48ECFF: test    ebp, ebp
 0x48ED01: mov     [edi+4], ebp
@@ -301,10 +299,10 @@
 0x48ED06: mov     dword ptr [edi], 0
 0x48ED0C: mov     eax, [esi]
 0x48ED0E: push    eax
-0x48ED0F: call    FormHeapFree
+0x48ED0F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48ED14: mov     dword ptr [esi], 0
 0x48ED1A: push    esi
-0x48ED1B: call    FormHeapFree
+0x48ED1B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48ED20: add     esp, 8
 0x48ED23: mov     ecx, [esp+30h+var_1C]
 0x48ED27: mov     eax, [ecx+4]
@@ -318,7 +316,6 @@
 0x48ED43: jz      loc_48F166
 0x48ED49: jmp     short loc_48ED54
 0x48ED4B: jmp     short loc_48ED50
-0x48ED4D: align 10h
 0x48ED50: mov     eax, [esp+30h+var_1C]
 0x48ED54: xor     edi, edi
 0x48ED56: cmp     [eax], edi
@@ -384,10 +381,10 @@
 0x48EE0B: mov     ebp, [ebx]
 0x48EE0D: test    ebp, ebp
 0x48EE0F: jz      short loc_48EE65
-0x48EE11: mov     eax, [esp+30h+arg_4]
-0x48EE15: push    eax
-0x48EE16: mov     ecx, ebp
-0x48EE18: call    sub_41E710
+0x48EE11: mov     eax, [esp+30h+originalReference]
+0x48EE15: push    eax; originalReference
+0x48EE16: mov     ecx, ebp; this
+0x48EE18: call    ExtraDataList_SetOriginalReferenceExtra; Set ExtraOriginalReference (type 0x26) to a live TESObjectREFR. This provenance is used for synthetic/reference projections, is excluded by relevant copy paths, and is never interpreted by pickup as a base-form override.
 0x48EE1D: test    ebp, ebp
 0x48EE1F: mov     edi, [esi]
 0x48EE21: jz      short loc_48EE50
@@ -439,11 +436,11 @@
 0x48EEAC: mov     edi, eax
 0x48EEAE: jmp     short loc_48EEB2
 0x48EEB0: xor     edi, edi
-0x48EEB2: mov     edx, [esp+30h+arg_4]
-0x48EEB6: push    edx
-0x48EEB7: mov     ecx, edi
+0x48EEB2: mov     edx, [esp+30h+originalReference]
+0x48EEB6: push    edx; originalReference
+0x48EEB7: mov     ecx, edi; this
 0x48EEB9: mov     [esp+34h+var_4], 0FFFFFFFFh
-0x48EEC1: call    sub_41E710
+0x48EEC1: call    ExtraDataList_SetOriginalReferenceExtra; Set ExtraOriginalReference (type 0x26) to a live TESObjectREFR. This provenance is used for synthetic/reference projections, is excluded by relevant copy paths, and is never interpreted by pickup as a base-form override.
 0x48EEC6: mov     eax, [esp+30h+var_14]
 0x48EECA: movzx   ecx, word ptr [eax+4]
 0x48EECE: sub     cx, word ptr [esp+30h+arg_8]
@@ -458,10 +455,10 @@
 0x48EEE7: call    ContainerEntryExtraData_HasWorn
 0x48EEEC: test    al, al
 0x48EEEE: jnz     short loc_48EF01
-0x48EEF0: mov     ecx, [esp+30h+arg_0]
-0x48EEF4: push    1
-0x48EEF6: push    esi
-0x48EEF7: call    ContainerExtraData_AddEntry
+0x48EEF0: mov     ecx, [esp+30h+arg_0]; this
+0x48EEF4: push    1; destroyEntryIfMerged
+0x48EEF6: push    esi; entry
+0x48EEF7: call    ContainerExtraData_AddEntry; Merge or append a complete EntryData into ExtraContainerChanges. Native ABI is two stack arguments (entry, destroyEntryIfMerged) and retn 0x08; all 14 callers pass exactly two. If a matching form entry exists, it merges counts/extra-data chains and conditionally destroys the supplied entry; otherwise it appends that entry directly. Return register has no contract.
 0x48EEFC: jmp     loc_48F153
 0x48EF01: mov     edx, [esi]
 0x48EF03: mov     ecx, [edx]
@@ -471,7 +468,7 @@
 0x48EF0E: mov     ecx, [esi]
 0x48EF10: test    ecx, ecx
 0x48EF12: jz      short loc_48EF19
-0x48EF14: call    BSSimpleList_Clear
+0x48EF14: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x48EF19: mov     eax, [esi]
 0x48EF1B: push    eax
 0x48EF1C: jmp     loc_48F13F
@@ -513,10 +510,10 @@
 0x48EF8A: jmp     short loc_48EF8E
 0x48EF8C: xor     eax, eax
 0x48EF8E: mov     [esi], eax
-0x48EF90: mov     ebp, [esp+30h+arg_4]
-0x48EF94: push    ebp
-0x48EF95: mov     ecx, edi
-0x48EF97: call    sub_41E710
+0x48EF90: mov     ebp, [esp+30h+originalReference]
+0x48EF94: push    ebp; originalReference
+0x48EF95: mov     ecx, edi; this
+0x48EF97: call    ExtraDataList_SetOriginalReferenceExtra; Set ExtraOriginalReference (type 0x26) to a live TESObjectREFR. This provenance is used for synthetic/reference projections, is excluded by relevant copy paths, and is never interpreted by pickup as a base-form override.
 0x48EF9C: mov     ecx, [esi]
 0x48EF9E: push    edi
 0x48EF9F: call    BSSimpleList_PushFront
@@ -540,10 +537,10 @@
 0x48EFE3: mov     edi, eax
 0x48EFE5: jmp     short loc_48EFE9
 0x48EFE7: xor     edi, edi
-0x48EFE9: push    ebp
-0x48EFEA: mov     ecx, edi
+0x48EFE9: push    ebp; originalReference
+0x48EFEA: mov     ecx, edi; this
 0x48EFEC: mov     [esp+34h+var_4], 0FFFFFFFFh
-0x48EFF4: call    sub_41E710
+0x48EFF4: call    ExtraDataList_SetOriginalReferenceExtra; Set ExtraOriginalReference (type 0x26) to a live TESObjectREFR. This provenance is used for synthetic/reference projections, is excluded by relevant copy paths, and is never interpreted by pickup as a base-form override.
 0x48EFF9: movzx   eax, word ptr [ebx+4]
 0x48EFFD: sub     ax, word ptr [esp+30h+arg_8]
 0x48F002: push    eax
@@ -560,11 +557,11 @@
 0x48F026: mov     edi, eax
 0x48F028: jmp     short loc_48F02C
 0x48F02A: xor     edi, edi
-0x48F02C: mov     ecx, [esp+30h+arg_4]
-0x48F030: push    ecx
-0x48F031: mov     ecx, edi
+0x48F02C: mov     ecx, [esp+30h+originalReference]
+0x48F030: push    ecx; originalReference
+0x48F031: mov     ecx, edi; this
 0x48F033: mov     [esp+34h+var_4], 0FFFFFFFFh
-0x48F03B: call    sub_41E710
+0x48F03B: call    ExtraDataList_SetOriginalReferenceExtra; Set ExtraOriginalReference (type 0x26) to a live TESObjectREFR. This provenance is used for synthetic/reference projections, is excluded by relevant copy paths, and is never interpreted by pickup as a base-form override.
 0x48F040: movzx   edx, word ptr [esi+4]
 0x48F044: push    edx
 0x48F045: mov     ecx, edi
@@ -582,11 +579,11 @@
 0x48F069: test    al, al
 0x48F06B: jnz     short loc_48F084
 0x48F06D: mov     edx, [ebx+4]
-0x48F070: mov     ecx, [esp+30h+arg_0]
-0x48F074: push    1
-0x48F076: push    esi
+0x48F070: mov     ecx, [esp+30h+arg_0]; this
+0x48F074: push    1; destroyEntryIfMerged
+0x48F076: push    esi; entry
 0x48F077: mov     [esi+4], edx
-0x48F07A: call    ContainerExtraData_AddEntry
+0x48F07A: call    ContainerExtraData_AddEntry; Merge or append a complete EntryData into ExtraContainerChanges. Native ABI is two stack arguments (entry, destroyEntryIfMerged) and retn 0x08; all 14 callers pass exactly two. If a matching form entry exists, it merges counts/extra-data chains and conditionally destroys the supplied entry; otherwise it appends that entry directly. Return register has no contract.
 0x48F07F: jmp     loc_48F153
 0x48F084: mov     eax, [esi]
 0x48F086: mov     ecx, [eax]
@@ -596,7 +593,7 @@
 0x48F091: mov     ecx, [esi]
 0x48F093: test    ecx, ecx
 0x48F095: jz      loc_48F13C
-0x48F09B: call    BSSimpleList_Clear
+0x48F09B: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x48F0A0: jmp     loc_48F13C
 0x48F0A5: mov     eax, [ebx+8]
 0x48F0A8: mov     [esi+8], eax
@@ -614,11 +611,11 @@
 0x48F0D2: mov     edi, eax
 0x48F0D4: jmp     short loc_48F0D8
 0x48F0D6: xor     edi, edi
-0x48F0D8: mov     edx, [esp+30h+arg_4]
-0x48F0DC: push    edx
-0x48F0DD: mov     ecx, edi
+0x48F0D8: mov     edx, [esp+30h+originalReference]
+0x48F0DC: push    edx; originalReference
+0x48F0DD: mov     ecx, edi; this
 0x48F0DF: mov     [esp+34h+var_4], 0FFFFFFFFh
-0x48F0E7: call    sub_41E710
+0x48F0E7: call    ExtraDataList_SetOriginalReferenceExtra; Set ExtraOriginalReference (type 0x26) to a live TESObjectREFR. This provenance is used for synthetic/reference projections, is excluded by relevant copy paths, and is never interpreted by pickup as a base-form override.
 0x48F0EC: movzx   eax, word ptr [esi+4]
 0x48F0F0: push    eax
 0x48F0F1: mov     ecx, edi
@@ -626,10 +623,10 @@
 0x48F0F8: mov     ecx, [esi]
 0x48F0FA: push    edi
 0x48F0FB: call    BSSimpleList_PushFront
-0x48F100: mov     ecx, [esp+30h+arg_0]
-0x48F104: push    1
-0x48F106: push    esi
-0x48F107: call    ContainerExtraData_AddEntry
+0x48F100: mov     ecx, [esp+30h+arg_0]; this
+0x48F104: push    1; destroyEntryIfMerged
+0x48F106: push    esi; entry
+0x48F107: call    ContainerExtraData_AddEntry; Merge or append a complete EntryData into ExtraContainerChanges. Native ABI is two stack arguments (entry, destroyEntryIfMerged) and retn 0x08; all 14 callers pass exactly two. If a matching form entry exists, it merges counts/extra-data chains and conditionally destroys the supplied entry; otherwise it appends that entry directly. Return register has no contract.
 0x48F10C: jmp     short loc_48F153
 0x48F10E: mov     edi, [esi]
 0x48F110: test    edi, edi
@@ -640,7 +637,7 @@
 0x48F120: mov     eax, [edi+4]
 0x48F123: mov     ebp, [eax+4]
 0x48F126: push    eax
-0x48F127: call    FormHeapFree
+0x48F127: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48F12C: add     esp, 4
 0x48F12F: test    ebp, ebp
 0x48F131: mov     [edi+4], ebp
@@ -648,10 +645,10 @@
 0x48F136: mov     dword ptr [edi], 0
 0x48F13C: mov     ecx, [esi]
 0x48F13E: push    ecx
-0x48F13F: call    FormHeapFree
+0x48F13F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48F144: push    esi
 0x48F145: mov     dword ptr [esi], 0
-0x48F14B: call    FormHeapFree
+0x48F14B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48F150: add     esp, 8
 0x48F153: mov     edx, [esp+30h+var_1C]
 0x48F157: mov     eax, [edx+4]
@@ -667,3 +664,40 @@
 0x48F175: pop     ebx
 0x48F176: add     esp, 1Ch
 0x48F179: retn    0Ch
+0x9AFE70: mov     eax, [ebp-14h]
+0x9AFE73: push    eax
+0x9AFE74: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFE79: pop     ecx
+0x9AFE7A: retn
+0x9AFE7B: mov     eax, [ebp-14h]
+0x9AFE7E: push    eax
+0x9AFE7F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFE84: pop     ecx
+0x9AFE85: retn
+0x9AFE86: mov     eax, [ebp-10h]
+0x9AFE89: push    eax
+0x9AFE8A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFE8F: pop     ecx
+0x9AFE90: retn
+0x9AFE91: mov     eax, [ebp-10h]
+0x9AFE94: push    eax
+0x9AFE95: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFE9A: pop     ecx
+0x9AFE9B: retn
+0x9AFE9C: mov     eax, [ebp+0Ch]
+0x9AFE9F: push    eax
+0x9AFEA0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFEA5: pop     ecx
+0x9AFEA6: retn
+0x9AFEA7: mov     eax, [ebp+0Ch]
+0x9AFEAA: push    eax
+0x9AFEAB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFEB0: pop     ecx
+0x9AFEB1: retn
+0x9AFEB2: mov     edx, [esp+originalReference]
+0x9AFEB6: lea     eax, [edx-20h]
+0x9AFEB9: mov     ecx, [edx-24h]
+0x9AFEBC: xor     ecx, eax
+0x9AFEBE: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AFEC3: mov     eax, offset stru_ADC2CC
+0x9AFEC8: jmp     ___CxxFrameHandler3

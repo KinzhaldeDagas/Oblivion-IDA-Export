@@ -1,4 +1,4 @@
-0x8D2C20: push    ebp
+0x8D2C20: push    ebp; Multiplies a 3x3 basis matrix in place by another basis matrix through 0x8D2AB0.
 0x8D2C21: mov     ebp, esp
 0x8D2C23: and     esp, 0FFFFFFF0h
 0x8D2C26: sub     esp, 3Ch

@@ -1,4 +1,4 @@
-0x6C2710: fld1
+0x6C2710: fld1; Oblivion position evaluator for numeric type 5: holds the lower key for t<1 and selects the upper key only at t>=1.
 0x6C2712: mov     ecx, [esp+arg_C]
 0x6C2716: fcomp   [esp+arg_0]
 0x6C271A: fnstsw  ax

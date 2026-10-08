@@ -2,7 +2,7 @@
 0x42E801: mov     ebp, esp
 0x42E803: and     esp, 0FFFFFFF8h
 0x42E806: sub     esp, 1Ch
-0x42E809: cmp     ArchiveList, 0
+0x42E809: cmp     dword ptr ds:0B338E0h, 0
 0x42E810: push    ebx
 0x42E811: push    esi
 0x42E812: push    edi
@@ -32,7 +32,7 @@
 0x42E858: push    ecx; int
 0x42E859: push    esi; FullPath
 0x42E85A: call    HashFilePAth
-0x42E85F: mov     edi, ArchiveList
+0x42E85F: mov     edi, ds:0B338E0h
 0x42E865: add     esp, 0Ch
 0x42E868: test    edi, edi
 0x42E86A: jz      short loc_42E8B2

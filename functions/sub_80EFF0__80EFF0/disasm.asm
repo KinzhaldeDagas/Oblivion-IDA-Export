@@ -1,4 +1,4 @@
-0x80EFF0: push    esi
+0x80EFF0: push    esi; SpeedTreeBranchShader load dispatch virtual +0x8C. Calls inherited thunk +0xA8, which loads branch 1x vertex/pixel programs through +0xAC/+0xB0; ShaderPackage>=2 also calls inherited +0xC4/+0xC8 loaders.
 0x80EFF1: mov     esi, ecx
 0x80EFF3: mov     eax, [esi]
 0x80EFF5: mov     edx, [eax+0A8h]

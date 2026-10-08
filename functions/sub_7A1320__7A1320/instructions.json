@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A1320",
-    "line": "push    ecx",
+    "line": "push    ecx; Checked insert-one wrapper for vector<st_vector<SFrondGuide>>. Preserves the 0x10-element index across possible reallocation and returns {owner,current}.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x7A1323",
-    "line": "mov     ebp, [esp+0Ch+arg_4]",
+    "line": "mov     ebp, [esp+0Ch+expectedOwner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x7A1358",
-    "line": "mov     edi, [esp+14h+arg_8]",
+    "line": "mov     edi, [esp+14h+position]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -169,50 +169,176 @@
   },
   {
     "ea": "0x7A1361",
-    "line": "mov     edx, [esp+14h+arg_C]",
+    "line": "mov     edx, [esp+14h+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A1365",
-    "line": "mov     eax, [esp+14h+arg_8]",
+    "line": "mov     eax, [esp+14h+position]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A1369",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A136A",
-    "line": "push    1",
+    "line": "push    1; count",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7A136C",
-    "line": "push    eax",
+    "line": "push    eax; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A136D",
-    "line": "push    ebp",
+    "line": "push    ebp; expectedOwner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A136E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A1370",
-    "line": "call    sub_7A1040",
+    "line": "call    OB_stVector_stVector_SFrondGuide_InsertFill_010201A0; Complete Oblivion insert-fill specialization for vector<st_vector<SFrondGuide>> at CFrondEngine+0x18. Uses an alias-safe deep snapshot, checked max size, 1.5x growth, ownership moves for old levels, deep fill construction, and exception cleanup.",
     "mnemonic": "call",
     "size": 5
+  },
+  {
+    "ea": "0x7A1375",
+    "line": "mov     ebx, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7A1378",
+    "line": "cmp     ebx, [esi+8]",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x7A137B",
+    "line": "jbe     short loc_7A1382",
+    "mnemonic": "jbe",
+    "size": 2
+  },
+  {
+    "ea": "0x7A137D",
+    "line": "call    __invalid_parameter_noinfo",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7A1382",
+    "line": "shl     edi, 4",
+    "mnemonic": "shl",
+    "size": 3
+  },
+  {
+    "ea": "0x7A1385",
+    "line": "add     edi, ebx",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x7A1387",
+    "line": "cmp     edi, [esi+8]",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x7A138A",
+    "line": "mov     [esp+14h+position], ebx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x7A138E",
+    "line": "ja      short loc_7A1395",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x7A1390",
+    "line": "cmp     edi, [esi+4]",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x7A1393",
+    "line": "jnb     short loc_7A139A",
+    "mnemonic": "jnb",
+    "size": 2
+  },
+  {
+    "ea": "0x7A1395",
+    "line": "call    __invalid_parameter_noinfo",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7A139A",
+    "line": "mov     eax, [esp+14h+result]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x7A139E",
+    "line": "mov     [eax+4], edi",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7A13A1",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7A13A2",
+    "line": "mov     [eax], esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7A13A4",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7A13A5",
+    "line": "pop     ebp",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7A13A6",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7A13A7",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7A13A8",
+    "line": "retn    10h",
+    "mnemonic": "retn",
+    "size": 3
   }
 ]

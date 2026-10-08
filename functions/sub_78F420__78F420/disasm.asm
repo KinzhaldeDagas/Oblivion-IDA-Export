@@ -1,4 +1,4 @@
-0x78F420: sub     esp, 0Ch
+0x78F420: sub     esp, 0Ch; CBranch::ComputeLod. Uses m_usCrossSectionSegments at +0x20, m_nStartingOffset at +0x24, and m_nNumVertices at +0x1C to rebuild LOD strip indices.
 0x78F423: push    edi
 0x78F424: mov     edi, ecx
 0x78F426: movzx   eax, word ptr [edi+20h]
@@ -31,29 +31,29 @@
 0x78F474: or      ecx, eax
 0x78F476: push    ecx; Size
 0x78F477: call    FormHeapAlloc
-0x78F47C: mov     ecx, [esp+20h+arg_4]
+0x78F47C: mov     ecx, [esp+20h+geometry]; this
 0x78F480: add     esp, 4
 0x78F483: mov     ebx, eax
-0x78F485: mov     eax, [esp+1Ch+arg_0]
-0x78F489: push    esi
-0x78F48A: push    ebx
-0x78F48B: push    eax
-0x78F48C: call    sub_796100
+0x78F485: mov     eax, [esp+1Ch+lodIndex]
+0x78F489: push    esi; stripLength
+0x78F48A: push    ebx; strip
+0x78F48B: push    eax; lodLevel
+0x78F48C: call    OB_CIndexedGeometry_AddStrip_010201A0; OBLIVION AUTHORITY (2026-08-30): CIndexedGeometry::AddStrip receives ownership of a caller FormHeap-allocated unsigned-short array (for example allocation at 0x78F477 before call 0x78F48C), appends its unsigned-short length and pointer to per-LOD nested vectors, then adds the 32-bit result of zero_extend(stripLength)-2 to the per-LOD triangle total. There is no clamp in this function; callers are expected to provide a valid strip length (at least two). RT4.1's later contiguous vector<int> representation is contrast only and was not projected onto Oblivion.
 0x78F491: fldz
 0x78F493: xor     esi, esi
-0x78F495: fstp    [esp+1Ch+arg_0]
+0x78F495: fstp    [esp+1Ch+lodIndex]
 0x78F499: test    ebp, ebp
 0x78F49B: jle     loc_78F5E5
 0x78F4A1: fld     [esp+1Ch+var_4]
 0x78F4A5: mov     [esp+1Ch+var_8], ebp
-0x78F4A9: fld     [esp+1Ch+arg_0]
+0x78F4A9: fld     [esp+1Ch+lodIndex]
 0x78F4AD: fld     st
-0x78F4AF: call    Double_To_SInt32
-0x78F4B4: fnstcw  word ptr [esp+1Ch+arg_0]
+0x78F4AF: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
+0x78F4B4: fnstcw  word ptr [esp+1Ch+lodIndex]
 0x78F4B8: movzx   edx, word ptr [edi+24h]
 0x78F4BC: fld     st
 0x78F4BE: mov     ecx, eax
-0x78F4C0: movzx   eax, word ptr [esp+1Ch+arg_0]
+0x78F4C0: movzx   eax, word ptr [esp+1Ch+lodIndex]
 0x78F4C5: or      eax, 0C00h
 0x78F4CA: mov     [esp+1Ch+var_4], eax
 0x78F4CE: add     esi, 1
@@ -63,7 +63,7 @@
 0x78F4DC: mov     ax, word ptr [esp+1Ch+var_4]
 0x78F4E1: add     dx, ax
 0x78F4E4: add     dx, [edi+20h]
-0x78F4E8: fldcw   word ptr [esp+1Ch+arg_0]
+0x78F4E8: fldcw   word ptr [esp+1Ch+lodIndex]
 0x78F4EC: add     dx, 1
 0x78F4F0: mov     [ebx+esi*2-4], dx
 0x78F4F5: movzx   edx, word ptr [edi+24h]
@@ -72,14 +72,14 @@
 0x78F501: mov     edx, [esp+1Ch+var_C]
 0x78F505: cmp     edx, 1
 0x78F508: fadd    st, st(1)
-0x78F50A: fstp    [esp+1Ch+arg_0]
+0x78F50A: fstp    [esp+1Ch+lodIndex]
 0x78F50E: jle     short loc_78F56D
 0x78F510: add     edx, 0FFFFFFFFh
-0x78F513: fld     [esp+1Ch+arg_0]
+0x78F513: fld     [esp+1Ch+lodIndex]
 0x78F517: mov     bp, [edi+24h]
-0x78F51B: fnstcw  word ptr [esp+1Ch+arg_0]
+0x78F51B: fnstcw  word ptr [esp+1Ch+lodIndex]
 0x78F51F: add     esi, 1
-0x78F522: movzx   eax, word ptr [esp+1Ch+arg_0]
+0x78F522: movzx   eax, word ptr [esp+1Ch+lodIndex]
 0x78F527: fld     st
 0x78F529: or      eax, 0C00h
 0x78F52E: mov     [esp+1Ch+var_4], eax
@@ -89,7 +89,7 @@
 0x78F53D: mov     ax, word ptr [esp+1Ch+var_4]
 0x78F542: add     bp, ax
 0x78F545: add     bp, [edi+20h]
-0x78F549: fldcw   word ptr [esp+1Ch+arg_0]
+0x78F549: fldcw   word ptr [esp+1Ch+lodIndex]
 0x78F54D: add     bp, 1
 0x78F551: mov     [ebx+esi*2-4], bp
 0x78F556: mov     bp, [edi+24h]
@@ -97,7 +97,7 @@
 0x78F55D: sub     edx, 1
 0x78F560: mov     [ebx+esi*2-2], bp
 0x78F565: fadd    st, st(1)
-0x78F567: fstp    [esp+1Ch+arg_0]
+0x78F567: fstp    [esp+1Ch+lodIndex]
 0x78F56B: jnz     short loc_78F513
 0x78F56D: movzx   eax, word ptr [edi+20h]
 0x78F571: add     ax, ax
@@ -121,17 +121,17 @@
 0x78F5B3: movzx   eax, word ptr [edi+24h]
 0x78F5B7: add     ax, cx
 0x78F5BA: add     ax, [edi+20h]
-0x78F5BE: mov     [esp+1Ch+arg_0], edx
+0x78F5BE: mov     [esp+1Ch+lodIndex], edx
 0x78F5C2: add     esi, 1
 0x78F5C5: add     ax, 1
-0x78F5C9: fild    [esp+1Ch+arg_0]
+0x78F5C9: fild    [esp+1Ch+lodIndex]
 0x78F5CD: mov     [ebx+esi*2], ax
 0x78F5D1: add     esi, 1
 0x78F5D4: sub     [esp+1Ch+var_8], 1
-0x78F5D9: fstp    [esp+1Ch+arg_0]
+0x78F5D9: fstp    [esp+1Ch+lodIndex]
 0x78F5DD: jnz     loc_78F4A9
 0x78F5E3: fstp    st
-0x78F5E5: mov     eax, [esp+1Ch+arg_4]
+0x78F5E5: mov     eax, [esp+1Ch+geometry]
 0x78F5E9: add     word ptr [eax+26h], 1
 0x78F5EE: pop     esi
 0x78F5EF: pop     ebp

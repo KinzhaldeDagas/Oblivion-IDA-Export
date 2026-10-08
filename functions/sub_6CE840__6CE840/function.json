@@ -1,18 +1,31 @@
 {
-  "callees_count": 45,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 13,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_6CE840",
+  "chunks": [
+    [
+      "0x6CE840",
+      "0x6CED41"
+    ]
+  ],
+  "chunks_sha256": "e36e6303365b8f2b52846a1f1fe83dd2f2e9277d8f5da79b8d524a23f934d002",
+  "comment_regular": "Oblivion: blends accumulated transforms from each active item's 0x68-byte state record using item+8 normalized weight. Chooses current sample or accumulated delta state, preserves TRS channel validity independently, hemisphere-corrects/normalizes rotation, composes with the cached blend transform at +0x30, and returns false only when every channel remains invalid.",
+  "comment_repeatable": "Oblivion: blends accumulated transforms from each active item's 0x68-byte state record using item+8 normalized weight. Chooses current sample or accumulated delta state, preserves TRS channel validity independently, hemisphere-corrects/normalizes rotation, composes with the cached blend transform at +0x30, and returns false only when every channel remains invalid.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "NiBlendAccumTransformInterpolator_UpdateMultiple",
   "end_ea": "0x6CED41",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6CE840",
+  "name": "NiBlendAccumTransformInterpolator_UpdateMultiple",
   "segment": ".text",
   "sha256": "e36e6303365b8f2b52846a1f1fe83dd2f2e9277d8f5da79b8d524a23f934d002",
   "size": 1281,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6CE840",
+  "total_chunk_size": 1281,
   "type": "char __thiscall(float *this, int, int, float *)",
   "xrefs_from_count": 421,
   "xrefs_to_count": 1

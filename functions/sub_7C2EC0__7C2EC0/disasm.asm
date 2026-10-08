@@ -3,7 +3,7 @@
 0x7C2EC5: lea     eax, [esp+4+var_4]
 0x7C2EC8: push    eax
 0x7C2EC9: push    ecx
-0x7C2ECA: mov     ecx, offset off_B2CBC4
+0x7C2ECA: mov     ecx, offset stru_B2CBC4
 0x7C2ECF: mov     [esp+0Ch+var_4], 0
 0x7C2ED7: call    NiTMap_GetAt
 0x7C2EDC: test    al, al

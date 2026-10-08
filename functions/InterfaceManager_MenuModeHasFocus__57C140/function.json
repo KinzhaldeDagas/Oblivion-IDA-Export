@@ -1,18 +1,31 @@
 {
-  "callees_count": 17,
-  "callers_count": 18,
-  "comment_regular": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
+  "callers_count": 21,
+  "chunks": [
+    [
+      "0x57C140",
+      "0x57C1F9"
+    ]
+  ],
+  "chunks_sha256": "eb375aa1fc594045ac958b7930d9b714e4287d0825c6398a53747fe3a2dfb367",
+  "comment_regular": "arg1\nVerified aPortable: native ABI is cdecl one uint32 menu ID (plain RET at 57C1EB/57C1F5/57C1F8), despite SDK MenuModeHasFocus using a ThisStdCall convenience wrapper. Requires live cursor/menuRoot and menu mode before comparing top visible menu. Use ID414 to gate setup on main-menu focus, not merely MainMenu singleton existence.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "InterfaceManager_MenuModeHasFocus",
   "end_ea": "0x57C1F9",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "InterfaceManager_MenuModeHasFocus",
   "segment": ".text",
   "sha256": "eb375aa1fc594045ac958b7930d9b714e4287d0825c6398a53747fe3a2dfb367",
   "size": 185,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x57C140",
+  "total_chunk_size": 185,
   "type": "bool __cdecl(int)",
   "xrefs_from_count": 73,
   "xrefs_to_count": 21

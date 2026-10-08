@@ -1,1 +1,4 @@
-NiMultiTargetTransformControllerVtbl
+struct NiMultiTargetTransformControllerVtbl
+{
+NiInterpControllerVtbl super;
+};

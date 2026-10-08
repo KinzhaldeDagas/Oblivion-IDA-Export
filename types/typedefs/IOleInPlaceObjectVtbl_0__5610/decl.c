@@ -1,1 +1,1 @@
-IOleInPlaceObjectVtbl_0
+typedef IOleInPlaceObjectVtbl IOleInPlaceObjectVtbl_0;

@@ -1,4 +1,4 @@
-0x6C3F60: push    esi
+0x6C3F60: push    esi; Oblivion NiTransformController viewer-string output. Appends generic controller/interpolator details and the concrete NiTransformController type string.
 0x6C3F61: mov     esi, [esp+4+arg_0]
 0x6C3F65: push    edi
 0x6C3F66: push    esi

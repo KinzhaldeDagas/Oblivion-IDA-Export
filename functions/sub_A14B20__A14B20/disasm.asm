@@ -6,7 +6,7 @@
 0xA14B2D: push    0
 0xA14B2F: push    0
 0xA14B31: push    60h ; '`'
-0xA14B33: push    offset dword_BA8620
+0xA14B33: push    offset unk_BA8620
 0xA14B38: push    offset aHkhingeconst_0; "hkHingeConstraintData"
 0xA14B3D: mov     ecx, offset unk_BA8EB4
 0xA14B42: call    sub_90D190

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x425970",
-    "line": "push    esi",
+    "line": "push    esi; Returns actor-owned INFOGENERAL/Rumors MenuTopic. If its response list has zero nodes, lazily rebuild responses from the cached ownerQuest/topic/INFO/speaker tuple; no topic/INFO condition selection is rerun. A populated-but-exhausted cache is simply rewound later by FillTopicList.",
     "mnemonic": "push",
     "size": 1
   },
@@ -55,13 +55,13 @@
   },
   {
     "ea": "0x425985",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x425987",
-    "line": "call    sub_422DF0",
+    "line": "call    MenuTopic__ResponsesEmpty; Rebuild gate is structural list emptiness, not an exhausted response cursor. Existing cached response entries remain the same selected INFO even if its conditions would now select another candidate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x425990",
-    "line": "mov     eax, [esp+4+arg_0]",
+    "line": "mov     eax, [esp+4+speaker]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x42599A",
-    "line": "push    eax",
+    "line": "push    eax; speaker",
     "mnemonic": "push",
     "size": 1
   },
@@ -109,31 +109,31 @@
   },
   {
     "ea": "0x42599E",
-    "line": "push    ecx",
+    "line": "push    ecx; info",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x42599F",
-    "line": "push    edx",
+    "line": "push    edx; topic",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4259A0",
-    "line": "push    eax",
+    "line": "push    eax; ownerQuest",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4259A1",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4259A3",
-    "line": "call    sub_6B8CF0",
+    "line": "call    MenuTopic__FillResponseList; Reconstruct response entries from the cached identity fields only. This refreshes the runtime preview after a save/load that omitted transient response nodes without reevaluating match conditions or selecting another rumor.",
     "mnemonic": "call",
     "size": 5
   },

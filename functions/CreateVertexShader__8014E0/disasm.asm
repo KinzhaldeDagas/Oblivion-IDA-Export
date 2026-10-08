@@ -1,4 +1,4 @@
-0x8014E0: push    0FFFFFFFFh
+0x8014E0: push    0FFFFFFFFh; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.
 0x8014E2: push    offset CreateVertexShader_SEH
 0x8014E7: mov     eax, large fs:0
 0x8014ED: push    eax
@@ -34,14 +34,14 @@
 0x80155D: mov     [esp+0DBCh+var_D68], esi
 0x801561: mov     [esp+0DBCh+var_D50], esi
 0x801565: mov     [esp+0DBCh+var_D88], esi
-0x801569: call    sub_801210
+0x801569: call    sub_801210; MoonSugarEffect decode: builds shader cache filename from CacheOrNullString/FullPath, appends 'HDR.' when UseHDR is active, then appends requested .vso/.pso cache name.
 0x80156E: mov     ecx, ds:0B430B8h
 0x801574: add     esp, 10h
 0x801577: cmp     ecx, esi
 0x801579: mov     [esp+0DACh+var_D96], 1
-0x80157E: jz      short loc_801588
+0x80157E: jz      short loc_801588; Null package map skips lookup CALL801581, including plugin embedded hook. Existing cached shader definitions need no lookup.
 0x801580: push    edi
-0x801581: call    NiTMap_GetAtIndex
+0x801581: call    NiTMap_GetAtIndex; [Verified] Vertex-program loader queries the selected ShaderProgramPackageRecordMap by its requested program key before the later cache/source path; an embedded ShaderBufferEntry can provide the program payload.
 0x801586: mov     esi, eax
 0x801588: cmp     byte ptr ds:0B2DD4Ch, 0
 0x80158F: jz      loc_801681
@@ -71,7 +71,7 @@
 0x8015DA: cmp     ds:0B430AEh, bl
 0x8015E0: jz      short loc_801627
 0x8015E2: xor     eax, eax
-0x8015E4: cmp     eax, offset CacheOrNullString
+0x8015E4: cmp     eax, 0B42D80h
 0x8015E9: jz      short loc_8015F3
 0x8015EB: cmp     ds:0B42D80h, al
 0x8015F1: jnz     short loc_801611
@@ -82,7 +82,7 @@
 0x801603: lea     ecx, [esp+0DB8h+Filename]
 0x801607: push    ebp
 0x801608: push    ecx
-0x801609: call    sub_801210
+0x801609: call    sub_801210; MoonSugarEffect decode: builds shader cache filename from CacheOrNullString/FullPath, appends 'HDR.' when UseHDR is active, then appends requested .vso/.pso cache name.
 0x80160E: add     esp, 14h
 0x801611: push    20h ; ' '; int
 0x801613: lea     edx, [esp+0DB0h+var_D80]
@@ -106,7 +106,7 @@
 0x80164D: lea     edx, [esp+0DACh+var_C40]
 0x801654: push    0; _DWORD
 0x801656: push    edx; _DWORD
-0x801657: call    eax ; dword_B42E8C
+0x801657: call    eax ; unk_B42E8C
 0x801659: add     esp, 8
 0x80165C: test    bl, bl
 0x80165E: jnz     short loc_801664
@@ -165,11 +165,11 @@
 0x801711: call    FormHeapAlloc
 0x801716: add     esp, 4
 0x801719: mov     edi, eax
-0x80171B: push    esi
-0x80171C: push    edi
-0x80171D: mov     ecx, ebx
+0x80171B: push    esi; byteCount
+0x80171C: push    edi; destination
+0x80171D: mov     ecx, ebx; self
 0x80171F: mov     [esp+0DB4h+var_D70.dwLowDateTime], edi
-0x801723: call    ReadFile??
+0x801723: call    Archive_ReadBytes
 0x801728: mov     ecx, ebp
 0x80172A: mov     ebp, [esp+0DACh+var_D84]
 0x80172E: add     ebp, 4
@@ -216,7 +216,6 @@
 0x8017B6: mov     [edi], dx
 0x8017B9: mov     ecx, eax
 0x8017BB: jmp     short loc_8017C0
-0x8017BD: align 10h
 0x8017C0: mov     dl, [eax]
 0x8017C2: add     eax, 1
 0x8017C5: test    dl, dl
@@ -268,7 +267,7 @@
 0x801863: lea     ecx, [esp+0DACh+var_524]
 0x80186A: push    0; _DWORD
 0x80186C: push    ecx; _DWORD
-0x80186D: call    eax ; dword_B42E8C
+0x80186D: call    eax ; unk_B42E8C
 0x80186F: add     esp, 8
 0x801872: lea     edx, [esp+0DACh+var_D50]
 0x801876: push    edx
@@ -293,7 +292,7 @@
 0x8018A4: mov     ecx, ebx
 0x8018A6: call    eax
 0x8018A8: push    edi
-0x8018A9: call    FormHeapFree
+0x8018A9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x8018AE: add     esp, 4
 0x8018B1: cmp     [esp+0DACh+var_D90], 0
 0x8018B6: jz      loc_801A07
@@ -393,7 +392,7 @@
 0x8019E4: lea     ecx, [esp+0DACh+var_524]
 0x8019EB: push    0; _DWORD
 0x8019ED: push    ecx; _DWORD
-0x8019EE: call    eax ; dword_B42E8C
+0x8019EE: call    eax ; unk_B42E8C
 0x8019F0: add     esp, 8
 0x8019F3: mov     eax, [esp+0DACh+var_D90]
 0x8019F7: mov     edx, [eax]
@@ -455,7 +454,7 @@
 0x801AA1: lea     ecx, [esp+0DACh+var_C40]
 0x801AA8: push    0; _DWORD
 0x801AAA: push    ecx; _DWORD
-0x801AAB: call    eax ; dword_B42E8C
+0x801AAB: call    eax ; unk_B42E8C
 0x801AAD: add     esp, 8
 0x801AB0: mov     eax, [esp+0DACh+Size]
 0x801AB4: mov     edx, [eax]
@@ -498,12 +497,12 @@
 0x801B21: mov     [esp+0DB0h+var_D88], edi
 0x801B25: call    FormHeapAlloc
 0x801B2A: add     esp, 4
-0x801B2D: push    edi
-0x801B2E: push    eax
-0x801B2F: mov     ecx, esi
+0x801B2D: push    edi; byteCount
+0x801B2E: push    eax; destination
+0x801B2F: mov     ecx, esi; self
 0x801B31: mov     [esp+0DB4h+var_D8C], eax
 0x801B35: mov     [esp+0DB4h+var_D95], 1
-0x801B3A: call    ReadFile??
+0x801B3A: call    Archive_ReadBytes
 0x801B3F: mov     edx, [esi]
 0x801B41: mov     eax, [edx]
 0x801B43: push    1
@@ -525,14 +524,14 @@
 0x801B74: mov     ecx, ds:0B43104h
 0x801B7A: mov     eax, [ecx+280h]
 0x801B80: mov     edx, [eax]
-0x801B82: mov     edx, [edx+16Ch]
+0x801B82: mov     edx, [edx+16Ch]; DX10 bridge note: CreateVertexShader vtable call is the authoritative D3D9 bytecode capture boundary for SM1/SM2/SM3 to SM4 companion translation.
 0x801B88: lea     ecx, [esp+0DACh+var_D54]
 0x801B8C: push    ecx
 0x801B8D: push    esi
 0x801B8E: push    eax
 0x801B8F: call    edx
 0x801B91: test    eax, eax
-0x801B93: jz      short loc_801BCA
+0x801B93: jz      short loc_801BCA; MoonSugar build52 reference: Oblivion CreateVertexShader consumes compiled vertex bytecode here before creating the D3D vertex shader; plugin embedded bytecode mirrors this cached-.vso stage, while eligibility remains governed by decoded pass/program gates.
 0x801B95: lea     eax, [esp+0DACh+Filename]
 0x801B99: push    eax
 0x801B9A: lea     ecx, [esp+0DB0h+var_628]
@@ -547,7 +546,7 @@
 0x801BBE: lea     edx, [esp+0DB0h+var_628]
 0x801BC5: jmp     loc_801C57
 0x801BCA: push    38h ; '8'; Size
-0x801BCC: call    FormHeapAlloc
+0x801BCC: call    FormHeapAlloc; MoonSugarEffect decode: allocates concrete NiD3DVertexShader wrapper size 0x38 after native D3D CreateVertexShader succeeds.
 0x801BD1: add     esp, 4
 0x801BD4: mov     [esp+0DACh+var_D64], eax
 0x801BD8: test    eax, eax
@@ -556,7 +555,7 @@
 0x801BE7: mov     ecx, ds:0B43104h
 0x801BED: push    ecx
 0x801BEE: mov     ecx, eax
-0x801BF0: call    sub_780D80
+0x801BF0: call    sub_780D80; MoonSugarEffect decode: standalone TES4 CreateVertexShader constructs a plain 0x38 NiD3DVertexShader with renderer dword_B43104. It stores the D3D handle later through vtable +0x44, but does not set creator pointer or retained bytecode metadata; rebuild on resource recreate instead of relying on factory restore.
 0x801BF5: jmp     short loc_801BF9
 0x801BF7: xor     eax, eax
 0x801BF9: mov     ecx, [esp+0DACh+var_D54]
@@ -566,11 +565,11 @@
 0x801C03: mov     ecx, eax
 0x801C05: mov     [esp+0DB0h+var_4], 0FFFFFFFFh
 0x801C10: mov     [esp+0DB0h+var_D68], eax
-0x801C14: call    edx
+0x801C14: call    edx; MoonSugar build52 reference: Oblivion stores the created IDirect3DVertexShader9 handle into the NiD3DVertexShader wrapper through vtable +0x44. MoonSugar uses plugin-owned D3D shader handles only after native setup, not as new Oblivion shader semantics.
 0x801C16: cmp     [esp+0DACh+var_D95], 0
 0x801C1B: jz      short loc_801C26
 0x801C1D: push    esi
-0x801C1E: call    FormHeapFree
+0x801C1E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x801C23: add     esp, 4
 0x801C26: mov     eax, [esp+0DACh+var_D68]
 0x801C2A: jmp     short loc_801C5F
@@ -587,7 +586,7 @@
 0x801C4F: push    edi; _DWORD
 0x801C50: lea     edx, [esp+0DB0h+var_C40]
 0x801C57: push    edx; _DWORD
-0x801C58: call    eax ; dword_B42E8C
+0x801C58: call    eax ; unk_B42E8C
 0x801C5A: add     esp, 8
 0x801C5D: xor     eax, eax
 0x801C5F: mov     ecx, [esp+0DACh+var_C]
@@ -602,3 +601,19 @@
 0x801C7B: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x801C80: add     esp, 0D98h
 0x801C86: retn    18h
+0x9D06F0: mov     eax, [ebp-0D64h]
+0x9D06F6: push    eax
+0x9D06F7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D06FC: pop     ecx
+0x9D06FD: retn
+0x9D06FE: mov     edx, [esp+arg_4]
+0x9D0702: lea     eax, [edx-0D9Ch]
+0x9D0708: mov     ecx, [edx-0DA0h]
+0x9D070E: xor     ecx, eax
+0x9D0710: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D0715: add     eax, 10h
+0x9D0718: mov     ecx, [edx-4]
+0x9D071B: xor     ecx, eax
+0x9D071D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D0722: mov     eax, offset stru_AF9034
+0x9D0727: jmp     ___CxxFrameHandler3

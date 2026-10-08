@@ -1,4 +1,4 @@
-BSStringT *sub_A0B1E0()
+NiRTTI *sub_A0B1E0()
 {
-  return sub_70E220((BSStringT *)dword_B409EC, "NiPSysBoxEmitter", (int)dword_B40D60);
+  return NiRTTI_Constructor(&stru_B409EC, "NiPSysBoxEmitter", &stru_B40D60); /*0xa0b1f4*/
 }

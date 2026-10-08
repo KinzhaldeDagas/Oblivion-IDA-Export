@@ -1,7 +1,7 @@
-0x78EBA0: fldz
+0x78EBA0: fldz; CTreeFileAccess vector3 float reader. Reads three 4-byte floats into caller buffer.
 0x78EBA2: push    ebx
 0x78EBA3: push    ebp
-0x78EBA4: mov     ebp, [esp+8+arg_0]
+0x78EBA4: mov     ebp, [esp+8+outVec3]
 0x78EBA8: push    esi
 0x78EBA9: fst     dword ptr [ebp+8]
 0x78EBAC: fst     dword ptr [ebp+4]

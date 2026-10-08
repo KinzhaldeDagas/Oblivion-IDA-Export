@@ -1,4 +1,4 @@
-0x40DF80: sub     esp, 6A8h
+0x40DF80: sub     esp, 6A8h; Pass230: +0x1C reads here are on player NiNode/property-state derived objects during exit-to-main-menu handling; not proof of TES+0x1C shader fog upload.
 0x40DF86: mov     eax, ___security_cookie
 0x40DF8B: xor     eax, esp
 0x40DF8D: mov     [esp+6A8h+var_4], eax
@@ -53,9 +53,8 @@
 0x40E043: call    edi ; CreateDirectoryA
 0x40E045: xor     eax, eax
 0x40E047: jmp     short loc_40E050
-0x40E049: align 10h
 0x40E050: mov     cl, [esp+eax+6B8h+pszPath]
-0x40E057: mov     byte ptr AppDataPath[eax], cl
+0x40E057: mov     (destination+10Ch)[eax], cl
 0x40E05D: add     eax, 1
 0x40E060: test    cl, cl
 0x40E062: jnz     short loc_40E050
@@ -103,22 +102,21 @@
 0x40E0F3: call    edi ; CreateDirectoryA
 0x40E0F5: xor     eax, eax
 0x40E0F7: jmp     short loc_40E100
-0x40E0F9: align 10h
 0x40E100: mov     cl, [esp+eax+6B8h+pszPath]
-0x40E107: mov     byte ptr word_B3F280[eax], cl
+0x40E107: mov     byte ptr unk_B3F280[eax], cl
 0x40E10D: add     eax, 1
 0x40E110: test    cl, cl
 0x40E112: jnz     short loc_40E100
 0x40E114: jmp     short loc_40E13A
 0x40E116: mov     ax, ds:word_A3126C
 0x40E11C: mov     cl, ds:byte_A3126E
-0x40E122: mov     AppDataPath, ax
-0x40E128: mov     byte_B3F17A, cl
-0x40E12E: mov     word_B3F280, ax
-0x40E134: mov     byte_B3F282, cl
+0x40E122: mov     word ptr destination+10Ch, ax
+0x40E128: mov     byte ptr unk_B3F17A, cl
+0x40E12E: mov     word ptr unk_B3F280, ax
+0x40E134: mov     byte ptr unk_B3F282, cl
 0x40E13A: xor     eax, eax
 0x40E13C: lea     esp, [esp+0]
-0x40E140: mov     cl, byte ptr word_B3F280[eax]
+0x40E140: mov     cl, byte ptr unk_B3F280[eax]
 0x40E146: mov     [esp+eax+6B8h+FileName], cl
 0x40E14D: add     eax, 1
 0x40E150: test    cl, cl
@@ -126,7 +124,6 @@
 0x40E154: mov     eax, OblivionINI
 0x40E159: mov     edx, eax
 0x40E15B: jmp     short loc_40E160
-0x40E15D: align 10h
 0x40E160: mov     cl, [eax]
 0x40E162: add     eax, 1
 0x40E165: test    cl, cl
@@ -180,7 +177,7 @@
 0x40E219: push    edx; lpExistingFileName
 0x40E21A: mov     [esp+6C4h+var_5F8], al
 0x40E221: call    ds:CopyFileA
-0x40E227: call    sub_404940
+0x40E227: call    FindOblivionDiscDrive; Enumerates CD-ROM drives and selects the first whose root contains OblivionLauncher.exe; stores its drive letter in byte_B33394.
 0x40E22C: test    al, al
 0x40E22E: jnz     loc_40E2CB
 0x40E234: mov     edx, lpCaption
@@ -220,12 +217,11 @@
 0x40E2BF: push    ebp; hWnd
 0x40E2C0: call    ds:MessageBoxA
 0x40E2C6: jmp     loc_40F61D
-0x40E2CB: cmp     byte_B33394, 0
+0x40E2CB: cmp     byte ptr unk_B33394, 0
 0x40E2D2: jnz     loc_40E393
 0x40E2D8: mov     esi, ds:GetPrivateProfileStringA
 0x40E2DE: mov     edi, ds:MessageBoxA
 0x40E2E4: jmp     short loc_40E2F0
-0x40E2E6: align 10h
 0x40E2F0: mov     eax, lpDefault
 0x40E2F5: lea     ecx, [esp+6B8h+FileName]
 0x40E2FC: push    ecx; lpFileName
@@ -263,8 +259,8 @@
 0x40E376: call    edi ; MessageBoxA
 0x40E378: cmp     eax, 2
 0x40E37B: jz      loc_40F61D
-0x40E381: call    sub_404940
-0x40E386: cmp     byte_B33394, 0
+0x40E381: call    FindOblivionDiscDrive; Enumerates CD-ROM drives and selects the first whose root contains OblivionLauncher.exe; stores its drive letter in byte_B33394.
+0x40E386: cmp     byte ptr unk_B33394, 0
 0x40E38D: jz      loc_40E2F0
 0x40E393: mov     edx, lpClassName
 0x40E399: push    ebp; lpWindowName
@@ -414,17 +410,17 @@
 0x40E611: push    108h
 0x40E616: mov     ecx, offset FormHeap
 0x40E61B: call    MemoryPool_Create
-0x40E620: mov     dword_B02184, offset Memory_Cleanup
-0x40E62A: call    sub_747BA0
-0x40E62F: mov     byte_B3F958, 1
+0x40E620: mov     dword_B02184, offset Memory_Cleanup; Verified memory-pressure dispatcher cases 9-11 and 13-15 call TES_RemoveTreeModelsByTrunkLength with BSTreeModel.trunkLength buckets [-FLT_MAX,100), [100,250), and [250,FLT_MAX). The ranges derive from CSpeedTreeRT_GetTrunkLength; the length units are Unknown.
+0x40E62A: call    sub_747BA0; Pass223: Startup callback dispatcher; invokes registered property startup callback when present.
+0x40E62F: mov     byte ptr unk_B3F958, 1
 0x40E636: call    sub_6F98F0
 0x40E63B: push    4; Size
-0x40E63D: mov     dword_B40334, offset sub_430D60
+0x40E63D: mov     dword ptr unk_B40334, offset sub_430D60
 0x40E647: call    FormHeapAlloc
 0x40E64C: add     esp, 4
 0x40E64F: cmp     eax, ebp
 0x40E651: jz      short loc_40E65E
-0x40E653: mov     dword_BA7A00, eax
+0x40E653: mov     dword ptr unk_BA7A00, eax
 0x40E658: mov     dword ptr [eax], offset ??_7SoundCollisionListener@@6B@; const SoundCollisionListener::`vftable'
 0x40E65E: push    14h; Size
 0x40E660: call    FormHeapAlloc
@@ -433,7 +429,7 @@
 0x40E66A: jz      short loc_40E673
 0x40E66C: mov     ecx, eax
 0x40E66E: call    sub_4316E0
-0x40E673: mov     ecx, OBSE_g_FileFinder
+0x40E673: mov     ecx, ds:0B33A04h
 0x40E679: cmp     ecx, ebp
 0x40E67B: jz      short loc_40E689
 0x40E67D: mov     edx, [ecx]
@@ -451,10 +447,10 @@
 0x40E6A3: jmp     short loc_40E6A7
 0x40E6A5: xor     eax, eax
 0x40E6A7: push    eax; a2
-0x40E6A8: mov     ecx, offset dword_B35300; this
+0x40E6A8: mov     ecx, offset unk_B35300; this
 0x40E6AD: call    NiSmartPointer_Set??
-0x40E6B2: mov     ecx, dword_B35300
-0x40E6B8: mov     dword_B3FAC8, ecx
+0x40E6B2: mov     ecx, dword ptr unk_B35300
+0x40E6B8: mov     dword ptr unk_B3FAC8, ecx
 0x40E6BE: xor     eax, eax
 0x40E6C0: mov     cl, ds:byte_A30FEC[eax]
 0x40E6C6: mov     byte_B07D2C[eax], cl
@@ -499,7 +495,7 @@
 0x40E752: mov     ecx, offset INISettingCollection
 0x40E757: call    eax
 0x40E759: call    sub_53AC60
-0x40E75E: call    sub_42F610
+0x40E75E: call    sub_42F610; MEF data-streaming pass: archive list builder uses fixed 0x8000 heap buffer and case-sensitive .esp-associated BSA discovery. Decoded as future policy/bounds improvement candidate, not included in narrow compatibility patch.
 0x40E763: push    65h ; 'e'; lpIconName
 0x40E765: push    ebx; hInstance
 0x40E766: mov     [esp+6C0h+WndClass.style], 3
@@ -559,7 +555,7 @@
 0x40E82B: jmp     short loc_40E82F
 0x40E82D: xor     eax, eax
 0x40E82F: push    8; Size
-0x40E831: mov     OSGlobals, eax
+0x40E831: mov     ds:0B33398h, eax
 0x40E836: call    FormHeapAlloc
 0x40E83B: add     esp, 4
 0x40E83E: cmp     eax, ebp
@@ -569,49 +565,49 @@
 0x40E849: jmp     short loc_40E84D
 0x40E84B: xor     eax, eax
 0x40E84D: push    offset aInitializingRe; "Initializing Renderer..."
-0x40E852: mov     dword_B3A6B0, eax
+0x40E852: mov     dword ptr unk_B3A6B0, eax
 0x40E857: call    PrintToLog???
-0x40E85C: mov     ecx, OSGlobals
+0x40E85C: mov     ecx, ds:0B33398h
 0x40E862: add     esp, 4
 0x40E865: call    sub_4052F0
-0x40E86A: mov     ecx, g_Renderer; this
+0x40E86A: mov     ecx, dword ptr renderer; this
 0x40E870: push    ebp; a3
-0x40E871: push    offset nullsub_returnTrue_0arg; a2
-0x40E876: mov     byte_B3F709, 1
+0x40E871: push    offset Cmd_AddAchievement_PC_ReturnTrueNoOp; a2
+0x40E876: mov     OB_NiDX9SourceTextureData_s_persistentFastPathEnabled_010201A0, 1; Oblivion startup sets the NiDX9 persistent source-texture file fast-path gate at 0xB3F709 to true.
 0x40E87D: call    NiDX9Renderer__AddLostDeviceCallbak
-0x40E882: mov     ecx, g_Renderer; this
+0x40E882: mov     ecx, dword ptr renderer; this
 0x40E888: push    ebp; a3
 0x40E889: push    offset sub_405440; a2
 0x40E88E: call    NiRenderer_RegisterOnDeviceLostCallback
-0x40E893: call    sub_553550
+0x40E893: call    FaceGenManager_EnsureInitialized; Lazily allocates and constructs the process FaceGen manager singleton (0xDBC bytes). Callers use g_faceGenManager; the authoritative control/basis data comes from FaceGen\\si.ctl.
 0x40E898: push    offset aInitializingSh; "Initializing Shader System..."
 0x40E89D: call    PrintToLog???
 0x40E8A2: fld     flt_B06D9C
 0x40E8A8: movzx   eax, bDoImageSpaceEffect
 0x40E8AF: fstp    [esp+6BCh+var_6BC]; float
 0x40E8B2: fld     flt_B06D94
-0x40E8B8: mov     ecx, dword_B35300
+0x40E8B8: mov     ecx, dword ptr unk_B35300
 0x40E8BE: sub     esp, 8
-0x40E8C1: mov     dword_B42E8C, offset sub_405150
-0x40E8CB: mov     ImageSpaceEffectEnabled, al
+0x40E8C1: mov     dword ptr unk_B42E8C, offset sub_405150
+0x40E8CB: mov     OB_RendererGlobalState_010201A0.pad_00D+98h, al; Initialize renderer global B42F3E (OB_RendererGlobalState_010201A0+0xA5) from bDoImageSpaceEffect loaded at 0x40E8A8. This is Hair's first conditional base-builder gate.
 0x40E8D0: fstp    [esp+6C4h+a2]; float
-0x40E8D4: mov     dword_B42EBC, ecx
+0x40E8D4: mov     dword ptr OB_RendererGlobalState_010201A0.pad_00D+16h, ecx
 0x40E8DA: fld     flt_B06D8C
-0x40E8E0: mov     dword_B42D78, offset sub_405290
+0x40E8E0: mov     dword ptr unk_B42D78, offset sub_405290
 0x40E8EA: fstp    [esp+6C4h+var_6C4]; float
-0x40E8ED: call    sub_7B4870
-0x40E8F2: movzx   eax, byte_B02D70
-0x40E8F9: fld     flt_B02D78
+0x40E8ED: call    sub_7B4870; MoonSugarEffect decode: writes GethitShader defaults from INI values fHitTexOffset, fBlockedTexOffset, fBlurAmmount. Only default/config ownership observed.
+0x40E8F2: movzx   eax, bDisplayLODLand
+0x40E8F9: fld     OB_INI_fLocalTreeMipMapLODBias_SpeedTree_010201A0
 0x40E8FF: mov     dl, bUseHardDriveCache
-0x40E905: fstp    flt_B430A8
-0x40E90B: fld     flt_B02D80
+0x40E905: fstp    dword ptr OB_RendererGlobalState_010201A0.pad_1DB+34h; Copies fLocalTreeMipMapLODBias:SpeedTree into runtime global 0xB430A8 used by the direct sampler write at 0x7F9169.
+0x40E90B: fld     OB_INI_fLODTreeMipMapLODBias_SpeedTree_010201A0
 0x40E911: mov     cl, byte_B06D1C
 0x40E917: add     esp, 0Ch
-0x40E91A: fstp    flt_B430A4
-0x40E920: cmp     UseHDR, 0
-0x40E927: mov     useHardDriveCache, dl
-0x40E92D: mov     byte_B43077, al
-0x40E932: mov     byte_B42D40, cl
+0x40E91A: fstp    dword ptr OB_RendererGlobalState_010201A0.pad_1DB+30h; Copies fLODTreeMipMapLODBias:SpeedTree into runtime global 0xB430A4 used by the direct sampler write at 0x7F94D0.
+0x40E920: cmp     OB_RendererGlobalState_010201A0.bHighDynamicRangeMode, 0; [Verified] WinMain tests RendererGlobalState+0x1D7 at entry and selects distinct HDR or non-HDR renderer parameter sets. This corroborates the HDR-mode use also visible in shader-name construction at sub_801210.
+0x40E927: mov     OB_RendererGlobalState_010201A0.pad_1DB+3Ah, dl
+0x40E92D: mov     OB_RendererGlobalState_010201A0.pad_1DB+3, al
+0x40E932: mov     byte ptr unk_B42D40, cl
 0x40E938: jz      loc_40EA3A
 0x40E93E: fld     flt_B06E24
 0x40E944: mov     edx, dword_B06DEC
@@ -622,39 +618,39 @@
 0x40E961: fstp    flt_B2C2C0
 0x40E967: mov     dword_B2C1E4, edx
 0x40E96D: fld     flt_B06DFC
-0x40E973: mov     dword_B43220, eax
-0x40E978: fstp    flt_B431F8
-0x40E97E: mov     dword_B43224, ecx
+0x40E973: mov     dword ptr unk_B43220, eax
+0x40E978: fstp    dword ptr unk_B431F8
+0x40E97E: mov     dword ptr unk_B43224, ecx
 0x40E984: fld     flt_B06E74
-0x40E98A: fstp    flt_B431FC
+0x40E98A: fstp    dword ptr unk_B431FC
 0x40E990: fld     flt_B06E04
-0x40E996: fstp    flt_B431E8
+0x40E996: fstp    dword ptr unk_B431E8
 0x40E99C: fld     flt_B06E7C
-0x40E9A2: fstp    flt_B431EC
+0x40E9A2: fstp    dword ptr unk_B431EC
 0x40E9A8: fld     flt_B06E0C
-0x40E9AE: fstp    flt_B431F0
+0x40E9AE: fstp    dword ptr unk_B431F0
 0x40E9B4: fld     flt_B06E84
-0x40E9BA: fstp    flt_B431F4
+0x40E9BA: fstp    dword ptr unk_B431F4
 0x40E9C0: fld     flt_B06E3C
-0x40E9C6: fstp    flt_B43200
+0x40E9C6: fstp    dword ptr unk_B43200
 0x40E9CC: fld     flt_B06E8C
-0x40E9D2: fstp    flt_B43204
+0x40E9D2: fstp    dword ptr unk_B43204
 0x40E9D8: fld     flt_B06E44
-0x40E9DE: fstp    flt_B43208
+0x40E9DE: fstp    dword ptr unk_B43208
 0x40E9E4: fld     flt_B06E94
-0x40E9EA: fstp    flt_B4320C
+0x40E9EA: fstp    dword ptr unk_B4320C
 0x40E9F0: fld     flt_B06E5C
-0x40E9F6: fstp    flt_B43210
+0x40E9F6: fstp    dword ptr unk_B43210
 0x40E9FC: fld     flt_B06E9C
-0x40EA02: fstp    flt_B43214
+0x40EA02: fstp    dword ptr unk_B43214
 0x40EA08: fld     flt_B06E64
-0x40EA0E: fstp    flt_B43218
+0x40EA0E: fstp    dword ptr unk_B43218
 0x40EA14: fld     flt_B06EA4
-0x40EA1A: fstp    flt_B4321C
+0x40EA1A: fstp    dword ptr unk_B4321C
 0x40EA20: fld     flt_B06E14
-0x40EA26: fstp    flt_B43154
+0x40EA26: fstp    dword ptr unk_B43154
 0x40EA2C: fld     flt_B06E1C
-0x40EA32: fstp    flt_B43158
+0x40EA32: fstp    dword ptr unk_B43158
 0x40EA38: jmp     short loc_40EAA6
 0x40EA3A: mov     edx, dword_B06D54
 0x40EA40: fld     flt_B06D64
@@ -669,19 +665,19 @@
 0x40EA69: fstp    [esp+6C8h+var_6C8]; float
 0x40EA6C: push    eax; int
 0x40EA6D: push    ecx; int
-0x40EA6E: call    sub_7B4830
+0x40EA6E: call    sub_7B4830; MoonSugarEffect decode: writes BlurShader globals (blend type, pass count, radius, alpha, tex size). Called by WinMain defaults, SetImageSpaceGlow, and SunDamage paths.
 0x40EA73: fld     flt_B06D6C
-0x40EA79: fstp    flt_B43154
+0x40EA79: fstp    dword ptr unk_B43154
 0x40EA7F: add     esp, 18h
 0x40EA82: fld     flt_B06D74
-0x40EA88: fstp    flt_B43158
+0x40EA88: fstp    dword ptr unk_B43158
 0x40EA8E: fld     flt_B06D7C
 0x40EA94: fstp    flt_B2C2BC
 0x40EA9A: fld     flt_B06D84
 0x40EAA0: fstp    flt_B2C2C0
-0x40EAA6: mov     ecx, OSGlobals
-0x40EAAC: call    sub_406950
-0x40EAB1: mov     esi, OSGlobals
+0x40EAA6: mov     ecx, ds:0B33398h
+0x40EAAC: call    sub_406950; Retail world-scene construction: creates the world SceneGraph/ShadowSceneNode state consumed by NiRenderer_Render and ShadowPass.
+0x40EAB1: mov     esi, ds:0B33398h
 0x40EAB7: mov     ecx, [esi+20h]; this
 0x40EABA: cmp     ecx, ebp
 0x40EABC: lea     edi, [esi+20h]
@@ -689,7 +685,7 @@
 0x40EAC1: call    InputGlobals__FlushKeyboardBuffer
 0x40EAC6: mov     ecx, [edi]; this
 0x40EAC8: call    InputGlobals__PollAndUpdateInputState
-0x40EACD: mov     ecx, offset TimeInfo
+0x40EACD: mov     ecx, 0B33E90h
 0x40EAD2: call    sub_47D0F0
 0x40EAD7: mov     byte ptr [esi+2], 1
 0x40EADB: call    sub_410310
@@ -697,47 +693,47 @@
 0x40EAE6: push    0FFFFFFFFh; int
 0x40EAE8: push    ebp; char
 0x40EAE9: push    edx; lpParameter
-0x40EAEA: call    sub_410E40
-0x40EAEF: mov     eax, g_worldScenegraph
+0x40EAEA: call    sub_410E40; MenuPlease: patched call to sub_410E40 so sIntroSequence startup movies are not launched.
+0x40EAEF: mov     eax, g_WorldSceneReceiverRoot; Verified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.
 0x40EAF4: mov     ecx, [eax+0DCh]
-0x40EAFA: mov     dword_B39B84, ecx
+0x40EAFA: mov     dword ptr unk_B39B84, ecx
 0x40EB00: mov     edx, [eax+0DCh]
-0x40EB06: mov     dword_B39E00, edx
-0x40EB0C: call    sub_67FCF0
+0x40EB06: mov     dword ptr unk_B39E00, edx
+0x40EB0C: call    TravelPath_EnsureDoorLinkMapInitialized; Verified lazy initialization of LowPathSearchGlobals.doorLinkMap: if null, allocates a 0x10-byte outer NiTPointerMap<TESForm*,NiTPointerMap<TESForm*,BSSimpleList<AStarWorldNode*>*>*> with 0xBF buckets. Called from WinMain and after map teardown during save/load reconciliation.
 0x40EB11: call    GetPathBuilderSingleton
 0x40EB16: push    1
 0x40EB18: call    sub_578CC0
-0x40EB1D: mov     eax, g_worldScenegraph
-0x40EB22: mov     ecx, OSGlobals
+0x40EB1D: mov     eax, g_WorldSceneReceiverRoot; Verified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.
+0x40EB22: mov     ecx, ds:0B33398h
 0x40EB28: add     esp, 10h
 0x40EB2B: push    eax
-0x40EB2C: call    OSGlobals_Initialize???
-0x40EB31: push    ebp
-0x40EB32: call    sub_55F750
+0x40EB2C: call    OSGlobals_Initialize???; Pass231/241: Scene/sky setup passes global B333E4 into Sky initialization path.
+0x40EB31: push    ebp; recreate
+0x40EB32: call    BSTreeManager_Create; Verified singleton Create(recreate): optionally destroys/frees an existing BSTreeManager, allocates 0x28 bytes, runs BSTreeManager_ctor, and stores the instance.
 0x40EB37: fld     ds:flt_A2FF44
-0x40EB3D: mov     ecx, TESDataHandler
+0x40EB3D: mov     ecx, g_TESDataHandler; Verified singleton pointer: allocated as TESDataHandler (0xCE0 bytes) and published at TES_constr 441B8A; passed to LoadFiles and form APIs; TES_destr 446915 destroys and clears it. Field +0x74 is the Global list head used by TESSaveLoadGame_LoadGlobalValues; surrounding layout remains Unknown.
 0x40EB43: fst     [esp+6BCh+var_69C]
 0x40EB47: fstp    [esp+6BCh+var_698]
 0x40EB4B: add     esp, 4
 0x40EB4E: fld     ds:flt_A2FFE8
 0x40EB54: fstp    [esp+6B8h+var_694]
 0x40EB58: mov     edx, [ecx+0Ch]
-0x40EB5B: mov     ecx, TES
+0x40EB5B: mov     ecx, ds:0B333A0h
 0x40EB61: push    edx
 0x40EB62: call    sub_4431F0
-0x40EB67: mov     ecx, TESDataHandler_g_PlayerRef
+0x40EB67: mov     ecx, dword ptr reference
 0x40EB6D: call    sub_662EE0
 0x40EB72: call    ArchiveManager_DisacrdAllBSARetainedFilenames
-0x40EB77: mov     eax, TlsIndex
+0x40EB77: mov     eax, dword ptr byte_BA9DCC+18h
 0x40EB7C: mov     ecx, large fs:2Ch
 0x40EB83: mov     edx, [ecx+eax*4]
 0x40EB86: push    offset aInitializingAc; "Initializing Actor Locations..."
 0x40EB8B: mov     byte ptr [edx+185h], 1
 0x40EB92: call    PrintToLog???
 0x40EB97: add     esp, 4
-0x40EB9A: mov     ecx, offset ActorProcessManager_ptr
+0x40EB9A: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x40EB9F: call    sub_675310
-0x40EBA4: mov     ecx, TESDataHandler
+0x40EBA4: mov     ecx, g_TESDataHandler; Verified singleton pointer: allocated as TESDataHandler (0xCE0 bytes) and published at TES_constr 441B8A; passed to LoadFiles and form APIs; TES_destr 446915 destroys and clears it. Field +0x74 is the Global list head used by TESSaveLoadGame_LoadGlobalValues; surrounding layout remains Unknown.
 0x40EBAA: call    sub_447300
 0x40EBAF: push    offset aLoadingInitial; "Loading initial area..."
 0x40EBB4: call    PrintToLog???
@@ -751,7 +747,7 @@
 0x40EBCE: jnz     short loc_40EBC7
 0x40EBD0: sub     eax, esi
 0x40EBD2: jz      loc_40EC8C
-0x40EBD8: mov     ecx, TESDataHandler
+0x40EBD8: mov     ecx, g_TESDataHandler; Verified singleton pointer: allocated as TESDataHandler (0xCE0 bytes) and published at TES_constr 441B8A; passed to LoadFiles and form APIs; TES_destr 446915 destroys and clears it. Field +0x74 is the Global list head used by TESSaveLoadGame_LoadGlobalValues; surrounding layout remains Unknown.
 0x40EBDE: push    edx
 0x40EBDF: call    sub_4476B0
 0x40EBE4: mov     esi, eax
@@ -762,7 +758,7 @@
 0x40EBF8: push    eax
 0x40EBF9: lea     ecx, [esp+6BCh+var_6A4]
 0x40EBFD: push    ecx
-0x40EBFE: mov     ecx, TESDataHandler
+0x40EBFE: mov     ecx, g_TESDataHandler; Verified singleton pointer: allocated as TESDataHandler (0xCE0 bytes) and published at TES_constr 441B8A; passed to LoadFiles and form APIs; TES_destr 446915 destroys and clears it. Field +0x74 is the Global list head used by TESSaveLoadGame_LoadGlobalValues; surrounding layout remains Unknown.
 0x40EC04: xor     ebp, ebp
 0x40EC06: push    edx
 0x40EC07: mov     [esp+6C4h+var_6A4], ebp
@@ -771,7 +767,7 @@
 0x40EC14: mov     edi, eax
 0x40EC16: cmp     edi, ebp
 0x40EC18: jz      loc_40ED57
-0x40EC1E: mov     ecx, TES
+0x40EC1E: mov     ecx, ds:0B333A0h
 0x40EC24: push    edi
 0x40EC25: call    sub_4431F0
 0x40EC2A: mov     eax, [esp+6B8h+var_6A4]
@@ -782,7 +778,7 @@
 0x40EC3D: shl     ecx, 0Ch
 0x40EC40: fld     ds:dbl_A30F70
 0x40EC46: mov     [esp+6B8h+var_6A8], ecx
-0x40EC4A: mov     ecx, TES
+0x40EC4A: mov     ecx, ds:0B333A0h
 0x40EC50: fadd    st(1), st
 0x40EC52: lea     edx, [esp+6B8h+var_69C]
 0x40EC56: fxch    st(1)
@@ -799,7 +795,7 @@
 0x40EC79: push    edi
 0x40EC7A: push    eax
 0x40EC7B: push    ecx
-0x40EC7C: mov     ecx, TESDataHandler
+0x40EC7C: mov     ecx, g_TESDataHandler; Verified singleton pointer: allocated as TESDataHandler (0xCE0 bytes) and published at TES_constr 441B8A; passed to LoadFiles and form APIs; TES_destr 446915 destroys and clears it. Field +0x74 is the Global list head used by TESSaveLoadGame_LoadGlobalValues; surrounding layout remains Unknown.
 0x40EC82: call    sub_447740
 0x40EC87: jmp     loc_40EE7A
 0x40EC8C: mov     edx, off_B02CF8
@@ -825,7 +821,7 @@
 0x40ECCD: push    edx; Str
 0x40ECCE: mov     ebx, eax
 0x40ECD0: call    j__atol
-0x40ECD5: mov     esi, TESDataHandler
+0x40ECD5: mov     esi, g_TESDataHandler; Verified singleton pointer: allocated as TESDataHandler (0xCE0 bytes) and published at TES_constr 441B8A; passed to LoadFiles and form APIs; TES_destr 446915 destroys and clears it. Field +0x74 is the Global list head used by TESSaveLoadGame_LoadGlobalValues; surrounding layout remains Unknown.
 0x40ECDB: mov     edi, [esi+0Ch]
 0x40ECDE: add     esi, 0Ch
 0x40ECE1: add     esp, 8
@@ -838,14 +834,14 @@
 0x40ECF5: cmp     [esi], ebp
 0x40ECF7: jz      short loc_40ED28
 0x40ECF9: mov     ebp, [esi]
-0x40ECFB: mov     eax, off_B02CF0
+0x40ECFB: mov     eax, right
 0x40ED00: mov     edx, [ebp+0]
-0x40ED03: push    eax; Str2
+0x40ED03: push    eax; right
 0x40ED04: mov     eax, [edx+0D4h]
 0x40ED0A: mov     ecx, ebp
 0x40ED0C: call    eax
-0x40ED0E: push    eax; Str1
-0x40ED0F: call    __strcmp
+0x40ED0E: push    eax; left
+0x40ED0F: call    CRT_StricmpLocaleDispatch
 0x40ED14: add     esp, 8
 0x40ED17: test    eax, eax
 0x40ED19: jz      short loc_40ED26
@@ -861,11 +857,11 @@
 0x40ED34: push    ebp; int
 0x40ED35: push    ebx; ArgList
 0x40ED36: mov     ecx, edi
-0x40ED38: call    sub_4F1630
+0x40ED38: call    TESWorldSpace_LoadExteriorCellAtCoord; Verified: exterior-cell loader checks cellMap first, searches master files using cellOffsetsArray fast path or GRUP/CELL fallback, creates a missing TESObjectCELL, post-fixes it, then attaches worldspace-indexed references.
 0x40ED3D: mov     esi, eax
 0x40ED3F: test    esi, esi
 0x40ED41: jnz     short loc_40ED5B
-0x40ED43: mov     ecx, TESDataHandler
+0x40ED43: mov     ecx, g_TESDataHandler; Verified singleton pointer: allocated as TESDataHandler (0xCE0 bytes) and published at TES_constr 441B8A; passed to LoadFiles and form APIs; TES_destr 446915 destroys and clears it. Field +0x74 is the Global list head used by TESSaveLoadGame_LoadGlobalValues; surrounding layout remains Unknown.
 0x40ED49: push    1
 0x40ED4B: push    edi
 0x40ED4C: push    ebp
@@ -876,18 +872,18 @@
 0x40ED57: cmp     esi, ebp
 0x40ED59: jz      short loc_40EDD2
 0x40ED5B: mov     ecx, esi; this
-0x40ED5D: call    TESObjectCELL_IsInterior
+0x40ED5D: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x40ED62: test    al, al
 0x40ED64: jz      short loc_40ED7C
 0x40ED66: lea     ecx, [esp+6B8h+var_69C]
 0x40ED6A: push    ecx
-0x40ED6B: mov     ecx, TES
+0x40ED6B: mov     ecx, ds:0B333A0h
 0x40ED71: push    esi
 0x40ED72: call    sub_4455E0
 0x40ED77: jmp     loc_40EE4C
 0x40ED7C: mov     ecx, esi; this
 0x40ED7E: call    TESObjectCELL_GetWorldSpace
-0x40ED83: mov     ecx, TES
+0x40ED83: mov     ecx, ds:0B333A0h
 0x40ED89: push    eax
 0x40ED8A: call    sub_4431F0
 0x40ED8F: mov     ecx, esi; this
@@ -927,7 +923,7 @@
 0x40EE07: jz      short loc_40EE3F
 0x40EE09: cmp     byte ptr [ecx], 0
 0x40EE0C: jz      short loc_40EE3F
-0x40EE0E: mov     eax, off_B02CF0
+0x40EE0E: mov     eax, right
 0x40EE13: test    eax, eax
 0x40EE15: jz      short loc_40EE2E
 0x40EE17: cmp     byte ptr [eax], 0
@@ -948,26 +944,26 @@
 0x40EE3F: push    offset aCouldNotFind_8; "Could not find starting cell for INI da"...
 0x40EE44: call    PrintError
 0x40EE49: add     esp, 4
-0x40EE4C: mov     ecx, TESDataHandler
+0x40EE4C: mov     ecx, g_TESDataHandler; Verified singleton pointer: allocated as TESDataHandler (0xCE0 bytes) and published at TES_constr 441B8A; passed to LoadFiles and form APIs; TES_destr 446915 destroys and clears it. Field +0x74 is the Global list head used by TESSaveLoadGame_LoadGlobalValues; surrounding layout remains Unknown.
 0x40EE52: push    0FFFFFFFFh
 0x40EE54: call    sub_447DB0
-0x40EE59: mov     ecx, TES
+0x40EE59: mov     ecx, ds:0B333A0h
 0x40EE5F: push    1
 0x40EE61: lea     edx, [esp+6BCh+var_69C]
 0x40EE65: push    edx
 0x40EE66: call    sub_444EC0
-0x40EE6B: mov     eax, TES
+0x40EE6B: mov     eax, ds:0B333A0h
 0x40EE70: mov     ecx, [eax+8]
 0x40EE73: call    sub_482310
 0x40EE78: xor     ebp, ebp
 0x40EE7A: push    offset aPlacingPlayer_; "Placing player..."
 0x40EE7F: call    PrintToLog???
-0x40EE84: mov     ecx, TES
+0x40EE84: mov     ecx, ds:0B333A0h
 0x40EE8A: mov     esi, [ecx+34h]
-0x40EE8D: mov     edx, dword ptr Vector3_InitValue?
-0x40EE93: mov     eax, dword ptr Vector3_InitValue?+4
+0x40EE8D: mov     edx, g_zeroNiPoint3.x
+0x40EE93: mov     eax, g_zeroNiPoint3.y
 0x40EE98: mov     dword ptr [esp+6BCh+var_680], edx
-0x40EE9C: mov     edx, dword_B3F9B0
+0x40EE9C: mov     edx, g_zeroNiPoint3.z
 0x40EEA2: add     esp, 4
 0x40EEA5: cmp     esi, ebp
 0x40EEA7: mov     dword ptr [esp+6B8h+var_680+4], eax
@@ -988,14 +984,14 @@
 0x40EED1: push    ecx
 0x40EED2: mov     ecx, esi
 0x40EED4: call    sub_4D5D70
-0x40EED9: mov     ecx, TESDataHandler_g_PlayerRef
+0x40EED9: mov     ecx, dword ptr reference
 0x40EEDF: fld     [esp+6B8h+var_678]
 0x40EEE3: mov     edx, [ecx]
 0x40EEE5: mov     eax, [edx+1E8h]
 0x40EEEB: push    ecx
 0x40EEEC: fstp    [esp+6BCh+var_6BC]
 0x40EEEF: call    eax
-0x40EEF1: mov     ecx, TESDataHandler_g_PlayerRef
+0x40EEF1: mov     ecx, dword ptr reference
 0x40EEF7: mov     edx, [ecx]
 0x40EEF9: mov     edx, [edx+1CCh]
 0x40EEFF: lea     eax, [esp+6B8h+var_69C]
@@ -1003,30 +999,30 @@
 0x40EF04: call    edx
 0x40EF06: cmp     esi, ebp
 0x40EF08: jz      short loc_40EF54
-0x40EF0A: mov     eax, TESDataHandler_g_PlayerRef
-0x40EF0F: push    eax; Concurrency::details::SchedulerBase *
-0x40EF10: mov     ecx, esi
-0x40EF12: call    sub_4D35D0
-0x40EF17: mov     ecx, ioManager
+0x40EF0A: mov     eax, dword ptr reference
+0x40EF0F: push    eax; reference
+0x40EF10: mov     ecx, esi; this
+0x40EF12: call    TESObjectCELL_AddReference; Verified: persistent-cell AddReference updates the WorldSpace coordinate/fallback persistent-reference index (+0x64) through TESWorldSpace_IndexReference. Ordinary cell additions do not index there. This routine does not populate the separate SubSpace spatial index at +0x60.
+0x40EF17: mov     ecx, ds:0B33A10h
 0x40EF1D: push    5
 0x40EF1F: call    sub_434020
-0x40EF24: mov     ecx, TESDataHandler_g_PlayerRef
-0x40EF2A: push    ebp
-0x40EF2B: call    PlayerCharacter_GetPlayerNode
+0x40EF24: mov     ecx, dword ptr reference; this
+0x40EF2A: push    ebp; firstPerson
+0x40EF2B: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x40EF30: mov     ecx, eax; this
-0x40EF32: call    NiAVObject_InitializePropertyState
-0x40EF37: mov     ecx, TESDataHandler_g_PlayerRef
-0x40EF3D: push    ebp
-0x40EF3E: call    PlayerCharacter_GetPlayerNode
+0x40EF32: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
+0x40EF37: mov     ecx, dword ptr reference; this
+0x40EF3D: push    ebp; firstPerson
+0x40EF3E: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x40EF43: push    eax
 0x40EF44: push    ebp
 0x40EF45: call    GetShadowSceneNode
 0x40EF4A: add     esp, 4
 0x40EF4D: mov     ecx, eax
-0x40EF4F: call    ShadowSceneNodeAddShadowCaster
-0x40EF54: mov     ecx, TESDataHandler_g_PlayerRef
+0x40EF4F: call    ShadowSceneNodeAddShadowCaster; Direct retail AddShadowCaster caller in player initialization.
+0x40EF54: mov     ecx, dword ptr reference
 0x40EF5A: call    sub_4D70E0
-0x40EF5F: mov     eax, g_worldScenegraph
+0x40EF5F: mov     eax, g_WorldSceneReceiverRoot; Verified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.
 0x40EF64: cmp     [eax+0B6h], bp
 0x40EF6B: ja      short loc_40EF71
 0x40EF6D: xor     eax, eax
@@ -1039,7 +1035,7 @@
 0x40EF84: mov     [eax+58h], ecx
 0x40EF87: mov     edx, [esp+6B8h+var_694]
 0x40EF8B: mov     [eax+5Ch], edx
-0x40EF8E: mov     eax, g_worldScenegraph
+0x40EF8E: mov     eax, g_WorldSceneReceiverRoot; Verified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.
 0x40EF93: cmp     [eax+0B6h], bp
 0x40EF9A: ja      short loc_40EFA0
 0x40EF9C: xor     esi, esi
@@ -1048,13 +1044,13 @@
 0x40EFA6: mov     esi, [eax]
 0x40EFA8: lea     ecx, [esp+6B8h+var_630]
 0x40EFAF: push    ecx
-0x40EFB0: mov     ecx, TESDataHandler_g_PlayerRef
+0x40EFB0: mov     ecx, dword ptr reference
 0x40EFB6: call    sub_4D7AF0
 0x40EFBB: lea     edi, [esi+30h]
 0x40EFBE: mov     esi, eax
 0x40EFC0: mov     ecx, 9
 0x40EFC5: rep movsd
-0x40EFC7: mov     eax, g_worldScenegraph
+0x40EFC7: mov     eax, g_WorldSceneReceiverRoot; Verified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.
 0x40EFCC: cmp     [eax+0B6h], bp
 0x40EFD3: ja      short loc_40EFD9
 0x40EFD5: xor     ecx, ecx
@@ -1065,9 +1061,9 @@
 0x40EFE3: push    1; a3
 0x40EFE5: push    ecx
 0x40EFE6: fstp    [esp+6C0h+a2]; a2
-0x40EFE9: call    NiAVObject_UpdateNiAVObject
+0x40EFE9: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x40EFEE: call    sub_578CD0
-0x40EFF3: mov     ecx, TESDataHandler_g_PlayerRef; this
+0x40EFF3: mov     ecx, dword ptr reference; this
 0x40EFF9: push    ebp; a2
 0x40EFFA: call    Actor_GetActorBaseForm
 0x40EFFF: mov     esi, eax
@@ -1086,7 +1082,7 @@
 0x40F021: cmp     esi, ebp
 0x40F023: jnz     short loc_40F006
 0x40F025: jmp     short loc_40F04A
-0x40F027: mov     ecx, TESDataHandler_g_PlayerRef
+0x40F027: mov     ecx, dword ptr reference
 0x40F02D: push    ebp
 0x40F02E: call    sub_664850
 0x40F033: cmp     edi, ebp
@@ -1094,34 +1090,34 @@
 0x40F037: add     edi, 18h
 0x40F03A: jmp     short loc_40F03E
 0x40F03C: xor     edi, edi
-0x40F03E: mov     ecx, TESDataHandler_g_PlayerRef
+0x40F03E: mov     ecx, dword ptr reference
 0x40F044: push    edi
 0x40F045: call    PlayerCharacter_SetCurrentMagicItem
-0x40F04A: mov     ecx, TESDataHandler_g_PlayerRef
+0x40F04A: mov     ecx, dword ptr reference
 0x40F050: call    sub_6632A0
-0x40F055: mov     eax, OSGlobals
+0x40F055: mov     eax, ds:0B33398h
 0x40F05A: mov     byte ptr [eax+3], 1
 0x40F05E: call    sub_42BA50
-0x40F063: mov     ecx, TESDataHandler_g_PlayerRef; this
-0x40F069: call    TESObjectREFR_GetParentCell
+0x40F063: mov     ecx, dword ptr reference; this
+0x40F069: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x40F06E: test    eax, eax
 0x40F070: jnz     short loc_40F0DB
-0x40F072: mov     ecx, TESDataHandler
+0x40F072: mov     ecx, g_TESDataHandler; Verified singleton pointer: allocated as TESDataHandler (0xCE0 bytes) and published at TES_constr 441B8A; passed to LoadFiles and form APIs; TES_destr 446915 destroys and clears it. Field +0x74 is the Global list head used by TESSaveLoadGame_LoadGlobalValues; surrounding layout remains Unknown.
 0x40F078: push    0FFFFFFFFh
 0x40F07A: call    sub_447DB0
-0x40F07F: mov     ecx, TES
+0x40F07F: mov     ecx, ds:0B333A0h
 0x40F085: push    ebp
 0x40F086: push    ebp
 0x40F087: push    ebp
 0x40F088: call    sub_440AF0
-0x40F08D: call    sub_5B6040
+0x40F08D: call    MainMenu_Open
 0x40F092: call    sub_40FDD0
 0x40F097: push    ebp; a2
 0x40F098: push    7; a1
-0x40F09A: call    NiRenderer_BeginScene1
+0x40F09A: call    NiRenderer_BeginScene1; Oblivion BeginScene internal path: establishes SceneState1 when required and starts the supplied or default render-target group.
 0x40F09F: call    sub_7D7210
 0x40F0A4: push    ebp
-0x40F0A5: call    nullsub_returnTrue_0arg
+0x40F0A5: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x40F0AA: call    sub_5B5AC0
 0x40F0AF: mov     ecx, off_B0308C; "Oblivion iv logo.bik"
 0x40F0B5: push    ebp; char
@@ -1131,17 +1127,17 @@
 0x40F0B9: push    1; int
 0x40F0BB: push    1; int
 0x40F0BD: push    ecx; ArgList
-0x40F0BE: call    sub_410BA0
+0x40F0BE: call    sub_410BA0; MenuPlease: patched call to sub_410BA0 so sMainMenuMovieIntro / Oblivion iv logo.bik is skipped.
 0x40F0C3: call    sub_5B5C90
 0x40F0C8: push    1
-0x40F0CA: mov     byte_B33430, 0
-0x40F0D1: call    nullsub_returnTrue_0arg
+0x40F0CA: mov     byte ptr unk_B33430, 0
+0x40F0D1: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x40F0D6: add     esp, 2Ch
 0x40F0D9: jmp     short Oblivion_Main?___IdleLoop_Prolog
 0x40F0DB: call    sub_40FDD0
 0x40F0E0: push    offset aBeginIdleLoop_; "Begin Idle loop..."
 0x40F0E5: call    PrintToLog???
-0x40F0EA: mov     edx, OSGlobals
+0x40F0EA: mov     edx, ds:0B33398h
 0x40F0F0: mov     edi, ds:PeekMessageA
 0x40F0F6: mov     ebx, ds:TranslateMessage
 0x40F0FC: mov     ebp, ds:DispatchMessageA
@@ -1184,25 +1180,25 @@
 0x40F164: call    ds:GetActiveWindow
 0x40F16A: cmp     eax, [esp+6B8h+var_6A8]
 0x40F16E: jz      short loc_40F197
-0x40F170: mov     eax, TES
+0x40F170: mov     eax, ds:0B333A0h
 0x40F175: cmp     byte ptr [eax+51h], 0
 0x40F179: jnz     short loc_40F197
 0x40F17B: cmp     byte ptr [eax+52h], 0
 0x40F17F: jnz     short loc_40F197
-0x40F181: cmp     dword_B333F0, 0
+0x40F181: cmp     dword ptr unk_B333F0, 0
 0x40F188: jnz     short loc_40F197
 0x40F18A: push    32h ; '2'; dwMilliseconds
 0x40F18C: call    ds:Sleep
 0x40F192: jmp     loc_40F275
-0x40F197: mov     edx, g_Renderer
-0x40F19D: mov     eax, [edx+280h]
-0x40F1A3: mov     ecx, [eax]
+0x40F197: mov     edx, dword ptr renderer
+0x40F19D: mov     eax, [edx+280h]; OBSE core hooks this address for foreground main-loop processing; Hot Reload OBSE must not patch here or it would replace OBSE's hook.
+0x40F1A3: mov     ecx, [eax]; BloodOnDeath frame hook: restores overwritten mov ecx,[eax]/mov edx,[ecx+0Ch], saves EFLAGS/GPRs and FPU/XMM state, then emits queued corpse blood and the configured 8-second floor spill.
 0x40F1A5: mov     edx, [ecx+0Ch]
-0x40F1A8: push    eax
+0x40F1A8: push    eax; Hot Reload OBSE queue hook return: original renderer vtable call setup continues with push eax/call edx.
 0x40F1A9: call    edx
 0x40F1AB: test    eax, eax
 0x40F1AD: jge     loc_40F26A
-0x40F1B3: mov     ecx, g_Renderer
+0x40F1B3: mov     ecx, dword ptr renderer
 0x40F1B9: cmp     dword ptr [ecx+204h], 0
 0x40F1C0: lea     esi, [ecx+204h]
 0x40F1C6: jnz     short loc_40F1EB
@@ -1214,7 +1210,7 @@
 0x40F1DB: test    al, al
 0x40F1DD: jz      short loc_40F1E5
 0x40F1DF: mov     dword ptr [esi], 1
-0x40F1E5: mov     ecx, g_Renderer
+0x40F1E5: mov     ecx, dword ptr renderer
 0x40F1EB: cmp     dword ptr [ecx+204h], 1
 0x40F1F2: lea     esi, [ecx+204h]
 0x40F1F8: jnz     short loc_40F21D
@@ -1226,7 +1222,7 @@
 0x40F20D: test    al, al
 0x40F20F: jz      short loc_40F217
 0x40F211: mov     dword ptr [esi], 0
-0x40F217: mov     ecx, g_Renderer
+0x40F217: mov     ecx, dword ptr renderer
 0x40F21D: mov     ecx, [ecx+280h]
 0x40F223: mov     eax, [ecx]
 0x40F225: push    ecx
@@ -1234,42 +1230,42 @@
 0x40F229: call    ecx
 0x40F22B: test    eax, eax
 0x40F22D: jl      short loc_40F260
-0x40F22F: mov     edx, TES
+0x40F22F: mov     edx, ds:0B333A0h
 0x40F235: cmp     dword ptr [edx+54h], 0
 0x40F239: jz      short loc_40F260
 0x40F23B: cmp     byte_B0703C, 0
 0x40F242: jz      short loc_40F260
-0x40F244: mov     ecx, SaveLoad_CurrentSavegame
+0x40F244: mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.
 0x40F24A: call    sub_45A500
 0x40F24F: test    al, al
 0x40F251: jnz     short loc_40F260
-0x40F253: mov     eax, TES
+0x40F253: mov     eax, ds:0B333A0h
 0x40F258: mov     ecx, [eax+54h]
-0x40F25B: call    WaterSurfaceLoop
+0x40F25B: call    WaterSurfaceLoop; Pass202/205: WaterSurfaceLoop. Native producer for persistent water height/depth target and updater of WaterShaderProperty pass-data fields for water grid cells.
 0x40F260: push    32h ; '2'; dwMilliseconds
 0x40F262: call    ds:Sleep
 0x40F268: jmp     short loc_40F275
-0x40F26A: mov     ecx, OSGlobals
-0x40F270: call    sub_40D800
-0x40F275: mov     eax, OSGlobals
+0x40F26A: mov     ecx, ds:0B33398h
+0x40F270: call    sub_40D800; Main frame/update loop; calls 0x55FA50 with world camera and menu-mode state once per frame.
+0x40F275: mov     eax, ds:0B33398h
 0x40F27A: cmp     byte ptr [eax], 0
 0x40F27D: jnz     Oblivion_Main?___exitPath?
 0x40F283: cmp     byte ptr [eax+1], 0
 0x40F287: jz      Oblivion_Main?___IdleLoop_GetMessage
 0x40F28D: mov     ecx, [eax+24h]
 0x40F290: call    SoundManager_StopFilterGraph
-0x40F295: mov     ecx, TESDataHandler_g_PlayerRef; this
-0x40F29B: call    TESObjectREFR_GetParentCell
+0x40F295: mov     ecx, dword ptr reference; this
+0x40F29B: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x40F2A0: test    eax, eax
 0x40F2A2: jz      short loc_40F2B7
-0x40F2A4: mov     ecx, TESDataHandler_g_PlayerRef; this
-0x40F2AA: push    ecx
-0x40F2AB: call    TESObjectREFR_GetParentCell
-0x40F2B0: mov     ecx, eax
-0x40F2B2: call    sub_4CECD0
-0x40F2B7: mov     ecx, TESDataHandler_g_PlayerRef
-0x40F2BD: push    1
-0x40F2BF: call    PlayerCharacter_GetPlayerNode
+0x40F2A4: mov     ecx, dword ptr reference; this
+0x40F2AA: push    ecx; reference
+0x40F2AB: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x40F2B0: mov     ecx, eax; this
+0x40F2B2: call    TESObjectCELL_RemoveReference; Verified: removes a reference from the cell object list under the cell lock. For persistent cells, clears the reference's ExtraDataList cell pointer and removes it from the owning WorldSpace persistent-reference index (+0x64); for normal cells, clears its parent cell and updates changed state. No write to the separate SubSpace index (+0x60) is present.
+0x40F2B7: mov     ecx, dword ptr reference; this
+0x40F2BD: push    1; firstPerson
+0x40F2BF: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x40F2C4: mov     esi, eax
 0x40F2C6: test    esi, esi
 0x40F2C8: jz      short loc_40F314
@@ -1304,9 +1300,9 @@
 0x40F30E: push    1
 0x40F310: mov     ecx, esi
 0x40F312: call    edx
-0x40F314: mov     ecx, TESDataHandler_g_PlayerRef
-0x40F31A: push    0
-0x40F31C: call    PlayerCharacter_GetPlayerNode
+0x40F314: mov     ecx, dword ptr reference; this
+0x40F31A: push    0; firstPerson
+0x40F31C: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x40F321: mov     esi, eax
 0x40F323: test    esi, esi
 0x40F325: jz      short loc_40F371
@@ -1341,41 +1337,41 @@
 0x40F36B: push    1
 0x40F36D: mov     ecx, esi
 0x40F36F: call    eax
-0x40F371: mov     ecx, TES; this
+0x40F371: mov     ecx, ds:0B333A0h; this
 0x40F377: push    0; a3
 0x40F379: push    0; a2
 0x40F37B: call    sub_442630
-0x40F380: mov     ecx, TES
+0x40F380: mov     ecx, ds:0B333A0h
 0x40F386: mov     eax, 7FFFFFFFh
 0x40F38B: mov     [ecx+20h], eax
-0x40F38E: mov     edx, TES
+0x40F38E: mov     edx, ds:0B333A0h
 0x40F394: mov     [edx+24h], eax
-0x40F397: mov     eax, TESDataHandler_g_PlayerRef
-0x40F39C: mov     ecx, SaveLoad_CurrentSavegame
+0x40F397: mov     eax, dword ptr reference
+0x40F39C: mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.
 0x40F3A2: push    0
 0x40F3A4: push    eax
 0x40F3A5: call    sub_4533F0
-0x40F3AA: mov     ecx, SaveLoad_CurrentSavegame
+0x40F3AA: mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.
 0x40F3B0: push    1
 0x40F3B2: mov     esi, eax
 0x40F3B4: call    sub_45A530
-0x40F3B9: mov     ecx, SaveLoad_CurrentSavegame
-0x40F3BF: push    0
-0x40F3C1: call    sub_464440
-0x40F3C6: mov     ecx, TESDataHandler_g_PlayerRef
+0x40F3B9: mov     ecx, g_TESSaveLoadGame; self
+0x40F3BF: push    0; initializationMode
+0x40F3C1: call    TESSaveLoadGame_ReconcileExistingChanges; Verified: LoadGame finalization (caller 466889) ensures incoming map at manager+4, walks current map at +0, reconciles extant forms through sub45F180/ResetObject and reconstructs missing moved references from their old locations, then destroys old current map and promotes incoming map to +0. Probable Fallout homolog BGSSaveLoadGame::RevertCurrentChanges 825F1938: same existing-form reconciliation, missing moved-reference handling, and final map swap. Fallout uses TESForm::Revert and BGSReconstructFormsInAllFilesMap; Oblivion uses sub45F180 plus source-file search at 45C4F0. Note: function also has a separate game/world initialization branch; the map reconciliation and swap are in the save-load branch.
+0x40F3C6: mov     ecx, dword ptr reference
 0x40F3CC: mov     edx, [ecx]
 0x40F3CE: mov     eax, [edx+150h]
 0x40F3D4: push    0
 0x40F3D6: call    eax
-0x40F3D8: mov     ecx, TESDataHandler_g_PlayerRef
+0x40F3D8: mov     ecx, dword ptr reference
 0x40F3DE: mov     edx, [ecx]
 0x40F3E0: mov     eax, [edx+170h]
 0x40F3E6: call    eax
-0x40F3E8: mov     ecx, eax
-0x40F3EA: call    sub_405CE0
-0x40F3EF: mov     ecx, TESDataHandler_g_PlayerRef
+0x40F3E8: mov     ecx, eax; this
+0x40F3EA: call    TESNPC_ClearFaceGenNodes; Releases and clears TESNPC cached FaceGen nodes at +0x1D4/+0x1D8. SexChange invokes at 0x515A57 after live-node detachment, then actor-process refresh virtuals. OCO dossier hypothesis: double sex change may repair stale appearance by forcing these transitions; missing native LoadGame invalidation and sufficiency of this helper alone remain UNRESOLVED. Controlled capture plan in analysis/oco_load/investigation.json.
+0x40F3EF: mov     ecx, dword ptr reference
 0x40F3F5: call    sub_5E9690
-0x40F3FA: mov     ecx, TESDataHandler_g_PlayerRef
+0x40F3FA: mov     ecx, dword ptr reference
 0x40F400: mov     ecx, [ecx+58h]
 0x40F403: test    ecx, ecx
 0x40F405: jz      short loc_40F413
@@ -1383,68 +1379,68 @@
 0x40F409: mov     eax, [edx+3A8h]
 0x40F40F: push    0
 0x40F411: call    eax
-0x40F413: mov     ecx, TESDataHandler_g_PlayerRef
+0x40F413: mov     ecx, dword ptr reference
 0x40F419: push    esi
 0x40F41A: call    sub_663340
-0x40F41F: mov     ecx, SaveLoad_CurrentSavegame
+0x40F41F: mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.
 0x40F425: call    sub_462080
-0x40F42A: mov     ecx, SaveLoad_CurrentSavegame
-0x40F430: call    SaveLoad_ValidateCreatedObj??
-0x40F435: mov     ecx, SaveLoad_CurrentSavegame
+0x40F42A: mov     ecx, g_TESSaveLoadGame; self
+0x40F430: call    TESSaveLoadGame_ProcessDeferredDeletions
+0x40F435: mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.
 0x40F43B: push    0
 0x40F43D: call    sub_45A530
-0x40F442: mov     ecx, SaveLoad_CurrentSavegame
+0x40F442: mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.
 0x40F448: call    sub_45C320
-0x40F44D: mov     ecx, offset ActorProcessManager_ptr
+0x40F44D: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x40F452: call    sub_675310
-0x40F457: mov     ecx, TESDataHandler
+0x40F457: mov     ecx, g_TESDataHandler; Verified singleton pointer: allocated as TESDataHandler (0xCE0 bytes) and published at TES_constr 441B8A; passed to LoadFiles and form APIs; TES_destr 446915 destroys and clears it. Field +0x74 is the Global list head used by TESSaveLoadGame_LoadGlobalValues; surrounding layout remains Unknown.
 0x40F45D: call    sub_447300
 0x40F462: push    0
 0x40F464: call    sub_57CCC0
 0x40F469: add     esp, 4
 0x40F46C: call    sub_5B5AC0
-0x40F471: call    sub_5B6040
-0x40F476: mov     eax, OSGlobals
+0x40F471: call    MainMenu_Open
+0x40F476: mov     eax, ds:0B33398h
 0x40F47B: mov     byte ptr [eax+1], 0
 0x40F47F: mov     byte ptr [eax+4], 0
 0x40F483: jmp     Oblivion_Main?___IdleLoop_GetMessage
 0x40F488: mov     byte ptr [eax+3], 0
-0x40F48C: cmp     dword_B3F940, 0
+0x40F48C: cmp     dword ptr g_NiParallelUpdateTaskManager, 0; Verified pointer, not a universal threading-enable boolean: 404D60 waits on manager+198 and adjusts counter+190; 404DD0 reads pending flag+1B0. NiRenderer_Render checks it at 40C8F7/40D059; main update checks it at 40DB4E/40DEC6. Null excludes this parallel update manager, but does not prove all IO, resource-reference, pool or external writer exclusion for a DX11 bucket transaction.
 0x40F493: jz      short loc_40F49A
-0x40F495: call    sub_701A80
-0x40F49A: mov     ecx, ModelLoaderPtr
+0x40F495: call    NiParallelUpdateTaskManager_DestroyGlobal
+0x40F49A: mov     ecx, ds:0B33A1Ch
 0x40F4A0: call    sub_43E0F0
 0x40F4A5: call    sub_410B80
-0x40F4AA: call    sub_67F180
+0x40F4AA: call    TravelPath_ClearAllDoorLinkMaps; Verified reset/teardown: release all AStarWorldNode state slots and allocations from LowPathSearchGlobals.allAStarWorldNodes, clear each node list, destroy inner/outer map instances, free the search-state table, and null doorLinkMap. Save/load reconciliation calls this then TravelPath_EnsureDoorLinkMapInitialized; WinMain also participates in this subsystem lifecycle.
 0x40F4AF: call    sub_682430
 0x40F4B4: call    sub_6844D0
 0x40F4B9: call    sub_684710
 0x40F4BE: call    sub_405B00
 0x40F4C3: call    Interface3dScenegraph_Destructor
-0x40F4C8: mov     ecx, offset dword_B3BDB0
+0x40F4C8: mov     ecx, (offset qword_B3BB2C+284h)
 0x40F4CD: call    sub_67CF00
 0x40F4D2: call    sub_578EF0
 0x40F4D7: call    sub_5C0FC0
-0x40F4DC: mov     ecx, TES
+0x40F4DC: mov     ecx, ds:0B333A0h
 0x40F4E2: mov     ecx, [ecx+5Ch]
 0x40F4E5: test    ecx, ecx
 0x40F4E7: jz      short loc_40F4EE
 0x40F4E9: call    sub_53FB30
-0x40F4EE: mov     edx, OSGlobals
+0x40F4EE: mov     edx, ds:0B33398h
 0x40F4F4: mov     ecx, [edx+24h]
 0x40F4F7: push    0FFFFFFFFh
 0x40F4F9: call    sub_6AC330
 0x40F4FE: call    sub_6F96B0
-0x40F503: mov     ecx, TES
+0x40F503: mov     ecx, ds:0B333A0h
 0x40F509: xor     ebx, ebx
 0x40F50B: cmp     ecx, ebx
 0x40F50D: mov     esi, ecx
 0x40F50F: jz      short loc_40F51F
 0x40F511: call    TES_destr
 0x40F516: push    esi
-0x40F517: call    FormHeapFree
+0x40F517: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x40F51C: add     esp, 4
-0x40F51F: mov     esi, OSGlobals
+0x40F51F: mov     esi, ds:0B33398h
 0x40F525: mov     edi, [esi+24h]
 0x40F528: add     esi, 24h ; '$'
 0x40F52B: cmp     edi, ebx
@@ -1452,53 +1448,53 @@
 0x40F52F: mov     ecx, edi
 0x40F531: call    sub_6AC020
 0x40F536: push    edi
-0x40F537: call    FormHeapFree
+0x40F537: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x40F53C: add     esp, 4
 0x40F53F: mov     [esi], ebx
 0x40F541: call    sub_5535D0
-0x40F546: call    sub_55F720
-0x40F54B: mov     ecx, offset EffectSettingCollection
+0x40F546: call    BSTreeManager_Destroy; Verified singleton Destroy: invokes BSTreeManager_dtor, frees the 0x28-byte manager and clears the global instance pointer.
+0x40F54B: mov     ecx, 0B33508h
 0x40F550: call    EffectSettingCollection_Clear
-0x40F555: call    ActiveEffect_Base_ClearCreateFuncTable
-0x40F55A: mov     ecx, dword_B3A6B0; void *
+0x40F555: call    ActiveEffect_Base_ClearCreateFuncTable; Verified registry-clear helper, called during WinMain shutdown after EffectSettingCollection_Clear; it clears NiTMap_AECreatorFuncs. The map also has a separate atexit destructor that frees its bucket array.
+0x40F55A: mov     ecx, dword ptr unk_B3A6B0; this
 0x40F560: cmp     ecx, ebx
 0x40F562: mov     esi, ecx
 0x40F564: jz      short loc_40F574
-0x40F566: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x40F566: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x40F56B: push    esi
-0x40F56C: call    FormHeapFree
+0x40F56C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x40F571: add     esp, 4
-0x40F574: mov     ecx, OSGlobals
+0x40F574: mov     ecx, ds:0B33398h
 0x40F57A: cmp     ecx, ebx
 0x40F57C: mov     esi, ecx
 0x40F57E: jz      short loc_40F58E
-0x40F580: call    sub_40C350
+0x40F580: call    sub_40C350;
 0x40F585: push    esi
-0x40F586: call    FormHeapFree
+0x40F586: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x40F58B: add     esp, 4
 0x40F58E: push    offset byte_B07BF4
 0x40F593: mov     ecx, offset INISettingCollection
-0x40F598: mov     OSGlobals, ebx
+0x40F598: mov     ds:0B33398h, ebx
 0x40F59E: call    sub_40C180
 0x40F5A3: call    sub_53AD60
-0x40F5A8: mov     ecx, g_Renderer; this
+0x40F5A8: mov     ecx, dword ptr renderer; this
 0x40F5AE: push    offset sub_405440; a2
-0x40F5B3: call    sub_40C220
-0x40F5B8: mov     ecx, g_Renderer; this
-0x40F5BE: push    offset nullsub_returnTrue_0arg; a2
+0x40F5B3: call    OB_NiDX9Renderer_UnregisterDeviceLostCallback_010201A0
+0x40F5B8: mov     ecx, dword ptr renderer; this
+0x40F5BE: push    offset Cmd_AddAchievement_PC_ReturnTrueNoOp; a2
 0x40F5C3: call    sub_40C2F0
 0x40F5C8: push    1
 0x40F5CA: call    sub_497B50
-0x40F5CF: mov     ecx, OBSE_g_FileFinder
+0x40F5CF: mov     ecx, ds:0B33A04h
 0x40F5D5: add     esp, 4
 0x40F5D8: cmp     ecx, ebx
 0x40F5DA: jz      short loc_40F5EC
 0x40F5DC: mov     esi, ecx
 0x40F5DE: call    sub_431770
 0x40F5E3: push    esi
-0x40F5E4: call    FormHeapFree
+0x40F5E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x40F5E9: add     esp, 4
-0x40F5EC: mov     esi, dword_B35300
+0x40F5EC: mov     esi, dword ptr unk_B35300
 0x40F5F2: cmp     esi, ebx
 0x40F5F4: jz      short loc_40F618
 0x40F5F6: lea     eax, [esi+4]
@@ -1513,8 +1509,8 @@
 0x40F60C: push    1
 0x40F60E: mov     ecx, esi
 0x40F610: call    eax
-0x40F612: mov     dword_B35300, ebx
-0x40F618: call    sub_747BE0
+0x40F612: mov     dword ptr unk_B35300, ebx
+0x40F618: call    sub_747BE0; Pass223: Shutdown callback dispatcher; invokes registered property shutdown callback before later heap cleanup.
 0x40F61D: mov     ecx, [esp+6B8h+var_4]
 0x40F624: pop     edi
 0x40F625: pop     esi

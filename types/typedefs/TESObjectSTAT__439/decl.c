@@ -1,1 +1,1 @@
-TESObjectSTAT
+struct TESObjectSTAT;

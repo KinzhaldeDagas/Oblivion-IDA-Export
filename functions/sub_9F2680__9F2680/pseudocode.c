@@ -1,8 +1,5 @@
 int sub_9F2680()
 {
-  GameSetting_ConstrAndReg(
-    &dword_B38C28,
-    (int)"sSoulGemTooSmall",
-    (int)"There is no Soul Gem large enough to capture the soul.");
-  return atexit(sub_A21F70);
+  GameSetting_ConstrAndReg(&stru_B38C28, "sSoulGemTooSmall", "There is no Soul Gem large enough to capture the soul."); /*0x9f268f*/
+  return atexit(sub_A21F70); /*0x9f269f*/
 }

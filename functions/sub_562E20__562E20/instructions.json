@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x562E20",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; 2026-05-25 render dispatch recheck: simple STBB builder creates TES4 billboard screen geometry without calling CSpeedTreeRT::GetGeometry(0x08). It is not a functional 360 billboard exporter.",
     "mnemonic": "push",
     "size": 2
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x562E4C",
-    "line": "mov     esi, [esp+180h+arg_0]",
+    "line": "mov     esi, [esp+180h+treeObject]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x562E55",
-    "line": "lea     ecx, [esp+180h+var_138]",
+    "line": "lea     ecx, [esp+180h+var_138]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x562E59",
-    "line": "call    sub_7879A0",
+    "line": "call    OB_SpeedTreeGeometryOutput_init_010201A0; STBB builder creates a temporary SGeometry-style output object but does not request GetGeometry(0x08); it forces a flat camera, builds a generic TES billboard quad, then restores camera.",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,13 +109,13 @@
   },
   {
     "ea": "0x562E60",
-    "line": "cmp     dword ptr [edi+0Ch], 0",
+    "line": "cmp     dword ptr [edi+0Ch], 0; 2026-05-22 360 gate probe implementation: stock simple STBB builder checks BSTreeModel+0x0C CSpeedTreeRT presence before creating a single flat billboard. This path is still not a 360 exporter.",
     "mnemonic": "cmp",
     "size": 4
   },
   {
     "ea": "0x562E64",
-    "line": "fst     [esp+180h+var_168]",
+    "line": "fst     [esp+180h+position3]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x562E7B",
-    "line": "fst     [esp+180h+var_15C]",
+    "line": "fst     [esp+180h+direction3]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -193,61 +193,61 @@
   },
   {
     "ea": "0x562EA5",
-    "line": "lea     eax, [esp+180h+var_150]",
+    "line": "lea     eax, [esp+180h+directionOut3]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x562EA9",
-    "line": "push    eax",
+    "line": "push    eax; directionOut3",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x562EAA",
-    "line": "lea     ecx, [esp+184h+var_144]",
+    "line": "lea     ecx, [esp+184h+positionOut3]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x562EAE",
-    "line": "push    ecx",
+    "line": "push    ecx; positionOut3",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x562EAF",
-    "line": "call    sub_78B690",
+    "line": "call    CSpeedTreeRT__GetCamera; Static CSpeedTreeRT::GetCamera. Copies the process-global camera position and direction vectors to non-NULL output arrays; otherwise records the SDK error.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x562EB4",
-    "line": "lea     edx, [esp+188h+var_15C]",
+    "line": "lea     edx, [esp+188h+direction3]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x562EB8",
-    "line": "push    edx",
+    "line": "push    edx; direction3",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x562EB9",
-    "line": "lea     eax, [esp+18Ch+var_168]",
+    "line": "lea     eax, [esp+18Ch+position3]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x562EBD",
-    "line": "push    eax",
+    "line": "push    eax; position3",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x562EBE",
-    "line": "call    sub_78D140",
+    "line": "call    CSpeedTreeRT__SetCamera; Static CSpeedTreeRT::SetCamera. On a changed non-NULL camera, updates global vectors, invalidates registered tree camera caches, recomputes unit billboard data, and updates clamped horizontal-billboard fade.",
     "mnemonic": "call",
     "size": 5
   },
@@ -259,13 +259,13 @@
   },
   {
     "ea": "0x562EC5",
-    "line": "mov     ecx, [edi+0Ch]",
+    "line": "mov     ecx, [edi+0Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x562EC8",
-    "line": "fstp    [esp+190h+var_184]; float",
+    "line": "fstp    [esp+190h+lodLevel]; lodLevel",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -277,13 +277,13 @@
   },
   {
     "ea": "0x562ECF",
-    "line": "call    sub_78C110",
+    "line": "call    CSpeedTreeRT__SetLodLevel",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x562ED4",
-    "line": "push    0",
+    "line": "push    0; distantPlane",
     "mnemonic": "push",
     "size": 2
   },
@@ -295,19 +295,19 @@
   },
   {
     "ea": "0x562EDA",
-    "line": "push    ecx",
+    "line": "push    ecx; outData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x562EDB",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x562EDD",
-    "line": "call    sub_4BA3C0",
+    "line": "call    TESObjectTREE_BuildBillboardQuadData; 2026-05-22 360 gate probe implementation: stock simple STBB builder calls generic TES billboard quad builder with orientation 0; it does not consume CSpeedTreeRT::GetGeometry(0x08) or directional 360 texcoords.",
     "mnemonic": "call",
     "size": 5
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x562F31",
-    "line": "push    edx; a2",
+    "line": "push    edx; data",
     "mnemonic": "push",
     "size": 1
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x562F34",
-    "line": "call    NiTriShape_NiTriShape",
+    "line": "call    OB_NiTriShape_ctorWithData_010201A0; Verified: OB_NiTriShape_ctorWithData constructs the NiTriShape stored as model.billboardShape_STBB (+0x1C); it is named STBB and later attached through BSTreeNode_SetBillboard.",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x562F3D",
-    "line": "lea     esi, [edi+1Ch]",
+    "line": "lea     esi, [edi+1Ch]; Verified STBB model field producer: BSTreeModel_CreateBillboardGeometry creates a NiTriShape from TESObjectTREE_BuildBillboardQuadData, stores it in BSTreeModel.billboardShape_STBB (+0x1C), and names it STBB.",
     "mnemonic": "lea",
     "size": 3
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x562F4B",
-    "line": "call    NiSmartPointer_Set??",
+    "line": "call    NiSmartPointer_Set??; Verified: assigns the newly constructed NiTriShape to billboardShape_STBB via an owning smart pointer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x562F5C",
-    "line": "call    sub_561030",
+    "line": "call    BSTreeModel_CreateAlphaProperty; Leaf geometry installs alpha-test property flags 0x12EC, function GREATER, ref=84. Therefore sampled alpha <=84 is discarded/invisible, not rendered RGB-black.",
     "mnemonic": "call",
     "size": 5
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x562F84",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x562F93",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -625,31 +625,31 @@
   },
   {
     "ea": "0x562F9A",
-    "line": "push    1",
+    "line": "push    1; arg3",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x562F9C",
-    "line": "push    1",
+    "line": "push    1; normalMapBypass",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x562F9E",
-    "line": "push    1",
+    "line": "push    1; shaderId",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x562FA0",
-    "line": "push    eax",
+    "line": "push    eax; root",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x562FA1",
-    "line": "call    sub_7B8940",
+    "line": "call    BSShaderManager_AssignShadersRecursive; Generic shader assignment in simple STBB builder: applies default/material shader id 1 to the billboard group, not frond id 5.",
     "mnemonic": "call",
     "size": 5
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x562FAD",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -817,37 +817,37 @@
   },
   {
     "ea": "0x562FFF",
-    "line": "call    sub_769030",
+    "line": "call    sub_769030; MoonSugarEffect decode: BeginScene prepack flush. Iterates renderer PrePackObjects, locks/stages shared VB ranges, uses declaration/default/skinned packers, rebuilds IBs, unlocks, clears the map, and heap-frees temporary entries. Plugin mask passes should not borrow this renderer-owned queue/lifetime.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x563004",
-    "line": "lea     ecx, [esp+180h+var_150]",
+    "line": "lea     ecx, [esp+180h+directionOut3]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x563008",
-    "line": "push    ecx",
+    "line": "push    ecx; direction3",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x563009",
-    "line": "lea     edx, [esp+184h+var_144]",
+    "line": "lea     edx, [esp+184h+positionOut3]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x56300D",
-    "line": "push    edx",
+    "line": "push    edx; position3",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x56300E",
-    "line": "call    sub_78D140",
+    "line": "call    CSpeedTreeRT__SetCamera; Static CSpeedTreeRT::SetCamera. On a changed non-NULL camera, updates global vectors, invalidates registered tree camera caches, recomputes unit billboard data, and updates clamped horizontal-billboard fade.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1039,7 +1039,7 @@
   },
   {
     "ea": "0x563065",
-    "line": "lea     ecx, [esp+180h+var_138]",
+    "line": "lea     ecx, [esp+180h+var_138]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1051,7 +1051,7 @@
   },
   {
     "ea": "0x563074",
-    "line": "call    sub_787B20",
+    "line": "call    OB_SpeedTreeGeometryOutput_Dtor_010201A0; Oblivion aggregate SpeedTree geometry-output destructor/reset: clears all externally owned branch, frond, leaf, and billboard view pointers without freeing them. Called on stack SGeometry output after Bethesda geometry builders finish.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1102,5 +1102,113 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9BD2B0",
+    "line": "lea     ecx, [ebp-138h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BD2B6",
+    "line": "jmp     OB_SpeedTreeGeometryOutput_Dtor_010201A0; Oblivion aggregate SpeedTree geometry-output destructor/reset: clears all externally owned branch, frond, leaf, and billboard view pointers without freeing them. Called on stack SGeometry output after Bethesda geometry builders finish.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD2BB",
+    "line": "lea     ecx, [ebp-170h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BD2C1",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD2C6",
+    "line": "mov     eax, [ebp-16Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9BD2CC",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD2CD",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD2D2",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD2D3",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD2D4",
+    "line": "lea     ecx, [ebp-16Ch]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BD2DA",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD2DF",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BD2E3",
+    "line": "lea     eax, [edx-170h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BD2E9",
+    "line": "mov     ecx, [edx-174h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9BD2EF",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BD2F1",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD2F6",
+    "line": "mov     eax, offset stru_AE6CE0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD2FB",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

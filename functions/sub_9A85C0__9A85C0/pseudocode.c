@@ -1,32 +1,32 @@
-void __thiscall sub_9A85C0(_DWORD *this, char *Src)
+void __thiscall sub_9A85C0(unsigned int *this, char *Src)
 {
-  const char *v3; // ebp
-  unsigned int v5; // kr00_4
-  const char *v6; // ecx
-  unsigned int v7; // edi
+  const char *v2; // ebp
+  unsigned int v4; // kr00_4
+  const char *v5; // ecx
+  unsigned int v6; // edi
 
-  v3 = Src;
-  if ( Src && *Src )
+  v2 = Src; /*0x9a85c1*/
+  if ( Src && *Src ) /*0x9a85cc*/
   {
-    v5 = strlen(Src);
-    v6 = (const char *)*(this + 9);
-    v7 = v5 + 1;
-    if ( v6 )
+    v4 = strlen(Src); /*0x9a85d4*/
+    v5 = (const char *)*(this + 9); /*0x9a85e0*/
+    v6 = v4 + 1; /*0x9a85e8*/
+    if ( v5 ) /*0x9a85eb*/
     {
-      if ( strlen(v6) < v7 )
+      if ( strlen(v5) < v6 ) /*0x9a85ff*/
       {
-        FormHeapFree((unsigned int)v6);
-        *(this + 9) = 0;
+        FormHeapFree((unsigned int)v5); /*0x9a8602*/
+        *(this + 9) = 0; /*0x9a860a*/
       }
-      v3 = Src;
+      v2 = Src; /*0x9a8611*/
     }
-    if ( !*(this + 9) )
-      *(this + 9) = FormHeapAlloc(v7);
-    strcpy_s((char *)*(this + 9), v7, v3);
+    if ( !*(this + 9) ) /*0x9a8615*/
+      *(this + 9) = FormHeapAlloc(v6); /*0x9a8624*/
+    strcpy_s((char *)*(this + 9), v6, v2); /*0x9a862d*/
   }
   else
   {
-    FormHeapFree(*(this + 9));
-    *(this + 9) = 0;
+    FormHeapFree(*(this + 9)); /*0x9a863f*/
+    *(this + 9) = 0; /*0x9a8647*/
   }
 }

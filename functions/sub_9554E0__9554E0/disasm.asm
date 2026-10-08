@@ -84,7 +84,7 @@
 0x9557B4: xor     edx, edx
 0x9557B6: mov     [esp+20h+var_14], 3F000000h
 0x9557BE: movss   xmm4, [esp+20h+var_14]
-0x9557C4: mov     ecx, offset dword_BA9810
+0x9557C4: mov     ecx, offset unk_BA9810
 0x9557C9: lea     esp, [esp+0]
 0x9557D0: movaps  xmm1, xmmword ptr [ecx]
 0x9557D3: movaps  xmm0, xmm1

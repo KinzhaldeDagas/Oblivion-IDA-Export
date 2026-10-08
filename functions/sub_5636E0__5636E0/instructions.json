@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5636E0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; SpeedTreeOBSE 2026-06-01 hook-truth correction: base resource builder still calls branch 0x5616F0, fixed-card leaf 0x5622B0, then simple STBB 0x562E20. No generic mesh-leaf/resource sidecar consumer is present; optional 0x563741 hook state now gates leafMesh log-only classification.",
     "mnemonic": "push",
     "size": 2
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x56371B",
-    "line": "mov     edi, [esp+6C0h+arg_0]",
+    "line": "mov     edi, [esp+6C0h+mode]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -145,43 +145,43 @@
   },
   {
     "ea": "0x563739",
-    "line": "call    sub_5616F0",
+    "line": "call    BSTreeModel_CreateBranchGeometry; Verified branch resource path: branch LOD count sizes three model arrays—branchGeometryDataByLOD (+0x14), branchShaderPropertiesByLOD (+0x24), and branchCachedPropertiesByLOD (+0x2C). CreateArt turns geometry data into branch NiTriStrips, attaches the per-LOD shader property, and caches property ID 3.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x56373E",
-    "line": "push    edi",
+    "line": "push    edi; tree",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x56373F",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x563741",
-    "line": "call    sub_5622B0",
+    "line": "call    BSTreeModel_CreateLeafGeometry; Build fixed-card leaf geometry/resources for all leaf LODs via 0x5622B0.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x563746",
-    "line": "push    edi",
+    "line": "push    edi; tree",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x563747",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x563749",
-    "line": "call    sub_562E20",
+    "line": "call    BSTreeModel_CreateBillboardGeometry; SpeedTreeOBSE 2026-05-31 absolute texture path enablement: branch-normal map-bank writer remains narrow index0 only; retained map-bank texture paths now normalize absolute source-library strings to safe local candidates; no generic sidecar mutation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -769,7 +769,7 @@
   },
   {
     "ea": "0x5638A9",
-    "line": "push    offset dword_B3FA80",
+    "line": "push    offset stru_B3FA80",
     "mnemonic": "push",
     "size": 5
   },
@@ -889,7 +889,7 @@
   },
   {
     "ea": "0x5638E6",
-    "line": "jp      short loc_563916",
+    "line": "jp      short loc_563916; Verified: if no collision shape was loaded from the tree model and BSTreeModel.trunkLength exceeds 64.0 (flt_A56670), CreateGeometry builds a fallback trunk capsule.",
     "mnemonic": "jp",
     "size": 2
   },
@@ -913,7 +913,7 @@
   },
   {
     "ea": "0x5638F4",
-    "line": "fstp    [esp+6C8h+var_6AC]",
+    "line": "fstp    [esp+6C8h+var_6AC]; Verified capsule radius input is BSTreeModel.trunkWidth * 0.5.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -925,7 +925,7 @@
   },
   {
     "ea": "0x5638FC",
-    "line": "fstp    [esp+6C8h+var_6C4]; float",
+    "line": "fstp    [esp+6C8h+radius]; radius",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -937,13 +937,13 @@
   },
   {
     "ea": "0x563903",
-    "line": "fstp    [esp+6C8h+var_6C8]; float",
+    "line": "fstp    [esp+6C8h+trunkLength]; trunkLength",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x563906",
-    "line": "call    sub_8AFDC0",
+    "line": "call    BSTreeModel_CreateTrunkCapsuleShape; Verified calls BSTreeModel_CreateTrunkCapsuleShape(trunkLength, trunkWidth*0.5) and stores the returned Havok object at BSTreeModel.collisionShape (+0x40).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1060,5 +1060,83 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9BD3E0",
+    "line": "lea     ecx, [ebp-6A8h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BD3E6",
+    "line": "jmp     ??1BSStream@@UAE@XZ; BSStream::~BSStream(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD3EB",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BD3EF",
+    "line": "lea     eax, [edx-6B0h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BD3F5",
+    "line": "mov     ecx, [edx-6B4h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9BD3FB",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BD3FD",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD402",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD405",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD408",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BD40A",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD40F",
+    "line": "mov     eax, offset stru_AE6DCC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD414",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

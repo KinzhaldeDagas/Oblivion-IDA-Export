@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x78377D",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x783786",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x7837A7",
-    "line": "jmp     ??1NiD3DVertexShader@@UAE@XZ; NiD3DVertexShader::~NiD3DVertexShader(void)",
+    "line": "jmp     ??1NiD3DVertexShader@@UAE@XZ; MoonSugarEffect decode: NiD3DVertexShader destructor. Removes shader-program-factory mapping, clears/release-binds the live vertex shader through renderer state, releases the D3D handle, then destructs base program.",
     "mnemonic": "jmp",
     "size": 5
   }

@@ -10,9 +10,9 @@
 0x676A52: jnz     loc_676B1F
 0x676A58: mov     ecx, [esp+20h+var_10]; this
 0x676A5C: push    ebp; a2
-0x676A5D: call    sub_673A50
+0x676A5D: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x676A62: mov     ecx, eax; this
-0x676A64: call    sub_7616D0
+0x676A64: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x676A69: mov     ebx, eax
 0x676A6B: test    ebx, ebx
 0x676A6D: jz      loc_676B1F
@@ -45,7 +45,7 @@
 0x676AC0: test    ah, 5
 0x676AC3: jp      short loc_676B17
 0x676AC5: mov     ecx, esi; this
-0x676AC7: call    TESObjectREFR_GetParentCell
+0x676AC7: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x676ACC: mov     edi, eax
 0x676ACE: test    edi, edi
 0x676AD0: jz      short loc_676B17
@@ -68,7 +68,7 @@
 0x676AFA: lea     ecx, [esp+3Ch+var_C]
 0x676AFE: push    ecx; int
 0x676AFF: mov     ecx, esi
-0x676B01: call    sub_5E2E20
+0x676B01: call    Actor_ChoosePathGridSteeringPosition; Verified actor package movement helper. Finds a reachable PathGrid point for the requested destination; if it has outgoing connections, selects the first linked node and chooses a randomized intermediate position along that edge. Handles empty/unavailable PathGrids by falling back to terrain height or the actor's current position. Multiple HighProcess package-action callers establish the steering-position role.
 0x676B06: mov     edx, [esi]
 0x676B08: mov     edx, [edx+1CCh]
 0x676B0E: lea     eax, [esp+20h+var_C]

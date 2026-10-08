@@ -24,3 +24,12 @@
 0x8BA63D: pop     esi
 0x8BA63E: add     esp, 10h
 0x8BA641: retn
+0x9D7150: mov     ecx, [ebp-10h]; this
+0x9D7153: jmp     ??1bhkPhantom@@UAE@XZ; bhkPhantom::~bhkPhantom(void)
+0x9D7158: mov     edx, [esp+arg_4]
+0x9D715C: lea     eax, [edx-8]
+0x9D715F: mov     ecx, [edx-0Ch]
+0x9D7162: xor     ecx, eax
+0x9D7164: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D7169: mov     eax, offset stru_AFEDDC
+0x9D716E: jmp     ___CxxFrameHandler3

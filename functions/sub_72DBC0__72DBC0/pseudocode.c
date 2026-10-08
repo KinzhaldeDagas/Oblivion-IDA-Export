@@ -53,114 +53,114 @@ int __thiscall sub_72DBC0(unsigned __int16 *this, int a2)
   int v53; // [esp+14h] [ebp-8h] BYREF
   int v54; // [esp+18h] [ebp-4h] BYREF
 
-  v2 = a2;
-  v3 = *(void (__cdecl **)(int, unsigned __int16 *, int, int *, int))(*(_DWORD *)(a2 + 0x220) + 8);
-  v5 = this + 0xE;
-  v36 = *(_DWORD *)(a2 + 0x220);
-  v53 = 2;
-  v3(v36, this + 0xE, 2, &v53, 1);
-  v32 = *(_DWORD *)(v2 + 0x220);
-  v6 = *(void (__cdecl **)(int, unsigned __int16 *, int, int *, int))(v32 + 8);
-  v53 = 2;
-  v6(v32, this + 0xF, 2, &v53, 1);
-  v7 = *(_DWORD *)(v2 + 0x220);
-  v8 = *(void (__cdecl **)(int, unsigned __int16 *, int, int *, int))(v7 + 8);
-  v53 = 2;
-  v8(v7, this + 0x10, 2, &v53, 1);
-  v30 = *(_DWORD *)(v2 + 0x220);
-  v9 = *(void (__cdecl **)(int, unsigned __int16 *, int, int *, int))(v30 + 8);
-  v53 = 2;
-  v9(v30, this + 0x11, 2, &v53, 1);
-  v37 = *(_DWORD *)(v2 + 0x220);
-  v10 = *(void (__cdecl **)(int, unsigned __int16 *, int, int *, int))(v37 + 8);
-  v53 = 2;
-  v10(v37, this + 0x12, 2, &v53, 1);
-  v35 = 2 * *(this + 0x10);
-  v11 = *(void (__cdecl **)(int, int, int, int *, int))(*(_DWORD *)(v2 + 0x220) + 8);
-  v34 = *((_DWORD *)this + 1);
-  v33 = *(_DWORD *)(v2 + 0x220);
-  v53 = 2;
-  v11(v33, v34, v35, &v53, 1);
-  LOBYTE(a2) = *((_DWORD *)this + 3) != 0;
-  v31 = *(_DWORD *)(v2 + 0x220);
-  v12 = *(void (__cdecl **)(int, int *, int, int *, int))(v31 + 8);
-  v53 = 1;
-  v12(v31, &a2, 1, &v53, 1);
-  if ( (_BYTE)a2 )
+  v2 = a2; /*0x72dbc7*/
+  v3 = *(void (__cdecl **)(int, unsigned __int16 *, int, int *, int))(*(_DWORD *)(a2 + 0x220) + 8); /*0x72dbd1*/
+  v5 = this + 0xE; /*0x72dbe3*/
+  v36 = *(_DWORD *)(a2 + 0x220); /*0x72dbe7*/
+  v53 = 2; /*0x72dbe8*/
+  v3(v36, this + 0xE, 2, &v53, 1); /*0x72dbec*/
+  v32 = *(_DWORD *)(v2 + 0x220); /*0x72dc00*/
+  v6 = *(void (__cdecl **)(int, unsigned __int16 *, int, int *, int))(v32 + 8); /*0x72dc01*/
+  v53 = 2; /*0x72dc04*/
+  v6(v32, this + 0xF, 2, &v53, 1); /*0x72dc08*/
+  v7 = *(_DWORD *)(v2 + 0x220); /*0x72dc0a*/
+  v8 = *(void (__cdecl **)(int, unsigned __int16 *, int, int *, int))(v7 + 8); /*0x72dc10*/
+  v53 = 2; /*0x72dc1a*/
+  v8(v7, this + 0x10, 2, &v53, 1); /*0x72dc25*/
+  v30 = *(_DWORD *)(v2 + 0x220); /*0x72dc3a*/
+  v9 = *(void (__cdecl **)(int, unsigned __int16 *, int, int *, int))(v30 + 8); /*0x72dc3b*/
+  v53 = 2; /*0x72dc3e*/
+  v9(v30, this + 0x11, 2, &v53, 1); /*0x72dc46*/
+  v37 = *(_DWORD *)(v2 + 0x220); /*0x72dc5e*/
+  v10 = *(void (__cdecl **)(int, unsigned __int16 *, int, int *, int))(v37 + 8); /*0x72dc5f*/
+  v53 = 2; /*0x72dc62*/
+  v10(v37, this + 0x12, 2, &v53, 1); /*0x72dc6a*/
+  v35 = 2 * *(this + 0x10); /*0x72dc81*/
+  v11 = *(void (__cdecl **)(int, int, int, int *, int))(*(_DWORD *)(v2 + 0x220) + 8); /*0x72dc82*/
+  v34 = *((_DWORD *)this + 1); /*0x72dc85*/
+  v33 = *(_DWORD *)(v2 + 0x220); /*0x72dc86*/
+  v53 = 2; /*0x72dc87*/
+  v11(v33, v34, v35, &v53, 1); /*0x72dc8f*/
+  LOBYTE(a2) = *((_DWORD *)this + 3) != 0; /*0x72dc9d*/
+  v31 = *(_DWORD *)(v2 + 0x220); /*0x72dcb3*/
+  v12 = *(void (__cdecl **)(int, int *, int, int *, int))(v31 + 8); /*0x72dcb4*/
+  v53 = 1; /*0x72dcb7*/
+  v12(v31, &a2, 1, &v53, 1); /*0x72dcbb*/
+  if ( (_BYTE)a2 ) /*0x72dcc5*/
   {
-    v49 = 2 * *v5;
-    v13 = *(void (__cdecl **)(int, int, int, int *, int))(*(_DWORD *)(v2 + 0x220) + 8);
-    v44 = *((_DWORD *)this + 3);
-    v38 = *(_DWORD *)(v2 + 0x220);
-    v53 = 2;
-    v13(v38, v44, v49, &v53, 1);
+    v49 = 2 * *v5; /*0x72dcdc*/
+    v13 = *(void (__cdecl **)(int, int, int, int *, int))(*(_DWORD *)(v2 + 0x220) + 8); /*0x72dcdd*/
+    v44 = *((_DWORD *)this + 3); /*0x72dce0*/
+    v38 = *(_DWORD *)(v2 + 0x220); /*0x72dce1*/
+    v53 = 2; /*0x72dce2*/
+    v13(v38, v44, v49, &v53, 1); /*0x72dcea*/
   }
-  v14 = *v5 * *(this + 0x12);
-  v50 = *((_DWORD *)this + 2) != 0;
-  v53 = v14;
-  v39 = *(_DWORD *)(v2 + 0x220);
-  v15 = *(void (__cdecl **)(int, bool *, int, int *, int))(v39 + 8);
-  v54 = 1;
-  v15(v39, &v50, 1, &v54, 1);
-  if ( v50 )
+  v14 = *v5 * *(this + 0x12); /*0x72dcf7*/
+  v50 = *((_DWORD *)this + 2) != 0; /*0x72dd07*/
+  v53 = v14; /*0x72dd0b*/
+  v39 = *(_DWORD *)(v2 + 0x220); /*0x72dd1b*/
+  v15 = *(void (__cdecl **)(int, bool *, int, int *, int))(v39 + 8); /*0x72dd1c*/
+  v54 = 1; /*0x72dd1f*/
+  v15(v39, &v50, 1, &v54, 1); /*0x72dd23*/
+  if ( v50 ) /*0x72dd2d*/
   {
-    v45 = *((_DWORD *)this + 2);
-    v40 = *(_DWORD *)(v2 + 0x220);
-    v16 = *(void (__cdecl **)(int, int, int, int *, int))(v40 + 8);
-    v54 = 4;
-    v16(v40, v45, 4 * v53, &v54, 1);
+    v45 = *((_DWORD *)this + 2); /*0x72dd4a*/
+    v40 = *(_DWORD *)(v2 + 0x220); /*0x72dd4b*/
+    v16 = *(void (__cdecl **)(int, int, int, int *, int))(v40 + 8); /*0x72dd4c*/
+    v54 = 4; /*0x72dd4f*/
+    v16(v40, v45, 4 * v53, &v54, 1); /*0x72dd57*/
   }
-  v17 = *(this + 0x11);
-  if ( v17 )
+  v17 = *(this + 0x11); /*0x72dd5c*/
+  if ( v17 ) /*0x72dd63*/
   {
-    v46 = *((_DWORD *)this + 6);
-    v41 = *(_DWORD *)(v2 + 0x220);
-    v19 = *(void (__cdecl **)(int, int, int, int *, int))(v41 + 8);
-    v54 = 2;
-    v19(v41, v46, 2 * v17, &v54, 1);
-    v20 = *(this + 0x11);
-    v21 = 0;
-    if ( *(this + 0x11) )
+    v46 = *((_DWORD *)this + 6); /*0x72dd83*/
+    v41 = *(_DWORD *)(v2 + 0x220); /*0x72dd84*/
+    v19 = *(void (__cdecl **)(int, int, int, int *, int))(v41 + 8); /*0x72dd85*/
+    v54 = 2; /*0x72dd88*/
+    v19(v41, v46, 2 * v17, &v54, 1); /*0x72dd90*/
+    v20 = *(this + 0x11); /*0x72dd92*/
+    v21 = 0; /*0x72dd99*/
+    if ( *(this + 0x11) ) /*0x72dd92*/
     {
-      v22 = *((unsigned __int16 **)this + 6);
-      do
+      v22 = *((unsigned __int16 **)this + 6); /*0x72dd9f*/
+      do /*0x72ddac*/
       {
-        v21 += *v22++;
-        --v20;
+        v21 += *v22++; /*0x72dda5*/
+        --v20; /*0x72ddaa*/
       }
-      while ( v20 );
+      while ( v20 ); /*0x72ddac*/
     }
-    v18 = v21;
+    v18 = v21; /*0x72ddae*/
   }
   else
   {
-    v18 = 3 * *(this + 0xF);
+    v18 = 3 * *(this + 0xF); /*0x72dd69*/
   }
-  v23 = *(_DWORD *)(v2 + 0x220);
-  v51 = *((_DWORD *)this + 5) != 0;
-  v24 = *(void (__cdecl **)(int, bool *, int, int *, int))(v23 + 8);
-  v54 = 1;
-  v24(v23, &v51, 1, &v54, 1);
-  if ( v51 )
+  v23 = *(_DWORD *)(v2 + 0x220); /*0x72ddb4*/
+  v51 = *((_DWORD *)this + 5) != 0; /*0x72ddc3*/
+  v24 = *(void (__cdecl **)(int, bool *, int, int *, int))(v23 + 8); /*0x72ddc7*/
+  v54 = 1; /*0x72ddd1*/
+  v24(v23, &v51, 1, &v54, 1); /*0x72ddd5*/
+  if ( v51 ) /*0x72dddf*/
   {
-    v25 = *(void (__cdecl **)(int, int, int, int *, int))(*(_DWORD *)(v2 + 0x220) + 8);
-    v47 = *((_DWORD *)this + 5);
-    v42 = *(_DWORD *)(v2 + 0x220);
-    v54 = 2;
-    v25(v42, v47, 2 * v18, &v54, 1);
+    v25 = *(void (__cdecl **)(int, int, int, int *, int))(*(_DWORD *)(v2 + 0x220) + 8); /*0x72ddf5*/
+    v47 = *((_DWORD *)this + 5); /*0x72ddf8*/
+    v42 = *(_DWORD *)(v2 + 0x220); /*0x72ddf9*/
+    v54 = 2; /*0x72ddfa*/
+    v25(v42, v47, 2 * v18, &v54, 1); /*0x72de02*/
   }
-  v52 = *((_DWORD *)this + 4) != 0;
-  v43 = *(_DWORD *)(v2 + 0x220);
-  v26 = *(int (__cdecl **)(int, bool *, int, int *, int))(v43 + 8);
-  v54 = 1;
-  result = v26(v43, &v52, 1, &v54, 1);
-  if ( v52 )
+  v52 = *((_DWORD *)this + 4) != 0; /*0x72de14*/
+  v43 = *(_DWORD *)(v2 + 0x220); /*0x72de24*/
+  v26 = *(int (__cdecl **)(int, bool *, int, int *, int))(v43 + 8); /*0x72de25*/
+  v54 = 1; /*0x72de28*/
+  result = v26(v43, &v52, 1, &v54, 1); /*0x72de2c*/
+  if ( v52 ) /*0x72de36*/
   {
-    v28 = *(_DWORD *)(v2 + 0x220);
-    v29 = *(int (__cdecl **)(int, int, int, int *, int))(v28 + 8);
-    v48 = *((_DWORD *)this + 4);
-    v54 = 1;
-    return v29(v28, v48, v53, &v54, 1);
+    v28 = *(_DWORD *)(v2 + 0x220); /*0x72de3f*/
+    v29 = *(int (__cdecl **)(int, int, int, int *, int))(v28 + 8); /*0x72de4b*/
+    v48 = *((_DWORD *)this + 4); /*0x72de4f*/
+    v54 = 1; /*0x72de51*/
+    return v29(v28, v48, v53, &v54, 1); /*0x72de55*/
   }
-  return result;
+  return result; /*0x72de5a*/
 }

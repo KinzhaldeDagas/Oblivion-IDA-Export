@@ -1,4 +1,4 @@
-0x79FB80: push    ebp
+0x79FB80: push    ebp; Deep copy assignment for st_vector<SFrondGuide>. Reuses initialized elements/capacity where possible, destroys surplus guides, or frees and buys exact capacity before exception-safe copy construction.
 0x79FB81: mov     ebp, [esp+4+arg_0]
 0x79FB85: push    esi
 0x79FB86: mov     esi, ecx
@@ -18,8 +18,8 @@
 0x79FBAB: shr     ecx, 1Fh
 0x79FBAE: add     ecx, edx
 0x79FBB0: jnz     short loc_79FBC1
-0x79FBB2: mov     ecx, esi
-0x79FBB4: call    sub_79F630
+0x79FBB2: mov     ecx, esi; this
+0x79FBB4: call    OB_stVector_SFrondGuide_Clear_010201A0; Oblivion st_vector<SFrondGuide>::clear. Validates begin/end and erases the entire initialized range while retaining capacity.
 0x79FBB9: pop     edi
 0x79FBBA: mov     eax, esi
 0x79FBBC: pop     esi
@@ -49,17 +49,17 @@
 0x79FBF9: mov     eax, [ebp+4]
 0x79FBFC: push    ecx
 0x79FBFD: push    edx
-0x79FBFE: push    ebx
-0x79FBFF: push    edi
-0x79FC00: push    eax
-0x79FC01: call    sub_79BE80
+0x79FBFE: push    ebx; destinationFirst
+0x79FBFF: push    edi; last
+0x79FC00: push    eax; first
+0x79FC01: call    OB_SFrondGuide_CopyAssignRangeForwardThunk_010201A0; Thin checked/STL wrapper around forward SFrondGuide range copy-assignment; returns destination end.
 0x79FC06: mov     ecx, [esp+28h+arg_0]
 0x79FC0A: mov     edx, [esi+8]
 0x79FC0D: push    ecx
 0x79FC0E: push    esi
-0x79FC0F: push    edx
-0x79FC10: push    eax
-0x79FC11: call    sub_79E150
+0x79FC0F: push    edx; last
+0x79FC10: push    eax; first
+0x79FC11: call    OB_SFrondGuide_DestroyRange_010201A0; Destroys every compact SFrondGuide in [first,last), freeing each embedded SFrondVertex vector.
 0x79FC16: mov     eax, [ebp+4]
 0x79FC19: add     esp, 28h
 0x79FC1C: test    eax, eax
@@ -106,24 +106,24 @@
 0x79FC7C: add     eax, edx
 0x79FC7E: cmp     ecx, eax
 0x79FC80: ja      short loc_79FCBB
-0x79FC82: mov     ecx, esi
-0x79FC84: call    sub_799F10
+0x79FC82: mov     ecx, esi; this
+0x79FC84: call    OB_stVector_SFrondGuide_Size_010201A0; Oblivion-authoritative size query for the compact SFrondGuide vector. Computes (end-begin)/0x30; returns zero when begin is null.
 0x79FC89: lea     edi, [eax+eax*2]
 0x79FC8C: mov     eax, [ebp+4]
 0x79FC8F: shl     edi, 4
 0x79FC92: add     edi, eax
-0x79FC94: push    ebx
-0x79FC95: push    edi
-0x79FC96: push    eax
-0x79FC97: call    sub_79E0C0
+0x79FC94: push    ebx; destinationFirst
+0x79FC95: push    edi; last
+0x79FC96: push    eax; first
+0x79FC97: call    OB_SFrondGuide_CopyAssignRangeForwardCheckedThunk_010201A0; Checked/STL trampoline for forward SFrondGuide copy-assignment; delegates to 0x79BE80 and returns destination end.
 0x79FC9C: mov     ecx, [esi+8]
 0x79FC9F: mov     edx, [ebp+8]
 0x79FCA2: add     esp, 0Ch
-0x79FCA5: push    ecx
-0x79FCA6: push    edx
-0x79FCA7: push    edi
-0x79FCA8: mov     ecx, esi
-0x79FCAA: call    sub_79EA70
+0x79FCA5: push    ecx; destinationFirst
+0x79FCA6: push    edx; last
+0x79FCA7: push    edi; first
+0x79FCA8: mov     ecx, esi; this
+0x79FCAA: call    OB_stVector_SFrondGuide_UninitializedCopyThunk_010201A0; Vector-context checked trampoline for exception-safe uninitialized SFrondGuide range copy. The vector owner is used by checked-iterator machinery; constructed records are 0x30 bytes.
 0x79FCAF: pop     ebx
 0x79FCB0: mov     [esi+8], eax
 0x79FCB3: pop     edi
@@ -134,29 +134,29 @@
 0x79FCBB: test    ebx, ebx
 0x79FCBD: jz      short loc_79FCD7
 0x79FCBF: mov     eax, [esi+8]
-0x79FCC2: push    eax
-0x79FCC3: push    ebx
+0x79FCC2: push    eax; last
+0x79FCC3: push    ebx; first
 0x79FCC4: mov     ecx, esi
-0x79FCC6: call    sub_79EAA0
+0x79FCC6: call    OB_SFrondGuide_DestroyRangeThunk_010201A0; Thin destroy-range trampoline for compact SFrondGuide records.
 0x79FCCB: mov     ecx, [esi+4]
 0x79FCCE: push    ecx
-0x79FCCF: call    FormHeapFree
+0x79FCCF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x79FCD4: add     esp, 4
-0x79FCD7: mov     ecx, ebp
-0x79FCD9: call    sub_799F10
-0x79FCDE: push    eax; char *
-0x79FCDF: mov     ecx, esi
-0x79FCE1: call    sub_79AD20
+0x79FCD7: mov     ecx, ebp; this
+0x79FCD9: call    OB_stVector_SFrondGuide_Size_010201A0; Oblivion-authoritative size query for the compact SFrondGuide vector. Computes (end-begin)/0x30; returns zero when begin is null.
+0x79FCDE: push    eax; count
+0x79FCDF: mov     ecx, esi; this
+0x79FCE1: call    OB_stVector_SFrondGuide_Buy_010201A0; Initializes an empty compact SFrondGuide vector wrapper and, when count is nonzero, buys exact count capacity. Maximum count is 0x05555555.
 0x79FCE6: test    al, al
 0x79FCE8: jz      short loc_79FD00
 0x79FCEA: mov     edx, [esi+4]
 0x79FCED: mov     eax, [ebp+8]
 0x79FCF0: mov     ecx, [ebp+4]
-0x79FCF3: push    edx
-0x79FCF4: push    eax
-0x79FCF5: push    ecx
-0x79FCF6: mov     ecx, esi
-0x79FCF8: call    sub_79EA70
+0x79FCF3: push    edx; destinationFirst
+0x79FCF4: push    eax; last
+0x79FCF5: push    ecx; first
+0x79FCF6: mov     ecx, esi; this
+0x79FCF8: call    OB_stVector_SFrondGuide_UninitializedCopyThunk_010201A0; Vector-context checked trampoline for exception-safe uninitialized SFrondGuide range copy. The vector owner is used by checked-iterator machinery; constructed records are 0x30 bytes.
 0x79FCFD: mov     [esi+8], eax
 0x79FD00: pop     ebx
 0x79FD01: pop     edi

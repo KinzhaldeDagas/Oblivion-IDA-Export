@@ -1,7 +1,7 @@
 0x4B6925: rol     byte ptr [ebp+6A0B74C0h], 1
 0x4B692B: add     [edx+1], ch
 0x4B692E: mov     ecx, eax
-0x4B6930: call    sub_475440
+0x4B6930: call    ActorAnimData_CleanupOrPromoteQueuedIdles; Owns current/queued idle retirement and promotion across ActorAnimData +0xCC/+0xD0/+0xD4/+0xD8. Depending on caller flags, stops a still-active sequence, moves stale holders into the two cleanup slots, destroys them when no slot is available or forced, or promotes queued +0xD0 into current +0xCC.
 0x4B6935: mov     ecx, ds:0B35EC8h
 0x4B693B: push    ecx
 0x4B693C: call    sub_520F00
@@ -22,14 +22,14 @@
 0x4B696B: push    0FFFFFFFFh
 0x4B696D: call    sub_520F20
 0x4B6972: add     esp, 0Ch
-0x4B6975: mov     ecx, edi
-0x4B6977: call    sub_4D77D0
+0x4B6975: mov     ecx, edi; doorReference
+0x4B6977: call    TESObjectREFR_FindLockExtraOnLinkedDoorChain; Verified wrapper lookup: follows linked-door references until it finds an ExtraLock wrapper, returning that wrapper or null when the chain ends without lock data.
 0x4B697C: test    eax, eax
 0x4B697E: jz      short loc_4B698E
-0x4B6980: mov     ecx, eax
-0x4B6982: call    sub_428E90
-0x4B6987: mov     ecx, edi
-0x4B6989: call    sub_4D9070
+0x4B6980: mov     ecx, eax; this
+0x4B6982: call    ExtraLock_ClearLockedFlag; Verified: clears only ExtraLockData.flags bit 0x01 (Locked), preserving bit 0x02. OpenEffect uses this after its lock-category test; this preserves LockEffect's bit-0x02 ownership marker.
+0x4B6987: mov     ecx, edi; this
+0x4B6989: call    TESObjectREFR_MarkLockDataAsModified; Verified modified-state propagation: if this reference has lock data, calls TESFormVtbl::MarkAsModified with mask 0x40; otherwise, if its linked-door chain has lock data, marks that linked-door reference with the same mask.
 0x4B698E: pop     edi
 0x4B698F: pop     ebp
 0x4B6990: pop     ebx

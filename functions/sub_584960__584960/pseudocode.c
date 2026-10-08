@@ -1,5 +1,6 @@
-void __thiscall sub_584960(_DWORD *this, int a2)
+// Verified: inserts supplied template in Menu embedded list at+8. Called by ReadFile ownership-transfer loop0x5904EA. Fallout named analogue0x827E3DC8.
+void __thiscall Menu::AddTemplate(Menu *this, OblivionTileTemplate *tileTemplate)
 {
-  if ( a2 )
-    BSSimpleList_PushFront(this + 2, a2);
+  if ( tileTemplate ) /*0x584966*/
+    BSSimpleList_PushFront(&this->members.templateHead, (int)tileTemplate); /*0x58496f*/
 }

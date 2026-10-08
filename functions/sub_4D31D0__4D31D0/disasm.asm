@@ -1,4 +1,4 @@
-0x4D31D0: push    esi
+0x4D31D0: push    esi; Verified NiTArray<float> append helper used for the three DistantLODCellObjectData arrays: grows on capacity exhaustion, appends one float and returns the previous element count/index.
 0x4D31D1: mov     esi, ecx
 0x4D31D3: movzx   eax, word ptr [esi+8]
 0x4D31D7: push    edi
@@ -10,7 +10,7 @@
 0x4D31E6: push    ecx
 0x4D31E7: mov     ecx, esi
 0x4D31E9: call    sub_4CA040
-0x4D31EE: mov     edx, [esp+8+arg_0]
+0x4D31EE: mov     edx, [esp+8+value]
 0x4D31F2: push    edx
 0x4D31F3: push    edi
 0x4D31F4: mov     ecx, esi

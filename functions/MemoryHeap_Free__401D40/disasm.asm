@@ -36,12 +36,12 @@
 0x401D9C: jnz     short loc_401DC4
 0x401D9E: mov     eax, edi
 0x401DA0: shr     eax, 18h
-0x401DA3: mov     ebx, g_HeapPoolByAddress[eax*4]
+0x401DA3: mov     ebx, ds:0B32C80h[eax*4]
 0x401DAA: test    ebx, ebx
 0x401DAC: jz      short loc_401DC4
 0x401DAE: push    edi
 0x401DAF: mov     ecx, ebx
-0x401DB1: call    sub_4011B0
+0x401DB1: call    MemoryPool_ContainsAddress; Checks whether an address lies in this pool's backing range: base at +0x40 through base + size at +0x110. Called by MemoryHeap_Free before dispatching to MemoryPool_Free.
 0x401DB6: test    al, al
 0x401DB8: jz      short loc_401DC4
 0x401DBA: push    edi
@@ -69,10 +69,10 @@
 0x401DE7: add     edi, 0FFFFFFF8h
 0x401DEA: push    edi
 0x401DEB: mov     ecx, esi
-0x401DED: call    sub_4015F0
+0x401DED: call    MemoryHeap_InsertFreeEntry; Marks a block free, appends it to the size-selected doubly linked free list, updates free-list statistics, and records the bin's active count.
 0x401DF2: push    edi
 0x401DF3: mov     ecx, esi
-0x401DF5: call    sub_401A30
+0x401DF5: call    MemoryHeap_CoalesceFreeEntry; Coalesces a just-freed entry with adjacent free predecessors/successors, then releases any now-free tail region.
 0x401DFA: cmp     byte ptr [esi+16Dh], 0
 0x401E01: jnz     short loc_401E0D
 0x401E03: mov     ecx, offset HeapCriticalSection; lpCriticalSection

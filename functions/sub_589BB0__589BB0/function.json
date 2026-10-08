@@ -1,19 +1,36 @@
 {
-  "callees_count": 29,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
   "callers_count": 2,
+  "chunks": [
+    [
+      "0x589BB0",
+      "0x589D22"
+    ],
+    [
+      "0x9BF770",
+      "0x9BF796"
+    ]
+  ],
+  "chunks_sha256": "ea75e0dcdca7e8da36158c21f37e64f8fca6256c8048d93fa3822438d47fad61",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_589BB0",
+  "comment_repeatable": "Verified: unlinks/frees own action chain and incoming reaction actions, unlinking crosslinks from both chains; frees sentinels/string and clears owner. Source deletion removes references rather than re-resolving selector to replacement Tile. Fallout Value destructor 0x827DBC60 uses a reaction map and nulls reference operands instead.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "Tile::Value::Destroy",
   "end_ea": "0x589D22",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_589BB0",
+  "name": "Tile::Value::Destroy",
   "segment": ".text",
   "sha256": "1714edc3a307d1ef3e4c0a6cc78fbcf18625719d02afef7f2ec99e65c4f2e15e",
   "size": 370,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x589BB0",
-  "type": "void __thiscall(_DWORD *this)",
-  "xrefs_from_count": 168,
+  "total_chunk_size": 408,
+  "type": "void __thiscall(OblivionTileValueView *this)",
+  "xrefs_from_count": 180,
   "xrefs_to_count": 2
 }

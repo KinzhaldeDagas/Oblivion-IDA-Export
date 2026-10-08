@@ -43,9 +43,9 @@
 0x88EEAD: sub     eax, edx
 0x88EEAF: cmp     eax, 5
 0x88EEB2: jnz     loc_88F011
-0x88EEB8: push    0
-0x88EEBA: mov     ecx, esi
-0x88EEBC: call    sub_405790
+0x88EEB8: push    0; index
+0x88EEBA: mov     ecx, esi; this
+0x88EEBC: call    NiNode_GetChildAtIndex
 0x88EEC1: mov     edi, eax
 0x88EEC3: test    edi, edi
 0x88EEC5: jz      short loc_88EECC
@@ -56,13 +56,13 @@
 0x88EED0: jz      loc_88F011
 0x88EED6: add     eax, 6
 0x88EED9: push    offset aNonaccum; "NonAccum"
-0x88EEDE: push    eax; Str1
-0x88EEDF: call    __strcmp
+0x88EEDE: push    eax; left
+0x88EEDF: call    CRT_StricmpLocaleDispatch
 0x88EEE4: add     esp, 8
 0x88EEE7: test    eax, eax
 0x88EEE9: jnz     loc_88F011
 0x88EEEF: push    esi
-0x88EEF0: call    sub_497420
+0x88EEF0: call    NiAVObject_GetBhkBlendCollisionObject; ODismemberment: authoritative blend-collision getter. Reuses NiAVObject_GetBhkCollisionObject and accepts objects whose class chain includes bhkBlendCollisionObject.
 0x88EEF5: add     esp, 4
 0x88EEF8: test    eax, eax
 0x88EEFA: jz      loc_88F011
@@ -75,7 +75,7 @@
 0x88EF11: mov     ax, [edi+18h]
 0x88EF15: and     ax, 0FFEFh
 0x88EF19: or      ax, 6
-0x88EF1D: push    offset dword_BA7F3C
+0x88EF1D: push    0BA7F3Ch
 0x88EF22: mov     ecx, esi
 0x88EF24: mov     [edi+18h], ax
 0x88EF28: mov     bl, 1
@@ -158,3 +158,16 @@
 0x88F02E: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x88F033: add     esp, 220h
 0x88F039: retn
+0x9D6160: lea     ecx, [ebp-220h]
+0x9D6166: jmp     sub_8BC000
+0x9D616B: mov     edx, [esp+arg_4]
+0x9D616F: lea     eax, [edx-220h]
+0x9D6175: mov     ecx, [edx-224h]
+0x9D617B: xor     ecx, eax
+0x9D617D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D6182: add     eax, 0Ch
+0x9D6185: mov     ecx, [edx-4]
+0x9D6188: xor     ecx, eax
+0x9D618A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D618F: mov     eax, offset stru_AFE0E4
+0x9D6194: jmp     ___CxxFrameHandler3

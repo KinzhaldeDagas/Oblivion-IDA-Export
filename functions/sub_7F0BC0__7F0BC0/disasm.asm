@@ -1,4 +1,4 @@
-0x7F0BC0: push    0FFFFFFFFh
+0x7F0BC0: push    0FFFFFFFFh; OBLIVION AUTHORITY (2026-08-24): SpeedTree leaf SetupPass. Full-bright forces VS0; otherwise marker count selects base versus point-light VS and active fog selects the fog variant. Selector inputs do not encode leaf layer/card/LOD. The routine uploads transform/light constants, binds the property texture, and uploads fog constants only for an active fog property.
 0x7F0BC2: push    offset SEH_7F0BC0
 0x7F0BC7: mov     eax, large fs:0
 0x7F0BCD: push    eax
@@ -29,7 +29,7 @@
 0x7F0C09: mov     eax, [esi+28h]
 0x7F0C0C: mov     ecx, [ebp+18h]
 0x7F0C0F: mov     edx, [ecx]
-0x7F0C11: push    eax
+0x7F0C11: push    eax; w
 0x7F0C12: mov     eax, [edx+24h]
 0x7F0C15: call    eax
 0x7F0C17: mov     edi, [esi+0Ch]
@@ -90,7 +90,7 @@
 0x7F0CE2: test    ah, 5
 0x7F0CE5: jnp     loc_7F0D85
 0x7F0CEB: fstp    st
-0x7F0CED: cmp     byte ptr ds:0B42E86h, 0
+0x7F0CED: cmp     byte ptr ds:0B42E86h, 0; OBLIVION AUTHORITY (2026-08-24): Direct check of B42E86, bFullBrightLighting:Display / Lite Brite debug flag. If set, forces c5=(1,1,1,1) and c6=(0,0.4,0,0); this branch is not a normal black-lighting path.
 0x7F0CF4: jz      short loc_7F0D71
 0x7F0CF6: fld1
 0x7F0CF8: sub     esp, 10h
@@ -106,9 +106,9 @@
 0x7F0D1B: mov     [eax+4], edx
 0x7F0D1E: mov     edx, [esp+5Ch+var_10]
 0x7F0D22: mov     [eax+8], ecx
-0x7F0D25: push    0
+0x7F0D25: push    0; slot
 0x7F0D27: mov     [eax+0Ch], edx
-0x7F0D2A: call    sub_7ECAE0
+0x7F0D2A: call    OB_BSShader_SetSharedFloat4Constant_010201A0; Shader global table helper: store four dwords at dword_B46498 + 0x10 * index.
 0x7F0D2F: fldz
 0x7F0D31: fst     [esp+60h+var_1C]
 0x7F0D35: add     esp, 4
@@ -124,9 +124,9 @@
 0x7F0D59: fstp    [esp+5Ch+var_10]
 0x7F0D5D: mov     edx, [esp+5Ch+var_10]
 0x7F0D61: mov     [eax+8], ecx
-0x7F0D64: push    1
+0x7F0D64: push    1; slot
 0x7F0D66: mov     [eax+0Ch], edx
-0x7F0D69: call    sub_7ECAE0
+0x7F0D69: call    OB_BSShader_SetSharedFloat4Constant_010201A0; Shader global table helper: store four dwords at dword_B46498 + 0x10 * index.
 0x7F0D6E: add     esp, 14h
 0x7F0D71: mov     esi, [esi+18h]
 0x7F0D74: test    esi, esi
@@ -154,7 +154,7 @@
 0x7F0DC2: fldz
 0x7F0DC4: mov     ds:0B4663Ch, eax
 0x7F0DC9: fst     [esp+4Ch+var_14]
-0x7F0DCD: mov     byte ptr [esp+4Ch+arg_C], 1
+0x7F0DCD: mov     byte ptr [esp+4Ch+arg_C], 1; OBLIVION AUTHORITY (2026-08-24): Active-fog branch writes leaf c8 fog color. A black fog color plus full fog factor can black surviving RGB; texture alpha remains sampled independently.
 0x7F0DD2: mov     ecx, [esp+4Ch+var_14]
 0x7F0DD6: fst     [esp+4Ch+var_10]
 0x7F0DDA: fld     [esp+4Ch+var_28]
@@ -168,7 +168,7 @@
 0x7F0DFE: fld     [esp+4Ch+var_20]
 0x7F0E02: mov     ecx, [esp+4Ch+var_18]
 0x7F0E06: fstp    [esp+4Ch+var_14]
-0x7F0E0A: mov     ds:0B46648h, eax
+0x7F0E0A: mov     ds:0B46648h, eax; OBLIVION AUTHORITY (2026-08-24): Active-fog branch writes leaf c9 fog range/factor data. Null/inactive fog selects non-fog shader variants, so stale c8/c9 are ignored.
 0x7F0E0F: mov     edx, [esp+4Ch+var_14]
 0x7F0E13: mov     ds:0B4664Ch, ecx
 0x7F0E19: fstp    [esp+4Ch+var_10]
@@ -193,7 +193,7 @@
 0x7F0E54: mov     esi, eax
 0x7F0E56: lea     edi, [ebp+7Ch]
 0x7F0E59: mov     ecx, 0C0h ; 'À'
-0x7F0E5E: rep movsd
+0x7F0E5E: rep movsd; LeafBase c34 table affects card geometry/normal and hence NdotL only. It cannot zero nonzero ambient by itself; whole-term zero instead occurs when the v3.z packed-green fraction is zero.
 0x7F0E60: mov     eax, [ebx]
 0x7F0E62: mov     edx, [eax+9Ch]
 0x7F0E68: mov     ecx, ebx
@@ -246,7 +246,7 @@
 0x7F0F18: mov     eax, [edx+78h]
 0x7F0F1B: mov     ecx, ebx
 0x7F0F1D: mov     [esp+4Ch+var_4], 0
-0x7F0F25: call    eax
+0x7F0F25: call    eax; Sole leaf diffuse-texture bind. Replacing this reference changes sampled RGB/alpha but not the packed BLENDINDICES dimmer stream, light constants, fog constants, or alpha reference.
 0x7F0F27: mov     esi, [esi+4]
 0x7F0F2A: mov     edi, eax
 0x7F0F2C: cmp     esi, edi
@@ -274,12 +274,12 @@
 0x7F0F5F: call    dword ptr ds:0A28078h
 0x7F0F65: jmp     short loc_7F0F6B
 0x7F0F67: mov     esi, [esp+4Ch+arg_0]
-0x7F0F6B: cmp     byte ptr ds:0B42E86h, 0
+0x7F0F6B: cmp     byte ptr ds:0B42E86h, 0; Lite Brite/full-bright flag forces base VS0 and bypasses point/fog selector. Normal mode selects VS by marker-count point bit plus fog-active bit.
 0x7F0F72: jz      short loc_7F0F7C
 0x7F0F74: mov     eax, [ebp+37Ch]
 0x7F0F7A: jmp     short loc_7F0FD7
-0x7F0F7C: mov     ecx, ebx
-0x7F0F7E: call    sub_7ED5D0
+0x7F0F7C: mov     ecx, ebx; this
+0x7F0F7E: call    OB_BSShaderProperty_CountPassListEntriesWithMarker_010201A0; OBLIVION AUTHORITY (2026-08-24): Pass-list marker count selects base versus point-light leaf VS. Base variants have no point addend, so packed-green fraction zero forces their lighting RGB to zero; point variants may retain the separately added c7 contribution.
 0x7F0F83: test    ax, ax
 0x7F0F86: jnz     short loc_7F0FB0
 0x7F0F88: cmp     byte ptr [esp+4Ch+arg_C], al
@@ -287,7 +287,7 @@
 0x7F0F92: jz      short loc_7F0FA8
 0x7F0F94: mov     eax, [ebp+380h]
 0x7F0F9A: push    eax; a2
-0x7F0F9B: call    sub_7AECB0
+0x7F0F9B: call    NiD3DPass_SetVertexShader; Fogged variant can turn surviving nonblack RGB black only through its lighting/fog math; sampled alpha is preserved. Distinguish this from terminal-mip alpha falling below alpha-test coverage.
 0x7F0FA0: mov     eax, [ebp+390h]
 0x7F0FA6: jmp     short loc_7F0FE9
 0x7F0FA8: mov     eax, [ebp+37Ch]
@@ -297,101 +297,101 @@
 0x7F0FB7: mov     eax, [ebp+388h]
 0x7F0FBD: mov     ecx, [ebp+394h]; this
 0x7F0FC3: push    eax; a2
-0x7F0FC4: call    sub_7AECB0
+0x7F0FC4: call    NiD3DPass_SetVertexShader; Point + fog selects VS3 and PS1. Non-fog paths select VS0/VS2 and PS0.
 0x7F0FC9: mov     eax, [ebp+390h]
 0x7F0FCF: jmp     short loc_7F0FE9
 0x7F0FD1: mov     eax, [ebp+384h]
 0x7F0FD7: mov     ecx, [ebp+394h]; this
 0x7F0FDD: push    eax; a2
-0x7F0FDE: call    sub_7AECB0
+0x7F0FDE: call    NiD3DPass_SetVertexShader; Reference-counted NiD3DPass vertex-shader setter. Replaces pass+0x58 and AddRefs the new NiD3DVertexShader.
 0x7F0FE3: mov     eax, [ebp+38Ch]
 0x7F0FE9: mov     ecx, [ebp+394h]; this
-0x7F0FEF: push    eax; a2
-0x7F0FF0: call    sub_7AEC60
+0x7F0FEF: push    eax; shader
+0x7F0FF0: call    NiD3DPass_SetPixelShader; Reference-counted NiD3DPass pixel-shader setter. Replaces pass+0x44 and AddRefs the new NiD3DPixelShader.
 0x7F0FF5: cmp     word ptr ds:0B42EACh, 4
 0x7F0FFD: jnz     loc_7F10B3
 0x7F1003: mov     esi, [ebp+394h]
 0x7F1009: cmp     dword ptr [esi+30h], 0
 0x7F100D: jnz     short loc_7F1017
-0x7F100F: call    sub_772DF0
+0x7F100F: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x7F1014: mov     [esi+30h], eax
 0x7F1017: mov     ecx, [esi+30h]
 0x7F101A: push    0
 0x7F101C: push    1
 0x7F101E: push    34h ; '4'
-0x7F1020: call    sub_772CD0
+0x7F1020: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x7F1025: mov     esi, [ebp+394h]
 0x7F102B: cmp     dword ptr [esi+30h], 0
 0x7F102F: jnz     short loc_7F1039
-0x7F1031: call    sub_772DF0
+0x7F1031: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x7F1036: mov     [esi+30h], eax
 0x7F1039: mov     ecx, [esi+30h]
 0x7F103C: push    0
 0x7F103E: push    8
 0x7F1040: push    38h ; '8'
-0x7F1042: call    sub_772CD0
+0x7F1042: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x7F1047: mov     esi, [ebp+394h]
 0x7F104D: cmp     dword ptr [esi+30h], 0
 0x7F1051: jnz     short loc_7F105B
-0x7F1053: call    sub_772DF0
+0x7F1053: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x7F1058: mov     [esi+30h], eax
 0x7F105B: mov     ecx, [esi+30h]
 0x7F105E: push    0
 0x7F1060: push    7
 0x7F1062: push    37h ; '7'
-0x7F1064: call    sub_772CD0
+0x7F1064: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x7F1069: mov     esi, [ebp+394h]
 0x7F106F: cmp     dword ptr [esi+30h], 0
 0x7F1073: jnz     short loc_7F107D
-0x7F1075: call    sub_772DF0
+0x7F1075: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x7F107A: mov     [esi+30h], eax
 0x7F107D: mov     ecx, [esi+30h]
 0x7F1080: push    0
 0x7F1082: push    1
 0x7F1084: push    35h ; '5'
-0x7F1086: call    sub_772CD0
+0x7F1086: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x7F108B: mov     esi, [ebp+394h]
 0x7F1091: cmp     dword ptr [esi+30h], 0
 0x7F1095: jnz     short loc_7F109F
-0x7F1097: call    sub_772DF0
+0x7F1097: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x7F109C: mov     [esi+30h], eax
 0x7F109F: mov     ecx, [esi+30h]
 0x7F10A2: push    0
 0x7F10A4: push    1
 0x7F10A6: push    36h ; '6'
-0x7F10A8: call    sub_772CD0
+0x7F10A8: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x7F10AD: mov     esi, [esp+4Ch+arg_0]
 0x7F10B1: jmp     short loc_7F10D5
 0x7F10B3: mov     edi, [ebp+394h]
 0x7F10B9: cmp     dword ptr [edi+30h], 0
 0x7F10BD: jnz     short loc_7F10C7
-0x7F10BF: call    sub_772DF0
+0x7F10BF: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x7F10C4: mov     [edi+30h], eax
 0x7F10C7: mov     ecx, [edi+30h]
 0x7F10CA: push    0
 0x7F10CC: push    0
 0x7F10CE: push    34h ; '4'
-0x7F10D0: call    sub_772CD0
+0x7F10D0: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x7F10D5: mov     edi, [ebp+394h]
 0x7F10DB: cmp     dword ptr [edi+30h], 0
 0x7F10DF: jnz     short loc_7F10E9
-0x7F10E1: call    sub_772DF0
+0x7F10E1: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x7F10E6: mov     [edi+30h], eax
 0x7F10E9: mov     ecx, [edi+30h]
 0x7F10EC: push    0
 0x7F10EE: push    7
 0x7F10F0: push    0A8h ; '¨'
-0x7F10F5: call    sub_772CD0
+0x7F10F5: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x7F10FA: mov     ebp, [ebp+394h]
 0x7F1100: cmp     dword ptr [ebp+30h], 0
 0x7F1104: jnz     short loc_7F110E
-0x7F1106: call    sub_772DF0
+0x7F1106: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x7F110B: mov     [ebp+30h], eax
 0x7F110E: mov     ecx, [ebp+30h]
 0x7F1111: push    0
 0x7F1113: push    0
 0x7F1115: push    1Ch
-0x7F1117: call    sub_772CD0
+0x7F1117: call    NiD3DRenderStateGroup_SetRenderState; Last leaf setup render-state write is FOGENABLE=0. No later setup write changes alpha test/reference, texture factor, or sampler state.
 0x7F111C: or      eax, 0FFFFFFFFh
 0x7F111F: test    esi, esi
 0x7F1121: mov     [esp+4Ch+var_4], eax
@@ -399,7 +399,7 @@
 0x7F1127: add     [esi+5Ch], eax
 0x7F112A: jnz     short loc_7F1133
 0x7F112C: mov     ecx, esi
-0x7F112E: call    sub_772560
+0x7F112E: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x7F1133: mov     ecx, [esp+4Ch+var_C]
 0x7F1137: mov     large fs:0, ecx
 0x7F113E: pop     ecx
@@ -409,3 +409,19 @@
 0x7F1142: pop     ebx
 0x7F1143: add     esp, 38h
 0x7F1146: retn    1Ch
+0x75FA70: mov     ecx, [ecx]
+0x75FA72: test    ecx, ecx
+0x75FA74: jz      short locret_75FA81
+0x75FA76: add     dword ptr [ecx+5Ch], 0FFFFFFFFh
+0x75FA7A: jnz     short locret_75FA81
+0x75FA7C: jmp     sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
+0x75FA81: retn
+0x9CFD60: lea     ecx, [ebp+4]
+0x9CFD63: jmp     loc_75FA70
+0x9CFD68: mov     edx, [esp+arg_4]
+0x9CFD6C: lea     eax, [edx-3Ch]
+0x9CFD6F: mov     ecx, [edx-40h]
+0x9CFD72: xor     ecx, eax
+0x9CFD74: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CFD79: mov     eax, offset stru_AF886C
+0x9CFD7E: jmp     ___CxxFrameHandler3

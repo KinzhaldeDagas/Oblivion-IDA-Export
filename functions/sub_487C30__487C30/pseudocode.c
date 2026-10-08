@@ -1,57 +1,55 @@
-void __thiscall sub_487C30(_DWORD *this, TESForm *a2, int a3)
+void __thiscall sub_487C30(ExtraContainerChanges_Data *this, TESForm *form, unsigned int referenceFormIDOrZero)
 {
-  int v4; // eax
-  TESObjectREFR *v5; // ecx
+  TESObjectREFR *owner; // ecx
   TESContainer *Container; // eax
   TESContainer_Entry *p_list; // edi
-  int v8; // eax
-  _DWORD *v9; // esi
-  _DWORD *v10; // eax
+  int v7; // eax
+  _DWORD *v8; // esi
+  _DWORD *v9; // eax
 
-  ContainerExtraData_GetEntryForForm((_DWORD **)this, (int)a2, 1, a3);
-  if ( !v4 && !a3 )
+  if ( !ContainerExtraData_GetEntryForForm(this, form, 1, referenceFormIDOrZero) && !referenceFormIDOrZero ) /*0x487c75*/
   {
-    v5 = (TESObjectREFR *)*(this + 1);
-    if ( v5 )
-      Container = TESObjectREFR_GetContainer(v5);
+    owner = this->owner; /*0x487c7b*/
+    if ( owner ) /*0x487c80*/
+      Container = TESObjectREFR_GetContainer(owner); /*0x487c82*/
     else
-      Container = 0;
-    p_list = &Container->list;
-    if ( Container != (TESContainer *)0xFFFFFFF8 )
+      Container = 0; /*0x487c89*/
+    p_list = &Container->list; /*0x487c8b*/
+    if ( Container != (TESContainer *)0xFFFFFFF8 ) /*0x487c90*/
     {
-      do
+      do /*0x487d00*/
       {
-        if ( !p_list->next && !p_list->data )
-          break;
-        if ( p_list->data->type == a2 )
+        if ( !p_list->next && !p_list->data ) /*0x487c97*/
+          break; /*0x487c99*/
+        if ( p_list->data->type == form ) /*0x487ca4*/
         {
-          v8 = FormHeapAlloc(0xCu);
-          v9 = (_DWORD *)v8;
-          if ( v8 )
+          v7 = FormHeapAlloc(0xCu); /*0x487ca8*/
+          v8 = (_DWORD *)v7; /*0x487cad*/
+          if ( v7 ) /*0x487cbc*/
           {
-            *(_DWORD *)(v8 + 8) = a2;
-            v10 = (_DWORD *)FormHeapAlloc(8u);
-            if ( v10 )
+            *(_DWORD *)(v7 + 8) = form; /*0x487cc4*/
+            v9 = (_DWORD *)FormHeapAlloc(8u); /*0x487cc7*/
+            if ( v9 ) /*0x487cd1*/
             {
-              *v10 = 0;
-              v10[1] = 0;
-              *v9 = v10;
+              *v9 = 0; /*0x487cd3*/
+              v9[1] = 0; /*0x487cd5*/
+              *v8 = v9; /*0x487cd8*/
             }
             else
             {
-              *v9 = 0;
+              *v8 = 0; /*0x487ce1*/
             }
-            v9[1] = 0;
+            v8[1] = 0; /*0x487cda*/
           }
           else
           {
-            v9 = 0;
+            v8 = 0; /*0x487ce8*/
           }
-          v9[1] = p_list->data->count;
+          v8[1] = p_list->data->count; /*0x487cf8*/
         }
-        p_list = p_list->next;
+        p_list = p_list->next; /*0x487cfb*/
       }
-      while ( p_list );
+      while ( p_list ); /*0x487d00*/
     }
   }
 }

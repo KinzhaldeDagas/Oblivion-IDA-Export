@@ -1,1 +1,1 @@
-IChannelHook_0
+typedef IChannelHook IChannelHook_0;

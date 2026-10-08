@@ -18,7 +18,7 @@
 0x5093DC: push    ecx; a3
 0x5093DD: push    edx; a2
 0x5093DE: push    eax; a1
-0x5093DF: call    Script_ExtractArgs
+0x5093DF: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x5093E4: add     esp, 20h
 0x5093E7: test    al, al
 0x5093E9: jnz     short loc_5093EE
@@ -62,7 +62,7 @@
 0x509454: jz      short loc_509477
 0x509456: push    edi
 0x509457: mov     ecx, eax; this
-0x509459: call    MobileObject_GetCharProxy
+0x509459: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x50945E: mov     edi, eax
 0x509460: test    edi, edi
 0x509462: jz      short loc_509476

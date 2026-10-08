@@ -15,9 +15,9 @@
 0x5BEA6E: call    sub_5BE5C0
 0x5BEA73: fld1
 0x5BEA75: push    ecx
-0x5BEA76: fstp    [esp+8+a2]; a3
+0x5BEA76: fstp    [esp+8+a2]; value
 0x5BEA79: mov     ecx, [esi+0C0h]; this
-0x5BEA7F: push    0FAFh; a2
-0x5BEA84: call    Tile_SetFloat
+0x5BEA7F: push    0FAFh; propertyCode
+0x5BEA84: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5BEA89: pop     esi
 0x5BEA8A: retn

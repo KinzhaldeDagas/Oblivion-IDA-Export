@@ -17,7 +17,7 @@
 0x5486DE: cmp     [esp+0Ch+arg_20], 0
 0x5486E3: fstp    st
 0x5486E5: jnz     loc_5487D6
-0x5486EB: mov     ecx, offset fPotionT2RetDurMult
+0x5486EB: mov     ecx, 0B37A18h
 0x5486F0: call    GameSetting_GetSafeFloatPointer
 0x5486F5: fld     dword ptr [esi]
 0x5486F7: fmul    [esp+0Ch+arg_14]
@@ -51,12 +51,12 @@
 0x54874B: jz      short loc_548731; jumptable 005486D0 case 3
 0x54874D: cmp     [esp+0Ch+arg_20], 0
 0x548752: jnz     short loc_548731; jumptable 005486D0 case 3
-0x548754: mov     ecx, offset fPotionT2AleDurMult
+0x548754: mov     ecx, 0B37A28h
 0x548759: fstp    st
 0x54875B: call    GameSetting_GetSafeFloatPointer
 0x548760: fld     dword ptr [eax]
 0x548762: fld     dword ptr [esi]
-0x548764: mov     ecx, offset fPotionT2CalDurMult
+0x548764: mov     ecx, 0B37A20h
 0x548769: fmul    [esp+0Ch+arg_18]
 0x54876D: fmulp   st(1), st
 0x54876F: fstp    [esp+0Ch+var_8]
@@ -74,12 +74,12 @@
 0x548792: jnz     short loc_548731; jumptable 005486D0 case 3
 0x548794: cmp     [esp+0Ch+arg_20], 0
 0x548799: jnz     short loc_548731; jumptable 005486D0 case 3
-0x54879B: mov     ecx, offset fPotionT2RetDurMult
+0x54879B: mov     ecx, 0B37A18h
 0x5487A0: fstp    st
 0x5487A2: call    GameSetting_GetSafeFloatPointer
 0x5487A7: fld     dword ptr [eax]
 0x5487A9: fld     dword ptr [esi]
-0x5487AB: mov     ecx, offset fPotionT2CalDurMult
+0x5487AB: mov     ecx, 0B37A20h
 0x5487B0: fmul    [esp+0Ch+arg_14]
 0x5487B4: fmulp   st(1), st
 0x5487B6: fstp    [esp+0Ch+var_8]

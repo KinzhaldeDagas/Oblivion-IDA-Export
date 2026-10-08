@@ -1,40 +1,72 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "RpcPacket",
+  "definition": "typedef _RpcPacket RpcPacket\n",
   "id": 18374686479672032875,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "conn",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "_RpcConnection *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hdr",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "RpcPktHdr *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "msg",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "RPC_MESSAGE *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "auth_data",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "unsigned __int8 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "auth_length",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     }
   ],
   "name": "RpcPacket",
+  "ordinal": 3279,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 24
 }

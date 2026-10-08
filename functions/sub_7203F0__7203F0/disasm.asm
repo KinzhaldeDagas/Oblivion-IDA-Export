@@ -2,7 +2,7 @@
 0x7203F7: push    esi
 0x7203F8: mov     esi, ecx
 0x7203FA: jz      short loc_720444
-0x7203FC: push    offset stru_B3FC00; lpCriticalSection
+0x7203FC: push    offset unk_B3FC00; lpCriticalSection
 0x720401: call    dword ptr ds:0A2806Ch
 0x720407: call    dword ptr ds:0A2808Ch
 0x72040D: add     dword ptr ds:0B3FC7Ch, 1
@@ -15,7 +15,7 @@
 0x720429: jnz     short loc_720435
 0x72042B: mov     dword ptr ds:0B3FC78h, 0
 0x720435: pop     esi
-0x720436: mov     [esp+arg_0], offset stru_B3FC00
+0x720436: mov     [esp+arg_0], offset unk_B3FC00
 0x72043E: jmp     dword ptr ds:0A28074h
 0x720444: pop     esi
 0x720445: retn    4

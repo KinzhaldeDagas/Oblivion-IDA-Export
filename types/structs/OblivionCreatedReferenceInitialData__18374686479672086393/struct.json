@@ -1,0 +1,90 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "OblivionCreatedReferenceInitialData",
+  "definition": "struct OblivionCreatedReferenceInitialData\n{\nOblivionCreatedReferenceKind kind; ///< Verified: 36-byte payload read by LoadGame at 465EB1..465ED6.\nunsigned int boundFormIDOrVariant; ///< Verified: kind value tested at +0; branch 1 allocates ArrowProjectile, 2 selects a MagicProjectile subtype, 0/3 feed standard TESObjectREFR construction/reuse at 4603E0.\nunsigned int locationFormID; ///< Candidate: value is passed through the saved-form-ID resolver at 465EE2; its meaning is bound-form ID for normal references and may be type-dependent for projectiles.\nfloat positionX; ///< Verified: +8 is resolved as FormID and looked up/cast as TESObjectCELL or TESWorldSpace at 465EEB..465F3F.\nfloat positionY; ///< Verified: +0xC,+0x10,+0x14 are finite-checked as a NiPoint3 and X/Y select a worldspace cell at 465F47..465F92.\nfloat positionZ; ///< Candidate: trailing 12 bytes at +0x18 resemble an angle vector; no Oblivion-side read of these bytes has been established. Fallout uses a separate ReferenceLocationInitialData plus compact type/bound-ID suffix.\nfloat unknown18[3];\n}\n",
+  "id": 18374686479672086393,
+  "is_union": false,
+  "kind": "struct",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified: 36-byte payload read by LoadGame at 465EB1..465ED6.",
+      "name": "kind",
+      "offset": 0,
+      "offset_hex": "0x0",
+      "size": 4,
+      "type": "OblivionCreatedReferenceKind"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified: kind value tested at +0; branch 1 allocates ArrowProjectile, 2 selects a MagicProjectile subtype, 0/3 feed standard TESObjectREFR construction/reuse at 4603E0.",
+      "name": "boundFormIDOrVariant",
+      "offset": 4,
+      "offset_hex": "0x4",
+      "size": 4,
+      "type": "unsigned int"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Candidate: value is passed through the saved-form-ID resolver at 465EE2; its meaning is bound-form ID for normal references and may be type-dependent for projectiles.",
+      "name": "locationFormID",
+      "offset": 8,
+      "offset_hex": "0x8",
+      "size": 4,
+      "type": "unsigned int"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified: +8 is resolved as FormID and looked up/cast as TESObjectCELL or TESWorldSpace at 465EEB..465F3F.",
+      "name": "positionX",
+      "offset": 12,
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified: +0xC,+0x10,+0x14 are finite-checked as a NiPoint3 and X/Y select a worldspace cell at 465F47..465F92.",
+      "name": "positionY",
+      "offset": 16,
+      "offset_hex": "0x10",
+      "size": 4,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Candidate: trailing 12 bytes at +0x18 resemble an angle vector; no Oblivion-side read of these bytes has been established. Fallout uses a separate ReferenceLocationInitialData plus compact type/bound-ID suffix.",
+      "name": "positionZ",
+      "offset": 20,
+      "offset_hex": "0x14",
+      "size": 4,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "unknown18",
+      "offset": 24,
+      "offset_hex": "0x18",
+      "size": 12,
+      "type": "float[3]"
+    }
+  ],
+  "name": "OblivionCreatedReferenceInitialData",
+  "ordinal": 10002,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 36
+}

@@ -42,7 +42,7 @@
 0x4FB6A8: push    ebx
 0x4FB6A9: push    esi
 0x4FB6AA: push    ecx; a1
-0x4FB6AB: call    TESForm_LookupByFormID
+0x4FB6AB: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4FB6B0: push    0; int
 0x4FB6B2: push    offset ??_R0?AVTESObjectREFR@@@8; struct TypeDescriptor *
 0x4FB6B7: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
@@ -58,7 +58,7 @@
 0x4FB6D1: call    TESObjectREFR_GetName
 0x4FB6D6: jmp     short loc_4FB6E1
 0x4FB6D8: push    esi; a1
-0x4FB6D9: call    TESFullName_GetNameForForm
+0x4FB6D9: call    TESFullName_GetNameForForm; 3DTheft decode: TESFullName_GetNameForForm only dynamic-casts the passed form to TESFullName and returns its raw name/EmptyString; it does not apply worldspace fallback.
 0x4FB6DE: add     esp, 4
 0x4FB6E1: test    esi, esi
 0x4FB6E3: jz      short loc_4FB726

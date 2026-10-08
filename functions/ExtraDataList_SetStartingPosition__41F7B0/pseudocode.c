@@ -4,18 +4,18 @@ BSExtraDataVtbl **__thiscall ExtraDataList_SetStartingPosition(
         _DWORD *a3,
         BSExtraDataVtbl *a4,
         BSExtraDataVtbl *a5,
-        BSExtraData *a6)
+        BSExtraDataVtbl *a6)
 {
   BSExtraData *ExtraData; // eax
 
-  ExtraData = BaseExtraList_GetExtraData(this, kExtraData_StartingPosition);
-  if ( !ExtraData )
-    ExtraData = ExtraDataList_AddExtraStartingPosition(this, a3);
-  ExtraData[1].vtbl = a4;
-  *(_DWORD *)&ExtraData[1].members.type = a5;
-  ExtraData[1].members.next = a6;
-  *a2 = a4;
-  a2[1] = a5;
-  a2[2] = (BSExtraDataVtbl *)a6;
-  return a2;
+  ExtraData = BaseExtraList_GetExtraData(this, kExtraData_StartingPosition); /*0x41f7b5*/
+  if ( !ExtraData ) /*0x41f7bc*/
+    ExtraData = ExtraDataList_AddExtraStartingPosition(this, a3); /*0x41f7c5*/
+  ExtraData[1].vtbl = a4; /*0x41f7d6*/
+  *(_DWORD *)&ExtraData[1].members.type = a5; /*0x41f7d9*/
+  ExtraData[1].members.next = (BSExtraData *)a6; /*0x41f7dc*/
+  *a2 = a4; /*0x41f7e3*/
+  a2[1] = a5; /*0x41f7e5*/
+  a2[2] = a6; /*0x41f7e8*/
+  return a2; /*0x41f7eb*/
 }

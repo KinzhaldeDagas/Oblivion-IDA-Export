@@ -15,9 +15,9 @@ BSExtraData *__userpurge sub_6489E0@<eax>(double a1@<st2>, double a2@<st1>, doub
   TESObjectREFR *v17; // edi
   int *v18; // eax
   char v19; // bl
-  char *v20; // esi
+  int v20; // esi
   BSExtraDataVtbl *ExtraPackage; // ebp
-  char *v22; // esi
+  int v22; // esi
   BSExtraDataVtbl *v23; // ebp
   char v24; // al
   double v25; // st7
@@ -28,169 +28,170 @@ BSExtraData *__userpurge sub_6489E0@<eax>(double a1@<st2>, double a2@<st1>, doub
   ExtraDataList *v30; // [esp+28h] [ebp-8h]
   BSExtraData *v31; // [esp+2Ch] [ebp-4h]
 
-  v26 = 0;
-  if ( (*(unsigned __int8 (__usercall **)@<al>(_DWORD *@<ecx>, _DWORD, double@<st0>, double@<st1>))(*a4 + 0x198))(
+  v26 = 0; /*0x6489f7*/
+  if ( (*(unsigned __int8 (__usercall **)@<al>(_DWORD *@<ecx>, _DWORD, double@<st0>, double@<st1>, double@<st2>))(*a4 + 0x198))( /*0x648a0a*/
          a4,
          0,
          a3,
-         a2)
+         a2,
+         a1)
     || (a4[2] & 0x800) != 0 )
   {
-    v26 = 1;
+    v26 = 1; /*0x648a0c*/
   }
-  v30 = (ExtraDataList *)(a4 + 0x11);
-  result = (BSExtraData *)GetExtraDataFollower();
-  v6 = result;
-  v31 = result;
-  if ( result )
+  v30 = (ExtraDataList *)(a4 + 0x11); /*0x648a14*/
+  result = (BSExtraData *)ExtraDataList_GetFollowerExtra(); /*0x648a18*/
+  v6 = result; /*0x648a1d*/
+  v31 = result; /*0x648a21*/
+  if ( result ) /*0x648a25*/
   {
-    v7 = (int *)FormHeapAlloc(8u);
-    if ( v7 )
+    v7 = (int *)FormHeapAlloc(8u); /*0x648a2d*/
+    if ( v7 ) /*0x648a37*/
     {
-      v8 = v7;
-      *v7 = 0;
-      v7[1] = 0;
-      v27 = v7;
+      v8 = v7; /*0x648a39*/
+      *v7 = 0; /*0x648a3b*/
+      v7[1] = 0; /*0x648a3d*/
+      v27 = v7; /*0x648a40*/
     }
     else
     {
-      v27 = 0;
-      v8 = 0;
+      v27 = 0; /*0x648a46*/
+      v8 = 0; /*0x648a4a*/
     }
-    v9 = (void (__thiscall **)(BSExtraData *))FormHeapAlloc(8u);
-    if ( v9 )
+    v9 = (void (__thiscall **)(BSExtraData *))FormHeapAlloc(8u); /*0x648a4e*/
+    if ( v9 ) /*0x648a58*/
     {
-      *v9 = 0;
-      v9[1] = 0;
-      v28 = v9;
+      *v9 = 0; /*0x648a5a*/
+      v9[1] = 0; /*0x648a5c*/
+      v28 = v9; /*0x648a5f*/
     }
     else
     {
-      v28 = 0;
+      v28 = 0; /*0x648a65*/
     }
-    v10 = v28;
-    vtbl = v6[1].vtbl;
-    for ( i = (TESObjectREFR **)v28; vtbl; v10 = v28 )
+    v10 = v28; /*0x648a69*/
+    vtbl = v6[1].vtbl; /*0x648a6e*/
+    for ( i = (TESObjectREFR **)v28; vtbl; v10 = v28 ) /*0x648a77*/
     {
-      Destructor = vtbl->Destructor;
-      if ( !vtbl->Destructor )
-        break;
-      v13 = v10;
-      v14 = (int)(v10 + 1);
-      if ( *(_DWORD *)v14 )
+      Destructor = vtbl->Destructor; /*0x648a80*/
+      if ( !vtbl->Destructor ) /*0x648a80*/
+        break; /*0x648a84*/
+      v13 = v10; /*0x648a86*/
+      v14 = (int)(v10 + 1); /*0x648a88*/
+      if ( *(_DWORD *)v14 ) /*0x648a8b*/
       {
-        do
+        do /*0x648a98*/
         {
-          v13 = *(void (__thiscall ***)(BSExtraData *))v14;
-          v15 = *(_DWORD *)(*(_DWORD *)v14 + 4) == 0;
-          v14 = *(_DWORD *)v14 + 4;
+          v13 = *(void (__thiscall ***)(BSExtraData *))v14; /*0x648a90*/
+          v15 = *(_DWORD *)(*(_DWORD *)v14 + 4) == 0; /*0x648a92*/
+          v14 = *(_DWORD *)v14 + 4; /*0x648a95*/
         }
-        while ( !v15 );
+        while ( !v15 ); /*0x648a98*/
       }
-      if ( *v13 )
+      if ( *v13 ) /*0x648a9a*/
       {
-        v16 = (void (__thiscall **)(BSExtraData *))FormHeapAlloc(8u);
-        if ( v16 )
+        v16 = (void (__thiscall **)(BSExtraData *))FormHeapAlloc(8u); /*0x648aa0*/
+        if ( v16 ) /*0x648aaa*/
         {
-          *v16 = Destructor;
-          v16[1] = 0;
-          v13[1] = (void (__thiscall *)(BSExtraData *))v16;
+          *v16 = Destructor; /*0x648aac*/
+          v16[1] = 0; /*0x648aae*/
+          v13[1] = (void (__thiscall *)(BSExtraData *))v16; /*0x648ab1*/
         }
         else
         {
-          v13[1] = 0;
+          v13[1] = 0; /*0x648ab8*/
         }
       }
       else
       {
-        *v13 = Destructor;
+        *v13 = Destructor; /*0x648abd*/
       }
-      vtbl = (BSExtraDataVtbl *)vtbl->CompareTo;
-      v8 = v27;
+      vtbl = (BSExtraDataVtbl *)vtbl->CompareTo; /*0x648abf*/
+      v8 = v27; /*0x648ac4*/
     }
-    if ( v10 )
+    if ( v10 ) /*0x648ad0*/
     {
-      do
+      do /*0x648ada*/
       {
-        v17 = *i;
-        if ( !*i )
-          break;
-        if ( !v26 )
+        v17 = *i; /*0x648ada*/
+        if ( !*i ) /*0x648ade*/
+          break; /*0x648ade*/
+        if ( !v26 ) /*0x648ae9*/
         {
-          if ( v17 != (TESObjectREFR *)TESDataHandler_g_PlayerRef )
+          if ( v17 != (TESObjectREFR *)reference ) /*0x648b2c*/
           {
-            v19 = 0;
-            v20 = (char *)sub_5E03A0(a4);
-            ExtraPackage = ExtraDataList::GetExtraPackage(v30);
-            if ( !v20 || sub_567770(v20) )
+            v19 = 0; /*0x648b36*/
+            v20 = sub_5E03A0(a4); /*0x648b41*/
+            ExtraPackage = ExtraDataList::GetExtraPackage(v30); /*0x648b4a*/
+            if ( !v20 || TESPackage::IsTemporaryOverrideType((TESPackage *)v20) ) /*0x648b50*/
             {
-              if ( ExtraPackage )
-                v20 = (char *)ExtraPackage;
+              if ( ExtraPackage ) /*0x648b5b*/
+                v20 = (int)ExtraPackage; /*0x648b5d*/
             }
-            if ( v20 )
+            if ( v20 ) /*0x648b61*/
             {
-              if ( v20[0x20] == 2 )
-                v19 = 1;
+              if ( *(_BYTE *)(v20 + 0x20) == 2 ) /*0x648b67*/
+                v19 = 1; /*0x648b69*/
             }
-            v22 = (char *)sub_5E03A0(v17);
-            v23 = ExtraDataList::GetExtraPackage(&v17->member.baseExtraList);
-            if ( !v22 || sub_567770(v22) && v23 )
-              v22 = (char *)v23;
-            if ( v19 || v22 && ((v24 = v22[0x20], v24 == 1) || v24 == 7) )
+            v22 = sub_5E03A0(v17); /*0x648b75*/
+            v23 = ExtraDataList::GetExtraPackage(&v17->member.baseExtraList); /*0x648b7e*/
+            if ( !v22 || TESPackage::IsTemporaryOverrideType((TESPackage *)v22) && v23 ) /*0x648b8f*/
+              v22 = (int)v23; /*0x648b91*/
+            if ( v19 || v22 && ((v24 = *(_BYTE *)(v22 + 0x20), v24 == 1) || v24 == 7) ) /*0x648ba4*/
             {
-              if ( Actor::GetProcessLevel((Actor *)v17) )
+              if ( Actor::GetProcessLevel((Actor *)v17) ) /*0x648bb4*/
               {
-                v25 = ((double (__thiscall *)(TESObjectREFR *, _DWORD))v17->vtbl[1].super.Unk_06)(v17, LODWORD(a5));
-                RunScripts(v17, a1, a2, v25);
+                v25 = ((double (__thiscall *)(TESObjectREFR *, _DWORD))v17->vtbl[1].super.Unk_06)(v17, LODWORD(a5)); /*0x648bcf*/
+                RunScripts(v17, a1, a2, v25); /*0x648bd3*/
               }
             }
             else
             {
-              BSSimpleList_PushFront(v27, (int)v17);
+              BSSimpleList_PushFront(v27, (int)v17); /*0x648bab*/
             }
-            v8 = v27;
+            v8 = v27; /*0x648bd8*/
           }
-          goto LABEL_49;
+          goto LABEL_49; /*0x648bd8*/
         }
-        if ( !*v8 )
-          goto LABEL_28;
-        v18 = (int *)FormHeapAlloc(8u);
-        if ( !v18 )
+        if ( !*v8 ) /*0x648aed*/
+          goto LABEL_28; /*0x648aed*/
+        v18 = (int *)FormHeapAlloc(8u); /*0x648af1*/
+        if ( !v18 ) /*0x648afb*/
         {
-          *(_DWORD *)4 = v8[1];
-          v8[1] = 0;
+          *(_DWORD *)4 = v8[1]; /*0x648b19*/
+          v8[1] = 0; /*0x648b1c*/
 LABEL_28:
-          *v8 = (int)v17;
-          goto LABEL_49;
+          *v8 = (int)v17; /*0x648b1f*/
+          goto LABEL_49; /*0x648b21*/
         }
-        *v18 = *v8;
-        v18[1] = 0;
-        v18[1] = v8[1];
-        v8[1] = (int)v18;
-        *v8 = (int)v17;
+        *v18 = *v8; /*0x648aff*/
+        v18[1] = 0; /*0x648b01*/
+        v18[1] = v8[1]; /*0x648b07*/
+        v8[1] = (int)v18; /*0x648b0a*/
+        *v8 = (int)v17; /*0x648b0d*/
 LABEL_49:
-        i = (TESObjectREFR **)i[1];
+        i = (TESObjectREFR **)i[1]; /*0x648bde*/
       }
-      while ( i );
+      while ( i ); /*0x648ada*/
     }
-    if ( v27 )
+    if ( v27 ) /*0x648bf8*/
     {
-      do
+      do /*0x648c15*/
       {
-        if ( !*v8 )
-          break;
-        sub_424D00(v30, *v8);
-        v8 = (int *)v8[1];
+        if ( !*v8 ) /*0x648c00*/
+          break; /*0x648c04*/
+        sub_424D00(v30, *v8); /*0x648c0b*/
+        v8 = (int *)v8[1]; /*0x648c10*/
       }
-      while ( v8 );
+      while ( v8 ); /*0x648c15*/
     }
-    BSSimpleList_Clear(v28);
-    FormHeapFree((unsigned int)v28);
-    BSSimpleList_Clear(v27);
-    FormHeapFree((unsigned int)v27);
-    result = (BSExtraData *)v31[1].vtbl;
-    if ( !*(_DWORD *)&result->members.type && !result->vtbl )
-      return sub_420F00(v30);
+    BSSimpleList_Clear(v28); /*0x648c1b*/
+    FormHeapFree((unsigned int)v28); /*0x648c25*/
+    BSSimpleList_Clear(v27); /*0x648c2f*/
+    FormHeapFree((unsigned int)v27); /*0x648c35*/
+    result = (BSExtraData *)v31[1].vtbl; /*0x648c3e*/
+    if ( !*(_DWORD *)&result->members.type && !result->vtbl ) /*0x648c49*/
+      return ExtraDataList_RemoveFollowerExtra(v30); /*0x648c51*/
   }
-  return result;
+  return result; /*0x648c56*/
 }

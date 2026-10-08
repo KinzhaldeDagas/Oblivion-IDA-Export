@@ -2,38 +2,38 @@
 0x606C53: push    esi
 0x606C54: push    edi
 0x606C55: mov     esi, ecx
-0x606C57: call    sub_567E00
+0x606C57: call    TESPackage_SaveGame
 0x606C5C: cmp     byte ptr ds:0B05BACh, 0
 0x606C63: mov     ecx, ds:0B33B00h
-0x606C69: mov     [esp+20h+var_4], 0
+0x606C69: mov     [esp+20h+source], 0
 0x606C71: mov     eax, [ecx+14h]
 0x606C74: mov     [esp+20h+var_C], 0
 0x606C7C: mov     [esp+20h+var_10], eax
 0x606C80: jz      short loc_606C86
 0x606C82: mov     [esp+20h+var_10], eax
-0x606C86: call    sub_45A170
+0x606C86: call    TESSaveLoadGame_UseSaveGameBlocks
 0x606C8B: test    al, al
 0x606C8D: jz      short loc_606CC2
-0x606C8F: mov     ecx, ds:0B33B00h
-0x606C95: push    4; Size
+0x606C8F: mov     ecx, ds:0B33B00h; self
+0x606C95: push    4; byteCount
 0x606C97: lea     eax, [esp+24h+Src]
-0x606C9B: push    eax; Src
+0x606C9B: push    eax; source
 0x606C9C: mov     [esp+28h+Src], 4B4F4C42h
 0x606CA4: call    SaveLoad_SaveData
-0x606CA9: mov     ecx, ds:0B33B00h
+0x606CA9: mov     ecx, ds:0B33B00h; self
 0x606CAF: mov     edx, [ecx+14h]
-0x606CB2: push    2; Size
-0x606CB4: lea     eax, [esp+24h+var_4]
-0x606CB8: push    eax; Src
+0x606CB2: push    2; byteCount
+0x606CB4: lea     eax, [esp+24h+source]
+0x606CB8: push    eax; source
 0x606CB9: mov     [esp+28h+var_C], edx
 0x606CBD: call    SaveLoad_SaveData
-0x606CC2: mov     ecx, ds:0B33B00h
+0x606CC2: mov     ecx, ds:0B33B00h; self
 0x606CC8: push    ebp
-0x606CC9: push    2; Size
+0x606CC9: push    2; byteCount
 0x606CCB: lea     edx, [esp+28h+var_14]
 0x606CCF: mov     [esp+28h+var_14], 0
 0x606CD7: mov     ebp, [ecx+14h]
-0x606CDA: push    edx; Src
+0x606CDA: push    edx; source
 0x606CDB: call    SaveLoad_SaveData
 0x606CE0: mov     esi, [esi+3Ch]
 0x606CE3: test    esi, esi
@@ -44,22 +44,22 @@
 0x606CF0: jz      short loc_606D43
 0x606CF2: mov     edi, [esi]
 0x606CF4: mov     al, [edi+4]
-0x606CF7: push    1; Size
+0x606CF7: push    1; byteCount
 0x606CF9: lea     ecx, [esp+28h+var_15]
-0x606CFD: push    ecx; Src
-0x606CFE: mov     ecx, ds:0B33B00h
+0x606CFD: push    ecx; source
+0x606CFE: mov     ecx, ds:0B33B00h; self
 0x606D04: mov     [esp+2Ch+var_15], al
 0x606D08: call    SaveLoad_SaveData
 0x606D0D: movsx   edx, [esp+24h+var_15]
-0x606D12: push    edi
-0x606D13: push    edx
-0x606D14: mov     ecx, offset ActorProcessManager_ptr
-0x606D19: call    sub_675CC0
+0x606D12: push    edi; crime
+0x606D13: push    edx; crimeType
+0x606D14: mov     ecx, (offset qword_B3BB2C+1D4h); self
+0x606D19: call    ActorProcessManager_GetCrimeIndex
 0x606D1E: movzx   eax, ax
-0x606D21: push    2; Size
+0x606D21: push    2; byteCount
 0x606D23: lea     ecx, [esp+28h+Src]
-0x606D27: push    ecx; Src
-0x606D28: mov     ecx, ds:0B33B00h
+0x606D27: push    ecx; source
+0x606D28: mov     ecx, ds:0B33B00h; self
 0x606D2E: mov     [esp+2Ch+Src], eax
 0x606D32: call    SaveLoad_SaveData
 0x606D37: add     [esp+24h+var_14], 1
@@ -78,7 +78,7 @@
 0x606D66: jz      short loc_606DA5
 0x606D68: mov     eax, [edi]
 0x606D6A: push    eax; a1
-0x606D6B: call    TESForm_LookupByFormID
+0x606D6B: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x606D70: mov     ecx, [edi+5]
 0x606D73: mov     edx, [eax]
 0x606D75: add     esp, 4
@@ -105,7 +105,7 @@
 0x606DB9: call    sub_40FEC0
 0x606DBE: add     esp, 10h
 0x606DC1: mov     ecx, ds:0B33B00h
-0x606DC7: call    sub_45A170
+0x606DC7: call    TESSaveLoadGame_UseSaveGameBlocks
 0x606DCC: test    al, al
 0x606DCE: jz      short loc_606E03
 0x606DD0: mov     edx, ds:0B33B00h

@@ -18,13 +18,13 @@
 0x6CA7F4: mov     [esp+20h+var_4], 2
 0x6CA7FC: jz      short loc_6CA80B
 0x6CA7FE: fldz
-0x6CA800: push    0; char
+0x6CA800: push    0; transition
 0x6CA802: push    ecx
-0x6CA803: fstp    [esp+28h+var_28]; float
-0x6CA806: call    sub_6C9CB0
+0x6CA803: fstp    [esp+28h+easeOutTime]; easeOutTime
+0x6CA806: call    NiControllerSequence_Deactivate; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.
 0x6CA80B: mov     eax, [esi+8]
 0x6CA80E: push    eax
-0x6CA80F: call    FormHeapFree
+0x6CA80F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6CA814: mov     eax, [esi+14h]
 0x6CA817: add     esp, 4
 0x6CA81A: test    eax, eax
@@ -37,24 +37,24 @@
 0x6CA82C: push    eax; void *
 0x6CA82D: call    $LN21
 0x6CA832: push    edi
-0x6CA833: call    FormHeapFree
+0x6CA833: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6CA838: add     esp, 4
 0x6CA83B: mov     eax, [esi+18h]
 0x6CA83E: test    eax, eax
 0x6CA840: jz      short loc_6CA85F
 0x6CA842: mov     edx, [eax-4]
 0x6CA845: lea     edi, [eax-4]
-0x6CA848: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x6CA848: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x6CA84D: push    edx; int
 0x6CA84E: push    10h; unsigned int
 0x6CA850: push    eax; void *
 0x6CA851: call    $LN21
 0x6CA856: push    edi
-0x6CA857: call    FormHeapFree
+0x6CA857: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6CA85C: add     esp, 4
 0x6CA85F: mov     eax, [esi+5Ch]
 0x6CA862: push    eax
-0x6CA863: call    FormHeapFree
+0x6CA863: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6CA868: mov     edi, [esi+64h]
 0x6CA86B: mov     ebx, ds:0A2807Ch
 0x6CA871: add     esp, 4
@@ -100,3 +100,18 @@
 0x6CA8D6: pop     ebx
 0x6CA8D7: add     esp, 10h
 0x6CA8DA: retn
+0x9C7730: mov     ecx, [ebp-10h]
+0x9C7733: jmp     NiRefObject_destr
+0x9C7738: mov     ecx, [ebp-10h]
+0x9C773B: add     ecx, 20h ; ' '; slot
+0x9C773E: jmp     NiPointerSlot_Release
+0x9C7743: mov     ecx, [ebp-10h]
+0x9C7746: add     ecx, 64h ; 'd'; slot
+0x9C7749: jmp     NiPointerSlot_Release
+0x9C774E: mov     edx, [esp+arg_4]
+0x9C7752: lea     eax, [edx-10h]
+0x9C7755: mov     ecx, [edx-14h]
+0x9C7758: xor     ecx, eax
+0x9C775A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C775F: mov     eax, offset stru_AEFB58
+0x9C7764: jmp     ___CxxFrameHandler3

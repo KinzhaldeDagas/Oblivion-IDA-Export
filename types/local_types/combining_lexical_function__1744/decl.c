@@ -1,1 +1,1 @@
-combining_lexical_function
+typedef int (*combining_lexical_function)(WCHAR_0);

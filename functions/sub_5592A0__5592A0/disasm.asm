@@ -21,10 +21,10 @@
 0x5592D0: mov     edx, [esi+8]
 0x5592D3: add     esp, 0Ch
 0x5592D6: mov     edi, eax
-0x5592D8: push    edx
-0x5592D9: push    edi
+0x5592D8: push    edx; end
+0x5592D9: push    edi; begin
 0x5592DA: mov     ecx, esi
-0x5592DC: call    sub_557740
+0x5592DC: call    FaceGenEgtBasisRecordArray_Destruct; Destroy the three owned image-channel vectors at +0x10 in every 64-byte EGT basis record.
 0x5592E1: mov     [esi+8], edi
 0x5592E4: pop     edi
 0x5592E5: mov     eax, [esp+0Ch+arg_0]

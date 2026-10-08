@@ -29,7 +29,7 @@
 0x5FA0F6: mov     ecx, edi
 0x5FA0F8: mov     [esp+0E0h+var_C4], edx
 0x5FA0FC: mov     [esp+0E0h+var_C0], eax
-0x5FA100: call    sub_5E0660
+0x5FA100: call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.
 0x5FA105: fmul    qword ptr ds:0A3C770h
 0x5FA10B: fld     qword ptr ds:0A46970h
 0x5FA111: fcom    st(1)
@@ -39,7 +39,7 @@
 0x5FA11A: jnz     short loc_5FA12B
 0x5FA11C: mov     ecx, edi
 0x5FA11E: fstp    st
-0x5FA120: call    sub_5E0660
+0x5FA120: call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.
 0x5FA125: fmul    qword ptr ds:0A3C770h
 0x5FA12B: fadd    [esp+0E0h+var_B4]
 0x5FA12F: movaps  xmm0, xmmword ptr ds:0BA7A40h
@@ -60,7 +60,7 @@
 0x5FA170: fstp    [esp+0E4h+var_4C]
 0x5FA177: mov     [esp+0E4h+var_18], ebx
 0x5FA17E: movaps  [esp+0E4h+var_30], xmm0
-0x5FA186: call    sub_65ABE0
+0x5FA186: call    MobileObject_GetCollisionFilterInfo; Returns actor/proxy collision filter identity by calling 0x57E270 on MobileObject_GetCharProxy(this). Callers keep high 16 bits and OR in the chosen collision layer.
 0x5FA18B: fld     [esp+0E0h+var_BC]
 0x5FA18F: fld     qword ptr ds:0A39088h
 0x5FA195: mov     edx, [eax]
@@ -89,12 +89,12 @@
 0x5FA1EA: fstp    dword ptr [esp+0E0h+var_A0+8]
 0x5FA1EE: movaps  xmm0, [esp+0E0h+var_A0]
 0x5FA1F3: movaps  [esp+0E0h+var_80], xmm0
-0x5FA1F8: call    TESObjectREFR_GetParentCell
+0x5FA1F8: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5FA1FD: mov     esi, eax
 0x5FA1FF: cmp     esi, ebx
 0x5FA201: jz      short loc_5FA269
 0x5FA203: mov     ecx, esi; this
-0x5FA205: call    TESObjectCELL_IsInterior
+0x5FA205: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x5FA20A: test    al, al
 0x5FA20C: jz      short loc_5FA218
 0x5FA20E: lea     ecx, [esi+28h]
@@ -104,7 +104,7 @@
 0x5FA21D: cmp     eax, ebx
 0x5FA21F: jz      short loc_5FA250
 0x5FA221: mov     ecx, esi; this
-0x5FA223: call    TESObjectCELL_IsInterior
+0x5FA223: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x5FA228: test    al, al
 0x5FA22A: jz      short loc_5FA236
 0x5FA22C: lea     ecx, [esi+28h]
@@ -156,7 +156,7 @@
 0x5FA2AD: test    al, al
 0x5FA2AF: jnz     short loc_5FA250
 0x5FA2B1: mov     ecx, edi; this
-0x5FA2B3: call    MobileObject_GetCharProxy
+0x5FA2B3: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x5FA2B8: cmp     eax, ebx
 0x5FA2BA: jz      short loc_5FA2E5
 0x5FA2BC: push    1

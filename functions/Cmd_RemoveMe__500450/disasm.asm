@@ -20,7 +20,7 @@
 0x50047B: xor     ebp, ebp
 0x50047D: push    edx; a1
 0x50047E: mov     dword ptr [esp+30h+var_4], ebp
-0x500482: call    Script_ExtractArgs
+0x500482: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x500487: add     esp, 20h
 0x50048A: test    al, al
 0x50048C: jz      loc_50055D

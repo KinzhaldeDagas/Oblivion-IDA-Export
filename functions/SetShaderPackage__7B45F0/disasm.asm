@@ -1,11 +1,11 @@
-0x7B45F0: mov     eax, [esp+arg_0]
+0x7B45F0: mov     eax, dword ptr [esp+shaderCapsA]; [Verified] Selects and publishes the renderer shader-package version at RendererGlobalState+0xAF from adapter/version inputs and vendor prefix. The third argument is bForce1XShaders; when true and a shader version is available, the function forces package version 1. Argument maxPS20Instructions is the same value logged as maxPS20inst; ATI/NVIDIA paths choose versions 3–6 and set +0xC when it exceeds 0xFF. Fallback branches choose version 0/1 and clear HDR mode at +0x1D7. [Verified] +0xC gates Lighting30 definition 0x1A; [Probable] it represents shader-feature capability. This native selector emits versions 0–6 only; [Unknown] the writer/source of version 7, which the package-index switch handles, has not yet been identified.
 0x7B45F4: cmp     ah, 2
-0x7B45F7: mov     ecx, [esp+arg_4]
+0x7B45F7: mov     ecx, dword ptr [esp+shaderCapsB]
 0x7B45FB: push    esi
 0x7B45FC: jb      loc_7B46AE
 0x7B4602: cmp     ch, 2
 0x7B4605: jb      loc_7B46AE
-0x7B460B: cmp     [esp+4+arg_C], 0
+0x7B460B: cmp     [esp+4+adapterCaps], 0
 0x7B4610: mov     edx, 2
 0x7B4615: mov     ds:0B42F48h, edx
 0x7B461B: mov     dword ptr ds:0B42F40h, 2Fh ; '/'
@@ -20,7 +20,7 @@
 0x7B463C: add     esp, 0Ch
 0x7B463F: test    eax, eax
 0x7B4641: jnz     loc_7B4702
-0x7B4647: mov     eax, [esp+4+arg_14]
+0x7B4647: mov     eax, [esp+4+maxPS20Instructions]
 0x7B464B: cmp     eax, 60h ; '`'
 0x7B464E: mov     edx, ds:0B42F48h
 0x7B4654: jle     loc_7B46E6
@@ -31,14 +31,14 @@
 0x7B466A: mov     dword ptr ds:0B42D74h, 6
 0x7B4674: cmp     eax, 0FFh
 0x7B4679: jle     short loc_7B4682
-0x7B467B: mov     byte ptr ds:0B42EA5h, 1
+0x7B467B: mov     byte ptr ds:0B42EA5h, 1; [Verified] On the ATI/vendor path, SetShaderPackage sets RendererGlobalState+0xC when maxPS20Instructions exceeds 0xFF; GetShaderDefinition uses this byte to permit Lighting30 definition 0x1A.
 0x7B4682: cmp     edx, 2
 0x7B4685: jge     short loc_7B468E
 0x7B4687: and     dword ptr ds:0B42F40h, 0FFFFFFEFh
 0x7B468E: push    edx
-0x7B468F: call    sub_7B4590
+0x7B468F: call    SetDecalPassBatchSizeForShaderPackageVersion; [Verified] SetShaderPackage calls UpdateDisplayDebugFlagsForShaderPackageVersion after selecting the renderer package version; it synchronizes the display-debug flag word with the selected version.
 0x7B4694: add     esp, 4
-0x7B4697: cmp     [esp+4+arg_8], 0
+0x7B4697: cmp     [esp+4+bForce1XShaders], 0
 0x7B469C: pop     esi
 0x7B469D: jz      short locret_7B46AD
 0x7B469F: test    edx, edx
@@ -51,12 +51,12 @@
 0x7B46B6: jb      short loc_7B46D6
 0x7B46B8: mov     edx, 1
 0x7B46BD: mov     ds:0B42F48h, edx
-0x7B46C3: mov     byte ptr ds:0B43070h, 0
+0x7B46C3: mov     byte ptr ds:0B43070h, 0; [Verified] SetShaderPackage's reduced-capability branch clears RendererGlobalState+0x1D7 (HDR mode) and selects package version 1.
 0x7B46CA: mov     dword ptr ds:0B42F40h, 0Fh
 0x7B46D4: jmp     short loc_7B4687
 0x7B46D6: xor     edx, edx
 0x7B46D8: mov     ds:0B42F48h, edx
-0x7B46DE: mov     ds:0B43070h, dl
+0x7B46DE: mov     ds:0B43070h, dl; [Verified] SetShaderPackage's no-capability fallback clears RendererGlobalState+0x1D7 (HDR mode) and selects package version 0.
 0x7B46E4: jmp     short loc_7B4687
 0x7B46E6: cmp     edx, 2
 0x7B46E9: jnz     short loc_7B46F6
@@ -71,7 +71,7 @@
 0x7B470F: add     esp, 0Ch
 0x7B4712: test    eax, eax
 0x7B4714: jnz     short loc_7B4763
-0x7B4716: mov     eax, [esp+4+arg_14]
+0x7B4716: mov     eax, [esp+4+maxPS20Instructions]
 0x7B471A: cmp     eax, 60h ; '`'
 0x7B471D: mov     edx, ds:0B42F48h
 0x7B4723: jle     short loc_7B4744
@@ -80,7 +80,7 @@
 0x7B472A: mov     edx, 5
 0x7B472F: mov     ds:0B42F48h, edx
 0x7B4735: mov     dword ptr ds:0B42D74h, 5
-0x7B473F: jmp     loc_7B4674
+0x7B473F: jmp     loc_7B4674; [Verified] On the NVIDIA/vendor path, SetShaderPackage reaches the same maxPS20Instructions > 0xFF check and sets RendererGlobalState+0xC, the Lighting30 definition gate.
 0x7B4744: cmp     edx, 2
 0x7B4747: jnz     short loc_7B4754
 0x7B4749: mov     edx, 3

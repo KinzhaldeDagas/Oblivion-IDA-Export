@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x625E70",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; DialoguePackage destructor/cancellation path. Clears PlayerCharacter.dialoguePackage when owned, destroys/frees the generated Conversation, and never calls DialogueItem::RunResult. Deferred INFO results are lost on interruption; ImmediateResult side effects already occurred during construction.",
     "mnemonic": "push",
     "size": 2
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x625E99",
-    "line": "mov     dword ptr [esi], offset ??_7DialoguePackage@@6B@; const DialoguePackage::`vftable'",
+    "line": "mov     dword ptr [esi], offset ??_7DialoguePackage@@6B@; Verified complete TESPackage persistence table extentEC; tail DC/E0/E4/E8 is no-argument size/save/load/init-load virtuals. Derived vtable identity from constructor stores and RTTI names. Prior incompleteDC type corrected.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x625EC1",
-    "line": "call    sub_6B7B90",
+    "line": "call    j_Conversation__Destroy; Destroy the owned Conversation directly. No DialogueItem::RunResult call occurs on this cancellation/destruction path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x625EC7",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -232,5 +232,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C35D0",
+    "line": "mov     ecx, [ebp-10h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C35D3",
+    "line": "jmp     ??1TESPackage@@UAE@XZ; TESPackage::~TESPackage(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C35D8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C35DC",
+    "line": "lea     eax, [edx-0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C35DF",
+    "line": "mov     ecx, [edx-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C35E2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C35E4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C35E9",
+    "line": "mov     eax, offset stru_AEC1B8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C35EE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,1 +1,1 @@
-HDSA
+typedef _DSA *HDSA;

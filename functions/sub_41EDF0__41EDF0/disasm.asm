@@ -1,4 +1,4 @@
-0x41EDF0: push    0FFFFFFFFh
+0x41EDF0: push    0FFFFFFFFh; ExtraTimeLeft singleton setter always creates/updates the supplied float32 bit pattern; no zero or NaN removal sentinel.
 0x41EDF2: push    offset SEH_8C62B0
 0x41EDF7: mov     eax, large fs:0
 0x41EDFD: push    eax
@@ -33,7 +33,7 @@
 0x41EE57: push    ecx
 0x41EE58: mov     ecx, eax
 0x41EE5A: fstp    [esp+1Ch+var_1C]; float
-0x41EE5D: call    sub_429EC0
+0x41EE5D: call    ExtraTimeLeft_ctor; Constructs ExtraTimeLeft: type 0x2D and supplied float value.
 0x41EE62: jmp     short loc_41EE66
 0x41EE64: xor     eax, eax
 0x41EE66: push    eax; BSExtraData *
@@ -46,3 +46,15 @@
 0x41EE82: pop     esi
 0x41EE83: add     esp, 10h
 0x41EE86: retn    4
+0x9D62E0: mov     eax, [ebp-10h]
+0x9D62E3: push    eax
+0x9D62E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D62E9: pop     ecx
+0x9D62EA: retn
+0x9D62EB: mov     edx, [esp+arg_4]
+0x9D62EF: lea     eax, [edx-8]
+0x9D62F2: mov     ecx, [edx-0Ch]
+0x9D62F5: xor     ecx, eax
+0x9D62F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D62FC: mov     eax, offset stru_AFE21C
+0x9D6301: jmp     ___CxxFrameHandler3

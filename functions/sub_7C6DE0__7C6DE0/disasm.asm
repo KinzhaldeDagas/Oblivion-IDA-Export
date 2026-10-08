@@ -1,36 +1,36 @@
-0x7C6DE0: sub     esp, 10h
+0x7C6DE0: sub     esp, 10h; Create/reposition the two persistent anchors and partition active lights by native transition/source-visibility state.
 0x7C6DE3: push    ebp
 0x7C6DE4: mov     ebp, ecx
 0x7C6DE6: mov     eax, [ebp+10Ch]
 0x7C6DEC: test    eax, eax
 0x7C6DEE: mov     [esp+14h+var_C], ebp
 0x7C6DF2: mov     [esp+14h+var_10], 0
-0x7C6DFA: lea     ecx, [ebp+0F4h]
+0x7C6DFA: lea     ecx, [ebp+0F4h]; self
 0x7C6E00: jnz     short loc_7C6E1C
 0x7C6E02: lea     eax, [ebp+114h]
-0x7C6E08: push    eax
-0x7C6E09: call    sub_749800
+0x7C6E08: push    eax; payload
+0x7C6E09: call    NiTRefPointerList__AddHead; Pass221: Refcounted NiTPointerList head-insert helper; node+0x08 owns the payload reference.
 0x7C6E0E: mov     ecx, [ebp+0F8h]
 0x7C6E14: mov     [ebp+10Ch], ecx
 0x7C6E1A: jmp     short loc_7C6E29
 0x7C6E1C: mov     edx, [ebp+0F8h]
-0x7C6E22: push    edx
-0x7C6E23: push    eax
-0x7C6E24: call    sub_7C58F0
+0x7C6E22: push    edx; before
+0x7C6E23: push    eax; node
+0x7C6E24: call    NiTPointerList_MoveNodeBefore; Pure doubly-linked-list move-before operation; no allocation, free, refcount, or count change.
 0x7C6E29: mov     eax, [ebp+108h]
 0x7C6E2F: test    eax, eax
-0x7C6E31: lea     ecx, [ebp+0F4h]
+0x7C6E31: lea     ecx, [ebp+0F4h]; self
 0x7C6E37: jnz     short loc_7C6E53
 0x7C6E39: lea     eax, [ebp+110h]
-0x7C6E3F: push    eax
-0x7C6E40: call    sub_749800
+0x7C6E3F: push    eax; payload
+0x7C6E40: call    NiTRefPointerList__AddHead; Pass221: Refcounted NiTPointerList head-insert helper; node+0x08 owns the payload reference.
 0x7C6E45: mov     ecx, [ebp+0F8h]
 0x7C6E4B: mov     [ebp+108h], ecx
 0x7C6E51: jmp     short loc_7C6E60
 0x7C6E53: mov     edx, [ebp+0F8h]
-0x7C6E59: push    edx
-0x7C6E5A: push    eax
-0x7C6E5B: call    sub_7C58F0
+0x7C6E59: push    edx; before
+0x7C6E5A: push    eax; node
+0x7C6E5B: call    NiTPointerList_MoveNodeBefore; Pure doubly-linked-list move-before operation; no allocation, free, refcount, or count change.
 0x7C6E60: mov     eax, [ebp+10Ch]
 0x7C6E66: test    eax, eax
 0x7C6E68: jz      loc_7C6FE8
@@ -41,9 +41,8 @@
 0x7C6E79: push    ebx
 0x7C6E7A: push    edi
 0x7C6E7B: jmp     short loc_7C6E84
-0x7C6E7D: align 10h
 0x7C6E80: mov     esi, [esp+20h+var_8]
-0x7C6E84: mov     edi, [esi+8]
+0x7C6E84: mov     edi, [esi+8]; Pre-projection partition uses transition +0xDC/+0xE0 and backing-light cull state, not projector-branch transform.
 0x7C6E87: test    edi, edi
 0x7C6E89: mov     ecx, [esi]
 0x7C6E8B: lea     eax, [esi+8]
@@ -95,7 +94,7 @@
 0x7C6F2A: lea     ecx, [esp+20h+var_4]
 0x7C6F2E: push    ecx
 0x7C6F2F: mov     ecx, edi
-0x7C6F31: call    sub_405AD0
+0x7C6F31: call    ShadowSceneLight_GetLightRef
 0x7C6F36: mov     edx, [eax]
 0x7C6F38: or      [esp+20h+var_10], 1
 0x7C6F3D: test    byte ptr [edx+18h], 1
@@ -142,13 +141,13 @@
 0x7C6FB8: push    eax
 0x7C6FB9: push    esi
 0x7C6FBA: lea     ecx, [ebp+0F4h]
-0x7C6FC0: call    sub_7C5950
+0x7C6FC0: call    NiTPointerList_MoveNodeAfter; Pure doubly-linked-list move-after operation; no allocation, free, refcount, or count change.
 0x7C6FC5: jmp     short loc_7C6FDA
 0x7C6FC7: mov     ecx, [ebp+10Ch]
-0x7C6FCD: push    ecx
-0x7C6FCE: push    esi
-0x7C6FCF: lea     ecx, [ebp+0F4h]
-0x7C6FD5: call    sub_7C58F0
+0x7C6FCD: push    ecx; before
+0x7C6FCE: push    esi; node
+0x7C6FCF: lea     ecx, [ebp+0F4h]; self
+0x7C6FD5: call    NiTPointerList_MoveNodeBefore; Pure doubly-linked-list move-before operation; no allocation, free, refcount, or count change.
 0x7C6FDA: cmp     [esp+20h+var_8], 0
 0x7C6FDF: jnz     loc_7C6E80
 0x7C6FE5: pop     edi

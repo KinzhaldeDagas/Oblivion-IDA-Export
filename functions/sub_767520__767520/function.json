@@ -1,18 +1,31 @@
 {
-  "callees_count": 18,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x767520",
+      "0x76780E"
+    ]
+  ],
+  "chunks_sha256": "39f7437ce09f8d2a82ea78721ac4c9c412d22240cfcee7f79f97b333467f5de3",
+  "comment_regular": "Skinned geometry renderer. Calls the selected concrete shader's SetupRenderPass and BeginPassLoop before iterating skin partitions. Zero queued passes bypass every partition pass and DrawIndexedPrimitive; this covers Lighting30 high records and conditionally reachable Hair high records.\n\nOblivion hardware-skinned geometry pass loop. Applies the same caster pass state, constants, buffers, and programs for every skin partition, then issues DrawIndexedPrimitive before pass finish/advance.",
+  "comment_repeatable": "Oblivion hardware-skinned geometry submission. After preflight and vtable +0x2C pass setup, it processes skin partitions and issues DrawIndexedPrimitive only when vtable +0x48 BeginPassLoop returns nonzero. A zero-pass invalid Lighting30 selector skips all pass and partition draws but still calls vtable +0x44 shader-finish cleanup.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_767520",
+  "display_name": "NiDX9Renderer_RenderGeometrySkinned",
   "end_ea": "0x76780E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_767520",
+  "name": "NiDX9Renderer_RenderGeometrySkinned",
   "segment": ".text",
   "sha256": "39f7437ce09f8d2a82ea78721ac4c9c412d22240cfcee7f79f97b333467f5de3",
   "size": 750,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x767520",
+  "total_chunk_size": 750,
   "type": "_DWORD *__userpurge@<eax>(int@<ecx>, int@<ebx>, int@<ebp>, int@<edi>, int, int, _DWORD *, int, int, int, int, _DWORD *)",
   "xrefs_from_count": 288,
   "xrefs_to_count": 1

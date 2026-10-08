@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x96A3DF",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -889,7 +889,7 @@
   },
   {
     "ea": "0x96A573",
-    "line": "mov     eax, [esp+arg_98]",
+    "line": "mov     eax, [esp+other]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1489,7 +1489,7 @@
   },
   {
     "ea": "0x96A689",
-    "line": "fcom    [esp+ecx*4+arg_98]",
+    "line": "fcom    [esp+ecx*4+other]",
     "mnemonic": "fcom",
     "size": 7
   },
@@ -1537,7 +1537,7 @@
   },
   {
     "ea": "0x96A6A4",
-    "line": "fcom    [esp+ecx*4+arg_98]",
+    "line": "fcom    [esp+ecx*4+other]",
     "mnemonic": "fcom",
     "size": 7
   },
@@ -2221,7 +2221,7 @@
   },
   {
     "ea": "0x96A7F4",
-    "line": "mov     ecx, [esp+arg_98]",
+    "line": "mov     ecx, [esp+other]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -3223,7 +3223,7 @@
   },
   {
     "ea": "0x96A9E5",
-    "line": "fadd    [esp+0Ch+arg_12C]",
+    "line": "fadd    qword ptr [esp+0Ch+arg_12C.x]",
     "mnemonic": "fadd",
     "size": 7
   },
@@ -3247,7 +3247,7 @@
   },
   {
     "ea": "0x96A9F6",
-    "line": "fadd    [esp+arg_13C]",
+    "line": "fadd    qword ptr [esp+arg_13C.x]",
     "mnemonic": "fadd",
     "size": 7
   },
@@ -3283,25 +3283,25 @@
   },
   {
     "ea": "0x96AA13",
-    "line": "mov     dword ptr [esp+arg_74], eax",
+    "line": "mov     [esp+out.x], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x96AA17",
-    "line": "lea     eax, [esp+arg_74]",
+    "line": "lea     eax, [esp+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x96AA1B",
-    "line": "mov     dword ptr [esp+arg_74+4], ecx",
+    "line": "mov     [esp+out.y], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x96AA1F",
-    "line": "mov     ecx, [esp+arg_98]",
+    "line": "mov     ecx, [esp+other]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -3343,13 +3343,13 @@
   },
   {
     "ea": "0x96AA3E",
-    "line": "mov     [esp+4+arg_7C], edx",
+    "line": "mov     [esp+4+out.z], edx",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x96AA45",
-    "line": "fmul    [esp+4+arg_11C]",
+    "line": "fmul    qword ptr [esp+4+arg_11C.x]",
     "mnemonic": "fmul",
     "size": 7
   },
@@ -3379,7 +3379,7 @@
   },
   {
     "ea": "0x96AA5B",
-    "line": "lea     ecx, [esp+arg_74]",
+    "line": "lea     ecx, [esp+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3853,13 +3853,13 @@
   },
   {
     "ea": "0x96AB44",
-    "line": "mov     eax, [esp+arg_98]",
+    "line": "mov     eax, [esp+other]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x96AB4B",
-    "line": "push    eax",
+    "line": "push    eax; other",
     "mnemonic": "push",
     "size": 1
   },
@@ -3895,25 +3895,25 @@
   },
   {
     "ea": "0x96AB5C",
-    "line": "lea     ecx, [esp+4+arg_74]",
+    "line": "lea     ecx, [esp+4+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x96AB60",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x96AB61",
-    "line": "mov     ecx, [esp+8+arg_60]",
+    "line": "mov     ecx, [esp+8+arg_60]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x96AB65",
-    "line": "call    sub_498FE0",
+    "line": "call    NiPoint3_CrossProduct",
     "mnemonic": "call",
     "size": 5
   },
@@ -4615,7 +4615,7 @@
   },
   {
     "ea": "0x96ACCB",
-    "line": "fadd    [esp+0Ch+arg_12C]",
+    "line": "fadd    qword ptr [esp+0Ch+arg_12C.x]",
     "mnemonic": "fadd",
     "size": 7
   },
@@ -4645,7 +4645,7 @@
   },
   {
     "ea": "0x96ACE0",
-    "line": "fadd    [esp+arg_13C]",
+    "line": "fadd    qword ptr [esp+arg_13C.x]",
     "mnemonic": "fadd",
     "size": 7
   },
@@ -4675,13 +4675,13 @@
   },
   {
     "ea": "0x96ACF9",
-    "line": "mov     dword ptr [esp+arg_74], edx",
+    "line": "mov     [esp+out.x], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x96ACFD",
-    "line": "lea     edx, [esp+arg_74]",
+    "line": "lea     edx, [esp+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -4711,13 +4711,13 @@
   },
   {
     "ea": "0x96AD0E",
-    "line": "mov     [esp+4+arg_7C], ecx",
+    "line": "mov     [esp+4+out.z], ecx",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x96AD15",
-    "line": "fmul    [esp+4+arg_16C]",
+    "line": "fmul    qword ptr [esp+4+arg_16C.x]",
     "mnemonic": "fmul",
     "size": 7
   },
@@ -4735,7 +4735,7 @@
   },
   {
     "ea": "0x96AD27",
-    "line": "mov     dword ptr [esp+4+arg_74+4], eax",
+    "line": "mov     [esp+4+out.y], eax",
     "mnemonic": "mov",
     "size": 7
   },
@@ -4777,7 +4777,7 @@
   },
   {
     "ea": "0x96AD48",
-    "line": "lea     eax, [esp+arg_74]",
+    "line": "lea     eax, [esp+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -5251,7 +5251,7 @@
   },
   {
     "ea": "0x96AE34",
-    "line": "push    eax",
+    "line": "push    eax; other",
     "mnemonic": "push",
     "size": 1
   },
@@ -5293,19 +5293,19 @@
   },
   {
     "ea": "0x96AE4F",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x96AE50",
-    "line": "mov     ecx, [esp+8+arg_60]",
+    "line": "mov     ecx, [esp+8+arg_60]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x96AE54",
-    "line": "call    sub_498FE0",
+    "line": "call    NiPoint3_CrossProduct",
     "mnemonic": "call",
     "size": 5
   },
@@ -5995,7 +5995,7 @@
   },
   {
     "ea": "0x96AFAC",
-    "line": "fadd    [esp+0Ch+arg_12C]",
+    "line": "fadd    qword ptr [esp+0Ch+arg_12C.x]",
     "mnemonic": "fadd",
     "size": 7
   },
@@ -6025,7 +6025,7 @@
   },
   {
     "ea": "0x96AFC1",
-    "line": "fadd    [esp+arg_13C]",
+    "line": "fadd    qword ptr [esp+arg_13C.x]",
     "mnemonic": "fadd",
     "size": 7
   },
@@ -6055,13 +6055,13 @@
   },
   {
     "ea": "0x96AFDA",
-    "line": "mov     dword ptr [esp+arg_74], edx",
+    "line": "mov     [esp+out.x], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x96AFDE",
-    "line": "lea     edx, [esp+arg_74]",
+    "line": "lea     edx, [esp+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -6091,7 +6091,7 @@
   },
   {
     "ea": "0x96AFEF",
-    "line": "mov     [esp+4+arg_7C], ecx",
+    "line": "mov     [esp+4+out.z], ecx",
     "mnemonic": "mov",
     "size": 7
   },
@@ -6115,13 +6115,13 @@
   },
   {
     "ea": "0x96B008",
-    "line": "mov     dword ptr [esp+4+arg_74+4], eax",
+    "line": "mov     [esp+4+out.y], eax",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x96B00F",
-    "line": "fmul    qword ptr [esp+4+arg_EC]",
+    "line": "fmul    qword ptr [esp+4+arg_EC.x]",
     "mnemonic": "fmul",
     "size": 7
   },
@@ -6157,7 +6157,7 @@
   },
   {
     "ea": "0x96B029",
-    "line": "lea     eax, [esp+arg_74]",
+    "line": "lea     eax, [esp+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -6631,7 +6631,7 @@
   },
   {
     "ea": "0x96B115",
-    "line": "push    eax",
+    "line": "push    eax; other",
     "mnemonic": "push",
     "size": 1
   },
@@ -6673,19 +6673,19 @@
   },
   {
     "ea": "0x96B130",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x96B131",
-    "line": "mov     ecx, [esp+8+arg_60]",
+    "line": "mov     ecx, [esp+8+arg_60]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x96B135",
-    "line": "call    sub_498FE0",
+    "line": "call    NiPoint3_CrossProduct",
     "mnemonic": "call",
     "size": 5
   },
@@ -7249,7 +7249,7 @@
   },
   {
     "ea": "0x96B24F",
-    "line": "fld     [esp+arg_11C]",
+    "line": "fld     qword ptr [esp+arg_11C.x]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -7393,7 +7393,7 @@
   },
   {
     "ea": "0x96B29F",
-    "line": "fadd    [esp+0Ch+arg_12C]",
+    "line": "fadd    qword ptr [esp+0Ch+arg_12C.x]",
     "mnemonic": "fadd",
     "size": 7
   },
@@ -7423,7 +7423,7 @@
   },
   {
     "ea": "0x96B2B4",
-    "line": "fadd    [esp+arg_13C]",
+    "line": "fadd    qword ptr [esp+arg_13C.x]",
     "mnemonic": "fadd",
     "size": 7
   },
@@ -7453,13 +7453,13 @@
   },
   {
     "ea": "0x96B2CD",
-    "line": "mov     dword ptr [esp+arg_74], edx",
+    "line": "mov     [esp+out.x], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x96B2D1",
-    "line": "lea     edx, [esp+arg_74]",
+    "line": "lea     edx, [esp+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -7489,7 +7489,7 @@
   },
   {
     "ea": "0x96B2E2",
-    "line": "mov     [esp+4+arg_7C], ecx",
+    "line": "mov     [esp+4+out.z], ecx",
     "mnemonic": "mov",
     "size": 7
   },
@@ -7501,7 +7501,7 @@
   },
   {
     "ea": "0x96B2F0",
-    "line": "mov     ecx, [esp+4+arg_98]",
+    "line": "mov     ecx, [esp+4+other]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -7513,7 +7513,7 @@
   },
   {
     "ea": "0x96B2FB",
-    "line": "mov     dword ptr [esp+4+arg_74+4], eax",
+    "line": "mov     [esp+4+out.y], eax",
     "mnemonic": "mov",
     "size": 7
   },
@@ -7555,7 +7555,7 @@
   },
   {
     "ea": "0x96B31F",
-    "line": "lea     eax, [esp+arg_74]",
+    "line": "lea     eax, [esp+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -7579,7 +7579,7 @@
   },
   {
     "ea": "0x96B32C",
-    "line": "fmul    [esp+4+arg_11C]",
+    "line": "fmul    qword ptr [esp+4+arg_11C.x]",
     "mnemonic": "fmul",
     "size": 7
   },
@@ -7627,7 +7627,7 @@
   },
   {
     "ea": "0x96B351",
-    "line": "fmul    qword ptr [esp+arg_EC]",
+    "line": "fmul    qword ptr [esp+arg_EC.x]",
     "mnemonic": "fmul",
     "size": 7
   },
@@ -8023,13 +8023,13 @@
   },
   {
     "ea": "0x96B404",
-    "line": "mov     eax, [esp+arg_98]",
+    "line": "mov     eax, [esp+other]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x96B40B",
-    "line": "push    eax",
+    "line": "push    eax; other",
     "mnemonic": "push",
     "size": 1
   },
@@ -8071,19 +8071,19 @@
   },
   {
     "ea": "0x96B429",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x96B42A",
-    "line": "mov     ecx, [esp+8+arg_88]",
+    "line": "mov     ecx, [esp+8+arg_88]; this",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x96B431",
-    "line": "call    sub_498FE0",
+    "line": "call    NiPoint3_CrossProduct",
     "mnemonic": "call",
     "size": 5
   },
@@ -8791,7 +8791,7 @@
   },
   {
     "ea": "0x96B59B",
-    "line": "fadd    [esp+0Ch+arg_12C]",
+    "line": "fadd    qword ptr [esp+0Ch+arg_12C.x]",
     "mnemonic": "fadd",
     "size": 7
   },
@@ -8821,7 +8821,7 @@
   },
   {
     "ea": "0x96B5B0",
-    "line": "fadd    [esp+arg_13C]",
+    "line": "fadd    qword ptr [esp+arg_13C.x]",
     "mnemonic": "fadd",
     "size": 7
   },
@@ -8851,13 +8851,13 @@
   },
   {
     "ea": "0x96B5C9",
-    "line": "mov     dword ptr [esp+arg_74], edx",
+    "line": "mov     [esp+out.x], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x96B5CD",
-    "line": "lea     edx, [esp+arg_74]",
+    "line": "lea     edx, [esp+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -8887,7 +8887,7 @@
   },
   {
     "ea": "0x96B5DE",
-    "line": "mov     [esp+4+arg_7C], ecx",
+    "line": "mov     [esp+4+out.z], ecx",
     "mnemonic": "mov",
     "size": 7
   },
@@ -8911,13 +8911,13 @@
   },
   {
     "ea": "0x96B5F7",
-    "line": "mov     dword ptr [esp+4+arg_74+4], eax",
+    "line": "mov     [esp+4+out.y], eax",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x96B5FE",
-    "line": "fmul    [esp+4+arg_16C]",
+    "line": "fmul    qword ptr [esp+4+arg_16C.x]",
     "mnemonic": "fmul",
     "size": 7
   },
@@ -8953,7 +8953,7 @@
   },
   {
     "ea": "0x96B61B",
-    "line": "lea     eax, [esp+arg_74]",
+    "line": "lea     eax, [esp+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -9007,7 +9007,7 @@
   },
   {
     "ea": "0x96B640",
-    "line": "fmul    [esp+arg_11C]",
+    "line": "fmul    qword ptr [esp+arg_11C.x]",
     "mnemonic": "fmul",
     "size": 7
   },
@@ -9025,7 +9025,7 @@
   },
   {
     "ea": "0x96B64D",
-    "line": "fmul    qword ptr [esp+arg_EC]",
+    "line": "fmul    qword ptr [esp+arg_EC.x]",
     "mnemonic": "fmul",
     "size": 7
   },
@@ -9427,7 +9427,7 @@
   },
   {
     "ea": "0x96B707",
-    "line": "push    eax",
+    "line": "push    eax; other",
     "mnemonic": "push",
     "size": 1
   },
@@ -9469,19 +9469,19 @@
   },
   {
     "ea": "0x96B725",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x96B726",
-    "line": "mov     ecx, [esp+8+arg_88]",
+    "line": "mov     ecx, [esp+8+arg_88]; this",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x96B72D",
-    "line": "call    sub_498FE0",
+    "line": "call    NiPoint3_CrossProduct",
     "mnemonic": "call",
     "size": 5
   },
@@ -10039,7 +10039,7 @@
   },
   {
     "ea": "0x96B840",
-    "line": "fld     qword ptr [esp+arg_EC]",
+    "line": "fld     qword ptr [esp+arg_EC.x]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -10183,7 +10183,7 @@
   },
   {
     "ea": "0x96B890",
-    "line": "fadd    [esp+0Ch+arg_12C]",
+    "line": "fadd    qword ptr [esp+0Ch+arg_12C.x]",
     "mnemonic": "fadd",
     "size": 7
   },
@@ -10213,7 +10213,7 @@
   },
   {
     "ea": "0x96B8A5",
-    "line": "fadd    [esp+arg_13C]",
+    "line": "fadd    qword ptr [esp+arg_13C.x]",
     "mnemonic": "fadd",
     "size": 7
   },
@@ -10243,13 +10243,13 @@
   },
   {
     "ea": "0x96B8BE",
-    "line": "mov     dword ptr [esp+arg_74], edx",
+    "line": "mov     [esp+out.x], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x96B8C2",
-    "line": "lea     edx, [esp+arg_74]",
+    "line": "lea     edx, [esp+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -10279,7 +10279,7 @@
   },
   {
     "ea": "0x96B8D3",
-    "line": "mov     [esp+4+arg_7C], ecx",
+    "line": "mov     [esp+4+out.z], ecx",
     "mnemonic": "mov",
     "size": 7
   },
@@ -10303,7 +10303,7 @@
   },
   {
     "ea": "0x96B8EC",
-    "line": "mov     dword ptr [esp+4+arg_74+4], eax",
+    "line": "mov     [esp+4+out.y], eax",
     "mnemonic": "mov",
     "size": 7
   },
@@ -10345,7 +10345,7 @@
   },
   {
     "ea": "0x96B910",
-    "line": "lea     eax, [esp+arg_74]",
+    "line": "lea     eax, [esp+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -10369,7 +10369,7 @@
   },
   {
     "ea": "0x96B91D",
-    "line": "fmul    qword ptr [esp+4+arg_EC]",
+    "line": "fmul    qword ptr [esp+4+arg_EC.x]",
     "mnemonic": "fmul",
     "size": 7
   },
@@ -10399,7 +10399,7 @@
   },
   {
     "ea": "0x96B935",
-    "line": "fmul    [esp+arg_11C]",
+    "line": "fmul    qword ptr [esp+arg_11C.x]",
     "mnemonic": "fmul",
     "size": 7
   },
@@ -10819,7 +10819,7 @@
   },
   {
     "ea": "0x96B9FC",
-    "line": "push    eax",
+    "line": "push    eax; other",
     "mnemonic": "push",
     "size": 1
   },
@@ -10861,19 +10861,19 @@
   },
   {
     "ea": "0x96BA1A",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x96BA1B",
-    "line": "mov     ecx, [esp+8+arg_88]",
+    "line": "mov     ecx, [esp+8+arg_88]; this",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x96BA22",
-    "line": "call    sub_498FE0",
+    "line": "call    NiPoint3_CrossProduct",
     "mnemonic": "call",
     "size": 5
   },
@@ -11569,7 +11569,7 @@
   },
   {
     "ea": "0x96BB81",
-    "line": "fadd    [esp+0Ch+arg_12C]",
+    "line": "fadd    qword ptr [esp+0Ch+arg_12C.x]",
     "mnemonic": "fadd",
     "size": 7
   },
@@ -11599,7 +11599,7 @@
   },
   {
     "ea": "0x96BB96",
-    "line": "fadd    [esp+arg_13C]",
+    "line": "fadd    qword ptr [esp+arg_13C.x]",
     "mnemonic": "fadd",
     "size": 7
   },
@@ -11629,13 +11629,13 @@
   },
   {
     "ea": "0x96BBAF",
-    "line": "mov     dword ptr [esp+arg_74], edx",
+    "line": "mov     [esp+out.x], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x96BBB3",
-    "line": "lea     edx, [esp+arg_74]",
+    "line": "lea     edx, [esp+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -11665,7 +11665,7 @@
   },
   {
     "ea": "0x96BBC4",
-    "line": "mov     [esp+4+arg_7C], ecx",
+    "line": "mov     [esp+4+out.z], ecx",
     "mnemonic": "mov",
     "size": 7
   },
@@ -11677,7 +11677,7 @@
   },
   {
     "ea": "0x96BBD2",
-    "line": "mov     ecx, [esp+4+arg_98]",
+    "line": "mov     ecx, [esp+4+other]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -11689,13 +11689,13 @@
   },
   {
     "ea": "0x96BBDD",
-    "line": "mov     dword ptr [esp+4+arg_74+4], eax",
+    "line": "mov     [esp+4+out.y], eax",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x96BBE4",
-    "line": "fmul    [esp+4+arg_11C]",
+    "line": "fmul    qword ptr [esp+4+arg_11C.x]",
     "mnemonic": "fmul",
     "size": 7
   },
@@ -11731,7 +11731,7 @@
   },
   {
     "ea": "0x96BBFE",
-    "line": "lea     eax, [esp+arg_74]",
+    "line": "lea     eax, [esp+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -11785,7 +11785,7 @@
   },
   {
     "ea": "0x96BC23",
-    "line": "fmul    [esp+arg_16C]",
+    "line": "fmul    qword ptr [esp+arg_16C.x]",
     "mnemonic": "fmul",
     "size": 7
   },
@@ -12199,13 +12199,13 @@
   },
   {
     "ea": "0x96BCE3",
-    "line": "mov     eax, [esp+arg_98]",
+    "line": "mov     eax, [esp+other]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x96BCEA",
-    "line": "push    eax",
+    "line": "push    eax; other",
     "mnemonic": "push",
     "size": 1
   },
@@ -12235,19 +12235,19 @@
   },
   {
     "ea": "0x96BD00",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x96BD01",
-    "line": "mov     ecx, [esp+8+arg_48]",
+    "line": "mov     ecx, [esp+8+arg_48]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x96BD05",
-    "line": "call    sub_498FE0",
+    "line": "call    NiPoint3_CrossProduct",
     "mnemonic": "call",
     "size": 5
   },
@@ -12799,7 +12799,7 @@
   },
   {
     "ea": "0x96BE14",
-    "line": "fld     [esp+arg_16C]",
+    "line": "fld     qword ptr [esp+arg_16C.x]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -12943,7 +12943,7 @@
   },
   {
     "ea": "0x96BE64",
-    "line": "fadd    [esp+0Ch+arg_12C]",
+    "line": "fadd    qword ptr [esp+0Ch+arg_12C.x]",
     "mnemonic": "fadd",
     "size": 7
   },
@@ -12973,7 +12973,7 @@
   },
   {
     "ea": "0x96BE79",
-    "line": "fadd    [esp+arg_13C]",
+    "line": "fadd    qword ptr [esp+arg_13C.x]",
     "mnemonic": "fadd",
     "size": 7
   },
@@ -13003,13 +13003,13 @@
   },
   {
     "ea": "0x96BE92",
-    "line": "mov     dword ptr [esp+arg_74], edx",
+    "line": "mov     [esp+out.x], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x96BE96",
-    "line": "lea     edx, [esp+arg_74]",
+    "line": "lea     edx, [esp+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -13039,7 +13039,7 @@
   },
   {
     "ea": "0x96BEA7",
-    "line": "mov     [esp+4+arg_7C], ecx",
+    "line": "mov     [esp+4+out.z], ecx",
     "mnemonic": "mov",
     "size": 7
   },
@@ -13063,7 +13063,7 @@
   },
   {
     "ea": "0x96BEC0",
-    "line": "mov     dword ptr [esp+4+arg_74+4], eax",
+    "line": "mov     [esp+4+out.y], eax",
     "mnemonic": "mov",
     "size": 7
   },
@@ -13105,7 +13105,7 @@
   },
   {
     "ea": "0x96BEE1",
-    "line": "lea     eax, [esp+arg_74]",
+    "line": "lea     eax, [esp+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -13129,7 +13129,7 @@
   },
   {
     "ea": "0x96BEEE",
-    "line": "fmul    [esp+4+arg_16C]",
+    "line": "fmul    qword ptr [esp+4+arg_16C.x]",
     "mnemonic": "fmul",
     "size": 7
   },
@@ -13579,7 +13579,7 @@
   },
   {
     "ea": "0x96BFCD",
-    "line": "push    eax",
+    "line": "push    eax; other",
     "mnemonic": "push",
     "size": 1
   },
@@ -13609,19 +13609,19 @@
   },
   {
     "ea": "0x96BFE0",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x96BFE1",
-    "line": "mov     ecx, [esp+8+arg_48]",
+    "line": "mov     ecx, [esp+8+arg_48]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x96BFE5",
-    "line": "call    sub_498FE0",
+    "line": "call    NiPoint3_CrossProduct",
     "mnemonic": "call",
     "size": 5
   },
@@ -14323,7 +14323,7 @@
   },
   {
     "ea": "0x96C14B",
-    "line": "fadd    [esp+0Ch+arg_12C]",
+    "line": "fadd    qword ptr [esp+0Ch+arg_12C.x]",
     "mnemonic": "fadd",
     "size": 7
   },
@@ -14353,7 +14353,7 @@
   },
   {
     "ea": "0x96C160",
-    "line": "fadd    [esp+arg_13C]",
+    "line": "fadd    qword ptr [esp+arg_13C.x]",
     "mnemonic": "fadd",
     "size": 7
   },
@@ -14383,13 +14383,13 @@
   },
   {
     "ea": "0x96C179",
-    "line": "mov     dword ptr [esp+arg_74], edx",
+    "line": "mov     [esp+out.x], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x96C17D",
-    "line": "lea     edx, [esp+arg_74]",
+    "line": "lea     edx, [esp+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -14419,7 +14419,7 @@
   },
   {
     "ea": "0x96C18E",
-    "line": "mov     [esp+4+arg_7C], ecx",
+    "line": "mov     [esp+4+out.z], ecx",
     "mnemonic": "mov",
     "size": 7
   },
@@ -14443,13 +14443,13 @@
   },
   {
     "ea": "0x96C1A7",
-    "line": "mov     dword ptr [esp+4+arg_74+4], eax",
+    "line": "mov     [esp+4+out.y], eax",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x96C1AE",
-    "line": "fmul    qword ptr [esp+4+arg_EC]",
+    "line": "fmul    qword ptr [esp+4+arg_EC.x]",
     "mnemonic": "fmul",
     "size": 7
   },
@@ -14485,7 +14485,7 @@
   },
   {
     "ea": "0x96C1C8",
-    "line": "lea     eax, [esp+arg_74]",
+    "line": "lea     eax, [esp+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -14557,7 +14557,7 @@
   },
   {
     "ea": "0x96C1FA",
-    "line": "fmul    [esp+arg_16C]",
+    "line": "fmul    qword ptr [esp+arg_16C.x]",
     "mnemonic": "fmul",
     "size": 7
   },
@@ -14959,7 +14959,7 @@
   },
   {
     "ea": "0x96C2B4",
-    "line": "push    eax",
+    "line": "push    eax; other",
     "mnemonic": "push",
     "size": 1
   },
@@ -14977,19 +14977,19 @@
   },
   {
     "ea": "0x96C2BE",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x96C2BF",
-    "line": "mov     ecx, [esp+8+arg_48]",
+    "line": "mov     ecx, [esp+8+arg_48]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x96C2C3",
-    "line": "call    sub_498FE0",
+    "line": "call    NiPoint3_CrossProduct",
     "mnemonic": "call",
     "size": 5
   },
@@ -15103,19 +15103,19 @@
   },
   {
     "ea": "0x96C305",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x96C306",
-    "line": "mov     ecx, [esp+8+arg_48]",
+    "line": "mov     ecx, [esp+8+arg_48]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x96C30A",
-    "line": "call    sub_498FE0",
+    "line": "call    NiPoint3_CrossProduct",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,19 +1,36 @@
 {
-  "callees_count": 35,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 14,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7F09D0",
+  "chunks": [
+    [
+      "0x7F09D0",
+      "0x7F0BBA"
+    ],
+    [
+      "0x9CD690",
+      "0x9CD6BB"
+    ]
+  ],
+  "chunks_sha256": "76fd16e01fe0befa36290ba767f3315aebcf23ac5a07648f4959a4c3ae52f666",
+  "comment_regular": "\n\n[v150 leaf normal map audit] Verified stock leaf draw pass has only diffuse stage0; sampler WRAP/LINEAR. Leaf normal texture pairing alone cannot enable card normal mapping. Plugin v150 consumes paired normal maps only through its mesh/type8 frond layer path; native cards still require a separate sampler and shader/data integration. No native card normal-map execution is claimed.\n\nSpeedTree leaf pass builder: texture stage uses wrap+linear; render states set ZENABLE=TRUE, ZFUNC=LESSEQUAL, ZWRITEENABLE=TRUE.\n[2026-10-05 DX11 pixel sampling investigation] Captured native PS payloads match shaderpackage002.sdp exactly: STLEAF2000 A1F00681, STLEAF2001 065ECAFC, DISTLOD2001 C5C5DBBD, SLS2067 4A398B92. Native HAL vs production DX11 oracle found 280 mismatches in 576 baseline cases, all involving an unbound diffuse sampler0; bound cases matched. The bridge could substitute white or an unrelated texture based on fixed-function state/names, or sample zero alpha from null DX11 SRV. Source V255 uses native opaque-black null diffuse only for these exact native bytes with certified canonical DXBC and ordinary non-BORDER addressing; custom companions and logical D3D9 state preserved. Final oracle: 2112 qualified cases match native (exact alpha, RGB tolerance1), plus768 BORDER cases byte-match the prior bridge on WARP/hardware. BORDER native parity remains explicitly unfinished: host colored-border l",
+  "comment_repeatable": "SpeedTree leaf pass builder: texture stage uses wrap+linear; render states set ZENABLE=TRUE, ZFUNC=LESSEQUAL, ZWRITEENABLE=TRUE.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_SpeedTreeLeafPass_Build_010201A0",
   "end_ea": "0x7F0BBA",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
-  "name": "sub_7F09D0",
+  "name": "OB_SpeedTreeLeafPass_Build_010201A0",
   "segment": ".text",
   "sha256": "af7342a75e6eb9c6dd0495a37ebd311d1f50377ae8600b9952faf54439923940",
   "size": 490,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7F09D0",
+  "total_chunk_size": 533,
   "type": "void __thiscall(NiD3DPass **this)",
-  "xrefs_from_count": 194,
+  "xrefs_from_count": 207,
   "xrefs_to_count": 1
 }

@@ -4,12 +4,12 @@ int __thiscall sub_8B04A0(_DWORD *this, float *a1)
   int v3; // eax
   int v4; // eax
 
-  if ( this && (v2 = *(this + 2)) != 0 )
-    v3 = *(_DWORD *)(v2 + 0xC);
+  if ( this && (v2 = *(this + 2)) != 0 ) /*0x8b04a9*/
+    v3 = *(_DWORD *)(v2 + 0xC); /*0x8b04ab*/
   else
-    v3 = 0;
-  if ( v3 && (v4 = *(_DWORD *)(v3 + 8)) != 0 )
-    return (*(int (__thiscall **)(int, float *))(*(_DWORD *)v4 + 0x8C))(v4, a1);
+    v3 = 0; /*0x8b04b0*/
+  if ( v3 && (v4 = *(_DWORD *)(v3 + 8)) != 0 ) /*0x8b04bb*/
+    return (*(int (__thiscall **)(int, float *))(*(_DWORD *)v4 + 0x8C))(v4, a1); /*0x8b04c7*/
   else
-    return sub_8A2760(a1);
+    return sub_8A2760(a1); /*0x8b04c9*/
 }

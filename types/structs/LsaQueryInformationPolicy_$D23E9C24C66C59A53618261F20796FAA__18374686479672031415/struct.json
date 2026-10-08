@@ -1,40 +1,72 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "LsaQueryInformationPolicy::$D23E9C24C66C59A53618261F20796FAA",
+  "definition": "struct LsaQueryInformationPolicy::$D23E9C24C66C59A53618261F20796FAA\n{\nPOLICY_DNS_DOMAIN_INFO info;\nLsaQueryInformationPolicy::$D23E9C24C66C59A53618261F20796FAA::$CA367FD9427F60917106769215DCFF66 domain_sid;\nWCHAR_0 domain_name[256];\nWCHAR_0 dns_domain_name[256];\nWCHAR_0 dns_forest_name[256];\n}\n",
   "id": 18374686479672031415,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "info",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 44
+      "size": 44,
+      "type": "POLICY_DNS_DOMAIN_INFO"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "domain_sid",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 24
+      "offset_hex": "0x2C",
+      "size": 24,
+      "type": "LsaQueryInformationPolicy::$D23E9C24C66C59A53618261F20796FAA::$CA367FD9427F60917106769215DCFF66"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "domain_name",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 512
+      "size": 512,
+      "type": "WCHAR_0[256]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dns_domain_name",
       "offset": 580,
       "offset_hex": "0x244",
-      "size": 512
+      "size": 512,
+      "type": "WCHAR_0[256]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dns_forest_name",
       "offset": 1092,
       "offset_hex": "0x444",
-      "size": 512
+      "size": 512,
+      "type": "WCHAR_0[256]"
     }
   ],
   "name": "LsaQueryInformationPolicy::$D23E9C24C66C59A53618261F20796FAA",
+  "ordinal": 2752,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 1604
 }

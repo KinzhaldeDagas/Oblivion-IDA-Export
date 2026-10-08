@@ -1,172 +1,270 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "DEVMODEA_0",
+  "definition": "struct DEVMODEA_0\n{\nBYTE dmDeviceName[32];\nWORD dmSpecVersion;\nWORD dmDriverVersion;\nWORD dmSize;\nWORD dmDriverExtra;\nDWORD dmFields;\n$F6AE2C8209B3F8FB4E265F03FC89D224 u1;\n__int16 dmColor;\n__int16 dmDuplex;\n__int16 dmYResolution;\n__int16 dmTTOption;\n__int16 dmCollate;\nBYTE dmFormName[32];\nWORD dmLogPixels;\nDWORD dmBitsPerPel;\nDWORD dmPelsWidth;\nDWORD dmPelsHeight;\n$D1F703E461D6815F25454A92424A7B4A u2;\nDWORD dmDisplayFrequency;\nDWORD dmICMMethod;\nDWORD dmICMIntent;\nDWORD dmMediaType;\nDWORD dmDitherType;\nDWORD dmReserved1;\nDWORD dmReserved2;\nDWORD dmPanningWidth;\nDWORD dmPanningHeight;\n}\n",
   "id": 18374686479672043795,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dmDeviceName",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 32
+      "size": 32,
+      "type": "BYTE[32]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dmSpecVersion",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dmDriverVersion",
       "offset": 34,
       "offset_hex": "0x22",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dmSize",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dmDriverExtra",
       "offset": 38,
       "offset_hex": "0x26",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dmFields",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "u1",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 16
+      "offset_hex": "0x2C",
+      "size": 16,
+      "type": "$F6AE2C8209B3F8FB4E265F03FC89D224"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dmColor",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 2
+      "offset_hex": "0x3C",
+      "size": 2,
+      "type": "__int16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dmDuplex",
       "offset": 62,
-      "offset_hex": "0x3e",
-      "size": 2
+      "offset_hex": "0x3E",
+      "size": 2,
+      "type": "__int16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dmYResolution",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 2
+      "size": 2,
+      "type": "__int16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dmTTOption",
       "offset": 66,
       "offset_hex": "0x42",
-      "size": 2
+      "size": 2,
+      "type": "__int16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dmCollate",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 2
+      "size": 2,
+      "type": "__int16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dmFormName",
       "offset": 70,
       "offset_hex": "0x46",
-      "size": 32
+      "size": 32,
+      "type": "BYTE[32]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dmLogPixels",
       "offset": 102,
       "offset_hex": "0x66",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dmBitsPerPel",
       "offset": 104,
       "offset_hex": "0x68",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dmPelsWidth",
       "offset": 108,
-      "offset_hex": "0x6c",
-      "size": 4
+      "offset_hex": "0x6C",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dmPelsHeight",
       "offset": 112,
       "offset_hex": "0x70",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "u2",
       "offset": 116,
       "offset_hex": "0x74",
-      "size": 4
+      "size": 4,
+      "type": "$D1F703E461D6815F25454A92424A7B4A"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dmDisplayFrequency",
       "offset": 120,
       "offset_hex": "0x78",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dmICMMethod",
       "offset": 124,
-      "offset_hex": "0x7c",
-      "size": 4
+      "offset_hex": "0x7C",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dmICMIntent",
       "offset": 128,
       "offset_hex": "0x80",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dmMediaType",
       "offset": 132,
       "offset_hex": "0x84",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dmDitherType",
       "offset": 136,
       "offset_hex": "0x88",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dmReserved1",
       "offset": 140,
-      "offset_hex": "0x8c",
-      "size": 4
+      "offset_hex": "0x8C",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dmReserved2",
       "offset": 144,
       "offset_hex": "0x90",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dmPanningWidth",
       "offset": 148,
       "offset_hex": "0x94",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dmPanningHeight",
       "offset": 152,
       "offset_hex": "0x98",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     }
   ],
   "name": "DEVMODEA_0",
+  "ordinal": 7602,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 156
 }

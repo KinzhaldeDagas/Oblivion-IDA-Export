@@ -1,26 +1,23 @@
-int __thiscall sub_66C6A0(PlayerCharacter *this, int *a2)
+// Batch-add each nonnull TESTopic from an INFO.addedTopics list using pointer deduplication and notification requests. Sort the full known-topic list once if any insertion succeeded.
+void __thiscall PlayerCharacter::AddKnownTopics(PlayerCharacter *this, tListTopic *topics)
 {
-  int result; // eax
-  int *v3; // esi
-  char v5; // bl
+  tListTopic *next; // esi
+  char v4; // bl
 
-  v3 = a2;
-  if ( a2 )
+  next = topics; /*0x66c6a1*/
+  if ( topics ) /*0x66c6aa*/
   {
-    v5 = 0;
-    do
+    v4 = 0; /*0x66c6ad*/
+    do /*0x66c6cd*/
     {
-      result = *v3;
-      if ( !*v3 )
-        break;
-      result = (int)sub_669690(this, (TESTopic *)result, 0, 1);
-      if ( (_BYTE)result )
-        v5 = 1;
-      v3 = (int *)v3[1];
+      if ( !next->node.data ) /*0x66c6b0*/
+        break; /*0x66c6b4*/
+      if ( PlayerCharacter::AddKnownTopic(this, next->node.data, 0, 1) )// AddedTopics iteration preserves the authored list traversal for notifications, while each successful topic is inserted at the known-topic head. Duplicate pointers are silently ignored. /*0x66c6bd*/
+        v4 = 1; /*0x66c6c6*/
+      next = (tListTopic *)next->node.next; /*0x66c6c8*/
     }
-    while ( v3 );
-    if ( v5 )
-      return (int)sub_52F6D0((tListTopic *)&this->unk5E4);
+    while ( next ); /*0x66c6cd*/
+    if ( v4 )                                   // One alphabetical sort follows the whole AddKnownTopics batch; during DialogMenu the same acquired topics remain available without per-topic notifications. /*0x66c6d2*/
+      SortTopicListByDisplayName((tListTopic *)&this->knownTopicFirst); /*0x66c6db*/
   }
-  return result;
 }

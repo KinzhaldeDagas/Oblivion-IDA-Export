@@ -1,4 +1,4 @@
-0x402E50: push    0FFFFFFFFh
+0x402E50: push    0FFFFFFFFh; Builds the in-game date string '%s %d, 3E%d' from a month-name table, game day, and game year. Observed in HUD and Sleep/Wait menu.
 0x402E52: push    offset SEH_402E50
 0x402E57: mov     eax, large fs:0
 0x402E5D: push    eax
@@ -38,7 +38,7 @@
 0x402EC7: fld     dword ptr [ecx+24h]
 0x402ECA: fstp    dword ptr [esp+2Ch+var_14]
 0x402ECE: fld     dword ptr [esp+2Ch+var_14]
-0x402ED2: call    Double_To_SInt32
+0x402ED2: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x402ED7: movsx   eax, al
 0x402EDA: jmp     short loc_402EE1
 0x402EDC: mov     eax, 7
@@ -57,7 +57,7 @@
 0x402F10: push    eax
 0x402F11: fldcw   word ptr [esp+30h+var_20]
 0x402F15: fld     [esp+30h+var_1C]
-0x402F19: call    Double_To_SInt32
+0x402F19: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x402F1E: movsx   ecx, al
 0x402F21: push    ecx
 0x402F22: push    edi; ArgList
@@ -73,3 +73,17 @@
 0x402F40: pop     esi
 0x402F41: add     esp, 20h
 0x402F44: retn    4
+0x9A9DB0: mov     eax, [ebp-18h]
+0x9A9DB3: and     eax, 1
+0x9A9DB6: jz      locret_9A9DC8
+0x9A9DBC: and     dword ptr [ebp-18h], 0FFFFFFFEh
+0x9A9DC0: mov     ecx, [ebp+4]; void *
+0x9A9DC3: jmp     BSStringT_Clear
+0x9A9DC8: retn
+0x9A9DC9: mov     edx, [esp+arg_4]
+0x9A9DCD: lea     eax, [edx-1Ch]
+0x9A9DD0: mov     ecx, [edx-20h]
+0x9A9DD3: xor     ecx, eax
+0x9A9DD5: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9A9DDA: mov     eax, offset stru_AD6E70
+0x9A9DDF: jmp     ___CxxFrameHandler3

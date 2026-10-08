@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x791460",
-    "line": "push    ecx",
+    "line": "push    ecx; Checked one-element insertion wrapper for the 0x0C-byte branch-child vector. Captures the logical index, calls InsertFill(count=1), then rebuilds the checked owner/current iterator against the possibly relocated buffer.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x791463",
-    "line": "mov     ebp, [esp+0Ch+arg_8]",
+    "line": "mov     ebp, [esp+0Ch+position]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x79148B",
-    "line": "mov     ebx, [esp+14h+arg_4]",
+    "line": "mov     ebx, [esp+14h+iteratorOwner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x79149C",
-    "line": "mov     ebx, [esp+14h+arg_4]",
+    "line": "mov     ebx, [esp+14h+iteratorOwner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -241,43 +241,43 @@
   },
   {
     "ea": "0x7914C1",
-    "line": "mov     ecx, [esp+14h+arg_C]",
+    "line": "mov     ecx, [esp+14h+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7914C5",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7914C6",
-    "line": "push    1",
+    "line": "push    1; count",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7914C8",
-    "line": "push    ebp",
+    "line": "push    ebp; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7914C9",
-    "line": "push    ebx",
+    "line": "push    ebx; iteratorOwner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7914CA",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7914CC",
-    "line": "call    sub_790E90",
+    "line": "call    OB_stVectorBranchChildRef_InsertFill_010201A0; Fixed-stride 0x0C vector insert/fill machinery for OB_CBranchChildRef records. Handles overlap, capacity growth, reallocation, and count copies; the observed wrapper at 0x791460 always requests count=1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x7914E7",
-    "line": "mov     [esp+14h+arg_8], ebx",
+    "line": "mov     [esp+14h+position], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x7914F7",
-    "line": "mov     eax, [esp+14h+arg_0]",
+    "line": "mov     eax, [esp+14h+result]",
     "mnemonic": "mov",
     "size": 4
   },

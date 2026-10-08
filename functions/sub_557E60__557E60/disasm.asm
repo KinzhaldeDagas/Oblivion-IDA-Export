@@ -1,4 +1,4 @@
-0x557E60: push    0FFFFFFFFh
+0x557E60: push    0FFFFFFFFh; Negative compatibility finding: nonzero maxBasisShapes is clamped to FaceGenEgtBasisBank_GetCount before basis iteration; zero selects min(bankCount,30). Thus PF requesting 50 during randomized refresh does not alone overrun a smaller EGT bank. Precheck separately errors if model basis records exceed matrix 2/3 rows. No bound bug from the raised limit proven.
 0x557E62: push    offset SEH_557E60
 0x557E67: mov     eax, large fs:0
 0x557E6D: push    eax
@@ -18,7 +18,7 @@
 0x557E8F: mov     [esp+70h+var_5C], eax
 0x557E93: mov     [esp+70h+var_4], eax
 0x557E97: call    sub_523D80
-0x557E9C: mov     ebx, [esp+70h+arg_4]
+0x557E9C: mov     ebx, [esp+70h+outTexture]
 0x557EA0: mov     esi, [ebx]
 0x557EA2: mov     edi, eax
 0x557EA4: cmp     esi, edi
@@ -45,10 +45,10 @@
 0x557ED2: call    dword ptr ds:0A28078h
 0x557ED8: cmp     dword ptr [ebp+0Ch], 0
 0x557EDC: jz      loc_55803D
-0x557EE2: mov     ebx, [esp+70h+arg_0]
+0x557EE2: mov     ebx, [esp+70h+parameters]
 0x557EE6: test    ebx, ebx
 0x557EE8: jnz     short loc_557EF9
-0x557EEA: call    sub_5538D0
+0x557EEA: call    FaceGenManager_GetDefaultHeadParameters; Returns the FaceGen manager's default head-parameter block at manager+0x08, initializing the manager on demand.
 0x557EEF: mov     ebx, eax
 0x557EF1: test    ebx, ebx
 0x557EF3: jz      loc_55803D
@@ -65,8 +65,8 @@
 0x557F16: test    eax, eax
 0x557F18: jz      loc_55802C
 0x557F1E: mov     esi, [esi]
-0x557F20: push    esi; Src
-0x557F21: call    sub_557C80
+0x557F20: push    esi; path
+0x557F21: call    BSFaceGenEgtData_CreateFromFile; Allocate and construct a BSFaceGen EGT data object from the named asset.
 0x557F26: mov     ecx, [ebp+0Ch]
 0x557F29: add     esp, 4
 0x557F2C: mov     [ecx+8], eax
@@ -96,15 +96,15 @@
 0x557F77: push    esi; Destination
 0x557F78: call    edi ; InterlockedCompareExchange
 0x557F7A: jmp     loc_55802C
-0x557F7F: push    0
-0x557F81: lea     ecx, [eax+4]
-0x557F84: call    sub_556320
+0x557F7F: push    0; index
+0x557F81: lea     ecx, [eax+4]; self
+0x557F84: call    FaceGenEgtBasisBank_GetAt; Bounds-check and return a pointer to one 64-byte basis record in a loaded EGT bank.
 0x557F89: mov     ecx, [ebp+0Ch]
 0x557F8C: mov     ecx, [ecx+8]
 0x557F8F: mov     edi, [eax+4]
-0x557F92: push    0
-0x557F94: add     ecx, 4
-0x557F97: call    sub_556320
+0x557F92: push    0; index
+0x557F94: add     ecx, 4; self
+0x557F97: call    FaceGenEgtBasisBank_GetAt; Bounds-check and return a pointer to one 64-byte basis record in a loaded EGT bank.
 0x557F9C: test    edi, edi
 0x557F9E: mov     eax, [eax+8]
 0x557FA1: mov     [esp+70h+var_58], eax
@@ -113,7 +113,7 @@
 0x557FA9: jz      short loc_558023
 0x557FAB: mov     edx, [ebp+0Ch]
 0x557FAE: mov     eax, [edx+8]
-0x557FB1: add     ebx, 30h ; '0'
+0x557FB1: add     ebx, 30h ; '0'; EGT texture generation begins at FaceGen matrix 2 and validates/consumes matrices 2 and 3 as texture-coordinate banks.
 0x557FB4: xor     esi, esi
 0x557FB6: mov     [esp+70h+var_38], ebx
 0x557FBA: add     eax, 8
@@ -126,7 +126,7 @@
 0x557FCB: sub     ecx, edx
 0x557FCD: sar     ecx, 6
 0x557FD0: cmp     ebp, ecx
-0x557FD2: jb      short loc_558016
+0x557FD2: jb      short loc_558016; Validate that FaceGen texture matrix 2/3 contains coordinates for the complete corresponding EGT basis bank, not merely the later default render limit.
 0x557FD4: add     esi, 1
 0x557FD7: add     ebx, 18h
 0x557FDA: add     eax, 10h
@@ -140,7 +140,7 @@
 0x557FF2: fstp    [esp+74h+var_1C]
 0x557FF6: call    FormHeapAlloc
 0x557FFB: add     esp, 4
-0x557FFE: mov     [esp+70h+arg_0], eax
+0x557FFE: mov     [esp+70h+parameters], eax
 0x558002: test    eax, eax
 0x558004: mov     byte ptr [esp+70h+var_4], 2
 0x558009: jz      short loc_558055
@@ -153,9 +153,9 @@
 0x558020: add     esp, 4
 0x558023: lea     ecx, [esp+70h+var_24]
 0x558027: call    sub_5563B0
-0x55802C: lea     ecx, [esp+70h+var_5C]; this
+0x55802C: lea     ecx, [esp+70h+var_5C]; slot
 0x558030: mov     [esp+70h+var_4], 0FFFFFFFFh
-0x558038: call    sub_7016A0
+0x558038: call    NiPointerSlot_Release
 0x55803D: xor     al, al
 0x55803F: mov     ecx, [esp+70h+var_C]
 0x558043: mov     large fs:0, ecx
@@ -200,7 +200,7 @@
 0x5580B0: push    eax
 0x5580B1: mov     [esp+80h+var_4C], eax
 0x5580B5: call    __memset
-0x5580BA: mov     esi, [esp+80h+arg_8]
+0x5580BA: mov     esi, [esp+80h+maxBasisShapes]; A nonzero maxBasisShapes is clipped only to the loaded bank count. Zero selects the stock default path, which caps the bank at 30.
 0x5580C1: add     esp, 10h
 0x5580C4: test    esi, esi
 0x5580C6: jz      short loc_5580EF
@@ -208,36 +208,36 @@
 0x5580CC: mov     eax, [edx+0Ch]
 0x5580CF: mov     eax, [eax+8]
 0x5580D2: lea     ebx, [eax+4]
-0x5580D5: mov     ecx, ebx
+0x5580D5: mov     ecx, ebx; self
 0x5580D7: mov     [esp+70h+var_50], esi
-0x5580DB: call    sub_556300
+0x5580DB: call    FaceGenEgtBasisBank_GetCount; Return the number of 64-byte basis records in one loaded EGT bank.
 0x5580E0: cmp     esi, eax
 0x5580E2: jbe     short loc_558115
-0x5580E4: mov     ecx, ebx
-0x5580E6: call    sub_556300
+0x5580E4: mov     ecx, ebx; self
+0x5580E6: call    FaceGenEgtBasisBank_GetCount; Return the number of 64-byte basis records in one loaded EGT bank.
 0x5580EB: mov     esi, eax
 0x5580ED: jmp     short loc_558111
 0x5580EF: mov     ecx, [esp+70h+var_54]
 0x5580F3: mov     edx, [ecx+0Ch]
 0x5580F6: mov     ecx, [edx+8]
-0x5580F9: add     ecx, 4
-0x5580FC: call    sub_556300
+0x5580F9: add     ecx, 4; self
+0x5580FC: call    FaceGenEgtBasisBank_GetCount; Return the number of 64-byte basis records in one loaded EGT bank.
 0x558101: mov     esi, eax
 0x558103: cmp     esi, 1Eh
 0x558106: mov     [esp+70h+var_50], esi
-0x55810A: jbe     short loc_558115
+0x55810A: jbe     short loc_558115; Stock zero-limit generation truncates the EGT bank to 30. All 20 vanilla FREGT003 assets in Oblivion - Meshes.bsa declare 50 bank-0 bases, leaving 20 valid bases unused.
 0x55810C: mov     esi, 1Eh
 0x558111: mov     [esp+70h+var_50], esi
 0x558115: test    esi, esi
-0x558117: mov     [esp+70h+arg_0], 0
+0x558117: mov     [esp+70h+parameters], 0
 0x55811F: jbe     loc_558351
-0x558125: mov     [esp+70h+arg_8], 0
+0x558125: mov     [esp+70h+maxBasisShapes], 0
 0x55812D: lea     ecx, [ecx+0]
 0x558130: mov     ebx, [esp+70h+var_54]
 0x558134: mov     eax, [ebx+0Ch]
 0x558137: mov     esi, [eax+8]
 0x55813A: mov     ecx, [esi+8]
-0x55813D: mov     ebp, [esp+70h+arg_0]
+0x55813D: mov     ebp, [esp+70h+parameters]
 0x558141: add     esi, 4
 0x558144: test    ecx, ecx
 0x558146: jz      short loc_558154
@@ -248,12 +248,12 @@
 0x558152: jb      short loc_558159
 0x558154: call    __invalid_parameter_noinfo
 0x558159: mov     ecx, [esi+4]
-0x55815C: mov     edx, [esp+70h+arg_8]
+0x55815C: mov     edx, [esp+70h+maxBasisShapes]
 0x558160: cmp     [ecx+edx+4], edi
 0x558164: jz      short loc_558178
-0x558166: push    462h; int
+0x558166: push    462h; sourceLine
 0x55816B: push    offset a__TesSharedFac; "..\\TES Shared\\FaceGen\\BSFaceGenModel"...
-0x558170: call    sub_6ED6D0
+0x558170: call    FaceGen_ReportAssertionViolation; FaceGen assertion reporter: PrintError("FR2 ASSERT violation in %s line %i. Code may crash.", sourceFile, sourceLine); returns normally. NOT noreturn and NOT a validation barrier.
 0x558175: add     esp, 8
 0x558178: mov     eax, [ebx+0Ch]
 0x55817B: mov     esi, [eax+8]
@@ -269,12 +269,12 @@
 0x558194: call    __invalid_parameter_noinfo
 0x558199: mov     ecx, [esi+4]
 0x55819C: mov     edx, [esp+70h+var_58]
-0x5581A0: mov     eax, [esp+70h+arg_8]
+0x5581A0: mov     eax, [esp+70h+maxBasisShapes]
 0x5581A4: cmp     [ecx+eax+8], edx
 0x5581A8: jz      short loc_5581BC
-0x5581AA: push    463h; int
+0x5581AA: push    463h; sourceLine
 0x5581AF: push    offset a__TesSharedFac; "..\\TES Shared\\FaceGen\\BSFaceGenModel"...
-0x5581B4: call    sub_6ED6D0
+0x5581B4: call    FaceGen_ReportAssertionViolation; FaceGen assertion reporter: PrintError("FR2 ASSERT violation in %s line %i. Code may crash.", sourceFile, sourceLine); returns normally. NOT noreturn and NOT a validation barrier.
 0x5581B9: add     esp, 8
 0x5581BC: mov     esi, [esp+70h+var_38]
 0x5581C0: mov     eax, [esi+0Ch]
@@ -291,23 +291,23 @@
 0x5581DF: fld     dword ptr [eax+edx*4]
 0x5581E2: fmul    qword ptr ds:0A3B1B8h
 0x5581E8: lea     eax, [eax+edx*4]
-0x5581EB: call    Double_To_SInt32
+0x5581EB: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5581F0: test    eax, eax
-0x5581F2: mov     [esp+70h+var_34], eax
+0x5581F2: mov     [esp+70h+var_34], eax; Quantize the FaceGen coordinate to signed fixed point using scale 256.
 0x5581F6: jz      loc_558337
 0x5581FC: mov     ebp, [esp+70h+var_54]
 0x558200: mov     ecx, [ebp+0Ch]
 0x558203: mov     ecx, [ecx+8]
-0x558206: mov     ebx, [esp+70h+arg_0]
-0x55820A: push    ebx
-0x55820B: add     ecx, 4
-0x55820E: call    sub_556320
+0x558206: mov     ebx, [esp+70h+parameters]
+0x55820A: push    ebx; index
+0x55820B: add     ecx, 4; self
+0x55820E: call    FaceGenEgtBasisBank_GetAt; Bounds-check and return a pointer to one 64-byte basis record in a loaded EGT bank.
 0x558213: mov     edx, [ebp+0Ch]
 0x558216: mov     ecx, [edx+8]
 0x558219: mov     esi, [eax+0Ch]
-0x55821C: push    ebx
-0x55821D: add     ecx, 4
-0x558220: call    sub_556320
+0x55821C: push    ebx; index
+0x55821D: add     ecx, 4; self
+0x558220: call    FaceGenEgtBasisBank_GetAt; Bounds-check and return a pointer to one 64-byte basis record in a loaded EGT bank.
 0x558225: mov     eax, [eax+4]
 0x558228: add     eax, esi
 0x55822A: mov     [esp+70h+var_30], eax
@@ -325,14 +325,14 @@
 0x558254: mov     eax, [esi+8]
 0x558257: sub     eax, ecx
 0x558259: sar     eax, 6
-0x55825C: cmp     [esp+70h+arg_0], eax
+0x55825C: cmp     [esp+70h+parameters], eax
 0x558260: jb      short loc_558267
 0x558262: call    __invalid_parameter_noinfo
 0x558267: mov     edx, [esi+4]
-0x55826A: mov     eax, [esp+70h+arg_8]
+0x55826A: mov     eax, [esp+70h+maxBasisShapes]
 0x55826E: fld     dword ptr [edx+eax]
 0x558271: fmul    qword ptr ds:0A3B1B8h
-0x558277: call    Double_To_SInt32
+0x558277: call    Double_To_SInt32; Quantize each EGT basis weight with the same scale 256 before multiplying it by the FaceGen coordinate.
 0x55827C: mov     ecx, [ebx+0Ch]
 0x55827F: mov     esi, [ecx+8]
 0x558282: add     esi, 4
@@ -344,11 +344,11 @@
 0x558293: mov     ecx, [esi+8]
 0x558296: sub     ecx, eax
 0x558298: sar     ecx, 6
-0x55829B: cmp     [esp+70h+arg_0], ecx
+0x55829B: cmp     [esp+70h+parameters], ecx
 0x55829F: jb      short loc_5582A6
 0x5582A1: call    __invalid_parameter_noinfo
 0x5582A6: mov     esi, [esi+4]
-0x5582A9: add     esi, [esp+70h+arg_8]
+0x5582A9: add     esi, [esp+70h+maxBasisShapes]
 0x5582AD: mov     ecx, [esp+70h+var_48]
 0x5582B1: mov     eax, [ecx+esi+14h]
 0x5582B5: test    eax, eax
@@ -374,7 +374,7 @@
 0x5582F4: jbe     short loc_558309
 0x5582F6: movsx   ebx, byte ptr [eax+edx]
 0x5582FA: imul    ebx, ebp
-0x5582FD: add     [ecx], ebx
+0x5582FD: add     [ecx], ebx; Accumulate each signed EGT RGB delta into a 16.16 fixed-point work buffer.
 0x5582FF: add     eax, 1
 0x558302: add     ecx, 0Ch
 0x558305: cmp     eax, edi
@@ -391,13 +391,13 @@
 0x55832A: cmp     eax, 30h ; '0'
 0x55832D: mov     [esp+70h+var_48], eax
 0x558331: jb      loc_558240
-0x558337: mov     eax, [esp+70h+arg_0]
-0x55833B: add     [esp+70h+arg_8], 40h ; '@'
+0x558337: mov     eax, [esp+70h+parameters]
+0x55833B: add     [esp+70h+maxBasisShapes], 40h ; '@'
 0x558340: add     eax, 1
 0x558343: cmp     eax, [esp+70h+var_50]
-0x558347: mov     [esp+70h+arg_0], eax
+0x558347: mov     [esp+70h+parameters], eax
 0x55834B: jb      loc_558130
-0x558351: fld     qword ptr ds:0A64AA0h
+0x558351: fld     qword ptr ds:0A64AA0h; Convert accumulated RGB deltas back to float with scale 1/65536.
 0x558357: xor     ebx, ebx
 0x558359: mov     ebp, [esp+70h+var_2C]
 0x55835D: mov     esi, [ebp+4]
@@ -425,16 +425,16 @@
 0x5583A9: lea     edx, [ecx+ebx*4]
 0x5583AC: mov     [esp+70h+var_30], eax
 0x5583B0: mov     eax, [esp+70h+var_3C]
-0x5583B4: mov     [esp+70h+arg_8], edx
+0x5583B4: mov     [esp+70h+maxBasisShapes], edx
 0x5583B8: mov     edx, [esp+70h+var_58]
 0x5583BC: lea     ecx, [eax+ebx*4]
-0x5583BF: mov     [esp+70h+arg_0], ecx
+0x5583BF: mov     [esp+70h+parameters], ecx
 0x5583C3: mov     [esp+70h+var_40], edx
 0x5583C7: xor     esi, esi
 0x5583C9: cmp     edi, 4
 0x5583CC: jl      short loc_558410
-0x5583CE: mov     ecx, [esp+70h+arg_0]
-0x5583D2: mov     eax, [esp+70h+arg_8]
+0x5583CE: mov     ecx, [esp+70h+parameters]
+0x5583D2: mov     eax, [esp+70h+maxBasisShapes]
 0x5583D6: lea     edx, [edi-4]
 0x5583D9: shr     edx, 2
 0x5583DC: add     edx, 1
@@ -476,8 +476,8 @@
 0x558441: jnz     short loc_558431
 0x558443: mov     ecx, [esp+70h+var_30]
 0x558447: mov     edx, [esp+70h+var_34]
-0x55844B: add     [esp+70h+arg_0], ecx
-0x55844F: add     [esp+70h+arg_8], edx
+0x55844B: add     [esp+70h+parameters], ecx
+0x55844F: add     [esp+70h+maxBasisShapes], edx
 0x558453: add     ebp, edi
 0x558455: sub     [esp+70h+var_40], 1
 0x55845A: jnz     loc_5583C7
@@ -487,7 +487,7 @@
 0x55846C: mov     eax, [esp+70h+var_4C]
 0x558470: fstp    st
 0x558472: push    eax
-0x558473: call    FormHeapFree
+0x558473: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x558478: fld     dword ptr ds:0A3D65Ch
 0x55847E: mov     ebx, [esp+74h+var_5C]
 0x558482: add     esp, 4
@@ -499,8 +499,8 @@
 0x558499: fstp    [esp+80h+var_7C]; float
 0x55849D: fld     dword ptr ds:0A64A9Ch
 0x5584A3: fstp    [esp+80h+var_80]; float
-0x5584A6: call    sub_54DA40
-0x5584AB: mov     ebp, [esp+70h+arg_4]
+0x5584A6: call    sub_54DA40; Convert/clamp the generated FaceGen image using -255, +255, and 0.5 conversion constants, then return the texture.
+0x5584AB: mov     ebp, [esp+70h+outTexture]
 0x5584AF: mov     esi, [ebp+0]
 0x5584B2: mov     edi, eax
 0x5584B4: cmp     esi, edi
@@ -543,3 +543,19 @@
 0x558516: call    edx
 0x558518: mov     al, 1
 0x55851A: jmp     loc_55803F
+0x9BC6E0: lea     ecx, [ebp-5Ch]; slot
+0x9BC6E3: jmp     NiPointerSlot_Release
+0x9BC6E8: lea     ecx, [ebp-24h]
+0x9BC6EB: jmp     sub_5563B0
+0x9BC6F0: mov     eax, [ebp+4]
+0x9BC6F3: push    eax
+0x9BC6F4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BC6F9: pop     ecx
+0x9BC6FA: retn
+0x9BC6FB: mov     edx, [esp+outTexture]
+0x9BC6FF: lea     eax, [edx-60h]
+0x9BC702: mov     ecx, [edx-64h]
+0x9BC705: xor     ecx, eax
+0x9BC707: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BC70C: mov     eax, offset stru_AE633C
+0x9BC711: jmp     ___CxxFrameHandler3

@@ -1,1 +1,9 @@
-MRUINFOA
+struct MRUINFOA
+{
+DWORD cbSize;
+UINT uMax;
+UINT fFlags;
+HKEY hKey;
+LPSTR lpszSubKey;
+$E1B144C911F0B467E04275A0121CADBC u;
+};

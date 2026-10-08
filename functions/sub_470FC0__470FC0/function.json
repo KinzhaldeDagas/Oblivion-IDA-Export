@@ -1,19 +1,32 @@
 {
-  "callees_count": 16,
-  "callers_count": 28,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
+  "callers_count": 59,
+  "chunks": [
+    [
+      "0x470FC0",
+      "0x4710AF"
+    ]
+  ],
+  "chunks_sha256": "44ec3f9c226bde7bbd91016ef76087388c08ffe5f21c24dd2d6e37fc6433f036",
+  "comment_regular": "Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.",
+  "comment_repeatable": "Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_470FC0",
+  "display_name": "ActorAnimData_ClearSlot",
   "end_ea": "0x4710AF",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_470FC0",
+  "name": "ActorAnimData_ClearSlot",
   "segment": ".text",
   "sha256": "44ec3f9c226bde7bbd91016ef76087388c08ffe5f21c24dd2d6e37fc6433f036",
   "size": 239,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x470FC0",
-  "type": "int __thiscall(_DWORD *this, int, float)",
+  "total_chunk_size": 239,
+  "type": "int __thiscall(ActorAnimData *this, int slot, float easeOutTime)",
   "xrefs_from_count": 88,
   "xrefs_to_count": 59
 }

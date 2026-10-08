@@ -1,4 +1,4 @@
-0x470720: mov     edx, [esp+arg_0]
+0x470720: mov     edx, [esp+slot]; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.
 0x470724: mov     eax, edx
 0x470726: sub     eax, 5
 0x470729: jz      short loc_47073D

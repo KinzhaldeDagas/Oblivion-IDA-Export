@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x72ACC2",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+stream]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x72ACC6",
-    "line": "push    edi",
+    "line": "push    edi; stream",
     "mnemonic": "push",
     "size": 1
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x72ACC9",
-    "line": "call    sub_71FEC0",
+    "line": "call    NiTriShapeData_Load; Load NiTriShapeData triangle indices and its serialized shared-normal table. The table is an array of 8-byte {UInt16 count, UInt16* indices} entries backed by linked index-pool blocks.",
     "mnemonic": "call",
     "size": 5
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x72ACD6",
-    "line": "lea     ecx, [esp+0Ch+arg_0]",
+    "line": "lea     ecx, [esp+0Ch+stream]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x72ACE5",
-    "line": "mov     [esp+1Ch+arg_0], 2",
+    "line": "mov     [esp+1Ch+stream], 2",
     "mnemonic": "mov",
     "size": 8
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x72ACFA",
-    "line": "lea     ecx, [esp+20h+arg_0]",
+    "line": "lea     ecx, [esp+20h+stream]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x72AD06",
-    "line": "mov     [esp+30h+arg_0], 2",
+    "line": "mov     [esp+30h+stream], 2",
     "mnemonic": "mov",
     "size": 8
   },

@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x49AD94",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x49AE99",
-    "line": "fst     [esp+0D0h+var_68]",
+    "line": "fst     qword ptr [esp+0D0h+start.x]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -1159,13 +1159,13 @@
   },
   {
     "ea": "0x49AFC2",
-    "line": "fstp    [esp+0D0h+var_3C]",
+    "line": "fstp    [esp+0D0h+worldXY]",
     "mnemonic": "fstp",
     "size": 7
   },
   {
     "ea": "0x49AFC9",
-    "line": "lea     edx, [esp+0D0h+var_3C]",
+    "line": "lea     edx, [esp+0D0h+worldXY]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -1177,7 +1177,7 @@
   },
   {
     "ea": "0x49AFD4",
-    "line": "push    edx; float *",
+    "line": "push    edx; worldXY",
     "mnemonic": "push",
     "size": 1
   },
@@ -1207,7 +1207,7 @@
   },
   {
     "ea": "0x49AFEA",
-    "line": "call    TESWorldSpace__GetCellAtPos",
+    "line": "call    TESWorldSpace_GetCellAtWorldPosition",
     "mnemonic": "call",
     "size": 5
   },
@@ -1417,7 +1417,7 @@
   },
   {
     "ea": "0x49B06C",
-    "line": "push    edx; int",
+    "line": "push    edx; vertexColor",
     "mnemonic": "push",
     "size": 1
   },
@@ -1459,13 +1459,13 @@
   },
   {
     "ea": "0x49B08B",
-    "line": "fstp    [esp+0D8h+var_D8]; float",
+    "line": "fstp    [esp+0D8h+scale]; scale",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x49B08E",
-    "line": "call    sub_47FD30",
+    "line": "call    NiTriShape_CreateOctahedronGeometry; Verified generic NiTriShape geometry factory, used by PathGrid rendering and multiple other callers. It builds six octahedron vertices (four ±scale X/Y equatorial points and two ±scale*sqrt(2) Z poles), repeats a supplied NiColorAlpha for all six, writes 24 u16 indices for eight triangular faces, and returns a NiTriShape. This constructs a filled octahedron surface; wireframe is a separate scene property.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1483,7 +1483,7 @@
   },
   {
     "ea": "0x49B098",
-    "line": "call    sub_4E70B0",
+    "line": "call    DebugRender_GetOrCreateVertexColorProperty; Verified shared debug property getter/creator, used by PathGrid debug rendering and the registered TestSeenData/TestLocalMap visualization commands, plus other debug-geometry callers. Lazily constructs NiVertexColorProperty, sets its observed render flags, stores the refcounted global g_DebugRenderVertexColorProperty and returns it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1501,7 +1501,7 @@
   },
   {
     "ea": "0x49B0A0",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1693,7 +1693,7 @@
   },
   {
     "ea": "0x49B129",
-    "line": "push    eax; int",
+    "line": "push    eax; vertexColor",
     "mnemonic": "push",
     "size": 1
   },
@@ -1735,13 +1735,13 @@
   },
   {
     "ea": "0x49B13F",
-    "line": "fstp    [esp+0D8h+var_D8]; float",
+    "line": "fstp    [esp+0D8h+scale]; scale",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x49B142",
-    "line": "call    sub_47FD30",
+    "line": "call    NiTriShape_CreateOctahedronGeometry; Verified generic NiTriShape geometry factory, used by PathGrid rendering and multiple other callers. It builds six octahedron vertices (four ±scale X/Y equatorial points and two ±scale*sqrt(2) Z poles), repeats a supplied NiColorAlpha for all six, writes 24 u16 indices for eight triangular faces, and returns a NiTriShape. This constructs a filled octahedron surface; wireframe is a separate scene property.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1759,7 +1759,7 @@
   },
   {
     "ea": "0x49B14C",
-    "line": "call    sub_4E70B0",
+    "line": "call    DebugRender_GetOrCreateVertexColorProperty; Verified shared debug property getter/creator, used by PathGrid debug rendering and the registered TestSeenData/TestLocalMap visualization commands, plus other debug-geometry callers. Lazily constructs NiVertexColorProperty, sets its observed render flags, stores the refcounted global g_DebugRenderVertexColorProperty and returns it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1777,7 +1777,7 @@
   },
   {
     "ea": "0x49B154",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2053,7 +2053,7 @@
   },
   {
     "ea": "0x49B1FA",
-    "line": "fld     [esp+0D0h+var_68]",
+    "line": "fld     qword ptr [esp+0D0h+start.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2755,7 +2755,7 @@
   },
   {
     "ea": "0x49B37B",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2833,7 +2833,7 @@
   },
   {
     "ea": "0x49B3B0",
-    "line": "mov     dword ptr [esp+0D0h+var_68], ecx",
+    "line": "mov     [esp+0D0h+start.x], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2845,7 +2845,7 @@
   },
   {
     "ea": "0x49B3B7",
-    "line": "mov     dword ptr [esp+0D0h+var_68+4], edx",
+    "line": "mov     [esp+0D0h+start.y], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2857,13 +2857,13 @@
   },
   {
     "ea": "0x49B3BE",
-    "line": "mov     [esp+0D0h+var_60], eax",
+    "line": "mov     [esp+0D0h+start.z], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x49B3C2",
-    "line": "fld     [esp+0D0h+var_60]",
+    "line": "fld     [esp+0D0h+start.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2881,7 +2881,7 @@
   },
   {
     "ea": "0x49B3D0",
-    "line": "push    ecx; int",
+    "line": "push    ecx; vertexColor",
     "mnemonic": "push",
     "size": 1
   },
@@ -2893,7 +2893,7 @@
   },
   {
     "ea": "0x49B3D2",
-    "line": "fstp    [esp+0D8h+var_60]",
+    "line": "fstp    [esp+0D8h+start.z]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2923,7 +2923,7 @@
   },
   {
     "ea": "0x49B3E6",
-    "line": "fld     [esp+0D8h+var_60]",
+    "line": "fld     [esp+0D8h+start.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2977,13 +2977,13 @@
   },
   {
     "ea": "0x49B408",
-    "line": "fstp    [esp+0D8h+var_D8]; float",
+    "line": "fstp    [esp+0D8h+scale]; scale",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x49B40B",
-    "line": "call    sub_47FD30",
+    "line": "call    NiTriShape_CreateOctahedronGeometry; Verified generic NiTriShape geometry factory, used by PathGrid rendering and multiple other callers. It builds six octahedron vertices (four ±scale X/Y equatorial points and two ±scale*sqrt(2) Z poles), repeats a supplied NiColorAlpha for all six, writes 24 u16 indices for eight triangular faces, and returns a NiTriShape. This constructs a filled octahedron surface; wireframe is a separate scene property.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3001,7 +3001,7 @@
   },
   {
     "ea": "0x49B415",
-    "line": "call    sub_4E70B0",
+    "line": "call    DebugRender_GetOrCreateVertexColorProperty; Verified shared debug property getter/creator, used by PathGrid debug rendering and the registered TestSeenData/TestLocalMap visualization commands, plus other debug-geometry callers. Lazily constructs NiVertexColorProperty, sets its observed render flags, stores the refcounted global g_DebugRenderVertexColorProperty and returns it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3019,7 +3019,7 @@
   },
   {
     "ea": "0x49B41D",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3121,7 +3121,7 @@
   },
   {
     "ea": "0x49B45B",
-    "line": "push    edx",
+    "line": "push    edx; endColor",
     "mnemonic": "push",
     "size": 1
   },
@@ -3145,7 +3145,7 @@
   },
   {
     "ea": "0x49B466",
-    "line": "push    eax",
+    "line": "push    eax; end",
     "mnemonic": "push",
     "size": 1
   },
@@ -3169,7 +3169,7 @@
   },
   {
     "ea": "0x49B479",
-    "line": "push    ecx",
+    "line": "push    ecx; startColor",
     "mnemonic": "push",
     "size": 1
   },
@@ -3181,13 +3181,13 @@
   },
   {
     "ea": "0x49B481",
-    "line": "lea     edx, [esp+0DCh+var_68]",
+    "line": "lea     edx, [esp+0DCh+start]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x49B485",
-    "line": "push    edx",
+    "line": "push    edx; start",
     "mnemonic": "push",
     "size": 1
   },
@@ -3205,7 +3205,7 @@
   },
   {
     "ea": "0x49B494",
-    "line": "call    sub_47F070",
+    "line": "call    NiLines_CreateSegment; Verified generic NiLines_CreateSegment: copies two endpoint positions and two per-vertex colors, supplies line flags [1,0], and returns a two-vertex NiLines segment. TESPathGrid_RebuildRenderedGraph calls it for adjacency edges.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3223,7 +3223,7 @@
   },
   {
     "ea": "0x49B49E",
-    "line": "call    sub_4E70B0",
+    "line": "call    DebugRender_GetOrCreateVertexColorProperty; Verified shared debug property getter/creator, used by PathGrid debug rendering and the registered TestSeenData/TestLocalMap visualization commands, plus other debug-geometry callers. Lazily constructs NiVertexColorProperty, sets its observed render flags, stores the refcounted global g_DebugRenderVertexColorProperty and returns it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3241,7 +3241,7 @@
   },
   {
     "ea": "0x49B4A6",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3319,7 +3319,7 @@
   },
   {
     "ea": "0x49B4D6",
-    "line": "fstp    [esp+0DCh+var_D8]; float",
+    "line": "fstp    [esp+0DCh+scale]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -3343,13 +3343,13 @@
   },
   {
     "ea": "0x49B4E6",
-    "line": "mov     ecx, [edi+40h]",
+    "line": "mov     ecx, [edi+40h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x49B4E9",
-    "line": "call    sub_6B7260",
+    "line": "call    SoundHandle__IsPlaying; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3463,7 +3463,7 @@
   },
   {
     "ea": "0x49B525",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3529,13 +3529,13 @@
   },
   {
     "ea": "0x49B53F",
-    "line": "mov     ecx, [edi+40h]",
+    "line": "mov     ecx, [edi+40h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x49B542",
-    "line": "call    sub_6B7260",
+    "line": "call    SoundHandle__IsPlaying; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.",
     "mnemonic": "call",
     "size": 5
   },

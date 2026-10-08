@@ -1,130 +1,129 @@
-void __userpurge sub_59C5E0(
+// [Controller decode 2026-07-09] Controls menu action handler. Saves settings when dirty; action 7 toggles bInvertYValues, action 8 swaps joystick movement/look axis selector settings.
+void __userpurge ControlsMenu::HandleAction(
         int a1@<ecx>,
         double st5_0@<st2>,
         double a3@<st1>,
         double a4@<st0>,
-        signed int a5,
-        Tile *a6)
+        double a5@<st7>,
+        double a6@<st6>,
+        double a7@<st5>,
+        double a8@<st4>,
+        signed int a9,
+        Tile *a10)
 {
-  double v7; // st4
+  double v11; // st4
   double Float; // st4
-  OSGlobals *v9; // ecx
-  unsigned __int8 **v10; // eax
-  unsigned __int8 *v11; // ecx
-  unsigned __int8 *v12; // edx
-  unsigned __int8 v13; // al
-  bool v14; // al
-  int v15; // ecx
-  int v16; // eax
-  int v17; // ecx
-  int v18; // eax
-  char v19; // al
+  OSGlobals *v13; // ecx
+  unsigned __int8 **v14; // eax
+  unsigned __int8 *v15; // ecx
+  unsigned __int8 *v16; // edx
+  unsigned __int8 v17; // al
+  bool AvailableScheme; // al
+  int v19; // ecx
+  int v20; // eax
+  int v21; // ecx
+  int v22; // eax
+  char v23; // al
   float a2; // [esp+0h] [ebp-40h]
-  BSStringT v21; // [esp+18h] [ebp-28h] BYREF
-  unsigned __int8 v22[16]; // [esp+20h] [ebp-20h] BYREF
-  unsigned int v23; // [esp+3Ch] [ebp-4h]
+  BSStringT v25; // [esp+18h] [ebp-28h] BYREF
+  unsigned __int8 v26[16]; // [esp+20h] [ebp-20h] BYREF
+  unsigned int v27; // [esp+3Ch] [ebp-4h]
 
-  if ( !*(_DWORD *)(a1 + 0xD8) )
+  if ( !*(_DWORD *)(a1 + 0xD8) ) /*0x59c61a*/
   {
-    switch ( a5 )
+    switch ( a9 ) /*0x59c63d*/
     {
-      case 1:
-        if ( Tile_GetFloat((_DWORD *)*(_DWORD *)(a1 + 4), 0xFAE) == fConstant_2 )
+      case 1: /*0x59c63d*/
+        if ( Tile_GetFloat((_DWORD *)*(_DWORD *)(a1 + 4), 0xFAE) == fConstant_2 ) /*0x59c65c*/
         {
-          v7 = 1.0;
-          goto LABEL_19;
+          v11 = 1.0; /*0x59c65e*/
+          goto LABEL_19; /*0x59c661*/
         }
-        Float = Tile_GetFloat((_DWORD *)*(_DWORD *)(a1 + 0x38), 0xFB5);
-        v9 = OSGlobals;
-        flt_B14EE8 = Float / fCostant_100 * dbl_A6B760 + dbl_A59B38;
-        InputGlobals::SaveControlSettingsToINI((DIDEVCAPS *)v9->input);
-        goto LABEL_6;
-      case 7:
-        sub_57DE50(3);
-        byte_B14F38 = byte_B14F38 == 0;
-        v19 = sub_404E10(&byte_B14F38);
-        sub_59B640(a6, v19);
-        break;
-      case 8:
-        sub_57DE50(3);
-        v15 = dword_B14EC8;
-        dword_B14EC8 = dword_B14ED8;
-        v16 = dword_B14ED0;
-        dword_B14ED8 = v15;
-        v17 = v16;
-        v18 = dword_B14EE0;
-        dword_B14EE0 = v17;
-        dword_B14ED0 = v18;
-        *(_BYTE *)(a1 + 0xD4) = 1;
-        break;
-      case 9:
-        sub_57DE50(1);
-        v7 = fConstant_2;
+        Float = Tile_GetFloat((_DWORD *)*(_DWORD *)(a1 + 0x38), 0xFB5); /*0x59c66e*/
+        v13 = MEMORY[0xB33398]; /*0x59c679*/
+        flt_B14EE8 = Float / fCostant_100 * dbl_A6B760 + dbl_A59B38; /*0x59c68b*/
+        InputGlobals::SaveControlSettingsToINI((DIDEVCAPS *)v13->input); /*0x59c694*/
+        goto LABEL_6; /*0x59c694*/
+      case 7: /*0x59c63d*/
+        sub_57DE50(3); /*0x59c7f6*/
+        bInvertYValues = bInvertYValues == 0; /*0x59c80c*/
+        v23 = sub_404E10(&bInvertYValues); /*0x59c812*/
+        ControlsMenu::SetInvertYButtonLabel(a10, v23); /*0x59c81b*/
+        break; /*0x59c81b*/
+      case 8: /*0x59c63d*/
+        sub_57DE50(3); /*0x59c7ab*/
+        v19 = iJoystickMoveFrontBack; /*0x59c7bd*/
+        iJoystickMoveFrontBack = iJoystickLookUpDown; /*0x59c7c1*/
+        v20 = iJoystickMoveLeftRight; /*0x59c7c6*/
+        iJoystickLookUpDown = v19; /*0x59c7cb*/
+        v21 = v20; /*0x59c7d9*/
+        v22 = iJoystickLookLeftRight; /*0x59c7de*/
+        iJoystickLookLeftRight = v21; /*0x59c7e0*/
+        iJoystickMoveLeftRight = v22; /*0x59c7e6*/
+        *(_BYTE *)(a1 + 0xD4) = 1; /*0x59c7eb*/
+        break; /*0x59c7f2*/
+      case 9: /*0x59c63d*/
+        sub_57DE50(1); /*0x59c78c*/
+        v11 = fConstant_2; /*0x59c791*/
 LABEL_19:
-        a2 = v7;
-        Tile_SetFloat(*(Tile **)(a1 + 4), (_DWORD *)0xFAE, a2);
-        break;
-      case 0xA:
-        sub_57DE50(1);
-        v21.m_data = 0;
-        v21.m_dataLen = 0;
-        v21.m_bufLen = 0;
-        v10 = *(unsigned __int8 ***)(4 * *(_DWORD *)(a1 + 0x5C) + 0xB39548);
-        v23 = 0;
-        if ( v10 )
-          v11 = *v10;
+        a2 = v11; /*0x59c797*/
+        Tile_SetFloat(*(Tile **)(a1 + 4), 0xFAEu, a2); /*0x59c7a2*/
+        break; /*0x59c7a7*/
+      case 0xA: /*0x59c63d*/
+        sub_57DE50(1); /*0x59c6aa*/
+        v25.m_data = 0; /*0x59c6b2*/
+        v25.m_dataLen = 0; /*0x59c6b6*/
+        v25.m_bufLen = 0; /*0x59c6bb*/
+        v14 = *(unsigned __int8 ***)(4 * *(_DWORD *)(a1 + 0x5C) + 0xB39548); /*0x59c6c3*/
+        v27 = 0; /*0x59c6cc*/
+        if ( v14 ) /*0x59c6d0*/
+          v15 = *v14; /*0x59c6d2*/
         else
-          v11 = 0;
-        v12 = v22;
-        do
+          v15 = 0; /*0x59c6d6*/
+        v16 = v26; /*0x59c6d8*/
+        do /*0x59c6ec*/
         {
-          v13 = *v11;
-          *v12++ = *v11++;
+          v17 = *v15; /*0x59c6e0*/
+          *v16++ = *v15++; /*0x59c6e2*/
         }
-        while ( v13 );
-        _mbslwr(v22);
-        BSStringT_Static_Format(
-          &v21,
-          "%s %s %s?",
-          *(const char **)dword_B38EF0,
-          (const char *)v22,
-          (const char *)dword_B38EF8);
-        ShowUIMessageBox(
-          v21.m_data,
-          a5,
+        while ( v17 ); /*0x59c6ec*/
+        _mbslwr(v26); /*0x59c6f3*/
+        BSStringT_Static_Format(&v25, "%s %s %s?", stru_B38EF0.value, (const char *)v26, stru_B38EF8.value); /*0x59c714*/
+        ShowUIMessageBox( /*0x59c733*/
+          v25.m_data,
           st5_0,
           a3,
           a4,
-          v21.m_data,
-          (int)sub_59B8C0,
+          v25.m_data,
+          (int)ControlsMenu::ConfirmResetDefaultsCallback,
           1,
-          (const char *)MessageButtonTextNo,
-          MessageButtonTextYes);
-        v23 = 0xFFFFFFFF;
-        BSStringT_Clear((unsigned int *)&v21);
-        break;
-      case 0xC:
-      case 0xD:
-        sub_57DE50(1);
-        if ( sub_587500(a5) == 0xB )
-          v14 = sub_59B980((_DWORD *)a1);
+          (char *)MEMORY[0xB38D00].value,
+          (char)MEMORY[0xB38CF8].value);
+        v27 = 0xFFFFFFFF; /*0x59c73f*/
+        BSStringT_Clear((unsigned int *)&v25); /*0x59c747*/
+        break; /*0x59c74c*/
+      case 0xC: /*0x59c63d*/
+      case 0xD: /*0x59c63d*/
+        sub_57DE50(1); /*0x59c753*/
+        if ( sub_587500(a9) == 0xB ) /*0x59c768*/
+          AvailableScheme = ControlsMenu::SelectPreviousAvailableScheme((_DWORD *)a1); /*0x59c76a*/
         else
-          v14 = sub_59B920((_DWORD *)a1);
-        if ( v14 )
+          AvailableScheme = ControlsMenu::SelectNextAvailableScheme((_DWORD *)a1); /*0x59c771*/
+        if ( AvailableScheme ) /*0x59c778*/
         {
-          *(_BYTE *)(a1 + 0xD4) = 1;
+          *(_BYTE *)(a1 + 0xD4) = 1; /*0x59c77e*/
         }
         else
         {
 LABEL_6:
-          sub_59B9E0(st5_0, a3);
-          sub_5BD610(a5, st5_0, a3);
+          ControlsMenu_CloseOpenMenu(st5_0, a5, a6, a7, a8); /*0x59c699*/
+          sub_5BD610(); /*0x59c69e*/
         }
-        break;
+        break; /*0x59c785*/
       default:
         break;
     }
-    if ( a5 > 0xD && !*(_BYTE *)(a1 + 0xE4) )
-      sub_59C3F0((float *)a1, a6);
+    if ( a9 > 0xD && !*(_BYTE *)(a1 + 0xE4) ) /*0x59c825*/
+      ControlsMenu::StartControlRebind((float *)a1, a10); /*0x59c830*/
   }
 }

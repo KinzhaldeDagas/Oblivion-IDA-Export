@@ -2,8 +2,8 @@ TESRegionGrassObject *__thiscall TESRegionGrassObject::`scalar deleting destruct
         TESRegionGrassObject *this,
         char a2)
 {
-  *(_DWORD *)this = &TESRegionGrassObject::`vftable';
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  this->vtable = &TESRegionGrassObject::`vftable'; /*0x4a59c8*/
+  if ( (a2 & 1) != 0 ) /*0x4a59ce*/
+    FormHeapFree((unsigned int)this); /*0x4a59d1*/
+  return this; /*0x4a59db*/
 }

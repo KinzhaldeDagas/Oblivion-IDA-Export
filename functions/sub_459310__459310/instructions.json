@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x459310",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+arg_0]; MEF v27 verification: same raw blob consumed-length contract as sub_458E50 for SaveLoad+0x60 map; guarded skips must advance/discard payload.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -115,13 +115,13 @@
   },
   {
     "ea": "0x459346",
-    "line": "push    edi; Size",
+    "line": "push    edi; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x459347",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -133,13 +133,13 @@
   },
   {
     "ea": "0x45934B",
-    "line": "push    edx; Dst",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45934C",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy; MEF decode note: raw save-buffer memcpy into SaveLoad map +0x60 using caller UInt16 length. Candidate for future bounded copy/skip once active save-record remaining bytes are tracked.",
     "mnemonic": "call",
     "size": 5
   },

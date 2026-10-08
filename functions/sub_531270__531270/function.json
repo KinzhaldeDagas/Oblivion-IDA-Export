@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 2,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x531270",
+      "0x531282"
+    ]
+  ],
+  "chunks_sha256": "2dc202b9618b5b57bc05107d1a809b396525e9696e28872106ece1c6f8de039f",
+  "comment_regular": "Snapshot the current TESTopicInfo response stream by deep-cloning the shared lazy response cache into the caller's list. MenuTopic and DialogueItem then own independent TESResponse objects and strings; rebuilding the global cache for another INFO cannot invalidate existing runtime responses.",
+  "comment_repeatable": "Snapshot the current TESTopicInfo response stream by deep-cloning the shared lazy response cache into the caller's list. MenuTopic and DialogueItem then own independent TESResponse objects and strings; rebuilding the global cache for another INFO cannot invalidate existing runtime responses.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_531270",
+  "display_name": "TESTopicInfo::CollectResponses",
   "end_ea": "0x531282",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_531270",
+  "name": "TESTopicInfo::CollectResponses",
   "segment": ".text",
   "sha256": "2dc202b9618b5b57bc05107d1a809b396525e9696e28872106ece1c6f8de039f",
   "size": 18,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x531270",
-  "type": "void __thiscall(TESForm *this, unsigned int **)",
+  "total_chunk_size": 18,
+  "type": "void __thiscall(OblivionTopicInfo *this, TESResponseListView *outResponses)",
   "xrefs_from_count": 6,
   "xrefs_to_count": 2
 }

@@ -1,4 +1,4 @@
-0x64BBC0: push    0FFFFFFFFh
+0x64BBC0: push    0FFFFFFFFh; 3DTheft release decode 2026-05-18: MiddleHighProcess StartCombatPackage returns success/failure as AL and owns active combat-controller/package setup. No observed Actor::EvaluatePackage call is required after this vfunc.
 0x64BBC2: push    offset SEH_64BBC0
 0x64BBC7: mov     eax, large fs:0
 0x64BBCD: push    eax
@@ -17,12 +17,12 @@
 0x64BBED: mov     ebp, [esp+5Ch+arg_4]
 0x64BBF1: test    ebp, ebp
 0x64BBF3: jz      loc_64BEAD
-0x64BBF9: mov     esi, [esp+5Ch+arg_0]
+0x64BBF9: mov     esi, [esp+5Ch+actor]
 0x64BBFD: mov     ecx, esi; this
-0x64BBFF: call    Actor__GetProcessLevel
+0x64BBFF: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x64BC04: mov     ecx, ebp; this
 0x64BC06: mov     ebx, eax
-0x64BC08: call    Actor__GetProcessLevel
+0x64BC08: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x64BC0D: cmp     eax, ebx
 0x64BC0F: jz      short loc_64BC4E
 0x64BC11: mov     eax, [esi]
@@ -48,7 +48,7 @@
 0x64BC45: push    ebp
 0x64BC46: push    esi
 0x64BC47: mov     ecx, edi
-0x64BC49: call    sub_646020
+0x64BC49: call    LowProcess_CreateCombatPackage; 3DTheft release decode 2026-05-18: low-process combat fallback creates CombatLow package and calls Actor_AddPackage_(actor, package, 0, 1), returning AL success. No separate forced EvaluatePackage observed at caller boundary.
 0x64BC4E: mov     al, byte ptr [esp+5Ch+arg_14]
 0x64BC52: mov     edx, [edi]
 0x64BC54: mov     byte ptr [esp+5Ch+arg_18], al
@@ -61,11 +61,11 @@
 0x64BC6E: mov     ecx, edi
 0x64BC70: call    eax
 0x64BC72: mov     ecx, esi; this
-0x64BC74: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x64BC74: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x64BC79: cmp     eax, 5
 0x64BC7C: jz      loc_64BEAD
 0x64BC82: mov     ecx, esi; this
-0x64BC84: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x64BC84: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x64BC89: cmp     eax, 3
 0x64BC8C: jz      loc_64BEAD
 0x64BC92: mov     edx, [esi]
@@ -95,29 +95,29 @@
 0x64BCDC: call    eax
 0x64BCDE: test    eax, eax
 0x64BCE0: jnz     loc_64BDB4
-0x64BCE6: cmp     [esp+5Ch+arg_1C], al
+0x64BCE6: cmp     byte ptr [esp+5Ch+arg_1C], al
 0x64BCEA: jnz     loc_64BDB4
 0x64BCF0: mov     edx, [edi]
 0x64BCF2: fldz
-0x64BCF4: push    1
-0x64BCF6: fstp    [esp+60h+arg_0]
-0x64BCFA: push    eax
+0x64BCF4: push    1; allowYieldEvaluation
+0x64BCF6: fstp    [esp+60h+actor]
+0x64BCFA: push    eax; skipFleeAndYieldEvaluation
 0x64BCFB: mov     eax, [edx+0ECh]
-0x64BD01: lea     ecx, [esp+64h+arg_0]
-0x64BD05: push    ecx
-0x64BD06: push    ebp
+0x64BD01: lea     ecx, [esp+64h+actor]
+0x64BD05: push    ecx; outScore
+0x64BD06: push    ebp; target
 0x64BD07: push    1
 0x64BD09: mov     ecx, edi
 0x64BD0B: call    eax
-0x64BD0D: push    eax
-0x64BD0E: push    esi
-0x64BD0F: call    sub_621B40
+0x64BD0D: push    eax; equippedEntry
+0x64BD0E: push    esi; actor
+0x64BD0F: call    CombatSelection_EvaluateWeaponVsHandToHand; Six-argument cdecl combat-choice evaluator. skipFleeAndYieldEvaluation nonzero skips the entire flee/yield block; allowYieldEvaluation gates only the yield portion when that block runs. These are control flags, not allowYield/hasYieldIdle. Any additional throwing-weapon scoring multipliers are external emulation policy, not observed here.
 0x64BD14: add     esp, 18h
 0x64BD17: cmp     eax, 7
 0x64BD1A: jnz     loc_64BDB4
-0x64BD20: mov     ecx, offset flt_B37038
+0x64BD20: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+360h); Combat-package entry calls CombatSelection_EvaluateWeaponVsHandToHand; when it returns flee mode 7, its output score is compared with live fAICombatFleeScoreThreshold before normal combat admission.
 0x64BD25: call    GameSetting_GetSafeFloatPointer
-0x64BD2A: fld     [esp+5Ch+arg_0]
+0x64BD2A: fld     [esp+5Ch+actor]
 0x64BD2E: fld     dword ptr [eax]
 0x64BD30: fcompp
 0x64BD32: fnstsw  ax
@@ -135,8 +135,8 @@
 0x64BD53: call    eax
 0x64BD55: test    eax, eax
 0x64BD57: jz      short loc_64BD88
-0x64BD59: mov     ecx, esi
-0x64BD5B: call    sub_5E0380
+0x64BD59: mov     ecx, esi; this
+0x64BD5B: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x64BD60: test    eax, eax
 0x64BD62: jz      short loc_64BD88
 0x64BD64: mov     ecx, [esp+5Ch+arg_4]
@@ -167,15 +167,15 @@
 0x64BDB4: mov     ecx, ds:0B333C4h
 0x64BDBA: cmp     ebp, ecx
 0x64BDBC: jnz     short loc_64BDE2
-0x64BDBE: cmp     [esp+5Ch+arg_1C], 0
+0x64BDBE: cmp     byte ptr [esp+5Ch+arg_1C], 0
 0x64BDC3: jnz     short loc_64BDE2
 0x64BDC5: call    sub_660530
 0x64BDCA: cmp     eax, ds:0B36A78h
 0x64BDD0: jge     loc_64BEAD
 0x64BDD6: mov     eax, ds:0B333C4h
 0x64BDDB: add     dword ptr [eax+7A0h], 1
-0x64BDE2: mov     ecx, ebp
-0x64BDE4: call    Actor_IsSwimming
+0x64BDE2: mov     ecx, ebp; this
+0x64BDE4: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x64BDE9: mov     ecx, esi
 0x64BDEB: mov     bl, al
 0x64BDED: call    Actor_CanFightInWater
@@ -210,33 +210,33 @@
 0x64BE47: add     esp, 0Ch
 0x64BE4A: test    al, al
 0x64BE4C: jnz     loc_64BED6
-0x64BE52: lea     ecx, [esp+5Ch+var_38]
+0x64BE52: lea     ecx, [esp+5Ch+segmentQuery]
 0x64BE56: call    sub_67D760
 0x64BE5B: mov     edx, [ebp+0]
 0x64BE5E: mov     eax, [edx+174h]
-0x64BE64: push    0; float
-0x64BE66: push    esi; int
+0x64BE64: push    0; extraCost
+0x64BE66: push    esi; actor
 0x64BE67: mov     ecx, ebp
 0x64BE69: mov     [esp+64h+var_4], 0
 0x64BE71: call    eax
 0x64BE73: mov     edx, [esi]
-0x64BE75: push    eax; int
+0x64BE75: push    eax; end
 0x64BE76: mov     eax, [edx+174h]
 0x64BE7C: mov     ecx, esi
 0x64BE7E: call    eax
-0x64BE80: push    eax; int
-0x64BE81: lea     ecx, [esp+6Ch+var_38]
-0x64BE85: call    sub_67EB60
+0x64BE80: push    eax; start
+0x64BE81: lea     ecx, [esp+6Ch+segmentQuery]; segmentQuery
+0x64BE85: call    ConnectedPointGraph_CanTraverseSegment; Verified shared graph route test used from actor package, combat, PathGrid selection, and fast-travel surface construction. It accepts a valid direct segment; if straight-segment validation fails, it invokes actor-aware connected-point A*.
 0x64BE8A: test    al, al
 0x64BE8C: jz      short loc_64BEC5
 0x64BE8E: push    esi; int
-0x64BE8F: lea     ecx, [esp+60h+var_38]; int
+0x64BE8F: lea     ecx, [esp+60h+segmentQuery]; int
 0x64BE93: call    sub_67D650
 0x64BE98: test    al, al
 0x64BE9A: jnz     short loc_64BEC5
-0x64BE9C: lea     ecx, [esp+5Ch+var_38]; void *
+0x64BE9C: lea     ecx, [esp+5Ch+segmentQuery]; this
 0x64BEA0: mov     [esp+5Ch+var_4], 0FFFFFFFFh
-0x64BEA8: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x64BEA8: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x64BEAD: xor     al, al
 0x64BEAF: mov     ecx, [esp+5Ch+var_C]
 0x64BEB3: mov     large fs:0, ecx
@@ -247,13 +247,13 @@
 0x64BEBE: pop     ebx
 0x64BEBF: add     esp, 48h
 0x64BEC2: retn    28h ; '('
-0x64BEC5: lea     ecx, [esp+5Ch+var_38]; void *
+0x64BEC5: lea     ecx, [esp+5Ch+segmentQuery]; this
 0x64BEC9: mov     [esp+5Ch+var_4], 0FFFFFFFFh
-0x64BED1: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
-0x64BED6: mov     ecx, [edi+8]
+0x64BED1: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x64BED6: mov     ecx, [edi+8]; this
 0x64BED9: test    ecx, ecx
 0x64BEDB: jz      short loc_64BEF6
-0x64BEDD: call    sub_567770
+0x64BEDD: call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.
 0x64BEE2: test    al, al
 0x64BEE4: jz      short loc_64BEF6
 0x64BEE6: lea     ecx, [esi+44h]
@@ -266,7 +266,7 @@
 0x64BEFC: mov     edx, [edx+70h]
 0x64BEFF: push    0
 0x64BF01: push    esi
-0x64BF02: lea     eax, [esp+64h+var_44]
+0x64BF02: lea     eax, [esp+64h+pointXYZ]
 0x64BF06: push    eax
 0x64BF07: mov     ecx, edi
 0x64BF09: call    edx
@@ -276,7 +276,7 @@
 0x64BF16: shr     eax, 16h
 0x64BF19: test    al, 1
 0x64BF1B: jz      loc_64C094
-0x64BF21: cmp     [esp+5Ch+arg_1C], 0
+0x64BF21: cmp     byte ptr [esp+5Ch+arg_1C], 0
 0x64BF26: jnz     loc_64C094
 0x64BF2C: cmp     byte ptr [esp+5Ch+arg_20], 0
 0x64BF34: jnz     loc_64C094
@@ -319,15 +319,15 @@
 0x64BFBD: mov     ecx, esi
 0x64BFBF: call    edx
 0x64BFC1: mov     ecx, [eax]
-0x64BFC3: mov     [esp+5Ch+var_44], ecx
+0x64BFC3: mov     [esp+5Ch+pointXYZ], ecx
 0x64BFC7: mov     edx, [eax+4]
 0x64BFCA: mov     [esp+5Ch+var_40], edx
 0x64BFCE: mov     eax, [eax+8]
 0x64BFD1: mov     [esp+5Ch+var_3C], eax
-0x64BFD5: lea     ecx, [esp+5Ch+var_44]
-0x64BFD9: push    ecx
-0x64BFDA: mov     ecx, ebp
-0x64BFDC: call    sub_4D7E30
+0x64BFD5: lea     ecx, [esp+5Ch+pointXYZ]
+0x64BFD9: push    ecx; pointXYZ
+0x64BFDA: mov     ecx, ebp; this
+0x64BFDC: call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.
 0x64BFE1: fld     [esp+5Ch+arg_20]
 0x64BFE8: fcompp
 0x64BFEA: fnstsw  ax
@@ -401,7 +401,7 @@
 0x64C0B3: mov     [edi+48h], ecx
 0x64C0B6: mov     ecx, esi; this
 0x64C0B8: mov     dword ptr [edi+44h], 0
-0x64C0BF: call    sub_5E6C60
+0x64C0BF: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x64C0C4: test    al, al
 0x64C0C6: jnz     short loc_64C105
 0x64C0C8: mov     edx, [ebp+0]
@@ -445,7 +445,7 @@
 0x64C13C: jnz     loc_64C2BC
 0x64C142: push    ebp
 0x64C143: push    0Ch
-0x64C145: mov     ecx, offset dword_B3BDB0
+0x64C145: mov     ecx, (offset qword_B3BB2C+284h)
 0x64C14A: call    sub_67CF50
 0x64C14F: mov     ebx, eax
 0x64C151: xor     edi, edi
@@ -471,7 +471,7 @@
 0x64C193: jnz     loc_64C226
 0x64C199: push    esi
 0x64C19A: push    0Ch
-0x64C19C: mov     ecx, offset dword_B3BDB0
+0x64C19C: mov     ecx, (offset qword_B3BB2C+284h)
 0x64C1A1: call    sub_67CF50
 0x64C1A6: mov     ebx, eax
 0x64C1A8: mov     edi, [ebx]
@@ -485,15 +485,15 @@
 0x64C1BA: jmp     short loc_64C1BE
 0x64C1BC: xor     edi, edi
 0x64C1BE: mov     ecx, ebx
-0x64C1C0: call    BSSimpleList_Clear
+0x64C1C0: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x64C1C5: push    ebx
-0x64C1C6: call    FormHeapFree
+0x64C1C6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x64C1CB: mov     ebx, [esp+60h+arg_20]
 0x64C1D2: add     esp, 4
 0x64C1D5: jmp     short loc_64C235
 0x64C1D7: push    esi
 0x64C1D8: push    0Ch
-0x64C1DA: mov     ecx, offset dword_B3BDB0
+0x64C1DA: mov     ecx, (offset qword_B3BB2C+284h)
 0x64C1DF: call    sub_67CF50
 0x64C1E4: mov     edi, [eax]
 0x64C1E6: test    edi, edi
@@ -509,10 +509,10 @@
 0x64C204: jmp     short loc_64C208
 0x64C206: xor     edi, edi
 0x64C208: mov     ecx, [esp+5Ch+arg_20]
-0x64C20F: call    BSSimpleList_Clear
+0x64C20F: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x64C214: mov     ecx, [esp+5Ch+arg_20]
 0x64C21B: push    ecx
-0x64C21C: call    FormHeapFree
+0x64C21C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x64C221: add     esp, 4
 0x64C224: jmp     short loc_64C235
 0x64C226: mov     edx, [esp+5Ch+arg_14]
@@ -533,12 +533,12 @@
 0x64C254: mov     [esp+5Ch+var_4], 1
 0x64C25C: jz      short loc_64C269
 0x64C25E: mov     ecx, eax
-0x64C260: call    sub_67CBC0
+0x64C260: call    sub_67CBC0; RadiantAI cut/beta review: active combat-package path constructs SpectatorPackage state via sub_67CBC0 at 0x64C260.
 0x64C265: mov     edi, eax
 0x64C267: jmp     short loc_64C26B
 0x64C269: xor     edi, edi
 0x64C26B: push    edi
-0x64C26C: mov     ecx, offset dword_B3BDB0
+0x64C26C: mov     ecx, (offset qword_B3BB2C+284h)
 0x64C271: mov     [esp+60h+var_4], 0FFFFFFFFh
 0x64C279: mov     dword ptr [edi+0Ch], 0Ch
 0x64C280: call    sub_67BF80
@@ -547,7 +547,7 @@
 0x64C28B: push    ebx
 0x64C28C: push    esi
 0x64C28D: mov     ecx, edi
-0x64C28F: call    sub_67CDB0
+0x64C28F: call    sub_67CDB0; MiddleHighProcess_StartCombatPackage builds package/list entries for combat target; sub_67CDB0 appends actor/target entries with priority/alert state.
 0x64C294: test    bl, bl
 0x64C296: setz    al
 0x64C299: push    0FFFFFFFFh
@@ -557,12 +557,12 @@
 0x64C29F: call    sub_67CDB0
 0x64C2A4: mov     edi, [esp+5Ch+arg_4]
 0x64C2A8: mov     ecx, edi
-0x64C2AA: call    BSSimpleList_Clear
+0x64C2AA: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x64C2AF: push    edi
-0x64C2B0: call    FormHeapFree
+0x64C2B0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x64C2B5: mov     edi, [esp+60h+var_48]
 0x64C2B9: add     esp, 4
-0x64C2BC: mov     edx, dword ptr [esp+5Ch+arg_1C]
+0x64C2BC: mov     edx, [esp+5Ch+arg_1C]
 0x64C2C0: xor     ecx, ecx
 0x64C2C2: test    dl, dl
 0x64C2C4: jz      short loc_64C2CB
@@ -611,3 +611,17 @@
 0x64C340: call    edx
 0x64C342: mov     al, 1
 0x64C344: jmp     loc_64BEAF
+0x9C3AD0: lea     ecx, [ebp-38h]; this
+0x9C3AD3: jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x9C3AD8: mov     eax, [ebp+24h]
+0x9C3ADB: push    eax
+0x9C3ADC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C3AE1: pop     ecx
+0x9C3AE2: retn
+0x9C3AE3: mov     edx, [esp+arg_4]
+0x9C3AE7: lea     eax, [edx-4Ch]
+0x9C3AEA: mov     ecx, [edx-50h]
+0x9C3AED: xor     ecx, eax
+0x9C3AEF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C3AF4: mov     eax, offset stru_AEC63C
+0x9C3AF9: jmp     ___CxxFrameHandler3

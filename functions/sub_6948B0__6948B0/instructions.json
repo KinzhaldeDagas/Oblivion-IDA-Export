@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6948B0",
-    "line": "push    ecx",
+    "line": "push    ecx; Tear down a LightEffect transient point light by backing-light identity: remove its full-list ShadowSceneLight, detach it from the actor scene graph, clear actor extra-data type 0x49, release the LightEffect smart pointer, and decrement the active magic-light count.",
     "mnemonic": "push",
     "size": 1
   },
@@ -115,19 +115,19 @@
   },
   {
     "ea": "0x6948E2",
-    "line": "push    ecx",
+    "line": "push    ecx; backingLight",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6948E3",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6948E5",
-    "line": "call    sub_7C7DC0",
+    "line": "call    ShadowSceneNode_RemoveFullLightBySource; Remove the native full-list ShadowSceneLight whose backing-light identity is this LightEffect's transient NiPointLight.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x694919",
-    "line": "call    edx",
+    "line": "call    edx; Find the transient point-light child in the parent actor's scene graph so the native teardown path can detach/release that child.",
     "mnemonic": "call",
     "size": 2
   },
@@ -343,19 +343,19 @@
   },
   {
     "ea": "0x69493D",
-    "line": "push    1",
+    "line": "push    1; useSpellEffectExtraLight",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x69493F",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x694941",
-    "line": "call    sub_4D8190",
+    "line": "call    TESObjectREFR_UnregisterAndClearAttachedLight; Clear the parent actor's spell-effect light extra-data type 0x49; this call selects useSpellEffectExtraLight=true.",
     "mnemonic": "call",
     "size": 5
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x69496A",
-    "line": "sub     dword ptr ds:0B3C0B4h, 1",
+    "line": "sub     dword ptr ds:0B3C0B4h, 1; Decrement and clamp the native active transient magic-light count.",
     "mnemonic": "sub",
     "size": 7
   },

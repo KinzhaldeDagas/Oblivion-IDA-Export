@@ -1,37 +1,30 @@
-void __usercall sub_5D1FC0(int a1@<ebx>, double st5_0@<st2>, double a3@<st1>, double a4@<st0>)
+void __usercall sub_5D1FC0(double a1@<st2>, double st6_0@<st1>, double a3@<st0>)
 {
   _DWORD *OpenMenuTile; // eax
   int ParentMenu; // esi
   int *ContainerChanges; // edi
-  double v8; // st7
+  double v6; // st7
   float a2; // [esp+0h] [ebp-10h]
 
-  OpenMenuTile = (_DWORD *)Menu_GetOpenMenuTile(0x40B);
-  if ( OpenMenuTile )
+  OpenMenuTile = (_DWORD *)Menu_GetOpenMenuTile(0x40B); /*0x5d1fc6*/
+  if ( OpenMenuTile ) /*0x5d1fd0*/
   {
-    ParentMenu = Tile_GetParentMenu(OpenMenuTile);
-    if ( ParentMenu )
+    ParentMenu = Tile_GetParentMenu(OpenMenuTile); /*0x5d1fde*/
+    if ( ParentMenu ) /*0x5d1fe2*/
     {
-      if ( sub_578D70() == 1 )
+      if ( InterfaceManager_ConsumeMessageButton() == 1 ) /*0x5d1fef*/
       {
-        ContainerChanges = (int *)ExtraDataList_GetContainerChanges(&TESDataHandler_g_PlayerRef->super.super.super.super.baseExtraList);
-        sub_48F390(ContainerChanges);
-        sub_491700(
-          (float *)ContainerChanges,
-          st5_0,
-          a3,
-          a4,
-          (TESObjectREFR *)TESDataHandler_g_PlayerRef,
-          dword_B3B714,
-          0);
-        v8 = (double)sub_5E4420((Actor *)TESDataHandler_g_PlayerRef);
-        a2 = v8;
-        Tile_SetFloat(*(Tile **)(ParentMenu + 0x34), (_DWORD *)0xFAE, a2);
-        TESDataHandler_g_PlayerRef->vtbl->super.Unk_B0((Actor *)TESDataHandler_g_PlayerRef);
-        sub_5D0B80();
-        sub_5D1080(ParentMenu, a1, v8, st5_0, a3, 1);
+        ContainerChanges = (int *)ExtraDataList_GetContainerChanges(&reference->super.super.super.super.baseExtraList); /*0x5d2000*/
+        sub_48F390(ContainerChanges); /*0x5d2004*/
+        sub_491700((float *)ContainerChanges, a1, st6_0, a3, (TESObjectREFR *)reference, dword_B3B704[4], 0); /*0x5d201a*/
+        v6 = (double)sub_5E4420((Actor *)reference); /*0x5d202e*/
+        a2 = v6; /*0x5d2036*/
+        Tile_SetFloat(*(Tile **)(ParentMenu + 0x34), 0xFAEu, a2); /*0x5d203e*/
+        reference->vtbl->super.Unk_B0((Actor *)reference); /*0x5d2051*/
+        sub_5D0B80(); /*0x5d2055*/
+        sub_5D1080(ParentMenu, v6, a1, st6_0, 1); /*0x5d205e*/
       }
-      *(_BYTE *)(ParentMenu + 0x64) = 0;
+      *(_BYTE *)(ParentMenu + 0x64) = 0; /*0x5d2064*/
     }
   }
 }

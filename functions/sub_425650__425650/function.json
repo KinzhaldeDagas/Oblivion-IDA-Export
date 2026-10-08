@@ -1,19 +1,32 @@
 {
-  "callees_count": 80,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 38,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x425650",
+      "0x4258FC"
+    ]
+  ],
+  "chunks_sha256": "2fe7244829f35f32164986871adf1508f6521206c28e3bb7d7e4fb0c846b5a0f",
+  "comment_regular": "Verified conditional ExtraTeleport cleanup branch: when the matching cleanup flag is present and the reference is not in the protected state, it removes low-path world indexing when the door-link reference-ID ordering condition holds, then removes the ExtraTeleport entry.",
+  "comment_repeatable": "Verified conditional ExtraTeleport cleanup branch: when the matching cleanup flag is present and the reference is not in the protected state, it removes low-path world indexing when the door-link reference-ID ordering condition holds, then removes the ExtraTeleport entry.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
   "display_name": "sub_425650",
   "end_ea": "0x4258FC",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_425650",
   "segment": ".text",
   "sha256": "2fe7244829f35f32164986871adf1508f6521206c28e3bb7d7e4fb0c846b5a0f",
   "size": 684,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x425650",
-  "type": "TESForm::ModReferenceList *__thiscall(ExtraDataList *this, int, _DWORD *)",
+  "total_chunk_size": 684,
+  "type": "TESForm::ModReferenceList *__thiscall(ExtraDataList *this, int, TESObjectCELL **)",
   "xrefs_from_count": 312,
   "xrefs_to_count": 1
 }

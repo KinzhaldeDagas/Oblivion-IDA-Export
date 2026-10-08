@@ -1,1 +1,4 @@
-in6_addr
+struct in6_addr
+{
+$2CF50033CD6778643CB415D1A69C38B2 u;
+};

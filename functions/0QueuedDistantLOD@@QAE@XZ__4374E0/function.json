@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 4,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
+  "chunks": [
+    [
+      "0x4374E0",
+      "0x437584"
+    ],
+    [
+      "0x9AC460",
+      "0x9AC48E"
+    ]
+  ],
+  "chunks_sha256": "46b68e1262da4bbab60c959274e2d9ff532d9fa7de3f01b56e6c69c3c5921ca7",
+  "comment_regular": "Verified QueuedDistantLOD constructor: stores its per-instance context pointer at task +0x38; context is a 0x20-byte DistantLODQueuedInstanceData record. Priority is supplied by the factory as 5.",
+  "comment_repeatable": "Verified QueuedDistantLOD constructor: stores its per-instance context pointer at task +0x38; context is a 0x20-byte DistantLODQueuedInstanceData record. Priority is supplied by the factory as 5.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
   "display_name": "QueuedDistantLOD::QueuedDistantLOD(void)",
   "end_ea": "0x437584",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
   "name": "??0QueuedDistantLOD@@QAE@XZ",
   "segment": ".text",
   "sha256": "69c46d978e6b469729116bb8852a8ebdb260a571f090aa536dc67b02bf0ac4a1",
   "size": 164,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4374E0",
-  "type": "QueuedDistantLOD *__thiscall(QueuedDistantLOD *this, const char *, unsigned __int8, int)",
-  "xrefs_from_count": 59,
+  "total_chunk_size": 210,
+  "type": "QueuedDistantLOD *__thiscall(QueuedDistantLOD *this, const char *modelPath, unsigned __int8 priority, DistantLODQueuedInstanceData *instanceData)",
+  "xrefs_from_count": 73,
   "xrefs_to_count": 1
 }

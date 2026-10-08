@@ -1,14 +1,14 @@
 void __cdecl sub_A27A80()
 {
-  void (__thiscall ***v0)(_DWORD, int); // esi
+  Ni2DBuffer *v0; // esi
 
-  v0 = (void (__thiscall ***)(_DWORD, int))dword_BA7B88;
-  if ( dword_BA7B88 )
+  v0 = dword_BA7B88; /*0xa27a81*/
+  if ( dword_BA7B88 ) /*0xa27a89*/
   {
-    if ( !InterlockedDecrement((volatile LONG *)(dword_BA7B88 + 4)) )
+    if ( !InterlockedDecrement((volatile LONG *)&dword_BA7B88->members) ) /*0xa27a8f*/
     {
-      if ( v0 )
-        (**v0)(v0, 1);
+      if ( v0 ) /*0xa27a9b*/
+        (*(void (__thiscall **)(Ni2DBuffer *, int))v0->__vftable)(v0, 1); /*0xa27aa5*/
     }
   }
 }

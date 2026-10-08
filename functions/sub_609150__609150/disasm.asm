@@ -1,4 +1,4 @@
-0x609150: push    ebp
+0x609150: push    ebp; Collision state 1: reconstruct attachment to a recorded non-Actor reference collision object, set projectile collision filtering, enqueue the projectile in the reference-collision list, and restore saved collision transform data.
 0x609151: mov     ebp, esp
 0x609153: and     esp, 0FFFFFFF0h
 0x609156: sub     esp, 24h
@@ -6,7 +6,7 @@
 0x60915E: xor     eax, esp
 0x609160: mov     [esp+24h+var_4], eax
 0x609164: push    ebx
-0x609165: mov     ebx, [ebp+arg_0]
+0x609165: mov     ebx, [ebp+collisionObject]
 0x609168: push    esi
 0x609169: mov     esi, ecx
 0x60916B: mov     eax, [esi]
@@ -17,8 +17,8 @@
 0x609179: cmp     dword ptr [eax+28h], 0
 0x60917D: jz      loc_609272
 0x609183: mov     eax, [eax+2Ch]
-0x609186: push    eax
-0x609187: call    sub_480340
+0x609186: push    eax; object
+0x609187: call    NiAVObject_FindBhkCollisionObjectRecursive; Returns the first bhk collision object found on object or recursively beneath its NiNode children. This is structural traversal, independent of node names.
 0x60918C: add     esp, 4
 0x60918F: test    eax, eax
 0x609191: jz      loc_60927F
@@ -31,7 +31,7 @@
 0x6091A8: mov     ecx, esi
 0x6091AA: call    eax
 0x6091AC: push    eax; a1
-0x6091AD: call    sub_88D070
+0x6091AD: call    sub_88D070; ODismemberment: bhkBlendCollisionObject traversal entry. Requires bhkBlendCollisionObject or forced flag; queues callback off off_B2E314 with state payload including a2 and a3.
 0x6091B2: add     esp, 10h
 0x6091B5: test    edi, edi
 0x6091B7: jz      short loc_6091CA
@@ -73,7 +73,7 @@
 0x609214: mov     ecx, ebx
 0x609216: call    eax
 0x609218: push    esi
-0x609219: mov     ecx, offset ActorProcessManager_ptr.unk4C
+0x609219: mov     ecx, (offset qword_B3BB2C+224h)
 0x60921E: call    BSSimpleList_PushFront
 0x609223: mov     ecx, edi
 0x609225: call    sub_535AC0

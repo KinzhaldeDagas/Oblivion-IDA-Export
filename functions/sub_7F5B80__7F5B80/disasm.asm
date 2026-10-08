@@ -22,7 +22,7 @@
 0x7F5BBC: fst     dword ptr [esi+28h]
 0x7F5BBF: fst     dword ptr [esi+14h]
 0x7F5BC2: fstp    dword ptr [esi]
-0x7F5BC4: call    sub_718A80
+0x7F5BC4: call    sub_718A80;
 0x7F5BC9: fld     [esp+38h+var_34]
 0x7F5BCD: fld     [esp+38h+var_4]
 0x7F5BD1: fld     st

@@ -1,19 +1,36 @@
 {
-  "callees_count": 8,
-  "callers_count": 27,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
+  "callers_count": 29,
+  "chunks": [
+    [
+      "0x565E00",
+      "0x565E81"
+    ],
+    [
+      "0x9C3090",
+      "0x9C30B6"
+    ]
+  ],
+  "chunks_sha256": "ba7436451548129fef59eb79b214676d28bfd7b9f3ba81b9548eea2f32598d6e",
+  "comment_regular": "3DTheft decode: TESPackage_SetLocation allocates package->location when needed and copies a 0x0C LocationData record; null source clears location data.",
+  "comment_repeatable": "3DTheft decode: TESPackage_SetLocation allocates package->location when needed and copies a 0x0C LocationData record; null source clears location data.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
   "display_name": "TESPackage_SetLocation",
   "end_ea": "0x565E81",
-  "flags": 20480,
+  "evidence_confidence": "Unknown",
+  "flags": 21504,
   "has_pseudocode": true,
   "name": "TESPackage_SetLocation",
   "segment": ".text",
   "sha256": "bc23d6548dbacaebb9ebbc6c99f12bb0f06ec1de3f7316440d959ccf978bbf24",
   "size": 129,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x565E00",
+  "total_chunk_size": 167,
   "type": "char __thiscall(_DWORD *this, char *)",
-  "xrefs_from_count": 47,
+  "xrefs_from_count": 61,
   "xrefs_to_count": 29
 }

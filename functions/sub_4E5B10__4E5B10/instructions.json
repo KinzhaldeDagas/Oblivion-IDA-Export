@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E5B10",
-    "line": "sub     esp, 14h",
+    "line": "sub     esp, 14h; Verified save path for linked-point state: writes a u16 count followed by u16 PathGrid point indices for each non-null point whose linkedPointsDisabled bit is set; optional save-block framing surrounds this payload.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x4E5B25",
-    "line": "mov     [esp+20h+var_4], 0",
+    "line": "mov     [esp+20h+source], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x4E5B42",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },
@@ -97,13 +97,13 @@
   },
   {
     "ea": "0x4E5B4B",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4E5B51",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x4E5B57",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x4E5B65",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -145,19 +145,19 @@
   },
   {
     "ea": "0x4E5B6E",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4E5B70",
-    "line": "lea     eax, [esp+24h+var_4]",
+    "line": "lea     eax, [esp+24h+source]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4E5B74",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -175,13 +175,13 @@
   },
   {
     "ea": "0x4E5B7E",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4E5B84",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x4E5B95",
-    "line": "push    edx; Src",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x4E5BB3",
-    "line": "mov     ecx, [eax+esi*4]",
+    "line": "mov     ecx, [eax+esi*4]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x4E5BBA",
-    "line": "call    sub_67ED70",
+    "line": "call    PathGraphNode_IsLinkedPointsDisabled; Verified returns PathGrid point flag 0x20, which is the linked-points-disabled state: SetLinkedPointsEnabled stores the inverse of its enabled argument, save/load persists flagged indices, searches skip flagged nodes, and renderer marks them wireframe.",
     "mnemonic": "call",
     "size": 5
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x4E5BC6",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -325,13 +325,13 @@
   },
   {
     "ea": "0x4E5BD0",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4E5BD6",
-    "line": "push    edx; Src",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x4E5C16",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x4E5C72",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6A4620",
-    "line": "push    esi",
+    "line": "push    esi; ScriptEffect Remove vfunc: normally runs ScriptEffectFinish and destroys the event list; save/load flags can suppress Finish and only destroy the list.",
     "mnemonic": "push",
     "size": 1
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x6A4628",
-    "line": "jz      short ScriptEffect_Remove___DestroyEventList",
+    "line": "jz      short ScriptEffect_Remove___DestroyEventList; DestroyEventList chunk: destruct and FormHeapFree the ScriptEventList at +0x3C, then null the field.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x6A463A",
-    "line": "jz      short ScriptEffect_Remove___RunFinishEvent",
+    "line": "jz      short ScriptEffect_Remove___RunFinishEvent; RunFinishEvent chunk: resolve target through caster vfunc +4, call ScriptEffect_RunFinishEvent(script,target,eventList), then destroy the event list.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x6A4640",
-    "line": "jz      short ScriptEffect_Remove___DestroyEventList",
+    "line": "jz      short ScriptEffect_Remove___DestroyEventList; DestroyEventList chunk: destruct and FormHeapFree the ScriptEventList at +0x3C, then null the field.",
     "mnemonic": "jz",
     "size": 2
   }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7BA0F0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; MoonSugarEffect decode: shader system init prewarms shader definitions 1..27, then constructs imageSpaceShaderList if ImageSpaceEffectEnabled.",
     "mnemonic": "push",
     "size": 2
   },
@@ -217,25 +217,25 @@
   },
   {
     "ea": "0x7BA16F",
-    "line": "call    sub_7DAB80",
+    "line": "call    GetShaderProgramPackageIndex; [Verified] Shader-system initialization calls GetShaderProgramPackageIndex and passes its EAX result to ShaderProgramPackageMap_Ctor, which formats shaderpackage%03i.sdp. The resulting map is loaded from Data\\Shaders and used to resolve compiled shader-program records.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7BA174",
-    "line": "push    eax",
+    "line": "push    eax; packageIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7BA175",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7BA177",
-    "line": "call    sub_7DB050",
+    "line": "call    ShaderProgramPackageMap_Ctor; [Verified] Initializes a NiTStringPointerMap<ShaderBufferEntry*> with 0x25 buckets and, for a positive package index, formats shaderpackage%03i.sdp. Oblivion then loads that SDP record map for shader creation. [Verified cross-build divergence] Fallout Renderer::Init exposes bCreateShaderPackage and forwards it to BSShaderManager::bCreateNewShaderPackage, while its HLSL creator resolves source files and compiles them; the current Fallout IDB does not establish a same-name Oblivion-style SDP map.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x7BA180",
-    "line": "mov     ds:0B430B8h, eax",
+    "line": "mov     ds:0B430B8h, eax; [Verified] Stores the initialized shader package record map returned by ShaderProgramPackageMap_Ctor; the following call loads the selected SDP file. If its data pointer is absent, the map is destroyed and the global is cleared.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -265,13 +265,13 @@
   },
   {
     "ea": "0x7BA187",
-    "line": "push    ecx",
+    "line": "push    ecx; filename",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7BA188",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x7BA18E",
-    "line": "call    sub_7DACA0",
+    "line": "call    ShaderProgramPackageMap_LoadSdp; [Verified] Loads the supplied shader package from Data\\Shaders\\<filename>, validates its header (observed values 0x0C and 0x64), reads the record payload, and inserts entries into the ShaderBufferEntry string map. [Unknown] Internal meaning of package header fields and variant-specific payloads is not established. [Candidate cross-build note] Fallout's observed HLSL creator compiles resolved source files directly; no same-name .sdp load path was located in its IDB, which remains an incomplete search rather than a proven absence.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x7BA1A7",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x7BA1B9",
-    "line": "call    InitBSShaderAccumulator",
+    "line": "call    BSShaderAccumulator_GetOrCreateGlobal",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x7BA200",
-    "line": "call    sub_7AB1D0",
+    "line": "call    sub_7AB1D0; MoonSugarEffect decode: mode-4 helper creates/releases global screen-element quads at B42CF8..B42D3C with vertex/z/alpha/stencil/material props; not a Moon Sugar mask API.",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x7BA261",
-    "line": "call    GetShaderDefinition",
+    "line": "call    GetShaderDefinition; [Verified] Shader-system initialization preloads shader definitions 1 through 27 while the selected SDP record map is available, then destroys and frees that temporary map. Shader program creation later uses package records when present and has a separate cache/source compilation fallback.",
     "mnemonic": "call",
     "size": 5
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x7BA283",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -787,7 +787,7 @@
   },
   {
     "ea": "0x7BA2C3",
-    "line": "call    ImageSpaceshaderList__Create; Treat this list as a de facto subclass of a standard NiTPointerList as this is bigger of 3 UInt32",
+    "line": "call    ImageSpaceshaderList__Create; MoonSugarEffect decode: ImageSpaceShaderList creation order: NightEye, HDR/Blur, optional Refraction, Hit, and Copy fallback at +0x18.",
     "mnemonic": "call",
     "size": 5
   },
@@ -856,5 +856,137 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CDC30",
+    "line": "mov     eax, [ebp-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CDC33",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CDC34",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDC39",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CDC3A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CDC3B",
+    "line": "mov     eax, [ebp-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CDC3E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CDC3F",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDC44",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CDC45",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CDC46",
+    "line": "mov     eax, [ebp-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CDC49",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CDC4A",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDC4F",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CDC50",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CDC51",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CDC55",
+    "line": "lea     eax, [edx-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CDC58",
+    "line": "mov     ecx, [edx-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CDC5B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CDC5D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDC62",
+    "line": "mov     eax, offset stru_AF6D94",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDC67",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

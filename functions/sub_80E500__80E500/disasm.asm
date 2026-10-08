@@ -1,4 +1,4 @@
-0x80E500: push    0FFFFFFFFh
+0x80E500: push    0FFFFFFFFh; Pass230: SpeedTree frond vertex map uses shared FogParam/ShadowVolumeFatness 0x00B46638 and FogColor/ShadowVolumeExtrudeDistance 0x00B46648.
 0x80E502: push    offset SEH_8C8970
 0x80E507: mov     eax, large fs:0
 0x80E50D: push    eax
@@ -49,7 +49,7 @@
 0x80E590: mov     edx, [ecx]
 0x80E592: mov     eax, [edx+18h]
 0x80E595: push    0
-0x80E597: push    offset dword_B46498
+0x80E597: push    offset flt_B46498
 0x80E59C: push    4
 0x80E59E: push    10h
 0x80E5A0: push    offset EmptyString
@@ -63,7 +63,7 @@
 0x80E5B9: mov     edx, [ecx]
 0x80E5BB: mov     eax, [edx+18h]
 0x80E5BE: push    0
-0x80E5C0: push    offset dword_B464A8
+0x80E5C0: push    (offset flt_B464A0+8)
 0x80E5C5: push    4
 0x80E5C7: push    10h
 0x80E5C9: push    offset EmptyString
@@ -77,7 +77,7 @@
 0x80E5E2: mov     edx, [ecx]
 0x80E5E4: mov     eax, [edx+18h]
 0x80E5E7: push    0
-0x80E5E9: push    offset unk_B464B8
+0x80E5E9: push    (offset flt_B464A0+18h)
 0x80E5EE: push    4
 0x80E5F0: push    10h
 0x80E5F2: push    offset EmptyString
@@ -121,7 +121,7 @@
 0x80E661: mov     eax, [ecx]
 0x80E663: mov     edx, [eax+18h]
 0x80E666: push    0
-0x80E668: push    offset flt_B465A8
+0x80E668: push    (offset flt_B464A0+108h)
 0x80E66D: push    4
 0x80E66F: push    10h
 0x80E671: push    offset EmptyString
@@ -135,7 +135,7 @@
 0x80E68A: mov     eax, [ecx]
 0x80E68C: mov     edx, [eax+18h]
 0x80E68F: push    0
-0x80E691: push    offset dword_B46638
+0x80E691: push    offset flt_B46638
 0x80E696: push    4
 0x80E698: push    10h
 0x80E69A: push    offset EmptyString
@@ -144,12 +144,12 @@
 0x80E6A3: push    0
 0x80E6A5: push    10000007h
 0x80E6AA: push    offset aFogparamShadow; "FogParam | ShadowVolumeFatness"
-0x80E6AF: call    edx
+0x80E6AF: call    edx; Fog constant-map decode: SpeedTree frond vertex map declares FogParam | ShadowVolumeFatness at vs c14 from shared B46638.
 0x80E6B1: mov     ecx, [esi]
 0x80E6B3: mov     eax, [ecx]
 0x80E6B5: mov     edx, [eax+18h]
 0x80E6B8: push    0
-0x80E6BA: push    offset dword_B46648
+0x80E6BA: push    (offset flt_B46638+10h)
 0x80E6BF: push    4
 0x80E6C1: push    10h
 0x80E6C3: push    offset EmptyString
@@ -158,14 +158,14 @@
 0x80E6CC: push    0
 0x80E6CE: push    10000007h
 0x80E6D3: push    offset aFogcolorShadow; "FogColor | ShadowVolumeExtrudeDistance"
-0x80E6D8: call    edx
+0x80E6D8: call    edx; Fog constant-map decode: SpeedTree frond vertex map declares FogColor | ShadowVolumeExtrudeDistance at vs c15 from shared B46648.
 0x80E6DA: cmp     byte ptr ds:0B43070h, 0
 0x80E6E1: jz      short loc_80E70C
 0x80E6E3: mov     ecx, [esi]
 0x80E6E5: mov     eax, [ecx]
 0x80E6E7: mov     edx, [eax+18h]
 0x80E6EA: push    0
-0x80E6EC: push    offset flt_B42EA8
+0x80E6EC: push    (offset OB_RendererGlobalState_010201A0.pad_00D+2)
 0x80E6F1: push    4
 0x80E6F3: push    4
 0x80E6F5: push    offset EmptyString
@@ -176,9 +176,9 @@
 0x80E705: push    offset aTreeDimmer; "Tree Dimmer"
 0x80E70A: call    edx
 0x80E70C: mov     eax, [esi]
-0x80E70E: push    11h
-0x80E710: push    eax
-0x80E711: call    sub_7F16F0
+0x80E70E: push    11h; baseRegister
+0x80E710: push    eax; constantMap
+0x80E711: call    OB_SpeedTreeShader_RegisterTreeAndWindConstants_010201A0; Registers SpeedTree shader constants: TreeData at base register and WindMatrices at base+1 (16 float4 registers).
 0x80E716: add     esp, 8
 0x80E719: mov     ecx, dword ptr [esp+1Ch+var_C]
 0x80E71D: mov     large fs:0, ecx
@@ -187,3 +187,15 @@
 0x80E726: pop     esi
 0x80E727: add     esp, 10h
 0x80E72A: retn
+0x9CA7E0: mov     eax, [ebp-10h]
+0x9CA7E3: push    eax
+0x9CA7E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA7E9: pop     ecx
+0x9CA7EA: retn
+0x9CA7EB: mov     edx, [esp+arg_4]
+0x9CA7EF: lea     eax, [edx-0Ch]
+0x9CA7F2: mov     ecx, [edx-10h]
+0x9CA7F5: xor     ecx, eax
+0x9CA7F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA7FC: mov     eax, offset stru_AF2E8C
+0x9CA801: jmp     ___CxxFrameHandler3

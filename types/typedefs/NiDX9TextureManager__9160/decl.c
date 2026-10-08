@@ -1,1 +1,1 @@
-NiDX9TextureManager
+struct NiDX9TextureManager;

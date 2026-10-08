@@ -9,7 +9,6 @@
 0x775332: push    ebx
 0x775333: mov     ebx, [esp+10h+arg_C]
 0x775337: jmp     short loc_775340
-0x775339: align 10h
 0x775340: mov     eax, [edi+454h]
 0x775346: mov     ecx, [eax+esi*4]
 0x775349: test    ecx, ecx

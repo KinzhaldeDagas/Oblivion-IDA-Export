@@ -18,7 +18,7 @@
 0x497E39: test    eax, eax
 0x497E3B: jz      short loc_497E4E
 0x497E3D: lea     ecx, [ecx+0]
-0x497E40: cmp     eax, offset unk_B4265C
+0x497E40: cmp     eax, offset stru_B4265C
 0x497E45: jz      short loc_497E5B
 0x497E47: mov     eax, [eax+4]
 0x497E4A: test    eax, eax

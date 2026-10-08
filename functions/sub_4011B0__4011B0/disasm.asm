@@ -1,4 +1,4 @@
-0x4011B0: mov     eax, [ecx+40h]
+0x4011B0: mov     eax, [ecx+40h]; Checks whether an address lies in this pool's backing range: base at +0x40 through base + size at +0x110. Called by MemoryHeap_Free before dispatching to MemoryPool_Free.
 0x4011B3: mov     edx, [esp+arg_0]
 0x4011B7: cmp     edx, eax
 0x4011B9: jb      short loc_4011CF

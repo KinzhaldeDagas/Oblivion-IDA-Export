@@ -1,4 +1,4 @@
-0x578F60: push    1; arg1
+0x578F60: push    1; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.
 0x578F62: push    0; canCreate
 0x578F64: call    InterfaceManager_GetSingleton
 0x578F69: add     esp, 8

@@ -1,4 +1,4 @@
 void sub_9933A9()
 {
-  dword_BAAA9C = 0;
+  unk_BAAA9C = 0; /*0x9933a9*/
 }

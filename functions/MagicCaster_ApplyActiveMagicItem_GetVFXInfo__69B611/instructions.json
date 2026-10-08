@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x69B616",
-    "line": "push    0",
+    "line": "push    0; effectIndex",
     "mnemonic": "push",
     "size": 2
   },
@@ -31,13 +31,13 @@
   },
   {
     "ea": "0x69B61C",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; magicItem",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x69B61E",
-    "line": "call    MagicItem_GetFXEffect",
+    "line": "call    MagicItem_GetFXEffect; Verified (Oblivion): MagicItem_GetFXEffect returns the effect's EffectSetting pointer; MagicShaderHitEffect constructors/PostLink dereference its +0x78 EffectSetting::effectShader field.",
     "mnemonic": "call",
     "size": 5
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x69B627",
-    "line": "mov     [esp+8+arg_70], eax",
+    "line": "mov     [esp+7Ch], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -97,13 +97,13 @@
   },
   {
     "ea": "0x69B639",
-    "line": "call    EffectItemList_GetStrongestItem",
+    "line": "call    EffectItemList_GetStrongestItem; this=EffectItemList; args are rangeFilter (0 self,1 touch,2 target,3 any) and requireArea. Returns effective (flag 0x400000 clear) qualifying item with greatest truncated MagickaCostForCaster(item,null).",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x69B63E",
-    "line": "mov     [esp+4+arg_78], eax",
+    "line": "mov     [esp+80h], eax",
     "mnemonic": "mov",
     "size": 7
   }

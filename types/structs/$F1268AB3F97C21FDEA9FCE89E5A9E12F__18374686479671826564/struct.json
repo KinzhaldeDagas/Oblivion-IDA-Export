@@ -1,64 +1,108 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "$F1268AB3F97C21FDEA9FCE89E5A9E12F",
+  "definition": "struct $F1268AB3F97C21FDEA9FCE89E5A9E12F\n{\nconst wchar_t *short_wday[7] __offset(OFF64|AUTO);\nconst wchar_t *wday[7] __offset(OFF64|AUTO);\nconst wchar_t *short_mon[12] __offset(OFF64|AUTO);\nconst wchar_t *mon[12] __offset(OFF64|AUTO);\nconst wchar_t *am __offset(OFF64|AUTO);\nconst wchar_t *pm __offset(OFF64|AUTO);\nconst wchar_t *short_date __offset(OFF64|AUTO);\nconst wchar_t *date __offset(OFF64|AUTO);\nconst wchar_t *time __offset(OFF64|AUTO);\n}\n",
   "id": 18374686479671826564,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "short_wday",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 28
+      "size": 28,
+      "type": "const wchar_t *[7]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "wday",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 28
+      "offset_hex": "0x1C",
+      "size": 28,
+      "type": "const wchar_t *[7]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "short_mon",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 48
+      "size": 48,
+      "type": "const wchar_t *[12]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "mon",
       "offset": 104,
       "offset_hex": "0x68",
-      "size": 48
+      "size": 48,
+      "type": "const wchar_t *[12]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "am",
       "offset": 152,
       "offset_hex": "0x98",
-      "size": 4
+      "size": 4,
+      "type": "const wchar_t *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pm",
       "offset": 156,
-      "offset_hex": "0x9c",
-      "size": 4
+      "offset_hex": "0x9C",
+      "size": 4,
+      "type": "const wchar_t *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "short_date",
       "offset": 160,
-      "offset_hex": "0xa0",
-      "size": 4
+      "offset_hex": "0xA0",
+      "size": 4,
+      "type": "const wchar_t *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "date",
       "offset": 164,
-      "offset_hex": "0xa4",
-      "size": 4
+      "offset_hex": "0xA4",
+      "size": 4,
+      "type": "const wchar_t *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "time",
       "offset": 168,
-      "offset_hex": "0xa8",
-      "size": 4
+      "offset_hex": "0xA8",
+      "size": 4,
+      "type": "const wchar_t *"
     }
   ],
   "name": "$F1268AB3F97C21FDEA9FCE89E5A9E12F",
+  "ordinal": 2322,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 172
 }

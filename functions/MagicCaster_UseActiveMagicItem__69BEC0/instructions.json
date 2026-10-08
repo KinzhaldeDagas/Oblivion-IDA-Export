@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x69BEDB",
-    "line": "push    eax",
+    "line": "push    eax; effectIndex",
     "mnemonic": "push",
     "size": 1
   },
@@ -415,13 +415,13 @@
   },
   {
     "ea": "0x69BF7B",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; magicItem",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x69BF7D",
-    "line": "call    MagicItem_GetFXEffect",
+    "line": "call    MagicItem_GetFXEffect; Verified (Oblivion): MagicItem_GetFXEffect returns the effect's EffectSetting pointer; MagicShaderHitEffect constructors/PostLink dereference its +0x78 EffectSetting::effectShader field.",
     "mnemonic": "call",
     "size": 5
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x69BFBB",
-    "line": "mov     ecx, [esp+2Ch+var_1C]",
+    "line": "mov     ecx, [esp+28h+var_18]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x69BFC2",
-    "line": "lea     edx, [esp+30h+string]",
+    "line": "lea     edx, [esp+2Ch+string+4]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -625,7 +625,7 @@
   },
   {
     "ea": "0x69BFD7",
-    "line": "mov     [esp+2Ch+var_4], 0",
+    "line": "mov     dword ptr [esp+28h], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x69BFFC",
-    "line": "mov     eax, dword ptr [esp+2Ch+string]",
+    "line": "mov     eax, dword ptr [esp+28h+string+4]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -703,7 +703,7 @@
   },
   {
     "ea": "0x69C001",
-    "line": "fstp    [esp+30h+duration]; duration",
+    "line": "fstp    dword ptr [esp+0]; duration",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -859,7 +859,7 @@
   },
   {
     "ea": "0x69C041",
-    "line": "mov     ecx, dword ptr [esp+2Ch+string]",
+    "line": "mov     ecx, dword ptr [esp+28h+string+4]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -871,7 +871,7 @@
   },
   {
     "ea": "0x69C046",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -883,7 +883,7 @@
   },
   {
     "ea": "0x69C04E",
-    "line": "mov     ecx, dword ptr [esp+2Ch+var_C]",
+    "line": "mov     ecx, [esp+20h]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -928,5 +928,59 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C2A40",
+    "line": "lea     ecx, [ebp-14h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2A43",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2A48",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C2A4C",
+    "line": "lea     eax, [edx-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2A4F",
+    "line": "mov     ecx, [edx-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2A52",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C2A54",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2A59",
+    "line": "mov     eax, offset stru_AEB7F4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2A5E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

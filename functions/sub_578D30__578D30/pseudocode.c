@@ -1,8 +1,8 @@
 void __cdecl sub_578D30(signed int a1)
 {
-  if ( TESDataHandler_g_PlayerRef )
+  if ( reference ) /*0x578d30*/
   {
-    if ( TESDataHandler_g_PlayerRef->vtbl->super.super.super.GetNiNode(TESDataHandler_g_PlayerRef) )
-      sub_5A8BC0(a1);
+    if ( reference->vtbl->super.super.super.GetNiNode(reference) ) /*0x578d42*/
+      sub_5A8BC0(a1); /*0x578d48*/
   }
 }

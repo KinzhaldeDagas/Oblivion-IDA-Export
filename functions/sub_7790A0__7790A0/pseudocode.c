@@ -1,4 +1,4 @@
-BSStringT *sub_7790A0()
+NiRTTI *sub_7790A0()
 {
-  return &NiD3DShaderInterfaceString;
+  return &MEMORY[0xB42858]; /*0x7790a5*/
 }

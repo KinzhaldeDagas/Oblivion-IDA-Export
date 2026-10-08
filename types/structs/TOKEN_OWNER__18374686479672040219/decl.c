@@ -1,1 +1,4 @@
-_TOKEN_OWNER
+struct _TOKEN_OWNER
+{
+PSID Owner;
+};

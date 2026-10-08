@@ -1,4 +1,4 @@
-0x863400: push    ecx
+0x863400: push    ecx; Requests the Lighting30 render-pass variant keyed by selector 0x2F through the property's pass-building virtual and returns the resulting depth-pass handle/value. Fallout provides the conventional GetRenderDepthPass label after this Oblivion call shape was established.
 0x863401: mov     eax, [ecx]
 0x863403: mov     eax, [eax+5Ch]
 0x863406: push    0

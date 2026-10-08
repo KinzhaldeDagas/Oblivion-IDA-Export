@@ -58,3 +58,12 @@
 0x4383A4: pop     esi
 0x4383A5: add     esp, 0Ch
 0x4383A8: retn    0Ch
+0x9AC960: lea     ecx, [ebp+4]; void *
+0x9AC963: jmp     sub_4BDDC0
+0x9AC968: mov     edx, [esp+arg_4]
+0x9AC96C: lea     eax, [edx-8]
+0x9AC96F: mov     ecx, [edx-0Ch]
+0x9AC972: xor     ecx, eax
+0x9AC974: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AC979: mov     eax, offset stru_AD95E8
+0x9AC97E: jmp     ___CxxFrameHandler3

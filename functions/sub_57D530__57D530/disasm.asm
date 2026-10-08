@@ -7,9 +7,9 @@
 0x57D542: fild    [esp+4+arg_0]
 0x57D546: push    ecx
 0x57D547: mov     ecx, [ecx+68h]; this
-0x57D54A: fstp    [esp+8+a2]; a3
-0x57D54D: push    1771h; a2
-0x57D552: call    Tile_SetFloat
+0x57D54A: fstp    [esp+8+a2]; value
+0x57D54D: push    1771h; propertyCode
+0x57D552: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x57D557: cmp     esi, 3EBh
 0x57D55D: jnz     short loc_57D56D
 0x57D55F: push    1

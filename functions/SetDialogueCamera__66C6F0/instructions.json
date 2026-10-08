@@ -7,7 +7,7 @@
   },
   {
     "ea": "0x66C6F3",
-    "line": "push    ebp",
+    "line": "push    ebp; float",
     "mnemonic": "push",
     "size": 1
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x66C6FA",
-    "line": "push    esi",
+    "line": "push    esi; float",
     "mnemonic": "push",
     "size": 1
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x66C74B",
-    "line": "push    edi",
+    "line": "push    edi; float",
     "mnemonic": "push",
     "size": 1
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x66C74E",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x66C759",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x66C760",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x66C76B",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x66C774",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x66C7C1",
-    "line": "mov     byte ptr [esp+24h+arg_0], 0",
+    "line": "mov     byte ptr [esp+24h+arg_0], 0; float",
     "mnemonic": "mov",
     "size": 5
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x66C800",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x66C84B",
-    "line": "mov     dword ptr [esp+28h+var_1C+4], edx",
+    "line": "mov     [esp+28h+var_1C+4], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x66C866",
-    "line": "fsub    dword ptr [esp+28h+var_1C+4]",
+    "line": "fsub    [esp+28h+var_1C+4]",
     "mnemonic": "fsub",
     "size": 4
   },
@@ -727,7 +727,7 @@
   },
   {
     "ea": "0x66C8A1",
-    "line": "fstp    dword ptr [esp+28h+var_1C+4]",
+    "line": "fstp    [esp+28h+var_1C+4]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -739,7 +739,7 @@
   },
   {
     "ea": "0x66C8AA",
-    "line": "fmul    dword ptr [esp+28h+var_1C+4]",
+    "line": "fmul    [esp+28h+var_1C+4]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -751,31 +751,31 @@
   },
   {
     "ea": "0x66C8B2",
-    "line": "fstp    [esp+28h+var_1C+4]",
+    "line": "fstp    qword ptr [esp+28h+var_1C+4]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x66C8B6",
-    "line": "call    sub_404C90",
+    "line": "call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x66C8BB",
-    "line": "fdivr   [esp+28h+var_1C+4]",
+    "line": "fdivr   qword ptr [esp+28h+var_1C+4]",
     "mnemonic": "fdivr",
     "size": 4
   },
   {
     "ea": "0x66C8BF",
-    "line": "fstp    dword ptr [esp+28h+var_1C+4]",
+    "line": "fstp    [esp+28h+var_1C+4]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x66C8C3",
-    "line": "fld     dword ptr [esp+28h+var_1C+4]",
+    "line": "fld     [esp+28h+var_1C+4]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -787,13 +787,13 @@
   },
   {
     "ea": "0x66C8CC",
-    "line": "fstp    dword ptr [esp+28h+var_1C+4]",
+    "line": "fstp    [esp+28h+var_1C+4]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x66C8D0",
-    "line": "fld     dword ptr [esp+28h+var_1C+4]",
+    "line": "fld     [esp+28h+var_1C+4]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -811,7 +811,7 @@
   },
   {
     "ea": "0x66C8DF",
-    "line": "fstp    dword ptr [esp+28h+var_1C+4]",
+    "line": "fstp    [esp+28h+var_1C+4]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -823,7 +823,7 @@
   },
   {
     "ea": "0x66C8E8",
-    "line": "fld     dword ptr [esp+28h+var_1C+4]",
+    "line": "fld     [esp+28h+var_1C+4]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -883,13 +883,13 @@
   },
   {
     "ea": "0x66C905",
-    "line": "fstp    dword ptr [esp+28h+var_1C+4]",
+    "line": "fstp    [esp+28h+var_1C+4]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x66C909",
-    "line": "fld     dword ptr [esp+28h+var_1C+4]",
+    "line": "fld     [esp+28h+var_1C+4]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -949,7 +949,7 @@
   },
   {
     "ea": "0x66C922",
-    "line": "fstp    dword ptr [esp+28h+var_1C+4]",
+    "line": "fstp    [esp+28h+var_1C+4]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -985,7 +985,7 @@
   },
   {
     "ea": "0x66C933",
-    "line": "fld     dword ptr [esp+30h+var_1C+4]",
+    "line": "fld     [esp+30h+var_1C+4]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1015,13 +1015,13 @@
   },
   {
     "ea": "0x66C93F",
-    "line": "fstp    dword ptr [esp+30h+var_1C+4]",
+    "line": "fstp    [esp+30h+var_1C+4]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x66C943",
-    "line": "fld     dword ptr [esp+30h+var_1C+4]",
+    "line": "fld     [esp+30h+var_1C+4]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1033,13 +1033,13 @@
   },
   {
     "ea": "0x66C94A",
-    "line": "call    SetCameraFOV_0",
+    "line": "call    SetCameraFOV_0; MoonSugarEffect decode: dialogue camera path calls SetCameraFOV_0 during dialogue framing; reinforces FOV as shared gameplay/UI camera state.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x66C94F",
-    "line": "fld     dword ptr [esp+28h+var_1C+4]",
+    "line": "fld     [esp+28h+var_1C+4]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1051,7 +1051,7 @@
   },
   {
     "ea": "0x66C954",
-    "line": "fstp    [esp+2Ch+var_2C]; float",
+    "line": "fstp    [esp+2Ch+arg0]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1165,7 +1165,7 @@
   },
   {
     "ea": "0x66C991",
-    "line": "mov     dword ptr [esp+28h+var_1C+4], ecx",
+    "line": "mov     [esp+28h+var_1C+4], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1219,13 +1219,13 @@
   },
   {
     "ea": "0x66C9B5",
-    "line": "fsub    dword ptr [esp+28h+var_1C+4]",
+    "line": "fsub    [esp+28h+var_1C+4]",
     "mnemonic": "fsub",
     "size": 4
   },
   {
     "ea": "0x66C9B9",
-    "line": "fstp    [esp+28h+var_C]",
+    "line": "fstp    [esp+28h+var_C]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1243,7 +1243,7 @@
   },
   {
     "ea": "0x66C9C5",
-    "line": "fstp    [esp+28h+var_8]",
+    "line": "fstp    [esp+28h+var_8]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1261,7 +1261,7 @@
   },
   {
     "ea": "0x66C9D1",
-    "line": "fstp    [esp+28h+var_4]",
+    "line": "fstp    [esp+28h+var_4]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1297,19 +1297,19 @@
   },
   {
     "ea": "0x66C9E9",
-    "line": "fstp    [esp+24h+var_1C+4]",
+    "line": "fstp    qword ptr [esp+24h+var_1C+4]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x66C9ED",
-    "line": "call    sub_404C90",
+    "line": "call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x66C9F2",
-    "line": "fdivr   [esp+24h+var_1C+4]",
+    "line": "fdivr   qword ptr [esp+24h+var_1C+4]",
     "mnemonic": "fdivr",
     "size": 4
   },
@@ -1345,7 +1345,7 @@
   },
   {
     "ea": "0x66CA0B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1357,7 +1357,7 @@
   },
   {
     "ea": "0x66CA11",
-    "line": "call    sub_4A9720",
+    "line": "call    Actor_GetAimPitch; Returns Actor rotation X as the native aim-pitch value used by projectile launch, impact, input, dialogue-camera, and magic-projectile paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1387,7 +1387,7 @@
   },
   {
     "ea": "0x66CA24",
-    "line": "fstp    [esp+24h+a4]",
+    "line": "fstp    [esp+24h+a4]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1507,7 +1507,7 @@
   },
   {
     "ea": "0x66CA6E",
-    "line": "fstp    [esp+28h+var_28]; float",
+    "line": "fstp    [esp+28h+arg1]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1675,7 +1675,7 @@
   },
   {
     "ea": "0x66CAC6",
-    "line": "fstp    dword ptr [esp+28h+var_1C+4]",
+    "line": "fstp    [esp+28h+var_1C+4]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1693,7 +1693,7 @@
   },
   {
     "ea": "0x66CAD0",
-    "line": "fstp    [esp+28h+var_14]",
+    "line": "fstp    [esp+28h+var_14]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1711,13 +1711,13 @@
   },
   {
     "ea": "0x66CADA",
-    "line": "fstp    [esp+28h+var_10]",
+    "line": "fstp    [esp+28h+var_10]; float",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x66CADE",
-    "line": "call    sub_683CB0",
+    "line": "call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1747,19 +1747,19 @@
   },
   {
     "ea": "0x66CAF0",
-    "line": "fstp    [esp+24h+var_1C+4]",
+    "line": "fstp    qword ptr [esp+24h+var_1C+4]; float",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x66CAF4",
-    "line": "call    MobileObject_GetZRotation",
+    "line": "call    MobileObject_GetZRotation; Actor/MobileObject vtable +0x1E0 base implementation. Returns the single-precision reference rotation Z field at +0x28; the prior double return type was an x87 decompiler artifact.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x66CAF9",
-    "line": "fsubr   [esp+24h+var_1C+4]",
+    "line": "fsubr   qword ptr [esp+24h+var_1C+4]",
     "mnemonic": "fsubr",
     "size": 4
   },
@@ -1801,13 +1801,13 @@
   },
   {
     "ea": "0x66CB15",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x66CB17",
-    "line": "call    sub_4A9720",
+    "line": "call    Actor_GetAimPitch; Returns Actor rotation X as the native aim-pitch value used by projectile launch, impact, input, dialogue-camera, and magic-projectile paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1849,7 +1849,7 @@
   },
   {
     "ea": "0x66CB2F",
-    "line": "call    sub_5E05F0",
+    "line": "call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1867,19 +1867,19 @@
   },
   {
     "ea": "0x66CB39",
-    "line": "fst     [esp+2Ch+var_28]; int",
+    "line": "fst     [esp+2Ch+arg1]; arg1",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x66CB3D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x66CB3F",
-    "line": "fstp    [esp+2Ch+var_2C]; float",
+    "line": "fstp    [esp+2Ch+arg0]; arg0",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1891,7 +1891,7 @@
   },
   {
     "ea": "0x66CB49",
-    "line": "call    Actor_ProcessAction",
+    "line": "call    Actor_ProcessAction; Per-actor native action state machine. Advances required-note phases, handles AttackBow nock/hold/release lifecycle, constructs ArrowProjectile on release, and dispatches post-shot AMMO consumption.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1915,13 +1915,13 @@
   },
   {
     "ea": "0x66CB5D",
-    "line": "fstp    [esp+24h+a5]",
+    "line": "fstp    [esp+24h+a5]; float",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x66CB61",
-    "line": "call    TESObjectREFR_GetAnimData",
+    "line": "call    TESObjectREFR_GetAnimData; Return active ActorAnimData for an actor reference. For actor/creature refs with process level 0 or 1, return process+0x17C; otherwise tail-call the ExtraAnim lookup on the reference extra list. Exact return type is ActorAnimData*.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1939,7 +1939,7 @@
   },
   {
     "ea": "0x66CB6F",
-    "line": "fstp    [esp+2Ch+var_28]; float",
+    "line": "fstp    [esp+2Ch+arg1]; explicitTimeOrMinusOne",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1957,19 +1957,19 @@
   },
   {
     "ea": "0x66CB79",
-    "line": "fstp    [esp+2Ch+var_2C]; float",
+    "line": "fstp    [esp+2Ch+arg0]; deltaTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x66CB7C",
-    "line": "push    esi; int",
+    "line": "push    esi; ownerActor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x66CB7D",
-    "line": "call    sub_476D10",
+    "line": "call    ActorAnimData_Update; Oblivion ActorAnimData scheduler with exact native ABI: this in ECX plus three 4-byte stack arguments, retn 0x0C. ownerActor is at [EBP+8]; all surveyed callers pass the owning Actor/Player, but the native body never dereferences it, so an interior hook's use of that value is a caller-derived contract. deltaTime at [EBP+0x0C] advances ActorAnimData time +0x94 and sequence offsets. explicitTimeOrMinusOne at [EBP+0x10] uses -1.0 for normal ticking; any other value drives an explicit-time scene update/early return. The function drains deferred KF models, maintains power/idle state, samples five slots, and advances required-note templates (class 4 terminal index 3; class 7 terminal index 4).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1993,7 +1993,7 @@
   },
   {
     "ea": "0x66CB91",
-    "line": "fstp    [esp+2Ch+var_28]; float",
+    "line": "fstp    [esp+2Ch+arg1]; explicitTimeOrMinusOne",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2005,19 +2005,19 @@
   },
   {
     "ea": "0x66CB9B",
-    "line": "fstp    [esp+2Ch+var_2C]; float",
+    "line": "fstp    [esp+2Ch+arg0]; deltaTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x66CB9E",
-    "line": "push    esi; int",
+    "line": "push    esi; ownerActor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x66CB9F",
-    "line": "call    sub_476D10",
+    "line": "call    ActorAnimData_Update; Oblivion ActorAnimData scheduler with exact native ABI: this in ECX plus three 4-byte stack arguments, retn 0x0C. ownerActor is at [EBP+8]; all surveyed callers pass the owning Actor/Player, but the native body never dereferences it, so an interior hook's use of that value is a caller-derived contract. deltaTime at [EBP+0x0C] advances ActorAnimData time +0x94 and sequence offsets. explicitTimeOrMinusOne at [EBP+0x10] uses -1.0 for normal ticking; any other value drives an explicit-time scene update/early return. The function drains deferred KF models, maintains power/idle state, samples five slots, and advances required-note templates (class 4 terminal index 3; class 7 terminal index 4).",
     "mnemonic": "call",
     "size": 5
   },
@@ -2035,7 +2035,7 @@
   },
   {
     "ea": "0x66CBA7",
-    "line": "fstp    [esp+28h+var_28]; a2",
+    "line": "fstp    [esp+28h+arg1]; a2",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -2215,7 +2215,7 @@
   },
   {
     "ea": "0x66CC0F",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2245,13 +2245,13 @@
   },
   {
     "ea": "0x66CC1F",
-    "line": "fstp    [esp+28h+var_28]; float",
+    "line": "fstp    [esp+28h+arg1]; float",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x66CC22",
-    "line": "call    SetCameraFOV",
+    "line": "call    SetCameraFOV; MoonSugarEffect decode: PlayerCharacter SetCameraFOV wrapper writes worldFoV, calls SetCameraFOV_0, then updates particle shader FOV data.",
     "mnemonic": "call",
     "size": 5
   },

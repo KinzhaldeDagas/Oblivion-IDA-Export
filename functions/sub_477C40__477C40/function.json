@@ -1,18 +1,31 @@
 {
-  "callees_count": 26,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x477C40",
+      "0x477DAF"
+    ]
+  ],
+  "chunks_sha256": "e2173ce142c2e63c553bbe5c356e2e4ac884ba4d0a44c8208e88246e6310dc7d",
+  "comment_regular": "Completes an asynchronous AnimIdle KF load. Stores KFModel at +0x08, binds the two actor-specific resources, holds the model reference, and marks phase 1. Completion mode +0x04 values 2/3 process playable queued state (3 also starts action 0x0B); mode 0 performs install-only; unsupported/no-ActorAnimData paths retain or destroy the holder as observed.",
+  "comment_repeatable": "Completes an asynchronous AnimIdle KF load. Stores KFModel at +0x08, binds the two actor-specific resources, holds the model reference, and marks phase 1. Completion mode +0x04 values 2/3 process playable queued state (3 also starts action 0x0B); mode 0 performs install-only; unsupported/no-ActorAnimData paths retain or destroy the holder as observed.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_477C40",
+  "display_name": "AnimIdle_OnKFLoadComplete",
   "end_ea": "0x477DAF",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_477C40",
+  "name": "AnimIdle_OnKFLoadComplete",
   "segment": ".text",
   "sha256": "e2173ce142c2e63c553bbe5c356e2e4ac884ba4d0a44c8208e88246e6310dc7d",
   "size": 367,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x477C40",
+  "total_chunk_size": 367,
   "type": "void __thiscall(int *this, int)",
   "xrefs_from_count": 165,
   "xrefs_to_count": 1

@@ -1,1 +1,5 @@
-PackageEntry
+struct PackageEntry
+{
+TESPackage *package;
+PackageEntry *next;
+};

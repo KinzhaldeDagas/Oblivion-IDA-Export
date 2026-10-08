@@ -1,4 +1,4 @@
-char __cdecl sub_5037B0(
+char __cdecl Cmd_GetFactionRank_Execute(
         ParamInfo *a1,
         UInt8 *a2,
         TESObjectREFR *a4,
@@ -11,9 +11,9 @@ char __cdecl sub_5037B0(
   char result; // al
   UInt16 v9[2]; // [esp+0h] [ebp-4h] BYREF
 
-  *(_DWORD *)v9 = 0;
-  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v9);
-  if ( result )
-    return sub_4F7280((Actor *)a4, *(int *)v9, 0, a7);
-  return result;
+  *(_DWORD *)v9 = 0; /*0x5037da*/
+  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v9); /*0x5037e2*/
+  if ( result ) /*0x5037ec*/
+    return GetFactionRank_Eval((Actor *)a4, *(int *)v9, 0, a7); /*0x5037fe*/
+  return result; /*0x5037f0*/
 }

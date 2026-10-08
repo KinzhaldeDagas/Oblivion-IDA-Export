@@ -9,7 +9,7 @@
 0x6D9E4E: mov     ecx, [esi+10h]
 0x6D9E51: mov     edx, ds:0B3D2E0h[ecx*4]
 0x6D9E58: push    eax
-0x6D9E59: call    edx ; dword_B3D2E0
+0x6D9E59: call    edx ; unk_B3D2E0
 0x6D9E5B: add     esp, 4
 0x6D9E5E: mov     edi, [esp+0Ch+arg_0]
 0x6D9E62: cmp     edi, ebx
@@ -18,7 +18,7 @@
 0x6D9E6A: cmp     ecx, ebx
 0x6D9E6C: jz      short loc_6D9E8A
 0x6D9E6E: mov     eax, [esp+0Ch+arg_8]
-0x6D9E72: mov     dl, ds:byte_B3D3EE[eax]
+0x6D9E72: mov     dl, byte ptr ds:unk_B3D3EE[eax]
 0x6D9E78: mov     [esi+0Ch], edi
 0x6D9E7B: pop     edi
 0x6D9E7C: mov     [esi+14h], dl

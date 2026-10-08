@@ -13,14 +13,14 @@
 0x571E13: mov     esi, ecx
 0x571E15: mov     eax, [esi+10h]
 0x571E18: push    eax
-0x571E19: call    FormHeapFree
+0x571E19: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x571E1E: xor     edi, edi
 0x571E20: mov     eax, edi
 0x571E22: push    eax
 0x571E23: mov     [esi+10h], edi
 0x571E26: mov     [esi+16h], di
 0x571E2A: mov     [esi+14h], di
-0x571E2E: call    FormHeapFree
+0x571E2E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x571E33: mov     [esi+10h], edi
 0x571E36: mov     [esi+16h], di
 0x571E3A: mov     [esi+14h], di
@@ -48,3 +48,16 @@
 0x571E79: pop     esi
 0x571E7A: add     esp, 10h
 0x571E7D: retn
+0x9BDE60: mov     ecx, [ebp-10h]
+0x9BDE63: add     ecx, 0Ch; slot
+0x9BDE66: jmp     NiPointerSlot_Release
+0x9BDE6B: mov     ecx, [ebp-10h]
+0x9BDE6E: add     ecx, 10h; void *
+0x9BDE71: jmp     BSStringT_Clear
+0x9BDE76: mov     edx, [esp+arg_4]
+0x9BDE7A: lea     eax, [edx-0Ch]
+0x9BDE7D: mov     ecx, [edx-10h]
+0x9BDE80: xor     ecx, eax
+0x9BDE82: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BDE87: mov     eax, offset stru_AE76D4
+0x9BDE8C: jmp     ___CxxFrameHandler3

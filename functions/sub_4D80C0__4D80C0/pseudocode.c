@@ -1,37 +1,38 @@
-void __thiscall sub_4D80C0(_DWORD *this, char a2)
+// Register the ExtraLight-backed NiLight in the native full-light list. Retail direct callers use ordinary ExtraLight; registration explicitly calls ShadowSceneLight_SetPerSourceProjectorMode(..., false), clears renderGateOverride_120, and copies falloff/FOV. It does not read TESObjectLIGH::lightFlags_7C, so Construction Set 'Spot Light' (0x200) and 'Spot Shadow' (0x400) labels do not establish an active retail projected-shadow branch here.
+void __thiscall TESObjectREFR_RegisterAttachedLightWithShadowScene(TESObjectREFR *self, bool useSpellEffectExtraLight)
 {
-  int v3; // eax
-  ExtraDataList *v4; // ecx
-  BSExtraDataVtbl *v5; // eax
+  TESForm::FormFlags flags; // eax
+  ExtraDataList *p_baseExtraList; // ecx
+  BSExtraDataVtbl *SpellEffectLight; // eax
   void (__thiscall *Destructor)(BSExtraData *); // eax
-  _DWORD *ShadowSceneNode; // eax
-  ShadowSceneLight *v8; // esi
-  int v9; // edi
-  int v10; // [esp-Ch] [ebp-10h]
+  ShadowSceneNode_DecodedLayout *ShadowSceneNode; // eax
+  ShadowSceneLight_DecodedLayout *FullLightForSource; // esi
+  TESForm *v9; // edi
+  void (__thiscall *v10)(BSExtraData *); // [esp-Ch] [ebp-10h]
 
-  v3 = *(this + 2);
-  if ( (v3 & 0x20) == 0 && (v3 & 0x800) == 0 )
+  flags = self->member.super.flags; /*0x4d80c3*/
+  if ( (flags & 0x20) == 0 && (flags & 0x800) == 0 ) /*0x4d80d5*/
   {
-    v4 = (ExtraDataList *)(this + 0x11);
-    if ( a2 )
-      v5 = sub_41E670(v4);
+    p_baseExtraList = &self->member.baseExtraList; /*0x4d80dc*/
+    if ( useSpellEffectExtraLight ) /*0x4d80df*/
+      SpellEffectLight = ExtraDataList_GetSpellEffectLight(p_baseExtraList); /*0x4d80e1*/
     else
-      v5 = sub_41E650(v4);
-    if ( v5 )
+      SpellEffectLight = ExtraDataList_GetLight(p_baseExtraList); /*0x4d80e8*/
+    if ( SpellEffectLight ) /*0x4d80ef*/
     {
-      Destructor = v5->Destructor;
-      if ( Destructor )
+      Destructor = SpellEffectLight->Destructor; /*0x4d80f1*/
+      if ( Destructor ) /*0x4d80f5*/
       {
-        v10 = (int)Destructor;
-        ShadowSceneNode = (_DWORD *)GetShadowSceneNode(0);
-        v8 = sub_7C6AE0(ShadowSceneNode, v10, 0);
-        v9 = (*(int (__thiscall **)(_DWORD *))(*this + 0x170))(this);
-        if ( v9 )
+        v10 = Destructor; /*0x4d80fa*/
+        ShadowSceneNode = (ShadowSceneNode_DecodedLayout *)GetShadowSceneNode(0); /*0x4d80fd*/
+        FullLightForSource = ShadowSceneNode_FindOrCreateFullLightForSource(ShadowSceneNode, v10, 0); /*0x4d810e*/
+        v9 = self->vtbl->GetBaseForm(self); /*0x4d811a*/
+        if ( v9 ) /*0x4d811e*/
         {
-          sub_7D3370((int)v8, 0);
-          *((_BYTE *)v8 + 0x120) = 0;
-          *((float *)v8 + 0x4A) = *(float *)(v9 + 0x80);
-          *((float *)v8 + 0x49) = *(float *)(v9 + 0x84);
+          ShadowSceneLight_SetPerSourceProjectorMode((int)FullLightForSource, 0);// Retail reference-light registration explicitly calls ShadowSceneLight_SetPerSourceProjectorMode(..., false). No TESObjectLIGH flag test precedes this constant. /*0x4d8124*/
+          FullLightForSource->renderGateOverride_120 = 0;// Retail reference-light registration clears ShadowSceneLight::renderGateOverride_120; TESObjectLIGH editor bits 0x200/0x400 are not consulted in this decoded path. /*0x4d8129*/
+          FullLightForSource->falloffExponent_128 = *(float *)&v9[5].member.flags;// Copy the Oblivion TESObjectLIGH DATA falloff exponent at base-form +0x80 into ShadowSceneLight falloffExponent_128. The game executable proves the copy/default path; the Oblivion Construction Set Light dialog labels the corresponding DATA field 'Falloff Exponent'. /*0x4d8136*/
+          FullLightForSource->projectorFovDegrees_124 = *(float *)&v9[5].member.refID; /*0x4d8142*/
         }
       }
     }

@@ -1,4 +1,4 @@
-0x68B200: push    esi
+0x68B200: push    esi; Verified for kind 1 allocates a 12-byte NiPoint3 when payload is null and copies xyz from the supplied position; this record owns that copy until cleared.
 0x68B201: mov     esi, ecx
 0x68B203: cmp     byte ptr [esi+4], 1
 0x68B207: jnz     short loc_68B230
@@ -8,7 +8,7 @@
 0x68B210: call    FormHeapAlloc
 0x68B215: add     esp, 4
 0x68B218: mov     [esi], eax
-0x68B21A: mov     ecx, [esp+4+arg_0]
+0x68B21A: mov     ecx, [esp+4+position]
 0x68B21E: mov     edx, [ecx]
 0x68B220: mov     eax, [esi]
 0x68B222: mov     [eax], edx

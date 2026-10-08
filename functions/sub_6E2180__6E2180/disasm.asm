@@ -1,4 +1,4 @@
-0x6E2180: sub     esp, 0Ch
+0x6E2180: sub     esp, 0Ch; Oblivion NiTransformData binary load. In rotation, translation, scale order, reads a 32-bit count; for nonzero count reads numeric type, allocates through that channel/type factory, reads keys using the registered stride/reader, clamps count to 0xFFFF, and transfers the array to the corresponding ownership setter.
 0x6E2183: push    ebx
 0x6E2184: push    ebp
 0x6E2185: push    esi
@@ -40,7 +40,7 @@
 0x6E21F3: push    edx
 0x6E21F4: push    esi
 0x6E21F5: mov     byte ptr [esp+38h+var_4], cl
-0x6E21F9: call    eax ; dword_B3D0B8
+0x6E21F9: call    eax ; unk_B3D0B8
 0x6E21FB: mov     ecx, [esp+38h+a2]
 0x6E21FF: mov     edx, ds:0B3D440h[edi*4]
 0x6E2206: mov     ebx, eax
@@ -48,21 +48,21 @@
 0x6E220C: push    eax
 0x6E220D: push    ecx
 0x6E220E: push    ebx
-0x6E220F: call    edx ; dword_B3D440
+0x6E220F: call    edx ; unk_B3D440
 0x6E2211: mov     eax, 0FFFFh
 0x6E2216: add     esp, 28h
 0x6E2219: cmp     [esp+1Ch+a2], eax
 0x6E221D: jbe     short loc_6E2230
 0x6E221F: push    offset aTransformDataL; "Transform data loading has more than 65"...
 0x6E2224: mov     [esp+20h+a2], eax
-0x6E2228: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x6E2228: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x6E222D: add     esp, 4
 0x6E2230: mov     eax, [esp+1Ch+a2]
 0x6E2234: mov     ecx, [esp+1Ch+var_C]
 0x6E2238: push    edi
 0x6E2239: push    eax
 0x6E223A: push    ebx
-0x6E223B: call    sub_6E1E90
+0x6E223B: call    NiTransformData_SetRotationKeys; Oblivion NiTransformData rotation-key ownership setter. Destroys the previous +0x20 array via the destructor table indexed by type +0x10; type 4 first destroys its three nested scalar-axis tracks. Installs count +8, pointer +0x20, type +0x10, and table-derived stride +0x1C, or clears all four fields for null/zero input.
 0x6E2240: mov     eax, [esi+21Ch]
 0x6E2246: push    1
 0x6E2248: lea     ecx, [esp+20h+var_4]
@@ -90,12 +90,12 @@
 0x6E2282: call    eax
 0x6E2284: mov     edx, [esp+30h+a2]
 0x6E2288: mov     edi, [esp+30h+var_8]
-0x6E228C: mov     cl, ds:byte_B3D3EE[edi]
+0x6E228C: mov     cl, byte ptr ds:unk_B3D3EE[edi]
 0x6E2292: mov     eax, ds:0B3D0A0h[edi*4]
 0x6E2299: push    edx
 0x6E229A: push    esi
 0x6E229B: mov     byte ptr [esp+38h+var_4], cl
-0x6E229F: call    eax ; dword_B3D0A0
+0x6E229F: call    eax ; unk_B3D0A0
 0x6E22A1: mov     ecx, [esp+38h+a2]
 0x6E22A5: mov     edx, ds:0B3D428h[edi*4]
 0x6E22AC: mov     ebx, eax
@@ -110,14 +110,14 @@
 0x6E22C3: jbe     short loc_6E22D6
 0x6E22C5: push    offset aTransformDat_0; "Transform data loading has more than 65"...
 0x6E22CA: mov     [esp+20h+a2], eax
-0x6E22CE: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x6E22CE: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x6E22D3: add     esp, 4
 0x6E22D6: mov     eax, [esp+1Ch+a2]
 0x6E22DA: mov     ecx, [esp+1Ch+var_C]
 0x6E22DE: push    edi
 0x6E22DF: push    eax
 0x6E22E0: push    ebx
-0x6E22E1: call    sub_6E1F00
+0x6E22E1: call    NiTransformData_SetTranslationKeys; Oblivion NiTransformData translation-key ownership setter. Destroys previous keys +0x24 through the destructor table indexed by type +0x14, then installs count +0x0A, pointer +0x24, type +0x14, and table-derived stride +0x1D. Null pointer or zero count clears the channel fields.
 0x6E22E6: mov     eax, [esi+21Ch]
 0x6E22EC: push    1
 0x6E22EE: lea     ecx, [esp+20h+var_4]
@@ -150,7 +150,7 @@
 0x6E233F: push    edx
 0x6E2340: push    esi
 0x6E2341: mov     byte ptr [esp+38h+var_4], cl
-0x6E2345: call    eax ; dword_B3D088
+0x6E2345: call    eax ; unk_B3D088
 0x6E2347: mov     ecx, [esp+38h+a2]
 0x6E234B: mov     edx, ds:0B3D410h[edi*4]
 0x6E2352: mov     esi, eax
@@ -158,21 +158,21 @@
 0x6E2358: push    eax
 0x6E2359: push    ecx
 0x6E235A: push    esi
-0x6E235B: call    edx ; dword_B3D410
+0x6E235B: call    edx ; unk_B3D410
 0x6E235D: mov     eax, 0FFFFh
 0x6E2362: add     esp, 28h
 0x6E2365: cmp     [esp+1Ch+a2], eax
 0x6E2369: jbe     short loc_6E237C
 0x6E236B: push    offset aTransformDat_1; "Transform data loading has more than 65"...
 0x6E2370: mov     [esp+20h+a2], eax
-0x6E2374: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x6E2374: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x6E2379: add     esp, 4
 0x6E237C: mov     eax, [esp+1Ch+a2]
 0x6E2380: mov     ecx, [esp+1Ch+var_C]
 0x6E2384: push    edi
 0x6E2385: push    eax
 0x6E2386: push    esi
-0x6E2387: call    sub_6E1F60
+0x6E2387: call    NiTransformData_SetScaleKeys; Oblivion NiTransformData scale-key ownership setter. Destroys previous keys +0x28 through the destructor table indexed by type +0x18, then installs count +0x0C, pointer +0x28, type +0x18, and table-derived stride +0x1E. Null pointer or zero count clears the channel fields.
 0x6E238C: pop     edi
 0x6E238D: pop     esi
 0x6E238E: pop     ebp

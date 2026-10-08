@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x65FAD0",
+      "0x65FB28"
+    ]
+  ],
+  "chunks_sha256": "e6d949f8b9b100e932beaf995eb839ec6ad3d8c6667d06b11c5dceca44815384",
+  "comment_regular": "Return the precomputed required-use threshold for a TESSkill. Null skill, absent base class, or a non-native actor value falls back to 1.0; otherwise read requiredSkillExp[0..20]. Major/minor and specialization multipliers are already baked into this array.",
+  "comment_repeatable": "Return the precomputed required-use threshold for a TESSkill. Null skill, absent base class, or a non-native actor value falls back to 1.0; otherwise read requiredSkillExp[0..20]. Major/minor and specialization multipliers are already baked into this array.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_65FAD0",
+  "display_name": "Player_GetRequiredSkillProgress",
   "end_ea": "0x65FB28",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_65FAD0",
+  "name": "Player_GetRequiredSkillProgress",
   "segment": ".text",
   "sha256": "e6d949f8b9b100e932beaf995eb839ec6ad3d8c6667d06b11c5dceca44815384",
   "size": 88,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x65FAD0",
-  "type": "double __thiscall(Actor *this, int)",
+  "total_chunk_size": 88,
+  "type": "float __thiscall(PlayerCharacter *this, TESSkill_RecordView *skill)",
   "xrefs_from_count": 36,
   "xrefs_to_count": 3
 }

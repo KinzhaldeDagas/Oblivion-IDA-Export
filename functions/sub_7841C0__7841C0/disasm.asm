@@ -1,7 +1,7 @@
-0x7841C0: mov     edx, [esp+arg_0]
-0x7841C4: mov     ecx, [esp+arg_4]
+0x7841C0: mov     edx, [esp+first]; Oblivion 1.2.0.416: backward-copies six-dword records ending at destinationEnd and returns the new destination start.
+0x7841C4: mov     ecx, [esp+last]
 0x7841C8: cmp     edx, ecx
-0x7841CA: mov     eax, [esp+arg_8]
+0x7841CA: mov     eax, [esp+destinationEnd]
 0x7841CE: jz      short locret_784200
 0x7841D0: push    esi
 0x7841D1: mov     esi, [ecx-18h]

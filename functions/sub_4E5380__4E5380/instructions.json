@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E5380",
-    "line": "push    ebp",
+    "line": "push    ebp; Verified insertion into TESPathGrid.pointsByCell (+0x44), which is a per-PathGrid 512-unit X/Y spatial-bucket map despite the legacy member/type spelling. It derives the packed key from the node's NiPoint3, finds or creates a BSSimpleList header, then pushes the point pointer. The graph-chunk loader calls this for each loaded point; FindPointByPositionInCell uses the same key.",
     "mnemonic": "push",
     "size": 1
   },
@@ -49,25 +49,25 @@
   },
   {
     "ea": "0x4E538E",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E5390",
-    "line": "call    sub_4BEF40",
+    "line": "call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E5395",
-    "line": "push    eax",
+    "line": "push    eax; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E5396",
-    "line": "call    sub_4E5320",
+    "line": "call    TESPathGrid_PackSpatialBucketKey; Verified spatial-index key encoder used by both insertion and lookup. Converts world X/Y to signed integers, arithmetic-shifts each by 9 (512 world units), accepts bucket coordinates only in [-0x7FFF, 0x7FFE], and packs X into the high halfword and Y into the low halfword. Z is ignored. Out-of-range input returns 0, which also encodes bucket (0,0); handling/significance of that collision is Unknown. This is not the 4096-unit exterior cell-coordinate key. Fallout NavMeshInfoMap uses a separate global registry keyed by NavMeshInfo IDs and nested worldspace/cell keys (e.g. Fallout constructor 0x824A7D30), so that system is architectural context only and does not establish this Oblivion behavior.",
     "mnemonic": "call",
     "size": 5
   },

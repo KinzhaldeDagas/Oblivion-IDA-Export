@@ -7,11 +7,10 @@
 0x44CFA1: mov     ecx, ds:0B06140h
 0x44CFA7: xor     eax, eax
 0x44CFA9: test    ecx, ecx
-0x44CFAB: mov     [esp+114h+var_110], 0
+0x44CFAB: mov     [esp+114h+valueOut], 0
 0x44CFB3: jbe     short loc_44CFD1
 0x44CFB5: mov     edx, ds:0B06144h
 0x44CFBB: jmp     short loc_44CFC0
-0x44CFBD: align 10h
 0x44CFC0: cmp     dword ptr [edx+eax*4], 0
 0x44CFC4: jnz     loc_44D093
 0x44CFCA: add     eax, 1
@@ -19,21 +18,21 @@
 0x44CFCF: jb      short loc_44CFC0
 0x44CFD1: xor     eax, eax
 0x44CFD3: test    eax, eax
-0x44CFD5: mov     [esp+114h+var_114], eax
+0x44CFD5: mov     [esp+114h+position], eax
 0x44CFD8: jz      loc_44D31E
 0x44CFDE: push    ebx
 0x44CFDF: push    ebp
 0x44CFE0: push    esi
 0x44CFE1: push    edi
-0x44CFE2: lea     eax, [esp+124h+var_110]
-0x44CFE6: push    eax
-0x44CFE7: lea     ecx, [esp+128h+var_10C]
-0x44CFEB: push    ecx
-0x44CFEC: lea     edx, [esp+12Ch+var_114]
-0x44CFF0: push    edx
-0x44CFF1: mov     ecx, offset TESForm_FormIDMap
-0x44CFF6: call    sub_452600
-0x44CFFB: mov     esi, [esp+124h+var_110]
+0x44CFE2: lea     eax, [esp+124h+valueOut]
+0x44CFE6: push    eax; valueOut
+0x44CFE7: lea     ecx, [esp+128h+keyOut]
+0x44CFEB: push    ecx; keyOut
+0x44CFEC: lea     edx, [esp+12Ch+position]
+0x44CFF0: push    edx; position
+0x44CFF1: mov     ecx, offset TESForm_FormIDMap; self
+0x44CFF6: call    NiTMap_U32Pointer_GetNextEntry
+0x44CFFB: mov     esi, [esp+124h+valueOut]
 0x44CFFF: test    esi, esi
 0x44D001: jz      loc_44D30F
 0x44D007: push    0; int
@@ -150,7 +149,7 @@
 0x44D161: jnz     short loc_44D177
 0x44D163: jmp     loc_44D30F
 0x44D168: mov     ecx, esi
-0x44D16A: call    TESClass_IsPlayable
+0x44D16A: call    TESClass_IsPlayable; TESClass_IsPlayable reads classFlags at +0x60 bit 0.
 0x44D16F: test    al, al
 0x44D171: jz      loc_44D30F
 0x44D177: mov     eax, [esi]
@@ -295,7 +294,7 @@
 0x44D302: push    offset aIconSMissingFo; "Icon '%s' missing for %s '%s'."
 0x44D307: call    PrintError
 0x44D30C: add     esp, 10h
-0x44D30F: cmp     [esp+124h+var_114], 0
+0x44D30F: cmp     [esp+124h+position], 0
 0x44D314: jnz     loc_44CFE2
 0x44D31A: pop     edi
 0x44D31B: pop     esi

@@ -1,13 +1,13 @@
-0x781170: sub     esp, 11Ch
+0x781170: sub     esp, 11Ch; Oblivion-authoritative HLSL compiler path: resolves the shader file, calls D3DXCompileShaderFromFileA with entry/profile and creator flags, returns a heap copy of bytecode plus the optional constant table, and reports compiler diagnostics.
 0x781176: mov     eax, ds:0B30AACh
 0x78117B: xor     eax, esp
 0x78117D: mov     [esp+11Ch+var_4], eax
 0x781184: mov     eax, [esp+11Ch+arg_8]
 0x78118B: push    ebx
-0x78118C: mov     ebx, dword ptr [esp+120h+ArgList]
+0x78118C: mov     ebx, [esp+120h+ArgList]
 0x781193: test    ebx, ebx
 0x781195: push    ebp
-0x781196: mov     ebp, dword ptr [esp+124h+arg_4]
+0x781196: mov     ebp, [esp+124h+arg_4]
 0x78119D: push    esi
 0x78119E: mov     esi, [esp+128h+arg_C]
 0x7811A5: push    edi; ArgList
@@ -103,7 +103,7 @@
 0x7812AB: call    sub_738460
 0x7812B0: add     esp, 14h
 0x7812B3: push    esi
-0x7812B4: call    FormHeapFree
+0x7812B4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7812B9: mov     eax, [esp+130h+var_118]
 0x7812BD: add     esp, 4
 0x7812C0: test    eax, eax
@@ -129,11 +129,11 @@
 0x7812EF: add     esp, 4
 0x7812F2: push    eax
 0x7812F3: call    edx
-0x7812F5: push    edi; Size
-0x7812F6: push    eax; Src
+0x7812F5: push    edi; byteCount
+0x7812F6: push    eax; source
 0x7812F7: mov     eax, [esi]
-0x7812F9: push    eax; Dst
-0x7812FA: call    _memcpy
+0x7812F9: push    eax; destination
+0x7812FA: call    _memcpy;
 0x7812FF: mov     eax, [esp+138h+var_118]
 0x781303: mov     ecx, [eax]
 0x781305: mov     edx, [ecx+8]

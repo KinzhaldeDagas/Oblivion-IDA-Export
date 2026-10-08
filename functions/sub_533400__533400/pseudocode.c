@@ -1,5 +1,5 @@
-int __thiscall sub_533400(_WORD *this)
+void __thiscall sub_533400(_WORD *this)
 {
-  sub_532EF0((int)this);
-  return sub_477EF0(this + 4);
+  sub_532EF0((int)this); /*0x533403*/
+  NiTObjectArray_ClearAndRelease(this + 4); /*0x53340c*/
 }

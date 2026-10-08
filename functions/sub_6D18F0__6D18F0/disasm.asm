@@ -3,7 +3,7 @@
 0x6D18F2: mov     edi, [esp+8+arg_0]
 0x6D18F6: push    edi
 0x6D18F7: mov     esi, ecx
-0x6D18F9: call    sub_6EC5C0
+0x6D18F9: call    j_NiSingleInterpController_IsEqual
 0x6D18FE: test    al, al
 0x6D1900: jnz     short loc_6D1907
 0x6D1902: pop     edi

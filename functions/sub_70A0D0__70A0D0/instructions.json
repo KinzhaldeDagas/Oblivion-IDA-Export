@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x70A0D0",
-    "line": "push    ebx",
+    "line": "push    ebx; NiNode virtual UpdateDownwardPass (+0x60). Optionally updates this node's properties/controllers, invokes virtual UpdateWorldTransform (+0x74), clears its world-bound radius, recursively updates every non-null child in +0xB0/count +0xB6, and copies/merges nonempty child spheres into the node bound.",
     "mnemonic": "push",
     "size": 1
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x70A0E1",
-    "line": "push    1; char",
+    "line": "push    1; updateProperties",
     "mnemonic": "push",
     "size": 2
   },
@@ -61,13 +61,13 @@
   },
   {
     "ea": "0x70A0E4",
-    "line": "fstp    [esp+14h+var_14]; float",
+    "line": "fstp    [esp+14h+applicationTime]; applicationTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x70A0E7",
-    "line": "call    sub_47C930",
+    "line": "call    NiAVObject_UpdatePropertiesAndControllers; Update one NiAVObject's property controllers and attached NiTimeController chain. If requested, walk the property list at NiAVObject+0x9C and invoke property virtual +0x50 when its controller pointer is non-null. Always walk NiObjectNET.controller at object+0x0C through NiTimeController.next at +0x34 and invoke controller virtual Update +0x54 with applicationTime. No Active-bit prefilter occurs here: NiTimeController.flags+0x08 bit 3 only affects time-cache logic inside the controller. External Crossbow consequence after this Oblivion decode: temporarily clearing the base Active bit inside an already-entered morph hook will not by itself stop the next scene traversal, but pointer discovery still cannot make a graph that is not traversed dispatch Update.",
     "mnemonic": "call",
     "size": 5
   },
@@ -136,12 +136,6 @@
     "line": "jmp     short loc_70A110",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x70A108",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
   },
   {
     "ea": "0x70A110",
@@ -349,7 +343,7 @@
   },
   {
     "ea": "0x70A169",
-    "line": "call    sub_72A6B0",
+    "line": "call    NiSphere_Merge; Merges a source NiSphere into the destination sphere. Preserves a containing destination, copies a containing source, otherwise computes the minimal enclosing center/radius. NiNode_UpdateDownwardPass uses it to aggregate nonempty child world bounds.",
     "mnemonic": "call",
     "size": 5
   },

@@ -23,14 +23,14 @@
 0x85AD0A: mov     [esp+18h+var_4], 0
 0x85AD12: jz      short loc_85AD31
 0x85AD14: movzx   ecx, byte ptr [esi]
-0x85AD17: mov     edx, [esp+18h+arg_0]
+0x85AD17: mov     edx, [esp+18h+vtable]
 0x85AD1B: push    0
-0x85AD1D: push    0
-0x85AD1F: push    ecx
-0x85AD20: push    18Fh
-0x85AD25: push    edx
-0x85AD26: push    eax
-0x85AD27: call    sub_7E2370
+0x85AD1D: push    0; lightCount
+0x85AD1F: push    ecx; byte6
+0x85AD20: push    18Fh; selector
+0x85AD25: push    edx; geometry
+0x85AD26: push    eax; outPass
+0x85AD27: call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.
 0x85AD2C: add     esp, 18h
 0x85AD2F: jmp     short loc_85AD33
 0x85AD31: xor     eax, eax
@@ -39,7 +39,7 @@
 0x85AD3B: push    eax
 0x85AD3C: lea     ecx, [edi+28h]
 0x85AD3F: mov     [esp+1Ch+var_4], 0FFFFFFFFh
-0x85AD47: call    sub_5B1E20
+0x85AD47: call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.
 0x85AD4C: mov     byte ptr [esi], 0
 0x85AD4F: mov     ecx, [esp+18h+var_C]
 0x85AD53: mov     large fs:0, ecx
@@ -70,14 +70,14 @@
 0x85ADA1: mov     [esp+18h+var_4], 1
 0x85ADA9: jz      short loc_85ADC8
 0x85ADAB: movzx   edx, byte ptr [esi]
-0x85ADAE: mov     ecx, [esp+18h+arg_0]
+0x85ADAE: mov     ecx, [esp+18h+vtable]
 0x85ADB2: push    0
-0x85ADB4: push    0
-0x85ADB6: push    edx
-0x85ADB7: push    18Eh
-0x85ADBC: push    ecx
-0x85ADBD: push    eax
-0x85ADBE: call    sub_7E2370
+0x85ADB4: push    0; lightCount
+0x85ADB6: push    edx; byte6
+0x85ADB7: push    18Eh; selector
+0x85ADBC: push    ecx; geometry
+0x85ADBD: push    eax; outPass
+0x85ADBE: call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.
 0x85ADC3: add     esp, 18h
 0x85ADC6: jmp     short loc_85ADCA
 0x85ADC8: xor     eax, eax
@@ -86,7 +86,7 @@
 0x85ADCF: lea     ecx, [edi+28h]
 0x85ADD2: mov     [esp+1Ch+var_4], 0FFFFFFFFh
 0x85ADDA: mov     [esp+1Ch+arg_8], eax
-0x85ADDE: call    sub_5B1E20
+0x85ADDE: call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.
 0x85ADE3: mov     byte ptr [esi], 0
 0x85ADE6: mov     ecx, [esp+18h+var_C]
 0x85ADEA: mov     large fs:0, ecx
@@ -106,3 +106,20 @@
 0x85AE16: pop     esi
 0x85AE17: add     esp, 0Ch
 0x85AE1A: retn    14h
+0x9D3AB0: mov     eax, [ebp+0Ch]
+0x9D3AB3: push    eax
+0x9D3AB4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D3AB9: pop     ecx
+0x9D3ABA: retn
+0x9D3ABB: mov     eax, [ebp+0Ch]
+0x9D3ABE: push    eax
+0x9D3ABF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D3AC4: pop     ecx
+0x9D3AC5: retn
+0x9D3AC6: mov     edx, [esp+passCount]
+0x9D3ACA: lea     eax, [edx-8]
+0x9D3ACD: mov     ecx, [edx-0Ch]
+0x9D3AD0: xor     ecx, eax
+0x9D3AD2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D3AD7: mov     eax, offset stru_AFBD98
+0x9D3ADC: jmp     ___CxxFrameHandler3

@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x4212F0",
+      "0x421334"
+    ]
+  ],
+  "chunks_sha256": "2410de59d7c7701074e4cf6836a2544404be18d7a4f560da40ffb7ddb1a1c287",
+  "comment_regular": "If saved-attached-animation data exists, frees it and replaces it with a six-byte initialized {4,0,0} word buffer. Observed in Oblivion door default-open/open/close paths.",
+  "comment_repeatable": "If saved-attached-animation data exists, frees it and replaces it with a six-byte initialized {4,0,0} word buffer. Observed in Oblivion door default-open/open/close paths.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_4212F0",
+  "display_name": "ExtraDataList_ResetSavedAttachedAnimationData",
   "end_ea": "0x421334",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4212F0",
+  "name": "ExtraDataList_ResetSavedAttachedAnimationData",
   "segment": ".text",
   "sha256": "2410de59d7c7701074e4cf6836a2544404be18d7a4f560da40ffb7ddb1a1c287",
   "size": 68,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4212F0",
-  "type": "BSExtraData *__usercall@<eax>(ExtraDataList *this@<ecx>, char@<bpl>)",
+  "total_chunk_size": 68,
+  "type": "void __thiscall(ExtraDataList *this)",
   "xrefs_from_count": 28,
   "xrefs_to_count": 3
 }

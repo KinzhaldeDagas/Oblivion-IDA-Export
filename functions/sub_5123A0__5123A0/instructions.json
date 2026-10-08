@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x5123D4",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x512413",
-    "line": "call    sub_5E6B40",
+    "line": "call    Actor_IsInDialogueProcedure; 3DTheft 2026-05-17: AddScriptPackage skips runtime package handoff if Actor_IsInDialoguePackage is true.",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x51243C",
-    "line": "call    Script_AddEventToExtraScript",
+    "line": "call    Script_AddEventToExtraScript; 3DTheft decode: AddScriptPackage queues event mask 0x800 for the actor's previous editor package when present.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x512452",
-    "line": "call    Script_AddEventToExtraScript",
+    "line": "call    Script_AddEventToExtraScript; 3DTheft decode: AddScriptPackage queues event mask 0x200 for the new script package before handoff.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x512464",
-    "line": "call    sub_5672A0",
+    "line": "call    sub_5672A0; 3DTheft decode: TESPackage procedure-array resolver is a mutator. It writes TESPackage+0x18/procedureArrayIndex directly; callers should not use EAX as the row result.",
     "mnemonic": "call",
     "size": 5
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x51247F",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x51248F",
-    "line": "call    sub_4D7A20",
+    "line": "call    TESObjectREFR_SetStartLocation; 3DTheft decode: AddScriptPackage records ExtraStartingPosition for the actor via TESObjectREFR::RecordStartLocation before package handoff.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x51249A",
-    "line": "call    sub_5660C0",
+    "line": "call    sub_5660C0; 3DTheft decode: AddScriptPackage sets package flag 0x4000 through TESPackage_SetScriptPackageFlag before Actor_AddPackage_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -535,13 +535,13 @@
   },
   {
     "ea": "0x5124AA",
-    "line": "call    Actor_AddPackage?",
+    "line": "call    Actor_AddPackage?; 3DTheft decode: AddScriptPackage hands off with Actor_AddPackage_(actor, package, setCurrent=0, markDynamic=0). Use this for external script-style runtime package assignment.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5124AF",
-    "line": "mov     ecx, [esi+58h]",
+    "line": "mov     ecx, [esi+58h]; 3DTheft decode: after Actor_AddPackage_, AddScriptPackage only enters the time/process refresh block for non-high process levels; high process level 0 does not call Actor::EvaluatePackage here.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x5124C8",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x51250A",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -793,19 +793,19 @@
   },
   {
     "ea": "0x51251C",
-    "line": "push    0",
+    "line": "push    0; relativeTo",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x51251E",
-    "line": "push    0",
+    "line": "push    0; insertRelative",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x512520",
-    "line": "push    0",
+    "line": "push    0; append",
     "mnemonic": "push",
     "size": 2
   },
@@ -817,25 +817,25 @@
   },
   {
     "ea": "0x512524",
-    "line": "push    eax",
+    "line": "push    eax; processLevel",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x512525",
-    "line": "push    esi",
+    "line": "push    esi; object",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x512526",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x51252B",
-    "line": "call    sub_673A90",
+    "line": "call    ActorProcessManager_AddMobileObject; Generic ActorProcessManager insertion. Selects process-level collection 0..3, silently returns if object->GetProcessLevel() does not match, then inserts with ordering controls. Returns void; there is no insertion-success result. Used for actors, load/resurrection paths, and projectiles.",
     "mnemonic": "call",
     "size": 5
   },

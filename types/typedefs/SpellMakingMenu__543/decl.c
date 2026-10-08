@@ -1,1 +1,1 @@
-SpellMakingMenu
+struct SpellMakingMenu;

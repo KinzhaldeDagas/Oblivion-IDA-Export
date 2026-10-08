@@ -1,1 +1,20 @@
-_D3DKMT_QUERYRESULT_PREEMPTION_ATTEMPT_RESULT
+enum _D3DKMT_QUERYRESULT_PREEMPTION_ATTEMPT_RESULT : __int32
+{
+D3DKMT_PreemptionAttempt = 0x0,
+D3DKMT_PreemptionAttemptSuccess = 0x1,
+D3DKMT_PreemptionAttemptMissNoCommand = 0x2,
+D3DKMT_PreemptionAttemptMissNotEnabled = 0x3,
+D3DKMT_PreemptionAttemptMissNextFence = 0x4,
+D3DKMT_PreemptionAttemptMissPagingCommand = 0x5,
+D3DKMT_PreemptionAttemptMissSplittedCommand = 0x6,
+D3DKMT_PreemptionAttemptMissFenceCommand = 0x7,
+D3DKMT_PreemptionAttemptMissRenderPendingFlip = 0x8,
+D3DKMT_PreemptionAttemptMissNotMakingProgress = 0x9,
+D3DKMT_PreemptionAttemptMissLessPriority = 0xA,
+D3DKMT_PreemptionAttemptMissRemainingQuantum = 0xB,
+D3DKMT_PreemptionAttemptMissRemainingPreemptionQuantum = 0xC,
+D3DKMT_PreemptionAttemptMissAlreadyPreempting = 0xD,
+D3DKMT_PreemptionAttemptMissGlobalBlock = 0xE,
+D3DKMT_PreemptionAttemptMissAlreadyRunning = 0xF,
+D3DKMT_PreemptionAttemptStatisticsMax = 0x10,
+};

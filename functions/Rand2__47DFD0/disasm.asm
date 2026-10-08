@@ -1,4 +1,4 @@
-0x47DFD0: cmp     byte ptr ds:0B069C3h, 0
+0x47DFD0: cmp     byte ptr ds:0B069C3h, 0; Engine RNG range helper: returns min + (max-min)*rand()/0x7FFF after lazy time seed.
 0x47DFD7: jz      short loc_47DFF0
 0x47DFD9: push    0; Time
 0x47DFDB: call    __time64

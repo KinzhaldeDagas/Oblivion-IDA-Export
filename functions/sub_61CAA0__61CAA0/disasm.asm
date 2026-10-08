@@ -14,7 +14,7 @@
 0x61CACD: fnstsw  ax
 0x61CACF: test    ah, 1
 0x61CAD2: jz      loc_61CBF3
-0x61CAD8: call    sub_615980
+0x61CAD8: call    CombatController_GetCachedTargetSurfaceDistance; Returns CombatController cached target surface distance at +0x184, computing it once when negative. The inherited EDI low-byte input belongs to this private compiler ABI and is deliberately retained.
 0x61CADD: fld     [esp+4+arg_8]
 0x61CAE1: fcom    st(1)
 0x61CAE3: fnstsw  ax
@@ -27,13 +27,13 @@
 0x61CAF6: jz      loc_61CBEA
 0x61CAFC: cmp     dword ptr [edi+58h], 0
 0x61CB00: jz      loc_61CBEA
-0x61CB06: push    0
+0x61CB06: push    0; outAngleDegrees
 0x61CB08: fstp    dword ptr [esi+170h]
 0x61CB0E: mov     ecx, esi
-0x61CB10: call    sub_6135F0
-0x61CB15: push    eax
-0x61CB16: push    edi
-0x61CB17: call    sub_6131D0
+0x61CB10: call    CombatController_GetCurrentTarget
+0x61CB15: push    eax; target
+0x61CB16: push    edi; actor
+0x61CB17: call    Actor_IsFacingReferenceWithinCombatAngle; Computes the absolute XY heading difference from actor to target, normalizes across the 360-degree boundary, optionally returns degrees, and tests it against the combat-facing threshold game setting.
 0x61CB1C: add     esp, 0Ch
 0x61CB1F: test    al, al
 0x61CB21: jz      loc_61CBAE

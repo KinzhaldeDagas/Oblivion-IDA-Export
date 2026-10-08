@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x76E320",
-    "line": "mov     eax, [esp+a2]",
+    "line": "mov     eax, [esp+a2]; Initializes NiDX9ShaderDeclaration from the renderer/device and stream count, AddRefs the D3D device, and allocates per-stream descriptors with disabled element slots.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x76E378",
-    "line": "push    offset sub_76E260",
+    "line": "push    offset sub_76E260; MoonSugarEffect decode: stream descriptor initializer. Clears active flag/unknown, element-array pointer, and stride/cache field.",
     "mnemonic": "push",
     "size": 5
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x76E3D2",
-    "line": "call    sub_76FB00",
+    "line": "call    sub_76FB00; MoonSugarEffect decode: vertex declaration element initializer. Clears fields and marks the element disabled with usage/type sentinel values 0xFFFFFFFF and 0x11.",
     "mnemonic": "call",
     "size": 5
   },

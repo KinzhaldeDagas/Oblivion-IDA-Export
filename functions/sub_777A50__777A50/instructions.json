@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x777A87",
-    "line": "mov     [esp+18h+var_10], eax",
+    "line": "mov     [esp+18h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -151,55 +151,55 @@
   },
   {
     "ea": "0x777A90",
-    "line": "lea     eax, [esp+20h+var_C]",
+    "line": "lea     eax, [esp+20h+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x777A94",
-    "line": "push    eax",
+    "line": "push    eax; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x777A95",
-    "line": "lea     ecx, [esp+24h+var_4]",
+    "line": "lea     ecx, [esp+24h+keyOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x777A99",
-    "line": "push    ecx",
+    "line": "push    ecx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x777A9A",
-    "line": "lea     edx, [esp+28h+var_10]",
+    "line": "lea     edx, [esp+28h+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x777A9E",
-    "line": "push    edx",
+    "line": "push    edx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x777A9F",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x777AA1",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x777AA6",
-    "line": "mov     ebp, [esp+20h+var_C]",
+    "line": "mov     ebp, [esp+20h+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x777AD5",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x777AE6",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x777AF2",
-    "line": "cmp     [esp+20h+var_10], 0",
+    "line": "cmp     [esp+20h+position], 0",
     "mnemonic": "cmp",
     "size": 5
   },

@@ -1,7 +1,8 @@
-int NiTPointerMap<unsigned int,TESTextureList *>::NiTPointerMap<unsigned int,TESTextureList *>()
+// Verified static constructor from RTTI/template symbol: initializes NiTPointerMap<unsigned int, TESTextureList*> with 37 zeroed buckets, sets its template vtable, registers destructor at atexit.
+int __cdecl TESObjectTREE_TextureHashCache_ctor()
 {
-  dword_B08318 = FormHeapAlloc(0x94u);
-  _memset(dword_B08318, 0, 4 * dword_B08314);
-  off_B08310 = &NiTPointerMap<unsigned int,TESTextureList *>::`vftable';
-  return atexit(sub_A1B680);
+  g_TESObjectTREETextureHashCache.buckets = (void *)FormHeapAlloc(0x94u); /*0x9e276c*/
+  _memset((int)g_TESObjectTREETextureHashCache.buckets, 0, 4 * g_TESObjectTREETextureHashCache.bucketCount); /*0x9e2771*/
+  g_TESObjectTREETextureHashCache.vftable = &NiTPointerMap<unsigned int,TESTextureList *>::`vftable'; /*0x9e277b*/
+  return atexit(TESObjectTREE_TextureHashCache_atexit); /*0x9e278d*/
 }

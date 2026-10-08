@@ -1,4 +1,4 @@
-0x5DF160: push    ebp
+0x5DF160: push    ebp; Display/settings apply handler; recomputes tree distance scalar flt_B0760C and calls 0x55FCB0 to refresh cached SpeedTree distances.
 0x5DF161: mov     ebp, esp
 0x5DF163: and     esp, 0FFFFFFF8h
 0x5DF166: push    0FFFFFFFFh
@@ -44,7 +44,7 @@
 0x5DF1EE: push    edx
 0x5DF1EF: push    eax
 0x5DF1F0: call    sub_497C10
-0x5DF1F5: mov     cl, ds:0B06CF4h
+0x5DF1F5: mov     cl, ds:0B06CF4h; Display-settings apply path reads bDoStaticAndArchShadows before recomposing the category mask.
 0x5DF1FB: mov     dl, ds:0B06CECh
 0x5DF201: mov     eax, [esi+0ECh]
 0x5DF207: add     esp, 8
@@ -60,20 +60,20 @@
 0x5DF226: or      ecx, edx
 0x5DF228: setnz   al
 0x5DF22B: cmp     byte ptr ds:0B06CBCh, 0
-0x5DF232: mov     ds:0B2C678h, ecx
+0x5DF232: mov     ds:0B2C678h, ecx; Display-settings apply writes Architecture bit 0x02 | Actors bit 0x08 to the caster-category mask.
 0x5DF238: mov     ds:0B06CB4h, al
 0x5DF23D: jz      short loc_5DF256
 0x5DF23F: mov     ecx, ds:0B333A0h
 0x5DF245: mov     ecx, [ecx+8]
-0x5DF248: call    ShadowCanopyPass
+0x5DF248: call    ShadowCanopyPass; Retail canopy shadow-map pass; separate from per-source ShadowSceneLight mode-5 maps.
 0x5DF24D: or      dword ptr ds:0B42F40h, 20h
 0x5DF254: jmp     short loc_5DF275
 0x5DF256: push    0
-0x5DF258: call    SetTextureCanopyShadowMap
+0x5DF258: call    SetTextureCanopyShadowMap; Install/own the current canopy shadow-map texture at global 0x00B4310C.
 0x5DF25D: mov     edx, ds:0B333A0h
 0x5DF263: mov     ecx, [edx+8]
 0x5DF266: add     esp, 4
-0x5DF269: call    sub_482670
+0x5DF269: call    ClearCanopyShadowMap; Clear/release canopy shadow-map state.
 0x5DF26E: and     dword ptr ds:0B42F40h, 0FFFFFFDFh
 0x5DF275: mov     ecx, offset flt_B1480C
 0x5DF27A: call    GameSetting_GetSafeFloatPointer
@@ -95,7 +95,7 @@
 0x5DF2BE: fld     dword ptr [eax]
 0x5DF2C0: fadd    [esp+2Ch+var_18]
 0x5DF2C4: fstp    dword ptr ds:0B0760Ch
-0x5DF2CA: call    sub_55FCB0
+0x5DF2CA: call    sub_55FCB0; Refresh cached tree model distance parameters across singleton tree cache using fTreeNearDistanceBase and flt_B39E10.
 0x5DF2CF: mov     ecx, offset flt_B14824
 0x5DF2D4: call    GameSetting_GetSafeFloatPointer
 0x5DF2D9: fld     dword ptr [eax]
@@ -205,12 +205,12 @@
 0x5DF480: mov     ecx, [esi+0ACh]
 0x5DF486: push    0FB5h
 0x5DF48B: call    Tile_GetFloat
-0x5DF490: call    Double_To_SInt32
+0x5DF490: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5DF495: mov     ds:0B06EFCh, eax
 0x5DF49A: mov     ecx, [esi+0A4h]
 0x5DF4A0: push    0FB5h
 0x5DF4A5: call    Tile_GetFloat
-0x5DF4AA: call    Double_To_SInt32
+0x5DF4AA: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5DF4AF: mov     ecx, offset flt_B14894
 0x5DF4B4: mov     ds:0B06F04h, eax
 0x5DF4B9: call    GameSetting_GetSafeFloatPointer
@@ -333,9 +333,9 @@
 0x5DF672: fild    dword ptr [esp+2Ch+var_18]
 0x5DF676: push    ecx
 0x5DF677: mov     ecx, [esi+4]; this
-0x5DF67A: fstp    [esp+30h+a2]; a3
-0x5DF67D: push    0FB1h; a2
-0x5DF682: call    Tile_SetFloat
+0x5DF67A: fstp    [esp+30h+a2]; value
+0x5DF67D: push    0FB1h; propertyCode
+0x5DF682: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5DF687: mov     ecx, [esp+2Ch+var_C]
 0x5DF68B: mov     large fs:0, ecx
 0x5DF692: pop     ecx
@@ -397,7 +397,6 @@
 0x5DF760: jnz     short loc_5DF7A5
 0x5DF762: mov     edi, 10h
 0x5DF767: jmp     short loc_5DF770
-0x5DF769: align 10h
 0x5DF770: add     dword ptr [esi+0FCh], 0FFFFFFFFh
 0x5DF777: mov     eax, [esi+0FCh]
 0x5DF77D: jns     short loc_5DF787
@@ -459,8 +458,8 @@
 0x5DF83E: mov     esp, ebp
 0x5DF840: pop     ebp
 0x5DF841: retn    8
-0x5DF844: cmp     byte ptr ds:0B43077h, 0; jumptable 005DF1A4 case 9
-0x5DF84B: mov     ecx, offset byte_B02D70
+0x5DF844: cmp     byte ptr ds:0B43077h, 0; Verified settings-menu case 9 toggles bDisplayLODLand; DistantLOD_UpdateLandLODMap reads this setting when activating LandLOD display.
+0x5DF84B: mov     ecx, offset bDisplayLODLand
 0x5DF850: setz    al
 0x5DF853: mov     ds:0B43077h, al
 0x5DF858: mov     ds:0B02D70h, al
@@ -473,7 +472,7 @@
 0x5DF86F: call    sub_5DE9C0
 0x5DF874: jmp     loc_5DFE39
 0x5DF879: cmp     byte ptr ds:0B06F0Ch, 0; jumptable 005DF1A4 case 10
-0x5DF880: mov     ecx, offset byte_B06F0C
+0x5DF880: mov     ecx, offset g_bShadowSourceAsReceiverSetting
 0x5DF885: setz    al
 0x5DF888: mov     ds:0B06F0Ch, al
 0x5DF88D: call    sub_404E10
@@ -606,7 +605,6 @@
 0x5DFABC: jmp     loc_5DFE39
 0x5DFAC1: mov     ecx, 1; jumptable 005DF1A4 case 20
 0x5DFAC6: jmp     short loc_5DFAD0
-0x5DFAC8: align 10h
 0x5DFAD0: add     [esi+0ECh], ecx
 0x5DFAD6: mov     eax, [esi+0ECh]
 0x5DFADC: cmp     eax, 3
@@ -668,7 +666,6 @@
 0x5DFB93: retn    8
 0x5DFB96: mov     ecx, 1; jumptable 005DF1A4 case 48
 0x5DFB9B: jmp     short loc_5DFBA0
-0x5DFB9D: align 10h
 0x5DFBA0: add     [esi+0F4h], ecx
 0x5DFBA6: mov     eax, [esi+0F4h]
 0x5DFBAC: cmp     eax, 3
@@ -727,8 +724,8 @@
 0x5DFC4F: mov     esp, ebp
 0x5DFC51: pop     ebp
 0x5DFC52: retn    8
-0x5DFC55: cmp     byte ptr ds:0B09AE8h, 0; jumptable 005DF1A4 case 30
-0x5DFC5C: mov     ecx, offset byte_B09AE8
+0x5DFC55: cmp     byte ptr ds:0B09AE8h, 0; Verified settings-menu case 30 toggles bDisplayLODBuildings; DistantLOD_UpdateExteriorGrid uses this setting for its building/object channel.
+0x5DFC5C: mov     ecx, offset bDisplayLODBuildings
 0x5DFC61: setz    al
 0x5DFC64: mov     ds:0B09AE8h, al
 0x5DFC69: call    sub_404E10
@@ -746,8 +743,8 @@
 0x5DFC96: add     esp, 14h
 0x5DFC99: or      word ptr ds:0B3B744h, 2
 0x5DFCA1: jmp     loc_5DFE39
-0x5DFCA6: cmp     byte ptr ds:0B09AF0h, 0; jumptable 005DF1A4 case 31
-0x5DFCAD: mov     ecx, offset byte_B09AF0
+0x5DFCA6: cmp     byte ptr ds:0B09AF0h, 0; Verified settings-menu case 31 toggles bDisplayLODTrees; DistantLOD_UpdateExteriorGrid uses this setting for its tree channel.
+0x5DFCAD: mov     ecx, offset bDisplayLODTrees
 0x5DFCB2: setz    al
 0x5DFCB5: mov     ds:0B09AF0h, al
 0x5DFCBA: call    sub_404E10
@@ -866,7 +863,7 @@
 0x5DFE85: fnstsw  ax
 0x5DFE87: test    ah, 44h
 0x5DFE8A: jp      short loc_5DFEB0
-0x5DFE8C: mov     ecx, offset byte_B02D70
+0x5DFE8C: mov     ecx, offset bDisplayLODLand
 0x5DFE91: mov     byte ptr ds:0B43077h, 1
 0x5DFE98: mov     byte ptr ds:0B02D70h, 1
 0x5DFE9F: call    sub_404E10
@@ -874,7 +871,7 @@
 0x5DFEA6: push    eax
 0x5DFEA7: mov     eax, [esi+48h]
 0x5DFEAA: push    eax
-0x5DFEAB: call    sub_59B640
+0x5DFEAB: call    ControlsMenu__SetInvertYButtonLabel
 0x5DFEB0: xor     ebx, ebx
 0x5DFEB2: mov     ecx, offset aSs?fJ
 0x5DFEB7: mov     [esi+0ECh], ebx
@@ -914,9 +911,9 @@
 0x5DFF5E: push    ecx
 0x5DFF5F: fstp    [esp+30h+a2]; float
 0x5DFF62: mov     ds:0B06D34h, dl
-0x5DFF68: call    sub_497AE0
+0x5DFF68: call    Renderer_SetGammaAndMarkDirty; Verified in OblivionNew 2026-09-26: accepts a changed positive gamma float, stores it at B06C2C and sets byte B34FA4. No direct D3D call here.
 0x5DFF6D: add     esp, 4
-0x5DFF70: call    sub_497C30
+0x5DFF70: call    Renderer_ApplyPendingGammaRamp; Verified in OblivionNew 2026-09-26: copies requested gamma B06C2C to fGamma INI value B06F64, clears B34FA4, builds 256 identical RGB WORD entries round(pow(i/255,gamma)*65535), then calls device vtable +54 (IDirect3DDevice9::SetGammaRamp slot21), swapchain0, flags1 (D3DSGR_CALIBRATE). Device is loaded from renderer +280; renderer pointer at B350D8. Constants: A3DDD8=255, A3DDD0=65535, A2FAA0=0.5. EAX return in decompiler is not an API HRESULT: SetGammaRamp is void.
 0x5DFF75: mov     ecx, [esi+4Ch]
 0x5DFF78: cmp     ecx, ebx
 0x5DFF7A: jz      short loc_5DFF8C
@@ -943,7 +940,7 @@
 0x5DFFC8: push    ecx
 0x5DFFC9: push    edx
 0x5DFFCA: mov     ecx, esi
-0x5DFFCC: call    sub_59B640
+0x5DFFCC: call    ControlsMenu__SetInvertYButtonLabel
 0x5DFFD1: mov     ecx, [esi+0C4h]
 0x5DFFD7: cmp     ecx, ebx
 0x5DFFD9: jz      short loc_5DFFEB
@@ -984,7 +981,7 @@
 0x5E0062: push    ecx
 0x5E0063: push    edx
 0x5E0064: mov     ecx, esi
-0x5E0066: call    sub_59B640
+0x5E0066: call    ControlsMenu__SetInvertYButtonLabel
 0x5E006B: mov     edi, [esi+104h]
 0x5E0071: mov     eax, edi
 0x5E0073: cmp     eax, ebx
@@ -1038,3 +1035,18 @@
 0x5E0122: mov     eax, edx
 0x5E0124: xor     ebx, ebx
 0x5E0126: jmp     loc_5E00A1
+0x9C2160: lea     ecx, [ebp+var_18]; void *
+0x9C2163: jmp     BSStringT_Clear
+0x9C2168: lea     ecx, [ebp+var_18]; void *
+0x9C216B: jmp     BSStringT_Clear
+0x9C2170: lea     ecx, [ebp+var_18]; void *
+0x9C2173: jmp     BSStringT_Clear
+0x9C2178: lea     ecx, [ebp+var_18]; void *
+0x9C217B: jmp     BSStringT_Clear
+0x9C2180: mov     edx, [esp-4+arg_4]
+0x9C2184: lea     eax, [edx-1Ch]
+0x9C2187: mov     ecx, [edx-20h]
+0x9C218A: xor     ecx, eax
+0x9C218C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C2191: mov     eax, offset stru_AEB098
+0x9C2196: jmp     ___CxxFrameHandler3

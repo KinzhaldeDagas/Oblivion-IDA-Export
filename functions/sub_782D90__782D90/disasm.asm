@@ -1,10 +1,10 @@
-0x782D90: mov     edx, [esp+arg_8]
+0x782D90: mov     edx, [esp+vector4Count]; Thin Direct3D9 render-state wrapper for IDirect3DDevice9::SetPixelShaderConstantI (device vtable slot +0x1BC).
 0x782D94: mov     eax, [ecx+0FF8h]
 0x782D9A: mov     ecx, [eax]
 0x782D9C: push    edx
-0x782D9D: mov     edx, [esp+4+arg_4]
+0x782D9D: mov     edx, [esp+4+constantData]
 0x782DA1: push    edx
-0x782DA2: mov     edx, [esp+8+arg_0]
+0x782DA2: mov     edx, [esp+8+startRegister]
 0x782DA6: push    edx
 0x782DA7: push    eax
 0x782DA8: mov     eax, [ecx+1BCh]

@@ -11,7 +11,6 @@
 0x4C02AC: mov     [esp+28h+var_14], 0
 0x4C02B4: mov     [esp+28h+var_8], ebp
 0x4C02B8: jmp     short loc_4C02C8
-0x4C02BA: align 10h
 0x4C02C0: mov     ebx, [esp+28h+var_C]
 0x4C02C4: mov     ebp, [esp+28h+var_8]
 0x4C02C8: xor     esi, esi
@@ -185,7 +184,6 @@
 0x4C04C4: cmp     ecx, edi
 0x4C04C6: jnb     short loc_4C04F0
 0x4C04C8: jmp     short loc_4C04D0
-0x4C04CA: align 10h
 0x4C04D0: fld     dword ptr [ebx+ecx*4]
 0x4C04D3: fld     [esp+28h+var_18]
 0x4C04D7: fcompp

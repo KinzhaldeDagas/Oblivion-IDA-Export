@@ -25,10 +25,36 @@ int __usercall Actor_AttackHandling_::ApplyWeaponDamage_Check@<eax>(
         int a24,
         int a25)
 {
-  if ( !a1 )
-    return Actor_AttackHandling_::RunProjectileOnHitScript_(a12);
-  if ( a12 )
-    return Actor_AttackHandling_::RunProjectileOnHitScript(
+  if ( !a1 ) /*0x5ff5a6*/
+    return Actor_AttackHandling_::RunProjectileOnHitScript_( /*0x5ff5a6*/
+             a12,
+             edi0,
+             esi0,
+             a4,
+             a5,
+             a6,
+             a7,
+             a8,
+             a9,
+             a10,
+             a11,
+             a12,
+             a13,
+             a14,
+             a15,
+             a16,
+             a17,
+             a18,
+             a19,
+             a20,
+             a21,
+             a22,
+             *(float *)&a23,
+             a24,
+             a25,
+             a9);
+  if ( a12 ) /*0x5ff5ae*/
+    return Actor_AttackHandling_::RunProjectileOnHitScript( /*0x5ff5ae*/
              a4,
              a5,
              a6,

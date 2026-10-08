@@ -1,1 +1,4 @@
-HMIXEROBJ__
+struct HMIXEROBJ__
+{
+int unused;
+};

@@ -1,1 +1,1 @@
-LPDIRECTSOUND
+typedef IDirectSound *LPDIRECTSOUND;

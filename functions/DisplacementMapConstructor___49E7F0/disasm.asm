@@ -1,4 +1,4 @@
-0x49E7F0: cmp     dword ptr ds:0B35230h, 0
+0x49E7F0: cmp     dword ptr ds:0B35230h, 0; Pass205: Water displacement setup; writes WaterShaderProperty +0x70=1 and +0x6C=rendered texture inner texture.
 0x49E7F7: push    ebx
 0x49E7F8: mov     ebx, ecx
 0x49E7FA: jz      short loc_49E876
@@ -29,11 +29,11 @@
 0x49E84D: fstp    [esp+10h+var_10]; float
 0x49E850: push    ecx; int
 0x49E851: mov     ecx, ebx
-0x49E853: call    sub_49E750
+0x49E853: call    sub_49E750; Pass205: Produces single generated displacement quad under global/root 0x00B35230 for water displacement setup.
 0x49E858: push    4
 0x49E85A: mov     ecx, eax
 0x49E85C: mov     [esi+4], eax
-0x49E85F: call    NiNode_GetNiPropertyByID
+0x49E85F: call    NiNode_GetNiPropertyByID;
 0x49E864: mov     esi, eax
 0x49E866: mov     byte ptr [esi+70h], 1
 0x49E86A: mov     ecx, [edi]; this

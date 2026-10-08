@@ -1,4 +1,4 @@
-0x61E0F0: sub     esp, 30h
+0x61E0F0: sub     esp, 30h; Selects normal/directional power attack from combat style, reach/distance, movement, and chance data.
 0x61E0F3: push    ebx
 0x61E0F4: push    ebp
 0x61E0F5: mov     ebp, ecx
@@ -25,17 +25,17 @@
 0x61E134: push    edi
 0x61E135: jz      loc_61E251
 0x61E13B: fld     [esp+40h+arg_4]
-0x61E13F: push    0; int
+0x61E13F: push    0; unused
 0x61E141: sub     esp, 8
-0x61E144: fstp    [esp+4Ch+var_48]; float
-0x61E148: mov     ecx, ebp
+0x61E144: fstp    [esp+4Ch+maximumDistance]; maximumDistance
+0x61E148: mov     ecx, ebp; this
 0x61E14A: fld     [esp+4Ch+arg_0]
-0x61E14E: fstp    [esp+4Ch+var_4C]; float
-0x61E151: call    sub_613440
+0x61E14E: fstp    [esp+4Ch+surfaceDistance]; surfaceDistance
+0x61E151: call    CombatController_IsTargetWithinRangedDistance; Tests surfaceDistance against maximumDistance plus a combat-style-controlled tolerance. Ranged weapon modes 2 and 4 suppress that extra tolerance.
 0x61E156: test    al, al
 0x61E158: jnz     loc_61E251
 0x61E15E: mov     ecx, [ebp+3Ch]
-0x61E161: call    sub_5E0F50
+0x61E161: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x61E166: mov     edx, [eax]
 0x61E168: mov     ecx, eax
 0x61E16A: mov     eax, [edx+164h]
@@ -101,7 +101,7 @@
 0x61E20F: jmp     short loc_61E245
 0x61E211: jle     short loc_61E251
 0x61E213: mov     ecx, [ebp+3Ch]
-0x61E216: call    sub_5E0F50
+0x61E216: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x61E21B: mov     edx, [eax]
 0x61E21D: mov     ecx, eax
 0x61E21F: mov     eax, [edx+16Ch]
@@ -112,7 +112,7 @@
 0x61E22D: mov     [esp+40h+var_2E], 1
 0x61E232: jmp     short loc_61E251
 0x61E234: push    0; Seed
-0x61E236: call    GetRandomLargeInteger?
+0x61E236: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x61E23B: cdq
 0x61E23C: add     esp, 4
 0x61E23F: idiv    esi
@@ -121,7 +121,7 @@
 0x61E247: mov     [esp+40h+var_2C], ecx
 0x61E24B: jnz     loc_61E4A5
 0x61E251: mov     ecx, [ebp+3Ch]
-0x61E254: call    sub_5E0F50
+0x61E254: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x61E259: mov     edx, [eax]
 0x61E25B: mov     ecx, eax
 0x61E25D: mov     eax, [edx+16Ch]
@@ -160,13 +160,13 @@
 0x61E2C6: shr     esi, 1
 0x61E2C8: and     esi, 4
 0x61E2CB: fld     [esp+40h+arg_4]
-0x61E2CF: push    0; int
+0x61E2CF: push    0; unused
 0x61E2D1: sub     esp, 8
-0x61E2D4: fstp    [esp+4Ch+var_48]; float
-0x61E2D8: mov     ecx, ebp
+0x61E2D4: fstp    [esp+4Ch+maximumDistance]; maximumDistance
+0x61E2D8: mov     ecx, ebp; this
 0x61E2DA: fld     [esp+4Ch+arg_0]
-0x61E2DE: fstp    [esp+4Ch+var_4C]; float
-0x61E2E1: call    sub_613440
+0x61E2DE: fstp    [esp+4Ch+surfaceDistance]; surfaceDistance
+0x61E2E1: call    CombatController_IsTargetWithinRangedDistance; Tests surfaceDistance against maximumDistance plus a combat-style-controlled tolerance. Ranged weapon modes 2 and 4 suppress that extra tolerance.
 0x61E2E6: test    al, al
 0x61E2E8: jz      loc_61E4A5
 0x61E2EE: mov     ecx, ds:0B14B78h[esi*4]
@@ -175,7 +175,7 @@
 0x61E2FE: push    0; Seed
 0x61E300: xor     bl, bl
 0x61E302: mov     dword ptr [esp+44h+arg_10], 0
-0x61E30A: call    GetRandomLargeInteger?
+0x61E30A: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x61E30F: cdq
 0x61E310: mov     ecx, 64h ; 'd'
 0x61E315: idiv    ecx
@@ -187,7 +187,7 @@
 0x61E327: jnz     short loc_61E32B
 0x61E329: mov     bl, 1
 0x61E32B: mov     ecx, [ebp+3Ch]
-0x61E32E: call    sub_5E0F50
+0x61E32E: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x61E333: mov     edx, [eax]
 0x61E335: mov     ecx, eax
 0x61E337: mov     eax, [edx+128h]
@@ -212,7 +212,7 @@
 0x61E37B: jnz     short loc_61E37F
 0x61E37D: mov     bl, 1
 0x61E37F: mov     ecx, [ebp+3Ch]
-0x61E382: call    sub_5E0F50
+0x61E382: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x61E387: mov     edx, [eax]
 0x61E389: mov     ecx, eax
 0x61E38B: mov     eax, [edx+12Ch]
@@ -238,7 +238,7 @@
 0x61E3CE: jnz     short loc_61E3D2
 0x61E3D0: mov     bl, 1
 0x61E3D2: mov     ecx, [ebp+3Ch]
-0x61E3D5: call    sub_5E0F50
+0x61E3D5: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x61E3DA: mov     edx, [eax]
 0x61E3DC: mov     ecx, eax
 0x61E3DE: mov     eax, [edx+130h]
@@ -264,7 +264,7 @@
 0x61E421: jnz     short loc_61E425
 0x61E423: mov     bl, 1
 0x61E425: mov     ecx, [ebp+3Ch]
-0x61E428: call    sub_5E0F50
+0x61E428: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x61E42D: mov     edx, [eax]
 0x61E42F: mov     ecx, eax
 0x61E431: mov     eax, [edx+134h]
@@ -290,7 +290,7 @@
 0x61E471: jnz     short loc_61E475
 0x61E473: mov     bl, 1
 0x61E475: mov     ecx, [ebp+3Ch]
-0x61E478: call    sub_5E0F50
+0x61E478: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x61E47D: mov     edx, [eax]
 0x61E47F: mov     ecx, eax
 0x61E481: mov     eax, [edx+138h]
@@ -331,7 +331,7 @@
 0x61E4F3: push    eax
 0x61E4F4: lea     ecx, [esp+48h+var_14]
 0x61E4F8: push    ecx
-0x61E4F9: call    sub_710250
+0x61E4F9: call    NiPoint3_MultiplyMatrix3
 0x61E4FE: mov     edx, [esi]
 0x61E500: mov     eax, [edx+174h]
 0x61E506: add     esp, 0Ch

@@ -29,7 +29,7 @@
 0x566A93: mov     ecx, esi
 0x566A95: call    sub_5697E0
 0x566A9A: mov     ecx, eax; this
-0x566A9C: call    TESObjectREFR_GetParentCell
+0x566A9C: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x566AA1: mov     edi, eax
 0x566AA3: pop     edi
 0x566AA4: pop     esi
@@ -62,7 +62,7 @@
 0x566AE8: test    eax, eax
 0x566AEA: jnz     short loc_566A9A
 0x566AEC: mov     ecx, esi; this
-0x566AEE: call    TESObjectREFR_GetParentCell
+0x566AEE: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x566AF3: mov     edi, eax
 0x566AF5: pop     edi
 0x566AF6: pop     esi

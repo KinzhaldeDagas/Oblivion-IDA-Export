@@ -1,4 +1,4 @@
-0x65A970: mov     eax, ds:0B33398h
+0x65A970: mov     eax, ds:0B33398h; Reference animation sound-note playback. Resolves a Sound: note token through SoundMap_ResolveAnimSoundNote, plays it, positions it on the reference when requested, and applies volume/loop flags.
 0x65A975: sub     esp, 0Ch
 0x65A978: push    ebp
 0x65A979: push    esi
@@ -16,7 +16,7 @@
 0x65A99D: mov     ecx, [esp+18h+arg_0]
 0x65A9A1: push    ecx
 0x65A9A2: mov     ecx, ds:0B33A98h
-0x65A9A8: call    sub_447490
+0x65A9A8: call    SoundMap_ResolveAnimSoundNote; Animation Sound: note resolver. Looks up the note token in global sound map off_B06164 and accepts only entries whose form/type byte is 0x0A; returns the sound entry or 0.
 0x65A9AD: test    eax, eax
 0x65A9AF: jz      loc_65AA48
 0x65A9B5: mov     edx, [esp+18h+arg_C]

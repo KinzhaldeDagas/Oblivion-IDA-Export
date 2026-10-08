@@ -1,4 +1,4 @@
-0x8EB910: push    ebp
+0x8EB910: push    ebp; Tests whether a candidate point lies behind a surface plane by dot(point - surfacePoint, surfaceNormal) < epsilon.
 0x8EB911: mov     ebp, esp
 0x8EB913: and     esp, 0FFFFFFF0h
 0x8EB916: sub     esp, 10h

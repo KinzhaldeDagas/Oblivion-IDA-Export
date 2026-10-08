@@ -12,7 +12,7 @@ int __usercall Actor_MagicCaster_ApplyMagicItemCost_::GetMagickaCost@<eax>(
 {
   int v11; // [esp+10h] [ebp+8h]
 
-  (*a1[3])(a1 + 3);
-  *(float *)&v11 = a2;
+  (*a1[3])(a1 + 3); /*0x5fc8fa*/
+  *(float *)&v11 = a2; /*0x5fc8fc*/
   return Actor_MagicCaster_ApplyMagicItemCost_::CastToIngred(a1, 0.0, a3, v11, a5, a6, a7, a8, a9, a10);
 }

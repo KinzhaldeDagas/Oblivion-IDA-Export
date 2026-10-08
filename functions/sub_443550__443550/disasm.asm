@@ -27,10 +27,10 @@
 0x4435AA: push    0
 0x4435AC: push    5
 0x4435AE: push    eax
-0x4435AF: lea     eax, [esp+148h+var_11C]
+0x4435AF: lea     eax, [esp+148h+outTexture]
 0x4435B3: push    eax
 0x4435B4: call    sub_43B420
-0x4435B9: mov     eax, [esp+12Ch+var_11C]
+0x4435B9: mov     eax, [esp+12Ch+outTexture]
 0x4435BD: test    eax, eax
 0x4435BF: jz      short loc_4435DB
 0x4435C1: mov     esi, eax
@@ -56,11 +56,11 @@
 0x4435ED: push    0
 0x4435EF: push    5
 0x4435F1: push    eax
-0x4435F2: lea     ecx, [esp+148h+var_11C]
+0x4435F2: lea     ecx, [esp+148h+outTexture]
 0x4435F6: push    ecx
 0x4435F7: mov     ecx, ds:0B33A1Ch
 0x4435FD: call    sub_43B420
-0x443602: mov     eax, [esp+12Ch+var_11C]
+0x443602: mov     eax, [esp+12Ch+outTexture]
 0x443606: test    eax, eax
 0x443608: jz      short loc_443624
 0x44360A: mov     esi, eax
@@ -86,11 +86,11 @@
 0x443636: push    0
 0x443638: push    5
 0x44363A: push    eax
-0x44363B: lea     ecx, [esp+148h+var_11C]
+0x44363B: lea     ecx, [esp+148h+outTexture]
 0x44363F: push    ecx
 0x443640: mov     ecx, ds:0B33A1Ch
 0x443646: call    sub_43B420
-0x44364B: mov     eax, [esp+12Ch+var_11C]
+0x44364B: mov     eax, [esp+12Ch+outTexture]
 0x44364F: test    eax, eax
 0x443651: jz      short loc_44366D
 0x443653: mov     esi, eax
@@ -116,11 +116,11 @@
 0x44367F: push    0
 0x443681: push    5
 0x443683: push    eax
-0x443684: lea     ecx, [esp+148h+var_11C]
+0x443684: lea     ecx, [esp+148h+outTexture]
 0x443688: push    ecx
 0x443689: mov     ecx, ds:0B33A1Ch
 0x44368F: call    sub_43B420
-0x443694: mov     eax, [esp+12Ch+var_11C]
+0x443694: mov     eax, [esp+12Ch+outTexture]
 0x443698: test    eax, eax
 0x44369A: jz      short loc_4436B6
 0x44369C: mov     esi, eax
@@ -146,11 +146,11 @@
 0x4436C8: push    0
 0x4436CA: push    5
 0x4436CC: push    eax
-0x4436CD: lea     ecx, [esp+148h+var_11C]
+0x4436CD: lea     ecx, [esp+148h+outTexture]
 0x4436D1: push    ecx
 0x4436D2: mov     ecx, ds:0B33A1Ch
 0x4436D8: call    sub_43B420
-0x4436DD: mov     eax, [esp+12Ch+var_11C]
+0x4436DD: mov     eax, [esp+12Ch+outTexture]
 0x4436E1: test    eax, eax
 0x4436E3: jz      short loc_4436FF
 0x4436E5: mov     esi, eax
@@ -176,11 +176,11 @@
 0x443711: push    0
 0x443713: push    5
 0x443715: push    eax
-0x443716: lea     ecx, [esp+148h+var_11C]
+0x443716: lea     ecx, [esp+148h+outTexture]
 0x44371A: push    ecx
 0x44371B: mov     ecx, ds:0B33A1Ch
 0x443721: call    sub_43B420
-0x443726: mov     eax, [esp+12Ch+var_11C]
+0x443726: mov     eax, [esp+12Ch+outTexture]
 0x44372A: test    eax, eax
 0x44372C: jz      short loc_443748
 0x44372E: mov     esi, eax
@@ -206,11 +206,11 @@
 0x44375A: push    0
 0x44375C: push    5
 0x44375E: push    eax
-0x44375F: lea     ecx, [esp+148h+var_11C]
+0x44375F: lea     ecx, [esp+148h+outTexture]
 0x443763: push    ecx
 0x443764: mov     ecx, ds:0B33A1Ch
 0x44376A: call    sub_43B420
-0x44376F: mov     eax, [esp+12Ch+var_11C]
+0x44376F: mov     eax, [esp+12Ch+outTexture]
 0x443773: test    eax, eax
 0x443775: jz      short loc_443791
 0x443777: mov     esi, eax
@@ -236,11 +236,11 @@
 0x4437A3: push    0
 0x4437A5: push    5
 0x4437A7: push    eax
-0x4437A8: lea     ecx, [esp+148h+var_11C]
+0x4437A8: lea     ecx, [esp+148h+outTexture]
 0x4437AC: push    ecx
 0x4437AD: mov     ecx, ds:0B33A1Ch
 0x4437B3: call    sub_43B420
-0x4437B8: mov     eax, [esp+12Ch+var_11C]
+0x4437B8: mov     eax, [esp+12Ch+outTexture]
 0x4437BC: test    eax, eax
 0x4437BE: jz      short loc_4437DA
 0x4437C0: mov     esi, eax
@@ -266,11 +266,11 @@
 0x4437EC: push    0
 0x4437EE: push    5
 0x4437F0: push    eax
-0x4437F1: lea     ecx, [esp+148h+var_11C]
+0x4437F1: lea     ecx, [esp+148h+outTexture]
 0x4437F5: push    ecx
 0x4437F6: mov     ecx, ds:0B33A1Ch
 0x4437FC: call    sub_43B420
-0x443801: mov     eax, [esp+12Ch+var_11C]
+0x443801: mov     eax, [esp+12Ch+outTexture]
 0x443805: test    eax, eax
 0x443807: jz      short loc_443823
 0x443809: mov     esi, eax
@@ -296,11 +296,11 @@
 0x443835: push    0
 0x443837: push    5
 0x443839: push    eax
-0x44383A: lea     ecx, [esp+148h+var_11C]
+0x44383A: lea     ecx, [esp+148h+outTexture]
 0x44383E: push    ecx
 0x44383F: mov     ecx, ds:0B33A1Ch
 0x443845: call    sub_43B420
-0x44384A: mov     eax, [esp+12Ch+var_11C]
+0x44384A: mov     eax, [esp+12Ch+outTexture]
 0x44384E: test    eax, eax
 0x443850: jz      short loc_44386C
 0x443852: mov     esi, eax
@@ -326,11 +326,11 @@
 0x44387E: push    0
 0x443880: push    5
 0x443882: push    eax
-0x443883: lea     ecx, [esp+148h+var_11C]
+0x443883: lea     ecx, [esp+148h+outTexture]
 0x443887: push    ecx
 0x443888: mov     ecx, ds:0B33A1Ch
 0x44388E: call    sub_43B420
-0x443893: mov     eax, [esp+12Ch+var_11C]
+0x443893: mov     eax, [esp+12Ch+outTexture]
 0x443897: test    eax, eax
 0x443899: jz      short loc_4438B5
 0x44389B: mov     esi, eax
@@ -356,11 +356,11 @@
 0x4438C7: push    0
 0x4438C9: push    5
 0x4438CB: push    eax
-0x4438CC: lea     ecx, [esp+148h+var_11C]
+0x4438CC: lea     ecx, [esp+148h+outTexture]
 0x4438D0: push    ecx
 0x4438D1: mov     ecx, ds:0B33A1Ch
 0x4438D7: call    sub_43B420
-0x4438DC: mov     eax, [esp+12Ch+var_11C]
+0x4438DC: mov     eax, [esp+12Ch+outTexture]
 0x4438E0: test    eax, eax
 0x4438E2: jz      short loc_4438FE
 0x4438E4: mov     esi, eax
@@ -386,11 +386,11 @@
 0x443910: push    0
 0x443912: push    5
 0x443914: push    eax
-0x443915: lea     ecx, [esp+148h+var_11C]
+0x443915: lea     ecx, [esp+148h+outTexture]
 0x443919: push    ecx
 0x44391A: mov     ecx, ds:0B33A1Ch
 0x443920: call    sub_43B420
-0x443925: mov     eax, [esp+12Ch+var_11C]
+0x443925: mov     eax, [esp+12Ch+outTexture]
 0x443929: test    eax, eax
 0x44392B: jz      short loc_443947
 0x44392D: mov     esi, eax
@@ -416,11 +416,11 @@
 0x443959: push    0
 0x44395B: push    5
 0x44395D: push    eax
-0x44395E: lea     ecx, [esp+148h+var_11C]
+0x44395E: lea     ecx, [esp+148h+outTexture]
 0x443962: push    ecx
 0x443963: mov     ecx, ds:0B33A1Ch
 0x443969: call    sub_43B420
-0x44396E: mov     eax, [esp+12Ch+var_11C]
+0x44396E: mov     eax, [esp+12Ch+outTexture]
 0x443972: test    eax, eax
 0x443974: jz      short loc_443990
 0x443976: mov     esi, eax
@@ -446,11 +446,11 @@
 0x4439A2: push    0
 0x4439A4: push    5
 0x4439A6: push    eax
-0x4439A7: lea     ecx, [esp+148h+var_11C]
+0x4439A7: lea     ecx, [esp+148h+outTexture]
 0x4439AB: push    ecx
 0x4439AC: mov     ecx, ds:0B33A1Ch
 0x4439B2: call    sub_43B420
-0x4439B7: mov     eax, [esp+12Ch+var_11C]
+0x4439B7: mov     eax, [esp+12Ch+outTexture]
 0x4439BB: test    eax, eax
 0x4439BD: jz      short loc_4439D9
 0x4439BF: mov     esi, eax
@@ -476,11 +476,11 @@
 0x4439EB: push    0
 0x4439ED: push    5
 0x4439EF: push    eax
-0x4439F0: lea     ecx, [esp+148h+var_11C]
+0x4439F0: lea     ecx, [esp+148h+outTexture]
 0x4439F4: push    ecx
 0x4439F5: mov     ecx, ds:0B33A1Ch
 0x4439FB: call    sub_43B420
-0x443A00: mov     eax, [esp+12Ch+var_11C]
+0x443A00: mov     eax, [esp+12Ch+outTexture]
 0x443A04: test    eax, eax
 0x443A06: jz      short loc_443A22
 0x443A08: mov     esi, eax
@@ -508,19 +508,19 @@
 0x443A43: push    ecx
 0x443A44: call    __sprintf
 0x443A49: add     esp, 14h
-0x443A4C: push    0; char
-0x443A4E: push    0; char
+0x443A4C: push    0; searchArchives
+0x443A4E: push    0; allowMissing
 0x443A50: lea     edx, [esp+134h+ArgList]
-0x443A54: push    edx; ArgList
-0x443A55: lea     eax, [esp+138h+var_11C]
-0x443A59: push    eax; int
+0x443A54: push    edx; path
+0x443A55: lea     eax, [esp+138h+outTexture]
+0x443A59: push    eax; outTexture
 0x443A5A: mov     ecx, ebp
-0x443A5C: call    sub_442890
-0x443A61: push    eax
-0x443A62: lea     ecx, [ebp+94h]
+0x443A5C: call    OB_TES_LoadOrFindSourceTexture_010201A0; TES texture cache/load helper: checks the global texture map, optionally verifies file existence via FileFinder, loads NiSourceTexture by filename, caches it, and returns a refcounted texture pointer.
+0x443A61: push    eax; incoming
+0x443A62: lea     ecx, [ebp+94h]; this
 0x443A68: mov     [esp+130h+var_4], 0
-0x443A73: call    sub_55E2A0
-0x443A78: mov     eax, [esp+12Ch+var_11C]
+0x443A73: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
+0x443A78: mov     eax, [esp+12Ch+outTexture]
 0x443A7C: test    eax, eax
 0x443A7E: mov     [esp+12Ch+var_4], edi
 0x443A85: jz      short loc_443AA5
@@ -548,19 +548,19 @@
 0x443AC3: push    ecx
 0x443AC4: call    __sprintf
 0x443AC9: add     esp, 14h
-0x443ACC: push    0; char
-0x443ACE: push    0; char
+0x443ACC: push    0; searchArchives
+0x443ACE: push    0; allowMissing
 0x443AD0: lea     edx, [esp+134h+ArgList]
-0x443AD4: push    edx; ArgList
-0x443AD5: lea     eax, [esp+138h+var_11C]
-0x443AD9: push    eax; int
+0x443AD4: push    edx; path
+0x443AD5: lea     eax, [esp+138h+outTexture]
+0x443AD9: push    eax; outTexture
 0x443ADA: mov     ecx, ebp
-0x443ADC: call    sub_442890
-0x443AE1: push    eax
-0x443AE2: lea     ecx, [ebp+98h]
+0x443ADC: call    OB_TES_LoadOrFindSourceTexture_010201A0; TES texture cache/load helper: checks the global texture map, optionally verifies file existence via FileFinder, loads NiSourceTexture by filename, caches it, and returns a refcounted texture pointer.
+0x443AE1: push    eax; incoming
+0x443AE2: lea     ecx, [ebp+98h]; this
 0x443AE8: mov     [esp+130h+var_4], 1
-0x443AF3: call    sub_55E2A0
-0x443AF8: mov     eax, [esp+12Ch+var_11C]
+0x443AF3: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
+0x443AF8: mov     eax, [esp+12Ch+outTexture]
 0x443AFC: test    eax, eax
 0x443AFE: mov     [esp+12Ch+var_4], edi
 0x443B05: jz      short loc_443B25
@@ -588,19 +588,19 @@
 0x443B43: push    ecx
 0x443B44: call    __sprintf
 0x443B49: add     esp, 14h
-0x443B4C: push    0; char
-0x443B4E: push    0; char
+0x443B4C: push    0; searchArchives
+0x443B4E: push    0; allowMissing
 0x443B50: lea     edx, [esp+134h+ArgList]
-0x443B54: push    edx; ArgList
-0x443B55: lea     eax, [esp+138h+var_11C]
-0x443B59: push    eax; int
+0x443B54: push    edx; path
+0x443B55: lea     eax, [esp+138h+outTexture]
+0x443B59: push    eax; outTexture
 0x443B5A: mov     ecx, ebp
-0x443B5C: call    sub_442890
-0x443B61: push    eax
-0x443B62: lea     ecx, [ebp+9Ch]
+0x443B5C: call    OB_TES_LoadOrFindSourceTexture_010201A0; TES texture cache/load helper: checks the global texture map, optionally verifies file existence via FileFinder, loads NiSourceTexture by filename, caches it, and returns a refcounted texture pointer.
+0x443B61: push    eax; incoming
+0x443B62: lea     ecx, [ebp+9Ch]; this
 0x443B68: mov     [esp+130h+var_4], 2
-0x443B73: call    sub_55E2A0
-0x443B78: mov     eax, [esp+12Ch+var_11C]
+0x443B73: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
+0x443B78: mov     eax, [esp+12Ch+outTexture]
 0x443B7C: test    eax, eax
 0x443B7E: mov     [esp+12Ch+var_4], edi
 0x443B85: jz      short loc_443BA9
@@ -623,7 +623,7 @@
 0x443BAF: xor     edi, edi
 0x443BB1: mov     ecx, ds:dword_B067C0[edi]
 0x443BB7: push    ecx; a1
-0x443BB8: call    TESForm_LookupByFormID
+0x443BB8: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x443BBD: add     esp, 4
 0x443BC0: test    eax, eax
 0x443BC2: jz      short loc_443C33
@@ -672,7 +672,7 @@
 0x443C2D: push    1
 0x443C2F: mov     ecx, esi
 0x443C31: call    eax
-0x443C33: mov     ds:dword_B35E50[edi], 0
+0x443C33: mov     dword ptr ds:unk_B35E50[edi], 0
 0x443C3D: add     edi, 4
 0x443C40: cmp     edi, 54h ; 'T'
 0x443C43: jl      loc_443BB1
@@ -687,3 +687,20 @@
 0x443C64: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x443C69: add     esp, 11Ch
 0x443C6F: retn
+0x9AD190: lea     ecx, [ebp-11Ch]; slot
+0x9AD196: jmp     NiPointerSlot_Release
+0x9AD19B: lea     ecx, [ebp-11Ch]; slot
+0x9AD1A1: jmp     NiPointerSlot_Release
+0x9AD1A6: lea     ecx, [ebp-11Ch]; slot
+0x9AD1AC: jmp     NiPointerSlot_Release
+0x9AD1B1: mov     edx, [esp+arg_4]
+0x9AD1B5: lea     eax, [edx-11Ch]
+0x9AD1BB: mov     ecx, [edx-120h]
+0x9AD1C1: xor     ecx, eax
+0x9AD1C3: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AD1C8: add     eax, 0Ch
+0x9AD1CB: mov     ecx, [edx-4]
+0x9AD1CE: xor     ecx, eax
+0x9AD1D0: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AD1D5: mov     eax, offset stru_AD9D94
+0x9AD1DA: jmp     ___CxxFrameHandler3

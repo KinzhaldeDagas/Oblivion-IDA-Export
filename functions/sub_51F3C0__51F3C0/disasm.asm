@@ -16,7 +16,7 @@
 0x51F3E9: lea     ecx, [ebp+38h]
 0x51F3EC: push    ecx; Src
 0x51F3ED: push    4D414E43h; int
-0x51F3F2: call    TESForm_PutFormRecordChunkData
+0x51F3F2: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x51F3F7: lea     ebx, [ebp+3Ch]
 0x51F3FA: add     esp, 0Ch
 0x51F3FD: test    ebx, ebx
@@ -34,7 +34,7 @@
 0x51F423: lea     edx, [esp+18h+Src]
 0x51F427: push    edx; Src
 0x51F428: push    4D414E52h; int
-0x51F42D: call    TESForm_PutFormRecordChunkData
+0x51F42D: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x51F432: movzx   edx, word ptr [esi+4]
 0x51F436: add     esp, 0Ch
 0x51F439: cmp     dx, 0FFFFh

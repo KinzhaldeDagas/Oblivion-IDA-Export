@@ -18,7 +18,7 @@
 0x4D7ABE: call    edx
 0x4D7AC0: push    ebx
 0x4D7AC1: lea     ecx, [esi+44h]
-0x4D7AC4: call    sub_4209D0
+0x4D7AC4: call    ExtraDataList_SetLeveledCreatureFlag; Oblivion marker toggle: false removes ExtraLeveledCreature (type 0x35); true creates the marker only if absent. No Fallout field layout is assumed.
 0x4D7AC9: pop     ebx
 0x4D7ACA: pop     esi
 0x4D7ACB: retn    4
@@ -26,7 +26,7 @@
 0x4D7AD1: call    edx
 0x4D7AD3: push    ebx
 0x4D7AD4: lea     ecx, [esi+44h]
-0x4D7AD7: call    sub_4209D0
+0x4D7AD7: call    ExtraDataList_SetLeveledCreatureFlag; Oblivion marker toggle: false removes ExtraLeveledCreature (type 0x35); true creates the marker only if absent. No Fallout field layout is assumed.
 0x4D7ADC: pop     ebx
 0x4D7ADD: pop     esi
 0x4D7ADE: retn    4

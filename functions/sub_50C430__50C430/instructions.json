@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x50C464",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,13 +199,13 @@
   },
   {
     "ea": "0x50C48F",
-    "line": "push    8",
+    "line": "push    8; mask",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x50C491",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x50C495",
-    "line": "call    sub_4D8270",
+    "line": "call    TESObjectREFR_SetActionFlagBits; Set reference action-state bits and synchronize special bit 0x04 with loaded/runtime open-state handling. ONAM itself represents action flag 0x08; PostLinkModifiedForm tests that bit before selecting set/clear paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x50C49C",
-    "line": "call    sub_4D82E0",
+    "line": "call    TESObjectREFR_ClearActionFlagBits",
     "mnemonic": "call",
     "size": 5
   },
@@ -307,13 +307,13 @@
   },
   {
     "ea": "0x50C4BF",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x50C4C1",
-    "line": "call    sub_4212F0",
+    "line": "call    ExtraDataList_ResetSavedAttachedAnimationData; If saved-attached-animation data exists, frees it and replaces it with a six-byte initialized {4,0,0} word buffer. Observed in Oblivion door default-open/open/close paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x50C4C8",
-    "line": "call    sub_420FF0",
+    "line": "call    ExtraDataList_RemoveLastFinishedSequence; Removes ExtraLastFinishedSequence (type 0x4A).",
     "mnemonic": "call",
     "size": 5
   },

@@ -13,37 +13,37 @@ char __thiscall sub_88CC80(_BYTE *this, NiObjectNET *a2, char a3, char a4, int a
   int v18; // [esp+20h] [ebp-8h]
   int v19; // [esp+24h] [ebp-4h]
 
-  if ( !a2 )
-    return 0;
-  if ( !a6 )
+  if ( !a2 ) /*0x88cc90*/
+    return 0; /*0x88cc90*/
+  if ( !a6 ) /*0x88cc9a*/
   {
-    v7 = sub_6FA970(a2);
-    if ( !v7 || (v7[1].members.m_uiRefCount & 2) == 0 )
-      return 0;
+    v7 = sub_6FA970(a2); /*0x88cc9d*/
+    if ( !v7 || (v7[1].members.m_uiRefCount & 2) == 0 ) /*0x88ccb5*/
+      return 0; /*0x88cd47*/
   }
-  *(this + 0x18) = 1;
-  v8 = byte_BA7908 == 0;
-  v13 = this;
-  v14 = a3;
-  if ( !v8 )
+  *(this + 0x18) = 1; /*0x88ccbf*/
+  v8 = unk_BA7908 == 0; /*0x88ccc3*/
+  v13 = this; /*0x88ccc9*/
+  v14 = a3; /*0x88cccd*/
+  if ( !v8 ) /*0x88ccd1*/
   {
-    v9 = (void (__cdecl *)(int, int))off_B2E328;
-    v8 = off_B2E328 == 0;
-    v15 = 0xA;
-    if ( !v8 )
-      sub_88A7D0(a2, (int)&v13, v9);
+    v9 = (void (__cdecl *)(int, int))off_B2E328; /*0x88ccd3*/
+    v8 = off_B2E328 == 0; /*0x88ccd8*/
+    v15 = 0xA; /*0x88ccda*/
+    if ( !v8 ) /*0x88cce2*/
+      sub_88A7D0(a2, (int)&v13, v9); /*0x88cceb*/
   }
-  v10 = a4 != 0;
-  if ( !a2[7].vtbl )
-    v10 = 0;
-  v16 = v10;
-  v11 = (void (__cdecl *)(int, int))off_B2E300;
-  v8 = off_B2E300 == 0;
-  v15 = 0;
-  v17 = a5;
-  v18 = 0;
-  v19 = 1;
-  if ( !v8 )
-    sub_88A7D0(a2, (int)&v13, v11);
-  return 1;
+  v10 = a4 != 0; /*0x88ccf9*/
+  if ( !a2[7].vtbl ) /*0x88ccfc*/
+    v10 = 0; /*0x88cd04*/
+  v16 = v10; /*0x88cd0a*/
+  v11 = (void (__cdecl *)(int, int))off_B2E300; /*0x88cd0e*/
+  v8 = off_B2E300 == 0; /*0x88cd13*/
+  v15 = 0; /*0x88cd15*/
+  v17 = a5; /*0x88cd19*/
+  v18 = 0; /*0x88cd1d*/
+  v19 = 1; /*0x88cd21*/
+  if ( !v8 ) /*0x88cd29*/
+    sub_88A7D0(a2, (int)&v13, v11); /*0x88cd32*/
+  return 1; /*0x88cd3a*/
 }

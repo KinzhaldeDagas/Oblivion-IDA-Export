@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x507A3D",
-    "line": "call    TESForm_GetOverrideFile",
+    "line": "call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.",
     "mnemonic": "call",
     "size": 5
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x507A49",
-    "line": "call    sub_4520F0",
+    "line": "call    TESFile_GetThreadSafeFile; Returns the root TESFile on the main thread; on worker threads returns the per-thread clone selected by GetCurrentThreadId via TESFile_GetThreadSafeFileForThread.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,13 +169,13 @@
   },
   {
     "ea": "0x507A76",
-    "line": "push    1",
+    "line": "push    1; forceRefresh",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x507A78",
-    "line": "push    esi",
+    "line": "push    esi; climate",
     "mnemonic": "push",
     "size": 1
   },
@@ -187,13 +187,13 @@
   },
   {
     "ea": "0x507A7E",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x507A80",
-    "line": "call    Sky_CreateChildGlobalObjects",
+    "line": "call    Sky_SetClimateAndRefreshChildren; Verified: climate override reload path reloads the current Sky climate form from its override file, then forces Sky_SetClimateAndRefreshChildren to rebuild dependent child objects.",
     "mnemonic": "call",
     "size": 5
   },

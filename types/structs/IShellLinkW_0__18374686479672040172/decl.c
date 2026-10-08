@@ -1,1 +1,1 @@
-IShellLinkW_0
+typedef IShellLinkW IShellLinkW_0;

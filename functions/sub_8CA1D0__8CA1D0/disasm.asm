@@ -31,7 +31,6 @@
 0x8CA214: test    eax, eax
 0x8CA216: jle     short loc_8CA249
 0x8CA218: jmp     short loc_8CA220
-0x8CA21A: align 10h
 0x8CA220: mov     eax, [esi+3Ch]
 0x8CA223: mov     edx, [eax+edi*4]
 0x8CA226: lea     ecx, ds:0[edi*4]

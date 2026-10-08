@@ -1,1 +1,1 @@
-MapShader
+struct MapShader;

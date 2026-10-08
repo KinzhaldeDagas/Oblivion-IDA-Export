@@ -25,12 +25,12 @@
 0x65446A: test    al, al
 0x65446C: jnz     loc_654518
 0x654472: mov     ecx, esi; this
-0x654474: call    MobileObject_GetCharProxy
+0x654474: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x654479: mov     esi, eax
 0x65447B: lea     eax, [esp+50h+var_2C]
 0x65447F: push    eax
 0x654480: mov     ecx, esi
-0x654482: call    sub_5E1500
+0x654482: call    sub_5E1500; TES4 authoritative: reads proxy position via 0x891440 and converts Havok units back to TES/world units via 0x43F3E0.
 0x654487: fld     [esp+50h+var_2C]
 0x65448B: fsub    [ebp+arg_4]
 0x65448E: lea     ecx, [esp+50h+var_38]
@@ -40,7 +40,7 @@
 0x65449D: fstp    [esp+50h+var_34]
 0x6544A1: fldz
 0x6544A3: fstp    [esp+50h+var_30]
-0x6544A7: call    sub_43F350
+0x6544A7: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x6544AC: fstp    st
 0x6544AE: fld     [ebp+arg_10]
 0x6544B1: push    ecx
@@ -66,7 +66,7 @@
 0x6544FA: fstp    [esp+54h+var_54]; float
 0x6544FD: push    ecx; int
 0x6544FE: mov     ecx, esi
-0x654500: call    sub_8907A0
+0x654500: call    bhkCharacterController_SetTransientPushVector; Knockout path calls transient push setter; another non-climbing use of +0x2F0/+0x300.
 0x654505: pop     edi
 0x654506: pop     esi
 0x654507: mov     ecx, [esp+48h+var_4]
@@ -96,11 +96,11 @@
 0x65454B: mov     ecx, edi
 0x65454D: mov     byte ptr [edi+11Ch], 2
 0x654554: call    eax
-0x654556: mov     ecx, ds:0B333C4h
+0x654556: mov     ecx, ds:0B333C4h; this
 0x65455C: cmp     esi, ecx
 0x65455E: jnz     short loc_65456B
-0x654560: push    0
-0x654562: call    PlayerCharacter_GetPlayerNode
+0x654560: push    0; firstPerson
+0x654562: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x654567: mov     esi, eax
 0x654569: jmp     short loc_65456E
 0x65456B: mov     esi, [esi+3Ch]
@@ -108,14 +108,14 @@
 0x654570: push    1; a3
 0x654572: push    1; a2
 0x654574: push    esi; a1
-0x654575: call    sub_88D070
+0x654575: call    sub_88D070; ODismemberment: bhkBlendCollisionObject traversal entry. Requires bhkBlendCollisionObject or forced flag; queues callback off off_B2E314 with state payload including a2 and a3.
 0x65457A: fldz
 0x65457C: add     esp, 10h
 0x65457F: push    0; a3
 0x654581: push    ecx
 0x654582: mov     ecx, esi; this
 0x654584: fstp    [esp+58h+a2]; a2
-0x654587: call    NiAVObject_UpdateNiAVObject
+0x654587: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x65458C: fld     [ebp+arg_4]
 0x65458F: fld     qword ptr ds:0A39088h
 0x654595: push    ecx

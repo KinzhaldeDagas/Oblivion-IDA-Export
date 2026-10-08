@@ -5,7 +5,7 @@
 0x6ECCD5: mov     eax, [edi+40h]
 0x6ECCD8: mov     ecx, [edi+30h]
 0x6ECCDB: push    eax
-0x6ECCDC: call    NiObjectNET_GetExtraData
+0x6ECCDC: call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.
 0x6ECCE1: mov     esi, [edi+44h]
 0x6ECCE4: mov     ebx, eax
 0x6ECCE6: cmp     esi, ebx

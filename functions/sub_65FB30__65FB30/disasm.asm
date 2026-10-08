@@ -1,8 +1,8 @@
-0x65FB30: push    esi
+0x65FB30: push    esi; Normal Oblivion skill-level path creates a new empty attribute-bonus bucket whenever majorSkillAdvances is divisible by iLevelUpSkillCount (default 10). The just-earned skill's governing-attribute increment occurs before this major-only rollover.
 0x65FB31: mov     esi, ecx
 0x65FB33: mov     eax, [esi+184h]
 0x65FB39: cdq
-0x65FB3A: idiv    dword ptr ds:0B37618h
+0x65FB3A: idiv    dword ptr ds:0B37618h; Modulo divisor is g_iLevelUpSkillCount.value (native default 10).
 0x65FB40: test    edx, edx
 0x65FB42: jnz     short loc_65FBA2
 0x65FB44: cmp     [esi+5B4h], edx

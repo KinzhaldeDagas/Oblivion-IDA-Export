@@ -1,1 +1,5 @@
-GPOS_EntryExitRecord
+struct GPOS_EntryExitRecord
+{
+WORD EntryAnchor;
+WORD ExitAnchor;
+};

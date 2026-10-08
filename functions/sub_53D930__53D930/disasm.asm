@@ -76,3 +76,26 @@
 0x53DA19: pop     ebx
 0x53DA1A: add     esp, 10h
 0x53DA1D: retn    0Ch
+0x4BFCA0: mov     eax, [ecx+4]
+0x4BFCA3: push    eax
+0x4BFCA4: mov     dword ptr [ecx], offset ??_7?$NiTArray@PAVNiAGDDataBlock@NiAdditionalGeometryData@@@@6B@; const NiTArray<NiAdditionalGeometryData::NiAGDDataBlock *>::`vftable'
+0x4BFCAA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x4BFCAF: pop     ecx
+0x4BFCB0: retn
+0x9CF6B0: mov     ecx, [ebp-10h]
+0x9CF6B3: jmp     NiRefObject_destr
+0x9CF6B8: mov     ecx, [ebp-10h]
+0x9CF6BB: add     ecx, 1Ch
+0x9CF6BE: jmp     loc_4BFCA0
+0x9CF6C3: mov     eax, [ebp+4]
+0x9CF6C6: push    eax
+0x9CF6C7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CF6CC: pop     ecx
+0x9CF6CD: retn
+0x9CF6CE: mov     edx, [esp+arg_4]
+0x9CF6D2: lea     eax, [edx-14h]
+0x9CF6D5: mov     ecx, [edx-18h]
+0x9CF6D8: xor     ecx, eax
+0x9CF6DA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CF6DF: mov     eax, offset stru_AF82F0
+0x9CF6E4: jmp     ___CxxFrameHandler3

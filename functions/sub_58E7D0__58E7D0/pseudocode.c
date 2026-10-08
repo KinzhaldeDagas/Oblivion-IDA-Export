@@ -1,29 +1,30 @@
-void __usercall sub_58E7D0(_DWORD *this@<ecx>, double a2@<st2>, double a3@<st1>, double a4@<st0>)
+// Verified descriptive name: resolves parent xscroll trait 0xFF5, then pulses resolved target user5 (0xFB3) with sentinel, selected tile xscroll value, then zero. Navigation resolution has scroll side effects; not a pure lookup.
+void __thiscall Tile::RequestNavigationScroll(Tile *this)
 {
-  Tile *v5; // ecx
-  _DWORD *v6; // eax
-  _DWORD *v7; // esi
-  _DWORD *PropertyByCode; // eax
-  _DWORD *v9; // eax
-  _DWORD *v10; // eax
-  int v11; // [esp+Ch] [ebp-8h] BYREF
-  float Float; // [esp+10h] [ebp-4h]
+  Tile *v2; // ecx
+  Tile *v3; // eax
+  Tile *v4; // esi
+  OblivionTileValueView *v5; // eax
+  OblivionTileValueView *v6; // eax
+  OblivionTileValueView *v7; // eax
+  unsigned int v8; // [esp+Ch] [ebp-8h] BYREF
+  float value; // [esp+10h] [ebp-4h]
 
-  v5 = (Tile *)*(this + 4);
-  v11 = 0;
-  v6 = sub_58E3B0(v5, a2, a3, a4, (_DWORD *)0xFF5, &v11);
-  v7 = v6;
-  if ( v6 )
+  v2 = *((Tile **)this + 4); /*0x58e7db*/
+  v8 = 0; /*0x58e7e4*/
+  v3 = Tile::ResolveNavigationTrait(v2, 0xFF5u, &v8); /*0x58e7ec*/
+  v4 = v3; /*0x58e7f1*/
+  if ( v3 ) /*0x58e7f5*/
   {
-    PropertyByCode = Tile_GetPropertyByCode_(v6, (_DWORD *)0xFB3);
-    if ( PropertyByCode )
-      Tile_Property_SetFloatValue_((int)PropertyByCode, flt_A6906C);
-    Float = Tile_GetFloat(this, 0xFF5);
-    v9 = Tile_GetPropertyByCode_(v7, (_DWORD *)0xFB3);
-    if ( v9 )
-      Tile_Property_SetFloatValue_((int)v9, Float);
-    v10 = Tile_GetPropertyByCode_(v7, (_DWORD *)0xFB3);
-    if ( v10 )
-      Tile_Property_SetFloatValue_((int)v10, 0.0);
+    v5 = Tile::GetOrCreateValue(v3, 0xFB3u); /*0x58e7fe*/
+    if ( v5 ) /*0x58e805*/
+      Tile::Value::SetFloat(v5, flt_A6906C); /*0x58e813*/
+    value = Tile_GetFloat(this, 0xFF5); /*0x58e824*/
+    v6 = Tile::GetOrCreateValue(v4, 0xFB3u); /*0x58e82f*/
+    if ( v6 ) /*0x58e836*/
+      Tile::Value::SetFloat(v6, value); /*0x58e842*/
+    v7 = Tile::GetOrCreateValue(v4, 0xFB3u); /*0x58e84e*/
+    if ( v7 ) /*0x58e855*/
+      Tile::Value::SetFloat(v7, 0.0); /*0x58e85f*/
   }
 }

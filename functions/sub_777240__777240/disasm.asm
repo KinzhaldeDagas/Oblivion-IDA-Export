@@ -1,6 +1,6 @@
-0x777240: sub     esp, 2Ch
+0x777240: sub     esp, 2Ch; Pass226: Vertex-buffer upload helper; low mask bits upload screen positions, UVs, and packed colors.
 0x777243: cmp     [esp+2Ch+arg_4], 0
-0x777249: mov     [esp+2Ch+var_28], ecx
+0x777249: mov     [esp+2Ch+self], ecx
 0x77724D: jz      loc_7774AC
 0x777253: cmp     [esp+2Ch+arg_8], 0
 0x777258: jz      loc_7774AC
@@ -24,7 +24,7 @@
 0x777296: mov     ebp, [esp+3Ch+arg_0]
 0x77729A: push    edi
 0x77729B: mov     ecx, ebp
-0x77729D: call    sub_7780A0
+0x77729D: call    sub_7780A0; MoonSugarEffect decode: NiGeometryBufferData SetFVF-style input ownership. Stores FVF and releases any cached IDirect3DVertexDeclaration9, so callers switch the buffer to fixed-function input mode.
 0x7772A2: cmp     dword ptr [ebp+1Ch], 0
 0x7772A6: jbe     short loc_7772AD
 0x7772A8: mov     eax, [ebp+20h]
@@ -59,26 +59,26 @@
 0x7772FF: mov     eax, [esp+3Ch+arg_18]
 0x777303: mov     [esp+3Ch+arg_0], eax
 0x777307: jmp     short loc_77732A
-0x777309: mov     ecx, [esp+3Ch+var_28]
+0x777309: mov     ecx, [esp+3Ch+self]
 0x77730D: push    0
 0x77730F: push    ebp
-0x777310: call    NiGeometryBufferData__RefreshVBChips
+0x777310: call    NiGeometryBufferData__RefreshVBChips; MoonSugarEffect decode: NiGeometryBufferData::RefreshVBChips. Releases the existing geometry-group chip for this stream, creates a replacement chip through NiGeometryGroup, and stores it in VBChip[stream] if stream is in range. This is allocation/lifetime ownership, not a safe mask-pass getter.
 0x777315: test    al, al
 0x777317: jz      loc_777492
 0x77731D: push    0
 0x77731F: mov     ecx, ebp
-0x777321: call    sub_761AC0
+0x777321: call    sub_761AC0; MoonSugarEffect decode: NiGeometryBufferData VBChip getter. Returns VBChip[stream] only when stream < StreamCount; no allocation or refresh. This is the safe read-side primitive for already-packed mask submission.
 0x777326: mov     [esp+3Ch+arg_0], eax
 0x77732A: mov     ecx, [eax+10h]
 0x77732D: mov     edx, [eax+14h]
 0x777330: mov     edi, [eax+0Ch]
 0x777333: mov     eax, [eax+8]
-0x777336: push    ecx; int
-0x777337: mov     ecx, [esp+40h+var_28]
-0x77733B: push    edx; Size
-0x77733C: push    edi; int
-0x77733D: push    eax; int
-0x77733E: call    sub_776C90
+0x777336: push    ecx; flags
+0x777337: mov     ecx, [esp+40h+self]; self
+0x77733B: push    edx; byteCount
+0x77733C: push    edi; offsetBytes
+0x77733D: push    eax; buffer
+0x77733E: call    NiDX9VertexBufferManager_LockToStaging; MoonSugarEffect decode: VB lock helper. Locks D3D VB, caches original bytes in a staging buffer, and returns a writable pointer; unlock is handled by packers when they own the lock.
 0x777343: mov     [esp+3Ch+arg_1C], eax
 0x777347: test    [esp+3Ch+arg_14], 1
 0x77734C: mov     bp, [esp+3Ch+arg_4]
@@ -175,9 +175,9 @@
 0x77747B: jz      short loc_77749E
 0x77747D: mov     edx, [esp+3Ch+arg_0]
 0x777481: mov     eax, [edx+8]
-0x777484: mov     ecx, [esp+3Ch+var_28]
+0x777484: mov     ecx, [esp+3Ch+self]
 0x777488: push    eax
-0x777489: call    sub_776D80
+0x777489: call    sub_776D80; MoonSugarEffect decode: vertex-buffer-manager unlock/staging helper. Copies the staging buffer back to the locked D3D buffer, clears lock bookkeeping, leaves the critical section, then calls the vertex buffer Unlock vtable slot.
 0x77748E: test    al, al
 0x777490: jnz     short loc_77749E
 0x777492: pop     ebp

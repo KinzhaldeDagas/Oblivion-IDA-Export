@@ -1,4 +1,4 @@
-0x60B120: push    ebp
+0x60B120: push    ebp; Resolve a non-Actor TESObjectREFR impact from world position/normal and the contacted Havok collision object. Builds state-1 attachment data, ray-resolves material/subshape, applies retained AMMO enchantment, poison, then bow enchantment through the shooter's MagicCaster, restores prior caster state, emits hit events, applies impulse, and selects attached or free-impact state.
 0x60B121: mov     ebp, esp
 0x60B123: and     esp, 0FFFFFFF0h
 0x60B126: push    0FFFFFFFFh
@@ -17,19 +17,19 @@
 0x60B152: push    eax; ArgList
 0x60B153: lea     eax, [esp+234h+var_C]
 0x60B15A: mov     large fs:0, eax
-0x60B160: mov     eax, [ebp+arg_8]
-0x60B163: mov     esi, [ebp+arg_0]
-0x60B166: mov     edi, [ebp+arg_4]
+0x60B160: mov     eax, [ebp+struckReference]
+0x60B163: mov     esi, [ebp+impactPosition]
+0x60B166: mov     edi, [ebp+impactNormal]
 0x60B169: mov     ebx, ecx
 0x60B16B: mov     ecx, [ebp+arg_C]
 0x60B16E: push    54h ; 'T'; Size
-0x60B170: mov     [esp+238h+var_20C], esi
+0x60B170: mov     [esp+238h+self], esi
 0x60B174: mov     [esp+238h+var_1F0], edi
 0x60B178: mov     [esp+238h+var_1F8], eax
 0x60B17C: mov     [esp+238h+var_218], ecx
 0x60B180: call    FormHeapAlloc
 0x60B185: mov     [ebx+5Ch], eax
-0x60B188: mov     dword ptr [eax], 1
+0x60B188: mov     dword ptr [eax], 1; Resolved non-Actor TESObjectREFR impact initializes collision record state 1.
 0x60B18E: mov     edx, [ebx+5Ch]
 0x60B191: xor     eax, eax
 0x60B193: mov     [edx+2Ch], eax
@@ -66,20 +66,20 @@
 0x60B1F9: add     esp, 4
 0x60B1FC: mov     ecx, ebx; this
 0x60B1FE: mov     [eax+8], edx
-0x60B201: call    MobileObject_GetCharProxy
+0x60B201: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x60B206: test    eax, eax
 0x60B208: jz      loc_60B2F8
 0x60B20E: mov     ecx, ebx; this
-0x60B210: call    MobileObject_GetCharProxy
+0x60B210: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x60B215: test    eax, eax
 0x60B217: jz      short loc_60B229
 0x60B219: mov     eax, [eax+8]
 0x60B21C: test    eax, eax
 0x60B21E: jz      short loc_60B229
 0x60B220: mov     ecx, eax
-0x60B222: call    sub_8AC0A0
+0x60B222: call    bhkWorldObject_GetLinearVelocityPtr; TES4 authoritative: returns pointer to bhk collision object's velocity vector at object+0x10. 0x896000 copies this into proxy +0x2E0 before state update.
 0x60B227: jmp     short loc_60B22E
-0x60B229: mov     eax, offset stru_BA7A40
+0x60B229: mov     eax, offset unk_BA7A40
 0x60B22E: movaps  xmm0, xmmword ptr [eax]
 0x60B231: movss   [esp+234h+var_1C0], xmm0
 0x60B237: fld     [esp+234h+var_1C0]
@@ -109,17 +109,17 @@
 0x60B28C: fmul    dword ptr ds:0B258E0h
 0x60B292: fstp    [esp+234h+var_1FC]
 0x60B296: fmul    dword ptr ds:0B258E4h
-0x60B29C: fstp    [esp+234h+var_214]
+0x60B29C: fstp    [esp+234h+collisionObject]
 0x60B2A0: fld     [esp+234h+var_210]
 0x60B2A4: fstp    [esp+234h+a3]
 0x60B2A8: fld     [esp+234h+var_1FC]
 0x60B2AC: fstp    [esp+234h+var_204]
-0x60B2B0: fld     [esp+234h+var_214]
+0x60B2B0: fld     [esp+234h+collisionObject]
 0x60B2B4: fstp    [esp+234h+var_200]
 0x60B2B8: call    edx
 0x60B2BA: lea     ecx, [esp+234h+a3]
 0x60B2BE: push    ecx
-0x60B2BF: lea     edx, [esp+238h+var_1DC]
+0x60B2BF: lea     edx, [esp+238h+normalZ]
 0x60B2C3: push    edx
 0x60B2C4: lea     ecx, [eax+64h]
 0x60B2C7: call    sub_7101F0
@@ -137,15 +137,15 @@
 0x60B2EB: push    ecx
 0x60B2EC: add     edx, 1Ch
 0x60B2EF: push    edx
-0x60B2F0: call    sub_43F3E0
+0x60B2F0: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x60B2F5: add     esp, 8
 0x60B2F8: mov     eax, [ebx]
 0x60B2FA: mov     edx, [eax+154h]
 0x60B300: mov     ecx, ebx
 0x60B302: mov     dword ptr [ebx+60h], 1
-0x60B309: mov     [esp+234h+var_214], 0
+0x60B309: mov     [esp+234h+collisionObject], 0
 0x60B311: call    edx
-0x60B313: mov     esi, [esp+234h+var_1F8]
+0x60B313: mov     esi, [esp+234h+var_1F8]; RealArenaTraining fidelity pass: ESI is loaded from the hit-ref argument/local used for both arrow event paths.
 0x60B317: test    esi, esi
 0x60B319: mov     [esp+234h+var_210], eax
 0x60B31D: jz      loc_60BA65
@@ -183,8 +183,8 @@
 0x60B37C: mov     eax, [edx+170h]
 0x60B382: mov     ecx, ebx
 0x60B384: call    eax
-0x60B386: push    eax; float
-0x60B387: call    Script_AddEventToExtraScript
+0x60B386: push    eax; localPosZ
+0x60B387: call    Script_AddEventToExtraScript; RealArenaTraining fidelity pass: first arrow Script_AddEventToExtraScript in sub_60B120; EBX is ArrowProjectile and ESI remains hit ref.
 0x60B38C: mov     edi, [esp+240h+var_218]
 0x60B390: add     esp, 0Ch
 0x60B393: test    edi, edi
@@ -196,12 +196,12 @@
 0x60B3A3: test    eax, eax
 0x60B3A5: jz      short loc_60B3BC
 0x60B3A7: mov     ecx, eax
-0x60B3A9: call    sub_452A60
+0x60B3A9: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x60B3AE: test    eax, eax
 0x60B3B0: jz      short loc_60B3BC
 0x60B3B2: mov     edx, [ebx+5Ch]
 0x60B3B5: mov     [edx+2Ch], eax
-0x60B3B8: mov     [esp+234h+var_214], edi
+0x60B3B8: mov     [esp+234h+collisionObject], edi
 0x60B3BC: mov     eax, [ebx+5Ch]
 0x60B3BF: cmp     dword ptr [eax+2Ch], 0
 0x60B3C3: jnz     short loc_60B3E7
@@ -209,15 +209,15 @@
 0x60B3C8: mov     [eax+2Ch], ecx
 0x60B3CB: mov     edx, [ebx+5Ch]
 0x60B3CE: mov     eax, [edx+2Ch]
-0x60B3D1: push    eax
-0x60B3D2: call    sub_480340
+0x60B3D1: push    eax; object
+0x60B3D2: call    NiAVObject_FindBhkCollisionObjectRecursive; Returns the first bhk collision object found on object or recursively beneath its NiNode children. This is structural traversal, independent of node names.
 0x60B3D7: xor     esi, esi
 0x60B3D9: add     esp, 4
 0x60B3DC: cmp     eax, esi
 0x60B3DE: jz      short loc_60B406
 0x60B3E0: mov     ecx, [eax+10h]
-0x60B3E3: mov     [esp+234h+var_214], ecx
-0x60B3E7: mov     ecx, [esp+234h+var_214]
+0x60B3E3: mov     [esp+234h+collisionObject], ecx
+0x60B3E7: mov     ecx, [esp+234h+collisionObject]
 0x60B3EB: test    ecx, ecx
 0x60B3ED: jz      short loc_60B41D
 0x60B3EF: mov     eax, [ecx+8]
@@ -232,7 +232,7 @@
 0x60B404: jmp     short loc_60B41F
 0x60B406: mov     edx, [ebx+5Ch]
 0x60B409: push    edx
-0x60B40A: call    FormHeapFree
+0x60B40A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x60B40F: add     esp, 4
 0x60B412: mov     [ebx+5Ch], esi
 0x60B415: mov     [ebx+60h], esi
@@ -287,13 +287,13 @@
 0x60B4EB: fstp    [esp+23Ch+var_1BC]
 0x60B4F2: fst     [esp+23Ch+var_1B8]
 0x60B4F9: fstp    [esp+23Ch+var_1B4]
-0x60B500: call    sub_88FCC0
+0x60B500: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x60B505: lea     edx, [esp+234h+var_1C0]
 0x60B509: push    edx
 0x60B50A: lea     eax, [esp+238h+var_E0]
 0x60B511: push    eax
 0x60B512: lea     ecx, [esp+23Ch+var_180]
-0x60B519: call    sub_88FCC0
+0x60B519: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x60B51E: lea     ecx, [esp+234h+var_1B0]
 0x60B525: push    ecx
 0x60B526: lea     edx, [esp+238h+var_190]
@@ -307,7 +307,7 @@
 0x60B543: jz      short loc_60B55C
 0x60B545: mov     eax, [ebx+5Ch]
 0x60B548: push    eax
-0x60B549: call    FormHeapFree
+0x60B549: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x60B54E: add     esp, 4
 0x60B551: mov     [ebx+5Ch], edi
 0x60B554: mov     [ebx+60h], edi
@@ -351,9 +351,9 @@
 0x60B5C8: fld     [esp+234h+var_218]
 0x60B5CC: call    __CIsqrt
 0x60B5D1: fstp    [esp+234h+var_218]
-0x60B5D5: mov     eax, [esp+234h+var_214]
+0x60B5D5: mov     eax, [esp+234h+collisionObject]
 0x60B5D9: fld     [esp+234h+var_218]
-0x60B5DD: mov     esi, [esp+234h+var_20C]
+0x60B5DD: mov     esi, [esp+234h+self]
 0x60B5E1: fstp    [esp+234h+var_218]
 0x60B5E5: mov     ecx, [esi]
 0x60B5E7: fld     [esp+234h+var_218]
@@ -368,25 +368,25 @@
 0x60B5FD: mov     [eax+8], ecx
 0x60B600: push    ecx
 0x60B601: mov     ecx, ebx
-0x60B603: fstp    [esp+24Ch+var_24C]; float
+0x60B603: fstp    [esp+24Ch+pointY]; directionZ
 0x60B606: call    sub_609D50
 0x60B60B: fld     dword ptr [ebx+88h]
 0x60B611: fchs
 0x60B613: lea     ecx, [esp+234h+a3]
-0x60B617: fstp    [esp+234h+var_20C]
+0x60B617: fstp    [esp+234h+self]
 0x60B61B: fld     dword ptr [ebx+8Ch]
 0x60B621: fchs
 0x60B623: fstp    [esp+234h+var_218]
 0x60B627: fld     dword ptr [ebx+90h]
 0x60B62D: fchs
-0x60B62F: fstp    [esp+234h+var_1F4]
-0x60B633: fld     [esp+234h+var_20C]
+0x60B62F: fstp    [esp+234h+parentNode]
+0x60B633: fld     [esp+234h+self]
 0x60B637: fstp    [esp+234h+a3]
 0x60B63B: fld     [esp+234h+var_218]
 0x60B63F: fstp    [esp+234h+var_204]
-0x60B643: fld     [esp+234h+var_1F4]
+0x60B643: fld     [esp+234h+parentNode]
 0x60B647: fstp    [esp+234h+var_200]
-0x60B64B: call    sub_43F350
+0x60B64B: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x60B650: mov     eax, [esp+234h+var_1F0]
 0x60B654: fstp    st
 0x60B656: fld     [esp+234h+a3]
@@ -399,39 +399,39 @@
 0x60B66F: fld     dword ptr [eax+8]
 0x60B672: fadd    [esp+234h+var_200]
 0x60B676: fstp    [esp+234h+var_200]
-0x60B67A: call    sub_43F350
-0x60B67F: push    edi
+0x60B67A: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
+0x60B67F: push    edi; materialId
 0x60B680: fstp    st
-0x60B682: call    sub_5361B0
+0x60B682: call    ImpactMaterial_GetHitParticlePath; Verified: maps Havok/material hit IDs to the corresponding sHitParticle* GameSetting string. 1/0x10 Stone; 2/0x11 Cloth; 3/0x12 Dirt; 4/0x13 Glass; 5/0x0B/0x14/0x1A Grass; 6/0x15 Metal; 7/0x16 Organic; 8/0x17 Skin; 9/0x0C/0x18/0x1B Water; 0x0D/0x1C Wood; 0x0E/0x1D Chain; default (including remaining material IDs) Snow. Distinct from Actor/TESCreature blood NIF path.
 0x60B687: mov     edi, eax
 0x60B689: add     esp, 4
 0x60B68C: test    edi, edi
 0x60B68E: jz      loc_60B747
 0x60B694: mov     ecx, ebx; this
-0x60B696: call    TESObjectREFR_GetParentCell
+0x60B696: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x60B69B: push    ebx; TESObjectREFR *
 0x60B69C: call    sub_4C9BE0
 0x60B6A1: add     esp, 4
 0x60B6A4: push    3
 0x60B6A6: push    eax
 0x60B6A7: mov     ecx, ebx; this
-0x60B6A9: call    TESObjectREFR_GetParentCell
+0x60B6A9: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x60B6AE: mov     ecx, eax
-0x60B6B0: call    sub_441800
+0x60B6B0: call    sub_441800; ODismemberment authority: loaded cell effect child lookup by quadrant/index; hit particles use index 3 after sub_4C9BE0(ref).
 0x60B6B5: push    20h ; ' '; Size
-0x60B6B7: mov     [esp+238h+var_1F4], eax
+0x60B6B7: mov     [esp+238h+parentNode], eax
 0x60B6BB: call    FormHeapAlloc
 0x60B6C0: add     esp, 4
-0x60B6C3: mov     [esp+234h+var_20C], eax
+0x60B6C3: mov     [esp+234h+self], eax
 0x60B6C7: test    eax, eax
 0x60B6C9: mov     [esp+234h+var_4], 0
 0x60B6D4: jz      short loc_60B72F
 0x60B6D6: fld1
 0x60B6D8: mov     edx, [esi]
 0x60B6DA: mov     ecx, [esi+4]
-0x60B6DD: push    0; float
+0x60B6DD: push    0; useCachedClone
 0x60B6DF: sub     esp, 10h
-0x60B6E2: fstp    [esp+248h+a2]; float
+0x60B6E2: fstp    [esp+248h+a2]; scale
 0x60B6E6: mov     eax, esp
 0x60B6E8: fld     dword ptr ds:0A31E2Ch
 0x60B6EE: mov     [eax], edx
@@ -445,24 +445,24 @@
 0x60B706: mov     [eax], ecx
 0x60B708: mov     ecx, [esp+254h+var_200]
 0x60B70C: mov     [eax+4], edx
-0x60B70F: mov     edx, [esp+254h+var_1F4]
-0x60B713: push    edi; float
-0x60B714: push    edx; int
+0x60B70F: mov     edx, [esp+254h+parentNode]
+0x60B713: push    edi; modelPath
+0x60B714: push    edx; parentNode
 0x60B715: mov     [eax+8], ecx
 0x60B718: push    ecx
 0x60B719: mov     ecx, ebx; this
-0x60B71B: fstp    [esp+260h+var_260]; float
-0x60B71E: call    TESObjectREFR_GetParentCell
-0x60B723: mov     ecx, [esp+260h+var_20C]
-0x60B727: push    eax; int
-0x60B728: call    sub_5713F0
+0x60B71B: fstp    [esp+260h+durationSeconds]; durationSeconds
+0x60B71E: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x60B723: mov     ecx, [esp+260h+self]; self
+0x60B727: push    eax; parentCell
+0x60B728: call    BSTempEffectParticle_Constructor; Verified: constructs BSTempEffectParticle; parameters include cell, duration, NiNode parent, model path, direction XYZ, local position XYZ, scale, and cached-clone flag. Body-hit caller 0x5EF214 passes direction XYZ and position XYZ; constructor writes position components into the NiAVObject local-transform translation (including stores at root+0x54/+0x58). It applies |scale|, attaches the cloned NIF and starts controllers. Cached-clone choice is controlled by the final bool. All parameters now typed by observed data flow.
 0x60B72D: jmp     short loc_60B731
 0x60B72F: xor     eax, eax
-0x60B731: push    eax
-0x60B732: mov     ecx, offset ActorProcessManager_ptr
+0x60B731: push    eax; effect
+0x60B732: mov     ecx, (offset qword_B3BB2C+1D4h); self
 0x60B737: mov     [esp+238h+var_4], 0FFFFFFFFh
-0x60B742: call    sub_678D30
-0x60B747: mov     ecx, [ebx+78h]
+0x60B742: call    ActorProcessManager_RegisterTempEffect; [Verified] ActorProcessManager_RegisterTempEffect increments the effect reference and routes GetTypeID 4-6 into extendedTempEffects (+0x48), all other IDs into activeTempEffects (+0x40). Vtable evidence confirms decals 0/1 and particles 2 use the active list. Fallout divergence: its BGSDecalManager updates distinct simple-decal and emitter collections instead of using this per-actor temp-effect routing; one-to-one equivalence is Unknown.
+0x60B747: mov     ecx, [ebx+78h]; Temporarily save shooter MagicCaster active item and target before applying projectile-retained effects; both are restored after AMMO enchantment, poison, and bow enchantment processing.
 0x60B74A: test    ecx, ecx
 0x60B74C: jz      loc_60B894
 0x60B752: mov     eax, [ecx+5Ch]
@@ -471,12 +471,12 @@
 0x60B75B: call    edx
 0x60B75D: mov     ecx, [ebx+78h]
 0x60B760: add     ecx, 5Ch ; '\'
-0x60B763: mov     [esp+234h+var_1F4], eax
+0x60B763: mov     [esp+234h+parentNode], eax
 0x60B767: mov     eax, [ecx]
 0x60B769: mov     edx, [eax+38h]
 0x60B76C: call    edx
-0x60B76E: mov     [esp+234h+var_20C], eax
-0x60B772: mov     eax, [ebx+7Ch]
+0x60B76E: mov     [esp+234h+self], eax
+0x60B772: mov     eax, [ebx+7Ch]; Apply ArrowProjectile+0x7C AMMO EnchantmentItem retained from the AMMO base form.
 0x60B775: test    eax, eax
 0x60B777: jz      short loc_60B7C5
 0x60B779: mov     ecx, [ebx+78h]
@@ -505,8 +505,8 @@
 0x60B7B9: mov     ecx, [ebx+78h]
 0x60B7BC: push    eax
 0x60B7BD: add     ecx, 5Ch ; '\'
-0x60B7C0: call    MagicCaster_UseActiveMagicItem
-0x60B7C5: mov     edx, [ebx+84h]
+0x60B7C0: call    MagicCaster_UseActiveMagicItem; Non-Actor reference impact invokes shooter MagicCaster with projectile-held AMMO enchantment.
+0x60B7C5: mov     edx, [ebx+84h]; Apply ArrowProjectile+0x84 AlchemyItem poison retained from the equipped weapon; poison was already removed from that weapon at release.
 0x60B7CB: test    edx, edx
 0x60B7CD: jz      short loc_60B81A
 0x60B7CF: mov     eax, [ebx+78h]
@@ -535,8 +535,8 @@
 0x60B80E: mov     ecx, [ebx+78h]
 0x60B811: push    eax
 0x60B812: add     ecx, 5Ch ; '\'
-0x60B815: call    MagicCaster_UseActiveMagicItem
-0x60B81A: mov     edx, [ebx+80h]
+0x60B815: call    MagicCaster_UseActiveMagicItem; Non-Actor reference impact invokes shooter MagicCaster with projectile-held poison.
+0x60B81A: mov     edx, [ebx+80h]; Apply ArrowProjectile+0x80 bow EnchantmentItem retained only after successful release-time charge payment.
 0x60B820: test    edx, edx
 0x60B822: jz      short loc_60B86F
 0x60B824: mov     eax, [ebx+78h]
@@ -557,7 +557,7 @@
 0x60B84F: mov     edx, [edi]
 0x60B851: push    eax
 0x60B852: add     ecx, 5Ch ; '\'
-0x60B855: call    edx
+0x60B855: call    edx; Non-Actor reference impact invokes shooter MagicCaster with projectile-held bow enchantment.
 0x60B857: mov     eax, [ebx]
 0x60B859: mov     edx, [eax+170h]
 0x60B85F: mov     ecx, ebx
@@ -567,7 +567,7 @@
 0x60B867: add     ecx, 5Ch ; '\'
 0x60B86A: call    MagicCaster_UseActiveMagicItem
 0x60B86F: mov     eax, [ebx+78h]
-0x60B872: mov     edx, [esp+234h+var_1F4]
+0x60B872: mov     edx, [esp+234h+parentNode]
 0x60B876: lea     ecx, [eax+5Ch]
 0x60B879: mov     eax, [ecx]
 0x60B87B: mov     eax, [eax+34h]
@@ -577,12 +577,12 @@
 0x60B884: mov     edx, [eax+5Ch]
 0x60B887: mov     edx, [edx+3Ch]
 0x60B88A: lea     ecx, [eax+5Ch]
-0x60B88D: mov     eax, [esp+234h+var_20C]
+0x60B88D: mov     eax, [esp+234h+self]
 0x60B891: push    eax
 0x60B892: call    edx
-0x60B894: mov     edi, [esp+234h+var_1F8]
+0x60B894: mov     edi, [esp+234h+var_1F8]; RealArenaTraining fidelity pass: EDI is reloaded from the same hit-ref local before the static object event.
 0x60B898: mov     ecx, edi; this
-0x60B89A: call    TESObjectREFR_GetParentCell
+0x60B89A: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x60B89F: test    eax, eax
 0x60B8A1: jz      short loc_60B8B3
 0x60B8A3: mov     ecx, eax
@@ -603,22 +603,22 @@
 0x60B8C8: jz      short loc_60B8D9
 0x60B8CA: push    10000000h
 0x60B8CF: push    eax
-0x60B8D0: push    edi; a2
-0x60B8D1: call    Script_AddEventToExtraScript
+0x60B8D0: push    edi; normalY
+0x60B8D1: call    Script_AddEventToExtraScript; RealArenaTraining fidelity pass: second arrow event in the same collision function; EBX is the same ArrowProjectile and EDI is the same hit ref, so plugin suppresses duplicate training by arrow+target identity rather than time.
 0x60B8D6: add     esp, 0Ch
 0x60B8D9: cmp     dword ptr [ebx+7Ch], 0
 0x60B8DD: jz      short loc_60B8E6
 0x60B8DF: mov     dword ptr [ebx+60h], 3
 0x60B8E6: mov     edi, [esp+234h+var_210]
-0x60B8EA: push    offset dword_B258DC
-0x60B8EF: lea     eax, [esp+238h+var_1DC]
+0x60B8EA: push    offset stru_B258DC
+0x60B8EF: lea     eax, [esp+238h+normalZ]
 0x60B8F3: add     edi, 64h ; 'd'
-0x60B8F6: push    eax; float
+0x60B8F6: push    eax; normalZ
 0x60B8F7: mov     ecx, edi
 0x60B8F9: call    sub_7101F0
-0x60B8FE: mov     ecx, [esp+234h+var_214]
+0x60B8FE: mov     ecx, [esp+234h+collisionObject]
 0x60B902: mov     edx, [eax]
-0x60B904: push    ecx; int
+0x60B904: push    ecx; collisionObject
 0x60B905: sub     esp, 0Ch
 0x60B908: mov     ecx, esp
 0x60B90A: mov     [ecx], edx
@@ -634,8 +634,8 @@
 0x60B924: mov     ecx, [esi+8]
 0x60B927: mov     [eax+4], edx
 0x60B92A: mov     [eax+8], ecx
-0x60B92D: mov     ecx, ebx
-0x60B92F: call    sub_6088F0
+0x60B92D: mov     ecx, ebx; this
+0x60B92F: call    ArrowProjectile_ApplyImpactImpulseToCollision; Applies the one-shot impact impulse using world-space contact point and normal components. Projectile byte +0x97 prevents duplicate attempts, including unsupported collision objects.
 0x60B934: mov     eax, [esp+234h+var_1FC]
 0x60B938: cmp     eax, 1Eh; switch 31 cases
 0x60B93B: ja      short def_60B944; jumptable 0060B944 default case, cases 1,2,4,6-9,12,14,16,17,19,21-24,27,29
@@ -646,7 +646,7 @@
 0x60B950: jmp     loc_60BA5D
 0x60B955: lea     ecx, [esp+234h+var_1E0]; jumptable 0060B944 default case, cases 1,2,4,6-9,12,14,16,17,19,21-24,27,29
 0x60B959: push    ecx
-0x60B95A: mov     ecx, [esp+238h+var_214]
+0x60B95A: mov     ecx, [esp+238h+collisionObject]
 0x60B95E: call    sub_497340
 0x60B963: mov     eax, [eax]
 0x60B965: and     eax, 3Fh
@@ -670,7 +670,7 @@
 0x60B9A9: fld     [esp+23Ch+var_1E8]
 0x60B9AD: fadd    qword ptr ds:0A2F910h
 0x60B9B3: fstp    [esp+23Ch+var_1E8]
-0x60B9B7: call    sub_53D4B0
+0x60B9B7: call    NiTransform_TransformPoint; ODismemberment: __thiscall NiTransform point transform helper. Plugin hit capture must pass transform in ECX; cdecl here crashes on actor hits.
 0x60B9BC: mov     esi, [esp+234h+a3]
 0x60B9C0: mov     ecx, [esp+234h+var_204]
 0x60B9C4: mov     edx, [esp+234h+var_200]
@@ -691,7 +691,7 @@
 0x60B9F0: mov     [ecx+58h], eax
 0x60B9F3: fstp    [esp+23Ch+a2]; a2
 0x60B9F6: mov     [ecx+5Ch], edx
-0x60B9F9: call    NiAVObject_UpdateNiAVObject
+0x60B9F9: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x60B9FE: lea     eax, [esp+234h+var_60]
 0x60BA05: push    edi
 0x60BA06: push    eax
@@ -708,7 +708,7 @@
 0x60BA35: push    eax
 0x60BA36: add     ecx, 4
 0x60BA39: push    ecx
-0x60BA3A: call    sub_43F3E0
+0x60BA3A: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x60BA3F: mov     eax, [ebx+5Ch]
 0x60BA42: lea     edx, [esp+23Ch+var_120]
 0x60BA49: push    edx
@@ -721,7 +721,7 @@
 0x60BA5C: push    ecx
 0x60BA5D: push    esi
 0x60BA5E: mov     ecx, ebx
-0x60BA60: call    sub_608DA0
+0x60BA60: call    ArrowProjectile_SetFreeImpactState3; Convert to free-impact state 3 without changing TESObjectREFR.baseForm or attaching source-WEAP identity.
 0x60BA65: mov     ecx, dword ptr [esp+234h+var_C]
 0x60BA6C: mov     large fs:0, ecx
 0x60BA73: pop     ecx
@@ -734,3 +734,19 @@
 0x60BA85: mov     esp, ebp
 0x60BA87: pop     ebp
 0x60BA88: retn    10h
+0x9C2FC0: mov     eax, [ebp+self]
+0x9C2FC6: push    eax
+0x9C2FC7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C2FCC: pop     ecx
+0x9C2FCD: retn
+0x9C2FCE: mov     edx, [esp-4+impactNormal]
+0x9C2FD2: lea     eax, [edx-224h]
+0x9C2FD8: mov     ecx, [edx-228h]
+0x9C2FDE: xor     ecx, eax
+0x9C2FE0: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C2FE5: add     eax, 0Ch
+0x9C2FE8: mov     ecx, [edx-8]
+0x9C2FEB: xor     ecx, eax
+0x9C2FED: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C2FF2: mov     eax, offset stru_AEBCB4
+0x9C2FF7: jmp     ___CxxFrameHandler3

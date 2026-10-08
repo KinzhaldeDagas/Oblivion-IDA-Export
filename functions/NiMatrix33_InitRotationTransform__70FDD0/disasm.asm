@@ -1,7 +1,7 @@
-0x70FDD0: sub     esp, 8
-0x70FDD3: fld     [esp+8+arg_0]
+0x70FDD0: sub     esp, 8; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
+0x70FDD3: fld     [esp+8+angleZ]
 0x70FDD7: fsincos
-0x70FDD9: fstp    [esp+8+var_8]
+0x70FDD9: fstp    [esp+8+var_8]; Verified matrix helper consumes angleZ directly in sin/cos with no degree conversion; its units are radians.
 0x70FDDC: fstp    [esp+8+var_4]
 0x70FDE0: fld     [esp+8+var_8]
 0x70FDE3: fst     dword ptr [ecx]

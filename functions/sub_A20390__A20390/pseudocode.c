@@ -1,4 +1,4 @@
 void __cdecl sub_A20390()
 {
-  GameSetting_destr((int *)&flt_B37E38);
+  GameSetting_destr((int *)flt_B37E38); /*0xa20395*/
 }

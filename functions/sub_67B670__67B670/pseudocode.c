@@ -4,17 +4,17 @@ void __thiscall sub_67B670(int **this, int a2)
   int *i; // eax
   _DWORD *v4; // esi
 
-  v2 = *this;
-  for ( i = v2; i; i = (int *)i[1] )
+  v2 = *this; /*0x67b670*/
+  for ( i = v2; i; i = (int *)i[1] ) /*0x67b676*/
   {
-    v4 = (_DWORD *)*i;
-    if ( !*i )
-      break;
-    if ( *v4 == a2 )
+    v4 = (_DWORD *)*i; /*0x67b680*/
+    if ( !*i ) /*0x67b680*/
+      break; /*0x67b680*/
+    if ( *v4 == a2 ) /*0x67b688*/
     {
-      BSSimpleList_Remove(v2, *i);
-      FormHeapFree((unsigned int)v4);
-      return;
+      BSSimpleList_Remove(v2, *i); /*0x67b696*/
+      FormHeapFree((unsigned int)v4); /*0x67b69c*/
+      return; /*0x67b69c*/
     }
   }
 }

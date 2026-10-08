@@ -7,13 +7,13 @@
   },
   {
     "ea": "0x470781",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x470787",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -25,13 +25,13 @@
   },
   {
     "ea": "0x47078D",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x47078E",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x4707A7",
-    "line": "call    sub_458E50",
+    "line": "call    SaveLoad_QueueAnimationBlob; MEF v27 verification: raw blob helper consumes UInt16 payload from SaveLoad+0x14. Guarded null-key/null-map replacements must discard the payload before skipping map insertion to preserve stream alignment.",
     "mnemonic": "call",
     "size": 5
   },

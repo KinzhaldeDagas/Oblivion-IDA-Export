@@ -10,7 +10,7 @@
 0x693663: test    esi, esi
 0x693665: jz      short loc_6936C3
 0x693667: mov     ecx, esi
-0x693669: call    sub_5E5A00
+0x693669: call    Actor_SelectArmorOrShieldForHitDamage; ODismemberment combat decode: selects a random equipped armor/shield/container entry for durability damage using iArmorDamage* chances, falling back to equipped weapon entry if no armor entry is chosen.
 0x69366E: test    eax, eax
 0x693670: mov     [edi+38h], eax
 0x693673: jz      short loc_6936C3
@@ -18,7 +18,7 @@
 0x693678: mov     edx, [esi]
 0x69367A: push    1
 0x69367C: push    ecx
-0x69367D: fstp    [esp+14h+var_14]
+0x69367D: fstp    dword ptr [esp+14h+var_14]
 0x693680: push    eax
 0x693681: mov     eax, [edx+2C4h]
 0x693687: mov     ecx, esi
@@ -30,7 +30,7 @@
 0x69369A: fstp    [esp+0Ch+var_4]
 0x69369E: sub     esp, 8
 0x6936A1: fld     [esp+14h+var_4]
-0x6936A5: fstp    qword ptr [esp+14h+var_14]
+0x6936A5: fstp    [esp+14h+var_14]
 0x6936A8: call    sub_488DF0
 0x6936AD: push    eax
 0x6936AE: mov     ecx, esi; this

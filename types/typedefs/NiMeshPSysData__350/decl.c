@@ -1,1 +1,1 @@
-NiMeshPSysData
+struct NiMeshPSysData;

@@ -6,9 +6,9 @@
 0x7C53BC: push    edi
 0x7C53BD: mov     edi, [esp+10h+arg_0]
 0x7C53C1: lea     eax, [esp+10h+arg_0]
-0x7C53C5: push    eax
-0x7C53C6: mov     ecx, edi
-0x7C53C8: call    sub_405760
+0x7C53C5: push    eax; output
+0x7C53C6: mov     ecx, edi; this
+0x7C53C8: call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.
 0x7C53CD: mov     ebx, [eax]
 0x7C53CF: mov     eax, [esp+10h+arg_0]
 0x7C53D3: test    eax, eax
@@ -30,11 +30,11 @@
 0x7C53F7: test    ebx, ebx
 0x7C53F9: jnz     short loc_7C542E
 0x7C53FB: mov     ecx, edi; this
-0x7C53FD: call    NiAVObject_InitializePropertyState
+0x7C53FD: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x7C5402: lea     ecx, [esp+10h+arg_0]
-0x7C5406: push    ecx
-0x7C5407: mov     ecx, edi
-0x7C5409: call    sub_405760
+0x7C5406: push    ecx; output
+0x7C5407: mov     ecx, edi; this
+0x7C5409: call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.
 0x7C540E: mov     esi, [esp+10h+arg_0]
 0x7C5412: test    esi, esi
 0x7C5414: jz      short loc_7C542E

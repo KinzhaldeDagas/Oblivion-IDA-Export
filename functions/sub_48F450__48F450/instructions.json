@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x48F48D",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x48F4D7",
-    "line": "push    offset dword_B3442C; int",
+    "line": "push    0B3442Ch; int",
     "mnemonic": "push",
     "size": 5
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x48F50D",
-    "line": "push    offset dword_B3442C; int",
+    "line": "push    0B3442Ch; int",
     "mnemonic": "push",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x48F52F",
-    "line": "push    offset dword_B3442C; int",
+    "line": "push    0B3442Ch; int",
     "mnemonic": "push",
     "size": 5
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x48F54B",
-    "line": "push    offset dword_B3442C; int",
+    "line": "push    0B3442Ch; int",
     "mnemonic": "push",
     "size": 5
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x48F5B2",
-    "line": "call    sub_4891C0",
+    "line": "call    Player_CalcInventoryEntryRating",
     "mnemonic": "call",
     "size": 5
   },
@@ -955,7 +955,7 @@
   },
   {
     "ea": "0x48F651",
-    "line": "push    offset dword_B3442C; int",
+    "line": "push    0B3442Ch; int",
     "mnemonic": "push",
     "size": 5
   },
@@ -997,7 +997,7 @@
   },
   {
     "ea": "0x48F668",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1015,7 +1015,7 @@
   },
   {
     "ea": "0x48F673",
-    "line": "push    offset dword_B3442C; int",
+    "line": "push    0B3442Ch; int",
     "mnemonic": "push",
     "size": 5
   },

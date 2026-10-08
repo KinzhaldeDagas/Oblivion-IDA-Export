@@ -2,7 +2,7 @@
 0x73EF31: mov     esi, ecx
 0x73EF33: mov     eax, [esi+4Ch]
 0x73EF36: push    eax
-0x73EF37: call    FormHeapFree
+0x73EF37: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x73EF3C: mov     ecx, [esp+8+arg_0]
 0x73EF40: add     esp, 4
 0x73EF43: mov     [esi+4Ch], ecx

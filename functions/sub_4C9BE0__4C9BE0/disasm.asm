@@ -5,11 +5,11 @@
 0x4C9BE8: test    esi, esi
 0x4C9BEA: jz      loc_4C9C75
 0x4C9BF0: mov     ecx, esi; this
-0x4C9BF2: call    TESObjectREFR_GetParentCell
+0x4C9BF2: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x4C9BF7: test    eax, eax
 0x4C9BF9: jz      short loc_4C9C75
 0x4C9BFB: mov     ecx, esi; this
-0x4C9BFD: call    TESObjectREFR_GetParentCell
+0x4C9BFD: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x4C9C02: test    byte ptr [eax+24h], 1
 0x4C9C06: jnz     short loc_4C9C75
 0x4C9C08: mov     eax, [esi]
@@ -21,7 +21,7 @@
 0x4C9C1C: call    unknown_libname_14
 0x4C9C21: fstp    [esp+8+arg_0]
 0x4C9C25: fld     [esp+8+arg_0]
-0x4C9C29: call    Double_To_SInt32
+0x4C9C29: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4C9C2E: cdq
 0x4C9C2F: xor     eax, edx
 0x4C9C31: sub     eax, edx
@@ -37,7 +37,7 @@
 0x4C9C54: call    unknown_libname_14
 0x4C9C59: fstp    [esp+8+arg_0]
 0x4C9C5D: fld     [esp+8+arg_0]
-0x4C9C61: call    Double_To_SInt32
+0x4C9C61: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4C9C66: cdq
 0x4C9C67: xor     eax, edx
 0x4C9C69: sub     eax, edx

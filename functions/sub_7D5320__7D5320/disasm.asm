@@ -1,4 +1,4 @@
-0x7D5320: push    ebx
+0x7D5320: push    ebx; Walk unfinished receiver cursor +0x144, invalidate accepted subtype-1..10 shader properties, then clear the cursor.
 0x7D5321: push    ebp
 0x7D5322: mov     ebp, ecx
 0x7D5324: push    edi
@@ -13,7 +13,7 @@
 0x7D533A: mov     edi, [edi]
 0x7D533C: jz      short loc_7D537B
 0x7D533E: push    4
-0x7D5340: call    NiNode_GetNiPropertyByID
+0x7D5340: call    NiNode_GetNiPropertyByID;
 0x7D5345: mov     esi, eax
 0x7D5347: cmp     esi, ebx
 0x7D5349: jz      short loc_7D537B

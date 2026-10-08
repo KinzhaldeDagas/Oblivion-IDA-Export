@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6643A0",
-    "line": "sub     esp, 8Ch",
+    "line": "sub     esp, 8Ch; [Controller decode 2026-07-09] Non-player QueryControlState consumer: Forward 0, Back 1, SlideLeft 2, SlideRight 3 move flycam.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x6643E0",
-    "line": "lea     ecx, [esp+98h+var_24]",
+    "line": "lea     ecx, [esp+98h+var_24]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -175,13 +175,13 @@
   },
   {
     "ea": "0x664412",
-    "line": "fstp    [esp+98h+var_98]; float",
+    "line": "fstp    [esp+98h+angleZ]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x664415",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,55 +199,55 @@
   },
   {
     "ea": "0x664421",
-    "line": "lea     ecx, [esp+98h+var_48]",
+    "line": "lea     ecx, [esp+98h+right]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x664425",
-    "line": "fstp    [esp+98h+var_98]; float",
+    "line": "fstp    [esp+98h+angleZ]; angleX",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x664428",
-    "line": "call    NiMatrix33_InitRotationTransposedTransform???",
+    "line": "call    NiMatrix33_InitRotationXTransposed; Verified matrix coefficients make this an X-axis rotation in the engine's transposed convention: X stays fixed; only the Y/Z submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x66442D",
-    "line": "lea     ecx, [esp+94h+var_48]",
+    "line": "lea     ecx, [esp+94h+right]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x664431",
-    "line": "push    ecx",
+    "line": "push    ecx; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x664432",
-    "line": "lea     edx, [esp+98h+var_6C]",
+    "line": "lea     edx, [esp+98h+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x664436",
-    "line": "push    edx",
+    "line": "push    edx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x664437",
-    "line": "lea     ecx, [esp+9Ch+var_24]",
+    "line": "lea     ecx, [esp+9Ch+var_24]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x66443B",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x664463",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x664480",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x66449D",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x6644BA",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x6644DB",
-    "line": "lea     ecx, [esp+9Ch+var_6C]",
+    "line": "lea     ecx, [esp+9Ch+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -757,7 +757,7 @@
   },
   {
     "ea": "0x66457C",
-    "line": "lea     esi, [esp+94h+var_6C]",
+    "line": "lea     esi, [esp+94h+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -823,7 +823,7 @@
   },
   {
     "ea": "0x664597",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -877,7 +877,7 @@
   },
   {
     "ea": "0x6645B3",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },

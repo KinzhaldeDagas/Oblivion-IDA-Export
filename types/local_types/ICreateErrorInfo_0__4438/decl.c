@@ -1,1 +1,1 @@
-ICreateErrorInfo_0
+typedef ICreateErrorInfo ICreateErrorInfo_0;

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6B94E0",
-    "line": "push    esi",
+    "line": "push    esi; Destroys the singleton MenuTopicManager without closing IDA: clears owned MenuTopics, frees the manager, and nulls the singleton storage.",
     "mnemonic": "push",
     "size": 1
   },
@@ -25,13 +25,13 @@
   },
   {
     "ea": "0x6B94EB",
-    "line": "push    1",
+    "line": "push    1; clearAll",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6B94ED",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x6B94F6",
-    "line": "call    sub_6B9250",
+    "line": "call    MenuTopicManager__ClearData; ClearData owns ordinary MenuTopics but deliberately does not destroy isInfoGeneralTopic entries. Those are actor-specific caches owned by ExtraInfoGeneralTopic (0x59).",
     "mnemonic": "call",
     "size": 5
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x6B94FC",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

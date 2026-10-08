@@ -1,32 +1,32 @@
-float *__thiscall sub_7875D0(int this)
+// Sets up stock horizontal billboard coordinates after Compute updates extents/tree sizes.
+void __thiscall CSpeedTreeRT__SetupHorizontalBillboard(OB_CSpeedTreeRT_010201A0 *this)
 {
-  float *result; // eax
+  OB_STreeExtents_010201A0 *treeSizeBounds; // eax
   float v2; // [esp+0h] [ebp-1Ch]
   float v3; // [esp+4h] [ebp-18h]
   float v4; // [esp+8h] [ebp-14h]
-  float v5; // [esp+10h] [ebp-Ch]
-  float v6; // [esp+14h] [ebp-8h]
+  float x; // [esp+10h] [ebp-Ch]
+  float y; // [esp+14h] [ebp-8h]
 
-  if ( *(_BYTE *)(this + 0x6D) )
+  if ( this->flagHorizontalBillboard ) /*0x7875d3*/
   {
-    result = *(float **)(this + 0x40);
-    v5 = *result;
-    v6 = result[1];
-    v3 = result[3];
-    v4 = result[4];
-    v2 = (result[5] + result[2]) * dbl_A2FAA0;
-    *(float *)(this + 0x70) = v3;
-    *(float *)(this + 0x74) = v4;
-    *(float *)(this + 0x78) = v2;
-    *(float *)(this + 0x7C) = v5;
-    *(float *)(this + 0x80) = v4;
-    *(float *)(this + 0x84) = v2;
-    *(float *)(this + 0x88) = v5;
-    *(float *)(this + 0x8C) = v6;
-    *(float *)(this + 0x90) = v2;
-    *(float *)(this + 0x94) = v3;
-    *(float *)(this + 0x98) = v6;
-    *(float *)(this + 0x9C) = v2;
+    treeSizeBounds = this->treeSizeBounds; /*0x7875dd*/
+    x = treeSizeBounds->min.x; /*0x7875e2*/
+    y = treeSizeBounds->min.y; /*0x7875e9*/
+    v3 = treeSizeBounds->max.x; /*0x7875f7*/
+    v4 = treeSizeBounds->max.y; /*0x7875fe*/
+    v2 = (treeSizeBounds->max.z + treeSizeBounds->min.z) * dbl_A2FAA0; /*0x787617*/
+    this->horizontalBillboardCoords12[0] = v3; /*0x78761e*/
+    this->horizontalBillboardCoords12[1] = v4; /*0x787625*/
+    this->horizontalBillboardCoords12[2] = v2; /*0x78762b*/
+    this->horizontalBillboardCoords12[3] = x; /*0x787632*/
+    this->horizontalBillboardCoords12[4] = v4; /*0x787637*/
+    this->horizontalBillboardCoords12[5] = v2; /*0x78763d*/
+    this->horizontalBillboardCoords12[6] = x; /*0x787645*/
+    this->horizontalBillboardCoords12[7] = y; /*0x78764f*/
+    this->horizontalBillboardCoords12[8] = v2; /*0x787657*/
+    this->horizontalBillboardCoords12[9] = v3; /*0x78765f*/
+    this->horizontalBillboardCoords12[0xA] = y; /*0x787665*/
+    this->horizontalBillboardCoords12[0xB] = v2; /*0x78766b*/
   }
-  return result;
 }

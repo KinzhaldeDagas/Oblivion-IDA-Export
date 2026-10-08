@@ -1,0 +1,63 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "OB_SFrondVertex_010201A0",
+  "definition": "struct OB_SFrondVertex_010201A0\n{\nfloat position[3]; ///< Guide vertex xyz position.\nfloat rotationTransform3x3[9]; ///< Nine-float orientation transform.\nfloat primaryCrossSectionOrWindWeight; ///< Primary cross-section/wind weight. Oblivion has no stock RT 4.1 secondary slot in this 0x38 record.\nint primaryWindGroup; ///< Primary wind group. Oblivion has no stock RT 4.1 secondary group in this 0x38 record.\n}\n",
+  "id": 18374686479672083421,
+  "is_union": false,
+  "kind": "struct",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Guide vertex xyz position.",
+      "name": "position",
+      "offset": 0,
+      "offset_hex": "0x0",
+      "size": 12,
+      "type": "float[3]"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Nine-float orientation transform.",
+      "name": "rotationTransform3x3",
+      "offset": 12,
+      "offset_hex": "0xC",
+      "size": 36,
+      "type": "float[9]"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Primary cross-section/wind weight. Oblivion has no stock RT 4.1 secondary slot in this 0x38 record.",
+      "name": "primaryCrossSectionOrWindWeight",
+      "offset": 48,
+      "offset_hex": "0x30",
+      "size": 4,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Primary wind group. Oblivion has no stock RT 4.1 secondary group in this 0x38 record.",
+      "name": "primaryWindGroup",
+      "offset": 52,
+      "offset_hex": "0x34",
+      "size": 4,
+      "type": "int"
+    }
+  ],
+  "name": "OB_SFrondVertex_010201A0",
+  "ordinal": 9730,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 56
+}

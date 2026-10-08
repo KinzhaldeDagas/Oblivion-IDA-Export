@@ -2,15 +2,15 @@ OSGlobals *__cdecl sub_6AF850(OSGlobals *a1)
 {
   OSGlobals *result; // eax
 
-  result = a1;
-  if ( a1 )
+  result = a1; /*0x6af850*/
+  if ( a1 ) /*0x6af856*/
   {
-    dword_B3C0F0 = (int)a1;
+    unk_B3C0F0 = (int)a1; /*0x6af858*/
   }
   else
   {
-    result = OSGlobals;
-    dword_B3C0F0 = (int)OSGlobals->sound;
+    result = MEMORY[0xB33398]; /*0x6af85e*/
+    unk_B3C0F0 = (int)MEMORY[0xB33398]->sound; /*0x6af866*/
   }
-  return result;
+  return result; /*0x6af85d*/
 }

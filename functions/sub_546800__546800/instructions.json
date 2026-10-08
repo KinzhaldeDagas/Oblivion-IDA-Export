@@ -1,19 +1,19 @@
 [
   {
     "ea": "0x546800",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Calculates an attack desirability score from luck-modified skill, CombatStyle weights, target action-state flags, power/regular attack multiplier, and the attack-during-block multiplier.",
     "mnemonic": "sub",
     "size": 3
   },
   {
     "ea": "0x546803",
-    "line": "mov     eax, [esp+8+arg_8]",
+    "line": "mov     eax, [esp+8+luckValue]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x546807",
-    "line": "mov     ecx, [esp+8+arg_4]",
+    "line": "mov     ecx, [esp+8+skillValue]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,19 +25,19 @@
   },
   {
     "ea": "0x54680C",
-    "line": "push    eax",
+    "line": "push    eax; luckValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x54680D",
-    "line": "push    ecx",
+    "line": "push    ecx; skillValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x54680E",
-    "line": "call    Calc_LuckModifiedSkill",
+    "line": "call    Calc_LuckModifiedSkill; Compute Luck-adjusted effective skill as skill + iActorLuckSkillBase + Luck*fActorLuckSkillMult, then clamp to 0..100. Defaults simplify to skill + (Luck-50)*0.4.",
     "mnemonic": "call",
     "size": 5
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x546819",
-    "line": "mov     esi, [esp+14h+arg_0]",
+    "line": "mov     esi, [esp+14h+combatStyle]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x546820",
-    "line": "cmp     byte ptr [esp+0Ch+arg_14], 0",
+    "line": "cmp     byte ptr [esp+0Ch+targetStaggered], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -115,13 +115,13 @@
   },
   {
     "ea": "0x54683B",
-    "line": "cmp     byte ptr [esp+0Ch+arg_18], 0",
+    "line": "cmp     byte ptr [esp+0Ch+targetKnockedDown], 0",
     "mnemonic": "cmp",
     "size": 5
   },
   {
     "ea": "0x546840",
-    "line": "fstp    [esp+0Ch+arg_14]",
+    "line": "fstp    [esp+0Ch+targetStaggered]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -169,13 +169,13 @@
   },
   {
     "ea": "0x546856",
-    "line": "cmp     byte ptr [esp+0Ch+arg_10], 0",
+    "line": "cmp     byte ptr [esp+0Ch+targetAttacking], 0",
     "mnemonic": "cmp",
     "size": 5
   },
   {
     "ea": "0x54685B",
-    "line": "fstp    [esp+0Ch+arg_18]",
+    "line": "fstp    [esp+0Ch+targetKnockedDown]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x546873",
-    "line": "fstp    [esp+0Ch+arg_10]",
+    "line": "fstp    [esp+0Ch+targetAttacking]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x54689F",
-    "line": "cmp     [esp+0Ch+arg_C], 0",
+    "line": "cmp     [esp+0Ch+usePowerAttack], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x5468A7",
-    "line": "mov     [esp+0Ch+arg_0], ecx",
+    "line": "mov     [esp+0Ch+combatStyle], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -325,25 +325,25 @@
   },
   {
     "ea": "0x5468AD",
-    "line": "fild    [esp+0Ch+arg_0]",
+    "line": "fild    [esp+0Ch+combatStyle]",
     "mnemonic": "fild",
     "size": 4
   },
   {
     "ea": "0x5468B1",
-    "line": "fadd    [esp+0Ch+arg_14]",
+    "line": "fadd    [esp+0Ch+targetStaggered]",
     "mnemonic": "fadd",
     "size": 4
   },
   {
     "ea": "0x5468B5",
-    "line": "fadd    [esp+0Ch+arg_18]",
+    "line": "fadd    [esp+0Ch+targetKnockedDown]",
     "mnemonic": "fadd",
     "size": 4
   },
   {
     "ea": "0x5468B9",
-    "line": "fadd    [esp+0Ch+arg_10]",
+    "line": "fadd    [esp+0Ch+targetAttacking]",
     "mnemonic": "fadd",
     "size": 4
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x5468C1",
-    "line": "fstp    [esp+0Ch+arg_14]",
+    "line": "fstp    [esp+0Ch+targetStaggered]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -385,31 +385,31 @@
   },
   {
     "ea": "0x5468D3",
-    "line": "cmp     [esp+0Ch+arg_1C], 0",
+    "line": "cmp     [esp+0Ch+targetBlocking], 0",
     "mnemonic": "cmp",
     "size": 5
   },
   {
     "ea": "0x5468D8",
-    "line": "fstp    [esp+0Ch+arg_18]",
+    "line": "fstp    [esp+0Ch+targetKnockedDown]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x5468DC",
-    "line": "fld     [esp+0Ch+arg_18]",
+    "line": "fld     [esp+0Ch+targetKnockedDown]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x5468E0",
-    "line": "fmul    [esp+0Ch+arg_14]",
+    "line": "fmul    [esp+0Ch+targetStaggered]",
     "mnemonic": "fmul",
     "size": 4
   },
   {
     "ea": "0x5468E4",
-    "line": "fstp    [esp+0Ch+arg_14]",
+    "line": "fstp    [esp+0Ch+targetStaggered]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -433,13 +433,13 @@
   },
   {
     "ea": "0x5468F1",
-    "line": "fstp    [esp+0Ch+arg_18]",
+    "line": "fstp    [esp+0Ch+targetKnockedDown]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x5468F5",
-    "line": "fld     [esp+0Ch+arg_18]",
+    "line": "fld     [esp+0Ch+targetKnockedDown]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -451,19 +451,19 @@
   },
   {
     "ea": "0x5468FA",
-    "line": "fmul    [esp+8+arg_14]",
+    "line": "fmul    [esp+8+targetStaggered]",
     "mnemonic": "fmul",
     "size": 4
   },
   {
     "ea": "0x5468FE",
-    "line": "fstp    [esp+8+arg_14]",
+    "line": "fstp    [esp+8+targetStaggered]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x546902",
-    "line": "fld     [esp+8+arg_14]",
+    "line": "fld     [esp+8+targetStaggered]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -493,31 +493,31 @@
   },
   {
     "ea": "0x54690D",
-    "line": "fstp    [esp+8+arg_18]",
+    "line": "fstp    [esp+8+targetKnockedDown]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x546911",
-    "line": "fld     [esp+8+arg_18]",
+    "line": "fld     [esp+8+targetKnockedDown]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x546915",
-    "line": "fmul    [esp+8+arg_14]",
+    "line": "fmul    [esp+8+targetStaggered]",
     "mnemonic": "fmul",
     "size": 4
   },
   {
     "ea": "0x546919",
-    "line": "fstp    [esp+8+arg_14]",
+    "line": "fstp    [esp+8+targetStaggered]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x54691D",
-    "line": "fld     [esp+8+arg_14]",
+    "line": "fld     [esp+8+targetStaggered]",
     "mnemonic": "fld",
     "size": 4
   },

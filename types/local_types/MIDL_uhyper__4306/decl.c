@@ -1,1 +1,1 @@
-MIDL_uhyper
+typedef UINT64 MIDL_uhyper;

@@ -47,7 +47,6 @@
 0x45C906: mov     eax, edi
 0x45C908: lea     edx, [eax+1]
 0x45C90B: jmp     short loc_45C910
-0x45C90D: align 10h
 0x45C910: mov     cl, [eax]
 0x45C912: add     eax, 1
 0x45C915: test    cl, cl

@@ -1,4 +1,4 @@
-0x7DD370: push    0FFFFFFFFh
+0x7DD370: push    0FFFFFFFFh; Pass205: Ensures water node has WaterShaderProperty subtype 0x0C; allocates/attaches one if missing or wrong property kind-4 subtype.
 0x7DD372: push    offset SEH_8C8970
 0x7DD377: mov     eax, large fs:0
 0x7DD37D: push    eax
@@ -13,7 +13,7 @@
 0x7DD393: mov     edi, [esp+1Ch+arg_0]
 0x7DD397: push    4
 0x7DD399: mov     ecx, edi
-0x7DD39B: call    NiNode_GetNiPropertyByID
+0x7DD39B: call    NiNode_GetNiPropertyByID;
 0x7DD3A0: test    eax, eax
 0x7DD3A2: jz      short loc_7DD3F1
 0x7DD3A4: mov     edx, [eax]
@@ -54,29 +54,29 @@
 0x7DD404: mov     [esp+1Ch+var_4], 0
 0x7DD40C: jz      short loc_7DD419
 0x7DD40E: mov     ecx, eax
-0x7DD410: call    sub_85BBE0
+0x7DD410: call    sub_85BBE0; Pass205: WaterShaderProperty constructor; initializes pass-data block +0x6C..+0x84 with default flags and floats.
 0x7DD415: mov     esi, eax
 0x7DD417: jmp     short loc_7DD41B
 0x7DD419: xor     esi, esi
 0x7DD41B: push    2
 0x7DD41D: mov     ecx, edi
 0x7DD41F: mov     [esp+20h+var_4], 0FFFFFFFFh
-0x7DD427: call    NiNode_GetNiPropertyByID
+0x7DD427: call    NiNode_GetNiPropertyByID;
 0x7DD42C: test    eax, eax
 0x7DD42E: jz      short loc_7DD450
 0x7DD430: mov     eax, [eax+8]
 0x7DD433: test    eax, eax
 0x7DD435: jz      short loc_7DD450
 0x7DD437: push    offset aLava; "lava"
-0x7DD43C: push    eax; Str1
-0x7DD43D: call    __strcmp
+0x7DD43C: push    eax; left
+0x7DD43D: call    CRT_StricmpLocaleDispatch
 0x7DD442: add     esp, 8
 0x7DD445: test    eax, eax
 0x7DD447: jnz     short loc_7DD450
 0x7DD449: mov     byte ptr ds:0B47844h, 1
 0x7DD450: push    esi; a2
 0x7DD451: mov     ecx, edi; this
-0x7DD453: call    sub_405680
+0x7DD453: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x7DD458: mov     edx, [esi]
 0x7DD45A: mov     eax, [edx+58h]
 0x7DD45D: push    edi
@@ -103,3 +103,15 @@
 0x7DD493: pop     esi
 0x7DD494: add     esp, 10h
 0x7DD497: retn    4
+0x9CA7E0: mov     eax, [ebp-10h]
+0x9CA7E3: push    eax
+0x9CA7E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA7E9: pop     ecx
+0x9CA7EA: retn
+0x9CA7EB: mov     edx, [esp+arg_4]
+0x9CA7EF: lea     eax, [edx-0Ch]
+0x9CA7F2: mov     ecx, [edx-10h]
+0x9CA7F5: xor     ecx, eax
+0x9CA7F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA7FC: mov     eax, offset stru_AF2E8C
+0x9CA801: jmp     ___CxxFrameHandler3

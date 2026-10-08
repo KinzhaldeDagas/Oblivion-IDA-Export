@@ -7,10 +7,10 @@
 0x5AFA51: jnz     short loc_5AFA7A
 0x5AFA53: fld1
 0x5AFA55: push    ecx
-0x5AFA56: fstp    [esp+8+a2]; a3
+0x5AFA56: fstp    [esp+8+a2]; value
 0x5AFA59: mov     dword ptr [esi+150h], 0
-0x5AFA63: push    0FAEh; a2
-0x5AFA68: call    Tile_SetFloat
+0x5AFA63: push    0FAEh; propertyCode
+0x5AFA68: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5AFA6D: mov     ecx, [esi+178h]
 0x5AFA73: push    0; float
 0x5AFA75: call    sub_58FBA0

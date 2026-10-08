@@ -1,4 +1,5 @@
-int __cdecl Calc_DetectionLevel_::CalcRunningMult(
+// Applies fSneakRunningMult when the target is running; otherwise uses multiplier 1.0.
+int __cdecl Calc_DetectionLevel_ApplyRunningMultiplier(
         float a1,
         int a2,
         int a3,
@@ -19,8 +20,8 @@ int __cdecl Calc_DetectionLevel_::CalcRunningMult(
         int a18,
         int a19)
 {
-  if ( (_BYTE)a17 )
-    return Calc_DetectionLevel_::CalcLOSMult(
+  if ( (_BYTE)a17 ) /*0x546478*/
+    return Calc_DetectionLevel_ApplyLOSMultiplier( /*0x546481*/
              a1,
              a2,
              a3,
@@ -40,9 +41,9 @@ int __cdecl Calc_DetectionLevel_::CalcRunningMult(
              a17,
              a18,
              a19,
-             fSneakRunningMult);
+             MEMORY[0xB36720]);
   else
-    return Calc_DetectionLevel_::CalcLOSMult(
+    return Calc_DetectionLevel_ApplyLOSMultiplier( /*0x546478*/
              a1,
              a2,
              a3,

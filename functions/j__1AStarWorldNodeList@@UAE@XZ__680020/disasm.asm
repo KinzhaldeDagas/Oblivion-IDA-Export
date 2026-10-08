@@ -1,1 +1,1 @@
-0x680020: jmp     ??1AStarWorldNodeList@@UAE@XZ
+0x680020: jmp     ??1AStarWorldNodeList@@UAE@XZ; Verified AStarWorldNodeList destructor resets the NiTPointerListBase vtable, frees all list-link nodes through NiTPointerList::FreeAllNodes, then resets the base list vtable; AStarWorldNode records themselves are stored in the separate transient state table.

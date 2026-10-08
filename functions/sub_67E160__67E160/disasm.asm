@@ -1,4 +1,4 @@
-0x67E160: sub     esp, 20h
+0x67E160: sub     esp, 20h; Verified direct-segment test used before actor-aware A*. It locates PathGrid nodes near both endpoints, rejects/defers segments based on distance, water-state mismatch and actor collision-height checks, and reports whether graph fallback should be attempted. Exact meaning of several geometric thresholds remains Unknown.
 0x67E163: push    ebx
 0x67E164: push    esi
 0x67E165: mov     esi, ecx
@@ -23,13 +23,13 @@
 0x67E19C: jnp     loc_67E3B9
 0x67E1A2: push    edi
 0x67E1A3: lea     edi, [esi+0Ch]
-0x67E1A6: push    offset dword_B15450
-0x67E1AB: mov     ecx, edi
-0x67E1AD: call    sub_8AA390
+0x67E1A6: push    offset stru_B15450; other
+0x67E1AB: mov     ecx, edi; this
+0x67E1AD: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x67E1B2: test    al, al
 0x67E1B4: jz      loc_67E3A2
 0x67E1BA: push    ebp
-0x67E1BB: mov     ebp, [esp+30h+arg_0]
+0x67E1BB: mov     ebp, [esp+30h+actor]
 0x67E1BF: cmp     ebp, ebx
 0x67E1C1: jz      loc_67E3AD
 0x67E1C7: mov     ecx, ebp; this
@@ -49,21 +49,21 @@
 0x67E1F6: mov     al, [esi+18h]
 0x67E1F9: cmp     al, bl
 0x67E1FB: setz    al
-0x67E1FE: push    ebx
-0x67E1FF: push    eax
-0x67E200: push    ebp
-0x67E201: push    esi
-0x67E202: call    sub_67D820
+0x67E1FE: push    ebx; excludedPoints
+0x67E1FF: push    eax; pathMode
+0x67E200: push    ebp; actor
+0x67E201: push    esi; position
+0x67E202: call    TESPathGrid_FindNearestReachablePointForActor; Verified actor-aware PathGrid point selection. For a placed reference, builds a temporary graph node at the requested position, attaches below-water and SubSpace flags, and asks that cell's PathGrid for the best reachable candidate. For exterior coordinates, searches the loaded cell grid; when the position is in the active world's loaded neighborhood, compares actor-aware candidates from the containing and adjacent cell PathGrids. It may reduce cost for candidates with the extra reachability result; exact meaning of that mode remains Candidate.
 0x67E207: mov     [esi+1Ch], eax
 0x67E20A: mov     al, [esi+18h]
 0x67E20D: cmp     al, bl
 0x67E20F: setz    cl
-0x67E212: push    ebx
-0x67E213: push    ecx
-0x67E214: push    ebp
-0x67E215: push    edi
-0x67E216: call    sub_67D820
-0x67E21B: mov     ecx, [esi+1Ch]
+0x67E212: push    ebx; excludedPoints
+0x67E213: push    ecx; pathMode
+0x67E214: push    ebp; actor
+0x67E215: push    edi; position
+0x67E216: call    TESPathGrid_FindNearestReachablePointForActor; Verified actor-aware PathGrid point selection. For a placed reference, builds a temporary graph node at the requested position, attaches below-water and SubSpace flags, and asks that cell's PathGrid for the best reachable candidate. For exterior coordinates, searches the loaded cell grid; when the position is in the active world's loaded neighborhood, compares actor-aware candidates from the containing and adjacent cell PathGrids. It may reduce cost for candidates with the extra reachability result; exact meaning of that mode remains Candidate.
+0x67E21B: mov     ecx, [esi+1Ch]; this
 0x67E21E: add     esp, 20h
 0x67E221: cmp     ecx, ebx
 0x67E223: mov     [esi+20h], eax
@@ -73,7 +73,7 @@
 0x67E231: jz      loc_67E38D
 0x67E237: cmp     ecx, eax
 0x67E239: jz      loc_67E38D
-0x67E23F: call    sub_4BEF40
+0x67E23F: call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.
 0x67E244: push    eax
 0x67E245: lea     edx, [esp+34h+var_C]
 0x67E249: push    edx
@@ -82,8 +82,8 @@
 0x67E251: mov     ecx, eax
 0x67E253: call    sub_47DA40
 0x67E258: fstp    [esp+30h+var_20]
-0x67E25C: mov     ecx, [esi+20h]
-0x67E25F: call    sub_4BEF40
+0x67E25C: mov     ecx, [esi+20h]; this
+0x67E25F: call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.
 0x67E264: push    eax
 0x67E265: lea     eax, [esp+34h+var_C]
 0x67E269: push    eax
@@ -99,8 +99,8 @@
 0x67E284: call    sub_4121A0
 0x67E289: mov     ecx, eax
 0x67E28B: call    sub_47DA40
-0x67E290: fstp    [esp+30h+arg_0]
-0x67E294: cmp     byte ptr [esp+30h+arg_4], bl
+0x67E290: fstp    [esp+30h+actor]
+0x67E294: cmp     [esp+30h+strictMode], bl
 0x67E298: fld     [esp+30h+var_20]
 0x67E29C: fld     [esp+30h+var_1C]
 0x67E2A0: jz      short loc_67E2CC
@@ -135,33 +135,33 @@
 0x67E2E4: jmp     short loc_67E2E8
 0x67E2E6: fstp    st
 0x67E2E8: faddp   st(1), st
-0x67E2EA: fld     [esp+30h+arg_0]
+0x67E2EA: fld     [esp+30h+actor]
 0x67E2EE: fcompp
 0x67E2F0: fnstsw  ax
 0x67E2F2: test    ah, 41h
 0x67E2F5: jz      short loc_67E2BE
-0x67E2F7: mov     ecx, [esi+20h]
-0x67E2FA: call    sub_67ECF0
-0x67E2FF: mov     ecx, [esi+1Ch]
+0x67E2F7: mov     ecx, [esi+20h]; this
+0x67E2FA: call    GraphNode_IsBelowWaterFlagSet; Verified returns stateFlags bit 0x08, the PathGrid loader's below-water point flag.
+0x67E2FF: mov     ecx, [esi+1Ch]; this
 0x67E302: mov     bl, al
-0x67E304: call    sub_67ECF0
+0x67E304: call    GraphNode_IsBelowWaterFlagSet; Verified returns stateFlags bit 0x08, the PathGrid loader's below-water point flag.
 0x67E309: cmp     al, bl
 0x67E30B: jnz     short loc_67E2BE
-0x67E30D: fld     [esp+30h+arg_0]
+0x67E30D: fld     [esp+30h+actor]
 0x67E311: fcomp   qword ptr ds:0A47CA8h
 0x67E317: fnstsw  ax
 0x67E319: test    ah, 5
 0x67E31C: jp      short loc_67E38B
 0x67E31E: mov     ecx, ebp
-0x67E320: call    sub_5E0660
+0x67E320: call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.
 0x67E325: fmul    qword ptr ds:0A2FAA0h
 0x67E32B: mov     ecx, [esi+8]
 0x67E32E: mov     edx, [esi]
 0x67E330: mov     eax, [esi+4]
-0x67E333: fstp    [esp+30h+arg_4]
+0x67E333: fstp    dword ptr [esp+30h+strictMode]
 0x67E337: mov     [esp+30h+var_4], ecx
 0x67E33B: fld     [esp+30h+var_4]
-0x67E33F: fld     [esp+30h+arg_4]
+0x67E33F: fld     dword ptr [esp+30h+strictMode]
 0x67E343: mov     ecx, [edi+8]
 0x67E346: fld     st
 0x67E348: mov     [esp+30h+var_C], edx

@@ -1,1 +1,1 @@
-IProcessInitControlVtbl_0
+typedef IProcessInitControlVtbl IProcessInitControlVtbl_0;

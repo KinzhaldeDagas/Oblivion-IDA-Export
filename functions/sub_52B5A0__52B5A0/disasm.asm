@@ -7,7 +7,7 @@
 0x52B5B0: mov     eax, [esi+90h]
 0x52B5B6: mov     edi, [eax+4]
 0x52B5B9: push    eax
-0x52B5BA: call    FormHeapFree
+0x52B5BA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x52B5BF: add     esp, 4
 0x52B5C2: test    edi, edi
 0x52B5C4: mov     [esi+90h], edi

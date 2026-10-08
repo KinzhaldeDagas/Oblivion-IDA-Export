@@ -1,292 +1,450 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "ActorAnimData",
+  "definition": "struct ActorAnimData\n{\nUInt32 unk00;\nNiNode *RootNode;\nNiNode *AccumNode;\nUInt32 unk0C;\nUInt32 unk10;\nUInt32 unk14;\nUInt32 unk18;\nUInt32 unk1C;\nUInt32 unk20;\nNiNode *nBip01;\nNiNode *nLForearm;\nNiNode *nTorch;\nNiNode *nWeapon;\nNiNode *nHead;\nfloat unk38;\nUInt16 animsMapKey[5];\nUInt16 unk44;\nint unk48State[5];\nUInt32 unk5C;\nUInt32 unk60;\nUInt32 unk64;\nUInt32 unk68;\nUInt32 unk6C;\nUInt32 unk70;\nUInt32 unk74;\nUInt16 unk78;\nUInt8 pad78[2];\nUInt32 unk7C;\nUInt32 unk80;\nUInt32 unk84;\nUInt32 unk88;\nUInt32 unk8C;\nUInt8 unk90;\nUInt8 pad90[3];\nfloat unk94;\nNiControllerManager *manager;\nvoid *animsMap;\nBSAnimGroupSequence *animSequences[5];\nvoid *modelB4;\nvoid *modelB8;\nfloat unkBC;\nfloat unkC0;\nUInt8 unkC4;\nUInt8 padC4[2];\nUInt32 unkC8[3];\nUInt32 unkD4;\nvoid *unkD8;\n}\n",
   "id": 18374686479671983005,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk00",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RootNode",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "NiNode *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AccumNode",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "NiNode *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk0C",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk10",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk14",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk18",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk1C",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk20",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nBip01",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "NiNode *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nLForearm",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "NiNode *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nTorch",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "NiNode *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nWeapon",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "NiNode *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nHead",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "NiNode *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk38",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "animsMapKey",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 10
+      "offset_hex": "0x3C",
+      "size": 10,
+      "type": "UInt16[5]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk44",
       "offset": 70,
       "offset_hex": "0x46",
-      "size": 2
+      "size": 2,
+      "type": "UInt16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk48State",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 20
+      "size": 20,
+      "type": "int[5]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk5C",
       "offset": 92,
-      "offset_hex": "0x5c",
-      "size": 4
+      "offset_hex": "0x5C",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk60",
       "offset": 96,
       "offset_hex": "0x60",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk64",
       "offset": 100,
       "offset_hex": "0x64",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk68",
       "offset": 104,
       "offset_hex": "0x68",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk6C",
       "offset": 108,
-      "offset_hex": "0x6c",
-      "size": 4
+      "offset_hex": "0x6C",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk70",
       "offset": 112,
       "offset_hex": "0x70",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk74",
       "offset": 116,
       "offset_hex": "0x74",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk78",
       "offset": 120,
       "offset_hex": "0x78",
-      "size": 2
+      "size": 2,
+      "type": "UInt16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad78",
       "offset": 122,
-      "offset_hex": "0x7a",
-      "size": 2
+      "offset_hex": "0x7A",
+      "size": 2,
+      "type": "UInt8[2]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk7C",
       "offset": 124,
-      "offset_hex": "0x7c",
-      "size": 4
+      "offset_hex": "0x7C",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk80",
       "offset": 128,
       "offset_hex": "0x80",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk84",
       "offset": 132,
       "offset_hex": "0x84",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk88",
       "offset": 136,
       "offset_hex": "0x88",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk8C",
       "offset": 140,
-      "offset_hex": "0x8c",
-      "size": 4
+      "offset_hex": "0x8C",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk90",
       "offset": 144,
       "offset_hex": "0x90",
-      "size": 1
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad90",
       "offset": 145,
       "offset_hex": "0x91",
-      "size": 3
+      "size": 3,
+      "type": "UInt8[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk94",
       "offset": 148,
       "offset_hex": "0x94",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "manager",
       "offset": 152,
       "offset_hex": "0x98",
-      "size": 4
+      "size": 4,
+      "type": "NiControllerManager *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "animsMap",
       "offset": 156,
-      "offset_hex": "0x9c",
-      "size": 4
+      "offset_hex": "0x9C",
+      "size": 4,
+      "type": "void *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "animSequences",
       "offset": 160,
-      "offset_hex": "0xa0",
-      "size": 20
+      "offset_hex": "0xA0",
+      "size": 20,
+      "type": "BSAnimGroupSequence *[5]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "modelB4",
       "offset": 180,
-      "offset_hex": "0xb4",
-      "size": 4
+      "offset_hex": "0xB4",
+      "size": 4,
+      "type": "void *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "modelB8",
       "offset": 184,
-      "offset_hex": "0xb8",
-      "size": 4
+      "offset_hex": "0xB8",
+      "size": 4,
+      "type": "void *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unkBC",
       "offset": 188,
-      "offset_hex": "0xbc",
-      "size": 4
+      "offset_hex": "0xBC",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unkC0",
       "offset": 192,
-      "offset_hex": "0xc0",
-      "size": 4
+      "offset_hex": "0xC0",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unkC4",
       "offset": 196,
-      "offset_hex": "0xc4",
-      "size": 1
+      "offset_hex": "0xC4",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "padC4",
       "offset": 197,
-      "offset_hex": "0xc5",
-      "size": 2
+      "offset_hex": "0xC5",
+      "size": 2,
+      "type": "UInt8[2]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unkC8",
       "offset": 200,
-      "offset_hex": "0xc8",
-      "size": 12
+      "offset_hex": "0xC8",
+      "size": 12,
+      "type": "UInt32[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unkD4",
       "offset": 212,
-      "offset_hex": "0xd4",
-      "size": 4
+      "offset_hex": "0xD4",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unkD8",
       "offset": 216,
-      "offset_hex": "0xd8",
-      "size": 4
+      "offset_hex": "0xD8",
+      "size": 4,
+      "type": "void *"
     }
   ],
   "name": "ActorAnimData",
+  "ordinal": 9129,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 220
 }

@@ -18,9 +18,9 @@
 0x429C64: mov     [esp+1Ch+var_4], 0
 0x429C6C: jz      short loc_429C7E
 0x429C6E: mov     ecx, edi; this
-0x429C70: call    ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; Concurrency::details::_NonReentrantLock::_Release(void)
+0x429C70: call    ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; Pass222: NiPropertyState slot constructor callback; zeroes one dword smart-pointer slot.
 0x429C75: push    edi
-0x429C76: call    FormHeapFree
+0x429C76: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x429C7B: add     esp, 4
 0x429C7E: mov     dword ptr [esi], offset ??_7BSExtraData@@6B@; const BSExtraData::`vftable'
 0x429C84: mov     ecx, [esp+1Ch+var_C]
@@ -30,3 +30,12 @@
 0x429C91: pop     esi
 0x429C92: add     esp, 10h
 0x429C95: retn
+0x9ABA20: mov     ecx, [ebp-10h]; this
+0x9ABA23: jmp     ??1BSExtraData@@UAE@XZ; BSExtraData::~BSExtraData(void)
+0x9ABA28: mov     edx, [esp+arg_4]
+0x9ABA2C: lea     eax, [edx-0Ch]
+0x9ABA2F: mov     ecx, [edx-10h]
+0x9ABA32: xor     ecx, eax
+0x9ABA34: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9ABA39: mov     eax, offset stru_AD881C
+0x9ABA3E: jmp     ___CxxFrameHandler3

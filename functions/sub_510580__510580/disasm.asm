@@ -11,7 +11,7 @@
 0x51059C: call    TES_GetCurrentCell
 0x5105A1: jmp     short loc_5105AE
 0x5105A3: mov     ecx, ds:0B333C4h; this
-0x5105A9: call    TESObjectREFR_GetParentCell
+0x5105A9: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5105AE: mov     ecx, ds:0B333CCh
 0x5105B4: mov     edx, [ecx+0DCh]
 0x5105BA: fld     dword ptr [edx+64h]
@@ -42,7 +42,7 @@
 0x51060B: mov     [esi+4], ecx
 0x51060E: mov     ecx, eax
 0x510610: mov     [esi+8], edx
-0x510613: call    ??0?$NiTPointerListBase@V?$NiTPointerAllocator@I@@PAVNiAVObject@@@@QAE@XZ; NiTPointerListBase<NiTPointerAllocator<uint>,NiAVObject *>::NiTPointerListBase<NiTPointerAllocator<uint>,NiAVObject *>(void)
+0x510613: call    Decal_ProjectToSceneGeometry; [Verified] This Oblivion scene-projection path creates/registers BSTempEffect decal effects after its geometry/raycast work; it is a transient decal path and does not establish population of BSShaderLightingProperty+0x80's DECAL_DATA* list. Fallout contrast: Fallout's AddDecalRef path stores reference/intersection/normal metadata in ExtraDecalRefs (ExtraData type 0x57). Equivalence between these paths: Unknown.
 0x510618: mov     al, 1
 0x51061A: pop     esi
 0x51061B: add     esp, 0Ch

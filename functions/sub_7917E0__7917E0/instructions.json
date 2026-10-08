@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7917E0",
-    "line": "push    ecx",
+    "line": "push    ecx; CBranch::BuildBranchVector. Recurses through m_vChildren at branch+0x08 and follows each SIdvBranch child pointer at element+0x08.",
     "mnemonic": "push",
     "size": 1
   },
@@ -43,31 +43,31 @@
   },
   {
     "ea": "0x7917EB",
-    "line": "lea     eax, [esp+14h+var_4]",
+    "line": "lea     eax, [esp+14h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7917EF",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7917F0",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7917F2",
-    "line": "mov     [esp+18h+var_4], esi",
+    "line": "mov     [esp+18h+value], esi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7917F6",
-    "line": "call    sub_791770",
+    "line": "call    OB_stVector4_PushBack_010201A0; Pushes one 4-byte value into an OB_stVector4. Writes directly at end when capacity remains, otherwise calls the checked insert-one helper. Oblivion uses it for CBranch pointers and other pointer-sized SpeedTree lists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x79184D",
-    "line": "call    sub_7917E0",
+    "line": "call    OB_CBranch_BuildBranchVector_010201A0; Recursively flattens compact CBranch tree into a pointer vector for branch LOD ranking.",
     "mnemonic": "call",
     "size": 5
   },

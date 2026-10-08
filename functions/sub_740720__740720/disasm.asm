@@ -4,7 +4,7 @@
 0x740725: push    esi
 0x740726: push    edi
 0x740727: mov     ebx, ecx
-0x740729: call    sub_70C120
+0x740729: call    NiAVObject_UpdateWorldTransform; NiAVObject/NiNode virtual +0x74. Updates this->worldTransform at +0x64. With a parent, composes parent world with this local via 0x53D7A0; without a parent, copies local directly. Then notifies an attached collision object through virtual +0x50. Return register contents are incidental; native callers use no return value.
 0x74072E: mov     ecx, [ebx+0B4h]
 0x740734: mov     ebp, [ecx+5Ch]
 0x740737: mov     [esp+18h+var_4], ecx
@@ -36,7 +36,7 @@
 0x740795: cmp     byte ptr [esi+60h], 0
 0x740799: jz      short loc_7407AD
 0x74079B: mov     ecx, ebx; this
-0x74079D: call    NiAVObject_InitializePropertyState
+0x74079D: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x7407A2: mov     ecx, ebx
 0x7407A4: call    NiNode_UpdateDynamicEffectState
 0x7407A9: mov     byte ptr [esi+60h], 0

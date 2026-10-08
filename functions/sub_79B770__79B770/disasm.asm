@@ -1,11 +1,11 @@
-0x79B770: sub     esp, 8
-0x79B773: mov     edx, [esp+8+arg_8]
+0x79B770: sub     esp, 8; Checked/STL trampoline around backward SFrondTexture range assignment; returns destination begin.
+0x79B773: mov     edx, [esp+8+destinationLast]
 0x79B777: push    ebx
-0x79B778: mov     ebx, [esp+0Ch+arg_0]
+0x79B778: mov     ebx, [esp+0Ch+first]
 0x79B77C: push    esi
-0x79B77D: mov     esi, [esp+10h+arg_4]
+0x79B77D: mov     esi, [esp+10h+last]
 0x79B781: push    edi
-0x79B782: mov     edi, [esp+14h+arg_8]
+0x79B782: mov     edi, [esp+14h+destinationLast]
 0x79B786: xor     al, al
 0x79B788: mov     byte ptr [esp+14h+var_4], al
 0x79B78C: mov     ecx, [esp+14h+var_4]
@@ -14,10 +14,10 @@
 0x79B798: push    eax
 0x79B799: push    ecx
 0x79B79A: push    edx
-0x79B79B: push    edi
-0x79B79C: push    esi
-0x79B79D: push    ebx
-0x79B79E: call    sub_79B510
+0x79B79B: push    edi; destinationLast
+0x79B79C: push    esi; last
+0x79B79D: push    ebx; first
+0x79B79E: call    OB_SFrondTexture_CopyAssignRangeBackward_010201A0; Overlap-safe backward copy-assignment for 0x2C-byte SFrondTexture records; deep-assigns filename plus the four scalar floats and returns destination begin.
 0x79B7A3: sub     esi, ebx
 0x79B7A5: mov     eax, 2E8BA2E9h
 0x79B7AA: imul    esi

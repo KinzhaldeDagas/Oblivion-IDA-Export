@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x64098D",
-    "line": "call    Actor_GetDetectionLevel",
+    "line": "call    Actor_GetDetectionLevelAgainstActor; Oblivion authoritative detection pipeline. Computes this detector's level against a target actor: obtains cached/physical LOS and distance, target light, boot weight, movement/running/sneak/combat/underwater/exterior state, Luck-modified Sneak values, detector Blindness AV 0x2D, target Chameleon AV 0x2E, and target Invisibility AV 0x2F; then calls Calc_DetectionLevel and updates the detector's process entry. Positive means detected. Fallout only corroborates the GetDetectionLevelAgainstActor terminology.",
     "mnemonic": "call",
     "size": 5
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x640A6E",
-    "line": "mov     ecx, offset unk_B36788; jumptable 00640A2E case 2",
+    "line": "mov     ecx, (offset flt_B36778+10h); jumptable 00640A2E case 2",
     "mnemonic": "mov",
     "size": 5
   },
@@ -811,7 +811,7 @@
   },
   {
     "ea": "0x640AAE",
-    "line": "mov     ecx, offset unk_B36780",
+    "line": "mov     ecx, (offset flt_B36778+8)",
     "mnemonic": "mov",
     "size": 5
   },

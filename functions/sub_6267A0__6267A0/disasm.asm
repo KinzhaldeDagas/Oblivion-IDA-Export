@@ -1,4 +1,4 @@
-0x6267A0: push    0FFFFFFFFh
+0x6267A0: push    0FFFFFFFFh; DialoguePackage cursor/playback state machine. Speak(true) performs audible HighProcess playback; Speak(false) advances silently with no new timer. With waitingForLip clear, each false call advances one response cursor and can commit an exhausted item while selecting the next. With waitingForLip set, false calls cannot clear the flag or advance, so MiddleHigh execution stalls until HighProcess playback resumes or the package is destroyed.
 0x6267A2: push    offset SEH_6267A0
 0x6267A7: mov     eax, large fs:0
 0x6267AD: push    eax
@@ -14,12 +14,12 @@
 0x6267C1: mov     large fs:0, eax
 0x6267C7: mov     esi, ecx
 0x6267C9: xor     ebx, ebx
-0x6267CB: cmp     [esi+4Ch], bl
+0x6267CB: cmp     [esi+4Ch], bl; waitingForLip suppresses the normal response/item cursor advance. The later code can clear this flag only inside the startSpeech=true branch; Speak(false) returns without progress while it remains set.
 0x6267CE: jnz     loc_62687D
-0x6267D4: mov     ecx, [esi+54h]
+0x6267D4: mov     ecx, [esi+54h]; this
 0x6267D7: cmp     ecx, ebx
 0x6267D9: jnz     short loc_626844
-0x6267DB: mov     ecx, [esi+50h]
+0x6267DB: mov     ecx, [esi+50h]; this
 0x6267DE: cmp     ecx, ebx
 0x6267E0: jnz     short loc_626807
 0x6267E2: mov     ecx, [esi+5Ch]
@@ -34,51 +34,51 @@
 0x6267FE: mov     ecx, esi
 0x626800: call    edx
 0x626802: jmp     loc_626BEF
-0x626807: call    sub_6B74B0
-0x62680C: mov     ecx, [esi+50h]
-0x62680F: call    sub_6B7C20
+0x626807: call    Conversation__FirstItem
+0x62680C: mov     ecx, [esi+50h]; this
+0x62680F: call    DialogueListCursor__GetCurrent; Shared cursor getter (identical layout): here the function named DialogueItem::GetCurrentResponse is operating on ConversationView and returns the current DialogueItem.
 0x626814: cmp     eax, ebx
 0x626816: mov     [esi+54h], eax
 0x626819: jz      short loc_626824
-0x62681B: mov     ecx, eax
-0x62681D: call    sub_6B7BA0
+0x62681B: mov     ecx, eax; this
+0x62681D: call    DialogueItem__FirstResponse
 0x626822: jmp     short loc_62684E
 0x626824: mov     ecx, [esi+5Ch]
 0x626827: mov     eax, [ecx]
 0x626829: mov     edx, [eax+17Ch]
 0x62682F: push    1
-0x626831: call    edx
+0x626831: call    edx; Empty/null conversation completion: mark the initiating speaker procedure completed.
 0x626833: mov     ecx, [esi+60h]
 0x626836: mov     eax, [ecx]
 0x626838: mov     edx, [eax+17Ch]
 0x62683E: push    1
-0x626840: call    edx
+0x626840: call    edx; Empty/null conversation completion: mark the target procedure completed as well; the process handler subsequently cleans up the shared package.
 0x626842: jmp     short loc_626859
 0x626844: cmp     [esi+58h], ebx
-0x626847: jz      short loc_62685E
-0x626849: call    sub_6B7C00
-0x62684E: mov     ecx, [esi+54h]
-0x626851: call    sub_6B7C20
+0x626847: jz      short loc_62685E; Normal completed-response path: advance currentItem's response cursor. A modern save restores this cursor, preventing previously completed responses from being selected again.
+0x626849: call    DialogueItem__NextResponse; One normal Speak call advances one response cursor. In MiddleHigh mode no replacement response timer is installed, so repeated process updates consume the chain at update cadence.
+0x62684E: mov     ecx, [esi+54h]; this
+0x626851: call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.
 0x626856: mov     [esi+58h], eax
 0x626859: cmp     [esi+58h], ebx
 0x62685C: jnz     short loc_62687D
-0x62685E: mov     ecx, [esi+54h]; int
+0x62685E: mov     ecx, [esi+54h]; this
 0x626861: cmp     ecx, ebx
 0x626863: jz      short loc_62686A
-0x626865: call    sub_6B7C30
-0x62686A: mov     ecx, [esi+50h]
-0x62686D: call    sub_6B74C0
-0x626872: mov     ecx, [esi+50h]
-0x626875: call    sub_6B7C20
+0x626865: call    DialogueItem__RunResult; Commit a deferred ambient INFO only when advancing past its exhausted response list; even a response-less item commits on the next Speak update. Goodbye does not terminate here, and RunForRumors does not gate the result.
+0x62686A: mov     ecx, [esi+50h]; this
+0x62686D: call    Conversation__NextItem; Conversation::NextItem selects the next speaker/topic item.
+0x626872: mov     ecx, [esi+50h]; this
+0x626875: call    DialogueListCursor__GetCurrent; Shared cursor getter used on ConversationView; result becomes DialoguePackage.currentItem.
 0x62687A: mov     [esi+54h], eax
-0x62687D: mov     ecx, [esi+54h]
+0x62687D: mov     ecx, [esi+54h]; this
 0x626880: cmp     ecx, ebx
 0x626882: jz      loc_626BCF
 0x626888: cmp     [esi+58h], ebx
 0x62688B: jnz     short loc_6268C1
-0x62688D: call    sub_6B7BA0
-0x626892: mov     ecx, [esi+54h]
-0x626895: call    sub_6B7C20
+0x62688D: call    DialogueItem__FirstResponse
+0x626892: mov     ecx, [esi+54h]; this
+0x626895: call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.
 0x62689A: cmp     eax, ebx
 0x62689C: mov     [esi+58h], eax
 0x62689F: jnz     short loc_6268B8
@@ -87,7 +87,7 @@
 0x6268A7: mov     eax, [eax+0Ch]
 0x6268AA: push    eax; ArgList
 0x6268AB: push    offset aNoResponsesFou; "No responses found for conversation Top"...
-0x6268B0: call    PrintError
+0x6268B0: call    PrintError; No-response item is diagnosed but retained. On the next Speak update its deferred result is committed and the conversation advances; a chain can therefore execute response-less INFO results without audible dialogue.
 0x6268B5: add     esp, 8
 0x6268B8: cmp     [esi+58h], ebx
 0x6268BB: jz      loc_626BEF
@@ -104,15 +104,15 @@
 0x6268DE: cmp     edi, ebx
 0x6268E0: jz      loc_626BEF
 0x6268E6: cmp     byte ptr [esp+30h+arg_0], 0
-0x6268EB: jz      loc_626BEF
+0x6268EB: jz      loc_626BEF; Only startSpeech=true enters voice/LIP initialization and establishes response timing. startSpeech=false leaves the selected response queued but silent; the next call advances it, unless waitingForLip has already frozen the state.
 0x6268F1: mov     [esp+30h+var_1C.m_data], ebx
 0x6268F5: mov     [esp+30h+var_1C.m_dataLen], bx
 0x6268FA: mov     [esp+30h+var_1C.m_bufLen], bx
-0x6268FF: mov     ecx, [esi+48h]
+0x6268FF: mov     ecx, [esi+48h]; this
 0x626902: cmp     ecx, ebx
 0x626904: mov     [esp+30h+var_4], ebx
 0x626908: jz      short loc_626912
-0x62690A: call    sub_5EF930
+0x62690A: call    Actor__StopDialoguePlayback; Stops an Actor's current dialogue/audio/lip playback and associated animation state. Used before starting/replacing dialogue, on menu close, death/paralysis, and DialoguePackage active-speaker cleanup.
 0x62690F: mov     [esi+48h], ebx
 0x626912: mov     edx, [esi+58h]
 0x626915: mov     eax, [edx+10h]
@@ -156,7 +156,7 @@
 0x62697E: push    eax
 0x62697F: push    ecx
 0x626980: mov     ecx, edi
-0x626982: call    Actor__InitDialogue
+0x626982: call    Actor__InitDialogue; 3DTheft 2026-05-17: DialoguePackage execution calls Actor::InitDialogue for the initiating/async path.
 0x626987: fstp    dword ptr [esi+44h]
 0x62698A: mov     [esi+48h], edi
 0x62698D: mov     edi, [edi+58h]
@@ -210,7 +210,7 @@
 0x626A21: push    ebx
 0x626A22: push    ecx
 0x626A23: mov     ecx, edi
-0x626A25: call    Actor__InitDialogue
+0x626A25: call    Actor__InitDialogue; Start audible ambient response and receive its active sound handle at DialoguePackage+0x3C. HighProcess waits SoundHandle::IsPlaying before advancing or cleaning the package.
 0x626A2A: fstp    dword ptr [esi+44h]
 0x626A2D: mov     [esi+48h], edi
 0x626A30: mov     ecx, [edi+58h]
@@ -243,19 +243,19 @@
 0x626A88: push    ecx
 0x626A89: mov     ecx, ds:0B362C0h
 0x626A8F: push    edx
-0x626A90: call    sub_521450
+0x626A90: call    TESIdleForm_FindIdleForActor; Idle root lookup for actor model path; rejects final candidate when ANAM high bit is set but model path is not .kf.
 0x626A95: mov     ebp, eax
 0x626A97: test    ebp, ebp
 0x626A99: jz      short loc_626AC0
 0x626A9B: push    2; int
 0x626A9D: mov     ecx, ebp
-0x626A9F: call    sub_520200
+0x626A9F: call    TESIdleForm_GetQueuedAnimType; Returns TESIdleForm ANAM byte at +0x38 masked with 0x7F. This low-seven-bit value is passed as the queued idle slot/type; the high bit is handled separately by native idle selection.
 0x626AA4: push    eax; int
 0x626AA5: mov     eax, [esi+48h]
 0x626AA8: push    eax; int
 0x626AA9: push    ebp; int
 0x626AAA: mov     ecx, edi; this
-0x626AAC: call    sub_477DB0
+0x626AAC: call    ActorAnimData_QueueIdle; Queues a TESIdleForm for playable ActorAnimData processing. If requested slot/type is 0 or 5, forces completion/action mode to 3; allocates and initializes an AnimIdle, stores it at queued slot +0xD0, then immediately attempts ActorAnimData_ProcessQueuedIdleKF for cache-hit/synchronous readiness.
 0x626AB1: mov     ecx, [esi+5Ch]
 0x626AB4: mov     ecx, [ecx+58h]
 0x626AB7: mov     edx, [ecx]
@@ -269,19 +269,19 @@
 0x626ACA: push    ecx
 0x626ACB: mov     ecx, ds:0B362C0h
 0x626AD1: push    eax
-0x626AD2: call    sub_521450
+0x626AD2: call    TESIdleForm_FindIdleForActor; Idle root lookup for actor model path; rejects final candidate when ANAM high bit is set but model path is not .kf.
 0x626AD7: mov     edi, eax
 0x626AD9: test    edi, edi
 0x626ADB: jz      short loc_626B04
 0x626ADD: push    2; int
 0x626ADF: mov     ecx, edi
-0x626AE1: call    sub_520200
+0x626AE1: call    TESIdleForm_GetQueuedAnimType; Returns TESIdleForm ANAM byte at +0x38 masked with 0x7F. This low-seven-bit value is passed as the queued idle slot/type; the high bit is handled separately by native idle selection.
 0x626AE6: mov     ecx, [esi+60h]
 0x626AE9: push    eax; int
 0x626AEA: push    ecx; int
 0x626AEB: mov     ecx, [esp+3Ch+arg_0]; this
 0x626AEF: push    edi; int
-0x626AF0: call    sub_477DB0
+0x626AF0: call    ActorAnimData_QueueIdle; Queues a TESIdleForm for playable ActorAnimData processing. If requested slot/type is 0 or 5, forces completion/action mode to 3; allocates and initializes an AnimIdle, stores it at queued slot +0xD0, then immediately attempts ActorAnimData_ProcessQueuedIdleKF for cache-hit/synchronous readiness.
 0x626AF5: mov     edx, [esi+60h]
 0x626AF8: mov     ecx, [edx+58h]
 0x626AFB: mov     eax, [ecx]
@@ -293,28 +293,28 @@
 0x626B0F: jz      short loc_626B1A
 0x626B11: cmp     byte ptr ds:0B3BDA5h, 0
 0x626B18: jz      short loc_626B7F
-0x626B1A: mov     ecx, [esi+50h]
-0x626B1D: call    sub_6B7C20
+0x626B1A: mov     ecx, [esi+50h]; this
+0x626B1D: call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.
 0x626B22: test    eax, eax
 0x626B24: jz      short loc_626B7F
-0x626B26: mov     ecx, [esi+50h]
-0x626B29: call    sub_6B7C20
-0x626B2E: mov     ecx, eax
-0x626B30: call    sub_6B7C20
+0x626B26: mov     ecx, [esi+50h]; this
+0x626B29: call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.
+0x626B2E: mov     ecx, eax; this
+0x626B30: call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.
 0x626B35: test    eax, eax
 0x626B37: jz      short loc_626B7F
-0x626B39: mov     ecx, [esi+50h]
-0x626B3C: call    sub_6B7C20
-0x626B41: mov     ecx, eax
-0x626B43: call    sub_6B7C20
+0x626B39: mov     ecx, [esi+50h]; this
+0x626B3C: call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.
+0x626B41: mov     ecx, eax; this
+0x626B43: call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.
 0x626B48: cmp     dword ptr [eax], 0
 0x626B4B: jz      short loc_626B7F
 0x626B4D: cmp     byte ptr ds:0B13208h, 0
 0x626B54: jz      short loc_626B7F
-0x626B56: mov     ecx, [esi+50h]
-0x626B59: call    sub_6B7C20
-0x626B5E: mov     ecx, eax
-0x626B60: call    sub_6B7C20
+0x626B56: mov     ecx, [esi+50h]; this
+0x626B59: call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.
+0x626B5E: mov     ecx, eax; this
+0x626B60: call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.
 0x626B65: fld     dword ptr ds:0A30634h
 0x626B6B: mov     eax, [eax]
 0x626B6D: push    ecx
@@ -347,7 +347,7 @@
 0x626BC0: mov     [esp+30h+var_4], 0FFFFFFFFh
 0x626BC8: call    BSStringT_Clear
 0x626BCD: jmp     short loc_626BEF
-0x626BCF: mov     ecx, [esi+5Ch]
+0x626BCF: mov     ecx, [esi+5Ch]; No current item remains: set procedureCompleted=true on both participants. This does not itself destroy the DialoguePackage; the owning process update observes the flag and performs cleanup.
 0x626BD2: mov     edx, [ecx]
 0x626BD4: mov     eax, [edx+17Ch]
 0x626BDA: push    1
@@ -367,3 +367,12 @@
 0x626BFE: pop     ebx
 0x626BFF: add     esp, 1Ch
 0x626C02: retn    4
+0x9C3630: lea     ecx, [ebp-1Ch]; void *
+0x9C3633: jmp     BSStringT_Clear
+0x9C3638: mov     edx, [esp+arg_4]
+0x9C363C: lea     eax, [edx-20h]
+0x9C363F: mov     ecx, [edx-24h]
+0x9C3642: xor     ecx, eax
+0x9C3644: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C3649: mov     eax, offset stru_AEC210
+0x9C364E: jmp     ___CxxFrameHandler3

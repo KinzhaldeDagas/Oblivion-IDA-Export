@@ -8,27 +8,27 @@
 0x595A30: mov     ecx, [esi+28h]
 0x595A33: push    0FB5h
 0x595A38: call    Tile_GetFloat
-0x595A3D: call    Double_To_SInt32
+0x595A3D: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x595A42: mov     ecx, [esi+40h]
 0x595A45: push    0FB5h
 0x595A4A: mov     [esp+24h+var_14], eax
 0x595A4E: call    Tile_GetFloat
-0x595A53: call    Double_To_SInt32
+0x595A53: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x595A58: mov     ecx, [esi+30h]
 0x595A5B: push    0FB5h
 0x595A60: mov     [esp+24h+var_8], eax
 0x595A64: call    Tile_GetFloat
-0x595A69: call    Double_To_SInt32
+0x595A69: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x595A6E: mov     ecx, [esi+38h]
 0x595A71: push    0FB5h
 0x595A76: mov     [esp+24h+var_4], eax
 0x595A7A: call    Tile_GetFloat
-0x595A7F: call    Double_To_SInt32
+0x595A7F: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x595A84: mov     ecx, [esi+48h]
 0x595A87: push    0FB5h
 0x595A8C: mov     [esp+24h+var_C], eax
 0x595A90: call    Tile_GetFloat
-0x595A95: call    Double_To_SInt32
+0x595A95: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x595A9A: fild    [esp+20h+var_14]
 0x595A9E: mov     [esp+20h+var_10], eax
 0x595AA2: xor     bl, bl

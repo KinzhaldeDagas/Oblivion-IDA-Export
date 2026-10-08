@@ -19,7 +19,7 @@
 0x433A79: call    sub_4322B0
 0x433A7E: test    al, al
 0x433A80: jz      short loc_433A9E
-0x433A82: mov     eax, ModelLoaderPtr
+0x433A82: mov     eax, ds:0B33A1Ch
 0x433A87: mov     esi, [eax+18h]
 0x433A8A: mov     edi, [esi+8]
 0x433A8D: call    ds:GetCurrentThreadId
@@ -37,7 +37,7 @@
 0x433AB9: push    ebx; _DWORD
 0x433ABA: lea     ecx, [esp+54h+var_2C]; _DWORD
 0x433ABE: mov     [esp+54h+var_4], ebx
-0x433AC2: call    ds:??_7?$BSTaskManagerIterator@_J@@6B@; const BSTaskManagerIterator<__int64>::`vftable' ...
+0x433AC2: call    ds:??_7?$BSTaskManagerIterator@_J@@6B@; nullsub_returnVoid_2arg; used by Low/MiddleLow movement/package setter slots and MiddleHigh movement flag setter slot.
 0x433AC8: mov     al, [esp+4Ch+var_14]
 0x433ACC: and     al, 0FCh
 0x433ACE: test    al, 2
@@ -110,7 +110,7 @@
 0x433B8E: call    sub_432350
 0x433B93: test    al, al
 0x433B95: jz      short loc_433BA5
-0x433B97: mov     ecx, ModelLoaderPtr
+0x433B97: mov     ecx, ds:0B33A1Ch
 0x433B9D: mov     ecx, [ecx+18h]
 0x433BA0: call    sub_431FA0
 0x433BA5: mov     ecx, dword ptr [esp+4Ch+var_C]
@@ -122,3 +122,16 @@
 0x433BB4: pop     ebx
 0x433BB5: add     esp, 38h
 0x433BB8: retn    8
+0x432090: mov     dword ptr [ecx], offset ??_7LockFreeMapIterator@?$LockFreeMap@_JV?$NiPointer@V?$BSTask@_J@@@@@@6B@; const LockFreeMap<__int64,NiPointer<BSTask<__int64>>>::LockFreeMapIterator::`vftable'
+0x432096: retn
+0x9AC010: lea     ecx, [ebp-2Ch]
+0x9AC013: jmp     loc_432090
+0x9AC018: lea     ecx, [ebp+8]; void *
+0x9AC01B: jmp     sub_4BDDC0
+0x9AC020: mov     edx, [esp+arg_4]
+0x9AC024: lea     eax, [edx-3Ch]
+0x9AC027: mov     ecx, [edx-40h]
+0x9AC02A: xor     ecx, eax
+0x9AC02C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AC031: mov     eax, offset stru_AD8D34
+0x9AC036: jmp     ___CxxFrameHandler3

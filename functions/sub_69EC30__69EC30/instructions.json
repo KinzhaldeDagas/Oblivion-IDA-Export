@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x69EC30",
-    "line": "mov     eax, ds:0B333C4h",
+    "line": "mov     eax, ds:0B333C4h; Verified MagicModelHitEffect UpdateVisualPlacement recalculates the attached NiNode transform from target perspective/node state and calls the target-specific detach/rebind helper as needed.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -55,25 +55,25 @@
   },
   {
     "ea": "0x69EC49",
-    "line": "mov     [edi+29h], al",
+    "line": "mov     [edi+29h], al; Verified (Oblivion): model field +0x29 is assigned PlayerCharacter::isThirdPerson when target is the player; the same byte is also consumed in model initialization. Semantic label isThirdPerson is directly supported.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x69EC4C",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x69EC52",
-    "line": "push    0",
+    "line": "push    0; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x69EC54",
-    "line": "call    PlayerCharacter_GetPlayerNode",
+    "line": "call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,19 +385,19 @@
   },
   {
     "ea": "0x69ECEE",
-    "line": "push    0",
+    "line": "push    0; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x69ECF0",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x69ECF2",
-    "line": "call    sub_405790",
+    "line": "call    NiNode_GetChildAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,19 +451,19 @@
   },
   {
     "ea": "0x69ED08",
-    "line": "push    offset Vector3_InitValue?",
+    "line": "push    offset g_zeroNiPoint3; other",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x69ED0D",
-    "line": "lea     ecx, [eax+54h]",
+    "line": "lea     ecx, [eax+54h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x69ED10",
-    "line": "call    sub_8AA390",
+    "line": "call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.",
     "mnemonic": "call",
     "size": 5
   },

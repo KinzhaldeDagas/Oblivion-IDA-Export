@@ -26,3 +26,14 @@
 0x6FA876: pop     esi
 0x6FA877: add     esp, 10h
 0x6FA87A: retn
+0x6FA780: mov     dword ptr [ecx], offset ??_7NiIntegerExtraData@@6B@; const NiIntegerExtraData::`vftable'
+0x6FA786: jmp     NiExtraData_dtor
+0x9C9140: mov     ecx, [ebp-10h]
+0x9C9143: jmp     loc_6FA780
+0x9C9148: mov     edx, [esp+arg_4]
+0x9C914C: lea     eax, [edx-8]
+0x9C914F: mov     ecx, [edx-0Ch]
+0x9C9152: xor     ecx, eax
+0x9C9154: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C9159: mov     eax, offset stru_AF1A70
+0x9C915E: jmp     ___CxxFrameHandler3

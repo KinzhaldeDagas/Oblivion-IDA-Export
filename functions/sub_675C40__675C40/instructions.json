@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x675C59",
-    "line": "mov     ebp, [esp+10h+arg_8]",
+    "line": "mov     ebp, [esp+10h+actor]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x675C60",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -199,13 +199,13 @@
   },
   {
     "ea": "0x675C92",
-    "line": "push    ebp",
+    "line": "push    ebp; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x675C93",
-    "line": "call    sub_605ED0",
+    "line": "call    Crime_DoesActorKnow",
     "mnemonic": "call",
     "size": 5
   },

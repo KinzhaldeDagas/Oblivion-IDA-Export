@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
-  "callers_count": 8,
-  "comment_regular": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 26,
+  "chunks": [
+    [
+      "0x7A25C0",
+      "0x7A25F0"
+    ]
+  ],
+  "chunks_sha256": "086f055ff487f14633070c17405a91908bc94ceba275cd7fefacb758f6832fdf",
+  "comment_regular": "Oblivion binary evidence: compiler-folded trivial four-byte uninitialized_copy. Computes the source byte span, memmoves it to destination, and returns destination + copied bytes. Shared by multiple vector<T> specializations; OB_stVector4 is deliberately element-neutral.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7A25C0",
+  "display_name": "OB_stVector4_UninitializedCopyRange_010201A0",
   "end_ea": "0x7A25F0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": false,
-  "name": "sub_7A25C0",
+  "name": "OB_stVector4_UninitializedCopyRange_010201A0",
   "segment": ".text",
   "sha256": "086f055ff487f14633070c17405a91908bc94ceba275cd7fefacb758f6832fdf",
   "size": 48,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A25C0",
-  "type": "char *__stdcall(void *Src, int, void *Dst)",
+  "total_chunk_size": 48,
+  "type": "unsigned int *__stdcall(const unsigned int *first, const unsigned int *last, unsigned int *destination)",
   "xrefs_from_count": 19,
   "xrefs_to_count": 26
 }

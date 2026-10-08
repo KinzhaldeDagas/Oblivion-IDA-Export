@@ -1,1 +1,1 @@
-IUnknownVtbl_0
+typedef IUnknownVtbl IUnknownVtbl_0;

@@ -1,1 +1,1 @@
-ASSOCF
+typedef DWORD ASSOCF;

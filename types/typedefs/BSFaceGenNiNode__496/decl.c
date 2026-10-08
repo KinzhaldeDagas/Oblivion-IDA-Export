@@ -1,1 +1,1 @@
-BSFaceGenNiNode
+struct BSFaceGenNiNode;

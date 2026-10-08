@@ -1,4 +1,4 @@
-0x6A0D90: sub     esp, 10h
+0x6A0D90: sub     esp, 10h; Verified (Oblivion): helper resolves target visual attachment nodes from target actor/player skin, perspective state, effect code, and weapon/torch context; writes two selected visual-node outputs plus geometry/perspective state. Renamed from sub_6A0D90.
 0x6A0D93: push    ebx
 0x6A0D94: push    ebp
 0x6A0D95: push    esi
@@ -6,7 +6,7 @@
 0x6A0D98: mov     eax, [esi+2Ch]
 0x6A0D9B: cmp     eax, 45574944h
 0x6A0DA0: push    edi
-0x6A0DA1: setz    [esp+20h+var_E]
+0x6A0DA1: setz    [esp+20h+var_E]; Verified (Oblivion): effectCode_2C value 0x45574944 is DIWE, directly registered to DisintegrateWeaponEffect_Make by ActiveEffect_Register_DIWE_Factory. ResolveVisualAttachmentTargets uses that code to select the weapon-attachment path.
 0x6A0DA6: cmp     eax, 52414944h
 0x6A0DAB: mov     eax, [esi+1Ch]
 0x6A0DAE: setz    bl
@@ -22,7 +22,7 @@
 0x6A0DCD: xor     ebp, ebp
 0x6A0DCF: test    eax, eax
 0x6A0DD1: jz      short loc_6A0E11
-0x6A0DD3: mov     ecx, ds:0B333C4h
+0x6A0DD3: mov     ecx, ds:0B333C4h; this
 0x6A0DD9: cmp     eax, ecx
 0x6A0DDB: jz      short loc_6A0DEB
 0x6A0DDD: mov     edx, [eax]
@@ -38,8 +38,8 @@
 0x6A0E00: jmp     short loc_6A0E11
 0x6A0E02: cmp     byte ptr [esi+44h], 0
 0x6A0E06: setz    dl
-0x6A0E09: push    edx
-0x6A0E0A: call    sub_6600D0
+0x6A0E09: push    edx; firstPerson
+0x6A0E0A: call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.
 0x6A0E0F: mov     ebp, eax
 0x6A0E11: cmp     byte ptr [esi+28h], 0
 0x6A0E15: jnz     loc_6A0F3A
@@ -61,7 +61,7 @@
 0x6A0E4F: test    eax, eax
 0x6A0E51: jz      short loc_6A0E59
 0x6A0E53: mov     eax, [eax+8]
-0x6A0E56: mov     [esi+30h], eax
+0x6A0E56: mov     [esi+30h], eax; Verified (Oblivion): when effectCode_2C is 0x52414944, the helper obtains the bound object from DisintegrateArmorEffect and stores it in +0x30. This directly supports the DisintegrateArmor enum value and TESBoundObject* member.
 0x6A0E59: mov     ecx, [esi+1Ch]
 0x6A0E5C: test    ecx, ecx
 0x6A0E5E: jz      loc_6A1098
@@ -104,13 +104,13 @@
 0x6A0ED4: call    eax
 0x6A0ED6: test    al, al
 0x6A0ED8: jz      short loc_6A0F11
-0x6A0EDA: mov     ecx, ds:0B333C4h
+0x6A0EDA: mov     ecx, ds:0B333C4h; this
 0x6A0EE0: cmp     [esi+1Ch], ecx
 0x6A0EE3: jnz     short loc_6A0EF4
 0x6A0EE5: cmp     byte ptr [esi+44h], 0
 0x6A0EE9: setz    dl
-0x6A0EEC: push    edx
-0x6A0EED: call    PlayerCharacter_GetPlayerNode
+0x6A0EEC: push    edx; firstPerson
+0x6A0EED: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x6A0EF2: mov     edi, eax
 0x6A0EF4: mov     eax, [esp+20h+arg_0]
 0x6A0EF8: mov     edx, [esp+20h+arg_C]
@@ -136,7 +136,7 @@
 0x6A0F2D: call    OblivionDynamicCast
 0x6A0F32: add     esp, 14h
 0x6A0F35: jmp     loc_6A103C
-0x6A0F3A: mov     ecx, [esi+1Ch]
+0x6A0F3A: mov     ecx, [esi+1Ch]; Verified (Oblivion): if bWeaponEnchantment_28 is set, or effectCode_2C is DIWE, the resolver takes the weapon/torch scenegraph attachment path instead of the ordinary target-node path.
 0x6A0F3D: test    ecx, ecx
 0x6A0F3F: jz      loc_6A1098
 0x6A0F45: mov     edx, [ecx]
@@ -200,9 +200,9 @@
 0x6A0FFB: call    eax
 0x6A0FFD: test    eax, eax
 0x6A0FFF: jz      short loc_6A100E
-0x6A1001: push    0
-0x6A1003: mov     ecx, eax
-0x6A1005: call    sub_405790
+0x6A1001: push    0; index
+0x6A1003: mov     ecx, eax; this
+0x6A1005: call    NiNode_GetChildAtIndex
 0x6A100A: mov     edi, eax
 0x6A100C: jmp     short loc_6A1010
 0x6A100E: xor     edi, edi
@@ -239,7 +239,7 @@
 0x6A1063: push    ecx
 0x6A1064: mov     ecx, edi; this
 0x6A1066: fstp    [esp+28h+a2]; a2
-0x6A1069: call    NiAVObject_UpdateNiAVObject
+0x6A1069: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x6A106E: jmp     short loc_6A1072
 0x6A1070: fstp    st
 0x6A1072: lea     edx, [edi+88h]
@@ -249,7 +249,7 @@
 0x6A107E: lea     ecx, [edi+20h]
 0x6A1081: call    sub_4121A0
 0x6A1086: lea     ecx, [esp+20h+var_C]
-0x6A108A: call    sub_404C90
+0x6A108A: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x6A108F: fadd    dword ptr [edi+2Ch]
 0x6A1092: mov     ecx, [esp+20h+arg_8]
 0x6A1096: fstp    dword ptr [ecx]

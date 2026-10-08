@@ -1,5 +1,5 @@
 0x506DE0: push    esi
-0x506DE1: mov     esi, dword ptr [esp+4+arg_8]
+0x506DE1: mov     esi, [esp+4+arg_8]
 0x506DE5: mov     eax, [esi]
 0x506DE7: mov     edx, [eax+190h]
 0x506DED: mov     ecx, esi
@@ -21,7 +21,7 @@
 0x506E1A: push    ecx; a3
 0x506E1B: push    edx; a2
 0x506E1C: push    eax; a1
-0x506E1D: call    Script_ExtractArgs
+0x506E1D: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x506E22: add     esp, 20h
 0x506E25: test    al, al
 0x506E27: jnz     short loc_506E2B
@@ -36,7 +36,7 @@
 0x506E3F: add     esp, 14h
 0x506E42: test    eax, eax
 0x506E44: jz      short loc_506E86
-0x506E46: cmp     dword ptr [esp+4+arg_8], 0
+0x506E46: cmp     [esp+4+arg_8], 0
 0x506E4B: jnz     short loc_506E53
 0x506E4D: mov     byte ptr [eax+78h], 0
 0x506E51: jmp     short loc_506E57
@@ -44,7 +44,7 @@
 0x506E57: cmp     byte ptr ds:0B361ACh, 0
 0x506E5E: jz      short loc_506E86
 0x506E60: cmp     byte ptr [eax+78h], 0
-0x506E64: mov     ecx, offset aOn_0
+0x506E64: mov     ecx, offset aOn_0; "On"
 0x506E69: jnz     short loc_506E70
 0x506E6B: mov     ecx, offset aOff
 0x506E70: push    ecx

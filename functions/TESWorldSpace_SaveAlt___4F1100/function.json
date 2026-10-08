@@ -1,18 +1,31 @@
 {
-  "callees_count": 25,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 14,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4F1100",
+      "0x4F1239"
+    ]
+  ],
+  "chunks_sha256": "ebfb791b3194f7e07fcfddb58e1b8ce829dc95d4e68ecfe06d6ebd7bb13b3494",
+  "comment_regular": "Verified: WRLD writer serializes fields/chunks and bounds but does not serialize TESWorldSpace.road (+0x54), consistent with ROAD being a separate record grouped beneath its owning WRLD. Neighboring +0x4C/+0x50 remain Unknown.",
+  "comment_repeatable": "Verified: WRLD writer serializes fields/chunks and bounds but does not serialize TESWorldSpace.road (+0x54), consistent with ROAD being a separate record grouped beneath its owning WRLD. Neighboring +0x4C/+0x50 remain Unknown.\n\nWRLD writer decoded 2026-09-05: parentWorldspace nonnull emits WNAM4 and bypasses CNAM/NAM2/ICON/MNAM. Otherwise optional climate emits CNAM4 and resolved/fallback water getter may emit NAM2 4, then ICON/MNAM16. DATA1, NAM0 8, NAM9 8 follow; SNAM4 emitted only for nonzero music. Water getter may substitute global default at0xB360AC even when direct WaterForm is null. Generated partial removal-delta guidance is distinct from this full object save.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "TESWorldSpace::SaveAlt?",
+  "display_name": "TESWorldSpace_WriteRecord",
   "end_ea": "0x4F1239",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "TESWorldSpace::SaveAlt?",
+  "name": "TESWorldSpace_WriteRecord",
   "segment": ".text",
   "sha256": "ebfb791b3194f7e07fcfddb58e1b8ce829dc95d4e68ecfe06d6ebd7bb13b3494",
   "size": 313,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4F1100",
+  "total_chunk_size": 313,
   "type": "UInt32 __usercall@<eax>(TESWorldSpace *this@<ecx>, int@<edi>, char@<bpl>)",
   "xrefs_from_count": 120,
   "xrefs_to_count": 1

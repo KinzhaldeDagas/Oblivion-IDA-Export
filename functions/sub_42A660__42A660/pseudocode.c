@@ -1,8 +1,9 @@
-_BYTE *__thiscall sub_42A660(_BYTE *this)
+// Verified ExtraRandomTeleportMarker constructor: sets ExtraData type 0x43 and the ExtraRandomTeleportMarker vtable, and zeroes its 4-byte teleportRef payload at +0x0C.
+ExtraRandomTeleportMarker *__thiscall ExtraRandomTeleportMarker_ctor(ExtraRandomTeleportMarker *this)
 {
-  *(this + 4) = 0x43;
-  *((_DWORD *)this + 2) = 0;
-  *(_DWORD *)this = &ExtraRandomTeleportMarker::`vftable';
-  *((_DWORD *)this + 3) = 0;
-  return this;
+  this->super.members.type = 0x43; /*0x42a664*/
+  this->super.members.next = 0; /*0x42a668*/
+  this->super.vtbl = (BSExtraDataVtbl *)&ExtraRandomTeleportMarker::`vftable'; /*0x42a66b*/
+  this->teleportRef = 0; /*0x42a671*/
+  return this; /*0x42a674*/
 }

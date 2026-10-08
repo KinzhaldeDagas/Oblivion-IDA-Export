@@ -64,7 +64,7 @@
 0x6B46F0: push    ecx
 0x6B46F1: lea     edx, [esp+34h+var_24]
 0x6B46F5: push    edx
-0x6B46F6: call    sub_43F3E0
+0x6B46F6: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x6B46FB: mov     eax, [esi+14h]
 0x6B46FE: add     esp, 8
 0x6B4701: test    eax, eax

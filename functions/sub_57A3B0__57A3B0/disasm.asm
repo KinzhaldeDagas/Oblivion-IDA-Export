@@ -35,8 +35,8 @@
 0x57A41B: jz      short locret_57A434
 0x57A41D: cmp     [esp+arg_0], 0
 0x57A422: jnz     short loc_57A42F
-0x57A424: mov     ecx, eax
-0x57A426: call    sub_5893B0
+0x57A424: mov     ecx, eax; this
+0x57A426: call    Tile__IsVisible; AchievementsNative evidence: target eligibility helper returns true when the tile and ancestors are not suppressed by the observed flag path; inventory hover uses it before accepting header/item targets.
 0x57A42B: test    al, al
 0x57A42D: jz      short locret_57A434
 0x57A42F: jmp     InventoryMenu_InitializeOrUpdate

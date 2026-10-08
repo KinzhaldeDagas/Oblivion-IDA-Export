@@ -13,7 +13,7 @@
 0x8A118D: lea     eax, [esp+2Ch+var_C]
 0x8A1191: mov     large fs:0, eax
 0x8A1197: mov     [esp+2Ch+var_14], ecx
-0x8A119B: mov     edi, [esp+2Ch+arg_0]
+0x8A119B: mov     edi, [esp+2Ch+info]
 0x8A119F: test    edi, edi
 0x8A11A1: jz      loc_8A12C5
 0x8A11A7: mov     ebp, [edi+8]
@@ -37,7 +37,7 @@
 0x8A11DB: call    eax
 0x8A11DD: test    eax, eax
 0x8A11DF: jz      short loc_8A11F3
-0x8A11E1: cmp     eax, offset dword_BA8150
+0x8A11E1: cmp     eax, offset stru_BA8150
 0x8A11E6: jz      loc_8A12DB
 0x8A11EC: mov     eax, [eax+4]
 0x8A11EF: test    eax, eax
@@ -48,7 +48,7 @@
 0x8A11FA: call    eax
 0x8A11FC: test    eax, eax
 0x8A11FE: jz      short loc_8A1212
-0x8A1200: cmp     eax, offset dword_BA7FF8
+0x8A1200: cmp     eax, offset stru_BA7FF8
 0x8A1205: jz      loc_8A12DB
 0x8A120B: mov     eax, [eax+4]
 0x8A120E: test    eax, eax
@@ -81,7 +81,7 @@
 0x8A1260: xor     edi, edi
 0x8A1262: test    ebp, ebp
 0x8A1264: jbe     short loc_8A128A
-0x8A1266: mov     ecx, [esp+2Ch+arg_0]
+0x8A1266: mov     ecx, [esp+2Ch+info]
 0x8A126A: mov     edx, [ecx+10h]
 0x8A126D: mov     eax, [edx+edi*4]
 0x8A1270: push    eax
@@ -114,7 +114,7 @@
 0x8A12B3: mov     ecx, esi
 0x8A12B5: call    eax
 0x8A12B7: mov     edx, [edi]
-0x8A12B9: mov     eax, [esp+2Ch+arg_0]
+0x8A12B9: mov     eax, [esp+2Ch+info]
 0x8A12BD: mov     edx, [edx+7Ch]
 0x8A12C0: push    eax
 0x8A12C1: mov     ecx, edi
@@ -146,3 +146,20 @@
 0x8A1309: mov     [esp+34h+var_4], 0
 0x8A1311: call    sub_8E86E0
 0x8A1316: jmp     loc_8A1242
+0x9D6980: mov     eax, [ebp-10h]
+0x9D6983: push    eax
+0x9D6984: call    sub_8C9290
+0x9D6989: pop     ecx
+0x9D698A: retn
+0x9D698B: mov     eax, [ebp-10h]
+0x9D698E: push    eax
+0x9D698F: call    sub_8C9290
+0x9D6994: pop     ecx
+0x9D6995: retn
+0x9D6996: mov     edx, [esp+arg_4]
+0x9D699A: lea     eax, [edx-1Ch]
+0x9D699D: mov     ecx, [edx-20h]
+0x9D69A0: xor     ecx, eax
+0x9D69A2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D69A7: mov     eax, offset stru_AFE728
+0x9D69AC: jmp     ___CxxFrameHandler3

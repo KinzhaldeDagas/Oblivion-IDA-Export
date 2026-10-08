@@ -1,4 +1,7 @@
-char __thiscall sub_799EA0(_BYTE *this)
+//
+//
+// [2026-10-03 callsite distinction] Native Enabled is solely byte+3C. Plugin changes two CBranch callsites, not this accessor globally:7925E9 uses current authored branch condition,79391A discards completed ENABLED/PRUNED children but retains DISABLED branches. An Enabled-only substitution without matching child retention would lose authored branch hierarchy.
+bool __thiscall OB_CFrondEngine_Enabled_010201A0(const OB_CFrondEngine_010201A0 *this)
 {
-  return *(this + 0x3C);
+  return this->enabledFlag; /*0x799ea3*/
 }

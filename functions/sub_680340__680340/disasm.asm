@@ -1,4 +1,4 @@
-0x680340: movzx   eax, word ptr [ecx]
+0x680340: movzx   eax, word ptr [ecx]; Verified: clears allocation flag 0x04 for this AStarWorldNode's table slot and rewinds LowPathSearchGlobals.nextFreeStateIndex when the released slot is lower.
 0x680343: cmp     ax, ds:0B3BF04h
 0x68034A: jnb     short locret_680373
 0x68034C: mov     edx, ds:0B3BF00h

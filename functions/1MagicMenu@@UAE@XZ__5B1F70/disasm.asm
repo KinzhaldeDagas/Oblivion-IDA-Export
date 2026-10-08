@@ -43,10 +43,10 @@
 0x5B1FF0: mov     ecx, edi
 0x5B1FF2: call    ContainerEntryExtraData_DestroyDataTable
 0x5B1FF7: push    edi
-0x5B1FF8: call    FormHeapFree
+0x5B1FF8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5B1FFD: add     esp, 4
 0x5B2000: push    esi
-0x5B2001: call    FormHeapFree
+0x5B2001: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5B2006: add     esp, 4
 0x5B2009: cmp     ds:0B14368h, ebp
 0x5B200F: jnz     short loc_5B1FB0
@@ -55,7 +55,7 @@
 0x5B2016: mov     eax, [ebx+3Ch]
 0x5B2019: mov     esi, [eax+4]
 0x5B201C: push    eax
-0x5B201D: call    FormHeapFree
+0x5B201D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5B2022: add     esp, 4
 0x5B2025: cmp     esi, ebp
 0x5B2027: mov     [ebx+3Ch], esi
@@ -65,7 +65,7 @@
 0x5B2032: call    sub_5B1D70
 0x5B2037: mov     ecx, ebx; this
 0x5B2039: mov     [esp+24h+var_4], 0FFFFFFFFh
-0x5B2041: call    ??1Menu@@UAE@XZ; Menu::~Menu(void)
+0x5B2041: call    ??1Menu@@UAE@XZ; Verified template ownership: Menu+0x1C byte gates freeing registered template objects; linked list nodes +8/+0xC always removed. Updated MenuMembr preserves size0x24; with vtable Menu total0x28. ReadFile0x5904EF sets Menu ownsTemplates=1 and BuildStorage ownsSubTemplates=0.
 0x5B2046: mov     ecx, dword ptr [esp+24h+var_C]
 0x5B204A: mov     large fs:0, ecx
 0x5B2051: pop     ecx
@@ -75,3 +75,12 @@
 0x5B2055: pop     ebx
 0x5B2056: add     esp, 10h
 0x5B2059: retn
+0x9C0620: mov     ecx, [ebp-10h]; this
+0x9C0623: jmp     ??1Menu@@UAE@XZ; Verified template ownership: Menu+0x1C byte gates freeing registered template objects; linked list nodes +8/+0xC always removed. Updated MenuMembr preserves size0x24; with vtable Menu total0x28. ReadFile0x5904EF sets Menu ownsTemplates=1 and BuildStorage ownsSubTemplates=0.
+0x9C0628: mov     edx, [esp+arg_4]
+0x9C062C: lea     eax, [edx-14h]
+0x9C062F: mov     ecx, [edx-18h]
+0x9C0632: xor     ecx, eax
+0x9C0634: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C0639: mov     eax, offset stru_AE98A8
+0x9C063E: jmp     ___CxxFrameHandler3

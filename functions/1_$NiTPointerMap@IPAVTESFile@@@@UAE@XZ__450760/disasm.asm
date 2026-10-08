@@ -20,7 +20,7 @@
 0x4507AB: call    NiTMap_Clear
 0x4507B0: mov     eax, [esi+8]
 0x4507B3: push    eax
-0x4507B4: call    FormHeapFree
+0x4507B4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4507B9: add     esp, 4
 0x4507BC: mov     ecx, [esp+18h+var_C]
 0x4507C0: mov     large fs:0, ecx
@@ -28,3 +28,12 @@
 0x4507C8: pop     esi
 0x4507C9: add     esp, 10h
 0x4507CC: retn
+0x9AE080: mov     ecx, [ebp-10h]
+0x9AE083: jmp     sub_450030
+0x9AE088: mov     edx, [esp+arg_4]
+0x9AE08C: lea     eax, [edx-8]
+0x9AE08F: mov     ecx, [edx-0Ch]
+0x9AE092: xor     ecx, eax
+0x9AE094: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AE099: mov     eax, offset stru_ADA974
+0x9AE09E: jmp     ___CxxFrameHandler3

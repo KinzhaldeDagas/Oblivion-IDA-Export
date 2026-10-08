@@ -1,4 +1,4 @@
-0x6CE2C0: push    ebx
+0x6CE2C0: push    ebx; Copies NiTimeController members, clones the source interpolator at +0x3C through the stream clone map, and assigns the clone through the destination smart pointer.
 0x6CE2C1: mov     ebx, [esp+4+arg_0]
 0x6CE2C5: push    esi
 0x6CE2C6: push    edi
@@ -6,7 +6,7 @@
 0x6CE2CB: push    edi
 0x6CE2CC: push    ebx
 0x6CE2CD: mov     esi, ecx
-0x6CE2CF: call    sub_6D0530
+0x6CE2CF: call    NiInterpController_CopyMembers; NiInterpController clone-member thunk delegates to NiTimeController_CopyMembers.
 0x6CE2D4: mov     ecx, [esi+3Ch]
 0x6CE2D7: test    ecx, ecx
 0x6CE2D9: jz      short loc_6CE2EA

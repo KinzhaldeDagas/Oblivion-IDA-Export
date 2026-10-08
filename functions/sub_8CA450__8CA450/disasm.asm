@@ -27,7 +27,6 @@
 0x8CA491: test    eax, eax
 0x8CA493: jle     short loc_8CA4C8
 0x8CA495: jmp     short loc_8CA4A0
-0x8CA497: align 10h
 0x8CA4A0: mov     edx, [esi+3Ch]
 0x8CA4A3: mov     eax, [edx+edi*4]
 0x8CA4A6: lea     ecx, ds:0[edi*4]

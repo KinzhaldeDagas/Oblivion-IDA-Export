@@ -182,7 +182,6 @@
 0x4100C8: pop     ebx
 0x4100C9: add     esp, 14h
 0x4100CC: retn
-0x4100CD: align 10h
 0x4100D0: mov     eax, [esi+40h]
 0x4100D3: cmp     dword ptr [eax+edi*4], 0
 0x4100D7: lea     eax, [eax+edi*4]

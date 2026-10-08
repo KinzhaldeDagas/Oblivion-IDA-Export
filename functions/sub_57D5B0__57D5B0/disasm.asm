@@ -3,7 +3,7 @@
 0x57D5B2: mov     esi, ecx
 0x57D5B4: mov     ecx, ds:0B333C4h; int
 0x57D5BA: push    1; char
-0x57D5BC: call    sub_668D00
+0x57D5BC: call    ObservedActorRef_InitDefaultIdleVariants; Actor reference default idle variant initialization. Seeds default idle/animation choices during actor setup; observed from actor initialization path.
 0x57D5C1: mov     ecx, [esi+60h]
 0x57D5C4: mov     edi, eax
 0x57D5C6: mov     eax, [ecx]
@@ -24,21 +24,21 @@
 0x57D5F7: add     esp, 8
 0x57D5FA: call    NiNode_UpdateDynamicEffectState
 0x57D5FF: mov     ecx, [esi+60h]; this
-0x57D602: call    NiAVObject_InitializePropertyState
+0x57D602: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x57D607: push    1
 0x57D609: call    GetShadowSceneNode
 0x57D60E: push    eax
 0x57D60F: push    edi
 0x57D610: call    sub_7C7050
-0x57D615: mov     ecx, ds:0B333C4h; int
+0x57D615: mov     ecx, ds:0B333C4h; this
 0x57D61B: add     esp, 0Ch
-0x57D61E: call    sub_664C40
+0x57D61E: call    Actor_UpdateAnimationAndFirstPerson
 0x57D623: fldz
 0x57D625: push    0; a3
 0x57D627: push    ecx
 0x57D628: mov     ecx, [esi+60h]; this
 0x57D62B: fstp    [esp+10h+a2]; a2
-0x57D62E: call    NiAVObject_UpdateNiAVObject
+0x57D62E: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x57D633: pop     edi
 0x57D634: pop     esi
 0x57D635: retn

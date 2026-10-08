@@ -45,12 +45,12 @@
 0x4E1CF7: push    ebx
 0x4E1CF8: mov     ecx, edi
 0x4E1CFA: call    sub_47A2C0
-0x4E1CFF: mov     ecx, ds:0B333C4h
+0x4E1CFF: mov     ecx, ds:0B333C4h; this
 0x4E1D05: mov     al, [ecx+588h]
 0x4E1D0B: mov     byte ptr [esp+28h+arg_0], al
 0x4E1D0F: mov     edx, [esp+28h+arg_0]
-0x4E1D13: push    edx
-0x4E1D14: call    sub_6600D0
+0x4E1D13: push    edx; firstPerson
+0x4E1D14: call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.
 0x4E1D19: mov     edi, eax
 0x4E1D1B: cmp     edi, ebp
 0x4E1D1D: jz      short loc_4E1D29
@@ -67,14 +67,14 @@
 0x4E1D3B: add     esp, 14h
 0x4E1D3E: cmp     eax, ebp
 0x4E1D40: jz      short loc_4E1DA1
-0x4E1D42: push    ebp
-0x4E1D43: push    esi
-0x4E1D44: push    0Eh
+0x4E1D42: push    ebp; skeletonRoot
+0x4E1D43: push    esi; actorRef
+0x4E1D44: push    0Eh; slot
 0x4E1D46: push    ebp
 0x4E1D47: mov     ecx, eax
 0x4E1D49: call    TESBipedModelForm_GetModelPath
-0x4E1D4E: push    eax
-0x4E1D4F: call    sub_479450
+0x4E1D4E: push    eax; modelPath
+0x4E1D4F: call    Actor_LoadCloneAndAttachModel3D; Loads and clones a model for an actor equipment/add-on slot, binds actor-specific resources, applies the stock attachment transform, attaches through Prn metadata, and initializes render property/dynamic-effect state.
 0x4E1D54: mov     edi, eax
 0x4E1D56: mov     [esp+38h+Src], ebp
 0x4E1D5A: mov     [esp+38h+var_10], bp
@@ -120,3 +120,12 @@
 0x4E1DDF: pop     ebx
 0x4E1DE0: add     esp, 14h
 0x4E1DE3: retn    4
+0x9B5BD0: lea     ecx, [ebp-14h]; void *
+0x9B5BD3: jmp     BSStringT_Clear
+0x9B5BD8: mov     edx, [esp+arg_4]
+0x9B5BDC: lea     eax, [edx-18h]
+0x9B5BDF: mov     ecx, [edx-1Ch]
+0x9B5BE2: xor     ecx, eax
+0x9B5BE4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B5BE9: mov     eax, offset stru_AE0BB4
+0x9B5BEE: jmp     ___CxxFrameHandler3

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x434C60",
-    "line": "push    ebp",
+    "line": "push    ebp; Queued file/tree child cancel/update helper: forwards a2 to children in slot +0x1C before generic IO cleanup.",
     "mnemonic": "push",
     "size": 1
   },
@@ -82,12 +82,6 @@
     "line": "jmp     short loc_434C80",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x434C7D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x434C80",
@@ -175,7 +169,7 @@
   },
   {
     "ea": "0x434C9E",
-    "line": "mov     ecx, ioManager",
+    "line": "mov     ecx, ds:0B33A10h",
     "mnemonic": "mov",
     "size": 6
   },

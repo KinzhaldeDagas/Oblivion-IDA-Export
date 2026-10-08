@@ -1,19 +1,32 @@
 {
-  "callees_count": 18,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 11,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x658CB0",
+      "0x658DE9"
+    ]
+  ],
+  "chunks_sha256": "9b858f0c6869ecd17ca3c9b29472e6b4a437f54f83f6b9088f0536d3b2311ab0",
+  "comment_regular": "Verified 2026-10-04: MiddleLowProcess save role from Oblivion process vtable slot +0x3F4, parent call chain and matching serialization/reset behavior. ECX receiver and RET8 establish stack arity; owner is MobileObject (dispatch 65A835 for Revert). \nVerified: calls LowProcess_SaveGame, writes unk090 (+0x90) as4 bytes, and maxAVModifiers (+0x94) when mask0x100000. Optional independent BLOK header/length envelope surrounds derived payload.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 6,
-  "display_name": "MiddleLowProcess_Save?",
+  "display_name": "MiddleLowProcess_SaveGame",
   "end_ea": "0x658DE9",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
-  "has_pseudocode": false,
-  "name": "MiddleLowProcess_Save?",
+  "has_pseudocode": true,
+  "name": "MiddleLowProcess_SaveGame",
   "segment": ".text",
   "sha256": "9b858f0c6869ecd17ca3c9b29472e6b4a437f54f83f6b9088f0536d3b2311ab0",
   "size": 313,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x658CB0",
-  "type": "char __thiscall(_DWORD *this, int, int Src)",
+  "total_chunk_size": 313,
+  "type": "void __thiscall(MiddleLowProcess *self, ProcessSaveChangeMask changeMask, MobileObject *owner)",
   "xrefs_from_count": 116,
   "xrefs_to_count": 2
 }

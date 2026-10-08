@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7C8710",
-    "line": "push    esi",
+    "line": "push    esi; Reloads Oblivion ShadowLightShader programs and re-presets pass families. After virtual vertex/pixel loading, installs 1x pass families or the larger 2x family set according to the observed shader-level selector.",
     "mnemonic": "push",
     "size": 1
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x7C876E",
-    "line": "call    sub_82D990",
+    "line": "call    ShadowLightShader_InitializeMultiPointPassPool",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x7C8775",
-    "line": "call    sub_820C00",
+    "line": "call    ShadowLightShader_InitializePassPool; Oblivion ShadowLight pass-pool initializer. Mode-5 pool[6..9] each owns one stage configured for texcoord 0, wrap addressing, linear MAG/MIN/MIP filtering, and disabled fixed-function color/alpha ops. All four disable alpha blending and stencil, enable Z test/write with LESS_EQUAL, and differ only in alpha-test enable: pools 6/8 off, 7/9 on. Opaque shaders ignore the unbound stage.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x7C8783",
-    "line": "call    sub_831910",
+    "line": "call    ShadowLightShader_InitializeAdditivePointPassPool",
     "mnemonic": "call",
     "size": 5
   },

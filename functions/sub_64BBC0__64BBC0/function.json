@@ -1,19 +1,36 @@
 {
-  "callees_count": 132,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 51,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_64BBC0",
+  "chunks": [
+    [
+      "0x64BBC0",
+      "0x64C349"
+    ],
+    [
+      "0x9C3AD0",
+      "0x9C3AFE"
+    ]
+  ],
+  "chunks_sha256": "3feda344047e20fa487bfed6fb9bb7b32e5f5375e688d6dc9981be941ab3ee9c",
+  "comment_regular": "3DTheft release decode 2026-05-18: MiddleHighProcess StartCombatPackage returns success/failure as AL and owns active combat-controller/package setup. No observed Actor::EvaluatePackage call is required after this vfunc.",
+  "comment_repeatable": "3DTheft release decode 2026-05-18: MiddleHighProcess StartCombatPackage returns success/failure as AL and owns active combat-controller/package setup. No observed Actor::EvaluatePackage call is required after this vfunc.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 8,
+  "display_name": "MiddleHighProcess_StartCombatPackage",
   "end_ea": "0x64C349",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_64BBC0",
+  "name": "MiddleHighProcess_StartCombatPackage",
   "segment": ".text",
   "sha256": "d84ae682e51d8949df1b4714583f30a6674f167f9d86c46d33f9a4c75ef9dbbd",
   "size": 1929,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x64BBC0",
-  "type": "char __userpurge@<al>(int@<ecx>, double@<st2>, double@<st1>, double@<st0>, Actor *, Actor *, int, int, int, int, int, int, float, int)",
-  "xrefs_from_count": 740,
+  "total_chunk_size": 1975,
+  "type": "char __userpurge@<al>(int@<ecx>, double@<st2>, double@<st1>, double@<st0>, Actor *, float, int, int, int, int, int, int, float, int)",
+  "xrefs_from_count": 756,
   "xrefs_to_count": 2
 }

@@ -10,10 +10,10 @@
 0x5B11B5: jnz     short loc_5B11E0
 0x5B11B7: lea     edi, [esi+0A0h]
 0x5B11BD: mov     ebx, 5
-0x5B11C2: mov     ecx, [edi]
+0x5B11C2: mov     ecx, [edi]; this
 0x5B11C4: test    ecx, ecx
 0x5B11C6: jz      short loc_5B11D8
-0x5B11C8: call    sub_6B7260
+0x5B11C8: call    SoundHandle__IsPlaying; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.
 0x5B11CD: test    al, al
 0x5B11CF: jz      short loc_5B11D8
 0x5B11D1: mov     ecx, [edi]
@@ -22,8 +22,8 @@
 0x5B11DB: sub     ebx, 1
 0x5B11DE: jnz     short loc_5B11C2
 0x5B11E0: mov     eax, [esi+48h]
-0x5B11E3: push    eax
-0x5B11E4: call    GetLockLevel
+0x5B11E3: push    eax; numericLockMagnitude
+0x5B11E4: call    GetLockLevel; Verified numeric lock magnitude to LOCK_LEVEL mapper. Thresholds are iLockLevelMaxVeryEasy, iLockLevelMaxEasy, iLockLevelMaxAverage, iLockLevelMaxHard, and iLockLevelMaxVeryHard; outputs 0..5 map through LockLevelNames to VeryEasy, Easy, Average, Hard, VeryHard, Impossible. Fallout independently uses the matching LOCK_LEVEL names, but this mapping is directly established by Oblivion code and data.
 0x5B11E9: mov     eax, ds:0B03E1Ch[eax*4]
 0x5B11F0: add     esp, 4
 0x5B11F3: test    eax, eax
@@ -130,7 +130,7 @@
 0x5B1343: cmp     ebp, edi
 0x5B1345: jz      short loc_5B139A
 0x5B1347: fld     dword ptr [esi+148h]
-0x5B134D: call    Double_To_SInt32
+0x5B134D: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B1352: mov     ebx, eax
 0x5B1354: push    ebx
 0x5B1355: mov     ecx, esi

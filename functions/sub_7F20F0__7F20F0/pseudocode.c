@@ -1,10 +1,12 @@
-int __thiscall sub_7F20F0(_DWORD *this)
+// PPLighting-property virtual +0xA4. Returns STSPData.streamData from property +0xF0 or zero.
+int __thiscall OB_SpeedTreeShaderPPLightingProperty_GetSTSPData_010201A0(
+        OB_SpeedTreeShaderPPLightingProperty_010201A0 *this)
 {
-  int v1; // eax
+  int stspData; // eax
 
-  v1 = *(this + 0x3C);
-  if ( v1 )
-    return *(_DWORD *)(v1 + 8);
+  stspData = this->stspData; /*0x7f20f0*/
+  if ( stspData ) /*0x7f20f8*/
+    return *(_DWORD *)(stspData + 8); /*0x7f20fa*/
   else
-    return 0;
+    return 0; /*0x7f20fe*/
 }

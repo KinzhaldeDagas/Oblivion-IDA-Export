@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x415B65",
+      "0x415BAE"
+    ]
+  ],
+  "chunks_sha256": "7e8fa96ddada242ddc8c7d738ede586d61bab35e44dac6253a3b317a109bd7b9",
+  "comment_regular": "Verified (Oblivion): the adjacent EffectSetting::enchantEffect at +0x7C is separately resolved through the TESEffectShader RTTI path; shader hit-effect constructors read +0x78, not this enchant-only slot.",
+  "comment_repeatable": "Verified (Oblivion): the adjacent EffectSetting::enchantEffect at +0x7C is separately resolved through the TESEffectShader RTTI path; shader hit-effect constructors read +0x78, not this enchant-only slot.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
   "display_name": "EffectSetting_LinkForm:::ResolveEnchantShader",
   "end_ea": "0x415BAE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "EffectSetting_LinkForm:::ResolveEnchantShader",
   "segment": ".text",
   "sha256": "7e8fa96ddada242ddc8c7d738ede586d61bab35e44dac6253a3b317a109bd7b9",
   "size": 73,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x415B65",
-  "type": "int __usercall@<eax>(TESForm *@<esi>, TESForm a1a)",
+  "total_chunk_size": 73,
+  "type": "int __usercall@<eax>(EffectSetting *effectSetting@<esi>)",
   "xrefs_from_count": 33,
   "xrefs_to_count": 2
 }

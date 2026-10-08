@@ -1,19 +1,36 @@
 {
-  "callees_count": 34,
-  "callers_count": 16,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
+  "callers_count": 17,
+  "chunks": [
+    [
+      "0x523B10",
+      "0x523D54"
+    ],
+    [
+      "0x9D71B0",
+      "0x9D71E6"
+    ]
+  ],
+  "chunks_sha256": "eb6c8078b36d0ecceb971b33c0e30215698aee70985686416736ff91c2e01af3",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_523B10",
+  "comment_repeatable": "MEF PERF 2026-10-08: PERF-17 Verified Resize16: allocate fresh header+pointer slots, retain/copy each old used live pointer, destruct old slots and free backing. Capacity0/grow1 dense N-build makes N resizes,N-1 old-block frees,N*(N-1)/2 copied pointers and N*(N-1) copy/discard Interlocked calls. Excludes ordinary insertion/parent operations; runtime size/timing unmeasured.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "NiTObjectArray_Resize16",
   "end_ea": "0x523D54",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_523B10",
+  "name": "NiTObjectArray_Resize16",
   "segment": ".text",
   "sha256": "632dc12d2ddb009ed6abc970b417031de7a3f36c07f86b548dfd46b7cc20fb3c",
   "size": 580,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x523B10",
-  "type": "void __thiscall(unsigned __int16 *this, unsigned int)",
-  "xrefs_from_count": 222,
+  "total_chunk_size": 634,
+  "type": "void __thiscall(MEF_RefPointerArray16 *self, unsigned int capacity)",
+  "xrefs_from_count": 240,
   "xrefs_to_count": 17
 }

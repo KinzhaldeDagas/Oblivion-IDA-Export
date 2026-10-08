@@ -20,7 +20,6 @@
 0x5B5B06: sub     eax, edx
 0x5B5B08: add     edi, 0FFFFFFFFh
 0x5B5B0B: jmp     short loc_5B5B10
-0x5B5B0D: align 10h
 0x5B5B10: mov     cl, [edi+1]
 0x5B5B13: add     edi, 1
 0x5B5B16: test    cl, cl

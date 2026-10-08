@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x529B30",
+      "0x529B66"
+    ]
+  ],
+  "chunks_sha256": "7f1b1f245280b2afefb935a6bcb9c8ee946cb601790c3a7012fad36411c3a0e2",
+  "comment_regular": "TESQuest::IsStageDone scans the quest's stage entries and matches the stored stage byte; on a match it returns that entry's completed byte, otherwise false.",
+  "comment_repeatable": "TESQuest::IsStageDone scans the quest's stage entries and matches the stored stage byte; on a match it returns that entry's completed byte, otherwise false.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_529B30",
+  "display_name": "TESQuest::IsStageDone",
   "end_ea": "0x529B66",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_529B30",
+  "name": "TESQuest::IsStageDone",
   "segment": ".text",
   "sha256": "7f1b1f245280b2afefb935a6bcb9c8ee946cb601790c3a7012fad36411c3a0e2",
   "size": 54,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x529B30",
-  "type": "char __thiscall(_DWORD *this, char)",
+  "total_chunk_size": 54,
+  "type": "bool __thiscall(TESQuest *this, UInt8 stage)",
   "xrefs_from_count": 27,
   "xrefs_to_count": 1
 }

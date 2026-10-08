@@ -6,7 +6,7 @@
 0x6826DA: jz      loc_682810
 0x6826E0: push    esi
 0x6826E1: push    edi
-0x6826E2: mov     ecx, offset stru_B3C000
+0x6826E2: mov     ecx, offset unk_B3C000
 0x6826E7: call    sub_49F470
 0x6826EC: lea     eax, [esp+10h+arg_0]
 0x6826F0: push    eax
@@ -42,7 +42,7 @@
 0x682741: push    1
 0x682743: call    eax
 0x682745: push    edi
-0x682746: call    FormHeapFree
+0x682746: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x68274B: add     esp, 4
 0x68274E: mov     [esp+10h+arg_0], 0
 0x682756: lea     ecx, [esp+10h+arg_0]
@@ -78,7 +78,7 @@
 0x6827A3: push    1
 0x6827A5: call    eax
 0x6827A7: push    esi
-0x6827A8: call    FormHeapFree
+0x6827A8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6827AD: add     esp, 4
 0x6827B0: mov     [esp+10h+arg_0], 0
 0x6827B8: lea     ecx, [esp+10h+arg_0]
@@ -110,9 +110,9 @@
 0x6827F7: push    1
 0x6827F9: call    eax
 0x6827FB: push    edi
-0x6827FC: call    FormHeapFree
+0x6827FC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x682801: add     esp, 4
-0x682804: mov     ecx, offset stru_B3C000
+0x682804: mov     ecx, offset unk_B3C000
 0x682809: call    j_NiLeaveCriticalSection_0
 0x68280E: pop     edi
 0x68280F: pop     esi

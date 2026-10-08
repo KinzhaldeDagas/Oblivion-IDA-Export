@@ -1,9 +1,9 @@
-void __thiscall sub_6862C0(int *this, _DWORD *a2)
+void __thiscall sub_6862C0(int *this, NiPoint3 *position)
 {
-  sub_689A00(this);
-  sub_684EC0((int **)this);
-  sub_68A280(this, a2);
-  sub_68BED0(this + 5, a2);
-  if ( byte_B3C08A )
-    sub_685EA0(this, 0);
+  TravelPath_ClearNodes((TravelPath *)this); /*0x6862c4*/
+  sub_684EC0((int **)this); /*0x6862cb*/
+  TravelPath_AppendDestinationPosition((TravelPath *)this, position); /*0x6862d7*/
+  sub_68BED0((TeleportData **)this + 5, position); /*0x6862e0*/
+  if ( unk_B3C08A ) /*0x6862e5*/
+    sub_685EA0(this, 0); /*0x6862f2*/
 }

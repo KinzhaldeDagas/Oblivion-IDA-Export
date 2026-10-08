@@ -79,13 +79,13 @@
   },
   {
     "ea": "0x5273CD",
-    "line": "push    offset sub_43ACE0; a5",
+    "line": "push    offset FaceGenMatrix_Destruct; a5",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5273D2",
-    "line": "push    offset sub_43EB30; a4",
+    "line": "push    offset FaceGenMatrix_Construct; a4",
     "mnemonic": "push",
     "size": 5
   },
@@ -121,13 +121,13 @@
   },
   {
     "ea": "0x5273E5",
-    "line": "push    offset sub_43ACE0; a5",
+    "line": "push    offset FaceGenMatrix_Destruct; a5",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5273EA",
-    "line": "push    offset sub_43EB30; a4",
+    "line": "push    offset FaceGenMatrix_Construct; a4",
     "mnemonic": "push",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x5273F3",
-    "line": "lea     ecx, [esp+0F4h+var_6C]",
+    "line": "lea     ecx, [esp+0F4h+outDelta]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -169,13 +169,13 @@
   },
   {
     "ea": "0x52740B",
-    "line": "lea     edx, [esp+0E4h+var_6C]",
+    "line": "lea     edx, [esp+0E4h+outDelta]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x52740F",
-    "line": "push    edx",
+    "line": "push    edx; parameters",
     "mnemonic": "push",
     "size": 1
   },
@@ -187,13 +187,13 @@
   },
   {
     "ea": "0x527418",
-    "line": "call    sub_552880",
+    "line": "call    FaceGenHeadParameters_Initialize; Standard FaceGenHeadParameters dimensions: matrix0 50x1, matrix1 30x1, matrix2 50x1, matrix3 untouched. Thus standard initialized active coefficient count is 130, under PF supported 256 cap. Existing elements survive ResizeFill as documented; this routine is not a full zero reset.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x52741D",
-    "line": "fld     dword ptr ds:0B362D4h",
+    "line": "fld     dword ptr ds:0B362D4h; Loads fNPCGeneticVariation solely for the immediately following generator argument; the value is popped to the stack and not reused. Prettier Faces substitutes its configured value at the direct call hook without modifying the global GMST.",
     "mnemonic": "fld",
     "size": 6
   },
@@ -211,25 +211,25 @@
   },
   {
     "ea": "0x52742C",
-    "line": "lea     ecx, [esp+0E4h+a1]",
+    "line": "lea     ecx, [esp+0E4h+a1]; Stack-local output FaceGenHeadParameters (0x60 bytes; four 0x18-byte matrix descriptors). Oblivion owns and destroys its coefficient buffers.",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x527430",
-    "line": "push    ecx; int",
+    "line": "push    ecx; outParameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x527431",
-    "line": "add     eax, 29Ch",
+    "line": "add     eax, 29Ch; TESRace+0x29C points to the race-authored FaceGenHeadParameters used as the Gaussian randomization base.",
     "mnemonic": "add",
     "size": 5
   },
   {
     "ea": "0x527436",
-    "line": "push    eax; int",
+    "line": "push    eax; raceParameters",
     "mnemonic": "push",
     "size": 1
   },
@@ -241,19 +241,19 @@
   },
   {
     "ea": "0x527438",
-    "line": "fstp    [esp+0F0h+var_F0]; float",
+    "line": "fstp    [esp+0F0h+geneticVariation]; geneticVariation",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x52743B",
-    "line": "call    sub_553B70",
+    "line": "call    FaceGen_GenerateRandomizedHeadParameters; Native TESNPC_RandomizeFaceGen calls FaceGen_GenerateRandomizedHeadParameters once per Randomize Face activation. PF 1.19.15 optional RandomSeed seeds its private geometry PCG32 stream reproducibly; default remains entropy-seeded. Native Gaussian source at 0x6EE070. Replay also depends on race, sex, active vampirism-selected bank and same settings/click order.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x527440",
-    "line": "push    0",
+    "line": "push    0; matrixChannel",
     "mnemonic": "push",
     "size": 2
   },
@@ -265,31 +265,31 @@
   },
   {
     "ea": "0x527446",
-    "line": "push    0",
+    "line": "push    0; controlIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x527448",
-    "line": "push    edx",
+    "line": "push    edx; parameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x527449",
-    "line": "call    BSFaceGen_GetAge",
+    "line": "call    FaceGenHeadParameters_GetControlValue; Read generated age from FanControls matrixChannel 0, which projects FaceGen matrix 0 (EGM geometry).",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x52744E",
-    "line": "fstp    [esp+0FCh+var_D0]",
+    "line": "fstp    [esp+0FCh+var_D0]; Project age control 0 from matrix channel 0, which FaceGen maps to matrix 0 (head geometry).",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x527452",
-    "line": "push    1",
+    "line": "push    1; matrixChannel",
     "mnemonic": "push",
     "size": 2
   },
@@ -301,25 +301,25 @@
   },
   {
     "ea": "0x527458",
-    "line": "push    0",
+    "line": "push    0; controlIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x52745A",
-    "line": "push    eax",
+    "line": "push    eax; parameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52745B",
-    "line": "call    BSFaceGen_GetAge",
+    "line": "call    FaceGenHeadParameters_GetControlValue; Read generated age from FanControls matrixChannel 1, which projects FaceGen matrix 2 (EGT texture), not matrix 1.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x527460",
-    "line": "fstp    [esp+108h+var_D8]",
+    "line": "fstp    [esp+108h+var_D8]; Project age control 0 from matrix channel 1, which FaceGen maps to matrix 2 (face texture).",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x52746D",
-    "line": "cmp     [esp+0E4h+arg_0], 0",
+    "line": "cmp     [esp+0E4h+preserveAge], 0",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x527481",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Native random Age target consumes Game_RandomLargeInteger(0) once when preserveAge=false. PF private Age PCG32 stream may be seeded from optional RandomSeed; repeatable independently of geometry/sex/hair streams. Actual target formula maps 15-bit integer to [15,65].",
     "mnemonic": "call",
     "size": 5
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x5274A5",
-    "line": "fxch    st(1)",
+    "line": "fxch    st(1); Linear 15-bit map: raw 0 -> age 15, midpoint 16384 -> approximately age 40, raw 32767 -> age 65.",
     "mnemonic": "fxch",
     "size": 2
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x5274BD",
-    "line": "fstp    [esp+0E4h+var_D0]",
+    "line": "fstp    [esp+0E4h+var_D0]; Texture age target is oldTextureAge + (newGeometryAge - oldGeometryAge): the same delta is applied, so any preexisting geometry/texture age difference survives.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x5274DD",
-    "line": "jnz     short loc_527525",
+    "line": "jnz     short loc_527525; Clamp the geometry age target independently to [15,65].",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x52750E",
-    "line": "jp      short loc_527533",
+    "line": "jp      short loc_527533; Clamp the texture age target independently to [15,65]; saturation can change the cross-channel difference further.",
     "mnemonic": "jp",
     "size": 2
   },
@@ -781,13 +781,13 @@
   },
   {
     "ea": "0x527542",
-    "line": "fstp    [esp+0E8h+var_E8]; float",
+    "line": "fstp    [esp+0E8h+value]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x527545",
-    "line": "push    0; int",
+    "line": "push    0; matrixChannel",
     "mnemonic": "push",
     "size": 2
   },
@@ -799,19 +799,19 @@
   },
   {
     "ea": "0x52754B",
-    "line": "push    0; int",
+    "line": "push    0; controlIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x52754D",
-    "line": "push    ecx; int",
+    "line": "push    ecx; parameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52754E",
-    "line": "call    sub_555A00",
+    "line": "call    FaceGenHeadParameters_SetControlValue; Write age target through FanControls into matrix 0 (geometry).",
     "mnemonic": "call",
     "size": 5
   },
@@ -829,13 +829,13 @@
   },
   {
     "ea": "0x52755A",
-    "line": "fstp    [esp+0E8h+var_E8]; float",
+    "line": "fstp    [esp+0E8h+value]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x52755D",
-    "line": "push    1; int",
+    "line": "push    1; matrixChannel",
     "mnemonic": "push",
     "size": 2
   },
@@ -847,19 +847,19 @@
   },
   {
     "ea": "0x527563",
-    "line": "push    0; int",
+    "line": "push    0; controlIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x527565",
-    "line": "push    edx; int",
+    "line": "push    edx; parameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x527566",
-    "line": "call    sub_555A00",
+    "line": "call    FaceGenHeadParameters_SetControlValue; Write age target through FanControls into matrix 2 (texture).",
     "mnemonic": "call",
     "size": 5
   },
@@ -913,7 +913,7 @@
   },
   {
     "ea": "0x527587",
-    "line": "push    0",
+    "line": "push    0; matrixChannel",
     "mnemonic": "push",
     "size": 2
   },
@@ -931,19 +931,19 @@
   },
   {
     "ea": "0x527591",
-    "line": "push    1",
+    "line": "push    1; controlIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x527593",
-    "line": "push    eax",
+    "line": "push    eax; parameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x527594",
-    "line": "call    BSFaceGen_GetAge",
+    "line": "call    FaceGenHeadParameters_GetControlValue; Read generated sex-morph control from FaceGen matrix 0 through FanControls channel 0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -967,7 +967,7 @@
   },
   {
     "ea": "0x5275A2",
-    "line": "fstp    [esp+0E4h+var_D0]",
+    "line": "fstp    [esp+0E4h+var_D0]; Project sex control 1 from matrix 0 and subtract the male/female center to obtain a relative geometry target.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1009,7 +1009,7 @@
   },
   {
     "ea": "0x5275BD",
-    "line": "push    1",
+    "line": "push    1; matrixChannel",
     "mnemonic": "push",
     "size": 2
   },
@@ -1027,19 +1027,19 @@
   },
   {
     "ea": "0x5275C7",
-    "line": "push    1",
+    "line": "push    1; controlIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5275C9",
-    "line": "push    ecx",
+    "line": "push    ecx; parameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5275CA",
-    "line": "call    BSFaceGen_GetAge",
+    "line": "call    FaceGenHeadParameters_GetControlValue; Read generated sex-morph control from FaceGen matrix 2 through FanControls channel 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1057,13 +1057,13 @@
   },
   {
     "ea": "0x5275D6",
-    "line": "cmp     byte ptr [esp+0E4h+arg_4], 0",
+    "line": "cmp     [esp+0E4h+preserveSexMorph], 0",
     "mnemonic": "cmp",
     "size": 8
   },
   {
     "ea": "0x5275DE",
-    "line": "fstp    [esp+0E4h+var_D8]",
+    "line": "fstp    [esp+0E4h+var_D8]; Project sex control 1 from matrix 2 and subtract the same sex center to obtain a relative texture target.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1117,7 +1117,7 @@
   },
   {
     "ea": "0x5275FC",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Native random relative sex-morph target consumes Game_RandomLargeInteger(0) once when preserveSexMorph=false. PF private sex-morph stream optionally reproducible via RandomSeed, independent of Age and geometry.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1159,7 +1159,7 @@
   },
   {
     "ea": "0x52761E",
-    "line": "fstp    [esp+0E4h+var_D4]",
+    "line": "fstp    [esp+0E4h+var_D4]; Linear 15-bit map: raw 0 -> relative sex -2, midpoint 16384 -> approximately 0, raw 32767 -> +2.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1201,7 +1201,7 @@
   },
   {
     "ea": "0x527634",
-    "line": "fstp    [esp+0E4h+var_D0]",
+    "line": "fstp    [esp+0E4h+var_D0]; Texture relative-sex target receives the same delta as geometry, preserving independent Gaussian cross-channel residual.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1261,7 +1261,7 @@
   },
   {
     "ea": "0x527654",
-    "line": "jnz     short loc_527667",
+    "line": "jnz     short loc_527667; Clamp relative geometry sex target independently to [-2,2].",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -1381,7 +1381,7 @@
   },
   {
     "ea": "0x527685",
-    "line": "jp      short loc_52769A",
+    "line": "jp      short loc_52769A; Clamp relative texture sex target independently to [-2,2]; saturation can further desynchronize geometry and texture.",
     "mnemonic": "jp",
     "size": 2
   },
@@ -1615,31 +1615,31 @@
   },
   {
     "ea": "0x527701",
-    "line": "fstp    [esp+0E8h+var_E8]; float",
+    "line": "fstp    [esp+0E8h+value]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x527704",
-    "line": "push    0; int",
+    "line": "push    0; matrixChannel",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x527706",
-    "line": "push    1; int",
+    "line": "push    1; controlIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x527708",
-    "line": "push    edx; int",
+    "line": "push    edx; parameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x527709",
-    "line": "call    sub_555A00",
+    "line": "call    FaceGenHeadParameters_SetControlValue; Add the sex center and write sex control 1 into matrix 0 (geometry).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1657,13 +1657,13 @@
   },
   {
     "ea": "0x527715",
-    "line": "fstp    [esp+0E8h+var_E8]; float",
+    "line": "fstp    [esp+0E8h+value]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x527718",
-    "line": "push    1; int",
+    "line": "push    1; matrixChannel",
     "mnemonic": "push",
     "size": 2
   },
@@ -1675,19 +1675,19 @@
   },
   {
     "ea": "0x52771E",
-    "line": "push    1; int",
+    "line": "push    1; controlIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x527720",
-    "line": "push    eax; int",
+    "line": "push    eax; parameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x527721",
-    "line": "call    sub_555A00",
+    "line": "call    FaceGenHeadParameters_SetControlValue; Add the sex center and write sex control 1 into matrix 2 (texture).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1699,13 +1699,13 @@
   },
   {
     "ea": "0x527729",
-    "line": "cmp     [esp+0E4h+arg_8], 0",
+    "line": "cmp     [esp+0E4h+preserveComplexion], 0",
     "mnemonic": "cmp",
     "size": 8
   },
   {
     "ea": "0x527731",
-    "line": "jnz     short loc_527759",
+    "line": "jnz     short loc_527759; Native TESNPC_RandomizeFaceGen gates hair-length sample/storage on !preserveHairLength. True leaves TESNPC+0x1CC unchanged while the same randomized geometry/texture candidate proceeds to delta computation and player refresh. PF 1.19.16 exposes optional PreserveHairLengthOnRandomize; default false preserves native Randomize Face behavior.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -1717,7 +1717,7 @@
   },
   {
     "ea": "0x527735",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Native hair-length randomization consumes Game_RandomLargeInteger(0) once when preserveHairLength=false and stores normalized float at TESNPC+0x1CC. PF private hair-length stream optionally reproducible via RandomSeed and independent of Age/sex-morph/geometry.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1747,7 +1747,7 @@
   },
   {
     "ea": "0x52774B",
-    "line": "fstp    [esp+0E4h+var_D8]",
+    "line": "fstp    [esp+0E4h+var_D8]; Linear 15-bit map: raw 0 -> hair length 0, midpoint 16384 -> approximately 0.5, raw 32767 -> 1.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1759,7 +1759,7 @@
   },
   {
     "ea": "0x527753",
-    "line": "fstp    dword ptr [esi+1CCh]",
+    "line": "fstp    dword ptr [esi+1CCh]; Vanilla Randomize Face writes random normalized hair length to TESNPC+0x1CC when preserveHairLength=false. RaceSexMenu_ExecuteRandomizeFace calls with false at 0x5C9D4E. Its subsequent explicit menu sync only writes Age and Complexion, so Hair > Length Tile user0 and menu cached float +0x874 can remain stale until another path updates them. This is a vanilla UI/state divergence supported by code; visual frequency and menu XML trigger timing need runtime confirmation.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -1771,13 +1771,13 @@
   },
   {
     "ea": "0x52775F",
-    "line": "lea     ecx, [esp+0E4h+var_6C]",
+    "line": "lea     ecx, [esp+0E4h+outDelta]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x527763",
-    "line": "push    ecx",
+    "line": "push    ecx; outDelta",
     "mnemonic": "push",
     "size": 1
   },
@@ -1789,7 +1789,7 @@
   },
   {
     "ea": "0x527768",
-    "line": "push    edx",
+    "line": "push    edx; absoluteParameters",
     "mnemonic": "push",
     "size": 1
   },
@@ -1801,13 +1801,13 @@
   },
   {
     "ea": "0x52776E",
-    "line": "push    eax",
+    "line": "push    eax; raceParameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52776F",
-    "line": "call    sub_552C10",
+    "line": "call    FaceGenHeadParameters_ComputeRaceDelta; Converts adjusted randomized absolute parameters to TESNPC's persisted race-relative delta matrices.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1873,25 +1873,25 @@
   },
   {
     "ea": "0x527795",
-    "line": "push    eax",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x527796",
-    "line": "lea     eax, [esp+0E8h+var_6C]",
+    "line": "lea     eax, [esp+0E8h+outDelta]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x52779A",
-    "line": "push    eax",
+    "line": "push    eax; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52779B",
-    "line": "call    sub_551990",
+    "line": "call    FaceGenHeadParameters_Differ; Compares the computed 0x60-byte race-relative delta against the active inline TESNPC sex bank. Both operands are concrete, so the comparator's latent null-case defect does not affect randomizer commit.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1969,25 +1969,25 @@
   },
   {
     "ea": "0x5277C5",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5277C6",
-    "line": "lea     ecx, [esp+0E8h+var_6C]",
+    "line": "lea     ecx, [esp+0E8h+outDelta]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5277CA",
-    "line": "push    ecx",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5277CB",
-    "line": "call    sub_5528F0",
+    "line": "call    FaceGenHeadParameters_Copy; Deep-copies all four FaceGen matrices, preserving dimensions and engine ownership of destination coefficient buffers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2095,7 +2095,7 @@
   },
   {
     "ea": "0x527803",
-    "line": "push    offset sub_43ACE0; void (__thiscall *)(void *)",
+    "line": "push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)",
     "mnemonic": "push",
     "size": 5
   },
@@ -2113,7 +2113,7 @@
   },
   {
     "ea": "0x52780C",
-    "line": "lea     eax, [esp+0F0h+var_6C]",
+    "line": "lea     eax, [esp+0F0h+outDelta]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -2137,7 +2137,7 @@
   },
   {
     "ea": "0x527821",
-    "line": "push    offset sub_43ACE0; void (__thiscall *)(void *)",
+    "line": "push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)",
     "mnemonic": "push",
     "size": 5
   },
@@ -2218,5 +2218,131 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B81C0",
+    "line": "push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x9B81C5",
+    "line": "push    4; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9B81C7",
+    "line": "push    18h; unsigned int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9B81C9",
+    "line": "lea     eax, [ebp-0CCh]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B81CF",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B81D0",
+    "line": "call    $LN21",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B81D5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B81D6",
+    "line": "push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x9B81DB",
+    "line": "push    4; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9B81DD",
+    "line": "push    18h; unsigned int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9B81DF",
+    "line": "lea     eax, [ebp-6Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B81E2",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B81E3",
+    "line": "call    $LN21",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B81E8",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B81E9",
+    "line": "mov     edx, dword ptr [esp+preserveSexMorph]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B81ED",
+    "line": "lea     eax, [edx-0D4h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B81F3",
+    "line": "mov     ecx, [edx-0D8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B81F9",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B81FB",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8200",
+    "line": "mov     eax, offset stru_AE2928",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8205",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -3,12 +3,12 @@
 0x4CA183: mov     eax, [esi+4]
 0x4CA186: push    eax
 0x4CA187: mov     dword ptr [esi], offset ??_7?$NiTArray@PAVTESObjectREFR@@@@6B@; const NiTArray<TESObjectREFR *>::`vftable'
-0x4CA18D: call    FormHeapFree
+0x4CA18D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4CA192: add     esp, 4
 0x4CA195: test    [esp+4+arg_0], 1
 0x4CA19A: jz      short loc_4CA1A5
 0x4CA19C: push    esi
-0x4CA19D: call    FormHeapFree
+0x4CA19D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4CA1A2: add     esp, 4
 0x4CA1A5: mov     eax, esi
 0x4CA1A7: pop     esi

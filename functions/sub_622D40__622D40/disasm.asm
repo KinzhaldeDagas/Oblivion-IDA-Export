@@ -3,17 +3,17 @@
 0x622D42: mov     esi, ecx
 0x622D44: cmp     dword ptr [esi+6Ch], 0Fh
 0x622D48: jnz     loc_622E25
-0x622D4E: call    sub_6135F0
+0x622D4E: call    CombatController_GetCurrentTarget
 0x622D53: test    eax, eax
 0x622D55: jz      short loc_622D81
 0x622D57: mov     ecx, esi
-0x622D59: call    sub_6135F0
-0x622D5E: mov     ecx, eax
-0x622D60: call    Actor_IsSwimming
+0x622D59: call    CombatController_GetCurrentTarget
+0x622D5E: mov     ecx, eax; this
+0x622D60: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x622D65: test    al, al
 0x622D67: jz      short loc_622D81
-0x622D69: mov     ecx, [esi+3Ch]
-0x622D6C: call    Actor_IsSwimming
+0x622D69: mov     ecx, [esi+3Ch]; this
+0x622D6C: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x622D71: test    al, al
 0x622D73: jnz     short loc_622D81
 0x622D75: mov     ecx, [esi+3Ch]
@@ -42,7 +42,7 @@
 0x622DC3: test    al, al
 0x622DC5: jnz     short loc_622E25
 0x622DC7: mov     ecx, esi
-0x622DC9: call    sub_614290
+0x622DC9: call    CombatController_CanReachCurrentTarget; Returns current-target reachability at +0x174, additionally forcing false when a non-water-capable actor cannot fight a swimming target.
 0x622DCE: test    al, al
 0x622DD0: jnz     short loc_622D8A
 0x622DD2: push    0
@@ -58,7 +58,7 @@
 0x622DF2: lea     ecx, [esp+10h+var_4]
 0x622DF6: push    ecx
 0x622DF7: mov     ecx, esi
-0x622DF9: call    sub_616980
+0x622DF9: call    CombatController_SelectAttackSpellByMode
 0x622DFE: mov     [esi+80h], eax
 0x622E04: fld     dword ptr [esi+44h]
 0x622E07: fstp    dword ptr [esi+0D4h]

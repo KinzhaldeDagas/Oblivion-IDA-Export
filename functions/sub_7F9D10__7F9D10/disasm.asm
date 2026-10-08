@@ -181,7 +181,7 @@
 0x7F9F4D: fld     [esp+34h+arg_0]
 0x7F9F51: fstp    [esp+34h+a3]; a3
 0x7F9F54: push    0; a2
-0x7F9F56: call    sub_702EC0
+0x7F9F56: call    sub_702EC0; MoonSugarEffect decode: sets 4-vertex screen polygon positions. For image-space quad arguments resolve to (-1,1), (-1,-1), (1,-1), (1,1), z=0.
 0x7F9F5B: mov     eax, [esi+0BCh]
 0x7F9F61: mov     ecx, [eax+0B4h]; this
 0x7F9F67: call    sub_703050
@@ -229,7 +229,7 @@
 0x7F9FEB: mov     ecx, ds:0B3F928h
 0x7F9FF1: push    ecx
 0x7F9FF2: mov     ecx, [esi+0BCh]; this
-0x7F9FF8: call    sub_709C60
+0x7F9FF8: call    sub_709C60; MoonSugarEffect decode: NiScreenElements render thunk. Callers push NiDX9Renderer on the stack, then this thunk jumps to object vtable +0x84.
 0x7F9FFD: mov     ecx, [esi+0C8h]
 0x7FA003: mov     edi, [esi+ecx*4+7Ch]
 0x7FA007: test    edi, edi

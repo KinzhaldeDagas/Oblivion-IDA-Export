@@ -1,1 +1,1 @@
-DirEntry_0
+typedef DirEntry DirEntry_0;

@@ -1,1 +1,1 @@
-0x754EA0: jmp     sub_715F10
+0x754EA0: jmp     NiTimeController_RegisterStreamables; Registers the NiObject base first and, on success, registers the refcounted next-controller object at +0x34. The target at +0x30 is a link, not recursively registered here.

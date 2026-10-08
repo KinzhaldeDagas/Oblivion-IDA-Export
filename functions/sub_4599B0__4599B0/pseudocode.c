@@ -1,19 +1,19 @@
-void __usercall sub_4599B0(char a1@<bpl>, double a2@<st2>, double a3@<st1>, double a4@<st0>)
+void sub_4599B0()
 {
   _DWORD *sound; // esi
   Actor *Speaker; // eax
 
-  PlayerCharacter_SetCurrentMagicItem((int)TESDataHandler_g_PlayerRef, a1, a2, a3, a4, 0);
-  sub_57AFB0(a2, a3);
-  sound = OSGlobals->sound;
-  if ( sound )
+  PlayerCharacter_SetCurrentMagicItem(reference, 0); /*0x4599b9*/
+  sub_57AFB0(); /*0x4599be*/
+  sound = MEMORY[0xB33398]->sound; /*0x4599c8*/
+  if ( sound ) /*0x4599cd*/
   {
-    sub_6AC210((_DWORD *)OSGlobals->sound);
-    sub_6AC330(sound, 0xFFFFFFFF);
+    sub_6AC210((_DWORD *)MEMORY[0xB33398]->sound); /*0x4599d1*/
+    sub_6AC330(sound, 0xFFFFFFFF); /*0x4599da*/
   }
-  if ( InterfaceManager::IsOpenedMenuDialogue() )
+  if ( InterfaceManager::IsOpenedMenuDialogue() ) /*0x4599df*/
   {
-    Speaker = (Actor *)Dialogue_GetSpeaker();
-    SetDialogueCamera(TESDataHandler_g_PlayerRef, Speaker, 0.0, 1u);
+    Speaker = (Actor *)Dialogue_GetSpeaker(); /*0x4599f1*/
+    SetDialogueCamera(reference, Speaker, 0.0, 1u); /*0x4599fd*/
   }
 }

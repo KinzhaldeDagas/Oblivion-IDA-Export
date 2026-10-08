@@ -7,7 +7,7 @@
 0x67D30F: mov     [esi+40h], eax
 0x67D312: mov     [esi+44h], eax
 0x67D315: mov     [esi+48h], eax
-0x67D318: mov     dword ptr [esi], offset ??_7TrespassPackage@@6B@; const TrespassPackage::`vftable'
+0x67D318: mov     dword ptr [esi], offset ??_7TrespassPackage@@6B@; Verified complete TESPackage persistence table extentEC; tail DC/E0/E4/E8 is no-argument size/save/load/init-load virtuals. Derived vtable identity from constructor stores and RTTI names. Prior incompleteDC type corrected.
 0x67D31E: mov     dword ptr [esi+4Ch], 0FFFFFFFFh
 0x67D325: mov     dword ptr [esi+50h], 1
 0x67D32C: mov     eax, esi

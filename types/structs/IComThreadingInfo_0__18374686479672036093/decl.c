@@ -1,1 +1,1 @@
-IComThreadingInfo_0
+typedef IComThreadingInfo IComThreadingInfo_0;

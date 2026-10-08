@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x615F99",
-    "line": "mov     eax, [esp+24h+arg_4]",
+    "line": "mov     eax, [esp+24h+groupID]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x615F9E",
-    "line": "push    0",
+    "line": "push    0; forceWeaponPrefix",
     "mnemonic": "push",
     "size": 2
   },
@@ -133,19 +133,19 @@
   },
   {
     "ea": "0x615FA9",
-    "line": "push    0",
+    "line": "push    0; weaponEntryDataArg",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x615FAB",
-    "line": "push    eax",
+    "line": "push    eax; groupID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x615FAC",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x615FB1",
-    "line": "call    Actor_LoadAnimGroup?",
+    "line": "call    Actor_LoadAnimGroup_; Builds an initial encoded key from live actor movement/weapon state and requested fixed group ID, then returns ActorAnimData_ResolveAnimKeyFallback's concrete playable key or sentinel 0x00FF when no ActorAnimData exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x615FBA",
-    "line": "call    sub_51ACC0",
+    "line": "call    AnimGroup_UsesPowerOrCastNoteTemplate; Returns true when the encoded key is not group 0xFF and its fixed group record uses note-template class 5. In Oblivion's 43 records that is AttackPower..AttackRightPower plus CastSelf/Touch/Target and their Alt variants.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x615FE5",
-    "line": "call    sub_470960",
+    "line": "call    ActorAnimData_FindAnimMapEntry; CustomAnimSupport decode: anim-map lookup helper used by playback, validators, and save/load restore to test an encoded group key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -307,19 +307,19 @@
   },
   {
     "ea": "0x616002",
-    "line": "push    2; ArgList",
+    "line": "push    2; noteIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x616004",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x616006",
-    "line": "call    sub_51AE20",
+    "line": "call    TESAnimGroup_GetRequiredNoteTime; Returns a 32-bit required-note time from TESAnimGroup +0x10 by zero-based note index after validating count, storage, and QNaN. Invalid entries report an error and return 0.0f.",
     "mnemonic": "call",
     "size": 5
   },
@@ -331,19 +331,19 @@
   },
   {
     "ea": "0x61600F",
-    "line": "push    0; ArgList",
+    "line": "push    0; noteIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x616011",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x616013",
-    "line": "call    sub_51AE20",
+    "line": "call    TESAnimGroup_GetRequiredNoteTime; Returns a 32-bit required-note time from TESAnimGroup +0x10 by zero-based note index after validating count, storage, and QNaN. Invalid entries report an error and return 0.0f.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x616027",
-    "line": "call    sub_51AAB0",
+    "line": "call    TESAnimGroup_GetMovementVector; TESAnimGroup movement-vector getter. Copies the three float movement components stored at TESAnimGroup +0x14/+0x18/+0x1C.",
     "mnemonic": "call",
     "size": 5
   },

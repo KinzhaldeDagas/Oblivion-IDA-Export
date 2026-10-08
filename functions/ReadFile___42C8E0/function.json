@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
-  "callers_count": 10,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 15,
+  "chunks": [
+    [
+      "0x42C8E0",
+      "0x42C906"
+    ]
+  ],
+  "chunks_sha256": "357d41c881ae937e0ef0a02918896057aaa1ac8ca8a5b49970d736f130fb728f",
+  "comment_regular": "MEF PLAN 2026-09-07: Assembly-proven Archive_ReadBytes ABI: ECX=stream owner, stack(destination,count), RET8; forwards five cdecl callback args(owner,destination,count,&componentSize=1,componentCount=1) through owner+4. Fourth arg is not bytes-read output. Leaves callback EAX as return; exact-count validation is viable for cached construction.",
+  "comment_repeatable": "MEF IMPLEMENTED v55 2026-09-07: TryBuildCachedArchiveNames calls thiscall Archive_ReadBytes(owner,dst,count) and requires returned bytes==count. Wrapper38bytes plus underlying callback/BSFile/NiFile bodies are runtime signature dependencies. IDB prototypes/bytes remain authoritative; entire disk input identity is not assumed equal.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "ReadFile??",
+  "display_name": "Archive_ReadBytes",
   "end_ea": "0x42C906",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "ReadFile??",
+  "name": "Archive_ReadBytes",
   "segment": ".text",
   "sha256": "357d41c881ae937e0ef0a02918896057aaa1ac8ca8a5b49970d736f130fb728f",
   "size": 38,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x42C8E0",
-  "type": "int __thiscall(int (__cdecl **this)(_DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD), int, int)",
+  "total_chunk_size": 38,
+  "type": "unsigned int __thiscall(void *self, void *destination, unsigned int byteCount)",
   "xrefs_from_count": 13,
   "xrefs_to_count": 15
 }

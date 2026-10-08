@@ -1,4 +1,4 @@
-0x7BA2F0: push    0FFFFFFFFh
+0x7BA2F0: push    0FFFFFFFFh; MoonSugarEffect decode: renderer/image-space recreate path. Cleans shader pass texture refs, clears shader maps, destroys imageSpaceShaderList, deletes texture manager, rebuilds texture manager and image-space list.
 0x7BA2F2: push    offset SEH_803C90
 0x7BA2F7: mov     eax, large fs:0
 0x7BA2FD: push    eax
@@ -13,7 +13,7 @@
 0x7BA313: xor     ebx, ebx
 0x7BA315: cmp     ds:0B42F31h, bl
 0x7BA31B: jnz     short loc_7BA334
-0x7BA31D: call    sub_7BA0F0
+0x7BA31D: call    sub_7BA0F0; MoonSugarEffect decode: shader system init prewarms shader definitions 1..27, then constructs imageSpaceShaderList if ImageSpaceEffectEnabled.
 0x7BA322: mov     ecx, [esp+1Ch+var_C]
 0x7BA326: mov     large fs:0, ecx
 0x7BA32D: pop     ecx
@@ -21,7 +21,7 @@
 0x7BA32F: pop     ebx
 0x7BA330: add     esp, 10h
 0x7BA333: retn
-0x7BA334: call    sub_7B84E0
+0x7BA334: call    sub_7B84E0; MoonSugarEffect decode: RecreateImageSpaceShader begins initialized cleanup by calling sub_7B84E0. This is cached shader pass texture-stage cleanup, not generic NiD3DVertexShader handle restore.
 0x7BA339: mov     eax, ds:0B42EBCh
 0x7BA33E: mov     ecx, [eax+0Ch]
 0x7BA341: mov     esi, eax
@@ -34,22 +34,22 @@
 0x7BA360: cmp     ecx, ebx
 0x7BA362: jz      short loc_7BA37A
 0x7BA364: mov     esi, ecx
-0x7BA366: call    ImageSpaceShaderList__Destroy
+0x7BA366: call    ImageSpaceShaderList__Destroy; MoonSugarEffect decode: ImageSpaceShaderList::Destroy frees list nodes and owned renderTarget/screen quad, clears fallback pointer; it does not release shader objects stored as raw list data.
 0x7BA36B: push    esi
-0x7BA36C: call    FormHeapFree
+0x7BA36C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7BA371: add     esp, 4
 0x7BA374: mov     ds:0B42D7Ch, ebx
 0x7BA37A: mov     ecx, ds:0B42F50h; this
 0x7BA380: cmp     ecx, ebx
 0x7BA382: jz      short loc_7BA39A
 0x7BA384: mov     esi, ecx
-0x7BA386: call    BSTextureManager_Delete
+0x7BA386: call    BSTextureManager_Delete; MoonSugarEffect decode: RecreateImageSpaceShader deletes g_textureManager after cached shader pass texture-stage refs have been scrubbed and imageSpaceShaderList destroyed.
 0x7BA38B: push    esi
-0x7BA38C: call    FormHeapFree
+0x7BA38C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7BA391: add     esp, 4
 0x7BA394: mov     ds:0B42F50h, ebx
 0x7BA39A: push    ebx
-0x7BA39B: call    sub_7AB1D0
+0x7BA39B: call    sub_7AB1D0; MoonSugarEffect decode: mode-4 helper creates/releases global screen-element quads at B42CF8..B42D3C with vertex/z/alpha/stencil/material props; not a Moon Sugar mask API.
 0x7BA3A0: push    48h ; 'H'; Size
 0x7BA3A2: mov     ds:0B42EB8h, ebx
 0x7BA3A8: call    FormHeapAlloc
@@ -67,9 +67,9 @@
 0x7BA3CE: mov     ecx, eax
 0x7BA3D0: mov     [esp+20h+var_4], 0FFFFFFFFh
 0x7BA3D8: mov     ds:0B42F50h, eax
-0x7BA3DD: call    sub_7C2450
+0x7BA3DD: call    sub_7C2450; MoonSugarEffect decode: after rebuilding BSTextureManager, prewarms/returns common render targets through sub_7C2450 before recreating screen quads and imageSpaceShaderList.
 0x7BA3E2: push    1
-0x7BA3E4: call    sub_7AB1D0
+0x7BA3E4: call    sub_7AB1D0; MoonSugarEffect decode: mode-4 helper creates/releases global screen-element quads at B42CF8..B42D3C with vertex/z/alpha/stencil/material props; not a Moon Sugar mask API.
 0x7BA3E9: add     esp, 4
 0x7BA3EC: cmp     ds:0B43104h, ebx
 0x7BA3F2: jz      short loc_7BA426
@@ -83,7 +83,7 @@
 0x7BA40C: mov     [esp+1Ch+var_4], 1
 0x7BA414: jz      short loc_7BA41F
 0x7BA416: mov     ecx, eax
-0x7BA418: call    ImageSpaceshaderList__Create; Treat this list as a de facto subclass of a standard NiTPointerList as this is bigger of 3 UInt32
+0x7BA418: call    ImageSpaceshaderList__Create; MoonSugarEffect decode: image-space list is recreated only after texture manager and screen-element quads are rebuilt. Plugin-owned list insertions/wrappers must be rebuilt/reinserted after this boundary.
 0x7BA41D: jmp     short loc_7BA421
 0x7BA41F: xor     eax, eax
 0x7BA421: mov     ds:0B42D7Ch, eax
@@ -94,3 +94,20 @@
 0x7BA433: pop     ebx
 0x7BA434: add     esp, 10h
 0x7BA437: retn
+0x9D00B0: mov     eax, [ebp-10h]
+0x9D00B3: push    eax
+0x9D00B4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D00B9: pop     ecx
+0x9D00BA: retn
+0x9D00BB: mov     eax, [ebp-10h]
+0x9D00BE: push    eax
+0x9D00BF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D00C4: pop     ecx
+0x9D00C5: retn
+0x9D00C6: mov     edx, [esp+arg_4]
+0x9D00CA: lea     eax, [edx-0Ch]
+0x9D00CD: mov     ecx, [edx-10h]
+0x9D00D0: xor     ecx, eax
+0x9D00D2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D00D7: mov     eax, offset stru_AF8B40
+0x9D00DC: jmp     ___CxxFrameHandler3

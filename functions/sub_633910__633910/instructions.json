@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x633957",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x633979",
-    "line": "call    sub_5E2E20",
+    "line": "call    Actor_ChoosePathGridSteeringPosition; Verified actor package movement helper. Finds a reachable PathGrid point for the requested destination; if it has outgoing connections, selects the first linked node and chooses a randomized intermediate position along that edge. Handles empty/unavailable PathGrids by falling back to terrain height or the actor's current position. Multiple HighProcess package-action callers establish the steering-position role.",
     "mnemonic": "call",
     "size": 5
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x633A42",
-    "line": "mov     [esp+3Ch+var_2C], edx",
+    "line": "mov     dword ptr [esp+3Ch+var_2C], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x633A9C",
-    "line": "mov     [esp+40h+var_2C], ecx",
+    "line": "mov     dword ptr [esp+40h+var_2C], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -805,13 +805,13 @@
   },
   {
     "ea": "0x633AA9",
-    "line": "mov     [esp+48h+var_28], edx",
+    "line": "mov     dword ptr [esp+48h+var_2C+4], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x633AAD",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -823,7 +823,7 @@
   },
   {
     "ea": "0x633AB6",
-    "line": "mov     edx, [esp+48h+var_2C]",
+    "line": "mov     edx, dword ptr [esp+48h+var_2C]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -853,7 +853,7 @@
   },
   {
     "ea": "0x633AC2",
-    "line": "mov     ecx, [esp+58h+var_28]",
+    "line": "mov     ecx, dword ptr [esp+58h+var_2C+4]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -889,7 +889,7 @@
   },
   {
     "ea": "0x633AD3",
-    "line": "call    sub_5E2E20",
+    "line": "call    Actor_ChoosePathGridSteeringPosition; Verified actor package movement helper. Finds a reachable PathGrid point for the requested destination; if it has outgoing connections, selects the first linked node and chooses a randomized intermediate position along that edge. Handles empty/unavailable PathGrids by falling back to terrain height or the actor's current position. Multiple HighProcess package-action callers establish the steering-position role.",
     "mnemonic": "call",
     "size": 5
   },
@@ -913,7 +913,7 @@
   },
   {
     "ea": "0x633AE1",
-    "line": "mov     [esp+3Ch+var_2C], edx",
+    "line": "mov     dword ptr [esp+3Ch+var_2C], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -931,7 +931,7 @@
   },
   {
     "ea": "0x633AEA",
-    "line": "mov     [esp+3Ch+var_28], eax",
+    "line": "mov     dword ptr [esp+3Ch+var_2C+4], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1039,7 +1039,7 @@
   },
   {
     "ea": "0x633B20",
-    "line": "mov     [esp+3Ch+var_2C], edx",
+    "line": "mov     dword ptr [esp+3Ch+var_2C], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1051,7 +1051,7 @@
   },
   {
     "ea": "0x633B27",
-    "line": "mov     [esp+3Ch+var_28], eax",
+    "line": "mov     dword ptr [esp+3Ch+var_2C+4], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1063,13 +1063,13 @@
   },
   {
     "ea": "0x633B2F",
-    "line": "mov     edx, [esp+3Ch+var_2C]",
+    "line": "mov     edx, dword ptr [esp+3Ch+var_2C]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x633B33",
-    "line": "mov     eax, [esp+3Ch+var_28]",
+    "line": "mov     eax, dword ptr [esp+3Ch+var_2C+4]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1123,7 +1123,7 @@
   },
   {
     "ea": "0x633B55",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1135,7 +1135,7 @@
   },
   {
     "ea": "0x633B5E",
-    "line": "mov     edx, [esp+40h+var_2C]",
+    "line": "mov     edx, dword ptr [esp+40h+var_2C]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1165,7 +1165,7 @@
   },
   {
     "ea": "0x633B6A",
-    "line": "mov     ecx, [esp+50h+var_28]",
+    "line": "mov     ecx, dword ptr [esp+50h+var_2C+4]",
     "mnemonic": "mov",
     "size": 4
   },

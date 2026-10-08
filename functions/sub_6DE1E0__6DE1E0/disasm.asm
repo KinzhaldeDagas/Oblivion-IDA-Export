@@ -26,7 +26,6 @@
 0x6DE217: jbe     short loc_6DE256
 0x6DE219: xor     ebx, ebx
 0x6DE21B: jmp     short loc_6DE220
-0x6DE21D: align 10h
 0x6DE220: cmp     esi, [ebp+8]
 0x6DE223: jnb     short loc_6DE22C
 0x6DE225: mov     edx, [ebp+10h]

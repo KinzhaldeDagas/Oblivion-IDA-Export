@@ -1,17 +1,18 @@
-char __thiscall sub_795050(_DWORD *this, char *a2)
+// OBLIVION AUTHORITY (2026-08-30): Initializes raw storage for a vector whose elements are 0x10-byte vector owners. Enforces max_size 0x0FFFFFFF and allocates count*0x10.
+bool __thiscall OB_stVector16_Buy_010201A0(OB_stVector16_010201A0 *this, unsigned int count)
 {
-  int v4; // eax
+  OB_stVector16_010201A0 *_010201A0; // eax
 
-  *(this + 1) = 0;
-  *(this + 2) = 0;
-  *(this + 3) = 0;
-  if ( !a2 )
-    return 0;
-  if ( (unsigned int)a2 > 0xFFFFFFF )
-    sub_790B90((int)this);
-  v4 = sub_794550(a2);
-  *(this + 1) = v4;
-  *(this + 2) = v4;
-  *(this + 3) = v4 + 0x10 * (_DWORD)a2;
-  return 1;
+  this->begin = 0; /*0x79505c*/
+  this->end = 0; /*0x79505f*/
+  this->capacityEnd = 0; /*0x795062*/
+  if ( !count ) /*0x795065*/
+    return 0; /*0x795068*/
+  if ( count > 0xFFFFFFF ) /*0x795074*/
+    OB_stVector_ThrowLengthError_010201A0((int)this); /*0x795076*/
+  _010201A0 = OB_stVector16_Allocate_010201A0(count); /*0x79507d*/
+  this->begin = _010201A0; /*0x79508a*/
+  this->end = _010201A0; /*0x79508d*/
+  this->capacityEnd = &_010201A0[count]; /*0x795090*/
+  return 1; /*0x795067*/
 }

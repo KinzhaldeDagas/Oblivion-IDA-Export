@@ -7,8 +7,8 @@
 0x5EDD65: jz      loc_5EDEA0
 0x5EDD6B: test    ebp, ebp
 0x5EDD6D: jz      loc_5EDEA0
-0x5EDD73: lea     ecx, [esi+0ACh]
-0x5EDD79: call    sub_477EF0
+0x5EDD73: lea     ecx, [esi+0ACh]; this
+0x5EDD79: call    NiTObjectArray_ClearAndRelease; Clears a ref-counted NiT object-pointer array: releases every non-null element, nulls entries, and resets end/count words to zero. At bow release it is invoked on ArrowBone+0xAC, thereby releasing all ArrowBone children including the held Arrow:0 clone.
 0x5EDD7E: mov     eax, [esi]
 0x5EDD80: mov     edx, [eax+84h]
 0x5EDD86: push    1
@@ -25,5 +25,5 @@
 0x5EDDA3: mov     ecx, ebp; this
 0x5EDDA5: call    MagicCaster_CastingVFX_destr
 0x5EDDAA: push    ebp
-0x5EDDAB: call    FormHeapFree
+0x5EDDAB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5EDDB0: add     esp, 4

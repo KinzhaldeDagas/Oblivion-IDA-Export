@@ -15,7 +15,7 @@
 0x5F604C: push    0
 0x5F604E: call    edx
 0x5F6050: lea     ecx, [esi+44h]
-0x5F6053: call    sub_4212E0
+0x5F6053: call    ExtraDataList_RemoveSavedMovementData; Removes the combined Oblivion ExtraSavedMovementData record (type 0x4B).
 0x5F6058: cmp     [esp+18h+useAnimBoh], 0
 0x5F605D: mov     byte ptr [esi+0FCh], 0
 0x5F6064: jz      loc_5F6179
@@ -26,12 +26,12 @@
 0x5F6076: test    eax, eax
 0x5F6078: jz      loc_5F6179
 0x5F607E: mov     ecx, esi; this
-0x5F6080: call    TESObjectREFR_GetParentCell
+0x5F6080: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5F6085: test    eax, eax
 0x5F6087: jz      loc_5F6179
 0x5F608D: push    1; a2
 0x5F608F: mov     ecx, esi; this
-0x5F6091: call    TESObjectREFR_GetParentCell
+0x5F6091: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5F6096: mov     ecx, ds:0B333A0h
 0x5F609C: push    eax; a1
 0x5F609D: call    TESObjectCELL_IsProcessLevel?LowHigh
@@ -39,7 +39,7 @@
 0x5F60A4: jz      loc_5F6179
 0x5F60AA: push    0; newDeadState
 0x5F60AC: mov     ecx, esi; this
-0x5F60AE: call    Actor_HandleDeathSTate????
+0x5F60AE: call    Actor_HandleDeathState
 0x5F60B3: mov     eax, [esi]
 0x5F60B5: mov     edx, [eax+288h]
 0x5F60BB: push    8
@@ -68,9 +68,9 @@
 0x5F6100: call    edx
 0x5F6102: push    eax; a2
 0x5F6103: mov     ecx, esi; this
-0x5F6105: call    MobileObject_GetCharProxy
+0x5F6105: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x5F610A: mov     ecx, eax; this
-0x5F610C: call    sub_452A10
+0x5F610C: call    sub_452A10; TES4 authoritative: converts TES/world NiPoint3 into Havok units with hkFactor, then writes proxy position through 0x891560.
 0x5F6111: push    ecx
 0x5F6112: mov     eax, esp
 0x5F6114: mov     dword ptr [eax], 0
@@ -97,7 +97,7 @@
 0x5F6156: test    eax, eax
 0x5F6158: jz      def_5F628C; jumptable 005F628C default case
 0x5F615E: mov     ecx, eax
-0x5F6160: call    sub_4728C0
+0x5F6160: call    ActorAnimData_ResetRootMotion; Resets ActorAnimData root-motion state: zeroes the cached accumulation vector at +0x18, restores the accumulation/root node transform fields, then finds the matching accumulation controllers and resets them. Used before sequence play and by full actor/animation reset paths.
 0x5F6165: mov     ecx, [esp+18h+var_C]
 0x5F6169: mov     large fs:0, ecx
 0x5F6170: pop     ecx
@@ -105,11 +105,11 @@
 0x5F6172: pop     esi
 0x5F6173: add     esp, 0Ch
 0x5F6176: retn    0Ch
-0x5F6179: lea     ecx, [esi+88h]
+0x5F6179: lea     ecx, [esi+88h]; self
 0x5F617F: call    AVCollection_ClearArrayAndList
 0x5F6184: push    0; newDeadState
 0x5F6186: mov     ecx, esi; this
-0x5F6188: call    Actor_HandleDeathSTate????
+0x5F6188: call    Actor_HandleDeathState
 0x5F618D: mov     byte ptr [esi+0C0h], 0
 0x5F6194: cmp     esi, ds:0B333C4h
 0x5F619A: jz      short loc_5F61F8
@@ -121,7 +121,7 @@
 0x5F61A8: call    edx
 0x5F61AA: push    eax
 0x5F61AB: push    esi
-0x5F61AC: mov     ecx, offset ActorProcessManager_ptr
+0x5F61AC: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x5F61B1: call    sub_674550
 0x5F61B6: mov     ecx, [esi+58h]
 0x5F61B9: test    ecx, ecx
@@ -138,7 +138,7 @@
 0x5F61D8: mov     [esp+18h+var_4], 0
 0x5F61E0: jz      short loc_5F61EB
 0x5F61E2: mov     ecx, eax; this
-0x5F61E4: call    ??0LowProcess@@QAE@XZ; LowProcess::LowProcess(void)
+0x5F61E4: call    ??0LowProcess@@QAE@XZ; LowProcess constructor: initializes editorPackage/editorPackProcedure and follow/pathing state, but no currentPackage field used by runtime package assignment.
 0x5F61E9: jmp     short loc_5F61ED
 0x5F61EB: xor     eax, eax
 0x5F61ED: mov     [esp+18h+var_4], 0FFFFFFFFh
@@ -153,7 +153,7 @@
 0x5F620D: cmp     esi, ds:0B333C4h
 0x5F6213: jz      def_5F628C; jumptable 005F628C default case
 0x5F6219: mov     ecx, esi; this
-0x5F621B: call    TESObjectREFR_GetParentCell
+0x5F621B: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5F6220: mov     edi, eax
 0x5F6222: test    edi, edi
 0x5F6224: jz      short loc_5F6280
@@ -225,12 +225,12 @@
 0x5F62ED: add     esp, 0Ch
 0x5F62F0: retn    0Ch
 0x5F62F3: push    0; jumptable 005F628C case 3
-0x5F62F5: push    0
-0x5F62F7: push    0
-0x5F62F9: push    3
-0x5F62FB: push    esi
-0x5F62FC: mov     ecx, offset ActorProcessManager_ptr
-0x5F6301: call    sub_673A90
+0x5F62F5: push    0; insertRelative
+0x5F62F7: push    0; append
+0x5F62F9: push    3; processLevel
+0x5F62FB: push    esi; object
+0x5F62FC: mov     ecx, (offset qword_B3BB2C+1D4h); this
+0x5F6301: call    ActorProcessManager_AddMobileObject; Generic ActorProcessManager insertion. Selects process-level collection 0..3, silently returns if object->GetProcessLevel() does not match, then inserts with ordering controls. Returns void; there is no insertion-success result. Used for actors, load/resurrection paths, and projectiles.
 0x5F6306: mov     ecx, [esp+18h+var_C]; jumptable 005F628C default case
 0x5F630A: mov     large fs:0, ecx
 0x5F6311: pop     ecx
@@ -238,3 +238,15 @@
 0x5F6313: pop     esi
 0x5F6314: add     esp, 0Ch
 0x5F6317: retn    0Ch
+0x9C2980: mov     eax, [ebp+0Ch]
+0x9C2983: push    eax
+0x9C2984: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C2989: pop     ecx
+0x9C298A: retn
+0x9C298B: mov     edx, [esp+arg_4]
+0x9C298F: lea     eax, [edx-8]
+0x9C2992: mov     ecx, [edx-0Ch]
+0x9C2995: xor     ecx, eax
+0x9C2997: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C299C: mov     eax, offset stru_AEB758
+0x9C29A1: jmp     ___CxxFrameHandler3

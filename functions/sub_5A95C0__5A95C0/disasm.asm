@@ -11,7 +11,7 @@
 0x5A95DD: jz      short loc_5A95EB
 0x5A95DF: sub     eax, 2
 0x5A95E2: jnz     short loc_5A95F0
-0x5A95E4: call    sub_584390
+0x5A95E4: call    Menu__StartFadeIn; Oblivion ClassMenu step refresh: derives the active step value from tile traits 0xFDB/0xFDC, updates menu state, sets state 8, and refreshes the interface manager.
 0x5A95E9: jmp     short loc_5A95F0
 0x5A95EB: call    sub_584820
 0x5A95F0: push    ebp; a3
@@ -42,7 +42,6 @@
 0x5A9636: mov     eax, esi
 0x5A9638: lea     edx, [eax+1]
 0x5A963B: jmp     short loc_5A9640
-0x5A963D: align 10h
 0x5A9640: mov     cl, [eax]
 0x5A9642: add     eax, 1
 0x5A9645: test    cl, cl
@@ -114,9 +113,9 @@
 0x5A96F1: mov     ecx, [ecx]
 0x5A96F3: test    ecx, ecx
 0x5A96F5: jz      short loc_5A9703
-0x5A96F7: push    eax; Str2
-0x5A96F8: push    ecx; Str1
-0x5A96F9: call    __strcmp
+0x5A96F7: push    eax; right
+0x5A96F8: push    ecx; left
+0x5A96F9: call    CRT_StricmpLocaleDispatch
 0x5A96FE: add     esp, 8
 0x5A9701: jmp     short loc_5A9710
 0x5A9703: xor     ecx, ecx
@@ -148,9 +147,9 @@
 0x5A9756: fld     dword ptr ds:0A379B4h
 0x5A975C: push    ecx
 0x5A975D: mov     ecx, [ebp+34h]; this
-0x5A9760: fstp    [esp+1Ch+var_1C]; a3
-0x5A9763: push    0FA1h; a2
-0x5A9768: call    Tile_SetFloat
+0x5A9760: fstp    [esp+1Ch+var_1C]; value
+0x5A9763: push    0FA1h; propertyCode
+0x5A9768: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A976D: mov     edx, [edi]
 0x5A976F: mov     eax, [edx+10h]
 0x5A9772: mov     ecx, [ebp+34h]
@@ -164,14 +163,14 @@
 0x5A978C: push    121h
 0x5A9791: push    0
 0x5A9793: push    ebx
-0x5A9794: call    sub_65A970
+0x5A9794: call    TESObjectREFR_PlayResolvedAnimSoundNote; Reference animation sound-note playback. Resolves a Sound: note token through SoundMap_ResolveAnimSoundNote, plays it, positions it on the reference when requested, and applies volume/loop flags.
 0x5A9799: mov     esi, eax
 0x5A979B: test    esi, esi
 0x5A979D: jz      short loc_5A97AF
 0x5A979F: mov     ecx, esi; this
 0x5A97A1: call    sub_6B73E0
 0x5A97A6: push    esi
-0x5A97A7: call    FormHeapFree
+0x5A97A7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5A97AC: add     esp, 4
 0x5A97AF: mov     ecx, [edi]
 0x5A97B1: cmp     dword ptr [ecx+10h], 0
@@ -179,9 +178,9 @@
 0x5A97B6: mov     ecx, [ebp+34h]; this
 0x5A97B9: jnz     short loc_5A97FD
 0x5A97BB: fld1
-0x5A97BD: fstp    [esp+1Ch+var_1C]; a3
-0x5A97C0: push    0FB0h; a2
-0x5A97C5: call    Tile_SetFloat
+0x5A97BD: fstp    [esp+1Ch+var_1C]; value
+0x5A97C0: push    0FB0h; propertyCode
+0x5A97C5: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A97CA: fld     [esp+18h+arg_4]
 0x5A97CE: pop     ebx
 0x5A97CF: fstp    dword ptr [ebp+3Ch]
@@ -195,7 +194,7 @@
 0x5A97E1: mov     ecx, ebp
 0x5A97E3: call    sub_5A9060
 0x5A97E8: push    ebp
-0x5A97E9: call    FormHeapFree
+0x5A97E9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5A97EE: add     esp, 4
 0x5A97F1: pop     ebx
 0x5A97F2: pop     ebp
@@ -205,9 +204,9 @@
 0x5A97F7: add     esp, 8
 0x5A97FA: retn    10h
 0x5A97FD: fld     dword ptr ds:0A379B4h
-0x5A9803: fstp    [esp+1Ch+var_1C]; a3
-0x5A9806: push    0FB0h; a2
-0x5A980B: call    Tile_SetFloat
+0x5A9803: fstp    [esp+1Ch+var_1C]; value
+0x5A9806: push    0FB0h; propertyCode
+0x5A980B: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A9810: fld     [esp+18h+arg_4]
 0x5A9814: pop     ebx
 0x5A9815: fstp    dword ptr [ebp+3Ch]
@@ -232,11 +231,11 @@
 0x5A984B: test    ecx, ecx
 0x5A984D: jz      short loc_5A986F
 0x5A984F: fstp    st
-0x5A9851: push    eax; Str2
+0x5A9851: push    eax; right
 0x5A9852: fstp    st
-0x5A9854: push    ecx; Str1
+0x5A9854: push    ecx; left
 0x5A9855: fstp    st
-0x5A9857: call    __strcmp
+0x5A9857: call    CRT_StricmpLocaleDispatch
 0x5A985C: fld     qword ptr ds:0A30E48h
 0x5A9862: add     esp, 8
 0x5A9865: fld1
@@ -313,7 +312,7 @@
 0x5A9922: mov     ecx, ebp
 0x5A9924: call    sub_5A9060
 0x5A9929: push    ebp
-0x5A992A: call    FormHeapFree
+0x5A992A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5A992F: fld     [esp+1Ch+arg_4]
 0x5A9933: mov     ebp, [esp+1Ch+var_8]
 0x5A9937: add     esp, 4

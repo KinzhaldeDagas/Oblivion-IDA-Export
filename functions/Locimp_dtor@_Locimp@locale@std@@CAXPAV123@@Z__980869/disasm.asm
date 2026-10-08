@@ -31,3 +31,12 @@
 0x9808BE: call    ??1_Lockit@std@@QAE@XZ
 0x9808C3: call    __EH_epilog3
 0x9808C8: retn
+0x9D7C39: lea     ecx, [ebp+var_10]; this
+0x9D7C3C: jmp     ??1_Lockit@std@@QAE@XZ
+0x9D7C41: mov     edx, [esp-4+arg_4]
+0x9D7C45: lea     eax, [edx+0Ch]
+0x9D7C48: mov     ecx, [edx-14h]
+0x9D7C4B: xor     ecx, eax
+0x9D7C4D: call    @__security_check_cookie@4
+0x9D7C52: mov     eax, offset stru_AFF788
+0x9D7C57: jmp     ___CxxFrameHandler3

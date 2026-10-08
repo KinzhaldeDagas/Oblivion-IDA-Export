@@ -1,1 +1,1 @@
-IMediaObjectInPlace_0
+typedef IMediaObjectInPlace IMediaObjectInPlace_0;

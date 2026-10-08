@@ -1,18 +1,24 @@
-void __cdecl sub_552990(char *a1, char *a2, int a3, char a4, float a5)
+// Four-matrix combine. Normal branch adds base+delta; optional positive maximumRms rescales using sqrt(sumSquares/rows), NOT sqrt(sumSquares/(rows*columns)). Equivalent to coefficient RMS only for columns=1. Special second-bank branch copies base matrices 2/3 rather than adding delta. No claim of malformed multi-column asset impact without callers/asset evidence.
+void __cdecl FaceGenHeadParameters_Combine(
+        const FaceGenHeadParameters *base,
+        const FaceGenHeadParameters *delta,
+        FaceGenHeadParameters *outParameters,
+        bool specialSecondBankMode,
+        float maximumRms)
 {
-  int v5; // edx
-  char *v6; // eax
+  FaceGenHeadParameters *v5; // edx
+  const FaceGenHeadParameters *v6; // eax
   int v7; // ebx
-  char *v8; // ecx
+  int v8; // ecx
   int *v9; // esi
-  int *v10; // ebp
+  FaceGenMatrix *v10; // ebp
   int v11; // eax
-  int *v12; // edi
+  const FaceGenMatrix *v12; // edi
   int v13; // ecx
-  int v14; // edi
+  int rows; // edi
   double v15; // st7
   double v16; // st6
-  _DWORD *v17; // eax
+  FaceGenMatrix *v17; // eax
   int v18; // edi
   double v19; // st7
   double v20; // st6
@@ -23,108 +29,103 @@ void __cdecl sub_552990(char *a1, char *a2, int a3, char a4, float a5)
   float v25; // [esp+20h] [ebp-2Ch]
   float v26; // [esp+20h] [ebp-2Ch]
   float v27; // [esp+20h] [ebp-2Ch]
-  int v28[3]; // [esp+28h] [ebp-24h] BYREF
-  unsigned int v29; // [esp+34h] [ebp-18h]
-  int v30; // [esp+38h] [ebp-14h]
-  int v31; // [esp+3Ch] [ebp-10h]
-  unsigned int v32; // [esp+48h] [ebp-4h]
+  FaceGenMatrix v28; // [esp+28h] [ebp-24h] BYREF
+  unsigned int v29; // [esp+48h] [ebp-4h]
 
-  v5 = a3;
-  if ( a3 )
+  v5 = outParameters; /*0x5529b7*/
+  if ( outParameters ) /*0x5529bd*/
   {
-    v6 = a1;
-    if ( !a1 )
+    v6 = base; /*0x5529c3*/
+    if ( !base ) /*0x5529c9*/
     {
-      v6 = a2;
-      if ( !a2 )
-        return;
-      goto LABEL_4;
+      v6 = delta; /*0x5529cb*/
+      if ( !delta ) /*0x5529d1*/
+        return; /*0x5529d1*/
+      goto LABEL_4; /*0x5529d1*/
     }
-    if ( !a2 )
+    if ( !delta ) /*0x5529fb*/
     {
 LABEL_4:
-      sub_5528F0((int *)v6, a3);
-      return;
+      FaceGenHeadParameters_Copy(v6, outParameters); /*0x5529d7*/
+      return; /*0x5529f4*/
     }
-    v7 = 0;
-    v8 = &a1[-a3];
-    while ( 1 )
+    v7 = 0; /*0x552a05*/
+    v8 = (char *)base - (char *)outParameters; /*0x552a07*/
+    while ( 1 ) /*0x552a1e*/
     {
-      v9 = (int *)(v5 + 0x30 * v7);
-      v10 = (int *)(v5 + 0x30);
-      v21 = 2;
-      while ( 1 )
+      v9 = (int *)((char *)v5 + 0x30 * v7); /*0x552a1e*/
+      v10 = &v5->matrices[2]; /*0x552a20*/
+      v21 = 2; /*0x552a23*/
+      while ( 1 ) /*0x552a3e*/
       {
-        v11 = *(int *)((char *)v9 + (_DWORD)v8);
-        v12 = (int *)((char *)v9 + (_DWORD)v8);
-        if ( v11 && (v13 = *(int *)((char *)v9 + (_DWORD)v8 + 4)) != 0 )
+        v11 = *(int *)((char *)v9 + v8); /*0x552a34*/
+        v12 = (const FaceGenMatrix *)((char *)v9 + v8); /*0x552a3b*/
+        if ( v11 && (v13 = *(int *)((char *)v9 + v8 + 4)) != 0 ) /*0x552a4a*/
         {
-          *v9 = v11;
-          v9[1] = v13;
-          sub_527160(v9 + 2, v13 * v11, COERCE_INT(0.0));
-          if ( v7 == 1 && a4 )
+          *v9 = v11; /*0x552a50*/
+          v9[1] = v13; /*0x552a56*/
+          FaceGenFloatVector_ResizeFill(v9 + 2, (int)v12, v13 * v11, COERCE_INT(0.0)); /*0x552a60*/
+          if ( v7 == 1 && specialSecondBankMode ) /*0x552a73*/
           {
-            sub_5520E0(v10, 1, &a1[(_DWORD)v10 - a3]);
-            if ( a5 > 0.0 )
+            FaceGenMatrix_Assign(v10, 1, (unsigned int *)((char *)&v10->rows + (char *)base - (char *)outParameters)); /*0x552a82*/
+            if ( maximumRms > 0.0 ) /*0x552a92*/
             {
-              v14 = *v10;
-              v15 = sub_5511D0((unsigned int *)v10);
-              v16 = (double)v14;
-              if ( v14 < 0 )
-                v16 = v16 + flt_A2FC78;
-              v22 = v15 / v16;
-              v23 = sqrt(v22);
-              if ( a5 < (double)v23 )
+              rows = v10->rows; /*0x552a98*/
+              v15 = FaceGenMatrix_SumSquares(&v10->rows);// Special second-bank limiter computes sqrt(sumSquares / matrix.rows), then scales when greater than maximumRms; denominator omits columns. /*0x552a9d*/
+              v16 = (double)rows; /*0x552aa8*/
+              if ( rows < 0 ) /*0x552aac*/
+                v16 = v16 + flt_A2FC78; /*0x552aae*/
+              v22 = v15 / v16; /*0x552ab6*/
+              v23 = sqrt(v22); /*0x552ac3*/
+              if ( maximumRms < (double)v23 ) /*0x552ade*/
               {
-                v24 = a5 / v23;
-                sub_551D40(v10, v24);
+                v24 = maximumRms / v23; /*0x552ae9*/
+                FaceGenMatrix_ScaleInPlace(v10, v24); /*0x552af4*/
               }
             }
           }
           else
           {
-            v17 = sub_552530(v12, v28, (int *)((char *)v12 + a2 - a1));
-            v32 = 0;
-            sub_5520E0(v9, v7, v17);
-            v32 = 0xFFFFFFFF;
-            if ( v29 )
-              FormHeapFree(v29);
-            v29 = 0;
-            v30 = 0;
-            v31 = 0;
-            if ( a5 > 0.0 )
+            v17 = FaceGenMatrix_Add(v12, &v28, (const FaceGenMatrix *)((char *)v12 + (char *)delta - (char *)base));// Normal combine path adds corresponding base and delta matrices element by element. /*0x552b0d*/
+            v29 = 0; /*0x552b17*/
+            FaceGenMatrix_Assign(v9, v7, v17); /*0x552b1b*/
+            v29 = 0xFFFFFFFF; /*0x552b26*/
+            if ( v28.begin ) /*0x552b2e*/
+              FormHeapFree((unsigned int)v28.begin); /*0x552b31*/
+            memset(&v28.begin, 0, 0xC); /*0x552b3b*/
+            if ( maximumRms > 0.0 ) /*0x552b50*/
             {
-              v18 = *v9;
-              v19 = sub_5511D0((unsigned int *)v9);
-              v20 = (double)v18;
-              if ( v18 < 0 )
-                v20 = v20 + flt_A2FC78;
-              v25 = v19 / v20;
-              v26 = sqrt(v25);
-              if ( a5 < (double)v26 )
+              v18 = *v9; /*0x552b56*/
+              v19 = FaceGenMatrix_SumSquares((unsigned int *)v9);// Normal combined-matrix limiter computes sqrt(sumSquares / matrix.rows); coefficient RMS interpretation assumes columns==1. /*0x552b5a*/
+              v20 = (double)v18; /*0x552b65*/
+              if ( v18 < 0 ) /*0x552b69*/
+                v20 = v20 + flt_A2FC78; /*0x552b6b*/
+              v25 = v19 / v20; /*0x552b73*/
+              v26 = sqrt(v25); /*0x552b80*/
+              if ( maximumRms < (double)v26 ) /*0x552b9b*/
               {
-                v27 = a5 / v26;
-                sub_551D40(v9, v27);
+                v27 = maximumRms / v26; /*0x552ba2*/
+                FaceGenMatrix_ScaleInPlace(v9, v27); /*0x552bad*/
               }
             }
           }
         }
         else
         {
-          *v9 = 0;
-          v9[1] = 0;
-          sub_527160(v9 + 2, 0, COERCE_INT(0.0));
+          *v9 = 0; /*0x552bbd*/
+          v9[1] = 0; /*0x552bc3*/
+          FaceGenFloatVector_ResizeFill(v9 + 2, (int)v12, 0, COERCE_INT(0.0)); /*0x552bca*/
         }
-        v10 += 6;
-        v9 += 6;
-        if ( !--v21 )
-          break;
-        v8 = &a1[-a3];
+        ++v10; /*0x552bd5*/
+        v9 += 6; /*0x552bd8*/
+        if ( !--v21 ) /*0x552be0*/
+          break; /*0x552be0*/
+        v8 = (char *)base - (char *)outParameters; /*0x552a30*/
       }
-      if ( ++v7 >= 2 )
-        break;
-      v8 = &a1[-a3];
-      v5 = a3;
+      if ( ++v7 >= 2 ) /*0x552bec*/
+        break; /*0x552bec*/
+      v8 = (char *)base - (char *)outParameters; /*0x552a10*/
+      v5 = outParameters; /*0x552a14*/
     }
   }
 }

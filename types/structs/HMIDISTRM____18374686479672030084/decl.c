@@ -1,1 +1,4 @@
-HMIDISTRM__
+struct HMIDISTRM__
+{
+int unused;
+};

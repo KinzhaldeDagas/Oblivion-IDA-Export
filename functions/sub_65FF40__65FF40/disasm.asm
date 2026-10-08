@@ -1,30 +1,30 @@
 0x65FF40: push    ecx
 0x65FF41: fld     dword ptr ds:0B33E9Ch
-0x65FF47: push    esi
+0x65FF47: push    esi; float
 0x65FF48: mov     esi, ecx
-0x65FF4A: fstp    [esp+8+var_4]
+0x65FF4A: fstp    [esp+8+var_4]; float
 0x65FF4E: mov     ecx, [esi+5CCh]; this
 0x65FF54: test    ecx, ecx
 0x65FF56: jz      short loc_65FF72
 0x65FF58: fld     dword ptr ds:0A30634h
 0x65FF5E: sub     esp, 8
-0x65FF61: fstp    [esp+10h+var_C]; float
+0x65FF61: fstp    [esp+10h+explicitTimeOrMinusOne]; explicitTimeOrMinusOne
 0x65FF65: fld     [esp+10h+var_4]
-0x65FF69: fstp    [esp+10h+var_10]; float
-0x65FF6C: push    esi; int
-0x65FF6D: call    sub_476D10
-0x65FF72: mov     ecx, esi
-0x65FF74: call    TESObjectREFR_GetAnimData
+0x65FF69: fstp    [esp+10h+deltaTime]; deltaTime
+0x65FF6C: push    esi; ownerActor
+0x65FF6D: call    ActorAnimData_Update; CustomAnimSupport evidence: observed player/first-person ActorAnimData update caller; supports broad scheduler classification.
+0x65FF72: mov     ecx, esi; this
+0x65FF74: call    TESObjectREFR_GetAnimData; Return active ActorAnimData for an actor reference. For actor/creature refs with process level 0 or 1, return process+0x17C; otherwise tail-call the ExtraAnim lookup on the reference extra list. Exact return type is ActorAnimData*.
 0x65FF79: test    eax, eax
 0x65FF7B: jz      short loc_65FF99
 0x65FF7D: fld     dword ptr ds:0A30634h
 0x65FF83: sub     esp, 8
-0x65FF86: fstp    [esp+10h+var_C]; float
+0x65FF86: fstp    [esp+10h+explicitTimeOrMinusOne]; explicitTimeOrMinusOne
 0x65FF8A: mov     ecx, eax; this
 0x65FF8C: fld     [esp+10h+var_4]
-0x65FF90: fstp    [esp+10h+var_10]; float
-0x65FF93: push    esi; int
-0x65FF94: call    sub_476D10
+0x65FF90: fstp    [esp+10h+deltaTime]; deltaTime
+0x65FF93: push    esi; ownerActor
+0x65FF94: call    ActorAnimData_Update; CustomAnimSupport evidence: observed player/first-person ActorAnimData update caller; supports broad scheduler classification.
 0x65FF99: mov     eax, [esi]
 0x65FF9B: mov     edx, [eax+0FCh]
 0x65FFA1: mov     ecx, esi
@@ -61,7 +61,7 @@
 0x660003: fstp    [esp+14h+var_4]
 0x660007: fld     [esp+14h+var_4]
 0x66000B: fstp    [esp+14h+var_14]; float
-0x66000E: call    sub_41EDF0
+0x66000E: call    ExtraDataList_SetTimeLeft; ExtraTimeLeft singleton setter always creates/updates the supplied float32 bit pattern; no zero or NaN removal sentinel.
 0x660013: fldz
 0x660015: fcomp   [esp+10h+var_4]
 0x660019: fnstsw  ax
@@ -69,7 +69,7 @@
 0x66001E: jnz     short loc_66009F
 0x660020: mov     ecx, ds:0B33A98h
 0x660026: push    offset aItmtorchheldex; "ITMTorchHeldExt"
-0x66002B: call    sub_447490
+0x66002B: call    SoundMap_ResolveAnimSoundNote; Animation Sound: note resolver. Looks up the note token in global sound map off_B06164 and accepts only entries whose form/type byte is 0x0A; returns the sound entry or 0.
 0x660030: test    eax, eax
 0x660032: jz      short loc_660060
 0x660034: mov     eax, [eax+0Ch]
@@ -86,7 +86,7 @@
 0x66004F: mov     ecx, ebx; this
 0x660051: call    sub_6B73E0
 0x660056: push    ebx
-0x660057: call    FormHeapFree
+0x660057: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x66005C: add     esp, 4
 0x66005F: pop     ebx
 0x660060: push    1

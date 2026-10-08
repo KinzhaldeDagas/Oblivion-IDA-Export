@@ -1,19 +1,32 @@
 {
-  "callees_count": 69,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 29,
   "callers_count": 6,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 26,
-  "display_name": "sub_40D4D0",
+  "chunks": [
+    [
+      "0x40D4D0",
+      "0x40D800"
+    ]
+  ],
+  "chunks_sha256": "c8165e0ef50d853d095fe4daad79ae92f04eb4bdc3478f5d13fa34e927f4b448",
+  "comment_regular": "[Controller decode 2026-07-09] Non-player QueryControlState consumer: special control 31 SysRq/PrintScreen screenshot edge.",
+  "comment_repeatable": "Verified gamma integration 2026-09-26: frame path tests B34FA4 and calls Renderer_ApplyPendingGammaRamp at40D508 before scene rendering.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 51,
+  "display_name": "Input_CheckScreenshotHotkey",
   "end_ea": "0x40D800",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_40D4D0",
+  "name": "Input_CheckScreenshotHotkey",
   "segment": ".text",
   "sha256": "c8165e0ef50d853d095fe4daad79ae92f04eb4bdc3478f5d13fa34e927f4b448",
   "size": 816,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x40D4D0",
-  "type": "void __usercall(InputGlobal *this@<ecx>, double a2@<st2>, double a3@<st1>, double a4@<st0>)",
-  "xrefs_from_count": 344,
+  "total_chunk_size": 816,
+  "type": "void __usercall(InputGlobal *this@<ecx>, double@<st2>, double@<st1>, double@<st0>, double@<st7>, double@<st6>, double@<st5>, double@<st4>, double@<st3>)",
+  "xrefs_from_count": 346,
   "xrefs_to_count": 6
 }

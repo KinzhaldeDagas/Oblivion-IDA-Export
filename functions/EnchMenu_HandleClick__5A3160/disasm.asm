@@ -57,7 +57,7 @@
 0x5A3209: push    0
 0x5A320B: push    0
 0x5A320D: push    4
-0x5A320F: call    sub_5D2070
+0x5A320F: call    RepairMenu_Create
 0x5A3214: mov     edx, [esi]
 0x5A3216: mov     eax, [edx+14h]
 0x5A3219: add     esp, 10h
@@ -73,7 +73,7 @@
 0x5A322A: push    0
 0x5A322C: push    0
 0x5A322E: push    5
-0x5A3230: call    sub_5D2070
+0x5A3230: call    RepairMenu_Create
 0x5A3235: mov     edx, [esi]
 0x5A3237: mov     eax, [edx+14h]
 0x5A323A: add     esp, 10h

@@ -1,19 +1,36 @@
 {
-  "callees_count": 41,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 19,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 6,
-  "display_name": "sub_6B7E50",
+  "chunks": [
+    [
+      "0x6B7E50",
+      "0x6B8050"
+    ],
+    [
+      "0x9C6E70",
+      "0x9C6E96"
+    ]
+  ],
+  "chunks_sha256": "6a9eb7e6cbe83bfc170a1add454ec7d5ce1bdc786a056466bcd2b33b0a8c80db",
+  "comment_regular": "Rebuilds serialized response objects and internal response cursor; resolves INFO/topic/ownerQuest immediately and leaves speaker as a FormID for InitLoadGame. Does not collect live responses or run results.",
+  "comment_repeatable": "Rebuilds serialized response objects and internal response cursor; resolves INFO/topic/ownerQuest immediately and leaves speaker as a FormID for InitLoadGame. Does not collect live responses or run results.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 7,
+  "display_name": "DialogueItem::LoadGame",
   "end_ea": "0x6B8050",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
-  "name": "sub_6B7E50",
+  "name": "DialogueItem::LoadGame",
   "segment": ".text",
   "sha256": "664061d2290262cce96847f6f9ad04743c53eb81df10e4338148161a91aa895c",
   "size": 512,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6B7E50",
-  "type": "int __thiscall(unsigned int **this)",
-  "xrefs_from_count": 213,
+  "total_chunk_size": 550,
+  "type": "void __thiscall(DialogueItemView *this)",
+  "xrefs_from_count": 227,
   "xrefs_to_count": 1
 }

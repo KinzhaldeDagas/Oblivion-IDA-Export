@@ -1,9 +1,9 @@
 _DWORD *sub_A14C10()
 {
-  return sub_90D190(
-           dword_BA8F68,
+  return sub_90D190( /*0xa14c37*/
+           unk_BA8F68,
            (int)"hkBreakableConstraintData",
-           (int)dword_BA8620,
+           (int)unk_BA8620,
            0x20,
            0,
            0,

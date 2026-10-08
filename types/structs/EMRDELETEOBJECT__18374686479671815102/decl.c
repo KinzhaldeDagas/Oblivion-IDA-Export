@@ -1,1 +1,5 @@
-EMRDELETEOBJECT
+struct EMRDELETEOBJECT
+{
+EMR emr;
+DWORD ihObject;
+};

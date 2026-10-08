@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7D71C0",
-    "line": "mov     ecx, ds:0B3F928h",
+    "line": "mov     ecx, ds:0B3F928h; Oblivion BeginScene internal path: establishes SceneState1 when required and starts the supplied or default render-target group.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x7D71FD",
-    "line": "call    StartUsingRenderTarget",
+    "line": "call    NiRenderer_PushAndBeginRenderTargetGroup; Begin a render-target-group stack entry: resolve null to the default group, end any currently ready group, begin the requested group, then strong-own it on the ten-entry global stack.",
     "mnemonic": "call",
     "size": 5
   },

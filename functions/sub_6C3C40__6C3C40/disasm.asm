@@ -1,4 +1,4 @@
-0x6C3C40: sub     esp, 20h
+0x6C3C40: sub     esp, 20h; NiTransformController virtual Update (+0x54). Manager-controlled flag 0x20 consumes the sample time already placed at controller +0x28; otherwise uses NiTimeController_IsUpdateUnchanged and interpolator validity. Calls interpolator virtual +0x4C with time, target +0x30, and a transform result. Valid translation writes target local +0x54/+0x58/+0x5C, valid quaternion is converted into local rotation matrix +0x30, and valid scale writes abs(value) to +0x60.
 0x6C3C43: push    esi
 0x6C3C44: mov     esi, ecx
 0x6C3C46: mov     al, [esi+8]
@@ -10,8 +10,8 @@
 0x6C3C59: jmp     short loc_6C3C89
 0x6C3C5B: fld     [esp+24h+arg_0]
 0x6C3C5F: push    ecx
-0x6C3C60: fstp    [esp+28h+var_28]; float
-0x6C3C63: call    sub_6C36B0
+0x6C3C60: fstp    [esp+28h+applicationTime]; applicationTime
+0x6C3C63: call    NiTimeController_IsUpdateUnchanged; Return true only when an active NiTimeController can reuse its previous interpolation result. Active bit is NiTimeController.flags +0x08 bit 3. On an application-time change, computeScaledTimeOnUpdate +0x2C normally calls virtual ComputeScaledTime and refreshes cachedScaledTime +0x28; forceUpdate +0x38 forces one changed result and is cleared. If +0x2C is zero, report changed without recomputing +0x28.
 0x6C3C68: test    al, al
 0x6C3C6A: jz      short loc_6C3C89
 0x6C3C6C: mov     ecx, [esi+3Ch]

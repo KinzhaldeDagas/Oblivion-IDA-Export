@@ -1,4 +1,4 @@
-0x781DC0: sub     esp, 10h
+0x781DC0: sub     esp, 10h; MoonSugarEffect decode: pixel shader wrapper factory. Allocates 0x2C NiD3DPixelShader, fills base metadata, stores D3D pixel shader handle through vtable +0x3C.
 0x781DC3: push    ebp
 0x781DC4: push    esi
 0x781DC5: push    edi
@@ -25,12 +25,12 @@
 0x781DFF: lea     eax, [esp+24h+var_C]
 0x781E03: push    eax
 0x781E04: mov     eax, [esp+28h+arg_0]
-0x781E08: lea     ecx, [esp+28h+var_10]
+0x781E08: lea     ecx, [esp+28h+bytecode]
 0x781E0C: push    ecx
 0x781E0D: push    eax
 0x781E0E: mov     ecx, edi
 0x781E10: mov     [esp+30h+var_C], ebp
-0x781E14: mov     [esp+30h+var_10], ebp
+0x781E14: mov     [esp+30h+bytecode], ebp
 0x781E18: mov     [esp+30h+var_8], ebp
 0x781E1C: mov     [esp+30h+var_4], ebp
 0x781E20: call    edx
@@ -47,11 +47,11 @@
 0x781E34: pop     ebp
 0x781E35: add     esp, 10h
 0x781E38: retn    10h
-0x781E3B: mov     eax, [esp+1Ch+var_10]
+0x781E3B: mov     eax, [esp+1Ch+bytecode]
 0x781E3F: push    ebx
-0x781E40: push    eax
+0x781E40: push    eax; bytecode
 0x781E41: mov     ecx, edi
-0x781E43: call    sub_783C30
+0x781E43: call    NiDX9Renderer__CreatePixelShader; Calls IDirect3DDevice9::CreatePixelShader for compiled DWORD bytecode and reports a failed HRESULT.
 0x781E48: mov     ebx, eax
 0x781E4A: cmp     ebx, ebp
 0x781E4C: jnz     short loc_781E79
@@ -86,7 +86,7 @@
 0x781E90: push    ecx
 0x781E91: mov     ecx, esi
 0x781E93: call    edx
-0x781E95: mov     ecx, [esp+20h+var_10]
+0x781E95: mov     ecx, [esp+20h+bytecode]
 0x781E99: mov     eax, [esi]
 0x781E9B: mov     edx, [esp+20h+var_C]
 0x781E9F: mov     eax, [eax+1Ch]

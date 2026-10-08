@@ -25,7 +25,6 @@
 0x52EDE5: mov     [esp+14h+var_4], eax
 0x52EDE9: jbe     short loc_52EE17
 0x52EDEB: jmp     short loc_52EDF0
-0x52EDED: align 10h
 0x52EDF0: mov     ecx, [ebx+8]
 0x52EDF3: mov     edi, [ecx+esi*4]
 0x52EDF6: test    edi, edi

@@ -1,4 +1,4 @@
-0x7395A0: push    ebx
+0x7395A0: push    ebx; Pass226/227: NiScreenSpaceCamera texture-array element setter; AddRefs/Releases NiScreenTexture pointers and updates array counts only.
 0x7395A1: push    ebp
 0x7395A2: push    esi
 0x7395A3: mov     ebx, 1

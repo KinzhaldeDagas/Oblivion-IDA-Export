@@ -1,4 +1,4 @@
-0x4B80E0: sub     esp, 2Ch
+0x4B80E0: sub     esp, 2Ch; Verified lifecycle connection: after creating reciprocal ExtraTeleport records and marker transforms, LinkDoors calls TESObjectREFR::AddToLowPathWorld for a1. That creates one bidirectional AStarWorldNode for the paired doors; the nested maps index it under both endpoint spaces.
 0x4B80E3: push    edi
 0x4B80E4: mov     edi, [esp+30h+arg_0]
 0x4B80E8: test    edi, edi
@@ -40,11 +40,11 @@
 0x4B815E: test    eax, eax
 0x4B8160: jz      loc_4B83A6
 0x4B8166: mov     ecx, edi; this
-0x4B8168: call    GetTeleportExtraData
+0x4B8168: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x4B816D: test    eax, eax
 0x4B816F: jnz     loc_4B83A6
 0x4B8175: mov     ecx, esi; this
-0x4B8177: call    GetTeleportExtraData
+0x4B8177: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x4B817C: test    eax, eax
 0x4B817E: jnz     loc_4B83A6
 0x4B8184: push    ebp
@@ -58,10 +58,10 @@
 0x4B819B: jz      loc_4B839C
 0x4B81A1: test    eax, eax
 0x4B81A3: jz      loc_4B839C
-0x4B81A9: mov     ecx, offset fRandomDoorDistance
+0x4B81A9: mov     ecx, 0B35B24h
 0x4B81AE: call    GameSetting_GetSafeFloatPointer
 0x4B81B3: fld     dword ptr [eax]
-0x4B81B5: mov     ecx, offset flt_B35B2C
+0x4B81B5: mov     ecx, offset unk_B35B2C
 0x4B81BA: fstp    [esp+3Ch+arg_0]
 0x4B81BE: call    GameSetting_GetSafeFloatPointer
 0x4B81C3: fld     [esp+3Ch+arg_0]
@@ -71,7 +71,7 @@
 0x4B81D1: fnstsw  ax
 0x4B81D3: test    ah, 5
 0x4B81D6: jnp     short loc_4B81EC
-0x4B81D8: mov     ecx, offset flt_B35B2C
+0x4B81D8: mov     ecx, offset unk_B35B2C
 0x4B81DD: fstp    st
 0x4B81DF: call    GameSetting_GetSafeFloatPointer
 0x4B81E4: fld     dword ptr [eax]
@@ -81,7 +81,7 @@
 0x4B81F1: mov     ecx, ebp
 0x4B81F3: call    TeleportData__SetLinkedDoor
 0x4B81F8: mov     ecx, esi; this
-0x4B81FA: call    TESObjectREFR__GetRandomTeleportMarkerReference
+0x4B81FA: call    TESObjectREFR__GetRandomTeleportMarkerReference; Verified TESObjectREFR wrapper over ExtraDataList_GetRandomTeleportMarker; this per-reference marker pointer is distinct from the TESObjectDOOR base-form randomTeleport list of eligible space forms.
 0x4B81FF: mov     ebx, eax
 0x4B8201: test    ebx, ebx
 0x4B8203: jz      short loc_4B8222
@@ -148,7 +148,7 @@
 0x4B82C9: mov     ecx, ebx
 0x4B82CB: call    TeleportData__SetLinkedDoor
 0x4B82D0: mov     ecx, edi; this
-0x4B82D2: call    TESObjectREFR__GetRandomTeleportMarkerReference
+0x4B82D2: call    TESObjectREFR__GetRandomTeleportMarkerReference; Verified TESObjectREFR wrapper over ExtraDataList_GetRandomTeleportMarker; this per-reference marker pointer is distinct from the TESObjectDOOR base-form randomTeleport list of eligible space forms.
 0x4B82D7: mov     esi, eax
 0x4B82D9: test    esi, esi
 0x4B82DB: jz      short loc_4B82FA
@@ -211,7 +211,7 @@
 0x4B8395: mov     ecx, ebx
 0x4B8397: call    TeleportData__SetTeleportRotation
 0x4B839C: push    edi
-0x4B839D: call    TESObjectREFR__AddToLowPathWorld
+0x4B839D: call    TESObjectREFR__AddToLowPathWorld; Verified `LinkDoors` creates reciprocal TeleportData and calls this hook once for a1. The resulting single AStarWorldNode stores both door refs and both spatial forms; its map entries make it reachable from either endpoint space.
 0x4B83A2: add     esp, 4
 0x4B83A5: pop     ebp
 0x4B83A6: pop     ebx

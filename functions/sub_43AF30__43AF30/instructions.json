@@ -43,13 +43,13 @@
   },
   {
     "ea": "0x43AF3B",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x43AF40",
-    "line": "mov     ecx, TES",
+    "line": "mov     ecx, ds:0B333A0h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x43AF56",
-    "line": "cmp     byte_B350D5, 0",
+    "line": "cmp     byte ptr ds:0B350D5h, 0",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x43AF5F",
-    "line": "call    nullsub_returnTrue_0arg",
+    "line": "call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x43AF7C",
-    "line": "cmp     byte_B350D5, 0",
+    "line": "cmp     byte ptr ds:0B350D5h, 0",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x43AF85",
-    "line": "call    nullsub_returnTrue_0arg",
+    "line": "call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x43AFA2",
-    "line": "mov     ecx, TES",
+    "line": "mov     ecx, ds:0B333A0h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x43AFCE",
-    "line": "mov     esi, ioManager",
+    "line": "mov     esi, ds:0B33A10h",
     "mnemonic": "mov",
     "size": 6
   },

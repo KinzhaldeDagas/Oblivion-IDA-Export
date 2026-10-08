@@ -4,10 +4,10 @@
 0x413BB6: jz      short EffectItem_destr___Done
 0x413BB8: mov     eax, [esi+8]
 0x413BBB: push    eax
-0x413BBC: call    FormHeapFree
+0x413BBC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x413BC1: push    esi
 0x413BC2: mov     dword ptr [esi+8], 0
 0x413BC9: mov     word ptr [esi+0Eh], 0
 0x413BCF: mov     word ptr [esi+0Ch], 0
-0x413BD5: call    FormHeapFree
+0x413BD5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x413BDA: add     esp, 8

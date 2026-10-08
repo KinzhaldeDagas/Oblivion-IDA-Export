@@ -75,7 +75,7 @@
 0x4DD349: mov     ecx, esi
 0x4DD34B: call    eax
 0x4DD34D: push    eax; a1
-0x4DD34E: call    TESFullName_GetNameForForm
+0x4DD34E: call    TESFullName_GetNameForForm; 3DTheft decode: TESFullName_GetNameForForm only dynamic-casts the passed form to TESFullName and returns its raw name/EmptyString; it does not apply worldspace fallback.
 0x4DD353: mov     edx, [edi]
 0x4DD355: add     esp, 4
 0x4DD358: push    eax
@@ -84,7 +84,7 @@
 0x4DD360: mov     ecx, edi
 0x4DD362: call    eax
 0x4DD364: push    eax; a1
-0x4DD365: call    TESFullName_GetNameForForm
+0x4DD365: call    TESFullName_GetNameForForm; 3DTheft decode: TESFullName_GetNameForForm only dynamic-casts the passed form to TESFullName and returns its raw name/EmptyString; it does not apply worldspace fallback.
 0x4DD36A: add     esp, 4
 0x4DD36D: push    eax
 0x4DD36E: lea     ecx, [esp+124h+Format]
@@ -101,14 +101,14 @@
 0x4DD393: cmp     byte ptr [eax+10Ch], 0
 0x4DD39A: jnz     short loc_4DD3E5
 0x4DD39C: lea     ebx, [esi+44h]
-0x4DD39F: push    1
-0x4DD3A1: mov     ecx, ebx
-0x4DD3A3: call    sub_41F830
+0x4DD39F: push    1; mask
+0x4DD3A1: mov     ecx, ebx; this
+0x4DD3A3: call    ExtraDataList_TestActionFlagBits; Test ExtraAction flag mask. Missing ExtraAction behaves as default flags byte 1. REFR save calls with 0x08 to decide whether to emit ONAM.
 0x4DD3A8: test    al, al
 0x4DD3AA: jnz     short loc_4DD3E5
-0x4DD3AC: push    2
-0x4DD3AE: mov     ecx, ebx
-0x4DD3B0: call    sub_423DF0
+0x4DD3AC: push    2; mask
+0x4DD3AE: mov     ecx, ebx; this
+0x4DD3B0: call    ExtraDataList_SetActionFlagBits; OR action flag mask into existing byte (default byte 1 when absent), creating state as needed. ONAM calls this with 0x08.
 0x4DD3B5: push    edi
 0x4DD3B6: mov     ecx, ebx
 0x4DD3B8: call    sub_423EB0
@@ -157,12 +157,12 @@
 0x4DD445: cmp     eax, 4
 0x4DD448: jz      short loc_4DD469
 0x4DD44A: mov     ecx, ebx
-0x4DD44C: call    sub_42B460
+0x4DD44C: call    sub_42B460; ExtraTeleport_GetTargetCell-style helper: returns parent cell of ExtraTeleport+0 target ref if present.
 0x4DD451: mov     ebx, eax
 0x4DD453: test    ebx, ebx
 0x4DD455: jz      short loc_4DD469
 0x4DD457: mov     ecx, ebx; this
-0x4DD459: call    TESObjectCELL_IsInterior
+0x4DD459: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x4DD45E: test    al, al
 0x4DD460: jz      short loc_4DD469
 0x4DD462: mov     ecx, ebx
@@ -179,7 +179,7 @@
 0x4DD486: push    esi
 0x4DD487: call    eax
 0x4DD489: test    al, al
-0x4DD48B: jz      loc_4DD404
+0x4DD48B: jz      loc_4DD404; Generic reference activation dispatches through the projectile reference's base form. For arrows that base form is AMMO, so normal inventory pickup semantics apply.
 0x4DD491: mov     ecx, ds:0B333C4h
 0x4DD497: push    edi
 0x4DD498: call    sub_665260

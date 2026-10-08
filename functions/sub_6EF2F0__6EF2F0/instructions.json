@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6EF2F0",
-    "line": "mov     eax, [esp+arg_C]",
+    "line": "mov     eax, [esp+value]; Oblivion body: checked byte-vector insert-fill. Handles alias-safe in-place insertion and reallocation, uses 1.5x growth, and updates begin/end/capacity. Called by byte insert-one and resize; RT4.1 st_vector_byte corroborates the element role.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x6EF300",
-    "line": "mov     byte ptr [esp+0Ch+arg_C], cl",
+    "line": "mov     byte ptr [esp+0Ch+value], cl",
     "mnemonic": "mov",
     "size": 4
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x6EF30F",
-    "line": "mov     ebx, [esp+0Ch+arg_8]",
+    "line": "mov     ebx, [esp+0Ch+count]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x6EF331",
-    "line": "call    sub_790B90",
+    "line": "call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error(\"vector<T> too long\") and throws; used by multiple element specializations after max_size checks.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x6EF39B",
-    "line": "mov     [esp+10h+arg_8], edx",
+    "line": "mov     [esp+10h+count], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -475,31 +475,31 @@
   },
   {
     "ea": "0x6EF3AD",
-    "line": "mov     ecx, [esp+10h+arg_8]",
+    "line": "mov     ecx, [esp+10h+count]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6EF3B1",
-    "line": "lea     eax, [esp+10h+arg_C]",
+    "line": "lea     eax, [esp+10h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6EF3B5",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6EF3B6",
-    "line": "push    ebx",
+    "line": "push    ebx; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6EF3B7",
-    "line": "push    ecx",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x6EF3BA",
-    "line": "call    sub_7890F0",
+    "line": "call    OB_stVectorByte_UninitializedFillN_010201A0; Oblivion byte-vector uninitialized fill-N primitive: writes count copies of one byte and returns one-past-last.",
     "mnemonic": "call",
     "size": 5
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x6EF3ED",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -799,13 +799,13 @@
   },
   {
     "ea": "0x6EF42C",
-    "line": "lea     ecx, [esp+10h+arg_C]",
+    "line": "lea     ecx, [esp+10h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6EF430",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -823,13 +823,13 @@
   },
   {
     "ea": "0x6EF435",
-    "line": "push    edx",
+    "line": "push    edx; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6EF436",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -841,7 +841,7 @@
   },
   {
     "ea": "0x6EF439",
-    "line": "call    sub_7890F0",
+    "line": "call    OB_stVectorByte_UninitializedFillN_010201A0; Oblivion byte-vector uninitialized fill-N primitive: writes count copies of one byte and returns one-past-last.",
     "mnemonic": "call",
     "size": 5
   },
@@ -859,7 +859,7 @@
   },
   {
     "ea": "0x6EF444",
-    "line": "lea     eax, [esp+10h+arg_C]",
+    "line": "lea     eax, [esp+10h+value]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -961,7 +961,7 @@
   },
   {
     "ea": "0x6EF463",
-    "line": "mov     [esp+1Ch+arg_8], eax",
+    "line": "mov     [esp+1Ch+count], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -973,25 +973,25 @@
   },
   {
     "ea": "0x6EF46C",
-    "line": "mov     ecx, [esp+10h+arg_8]",
+    "line": "mov     ecx, [esp+10h+count]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6EF470",
-    "line": "push    ebp; int",
+    "line": "push    ebp; destinationEnd",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6EF471",
-    "line": "push    ecx; int",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6EF472",
-    "line": "push    edi; Src",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -1003,13 +1003,13 @@
   },
   {
     "ea": "0x6EF476",
-    "line": "call    sub_788A80",
+    "line": "call    OB_stVectorByte_CopyBackwardRange_010201A0; Oblivion byte-vector copy-backward primitive: computes destinationEnd-(last-first), uses overlap-safe memmove_s for the raw byte span, and returns destination start. Hex-Rays does not decompile this helper; the 17-instruction body is the evidence.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6EF47B",
-    "line": "lea     edx, [esp+1Ch+arg_C]",
+    "line": "lea     edx, [esp+1Ch+value]",
     "mnemonic": "lea",
     "size": 4
   },

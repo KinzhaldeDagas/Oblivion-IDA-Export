@@ -1,4 +1,4 @@
-0x8AD070: push    ebp
+0x8AD070: push    ebp; TES4 authoritative: collects support contacts for 0x8AE100. Temporarily offsets the low-level collision object by wrapper vertical adjustment (+0x58 + +0x5C), calls object vfunc +0x34 and then all-contact collection, then restores the old value.
 0x8AD071: mov     ebp, esp
 0x8AD073: and     esp, 0FFFFFFF0h
 0x8AD076: sub     esp, 1A4h

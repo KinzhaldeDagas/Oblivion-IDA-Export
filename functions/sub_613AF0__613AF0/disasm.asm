@@ -63,7 +63,7 @@
 0x613B86: jnz     short loc_613B97
 0x613B88: mov     eax, [edi]
 0x613B8A: push    eax
-0x613B8B: call    FormHeapFree
+0x613B8B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x613B90: add     esp, 4
 0x613B93: mov     bl, 1
 0x613B95: mov     [edi], esi

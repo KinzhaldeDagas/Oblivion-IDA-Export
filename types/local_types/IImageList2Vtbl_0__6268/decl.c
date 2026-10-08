@@ -1,1 +1,1 @@
-IImageList2Vtbl_0
+typedef IImageList2Vtbl IImageList2Vtbl_0;

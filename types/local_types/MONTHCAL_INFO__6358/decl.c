@@ -1,1 +1,38 @@
-MONTHCAL_INFO
+struct MONTHCAL_INFO
+{
+HWND hwndSelf __offset(OFF64|AUTO);
+DWORD dwStyle;
+COLORREF colors[6];
+HBRUSH brushes[3] __offset(OFF64|AUTO);
+HPEN pens[2] __offset(OFF64|AUTO);
+HFONT hFont __offset(OFF64|AUTO);
+HFONT hBoldFont __offset(OFF64|AUTO);
+int textHeight;
+int height_increment;
+int width_increment;
+INT delta;
+int firstDay;
+BOOL firstDaySet;
+BOOL isUnicode;
+MONTHDAYSTATE *monthdayState __offset(OFF64|AUTO);
+SYSTEMTIME todaysDate;
+BOOL todaySet;
+int status;
+SYSTEMTIME firstSel;
+INT maxSelCount;
+SYSTEMTIME minSel;
+SYSTEMTIME maxSel;
+SYSTEMTIME focusedSel;
+DWORD rangeValid;
+SYSTEMTIME minDate;
+SYSTEMTIME maxDate;
+RECT titlebtnnext;
+RECT titlebtnprev;
+RECT todayrect;
+HWND hwndNotify __offset(OFF64|AUTO);
+HWND hWndYearEdit __offset(OFF64|AUTO);
+HWND hWndYearUpDown __offset(OFF64|AUTO);
+WNDPROC_0 EditWndProc __offset(OFF64|AUTO);
+CALENDAR_INFO *calendars __offset(OFF64|AUTO);
+SIZE dim;
+};

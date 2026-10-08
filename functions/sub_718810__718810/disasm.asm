@@ -1,6 +1,6 @@
 0x718810: push    ebx
 0x718811: push    esi
-0x718812: mov     esi, dword ptr [esp+8+arg_0]
+0x718812: mov     esi, [esp+8+arg_0]
 0x718816: push    edi
 0x718817: push    esi
 0x718818: mov     edi, ecx
@@ -12,7 +12,7 @@
 0x71882E: movzx   ecx, word ptr [esi+8]
 0x718832: add     esp, 4
 0x718835: cmp     ebx, ecx
-0x718837: mov     dword ptr [esp+0Ch+arg_0], eax
+0x718837: mov     [esp+0Ch+arg_0], eax
 0x71883B: jb      short loc_71884B
 0x71883D: movzx   edx, word ptr [esi+0Eh]
 0x718841: add     edx, ebx
@@ -26,13 +26,13 @@
 0x718853: call    NiTArray_SetAt; Actually first arg is a generic NiTArray
 0x718858: mov     cl, [edi+18h]
 0x71885B: and     cl, 1
-0x71885E: mov     [esp+0Ch+arg_0], cl
-0x718862: mov     edx, dword ptr [esp+0Ch+arg_0]
+0x71885E: mov     byte ptr [esp+0Ch+arg_0], cl
+0x718862: mov     edx, [esp+0Ch+arg_0]
 0x718866: push    edx; char
 0x718867: push    offset aM_balpha; "m_bAlpha"
 0x71886C: call    TESOutput_PrintLabeledBool
 0x718871: movzx   ebx, word ptr [esi+0Ah]
-0x718875: mov     dword ptr [esp+14h+arg_0], eax
+0x718875: mov     [esp+14h+arg_0], eax
 0x718879: movzx   eax, word ptr [esi+8]
 0x71887D: add     esp, 8
 0x718880: cmp     ebx, eax
@@ -54,7 +54,7 @@
 0x7188A9: push    offset aM_esrcblend; "m_eSrcBlend"
 0x7188AE: call    sub_7182A0
 0x7188B3: movzx   ebx, word ptr [esi+0Ah]
-0x7188B7: mov     dword ptr [esp+14h+arg_0], eax
+0x7188B7: mov     [esp+14h+arg_0], eax
 0x7188BB: movzx   eax, word ptr [esi+8]
 0x7188BF: add     esp, 8
 0x7188C2: cmp     ebx, eax
@@ -76,7 +76,7 @@
 0x7188EC: push    offset aM_edestblend; "m_eDestBlend"
 0x7188F1: call    sub_7182A0
 0x7188F6: movzx   ebx, word ptr [esi+0Ah]
-0x7188FA: mov     dword ptr [esp+14h+arg_0], eax
+0x7188FA: mov     [esp+14h+arg_0], eax
 0x7188FE: movzx   eax, word ptr [esi+8]
 0x718902: add     esp, 8
 0x718905: cmp     ebx, eax
@@ -94,8 +94,8 @@
 0x718924: mov     ax, [edi+18h]
 0x718928: shr     ax, 9
 0x71892C: and     al, 1
-0x71892E: mov     [esp+0Ch+arg_0], al
-0x718932: mov     ecx, dword ptr [esp+0Ch+arg_0]
+0x71892E: mov     byte ptr [esp+0Ch+arg_0], al
+0x718932: mov     ecx, [esp+0Ch+arg_0]
 0x718936: push    ecx; char
 0x718937: push    offset aM_balphatest; "m_bAlphaTest"
 0x71893C: call    TESOutput_PrintLabeledBool
@@ -103,7 +103,7 @@
 0x718945: movzx   edx, word ptr [esi+8]
 0x718949: add     esp, 8
 0x71894C: cmp     ebx, edx
-0x71894E: mov     dword ptr [esp+0Ch+arg_0], eax
+0x71894E: mov     [esp+0Ch+arg_0], eax
 0x718952: jb      short loc_718962
 0x718954: movzx   eax, word ptr [esi+0Eh]
 0x718958: add     eax, ebx
@@ -125,7 +125,7 @@
 0x718988: movzx   edx, word ptr [esi+8]
 0x71898C: add     esp, 8
 0x71898F: cmp     ebx, edx
-0x718991: mov     dword ptr [esp+0Ch+arg_0], eax
+0x718991: mov     [esp+0Ch+arg_0], eax
 0x718995: jb      short loc_7189A5
 0x718997: movzx   eax, word ptr [esi+0Eh]
 0x71899B: add     eax, ebx
@@ -138,8 +138,8 @@
 0x7189AB: mov     ecx, esi
 0x7189AD: call    NiTArray_SetAt; Actually first arg is a generic NiTArray
 0x7189B2: mov     dl, [edi+1Ah]
-0x7189B5: mov     [esp+0Ch+arg_0], dl
-0x7189B9: mov     eax, dword ptr [esp+0Ch+arg_0]
+0x7189B5: mov     byte ptr [esp+0Ch+arg_0], dl
+0x7189B9: mov     eax, [esp+0Ch+arg_0]
 0x7189BD: push    eax; char
 0x7189BE: push    offset aM_uctestref; "m_ucTestRef"
 0x7189C3: call    sub_70FA00
@@ -147,7 +147,7 @@
 0x7189CC: movzx   ecx, word ptr [esi+8]
 0x7189D0: add     esp, 8
 0x7189D3: cmp     ebx, ecx
-0x7189D5: mov     dword ptr [esp+0Ch+arg_0], eax
+0x7189D5: mov     [esp+0Ch+arg_0], eax
 0x7189D9: jb      short loc_7189E9
 0x7189DB: movzx   edx, word ptr [esi+0Eh]
 0x7189DF: add     edx, ebx
@@ -162,13 +162,13 @@
 0x7189F6: mov     cx, [edi+18h]
 0x7189FA: shr     cx, 0Dh
 0x7189FE: and     cl, 1
-0x718A01: mov     [esp+0Ch+arg_0], cl
-0x718A05: mov     edx, dword ptr [esp+0Ch+arg_0]
+0x718A01: mov     byte ptr [esp+0Ch+arg_0], cl
+0x718A05: mov     edx, [esp+0Ch+arg_0]
 0x718A09: push    edx; char
 0x718A0A: push    offset aM_bnosorter; "m_bNoSorter"
 0x718A0F: call    TESOutput_PrintLabeledBool
 0x718A14: movzx   edi, word ptr [esi+0Ah]
-0x718A18: mov     dword ptr [esp+14h+arg_0], eax
+0x718A18: mov     [esp+14h+arg_0], eax
 0x718A1C: movzx   eax, word ptr [esi+8]
 0x718A20: add     esp, 8
 0x718A23: cmp     edi, eax

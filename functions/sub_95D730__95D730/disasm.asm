@@ -9,10 +9,10 @@
 0x95D748: add     esp, 4
 0x95D74B: test    eax, eax
 0x95D74D: jz      short loc_95D75D
-0x95D74F: mov     ecx, [esp+4+arg_C]
-0x95D753: push    ecx
-0x95D754: mov     ecx, eax
-0x95D756: call    sub_95A2D0
+0x95D74F: mov     ecx, [esp+4+pickedObject]
+0x95D753: push    ecx; pickedObject
+0x95D754: mov     ecx, eax; this
+0x95D756: call    NiPickRecord_Initialize; Verified NiPickRecord initialization for the 0x44-byte record: retains the picked object at +0, clears/releases the secondary reference at +4, and zeros tail fields +0x34..+0x40. It does not initialize the intersection point, distance, or +0x28 normal fields; pick paths populate those selectively, so bounds-only records may leave the normal unavailable.
 0x95D75B: jmp     short loc_95D75F
 0x95D75D: xor     eax, eax
 0x95D75F: lea     edx, [esp+4+arg_8]
@@ -25,7 +25,7 @@
 0x95D775: pop     ebp
 0x95D776: retn
 0x95D777: push    edi
-0x95D778: mov     edi, [esp+8+arg_C]
+0x95D778: mov     edi, [esp+8+pickedObject]
 0x95D77C: test    edi, edi
 0x95D77E: jz      short loc_95D79E
 0x95D780: mov     eax, [edi]
@@ -35,7 +35,7 @@
 0x95D789: test    eax, eax
 0x95D78B: jz      short loc_95D79E
 0x95D78D: lea     ecx, [ecx+0]
-0x95D790: cmp     eax, offset dword_B3FD70
+0x95D790: cmp     eax, offset stru_B3FD70
 0x95D795: jz      short loc_95D80A
 0x95D797: mov     eax, [eax+4]
 0x95D79A: test    eax, eax
@@ -65,7 +65,7 @@
 0x95D7DF: push    ebp
 0x95D7E0: push    ebx
 0x95D7E1: push    eax
-0x95D7E2: call    sub_95D540
+0x95D7E2: call    NiPick_ProcessSceneObject; Verified scene-object pick dispatcher: rejects invalid/filtered candidates, delegates NiGeometryData to NiPick_ProcessGeometryIntersection, and has a separate bounds/RTTI fallback that writes hit point and distance but does not explicitly populate the normal field.
 0x95D7E7: add     esp, 10h
 0x95D7EA: test    al, al
 0x95D7EC: jz      short loc_95D7F3

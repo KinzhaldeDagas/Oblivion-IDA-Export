@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x662750",
-    "line": "sub     esp, 10h",
+    "line": "sub     esp, 10h; Resolve Oblivion's default/recommended class. If the actor already has a non-sentinel class, return it. Otherwise classify all 21 deferred chargen skill-use totals by TESSkill specialization, normalize the three shares to seven implied major slots, and select/cache a preset class.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x662756",
-    "line": "call    Actor_GetBaseClass",
+    "line": "call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.",
     "mnemonic": "call",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x662764",
-    "line": "jnz     Actor_GetDefaultClass___Return_CurrentClass",
+    "line": "jnz     Actor_GetDefaultClass___Return_CurrentClass; A non-sentinel current class is already authoritative; skip recommendation scoring and return that TESClass.",
     "mnemonic": "jnz",
     "size": 6
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x66277B",
-    "line": "xor     esi, esi",
+    "line": "xor     esi, esi; Scan exactly 21 deferred chargen skill-use floats at PlayerCharacter+0x5B0, one per native TESSkill index.",
     "mnemonic": "xor",
     "size": 2
   },
@@ -97,19 +97,19 @@
   },
   {
     "ea": "0x662780",
-    "line": "mov     ecx, ds:0B33A98h",
+    "line": "mov     ecx, ds:0B33A98h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x662786",
-    "line": "push    esi",
+    "line": "push    esi; skillIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x662787",
-    "line": "call    TESDataHandler_GetTESSkillByCode",
+    "line": "call    TESDataHandler_GetTESSkillByCode; Return one of exactly 21 inline Oblivion TESSkill records. Reject skillIndex > 20; otherwise return TESDataHandler+0xD8+(skillIndex*0x60).",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x6627B0",
-    "line": "mov     eax, [ecx+34h]",
+    "line": "mov     eax, [ecx+34h]; Bucket each positive deferred use value by TESSkill_Data::specialization: 0 Combat, 1 Magic, 2 Stealth. Major membership is unavailable and is not consulted here.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x662802",
-    "line": "fstp    [esp+20h+var_4]",
+    "line": "fstp    [esp+20h+var_4]; Normalize Combat/Magic/Stealth usage shares to a total of seven slots (the TESClass major count) and round each share to the nearest integer using 0.5.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x662822",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x662855",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x66286E",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x662899",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -703,7 +703,7 @@
   },
   {
     "ea": "0x6628AE",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -787,13 +787,13 @@
   },
   {
     "ea": "0x6628D9",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6628DE",
-    "line": "cmp     edi, 7",
+    "line": "cmp     edi, 7; Pure 7-slot distributions select the corresponding specialization-pure preset; mixed distributions continue through the native preset-class decision table.",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -883,7 +883,7 @@
   },
   {
     "ea": "0x662911",
-    "line": "lea     eax, [edi-3]; switch 4 cases",
+    "line": "lea     eax, [edi-3]; Select a preset TESClass from the rounded seven-slot Combat/Magic/Stealth distribution. This is recommendation logic, not construction of a new majorSkills array.",
     "mnemonic": "lea",
     "size": 3
   },
@@ -1063,7 +1063,7 @@
   },
   {
     "ea": "0x66296F",
-    "line": "mov     [ebx+650h], eax",
+    "line": "mov     [ebx+650h], eax; Cache the selected recommended TESClass at PlayerCharacter+0x650.",
     "mnemonic": "mov",
     "size": 6
   }

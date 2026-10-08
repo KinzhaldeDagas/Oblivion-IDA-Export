@@ -21,7 +21,7 @@
 0x531933: test    al, 1
 0x531935: jnz     loc_531B09
 0x53193B: push    0FFFFFFFFh; a2
-0x53193D: call    TESForm_GetOverrideFile
+0x53193D: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x531942: xor     esi, esi
 0x531944: lea     ebp, [ebx+28h]
 0x531947: test    ebp, ebp
@@ -29,7 +29,6 @@
 0x53194D: mov     [esp+144h+var_124], esi
 0x531951: jz      loc_531AE6
 0x531957: jmp     short loc_531964
-0x531959: align 10h
 0x531960: mov     esi, [esp+144h+var_124]
 0x531964: mov     eax, [ebp+0]
 0x531967: test    eax, eax
@@ -39,7 +38,7 @@
 0x531974: lea     edx, [esp+148h+ArgList]
 0x531978: push    edx; a1
 0x531979: mov     dword ptr [esp+14Ch+ArgList], eax
-0x53197D: call    TESForm_ResolveFormID
+0x53197D: call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.
 0x531982: mov     eax, dword ptr [esp+14Ch+ArgList]
 0x531986: add     esp, 8
 0x531989: push    0; int
@@ -47,7 +46,7 @@
 0x531990: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x531995: push    0; int
 0x531997: push    eax; a1
-0x531998: call    TESForm_LookupByFormID
+0x531998: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x53199D: add     esp, 4
 0x5319A0: push    eax; void *
 0x5319A1: call    OblivionDynamicCast
@@ -72,7 +71,7 @@
 0x5319D7: mov     ecx, [eax]
 0x5319D9: push    eax
 0x5319DA: mov     [ebp+0], ecx
-0x5319DD: call    FormHeapFree
+0x5319DD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5319E2: add     esp, 4
 0x5319E5: jmp     short loc_5319EE
 0x5319E7: mov     dword ptr [ebp+0], 0
@@ -80,9 +79,9 @@
 0x5319EF: call    TESTopic_static_GetTopicInfoParent?
 0x5319F4: add     esp, 4
 0x5319F7: mov     esi, eax
-0x5319F9: push    ebx
-0x5319FA: mov     ecx, esi
-0x5319FC: call    sub_52F570
+0x5319F9: push    ebx; info
+0x5319FA: mov     ecx, esi; this
+0x5319FC: call    TESTopic__GetOwnerQuest
 0x531A01: mov     edi, eax
 0x531A03: xor     eax, eax
 0x531A05: mov     [esp+144h+var_12C], eax
@@ -93,7 +92,7 @@
 0x531A19: push    edx
 0x531A1A: mov     ecx, ebx
 0x531A1C: mov     [esp+14Ch+var_4], eax
-0x531A23: call    sub_531200
+0x531A23: call    TESTopicInfo__GetInfoDisplayText
 0x531A28: test    esi, esi
 0x531A2A: jz      short loc_531A7F
 0x531A2C: test    edi, edi
@@ -143,7 +142,7 @@
 0x531AA9: call    PrintError
 0x531AAE: push    esi
 0x531AAF: mov     [esp+154h+var_4], 0FFFFFFFFh
-0x531ABA: call    FormHeapFree
+0x531ABA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x531ABF: add     esp, 10h
 0x531AC2: xor     eax, eax
 0x531AC4: mov     [esp+144h+var_12C], eax
@@ -180,3 +179,16 @@
 0x531B25: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x531B2A: add     esp, 130h
 0x531B30: retn
+0x9B8CA0: lea     ecx, [ebp-12Ch]; void *
+0x9B8CA6: jmp     BSStringT_Clear
+0x9B8CAB: mov     edx, [esp+arg_4]
+0x9B8CAF: lea     eax, [edx-134h]
+0x9B8CB5: mov     ecx, [edx-138h]
+0x9B8CBB: xor     ecx, eax
+0x9B8CBD: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B8CC2: add     eax, 10h
+0x9B8CC5: mov     ecx, [edx-4]
+0x9B8CC8: xor     ecx, eax
+0x9B8CCA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B8CCF: mov     eax, offset stru_AE3114
+0x9B8CD4: jmp     ___CxxFrameHandler3

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x609DF0",
-    "line": "push    ebp",
+    "line": "push    ebp; Recursively searches an Actor scene subtree for an admissible collision-backed embed node. It filters collision layer/body groups, ray-tests the supplied start/direction against each candidate, updates inOutDistance to the accepted fraction, and returns the selected NiAVObject; no bone name is hard-coded.",
     "mnemonic": "push",
     "size": 1
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x609E0A",
-    "line": "mov     eax, [ebp+arg_1C]",
+    "line": "mov     eax, [ebp+inOutDistance]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x609E0E",
-    "line": "mov     ebx, [ebp+arg_0]",
+    "line": "mov     ebx, [ebp+candidate]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x609E2D",
-    "line": "call    sub_47FAC0",
+    "line": "call    NiAVObject_GetBhkCollisionObject; ODismemberment: authoritative NiAVObject collision getter. Reads NiAVObject+0xA8 and accepts objects whose class chain includes bhkCollisionObject.",
     "mnemonic": "call",
     "size": 5
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x609F25",
-    "line": "cmp     byte ptr [ebp+arg_20], 0",
+    "line": "cmp     [ebp+excludeGroup0100], 0",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -601,13 +601,13 @@
   },
   {
     "ea": "0x609F43",
-    "line": "jz      loc_60A128",
+    "line": "jz      loc_60A128; Accept actor embed candidate only for collision filter category 8, excluding several high-word body/material groups and optionally group 0x0100.",
     "mnemonic": "jz",
     "size": 6
   },
   {
     "ea": "0x609F49",
-    "line": "lea     ecx, [ebp+arg_4]",
+    "line": "lea     ecx, [ebp+startX]",
     "mnemonic": "lea",
     "size": 3
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x609F69",
-    "line": "fld     [ebp+arg_10]",
+    "line": "fld     [ebp+directionX]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x609F7F",
-    "line": "fld     [ebp+arg_14]",
+    "line": "fld     [ebp+directionY]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -733,7 +733,7 @@
   },
   {
     "ea": "0x609F88",
-    "line": "fmul    [ebp+arg_18]",
+    "line": "fmul    [ebp+directionZ]",
     "mnemonic": "fmul",
     "size": 3
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x609F8F",
-    "line": "fld     [ebp+arg_4]",
+    "line": "fld     [ebp+startX]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x609F9A",
-    "line": "fld     [ebp+arg_8]",
+    "line": "fld     [ebp+startY]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -781,7 +781,7 @@
   },
   {
     "ea": "0x609FA5",
-    "line": "fld     [ebp+arg_C]",
+    "line": "fld     [ebp+startZ]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -829,7 +829,7 @@
   },
   {
     "ea": "0x609FC1",
-    "line": "push    offset dword_BA7A20",
+    "line": "push    0BA7A20h",
     "mnemonic": "push",
     "size": 5
   },
@@ -1003,7 +1003,7 @@
   },
   {
     "ea": "0x60A022",
-    "line": "push    offset dword_BA8018",
+    "line": "push    offset stru_BA8018",
     "mnemonic": "push",
     "size": 5
   },
@@ -1099,7 +1099,7 @@
   },
   {
     "ea": "0x60A075",
-    "line": "call    sub_8B1DD0",
+    "line": "call    hkMatrix3_SetFromQuaternion; Converts a quaternion into a 3x3 basis matrix. 0x896000 uses this during per-frame movement basis refresh.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1315,7 +1315,7 @@
   },
   {
     "ea": "0x60A0FC",
-    "line": "call    edx",
+    "line": "call    edx; Ray/shape query against candidate collision object; update caller distance by hit fraction when accepted.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1471,19 +1471,19 @@
   },
   {
     "ea": "0x60A158",
-    "line": "mov     esi, [ebp+arg_18]",
+    "line": "mov     esi, [ebp+directionZ]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x60A15B",
-    "line": "mov     edi, [ebp+arg_14]",
+    "line": "mov     edi, [ebp+directionY]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x60A15E",
-    "line": "mov     ebx, [ebp+arg_10]",
+    "line": "mov     ebx, [ebp+directionX]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1543,7 +1543,7 @@
   },
   {
     "ea": "0x60A17C",
-    "line": "mov     eax, [ebp+arg_20]",
+    "line": "mov     eax, dword ptr [ebp+excludeGroup0100]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1555,19 +1555,19 @@
   },
   {
     "ea": "0x60A183",
-    "line": "push    eax; int",
+    "line": "push    eax; excludeGroup0100",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60A184",
-    "line": "push    edx; int",
+    "line": "push    edx; inOutDistance",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60A185",
-    "line": "mov     edx, [ebp+arg_4]",
+    "line": "mov     edx, [ebp+startX]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1621,7 +1621,7 @@
   },
   {
     "ea": "0x60A19C",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+startY]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1633,19 +1633,19 @@
   },
   {
     "ea": "0x60A1A2",
-    "line": "mov     edx, [ebp+arg_C]",
+    "line": "mov     edx, [ebp+startZ]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x60A1A5",
-    "line": "push    ecx; int",
+    "line": "push    ecx; candidate",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60A1A6",
-    "line": "mov     ecx, [esp+1A4h+var_150]",
+    "line": "mov     ecx, [esp+1A4h+var_150]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1657,7 +1657,7 @@
   },
   {
     "ea": "0x60A1AD",
-    "line": "call    sub_609DF0",
+    "line": "call    ArrowProjectile_FindActorEmbedCollisionNode; Recursively traverse NiNode children until a collision-backed embed candidate is found; selection is geometry/collision driven, not hard-coded bone-name lookup.",
     "mnemonic": "call",
     "size": 5
   },

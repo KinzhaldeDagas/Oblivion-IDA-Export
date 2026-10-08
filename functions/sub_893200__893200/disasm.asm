@@ -9,7 +9,7 @@
 0x893212: mov     ecx, esi
 0x893214: call    sub_890F70
 0x893219: push    esi
-0x89321A: call    FormHeapFree
+0x89321A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x89321F: add     esp, 4
 0x893222: mov     dword ptr [edi+0Ch], 0
 0x893229: pop     esi

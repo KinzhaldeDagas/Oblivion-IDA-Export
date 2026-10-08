@@ -1,1 +1,1 @@
-FleePackage
+struct FleePackage;

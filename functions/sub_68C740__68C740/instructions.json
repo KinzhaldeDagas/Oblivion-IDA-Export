@@ -126,12 +126,6 @@
     "size": 2
   },
   {
-    "ea": "0x68C77A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x68C780",
     "line": "mov     ecx, eax",
     "mnemonic": "mov",
@@ -397,7 +391,7 @@
   },
   {
     "ea": "0x68C808",
-    "line": "mov     [esp+48h+var_2C], edi",
+    "line": "mov     [esp+48h+colors], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -451,7 +445,7 @@
   },
   {
     "ea": "0x68C826",
-    "line": "mov     [esp+48h+var_2C], edi",
+    "line": "mov     [esp+48h+colors], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -463,7 +457,7 @@
   },
   {
     "ea": "0x68C82C",
-    "line": "mov     [esp+48h+var_2C], 0",
+    "line": "mov     [esp+48h+colors], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -505,7 +499,7 @@
   },
   {
     "ea": "0x68C84A",
-    "line": "mov     [esp+48h+var_30], eax",
+    "line": "mov     [esp+48h+lineFlags], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -523,7 +517,7 @@
   },
   {
     "ea": "0x68C85C",
-    "line": "mov     edi, [esp+48h+var_2C]",
+    "line": "mov     edi, [esp+48h+colors]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -541,13 +535,13 @@
   },
   {
     "ea": "0x68C868",
-    "line": "mov     ecx, ds:0B3C0A0h",
+    "line": "mov     ecx, ds:0B3C0A0h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x68C86E",
-    "line": "call    sub_700900",
+    "line": "call    NiObject_CloneWithPointerMap; Clones a loaded NiObject with a temporary pointer map and runs clone post-processing; the returned scene object is distinct from its source.",
     "mnemonic": "call",
     "size": 5
   },
@@ -565,7 +559,7 @@
   },
   {
     "ea": "0x68C877",
-    "line": "call    sub_6899C0",
+    "line": "call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,7 +643,7 @@
   },
   {
     "ea": "0x68C8A0",
-    "line": "call    sub_6899C0",
+    "line": "call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -775,7 +769,7 @@
   },
   {
     "ea": "0x68C8E5",
-    "line": "mov     eax, [esp+48h+var_30]",
+    "line": "mov     eax, [esp+48h+lineFlags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -865,7 +859,7 @@
   },
   {
     "ea": "0x68C91A",
-    "line": "mov     ecx, [esp+48h+var_30]",
+    "line": "mov     ecx, [esp+48h+lineFlags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -919,67 +913,67 @@
   },
   {
     "ea": "0x68C940",
-    "line": "mov     edx, [esp+48h+var_30]",
+    "line": "mov     edx, [esp+48h+lineFlags]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x68C944",
-    "line": "mov     ecx, [esp+48h+var_2C]",
+    "line": "mov     ecx, [esp+48h+colors]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x68C948",
-    "line": "push    edx",
+    "line": "push    edx; lineFlags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x68C949",
-    "line": "push    0",
+    "line": "push    0; arg7",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x68C94B",
-    "line": "push    0",
+    "line": "push    0; arg6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x68C94D",
-    "line": "push    0",
+    "line": "push    0; arg5",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x68C94F",
-    "line": "push    ecx",
+    "line": "push    ecx; colors",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x68C950",
-    "line": "push    ebx",
+    "line": "push    ebx; vertices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x68C951",
-    "line": "push    esi",
+    "line": "push    esi; vertexCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x68C952",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x68C954",
-    "line": "call    sub_7177E0",
+    "line": "call    NiLines_ctorWithGeometryData; Verified NiLines constructor wrapper: create NiGeometryData via NiLinesData_ctor, initialize NiGeometry, then install NiLines vtable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1162,5 +1156,137 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C53F0",
+    "line": "mov     eax, [ebp-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C53F3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C53F4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C53F9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C53FA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C53FB",
+    "line": "mov     eax, [ebp-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C53FE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C53FF",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5404",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C5405",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C5406",
+    "line": "mov     eax, [ebp-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5409",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C540A",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C540F",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C5410",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C5411",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C5415",
+    "line": "lea     eax, [edx-38h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5418",
+    "line": "mov     ecx, [edx-3Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C541B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C541D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5422",
+    "line": "mov     eax, offset stru_AEDBE4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5427",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

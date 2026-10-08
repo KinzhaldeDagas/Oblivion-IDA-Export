@@ -6,123 +6,123 @@ void __userpurge sub_5F6330(
         double a5@<st0>,
         PlayerCharacter *a6)
 {
-  PlayerCharacter *v8; // ecx
-  PlayerCharacter *v9; // eax
-  _DWORD *v10; // edi
-  _DWORD *v11; // ebp
-  _DWORD *v12; // ebx
-  bool v13; // zf
-  _DWORD *v14; // eax
-  _DWORD *v15; // edi
-  _DWORD *v16; // ebx
-  _DWORD *v17; // ecx
+  PlayerCharacter *v7; // ecx
+  PlayerCharacter *v8; // eax
+  _DWORD *v9; // edi
+  _DWORD *v10; // ebp
+  _DWORD *v11; // ebx
+  bool v12; // zf
+  int *v13; // eax
+  _DWORD *v14; // edi
+  _DWORD *v15; // ebx
+  int **v16; // ecx
   LowProcess *process; // ecx
-  int v19; // eax
+  int v18; // eax
   char *Name; // eax
-  LowProcess *v21; // ecx
+  LowProcess *v20; // ecx
 
-  if ( !sub_5E6C60(a1) )
-    goto LABEL_6;
-  v8 = TESDataHandler_g_PlayerRef;
-  if ( LOBYTE(TESDataHandler_g_PlayerRef->unk738) )
+  if ( !Actor_IsGuardClass(a1) ) /*0x5f633a*/
+    goto LABEL_6; /*0x5f633a*/
+  v7 = reference; /*0x5f633c*/
+  if ( LOBYTE(reference->unk738) ) /*0x5f6342*/
   {
-    if ( !a1->vtbl->IsInCombat(a1, 1) )
+    if ( !a1->vtbl->IsInCombat(a1, 1) ) /*0x5f635b*/
     {
 LABEL_6:
-      v8 = TESDataHandler_g_PlayerRef;
-      goto LABEL_7;
+      v7 = reference; /*0x5f6383*/
+      goto LABEL_7; /*0x5f6383*/
     }
-    v9 = (PlayerCharacter *)a1->members.super.process->GetUnk02C(a1->members.super.process);
-    v8 = TESDataHandler_g_PlayerRef;
-    if ( v9 == TESDataHandler_g_PlayerRef )
+    v8 = (PlayerCharacter *)a1->members.super.process->GetUnk02C(a1->members.super.process); /*0x5f6368*/
+    v7 = reference; /*0x5f636a*/
+    if ( v8 == reference ) /*0x5f6372*/
     {
-      ((void (__thiscall *)(LowProcess *, unsigned int))v8->super.super.super.process->Unk_111)(
-        v8->super.super.super.process,
+      ((void (__thiscall *)(LowProcess *, unsigned int))v7->super.super.super.process->Unk_111)( /*0x5f6381*/
+        v7->super.super.super.process,
         0xFFFFFFFF);
-      goto LABEL_6;
+      goto LABEL_6; /*0x5f6381*/
     }
   }
 LABEL_7:
-  if ( !a6 || a6 == v8 )
-    sub_65DEF0(v8, (int)a1);
-  sub_5F4AE0(a1, a3, a4, a5, 0);
-  ((void (__thiscall *)(Actor *, _DWORD))a1->vtbl->Unk_E5)(a1, 0);
-  v10 = sub_67C880(&dword_B3BDB0, (int)a1, 4);
-  v11 = v10;
-  if ( v10 )
+  if ( !a6 || a6 == v7 ) /*0x5f6393*/
+    sub_65DEF0((unsigned int *)v7, (int)a1); /*0x5f6396*/
+  Actor_UpdateBlockingState(a1, 0); /*0x5f63a2*/
+  ((void (__thiscall *)(Actor *, _DWORD))a1->vtbl->Unk_E5)(a1, 0); /*0x5f63b3*/
+  v9 = CombatGroupManager_BuildFriendlyEntryList((int *)&qword_B3BB2C[0xA1], (PlayerCharacter *)a1, 4); /*0x5f63c2*/
+  v10 = v9; /*0x5f63c6*/
+  if ( v9 ) /*0x5f63c8*/
   {
-    do
+    do /*0x5f6403*/
     {
-      v12 = (_DWORD *)*v10;
-      v13 = *v10 == 0;
-      v10 = (_DWORD *)v10[1];
-      if ( !v13 )
+      v11 = (_DWORD *)*v9; /*0x5f63d0*/
+      v12 = *v9 == 0; /*0x5f63d2*/
+      v9 = (_DWORD *)v9[1]; /*0x5f63d4*/
+      if ( !v12 ) /*0x5f63d7*/
       {
-        if ( *v12 )
+        if ( *v11 ) /*0x5f63d9*/
         {
-          if ( (*(int (__thiscall **)(_DWORD))(*(_DWORD *)*v12 + 0x330))(*v12) )
+          if ( (*(int (__thiscall **)(_DWORD))(*(_DWORD *)*v11 + 0x330))(*v11) ) /*0x5f63e7*/
           {
-            v14 = (_DWORD *)(*(int (__thiscall **)(_DWORD))(*(_DWORD *)*v12 + 0x330))(*v12);
-            sub_615010(v14, (int)a1);
+            v13 = (int *)(*(int (__thiscall **)(_DWORD))(*(_DWORD *)*v11 + 0x330))(*v11); /*0x5f63f8*/
+            sub_615010(v13, a1); /*0x5f63fc*/
           }
         }
       }
     }
-    while ( v10 );
-    BSSimpleList_Clear(v11);
-    FormHeapFree((unsigned int)v11);
+    while ( v9 ); /*0x5f6403*/
+    BSSimpleList_Clear(v10); /*0x5f6407*/
+    FormHeapFree((unsigned int)v10); /*0x5f640d*/
   }
-  v15 = sub_67CF50((int ***)&dword_B3BDB0, 0xC, (int)a1);
-  v16 = v15;
-  while ( v15 )
+  v14 = sub_67CF50((int ***)&qword_B3BB2C[0xA1], 0xC, (int)a1); /*0x5f6422*/
+  v15 = v14; /*0x5f6426*/
+  while ( v14 ) /*0x5f6428*/
   {
-    v17 = (_DWORD *)*v15;
-    if ( !*v15 )
-      break;
-    v15 = (_DWORD *)v15[1];
-    sub_67B670(v17, (int)a1);
+    v16 = (int **)*v14; /*0x5f6430*/
+    if ( !*v14 ) /*0x5f6430*/
+      break; /*0x5f6434*/
+    v14 = (_DWORD *)v14[1]; /*0x5f6436*/
+    sub_67B670(v16, (int)a1); /*0x5f643a*/
   }
-  if ( v16[1] )
+  if ( v15[1] ) /*0x5f6443*/
   {
-    do
+    do /*0x5f6464*/
     {
-      v15 = *(_DWORD **)(v16[1] + 4);
-      FormHeapFree(v16[1]);
-      v16[1] = v15;
+      v14 = *(_DWORD **)(v15[1] + 4); /*0x5f6453*/
+      FormHeapFree(v15[1]); /*0x5f6457*/
+      v15[1] = v14; /*0x5f6461*/
     }
-    while ( v15 );
+    while ( v14 ); /*0x5f6464*/
   }
-  *v16 = 0;
-  FormHeapFree((unsigned int)v16);
-  process = a1->members.super.process;
-  if ( process )
+  *v15 = 0; /*0x5f6467*/
+  FormHeapFree((unsigned int)v15); /*0x5f646d*/
+  process = a1->members.super.process; /*0x5f6472*/
+  if ( process ) /*0x5f647a*/
   {
-    if ( ((int (__thiscall *)(LowProcess *))process->Unk_5C)(process) )
-      a1->members.super.process->SetCurrentPackage(a1->members.super.process, 0);
+    if ( ((int (__thiscall *)(LowProcess *))process->Unk_5C)(process) ) /*0x5f6484*/
+      a1->members.super.process->SetCurrentPackage(a1->members.super.process, 0); /*0x5f6497*/
   }
-  if ( a1->members.super.process )
-    ((void (__thiscall *)(LowProcess *, _DWORD))a1->members.super.process->Unk_B1)(a1->members.super.process, 0);
-  if ( a1->vtbl->GetCombatController(a1) )
+  if ( a1->members.super.process ) /*0x5f6499*/
+    ((void (__thiscall *)(LowProcess *, _DWORD))a1->members.super.process->Unk_B1)(a1->members.super.process, 0); /*0x5f64ac*/
+  if ( a1->vtbl->GetCombatController(a1) ) /*0x5f64b8*/
   {
-    v19 = ((int (__thiscall *)(Actor *, PlayerCharacter *))a1->vtbl->GetCombatController)(a1, a6);
-    LOBYTE(v16) = sub_61DB00(v19, a3, a4, a5, a2);
-    if ( !((unsigned __int8 (__thiscall *)(Actor *))a1->vtbl->super.super.IsDead)(a1) )
+    v18 = ((int (__thiscall *)(Actor *, PlayerCharacter *))a1->vtbl->GetCombatController)(a1, a6); /*0x5f64cd*/
+    LOBYTE(v15) = sub_61DB00(v18, a3, a4, a5, a2); /*0x5f64d8*/
+    if ( !((unsigned __int8 (__thiscall *)(Actor *))a1->vtbl->super.super.IsDead)(a1) ) /*0x5f64e4*/
     {
-      if ( (_BYTE)v16 )
+      if ( (_BYTE)v15 ) /*0x5f64ec*/
       {
-        if ( byte_B3B908 )
+        if ( unk_B3B908 ) /*0x5f64ee*/
         {
-          Name = TESObjectREFR_GetName((TESObjectREFR *)a1);
-          Interface_ConsolePrint("%.20s stops combat.", Name);
+          Name = TESObjectREFR_GetName((TESObjectREFR *)a1); /*0x5f64f8*/
+          Interface_ConsolePrint("%.20s stops combat.", Name); /*0x5f6503*/
         }
-        sub_5EAE70(a1, (int)v16, (int)v15, 0);
+        sub_5EAE70(a1, (int)v15, (int)v14, 0); /*0x5f650d*/
       }
     }
   }
-  v21 = a1->members.super.process;
-  if ( v21 )
+  v20 = a1->members.super.process; /*0x5f6512*/
+  if ( v20 ) /*0x5f651a*/
   {
-    v21->SetUnk01E(v21, 0);
-    a1->members.super.process->Unk_128(a1->members.super.process);
+    v20->SetUnk01E(v20, 0); /*0x5f6526*/
+    a1->members.super.process->Unk_128(a1->members.super.process); /*0x5f6535*/
   }
 }

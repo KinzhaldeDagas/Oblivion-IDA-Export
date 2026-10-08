@@ -1,19 +1,32 @@
 {
-  "callees_count": 67,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x52F010",
+      "0x52F330"
+    ]
+  ],
+  "chunks_sha256": "d7eb25f941fcc32f29006d8e4e516b5edab09fd1027870d7c2da983641449f92",
+  "comment_regular": "OFE topic routing verified: call adapters must retain native selector, including quest priority/order, continued quest+INFO condition grouping, speaker/target context, Random/RandomEnd and conversation reuse. A custom replacement is eligible only when returned INFO is nonnull AND lowDispositionFailure is false; otherwise invoke original stock matching path unchanged.\n\nAuthoritative Oblivion INFO selector. Scans running quest buckets by descending priority and INFOs in record order; applies conditions, conversation linkedFrom/ANY rules, reuse suppression, and Random groups. For an ambient first item (previousTopic=null), a nonempty linkedFrom list is rejected unless the target is the player. RandomEnd is latched before conversation reuse checks, so a duplicate/repeated RandomEnd INFO can terminate the scan without being eligible.",
+  "comment_repeatable": "Authoritative Oblivion INFO selector. Scans running quest buckets by descending priority and INFOs in record order; applies conditions, conversation linkedFrom/ANY rules, reuse suppression, and Random groups. For an ambient first item (previousTopic=null), a nonempty linkedFrom list is rejected unless the target is the player. RandomEnd is latched before conversation reuse checks, so a duplicate/repeated RandomEnd INFO can terminate the scan without being eligible.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_52F010",
+  "display_name": "TESTopic::SelectInfoForSpeaker",
   "end_ea": "0x52F330",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_52F010",
+  "name": "TESTopic::SelectInfoForSpeaker",
   "segment": ".text",
   "sha256": "d7eb25f941fcc32f29006d8e4e516b5edab09fd1027870d7c2da983641449f92",
   "size": 800,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x52F010",
-  "type": "int __thiscall(TESTopic *this, _BYTE *a2, Actor *a3, TESObjectREFR *a4, int a5, int a6, _DWORD *a7)",
+  "total_chunk_size": 800,
+  "type": "OblivionTopicInfo *__thiscall(TESTopic *this, bool *lowDispositionFailure, Actor *speaker, TESObjectREFR *target, bool useConversationRules, TESTopic *previousTopic, ConversationView *conversation)",
   "xrefs_from_count": 325,
   "xrefs_to_count": 4
 }

@@ -1,34 +1,63 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "actctx_loader",
+  "definition": "struct actctx_loader\n{\nACTIVATION_CONTEXT *actctx __offset(OFF64|AUTO);\nassembly_identity *dependencies __offset(OFF64|AUTO);\nunsigned int num_dependencies;\nunsigned int allocated_dependencies;\n}\n",
   "id": 18374686479671877787,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "actctx",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "ACTIVATION_CONTEXT *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dependencies",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "assembly_identity *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "num_dependencies",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "unsigned int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "allocated_dependencies",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "unsigned int"
     }
   ],
   "name": "actctx_loader",
+  "ordinal": 8798,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 16
 }

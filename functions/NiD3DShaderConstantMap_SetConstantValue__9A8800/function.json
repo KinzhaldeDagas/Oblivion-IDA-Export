@@ -1,19 +1,32 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x9A8800",
+      "0x9A8881"
+    ]
+  ],
+  "chunks_sha256": "8458cb42b7b6d3ff3d7c90fd56806bb944babd3bf57b896bc5ce2e73b04bd5e4",
+  "comment_regular": "DeferredRendering: NiD3DShaderConstantMap::SetConstantValue allocates a 0x38 entry, copies key/constant names, stores shader register at +0x1C, and adds it to the map.",
+  "comment_repeatable": "DeferredRendering: NiD3DShaderConstantMap::SetConstantValue allocates a 0x38 entry, copies key/constant names, stores shader register at +0x1C, and adds it to the map.\nDX11 writer ABI audit 2026-10-01: SetConstantValue is thiscall with FOUR raw DWORD stack arguments, RET10h. Observe the whole entry replacement operation; retained map/entry objects do not freeze contents.\nVerified naming correction 2026-10-01: the former SetConstantValue label was misleading. This allocates a0x38 entry, copies key and variable names, stores extra at+18/register+1C, sets type20000000 at+14, validates via virtual+64 and inserts via+60. It is AddPredefinedEntry, correlated with Fallout827C7AB8 and confirmed by Oblivion AddEntry9A8660 case20000000. Oblivion has FOUR arguments and no additional data-size/stride/source/copy parameters present in Fallout; do not transplant that signature. This constructs binding metadata, not a GPU constant value.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "NiD3DShaderConstantMap::SetConstantValue",
+  "display_name": "NiD3DShaderConstantMap_AddPredefinedEntry",
   "end_ea": "0x9A8881",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "NiD3DShaderConstantMap::SetConstantValue",
+  "name": "NiD3DShaderConstantMap_AddPredefinedEntry",
   "segment": ".text",
   "sha256": "8458cb42b7b6d3ff3d7c90fd56806bb944babd3bf57b896bc5ce2e73b04bd5e4",
   "size": 129,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x9A8800",
-  "type": "int __thiscall(NiD3DShaderConstantMap *this, char *keyName, int flags, int register_1, char *constName)",
+  "total_chunk_size": 129,
+  "type": "unsigned int __thiscall(NiD3DShaderConstantMap *this, const char *keyName, unsigned int extra, unsigned int shaderRegister, const char *variableName)",
   "xrefs_from_count": 56,
   "xrefs_to_count": 3
 }

@@ -1,19 +1,40 @@
 {
-  "callees_count": 305,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 165,
   "callers_count": 5,
+  "chunks": [
+    [
+      "0x465860",
+      "0x466AC6"
+    ],
+    [
+      "0x4526C0",
+      "0x4526D1"
+    ],
+    [
+      "0x9AE770",
+      "0x9AE7C5"
+    ]
+  ],
+  "chunks_sha256": "0831a03167e0b45cc0e1cb0e58bf5034b1808030feb9d5caf5076cb90998fed7",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 45,
+  "comment_repeatable": " Verified map lifecycle: allocates incomingChangesMap at +4, stores save records there, reconciles pre-load currentChangesMap at +0 after form loading, then swaps in incoming map via 464440. The map roles are based on direct stores/lookups and final pointer assignments.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 95,
   "display_name": "TESSaveLoadGame_LoadGame",
   "end_ea": "0x466AC6",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "TESSaveLoadGame_LoadGame",
   "segment": ".text",
   "sha256": "291680f6f57c949c3db62e847c638f2e31c043bd004d8b4bc41bc58c1b068cf4",
   "size": 4710,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x465860",
+  "total_chunk_size": 4812,
   "type": "void __userpurge(TESSaveLoad *this@<ecx>, double st0_0@<st7>, double st1_0@<st6>, double st2_0@<st5>, double@<st4>, double@<st3>, double@<st2>, double@<st1>, double@<st0>, int, char *Str, char, int, int, TESObjectREFR *, char, __int16, int, int, float *, int, int, int, int, int, int, int, int, int, int, char, int, int, int, int, int, __int16, int, unsigned int, unsigned int, float, float, int, int, int, int, char, int, int, int, int, int, int, unsigned int, int, int, int, int, float, float, int, int, int)",
-  "xrefs_from_count": 1740,
+  "xrefs_from_count": 1821,
   "xrefs_to_count": 5
 }

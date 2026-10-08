@@ -1,1 +1,1 @@
-EnumMonikerImpl_0
+typedef EnumMonikerImpl EnumMonikerImpl_0;

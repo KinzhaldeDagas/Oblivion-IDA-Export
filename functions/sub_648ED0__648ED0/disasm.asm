@@ -58,7 +58,7 @@
 0x648F64: mov     edx, [esp+18h+arg_0]
 0x648F68: mov     ecx, [esi+8]
 0x648F6B: push    edx
-0x648F6C: call    sub_568BB0
+0x648F6C: call    sub_568BB0; 3DTheft: package target resolver/follower bookkeeping. Runtime packages with packageFlags bit 0x800 skip normal follower extra-data side effects for actor targets.
 0x648F71: jmp     short loc_648F87
 0x648F73: mov     ebx, [esi]
 0x648F75: mov     ecx, edi
@@ -80,10 +80,10 @@
 0x648FAB: test    al, al
 0x648FAD: jnz     loc_649184
 0x648FB3: mov     ecx, [esi+2Ch]
-0x648FB6: add     ecx, 44h ; 'D'
+0x648FB6: add     ecx, 44h ; 'D'; this
 0x648FB9: jz      loc_649184
 0x648FBF: mov     edi, [esi]
-0x648FC1: call    ExtraDataList_GetReferencePointer
+0x648FC1: call    ExtraDataList_GetReferencePointer; Return the TESObjectREFR payload from ExtraReferencePointer type 0x22, or null. Provenance only: callers still select EntryData by exact TESForm first.
 0x648FC6: push    eax
 0x648FC7: mov     eax, [edi+0D0h]
 0x648FCD: mov     ecx, esi
@@ -115,12 +115,12 @@
 0x64901B: mov     eax, [esp+18h+arg_0]
 0x64901F: mov     ecx, [esi+8]
 0x649022: push    eax
-0x649023: call    sub_568BB0
+0x649023: call    sub_568BB0; 3DTheft: package target resolver/follower bookkeeping. Runtime packages with packageFlags bit 0x800 skip normal follower extra-data side effects for actor targets.
 0x649028: jmp     loc_649103
 0x64902D: mov     edi, [esp+18h+arg_0]
 0x649031: push    ebp
 0x649032: mov     ecx, edi; this
-0x649034: call    TESObjectREFR_GetParentCell
+0x649034: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x649039: mov     edx, [edi]
 0x64903B: mov     ebp, eax
 0x64903D: mov     eax, [edx+174h]
@@ -185,7 +185,7 @@
 0x6490F5: test    eax, eax
 0x6490F7: jz      short loc_649103
 0x6490F9: mov     ecx, edi
-0x6490FB: call    sub_452A60
+0x6490FB: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x649100: mov     [esi+38h], eax
 0x649103: cmp     dword ptr [esi+40h], 0
 0x649107: lea     edi, [esi+3Ch]
@@ -203,7 +203,7 @@
 0x649128: call    eax
 0x64912A: test    al, al
 0x64912C: mov     eax, [esi+44h]
-0x64912F: mov     ecx, [eax]; this
+0x64912F: mov     ecx, [eax]; reference
 0x649131: jz      short loc_649136
 0x649133: push    ecx
 0x649134: jmp     short loc_64916D
@@ -211,7 +211,7 @@
 0x649138: push    offset ??_R0?AVTESNPC@@@8; struct TypeDescriptor *
 0x64913D: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x649142: push    0; int
-0x649144: call    TESObjectREFR_GetOwner
+0x649144: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x649149: push    eax; void *
 0x64914A: call    OblivionDynamicCast
 0x64914F: add     esp, 14h
@@ -219,7 +219,7 @@
 0x649154: jz      short loc_649179
 0x649156: mov     ebx, [esi]
 0x649158: push    eax
-0x649159: mov     ecx, offset ActorProcessManager_ptr
+0x649159: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x64915E: call    sub_675220
 0x649163: mov     edx, [ebx+0D0h]
 0x649169: push    eax

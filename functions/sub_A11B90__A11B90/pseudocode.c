@@ -1,4 +1,4 @@
-BSStringT *sub_A11B90()
+NiRTTI *sub_A11B90()
 {
-  return sub_70E220(&stru_B46904, "BoltShader", (int)&ImageSpaceShaderRTTI___);
+  return NiRTTI_Constructor(&stru_B46904, "BoltShader", &MEMORY[0xB4257C]); /*0xa11ba4*/
 }

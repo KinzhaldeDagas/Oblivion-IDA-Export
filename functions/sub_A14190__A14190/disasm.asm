@@ -8,6 +8,6 @@
 0xA141A1: push    24h ; '$'
 0xA141A3: push    0
 0xA141A5: push    offset aHkclass; "hkClass"
-0xA141AA: mov     ecx, offset dword_BA8788
+0xA141AA: mov     ecx, offset unk_BA8788
 0xA141AF: call    sub_90D190
 0xA141B4: retn

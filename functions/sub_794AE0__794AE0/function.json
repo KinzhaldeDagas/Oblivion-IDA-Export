@@ -1,19 +1,32 @@
 {
-  "callees_count": 42,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 10,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x794AE0",
+      "0x794DFF"
+    ]
+  ],
+  "chunks_sha256": "2acc8a28a4f4b9bbbf853d0b0b3001f9753afb8965215848bf324e4a0924e2a9",
+  "comment_regular": "Oblivion CPU indexed-geometry wind pass: transforms each referenced original vertex through its primary matrix, blends by primary weight, and computes each vertex once.\n[SpeedTreeOBSE v171] Optional paired CPU consumer detours the exact six-byte prefix83EC3C568BF1. Native fallback reproduces SUB ESP,3C / PUSH ESI / MOV ESI,ECX and resumes794AE6; native RET4 consumes one signed-short LOD argument in a four-byte slot. Only method1 plus matching owned branch/frond canonical pair metadata uses the extension. It snapshots current/original coordinates and selected LOD strips, applies reference first then second matrix interpolation once per vertex, commits coordinates, then sets valid+12. Unowned or other methods use the stock body. Invalid owned input stays invalid and returnsfalse. Reference/synthetic checks passed; actual detour/game execution UNVERIFIED.",
+  "comment_repeatable": "Oblivion CPU indexed-geometry wind pass: transforms each referenced original vertex through its primary matrix, blends by primary weight, and computes each vertex once.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_794AE0",
+  "display_name": "OB_CIndexedGeometry_ComputeWindEffect_010201A0",
   "end_ea": "0x794DFF",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_794AE0",
+  "name": "OB_CIndexedGeometry_ComputeWindEffect_010201A0",
   "segment": ".text",
   "sha256": "2acc8a28a4f4b9bbbf853d0b0b3001f9753afb8965215848bf324e4a0924e2a9",
   "size": 799,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x794AE0",
-  "type": "char __thiscall(int this, __int16)",
+  "total_chunk_size": 799,
+  "type": "bool __thiscall(OB_CIndexedGeometry_010201A0 *this, __int16 lodLevel)",
   "xrefs_from_count": 309,
   "xrefs_to_count": 2
 }

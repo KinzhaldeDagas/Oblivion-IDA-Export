@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4F5010",
+      "0x4F5060"
+    ]
+  ],
+  "chunks_sha256": "89b21ce552cf73709b7129e34e88132d4298946cfd0fefb08aced74213961bd9",
+  "comment_regular": "GetDeadCount_Eval uses its Actor Base parameter to query the engine's global form-to-dead-count list. The helper returns the matching 16-bit count or 0 when no entry exists; no subject reference is required.",
+  "comment_repeatable": "GetDeadCount_Eval uses its Actor Base parameter to query the engine's global form-to-dead-count list. The helper returns the matching 16-bit count or 0 when no entry exists; no subject reference is required.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_4F5010",
+  "display_name": "GetDeadCount_Eval",
   "end_ea": "0x4F5060",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4F5010",
+  "name": "GetDeadCount_Eval",
   "segment": ".text",
   "sha256": "89b21ce552cf73709b7129e34e88132d4298946cfd0fefb08aced74213961bd9",
   "size": 80,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4F5010",
-  "type": "char __cdecl(int, int, int, double *)",
+  "total_chunk_size": 80,
+  "type": "char __cdecl(TESObjectREFR *subject, TESForm *actorBase, TESForm *param2, double *value)",
   "xrefs_from_count": 31,
-  "xrefs_to_count": 2
+  "xrefs_to_count": 1
 }

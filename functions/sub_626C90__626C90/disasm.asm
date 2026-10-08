@@ -3,7 +3,6 @@
 0x626C97: mov     eax, ecx
 0x626C99: jz      short loc_626CAB
 0x626C9B: jmp     short loc_626CA0
-0x626C9D: align 10h
 0x626CA0: cmp     [eax], edx
 0x626CA2: jz      short locret_626CB4
 0x626CA4: mov     eax, [eax+4]

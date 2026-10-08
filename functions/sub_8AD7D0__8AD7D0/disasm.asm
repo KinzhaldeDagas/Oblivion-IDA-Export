@@ -1,4 +1,4 @@
-0x8AD7D0: push    ebp
+0x8AD7D0: push    ebp; TES4 authoritative: low-level character proxy move loop uses the same active-surface solver for sliding/corrected motion after manifold constraints are built.
 0x8AD7D1: mov     ebp, esp
 0x8AD7D3: and     esp, 0FFFFFFF0h
 0x8AD7D6: sub     esp, 134h
@@ -23,7 +23,7 @@
 0x8AD820: mov     [ecx+4], eax
 0x8AD823: add     ecx, 10h
 0x8AD826: mov     [edi+1A4h], ecx
-0x8AD82C: mov     eax, [ebp+arg_0]
+0x8AD82C: mov     eax, [ebp+moveInput]
 0x8AD82F: fld     dword ptr [eax+8]
 0x8AD832: mov     ecx, [esi+30h]
 0x8AD835: mov     edx, [ecx+1Ch]
@@ -31,7 +31,7 @@
 0x8AD83C: fld     dword ptr [esi+5Ch]
 0x8AD83F: movaps  xmm0, xmmword ptr [edx+30h]
 0x8AD843: fadd    dword ptr [esi+58h]
-0x8AD846: movaps  [esp+140h+var_110], xmm0
+0x8AD846: movaps  [esp+140h+currentPos], xmm0
 0x8AD84B: mov     [esp+140h+var_E0], 3C23D70Ah
 0x8AD853: mov     [esp+140h+var_114], 0
 0x8AD85B: fstp    [esp+140h+var_E0+4]
@@ -40,9 +40,8 @@
 0x8AD867: test    ah, 41h
 0x8AD86A: jnz     loc_8AE071
 0x8AD870: jmp     short loc_8AD880
-0x8AD872: movaps  xmm0, [esp+140h+var_110]
+0x8AD872: movaps  xmm0, [esp+140h+currentPos]
 0x8AD877: jmp     short loc_8AD880
-0x8AD879: align 10h
 0x8AD880: mov     ecx, [esp+140h+var_114]
 0x8AD884: cmp     ecx, ds:0B2EFB8h
 0x8AD88A: jge     loc_8AE071
@@ -59,26 +58,26 @@
 0x8AD8BE: mov     [esp+140h+var_C0], eax
 0x8AD8C5: mov     edx, [esp+140h+var_C0]
 0x8AD8CC: mov     [ecx+4], edx
-0x8AD8CF: movaps  xmm0, [esp+140h+var_110]
+0x8AD8CF: movaps  xmm0, [esp+140h+currentPos]
 0x8AD8D4: add     ecx, 0Ch
 0x8AD8D7: mov     [edi+1A4h], ecx
-0x8AD8DD: mov     ebx, [ebp+arg_C]
+0x8AD8DD: mov     ebx, [ebp+collectorState]
 0x8AD8E0: movaps  xmm1, xmmword ptr [esi+20h]
-0x8AD8E4: mov     edi, [ebp+arg_8]
+0x8AD8E4: mov     edi, [ebp+collector]
 0x8AD8E7: push    ebx
 0x8AD8E8: xor     eax, eax
 0x8AD8EA: mov     [edi+14h], eax
 0x8AD8ED: mov     ecx, 7F7FFFFFh
 0x8AD8F2: mov     [edi+4], ecx
 0x8AD8F5: push    edi
-0x8AD8F6: lea     edx, [esp+148h+var_F0]
+0x8AD8F6: lea     edx, [esp+148h+targetPos]
 0x8AD8FA: mov     [ebx+14h], eax
 0x8AD8FD: mov     [ebx+4], ecx
 0x8AD900: mov     ecx, [esi+30h]
 0x8AD903: push    edx
 0x8AD904: addps   xmm0, xmm1
-0x8AD907: lea     edx, [esp+14Ch+var_110]
-0x8AD90B: movaps  [esp+14Ch+var_F0], xmm0
+0x8AD907: lea     edx, [esp+14Ch+currentPos]
+0x8AD90B: movaps  [esp+14Ch+targetPos], xmm0
 0x8AD910: mov     eax, [ecx]
 0x8AD912: push    edx
 0x8AD913: call    dword ptr [eax+30h]
@@ -86,15 +85,15 @@
 0x8AD919: test    eax, eax
 0x8AD91B: jle     short loc_8AD937
 0x8AD91D: mov     ecx, edi
-0x8AD91F: call    sub_8AF890
+0x8AD91F: call    hkpCdPointCollector_SortHitsByDistance; Initial cast returned hits: sort by entry+0x1C, then rewrite hit keys relative to movement direction.
 0x8AD924: mov     ecx, [edi+10h]
 0x8AD927: lea     eax, [esi+20h]
-0x8AD92A: push    eax
+0x8AD92A: push    eax; moveDir
 0x8AD92B: mov     eax, [edi+14h]
-0x8AD92E: push    eax
-0x8AD92F: push    ecx
+0x8AD92E: push    eax; count
+0x8AD92F: push    ecx; entries
 0x8AD930: mov     ecx, esi
-0x8AD932: call    sub_8ABD40
+0x8AD932: call    hkpCdPointHits_RewriteSortKeyFromMoveNormal; TES4 authoritative: for each 0x30-byte hit, copies original entry+0x1C cast fraction into entry+0x0C, then rewrites entry+0x1C as -dot(moveDir, normal) * originalFraction.
 0x8AD937: mov     edx, ds:0BA9DE4h
 0x8AD93D: mov     ecx, large fs:2Ch
 0x8AD944: mov     eax, [ecx+edx*4]
@@ -117,7 +116,7 @@
 0x8AD989: push    edi
 0x8AD98A: push    ebx
 0x8AD98B: mov     ecx, esi
-0x8AD98D: call    dword ptr [edx+8]
+0x8AD98D: call    dword ptr [edx+8]; Virtual manifold update consumes the sorted/rekeyed collector hits.
 0x8AD990: mov     eax, [esi+64h]
 0x8AD993: mov     ecx, [esi+78h]
 0x8AD996: lea     edi, [eax+ecx+0Ah]
@@ -160,8 +159,7 @@
 0x8ADA13: mov     [esp+140h+var_134], eax
 0x8ADA17: mov     [esp+140h+var_12C], eax
 0x8ADA1B: jmp     short loc_8ADA20
-0x8ADA1D: align 10h
-0x8ADA20: mov     ecx, [ebp+arg_0]
+0x8ADA20: mov     ecx, [ebp+moveInput]
 0x8ADA23: fld     dword ptr [ecx+8]
 0x8ADA26: mov     edx, [esp+140h+var_12C]
 0x8ADA2A: fsub    [esp+140h+var_130]
@@ -183,7 +181,7 @@
 0x8ADA54: push    eax; float
 0x8ADA55: lea     edi, [esp+148h+var_124]
 0x8ADA59: mov     eax, ebx
-0x8ADA5B: call    sub_8AC3C0
+0x8ADA5B: call    hkpCharacterProxy_ProjectManifoldContactToSurfaceConstraint; TES4 authoritative: converts a 0x40-byte manifold/contact surface into a support surface constraint when its dot against the up/support basis is between 0.01 and the proxy slope limit.
 0x8ADA60: mov     edx, [esp+148h+var_12C]
 0x8ADA64: mov     ecx, [esp+148h+var_134]
 0x8ADA68: mov     eax, [esi+78h]
@@ -343,12 +341,12 @@
 0x8ADD17: dec     edi
 0x8ADD18: jns     short loc_8ADD00
 0x8ADD1A: mov     ecx, [esp+140h+var_12C]
-0x8ADD1E: lea     edx, [esp+140h+var_A0]
+0x8ADD1E: lea     edx, [esp+140h+moveDir]
 0x8ADD25: push    edx
 0x8ADD26: lea     eax, [esp+144h+var_78+8]
 0x8ADD2D: push    eax
 0x8ADD2E: mov     [esp+148h+var_7C], ecx
-0x8ADD35: call    sub_8EC790
+0x8ADD35: call    hkSurfaceConstraintUtil_CalcSupportMotion; Corrected movement path: active-surface solver computes sliding motion from manifold surface constraints.
 0x8ADD3A: mov     edi, large fs:2Ch
 0x8ADD41: mov     ebx, ds:0BA9DE4h
 0x8ADD47: mov     eax, [edi+ebx*4]
@@ -367,12 +365,12 @@
 0x8ADD81: mov     [ecx+4], eax
 0x8ADD84: add     ecx, 0Ch
 0x8ADD87: mov     [edx+1A4h], ecx
-0x8ADD8D: mov     eax, [ebp+arg_4]
-0x8ADD90: mov     ecx, [ebp+arg_0]
-0x8ADD93: push    eax
-0x8ADD94: push    ecx
-0x8ADD95: mov     ecx, esi
-0x8ADD97: call    sub_8AC6A0
+0x8ADD8D: mov     eax, [ebp+contextVec]
+0x8ADD90: mov     ecx, [ebp+moveInput]
+0x8ADD93: push    eax; surfaceMotion
+0x8ADD94: push    ecx; moveInput
+0x8ADD95: mov     ecx, esi; this
+0x8ADD97: call    hkpCharacterProxy_ApplyContactEntityInteractions; Applies entity/contact interactions after surface constraint motion is computed and before corrected cast move.
 0x8ADD9C: mov     eax, [edi+ebx*4]
 0x8ADD9F: mov     edx, [eax+1A4h]
 0x8ADDA5: cmp     edx, [eax+1A8h]
@@ -387,7 +385,7 @@
 0x8ADDD0: add     ecx, 0Ch
 0x8ADDD3: mov     [edi+1A4h], ecx
 0x8ADDD9: movaps  xmm0, xmmword ptr ds:0A372D0h
-0x8ADDE0: movaps  xmm1, [esp+140h+var_A0]
+0x8ADDE0: movaps  xmm1, [esp+140h+moveDir]; After surface solve, compares requested movement against solved movement; only then performs a corrected cast if the vector changed enough.
 0x8ADDE8: movaps  xmm2, xmmword ptr [esi+20h]
 0x8ADDEC: subps   xmm2, xmm1
 0x8ADDEF: andps   xmm2, xmm0
@@ -402,18 +400,18 @@
 0x8ADE12: inc     cl
 0x8ADE14: mov     [esp+140h+var_F1], cl
 0x8ADE18: jnz     loc_8AE0E2
-0x8ADE1E: mov     edi, [ebp+arg_8]
-0x8ADE21: movaps  xmm0, [esp+140h+var_110]
+0x8ADE1E: mov     edi, [ebp+collector]
+0x8ADE21: movaps  xmm0, [esp+140h+currentPos]
 0x8ADE26: push    0
 0x8ADE28: push    edi
-0x8ADE29: lea     eax, [esp+148h+var_F0]
+0x8ADE29: lea     eax, [esp+148h+targetPos]
 0x8ADE2D: mov     dword ptr [edi+14h], 0
 0x8ADE34: mov     dword ptr [edi+4], 7F7FFFFFh
 0x8ADE3B: mov     ecx, [esi+30h]
 0x8ADE3E: push    eax
 0x8ADE3F: addps   xmm0, xmm1
-0x8ADE42: lea     eax, [esp+14Ch+var_110]
-0x8ADE46: movaps  [esp+14Ch+var_F0], xmm0
+0x8ADE42: lea     eax, [esp+14Ch+currentPos]
+0x8ADE46: movaps  [esp+14Ch+targetPos], xmm0
 0x8ADE4B: mov     edx, [ecx]
 0x8ADE4D: push    eax
 0x8ADE4E: call    dword ptr [edx+30h]
@@ -421,27 +419,26 @@
 0x8ADE54: test    eax, eax
 0x8ADE56: jle     loc_8AE0DA
 0x8ADE5C: mov     ecx, edi
-0x8ADE5E: call    sub_8AF890
+0x8ADE5E: call    hkpCdPointCollector_SortHitsByDistance; TES4 authoritative: sorts collector contact hits by entry+0x1C when more than one hit is present.
 0x8ADE63: mov     edx, [edi+14h]
 0x8ADE66: mov     eax, [edi+10h]
-0x8ADE69: lea     ecx, [esp+140h+var_A0]
-0x8ADE70: push    ecx
-0x8ADE71: push    edx
-0x8ADE72: push    eax
+0x8ADE69: lea     ecx, [esp+140h+moveDir]
+0x8ADE70: push    ecx; moveDir
+0x8ADE71: push    edx; count
+0x8ADE72: push    eax; entries
 0x8ADE73: mov     ecx, esi
-0x8ADE75: call    sub_8ABD40
+0x8ADE75: call    hkpCdPointHits_RewriteSortKeyFromMoveNormal; TES4 authoritative: for each 0x30-byte hit, copies original entry+0x1C cast fraction into entry+0x0C, then rewrites entry+0x1C as -dot(moveDir, normal) * originalFraction.
 0x8ADE7A: mov     ebx, [edi+10h]
-0x8ADE7D: push    ebx
-0x8ADE7E: mov     ecx, esi
-0x8ADE80: call    sub_8AC640
+0x8ADE7D: push    ebx; candidate
+0x8ADE7E: mov     ecx, esi; this
+0x8ADE80: call    hkpCharacterProxy_FindMatchingManifoldContact; TES4 authoritative: searches existing manifold entries for a candidate 0x30-byte contact with match error < 0.1; returns index or 0xFFFFFFFF.
 0x8ADE85: cmp     eax, 0FFFFFFFFh
-0x8ADE88: jnz     loc_8ADF0F
+0x8ADE88: jnz     loc_8ADF0F; If the corrected cast hit does not match an existing manifold entry, vanilla appends the first 0x30-byte hit to the manifold.
 0x8ADE8E: mov     eax, [esi+84h]
 0x8ADE94: dec     eax
 0x8ADE95: mov     [esp+140h+var_134], eax
 0x8ADE99: js      short loc_8ADEB9
 0x8ADE9B: jmp     short loc_8ADEA0
-0x8ADE9D: align 10h
 0x8ADEA0: mov     ecx, [esi+80h]
 0x8ADEA6: mov     edx, [esp+140h+var_134]
 0x8ADEAA: mov     ecx, [ecx+edx*4]
@@ -470,7 +467,7 @@
 0x8ADEE9: movaps  xmm0, xmmword ptr [ebx]
 0x8ADEEC: movaps  xmmword ptr [eax], xmm0
 0x8ADEEF: movaps  xmm0, xmmword ptr [ebx+10h]
-0x8ADEF3: movaps  xmmword ptr [eax+10h], xmm0
+0x8ADEF3: movaps  xmmword ptr [eax+10h], xmm0; Copies full 0x30-byte contact entry into manifold, including normal, collidable refs, and shape/filter keys.
 0x8ADEF7: mov     edx, [ebx+20h]
 0x8ADEFA: mov     [eax+20h], edx
 0x8ADEFD: mov     ecx, [ebx+24h]
@@ -480,9 +477,9 @@
 0x8ADF09: mov     ecx, [ebx+2Ch]
 0x8ADF0C: mov     [eax+2Ch], ecx
 0x8ADF0F: mov     edx, [edi+10h]
-0x8ADF12: push    edx
-0x8ADF13: mov     ecx, esi
-0x8ADF15: call    sub_8AC640
+0x8ADF12: push    edx; candidate
+0x8ADF13: mov     ecx, esi; this
+0x8ADF15: call    hkpCharacterProxy_FindMatchingManifoldContact; TES4 authoritative: searches existing manifold entries for a candidate 0x30-byte contact with match error < 0.1; returns index or 0xFFFFFFFF.
 0x8ADF1A: cmp     eax, 0FFFFFFFFh
 0x8ADF1D: jz      short loc_8ADF84
 0x8ADF1F: nop
@@ -517,22 +514,22 @@
 0x8ADF6C: test    eax, eax
 0x8ADF6E: jle     loc_8AE0DA
 0x8ADF74: mov     ecx, [edi+10h]
-0x8ADF77: push    ecx
-0x8ADF78: mov     ecx, esi
-0x8ADF7A: call    sub_8AC640
+0x8ADF77: push    ecx; candidate
+0x8ADF78: mov     ecx, esi; this
+0x8ADF7A: call    hkpCharacterProxy_FindMatchingManifoldContact; TES4 authoritative: searches existing manifold entries for a candidate 0x30-byte contact with match error < 0.1; returns index or 0xFFFFFFFF.
 0x8ADF7F: cmp     eax, 0FFFFFFFFh
 0x8ADF82: jnz     short loc_8ADF20
-0x8ADF84: lea     edx, [esp+140h+var_110]
-0x8ADF88: push    edx
-0x8ADF89: lea     eax, [esp+144h+var_F0]
-0x8ADF8D: push    eax
-0x8ADF8E: push    edi
-0x8ADF8F: lea     ecx, [esp+14Ch+var_A0]
-0x8ADF96: push    ecx
-0x8ADF97: mov     ecx, esi
-0x8ADF99: call    sub_8AC530
+0x8ADF84: lea     edx, [esp+140h+currentPos]
+0x8ADF88: push    edx; currentPos
+0x8ADF89: lea     eax, [esp+144h+targetPos]
+0x8ADF8D: push    eax; targetPos
+0x8ADF8E: push    edi; collector
+0x8ADF8F: lea     ecx, [esp+14Ch+moveDir]
+0x8ADF96: push    ecx; moveVec
+0x8ADF97: mov     ecx, esi; this
+0x8ADF99: call    hkpCharacterProxy_ComputeCastMoveFraction; TES4 authoritative: after a new cast hit, computes remaining time/move fraction from the first collector hit and blends the cast endpoint toward the hit point.
 0x8ADF9E: fsubr   [esp+140h+var_130]
-0x8ADFA2: movaps  xmm1, [esp+140h+var_A0]
+0x8ADFA2: movaps  xmm1, [esp+140h+moveDir]
 0x8ADFAA: mov     ebx, [esp+140h+var_128]
 0x8ADFAE: fstp    [esp+140h+var_130]
 0x8ADFB2: movaps  xmmword ptr [esi+20h], xmm1
@@ -597,10 +594,10 @@
 0x8AE075: movaps  xmm0, [esp+140h+anonymous_1]
 0x8AE07D: push    ecx; float
 0x8AE07E: mov     ecx, [esi+30h]
-0x8AE081: lea     edx, [esp+144h+var_110]
+0x8AE081: lea     edx, [esp+144h+currentPos]
 0x8AE085: push    edx; int
 0x8AE086: movaps  xmmword ptr [esi+10h], xmm0
-0x8AE08A: call    sub_8ABAC0
+0x8AE08A: call    sub_8ABAC0; Low-level position writer: stores target at object+0xA0 and updates Havok transform when shape data exists.
 0x8AE08F: mov     ecx, large fs:2Ch
 0x8AE096: mov     edx, ds:0BA9DE4h
 0x8AE09C: mov     eax, [ecx+edx*4]
@@ -622,10 +619,10 @@
 0x8AE0D4: mov     esp, ebp
 0x8AE0D6: pop     ebp
 0x8AE0D7: retn    10h
-0x8AE0DA: movaps  xmm1, [esp+140h+var_A0]
-0x8AE0E2: movaps  xmm0, [esp+140h+var_110]
+0x8AE0DA: movaps  xmm1, [esp+140h+moveDir]
+0x8AE0E2: movaps  xmm0, [esp+140h+currentPos]
 0x8AE0E7: fld     [esp+140h+var_130]
 0x8AE0EB: fsub    [esp+140h+var_80]
 0x8AE0F2: addps   xmm0, xmm1
-0x8AE0F5: movaps  [esp+140h+var_110], xmm0
+0x8AE0F5: movaps  [esp+140h+currentPos], xmm0; Final low-level position advances by the solved constrained motion vector; no separate ledge step-up/mantle helper is invoked here.
 0x8AE0FA: jmp     loc_8ADFAA

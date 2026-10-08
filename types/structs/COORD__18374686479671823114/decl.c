@@ -1,1 +1,1 @@
-COORD
+typedef tagCOORD COORD;

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x79A390",
-    "line": "push    ecx",
+    "line": "push    ecx; SpeedTree decode: stock CFrondEngine::ComputeBlade. For each blade, emits one strip over the shared highest-LOD vertices for the requested LOD. Fade-hint storage from later 4.1 is not visible in this compact stock writer path.",
     "mnemonic": "push",
     "size": 1
   },
@@ -67,19 +67,19 @@
   },
   {
     "ea": "0x79A3AC",
-    "line": "mov     edi, [esp+14h+arg_8]",
+    "line": "mov     edi, dword ptr [esp+14h+stripLength]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79A3B0",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79A3B2",
-    "line": "call    sub_799EE0",
+    "line": "call    OB_stVector_SFrondVertex_Size_010201A0; Oblivion-authoritative size query for the SFrondVertex vector. Computes (end-begin)/0x38; returns zero when begin is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x79A3BC",
-    "line": "mov     [esp+14h+arg_8], eax",
+    "line": "mov     dword ptr [esp+14h+stripLength], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x79A3DC",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x79A3E2",
-    "line": "call    sub_799EE0",
+    "line": "call    OB_stVector_SFrondVertex_Size_010201A0; Oblivion-authoritative size query for the SFrondVertex vector. Computes (end-begin)/0x38; returns zero when begin is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -204,20 +204,14 @@
     "size": 2
   },
   {
-    "ea": "0x79A3ED",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x79A3F0",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79A3F2",
-    "line": "call    sub_799EE0",
+    "line": "call    OB_stVector_SFrondVertex_Size_010201A0; Oblivion-authoritative size query for the SFrondVertex vector. Computes (end-begin)/0x38; returns zero when begin is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,7 +247,7 @@
   },
   {
     "ea": "0x79A407",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -265,7 +259,7 @@
   },
   {
     "ea": "0x79A40C",
-    "line": "call    sub_799EE0",
+    "line": "call    OB_stVector_SFrondVertex_Size_010201A0; Oblivion-authoritative size query for the SFrondVertex vector. Computes (end-begin)/0x38; returns zero when begin is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -289,13 +283,13 @@
   },
   {
     "ea": "0x79A417",
-    "line": "mov     eax, [esp+14h+arg_8]",
+    "line": "mov     eax, dword ptr [esp+14h+stripLength]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79A41B",
-    "line": "mov     ecx, [esp+14h+arg_0]",
+    "line": "mov     ecx, dword ptr [esp+14h+lodLevel]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -307,31 +301,31 @@
   },
   {
     "ea": "0x79A423",
-    "line": "push    eax",
+    "line": "push    eax; stripLength",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79A424",
-    "line": "push    ebx",
+    "line": "push    ebx; strip",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79A425",
-    "line": "push    ecx",
+    "line": "push    ecx; lodLevel",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79A426",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79A428",
-    "line": "call    sub_796100",
+    "line": "call    OB_CIndexedGeometry_AddStrip_010201A0; OBLIVION AUTHORITY (2026-08-30): CIndexedGeometry::AddStrip receives ownership of a caller FormHeap-allocated unsigned-short array (for example allocation at 0x78F477 before call 0x78F48C), appends its unsigned-short length and pointer to per-LOD nested vectors, then adds the 32-bit result of zero_extend(stripLength)-2 to the per-LOD triangle total. There is no clamp in this function; callers are expected to provide a valid strip length (at least two). RT4.1's later contiguous vector<int> representation is contrast only and was not projected onto Oblivion.",
     "mnemonic": "call",
     "size": 5
   },

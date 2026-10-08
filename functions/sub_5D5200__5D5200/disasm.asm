@@ -25,9 +25,9 @@
 0x5D524A: mov     esi, eax
 0x5D524C: call    InterfaceManager_GetDepth
 0x5D5251: fstp    [esp+120h+var_10C]
-0x5D5255: mov     ecx, [esi+68h]; TileWindow *
+0x5D5255: mov     ecx, [esi+68h]; this
 0x5D5258: push    offset aDataMenusDialo; "Data\\Menus\\dialog\\SigilStone.xml"
-0x5D525D: call    Menu_LoadXML
+0x5D525D: call    Tile__ReadFile; Verified: SDK ReadXML entry. Builds named tree under receiver via 0x590330, connects/evaluates traits via 0x58CF40, registers subtemplates with owning Menu, frees build storage, refreshes returned subtree via 0x58FBA0. Returns first created tile. Fallout analogue 0x827E2588; cache/cleanup differs.
 0x5D5262: mov     ebx, eax
 0x5D5264: mov     ecx, ebx
 0x5D5266: call    Tile_GetParentMenu
@@ -89,10 +89,10 @@
 0x5D5326: jp      short loc_5D533C
 0x5D5328: fld     [esp+120h+var_10C]
 0x5D532C: push    ecx
-0x5D532D: fstp    [esp+124h+var_124]; a3
-0x5D5330: push    0FABh; a2
+0x5D532D: fstp    [esp+124h+var_124]; value
+0x5D5330: push    0FABh; propertyCode
 0x5D5335: mov     ecx, ebx; this
-0x5D5337: call    Tile_SetFloat
+0x5D5337: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D533C: mov     dword ptr ds:0B3B718h, 0
 0x5D5346: call    EffectSetting_Create
 0x5D534B: mov     ebp, eax
@@ -100,10 +100,10 @@
 0x5D5354: mov     ecx, [esi+6Ch]
 0x5D5357: test    ecx, ecx
 0x5D5359: jz      short loc_5D536C
-0x5D535B: call    BSSimpleList_Clear
+0x5D535B: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x5D5360: mov     ecx, [esi+6Ch]
 0x5D5363: push    ecx
-0x5D5364: call    FormHeapFree
+0x5D5364: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5D5369: add     esp, 4
 0x5D536C: push    1
 0x5D536E: push    0
@@ -128,7 +128,7 @@
 0x5D53AC: push    0
 0x5D53AE: push    3
 0x5D53B0: add     ecx, 78h ; 'x'
-0x5D53B3: call    EffectItemList_GetStrongestItem
+0x5D53B3: call    EffectItemList_GetStrongestItem; this=EffectItemList; args are rangeFilter (0 self,1 touch,2 target,3 any) and requireArea. Returns effective (flag 0x400000 clear) qualifying item with greatest truncated MagickaCostForCaster(item,null).
 0x5D53B8: test    eax, eax
 0x5D53BA: jz      short loc_5D5405
 0x5D53BC: mov     eax, [esi+28h]
@@ -155,9 +155,9 @@
 0x5D5405: fld1
 0x5D5407: push    ecx
 0x5D5408: mov     ecx, [esi+64h]; this
-0x5D540B: fstp    [esp+124h+var_124]; a3
-0x5D540E: push    0FA1h; a2
-0x5D5413: call    Tile_SetFloat
+0x5D540B: fstp    [esp+124h+var_124]; value
+0x5D540E: push    0FA1h; propertyCode
+0x5D5413: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D5418: mov     edx, [ebp+0]
 0x5D541B: mov     eax, [edx+10h]
 0x5D541E: push    1

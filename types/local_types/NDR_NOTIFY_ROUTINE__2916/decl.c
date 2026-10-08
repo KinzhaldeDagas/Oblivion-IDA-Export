@@ -1,1 +1,1 @@
-NDR_NOTIFY_ROUTINE
+typedef void (*NDR_NOTIFY_ROUTINE)(void);

@@ -1,7 +1,7 @@
-int __stdcall sub_4A47A0(int a1)
+TESRegionDataWeather *__stdcall TESRegionDataManager_GetDataID3(TESRegionData *data)
 {
-  if ( a1 && (*(int (__thiscall **)(int))(*(_DWORD *)a1 + 0xC))(a1) == 3 )
-    return a1;
+  if ( data && ((int (__thiscall *)(TESRegionData *))data->vtable->unknown0C)(data) == 3 ) /*0x4a47b5*/
+    return (TESRegionDataWeather *)data; /*0x4a47b7*/
   else
-    return 0;
+    return 0; /*0x4a47bd*/
 }

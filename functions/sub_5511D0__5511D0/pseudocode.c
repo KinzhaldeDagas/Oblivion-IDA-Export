@@ -1,24 +1,27 @@
-double __thiscall sub_5511D0(unsigned int *this)
+// Verified Oblivion: row-major sum of coefficient squares over rows*columns. Each square and accumulator are stored as float; result returned through x87. Storage check only establishes nonempty vector, not index < storage length. Requires consistent matrix dimensions/storage. Used by Combine and sub_6EE270.
+float __thiscall FaceGenMatrix_SumSquares(const FaceGenMatrix *this)
 {
   unsigned int i; // ebx
   unsigned int j; // edi
-  int v4; // eax
+  float *begin; // eax
   unsigned int v5; // edx
-  float v7; // [esp+8h] [ebp-8h]
-  float v8; // [esp+Ch] [ebp-4h]
+  float v8; // [esp+8h] [ebp-8h]
+  float v9; // [esp+Ch] [ebp-4h]
+  float v10; // [esp+Ch] [ebp-4h]
 
-  v7 = 0.0;
-  for ( i = 0; i < *this; ++i )
+  v8 = 0.0; /*0x5511d7*/
+  for ( i = 0; i < this->rows; ++i ) /*0x5511df*/
   {
-    for ( j = 0; j < *(this + 1); v7 = v8 + v7 )
+    for ( j = 0; j < this->columns; v8 = v10 + v8 ) /*0x5511e6*/
     {
-      v4 = *(this + 3);
-      if ( !v4 || !((int)(*(this + 4) - v4) >> 2) )
-        _invalid_parameter_noinfo();
-      v5 = j + i * *(this + 1);
-      ++j;
-      v8 = *(float *)(*(this + 3) + 4 * v5) * *(float *)(*(this + 3) + 4 * v5);
+      begin = this->begin; /*0x5511f0*/
+      if ( !begin || !(this->end - begin) ) /*0x5511fc*/
+        _invalid_parameter_noinfo(i, j, (int)this); /*0x551201*/
+      v5 = j + i * this->columns; /*0x55120f*/
+      ++j; /*0x551211*/
+      v9 = this->begin[v5]; /*0x55121a*/
+      v10 = v9 * v9; /*0x551224*/
     }
   }
-  return v7;
+  return v8; /*0x551242*/
 }

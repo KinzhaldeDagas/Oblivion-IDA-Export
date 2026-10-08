@@ -42,10 +42,10 @@
 0x7280C9: mov     [esi+0Ch], eax
 0x7280CC: mov     ecx, [edi+10h]
 0x7280CF: mov     edx, [edi+0Ch]
-0x7280D2: push    ecx; Size
-0x7280D3: push    edx; Src
-0x7280D4: push    eax; Dst
-0x7280D5: call    _memcpy
+0x7280D2: push    ecx; byteCount
+0x7280D3: push    edx; source
+0x7280D4: push    eax; destination
+0x7280D5: call    _memcpy;
 0x7280DA: mov     eax, [edi+10h]
 0x7280DD: add     esp, 10h
 0x7280E0: mov     [esi+10h], eax
@@ -61,3 +61,15 @@
 0x7280FB: pop     ebx
 0x7280FC: add     esp, 10h
 0x7280FF: retn    4
+0x9CA420: mov     eax, [ebp-10h]
+0x9CA423: push    eax
+0x9CA424: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA429: pop     ecx
+0x9CA42A: retn
+0x9CA42B: mov     edx, [esp+arg_4]
+0x9CA42F: lea     eax, [edx-10h]
+0x9CA432: mov     ecx, [edx-14h]
+0x9CA435: xor     ecx, eax
+0x9CA437: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA43C: mov     eax, offset stru_AF2B24
+0x9CA441: jmp     ___CxxFrameHandler3

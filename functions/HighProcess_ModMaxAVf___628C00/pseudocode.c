@@ -1,15 +1,12 @@
-int __thiscall HighProcess_ModMaxAVf_(float *this, int a2, int a3, float a4)
+void __thiscall HighProcess_ModMaxAVf_(MiddleLowProcess *this, int context, int actorValue, float delta)
 {
-  int result; // eax
-
-  result = MiddleProcess_ModAVfMax(this, a2, a3, a4);
-  if ( a3 == 0xB )
+  MiddleProcess_ModAVfMax(this, context, actorValue, delta); /*0x628c16*/
+  if ( actorValue == 0xB ) /*0x628c1e*/
   {
-    *(this + 0xA5) = flt_A30634;
+    *((float *)this + 0xA5) = kTerrainLODQuadRayDirectionZ; /*0x628c3a*/
   }
-  else if ( a3 == 0x30 )
+  else if ( actorValue == 0x30 ) /*0x628c23*/
   {
-    *(this + 0xA6) = NAN;
+    *((_DWORD *)this + 0xA6) = 0xFFFFFFFF; /*0x628c26*/
   }
-  return result;
 }

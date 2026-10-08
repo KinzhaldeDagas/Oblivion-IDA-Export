@@ -1,1 +1,1 @@
-ISequentialStreamVtbl_0
+typedef ISequentialStreamVtbl ISequentialStreamVtbl_0;

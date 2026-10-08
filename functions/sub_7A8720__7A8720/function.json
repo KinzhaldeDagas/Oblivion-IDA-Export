@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7A8720",
+      "0x7A874B"
+    ]
+  ],
+  "chunks_sha256": "84273a67e5ecd5a09b4c698f516de29d9016b424dbea4642ecc9e8af8dfeacf1",
+  "comment_regular": "OBLIVION AUTHORITY (2026-08-30): Placement-fills count uninitialized 8-byte SLodEntry slots from one source pair.",
+  "comment_repeatable": "OBLIVION AUTHORITY (2026-08-30): Placement-fills count uninitialized 8-byte SLodEntry slots from one source pair.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7A8720",
+  "display_name": "OB_LeafLodEntry_UninitializedFillN_010201A0",
   "end_ea": "0x7A874B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7A8720",
+  "name": "OB_LeafLodEntry_UninitializedFillN_010201A0",
   "segment": ".text",
   "sha256": "84273a67e5ecd5a09b4c698f516de29d9016b424dbea4642ecc9e8af8dfeacf1",
   "size": 43,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A8720",
-  "type": "void __cdecl(_DWORD *, int, _DWORD *)",
+  "total_chunk_size": 43,
+  "type": "void __cdecl(OB_CLeafLodEngine_SLodEntry_010201A0 *destination, unsigned int count, const OB_CLeafLodEngine_SLodEntry_010201A0 *value)",
   "xrefs_from_count": 20,
   "xrefs_to_count": 2
 }

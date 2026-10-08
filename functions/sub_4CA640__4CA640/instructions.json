@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4CA640",
-    "line": "test    byte ptr [ecx+24h], 1",
+    "line": "test    byte ptr [ecx+24h], 1; Compute the CELL group sub-block label. Interior: decimal FormID bucket ((objectID24 % 100) / 10). Exterior: signed cell coordinates divided by 8 and packed X-high/Y-low. Cross-checks TESCS TESObjectCELL_GetCellGroupSubBlockLabel at 0x533F90.",
     "mnemonic": "test",
     "size": 4
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x4CA661",
-    "line": "push    ecx",
+    "line": "push    ecx; group_y",
     "mnemonic": "push",
     "size": 1
   },
@@ -97,13 +97,13 @@
   },
   {
     "ea": "0x4CA665",
-    "line": "push    eax",
+    "line": "push    eax; group_x",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4CA666",
-    "line": "call    sub_4EF1D0",
+    "line": "call    TESObjectCELL_PackExteriorGroupLabel; Verified exact key encoding used by the DistantLOD cell model map: packed label = (signed cellX << 16) | unsigned cellY.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,4 +1,4 @@
-0x6BFCD0: sub     esp, 18h
+0x6BFCD0: sub     esp, 18h; Oblivion position evaluator for numeric type 3: evaluates its distinct precomputed three-component cubic polynomial layout from the lower key record using Horner form.
 0x6BFCD3: mov     eax, [esp+18h+arg_4]
 0x6BFCD7: fld     dword ptr [eax+40h]
 0x6BFCDA: fld     [esp+18h+arg_0]

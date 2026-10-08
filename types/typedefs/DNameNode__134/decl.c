@@ -1,1 +1,1 @@
-DNameNode
+struct DNameNode;

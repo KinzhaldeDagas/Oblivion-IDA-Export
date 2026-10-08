@@ -47,7 +47,7 @@
 0x44316F: add     edi, eax
 0x443171: push    esi; int
 0x443172: push    edi; ArgList
-0x443173: call    sub_4F1630
+0x443173: call    TESWorldSpace_LoadExteriorCellAtCoord; Verified: exterior-cell loader checks cellMap first, searches master files using cellOffsetsArray fast path or GRUP/CELL fallback, creates a missing TESObjectCELL, post-fixes it, then attaches worldspace-indexed references.
 0x443178: test    eax, eax
 0x44317A: jnz     short loc_443193
 0x44317C: mov     eax, [ebx+74h]

@@ -1,4 +1,4 @@
-0x7ED3B0: sub     esp, 8
+0x7ED3B0: sub     esp, 8; Continues Oblivion BSShaderLightingProperty non-shadow-light iteration using the stored cursor and the same cull/backing-light eligibility filter. Fallout later adds an explicit cast-shadow exclusion absent here.
 0x7ED3B3: push    ebx
 0x7ED3B4: push    ebp
 0x7ED3B5: push    esi
@@ -21,7 +21,7 @@
 0x7ED3E6: lea     edx, [esp+18h+var_4]
 0x7ED3EA: push    edx
 0x7ED3EB: mov     ecx, edi
-0x7ED3ED: call    sub_405AD0
+0x7ED3ED: call    ShadowSceneLight_GetLightRef
 0x7ED3F2: mov     eax, [eax]
 0x7ED3F4: or      [esp+18h+var_8], 1
 0x7ED3F9: test    byte ptr [eax+18h], 1
@@ -56,7 +56,7 @@
 0x7ED448: lea     edx, [esp+18h+var_4]
 0x7ED44C: push    edx
 0x7ED44D: mov     ecx, edi
-0x7ED44F: call    sub_405AD0
+0x7ED44F: call    ShadowSceneLight_GetLightRef
 0x7ED454: mov     eax, [eax]
 0x7ED456: or      [esp+18h+var_8], 2
 0x7ED45B: test    byte ptr [eax+18h], 1

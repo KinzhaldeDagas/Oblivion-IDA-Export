@@ -1,1 +1,1 @@
-OptionsMenu
+struct OptionsMenu;

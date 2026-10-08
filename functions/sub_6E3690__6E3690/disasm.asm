@@ -39,7 +39,7 @@
 0x6E36FA: mov     [esi+14h], cl
 0x6E36FD: mov     eax, ds:0B3D088h[edi*4]
 0x6E3704: push    ebx
-0x6E3705: call    eax ; dword_B3D088
+0x6E3705: call    eax ; unk_B3D088
 0x6E3707: mov     ecx, [esp+30h+a2]
 0x6E370B: mov     edx, ds:0B3D410h[edi*4]
 0x6E3712: mov     ebx, eax
@@ -47,7 +47,7 @@
 0x6E3718: push    eax
 0x6E3719: push    ecx
 0x6E371A: push    ebx
-0x6E371B: call    edx ; dword_B3D410
+0x6E371B: call    edx ; unk_B3D410
 0x6E371D: mov     eax, [esp+3Ch+a2]
 0x6E3721: add     esp, 28h
 0x6E3724: push    edi

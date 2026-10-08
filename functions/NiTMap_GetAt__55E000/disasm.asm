@@ -12,7 +12,6 @@
 0x55E017: test    edi, edi
 0x55E019: jz      short loc_55E038
 0x55E01B: jmp     short loc_55E020
-0x55E01D: align 10h
 0x55E020: mov     eax, [edi+4]
 0x55E023: mov     edx, [esi]
 0x55E025: mov     edx, [edx+8]

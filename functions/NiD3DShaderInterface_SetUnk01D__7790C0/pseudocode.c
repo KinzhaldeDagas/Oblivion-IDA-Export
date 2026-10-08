@@ -1,5 +1,5 @@
-UInt8 __thiscall NiD3DShaderInterface::SetUnk01D(HighProcess *this, UInt8 a2)
+UInt8 __thiscall Shared_SetByteAtOffset1D(void *this, UInt8 value)
 {
-  this->unk01D = a2;
-  return a2;
+  *((_BYTE *)this + 0x1D) = value; /*0x7790c4*/
+  return value; /*0x7790c7*/
 }

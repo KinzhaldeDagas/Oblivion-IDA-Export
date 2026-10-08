@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A7090",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Oblivion Random::load virtual. This base implementation is unsupported and always throws std::logic_error(\"Newran: illegal combination\").",
     "mnemonic": "push",
     "size": 2
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x7A70B3",
-    "line": "push    1Bh; MaxCount",
+    "line": "push    1Bh; count",
     "mnemonic": "push",
     "size": 2
   },
@@ -73,31 +73,31 @@
   },
   {
     "ea": "0x7A70BA",
-    "line": "lea     ecx, [esp+5Ch+var_50]",
+    "line": "lea     ecx, [esp+5Ch+var_50]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A70BE",
-    "line": "mov     [esp+5Ch+var_38], 0Fh",
+    "line": "mov     [esp+5Ch+var_50.capacity], 0Fh",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x7A70C6",
-    "line": "mov     [esp+5Ch+var_3C], 0",
+    "line": "mov     [esp+5Ch+var_50.size], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x7A70CE",
-    "line": "mov     [esp+5Ch+var_4C], 0",
+    "line": "mov     byte ptr [esp+5Ch+var_50.storage], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x7A70D3",
-    "line": "call    sub_414500",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
     "mnemonic": "call",
     "size": 5
   },
@@ -153,6 +153,60 @@
     "ea": "0x7A70F8",
     "line": "call    ThrowException??",
     "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8770",
+    "line": "lea     ecx, [ebp-50h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C8773",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8778",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C877C",
+    "line": "lea     eax, [edx-44h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C877F",
+    "line": "mov     ecx, [edx-48h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C8782",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C8784",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8789",
+    "line": "mov     eax, offset stru_AF0C3C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C878E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
     "size": 5
   }
 ]

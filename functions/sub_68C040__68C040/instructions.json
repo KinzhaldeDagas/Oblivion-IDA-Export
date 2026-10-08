@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x68C069",
-    "line": "push    eax; int",
+    "line": "push    eax; vertexColor",
     "mnemonic": "push",
     "size": 1
   },
@@ -109,13 +109,13 @@
   },
   {
     "ea": "0x68C07D",
-    "line": "fstp    [esp+20h+var_20]; float",
+    "line": "fstp    [esp+20h+scale]; scale",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x68C080",
-    "line": "call    sub_47FD30",
+    "line": "call    NiTriShape_CreateOctahedronGeometry; Verified generic NiTriShape geometry factory, used by PathGrid rendering and multiple other callers. It builds six octahedron vertices (four ±scale X/Y equatorial points and two ±scale*sqrt(2) Z poles), repeats a supplied NiColorAlpha for all six, writes 24 u16 indices for eight triangular faces, and returns a NiTriShape. This constructs a filled octahedron surface; wireframe is a separate scene property.",
     "mnemonic": "call",
     "size": 5
   },

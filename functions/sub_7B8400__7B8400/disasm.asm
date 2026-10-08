@@ -12,7 +12,7 @@
 0x7B841F: push    0CA4h
 0x7B8424: push    offset a_Bsshadermanag; ".\\BSShaderManager.cpp"
 0x7B8429: push    esi
-0x7B842A: call    nullsub_return0_0arg
+0x7B842A: call    nullsub_return0_0arg; [Verified] Shared zero-return leaf. BSTempEffectDecal vtable 0xA6822C uses it at +0x54 for GetTypeID 0 and also in other slots; many unrelated vtables reuse this target. Class meaning must be established from the owning vtable and caller.
 0x7B842F: add     esp, 0Ch
 0x7B8432: push    0
 0x7B8434: mov     ecx, esi

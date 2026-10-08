@@ -4,7 +4,7 @@
 0x68E79A: call    eax
 0x68E79C: cmp     eax, ds:0B333C4h
 0x68E7A2: jnz     short ActiveEffect_Base_ProcessEffect___ClearHitEffectList
-0x68E7A4: call    InterfaceManager_IsMenuMode
+0x68E7A4: call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.
 0x68E7A9: test    al, al
 0x68E7AB: jz      short ActiveEffect_Base_ProcessEffect___ClearHitEffectList
 0x68E7AD: or      dword ptr [esi+14h], 40h

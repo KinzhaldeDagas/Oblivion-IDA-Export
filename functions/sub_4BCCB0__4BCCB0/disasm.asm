@@ -1,9 +1,9 @@
-0x4BCCB0: push    ebx
-0x4BCCB1: mov     ebx, [esp+4+arg_0]
+0x4BCCB0: push    ebx; Verified completion callback: on taskStatus zero, releases the task-data scene node and Ni2DBuffer; regardless of status, it removes the packed cell key from the owner map at task+0x28. Exact status-code semantics remain Unknown.
+0x4BCCB1: mov     ebx, [esp+4+taskStatus]
 0x4BCCB5: push    ebp
 0x4BCCB6: push    ebx
 0x4BCCB7: mov     ebp, ecx
-0x4BCCB9: call    sub_4392E0
+0x4BCCB9: call    QueuedTreeModel_ReleaseBuildResources; Verified DistantLOD task completion callback: status 0 releases the task-data scene node and cellLODBuffer; nonzero status leaves these resources for task destruction. In all cases it removes the packed cell key from the owner map.
 0x4BCCBE: test    bl, bl
 0x4BCCC0: jnz     short loc_4BCD21
 0x4BCCC2: mov     ebx, ds:0A2807Ch
@@ -51,9 +51,9 @@
 0x4BCD24: mov     ecx, [eax+4]
 0x4BCD27: mov     eax, [eax]
 0x4BCD29: mov     ebp, [ebp+28h]
-0x4BCD2C: push    ecx
-0x4BCD2D: push    eax
-0x4BCD2E: call    sub_4EF1D0
+0x4BCD2C: push    ecx; group_y
+0x4BCD2D: push    eax; group_x
+0x4BCD2E: call    TESObjectCELL_PackExteriorGroupLabel; Verified exact key encoding used by the DistantLOD cell model map: packed label = (signed cellX << 16) | unsigned cellY.
 0x4BCD33: mov     edx, [ebp+0]
 0x4BCD36: add     esp, 8
 0x4BCD39: push    eax

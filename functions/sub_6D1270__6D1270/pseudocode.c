@@ -1,4 +1,4 @@
-void *sub_6D1270()
+NiRTTI *sub_6D1270()
 {
-  return &unk_B3CE30;
+  return &stru_B3CE30; /*0x6d1275*/
 }

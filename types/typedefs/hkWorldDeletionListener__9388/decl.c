@@ -1,1 +1,1 @@
-hkWorldDeletionListener
+struct hkWorldDeletionListener;

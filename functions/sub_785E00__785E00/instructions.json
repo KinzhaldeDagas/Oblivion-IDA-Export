@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x785E00",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Oblivion compact stVec-vector resize(count) wrapper. Constructs the default zero/size-3 stVec fill value, delegates to the vector resize/fill implementation, then destroys the temporary.",
     "mnemonic": "push",
     "size": 2
   },
@@ -73,13 +73,13 @@
   },
   {
     "ea": "0x785E26",
-    "line": "lea     ecx, [esp+2Ch+var_24]",
+    "line": "lea     ecx, [esp+2Ch+var_24]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x785E2A",
-    "line": "call    sub_78E550",
+    "line": "call    OB_stVec_ctor_zero3_010201A0; Oblivion stVec default constructor: zeros all five float slots and sets logical size to 3. Exact body corroborated after binary observation by RT4.1 LibVector Vec.cpp stVec().",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,19 +169,19 @@
   },
   {
     "ea": "0x785E56",
-    "line": "mov     ecx, [esp+44h+arg_0]",
+    "line": "mov     ecx, [esp+44h+count]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x785E5A",
-    "line": "push    ecx",
+    "line": "push    ecx; newSize",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x785E5B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -193,13 +193,13 @@
   },
   {
     "ea": "0x785E65",
-    "line": "call    sub_7856B0",
+    "line": "call    OB_stVector_stVec_ResizeFill_010201A0; Oblivion 1.2.0.416: vector<stVec>::resize(newSize,value), with the 24-byte value passed by value; grows through insert-fill or shrinks through checked erase.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x785E6A",
-    "line": "lea     ecx, [esp+2Ch+var_24]; void *",
+    "line": "lea     ecx, [esp+2Ch+var_24]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x785E76",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -250,5 +250,59 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CB110",
+    "line": "lea     ecx, [ebp-24h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB113",
+    "line": "jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB118",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CB11C",
+    "line": "lea     eax, [edx-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB11F",
+    "line": "mov     ecx, [edx-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB122",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CB124",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB129",
+    "line": "mov     eax, offset stru_AF37C4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB12E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

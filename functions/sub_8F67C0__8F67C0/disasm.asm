@@ -26,10 +26,10 @@
 0x8F681E: mov     edi, [ebp+arg_8]
 0x8F6821: mov     ecx, [ecx+8]
 0x8F6824: fld     dword ptr [edi+18h]
-0x8F6827: mov     ebx, [ebp+arg_0]
+0x8F6827: mov     ebx, dword ptr [ebp+arg_0]
 0x8F682A: fld     st
 0x8F682C: mov     eax, [ebx+8]
-0x8F682F: mov     esi, [ebp+arg_4]
+0x8F682F: mov     esi, dword ptr [ebp+arg_0+4]
 0x8F6832: mov     [esp+310h+var_2B4], ecx
 0x8F6836: mov     ecx, [esi+8]
 0x8F6839: mov     [esp+310h+var_2C0], ebx
@@ -138,7 +138,7 @@
 0x8F69D9: fld     dword ptr [edi+8]
 0x8F69DC: mov     ecx, dword ptr [esp+310h+var_2FC]
 0x8F69E0: fmul    dword ptr ds:0A3D65Ch
-0x8F69E6: mov     edx, [ebp+arg_4]
+0x8F69E6: mov     edx, dword ptr [ebp+arg_0+4]
 0x8F69E9: mov     eax, [edx+8]
 0x8F69EC: movaps  xmm1, xmmword ptr [eax+30h]
 0x8F69F0: fadd    dword ptr [esp+310h+var_2FC+4]
@@ -294,7 +294,7 @@
 0x8F6C27: movaps  xmmword ptr [esp+310h+var_2EC+0Ch], xmm4
 0x8F6C2C: movaps  xmmword ptr [eax], xmm3
 0x8F6C2F: movaps  xmmword ptr [eax+10h], xmm4
-0x8F6C33: mov     eax, [ebp+arg_4]
+0x8F6C33: mov     eax, dword ptr [ebp+arg_0+4]
 0x8F6C36: mov     ecx, [eax]
 0x8F6C38: mov     edx, [ecx]
 0x8F6C3A: lea     eax, [esp+310h+var_210]
@@ -383,7 +383,7 @@
 0x8F6D56: add     esp, 10h
 0x8F6D59: mov     edx, [ebp+arg_C]
 0x8F6D5C: mov     eax, [esp+310h+var_210]
-0x8F6D63: mov     ecx, [ebp+arg_4]
+0x8F6D63: mov     ecx, dword ptr [ebp+arg_0+4]
 0x8F6D66: push    edx
 0x8F6D67: mov     edx, [ecx]
 0x8F6D69: push    edi
@@ -399,7 +399,7 @@
 0x8F6D81: mov     edi, ds:0BA9DE4h
 0x8F6D87: jmp     short loc_8F6DAC
 0x8F6D89: mov     eax, [ebp+arg_C]
-0x8F6D8C: mov     ecx, [ebp+arg_4]
+0x8F6D8C: mov     ecx, dword ptr [ebp+arg_0+4]
 0x8F6D8F: mov     edx, [ecx]
 0x8F6D91: push    eax
 0x8F6D92: mov     eax, [edx+0Ch]

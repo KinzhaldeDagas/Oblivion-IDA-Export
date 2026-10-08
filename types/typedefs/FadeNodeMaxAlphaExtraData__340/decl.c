@@ -1,1 +1,1 @@
-FadeNodeMaxAlphaExtraData
+struct FadeNodeMaxAlphaExtraData;

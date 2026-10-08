@@ -16,9 +16,9 @@
 0x6D1BED: cmp     eax, edi
 0x6D1BEF: ja      short loc_6D1BFD
 0x6D1BF1: lea     ecx, [edi+1]
-0x6D1BF4: push    ecx
-0x6D1BF5: lea     ecx, [esi+40h]
-0x6D1BF8: call    sub_523B10
+0x6D1BF4: push    ecx; capacity
+0x6D1BF5: lea     ecx, [esi+40h]; self
+0x6D1BF8: call    NiTObjectArray_Resize16
 0x6D1BFD: mov     ebx, [esp+1Ch+arg_0]
 0x6D1C01: test    ebx, ebx
 0x6D1C03: mov     [esp+1Ch+arg_4], ebx
@@ -33,9 +33,9 @@
 0x6D1C24: jb      short loc_6D1C34
 0x6D1C26: movzx   ecx, word ptr [esi+0Eh]
 0x6D1C2A: add     ecx, edi
-0x6D1C2C: push    ecx
-0x6D1C2D: mov     ecx, esi
-0x6D1C2F: call    sub_523B10
+0x6D1C2C: push    ecx; capacity
+0x6D1C2D: mov     ecx, esi; self
+0x6D1C2F: call    NiTObjectArray_Resize16
 0x6D1C34: lea     edx, [esp+1Ch+arg_4]
 0x6D1C38: push    edx
 0x6D1C39: push    edi
@@ -62,3 +62,12 @@
 0x6D1C73: pop     ebx
 0x6D1C74: add     esp, 0Ch
 0x6D1C77: retn    8
+0x9C7B10: lea     ecx, [ebp+8]; slot
+0x9C7B13: jmp     NiPointerSlot_Release
+0x9C7B18: mov     edx, [esp+arg_4]
+0x9C7B1C: lea     eax, [edx-0Ch]
+0x9C7B1F: mov     ecx, [edx-10h]
+0x9C7B22: xor     ecx, eax
+0x9C7B24: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C7B29: mov     eax, offset stru_AEFED8
+0x9C7B2E: jmp     ___CxxFrameHandler3

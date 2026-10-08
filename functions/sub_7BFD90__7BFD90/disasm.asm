@@ -216,11 +216,11 @@
 0x7BFFCE: jz      short loc_7BFFEE
 0x7BFFD0: mov     edx, [esi+9Ch]
 0x7BFFD6: push    edx; a2
-0x7BFFD7: call    sub_7AECB0
+0x7BFFD7: call    NiD3DPass_SetVertexShader; Reference-counted NiD3DPass vertex-shader setter. Replaces pass+0x58 and AddRefs the new NiD3DVertexShader.
 0x7BFFDC: mov     eax, [esi+0BCh]
 0x7BFFE2: mov     ecx, [esi+0F0h]; this
-0x7BFFE8: push    eax; a2
-0x7BFFE9: call    sub_7AEC60
+0x7BFFE8: push    eax; shader
+0x7BFFE9: call    NiD3DPass_SetPixelShader; Reference-counted NiD3DPass pixel-shader setter. Replaces pass+0x44 and AddRefs the new NiD3DPixelShader.
 0x7BFFEE: mov     ebx, [esi+0F4h]
 0x7BFFF4: mov     ebp, [esi+9Ch]
 0x7BFFFA: mov     edi, [ebx+58h]

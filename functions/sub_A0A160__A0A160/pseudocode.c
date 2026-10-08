@@ -1,4 +1,4 @@
-BSStringT *sub_A0A160()
+NiRTTI *sub_A0A160()
 {
-  return sub_70E220(&stru_B3FF04, "NiRenderedTexture", (int)dword_B3F70C);
+  return NiRTTI_Constructor(&stru_B3FF04, "NiRenderedTexture", &stru_B3F70C); /*0xa0a174*/
 }

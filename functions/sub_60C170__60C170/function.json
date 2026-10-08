@@ -1,19 +1,32 @@
 {
-  "callees_count": 55,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 18,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x60C170",
+      "0x60C5AE"
+    ]
+  ],
+  "chunks_sha256": "4f48657415d1600e43542b7793501ee16ecf2b7995424d5daf3233fa0bbbec60",
+  "comment_regular": "Projectile lifecycle/settling state machine never replaces the AMMO base assigned by construction. A later ordinary pickup therefore remains reference-based AMMO recovery.",
+  "comment_repeatable": "Projectile lifecycle/settling state machine never replaces the AMMO base assigned by construction. A later ordinary pickup therefore remains reference-based AMMO recovery.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_60C170",
+  "display_name": "ArrowProjectile_UpdateFlightAndLifecycle",
   "end_ea": "0x60C5AE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_60C170",
+  "name": "ArrowProjectile_UpdateFlightAndLifecycle",
   "segment": ".text",
   "sha256": "4f48657415d1600e43542b7793501ee16ecf2b7995424d5daf3233fa0bbbec60",
   "size": 1086,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x60C170",
-  "type": "void __thiscall(float *this, float)",
+  "total_chunk_size": 1086,
+  "type": "void __thiscall(ArrowProjectile *this, float deltaTime)",
   "xrefs_from_count": 399,
   "xrefs_to_count": 1
 }

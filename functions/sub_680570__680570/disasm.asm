@@ -1,6 +1,6 @@
-0x680570: movzx   ecx, word ptr [ecx]
+0x680570: movzx   ecx, word ptr [ecx]; Verified: sets/clears state flag bit 0x01. It is set during source seeding and for newly inserted links; because it persists after expansion, its 'discovered' meaning is Probable.
 0x680573: xor     eax, eax
-0x680575: cmp     [esp+arg_0], al
+0x680575: cmp     [esp+discovered], al
 0x680579: jz      short loc_680597
 0x68057B: cmp     cx, ds:0B3BF04h
 0x680582: jnb     short loc_680590

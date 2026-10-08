@@ -32,7 +32,7 @@
 0x4A29D3: mov     edx, [eax]
 0x4A29D5: push    1
 0x4A29D7: call    edx
-0x4A29D9: push    offset NiRefObject_objcount; lpAddend
+0x4A29D9: push    0B3FD64h; lpAddend
 0x4A29DE: mov     dword ptr [esi+0Ch], 0
 0x4A29E5: mov     dword ptr [esi], offset ??_7NiRefObject@@6B@; const NiRefObject::`vftable'
 0x4A29EB: call    dword ptr ds:0A2807Ch
@@ -42,3 +42,12 @@
 0x4A29FD: pop     esi
 0x4A29FE: add     esp, 10h
 0x4A2A01: retn
+0x9CFDD0: mov     ecx, [ebp-10h]
+0x9CFDD3: jmp     NiRefObject_destr
+0x9CFDD8: mov     edx, [esp+arg_4]
+0x9CFDDC: lea     eax, [edx-8]
+0x9CFDDF: mov     ecx, [edx-0Ch]
+0x9CFDE2: xor     ecx, eax
+0x9CFDE4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CFDE9: mov     eax, offset stru_AF88CC
+0x9CFDEE: jmp     ___CxxFrameHandler3

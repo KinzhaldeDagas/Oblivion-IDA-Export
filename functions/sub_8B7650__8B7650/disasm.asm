@@ -34,7 +34,6 @@
 0x8B76A4: shufps  xmm0, xmm0, 0
 0x8B76A8: shl     edx, 4
 0x8B76AB: jmp     short loc_8B76B0
-0x8B76AD: align 10h
 0x8B76B0: mov     eax, [esi+4]
 0x8B76B3: sub     edx, 10h
 0x8B76B6: movaps  xmm1, xmmword ptr [eax+edx]

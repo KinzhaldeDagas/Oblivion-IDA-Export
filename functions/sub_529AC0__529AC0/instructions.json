@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x529ACC",
-    "line": "mov     bl, [esp+0Ch+arg_0]",
+    "line": "mov     bl, [esp+0Ch+stage]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x529AF8",
-    "line": "jz      short loc_529B09",
+    "line": "jz      short loc_529B09; SetStage reactivates a non-completed quest. A completed quest is reactivated only when questFlags has 0x08, confirmed by the Oblivion Construction Set label 'Allow repeated stages'.",
     "mnemonic": "jz",
     "size": 2
   },

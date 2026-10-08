@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x526FA0",
-    "line": "mov     eax, [esp+arg_C]",
+    "line": "mov     eax, [esp+value]; Oblivion 1.2.0.416: compiler-emitted vector<float>::insert(position,count,value) body used by the checked float insert-one wrapper; 4-byte stride, 1.5x growth, alias-safe local fill value, in-place shift or FormHeap reallocation. Named CompilerCopy because equivalent specializations also exist at other addresses.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x526FA8",
-    "line": "fstp    [esp+8+arg_C]",
+    "line": "fstp    [esp+8+value]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x526FC1",
-    "line": "mov     ebx, [esp+8+arg_8]",
+    "line": "mov     ebx, [esp+8+count]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x526FE7",
-    "line": "call    sub_790B90",
+    "line": "call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error(\"vector<T> too long\") and throws; used by multiple element specializations after max_size checks.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x527047",
-    "line": "mov     [esp+14h+arg_8], eax",
+    "line": "mov     [esp+14h+count], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -463,19 +463,19 @@
   },
   {
     "ea": "0x52705C",
-    "line": "push    edi; Dst",
+    "line": "push    edi; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52705D",
-    "line": "push    ebp; int",
+    "line": "push    ebp; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52705E",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -487,31 +487,31 @@
   },
   {
     "ea": "0x527061",
-    "line": "call    sub_7A25C0",
+    "line": "call    OB_stVector4_UninitializedCopyRange_010201A0",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x527066",
-    "line": "lea     edx, [esp+10h+arg_C]",
+    "line": "lea     edx, [esp+10h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x52706A",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52706B",
-    "line": "push    ebx",
+    "line": "push    ebx; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52706C",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -523,13 +523,13 @@
   },
   {
     "ea": "0x52706F",
-    "line": "call    sub_784B30",
+    "line": "call    OB_stVectorFloat_UninitializedFillN_010201A0; vector<float> uninitialized-fill primitive: constructs count four-byte float elements at destination from *value and returns destination+count. Identified from Oblivion call shape and four-byte stride.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x527074",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -541,13 +541,13 @@
   },
   {
     "ea": "0x527078",
-    "line": "push    eax; int",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x527079",
-    "line": "push    ebp; Src",
+    "line": "push    ebp; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x52707C",
-    "line": "call    sub_7A25C0",
+    "line": "call    OB_stVector4_UninitializedCopyRange_010201A0",
     "mnemonic": "call",
     "size": 5
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x52709B",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x5270A3",
-    "line": "mov     ecx, [esp+10h+arg_8]",
+    "line": "mov     ecx, [esp+10h+count]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x5270D5",
-    "line": "mov     [esp+10h+arg_8], eax",
+    "line": "mov     [esp+10h+count], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -781,25 +781,25 @@
   },
   {
     "ea": "0x5270DD",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5270DE",
-    "line": "push    ebp; int",
+    "line": "push    ebp; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5270DF",
-    "line": "push    edi; Src",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5270E0",
-    "line": "call    sub_7A25C0",
+    "line": "call    OB_stVector4_UninitializedCopyRange_010201A0",
     "mnemonic": "call",
     "size": 5
   },
@@ -823,13 +823,13 @@
   },
   {
     "ea": "0x5270EC",
-    "line": "lea     ecx, [esp+10h+arg_C]",
+    "line": "lea     ecx, [esp+10h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5270F0",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -847,13 +847,13 @@
   },
   {
     "ea": "0x5270F6",
-    "line": "push    ebx",
+    "line": "push    ebx; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5270F7",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -865,13 +865,13 @@
   },
   {
     "ea": "0x5270FA",
-    "line": "call    sub_784B30",
+    "line": "call    OB_stVectorFloat_UninitializedFillN_010201A0; vector<float> uninitialized-fill primitive: constructs count four-byte float elements at destination from *value and returns destination+count. Identified from Oblivion call shape and four-byte stride.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5270FF",
-    "line": "mov     eax, [esp+10h+arg_8]",
+    "line": "mov     eax, [esp+10h+count]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -889,13 +889,13 @@
   },
   {
     "ea": "0x527109",
-    "line": "lea     ecx, [esp+10h+arg_C]",
+    "line": "lea     ecx, [esp+10h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x52710D",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -907,19 +907,19 @@
   },
   {
     "ea": "0x527110",
-    "line": "push    esi",
+    "line": "push    esi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x527111",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x527112",
-    "line": "call    sub_523AF0",
+    "line": "call    OB_stVectorFloat_CopyFillRange_010201A0; std::fill specialization for float: assigns *value across [first,last) and returns last. Shipped Oblivion callers use it for initialized portions of vector<float> growth/reuse.",
     "mnemonic": "call",
     "size": 5
   },
@@ -961,7 +961,7 @@
   },
   {
     "ea": "0x527121",
-    "line": "push    ebp; Dst",
+    "line": "push    ebp; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -979,37 +979,37 @@
   },
   {
     "ea": "0x527126",
-    "line": "push    ebp; int",
+    "line": "push    ebp; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x527127",
-    "line": "push    ebx; Src",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x527128",
-    "line": "call    sub_7A25C0",
+    "line": "call    OB_stVector4_UninitializedCopyRange_010201A0",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x52712D",
-    "line": "push    ebp; int",
+    "line": "push    ebp; destinationEnd",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52712E",
-    "line": "push    ebx; int",
+    "line": "push    ebx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52712F",
-    "line": "push    edi; Src",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -1021,25 +1021,25 @@
   },
   {
     "ea": "0x527133",
-    "line": "call    sub_5254A0",
+    "line": "call    OB_stVector4_CopyBackwardRange_010201A0",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x527138",
-    "line": "mov     eax, [esp+1Ch+arg_8]",
+    "line": "mov     eax, [esp+1Ch+count]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x52713C",
-    "line": "lea     edx, [esp+1Ch+arg_C]",
+    "line": "lea     edx, [esp+1Ch+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x527140",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -1051,19 +1051,19 @@
   },
   {
     "ea": "0x527143",
-    "line": "push    eax",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x527144",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x527145",
-    "line": "call    sub_523AF0",
+    "line": "call    OB_stVectorFloat_CopyFillRange_010201A0; std::fill specialization for float: assigns *value across [first,last) and returns last. Shipped Oblivion callers use it for initialized portions of vector<float> growth/reuse.",
     "mnemonic": "call",
     "size": 5
   },

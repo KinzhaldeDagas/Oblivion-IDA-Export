@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7C7030",
+      "0x7C704D"
+    ]
+  ],
+  "chunks_sha256": "fd67f46fc407626eac9cb1c7fa64bacf66b5af71a14ac6460326e96b19062db5",
+  "comment_regular": "Find an existing source light and forward the requested per-source projector mode to ShadowSceneLight+0xF4.",
+  "comment_repeatable": "Find an existing source light and forward the requested per-source projector mode to ShadowSceneLight+0xF4.\n\nMEF PERF 2026-10-02: PERF-9 caller constraint: lookup forwards projector-mode change only when a source match exists. Future source index must return the same first matching wrapper or null.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7C7030",
+  "display_name": "ShadowSceneNode_SetSourceProjectorMode",
   "end_ea": "0x7C704D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7C7030",
+  "name": "ShadowSceneNode_SetSourceProjectorMode",
   "segment": ".text",
   "sha256": "fd67f46fc407626eac9cb1c7fa64bacf66b5af71a14ac6460326e96b19062db5",
   "size": 29,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7C7030",
-  "type": "void __thiscall(_DWORD *this, int, char)",
+  "total_chunk_size": 29,
+  "type": "void __thiscall(ShadowSceneNode_DecodedLayout *this, void *backingLight, char)",
   "xrefs_from_count": 12,
   "xrefs_to_count": 1
 }

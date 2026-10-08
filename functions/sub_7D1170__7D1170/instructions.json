@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7D1170",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified (Oblivion): ShadowLightShader__LoadStagesAndPasses acquires and stores NiD3DPass pool objects into g_ShadowLightPassBySelector[0..0x1A2], AddRefs each stored pass, then installs the shared vertex shader in each pass at +0x58 before building the pass families. The four texture-effect template slots line up exactly with selector indices 0x18C..0x18F.",
     "mnemonic": "push",
     "size": 2
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x7D11A2",
-    "line": "call    sub_7606A0",
+    "line": "call    NiD3DPassPool_Acquire; Acquire a renderer-owned NiD3DPass from the global pass pool and return it with a reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x7D11AC",
-    "line": "mov     ecx, ds:dword_B455A0[ebx]",
+    "line": "mov     ecx, ds:g_ShadowLightPassBySelector[ebx]",
     "mnemonic": "mov",
     "size": 6
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x7D11C8",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x7D11D1",
-    "line": "mov     ds:dword_B455A0[ebx], eax",
+    "line": "mov     ds:g_ShadowLightPassBySelector[ebx], eax",
     "mnemonic": "mov",
     "size": 6
   },
@@ -265,13 +265,13 @@
   },
   {
     "ea": "0x7D11FB",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7D1200",
-    "line": "mov     esi, ds:dword_B455A0[ebx]",
+    "line": "mov     esi, ds:g_ShadowLightPassBySelector[ebx]",
     "mnemonic": "mov",
     "size": 6
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x7D12AB",
-    "line": "call    sub_82D990",
+    "line": "call    ShadowLightShader_InitializeMultiPointPassPool",
     "mnemonic": "call",
     "size": 5
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x7D12B2",
-    "line": "call    sub_820C00",
+    "line": "call    ShadowLightShader_InitializePassPool; Oblivion ShadowLight pass-pool initializer. Mode-5 pool[6..9] each owns one stage configured for texcoord 0, wrap addressing, linear MAG/MIN/MIP filtering, and disabled fixed-function color/alpha ops. All four disable alpha blending and stencil, enable Z test/write with LESS_EQUAL, and differ only in alpha-test enable: pools 6/8 off, 7/9 on. Opaque shaders ignore the unbound stage.",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x7D12C0",
-    "line": "call    sub_831910",
+    "line": "call    ShadowLightShader_InitializeAdditivePointPassPool",
     "mnemonic": "call",
     "size": 5
   },
@@ -790,5 +790,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9D0AC0",
+    "line": "lea     ecx, [ebp-14h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0AC3",
+    "line": "jmp     sub_4027D0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0AC8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D0ACC",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0ACF",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0AD2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D0AD4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0AD9",
+    "line": "mov     eax, offset stru_AF9368",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0ADE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x668D00",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Actor reference default idle variant initialization. Seeds default idle/animation choices during actor setup; observed from actor initialization path.",
     "mnemonic": "push",
     "size": 2
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x668D61",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -187,19 +187,19 @@
   },
   {
     "ea": "0x668D79",
-    "line": "fstp    [esp+2ACh+a5]",
+    "line": "fstp    [esp+2ACh+a5]; deltaSeconds",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x668D7C",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x668D81",
-    "line": "call    sub_67ACA0",
+    "line": "call    ActorProcessManager_UpdateTempEffects; [Verified] Per-actor temp-effect update loop visits both activeTempEffects (+0x40) and extendedTempEffects (+0x48), dispatches virtual Update(effect, deltaSeconds), removes effects returning false, and releases manager references. Active-list decals (types 0/1) and particles (2) update through this shared manager. Fallout divergence: Fallout updates its separate BGSDecalManager simple-decal/emitter collections through UpdateDecals.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x668D9D",
-    "line": "call    TESObjectREFR__GetNiNode",
+    "line": "call    TESObjectREFR__GetNiNode; ODismemberment: TESObjectREFR::GetNiNode; runtime primitive starts from actor 3D and toggles prepared ODISMEMBER_* nodes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x668DAD",
-    "line": "call    TESObjectREFR__GetNiNode",
+    "line": "call    TESObjectREFR__GetNiNode; ODismemberment: TESObjectREFR::GetNiNode; runtime primitive starts from actor 3D and toggles prepared ODISMEMBER_* nodes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,13 +355,13 @@
   },
   {
     "ea": "0x668DDB",
-    "line": "lea     ecx, [esp+2A8h+var_27C]",
+    "line": "lea     ecx, [esp+2A8h+var_27C]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x668DDF",
-    "line": "call    sub_478B90",
+    "line": "call    OB_NiCloningProcess_ctor",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,13 +475,13 @@
   },
   {
     "ea": "0x668E19",
-    "line": "push    0",
+    "line": "push    0; removeExisting",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x668E1B",
-    "line": "push    eax",
+    "line": "push    eax; root",
     "mnemonic": "push",
     "size": 1
   },
@@ -505,13 +505,13 @@
   },
   {
     "ea": "0x668E26",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x668E28",
-    "line": "call    sub_7C7F90",
+    "line": "call    ShadowSceneNode_RegisterOrRemovePointLightsInSubtree; Lock-protected wrapper for recursive point-light registration/removal across a NiNode subtree.",
     "mnemonic": "call",
     "size": 5
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x668EAB",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -997,25 +997,25 @@
   },
   {
     "ea": "0x668F13",
-    "line": "push    eax",
+    "line": "push    eax; quiverNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x668F14",
-    "line": "push    0",
+    "line": "push    0; animData",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x668F16",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x668F18",
-    "line": "call    sub_5F8300",
+    "line": "call    Actor_RefreshQuiverArrowVisibility; Recomputes Quiver Arrow:0/ArrowN visibility from the current equipped-AMMO inventory count. animData selects the perspective/cache and quiverNode may supply an already resolved node.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1285,7 +1285,7 @@
   },
   {
     "ea": "0x668FB0",
-    "line": "push    offset dword_B39DB8",
+    "line": "push    offset stru_B39DB8",
     "mnemonic": "push",
     "size": 5
   },
@@ -1447,7 +1447,7 @@
   },
   {
     "ea": "0x669004",
-    "line": "push    offset dword_B39DB8",
+    "line": "push    offset stru_B39DB8",
     "mnemonic": "push",
     "size": 5
   },
@@ -1927,19 +1927,19 @@
   },
   {
     "ea": "0x6690EB",
-    "line": "push    eax",
+    "line": "push    eax; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6690EC",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6690EE",
-    "line": "call    sub_405790",
+    "line": "call    NiNode_GetChildAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -1969,19 +1969,19 @@
   },
   {
     "ea": "0x6690FB",
-    "line": "push    eax",
+    "line": "push    eax; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6690FC",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6690FE",
-    "line": "call    sub_405790",
+    "line": "call    NiNode_GetChildAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -2677,13 +2677,13 @@
   },
   {
     "ea": "0x669246",
-    "line": "fst     [esp+2ACh+a5]; a5",
+    "line": "fst     [esp+2ACh+a5]; period",
     "mnemonic": "fst",
     "size": 3
   },
   {
     "ea": "0x669249",
-    "line": "push    0; a4",
+    "line": "push    0; useRefractF",
     "mnemonic": "push",
     "size": 2
   },
@@ -2695,25 +2695,25 @@
   },
   {
     "ea": "0x66924C",
-    "line": "fstp    [esp+2B4h+a3]; a3",
+    "line": "fstp    [esp+2B4h+a3]; power",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x66924F",
-    "line": "push    0; a2",
+    "line": "push    0; enabled",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x669251",
-    "line": "push    eax; a1",
+    "line": "push    eax; root",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x669252",
-    "line": "call    sub_7D92C0",
+    "line": "call    NiAVObject_SetShaderRefractionStateRecursive; Recursively set/clear native refraction state on shader-property subtypes 5..10. useRefractF selects passInfo 0x10000 instead of 0x8000; stores power and optional period and invalidates pass caches.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2767,7 +2767,7 @@
   },
   {
     "ea": "0x669276",
-    "line": "call    NewActorAnimData",
+    "line": "call    NewActorAnimData; Allocates and initializes ActorAnimData. Creates the +0x9C 0x65-bucket UInt16 animation-key map; nulls manager/root/accumulation, active-slot, pending-KF, and sequence pointers; initializes current/queued keys to 0xFFFF:0xFFFF, action arrays to -1, update state +0x90 to 0xFF, and blend scales +0xBC/+0xC0 to 1.0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3325,7 +3325,7 @@
   },
   {
     "ea": "0x6693AD",
-    "line": "call    sub_434850",
+    "line": "call    ModelLoader_BuildFileListWithArchives; Thin wrapper over ModelLoader_BuildFileListWildcard with archive lookup enabled. Power-attack/KF discovery uses this to enumerate candidate model paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3403,7 +3403,7 @@
   },
   {
     "ea": "0x6693DD",
-    "line": "call    __sprintf",
+    "line": "call    __sprintf; Default idle variant auto-detect: checks Data\\Meshes\\<model dir>\\<weaponPrefix>Idle.KF and queues existing files.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3715,7 +3715,7 @@
   },
   {
     "ea": "0x669478",
-    "line": "call    __sprintf",
+    "line": "call    __sprintf; Default torch idle variant auto-detect: checks Data\\Meshes\\<model dir>\\<weaponPrefix>TorchIdle.KF and queues existing files.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3985,7 +3985,7 @@
   },
   {
     "ea": "0x6694FE",
-    "line": "cmp     edi, offset animGroupInfos_ptr",
+    "line": "cmp     edi, offset animGroupInfos_ptr; Interior callsite in actor default idle variant initialization; same setup path as ObservedActorRef_InitDefaultIdleVariants.",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -4033,7 +4033,7 @@
   },
   {
     "ea": "0x66951A",
-    "line": "call    Menu_PickIdles??",
+    "line": "call    Menu_PickIdles; Initializes actor/player idle animation data from default Idle/TorchIdle files gathered from the model directory.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4045,7 +4045,7 @@
   },
   {
     "ea": "0x669522",
-    "line": "call    sub_41E650",
+    "line": "call    ExtraDataList_GetLight; Returns the REFR_LIGHT payload from ExtraLight type 0x30; heavily used by TESObjectREF lighting and equipped-light paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4081,13 +4081,13 @@
   },
   {
     "ea": "0x669531",
-    "line": "push    0",
+    "line": "push    0; trackBackingPosition",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x669533",
-    "line": "push    eax",
+    "line": "push    eax; backingLight",
     "mnemonic": "push",
     "size": 1
   },
@@ -4111,13 +4111,13 @@
   },
   {
     "ea": "0x66953E",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x669540",
-    "line": "call    sub_7C6AE0",
+    "line": "call    ShadowSceneNode_FindOrCreateFullLightForSource; Actor/equipped ExtraLight registration uses trackBackingPosition=false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4543,7 +4543,7 @@
   },
   {
     "ea": "0x66960C",
-    "line": "call    DisposeActorAnimData",
+    "line": "call    DisposeActorAnimData; Destroys ActorAnimData-owned state. Releases current/queued/cleanup idles; deactivates and releases the controller manager; deleting-destructs every +0x9C animation-map entry; frees the +0xB8 pending-KF linked list; clears/destroys the map; and nulls the accumulation node. Confirms map entries and pending-KF nodes are ActorAnimData-owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4555,7 +4555,7 @@
   },
   {
     "ea": "0x669612",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4792,5 +4792,167 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C3F40",
+    "line": "lea     ecx, [ebp-284h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C3F46",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3F4B",
+    "line": "lea     ecx, [ebp-27Ch]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C3F51",
+    "line": "jmp     sub_4781A0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3F56",
+    "line": "mov     eax, [ebp-280h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C3F5C",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3F5D",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3F62",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3F63",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3F64",
+    "line": "lea     ecx, [ebp-28Ch]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C3F6A",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3F6F",
+    "line": "mov     eax, [ebp-294h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C3F75",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3F76",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3F7B",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3F7C",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3F7D",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C3F81",
+    "line": "lea     eax, [edx-298h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C3F87",
+    "line": "mov     ecx, [edx-29Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C3F8D",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C3F8F",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3F94",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3F97",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3F9A",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C3F9C",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3FA1",
+    "line": "mov     eax, offset stru_AECA04",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3FA6",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

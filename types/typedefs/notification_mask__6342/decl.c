@@ -1,1 +1,6 @@
-notification_mask
+enum notification_mask : __int32
+{
+NOTIFY_MASK_ITEM_CHANGE = 0x1,
+NOTIFY_MASK_END_LABEL_EDIT = 0x2,
+NOTIFY_MASK_UNMASK_ALL = 0xFFFFFFFF,
+};

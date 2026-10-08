@@ -1,19 +1,32 @@
 {
-  "callees_count": 15,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 11,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6B8280",
+      "0x6B8384"
+    ]
+  ],
+  "chunks_sha256": "ea39e38b4facd38cc6402110c2289d5e29db37a034dde43f72c72d5511b3a60f",
+  "comment_regular": "Loads the exact saved response display text, voice path, and copied first 8 bytes of TRDT. Resume therefore uses serialized response material rather than recollecting TESTopicInfo responses.",
+  "comment_repeatable": "Loads the exact saved response display text, voice path, and copied first 8 bytes of TRDT. Resume therefore uses serialized response material rather than recollecting TESTopicInfo responses.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_6B8280",
+  "display_name": "DialogueResponse::LoadGame",
   "end_ea": "0x6B8384",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6B8280",
+  "name": "DialogueResponse::LoadGame",
   "segment": ".text",
   "sha256": "ea39e38b4facd38cc6402110c2289d5e29db37a034dde43f72c72d5511b3a60f",
   "size": 260,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6B8280",
-  "type": "void *__thiscall(BSStringT *this)",
+  "total_chunk_size": 260,
+  "type": "void __thiscall(DialogueResponse *this)",
   "xrefs_from_count": 94,
   "xrefs_to_count": 1
 }

@@ -1,4 +1,4 @@
-0x4E0000: push    ebx
+0x4E0000: push    ebx; Runtime corroboration of TESCS 0x545970: construct owning CELL group type 6 from parent types 1/3/5, then construct the direct reference-role group from type 6. Role is 8 if reference Persistent, else 10 if Visible When Distant, else 9; label remains the owning CELL FormID.
 0x4E0001: push    esi
 0x4E0002: mov     esi, [esp+8+arg_0]
 0x4E0006: test    esi, esi
@@ -24,29 +24,29 @@
 0x4E0045: ja      short TESObjectREFR_CreateGroupRecord___def_4E0047; jumptable 004E0047 default case, cases 2,4
 0x4E0047: jmp     ds:jpt_4E0047[eax*4]; switch jump
 0x4E004E: mov     ecx, edi; jumptable 004E0047 case 1
-0x4E0050: call    TESForm_GetQuestItem
+0x4E0050: call    TESForm_GetQuestItem; TESForm_GetQuestItem: returns TESForm flags bit 0x400. Plugin IsStealableForm uses this, so quest items are skipped before RemoveItem.
 0x4E0055: test    al, al
 0x4E0057: jz      short loc_4E005E; jumptable 004E0047 cases 3,5
-0x4E0059: mov     byte ptr [esp+10h+arg_0], 1
+0x4E0059: mov     byte ptr [esp+10h+arg_0], 1; For current group type 1, the owning CELL must carry form flag 0x400; this is the persistent exterior-CELL shortcut to type 6.
 0x4E005E: mov     ecx, edi; jumptable 004E0047 cases 3,5
-0x4E0060: call    sub_4CA640
+0x4E0060: call    TESObjectCELL_GetCellGroupSubBlockLabel; Compute the CELL group sub-block label. Interior: decimal FormID bucket ((objectID24 % 100) / 10). Exterior: signed cell coordinates divided by 8 and packed X-high/Y-low. Cross-checks TESCS TESObjectCELL_GetCellGroupSubBlockLabel at 0x533F90.
 0x4E0065: cmp     [ebp+8], eax
 0x4E0068: jz      short loc_4E0071
 0x4E006A: cmp     byte ptr [esp+10h+arg_0], 0
 0x4E006F: jz      short TESObjectREFR_CreateGroupRecord___def_4E0047; jumptable 004E0047 default case, cases 2,4
 0x4E0071: mov     eax, ds:0B05E20h
 0x4E0076: mov     [esi], eax
-0x4E0078: mov     dword ptr [esi+0Ch], 6
+0x4E0078: mov     dword ptr [esi+0Ch], 6; Emit owning CELL-child GRUP type 6.
 0x4E007F: jmp     short loc_4E00B6
 0x4E0081: cmp     [ebp+8], ecx; jumptable 004E0047 case 6
 0x4E0084: jnz     short TESObjectREFR_CreateGroupRecord___def_4E0047; jumptable 004E0047 default case, cases 2,4
 0x4E0086: mov     edx, ds:0B05E20h
 0x4E008C: mov     ecx, ebx; this
 0x4E008E: mov     [esi], edx
-0x4E0090: call    TESObjectREFR_IsPersistent?
+0x4E0090: call    TESObjectREFR_IsPersistent; From owning type 6, test current reference Persistent first.
 0x4E0095: test    al, al
 0x4E0097: jz      short loc_4E00A2
-0x4E0099: mov     dword ptr [esi+0Ch], 8
+0x4E0099: mov     dword ptr [esi+0Ch], 8; Persistent reference => direct role GRUP type 8.
 0x4E00A0: jmp     short loc_4E00B6
 0x4E00A2: mov     eax, [ebx+8]
 0x4E00A5: and     eax, 8000h
@@ -54,7 +54,7 @@
 0x4E00AC: sbb     eax, eax
 0x4E00AE: neg     eax
 0x4E00B0: add     eax, 9
-0x4E00B3: mov     [esi+0Ch], eax
+0x4E00B3: mov     [esi+0Ch], eax; Non-persistent reference => role type 10 if Visible When Distant, otherwise type 9.
 0x4E00B6: mov     ecx, [esp+10h+arg_4]
 0x4E00BA: xor     eax, eax
 0x4E00BC: mov     [esi+10h], eax

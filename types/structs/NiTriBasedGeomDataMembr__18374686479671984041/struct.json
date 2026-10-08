@@ -1,28 +1,54 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "NiTriBasedGeomDataMembr",
+  "definition": "struct NiTriBasedGeomDataMembr\n{\nNiGeometryDataMembr super;\nUInt16 m_usTriangles;\nUInt8 pad42[2];\n}\n",
   "id": 18374686479671984041,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "super",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 60
+      "size": 60,
+      "type": "NiGeometryDataMembr"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "m_usTriangles",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 2
+      "offset_hex": "0x3C",
+      "size": 2,
+      "type": "UInt16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad42",
       "offset": 62,
-      "offset_hex": "0x3e",
-      "size": 2
+      "offset_hex": "0x3E",
+      "size": 2,
+      "type": "UInt8[2]"
     }
   ],
   "name": "NiTriBasedGeomDataMembr",
+  "ordinal": 9317,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 64
 }

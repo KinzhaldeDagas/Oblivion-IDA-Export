@@ -1,1 +1,1 @@
-GLDEBUGPROC
+typedef void *GLDEBUGPROC;

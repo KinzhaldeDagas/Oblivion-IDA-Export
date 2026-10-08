@@ -1,34 +1,63 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "TESScriptableForm",
+  "definition": "struct TESScriptableForm\n{\nBaseFormComponentVtbl *vtbl;\nScript *script;\nUInt8 unk1;\nUInt8 pad[3];\n}\n",
   "id": 18374686479671995174,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "vtbl",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "BaseFormComponentVtbl *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "script",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "Script *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk1",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 1
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad",
       "offset": 9,
       "offset_hex": "0x9",
-      "size": 3
+      "size": 3,
+      "type": "UInt8[3]"
     }
   ],
   "name": "TESScriptableForm",
+  "ordinal": 9575,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 12
 }

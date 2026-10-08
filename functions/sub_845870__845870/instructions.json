@@ -1081,7 +1081,7 @@
   },
   {
     "ea": "0x845B18",
-    "line": "mov     ds:dword_B461A8[ebx], edx",
+    "line": "mov     ds:flt_B461A8[ebx], edx",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1111,19 +1111,19 @@
   },
   {
     "ea": "0x845B2E",
-    "line": "mov     ds:dword_B461AC[ebx], eax",
+    "line": "mov     ds:flt_B461AC[ebx], eax",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x845B34",
-    "line": "mov     ds:dword_B461B0[ebx], ecx",
+    "line": "mov     ds:flt_B461B0[ebx], ecx",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x845B3A",
-    "line": "mov     ds:dword_B461B4[ebx], edx",
+    "line": "mov     ds:flt_B461B4[ebx], edx",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1171,7 +1171,7 @@
   },
   {
     "ea": "0x845B5B",
-    "line": "mov     ds:dword_B461A8[ebx], eax",
+    "line": "mov     ds:flt_B461A8[ebx], eax",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1201,19 +1201,19 @@
   },
   {
     "ea": "0x845B6F",
-    "line": "mov     ds:dword_B461AC[ebx], ecx",
+    "line": "mov     ds:flt_B461AC[ebx], ecx",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x845B75",
-    "line": "mov     ds:dword_B461B0[ebx], edx",
+    "line": "mov     ds:flt_B461B0[ebx], edx",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x845B7B",
-    "line": "mov     ds:dword_B461B4[ebx], eax",
+    "line": "mov     ds:flt_B461B4[ebx], eax",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1243,7 +1243,7 @@
   },
   {
     "ea": "0x845B90",
-    "line": "mov     ds:dword_B461A8[ebx], ecx",
+    "line": "mov     ds:flt_B461A8[ebx], ecx",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1285,19 +1285,19 @@
   },
   {
     "ea": "0x845BAE",
-    "line": "mov     ds:dword_B461AC[ebx], edx",
+    "line": "mov     ds:flt_B461AC[ebx], edx",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x845BB4",
-    "line": "mov     ds:dword_B461B0[ebx], eax",
+    "line": "mov     ds:flt_B461B0[ebx], eax",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x845BBA",
-    "line": "mov     ds:dword_B461B4[ebx], ecx",
+    "line": "mov     ds:flt_B461B4[ebx], ecx",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1339,7 +1339,7 @@
   },
   {
     "ea": "0x845BD4",
-    "line": "mov     ds:dword_B461A8[ebx], edx",
+    "line": "mov     ds:flt_B461A8[ebx], edx",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1369,19 +1369,19 @@
   },
   {
     "ea": "0x845BEA",
-    "line": "mov     ds:dword_B461AC[ebx], eax",
+    "line": "mov     ds:flt_B461AC[ebx], eax",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x845BF0",
-    "line": "mov     ds:dword_B461B0[ebx], ecx",
+    "line": "mov     ds:flt_B461B0[ebx], ecx",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x845BF6",
-    "line": "mov     ds:dword_B461B4[ebx], edx",
+    "line": "mov     ds:flt_B461B4[ebx], edx",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1390,5 +1390,59 @@
     "line": "jmp     short loc_845C21",
     "mnemonic": "jmp",
     "size": 2
+  },
+  {
+    "ea": "0x9D3270",
+    "line": "lea     ecx, [ebp-0D4h]; void *",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9D3276",
+    "line": "jmp     sub_4027D0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D327B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D327F",
+    "line": "lea     eax, [edx-0DCh]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9D3285",
+    "line": "mov     ecx, [edx-0E0h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9D328B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D328D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3292",
+    "line": "mov     eax, offset stru_AFB6B8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3297",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

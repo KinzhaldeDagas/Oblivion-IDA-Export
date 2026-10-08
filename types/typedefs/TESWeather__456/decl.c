@@ -1,1 +1,1 @@
-TESWeather
+struct TESWeather;

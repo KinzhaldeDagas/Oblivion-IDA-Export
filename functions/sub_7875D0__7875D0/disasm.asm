@@ -1,4 +1,4 @@
-0x7875D0: sub     esp, 1Ch
+0x7875D0: sub     esp, 1Ch; SetupHorizontalBillboard: when horizontal billboards are enabled, builds four XYZ corners at CSpeedTreeRT+0x70..0x9C from tree bounds midpoint and extent values.
 0x7875D3: cmp     byte ptr [ecx+6Dh], 0
 0x7875D7: jz      loc_787671
 0x7875DD: mov     eax, [ecx+40h]

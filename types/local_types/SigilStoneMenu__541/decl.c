@@ -1,1 +1,1 @@
-SigilStoneMenu
+struct SigilStoneMenu;

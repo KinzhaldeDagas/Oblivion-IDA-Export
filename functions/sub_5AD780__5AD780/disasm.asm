@@ -22,13 +22,12 @@
 0x5AD7CC: mov     [esp+238h+var_214], edi
 0x5AD7D0: mov     [esp+238h+var_220], eax
 0x5AD7D4: call    Tile_GetFloat
-0x5AD7D9: call    Double_To_SInt32
+0x5AD7D9: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5AD7DE: lea     ecx, [edi+4Ch]
 0x5AD7E1: xor     ebx, ebx
 0x5AD7E3: cmp     ecx, ebx
 0x5AD7E5: jz      loc_5AD947
 0x5AD7EB: jmp     short loc_5AD7F0
-0x5AD7ED: align 10h
 0x5AD7F0: mov     edx, [ecx+4]
 0x5AD7F3: cmp     edx, ebx
 0x5AD7F5: jnz     short loc_5AD7FB
@@ -138,11 +137,11 @@
 0x5AD927: mov     ecx, esi; this
 0x5AD929: fstp    [esp+238h+var_220]
 0x5AD92D: fld     [esp+238h+var_220]
-0x5AD931: fstp    [esp+238h+a3]; a3
-0x5AD934: push    0FAEh; a2
-0x5AD939: call    Tile_SetFloat
+0x5AD931: fstp    [esp+238h+a3]; value
+0x5AD934: push    0FAEh; propertyCode
+0x5AD939: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5AD93E: push    ebp
-0x5AD93F: call    FormHeapFree
+0x5AD93F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5AD944: add     esp, 4
 0x5AD947: mov     ecx, dword ptr [esp+234h+var_C]
 0x5AD94E: mov     large fs:0, ecx
@@ -156,3 +155,16 @@
 0x5AD963: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x5AD968: add     esp, 220h
 0x5AD96E: retn    4
+0x9C05E0: lea     ecx, [ebp-21Ch]; void *
+0x9C05E6: jmp     BSStringT_Clear
+0x9C05EB: mov     edx, [esp+arg_4]
+0x9C05EF: lea     eax, [edx-224h]
+0x9C05F5: mov     ecx, [edx-228h]
+0x9C05FB: xor     ecx, eax
+0x9C05FD: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C0602: add     eax, 10h
+0x9C0605: mov     ecx, [edx-4]
+0x9C0608: xor     ecx, eax
+0x9C060A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C060F: mov     eax, offset stru_AE987C
+0x9C0614: jmp     ___CxxFrameHandler3

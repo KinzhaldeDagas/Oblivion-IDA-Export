@@ -23,3 +23,24 @@
 0x691BC9: jmp     loc_6193D0
 0x691BCE: pop     esi
 0x691BCF: retn
+0x6193D0: push    esi
+0x6193D1: mov     esi, ecx
+0x6193D3: cmp     dword ptr [esi+70h], 0Bh
+0x6193D7: jz      short loc_619409
+0x6193D9: cmp     byte ptr ds:0B3B908h, 0
+0x6193E0: jz      short loc_6193FD
+0x6193E2: mov     ecx, [esi+3Ch]; this
+0x6193E5: push    offset a___justKindaSt; "...just kinda stand around"
+0x6193EA: call    TESObjectREFR_GetName
+0x6193EF: push    eax
+0x6193F0: push    offset a_20sIsGoingToS; "%.20s is going to %s!"
+0x6193F5: call    Interface_ConsolePrint
+0x6193FA: add     esp, 0Ch
+0x6193FD: fld     dword ptr ds:0A30634h
+0x619403: fstp    dword ptr [esi+188h]
+0x619409: mov     ecx, esi
+0x61940B: mov     dword ptr [esi+70h], 0Bh
+0x619412: call    sub_6160B0
+0x619417: mov     ecx, esi
+0x619419: pop     esi
+0x61941A: jmp     sub_6191B0

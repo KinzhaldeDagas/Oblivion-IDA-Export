@@ -1,10 +1,22 @@
 {
   "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 44,
   "callers_count": 0,
+  "chunks": [
+    [
+      "0x56C4C0",
+      "0x56CA96"
+    ],
+    [
+      "0x9BD9C0",
+      "0x9BD9F9"
+    ]
+  ],
   "chunks_sha256": "096478167b46a3283b7107d5388351cb3208bea92c56041a759397f62de24e61",
   "comment_regular": "[Verified] BSTempEffectDecal_LoadGame allocates a 0x4C DECAL_DATA payload, reloads its source texture into +0, restores transform/vector/reference fields, resolves a NiProperty* at +0x48 from the saved geometry/property index, then calls BSShaderLightingProperty_AddDecalData on that property. This is the save-load re-registration path.",
   "comment_repeatable": "[Verified] BSTempEffectDecal_LoadGame allocates a 0x4C DECAL_DATA payload, reloads its source texture into +0, restores transform/vector/reference fields, resolves a NiProperty* at +0x48 from the saved geometry/property index, then calls BSShaderLightingProperty_AddDecalData on that property. This is the save-load re-registration path.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 20,
   "display_name": "BSTempEffectDecal_LoadGame",
   "end_ea": "0x56CA96",
@@ -15,6 +27,7 @@
   "segment": ".text",
   "sha256": "e4e401b5884dab98c858c6319bf6bfb8049488df2fe77c1ad06d981f754a4f28",
   "size": 1494,
+  "source_annotation_confidence": "Verified",
   "start_ea": "0x56C4C0",
   "total_chunk_size": 1551,
   "type": "bool __thiscall(BSTempEffectDecalLayout_t *this)",

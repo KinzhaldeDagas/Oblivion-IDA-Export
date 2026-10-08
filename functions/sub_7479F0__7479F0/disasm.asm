@@ -73,7 +73,7 @@
 0x747B0C: push    3; SizeInBytes
 0x747B0E: push    edx; Dst
 0x747B0F: call    _strcpy_s
-0x747B14: push    offset byte_B40230; Src
+0x747B14: push    offset unk_B40230; Src
 0x747B19: push    100h; SizeInBytes
 0x747B1E: lea     eax, [esp+82Ch+Dir]
 0x747B22: push    eax; Dst
@@ -85,7 +85,7 @@
 0x747B34: lea     ecx, [esp+820h+Dir]; Src
 0x747B38: call    sub_7487B0
 0x747B3D: push    ebx
-0x747B3E: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x747B3E: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x747B43: mov     eax, 1
 0x747B48: add     esp, 4
 0x747B4B: add     [esi+4], eax

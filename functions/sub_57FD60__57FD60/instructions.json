@@ -13,19 +13,19 @@
   },
   {
     "ea": "0x57FD62",
-    "line": "push    0",
+    "line": "push    0; root",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x57FD64",
-    "line": "lea     eax, [esp+0Ch+var_4]",
+    "line": "lea     eax, [esp+0Ch+maxFocus]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x57FD68",
-    "line": "push    eax",
+    "line": "push    eax; maxFocus",
     "mnemonic": "push",
     "size": 1
   },
@@ -37,13 +37,13 @@
   },
   {
     "ea": "0x57FD6B",
-    "line": "mov     [esp+10h+var_4], 80000000h",
+    "line": "mov     [esp+10h+maxFocus], 80000000h",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x57FD73",
-    "line": "call    sub_57DA90",
+    "line": "call    InterfaceManager__ScanForMaxFocus; AchievementsNative evidence: default UI hit-test recursively scans visible/non-hidden target tiles, chooses highest depth, and tie-breaks list items by lower listindex; use active/mouseover tile evidence before cursor-sprite coordinate fallbacks.",
     "mnemonic": "call",
     "size": 5
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x57FD86",
-    "line": "call    sub_57F9F0",
+    "line": "call    InterfaceManager__SetCurrentFocusTarget; AchievementsNative evidence: focused tile with xlist=&xitem drives parent xscroll by pulsing the xscroll target's user5 through -999999, tile xscroll, then 0; do not leave scroll target user5 at the desired scroll value.",
     "mnemonic": "call",
     "size": 5
   },
@@ -127,19 +127,19 @@
   },
   {
     "ea": "0x57FD9C",
-    "line": "fstp    [esp+0Ch+a2]; a3",
+    "line": "fstp    [esp+0Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x57FD9F",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x57FDA4",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x57FDB5",
-    "line": "call    sub_57F9F0",
+    "line": "call    InterfaceManager__SetCurrentFocusTarget; AchievementsNative evidence: focused tile with xlist=&xitem drives parent xscroll by pulsing the xscroll target's user5 through -999999, tile xscroll, then 0; do not leave scroll target user5 at the desired scroll value.",
     "mnemonic": "call",
     "size": 5
   },

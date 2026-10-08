@@ -1,19 +1,36 @@
 {
-  "callees_count": 140,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_5F9620",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 71,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x5F9620",
+      "0x5F9EA2"
+    ],
+    [
+      "0x9C2AB0",
+      "0x9C2AEC"
+    ]
+  ],
+  "chunks_sha256": "29646919c5b2008d358fd3eb1f178cccbf728e380f40999c121bfd8549b1893a",
+  "comment_regular": "Probable name: Actor_ProcessAttackReachProbe. This routine is called from Actor_ProcessAction's two reach/attack branches and from Actor_AttackHandling::DetermineTarget; it returns a byte and contains target/static-hit probing, impact-particle registration, and conditional attack/script follow-up. The two floating x87 inputs are visible in DetermineTarget's caller, but their semantic roles and Actor_ProcessAction's input values remain Unknown.",
+  "comment_repeatable": "Probable name: Actor_ProcessAttackReachProbe. This routine is called from Actor_ProcessAction's two reach/attack branches and from Actor_AttackHandling::DetermineTarget; it returns a byte and contains target/static-hit probing, impact-particle registration, and conditional attack/script follow-up. The two floating x87 inputs are visible in DetermineTarget's caller, but their semantic roles and Actor_ProcessAction's input values remain Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 7,
+  "display_name": "Actor_ProcessAttackReachProbe",
   "end_ea": "0x5F9EA2",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "sub_5F9620",
+  "name": "Actor_ProcessAttackReachProbe",
   "segment": ".text",
   "sha256": "bdcb79d255c05df62fb4310a5bb874efae212c479cee1d68f7a47bbe58399180",
   "size": 2178,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5F9620",
-  "type": "char __usercall@<al>(TESObjectREFR *@<ecx>, double st6_0@<st1>, double@<st0>)",
-  "xrefs_from_count": 820,
+  "total_chunk_size": 2238,
+  "type": "char __usercall@<al>(Actor *@<ecx>, double st6_0@<st1>, double@<st0>)",
+  "xrefs_from_count": 839,
   "xrefs_to_count": 3
 }

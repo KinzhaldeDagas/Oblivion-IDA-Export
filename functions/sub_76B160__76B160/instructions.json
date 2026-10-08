@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x76B160",
-    "line": "sub     esp, 4Ch",
+    "line": "sub     esp, 4Ch; Pass224: NiRenderer::RenderScreenTexture vtable slot. Uses cached renderer+0x89C NiPropertyState and transiently swaps slot 6 to NiScreenTexture+0x14.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x76B1BD",
-    "line": "call    sub_7319E0",
+    "line": "call    sub_7319E0; Pass222: Constructs 0x30-byte NiPropertyState with ten managed smart-pointer slots at +0x08..+0x2C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x76B1FC",
-    "line": "call    sub_707470",
+    "line": "call    sub_707470; Pass224: RenderScreenTexture inserts custom NiVertexColorProperty into cached state slot 7.",
     "mnemonic": "call",
     "size": 5
   },
@@ -319,13 +319,13 @@
   },
   {
     "ea": "0x76B20F",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x76B211",
-    "line": "call    sub_47F920",
+    "line": "call    NiAlphaProperty_ctor; Constructs a 0x1C NiAlphaProperty over NiObjectNET: installs NiAlphaProperty vtable, initializes flags to 0x00EC and threshold byte to 0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x76B230",
-    "line": "call    sub_707470",
+    "line": "call    sub_707470; Pass224: RenderScreenTexture inserts custom NiAlphaProperty into cached state slot 0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x76B258",
-    "line": "call    sub_707470",
+    "line": "call    sub_707470; Pass224: RenderScreenTexture inserts custom NiZBufferProperty into cached state slot 9.",
     "mnemonic": "call",
     "size": 5
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x76B264",
-    "line": "call    sub_707470",
+    "line": "call    sub_707470; Pass224: RenderScreenTexture inserts NiScreenTexture +0x14 texturing property into cached state slot 6 for the draw.",
     "mnemonic": "call",
     "size": 5
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x76B28E",
-    "line": "call    sub_769B60",
+    "line": "call    sub_769B60; Pass224/226: Prepares NiScreenTexture +0x1C geometry buffer and rebuilds from records when pending/update flags require it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -703,7 +703,7 @@
   },
   {
     "ea": "0x76B2E0",
-    "line": "call    sub_7672F0",
+    "line": "call    NiDX9Renderer_RenderGeometryNonSkinned; MoonSugarEffect decode: special extra-data/property render path also calls sub_7672F0 with a2/a3/a4 null-ish. Do not patch this call for first Moon Sugar geometry wobble; use RenderTriGeometries call site 0x007694D7 and filter null/screen/skinned geometry.",
     "mnemonic": "call",
     "size": 5
   },
@@ -727,7 +727,7 @@
   },
   {
     "ea": "0x76B2EF",
-    "line": "call    sub_707470",
+    "line": "call    sub_707470; Pass224: RenderScreenTexture resets cached state slot 6 back to default NiTexturingProperty global 0x00B3F974 after draw.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,4 +1,4 @@
-0x79EE40: push    ebp
+0x79EE40: push    ebp; Oblivion st_vector<SFrondGuide> copy constructor. Allocates sourceCount*0x30 and deep-copy-constructs each compact guide, including its owned SFrondVertex vector. The executable establishes the by-value layout.
 0x79EE41: mov     ebp, esp
 0x79EE43: push    0FFFFFFFFh
 0x79EE45: push    offset SEH_79EE40
@@ -16,7 +16,7 @@
 0x79EE68: mov     [ebp+var_10], esp
 0x79EE6B: mov     edi, ecx
 0x79EE6D: mov     [ebp+var_14], edi
-0x79EE70: mov     ebx, [ebp+arg_0]
+0x79EE70: mov     ebx, [ebp+source]
 0x79EE73: mov     eax, [ebx+4]
 0x79EE76: xor     ecx, ecx
 0x79EE78: cmp     eax, ecx
@@ -39,10 +39,10 @@
 0x79EEA3: jz      short loc_79EF12
 0x79EEA5: cmp     esi, 5555555h
 0x79EEAB: jbe     short loc_79EEB2
-0x79EEAD: call    sub_790B90
+0x79EEAD: call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error("vector<T> too long") and throws; used by multiple element specializations after max_size checks.
 0x79EEB2: push    ecx
-0x79EEB3: push    esi; char *
-0x79EEB4: call    sub_799FA0
+0x79EEB3: push    esi; count
+0x79EEB4: call    OB_stVector_SFrondGuide_Allocate_010201A0; Allocates count compact 0x30-byte SFrondGuide records from FormHeap and throws std::bad_alloc on count*0x30 overflow.
 0x79EEB9: lea     ecx, [esi+esi*2]
 0x79EEBC: shl     ecx, 4
 0x79EEBF: add     ecx, eax
@@ -57,21 +57,21 @@
 0x79EEDC: call    __invalid_parameter_noinfo
 0x79EEE1: mov     ecx, [ebx+4]
 0x79EEE4: cmp     ecx, [ebx+8]
-0x79EEE7: mov     [ebp+arg_0], ecx
+0x79EEE7: mov     [ebp+source], ecx
 0x79EEEA: jbe     short loc_79EEF4
 0x79EEEC: call    __invalid_parameter_noinfo
-0x79EEF1: mov     ecx, [ebp+arg_0]
+0x79EEF1: mov     ecx, [ebp+source]
 0x79EEF4: mov     eax, [edi+4]
-0x79EEF7: mov     byte ptr [ebp+arg_0], 0
-0x79EEFB: mov     edx, [ebp+arg_0]
+0x79EEF7: mov     byte ptr [ebp+source], 0
+0x79EEFB: mov     edx, [ebp+source]
 0x79EEFE: push    edx
-0x79EEFF: mov     edx, [ebp+arg_0]
+0x79EEFF: mov     edx, [ebp+source]
 0x79EF02: push    edx
 0x79EF03: push    edi
-0x79EF04: push    eax
-0x79EF05: push    esi
-0x79EF06: push    ecx
-0x79EF07: call    sub_79C2E0
+0x79EF04: push    eax; destinationFirst
+0x79EF05: push    esi; last
+0x79EF06: push    ecx; first
+0x79EF07: call    OB_SFrondGuide_UninitializedCopy_010201A0; Exception-safe uninitialized copy of compact SFrondGuide records. Placement-copy-constructs [first,last) into destination; unwind cleanup destroys the already constructed prefix before rethrowing.
 0x79EF0C: add     esp, 18h
 0x79EF0F: mov     [edi+8], eax
 0x79EF12: mov     eax, edi
@@ -84,8 +84,15 @@
 0x79EF22: mov     esp, ebp
 0x79EF24: pop     ebp
 0x79EF25: retn    4
-0x79EF28: mov     ecx, [ebp+var_14]
-0x79EF2B: call    sub_79F000
+0x79EF28: mov     ecx, [ebp+var_14]; this
+0x79EF2B: call    OB_stVector_SFrondGuide_Destroy_010201A0; Destroys one st_vector<SFrondGuide>: deep-destroys the initialized 0x30 guide range, frees its allocation, and clears begin/end/capacityEnd.
 0x79EF30: push    0
 0x79EF32: push    0
 0x79EF34: call    ThrowException??
+0x9CC480: mov     edx, [esp+8]
+0x9CC484: lea     eax, [edx+0Ch]
+0x9CC487: mov     ecx, [edx-18h]
+0x9CC48A: xor     ecx, eax
+0x9CC48C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CC491: mov     eax, offset stru_AF5750
+0x9CC496: jmp     ___CxxFrameHandler3

@@ -1,4 +1,4 @@
-0x65E530: cmp     byte ptr ds:0B3BB06h, 0
+0x65E530: cmp     byte ptr ds:0B3BB06h, 0; Player float damage-modifier path. Update the damage/current-value channel, refresh UI, and notify with rebuild=false; no major/minor progression counters are touched.
 0x65E537: fld     [esp+arg_4]
 0x65E53B: push    esi
 0x65E53C: mov     esi, [esp+4+a2]
@@ -30,8 +30,8 @@
 0x65E579: push    2
 0x65E57B: mov     ecx, edi
 0x65E57D: call    Player_ModAVModifierf
-0x65E582: push    esi; a2
-0x65E583: call    sub_57A6F0
+0x65E582: push    esi; actorValue
+0x65E583: call    UI_UpdateActorValueDisplays; UI_UpdateActorValueDisplays(actorValue), called by player base-AV setters/modifiers after changing base form values.
 0x65E588: add     esp, 4
 0x65E58B: cmp     esi, 8
 0x65E58E: jnz     short loc_65E5C4
@@ -49,19 +49,19 @@
 0x65E5AD: push    ebx
 0x65E5AE: mov     ecx, edi
 0x65E5B0: call    edx
-0x65E5B2: push    0
-0x65E5B4: push    esi
-0x65E5B5: mov     ecx, edi
-0x65E5B7: call    sub_5E2670
+0x65E5B2: push    0; updatePlayerUI
+0x65E5B4: push    esi; actorValue
+0x65E5B5: mov     ecx, edi; this
+0x65E5B7: call    Player_OnActorValueBaseChanged; Handles player base actor-value changes. For native skill AVs, optional UI refresh also recalculates required experience for all 21 skills; major/non-major membership affects the recomputed requirement through TESClass_IsMajorSkillAV.
 0x65E5BC: pop     ebx
 0x65E5BD: pop     edi
 0x65E5BE: pop     esi
 0x65E5BF: retn    0Ch
 0x65E5C2: fstp    st
-0x65E5C4: push    0
-0x65E5C6: push    esi
-0x65E5C7: mov     ecx, edi
-0x65E5C9: call    sub_5E2670
+0x65E5C4: push    0; updatePlayerUI
+0x65E5C6: push    esi; actorValue
+0x65E5C7: mov     ecx, edi; this
+0x65E5C9: call    Player_OnActorValueBaseChanged; Handles player base actor-value changes. For native skill AVs, optional UI refresh also recalculates required experience for all 21 skills; major/non-major membership affects the recomputed requirement through TESClass_IsMajorSkillAV.
 0x65E5CE: pop     ebx
 0x65E5CF: pop     edi
 0x65E5D0: pop     esi

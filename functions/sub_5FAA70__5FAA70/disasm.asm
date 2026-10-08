@@ -18,15 +18,15 @@
 0x5FAA97: mov     edi, ebx
 0x5FAA99: movzx   edi, word ptr [edi+30h]
 0x5FAA9D: lea     ecx, [esi+44h]
-0x5FAAA0: call    sub_41E980
+0x5FAAA0: call    ExtraDataList_GetInvestmentGold; Returns the integer value stored in ExtraInvestmentGold type 0x52, or zero when absent.
 0x5FAAA5: mov     ecx, ds:0B333C4h
 0x5FAAAB: mov     esi, eax
 0x5FAAAD: movzx   eax, di
 0x5FAAB0: push    1Dh
 0x5FAAB2: add     esi, eax
 0x5FAAB4: call    Actor_GetBaseCalcAVi
-0x5FAAB9: push    eax
-0x5FAABA: call    Calc_MasteryFromSkill
+0x5FAAB9: push    eax; skillValue
+0x5FAABA: call    Calc_MasteryFromSkill; Map a base skill value to Oblivion's five mastery tiers using iSkillApprenticeMin=25, iSkillJourneymanMin=50, iSkillExpertMin=75, and iSkillMasterMin=100.
 0x5FAABF: add     esp, 4
 0x5FAAC2: cmp     eax, 4
 0x5FAAC5: jnz     short loc_5FAACD

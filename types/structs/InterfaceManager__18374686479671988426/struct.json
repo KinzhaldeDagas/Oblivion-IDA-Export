@@ -1,214 +1,333 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "InterfaceManager",
+  "definition": "struct InterfaceManager\n{\nSceneGraph *unk000;\nSceneGraph *unk004;\nUInt32 unk008[4];\nvoid *unk018;\nTile *cursor;\nUInt32 unk020[12];\nbool debugTextOn;\nUInt8 unk051[3];\nNiNode *unk054[4];\nNiNode *unk064;\nTile *menuRoot;\nTile *strings;\nNiNode *unk070;\nUInt32 unk074;\nvoid *unk078;\nUInt32 unk07C;\nTile *hudReticule;\nUInt32 unk084;\nTile *altActiveTile;\nUInt32 unk08C;\nUInt32 unk090;\nUInt32 unk094;\nTile *activeTile;\nMenu *activeMenu;\nUInt32 unk0A0;\nUInt32 unk0A4;\nUInt32 unk0A8;\nUInt32 unk0AC;\nUInt8 msgBoxButtonPressed;\nUInt8 unk0B1[3];\nvoid (__cdecl *pendingMessageCallback)();\nUInt32 unk0B8;\nTESObjectREFR *debugSelection;\nUInt32 unk0C0[29];\n}\n",
   "id": 18374686479671988426,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk000",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "SceneGraph *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk004",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "SceneGraph *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk008",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 16
+      "size": 16,
+      "type": "UInt32[4]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk018",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "void *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cursor",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "Tile *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk020",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 48
+      "size": 48,
+      "type": "UInt32[12]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "debugTextOn",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 1
+      "size": 1,
+      "type": "bool"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk051",
       "offset": 81,
       "offset_hex": "0x51",
-      "size": 3
+      "size": 3,
+      "type": "UInt8[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk054",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 16
+      "size": 16,
+      "type": "NiNode *[4]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk064",
       "offset": 100,
       "offset_hex": "0x64",
-      "size": 4
+      "size": 4,
+      "type": "NiNode *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "menuRoot",
       "offset": 104,
       "offset_hex": "0x68",
-      "size": 4
+      "size": 4,
+      "type": "Tile *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "strings",
       "offset": 108,
-      "offset_hex": "0x6c",
-      "size": 4
+      "offset_hex": "0x6C",
+      "size": 4,
+      "type": "Tile *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk070",
       "offset": 112,
       "offset_hex": "0x70",
-      "size": 4
+      "size": 4,
+      "type": "NiNode *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk074",
       "offset": 116,
       "offset_hex": "0x74",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk078",
       "offset": 120,
       "offset_hex": "0x78",
-      "size": 4
+      "size": 4,
+      "type": "void *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk07C",
       "offset": 124,
-      "offset_hex": "0x7c",
-      "size": 4
+      "offset_hex": "0x7C",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hudReticule",
       "offset": 128,
       "offset_hex": "0x80",
-      "size": 4
+      "size": 4,
+      "type": "Tile *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk084",
       "offset": 132,
       "offset_hex": "0x84",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "altActiveTile",
       "offset": 136,
       "offset_hex": "0x88",
-      "size": 4
+      "size": 4,
+      "type": "Tile *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk08C",
       "offset": 140,
-      "offset_hex": "0x8c",
-      "size": 4
+      "offset_hex": "0x8C",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk090",
       "offset": 144,
       "offset_hex": "0x90",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk094",
       "offset": 148,
       "offset_hex": "0x94",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "activeTile",
       "offset": 152,
       "offset_hex": "0x98",
-      "size": 4
+      "size": 4,
+      "type": "Tile *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "activeMenu",
       "offset": 156,
-      "offset_hex": "0x9c",
-      "size": 4
+      "offset_hex": "0x9C",
+      "size": 4,
+      "type": "Menu *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk0A0",
       "offset": 160,
-      "offset_hex": "0xa0",
-      "size": 4
+      "offset_hex": "0xA0",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk0A4",
       "offset": 164,
-      "offset_hex": "0xa4",
-      "size": 4
+      "offset_hex": "0xA4",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk0A8",
       "offset": 168,
-      "offset_hex": "0xa8",
-      "size": 4
+      "offset_hex": "0xA8",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk0AC",
       "offset": 172,
-      "offset_hex": "0xac",
-      "size": 4
+      "offset_hex": "0xAC",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "msgBoxButtonPressed",
       "offset": 176,
-      "offset_hex": "0xb0",
-      "size": 1
+      "offset_hex": "0xB0",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk0B1",
       "offset": 177,
-      "offset_hex": "0xb1",
-      "size": 3
+      "offset_hex": "0xB1",
+      "size": 3,
+      "type": "UInt8[3]"
     },
     {
-      "name": "unk0B4",
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "pendingMessageCallback",
       "offset": 180,
-      "offset_hex": "0xb4",
-      "size": 4
+      "offset_hex": "0xB4",
+      "size": 4,
+      "type": "void (__cdecl *)()"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk0B8",
       "offset": 184,
-      "offset_hex": "0xb8",
-      "size": 4
+      "offset_hex": "0xB8",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "debugSelection",
       "offset": 188,
-      "offset_hex": "0xbc",
-      "size": 4
+      "offset_hex": "0xBC",
+      "size": 4,
+      "type": "TESObjectREFR *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk0C0",
       "offset": 192,
-      "offset_hex": "0xc0",
-      "size": 116
+      "offset_hex": "0xC0",
+      "size": 116,
+      "type": "UInt32[29]"
     }
   ],
   "name": "InterfaceManager",
+  "ordinal": 9440,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 308
 }

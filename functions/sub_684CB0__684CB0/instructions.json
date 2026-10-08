@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x684CD2",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x684CFD",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x684D07",
-    "line": "call    sub_8913C0",
+    "line": "call    bhkCharacterController_GetRadius; Controller radius helper. Returns shape radius from proxy+0x374 object when available, else proxy+0x3A0/E8 default. MobileObject::Move converts this from Havok to world with 0xA372E0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x684D60",
-    "line": "lea     ecx, [esp+68h+var_24]",
+    "line": "lea     ecx, [esp+68h+var_24]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -313,13 +313,13 @@
   },
   {
     "ea": "0x684D6C",
-    "line": "fstp    [esp+68h+var_68]; float",
+    "line": "fstp    [esp+68h+angleZ]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x684D6F",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x684D84",
-    "line": "push    offset Vector3_InitValue?",
+    "line": "push    offset g_zeroNiPoint3",
     "mnemonic": "push",
     "size": 5
   },
@@ -589,7 +589,7 @@
   },
   {
     "ea": "0x684E04",
-    "line": "lea     ecx, [esp+68h+var_24]",
+    "line": "lea     ecx, [esp+68h+var_24]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -607,13 +607,13 @@
   },
   {
     "ea": "0x684E10",
-    "line": "fstp    [esp+68h+var_68]; float",
+    "line": "fstp    [esp+68h+angleZ]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x684E13",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x684E28",
-    "line": "push    offset Vector3_InitValue?",
+    "line": "push    offset g_zeroNiPoint3",
     "mnemonic": "push",
     "size": 5
   },

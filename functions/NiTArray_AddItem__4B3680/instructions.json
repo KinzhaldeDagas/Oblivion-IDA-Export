@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x4B3680",
-    "line": "push    ebx",
+    "line": "push    ebx; Verified AddFirstEmpty ownership: inserts into a free slot and increments the child reference at 0x4B3730, or grows/appends via 0x523B10/0x4B34E0. Thus an outer caller that catches a later fault cannot assume child refcount remains zero. Frond publication retains its own pin and respects array ownership.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B3681",
-    "line": "mov     ebx, [esp+4+arg_0]",
+    "line": "mov     ebx, [esp+4+element]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x4B369D",
-    "line": "movzx   edi, word ptr [esi+0Ah]",
+    "line": "movzx   edi, word ptr [esi+0Ah]; MEF v57 IMPLEMENTED 2026-10-08: PERF-16 implemented dense strong-array probe INSIDE AddFirstEmpty after parent-detach callbacks. Audited vtableA43850, used==occupied, coherent capacity and representable growth permit native append4B36C8; otherwise replay6bytes and native search4B36A3. No persistent density cache or duplicated SetAt refs.",
     "mnemonic": "movzx",
     "size": 4
   },
   {
     "ea": "0x4B36A1",
-    "line": "xor     eax, eax",
+    "line": "xor     eax, eax; MEF PERF 2026-10-08: PERF-16 candidate density decision after usedEnd captured in EDI: under trustworthy metadata and no concurrent mutation, occupiedCount+C==usedEnd+A implies no hole, so existing append/grow path4B36C8 is equivalent. Check used<=capacity and representable sizes. Do not decide earlier at NiNode::AddObject entry, where subsequent old-parent detach can create holes.",
     "mnemonic": "xor",
     "size": 2
   },
@@ -124,12 +124,6 @@
     "line": "jmp     short loc_4B36B0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x4B36AD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x4B36B0",
@@ -217,43 +211,43 @@
   },
   {
     "ea": "0x4B36D9",
-    "line": "push    edx",
+    "line": "push    edx; capacity",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B36DA",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B36DC",
-    "line": "call    sub_523B10",
+    "line": "call    NiTObjectArray_Resize16; MEF PERF 2026-10-08: PERF-16/17 interaction: dense hole-scan bypass alone still calls native growth here. With NiNode grow1, copying remains quadratic. Conversely reserve alone removes growth copies but not first-hole scans. Neither proves linear whole model conversion, because detach and other work remain.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4B36E1",
-    "line": "push    ebx",
+    "line": "push    ebx; element",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B36E2",
-    "line": "push    edi",
+    "line": "push    edi; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B36E3",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B36E5",
-    "line": "call    sub_4B34E0",
+    "line": "call    NiTObjectArray_SetAt",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,7 +397,7 @@
   },
   {
     "ea": "0x4B371E",
-    "line": "mov     eax, [esp+10h+arg_0]",
+    "line": "mov     eax, [esp+10h+element]",
     "mnemonic": "mov",
     "size": 4
   },

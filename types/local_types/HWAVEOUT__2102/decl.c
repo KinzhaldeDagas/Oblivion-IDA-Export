@@ -1,1 +1,1 @@
-HWAVEOUT
+typedef HWAVEOUT__ *HWAVEOUT;

@@ -1,19 +1,32 @@
 {
-  "callees_count": 75,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 28,
   "callers_count": 5,
+  "chunks": [
+    [
+      "0x4535A0",
+      "0x453906"
+    ]
+  ],
+  "chunks_sha256": "0c2f17ff7c243d0da0dc01a4d8313cb680828fde417038b2a77f2930973af0da",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "Verified: starts with created-form flag adjustment, then normalizes flags by runtime type/state. For TESObjectREFR it checks inventory/process/package/death/persistence and location; bit31 is set when reference location differs from its starting location. For TESObjectCELL it validates light/terrain-related flags and classifies exterior grid coordinates. Callers include UnloadForm, ResetFormForLoad, save/load consistency passes. Do not assign names to remaining individual bits without further use tracing.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 9,
-  "display_name": "sub_4535A0",
+  "display_name": "SaveLoad_NormalizeFormChangeFlags",
   "end_ea": "0x453906",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4535A0",
+  "name": "SaveLoad_NormalizeFormChangeFlags",
   "segment": ".text",
   "sha256": "0c2f17ff7c243d0da0dc01a4d8313cb680828fde417038b2a77f2930973af0da",
   "size": 870,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4535A0",
-  "type": "unsigned int __stdcall(_DWORD *, unsigned int)",
+  "total_chunk_size": 870,
+  "type": "unsigned int __stdcall(TESForm *form, unsigned int changeFlags)",
   "xrefs_from_count": 354,
   "xrefs_to_count": 5
 }

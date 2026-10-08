@@ -1,4 +1,4 @@
-0x5D6270: sub     esp, 108h
+0x5D6270: sub     esp, 108h; Sidecar decode: creates chargen skill row; writes skill/AV to tile trait 0xFB0 and selection state to 0xFB1.
 0x5D6276: mov     eax, ds:0B30AACh
 0x5D627B: xor     eax, esp
 0x5D627D: mov     [esp+108h+var_4], eax
@@ -6,12 +6,12 @@
 0x5D6285: mov     ebx, [esp+10Ch+arg_0]
 0x5D628C: push    esi; a3
 0x5D628D: push    edi; a3
-0x5D628E: push    0
+0x5D628E: push    0; lastTile
 0x5D6290: mov     edi, ecx
 0x5D6292: mov     eax, [edi+28h]
 0x5D6295: push    offset aChargen_skill_; "chargen_skill_template"
-0x5D629A: push    eax
-0x5D629B: call    Menu_CreateTileFromTemplate
+0x5D629A: push    eax; parent
+0x5D629B: call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.
 0x5D62A0: mov     esi, eax
 0x5D62A2: test    esi, esi
 0x5D62A4: jz      loc_5D6372
@@ -19,22 +19,22 @@
 0x5D62AD: push    0FD0h
 0x5D62B2: call    Tile_GetFloat
 0x5D62B7: fsub    qword ptr ds:0A2F928h
-0x5D62BD: call    Double_To_SInt32
+0x5D62BD: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5D62C2: mov     [esp+114h+a3], eax
 0x5D62C6: fild    [esp+114h+a3]
 0x5D62CA: push    ecx
 0x5D62CB: mov     ecx, esi; this
 0x5D62CD: fstp    [esp+118h+a3]; a3
 0x5D62D1: fld     [esp+118h+a3]
-0x5D62D5: fstp    [esp+118h+a2]; a3
-0x5D62D8: push    0FAAh; a2
-0x5D62DD: call    Tile_SetFloat
+0x5D62D5: fstp    [esp+118h+a2]; value
+0x5D62D8: push    0FAAh; propertyCode
+0x5D62DD: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D62E2: fld     [esp+114h+a3]
 0x5D62E6: push    ecx
-0x5D62E7: fstp    [esp+118h+a2]; a3
-0x5D62EA: push    0FAEh; a2
+0x5D62E7: fstp    [esp+118h+a2]; value
+0x5D62EA: push    0FAEh; propertyCode
 0x5D62EF: mov     ecx, esi; this
-0x5D62F1: call    Tile_SetFloat
+0x5D62F1: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D62F6: mov     edi, ebx
 0x5D62F8: lea     ecx, [esp+114h+var_104]
 0x5D62FC: xor     edx, edx
@@ -63,15 +63,15 @@
 0x5D6345: fild    [esp+114h+arg_4]
 0x5D634C: push    ecx
 0x5D634D: mov     ecx, esi; this
-0x5D634F: fstp    [esp+118h+a2]; a3
-0x5D6352: push    0FB0h; a2
-0x5D6357: call    Tile_SetFloat
+0x5D634F: fstp    [esp+118h+a2]; value
+0x5D6352: push    0FB0h; propertyCode
+0x5D6357: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D635C: fld1
 0x5D635E: push    ecx
-0x5D635F: fstp    [esp+118h+a2]; a3
-0x5D6362: push    0FB1h; a2
+0x5D635F: fstp    [esp+118h+a2]; value
+0x5D6362: push    0FB1h; propertyCode
 0x5D6367: mov     ecx, esi; this
-0x5D6369: call    Tile_SetFloat
+0x5D6369: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D636E: mov     eax, esi
 0x5D6370: jmp     short loc_5D6374
 0x5D6372: xor     eax, eax

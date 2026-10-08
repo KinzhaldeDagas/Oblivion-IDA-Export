@@ -6,7 +6,7 @@
 0x41DF9A: mov     ebx, [esp+8+arg_4]
 0x41DF9E: test    ebx, ebx
 0x41DFA0: jz      short loc_41DFE2
-0x41DFA2: mov     eax, TlsIndex
+0x41DFA2: mov     eax, dword ptr byte_BA9DCC+18h
 0x41DFA7: mov     ecx, large fs:2Ch
 0x41DFAE: push    esi
 0x41DFAF: mov     esi, [ecx+eax*4]

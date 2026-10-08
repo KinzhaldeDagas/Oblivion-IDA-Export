@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6C6B30",
-    "line": "sub     esp, 18h",
+    "line": "sub     esp, 18h; Maps one sequence time into a partner sequence by matching case-insensitive m: text keys. Computes source local time without committing it, brackets the previous/next source morph keys with cycle wrap, finds identical full key strings in the partner, linearly interpolates between partner key times, then wraps the result to the partner start/end range. Used only by the native morph/transition update path.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x6C6B4E",
-    "line": "call    sub_6C5FC0",
+    "line": "call    NiControllerSequence_AdvanceTime; NiControllerSequence time advance. Computes scaled time from input, last input +0x34, accumulated/scaled time +0x38, and frequency +0x28; wraps cycle type 0 or clamps other cycle types to start/end +0x2C/+0x30. When commit is true, stores +0x34, +0x38, and resulting local time +0x3C; otherwise returns the computed local time without mutation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -709,19 +709,19 @@
   },
   {
     "ea": "0x6C6C82",
-    "line": "push    eax; Str2",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6C6C83",
-    "line": "push    ecx; Str1",
+    "line": "push    ecx; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6C6C84",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -781,19 +781,19 @@
   },
   {
     "ea": "0x6C6CA6",
-    "line": "push    eax; Str2",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6C6CA7",
-    "line": "push    ecx; Str1",
+    "line": "push    ecx; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6C6CA8",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },

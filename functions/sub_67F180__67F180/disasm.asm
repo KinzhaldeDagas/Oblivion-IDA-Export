@@ -1,10 +1,10 @@
-0x67F180: sub     esp, 0Ch
+0x67F180: sub     esp, 0Ch; Verified reset/teardown: release all AStarWorldNode state slots and allocations from LowPathSearchGlobals.allAStarWorldNodes, clear each node list, destroy inner/outer map instances, free the search-state table, and null doorLinkMap. Save/load reconciliation calls this then TravelPath_EnsureDoorLinkMapInitialized; WinMain also participates in this subsystem lifecycle.
 0x67F183: cmp     dword ptr ds:0B3BE00h, 0
 0x67F18A: jz      loc_67F333
-0x67F190: call    sub_6805F0
+0x67F190: call    TravelPath_FreeSearchStateTable; Verified: frees LowPathSearchGlobals.states and resets its pointer, stateCapacity, and nextFreeStateIndex.
 0x67F195: push    esi
 0x67F196: push    edi
-0x67F197: mov     ecx, ds:0B3BE18h
+0x67F197: mov     ecx, ds:0B3BE18h; this
 0x67F19D: mov     eax, ds:0B3BE1Ch
 0x67F1A2: test    eax, eax
 0x67F1A4: jnz     short loc_67F1AA
@@ -13,9 +13,9 @@
 0x67F1AA: test    ecx, ecx
 0x67F1AC: mov     esi, ecx
 0x67F1AE: jz      short loc_67F1C3
-0x67F1B0: call    sub_680340
+0x67F1B0: call    AStarWorldNode_ReleaseSearchStateSlot; Verified: clears allocation flag 0x04 for this AStarWorldNode's table slot and rewinds LowPathSearchGlobals.nextFreeStateIndex when the released slot is lower.
 0x67F1B5: push    esi
-0x67F1B6: call    FormHeapFree
+0x67F1B6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x67F1BB: mov     eax, ds:0B3BE1Ch
 0x67F1C0: add     esp, 4
 0x67F1C3: test    eax, eax
@@ -25,13 +25,13 @@
 0x67F1D0: mov     edx, [eax]
 0x67F1D2: push    eax
 0x67F1D3: mov     ds:0B3BE18h, edx
-0x67F1D9: call    FormHeapFree
+0x67F1D9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x67F1DE: add     esp, 4
 0x67F1E1: jmp     short loc_67F197
 0x67F1E3: xor     ecx, ecx
 0x67F1E5: mov     ds:0B3BE18h, ecx
 0x67F1EB: jmp     short loc_67F1A2
-0x67F1ED: mov     ecx, ds:0B3BE00h
+0x67F1ED: mov     ecx, ds:0B3BE00h; self
 0x67F1F3: mov     edx, [ecx+4]
 0x67F1F6: xor     eax, eax
 0x67F1F8: test    edx, edx
@@ -46,19 +46,19 @@
 0x67F20E: jb      short loc_67F201
 0x67F210: xor     eax, eax
 0x67F212: test    eax, eax
-0x67F214: mov     [esp+14h+var_8], eax
+0x67F214: mov     [esp+14h+position], eax
 0x67F218: jz      loc_67F310
 0x67F21E: push    ebx
 0x67F21F: push    ebp
-0x67F220: lea     eax, [esp+1Ch+var_C]
-0x67F224: push    eax
-0x67F225: lea     edx, [esp+20h+var_4]
-0x67F229: push    edx
-0x67F22A: lea     eax, [esp+24h+var_8]
-0x67F22E: push    eax
-0x67F22F: mov     [esp+28h+var_C], 0
-0x67F237: call    sub_452600
-0x67F23C: mov     ebp, [esp+1Ch+var_C]
+0x67F220: lea     eax, [esp+1Ch+valueOut]
+0x67F224: push    eax; valueOut
+0x67F225: lea     edx, [esp+20h+keyOut]
+0x67F229: push    edx; keyOut
+0x67F22A: lea     eax, [esp+24h+position]
+0x67F22E: push    eax; position
+0x67F22F: mov     [esp+28h+valueOut], 0
+0x67F237: call    NiTMap_U32Pointer_GetNextEntry
+0x67F23C: mov     ebp, [esp+1Ch+valueOut]
 0x67F240: test    ebp, ebp
 0x67F242: jz      loc_67F2FD
 0x67F248: mov     edx, [ebp+4]
@@ -114,14 +114,14 @@
 0x67F2C2: mov     eax, [esi+4]
 0x67F2C5: mov     edi, [eax+4]
 0x67F2C8: push    eax
-0x67F2C9: call    FormHeapFree
+0x67F2C9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x67F2CE: add     esp, 4
 0x67F2D1: test    edi, edi
 0x67F2D3: mov     [esi+4], edi
 0x67F2D6: jnz     short loc_67F2C2
 0x67F2D8: push    esi
 0x67F2D9: mov     dword ptr [esi], 0
-0x67F2DF: call    FormHeapFree
+0x67F2DF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x67F2E4: add     esp, 4
 0x67F2E7: test    ebx, ebx
 0x67F2E9: jnz     short loc_67F271
@@ -132,7 +132,7 @@
 0x67F2F7: push    1
 0x67F2F9: mov     ecx, ebp
 0x67F2FB: call    eax
-0x67F2FD: cmp     [esp+1Ch+var_8], 0
+0x67F2FD: cmp     [esp+1Ch+position], 0
 0x67F302: mov     ecx, ds:0B3BE00h
 0x67F308: jnz     loc_67F220
 0x67F30E: pop     ebp

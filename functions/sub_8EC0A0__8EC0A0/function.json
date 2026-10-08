@@ -1,19 +1,32 @@
 {
-  "callees_count": 9,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
+  "callers_count": 6,
+  "chunks": [
+    [
+      "0x8EC0A0",
+      "0x8EC338"
+    ]
+  ],
+  "chunks_sha256": "d80cdcd49e3a8e4971899f0ebca65ee516f8c35a845508b7f8dcd6ce604a00b8",
+  "comment_regular": "Projects against three active planes; falls back through two-plane projections and marks incompatible surfaces in the per-surface state array.",
+  "comment_repeatable": "Projects against three active planes; falls back through two-plane projections and marks incompatible surfaces in the per-surface state array.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_8EC0A0",
+  "display_name": "hkSurfaceConstraintUtil_ProjectAgainstThreePlanes",
   "end_ea": "0x8EC338",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "sub_8EC0A0",
+  "name": "hkSurfaceConstraintUtil_ProjectAgainstThreePlanes",
   "segment": ".text",
   "sha256": "d80cdcd49e3a8e4971899f0ebca65ee516f8c35a845508b7f8dcd6ce604a00b8",
   "size": 664,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x8EC0A0",
-  "type": "void __usercall(__m128 *@<eax>, _DWORD *@<edx>, __m128 *@<ecx>, __m128 *, int, __m128 *, __m128 *)",
+  "total_chunk_size": 664,
+  "type": "void __usercall(__m128 *surfaceA@<eax>, _DWORD *solverState@<edx>, __m128 *surfaceB@<ecx>, __m128 *surfaceC, int allowFallback, __m128 *inputPoint, __m128 *outPoint)",
   "xrefs_from_count": 213,
   "xrefs_to_count": 6
 }

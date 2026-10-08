@@ -1,4 +1,4 @@
-BSStringT *sub_A0A440()
+NiRTTI *sub_A0A440()
 {
-  return sub_70E220(&stru_B40110, "NiBackToFrontAccumulator", (int)&unk_B40118);
+  return NiRTTI_Constructor(&stru_B40110, "NiBackToFrontAccumulator", &stru_B40118); /*0xa0a454*/
 }

@@ -4,8 +4,8 @@
 0x95F728: add     esp, 4
 0x95F72B: test    eax, eax
 0x95F72D: jz      short loc_95F753
-0x95F72F: push    offset dword_B258DC
-0x95F734: push    offset Vector3_InitValue?
+0x95F72F: push    offset stru_B258DC
+0x95F734: push    offset g_zeroNiPoint3
 0x95F739: mov     ecx, eax
 0x95F73B: call    sub_95F620
 0x95F740: mov     ecx, [esp+4+arg_0]

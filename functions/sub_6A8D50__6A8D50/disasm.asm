@@ -21,12 +21,12 @@
 0x6A8D80: call    eax
 0x6A8D82: test    eax, eax
 0x6A8D84: jl      short loc_6A8DA5
-0x6A8D86: mov     eax, dword ptr [esp+8+var_4]
+0x6A8D86: mov     eax, [esp+8+var_4]
 0x6A8D8A: mov     ecx, [eax]
 0x6A8D8C: mov     edx, [ecx+1Ch]
 0x6A8D8F: push    eax
 0x6A8D90: call    edx
-0x6A8D92: mov     eax, dword ptr [esp+8+var_4]
+0x6A8D92: mov     eax, [esp+8+var_4]
 0x6A8D96: mov     ecx, [eax]
 0x6A8D98: mov     edx, [ecx+8]
 0x6A8D9B: push    eax

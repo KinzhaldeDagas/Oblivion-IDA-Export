@@ -1,4 +1,4 @@
-0x76A970: sub     esp, 10h
+0x76A970: sub     esp, 10h; Oblivion-authoritative NiDX9 device reset transaction: releases light/index/vertex buffers and RT slots 1-3; invalidates screen RT groups, rendered textures/cubemaps/dynamic textures, shaders and geometry; runs pre-reset callbacks; Reset()s using the default RT group's saved D3DPRESENT_PARAMETERS; increments ResetCounter; rebuilds targets/textures/defaults/shaders/render state; then runs post-reset callbacks. Any failed phase returns false.
 0x76A973: push    ebx
 0x76A974: push    ebp
 0x76A975: push    esi
@@ -13,15 +13,15 @@
 0x76A99A: mov     eax, [ebp+280h]
 0x76A9A0: push    1; a2
 0x76A9A2: push    eax; a1
-0x76A9A3: call    UnsetRenderTarget
+0x76A9A3: call    UnsetRenderTarget; Unbinds nonzero MRT slots only when the renderer cache says a surface is active, then clears the corresponding cache entry. Slot 0 is deliberately retained.
 0x76A9A8: mov     ecx, [ebp+280h]
 0x76A9AE: push    2; a2
 0x76A9B0: push    ecx; a1
-0x76A9B1: call    UnsetRenderTarget
+0x76A9B1: call    UnsetRenderTarget; Unbinds nonzero MRT slots only when the renderer cache says a surface is active, then clears the corresponding cache entry. Slot 0 is deliberately retained.
 0x76A9B6: mov     edx, [ebp+280h]
 0x76A9BC: push    3; a2
 0x76A9BE: push    edx; a1
-0x76A9BF: call    UnsetRenderTarget
+0x76A9BF: call    UnsetRenderTarget; Unbinds nonzero MRT slots only when the renderer cache says a surface is active, then clears the corresponding cache entry. Slot 0 is deliberately retained.
 0x76A9C4: mov     ecx, [ebp+888h]
 0x76A9CA: xor     ebx, ebx
 0x76A9CC: add     esp, 18h
@@ -39,14 +39,14 @@
 0x76A9EC: jb      short loc_76A9E0
 0x76A9EE: xor     eax, eax
 0x76A9F0: cmp     eax, ebx
-0x76A9F2: mov     [esp+20h+var_10], eax
+0x76A9F2: mov     [esp+20h+position], eax
 0x76A9F6: jz      loc_76AADB
 0x76A9FC: lea     esp, [esp+0]
 0x76AA00: lea     eax, [esp+20h+a2]
 0x76AA04: push    eax
-0x76AA05: lea     ecx, [esp+24h+var_4]
+0x76AA05: lea     ecx, [esp+24h+valueOut]
 0x76AA09: push    ecx
-0x76AA0A: lea     edx, [esp+28h+var_10]
+0x76AA0A: lea     edx, [esp+28h+position]
 0x76AA0E: push    edx
 0x76AA0F: lea     ecx, [ebp+884h]
 0x76AA15: mov     [esp+2Ch+a2], ebx
@@ -71,7 +71,7 @@
 0x76AA45: cmp     eax, ebx
 0x76AA47: jz      short loc_76AA62
 0x76AA49: lea     esp, [esp+0]
-0x76AA50: cmp     eax, offset unk_B4265C
+0x76AA50: cmp     eax, offset stru_B4265C
 0x76AA55: jz      loc_76ACB3
 0x76AA5B: mov     eax, [eax+4]
 0x76AA5E: cmp     eax, ebx
@@ -99,7 +99,7 @@
 0x76AA8E: call    eax
 0x76AA90: cmp     eax, ebx
 0x76AA92: jz      short loc_76AAA6
-0x76AA94: cmp     eax, offset unk_B4263C
+0x76AA94: cmp     eax, offset stru_B4263C
 0x76AA99: jz      loc_76ACBA
 0x76AA9F: mov     eax, [eax+4]
 0x76AAA2: cmp     eax, ebx
@@ -123,7 +123,7 @@
 0x76AACB: push    1
 0x76AACD: mov     ecx, edi
 0x76AACF: call    eax
-0x76AAD1: cmp     [esp+20h+var_10], ebx
+0x76AAD1: cmp     [esp+20h+position], ebx
 0x76AAD5: jnz     loc_76AA00
 0x76AADB: mov     edx, [ebp+8C4h]
 0x76AAE1: xor     eax, eax
@@ -140,18 +140,18 @@
 0x76AB00: jb      short loc_76AAF0
 0x76AB02: xor     eax, eax
 0x76AB04: cmp     eax, ebx
-0x76AB06: mov     [esp+20h+var_10], eax
+0x76AB06: mov     [esp+20h+position], eax
 0x76AB0A: jz      short loc_76AB4D
 0x76AB0C: lea     esp, [esp+0]
-0x76AB10: lea     ecx, [esp+20h+var_4]
-0x76AB14: push    ecx
+0x76AB10: lea     ecx, [esp+20h+valueOut]
+0x76AB14: push    ecx; valueOut
 0x76AB15: lea     edx, [esp+24h+a2]
-0x76AB19: push    edx
-0x76AB1A: lea     eax, [esp+28h+var_10]
+0x76AB19: push    edx; keyOut
+0x76AB1A: lea     eax, [esp+28h+position]
 0x76AB1E: lea     edi, [ebp+8C0h]
-0x76AB24: push    eax
-0x76AB25: mov     ecx, edi
-0x76AB27: call    sub_452600
+0x76AB24: push    eax; position
+0x76AB25: mov     ecx, edi; self
+0x76AB27: call    NiTMap_U32Pointer_GetNextEntry
 0x76AB2C: mov     edx, [ebp+0]
 0x76AB2F: mov     esi, [esp+20h+a2]
 0x76AB33: mov     eax, [edx+0CCh]
@@ -162,7 +162,7 @@
 0x76AB3F: push    esi; a2
 0x76AB40: mov     ecx, edi; this
 0x76AB42: call    NiTMap_SetAt
-0x76AB47: cmp     [esp+20h+var_10], ebx
+0x76AB47: cmp     [esp+20h+position], ebx
 0x76AB4B: jnz     short loc_76AB10
 0x76AB4D: mov     edx, [ebp+8D4h]
 0x76AB53: xor     eax, eax
@@ -178,18 +178,18 @@
 0x76AB71: jb      short loc_76AB61
 0x76AB73: xor     eax, eax
 0x76AB75: cmp     eax, ebx
-0x76AB77: mov     [esp+20h+var_10], eax
+0x76AB77: mov     [esp+20h+position], eax
 0x76AB7B: jz      short loc_76ABBD
 0x76AB7D: lea     ecx, [ecx+0]
-0x76AB80: lea     ecx, [esp+20h+var_4]
-0x76AB84: push    ecx
+0x76AB80: lea     ecx, [esp+20h+valueOut]
+0x76AB84: push    ecx; valueOut
 0x76AB85: lea     edx, [esp+24h+a2]
-0x76AB89: push    edx
-0x76AB8A: lea     eax, [esp+28h+var_10]
+0x76AB89: push    edx; keyOut
+0x76AB8A: lea     eax, [esp+28h+position]
 0x76AB8E: lea     edi, [ebp+8D0h]
-0x76AB94: push    eax
-0x76AB95: mov     ecx, edi
-0x76AB97: call    sub_452600
+0x76AB94: push    eax; position
+0x76AB95: mov     ecx, edi; self
+0x76AB97: call    NiTMap_U32Pointer_GetNextEntry
 0x76AB9C: mov     edx, [ebp+0]
 0x76AB9F: mov     esi, [esp+20h+a2]
 0x76ABA3: mov     eax, [edx+0CCh]
@@ -200,7 +200,7 @@
 0x76ABAF: push    esi; a2
 0x76ABB0: mov     ecx, edi; this
 0x76ABB2: call    NiTMap_SetAt
-0x76ABB7: cmp     [esp+20h+var_10], ebx
+0x76ABB7: cmp     [esp+20h+position], ebx
 0x76ABBB: jnz     short loc_76AB80
 0x76ABBD: mov     edx, [ebp+8E4h]
 0x76ABC3: xor     eax, eax
@@ -216,18 +216,18 @@
 0x76ABE1: jb      short loc_76ABD1
 0x76ABE3: xor     eax, eax
 0x76ABE5: cmp     eax, ebx
-0x76ABE7: mov     [esp+20h+var_10], eax
+0x76ABE7: mov     [esp+20h+position], eax
 0x76ABEB: jz      short loc_76AC32
 0x76ABED: lea     ecx, [ecx+0]
 0x76ABF0: lea     ecx, [esp+20h+var_8]
-0x76ABF4: push    ecx
+0x76ABF4: push    ecx; valueOut
 0x76ABF5: lea     edx, [esp+24h+a2]
-0x76ABF9: push    edx
-0x76ABFA: lea     eax, [esp+28h+var_10]
+0x76ABF9: push    edx; keyOut
+0x76ABFA: lea     eax, [esp+28h+position]
 0x76ABFE: lea     edi, [ebp+8E0h]
-0x76AC04: push    eax
-0x76AC05: mov     ecx, edi
-0x76AC07: call    sub_452600
+0x76AC04: push    eax; position
+0x76AC05: mov     ecx, edi; self
+0x76AC07: call    NiTMap_U32Pointer_GetNextEntry
 0x76AC0C: mov     ecx, [esp+20h+var_8]
 0x76AC10: cmp     ecx, ebx
 0x76AC12: mov     esi, [esp+20h+a2]
@@ -241,9 +241,9 @@
 0x76AC24: push    esi; a2
 0x76AC25: mov     ecx, edi; this
 0x76AC27: call    NiTMap_SetAt
-0x76AC2C: cmp     [esp+20h+var_10], ebx
+0x76AC2C: cmp     [esp+20h+position], ebx
 0x76AC30: jnz     short loc_76ABF0
-0x76AC32: call    sub_76DB00
+0x76AC32: call    NiDX9ResourceRegistry_ReleaseAll; Global NiDX9 device-resource registry release pass. Under its critical section, invokes virtual slot 0x2C on every registered resource before Reset.
 0x76AC37: mov     esi, [ebp+908h]
 0x76AC3D: cmp     esi, ebx
 0x76AC3F: jz      short loc_76AC54
@@ -262,7 +262,7 @@
 0x76AC60: movzx   edi, word ptr [ebp+0AA2h]
 0x76AC67: xor     esi, esi
 0x76AC69: cmp     edi, ebx
-0x76AC6B: mov     dword ptr [esp+20h+var_4], edi
+0x76AC6B: mov     [esp+20h+valueOut], edi
 0x76AC6F: jbe     short loc_76AC9A
 0x76AC71: mov     ecx, [ebp+0A9Ch]
 0x76AC77: mov     eax, [ecx+esi*4]
@@ -272,7 +272,7 @@
 0x76AC85: jz      short loc_76AC93
 0x76AC87: push    ecx
 0x76AC88: push    1
-0x76AC8A: call    eax
+0x76AC8A: call    eax; Pre-reset notification phase. Each registered callback receives phase=1 before IDirect3DDevice9::Reset; a false callback aborts the transaction.
 0x76AC8C: add     esp, 8
 0x76AC8F: test    al, al
 0x76AC91: jz      short loc_76ACD9
@@ -300,7 +300,7 @@
 0x76ACD1: mov     eax, [esi+eax*4]
 0x76ACD4: jmp     loc_76ABE5
 0x76ACD9: push    offset aNidx9rendererR; "NiDX9Renderer::Recreate> Reset notifica"...
-0x76ACDE: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x76ACDE: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x76ACE3: add     esp, 4
 0x76ACE6: pop     edi
 0x76ACE7: pop     esi
@@ -316,7 +316,7 @@
 0x76ACF9: cmp     eax, ebx
 0x76ACFB: jz      short loc_76AD12
 0x76ACFD: lea     ecx, [ecx+0]
-0x76AD00: cmp     eax, offset unk_B4265C
+0x76AD00: cmp     eax, offset stru_B4265C
 0x76AD05: jz      loc_76ADA7
 0x76AD0B: mov     eax, [eax+4]
 0x76AD0E: cmp     eax, ebx
@@ -333,7 +333,7 @@
 0x76AD29: push    ecx
 0x76AD2A: call    eax
 0x76AD2C: test    eax, eax
-0x76AD2E: jl      short loc_76ACE6
+0x76AD2E: jl      short loc_76ACE6; Device-reset commit point: IDirect3DDevice9::Reset(device, saved presentation parameters from default RT-group buffer data). ResetCounter increments only after success.
 0x76AD30: add     dword ptr [ebp+6ECh], 1
 0x76AD37: mov     ecx, [ebp+888h]
 0x76AD3D: xor     eax, eax
@@ -342,7 +342,6 @@
 0x76AD43: mov     esi, [ebp+88Ch]
 0x76AD49: mov     edx, esi
 0x76AD4B: jmp     short loc_76AD50
-0x76AD4D: align 10h
 0x76AD50: cmp     [edx], ebx
 0x76AD52: jnz     short loc_76ADAE
 0x76AD54: add     eax, 1
@@ -351,14 +350,14 @@
 0x76AD5C: jb      short loc_76AD50
 0x76AD5E: xor     eax, eax
 0x76AD60: cmp     eax, ebx
-0x76AD62: mov     [esp+20h+var_10], eax
+0x76AD62: mov     [esp+20h+position], eax
 0x76AD66: jz      loc_76AE5A
 0x76AD6C: lea     esp, [esp+0]
 0x76AD70: lea     ecx, [esp+20h+a2]
 0x76AD74: push    ecx
 0x76AD75: lea     edx, [esp+24h+var_8]
 0x76AD79: push    edx
-0x76AD7A: lea     eax, [esp+28h+var_10]
+0x76AD7A: lea     eax, [esp+28h+position]
 0x76AD7E: push    eax
 0x76AD7F: lea     ecx, [ebp+884h]
 0x76AD85: mov     [esp+2Ch+a2], ebx
@@ -384,7 +383,7 @@
 0x76ADBA: call    eax
 0x76ADBC: cmp     eax, ebx
 0x76ADBE: jz      short loc_76ADD2
-0x76ADC0: cmp     eax, offset unk_B4265C
+0x76ADC0: cmp     eax, offset stru_B4265C
 0x76ADC5: jz      loc_76AE88
 0x76ADCB: mov     eax, [eax+4]
 0x76ADCE: cmp     eax, ebx
@@ -400,7 +399,7 @@
 0x76ADE6: mov     ecx, eax
 0x76ADE8: call    edx
 0x76ADEA: mov     eax, [edi]
-0x76ADEC: mov     edx, [eax+84h]
+0x76ADEC: mov     edx, [eax+84h];
 0x76ADF2: mov     ecx, edi
 0x76ADF4: call    edx
 0x76ADF6: mov     esi, eax
@@ -413,7 +412,7 @@
 0x76AE05: cmp     eax, ebx
 0x76AE07: jz      short loc_76AE1E
 0x76AE09: lea     esp, [esp+0]
-0x76AE10: cmp     eax, offset unk_B4263C
+0x76AE10: cmp     eax, offset stru_B4263C
 0x76AE15: jz      short loc_76AE8F
 0x76AE17: mov     eax, [eax+4]
 0x76AE1A: cmp     eax, ebx
@@ -439,16 +438,16 @@
 0x76AE4A: push    1
 0x76AE4C: mov     ecx, edi
 0x76AE4E: call    eax
-0x76AE50: cmp     [esp+20h+var_10], ebx
+0x76AE50: cmp     [esp+20h+position], ebx
 0x76AE54: jnz     loc_76AD70
 0x76AE5A: mov     ecx, [ebp+880h]
 0x76AE60: mov     [ebp+87Ch], ecx
 0x76AE66: mov     ecx, ebp; this
-0x76AE68: call    sub_768C10
+0x76AE68: call    NiDX9Renderer_InitializeTextureDefaults; Rebuilds NiDX9 renderer texture defaults after device creation/reset, including four default format resources and the small clipper/default source texture. Called during both initial creation and RecreateDevice.
 0x76AE6D: test    al, al
 0x76AE6F: jnz     short loc_76AE93
 0x76AE71: push    offset aNidx9rendere_0; "NiDX9Renderer::Recreate> Could not init"...
-0x76AE76: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x76AE76: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x76AE7B: add     esp, 4
 0x76AE7E: pop     edi
 0x76AE7F: pop     esi
@@ -475,23 +474,23 @@
 0x76AEB7: jb      short loc_76AEA7
 0x76AEB9: xor     eax, eax
 0x76AEBB: cmp     eax, ebx
-0x76AEBD: mov     [esp+20h+var_10], eax
+0x76AEBD: mov     [esp+20h+position], eax
 0x76AEC1: jz      short loc_76AEF5
 0x76AEC3: lea     edx, [esp+20h+a2]
-0x76AEC7: push    edx
+0x76AEC7: push    edx; valueOut
 0x76AEC8: lea     eax, [esp+24h+var_8]
-0x76AECC: push    eax
-0x76AECD: lea     ecx, [esp+28h+var_10]
-0x76AED1: push    ecx
-0x76AED2: lea     ecx, [ebp+8C0h]
-0x76AED8: call    sub_452600
+0x76AECC: push    eax; keyOut
+0x76AECD: lea     ecx, [esp+28h+position]
+0x76AED1: push    ecx; position
+0x76AED2: lea     ecx, [ebp+8C0h]; self
+0x76AED8: call    NiTMap_U32Pointer_GetNextEntry
 0x76AEDD: mov     edx, [ebp+0]
 0x76AEE0: mov     eax, [esp+20h+var_8]
 0x76AEE4: mov     edx, [edx+108h]
 0x76AEEA: push    eax
 0x76AEEB: mov     ecx, ebp
-0x76AEED: call    edx
-0x76AEEF: cmp     [esp+20h+var_10], ebx
+0x76AEED: call    edx; Post-reset resource reconstruction: recreate every tracked NiRenderedTexture renderer-data object; analogous passes follow for rendered cube maps and dynamic textures.
+0x76AEEF: cmp     [esp+20h+position], ebx
 0x76AEF3: jnz     short loc_76AEC3
 0x76AEF5: mov     edx, [ebp+8D4h]
 0x76AEFB: xor     eax, eax
@@ -508,24 +507,24 @@
 0x76AF20: jb      short loc_76AF10
 0x76AF22: xor     eax, eax
 0x76AF24: cmp     eax, ebx
-0x76AF26: mov     [esp+20h+var_10], eax
+0x76AF26: mov     [esp+20h+position], eax
 0x76AF2A: jz      short loc_76AF62
 0x76AF2C: lea     esp, [esp+0]
 0x76AF30: lea     eax, [esp+20h+a2]
-0x76AF34: push    eax
+0x76AF34: push    eax; valueOut
 0x76AF35: lea     ecx, [esp+24h+var_8]
-0x76AF39: push    ecx
-0x76AF3A: lea     edx, [esp+28h+var_10]
-0x76AF3E: push    edx
-0x76AF3F: lea     ecx, [ebp+8D0h]
-0x76AF45: call    sub_452600
+0x76AF39: push    ecx; keyOut
+0x76AF3A: lea     edx, [esp+28h+position]
+0x76AF3E: push    edx; position
+0x76AF3F: lea     ecx, [ebp+8D0h]; self
+0x76AF45: call    NiTMap_U32Pointer_GetNextEntry
 0x76AF4A: mov     ecx, [esp+20h+var_8]
 0x76AF4E: mov     eax, [ebp+0]
 0x76AF51: mov     edx, [eax+110h]
 0x76AF57: push    ecx
 0x76AF58: mov     ecx, ebp
 0x76AF5A: call    edx
-0x76AF5C: cmp     [esp+20h+var_10], ebx
+0x76AF5C: cmp     [esp+20h+position], ebx
 0x76AF60: jnz     short loc_76AF30
 0x76AF62: mov     edx, [ebp+8E4h]
 0x76AF68: xor     eax, eax
@@ -541,27 +540,27 @@
 0x76AF86: jb      short loc_76AF76
 0x76AF88: xor     eax, eax
 0x76AF8A: cmp     eax, ebx
-0x76AF8C: mov     [esp+20h+var_10], eax
+0x76AF8C: mov     [esp+20h+position], eax
 0x76AF90: jz      short loc_76AFC4
 0x76AF92: lea     eax, [esp+20h+a2]
-0x76AF96: push    eax
+0x76AF96: push    eax; valueOut
 0x76AF97: lea     ecx, [esp+24h+var_8]
-0x76AF9B: push    ecx
-0x76AF9C: lea     edx, [esp+28h+var_10]
-0x76AFA0: push    edx
-0x76AFA1: lea     ecx, [ebp+8E0h]
-0x76AFA7: call    sub_452600
+0x76AF9B: push    ecx; keyOut
+0x76AF9C: lea     edx, [esp+28h+position]
+0x76AFA0: push    edx; position
+0x76AFA1: lea     ecx, [ebp+8E0h]; self
+0x76AFA7: call    NiTMap_U32Pointer_GetNextEntry
 0x76AFAC: mov     ecx, [esp+20h+var_8]
 0x76AFB0: mov     eax, [ebp+0]
 0x76AFB3: mov     edx, [eax+114h]
 0x76AFB9: push    ecx
 0x76AFBA: mov     ecx, ebp
 0x76AFBC: call    edx
-0x76AFBE: cmp     [esp+20h+var_10], ebx
+0x76AFBE: cmp     [esp+20h+position], ebx
 0x76AFC2: jnz     short loc_76AF92
 0x76AFC4: mov     eax, [ebp+280h]
-0x76AFCA: push    eax
-0x76AFCB: call    sub_76DB60
+0x76AFCA: push    eax; device
+0x76AFCB: call    NiDX9ResourceRegistry_RecreateAll; Global NiDX9 device-resource registry reconstruction pass. Under its critical section, invokes virtual slot 0x30 on every registered resource with the reset IDirect3DDevice9.
 0x76AFD0: mov     esi, [ebp+908h]
 0x76AFD6: add     esp, 4
 0x76AFD9: cmp     esi, ebx
@@ -581,12 +580,11 @@
 0x76B001: call    eax
 0x76B003: mov     ecx, [ebp+8BCh]
 0x76B009: call    sub_776240
-0x76B00E: mov     edi, dword ptr [esp+20h+var_4]
+0x76B00E: mov     edi, [esp+20h+valueOut]
 0x76B012: xor     esi, esi
 0x76B014: cmp     edi, ebx
 0x76B016: jbe     short loc_76B048
 0x76B018: jmp     short loc_76B020
-0x76B01A: align 10h
 0x76B020: mov     ecx, [ebp+0A9Ch]
 0x76B026: mov     eax, [ecx+esi*4]
 0x76B029: cmp     eax, ebx
@@ -595,7 +593,7 @@
 0x76B034: jz      short loc_76B041
 0x76B036: push    ecx
 0x76B037: push    ebx
-0x76B038: call    eax
+0x76B038: call    eax; Post-reset notification phase. Each registered callback receives phase=0 after renderer resources and state managers are restored; false marks recreation failed.
 0x76B03A: add     esp, 8
 0x76B03D: test    al, al
 0x76B03F: jz      short loc_76B06A
@@ -616,7 +614,7 @@
 0x76B062: mov     eax, [esi+eax*4]
 0x76B065: jmp     loc_76AF8A
 0x76B06A: push    offset aNidx9rendere_1; "NiDX9Renderer::Recreate> Reset notifica"...
-0x76B06F: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x76B06F: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x76B074: add     esp, 4
 0x76B077: pop     edi
 0x76B078: pop     esi

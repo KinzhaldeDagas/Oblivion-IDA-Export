@@ -1,1 +1,1 @@
-RGBQUAD
+typedef tagRGBQUAD RGBQUAD;

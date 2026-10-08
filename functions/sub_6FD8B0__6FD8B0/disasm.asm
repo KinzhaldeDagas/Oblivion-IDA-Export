@@ -13,9 +13,9 @@
 0x6FD8C8: jz      short loc_6FD8DB
 0x6FD8CA: mov     ecx, [ebx]
 0x6FD8CC: push    ecx
-0x6FD8CD: call    FormHeapFree
+0x6FD8CD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6FD8D2: push    ebx
-0x6FD8D3: call    FormHeapFree
+0x6FD8D3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6FD8D8: add     esp, 8
 0x6FD8DB: movzx   edx, word ptr [esi+4Eh]
 0x6FD8DF: add     edi, 1

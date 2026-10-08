@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7C6C30",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Retail AddShadowCaster. Seven decoded direct callers are player/mobile-object lifecycle paths; no direct loaded-TESObjectSTAT enumerator was found. Duplicate sources refresh ownership/state; new sources create a backing point light and retain exact caster root at +0x130.",
     "mnemonic": "push",
     "size": 2
   },
@@ -205,13 +205,13 @@
   },
   {
     "ea": "0x7C6C9E",
-    "line": "call    ??0ShadowSceneLight@@QAE@XZ; ShadowSceneLight::ShadowSceneLight(void)",
+    "line": "call    ??0ShadowSceneLight@@QAE@XZ; ShadowSceneLight constructor. Initializes projection/transition/status fields, object/receiver list ownership, map/camera state, and source pointers.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7C6CA3",
-    "line": "mov     esi, eax",
+    "line": "mov     esi, eax; Constructor callsite for direct player/mobile caster admission; immediate setup writes +0x104, +0x100, +0xF4, +0xF5, +0x130, and list ownership only.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x7C6CAE",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef; Duplicate-source path resolves the existing backing NiLight smart reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x7C6CB5",
-    "line": "and     word ptr [eax+18h], 0FFFEh",
+    "line": "and     word ptr [eax+18h], 0FFFEh; Duplicate-source refresh clears the backing source cull bit.",
     "mnemonic": "and",
     "size": 6
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x7C6CEB",
-    "line": "call    sub_7D1ED0",
+    "line": "call    ShadowSceneLight_UpdateTransitionState; Duplicate-source refresh updates the native transition target to 1.0 with no immediate transition.",
     "mnemonic": "call",
     "size": 5
   },
@@ -529,19 +529,19 @@
   },
   {
     "ea": "0x7C6D4E",
-    "line": "and     word ptr [eax+18h], 0FFFEh",
+    "line": "and     word ptr [eax+18h], 0FFFEh; New/refresh caster path clears backing source NiAVObject flags+0x18 bit0.",
     "mnemonic": "and",
     "size": 6
   },
   {
     "ea": "0x7C6D54",
-    "line": "push    eax",
+    "line": "push    eax; backingLight",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C6D55",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x7C6D5F",
-    "line": "call    sub_7D3400",
+    "line": "call    ShadowSceneLight_SetBackingLight; New-source path installs/strong-owns the backing NiPointLight at ShadowSceneLight+0x100.",
     "mnemonic": "call",
     "size": 5
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x7C6D68",
-    "line": "call    sub_7D3370",
+    "line": "call    ShadowSceneLight_SetPerSourceProjectorMode; ShadowSceneNodeAddShadowCaster enables the actor/per-source ShadowSceneLight path. That direct projected-map path does not consume dword_B2C678; static reference admission is a separate lifecycle concern.",
     "mnemonic": "call",
     "size": 5
   },
@@ -595,13 +595,13 @@
   },
   {
     "ea": "0x7C6D74",
-    "line": "mov     byte ptr [esi+0F5h], 0",
+    "line": "mov     byte ptr [esi+0F5h], 0; Native AddShadowCaster explicitly clears +0xF5, preserving the ordinary per-source projected-shadow dispatch for player/mobile caster lights.",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x7C6D7B",
-    "line": "call    sub_7C5A10",
+    "line": "call    ShadowSceneLight_SetCasterRoot; Strong-own the exact caster/source root at ShadowSceneLight+0x130.",
     "mnemonic": "call",
     "size": 5
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x7C6DA5",
-    "line": "call    sub_7C16B0",
+    "line": "call    NiTRefPointerList__AddTail; MEF PERF 2026-10-07: PERF-9 lifecycle clarification: AddShadowCaster appends a newly created wrapper to ACTIVE list owner+F4. Ordinary FindOrCreate at7C6B8E appends to FULL list+E4. Do not conflate these admission routes or assume actor candidate cap bounds full lights.",
     "mnemonic": "call",
     "size": 5
   },
@@ -772,5 +772,119 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CE730",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE733",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE734",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE739",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE73A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE73B",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE73E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE73F",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE744",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE745",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE746",
+    "line": "lea     ecx, [ebp+4]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE749",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE74E",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CE752",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE755",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE758",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CE75A",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE75F",
+    "line": "mov     eax, offset stru_AF76E0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE764",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

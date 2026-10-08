@@ -1,178 +1,279 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "WINMM_Device",
+  "definition": "typedef _WINMM_Device WINMM_Device\n",
   "id": 18374686479672029978,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cb_info",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "WINMM_CBInfo"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "handle",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "HWAVE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "open",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "device",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "IMMDevice_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "client",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "IAudioClient_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "render",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "IAudioRenderClient_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "capture",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "IAudioCaptureClient_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "clock",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "IAudioClock_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "volume",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "IAudioStreamVolume_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "orig_fmt",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "WAVEFORMATEX *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "acm_handle",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "HACMSTREAM"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "acm_hdr",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 116
+      "size": 116,
+      "type": "ACMSTREAMHEADER"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "acm_offs",
       "offset": 180,
-      "offset_hex": "0xb4",
-      "size": 4
+      "offset_hex": "0xB4",
+      "size": 4,
+      "type": "UINT32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "first",
       "offset": 184,
-      "offset_hex": "0xb8",
-      "size": 4
+      "offset_hex": "0xB8",
+      "size": 4,
+      "type": "WAVEHDR *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "last",
       "offset": 188,
-      "offset_hex": "0xbc",
-      "size": 4
+      "offset_hex": "0xBC",
+      "size": 4,
+      "type": "WAVEHDR *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "playing",
       "offset": 192,
-      "offset_hex": "0xc0",
-      "size": 4
+      "offset_hex": "0xC0",
+      "size": 4,
+      "type": "WAVEHDR *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "loop_start",
       "offset": 196,
-      "offset_hex": "0xc4",
-      "size": 4
+      "offset_hex": "0xC4",
+      "size": 4,
+      "type": "WAVEHDR *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "stopped",
       "offset": 200,
-      "offset_hex": "0xc8",
-      "size": 4
+      "offset_hex": "0xC8",
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "loop_counter",
       "offset": 204,
-      "offset_hex": "0xcc",
-      "size": 4
+      "offset_hex": "0xCC",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bytes_per_frame",
       "offset": 208,
-      "offset_hex": "0xd0",
-      "size": 4
+      "offset_hex": "0xD0",
+      "size": 4,
+      "type": "UINT32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "samples_per_sec",
       "offset": 212,
-      "offset_hex": "0xd4",
-      "size": 4
+      "offset_hex": "0xD4",
+      "size": 4,
+      "type": "UINT32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ofs_bytes",
       "offset": 216,
-      "offset_hex": "0xd8",
-      "size": 4
+      "offset_hex": "0xD8",
+      "size": 4,
+      "type": "UINT32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "played_frames",
       "offset": 220,
-      "offset_hex": "0xdc",
-      "size": 4
+      "offset_hex": "0xDC",
+      "size": 4,
+      "type": "UINT32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "remainder_frames",
       "offset": 224,
-      "offset_hex": "0xe0",
-      "size": 4
+      "offset_hex": "0xE0",
+      "size": 4,
+      "type": "UINT32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "last_clock_pos",
       "offset": 232,
-      "offset_hex": "0xe8",
-      "size": 8
+      "offset_hex": "0xE8",
+      "size": 8,
+      "type": "UINT64"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "event",
       "offset": 240,
-      "offset_hex": "0xf0",
-      "size": 4
+      "offset_hex": "0xF0",
+      "size": 4,
+      "type": "HANDLE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lock",
       "offset": 248,
-      "offset_hex": "0xf8",
-      "size": 32
+      "offset_hex": "0xF8",
+      "size": 32,
+      "type": "CRITICAL_SECTION"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "parent",
       "offset": 280,
       "offset_hex": "0x118",
-      "size": 4
+      "size": 4,
+      "type": "WINMM_MMDevice *"
     }
   ],
   "name": "WINMM_Device",
+  "ordinal": 2258,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 288
 }

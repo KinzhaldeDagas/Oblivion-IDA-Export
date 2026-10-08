@@ -39,7 +39,7 @@
 0x9435AD: push    ecx
 0x9435AE: xorps   xmm1, xmm0
 0x9435B1: mov     ecx, esi
-0x9435B3: movaps  [esp+234h+var_21C+0Ch], xmm1
+0x9435B3: movaps  xmmword ptr [esp+234h+var_21C+0Ch], xmm1
 0x9435B8: call    dword ptr [eax+10h]
 0x9435BB: fchs
 0x9435BD: jmp     short loc_9435CD

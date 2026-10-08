@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x664A20",
+      "0x664A40"
+    ]
+  ],
+  "chunks_sha256": "5b3e39c889157c95551e6e40364840a6643dffb271ef98d29ef3bf229f876075",
+  "comment_regular": "Player_GetAttributeLevelingBonus: for attribute AV 0..7, read the attribute's skill-increase count and convert it through LevelUp_GetAttributeMultiplierFromCount; otherwise return 1.",
+  "comment_repeatable": "Player_GetAttributeLevelingBonus: for attribute AV 0..7, read the attribute's skill-increase count and convert it through LevelUp_GetAttributeMultiplierFromCount; otherwise return 1.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "Player_GetAttributeLevelingBonus",
   "end_ea": "0x664A40",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "Player_GetAttributeLevelingBonus",
   "segment": ".text",
   "sha256": "5b3e39c889157c95551e6e40364840a6643dffb271ef98d29ef3bf229f876075",
   "size": 32,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x664A20",
-  "type": "signed int __thiscall(_DWORD *this, unsigned int)",
+  "total_chunk_size": 32,
+  "type": "signed int __thiscall(PlayerCharacter *this, unsigned int attributeAV)",
   "xrefs_from_count": 12,
   "xrefs_to_count": 2
 }

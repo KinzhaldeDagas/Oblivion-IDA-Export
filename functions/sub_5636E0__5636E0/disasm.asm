@@ -1,4 +1,4 @@
-0x5636E0: push    0FFFFFFFFh
+0x5636E0: push    0FFFFFFFFh; SpeedTreeOBSE 2026-06-01 hook-truth correction: base resource builder still calls branch 0x5616F0, fixed-card leaf 0x5622B0, then simple STBB 0x562E20. No generic mesh-leaf/resource sidecar consumer is present; optional 0x563741 hook state now gates leafMesh log-only classification.
 0x5636E2: push    offset SEH_5636E0
 0x5636E7: mov     eax, large fs:0
 0x5636ED: push    eax
@@ -15,20 +15,20 @@
 0x56370D: push    eax
 0x56370E: lea     eax, [esp+6C0h+var_C]
 0x563715: mov     large fs:0, eax
-0x56371B: mov     edi, [esp+6C0h+arg_0]
+0x56371B: mov     edi, [esp+6C0h+mode]
 0x563722: mov     ebp, ecx
 0x563724: xor     ebx, ebx
 0x563726: cmp     [ebp+0Ch], ebx
 0x563729: jz      loc_56392A
 0x56372F: cmp     dword ptr [ebp+8], 2
 0x563733: jz      loc_56392A
-0x563739: call    sub_5616F0
-0x56373E: push    edi
-0x56373F: mov     ecx, ebp
-0x563741: call    sub_5622B0
-0x563746: push    edi
-0x563747: mov     ecx, ebp
-0x563749: call    sub_562E20
+0x563739: call    BSTreeModel_CreateBranchGeometry; Verified branch resource path: branch LOD count sizes three model arrays—branchGeometryDataByLOD (+0x14), branchShaderPropertiesByLOD (+0x24), and branchCachedPropertiesByLOD (+0x2C). CreateArt turns geometry data into branch NiTriStrips, attaches the per-LOD shader property, and caches property ID 3.
+0x56373E: push    edi; tree
+0x56373F: mov     ecx, ebp; this
+0x563741: call    BSTreeModel_CreateLeafGeometry; Build fixed-card leaf geometry/resources for all leaf LODs via 0x5622B0.
+0x563746: push    edi; tree
+0x563747: mov     ecx, ebp; this
+0x563749: call    BSTreeModel_CreateBillboardGeometry; SpeedTreeOBSE 2026-05-31 absolute texture path enablement: branch-normal map-bank writer remains narrow index0 only; retained map-bank texture paths now normalize absolute source-library strings to safe local candidates; no generic sidecar mutation.
 0x56374E: mov     esi, [ebp+40h]
 0x563751: cmp     esi, ebx
 0x563753: jz      short loc_563774
@@ -83,7 +83,7 @@
 0x563809: lea     eax, [esp+6C0h+var_114]
 0x563810: mov     [esp+6C0h+var_208], dx
 0x563818: mov     [esp+6C0h+var_4], ebx
-0x56381F: mov     dword ptr [esp+6C0h+var_20C], ecx
+0x56381F: mov     [esp+6C0h+var_20C], ecx
 0x563826: mov     edx, eax
 0x563828: mov     cl, [eax]
 0x56382A: add     eax, 1
@@ -126,7 +126,7 @@
 0x56389F: mov     ecx, [esp+6C0h+var_4A0]
 0x5638A6: mov     eax, [ecx]
 0x5638A8: push    eax
-0x5638A9: push    offset dword_B3FA80
+0x5638A9: push    offset stru_B3FA80
 0x5638AE: call    NiRTTI_Cast
 0x5638B3: push    eax
 0x5638B4: call    sub_4A05E0
@@ -146,16 +146,16 @@
 0x5638DE: fcomp   dword ptr [ebp+50h]
 0x5638E1: fnstsw  ax
 0x5638E3: test    ah, 5
-0x5638E6: jp      short loc_563916
+0x5638E6: jp      short loc_563916; Verified: if no collision shape was loaded from the tree model and BSTreeModel.trunkLength exceeds 64.0 (flt_A56670), CreateGeometry builds a fallback trunk capsule.
 0x5638E8: fld     dword ptr [ebp+54h]
 0x5638EB: sub     esp, 8
 0x5638EE: fmul    qword ptr ds:0A2FAA0h
-0x5638F4: fstp    [esp+6C8h+var_6AC]
+0x5638F4: fstp    [esp+6C8h+var_6AC]; Verified capsule radius input is BSTreeModel.trunkWidth * 0.5.
 0x5638F8: fld     [esp+6C8h+var_6AC]
-0x5638FC: fstp    [esp+6C8h+var_6C4]; float
+0x5638FC: fstp    [esp+6C8h+radius]; radius
 0x563900: fld     dword ptr [ebp+50h]
-0x563903: fstp    [esp+6C8h+var_6C8]; float
-0x563906: call    sub_8AFDC0
+0x563903: fstp    [esp+6C8h+trunkLength]; trunkLength
+0x563906: call    BSTreeModel_CreateTrunkCapsuleShape; Verified calls BSTreeModel_CreateTrunkCapsuleShape(trunkLength, trunkWidth*0.5) and stores the returned Havok object at BSTreeModel.collisionShape (+0x40).
 0x56390B: add     esp, 8
 0x56390E: push    eax; a2
 0x56390F: mov     ecx, esi; this
@@ -175,3 +175,16 @@
 0x563946: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x56394B: add     esp, 6ACh
 0x563951: retn    4
+0x9BD3E0: lea     ecx, [ebp-6A8h]; this
+0x9BD3E6: jmp     ??1BSStream@@UAE@XZ; BSStream::~BSStream(void)
+0x9BD3EB: mov     edx, [esp+arg_4]
+0x9BD3EF: lea     eax, [edx-6B0h]
+0x9BD3F5: mov     ecx, [edx-6B4h]
+0x9BD3FB: xor     ecx, eax
+0x9BD3FD: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BD402: add     eax, 10h
+0x9BD405: mov     ecx, [edx-4]
+0x9BD408: xor     ecx, eax
+0x9BD40A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BD40F: mov     eax, offset stru_AE6DCC
+0x9BD414: jmp     ___CxxFrameHandler3

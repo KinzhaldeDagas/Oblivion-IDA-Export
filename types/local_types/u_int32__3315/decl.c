@@ -1,1 +1,1 @@
-u_int32
+typedef ULONG u_int32;

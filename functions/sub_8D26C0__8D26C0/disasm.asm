@@ -40,3 +40,12 @@
 0x8D2756: pop     esi
 0x8D2757: add     esp, 10h
 0x8D275A: retn    4
+0x9D7AF0: mov     ecx, [ebp-10h]; this
+0x9D7AF3: jmp     ??1bhkCharControllerShape@@UAE@XZ; bhkCharControllerShape::~bhkCharControllerShape(void)
+0x9D7AF8: mov     edx, [esp+arg_4]
+0x9D7AFC: lea     eax, [edx-0Ch]
+0x9D7AFF: mov     ecx, [edx-10h]
+0x9D7B02: xor     ecx, eax
+0x9D7B04: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D7B09: mov     eax, offset stru_AFF63C
+0x9D7B0E: jmp     ___CxxFrameHandler3

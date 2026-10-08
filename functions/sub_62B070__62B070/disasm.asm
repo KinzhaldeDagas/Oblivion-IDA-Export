@@ -29,7 +29,7 @@
 0x62B0C0: cmp     eax, ds:0B35EB0h
 0x62B0C6: jnz     short loc_62B0D2
 0x62B0C8: lea     ecx, [edi+44h]
-0x62B0CB: call    ExtraDataList__GetExtraXTarget
+0x62B0CB: call    ExtraDataList_GetXTarget; Returns the TESObjectREFR target stored by ExtraXTarget (type 0x4D), or null.
 0x62B0D0: mov     edi, eax
 0x62B0D2: test    edi, edi
 0x62B0D4: jz      loc_62B40C
@@ -39,9 +39,9 @@
 0x62B0E4: call    edx
 0x62B0E6: test    eax, eax
 0x62B0E8: jz      short loc_62B0FC
-0x62B0EA: push    2
-0x62B0EC: mov     ecx, eax
-0x62B0EE: call    MagicItem_GetFXEffect
+0x62B0EA: push    2; effectIndex
+0x62B0EC: mov     ecx, eax; magicItem
+0x62B0EE: call    MagicItem_GetFXEffect; Verified (Oblivion): MagicItem_GetFXEffect returns the effect's EffectSetting pointer; MagicShaderHitEffect constructors/PostLink dereference its +0x78 EffectSetting::effectShader field.
 0x62B0F3: test    eax, eax
 0x62B0F5: jz      short loc_62B0FC
 0x62B0F7: fld     dword ptr [eax+74h]
@@ -73,7 +73,7 @@
 0x62B14C: mov     ecx, esi
 0x62B14E: mov     [esp+3Ch+var_20], edx
 0x62B152: mov     [esp+3Ch+var_1C], eax
-0x62B156: call    sub_5E0660
+0x62B156: call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.
 0x62B15B: fmul    qword ptr ds:0A31C70h
 0x62B161: fadd    [esp+3Ch+var_1C]
 0x62B165: fstp    [esp+3Ch+var_1C]
@@ -110,7 +110,7 @@
 0x62B1D1: fstp    [esp+4Ch+var_48]; float
 0x62B1D5: fld     [esp+4Ch+arg_0]
 0x62B1D9: fstp    [esp+4Ch+var_4C]; float
-0x62B1DC: call    sub_6132D0
+0x62B1DC: call    Combat_CalculateBallisticPitch; Low ballistic-pitch solver. It forms the quadratic in cos^2(theta), selects the larger valid root for the low arc, and returns a signed acos(sqrt(root)); invalid trajectories return the engine fallback angle.
 0x62B1E1: fstp    [esp+4Ch+var_2C]
 0x62B1E5: fld     [esp+4Ch+var_30]
 0x62B1E9: add     esp, 4
@@ -128,9 +128,9 @@
 0x62B213: call    eax
 0x62B215: fld     [esp+3Ch+var_2C]
 0x62B219: fchs
-0x62B21B: mov     ecx, esi
+0x62B21B: mov     ecx, esi; this
 0x62B21D: fstp    [esp+3Ch+arg_0]
-0x62B221: call    sub_4A9720
+0x62B221: call    Actor_GetAimPitch; Returns Actor rotation X as the native aim-pitch value used by projectile launch, impact, input, dialogue-camera, and magic-projectile paths.
 0x62B226: fsubr   [esp+3Ch+arg_0]
 0x62B22A: fstp    [esp+3Ch+arg_0]
 0x62B22E: fldz
@@ -155,8 +155,8 @@
 0x62B26B: fstp    [esp+3Ch+arg_0]
 0x62B26F: jmp     short loc_62B273
 0x62B271: fstp    st
-0x62B273: mov     ecx, esi
-0x62B275: call    sub_4A9720
+0x62B273: mov     ecx, esi; this
+0x62B275: call    Actor_GetAimPitch; Returns Actor rotation X as the native aim-pitch value used by projectile launch, impact, input, dialogue-camera, and magic-projectile paths.
 0x62B27A: fadd    [esp+3Ch+arg_0]
 0x62B27E: push    ecx
 0x62B27F: mov     ecx, esi; int
@@ -195,7 +195,7 @@
 0x62B2E7: fstp    [esp+44h+var_8]
 0x62B2EB: fld     [esp+44h+var_2C]
 0x62B2EF: fstp    [esp+44h+var_4]
-0x62B2F3: call    sub_683CB0
+0x62B2F3: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x62B2F8: fstp    [esp+44h+arg_0]
 0x62B2FC: add     esp, 4
 0x62B2FF: fldz
@@ -236,7 +236,7 @@
 0x62B364: retn    4
 0x62B367: push    30h ; '0'
 0x62B369: mov     ecx, esi
-0x62B36B: call    sub_5E05F0
+0x62B36B: call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.
 0x62B370: mov     eax, [ebx]
 0x62B372: mov     edx, [eax+188h]
 0x62B378: push    1
@@ -290,7 +290,7 @@
 0x62B400: push    ecx
 0x62B401: mov     ecx, esi
 0x62B403: fstp    [esp+48h+var_48]; float
-0x62B406: call    sub_5F25F0
+0x62B406: call    sub_5F25F0; Fast-travel loop player AV update: magicka regeneration/active magic adjustment over travel time.
 0x62B40B: pop     ebp
 0x62B40C: pop     edi
 0x62B40D: pop     esi

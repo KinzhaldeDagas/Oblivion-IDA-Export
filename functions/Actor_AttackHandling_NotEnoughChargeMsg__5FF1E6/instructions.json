@@ -7,7 +7,7 @@
   },
   {
     "ea": "0x5FF1EB",
-    "line": "jz      short Actor_AttackHandling___SneakAttackCheck",
+    "line": "jz      short Actor_EvaluateSneakAttack; Oblivion sneak-attack decision. Creatures are excluded as attackers; the attacker must be sneaking; victim detection <= 0 permits the bonus unless combat-awareness logic forces failure. Successful attacks use the attacker's Sneak mastery plus weapon type to select the multiplier, set the Master-tier flag when applicable, show the player message, and pass the multiplier into damage calculation.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x5FF1F5",
-    "line": "jnz     short Actor_AttackHandling___SneakAttackCheck",
+    "line": "jnz     short Actor_EvaluateSneakAttack; Oblivion sneak-attack decision. Creatures are excluded as attackers; the attacker must be sneaking; victim detection <= 0 permits the bonus unless combat-awareness logic forces failure. Successful attacks use the attacker's Sneak mastery plus weapon type to select the multiplier, set the Master-tier flag when applicable, show the player message, and pass the multiplier into damage calculation.",
     "mnemonic": "jnz",
     "size": 2
   },

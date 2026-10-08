@@ -1,75 +1,63 @@
-void __usercall sub_59EB90(int a1@<ecx>, const char **ebp0@<ebp>, double a3@<st0>, double a4@<st2>, double a5@<st1>)
+void __usercall DialogMenu::AdvanceTopicResponse(int a1@<ecx>, double a2@<st0>, double a3@<st2>, double a4@<st1>)
 {
-  int **v6; // ebx
-  _DWORD *v7; // eax
-  _DWORD *v8; // edi
-  char **v9; // ebp
-  bool v11; // al
-  UnkBohBoh *v12; // eax
-  UnkBohBoh *v13; // edi
-  float v14; // [esp+4h] [ebp-1Ch]
-  float a2; // [esp+8h] [ebp-18h]
+  MenuTopicManagerView *Singleton; // ebx
+  MenuTopicView *CurrentTopic; // eax
+  MenuTopicView *v7; // edi
+  DialogueResponse *CurrentResponse; // ebp
+  bool v9; // al
+  UnkBohBoh *v10; // eax
+  UnkBohBoh *v11; // edi
   float a2a; // [esp+8h] [ebp-18h]
-  float a2b; // [esp+8h] [ebp-18h]
-  float a2c; // [esp+8h] [ebp-18h]
-  int v19; // [esp+10h] [ebp-10h]
-  int v20; // [esp+1Ch] [ebp-4h]
 
-  __asm { fld1 }
-  __asm { fstp    [esp+18h+a2]; a3 }
-  Tile_SetFloat(*(Tile **)(a1 + 0x38), (_DWORD *)0xFA1, a2);
-  v6 = (int **)sub_6B8660();
-  v7 = (_DWORD *)sub_6B8650(v6);
-  v8 = v7;
-  if ( v7 && (v9 = (char **)sub_6B85B0(v7)) != 0 )
+  Tile_SetFloat(*(Tile **)(a1 + 0x38), 0xFA1u, 1.0); /*0x59eba5*/
+  Singleton = MenuTopicManager::GetSingleton(); /*0x59ebaf*/
+  CurrentTopic = MenuTopicManager::GetCurrentTopic(Singleton); /*0x59ebb3*/
+  v7 = CurrentTopic; /*0x59ebb8*/
+  if ( CurrentTopic && (CurrentResponse = MenuTopic::GetCurrentResponse(CurrentTopic)) != 0 ) /*0x59ebcd*/
   {
-    __asm { fldz }
-    __asm { fstp    [esp+1Ch+var_1C]; a3 }
-    (*(void (__stdcall **)(_DWORD, char **))(**(_DWORD **)(a1 + 0x60) + 0x304))(LODWORD(v14), v9);
-    __asm { fld     dword ptr ds:0A379B4h }
-    __asm { fstp    dword ptr [esi+84h] }
-    *(float *)(a1 + 0x84) = _ET1;
-    *(_DWORD *)(a1 + 0x80) = 2;
-    *v6 = (int *)(v6 + 1);
-    while ( sub_6B8650(v6) )
+    (*(void (__userpurge **)(_DWORD, DialogueResponse *, double@<st0>, double@<st1>, double@<st2>))(**(_DWORD **)(a1 + 0x60) /*0x59ebe5*/
+                                                                                                  + 0x304))(
+      0.0,
+      CurrentResponse,
+      a2,
+      a4,
+      a3);
+    *(float *)(a1 + 0x84) = fConstant_2; /*0x59ebf0*/
+    *(_DWORD *)(a1 + 0x80) = 2; /*0x59ebf6*/
+    Singleton->currentTopicNode = (MenuTopicNode *)&Singleton->firstTopic; /*0x59ec02*/
+    while ( MenuTopicManager::GetCurrentTopic(Singleton) ) /*0x59ec04*/
     {
-      if ( (_DWORD *)sub_6B8650(v6) == v8 )
-        break;
-      sub_6B85F0(v6);
+      if ( MenuTopicManager::GetCurrentTopic(Singleton) == v7 ) /*0x59ec19*/
+        break; /*0x59ec19*/
+      MenuTopicManager::NextTopic(Singleton); /*0x59ec1d*/
     }
-    sub_6B8560(v8);
-    while ( sub_6B85B0(v8) )
+    MenuTopic::FirstResponse(v7); /*0x59ec2f*/
+    while ( MenuTopic::GetCurrentResponse(v7) ) /*0x59ec36*/
     {
-      if ( (char **)sub_6B85B0(v8) == v9 )
-        break;
-      sub_6B8580(v8);
+      if ( MenuTopic::GetCurrentResponse(v7) == CurrentResponse ) /*0x59ec49*/
+        break; /*0x59ec49*/
+      MenuTopic::NextResponse(v7); /*0x59ec4d*/
     }
-    v20 = (byte_B13200 != 0) + 1;
-    __asm { fild    [esp+14h+var_4] }
-    __asm { fstp    [esp+18h+a2]; a3 }
-    Tile_SetFloat(*(Tile **)(a1 + 0x2C), (_DWORD *)0xFA1, a2a);
-    Tile_SetString(*(_DWORD **)(a1 + 0x2C), (_DWORD *)0xFDE, *v9);
-    sub_6B8580(v8);
-    __asm { fld1 }
-    __asm { fstp    [esp+18h+a2]; a3 }
-    Tile_SetFloat(*(Tile **)(a1 + 0x3C), (_DWORD *)0xFA1, a2b);
+    a2a = (float)((byte_B13200 != 0) + 1); /*0x59ec77*/
+    Tile_SetFloat(*(Tile **)(a1 + 0x2C), 0xFA1u, a2a); /*0x59ec7f*/
+    Tile_SetString(*(_DWORD **)(a1 + 0x2C), (_DWORD *)0xFDE, CurrentResponse->displayText.m_data); /*0x59ec90*/
+    MenuTopic::NextResponse(v7);                // After starting/displaying the current DialogueResponse, advance the MenuTopic cursor immediately. The next DoIdle completion callback therefore selects the following response; a null cursor means the just-finished response was final. /*0x59ec97*/
+    Tile_SetFloat(*(Tile **)(a1 + 0x3C), 0xFA1u, 1.0); /*0x59ecaa*/
   }
   else
   {
-    __asm { fld     dword ptr ds:0A379B4h }
-    __asm { fstp    [esp+18h+a2]; a3 }
-    Tile_SetFloat(*(Tile **)(a1 + 0x3C), (_DWORD *)0xFA1, a2c);
-    v11 = v8 && *((_BYTE *)v8 + 8);
-    sub_59E2B0((int *)a1, !v11);
-    v12 = sub_6B8660();
-    v13 = v12;
-    if ( *(_BYTE *)(a1 + 0x96) )
+    Tile_SetFloat(*(Tile **)(a1 + 0x3C), 0xFA1u, fConstant_2); /*0x59ecc7*/
+    v9 = v7 && v7->hasLinkedTopics; /*0x59ecd6*/
+    DialogMenu::RefreshActionAvailability((DialogMenu *)a1, !v9); /*0x59ece4*/
+    v10 = (UnkBohBoh *)MenuTopicManager::GetSingleton(); /*0x59ece9*/
+    v11 = v10; /*0x59ecf5*/
+    if ( *(_BYTE *)(a1 + 0x96) ) /*0x59ecee*/
     {
-      v12->unk00 = 0;
-      sub_59E2B0((int *)a1, 1);
+      v10->unk00 = 0; /*0x59ecfd*/
+      DialogMenu::RefreshActionAvailability((DialogMenu *)a1, 1); /*0x59ed03*/
     }
-    *(_BYTE *)(a1 + 0x88) = sub_6B92C0(v13, a5, a3, 1, 0);
-    *(_BYTE *)(a1 + 0x96) = 0;
-    sub_59E680(a1, v19, a4, a5);
+    *(_BYTE *)(a1 + 0x88) = MenuTopicManager::LoadNextTopicList((MenuTopicManagerView *)v11, 1, 0);// Overwrite closePending with LoadNextTopicList's result after response exhaustion. INFOGENERAL without RunForRumors returns false even when Goodbye is set, so the menu stays open while the parked Goodbye INFO survives for a later manual/other close. /*0x59ed14*/
+    *(_BYTE *)(a1 + 0x96) = 0; /*0x59ed1a*/
+    DialogMenu::LoadTopicsList((DialogMenu *)a1); /*0x59ed29*/
   }
 }

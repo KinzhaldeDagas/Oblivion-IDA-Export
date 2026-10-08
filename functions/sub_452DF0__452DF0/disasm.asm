@@ -11,7 +11,7 @@
 0x452E07: pop     ecx
 0x452E08: retn    8
 0x452E0B: push    ebx
-0x452E0C: mov     ebx, [esp+0Ch+arg_0]
+0x452E0C: mov     ebx, [esp+0Ch+formID]
 0x452E10: push    esi
 0x452E11: lea     edx, [esp+10h+var_4]
 0x452E15: push    edx
@@ -24,7 +24,7 @@
 0x452E2C: jz      short loc_452E67
 0x452E2E: cmp     dword ptr [esi+4], 0
 0x452E32: jz      short loc_452E3B
-0x452E34: cmp     [esp+10h+arg_4], 0
+0x452E34: cmp     [esp+10h+force], 0
 0x452E39: jz      short loc_452E5E
 0x452E3B: push    ebx
 0x452E3C: mov     ecx, edi
@@ -36,7 +36,7 @@
 0x452E4B: mov     ecx, offset FormHeap
 0x452E50: call    MemoryHeap_Free_checked
 0x452E55: push    esi
-0x452E56: call    FormHeapFree
+0x452E56: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x452E5B: add     esp, 4
 0x452E5E: pop     esi
 0x452E5F: pop     ebx

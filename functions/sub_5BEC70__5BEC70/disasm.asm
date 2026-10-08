@@ -44,8 +44,8 @@
 0x5BECF9: cmp     eax, ebx
 0x5BECFB: mov     byte ptr [esp+4Ch+var_38+3], bl
 0x5BECFF: jz      short loc_5BED11
-0x5BED01: mov     ecx, eax
-0x5BED03: call    sub_6B7260
+0x5BED01: mov     ecx, eax; this
+0x5BED03: call    SoundHandle__IsPlaying; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.
 0x5BED08: test    al, al
 0x5BED0A: jz      short loc_5BED11
 0x5BED0C: mov     byte ptr [esp+4Ch+var_38+3], 1
@@ -66,45 +66,45 @@
 0x5BED41: jnz     short loc_5BED34
 0x5BED43: push    1
 0x5BED45: call    sub_5BEA90
-0x5BED4A: mov     ecx, ds:0B333C4h
+0x5BED4A: mov     ecx, ds:0B333C4h; this
 0x5BED50: add     esp, 4
-0x5BED53: push    20h ; ' '
-0x5BED55: call    Actor_GetSkillMasteryLevel
+0x5BED53: push    20h ; ' '; actorValue
+0x5BED55: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x5BED5A: cmp     eax, 4
 0x5BED5D: jz      short loc_5BED71
-0x5BED5F: mov     ecx, ds:0B333C4h
-0x5BED65: push    20h ; ' '
-0x5BED67: call    Actor_GetSkillMasteryLevel
+0x5BED5F: mov     ecx, ds:0B333C4h; this
+0x5BED65: push    20h ; ' '; actorValue
+0x5BED67: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x5BED6C: cmp     eax, 3
 0x5BED6F: jnz     short loc_5BEDA1
-0x5BED71: mov     ecx, ds:0B333C4h
-0x5BED77: push    20h ; ' '
-0x5BED79: call    Actor_GetSkillMasteryLevel
+0x5BED71: mov     ecx, ds:0B333C4h; this
+0x5BED77: push    20h ; ' '; actorValue
+0x5BED79: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x5BED7E: cmp     eax, 4
 0x5BED81: jz      short loc_5BED99
-0x5BED83: mov     ecx, ds:0B333C4h
-0x5BED89: push    20h ; ' '
-0x5BED8B: call    Actor_GetSkillMasteryLevel
+0x5BED83: mov     ecx, ds:0B333C4h; this
+0x5BED89: push    20h ; ' '; actorValue
+0x5BED8B: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x5BED90: cmp     eax, 3
 0x5BED93: jnz     loc_5BEE8A
 0x5BED99: cmp     edi, ebx
 0x5BED9B: jz      loc_5BEE8A
-0x5BEDA1: mov     ecx, ds:0B333C4h
-0x5BEDA7: push    20h ; ' '
-0x5BEDA9: call    Actor_GetSkillMasteryLevel
+0x5BEDA1: mov     ecx, ds:0B333C4h; this
+0x5BEDA7: push    20h ; ' '; actorValue
+0x5BEDA9: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x5BEDAE: test    eax, eax
 0x5BEDB0: jz      short loc_5BEDD3
-0x5BEDB2: mov     ecx, ds:0B333C4h
-0x5BEDB8: push    20h ; ' '
-0x5BEDBA: call    Actor_GetSkillMasteryLevel
+0x5BEDB2: mov     ecx, ds:0B333C4h; this
+0x5BEDB8: push    20h ; ' '; actorValue
+0x5BEDBA: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x5BEDBF: cmp     eax, 1
 0x5BEDC2: jz      short loc_5BEDD3
 0x5BEDC4: fld     dword ptr ds:0B38E28h
-0x5BEDCA: call    Double_To_SInt32
+0x5BEDCA: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5BEDCF: add     eax, eax
 0x5BEDD1: jmp     short loc_5BEDDE
 0x5BEDD3: fld     dword ptr ds:0B38E28h
-0x5BEDD9: call    Double_To_SInt32
+0x5BEDD9: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5BEDDE: mov     ecx, ds:0B33EA0h
 0x5BEDE4: sub     ecx, [esi+80h]
 0x5BEDEA: cmp     ecx, eax
@@ -145,7 +145,7 @@
 0x5BEE73: push    edi
 0x5BEE74: mov     [esi+80h], edx
 0x5BEE7A: mov     [esp+5Ch+var_14], 0FFFFFFFFh
-0x5BEE82: call    FormHeapFree
+0x5BEE82: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5BEE87: add     esp, 4
 0x5BEE8A: lea     edi, [esi+3Ch]
 0x5BEE8D: mov     ebp, 4
@@ -157,9 +157,9 @@
 0x5BEE9C: and     eax, 0FFh
 0x5BEEA1: mov     [esp+5Ch+hinstDLL.unused], eax
 0x5BEEA5: fild    [esp+5Ch+hinstDLL.unused]
-0x5BEEA9: fstp    [esp+5Ch+a2]; a3
-0x5BEEAC: push    0FA7h; a2
-0x5BEEB1: call    Tile_SetFloat
+0x5BEEA9: fstp    [esp+5Ch+a2]; value
+0x5BEEAC: push    0FA7h; propertyCode
+0x5BEEB1: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5BEEB6: add     edi, 14h
 0x5BEEB9: sub     ebp, 1
 0x5BEEBC: jnz     short loc_5BEE92
@@ -173,20 +173,20 @@
 0x5BEED7: call    InterfaceManager_GetSingleton
 0x5BEEDC: add     esp, 8
 0x5BEEDF: mov     edi, eax
-0x5BEEE1: call    sub_57D7A0
+0x5BEEE1: call    UI_GetVirtualScreenWidth; Returns virtual UI width: 1280 for portrait/square, otherwise aspect*960. Layout coordinates are independent of output pixel resolution.
 0x5BEEE6: fmul    qword ptr ds:0A2FAA0h
 0x5BEEEC: fadd    dword ptr [edi+20h]
-0x5BEEEF: call    Double_To_SInt32
+0x5BEEEF: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5BEEF4: mov     dword ptr [esp+58h+var_34], eax
 0x5BEEF8: fild    dword ptr [esp+58h+var_34]
 0x5BEEFC: fstp    [esp+58h+hinstDLL.unused]
-0x5BEF00: call    sub_57D7F0
+0x5BEF00: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x5BEF05: fstp    [esp+58h+var_34]
-0x5BEF09: call    sub_57D7F0
+0x5BEF09: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x5BEF0E: fmul    qword ptr ds:0A2FAA0h
 0x5BEF14: fadd    dword ptr [edi+28h]
 0x5BEF17: fsubr   [esp+58h+var_34]
-0x5BEF1B: call    Double_To_SInt32
+0x5BEF1B: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5BEF20: mov     dword ptr [esp+58h+var_34], eax
 0x5BEF24: fild    dword ptr [esp+58h+var_34]
 0x5BEF28: fstp    [esp+58h+var_3C]
@@ -289,3 +289,37 @@
 0x5BF095: fld1
 0x5BF097: mov     ecx, [esi+0D8h]
 0x5BF09D: fstp    dword ptr [ecx+74h]
+0x5BF10D: mov     ecx, [esi+0D8h]
+0x5BF113: fldz
+0x5BF115: mov     dword ptr [ecx+70h], 7
+0x5BF11C: mov     edx, [esi+0D8h]
+0x5BF122: fst     dword ptr [edx+74h]
+0x5BF125: mov     esi, [esi+0D8h]
+0x5BF12B: mov     eax, [esi]
+0x5BF12D: mov     edx, [eax+304h]
+0x5BF133: push    ebx
+0x5BF134: push    ecx
+0x5BF135: mov     ecx, esi
+0x5BF137: fstp    [esp+54h+var_54]
+0x5BF13A: call    edx
+0x5BF13C: push    ebx
+0x5BF13D: call    sub_5BEA90
+0x5BF142: add     esp, 4
+0x5BF145: mov     ecx, [esp+54h+var_18]
+0x5BF149: mov     large fs:0, ecx
+0x5BF150: pop     ecx
+0x5BF151: pop     edi
+0x5BF152: pop     esi
+0x5BF153: pop     ebp
+0x5BF154: pop     ebx
+0x5BF155: add     esp, 34h
+0x5BF158: retn
+0x9C0E90: lea     ecx, [ebp-30h]; void *
+0x9C0E93: jmp     BSStringT_Clear
+0x9C0E98: mov     edx, [esp+arg_4]
+0x9C0E9C: lea     eax, [edx-38h]
+0x9C0E9F: mov     ecx, [edx-3Ch]
+0x9C0EA2: xor     ecx, eax
+0x9C0EA4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C0EA9: mov     eax, offset stru_AE9FCC
+0x9C0EAE: jmp     ___CxxFrameHandler3

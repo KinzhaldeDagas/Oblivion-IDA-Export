@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 2,
-  "callers_count": 32,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 47,
+  "chunks": [
+    [
+      "0x53D7A0",
+      "0x53D84D"
+    ]
+  ],
+  "chunks_sha256": "4043694f097695c3d721d3e2bf975639d37ce86aa542b6085bc7c3c42b491cee",
+  "comment_regular": "Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.",
+  "comment_repeatable": "Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_53D7A0",
+  "display_name": "NiTransform_Compose",
   "end_ea": "0x53D84D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_53D7A0",
+  "name": "NiTransform_Compose",
   "segment": ".text",
   "sha256": "4043694f097695c3d721d3e2bf975639d37ce86aa542b6085bc7c3c42b491cee",
   "size": 173,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x53D7A0",
-  "type": "NiTransform *__thiscall(NiTransform *this, NiTransform *, NiTransform *)",
+  "total_chunk_size": 173,
+  "type": "NiTransform *__thiscall(const NiTransform *parent, NiTransform *out, const NiTransform *local)",
   "xrefs_from_count": 62,
   "xrefs_to_count": 47
 }

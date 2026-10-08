@@ -360,12 +360,6 @@
     "size": 2
   },
   {
-    "ea": "0x7EF0FD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x7EF100",
     "line": "mov     edi, [esp+354h+var_344]",
     "mnemonic": "mov",
@@ -463,7 +457,7 @@
   },
   {
     "ea": "0x7EF135",
-    "line": "call    sub_7B47E0",
+    "line": "call    BSShaderManager_GetVertexShaderTargetName",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,7 +493,7 @@
   },
   {
     "ea": "0x7EF148",
-    "line": "call    CreateVertexShader",
+    "line": "call    CreateVertexShader; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.",
     "mnemonic": "call",
     "size": 5
   },

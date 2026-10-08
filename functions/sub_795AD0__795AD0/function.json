@@ -1,19 +1,36 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_795AD0",
+  "chunks": [
+    [
+      "0x795AD0",
+      "0x795B72"
+    ],
+    [
+      "0x9CBD90",
+      "0x9CBDBC"
+    ]
+  ],
+  "chunks_sha256": "643af165a4cb9f5048cd91130978b7a8b5105328750835daa6d868c82bee0b1b",
+  "comment_regular": "OBLIVION AUTHORITY (2026-08-30): Exception-safe uninitialized copy of inner vector<unsigned short> owners. Deep-copy-constructs the destination range, destroys only its constructed prefix on unwind, and normally returns the constructed end at 0x795B5E; prior noreturn metadata was false.",
+  "comment_repeatable": "OBLIVION AUTHORITY (2026-08-30): Exception-safe uninitialized copy of inner vector<unsigned short> owners. Deep-copy-constructs the destination range, destroys only its constructed prefix on unwind, and normally returns the constructed end at 0x795B5E; prior noreturn metadata was false.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_stVector_stVectorUShort_UninitializedCopyRange_010201A0",
   "end_ea": "0x795B72",
-  "flags": 21521,
+  "evidence_confidence": "Unknown",
+  "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_795AD0",
+  "name": "OB_stVector_stVectorUShort_UninitializedCopyRange_010201A0",
   "segment": ".text",
   "sha256": "aa858558c56c40a5e05fc363a9e5f51fb131823abd72f79480fc9d0522516d53",
   "size": 162,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x795AD0",
-  "type": "void __cdecl __noreturn(int, int, char *)",
-  "xrefs_from_count": 69,
+  "total_chunk_size": 206,
+  "type": "OB_stVectorUShort_010201A0 *__cdecl(const OB_stVectorUShort_010201A0 *first, const OB_stVectorUShort_010201A0 *last, OB_stVectorUShort_010201A0 *destination)",
+  "xrefs_from_count": 85,
   "xrefs_to_count": 1
 }

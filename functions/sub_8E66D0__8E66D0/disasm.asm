@@ -17,7 +17,6 @@
 0x8E66F5: mov     ecx, [ecx+24h]
 0x8E66F8: lea     edx, [ecx+4]
 0x8E66FB: jmp     short loc_8E6700
-0x8E66FD: align 10h
 0x8E6700: cmp     [edx], edi
 0x8E6702: jz      short loc_8E6711
 0x8E6704: inc     eax

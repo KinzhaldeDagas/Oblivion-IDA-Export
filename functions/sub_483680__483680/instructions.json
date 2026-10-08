@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x483680",
-    "line": "push    ebx",
+    "line": "push    ebx; Verified exterior-cell unload: cancels that cell's in-flight DistantLODLoaderTask, removes queued model-usage counts for its packed cell label, releases the cell slot, and clears its coordinates.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,13 +19,13 @@
   },
   {
     "ea": "0x483685",
-    "line": "imul    esi, [esp+8+arg_0]",
+    "line": "imul    esi, [esp+8+cellX]",
     "mnemonic": "imul",
     "size": 5
   },
   {
     "ea": "0x48368A",
-    "line": "add     esi, [esp+8+arg_4]",
+    "line": "add     esi, [esp+8+cellY]",
     "mnemonic": "add",
     "size": 4
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x4836B5",
-    "line": "lea     eax, [esp+14h+arg_0]",
+    "line": "lea     eax, [esp+14h+cellX]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x4836BC",
-    "line": "mov     eax, [esp+10h+arg_0]",
+    "line": "mov     eax, [esp+10h+cellX]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -343,31 +343,31 @@
   },
   {
     "ea": "0x483708",
-    "line": "push    ecx",
+    "line": "push    ecx; group_y",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x483709",
-    "line": "push    edx",
+    "line": "push    edx; group_x",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48370A",
-    "line": "call    sub_4EF1D0",
+    "line": "call    TESObjectCELL_PackExteriorGroupLabel; Verified exact key encoding used by the DistantLOD cell model map: packed label = (signed cellX << 16) | unsigned cellY.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x48370F",
-    "line": "push    eax",
+    "line": "push    eax; packedExteriorCellLabel",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x483710",
-    "line": "call    sub_4B27F0",
+    "line": "call    DistantLOD_RemoveCellModelUsages; Verified GridDistantArray_UnloadCell calls DistantLOD_RemoveCellModelUsages with the packed exterior-cell label before clearing the cell slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x48371A",
-    "line": "mov     ecx, ds:0B35B8Ch",
+    "line": "mov     ecx, ds:0B35B8Ch; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -421,19 +421,19 @@
   },
   {
     "ea": "0x48372A",
-    "line": "push    eax",
+    "line": "push    eax; groupY",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48372B",
-    "line": "push    edx",
+    "line": "push    edx; groupX",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48372C",
-    "line": "call    sub_4BD380",
+    "line": "call    DistantLODLoaderTaskMap_CancelForCell; Verified per-cell cancellation path: looks up the packed cell label in g_DistantLODLoaderTasksByCell, cancels the referenced task through generic IOTask cancellation, then releases the lookup reference. GridDistantArray_UnloadCell calls this before clearing the cell slot.",
     "mnemonic": "call",
     "size": 5
   },

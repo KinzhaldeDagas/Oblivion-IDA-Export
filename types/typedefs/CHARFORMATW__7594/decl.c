@@ -1,1 +1,1 @@
-CHARFORMATW
+typedef _charformatw CHARFORMATW;

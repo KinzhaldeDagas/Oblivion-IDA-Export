@@ -1,4 +1,4 @@
-0x814340: mov     eax, ds:0B43124h
+0x814340: mov     eax, ds:0B43124h; BSCubeMapCamera virtual render dispatcher. Mode 0 calls the six-face shadow object-list renderer; mode 3 calls the alternate face renderer; afterward it releases +0x140 and all six +0x128 face references.
 0x814345: push    ebx
 0x814346: push    ebp
 0x814347: mov     ebp, ds:0A2807Ch
@@ -28,18 +28,18 @@
 0x81437D: lea     eax, [esi+4]
 0x814380: push    eax; lpAddend
 0x814381: call    dword ptr ds:0A28078h
-0x814387: mov     eax, [esi+124h]
+0x814387: mov     eax, [esi+124h]; Dispatch by BSCubeMapCamera+0x124: mode 0 -> 0x00813510, mode 3 -> 0x00813960.
 0x81438D: cmp     eax, 3; switch 4 cases
 0x814390: ja      short def_814392; jumptable 00814392 default case, cases 1,2
 0x814392: jmp     ds:jpt_814392[eax*4]; switch jump
 0x814399: mov     ecx, esi; jumptable 00814392 case 0
-0x81439B: call    sub_813510
+0x81439B: call    BSCubeMapCamera_RenderMode0_ShadowObjectListFaces; Mode 0 is the six-face render-target loop used by ShadowSceneLight special/object-list dispatch.
 0x8143A0: jmp     short def_814392; jumptable 00814392 default case, cases 1,2
-0x8143A2: mov     ecx, [esp+10h+arg_0]; jumptable 00814392 case 3
+0x8143A2: mov     ecx, [esp+10h+renderArg]; jumptable 00814392 case 3
 0x8143A6: push    ecx
 0x8143A7: mov     ecx, esi
-0x8143A9: call    sub_813960
-0x8143AE: mov     edi, [esi+140h]; jumptable 00814392 default case, cases 1,2
+0x8143A9: call    BSCubeMapCamera_RenderMode3Faces; Mode 3 uses the distinct image-space cube-face path; it is not the mode used by ShadowPass special-light rendering.
+0x8143AE: mov     edi, [esi+140h]; Begin post-render ownership cleanup for BSCubeMapCamera+0x140 and six face texture references.
 0x8143B4: test    edi, edi
 0x8143B6: jz      short loc_8143DA
 0x8143B8: lea     edx, [edi+4]

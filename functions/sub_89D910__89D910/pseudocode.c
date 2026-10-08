@@ -4,7 +4,7 @@ int __fastcall sub_89D910(_DWORD *a1, int a2, char a3)
 
   if ( a1 )
   {
-    v3 = a1[2];
+    v3 = a1[2]; /*0x89d918*/
     if ( v3 )
       *(_DWORD *)(v3 + 0x10) = a3 != 0 ? a1 : 0;
   }

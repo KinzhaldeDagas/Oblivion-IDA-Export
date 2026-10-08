@@ -1,7 +1,8 @@
-bool __thiscall sub_76D4F0(char **this)
+// Return whether this depth/stencil buffer's surface format advertises a depth component; used to gate D3DCLEAR_ZBUFFER.
+bool __thiscall NiDX92DBufferData_HasDepthComponent(NiDX92DBufferData *this)
 {
-  char *v2; // ecx
+  NiSurfaceData *SurfaceData; // ecx
 
-  v2 = *(this + 4);
-  return v2 && *(this + 3) && sub_71B4A0(v2, 0x11) != 0;
+  SurfaceData = this->member.SurfaceData; /*0x76d4f2*/
+  return SurfaceData && this->member.Surface && sub_71B4A0((char *)SurfaceData, 0x11) != 0; /*0x76d50b*/
 }

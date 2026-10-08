@@ -1,1 +1,1 @@
-RpcConnection_np
+typedef _RpcConnection_np RpcConnection_np;

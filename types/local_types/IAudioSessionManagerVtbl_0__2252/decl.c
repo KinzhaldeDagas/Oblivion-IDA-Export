@@ -1,1 +1,1 @@
-IAudioSessionManagerVtbl_0
+typedef IAudioSessionManagerVtbl IAudioSessionManagerVtbl_0;

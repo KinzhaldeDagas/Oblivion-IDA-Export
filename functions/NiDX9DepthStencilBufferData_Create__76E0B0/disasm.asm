@@ -1,4 +1,4 @@
-0x76E0B0: sub     esp, 20h
+0x76E0B0: sub     esp, 20h; Creates NiDX9ImplicitDepthStencilBufferData around IDirect3DDevice9::GetDepthStencilSurface. Reads the surface description, creates or attaches the parent Ni2DBuffer, and records the surface in the renderer's depth/stencil binding cache.
 0x76E0B3: push    ebx
 0x76E0B4: push    ebp
 0x76E0B5: push    esi
@@ -9,7 +9,7 @@
 0x76E0C1: add     esp, 4
 0x76E0C4: cmp     esi, ebp
 0x76E0C6: jz      short loc_76E0ED
-0x76E0C8: push    offset NiRefObject_objcount; lpAddend
+0x76E0C8: push    0B3FD64h; lpAddend
 0x76E0CD: mov     dword ptr [esi], offset ??_7NiRefObject@@6B@; const NiRefObject::`vftable'
 0x76E0D3: mov     [esi+4], ebp
 0x76E0D6: call    dword ptr ds:0A28078h
@@ -19,7 +19,7 @@
 0x76E0E5: mov     dword ptr [esi], offset ??_7NiDX9ImplicitDepthStencilBufferData@@6B@; const NiDX9ImplicitDepthStencilBufferData::`vftable'
 0x76E0EB: jmp     short loc_76E0EF
 0x76E0ED: xor     esi, esi
-0x76E0EF: mov     eax, [esp+2Ch+arg_0]
+0x76E0EF: mov     eax, [esp+2Ch+device]
 0x76E0F3: mov     ecx, [eax]
 0x76E0F5: mov     edx, [ecx+0A0h]
 0x76E0FB: lea     ebx, [esi+0Ch]
@@ -65,7 +65,7 @@
 0x76E147: push    edi
 0x76E148: push    ecx; a1
 0x76E149: call    CreateSurfaceData
-0x76E14E: mov     edi, [esp+34h+arg_4]
+0x76E14E: mov     edi, [esp+34h+parentBuffer]
 0x76E152: mov     [esi+10h], eax
 0x76E155: mov     ecx, [edi]; this
 0x76E157: add     esp, 4

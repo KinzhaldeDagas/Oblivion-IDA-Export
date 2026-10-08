@@ -39,8 +39,8 @@
 0x66A504: call    ShowUIMessageBox
 0x66A509: add     esp, 14h
 0x66A50C: jmp     loc_66A5C3
-0x66A511: mov     ecx, esi
-0x66A513: call    sub_484DF0
+0x66A511: mov     ecx, esi; this
+0x66A513: call    EquippedEntryData_GetPoison; Return the AlchemyItem poison attached to this EntryData's first ExtraDataList stack, or NULL. EntryData layout is extendData@+0, countDelta@+4, type@+8.
 0x66A518: test    eax, eax
 0x66A51A: jz      short loc_66A53F
 0x66A51C: mov     edx, ds:0B38CF0h

@@ -1,1 +1,1 @@
-WINMM_MMDevice
+typedef _WINMM_MMDevice WINMM_MMDevice;

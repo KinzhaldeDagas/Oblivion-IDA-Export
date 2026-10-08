@@ -12,73 +12,66 @@ void __thiscall sub_753400(float *this, float a2, int a3)
   float v13; // [esp+10h] [ebp-118h]
   float v14; // [esp+10h] [ebp-118h]
   float v15; // [esp+10h] [ebp-118h]
-  float v16; // [esp+14h] [ebp-114h] BYREF
-  float v17; // [esp+18h] [ebp-110h]
-  float v18; // [esp+1Ch] [ebp-10Ch]
-  float v19; // [esp+20h] [ebp-108h]
-  float scale; // [esp+24h] [ebp-104h] BYREF
-  float v21; // [esp+28h] [ebp-100h]
-  float v22; // [esp+2Ch] [ebp-FCh]
-  float v23[3]; // [esp+30h] [ebp-F8h] BYREF
-  float v24; // [esp+3Ch] [ebp-ECh]
-  float v25; // [esp+40h] [ebp-E8h]
-  float v26; // [esp+44h] [ebp-E4h]
-  float v27; // [esp+48h] [ebp-E0h]
-  NiTransform v28; // [esp+4Ch] [ebp-DCh] BYREF
-  float v29; // [esp+80h] [ebp-A8h]
-  float v30; // [esp+84h] [ebp-A4h]
-  float v31[13]; // [esp+8Ch] [ebp-9Ch] BYREF
-  NiTransform v32; // [esp+C0h] [ebp-68h] BYREF
-  NiTransform v33; // [esp+F4h] [ebp-34h] BYREF
+  NiPoint3 v16; // [esp+14h] [ebp-114h] BYREF
+  float v17; // [esp+20h] [ebp-108h]
+  NiPoint3 pos; // [esp+24h] [ebp-104h] BYREF
+  float v19[3]; // [esp+30h] [ebp-F8h] BYREF
+  float v20; // [esp+3Ch] [ebp-ECh]
+  float v21; // [esp+40h] [ebp-E8h]
+  float v22; // [esp+44h] [ebp-E4h]
+  float v23; // [esp+48h] [ebp-E0h]
+  NiPoint3 v24; // [esp+4Ch] [ebp-DCh] BYREF
+  NiTransform out; // [esp+58h] [ebp-D0h] BYREF
+  float v26[13]; // [esp+8Ch] [ebp-9Ch] BYREF
+  NiTransform local; // [esp+C0h] [ebp-68h] BYREF
+  NiTransform parent; // [esp+F4h] [ebp-34h] BYREF
 
-  qmemcpy(&v32, (const void *)(*((_DWORD *)this + 6) + 0x64), sizeof(v32));
-  qmemcpy(v31, (const void *)(*((_DWORD *)this + 4) + 0x64), sizeof(v31));
-  sub_718A80(v31, &v33);
-  sub_53D7A0(&v33, (NiTransform *)v28.rot.data[1], &v32);
-  scale = v28.scale;
-  v21 = v29;
-  v22 = v30;
-  sub_7101F0((NiTransform *)v28.rot.data[1], &v28, (NiPoint3 *)this + 4);
-  sub_43F350((float *)&v28);
-  v4 = 0;
-  v5 = *(_WORD *)(a3 + 0x48) == 0;
-  v24 = *(this + 0xA) * *(this + 0xA);
-  if ( !v5 )
+  qmemcpy(&local, (const void *)(*((_DWORD *)this + 6) + 0x64), sizeof(local)); /*0x75341e*/
+  qmemcpy(v26, (const void *)(*((_DWORD *)this + 4) + 0x64), sizeof(v26)); /*0x753439*/
+  sub_718A80(v26, &parent); /*0x753443*/
+  NiTransform_Compose(&parent, &out, &local); /*0x75345c*/
+  pos = out.pos; /*0x753473*/
+  sub_7101F0(&out, (NiTransform *)&v24, (NiPoint3 *)this + 4); /*0x75348c*/
+  Vector3_NormalizeInPlace(&v24.x); /*0x753495*/
+  v4 = 0; /*0x7534a8*/
+  v5 = *(_WORD *)(a3 + 0x48) == 0; /*0x7534aa*/
+  v20 = *(this + 0xA) * *(this + 0xA); /*0x7534ae*/
+  if ( !v5 ) /*0x7534b2*/
   {
-    do
+    do /*0x7535f7*/
     {
-      v6 = (float *)(*(_DWORD *)(a3 + 0x5C) + 0x1C * v4);
-      v19 = a2 - v6[5];
-      if ( 0.0 != v19 )
+      v6 = (float *)(*(_DWORD *)(a3 + 0x5C) + 0x1C * v4); /*0x7534d6*/
+      v17 = a2 - v6[5]; /*0x7534dc*/
+      if ( 0.0 != v17 ) /*0x7534eb*/
       {
-        v7 = *(_DWORD *)(a3 + 0x1C);
-        v8 = *(float *)(v7 + 0xC * v4);
-        v9 = v7 + 0xC * v4;
-        v10 = *(float *)(v9 + 4);
-        v23[0] = v8;
-        v11 = v8 - scale;
-        v12 = *(float *)(v9 + 8);
-        v23[1] = v10;
-        v23[2] = v12;
-        v25 = v11;
-        v26 = v10 - v21;
-        v27 = v12 - v22;
-        v13 = v26 * v26 + v25 * v25 + v27 * v27;
-        v14 = sqrt(v13);
-        if ( v14 != 0.0 && v24 >= (double)v14 )
+        v7 = *(_DWORD *)(a3 + 0x1C); /*0x7534f1*/
+        v8 = *(float *)(v7 + 0xC * v4); /*0x7534f7*/
+        v9 = v7 + 0xC * v4; /*0x7534fa*/
+        v10 = *(float *)(v9 + 4); /*0x7534fd*/
+        v19[0] = v8; /*0x753500*/
+        v11 = v8 - pos.x; /*0x753508*/
+        v12 = *(float *)(v9 + 8); /*0x75350c*/
+        v19[1] = v10; /*0x75350f*/
+        v19[2] = v12; /*0x753513*/
+        v21 = v11; /*0x753517*/
+        v22 = v10 - pos.y; /*0x753523*/
+        v23 = v12 - pos.z; /*0x75352f*/
+        v13 = v22 * v22 + v21 * v21 + v23 * v23; /*0x75354f*/
+        v14 = sqrt(v13); /*0x75355c*/
+        if ( v14 != 0.0 && v20 >= (double)v14 ) /*0x753584*/
         {
-          sub_753280(&v16, &scale, (float *)&v28, v23);
-          v15 = *(this + 7) * v19;
-          v16 = v16 * v15;
-          v17 = v17 * v15;
-          v18 = v15 * v18;
-          *v6 = *v6 + v16;
-          v6[1] = v6[1] + v17;
-          v6[2] = v6[2] + v18;
+          sub_753280(&v16, &pos.x, &v24, v19); /*0x75359c*/
+          v15 = *(this + 7) * v17; /*0x7535a8*/
+          v16.x = v16.x * v15; /*0x7535ba*/
+          v16.y = v16.y * v15; /*0x7535c4*/
+          v16.z = v15 * v16.z; /*0x7535cc*/
+          *v6 = *v6 + v16.x; /*0x7535d6*/
+          v6[1] = v6[1] + v16.y; /*0x7535df*/
+          v6[2] = v6[2] + v16.z; /*0x7535e9*/
         }
       }
-      ++v4;
+      ++v4; /*0x7535f0*/
     }
-    while ( v4 < *(_WORD *)(a3 + 0x48) );
+    while ( v4 < *(_WORD *)(a3 + 0x48) ); /*0x7535f7*/
   }
 }

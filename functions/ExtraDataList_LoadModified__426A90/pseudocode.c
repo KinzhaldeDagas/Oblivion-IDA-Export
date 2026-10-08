@@ -5,17 +5,17 @@ void __userpurge ExtraDataList_LoadModified(
         double st7_0@<st0>,
         int a5,
         int a6,
-        TESObjectREFR *a7)
+        TESChildCELL *a7)
 {
-  TESObjectREFR *v7; // ebp
-  UInt32 *v9; // esi
+  TESChildCELL *v7; // ebp
+  UInt32 *currentlyLoadingFormHeader; // esi
   TESForm *v10; // eax
   const char *v11; // eax
-  char *v12; // esi
+  void (__thiscall *v12)(BSExtraData *); // esi
   int v13; // eax
-  _DWORD *v14; // esi
-  TESSaveLoad *v15; // ecx
-  TESSaveLoad *v16; // ecx
+  ExtraLockData *v14; // esi
+  TESSaveLoadGame_SerializationView *v15; // ecx
+  TESSaveLoadGame_SerializationView *v16; // ecx
   TESForm *v17; // eax
   UInt32 v18; // eax
   bool v19; // zf
@@ -24,16 +24,16 @@ void __userpurge ExtraDataList_LoadModified(
   TESForm *v22; // eax
   TESForm *v23; // eax
   TESForm *v24; // eax
-  BSExtraDataVtbl *v25; // eax
+  TESGlobal *v25; // eax
   TESForm *v26; // eax
-  char *v27; // eax
+  BSExtraDataVtbl *v27; // eax
   char *v28; // esi
   int *ExtraScriptEventList; // edi
   _DWORD *v30; // eax
   int *v31; // esi
-  TESPackage *v32; // esi
+  TESPackage *Package; // esi
   TESForm *v33; // eax
-  CombatController *v34; // esi
+  TESPackage *v34; // esi
   int v35; // esi
   TESForm *v36; // eax
   void *v37; // eax
@@ -43,26 +43,26 @@ void __userpurge ExtraDataList_LoadModified(
   NonActorMagicCaster *v41; // eax
   BSExtraData *v42; // edi
   bool (__thiscall *CompareTo)(BSExtraData *, BSExtraData *); // edx
-  BSExtraData *v44; // eax
-  BSExtraData *v45; // esi
-  void (__thiscall *Destructor)(BSExtraData *); // eax
-  int v47; // eax
+  NonActorMagicTarget *v44; // eax
+  NonActorMagicTarget *v45; // esi
+  EffectNode *(__thiscall *GetActiveEffectList)(MagicTarget *); // eax
+  int *v47; // eax
   TeleportData *v48; // eax
-  TeleportData *v49; // esi
+  TeleportData *inited; // esi
   char *v50; // eax
   BSExtraData *v51; // esi
   float *v52; // eax
-  unsigned __int8 next; // al
+  unsigned __int8 currentVersion; // al
   unsigned __int8 v54; // al
   BSExtraData *v55; // eax
-  TESObjectCELL *v56; // esi
+  TESObjectCELL *PersistentCell; // esi
   BSExtraData *ExtraData; // eax
   TESForm *v58; // eax
   _DWORD *v59; // eax
   _DWORD *v60; // esi
   BSExtraDataVtbl *v61; // eax
   TESObjectCELL *v62; // eax
-  TESObjectCELL *ParentCell; // eax
+  TESObjectCELL *DwordAtOffset40; // eax
   TESObjectCELL *v64; // eax
   unsigned int v65; // esi
   TESForm *v66; // esi
@@ -73,163 +73,138 @@ void __userpurge ExtraDataList_LoadModified(
   ExtraFriendHitList *v71; // eax
   BSExtraData *v72; // ebp
   unsigned int v73; // edi
-  int v74; // eax
-  int v75; // esi
+  float *v74; // eax
+  float *v75; // esi
   TESForm *v76; // esi
   unsigned int v77; // edi
   _DWORD *v78; // ebp
   TESObjectREFR *v79; // eax
   int v80; // esi
-  unsigned int *v81; // eax
-  unsigned int *v82; // esi
+  TESObjectREFR *v81; // eax
+  MenuTopicView *v82; // esi
   UInt32 *v83; // edi
-  UInt32 v84; // esi
+  unsigned __int8 *v84; // esi
   TESForm *v85; // eax
-  UInt32 v86; // ebx
+  unsigned __int8 *v86; // ebx
   TESForm *v87; // ecx
-  UInt32 v88; // eax
+  unsigned __int8 *v88; // eax
   const char *v89; // eax
   const char *v90; // eax
-  UInt32 v91; // edx
-  size_t v92; // [esp-8h] [ebp-264h]
-  size_t v93; // [esp-8h] [ebp-264h]
-  size_t v94; // [esp-8h] [ebp-264h]
-  size_t v95; // [esp-8h] [ebp-264h]
-  size_t v96; // [esp+0h] [ebp-25Ch]
-  size_t v97; // [esp+0h] [ebp-25Ch]
-  size_t v98; // [esp+0h] [ebp-25Ch]
-  size_t v99; // [esp+0h] [ebp-25Ch]
-  size_t v100; // [esp+0h] [ebp-25Ch]
-  size_t v101; // [esp+0h] [ebp-25Ch]
-  size_t v102; // [esp+0h] [ebp-25Ch]
-  float v103; // [esp+0h] [ebp-25Ch]
-  size_t v104; // [esp+0h] [ebp-25Ch]
-  size_t v105; // [esp+0h] [ebp-25Ch]
-  size_t v106; // [esp+0h] [ebp-25Ch]
-  int v107; // [esp+4h] [ebp-258h]
-  int v108; // [esp+4h] [ebp-258h]
-  int v109; // [esp+4h] [ebp-258h]
-  int v110; // [esp+4h] [ebp-258h]
-  size_t v111; // [esp+8h] [ebp-254h]
-  size_t v112; // [esp+8h] [ebp-254h]
-  int v113; // [esp+8h] [ebp-254h]
-  size_t v114; // [esp+8h] [ebp-254h]
-  size_t v115; // [esp+8h] [ebp-254h]
-  size_t v116; // [esp+8h] [ebp-254h]
-  __int16 v117; // [esp+8h] [ebp-254h]
-  size_t v118; // [esp+8h] [ebp-254h]
-  size_t v119; // [esp+8h] [ebp-254h]
-  size_t v120; // [esp+8h] [ebp-254h]
-  size_t v121; // [esp+8h] [ebp-254h]
-  size_t v122; // [esp+8h] [ebp-254h]
-  size_t v123; // [esp+8h] [ebp-254h]
-  float v124; // [esp+8h] [ebp-254h]
-  int v125; // [esp+8h] [ebp-254h]
-  int v126; // [esp+8h] [ebp-254h]
-  int v127; // [esp+Ch] [ebp-250h]
-  int v128; // [esp+10h] [ebp-24Ch]
-  float v129; // [esp+14h] [ebp-248h]
-  int v130; // [esp+18h] [ebp-244h]
-  int v131; // [esp+1Ch] [ebp-240h]
-  _DWORD *v132; // [esp+20h] [ebp-23Ch] BYREF
-  int v133; // [esp+24h] [ebp-238h] BYREF
-  void *v134; // [esp+28h] [ebp-234h]
-  unsigned __int16 v135; // [esp+2Ch] [ebp-230h]
-  char v136; // [esp+2Fh] [ebp-22Dh] BYREF
-  char v137; // [esp+30h] [ebp-22Ch] BYREF
-  unsigned __int8 v138; // [esp+31h] [ebp-22Bh] BYREF
-  char v139; // [esp+32h] [ebp-22Ah] BYREF
-  unsigned __int8 v140; // [esp+33h] [ebp-229h] BYREF
-  unsigned __int16 v141; // [esp+34h] [ebp-228h] BYREF
-  unsigned __int16 v142; // [esp+38h] [ebp-224h] BYREF
-  int v143; // [esp+3Ch] [ebp-220h] BYREF
-  UInt32 v144; // [esp+40h] [ebp-21Ch] BYREF
-  unsigned __int16 v145; // [esp+44h] [ebp-218h] BYREF
-  __int16 v146; // [esp+48h] [ebp-214h] BYREF
-  UInt32 v147; // [esp+4Ch] [ebp-210h]
-  char v148[4]; // [esp+50h] [ebp-20Ch] BYREF
-  TESChildCELL *v149; // [esp+54h] [ebp-208h]
-  int v150; // [esp+58h] [ebp-204h]
-  BSExtraData *v151; // [esp+5Ch] [ebp-200h] BYREF
-  char *v152; // [esp+60h] [ebp-1FCh]
-  BSExtraDataVtbl *v153; // [esp+64h] [ebp-1F8h] BYREF
-  char v154[8]; // [esp+68h] [ebp-1F4h] BYREF
-  int v155; // [esp+70h] [ebp-1ECh] BYREF
-  char v156[4]; // [esp+74h] [ebp-1E8h] BYREF
-  float v157[2]; // [esp+78h] [ebp-1E4h] BYREF
-  float v158; // [esp+80h] [ebp-1DCh] BYREF
-  BSExtraDataVtbl *v159; // [esp+84h] [ebp-1D8h] BYREF
-  int v160; // [esp+88h] [ebp-1D4h] BYREF
-  BSExtraDataVtbl *v161; // [esp+8Ch] [ebp-1D0h] BYREF
-  int v162; // [esp+90h] [ebp-1CCh] BYREF
-  int v163; // [esp+94h] [ebp-1C8h] BYREF
-  int v164; // [esp+98h] [ebp-1C4h] BYREF
-  int v165; // [esp+9Ch] [ebp-1C0h] BYREF
-  int v166; // [esp+A0h] [ebp-1BCh] BYREF
-  int v167; // [esp+A4h] [ebp-1B8h] BYREF
-  char v168[4]; // [esp+A8h] [ebp-1B4h] BYREF
-  BSExtraDataVtbl *v169; // [esp+ACh] [ebp-1B0h] BYREF
-  int v170; // [esp+B0h] [ebp-1ACh]
-  int v171; // [esp+B4h] [ebp-1A8h] BYREF
-  int v172; // [esp+B8h] [ebp-1A4h] BYREF
-  int v173; // [esp+BCh] [ebp-1A0h] BYREF
-  int v174; // [esp+C0h] [ebp-19Ch] BYREF
-  BSExtraDataVtbl *v175; // [esp+C4h] [ebp-198h] BYREF
-  char v176[4]; // [esp+C8h] [ebp-194h] BYREF
-  int v177; // [esp+CCh] [ebp-190h] BYREF
-  float v178; // [esp+D0h] [ebp-18Ch] BYREF
-  int v179; // [esp+D4h] [ebp-188h] BYREF
-  BSExtraDataVtbl *v180; // [esp+D8h] [ebp-184h] BYREF
-  int v181; // [esp+DCh] [ebp-180h] BYREF
-  BSExtraDataVtbl *v182; // [esp+E0h] [ebp-17Ch] BYREF
-  int v183; // [esp+E4h] [ebp-178h] BYREF
-  char v184[4]; // [esp+E8h] [ebp-174h] BYREF
-  int v185; // [esp+ECh] [ebp-170h] BYREF
+  unsigned __int8 *v91; // edx
+  BSExtraData *v92; // [esp-4h] [ebp-260h]
+  unsigned int v93; // [esp+0h] [ebp-25Ch]
+  int v94; // [esp+4h] [ebp-258h]
+  int v95; // [esp+4h] [ebp-258h]
+  int v96; // [esp+4h] [ebp-258h]
+  int v97; // [esp+4h] [ebp-258h]
+  int valuea; // [esp+8h] [ebp-254h]
+  __int16 value; // [esp+8h] [ebp-254h]
+  float valueb; // [esp+8h] [ebp-254h]
+  int valuec; // [esp+8h] [ebp-254h]
+  int valued; // [esp+8h] [ebp-254h]
+  int v103; // [esp+Ch] [ebp-250h]
+  int v104; // [esp+10h] [ebp-24Ch]
+  float v105; // [esp+14h] [ebp-248h]
+  int v106; // [esp+18h] [ebp-244h]
+  int v107; // [esp+1Ch] [ebp-240h]
+  _DWORD *p_vtbl; // [esp+20h] [ebp-23Ch] BYREF
+  int v109; // [esp+24h] [ebp-238h] BYREF
+  float v110; // [esp+28h] [ebp-234h]
+  unsigned __int16 v111; // [esp+2Ch] [ebp-230h]
+  char v112; // [esp+2Fh] [ebp-22Dh] BYREF
+  char v113; // [esp+30h] [ebp-22Ch] BYREF
+  unsigned __int8 v114; // [esp+31h] [ebp-22Bh] BYREF
+  char v115; // [esp+32h] [ebp-22Ah] BYREF
+  unsigned __int8 v116; // [esp+33h] [ebp-229h] BYREF
+  unsigned __int16 v117; // [esp+34h] [ebp-228h] BYREF
+  unsigned __int16 v118; // [esp+38h] [ebp-224h] BYREF
+  unsigned int formID; // [esp+3Ch] [ebp-220h] BYREF
+  UInt32 destination; // [esp+40h] [ebp-21Ch] BYREF
+  unsigned __int16 v121; // [esp+44h] [ebp-218h] BYREF
+  __int16 v122; // [esp+48h] [ebp-214h] BYREF
+  unsigned __int8 *bufferCursor; // [esp+4Ch] [ebp-210h]
+  char v124[4]; // [esp+50h] [ebp-20Ch] BYREF
+  TESChildCELL *v125; // [esp+54h] [ebp-208h]
+  int v126; // [esp+58h] [ebp-204h]
+  unsigned int v127; // [esp+5Ch] [ebp-200h] BYREF
+  void (__thiscall *v128)(BSExtraData *); // [esp+60h] [ebp-1FCh]
+  BSExtraDataVtbl *v129; // [esp+64h] [ebp-1F8h] BYREF
+  char v130[8]; // [esp+68h] [ebp-1F4h] BYREF
+  int v131; // [esp+70h] [ebp-1ECh] BYREF
+  char v132[4]; // [esp+74h] [ebp-1E8h] BYREF
+  BSExtraDataVtbl *v133[2]; // [esp+78h] [ebp-1E4h] BYREF
+  float v134; // [esp+80h] [ebp-1DCh] BYREF
+  unsigned int v135; // [esp+84h] [ebp-1D8h] BYREF
+  int v136; // [esp+88h] [ebp-1D4h] BYREF
+  unsigned int v137; // [esp+8Ch] [ebp-1D0h] BYREF
+  unsigned int v138; // [esp+90h] [ebp-1CCh] BYREF
+  unsigned int v139; // [esp+94h] [ebp-1C8h] BYREF
+  unsigned int v140; // [esp+98h] [ebp-1C4h] BYREF
+  int v141; // [esp+9Ch] [ebp-1C0h] BYREF
+  int v142; // [esp+A0h] [ebp-1BCh] BYREF
+  unsigned int v143; // [esp+A4h] [ebp-1B8h] BYREF
+  char v144[4]; // [esp+A8h] [ebp-1B4h] BYREF
+  unsigned int v145; // [esp+ACh] [ebp-1B0h] BYREF
+  unsigned int v146; // [esp+B0h] [ebp-1ACh]
+  unsigned int v147; // [esp+B4h] [ebp-1A8h] BYREF
+  unsigned int v148; // [esp+B8h] [ebp-1A4h] BYREF
+  unsigned int v149; // [esp+BCh] [ebp-1A0h] BYREF
+  unsigned int v150; // [esp+C0h] [ebp-19Ch] BYREF
+  unsigned int v151; // [esp+C4h] [ebp-198h] BYREF
+  char v152[4]; // [esp+C8h] [ebp-194h] BYREF
+  unsigned int v153; // [esp+CCh] [ebp-190h] BYREF
+  BSExtraDataVtbl *v154; // [esp+D0h] [ebp-18Ch] BYREF
+  unsigned __int8 packageType[4]; // [esp+D4h] [ebp-188h] BYREF
+  BSExtraDataVtbl *v156; // [esp+D8h] [ebp-184h] BYREF
+  float v157; // [esp+DCh] [ebp-180h] BYREF
+  SInt32 rank; // [esp+E0h] [ebp-17Ch] BYREF
+  int v159; // [esp+E4h] [ebp-178h] BYREF
+  char v160[4]; // [esp+E8h] [ebp-174h] BYREF
+  int v161; // [esp+ECh] [ebp-170h] BYREF
   int a1; // [esp+F0h] [ebp-16Ch] BYREF
-  int v187; // [esp+F4h] [ebp-168h] BYREF
-  int v188; // [esp+F8h] [ebp-164h] BYREF
-  float v189; // [esp+FCh] [ebp-160h] BYREF
-  char v190[4]; // [esp+100h] [ebp-15Ch] BYREF
-  float v191[2]; // [esp+104h] [ebp-158h] BYREF
-  TESObjectREFR *v192; // [esp+10Ch] [ebp-150h]
-  char v193[4]; // [esp+110h] [ebp-14Ch] BYREF
-  void *v194; // [esp+114h] [ebp-148h] BYREF
+  bool noRumors[4]; // [esp+F4h] [ebp-168h] BYREF
+  int v164; // [esp+F8h] [ebp-164h] BYREF
+  BSExtraDataVtbl *v165; // [esp+FCh] [ebp-160h] BYREF
+  char v166[4]; // [esp+100h] [ebp-15Ch] BYREF
+  BSExtraDataVtbl *v167[2]; // [esp+104h] [ebp-158h] BYREF
+  TESObjectREFR *reference; // [esp+10Ch] [ebp-150h]
+  char v169[4]; // [esp+110h] [ebp-14Ch] BYREF
+  void *v170; // [esp+114h] [ebp-148h] BYREF
   int Dst; // [esp+118h] [ebp-144h] BYREF
-  float v196; // [esp+124h] [ebp-138h] BYREF
-  char v197[4]; // [esp+128h] [ebp-134h] BYREF
-  int v198; // [esp+12Ch] [ebp-130h]
-  char v199[20]; // [esp+134h] [ebp-128h] BYREF
-  _DWORD v200[65]; // [esp+148h] [ebp-114h] BYREF
-  int v201; // [esp+250h] [ebp-Ch]
-  int v202; // [esp+258h] [ebp-4h]
+  float v172; // [esp+124h] [ebp-138h] BYREF
+  char v173[4]; // [esp+128h] [ebp-134h] BYREF
+  int v174; // [esp+12Ch] [ebp-130h]
+  char v175[20]; // [esp+134h] [ebp-128h] BYREF
+  _DWORD v176[65]; // [esp+148h] [ebp-114h] BYREF
+  int v177; // [esp+250h] [ebp-Ch]
+  int v178; // [esp+258h] [ebp-4h]
 
-  v7 = a7;
-  v149 = (TESChildCELL *)a7;
-  v144 = 0;
-  v147 = 0;
-  if ( sub_45A170() )
+  v7 = a7; /*0x426acb*/
+  v125 = a7; /*0x426adc*/
+  destination = 0; /*0x426ae0*/
+  bufferCursor = 0; /*0x426ae4*/
+  if ( TESSaveLoadGame_UseSaveGameBlocks() )
   {
-    LODWORD(v111) = 4;
-    SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &Dst, v111);
+    SaveLoad_LoadData(g_TESSaveLoadGame, &Dst, 4u); /*0x426b05*/
     if ( Dst != 0x4B4F4C42 )
     {
-      v9 = (UInt32 *)SaveLoad_CurrentSavegame[1].unk030[0];
-      if ( v9 )
+      currentlyLoadingFormHeader = (UInt32 *)g_TESSaveLoadGame->currentlyLoadingFormHeader; /*0x426b1c*/
+      if ( currentlyLoadingFormHeader )
       {
-        v10 = TESForm_LookupByFormID(*v9);
-        v11 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v10->vtbl->GetEditorName)(
+        v10 = TESForm_LookupByFormID(*currentlyLoadingFormHeader); /*0x426b29*/
+        v11 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v10->vtbl->GetEditorName)( /*0x426b44*/
                               v10,
-                              *((unsigned __int8 *)v9 + 9),
-                              *(UInt32 *)((char *)v9 + 5));
+                              *((unsigned __int8 *)currentlyLoadingFormHeader + 9),
+                              *(UInt32 *)((char *)currentlyLoadingFormHeader + 5));
         PrintError(
           "LoadGame Buffer error: Block Header is incorrect in file %s on line %i.  Currently loading form is %08X %s wit"
           "h version %i and flags %08X",
           "..\\TES Shared\\ExtraDataList.cpp",
           0x1B6F,
-          *v9,
+          *currentlyLoadingFormHeader,
           v11,
-          v107,
-          v113);
+          v94,
+          valuea);
       }
       else
       {
@@ -237,859 +212,774 @@ void __userpurge ExtraDataList_LoadModified(
           "LoadGame Buffer error: Block Header is incorrect in file %s on line %i.  Current version is %i",
           "..\\TES Shared\\ExtraDataList.cpp",
           0x1B6F,
-          LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next));
+          g_TESSaveLoadGame->currentVersion);
       }
     }
-    LODWORD(v112) = 2;
-    v147 = SaveLoad_CurrentSavegame->unk000[5];
-    SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v144, v112);
+    bufferCursor = g_TESSaveLoadGame->bufferCursor; /*0x426b8f*/
+    SaveLoad_LoadData(g_TESSaveLoadGame, &destination, 2u); /*0x426b93*/
   }
-  LOWORD(v133) = 0;
-  HIBYTE(v133) = 0;
-  v12 = (char *)OblivionDynamicCast(
-                  a7,
-                  0,
-                  (struct _s_RTTICompleteObjectLocator *)&TESObjectREFR `RTTI Type Descriptor',
-                  &Actor `RTTI Type Descriptor',
-                  0);
-  LODWORD(v111) = 2;
-  v152 = v12;
-  SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v142, v111);
-  v150 = 0;
-  if ( !v142 )
+  LOWORD(v109) = 0; /*0x426ba5*/
+  HIBYTE(v109) = 0; /*0x426baa*/
+  v12 = (void (__thiscall *)(BSExtraData *))OblivionDynamicCast( /*0x426bc2*/
+                                              a7,
+                                              0,
+                                              (struct _s_RTTICompleteObjectLocator *)&TESObjectREFR `RTTI Type Descriptor',
+                                              &Actor `RTTI Type Descriptor',
+                                              0);
+  v128 = v12; /*0x426bcb*/
+  SaveLoad_LoadData(g_TESSaveLoadGame, &v118, 2u); /*0x426bcf*/
+  v126 = 0; /*0x426bd9*/
+  if ( !v118 ) /*0x426bdd*/
   {
 LABEL_215:
-    if ( (a5 & 0x4000000) != 0 )
-      BaseExtraList_RemoveExtraByType(ecx0, 0x12u);
-    goto LABEL_217;
+    if ( (a5 & 0x4000000) != 0 ) /*0x42800e*/
+      BaseExtraList_RemoveExtraByType(ecx0, 0x12u); /*0x428014*/
+    goto LABEL_217; /*0x428014*/
   }
-  while ( 2 )
+  while ( 2 ) /*0x426bfb*/
   {
-    LODWORD(v114) = 1;
-    SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v138, v114);
-    switch ( v138 )
+    SaveLoad_LoadData(g_TESSaveLoadGame, &v114, 1u); /*0x426bfb*/
+    switch ( v114 ) /*0x426c18*/
     {
-      case 0x11u:
-        if ( v7 )
+      case 0x11u: /*0x426c18*/
+        if ( v7 ) /*0x4279a6*/
         {
-          if ( v7->vtbl->IsActor(v7) )
+          if ( (*((unsigned __int8 (__thiscall **)(TESChildCELL *))v7->vtbl + 0x64))(v7) ) /*0x4279b7*/
           {
-            v56 = (TESObjectCELL *)sub_41FF80(ecx0);
-            if ( v56 )
+            PersistentCell = (TESObjectCELL *)ExtraDataList_GetPersistentCell(ecx0); /*0x4279c8*/
+            if ( PersistentCell ) /*0x4279cc*/
             {
-              ExtraData = BaseExtraList_GetExtraData(ecx0, kExtraData_PersistentCell);
-              if ( ExtraData )
-                BaseExtraList_RemoveExtraByPtr(ecx0, (int)ExtraData, 1);
-              sub_4CECD0(v56, v7);
+              ExtraData = BaseExtraList_GetExtraData(ecx0, kExtraData_PersistentCell); /*0x4279d2*/
+              if ( ExtraData ) /*0x4279d9*/
+                BaseExtraList_RemoveExtraByPtr(ecx0, (int)ExtraData, 1); /*0x4279e0*/
+              TESObjectCELL_RemoveReference(PersistentCell, (TESObjectREFR *)v7); /*0x4279e8*/
             }
-            LODWORD(v114) = 4;
-            SaveLoad_LoadFormID(&v167, v114);
-            if ( TESObjectREFR_IsPersistent_(v7) && v7 != (TESObjectREFR *)TESDataHandler_g_PlayerRef )
+            SaveLoad_LoadFormID(g_TESSaveLoadGame, &v143, 4u); /*0x4279fd*/
+            if ( TESObjectREFR_IsPersistent((TESObjectREFR *)v7) && v7 != (TESChildCELL *)::reference ) /*0x427a17*/
             {
-              v58 = TESForm_LookupByFormID(v165);
-              v59 = OblivionDynamicCast(
+              v58 = TESForm_LookupByFormID(v141); /*0x427a33*/
+              v59 = OblivionDynamicCast( /*0x427a3c*/
                       v58,
                       0,
                       (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                       &TESWorldSpace `RTTI Type Descriptor',
                       0);
-              v60 = v59;
-              if ( v59 )
+              v60 = v59; /*0x427a41*/
+              if ( v59 ) /*0x427a48*/
               {
-                v61 = (BSExtraDataVtbl *)sub_4EF1E0(v59);
-                sub_4247B0(ecx0, v61);
-                v62 = (TESObjectCELL *)sub_4EF1E0(v60);
-                sub_4D35D0(v62, a2, a3, st7_0, (TESChildCELL *)v7);
-                if ( TESObjectREFR_GetParentCell(v7) )
+                v61 = (BSExtraDataVtbl *)sub_4EF1E0(v59); /*0x427a50*/
+                sub_4247B0(ecx0, v61); /*0x427a58*/
+                v62 = (TESObjectCELL *)sub_4EF1E0(v60); /*0x427a60*/
+                TESObjectCELL_AddReference(v62, (TESObjectREFR *)v7); /*0x427a67*/
+                if ( Shared_GetDwordAtOffset40(v7) ) /*0x427a6e*/
                 {
-                  ParentCell = TESObjectREFR_GetParentCell(v7);
-                  if ( TESObjectCELL_IsInterior(ParentCell) )
+                  DwordAtOffset40 = (TESObjectCELL *)Shared_GetDwordAtOffset40(v7); /*0x427a7d*/
+                  if ( TESObjectCELL_IsInterior(DwordAtOffset40) ) /*0x427a84*/
                   {
-                    v64 = TESObjectREFR_GetParentCell(v7);
-                    sub_4CECD0(v64, v7);
+                    v64 = (TESObjectCELL *)Shared_GetDwordAtOffset40(v7); /*0x427a94*/
+                    TESObjectCELL_RemoveReference(v64, (TESObjectREFR *)v7); /*0x427a9b*/
                   }
                 }
               }
             }
           }
         }
-        goto LABEL_213;
-      case 0x12u:
-        if ( (a5 & 0x4000020) != 0 )
+        goto LABEL_213; /*0x427aa0*/
+      case 0x12u: /*0x426c18*/
+        if ( (a5 & 0x4000020) != 0 ) /*0x427107*/
         {
-          LODWORD(v114) = 4;
-          HIBYTE(v133) = 1;
-          SaveLoad_LoadFormID(&v164, v114);
-          v26 = TESForm_LookupByFormID(v162);
-          v27 = (char *)OblivionDynamicCast(
-                          v26,
-                          0,
-                          (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                          &Script `RTTI Type Descriptor',
-                          0);
-          v28 = v27;
-          if ( v27 )
-            ExtraDataList_AddScript(ecx0, (int)v27);
-          ExtraScriptEventList = (int *)ExtraDataList_GetExtraScriptEventList(ecx0);
-          if ( ExtraScriptEventList )
-            goto LABEL_78;
-          if ( v28 )
-            ExtraScriptEventList = (int *)Script_CreateEventList(v28);
-          ExtraDataList_SetScriptEventList(ecx0, (int)ExtraScriptEventList);
-          if ( ExtraScriptEventList )
+          HIBYTE(v109) = 1; /*0x42711d*/
+          SaveLoad_LoadFormID(g_TESSaveLoadGame, &v140, 4u); /*0x427122*/
+          v26 = TESForm_LookupByFormID(v138); /*0x42713d*/
+          v27 = (BSExtraDataVtbl *)OblivionDynamicCast( /*0x427146*/
+                                     v26,
+                                     0,
+                                     (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                                     &Script `RTTI Type Descriptor',
+                                     0);
+          v28 = (char *)v27; /*0x42714b*/
+          if ( v27 ) /*0x427152*/
+            ExtraDataList_AddScript(ecx0, v27); /*0x427157*/
+          ExtraScriptEventList = (int *)ExtraDataList_GetExtraScriptEventList(ecx0); /*0x427163*/
+          if ( ExtraScriptEventList ) /*0x427167*/
+            goto LABEL_78; /*0x427167*/
+          if ( v28 ) /*0x42716b*/
+            ExtraScriptEventList = (int *)Script_CreateEventList(v28); /*0x427174*/
+          ExtraDataList_SetScriptEventList(ecx0, (int)ExtraScriptEventList); /*0x427179*/
+          if ( ExtraScriptEventList ) /*0x427180*/
           {
 LABEL_78:
-            ScriptEventList_Load_(ExtraScriptEventList, st7_0);
+            ScriptEventList_Load_(ExtraScriptEventList, st7_0); /*0x4271d9*/
           }
           else
           {
-            v30 = (_DWORD *)FormHeapAlloc(0x14u);
-            v132 = v30;
-            v201 = 0;
-            if ( v30 )
-              v31 = sub_4F9DB0(v30);
+            v30 = (_DWORD *)FormHeapAlloc(0x14u); /*0x427184*/
+            p_vtbl = v30; /*0x42718c*/
+            v177 = 0; /*0x427192*/
+            if ( v30 ) /*0x427199*/
+              v31 = sub_4F9DB0(v30); /*0x4271a2*/
             else
-              v31 = 0;
-            v201 = 0xFFFFFFFF;
-            ScriptEventList_Load_(v31, st7_0);
-            if ( v31 )
+              v31 = 0; /*0x4271a6*/
+            v177 = 0xFFFFFFFF; /*0x4271aa*/
+            ScriptEventList_Load_(v31, st7_0); /*0x4271b5*/
+            if ( v31 ) /*0x4271bc*/
             {
-              ScriptEventList_destr__((ScriptEventList *)v31);
-              FormHeapFree((unsigned int)v31);
+              ScriptEventList_destr__((ScriptEventList *)v31); /*0x4271c4*/
+              FormHeapFree((unsigned int)v31); /*0x4271ca*/
             }
           }
         }
-        goto LABEL_213;
-      case 0x17u:
-        if ( (a5 & 0x400000) != 0 )
-        {
-          LODWORD(v114) = 4;
-          SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, v199, v114);
-        }
-        goto LABEL_213;
-      case 0x1Bu:
-        if ( (a5 & 0x20) != 0 )
-          SetWorn(ecx0, 1, 0);
-        goto LABEL_213;
-      case 0x1Cu:
-        if ( (a5 & 0x20) != 0 )
-          SetWorn(ecx0, 1, 1);
-        goto LABEL_213;
-      case 0x1Eu:
-        LODWORD(v114) = 4;
-        SaveLoad_LoadFormID(v176, v114);
-        LODWORD(v101) = 0xC;
-        SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &Dst, v101);
-        LODWORD(v102) = 4;
-        SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v196, v102);
-        v194 = TESForm_LookupByFormID(v174);
-        v38 = (BSExtraDataVtbl *)OblivionDynamicCast(
-                                   v194,
+        goto LABEL_213; /*0x4271d2*/
+      case 0x17u: /*0x426c18*/
+        if ( (a5 & 0x400000) != 0 ) /*0x4273d8*/
+          SaveLoad_LoadData(g_TESSaveLoadGame, v175, 4u); /*0x4273ee*/
+        goto LABEL_213; /*0x4273f3*/
+      case 0x1Bu: /*0x426c18*/
+        if ( (a5 & 0x20) != 0 ) /*0x427084*/
+          SetWorn(ecx0, 1, 0); /*0x427090*/
+        goto LABEL_213; /*0x427095*/
+      case 0x1Cu: /*0x426c18*/
+        if ( (a5 & 0x20) != 0 ) /*0x4270a2*/
+          SetWorn(ecx0, 1, 1); /*0x4270ae*/
+        goto LABEL_213; /*0x4270b3*/
+      case 0x1Eu: /*0x426c18*/
+        SaveLoad_LoadFormID(g_TESSaveLoadGame, (unsigned int *)v152, 4u); /*0x4274f6*/
+        SaveLoad_LoadData(g_TESSaveLoadGame, &Dst, 0xCu); /*0x42750b*/
+        SaveLoad_LoadData(g_TESSaveLoadGame, &v172, 4u); /*0x427520*/
+        v170 = TESForm_LookupByFormID(v150); /*0x427541*/
+        v38 = (BSExtraDataVtbl *)OblivionDynamicCast( /*0x427563*/
+                                   v170,
                                    0,
                                    (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                                    &TESWorldSpace `RTTI Type Descriptor',
                                    0);
-        v39 = (BSExtraDataVtbl *)OblivionDynamicCast(
-                                   v194,
+        v39 = (BSExtraDataVtbl *)OblivionDynamicCast( /*0x427565*/
+                                   v170,
                                    0,
                                    (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                                    &TESObjectCELL `RTTI Type Descriptor',
                                    0);
-        if ( v38 || v39 )
+        if ( v38 || v39 ) /*0x427573*/
+          ExtraDataList_SetStartLocation(ecx0, v38, v39, &Dst, v172); /*0x427590*/
+        goto LABEL_213; /*0x427595*/
+      case 0x1Fu: /*0x426c18*/
+        SaveLoad_LoadFormID(g_TESSaveLoadGame, (unsigned int *)v124, 4u); /*0x427245*/
+        SaveLoad_LoadData(g_TESSaveLoadGame, v160, 4u); /*0x42725a*/
+        SaveLoad_LoadFormID(g_TESSaveLoadGame, (unsigned int *)v144, 4u); /*0x42726f*/
+        SaveLoad_LoadData(g_TESSaveLoadGame, &v164, 1u); /*0x427284*/
+        SaveLoad_LoadData(g_TESSaveLoadGame, &v140, 1u); /*0x427299*/
+        if ( g_TESSaveLoadGame->currentVersion >= 0x40u && TESDataHandler_IsFormIDCreated_(destination) ) /*0x4272b5*/
         {
-          __asm { fld     [esp+258h+var_138] }
-          __asm { fstp    [esp+25Ch+var_25C]; float }
-          sub_41F4C0(ecx0, v38, v39, &Dst, v103);
-        }
-        goto LABEL_213;
-      case 0x1Fu:
-        LODWORD(v114) = 4;
-        SaveLoad_LoadFormID(v148, v114);
-        LODWORD(v98) = 4;
-        SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, v184, v98);
-        LODWORD(v99) = 4;
-        SaveLoad_LoadFormID(v168, v99);
-        LODWORD(v93) = 1;
-        SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v188, v93);
-        LODWORD(v94) = 1;
-        SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v164, v94);
-        if ( LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) >= 0x40u
-          && TESDataHandler_IsFormIDCreated_(v144) )
-        {
-          LODWORD(v92) = 1;
-          SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v180, v92);
-          if ( !v12 )
-            (*(void (__thiscall **)(int, const char *))(*(_DWORD *)dword_B34D90 + 0x18))(
-              dword_B34D90,
+          SaveLoad_LoadData(g_TESSaveLoadGame, &v156, 1u); /*0x4272ce*/
+          if ( !v12 ) /*0x4272d5*/
+            (*(void (__thiscall **)(_DWORD, const char *))(**(_DWORD **)&MEMORY[0xB33E90][0xF00] + 0x18))( /*0x4272e7*/
+              *(_DWORD *)&MEMORY[0xB33E90][0xF00],
               "Package being created on non-actor!");
-          v32 = (TESPackage *)sub_463EC0((char *)SaveLoad_CurrentSavegame, v143, (int)v12, v179);
-          ((void (__thiscall *)(TESPackage *))v32->__vftable[1].super.super.CopyFromBase)(v32);
+          Package = TESSaveLoadGame_CreatePackage(g_TESSaveLoadGame, formID, v12, (TESPackageType)packageType[0]); /*0x427302*/
+          Package->__vftable->LoadGame(Package); /*0x42730e*/
         }
         else
         {
-          v33 = TESForm_LookupByFormID(v144);
-          v32 = (TESPackage *)OblivionDynamicCast(
-                                v33,
-                                0,
-                                (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                                &TESPackage `RTTI Type Descriptor',
-                                0);
-          if ( !v32 )
-            goto LABEL_213;
+          v33 = TESForm_LookupByFormID(destination); /*0x427325*/
+          Package = (TESPackage *)OblivionDynamicCast( /*0x427333*/
+                                    v33,
+                                    0,
+                                    (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                                    &TESPackage `RTTI Type Descriptor',
+                                    0);
+          if ( !Package ) /*0x42733a*/
+            goto LABEL_213; /*0x42733a*/
         }
-        sub_4268B0(ecx0, v32, v181, (BSExtraData *)v165, v187, v163);
+        sub_4268B0(ecx0, Package, SLODWORD(v157), (BSExtraData *)v141, noRumors[0], v139); /*0x427363*/
 LABEL_213:
-        if ( ++v150 < v142 )
+        if ( ++v126 < v118 ) /*0x427ff6*/
         {
-          v12 = v152;
-          continue;
+          v12 = v128; /*0x426be5*/
+          continue; /*0x426be5*/
         }
-        if ( !HIBYTE(v133) )
-          goto LABEL_215;
+        if ( !HIBYTE(v109) ) /*0x428001*/
+          goto LABEL_215; /*0x428001*/
 LABEL_217:
-        if ( !(_BYTE)v133 && (char)a5 < 0 )
-          BaseExtraList_RemoveExtraByType(ecx0, 0x27u);
-        if ( BYTE1(v133) )
+        if ( !(_BYTE)v109 && (char)a5 < 0 ) /*0x428028*/
+          BaseExtraList_RemoveExtraByType(ecx0, 0x27u); /*0x42802e*/
+        if ( BYTE1(v109) ) /*0x428038*/
         {
-          ExtraDataList_RestoreSavedAnimationData(ecx0, a2, a3, st7_0, (int)v7);
-          ExtraDataList_RestoreSavedHavokData(ecx0, v7);
+          ExtraDataList_RestoreSavedAnimationData(ecx0, a2, a3, st7_0, (int)v7); /*0x42803d*/
+          ExtraDataList_RestoreSavedHavokData(ecx0, v7); /*0x428045*/
         }
-        if ( sub_45A170() )
+        if ( TESSaveLoadGame_UseSaveGameBlocks() ) /*0x428050*/
         {
-          v83 = (UInt32 *)SaveLoad_CurrentSavegame[1].unk030[0];
-          v84 = SaveLoad_CurrentSavegame->unk000[5];
-          if ( v83 )
+          v83 = (UInt32 *)g_TESSaveLoadGame->currentlyLoadingFormHeader; /*0x428063*/
+          v84 = g_TESSaveLoadGame->bufferCursor; /*0x42806b*/
+          if ( v83 ) /*0x42806e*/
           {
-            v85 = TESForm_LookupByFormID(*v83);
-            v86 = v147;
-            v87 = v85;
-            v88 = v147 + (unsigned __int16)v144;
-            if ( v84 <= v88 )
+            v85 = TESForm_LookupByFormID(*v83); /*0x428077*/
+            v86 = bufferCursor; /*0x42807c*/
+            v87 = v85; /*0x428080*/
+            v88 = &bufferCursor[(unsigned __int16)destination]; /*0x428087*/
+            if ( v84 <= v88 ) /*0x42808e*/
             {
-              if ( v84 < v88 )
+              if ( v84 < v88 ) /*0x4280cd*/
               {
-                v90 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v87->vtbl->GetEditorName)(
+                v90 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v87->vtbl->GetEditorName)( /*0x4280e4*/
                                       v87,
                                       *((unsigned __int8 *)v83 + 9),
                                       *(UInt32 *)((char *)v83 + 5));
-                PrintError(
+                PrintError( /*0x428103*/
                   "LoadGame Buffer underrun of %i bytes in file %s on line %i.  Currently loading form is %08X %s with ve"
                   "rsion %i and flags %08X",
-                  v86 + (unsigned __int16)v144 - v84,
+                  &v86[(unsigned __int16)destination - (_DWORD)v84],
                   "..\\TES Shared\\ExtraDataList.cpp",
                   0x1E93,
                   *v83,
                   v90,
-                  v110,
-                  v126);
+                  v97,
+                  valued);
               }
             }
             else
             {
-              v89 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v87->vtbl->GetEditorName)(
+              v89 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v87->vtbl->GetEditorName)( /*0x4280a1*/
                                     v87,
                                     *((unsigned __int8 *)v83 + 9),
                                     *(UInt32 *)((char *)v83 + 5));
-              PrintError(
+              PrintError( /*0x4280c0*/
                 "LoadGame Buffer overrun of %i bytes in file %s on line %i.  Currently loading form is %08X %s with versi"
                 "on %i and flags %08X",
-                v84 - (unsigned __int16)v144 - v86,
+                &v84[-(unsigned __int16)destination] - v86,
                 "..\\TES Shared\\ExtraDataList.cpp",
                 0x1E93,
                 *v83,
                 v89,
-                v109,
-                v125);
+                v96,
+                valuec);
             }
           }
           else
           {
-            v91 = (unsigned __int16)v144 + v147;
-            if ( v84 <= v91 )
+            v91 = &bufferCursor[(unsigned __int16)destination]; /*0x428116*/
+            if ( v84 <= v91 ) /*0x42811b*/
             {
-              if ( v84 < v91 )
-                PrintError(
+              if ( v84 < v91 ) /*0x428138*/
+                PrintError( /*0x428153*/
                   "LoadGame Buffer underrun of %i bytes in file %s on line %i.  Current version is %i",
-                  v147 + (unsigned __int16)v144 - v84,
+                  &bufferCursor[(unsigned __int16)destination - (_DWORD)v84],
                   "..\\TES Shared\\ExtraDataList.cpp",
                   0x1E93,
-                  LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next));
+                  g_TESSaveLoadGame->currentVersion);
             }
             else
             {
-              PrintError(
+              PrintError( /*0x428136*/
                 "LoadGame Buffer overrun of %i bytes in file %s on line %i.  Current version is %i",
-                v84 - (unsigned __int16)v144 - v147,
+                &v84[-(unsigned __int16)destination] - bufferCursor,
                 "..\\TES Shared\\ExtraDataList.cpp",
                 0x1E93,
-                LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next));
+                g_TESSaveLoadGame->currentVersion);
             }
           }
         }
         return;
-      case 0x20u:
-        if ( (a5 & 0x40000) != 0 )
+      case 0x20u: /*0x426c18*/
+        if ( (a5 & 0x40000) != 0 ) /*0x427378*/
         {
-          LODWORD(v114) = 4;
-          SaveLoad_LoadFormID(&v172, v114);
-          if ( v170 )
+          SaveLoad_LoadFormID(g_TESSaveLoadGame, &v148, 4u); /*0x42738e*/
+          if ( v146 ) /*0x42739c*/
           {
-            v34 = sub_463EC0((char *)SaveLoad_CurrentSavegame, v170, 0, 0x11);
-            (*(void (__thiscall **)(CombatController *))(*(_DWORD *)v34 + 0xE4))(v34);
-            sub_41FBC0(ecx0, (BSExtraDataVtbl *)v34);
+            v34 = TESSaveLoadGame_CreatePackage(g_TESSaveLoadGame, v146, 0, kPackageType_Trespass); /*0x4273b2*/
+            ((void (__usercall *)(TESPackage *@<ecx>, double@<st0>, double@<st1>, double@<st2>))v34->__vftable->LoadGame)( /*0x4273be*/
+              v34,
+              st7_0,
+              a3,
+              a2);
+            ExtraDataList_SetTrespassPackageExtra(ecx0, (BSExtraDataVtbl *)v34); /*0x4273c3*/
           }
         }
-        goto LABEL_213;
-      case 0x21u:
-        LODWORD(v114) = 2;
-        SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v143, v114);
-        v35 = 0;
-        if ( (_WORD)v143 )
+        goto LABEL_213; /*0x4273c8*/
+      case 0x21u: /*0x426c18*/
+        SaveLoad_LoadData(g_TESSaveLoadGame, &formID, 2u); /*0x42745b*/
+        v35 = 0; /*0x427460*/
+        if ( (_WORD)formID ) /*0x427467*/
         {
-          do
+          do /*0x4274df*/
           {
-            LODWORD(v114) = 4;
-            SaveLoad_LoadFormID(&v174, v114);
-            LODWORD(v100) = 1;
-            SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &a1, v100);
-            v36 = TESForm_LookupByFormID(v172);
-            v37 = OblivionDynamicCast(
+            SaveLoad_LoadFormID(g_TESSaveLoadGame, &v150, 4u); /*0x427480*/
+            SaveLoad_LoadData(g_TESSaveLoadGame, &a1, 1u); /*0x427495*/
+            v36 = TESForm_LookupByFormID(v148); /*0x4274b0*/
+            v37 = OblivionDynamicCast( /*0x4274b9*/
                     v36,
                     0,
                     (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                     &TESPackage `RTTI Type Descriptor',
                     0);
-            if ( v37 )
-              sub_41FFC0(ecx0, (int)v37, a1);
-            ++v35;
+            if ( v37 ) /*0x4274c3*/
+              ExtraDataList_SetRunOnceExtraPackage(ecx0, (int)v37, a1); /*0x4274d0*/
+            ++v35; /*0x4274da*/
           }
-          while ( v35 < v141 );
+          while ( v35 < v117 ); /*0x4274df*/
         }
-        goto LABEL_213;
-      case 0x22u:
-        if ( (a5 & 0x20) != 0 )
+        goto LABEL_213; /*0x4274df*/
+      case 0x22u: /*0x426c18*/
+        if ( (a5 & 0x20) != 0 ) /*0x427400*/
         {
-          LODWORD(v114) = 4;
-          SaveLoad_LoadFormID(&v194, v114);
-          ExtraDataList_SetReferencePointer(ecx0, v192);
+          SaveLoad_LoadFormID(g_TESSaveLoadGame, (unsigned int *)&v170, 4u); /*0x427416*/
+          ExtraDataList_SetReferencePointer(ecx0, reference); /*0x427425*/
         }
-        goto LABEL_213;
-      case 0x23u:
-        LODWORD(v114) = 2;
-        SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v141, v114);
-        v40 = 0;
-        if ( v141 )
+        goto LABEL_213; /*0x42742a*/
+      case 0x23u: /*0x426c18*/
+        SaveLoad_LoadData(g_TESSaveLoadGame, &v117, 2u); /*0x4275a7*/
+        v40 = 0; /*0x4275ac*/
+        if ( v117 ) /*0x4275b3*/
         {
-          do
+          do /*0x4275e8*/
           {
-            LODWORD(v114) = 4;
-            SaveLoad_LoadFormID(v154, v114);
-            sub_424C50(ecx0, (int)v152);
-            ++v40;
+            SaveLoad_LoadFormID(g_TESSaveLoadGame, (unsigned int *)v130, 4u); /*0x4275cd*/
+            sub_424C50(ecx0, v128); /*0x4275d9*/
+            ++v40; /*0x4275e3*/
           }
-          while ( v40 < v135 );
+          while ( v40 < v111 ); /*0x4275e8*/
         }
-        goto LABEL_213;
-      case 0x25u:
-        ExtraDataList_SetGhost_(ecx0, 1);
-        goto LABEL_213;
-      case 0x27u:
-        if ( (a5 & 0xA0) != 0 )
+        goto LABEL_213; /*0x4275e8*/
+      case 0x25u: /*0x426c18*/
+        ExtraDataList_SetGhost_(ecx0, 1); /*0x4270f2*/
+        goto LABEL_213; /*0x4270f7*/
+      case 0x27u: /*0x426c18*/
+        if ( (a5 & 0xA0) != 0 ) /*0x426fa3*/
         {
-          LODWORD(v114) = 4;
-          SaveLoad_LoadFormID(v193, v114);
-          v23 = TESForm_LookupByFormID(LODWORD(v191[1]));
-          ExtraDataList::SetOrRemoveExtraOwnership(ecx0, v23);
-          LOBYTE(v131) = 1;
+          SaveLoad_LoadFormID(g_TESSaveLoadGame, (unsigned int *)v169, 4u); /*0x426fb9*/
+          v23 = TESForm_LookupByFormID((UInt32)v167[1]); /*0x426fc6*/
+          ExtraDataList::SetOrRemoveExtraOwnership(ecx0, v23); /*0x426fd1*/
+          LOBYTE(v107) = 1; /*0x426fd6*/
         }
-        goto LABEL_213;
-      case 0x28u:
-        if ( (a5 & 0x120) != 0 )
+        goto LABEL_213; /*0x426fdb*/
+      case 0x28u: /*0x426c18*/
+        if ( (a5 & 0x120) != 0 ) /*0x426feb*/
         {
-          LODWORD(v114) = 4;
-          SaveLoad_LoadFormID(&v162, v114);
-          v24 = TESForm_LookupByFormID(v160);
-          v25 = (BSExtraDataVtbl *)OblivionDynamicCast(
-                                     v24,
-                                     0,
-                                     (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                                     &TESGlobal `RTTI Type Descriptor',
-                                     0);
-          if ( v25 )
-            sub_423720(ecx0, v25);
+          SaveLoad_LoadFormID(g_TESSaveLoadGame, &v138, 4u); /*0x427001*/
+          v24 = TESForm_LookupByFormID(v136); /*0x42701c*/
+          v25 = (TESGlobal *)OblivionDynamicCast( /*0x427025*/
+                               v24,
+                               0,
+                               (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                               &TESGlobal `RTTI Type Descriptor',
+                               0);
+          if ( v25 ) /*0x42702f*/
+            ExtraDataList_SetGlobal(ecx0, v25); /*0x427038*/
         }
-        goto LABEL_213;
-      case 0x29u:
-        if ( (a5 & 0x220) != 0 )
+        goto LABEL_213; /*0x42703d*/
+      case 0x29u: /*0x426c18*/
+        if ( (a5 & 0x220) != 0 ) /*0x42704d*/
         {
-          LODWORD(v114) = 4;
-          SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v182, v114);
-          sub_4237E0(ecx0, v182);
+          SaveLoad_LoadData(g_TESSaveLoadGame, &rank, 4u); /*0x427063*/
+          ExtraDataList_SetRank(ecx0, rank); /*0x427072*/
         }
-        goto LABEL_213;
-      case 0x2Au:
-        if ( (a5 & 0x20) != 0 )
+        goto LABEL_213; /*0x427077*/
+      case 0x2Au: /*0x426c18*/
+        if ( (a5 & 0x20) != 0 ) /*0x426c27*/
         {
-          LODWORD(v114) = 2;
-          SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v183, v114);
-          ExtraDataList_SetExtraCount(ecx0, v183);
+          SaveLoad_LoadData(g_TESSaveLoadGame, &v159, 2u); /*0x426c3d*/
+          ExtraDataList_SetExtraCount(ecx0, v159); /*0x426c4c*/
         }
-        goto LABEL_213;
-      case 0x2Bu:
-        if ( (a5 & 0x20) != 0 )
+        goto LABEL_213; /*0x426c51*/
+      case 0x2Bu: /*0x426c18*/
+        if ( (a5 & 0x20) != 0 ) /*0x426c5e*/
         {
-          LODWORD(v114) = 4;
-          SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, v191, v114);
-          __asm { fld     [esp+250h+var_158] }
-          __asm { fstp    [esp+254h+var_254]; float }
-          ExtraDataList_SetHealthValue(ecx0, (BSExtraDataVtbl *)v114);
+          SaveLoad_LoadData(g_TESSaveLoadGame, v167, 4u); /*0x426c74*/
+          ExtraDataList_SetHealthValue(ecx0, v167[0]); /*0x426c86*/
         }
-        goto LABEL_213;
-      case 0x2Cu:
-        if ( (a5 & 0x20) != 0 )
+        goto LABEL_213; /*0x426c8b*/
+      case 0x2Cu: /*0x426c18*/
+        if ( (a5 & 0x20) != 0 ) /*0x426c98*/
         {
-          LODWORD(v114) = 1;
-          SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v155, v114);
-          ExtraDataList_SetUses(ecx0, v155);
+          SaveLoad_LoadData(g_TESSaveLoadGame, &v131, 1u); /*0x426cab*/
+          ExtraDataList_SetUses(ecx0, v131); /*0x426cb7*/
         }
-        goto LABEL_213;
-      case 0x2Du:
-        if ( (a5 & 0x20) != 0 )
+        goto LABEL_213; /*0x426cbc*/
+      case 0x2Du: /*0x426c18*/
+        if ( (a5 & 0x20) != 0 ) /*0x426cc9*/
         {
-          LODWORD(v114) = 4;
-          SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v178, v114);
-          __asm { fld     [esp+250h+var_18C] }
-          __asm { fstp    [esp+254h+var_254]; float }
-          sub_41EDF0(ecx0, (BSExtraDataVtbl *)v114);
+          SaveLoad_LoadData(g_TESSaveLoadGame, &v154, 4u); /*0x426cdf*/
+          ExtraDataList_SetTimeLeft(ecx0, v154); /*0x426cf1*/
         }
-        goto LABEL_213;
-      case 0x2Eu:
-        if ( (a5 & 0x20) != 0 )
+        goto LABEL_213; /*0x426cf6*/
+      case 0x2Eu: /*0x426c18*/
+        if ( (a5 & 0x20) != 0 ) /*0x426d03*/
         {
-          LODWORD(v114) = 4;
-          SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, v157, v114);
-          __asm { fld     [esp+250h+var_1E4] }
-          __asm { fstp    [esp+254h+var_254]; float }
-          sub_41EE90(ecx0, (BSExtraDataVtbl *)v114);
+          SaveLoad_LoadData(g_TESSaveLoadGame, v133, 4u); /*0x426d16*/
+          ExtraDataList_SetCharge(ecx0, v133[0]); /*0x426d25*/
         }
-        goto LABEL_213;
-      case 0x2Fu:
-        if ( (a5 & 0x20) != 0 )
+        goto LABEL_213; /*0x426d2a*/
+      case 0x2Fu: /*0x426c18*/
+        if ( (a5 & 0x20) != 0 ) /*0x426d37*/
         {
-          LODWORD(v114) = 1;
-          SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v136, v114);
-          BaseExtraList_SetSoulLevel(ecx0, v136);
+          SaveLoad_LoadData(g_TESSaveLoadGame, &v112, 1u); /*0x426d4a*/
+          BaseExtraList_SetSoulLevel(ecx0, v112); /*0x426d57*/
         }
-        goto LABEL_213;
-      case 0x31u:
-        if ( (a5 & 0x40) != 0 )
+        goto LABEL_213; /*0x426d5c*/
+      case 0x31u: /*0x426c18*/
+        if ( (a5 & 0x40) != 0 ) /*0x426d69*/
         {
-          v13 = FormHeapAlloc(0xCu);
-          if ( v13 )
+          v13 = FormHeapAlloc(0xCu); /*0x426d71*/
+          if ( v13 ) /*0x426d7b*/
           {
-            *(_BYTE *)v13 = 0;
-            *(_DWORD *)(v13 + 4) = 0;
-            *(_BYTE *)(v13 + 8) = 0;
-            v14 = (_DWORD *)v13;
+            *(_BYTE *)v13 = 0; /*0x426d7d*/
+            *(_DWORD *)(v13 + 4) = 0; /*0x426d80*/
+            *(_BYTE *)(v13 + 8) = 0; /*0x426d87*/
+            v14 = (ExtraLockData *)v13; /*0x426d8b*/
           }
           else
           {
-            v14 = 0;
+            v14 = 0; /*0x426d8f*/
           }
-          v15 = SaveLoad_CurrentSavegame;
-          if ( LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) < 0x15u )
-            goto LABEL_33;
-          LODWORD(v114) = 1;
-          SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, v14, v114);
-          LODWORD(v115) = 4;
-          SaveLoad_LoadFormID(v190, v115);
-          v16 = SaveLoad_CurrentSavegame;
-          if ( LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) < 0x1Au )
+          v15 = g_TESSaveLoadGame; /*0x426d91*/
+          if ( g_TESSaveLoadGame->currentVersion < 0x15u ) /*0x426d9b*/
+            goto LABEL_33; /*0x426d9b*/
+          SaveLoad_LoadData(g_TESSaveLoadGame, v14, 1u); /*0x426da4*/
+          SaveLoad_LoadFormID(g_TESSaveLoadGame, (unsigned int *)v166, 4u); /*0x426db9*/
+          v16 = g_TESSaveLoadGame; /*0x426dbe*/
+          if ( g_TESSaveLoadGame->currentVersion < 0x1Au ) /*0x426dc8*/
           {
-            LODWORD(v97) = 4;
-            SaveLoad_LoadFormID(v197, v97);
-            v16 = SaveLoad_CurrentSavegame;
+            SaveLoad_LoadFormID(g_TESSaveLoadGame, (unsigned int *)v173, 4u); /*0x426dd4*/
+            v16 = g_TESSaveLoadGame; /*0x426dd9*/
           }
-          LODWORD(v92) = 1;
-          SaveLoad_LoadData((int)v16, v14 + 2, v92);
-          if ( a1 )
+          SaveLoad_LoadData(v16, &v14->flags, 1u); /*0x426de5*/
+          if ( a1 ) /*0x426df3*/
           {
-            v17 = TESForm_LookupByFormID(a1);
-            v14[1] = OblivionDynamicCast(
-                       v17,
-                       0,
-                       (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                       &TESKey `RTTI Type Descriptor',
-                       0);
+            v17 = TESForm_LookupByFormID(a1); /*0x426e04*/
+            v14->key = (TESKey *)OblivionDynamicCast( /*0x426e15*/
+                                   v17,
+                                   0,
+                                   (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                                   &TESKey `RTTI Type Descriptor',
+                                   0);
           }
-          v15 = SaveLoad_CurrentSavegame;
-          if ( LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) < 0x15u )
+          v15 = g_TESSaveLoadGame; /*0x426e18*/
+          if ( g_TESSaveLoadGame->currentVersion < 0x15u ) /*0x426e22*/
           {
 LABEL_33:
-            LODWORD(v92) = 0x10;
-            SaveLoad_LoadData((int)v15, v197, v92);
-            v18 = v198;
-            v19 = v198 == 0;
-            v20 = v197[0];
-            v21 = v199[0];
-            v14[1] = v198;
-            *(_BYTE *)v14 = v20;
-            *((_BYTE *)v14 + 8) = v21;
-            if ( !v19 )
+            SaveLoad_LoadData(v15, v173, 0x10u); /*0x426e2e*/
+            v18 = v174; /*0x426e33*/
+            v19 = v174 == 0; /*0x426e3a*/
+            v20 = v173[0]; /*0x426e3c*/
+            v21 = v175[0]; /*0x426e43*/
+            v14->key = (TESKey *)v174; /*0x426e4a*/
+            v14->level = v20; /*0x426e4d*/
+            v14->flags = v21; /*0x426e4f*/
+            if ( !v19 ) /*0x426e52*/
             {
-              v22 = TESForm_LookupByFormID(v18);
-              v14[1] = OblivionDynamicCast(
-                         v22,
-                         0,
-                         (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                         &TESKey `RTTI Type Descriptor',
-                         0);
+              v22 = TESForm_LookupByFormID(v18); /*0x426e63*/
+              v14->key = (TESKey *)OblivionDynamicCast( /*0x426e74*/
+                                     v22,
+                                     0,
+                                     (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                                     &TESKey `RTTI Type Descriptor',
+                                     0);
             }
           }
-          sub_41EAF0(ecx0, (int)v14);
+          ExtraDataList_SetLock(ecx0, v14); /*0x426e7a*/
         }
-        goto LABEL_213;
-      case 0x32u:
-        if ( (a5 & 0x100000) != 0 )
+        goto LABEL_213; /*0x426e7f*/
+      case 0x32u: /*0x426c18*/
+        if ( (a5 & 0x100000) != 0 ) /*0x427720*/
         {
-          *(float *)&v48 = COERCE_FLOAT(FormHeapAlloc(0x1Cu));
-          v134 = v48;
-          v202 = 3;
-          if ( *(float *)&v48 == 0.0 )
-            v49 = 0;
+          *(float *)&v48 = COERCE_FLOAT(FormHeapAlloc(0x1Cu)); /*0x427728*/
+          v110 = *(float *)&v48; /*0x427730*/
+          v178 = 3; /*0x427736*/
+          if ( *(float *)&v48 == 0.0 ) /*0x427741*/
+            inited = 0; /*0x42774e*/
           else
-            v49 = sub_42B590(v48);
-          v202 = 0xFFFFFFFF;
-          sub_42B500(v49);
-          ExtraDataList::SetTeleportData(ecx0, v49);
+            inited = TeleportData_InitSentinels(v48); /*0x42774a*/
+          v178 = 0xFFFFFFFF; /*0x427752*/
+          sub_42B500(inited); /*0x42775d*/
+          ExtraDataList::SetTeleportData(ecx0, inited); /*0x427765*/
         }
-        goto LABEL_213;
-      case 0x33u:
-        if ( (a5 & 0x400) != 0 )
+        goto LABEL_213; /*0x42776a*/
+      case 0x33u: /*0x426c18*/
+        if ( (a5 & 0x400) != 0 ) /*0x42796c*/
         {
-          LODWORD(v114) = 1;
-          SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v139, v114);
-          v55 = BaseExtraList_GetExtraData(ecx0, kExtraData_MapMarker);
-          if ( v55 )
-            LOBYTE(v55[1].vtbl[1].CompareTo) = v139;
+          SaveLoad_LoadData(g_TESSaveLoadGame, &v115, 1u); /*0x42797f*/
+          v55 = BaseExtraList_GetExtraData(ecx0, kExtraData_MapMarker); /*0x427988*/
+          if ( v55 ) /*0x42798f*/
+            LOBYTE(v55[1].vtbl[1].CompareTo) = v115; /*0x42799c*/
         }
-        goto LABEL_213;
-      case 0x35u:
-        if ( (a5 & 0x10000000) != 0 )
-          sub_4209D0(ecx0, 1);
-        goto LABEL_213;
-      case 0x36u:
-        if ( (a5 & 0x20) != 0 )
+        goto LABEL_213; /*0x42799f*/
+      case 0x35u: /*0x426c18*/
+        if ( (a5 & 0x10000000) != 0 ) /*0x42743a*/
+          ExtraDataList_SetLeveledCreatureFlag(ecx0, 1); /*0x427444*/
+        goto LABEL_213; /*0x427449*/
+      case 0x36u: /*0x426c18*/
+        if ( (a5 & 0x20) != 0 ) /*0x4271eb*/
         {
-          LODWORD(v114) = 4;
-          SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v153, v114);
-          LODWORD(v116) = 1;
-          SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v166, v116);
-          ExtraDataList_AddExtraLeveledItem(ecx0, v153);
-          sub_41FF40(ecx0, v166);
+          SaveLoad_LoadData(g_TESSaveLoadGame, &v129, 4u); /*0x4271fe*/
+          SaveLoad_LoadData(g_TESSaveLoadGame, &v142, 1u); /*0x427213*/
+          ExtraDataList_AddExtraLeveledItem(ecx0, v129); /*0x42721f*/
+          sub_41FF40(ecx0, v142); /*0x42722e*/
         }
-        goto LABEL_213;
-      case 0x37u:
-        if ( LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) < 0x43u && (a5 & 0x30) != 0 )
+        goto LABEL_213; /*0x427233*/
+      case 0x37u: /*0x426c18*/
+        if ( g_TESSaveLoadGame->currentVersion < 0x43u && (a5 & 0x30) != 0 ) /*0x426e98*/
         {
-          LODWORD(v114) = 4;
-          SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v151, v114);
-          __asm { fld     [esp+250h+var_200] }
-          __asm { fstp    [esp+254h+var_254]; float }
-          if ( v7 )
-            sub_4DB520(*(float *)&v114);
+          SaveLoad_LoadData(g_TESSaveLoadGame, &v127, 4u); /*0x426ea1*/
+          if ( v7 ) /*0x426eb0*/
+            sub_4DB520((MobileObject *)v7, *(float *)&v127); /*0x426eb4*/
           else
-            sub_423A30(ecx0, *(float *)&v114);
+            sub_423A30(ecx0, *(float *)&v127); /*0x426ebd*/
         }
-        if ( LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) >= 0x43u && (a5 & 0x20) != 0 )
+        if ( g_TESSaveLoadGame->currentVersion >= 0x43u && (a5 & 0x20) != 0 ) /*0x426eda*/
         {
-          LODWORD(v114) = 4;
-          SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v158, v114);
-          __asm { fld     [esp+250h+var_1DC] }
-          __asm { fstp    [esp+254h+var_254]; float }
-          sub_423A30(ecx0, *(float *)&v114);
+          SaveLoad_LoadData(g_TESSaveLoadGame, &v134, 4u); /*0x426ee7*/
+          sub_423A30(ecx0, v134); /*0x426ef6*/
         }
-        goto LABEL_213;
-      case 0x39u:
-        if ( (a5 & 0x200000) != 0 )
+        goto LABEL_213; /*0x426efb*/
+      case 0x39u: /*0x426c18*/
+        if ( (a5 & 0x200000) != 0 ) /*0x4275f6*/
         {
-          LODWORD(v114) = 4;
-          SaveLoad_LoadFormID(v156, v114);
-          LODWORD(v104) = 4;
-          SaveLoad_LoadFormID(v156, v104);
-          LODWORD(v95) = 4;
-          SaveLoad_LoadFormID(&v151, v95);
-          v41 = (NonActorMagicCaster *)FormHeapAlloc(0x24u);
-          v128 = (int)v41;
-          v200[0x3E] = 1;
-          if ( v41 )
-            v42 = (BSExtraData *)NonActorMagicCaster::NonActorMagicCaster(v41);
+          SaveLoad_LoadFormID(g_TESSaveLoadGame, (unsigned int *)v132, 4u); /*0x427609*/
+          SaveLoad_LoadFormID(g_TESSaveLoadGame, (unsigned int *)v132, 4u); /*0x42761b*/
+          SaveLoad_LoadFormID(g_TESSaveLoadGame, &v127, 4u); /*0x42762d*/
+          v41 = (NonActorMagicCaster *)FormHeapAlloc(0x24u); /*0x427634*/
+          v104 = (int)v41; /*0x42763c*/
+          v176[0x3E] = 1; /*0x427642*/
+          if ( v41 ) /*0x42764d*/
+            v42 = (BSExtraData *)NonActorMagicCaster::NonActorMagicCaster(v41, (int)v125); /*0x42765b*/
           else
-            v42 = 0;
-          CompareTo = v42[1].vtbl[6].CompareTo;
-          v200[0x3E] = 0xFFFFFFFF;
-          CompareTo(v42 + 1, v151);
-          v42[1].vtbl[7].CompareTo(v42 + 1, (BSExtraData *)v152);
-          BaseExtraList_AddExtra(ecx0, v42);
+            v42 = 0; /*0x42765f*/
+          CompareTo = v42[1].vtbl[6].CompareTo; /*0x427668*/
+          v176[0x3E] = 0xFFFFFFFF; /*0x427671*/
+          ((void (__usercall *)(BSExtraData *@<ecx>, unsigned int, double@<st0>, double@<st1>, double@<st2>))CompareTo)( /*0x42767c*/
+            &v42[1],
+            v127,
+            st7_0,
+            a3,
+            a2);
+          v42[1].vtbl[7].CompareTo(v42 + 1, (BSExtraData *)v128); /*0x42768a*/
+          BaseExtraList_AddExtra(ecx0, v42); /*0x42768f*/
         }
-        goto LABEL_213;
-      case 0x3Au:
-        if ( (a5 & 0x200000) != 0 )
+        goto LABEL_213; /*0x427694*/
+      case 0x3Au: /*0x426c18*/
+        if ( (a5 & 0x200000) != 0 ) /*0x4276a0*/
         {
-          LODWORD(v114) = 4;
-          SaveLoad_LoadFormID(&v159, v114);
-          v132 = (_DWORD *)FormHeapAlloc(0x20u);
-          v201 = 2;
-          if ( v132 )
+          SaveLoad_LoadFormID(g_TESSaveLoadGame, &v135, 4u); /*0x4276b3*/
+          v44 = (NonActorMagicTarget *)FormHeapAlloc(0x20u); /*0x4276ba*/
+          p_vtbl = &v44->super.vtbl; /*0x4276c2*/
+          v177 = 2; /*0x4276c8*/
+          if ( v44 ) /*0x4276d3*/
+            v45 = NonActorMagicTarget_constr(v44, (TESObjectREFR *)v133[1]); /*0x4276e1*/
+          else
+            v45 = 0; /*0x4276e5*/
+          GetActiveEffectList = v45->magicTarget.vtbl->GetActiveEffectList; /*0x4276ea*/
+          v177 = 0xFFFFFFFF; /*0x4276f2*/
+          v47 = (int *)((int (__usercall *)@<eax>(MagicTarget *@<ecx>, double@<st0>, double@<st1>, double@<st2>))GetActiveEffectList)( /*0x4276fd*/
+                         &v45->magicTarget,
+                         st7_0,
+                         a3,
+                         a2);
+          ActiveEffect_Base_LoadAEList(v47, 0, v95, value, v103, v104, v105, v106, v107, (int)p_vtbl, v109); /*0x427700*/
+          BaseExtraList_AddExtra(ecx0, &v45->super); /*0x42770b*/
+        }
+        goto LABEL_213; /*0x427710*/
+      case 0x3Cu: /*0x426c18*/
+        if ( (a5 & 0x2000) != 0 ) /*0x426f0b*/
+          SaveLoad_AdvanceBufferOffset(g_TESSaveLoadGame, 4); /*0x426f19*/
+        goto LABEL_213; /*0x426f1e*/
+      case 0x3Du: /*0x426c18*/
+        if ( (char)a5 < 0 ) /*0x426f65*/
+        {
+          sub_424770(ecx0); /*0x426f6d*/
+          SaveLoad_LoadData(g_TESSaveLoadGame, &v136, 4u); /*0x426f82*/
+          st7_0 = *(float *)&v136; /*0x426f87*/
+          sub_4269E0(ecx0, *(float *)&v136); /*0x426f91*/
+        }
+        goto LABEL_213; /*0x426f96*/
+      case 0x3Eu: /*0x426c18*/
+        if ( (a5 & 0x4000) != 0 ) /*0x42777a*/
+        {
+          *(float *)&v50 = COERCE_FLOAT(FormHeapAlloc(0x1Cu)); /*0x427782*/
+          v110 = *(float *)&v50; /*0x42778a*/
+          v178 = 4; /*0x427790*/
+          if ( *(float *)&v50 == 0.0 ) /*0x42779b*/
+            v51 = 0; /*0x4277a8*/
+          else
+            v51 = (BSExtraData *)sub_42A510(v50); /*0x4277a4*/
+          v178 = 0xFFFFFFFF; /*0x4277ba*/
+          SaveLoad_LoadFormID(g_TESSaveLoadGame, &v137, 4u); /*0x4277c5*/
+          v93 = 0xC; /*0x4277d1*/
+          v51[2].vtbl = (BSExtraDataVtbl *)v135; /*0x4277d6*/
+          v92 = v51 + 1; /*0x4277d9*/
+          goto LABEL_128; /*0x4277d9*/
+        }
+        goto LABEL_213; /*0x42777a*/
+      case 0x41u: /*0x426c18*/
+        SaveLoad_LoadFormID(g_TESSaveLoadGame, &v147, 4u); /*0x427b0d*/
+        if ( v145 ) /*0x427b1b*/
+          ExtraDataList_SetItemDropper(ecx0, (BSExtraDataVtbl *)v145); /*0x427b24*/
+        goto LABEL_213; /*0x427b29*/
+      case 0x42u: /*0x426c18*/
+        SaveLoad_LoadData(g_TESSaveLoadGame, (char *)&v109 + 2, 1u); /*0x427ab2*/
+        v65 = 0; /*0x427ab7*/
+        if ( BYTE2(v109) ) /*0x427abe*/
+        {
+          do /*0x427af6*/
           {
-            st7_0 = NonActorMagicTarget_constr(LODWORD(v157[1]));
-            v45 = v44;
+            SaveLoad_LoadFormID(g_TESSaveLoadGame, &v145, 4u); /*0x427ad4*/
+            if ( v143 ) /*0x427ae2*/
+              sub_424B60(ecx0, (BSExtraDataVtbl *)v143); /*0x427ae7*/
+            ++v65; /*0x427af1*/
           }
-          else
-          {
-            v45 = 0;
-          }
-          Destructor = v45[1].vtbl[1].Destructor;
-          v201 = 0xFFFFFFFF;
-          v47 = ((int (__thiscall *)(BSExtraData *))Destructor)(&v45[1]);
-          ActiveEffect_Base_LoadAEList_(v47, 0, v108, v117, v127, v128, v129, v130, v131, (int)v132, v133);
-          BaseExtraList_AddExtra(ecx0, v45);
+          while ( v65 < BYTE2(v107) ); /*0x427af6*/
         }
-        goto LABEL_213;
-      case 0x3Cu:
-        if ( (a5 & 0x2000) != 0 )
-          st7_0 = SaveLoad_AdvanceBufferOffset(4);
-        goto LABEL_213;
-      case 0x3Du:
-        if ( (char)a5 < 0 )
-        {
-          sub_424770(ecx0);
-          LODWORD(v114) = 4;
-          SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v160, v114);
-          __asm { fld     [esp+250h+var_1D4] }
-          __asm { fstp    [esp+254h+var_254]; float }
-          sub_4269E0(ecx0, *(float *)&v114);
-        }
-        goto LABEL_213;
-      case 0x3Eu:
-        if ( (a5 & 0x4000) != 0 )
-        {
-          *(float *)&v50 = COERCE_FLOAT(FormHeapAlloc(0x1Cu));
-          v134 = v50;
-          v202 = 4;
-          if ( *(float *)&v50 == 0.0 )
-            v51 = 0;
-          else
-            v51 = (BSExtraData *)sub_42A510(v50);
-          LODWORD(v114) = 4;
-          v202 = 0xFFFFFFFF;
-          SaveLoad_LoadFormID(&v161, v114);
-          LODWORD(v96) = 0xC;
-          v51[2].vtbl = v159;
-          HIDWORD(v92) = v51 + 1;
-          goto LABEL_128;
-        }
-        goto LABEL_213;
-      case 0x41u:
-        LODWORD(v114) = 4;
-        SaveLoad_LoadFormID(&v171, v114);
-        if ( v169 )
-          sub_4203E0(ecx0, v169);
-        goto LABEL_213;
-      case 0x42u:
-        LODWORD(v114) = 1;
-        SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, (char *)&v133 + 2, v114);
-        v65 = 0;
-        if ( BYTE2(v133) )
-        {
-          do
-          {
-            LODWORD(v114) = 4;
-            SaveLoad_LoadFormID(&v169, v114);
-            if ( v167 )
-              sub_424B60(ecx0, v167);
-            ++v65;
-          }
-          while ( v65 < BYTE2(v131) );
-        }
-        goto LABEL_213;
-      case 0x45u:
-        LODWORD(v114) = 4;
-        SaveLoad_LoadFormID(&v173, v114);
-        v69 = TESForm_LookupByFormID(v171);
-        v70 = OblivionDynamicCast(
+        goto LABEL_213; /*0x427af6*/
+      case 0x45u: /*0x426c18*/
+        SaveLoad_LoadFormID(g_TESSaveLoadGame, &v149, 4u); /*0x427c2f*/
+        v69 = TESForm_LookupByFormID(v147); /*0x427c4a*/
+        v70 = OblivionDynamicCast( /*0x427c53*/
                 v69,
                 0,
                 (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                 &TESActorBase `RTTI Type Descriptor',
                 0);
-        if ( v12 )
+        if ( v12 ) /*0x427c5d*/
         {
-          if ( v70 )
-            (*(void (__thiscall **)(char *, void *))(*(_DWORD *)v12 + 0x12C))(v12, v70);
+          if ( v70 ) /*0x427c65*/
+            (*(void (__thiscall **)(void (__thiscall *)(BSExtraData *), void *))(*(_DWORD *)v12 + 0x12C))(v12, v70); /*0x427c76*/
         }
-        goto LABEL_213;
-      case 0x46u:
-        if ( (a5 & 0x1000) != 0 )
+        goto LABEL_213; /*0x427c78*/
+      case 0x46u: /*0x426c18*/
+        if ( (a5 & 0x1000) != 0 ) /*0x4277fd*/
         {
-          *(float *)&v52 = COERCE_FLOAT(FormHeapAlloc(0x1Cu));
-          v134 = v52;
-          v202 = 5;
-          if ( *(float *)&v52 == 0.0 )
-            v51 = 0;
+          *(float *)&v52 = COERCE_FLOAT(FormHeapAlloc(0x1Cu)); /*0x427805*/
+          v110 = *(float *)&v52; /*0x42780d*/
+          v178 = 5; /*0x427813*/
+          if ( *(float *)&v52 == 0.0 ) /*0x42781e*/
+            v51 = 0; /*0x42782b*/
           else
-            v51 = (BSExtraData *)sub_42A6E0(v52);
-          LODWORD(v114) = 4;
-          v202 = 0xFFFFFFFF;
-          SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v51[1], v114);
-          LODWORD(v118) = 4;
-          SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v51[1].members, v118);
-          LODWORD(v119) = 1;
-          SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v51[1].members.next, v119);
-          HIDWORD(v96) = v51 + 2;
+            v51 = (BSExtraData *)ExtraPersuasionPercent_ctor(v52); /*0x427827*/
+          v178 = 0xFFFFFFFF; /*0x427839*/
+          SaveLoad_LoadData(g_TESSaveLoadGame, &v51[1], 4u); /*0x427844*/
+          SaveLoad_LoadData(g_TESSaveLoadGame, &v51[1].members, 4u); /*0x427855*/
+          SaveLoad_LoadData(g_TESSaveLoadGame, &v51[1].members.next, 1u); /*0x427866*/
 LABEL_128:
-          SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, (void *)HIDWORD(v92), v96);
-          BaseExtraList_AddExtra(ecx0, v51);
+          SaveLoad_LoadData(g_TESSaveLoadGame, v92, v93); /*0x4277da*/
+          BaseExtraList_AddExtra(ecx0, v51); /*0x4277e8*/
         }
-        goto LABEL_213;
-      case 0x47u:
-        if ( (a5 & 0x20) != 0 )
-          sub_41F370(ecx0, 1);
-        goto LABEL_213;
-      case 0x48u:
-        if ( (a5 & 0x20) != 0 )
+        goto LABEL_213; /*0x4277ed*/
+      case 0x47u: /*0x426c18*/
+        if ( (a5 & 0x20) != 0 ) /*0x4270c0*/
+          ExtraDataList_SetCannotWear(ecx0, 1); /*0x4270ca*/
+        goto LABEL_213; /*0x4270cf*/
+      case 0x48u: /*0x426c18*/
+        if ( (a5 & 0x20) != 0 ) /*0x42787e*/
         {
-          LODWORD(v114) = 4;
-          SaveLoad_LoadFormID(&v163, v114);
-          sub_41EFD0(ecx0, v161);
+          SaveLoad_LoadFormID(g_TESSaveLoadGame, &v139, 4u); /*0x427894*/
+          ExtraDataList_SetPoison(ecx0, (BSExtraDataVtbl *)v137); /*0x4278a3*/
         }
-        goto LABEL_213;
-      case 0x4Au:
-        if ( (a5 & 0x2000000) != 0 )
+        goto LABEL_213; /*0x4278a8*/
+      case 0x4Au: /*0x426c18*/
+        if ( (a5 & 0x2000000) != 0 ) /*0x4278b8*/
         {
-          next = (unsigned __int8)SaveLoad_CurrentSavegame[1].createdObjectList.next;
-          if ( next >= 0x15u && next < 0x17u )
+          currentVersion = g_TESSaveLoadGame->currentVersion; /*0x4278c4*/
+          if ( currentVersion >= 0x15u && currentVersion < 0x17u ) /*0x4278cd*/
           {
-            LODWORD(v114) = 4;
-            SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v165, v114);
-            if ( v165 < 0x2B )
-              sub_424DE0(ecx0, *(const char **)&animGroupInfos_ptr[0x24 * v165]);
+            SaveLoad_LoadData(g_TESSaveLoadGame, &v141, 4u); /*0x4278d9*/
+            if ( v141 < 0x2B ) /*0x4278e8*/
+              sub_424DE0(ecx0, (char)v7, *(const char **)&animGroupInfos_ptr[0x24 * v141]); /*0x4278f7*/
           }
-          v54 = (unsigned __int8)SaveLoad_CurrentSavegame[1].createdObjectList.next;
-          if ( v54 < 0x15u || v54 >= 0x17u )
+          v54 = g_TESSaveLoadGame->currentVersion; /*0x427902*/
+          if ( v54 < 0x15u || v54 >= 0x17u ) /*0x42790b*/
           {
-            LODWORD(v114) = 1;
-            SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v140, v114);
-            st7_0 = _memset(v200, 0, sizeof(v200));
-            LODWORD(v120) = v140;
-            SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, v200, v120);
-            sub_424DE0(ecx0, (const char *)v200);
+            SaveLoad_LoadData(g_TESSaveLoadGame, &v116, 1u); /*0x427918*/
+            _memset((int)v176, 0, sizeof(v176)); /*0x42792c*/
+            SaveLoad_LoadData(g_TESSaveLoadGame, v176, v116); /*0x427948*/
+            sub_424DE0(ecx0, (char)v7, (const char *)v176); /*0x427957*/
           }
         }
-        goto LABEL_213;
-      case 0x4Bu:
-        if ( (a5 & 0x1000000) != 0 )
+        goto LABEL_213; /*0x42795c*/
+      case 0x4Bu: /*0x426c18*/
+        if ( (a5 & 0x1000000) != 0 ) /*0x427b39*/
         {
-          LODWORD(v114) = 2;
-          SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v132, v114);
-          if ( (_WORD)v132 )
+          SaveLoad_LoadData(g_TESSaveLoadGame, &p_vtbl, 2u); /*0x427b4c*/
+          if ( (_WORD)p_vtbl ) /*0x427b59*/
           {
-            v66 = (TESForm *)MemoryHeap_Alloc_ZlibCallback((unsigned __int16)v132);
-            LODWORD(v121) = (unsigned __int16)v132;
-            SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, v66, v121);
-            sub_421000(ecx0, v66);
+            v66 = (TESForm *)MemoryHeap_Alloc_ZlibCallback((unsigned __int16)p_vtbl); /*0x427b6a*/
+            SaveLoad_LoadData(g_TESSaveLoadGame, v66, (unsigned __int16)p_vtbl); /*0x427b76*/
+            ExtraDataList_SetSavedAnimation(ecx0, v66); /*0x427b7e*/
           }
-          LODWORD(v121) = 2;
-          SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v132, v121);
-          if ( (_WORD)v132 )
+          SaveLoad_LoadData(g_TESSaveLoadGame, &p_vtbl, 2u); /*0x427b90*/
+          if ( (_WORD)p_vtbl ) /*0x427b9d*/
           {
-            v67 = (BSExtraData *)MemoryHeap_Alloc_ZlibCallback((unsigned __int16)v132);
-            LODWORD(v122) = (unsigned __int16)v132;
-            SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, v67, v122);
-            sub_4210E0(ecx0, v67);
+            v67 = (BSExtraData *)MemoryHeap_Alloc_ZlibCallback((unsigned __int16)p_vtbl); /*0x427bae*/
+            SaveLoad_LoadData(g_TESSaveLoadGame, v67, (unsigned __int16)p_vtbl); /*0x427bba*/
+            ExtraDataList_SetSavedAttachedAnimation(ecx0, v67); /*0x427bc2*/
           }
-          LODWORD(v122) = 2;
-          SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v132, v122);
-          if ( (_WORD)v132 )
+          SaveLoad_LoadData(g_TESSaveLoadGame, &p_vtbl, 2u); /*0x427bd4*/
+          if ( (_WORD)p_vtbl ) /*0x427be1*/
           {
-            v68 = (BSExtraDataVtbl *)MemoryHeap_Alloc_ZlibCallback((unsigned __int16)v132);
-            LODWORD(v114) = (unsigned __int16)v132;
-            SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, v68, v114);
-            sub_4211E0(ecx0, v68);
+            v68 = (BSExtraDataVtbl *)MemoryHeap_Alloc_ZlibCallback((unsigned __int16)p_vtbl); /*0x427bf2*/
+            SaveLoad_LoadData(g_TESSaveLoadGame, v68, (unsigned __int16)p_vtbl); /*0x427bfe*/
+            ExtraDataList_SetSavedHavokData(ecx0, v68); /*0x427c06*/
           }
-          if ( v7->member.niNode )
-            BYTE1(v133) = 1;
+          if ( v7[0xF].vtbl ) /*0x427c0b*/
+            BYTE1(v109) = 1; /*0x427c15*/
         }
-        goto LABEL_213;
-      case 0x4Eu:
-        LODWORD(v114) = 2;
-        SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v146, v114);
-        *(float *)&v71 = COERCE_FLOAT(FormHeapAlloc(0x10u));
-        v134 = v71;
-        v202 = 7;
-        if ( *(float *)&v71 == 0.0 )
-          v72 = 0;
+        goto LABEL_213; /*0x427c1a*/
+      case 0x4Eu: /*0x426c18*/
+        SaveLoad_LoadData(g_TESSaveLoadGame, &v122, 2u); /*0x427c8a*/
+        *(float *)&v71 = COERCE_FLOAT(FormHeapAlloc(0x10u)); /*0x427c91*/
+        v110 = *(float *)&v71; /*0x427c99*/
+        v178 = 7; /*0x427c9f*/
+        if ( *(float *)&v71 == 0.0 ) /*0x427caa*/
+          v72 = 0; /*0x427cb7*/
         else
-          v72 = (BSExtraData *)ExtraFriendHitList::ExtraFriendHitList(v71);
-        v73 = 0;
-        v202 = 0xFFFFFFFF;
-        if ( v146 )
+          v72 = (BSExtraData *)ExtraFriendHitList::ExtraFriendHitList(v71); /*0x427cb3*/
+        v73 = 0; /*0x427cb9*/
+        v178 = 0xFFFFFFFF; /*0x427cc0*/
+        if ( v122 ) /*0x427ccb*/
         {
-          do
+          do /*0x427d58*/
           {
-            LODWORD(v114) = 4;
-            SaveLoad_LoadFormID(&v175, v114);
-            v132 = (_DWORD *)FormHeapAlloc(0xCu);
-            v201 = 8;
-            if ( v132 )
-            {
-              st7_0 = sub_4298A0(v173);
-              v75 = v74;
-            }
+            SaveLoad_LoadFormID(g_TESSaveLoadGame, &v151, 4u); /*0x427ce1*/
+            v74 = (float *)FormHeapAlloc(0xCu); /*0x427ce8*/
+            p_vtbl = v74; /*0x427cf0*/
+            v177 = 8; /*0x427cf6*/
+            if ( v74 ) /*0x427d01*/
+              v75 = sub_4298A0(v74, v149); /*0x427d12*/
             else
-            {
-              v75 = 0;
-            }
-            LODWORD(v105) = 2;
-            v201 = 0xFFFFFFFF;
-            SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, (void *)(v75 + 4), v105);
-            LODWORD(v106) = 4;
-            SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, (void *)(v75 + 8), v106);
-            BSSimpleList_PushFront(&v72[1].vtbl->Destructor, v75);
-            ++v73;
+              v75 = 0; /*0x427d16*/
+            v177 = 0xFFFFFFFF; /*0x427d24*/
+            SaveLoad_LoadData(g_TESSaveLoadGame, v75 + 1, 2u); /*0x427d2f*/
+            SaveLoad_LoadData(g_TESSaveLoadGame, v75 + 2, 4u); /*0x427d40*/
+            BSSimpleList_PushFront(&v72[1].vtbl->Destructor, (int)v75); /*0x427d49*/
+            ++v73; /*0x427d53*/
           }
-          while ( v73 < (unsigned __int16)v144 );
+          while ( v73 < (unsigned __int16)destination ); /*0x427d58*/
         }
-        BaseExtraList_AddExtra(ecx0, v72);
-        v7 = (TESObjectREFR *)v147;
-        goto LABEL_213;
-      case 0x4Fu:
-        LODWORD(v114) = 4;
-        SaveLoad_LoadFormID(&v177, v114);
-        if ( v175 )
-          sub_423970(ecx0, v175);
-        goto LABEL_213;
-      case 0x50u:
-        if ( (a5 & 0x20) != 0 )
-          sub_41F2F0(ecx0);
-        goto LABEL_213;
-      case 0x52u:
-        if ( (a5 & 0x2000) != 0 )
+        BaseExtraList_AddExtra(ecx0, v72); /*0x427d61*/
+        v7 = (TESChildCELL *)bufferCursor; /*0x427d66*/
+        goto LABEL_213; /*0x427d6a*/
+      case 0x4Fu: /*0x426c18*/
+        SaveLoad_LoadFormID(g_TESSaveLoadGame, &v153, 4u); /*0x427d7f*/
+        if ( v151 ) /*0x427d8d*/
+          sub_423970(ecx0, (BSExtraDataVtbl *)v151); /*0x427d96*/
+        goto LABEL_213; /*0x427d9b*/
+      case 0x50u: /*0x426c18*/
+        if ( (a5 & 0x20) != 0 ) /*0x4270dc*/
+          ExtraDataList_AddBoundArmor(ecx0); /*0x4270e4*/
+        goto LABEL_213; /*0x4270e9*/
+      case 0x52u: /*0x426c18*/
+        if ( (a5 & 0x2000) != 0 ) /*0x426f2e*/
         {
-          LODWORD(v114) = 4;
-          SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v180, v114);
-          sub_41F420(ecx0, v180);
+          SaveLoad_LoadData(g_TESSaveLoadGame, &v156, 4u); /*0x426f44*/
+          ExtraDataList_SetInvestmentGold(ecx0, v156); /*0x426f53*/
         }
-        goto LABEL_213;
-      case 0x53u:
-        if ( (a5 & 0x20) != 0 )
+        goto LABEL_213; /*0x426f58*/
+      case 0x53u: /*0x426c18*/
+        if ( (a5 & 0x20) != 0 ) /*0x427da8*/
         {
-          LODWORD(v114) = 4;
-          SaveLoad_LoadFormID(&v179, v114);
-          if ( v177 )
+          SaveLoad_LoadFormID(g_TESSaveLoadGame, (unsigned int *)packageType, 4u); /*0x427dbe*/
+          if ( v153 ) /*0x427dcc*/
           {
-            v76 = TESForm_LookupByFormID(v177);
-            if ( OblivionDynamicCast(
+            v76 = TESForm_LookupByFormID(v153); /*0x427de4*/
+            if ( OblivionDynamicCast( /*0x427e02*/
                    v76,
                    0,
                    (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
@@ -1102,102 +992,91 @@ LABEL_128:
                    &TESWorldSpace `RTTI Type Descriptor',
                    0) )
             {
-              sub_423C90(ecx0, (BSExtraDataVtbl *)v76);
+              sub_423C90(ecx0, (BSExtraDataVtbl *)v76); /*0x427e15*/
             }
           }
         }
-        goto LABEL_213;
-      case 0x54u:
-        if ( LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) < 0x44u )
+        goto LABEL_213; /*0x427e1a*/
+      case 0x54u: /*0x426c18*/
+        if ( g_TESSaveLoadGame->currentVersion < 0x44u ) /*0x427e29*/
         {
-          LODWORD(v114) = 2;
-          SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v145, v114);
-          v77 = 0;
-          if ( v145 )
+          SaveLoad_LoadData(g_TESSaveLoadGame, &v121, 2u); /*0x427e36*/
+          v77 = 0; /*0x427e3b*/
+          if ( v121 ) /*0x427e42*/
           {
-            v78 = v152 + 0x88;
-            do
+            v78 = (_DWORD *)((char *)v128 + 0x88); /*0x427e4c*/
+            do /*0x427edc*/
             {
-              LODWORD(v114) = 1;
-              SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v137, v114);
-              LODWORD(v123) = 4;
-              SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v181, v123);
-              v79 = (TESObjectREFR *)FormHeapAlloc(8u);
-              v80 = (int)v79;
-              v192 = v79;
-              v202 = 9;
-              if ( v79 )
+              SaveLoad_LoadData(g_TESSaveLoadGame, &v113, 1u); /*0x427e5f*/
+              SaveLoad_LoadData(g_TESSaveLoadGame, &v157, 4u); /*0x427e74*/
+              v79 = (TESObjectREFR *)FormHeapAlloc(8u); /*0x427e7b*/
+              v80 = (int)v79; /*0x427e80*/
+              reference = v79; /*0x427e85*/
+              v178 = 9; /*0x427e8e*/
+              if ( v79 ) /*0x427e99*/
               {
-                __asm { fld     [esp+250h+var_180] }
-                __asm { fstp    [esp+250h+var_234] }
-                __asm { fld     [esp+254h+var_234] }
-                __asm { fstp    [esp+254h+var_254]; float }
-                LOBYTE(v79->vtbl) = v137;
-                sub_67EC70(v124);
+                v110 = v157; /*0x427ea6*/
+                valueb = v157; /*0x427eb1*/
+                LOBYTE(v79->vtbl) = v113; /*0x427eb4*/
+                SetFloatAtOffset_04(v79, valueb); /*0x427eb6*/
               }
               else
               {
-                v80 = 0;
+                v80 = 0; /*0x427ebd*/
               }
-              v202 = 0xFFFFFFFF;
-              BSSimpleList_PushFront(v78, v80);
-              ++v77;
+              v178 = 0xFFFFFFFF; /*0x427ec2*/
+              BSSimpleList_PushFront(v78, v80); /*0x427ecd*/
+              ++v77; /*0x427ed7*/
             }
-            while ( v77 < v145 );
-            v7 = (TESObjectREFR *)v149;
+            while ( v77 < v121 ); /*0x427edc*/
+            v7 = v125; /*0x427ee2*/
           }
         }
-        goto LABEL_213;
-      case 0x55u:
-        if ( (a5 & 0x20) != 0 )
+        goto LABEL_213; /*0x427ee6*/
+      case 0x55u: /*0x426c18*/
+        if ( (a5 & 0x20) != 0 ) /*0x427ef3*/
         {
-          LODWORD(v114) = 1;
-          SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v185, v114);
-          sub_422BA0(ecx0, v185);
+          SaveLoad_LoadData(g_TESSaveLoadGame, &v161, 1u); /*0x427f09*/
+          sub_422BA0(ecx0, v161); /*0x427f18*/
         }
-        goto LABEL_213;
-      case 0x59u:
-        v192 = (TESObjectREFR *)FormHeapAlloc(0x28u);
-        v202 = 0xA;
-        if ( v192 )
+        goto LABEL_213; /*0x427f1d*/
+      case 0x59u: /*0x426c18*/
+        v81 = (TESObjectREFR *)FormHeapAlloc(0x28u);// Load extra type 0x59 by allocating an empty MenuTopic, restoring its persistent fields, and conditionally transferring it to ExtraInfoGeneralTopic. /*0x427f24*/
+        reference = v81; /*0x427f2c*/
+        v178 = 0xA; /*0x427f35*/
+        if ( v81 ) /*0x427f40*/
+          v82 = MenuTopic::InitializeEmpty((MenuTopicView *)v81); /*0x427f49*/
+        else
+          v82 = 0; /*0x427f4d*/
+        v178 = 0xFFFFFFFF; /*0x427f52*/
+        MenuTopic::LoadGame(v82, (TESObjectREFR *)v7);// Restore cached MenuTopic identity/display/UI state only. DialogueResponses remain empty for lazy reconstruction. /*0x427f5d*/
+        if ( v82->info )                        // Retention gate checks only whether the saved INFO FormID resolved to TESTopicInfo. ownerQuest and topic may still be null; they are not validated here. /*0x427f62*/
         {
-          st7_0 = sub_6B8C80(HIDWORD(v114), v128);
-          v82 = v81;
+          ExtraDataList::SetInfoGeneralTopic(ecx0, v82);// Resolved INFO: transfer the restored MenuTopic pointer to ExtraInfoGeneralTopic. SetInfoGeneralTopic itself does not free a previous cached pointer. /*0x427f6b*/
         }
         else
         {
-          v82 = 0;
+          MenuTopic::Destroy(v82);              // Unresolved INFO: destroy and free the restored MenuTopic instead of retaining extra type 0x59. /*0x427f77*/
+          FormHeapFree((unsigned int)v82); /*0x427f7d*/
         }
-        v202 = 0xFFFFFFFF;
-        sub_6B8950(v82, st7_0, (int)v7);
-        if ( v82[6] )
-        {
-          sub_422C70(ecx0, (UnkBohDialogueTopicBoh *)v82);
-        }
-        else
-        {
-          sub_6B8F50(v82);
-          FormHeapFree((unsigned int)v82);
-        }
-        goto LABEL_213;
-      case 0x5Au:
-        LODWORD(v114) = 1;
-        SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v187, v114);
-        sub_420920(ecx0, v187);
-        goto LABEL_213;
-      case 0x5Cu:
-        LODWORD(v114) = 4;
-        SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v189, v114);
-        __asm { fld     [esp+250h+var_160] }
-        __asm { fstp    [esp+254h+var_254]; float }
-        sub_422D20(ecx0, (BSExtraDataVtbl *)v114);
-        goto LABEL_213;
+        goto LABEL_213; /*0x427f70*/
+      case 0x5Au: /*0x426c18*/
+        SaveLoad_LoadData(g_TESSaveLoadGame, noRumors, 1u); /*0x427f97*/
+        ExtraDataList::SetNoRumors(ecx0, noRumors[0]); /*0x427fa6*/
+        goto LABEL_213; /*0x427fab*/
+      case 0x5Cu: /*0x426c18*/
+        SaveLoad_LoadData(g_TESSaveLoadGame, &v165, 4u); /*0x427fbd*/
+        sub_422D20(ecx0, v165); /*0x427fcf*/
+        goto LABEL_213; /*0x427fd4*/
       default:
-        PrintError(
+        PrintError( /*0x427fdc*/
           "No loading code found in ExtraDataList::LoadGame() for type %i.  The order of the extra data enum probably cha"
           "nged.  Errors may occur.",
-          v138);
-        goto LABEL_213;
+          v114);
+        goto LABEL_213; /*0x427fdc*/
     }
   }
 }
+/* Orphan comments:
+Load extra type 0x5A (ExtraHasNoRumors) as one persistent boolean, independently of the cached INFOGENERAL MenuTopic.
+*/

@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x45AAFC",
-    "line": "mov     dword ptr [ebx], offset ??_7ExteriorCellNewReferencesMap@@6B@; const ExteriorCellNewReferencesMap::`vftable'",
+    "line": "mov     dword ptr [ebx], offset ??_7ExteriorCellNewReferencesMap@@6B@; Verified vtable layout from raw RTTI and function pointers: +0x0 Deleting destructor, +0x4 key hash, +0x8 key equality, +0xC set key/value, +0x10 clear value no-op, +0x14 node-pool allocate, +0x18 node-pool release. Fallout constructor homologs: interior 82601B90, exterior 82601C58; both use 37 buckets, matching Oblivion constructors 45A940/45AA80. Fallout nested-list ownership and exterior record payload differ.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x45AB2E",
-    "line": "mov     [esp+2Ch+var_18], eax",
+    "line": "mov     [esp+2Ch+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -193,61 +193,61 @@
   },
   {
     "ea": "0x45AB34",
-    "line": "lea     eax, [esp+2Ch+var_1C]",
+    "line": "lea     eax, [esp+2Ch+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x45AB38",
-    "line": "push    eax",
+    "line": "push    eax; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45AB39",
-    "line": "lea     ecx, [esp+30h+var_10]",
+    "line": "lea     ecx, [esp+30h+keyOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x45AB3D",
-    "line": "push    ecx",
+    "line": "push    ecx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45AB3E",
-    "line": "lea     edx, [esp+34h+var_18]",
+    "line": "lea     edx, [esp+34h+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x45AB42",
-    "line": "push    edx",
+    "line": "push    edx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45AB43",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x45AB45",
-    "line": "mov     [esp+38h+var_1C], 0",
+    "line": "mov     [esp+38h+valueOut], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x45AB4D",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x45AB52",
-    "line": "mov     esi, [esp+2Ch+var_1C]",
+    "line": "mov     esi, [esp+2Ch+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x45AB67",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -348,12 +348,6 @@
     "size": 2
   },
   {
-    "ea": "0x45AB7D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x45AB80",
     "line": "mov     eax, [esi+4]",
     "mnemonic": "mov",
@@ -373,7 +367,7 @@
   },
   {
     "ea": "0x45AB87",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -415,7 +409,7 @@
   },
   {
     "ea": "0x45AB9D",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +421,7 @@
   },
   {
     "ea": "0x45ABA5",
-    "line": "cmp     [esp+2Ch+var_18], 0",
+    "line": "cmp     [esp+2Ch+position], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -524,6 +518,60 @@
   {
     "ea": "0x45ABD8",
     "line": "jmp     loc_45AB2C",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE260",
+    "line": "mov     ecx, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE263",
+    "line": "jmp     ??1?$NiTPointerMap@IPAV?$BSSimpleList@PAUExteriorCellReferenceData@@@@@@UAE@XZ; NiTPointerMap<uint,BSSimpleList<ExteriorCellReferenceData *> *>::~NiTPointerMap<uint,BSSimpleList<ExteriorCellReferenceData *> *>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE268",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AE26C",
+    "line": "lea     eax, [edx-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE26F",
+    "line": "mov     ecx, [edx-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE272",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AE274",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE279",
+    "line": "mov     eax, offset stru_ADAB10",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE27E",
+    "line": "jmp     ___CxxFrameHandler3",
     "mnemonic": "jmp",
     "size": 5
   }

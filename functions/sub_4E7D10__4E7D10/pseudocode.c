@@ -1,53 +1,53 @@
-void __usercall sub_4E7D10(NiNode *a1@<eax>)
+// Verified `TogglePathGrid` action: flips g_PathGridDebugRenderingEnabled, updates the shared debug root, then rebuilds or clears the PathGrid visuals for the current interior grid or every loaded exterior grid cell. It is reached by ScriptCommand_TogglePathGrid. Fallout comparison: Script::ToggleNavMeshFunction (Fallout 0x823CED68) handles selectable draw modes, cover/connection overlays and transparency, and adds per-cell navmesh draws; Oblivion exposes one PathGrid display toggle and updates loaded PathGrid roots. This is a directly observed subsystem divergence.
+void __cdecl TESPathGrid_ToggleDebugRendering()
 {
   TESObjectCELL *currentInteriorCell; // ecx
-  TESObjectREFR *v2; // ecx
-  unsigned int v3; // eax
+  TESPathGrid *v1; // ecx
+  unsigned int v2; // eax
   unsigned int i; // edi
-  unsigned int v5; // esi
+  unsigned int v4; // esi
   TESObjectCELL *cell; // ecx
-  TESObjectREFR *v7; // ecx
+  TESPathGrid *v6; // ecx
 
-  LOBYTE(a1) = byte_B35F84 == 0;
-  sub_4E76D0(a1);
-  currentInteriorCell = TES->currentInteriorCell;
-  if ( !currentInteriorCell )
+  TESPathGrid_SetDebugRenderingEnabled(!g_PathGridDebugRenderingEnabled); /*0x4e7d1b*/
+  currentInteriorCell = MEMORY[0xB333A0]->currentInteriorCell; /*0x4e7d26*/
+  if ( !currentInteriorCell ) /*0x4e7d2e*/
   {
-    v3 = uGridsToLoad;
-    for ( i = 0; ; ++i )
+    v2 = uGridsToLoad; /*0x4e7d4e*/
+    for ( i = 0; ; ++i ) /*0x4e7d54*/
     {
-      if ( i >= v3 )
-        return;
-      v5 = 0;
-      while ( v5 < v3 )
+      if ( i >= v2 ) /*0x4e7d59*/
+        return; /*0x4e7d59*/
+      v4 = 0; /*0x4e7d5b*/
+      while ( v4 < v2 ) /*0x4e7d62*/
       {
-        cell = GetGridEntry(TES->gridCellArray, i, v5)->cell;
-        if ( cell && (v7 = (TESObjectREFR *)sub_4AF170(cell)) != 0 )
+        cell = GetGridEntry(MEMORY[0xB333A0]->gridCellArray, i, v4)->cell; /*0x4e7d74*/
+        if ( cell && (v6 = (TESPathGrid *)sub_4AF170(cell)) != 0 ) /*0x4e7d83*/
         {
-          if ( !byte_B35F84 )
+          if ( !g_PathGridDebugRenderingEnabled ) /*0x4e7d8c*/
           {
-            sub_4E5400((int)v7);
-            goto LABEL_15;
+            TESPathGrid_ClearRenderedPointGeometry(v6); /*0x4e7d9d*/
+            goto LABEL_15; /*0x4e7d9d*/
           }
-          sub_4E71A0(v7);
-          v3 = uGridsToLoad;
-          ++v5;
+          TESPathGrid_RebuildRenderedGraph(v6); /*0x4e7d8e*/
+          v2 = uGridsToLoad; /*0x4e7d93*/
+          ++v4; /*0x4e7d98*/
         }
         else
         {
 LABEL_15:
-          v3 = uGridsToLoad;
-          ++v5;
+          v2 = uGridsToLoad; /*0x4e7da2*/
+          ++v4; /*0x4e7da7*/
         }
       }
     }
   }
-  v2 = (TESObjectREFR *)sub_4AF170(currentInteriorCell);
-  if ( v2 )
+  v1 = (TESPathGrid *)sub_4AF170(currentInteriorCell); /*0x4e7d35*/
+  if ( v1 ) /*0x4e7d39*/
   {
-    if ( byte_B35F84 )
-      sub_4E71A0(v2);
+    if ( g_PathGridDebugRenderingEnabled ) /*0x4e7d3b*/
+      TESPathGrid_RebuildRenderedGraph(v1); /*0x4e7d44*/
     else
-      sub_4E5400((int)v2);
+      TESPathGrid_ClearRenderedPointGeometry(v1); /*0x4e7d49*/
   }
 }

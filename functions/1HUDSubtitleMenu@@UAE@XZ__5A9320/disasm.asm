@@ -17,7 +17,6 @@
 0x5A9350: mov     [esp+20h+var_4], 0
 0x5A9358: lea     edi, [ebx+2Ch]
 0x5A935B: jmp     short loc_5A9360
-0x5A935D: align 10h
 0x5A9360: cmp     dword ptr [edi+4], 0
 0x5A9364: jnz     short loc_5A936B
 0x5A9366: cmp     dword ptr [edi], 0
@@ -31,12 +30,12 @@
 0x5A9379: mov     ecx, esi
 0x5A937B: call    sub_5A9060
 0x5A9380: push    esi
-0x5A9381: call    FormHeapFree
+0x5A9381: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5A9386: add     esp, 4
 0x5A9389: jmp     short loc_5A9360
 0x5A938B: mov     ecx, ebx; this
 0x5A938D: mov     [esp+20h+var_4], 0FFFFFFFFh
-0x5A9395: call    ??1Menu@@UAE@XZ; Menu::~Menu(void)
+0x5A9395: call    ??1Menu@@UAE@XZ; Verified template ownership: Menu+0x1C byte gates freeing registered template objects; linked list nodes +8/+0xC always removed. Updated MenuMembr preserves size0x24; with vtable Menu total0x28. ReadFile0x5904EF sets Menu ownsTemplates=1 and BuildStorage ownsSubTemplates=0.
 0x5A939A: mov     ecx, [esp+20h+var_C]
 0x5A939E: mov     large fs:0, ecx
 0x5A93A5: pop     ecx
@@ -45,3 +44,12 @@
 0x5A93A8: pop     ebx
 0x5A93A9: add     esp, 10h
 0x5A93AC: retn
+0x9C0AD0: mov     ecx, [ebp-10h]; this
+0x9C0AD3: jmp     ??1Menu@@UAE@XZ; Verified template ownership: Menu+0x1C byte gates freeing registered template objects; linked list nodes +8/+0xC always removed. Updated MenuMembr preserves size0x24; with vtable Menu total0x28. ReadFile0x5904EF sets Menu ownsTemplates=1 and BuildStorage ownsSubTemplates=0.
+0x9C0AD8: mov     edx, [esp+arg_4]
+0x9C0ADC: lea     eax, [edx-10h]
+0x9C0ADF: mov     ecx, [edx-14h]
+0x9C0AE2: xor     ecx, eax
+0x9C0AE4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C0AE9: mov     eax, offset stru_AE9C90
+0x9C0AEE: jmp     ___CxxFrameHandler3

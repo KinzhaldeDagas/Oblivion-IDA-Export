@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x7F0100",
+      "0x7F0201"
+    ]
+  ],
+  "chunks_sha256": "06c17c61c5f12deb00039197213480dd7b02e74486676b4d6cfd514e76cc2923",
+  "comment_regular": "Transforms the global directional light vector into object space and writes leaf c11; optional point-light position becomes c12. Does not touch texture or alpha.",
+  "comment_repeatable": "Transforms the global directional light vector into object space and writes leaf c11; optional point-light position becomes c12. Does not touch texture or alpha.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7F0100",
+  "display_name": "OB_SpeedTreeLeafShader_UpdateObjectSpaceLightConstants_010201A0",
   "end_ea": "0x7F0201",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7F0100",
+  "name": "OB_SpeedTreeLeafShader_UpdateObjectSpaceLightConstants_010201A0",
   "segment": ".text",
   "sha256": "06c17c61c5f12deb00039197213480dd7b02e74486676b4d6cfd514e76cc2923",
   "size": 257,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7F0100",
-  "type": "int __stdcall(_DWORD *, int, float)",
+  "total_chunk_size": 257,
+  "type": "int __stdcall(void *leafProperty, const float *inverseWorld, float objectScale)",
   "xrefs_from_count": 71,
   "xrefs_to_count": 3
 }

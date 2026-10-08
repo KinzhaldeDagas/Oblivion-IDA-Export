@@ -13,33 +13,33 @@ void __thiscall sub_725100(char *this, unsigned int a2)
   int v13; // [esp-14h] [ebp-24h]
   int v14; // [esp+Ch] [ebp-4h] BYREF
 
-  v2 = a2;
-  sub_6EBA80((NiRenderer *)this, a2);
-  sub_709430(this + 8, v2);
-  v12 = *(_DWORD *)(v2 + 0x21C);
-  v4 = *(void (__cdecl **)(int, unsigned int *, int, int *, int))(v12 + 4);
-  v14 = 4;
-  v4(v12, &a2, 4, &v14, 1);
-  sub_724AB0(this, v2, a2);
-  v5 = 0;
-  if ( a2 )
+  v2 = a2; /*0x725102*/
+  sub_6EBA80((NiRenderer *)this, a2); /*0x72510b*/
+  sub_709430(this + 8, v2); /*0x725114*/
+  v12 = *(_DWORD *)(v2 + 0x21C); /*0x72512d*/
+  v4 = *(void (__cdecl **)(int, unsigned int *, int, int *, int))(v12 + 4); /*0x72512e*/
+  v14 = 4; /*0x725131*/
+  v4(v12, &a2, 4, &v14, 1); /*0x725139*/
+  sub_724AB0(this, v2, a2); /*0x725145*/
+  v5 = 0; /*0x72514a*/
+  if ( a2 ) /*0x725150*/
   {
-    v6 = 0;
-    do
+    v6 = 0; /*0x725153*/
+    do /*0x7251aa*/
     {
-      v7 = *(void (__cdecl **)(int, int, int, int *, int))(*(_DWORD *)(v2 + 0x21C) + 4);
-      v13 = v6 + *((_DWORD *)this + 9);
-      v11 = *(_DWORD *)(v2 + 0x21C);
-      v14 = 4;
-      v7(v11, v13, 4, &v14, 1);
-      v8 = *(void (__cdecl **)(int, int, int, int *, int))(*(_DWORD *)(v2 + 0x21C) + 4);
-      v10 = v6 + *((_DWORD *)this + 9) + 4;
-      v9 = *(_DWORD *)(v2 + 0x21C);
-      v14 = 4;
-      v8(v9, v10, 4, &v14, 1);
-      ++v5;
-      v6 += 0x10;
+      v7 = *(void (__cdecl **)(int, int, int, int *, int))(*(_DWORD *)(v2 + 0x21C) + 4); /*0x725165*/
+      v13 = v6 + *((_DWORD *)this + 9); /*0x72516c*/
+      v11 = *(_DWORD *)(v2 + 0x21C); /*0x72516d*/
+      v14 = 4; /*0x72516e*/
+      v7(v11, v13, 4, &v14, 1); /*0x725176*/
+      v8 = *(void (__cdecl **)(int, int, int, int *, int))(*(_DWORD *)(v2 + 0x21C) + 4); /*0x72518c*/
+      v10 = v6 + *((_DWORD *)this + 9) + 4; /*0x725191*/
+      v9 = *(_DWORD *)(v2 + 0x21C); /*0x725192*/
+      v14 = 4; /*0x725193*/
+      v8(v9, v10, 4, &v14, 1); /*0x72519b*/
+      ++v5; /*0x72519d*/
+      v6 += 0x10; /*0x7251a3*/
     }
-    while ( v5 < a2 );
+    while ( v5 < a2 ); /*0x7251aa*/
   }
 }

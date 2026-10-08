@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x546440",
-    "line": "fst     [esp+arg_1C]",
+    "line": "fst     [esp+arg_1C]; When the target is moving, builds its boot-noise term as bootWeight * fSneakBootWeightMult + fSneakBootWeightBase; stationary targets retain the quiet baseline.",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x546444",
-    "line": "jz      short Calc_DetectionLevel___CalcInCombatBonus",
+    "line": "jz      short Calc_DetectionLevel_ApplyCombatBonus; Applies fSneakTargetInCombatBonus when the observed target is in combat.",
     "mnemonic": "jz",
     "size": 2
   },

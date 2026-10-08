@@ -4,13 +4,13 @@
 0x6C20A8: mov     ecx, [eax-4]
 0x6C20AB: push    esi
 0x6C20AC: lea     esi, [eax-4]
-0x6C20AF: push    offset ?ClearComponentReferences@TESTexture@@UAEXXZ?; void (__thiscall *)(void *)
+0x6C20AF: push    offset Shared_NoOpVirtual_60D0A0; void (__thiscall *)(void *)
 0x6C20B4: push    ecx; int
 0x6C20B5: push    14h; unsigned int
 0x6C20B7: push    eax; void *
 0x6C20B8: call    $LN21
 0x6C20BD: push    esi
-0x6C20BE: call    FormHeapFree
+0x6C20BE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6C20C3: add     esp, 4
 0x6C20C6: pop     esi
 0x6C20C7: retn

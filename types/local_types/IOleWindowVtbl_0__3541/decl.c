@@ -1,1 +1,1 @@
-IOleWindowVtbl_0
+typedef IOleWindowVtbl IOleWindowVtbl_0;

@@ -1,19 +1,36 @@
 {
-  "callees_count": 17,
-  "callers_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
+  "callers_count": 19,
+  "chunks": [
+    [
+      "0x58B220",
+      "0x58B2EB"
+    ],
+    [
+      "0x9C6200",
+      "0x9C6226"
+    ]
+  ],
+  "chunks_sha256": "48d2a250e60dbfcf6ad277a39a4f1d16aa7748f0d935321d3d27c4ff9e2b8d8c",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "Tile_GetPropertyByCode?",
+  "comment_repeatable": "Verified: sorted trait lookup; if absent allocates 0x1C bytes, constructs Value at 0x589DF0, stores owner Tile at +0 and inserts into Tile value list. Corrects misleading existing-property-only interpretation.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "Tile::GetOrCreateValue",
   "end_ea": "0x58B2EB",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "Tile_GetPropertyByCode?",
+  "name": "Tile::GetOrCreateValue",
   "segment": ".text",
   "sha256": "7abe01ed78a61c0ec176961f4f0eb08199dcfca99c388c9f98e3bc13cfecfa35",
   "size": 203,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x58B220",
-  "type": "_DWORD *__thiscall(_DWORD *this, _DWORD *)",
-  "xrefs_from_count": 89,
+  "total_chunk_size": 241,
+  "type": "OblivionTileValueView *__thiscall(Tile *this, unsigned int trait)",
+  "xrefs_from_count": 103,
   "xrefs_to_count": 19
 }

@@ -1,19 +1,36 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "DialoguePackage::~DialoguePackage(void)",
+  "chunks": [
+    [
+      "0x625E70",
+      "0x625EF0"
+    ],
+    [
+      "0x9C35D0",
+      "0x9C35F3"
+    ]
+  ],
+  "chunks_sha256": "15c5182b73728a42d8966f7aaea5596385611acae4fdf2401c466b5ebd3c8b20",
+  "comment_regular": "DialoguePackage destructor/cancellation path. Clears PlayerCharacter.dialoguePackage when owned, destroys/frees the generated Conversation, and never calls DialogueItem::RunResult. Deferred INFO results are lost on interruption; ImmediateResult side effects already occurred during construction.",
+  "comment_repeatable": "DialoguePackage destructor/cancellation path. Clears PlayerCharacter.dialoguePackage when owned, destroys/frees the generated Conversation, and never calls DialogueItem::RunResult. Deferred INFO results are lost on interruption; ImmediateResult side effects already occurred during construction.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "DialoguePackage::Destructor",
   "end_ea": "0x625EF0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "??1DialoguePackage@@UAE@XZ",
+  "name": "DialoguePackage::Destructor",
   "segment": ".text",
   "sha256": "436da619c602f1f23abb8e9517dc91ffe1af0ec25e405cd219dae6f4b5438996",
   "size": 128,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x625E70",
-  "type": "void __thiscall(TESPackage *this)",
-  "xrefs_from_count": 45,
+  "total_chunk_size": 163,
+  "type": "void __thiscall(DialoguePackageRuntimeView *this)",
+  "xrefs_from_count": 56,
   "xrefs_to_count": 1
 }

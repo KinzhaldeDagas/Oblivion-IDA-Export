@@ -9,7 +9,7 @@
 0x6D8E1E: mov     ecx, [esi+10h]
 0x6D8E21: mov     edx, ds:0B3D2F8h[ecx*4]
 0x6D8E28: push    eax
-0x6D8E29: call    edx ; dword_B3D2F8
+0x6D8E29: call    edx ; unk_B3D2F8
 0x6D8E2B: add     esp, 4
 0x6D8E2E: mov     edi, [esp+0Ch+arg_0]
 0x6D8E32: cmp     edi, ebx

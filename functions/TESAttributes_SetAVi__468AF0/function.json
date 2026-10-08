@@ -1,18 +1,31 @@
 {
-  "callees_count": 3,
-  "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 11,
+  "chunks": [
+    [
+      "0x468AF0",
+      "0x468B34"
+    ]
+  ],
+  "chunks_sha256": "9838638b43869298a503389d71b7906f77bd4eda06f0c730307d29dd165e2e14",
+  "comment_regular": "TESAttributes_SetAVi: attributes are stored as single bytes in TESAttributes. AVU base-AV guards clamp attributes to 0..configuredLimit before player integer base setters/modifiers reach this storage.",
+  "comment_repeatable": "TESAttributes_SetAVi: attributes are stored as single bytes in TESAttributes. AVU base-AV guards clamp attributes to 0..configuredLimit before player integer base setters/modifiers reach this storage.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
   "display_name": "TESAttributes_SetAVi",
   "end_ea": "0x468B34",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "TESAttributes_SetAVi",
   "segment": ".text",
   "sha256": "9838638b43869298a503389d71b7906f77bd4eda06f0c730307d29dd165e2e14",
   "size": 68,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x468AF0",
+  "total_chunk_size": 68,
   "type": "void *__thiscall(_BYTE *this, char, char)",
   "xrefs_from_count": 29,
   "xrefs_to_count": 11

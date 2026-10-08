@@ -1,4 +1,4 @@
-BSStringT *sub_A13870()
+NiRTTI *sub_A13870()
 {
-  return sub_70E220((BSStringT *)&unk_BA8358, "bhkGenericConstraint", (int)&stru_BA7D50);
+  return NiRTTI_Constructor(&stru_BA8358, "bhkGenericConstraint", &MEMORY[0xBA7D50]); /*0xa13884*/
 }

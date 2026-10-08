@@ -1,19 +1,32 @@
 {
-  "callees_count": 81,
-  "callers_count": 7,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 42,
+  "callers_count": 8,
+  "chunks": [
+    [
+      "0x5222D0",
+      "0x522760"
+    ]
+  ],
+  "chunks_sha256": "5015df6ed3b585fffbb5a29dff2efd7061fb06a399ff42d07d0cd019790a5669",
+  "comment_regular": "Authoritative Oblivion TESNPC auto-stat calculation. For each of 21 skills: major = 25+(level-1), non-major = 5+0.1*(level-1), then add 5+0.5*(level-1) for matching class specialization, then the signed race bonus, cap at 100, and store in TESNPC::baseSkills. The chargen placeholder class suppresses major/specialization contributions. Attributes start from sex-specific race values, add configured +5 class-primary bonuses, then add (level-1) per governed major skill or 0.2*(level-1) per governed non-major skill, capped at 100.",
+  "comment_repeatable": "Authoritative Oblivion TESNPC auto-stat calculation. For each of 21 skills: major = 25+(level-1), non-major = 5+0.1*(level-1), then add 5+0.5*(level-1) for matching class specialization, then the signed race bonus, cap at 100, and store in TESNPC::baseSkills. The chargen placeholder class suppresses major/specialization contributions. Attributes start from sex-specific race values, add configured +5 class-primary bonuses, then add (level-1) per governed major skill or 0.2*(level-1) per governed non-major skill, capped at 100.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_5222D0",
+  "display_name": "TESNPC_RecalculateAutoStats",
   "end_ea": "0x522760",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_5222D0",
+  "name": "TESNPC_RecalculateAutoStats",
   "segment": ".text",
   "sha256": "5015df6ed3b585fffbb5a29dff2efd7061fb06a399ff42d07d0cd019790a5669",
   "size": 1168,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5222D0",
-  "type": "char __thiscall(TESForm *this, char)",
+  "total_chunk_size": 1168,
+  "type": "void __thiscall(TESNPC *this, bool skipDerivedStats)",
   "xrefs_from_count": 412,
   "xrefs_to_count": 8
 }

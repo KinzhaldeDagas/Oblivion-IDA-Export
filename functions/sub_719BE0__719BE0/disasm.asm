@@ -29,7 +29,7 @@
 0x719C3A: push    esi
 0x719C3B: mov     ecx, edi
 0x719C3D: mov     [esp+24h+var_4], 0FFFFFFFFh
-0x719C45: call    sub_722700
+0x719C45: call    j_NiGeometry_CopyMembersForClone
 0x719C4A: mov     eax, esi
 0x719C4C: mov     ecx, [esp+1Ch+var_C]
 0x719C50: mov     large fs:0, ecx
@@ -38,3 +38,15 @@
 0x719C59: pop     esi
 0x719C5A: add     esp, 10h
 0x719C5D: retn    4
+0x9CA7E0: mov     eax, [ebp-10h]
+0x9CA7E3: push    eax
+0x9CA7E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA7E9: pop     ecx
+0x9CA7EA: retn
+0x9CA7EB: mov     edx, [esp+arg_4]
+0x9CA7EF: lea     eax, [edx-0Ch]
+0x9CA7F2: mov     ecx, [edx-10h]
+0x9CA7F5: xor     ecx, eax
+0x9CA7F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA7FC: mov     eax, offset stru_AF2E8C
+0x9CA801: jmp     ___CxxFrameHandler3

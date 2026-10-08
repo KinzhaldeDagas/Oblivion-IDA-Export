@@ -17,7 +17,6 @@
 0x93C6BF: lea     ecx, [esi+0A0h]
 0x93C6C5: sub     ecx, eax
 0x93C6C7: jmp     short loc_93C6D0
-0x93C6C9: align 10h
 0x93C6D0: movaps  xmm0, xmmword ptr [eax]
 0x93C6D3: movaps  xmm2, xmm0
 0x93C6D6: shufps  xmm2, xmm0, 0
@@ -59,7 +58,6 @@
 0x93C74B: mov     dword ptr [esi+170h], 0
 0x93C755: ja      def_93C767; jumptable 0093C767 default case, cases 13-16,20-24,27-32
 0x93C75B: jmp     short loc_93C760
-0x93C75D: align 10h
 0x93C760: movzx   eax, ds:byte_93D47C[eax]
 0x93C767: jmp     ds:jpt_93C767[eax*4]; switch jump
 0x93C76E: push    1; jumptable 0093C767 case 19

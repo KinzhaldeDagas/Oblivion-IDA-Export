@@ -1,8 +1,9 @@
-void __thiscall sub_625D70(Actor **this)
+// Stops dialogue playback on activeSpeaker when a DialoguePackage is being torn down or replaced.
+void __thiscall DialoguePackage::StopActiveSpeakerDialogue(DialoguePackageRuntimeView *this)
 {
-  Actor *v1; // ecx
+  Actor *activeSpeaker; // ecx
 
-  v1 = *(this + 0x12);
-  if ( v1 )
-    sub_5EF930(v1);
+  activeSpeaker = this->activeSpeaker; /*0x625d70*/
+  if ( activeSpeaker ) /*0x625d75*/
+    Actor::StopDialoguePlayback(activeSpeaker); /*0x625d77*/
 }

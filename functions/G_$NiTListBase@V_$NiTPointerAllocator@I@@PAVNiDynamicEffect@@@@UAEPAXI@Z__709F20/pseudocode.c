@@ -2,8 +2,8 @@ _DWORD *__thiscall NiTListBase<NiTPointerAllocator<unsigned int>,NiDynamicEffect
         _DWORD *this,
         char a2)
 {
-  *this = &NiTListBase<NiTPointerAllocator<unsigned int>,NiDynamicEffect *>::`vftable';
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  *this = &NiTListBase<NiTPointerAllocator<unsigned int>,NiDynamicEffect *>::`vftable'; /*0x709f28*/
+  if ( (a2 & 1) != 0 ) /*0x709f2e*/
+    FormHeapFree((unsigned int)this); /*0x709f31*/
+  return this; /*0x709f3b*/
 }

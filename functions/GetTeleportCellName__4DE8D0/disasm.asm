@@ -6,7 +6,7 @@
 0x4DE8D8: test    edi, edi
 0x4DE8DA: jz      short loc_4DE905
 0x4DE8DC: mov     ecx, edi; this
-0x4DE8DE: call    TESObjectCELL_IsInterior
+0x4DE8DE: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x4DE8E3: test    al, al
 0x4DE8E5: jz      short loc_4DE905
 0x4DE8E7: mov     edi, [edi+1Ch]

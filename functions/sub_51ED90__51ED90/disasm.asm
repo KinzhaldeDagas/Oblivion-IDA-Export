@@ -17,7 +17,7 @@
 0x51EDB4: jmp     loc_51EE73
 0x51EDB9: push    esi
 0x51EDBA: mov     ecx, edi
-0x51EDBC: call    TESFile_InitializeFormFromRecord
+0x51EDBC: call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.
 0x51EDC1: mov     ecx, edi
 0x51EDC3: call    TESFile_GetChunkType
 0x51EDC8: test    eax, eax
@@ -35,7 +35,7 @@
 0x51EDF4: push    200h; a4
 0x51EDF9: push    ebx; Dst
 0x51EDFA: mov     ecx, edi; a1
-0x51EDFC: call    TESFile_GetChunkData
+0x51EDFC: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x51EE01: mov     eax, [esi]
 0x51EE03: mov     edx, [eax+0D8h]
 0x51EE09: push    ebx
@@ -47,19 +47,19 @@
 0x51EE15: push    eax; Dst
 0x51EE16: push    edi; a2
 0x51EE17: mov     ecx, esi; this
-0x51EE19: call    TESForm_LoadGenericComponents
+0x51EE19: call    TESForm_LoadGenericComponents; Generic fixed-prefix/component DATA overlay. Copies min(chunk_length,fixed_prefix_size), then updates later components only when their starting offset is below chunk_length; omitted suffix components retain prior in-memory values.
 0x51EE1E: jmp     short loc_51EE57
 0x51EE20: test    esi, esi
 0x51EE22: jz      short loc_51EE30
 0x51EE24: lea     eax, [esi+18h]
 0x51EE27: push    edi
 0x51EE28: push    eax
-0x51EE29: call    TESFullname_Load
+0x51EE29: call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.
 0x51EE2E: jmp     short loc_51EE54
 0x51EE30: xor     eax, eax
 0x51EE32: push    edi
 0x51EE33: push    eax
-0x51EE34: call    TESFullname_Load
+0x51EE34: call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.
 0x51EE39: jmp     short loc_51EE54
 0x51EE3B: cmp     eax, 4E4F4349h
 0x51EE40: jnz     short loc_51EE57

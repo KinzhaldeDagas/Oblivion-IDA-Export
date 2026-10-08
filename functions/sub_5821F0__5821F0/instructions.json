@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5821F0",
-    "line": "push    ebp",
+    "line": "push    ebp; [Controller decode 2026-07-09] Non-player QueryControlState consumer: QuickSave 26, QuickLoad 27, Journal 15, Escape 29, Grave/console 30.",
     "mnemonic": "push",
     "size": 1
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x582271",
-    "line": "call    sub_5A6B00",
+    "line": "call    HUDMainMenu_Create",
     "mnemonic": "call",
     "size": 5
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x5822F5",
-    "line": "call    sub_5ACE20",
+    "line": "call    LevelUpMenu_Open",
     "mnemonic": "call",
     "size": 5
   },
@@ -529,13 +529,13 @@
   },
   {
     "ea": "0x58234A",
-    "line": "fstp    [esp+208h+var_208.dwOfs]; a3",
+    "line": "fstp    [esp+208h+var_208.dwOfs]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x58234D",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x582359",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x58236E",
-    "line": "mov     ecx, [esi+88h]",
+    "line": "mov     ecx, [esi+88h]; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x582378",
-    "line": "call    sub_5893B0",
+    "line": "call    Tile__IsVisible; AchievementsNative evidence: target eligibility helper returns true when the tile and ancestors are not suppressed by the observed flag path; inventory hover uses it before accepting header/item targets.",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,13 +655,13 @@
   },
   {
     "ea": "0x58239E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5823A0",
-    "line": "call    sub_57FD60",
+    "line": "call    InterfaceManager__GetDefaultFocus; Verified: invokes ScanForMaxFocus with INT_MIN and null root, sets selected tile via SetCurrentFocusTarget, hides cursor, clears mouse-motion byte +0xB9. Fallout named analogue 0x824F09D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -685,7 +685,7 @@
   },
   {
     "ea": "0x5823AA",
-    "line": "call    InputGlobals__QueryMouseKeyState",
+    "line": "call    InputGlobals__QueryMouseKeyState; TES4 authoritative mouse query modes mirror keyboard for buttons; mouse wheel pseudo-buttons 8/9 return wheel up/down.",
     "mnemonic": "call",
     "size": 5
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x5823B8",
-    "line": "call    InputGlobals__QueryMouseKeyState",
+    "line": "call    InputGlobals__QueryMouseKeyState; TES4 authoritative mouse query modes mirror keyboard for buttons; mouse wheel pseudo-buttons 8/9 return wheel up/down.",
     "mnemonic": "call",
     "size": 5
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x5823C5",
-    "line": "call    InputGlobals__QueryMouseKeyState",
+    "line": "call    InputGlobals__QueryMouseKeyState; TES4 authoritative mouse query modes mirror keyboard for buttons; mouse wheel pseudo-buttons 8/9 return wheel up/down.",
     "mnemonic": "call",
     "size": 5
   },
@@ -943,19 +943,19 @@
   },
   {
     "ea": "0x582431",
-    "line": "fstp    [esp+208h+var_208.dwOfs]; a3",
+    "line": "fstp    [esp+208h+var_208.dwOfs]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x582434",
-    "line": "push    0FDDh; a2",
+    "line": "push    0FDDh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x582439",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1021,7 +1021,7 @@
   },
   {
     "ea": "0x582467",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1171,7 +1171,7 @@
   },
   {
     "ea": "0x5824C2",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1303,7 +1303,7 @@
   },
   {
     "ea": "0x582509",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1507,7 +1507,7 @@
   },
   {
     "ea": "0x582594",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1591,19 +1591,19 @@
   },
   {
     "ea": "0x5825CB",
-    "line": "fstp    [esp+228h+a3]; a3",
+    "line": "fstp    [esp+228h+a3]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5825CE",
-    "line": "push    0FE3h; a2",
+    "line": "push    0FE3h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5825D3",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1627,19 +1627,19 @@
   },
   {
     "ea": "0x5825E1",
-    "line": "fstp    [esp+228h+a3]; a3",
+    "line": "fstp    [esp+228h+a3]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5825E4",
-    "line": "push    0FE1h; a2",
+    "line": "push    0FE1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5825E9",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1663,19 +1663,19 @@
   },
   {
     "ea": "0x5825F7",
-    "line": "fstp    [esp+228h+a3]; a3",
+    "line": "fstp    [esp+228h+a3]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5825FA",
-    "line": "push    0FE1h; a2",
+    "line": "push    0FE1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5825FF",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1723,7 +1723,7 @@
   },
   {
     "ea": "0x582620",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1873,19 +1873,19 @@
   },
   {
     "ea": "0x58267A",
-    "line": "fstp    [esp+230h+var_230]; a3",
+    "line": "fstp    [esp+230h+value]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x58267D",
-    "line": "push    0FDDh; a2",
+    "line": "push    0FDDh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x582682",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1933,7 +1933,7 @@
   },
   {
     "ea": "0x5826A3",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2077,13 +2077,13 @@
   },
   {
     "ea": "0x5826F6",
-    "line": "fstp    [esp+238h+var_238]; a3",
+    "line": "fstp    [esp+238h+var_238]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5826F9",
-    "line": "push    0FDDh; a2",
+    "line": "push    0FDDh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -2095,7 +2095,7 @@
   },
   {
     "ea": "0x582704",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2143,7 +2143,7 @@
   },
   {
     "ea": "0x582725",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2299,7 +2299,7 @@
   },
   {
     "ea": "0x58278B",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2377,7 +2377,7 @@
   },
   {
     "ea": "0x5827BD",
-    "line": "call    sub_959BC0",
+    "line": "call    NiPickContext_ctor; Verified NiPick context initializer: initializes the record array, pick flags/root pointers, and default query settings used by TESTerrainLODQuad_PickSurfacePoint.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2473,7 +2473,7 @@
   },
   {
     "ea": "0x582808",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2491,7 +2491,7 @@
   },
   {
     "ea": "0x582811",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2551,7 +2551,7 @@
   },
   {
     "ea": "0x582836",
-    "line": "call    sub_959D60",
+    "line": "call    NiPick_ExecuteAndSort; Verified NiPick query runner: invokes NiPick_ProcessSceneObject over the configured pick root, gathers hit records, sorts by the record distance field, and leaves the nearest record first in the result list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2605,7 +2605,7 @@
   },
   {
     "ea": "0x582857",
-    "line": "call    sub_4DC270",
+    "line": "call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2713,7 +2713,7 @@
   },
   {
     "ea": "0x582897",
-    "line": "call    sub_4DC270",
+    "line": "call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2797,7 +2797,7 @@
   },
   {
     "ea": "0x5828D2",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3301,13 +3301,13 @@
   },
   {
     "ea": "0x582A00",
-    "line": "mov     ecx, [esi+0BCh]; this",
+    "line": "mov     ecx, [esi+0BCh]; reference",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x582A06",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3325,19 +3325,19 @@
   },
   {
     "ea": "0x582A0F",
-    "line": "mov     ecx, [esi+0BCh]; this",
+    "line": "mov     ecx, [esi+0BCh]; reference",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x582A15",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x582A1A",
-    "line": "mov     ecx, [esi+0BCh]; this",
+    "line": "mov     ecx, [esi+0BCh]; reference",
     "mnemonic": "mov",
     "size": 6
   },
@@ -3349,7 +3349,7 @@
   },
   {
     "ea": "0x582A22",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4843,7 +4843,7 @@
   },
   {
     "ea": "0x582D55",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5053,7 +5053,7 @@
   },
   {
     "ea": "0x582DCA",
-    "line": "call    sub_4DB9D0",
+    "line": "call    sub_4DB9D0; BunkFix: plugin activation assist uses this helper as a guard to ensure the selected free marker has a resolvable BSFurnitureMarker transform before applying SetSleepState.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5074,12 +5074,6 @@
     "line": "jmp     short loc_582DE0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x582DD9",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
   },
   {
     "ea": "0x582DE0",
@@ -5365,7 +5359,7 @@
   },
   {
     "ea": "0x582E93",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5797,7 +5791,7 @@
   },
   {
     "ea": "0x582F80",
-    "line": "call    sub_4DB9D0",
+    "line": "call    sub_4DB9D0; BunkFix: plugin activation assist uses this helper as a guard to ensure the selected free marker has a resolvable BSFurnitureMarker transform before applying SetSleepState.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5815,13 +5809,13 @@
   },
   {
     "ea": "0x582F8D",
-    "line": "mov     ecx, [esi+0BCh]",
+    "line": "mov     ecx, [esi+0BCh]; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x582F93",
-    "line": "call    sub_4D7740",
+    "line": "call    TESObjectREFR_GetEffectiveDoorLock; Verified: returns this reference's ExtraLockData* payload when present; otherwise, if its ExtraTeleport has a linked door, returns that linked reference's ExtraLockData* payload; null when neither exists. Directly supported by ExtraDataList_GetLock, ExtraDataList_GetTeleport, and TeleportData_GetLinkedDoor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5839,19 +5833,19 @@
   },
   {
     "ea": "0x582FA0",
-    "line": "mov     ecx, [esi+0BCh]",
+    "line": "mov     ecx, [esi+0BCh]; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x582FA6",
-    "line": "call    sub_4D7740",
+    "line": "call    TESObjectREFR_GetEffectiveDoorLock; Verified: returns this reference's ExtraLockData* payload when present; otherwise, if its ExtraTeleport has a linked door, returns that linked reference's ExtraLockData* payload; null when neither exists. Directly supported by ExtraDataList_GetLock, ExtraDataList_GetTeleport, and TeleportData_GetLinkedDoor.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x582FAB",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -5863,7 +5857,7 @@
   },
   {
     "ea": "0x582FB1",
-    "line": "call    sub_428E70",
+    "line": "call    ExtraLockData_IsLocked; Verified runtime lock predicate: returns (ExtraLockData.flags & 0x01) != 0. ExtraDataList_Load sets this bit on accepted 12-byte and legacy 16-byte XLOC payloads; serialized flag bits are then preserved. This is a runtime normalization step.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5893,13 +5887,13 @@
   },
   {
     "ea": "0x582FC4",
-    "line": "mov     ecx, [esp+23Ch+var_210]",
+    "line": "mov     ecx, [esp+23Ch+var_210]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x582FC8",
-    "line": "call    sub_42ACD0",
+    "line": "call    ExtraLockData_GetLockLevelCategory; Verified lock-status UI path: retrieves the effective ExtraLockData, checks ExtraLockData_IsLocked, calls ExtraLockData_GetLockLevelCategory, indexes LockLevelNames, and formats `Lock '<category>' Locked/Unlocked.` This independently confirms enum order 0=VeryEasy, 1=Easy, 2=Average, 3=Hard, 4=VeryHard, 5=Impossible.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6319,7 +6313,7 @@
   },
   {
     "ea": "0x5830A6",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6343,7 +6337,7 @@
   },
   {
     "ea": "0x5830B9",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6361,13 +6355,13 @@
   },
   {
     "ea": "0x5830C2",
-    "line": "call    sub_42B460",
+    "line": "call    sub_42B460; ExtraTeleport_GetTargetCell-style helper: returns parent cell of ExtraTeleport+0 target ref if present.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5830C7",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -6379,7 +6373,7 @@
   },
   {
     "ea": "0x5830CD",
-    "line": "call    sub_42B410",
+    "line": "call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6481,7 +6475,7 @@
   },
   {
     "ea": "0x583108",
-    "line": "call    sub_41FF80",
+    "line": "call    ExtraDataList_GetPersistentCell; Returns the TESObjectCELL stored in ExtraPersistentCell, or null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7663,7 +7657,7 @@
   },
   {
     "ea": "0x5833F5",
-    "line": "call    sub_959EC0",
+    "line": "call    NiPickContext_dtor; Verified NiPick context destructor: clears/releases hit records, frees the record-pointer array, and releases its retained root object.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7741,7 +7735,7 @@
   },
   {
     "ea": "0x583422",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7843,7 +7837,7 @@
   },
   {
     "ea": "0x583458",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7963,7 +7957,7 @@
   },
   {
     "ea": "0x583496",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8917,7 +8911,7 @@
   },
   {
     "ea": "0x583696",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9043,7 +9037,7 @@
   },
   {
     "ea": "0x5836DA",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9163,7 +9157,7 @@
   },
   {
     "ea": "0x583723",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9199,7 +9193,7 @@
   },
   {
     "ea": "0x583735",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9355,7 +9349,7 @@
   },
   {
     "ea": "0x583782",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9667,7 +9661,7 @@
   },
   {
     "ea": "0x583844",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10393,7 +10387,7 @@
   },
   {
     "ea": "0x5839B6",
-    "line": "call    InputGlobals__QueryKeyboardState",
+    "line": "call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10441,7 +10435,7 @@
   },
   {
     "ea": "0x5839CC",
-    "line": "call    InputGlobals__QueryKeyboardState",
+    "line": "call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10489,7 +10483,7 @@
   },
   {
     "ea": "0x5839E2",
-    "line": "call    InputGlobals__QueryKeyboardState",
+    "line": "call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10537,7 +10531,7 @@
   },
   {
     "ea": "0x5839F8",
-    "line": "call    InputGlobals__QueryKeyboardState",
+    "line": "call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10585,7 +10579,7 @@
   },
   {
     "ea": "0x583A17",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10597,7 +10591,7 @@
   },
   {
     "ea": "0x583A1E",
-    "line": "mov     [esp+258h+var_230+4], eax",
+    "line": "mov     [esp+258h+value+4], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -10645,7 +10639,7 @@
   },
   {
     "ea": "0x583A36",
-    "line": "cmp     edi, [esp+258h+var_230+4]",
+    "line": "cmp     edi, [esp+258h+value+4]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -10819,7 +10813,7 @@
   },
   {
     "ea": "0x583A9B",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10987,31 +10981,31 @@
   },
   {
     "ea": "0x583AEF",
-    "line": "fstp    [esp+264h+var_264]; a3",
+    "line": "fstp    [esp+264h+var_264]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x583AF2",
-    "line": "push    1771h; a2",
+    "line": "push    1771h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x583AF7",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x583AFC",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x583B02",
-    "line": "call    sub_663920",
+    "line": "call    Actor_CleanupTransferredArrowProjectilesForEquippedAmmo; For the actor's currently equipped AMMO, removes all matching transferred ArrowProjectile references (+0x95 transfer marker) by calling cleanup with INT_MAX and immediate-destroy flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11065,7 +11059,7 @@
   },
   {
     "ea": "0x583B20",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11305,7 +11299,7 @@
   },
   {
     "ea": "0x583B9D",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11335,7 +11329,7 @@
   },
   {
     "ea": "0x583BB0",
-    "line": "mov     ecx, ds:0B333C4h; int",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -11389,7 +11383,7 @@
   },
   {
     "ea": "0x583BCC",
-    "line": "call    sub_664C40",
+    "line": "call    Actor_UpdateAnimationAndFirstPerson",
     "mnemonic": "call",
     "size": 5
   },
@@ -11494,5 +11488,95 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9BED10",
+    "line": "lea     ecx, [ebp+a2.dwSequence]; void *",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BED16",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BED1B",
+    "line": "lea     ecx, [ebp+var_190]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BED21",
+    "line": "jmp     NiPickContext_dtor; Verified NiPick context destructor: clears/releases hit records, frees the record-pointer array, and releases its retained root object.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BED26",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BED2A",
+    "line": "lea     eax, [edx-1F4h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BED30",
+    "line": "mov     ecx, [edx-1F8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9BED36",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BED38",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BED3D",
+    "line": "add     eax, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BED40",
+    "line": "mov     ecx, [edx-38h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BED43",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BED45",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BED4A",
+    "line": "mov     eax, offset stru_AE83AC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BED4F",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -37,7 +37,7 @@
 0x551D02: mov     ecx, esi
 0x551D04: call    eax
 0x551D06: push    edi
-0x551D07: call    FormHeapFree
+0x551D07: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x551D0C: add     esp, 4
 0x551D0F: pop     edi
 0x551D10: pop     esi

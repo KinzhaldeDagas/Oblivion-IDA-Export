@@ -1,18 +1,31 @@
 {
-  "callees_count": 4,
-  "callers_count": 119,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 182,
+  "chunks": [
+    [
+      "0x65A2C0",
+      "0x65A30D"
+    ]
+  ],
+  "chunks_sha256": "6c0c2fed7802ed58894762fad34656fd67d4e07edd347b8d7f834d69d5f33247",
+  "comment_regular": "TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
+  "comment_repeatable": "TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "MobileObject_GetCharProxy",
   "end_ea": "0x65A30D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "MobileObject_GetCharProxy",
   "segment": ".text",
   "sha256": "6c0c2fed7802ed58894762fad34656fd67d4e07edd347b8d7f834d69d5f33247",
   "size": 77,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x65A2C0",
+  "total_chunk_size": 77,
   "type": "bhkCharacterProxy *__thiscall(MobileObject *this)",
   "xrefs_from_count": 38,
   "xrefs_to_count": 182

@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
-  "callers_count": 11,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 22,
+  "chunks": [
+    [
+      "0x470750",
+      "0x47077C"
+    ]
+  ],
+  "chunks_sha256": "d5e068e41348c6a7afda28a77675ac560fb4e2d1a148a3de294dfda0324c5fd8",
+  "comment_regular": "Reads the per-slot action/state dword at ActorAnimData +0x48 + 4*normalizedSlot. Native aliases slot 5 to slot 0 and slot 6 to slot 3.",
+  "comment_repeatable": "Reads the per-slot action/state dword at ActorAnimData +0x48 + 4*normalizedSlot. Native aliases slot 5 to slot 0 and slot 6 to slot 3.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "ActorAnimData_GetSomethingFromField8Value",
+  "display_name": "ActorAnimData_GetSlotActionState",
   "end_ea": "0x47077C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "ActorAnimData_GetSomethingFromField8Value",
+  "name": "ActorAnimData_GetSlotActionState",
   "segment": ".text",
   "sha256": "d5e068e41348c6a7afda28a77675ac560fb4e2d1a148a3de294dfda0324c5fd8",
   "size": 44,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x470750",
-  "type": "int __thiscall(_DWORD *this, int)",
+  "total_chunk_size": 44,
+  "type": "int __thiscall(ActorAnimData *this, int slot)",
   "xrefs_from_count": 13,
   "xrefs_to_count": 22
 }

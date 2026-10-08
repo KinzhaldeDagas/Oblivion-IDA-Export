@@ -15,7 +15,7 @@
 0x8A93AE: call    edx
 0x8A93B0: test    eax, eax
 0x8A93B2: jz      short loc_8A93C2
-0x8A93B4: cmp     eax, offset dword_BA7D84
+0x8A93B4: cmp     eax, offset stru_BA7D84
 0x8A93B9: jz      short loc_8A93DB
 0x8A93BB: mov     eax, [eax+4]
 0x8A93BE: test    eax, eax

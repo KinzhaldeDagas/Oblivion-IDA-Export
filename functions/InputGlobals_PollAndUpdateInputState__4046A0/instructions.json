@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4046A0",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; [Controller decode 2026-07-09] Polls all enumerated joysticks, keyboard, and mouse. Joystick current DIJOYSTATE is copied to previous DIJOYSTATE before polling. InputGlobal+0x1B50/+0x1B58 are mouse double-click flags/timestamps, not controller state.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -889,6 +889,156 @@
   },
   {
     "ea": "0x404841",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x403C30",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x403C31",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x403C33",
+    "line": "lea     edx, [ecx+1B58h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x403C39",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x403C3A",
+    "line": "lea     ebx, [ebx+0]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x403C40",
+    "line": "test    byte ptr [ecx+eax+1B2Ch], 80h",
+    "mnemonic": "test",
+    "size": 8
+  },
+  {
+    "ea": "0x403C48",
+    "line": "jz      short loc_403C78",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x403C4A",
+    "line": "test    byte ptr [eax+ecx+1B40h], 80h",
+    "mnemonic": "test",
+    "size": 8
+  },
+  {
+    "ea": "0x403C52",
+    "line": "jnz     short loc_403C78",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x403C54",
+    "line": "mov     esi, ds:0B33EA0h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x403C5A",
+    "line": "mov     edi, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x403C5C",
+    "line": "sub     edi, [edx]",
+    "mnemonic": "sub",
+    "size": 2
+  },
+  {
+    "ea": "0x403C5E",
+    "line": "cmp     edi, [ecx+1B4Ch]",
+    "mnemonic": "cmp",
+    "size": 6
+  },
+  {
+    "ea": "0x403C64",
+    "line": "ja      short loc_403C76",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x403C66",
+    "line": "mov     byte ptr [eax+ecx+1B50h], 1",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x403C6E",
+    "line": "mov     dword ptr [edx], 0",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x403C74",
+    "line": "jmp     short loc_403C78",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x403C76",
+    "line": "mov     [edx], esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x403C78",
+    "line": "add     eax, 1",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x403C7B",
+    "line": "add     edx, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x403C7E",
+    "line": "cmp     eax, 7",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x403C81",
+    "line": "jle     short loc_403C40",
+    "mnemonic": "jle",
+    "size": 2
+  },
+  {
+    "ea": "0x403C83",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x403C84",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x403C85",
     "line": "retn",
     "mnemonic": "retn",
     "size": 1

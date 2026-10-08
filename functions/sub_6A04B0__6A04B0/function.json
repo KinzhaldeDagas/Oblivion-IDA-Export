@@ -1,19 +1,32 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6A04B0",
+      "0x6A053E"
+    ]
+  ],
+  "chunks_sha256": "149dfcb82305b67982b08c601dfd19471f5ab52317e030cdb265377ae587c2d3",
+  "comment_regular": "Verified (Oblivion): loads base hit-effect payload and elapsedVisualSeconds_38, then for version >=0x37 restores weaponAttachmentFlag_28, effectCode_2C, and a FormID resolved to TESBoundObject* at +0x30.",
+  "comment_repeatable": "Verified (Oblivion): loads base hit-effect payload and elapsedVisualSeconds_38, then for version >=0x37 restores weaponAttachmentFlag_28, effectCode_2C, and a FormID resolved to TESBoundObject* at +0x30.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_6A04B0",
+  "display_name": "MagicShaderHitEffect_LoadExtraData",
   "end_ea": "0x6A053E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
-  "has_pseudocode": false,
-  "name": "sub_6A04B0",
+  "has_pseudocode": true,
+  "name": "MagicShaderHitEffect_LoadExtraData",
   "segment": ".text",
   "sha256": "149dfcb82305b67982b08c601dfd19471f5ab52317e030cdb265377ae587c2d3",
   "size": 142,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6A04B0",
-  "type": "int __thiscall(_DWORD *this, int, int Dst)",
+  "total_chunk_size": 142,
+  "type": "void __thiscall(MagicShaderHitEffect *this, ActiveEffect *ownerActiveEffect, TESObjectREFR *targetReference)",
   "xrefs_from_count": 56,
   "xrefs_to_count": 1
 }

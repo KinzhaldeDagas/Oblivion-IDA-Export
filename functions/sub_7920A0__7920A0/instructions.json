@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7920A0",
-    "line": "push    ebp",
+    "line": "push    ebp; CBranch::ComputeBud. Builds a two-vertex bud direction from branch profile/parent transform and forwards final position, normal, parent direction, wind weights, and map state to MakeLeaf.",
     "mnemonic": "push",
     "size": 1
   },
@@ -259,19 +259,19 @@
   },
   {
     "ea": "0x79215F",
-    "line": "fst     [esp+100h+var_3C]",
+    "line": "fst     [esp+100h+position.z]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x792166",
-    "line": "fst     [esp+100h+var_40]",
+    "line": "fst     [esp+100h+position.y]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x79216D",
-    "line": "fst     [esp+100h+var_44]",
+    "line": "fst     [esp+100h+position.x]",
     "mnemonic": "fst",
     "size": 7
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x79219E",
-    "line": "mov     ecx, [esi+60h]",
+    "line": "mov     ecx, [esi+60h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -331,13 +331,13 @@
   },
   {
     "ea": "0x7921A5",
-    "line": "fstp    [esp+104h+var_104]; float",
+    "line": "fstp    [esp+104h+percent]; percent",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7921A8",
-    "line": "call    sub_784210",
+    "line": "call    OB_stBezierSpline_Evaluate_010201A0; Oblivion compact stBezierSpline Evaluate: requires the 500-entry vector at +0x3C, samples/interpolates its y values, maps normalized output through min@0x00/max@0x04, then adds uniform +/- variance@0x08. This executable field order overrides the differing RT4.1 header declaration order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -433,13 +433,13 @@
   },
   {
     "ea": "0x7921DD",
-    "line": "mov     ecx, offset unk_B429C9",
+    "line": "mov     ecx, offset stru_B429C9; this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x7921E2",
-    "line": "fstp    [esp+108h+var_104]; float",
+    "line": "fstp    [esp+108h+percent]; maxValue",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -451,13 +451,13 @@
   },
   {
     "ea": "0x7921EC",
-    "line": "fstp    dword ptr [esp+108h+var_10C+4]; float",
+    "line": "fstp    [esp+108h+primaryWindWeight+4]; minValue",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7921EF",
-    "line": "call    sub_78EA00",
+    "line": "call    OB_stRandom_GetUniform_010201A0; Oblivion stRandom::GetUniform. Returns minValue + (maxValue - minValue) * SIdvRandomImpl::m_cUniform.Next(). Used throughout spline, branch, frond, tree, leaf-LOD, and seed generation paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x792249",
-    "line": "fstp    dword ptr [esp+10Ch+var_EC]",
+    "line": "fstp    [esp+10Ch+normal.x]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -667,13 +667,13 @@
   },
   {
     "ea": "0x792260",
-    "line": "fstp    dword ptr [esp+10Ch+var_EC+4]",
+    "line": "fstp    [esp+10Ch+normal.y]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x792264",
-    "line": "mov     edx, dword ptr [esp+10Ch+var_EC+4]",
+    "line": "mov     edx, [esp+10Ch+normal.y]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -733,7 +733,7 @@
   },
   {
     "ea": "0x79227D",
-    "line": "fstp    [esp+10Ch+var_E4]",
+    "line": "fstp    [esp+10Ch+normal.z]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x792285",
-    "line": "mov     ecx, dword ptr [esp+10Ch+var_EC]",
+    "line": "mov     ecx, [esp+10Ch+normal.x]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -757,7 +757,7 @@
   },
   {
     "ea": "0x79228B",
-    "line": "mov     ecx, [esp+10Ch+var_E4]",
+    "line": "mov     ecx, [esp+10Ch+normal.z]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x7922A0",
-    "line": "call    sub_78F050",
+    "line": "call    OB_Mat3_AxisAngleInPlace_010201A0; In-place axis-angle rotation helper for branch transforms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -817,13 +817,13 @@
   },
   {
     "ea": "0x7922B3",
-    "line": "fstp    [esp+104h+var_104]; float",
+    "line": "fstp    [esp+104h+percent]; float",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7922B6",
-    "line": "call    sub_78EEC0",
+    "line": "call    OB_Mat3_RotateY_010201A0; Y-rotation helper used by branch/bud generation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -895,7 +895,7 @@
   },
   {
     "ea": "0x7922EC",
-    "line": "fstp    dword ptr [esp+100h+var_EC]",
+    "line": "fstp    [esp+100h+normal.x]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -907,7 +907,7 @@
   },
   {
     "ea": "0x7922F7",
-    "line": "mov     edx, dword ptr [esp+100h+var_EC]",
+    "line": "mov     edx, [esp+100h+normal.x]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -961,13 +961,13 @@
   },
   {
     "ea": "0x792317",
-    "line": "fstp    dword ptr [esp+100h+var_EC+4]",
+    "line": "fstp    [esp+100h+normal.y]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x79231B",
-    "line": "mov     eax, dword ptr [esp+100h+var_EC+4]",
+    "line": "mov     eax, [esp+100h+normal.y]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1027,13 +1027,13 @@
   },
   {
     "ea": "0x792342",
-    "line": "fstp    [esp+100h+var_E4]",
+    "line": "fstp    [esp+100h+normal.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x792346",
-    "line": "mov     ecx, [esp+100h+var_E4]",
+    "line": "mov     ecx, [esp+100h+normal.z]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1051,7 +1051,7 @@
   },
   {
     "ea": "0x792352",
-    "line": "fld     dword ptr [esp+100h+var_EC]",
+    "line": "fld     [esp+100h+normal.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1069,7 +1069,7 @@
   },
   {
     "ea": "0x79235C",
-    "line": "fld     dword ptr [esp+100h+var_EC+4]",
+    "line": "fld     [esp+100h+normal.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1087,7 +1087,7 @@
   },
   {
     "ea": "0x792366",
-    "line": "fmul    [esp+100h+var_E4]",
+    "line": "fmul    [esp+100h+normal.z]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -1135,7 +1135,7 @@
   },
   {
     "ea": "0x792384",
-    "line": "mov     [esp+100h+var_44], edx",
+    "line": "mov     [esp+100h+position.x], edx",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1171,7 +1171,7 @@
   },
   {
     "ea": "0x79239D",
-    "line": "mov     [esp+100h+var_40], eax",
+    "line": "mov     [esp+100h+position.y], eax",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1207,7 +1207,7 @@
   },
   {
     "ea": "0x7923B6",
-    "line": "mov     [esp+100h+var_3C], ecx",
+    "line": "mov     [esp+100h+position.z], ecx",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1231,7 +1231,7 @@
   },
   {
     "ea": "0x7923C5",
-    "line": "fstp    dword ptr [esp+100h+var_EC]",
+    "line": "fstp    [esp+100h+normal.x]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1255,7 +1255,7 @@
   },
   {
     "ea": "0x7923D3",
-    "line": "fstp    dword ptr [esp+100h+var_EC+4]",
+    "line": "fstp    [esp+100h+normal.y]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1279,13 +1279,13 @@
   },
   {
     "ea": "0x7923E1",
-    "line": "fstp    [esp+100h+var_E4]",
+    "line": "fstp    [esp+100h+normal.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7923E5",
-    "line": "fld     dword ptr [esp+100h+var_EC+4]",
+    "line": "fld     [esp+100h+normal.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1297,7 +1297,7 @@
   },
   {
     "ea": "0x7923F0",
-    "line": "fld     dword ptr [esp+100h+var_EC]",
+    "line": "fld     [esp+100h+normal.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1309,13 +1309,13 @@
   },
   {
     "ea": "0x7923F8",
-    "line": "fld     [esp+100h+var_E4]",
+    "line": "fld     [esp+100h+normal.z]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7923FC",
-    "line": "fst     [esp+100h+var_E0]",
+    "line": "fst     qword ptr [esp+100h+parentDirection.x]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -1447,7 +1447,7 @@
   },
   {
     "ea": "0x79243C",
-    "line": "fstp    dword ptr [esp+100h+var_EC]",
+    "line": "fstp    [esp+100h+normal.x]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1465,19 +1465,19 @@
   },
   {
     "ea": "0x792449",
-    "line": "fstp    dword ptr [esp+100h+var_EC+4]",
+    "line": "fstp    [esp+100h+normal.y]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x79244D",
-    "line": "fmul    [esp+100h+var_E0]",
+    "line": "fmul    qword ptr [esp+100h+parentDirection.x]",
     "mnemonic": "fmul",
     "size": 4
   },
   {
     "ea": "0x792451",
-    "line": "fstp    [esp+100h+var_E4]",
+    "line": "fstp    [esp+100h+normal.z]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1519,7 +1519,7 @@
   },
   {
     "ea": "0x79246E",
-    "line": "mov     dword ptr [esp+100h+var_E0], edx",
+    "line": "mov     [esp+100h+parentDirection.x], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1537,7 +1537,7 @@
   },
   {
     "ea": "0x792478",
-    "line": "mov     dword ptr [esp+100h+var_E0+4], edx",
+    "line": "mov     [esp+100h+parentDirection.y], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1561,7 +1561,7 @@
   },
   {
     "ea": "0x792487",
-    "line": "mov     [esp+100h+var_D8], ecx",
+    "line": "mov     [esp+100h+parentDirection.z], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1669,25 +1669,25 @@
   },
   {
     "ea": "0x7924B2",
-    "line": "mov     dword ptr [esp+100h+var_E0], ecx",
+    "line": "mov     [esp+100h+parentDirection.x], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7924B6",
-    "line": "mov     dword ptr [esp+100h+var_E0+4], edx",
+    "line": "mov     [esp+100h+parentDirection.y], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7924BA",
-    "line": "mov     [esp+100h+var_D8], eax",
+    "line": "mov     [esp+100h+parentDirection.z], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7924BE",
-    "line": "fld     dword ptr [esp+100h+var_E0]",
+    "line": "fld     [esp+100h+parentDirection.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1711,7 +1711,7 @@
   },
   {
     "ea": "0x7924CE",
-    "line": "fld     dword ptr [esp+100h+var_E0+4]",
+    "line": "fld     [esp+100h+parentDirection.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1735,7 +1735,7 @@
   },
   {
     "ea": "0x7924DE",
-    "line": "fld     [esp+100h+var_D8]",
+    "line": "fld     [esp+100h+parentDirection.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1765,31 +1765,31 @@
   },
   {
     "ea": "0x7924F0",
-    "line": "mov     ecx, dword ptr [esp+100h+var_EC]",
+    "line": "mov     ecx, [esp+100h+normal.x]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7924F4",
-    "line": "mov     edx, dword ptr [esp+100h+var_EC+4]",
+    "line": "mov     edx, [esp+100h+normal.y]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7924F8",
-    "line": "mov     eax, [esp+100h+var_E4]",
+    "line": "mov     eax, [esp+100h+normal.z]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7924FC",
-    "line": "mov     dword ptr [esp+100h+var_E0+4], edx",
+    "line": "mov     [esp+100h+parentDirection.y], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x792500",
-    "line": "fld     dword ptr [esp+100h+var_E0+4]",
+    "line": "fld     [esp+100h+parentDirection.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1801,19 +1801,19 @@
   },
   {
     "ea": "0x792508",
-    "line": "mov     dword ptr [esp+100h+var_E0], ecx",
+    "line": "mov     [esp+100h+parentDirection.x], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79250C",
-    "line": "fld     dword ptr [esp+100h+var_E0]",
+    "line": "fld     [esp+100h+parentDirection.x]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x792510",
-    "line": "mov     [esp+100h+var_D8], eax",
+    "line": "mov     [esp+100h+parentDirection.z], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1825,7 +1825,7 @@
   },
   {
     "ea": "0x792518",
-    "line": "fld     [esp+100h+var_D8]",
+    "line": "fld     [esp+100h+parentDirection.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1915,7 +1915,7 @@
   },
   {
     "ea": "0x792545",
-    "line": "mov     ecx, [ebp+arg_1C]",
+    "line": "mov     ecx, [ebp+leaves]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1927,7 +1927,7 @@
   },
   {
     "ea": "0x79254A",
-    "line": "mov     edx, [ebp+arg_24]",
+    "line": "mov     edx, [ebp+primaryWindGroup]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1939,13 +1939,13 @@
   },
   {
     "ea": "0x79254F",
-    "line": "push    ecx; int",
+    "line": "push    ecx; leaves",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x792550",
-    "line": "push    edx; int",
+    "line": "push    edx; primaryWindGroup",
     "mnemonic": "push",
     "size": 1
   },
@@ -1957,19 +1957,19 @@
   },
   {
     "ea": "0x792552",
-    "line": "lea     eax, [esp+10Ch+var_E0]",
+    "line": "lea     eax, [esp+10Ch+parentDirection]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x792556",
-    "line": "lea     ecx, [esp+10Ch+var_EC]",
+    "line": "lea     ecx, [esp+10Ch+normal]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x79255A",
-    "line": "lea     edx, [esp+10Ch+var_44]",
+    "line": "lea     edx, [esp+10Ch+position]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -1999,7 +1999,7 @@
   },
   {
     "ea": "0x79256F",
-    "line": "fstp    dword ptr [esp+10Ch+var_E0]",
+    "line": "fstp    [esp+10Ch+parentDirection.x]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2017,7 +2017,7 @@
   },
   {
     "ea": "0x792579",
-    "line": "fstp    dword ptr [esp+10Ch+var_E0+4]",
+    "line": "fstp    [esp+10Ch+parentDirection.y]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2029,7 +2029,7 @@
   },
   {
     "ea": "0x792581",
-    "line": "fstp    [esp+10Ch+var_D8]",
+    "line": "fstp    [esp+10Ch+parentDirection.z]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2041,13 +2041,13 @@
   },
   {
     "ea": "0x792588",
-    "line": "fstp    dword ptr [esp+10Ch+var_10C]; float",
+    "line": "fstp    [esp+10Ch+primaryWindWeight]; primaryWindWeight",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x79258B",
-    "line": "push    eax; int",
+    "line": "push    eax; parentDirection",
     "mnemonic": "push",
     "size": 1
   },
@@ -2059,13 +2059,13 @@
   },
   {
     "ea": "0x79258F",
-    "line": "push    ecx; int",
+    "line": "push    ecx; normal",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x792590",
-    "line": "push    ebx; int",
+    "line": "push    ebx; parentBranch",
     "mnemonic": "push",
     "size": 1
   },
@@ -2077,25 +2077,25 @@
   },
   {
     "ea": "0x792592",
-    "line": "fstp    [esp+11Ch+var_11C]; float",
+    "line": "fstp    [esp+11Ch+percentAlongParent]; percentAlongParent",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x792595",
-    "line": "push    edx; int",
+    "line": "push    edx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x792596",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x792598",
-    "line": "call    sub_7919D0",
+    "line": "call    OB_CBranch_MakeLeaf_010201A0; Only direct MakeLeaf call. ComputeBud passes its a7/fPercentOfParent argument as percentAlongParent and the current CBranch (`this`) as parentBranch; these are the inputs to the recursive/cubic dimming formula.",
     "mnemonic": "call",
     "size": 5
   },

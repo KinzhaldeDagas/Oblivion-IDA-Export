@@ -1,19 +1,32 @@
 {
-  "callees_count": 60,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x7905D0",
+      "0x790925"
+    ]
+  ],
+  "chunks_sha256": "1eb9b92bc42b442666f0a20da907785a3ae39a81e4a519a1db37bf36dfd3a273",
+  "comment_regular": "Compiler/container partition helper used only by the branch-pointer introsort at 0x790C10. Partitions OB_CBranch* iterators into less/equal/greater regions by OB_CBranch+0x2C fuzzyBranchVolume and returns equal-range boundaries through equalRangeOut.\n\nCompiler/container partition helper used only by the branch-pointer introsort at 0x790C10. Partitions OB_CBranch* iterators into less/equal/greater regions by OB_CBranch+0x2C fuzzyBranchVolume and returns the equal-range boundaries through equalRangeOut.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7905D0",
+  "display_name": "OB_BranchPtrVector_PartitionByFuzzyVolume_010201A0",
   "end_ea": "0x790925",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7905D0",
+  "name": "OB_BranchPtrVector_PartitionByFuzzyVolume_010201A0",
   "segment": ".text",
   "sha256": "1eb9b92bc42b442666f0a20da907785a3ae39a81e4a519a1db37bf36dfd3a273",
   "size": 853,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7905D0",
-  "type": "int **__cdecl(int **, int *, unsigned int)",
+  "total_chunk_size": 853,
+  "type": "OB_CBranch_010201A0 ***__cdecl(OB_CBranch_010201A0 ***equalRangeOut, OB_CBranch_010201A0 **begin, OB_CBranch_010201A0 **end)",
   "xrefs_from_count": 385,
   "xrefs_to_count": 1
 }

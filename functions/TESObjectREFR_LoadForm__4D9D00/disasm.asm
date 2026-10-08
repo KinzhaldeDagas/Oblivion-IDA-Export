@@ -1,4 +1,4 @@
-0x4D9D00: push    ebp
+0x4D9D00: push    ebp; Authoritative common placed-reference loader used by TESObjectREFR, Character/ACHR, and Creature/ACRE vtables (LoadForm slots at 0xA46C60, 0xA6FCB8, 0xA71110; matching SaveFormChunks slots at +8). Replays recognized chunks in stream order and forwards common extras to ExtraDataList_Load; there is no REFR-vs-ACHR/ACRE filter here.
 0x4D9D01: mov     ebp, esp
 0x4D9D03: sub     esp, 28h
 0x4D9D06: mov     eax, ds:0B30AACh
@@ -16,7 +16,7 @@
 0x4D9D21: mov     ecx, ebx
 0x4D9D23: mov     [ebp+var_5], 0
 0x4D9D27: mov     dword ptr [ebp+ArgList], edi
-0x4D9D2A: call    TESFile_InitializeFormFromRecord
+0x4D9D2A: call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.
 0x4D9D2F: push    edi; a2
 0x4D9D30: mov     ecx, esi; this
 0x4D9D32: call    TESForm_SetIsLinked
@@ -26,7 +26,7 @@
 0x4D9D3F: jz      short loc_4D9D80
 0x4D9D41: lea     edi, [esi+44h]
 0x4D9D44: mov     ecx, edi
-0x4D9D46: call    sub_41FF80
+0x4D9D46: call    ExtraDataList_GetPersistentCell; Returns the TESObjectCELL stored in ExtraPersistentCell, or null.
 0x4D9D4B: push    1
 0x4D9D4D: mov     ecx, edi
 0x4D9D4F: mov     ebx, eax
@@ -44,7 +44,6 @@
 0x4D9D70: sbb     eax, eax
 0x4D9D72: neg     eax
 0x4D9D74: jmp     loc_4DA088
-0x4D9D79: align 10h
 0x4D9D80: mov     ecx, ebx
 0x4D9D82: call    TESFile_GetChunkType
 0x4D9D87: cmp     eax, edi
@@ -76,7 +75,7 @@
 0x4D9DF5: lea     ecx, [ebp+Dst]
 0x4D9DF8: push    ecx; Dst
 0x4D9DF9: mov     ecx, ebx; a1
-0x4D9DFB: call    TESFile_GetChunkData
+0x4D9DFB: call    TESFile_GetChunkData; DATA bounded read max 24: size 0 is a no-op; short chunks prefix-overlay the shared uninitialized/local prior buffer; oversized chunks copy 23 bytes and force byte 23 to zero. Each unguarded DATA copies all 24 scratch bytes to the reference transform.
 0x4D9E00: mov     edx, dword ptr [ebp+Dst]
 0x4D9E03: mov     eax, [ebp+var_24]
 0x4D9E06: mov     ecx, [ebp+var_20]
@@ -105,7 +104,7 @@
 0x4D9E63: push    200h; a4
 0x4D9E68: push    edi; Dst
 0x4D9E69: mov     ecx, ebx; a1
-0x4D9E6B: call    TESFile_GetChunkData
+0x4D9E6B: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4D9E70: mov     edx, [esi]
 0x4D9E72: mov     eax, [edx+0D8h]
 0x4D9E78: push    edi
@@ -114,15 +113,15 @@
 0x4D9E7D: xor     edi, edi
 0x4D9E7F: jmp     loc_4DA021
 0x4D9E84: cmp     eax, 454D414Eh
-0x4D9E89: jnz     loc_4DA008
+0x4D9E89: jnz     loc_4DA008; NAME replay path. The 4-byte scratch accumulator was zeroed once at loader entry and persists across repeated NAME chunks; bounded short reads overlay its prefix, oversized reads force the high byte to zero, and every occurrence performs lookup/store. Any lookup/cast failure latches DATA suppression.
 0x4D9E8F: lea     ecx, [ebp+ArgList]
 0x4D9E92: push    ecx
 0x4D9E93: mov     ecx, ebx
-0x4D9E95: call    TESFile_GetChunkData4
+0x4D9E95: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x4D9E9A: lea     edx, [ebp+ArgList]
 0x4D9E9D: push    ebx; a2
 0x4D9E9E: push    edx; a1
-0x4D9E9F: call    TESForm_ResolveFormID
+0x4D9E9F: call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.
 0x4D9EA4: mov     ecx, dword ptr [ebp+ArgList]
 0x4D9EA7: add     esp, 8
 0x4D9EAA: lea     eax, [ebp+var_10]
@@ -172,7 +171,7 @@
 0x4D9F52: lea     edx, [esi+38h]
 0x4D9F55: push    edx
 0x4D9F56: mov     ecx, ebx
-0x4D9F58: call    TESFile_GetChunkData4
+0x4D9F58: call    TESFile_GetChunkData4; XSCL bounded max-4 read targets the existing object scale directly. Omitted/empty chunks preserve it; short chunks overlay a byte prefix; oversized chunks copy 3 bytes and zero the high byte; repeated chunks apply in order.
 0x4D9F5D: jmp     loc_4DA021
 0x4D9F62: cmp     eax, 50534558h
 0x4D9F67: jg      short loc_4D9FCC
@@ -187,9 +186,9 @@
 0x4D9F8E: jz      loc_4DA017
 0x4D9F94: cmp     eax, 4D414E4Fh
 0x4D9F99: jnz     short loc_4DA008
-0x4D9F9B: push    8
-0x4D9F9D: lea     ecx, [esi+44h]
-0x4D9FA0: call    sub_423DF0
+0x4D9F9B: push    8; mask
+0x4D9F9D: lea     ecx, [esi+44h]; this
+0x4D9FA0: call    ExtraDataList_SetActionFlagBits; ONAM is an empty semantic marker; payload is never read. It ORs action flag bit 0x08 into existing flags, or into default 1 when creating ExtraAction. Repeated ONAM is idempotent. Ordering matters: later XACT replaces the flag byte and can clear 0x08; later ONAM restores it.
 0x4D9FA5: jmp     short loc_4DA021
 0x4D9FA7: cmp     eax, 4D434C58h
 0x4D9FAC: jmp     short loc_4DA006
@@ -224,10 +223,10 @@
 0x4DA00D: call    PrintError
 0x4DA012: add     esp, 4
 0x4DA015: jmp     short loc_4DA021
-0x4DA017: push    esi
-0x4DA018: push    ebx
-0x4DA019: lea     ecx, [esi+44h]
-0x4DA01C: call    ExtraDataList_Load
+0x4DA017: push    esi; Shared REFR/ACHR/ACRE dispatch also forwards XUSE, XPSL, XPSN, and XTIM to ExtraDataList_Load; no placed-kind gate excludes them.
+0x4DA018: push    ebx; tesFile
+0x4DA019: lea     ecx, [esi+44h]; this
+0x4DA01C: call    ExtraDataList_Load; Common ExtraDataList single-chunk dispatcher reached by REFR/ACHR/ACRE. TESFile_GetChunkData(max) semantics at 0x450C20: length 0 leaves destination unchanged; <=max copies a prefix only; >max copies max-1 and writes a terminal zero. Each explicitly zeroed scratch therefore gives deterministic malformed-width behavior; singleton setters make repeats last-wins/remove as noted per branch.
 0x4DA021: mov     ecx, ebx
 0x4DA023: call    TESFile_GetNextChunk
 0x4DA028: test    al, al
@@ -248,10 +247,10 @@
 0x4DA056: test    dl, 1
 0x4DA059: jnz     short loc_4DA080
 0x4DA05B: mov     ecx, esi; this
-0x4DA05D: call    Actor__GetProcessLevel
+0x4DA05D: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x4DA062: push    eax
 0x4DA063: push    esi
-0x4DA064: mov     ecx, offset ActorProcessManager_ptr
+0x4DA064: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x4DA069: call    sub_674550
 0x4DA06E: mov     ecx, [esi+58h]
 0x4DA071: cmp     ecx, edi

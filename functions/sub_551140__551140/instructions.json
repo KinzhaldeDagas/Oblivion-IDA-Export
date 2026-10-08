@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x551140",
-    "line": "cmp     byte ptr ds:0B39D80h, 0",
+    "line": "cmp     byte ptr ds:0B39D80h, 0; Generic precache helper: takes caller-supplied shader definition id and precaches one geometry. Dynamic shader id path, not a SpeedTree tree-builder-specific frond consumer.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x551164",
-    "line": "call    GetShaderDefinition",
+    "line": "call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x5511C7",
-    "line": "jmp     sub_769030",
+    "line": "jmp     sub_769030; MoonSugarEffect decode: BeginScene prepack flush. Iterates renderer PrePackObjects, locks/stages shared VB ranges, uses declaration/default/skinned packers, rebuilds IBs, unlocks, clears the map, and heap-frees temporary entries. Plugin mask passes should not borrow this renderer-owned queue/lifetime.",
     "mnemonic": "jmp",
     "size": 5
   },

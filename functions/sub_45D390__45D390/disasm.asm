@@ -34,7 +34,7 @@
 0x45D3F3: test    bp, bp
 0x45D3F6: jz      short loc_45D446
 0x45D3F8: push    offset aTessaveloadg_1; lpCriticalSection
-0x45D3FD: mov     ecx, offset stru_B33B80
+0x45D3FD: mov     ecx, offset unk_B33B80
 0x45D402: call    NiEnterCriticalSection
 0x45D407: push    ebp
 0x45D408: mov     ecx, edi
@@ -47,13 +47,13 @@
 0x45D41E: push    ebp
 0x45D41F: lea     ecx, [esi+44h]
 0x45D422: mov     dword ptr [edi+14h], 0
-0x45D429: call    sub_4210E0
+0x45D429: call    ExtraDataList_SetSavedAttachedAnimation; Gets/creates Oblivion ExtraSavedMovementData and stores the saved-attached-animation pointer; replacement is diagnosed at runtime.
 0x45D42E: mov     edx, [esi]
 0x45D430: mov     eax, [edx+40h]
 0x45D433: push    1000000h
 0x45D438: mov     ecx, esi
 0x45D43A: call    eax
-0x45D43C: mov     ecx, offset stru_B33B80; lpCriticalSection
+0x45D43C: mov     ecx, offset unk_B33B80; lpCriticalSection
 0x45D441: call    NiLeaveCriticalSection_0
 0x45D446: pop     ebp
 0x45D447: pop     edi

@@ -17,7 +17,6 @@
 0x4475B4: push    edi
 0x4475B5: jmp     short loc_4475C4
 0x4475B7: jmp     short loc_4475C0
-0x4475B9: align 10h
 0x4475C0: mov     eax, [esp+28h+var_18]
 0x4475C4: mov     ecx, [ebx+0C4h]
 0x4475CA: mov     ecx, [ecx+eax*4]
@@ -34,9 +33,9 @@
 0x4475EF: jz      short loc_447613
 0x4475F1: test    ebx, ebx
 0x4475F3: jz      short loc_447619
-0x4475F5: push    offset EmptyString; Str2
-0x4475FA: push    offset EmptyString; Str1
-0x4475FF: call    __strcmp
+0x4475F5: push    offset EmptyString; right
+0x4475FA: push    offset EmptyString; left
+0x4475FF: call    CRT_StricmpLocaleDispatch
 0x447604: mov     ecx, [esp+30h+var_C]
 0x447608: add     esp, 8
 0x44760B: test    eax, eax

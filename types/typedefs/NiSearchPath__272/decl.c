@@ -1,1 +1,1 @@
-NiSearchPath
+struct NiSearchPath;

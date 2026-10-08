@@ -1,136 +1,216 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "WaterManager",
+  "definition": "struct WaterManager\n{\nNiCamera *Camera;\nBSRenderedTexture *ReflectionMap;\nBSRenderedTexture *BaseHeightMap;\nBSRenderedTexture *DisplacementMap;\nBSRenderedTexture *HeightMap;\nBSRenderedTexture *BaseDisplacementMap;\nfloat unk18;\nUInt32 unk1C;\nTESWaterForm *WaterForm1;\nTESWaterForm *WaterForm2;\nUInt8 unk28;\nUInt8 unk29;\nUInt8 unk2A;\nUInt8 unk2B;\nfloat unk2C;\nUInt32 unk30;\nUInt32 unk34;\nUInt32 unk38;\nUInt32 unk3C;\nUInt32 unk40;\nfloat WaterHeight;\n}\n",
   "id": 18374686479671988263,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Camera",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "NiCamera *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ReflectionMap",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "BSRenderedTexture *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "BaseHeightMap",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "BSRenderedTexture *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DisplacementMap",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "BSRenderedTexture *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "HeightMap",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "BSRenderedTexture *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "BaseDisplacementMap",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "BSRenderedTexture *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk18",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk1C",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "WaterForm1",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "TESWaterForm *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "WaterForm2",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "TESWaterForm *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk28",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 1
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk29",
       "offset": 41,
       "offset_hex": "0x29",
-      "size": 1
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk2A",
       "offset": 42,
-      "offset_hex": "0x2a",
-      "size": 1
+      "offset_hex": "0x2A",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk2B",
       "offset": 43,
-      "offset_hex": "0x2b",
-      "size": 1
+      "offset_hex": "0x2B",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk2C",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk30",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk34",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk38",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk3C",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk40",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "WaterHeight",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 4
+      "size": 4,
+      "type": "float"
     }
   ],
   "name": "WaterManager",
+  "ordinal": 9416,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 72
 }

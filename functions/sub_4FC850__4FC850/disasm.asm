@@ -53,11 +53,11 @@
 0x4FC8D9: push    edx; Src
 0x4FC8DA: push    eax; int
 0x4FC8DB: mov     ecx, esi
-0x4FC8DD: call    sub_4F9DF0
+0x4FC8DD: call    Script_SetCompiledData; Replace Script compiled data: free old pointer at Script+0x30, clear it, set ScriptInfo compiledSize at +0x20, then allocate/zero/copy exactly Size bytes when nonzero. A zero-size call clears compiled storage and size.
 0x4FC8E2: mov     ecx, esi
-0x4FC8E4: call    sub_4FC730
+0x4FC8E4: call    Script_ClearReferenceList; Hot Reload OBSE decode: script ref-list cleanup. Clears executing-script cache if needed, frees each RefVariable name buffer and payload, removes extra list nodes.
 0x4FC8E9: mov     ecx, esi
-0x4FC8EB: call    sub_4FC6C0
+0x4FC8EB: call    Script_ClearVariableList; Hot Reload OBSE decode: script variable-list cleanup. Frees each VariableInfo name buffer and payload, removes extra list nodes, leaves script->varList empty.
 0x4FC8F0: cmp     dword ptr [esi+20h], 0
 0x4FC8F4: jz      short loc_4FC915
 0x4FC8F6: push    esi

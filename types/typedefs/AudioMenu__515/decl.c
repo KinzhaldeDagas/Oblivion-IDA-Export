@@ -1,1 +1,1 @@
-AudioMenu
+struct AudioMenu;

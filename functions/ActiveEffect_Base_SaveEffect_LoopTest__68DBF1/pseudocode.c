@@ -13,8 +13,7 @@ int __usercall ActiveEffect_Base_SaveEffect_::LoopTest@<eax>(
         int a12,
         char Src)
 {
-  if ( a3[1] || *a3 )
-    return ActiveEffect_Base_SaveEffect_::LoopBody(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, Src);
-  else
-    return ActiveEffect_Base_SaveEffect_::LoopExit(a4, a5, a6, a7, a8, a9, a10, a11, a12);
+  if ( !a3[1] && !*a3 ) /*0x68dbfa*/
+    JUMPOUT(0x68DC34); /*0x68dc34*/
+  return ActiveEffect_Base_SaveEffect_::LoopBody(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, Src);
 }

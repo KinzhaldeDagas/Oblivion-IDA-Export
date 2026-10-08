@@ -1,19 +1,32 @@
 {
-  "callees_count": 8,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x796260",
+      "0x7962E1"
+    ]
+  ],
+  "chunks_sha256": "287df41e9eea169f5ca2c0e13b5cda14e79dad5bd6e5b77973a0f9211cca59e5",
+  "comment_regular": "Oblivion CIndexedGeometry::AddVertexCoord. Appends xyz; when CPU wind is active it also preserves xyz in originalVertexCoords for later deformation.\n[2026-10-05 supplemental roughness] CPU wind (vertexWeighting !=0, windMethod==1) appends duplicate originals at geometry vector+78 as well as coords+68. Post-ring displacement MUST update both spans; otherwise later CPU wind discards roughness.",
+  "comment_repeatable": "Oblivion CIndexedGeometry::AddVertexCoord. Appends xyz; when CPU wind is active it also preserves xyz in originalVertexCoords for later deformation.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_796260",
+  "display_name": "OB_CIndexedGeometry_AddVertexCoord_010201A0",
   "end_ea": "0x7962E1",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_796260",
+  "name": "OB_CIndexedGeometry_AddVertexCoord_010201A0",
   "segment": ".text",
   "sha256": "287df41e9eea169f5ca2c0e13b5cda14e79dad5bd6e5b77973a0f9211cca59e5",
   "size": 129,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x796260",
-  "type": "unsigned int **__thiscall(char *this, int *)",
+  "total_chunk_size": 129,
+  "type": "void __thiscall(OB_CIndexedGeometry_010201A0 *this, const float *coord)",
   "xrefs_from_count": 52,
   "xrefs_to_count": 4
 }

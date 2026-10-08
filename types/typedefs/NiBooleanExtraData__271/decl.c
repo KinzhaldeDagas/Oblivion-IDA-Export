@@ -1,1 +1,1 @@
-NiBooleanExtraData
+struct NiBooleanExtraData;

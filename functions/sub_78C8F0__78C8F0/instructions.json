@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x78C8F0",
-    "line": "push    ecx",
+    "line": "push    ecx; Oblivion collision-vector insert-one wrapper: converts the checked iterator to a 0x1C-record index, delegates to collision insert-fill(count=1), and returns the relocated iterator.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x78C8F3",
-    "line": "mov     ebp, [esp+0Ch+arg_8]",
+    "line": "mov     ebp, [esp+0Ch+position.current]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x78C91E",
-    "line": "mov     ebx, [esp+14h+arg_4]",
+    "line": "mov     ebx, [esp+14h+position.owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x78C92F",
-    "line": "mov     ebx, [esp+14h+arg_4]",
+    "line": "mov     ebx, [esp+14h+position.owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -253,19 +253,19 @@
   },
   {
     "ea": "0x78C957",
-    "line": "mov     ecx, [esp+14h+arg_C]",
+    "line": "mov     ecx, [esp+14h+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x78C95B",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78C95C",
-    "line": "push    1",
+    "line": "push    1; count",
     "mnemonic": "push",
     "size": 2
   },
@@ -277,19 +277,19 @@
   },
   {
     "ea": "0x78C95F",
-    "line": "push    ebx",
+    "line": "push    ebx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78C960",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x78C962",
-    "line": "call    sub_78ADE0",
+    "line": "call    OB_stVector_CollisionObject_InsertFill_010201A0; Oblivion vector<collision-record>::insert(position,count,value): authoritative 0x1C record stride, checked maximum 0x09249249, 1.5x growth, alias-safe in-place/reallocation paths, and FormHeap ownership.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x78C983",
-    "line": "mov     [esp+14h+arg_8], ebx",
+    "line": "mov     [esp+14h+position.current], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x78C993",
-    "line": "mov     eax, [esp+14h+arg_0]",
+    "line": "mov     eax, [esp+14h+result]",
     "mnemonic": "mov",
     "size": 4
   },

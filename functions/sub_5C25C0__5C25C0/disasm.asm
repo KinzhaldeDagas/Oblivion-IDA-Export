@@ -16,12 +16,12 @@
 0x5C25F2: jz      loc_5C26AB
 0x5C25F8: call    sub_5C1100
 0x5C25FD: shl     eax, 4
-0x5C2600: cmp     ds:dword_B3B44C[eax], 0
+0x5C2600: cmp     dword ptr ds:unk_B3B44C[eax], 0
 0x5C2607: jz      short loc_5C2655
 0x5C2609: push    ebp
 0x5C260A: call    sub_5C1100
 0x5C260F: shl     eax, 4
-0x5C2612: mov     eax, ds:dword_B3B444[eax]
+0x5C2612: mov     eax, dword ptr ds:unk_B3B444[eax]
 0x5C2618: mov     ebp, [eax+8]
 0x5C261B: test    ebp, ebp
 0x5C261D: jz      short loc_5C2654
@@ -45,7 +45,7 @@
 0x5C2654: pop     ebp
 0x5C2655: call    sub_5C1100
 0x5C265A: shl     eax, 4
-0x5C265D: cmp     ds:dword_B3B44C[eax], ebx
+0x5C265D: cmp     dword ptr ds:unk_B3B44C[eax], ebx
 0x5C2663: jge     short loc_5C2676
 0x5C2665: mov     ecx, [esp+10h+var_4]
 0x5C2669: push    edi
@@ -56,15 +56,15 @@
 0x5C2676: call    sub_5C1100
 0x5C267B: mov     ecx, eax
 0x5C267D: shl     ecx, 4
-0x5C2680: add     ecx, offset quickKeyList_ptr
-0x5C2686: call    NiTPointerList__FreeAllNodes
+0x5C2680: add     ecx, 0B3B440h
+0x5C2686: call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.
 0x5C268B: lea     eax, [esp+10h+arg_0]
 0x5C268F: push    eax
 0x5C2690: call    sub_5C1100
 0x5C2695: mov     ecx, eax
 0x5C2697: shl     ecx, 4
-0x5C269A: add     ecx, offset quickKeyList_ptr
-0x5C26A0: call    sub_5B1E20
+0x5C269A: add     ecx, 0B3B440h
+0x5C26A0: call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.
 0x5C26A5: mov     ds:0B3B43Ch, bl
 0x5C26AB: call    sub_5C1100
 0x5C26B0: mov     ecx, ds:0B333C4h

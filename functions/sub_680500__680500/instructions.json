@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x680500",
-    "line": "movzx   ecx, word ptr [ecx]",
+    "line": "movzx   ecx, word ptr [ecx]; Verified: Sets or clears bit 0x02 at byte +0x0C of the 0x10-byte state record selected by the node's 16-bit index. The route loop sets it after expanding a popped node, so its expanded/closed-set role is Probable; the full record layout remains Unknown.",
     "mnemonic": "movzx",
     "size": 3
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x680505",
-    "line": "cmp     [esp+arg_0], al",
+    "line": "cmp     [esp+expanded], al",
     "mnemonic": "cmp",
     "size": 4
   },

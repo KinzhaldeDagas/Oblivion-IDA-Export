@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x77B610",
+      "0x77B668"
+    ]
+  ],
+  "chunks_sha256": "657d1ede8b59016a4c8a6dafb55e43dd4193d2b9ac60b6cf8490dc6ca5add569",
+  "comment_regular": "Tracked NiDX9 sampler setter accepts only D3DSAMP_ADDRESSU/V and MAG/MIN/MIPFILTER (states 1,2,5,6,7). State 8 MIPMAPLODBIAS is outside this cache, so a direct leaked bias is not self-healed by the leaf stage.",
+  "comment_repeatable": "Tracked NiDX9 sampler setter accepts only D3DSAMP_ADDRESSU/V and MAG/MIN/MIPFILTER (states 1,2,5,6,7). State 8 MIPMAPLODBIAS is outside this cache, so a direct leaked bias is not self-healed by the leaf stage.\nDX11 inherited-state audit 2026-09-30: physical sampler pair atD20+40*sampler+8*WORD[B427B0+2*state]. Slot>=5 ignores the request; equal cached values suppress the device call. Ordinary profile captures16 sampler rows. Render/TSS save-on-equal differs from sampler save-only-on-change; current compiled sampler programs never request savePrevious.\nDX11 state-handoff audit 2026-10-01: receiver is a render-state manager, not NiDX9Renderer. Shared entries appear in NiDX9RenderState vtable A8A9F4 and NiD3DRenderState vtable A8B2AC. State/value arguments are DWORDs, not pointers. Return register is not a uniform HRESULT (equal cached paths can omit the device call); do not infer backend success from it. Preserve physical current/saved cache words separately from actual logical device state and guard runtime enum-map values before native commit.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "SetSamplerState",
+  "display_name": "OB_NiDX9RenderState_SetTrackedSamplerState_010201A0",
   "end_ea": "0x77B668",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "SetSamplerState",
+  "name": "OB_NiDX9RenderState_SetTrackedSamplerState_010201A0",
   "segment": ".text",
   "sha256": "657d1ede8b59016a4c8a6dafb55e43dd4193d2b9ac60b6cf8490dc6ca5add569",
   "size": 88,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x77B610",
-  "type": "NiRenderStateSetting *__fastcall(NiDX9RenderState *, int, D3DSAMPLERSTATETYPE, D3DSAMPLERSTATETYPE, DWORD, char)",
+  "total_chunk_size": 88,
+  "type": "int __thiscall(void *this, unsigned int sampler, unsigned int state, unsigned int value, unsigned __int8 savePrevious)",
   "xrefs_from_count": 34,
   "xrefs_to_count": 1
 }

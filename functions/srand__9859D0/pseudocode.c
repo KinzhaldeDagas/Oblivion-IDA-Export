@@ -1,4 +1,4 @@
 void __cdecl srand(unsigned int Seed)
 {
-  *(_DWORD *)(_getptd() + 0x14) = Seed;
+  _getptd()[5] = Seed; /*0x9859d9*/
 }

@@ -1,9 +1,9 @@
-0x4D9070: push    esi
+0x4D9070: push    esi; Verified modified-state propagation: if this reference has lock data, calls TESFormVtbl::MarkAsModified with mask 0x40; otherwise, if its linked-door chain has lock data, marks that linked-door reference with the same mask.
 0x4D9071: mov     esi, ecx
 0x4D9073: push    edi
 0x4D9074: lea     edi, [esi+44h]
 0x4D9077: mov     ecx, edi; this
-0x4D9079: call    sub_41E690
+0x4D9079: call    ExtraDataList_GetLock; Verified: looks up BSExtraData type 0x31 (ExtraLock) and returns its ExtraLockData* payload at wrapper offset +0x0C, or null. The returned value is the 12-byte lock-data structure, not the ExtraLock wrapper.
 0x4D907E: test    eax, eax
 0x4D9080: jz      short loc_4D9090
 0x4D9082: mov     eax, [esi]
@@ -19,18 +19,18 @@
 0x4D9097: mov     esi, eax
 0x4D9099: test    esi, esi
 0x4D909B: jz      short loc_4D90CD
-0x4D909D: mov     ecx, esi
-0x4D909F: call    sub_42B410
+0x4D909D: mov     ecx, esi; this
+0x4D909F: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x4D90A4: test    eax, eax
 0x4D90A6: jz      short loc_4D90CD
-0x4D90A8: mov     ecx, esi
-0x4D90AA: call    sub_42B410
+0x4D90A8: mov     ecx, esi; this
+0x4D90AA: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x4D90AF: lea     ecx, [eax+44h]; this
-0x4D90B2: call    sub_41E690
+0x4D90B2: call    ExtraDataList_GetLock; Verified: looks up BSExtraData type 0x31 (ExtraLock) and returns its ExtraLockData* payload at wrapper offset +0x0C, or null. The returned value is the 12-byte lock-data structure, not the ExtraLock wrapper.
 0x4D90B7: test    eax, eax
 0x4D90B9: jz      short loc_4D90CD
-0x4D90BB: mov     ecx, esi
-0x4D90BD: call    sub_42B410
+0x4D90BB: mov     ecx, esi; this
+0x4D90BD: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x4D90C2: mov     edx, [eax]
 0x4D90C4: mov     ecx, eax
 0x4D90C6: mov     eax, [edx+40h]

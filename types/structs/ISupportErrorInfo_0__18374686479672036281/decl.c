@@ -1,1 +1,1 @@
-ISupportErrorInfo_0
+typedef ISupportErrorInfo ISupportErrorInfo_0;

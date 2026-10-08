@@ -2,10 +2,10 @@
 0x6DE0D1: mov     esi, ecx
 0x6DE0D3: mov     eax, [esi]
 0x6DE0D5: push    eax
-0x6DE0D6: call    FormHeapFree
+0x6DE0D6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6DE0DB: mov     ecx, [esi+4]
 0x6DE0DE: push    ecx
-0x6DE0DF: call    FormHeapFree
+0x6DE0DF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6DE0E4: mov     esi, [esi+8]
 0x6DE0E7: add     esp, 8
 0x6DE0EA: test    esi, esi

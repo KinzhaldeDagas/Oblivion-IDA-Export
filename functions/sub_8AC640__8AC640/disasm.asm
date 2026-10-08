@@ -1,4 +1,4 @@
-0x8AC640: sub     esp, 8
+0x8AC640: sub     esp, 8; TES4 authoritative: searches existing manifold entries for a candidate 0x30-byte contact with match error < 0.1; returns index or 0xFFFFFFFF.
 0x8AC643: push    ebx
 0x8AC644: push    ebp
 0x8AC645: mov     ebx, ecx
@@ -8,15 +8,15 @@
 0x8AC64E: xor     esi, esi
 0x8AC650: test    ebp, ebp
 0x8AC652: mov     [esp+14h+var_4], eax
-0x8AC656: mov     [esp+14h+var_8], 3DCCCCCDh
+0x8AC656: mov     [esp+14h+var_8], 3DCCCCCDh; Contact-match threshold is 0.1; entries above this are treated as new contacts.
 0x8AC65E: jle     short loc_8AC695
 0x8AC660: push    edi
 0x8AC661: mov     edi, [ebx+74h]
-0x8AC664: mov     eax, [esp+18h+arg_0]
-0x8AC668: push    edi
-0x8AC669: push    eax
-0x8AC66A: mov     ecx, ebx
-0x8AC66C: call    sub_8ABF70
+0x8AC664: mov     eax, [esp+18h+candidate]
+0x8AC668: push    edi; manifoldEntry
+0x8AC669: push    eax; candidate
+0x8AC66A: mov     ecx, ebx; this
+0x8AC66C: call    hkpCharacterProxy_ComputeContactMatchError; TES4 authoritative: computes contact-match error from normal difference, contact plane/fraction difference, and resolved collidable-space point difference.
 0x8AC671: fcom    [esp+18h+var_8]
 0x8AC675: fnstsw  ax
 0x8AC677: test    ah, 5

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6497F0",
-    "line": "sub     esp, 174h",
+    "line": "sub     esp, 174h; RadiantAI: LowProcess editor-package action dispatcher. Uses editorPackage->procedureArrayIndex and editorPackProcedure to index 0xB152B0, then dispatches action code; cases 4/5 print sleeping/eating debug text for selected debug actor.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x64981D",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x64989A",
-    "line": "call    sub_452A60",
+    "line": "call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -769,7 +769,7 @@
   },
   {
     "ea": "0x649989",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -781,7 +781,7 @@
   },
   {
     "ea": "0x649991",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1285,7 +1285,7 @@
   },
   {
     "ea": "0x649AA5",
-    "line": "push    offset sub_645A30; a6",
+    "line": "push    offset TESObjectREFR_SetOwnedDoorLockedForActor; a6",
     "mnemonic": "push",
     "size": 5
   },
@@ -1375,7 +1375,7 @@
   },
   {
     "ea": "0x649ACC",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1453,7 +1453,7 @@
   },
   {
     "ea": "0x649AFF",
-    "line": "push    offset sub_645AF0; a6",
+    "line": "push    offset TESObjectREFR_ClearOwnedDoorLockForActor; a6",
     "mnemonic": "push",
     "size": 5
   },
@@ -1543,7 +1543,7 @@
   },
   {
     "ea": "0x649B26",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1873,7 +1873,7 @@
   },
   {
     "ea": "0x649BD8",
-    "line": "push    offset sub_645A30; a6",
+    "line": "push    offset TESObjectREFR_SetOwnedDoorLockedForActor; a6",
     "mnemonic": "push",
     "size": 5
   },
@@ -1963,7 +1963,7 @@
   },
   {
     "ea": "0x649BFF",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2041,7 +2041,7 @@
   },
   {
     "ea": "0x649C32",
-    "line": "push    offset sub_645AF0; a6",
+    "line": "push    offset TESObjectREFR_ClearOwnedDoorLockForActor; a6",
     "mnemonic": "push",
     "size": 5
   },
@@ -2131,7 +2131,7 @@
   },
   {
     "ea": "0x649C59",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3121,7 +3121,7 @@
   },
   {
     "ea": "0x649E3A",
-    "line": "call    sub_5EAE70",
+    "line": "call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3901,7 +3901,7 @@
   },
   {
     "ea": "0x649FF1",
-    "line": "call    sub_452A60",
+    "line": "call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4027,7 +4027,7 @@
   },
   {
     "ea": "0x64A034",
-    "line": "call    sub_452A60",
+    "line": "call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4063,7 +4063,7 @@
   },
   {
     "ea": "0x64A04B",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4087,7 +4087,7 @@
   },
   {
     "ea": "0x64A056",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4099,7 +4099,7 @@
   },
   {
     "ea": "0x64A05D",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4117,7 +4117,7 @@
   },
   {
     "ea": "0x64A066",
-    "line": "mov     ecx, offset flt_B36AA0",
+    "line": "mov     ecx, (offset flt_B36A88+18h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -4141,7 +4141,7 @@
   },
   {
     "ea": "0x64A074",
-    "line": "mov     ecx, offset flt_B36A98",
+    "line": "mov     ecx, (offset flt_B36A88+10h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -4369,7 +4369,7 @@
   },
   {
     "ea": "0x64A0EC",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4645,7 +4645,7 @@
   },
   {
     "ea": "0x64A17D",
-    "line": "call    sub_565DF0",
+    "line": "call    sub_565DF0; RadiantAI: package flag helper used by chooser skip logic; tests TESPackage flag 0x0400.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4663,7 +4663,7 @@
   },
   {
     "ea": "0x64A186",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -4699,13 +4699,13 @@
   },
   {
     "ea": "0x64A197",
-    "line": "call    sub_41FFC0",
+    "line": "call    ExtraDataList_SetRunOnceExtraPackage; Ensures ExtraRunOncePacks exists, then adds or updates a package record with the supplied package and state byte.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x64A19C",
-    "line": "mov     ecx, [esi+8]",
+    "line": "mov     ecx, [esi+8]; self",
     "mnemonic": "mov",
     "size": 3
   },
@@ -4723,7 +4723,7 @@
   },
   {
     "ea": "0x64A1A3",
-    "line": "call    sub_5660A0",
+    "line": "call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).",
     "mnemonic": "call",
     "size": 5
   },
@@ -4747,7 +4747,7 @@
   },
   {
     "ea": "0x64A1AE",
-    "line": "call    sub_5EAE70",
+    "line": "call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4885,7 +4885,7 @@
   },
   {
     "ea": "0x64A1F7",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4963,7 +4963,7 @@
   },
   {
     "ea": "0x64A224",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5041,7 +5041,7 @@
   },
   {
     "ea": "0x64A246",
-    "line": "call    sub_648E40",
+    "line": "call    sub_648E40; RadiantAI: per-process package refresh wrapper; calls actor base package chooser chain and stores selected package at process+0x8.",
     "mnemonic": "call",
     "size": 5
   },

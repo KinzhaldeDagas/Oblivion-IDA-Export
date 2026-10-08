@@ -1,4 +1,4 @@
-0x778DB0: push    ebp
+0x778DB0: push    ebp; MoonSugarEffect decode: NiGeometryGroup::AddGeometryDataToGroup. For hardware-skinned geometry, adds each partition object when the partition is compatible; for non-skinned geometry it only calls AddObject when BuffData is missing. Existing BuffData returns false, so this is packing/registration ownership rather than draw ownership.
 0x778DB1: mov     ebp, [esp+4+arg_8]
 0x778DB5: test    ebp, ebp
 0x778DB7: jz      short loc_778E08

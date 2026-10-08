@@ -1,1 +1,1 @@
-SpeedTreeShaderPPLightingProperty
+struct SpeedTreeShaderPPLightingProperty;

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5464AE",
-    "line": "fld     [esp+arg_4C]",
+    "line": "fld     [esp+arg_4C]; Combines movement/boot noise, distance attenuation, LOS and running multipliers, then scales the audible contribution by fSneakSoundsMult while preserving the stronger accumulated contribution.",
     "mnemonic": "fld",
     "size": 4
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x5464E0",
-    "line": "jnz     short Calc_DetectionLevel___CalcLightFactor",
+    "line": "jnz     short Calc_DetectionLevel_ApplyLightFactor; Computes the target-light contribution using light level, detector visual penalties/bonuses (including Blindness/Night Eye inputs), distance normalization, and fSneakLightMult; preserves the stronger accumulated contribution.",
     "mnemonic": "jnz",
     "size": 2
   },

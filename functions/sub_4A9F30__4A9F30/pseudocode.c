@@ -2,8 +2,8 @@ double __thiscall sub_4A9F30(_DWORD *this)
 {
   int v2; // eax
 
-  if ( (*(unsigned __int8 (__thiscall **)(_DWORD *, int))(*this + 0x16C))(this, 1) && (v2 = *(this + 0x25)) != 0 )
-    return *(float *)(v2 + 0x28);
+  if ( (*(unsigned __int8 (__thiscall **)(_DWORD *, int))(*this + 0x16C))(this, 1) && (v2 = *(this + 0x25)) != 0 ) /*0x4a9f4c*/
+    return *(float *)(v2 + 0x28); /*0x4a9f55*/
   else
-    return flt_B356F0;
+    return unk_B356F0; /*0x4a9f64*/
 }

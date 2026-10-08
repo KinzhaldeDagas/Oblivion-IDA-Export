@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "NiTPointerMap<MagicSystem::EffectID,ActiveEffect * (*)(MagicCaster *,MagicItem *,EffectItem *)>::NiTPointerMap<MagicSystem::EffectID,ActiveEffect * (*)(MagicCaster *,MagicItem *,EffectItem *)>(void)",
+  "chunks": [
+    [
+      "0x9FEA00",
+      "0x9FEA4E"
+    ]
+  ],
+  "chunks_sha256": "9d687220768d772a4e68ef896120eb9bdf18ce9423ec0179881e2fcd67b4d6b1",
+  "comment_regular": "Verified (Oblivion): constructor allocates and zeroes the 37-bucket NiTMap_AECreatorFuncs (0x94-byte bucket array), installs its NiTPointerMap vtable, and registers the atexit cleanup. Invocation timing relative to the ActiveEffect_Register_* wrappers remains Unknown.",
+  "comment_repeatable": "Verified (Oblivion): constructor allocates and zeroes the 37-bucket NiTMap_AECreatorFuncs (0x94-byte bucket array), installs its NiTPointerMap vtable, and registers the atexit cleanup. Invocation timing relative to the ActiveEffect_Register_* wrappers remains Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 7,
+  "display_name": "ActiveEffectCreatorMap_GlobalCtor",
   "end_ea": "0x9FEA4E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "??0?$NiTPointerMap@W4EffectID@MagicSystem@@P6APAVActiveEffect@@PAVMagicCaster@@PAVMagicItem@@PAVEffectItem@@@Z@@QAE@XZ",
+  "name": "ActiveEffectCreatorMap_GlobalCtor",
   "segment": ".text",
   "sha256": "9d687220768d772a4e68ef896120eb9bdf18ce9423ec0179881e2fcd67b4d6b1",
   "size": 78,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x9FEA00",
-  "type": "int()",
-  "xrefs_from_count": 28,
+  "total_chunk_size": 78,
+  "type": "int __cdecl()",
+  "xrefs_from_count": 31,
   "xrefs_to_count": 0
 }

@@ -1,1 +1,1 @@
-CALID
+typedef DWORD CALID;

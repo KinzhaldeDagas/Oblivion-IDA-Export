@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
-  "callers_count": 8,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
+  "callers_count": 13,
+  "chunks": [
+    [
+      "0x58CA00",
+      "0x58CA49"
+    ]
+  ],
+  "chunks_sha256": "a4c6fdd3ef6508a275534cf93cd14a7c257f524ebb1f9d38bf78cda46ce5edb7",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "Verified: marks numeric; if changed or string trait 0xFDE, clears string, stores number, clears own expression actions via 0x588930, then CalculateValue(this,true). Same-value ordinary traits bypass clear/evaluation. Unlike Fallout SetFloat, no abClearActions parameter.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "Tile_Property_SetFloatValue?",
+  "display_name": "Tile::Value::SetFloat",
   "end_ea": "0x58CA49",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "Tile_Property_SetFloatValue?",
+  "name": "Tile::Value::SetFloat",
   "segment": ".text",
   "sha256": "a4c6fdd3ef6508a275534cf93cd14a7c257f524ebb1f9d38bf78cda46ce5edb7",
   "size": 73,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x58CA00",
-  "type": "void __thiscall(int this, float)",
+  "total_chunk_size": 73,
+  "type": "void __thiscall(OblivionTileValueView *this, float value)",
   "xrefs_from_count": 29,
   "xrefs_to_count": 13
 }

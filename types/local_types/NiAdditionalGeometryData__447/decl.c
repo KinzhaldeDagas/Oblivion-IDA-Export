@@ -1,1 +1,1 @@
-NiAdditionalGeometryData
+struct NiAdditionalGeometryData;

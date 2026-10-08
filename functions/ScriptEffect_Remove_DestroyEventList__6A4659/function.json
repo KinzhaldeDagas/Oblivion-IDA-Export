@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x6A4659",
+      "0x6A4677"
+    ]
+  ],
+  "chunks_sha256": "0002cada511fcfcae208a9534a110b6151a83fffe2d363a39978233257fbaacf",
+  "comment_regular": "DestroyEventList chunk: destruct and FormHeapFree the ScriptEventList at +0x3C, then null the field.",
+  "comment_repeatable": "DestroyEventList chunk: destruct and FormHeapFree the ScriptEventList at +0x3C, then null the field.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "ScriptEffect_Remove:::DestroyEventList",
   "end_ea": "0x6A4677",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "ScriptEffect_Remove:::DestroyEventList",
   "segment": ".text",
   "sha256": "0002cada511fcfcae208a9534a110b6151a83fffe2d363a39978233257fbaacf",
   "size": 30,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6A4659",
-  "type": "int __usercall@<eax>(ScriptEffect *a1@<esi>)",
+  "total_chunk_size": 30,
+  "type": "void __usercall(ScriptEffect *@<esi>)",
   "xrefs_from_count": 12,
   "xrefs_to_count": 3
 }

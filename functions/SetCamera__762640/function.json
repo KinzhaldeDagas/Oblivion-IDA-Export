@@ -1,19 +1,32 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x762640",
+      "0x762BD4"
+    ]
+  ],
+  "chunks_sha256": "44d729ff0dbc3cd0e25d312dc3cf45ac1a86a36d424855f1ecb27d97c1f81543",
+  "comment_regular": "NiDX9Renderer camera/viewport setup. Builds and uploads view/projection matrices, then converts the normalized viewport to pixel coordinates from the current render-target dimensions.\n\nBuild and upload camera view/projection state, convert a normalized viewport against current target dimensions, and call IDirect3DDevice9::SetViewport. This function does not set a scissor rectangle or alter D3DRS_SCISSORTESTENABLE.\nGPU camera decode: camera position becomes separate B3F92C origin; view translation uses B3F9A8..B3F9B0, normally zero. Perspective extents are slopes. Frustum sums/differences and reciprocal depth are stored as float before projection arithmetic. Viewport conversion truncates extended-precision expressions; no half-pixel correction is included here.",
+  "comment_repeatable": "Build and upload camera view/projection state, convert a normalized viewport against current target dimensions, and call IDirect3DDevice9::SetViewport. This function does not set a scissor rectangle or alter D3DRS_SCISSORTESTENABLE.\nDX11 current-frame inverse-view verification 2026-09-30:762640 writes renderer+A00 directly. Rows0/1/2 are the supplied right/up/forward vectors, each with fourth component0; row3 is globals B3F9A8/B3F9AC/B3F9B0 plus1. This is NOT a generic inversion and is independent of the large camera position saved to B3F92C..B3F934. Small non-orthonormal input deviations remain in the copied axes. The owned camera builder now reproduces these direct copies and carries renderer/camera/device provenance for texture recipes; no previous renderer matrix read is needed.\n\nDX11 concurrency audit 2026-09-24: inspected camera body writes view/projection via D3D SetTransform at 762813/762A74 and viewport at 762BAA; no local renderer/precache acquisition pair was established. Do not assume the prepack lock serializes these state calls.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "SetCamera",
+  "display_name": "NiDX9Renderer_SetCameraAndViewport",
   "end_ea": "0x762BD4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "SetCamera",
+  "name": "NiDX9Renderer_SetCameraAndViewport",
   "segment": ".text",
   "sha256": "44d729ff0dbc3cd0e25d312dc3cf45ac1a86a36d424855f1ecb27d97c1f81543",
   "size": 1428,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x762640",
-  "type": "void __userpurge(int@<ecx>, int@<ebx>, int@<edi>, float *, float *, float *, float *, float, float, int, float *)",
+  "total_chunk_size": 1428,
+  "type": "void __thiscall(NiDX9Renderer *self, const NiPoint3 *position, const NiPoint3 *forward, const NiPoint3 *up, const NiPoint3 *right, const NiFrustum *frustum, const NiViewport *viewport)",
   "xrefs_from_count": 394,
   "xrefs_to_count": 1
 }

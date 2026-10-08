@@ -54,7 +54,6 @@
 0x72CFE1: call    edx
 0x72CFE3: xor     ecx, ecx
 0x72CFE5: jmp     short loc_72CFF0
-0x72CFE7: align 10h
 0x72CFF0: movzx   eax, word ptr [esp+ecx*2+28h+var_C]
 0x72CFF5: cmp     word ptr [ebp+eax*2+0], 0FFFFh
 0x72CFFC: jnz     short loc_72D006

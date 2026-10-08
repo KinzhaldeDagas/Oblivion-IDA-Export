@@ -1,1 +1,1 @@
-IDirectSoundCaptureBuffer8Vtbl_0
+typedef IDirectSoundCaptureBuffer8Vtbl IDirectSoundCaptureBuffer8Vtbl_0;

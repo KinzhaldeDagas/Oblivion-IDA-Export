@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x54645A",
-    "line": "cmp     [esp+arg_3C], 0",
+    "line": "cmp     [esp+arg_3C], 0; Applies fSneakTargetInCombatBonus when the observed target is in combat.",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x546462",
-    "line": "jz      short Calc_DetectionLevel___CalcRunningMult",
+    "line": "jz      short Calc_DetectionLevel_ApplyRunningMultiplier; Applies fSneakRunningMult when the target is running; otherwise uses multiplier 1.0.",
     "mnemonic": "jz",
     "size": 2
   },

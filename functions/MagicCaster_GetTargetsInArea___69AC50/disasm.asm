@@ -25,11 +25,11 @@
 0x69AC97: cmp     [edi+10h], eax
 0x69AC9A: jnz     short loc_69ACB0
 0x69AC9C: mov     ecx, edi
-0x69AC9E: call    EffectItem_GetArea
+0x69AC9E: call    EffectItem_GetArea; Effective area: returns 0 for EffectSetting NoArea (0x200) or Self range (0); otherwise raw EffectItem+0x8 area.
 0x69ACA3: cmp     eax, ebx
 0x69ACA5: jle     short loc_69ACB0
 0x69ACA7: mov     ecx, edi
-0x69ACA9: call    EffectItem_GetArea
+0x69ACA9: call    EffectItem_GetArea; Effective area: returns 0 for EffectSetting NoArea (0x200) or Self range (0); otherwise raw EffectItem+0x8 area.
 0x69ACAE: mov     ebx, eax
 0x69ACB0: mov     esi, [esi+8]
 0x69ACB3: test    esi, esi
@@ -73,10 +73,10 @@
 0x69AD29: jmp     short loc_69AD33
 0x69AD2B: mov     [esp+20h+var_10], 0
 0x69AD33: push    0; a2
-0x69AD35: mov     ecx, offset ActorProcessManager_ptr; this
-0x69AD3A: call    sub_673A50
+0x69AD35: mov     ecx, (offset qword_B3BB2C+1D4h); this
+0x69AD3A: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x69AD3F: mov     ecx, eax; this
-0x69AD41: call    sub_7616D0
+0x69AD41: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x69AD46: test    eax, eax
 0x69AD48: mov     [esp+20h+arg_4], eax
 0x69AD4C: jz      loc_69AE90
@@ -115,10 +115,10 @@
 0x69ADB1: call    eax
 0x69ADB3: test    eax, eax
 0x69ADB5: jz      short loc_69AE17
-0x69ADB7: lea     ecx, [esp+20h+arg_8]
-0x69ADBB: push    ecx
-0x69ADBC: mov     ecx, esi
-0x69ADBE: call    sub_4D7E30
+0x69ADB7: lea     ecx, [esp+20h+pointXYZ]
+0x69ADBB: push    ecx; pointXYZ
+0x69ADBC: mov     ecx, esi; this
+0x69ADBE: call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.
 0x69ADC3: fld     [esp+20h+var_8]
 0x69ADC7: fcompp
 0x69ADC9: fnstsw  ax
@@ -132,17 +132,17 @@
 0x69ADDD: jnz     short loc_69AE17
 0x69ADDF: cmp     byte ptr [esp+20h+arg_0], 0
 0x69ADE4: jnz     short loc_69AE0D
-0x69ADE6: mov     edx, [esp+20h+arg_8]
-0x69ADEA: mov     ecx, [esp+20h+arg_C]
+0x69ADE6: mov     edx, [esp+20h+pointXYZ]
+0x69ADEA: mov     ecx, dword ptr [esp+20h+arg_C]
 0x69ADEE: push    ebp
 0x69ADEF: sub     esp, 0Ch
 0x69ADF2: mov     eax, esp
 0x69ADF4: mov     [eax], edx
-0x69ADF6: mov     edx, [esp+30h+arg_10]
+0x69ADF6: mov     edx, dword ptr [esp+30h+arg_C+4]
 0x69ADFA: mov     [eax+4], ecx
 0x69ADFD: mov     ecx, [esp+30h+var_C]
 0x69AE01: mov     [eax+8], edx
-0x69AE04: call    sub_69A490
+0x69AE04: call    MagicCaster_IsRayClearToActorMidpoint_Layer1C; Area magic target check calls 0x69A490 unless spell ignores obstruction; source point is area origin and target is actor midpoint. Confirms helper is an unobstructed movement-layer ray, not a climb-specific rule.
 0x69AE09: test    al, al
 0x69AE0B: jz      short loc_69AE17
 0x69AE0D: mov     ecx, [esp+20h+arg_14]
@@ -199,10 +199,10 @@
 0x69AEA8: call    eax
 0x69AEAA: test    eax, eax
 0x69AEAC: jz      short loc_69AF1D
-0x69AEAE: lea     ecx, [esp+20h+arg_8]
-0x69AEB2: push    ecx
-0x69AEB3: mov     ecx, ds:0B333C4h
-0x69AEB9: call    sub_4D7E30
+0x69AEAE: lea     ecx, [esp+20h+pointXYZ]
+0x69AEB2: push    ecx; pointXYZ
+0x69AEB3: mov     ecx, ds:0B333C4h; this
+0x69AEB9: call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.
 0x69AEBE: fld     [esp+20h+var_8]
 0x69AEC2: fcompp
 0x69AEC4: fnstsw  ax
@@ -215,17 +215,17 @@
 0x69AEDA: cmp     byte ptr [esp+20h+arg_0], al
 0x69AEDE: jnz     short loc_69AF0D
 0x69AEE0: mov     edx, ds:0B333C4h
-0x69AEE6: mov     ecx, [esp+20h+arg_8]
+0x69AEE6: mov     ecx, [esp+20h+pointXYZ]
 0x69AEEA: push    edx
-0x69AEEB: mov     edx, [esp+24h+arg_C]
+0x69AEEB: mov     edx, dword ptr [esp+24h+arg_C]
 0x69AEEF: sub     esp, 0Ch
 0x69AEF2: mov     eax, esp
 0x69AEF4: mov     [eax], ecx
-0x69AEF6: mov     ecx, [esp+30h+arg_10]
+0x69AEF6: mov     ecx, dword ptr [esp+30h+arg_C+4]
 0x69AEFA: mov     [eax+4], edx
 0x69AEFD: mov     [eax+8], ecx
 0x69AF00: mov     ecx, [esp+30h+var_C]
-0x69AF04: call    sub_69A490
+0x69AF04: call    MagicCaster_IsRayClearToActorMidpoint_Layer1C; Player variant of area magic target obstruction check; same 0x69A490 clear-ray helper on layer 0x1C.
 0x69AF09: test    al, al
 0x69AF0B: jz      short loc_69AF1D
 0x69AF0D: mov     edx, ds:0B333C4h

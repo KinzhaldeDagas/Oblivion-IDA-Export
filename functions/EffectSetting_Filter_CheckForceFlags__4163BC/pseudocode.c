@@ -7,8 +7,8 @@ int __userpurge EffectSetting_Filter_::CheckForceFlags@<eax>(
         int a6,
         int a7)
 {
-  if ( a7 && (a7 & *(_DWORD *)(a1 + 0x58)) == a7 )
-    return EffectSetting_Filter_::Return_0(a3, a4, a5);
+  if ( a7 && (a7 & *(_DWORD *)(a1 + 0x58)) == a7 ) /*0x4163d4*/
+    return EffectSetting_Filter_::Return_0(a3, a4, a5); /*0x4163d4*/
   else
-    return EffectSetting_Filter_::CheckMeta(a1, edi0, a3, a4, a5);
+    return EffectSetting_Filter_::CheckMeta(a1, edi0, a3, a4, a5); /*0x4163d5*/
 }

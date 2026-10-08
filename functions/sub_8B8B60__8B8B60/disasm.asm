@@ -13,7 +13,7 @@
 0x8B8B7D: push    eax
 0x8B8B7E: push    ecx
 0x8B8B7F: lea     ecx, [esp+178h+var_150]
-0x8B8B83: call    sub_88FCC0
+0x8B8B83: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x8B8B88: movaps  xmm0, [esp+170h+var_150]
 0x8B8B8D: mov     eax, [esi+50h]
 0x8B8B90: movaps  xmm2, xmmword ptr [edi+30h]
@@ -102,7 +102,7 @@
 0x8B8CE0: lea     ecx, [esp+174h+var_150]
 0x8B8CE4: push    ecx
 0x8B8CE5: mov     ecx, esi
-0x8B8CE7: call    sub_8ABCE0
+0x8B8CE7: call    sub_8ABCE0; TES4 authoritative: resolves a contact point through the hit collidable/entity transform to compare contact positions between manifold entries.
 0x8B8CEC: fld     dword ptr [edi+44h]
 0x8B8CEF: mov     ebx, [ebp+arg_0]
 0x8B8CF2: fmul    dword ptr [ebx+0Ch]
@@ -125,11 +125,11 @@
 0x8B8D34: addps   xmm1, xmm3
 0x8B8D37: lea     ecx, [esp+178h+var_16C+0Ch]
 0x8B8D3B: movaps  [esp+178h+var_F0], xmm1
-0x8B8D43: call    sub_88FE00
+0x8B8D43: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x8B8D48: movaps  xmm1, xmmword ptr ds:0A965C0h
-0x8B8D4F: movaps  xmm0, [esp+170h+var_16C+0Ch]
+0x8B8D4F: movaps  xmm0, xmmword ptr [esp+170h+var_16C+0Ch]
 0x8B8D54: xorps   xmm0, xmm1
-0x8B8D57: movaps  [esp+170h+var_16C+0Ch], xmm0
+0x8B8D57: movaps  xmmword ptr [esp+170h+var_16C+0Ch], xmm0
 0x8B8D5C: mov     ecx, [esi+50h]
 0x8B8D5F: mulps   xmm0, xmm0
 0x8B8D62: movaps  xmm1, xmm0
@@ -150,7 +150,7 @@
 0x8B8D95: test    ah, 5
 0x8B8D98: jp      short loc_8B8DC0
 0x8B8D9A: fld     dword ptr [esp+170h+var_16C+8]
-0x8B8D9E: movaps  xmm1, [esp+170h+var_16C+0Ch]
+0x8B8D9E: movaps  xmm1, xmmword ptr [esp+170h+var_16C+0Ch]
 0x8B8DA3: fsqrt
 0x8B8DA5: fdivr   st, st(1)
 0x8B8DA7: fstp    dword ptr [esp+170h+var_16C+8]
@@ -158,7 +158,7 @@
 0x8B8DB1: movaps  xmm2, xmm0
 0x8B8DB4: shufps  xmm2, xmm0, 0
 0x8B8DB8: mulps   xmm2, xmm1
-0x8B8DBB: movaps  [esp+170h+var_16C+0Ch], xmm2
+0x8B8DBB: movaps  xmmword ptr [esp+170h+var_16C+0Ch], xmm2
 0x8B8DC0: mov     ecx, esi
 0x8B8DC2: fstp    st
 0x8B8DC4: call    sub_8A6410

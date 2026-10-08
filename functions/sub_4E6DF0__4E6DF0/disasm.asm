@@ -1,24 +1,24 @@
-0x4E6DF0: sub     esp, 14h
-0x4E6DF3: mov     eax, [esp+14h+arg_8]
+0x4E6DF0: sub     esp, 14h; Verified cross-cell endpoint lookup: compute cellX/cellY by arithmetic-shifting world X/Y by 12, search that WorldSpace's pathgrids, and also test the preceding X and/or Y cell when the point lies exactly on a 4096-unit boundary. Excludes the source PathGrid, returns the matching point, and outputs its owning PathGrid.
+0x4E6DF3: mov     eax, [esp+14h+outOwningGrid]
 0x4E6DF7: push    esi
 0x4E6DF8: xor     esi, esi
-0x4E6DFA: cmp     [esp+18h+arg_4], esi
+0x4E6DFA: cmp     [esp+18h+worldspace], esi
 0x4E6DFE: mov     [esp+18h+var_4], esi
 0x4E6E02: mov     [eax], esi
 0x4E6E04: jnz     short loc_4E6E15
 0x4E6E06: mov     ecx, ds:0B333A0h
 0x4E6E0C: call    TES__GetCurrentWorldspace
-0x4E6E11: mov     [esp+18h+arg_4], eax
-0x4E6E15: mov     eax, [esp+18h+arg_0]
+0x4E6E11: mov     [esp+18h+worldspace], eax
+0x4E6E15: mov     eax, [esp+18h+position]
 0x4E6E19: fld     dword ptr [eax]
 0x4E6E1B: fstp    [esp+18h+var_8]
 0x4E6E1F: fld     [esp+18h+var_8]
-0x4E6E23: fistp   [esp+18h+var_C]
+0x4E6E23: fistp   [esp+18h+cellY]
 0x4E6E27: fld     dword ptr [eax+4]
 0x4E6E2A: fstp    [esp+18h+var_10]
 0x4E6E2E: fld     [esp+18h+var_10]
 0x4E6E32: fistp   [esp+18h+var_8]
-0x4E6E36: mov     eax, [esp+18h+var_C]
+0x4E6E36: mov     eax, [esp+18h+cellY]
 0x4E6E3A: mov     ecx, eax
 0x4E6E3C: and     ecx, 80000FFFh
 0x4E6E42: mov     [esp+18h+var_10], esi
@@ -41,7 +41,7 @@
 0x4E6E7E: sar     ecx, 0Ch
 0x4E6E81: sar     eax, 0Ch
 0x4E6E84: cmp     [esp+18h+var_10], esi
-0x4E6E88: mov     [esp+18h+var_C], ecx
+0x4E6E88: mov     [esp+18h+cellY], ecx
 0x4E6E8C: mov     [esp+18h+var_8], esi
 0x4E6E90: jl      loc_4E6F20
 0x4E6E96: push    ebp
@@ -49,15 +49,14 @@
 0x4E6E98: mov     ebp, eax
 0x4E6E9A: push    edi
 0x4E6E9B: jmp     short loc_4E6EA0
-0x4E6E9D: align 10h
 0x4E6EA0: xor     ebx, ebx
 0x4E6EA2: cmp     [esp+24h+var_14], ebx
 0x4E6EA6: jl      short loc_4E6F02
-0x4E6EA8: mov     edi, [esp+24h+var_C]
+0x4E6EA8: mov     edi, [esp+24h+cellY]
 0x4E6EAC: lea     esp, [esp+0]
-0x4E6EB0: mov     ecx, [esp+24h+arg_4]; this
-0x4E6EB4: push    edi; signed int
-0x4E6EB5: push    ebp; signed int
+0x4E6EB0: mov     ecx, [esp+24h+worldspace]; this
+0x4E6EB4: push    edi; cellY
+0x4E6EB5: push    ebp; cellX
 0x4E6EB6: call    TESWorldSpace__GetCellAtCellCoord
 0x4E6EBB: test    eax, eax
 0x4E6EBD: jz      short loc_4E6EE6
@@ -66,12 +65,12 @@
 0x4E6EC6: mov     esi, eax
 0x4E6EC8: test    esi, esi
 0x4E6ECA: jz      short loc_4E6EE6
-0x4E6ECC: cmp     esi, [esp+24h+arg_C]
+0x4E6ECC: cmp     esi, [esp+24h+excludedGrid]
 0x4E6ED0: jz      short loc_4E6EE6
-0x4E6ED2: mov     eax, [esp+24h+arg_0]
-0x4E6ED6: push    eax
-0x4E6ED7: mov     ecx, esi
-0x4E6ED9: call    sub_4E6D60
+0x4E6ED2: mov     eax, [esp+24h+position]
+0x4E6ED6: push    eax; position
+0x4E6ED7: mov     ecx, esi; this
+0x4E6ED9: call    TESPathGrid_FindPointByPositionInCell; Verified per-PathGrid point lookup by packed 512-unit X/Y spatial bucket, then scans that bucket's point pointers and compares NiPoint3 positions using fConstant_2 tolerance. The field's existing name pointsByCell is legacy shorthand; this map subdivides world coordinates at 512 units, unlike 4096-unit world cells.
 0x4E6EDE: test    eax, eax
 0x4E6EE0: mov     [esp+24h+var_4], eax
 0x4E6EE4: jnz     short loc_4E6EF4
@@ -80,7 +79,7 @@
 0x4E6EEC: cmp     ebx, [esp+24h+var_14]
 0x4E6EF0: jle     short loc_4E6EB0
 0x4E6EF2: jmp     short loc_4E6EFA
-0x4E6EF4: mov     ecx, [esp+24h+arg_8]
+0x4E6EF4: mov     ecx, [esp+24h+outOwningGrid]
 0x4E6EF8: mov     [ecx], esi
 0x4E6EFA: mov     esi, [esp+24h+var_4]
 0x4E6EFE: test    esi, esi

@@ -1,14 +1,14 @@
 int __userpurge TESContainer_CopyContentsToRef_::ContentLoop@<eax>(
         double a1@<st2>,
         double a2@<st1>,
-        int a3,
+        int a3@<edi>,
         int a4,
         int a5,
         int a6,
         int a7,
         int a8,
-        _DWORD **a9,
-        int a10,
+        int a9,
+        _DWORD **a10,
         int a11,
         int a12,
         int a13,
@@ -59,10 +59,11 @@ int __userpurge TESContainer_CopyContentsToRef_::ContentLoop@<eax>(
         int a58,
         int a59,
         int a60,
-        int a61)
+        int a61,
+        int a62)
 {
   return TESContainer_CopyContentsToRef_::ContentLoop_(
-           a9,
+           a10,
            a1,
            a2,
            a3,
@@ -71,8 +72,8 @@ int __userpurge TESContainer_CopyContentsToRef_::ContentLoop@<eax>(
            a6,
            a7,
            a8,
-           (int)a9,
-           a10,
+           a9,
+           (int)a10,
            a11,
            a12,
            a13,
@@ -123,5 +124,6 @@ int __userpurge TESContainer_CopyContentsToRef_::ContentLoop@<eax>(
            a58,
            a59,
            a60,
-           a61);
+           a61,
+           a62);
 }

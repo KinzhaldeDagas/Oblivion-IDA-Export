@@ -1,18 +1,31 @@
 {
-  "callees_count": 71,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
+  "chunks": [
+    [
+      "0x7D6390",
+      "0x7D68F3"
+    ]
+  ],
+  "chunks_sha256": "fe6d53d6a84cc0966cf096cc7f3f61776e6237fe8b092995fac824d85437618a",
+  "comment_regular": "Oblivion ShadowSceneLight cull/update path: tests camera/shadow-volume overlap and cube-face visibility, updates category visibility and receiver state, and returns obsolete shadow maps to BSTextureManager.\nV179: for ordinary point lights, bounds center comes from backing+88/+8C/+90 and radius from backing+F8. Camera-to-sphere-surface distance is compared with B4307C fade-start and B43080 hard-cull/end. The base fade is committed to wrapper+D4; cull status to+118. DX11 interior preset temporarily raises these camera-LOD thresholds during the verified primary world-render scope and restores them afterward; physical light radius is unchanged.",
+  "comment_repeatable": "Oblivion ShadowSceneLight cull/update path: tests camera/shadow-volume overlap and cube-face visibility, updates category visibility and receiver state, and returns obsolete shadow maps to BSTextureManager.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 72,
   "display_name": "ShadowSceneLight_CullProcess",
   "end_ea": "0x7D68F3",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "ShadowSceneLight_CullProcess",
   "segment": ".text",
   "sha256": "fe6d53d6a84cc0966cf096cc7f3f61776e6237fe8b092995fac824d85437618a",
   "size": 1379,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7D6390",
+  "total_chunk_size": 1379,
   "type": "void __thiscall(void *this, int arg0)",
   "xrefs_from_count": 550,
   "xrefs_to_count": 2

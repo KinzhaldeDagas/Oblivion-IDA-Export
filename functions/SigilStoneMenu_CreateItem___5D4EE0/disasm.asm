@@ -31,8 +31,8 @@
 0x5D4F42: mov     eax, [esi+2Ch]
 0x5D4F45: mov     eax, [eax+8]
 0x5D4F48: movzx   eax, byte ptr [eax+4]
-0x5D4F4C: push    eax; a1
-0x5D4F4D: call    TESForm_CreateDynamic
+0x5D4F4C: push    eax; formType
+0x5D4F4D: call    TESForm_CreateDynamic; Verified runtime serialized-form factory dispatch: form type 0x29 constructs a 0x30-byte TESSubSpace; constructor sets default bounds and the TESSubSpace vtable.
 0x5D4F52: mov     ecx, [esi+2Ch]
 0x5D4F55: mov     edi, eax
 0x5D4F57: mov     eax, [ecx+8]
@@ -42,9 +42,9 @@
 0x5D4F60: mov     eax, [edx+0B4h]
 0x5D4F66: mov     ecx, edi
 0x5D4F68: call    eax
-0x5D4F6A: mov     ecx, ds:0B33A98h
-0x5D4F70: push    edi
-0x5D4F71: call    TESDataHandler_AddForm
+0x5D4F6A: mov     ecx, ds:0B33A98h; self
+0x5D4F70: push    edi; form
+0x5D4F71: call    TESDataHandler_AddForm; Verified registration path: switches on TESForm+4 type byte. TESGlobal ctor 4F9604 writes type 4; case 4 pushes the form into TESDataHandler.listGlobals at self+0x74 (self+0x1D pointers) and returns success. Called from TESDataHandler_LoadFormRecord 44E596; this list is consumed by TESSaveLoadGame_LoadGlobalValues.
 0x5D4F76: mov     al, [edi+4]
 0x5D4F79: cmp     al, 14h
 0x5D4F7B: jz      short loc_5D4F86
@@ -99,7 +99,6 @@
 0x5D5014: mov     [esp+30h+var_18], ecx
 0x5D5018: jz      short loc_5D508C
 0x5D501A: jmp     short loc_5D5024
-0x5D501C: align 10h
 0x5D5020: mov     ecx, [esp+30h+var_18]
 0x5D5024: mov     ebp, [ecx]
 0x5D5026: test    ebp, ebp
@@ -180,9 +179,9 @@
 0x5D50FD: add     esp, 1Ch
 0x5D5100: retn
 0x5D5101: mov     [eax+4], ebx
-0x5D5104: mov     ecx, ds:0B33A98h
-0x5D510A: push    ebx
-0x5D510B: call    TESDataHandler_AddForm
+0x5D5104: mov     ecx, ds:0B33A98h; self
+0x5D510A: push    ebx; form
+0x5D510B: call    TESDataHandler_AddForm; Verified registration path: switches on TESForm+4 type byte. TESGlobal ctor 4F9604 writes type 4; case 4 pushes the form into TESDataHandler.listGlobals at self+0x74 (self+0x1D pointers) and returns success. Called from TESDataHandler_LoadFormRecord 44E596; this list is consumed by TESSaveLoadGame_LoadGlobalValues.
 0x5D5110: mov     ecx, ds:0B33B00h
 0x5D5116: push    edi
 0x5D5117: call    SaveLoad_AddCreatedObj
@@ -207,11 +206,11 @@
 0x5D513F: mov     edx, [ebx+100h]
 0x5D5145: push    eax
 0x5D5146: call    edx
-0x5D5148: mov     ecx, ds:0B333C4h
-0x5D514E: push    1
-0x5D5150: push    ebp
-0x5D5151: push    edi
-0x5D5152: call    TESObjectREFR_AddItem_Abbrev
+0x5D5148: mov     ecx, ds:0B333C4h; this
+0x5D514E: push    1; count
+0x5D5150: push    ebp; extraList
+0x5D5151: push    edi; item
+0x5D5152: call    TESObjectREFR_AddItem_Abbrev; Short TESObjectREFR AddItem wrapper: emits the inventory event and delegates item, ExtraDataList, and count to ContainerExtraData_AddItem.
 0x5D5157: mov     ecx, ds:0B333C4h
 0x5D515D: mov     eax, [ecx]
 0x5D515F: mov     edx, [esi+28h]
@@ -227,14 +226,14 @@
 0x5D5172: push    ebp
 0x5D5173: push    edx
 0x5D5174: call    eax
-0x5D5176: call    sub_5C1900
+0x5D5176: call    PlayerCharacter_ReconcileHotkeysAfterInventoryRemoval
 0x5D517B: mov     edi, [esi+2Ch]
 0x5D517E: cmp     edi, ebp
 0x5D5180: jz      short loc_5D5192
 0x5D5182: mov     ecx, edi
 0x5D5184: call    ContainerEntryExtraData_DestroyDataTable
 0x5D5189: push    edi
-0x5D518A: call    FormHeapFree
+0x5D518A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5D518F: add     esp, 4
 0x5D5192: push    22h ; '"'; int
 0x5D5194: mov     [esi+2Ch], ebp
@@ -272,3 +271,20 @@
 0x5D51F0: pop     ebx
 0x5D51F1: add     esp, 1Ch
 0x5D51F4: retn
+0x9C5660: mov     eax, [ebp-18h]
+0x9C5663: push    eax
+0x9C5664: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C5669: pop     ecx
+0x9C566A: retn
+0x9C566B: mov     eax, [ebp-10h]
+0x9C566E: push    eax
+0x9C566F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C5674: pop     ecx
+0x9C5675: retn
+0x9C5676: mov     edx, [esp+arg_4]
+0x9C567A: lea     eax, [edx-20h]
+0x9C567D: mov     ecx, [edx-24h]
+0x9C5680: xor     ecx, eax
+0x9C5682: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5687: mov     eax, offset stru_AEDE24
+0x9C568C: jmp     ___CxxFrameHandler3

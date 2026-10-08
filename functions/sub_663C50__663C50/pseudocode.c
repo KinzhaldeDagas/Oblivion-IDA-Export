@@ -1,46 +1,48 @@
-int __thiscall sub_663C50(Actor *this, float a2)
+// Skill-use requirement recalculation evaluates the curve with the raw skill level, including level 0; only an exactly-zero computed result is replaced with 1.
+int __thiscall Player_RecalculateRequiredSkillExperience(PlayerCharacter *this, SkillActorValue actorValue)
 {
   int result; // eax
-  char GroupOffsetFromAV; // al
-  int v5; // esi
-  int BaseCalcAVi; // ebp
-  TESObjectCELL *v7; // ebx
-  TESObjectREFR *BaseClass; // eax
-  TESObjectCELL *ParentCell; // eax
-  TESForm::ModReferenceList *v10; // eax
-  int v11; // [esp-10h] [ebp-1Ch]
-  float v12; // [esp+4h] [ebp-8h]
+  signed __int8 GroupOffsetFromAV; // al
+  TESSkill_RecordView *skill; // esi
+  UInt32 BaseCalcAVi; // ebp
+  SkillSpecialization specialization; // ebx
+  TESForm::ModReferenceList *BaseClass; // eax
+  UInt32 DwordAtOffset40; // eax
+  TESClass *v10; // eax
+  SkillActorValue v11; // [esp-10h] [ebp-1Ch]
+  bool specializationSkill; // [esp+4h] [ebp-8h]
   int v13; // [esp+8h] [ebp-4h]
-  float v14; // [esp+10h] [ebp+4h]
+  bool actorValuea; // [esp+10h] [ebp+4h]
+  float actorValueb; // [esp+10h] [ebp+4h]
 
-  result = LODWORD(a2);
-  if ( (unsigned int)(LODWORD(a2) - 0xC) <= 0x14 )
+  result = actorValue; /*0x663c50*/
+  if ( (unsigned int)(actorValue - 0xC) <= 0x14 ) /*0x663c60*/
   {
-    GroupOffsetFromAV = ActorValue_GetGroupOffsetFromAV(2, SLOBYTE(a2));
-    v13 = GroupOffsetFromAV;
-    result = (int)TESDataHandler_GetTESSkillByCode((char *)TESDataHandler, GroupOffsetFromAV);
-    v5 = result;
-    if ( result )
+    GroupOffsetFromAV = ActorValue_GetGroupOffsetFromAV(2, actorValue); /*0x663c6b*/
+    v13 = GroupOffsetFromAV; /*0x663c7d*/
+    result = (int)TESDataHandler_GetTESSkillByCode((void *)g_TESDataHandler, GroupOffsetFromAV); /*0x663c81*/
+    skill = (TESSkill_RecordView *)result; /*0x663c86*/
+    if ( result ) /*0x663c8c*/
     {
-      BaseCalcAVi = Actor_GetBaseCalcAVi((int *)this, 0, (int)this, result, *(_DWORD *)(result + 0x2C));
-      LOBYTE(v12) = 0;
-      LOBYTE(a2) = 0;
-      if ( Actor_GetBaseClass(this)[1].next != (TESForm::ModReferenceList *)iClassCharactergenClass )
+      BaseCalcAVi = Actor_GetBaseCalcAVi((int *)this, 0, (int)this, result, *(_DWORD *)(result + 0x2C)); /*0x663ca0*/
+      specializationSkill = 0; /*0x663ca2*/
+      actorValuea = 0; /*0x663ca6*/
+      if ( Actor_GetBaseClass((Actor *)this)[1].next != (TESForm::ModReferenceList *)g_iClassCharactergenClass.value ) /*0x663cb8*/
       {
-        v7 = *(TESObjectCELL **)(v5 + 0x34);
-        BaseClass = (TESObjectREFR *)Actor_GetBaseClass(this);
-        ParentCell = TESObjectREFR_GetParentCell(BaseClass);
-        v11 = *(_DWORD *)(v5 + 0x2C);
-        LOBYTE(v12) = ParentCell == v7;
-        v10 = Actor_GetBaseClass(this);
-        LOBYTE(a2) = sub_51C090(v10, v11);
+        specialization = skill->data.specialization;// Read TESSkill_Data::specialization at TESSkill+0x34 for the independent specialization-speed comparison. /*0x663cba*/
+        BaseClass = Actor_GetBaseClass((Actor *)this); /*0x663cbf*/
+        DwordAtOffset40 = Shared_GetDwordAtOffset40(BaseClass);// TESClass call context: read TESClass::specialization at +0x40 through the linker-shared dword accessor, then compare it with TESSkill::specialization at +0x34. /*0x663cc6*/
+        v11 = skill->data.actorValue; /*0x663cd3*/
+        specializationSkill = DwordAtOffset40 == specialization; /*0x663cd6*/
+        v10 = (TESClass *)Actor_GetBaseClass((Actor *)this); /*0x663cda*/
+        actorValuea = TESClass_IsMajorSkillAV(v10, v11);// The sole required-use membership split is TESClass_IsMajorSkillAV: true selects g_fSkillUseMajorMult, false selects g_fSkillUseMinorMult. The chargen placeholder class bypass also leaves both flags false. /*0x663ce6*/
       }
-      v14 = sub_548030(BaseCalcAVi, v12, a2);
-      if ( 0.0 == v14 )
-        v14 = 1.0;
-      *((float *)this + v13 + 0x1E9) = v14;
-      return v13;
+      actorValueb = Calc_RequiredSkillUseExperience(BaseCalcAVi, specializationSkill, actorValuea);// Required use = pow(baseSkillValue * g_fSkillUseFactor, g_fSkillUseExp) * (specializationMatch ? g_fSkillUseSpecMult : 1) * (majorMatch ? g_fSkillUseMajorMult : g_fSkillUseMinorMult). Native defaults: 1.0, 1.0, 0.75, 0.75, 1.25. /*0x663cfa*/
+      if ( 0.0 == actorValueb ) /*0x663d0d*/
+        actorValueb = 1.0; /*0x663d11*/
+      this->requiredSkillExp[v13] = actorValueb; /*0x663d1d*/
+      return v13; /*0x663d19*/
     }
   }
-  return result;
+  return result; /*0x663d26*/
 }

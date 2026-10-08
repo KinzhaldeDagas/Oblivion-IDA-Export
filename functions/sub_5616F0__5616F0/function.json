@@ -1,19 +1,40 @@
 {
-  "callees_count": 134,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 54,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_5616F0",
+  "chunks": [
+    [
+      "0x5616F0",
+      "0x5622A5"
+    ],
+    [
+      "0x4B9D50",
+      "0x4B9D61"
+    ],
+    [
+      "0x9BD150",
+      "0x9BD1F4"
+    ]
+  ],
+  "chunks_sha256": "86c62b3641460740a7a44a4694253137c346ed9776602456de58ec995636965b",
+  "comment_regular": "\n\n[2026-10-02 tangent preservation pass] Verified stock branch builder copies exported tangent/binormal XYZ using the compacted vertex mapping and attaches owning TangentSpaceData to property+0xD4. Fallout BSTreeModel::CreateBranchGeometry 0x8246BD48 corroborates preservation of both vectors. A basis synthesized only from normals loses original direction/handedness. SpeedTreeOBSE branch-shader frond path now preserves exported frond tangents (+0x5C) and binormals (+0x58) through capture/cache/clone and supplies separate property-owned copies. Normal-derived fallback remains only for absent pairs.\n\n[2026-10-02 branch dimming correction] Verified branch STSP per-vertex packing: x=exported windWeight, y=4*matrixByte, z=BYTE1(packedColor)/255.0, w=0. Divisor at 0xA3DDD8 has double bits 0x406FE00000000000. Fallout CreateBranchGeometry 0x8246BD48 corroborates color-derived z and 1/255 scale, but byte addressing differs on PPC; use Oblivion byte selection. RT4.1 IndexedGeometry.cpp:596 explicitly separates little/big-endian packing. SpeedTreeOBSE now retains Oblivion packed-green scalar in owned cache buffers and applies it ONLY to branch-shader property creation. The frond layout keeps z=0; eliminating fake secondary wind does not mean branch z is unused. Missing packed-color data rejects branch property creation instead of inventing a dimmer.\n\n[v152 UV delivery] Native branch LOD builder compacts by selected source vertex indices, copying diffuse S/T at561DFD/561E05 into scene UV0 at561E11/561E1C without a second V flip. Extra UV channels must follow this same source-to-LOD mapping; v152 has not yet added their scene/shader consumers.\n\n[v153 extra UV delivery] Plugin post-builder bridge now checks source/scene strip lengths, canonical ascending vertex remapping and bit-identical UV0 before constructing seven planar UV sets. All model LOD arrays are prepared before SetData728890 publication; XYZ/N/color pointers are preserved and CPU streams retained. Base builder clears packed colors and primary wind but leaves source strip/UV data usable. Actual native scene execution and graphics integration remain UNVERIFIED.\n\nVerified branch resource path: branch LOD count sizes three model arrays—branchGeometryDataByLOD (+0x14), branchShaderPropertiesByLOD (+0x24), and branchCachedPropertiesByLOD (+0x2C). CreateArt turns geometry data into branch NiTriStrips, attaches the per-LOD shader property, and caches property ID 3.",
+  "comment_repeatable": "Verified branch resource path: branch LOD count sizes three model arrays—branchGeometryDataByLOD (+0x14), branchShaderPropertiesByLOD (+0x24), and branchCachedPropertiesByLOD (+0x2C). CreateArt turns geometry data into branch NiTriStrips, attaches the per-LOD shader property, and caches property ID 3.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
+  "display_name": "BSTreeModel_CreateBranchGeometry",
   "end_ea": "0x5622A5",
+  "evidence_confidence": "Unknown",
   "flags": 23552,
   "has_pseudocode": true,
-  "name": "sub_5616F0",
+  "name": "BSTreeModel_CreateBranchGeometry",
   "segment": ".text",
   "sha256": "e6e7a282f22f41115f2a5b6f874d49fc91ec53e05ce76c0308d7f183fb61c55d",
   "size": 2997,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5616F0",
-  "type": "int __thiscall(_DWORD *this)",
-  "xrefs_from_count": 952,
+  "total_chunk_size": 3178,
+  "type": "void __thiscall(BSTreeModel_OblivionLayout_058 *this)",
+  "xrefs_from_count": 1009,
   "xrefs_to_count": 1
 }

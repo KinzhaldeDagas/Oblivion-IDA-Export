@@ -1,106 +1,171 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "StorageBaseImplVtbl",
+  "definition": "struct StorageBaseImplVtbl\n{\nvoid (*Destroy)(StorageBaseImpl_0 *);\nvoid (*Invalidate)(StorageBaseImpl_0 *);\nHRESULT_0 (*Flush)(StorageBaseImpl_0 *);\nHRESULT_0 (*GetFilename)(StorageBaseImpl_0 *, LPWSTR *);\nHRESULT_0 (*CreateDirEntry)(StorageBaseImpl_0 *, const DirEntry_0 *, DirRef *);\nHRESULT_0 (*WriteDirEntry)(StorageBaseImpl_0 *, DirRef, const DirEntry_0 *);\nHRESULT_0 (*ReadDirEntry)(StorageBaseImpl_0 *, DirRef, DirEntry_0 *);\nHRESULT_0 (*DestroyDirEntry)(StorageBaseImpl_0 *, DirRef);\nHRESULT_0 (*StreamReadAt)(StorageBaseImpl_0 *, DirRef, ULARGE_INTEGER, ULONG, void *, ULONG *);\nHRESULT_0 (*StreamWriteAt)(StorageBaseImpl_0 *, DirRef, ULARGE_INTEGER, ULONG, const void *, ULONG *);\nHRESULT_0 (*StreamSetSize)(StorageBaseImpl_0 *, DirRef, ULARGE_INTEGER);\nHRESULT_0 (*StreamLink)(StorageBaseImpl_0 *, DirRef, DirRef);\nHRESULT_0 (*GetTransactionSig)(StorageBaseImpl_0 *, ULONG *, BOOL);\nHRESULT_0 (*SetTransactionSig)(StorageBaseImpl_0 *, ULONG);\nHRESULT_0 (*LockTransaction)(StorageBaseImpl_0 *, BOOL);\nHRESULT_0 (*UnlockTransaction)(StorageBaseImpl_0 *, BOOL);\n}\n",
   "id": 18374686479672038495,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Destroy",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(StorageBaseImpl_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Invalidate",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(StorageBaseImpl_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Flush",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(StorageBaseImpl_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetFilename",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HRESULT_0 (*)(StorageBaseImpl_0 *, LPWSTR *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CreateDirEntry",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(StorageBaseImpl_0 *, const DirEntry_0 *, DirRef *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "WriteDirEntry",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(StorageBaseImpl_0 *, DirRef, const DirEntry_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ReadDirEntry",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(StorageBaseImpl_0 *, DirRef, DirEntry_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DestroyDirEntry",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "HRESULT_0 (*)(StorageBaseImpl_0 *, DirRef)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "StreamReadAt",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(StorageBaseImpl_0 *, DirRef, ULARGE_INTEGER, ULONG, void *, ULONG *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "StreamWriteAt",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(StorageBaseImpl_0 *, DirRef, ULARGE_INTEGER, ULONG, const void *, ULONG *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "StreamSetSize",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(StorageBaseImpl_0 *, DirRef, ULARGE_INTEGER)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "StreamLink",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "HRESULT_0 (*)(StorageBaseImpl_0 *, DirRef, DirRef)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetTransactionSig",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(StorageBaseImpl_0 *, ULONG *, BOOL)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetTransactionSig",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(StorageBaseImpl_0 *, ULONG)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "LockTransaction",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(StorageBaseImpl_0 *, BOOL)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "UnlockTransaction",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "HRESULT_0 (*)(StorageBaseImpl_0 *, BOOL)"
     }
   ],
   "name": "StorageBaseImplVtbl",
+  "ordinal": 5302,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 64
 }

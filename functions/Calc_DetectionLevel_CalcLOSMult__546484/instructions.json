@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x546484",
-    "line": "mov     eax, [esp+arg_18]",
+    "line": "mov     eax, [esp+arg_18]; Selects the LOS sound multiplier: full contribution with sight, fSneakSoundLosMult without sight. Detection can therefore still occur through sound when visual LOS fails.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x5464A4",
-    "line": "jz      short Calc_DetectionLevel___CalcSoundFactor",
+    "line": "jz      short Calc_DetectionLevel_ApplySoundFactor; Combines movement/boot noise, distance attenuation, LOS and running multipliers, then scales the audible contribution by fSneakSoundsMult while preserving the stronger accumulated contribution.",
     "mnemonic": "jz",
     "size": 2
   },

@@ -1,1 +1,1 @@
-EVENTMSG
+typedef tagEVENTMSG EVENTMSG;

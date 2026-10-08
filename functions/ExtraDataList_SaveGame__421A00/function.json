@@ -1,19 +1,32 @@
 {
-  "callees_count": 251,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 130,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 121,
+  "chunks": [
+    [
+      "0x421A00",
+      "0x422A14"
+    ]
+  ],
+  "chunks_sha256": "9c2e583a8ff742ff713530e02e656b2c7ca24d9f5afef1d2ae59f2db511db896",
+  "comment_regular": "Verified save-game block writer handles dynamic ExtraData records but has no ExtraDistantData/XLOD case. This is distinct from plugin-record serialization, whose ExtraDataList_Save case writes XLOD (12 bytes). Whether omitting it from save-game blocks is intentional static-data policy is Probable, not directly stated.",
+  "comment_repeatable": "Verified save-game block writer handles dynamic ExtraData records but has no ExtraDistantData/XLOD case. This is distinct from plugin-record serialization, whose ExtraDataList_Save case writes XLOD (12 bytes). Whether omitting it from save-game blocks is intentional static-data policy is Probable, not directly stated.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 123,
   "display_name": "ExtraDataList_SaveGame",
   "end_ea": "0x422A14",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "ExtraDataList_SaveGame",
   "segment": ".text",
   "sha256": "9c2e583a8ff742ff713530e02e656b2c7ca24d9f5afef1d2ae59f2db511db896",
   "size": 4116,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x421A00",
+  "total_chunk_size": 4116,
   "type": "int __userpurge@<eax>(ExtraDataList *this@<ecx>, double st7_0@<st0>, int a3, TESObjectREFR *a4)",
-  "xrefs_from_count": 1486,
+  "xrefs_from_count": 1487,
   "xrefs_to_count": 2
 }

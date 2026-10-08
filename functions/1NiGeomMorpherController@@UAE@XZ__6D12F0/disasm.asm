@@ -54,7 +54,7 @@
 0x6D1381: mov     eax, [esi+44h]
 0x6D1384: push    eax
 0x6D1385: mov     dword ptr [esi+40h], offset ??_7?$NiTArray@M@@6B@; const NiTArray<float>::`vftable'
-0x6D138C: call    FormHeapFree
+0x6D138C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6D1391: add     esp, 4
 0x6D1394: mov     ecx, esi; this
 0x6D1396: mov     [esp+20h+var_4], 0FFFFFFFFh
@@ -67,3 +67,24 @@
 0x6D13B1: pop     ebx
 0x6D13B2: add     esp, 10h
 0x6D13B5: retn
+0x4BCBC0: mov     eax, [ecx+4]
+0x4BCBC3: push    eax
+0x4BCBC4: mov     dword ptr [ecx], offset ??_7?$NiTArray@M@@6B@; const NiTArray<float>::`vftable'
+0x4BCBCA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x4BCBCF: pop     ecx
+0x4BCBD0: retn
+0x9C78D0: mov     ecx, [ebp-10h]; this
+0x9C78D3: jmp     j_??1NiPSysResetOnLoopCtlr@@UAE@XZ; NiPSysResetOnLoopCtlr::~NiPSysResetOnLoopCtlr(void)
+0x9C78D8: mov     ecx, [ebp-10h]
+0x9C78DB: add     ecx, 40h ; '@'
+0x9C78DE: jmp     loc_4BCBC0
+0x9C78E3: mov     ecx, [ebp-10h]
+0x9C78E6: add     ecx, 50h ; 'P'; slot
+0x9C78E9: jmp     NiPointerSlot_Release
+0x9C78EE: mov     edx, [esp+arg_4]
+0x9C78F2: lea     eax, [edx-10h]
+0x9C78F5: mov     ecx, [edx-14h]
+0x9C78F8: xor     ecx, eax
+0x9C78FA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C78FF: mov     eax, offset stru_AEFCD4
+0x9C7904: jmp     ___CxxFrameHandler3

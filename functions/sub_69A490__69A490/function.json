@@ -1,19 +1,32 @@
 {
-  "callees_count": 52,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_69A490",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 39,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x69A490",
+      "0x69A74C"
+    ]
+  ],
+  "chunks_sha256": "582c9711878962b00021f720fcaa9f6e299c7eeabea3a42c1974f4e2499d8311",
+  "comment_regular": "Obstruction raycast helper. Configures layer 0x1C collision mask, builds from supplied point to actor mid/upper z, preserves actor collision identity in high 16 filter bits, and returns true when no ray hit occurs.",
+  "comment_repeatable": "Obstruction raycast helper. Configures layer 0x1C collision mask, builds from supplied point to actor mid/upper z, preserves actor collision identity in high 16 filter bits, and returns true when no ray hit occurs.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 21,
+  "display_name": "MagicCaster_IsRayClearToActorMidpoint_Layer1C",
   "end_ea": "0x69A74C",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "sub_69A490",
+  "name": "MagicCaster_IsRayClearToActorMidpoint_Layer1C",
   "segment": ".text",
   "sha256": "582c9711878962b00021f720fcaa9f6e299c7eeabea3a42c1974f4e2499d8311",
   "size": 700,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x69A490",
-  "type": "bool __stdcall(NiPoint3, TESObjectREFR *argC)",
+  "total_chunk_size": 700,
+  "type": "bool __stdcall(NiPoint3, TESChildCELL *argC)",
   "xrefs_from_count": 310,
   "xrefs_to_count": 2
 }

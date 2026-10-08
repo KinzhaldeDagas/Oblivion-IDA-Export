@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 3,
   "callers_count": 6,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_4CBBB0",
+  "chunks": [
+    [
+      "0x4CBBB0",
+      "0x4CBBE4"
+    ]
+  ],
+  "chunks_sha256": "8f48ac59937b39a6329aa398b96dc59ce453f8feb0c173928121e1ff8b1ea8b8",
+  "comment_regular": "Verified: locks a cell's object list and returns the smallest-radius TESSubSpace reference containing the query position; this is the interior-cell counterpart to the WorldSpace coordinate-bucket lookup.",
+  "comment_repeatable": "Verified: locks a cell's object list and returns the smallest-radius TESSubSpace reference containing the query position; this is the interior-cell counterpart to the WorldSpace coordinate-bucket lookup.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "TESObjectCELL_FindSmallestSubSpaceContainingPosition",
   "end_ea": "0x4CBBE4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4CBBB0",
+  "name": "TESObjectCELL_FindSmallestSubSpaceContainingPosition",
   "segment": ".text",
   "sha256": "8f48ac59937b39a6329aa398b96dc59ce453f8feb0c173928121e1ff8b1ea8b8",
   "size": 52,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4CBBB0",
-  "type": "float *__thiscall(TESObjectCELL *, float *arg0)",
+  "total_chunk_size": 52,
+  "type": "TESObjectREFR *__thiscall(TESObjectCELL *this, float *worldPosition)",
   "xrefs_from_count": 24,
   "xrefs_to_count": 6
 }

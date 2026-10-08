@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7C0D10",
-    "line": "mov     eax, [esp+arg_14]",
+    "line": "mov     eax, [esp+arg_14]; MoonSugarEffect decode: default render-target type map. Type 4 is full default-RT dimensions for image-space source; type 3 is full-size ping-pong; types 0x10/0x13 are blur/hit square temps sized by dword_B2C2B8.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x7C0D9F",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x7C0DF0",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -973,13 +973,13 @@
   },
   {
     "ea": "0x7C0F1C",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7C0F21",
-    "line": "mov     ecx, [esp+arg_C]",
+    "line": "mov     ecx, [esp+arg_C]; Type-5 case: stores default-RT width through the width output pointer. Hex-Rays can misidentify this because the function reuses the same stack slot as a temporary afterward.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1051,7 +1051,7 @@
   },
   {
     "ea": "0x7C0F3D",
-    "line": "mov     [esp+4+arg_8], eax",
+    "line": "mov     [esp+4+arg_8], eax; Reuses the no-longer-needed width-pointer stack slot as a temporary for the default-RT height; this does not overwrite the width result.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1075,13 +1075,13 @@
   },
   {
     "ea": "0x7C0F4D",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7C0F52",
-    "line": "mov     ecx, [esp+4+arg_C]",
+    "line": "mov     ecx, [esp+4+arg_C]; Type-5 case: loads the distinct height output pointer and stores default-RT height.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2209,7 +2209,7 @@
   },
   {
     "ea": "0x7C1235",
-    "line": "movzx   eax, word ptr ds:0B2C67Ch; jumptable 007C0D28 case 23",
+    "line": "movzx   eax, word ptr ds:0B2C67Ch; Default target type 0x17 uses unsigned-short ShadowSurfaceRes for both width and height (retail IDB initial value 0x400).",
     "mnemonic": "movzx",
     "size": 7
   },
@@ -2251,7 +2251,7 @@
   },
   {
     "ea": "0x7C1250",
-    "line": "mov     dword ptr [eax], 6",
+    "line": "mov     dword ptr [eax], 6; Type 0x17 target flags = 6.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2263,7 +2263,7 @@
   },
   {
     "ea": "0x7C125C",
-    "line": "mov     [ecx], edx",
+    "line": "mov     [ecx], edx; Type 0x17 D3D format = ShadowMapRenderTargetD3DFormat, retail value 0x72 (D3DFMT_R32F).",
     "mnemonic": "mov",
     "size": 2
   },

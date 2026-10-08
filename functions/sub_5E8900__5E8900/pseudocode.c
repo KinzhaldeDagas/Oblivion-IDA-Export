@@ -1,37 +1,48 @@
-bool __usercall sub_5E8900@<al>(Actor *this@<ecx>, double a2@<st1>)
+double __usercall sub_5E8900@<st0>(Actor *this@<ecx>, double result@<st0>, double a3@<st2>)
 {
   LowProcess *process; // eax
   BSExtraDataVtbl *editorPackage; // edi
-  char v5; // al
-  TESObjectCELL *ParentCell; // eax
-  int v7; // ebx
-  int v8; // edi
+  char v6; // al
+  TESObjectCELL *DwordAtOffset40; // eax
+  int v8; // ebx
+  int v9; // edi
 
-  process = this->members.super.process;
-  editorPackage = (BSExtraDataVtbl *)process->editorPackage;
-  if ( !editorPackage )
-    return 0;
-  if ( sub_567770((char *)process->editorPackage) )
-    editorPackage = ExtraDataList::GetExtraPackage(&this->members.super.super.baseExtraList);
-  if ( !editorPackage )
-    return 0;
-  if ( ((int)editorPackage[3].CompareTo & 1) == 0 )
-    return 0;
-  sub_566DC0((TESPackage *)editorPackage, flt_A30634, a2, this, 0, flt_A30634);
-  if ( !v5 )
+  process = this->members.super.process; /*0x5e8903*/
+  editorPackage = (BSExtraDataVtbl *)process->editorPackage; /*0x5e8907*/
+  if ( editorPackage ) /*0x5e890c*/
   {
-    if ( !TESObjectREFR_GetParentCell((TESObjectREFR *)this) )
-      return 0;
-    ParentCell = TESObjectREFR_GetParentCell((TESObjectREFR *)this);
-    if ( !sub_4CAAC0((ExtraDataList *)ParentCell, this) )
-      return 0;
+    if ( TESPackage::IsTemporaryOverrideType(process->editorPackage) ) /*0x5e8914*/
+      editorPackage = ExtraDataList::GetExtraPackage(&this->members.super.super.baseExtraList); /*0x5e8925*/
+    if ( editorPackage ) /*0x5e8929*/
+    {
+      if ( ((int)editorPackage[3].CompareTo & 1) != 0 ) /*0x5e892f*/
+      {
+        result = sub_566DC0( /*0x5e8940*/
+                   (TESPackage *)editorPackage,
+                   result,
+                   kTerrainLODQuadRayDirectionZ,
+                   a3,
+                   this,
+                   0,
+                   kTerrainLODQuadRayDirectionZ);
+        if ( v6 /*0x5e895e*/
+          || Shared_GetDwordAtOffset40(this)
+          && (DwordAtOffset40 = (TESObjectCELL *)Shared_GetDwordAtOffset40(this),
+              TESObjectCELL_IsOwnedByActor(DwordAtOffset40, this)) )
+        {
+          v8 = 0; /*0x5e8972*/
+          v9 = ((int (__usercall *)@<eax>(Actor *@<ecx>, double@<st0>))this->vtbl->super.super.GetBaseForm)( /*0x5e8976*/
+                 this,
+                 result);
+          if ( v9 ) /*0x5e897a*/
+          {
+            if ( this->vtbl->super.super.IsActor((TESObjectREFR *)this) ) /*0x5e8986*/
+              v8 = v9; /*0x5e898c*/
+          }
+          TESAIForm_OffersService((_DWORD *)(v8 + 0x68), 0x259F); /*0x5e8996*/
+        }
+      }
+    }
   }
-  v7 = 0;
-  v8 = (int)this->vtbl->super.super.GetBaseForm((TESObjectREFR *)this);
-  if ( v8 )
-  {
-    if ( this->vtbl->super.super.IsActor((TESObjectREFR *)this) )
-      v7 = v8;
-  }
-  return TESAIForm_OffersService((_DWORD *)(v7 + 0x68), 0x259F);
+  return result; /*0x5e899c*/
 }

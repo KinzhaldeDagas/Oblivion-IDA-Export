@@ -1,19 +1,32 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7A1320",
+      "0x7A13AB"
+    ]
+  ],
+  "chunks_sha256": "216d5fb4a28af3136bd62526e5bfa320447566d5ec87f77f646fa0e5652660ce",
+  "comment_regular": "Checked insert-one wrapper for vector<st_vector<SFrondGuide>>. Preserves the 0x10-element index across possible reallocation and returns {owner,current}.",
+  "comment_repeatable": "Checked insert-one wrapper for vector<st_vector<SFrondGuide>>. Preserves the 0x10-element index across possible reallocation and returns {owner,current}.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7A1320",
-  "end_ea": "0x7A1375",
-  "flags": 21505,
+  "display_name": "OB_stVector_stVector_SFrondGuide_InsertOne_010201A0",
+  "end_ea": "0x7A13AB",
+  "evidence_confidence": "Unknown",
+  "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7A1320",
+  "name": "OB_stVector_stVector_SFrondGuide_InsertOne_010201A0",
   "segment": ".text",
-  "sha256": "f05641b6a79bd08655edc7be739cee8b2de18a17e44d394c708e810f2546020f",
-  "size": 85,
+  "sha256": "216d5fb4a28af3136bd62526e5bfa320447566d5ec87f77f646fa0e5652660ce",
+  "size": 139,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A1320",
-  "type": "void __thiscall __noreturn(unsigned int *this, int, unsigned int *, char *, int)",
-  "xrefs_from_count": 43,
+  "total_chunk_size": 139,
+  "type": "OB_stVectorIterator_stVector_SFrondGuide_010201A0 *__thiscall(OB_stVector_stVector_SFrondGuide_010201A0 *this, OB_stVectorIterator_stVector_SFrondGuide_010201A0 *result, OB_stVector_stVector_SFrondGuide_010201A0 *expectedOwner, OB_stVector_SFrondGuide_010201A0 *position, const OB_stVector_SFrondGuide_010201A0 *value)",
+  "xrefs_from_count": 69,
   "xrefs_to_count": 1
 }

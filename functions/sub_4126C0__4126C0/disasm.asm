@@ -60,7 +60,7 @@
 0x412779: call    __CIsqrt
 0x41277E: fstp    [esp+2Ch+var_1C]
 0x412782: fld     [esp+2Ch+var_1C]
-0x412786: fld     fSeenDataUpdateRadius
+0x412786: fld     dword ptr ds:0B35C14h
 0x41278C: fcompp
 0x41278E: fnstsw  ax
 0x412790: test    ah, 41h

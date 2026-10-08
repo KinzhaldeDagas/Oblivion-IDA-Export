@@ -1,19 +1,32 @@
 {
-  "callees_count": 27,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7A8CA0",
+  "chunks": [
+    [
+      "0x7A8CA0",
+      "0x7A8D8A"
+    ]
+  ],
+  "chunks_sha256": "1ba36f5b7bd4adcb1ed30a030eb90028f8133900a04795eeb3cab299269e718e",
+  "comment_regular": "OBLIVION AUTHORITY (2026-08-30): Fills a vector<bool> iterator range one packed bit at a time, setting or clearing the selected bit in each 32-bit word.",
+  "comment_repeatable": "OBLIVION AUTHORITY (2026-08-30): Fills a vector<bool> iterator range one packed bit at a time, setting or clearing the selected bit in each 32-bit word.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "OB_stVectorBool_FillRangeCore_010201A0",
   "end_ea": "0x7A8D8A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7A8CA0",
+  "name": "OB_stVectorBool_FillRangeCore_010201A0",
   "segment": ".text",
   "sha256": "1ba36f5b7bd4adcb1ed30a030eb90028f8133900a04795eeb3cab299269e718e",
   "size": 234,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A8CA0",
-  "type": "int __cdecl(_DWORD *, _DWORD *, unsigned int, int, _DWORD *, int, _BYTE *)",
-  "xrefs_from_count": 108,
+  "total_chunk_size": 234,
+  "type": "void __cdecl(OB_stVectorBoolIterator_010201A0 first, OB_stVectorBoolIterator_010201A0 last, const bool *value)",
+  "xrefs_from_count": 111,
   "xrefs_to_count": 1
 }

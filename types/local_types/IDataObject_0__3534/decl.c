@@ -1,1 +1,1 @@
-IDataObject_0
+typedef IDataObject IDataObject_0;

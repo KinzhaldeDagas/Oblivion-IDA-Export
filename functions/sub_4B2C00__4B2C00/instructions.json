@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4B2C00",
-    "line": "sub     esp, 10Ch",
+    "line": "sub     esp, 10Ch; Verified local save behavior: looks up runtime TESTextureList cache by tree FormID and, when present, derives the model path then calls nullsub_returnVoid_2arg (0x60CF60). That target is a single `retn 8`, so no DMTL chunk bytes are emitted by this helper. The load path does parse DMTL; this is an Oblivion load/save asymmetry.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x4B2C20",
-    "line": "mov     ecx, offset off_B08310",
+    "line": "mov     ecx, offset g_TESObjectTREETextureHashCache",
     "mnemonic": "mov",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x4B2C59",
-    "line": "call    nullsub_returnVoid_2arg",
+    "line": "call    nullsub_returnVoid_2arg; Verified: nullsub_returnVoid_2arg at 0x60CF60 is exactly `retn 8`; this call emits no DMTL chunk. Do not treat the presence of the call as successful serialization.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,19 +1,36 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 25,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
+  "chunks": [
+    [
+      "0x715990",
+      "0x715A60"
+    ],
+    [
+      "0x9C9EB0",
+      "0x9C9EDE"
+    ]
+  ],
+  "chunks_sha256": "91b8857aa40648ff965cd0a5ca48a78b0719bed192e1b250160c285656ea81db",
+  "comment_regular": "Constructs a 0x3C-byte NiTimeController. Persistent authored state: flags +0x08, frequency +0x0C, phase +0x10, low/high key times +0x14/+0x18, target +0x30, next controller +0x34. Initializes runtime start/last/cache values +0x1C..+0x28 to sentinels, update byte +0x2C to 1, and force byte +0x38 to 0.",
+  "comment_repeatable": "Constructs a 0x3C-byte NiTimeController. Persistent authored state: flags +0x08, frequency +0x0C, phase +0x10, low/high key times +0x14/+0x18, target +0x30, next controller +0x34. Initializes runtime start/last/cache values +0x1C..+0x28 to sentinels, update byte +0x2C to 1, and force byte +0x38 to 0.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
   "display_name": "NiTimeController::NiTimeController(void)",
   "end_ea": "0x715A60",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??0NiTimeController@@QAE@XZ",
   "segment": ".text",
   "sha256": "6b6fc3b299078d39f0dd16d825d5fa8b54e8dadcef120281b769fcd976b9392b",
   "size": 208,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x715990",
+  "total_chunk_size": 254,
   "type": "NiTimeController *__thiscall(NiTimeController *__hidden this)",
-  "xrefs_from_count": 74,
+  "xrefs_from_count": 88,
   "xrefs_to_count": 25
 }

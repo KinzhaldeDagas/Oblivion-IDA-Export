@@ -1,18 +1,31 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 5,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x80DDA0",
+      "0x80DF73"
+    ]
+  ],
+  "chunks_sha256": "5a1b770db76588b1e48086891ee940aa1244119f5f56c83edf1c1d9e0159d2c1",
+  "comment_regular": "\n\n[2026-10-03 lighting audit] Verified this is Frond vtable+34 transform stage: c8 directional block at shader+A8 from shared light-data slot0; c9 point block at shader+98 from shared position slot0. Native leaf light helper uses position slot1 for its optional local light. Candidate mismatch for frond point lighting: after sun+local pass association, confirm STFROND PT shader c9/c10 consumers before changing these source bindings. Constant map 0x80E500 currently binds LightRadius c10 to shared light-data slot0. This is unresolved, not an accepted correction.\n\n[2026-10-03 bytecode follow-up] PT bytecode confirmation closes the consumer uncertainty above: installed STFROND002/003 use c9 for point position and c10.x for radius. Native transform still sources position slot0 and map sources radius slot0, but restored pass local light is slot1. Full corrective shader path remains pending; do not treat current texture-only output as lighting acceptance.\n\n[2026-10-03 implemented correction] Plugin verifies and changes only this frond transform's FLD operands at 0x80DEEB,0x80DEFC,0x80DF0B from generic position slot0 (B46528/2C/30) to slot1 (B46538/3C/40). Native inverse-transform math remains intact. Vtable+34 (A94470) wrapper calls this 8-stack-argument thiscall routine (ret20), then supplies slot1 radius B465B8 divided by abs(world scale+30). Division is corroborated by Oblivion leaf 0x7F0100 and Fallout leaf UpdatePointLights 0x82214550; invalid radius/scale gets a small positive fallback. This is a plugin correction, not a claim that retail code already uses slot1.\n\n[2026-10-03 per-node guide fading] Plugin wrapper now fills redirected c10.yzw from the generated shape registry's last runtime-node-sync LOD, not a shared model's current tree LOD at draw time. c10.x remains object-space point radius. Missing/unvalidated scene metadata disables guide fading with a defined distance1. Embedded VS computes lerp(.33,1,saturate((nodeLOD-hint)/distance)); legacy PS receives factor through COLOR0 alpha, modern PS through TEXCOORD3.x. Both modulate only sampled alpha; fog/lighting remain independent.\n\n[2026-10-03 material scalar update] After native transform and point-radius update, plugin copies world ambient/sun/local constants into private c5/c6/c7 storage and applies immutable per-shape asset factors. This uses the same transform-before-constant-map-upload stage as native c8/c9 and prior redirected c10. No new shader register or bytecode changes were needed. Missing tracking uses identity factors; malformed retained scalars reject new shape registration. Actual game ordering/appearance still requires acceptance.\n\nSpeedTreeFrondShader pre-render transform. Builds inverse scaled local transform, converts global directional and point light into object space, stores point-light block at +0x98..+0xA4 and directional-light block at +0xA8..+0xB4.",
+  "comment_repeatable": "SpeedTreeFrondShader pre-render transform. Builds inverse scaled local transform, converts global directional and point light into object space, stores point-light block at +0x98..+0xA4 and directional-light block at +0xA8..+0xB4.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_80DDA0",
+  "display_name": "OB_SpeedTreeFrondShader_SetupTransformations_010201A0",
   "end_ea": "0x80DF73",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_80DDA0",
+  "name": "OB_SpeedTreeFrondShader_SetupTransformations_010201A0",
   "segment": ".text",
   "sha256": "5a1b770db76588b1e48086891ee940aa1244119f5f56c83edf1c1d9e0159d2c1",
   "size": 467,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x80DDA0",
+  "total_chunk_size": 467,
   "type": "int __thiscall(char **this, int, int, int, int, int, int, float *, int)",
   "xrefs_from_count": 129,
   "xrefs_to_count": 1

@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x652A50",
-    "line": "fstp    [esp+50h+var_50]; float",
+    "line": "fstp    [esp+50h+angleZ]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -409,19 +409,19 @@
   },
   {
     "ea": "0x652AD4",
-    "line": "push    eax",
+    "line": "push    eax; pointXYZ",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x652AD5",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x652AD7",
-    "line": "call    sub_4D7E30",
+    "line": "call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.",
     "mnemonic": "call",
     "size": 5
   },
@@ -961,7 +961,7 @@
   },
   {
     "ea": "0x652BFB",
-    "line": "fstp    [esp+50h+var_50]; float",
+    "line": "fstp    [esp+50h+angleZ]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1081,7 +1081,7 @@
   },
   {
     "ea": "0x652C4F",
-    "line": "fstp    [esp+50h+var_50]; float",
+    "line": "fstp    [esp+50h+angleZ]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1759,7 +1759,7 @@
   },
   {
     "ea": "0x652DAA",
-    "line": "call    sub_673980",
+    "line": "call    sub_673980; 3DTheft: returns package procedure row length for procedureArrayIndex. Rows used here include Follow row 7 and Flee row 0x13.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1975,7 +1975,7 @@
   },
   {
     "ea": "0x652E26",
-    "line": "call    sub_404C90",
+    "line": "call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2149,7 +2149,7 @@
   },
   {
     "ea": "0x652E87",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2323,7 +2323,7 @@
   },
   {
     "ea": "0x652EE6",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2335,7 +2335,7 @@
   },
   {
     "ea": "0x652EEE",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2509,7 +2509,7 @@
   },
   {
     "ea": "0x652F53",
-    "line": "fstp    [esp+54h+var_50]",
+    "line": "fstp    [esp+54h+angleZ]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2755,7 +2755,7 @@
   },
   {
     "ea": "0x652FC8",
-    "line": "push    offset sub_645A30; a6",
+    "line": "push    offset TESObjectREFR_SetOwnedDoorLockedForActor; a6",
     "mnemonic": "push",
     "size": 5
   },
@@ -2845,7 +2845,7 @@
   },
   {
     "ea": "0x652FEF",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2923,7 +2923,7 @@
   },
   {
     "ea": "0x653021",
-    "line": "push    offset sub_645AF0; a6",
+    "line": "push    offset TESObjectREFR_ClearOwnedDoorLockForActor; a6",
     "mnemonic": "push",
     "size": 5
   },
@@ -3013,7 +3013,7 @@
   },
   {
     "ea": "0x653048",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3739,7 +3739,7 @@
   },
   {
     "ea": "0x6531E4",
-    "line": "fstp    [esp+50h+var_50]",
+    "line": "fstp    [esp+50h+angleZ]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -3799,7 +3799,7 @@
   },
   {
     "ea": "0x653202",
-    "line": "fstp    [esp+50h+var_50]; float",
+    "line": "fstp    [esp+50h+angleZ]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -3853,7 +3853,7 @@
   },
   {
     "ea": "0x65321D",
-    "line": "lea     ecx, [esp+50h+var_24]",
+    "line": "lea     ecx, [esp+50h+var_24]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3883,13 +3883,13 @@
   },
   {
     "ea": "0x653233",
-    "line": "fstp    [esp+50h+var_50]; float",
+    "line": "fstp    [esp+50h+angleZ]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x653236",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4123,7 +4123,7 @@
   },
   {
     "ea": "0x6532B8",
-    "line": "fstp    [esp+50h+var_50]; float",
+    "line": "fstp    [esp+50h+angleZ]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -5281,7 +5281,7 @@
   },
   {
     "ea": "0x6534C6",
-    "line": "fstp    [esp+50h+var_50]",
+    "line": "fstp    [esp+50h+angleZ]",
     "mnemonic": "fstp",
     "size": 3
   },

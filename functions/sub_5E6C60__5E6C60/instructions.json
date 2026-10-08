@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5E6C60",
-    "line": "push    esi",
+    "line": "push    esi; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.",
     "mnemonic": "push",
     "size": 1
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x5E6CB4",
-    "line": "jmp     TESClass__IsGuardClass",
+    "line": "jmp     TESClass__IsGuardClass; TESClass::IsGuardClass reads classFlags at +0x60 bit 1.",
     "mnemonic": "jmp",
     "size": 5
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x5E6CBE",
-    "line": "jmp     TESClass__IsGuardClass",
+    "line": "jmp     TESClass__IsGuardClass; TESClass::IsGuardClass reads classFlags at +0x60 bit 1.",
     "mnemonic": "jmp",
     "size": 5
   },

@@ -1,19 +1,32 @@
 {
-  "callees_count": 19,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x67B260",
+      "0x67B316"
+    ]
+  ],
+  "chunks_sha256": "fb528d55ce9d820fb3d82737ecfe5ea2b3aea53b40800865be1a3dd402057bfd",
+  "comment_regular": "TES4 authoritative helper for inserting a non-player MobileObject into a process-level BSSimpleList. Supports front/back insertion and placement relative to another object; advances the list cursor after insertion.",
+  "comment_repeatable": "TES4 authoritative helper for inserting a non-player MobileObject into a process-level BSSimpleList. Supports front/back insertion and placement relative to another object; advances the list cursor after insertion.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_67B260",
+  "display_name": "ProcessLevelList_InsertMobileObject",
   "end_ea": "0x67B316",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_67B260",
+  "name": "ProcessLevelList_InsertMobileObject",
   "segment": ".text",
   "sha256": "fb528d55ce9d820fb3d82737ecfe5ea2b3aea53b40800865be1a3dd402057bfd",
   "size": 182,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x67B260",
-  "type": "void __thiscall(int this, PlayerCharacter *, char, char, int)",
+  "total_chunk_size": 182,
+  "type": "void __thiscall(void *this, MobileObject *object, bool append, bool insertRelative, MobileObject *relativeTo)",
   "xrefs_from_count": 84,
   "xrefs_to_count": 4
 }

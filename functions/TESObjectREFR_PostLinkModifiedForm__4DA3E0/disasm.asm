@@ -47,7 +47,7 @@
 0x4DA45C: push    ecx
 0x4DA45D: mov     ecx, ebp; this
 0x4DA45F: fstp    [esp+3Ch+a2]; a2
-0x4DA462: call    NiAVObject_UpdateNiAVObject
+0x4DA462: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x4DA467: mov     esi, [esp+34h+arg_0]
 0x4DA46B: pop     edi
 0x4DA46C: test    esi, 80000h
@@ -61,21 +61,21 @@
 0x4DA482: push    ebx
 0x4DA483: call    sub_4533F0
 0x4DA488: test    eax, 40000h
-0x4DA48D: push    8
-0x4DA48F: lea     ecx, [ebx+44h]
+0x4DA48D: push    8; mask
+0x4DA48F: lea     ecx, [ebx+44h]; this
 0x4DA492: jz      short loc_4DA4A0
-0x4DA494: call    sub_41F830
+0x4DA494: call    ExtraDataList_TestActionFlagBits; Test ExtraAction flag mask. Missing ExtraAction behaves as default flags byte 1. REFR save calls with 0x08 to decide whether to emit ONAM.
 0x4DA499: test    al, al
 0x4DA49B: setz    al
 0x4DA49E: jmp     short loc_4DA4A5
-0x4DA4A0: call    sub_41F830
+0x4DA4A0: call    ExtraDataList_TestActionFlagBits; Test ExtraAction flag mask. Missing ExtraAction behaves as default flags byte 1. REFR save calls with 0x08 to decide whether to emit ONAM.
 0x4DA4A5: test    al, al
-0x4DA4A7: push    4
-0x4DA4A9: mov     ecx, ebx
+0x4DA4A7: push    4; mask
+0x4DA4A9: mov     ecx, ebx; this
 0x4DA4AB: jz      short loc_4DA4B4
-0x4DA4AD: call    sub_4D82E0
+0x4DA4AD: call    TESObjectREFR_ClearActionFlagBits
 0x4DA4B2: jmp     short loc_4DA4B9
-0x4DA4B4: call    sub_4D8270
+0x4DA4B4: call    TESObjectREFR_SetActionFlagBits; Set reference action-state bits and synchronize special bit 0x04 with loaded/runtime open-state handling. ONAM itself represents action flag 0x08; PostLinkModifiedForm tests that bit before selecting set/clear paths.
 0x4DA4B9: test    esi, 177577E0h
 0x4DA4BF: jnz     short loc_4DA4D1
 0x4DA4C1: mov     edx, [ebx]

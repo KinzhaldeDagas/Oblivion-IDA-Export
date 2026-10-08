@@ -4,16 +4,16 @@
 0x5C142A: push    esi
 0x5C142B: xor     ebx, ebx
 0x5C142D: push    edi
-0x5C142E: mov     [esp+24h+var_14], ebx
+0x5C142E: mov     [esp+24h+destination], ebx
 0x5C1432: mov     [esp+24h+a1], ebx
-0x5C1436: call    sub_45A170
+0x5C1436: call    TESSaveLoadGame_UseSaveGameBlocks
 0x5C143B: test    al, al
 0x5C143D: jz      loc_5C14E0
-0x5C1443: mov     ecx, ds:0B33B00h
-0x5C1449: push    4; Size
+0x5C1443: mov     ecx, ds:0B33B00h; self
+0x5C1449: push    4; byteCount
 0x5C144B: lea     eax, [esp+28h+Dst]
-0x5C144F: push    eax; Dst
-0x5C1450: call    SaveLoad_LoadData
+0x5C144F: push    eax; destination
+0x5C1450: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x5C1455: cmp     [esp+24h+Dst], 4B4F4C42h
 0x5C145D: jz      short loc_5C14C7
 0x5C145F: mov     eax, ds:0B33B00h
@@ -22,7 +22,7 @@
 0x5C146C: jz      short loc_5C14AB
 0x5C146E: mov     ecx, [esi]
 0x5C1470: push    ecx; a1
-0x5C1471: call    TESForm_LookupByFormID
+0x5C1471: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x5C1476: mov     edx, [esi+5]
 0x5C1479: movzx   ecx, byte ptr [esi+9]
 0x5C147D: add     esp, 4
@@ -48,14 +48,14 @@
 0x5C14BA: push    offset aLoadgameBuff_0; "LoadGame Buffer error: Block Header is "...
 0x5C14BF: call    PrintError
 0x5C14C4: add     esp, 10h
-0x5C14C7: mov     ecx, ds:0B33B00h
+0x5C14C7: mov     ecx, ds:0B33B00h; self
 0x5C14CD: mov     eax, [ecx+14h]
-0x5C14D0: push    2; Size
-0x5C14D2: lea     edx, [esp+28h+var_14]
-0x5C14D6: push    edx; Dst
+0x5C14D0: push    2; byteCount
+0x5C14D2: lea     edx, [esp+28h+destination]
+0x5C14D6: push    edx; destination
 0x5C14D7: mov     [esp+2Ch+a1], eax
-0x5C14DB: call    SaveLoad_LoadData
-0x5C14E0: mov     esi, offset quickKeyList_ptr
+0x5C14DB: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
+0x5C14E0: mov     esi, 0B3B440h
 0x5C14E5: mov     [esp+24h+var_C], 8
 0x5C14ED: push    ebp
 0x5C14EE: mov     edi, edi
@@ -72,25 +72,25 @@
 0x5C1505: cmp     edi, ebx
 0x5C1507: jnz     short loc_5C14F7
 0x5C1509: mov     ebp, 1
-0x5C150E: push    ebp; Size
+0x5C150E: push    ebp; byteCount
 0x5C150F: lea     ecx, [esp+30h+anonymous_0+3]
-0x5C1513: push    ecx; Dst
-0x5C1514: mov     ecx, ds:0B33B00h
+0x5C1513: push    ecx; destination
+0x5C1514: mov     ecx, ds:0B33B00h; self
 0x5C151A: mov     [esi+0Ch], ebx
 0x5C151D: mov     [esi+4], ebx
 0x5C1520: mov     [esi+8], ebx
-0x5C1523: call    SaveLoad_LoadData
+0x5C1523: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x5C1528: cmp     byte ptr [esp+2Ch+anonymous_0+3], bl
 0x5C152C: mov     byte ptr [esp+2Ch+anonymous_0+2], bl
 0x5C1530: jbe     short loc_5C1590
-0x5C1532: mov     ecx, ds:0B33B00h
-0x5C1538: push    4; Size
+0x5C1532: mov     ecx, ds:0B33B00h; self
+0x5C1538: push    4; byteCount
 0x5C153A: lea     edx, [esp+30h+Dst]
-0x5C153E: push    edx; Dst
-0x5C153F: call    SaveLoad_LoadFormID
+0x5C153E: push    edx; destination
+0x5C153F: call    SaveLoad_LoadFormID; EnginePatch v2: byte-checked SaveLoad_LoadFormID hook. Bounded save-buffer copy, then preserves original iref-to-formID translation behavior.
 0x5C1544: mov     eax, [esp+34h+a1]
 0x5C1548: push    eax; a1
-0x5C1549: call    TESForm_LookupByFormID
+0x5C1549: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x5C154E: mov     edi, eax
 0x5C1550: add     esp, 4
 0x5C1553: cmp     edi, ebx
@@ -120,7 +120,7 @@
 0x5C1593: sub     [esp+34h+var_18], ebp
 0x5C1597: jnz     loc_5C14F0
 0x5C159D: mov     ecx, ds:0B33B00h
-0x5C15A3: call    sub_45A170
+0x5C15A3: call    TESSaveLoadGame_UseSaveGameBlocks
 0x5C15A8: test    al, al
 0x5C15AA: pop     ebp
 0x5C15AB: jz      loc_5C16C3
@@ -131,10 +131,10 @@
 0x5C15C2: jz      loc_5C1668
 0x5C15C8: mov     edx, [edi]
 0x5C15CA: push    edx; a1
-0x5C15CB: call    TESForm_LookupByFormID
+0x5C15CB: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x5C15D0: mov     ebx, [esp+34h+anonymous_0]
 0x5C15D4: mov     ecx, eax
-0x5C15D6: movzx   eax, [esp+34h+var_20]
+0x5C15D6: movzx   eax, word ptr [esp+34h+var_20]
 0x5C15DB: add     eax, ebx
 0x5C15DD: add     esp, 4
 0x5C15E0: cmp     esi, eax
@@ -147,7 +147,7 @@
 0x5C15EF: mov     eax, [edx+0D4h]
 0x5C15F5: call    eax
 0x5C15F7: mov     ecx, [edi]
-0x5C15F9: movzx   edx, [esp+38h+var_20]
+0x5C15F9: movzx   edx, word ptr [esp+38h+var_20]
 0x5C15FE: push    eax
 0x5C15FF: push    ecx
 0x5C1600: push    3A3h
@@ -171,7 +171,7 @@
 0x5C1633: push    edx
 0x5C1634: mov     edx, [eax+0D4h]
 0x5C163A: call    edx
-0x5C163C: movzx   ecx, [esp+38h+var_20]
+0x5C163C: movzx   ecx, word ptr [esp+38h+var_20]
 0x5C1641: push    eax
 0x5C1642: mov     eax, [edi]
 0x5C1644: push    eax
@@ -188,7 +188,7 @@
 0x5C1663: pop     ebx
 0x5C1664: add     esp, 18h
 0x5C1667: retn
-0x5C1668: movzx   eax, [esp+30h+var_20]
+0x5C1668: movzx   eax, word ptr [esp+30h+var_20]
 0x5C166D: mov     edi, [esp+30h+anonymous_0]
 0x5C1671: lea     edx, [eax+edi]
 0x5C1674: cmp     esi, edx

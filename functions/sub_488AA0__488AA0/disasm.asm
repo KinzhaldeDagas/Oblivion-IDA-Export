@@ -1,4 +1,4 @@
-0x488AA0: push    0FFFFFFFFh
+0x488AA0: push    0FFFFFFFFh; Set per-instance charge for a specific EntryData stack. Creates ExtraDataList/ExtraCharge as needed, or removes redundant charge data when newCharge exceeds the base maximum. containerChanges identifies the owning inventory; targetStack selects the equipped instance.
 0x488AA2: push    offset SEH_4CCEE0
 0x488AA7: mov     eax, large fs:0
 0x488AAD: push    eax
@@ -27,7 +27,7 @@
 0x488AEF: mov     [esp+20h+var_10], ecx
 0x488AF3: fild    [esp+20h+var_10]
 0x488AF7: fstp    [esp+20h+var_10]
-0x488AFB: fld     [esp+20h+arg_0]
+0x488AFB: fld     [esp+20h+newCharge]
 0x488AFF: fld     [esp+20h+var_10]
 0x488B03: fcomp   st(1)
 0x488B05: fnstsw  ax
@@ -40,7 +40,7 @@
 0x488B1D: fstp    st
 0x488B1F: call    FormHeapAlloc
 0x488B24: add     esp, 4
-0x488B27: mov     [esp+20h+arg_8], eax
+0x488B27: mov     [esp+20h+targetStack], eax
 0x488B2B: test    eax, eax
 0x488B2D: mov     [esp+20h+var_4], 0
 0x488B35: jz      short loc_488B42
@@ -60,11 +60,11 @@
 0x488B67: mov     esi, eax
 0x488B69: jmp     short loc_488B6D
 0x488B6B: xor     esi, esi
-0x488B6D: fld     [esp+20h+arg_0]
+0x488B6D: fld     [esp+20h+newCharge]
 0x488B71: push    ecx
 0x488B72: mov     ecx, edi
 0x488B74: fstp    [esp+24h+var_24]; float
-0x488B77: call    sub_41EE90
+0x488B77: call    ExtraDataList_SetCharge; Updates or creates ExtraCharge type 0x2E with the supplied float.
 0x488B7C: push    edi
 0x488B7D: mov     ecx, esi
 0x488B7F: call    BSSimpleList_PushFront
@@ -77,7 +77,7 @@
 0x488B95: pop     ebp
 0x488B96: add     esp, 10h
 0x488B99: retn    0Ch
-0x488B9C: mov     edx, [esp+20h+arg_8]
+0x488B9C: mov     edx, [esp+20h+targetStack]
 0x488BA0: mov     ecx, [eax]
 0x488BA2: test    ecx, ecx
 0x488BA4: jz      short loc_488BB1
@@ -90,7 +90,7 @@
 0x488BB3: fstp    st
 0x488BB5: call    FormHeapAlloc
 0x488BBA: add     esp, 4
-0x488BBD: mov     [esp+20h+arg_8], eax
+0x488BBD: mov     [esp+20h+targetStack], eax
 0x488BC1: test    eax, eax
 0x488BC3: mov     [esp+20h+var_4], 1
 0x488BCB: jz      short loc_488BF6
@@ -100,7 +100,7 @@
 0x488BD6: jmp     short loc_488BF8
 0x488BD8: push    ecx
 0x488BD9: fstp    [esp+24h+var_24]; float
-0x488BDC: call    sub_41EE90
+0x488BDC: call    ExtraDataList_SetCharge; Updates or creates ExtraCharge type 0x2E with the supplied float.
 0x488BE1: mov     ecx, [esp+20h+var_C]
 0x488BE5: mov     large fs:0, ecx
 0x488BEC: pop     ecx
@@ -110,12 +110,12 @@
 0x488BF0: add     esp, 10h
 0x488BF3: retn    0Ch
 0x488BF6: xor     esi, esi
-0x488BF8: fld     [esp+20h+arg_0]
+0x488BF8: fld     [esp+20h+newCharge]
 0x488BFC: push    ecx
 0x488BFD: mov     ecx, esi
 0x488BFF: fstp    [esp+24h+var_24]; float
 0x488C02: mov     [esp+24h+var_4], 0FFFFFFFFh
-0x488C0A: call    sub_41EE90
+0x488C0A: call    ExtraDataList_SetCharge; Updates or creates ExtraCharge type 0x2E with the supplied float.
 0x488C0F: mov     ecx, [ebp+0]
 0x488C12: push    esi
 0x488C13: call    BSSimpleList_PushFront
@@ -130,7 +130,7 @@
 0x488C2D: test    eax, eax
 0x488C2F: fstp    st
 0x488C31: jz      short loc_488C8D
-0x488C33: mov     ecx, [esp+20h+arg_8]
+0x488C33: mov     ecx, [esp+20h+targetStack]
 0x488C37: mov     esi, [eax]
 0x488C39: test    esi, esi
 0x488C3B: jz      short loc_488C8D
@@ -152,11 +152,11 @@
 0x488C64: cmp     dword ptr [esi+4], 0
 0x488C68: jnz     short loc_488C8D
 0x488C6A: mov     eax, [ebp+8]
-0x488C6D: mov     ecx, [esp+20h+arg_4]
-0x488C71: push    0
-0x488C73: push    1
-0x488C75: push    eax
-0x488C76: call    ContainerExtraData_GetEntryForForm
+0x488C6D: mov     ecx, [esp+20h+containerChanges]; this
+0x488C71: push    0; referenceFormIDOrZero
+0x488C73: push    1; unusedAlwaysOne
+0x488C75: push    eax; form
+0x488C76: call    ContainerExtraData_GetEntryForForm; Find EntryData for an exact TESForm in ExtraContainerChanges. Native ABI is three stack arguments and retn 0x0C. The middle Boolean is not read; callers conventionally pass true. If referenceFormIDOrZero is nonzero, require an extend-data list whose ExtraReferencePointer target has that form ID; otherwise return the form entry directly.
 0x488C7B: mov     ecx, [eax]
 0x488C7D: push    esi
 0x488C7E: call    BSSimpleList_Remove
@@ -173,3 +173,20 @@
 0x488C9B: pop     ebp
 0x488C9C: add     esp, 10h
 0x488C9F: retn    0Ch
+0x9AFC20: mov     eax, [ebp+0Ch]
+0x9AFC23: push    eax
+0x9AFC24: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFC29: pop     ecx
+0x9AFC2A: retn
+0x9AFC2B: mov     eax, [ebp+0Ch]
+0x9AFC2E: push    eax
+0x9AFC2F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFC34: pop     ecx
+0x9AFC35: retn
+0x9AFC36: mov     edx, [esp+containerChanges]
+0x9AFC3A: lea     eax, [edx-10h]
+0x9AFC3D: mov     ecx, [edx-14h]
+0x9AFC40: xor     ecx, eax
+0x9AFC42: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AFC47: mov     eax, offset stru_ADC10C
+0x9AFC4C: jmp     ___CxxFrameHandler3

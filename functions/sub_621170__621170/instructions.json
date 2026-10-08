@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x621170",
-    "line": "push    edi",
+    "line": "push    edi; Requires shooter HighProcess. Iterates cached controller+0x15C allies, or temporary combat-group friendlies if no controller.",
     "mnemonic": "push",
     "size": 1
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x6211EA",
-    "line": "call    sub_620050",
+    "line": "call    Combat_CheckActorBlocksRangedTarget; Vanilla quirk: result is overwritten for each ally and no early exit occurs. Final return reflects only the last list element, though every blocking ally receives the side effect.",
     "mnemonic": "call",
     "size": 5
   },
@@ -331,13 +331,13 @@
   },
   {
     "ea": "0x621200",
-    "line": "mov     ecx, offset dword_B3BDB0",
+    "line": "mov     ecx, (offset qword_B3BB2C+284h)",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x621205",
-    "line": "call    sub_67C880",
+    "line": "call    CombatGroupManager_BuildFriendlyEntryList; Builds temporary BSSimpleList of combat-group friendly entry pointers: same team byte, mount/rider equivalence, and shouldActorFight<=0. arg=0 disables process-level filter.",
     "mnemonic": "call",
     "size": 5
   },
@@ -376,12 +376,6 @@
     "line": "jmp     short loc_621220",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x62121A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
   },
   {
     "ea": "0x621220",
@@ -463,7 +457,7 @@
   },
   {
     "ea": "0x62123C",
-    "line": "call    sub_620050",
+    "line": "call    Combat_CheckActorBlocksRangedTarget; Read-mostly lane test for one ally: predictive target/ally yaw plus local horizontal bound width. Success has a controller side effect, so SmartAI must not call it as a query.",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,7 +499,7 @@
   },
   {
     "ea": "0x621250",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,7 +511,7 @@
   },
   {
     "ea": "0x621256",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

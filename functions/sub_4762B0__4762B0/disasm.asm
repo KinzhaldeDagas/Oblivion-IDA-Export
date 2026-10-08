@@ -1,4 +1,4 @@
-0x4762B0: push    0FFFFFFFFh
+0x4762B0: push    0FFFFFFFFh; Loads an IDLE KF into ActorAnimData without playback. Allocates an AnimIdle for +0xD0, chooses immediate versus queued loading from the native save/load flag 0x800, then calls ActorAnimData_InstallQueuedIdleOnly. The observed caller preloads a furniture-selected TESIdleForm.
 0x4762B2: push    offset SEH_478B90
 0x4762B7: mov     eax, large fs:0
 0x4762BD: push    eax
@@ -31,7 +31,7 @@
 0x47630F: push    ecx
 0x476310: push    edx
 0x476311: mov     ecx, eax
-0x476313: call    sub_474C50
+0x476313: call    AnimIdle_InitAndLoadKF; Initializes the 0x2C-byte AnimIdle runtime holder and starts its KF load. Observed layout: +0x00 phase (0 pending/unavailable, 1 ready, 2 active, 3 terminal), +0x04 completion/action mode, +0x08 KFModel, +0x0C requested slot/type, +0x10 played sequence, +0x24 TESIdleForm, +0x28 actor ref. Builds Meshes\\<TESIdleForm model path>, loads now or queues asynchronously, binds two actor-specific resources, and marks phase 1 when a KFModel is immediately available.
 0x476318: jmp     short loc_476350
 0x47631A: call    FormHeapAlloc
 0x47631F: add     esp, 4
@@ -48,16 +48,33 @@
 0x476343: push    edx
 0x476344: push    ecx
 0x476345: mov     ecx, eax
-0x476347: call    sub_474C50
+0x476347: call    AnimIdle_InitAndLoadKF; Initializes the 0x2C-byte AnimIdle runtime holder and starts its KF load. Observed layout: +0x00 phase (0 pending/unavailable, 1 ready, 2 active, 3 terminal), +0x04 completion/action mode, +0x08 KFModel, +0x0C requested slot/type, +0x10 played sequence, +0x24 TESIdleForm, +0x28 actor ref. Builds Meshes\\<TESIdleForm model path>, loads now or queues asynchronously, binds two actor-specific resources, and marks phase 1 when a KFModel is immediately available.
 0x47634C: jmp     short loc_476350
 0x47634E: xor     eax, eax
 0x476350: mov     ecx, esi
 0x476352: mov     [esi+0D0h], eax
 0x476358: mov     [esp+18h+var_4], 0FFFFFFFFh
-0x476360: call    sub_4753F0
+0x476360: call    ActorAnimData_InstallQueuedIdleOnly; Install-only path for the queued AnimIdle at ActorAnimData +0xD0. Requires phase 1 and a successful ActorAnimData_InstallKFModel, then cleans/frees the AnimIdle and clears +0xD0 without calling ActorAnimData_PlayEncodedGroup.
 0x476365: mov     ecx, [esp+18h+var_C]
 0x476369: mov     large fs:0, ecx
 0x476370: pop     ecx
 0x476371: pop     esi
 0x476372: add     esp, 10h
 0x476375: retn    0Ch
+0x9BFAD0: mov     eax, [ebp-10h]
+0x9BFAD3: push    eax
+0x9BFAD4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BFAD9: pop     ecx
+0x9BFADA: retn
+0x9BFADB: mov     eax, [ebp-10h]
+0x9BFADE: push    eax
+0x9BFADF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BFAE4: pop     ecx
+0x9BFAE5: retn
+0x9BFAE6: mov     edx, [esp+arg_4]
+0x9BFAEA: lea     eax, [edx-8]
+0x9BFAED: mov     ecx, [edx-0Ch]
+0x9BFAF0: xor     ecx, eax
+0x9BFAF2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BFAF7: mov     eax, offset stru_AE8F8C
+0x9BFAFC: jmp     ___CxxFrameHandler3

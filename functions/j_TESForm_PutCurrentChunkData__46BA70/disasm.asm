@@ -1,1 +1,1 @@
-0x46BA70: jmp     TESForm_PutFormRecordChunkData
+0x46BA70: jmp     TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.

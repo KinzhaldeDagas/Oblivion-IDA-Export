@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x776B3C",
-    "line": "mov     [esp+14h+var_8], eax",
+    "line": "mov     [esp+14h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -138,68 +138,62 @@
     "size": 2
   },
   {
-    "ea": "0x776B4A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x776B50",
-    "line": "lea     eax, [esp+1Ch+var_C]",
+    "line": "lea     eax, [esp+1Ch+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x776B54",
-    "line": "push    eax",
+    "line": "push    eax; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x776B55",
-    "line": "lea     ecx, [esp+20h+var_4]",
+    "line": "lea     ecx, [esp+20h+keyOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x776B59",
-    "line": "push    ecx",
+    "line": "push    ecx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x776B5A",
-    "line": "lea     edx, [esp+24h+var_8]",
+    "line": "lea     edx, [esp+24h+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x776B5E",
-    "line": "push    edx",
+    "line": "push    edx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x776B5F",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x776B61",
-    "line": "mov     [esp+28h+var_C], 0",
+    "line": "mov     [esp+28h+valueOut], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x776B69",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x776B6E",
-    "line": "mov     ebp, [esp+1Ch+var_C]",
+    "line": "mov     ebp, [esp+1Ch+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -265,7 +259,7 @@
   },
   {
     "ea": "0x776B8A",
-    "line": "mov     esi, [esp+1Ch+var_4]",
+    "line": "mov     esi, [esp+1Ch+keyOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -373,7 +367,7 @@
   },
   {
     "ea": "0x776BB8",
-    "line": "mov     [esp+1Ch+var_C], ecx",
+    "line": "mov     [esp+1Ch+valueOut], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -385,25 +379,25 @@
   },
   {
     "ea": "0x776BBE",
-    "line": "lea     ecx, [esp+1Ch+var_C]",
+    "line": "lea     ecx, [esp+1Ch+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x776BC2",
-    "line": "push    ecx",
+    "line": "push    ecx; node",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x776BC3",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; list",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x776BC5",
-    "line": "call    sub_7AA860",
+    "line": "call    NiTPointerList_RemoveNode; [Verified] Generic NiTPointerList node-removal helper. Unlinks the supplied node, updates head/tail and neighboring links, invokes the list's FreeNode vfunc, decrements item count, and returns the removed node's data pointer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -421,7 +415,7 @@
   },
   {
     "ea": "0x776BD5",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -433,7 +427,7 @@
   },
   {
     "ea": "0x776BDD",
-    "line": "cmp     [esp+1Ch+var_8], 0",
+    "line": "cmp     [esp+1Ch+position], 0",
     "mnemonic": "cmp",
     "size": 5
   },

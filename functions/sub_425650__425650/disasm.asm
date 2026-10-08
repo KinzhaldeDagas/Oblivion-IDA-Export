@@ -1,8 +1,8 @@
-0x425650: sub     esp, 8
+0x425650: sub     esp, 8; Verified conditional ExtraTeleport cleanup branch: when the matching cleanup flag is present and the reference is not in the protected state, it removes low-path world indexing when the door-link reference-ID ordering condition holds, then removes the ExtraTeleport entry.
 0x425653: push    ebx
 0x425654: push    esi
 0x425655: mov     esi, ecx
-0x425657: mov     ecx, [esp+10h+arg_4]
+0x425657: mov     ecx, [esp+10h+doorReference]
 0x42565B: xor     bl, bl
 0x42565D: test    ecx, ecx
 0x42565F: jz      short loc_425671
@@ -71,15 +71,15 @@
 0x42571F: mov     eax, [eax+0Ch]
 0x425722: test    eax, eax
 0x425724: jz      short loc_425753
-0x425726: mov     ecx, [esp+18h+arg_4]
+0x425726: mov     ecx, [esp+18h+doorReference]
 0x42572A: mov     edi, [ecx+0Ch]
-0x42572D: mov     ecx, eax
-0x42572F: call    sub_42B410
+0x42572D: mov     ecx, eax; this
+0x42572F: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x425734: cmp     edi, [eax+0Ch]
 0x425737: jnb     short loc_425746
-0x425739: mov     edx, [esp+18h+arg_4]
-0x42573D: push    edx
-0x42573E: call    sub_67F340
+0x425739: mov     edx, [esp+18h+doorReference]
+0x42573D: push    edx; doorReference
+0x42573E: call    TravelPath_RemoveAStarWorldNodeFromSpaceMaps; Verified unlink path for a door reference whose ExtraTeleport is being removed: locate its AStarWorldNode by reciprocal space pair and endpoint refs, remove it from both inner lists, remove/free empty inner maps and outer entries, unlink it from LowPathSearchGlobals.allAStarWorldNodes, release its state slot, and free the node. Called from RemoveExtraTeleportFromDoorRef and ExtraData cleanup.
 0x425743: add     esp, 4
 0x425746: push    32h ; '2'
 0x425748: mov     ecx, esi
@@ -155,7 +155,7 @@
 0x425817: push    35h ; '5'
 0x425819: mov     ecx, esi
 0x42581B: call    BaseExtraList_RemoveExtraByType
-0x425820: mov     eax, SaveLoad_CurrentSavegame
+0x425820: mov     eax, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.
 0x425825: mov     eax, [eax+44h]
 0x425828: cmp     eax, 1FFFF000h
 0x42582D: jz      short loc_42583A
@@ -220,7 +220,7 @@
 0x4258D7: mov     eax, [eax+0Ch]
 0x4258DA: test    eax, eax
 0x4258DC: jz      short loc_4258F4
-0x4258DE: mov     ecx, [esp+10h+arg_4]
+0x4258DE: mov     ecx, [esp+10h+doorReference]
 0x4258E2: push    ecx
 0x4258E3: lea     ecx, [eax+44h]
 0x4258E6: call    sub_424C00

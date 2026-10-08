@@ -1,4 +1,4 @@
-char *sub_741AD0()
+NiRTTI *sub_741AD0()
 {
-  return dword_B4020C;
+  return &stru_B4020C; /*0x741ad5*/
 }

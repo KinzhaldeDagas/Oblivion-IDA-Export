@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x446B80",
-    "line": "cmp     [esp+arg_0], 0FF000000h",
+    "line": "cmp     [esp+arg_0], 0FF000000h; MEF PERF 2026-09-08: PERF-3 created-ID exclusion is proven by unsigned CMP argument,FF000000h then SBB/ADD: IDs>=FF000000h return true.45E0D0 returns such IDs unchanged before array access; optimization must preserve that path exactly.",
     "mnemonic": "cmp",
     "size": 8
   },

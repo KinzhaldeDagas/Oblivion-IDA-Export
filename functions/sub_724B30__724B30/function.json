@@ -1,18 +1,31 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x724B30",
+      "0x724BFF"
+    ]
+  ],
+  "chunks_sha256": "a6d5d3c951d065adeea1d31bd7696e2c118cdcafced73d31ec46781063c687d1",
+  "comment_regular": "\nGPU static-world LOD audit 2026-09-27: world center is data+14/+18/+1C; subtract camera+88/+8C/+90, project using raw camera forward +64/+70/+7C, store float, multiply camera LODAdjust+120, store float, abs. Count=data+20, rows=data+24, stride16; use world near+8 and far+C, first interval near<=distance<far. This is NOT Euclidean range.\n\nPass330 decode: NiRangeLODData camera selector. It projects the data center-to-camera vector on camera forward, multiplies by Camera::LODAdjust, takes absolute distance, and selects the matching authored range interval.",
+  "comment_repeatable": "Pass330 decode: NiRangeLODData camera selector. It projects the data center-to-camera vector on camera forward, multiplies by Camera::LODAdjust, takes absolute distance, and selects the matching authored range interval.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_724B30",
+  "display_name": "NiRangeLODData_SelectCamera",
   "end_ea": "0x724BFF",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_724B30",
+  "name": "NiRangeLODData_SelectCamera",
   "segment": ".text",
   "sha256": "a6d5d3c951d065adeea1d31bd7696e2c118cdcafced73d31ec46781063c687d1",
   "size": 207,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x724B30",
+  "total_chunk_size": 207,
   "type": "int __thiscall(int this, float *, int)",
   "xrefs_from_count": 68,
   "xrefs_to_count": 1

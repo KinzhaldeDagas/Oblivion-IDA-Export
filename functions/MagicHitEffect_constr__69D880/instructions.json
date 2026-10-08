@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x69D880",
-    "line": "fldz",
+    "line": "fldz; Verified MagicHitEffect constructor starts from the 24-byte BSTempEffect base, nulls ownerActiveEffect (+0x18) and targetReference (+0x1C), zeros elapsedSeconds (+0x20) and bFinished (+0x24), establishing a 40-byte base layout.",
     "mnemonic": "fldz",
     "size": 2
   },
@@ -19,13 +19,13 @@
   },
   {
     "ea": "0x69D884",
-    "line": "fstp    [esp+8+var_8]; float",
+    "line": "fstp    [esp+8+durationSeconds]; durationSeconds",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x69D887",
-    "line": "push    0; int",
+    "line": "push    0; parentCell",
     "mnemonic": "push",
     "size": 2
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x69D88B",
-    "line": "call    BSTempEff_constr",
+    "line": "call    BSTempEffect_Constructor; Verified BSTempEffect constructor: initializes NiObject base, stores duration at +0x08 and parent cell at +0x0C, zeros elapsed at +0x10, sets initializeCallbackDone (+0x14) false, and installs BSTempEffect vtable.",
     "mnemonic": "call",
     "size": 5
   },

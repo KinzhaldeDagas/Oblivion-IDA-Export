@@ -1,4 +1,4 @@
-0x5E6C60: push    esi
+0x5E6C60: push    esi; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x5E6C61: mov     esi, ecx
 0x5E6C63: call    Actor_IsNPC
 0x5E6C68: test    al, al
@@ -28,11 +28,11 @@
 0x5E6CAB: mov     eax, [eax+104h]
 0x5E6CB1: mov     ecx, eax
 0x5E6CB3: pop     esi
-0x5E6CB4: jmp     TESClass__IsGuardClass
+0x5E6CB4: jmp     TESClass__IsGuardClass; TESClass::IsGuardClass reads classFlags at +0x60 bit 1.
 0x5E6CB9: xor     eax, eax
 0x5E6CBB: mov     ecx, eax
 0x5E6CBD: pop     esi
-0x5E6CBE: jmp     TESClass__IsGuardClass
+0x5E6CBE: jmp     TESClass__IsGuardClass; TESClass::IsGuardClass reads classFlags at +0x60 bit 1.
 0x5E6CC3: xor     al, al
 0x5E6CC5: pop     esi
 0x5E6CC6: retn

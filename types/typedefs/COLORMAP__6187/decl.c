@@ -1,1 +1,5 @@
-_COLORMAP
+struct _COLORMAP
+{
+COLORREF from;
+COLORREF to;
+};

@@ -1,57 +1,58 @@
-void __thiscall sub_612DE0(int this, int a2)
+// Sets CombatController+0x70 active mode (0 H2H, 1 melee weapon, 2 ranged weapon, 3 touch spell, 4 ranged spell, 5 yield, 7 flee, 0xA switch weapon, 0xC leave water) and invalidates desired-distance cache +0x188.
+void __thiscall CombatController_SetCombatMode(int this, int a2)
 {
-  const char *v7; // eax
+  const char *v3; // eax
   char *Name; // eax
-  const char *v9; // [esp-4h] [ebp-Ch]
+  const char *v5; // [esp-4h] [ebp-Ch]
 
-  if ( a2 != *(_DWORD *)(this + 0x70) )
+  if ( a2 != *(_DWORD *)(this + 0x70) ) /*0x612deb*/
   {
-    if ( byte_B3B908 )
+    if ( unk_B3B908 ) /*0x612df1*/
     {
-      if ( a2 != 0xD )
+      if ( a2 != 0xD ) /*0x612e01*/
       {
-        if ( a2 )
+        if ( a2 ) /*0x612e09*/
         {
-          switch ( a2 )
+          switch ( a2 ) /*0x612e15*/
           {
-            case 1:
-              v7 = "fight with a Melee Weapon";
+            case 1: /*0x612e15*/
+              v3 = "fight with a Melee Weapon"; /*0x612e17*/
               break;
-            case 2:
-              v7 = "fight with a Ranged Weapon";
+            case 2: /*0x612e15*/
+              v3 = "fight with a Ranged Weapon"; /*0x612e23*/
               break;
-            case 3:
-              v7 = "cast Touch spells";
+            case 3: /*0x612e15*/
+              v3 = "cast Touch spells"; /*0x612e2f*/
               break;
-            case 4:
-              v7 = "cast Ranged spells";
+            case 4: /*0x612e15*/
+              v3 = "cast Ranged spells"; /*0x612e3b*/
               break;
-            case 5:
-              v7 = "attempt to Yield";
+            case 5: /*0x612e15*/
+              v3 = "attempt to Yield"; /*0x612e47*/
               break;
-            case 0xA:
-              v7 = "Switch weapons";
+            case 0xA: /*0x612e15*/
+              v3 = "Switch weapons"; /*0x612e53*/
               break;
-            case 0xC:
-              v7 = "Get out of the water";
+            case 0xC: /*0x612e15*/
+              v3 = "Get out of the water"; /*0x612e5f*/
               break;
             default:
-              v7 = "attempt to Flee";
-              if ( a2 != 7 )
-                v7 = "...just kinda stand around";
+              v3 = "attempt to Flee"; /*0x612e69*/
+              if ( a2 != 7 ) /*0x612e6e*/
+                v3 = "...just kinda stand around"; /*0x612e70*/
               break;
           }
         }
         else
         {
-          v7 = "fight Hand-to-Hand";
+          v3 = "fight Hand-to-Hand"; /*0x612e0b*/
         }
-        v9 = v7;
-        Name = TESObjectREFR_GetName(*(TESObjectREFR **)(this + 0x3C));
-        Interface_ConsolePrint("%.20s is going to %s!", Name, v9);
+        v5 = v3; /*0x612e78*/
+        Name = TESObjectREFR_GetName(*(TESObjectREFR **)(this + 0x3C)); /*0x612e79*/
+        Interface_ConsolePrint("%.20s is going to %s!", Name, v5); /*0x612e84*/
       }
     }
-    *(float *)(this + 0x188) = flt_A30634;
+    *(float *)(this + 0x188) = kTerrainLODQuadRayDirectionZ; /*0x612e92*/
   }
-  *(_DWORD *)(this + 0x70) = a2;
+  *(_DWORD *)(this + 0x70) = a2; /*0x612e98*/
 }

@@ -1,1 +1,7 @@
-_GENERIC_MAPPING
+struct _GENERIC_MAPPING
+{
+ACCESS_MASK GenericRead;
+ACCESS_MASK GenericWrite;
+ACCESS_MASK GenericExecute;
+ACCESS_MASK GenericAll;
+};

@@ -1,4 +1,4 @@
-void __cdecl sub_A24090()
+void __cdecl GameSettings_Unregister_fPathImpassableDoorPenalty()
 {
-  GameSetting_destr((int *)flt_B3A430);
+  GameSetting_destr((int *)unk_B3A430); /*0xa24095*/
 }

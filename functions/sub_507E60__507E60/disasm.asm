@@ -1,4 +1,4 @@
-0x507E60: sub     esp, 8
+0x507E60: sub     esp, 8; MoonSugarEffect decode: SetTargetRefraction command; for actors routes to Actor refraction/transparency, for non-actors toggles NiProperty refraction flags through sub_7D92C0.
 0x507E63: cmp     byte ptr ds:0B42F3Eh, 0
 0x507E6A: push    edi
 0x507E6B: jz      loc_507FE8
@@ -24,7 +24,7 @@
 0x507EB6: push    ecx; a3
 0x507EB7: push    edx; a2
 0x507EB8: push    eax; a1
-0x507EB9: call    Script_ExtractArgs
+0x507EB9: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x507EBE: add     esp, 20h
 0x507EC1: test    al, al
 0x507EC3: jnz     short loc_507ECA
@@ -95,33 +95,33 @@
 0x507F72: jz      short loc_507FBF
 0x507F74: fldz
 0x507F76: push    ecx
-0x507F77: fst     [esp+14h+a5]; a5
-0x507F7A: push    0; a4
+0x507F77: fst     [esp+14h+a5]; period
+0x507F7A: push    0; useRefractF
 0x507F7C: push    ecx
-0x507F7D: fstp    [esp+1Ch+var_1C]; a3
-0x507F80: push    0; a2
-0x507F82: push    esi; a1
-0x507F83: call    sub_7D92C0
+0x507F7D: fstp    [esp+1Ch+power]; power
+0x507F80: push    0; enabled
+0x507F82: push    esi; root
+0x507F83: call    NiAVObject_SetShaderRefractionStateRecursive; Recursively set/clear native refraction state on shader-property subtypes 5..10. useRefractF selects passInfo 0x10000 instead of 0x8000; stores power and optional period and invalidates pass caches.
 0x507F88: fldz
 0x507F8A: add     esp, 10h
-0x507F8D: fst     [esp+14h+a5]; a5
-0x507F90: push    1; a4
+0x507F8D: fst     [esp+14h+a5]; period
+0x507F90: push    1; useRefractF
 0x507F92: push    ecx
-0x507F93: fstp    [esp+1Ch+var_1C]; a3
-0x507F96: push    0; a2
-0x507F98: push    esi; a1
-0x507F99: call    sub_7D92C0
+0x507F93: fstp    [esp+1Ch+power]; power
+0x507F96: push    0; enabled
+0x507F98: push    esi; root
+0x507F99: call    NiAVObject_SetShaderRefractionStateRecursive; Recursively set/clear native refraction state on shader-property subtypes 5..10. useRefractF selects passInfo 0x10000 instead of 0x8000; stores power and optional period and invalidates pass caches.
 0x507F9E: fldz
 0x507FA0: mov     eax, [esp+24h+a2]
-0x507FA4: fstp    [esp+24h+a5]; a5
+0x507FA4: fstp    [esp+24h+a5]; period
 0x507FA8: fld     dword ptr [esp+24h+var_8]
 0x507FAC: add     esp, 10h
-0x507FAF: push    0; a4
+0x507FAF: push    0; useRefractF
 0x507FB1: push    ecx
-0x507FB2: fstp    [esp+1Ch+var_1C]; a3
-0x507FB5: push    eax; a2
-0x507FB6: push    esi; a1
-0x507FB7: call    sub_7D92C0
+0x507FB2: fstp    [esp+1Ch+power]; power
+0x507FB5: push    eax; enabled
+0x507FB6: push    esi; root
+0x507FB7: call    NiAVObject_SetShaderRefractionStateRecursive; Recursively set/clear native refraction state on shader-property subtypes 5..10. useRefractF selects passInfo 0x10000 instead of 0x8000; stores power and optional period and invalidates pass caches.
 0x507FBC: add     esp, 14h
 0x507FBF: pop     esi
 0x507FC0: cmp     byte ptr ds:0B361ACh, 0

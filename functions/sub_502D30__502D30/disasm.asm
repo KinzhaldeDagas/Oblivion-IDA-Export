@@ -16,17 +16,17 @@
 0x502D56: push    eax; a2
 0x502D57: push    ecx; a1
 0x502D58: mov     dword ptr [esp+24h+var_4], 0
-0x502D60: call    Script_ExtractArgs
+0x502D60: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x502D65: add     esp, 20h
 0x502D68: test    al, al
 0x502D6A: jnz     short loc_502D6E
 0x502D6C: pop     ecx
 0x502D6D: retn
-0x502D6E: mov     ecx, dword ptr [esp+4+var_4]
+0x502D6E: mov     ecx, dword ptr [esp+4+var_4]; this
 0x502D71: test    ecx, ecx
 0x502D73: jz      short loc_502D7C
-0x502D75: push    1
-0x502D77: call    sub_529820
+0x502D75: push    1; running
+0x502D77: call    TESQuest__SetRunning; TESQuest running/active setter used by StartQuest and StopQuest. Runtime bit 0x01 shares QUST DATA's editor label 'Start Game Enabled'; toggling it marks modified flag 0x04.
 0x502D7C: mov     al, 1
 0x502D7E: pop     ecx
 0x502D7F: retn

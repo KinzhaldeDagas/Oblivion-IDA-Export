@@ -1,4 +1,4 @@
-0x520970: push    ebp
+0x520970: push    ebp; CustomAnimSupport decode: TESIdleForm loader for IDLE records; handles EDID, MODL/MODB, CTDA/CTDT, DATA links, and ANAM byte.
 0x520971: mov     ebp, esp
 0x520973: push    0FFFFFFFFh
 0x520975: push    offset TESIdleForm_LoadForm_SEH
@@ -24,7 +24,7 @@
 0x5209AE: jmp     loc_520B8E
 0x5209B3: push    esi
 0x5209B4: mov     ecx, ebx; this
-0x5209B6: call    TESFile_InitializeFormFromRecord
+0x5209B6: call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.
 0x5209BB: mov     ecx, ebx
 0x5209BD: call    TESFile_GetChunkType
 0x5209C2: xor     edi, edi
@@ -48,17 +48,17 @@
 0x520A12: lea     eax, [ebp+ArgList]
 0x520A15: push    eax; Dst
 0x520A16: mov     ecx, ebx; a1
-0x520A18: call    TESFile_GetChunkData
+0x520A18: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x520A1D: xor     ebx, ebx
 0x520A1F: cmp     dword ptr [ebp+ArgList], edi
 0x520A22: jz      short loc_520AA0
 0x520A24: push    0FFFFFFFFh; a2
 0x520A26: mov     ecx, esi; this
-0x520A28: call    TESForm_GetOverrideFile
+0x520A28: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x520A2D: push    eax; a2
 0x520A2E: lea     ecx, [ebp+ArgList]
 0x520A31: push    ecx; a1
-0x520A32: call    TESForm_ResolveFormID
+0x520A32: call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.
 0x520A37: mov     edx, dword ptr [ebp+ArgList]
 0x520A3A: add     esp, 8
 0x520A3D: push    edi; int
@@ -66,7 +66,7 @@
 0x520A43: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x520A48: push    edi; int
 0x520A49: push    edx; a1
-0x520A4A: call    TESForm_LookupByFormID
+0x520A4A: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x520A4F: add     esp, 4
 0x520A52: push    eax; void *
 0x520A53: call    OblivionDynamicCast
@@ -99,11 +99,11 @@
 0x520AA7: jz      loc_520B2F
 0x520AAD: push    0FFFFFFFFh; a2
 0x520AAF: mov     ecx, esi; this
-0x520AB1: call    TESForm_GetOverrideFile
+0x520AB1: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x520AB6: push    eax; a2
 0x520AB7: lea     edx, [ebp+a1]
 0x520ABA: push    edx; a1
-0x520ABB: call    TESForm_ResolveFormID
+0x520ABB: call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.
 0x520AC0: mov     eax, [ebp+a1.vtbl]
 0x520AC3: add     esp, 8
 0x520AC6: push    0; int
@@ -111,7 +111,7 @@
 0x520ACD: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x520AD2: push    0; int
 0x520AD4: push    eax; a1
-0x520AD5: call    TESForm_LookupByFormID
+0x520AD5: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x520ADA: add     esp, 4
 0x520ADD: push    eax; void *
 0x520ADE: call    OblivionDynamicCast
@@ -163,7 +163,7 @@
 0x520B64: push    esi
 0x520B65: push    eax
 0x520B66: mov     ecx, ebx
-0x520B68: call    sub_520780
+0x520B68: call    TESIdleForm_InsertChild; Final name: TESIdleForm_InsertChild. Maintains parent child array plus previous/next idle sibling links.
 0x520B6D: mov     ebx, [ebp+arg_0]
 0x520B70: mov     ecx, ebx
 0x520B72: call    TESFile_GetNextChunk
@@ -257,7 +257,7 @@
 0x520C6F: push    200h; a4
 0x520C74: push    edi; Dst
 0x520C75: mov     ecx, ebx; a1
-0x520C77: call    TESFile_GetChunkData
+0x520C77: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x520C7C: mov     edx, [esi]
 0x520C7E: mov     eax, [edx+0D8h]
 0x520C84: push    edi
@@ -292,5 +292,19 @@
 0x520CDE: lea     ecx, [esi+38h]
 0x520CE1: push    ecx; Dst
 0x520CE2: mov     ecx, ebx; a1
-0x520CE4: call    TESFile_GetChunkData
+0x520CE4: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x520CE9: jmp     loc_520B70
+0x9B7E30: lea     ecx, [ebp+var_24]; void *
+0x9B7E33: jmp     BSStringT_Clear
+0x9B7E38: lea     ecx, [ebp+var_2C]; void *
+0x9B7E3B: jmp     BSStringT_Clear
+0x9B7E40: mov     edx, [esp-4+arg_4]
+0x9B7E44: lea     eax, [edx+0Ch]
+0x9B7E47: mov     ecx, [edx-30h]
+0x9B7E4A: xor     ecx, eax
+0x9B7E4C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B7E51: mov     ecx, [edx-4]
+0x9B7E54: xor     ecx, eax
+0x9B7E56: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B7E5B: mov     eax, offset stru_AE266C
+0x9B7E60: jmp     ___CxxFrameHandler3

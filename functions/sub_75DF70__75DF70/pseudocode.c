@@ -1,4 +1,4 @@
-void *sub_75DF70()
+NiRTTI *sub_75DF70()
 {
-  return &unk_B41D28;
+  return &stru_B41D28; /*0x75df75*/
 }

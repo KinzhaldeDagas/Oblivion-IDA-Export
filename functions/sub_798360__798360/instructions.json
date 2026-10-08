@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x798360",
-    "line": "xor     edx, edx",
+    "line": "xor     edx, edx; Oblivion CLeafGeometry::Transform. Applies the 4x4 stTransform to every LOD's leaf centers (including the preserved CPU-wind source centers) and transforms the per-card orientation vectors.",
     "mnemonic": "xor",
     "size": 2
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x79837B",
-    "line": "mov     eax, [esp+34h+arg_0]",
+    "line": "mov     eax, [esp+34h+transform4x4]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x79838C",
-    "line": "mov     [esp+40h+arg_0], edx",
+    "line": "mov     [esp+40h+transform4x4], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x798394",
-    "line": "add     esi, [esp+44h+arg_0]",
+    "line": "add     esi, [esp+44h+transform4x4]",
     "mnemonic": "add",
     "size": 4
   },
@@ -811,7 +811,7 @@
   },
   {
     "ea": "0x7984EE",
-    "line": "add     [esp+44h+arg_0], 44h ; 'D'",
+    "line": "add     [esp+44h+transform4x4], 44h ; 'D'",
     "mnemonic": "add",
     "size": 5
   },
@@ -877,7 +877,7 @@
   },
   {
     "ea": "0x79850D",
-    "line": "fstp    [esp+38h+arg_0]",
+    "line": "fstp    [esp+38h+transform4x4]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -889,7 +889,7 @@
   },
   {
     "ea": "0x798513",
-    "line": "fld     [esp+38h+arg_0]",
+    "line": "fld     [esp+38h+transform4x4]",
     "mnemonic": "fld",
     "size": 4
   },

@@ -1,1 +1,1 @@
-IExternalConnection_0
+typedef IExternalConnection IExternalConnection_0;

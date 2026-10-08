@@ -1,7 +1,7 @@
 0x9E74F0: fldz
 0x9E74F2: push    ecx
 0x9E74F3: fstp    [esp+4+var_4]; float
-0x9E74F6: mov     ecx, offset unk_B369F0
+0x9E74F6: mov     ecx, (offset flt_B36778+278h)
 0x9E74FB: push    offset aFpicklevelmult; "fPickLevelMult"
 0x9E7500: call    GameSetting_ConstrAndReg_float
 0x9E7505: push    offset sub_A1DB00; void (__cdecl *)()

@@ -1,4 +1,4 @@
-0x78A890: push    ebp
+0x78A890: push    ebp; SpeedTreeOBSE 2026-05-31 leaf/frond level pass: compact texture summary exporter returns frond count at summary[3] and frond filename pointer array at summary[4]; reference layer caches these paths by array index/selector before sidecar map-bank candidates.
 0x78A891: mov     ebp, esp
 0x78A893: push    0FFFFFFFFh
 0x78A895: push    offset SEH_78A890
@@ -24,7 +24,7 @@
 0x78A8D2: mov     eax, [eax+4]
 0x78A8D5: jmp     short loc_78A8DA
 0x78A8D7: add     eax, 4
-0x78A8DA: mov     ebx, [ebp+arg_0]
+0x78A8DA: mov     ebx, [ebp+texturesOut]
 0x78A8DD: mov     [ebx], eax
 0x78A8DF: mov     esi, [edi]
 0x78A8E1: mov     eax, [esi+98h]
@@ -53,8 +53,8 @@
 0x78A928: add     esp, 4
 0x78A92B: mov     [ebx+8], eax
 0x78A92E: xor     edi, edi
-0x78A930: mov     ecx, esi
-0x78A932: call    sub_7876A0
+0x78A930: mov     ecx, esi; this
+0x78A932: call    OB_stVector_SIdvLeafTexture_Size_010201A0; Oblivion checked-vector size helper for 0x54-byte SIdvLeafTexture records: returns (end-begin)/0x54 or zero for null storage.
 0x78A937: cmp     edi, eax
 0x78A939: jnb     short loc_78A999
 0x78A93B: mov     eax, [esi+4]
@@ -106,7 +106,7 @@
 0x78A9BE: shr     eax, 1Fh
 0x78A9C1: add     eax, edx
 0x78A9C3: test    eax, eax
-0x78A9C5: mov     [ebx+0Ch], eax
+0x78A9C5: mov     [ebx+0Ch], eax; SpeedTreeOBSE 2026-05-31 texture-index pass: GetTextures summary[3] is compact frond texture count; each frond filename pointer at summary[4][index] is cached with textureIndex=index/selector.
 0x78A9C8: jbe     loc_78AB01
 0x78A9CE: xor     ecx, ecx
 0x78A9D0: mov     edx, 4
@@ -146,7 +146,7 @@
 0x78AA34: jb      short loc_78AA44
 0x78AA36: mov     eax, [eax+4]
 0x78AA39: mov     ecx, [ebx+10h]
-0x78AA3C: mov     [ecx+edi*4], eax
+0x78AA3C: mov     [ecx+edi*4], eax; SpeedTreeOBSE 2026-05-31 texture-index pass: GetTextures writes compact frond filename pointer to summary[4][j]; plugin treats j as selector textureIndex before map-bank collection-index fallback.
 0x78AA3F: add     edi, 1
 0x78AA42: jmp     short loc_78A9F0
 0x78AA44: mov     ecx, [ebx+10h]
@@ -161,8 +161,8 @@
 0x78AA5C: push    eax
 0x78AA5D: push    offset aCspeedtreert_0; "CSpeedTreeRT::GetTextures"
 0x78AA62: push    offset aSFailedS; "%s - failed [%s]"
-0x78AA67: lea     esi, [ebp+var_34]
-0x78AA6A: call    sub_7A54A0
+0x78AA67: lea     esi, [ebp+result]; result
+0x78AA6A: call    OB_IdvFormatString_010201A0; Oblivion binary evidence: IdvFormatString. Formats variadic arguments with vsprintf into a 1024-byte stack buffer, constructs the hidden-result 28-byte SSO string, assigns strlen(buffer) bytes, and returns the result pointer in EAX. SpeedTreeRT 4.1 IdvGlobals.h:77-93 corroborates the name and fixed buffer only after observation.
 0x78AA6F: add     esp, 0Ch
 0x78AA72: cmp     dword ptr [eax+18h], 10h
 0x78AA76: mov     byte ptr [ebp+var_4], 2
@@ -170,11 +170,11 @@
 0x78AA7C: mov     eax, [eax+4]
 0x78AA7F: jmp     short loc_78AA84
 0x78AA81: add     eax, 4
-0x78AA84: push    eax; Src
-0x78AA85: call    sub_7895E0
+0x78AA84: push    eax; error
+0x78AA85: call    CSpeedTreeRT__SetError; Oblivion binary evidence: CSpeedTreeRT static error setter. Assigns the NUL-terminated input into the sole 28-byte global error string at 0xB2B614. After observation, SpeedTreeRT 4.1 SpeedTreeRT.cpp:2671-2677 corroborates SetError and g_strError.
 0x78AA8A: add     esp, 4
-0x78AA8D: lea     ecx, [ebp+var_34]
-0x78AA90: call    sub_79AB00
+0x78AA8D: lea     ecx, [ebp+result]; this
+0x78AA90: call    OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
 0x78AA95: mov     eax, offset loc_78AA9B
 0x78AA9A: retn
 0x78AA9B: mov     ecx, [ebp+var_C]
@@ -188,8 +188,8 @@
 0x78AAAC: retn    4
 0x78AAAF: push    offset aCspeedtreert_0; "CSpeedTreeRT::GetTextures"
 0x78AAB4: push    offset aSThrewAnUnknow; "%s - threw an unknown system exception"
-0x78AAB9: lea     esi, [ebp+var_50]
-0x78AABC: call    sub_7A54A0
+0x78AAB9: lea     esi, [ebp+var_50]; result
+0x78AABC: call    OB_IdvFormatString_010201A0; Oblivion binary evidence: IdvFormatString. Formats variadic arguments with vsprintf into a 1024-byte stack buffer, constructs the hidden-result 28-byte SSO string, assigns strlen(buffer) bytes, and returns the result pointer in EAX. SpeedTreeRT 4.1 IdvGlobals.h:77-93 corroborates the name and fixed buffer only after observation.
 0x78AAC1: add     esp, 8
 0x78AAC4: cmp     dword ptr [eax+18h], 10h
 0x78AAC8: mov     byte ptr [ebp+var_4], 3
@@ -197,11 +197,11 @@
 0x78AACE: mov     eax, [eax+4]
 0x78AAD1: jmp     short loc_78AAD6
 0x78AAD3: add     eax, 4
-0x78AAD6: push    eax; Src
-0x78AAD7: call    sub_7895E0
+0x78AAD6: push    eax; error
+0x78AAD7: call    CSpeedTreeRT__SetError; Oblivion binary evidence: CSpeedTreeRT static error setter. Assigns the NUL-terminated input into the sole 28-byte global error string at 0xB2B614. After observation, SpeedTreeRT 4.1 SpeedTreeRT.cpp:2671-2677 corroborates SetError and g_strError.
 0x78AADC: add     esp, 4
-0x78AADF: lea     ecx, [ebp+var_50]
-0x78AAE2: call    sub_79AB00
+0x78AADF: lea     ecx, [ebp+var_50]; this
+0x78AAE2: call    OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
 0x78AAE7: mov     eax, offset loc_78AAED
 0x78AAEC: retn
 0x78AAED: mov     ecx, [ebp+var_C]
@@ -224,8 +224,8 @@
 0x78AB1A: mov     eax, [eax+28h]
 0x78AB1D: jmp     short loc_78AB22
 0x78AB1F: add     eax, 28h ; '('
-0x78AB22: mov     [ebx+18h], eax
-0x78AB25: mov     eax, [edi+4Ch]
+0x78AB22: mov     [ebx+18h], eax;
+0x78AB25: mov     eax, [edi+4Ch]; GetTextures reads CSpeedTreeRT+0x4C embedded texcoord object to export the legacy composite filename.
 0x78AB28: test    eax, eax
 0x78AB2A: jz      short loc_78AB3D
 0x78AB2C: cmp     dword ptr [eax+30h], 10h
@@ -233,7 +233,7 @@
 0x78AB32: mov     eax, [eax+1Ch]
 0x78AB35: jmp     short loc_78AB3A
 0x78AB37: add     eax, 1Ch
-0x78AB3A: mov     [ebx+14h], eax
+0x78AB3A: mov     [ebx+14h], eax; Writes embedded composite filename to texture summary[5]; BSTreeModel legacy texture setup can bind this same composite surface.
 0x78AB3D: mov     ecx, [ebp+var_C]
 0x78AB40: mov     large fs:0, ecx
 0x78AB47: pop     ecx
@@ -243,3 +243,14 @@
 0x78AB4B: mov     esp, ebp
 0x78AB4D: pop     ebp
 0x78AB4E: retn    4
+0x9CB480: lea     ecx, [ebp+result]; this
+0x9CB483: jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
+0x9CB488: lea     ecx, [ebp+var_50]; this
+0x9CB48B: jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
+0x9CB490: mov     edx, [esp-4+arg_4]
+0x9CB494: lea     eax, [edx+0Ch]
+0x9CB497: mov     ecx, [edx-54h]
+0x9CB49A: xor     ecx, eax
+0x9CB49C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CB4A1: mov     eax, offset stru_AF3BCC
+0x9CB4A6: jmp     ___CxxFrameHandler3

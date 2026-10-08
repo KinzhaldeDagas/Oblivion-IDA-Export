@@ -1,4 +1,4 @@
-0x4728C0: mov     eax, ecx
+0x4728C0: mov     eax, ecx; Resets ActorAnimData root-motion state: zeroes the cached accumulation vector at +0x18, restores the accumulation/root node transform fields, then finds the matching accumulation controllers and resets them. Used before sequence play and by full actor/animation reset paths.
 0x4728C2: mov     ecx, [eax+8]
 0x4728C5: test    ecx, ecx
 0x4728C7: jz      locret_472998
@@ -32,7 +32,7 @@
 0x47292A: call    eax
 0x47292C: test    eax, eax
 0x47292E: jz      short loc_47293E
-0x472930: cmp     eax, offset dword_B3CCB0
+0x472930: cmp     eax, offset stru_B3CCB0
 0x472935: jz      short loc_472999
 0x472937: mov     eax, [eax+4]
 0x47293A: test    eax, eax
@@ -57,7 +57,7 @@
 0x472965: test    eax, eax
 0x472967: jz      short loc_47297E
 0x472969: lea     esp, [esp+0]
-0x472970: cmp     eax, offset dword_B3CD1C
+0x472970: cmp     eax, offset stru_B3CD1C
 0x472975: jz      short loc_47299D
 0x472977: mov     eax, [eax+4]
 0x47297A: test    eax, eax

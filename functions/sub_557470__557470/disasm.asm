@@ -110,7 +110,7 @@
 0x55757A: test    edi, edi
 0x55757C: jz      short loc_557587
 0x55757E: push    edi
-0x55757F: call    FormHeapFree
+0x55757F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x557584: add     esp, 4
 0x557587: mov     ecx, ebx
 0x557589: call    sub_54F700

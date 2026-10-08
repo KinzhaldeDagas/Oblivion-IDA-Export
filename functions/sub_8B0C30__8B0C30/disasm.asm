@@ -3,7 +3,7 @@
 0x8B0C33: fild    dword ptr [esi+10h]
 0x8B0C36: fsub    qword ptr ds:0A2F928h
 0x8B0C3C: fisub   [esp+4+arg_4]
-0x8B0C40: call    Double_To_SInt32
+0x8B0C40: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x8B0C45: imul    eax, [esi+0Ch]
 0x8B0C49: add     eax, [esp+4+arg_0]
 0x8B0C4D: mov     ecx, [esi+60h]

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4B9B30",
-    "line": "push    ebp",
+    "line": "push    ebp; Verified Oblivion TREE record dispatch: accepts TREE record type 0x1C, initializes the base form, and handles MODL/MODB, MODT, EDID, and DMTL (texture-hash cache) chunks. Unlike Fallout TESObjectTREE::Load/Save, this dispatcher has no SNAM seed-array or BNAM billboard-size case. The loader's complete switch and the Fallout routines establish this as a schema divergence; the source of Oblivion seed-array population outside this loader remains Unknown.",
     "mnemonic": "push",
     "size": 1
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x4B9B5B",
-    "line": "call    TESFile_InitializeFormFromRecord",
+    "line": "call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x4B9B69",
-    "line": "jz      loc_4B9C01",
+    "line": "jz      loc_4B9C01; Verified chunk dispatch loop. The local switch branches to TESModel_Load for MODL/MODB and MODT, EDID uses the TESObjectTREE vtable setter, and DMTL is handled by TESObjectTREE_LoadTextureHashChunk. No local SNAM or BNAM branch exists in the complete dispatch.",
     "mnemonic": "jz",
     "size": 6
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x4B9B85",
-    "line": "jnz     short loc_4B9BE7",
+    "line": "jnz     short loc_4B9BE7; Verified EDID branch: reads the form editor ID and passes it through TESObjectTREE vtable slot +0xD8. Chunk code is EDID (little-endian immediate 0x44494445), not DEDI.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x4B9B9C",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x4B9BB5",
-    "line": "jz      short loc_4B9BDF",
+    "line": "jz      short loc_4B9BDF; Verified DMTL record branch: delegates the TREE DMTL chunk to TESObjectTREE_LoadTextureHashChunk. Fallout TREE load has no matching DMTL branch in its inspected chunk switch.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -379,19 +379,19 @@
   },
   {
     "ea": "0x4B9BDF",
-    "line": "push    edi; int",
+    "line": "push    edi; file",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B9BE0",
-    "line": "mov     ecx, ebx; int",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B9BE2",
-    "line": "call    sub_4B3460",
+    "line": "call    TESObjectTREE_LoadTextureHashChunk; Verified DMTL load path: allocates a TESTextureList header, derives model path, parses texture-hash entries, and replaces the global cache entry keyed by form ID. Paired Oblivion save handler invokes a writer whose terminal thunk is a no-op.",
     "mnemonic": "call",
     "size": 5
   },

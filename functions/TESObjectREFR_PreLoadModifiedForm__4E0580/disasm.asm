@@ -3,7 +3,7 @@
 0x4E0582: mov     edi, [esp+8+arg_0]
 0x4E0586: push    edi
 0x4E0587: mov     esi, ecx
-0x4E0589: call    nullsub_returnvVoid_1arg
+0x4E0589: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x4E058E: mov     eax, [esi]
 0x4E0590: mov     edx, [eax+190h]
 0x4E0596: mov     ecx, esi
@@ -81,7 +81,7 @@
 0x4E0668: push    esi
 0x4E0669: push    edi
 0x4E066A: lea     ecx, [esi+44h]
-0x4E066D: call    sub_425650
+0x4E066D: call    sub_425650; Verified conditional ExtraTeleport cleanup branch: when the matching cleanup flag is present and the reference is not in the protected state, it removes low-path world indexing when the door-link reference-ID ordering condition holds, then removes the ExtraTeleport entry.
 0x4E0672: test    edi, 8000000h
 0x4E0678: jz      short loc_4E06D8
 0x4E067A: mov     eax, [esi]
@@ -101,8 +101,8 @@
 0x4E06A0: call    sub_4DC8F0
 0x4E06A5: mov     ecx, esi
 0x4E06A7: call    UnequipLight
-0x4E06AC: mov     ecx, esi
-0x4E06AE: call    sub_4DCCF0
+0x4E06AC: mov     ecx, esi; this
+0x4E06AE: call    TESObjectREFR_ClearEquippedAmmo3D; Clears this reference's equipped-ammunition 3D and related actor-animation ammo slot state. No explicit stack arguments.
 0x4E06B3: mov     eax, ds:0B33B00h
 0x4E06B8: mov     ecx, [eax+18h]
 0x4E06BB: shr     ecx, 6
@@ -133,16 +133,16 @@
 0x4E0708: cmp     byte ptr [ecx+0A8h], 0
 0x4E070F: jnz     short loc_4E0731
 0x4E0711: lea     edi, [esi+44h]
-0x4E0714: push    8
-0x4E0716: mov     ecx, edi
-0x4E0718: call    sub_41F830
+0x4E0714: push    8; mask
+0x4E0716: mov     ecx, edi; this
+0x4E0718: call    ExtraDataList_TestActionFlagBits; Test ExtraAction flag mask. Missing ExtraAction behaves as default flags byte 1. REFR save calls with 0x08 to decide whether to emit ONAM.
 0x4E071D: test    al, al
-0x4E071F: push    8
-0x4E0721: mov     ecx, edi
+0x4E071F: push    8; mask
+0x4E0721: mov     ecx, edi; this
 0x4E0723: jz      short loc_4E072C
-0x4E0725: call    sub_423E50
+0x4E0725: call    ExtraDataList_ClearActionFlagBits
 0x4E072A: jmp     short loc_4E0731
-0x4E072C: call    sub_423DF0
+0x4E072C: call    ExtraDataList_SetActionFlagBits; OR action flag mask into existing byte (default byte 1 when absent), creating state as needed. ONAM calls this with 0x08.
 0x4E0731: mov     edx, ds:0B33B00h
 0x4E0737: mov     eax, [edx+44h]
 0x4E073A: cmp     eax, 1FFFF000h
@@ -150,9 +150,9 @@
 0x4E0741: cmp     eax, 7FFFF000h
 0x4E0746: jnz     short loc_4E075C
 0x4E0748: push    1; char
-0x4E074A: push    8
-0x4E074C: lea     ecx, [esi+44h]
-0x4E074F: call    sub_41F830
+0x4E074A: push    8; mask
+0x4E074C: lea     ecx, [esi+44h]; this
+0x4E074F: call    ExtraDataList_TestActionFlagBits; Test ExtraAction flag mask. Missing ExtraAction behaves as default flags byte 1. REFR save calls with 0x08 to decide whether to emit ONAM.
 0x4E0754: mov     ecx, esi
 0x4E0756: push    eax; float
 0x4E0757: call    sub_4DE460
@@ -172,7 +172,7 @@
 0x4E0784: cmp     dword ptr [esi+3Ch], 0
 0x4E0788: jz      short loc_4E07BC
 0x4E078A: lea     ecx, [esi+44h]
-0x4E078D: call    sub_41FFA0
+0x4E078D: call    ExtraDataList_GetRagDollData; Returns the ragdoll payload stored in ExtraRagDollData, or null.
 0x4E0792: test    eax, eax
 0x4E0794: jz      short loc_4E079E
 0x4E0796: push    esi

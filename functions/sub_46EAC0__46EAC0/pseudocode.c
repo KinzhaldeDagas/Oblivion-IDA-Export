@@ -1,112 +1,103 @@
-void __userpurge sub_46EAC0(char *this@<ecx>, int a2@<edi>, int a3)
+void __thiscall sub_46EAC0(char *this, int a2)
 {
-  bool v5; // zf
-  TESSaveLoad *v6; // ecx
-  TESSaveLoad *v7; // ecx
-  TESSaveLoad *v8; // ecx
-  _WORD *v9; // ebp
-  char *v10; // edi
-  int v11; // esi
-  UInt32 *v12; // edi
-  UInt32 v13; // esi
-  TESForm *v14; // eax
-  const char *v15; // eax
-  unsigned int v16; // esi
-  int v17; // [esp-14h] [ebp-28h]
-  int v18; // [esp-10h] [ebp-24h]
-  size_t v19; // [esp-Ch] [ebp-20h]
-  size_t v20; // [esp-Ch] [ebp-20h]
-  const char *v21; // [esp-Ch] [ebp-20h]
-  size_t v22; // [esp-4h] [ebp-18h]
-  size_t v23; // [esp-4h] [ebp-18h]
-  UInt32 v24; // [esp+4h] [ebp-10h]
-  _WORD *v25; // [esp+8h] [ebp-Ch]
-  int Src; // [esp+Ch] [ebp-8h] BYREF
-  int v27; // [esp+10h] [ebp-4h] BYREF
+  bool v4; // zf
+  TESSaveLoadGame_SerializationView *v5; // ecx
+  TESSaveLoadGame_SerializationView *v6; // ecx
+  TESSaveLoadGame_SerializationView *v7; // ecx
+  unsigned __int8 *v8; // ebp
+  char *v9; // edi
+  int v10; // esi
+  UInt32 *currentlySavingFormHeader; // edi
+  unsigned __int8 *v12; // esi
+  TESForm *v13; // eax
+  const char *v14; // eax
+  unsigned __int8 *v15; // esi
+  int v16; // [esp-14h] [ebp-28h]
+  int v17; // [esp-10h] [ebp-24h]
+  const char *v18; // [esp-Ch] [ebp-20h]
+  unsigned __int8 *bufferCursor; // [esp+4h] [ebp-10h]
+  unsigned __int8 *v20; // [esp+8h] [ebp-Ch]
+  unsigned int Src; // [esp+Ch] [ebp-8h] BYREF
+  int source; // [esp+10h] [ebp-4h] BYREF
 
-  if ( (a3 & 8) != 0 )
+  if ( (a2 & 8) != 0 )
   {
-    v5 = Global_DebugSaveBuffer == 0;
-    v6 = SaveLoad_CurrentSavegame;
-    v27 = 0;
-    v25 = 0;
-    v24 = v6->unk000[5];
-    if ( !v5 )
-      v24 = v6->unk000[5];
-    if ( sub_45A170() )
+    v4 = Global_DebugSaveBuffer == 0; /*0x46ead1*/
+    v5 = g_TESSaveLoadGame; /*0x46ead8*/
+    source = 0; /*0x46eade*/
+    v20 = 0; /*0x46eae9*/
+    bufferCursor = v5->bufferCursor; /*0x46eaf1*/
+    if ( !v4 ) /*0x46eaf5*/
+      bufferCursor = v5->bufferCursor; /*0x46eaf7*/
+    if ( TESSaveLoadGame_UseSaveGameBlocks() ) /*0x46eafb*/
     {
-      v7 = SaveLoad_CurrentSavegame;
-      LODWORD(v22) = 4;
-      Src = 0x4B4F4C42;
-      SaveLoad_SaveData((int)v7, &Src, v22);
-      LODWORD(v23) = 2;
-      v25 = (_WORD *)SaveLoad_CurrentSavegame->unk000[5];
-      SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, &v27, v23);
+      v6 = g_TESSaveLoadGame; /*0x46eb04*/
+      Src = 0x4B4F4C42; /*0x46eb11*/
+      SaveLoad_SaveData(v6, &Src, 4u); /*0x46eb19*/
+      v20 = g_TESSaveLoadGame->bufferCursor; /*0x46eb2e*/
+      SaveLoad_SaveData(g_TESSaveLoadGame, &source, 2u); /*0x46eb32*/
     }
-    v8 = SaveLoad_CurrentSavegame;
-    HIDWORD(v19) = a2;
-    LODWORD(v19) = 2;
-    a3 = 0;
-    v9 = (_WORD *)v8->unk000[5];
-    SaveLoad_SaveData((int)v8, &a3, v19);
-    v10 = this + 4;
-    if ( this != (char *)0xFFFFFFFC )
+    v7 = g_TESSaveLoadGame; /*0x46eb37*/
+    a2 = 0; /*0x46eb45*/
+    v8 = v7->bufferCursor; /*0x46eb4d*/
+    SaveLoad_SaveData(v7, &a2, 2u); /*0x46eb51*/
+    v9 = this + 4; /*0x46eb56*/
+    if ( this != (char *)0xFFFFFFFC ) /*0x46eb5b*/
     {
-      do
+      do /*0x46eb9c*/
       {
-        v11 = *(_DWORD *)v10;
-        if ( *(_DWORD *)v10 )
+        v10 = *(_DWORD *)v9; /*0x46eb60*/
+        if ( *(_DWORD *)v9 ) /*0x46eb60*/
         {
-          Src = *(_DWORD *)(*(_DWORD *)v11 + 0xC);
-          SaveLoad_SaveFormID(SaveLoad_CurrentSavegame, (int)&Src, 4u);
-          LODWORD(v20) = 4;
-          SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, (void *)(v11 + 4), v20);
-          ++a3;
+          Src = *(_DWORD *)(*(_DWORD *)v10 + 0xC); /*0x46eb71*/
+          SaveLoad_SaveFormID(g_TESSaveLoadGame, &Src, 4u); /*0x46eb7c*/
+          SaveLoad_SaveData(g_TESSaveLoadGame, (const void *)(v10 + 4), 4u); /*0x46eb8d*/
+          ++a2; /*0x46eb92*/
         }
-        v10 = *((char **)v10 + 1);
+        v9 = *((char **)v9 + 1); /*0x46eb97*/
       }
-      while ( v10 );
+      while ( v9 ); /*0x46eb9c*/
     }
-    *v9 = a3;
+    *(_WORD *)v8 = a2; /*0x46eba3*/
     if ( Global_DebugSaveBuffer )
     {
-      v12 = (UInt32 *)SaveLoad_CurrentSavegame[1].unk030[1];
-      v13 = SaveLoad_CurrentSavegame->unk000[5];
-      if ( v12 )
+      currentlySavingFormHeader = (UInt32 *)g_TESSaveLoadGame->currentlySavingFormHeader; /*0x46ebb5*/
+      v12 = g_TESSaveLoadGame->bufferCursor; /*0x46ebbd*/
+      if ( currentlySavingFormHeader )
       {
-        v14 = TESForm_LookupByFormID(*v12);
-        v15 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, int, const char *))v14->vtbl->GetEditorName)(
-                              v14,
-                              *(UInt32 *)((char *)v12 + 5),
+        v13 = TESForm_LookupByFormID(*currentlySavingFormHeader); /*0x46ebc5*/
+        v14 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, int, const char *))v13->vtbl->GetEditorName)( /*0x46ebe5*/
+                              v13,
+                              *(UInt32 *)((char *)currentlySavingFormHeader + 5),
                               0x50D,
                               "..\\TES Shared\\TESReactionForm.cpp");
         sub_40FEC0(
           "SaveGame(): %-5i for form %08X %s with flags %08X ending at line %i in file %s",
-          v13 - v24,
-          *v12,
-          v15,
+          v12 - bufferCursor,
+          *currentlySavingFormHeader,
+          v14,
+          v16,
           v17,
-          v18,
-          v21);
+          v18);
       }
       else
       {
         sub_40FEC0(
           "SaveGame(): %-5i ending at line %i in file %s",
-          v13 - v24,
+          v12 - bufferCursor,
           0x50D,
           "..\\TES Shared\\TESReactionForm.cpp");
       }
     }
-    if ( sub_45A170() )
+    if ( TESSaveLoadGame_UseSaveGameBlocks() ) /*0x46ec21*/
     {
-      v16 = SaveLoad_CurrentSavegame->unk000[5];
-      if ( v16 > (unsigned int)v25 + 0xFFFF )
-        PrintError(
+      v15 = g_TESSaveLoadGame->bufferCursor; /*0x46ec34*/
+      if ( v15 > v20 + 0xFFFF ) /*0x46ec3f*/
+        PrintError( /*0x46ec50*/
           "Save Game Block in file %s on line %i is greater than maximum short size",
           "..\\TES Shared\\TESReactionForm.cpp",
           0x50D);
-      *v25 = v16 - (_WORD)v25;
+      *(_WORD *)v20 = (_WORD)v15 - (_WORD)v20; /*0x46ec5a*/
     }
   }
 }

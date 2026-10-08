@@ -1,25 +1,25 @@
 [
   {
     "ea": "0x7944C0",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; OBLIVION AUTHORITY (2026-08-30): Converts rgb[0..2] with truncation after multiplication by 255.0 and packs the result as 0xFFBBGGRR (RGBA byte order in little-endian memory). This routine performs no local channel clamp.",
     "mnemonic": "sub",
     "size": 3
   },
   {
     "ea": "0x7944C3",
-    "line": "mov     ecx, [esp+8+arg_0]",
+    "line": "mov     ecx, [esp+8+rgb]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7944C7",
-    "line": "fnstcw  word ptr [esp+8+arg_0]",
+    "line": "fnstcw  word ptr [esp+8+rgb]",
     "mnemonic": "fnstcw",
     "size": 4
   },
   {
     "ea": "0x7944CB",
-    "line": "movzx   eax, word ptr [esp+8+arg_0]",
+    "line": "movzx   eax, word ptr [esp+8+rgb]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x7944F8",
-    "line": "fldcw   word ptr [esp+8+arg_0]",
+    "line": "fldcw   word ptr [esp+8+rgb]",
     "mnemonic": "fldcw",
     "size": 4
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x7944FF",
-    "line": "fnstcw  word ptr [esp+8+arg_0]",
+    "line": "fnstcw  word ptr [esp+8+rgb]",
     "mnemonic": "fnstcw",
     "size": 4
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x794505",
-    "line": "movzx   eax, word ptr [esp+8+arg_0]",
+    "line": "movzx   eax, word ptr [esp+8+rgb]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x794520",
-    "line": "fldcw   word ptr [esp+8+arg_0]",
+    "line": "fldcw   word ptr [esp+8+rgb]",
     "mnemonic": "fldcw",
     "size": 4
   },
@@ -181,13 +181,13 @@
   },
   {
     "ea": "0x794526",
-    "line": "fnstcw  word ptr [esp+8+arg_0]",
+    "line": "fnstcw  word ptr [esp+8+rgb]",
     "mnemonic": "fnstcw",
     "size": 4
   },
   {
     "ea": "0x79452A",
-    "line": "movzx   eax, word ptr [esp+8+arg_0]",
+    "line": "movzx   eax, word ptr [esp+8+rgb]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x794544",
-    "line": "fldcw   word ptr [esp+8+arg_0]",
+    "line": "fldcw   word ptr [esp+8+rgb]",
     "mnemonic": "fldcw",
     "size": 4
   },

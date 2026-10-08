@@ -4,7 +4,7 @@
 0x6FFE16: push    edi
 0x6FFE17: push    ebx; arg0
 0x6FFE18: mov     esi, ecx
-0x6FFE1A: call    sub_700750
+0x6FFE1A: call    sub_700750; Pass227: NiScreenTexture vtable +0x38 map insertion helper; inserts object into map context, not a draw call.
 0x6FFE1F: xor     edi, edi
 0x6FFE21: cmp     [esi+14h], di
 0x6FFE25: jbe     short loc_6FFE45

@@ -1,1 +1,1 @@
-CAUB
+typedef tagCAUB CAUB;

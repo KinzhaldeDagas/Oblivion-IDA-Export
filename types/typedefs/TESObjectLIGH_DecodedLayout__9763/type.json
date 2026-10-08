@@ -1,0 +1,105 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "TESObjectLIGH_DecodedLayout",
+  "definition": "struct TESObjectLIGH_DecodedLayout\n{\nunsigned __int8 base_00[112];\nint time_70; ///< Native LIGH time/duration field.\nunsigned int radius_74; ///< Native light radius; passed in EAX to NiPointLight_ConfigureAttenuationFromLightRadius.\nunsigned int colorRgb_78; ///< Packed RGB color used to seed NiLight diffuse/specular color.\nunsigned int lightFlags_7C; ///< Oblivion LIGH DATA flags. Retail game consumers prove: 0x02 Can carry gates activation/pickup; 0x04 Negative negates point-light RGB; 0x20 Off by default suppresses the normal non-actor attached-light path; 0x08/0x40 select Flicker/Flicker Slow; 0x80/0x100 select Pulse/Pulse Slow. Construction Set Light dialog 156 supplies the exact labels Dynamic=0x01, Can carry=0x02, Negative=0x04, Flicker=0x08, Off by default=0x20, Flicker Slow=0x40, Pulse=0x80, Pulse Slow=0x100, Spot Light=0x200, Spot Shadow=0x400. The decoded retail reference-light registration at 0x004D80C0 does not read this flag word and explicitly sets ShadowSceneLight projector mode false and renderGateOverride_120=0; the editor Spot labels therefore are not proof of an active retail projected-shadow producer.\nfloat falloffExponent_80; ///< Falloff exponent field decoded from the Oblivion LIGH record and projector path.\nfloat projectorFovDegrees_84; ///< Projector field of view in degrees; native projected-light setup clamps it before use.\nfloat fade_88; ///< Fade/dimmer base loaded from and saved to the FNAM subrecord. Seeds NiLight::m_fDimmer and retargets AttachedLightPayload_Decoded::targetDimmer_04.\nvoid *soundForm_8C; ///< Linked sound form loaded from the SNAM subrecord.\n}\n",
+  "kind": "struct",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "base_00",
+      "offset_bits": 0,
+      "offset_bytes": 0,
+      "size_bits": 896,
+      "type": "unsigned __int8[112]"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Native LIGH time/duration field.",
+      "name": "time_70",
+      "offset_bits": 896,
+      "offset_bytes": 112,
+      "size_bits": 32,
+      "type": "int"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Native light radius; passed in EAX to NiPointLight_ConfigureAttenuationFromLightRadius.",
+      "name": "radius_74",
+      "offset_bits": 928,
+      "offset_bytes": 116,
+      "size_bits": 32,
+      "type": "unsigned int"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Packed RGB color used to seed NiLight diffuse/specular color.",
+      "name": "colorRgb_78",
+      "offset_bits": 960,
+      "offset_bytes": 120,
+      "size_bits": 32,
+      "type": "unsigned int"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Oblivion LIGH DATA flags. Retail game consumers prove: 0x02 Can carry gates activation/pickup; 0x04 Negative negates point-light RGB; 0x20 Off by default suppresses the normal non-actor attached-light path; 0x08/0x40 select Flicker/Flicker Slow; 0x80/0x100 select Pulse/Pulse Slow. Construction Set Light dialog 156 supplies the exact labels Dynamic=0x01, Can carry=0x02, Negative=0x04, Flicker=0x08, Off by default=0x20, Flicker Slow=0x40, Pulse=0x80, Pulse Slow=0x100, Spot Light=0x200, Spot Shadow=0x400. The decoded retail reference-light registration at 0x004D80C0 does not read this flag word and explicitly sets ShadowSceneLight projector mode false and renderGateOverride_120=0; the editor Spot labels therefore are not proof of an active retail projected-shadow producer.",
+      "name": "lightFlags_7C",
+      "offset_bits": 992,
+      "offset_bytes": 124,
+      "size_bits": 32,
+      "type": "unsigned int"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Falloff exponent field decoded from the Oblivion LIGH record and projector path.",
+      "name": "falloffExponent_80",
+      "offset_bits": 1024,
+      "offset_bytes": 128,
+      "size_bits": 32,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Projector field of view in degrees; native projected-light setup clamps it before use.",
+      "name": "projectorFovDegrees_84",
+      "offset_bits": 1056,
+      "offset_bytes": 132,
+      "size_bits": 32,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Fade/dimmer base loaded from and saved to the FNAM subrecord. Seeds NiLight::m_fDimmer and retargets AttachedLightPayload_Decoded::targetDimmer_04.",
+      "name": "fade_88",
+      "offset_bits": 1088,
+      "offset_bytes": 136,
+      "size_bits": 32,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Linked sound form loaded from the SNAM subrecord.",
+      "name": "soundForm_8C",
+      "offset_bits": 1120,
+      "offset_bytes": 140,
+      "size_bits": 32,
+      "type": "void *"
+    }
+  ],
+  "name": "TESObjectLIGH_DecodedLayout",
+  "ordinal": 9763,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 144
+}

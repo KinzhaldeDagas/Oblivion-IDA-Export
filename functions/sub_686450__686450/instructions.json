@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x6864D6",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x686530",
-    "line": "call    sub_5E0660",
+    "line": "call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.",
     "mnemonic": "call",
     "size": 5
   },
@@ -835,7 +835,7 @@
   },
   {
     "ea": "0x68662B",
-    "line": "call    bhkWorldRayCastData__Init",
+    "line": "call    bhkWorldRayCastData__Init; TES4 authoritative: bhkWorldRayCastData::Init. Raycast input From at +0x00, To at +0x10, enable/filter at +0x20/+0x24, output hit fraction at +0x44, root collidable at +0x50, extra collector pointers at +0x70/+0x74/+0x78.",
     "mnemonic": "call",
     "size": 5
   },
@@ -847,7 +847,7 @@
   },
   {
     "ea": "0x686632",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -859,7 +859,7 @@
   },
   {
     "ea": "0x686639",
-    "line": "call    sub_608B30",
+    "line": "call    sub_608B30; Character proxy collision-filter helper used by native movement ground probes. Returns high-word collision filter/layer from charProxy+0x364 path; ground probe builds FilterInfo=(return<<16)|0x1B.",
     "mnemonic": "call",
     "size": 5
   },
@@ -877,19 +877,19 @@
   },
   {
     "ea": "0x686644",
-    "line": "mov     [esp+144h+var_F8], edx",
+    "line": "mov     [esp+144h+start.z], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x686648",
-    "line": "fld     [esp+144h+var_F8]",
+    "line": "fld     [esp+144h+start.z]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x68664C",
-    "line": "fadd    [esp+144h+var_128]",
+    "line": "fadd    [esp+144h+var_128]; Actor movement ground-probe setup: From.z = requested position z + actor vertical extent. FilterInfo = (charProxy collision layer << 16) | 0x1B.",
     "mnemonic": "fadd",
     "size": 4
   },
@@ -919,7 +919,7 @@
   },
   {
     "ea": "0x686661",
-    "line": "fstp    [esp+144h+var_F8]",
+    "line": "fstp    [esp+144h+start.z]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -937,37 +937,37 @@
   },
   {
     "ea": "0x68666E",
-    "line": "mov     [esp+144h+var_FC], ecx",
+    "line": "mov     [esp+144h+start.y], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x686672",
-    "line": "mov     [esp+144h+var_11C], ecx",
+    "line": "mov     [esp+144h+end.y], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x686676",
-    "line": "lea     ecx, [esp+144h+var_100]",
+    "line": "lea     ecx, [esp+144h+start]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x68667A",
-    "line": "mov     [esp+144h+var_100], eax",
+    "line": "mov     [esp+144h+start.x], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x68667E",
-    "line": "mov     [esp+144h+var_120], eax",
+    "line": "mov     [esp+144h+end.x], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x686682",
-    "line": "mov     eax, [esp+144h+var_F8]",
+    "line": "mov     eax, [esp+144h+start.z]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -991,19 +991,19 @@
   },
   {
     "ea": "0x686699",
-    "line": "mov     [esp+148h+var_118], eax",
+    "line": "mov     [esp+148h+end.z], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x68669D",
-    "line": "call    bhkWorldRayCastData__SetCastInputFrom",
+    "line": "call    bhkWorldRayCastData__SetCastInputFrom; TES4 authoritative: bhkWorldRayCastData::SetCastInputFrom; scales world-space NiPoint3 into Havok units using hkFactor and writes ray From.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6866A2",
-    "line": "fld     [esp+144h+var_124]",
+    "line": "fld     [esp+144h+var_124]; Downward ground-probe ray length = actorHeight + max(256.0, actorHeight). Direction vector passed to 0x663FF0 is (0, 0, -rayLength).",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1099,7 +1099,7 @@
   },
   {
     "ea": "0x6866E4",
-    "line": "call    sub_663FF0",
+    "line": "call    sub_663FF0; bhkWorldRayCastData::SetCastDirectionVector. Converts a world-space direction vector by hkFactor and writes data+0x60. Used by actor movement probes for downward ground snapping instead of an absolute To point.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1123,13 +1123,13 @@
   },
   {
     "ea": "0x6866F7",
-    "line": "call    TES__CastRay",
+    "line": "call    TES__CastRay; Native ground probe raycast. After TES::CastRay, if RootCollidable is set, Oblivion computes snappedZ = fromZ - HitFraction * rayLength; if no hit, it uses fromZ - rayLength.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6866FC",
-    "line": "fld     [esp+144h+var_118]",
+    "line": "fld     [esp+144h+end.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1153,7 +1153,7 @@
   },
   {
     "ea": "0x68670C",
-    "line": "fld     [esp+144h+a2.WorldRayCastOutput.HitFraction]",
+    "line": "fld     [esp+144h+a2.WorldRayCastOutput.HitFraction]; HitFraction application for downward snap: ST0 starts as From.z; HitFraction * rayLength is subtracted to produce the ground/contact z used in TeleportData.",
     "mnemonic": "fld",
     "size": 7
   },
@@ -1189,7 +1189,7 @@
   },
   {
     "ea": "0x686721",
-    "line": "fstp    [esp+144h+var_118]",
+    "line": "fstp    [esp+144h+end.z]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1303,7 +1303,7 @@
   },
   {
     "ea": "0x686751",
-    "line": "fld     [esp+144h+var_118]",
+    "line": "fld     [esp+144h+end.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1345,7 +1345,7 @@
   },
   {
     "ea": "0x686764",
-    "line": "fstp    [esp+144h+var_118]",
+    "line": "fstp    [esp+144h+end.z]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1393,7 +1393,7 @@
   },
   {
     "ea": "0x68677D",
-    "line": "push    ecx",
+    "line": "push    ecx; endColor",
     "mnemonic": "push",
     "size": 1
   },
@@ -1405,13 +1405,13 @@
   },
   {
     "ea": "0x686782",
-    "line": "lea     edx, [esp+148h+var_120]",
+    "line": "lea     edx, [esp+148h+end]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x686786",
-    "line": "push    edx",
+    "line": "push    edx; end",
     "mnemonic": "push",
     "size": 1
   },
@@ -1429,7 +1429,7 @@
   },
   {
     "ea": "0x68678F",
-    "line": "push    eax",
+    "line": "push    eax; startColor",
     "mnemonic": "push",
     "size": 1
   },
@@ -1441,7 +1441,7 @@
   },
   {
     "ea": "0x686794",
-    "line": "lea     ecx, [esp+150h+var_100]",
+    "line": "lea     ecx, [esp+150h+start]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1453,7 +1453,7 @@
   },
   {
     "ea": "0x68679C",
-    "line": "push    ecx",
+    "line": "push    ecx; start",
     "mnemonic": "push",
     "size": 1
   },
@@ -1477,7 +1477,7 @@
   },
   {
     "ea": "0x6867A9",
-    "line": "call    sub_47F070",
+    "line": "call    NiLines_CreateSegment; Verified generic NiLines_CreateSegment: copies two endpoint positions and two per-vertex colors, supplies line flags [1,0], and returns a two-vertex NiLines segment. TESPathGrid_RebuildRenderedGraph calls it for adjacency edges.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1495,7 +1495,7 @@
   },
   {
     "ea": "0x6867B3",
-    "line": "call    sub_4E70B0",
+    "line": "call    DebugRender_GetOrCreateVertexColorProperty; Verified shared debug property getter/creator, used by PathGrid debug rendering and the registered TestSeenData/TestLocalMap visualization commands, plus other debug-geometry callers. Lazily constructs NiVertexColorProperty, sets its observed render flags, stores the refcounted global g_DebugRenderVertexColorProperty and returns it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1513,7 +1513,7 @@
   },
   {
     "ea": "0x6867BB",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1573,7 +1573,7 @@
   },
   {
     "ea": "0x6867DE",
-    "line": "lea     edx, [esp+144h+var_120]",
+    "line": "lea     edx, [esp+144h+end]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1777,7 +1777,7 @@
   },
   {
     "ea": "0x68684F",
-    "line": "fsub    [esp+144h+var_118]",
+    "line": "fsub    [esp+144h+end.z]",
     "mnemonic": "fsub",
     "size": 4
   },
@@ -1849,7 +1849,7 @@
   },
   {
     "ea": "0x68687B",
-    "line": "push    eax; int",
+    "line": "push    eax; vertexColor",
     "mnemonic": "push",
     "size": 1
   },
@@ -1891,13 +1891,13 @@
   },
   {
     "ea": "0x686891",
-    "line": "fstp    [esp+14Ch+var_14C]; float",
+    "line": "fstp    [esp+14Ch+scale]; scale",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x686894",
-    "line": "call    sub_47FD30",
+    "line": "call    NiTriShape_CreateOctahedronGeometry; Verified generic NiTriShape geometry factory, used by PathGrid rendering and multiple other callers. It builds six octahedron vertices (four ±scale X/Y equatorial points and two ±scale*sqrt(2) Z poles), repeats a supplied NiColorAlpha for all six, writes 24 u16 indices for eight triangular faces, and returns a NiTriShape. This constructs a filled octahedron surface; wireframe is a separate scene property.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1915,7 +1915,7 @@
   },
   {
     "ea": "0x68689E",
-    "line": "call    sub_4E70B0",
+    "line": "call    DebugRender_GetOrCreateVertexColorProperty; Verified shared debug property getter/creator, used by PathGrid debug rendering and the registered TestSeenData/TestLocalMap visualization commands, plus other debug-geometry callers. Lazily constructs NiVertexColorProperty, sets its observed render flags, stores the refcounted global g_DebugRenderVertexColorProperty and returns it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1933,13 +1933,13 @@
   },
   {
     "ea": "0x6868A6",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6868AB",
-    "line": "mov     ecx, [esp+144h+var_120]",
+    "line": "mov     ecx, [esp+144h+end.x]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1951,7 +1951,7 @@
   },
   {
     "ea": "0x6868B2",
-    "line": "mov     edx, [esp+144h+var_11C]",
+    "line": "mov     edx, [esp+144h+end.y]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1963,7 +1963,7 @@
   },
   {
     "ea": "0x6868B9",
-    "line": "mov     eax, [esp+144h+var_118]",
+    "line": "mov     eax, [esp+144h+end.z]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2191,7 +2191,7 @@
   },
   {
     "ea": "0x686937",
-    "line": "push    ecx; int",
+    "line": "push    ecx; vertexColor",
     "mnemonic": "push",
     "size": 1
   },
@@ -2203,13 +2203,13 @@
   },
   {
     "ea": "0x686939",
-    "line": "fstp    [esp+14Ch+var_14C]; float",
+    "line": "fstp    [esp+14Ch+scale]; scale",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x68693C",
-    "line": "call    sub_47FD30",
+    "line": "call    NiTriShape_CreateOctahedronGeometry; Verified generic NiTriShape geometry factory, used by PathGrid rendering and multiple other callers. It builds six octahedron vertices (four ±scale X/Y equatorial points and two ±scale*sqrt(2) Z poles), repeats a supplied NiColorAlpha for all six, writes 24 u16 indices for eight triangular faces, and returns a NiTriShape. This constructs a filled octahedron surface; wireframe is a separate scene property.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2227,7 +2227,7 @@
   },
   {
     "ea": "0x686946",
-    "line": "call    sub_4E70B0",
+    "line": "call    DebugRender_GetOrCreateVertexColorProperty; Verified shared debug property getter/creator, used by PathGrid debug rendering and the registered TestSeenData/TestLocalMap visualization commands, plus other debug-geometry callers. Lazily constructs NiVertexColorProperty, sets its observed render flags, stores the refcounted global g_DebugRenderVertexColorProperty and returns it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2245,13 +2245,13 @@
   },
   {
     "ea": "0x68694E",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x686953",
-    "line": "mov     edx, [esp+144h+var_120]",
+    "line": "mov     edx, [esp+144h+end.x]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2263,7 +2263,7 @@
   },
   {
     "ea": "0x68695A",
-    "line": "mov     eax, [esp+144h+var_11C]",
+    "line": "mov     eax, [esp+144h+end.y]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2275,7 +2275,7 @@
   },
   {
     "ea": "0x686961",
-    "line": "mov     ecx, [esp+144h+var_118]",
+    "line": "mov     ecx, [esp+144h+end.z]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2323,7 +2323,7 @@
   },
   {
     "ea": "0x686980",
-    "line": "call    sub_4DC270",
+    "line": "call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2666,6 +2666,84 @@
   {
     "ea": "0x686A37",
     "line": "jmp     loc_6868E4",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4F40",
+    "line": "lea     ecx, [ebp+var_E0]; void *",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C4F46",
+    "line": "jmp     sub_4F5E90",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4F4B",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C4F4F",
+    "line": "lea     eax, [edx-134h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C4F55",
+    "line": "mov     ecx, [edx-138h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C4F5B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C4F5D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4F62",
+    "line": "add     eax, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C4F65",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C4F68",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C4F6A",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4F6F",
+    "line": "mov     eax, offset stru_AED7C4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4F74",
+    "line": "jmp     ___CxxFrameHandler3",
     "mnemonic": "jmp",
     "size": 5
   }

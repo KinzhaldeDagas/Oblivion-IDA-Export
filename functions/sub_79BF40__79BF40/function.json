@@ -1,19 +1,36 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_79BF40",
+  "chunks": [
+    [
+      "0x79BF40",
+      "0x79BFE2"
+    ],
+    [
+      "0x9CC330",
+      "0x9CC35C"
+    ]
+  ],
+  "chunks_sha256": "4e21d8db8a5d0659e22032436909fa5fc0fa0dc9257a0825a7f20fe2243d78ea",
+  "comment_regular": "OBLIVION AUTHORITY (2026-08-30): Exception-safe uninitialized_fill_n for vector<float> elements of vector<vector<float>>. Deep-copy-constructs each inner vector and destroys only the constructed prefix on unwind. Its normal return at 0x79BFD0 proves the prior noreturn annotation false.",
+  "comment_repeatable": "OBLIVION AUTHORITY (2026-08-30): Exception-safe uninitialized_fill_n for vector<float> elements of vector<vector<float>>. Deep-copy-constructs each inner vector and destroys only the constructed prefix on unwind. Its normal return at 0x79BFD0 proves the prior noreturn annotation false.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_stVector_stVectorFloat_UninitializedFillN_010201A0",
   "end_ea": "0x79BFE2",
-  "flags": 21521,
+  "evidence_confidence": "Unknown",
+  "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_79BF40",
+  "name": "OB_stVector_stVectorFloat_UninitializedFillN_010201A0",
   "segment": ".text",
   "sha256": "a3dab8c309243a44b2ee2a8fdec13a487353d91fe27a54fc5714b4905b95ff37",
   "size": 162,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x79BF40",
-  "type": "void __cdecl __noreturn(char *, unsigned int, int)",
-  "xrefs_from_count": 69,
+  "total_chunk_size": 206,
+  "type": "void __cdecl(OB_stVectorFloat_010201A0 *destination, unsigned int count, const OB_stVectorFloat_010201A0 *value)",
+  "xrefs_from_count": 85,
   "xrefs_to_count": 3
 }

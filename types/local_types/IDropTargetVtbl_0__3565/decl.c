@@ -1,1 +1,1 @@
-IDropTargetVtbl_0
+typedef IDropTargetVtbl IDropTargetVtbl_0;

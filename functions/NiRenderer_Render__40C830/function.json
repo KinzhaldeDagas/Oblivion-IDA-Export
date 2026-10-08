@@ -1,19 +1,36 @@
 {
-  "callees_count": 139,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 57,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 46,
+  "chunks": [
+    [
+      "0x40C830",
+      "0x40D153"
+    ],
+    [
+      "0x9AA150",
+      "0x9AA17E"
+    ]
+  ],
+  "chunks_sha256": "3aec7db9b1d8bb17d8c2b6473f723c18fddf7335017d3c76ad8539cafd9510d9",
+  "comment_regular": "CULLING audit 2026-09-27 (observed Oblivion behavior): Focused CULLING audit: call 0x40CCD3 uses world SceneGraph camera(+0xDC), root, process(+0xE4), null explicit array. Call 0x40CE48 uses SAME camera/process with first-person node selected at 0x40C945 via selector(true), and null array. First-person node is temporarily AppCulled during world traversal, restored before separate rendering; accumulator flags differ. Do not equate this one callsite with both player perspectives.",
+  "comment_repeatable": "\n\n2026-10-02 renderer-side performance evidence (not native algorithm inference): accepted V233 runtime frame591 window60 reports CPU preparation totalAvg111.745ms/sharedNative42.070ms/actorCapture46.738ms (census10.693/admission18.006/finalSeal11.495); GPU duration unmeasured. Source optimizer now skips redundant shadow draw bindings only within each private deferred recording and reuses actor code-check scratch allocation while re-reading full code at required seals. Targeted sun/local WARP depth/state checks and hook-normalization/mutation checks pass. Six-caster fixtures request54 bindings, issue23, skip31; no game FPS claim. Draw order, code/metadata/lifetime checks and full final validation preserved. High graphical tiers now explicitly requested by user. Evidence stage-shadow-high-optimization. Optimized DLL is not deployed.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 88,
   "display_name": "NiRenderer_Render",
   "end_ea": "0x40D153",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "NiRenderer_Render",
   "segment": ".text",
   "sha256": "36406f6d9216c27af6a42ea933d957e94599630f55c2c227467480832ef808fb",
   "size": 2339,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x40C830",
+  "total_chunk_size": 2385,
   "type": "void __thiscall(NiDX9Renderer *this, BSRenderedTexture *a2)",
-  "xrefs_from_count": 892,
+  "xrefs_from_count": 915,
   "xrefs_to_count": 3
 }

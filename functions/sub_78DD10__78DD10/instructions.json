@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x78DD10",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; 2026-05-19 payload-retention pass: stock 12000 parser still creates compact 0x1C collision records with type, position, and dimensions only. No rotation storage exists here; plugin-side 73000 rotations must stay in sidecar payload records keyed by collision index.",
     "mnemonic": "push",
     "size": 2
   },
@@ -157,13 +157,13 @@
   },
   {
     "ea": "0x78DD5C",
-    "line": "mov     esi, [esp+0D4h+arg_0]",
+    "line": "mov     esi, [esp+0D4h+reader]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x78DD63",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x78DD73",
-    "line": "call    sub_78EB40",
+    "line": "call    OB_CTreeFileAccess_ReadDword_010201A0; SpeedTreeOBSE 2026-05-25 stock-tail fidelity pass: top-level 12000 collision requires at least one recognized 12002/12003/12004 collision record before accepting 12001.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x78DD83",
-    "line": "mov     [esp+0D4h+var_BC], ebx",
+    "line": "mov     [esp+0D4h+record], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -301,19 +301,19 @@
   },
   {
     "ea": "0x78DDBB",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x78DDBD",
-    "line": "mov     [esp+0D4h+var_BC], edi",
+    "line": "mov     [esp+0D4h+record], edi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x78DDC1",
-    "line": "call    sub_78EB10",
+    "line": "call    OB_CTreeFileAccess_ReadFloat_010201A0; CTreeFileAccess::ParseFloat. Bounds-checks cursor, advances by 4, returns little-endian float.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,13 +325,13 @@
   },
   {
     "ea": "0x78DDCA",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x78DDCC",
-    "line": "call    sub_78EB10",
+    "line": "call    OB_CTreeFileAccess_ReadFloat_010201A0; CTreeFileAccess::ParseFloat. Bounds-checks cursor, advances by 4, returns little-endian float.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,13 +343,13 @@
   },
   {
     "ea": "0x78DDD5",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x78DDD7",
-    "line": "call    sub_78EB10",
+    "line": "call    OB_CTreeFileAccess_ReadFloat_010201A0; CTreeFileAccess::ParseFloat. Bounds-checks cursor, advances by 4, returns little-endian float.",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,13 +439,13 @@
   },
   {
     "ea": "0x78DE0C",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x78DE0E",
-    "line": "call    sub_78EB10",
+    "line": "call    OB_CTreeFileAccess_ReadFloat_010201A0; CTreeFileAccess::ParseFloat. Bounds-checks cursor, advances by 4, returns little-endian float.",
     "mnemonic": "call",
     "size": 5
   },
@@ -457,13 +457,13 @@
   },
   {
     "ea": "0x78DE17",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x78DE19",
-    "line": "call    sub_78EB10",
+    "line": "call    OB_CTreeFileAccess_ReadFloat_010201A0; CTreeFileAccess::ParseFloat. Bounds-checks cursor, advances by 4, returns little-endian float.",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,13 +475,13 @@
   },
   {
     "ea": "0x78DE22",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x78DE24",
-    "line": "call    sub_78EB10",
+    "line": "call    OB_CTreeFileAccess_ReadFloat_010201A0; CTreeFileAccess::ParseFloat. Bounds-checks cursor, advances by 4, returns little-endian float.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,13 +499,13 @@
   },
   {
     "ea": "0x78DE2F",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x78DE31",
-    "line": "call    sub_78EB10",
+    "line": "call    OB_CTreeFileAccess_ReadFloat_010201A0; CTreeFileAccess::ParseFloat. Bounds-checks cursor, advances by 4, returns little-endian float.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,13 +517,13 @@
   },
   {
     "ea": "0x78DE3A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x78DE3C",
-    "line": "call    sub_78EB10",
+    "line": "call    OB_CTreeFileAccess_ReadFloat_010201A0; CTreeFileAccess::ParseFloat. Bounds-checks cursor, advances by 4, returns little-endian float.",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,13 +541,13 @@
   },
   {
     "ea": "0x78DE47",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x78DE49",
-    "line": "call    sub_78EB10",
+    "line": "call    OB_CTreeFileAccess_ReadFloat_010201A0; CTreeFileAccess::ParseFloat. Bounds-checks cursor, advances by 4, returns little-endian float.",
     "mnemonic": "call",
     "size": 5
   },
@@ -559,37 +559,37 @@
   },
   {
     "ea": "0x78DE52",
-    "line": "mov     ecx, [ebp+58h]",
+    "line": "mov     ecx, [ebp+58h]; vec",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x78DE55",
-    "line": "lea     eax, [esp+0D4h+var_BC]",
+    "line": "lea     eax, [esp+0D4h+record]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x78DE59",
-    "line": "push    eax",
+    "line": "push    eax; record",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78DE5A",
-    "line": "call    sub_78D550",
+    "line": "call    OB_CollisionObjectVector_Append_010201A0; Appends one compact 0x1C stock collision record to the collision vector; vector stride proves no in-record 4.1 supplemental rotation fields.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x78DE5F",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x78DE61",
-    "line": "call    sub_787810",
+    "line": "call    OB_CTreeFileAccess_IsEOF_010201A0; CTreeFileAccess::EndOfFile-style helper. Returns true when byte-buffer begin is null or cursor offset is at/after end-begin.",
     "mnemonic": "call",
     "size": 5
   },
@@ -607,13 +607,13 @@
   },
   {
     "ea": "0x78DE6E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x78DE70",
-    "line": "call    sub_78EB40",
+    "line": "call    OB_CTreeFileAccess_ReadDword_010201A0; CTreeFileAccess::ParseToken/ParseInt-style 4-byte read. Bounds-checks cursor against owned buffer, advances cursor by 4, returns little-endian dword.",
     "mnemonic": "call",
     "size": 5
   },
@@ -685,7 +685,7 @@
   },
   {
     "ea": "0x78DE9C",
-    "line": "push    1Fh; MaxCount",
+    "line": "push    1Fh; count",
     "mnemonic": "push",
     "size": 2
   },
@@ -697,55 +697,55 @@
   },
   {
     "ea": "0x78DEA3",
-    "line": "lea     ecx, [esp+0DCh+var_94]",
+    "line": "lea     ecx, [esp+0DCh+details]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x78DEA7",
-    "line": "mov     [esp+0DCh+var_7C], 0Fh",
+    "line": "mov     [esp+0DCh+details.capacity], 0Fh",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x78DEAF",
-    "line": "mov     [esp+0DCh+var_80], ebx",
+    "line": "mov     [esp+0DCh+details.size], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x78DEB3",
-    "line": "mov     [esp+0DCh+var_90], bl",
+    "line": "mov     byte ptr [esp+0DCh+details.storage], bl",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x78DEB7",
-    "line": "call    sub_414500",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x78DEBC",
-    "line": "push    ebx",
+    "line": "push    ebx; appendSystemError",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78DEBD",
-    "line": "lea     ecx, [esp+0D8h+var_94]",
+    "line": "lea     ecx, [esp+0D8h+details]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x78DEC1",
-    "line": "push    ecx",
+    "line": "push    ecx; details",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78DEC2",
-    "line": "lea     ecx, [esp+0DCh+var_5C]",
+    "line": "lea     ecx, [esp+0DCh+var_5C]; this",
     "mnemonic": "lea",
     "size": 7
   },
@@ -757,7 +757,7 @@
   },
   {
     "ea": "0x78DED4",
-    "line": "call    sub_789190",
+    "line": "call    OB_IdvFileError_Ctor_010201A0; Oblivion IdvFileError constructor: builds details + ' [' + optional strerror(errno) + ']', constructs the binary runtime_error base, then installs IdvFileError vftable. RT4.1 corroborates the message expression but its st_string inheritance is not used for this older binary layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -787,7 +787,7 @@
   },
   {
     "ea": "0x78DEE8",
-    "line": "push    1Dh; MaxCount",
+    "line": "push    1Dh; count",
     "mnemonic": "push",
     "size": 2
   },
@@ -799,55 +799,55 @@
   },
   {
     "ea": "0x78DEEF",
-    "line": "lea     ecx, [esp+0DCh+var_94]",
+    "line": "lea     ecx, [esp+0DCh+details]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x78DEF3",
-    "line": "mov     [esp+0DCh+var_7C], 0Fh",
+    "line": "mov     [esp+0DCh+details.capacity], 0Fh",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x78DEFB",
-    "line": "mov     [esp+0DCh+var_80], ebx",
+    "line": "mov     [esp+0DCh+details.size], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x78DEFF",
-    "line": "mov     [esp+0DCh+var_90], bl",
+    "line": "mov     byte ptr [esp+0DCh+details.storage], bl",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x78DF03",
-    "line": "call    sub_414500",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x78DF08",
-    "line": "push    ebx",
+    "line": "push    ebx; appendSystemError",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78DF09",
-    "line": "lea     eax, [esp+0D8h+var_94]",
+    "line": "lea     eax, [esp+0D8h+details]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x78DF0D",
-    "line": "push    eax",
+    "line": "push    eax; details",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78DF0E",
-    "line": "lea     ecx, [esp+0DCh+var_5C]",
+    "line": "lea     ecx, [esp+0DCh+var_5C]; this",
     "mnemonic": "lea",
     "size": 7
   },
@@ -859,7 +859,7 @@
   },
   {
     "ea": "0x78DF20",
-    "line": "call    sub_789190",
+    "line": "call    OB_IdvFileError_Ctor_010201A0; Oblivion IdvFileError constructor: builds details + ' [' + optional strerror(errno) + ']', constructs the binary runtime_error base, then installs IdvFileError vftable. RT4.1 corroborates the message expression but its st_string inheritance is not used for this older binary layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -889,7 +889,7 @@
   },
   {
     "ea": "0x78DF34",
-    "line": "push    3Bh ; ';'; MaxCount",
+    "line": "push    3Bh ; ';'; count",
     "mnemonic": "push",
     "size": 2
   },
@@ -901,37 +901,37 @@
   },
   {
     "ea": "0x78DF3B",
-    "line": "lea     ecx, [esp+0DCh+var_78]",
+    "line": "lea     ecx, [esp+0DCh+var_78]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x78DF3F",
-    "line": "mov     [esp+0DCh+var_60], 0Fh",
+    "line": "mov     [esp+0DCh+var_78.capacity], 0Fh",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x78DF47",
-    "line": "mov     [esp+0DCh+var_64], ebx",
+    "line": "mov     [esp+0DCh+var_78.size], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x78DF4B",
-    "line": "mov     [esp+0DCh+var_74], bl",
+    "line": "mov     byte ptr [esp+0DCh+var_78.storage], bl",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x78DF4F",
-    "line": "call    sub_414500",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x78DF54",
-    "line": "push    ebx",
+    "line": "push    ebx; appendSystemError",
     "mnemonic": "push",
     "size": 1
   },
@@ -943,13 +943,13 @@
   },
   {
     "ea": "0x78DF59",
-    "line": "push    edx",
+    "line": "push    edx; details",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78DF5A",
-    "line": "lea     ecx, [esp+0DCh+var_34]",
+    "line": "lea     ecx, [esp+0DCh+var_34]; this",
     "mnemonic": "lea",
     "size": 7
   },
@@ -961,7 +961,7 @@
   },
   {
     "ea": "0x78DF6C",
-    "line": "call    sub_789190",
+    "line": "call    OB_IdvFileError_Ctor_010201A0; Oblivion IdvFileError constructor: builds details + ' [' + optional strerror(errno) + ']', constructs the binary runtime_error base, then installs IdvFileError vftable. RT4.1 corroborates the message expression but its st_string inheritance is not used for this older binary layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -987,6 +987,114 @@
     "ea": "0x78DF7E",
     "line": "call    ThrowException??",
     "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CBA70",
+    "line": "mov     eax, [ebp-0C0h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9CBA76",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CBA77",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CBA7C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CBA7D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CBA7E",
+    "line": "lea     ecx, [ebp-94h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CBA84",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CBA89",
+    "line": "lea     ecx, [ebp-94h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CBA8F",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CBA94",
+    "line": "lea     ecx, [ebp-78h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CBA97",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CBA9C",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CBAA0",
+    "line": "lea     eax, [edx-0C4h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CBAA6",
+    "line": "mov     ecx, [edx-0C8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9CBAAC",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CBAAE",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CBAB3",
+    "line": "mov     eax, offset stru_AF48AC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CBAB8",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
     "size": 5
   }
 ]

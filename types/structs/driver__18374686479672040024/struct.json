@@ -1,40 +1,72 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "driver",
+  "definition": "struct driver\n{\nWCHAR_0 inf_path[260];\nWCHAR_0 manufacturer[256];\nWCHAR_0 mfg_key[256];\nWCHAR_0 description[256];\nWCHAR_0 section[256];\n}\n",
   "id": 18374686479672040024,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "inf_path",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 520
+      "size": 520,
+      "type": "WCHAR_0[260]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "manufacturer",
       "offset": 520,
       "offset_hex": "0x208",
-      "size": 512
+      "size": 512,
+      "type": "WCHAR_0[256]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "mfg_key",
       "offset": 1032,
       "offset_hex": "0x408",
-      "size": 512
+      "size": 512,
+      "type": "WCHAR_0[256]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "description",
       "offset": 1544,
       "offset_hex": "0x608",
-      "size": 512
+      "size": 512,
+      "type": "WCHAR_0[256]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "section",
       "offset": 2056,
       "offset_hex": "0x808",
-      "size": 512
+      "size": 512,
+      "type": "WCHAR_0[256]"
     }
   ],
   "name": "driver",
+  "ordinal": 5953,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 2568
 }

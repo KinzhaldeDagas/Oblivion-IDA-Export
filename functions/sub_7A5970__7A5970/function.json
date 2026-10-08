@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x7A5970",
+      "0x7A5996"
+    ]
+  ],
+  "chunks_sha256": "9cd9c503310eab7e7f06d45159cd85106accd2c931420cd5cfee4feb4c9d1008",
+  "comment_regular": "Deep-copy assigns one SIdvLeafTexture value across an existing 0x54-stride range.",
+  "comment_repeatable": "Deep-copy assigns one SIdvLeafTexture value across an existing 0x54-stride range.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7A5970",
+  "display_name": "OB_SIdvLeafTexture_CopyAssignFillRange_010201A0",
   "end_ea": "0x7A5996",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7A5970",
+  "name": "OB_SIdvLeafTexture_CopyAssignFillRange_010201A0",
   "segment": ".text",
   "sha256": "9cd9c503310eab7e7f06d45159cd85106accd2c931420cd5cfee4feb4c9d1008",
   "size": 38,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A5970",
-  "type": "float *__cdecl(float *, float *, int)",
+  "total_chunk_size": 38,
+  "type": "void __cdecl(OB_SIdvLeafTexture_010201A0 *first, OB_SIdvLeafTexture_010201A0 *last, const OB_SIdvLeafTexture_010201A0 *value)",
   "xrefs_from_count": 20,
   "xrefs_to_count": 2
 }

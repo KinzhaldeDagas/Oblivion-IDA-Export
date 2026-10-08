@@ -14,8 +14,8 @@
 0x7B0BF1: mov     large fs:0, eax
 0x7B0BF7: mov     esi, ecx
 0x7B0BF9: mov     [esp+28h+var_10], esi
-0x7B0BFD: call    ??0BSImageSpaceShader@@QAE@XZ; BSImageSpaceShader::BSImageSpaceShader(void)
-0x7B0C02: push    offset sub_7016A0; a5
+0x7B0BFD: call    ??0BSImageSpaceShader@@QAE@XZ; MoonSugarEffect decode: BSImageSpaceShader base ctor calls BSShader ctor, sets vtable, clears source texture +0x7C and scalar fields +0x80..+0x8C.
+0x7B0C02: push    offset NiPointerSlot_Release; a5
 0x7B0C07: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x7B0C0C: push    3; size
 0x7B0C0E: push    4; a2
@@ -25,7 +25,7 @@
 0x7B0C19: mov     [esp+3Ch+var_4], ebp
 0x7B0C1D: mov     dword ptr [esi], offset ??_7BlurShader@@6B@; const BlurShader::`vftable'
 0x7B0C23: call    ArrayConstructor
-0x7B0C28: push    offset sub_7016A0; a5
+0x7B0C28: push    offset NiPointerSlot_Release; a5
 0x7B0C2D: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x7B0C32: push    3; size
 0x7B0C34: push    4; a2
@@ -99,3 +99,31 @@
 0x7B0CF7: pop     ebx
 0x7B0CF8: add     esp, 14h
 0x7B0CFB: retn
+0x9CD6C0: mov     ecx, [ebp-10h]; this
+0x9CD6C3: jmp     ??1BSImageSpaceShader@@UAE@XZ; MoonSugarEffect decode: BSImageSpaceShader dtor releases source BSRenderedTexture at +0x7C, clears +0x80..+0x8C, then calls BSShader dtor.
+0x9CD6C8: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9CD6CD: push    3; int
+0x9CD6CF: push    4; unsigned int
+0x9CD6D1: mov     eax, [ebp-10h]
+0x9CD6D4: add     eax, 94h ; '”'
+0x9CD6D9: push    eax; void *
+0x9CD6DA: call    $LN21
+0x9CD6DF: retn
+0x9CD6E0: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9CD6E5: push    3; int
+0x9CD6E7: push    4; unsigned int
+0x9CD6E9: mov     eax, [ebp-10h]
+0x9CD6EC: add     eax, 0A0h ; ' '
+0x9CD6F1: push    eax; void *
+0x9CD6F2: call    $LN21
+0x9CD6F7: retn
+0x9CD6F8: mov     ecx, [ebp-10h]
+0x9CD6FB: add     ecx, 0E0h ; 'à'; slot
+0x9CD701: jmp     NiPointerSlot_Release
+0x9CD706: mov     edx, [esp+arg_4]
+0x9CD70A: lea     eax, [edx-18h]
+0x9CD70D: mov     ecx, [edx-1Ch]
+0x9CD710: xor     ecx, eax
+0x9CD712: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CD717: mov     eax, offset stru_AF6978
+0x9CD71C: jmp     ___CxxFrameHandler3

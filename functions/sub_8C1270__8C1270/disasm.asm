@@ -14,7 +14,7 @@
 0x8C128D: mov     dword ptr [esi], offset ??_7hkConstraintCinfo@@6B@; const hkConstraintCinfo::`vftable'
 0x8C1293: call    sub_8A0200
 0x8C1298: push    esi
-0x8C1299: call    FormHeapFree
+0x8C1299: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x8C129E: add     esp, 4
 0x8C12A1: pop     esi
 0x8C12A2: mov     dword ptr [edi+0Ch], 0

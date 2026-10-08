@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7ABAC0",
-    "line": "push    ecx",
+    "line": "push    ecx; Drain accumulated RenderPass entries through shader selector setup and final draw submission.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x7ABAC2",
-    "line": "mov     esi, [esp+8+arg_0]",
+    "line": "mov     esi, [esp+8+self]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,19 +49,19 @@
   },
   {
     "ea": "0x7ABADC",
-    "line": "push    offset sub_7A9A90",
+    "line": "push    offset RenderPassNode_CompareSelectorAscending; compare",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x7ABAE1",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7ABAE3",
-    "line": "call    sub_7AA550",
+    "line": "call    BSTPersistentRenderPassList_StableMergeSort; MEF PERF 2026-10-07 PASS5: PERF-15 caller: DrainRenderPassList invokes stable merge sort with selector comparator7A9A90 when persistent count+10 nonzero, then selector setup/draw and node recycling. Borrowed RenderPass payloads remain property-owned. Preserve draw order and drain even if sorting work is skipped.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x7ABB37",
-    "line": "call    sub_7D1320",
+    "line": "call    sub_7D1320; MoonSugarEffect decode: native shader-id selector for standard shader property families. Updates program/pass render-state choices and constants for hardcoded IDs before object render.",
     "mnemonic": "call",
     "size": 5
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x7ABB52",
-    "line": "call    sub_7FD260",
+    "line": "call    Lighting30Shader_SelectRenderPass; Oblivion Lighting30 selector activation. Selectors outside 0x15E/0x15F restore the main constant maps, derive row selector-0x12A, rewrite automatic vertex/pixel-constant enable flags from B46988/B46A60, and apply a route render-state group. SimpleShadow selectors 0x14E..0x151 use valid rows and route group 7. Stock one-light selectors 0x177..0x17A are not rejected here: they derive rows 0x4D..0x50 and use the generic route-group-0 path. The later per-geometry resolver is the actual validity gate; every later selector activation deterministically rewrites these flags before its draw.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,19 +403,19 @@
   },
   {
     "ea": "0x7ABB7A",
-    "line": "push    ebp; float",
+    "line": "push    ebp; selector",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7ABB7B",
-    "line": "push    edi; int",
+    "line": "push    edi; entry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7ABB7C",
-    "line": "call    sub_7A9820",
+    "line": "call    BSShaderAccumulator_DrawRenderPass; Submit one accumulated Oblivion RenderPass. Publishes selector/current entry, dispatches each light pointer, then invokes geometry render virtual +0x84 exactly once. It does not prevalidate the Lighting30 selector; invalid 0x177..0x17A records are suppressed later by SetupRenderPass leaving PassCount zero. Valid SimpleShadow compatibility records each have lightCount=1, so eligible lights remain separate receiver draws.",
     "mnemonic": "call",
     "size": 5
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x7ABB91",
-    "line": "mov     esi, [esp+14h+arg_0]",
+    "line": "mov     esi, [esp+14h+self]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -487,13 +487,13 @@
   },
   {
     "ea": "0x7ABB98",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7ABB9A",
-    "line": "call    sub_7A9C30",
+    "line": "call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Drain helper recycles list nodes after drawing but never destroys the borrowed property RenderPass payloads.",
     "mnemonic": "call",
     "size": 5
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x7ABBA4",
-    "line": "mov     [esi+0Ch], ecx",
+    "line": "mov     [esi+0Ch], ecx; MEF PERF 2026-10-07 PASS5: PERF-15 drain lifecycle: after draw/free-surplus helper, active head is assigned to freeHead+0C then head/tail/count cleared. This retains just-used nodes locally for reuse. Do not promote a generic repeated heap-churn claim based on ReleaseFreeNodesToGlobalPool name.",
     "mnemonic": "mov",
     "size": 3
   },

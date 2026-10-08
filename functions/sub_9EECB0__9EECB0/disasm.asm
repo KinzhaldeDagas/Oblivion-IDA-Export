@@ -2,7 +2,7 @@
 0x9EECB6: push    ecx
 0x9EECB7: fstp    [esp+4+var_4]; float
 0x9EECBA: push    offset aFwortcraftstrc; "fWortcraftStrChanceDenom"
-0x9EECBF: mov     ecx, offset fWortcraftStrChanceDenom
+0x9EECBF: mov     ecx, (offset flt_B37ED0+0A0h)
 0x9EECC4: call    GameSetting_ConstrAndReg_float
 0x9EECC9: push    offset sub_A20600; void (__cdecl *)()
 0x9EECCE: call    _atexit

@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
-  "callers_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 7,
+  "chunks": [
+    [
+      "0x7AA390",
+      "0x7AA3BC"
+    ]
+  ],
+  "chunks_sha256": "be121ae80219facda6f6ae8150913910187bc8e27f41553289f2d92cd3457460",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "MEF PERF 2026-10-07 PASS5: PERF-15 allowed pure comparator: RenderPass** -> geometry at pass+0 -> unsigned DWORD geometry+B4; current Oblivion NiGeometry type identifies+B4 as geomData. Returns signed -1/0/+1 using unsigned key order, no callbacks/writes. Equal geomData addresses retain input order in native merge sort.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7AA390",
+  "display_name": "RenderPassNode_CompareGeometryDataAddressAscending",
   "end_ea": "0x7AA3BC",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7AA390",
+  "name": "RenderPassNode_CompareGeometryDataAddressAscending",
   "segment": ".text",
   "sha256": "be121ae80219facda6f6ae8150913910187bc8e27f41553289f2d92cd3457460",
   "size": 44,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7AA390",
-  "type": "unsigned int __cdecl(int, int)",
+  "total_chunk_size": 44,
+  "type": "int __cdecl(RenderPass_DecodedLayout **left, RenderPass_DecodedLayout **right)",
   "xrefs_from_count": 15,
   "xrefs_to_count": 7
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x79E380",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Oblivion st_vector<SFrondTexture>::clear. Validates begin/end and erases the initialized range while retaining capacity; CFrondEngine::Parse calls it before token 13008 repopulates textures.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -79,49 +79,49 @@
   },
   {
     "ea": "0x79E3A2",
-    "line": "push    ebx",
+    "line": "push    ebx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E3A3",
-    "line": "push    esi",
+    "line": "push    esi; lastOwner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E3A4",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E3A5",
-    "line": "push    esi",
+    "line": "push    esi; firstOwner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E3A6",
-    "line": "lea     eax, [esp+24h+var_8]",
+    "line": "lea     eax, [esp+24h+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x79E3AA",
-    "line": "push    eax",
+    "line": "push    eax; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E3AB",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79E3AD",
-    "line": "call    sub_79E020",
+    "line": "call    OB_stVector_SFrondTexture_EraseRange_010201A0; Checked erase-range for st_vector<SFrondTexture>. Validates iterator owners, deep-moves [last,end) over [first,last), destroys the vacated tail, updates end, and returns {owner,first}.",
     "mnemonic": "call",
     "size": 5
   },

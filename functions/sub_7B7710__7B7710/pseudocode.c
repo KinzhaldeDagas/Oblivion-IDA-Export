@@ -15,7 +15,7 @@ BSShaderPPLightingProperty::TangentSpaceData *__cdecl sub_7B7710(NiObjectNET *a1
   unsigned int v14; // edx
   int v15; // edi
   unsigned __int64 v16; // rcx
-  unsigned int v17; // esi
+  int v17; // esi
   void *v18; // eax
   int v19; // ecx
   int v20; // eax
@@ -59,107 +59,103 @@ BSShaderPPLightingProperty::TangentSpaceData *__cdecl sub_7B7710(NiObjectNET *a1
   char *v58; // edi
   BSShaderPPLightingProperty::TangentSpaceData *v59; // edi
   void *v60; // edx
-  size_t v61; // [esp-18h] [ebp-CCh]
-  size_t v62; // [esp-Ch] [ebp-C0h]
-  size_t v63; // [esp-4h] [ebp-B8h]
-  bool v64; // [esp+12h] [ebp-A2h]
-  bool v65; // [esp+12h] [ebp-A2h]
+  size_t v61; // [esp-4h] [ebp-B8h]
+  bool v62; // [esp+12h] [ebp-A2h]
+  bool v63; // [esp+12h] [ebp-A2h]
   char IsObjectOfRTTIType; // [esp+13h] [ebp-A1h]
-  int v67; // [esp+14h] [ebp-A0h] BYREF
-  float v68; // [esp+18h] [ebp-9Ch]
-  unsigned int v69; // [esp+1Ch] [ebp-98h]
+  int v65; // [esp+14h] [ebp-A0h] BYREF
+  float v66; // [esp+18h] [ebp-9Ch]
+  unsigned int v67; // [esp+1Ch] [ebp-98h]
   void *Src; // [esp+20h] [ebp-94h]
-  int v71; // [esp+24h] [ebp-90h] BYREF
-  float v72; // [esp+28h] [ebp-8Ch]
-  float v73; // [esp+2Ch] [ebp-88h]
-  int v74; // [esp+30h] [ebp-84h] BYREF
-  float v75; // [esp+34h] [ebp-80h]
-  void *vftable; // [esp+38h] [ebp-7Ch]
-  BSShaderPPLightingProperty::TangentSpaceData *v77; // [esp+3Ch] [ebp-78h]
+  int v69; // [esp+24h] [ebp-90h] BYREF
+  float v70; // [esp+28h] [ebp-8Ch]
+  float v71; // [esp+2Ch] [ebp-88h]
+  int v72; // [esp+30h] [ebp-84h] BYREF
+  float v73; // [esp+34h] [ebp-80h]
+  void *source; // [esp+38h] [ebp-7Ch]
+  BSShaderPPLightingProperty::TangentSpaceData *v75; // [esp+3Ch] [ebp-78h]
   int i; // [esp+40h] [ebp-74h]
-  int v79; // [esp+44h] [ebp-70h]
-  float v80; // [esp+48h] [ebp-6Ch]
-  float v81; // [esp+4Ch] [ebp-68h]
-  float v82; // [esp+50h] [ebp-64h]
-  float v83; // [esp+54h] [ebp-60h]
-  float v84; // [esp+58h] [ebp-5Ch]
-  float v85; // [esp+5Ch] [ebp-58h]
-  float v86; // [esp+60h] [ebp-54h]
-  double v87; // [esp+64h] [ebp-50h]
-  float v88; // [esp+6Ch] [ebp-48h]
-  unsigned __int64 v89; // [esp+74h] [ebp-40h]
-  unsigned int v90; // [esp+7Ch] [ebp-38h]
-  float v91; // [esp+80h] [ebp-34h]
-  double v92; // [esp+84h] [ebp-30h]
-  double v93; // [esp+8Ch] [ebp-28h]
-  double v94; // [esp+94h] [ebp-20h]
-  NiObject *v95; // [esp+9Ch] [ebp-18h]
-  float v96; // [esp+A0h] [ebp-14h]
-  unsigned int v97; // [esp+B0h] [ebp-4h]
+  int v77; // [esp+44h] [ebp-70h]
+  float v78; // [esp+48h] [ebp-6Ch]
+  float v79; // [esp+4Ch] [ebp-68h]
+  float v80; // [esp+50h] [ebp-64h]
+  float v81; // [esp+54h] [ebp-60h]
+  float v82; // [esp+58h] [ebp-5Ch]
+  float v83; // [esp+5Ch] [ebp-58h]
+  float v84; // [esp+60h] [ebp-54h]
+  double v85; // [esp+64h] [ebp-50h]
+  float v86; // [esp+6Ch] [ebp-48h]
+  unsigned __int64 v87; // [esp+74h] [ebp-40h]
+  unsigned int v88; // [esp+7Ch] [ebp-38h]
+  float v89; // [esp+80h] [ebp-34h]
+  double v90; // [esp+84h] [ebp-30h]
+  double v91; // [esp+8Ch] [ebp-28h]
+  double v92; // [esp+94h] [ebp-20h]
+  NiObject *v93; // [esp+9Ch] [ebp-18h]
+  float v94; // [esp+A0h] [ebp-14h]
+  unsigned int v95; // [esp+B0h] [ebp-4h]
 
-  m_pcName = a1->members.m_pcName;
-  v64 = 0;
-  if ( m_pcName )
+  m_pcName = a1->members.m_pcName; /*0x7b7745*/
+  v62 = 0; /*0x7b774c*/
+  if ( m_pcName ) /*0x7b7751*/
   {
-    LODWORD(v63) = 4;
-    v64 = _strnicmp(m_pcName, "STBB", v63) == 0;
+    LODWORD(v61) = 4; /*0x7b7753*/
+    v62 = _strnicmp(m_pcName, "STBB", v61) == 0; /*0x7b7767*/
   }
-  v2 = (BSShaderPPLightingProperty::TangentSpaceData *)FormHeapAlloc(0x14u);
-  LODWORD(v75) = v2;
-  v97 = 0;
-  if ( v2 )
+  v2 = (BSShaderPPLightingProperty::TangentSpaceData *)FormHeapAlloc(0x14u); /*0x7b776e*/
+  LODWORD(v73) = v2; /*0x7b7776*/
+  v95 = 0; /*0x7b777c*/
+  if ( v2 ) /*0x7b7783*/
   {
-    v3 = BSShaderPPLightingProperty::TangentSpaceData::TangentSpaceData(v2, 1);
-    v77 = v3;
-  }
-  else
-  {
-    v77 = 0;
-    v3 = 0;
-  }
-  v97 = 0xFFFFFFFF;
-  if ( v64 )
-  {
-    Src = (void *)FormHeapAlloc(0x30u);
-    v4 = (void *)FormHeapAlloc(0x30u);
-    qmemcpy(Src, &unk_B2C688, 0x30u);
-    qmemcpy(v4, &unk_B2C6B8, 0x30u);
-    *((_DWORD *)v3 + 3) = Src;
-    *((_DWORD *)v3 + 4) = v4;
-    qmemcpy((void *)LODWORD(a1[7].members.m_controller->member.m_fLastTime), &unk_B2C6E8, 0x30u);
-    return v3;
+    v3 = BSShaderPPLightingProperty::TangentSpaceData::TangentSpaceData(v2, 1); /*0x7b778e*/
+    v75 = v3; /*0x7b7790*/
   }
   else
   {
-    ExtraData = NiObjectNET_GetExtraData(a1, "Tangent space (binormal & tangent vectors)");
+    v75 = 0; /*0x7b7796*/
+    v3 = 0; /*0x7b779a*/
+  }
+  v95 = 0xFFFFFFFF; /*0x7b77a1*/
+  if ( v62 )
+  {
+    Src = (void *)FormHeapAlloc(0x30u); /*0x7b77b9*/
+    v4 = (void *)FormHeapAlloc(0x30u); /*0x7b77bd*/
+    qmemcpy(Src, &unk_B2C688, 0x30u); /*0x7b77cf*/
+    qmemcpy(v4, &unk_B2C6B8, 0x30u); /*0x7b77dd*/
+    *((_DWORD *)v3 + 3) = Src; /*0x7b77e3*/
+    *((_DWORD *)v3 + 4) = v4; /*0x7b77e6*/
+    qmemcpy((void *)LODWORD(a1[7].members.m_controller->member.m_fLastTime), &unk_B2C6E8, 0x30u); /*0x7b77ff*/
+    return v3; /*0x7b7801*/
+  }
+  else
+  {
+    ExtraData = NiObjectNET_GetExtraData(a1, "Tangent space (binormal & tangent vectors)"); /*0x7b7820*/
     if ( ExtraData )
     {
-      flags = a1[7].members.m_controller->member.flags;
-      vftable = ExtraData[1].__vftable;
-      Src = (char *)vftable + 0xC * flags;
+      flags = a1[7].members.m_controller->member.flags; /*0x7b7833*/
+      source = ExtraData[1].__vftable; /*0x7b7844*/
+      Src = (char *)source + 0xC * flags; /*0x7b7848*/
       *((_DWORD *)v3 + 3) = FormHeapAlloc((0xC * (unsigned __int64)flags) >> 0x20 != 0 ? 0xFFFFFFFF : 0xC * flags);
       v8 = FormHeapAlloc((0xC * (unsigned __int64)flags) >> 0x20 != 0 ? 0xFFFFFFFF : 0xC * flags);
-      v9 = *((void **)v3 + 3);
-      *((_DWORD *)v3 + 4) = v8;
-      LODWORD(v62) = 0xC * flags;
-      memcpy(v9, Src, v62);
-      LODWORD(v61) = 0xC * flags;
-      memcpy(*((void **)v3 + 4), vftable, v61);
-      sub_6FFAC0(a1, "Tangent space (binormal & tangent vectors)");
-      return v3;
+      v9 = *((void **)v3 + 3); /*0x7b787f*/
+      *((_DWORD *)v3 + 4) = v8; /*0x7b7882*/
+      memcpy(v9, Src, 0xC * flags); /*0x7b788c*/
+      memcpy(*((void **)v3 + 4), source, 0xC * flags); /*0x7b789b*/
+      sub_6FFAC0(a1, "Tangent space (binormal & tangent vectors)"); /*0x7b78ab*/
+      return v3; /*0x7b78b0*/
     }
     else
     {
-      v10 = a1->members.m_pcName;
-      if ( !v10 || (LODWORD(v63) = 5, !strncmp(v10, "Block", v63)) )
+      v10 = a1->members.m_pcName; /*0x7b78c8*/
+      if ( !v10 || (LODWORD(v61) = 5, !strncmp(v10, "Block", v61)) )
       {
-        if ( !a1->members.m_pcName )
+        if ( !a1->members.m_pcName ) /*0x7b78f6*/
         {
-          m_uiRefCount = a1[1].members.super.m_uiRefCount;
-          if ( m_uiRefCount )
-            sub_40FEC0("Creating tangent space for a nameless object, parent='%s'.", *(const char **)(m_uiRefCount + 8));
+          m_uiRefCount = a1[1].members.super.m_uiRefCount; /*0x7b78fb*/
+          if ( m_uiRefCount ) /*0x7b7900*/
+            sub_40FEC0("Creating tangent space for a nameless object, parent='%s'.", *(const char **)(m_uiRefCount + 8)); /*0x7b790b*/
           else
-            sub_40FEC0("Creating tangent space for a nameless parentless object");
+            sub_40FEC0("Creating tangent space for a nameless parentless object"); /*0x7b791a*/
         }
       }
       else
@@ -168,192 +164,192 @@ BSShaderPPLightingProperty::TangentSpaceData *__cdecl sub_7B7710(NiObjectNET *a1
       }
       if ( (*((int (__thiscall **)(NiObjectNET *))a1->vtbl + 4))(a1) )
       {
-        v12 = (NiObject *)(*((int (__thiscall **)(NiObjectNET *))a1->vtbl + 4))(a1);
-        v13 = v12[0x16].members.m_uiRefCount;
-        v14 = *(unsigned __int16 *)(v13 + 0x40);
-        HIDWORD(v16) = *(_DWORD *)(v13 + 0x1C);
-        v15 = *(_DWORD *)(v13 + 0x28);
-        v69 = *(unsigned __int16 *)(v13 + 8);
-        LODWORD(v16) = *(_DWORD *)(v13 + 0x20);
-        v95 = v12;
-        v90 = v14;
-        v89 = v16;
-        IsObjectOfRTTIType = NiRTTI::IsObjectOfRTTIType((NiRTTI *)dword_B3FD04, v12);
-        v79 = 0;
-        if ( IsObjectOfRTTIType )
-          v79 = *(_DWORD *)(v12[0x16].members.m_uiRefCount + 0x4C);
-        if ( (_DWORD)v89 )
+        v12 = (NiObject *)(*((int (__thiscall **)(NiObjectNET *))a1->vtbl + 4))(a1); /*0x7b795d*/
+        v13 = v12[0x16].members.m_uiRefCount; /*0x7b795f*/
+        v14 = *(unsigned __int16 *)(v13 + 0x40); /*0x7b7969*/
+        HIDWORD(v16) = *(_DWORD *)(v13 + 0x1C); /*0x7b796d*/
+        v15 = *(_DWORD *)(v13 + 0x28); /*0x7b7970*/
+        v67 = *(unsigned __int16 *)(v13 + 8); /*0x7b7973*/
+        LODWORD(v16) = *(_DWORD *)(v13 + 0x20); /*0x7b7977*/
+        v93 = v12; /*0x7b7980*/
+        v88 = v14; /*0x7b7987*/
+        v87 = v16; /*0x7b7995*/
+        IsObjectOfRTTIType = NiRTTI::IsObjectOfRTTIType(&stru_B3FD04, v12); /*0x7b79a3*/
+        v77 = 0; /*0x7b79a7*/
+        if ( IsObjectOfRTTIType ) /*0x7b79af*/
+          v77 = *(_DWORD *)(v12[0x16].members.m_uiRefCount + 0x4C); /*0x7b79ba*/
+        if ( (_DWORD)v87 )
         {
-          v17 = FormHeapAlloc((0xC * (unsigned __int64)(2 * v69)) >> 0x20 != 0 ? 0xFFFFFFFF : 0x18 * v69);
-          LODWORD(v75) = v17 + 0xC * v69;
-          _memset(v17, 0, 0x18 * v69);
-          vftable = (void *)FormHeapAlloc((0xC * (unsigned __int64)v69) >> 0x20 != 0 ? 0xFFFFFFFF : 0xC * v69);
-          v18 = (void *)FormHeapAlloc((0xC * (unsigned __int64)v69) >> 0x20 != 0 ? 0xFFFFFFFF : 0xC * v69);
-          v19 = 0;
-          Src = v18;
-          v65 = 0;
-          for ( i = 0; (unsigned __int16)i < v90; v19 = (unsigned __int16)i )
+          v17 = FormHeapAlloc((0xC * (unsigned __int64)(2 * v67)) >> 0x20 != 0 ? 0xFFFFFFFF : 0x18 * v67);
+          LODWORD(v73) = v17 + 0xC * v67; /*0x7b7a21*/
+          _memset(v17, 0, 0x18 * v67); /*0x7b7a25*/
+          source = (void *)FormHeapAlloc((0xC * (unsigned __int64)v67) >> 0x20 != 0 ? 0xFFFFFFFF : 0xC * v67);
+          v18 = (void *)FormHeapAlloc((0xC * (unsigned __int64)v67) >> 0x20 != 0 ? 0xFFFFFFFF : 0xC * v67);
+          v19 = 0; /*0x7b7a62*/
+          Src = v18; /*0x7b7a6b*/
+          v63 = 0; /*0x7b7a6f*/
+          for ( i = 0; (unsigned __int16)i < v88; v19 = (unsigned __int16)i ) /*0x7b7a78*/
           {
-            if ( IsObjectOfRTTIType )
+            if ( IsObjectOfRTTIType ) /*0x7b7a83*/
             {
-              v20 = *(unsigned __int16 *)(v79 + 2 * v19);
-              v71 = *(unsigned __int16 *)(v79 + 2 * v19 + 2);
-              v21 = *(unsigned __int16 *)(v79 + 2 * v19 + 4);
-              v74 = v20;
-              v67 = v21;
-              if ( v65 )
+              v20 = *(unsigned __int16 *)(v77 + 2 * v19); /*0x7b7a89*/
+              v69 = *(unsigned __int16 *)(v77 + 2 * v19 + 2); /*0x7b7a92*/
+              v21 = *(unsigned __int16 *)(v77 + 2 * v19 + 4); /*0x7b7a9a*/
+              v72 = v20; /*0x7b7aa5*/
+              v65 = v21; /*0x7b7aa9*/
+              if ( v63 ) /*0x7b7aad*/
               {
-                LODWORD(v68) = (unsigned __int16)v21;
-                v21 = (unsigned __int16)v20;
-                LOWORD(v20) = LOWORD(v68);
-                v67 = v21;
-                v74 = LOWORD(v68);
+                LODWORD(v66) = (unsigned __int16)v21; /*0x7b7ab2*/
+                v21 = (unsigned __int16)v20; /*0x7b7ab6*/
+                LOWORD(v20) = LOWORD(v66); /*0x7b7ab9*/
+                v65 = v21; /*0x7b7abe*/
+                v72 = LOWORD(v66); /*0x7b7ac2*/
               }
-              v65 = !v65;
+              v63 = !v63; /*0x7b7ac9*/
             }
             else
             {
-              (*(void (__thiscall **)(UInt32, int, int *, int *, int *))(*(_DWORD *)v95[0x16].members.m_uiRefCount + 0x60))(
-                v95[0x16].members.m_uiRefCount,
+              (*(void (__thiscall **)(UInt32, int, int *, int *, int *))(*(_DWORD *)v93[0x16].members.m_uiRefCount + 0x60))( /*0x7b7af5*/
+                v93[0x16].members.m_uiRefCount,
                 i,
-                &v74,
-                &v71,
-                &v67);
-              LOWORD(v21) = v67;
-              LOWORD(v20) = v74;
+                &v72,
+                &v69,
+                &v65);
+              LOWORD(v21) = v65; /*0x7b7af7*/
+              LOWORD(v20) = v72; /*0x7b7afb*/
             }
-            if ( (_WORD)v20 != (_WORD)v71 && (_WORD)v71 != (_WORD)v21 && (_WORD)v20 != (_WORD)v21 )
+            if ( (_WORD)v20 != (_WORD)v69 && (_WORD)v69 != (_WORD)v21 && (_WORD)v20 != (_WORD)v21 ) /*0x7b7b18*/
             {
-              LODWORD(v68) = (unsigned __int16)v71;
-              LODWORD(v80) = HIDWORD(v16) + 0xC * (unsigned __int16)v71;
-              LODWORD(v16) = (unsigned __int16)v20;
-              LODWORD(v73) = (unsigned __int16)v67;
-              LODWORD(v72) = HIDWORD(v16) + 0xC * (unsigned __int16)v67;
-              v22 = 0xC * (unsigned __int16)v20;
-              v23 = *(float *)(v22 + HIDWORD(v16));
-              v96 = *(float *)LODWORD(v80) - v23;
-              *(float *)&v93 = *(float *)LODWORD(v72) - v23;
-              v24 = *(float *)(v22 + HIDWORD(v89) + 4);
-              *(float *)&v92 = *(float *)(LODWORD(v80) + 4) - v24;
-              *(float *)&v94 = *(float *)(LODWORD(v72) + 4) - v24;
-              v25 = *(float *)(v22 + HIDWORD(v89) + 8);
-              v91 = *(float *)(LODWORD(v80) + 8) - v25;
-              *(float *)&v87 = *(float *)(LODWORD(v72) + 8) - v25;
-              v26 = *(float *)(v15 + 8 * v16);
-              v80 = *(float *)(v15 + 8 * (unsigned __int16)v71) - v26;
-              v72 = *(float *)(v15 + 8 * (unsigned __int16)v67) - v26;
-              v27 = *(float *)(v15 + 8 * v16 + 4);
-              v68 = *(float *)(v15 + 8 * (unsigned __int16)v71 + 4) - v27;
-              v73 = *(float *)(v15 + 8 * (unsigned __int16)v67 + 4) - v27;
-              v28 = v73;
-              v73 = 1.0 / (v80 * v73 - v72 * v68);
-              v93 = *(float *)&v93;
-              v81 = (v96 * v28 - v93 * v68) * v73;
-              v92 = *(float *)&v92;
-              v94 = *(float *)&v94;
-              v16 = __PAIR64__(HIDWORD(v89), LODWORD(v75));
-              v82 = (v92 * v28 - v94 * v68) * v73;
-              v87 = *(float *)&v87;
-              v83 = (v28 * v91 - v68 * v87) * v73;
-              v84 = (v93 * v80 - v96 * v72) * v73;
-              v85 = (v94 * v80 - v92 * v72) * v73;
-              v86 = (v80 * v87 - v91 * v72) * v73;
-              v29 = v81;
-              *(float *)(v22 + v17) = *(float *)(v22 + v17) + v81;
-              v30 = v82;
-              *(float *)(v22 + v17 + 4) = *(float *)(v22 + v17 + 4) + v82;
-              v31 = v83;
-              *(float *)(v22 + v17 + 8) = *(float *)(v22 + v17 + 8) + v83;
-              v32 = (float *)(v17 + 0xC * (unsigned __int16)v71);
-              *v32 = *v32 + v29;
-              v32[1] = v32[1] + v30;
-              v32[2] = v32[2] + v31;
-              v33 = (float *)(v17 + 0xC * (unsigned __int16)v67);
-              *v33 = v29 + *v33;
-              v33[1] = v30 + v33[1];
-              v33[2] = v31 + v33[2];
-              v34 = v84;
-              v35 = (float *)(v16 + 0xC * (unsigned __int16)v74);
-              *v35 = *v35 + v84;
-              v36 = v85;
-              v35[1] = v35[1] + v85;
-              v37 = v86;
-              v35[2] = v35[2] + v86;
-              v38 = (float *)(v16 + 0xC * (unsigned __int16)v71);
-              *v38 = *v38 + v34;
-              v38[1] = v38[1] + v36;
-              v38[2] = v38[2] + v37;
-              v39 = (float *)(v16 + 0xC * (unsigned __int16)v67);
-              *v39 = v34 + *v39;
-              v39[1] = v36 + v39[1];
-              v39[2] = v37 + v39[2];
+              LODWORD(v66) = (unsigned __int16)v69; /*0x7b7b21*/
+              LODWORD(v78) = HIDWORD(v16) + 0xC * (unsigned __int16)v69; /*0x7b7b2b*/
+              LODWORD(v16) = (unsigned __int16)v20; /*0x7b7b34*/
+              LODWORD(v71) = (unsigned __int16)v65; /*0x7b7b37*/
+              LODWORD(v70) = HIDWORD(v16) + 0xC * (unsigned __int16)v65; /*0x7b7b41*/
+              v22 = 0xC * (unsigned __int16)v20; /*0x7b7b4e*/
+              v23 = *(float *)(v22 + HIDWORD(v16)); /*0x7b7b50*/
+              v94 = *(float *)LODWORD(v78) - v23; /*0x7b7b5b*/
+              *(float *)&v91 = *(float *)LODWORD(v70) - v23; /*0x7b7b68*/
+              v24 = *(float *)(v22 + HIDWORD(v87) + 4); /*0x7b7b6f*/
+              *(float *)&v90 = *(float *)(LODWORD(v78) + 4) - v24; /*0x7b7b7c*/
+              *(float *)&v92 = *(float *)(LODWORD(v70) + 4) - v24; /*0x7b7b8a*/
+              v25 = *(float *)(v22 + HIDWORD(v87) + 8); /*0x7b7b91*/
+              v89 = *(float *)(LODWORD(v78) + 8) - v25; /*0x7b7b9e*/
+              *(float *)&v85 = *(float *)(LODWORD(v70) + 8) - v25; /*0x7b7bac*/
+              v26 = *(float *)(v15 + 8 * v16); /*0x7b7bb0*/
+              v78 = *(float *)(v15 + 8 * (unsigned __int16)v69) - v26; /*0x7b7bbc*/
+              v70 = *(float *)(v15 + 8 * (unsigned __int16)v65) - v26; /*0x7b7bc3*/
+              v27 = *(float *)(v15 + 8 * v16 + 4); /*0x7b7bc7*/
+              v66 = *(float *)(v15 + 8 * (unsigned __int16)v69 + 4) - v27; /*0x7b7bd5*/
+              v71 = *(float *)(v15 + 8 * (unsigned __int16)v65 + 4) - v27; /*0x7b7bdd*/
+              v28 = v71; /*0x7b7be1*/
+              v71 = 1.0 / (v78 * v71 - v70 * v66); /*0x7b7bff*/
+              v91 = *(float *)&v91; /*0x7b7c11*/
+              v79 = (v94 * v28 - v91 * v66) * v71; /*0x7b7c2a*/
+              v90 = *(float *)&v90; /*0x7b7c35*/
+              v92 = *(float *)&v92; /*0x7b7c43*/
+              v16 = __PAIR64__(HIDWORD(v87), LODWORD(v73)); /*0x7b7c4c*/
+              v80 = (v90 * v28 - v92 * v66) * v71; /*0x7b7c5a*/
+              v85 = *(float *)&v85; /*0x7b7c69*/
+              v81 = (v28 * v89 - v66 * v85) * v71; /*0x7b7c7f*/
+              v82 = (v91 * v78 - v94 * v70) * v71; /*0x7b7c94*/
+              v83 = (v92 * v78 - v90 * v70) * v71; /*0x7b7cae*/
+              v84 = (v78 * v85 - v89 * v70) * v71; /*0x7b7cc0*/
+              v29 = v79; /*0x7b7cc4*/
+              *(float *)(v22 + v17) = *(float *)(v22 + v17) + v79; /*0x7b7ccd*/
+              v30 = v80; /*0x7b7cd0*/
+              *(float *)(v22 + v17 + 4) = *(float *)(v22 + v17 + 4) + v80; /*0x7b7cda*/
+              v31 = v81; /*0x7b7ce2*/
+              *(float *)(v22 + v17 + 8) = *(float *)(v22 + v17 + 8) + v81; /*0x7b7cea*/
+              v32 = (float *)(v17 + 0xC * (unsigned __int16)v69); /*0x7b7cf4*/
+              *v32 = *v32 + v29; /*0x7b7cfb*/
+              v32[1] = v32[1] + v30; /*0x7b7d02*/
+              v32[2] = v32[2] + v31; /*0x7b7d0a*/
+              v33 = (float *)(v17 + 0xC * (unsigned __int16)v65); /*0x7b7d15*/
+              *v33 = v29 + *v33; /*0x7b7d1e*/
+              v33[1] = v30 + v33[1]; /*0x7b7d23*/
+              v33[2] = v31 + v33[2]; /*0x7b7d29*/
+              v34 = v82; /*0x7b7d31*/
+              v35 = (float *)(v16 + 0xC * (unsigned __int16)v72); /*0x7b7d38*/
+              *v35 = *v35 + v82; /*0x7b7d3f*/
+              v36 = v83; /*0x7b7d41*/
+              v35[1] = v35[1] + v83; /*0x7b7d4a*/
+              v37 = v84; /*0x7b7d4d*/
+              v35[2] = v35[2] + v84; /*0x7b7d56*/
+              v38 = (float *)(v16 + 0xC * (unsigned __int16)v69); /*0x7b7d61*/
+              *v38 = *v38 + v34; /*0x7b7d68*/
+              v38[1] = v38[1] + v36; /*0x7b7d6f*/
+              v38[2] = v38[2] + v37; /*0x7b7d77*/
+              v39 = (float *)(v16 + 0xC * (unsigned __int16)v65); /*0x7b7d82*/
+              *v39 = v34 + *v39; /*0x7b7d8b*/
+              v39[1] = v36 + v39[1]; /*0x7b7d90*/
+              v39[2] = v37 + v39[2]; /*0x7b7d96*/
             }
-            ++i;
+            ++i; /*0x7b7da7*/
           }
-          v40 = 0;
-          if ( v69 )
+          v40 = 0; /*0x7b7db1*/
+          if ( v67 ) /*0x7b7db7*/
           {
-            v41 = 0;
-            do
+            v41 = 0; /*0x7b7dbd*/
+            do /*0x7b7ebe*/
             {
-              v42 = v89;
-              v43 = 0xC * v41;
-              v44 = *(float *)(v43 + v17 + 4);
-              v45 = *(float *)(v43 + v89 + 4);
-              v46 = (float *)((char *)vftable + v43);
-              v47 = *(float *)(v43 + v17);
-              v48 = *(float *)(v43 + v89);
-              v49 = *(float *)(v43 + v17 + 8);
-              v50 = *(float *)(v43 + v89 + 8);
-              v75 = v48 * v47 + v45 * v44 + v50 * v49;
-              v84 = v48 * v75;
-              v85 = v45 * v75;
-              v86 = v50 * v75;
-              v81 = v47 - v84;
-              v51 = v85;
-              *v46 = v81;
-              v82 = v44 - v51;
-              v46[1] = v82;
-              v83 = v49 - v86;
-              v46[2] = v83;
-              v52 = v46[2];
-              v53 = *(float *)(v43 + v42 + 4);
-              v54 = v46[1];
-              v55 = *(float *)(v43 + v42 + 8);
-              *(float *)&v87 = v53 * v52 - v55 * v54;
-              v56 = *(float *)(v43 + v42);
-              v57 = *v46;
-              v58 = (char *)Src + v43;
-              *(_DWORD *)v58 = LODWORD(v87);
-              *((float *)&v87 + 1) = v55 * v57 - v52 * v56;
-              *((_DWORD *)v58 + 1) = HIDWORD(v87);
-              v88 = v54 * v56 - v53 * v57;
-              *((float *)v58 + 2) = v88;
-              sub_43F350(v46);
-              sub_43F350((float *)v58);
-              v41 = (unsigned __int16)++v40;
+              v42 = v87; /*0x7b7dbf*/
+              v43 = 0xC * v41; /*0x7b7dc8*/
+              v44 = *(float *)(v43 + v17 + 4); /*0x7b7dca*/
+              v45 = *(float *)(v43 + v87 + 4); /*0x7b7dd2*/
+              v46 = (float *)((char *)source + v43); /*0x7b7dd6*/
+              v47 = *(float *)(v43 + v17); /*0x7b7dd8*/
+              v48 = *(float *)(v43 + v87); /*0x7b7ddb*/
+              v49 = *(float *)(v43 + v17 + 8); /*0x7b7dde*/
+              v50 = *(float *)(v43 + v87 + 8); /*0x7b7de2*/
+              v73 = v48 * v47 + v45 * v44 + v50 * v49; /*0x7b7df6*/
+              v82 = v48 * v73; /*0x7b7e04*/
+              v83 = v45 * v73; /*0x7b7e0e*/
+              v84 = v50 * v73; /*0x7b7e18*/
+              v79 = v47 - v82; /*0x7b7e20*/
+              v51 = v83; /*0x7b7e28*/
+              *v46 = v79; /*0x7b7e2c*/
+              v80 = v44 - v51; /*0x7b7e32*/
+              v46[1] = v80; /*0x7b7e3a*/
+              v81 = v49 - v84; /*0x7b7e41*/
+              v46[2] = v81; /*0x7b7e49*/
+              v52 = v46[2]; /*0x7b7e4c*/
+              v53 = *(float *)(v43 + v42 + 4); /*0x7b7e4f*/
+              v54 = v46[1]; /*0x7b7e53*/
+              v55 = *(float *)(v43 + v42 + 8); /*0x7b7e56*/
+              *(float *)&v85 = v53 * v52 - v55 * v54; /*0x7b7e64*/
+              v56 = *(float *)(v43 + v42); /*0x7b7e6a*/
+              v57 = *v46; /*0x7b7e71*/
+              v58 = (char *)Src + v43; /*0x7b7e73*/
+              *(_DWORD *)v58 = LODWORD(v85); /*0x7b7e7c*/
+              *((float *)&v85 + 1) = v55 * v57 - v52 * v56; /*0x7b7e86*/
+              *((_DWORD *)v58 + 1) = HIDWORD(v85); /*0x7b7e8e*/
+              v86 = v54 * v56 - v53 * v57; /*0x7b7e99*/
+              *((float *)v58 + 2) = v86; /*0x7b7ea1*/
+              Vector3_NormalizeInPlace(v46); /*0x7b7ea4*/
+              Vector3_NormalizeInPlace((float *)v58); /*0x7b7ead*/
+              v41 = (unsigned __int16)++v40; /*0x7b7eb7*/
             }
-            while ( (unsigned __int16)v40 < v69 );
+            while ( (unsigned __int16)v40 < v67 ); /*0x7b7ebe*/
           }
-          v59 = v77;
-          v60 = Src;
-          *((_DWORD *)v77 + 3) = vftable;
-          *((_DWORD *)v59 + 4) = v60;
-          FormHeapFree(v17);
-          return v59;
+          v59 = v75; /*0x7b7ec8*/
+          v60 = Src; /*0x7b7ecc*/
+          *((_DWORD *)v75 + 3) = source; /*0x7b7ed1*/
+          *((_DWORD *)v59 + 4) = v60; /*0x7b7ed4*/
+          FormHeapFree(v17); /*0x7b7ed7*/
+          return v59; /*0x7b7edf*/
         }
         else
         {
           sub_40FEC0(
             "BSShaderManager::CreateTangentSpaceSimple(): Trying to create a tangent space for a trigeom with no normals.  Aborted.");
-          return 0;
+          return 0; /*0x7b79d2*/
         }
       }
       else
       {
         sub_40FEC0(
           "BSShaderManager::CreateTangentSpaceSimple(): Trying to create a tangent space for NiGeom that isn't triangle-based.  Aborted.");
-        return 0;
+        return 0; /*0x7b793c*/
       }
     }
   }

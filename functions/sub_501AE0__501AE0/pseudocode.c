@@ -12,9 +12,9 @@ char __cdecl sub_501AE0(
   char result; // al
   char v10; // [esp+1h] [ebp-1h] BYREF
 
-  v10 = HIBYTE(v8);
-  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, &v10);
-  if ( result )
-    return sub_4F4490((int)a4, v10, 0, a7);
-  return result;
+  v10 = HIBYTE(v8); /*0x501ae0*/
+  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, &v10); /*0x501b0a*/
+  if ( result ) /*0x501b14*/
+    return sub_4F4490((int)a4, v10, 0, a7); /*0x501b27*/
+  return result; /*0x501b18*/
 }

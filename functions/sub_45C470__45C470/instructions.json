@@ -61,31 +61,31 @@
   },
   {
     "ea": "0x45C486",
-    "line": "push    0",
+    "line": "push    0; mode",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x45C488",
-    "line": "push    1",
+    "line": "push    1; changeFlags",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x45C48A",
-    "line": "push    eax",
+    "line": "push    eax; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45C48B",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x45C48D",
-    "line": "call    TESSaveLoadGame_ResetObject",
+    "line": "call    TESSaveLoadGame_ResetObject; Verified: ResetObject reloads a form’s active override record. Counts override files, casts references/actors, calls UnloadForm-style buffer cleanup where needed, checks parent-cell and process constraints, finds the winning override file, and invokes TESDataHandler_LoadFormRecord under save/load guard. Callers include ResetFormForLoad 45F20E and LoadGame 4665B9.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,4 +1,4 @@
-0x7260B0: mov     eax, [esp+arg_0]
+0x7260B0: mov     eax, [esp+blockIndex];
 0x7260B4: push    ebx
 0x7260B5: mov     ebx, [esp+4+Src]
 0x7260B9: push    ebp
@@ -36,7 +36,7 @@
 0x726106: cmp     dword ptr [esi+8], 0
 0x72610A: push    edi
 0x72610B: jnz     short loc_726155
-0x72610D: cmp     [esp+10h+arg_C], 0
+0x72610D: cmp     [esp+10h+copyData], 0
 0x726112: jz      short loc_72614B
 0x726114: cmp     word ptr [ebp+0Ch], 40h ; '@'
 0x726119: push    ebx
@@ -46,14 +46,14 @@
 0x726122: mov     eax, [edx]
 0x726124: mov     ecx, esi
 0x726126: call    eax
-0x726128: mov     edi, eax
-0x72612A: mov     eax, [esp+0Ch+Src]
+0x726128: mov     edi, eax;
+0x72612A: mov     eax, [esp+10h+data]
 0x72612E: test    eax, eax
 0x726130: jz      short loc_72613D
-0x726132: push    ebx; Size
-0x726133: push    eax; Src
-0x726134: push    edi; Dst
-0x726135: call    _memcpy
+0x726132: push    ebx; byteCount
+0x726133: push    eax; source
+0x726134: push    edi; destination
+0x726135: call    _memcpy;
 0x72613A: add     esp, 0Ch
 0x72613D: mov     edx, [esi]
 0x72613F: mov     eax, [edx+4]
@@ -61,12 +61,12 @@
 0x726144: push    edi
 0x726145: mov     ecx, esi
 0x726147: call    eax
-0x726149: jmp     short loc_72614F
-0x72614B: mov     edi, dword ptr [esp+10h+arg_4]
+0x726149: jmp     short loc_72614F;
+0x72614B: mov     edi, [esp+10h+data]
 0x72614F: mov     [esi+4], ebx
 0x726152: mov     [esi+8], edi
 0x726155: movzx   ecx, word ptr [ebp+24h]
-0x726159: mov     ebx, [esp+10h+arg_0]
+0x726159: mov     ebx, [esp+10h+blockIndex]
 0x72615D: cmp     ebx, ecx
 0x72615F: lea     edi, [ebp+1Ch]
 0x726162: jb      short loc_726172
@@ -80,7 +80,7 @@
 0x726177: push    ebx
 0x726178: mov     ecx, edi
 0x72617A: call    NiTArray_SetAt; Actually first arg is a generic NiTArray
-0x72617F: mov     cl, [esp+10h+arg_C]
+0x72617F: mov     cl, [esp+10h+copyData]
 0x726183: pop     edi
 0x726184: mov     [esi+0Ch], cl
 0x726187: pop     esi

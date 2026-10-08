@@ -28,3 +28,7 @@
 0x984A6A: mov     [ebp+var_1C], eax
 0x984A6D: mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
 0x984A74: call    _ftell___$LN8_2
+0x984A82: push    [ebp+File]
+0x984A85: call    __unlock_file
+0x984A8A: pop     ecx
+0x984A8B: retn

@@ -11,24 +11,24 @@ int __thiscall sub_75E9E0(const char **this, _DWORD *a2)
   int v12; // [esp-14h] [ebp-20h]
   int v13; // [esp+8h] [ebp-4h] BYREF
 
-  v2 = a2;
-  sub_752E40(this, (signed int)a2);
-  (*(void (__thiscall **)(_DWORD *, _DWORD))(*v2 + 0x2C))(v2, *(this + 6));
-  v12 = v2[0x88];
-  v4 = *(void (__cdecl **)(int, const char **, int, int *, int))(v12 + 8);
-  v13 = 4;
-  v4(v12, this + 7, 4, &v13, 1);
-  v11 = v2[0x88];
-  v5 = *(void (__cdecl **)(int, const char **, int, int *, int))(v11 + 8);
-  v13 = 4;
-  v5(v11, this + 8, 4, &v13, 1);
-  v6 = v2[0x88];
-  LOBYTE(a2) = *((_BYTE *)this + 0x24);
-  v7 = *(void (__cdecl **)(int, _DWORD **, int, int *, int))(v6 + 8);
-  v13 = 1;
-  v7(v6, &a2, 1, &v13, 1);
-  v8 = v2[0x88];
-  v9 = *(int (__cdecl **)(int, const char **, int, int *, int))(v8 + 8);
-  v13 = 4;
-  return v9(v8, this + 0xA, 4, &v13, 1);
+  v2 = a2; /*0x75e9e3*/
+  sub_752E40(this, (signed int)a2); /*0x75e9ea*/
+  (*(void (__thiscall **)(_DWORD *, _DWORD))(*v2 + 0x2C))(v2, *(this + 6)); /*0x75e9fa*/
+  v12 = v2[0x88]; /*0x75ea0f*/
+  v4 = *(void (__cdecl **)(int, const char **, int, int *, int))(v12 + 8); /*0x75ea10*/
+  v13 = 4; /*0x75ea13*/
+  v4(v12, this + 7, 4, &v13, 1); /*0x75ea1b*/
+  v11 = v2[0x88]; /*0x75ea30*/
+  v5 = *(void (__cdecl **)(int, const char **, int, int *, int))(v11 + 8); /*0x75ea31*/
+  v13 = 4; /*0x75ea34*/
+  v5(v11, this + 8, 4, &v13, 1); /*0x75ea3c*/
+  v6 = v2[0x88]; /*0x75ea41*/
+  LOBYTE(a2) = *((_BYTE *)this + 0x24); /*0x75ea4e*/
+  v7 = *(void (__cdecl **)(int, _DWORD **, int, int *, int))(v6 + 8); /*0x75ea52*/
+  v13 = 1; /*0x75ea5d*/
+  v7(v6, &a2, 1, &v13, 1); /*0x75ea65*/
+  v8 = v2[0x88]; /*0x75ea67*/
+  v9 = *(int (__cdecl **)(int, const char **, int, int *, int))(v8 + 8); /*0x75ea6d*/
+  v13 = 4; /*0x75ea7e*/
+  return v9(v8, this + 0xA, 4, &v13, 1); /*0x75ea8b*/
 }

@@ -1,5 +1,6 @@
+// NiInterpController clone-member thunk delegates to NiTimeController_CopyMembers.
 // attributes: thunk
-void __thiscall sub_6D0530(float *this, int a2, int *a3)
+void __thiscall NiInterpController_CopyMembers(float *this, int a2, int *a3)
 {
-  sub_715D80(this, a2, a3);
+  NiTimeController_CopyMembers(this, a2, a3); /*0x6d0530*/
 }

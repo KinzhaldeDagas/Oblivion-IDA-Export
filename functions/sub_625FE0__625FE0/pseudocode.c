@@ -1,145 +1,134 @@
-void __usercall sub_625FE0(_DWORD *this@<ecx>, double a2@<st0>)
+// Serializes exact random-conversation resume state. The generated Conversation is saved rather than regenerated; package-level current item/response indices complement the list-internal cursors. Save does not execute INFO results.
+void __thiscall DialoguePackage::SaveGame(DialoguePackageRuntimeView *this)
 {
-  TESSaveLoad *v3; // ecx
-  UInt32 v4; // ebp
-  TESSaveLoad *v5; // ecx
-  TESSaveLoad *v6; // ecx
-  int v7; // eax
-  int v8; // eax
-  int v9; // eax
-  int v10; // eax
-  const char ****v11; // ecx
-  int v12; // edx
-  int v13; // eax
-  int v14; // edx
-  _DWORD *v15; // ecx
-  UInt32 *v16; // edi
-  UInt32 v17; // esi
-  TESForm *v18; // eax
-  const char *v19; // eax
-  _WORD *v20; // edi
-  unsigned int v21; // esi
-  int v22; // [esp-Ch] [ebp-40h]
-  int v23; // [esp-8h] [ebp-3Ch]
-  size_t v24; // [esp-4h] [ebp-38h]
-  size_t v25; // [esp-4h] [ebp-38h]
-  size_t v26; // [esp-4h] [ebp-38h]
-  size_t v27; // [esp-4h] [ebp-38h]
-  size_t v28; // [esp-4h] [ebp-38h]
-  const char *v29; // [esp-4h] [ebp-38h]
-  int v30; // [esp+10h] [ebp-24h] BYREF
-  int v31; // [esp+14h] [ebp-20h] BYREF
-  int v32; // [esp+18h] [ebp-1Ch] BYREF
-  int v33; // [esp+1Ch] [ebp-18h] BYREF
-  int v34; // [esp+20h] [ebp-14h] BYREF
-  unsigned int v35; // [esp+24h] [ebp-10h] BYREF
+  TESSaveLoadGame_SerializationView *v2; // ecx
+  unsigned __int8 *bufferCursor; // ebp
+  TESSaveLoadGame_SerializationView *v4; // ecx
+  TESSaveLoadGame_SerializationView *v5; // ecx
+  Actor *activeSpeaker; // eax
+  Actor *speaker; // eax
+  Actor *target; // eax
+  TESTopic *startingTopic; // eax
+  ConversationView *conversation; // ecx
+  DialogueItemView *currentItem; // eax
+  DialogueItemView *v12; // ecx
+  UInt32 *currentlySavingFormHeader; // edi
+  unsigned __int8 *v14; // esi
+  TESForm *v15; // eax
+  const char *v16; // eax
+  unsigned __int8 *v17; // edi
+  unsigned __int8 *v18; // esi
+  int v19; // [esp-Ch] [ebp-40h]
+  int v20; // [esp-8h] [ebp-3Ch]
+  const char *v21; // [esp-4h] [ebp-38h]
+  int SaveSize; // [esp+10h] [ebp-24h] BYREF
+  unsigned int refID; // [esp+14h] [ebp-20h] BYREF
+  unsigned int v24; // [esp+18h] [ebp-1Ch] BYREF
+  unsigned int v25; // [esp+1Ch] [ebp-18h] BYREF
+  unsigned int v26; // [esp+20h] [ebp-14h] BYREF
+  unsigned int DialogueItemIndex; // [esp+24h] [ebp-10h] BYREF
   int Src; // [esp+28h] [ebp-Ch] BYREF
-  UInt32 v37; // [esp+2Ch] [ebp-8h]
-  int v38; // [esp+30h] [ebp-4h] BYREF
+  unsigned __int8 *v29; // [esp+2Ch] [ebp-8h]
+  int source; // [esp+30h] [ebp-4h] BYREF
 
-  sub_567E00(this);
-  v3 = SaveLoad_CurrentSavegame;
-  v38 = 0;
-  v4 = v3->unk000[5];
-  v37 = 0;
-  if ( sub_45A170() )
+  TESPackage_SaveGame(&this->super); /*0x625fe9*/
+  v2 = g_TESSaveLoadGame; /*0x625fee*/
+  source = 0; /*0x625ff6*/
+  bufferCursor = v2->bufferCursor; /*0x625ffa*/
+  v29 = 0; /*0x625ffd*/
+  if ( TESSaveLoadGame_UseSaveGameBlocks() ) /*0x626001*/
   {
-    v5 = SaveLoad_CurrentSavegame;
-    LODWORD(v24) = 4;
-    Src = 0x4B4F4C42;
-    SaveLoad_SaveData((int)v5, &Src, v24);
-    v6 = SaveLoad_CurrentSavegame;
-    LODWORD(v25) = 2;
-    v37 = SaveLoad_CurrentSavegame->unk000[5];
-    SaveLoad_SaveData((int)v6, &v38, v25);
+    v4 = g_TESSaveLoadGame; /*0x62600a*/
+    Src = 0x4B4F4C42; /*0x626017*/
+    SaveLoad_SaveData(v4, &Src, 4u); /*0x62601f*/
+    v5 = g_TESSaveLoadGame; /*0x626024*/
+    v29 = g_TESSaveLoadGame->bufferCursor; /*0x626034*/
+    SaveLoad_SaveData(v5, &source, 2u); /*0x626038*/
   }
-  LODWORD(v24) = 4;
-  TESForm_SaveDataToCurrentSaveGame((TESForm *)(this + 0x11), v24);
-  if ( LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) >= 0x6Au )
+  TESForm_SaveDataToCurrentSaveGame((TESForm *)this, &this->responseTimeRemaining, 4u);// Persist responseTimeRemaining so a loaded in-progress line retains its remaining package delay. /*0x626045*/
+  if ( g_TESSaveLoadGame->currentVersion >= 0x6Au ) /*0x626054*/
+    TESForm_SaveDataToCurrentSaveGame((TESForm *)this, &this->waitingForLip, 1u);// For save version >=0x6A, persist waitingForLip. A restored true value makes DialoguePackage::Speak retain the current response rather than advancing it while asynchronous LIP loading completes. /*0x62605e*/
+  activeSpeaker = this->activeSpeaker; /*0x626063*/
+  refID = 0; /*0x626068*/
+  if ( activeSpeaker ) /*0x62606c*/
+    refID = activeSpeaker->members.super.super.super.refID; /*0x626071*/
+  TESForm_SaveFormIDToCurrentSaveGame((TESForm *)this, &refID, 4u); /*0x62607e*/
+  speaker = this->speaker; /*0x626083*/
+  v24 = 0; /*0x626088*/
+  if ( speaker ) /*0x62608c*/
+    v24 = speaker->members.super.super.super.refID; /*0x626091*/
+  TESForm_SaveFormIDToCurrentSaveGame((TESForm *)this, &v24, 4u); /*0x62609e*/
+  target = this->target; /*0x6260a3*/
+  v25 = 0; /*0x6260a8*/
+  if ( target ) /*0x6260ac*/
+    v25 = target->members.super.super.super.refID; /*0x6260b1*/
+  TESForm_SaveFormIDToCurrentSaveGame((TESForm *)this, &v25, 4u); /*0x6260be*/
+  startingTopic = this->startingTopic; /*0x6260c3*/
+  v26 = 0; /*0x6260c8*/
+  if ( startingTopic ) /*0x6260cc*/
+    v26 = startingTopic->super.refID; /*0x6260d1*/
+  TESForm_SaveFormIDToCurrentSaveGame((TESForm *)this, &v26, 4u); /*0x6260de*/
+  conversation = this->conversation; /*0x6260e3*/
+  SaveSize = 0; /*0x6260e8*/
+  if ( conversation ) /*0x6260ec*/
+    SaveSize = Conversation::GetSaveSize(conversation);// Compute serialized size of the already-generated Conversation; zero means no conversation payload. /*0x6260f6*/
+  SaveLoad_SaveData(g_TESSaveLoadGame, &SaveSize, 2u); /*0x626107*/
+  if ( (_WORD)SaveSize ) /*0x626111*/
   {
-    LODWORD(v26) = 1;
-    TESForm_SaveDataToCurrentSaveGame((TESForm *)(this + 0x13), v26);
-  }
-  v7 = *(this + 0x12);
-  v31 = 0;
-  if ( v7 )
-    v31 = *(_DWORD *)(v7 + 0xC);
-  TESForm_SaveFormIDToCurrentSaveGame((int)&v31, 4u);
-  v8 = *(this + 0x17);
-  v32 = 0;
-  if ( v8 )
-    v32 = *(_DWORD *)(v8 + 0xC);
-  TESForm_SaveFormIDToCurrentSaveGame((int)&v32, 4u);
-  v9 = *(this + 0x18);
-  v33 = 0;
-  if ( v9 )
-    v33 = *(_DWORD *)(v9 + 0xC);
-  TESForm_SaveFormIDToCurrentSaveGame((int)&v33, 4u);
-  v10 = *(this + 0x10);
-  v34 = 0;
-  if ( v10 )
-    v34 = *(_DWORD *)(v10 + 0xC);
-  TESForm_SaveFormIDToCurrentSaveGame((int)&v34, 4u);
-  v11 = (const char ****)*(this + 0x14);
-  v30 = 0;
-  if ( v11 )
-    v30 = (unsigned __int16)sub_6B75B0(v11, a2);
-  LODWORD(v26) = 2;
-  SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, &v30, v26);
-  if ( (_WORD)v30 )
-  {
-    sub_6B7690((const char ****)*(this + 0x14), a2);
-    v13 = *(this + 0x15);
-    v35 = 0xFFFFFFFF;
-    if ( v13 )
-      v35 = (unsigned __int16)sub_6B7520((_DWORD *)*(this + 0x14), v12, v13);
-    LODWORD(v27) = 2;
-    TESForm_SaveDataToCurrentSaveGame((TESForm *)&v35, v27);
-    v15 = (_DWORD *)*(this + 0x15);
-    Src = 0xFFFFFFFF;
-    if ( v15 )
+    Conversation::SaveGame(this->conversation); // Persist the complete generated item/response chain and its internal cursors. Modern load therefore does not call INFO selection again. /*0x626116*/
+    currentItem = this->currentItem; /*0x62611b*/
+    DialogueItemIndex = 0xFFFFFFFF; /*0x626123*/
+    if ( currentItem ) /*0x626127*/
+      DialogueItemIndex = (unsigned __int16)Conversation::GetDialogueItemIndex(this->conversation, currentItem);// Persist DialoguePackage.currentItem as a UInt16 index into the serialized Conversation; FFFF means null. /*0x626135*/
+    TESForm_SaveDataToCurrentSaveGame((TESForm *)this, &DialogueItemIndex, 2u); /*0x626142*/
+    v12 = this->currentItem; /*0x626147*/
+    Src = 0xFFFFFFFF; /*0x62614c*/
+    if ( v12 ) /*0x626150*/
     {
-      if ( *(this + 0x16) )
-        Src = (unsigned __int16)sub_6B7C60(v15, v14, *(this + 0x16));
+      if ( this->currentResponse ) /*0x626152*/
+        Src = (unsigned __int16)DialogueItem::GetDialogueResponseIndex(v12, this->currentResponse);// Persist DialoguePackage.currentResponse as a UInt16 index within currentItem; FFFF means null. /*0x626162*/
     }
-    LODWORD(v28) = 2;
-    TESForm_SaveDataToCurrentSaveGame((TESForm *)&Src, v28);
+    TESForm_SaveDataToCurrentSaveGame((TESForm *)this, &Src, 2u); /*0x62616f*/
   }
   if ( Global_DebugSaveBuffer )
   {
-    v16 = (UInt32 *)SaveLoad_CurrentSavegame[1].unk030[1];
-    v17 = SaveLoad_CurrentSavegame->unk000[5];
-    if ( v16 )
+    currentlySavingFormHeader = (UInt32 *)g_TESSaveLoadGame->currentlySavingFormHeader; /*0x626181*/
+    v14 = g_TESSaveLoadGame->bufferCursor; /*0x626189*/
+    if ( currentlySavingFormHeader )
     {
-      v18 = TESForm_LookupByFormID(*v16);
-      v19 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, int, const char *))v18->vtbl->GetEditorName)(
-                            v18,
-                            *(UInt32 *)((char *)v16 + 5),
+      v15 = TESForm_LookupByFormID(*currentlySavingFormHeader); /*0x626191*/
+      v16 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, int, const char *))v15->vtbl->GetEditorName)( /*0x6261b1*/
+                            v15,
+                            *(UInt32 *)((char *)currentlySavingFormHeader + 5),
                             0x17A,
                             ".\\AI\\DialoguePackage.cpp");
       sub_40FEC0(
         "SaveGame(): %-5i for form %08X %s with flags %08X ending at line %i in file %s",
-        v17 - v4,
-        *v16,
+        v14 - bufferCursor,
+        *currentlySavingFormHeader,
+        v16,
         v19,
-        v22,
-        v23,
-        v29);
+        v20,
+        v21);
     }
     else
     {
-      sub_40FEC0("SaveGame(): %-5i ending at line %i in file %s", v17 - v4, 0x17A, ".\\AI\\DialoguePackage.cpp");
+      sub_40FEC0(
+        "SaveGame(): %-5i ending at line %i in file %s",
+        v14 - bufferCursor,
+        0x17A,
+        ".\\AI\\DialoguePackage.cpp");
     }
   }
-  if ( sub_45A170() )
+  if ( TESSaveLoadGame_UseSaveGameBlocks() ) /*0x6261e9*/
   {
-    v20 = (_WORD *)v37;
-    v21 = SaveLoad_CurrentSavegame->unk000[5];
-    if ( v21 > v37 + 0xFFFF )
-      PrintError(
+    v17 = v29; /*0x6261f8*/
+    v18 = g_TESSaveLoadGame->bufferCursor; /*0x6261fc*/
+    if ( v18 > v29 + 0xFFFF ) /*0x626207*/
+      PrintError( /*0x626218*/
         "Save Game Block in file %s on line %i is greater than maximum short size",
         ".\\AI\\DialoguePackage.cpp",
         0x17A);
-    *v20 = v21 - (_WORD)v20;
+    *(_WORD *)v17 = (_WORD)v18 - (_WORD)v17; /*0x626222*/
   }
 }

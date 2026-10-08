@@ -1,43 +1,43 @@
 [
   {
     "ea": "0x5039F0",
-    "line": "mov     eax, [esp+arg_18]",
+    "line": "mov     eax, [esp+value]; CommandInfo.execute wrapper for GetRandomPercent (index 77); delegates to GetRandomPercent_Eval, which is also the CTDA eval callback. Script execution and condition evaluation share the same percentage-roll logic.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5039F4",
-    "line": "mov     ecx, [esp+arg_8]",
+    "line": "mov     ecx, [esp+subject]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5039F8",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5039F9",
-    "line": "push    0",
+    "line": "push    0; param2",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5039FB",
-    "line": "push    0",
+    "line": "push    0; param1",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5039FD",
-    "line": "push    ecx",
+    "line": "push    ecx; subject",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5039FE",
-    "line": "call    sub_4F4EF0",
+    "line": "call    GetRandomPercent_Eval; Oblivion GetRandomPercent_Eval draws Game_RandomLargeInteger(0) % 100, returning 0..99 per evaluation. Fallout's analogous condition callback (x4y6:0x823B70B0) uses BSRandom::UnsignedInt(100); both yield percent values, but the RNG source/reduction differs. This remains independent of TESTopicInfo.Random selection.",
     "mnemonic": "call",
     "size": 5
   },

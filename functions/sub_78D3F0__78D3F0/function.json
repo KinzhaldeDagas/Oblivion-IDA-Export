@@ -1,19 +1,36 @@
 {
-  "callees_count": 16,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 4,
-  "display_name": "sub_78D3F0",
+  "chunks": [
+    [
+      "0x78D3F0",
+      "0x78D4E0"
+    ],
+    [
+      "0x9CB910",
+      "0x9CB93B"
+    ]
+  ],
+  "chunks_sha256": "ff1996c2c29cce9fab6546a1094a0f63e464cfddf6258434f92918823f9f36da",
+  "comment_regular": "Static CSpeedTreeRT::SetTime. Stores global wind time and sends the wind-change invalidation event to all registered unique trees.",
+  "comment_repeatable": "Static CSpeedTreeRT::SetTime. Stores global wind time and sends the wind-change invalidation event to all registered unique trees.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "CSpeedTreeRT__SetTime",
   "end_ea": "0x78D4E0",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_78D3F0",
+  "name": "CSpeedTreeRT__SetTime",
   "segment": ".text",
   "sha256": "ea8aa067edd5895db0cf23e058d9c3d19f13cf04f7f91795a5a9c49722d4c81d",
   "size": 240,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78D3F0",
-  "type": "void __cdecl(float)",
-  "xrefs_from_count": 95,
+  "total_chunk_size": 283,
+  "type": "void __cdecl(float time)",
+  "xrefs_from_count": 108,
   "xrefs_to_count": 1
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6CE840",
-    "line": "sub     esp, 0A4h",
+    "line": "sub     esp, 0A4h; Oblivion: blends accumulated transforms from each active item's 0x68-byte state record using item+8 normalized weight. Chooses current sample or accumulated delta state, preserves TRS channel validity independently, hemisphere-corrects/normalizes rotation, composes with the cached blend transform at +0x30, and returns false only when every channel remains invalid.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x6CE8F0",
-    "line": "push    offset Vector3_InitValue?",
+    "line": "push    offset g_zeroNiPoint3",
     "mnemonic": "push",
     "size": 5
   },

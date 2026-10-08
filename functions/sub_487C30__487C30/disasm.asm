@@ -12,12 +12,12 @@
 0x487C4A: lea     eax, [esp+20h+var_C]
 0x487C4E: mov     large fs:0, eax
 0x487C54: mov     esi, ecx
-0x487C56: mov     edi, [esp+20h+arg_4]
-0x487C5A: mov     eax, [esp+20h+arg_0]
-0x487C5E: push    edi
-0x487C5F: push    1
-0x487C61: push    eax
-0x487C62: call    ContainerExtraData_GetEntryForForm
+0x487C56: mov     edi, [esp+20h+referenceFormIDOrZero]
+0x487C5A: mov     eax, [esp+20h+form]
+0x487C5E: push    edi; referenceFormIDOrZero
+0x487C5F: push    1; unusedAlwaysOne
+0x487C61: push    eax; form
+0x487C62: call    ContainerExtraData_GetEntryForForm; Find EntryData for an exact TESForm in ExtraContainerChanges. Native ABI is three stack arguments and retn 0x0C. The middle Boolean is not read; callers conventionally pass true. If referenceFormIDOrZero is nonzero, require an extend-data list whose ExtraReferencePointer target has that form ID; otherwise return the form entry directly.
 0x487C67: mov     ebx, eax
 0x487C69: xor     ebp, ebp
 0x487C6B: cmp     ebx, ebp
@@ -38,18 +38,18 @@
 0x487C97: cmp     [edi], ebp
 0x487C99: jz      short loc_487D02
 0x487C9B: mov     eax, [edi]
-0x487C9D: mov     ecx, [esp+20h+arg_0]
+0x487C9D: mov     ecx, [esp+20h+form]
 0x487CA1: cmp     [eax+4], ecx
 0x487CA4: jnz     short loc_487CFB
 0x487CA6: push    0Ch; Size
 0x487CA8: call    FormHeapAlloc
 0x487CAD: mov     esi, eax
 0x487CAF: add     esp, 4
-0x487CB2: mov     [esp+20h+arg_4], esi
+0x487CB2: mov     [esp+20h+referenceFormIDOrZero], esi
 0x487CB6: cmp     esi, ebp
 0x487CB8: mov     [esp+20h+var_4], ebp
 0x487CBC: jz      short loc_487CE8
-0x487CBE: mov     edx, [esp+20h+arg_0]
+0x487CBE: mov     edx, [esp+20h+form]
 0x487CC2: push    8; Size
 0x487CC4: mov     [esi+8], edx
 0x487CC7: call    FormHeapAlloc
@@ -84,3 +84,15 @@
 0x487D13: pop     ebx
 0x487D14: add     esp, 0Ch
 0x487D17: retn    8
+0x9AFB50: mov     eax, [ebp+8]
+0x9AFB53: push    eax
+0x9AFB54: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFB59: pop     ecx
+0x9AFB5A: retn
+0x9AFB5B: mov     edx, [esp+referenceFormIDOrZero]
+0x9AFB5F: lea     eax, [edx-10h]
+0x9AFB62: mov     ecx, [edx-14h]
+0x9AFB65: xor     ecx, eax
+0x9AFB67: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AFB6C: mov     eax, offset stru_ADC04C
+0x9AFB71: jmp     ___CxxFrameHandler3

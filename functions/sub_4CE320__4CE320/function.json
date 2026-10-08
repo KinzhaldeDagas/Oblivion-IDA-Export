@@ -1,18 +1,31 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4CE320",
+      "0x4CE3B7"
+    ]
+  ],
+  "chunks_sha256": "417b8d0dbcb353e72e122d65e97b38a1622b19aa3f2ec061fe3b8d77c7b3296d",
+  "comment_regular": "Verified scene-node teardown: temporarily sets cellProcessLevel=1, detaches the cell NiNode from its parent, clears/releases its child array, releases the NiNode and cell extra-data component, then resets cellProcessLevel to 0.",
+  "comment_repeatable": "Verified scene-node teardown: temporarily sets cellProcessLevel=1, detaches the cell NiNode from its parent, clears/releases its child array, releases the NiNode and cell extra-data component, then resets cellProcessLevel to 0.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_4CE320",
+  "display_name": "TESObjectCELL_DestroySceneNode",
   "end_ea": "0x4CE3B7",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4CE320",
+  "name": "TESObjectCELL_DestroySceneNode",
   "segment": ".text",
   "sha256": "417b8d0dbcb353e72e122d65e97b38a1622b19aa3f2ec061fe3b8d77c7b3296d",
   "size": 151,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4CE320",
+  "total_chunk_size": 151,
   "type": "void __thiscall(TESObjectCELL *this)",
   "xrefs_from_count": 75,
   "xrefs_to_count": 1

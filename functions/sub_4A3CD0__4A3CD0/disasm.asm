@@ -11,7 +11,7 @@
 0x4A3CEE: mov     large fs:0, eax
 0x4A3CF4: mov     esi, ecx
 0x4A3CF6: mov     [esp+1Ch+var_14], esi
-0x4A3CFA: call    sub_4A34C0
+0x4A3CFA: call    TESRegionData_InitializeBase
 0x4A3CFF: push    0Ch; Size
 0x4A3D01: mov     [esp+20h+var_4], 0
 0x4A3D09: mov     dword ptr [esi], offset ??_7TESRegionDataLandscape@@6B@; const TESRegionDataLandscape::`vftable'
@@ -38,3 +38,17 @@
 0x4A3D54: pop     esi
 0x4A3D55: add     esp, 14h
 0x4A3D58: retn
+0x9B26B0: mov     ecx, [ebp-14h]
+0x9B26B3: jmp     TESRegionData_SetBaseVTable
+0x9B26B8: mov     eax, [ebp-10h]
+0x9B26BB: push    eax
+0x9B26BC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B26C1: pop     ecx
+0x9B26C2: retn
+0x9B26C3: mov     edx, [esp+arg_4]
+0x9B26C7: lea     eax, [edx-0Ch]
+0x9B26CA: mov     ecx, [edx-10h]
+0x9B26CD: xor     ecx, eax
+0x9B26CF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B26D4: mov     eax, offset stru_ADE660
+0x9B26D9: jmp     ___CxxFrameHandler3

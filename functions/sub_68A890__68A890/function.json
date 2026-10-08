@@ -1,19 +1,32 @@
 {
-  "callees_count": 34,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 14,
+  "callers_count": 6,
+  "chunks": [
+    [
+      "0x68A890",
+      "0x68A9C6"
+    ]
+  ],
+  "chunks_sha256": "0fa98aee2faf383abf42518d5cf9a473dbfc1b5af2fcfed448d48643f434e037",
+  "comment_regular": "Verified: scans TravelPath reference nodes for a reference whose spatial container or WorldSpace matches targetWorldspace. If the reference is a teleport door in another space, it checks the linked door and may return that linked door. continueAfterMatch controls whether scanning continues after a match; the fast-travel script wrapper calls with false to return the first match.",
+  "comment_repeatable": "Verified: scans TravelPath reference nodes for a reference whose spatial container or WorldSpace matches targetWorldspace. If the reference is a teleport door in another space, it checks the linked door and may return that linked door. continueAfterMatch controls whether scanning continues after a match; the fast-travel script wrapper calls with false to return the first match.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 8,
-  "display_name": "sub_68A890",
+  "display_name": "TravelPath_FindReferenceForWorldspace",
   "end_ea": "0x68A9C6",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_68A890",
+  "name": "TravelPath_FindReferenceForWorldspace",
   "segment": ".text",
   "sha256": "0fa98aee2faf383abf42518d5cf9a473dbfc1b5af2fcfed448d48643f434e037",
   "size": 310,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x68A890",
-  "type": "BSExtraDataVtbl *__thiscall(char *this, TESWorldSpace *, char)",
+  "total_chunk_size": 310,
+  "type": "TESObjectREFR *__thiscall(TravelPath *this, TESWorldSpace *targetWorldspace, char continueAfterMatch)",
   "xrefs_from_count": 151,
   "xrefs_to_count": 6
 }

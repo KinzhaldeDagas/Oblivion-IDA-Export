@@ -16,7 +16,7 @@
 0x9A2720: mov     ecx, 7; jumptable 009A2719 case 0
 0x9A2725: jmp     short loc_9A2729
 0x9A2727: xor     ecx, ecx
-0x9A2729: movzx   ecx, byte_B4294C[ecx]
+0x9A2729: movzx   ecx, byte ptr unk_B4294C[ecx]
 0x9A2730: push    edi
 0x9A2731: mov     edi, [esi+14h]
 0x9A2734: and     edi, 0FFFFFF00h

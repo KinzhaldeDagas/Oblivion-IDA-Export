@@ -1,112 +1,180 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "IDirect3DBaseTexture9Vtbl",
+  "definition": "struct IDirect3DBaseTexture9Vtbl\n{\nHRESULT (__stdcall *QueryInterface)(IDirect3DBaseTexture9 *This, const IID *const riid, void **ppvObj);\nULONG (__stdcall *AddRef)(IDirect3DBaseTexture9 *This);\nULONG (__stdcall *Release)(IDirect3DBaseTexture9 *This);\nHRESULT (__stdcall *GetDevice)(IDirect3DBaseTexture9 *This, IDirect3DDevice9 **ppDevice);\nHRESULT (__stdcall *SetPrivateData)(IDirect3DBaseTexture9 *This, const GUID *const refguid, const void *pData, DWORD SizeOfData, DWORD Flags);\nHRESULT (__stdcall *GetPrivateData)(IDirect3DBaseTexture9 *This, const GUID *const refguid, void *pData, DWORD *pSizeOfData);\nHRESULT (__stdcall *FreePrivateData)(IDirect3DBaseTexture9 *This, const GUID *const refguid);\nDWORD (__stdcall *SetPriority)(IDirect3DBaseTexture9 *This, DWORD PriorityNew);\nDWORD (__stdcall *GetPriority)(IDirect3DBaseTexture9 *This);\nvoid (__stdcall *PreLoad)(IDirect3DBaseTexture9 *This);\nD3DRESOURCETYPE (__stdcall *GetType)(IDirect3DBaseTexture9 *This);\nDWORD (__stdcall *SetLOD)(IDirect3DBaseTexture9 *This, DWORD LODNew); ///< \n                                                                      ///< \n                                                                      ///< 2026-10-02 scoped host D3D9 contract evidence, stage-owned-texture-lod/native.log (not a claim of an Oblivion call-site execution): 44 successful 2D/cube/volume creation cases, 396 SetLOD/GetLOD observations. MANAGED ordinary resources clamp requested DWORD to public visible GetLevelCount-1 and return the previous value. DEFAULT/SYSTEMMEM/SCRATCH ignore writes and return/read zero. MANAGED AUTOGEN 2D/cube expose one level and clamp to zero, not hidden generated mips. After failed Reset with live DEFAULT resource: GetLOD and SetLOD return zero; requested write is ignored; successful Reset restores prior managed LOD2. Native volume AUTOGEN creation rejected. This is host-provider measurement, not universal capability proof. Owned replacement source/validation status is recorded separately.\n                                                                      ///< \n                                                                      ///< 2026-10-02 source milestone: owned public SetLOD/GetLOD now maintain atomic CPU state and publish changed controls to DX11 SRVs; no-op exchanges preserve revision. Original per-object GetLOD is used only for bootstrap inspection to avoid hook recursion; public foreign resources retain original routing. Release renderer build and four targeted checks passed: 396 native LOD observations, worker calls and 2D/cube/volume SRV mip selection with zero native LOD calls, alias reinspection, failed-Reset recovery, 193 manager checks, 109 inspection checks and 45 mip-reference comparisons (max channel error1). Undeployed; V233 remains installed. Native texture COM allocation/filter/bootstrap metadata remain dependencies. Evidence stage-owned-texture-lod.\nDWORD (__stdcall *GetLOD)(IDirect3DBaseTexture9 *This); ///< \n                                                        ///< \n                                                        ///< 2026-10-02 scoped host D3D9 contract evidence, stage-owned-texture-lod/native.log (not a claim of an Oblivion call-site execution): 44 successful 2D/cube/volume creation cases, 396 SetLOD/GetLOD observations. MANAGED ordinary resources clamp requested DWORD to public visible GetLevelCount-1 and return the previous value. DEFAULT/SYSTEMMEM/SCRATCH ignore writes and return/read zero. MANAGED AUTOGEN 2D/cube expose one level and clamp to zero, not hidden generated mips. After failed Reset with live DEFAULT resource: GetLOD and SetLOD return zero; requested write is ignored; successful Reset restores prior managed LOD2. Native volume AUTOGEN creation rejected. This is host-provider measurement, not universal capability proof. Owned replacement source/validation status is recorded separately.\n                                                        ///< \n                                                        ///< 2026-10-02 source milestone: owned public SetLOD/GetLOD now maintain atomic CPU state and publish changed controls to DX11 SRVs; no-op exchanges preserve revision. Original per-object GetLOD is used only for bootstrap inspection to avoid hook recursion; public foreign resources retain original routing. Release renderer build and four targeted checks passed: 396 native LOD observations, worker calls and 2D/cube/volume SRV mip selection with zero native LOD calls, alias reinspection, failed-Reset recovery, 193 manager checks, 109 inspection checks and 45 mip-reference comparisons (max channel error1). Undeployed; V233 remains installed. Native texture COM allocation/filter/bootstrap metadata remain dependencies. Evidence stage-owned-texture-lod.\nDWORD (__stdcall *GetLevelCount)(IDirect3DBaseTexture9 *This);\nHRESULT (__stdcall *SetAutoGenFilterType)(IDirect3DBaseTexture9 *This, D3DTEXTUREFILTERTYPE FilterType); ///< \n                                                                                                         ///< \n                                                                                                         ///< 2026-10-02 scoped native provider contract probe stage-owned-texture-filter/native.log: 144 attempted 2D/cube/volume creations across four pools, ordinary/AUTOGEN/AUTOGEN+RT/DYNAMIC usage and A8R8G8B8/DXT1/R5G6B5; 70 successes and980 filter observations. POINT/LINEAR setters succeed even on ordinary non-AUTOGEN textures. ANISOTROPIC succeeds on 2D but rejects on cube/volume (reported filter caps 03030700/03030300/03030300). NONE and enum values4..8/99/FFFFFFFF reject without changing the stored filter. Initial filter is LINEAR except SCRATCH cube returns NONE on this provider. Failed Reset makes getter return NONE and valid/invalid setters return D3DERR_INVALIDCALL; a successful Reset restores prior managed POINT state. Measurements are host-scoped, not inferred native Oblivion calls or a universal capability proof. Native filter setter/getter still remain in production; owned migration not implemented yet.\n                                                                                                         ///< \n                                                                                                         ///< 2026-10-02 contract clarification: Microsoft SetAutoGenFilterType documentation requires the corresponding D3DPTFILTERCAPS_MINFxxx bit; source admission uses cached per-kind device caps. Docs describe non-AUTOGEN controls as no-effect/NONE, but the scoped native host probe (70 creations/980 calls) instead stores POINT/LINEAR and 2D ANISOTROPIC on ordinary resources. Migration deliberately follows the measured provider behavior here, retains bootstrap initial filter (including SCRATCH cube NONE), and records this divergence rather than asserting universal behavior. References: https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-setautogenfiltertype and corresponding getautogenfiltertype. Exotic capable providers/mip algorithms remain unverified.\n                                                                                                         ///< \n                                                                                                         ///< 2026-10-02 completed source milestone stage-owned-texture-filter: public owned slots14/15 now use atomic owned Store filter state, cached per-kind D3DCAPS9 MINF admission and DX11 mip publication. Original getter is retained only for bootstrap inspection; foreign resources forward. Failed Reset getterNONE/setterINVALIDCALL and managed recovery preserve measured values. Release DLL and3 targeted tests passed:980 native API comparisons; zero native filter calls during owned worker controls; alias reinspection and reset;45 generated mip image comparisons max channel-byte error1; manager199checks/inspection109checks. No deployment. Native texture COM factories and dirty controls remain; unusual capable-provider filters/mip algorithms still unverified. V233 installed DLL unchanged; High INI explicitly set by user.\nD3DTEXTUREFILTERTYPE (__stdcall *GetAutoGenFilterType)(IDirect3DBaseTexture9 *This); ///< \n                                                                                     ///< \n                                                                                     ///< 2026-10-02 scoped native provider contract probe stage-owned-texture-filter/native.log: 144 attempted 2D/cube/volume creations across four pools, ordinary/AUTOGEN/AUTOGEN+RT/DYNAMIC usage and A8R8G8B8/DXT1/R5G6B5; 70 successes and980 filter observations. POINT/LINEAR setters succeed even on ordinary non-AUTOGEN textures. ANISOTROPIC succeeds on 2D but rejects on cube/volume (reported filter caps 03030700/03030300/03030300). NONE and enum values4..8/99/FFFFFFFF reject without changing the stored filter. Initial filter is LINEAR except SCRATCH cube returns NONE on this provider. Failed Reset makes getter return NONE and valid/invalid setters return D3DERR_INVALIDCALL; a successful Reset restores prior managed POINT state. Measurements are host-scoped, not inferred native Oblivion calls or a universal capability proof. Native filter setter/getter still remain in production; owned migration not implemented yet.\n                                                                                     ///< \n                                                                                     ///< 2026-10-02 contract clarification: Microsoft SetAutoGenFilterType documentation requires the corresponding D3DPTFILTERCAPS_MINFxxx bit; source admission uses cached per-kind device caps. Docs describe non-AUTOGEN controls as no-effect/NONE, but the scoped native host probe (70 creations/980 calls) instead stores POINT/LINEAR and 2D ANISOTROPIC on ordinary resources. Migration deliberately follows the measured provider behavior here, retains bootstrap initial filter (including SCRATCH cube NONE), and records this divergence rather than asserting universal behavior. References: https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-setautogenfiltertype and corresponding getautogenfiltertype. Exotic capable providers/mip algorithms remain unverified.\n                                                                                     ///< \n                                                                                     ///< 2026-10-02 completed source milestone stage-owned-texture-filter: public owned slots14/15 now use atomic owned Store filter state, cached per-kind D3DCAPS9 MINF admission and DX11 mip publication. Original getter is retained only for bootstrap inspection; foreign resources forward. Failed Reset getterNONE/setterINVALIDCALL and managed recovery preserve measured values. Release DLL and3 targeted tests passed:980 native API comparisons; zero native filter calls during owned worker controls; alias reinspection and reset;45 generated mip image comparisons max channel-byte error1; manager199checks/inspection109checks. No deployment. Native texture COM factories and dirty controls remain; unusual capable-provider filters/mip algorithms still unverified. V233 installed DLL unchanged; High INI explicitly set by user.\nvoid (__stdcall *GenerateMipSubLevels)(IDirect3DBaseTexture9 *This);\n}\n",
   "id": 18374686479671984674,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QueryInterface",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DBaseTexture9 *This, const IID *const riid, void **ppvObj)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddRef",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (__stdcall *)(IDirect3DBaseTexture9 *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Release",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (__stdcall *)(IDirect3DBaseTexture9 *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetDevice",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DBaseTexture9 *This, IDirect3DDevice9 **ppDevice)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetPrivateData",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DBaseTexture9 *This, const GUID *const refguid, const void *pData, DWORD SizeOfData, DWORD Flags)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetPrivateData",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DBaseTexture9 *This, const GUID *const refguid, void *pData, DWORD *pSizeOfData)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "FreePrivateData",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DBaseTexture9 *This, const GUID *const refguid)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetPriority",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "DWORD (__stdcall *)(IDirect3DBaseTexture9 *This, DWORD PriorityNew)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetPriority",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "DWORD (__stdcall *)(IDirect3DBaseTexture9 *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "PreLoad",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "void (__stdcall *)(IDirect3DBaseTexture9 *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetType",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "D3DRESOURCETYPE (__stdcall *)(IDirect3DBaseTexture9 *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\n\n2026-10-02 scoped host D3D9 contract evidence, stage-owned-texture-lod/native.log (not a claim of an Oblivion call-site execution): 44 successful 2D/cube/volume creation cases, 396 SetLOD/GetLOD observations. MANAGED ordinary resources clamp requested DWORD to public visible GetLevelCount-1 and return the previous value. DEFAULT/SYSTEMMEM/SCRATCH ignore writes and return/read zero. MANAGED AUTOGEN 2D/cube expose one level and clamp to zero, not hidden generated mips. After failed Reset with live DEFAULT resource: GetLOD and SetLOD return zero; requested write is ignored; successful Reset restores prior managed LOD2. Native volume AUTOGEN creation rejected. This is host-provider measurement, not universal capability proof. Owned replacement source/validation status is recorded separately.\n\n2026-10-02 source milestone: owned public SetLOD/GetLOD now maintain atomic CPU state and publish changed controls to DX11 SRVs; no-op exchanges preserve revision. Original per-object GetLOD is used only for bootstrap inspection to avoid hook recursion; public foreign resources retain original routing. Release renderer build and four targeted checks passed: 396 native LOD observations, worker calls and 2D/cube/volume SRV mip selection with zero native LOD calls, alias reinspection, failed-Reset recovery, 193 manager checks, 109 inspection checks and 45 mip-reference comparisons (max channel error1). Undeployed; V233 remains installed. Native texture COM allocation/filter/bootstrap metadata remain dependencies. Evidence stage-owned-texture-lod.",
       "name": "SetLOD",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "DWORD (__stdcall *)(IDirect3DBaseTexture9 *This, DWORD LODNew)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\n\n2026-10-02 scoped host D3D9 contract evidence, stage-owned-texture-lod/native.log (not a claim of an Oblivion call-site execution): 44 successful 2D/cube/volume creation cases, 396 SetLOD/GetLOD observations. MANAGED ordinary resources clamp requested DWORD to public visible GetLevelCount-1 and return the previous value. DEFAULT/SYSTEMMEM/SCRATCH ignore writes and return/read zero. MANAGED AUTOGEN 2D/cube expose one level and clamp to zero, not hidden generated mips. After failed Reset with live DEFAULT resource: GetLOD and SetLOD return zero; requested write is ignored; successful Reset restores prior managed LOD2. Native volume AUTOGEN creation rejected. This is host-provider measurement, not universal capability proof. Owned replacement source/validation status is recorded separately.\n\n2026-10-02 source milestone: owned public SetLOD/GetLOD now maintain atomic CPU state and publish changed controls to DX11 SRVs; no-op exchanges preserve revision. Original per-object GetLOD is used only for bootstrap inspection to avoid hook recursion; public foreign resources retain original routing. Release renderer build and four targeted checks passed: 396 native LOD observations, worker calls and 2D/cube/volume SRV mip selection with zero native LOD calls, alias reinspection, failed-Reset recovery, 193 manager checks, 109 inspection checks and 45 mip-reference comparisons (max channel error1). Undeployed; V233 remains installed. Native texture COM allocation/filter/bootstrap metadata remain dependencies. Evidence stage-owned-texture-lod.",
       "name": "GetLOD",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "DWORD (__stdcall *)(IDirect3DBaseTexture9 *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetLevelCount",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "DWORD (__stdcall *)(IDirect3DBaseTexture9 *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\n\n2026-10-02 scoped native provider contract probe stage-owned-texture-filter/native.log: 144 attempted 2D/cube/volume creations across four pools, ordinary/AUTOGEN/AUTOGEN+RT/DYNAMIC usage and A8R8G8B8/DXT1/R5G6B5; 70 successes and980 filter observations. POINT/LINEAR setters succeed even on ordinary non-AUTOGEN textures. ANISOTROPIC succeeds on 2D but rejects on cube/volume (reported filter caps 03030700/03030300/03030300). NONE and enum values4..8/99/FFFFFFFF reject without changing the stored filter. Initial filter is LINEAR except SCRATCH cube returns NONE on this provider. Failed Reset makes getter return NONE and valid/invalid setters return D3DERR_INVALIDCALL; a successful Reset restores prior managed POINT state. Measurements are host-scoped, not inferred native Oblivion calls or a universal capability proof. Native filter setter/getter still remain in production; owned migration not implemented yet.\n\n2026-10-02 contract clarification: Microsoft SetAutoGenFilterType documentation requires the corresponding D3DPTFILTERCAPS_MINFxxx bit; source admission uses cached per-kind device caps. Docs describe non-AUTOGEN controls as no-effect/NONE, but the scoped native host probe (70 creations/980 calls) instead stores POINT/LINEAR and 2D ANISOTROPIC on ordinary resources. Migration deliberately follows the measured provider behavior here, retains bootstrap initial filter (including SCRATCH cube NONE), and records this divergence rather than asserting universal behavior. References: https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-setautogenfiltertype and corresponding getautogenfiltertype. Exotic capable providers/mip algorithms remain unverified.\n\n2026-10-02 completed source milestone stage-owned-texture-filter: public owned slots14/15 now use atomic owned Store filter state, cached per-kind D3DCAPS9 MINF admission and DX11 mip publication. Original getter is retained only for bootstrap inspection; foreign resources forward. Failed Reset getterNONE/setterINVALIDCALL and managed recovery preserve measured values. Release DLL and3 targeted tests passed:980 native API comparisons; zero native filter calls during owned worker controls; alias reinspection and reset;45 generated mip image comparisons max channel-byte error1; manager199checks/inspection109checks. No deployment. Native texture COM factories and dirty controls remain; unusual capable-provider filters/mip algorithms still unverified. V233 installed DLL unchanged; High INI explicitly set by user.",
       "name": "SetAutoGenFilterType",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DBaseTexture9 *This, D3DTEXTUREFILTERTYPE FilterType)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\n\n2026-10-02 scoped native provider contract probe stage-owned-texture-filter/native.log: 144 attempted 2D/cube/volume creations across four pools, ordinary/AUTOGEN/AUTOGEN+RT/DYNAMIC usage and A8R8G8B8/DXT1/R5G6B5; 70 successes and980 filter observations. POINT/LINEAR setters succeed even on ordinary non-AUTOGEN textures. ANISOTROPIC succeeds on 2D but rejects on cube/volume (reported filter caps 03030700/03030300/03030300). NONE and enum values4..8/99/FFFFFFFF reject without changing the stored filter. Initial filter is LINEAR except SCRATCH cube returns NONE on this provider. Failed Reset makes getter return NONE and valid/invalid setters return D3DERR_INVALIDCALL; a successful Reset restores prior managed POINT state. Measurements are host-scoped, not inferred native Oblivion calls or a universal capability proof. Native filter setter/getter still remain in production; owned migration not implemented yet.\n\n2026-10-02 contract clarification: Microsoft SetAutoGenFilterType documentation requires the corresponding D3DPTFILTERCAPS_MINFxxx bit; source admission uses cached per-kind device caps. Docs describe non-AUTOGEN controls as no-effect/NONE, but the scoped native host probe (70 creations/980 calls) instead stores POINT/LINEAR and 2D ANISOTROPIC on ordinary resources. Migration deliberately follows the measured provider behavior here, retains bootstrap initial filter (including SCRATCH cube NONE), and records this divergence rather than asserting universal behavior. References: https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-setautogenfiltertype and corresponding getautogenfiltertype. Exotic capable providers/mip algorithms remain unverified.\n\n2026-10-02 completed source milestone stage-owned-texture-filter: public owned slots14/15 now use atomic owned Store filter state, cached per-kind D3DCAPS9 MINF admission and DX11 mip publication. Original getter is retained only for bootstrap inspection; foreign resources forward. Failed Reset getterNONE/setterINVALIDCALL and managed recovery preserve measured values. Release DLL and3 targeted tests passed:980 native API comparisons; zero native filter calls during owned worker controls; alias reinspection and reset;45 generated mip image comparisons max channel-byte error1; manager199checks/inspection109checks. No deployment. Native texture COM factories and dirty controls remain; unusual capable-provider filters/mip algorithms still unverified. V233 installed DLL unchanged; High INI explicitly set by user.",
       "name": "GetAutoGenFilterType",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "D3DTEXTUREFILTERTYPE (__stdcall *)(IDirect3DBaseTexture9 *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GenerateMipSubLevels",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "void (__stdcall *)(IDirect3DBaseTexture9 *This)"
     }
   ],
   "name": "IDirect3DBaseTexture9Vtbl",
+  "ordinal": 9237,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 68
 }

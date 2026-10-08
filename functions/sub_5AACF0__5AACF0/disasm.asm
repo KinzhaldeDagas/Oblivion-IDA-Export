@@ -3,9 +3,9 @@
 0x5AACF5: push    ecx
 0x5AACF6: mov     esi, ecx
 0x5AACF8: mov     ecx, [esi+4]; this
-0x5AACFB: fstp    [esp+8+a2]; a3
-0x5AACFE: push    0FAEh; a2
-0x5AAD03: call    Tile_SetFloat
+0x5AACFB: fstp    [esp+8+a2]; value
+0x5AACFE: push    0FAEh; propertyCode
+0x5AAD03: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5AAD08: push    1; arg1
 0x5AAD0A: push    0; canCreate
 0x5AAD0C: call    InterfaceManager_GetSingleton
@@ -23,7 +23,7 @@
 0x5AAD36: mov     ecx, [esi+40h]
 0x5AAD39: push    ecx
 0x5AAD3A: mov     ecx, esi
-0x5AAD3C: call    sub_5AA3A0
+0x5AAD3C: call    sub_5AA3A0; AchievementsNative evidence: InventoryMenu list update helper sets list user0 to last visible list index and controls row user8/listindex for filtered inventory rows.
 0x5AAD41: push    1; arg1
 0x5AAD43: push    0; canCreate
 0x5AAD45: call    InterfaceManager_GetSingleton
@@ -33,15 +33,15 @@
 0x5AAD56: fld     dword ptr ds:0A6B618h
 0x5AAD5C: push    ecx
 0x5AAD5D: mov     ecx, [esi+34h]; this
-0x5AAD60: fstp    [esp+8+a2]; a3
-0x5AAD63: push    0FB7h; a2
-0x5AAD68: call    Tile_SetFloat
+0x5AAD60: fstp    [esp+8+a2]; value
+0x5AAD63: push    0FB7h; propertyCode
+0x5AAD68: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5AAD6D: fldz
 0x5AAD6F: push    ecx
-0x5AAD70: fstp    [esp+8+a2]; a3
+0x5AAD70: fstp    [esp+8+a2]; value
 0x5AAD73: mov     ecx, [esi+34h]; this
-0x5AAD76: push    0FB7h; a2
-0x5AAD7B: call    Tile_SetFloat
+0x5AAD76: push    0FB7h; propertyCode
+0x5AAD7B: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5AAD80: push    1; arg1
 0x5AAD82: push    0; canCreate
 0x5AAD84: call    InterfaceManager_GetSingleton
@@ -54,7 +54,7 @@
 0x5AAD99: push    ecx
 0x5AAD9A: push    0FA8h
 0x5AAD9F: call    Tile_GetFloat
-0x5AADA4: call    Double_To_SInt32
+0x5AADA4: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5AADA9: mov     edx, [edi+14h]
 0x5AADAC: push    eax
 0x5AADAD: mov     ecx, esi

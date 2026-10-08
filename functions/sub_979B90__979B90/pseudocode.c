@@ -1,4 +1,4 @@
-bool __thiscall sub_979B90(float *this, float *a2, int a3, int a4, int a5, int a6, int a7, int a8)
+char __thiscall sub_979B90(float *this, float *a2, int a3, int a4, int a5, int a6, int a7, int a8)
 {
   bool v11; // zf
   int (__thiscall *v12)(float *); // edx
@@ -9,34 +9,34 @@ bool __thiscall sub_979B90(float *this, float *a2, int a3, int a4, int a5, int a
   int v18; // [esp+60h] [ebp+10h]
   int v19; // [esp+64h] [ebp+14h]
 
-  if ( !a2 )
-    return 0;
-  if ( a7 != *((_DWORD *)this + 0x22) )
+  if ( !a2 ) /*0x979b9a*/
+    return 0; /*0x979ba0*/
+  if ( a7 != *((_DWORD *)this + 0x22) ) /*0x979bae*/
   {
-    sub_97AEC0(this + 1, (float *)(a3 + 0x64));
-    *((_DWORD *)this + 0x22) = a7;
+    sub_97AEC0((NiPoint3 *)(this + 1), (NiTransform *)(a3 + 0x64)); /*0x979bbb*/
+    *((_DWORD *)this + 0x22) = a7; /*0x979bc0*/
   }
-  if ( a8 != *((_DWORD *)a2 + 0x22) )
+  if ( a8 != *((_DWORD *)a2 + 0x22) ) /*0x979bd5*/
   {
-    sub_97AEC0(a2 + 1, (float *)(a4 + 0x64));
-    *((_DWORD *)a2 + 0x22) = a8;
+    sub_97AEC0((NiPoint3 *)(a2 + 1), (NiTransform *)(a4 + 0x64)); /*0x979bde*/
+    *((_DWORD *)a2 + 0x22) = a8; /*0x979be3*/
   }
-  if ( !sub_97AFC0((int)(this + 1), (int)(a2 + 1)) )
-    return 0;
-  if ( a5 && a6 )
+  if ( !sub_97AFC0((int)(this + 1), (int)(a2 + 1)) ) /*0x979bf0*/
+    return 0; /*0x979bff*/
+  if ( a5 && a6 ) /*0x979c12*/
   {
-    v11 = (*(unsigned __int8 (__thiscall **)(float *))(*(_DWORD *)this + 4))(this) == 0;
-    v12 = *(int (__thiscall **)(float *))(*(_DWORD *)a2 + 4);
-    if ( v11 )
+    v11 = (*(unsigned __int8 (__thiscall **)(float *))(*(_DWORD *)this + 4))(this) == 0; /*0x979c21*/
+    v12 = *(int (__thiscall **)(float *))(*(_DWORD *)a2 + 4); /*0x979c25*/
+    if ( v11 ) /*0x979c2a*/
     {
-      v13 = v12(a2);
-      v14 = *((_DWORD *)this + 0x20);
-      if ( v13 )
+      v13 = v12(a2); /*0x979cb5*/
+      v14 = *((_DWORD *)this + 0x20); /*0x979cb9*/
+      if ( v13 ) /*0x979cbf*/
       {
-        if ( v14 && *((_DWORD *)this + 0x21) )
+        if ( v14 && *((_DWORD *)this + 0x21) ) /*0x979cc9*/
         {
-          v17 = a5 - 1;
-          return (*(unsigned __int8 (__thiscall **)(int, float *, int, int, int, int, int, int))(*(_DWORD *)v14 + 8))(
+          v17 = a5 - 1; /*0x979ce3*/
+          return (*(unsigned __int8 (__thiscall **)(int, float *, int, int, int, int, int, int))(*(_DWORD *)v14 + 8))( /*0x979d29*/
                    v14,
                    a2,
                    a3,
@@ -57,11 +57,11 @@ bool __thiscall sub_979B90(float *this, float *a2, int a3, int a4, int a5, int a
                    a8);
         }
       }
-      else if ( v14 && *((_DWORD *)this + 0x21) )
+      else if ( v14 && *((_DWORD *)this + 0x21) ) /*0x979d44*/
       {
-        v18 = a6 - 1;
-        v16 = a5 - 1;
-        return (*(unsigned __int8 (__thiscall **)(int, _DWORD, int, int, int, int, int, int))(*(_DWORD *)v14 + 8))(
+        v18 = a6 - 1; /*0x979d5c*/
+        v16 = a5 - 1; /*0x979d6e*/
+        return (*(unsigned __int8 (__thiscall **)(int, _DWORD, int, int, int, int, int, int))(*(_DWORD *)v14 + 8))( /*0x979e17*/
                  v14,
                  *((_DWORD *)a2 + 0x20),
                  a3,
@@ -105,10 +105,10 @@ bool __thiscall sub_979B90(float *this, float *a2, int a3, int a4, int a5, int a
                  a8);
       }
     }
-    else if ( !(unsigned __int8)v12(a2) && sub_977510(a2) )
+    else if ( !(unsigned __int8)v12(a2) && sub_977510(a2) ) /*0x979c3c*/
     {
-      v19 = a6 - 1;
-      return (*(unsigned __int8 (__thiscall **)(float *, _DWORD, int, int, int, int, int, int))(*(_DWORD *)this + 8))(
+      v19 = a6 - 1; /*0x979c60*/
+      return (*(unsigned __int8 (__thiscall **)(float *, _DWORD, int, int, int, int, int, int))(*(_DWORD *)this + 8))( /*0x979ca2*/
                this,
                *((_DWORD *)a2 + 0x20),
                a3,
@@ -128,5 +128,5 @@ bool __thiscall sub_979B90(float *this, float *a2, int a3, int a4, int a5, int a
                a8);
     }
   }
-  return 1;
+  return 1; /*0x979b9c*/
 }

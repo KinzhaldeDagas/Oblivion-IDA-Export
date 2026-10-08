@@ -14,7 +14,7 @@
 0x8E7B37: call    sub_8E79A0
 0x8E7B3C: push    edi
 0x8E7B3D: mov     ecx, esi
-0x8E7B3F: call    sub_8B1DD0
+0x8E7B3F: call    hkMatrix3_SetFromQuaternion; Converts a quaternion into a 3x3 basis matrix. 0x896000 uses this during per-frame movement basis refresh.
 0x8E7B44: movaps  xmm0, xmmword ptr [ebx]
 0x8E7B47: movaps  xmmword ptr [esi+30h], xmm0
 0x8E7B4B: pop     edi

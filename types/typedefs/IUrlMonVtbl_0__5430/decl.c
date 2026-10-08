@@ -1,1 +1,1 @@
-IUrlMonVtbl_0
+typedef IUrlMonVtbl IUrlMonVtbl_0;

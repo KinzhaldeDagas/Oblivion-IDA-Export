@@ -1,4 +1,4 @@
-0x4EEB30: push    edi
+0x4EEB30: push    edi; Verified: serializes each Oblivion weather entry as TESWeather FormID plus uint32 selectionWeight at +4; shared by climate WLS(T) and region RDWT.
 0x4EEB31: mov     edi, ecx
 0x4EEB33: xor     eax, eax
 0x4EEB35: test    edi, edi
@@ -40,9 +40,9 @@
 0x4EEB99: push    eax; Size
 0x4EEB9A: push    esi; Src
 0x4EEB9B: push    ecx; int
-0x4EEB9C: call    TESForm_PutFormRecordChunkData
+0x4EEB9C: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4EEBA1: push    esi
-0x4EEBA2: call    FormHeapFree
+0x4EEBA2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4EEBA7: add     esp, 10h
 0x4EEBAA: pop     esi
 0x4EEBAB: pop     edi

@@ -1,14 +1,10 @@
-void __thiscall sub_68B200(int *this, _DWORD *a2)
+// Verified for kind 1 allocates a 12-byte NiPoint3 when payload is null and copies xyz from the supplied position; this record owns that copy until cleared.
+void __thiscall TravelPathNode_SetOwnedPosition(TravelPathNode *this, const NiPoint3 *position)
 {
-  _DWORD *v3; // eax
-
-  if ( *((_BYTE *)this + 4) == 1 )
+  if ( this->type == 1 ) /*0x68b207*/
   {
-    if ( !*this )
-      *this = FormHeapAlloc(0xCu);
-    v3 = (_DWORD *)*this;
-    *v3 = *a2;
-    v3[1] = a2[1];
-    v3[2] = a2[2];
+    if ( !this->payload ) /*0x68b209*/
+      this->payload = (void *)FormHeapAlloc(0xCu); /*0x68b218*/
+    *(NiPoint3 *)this->payload = *position; /*0x68b222*/
   }
 }

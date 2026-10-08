@@ -1,1 +1,1 @@
-NiBlendAccumTransformInterpolator
+struct NiBlendAccumTransformInterpolator;

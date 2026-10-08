@@ -1,154 +1,243 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_MIB_IFROW",
+  "definition": "struct _MIB_IFROW\n{\nWCHAR_0 wszName[256];\nDWORD dwIndex;\nDWORD dwType;\nDWORD dwMtu;\nDWORD dwSpeed;\nDWORD dwPhysAddrLen;\nUCHAR bPhysAddr[8];\nDWORD dwAdminStatus;\nINTERNAL_IF_OPER_STATUS dwOperStatus;\nDWORD dwLastChange;\nDWORD dwInOctets;\nDWORD dwInUcastPkts;\nDWORD dwInNUcastPkts;\nDWORD dwInDiscards;\nDWORD dwInErrors;\nDWORD dwInUnknownProtos;\nDWORD dwOutOctets;\nDWORD dwOutUcastPkts;\nDWORD dwOutNUcastPkts;\nDWORD dwOutDiscards;\nDWORD dwOutErrors;\nDWORD dwOutQLen;\nDWORD dwDescrLen;\nBYTE bDescr[256];\n}\n",
   "id": 18374686479672037073,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "wszName",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 512
+      "size": 512,
+      "type": "WCHAR_0[256]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwIndex",
       "offset": 512,
       "offset_hex": "0x200",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwType",
       "offset": 516,
       "offset_hex": "0x204",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwMtu",
       "offset": 520,
       "offset_hex": "0x208",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwSpeed",
       "offset": 524,
-      "offset_hex": "0x20c",
-      "size": 4
+      "offset_hex": "0x20C",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwPhysAddrLen",
       "offset": 528,
       "offset_hex": "0x210",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bPhysAddr",
       "offset": 532,
       "offset_hex": "0x214",
-      "size": 8
+      "size": 8,
+      "type": "UCHAR[8]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwAdminStatus",
       "offset": 540,
-      "offset_hex": "0x21c",
-      "size": 4
+      "offset_hex": "0x21C",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwOperStatus",
       "offset": 544,
       "offset_hex": "0x220",
-      "size": 4
+      "size": 4,
+      "type": "INTERNAL_IF_OPER_STATUS"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwLastChange",
       "offset": 548,
       "offset_hex": "0x224",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwInOctets",
       "offset": 552,
       "offset_hex": "0x228",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwInUcastPkts",
       "offset": 556,
-      "offset_hex": "0x22c",
-      "size": 4
+      "offset_hex": "0x22C",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwInNUcastPkts",
       "offset": 560,
       "offset_hex": "0x230",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwInDiscards",
       "offset": 564,
       "offset_hex": "0x234",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwInErrors",
       "offset": 568,
       "offset_hex": "0x238",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwInUnknownProtos",
       "offset": 572,
-      "offset_hex": "0x23c",
-      "size": 4
+      "offset_hex": "0x23C",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwOutOctets",
       "offset": 576,
       "offset_hex": "0x240",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwOutUcastPkts",
       "offset": 580,
       "offset_hex": "0x244",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwOutNUcastPkts",
       "offset": 584,
       "offset_hex": "0x248",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwOutDiscards",
       "offset": 588,
-      "offset_hex": "0x24c",
-      "size": 4
+      "offset_hex": "0x24C",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwOutErrors",
       "offset": 592,
       "offset_hex": "0x250",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwOutQLen",
       "offset": 596,
       "offset_hex": "0x254",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwDescrLen",
       "offset": 600,
       "offset_hex": "0x258",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bDescr",
       "offset": 604,
-      "offset_hex": "0x25c",
-      "size": 256
+      "offset_hex": "0x25C",
+      "size": 256,
+      "type": "BYTE[256]"
     }
   ],
   "name": "_MIB_IFROW",
+  "ordinal": 4856,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 860
 }

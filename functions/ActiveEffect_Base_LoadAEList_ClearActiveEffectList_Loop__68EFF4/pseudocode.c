@@ -14,12 +14,12 @@ int __usercall ActiveEffect_Base_LoadAEList__::ClearActiveEffectList_Loop@<eax>(
 {
   int v12; // esi
 
-  do
+  do /*0x68f008*/
   {
-    v12 = *(_DWORD *)(a1[1] + 4);
-    FormHeapFree(a1[1]);
-    a1[1] = v12;
+    v12 = *(_DWORD *)(a1[1] + 4); /*0x68eff7*/
+    FormHeapFree(a1[1]); /*0x68effb*/
+    a1[1] = v12; /*0x68f005*/
   }
-  while ( v12 );
+  while ( v12 ); /*0x68f008*/
   return ActiveEffect_Base_LoadAEList__::LoadActiveEffectCount(a1, a2, a3, a4, Dst, a6, a7, a8, a9, a10, a11, a12);
 }

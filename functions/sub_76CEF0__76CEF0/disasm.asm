@@ -47,7 +47,7 @@
 0x76CF6A: jz      short loc_76CF7E
 0x76CF6C: add     dword ptr [ecx+60h], 0FFFFFFFFh
 0x76CF70: jnz     short loc_76CF77
-0x76CF72: call    sub_7604D0
+0x76CF72: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x76CF77: mov     dword ptr [esi+3Ch], 0
 0x76CF7E: add     dword ptr [esi+38h], 1
 0x76CF82: mov     dword ptr [esi+58h], 0

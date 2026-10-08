@@ -57,3 +57,15 @@
 0x6A744A: pop     ebx
 0x6A744B: add     esp, 10h
 0x6A744E: retn    0Ch
+0x9C6230: mov     ecx, [ebp-10h]; this
+0x9C6233: jmp     j_??1VampirismEffect@@UAE@XZ; VampirismEffect::~VampirismEffect(void)
+0x9C6238: mov     ecx, [ebp-10h]
+0x9C623B: add     ecx, 3Ch ; '<'; slot
+0x9C623E: jmp     NiPointerSlot_Release
+0x9C6243: mov     edx, [esp+arg_4]
+0x9C6247: lea     eax, [edx-10h]
+0x9C624A: mov     ecx, [edx-14h]
+0x9C624D: xor     ecx, eax
+0x9C624F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C6254: mov     eax, offset stru_AEE81C
+0x9C6259: jmp     ___CxxFrameHandler3

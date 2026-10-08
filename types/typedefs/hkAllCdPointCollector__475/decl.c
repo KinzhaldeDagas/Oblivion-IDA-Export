@@ -1,1 +1,1 @@
-hkAllCdPointCollector
+struct hkAllCdPointCollector;

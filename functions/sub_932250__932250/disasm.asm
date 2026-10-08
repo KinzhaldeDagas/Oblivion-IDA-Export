@@ -196,11 +196,11 @@
 0x93255D: addss   xmm0, xmm1
 0x932561: fstp    dword ptr [esp+0E50h+var_E34+8]
 0x932565: fld     dword ptr [edx+8]
-0x932568: movaps  [esp+0E50h+var_E24+4], xmm0
+0x932568: movaps  xmmword ptr [esp+0E50h+var_E24+4], xmm0
 0x93256D: fsub    dword ptr [eax+8]
 0x932570: rsqrtss xmm1, xmm0
-0x932574: movss   dword ptr [esp+0E50h+var_E24+4], xmm1
-0x93257A: movaps  xmm1, [esp+0E50h+var_E24+4]
+0x932574: movss   [esp+0E50h+var_E24+4], xmm1
+0x93257A: movaps  xmm1, xmmword ptr [esp+0E50h+var_E24+4]
 0x93257F: mulss   xmm0, xmm1
 0x932583: fstp    dword ptr [esp+0E50h+var_E34+0Ch]
 0x932587: fld     dword ptr [edx+0Ch]
@@ -210,7 +210,7 @@
 0x93259C: movss   xmm3, [esp+0E50h+var_DC8]
 0x9325A5: movaps  xmm5, xmm2
 0x9325A8: subss   xmm5, xmm0
-0x9325AC: fstp    dword ptr [esp+0E50h+var_E24]
+0x9325AC: fstp    [esp+0E50h+var_E24]
 0x9325B0: movaps  xmm0, xmm3
 0x9325B3: mulss   xmm0, xmm1
 0x9325B7: mulss   xmm0, xmm5
@@ -227,10 +227,10 @@
 0x9325DE: shufps  xmm6, xmm0, 0AAh ; 'ª'
 0x9325E2: movaps  xmm0, xmm6
 0x9325E5: addss   xmm0, xmm4
-0x9325E9: movaps  [esp+0E50h+var_E24+4], xmm0
+0x9325E9: movaps  xmmword ptr [esp+0E50h+var_E24+4], xmm0
 0x9325EE: rsqrtss xmm4, xmm0
-0x9325F2: movss   dword ptr [esp+0E50h+var_E24+4], xmm4
-0x9325F8: movaps  xmm4, [esp+0E50h+var_E24+4]
+0x9325F2: movss   [esp+0E50h+var_E24+4], xmm4
+0x9325F8: movaps  xmm4, xmmword ptr [esp+0E50h+var_E24+4]
 0x9325FD: mulss   xmm0, xmm4
 0x932601: mulss   xmm0, xmm4
 0x932605: movaps  xmm6, xmm2
@@ -284,7 +284,7 @@
 0x9326B4: fld     dword ptr [edx+0Ch]
 0x9326B7: fsub    dword ptr [ecx+0Ch]
 0x9326BA: lea     ecx, [esp+0E50h+var_DD0]
-0x9326C1: fstp    dword ptr [esp+0E50h+var_E24]
+0x9326C1: fstp    [esp+0E50h+var_E24]
 0x9326C5: movaps  xmm6, [esp+0E50h+var_E34+4]
 0x9326CA: movaps  xmm0, xmm6
 0x9326CD: mulps   xmm0, xmm6
@@ -295,10 +295,10 @@
 0x9326DE: shufps  xmm7, xmm0, 0AAh ; 'ª'
 0x9326E2: movaps  xmm0, xmm7
 0x9326E5: addss   xmm0, xmm1
-0x9326E9: movaps  [esp+0E50h+var_E24+4], xmm0
+0x9326E9: movaps  xmmword ptr [esp+0E50h+var_E24+4], xmm0
 0x9326EE: rsqrtss xmm1, xmm0
-0x9326F2: movss   dword ptr [esp+0E50h+var_E24+4], xmm1
-0x9326F8: movaps  xmm1, [esp+0E50h+var_E24+4]
+0x9326F2: movss   [esp+0E50h+var_E24+4], xmm1
+0x9326F8: movaps  xmm1, xmmword ptr [esp+0E50h+var_E24+4]
 0x9326FD: mulss   xmm0, xmm1
 0x932701: mulss   xmm0, xmm1
 0x932705: movaps  xmm7, xmm2
@@ -343,7 +343,7 @@
 0x9327A0: fld     dword ptr [esp+0E50h+var_E34+0Ch]
 0x9327A4: fadd    [esp+0E50h+anonymous_1]
 0x9327A8: fstp    dword ptr [esp+0E50h+var_D94+0Ch]
-0x9327AF: fld     dword ptr [esp+0E50h+var_E24]
+0x9327AF: fld     [esp+0E50h+var_E24]
 0x9327B3: fadd    [esp+0E50h+anonymous_2]
 0x9327B7: fstp    dword ptr [esp+0E50h+var_D84]
 0x9327BE: fld     [esp+0E50h+var_DF1+1]
@@ -356,7 +356,7 @@
 0x9327E0: fsub    dword ptr [esp+0E50h+var_E34+0Ch]
 0x9327E4: fstp    dword ptr [esp+0E50h+var_D84+0Ch]
 0x9327EB: fld     [esp+0E50h+anonymous_2]
-0x9327EF: fsub    dword ptr [esp+0E50h+var_E24]
+0x9327EF: fsub    [esp+0E50h+var_E24]
 0x9327F3: fstp    [esp+0E50h+var_D74]
 0x9327FA: movaps  xmm6, [esp+0E50h+var_D84+4]
 0x932802: movaps  xmm4, xmm6
@@ -396,10 +396,10 @@
 0x932889: shufps  xmm7, xmm0, 0AAh ; 'ª'
 0x93288D: movaps  xmm0, xmm7
 0x932890: addss   xmm0, xmm1
-0x932894: movaps  [esp+0E50h+var_E24+4], xmm0
+0x932894: movaps  xmmword ptr [esp+0E50h+var_E24+4], xmm0
 0x932899: rsqrtss xmm1, xmm0
-0x93289D: movss   dword ptr [esp+0E50h+var_E24+4], xmm1
-0x9328A3: movaps  xmm1, [esp+0E50h+var_E24+4]
+0x93289D: movss   [esp+0E50h+var_E24+4], xmm1
+0x9328A3: movaps  xmm1, xmmword ptr [esp+0E50h+var_E24+4]
 0x9328A8: mulss   xmm0, xmm1
 0x9328AC: mulss   xmm0, xmm1
 0x9328B0: movaps  xmm7, xmm2
@@ -417,10 +417,10 @@
 0x9328DA: movaps  xmm0, xmm4
 0x9328DD: shufps  xmm0, xmm4, 0AAh ; 'ª'
 0x9328E1: addss   xmm0, xmm5
-0x9328E5: movaps  [esp+0E50h+var_E24+4], xmm0
+0x9328E5: movaps  xmmword ptr [esp+0E50h+var_E24+4], xmm0
 0x9328EA: rsqrtss xmm4, xmm0
-0x9328EE: movss   dword ptr [esp+0E50h+var_E24+4], xmm4
-0x9328F4: movaps  xmm4, [esp+0E50h+var_E24+4]
+0x9328EE: movss   [esp+0E50h+var_E24+4], xmm4
+0x9328F4: movaps  xmm4, xmmword ptr [esp+0E50h+var_E24+4]
 0x9328F9: mulss   xmm0, xmm4
 0x9328FD: mulss   xmm0, xmm4
 0x932901: movaps  xmm5, xmm2
@@ -457,10 +457,10 @@
 0x932976: shufps  xmm5, xmm1, 0AAh ; 'ª'
 0x93297A: movaps  xmm1, xmm5
 0x93297D: addss   xmm1, xmm4
-0x932981: movaps  [esp+0E50h+var_E24+4], xmm1
+0x932981: movaps  xmmword ptr [esp+0E50h+var_E24+4], xmm1
 0x932986: rsqrtss xmm4, xmm1
-0x93298A: movss   dword ptr [esp+0E50h+var_E24+4], xmm4
-0x932990: movaps  xmm4, [esp+0E50h+var_E24+4]
+0x93298A: movss   [esp+0E50h+var_E24+4], xmm4
+0x932990: movaps  xmm4, xmmword ptr [esp+0E50h+var_E24+4]
 0x932995: mulss   xmm1, xmm4
 0x932999: mulss   xmm1, xmm4
 0x93299D: subss   xmm2, xmm1
@@ -607,7 +607,6 @@
 0x932B6B: mov     eax, large fs:2Ch
 0x932B71: mov     esi, [eax+edx*4]
 0x932B74: jmp     short loc_932B80
-0x932B76: align 10h
 0x932B80: mov     ecx, [esp+0E50h+var_D40]
 0x932B87: mov     ecx, [ecx+edi*4]
 0x932B8A: mov     eax, [ecx+8]

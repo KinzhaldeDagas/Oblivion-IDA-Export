@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x552C10",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Computes the NPC-persisted delta = adjusted absolute parameters - race base for each active matrix. Prettier Faces 1.19.7 audit: curation must score actual post-projection race-relative coefficients. Applying soft compression again only to score/history (without applying it to output) understates real tails/spikes. Candidate capture limits once; scoring now measures the resulting coefficients directly.",
     "mnemonic": "push",
     "size": 2
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x552C37",
-    "line": "mov     edi, [esp+40h+arg_0]",
+    "line": "mov     edi, [esp+40h+raceParameters]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x552C43",
-    "line": "mov     ebp, [esp+40h+arg_4]",
+    "line": "mov     ebp, [esp+40h+absoluteParameters]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x552C4F",
-    "line": "mov     eax, [esp+40h+arg_8]",
+    "line": "mov     eax, [esp+40h+outDelta]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x552C70",
-    "line": "mov     [esp+40h+arg_0], 2",
+    "line": "mov     [esp+40h+raceParameters], 2",
     "mnemonic": "mov",
     "size": 8
   },
@@ -271,49 +271,49 @@
   },
   {
     "ea": "0x552C99",
-    "line": "call    sub_527160",
+    "line": "call    FaceGenFloatVector_ResizeFill; Vector resize: retain existing prefix, erase surplus elements when shrinking, fill only newly inserted elements when growing. Equal size does not overwrite coefficients. Matrix dimension products must already be valid; no recovery from rows*columns overflow.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x552C9E",
-    "line": "push    edi",
+    "line": "push    edi; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x552C9F",
-    "line": "lea     eax, [esp+44h+var_24]",
+    "line": "lea     eax, [esp+44h+outDifference]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x552CA3",
-    "line": "push    eax",
+    "line": "push    eax; outDifference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x552CA4",
-    "line": "lea     ecx, [edi+ebp]",
+    "line": "lea     ecx, [edi+ebp]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x552CA7",
-    "line": "call    sub_552630",
+    "line": "call    FaceGenMatrix_Subtract; Subtracts the race matrix from the adjusted randomized absolute matrix. This delta space is what TESNPC persists.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x552CAC",
-    "line": "push    eax",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x552CAD",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -325,13 +325,13 @@
   },
   {
     "ea": "0x552CB7",
-    "line": "call    sub_5520E0",
+    "line": "call    FaceGenMatrix_Assign; Assigns the temporary matrix difference into the corresponding output delta slot.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x552CBC",
-    "line": "mov     eax, [esp+40h+var_18]",
+    "line": "mov     eax, [esp+40h+outDifference.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x552CCF",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,19 +379,19 @@
   },
   {
     "ea": "0x552CD7",
-    "line": "mov     [esp+40h+var_18], ebx",
+    "line": "mov     [esp+40h+outDifference.begin], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x552CDB",
-    "line": "mov     [esp+40h+var_14], ebx",
+    "line": "mov     [esp+40h+outDifference.end], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x552CDF",
-    "line": "mov     [esp+40h+var_10], ebx",
+    "line": "mov     [esp+40h+outDifference.capacityEnd], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x552CFF",
-    "line": "call    sub_527160",
+    "line": "call    FaceGenFloatVector_ResizeFill; Vector resize: retain existing prefix, erase surplus elements when shrinking, fill only newly inserted elements when growing. Equal size does not overwrite coefficients. Matrix dimension products must already be valid; no recovery from rows*columns overflow.",
     "mnemonic": "call",
     "size": 5
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x552D0A",
-    "line": "sub     [esp+40h+arg_0], 1",
+    "line": "sub     [esp+40h+raceParameters], 1",
     "mnemonic": "sub",
     "size": 5
   },
@@ -538,5 +538,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9BBD90",
+    "line": "lea     ecx, [ebp-24h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BBD93",
+    "line": "jmp     FaceGenMatrix_Destruct; Destroys a FaceGenMatrix by freeing the coefficient allocation at +0x0C, then clears begin/end/capacity-end.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BBD98",
+    "line": "mov     edx, [esp+absoluteParameters]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BBD9C",
+    "line": "lea     eax, [edx-30h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BBD9F",
+    "line": "mov     ecx, [edx-34h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BBDA2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BBDA4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BBDA9",
+    "line": "mov     eax, offset stru_AE5A94",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BBDAE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

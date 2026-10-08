@@ -1,1 +1,1 @@
-PointerMonikerImpl_0
+typedef PointerMonikerImpl PointerMonikerImpl_0;

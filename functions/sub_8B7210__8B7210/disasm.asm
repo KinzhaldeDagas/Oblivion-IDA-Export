@@ -22,12 +22,12 @@
 0x8B7243: test    edi, edi
 0x8B7245: jz      short loc_8B725D
 0x8B7247: mov     ecx, esi
-0x8B7249: call    sub_89F570
+0x8B7249: call    bhkRefObject_UpdateHavokObject
 0x8B724E: push    ebx
 0x8B724F: mov     ecx, edi
 0x8B7251: call    sub_8ABA40
 0x8B7256: mov     ecx, esi
-0x8B7258: call    sub_89F570
+0x8B7258: call    bhkRefObject_UpdateHavokObject
 0x8B725D: mov     ecx, [esp+60h+var_4]
 0x8B7261: pop     edi
 0x8B7262: pop     esi

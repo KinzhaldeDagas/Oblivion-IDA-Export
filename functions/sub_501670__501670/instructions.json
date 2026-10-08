@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x501670",
-    "line": "push    ecx",
+    "line": "push    ecx; GetAV execute callback. Extracts one Actor Value parameter with Script_ExtractArgs and forwards to 0x4F6060 helper.",
     "mnemonic": "push",
     "size": 1
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x5016A2",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x5016BE",
-    "line": "call    sub_4F6060",
+    "line": "call    Cmd_GetAV_EvalOrConsole; GetActorValue condition handler (index 14 / opcode 0x100E), used 34 times in core dialogue. Requires an actor subject; Actor flag 0x800 selects the base-form AV getter, otherwise the live actor value getter. The numeric result is then compared with the CTDA threshold; subject/target selection follows Oblivion's operatorAndFlags run-on handling.",
     "mnemonic": "call",
     "size": 5
   },

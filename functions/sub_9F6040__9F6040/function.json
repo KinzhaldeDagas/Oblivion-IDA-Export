@@ -1,19 +1,36 @@
 {
-  "callees_count": 117,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 88,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 58,
-  "display_name": "sub_9F6040",
+  "chunks": [
+    [
+      "0x9F6040",
+      "0x9F66CA"
+    ],
+    [
+      "0x9BB2B0",
+      "0x9BB40A"
+    ]
+  ],
+  "chunks_sha256": "fa822a354630d59f8fedda3be216e6f3f6769688d2570c4fa2c198872025f74d",
+  "comment_regular": "[Controller decode 2026-07-09] Initializes 29 control action label GameSetting pointers.\n\nMorrowindDialogueText: user action string game setting registration block. Allocates 8-byte Setting objects and registers sUActn* keys into dword_B35574.\n\n[Controller decode 2026-07-09] Initializes 29 control action label GameSetting pointers.",
+  "comment_repeatable": "MorrowindDialogueText: user action string game setting registration block. Allocates 8-byte Setting objects and registers sUActn* keys into dword_B35574.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 89,
+  "display_name": "GameSetting_Init_ControlActionLabels",
   "end_ea": "0x9F66CA",
+  "evidence_confidence": "Unknown",
   "flags": 21508,
   "has_pseudocode": true,
-  "name": "sub_9F6040",
+  "name": "GameSetting_Init_ControlActionLabels",
   "segment": ".text",
   "sha256": "eb7fcd059a4f5e3dae6525ac555a5068c8d36ba59fc241c2400631202c6c7637",
   "size": 1674,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x9F6040",
-  "type": "int *()",
-  "xrefs_from_count": 627,
+  "total_chunk_size": 2020,
+  "type": "GameSettingString *()",
+  "xrefs_from_count": 781,
   "xrefs_to_count": 0
 }

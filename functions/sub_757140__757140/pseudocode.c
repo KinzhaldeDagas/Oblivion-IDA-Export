@@ -1,4 +1,4 @@
-char *sub_757140()
+NiRTTI *sub_757140()
 {
-  return dword_B412EC;
+  return &stru_B412EC; /*0x757145*/
 }

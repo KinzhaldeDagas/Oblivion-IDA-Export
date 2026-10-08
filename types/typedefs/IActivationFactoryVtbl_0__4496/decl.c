@@ -1,1 +1,1 @@
-IActivationFactoryVtbl_0
+typedef IActivationFactoryVtbl IActivationFactoryVtbl_0;

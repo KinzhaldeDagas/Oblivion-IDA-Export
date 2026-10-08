@@ -1,143 +1,161 @@
-char __userpurge Actor_DamageEquippedItem_@<al>(
-        PlayerCharacter *a1@<ecx>,
-        int a2@<ebx>,
-        int a3@<ebp>,
-        void **a4,
-        int a5,
-        int a6)
+// Actor vtable +0x2C4 durability mutation. Applies positive damage to EntryData health, with optional Heavy/Light armor skill modifiers unless suppressed; updates container extras and handles break/unequip at zero. Returns false while item remains usable and true on terminal/break handling paths.
+bool __thiscall Actor_DamageEquippedItem(Actor *this, EntryData *entry, float damage, bool suppressArmorSkillModifiers)
 {
-  _BYTE *v9; // eax
-  _BYTE *v10; // ebp
-  int *v11; // ecx
-  const char *v12; // ebx
+  int v4; // edx
+  int v5; // ebx
+  int v6; // ebp
+  double v7; // st5
+  TESForm *type; // eax
+  TESForm *v11; // ebp
+  float *v12; // ecx
+  const char *data; // ebx
   char *Name; // eax
   ExtraContainerChanges_Data *ContainerChanges; // eax
-  _DWORD *v15; // eax
-  LowProcess_vtbl *v16; // ebx
-  int v17; // eax
+  TESForm *v16; // eax
+  LowProcess_vtbl *v17; // ebx
   int v18; // eax
-  int v19; // ebx
-  int v20; // eax
-  TESForm *v21; // eax
+  int v19; // eax
+  int v20; // ebx
+  float *v21; // eax
+  TESChildCELL *v22; // eax
   double Health; // [esp+10h] [ebp-30h]
-  ExtraDataList *v24; // [esp+10h] [ebp-30h]
-  int v27; // [esp+30h] [ebp-10h] BYREF
-  int v28; // [esp+34h] [ebp-Ch] BYREF
-  float v29[2]; // [esp+38h] [ebp-8h] BYREF
+  ExtraDataList *v25; // [esp+10h] [ebp-30h]
+  int v26; // [esp+18h] [ebp-28h]
+  int v27; // [esp+1Ch] [ebp-24h]
+  int v28; // [esp+30h] [ebp-10h] BYREF
+  int v29; // [esp+34h] [ebp-Ch] BYREF
+  float v30[2]; // [esp+38h] [ebp-8h] BYREF
   _UNKNOWN *retaddr; // [esp+40h] [ebp+0h]
-  int v31; // [esp+44h] [ebp+4h]
-  float v32; // [esp+4Ch] [ebp+Ch]
+  float entrya; // [esp+44h] [ebp+4h]
+  float suppressArmorSkillModifiersa; // [esp+4Ch] [ebp+Ch]
 
-  if ( !a4 )
-    return Actor_DamageEquippedItem__::Done(0, a5, a6);
-  if ( *(float *)&a5 <= 0.0 )
-    return Actor_DamageEquippedItem__::Done_((int)a4, a5, a6);
-  v9 = a4[2];
-  v31 = a5;
-  v10 = 0;
-  if ( v9 )
+  if ( !entry ) /*0x5f387f*/
+    return Actor_DamageEquippedItem__::Done(0, v4, 0, SLODWORD(damage), suppressArmorSkillModifiers); /*0x5f387f*/
+  if ( damage <= 0.0 ) /*0x5f3894*/
+    return Actor_DamageEquippedItem__::Done_((int)entry, SLODWORD(damage), suppressArmorSkillModifiers); /*0x5f3894*/
+  type = entry->type; /*0x5f389a*/
+  entrya = damage; /*0x5f389d*/
+  v27 = v6; /*0x5f38a1*/
+  v11 = 0; /*0x5f38a2*/
+  if ( type ) /*0x5f38a6*/
   {
-    if ( v9[4] == 0x14 )
+    if ( type->member.type == kFormType_Armor ) /*0x5f38b0*/
     {
-      v10 = v9;
-      if ( !(_BYTE)a6 )
+      v11 = type; /*0x5f38b6*/
+      if ( !suppressArmorSkillModifiers ) /*0x5f38b8*/
       {
-        if ( TESObjectARMO_ISHeavyArmor(v9) == 1 )
+        if ( TESObjectARMO_ISHeavyArmor(type) == 1 ) /*0x5f38c3*/
         {
-          if ( Actor_GetSkillMasteryLevel((int *)a1, a2, (int)a4, 0x12) < 2 )
+          if ( Actor_GetSkillMasteryLevel(this, kSkillAV_HeavyArmor) < kSkillMastery_Journeyman ) /*0x5f38d1*/
           {
-            if ( Actor_GetSkillMasteryLevel((int *)a1, a2, (int)a4, 0x12) )
-              goto LABEL_17;
-            v11 = (int *)&fPerkHeavyArmorNoviceDamageMult;
+            if ( Actor_GetSkillMasteryLevel(this, kSkillAV_HeavyArmor) ) /*0x5f38de*/
+              goto LABEL_17; /*0x5f38e5*/
+            v12 = MEMORY[0xB374F8]; /*0x5f38e7*/
           }
           else
           {
-            v11 = (int *)&fPerkHeavyArmorJourneymanDamageMult;
+            v12 = MEMORY[0xB37500]; /*0x5f38d3*/
           }
         }
         else
         {
-          if ( TESObjectARMO_ISHeavyArmor(v10) )
-            goto LABEL_17;
-          if ( Actor_GetSkillMasteryLevel((int *)a1, a2, (int)a4, 0x1B) < 2 )
+          if ( TESObjectARMO_ISHeavyArmor(v11) ) /*0x5f38f0*/
+            goto LABEL_17; /*0x5f38f7*/
+          if ( Actor_GetSkillMasteryLevel(this, kSkillAV_LightArmor) < kSkillMastery_Journeyman ) /*0x5f3905*/
           {
-            if ( Actor_GetSkillMasteryLevel((int *)a1, a2, (int)a4, 0x1B) )
-              goto LABEL_17;
-            v11 = (int *)&fPerkLightArmorNoviceDamageMult;
+            if ( Actor_GetSkillMasteryLevel(this, kSkillAV_LightArmor) ) /*0x5f3912*/
+              goto LABEL_17; /*0x5f3919*/
+            v12 = MEMORY[0xB374F0]; /*0x5f391b*/
           }
           else
           {
-            v11 = (int *)&fPerkLightArmorJourneymanDamageMult;
+            v12 = MEMORY[0xB37508]; /*0x5f3907*/
           }
         }
-        *(float *)&v31 = *(float *)GameSetting_GetSafeFloatPointer(v11) * *(float *)&a5;
+        entrya = *GameSetting_GetSafeFloatPointer(v12) * damage; /*0x5f392b*/
       }
     }
   }
 LABEL_17:
-  v32 = ContainerEntryExtraData_GetHealth(a4, 0) - *(float *)&v31;
-  if ( v32 < 1.0 )
-    v32 = 0.0;
-  if ( byte_B3B908 )
+  suppressArmorSkillModifiersa = ContainerEntryExtraData_GetHealth((void **)&entry->extendData, 0) - entrya; /*0x5f392f*/
+  if ( suppressArmorSkillModifiersa < 1.0 ) /*0x5f394b*/
+    suppressArmorSkillModifiersa = 0.0; /*0x5f394f*/
+  v26 = v5; /*0x5f395a*/
+  if ( unk_B3B908 ) /*0x5f3953*/
   {
-    if ( v10 )
+    if ( v11 ) /*0x5f395f*/
     {
-      v12 = *((const char **)v10 + 0xA);
-      if ( !v12 )
-        v12 = EmptyString;
-      Health = ContainerEntryExtraData_GetHealth(a4, 0);
-      Name = TESObjectREFR_GetName((TESObjectREFR *)a1);
-      Interface_ConsolePrint(
+      data = (const char *)v11[1].member.modlist.data; /*0x5f3966*/
+      if ( !data ) /*0x5f3968*/
+        data = EmptyString; /*0x5f396a*/
+      Health = ContainerEntryExtraData_GetHealth((void **)&entry->extendData, 0); /*0x5f397b*/
+      Name = TESObjectREFR_GetName((TESObjectREFR *)this); /*0x5f3991*/
+      Interface_ConsolePrint( /*0x5f399c*/
         "%.20s's %s takes %.2f points of damage (%.2f/%.2f)!",
         Name,
-        v12,
-        *(float *)&v31,
-        v32,
+        data,
+        entrya,
+        suppressArmorSkillModifiersa,
         Health);
     }
   }
-  v24 = *(ExtraDataList **)*a4;
-  ContainerChanges = ExtraDataList_GetContainerChanges(&a1->super.super.super.super.baseExtraList);
-  sub_488830(a4, (BSExtraDataVtbl *)LODWORD(v32), (int)ContainerChanges, v24, 1);
-  if ( v10 )
-    a1->vtbl->super.Unk_B0((Actor *)a1);
-  if ( v32 > 0.0 )
-    return 0;
-  v15 = a4[2];
-  if ( (!v15
-     || *((_BYTE *)v15 + 4) != 0x21
-     || !a1->super.super.super.process
-     || !a1->super.super.super.process->GetWeaponOut(a1->super.super.super.process))
-    && (!v10
-     || !TESBipedModelForm_CoversSlot((unsigned __int16 *)v10 + 0x32, 0xD, 0)
-     || !a1->super.super.super.process->GetEquippedShieldData(a1->super.super.super.process, 1)) )
+  v25 = (ExtraDataList *)entry->extendData->node.data; /*0x5f39aa*/
+  ContainerChanges = ExtraDataList_GetContainerChanges(&this->members.super.super.baseExtraList); /*0x5f39ae*/
+  sub_488830( /*0x5f39be*/
+    (void **)&entry->extendData,
+    (BSExtraDataVtbl *)LODWORD(suppressArmorSkillModifiersa),
+    ContainerChanges,
+    v25,
+    1);
+  if ( v11 ) /*0x5f39c5*/
+    this->vtbl->Unk_B0(this); /*0x5f39d1*/
+  if ( suppressArmorSkillModifiersa > 0.0 ) /*0x5f39de*/
+    return 0; /*0x5f3b3a*/
+  v16 = entry->type; /*0x5f39e4*/
+  if ( (!v16 /*0x5f3a31*/
+     || v16->member.type != kFormType_Weapon
+     || !this->members.super.process
+     || !this->members.super.process->GetWeaponOut(this->members.super.process))
+    && (!v11
+     || !TESBipedModelForm_CoversSlot((unsigned __int16 *)&v11[4].member, 0xD, 0)
+     || !this->members.super.process->GetEquippedShieldData(this->members.super.process, 1)) )
   {
-    return 1;
+    return 1; /*0x5f3b2e*/
   }
-  if ( a1 == TESDataHandler_g_PlayerRef || (*(unsigned __int8 (__thiscall **)(void *))(*(_DWORD *)a4[2] + 0x78))(a4[2]) )
+  if ( this == (Actor *)reference || ((unsigned __int8 (__thiscall *)(TESForm *))entry->type->vtbl->Unk_1E)(entry->type) ) /*0x5f3a4f*/
   {
-    Actor_UnequipItem(a1, 0.0, *(float *)&a5, v32, (char)a4[2], 1, *(ExtraDataList **)*a4, 0, 1, 0);
-    return 1;
+    Actor_UnequipItem( /*0x5f3b20*/
+      this,
+      0.0,
+      v7,
+      damage,
+      (__int16)entry->type,
+      1,
+      (ExtraDataList *)entry->extendData->node.data,
+      0,
+      1,
+      0);
+    return 1; /*0x5f3b20*/
   }
-  v16 = a1->super.super.super.process->__vftable;
-  v17 = ((int (__thiscall *)(PlayerCharacter *, int, int))a1->vtbl->super.super.super.Unk_5A)(a1, a2, a3);
-  if ( v10 )
-    v18 = v16->Unk_47(a1->super.super.super.process, v17);
+  v17 = this->members.super.process->__vftable; /*0x5f3a62*/
+  v18 = ((int (__thiscall *)(Actor *, int, int))this->vtbl->super.super.GetActiveSkinInfo)(this, v26, v27); /*0x5f3a6c*/
+  if ( v11 ) /*0x5f3a5d*/
+    v19 = v17->Unk_47(this->members.super.process, v18); /*0x5f3a74*/
   else
-    v18 = v16->Unk_45(a1->super.super.super.process, v17);
-  v19 = v18;
-  if ( v18 )
-    v20 = v18 + 0x88;
+    v19 = v17->Unk_45(this->members.super.process, v18); /*0x5f3a8f*/
+  v20 = v19; /*0x5f3a91*/
+  if ( v19 ) /*0x5f3a95*/
+    v21 = (float *)(v19 + 0x88); /*0x5f3a97*/
   else
-    v20 = (int)a1->vtbl->super.super.super.GetPos((TESObjectREFR *)a1);
-  v29[1] = *(float *)v20;
-  retaddr = *(_UNKNOWN **)(v20 + 4);
-  sub_711440((float *)(v19 + 0x64), v29, (float *)&v27, (float *)&v28);
-  v21 = (TESForm *)((int (__thiscall *)(PlayerCharacter *, void *, _DWORD, int))a1->vtbl->super.Unk_B2)(
-                     a1,
-                     a4[2],
-                     *(_DWORD *)*a4,
-                     1);
-  sub_4DC000((int)a1, v21);
-  return 1;
+    v21 = this->vtbl->super.super.GetPos(this); /*0x5f3aa9*/
+  v30[1] = *v21; /*0x5f3aad*/
+  retaddr = *((_UNKNOWN **)v21 + 1); /*0x5f3ab4*/
+  sub_711440((float *)(v20 + 0x64), v30, (float *)&v28, (float *)&v29); /*0x5f3ad1*/
+  v22 = (TESChildCELL *)((int (__thiscall *)(Actor *, TESForm *, void *, int))this->vtbl->Unk_B2)( /*0x5f3af5*/
+                          this,
+                          entry->type,
+                          entry->extendData->node.data,
+                          1);
+  sub_4DC000((int)this, v22); /*0x5f3af9*/
+  return 1; /*0x5f3b03*/
 }

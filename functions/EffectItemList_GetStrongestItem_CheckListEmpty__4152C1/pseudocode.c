@@ -9,8 +9,8 @@ int __userpurge EffectItemList_GetStrongestItem_::CheckListEmpty@<eax>(
         int a7,
         char a8)
 {
-  if ( a1[2] || a1[1] )
-    return EffectItemList_GetStrongestItem_::EffectsLoop(a1, (int)a1, a2, a3, a4, a5, a6, a7, a8);
+  if ( a1[2] || a1[1] ) /*0x4152d2*/
+    return EffectItemList_GetStrongestItem_::EffectsLoop(a1, (int)a1, a2, a3, a4, a5, a6, a7, a8); /*0x4152d0*/
   else
-    return 0;
+    return 0; /*0x4152d8*/
 }

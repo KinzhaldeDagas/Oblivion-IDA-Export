@@ -143,11 +143,11 @@
 0x8B49A6: lea     ecx, [esp+434h+var_390]
 0x8B49AD: push    ecx; int
 0x8B49AE: lea     ecx, [esp+438h+var_3F0]
-0x8B49B2: call    sub_8B1B00
+0x8B49B2: call    hkQuaternion_SetAxisAngleScaled; Builds a quaternion from an axis vector and scaled angle: vector part = axis*sin(angleScale), w = cos(angleScale). Used by 0x896000 while refreshing movement basis.
 0x8B49B7: lea     edx, [esp+430h+var_3F0]
 0x8B49BB: push    edx
 0x8B49BC: lea     ecx, [esp+434h+var_3D0]
-0x8B49C0: call    sub_8B1DD0
+0x8B49C0: call    hkMatrix3_SetFromQuaternion; Converts a quaternion into a 3x3 basis matrix. 0x896000 uses this during per-frame movement basis refresh.
 0x8B49C5: jmp     short loc_8B49F7
 0x8B49C7: xorps   xmm0, xmm0
 0x8B49CA: movaps  [esp+430h+var_3D0], xmm0
@@ -315,7 +315,7 @@
 0x8B4D22: mov     dword ptr [esp+438h+var_410], 0
 0x8B4D2A: mov     dword ptr [esp+438h+var_410+4], 0
 0x8B4D32: mov     dword ptr [esp+438h+var_410+0Ch], 0
-0x8B4D3A: call    sub_88FE00
+0x8B4D3A: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x8B4D3F: fld     [ebp+arg_8]
 0x8B4D42: movaps  xmm1, [esp+430h+var_260]
 0x8B4D4A: fmul    dword ptr ds:0A97F50h
@@ -426,7 +426,7 @@
 0x8B4F7F: mov     dword ptr [esp+438h+var_410], 0
 0x8B4F87: mov     dword ptr [esp+438h+var_410+4], 0
 0x8B4F8F: mov     dword ptr [esp+438h+var_410+0Ch], 0
-0x8B4F97: call    sub_88FE00
+0x8B4F97: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x8B4F9C: fld     [ebp+arg_8]
 0x8B4F9F: movaps  xmm1, [esp+430h+var_1D0]
 0x8B4FA7: fmul    dword ptr ds:0A97F4Ch

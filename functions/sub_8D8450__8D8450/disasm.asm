@@ -12,9 +12,7 @@
 0x8D847A: lea     eax, [esi+8]
 0x8D847D: mov     ecx, 8
 0x8D8482: jmp     short loc_8D8490
-0x8D8484: db 8Dh, 0A4h, 24h, 4 dup(0)
 0x8D848B: jmp     short loc_8D8490
-0x8D848D: align 10h
 0x8D8490: mov     edx, [esi+100h]
 0x8D8496: mov     [eax-8], edx
 0x8D8499: mov     edx, [esi+100h]

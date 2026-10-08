@@ -12,7 +12,7 @@
 0x747E03: add     esp, 4
 0x747E06: mov     ecx, [esi+18h]
 0x747E09: push    ecx
-0x747E0A: call    FormHeapFree
+0x747E0A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x747E0F: add     esp, 4
 0x747E12: mov     ecx, esi
 0x747E14: pop     esi

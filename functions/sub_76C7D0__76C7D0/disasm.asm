@@ -7,7 +7,7 @@
 0x76C7DE: push    0
 0x76C7E0: push    edx
 0x76C7E1: push    89h ; '‰'
-0x76C7E6: call    eax
+0x76C7E6: call    eax; Geometry-finish restores D3DRS_LIGHTING (0x89) from the shader's saved value even after a zero-pass submission.
 0x76C7E8: mov     ecx, [esp+4+a8]
 0x76C7EC: mov     edx, [esp+4+a7]
 0x76C7F0: mov     eax, [esp+4+a6]
@@ -23,6 +23,6 @@
 0x76C809: push    eax; a3
 0x76C80A: push    ecx; a2
 0x76C80B: mov     ecx, esi; this
-0x76C80D: call    sub_779790
+0x76C80D: call    NiD3DShader_RestoreRenderStateGroup; Then restore the shader's NiD3DRenderStateGroup; this is unconditional with respect to PassCount.
 0x76C812: pop     esi
 0x76C813: retn    1Ch

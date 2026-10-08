@@ -1,1 +1,1 @@
-hkSimulationIsland
+struct hkSimulationIsland;

@@ -1,87 +1,53 @@
-void __userpurge sub_6B9750(
-        _DWORD *a1@<ecx>,
-        double st5_0@<st2>,
-        double a3@<st1>,
-        double a4@<st0>,
-        signed int *a5,
-        int a6,
-        unsigned int a7,
-        char *a2)
+void __thiscall sub_6B9750(_DWORD *this, signed int *arg0, int a3, unsigned int a4, char *a2)
 {
-  double v10; // st7
-  double v11; // st7
-  _DWORD *v12; // edi
-  unsigned int v13; // edx
-  _DWORD *v14; // ecx
-  float v15; // [esp+0h] [ebp-140h]
-  float v16; // [esp+0h] [ebp-140h]
-  float v17; // [esp+0h] [ebp-140h]
-  float v18; // [esp+4h] [ebp-13Ch]
-  float v19; // [esp+4h] [ebp-13Ch]
-  float v20; // [esp+4h] [ebp-13Ch]
-  const char *v21; // [esp+Ch] [ebp-134h]
-  BSStringT v24; // [esp+28h] [ebp-118h] BYREF
-  int v25[68]; // [esp+30h] [ebp-110h] BYREF
+  double v9; // st6
+  _DWORD *v10; // edi
+  unsigned int v11; // edx
+  _DWORD *v12; // ecx
+  float v13; // [esp+4h] [ebp-13Ch]
+  float v14; // [esp+4h] [ebp-13Ch]
+  float v15; // [esp+4h] [ebp-13Ch]
+  const char *v16; // [esp+Ch] [ebp-134h]
+  float v17; // [esp+24h] [ebp-11Ch]
+  float v18; // [esp+24h] [ebp-11Ch]
+  BSStringT v19; // [esp+28h] [ebp-118h] BYREF
+  int v20[68]; // [esp+30h] [ebp-110h] BYREF
 
-  _ESI = a5;
-  v24.m_data = 0;
-  v24.m_dataLen = 0;
-  v24.m_bufLen = 0;
-  BSStringT_Set(&v24, a2, 0);
-  v21 = (const char *)a1[2];
-  v25[0x43] = 0;
-  _sprintf((char *)v25, "%s%s", a2, v21);
-  __asm { fild    dword ptr [esi] }
-  __asm { fstp    [esp+140h+var_13C]; float }
-  __asm
+  v19.m_data = 0; /*0x6b97a3*/
+  v19.m_dataLen = 0; /*0x6b97a7*/
+  v19.m_bufLen = 0; /*0x6b97ac*/
+  BSStringT_Set(&v19, a2, 0); /*0x6b97b1*/
+  v16 = (const char *)this[2]; /*0x6b97b9*/
+  v20[0x43] = 0; /*0x6b97c5*/
+  _sprintf((char *)v20, "%s%s", a2, v16); /*0x6b97cc*/
+  v13 = (float)*arg0; /*0x6b97dd*/
+  InterfaceMgr_DebugTextLine((char *)v20, 0.0, v13, 1, 0xFFFFFFFF); /*0x6b97eb*/
+  _sprintf((char *)v20, "%u", this[9] / 0x64u); /*0x6b9808*/
+  v14 = (float)*arg0; /*0x6b9817*/
+  v17 = UI_GetVirtualScreenWidth() * dbl_A46B08 / fCostant_100; /*0x6b9830*/
+  v9 = v17; /*0x6b9834*/
+  InterfaceMgr_DebugTextLine((char *)v20, v17, v14, 1, 0xFFFFFFFF); /*0x6b983c*/
+  _sprintf((char *)v20, "%u", 0x64 * this[9] / a4); /*0x6b985d*/
+  v15 = (float)*arg0; /*0x6b986c*/
+  v18 = UI_GetVirtualScreenWidth() * dbl_A78850 / fCostant_100; /*0x6b9885*/
+  InterfaceMgr_DebugTextLine((char *)v20, v18, v15, 1, 0xFFFFFFFF); /*0x6b9891*/
+  *arg0 += a3; /*0x6b989d*/
+  BSStringT_Append(&v19, (char *)&word_A403A0); /*0x6b98ab*/
+  v10 = (_DWORD *)this[5]; /*0x6b98b0*/
+  if ( v10 ) /*0x6b98b5*/
   {
-    fldz
-    fstp    [esp+140h+var_140]; float
-  }
-  InterfaceMgr_DebugTextLine(0, st5_0, a3, a4, (char *)v25, v15, v18, 1, 0xFFFFFFFF);
-  _sprintf((char *)v25, "%u", a1[9] / 0x64u);
-  __asm { fild    dword ptr [esi] }
-  __asm { fstp    [esp+13Ch+var_13C]; float }
-  v10 = sub_57D7A0();
-  __asm { fmul    qword ptr ds:0A46B08h }
-  __asm
-  {
-    fdiv    qword ptr ds:0A309F0h
-    fstp    [esp+140h+var_11C]
-    fld     [esp+140h+var_11C]
-    fstp    [esp+140h+var_140]; float
-  }
-  InterfaceMgr_DebugTextLine(0, st5_0, a3, v10, (char *)v25, v16, v19, 1, 0xFFFFFFFF);
-  _sprintf((char *)v25, "%u", 0x64 * a1[9] / a7);
-  __asm { fild    dword ptr [esi] }
-  __asm { fstp    [esp+13Ch+var_13C]; float }
-  v11 = sub_57D7A0();
-  __asm { fmul    qword ptr ds:0A78850h }
-  __asm
-  {
-    fdiv    qword ptr ds:0A309F0h
-    fstp    [esp+140h+var_11C]
-    fld     [esp+140h+var_11C]
-    fstp    [esp+140h+var_140]; float
-  }
-  InterfaceMgr_DebugTextLine(0, st5_0, a3, v11, (char *)v25, v17, v20, 1, 0xFFFFFFFF);
-  *a5 += a6;
-  BSStringT_Append(&v24, (char *)&word_A403A0);
-  v12 = (_DWORD *)a1[5];
-  if ( v12 )
-  {
-    v13 = a7 / 0x64;
-    do
+    v11 = a4 / 0x64; /*0x6b98be*/
+    do /*0x6b98e9*/
     {
-      v14 = (_DWORD *)v12[2];
-      if ( v14[9] > v13 )
+      v12 = (_DWORD *)v10[2]; /*0x6b98c5*/
+      if ( v12[9] > v11 ) /*0x6b98cb*/
       {
-        sub_6B9750(v14, st5_0, a3, a5, a6, a7, v24.m_data);
-        v13 = a7 / 0x64;
+        sub_6B9750(v12, 0.0, v9, v18, arg0, a3, a4, v19.m_data); /*0x6b98dc*/
+        v11 = a4 / 0x64; /*0x6b98e1*/
       }
-      v12 = (_DWORD *)*v12;
+      v10 = (_DWORD *)*v10; /*0x6b98e5*/
     }
-    while ( v12 );
+    while ( v10 ); /*0x6b98e9*/
   }
-  FormHeapFree((unsigned int)v24.m_data);
+  FormHeapFree((unsigned int)v19.m_data); /*0x6b98f0*/
 }

@@ -1,8 +1,8 @@
-0x529B30: lea     eax, [ecx+40h]
+0x529B30: lea     eax, [ecx+40h]; TESQuest::IsStageDone scans the quest's stage entries and matches the stored stage byte; on a match it returns that entry's completed byte, otherwise false.
 0x529B33: test    eax, eax
 0x529B35: push    esi
 0x529B36: jz      short loc_529B57
-0x529B38: mov     dl, [esp+4+arg_0]
+0x529B38: mov     dl, [esp+4+stage]
 0x529B3C: lea     esp, [esp+0]
 0x529B40: mov     ecx, [eax+4]
 0x529B43: test    ecx, ecx

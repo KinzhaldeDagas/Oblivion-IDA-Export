@@ -1,4 +1,4 @@
 int Magic_GetDefaultPlayerSpell()
 {
-  return TESDataHandler_g_DefaultPlayerSpell;
+  return MEMORY[0xB335A8]; /*0x41b875*/
 }

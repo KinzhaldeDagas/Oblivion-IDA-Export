@@ -1,4 +1,4 @@
-BSStringT *sub_A09C90()
+NiRTTI *sub_A09C90()
 {
-  return sub_70E220((BSStringT *)dword_B3FAB0, "NiNode", (int)dword_B3FA80);
+  return NiRTTI_Constructor(&parent, "NiNode", &stru_B3FA80); /*0xa09ca4*/
 }

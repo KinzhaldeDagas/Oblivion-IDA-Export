@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x42EC70",
-    "line": "sub     esp, 11Ch",
+    "line": "sub     esp, 11Ch; MEF PERF 2026-09-07: PERF-1 outer path: called by wildcard model/KF discovery431B06; computes a fixed exclusion hash set from initial result entries, walks registered archives and calls42DB50 at42ED9A. Performance changes must not rebuild exclusions from newly prepended archive results or change archive precedence.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x42EC84",
-    "line": "cmp     ArchiveList, 0",
+    "line": "cmp     dword ptr ds:0B338E0h, 0",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x42ED6E",
-    "line": "mov     esi, ArchiveList",
+    "line": "mov     esi, ds:0B338E0h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -685,7 +685,7 @@
   },
   {
     "ea": "0x42EDBB",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x42EDCB",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

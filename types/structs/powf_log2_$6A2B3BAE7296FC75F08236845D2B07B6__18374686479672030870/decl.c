@@ -1,1 +1,5 @@
-powf_log2::$6A2B3BAE7296FC75F08236845D2B07B6
+struct powf_log2::$6A2B3BAE7296FC75F08236845D2B07B6
+{
+double invc;
+double logc;
+};

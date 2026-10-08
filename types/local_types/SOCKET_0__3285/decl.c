@@ -1,1 +1,1 @@
-SOCKET_0
+typedef UINT_PTR_0 SOCKET_0;

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x43FC20",
-    "line": "cmp     byte ptr ds:0B350D5h, 0",
+    "line": "cmp     byte ptr ds:0B350D5h, 0; TES cleanup/streaming critical-section path; calls SpeedTree cache prune 0x55E390(1) before and after heap/cell cleanup.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x43FC2C",
-    "line": "call    nullsub_returnTrue_0arg",
+    "line": "call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x43FC3B",
-    "line": "call    nullsub_returnTrue_0arg",
+    "line": "call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x43FC43",
-    "line": "push    offset CriticalSection; lpCriticalSection",
+    "line": "push    0B35380h; lpCriticalSection",
     "mnemonic": "push",
     "size": 5
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x43FC5B",
-    "line": "push    1",
+    "line": "push    1; unusedModelsOnly",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x43FC62",
-    "line": "call    sub_55E390",
+    "line": "call    BSTreeManager_ClearModelCache; Verified cache maintenance: with unusedModelsOnly=true removes tree-form/seed model entries whose model is null or only map-owned; false releases and clears every model cache entry. Called during TES destruction and BSTreeManager destruction.",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x43FC6A",
-    "line": "call    sub_7B84E0",
+    "line": "call    sub_7B84E0; MoonSugarEffect decode: walks ShaderDefinition cache B42EC0..B42F30; for shaders with type != -1 calls vtable +0x90 to detach pass texture-stage refs before texture-manager rebuild. Does not walk arbitrary plugin-owned shader wrappers or call vertex wrapper +0x5C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,13 +169,13 @@
   },
   {
     "ea": "0x43FC93",
-    "line": "push    1",
+    "line": "push    1; unusedModelsOnly",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x43FC95",
-    "line": "call    sub_55E390",
+    "line": "call    BSTreeManager_ClearModelCache; Verified cache maintenance: with unusedModelsOnly=true removes tree-form/seed model entries whose model is null or only map-owned; false releases and clears every model cache entry. Called during TES destruction and BSTreeManager destruction.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x43FCB0",
-    "line": "push    offset CriticalSection; lpCriticalSection",
+    "line": "push    0B35380h; lpCriticalSection",
     "mnemonic": "push",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x43FCBD",
-    "line": "call    nullsub_returnTrue_0arg",
+    "line": "call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.",
     "mnemonic": "call",
     "size": 5
   },

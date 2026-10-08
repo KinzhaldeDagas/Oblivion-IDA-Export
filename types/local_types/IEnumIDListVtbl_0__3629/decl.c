@@ -1,1 +1,1 @@
-IEnumIDListVtbl_0
+typedef IEnumIDListVtbl IEnumIDListVtbl_0;

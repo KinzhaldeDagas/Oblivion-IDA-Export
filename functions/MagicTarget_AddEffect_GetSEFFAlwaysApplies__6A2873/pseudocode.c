@@ -1,5 +1,5 @@
 int __usercall MagicTarget_AddEffect_::GetSEFFAlwaysApplies@<eax>(
-        TESObjectREFR *a1@<ebx>,
+        PlayerCharacter *a1@<ebx>,
         int a2@<ebp>,
         int a3@<esi>,
         int edi0@<edi>,
@@ -18,14 +18,14 @@ int __usercall MagicTarget_AddEffect_::GetSEFFAlwaysApplies@<eax>(
 {
   char v16; // al
 
-  if ( *(_DWORD *)(*(_DWORD *)(*(_DWORD *)(a2 + 0xC) + 0x1C) + 0x98) == 0x46464553 )
+  if ( *(_DWORD *)(*(_DWORD *)(*(_DWORD *)(a2 + 0xC) + 0x1C) + 0x98) == 0x46464553 ) /*0x6a2883*/
   {
-    st7_0 = ((double (__thiscall *)(int))*(_DWORD *)(*(_DWORD *)a3 + 0x1C))(a3);
-    HIBYTE(a10) = v16;
+    st7_0 = ((double (__thiscall *)(int))*(_DWORD *)(*(_DWORD *)a3 + 0x1C))(a3); /*0x6a288c*/
+    HIBYTE(a10) = v16; /*0x6a288e*/
   }
   else
   {
-    HIBYTE(a10) = 0;
+    HIBYTE(a10) = 0; /*0x6a2894*/
   }
   return MagicTarget_AddEffect_::GetAlwaysApplies_PlayerOverride(
            a1,

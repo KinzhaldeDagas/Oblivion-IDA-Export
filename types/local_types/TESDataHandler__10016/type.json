@@ -1,0 +1,276 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "TESDataHandler",
+  "definition": "struct TESDataHandler\n{\nvoid *objectList;\nOblivionTESFormListNode packageList;\nOblivionTESFormListNode worldspaceList;\nOblivionTESFormListNode climateList;\nOblivionTESFormListNode weatherList;\nOblivionTESFormListNode enchantmentList;\nOblivionTESFormListNode spellList;\nOblivionTESFormListNode hairList;\nOblivionTESFormListNode eyeList;\nOblivionTESFormListNode raceList;\nOblivionTESFormListNode landTextureList;\nOblivionTESFormListNode classList;\nOblivionTESFormListNode factionList;\nOblivionTESFormListNode scriptList;\nOblivionTESFormListNode soundList;\nOblivionTESGlobalListNode listGlobals;\nunsigned __int8 unknown7C[8];\nOblivionTESFormListNode questList;\nOblivionTESFormListNode birthsignList;\nOblivionTESFormListNode combatStyleList;\nOblivionTESFormListNode loadScreenList;\nOblivionTESFormListNode waterList;\nOblivionTESFormListNode effectShaderList;\nOblivionTESFormListNode animationObjectList;\nTESRegionList *regionListOwner; ///< Verified: 16-byte TESRegionList allocated in TESDataHandler_constr at +0xBC; Region forms are added here by TESDataHandler_AddForm case kFormType_Region.\nTESDataHandler_ActiveFileState activeFileState; ///< Partial decode of prior unknown block: embedded TESDataHandler_ActiveFileState exposes retainActiveFile at absolute +0xCD1; remaining bytes unknown.\nTESRegionDataManager *regionDataManager; ///< Verified: 8-byte TESRegionDataManager allocated and constructed at +0xCD8; accessed by CELLS/WRLD region-data queries.\nContainerExtraData *containerExtraData; ///< Verified: ContainerExtraData pointer cleared and destroyed during DataHandler_Clear/destructor path; detailed member layout Unknown.\n}\n",
+  "kind": "struct",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "objectList",
+      "offset_bits": 0,
+      "offset_bytes": 0,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "packageList",
+      "offset_bits": 32,
+      "offset_bytes": 4,
+      "size_bits": 64,
+      "type": "OblivionTESFormListNode"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "worldspaceList",
+      "offset_bits": 96,
+      "offset_bytes": 12,
+      "size_bits": 64,
+      "type": "OblivionTESFormListNode"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "climateList",
+      "offset_bits": 160,
+      "offset_bytes": 20,
+      "size_bits": 64,
+      "type": "OblivionTESFormListNode"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "weatherList",
+      "offset_bits": 224,
+      "offset_bytes": 28,
+      "size_bits": 64,
+      "type": "OblivionTESFormListNode"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "enchantmentList",
+      "offset_bits": 288,
+      "offset_bytes": 36,
+      "size_bits": 64,
+      "type": "OblivionTESFormListNode"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "spellList",
+      "offset_bits": 352,
+      "offset_bytes": 44,
+      "size_bits": 64,
+      "type": "OblivionTESFormListNode"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "hairList",
+      "offset_bits": 416,
+      "offset_bytes": 52,
+      "size_bits": 64,
+      "type": "OblivionTESFormListNode"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "eyeList",
+      "offset_bits": 480,
+      "offset_bytes": 60,
+      "size_bits": 64,
+      "type": "OblivionTESFormListNode"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "raceList",
+      "offset_bits": 544,
+      "offset_bytes": 68,
+      "size_bits": 64,
+      "type": "OblivionTESFormListNode"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "landTextureList",
+      "offset_bits": 608,
+      "offset_bytes": 76,
+      "size_bits": 64,
+      "type": "OblivionTESFormListNode"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "classList",
+      "offset_bits": 672,
+      "offset_bytes": 84,
+      "size_bits": 64,
+      "type": "OblivionTESFormListNode"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "factionList",
+      "offset_bits": 736,
+      "offset_bytes": 92,
+      "size_bits": 64,
+      "type": "OblivionTESFormListNode"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "scriptList",
+      "offset_bits": 800,
+      "offset_bytes": 100,
+      "size_bits": 64,
+      "type": "OblivionTESFormListNode"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "soundList",
+      "offset_bits": 864,
+      "offset_bytes": 108,
+      "size_bits": 64,
+      "type": "OblivionTESFormListNode"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "listGlobals",
+      "offset_bits": 928,
+      "offset_bytes": 116,
+      "size_bits": 64,
+      "type": "OblivionTESGlobalListNode"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "unknown7C",
+      "offset_bits": 992,
+      "offset_bytes": 124,
+      "size_bits": 64,
+      "type": "unsigned __int8[8]"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "questList",
+      "offset_bits": 1056,
+      "offset_bytes": 132,
+      "size_bits": 64,
+      "type": "OblivionTESFormListNode"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "birthsignList",
+      "offset_bits": 1120,
+      "offset_bytes": 140,
+      "size_bits": 64,
+      "type": "OblivionTESFormListNode"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "combatStyleList",
+      "offset_bits": 1184,
+      "offset_bytes": 148,
+      "size_bits": 64,
+      "type": "OblivionTESFormListNode"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "loadScreenList",
+      "offset_bits": 1248,
+      "offset_bytes": 156,
+      "size_bits": 64,
+      "type": "OblivionTESFormListNode"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "waterList",
+      "offset_bits": 1312,
+      "offset_bytes": 164,
+      "size_bits": 64,
+      "type": "OblivionTESFormListNode"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "effectShaderList",
+      "offset_bits": 1376,
+      "offset_bytes": 172,
+      "size_bits": 64,
+      "type": "OblivionTESFormListNode"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "animationObjectList",
+      "offset_bits": 1440,
+      "offset_bytes": 180,
+      "size_bits": 64,
+      "type": "OblivionTESFormListNode"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified: 16-byte TESRegionList allocated in TESDataHandler_constr at +0xBC; Region forms are added here by TESDataHandler_AddForm case kFormType_Region.",
+      "name": "regionListOwner",
+      "offset_bits": 1504,
+      "offset_bytes": 188,
+      "size_bits": 32,
+      "type": "TESRegionList *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Partial decode of prior unknown block: embedded TESDataHandler_ActiveFileState exposes retainActiveFile at absolute +0xCD1; remaining bytes unknown.",
+      "name": "activeFileState",
+      "offset_bits": 1536,
+      "offset_bytes": 192,
+      "size_bits": 24768,
+      "type": "TESDataHandler_ActiveFileState"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified: 8-byte TESRegionDataManager allocated and constructed at +0xCD8; accessed by CELLS/WRLD region-data queries.",
+      "name": "regionDataManager",
+      "offset_bits": 26304,
+      "offset_bytes": 3288,
+      "size_bits": 32,
+      "type": "TESRegionDataManager *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified: ContainerExtraData pointer cleared and destroyed during DataHandler_Clear/destructor path; detailed member layout Unknown.",
+      "name": "containerExtraData",
+      "offset_bits": 26336,
+      "offset_bytes": 3292,
+      "size_bits": 32,
+      "type": "ContainerExtraData *"
+    }
+  ],
+  "name": "TESDataHandler",
+  "ordinal": 10016,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 3296
+}

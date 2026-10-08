@@ -30,7 +30,6 @@
 0x431C60: cmp     [edi+10h], bp
 0x431C64: jbe     loc_431CF8
 0x431C6A: jmp     short loc_431C72
-0x431C6C: align 10h
 0x431C70: mov     edi, edx
 0x431C72: mov     eax, [edi+8]
 0x431C75: mov     eax, [eax+ebp*4]

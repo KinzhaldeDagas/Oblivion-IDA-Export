@@ -18,7 +18,7 @@
 0x430ECC: test    [esp+8+arg_0], 1
 0x430ED1: jz      short loc_430EDC
 0x430ED3: push    esi
-0x430ED4: call    FormHeapFree
+0x430ED4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x430ED9: add     esp, 4
 0x430EDC: pop     edi
 0x430EDD: mov     eax, esi

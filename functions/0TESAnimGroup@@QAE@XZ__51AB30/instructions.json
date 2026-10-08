@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x51AB30",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Constructs ref-counted TESAnimGroup state: encoded key/required-note array, zero morph and blend bytes, zero movement vector, and empty parsed-event count/pointer at +0x24/+0x28.",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x51AB5B",
-    "line": "push    offset NiRefObject_objcount; lpAddend",
+    "line": "push    0B3FD64h; lpAddend",
     "mnemonic": "push",
     "size": 5
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x51AB8C",
-    "line": "mov     eax, [esp+1Ch+arg_0]",
+    "line": "mov     eax, dword ptr [esp+1Ch+groupKey]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -175,13 +175,13 @@
   },
   {
     "ea": "0x51AB99",
-    "line": "push    eax",
+    "line": "push    eax; groupKey",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x51AB9A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x51ABA3",
-    "line": "call    sub_51AA10",
+    "line": "call    TESAnimGroup_InitKeyAndRequiredNotes; Stores the encoded group key at TESAnimGroup +0x08. Using the unsigned low group byte without a bounds check, indexes the fixed 43-record table, reads noteTemplateClass at record +0x0C, counts that class in the note-major required-note matrix (max 5), writes requiredNoteCount at +0x0C, frees the old +0x10 time array, allocates count*4, and zero-fills it to +0.0f. Later KF parsing populates and validates the authored times. Corrected: this initializer does not write QNaNs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -262,5 +262,59 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CA4B0",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA4B3",
+    "line": "jmp     NiRefObject_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA4B8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CA4BC",
+    "line": "lea     eax, [edx-0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA4BF",
+    "line": "mov     ecx, [edx-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA4C2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CA4C4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA4C9",
+    "line": "mov     eax, offset stru_AF2BA8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA4CE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,19 +1,36 @@
 {
-  "callees_count": 19,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_6EDE10",
+  "chunks": [
+    [
+      "0x6EDE10",
+      "0x6EE00B"
+    ],
+    [
+      "0x9C8460",
+      "0x9C848B"
+    ]
+  ],
+  "chunks_sha256": "d6e2b728d73de12367d4438bbc0cd288b138b74610ac56372d0d7d49536e61b9",
+  "comment_regular": "Clamps an age/sex target pair, computes target-current deltas, couples them through the authored 2x2 transform, and adds two basis-transpose corrections to parameters.matrix[2*matrixChannel].\n\nSetControlPair computes clampedTarget-current projection for two controls, multiplies deltas by cached 2x2 transform at this+0xC34+0x10*(channel+2*fan), then adds two scaled basis transposes to matrix[2*channel]. Uninitialized FanControls produces no update. Fan upper-bound assertion logs/returns; this entry has no direct channel guard.",
+  "comment_repeatable": "SetControlPair computes clampedTarget-current projection for two controls, multiplies deltas by cached 2x2 transform at this+0xC34+0x10*(channel+2*fan), then adds two scaled basis transposes to matrix[2*channel]. Uninitialized FanControls produces no update. Fan upper-bound assertion logs/returns; this entry has no direct channel guard.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 7,
+  "display_name": "FaceGenFanControls_SetControlPair",
   "end_ea": "0x6EE00B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6EDE10",
+  "name": "FaceGenFanControls_SetControlPair",
   "segment": ".text",
   "sha256": "4d2da409f225855ff0d58f6ae46667f9af9a6c7b2d98dea5228fd504cde712cf",
   "size": 507,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6EDE10",
-  "type": "void __thiscall(_BYTE *this, signed int, signed int, int, int)",
-  "xrefs_from_count": 169,
+  "total_chunk_size": 550,
+  "type": "void __thiscall(void *this, int fanIndex, int matrixChannel, const float *targetPair, FaceGenHeadParameters *parameters)",
+  "xrefs_from_count": 187,
   "xrefs_to_count": 1
 }

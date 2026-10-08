@@ -1,4 +1,4 @@
-0x546CC0: fldz
+0x546CC0: fldz; Exact flee score: fAIFleeConfBase + confidence*fAIFleeConfMult + (1-currentHealth/baseHealth)*fAIFleeHealthMult. Vanilla defaults: 40 - 0.5*confidence + 20*missingHealthFraction.
 0x546CC2: fld     [esp+arg_4]
 0x546CC6: fucom   st(1)
 0x546CC8: fnstsw  ax

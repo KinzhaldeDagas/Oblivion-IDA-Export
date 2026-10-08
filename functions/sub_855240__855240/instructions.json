@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x855240",
-    "line": "sub     esp, 48h",
+    "line": "sub     esp, 48h; ShaderPackage class-1 PP-lighting producer at vtable +0x98. Refract/RefractF emits selector 0x160/0x161/0x162, then continues class-1 material/light pass production. This function contains no 0x177..0x17A high-selector construction.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x85528F",
-    "line": "setnbe  byte ptr [esp+58h+var_10]",
+    "line": "setnbe  [esp+58h+bPassInfoBit2]; Verified (Oblivion): class-1 PP-lighting pass builder caches passInfo bit 0x02 in bPassInfoBit2; it is forwarded into texture-effect pass construction, where clear selects selector 0x18C and set selects 0x18D.",
     "mnemonic": "setnbe",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x8552AF",
-    "line": "mov     edi, [esp+58h+arg_0]",
+    "line": "mov     edi, [esp+58h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x8552E1",
-    "line": "cmp     eax, offset unk_B468C8",
+    "line": "cmp     eax, offset NiRTTI_SpeedTreeBranchShaderProperty; Independent Oblivion inherited-pass RTTI comparison against the same exact NiRTTI_SpeedTreeBranchShaderProperty descriptor.",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x8552F1",
-    "line": "jnz     short loc_8552E1",
+    "line": "jnz     short loc_8552E1; Independent Oblivion inherited-pass RTTI comparison against the same exact NiRTTI_SpeedTreeBranchShaderProperty descriptor.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x855310",
-    "line": "cmp     eax, offset unk_B478B0",
+    "line": "cmp     eax, offset stru_B478B0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x855340",
-    "line": "cmp     eax, offset unk_B468BC",
+    "line": "cmp     eax, offset NiRTTI_SpeedTreeLeafShaderProperty; Oblivion NiRTTI_SpeedTreeLeafShaderProperty: name 'SpeedTreeLeafShaderProperty'; parent NiRTTI_SpeedTreeShaderLightingProperty (B468D4). Separate from the branch RTTI that selects 0x17A.",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x855380",
-    "line": "call    InitBSShaderAccumulator",
+    "line": "call    BSShaderAccumulator_GetOrCreateGlobal",
     "mnemonic": "call",
     "size": 5
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x8553BB",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -967,7 +967,7 @@
   },
   {
     "ea": "0x85544D",
-    "line": "lea     ecx, [esp+58h+var_4]",
+    "line": "lea     ecx, [esp+58h+slot]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -985,7 +985,7 @@
   },
   {
     "ea": "0x855454",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -1003,13 +1003,13 @@
   },
   {
     "ea": "0x855460",
-    "line": "push    offset dword_B3FA90",
+    "line": "push    offset stru_B3FA90; other",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x855465",
-    "line": "add     ecx, 0F8h ; 'ø'",
+    "line": "add     ecx, 0F8h ; 'ø'; this",
     "mnemonic": "add",
     "size": 6
   },
@@ -1021,7 +1021,7 @@
   },
   {
     "ea": "0x85546F",
-    "line": "call    sub_8AA390",
+    "line": "call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1063,7 +1063,7 @@
   },
   {
     "ea": "0x855486",
-    "line": "mov     edi, [esp+58h+var_4]",
+    "line": "mov     edi, [esp+58h+slot]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1171,7 +1171,7 @@
   },
   {
     "ea": "0x8554B3",
-    "line": "mov     edi, [esp+58h+arg_8]",
+    "line": "mov     edi, [esp+58h+outContext]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1183,13 +1183,13 @@
   },
   {
     "ea": "0x8554BA",
-    "line": "mov     ebp, [esp+58h+arg_C]",
+    "line": "mov     ebp, [esp+58h+emit]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x8554BE",
-    "line": "mov     ebx, [esp+58h+var_10]",
+    "line": "mov     ebx, dword ptr [esp+58h+bPassInfoBit2]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1249,7 +1249,7 @@
   },
   {
     "ea": "0x8554DC",
-    "line": "mov     byte ptr [esp+58h+arg_8], 1",
+    "line": "mov     byte ptr [esp+58h+outContext], 1",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1261,7 +1261,7 @@
   },
   {
     "ea": "0x8554E3",
-    "line": "mov     ecx, [esp+58h+arg_0]",
+    "line": "mov     ecx, [esp+58h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1273,7 +1273,7 @@
   },
   {
     "ea": "0x8554E8",
-    "line": "lea     eax, [esp+5Ch+arg_8]",
+    "line": "lea     eax, [esp+5Ch+outContext]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1309,7 +1309,7 @@
   },
   {
     "ea": "0x8554F2",
-    "line": "call    sub_854E90",
+    "line": "call    Lighting30__AppendPassSelector0Or2; Lighting30 pass-list helper selecting RenderPass selector 0 or 2 from one variant flag; appends in emit mode or increments the pending count in count mode.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1333,7 +1333,7 @@
   },
   {
     "ea": "0x855506",
-    "line": "mov     byte ptr [esp+58h+arg_8], 1",
+    "line": "mov     byte ptr [esp+58h+outContext], 1",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1351,7 +1351,7 @@
   },
   {
     "ea": "0x855512",
-    "line": "jz      short loc_85552D",
+    "line": "jz      short loc_85552D; Native class-1 Refract/RefractF gate.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -1363,7 +1363,7 @@
   },
   {
     "ea": "0x855518",
-    "line": "mov     ecx, [esp+58h+arg_0]",
+    "line": "mov     ecx, [esp+58h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1381,7 +1381,7 @@
   },
   {
     "ea": "0x85551E",
-    "line": "lea     eax, [esp+60h+arg_8]",
+    "line": "lea     eax, [esp+60h+outContext]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1417,19 +1417,19 @@
   },
   {
     "ea": "0x855528",
-    "line": "call    sub_854CD0",
+    "line": "call    BSShaderPPLightingProperty_AppendRefractionPass160To162; Append refraction selector: RefractF -> 0x162; otherwise passInfo bit 2 -> 0x161; otherwise -> 0x160.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x85552D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x85552F",
-    "line": "call    sub_7ED600",
+    "line": "call    BSShaderLightingProperty__CountFrustumVisibleEnabledLights; Counts list entries with a non-null ShadowSceneLight, frustumCull != 0xFF, and byte +0xF4 == 0. Unlike GetFirst/NextActiveLight, this counter does not test the backing NiLight AppCulled bit.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1471,7 +1471,7 @@
   },
   {
     "ea": "0x85554A",
-    "line": "cmp     [esp+58h+arg_4], 0Fh",
+    "line": "cmp     [esp+58h+rendererState], 0Fh",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1531,13 +1531,13 @@
   },
   {
     "ea": "0x85557B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x85557D",
-    "line": "call    sub_7ED2A0",
+    "line": "call    BSShaderLightingProperty__GetFirstActiveLight; Seeds the embedded light-list cursor from property +0x70 and returns the first usable ShadowSceneLight. Oblivion rejects frustumCull == 0xFF, backing-light AppCulled, and light byte +0xF4 == 1. Fallout was consulted afterward only for the conventional GetFirstActiveLight label; its later implementation lacks Oblivion's +0xF4 rejection.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1561,7 +1561,7 @@
   },
   {
     "ea": "0x85558D",
-    "line": "cmp     byte ptr [esp+58h+var_10], 0",
+    "line": "cmp     [esp+58h+bPassInfoBit2], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1615,7 +1615,7 @@
   },
   {
     "ea": "0x8555AA",
-    "line": "lea     eax, [esp+60h+arg_8]",
+    "line": "lea     eax, [esp+60h+outContext]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1627,7 +1627,7 @@
   },
   {
     "ea": "0x8555AF",
-    "line": "mov     eax, [esp+64h+arg_0]",
+    "line": "mov     eax, [esp+64h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1681,7 +1681,7 @@
   },
   {
     "ea": "0x8555C4",
-    "line": "test    byte ptr [esp+58h+arg_4], 1",
+    "line": "test    byte ptr [esp+58h+rendererState], 1",
     "mnemonic": "test",
     "size": 5
   },
@@ -1735,7 +1735,7 @@
   },
   {
     "ea": "0x8555DE",
-    "line": "mov     eax, [esp+64h+arg_0]",
+    "line": "mov     eax, [esp+64h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1747,7 +1747,7 @@
   },
   {
     "ea": "0x8555E3",
-    "line": "lea     ecx, [esp+68h+arg_8]",
+    "line": "lea     ecx, [esp+68h+outContext]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1795,7 +1795,7 @@
   },
   {
     "ea": "0x8555F3",
-    "line": "lea     ecx, [esp+58h+var_4]",
+    "line": "lea     ecx, [esp+58h+slot]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1813,7 +1813,7 @@
   },
   {
     "ea": "0x8555FC",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -1825,43 +1825,43 @@
   },
   {
     "ea": "0x855603",
-    "line": "push    offset dword_B3FA90",
+    "line": "push    offset stru_B3FA90; other",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x855608",
-    "line": "add     ecx, 0ECh ; 'ì'",
+    "line": "add     ecx, 0ECh ; 'ì'; this",
     "mnemonic": "add",
     "size": 6
   },
   {
     "ea": "0x85560E",
-    "line": "call    sub_8AA390",
+    "line": "call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x855613",
-    "line": "lea     ecx, [esp+58h+var_4]; this",
+    "line": "lea     ecx, [esp+58h+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x855617",
-    "line": "mov     byte ptr [esp+58h+arg_C], al",
+    "line": "mov     byte ptr [esp+58h+emit], al",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x85561B",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x855620",
-    "line": "cmp     byte ptr [esp+58h+arg_C], 0",
+    "line": "cmp     byte ptr [esp+58h+emit], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1903,7 +1903,7 @@
   },
   {
     "ea": "0x855635",
-    "line": "mov     eax, [esp+60h+arg_0]",
+    "line": "mov     eax, [esp+60h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1921,7 +1921,7 @@
   },
   {
     "ea": "0x85563C",
-    "line": "lea     ecx, [esp+68h+arg_8]",
+    "line": "lea     ecx, [esp+68h+outContext]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1969,7 +1969,7 @@
   },
   {
     "ea": "0x85564C",
-    "line": "lea     ecx, [esp+58h+var_4]",
+    "line": "lea     ecx, [esp+58h+slot]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1987,7 +1987,7 @@
   },
   {
     "ea": "0x855655",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -1999,43 +1999,43 @@
   },
   {
     "ea": "0x85565C",
-    "line": "push    offset dword_B3FA90",
+    "line": "push    offset stru_B3FA90; other",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x855661",
-    "line": "add     ecx, 0ECh ; 'ì'",
+    "line": "add     ecx, 0ECh ; 'ì'; this",
     "mnemonic": "add",
     "size": 6
   },
   {
     "ea": "0x855667",
-    "line": "call    sub_8AA390",
+    "line": "call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x85566C",
-    "line": "lea     ecx, [esp+58h+var_4]; this",
+    "line": "lea     ecx, [esp+58h+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x855670",
-    "line": "mov     byte ptr [esp+58h+arg_C], al",
+    "line": "mov     byte ptr [esp+58h+emit], al",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x855674",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x855679",
-    "line": "cmp     byte ptr [esp+58h+arg_C], 0",
+    "line": "cmp     byte ptr [esp+58h+emit], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -2077,7 +2077,7 @@
   },
   {
     "ea": "0x85568E",
-    "line": "mov     eax, [esp+60h+arg_0]",
+    "line": "mov     eax, [esp+60h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2095,7 +2095,7 @@
   },
   {
     "ea": "0x855695",
-    "line": "lea     ecx, [esp+68h+arg_8]",
+    "line": "lea     ecx, [esp+68h+outContext]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2143,13 +2143,13 @@
   },
   {
     "ea": "0x8556A5",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8556A7",
-    "line": "call    sub_7ED4B0",
+    "line": "call    BSShaderLightingProperty__GetNextActiveLight; Advances the embedded cursor at property +0x7C and returns the next usable ShadowSceneLight under Oblivion's three gates: frustumCull != 0xFF, backing NiLight not AppCulled, and byte +0xF4 != 1. Fallout corroborates the method label but not the extra Oblivion gate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2178,14 +2178,8 @@
     "size": 2
   },
   {
-    "ea": "0x8556BA",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x8556C0",
-    "line": "lea     ecx, [esp+58h+var_4]",
+    "line": "lea     ecx, [esp+58h+slot]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2203,7 +2197,7 @@
   },
   {
     "ea": "0x8556C9",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -2215,31 +2209,31 @@
   },
   {
     "ea": "0x8556D0",
-    "line": "push    offset dword_B3FA90",
+    "line": "push    offset stru_B3FA90; other",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x8556D5",
-    "line": "add     ecx, 0ECh ; 'ì'",
+    "line": "add     ecx, 0ECh ; 'ì'; this",
     "mnemonic": "add",
     "size": 6
   },
   {
     "ea": "0x8556DB",
-    "line": "call    sub_8AA390",
+    "line": "call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x8556E0",
-    "line": "mov     byte ptr [esp+58h+arg_C], al",
+    "line": "mov     byte ptr [esp+58h+emit], al",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x8556E4",
-    "line": "mov     eax, [esp+58h+var_4]",
+    "line": "mov     eax, [esp+58h+slot]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2257,7 +2251,7 @@
   },
   {
     "ea": "0x8556EC",
-    "line": "mov     [esp+58h+var_10], eax",
+    "line": "mov     dword ptr [esp+58h+bPassInfoBit2], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2293,7 +2287,7 @@
   },
   {
     "ea": "0x8556FE",
-    "line": "cmp     [esp+58h+var_10], eax",
+    "line": "cmp     dword ptr [esp+58h+bPassInfoBit2], eax",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -2305,7 +2299,7 @@
   },
   {
     "ea": "0x855704",
-    "line": "mov     ecx, [esp+58h+var_10]",
+    "line": "mov     ecx, dword ptr [esp+58h+bPassInfoBit2]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2335,7 +2329,7 @@
   },
   {
     "ea": "0x855710",
-    "line": "cmp     byte ptr [esp+58h+arg_C], 0",
+    "line": "cmp     byte ptr [esp+58h+emit], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -2377,7 +2371,7 @@
   },
   {
     "ea": "0x855725",
-    "line": "mov     edx, [esp+60h+arg_0]",
+    "line": "mov     edx, [esp+60h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2395,7 +2389,7 @@
   },
   {
     "ea": "0x85572C",
-    "line": "lea     eax, [esp+68h+arg_8]",
+    "line": "lea     eax, [esp+68h+outContext]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2443,13 +2437,13 @@
   },
   {
     "ea": "0x85573C",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x85573E",
-    "line": "call    sub_7ED4B0",
+    "line": "call    BSShaderLightingProperty__GetNextActiveLight; Advances the embedded cursor at property +0x7C and returns the next usable ShadowSceneLight under Oblivion's three gates: frustumCull != 0xFF, backing NiLight not AppCulled, and byte +0xF4 != 1. Fallout corroborates the method label but not the extra Oblivion gate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2539,7 +2533,7 @@
   },
   {
     "ea": "0x85576C",
-    "line": "mov     ecx, [esp+6Ch+arg_0]",
+    "line": "mov     ecx, [esp+6Ch+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2551,7 +2545,7 @@
   },
   {
     "ea": "0x855771",
-    "line": "lea     edx, [esp+70h+arg_8]",
+    "line": "lea     edx, [esp+70h+outContext]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2611,13 +2605,13 @@
   },
   {
     "ea": "0x85578C",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x85578E",
-    "line": "call    sub_7ED2A0",
+    "line": "call    BSShaderLightingProperty__GetFirstActiveLight; Seeds the embedded light-list cursor from property +0x70 and returns the first usable ShadowSceneLight. Oblivion rejects frustumCull == 0xFF, backing-light AppCulled, and light byte +0xF4 == 1. Fallout was consulted afterward only for the conventional GetFirstActiveLight label; its later implementation lacks Oblivion's +0xF4 rejection.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2647,7 +2641,7 @@
   },
   {
     "ea": "0x8557A2",
-    "line": "lea     edx, [esp+58h+var_4]",
+    "line": "lea     edx, [esp+58h+slot]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2659,7 +2653,7 @@
   },
   {
     "ea": "0x8557A7",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -2677,19 +2671,19 @@
   },
   {
     "ea": "0x8557B3",
-    "line": "push    offset dword_B3FA90",
+    "line": "push    offset stru_B3FA90; other",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x8557B8",
-    "line": "add     ecx, 0ECh ; 'ì'",
+    "line": "add     ecx, 0ECh ; 'ì'; this",
     "mnemonic": "add",
     "size": 6
   },
   {
     "ea": "0x8557BE",
-    "line": "call    sub_8AA390",
+    "line": "call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2701,7 +2695,7 @@
   },
   {
     "ea": "0x8557C5",
-    "line": "mov     byte ptr [esp+58h+arg_C], 1",
+    "line": "mov     byte ptr [esp+58h+emit], 1",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2713,7 +2707,7 @@
   },
   {
     "ea": "0x8557CC",
-    "line": "mov     byte ptr [esp+58h+arg_C], 0",
+    "line": "mov     byte ptr [esp+58h+emit], 0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2731,19 +2725,19 @@
   },
   {
     "ea": "0x8557D8",
-    "line": "lea     ecx, [esp+58h+var_4]; this",
+    "line": "lea     ecx, [esp+58h+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x8557DC",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x8557E1",
-    "line": "cmp     byte ptr [esp+58h+arg_C], 0",
+    "line": "cmp     byte ptr [esp+58h+emit], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -2809,7 +2803,7 @@
   },
   {
     "ea": "0x855800",
-    "line": "mov     eax, [esp+68h+arg_0]",
+    "line": "mov     eax, [esp+68h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2827,7 +2821,7 @@
   },
   {
     "ea": "0x855807",
-    "line": "lea     ecx, [esp+70h+arg_8]",
+    "line": "lea     ecx, [esp+70h+outContext]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2935,7 +2929,7 @@
   },
   {
     "ea": "0x855831",
-    "line": "mov     ecx, [esp+68h+arg_0]",
+    "line": "mov     ecx, [esp+68h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2953,7 +2947,7 @@
   },
   {
     "ea": "0x855838",
-    "line": "lea     edx, [esp+70h+arg_8]",
+    "line": "lea     edx, [esp+70h+outContext]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3001,13 +2995,13 @@
   },
   {
     "ea": "0x855848",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x85584A",
-    "line": "call    sub_7ED4B0",
+    "line": "call    BSShaderLightingProperty__GetNextActiveLight; Advances the embedded cursor at property +0x7C and returns the next usable ShadowSceneLight under Oblivion's three gates: frustumCull != 0xFF, backing NiLight not AppCulled, and byte +0xF4 != 1. Fallout corroborates the method label but not the extra Oblivion gate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3043,7 +3037,7 @@
   },
   {
     "ea": "0x855864",
-    "line": "lea     edx, [esp+58h+var_4]",
+    "line": "lea     edx, [esp+58h+slot]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3055,7 +3049,7 @@
   },
   {
     "ea": "0x855869",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -3067,43 +3061,43 @@
   },
   {
     "ea": "0x855870",
-    "line": "push    offset dword_B3FA90",
+    "line": "push    offset stru_B3FA90; other",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x855875",
-    "line": "add     ecx, 0ECh ; 'ì'",
+    "line": "add     ecx, 0ECh ; 'ì'; this",
     "mnemonic": "add",
     "size": 6
   },
   {
     "ea": "0x85587B",
-    "line": "call    sub_8AA390",
+    "line": "call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x855880",
-    "line": "lea     ecx, [esp+58h+var_4]; this",
+    "line": "lea     ecx, [esp+58h+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x855884",
-    "line": "mov     byte ptr [esp+58h+arg_C], al",
+    "line": "mov     byte ptr [esp+58h+emit], al",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x855888",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x85588D",
-    "line": "cmp     byte ptr [esp+58h+arg_C], 0",
+    "line": "cmp     byte ptr [esp+58h+emit], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -3169,7 +3163,7 @@
   },
   {
     "ea": "0x8558AC",
-    "line": "mov     eax, [esp+68h+arg_0]",
+    "line": "mov     eax, [esp+68h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3187,7 +3181,7 @@
   },
   {
     "ea": "0x8558B3",
-    "line": "lea     ecx, [esp+70h+arg_8]",
+    "line": "lea     ecx, [esp+70h+outContext]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3235,13 +3229,13 @@
   },
   {
     "ea": "0x8558C3",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8558C5",
-    "line": "call    sub_7ED4B0",
+    "line": "call    BSShaderLightingProperty__GetNextActiveLight; Advances the embedded cursor at property +0x7C and returns the next usable ShadowSceneLight under Oblivion's three gates: frustumCull != 0xFF, backing NiLight not AppCulled, and byte +0xF4 != 1. Fallout corroborates the method label but not the extra Oblivion gate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3283,7 +3277,7 @@
   },
   {
     "ea": "0x8558DD",
-    "line": "mov     eax, [esp+58h+arg_0]",
+    "line": "mov     eax, [esp+58h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3301,7 +3295,7 @@
   },
   {
     "ea": "0x8558E3",
-    "line": "lea     edx, [esp+60h+arg_8]",
+    "line": "lea     edx, [esp+60h+outContext]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3361,7 +3355,7 @@
   },
   {
     "ea": "0x8558FD",
-    "line": "mov     ecx, [esp+58h+arg_0]",
+    "line": "mov     ecx, [esp+58h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3373,7 +3367,7 @@
   },
   {
     "ea": "0x855903",
-    "line": "lea     edx, [esp+5Ch+arg_8]",
+    "line": "lea     edx, [esp+5Ch+outContext]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3421,7 +3415,7 @@
   },
   {
     "ea": "0x855913",
-    "line": "cmp     [esp+58h+arg_4], 0Fh",
+    "line": "cmp     [esp+58h+rendererState], 0Fh",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -3607,7 +3601,7 @@
   },
   {
     "ea": "0x85597D",
-    "line": "mov     edx, [esp+70h+arg_0]",
+    "line": "mov     edx, [esp+70h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3619,7 +3613,7 @@
   },
   {
     "ea": "0x855982",
-    "line": "lea     eax, [esp+74h+arg_8]",
+    "line": "lea     eax, [esp+74h+outContext]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -3751,7 +3745,7 @@
   },
   {
     "ea": "0x8559BB",
-    "line": "mov     ecx, [esp+70h+arg_0]",
+    "line": "mov     ecx, [esp+70h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3763,7 +3757,7 @@
   },
   {
     "ea": "0x8559C0",
-    "line": "lea     edx, [esp+74h+arg_8]",
+    "line": "lea     edx, [esp+74h+outContext]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -3889,7 +3883,7 @@
   },
   {
     "ea": "0x8559F9",
-    "line": "mov     edx, [esp+68h+arg_0]",
+    "line": "mov     edx, [esp+68h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3907,7 +3901,7 @@
   },
   {
     "ea": "0x855A00",
-    "line": "lea     eax, [esp+70h+arg_8]",
+    "line": "lea     eax, [esp+70h+outContext]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3973,7 +3967,7 @@
   },
   {
     "ea": "0x855A1F",
-    "line": "mov     edx, [esp+58h+arg_0]",
+    "line": "mov     edx, [esp+58h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3991,7 +3985,7 @@
   },
   {
     "ea": "0x855A25",
-    "line": "lea     ecx, [esp+60h+arg_8]",
+    "line": "lea     ecx, [esp+60h+outContext]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -4039,13 +4033,13 @@
   },
   {
     "ea": "0x855A3D",
-    "line": "test    byte ptr [esp+58h+arg_4], 1",
+    "line": "test    byte ptr [esp+58h+rendererState], 1",
     "mnemonic": "test",
     "size": 5
   },
   {
     "ea": "0x855A42",
-    "line": "mov     byte ptr [esp+58h+arg_8], 1",
+    "line": "mov     byte ptr [esp+58h+outContext], 1",
     "mnemonic": "mov",
     "size": 5
   },
@@ -4099,7 +4093,7 @@
   },
   {
     "ea": "0x855A5C",
-    "line": "mov     edx, [esp+64h+arg_0]",
+    "line": "mov     edx, [esp+64h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4111,7 +4105,7 @@
   },
   {
     "ea": "0x855A61",
-    "line": "lea     eax, [esp+68h+arg_8]",
+    "line": "lea     eax, [esp+68h+outContext]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -4159,7 +4153,7 @@
   },
   {
     "ea": "0x855A71",
-    "line": "mov     ecx, [esp+58h+arg_0]",
+    "line": "mov     ecx, [esp+58h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4171,13 +4165,13 @@
   },
   {
     "ea": "0x855A77",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x855A7C",
-    "line": "test    byte ptr [esp+58h+arg_4], 2",
+    "line": "test    byte ptr [esp+58h+rendererState], 2",
     "mnemonic": "test",
     "size": 5
   },
@@ -4195,7 +4189,7 @@
   },
   {
     "ea": "0x855A8B",
-    "line": "lea     eax, [esp+58h+var_4]",
+    "line": "lea     eax, [esp+58h+slot]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -4207,7 +4201,7 @@
   },
   {
     "ea": "0x855A90",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -4219,31 +4213,31 @@
   },
   {
     "ea": "0x855A97",
-    "line": "push    offset dword_B3FA90",
+    "line": "push    offset stru_B3FA90; other",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x855A9C",
-    "line": "add     ecx, 0ECh ; 'ì'",
+    "line": "add     ecx, 0ECh ; 'ì'; this",
     "mnemonic": "add",
     "size": 6
   },
   {
     "ea": "0x855AA2",
-    "line": "call    sub_8AA390",
+    "line": "call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x855AA7",
-    "line": "mov     byte ptr [esp+58h+arg_C], al",
+    "line": "mov     byte ptr [esp+58h+emit], al",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x855AAB",
-    "line": "mov     eax, [esp+58h+var_4]",
+    "line": "mov     eax, [esp+58h+slot]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4261,7 +4255,7 @@
   },
   {
     "ea": "0x855AB3",
-    "line": "mov     [esp+58h+var_10], eax",
+    "line": "mov     dword ptr [esp+58h+bPassInfoBit2], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4297,7 +4291,7 @@
   },
   {
     "ea": "0x855AC5",
-    "line": "cmp     [esp+58h+var_10], eax",
+    "line": "cmp     dword ptr [esp+58h+bPassInfoBit2], eax",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -4309,7 +4303,7 @@
   },
   {
     "ea": "0x855ACB",
-    "line": "mov     ecx, [esp+58h+var_10]",
+    "line": "mov     ecx, dword ptr [esp+58h+bPassInfoBit2]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4339,7 +4333,7 @@
   },
   {
     "ea": "0x855AD7",
-    "line": "cmp     byte ptr [esp+58h+arg_C], 0",
+    "line": "cmp     byte ptr [esp+58h+emit], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -4381,7 +4375,7 @@
   },
   {
     "ea": "0x855AEC",
-    "line": "mov     edx, [esp+60h+arg_0]",
+    "line": "mov     edx, [esp+60h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4399,7 +4393,7 @@
   },
   {
     "ea": "0x855AF3",
-    "line": "lea     eax, [esp+68h+arg_8]",
+    "line": "lea     eax, [esp+68h+outContext]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -4447,13 +4441,13 @@
   },
   {
     "ea": "0x855B03",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x855B05",
-    "line": "call    sub_7ED2A0",
+    "line": "call    BSShaderLightingProperty__GetFirstActiveLight; Seeds the embedded light-list cursor from property +0x70 and returns the first usable ShadowSceneLight. Oblivion rejects frustumCull == 0xFF, backing-light AppCulled, and light byte +0xF4 == 1. Fallout was consulted afterward only for the conventional GetFirstActiveLight label; its later implementation lacks Oblivion's +0xF4 rejection.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4483,7 +4477,7 @@
   },
   {
     "ea": "0x855B1A",
-    "line": "lea     eax, [esp+58h+var_4]",
+    "line": "lea     eax, [esp+58h+slot]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -4495,7 +4489,7 @@
   },
   {
     "ea": "0x855B1F",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -4645,13 +4639,13 @@
   },
   {
     "ea": "0x855B70",
-    "line": "mov     eax, [esp+58h+var_4]",
+    "line": "mov     eax, [esp+58h+slot]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x855B74",
-    "line": "setz    byte ptr [esp+58h+arg_C]",
+    "line": "setz    byte ptr [esp+58h+emit]",
     "mnemonic": "setz",
     "size": 5
   },
@@ -4669,7 +4663,7 @@
   },
   {
     "ea": "0x855B7D",
-    "line": "mov     [esp+58h+var_10], eax",
+    "line": "mov     dword ptr [esp+58h+bPassInfoBit2], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4705,7 +4699,7 @@
   },
   {
     "ea": "0x855B8F",
-    "line": "cmp     [esp+58h+var_10], eax",
+    "line": "cmp     dword ptr [esp+58h+bPassInfoBit2], eax",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -4717,7 +4711,7 @@
   },
   {
     "ea": "0x855B95",
-    "line": "mov     ecx, [esp+58h+var_10]",
+    "line": "mov     ecx, dword ptr [esp+58h+bPassInfoBit2]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4747,7 +4741,7 @@
   },
   {
     "ea": "0x855BA1",
-    "line": "cmp     byte ptr [esp+58h+arg_C], 0",
+    "line": "cmp     byte ptr [esp+58h+emit], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -4789,7 +4783,7 @@
   },
   {
     "ea": "0x855BB6",
-    "line": "mov     edx, [esp+60h+arg_0]",
+    "line": "mov     edx, [esp+60h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4807,7 +4801,7 @@
   },
   {
     "ea": "0x855BBD",
-    "line": "lea     eax, [esp+68h+arg_8]",
+    "line": "lea     eax, [esp+68h+outContext]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -4855,13 +4849,13 @@
   },
   {
     "ea": "0x855BCD",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x855BCF",
-    "line": "call    sub_7ED4B0",
+    "line": "call    BSShaderLightingProperty__GetNextActiveLight; Advances the embedded cursor at property +0x7C and returns the next usable ShadowSceneLight under Oblivion's three gates: frustumCull != 0xFF, backing NiLight not AppCulled, and byte +0xF4 != 1. Fallout corroborates the method label but not the extra Oblivion gate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4885,7 +4879,7 @@
   },
   {
     "ea": "0x855BE0",
-    "line": "test    byte ptr [esp+58h+arg_4], 4",
+    "line": "test    byte ptr [esp+58h+rendererState], 4",
     "mnemonic": "test",
     "size": 5
   },
@@ -4963,7 +4957,7 @@
   },
   {
     "ea": "0x855C04",
-    "line": "mov     ecx, [esp+6Ch+arg_0]",
+    "line": "mov     ecx, [esp+6Ch+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4975,7 +4969,7 @@
   },
   {
     "ea": "0x855C09",
-    "line": "lea     edx, [esp+70h+arg_8]",
+    "line": "lea     edx, [esp+70h+outContext]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -5035,7 +5029,7 @@
   },
   {
     "ea": "0x855C24",
-    "line": "test    byte ptr [esp+58h+arg_4], 8",
+    "line": "test    byte ptr [esp+58h+rendererState], 8",
     "mnemonic": "test",
     "size": 5
   },
@@ -5047,13 +5041,13 @@
   },
   {
     "ea": "0x855C2F",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x855C31",
-    "line": "call    sub_7ED2A0",
+    "line": "call    BSShaderLightingProperty__GetFirstActiveLight; Seeds the embedded light-list cursor from property +0x70 and returns the first usable ShadowSceneLight. Oblivion rejects frustumCull == 0xFF, backing-light AppCulled, and light byte +0xF4 == 1. Fallout was consulted afterward only for the conventional GetFirstActiveLight label; its later implementation lacks Oblivion's +0xF4 rejection.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5083,7 +5077,7 @@
   },
   {
     "ea": "0x855C45",
-    "line": "lea     edx, [esp+58h+var_4]",
+    "line": "lea     edx, [esp+58h+slot]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -5095,7 +5089,7 @@
   },
   {
     "ea": "0x855C4A",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -5113,19 +5107,19 @@
   },
   {
     "ea": "0x855C56",
-    "line": "push    offset dword_B3FA90",
+    "line": "push    offset stru_B3FA90; other",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x855C5B",
-    "line": "add     ecx, 0ECh ; 'ì'",
+    "line": "add     ecx, 0ECh ; 'ì'; this",
     "mnemonic": "add",
     "size": 6
   },
   {
     "ea": "0x855C61",
-    "line": "call    sub_8AA390",
+    "line": "call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5137,7 +5131,7 @@
   },
   {
     "ea": "0x855C68",
-    "line": "mov     byte ptr [esp+58h+arg_C], 1",
+    "line": "mov     byte ptr [esp+58h+emit], 1",
     "mnemonic": "mov",
     "size": 5
   },
@@ -5149,7 +5143,7 @@
   },
   {
     "ea": "0x855C6F",
-    "line": "mov     byte ptr [esp+58h+arg_C], 0",
+    "line": "mov     byte ptr [esp+58h+emit], 0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -5167,19 +5161,19 @@
   },
   {
     "ea": "0x855C7B",
-    "line": "lea     ecx, [esp+58h+var_4]; this",
+    "line": "lea     ecx, [esp+58h+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x855C7F",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x855C84",
-    "line": "cmp     byte ptr [esp+58h+arg_C], 0",
+    "line": "cmp     byte ptr [esp+58h+emit], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -5245,7 +5239,7 @@
   },
   {
     "ea": "0x855CA3",
-    "line": "mov     eax, [esp+68h+arg_0]",
+    "line": "mov     eax, [esp+68h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5263,7 +5257,7 @@
   },
   {
     "ea": "0x855CAA",
-    "line": "lea     ecx, [esp+70h+arg_8]",
+    "line": "lea     ecx, [esp+70h+outContext]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -5311,7 +5305,7 @@
   },
   {
     "ea": "0x855CBA",
-    "line": "mov     byte ptr [esp+58h+arg_8], 0",
+    "line": "mov     byte ptr [esp+58h+outContext], 0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -5335,7 +5329,7 @@
   },
   {
     "ea": "0x855CCC",
-    "line": "lea     ecx, [esp+58h+var_4]",
+    "line": "lea     ecx, [esp+58h+slot]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -5353,7 +5347,7 @@
   },
   {
     "ea": "0x855CD5",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -5365,43 +5359,43 @@
   },
   {
     "ea": "0x855CDC",
-    "line": "push    offset dword_B3FA90",
+    "line": "push    offset stru_B3FA90; other",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x855CE1",
-    "line": "add     ecx, 0ECh ; 'ì'",
+    "line": "add     ecx, 0ECh ; 'ì'; this",
     "mnemonic": "add",
     "size": 6
   },
   {
     "ea": "0x855CE7",
-    "line": "call    sub_8AA390",
+    "line": "call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x855CEC",
-    "line": "lea     ecx, [esp+58h+var_4]; this",
+    "line": "lea     ecx, [esp+58h+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x855CF0",
-    "line": "mov     byte ptr [esp+58h+arg_C], al",
+    "line": "mov     byte ptr [esp+58h+emit], al",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x855CF4",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x855CF9",
-    "line": "cmp     byte ptr [esp+58h+arg_C], 0",
+    "line": "cmp     byte ptr [esp+58h+emit], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -5467,7 +5461,7 @@
   },
   {
     "ea": "0x855D18",
-    "line": "mov     edx, [esp+68h+arg_0]",
+    "line": "mov     edx, [esp+68h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5485,7 +5479,7 @@
   },
   {
     "ea": "0x855D1F",
-    "line": "lea     eax, [esp+70h+arg_8]",
+    "line": "lea     eax, [esp+70h+outContext]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -5533,13 +5527,13 @@
   },
   {
     "ea": "0x855D2F",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x855D31",
-    "line": "call    sub_7ED4B0",
+    "line": "call    BSShaderLightingProperty__GetNextActiveLight; Advances the embedded cursor at property +0x7C and returns the next usable ShadowSceneLight under Oblivion's three gates: frustumCull != 0xFF, backing NiLight not AppCulled, and byte +0xF4 != 1. Fallout corroborates the method label but not the extra Oblivion gate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5569,7 +5563,7 @@
   },
   {
     "ea": "0x855D49",
-    "line": "lea     eax, [esp+58h+var_4]",
+    "line": "lea     eax, [esp+58h+slot]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -5581,7 +5575,7 @@
   },
   {
     "ea": "0x855D4E",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -5593,31 +5587,31 @@
   },
   {
     "ea": "0x855D55",
-    "line": "push    offset dword_B3FA90",
+    "line": "push    offset stru_B3FA90; other",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x855D5A",
-    "line": "add     ecx, 0ECh ; 'ì'",
+    "line": "add     ecx, 0ECh ; 'ì'; this",
     "mnemonic": "add",
     "size": 6
   },
   {
     "ea": "0x855D60",
-    "line": "call    sub_8AA390",
+    "line": "call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x855D65",
-    "line": "mov     byte ptr [esp+58h+arg_C], al",
+    "line": "mov     byte ptr [esp+58h+emit], al",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x855D69",
-    "line": "mov     eax, [esp+58h+var_4]",
+    "line": "mov     eax, [esp+58h+slot]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5713,7 +5707,7 @@
   },
   {
     "ea": "0x855D95",
-    "line": "cmp     byte ptr [esp+58h+arg_C], 0",
+    "line": "cmp     byte ptr [esp+58h+emit], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -5779,7 +5773,7 @@
   },
   {
     "ea": "0x855DB4",
-    "line": "mov     ecx, [esp+68h+arg_0]",
+    "line": "mov     ecx, [esp+68h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5797,7 +5791,7 @@
   },
   {
     "ea": "0x855DBB",
-    "line": "lea     edx, [esp+70h+arg_8]",
+    "line": "lea     edx, [esp+70h+outContext]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -5845,13 +5839,13 @@
   },
   {
     "ea": "0x855DCB",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x855DCD",
-    "line": "call    sub_7ED4B0",
+    "line": "call    BSShaderLightingProperty__GetNextActiveLight; Advances the embedded cursor at property +0x7C and returns the next usable ShadowSceneLight under Oblivion's three gates: frustumCull != 0xFF, backing NiLight not AppCulled, and byte +0xF4 != 1. Fallout corroborates the method label but not the extra Oblivion gate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5887,7 +5881,7 @@
   },
   {
     "ea": "0x855DE9",
-    "line": "test    byte ptr [esp+58h+arg_4], 8",
+    "line": "test    byte ptr [esp+58h+rendererState], 8",
     "mnemonic": "test",
     "size": 5
   },
@@ -5905,7 +5899,7 @@
   },
   {
     "ea": "0x855DF8",
-    "line": "mov     ecx, [esp+58h+arg_0]",
+    "line": "mov     ecx, [esp+58h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5923,7 +5917,7 @@
   },
   {
     "ea": "0x855DFE",
-    "line": "lea     eax, [esp+60h+arg_8]",
+    "line": "lea     eax, [esp+60h+outContext]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -5983,7 +5977,7 @@
   },
   {
     "ea": "0x855E18",
-    "line": "mov     ecx, [esp+58h+arg_0]",
+    "line": "mov     ecx, [esp+58h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6007,7 +6001,7 @@
   },
   {
     "ea": "0x855E1F",
-    "line": "lea     eax, [esp+64h+arg_8]",
+    "line": "lea     eax, [esp+64h+outContext]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -6049,7 +6043,7 @@
   },
   {
     "ea": "0x855E2E",
-    "line": "cmp     dword ptr [esi+0E0h], 0",
+    "line": "cmp     dword ptr [esi+0E0h], 0; Verified (Oblivion): class-1 PP-lighting pass construction checks the property-owned TextureEffectData pointer at +0xE0; when present, it calls BSShaderProperty_AppendTextureEffectPass to enqueue the BSSM_TEXEFFECT or BSSM_TEXEFFECT_S render pass according to passInfo bit 0x02 and the render-state class.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -6061,55 +6055,55 @@
   },
   {
     "ea": "0x855E37",
-    "line": "mov     eax, [esp+58h+arg_0]",
+    "line": "mov     eax, [esp+58h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x855E3B",
-    "line": "push    ebx",
+    "line": "push    ebx; bPassInfoBit2",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x855E3C",
-    "line": "lea     edx, [esp+5Ch+arg_8]",
+    "line": "lea     edx, [esp+5Ch+outContext]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x855E40",
-    "line": "push    edx",
+    "line": "push    edx; passFlags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x855E41",
-    "line": "push    ebp",
+    "line": "push    ebp; renderStateClass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x855E42",
-    "line": "push    edi",
+    "line": "push    edi; passCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x855E43",
-    "line": "push    eax",
+    "line": "push    eax; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x855E44",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x855E46",
-    "line": "call    sub_854B70",
+    "line": "call    BSShaderProperty_AppendTextureEffectPass; Verified (Oblivion): PP-lighting class-1 pass builder calls BSShaderProperty_AppendTextureEffectPass when the property-owned TextureEffectData pointer at +0xE0 is non-null. The resulting selectors 0x18C/0x18D are later consumed by ShadowLightShader__SetupRenderPass, which binds the effect texture and blend/Z-test parameters.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6127,7 +6121,7 @@
   },
   {
     "ea": "0x855E54",
-    "line": "test    byte ptr [esp+58h+arg_4], 1",
+    "line": "test    byte ptr [esp+58h+rendererState], 1",
     "mnemonic": "test",
     "size": 5
   },
@@ -6145,7 +6139,7 @@
   },
   {
     "ea": "0x855E5F",
-    "line": "mov     edx, [esp+58h+arg_0]",
+    "line": "mov     edx, [esp+58h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6187,7 +6181,7 @@
   },
   {
     "ea": "0x855E6A",
-    "line": "call    sub_854FF0",
+    "line": "call    Lighting30__AppendPassSelector19EOr19F; Lighting30 pass-list helper gated by an exact three-component property/global vector mismatch. Marks the associated state dirty and selects 0x19E or 0x19F; count mode only increments the pending pass count.",
     "mnemonic": "call",
     "size": 5
   },

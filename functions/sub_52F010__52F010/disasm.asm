@@ -1,4 +1,4 @@
-0x52F010: sub     esp, 14h
+0x52F010: sub     esp, 14h; Authoritative Oblivion INFO selector. Scans running quest buckets by descending priority and INFOs in record order; applies conditions, conversation linkedFrom/ANY rules, reuse suppression, and Random groups. For an ambient first item (previousTopic=null), a nonempty linkedFrom list is rejected unless the target is the player. RandomEnd is latched before conversation reuse checks, so a duplicate/repeated RandomEnd INFO can terminate the scan without being eligible.
 0x52F013: mov     eax, [esp+14h+a2]
 0x52F017: push    ebx
 0x52F018: xor     ebx, ebx
@@ -18,7 +18,7 @@
 0x52F038: mov     ecx, ds:0B36510h
 0x52F03E: cmp     ecx, ebx
 0x52F040: jz      short loc_52F049
-0x52F042: call    BSSimpleList_Clear
+0x52F042: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x52F047: jmp     short loc_52F065
 0x52F049: push    8; Size
 0x52F04B: call    FormHeapAlloc
@@ -47,7 +47,7 @@
 0x52F097: jz      loc_52F2CB
 0x52F09D: mov     esi, ds:0B333C4h
 0x52F0A3: xor     eax, eax
-0x52F0A5: cmp     [esi+116h], bl
+0x52F0A5: cmp     [esi+116h], bl; Shivering Isles fallback for ambient selection only: if no match while the player is in the SE world, temporarily retry base-world conditions for dialogue types Combat(2), Persuasion(3), Detection(4), or Miscellaneous(6), then restore the world flag.
 0x52F0AB: jz      loc_52F326
 0x52F0B1: movsx   ecx, byte ptr [ebp+24h]
 0x52F0B5: cmp     ecx, 2
@@ -58,18 +58,18 @@
 0x52F0C6: jnz     loc_52F326
 0x52F0CC: mov     ecx, [esp+24h+a7]
 0x52F0D0: mov     eax, [esp+24h+a6]
-0x52F0D4: push    ecx; a7
+0x52F0D4: push    ecx; conversation
 0x52F0D5: mov     ecx, [esp+28h+a4]
-0x52F0D9: push    eax; a6
+0x52F0D9: push    eax; previousTopic
 0x52F0DA: mov     eax, [esp+2Ch+a2]
-0x52F0DE: push    edx; a5
+0x52F0DE: push    edx; useConversationRules
 0x52F0DF: mov     edx, [esp+30h+a3]
-0x52F0E3: push    ecx; a4
-0x52F0E4: push    edx; a3
-0x52F0E5: push    eax; a2
+0x52F0E3: push    ecx; target
+0x52F0E4: push    edx; speaker
+0x52F0E5: push    eax; lowDispositionFailure
 0x52F0E6: mov     ecx, ebp; this
 0x52F0E8: mov     [esi+116h], bl
-0x52F0EE: call    sub_52F010
+0x52F0EE: call    TESTopic__SelectInfoForSpeaker; Authoritative Oblivion INFO selector. Scans running quest buckets by descending priority and INFOs in record order; applies conditions, conversation linkedFrom/ANY rules, reuse suppression, and Random groups. For an ambient first item (previousTopic=null), a nonempty linkedFrom list is rejected unless the target is the player. RandomEnd is latched before conversation reuse checks, so a duplicate/repeated RandomEnd INFO can terminate the scan without being eligible.
 0x52F0F3: mov     ecx, ds:0B333C4h
 0x52F0F9: pop     edi
 0x52F0FA: pop     esi
@@ -78,9 +78,8 @@
 0x52F103: pop     ebx
 0x52F104: add     esp, 14h
 0x52F107: retn    18h
-0x52F10A: align 10h
 0x52F110: mov     eax, [esp+24h+var_C]
-0x52F114: mov     edi, [eax]
+0x52F114: mov     edi, [eax]; QuestInfoEntry traversal is already sorted by descending QUST priority. Selection therefore exhausts higher-priority quest INFO arrays before lower-priority quests; equal-priority bucket order remains stable.
 0x52F116: cmp     edi, ebx
 0x52F118: jz      loc_52F080
 0x52F11E: cmp     [esp+24h+var_12], bl
@@ -93,7 +92,7 @@
 0x52F139: cmp     eax, ebx
 0x52F13B: jz      loc_52F2A5
 0x52F141: test    byte ptr [eax+3Ch], 1
-0x52F145: jz      loc_52F2A5
+0x52F145: jz      loc_52F2A5; Only a running quest bucket participates in INFO selection: TESQuest.questFlags bit 0x01. In authored QUST DATA the Construction Set labels this same bit 'Start Game Enabled'.
 0x52F14B: mov     eax, [edi+10h]
 0x52F14E: xor     ebp, ebp
 0x52F150: cmp     eax, ebx
@@ -103,18 +102,18 @@
 0x52F160: mov     eax, [edi+8]
 0x52F163: mov     esi, [eax+ebp*4]
 0x52F166: cmp     esi, ebx
-0x52F168: mov     [esp+24h+var_11], bl
+0x52F168: mov     [esp+24h+lowDispositionFailure], bl
 0x52F16C: jz      loc_52F275
 0x52F172: mov     ecx, [esp+24h+a4]
 0x52F176: mov     edx, [esp+24h+a3]
 0x52F17A: mov     eax, [edi]
-0x52F17C: push    ecx
-0x52F17D: push    edx
-0x52F17E: push    eax
-0x52F17F: lea     ecx, [esp+30h+var_11]
-0x52F183: push    ecx
-0x52F184: mov     ecx, esi
-0x52F186: call    sub_530830
+0x52F17C: push    ecx; target
+0x52F17D: push    edx; speaker
+0x52F17E: push    eax; parentQuest
+0x52F17F: lea     ecx, [esp+30h+lowDispositionFailure]
+0x52F183: push    ecx; lowDispositionFailure
+0x52F184: mov     ecx, esi; this
+0x52F186: call    TESTopicInfo__EvaluateConditions; Evaluate quest conditions followed by INFO conditions for this speaker/target. SayOnce is rejected here when the INFO-global spoken byte is already set.
 0x52F18B: test    al, al
 0x52F18D: jz      loc_52F275
 0x52F193: cmp     byte ptr [esp+24h+a5], bl
@@ -136,23 +135,23 @@
 0x52F1C3: cmp     eax, edx
 0x52F1C5: jz      short loc_52F1F5
 0x52F1C7: cmp     dword ptr [eax+0Ch], 0D3h ; 'Ó'
-0x52F1CE: jz      short loc_52F1F5
+0x52F1CE: jz      short loc_52F1F5; Conversation link acceptance: the candidate linked topic may equal previousTopic or be stock 000000D3 / ANY, which acts as the wildcard continuation root.
 0x52F1D0: mov     eax, ecx
 0x52F1D2: cmp     eax, ebx
 0x52F1D4: jnz     short loc_52F1B2
 0x52F1D6: jmp     loc_52F275
-0x52F1DB: mov     ecx, eax
+0x52F1DB: mov     ecx, eax; First ambient item (previousTopic=null): an INFO with a links object is accepted when its linkedFrom list is empty. If linkedFrom is nonempty, only the special target==Player case bypasses the missing previous-topic match.
 0x52F1DD: call    BSSimpleList_IsEmpty
 0x52F1E2: test    al, al
 0x52F1E4: jnz     short loc_52F1F5
 0x52F1E6: mov     eax, ds:0B333C4h
 0x52F1EB: cmp     [esp+24h+a4], eax
-0x52F1EF: jnz     loc_52F275
+0x52F1EF: jnz     loc_52F275; For normal NPC-to-NPC random conversation, previousTopic=null plus nonempty INFO.linkedFrom rejects this candidate. The target==Player exception applies only to this first-item/no-previous-topic branch.
 0x52F1F5: movzx   ecx, byte ptr [esi+25h]
 0x52F1F9: shr     ecx, 5
 0x52F1FC: test    cl, 1
-0x52F1FF: jz      short loc_52F206
-0x52F201: mov     [esp+24h+var_12], 1
+0x52F1FF: jz      short loc_52F206; TESTopicInfo::RandomEnd (0x20): stop scanning later INFO candidates after this match.
+0x52F201: mov     [esp+24h+var_12], 1; Latch RandomEnd before checking whether this INFO duplicates an earlier conversation item. The stop flag is not cleared if the later exact-INFO or same quest/topic reuse test rejects the candidate.
 0x52F206: mov     eax, [esp+24h+a7]
 0x52F20A: cmp     eax, ebx
 0x52F20C: jz      short loc_52F23E
@@ -164,15 +163,15 @@
 0x52F219: jz      short loc_52F23E
 0x52F21B: mov     eax, [eax]
 0x52F21D: cmp     [eax+0Ch], esi
-0x52F220: jz      short loc_52F275
+0x52F220: jz      short loc_52F275; Exact-INFO reuse rejection occurs after RandomEnd was latched. A rejected RandomEnd still blocks all later INFOs; earlier accumulated Random candidates remain selectable, otherwise selection can return null and drive retry/GOODBYE recovery.
 0x52F222: mov     ecx, [edi]
-0x52F224: test    byte ptr [ecx+3Ch], 4
+0x52F224: test    byte ptr [ecx+3Ch], 4; TESQuest.questFlags bit 0x04 is the Oblivion Construction Set option 'Allow repeated conversation topics'. When clear, generated conversations suppress later DialogueItems from the same owner quest/topic.
 0x52F228: jnz     short loc_52F238
 0x52F22A: cmp     [eax+14h], ecx
 0x52F22D: jnz     short loc_52F238
 0x52F22F: mov     ecx, [esp+24h+var_10]
 0x52F233: cmp     [eax+10h], ecx
-0x52F236: jz      short loc_52F275
+0x52F236: jz      short loc_52F275; Same owner quest/topic reuse rejection also preserves an already-latched RandomEnd stop. QUST Allow repeated conversation topics bypasses only this same-topic test, never exact-INFO reuse.
 0x52F238: mov     eax, edx
 0x52F23A: cmp     eax, ebx
 0x52F23C: jnz     short loc_52F210
@@ -190,18 +189,18 @@
 0x52F260: mov     edx, eax
 0x52F262: shr     edx, 1
 0x52F264: test    dl, 1
-0x52F267: jz      short loc_52F2BF
+0x52F267: jz      short loc_52F2BF; TESTopicInfo::Random (0x02): non-random eligible INFO returns immediately when no random candidates exist; random INFOs are accumulated.
 0x52F269: shr     eax, 1
 0x52F26B: test    al, 1
-0x52F26D: jz      short loc_52F2B8
+0x52F26D: jz      short loc_52F2B8; An eligible non-Random INFO terminates further scanning. If Random candidates were already accumulated, the non-Random INFO is a boundary and is not itself selected.
 0x52F26F: push    esi
 0x52F270: call    BSSimpleList_PushFront
 0x52F275: cmp     byte ptr [esp+24h+a5], bl
 0x52F279: jnz     short loc_52F28C
-0x52F27B: cmp     [esp+24h+var_11], bl
+0x52F27B: cmp     [esp+24h+lowDispositionFailure], bl
 0x52F27F: jz      short loc_52F28C
 0x52F281: mov     eax, [esp+24h+a2]
-0x52F285: mov     [esp+24h+var_8], esi
+0x52F285: mov     [esp+24h+var_8], esi; Player/menu-only fallback: retain this condition-failed INFO when its failed condition was GetDisposition with > or >=. The last such candidate wins if no normal or Random match exists.
 0x52F289: mov     byte ptr [eax], 1
 0x52F28C: cmp     [esp+24h+var_12], bl
 0x52F290: jnz     short loc_52F29F
@@ -240,9 +239,9 @@
 0x52F2EB: cmp     eax, ebx
 0x52F2ED: jnz     short loc_52F2E1
 0x52F2EF: push    ebx; Seed
-0x52F2F0: call    GetRandomLargeInteger?
+0x52F2F0: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x52F2F5: xor     edx, edx
-0x52F2F7: div     esi
+0x52F2F7: div     esi; Uniform selection from the eligible Random (0x02) INFO candidate list.
 0x52F2F9: mov     ecx, ds:0B36510h
 0x52F2FF: add     esp, 4
 0x52F302: xor     edi, edi

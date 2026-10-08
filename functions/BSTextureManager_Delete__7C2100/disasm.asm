@@ -1,4 +1,4 @@
-0x7C2100: push    0FFFFFFFFh
+0x7C2100: push    0FFFFFFFFh; MoonSugarEffect decode: BSTextureManager destructor/delete path. Releases available/in-use rendered textures, shadow maps, cached buffers, and manager lists.
 0x7C2102: push    offset BSTextureManager_Delete_SEH
 0x7C2107: mov     eax, large fs:0
 0x7C210D: push    eax
@@ -20,11 +20,11 @@
 0x7C2134: mov     [esp+28h+var_4], 5
 0x7C213C: jz      short loc_7C2176
 0x7C213E: lea     ebp, [esi+30h]
-0x7C2141: lea     eax, [esp+28h+var_14]
-0x7C2145: push    eax
-0x7C2146: mov     ecx, ebp
-0x7C2148: call    sub_7C1740
-0x7C214D: mov     edi, [esp+28h+var_14]
+0x7C2141: lea     eax, [esp+28h+result]
+0x7C2145: push    eax; result
+0x7C2146: mov     ecx, ebp; self
+0x7C2148: call    NiTRefPointerList__RemoveHead; Generic refcounted NiT pointer-list RemoveHead helper. Unlinks the head, returns a strong reference to its payload, frees the node through the allocator virtual, and decrements count.
+0x7C214D: mov     edi, [esp+28h+result]
 0x7C2151: cmp     edi, ebx
 0x7C2153: jz      short loc_7C2171
 0x7C2155: lea     ecx, [edi+4]
@@ -45,11 +45,11 @@
 0x7C2179: jz      short loc_7C21B5
 0x7C217B: lea     ebp, [esi+20h]
 0x7C217E: mov     edi, edi
-0x7C2180: lea     ecx, [esp+28h+var_14]
-0x7C2184: push    ecx
-0x7C2185: mov     ecx, ebp
-0x7C2187: call    sub_7C1740
-0x7C218C: mov     edi, [esp+28h+var_14]
+0x7C2180: lea     ecx, [esp+28h+result]
+0x7C2184: push    ecx; result
+0x7C2185: mov     ecx, ebp; self
+0x7C2187: call    NiTRefPointerList__RemoveHead; Generic refcounted NiT pointer-list RemoveHead helper. Unlinks the head, returns a strong reference to its payload, frees the node through the allocator virtual, and decrements count.
+0x7C218C: mov     edi, [esp+28h+result]
 0x7C2190: cmp     edi, ebx
 0x7C2192: jz      short loc_7C21B0
 0x7C2194: lea     edx, [edi+4]
@@ -119,7 +119,7 @@
 0x7C2235: mov     ecx, ebp
 0x7C2237: call    eax
 0x7C2239: push    ebx
-0x7C223A: call    FormHeapFree
+0x7C223A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7C223F: add     esp, 4
 0x7C2242: cmp     dword ptr [esi+1Ch], 0
 0x7C2246: jnz     loc_7C21C3
@@ -174,7 +174,7 @@
 0x7C22C4: mov     ecx, edi
 0x7C22C6: call    eax
 0x7C22C8: push    ebp
-0x7C22C9: call    FormHeapFree
+0x7C22C9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7C22CE: add     esp, 4
 0x7C22D1: cmp     [esi+0Ch], ebx
 0x7C22D4: jnz     short loc_7C2257
@@ -264,3 +264,27 @@
 0x7C23AD: pop     ebx
 0x7C23AE: add     esp, 14h
 0x7C23B1: retn
+0x9CE270: mov     ecx, [ebp-10h]
+0x9CE273: jmp     j_??1?$NiTPointerList@PAURenderedTextureData@BSTextureManager@@@@UAE@XZ
+0x9CE278: mov     ecx, [ebp-10h]
+0x9CE27B: add     ecx, 10h
+0x9CE27E: jmp     j_??1?$NiTPointerList@PAURenderedTextureData@BSTextureManager@@@@UAE@XZ
+0x9CE283: mov     ecx, [ebp-10h]
+0x9CE286: add     ecx, 20h ; ' '
+0x9CE289: jmp     j_??1?$NiTPointerList@V?$NiPointer@VBSRenderedTexture@@@@@@UAE@XZ
+0x9CE28E: mov     ecx, [ebp-10h]
+0x9CE291: add     ecx, 30h ; '0'
+0x9CE294: jmp     j_??1?$NiTPointerList@V?$NiPointer@VBSRenderedTexture@@@@@@UAE@XZ
+0x9CE299: mov     ecx, [ebp-10h]
+0x9CE29C: add     ecx, 40h ; '@'; slot
+0x9CE29F: jmp     NiPointerSlot_Release
+0x9CE2A4: mov     ecx, [ebp-10h]
+0x9CE2A7: add     ecx, 44h ; 'D'; slot
+0x9CE2AA: jmp     NiPointerSlot_Release
+0x9CE2AF: mov     edx, [esp+arg_4]
+0x9CE2B3: lea     eax, [edx-18h]
+0x9CE2B6: mov     ecx, [edx-1Ch]
+0x9CE2B9: xor     ecx, eax
+0x9CE2BB: call    @__security_check_cookie@4
+0x9CE2C0: mov     eax, offset stru_AF7298
+0x9CE2C5: jmp     ___CxxFrameHandler3

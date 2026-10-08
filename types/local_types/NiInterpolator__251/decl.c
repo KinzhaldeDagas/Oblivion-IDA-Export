@@ -1,1 +1,1 @@
-NiInterpolator
+struct NiInterpolator;

@@ -45,10 +45,10 @@
 0x678714: cmp     dword ptr [esi+58h], 0
 0x678718: jz      short loc_67873E
 0x67871A: mov     ecx, esi; this
-0x67871C: call    Actor__GetProcessLevel
+0x67871C: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x678721: push    eax
 0x678722: push    esi
-0x678723: mov     ecx, offset ActorProcessManager_ptr
+0x678723: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x678728: call    sub_674550
 0x67872D: mov     ecx, esi
 0x67872F: call    sub_659BC0

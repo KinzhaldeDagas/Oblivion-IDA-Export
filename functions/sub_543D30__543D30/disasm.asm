@@ -1,4 +1,4 @@
-0x543D30: push    0FFFFFFFFh
+0x543D30: push    0FFFFFFFFh; Allocates a NiNode, stores it as the sky-object root with refcount ownership, sets flags 0x2 and 0x20, and attaches it to the supplied parent through virtual slot +0x84.
 0x543D32: push    offset ??0bhkBallAndSocketConstraint@@QAE@XZ_SEH
 0x543D37: mov     eax, large fs:0
 0x543D3D: push    eax
@@ -68,3 +68,15 @@
 0x543DF4: pop     ebx
 0x543DF5: add     esp, 10h
 0x543DF8: retn    4
+0x9CA420: mov     eax, [ebp-10h]
+0x9CA423: push    eax
+0x9CA424: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA429: pop     ecx
+0x9CA42A: retn
+0x9CA42B: mov     edx, [esp+arg_4]
+0x9CA42F: lea     eax, [edx-10h]
+0x9CA432: mov     ecx, [edx-14h]
+0x9CA435: xor     ecx, eax
+0x9CA437: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA43C: mov     eax, offset stru_AF2B24
+0x9CA441: jmp     ___CxxFrameHandler3

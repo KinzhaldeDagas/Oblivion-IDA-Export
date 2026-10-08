@@ -11,7 +11,7 @@
 0x66E969: lea     eax, [esp+1Ch+var_C]
 0x66E96D: mov     large fs:0, eax
 0x66E973: mov     edi, ecx
-0x66E975: call    TESObjectREFR__GetNiNode
+0x66E975: call    TESObjectREFR__GetNiNode; ODismemberment: TESObjectREFR::GetNiNode; runtime primitive starts from actor 3D and toggles prepared ODISMEMBER_* nodes.
 0x66E97A: mov     esi, eax
 0x66E97C: test    esi, esi
 0x66E97E: jz      short loc_66E9F8
@@ -24,9 +24,9 @@
 0x66E992: jp      short loc_66E99B
 0x66E994: call    sub_6FFAC0
 0x66E999: jmp     short loc_66E9F8
-0x66E99B: call    NiObjectNET_GetExtraData
+0x66E99B: call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.
 0x66E9A0: push    eax
-0x66E9A1: push    offset dword_B35294
+0x66E9A1: push    0B35294h
 0x66E9A6: call    NiRTTI_Cast
 0x66E9AB: add     esp, 8
 0x66E9AE: test    eax, eax
@@ -51,7 +51,7 @@
 0x66E9E8: push    eax
 0x66E9E9: mov     ecx, esi
 0x66E9EB: mov     [esp+20h+var_4], 0FFFFFFFFh
-0x66E9F3: call    NiNode_AddNiExtraData
+0x66E9F3: call    NiObjectNET_AddExtraData; Pass269 ABI and ownership proof: NiObjectNET::AddExtraData consumes one stack argument with RET 4 and also expects owning object in ECX/EBX at this build's callsites. The plugin wrapper must not execute caller-side ADD ESP,4.
 0x66E9F8: mov     esi, [edi+5D0h]
 0x66E9FE: test    esi, esi
 0x66EA00: jz      loc_66EAB0
@@ -61,7 +61,7 @@
 0x66EA0D: call    edx
 0x66EA0F: test    eax, eax
 0x66EA11: jz      short loc_66EA21
-0x66EA13: cmp     eax, offset dword_B3FAB0
+0x66EA13: cmp     eax, offset parent
 0x66EA18: jz      short loc_66EA51
 0x66EA1A: mov     eax, [eax+4]
 0x66EA1D: test    eax, eax
@@ -79,14 +79,14 @@
 0x66EA3B: fnstsw  ax
 0x66EA3D: test    ah, 41h
 0x66EA40: jp      short loc_66EA55
-0x66EA42: call    NiNode_GetNiPropertyByID
+0x66EA42: call    NiNode_GetNiPropertyByID;
 0x66EA47: push    eax
 0x66EA48: mov     ecx, esi
 0x66EA4A: call    sub_4A1220
 0x66EA4F: jmp     short loc_66EA98
 0x66EA51: mov     al, 1
 0x66EA53: jmp     short loc_66EA23
-0x66EA55: call    NiNode_GetNiPropertyByID
+0x66EA55: call    NiNode_GetNiPropertyByID;
 0x66EA5A: test    eax, eax
 0x66EA5C: jnz     short loc_66EA9F
 0x66EA5E: push    1Ch; Size
@@ -96,17 +96,17 @@
 0x66EA6C: test    eax, eax
 0x66EA6E: mov     [esp+1Ch+var_4], 1
 0x66EA76: jz      short loc_66EA81
-0x66EA78: mov     ecx, eax
-0x66EA7A: call    sub_47F920
+0x66EA78: mov     ecx, eax; this
+0x66EA7A: call    NiAlphaProperty_ctor; Constructs a 0x1C NiAlphaProperty over NiObjectNET: installs NiAlphaProperty vtable, initializes flags to 0x00EC and threshold byte to 0.
 0x66EA7F: jmp     short loc_66EA83
 0x66EA81: xor     eax, eax
 0x66EA83: or      word ptr [eax+18h], 1
 0x66EA88: push    eax; a2
 0x66EA89: mov     ecx, esi; this
 0x66EA8B: mov     [esp+20h+var_4], 0FFFFFFFFh
-0x66EA93: call    sub_405680
+0x66EA93: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x66EA98: mov     ecx, esi; this
-0x66EA9A: call    NiAVObject_InitializePropertyState
+0x66EA9A: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x66EA9F: fld     [esp+1Ch+arg_0]
 0x66EAA3: push    ecx
 0x66EAA4: fstp    [esp+20h+var_20]; float
@@ -120,3 +120,20 @@
 0x66EABD: pop     esi
 0x66EABE: add     esp, 10h
 0x66EAC1: retn    4
+0x9D00B0: mov     eax, [ebp-10h]
+0x9D00B3: push    eax
+0x9D00B4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D00B9: pop     ecx
+0x9D00BA: retn
+0x9D00BB: mov     eax, [ebp-10h]
+0x9D00BE: push    eax
+0x9D00BF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D00C4: pop     ecx
+0x9D00C5: retn
+0x9D00C6: mov     edx, [esp+arg_4]
+0x9D00CA: lea     eax, [edx-0Ch]
+0x9D00CD: mov     ecx, [edx-10h]
+0x9D00D0: xor     ecx, eax
+0x9D00D2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D00D7: mov     eax, offset stru_AF8B40
+0x9D00DC: jmp     ___CxxFrameHandler3

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x60CD70",
-    "line": "fld     dword ptr ds:0B33E9Ch",
+    "line": "fld     dword ptr ds:0B33E9Ch; ArrowProjectile virtual update wrapper. It ignores the supplied update argument and feeds the current global frame delta to ArrowProjectile_UpdateFlightAndLifecycle.",
     "mnemonic": "fld",
     "size": 6
   },
@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x60CD77",
-    "line": "fstp    [esp+4+var_4]; float",
+    "line": "fstp    [esp+4+deltaTime]; deltaTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x60CD7A",
-    "line": "call    sub_60C170",
+    "line": "call    ArrowProjectile_UpdateFlightAndLifecycle; Projectile lifecycle/settling state machine never replaces the AMMO base assigned by construction. A later ordinary pickup therefore remains reference-based AMMO recovery.",
     "mnemonic": "call",
     "size": 5
   },

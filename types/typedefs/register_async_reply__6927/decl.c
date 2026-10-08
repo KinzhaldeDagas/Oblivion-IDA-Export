@@ -1,1 +1,4 @@
-register_async_reply
+struct register_async_reply
+{
+reply_header __header;
+};

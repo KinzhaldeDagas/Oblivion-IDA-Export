@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x6DAECB",
-    "line": "lea     edi, [esp+0F8h+var_AC]",
+    "line": "lea     edi, [esp+0F8h+right]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x6DAF2F",
-    "line": "lea     edx, [esp+100h+var_B8]",
+    "line": "lea     edx, [esp+100h+other]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x6DAF34",
-    "line": "lea     edx, [esp+104h+var_88]",
+    "line": "lea     edx, [esp+104h+rhs]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x6DAFE1",
-    "line": "lea     eax, [esp+100h+var_B8]",
+    "line": "lea     eax, [esp+100h+other]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x6DAFEC",
-    "line": "lea     ecx, [esp+104h+var_C4]",
+    "line": "lea     ecx, [esp+104h+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -739,7 +739,7 @@
   },
   {
     "ea": "0x6DB03F",
-    "line": "lea     ecx, [esp+104h+var_C4]",
+    "line": "lea     ecx, [esp+104h+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -883,7 +883,7 @@
   },
   {
     "ea": "0x6DB081",
-    "line": "lea     eax, [esp+100h+var_B8]",
+    "line": "lea     eax, [esp+100h+other]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -949,7 +949,7 @@
   },
   {
     "ea": "0x6DB0A3",
-    "line": "mov     [esp+0F8h+var_B8], edx",
+    "line": "mov     [esp+0F8h+other.x], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -961,7 +961,7 @@
   },
   {
     "ea": "0x6DB0AA",
-    "line": "mov     [esp+0F8h+var_B4], ecx",
+    "line": "mov     [esp+0F8h+other.y], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -973,19 +973,19 @@
   },
   {
     "ea": "0x6DB0B1",
-    "line": "lea     ecx, [esp+0F8h+var_B8]",
+    "line": "lea     ecx, [esp+0F8h+other]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6DB0B5",
-    "line": "mov     [esp+0F8h+var_B0], edx",
+    "line": "mov     [esp+0F8h+other.z], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6DB0B9",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1003,7 +1003,7 @@
   },
   {
     "ea": "0x6DB0C4",
-    "line": "lea     eax, [esp+0F8h+var_B8]",
+    "line": "lea     eax, [esp+0F8h+other]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1015,7 +1015,7 @@
   },
   {
     "ea": "0x6DB0CC",
-    "line": "push    eax",
+    "line": "push    eax; other",
     "mnemonic": "push",
     "size": 1
   },
@@ -1039,13 +1039,13 @@
   },
   {
     "ea": "0x6DB0DC",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6DB0DD",
-    "line": "lea     ecx, [esp+100h+var_88]",
+    "line": "lea     ecx, [esp+100h+rhs]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1063,7 +1063,7 @@
   },
   {
     "ea": "0x6DB0E7",
-    "line": "call    sub_498FE0",
+    "line": "call    NiPoint3_CrossProduct",
     "mnemonic": "call",
     "size": 5
   },
@@ -1279,7 +1279,7 @@
   },
   {
     "ea": "0x6DB16F",
-    "line": "lea     edx, [esp+100h+var_B8]",
+    "line": "lea     edx, [esp+100h+other]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1303,7 +1303,7 @@
   },
   {
     "ea": "0x6DB17A",
-    "line": "lea     eax, [esp+104h+var_C4]",
+    "line": "lea     eax, [esp+104h+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1453,7 +1453,7 @@
   },
   {
     "ea": "0x6DB1C0",
-    "line": "lea     eax, [esp+104h+var_C4]",
+    "line": "lea     eax, [esp+104h+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1627,7 +1627,7 @@
   },
   {
     "ea": "0x6DB211",
-    "line": "lea     edx, [esp+100h+var_B8]",
+    "line": "lea     edx, [esp+100h+other]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1693,7 +1693,7 @@
   },
   {
     "ea": "0x6DB233",
-    "line": "mov     [esp+0F8h+var_B8], ecx",
+    "line": "mov     [esp+0F8h+other.x], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1705,7 +1705,7 @@
   },
   {
     "ea": "0x6DB23A",
-    "line": "mov     [esp+0F8h+var_B4], edx",
+    "line": "mov     [esp+0F8h+other.y], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1717,19 +1717,19 @@
   },
   {
     "ea": "0x6DB241",
-    "line": "lea     ecx, [esp+0F8h+var_B8]",
+    "line": "lea     ecx, [esp+0F8h+other]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6DB245",
-    "line": "mov     [esp+0F8h+var_B0], eax",
+    "line": "mov     [esp+0F8h+other.z], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6DB249",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1747,7 +1747,7 @@
   },
   {
     "ea": "0x6DB254",
-    "line": "lea     ecx, [esp+0F8h+var_B8]",
+    "line": "lea     ecx, [esp+0F8h+other]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1759,7 +1759,7 @@
   },
   {
     "ea": "0x6DB25C",
-    "line": "push    ecx",
+    "line": "push    ecx; other",
     "mnemonic": "push",
     "size": 1
   },
@@ -1783,13 +1783,13 @@
   },
   {
     "ea": "0x6DB26C",
-    "line": "push    edx",
+    "line": "push    edx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6DB26D",
-    "line": "lea     ecx, [esp+100h+var_88]",
+    "line": "lea     ecx, [esp+100h+rhs]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1807,7 +1807,7 @@
   },
   {
     "ea": "0x6DB277",
-    "line": "call    sub_498FE0",
+    "line": "call    NiPoint3_CrossProduct",
     "mnemonic": "call",
     "size": 5
   },
@@ -1867,43 +1867,43 @@
   },
   {
     "ea": "0x6DB29C",
-    "line": "fld     [esp+0F8h+var_88]",
+    "line": "fld     [esp+0F8h+rhs.x]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x6DB2A0",
-    "line": "fst     [esp+0F8h+var_AC]",
+    "line": "fst     [esp+0F8h+right.data]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x6DB2A4",
-    "line": "fld     [esp+0F8h+var_84]",
+    "line": "fld     [esp+0F8h+rhs.y]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x6DB2A8",
-    "line": "fst     [esp+0F8h+var_A0]",
+    "line": "fst     [esp+0F8h+right.data+0Ch]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x6DB2AC",
-    "line": "fld     [esp+0F8h+var_80]",
+    "line": "fld     [esp+0F8h+rhs.z]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x6DB2B0",
-    "line": "fst     [esp+0F8h+var_94]",
+    "line": "fst     [esp+0F8h+right.data+18h]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x6DB2B4",
-    "line": "fld     [esp+0F8h+var_B8]",
+    "line": "fld     [esp+0F8h+other.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1921,7 +1921,7 @@
   },
   {
     "ea": "0x6DB2BE",
-    "line": "fld     [esp+0F8h+var_B4]",
+    "line": "fld     [esp+0F8h+other.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1939,7 +1939,7 @@
   },
   {
     "ea": "0x6DB2C8",
-    "line": "fld     [esp+0F8h+var_B0]",
+    "line": "fld     [esp+0F8h+other.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1963,7 +1963,7 @@
   },
   {
     "ea": "0x6DB2D6",
-    "line": "fstp    [esp+0F8h+var_A8]",
+    "line": "fstp    [esp+0F8h+right.data+4]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1975,7 +1975,7 @@
   },
   {
     "ea": "0x6DB2DE",
-    "line": "fstp    [esp+0F8h+var_9C]",
+    "line": "fstp    [esp+0F8h+right.data+10h]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1987,7 +1987,7 @@
   },
   {
     "ea": "0x6DB2E6",
-    "line": "fstp    [esp+0F8h+var_90]",
+    "line": "fstp    [esp+0F8h+right.data+1Ch]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2053,7 +2053,7 @@
   },
   {
     "ea": "0x6DB312",
-    "line": "fstp    [esp+0F8h+var_A4]",
+    "line": "fstp    [esp+0F8h+right.data+8]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2065,7 +2065,7 @@
   },
   {
     "ea": "0x6DB31A",
-    "line": "fstp    [esp+0F8h+var_98]",
+    "line": "fstp    [esp+0F8h+right.data+14h]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2077,7 +2077,7 @@
   },
   {
     "ea": "0x6DB322",
-    "line": "fstp    [esp+0F8h+var_8C]",
+    "line": "fstp    [esp+0F8h+right.data+20h]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2119,7 +2119,7 @@
   },
   {
     "ea": "0x6DB33B",
-    "line": "lea     ecx, [esp+100h+var_B8]",
+    "line": "lea     ecx, [esp+100h+other]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2149,7 +2149,7 @@
   },
   {
     "ea": "0x6DB352",
-    "line": "lea     edx, [esp+104h+var_88]",
+    "line": "lea     edx, [esp+104h+rhs]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2209,7 +2209,7 @@
   },
   {
     "ea": "0x6DB367",
-    "line": "fld     [esp+118h+var_88]",
+    "line": "fld     [esp+118h+rhs.x]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -2221,103 +2221,103 @@
   },
   {
     "ea": "0x6DB371",
-    "line": "fstp    [esp+0F8h+var_AC]",
+    "line": "fstp    [esp+0F8h+right.data]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6DB375",
-    "line": "lea     edx, [esp+0F8h+var_88]",
+    "line": "lea     edx, [esp+0F8h+rhs]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6DB379",
-    "line": "fld     [esp+0F8h+var_84]",
+    "line": "fld     [esp+0F8h+rhs.y]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x6DB37D",
-    "line": "push    edx",
+    "line": "push    edx; rhs",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6DB37E",
-    "line": "fstp    [esp+0FCh+var_A0]",
+    "line": "fstp    [esp+0FCh+right.data+0Ch]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6DB382",
-    "line": "lea     eax, [esp+0FCh+var_C4]",
+    "line": "lea     eax, [esp+0FCh+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6DB386",
-    "line": "fld     [esp+0FCh+var_80]",
+    "line": "fld     [esp+0FCh+rhs.z]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x6DB38A",
-    "line": "push    eax",
+    "line": "push    eax; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6DB38B",
-    "line": "mov     ecx, offset dword_B258E8",
+    "line": "mov     ecx, offset rhs; this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x6DB390",
-    "line": "fstp    [esp+100h+var_94]",
+    "line": "fstp    [esp+100h+right.data+18h]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6DB394",
-    "line": "call    sub_4BF9E0",
+    "line": "call    NiPoint3__NormalizedCrossProduct; Computes and normalizes the cross product of two NiPoint3 vectors, returning zero for near-degenerate input. ShadowSceneLight uses it to construct an orthonormal shadow-camera basis.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6DB399",
-    "line": "fld     [esp+0F8h+var_C4]",
+    "line": "fld     [esp+0F8h+out.x]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x6DB39D",
-    "line": "fst     [esp+0F8h+var_A8]",
+    "line": "fst     [esp+0F8h+right.data+4]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x6DB3A1",
-    "line": "fld     [esp+0F8h+var_C0]",
+    "line": "fld     [esp+0F8h+out.y]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x6DB3A5",
-    "line": "fst     [esp+0F8h+var_9C]",
+    "line": "fst     [esp+0F8h+right.data+10h]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x6DB3A9",
-    "line": "fld     [esp+0F8h+var_BC]",
+    "line": "fld     [esp+0F8h+out.z]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x6DB3AD",
-    "line": "fst     [esp+0F8h+var_90]",
+    "line": "fst     [esp+0F8h+right.data+1Ch]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -2329,7 +2329,7 @@
   },
   {
     "ea": "0x6DB3B3",
-    "line": "fld     [esp+0F8h+var_84]",
+    "line": "fld     [esp+0F8h+rhs.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2353,7 +2353,7 @@
   },
   {
     "ea": "0x6DB3BD",
-    "line": "fld     [esp+0F8h+var_80]",
+    "line": "fld     [esp+0F8h+rhs.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2401,7 +2401,7 @@
   },
   {
     "ea": "0x6DB3D1",
-    "line": "fld     [esp+0F8h+var_88]",
+    "line": "fld     [esp+0F8h+rhs.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2497,7 +2497,7 @@
   },
   {
     "ea": "0x6DB3F9",
-    "line": "fstp    [esp+0F8h+var_A4]",
+    "line": "fstp    [esp+0F8h+right.data+8]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2509,7 +2509,7 @@
   },
   {
     "ea": "0x6DB401",
-    "line": "fstp    [esp+0F8h+var_98]",
+    "line": "fstp    [esp+0F8h+right.data+14h]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2521,7 +2521,7 @@
   },
   {
     "ea": "0x6DB409",
-    "line": "fstp    [esp+0F8h+var_8C]",
+    "line": "fstp    [esp+0F8h+right.data+20h]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2623,7 +2623,7 @@
   },
   {
     "ea": "0x6DB439",
-    "line": "fstp    [esp+0F8h+var_AC]",
+    "line": "fstp    [esp+0F8h+right.data]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2635,7 +2635,7 @@
   },
   {
     "ea": "0x6DB441",
-    "line": "fstp    [esp+0F8h+var_A0]",
+    "line": "fstp    [esp+0F8h+right.data+0Ch]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2647,13 +2647,13 @@
   },
   {
     "ea": "0x6DB449",
-    "line": "fstp    [esp+0F8h+var_94]",
+    "line": "fstp    [esp+0F8h+right.data+18h]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6DB44D",
-    "line": "fld     [esp+0F8h+var_A8]",
+    "line": "fld     [esp+0F8h+right.data+4]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2671,7 +2671,7 @@
   },
   {
     "ea": "0x6DB457",
-    "line": "fld     [esp+0F8h+var_9C]",
+    "line": "fld     [esp+0F8h+right.data+10h]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2689,7 +2689,7 @@
   },
   {
     "ea": "0x6DB461",
-    "line": "fld     [esp+0F8h+var_90]",
+    "line": "fld     [esp+0F8h+right.data+1Ch]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2713,7 +2713,7 @@
   },
   {
     "ea": "0x6DB46F",
-    "line": "fstp    [esp+0F8h+var_A8]",
+    "line": "fstp    [esp+0F8h+right.data+4]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2725,7 +2725,7 @@
   },
   {
     "ea": "0x6DB477",
-    "line": "fstp    [esp+0F8h+var_9C]",
+    "line": "fstp    [esp+0F8h+right.data+10h]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2737,7 +2737,7 @@
   },
   {
     "ea": "0x6DB47F",
-    "line": "fstp    [esp+0F8h+var_90]",
+    "line": "fstp    [esp+0F8h+right.data+1Ch]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2773,7 +2773,7 @@
   },
   {
     "ea": "0x6DB495",
-    "line": "fld     [esp+0F8h+var_AC]",
+    "line": "fld     [esp+0F8h+right.data]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2785,7 +2785,7 @@
   },
   {
     "ea": "0x6DB49D",
-    "line": "fld     [esp+0F8h+var_A0]",
+    "line": "fld     [esp+0F8h+right.data+0Ch]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2797,7 +2797,7 @@
   },
   {
     "ea": "0x6DB4A5",
-    "line": "fld     [esp+0F8h+var_94]",
+    "line": "fld     [esp+0F8h+right.data+18h]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2809,7 +2809,7 @@
   },
   {
     "ea": "0x6DB4AD",
-    "line": "fld     [esp+0F8h+var_A4]",
+    "line": "fld     [esp+0F8h+right.data+8]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2821,13 +2821,13 @@
   },
   {
     "ea": "0x6DB4B3",
-    "line": "fstp    [esp+0F8h+var_C4]",
+    "line": "fstp    [esp+0F8h+out.x]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6DB4B7",
-    "line": "fld     [esp+0F8h+var_98]",
+    "line": "fld     [esp+0F8h+right.data+14h]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2839,13 +2839,13 @@
   },
   {
     "ea": "0x6DB4BD",
-    "line": "fstp    [esp+0F8h+var_C0]",
+    "line": "fstp    [esp+0F8h+out.y]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6DB4C1",
-    "line": "fld     [esp+0F8h+var_8C]",
+    "line": "fld     [esp+0F8h+right.data+20h]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2857,43 +2857,43 @@
   },
   {
     "ea": "0x6DB4C7",
-    "line": "fstp    [esp+0F8h+var_BC]",
+    "line": "fstp    [esp+0F8h+out.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6DB4CB",
-    "line": "fld     [esp+0F8h+var_C4]",
+    "line": "fld     [esp+0F8h+out.x]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x6DB4CF",
-    "line": "fstp    [esp+0F8h+var_AC]",
+    "line": "fstp    [esp+0F8h+right.data]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6DB4D3",
-    "line": "fld     [esp+0F8h+var_C0]",
+    "line": "fld     [esp+0F8h+out.y]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x6DB4D7",
-    "line": "fstp    [esp+0F8h+var_A0]",
+    "line": "fstp    [esp+0F8h+right.data+0Ch]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6DB4DB",
-    "line": "fld     [esp+0F8h+var_BC]",
+    "line": "fld     [esp+0F8h+out.z]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x6DB4DF",
-    "line": "fstp    [esp+0F8h+var_94]",
+    "line": "fstp    [esp+0F8h+right.data+18h]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2905,7 +2905,7 @@
   },
   {
     "ea": "0x6DB4E7",
-    "line": "fstp    [esp+0F8h+var_A4]",
+    "line": "fstp    [esp+0F8h+right.data+8]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2917,7 +2917,7 @@
   },
   {
     "ea": "0x6DB4EF",
-    "line": "fstp    [esp+0F8h+var_98]",
+    "line": "fstp    [esp+0F8h+right.data+14h]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2929,7 +2929,7 @@
   },
   {
     "ea": "0x6DB4F7",
-    "line": "fstp    [esp+0F8h+var_8C]",
+    "line": "fstp    [esp+0F8h+right.data+20h]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2941,7 +2941,7 @@
   },
   {
     "ea": "0x6DB4FD",
-    "line": "fld     [esp+0F8h+var_AC]",
+    "line": "fld     [esp+0F8h+right.data]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2953,7 +2953,7 @@
   },
   {
     "ea": "0x6DB505",
-    "line": "fld     [esp+0F8h+var_A0]",
+    "line": "fld     [esp+0F8h+right.data+0Ch]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2965,7 +2965,7 @@
   },
   {
     "ea": "0x6DB50D",
-    "line": "fld     [esp+0F8h+var_94]",
+    "line": "fld     [esp+0F8h+right.data+18h]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2977,7 +2977,7 @@
   },
   {
     "ea": "0x6DB515",
-    "line": "fld     [esp+0F8h+var_A8]",
+    "line": "fld     [esp+0F8h+right.data+4]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2989,13 +2989,13 @@
   },
   {
     "ea": "0x6DB51B",
-    "line": "fstp    [esp+0F8h+var_C4]",
+    "line": "fstp    [esp+0F8h+out.x]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6DB51F",
-    "line": "fld     [esp+0F8h+var_9C]",
+    "line": "fld     [esp+0F8h+right.data+10h]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3007,13 +3007,13 @@
   },
   {
     "ea": "0x6DB525",
-    "line": "fstp    [esp+0F8h+var_C0]",
+    "line": "fstp    [esp+0F8h+out.y]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6DB529",
-    "line": "fld     [esp+0F8h+var_90]",
+    "line": "fld     [esp+0F8h+right.data+1Ch]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3025,43 +3025,43 @@
   },
   {
     "ea": "0x6DB52F",
-    "line": "fstp    [esp+0F8h+var_BC]",
+    "line": "fstp    [esp+0F8h+out.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6DB533",
-    "line": "fld     [esp+0F8h+var_C4]",
+    "line": "fld     [esp+0F8h+out.x]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x6DB537",
-    "line": "fstp    [esp+0F8h+var_AC]",
+    "line": "fstp    [esp+0F8h+right.data]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6DB53B",
-    "line": "fld     [esp+0F8h+var_C0]",
+    "line": "fld     [esp+0F8h+out.y]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x6DB53F",
-    "line": "fstp    [esp+0F8h+var_A0]",
+    "line": "fstp    [esp+0F8h+right.data+0Ch]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6DB543",
-    "line": "fld     [esp+0F8h+var_BC]",
+    "line": "fld     [esp+0F8h+out.z]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x6DB547",
-    "line": "fstp    [esp+0F8h+var_94]",
+    "line": "fstp    [esp+0F8h+right.data+18h]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -3073,7 +3073,7 @@
   },
   {
     "ea": "0x6DB54F",
-    "line": "fstp    [esp+0F8h+var_A8]",
+    "line": "fstp    [esp+0F8h+right.data+4]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -3085,7 +3085,7 @@
   },
   {
     "ea": "0x6DB557",
-    "line": "fstp    [esp+0F8h+var_9C]",
+    "line": "fstp    [esp+0F8h+right.data+10h]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -3097,7 +3097,7 @@
   },
   {
     "ea": "0x6DB55F",
-    "line": "fstp    [esp+0F8h+var_90]",
+    "line": "fstp    [esp+0F8h+right.data+1Ch]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -3283,19 +3283,19 @@
   },
   {
     "ea": "0x6DB5DB",
-    "line": "fld     [esp+0F8h+var_84]",
+    "line": "fld     [esp+0F8h+rhs.y]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x6DB5DF",
-    "line": "fld     [esp+0F8h+var_88]",
+    "line": "fld     [esp+0F8h+rhs.x]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x6DB5E3",
-    "line": "fld     [esp+0F8h+var_80]",
+    "line": "fld     [esp+0F8h+rhs.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3367,13 +3367,13 @@
   },
   {
     "ea": "0x6DB60F",
-    "line": "lea     eax, [esp+0F8h+var_AC]",
+    "line": "lea     eax, [esp+0F8h+right]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6DB613",
-    "line": "push    eax",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
@@ -3385,19 +3385,19 @@
   },
   {
     "ea": "0x6DB61B",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6DB61C",
-    "line": "lea     ecx, [esp+100h+var_48]",
+    "line": "lea     ecx, [esp+100h+var_48]; this",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x6DB623",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3415,7 +3415,7 @@
   },
   {
     "ea": "0x6DB62F",
-    "line": "lea     edi, [esp+0F8h+var_AC]",
+    "line": "lea     edi, [esp+0F8h+right]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3475,7 +3475,7 @@
   },
   {
     "ea": "0x6DB64D",
-    "line": "lea     esi, [esp+0F8h+var_AC]",
+    "line": "lea     esi, [esp+0F8h+right]",
     "mnemonic": "lea",
     "size": 4
   },

@@ -1,4 +1,5 @@
-bhkRefObject *__cdecl sub_8AFDC0(float a1, float a2)
+// [Collision research 2026-10-07] Native trunk factory descriptor:8A5790 init,filter40009 at+0/+20,shape+4/+24,mass+B0=0,friction+BC=A3F424,motion+D0=7,material9;ctor533290 wrapper1C. Captured by native instruction emulation in out/collision_full_v144/native_body_oracle.json. Extra solid-body prototype discarded after user clarified existing authored tree contact works. v144 does not add extra solids.
+bhkRefObject *__cdecl BSTreeModel_CreateTrunkCapsuleShape(float trunkLength, float radius)
 {
   double v2; // st6
   double v3; // st4
@@ -9,73 +10,64 @@ bhkRefObject *__cdecl sub_8AFDC0(float a1, float a2)
   bhkRefObject *v8; // esi
   int v9; // ecx
   float v11; // [esp+10h] [ebp-134h]
-  int v12; // [esp+14h] [ebp-130h] BYREF
-  float v13; // [esp+18h] [ebp-12Ch]
-  float v14; // [esp+24h] [ebp-120h]
-  float v15; // [esp+28h] [ebp-11Ch]
-  float v16; // [esp+2Ch] [ebp-118h]
-  float v17; // [esp+30h] [ebp-114h]
-  float v18; // [esp+34h] [ebp-110h]
-  float v19; // [esp+38h] [ebp-10Ch]
-  float v20; // [esp+3Ch] [ebp-108h]
-  float v21; // [esp+40h] [ebp-104h]
-  float v22[5]; // [esp+44h] [ebp-100h] BYREF
-  int v23; // [esp+58h] [ebp-ECh]
-  int v24; // [esp+64h] [ebp-E0h]
-  float v25; // [esp+68h] [ebp-DCh]
-  float v26; // [esp+F4h] [ebp-50h]
-  float v27; // [esp+100h] [ebp-44h]
-  char v28; // [esp+114h] [ebp-30h]
-  int v29; // [esp+140h] [ebp-4h]
+  OB_CollisionCapsuleCinfo_010201A0 info; // [esp+14h] [ebp-130h] BYREF
+  float v13[5]; // [esp+44h] [ebp-100h] BYREF
+  int v14; // [esp+58h] [ebp-ECh]
+  int v15; // [esp+64h] [ebp-E0h]
+  float v16; // [esp+68h] [ebp-DCh]
+  float v17; // [esp+F4h] [ebp-50h]
+  float v18; // [esp+100h] [ebp-44h]
+  char v19; // [esp+114h] [ebp-30h]
+  int v20; // [esp+140h] [ebp-4h]
 
-  v17 = 0.0;
-  v12 = 0;
-  v21 = 0.0;
-  v2 = a2;
-  if ( a1 <= v2 + v2 )
-    a1 = v2 + v2 + dbl_A2F928;
-  v3 = hkFactor;
-  v13 = v2 * v3;
-  v14 = 0.0;
-  v15 = 0.0;
-  v11 = a1 - v2;
-  v16 = v3 * v11;
-  v18 = 0.0;
-  v19 = 0.0;
-  v20 = v13;
-  v4 = (bhkRefObject *)FormHeapAlloc(0x14u);
-  v29 = 0;
-  if ( v4 )
-    v5 = sub_563BB0(v4, (int)&v12);
+  info.endpointA[3] = 0.0; /*0x8afe03*/
+  info.material = 0; /*0x8afe07*/
+  info.endpointB[3] = 0.0; /*0x8afe0b*/
+  v2 = radius; /*0x8afe0f*/
+  if ( trunkLength <= v2 + v2 ) /*0x8afe20*/
+    trunkLength = v2 + v2 + dbl_A2F928; /*0x8afe28*/
+  v3 = hkFactor; /*0x8afe33*/
+  info.radius = v2 * v3; /*0x8afe3d*/
+  info.endpointA[0] = 0.0; /*0x8afe43*/
+  info.endpointA[1] = 0.0; /*0x8afe47*/
+  v11 = trunkLength - v2; /*0x8afe52*/
+  info.endpointA[2] = v3 * v11; /*0x8afe5e*/
+  info.endpointB[0] = 0.0; /*0x8afe62*/
+  info.endpointB[1] = 0.0; /*0x8afe66*/
+  info.endpointB[2] = info.radius; /*0x8afe6e*/
+  v4 = (bhkRefObject *)FormHeapAlloc(0x14u); /*0x8afe72*/
+  v20 = 0; /*0x8afe80*/
+  if ( v4 ) /*0x8afe87*/
+    v5 = OB_bhkCapsuleShape_CtorFromCinfo_010201A0(v4, &info); /*0x8afe95*/
   else
-    v5 = 0;
-  v29 = 0xFFFFFFFF;
-  if ( !v5 )
-    return 0;
-  v5[1].members.m_uiRefCount = 9;
-  sub_8A5790(v22);
-  v6 = *(float *)&v5->hkObject;
-  v26 = 0.0;
-  v27 = flt_A3F424;
-  v29 = 1;
-  v28 = 7;
-  LODWORD(v22[0]) = 0x40009;
-  v24 = 0x40009;
-  v22[1] = v6;
-  v25 = v6;
-  v7 = (bhkRefObject *)FormHeapAlloc(0x1Cu);
-  LOBYTE(v29) = 2;
-  if ( v7 )
-    v8 = sub_533290(v7, (int)v22);
+    v5 = 0; /*0x8afe99*/
+  v20 = 0xFFFFFFFF; /*0x8afe9d*/
+  if ( !v5 ) /*0x8afea8*/
+    return 0; /*0x8aff7a*/
+  v5[1].members.m_uiRefCount = 9; /*0x8afeb2*/
+  sub_8A5790(v13); /*0x8afeb9*/
+  v6 = *(float *)&v5->hkObject; /*0x8afec0*/
+  v17 = 0.0; /*0x8afec3*/
+  v18 = flt_A3F424; /*0x8afed7*/
+  v20 = 1; /*0x8afede*/
+  v19 = 7; /*0x8afee9*/
+  LODWORD(v13[0]) = 0x40009; /*0x8afef1*/
+  v15 = 0x40009; /*0x8afef5*/
+  v13[1] = v6; /*0x8afef9*/
+  v16 = v6; /*0x8afefd*/
+  v7 = (bhkRefObject *)FormHeapAlloc(0x1Cu); /*0x8aff01*/
+  LOBYTE(v20) = 2; /*0x8aff0f*/
+  if ( v7 ) /*0x8aff17*/
+    v8 = sub_533290(v7, (int)v13); /*0x8aff25*/
   else
-    v8 = 0;
-  v29 = 0xFFFFFFFF;
-  if ( v23 >= 0 )
+    v8 = 0; /*0x8aff29*/
+  v20 = 0xFFFFFFFF; /*0x8aff31*/
+  if ( v14 >= 0 ) /*0x8aff3c*/
   {
-    v9 = *(_DWORD *)(*((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + TlsIndex) + 0x19C);
-    if ( !v9 )
-      v9 = dword_BA7D9C;
-    sub_8A75D0(v9, (_DWORD *)LODWORD(v22[3]), 8 * v23, 0x14);
+    v9 = *(_DWORD *)(*((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + MEMORY[0xBA9DE4]) + 0x19C); /*0x8aff4e*/
+    if ( !v9 ) /*0x8aff56*/
+      v9 = unk_BA7D9C; /*0x8aff58*/
+    sub_8A75D0(v9, (_DWORD *)LODWORD(v13[3]), 8 * v14, 0x14); /*0x8aff71*/
   }
-  return v8;
+  return v8; /*0x8aff7c*/
 }

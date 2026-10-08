@@ -1,21 +1,22 @@
-void __thiscall sub_4A2E90(int **this)
+// Verified: clears TESRegion.cachedWeather +0x24, finds region-data ID 3, casts to TESRegionDataWeather, performs Oblivion weighted TESWeather selection, and stores result at +0x24.
+void __thiscall TESRegion_RefreshCachedWeather(TESRegion *this)
 {
-  int *v2; // ecx
-  void *v3; // eax
-  _DWORD *v4; // eax
+  TESRegionDataList *dataList; // ecx
+  TESRegionData *DataByID; // eax
+  OblivionTESWeatherList *v4; // eax
 
-  v2 = *(this + 6);
-  *(this + 9) = 0;
-  if ( v2 )
+  dataList = this->dataList; /*0x4a2e93*/
+  this->cachedWeather = 0; /*0x4a2e98*/
+  if ( dataList ) /*0x4a2e9f*/
   {
-    v3 = (void *)sub_4A4460(v2, 3);
-    v4 = OblivionDynamicCast(
-           v3,
-           0,
-           (struct _s_RTTICompleteObjectLocator *)&TESRegionData `RTTI Type Descriptor',
-           &TESRegionDataWeather `RTTI Type Descriptor',
-           0);
-    if ( v4 )
-      *(this + 9) = (int *)sub_4EECE0(v4 + 2);
+    DataByID = TESRegion_FindDataByID(dataList, 3);// Exterior fog source: retrieves region data type 3 before TESRegionDataWeather cast. /*0x4a2eb1*/
+    v4 = (OblivionTESWeatherList *)OblivionDynamicCast( /*0x4a2eb7*/
+                                     DataByID,
+                                     0,
+                                     (struct _s_RTTICompleteObjectLocator *)&TESRegionData `RTTI Type Descriptor',
+                                     &TESRegionDataWeather `RTTI Type Descriptor',
+                                     0);        // Exterior fog source: casts region data to TESRegionDataWeather.
+    if ( v4 ) /*0x4a2ec1*/
+      this->cachedWeather = OblivionTESWeatherList_SelectWeightedWeather(v4 + 1);// Verified: TESRegion_RefreshCachedWeather selects a weighted TESWeather from region data ID 3 and stores it in TESRegion cached weather field at +0x24; Sky may use this as current weather override. /*0x4a2ecb*/
   }
 }

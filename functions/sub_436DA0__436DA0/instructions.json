@@ -109,19 +109,19 @@
   },
   {
     "ea": "0x436DCB",
-    "line": "push    edi; Str",
+    "line": "push    edi; modelPath",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x436DCC",
-    "line": "push    eax; int",
+    "line": "push    eax; sequence",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x436DCD",
-    "line": "call    sub_51B490",
+    "line": "call    TESAnimGroup_ParseKFModel; Authoritative Oblivion KF-to-TESAnimGroup parser. Consumes a NiControllerSequence and model path, resolves the fixed 43-group table, encodes filename movement/weapon prefixes, parses required action notes plus m:/Blend:/Sound:/Enum:, builds the +0x24/+0x28 event array, validates required-note ordering, and returns the constructed TESAnimGroup. Native scheduling uses each KF's authored note times; it does not impose fixed Hit timestamps. External StarShooting contrast after this native decode: deployed AttackLeft/AttackRight files instantiate class 4 as Start, Hit, a:R/a:L, End; TES3 Shoot Follow Attach is motion-only and not an Oblivion scheduler phase. The current CAS manifest applies groups 17/18/20/21 by broad weapon-name substrings Star/Throwing/Dart (12 rules over 8 files), so unrelated names can match. Its lightweight package validator checks only first/last Start/End and would not catch missing class-4 Hit/a: notes; the older six-file import log is stale.",
     "mnemonic": "call",
     "size": 5
   },

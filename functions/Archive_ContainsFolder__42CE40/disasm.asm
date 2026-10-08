@@ -91,10 +91,10 @@
 0x42CF80: mov     ecx, edi
 0x42CF82: call    Archive_LoadFolderNames
 0x42CF87: mov     esi, eax
-0x42CF89: lea     eax, [esp+130h+Dir]
-0x42CF8D: push    eax; Str2
-0x42CF8E: push    esi; Str1
-0x42CF8F: call    __strcmp
+0x42CF89: lea     eax, [esp+130h+Dir]; MEF v39 caller proof: Archive_ContainsFolder passes Archive_LoadFolderNames result directly to strcmp without null check.
+0x42CF8D: push    eax; right
+0x42CF8E: push    esi; left
+0x42CF8F: call    CRT_StricmpLocaleDispatch
 0x42CF94: add     esp, 8
 0x42CF97: test    eax, eax
 0x42CF99: jz      short loc_42CFB3

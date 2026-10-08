@@ -19,19 +19,19 @@
 0x5DCDA7: fild    [esp+8+arg_0]
 0x5DCDAB: push    ecx
 0x5DCDAC: mov     ecx, eax; this
-0x5DCDAE: fstp    [esp+0Ch+a2]; a3
-0x5DCDB1: push    0FAEh; a2
-0x5DCDB6: call    Tile_SetFloat
+0x5DCDAE: fstp    [esp+0Ch+a2]; value
+0x5DCDB1: push    0FAEh; propertyCode
+0x5DCDB6: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5DCDBB: push    1; arg1
 0x5DCDBD: push    0; canCreate
 0x5DCDBF: call    InterfaceManager_GetSingleton
 0x5DCDC4: fld1
 0x5DCDC6: add     esp, 4
-0x5DCDC9: fstp    [esp+0Ch+a2]; a3
+0x5DCDC9: fstp    [esp+0Ch+a2]; value
 0x5DCDCC: mov     [eax+0Ah], bl
 0x5DCDCF: mov     ecx, [edi+54h]; this
-0x5DCDD2: push    0FA1h; a2
-0x5DCDD7: call    Tile_SetFloat
+0x5DCDD2: push    0FA1h; propertyCode
+0x5DCDD7: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5DCDDC: mov     ecx, ds:0B33B00h
 0x5DCDE2: call    sub_45A500
 0x5DCDE7: test    al, al
@@ -63,7 +63,7 @@
 0x5DCE2D: retn    8
 0x5DCE30: push    0FFFFFFFFh
 0x5DCE32: mov     ecx, edi
-0x5DCE34: call    sub_5DA1A0
+0x5DCE34: call    StatsMenu_UpdateAttributesAndSkills; Full refresh (actorValue == -1) scans exactly 21 native Oblivion skills, counts strict TESClass major matches, publishes that count to the Stats XML, and orders major rows before one optional separator and all non-major rows. A targeted refresh updates only the requested native actor value and does not reorder rows.
 0x5DCE39: pop     edi
 0x5DCE3A: pop     ebx
 0x5DCE3B: retn    8
@@ -75,7 +75,7 @@
 0x5DCE4F: push    esi; a3
 0x5DCE50: push    0FAEh
 0x5DCE55: call    Tile_GetFloat
-0x5DCE5A: call    Double_To_SInt32
+0x5DCE5A: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5DCE5F: cmp     ebx, 8
 0x5DCE62: mov     esi, eax
 0x5DCE64: jnz     short loc_5DCE6B
@@ -94,9 +94,9 @@
 0x5DCE8C: fild    [esp+0Ch+arg_0]
 0x5DCE90: push    ecx
 0x5DCE91: mov     ecx, [edi+4]; this
-0x5DCE94: fstp    [esp+10h+var_10]; a3
-0x5DCE97: push    0FAEh; a2
-0x5DCE9C: call    Tile_SetFloat
+0x5DCE94: fstp    [esp+10h+var_10]; value
+0x5DCE97: push    0FAEh; propertyCode
+0x5DCE9C: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5DCEA1: cmp     esi, 1
 0x5DCEA4: jnz     short loc_5DCEB3
 0x5DCEA6: mov     ecx, edi
@@ -127,7 +127,7 @@
 0x5DCEDE: retn    8
 0x5DCEE1: push    0FFFFFFFFh
 0x5DCEE3: mov     ecx, edi
-0x5DCEE5: call    sub_5DA1A0
+0x5DCEE5: call    StatsMenu_UpdateAttributesAndSkills; Full refresh (actorValue == -1) scans exactly 21 native Oblivion skills, counts strict TESClass major matches, publishes that count to the Stats XML, and orders major rows before one optional separator and all non-major rows. A targeted refresh updates only the requested native actor value and does not reorder rows.
 0x5DCEEA: pop     esi
 0x5DCEEB: pop     edi
 0x5DCEEC: pop     ebx

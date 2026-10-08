@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x60A210",
-    "line": "push    esi",
+    "line": "push    esi; ArrowProjectile scalar deleting destructor. Runs the complete destructor and frees this when deleteFlags bit 0 is set.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x60A213",
-    "line": "call    sub_608B60",
+    "line": "call    ArrowProjectile_Destroy; ArrowProjectile complete destructor; releases projectile-owned state, then invokes MobileObject destruction and returns this.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x60A218",
-    "line": "test    [esp+4+arg_0], 1",
+    "line": "test    byte ptr [esp+4+deleteFlags], 1",
     "mnemonic": "test",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x60A220",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

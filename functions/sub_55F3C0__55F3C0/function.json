@@ -1,19 +1,36 @@
 {
-  "callees_count": 14,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
+  "callers_count": 7,
+  "chunks": [
+    [
+      "0x55F3C0",
+      "0x55F4B2"
+    ],
+    [
+      "0x9BD8A0",
+      "0x9BD8C6"
+    ]
+  ],
+  "chunks_sha256": "aae48c030d9905507e2237f91a2e46d2643e13319436efd86ec90c335abfb8e0",
+  "comment_regular": "LockFreeMap teardown/clear: drains thread-local manager and all buckets; callback vtable slot +0x20 releases keys before freeing nodes.",
+  "comment_repeatable": "LockFreeMap teardown/clear: drains thread-local manager and all buckets; callback vtable slot +0x20 releases keys before freeing nodes.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
   "display_name": "sub_55F3C0",
   "end_ea": "0x55F4B2",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_55F3C0",
   "segment": ".text",
   "sha256": "2b8a2c760d66a21508bd645a840d518fcddbf84575f7b704b3806d38834ad894",
   "size": 242,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x55F3C0",
+  "total_chunk_size": 280,
   "type": "void __thiscall(LockFreeMap *this, char a2)",
-  "xrefs_from_count": 97,
+  "xrefs_from_count": 111,
   "xrefs_to_count": 7
 }

@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
-  "callers_count": 25,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
+  "callers_count": 32,
+  "chunks": [
+    [
+      "0x7B8940",
+      "0x7B898E"
+    ]
+  ],
+  "chunks_sha256": "6ba27f1164406153b6af3179029bc9728f4ce57762f92b57ed5041e9e80fab40",
+  "comment_regular": "\n[2026-10-06] Return is the recursive helper return, ultimately shader UpdateInternalVars AL at 0x7B80CD. Stock billboard builder 0x562FA1 ignores it. Do not treat zero alone as absence of an installed shader/property; inspect actual resource pointers. v139 plugin incorrectly rejected zero before resource inspection; v140 corrects that guard.\n\nGeneric recursive shader assignment wrapper around 0x7B7FC0. In decoded TES4 tree code it is used for branch shader id 4 and simple/default id 1; no stock call with frond shader id 5 was found in this pass.",
+  "comment_repeatable": "Generic recursive shader assignment wrapper around 0x7B7FC0. In decoded TES4 tree code it is used for branch shader id 4 and simple/default id 1; no stock call with frond shader id 5 was found in this pass.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7B8940",
+  "display_name": "BSShaderManager_AssignShadersRecursive",
   "end_ea": "0x7B898E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7B8940",
+  "name": "BSShaderManager_AssignShadersRecursive",
   "segment": ".text",
   "sha256": "6ba27f1164406153b6af3179029bc9728f4ce57762f92b57ed5041e9e80fab40",
   "size": 78,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7B8940",
-  "type": "char __cdecl(NiAVObject *, unsigned int, int, int)",
+  "total_chunk_size": 78,
+  "type": "char __cdecl(NiAVObject *root, unsigned int shaderId, char normalMapBypass, char arg3)",
   "xrefs_from_count": 37,
   "xrefs_to_count": 32
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x76D5C0",
-    "line": "sub     esp, 20h",
+    "line": "sub     esp, 20h; Recreates an additional depth/stencil surface after device reset. Validates the stored depth format against the current default framebuffer with IDirect3D9::CheckDeviceFormat, calls CreateDepthStencilSurface using saved width/height/multisample settings, and rebuilds NiSurfaceData.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x76D634",
-    "line": "mov     edx, [esp+30h+arg_0]",
+    "line": "mov     edx, [esp+30h+device]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -391,13 +391,13 @@
   },
   {
     "ea": "0x76D658",
-    "line": "push    eax",
+    "line": "push    eax; hresult",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76D659",
-    "line": "call    sub_7736F0",
+    "line": "call    D3D9_HResultToString; Maps common COM/D3D9 HRESULT values to diagnostic names, including DEVICELOST, DEVICENOTRESET, INVALIDCALL, OUTOFVIDEOMEMORY, and format/state failures.",
     "mnemonic": "call",
     "size": 5
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x76D664",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,19 +1,32 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4E5380",
+      "0x4E53F1"
+    ]
+  ],
+  "chunks_sha256": "870f324b2cc50aee2b31f9ef664eaf7c4a1765b4b4ea4d4951291f6b3b27af01",
+  "comment_regular": "Verified insertion into TESPathGrid.pointsByCell (+0x44), which is a per-PathGrid 512-unit X/Y spatial-bucket map despite the legacy member/type spelling. It derives the packed key from the node's NiPoint3, finds or creates a BSSimpleList header, then pushes the point pointer. The graph-chunk loader calls this for each loaded point; FindPointByPositionInCell uses the same key.",
+  "comment_repeatable": "Verified insertion into TESPathGrid.pointsByCell (+0x44), which is a per-PathGrid 512-unit X/Y spatial-bucket map despite the legacy member/type spelling. It derives the packed key from the node's NiPoint3, finds or creates a BSSimpleList header, then pushes the point pointer. The graph-chunk loader calls this for each loaded point; FindPointByPositionInCell uses the same key.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4E5380",
+  "display_name": "TESPathGrid_AddPointToSpatialBucket",
   "end_ea": "0x4E53F1",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4E5380",
+  "name": "TESPathGrid_AddPointToSpatialBucket",
   "segment": ".text",
   "sha256": "870f324b2cc50aee2b31f9ef664eaf7c4a1765b4b4ea4d4951291f6b3b27af01",
   "size": 113,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E5380",
-  "type": "void __thiscall(char *this, char *)",
+  "total_chunk_size": 113,
+  "type": "void __thiscall(TESPathGrid *this, TESPathGridPoint *point)",
   "xrefs_from_count": 54,
   "xrefs_to_count": 1
 }

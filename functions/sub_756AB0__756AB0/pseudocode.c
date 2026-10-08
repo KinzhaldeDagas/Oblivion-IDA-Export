@@ -1,4 +1,4 @@
-char *sub_756AB0()
+NiRTTI *sub_756AB0()
 {
-  return dword_B411AC;
+  return &stru_B411AC; /*0x756ab5*/
 }

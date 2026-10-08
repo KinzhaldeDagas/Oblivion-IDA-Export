@@ -8,7 +8,7 @@
 0x73D7B2: mov     edi, [eax+4]
 0x73D7B5: push    esi; a2
 0x73D7B6: setnz   bl
-0x73D7B9: call    NiNode__OnVisible
+0x73D7B9: call    NiNode__OnVisible; Retail NiNode OnVisible entry; visible nonempty child arrays recurse through ordinary child traversal.
 0x73D7BE: mov     esi, [esi+8]
 0x73D7C1: mov     ebp, [esi+4]
 0x73D7C4: cmp     edi, ebp

@@ -44,7 +44,7 @@
 0x640988: push    esi; int
 0x640989: push    1; int
 0x64098B: mov     ecx, edi; int
-0x64098D: call    Actor_GetDetectionLevel
+0x64098D: call    Actor_GetDetectionLevelAgainstActor; Oblivion authoritative detection pipeline. Computes this detector's level against a target actor: obtains cached/physical LOS and distance, target light, boot weight, movement/running/sneak/combat/underwater/exterior state, Luck-modified Sneak values, detector Blindness AV 0x2D, target Chameleon AV 0x2E, and target Invisibility AV 0x2F; then calls Calc_DetectionLevel and updates the detector's process entry. Positive means detected. Fallout only corroborates the GetDetectionLevelAgainstActor terminology.
 0x640992: mov     [esp+28h+var_14], eax
 0x640996: fild    [esp+28h+var_14]
 0x64099A: xor     ebp, ebp
@@ -84,7 +84,7 @@
 0x6409FF: mov     ecx, offset flt_B36778
 0x640A04: mov     [ebx+8], dl
 0x640A07: call    GameSetting_GetSafeFloatPointer
-0x640A0C: fld     dword ptr [esp+3Ch+var_10]
+0x640A0C: fld     [esp+3Ch+var_10]
 0x640A10: fld     dword ptr [eax]
 0x640A12: fcompp
 0x640A14: fnstsw  ax
@@ -97,7 +97,7 @@
 0x640A2E: jmp     ds:jpt_640A2E[ebp*4]; switch jump
 0x640A35: mov     ecx, offset flt_B36778; jumptable 00640A2E case 0
 0x640A3A: call    GameSetting_GetSafeFloatPointer
-0x640A3F: fld     dword ptr [esp+3Ch+var_10]
+0x640A3F: fld     [esp+3Ch+var_10]
 0x640A43: fld     dword ptr [eax]
 0x640A45: fcompp
 0x640A47: fnstsw  ax
@@ -105,7 +105,7 @@
 0x640A4C: jnz     short def_640A2E
 0x640A4E: mov     ecx, offset unk_B36770
 0x640A53: call    GameSetting_GetSafeFloatPointer
-0x640A58: fld     dword ptr [esp+3Ch+var_10]
+0x640A58: fld     [esp+3Ch+var_10]
 0x640A5C: fld     dword ptr [eax]
 0x640A5E: fcompp
 0x640A60: fnstsw  ax
@@ -113,9 +113,9 @@
 0x640A65: jp      short def_640A2E
 0x640A67: mov     ebp, 2
 0x640A6C: jmp     short def_640A2E
-0x640A6E: mov     ecx, offset unk_B36788; jumptable 00640A2E case 2
+0x640A6E: mov     ecx, (offset flt_B36778+10h); jumptable 00640A2E case 2
 0x640A73: call    GameSetting_GetSafeFloatPointer
-0x640A78: fld     dword ptr [esp+3Ch+var_10]
+0x640A78: fld     [esp+3Ch+var_10]
 0x640A7C: fld     dword ptr [eax]
 0x640A7E: fcompp
 0x640A80: fnstsw  ax
@@ -125,7 +125,7 @@
 0x640A8C: jmp     short def_640A2E
 0x640A8E: mov     ecx, offset unk_B36770; jumptable 00640A2E case 1
 0x640A93: call    GameSetting_GetSafeFloatPointer
-0x640A98: fld     dword ptr [esp+3Ch+var_10]
+0x640A98: fld     [esp+3Ch+var_10]
 0x640A9C: fld     dword ptr [eax]
 0x640A9E: fcompp
 0x640AA0: fnstsw  ax
@@ -133,9 +133,9 @@
 0x640AA5: jp      short loc_640AAE
 0x640AA7: mov     ebp, 2
 0x640AAC: jmp     short def_640A2E
-0x640AAE: mov     ecx, offset unk_B36780
+0x640AAE: mov     ecx, (offset flt_B36778+8)
 0x640AB3: call    GameSetting_GetSafeFloatPointer
-0x640AB8: fld     dword ptr [esp+3Ch+var_10]
+0x640AB8: fld     [esp+3Ch+var_10]
 0x640ABC: fld     dword ptr [eax]
 0x640ABE: fcompp
 0x640AC0: fnstsw  ax

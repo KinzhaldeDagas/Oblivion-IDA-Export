@@ -1,1 +1,4 @@
-esync_msgwait_reply
+struct esync_msgwait_reply
+{
+reply_header __header;
+};

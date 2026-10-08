@@ -1,9 +1,16 @@
-int __thiscall sub_4A67B0(int *this, int a2, float a3, float a4, int a5, int a6)
+// Verified: converts world XYZ input to a 2D point and delegates region-data selection for that location.
+TESRegionData *__thiscall TESRegionList_SelectDataAtWorldPosition(
+        TESRegionList *this,
+        int dataID,
+        float worldX,
+        float worldY,
+        float worldZ,
+        TESWorldSpace *worldspace)
 {
-  float v8[2]; // [esp+4h] [ebp-8h] BYREF
+  float worldXY[2]; // [esp+4h] [ebp-8h] BYREF
 
-  sub_4A6920(v8);
-  v8[0] = a3;
-  v8[1] = a4;
-  return sub_4A6460(this, a2, v8, a6);
+  sub_4A6920(worldXY); /*0x4a67ba*/
+  worldXY[0] = worldX; /*0x4a67c7*/
+  worldXY[1] = worldY; /*0x4a67d4*/
+  return TESRegionList_SelectDataForLocation(this, dataID, worldXY, worldspace); /*0x4a67e5*/
 }

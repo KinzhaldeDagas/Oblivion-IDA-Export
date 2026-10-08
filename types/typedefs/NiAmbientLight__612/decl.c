@@ -1,1 +1,1 @@
-NiAmbientLight
+struct NiAmbientLight;

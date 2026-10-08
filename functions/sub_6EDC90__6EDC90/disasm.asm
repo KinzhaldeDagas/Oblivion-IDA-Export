@@ -6,16 +6,16 @@
 0x6EDC9C: jz      short loc_6EDCC5
 0x6EDC9E: push    ebx
 0x6EDC9F: push    edi
-0x6EDCA0: mov     edi, [esp+10h+arg_8]
+0x6EDCA0: mov     edi, [esp+10h+source]
 0x6EDCA4: lea     ebx, [edi+18h]
-0x6EDCA7: push    edi
-0x6EDCA8: mov     ecx, esi
-0x6EDCAA: call    sub_5520E0
-0x6EDCAF: push    0FFFFFFFFh
-0x6EDCB1: push    0
-0x6EDCB3: push    ebx
-0x6EDCB4: lea     ecx, [esi+18h]
-0x6EDCB7: call    sub_414420
+0x6EDCA7: push    edi; source
+0x6EDCA8: mov     ecx, esi; this
+0x6EDCAA: call    FaceGenMatrix_Assign; Deep matrix assignment. Copies rows/columns, resizes coefficient storage, then copies rows*columns floats.
+0x6EDCAF: push    0FFFFFFFFh; count
+0x6EDCB1: push    0; offset
+0x6EDCB3: push    ebx; source
+0x6EDCB4: lea     ecx, [esi+18h]; this
+0x6EDCB7: call    OB_stString28_AssignSubstring_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,offset,count). Bounds-checks offset, clamps count to source.size-offset, handles self-assignment by in-place erasure, grows when required, copies the selected bytes, updates size, and writes the terminator.
 0x6EDCBC: add     esi, 34h ; '4'
 0x6EDCBF: cmp     esi, ebp
 0x6EDCC1: jnz     short loc_6EDCA7

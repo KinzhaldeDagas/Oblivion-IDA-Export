@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6600D0",
-    "line": "cmp     [esp+arg_0], 0",
+    "line": "cmp     [esp+firstPerson], 0; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.",
     "mnemonic": "cmp",
     "size": 5
   },

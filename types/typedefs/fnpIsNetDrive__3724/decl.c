@@ -1,1 +1,1 @@
-fnpIsNetDrive
+typedef BOOL (*fnpIsNetDrive)(int);

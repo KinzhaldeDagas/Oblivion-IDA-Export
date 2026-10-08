@@ -65,7 +65,7 @@
 0x6CCF07: cmp     eax, ebx
 0x6CCF09: mov     byte ptr [esp+20h+var_4], 1
 0x6CCF0E: jz      short loc_6CCF28
-0x6CCF10: push    offset sub_7016A0; a5
+0x6CCF10: push    offset NiPointerSlot_Release; a5
 0x6CCF15: push    offset sub_6CCDE0; a4
 0x6CCF1A: push    edi; size
 0x6CCF1B: lea     ebx, [eax+4]
@@ -83,3 +83,17 @@
 0x6CCF3B: pop     ebx
 0x6CCF3C: add     esp, 10h
 0x6CCF3F: retn    0Ch
+0x9C7840: mov     ecx, [ebp-10h]
+0x9C7843: jmp     sub_6EBA30
+0x9C7848: mov     eax, [ebp+0Ch]
+0x9C784B: push    eax
+0x9C784C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C7851: pop     ecx
+0x9C7852: retn
+0x9C7853: mov     edx, [esp+arg_4]
+0x9C7857: lea     eax, [edx-10h]
+0x9C785A: mov     ecx, [edx-14h]
+0x9C785D: xor     ecx, eax
+0x9C785F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C7864: mov     eax, offset stru_AEFC40
+0x9C7869: jmp     ___CxxFrameHandler3

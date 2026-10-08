@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x535784",
-    "line": "call    sub_532090",
+    "line": "call    bhkSphereShape_CtorRadius; TES4 authoritative: constructs a bhkSphereShape; if the third byte arg is true, radius is converted from TES/world units to Havok units with hkFactor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,13 +205,13 @@
   },
   {
     "ea": "0x53578F",
-    "line": "lea     ecx, [esp+84h+var_70]",
+    "line": "lea     ecx, [esp+84h+info]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x535793",
-    "line": "call    sub_532250",
+    "line": "call    OB_bhkShapePhantomCinfo_InitIdentity_010201A0; 2026-05-18 73000 consumer decode: initializes bhkSimpleShapePhantom cinfo, including identity transform at +0x20 and shape pointer slot at +0x04. Stock 0x565510 installs one shape pointer and attaches the phantom to the target NiAVObject.",
     "mnemonic": "call",
     "size": 5
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x5357B6",
-    "line": "mov     [esp+84h+var_70], eax",
+    "line": "mov     [esp+84h+info.collisionFilter], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x5357BF",
-    "line": "mov     [esp+84h+var_6C], eax",
+    "line": "mov     [esp+84h+info.shape], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x5357C5",
-    "line": "mov     [esp+84h+var_6C], edi",
+    "line": "mov     [esp+84h+info.shape], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -307,55 +307,55 @@
   },
   {
     "ea": "0x5357CD",
-    "line": "fst     [esp+88h+var_4C]",
+    "line": "fst     [esp+88h+info.transform+4]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x5357D1",
-    "line": "fst     [esp+88h+var_48]",
+    "line": "fst     [esp+88h+info.transform+8]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x5357D5",
-    "line": "fst     [esp+88h+var_44]",
+    "line": "fst     [esp+88h+info.transform+0Ch]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x5357D9",
-    "line": "fst     [esp+88h+var_40]",
+    "line": "fst     [esp+88h+info.transform+10h]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x5357DD",
-    "line": "fst     [esp+88h+var_38]",
+    "line": "fst     [esp+88h+info.transform+18h]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x5357E1",
-    "line": "fst     [esp+88h+var_34]",
+    "line": "fst     [esp+88h+info.transform+1Ch]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x5357E5",
-    "line": "fst     [esp+88h+var_30]",
+    "line": "fst     [esp+88h+info.transform+20h]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x5357E9",
-    "line": "fst     [esp+88h+var_2C]",
+    "line": "fst     [esp+88h+info.transform+24h]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x5357ED",
-    "line": "fst     [esp+88h+var_24]",
+    "line": "fst     [esp+88h+info.transform+2Ch]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -367,43 +367,43 @@
   },
   {
     "ea": "0x5357F3",
-    "line": "fst     [esp+88h+var_50]",
+    "line": "fst     [esp+88h+info.transform]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x5357F7",
-    "line": "fst     [esp+88h+var_3C]",
+    "line": "fst     [esp+88h+info.transform+14h]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x5357FB",
-    "line": "fstp    [esp+88h+var_28]",
+    "line": "fstp    [esp+88h+info.transform+28h]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x5357FF",
-    "line": "fst     [esp+88h+var_20]",
+    "line": "fst     [esp+88h+info.transform+30h]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x535803",
-    "line": "fst     [esp+88h+var_1C]",
+    "line": "fst     [esp+88h+info.transform+34h]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x535807",
-    "line": "fst     [esp+88h+var_18]",
+    "line": "fst     [esp+88h+info.transform+38h]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x53580B",
-    "line": "fstp    [esp+88h+var_14]",
+    "line": "fstp    [esp+88h+info.transform+3Ch]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -445,25 +445,25 @@
   },
   {
     "ea": "0x535827",
-    "line": "lea     ecx, [esp+84h+var_70]",
+    "line": "lea     ecx, [esp+84h+info]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x53582B",
-    "line": "push    ecx",
+    "line": "push    ecx; info",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x53582C",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x53582E",
-    "line": "call    sub_531FC0",
+    "line": "call    OB_bhkSimpleShapePhantom_CtorFromCinfo_010201A0; Constructs bhkSimpleShapePhantom wrapper and calls 0x8AF1A0 to create/attach the low-level Havok phantom object from cinfo.",
     "mnemonic": "call",
     "size": 5
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x53587B",
-    "line": "mov     eax, [esp+84h+var_5C]",
+    "line": "mov     eax, [esp+84h+info.propertyCapacityFlags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x5358B5",
-    "line": "mov     edx, [esp+84h+var_64]",
+    "line": "mov     edx, [esp+84h+info.propertyData]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -796,5 +796,119 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B9410",
+    "line": "mov     eax, [ebp+var_74]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B9413",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B9414",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B9419",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B941A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B941B",
+    "line": "lea     ecx, [ebp+info]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B941E",
+    "line": "jmp     sub_8A5090",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B9423",
+    "line": "mov     eax, [ebp+var_74]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B9426",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B9427",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B942C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B942D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B942E",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B9432",
+    "line": "lea     eax, [edx-74h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B9435",
+    "line": "mov     ecx, [edx-78h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B9438",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B943A",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B943F",
+    "line": "mov     eax, offset stru_AE37AC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B9444",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

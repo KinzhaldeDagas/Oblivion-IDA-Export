@@ -1,4 +1,4 @@
-0x763130: sub     esp, 1Ch
+0x763130: sub     esp, 1Ch; MoonSugarEffect decode: NiDX9Renderer::PackSkinnedGeometryBuffer. Same ownership as non-skinned packer but uses skin partition data for vertex/index counts, stream repacking, and optional software-VP index-buffer usage.
 0x763133: push    ebx
 0x763134: push    esi
 0x763135: mov     esi, [esp+24h+a2]
@@ -8,8 +8,8 @@
 0x763145: mov     ebx, [esp+24h+a3]
 0x763149: test    ebx, ebx
 0x76314B: jz      loc_7633BD
-0x763151: mov     ecx, esi
-0x763153: call    sub_777F10
+0x763151: mov     ecx, esi; this
+0x763153: call    NiGeometryBufferData_HasLiveStreams; Pass225/226: Tests whether NiGeometryBufferData is live: stream count nonzero and every VBChip has a D3D vertex buffer.
 0x763158: cmp     byte ptr [esp+24h+a7], 0
 0x76315D: mov     byte ptr [esp+24h+a2], al
 0x763161: jnz     short loc_76317F
@@ -49,7 +49,7 @@
 0x7631C2: mov     [esp+2Ch+var_4], ecx
 0x7631C6: movzx   ecx, word ptr [edi+22h]
 0x7631CA: test    cx, cx
-0x7631CD: mov     [esp+2Ch+var_10], eax
+0x7631CD: mov     [esp+2Ch+indices], eax
 0x7631D1: mov     [esp+2Ch+var_14], ecx
 0x7631D5: jnz     short loc_7631F0
 0x7631D7: movzx   ebp, dx
@@ -87,7 +87,7 @@
 0x763250: jz      short loc_76329A
 0x763252: push    ecx; streamCount
 0x763253: mov     ecx, esi; this
-0x763255: call    sub_777F70
+0x763255: call    sub_777F70; Pass225/226: Forces NiGeometryBufferData stream count; screen-texture render path forces exactly one stream.
 0x76325A: jmp     short loc_76328D
 0x76325C: mov     ebp, [esi+4]
 0x76325F: xor     ebx, ebx
@@ -105,13 +105,13 @@
 0x76327A: mov     ecx, [esp+2Ch+a5]
 0x76327E: push    ecx; streamCount
 0x76327F: mov     ecx, esi; this
-0x763281: call    sub_777F70
+0x763281: call    sub_777F70; Pass225/226: Forces NiGeometryBufferData stream count; screen-texture render path forces exactly one stream.
 0x763286: mov     dword ptr [esi+34h], 0
 0x76328D: mov     ebp, [esp+2Ch+var_1C]
 0x763291: mov     ecx, [esp+2Ch+a5]
 0x763295: mov     ebx, 0FFFh
 0x76329A: movzx   eax, word ptr [esp+2Ch+var_8]
-0x76329F: mov     edx, [esp+2Ch+var_10]
+0x76329F: mov     edx, [esp+2Ch+indices]
 0x7632A3: mov     [esi+14h], eax
 0x7632A6: mov     [esi+18h], eax
 0x7632A9: mov     eax, [esp+2Ch+var_4]
@@ -165,7 +165,7 @@
 0x763325: push    eax
 0x763326: push    ecx
 0x763327: mov     ecx, [edx+8B0h]
-0x76332D: call    sub_7774C0
+0x76332D: call    sub_7774C0; MoonSugarEffect decode: fallback skinned vertex packer. Uses skin partition remap/weights/bone data, refreshes VB chips if stale/too small, writes packed partition vertices, and unlocks owned VB.
 0x763332: test    eax, eax
 0x763334: jz      short loc_763389
 0x763336: mov     eax, [esp+2Ch+a7]
@@ -177,24 +177,24 @@
 0x76334A: jz      short loc_7633B1
 0x76334C: mov     eax, [esi+2Ch]
 0x76334F: mov     ebx, [esi+30h]
-0x763352: mov     edx, [esp+2Ch+var_10]
+0x763352: mov     edx, [esp+2Ch+indices]
 0x763356: mov     [esp+2Ch+a7], eax
 0x76335A: mov     al, [esi+10h]
 0x76335D: neg     al
 0x76335F: lea     ecx, [esp+2Ch+a7]
 0x763363: sbb     eax, eax
 0x763365: and     eax, 10h
-0x763368: push    eax; Dst
+0x763368: push    eax; usage
 0x763369: mov     eax, [esp+30h+Src]
-0x76336D: push    1; int
-0x76336F: push    ecx; int
-0x763370: push    ebx; int
-0x763371: push    eax; int
-0x763372: push    eax; Src
+0x76336D: push    1; pool
+0x76336F: push    ecx; bufferBytes
+0x763370: push    ebx; existing
+0x763371: push    eax; capacityIndices
+0x763372: push    eax; indexCount
 0x763373: mov     eax, [esp+44h+var_C]
-0x763377: mov     ecx, [eax+8B4h]
-0x76337D: push    edx; int
-0x76337E: call    sub_7781F0
+0x763377: mov     ecx, [eax+8B4h]; this
+0x76337D: push    edx; indices
+0x76337E: call    NiDX9IndexBufferManager_PackBuffer; Pass226: Index-buffer rebuild/upload helper used when NiScreenTexture mask bit 0x08 is active.
 0x763383: mov     edi, eax
 0x763385: test    edi, edi
 0x763387: jnz     short loc_763395
@@ -208,7 +208,7 @@
 0x763395: cmp     ebx, edi
 0x763397: jz      short loc_7633B1
 0x763399: mov     ecx, esi
-0x76339B: call    sub_777F40
+0x76339B: call    sub_777F40; MoonSugarEffect decode: release BuffData index buffer and reset IBSize/IB.
 0x7633A0: mov     ecx, [esp+2Ch+Src]
 0x7633A4: mov     edx, [esp+2Ch+a7]
 0x7633A8: mov     [esi+30h], edi

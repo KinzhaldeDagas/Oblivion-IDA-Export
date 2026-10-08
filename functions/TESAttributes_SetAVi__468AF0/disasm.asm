@@ -1,9 +1,9 @@
-0x468AF0: mov     eax, [esp+arg_0]
+0x468AF0: mov     eax, [esp+arg_0]; TESAttributes_SetAVi: attributes are stored as single bytes in TESAttributes. AVU base-AV guards clamp attributes to 0..configuredLimit before player integer base setters/modifiers reach this storage.
 0x468AF4: push    esi
 0x468AF5: push    eax
 0x468AF6: push    0
 0x468AF8: mov     esi, ecx
-0x468AFA: call    ActorValue_GetGroupOffsetFromAV
+0x468AFA: call    ActorValue_GetGroupOffsetFromAV; RealArenaTraining fidelity pass: ActorValue_GetGroupOffsetFromAV(group, actorValue). Player skill-progress code calls this with group 2 before indexing player skillExp/requiredSkillExp.
 0x468AFF: mov     dl, [esp+0Ch+arg_4]
 0x468B03: push    0; int
 0x468B05: push    offset ??_R0?AVTESForm@@@8; struct TypeDescriptor *

@@ -1,19 +1,20 @@
-char __thiscall sub_4B80A0(char *this, unsigned __int8 *a2)
+// Verified mechanics: rejects null/unsupported candidate spaces, then returns true only when the TESForm* is present in TESObjectDOOR.randomTeleport. Probable domain meaning: this list records spaces in which the door can be selected as a random teleport destination; ExtraRandomTeleportMarker.teleportRef is a separate per-reference marker pointer.
+bool __thiscall TESObjectDOOR_ContainsRandomTeleportSpace(TESObjectDOOR *this, TESForm *space)
 {
-  char *v3; // eax
+  TESObjectDOOR_RandomTeleportSpaceNode *p_randomTeleport; // eax
 
-  if ( !a2 )
-    return 0;
-  if ( !sub_4B7930(a2) )
-    return 0;
-  v3 = this + 0x68;
-  if ( this == (char *)0xFFFFFF98 )
-    return 0;
-  while ( *(unsigned __int8 **)v3 != a2 )
+  if ( !space ) /*0x4b80ad*/
+    return 0; /*0x4b80ad*/
+  if ( !TESForm_IsInteriorCellOrWorldSpace(space) ) /*0x4b80b0*/
+    return 0; /*0x4b80b0*/
+  p_randomTeleport = &this->super.randomTeleport; /*0x4b80bc*/
+  if ( this == (TESObjectDOOR *)0xFFFFFF98 ) /*0x4b80c1*/
+    return 0; /*0x4b80ce*/
+  while ( p_randomTeleport->space != space ) /*0x4b80c5*/
   {
-    v3 = *((char **)v3 + 1);
-    if ( !v3 )
-      return 0;
+    p_randomTeleport = p_randomTeleport->next; /*0x4b80c7*/
+    if ( !p_randomTeleport ) /*0x4b80cc*/
+      return 0; /*0x4b80cc*/
   }
-  return 1;
+  return 1; /*0x4b80ce*/
 }

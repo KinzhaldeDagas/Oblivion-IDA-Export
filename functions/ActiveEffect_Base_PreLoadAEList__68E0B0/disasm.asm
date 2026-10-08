@@ -1,4 +1,4 @@
-0x68E0B0: push    esi
+0x68E0B0: push    esi; Verified pre-load lifecycle hook: before list restoration, iterates current ActiveEffects and calls vtable slot +0x20 with the supplied load context. This is the preLoad slot in ActiveEffectVtbl; LockEffect and OpenEffect use the shared no-op.
 0x68E0B1: mov     esi, [esp+4+arg_0]
 0x68E0B5: test    esi, esi
 0x68E0B7: jz      short loc_68E0DD

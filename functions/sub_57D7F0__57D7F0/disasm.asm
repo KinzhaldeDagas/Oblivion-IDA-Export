@@ -1,4 +1,4 @@
-0x57D7F0: sub     esp, 8
+0x57D7F0: sub     esp, 8; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x57D7F3: fild    dword ptr ds:0B06C4Ch
 0x57D7F9: fstp    [esp+8+var_4]
 0x57D7FD: fild    dword ptr ds:0B06C50h

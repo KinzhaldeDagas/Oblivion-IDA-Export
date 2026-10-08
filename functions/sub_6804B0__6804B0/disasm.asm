@@ -1,4 +1,4 @@
-0x6804B0: movzx   eax, word ptr [ecx]
+0x6804B0: movzx   eax, word ptr [ecx]; Verified: returns fitness from state +0 for the link's searchNodeIndex.
 0x6804B3: xor     edx, edx
 0x6804B5: cmp     ax, ds:0B3BF04h
 0x6804BC: jnb     short loc_6804CD

@@ -12,6 +12,6 @@
 0x6A5D66: call    PrintError
 0x6A5D6B: mov     eax, dword ptr [esp+0Ch+arg_10]
 0x6A5D6F: push    eax
-0x6A5D70: call    FormHeapFree
+0x6A5D70: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6A5D75: add     esp, 10h
 0x6A5D78: jmp     SummonCreatureEffect_PlaceSummon___Done

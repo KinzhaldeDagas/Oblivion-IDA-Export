@@ -1,1 +1,1 @@
-SInt16
+typedef __int16 SInt16;

@@ -1,5 +1,5 @@
 0xA16670: push    esi
-0xA16671: mov     esi, menuRenderedTexture
+0xA16671: mov     esi, dword ptr texture
 0xA16677: test    esi, esi
 0xA16679: jz      short loc_A16697
 0xA1667B: lea     eax, [esi+4]

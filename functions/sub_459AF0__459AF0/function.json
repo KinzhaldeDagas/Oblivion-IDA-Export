@@ -1,19 +1,32 @@
 {
-  "callees_count": 89,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 29,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x459AF0",
+      "0x459F2A"
+    ]
+  ],
+  "chunks_sha256": "e6bf48de53e01f027ed6169e534d13acc7f3b833c1bb4e6acecaa86ec47d3700",
+  "comment_regular": "EngineFix trace 2026-05-11: raw save-cursor parser with several fixed-size direct reads/memcpy blocks and branch-dependent cursor advances. Not patched in this pass; requires either per-read conversion to SaveLoad_LoadData or a state-machine wrapper to avoid save desynchronization.",
+  "comment_repeatable": "EngineFix trace 2026-05-11: raw save-cursor parser with several fixed-size direct reads/memcpy blocks and branch-dependent cursor advances. Not patched in this pass; requires either per-read conversion to SaveLoad_LoadData or a state-machine wrapper to avoid save desynchronization.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
   "display_name": "sub_459AF0",
   "end_ea": "0x459F2A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_459AF0",
   "segment": ".text",
   "sha256": "e6bf48de53e01f027ed6169e534d13acc7f3b833c1bb4e6acecaa86ec47d3700",
   "size": 1082,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x459AF0",
-  "type": "signed int __thiscall(NiTMap_TESCELL **this, int, char)",
+  "total_chunk_size": 1082,
+  "type": "signed int __thiscall(ChangesMap **this, int, char)",
   "xrefs_from_count": 423,
   "xrefs_to_count": 2
 }

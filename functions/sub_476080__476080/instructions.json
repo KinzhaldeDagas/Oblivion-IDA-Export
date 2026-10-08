@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x476080",
-    "line": "sub     esp, 110h",
+    "line": "sub     esp, 110h; Actor-base KFFZ loader. Iterates TESAnimation_AnimationNode entries, constructs <model-dir>\\SpecialAnims\\<entry>, loads each KF synchronously, and installs/defer-installs it into this ActorAnimData. Full direct-xref audit found only the creature and NPC branches in Actor_SetupAnimationData; no direct first-person KFFZ load site.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x476094",
-    "line": "mov     eax, [esp+110h+arg_0]",
+    "line": "mov     eax, [esp+110h+kffzEntries]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x47609E",
-    "line": "mov     ebx, [esp+114h+arg_4]",
+    "line": "mov     ebx, [esp+114h+modelDirectory]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -163,13 +163,13 @@
   },
   {
     "ea": "0x4760DD",
-    "line": "call    sub_439FF0",
+    "line": "call    ModelLoader_LoadKFModelNow; Synchronous KF model load path. Queued idle loader and menu/power-attack setup use this when an immediate KFModel is required.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4760E2",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -199,13 +199,13 @@
   },
   {
     "ea": "0x4760F3",
-    "line": "push    0",
+    "line": "push    0; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4760F5",
-    "line": "call    PlayerCharacter_GetPlayerNode",
+    "line": "call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,19 +235,19 @@
   },
   {
     "ea": "0x476107",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x47610D",
-    "line": "push    0",
+    "line": "push    0; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x47610F",
-    "line": "call    PlayerCharacter_GetPlayerNode",
+    "line": "call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x476119",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -277,13 +277,13 @@
   },
   {
     "ea": "0x476122",
-    "line": "push    1",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x476124",
-    "line": "call    PlayerCharacter_GetPlayerNode",
+    "line": "call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x476149",
-    "line": "call    InterfaceManager_IsMenuMode",
+    "line": "call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.",
     "mnemonic": "call",
     "size": 5
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x476158",
-    "line": "call    sub_404F20",
+    "line": "call    sub_404F20; CustomAnimSupport evidence: global loading/update gate checked by KF install/defer decisions; support condition for SpecialAnims install timing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x476176",
-    "line": "call    ??0AnimSequenceSingle@@QAE@XZ; AnimSequenceSingle::AnimSequenceSingle(void)",
+    "line": "call    ActorAnimData_InstallKFModel; CustomAnimSupport decode: installs a parsed KFModel into ActorAnimData as AnimSequenceSingle/Multiple or defers it. Historical constructor-style name is not canonical.",
     "mnemonic": "call",
     "size": 5
   },

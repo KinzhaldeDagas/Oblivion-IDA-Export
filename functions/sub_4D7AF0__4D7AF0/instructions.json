@@ -115,55 +115,55 @@
   },
   {
     "ea": "0x4D7B20",
-    "line": "lea     ecx, [esp+80h+var_6C]",
+    "line": "lea     ecx, [esp+80h+right]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4D7B24",
-    "line": "fstp    [esp+80h+var_80]; float",
+    "line": "fstp    [esp+80h+angleX]; angleX",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4D7B27",
-    "line": "call    NiMatrix33_InitRotationTransposedTransform???",
+    "line": "call    NiMatrix33_InitRotationXTransposed; Verified matrix coefficients make this an X-axis rotation in the engine's transposed convention: X stays fixed; only the Y/Z submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4D7B2C",
-    "line": "lea     eax, [esp+7Ch+var_6C]",
+    "line": "lea     eax, [esp+7Ch+right]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4D7B30",
-    "line": "push    eax",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D7B31",
-    "line": "lea     ecx, [esp+80h+var_48]",
+    "line": "lea     ecx, [esp+80h+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4D7B35",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D7B36",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D7B38",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,55 +205,55 @@
   },
   {
     "ea": "0x4D7B4C",
-    "line": "lea     ecx, [esp+80h+var_6C]",
+    "line": "lea     ecx, [esp+80h+right]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4D7B50",
-    "line": "fstp    [esp+80h+var_80]; float",
+    "line": "fstp    [esp+80h+angleX]; angleY",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4D7B53",
-    "line": "call    sub_70FD80",
+    "line": "call    NiMatrix33_InitRotationY; Verified matrix coefficients make this a Y-axis rotation: Y stays fixed; only the X/Z submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4D7B58",
-    "line": "lea     edx, [esp+7Ch+var_6C]",
+    "line": "lea     edx, [esp+7Ch+right]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4D7B5C",
-    "line": "push    edx",
+    "line": "push    edx; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D7B5D",
-    "line": "lea     eax, [esp+80h+var_48]",
+    "line": "lea     eax, [esp+80h+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4D7B61",
-    "line": "push    eax",
+    "line": "push    eax; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D7B62",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D7B64",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,55 +295,55 @@
   },
   {
     "ea": "0x4D7B78",
-    "line": "lea     ecx, [esp+80h+var_6C]",
+    "line": "lea     ecx, [esp+80h+right]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4D7B7C",
-    "line": "fstp    [esp+80h+var_80]; float",
+    "line": "fstp    [esp+80h+angleX]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4D7B7F",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4D7B84",
-    "line": "lea     ecx, [esp+7Ch+var_6C]",
+    "line": "lea     ecx, [esp+7Ch+right]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4D7B88",
-    "line": "push    ecx",
+    "line": "push    ecx; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D7B89",
-    "line": "lea     edx, [esp+80h+var_48]",
+    "line": "lea     edx, [esp+80h+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4D7B8D",
-    "line": "push    edx",
+    "line": "push    edx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D7B8E",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D7B90",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x4D7BC9",
-    "line": "lea     edi, [esp+7Ch+var_48]",
+    "line": "lea     edi, [esp+7Ch+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -511,13 +511,13 @@
   },
   {
     "ea": "0x4D7BFB",
-    "line": "fst     [esp+7Ch+var_48]",
+    "line": "fst     [esp+7Ch+out.data]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x4D7BFF",
-    "line": "fstp    [esp+7Ch+var_38]",
+    "line": "fstp    [esp+7Ch+out.data+10h]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x4D7C0B",
-    "line": "lea     eax, [esp+7Ch+var_48]",
+    "line": "lea     eax, [esp+7Ch+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x4D7C1D",
-    "line": "push    eax",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
@@ -571,25 +571,25 @@
   },
   {
     "ea": "0x4D7C22",
-    "line": "fstp    [esp+80h+var_28]",
+    "line": "fstp    [esp+80h+out.data+20h]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4D7C26",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D7C27",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D7C29",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },

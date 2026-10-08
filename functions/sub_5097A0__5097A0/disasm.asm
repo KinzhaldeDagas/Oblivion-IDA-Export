@@ -47,13 +47,13 @@
 0x50982C: mov     [esp+44h+var_14], eax
 0x509830: call    sub_4FA1B0
 0x509835: test    al, al
-0x509837: push    0; a3
+0x509837: push    0; sourceScript
 0x509839: jz      short loc_50988C
 0x50983B: mov     edx, [esi]
-0x50983D: push    edx; ArgList
+0x50983D: push    edx; variableID
 0x50983E: mov     ecx, ebx; this
 0x509840: mov     [esp+48h+var_10], 0
-0x509848: call    sub_4FA110
+0x509848: call    ScriptEventList__GetVariableValue; ScriptEventList::GetVariableValue scans `m_vars` for Var.id == variableID and returns Var.data. A single global last-list/last-ID/Var cache accelerates repeated CTDA and script lookups; a cache miss with no variable logs an error and returns 0.
 0x50984D: fstp    [esp+40h+var_8]
 0x509851: lea     eax, [esp+40h+var_8]
 0x509855: push    eax
@@ -78,12 +78,12 @@
 0x50988C: cmp     byte ptr [esi+10h], 0
 0x509890: mov     ecx, [esi]
 0x509892: mov     eax, [esi+18h]
-0x509895: push    ecx; ArgList
+0x509895: push    ecx; variableID
 0x509896: mov     [esp+48h+var_10], eax
 0x50989A: mov     ecx, ebx; this
 0x50989C: jz      short loc_5098D1
-0x50989E: call    sub_4FA110
-0x5098A3: call    Double_To_SInt32
+0x50989E: call    ScriptEventList__GetVariableValue; ScriptEventList::GetVariableValue scans `m_vars` for Var.id == variableID and returns Var.data. A single global last-list/last-ID/Var cache accelerates repeated CTDA and script lookups; a cache miss with no variable logs an error and returns 0.
+0x5098A3: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5098A8: mov     edx, [esp+40h+var_10]
 0x5098AC: push    eax
 0x5098AD: mov     eax, [edi]
@@ -97,7 +97,7 @@
 0x5098C5: mov     eax, [esp+50h+var_14]
 0x5098C9: add     esp, 10h
 0x5098CC: jmp     loc_509812
-0x5098D1: call    sub_4FA110
+0x5098D1: call    ScriptEventList__GetVariableValue; ScriptEventList::GetVariableValue scans `m_vars` for Var.id == variableID and returns Var.data. A single global last-list/last-ID/Var cache accelerates repeated CTDA and script lookups; a cache miss with no variable logs an error and returns 0.
 0x5098D6: mov     edx, [esp+40h+var_10]
 0x5098DA: mov     eax, [edi]
 0x5098DC: sub     esp, 8
@@ -180,7 +180,6 @@
 0x5099E3: call    Interface_ConsolePrint
 0x5099E8: add     esp, 4
 0x5099EB: jmp     short loc_5099F0
-0x5099ED: align 10h
 0x5099F0: mov     esi, [edi]
 0x5099F2: test    esi, esi
 0x5099F4: jz      loc_509B18
@@ -194,7 +193,7 @@
 0x509A15: fld     dword ptr [esi+24h]
 0x509A18: fstp    dword ptr [esp+40h+var_8]
 0x509A1C: fld     dword ptr [esp+40h+var_8]
-0x509A20: call    Double_To_SInt32
+0x509A20: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x509A25: movsx   ecx, ax
 0x509A28: push    ecx
 0x509A29: mov     edx, [esi]
@@ -217,13 +216,13 @@
 0x509A66: mov     ecx, [ecx+4]
 0x509A69: mov     edi, [eax+18h]
 0x509A6C: mov     [esp+40h+var_10], ecx
-0x509A70: push    0; a3
+0x509A70: push    0; sourceScript
 0x509A72: mov     ecx, ebx; this
 0x509A74: jz      short loc_509AA5
 0x509A76: mov     edx, [eax]
-0x509A78: push    edx; ArgList
-0x509A79: call    sub_4FA110
-0x509A7E: call    Double_To_SInt32
+0x509A78: push    edx; variableID
+0x509A79: call    ScriptEventList__GetVariableValue; ScriptEventList::GetVariableValue scans `m_vars` for Var.id == variableID and returns Var.data. A single global last-list/last-ID/Var cache accelerates repeated CTDA and script lookups; a cache miss with no variable logs an error and returns 0.
+0x509A7E: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x509A83: push    eax
 0x509A84: mov     eax, [esi]
 0x509A86: mov     edx, [eax+0D4h]
@@ -237,8 +236,8 @@
 0x509AA0: add     esp, 10h
 0x509AA3: jmp     short loc_509A50
 0x509AA5: mov     eax, [eax]
-0x509AA7: push    eax; ArgList
-0x509AA8: call    sub_4FA110
+0x509AA7: push    eax; variableID
+0x509AA8: call    ScriptEventList__GetVariableValue; ScriptEventList::GetVariableValue scans `m_vars` for Var.id == variableID and returns Var.data. A single global last-list/last-ID/Var cache accelerates repeated CTDA and script lookups; a cache miss with no variable logs an error and returns 0.
 0x509AAD: mov     edx, [esi]
 0x509AAF: mov     eax, [edx+0D4h]
 0x509AB5: sub     esp, 8
@@ -255,7 +254,7 @@
 0x509AD7: fld     dword ptr [esi+24h]
 0x509ADA: fstp    dword ptr [esp+40h+var_8]
 0x509ADE: fld     dword ptr [esp+40h+var_8]
-0x509AE2: call    Double_To_SInt32
+0x509AE2: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x509AE7: push    eax
 0x509AE8: jmp     loc_509A29
 0x509AED: fld     dword ptr [esi+24h]

@@ -1,5 +1,5 @@
 int sub_9D8D70()
 {
-  SettingCollectionList_AddSetting(&INISettingCollection, (int)&flt_B02D78);
-  return atexit(sub_A16C70);
+  SettingCollectionList_AddSetting(&INISettingCollection, (int)&OB_INI_fLocalTreeMipMapLODBias_SpeedTree_010201A0); /*0x9d8da2*/
+  return atexit(sub_A16C70); /*0x9d8db4*/
 }

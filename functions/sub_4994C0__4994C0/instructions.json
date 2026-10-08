@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4994C0",
-    "line": "mov     eax, ds:0B35220h",
+    "line": "mov     eax, ds:0B35220h; Fog water decode: selects current water fog source record from base/day/night/override water records.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x4994D1",
-    "line": "cmp     dword ptr [eax+0A8h], 0",
+    "line": "cmp     dword ptr [eax+0A8h], 0; Fog water source: when override flag is active and field [0x2A] exists, return override water record.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x4994E8",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x4994FC",
-    "line": "call    sub_499200",
+    "line": "call    sub_499200; Exterior fog day/night helper: climate night boundary byte (+0x53) cached as normalized time for weather fog interpolation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x49950B",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x49951F",
-    "line": "call    sub_499140",
+    "line": "call    sub_499140; Exterior fog day/night helper: climate sunrise boundary byte (+0x50) cached as normalized time for weather fog interpolation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x49952C",
-    "line": "jz      short loc_499548",
+    "line": "jz      short loc_499548; Fog water source: compare game hour against night/sunrise climate boundaries to choose day versus night water record.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x499540",
-    "line": "mov     ecx, [eax+0A0h]",
+    "line": "mov     ecx, [eax+0A0h]; Fog water source: return day water record field [0x28] when available.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x499556",
-    "line": "mov     ecx, [eax+0A4h]",
+    "line": "mov     ecx, [eax+0A4h]; Fog water source: return night water record field [0x29] when available.",
     "mnemonic": "mov",
     "size": 6
   },

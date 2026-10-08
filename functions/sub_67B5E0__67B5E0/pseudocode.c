@@ -1,5 +1,5 @@
 // attributes: thunk
-void __thiscall sub_67B5E0(_DWORD *this)
+void __thiscall j_TESPackage_InitLoadGame(TESPackage *this)
 {
-  sub_5660F0(this);
+  TESPackage_InitLoadGame(this); /*0x67b5e0*/
 }

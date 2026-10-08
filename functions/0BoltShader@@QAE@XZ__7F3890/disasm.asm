@@ -43,7 +43,7 @@
 0x7F3944: add     dword ptr [ecx+60h], 0FFFFFFFFh
 0x7F3948: jnz     short loc_7F3953
 0x7F394A: fstp    st
-0x7F394C: call    sub_7604D0
+0x7F394C: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x7F3951: fldz
 0x7F3953: mov     [esi+178h], ebp
 0x7F3959: mov     edi, [esi+24h]
@@ -208,3 +208,21 @@
 0x7F3B74: pop     ebx
 0x7F3B75: add     esp, 20h
 0x7F3B78: retn    4
+0x9CFF60: mov     ecx, [ebp-10h]; this
+0x9CFF63: jmp     ??1BSShader@@UAE@XZ;
+0x9CFF68: mov     ecx, [ebp-10h]
+0x9CFF6B: add     ecx, 178h; void *
+0x9CFF71: jmp     sub_4027D0
+0x9CFF76: mov     ecx, [ebp-10h]
+0x9CFF79: add     ecx, 19Ch; slot
+0x9CFF7F: jmp     NiPointerSlot_Release
+0x9CFF84: mov     ecx, [ebp-10h]
+0x9CFF87: add     ecx, 1A0h; slot
+0x9CFF8D: jmp     NiPointerSlot_Release
+0x9CFF92: mov     edx, [esp+arg_4]
+0x9CFF96: lea     eax, [edx-24h]
+0x9CFF99: mov     ecx, [edx-28h]
+0x9CFF9C: xor     ecx, eax
+0x9CFF9E: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CFFA3: mov     eax, offset stru_AF8A48
+0x9CFFA8: jmp     ___CxxFrameHandler3

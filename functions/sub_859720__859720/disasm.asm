@@ -24,14 +24,14 @@
 0x859778: jz      short loc_8597DD
 0x85977A: mov     ecx, [esp+14h+arg_10]
 0x85977E: movzx   edx, byte ptr [ecx]
-0x859781: mov     ecx, [esp+14h+arg_0]
+0x859781: mov     ecx, [esp+14h+vtable]
 0x859785: push    0
-0x859787: push    0
-0x859789: push    edx
-0x85978A: push    10Dh
-0x85978F: push    ecx
-0x859790: push    eax
-0x859791: call    sub_7E2370
+0x859787: push    0; lightCount
+0x859789: push    edx; byte6
+0x85978A: push    10Dh; selector
+0x85978F: push    ecx; geometry
+0x859790: push    eax; outPass
+0x859791: call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.
 0x859796: add     esp, 18h
 0x859799: jmp     short loc_8597DF
 0x85979B: cmp     byte ptr [esp+14h+arg_C], 1
@@ -45,14 +45,14 @@
 0x8597BA: jz      short loc_8597DD
 0x8597BC: mov     ecx, [esp+14h+arg_10]
 0x8597C0: movzx   edx, byte ptr [ecx]
-0x8597C3: mov     ecx, [esp+14h+arg_0]
+0x8597C3: mov     ecx, [esp+14h+vtable]
 0x8597C7: push    0
-0x8597C9: push    0
-0x8597CB: push    edx
-0x8597CC: push    10Eh
-0x8597D1: push    ecx
-0x8597D2: push    eax
-0x8597D3: call    sub_7E2370
+0x8597C9: push    0; lightCount
+0x8597CB: push    edx; byte6
+0x8597CC: push    10Eh; selector
+0x8597D1: push    ecx; geometry
+0x8597D2: push    eax; outPass
+0x8597D3: call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.
 0x8597D8: add     esp, 18h
 0x8597DB: jmp     short loc_8597DF
 0x8597DD: xor     eax, eax
@@ -61,7 +61,7 @@
 0x8597E4: lea     ecx, [esi+28h]
 0x8597E7: mov     [esp+18h+var_4], 0FFFFFFFFh
 0x8597EF: mov     [esp+18h+arg_2C], eax
-0x8597F3: call    sub_5B1E20
+0x8597F3: call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.
 0x8597F8: mov     ecx, [esp+14h+var_C]
 0x8597FC: mov     large fs:0, ecx
 0x859803: pop     ecx
@@ -94,7 +94,7 @@
 0x859850: push    eax
 0x859851: mov     eax, [esp+30h+arg_4]
 0x859855: push    ecx
-0x859856: mov     ecx, [esp+34h+arg_0]
+0x859856: mov     ecx, [esp+34h+vtable]
 0x85985A: push    edx
 0x85985B: push    eax
 0x85985C: push    ecx
@@ -106,3 +106,20 @@
 0x859870: pop     esi
 0x859871: add     esp, 0Ch
 0x859874: retn    34h ; '4'
+0x9D4310: mov     eax, [ebp+30h]
+0x9D4313: push    eax
+0x9D4314: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D4319: pop     ecx
+0x9D431A: retn
+0x9D431B: mov     eax, [ebp+30h]
+0x9D431E: push    eax
+0x9D431F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D4324: pop     ecx
+0x9D4325: retn
+0x9D4326: mov     edx, [esp+arg_4]
+0x9D432A: lea     eax, [edx-4]
+0x9D432D: mov     ecx, [edx-8]
+0x9D4330: xor     ecx, eax
+0x9D4332: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D4337: mov     eax, offset stru_AFC41C
+0x9D433C: jmp     ___CxxFrameHandler3

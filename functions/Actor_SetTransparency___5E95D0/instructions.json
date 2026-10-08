@@ -247,13 +247,13 @@
   },
   {
     "ea": "0x5E9639",
-    "line": "fstp    [esp+14h+a5]; a5",
+    "line": "fstp    [esp+14h+a5]; period",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5E963C",
-    "line": "push    0; a4",
+    "line": "push    0; useRefractF",
     "mnemonic": "push",
     "size": 2
   },
@@ -265,13 +265,13 @@
   },
   {
     "ea": "0x5E963F",
-    "line": "fstp    [esp+1Ch+var_1C]; a3",
+    "line": "fstp    [esp+1Ch+power]; power",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5E9642",
-    "line": "push    edi; a2",
+    "line": "push    edi; enabled",
     "mnemonic": "push",
     "size": 1
   },
@@ -289,13 +289,13 @@
   },
   {
     "ea": "0x5E9647",
-    "line": "push    eax; a1",
+    "line": "push    eax; root",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5E9648",
-    "line": "call    sub_7D92C0",
+    "line": "call    NiAVObject_SetShaderRefractionStateRecursive; Recursively set/clear native refraction state on shader-property subtypes 5..10. useRefractF selects passInfo 0x10000 instead of 0x8000; stores power and optional period and invalidates pass caches.",
     "mnemonic": "call",
     "size": 5
   },

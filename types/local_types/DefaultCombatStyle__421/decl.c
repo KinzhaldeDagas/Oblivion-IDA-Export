@@ -1,1 +1,1 @@
-DefaultCombatStyle
+struct DefaultCombatStyle;

@@ -1,18 +1,31 @@
 {
-  "callees_count": 1,
-  "callers_count": 51,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 79,
+  "chunks": [
+    [
+      "0x5B1E20",
+      "0x5B1E61"
+    ]
+  ],
+  "chunks_sha256": "7601294bd41ad6870ec634f500ab29a530c415ef9af6ba7cebf19f64131d51bd",
+  "comment_regular": "Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.",
+  "comment_repeatable": "Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.\n\nMEF PERF 2026-10-07 PASS3: PERF-14 ownership clarification: property light admission at7EE376 uses this RAW payload tail insertion; assignment has no explicit Interlocked retain. MEF_RefListNode32 reused in the property layout VIEW describes physical next/previous/payload offsets only and does not assert owning semantics.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_5B1E20",
+  "display_name": "NiTPointerList__AddTail",
   "end_ea": "0x5B1E61",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_5B1E20",
+  "name": "NiTPointerList__AddTail",
   "segment": ".text",
   "sha256": "7601294bd41ad6870ec634f500ab29a530c415ef9af6ba7cebf19f64131d51bd",
   "size": 65,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5B1E20",
+  "total_chunk_size": 65,
   "type": "NiTPointerList_Node_void *__thiscall(BSTextureManager *this, void **)",
   "xrefs_from_count": 23,
   "xrefs_to_count": 79

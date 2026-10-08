@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6684B0",
-    "line": "push    ebp",
+    "line": "push    ebp; When bTrackLevelUps is enabled, append an Oblivion-native diagnostic snapshot: player identity/level, exactly seven class major-skill names, then all 21 skill values and skillExp entries, attributes, inventory data, and advancement counters. There is no serialized minor-skill name list.",
     "mnemonic": "push",
     "size": 1
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x66859E",
-    "line": "push    offset byte_B34190",
+    "line": "push    0B34190h",
     "mnemonic": "push",
     "size": 5
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x668635",
-    "line": "call    Actor_GetBaseClass",
+    "line": "call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1099,7 +1099,7 @@
   },
   {
     "ea": "0x6686F2",
-    "line": "push    ebx",
+    "line": "push    ebx; Begin a fixed seven-iteration loop over TESClass::majorSkills[0..6]; append each resolved actor-value name.",
     "mnemonic": "push",
     "size": 1
   },
@@ -1111,19 +1111,19 @@
   },
   {
     "ea": "0x6686F5",
-    "line": "call    Actor_GetBaseClass",
+    "line": "call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6686FA",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6686FC",
-    "line": "call    sub_51BF00",
+    "line": "call    TESClass_GetMajorSkillAV; Fetch one of exactly seven stored class major SkillActorValues. The diagnostic header preserves slot order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1135,7 +1135,7 @@
   },
   {
     "ea": "0x668702",
-    "line": "call    ActorValue_GetName",
+    "line": "call    ActorValue_GetName; Return the localized actor-value display name through g_actorValueNameSettings. Native skills occupy the contiguous SkillActorValue range 0x0C..0x20.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1231,7 +1231,7 @@
   },
   {
     "ea": "0x668730",
-    "line": "mov     ebx, 0Ch",
+    "line": "mov     ebx, 0Ch; After the seven major names, enumerate all 21 native SkillActorValues 0x0C..0x20 and append each current value plus raw skillExp.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1381,7 +1381,7 @@
   },
   {
     "ea": "0x668774",
-    "line": "call    ActorValue_GetGroupOffsetFromAV",
+    "line": "call    ActorValue_GetGroupOffsetFromAV; Oblivion group 2 converts SkillActorValue 0x0C..0x20 to the 0..20 index used by PlayerCharacter::skillExp.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1519,7 +1519,7 @@
   },
   {
     "ea": "0x6687C3",
-    "line": "xor     ebx, ebx",
+    "line": "xor     ebx, ebx; After all skill values/progress entries, begin the eight primary-attribute snapshot.",
     "mnemonic": "xor",
     "size": 2
   },
@@ -3253,7 +3253,7 @@
   },
   {
     "ea": "0x668B01",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3334,5 +3334,113 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C3EF0",
+    "line": "mov     eax, [ebp+var_260]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C3EF6",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3EF7",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3EFC",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3EFD",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3EFE",
+    "line": "lea     ecx, [ebp+var_26C]; void *",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C3F04",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3F09",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C3F0D",
+    "line": "lea     eax, [edx-274h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C3F13",
+    "line": "mov     ecx, [edx-278h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C3F19",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C3F1B",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3F20",
+    "line": "add     eax, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3F23",
+    "line": "mov     ecx, [edx-38h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3F26",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C3F28",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3F2D",
+    "line": "mov     eax, offset stru_AEC9E0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3F32",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

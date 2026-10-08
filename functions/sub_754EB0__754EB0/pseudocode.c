@@ -1,5 +1,5 @@
 // attributes: thunk
-int __thiscall sub_754EB0(_DWORD *this, signed int a2)
+int __thiscall j_NiTimeController_SaveBinary(_DWORD *this, signed int a2)
 {
-  return sub_716050(this, a2);
+  return NiTimeController_SaveBinary(this, a2);
 }

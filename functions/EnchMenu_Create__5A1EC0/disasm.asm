@@ -30,9 +30,9 @@
 0x5A1F0F: mov     esi, eax
 0x5A1F11: call    InterfaceManager_GetDepth
 0x5A1F16: fstp    [esp+28h+var_14]
-0x5A1F1A: mov     ecx, [esi+68h]; TileWindow *
+0x5A1F1A: mov     ecx, [esi+68h]; this
 0x5A1F1D: push    offset aDataMenusDia_6; "Data\\Menus\\dialog\\Enchantment.xml"
-0x5A1F22: call    Menu_LoadXML
+0x5A1F22: call    Tile__ReadFile; Verified: SDK ReadXML entry. Builds named tree under receiver via 0x590330, connects/evaluates traits via 0x58CF40, registers subtemplates with owning Menu, frees build storage, refreshes returned subtree via 0x58FBA0. Returns first created tile. Fallout analogue 0x827E2588; cache/cleanup differs.
 0x5A1F27: mov     ebx, eax
 0x5A1F29: mov     ecx, ebx
 0x5A1F2B: call    Tile_GetParentMenu
@@ -89,10 +89,10 @@
 0x5A1FD6: jp      short loc_5A1FEC
 0x5A1FD8: fld     [esp+28h+var_14]
 0x5A1FDC: push    ecx
-0x5A1FDD: fstp    [esp+2Ch+a2]; a3
-0x5A1FE0: push    0FABh; a2
+0x5A1FDD: fstp    [esp+2Ch+a2]; value
+0x5A1FE0: push    0FABh; propertyCode
 0x5A1FE5: mov     ecx, ebx; this
-0x5A1FE7: call    Tile_SetFloat
+0x5A1FE7: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A1FEC: mov     ds:0B3B718h, ebp
 0x5A1FF2: mov     [esp+28h+var_14], ebp
 0x5A1FF6: mov     [esp+28h+var_10], bp
@@ -105,7 +105,7 @@
 0x5A200C: mov     [esp+2Ch+var_4], ebp
 0x5A2010: call    eax
 0x5A2012: fmul    dword ptr ds:0B37FE8h
-0x5A2018: call    Double_To_SInt32
+0x5A2018: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5A201D: push    eax; ArgList
 0x5A201E: lea     ecx, [esp+2Ch+var_14]
 0x5A2022: push    offset aD_0; "%d"
@@ -134,7 +134,7 @@
 0x5A2074: mov     ecx, esi; int
 0x5A2076: call    EnableMenu
 0x5A207B: push    ebp
-0x5A207C: call    FormHeapFree
+0x5A207C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5A2081: add     esp, 4
 0x5A2084: mov     eax, ebx
 0x5A2086: mov     ecx, dword ptr [esp+28h+var_C]
@@ -163,3 +163,12 @@
 0x5A20BA: pop     ebx
 0x5A20BB: add     esp, 14h
 0x5A20BE: retn
+0x9B5BD0: lea     ecx, [ebp-14h]; void *
+0x9B5BD3: jmp     BSStringT_Clear
+0x9B5BD8: mov     edx, [esp+arg_4]
+0x9B5BDC: lea     eax, [edx-18h]
+0x9B5BDF: mov     ecx, [edx-1Ch]
+0x9B5BE2: xor     ecx, eax
+0x9B5BE4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B5BE9: mov     eax, offset stru_AE0BB4
+0x9B5BEE: jmp     ___CxxFrameHandler3

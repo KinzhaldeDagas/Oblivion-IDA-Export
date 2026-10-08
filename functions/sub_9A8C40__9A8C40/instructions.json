@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x9A8CCA",
-    "line": "cmp     byte_B4295B, 0",
+    "line": "cmp     g_D3DXParameterDispatchInitialized, 0",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x9A8CD3",
-    "line": "call    sub_783C70",
+    "line": "call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x9A8CDE",
-    "line": "cmp     dword_B428D8[edi*4], 1",
+    "line": "cmp     g_D3DXParameterClassDispatch[edi*4], 1",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x9A8CE8",
-    "line": "cmp     byte_B4295B, 0",
+    "line": "cmp     g_D3DXParameterDispatchInitialized, 0",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x9A8CF4",
-    "line": "call    sub_783C70",
+    "line": "call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x9A8CFF",
-    "line": "cmp     dword_B428D8[edi*4], 3",
+    "line": "cmp     g_D3DXParameterClassDispatch[edi*4], 3",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x9A8D17",
-    "line": "cmp     eax, offset unk_BAA920",
+    "line": "cmp     eax, offset stru_BAA920",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x9A8D2B",
-    "line": "push    offset unk_BAA8D8",
+    "line": "push    offset stru_BAA8D8",
     "mnemonic": "push",
     "size": 5
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x9A8D7B",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,19 +631,19 @@
   },
   {
     "ea": "0x9A8D8A",
-    "line": "push    ebx; Size",
+    "line": "push    ebx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x9A8D8B",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x9A8D8C",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x9A8D90",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },

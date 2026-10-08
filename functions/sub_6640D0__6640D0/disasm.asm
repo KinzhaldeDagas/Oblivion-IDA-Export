@@ -1,4 +1,4 @@
-0x6640D0: sub     esp, 1F8h
+0x6640D0: sub     esp, 1F8h; Fast-travel eligibility gate for the player: blocks combat, guard alarm, damaging active effects, script-disabled travel flag at PlayerCharacter+0x5A9, invalid/dead player states, and non-travel-enabled current cell/worldspace. It does not execute the travel.
 0x6640D6: mov     eax, ds:0B30AACh
 0x6640DB: xor     eax, esp
 0x6640DD: mov     [esp+1F8h+var_4], eax
@@ -38,7 +38,7 @@
 0x664147: push    0
 0x664149: push    0Fh
 0x66414B: push    eax
-0x66414C: mov     ecx, offset ActorProcessManager_ptr
+0x66414C: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x664151: call    sub_6758E0
 0x664156: mov     esi, eax
 0x664158: test    esi, esi
@@ -62,9 +62,9 @@
 0x66418D: call    GameUI_QueueMessage
 0x664192: add     esp, 10h
 0x664195: mov     ecx, esi
-0x664197: call    BSSimpleList_Clear
+0x664197: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x66419C: push    esi
-0x66419D: call    FormHeapFree
+0x66419D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6641A2: add     esp, 4
 0x6641A5: pop     esi
 0x6641A6: pop     edi
@@ -146,11 +146,11 @@
 0x664299: cmp     eax, 1
 0x66429C: jl      loc_6641A5
 0x6642A2: mov     ecx, edi; this
-0x6642A4: call    TESObjectREFR_GetParentCell
+0x6642A4: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6642A9: test    eax, eax
 0x6642AB: mov     ecx, edi; this
 0x6642AD: jz      short loc_6642BD
-0x6642AF: call    TESObjectREFR_GetParentCell
+0x6642AF: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6642B4: mov     ecx, eax
 0x6642B6: call    sub_4CA6C0
 0x6642BB: jmp     short loc_6642CD

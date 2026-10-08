@@ -1,4 +1,4 @@
-0x771150: sub     esp, 0Ch
+0x771150: sub     esp, 0Ch; DirectX10OBSE authority: Oblivion vertex declaration materializer. Walks enabled internal elements, computes offsets/stream strides, writes D3DVERTEXELEMENT9 records plus D3DDECL_END, then calls IDirect3DDevice9::CreateVertexDeclaration via vtable +0x158.
 0x771153: push    ebp
 0x771154: push    esi
 0x771155: mov     esi, ecx
@@ -50,7 +50,7 @@
 0x7711CA: jnb     short loc_7711DB
 0x7711CC: mov     eax, [esi+2Ch]
 0x7711CF: push    eax
-0x7711D0: call    FormHeapFree
+0x7711D0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7711D5: add     esp, 4
 0x7711D8: mov     [esi+2Ch], edi
 0x7711DB: cmp     ebp, edi
@@ -99,11 +99,11 @@
 0x771249: jz      short loc_771269
 0x77124B: cmp     dword ptr [eax+0Ch], 11h
 0x77124F: jz      short loc_771269
-0x771251: push    edx
+0x771251: push    edx; stream
 0x771252: mov     [eax+4], ecx
-0x771255: push    eax
-0x771256: mov     ecx, esi
-0x771258: call    sub_770150
+0x771255: push    eax; entry
+0x771256: mov     ecx, esi; self
+0x771258: call    NiDX9ShaderDeclaration_AddDeclarationEntry; DirectX10OBSE authority: Oblivion declaration element emitter. Uses B29858/B2983C/B298A0 type-method-usage tables and returns the D3D9 element byte size; DX10 input-layout mapping follows this emitted declaration surface.
 0x77125D: add     [esp+1Ch+var_C], eax
 0x771261: mov     ecx, [esp+1Ch+var_C]
 0x771265: mov     edx, [esp+1Ch+var_4]
@@ -146,7 +146,7 @@
 0x7712DB: mov     eax, [ecx+158h]
 0x7712E1: call    eax
 0x7712E3: test    eax, eax
-0x7712E5: jl      loc_7711E2
+0x7712E5: jl      loc_7711E2; Create the native IDirect3DVertexDeclaration9 from the materialized D3DVERTEXELEMENT9 array.
 0x7712EB: mov     eax, [edi]
 0x7712ED: mov     byte ptr [esi+28h], 0
 0x7712F1: pop     ebx

@@ -1,1 +1,1 @@
-ItemMonikerImpl_0
+typedef ItemMonikerImpl ItemMonikerImpl_0;

@@ -1,1 +1,1 @@
-NiKeyframeManager
+struct NiKeyframeManager;

@@ -1,46 +1,81 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "DetectionList::Data",
+  "definition": "struct DetectionList::Data\n{\nActor *actor;\nUInt8 detectionState;\nUInt8 pad04[3];\nUInt8 hasLOS;\nUInt8 pad08[3];\nSInt32 detectionLevel;\n}\n",
   "id": 18374686479672049752,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "actor",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "Actor *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "detectionState",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 1
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad04",
       "offset": 5,
       "offset_hex": "0x5",
-      "size": 3
+      "size": 3,
+      "type": "UInt8[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hasLOS",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 1
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad08",
       "offset": 9,
       "offset_hex": "0x9",
-      "size": 3
+      "size": 3,
+      "type": "UInt8[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "detectionLevel",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "SInt32"
     }
   ],
   "name": "DetectionList::Data",
+  "ordinal": 9525,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 16
 }

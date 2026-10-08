@@ -1,10 +1,11 @@
-_DWORD *__cdecl sub_557C80(char *Src)
+// Allocate and construct a BSFaceGen EGT data object from the named asset.
+BSFaceGenEgtData *__cdecl BSFaceGenEgtData_CreateFromFile(const char *path)
 {
-  _DWORD *v1; // eax
+  BSFaceGenEgtData *v1; // eax
 
-  v1 = (_DWORD *)FormHeapAlloc(0x24u);
-  if ( v1 )
-    return sub_557BB0(v1, Src);
+  v1 = (BSFaceGenEgtData *)FormHeapAlloc(0x24u); /*0x557ca3*/
+  if ( v1 ) /*0x557cb9*/
+    return BSFaceGenEgtData_ConstructFromFile(v1, path); /*0x557cc2*/
   else
-    return 0;
+    return 0; /*0x557cd7*/
 }

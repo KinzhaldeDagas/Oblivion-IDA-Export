@@ -5,7 +5,7 @@
 0x4977B8: test    edi, edi
 0x4977BA: jz      short loc_49781C
 0x4977BC: push    edi
-0x4977BD: call    sub_497420
+0x4977BD: call    NiAVObject_GetBhkBlendCollisionObject; ODismemberment: authoritative blend-collision getter. Reuses NiAVObject_GetBhkCollisionObject and accepts objects whose class chain includes bhkBlendCollisionObject.
 0x4977C2: add     esp, 4
 0x4977C5: test    eax, eax
 0x4977C7: jz      short loc_4977CB

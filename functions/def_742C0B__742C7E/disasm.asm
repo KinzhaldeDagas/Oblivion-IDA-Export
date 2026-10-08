@@ -55,10 +55,10 @@
 0x742D25: jz      loc_743801
 0x742D2B: mov     edx, [esp+Size]
 0x742D2F: mov     eax, [esp+Dst]
-0x742D33: push    edx; Size
-0x742D34: push    ebp; Src
-0x742D35: push    eax; Dst
-0x742D36: call    _memcpy
+0x742D33: push    edx; byteCount
+0x742D34: push    ebp; source
+0x742D35: push    eax; destination
+0x742D36: call    _memcpy;
 0x742D3B: mov     eax, [esp+0Ch+Size]
 0x742D3F: sub     [esp+0Ch+arg_C], eax
 0x742D43: sub     [esp+0Ch+arg_18], eax
@@ -881,3 +881,91 @@
 0x7437A3: mov     ecx, [edi]
 0x7437A5: cmp     ecx, 1Ch
 0x7437A8: jbe     loc_742620
+0x7437E5: xor     ebx, ebx
+0x7437E7: xor     esi, esi
+0x7437E9: mov     dword ptr [edi], 1Ah
+0x7437EF: mov     [esp+arg_2C], 1; jumptable 00742620 case 26
+0x7437F7: jmp     short loc_743801
+0x743801: mov     ecx, [esp+3Ch+arg_0]
+0x743805: mov     edx, [esp+3Ch+Dst]
+0x743809: mov     [ecx+0Ch], edx
+0x74380C: mov     edx, [esp+3Ch+var_20]
+0x743810: mov     [ecx+10h], edx
+0x743813: mov     [ecx], ebp
+0x743815: mov     [ecx+4], eax
+0x743818: cmp     dword ptr [edi+20h], 0
+0x74381C: mov     [edi+30h], ebx
+0x74381F: mov     [edi+34h], esi
+0x743822: jnz     short loc_743832
+0x743824: cmp     dword ptr [edi], 18h
+0x743827: jge     short loc_743856
+0x743829: mov     eax, [esp+3Ch+var_10]
+0x74382D: cmp     eax, [ecx+10h]
+0x743830: jz      short loc_743856
+0x743832: mov     eax, [esp+3Ch+var_10]
+0x743836: mov     ebx, [esp+3Ch+arg_0]
+0x74383A: call    sub_7424B0
+0x74383F: test    eax, eax
+0x743841: jz      short loc_743856
+0x743843: mov     dword ptr [edi], 1Ch
+0x743849: pop     esi; jumptable 00742620 case 28
+0x74384A: pop     ebp
+0x74384B: pop     ebx
+0x74384C: mov     eax, 0FFFFFFFCh
+0x743851: pop     edi
+0x743852: add     esp, 2Ch
+0x743855: retn
+0x743856: mov     eax, [esp+3Ch+arg_0]
+0x74385A: mov     esi, [esp+3Ch+var_4]
+0x74385E: sub     esi, [eax+4]
+0x743861: mov     ecx, [esp+3Ch+var_10]
+0x743865: sub     ecx, [eax+10h]
+0x743868: add     [eax+8], esi
+0x74386B: add     [eax+14h], ecx
+0x74386E: add     [edi+18h], ecx
+0x743871: xor     ebp, ebp
+0x743873: cmp     [edi+8], ebp
+0x743876: jz      short loc_743882
+0x743878: cmp     ecx, ebp
+0x74387A: jz      short loc_743882
+0x74387C: mov     [edi+14h], ebp
+0x74387F: mov     [eax+30h], ebp
+0x743882: mov     edx, [edi+4]
+0x743885: neg     edx
+0x743887: sbb     edx, edx
+0x743889: and     edx, 40h
+0x74388C: xor     ebx, ebx
+0x74388E: cmp     dword ptr [edi], 0Bh
+0x743891: setnz   bl
+0x743894: sub     ebx, 1
+0x743897: and     ebx, 80h
+0x74389D: add     edx, ebx
+0x74389F: add     edx, [edi+34h]
+0x7438A2: cmp     esi, ebp
+0x7438A4: mov     [eax+2Ch], edx
+0x7438A7: jnz     short loc_7438AD
+0x7438A9: cmp     ecx, ebp
+0x7438AB: jz      short loc_7438B4
+0x7438AD: cmp     [esp+3Ch+arg_4], 4
+0x7438B2: jnz     short loc_7438CD
+0x7438B4: mov     eax, [esp+3Ch+var_C]
+0x7438B8: cmp     eax, ebp
+0x7438BA: jnz     loc_7437B3
+0x7438C0: pop     esi
+0x7438C1: pop     ebp
+0x7438C2: pop     ebx
+0x7438C3: mov     eax, 0FFFFFFFBh
+0x7438C8: pop     edi
+0x7438C9: add     esp, 2Ch
+0x7438CC: retn
+0x7438CD: mov     eax, [esp+3Ch+var_C]
+0x7438D1: pop     esi
+0x7438D2: pop     ebp
+0x7438D3: pop     ebx
+0x7438D4: pop     edi
+0x7438D5: add     esp, 2Ch
+0x7438D8: retn
+0x7438D9: mov     eax, 0FFFFFFFEh
+0x7438DE: pop     edi
+0x7438DF: add     esp, 2Ch
+0x7438E2: retn

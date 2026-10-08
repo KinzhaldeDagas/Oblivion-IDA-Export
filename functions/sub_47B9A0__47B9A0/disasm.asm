@@ -18,11 +18,11 @@
 0x47B9D5: jz      loc_47BC20
 0x47B9DB: cmp     byte ptr [esi+4], 16h
 0x47B9DF: jnz     loc_47BC20
-0x47B9E5: push    0
+0x47B9E5: push    0; newModelData
 0x47B9E7: lea     eax, [ebp+0CCh]
-0x47B9ED: push    1
-0x47B9EF: push    eax
-0x47B9F0: call    sub_478780
+0x47B9ED: push    1; replaceMetadata
+0x47B9EF: push    eax; slot
+0x47B9F0: call    ActorSkinInfo_ClearOrReplaceEquipmentSlot; ActorSkinInfo equipment-slot teardown/replacement. Slot is exactly {TESForm*, TESModel*, NiAVObject*}; native code removes loaded 3D from shadow/parent ownership, releases loader/scene state, clears object3D, and optionally replaces form/model metadata. Known slots include rings, amulet, WEAP, AMMO, shield, and light. External Crossbow contrast after this native ownership behavior: retained raw controller/target pointers are invalidated when the owning WeaponObject graph is torn down; pointer equality alone is not a lifetime or generation check. Current removal/reset erases tracking without restoring original controller timing state, and target mismatch leaves null-controller tombstones instead of generation-validating/rescanning.
 0x47B9F5: mov     ecx, [ebp+150h]
 0x47B9FB: mov     eax, [ecx]
 0x47B9FD: mov     edx, [eax+170h]
@@ -72,10 +72,10 @@
 0x47BA8E: call    eax
 0x47BA90: mov     ecx, ds:0B33A1Ch
 0x47BA96: push    eax
-0x47BA97: call    sub_439EB0
-0x47BA9C: lea     ecx, [esp+8Ch+var_70]
+0x47BA97: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
+0x47BA9C: lea     ecx, [esp+8Ch+var_70]; this
 0x47BAA0: mov     esi, eax
-0x47BAA2: call    sub_478B90
+0x47BAA2: call    OB_NiCloningProcess_ctor
 0x47BAA7: fld1
 0x47BAA9: fst     [esp+8Ch+var_58]
 0x47BAAD: fst     [esp+8Ch+var_5C]
@@ -90,7 +90,7 @@
 0x47BAD0: test    ebx, ebx
 0x47BAD2: jz      loc_47BC06
 0x47BAD8: push    ebx
-0x47BAD9: push    offset dword_B35288
+0x47BAD9: push    0B35288h
 0x47BADE: call    NiRTTI__IsObjectOfRTTIType
 0x47BAE3: add     esp, 8
 0x47BAE6: test    al, al
@@ -124,14 +124,14 @@
 0x47BB41: jnz     short loc_47BB64
 0x47BB43: mov     edx, [ebp+150h]
 0x47BB49: mov     eax, [edx+3Ch]
-0x47BB4C: push    edi
-0x47BB4D: push    8
-0x47BB4F: push    ebp
-0x47BB50: push    edi
-0x47BB51: push    ebx
-0x47BB52: push    eax
+0x47BB4C: push    edi; unusedTrailing
+0x47BB4D: push    8; modelType
+0x47BB4F: push    ebp; unusedContext
+0x47BB50: push    edi; sourceModelRoot
+0x47BB51: push    ebx; modelRoot
+0x47BB52: push    eax; skeletonRoot
 0x47BB53: mov     [esp+0A4h+arg_0], ebx
-0x47BB5A: call    sub_479140
+0x47BB5A: call    AttachModelUsingPrnExtraData; Six-argument cdecl helper (all ten native callers push 6 arguments; unusedContext and unusedTrailing are not read). Reads NiStringExtraData 'Prn' from sourceModelRoot, falling back to modelRoot; resolves that exact parent in skeletonRoot and attaches modelRoot. For modelType==7 it forces Prn string byte 6 to 'L' for lookup, then writes it back to 'R'. It then finds exact-name 'Scb' inside modelRoot and attaches that object separately to the same parent, reparenting Scb as modelRoot's sibling before refreshing property/effect state. Missing creature parents invoke the narrow FadeNode-chain Scb removal. Every exit returns the bool result of sub_88D000(modelRoot,1,1), which is not proven to be general attachment success.
 0x47BB5F: add     esp, 18h
 0x47BB62: mov     esi, ebx
 0x47BB64: mov     [esp+8Ch+Src], edi
@@ -191,3 +191,14 @@
 0x47BC32: pop     ebx
 0x47BC33: add     esp, 78h
 0x47BC36: retn    4
+0x9AF330: lea     ecx, [ebp-70h]
+0x9AF333: jmp     sub_4781A0
+0x9AF338: lea     ecx, [ebp-78h]; void *
+0x9AF33B: jmp     BSStringT_Clear
+0x9AF340: mov     edx, [esp+arg_4]
+0x9AF344: lea     eax, [edx-7Ch]
+0x9AF347: mov     ecx, [edx-80h]
+0x9AF34A: xor     ecx, eax
+0x9AF34C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AF351: mov     eax, offset stru_ADB950
+0x9AF356: jmp     ___CxxFrameHandler3

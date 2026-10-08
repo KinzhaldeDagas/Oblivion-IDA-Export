@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x60E320",
+      "0x60E346"
+    ]
+  ],
+  "chunks_sha256": "56d9eb9ae366254fd6da8599ed3184e509b3b21518be763d9eac4eb76e3e9511",
+  "comment_regular": "Verified actor wrapper: returns false if the actor has no current cell; otherwise calls TESObjectCELL_IsActorOwnershipRestricted(currentCell, actor). It is referenced by condition/function tables, but the registered condition identity/name remains Unknown.",
+  "comment_repeatable": "Verified actor wrapper: returns false if the actor has no current cell; otherwise calls TESObjectCELL_IsActorOwnershipRestricted(currentCell, actor). It is referenced by condition/function tables, but the registered condition identity/name remains Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_60E320",
+  "display_name": "Actor_IsCurrentCellOwnershipRestricted",
   "end_ea": "0x60E346",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_60E320",
+  "name": "Actor_IsCurrentCellOwnershipRestricted",
   "segment": ".text",
   "sha256": "56d9eb9ae366254fd6da8599ed3184e509b3b21518be763d9eac4eb76e3e9511",
   "size": 38,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x60E320",
-  "type": "bool __thiscall(TESObjectREFR *this)",
+  "total_chunk_size": 38,
+  "type": "bool __thiscall(Actor *actor)",
   "xrefs_from_count": 21,
   "xrefs_to_count": 2
 }

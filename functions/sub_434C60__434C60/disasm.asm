@@ -1,4 +1,4 @@
-0x434C60: push    ebp
+0x434C60: push    ebp; Queued file/tree child cancel/update helper: forwards a2 to children in slot +0x1C before generic IO cleanup.
 0x434C61: mov     ebp, [esp+4+arg_0]
 0x434C65: push    edi
 0x434C66: mov     edi, ecx
@@ -12,7 +12,6 @@
 0x434C77: test    ebx, ebx
 0x434C79: jbe     short loc_434C9C
 0x434C7B: jmp     short loc_434C80
-0x434C7D: align 10h
 0x434C80: mov     eax, [edi+1Ch]
 0x434C83: mov     ecx, [eax+4]
 0x434C86: mov     ecx, [ecx+esi*4]
@@ -27,7 +26,7 @@
 0x434C9A: jb      short loc_434C80
 0x434C9C: pop     esi
 0x434C9D: pop     ebx
-0x434C9E: mov     ecx, ioManager
+0x434C9E: mov     ecx, ds:0B33A10h
 0x434CA4: push    ebp
 0x434CA5: push    edi
 0x434CA6: call    sub_432820

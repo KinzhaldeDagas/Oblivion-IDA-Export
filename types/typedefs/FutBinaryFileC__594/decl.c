@@ -1,1 +1,1 @@
-FutBinaryFileC
+struct FutBinaryFileC;

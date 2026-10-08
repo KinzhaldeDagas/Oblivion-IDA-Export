@@ -1,19 +1,32 @@
 {
-  "callees_count": 14,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_69EE30",
+  "chunks": [
+    [
+      "0x69EE30",
+      "0x69EF03"
+    ]
+  ],
+  "chunks_sha256": "19485961c937cfb319d4c36482451fd27231a000c3ec267aa072c722853d9bd9",
+  "comment_regular": "Verified (Oblivion): model save receives owner ActiveEffect* and target TESObjectREFR*, writes base data, then a 16-bit length and serialized NiStreamable model resource payload. Fallout instead serializes controller-manager save data.",
+  "comment_repeatable": "Verified (Oblivion): model save receives owner ActiveEffect* and target TESObjectREFR*, writes base data, then a 16-bit length and serialized NiStreamable model resource payload. Fallout instead serializes controller-manager save data.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "MagicModelHitEffect_SaveExtraData",
   "end_ea": "0x69EF03",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_69EE30",
+  "name": "MagicModelHitEffect_SaveExtraData",
   "segment": ".text",
   "sha256": "19485961c937cfb319d4c36482451fd27231a000c3ec267aa072c722853d9bd9",
   "size": 211,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x69EE30",
-  "type": "__int16 __thiscall(NiObject **this, int, int Src)",
+  "total_chunk_size": 211,
+  "type": "void __thiscall(MagicModelHitEffect *this, ActiveEffect *ownerActiveEffect, TESObjectREFR *targetReference)",
   "xrefs_from_count": 89,
   "xrefs_to_count": 1
 }

@@ -4,7 +4,7 @@
 0x6134C3: mov     esi, ecx
 0x6134C5: mov     ecx, [esi+3Ch]
 0x6134C8: xor     bl, bl
-0x6134CA: call    sub_5E0F50
+0x6134CA: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x6134CF: mov     edx, [eax]
 0x6134D1: mov     ecx, eax
 0x6134D3: mov     eax, [edx+11Ch]
@@ -18,7 +18,7 @@
 0x6134F1: jnz     def_613527
 0x6134F7: mov     ecx, [esi+3Ch]
 0x6134FA: mov     bl, 1
-0x6134FC: call    sub_5E0F50
+0x6134FC: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x613501: mov     edx, [eax]
 0x613503: mov     ecx, eax
 0x613505: mov     eax, [edx+16Ch]
@@ -32,7 +32,7 @@
 0x613521: ja      def_613527
 0x613527: jmp     ds:jpt_613527[eax*4]; switch jump
 0x61352E: mov     ecx, [esi+3Ch]; jumptable 00613527 case 22
-0x613531: call    sub_5E0F50
+0x613531: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x613536: mov     edx, [eax]
 0x613538: mov     ecx, eax
 0x61353A: mov     eax, [edx+128h]
@@ -45,7 +45,7 @@
 0x61354B: pop     ecx
 0x61354C: retn    4
 0x61354F: mov     ecx, [esi+3Ch]; jumptable 00613527 case 23
-0x613552: call    sub_5E0F50
+0x613552: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x613557: mov     edx, [eax]
 0x613559: mov     ecx, eax
 0x61355B: mov     eax, [edx+12Ch]
@@ -58,7 +58,7 @@
 0x61356C: pop     ecx
 0x61356D: retn    4
 0x613570: mov     ecx, [esi+3Ch]; jumptable 00613527 case 24
-0x613573: call    sub_5E0F50
+0x613573: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x613578: mov     edx, [eax]
 0x61357A: mov     ecx, eax
 0x61357C: mov     eax, [edx+130h]
@@ -71,7 +71,7 @@
 0x61358D: pop     ecx
 0x61358E: retn    4
 0x613591: mov     ecx, [esi+3Ch]; jumptable 00613527 case 25
-0x613594: call    sub_5E0F50
+0x613594: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x613599: mov     edx, [eax]
 0x61359B: mov     ecx, eax
 0x61359D: mov     eax, [edx+134h]
@@ -84,7 +84,7 @@
 0x6135AE: pop     ecx
 0x6135AF: retn    4
 0x6135B2: mov     ecx, [esi+3Ch]; jumptable 00613527 case 26
-0x6135B5: call    sub_5E0F50
+0x6135B5: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x6135BA: mov     edx, [eax]
 0x6135BC: mov     ecx, eax
 0x6135BE: mov     eax, [edx+138h]

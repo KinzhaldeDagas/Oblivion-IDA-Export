@@ -85,7 +85,7 @@
 0x6C4608: test    eax, eax
 0x6C460A: mov     [esp+24h+var_4], 1
 0x6C4612: jz      short loc_6C462E
-0x6C4614: push    offset sub_7016A0; a5
+0x6C4614: push    offset NiPointerSlot_Release; a5
 0x6C4619: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x6C461E: push    edi; size
 0x6C461F: lea     ebx, [eax+4]
@@ -102,7 +102,6 @@
 0x6C4641: mov     [esp+24h+arg_0], eax
 0x6C4645: jbe     short loc_6C46B2
 0x6C4647: jmp     short loc_6C4650
-0x6C4649: align 10h
 0x6C4650: mov     ebp, [esi+4]
 0x6C4653: mov     ecx, [esp+24h+var_10]
 0x6C4657: movzx   edi, ax
@@ -172,13 +171,13 @@
 0x6C4716: jz      short loc_6C4735
 0x6C4718: mov     ecx, [eax-4]
 0x6C471B: lea     esi, [eax-4]
-0x6C471E: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x6C471E: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x6C4723: push    ecx; int
 0x6C4724: push    4; unsigned int
 0x6C4726: push    eax; void *
 0x6C4727: call    $LN21
 0x6C472C: push    esi
-0x6C472D: call    FormHeapFree
+0x6C472D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6C4732: add     esp, 4
 0x6C4735: mov     ecx, [esp+24h+var_C]
 0x6C4739: mov     large fs:0, ecx
@@ -191,3 +190,19 @@
 0x6C4748: retn    4
 0x6C474B: mov     dword ptr [esi+4], 0
 0x6C4752: jmp     short loc_6C4714
+0x9D71B0: lea     ecx, [ebp-10h]; slot
+0x9D71B3: jmp     NiPointerSlot_Release
+0x9D71B8: mov     eax, [ebp+4]
+0x9D71BB: push    eax
+0x9D71BC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D71C1: pop     ecx
+0x9D71C2: retn
+0x9D71C3: lea     ecx, [ebp+4]; slot
+0x9D71C6: jmp     NiPointerSlot_Release
+0x9D71CB: mov     edx, [esp+arg_4]
+0x9D71CF: lea     eax, [edx-14h]
+0x9D71D2: mov     ecx, [edx-18h]
+0x9D71D5: xor     ecx, eax
+0x9D71D7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D71DC: mov     eax, offset stru_AFEE44
+0x9D71E1: jmp     ___CxxFrameHandler3

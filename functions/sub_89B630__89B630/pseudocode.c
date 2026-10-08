@@ -1,6 +1,6 @@
 void __thiscall sub_89B630(int *this, int a2, int a3, int a4)
 {
-  int v5; // ecx
+  char **v5; // ecx
   int v6; // ebx
   _DWORD *ThreadLocalStoragePointer; // edi
   int v8; // eax
@@ -57,194 +57,194 @@ void __thiscall sub_89B630(int *this, int a2, int a3, int a4)
   int v61; // [esp+444h] [ebp-404h]
   char v62; // [esp+448h] [ebp-400h] BYREF
 
-  if ( *(this + 0x22) )
+  if ( *(this + 0x22) ) /*0x89b639*/
   {
-    v53[1] = a2;
-    v54[0] = a3;
-    v5 = *(this + 0x20);
-    LOBYTE(v53[0]) = 0x12;
-    v54[1] = a4;
-    sub_8D8830(v5, (int)v53);
+    v53[1] = a2; /*0x89b65c*/
+    v54[0] = a3; /*0x89b664*/
+    v5 = (char **)*(this + 0x20); /*0x89b668*/
+    LOBYTE(v53[0]) = 0x12; /*0x89b66f*/
+    v54[1] = a4; /*0x89b674*/
+    sub_8D8830(v5, (int)v53); /*0x89b678*/
   }
   else
   {
-    v6 = TlsIndex;
-    ThreadLocalStoragePointer = NtCurrentTeb()->ThreadLocalStoragePointer;
-    v8 = ThreadLocalStoragePointer[TlsIndex];
-    if ( *(_DWORD *)(v8 + 0x1A4) < *(_DWORD *)(v8 + 0x1A8) )
+    v6 = MEMORY[0xBA9DE4]; /*0x89b688*/
+    ThreadLocalStoragePointer = NtCurrentTeb()->ThreadLocalStoragePointer; /*0x89b690*/
+    v8 = ThreadLocalStoragePointer[MEMORY[0xBA9DE4]]; /*0x89b697*/
+    if ( *(_DWORD *)(v8 + 0x1A4) < *(_DWORD *)(v8 + 0x1A8) ) /*0x89b6a6*/
     {
-      v9 = ThreadLocalStoragePointer[v6];
-      v10 = *(_DWORD **)(v8 + 0x1A4);
-      *v10 = "LtUpdateFilterOnEntity";
-      v10[3] = "init";
-      v11 = __rdtsc();
-      v10[1] = v11;
-      *(_DWORD *)(v9 + 0x1A4) = v10 + 4;
+      v9 = ThreadLocalStoragePointer[v6]; /*0x89b6a8*/
+      v10 = *(_DWORD **)(v8 + 0x1A4); /*0x89b6aa*/
+      *v10 = "LtUpdateFilterOnEntity"; /*0x89b6b0*/
+      v10[3] = "init"; /*0x89b6b6*/
+      v11 = __rdtsc(); /*0x89b6bd*/
+      v10[1] = v11; /*0x89b6c7*/
+      *(_DWORD *)(v9 + 0x1A4) = v10 + 4; /*0x89b6cd*/
     }
-    v12 = *(this + 0x22) + 1;
-    v55 = &v58;
-    *(this + 0x22) = v12;
-    v56 = 0;
-    v57 = 0x80000080;
-    if ( !a3 )
+    v12 = *(this + 0x22) + 1; /*0x89b6dd*/
+    v55 = &v58; /*0x89b6de*/
+    *(this + 0x22) = v12; /*0x89b6eb*/
+    v56 = 0; /*0x89b6f8*/
+    v57 = 0x80000080; /*0x89b700*/
+    if ( !a3 ) /*0x89b708*/
     {
-      v13 = ThreadLocalStoragePointer[v6];
-      if ( *(_DWORD *)(v13 + 0x1A4) < *(_DWORD *)(v13 + 0x1A8) )
+      v13 = ThreadLocalStoragePointer[v6]; /*0x89b70e*/
+      if ( *(_DWORD *)(v13 + 0x1A4) < *(_DWORD *)(v13 + 0x1A8) ) /*0x89b71d*/
       {
-        v14 = ThreadLocalStoragePointer[v6];
-        v15 = *(_DWORD **)(v13 + 0x1A4);
-        *v15 = "Stbroadphase";
-        v16 = __rdtsc();
-        v15[1] = v16;
-        *(_DWORD *)(v14 + 0x1A4) = v15 + 3;
+        v14 = ThreadLocalStoragePointer[v6]; /*0x89b71f*/
+        v15 = *(_DWORD **)(v13 + 0x1A4); /*0x89b721*/
+        *v15 = "Stbroadphase"; /*0x89b727*/
+        v16 = __rdtsc(); /*0x89b72d*/
+        v15[1] = v16; /*0x89b737*/
+        *(_DWORD *)(v14 + 0x1A4) = v15 + 3; /*0x89b73d*/
       }
-      (*(void (__thiscall **)(_DWORD, int, char **))(*(_DWORD *)*(this + 0x19) + 0x2C))(*(this + 0x19), a2 + 0x28, &v55);
-      v17 = ThreadLocalStoragePointer[v6];
-      if ( *(_DWORD *)(v17 + 0x1A4) < *(_DWORD *)(v17 + 0x1A8) )
+      (*(void (__thiscall **)(_DWORD, int, char **))(*(_DWORD *)*(this + 0x19) + 0x2C))(*(this + 0x19), a2 + 0x28, &v55); /*0x89b755*/
+      v17 = ThreadLocalStoragePointer[v6]; /*0x89b758*/
+      if ( *(_DWORD *)(v17 + 0x1A4) < *(_DWORD *)(v17 + 0x1A8) ) /*0x89b767*/
       {
-        v18 = ThreadLocalStoragePointer[v6];
-        v19 = *(_DWORD **)(v17 + 0x1A4);
-        *v19 = "Stphantom";
-        v20 = __rdtsc();
-        v19[1] = v20;
-        *(_DWORD *)(v18 + 0x1A4) = v19 + 3;
+        v18 = ThreadLocalStoragePointer[v6]; /*0x89b769*/
+        v19 = *(_DWORD **)(v17 + 0x1A4); /*0x89b76b*/
+        *v19 = "Stphantom"; /*0x89b771*/
+        v20 = __rdtsc(); /*0x89b777*/
+        v19[1] = v20; /*0x89b781*/
+        *(_DWORD *)(v18 + 0x1A4) = v19 + 3; /*0x89b787*/
       }
-      for ( i = 0; i < v56; ++i )
+      for ( i = 0; i < v56; ++i ) /*0x89b795*/
       {
-        v22 = *(_DWORD *)&v55[8 * i + 4] + *(char *)(*(_DWORD *)&v55[8 * i + 4] + 5);
-        if ( *(_BYTE *)(v22 + 0x18) == 2 )
+        v22 = *(_DWORD *)&v55[8 * i + 4] + *(char *)(*(_DWORD *)&v55[8 * i + 4] + 5); /*0x89b7ac*/
+        if ( *(_BYTE *)(v22 + 0x18) == 2 ) /*0x89b7b2*/
         {
-          v23 = v22 + *(_DWORD *)(v22 + 0x10);
-          if ( v23 )
+          v23 = v22 + *(_DWORD *)(v22 + 0x10); /*0x89b7b7*/
+          if ( v23 ) /*0x89b7b9*/
           {
-            sub_898760(v23, a2 + 0x14, *(this + 0x1E));
-            if ( a4 )
-              (*(void (__thiscall **)(int))(*(_DWORD *)v23 + 0x28))(v23);
-            --v56;
-            v24 = v55;
-            *(_DWORD *)&v55[8 * i] = *(_DWORD *)&v55[8 * v56];
-            *(_DWORD *)&v55[8 * i-- + 4] = *(_DWORD *)&v24[8 * v56 + 4];
+            sub_898760(v23, a2 + 0x14, *(this + 0x1E)); /*0x89b7c6*/
+            if ( a4 ) /*0x89b7d7*/
+              (*(void (__thiscall **)(int))(*(_DWORD *)v23 + 0x28))(v23); /*0x89b7dd*/
+            --v56; /*0x89b7e9*/
+            v24 = v55; /*0x89b7ed*/
+            *(_DWORD *)&v55[8 * i] = *(_DWORD *)&v55[8 * v56]; /*0x89b7f2*/
+            *(_DWORD *)&v55[8 * i-- + 4] = *(_DWORD *)&v24[8 * v56 + 4]; /*0x89b801*/
           }
-          ThreadLocalStoragePointer = NtCurrentTeb()->ThreadLocalStoragePointer;
+          ThreadLocalStoragePointer = NtCurrentTeb()->ThreadLocalStoragePointer; /*0x89b806*/
         }
       }
-      v59 = &v62;
-      v25 = *(_DWORD *)(a2 + 0x3C);
-      v26 = 0;
-      v27 = 0x80000080;
-      v60 = 0;
-      v61 = 0x80000080;
-      if ( v25 > 0 )
+      v59 = &v62; /*0x89b81d*/
+      v25 = *(_DWORD *)(a2 + 0x3C); /*0x89b824*/
+      v26 = 0; /*0x89b827*/
+      v27 = 0x80000080; /*0x89b82b*/
+      v60 = 0; /*0x89b830*/
+      v61 = 0x80000080; /*0x89b837*/
+      if ( v25 > 0 ) /*0x89b83e*/
       {
-        while ( 1 )
+        while ( 1 ) /*0x89b850*/
         {
-          if ( v60 == (v27 & 0x3FFFFFFF) )
-            sub_8A6EE0((int)&v59, 8);
-          v28 = &v59[8 * v60++];
-          *(_DWORD *)v28 = *(_DWORD *)(*(_DWORD *)(*(_DWORD *)(a2 + 0x38) + 8 * v26) + 0x14) + 0x14;
-          *((_DWORD *)v28 + 1) = *(_DWORD *)(*(_DWORD *)(*(_DWORD *)(a2 + 0x38) + 8 * v26++) + 0x18) + 0x14;
-          if ( v26 >= *(_DWORD *)(a2 + 0x3C) )
-            break;
-          v27 = v61;
+          if ( v60 == (v27 & 0x3FFFFFFF) ) /*0x89b85e*/
+            sub_8A6EE0((const void **)&v59, 8); /*0x89b86a*/
+          v28 = &v59[8 * v60++]; /*0x89b880*/
+          *(_DWORD *)v28 = *(_DWORD *)(*(_DWORD *)(*(_DWORD *)(a2 + 0x38) + 8 * v26) + 0x14) + 0x14; /*0x89b897*/
+          *((_DWORD *)v28 + 1) = *(_DWORD *)(*(_DWORD *)(*(_DWORD *)(a2 + 0x38) + 8 * v26++) + 0x18) + 0x14; /*0x89b8a5*/
+          if ( v26 >= *(_DWORD *)(a2 + 0x3C) ) /*0x89b8ae*/
+            break; /*0x89b8ae*/
+          v27 = v61; /*0x89b842*/
         }
       }
-      sub_8D84F0((int)&v59, (int *)&v55);
-      if ( v61 >= 0 )
+      sub_8D84F0((const void **)&v59, (int *)&v55); /*0x89b8bd*/
+      if ( v61 >= 0 ) /*0x89b8ce*/
       {
-        v29 = *(_DWORD *)(ThreadLocalStoragePointer[TlsIndex] + 0x19C);
-        if ( !v29 )
-          v29 = dword_BA7D9C;
-        sub_8A75D0(v29, v59, 8 * v61, 0x14);
+        v29 = *(_DWORD *)(ThreadLocalStoragePointer[MEMORY[0xBA9DE4]] + 0x19C); /*0x89b8d9*/
+        if ( !v29 ) /*0x89b8e1*/
+          v29 = unk_BA7D9C; /*0x89b8e3*/
+        sub_8A75D0(v29, v59, 8 * v61, 0x14); /*0x89b8fc*/
       }
-      v6 = TlsIndex;
+      v6 = MEMORY[0xBA9DE4]; /*0x89b901*/
     }
-    v30 = ThreadLocalStoragePointer[v6];
-    if ( *(_DWORD *)(v30 + 0x1A4) < *(_DWORD *)(v30 + 0x1A8) )
+    v30 = ThreadLocalStoragePointer[v6]; /*0x89b907*/
+    if ( *(_DWORD *)(v30 + 0x1A4) < *(_DWORD *)(v30 + 0x1A8) ) /*0x89b916*/
     {
-      v31 = ThreadLocalStoragePointer[v6];
-      v32 = *(_DWORD **)(v30 + 0x1A4);
-      *v32 = "StcheckAgts";
-      v33 = __rdtsc();
-      v32[1] = v33;
-      *(_DWORD *)(v31 + 0x1A4) = v32 + 3;
+      v31 = ThreadLocalStoragePointer[v6]; /*0x89b918*/
+      v32 = *(_DWORD **)(v30 + 0x1A4); /*0x89b91a*/
+      *v32 = "StcheckAgts"; /*0x89b920*/
+      v33 = __rdtsc(); /*0x89b926*/
+      v32[1] = v33; /*0x89b930*/
+      *(_DWORD *)(v31 + 0x1A4) = v32 + 3; /*0x89b936*/
     }
-    v50 = *(unsigned __int16 *)(a2 + 0x2E);
-    v34 = 0;
-    if ( *(int *)(a2 + 0x3C) > 0 )
+    v50 = *(unsigned __int16 *)(a2 + 0x2E); /*0x89b940*/
+    v34 = 0; /*0x89b947*/
+    if ( *(int *)(a2 + 0x3C) > 0 ) /*0x89b94b*/
     {
-      do
+      do /*0x89b9cb*/
       {
-        v35 = (int *)(*(_DWORD *)(a2 + 0x38) + 8 * v34);
-        if ( *(_BYTE *)(**(int (__thiscall ***)(int, char *, int, int))(*(this + 0x1E) + 8))(
+        v35 = (int *)(*(_DWORD *)(a2 + 0x38) + 8 * v34); /*0x89b95b*/
+        if ( *(_BYTE *)(**(int (__thiscall ***)(int, char *, int, int))(*(this + 0x1E) + 8))( /*0x89b98d*/
                          *(this + 0x1E) + 8,
                          (char *)&v52 + 3,
                          a2 + 0x14,
                          v35[1])
           && *(_BYTE *)(*(unsigned __int16 *)(v35[1] + 0x1A) + 8 * v50 + *(this + 0x1F) + 0x19D4) )
         {
-          if ( a4 == 1 )
-            sub_8E6560(*v35, (_DWORD *)*(this + 0x1D));
+          if ( a4 == 1 ) /*0x89b9b4*/
+            sub_8E6560(*v35, (_DWORD *)*(this + 0x1D)); /*0x89b9bd*/
         }
         else
         {
-          sub_8E7920((_DWORD *)*v35);
-          --v34;
-          *(_BYTE *)(*(_DWORD *)(a2 + 0x54) + 0x26) = 1;
+          sub_8E7920((_DWORD *)*v35); /*0x89b99a*/
+          --v34; /*0x89b9a5*/
+          *(_BYTE *)(*(_DWORD *)(a2 + 0x54) + 0x26) = 1; /*0x89b9a6*/
         }
-        ++v34;
+        ++v34; /*0x89b9c8*/
       }
-      while ( v34 < *(_DWORD *)(a2 + 0x3C) );
-      ThreadLocalStoragePointer = NtCurrentTeb()->ThreadLocalStoragePointer;
+      while ( v34 < *(_DWORD *)(a2 + 0x3C) ); /*0x89b9cb*/
+      ThreadLocalStoragePointer = NtCurrentTeb()->ThreadLocalStoragePointer; /*0x89b9cd*/
     }
-    v36 = TlsIndex;
-    if ( v56 <= 0 )
+    v36 = MEMORY[0xBA9DE4]; /*0x89b9da*/
+    if ( v56 <= 0 ) /*0x89b9e0*/
     {
-      v41 = this;
+      v41 = this; /*0x89ba3e*/
     }
     else
     {
-      v37 = ThreadLocalStoragePointer[v36];
-      if ( *(_DWORD *)(v37 + 0x1A4) < *(_DWORD *)(v37 + 0x1A8) )
+      v37 = ThreadLocalStoragePointer[v36]; /*0x89b9e2*/
+      if ( *(_DWORD *)(v37 + 0x1A4) < *(_DWORD *)(v37 + 0x1A8) ) /*0x89b9f1*/
       {
-        v38 = ThreadLocalStoragePointer[v36];
-        v39 = *(_DWORD **)(v37 + 0x1A4);
-        *v39 = "StaddAgts";
-        v40 = __rdtsc();
-        v39[1] = v40;
-        *(_DWORD *)(v38 + 0x1A4) = v39 + 3;
+        v38 = ThreadLocalStoragePointer[v36]; /*0x89b9f3*/
+        v39 = *(_DWORD **)(v37 + 0x1A4); /*0x89b9f5*/
+        *v39 = "StaddAgts"; /*0x89b9fb*/
+        v40 = __rdtsc(); /*0x89ba01*/
+        v39[1] = v40; /*0x89ba0b*/
+        *(_DWORD *)(v38 + 0x1A4) = v39 + 3; /*0x89ba11*/
       }
-      v41 = this;
-      v42 = *(this + 0x1E);
-      if ( v42 )
-        v43 = (int (__thiscall ***)(_DWORD, int *, int, int))(v42 + 8);
+      v41 = this; /*0x89ba17*/
+      v42 = *(this + 0x1E); /*0x89ba1b*/
+      if ( v42 ) /*0x89ba20*/
+        v43 = (int (__thiscall ***)(_DWORD, int *, int, int))(v42 + 8); /*0x89ba22*/
       else
-        v43 = 0;
-      sub_8D8370((_DWORD **)*(this + 0x1A), v55, v56, v43);
+        v43 = 0; /*0x89ba27*/
+      sub_8D8370((_DWORD **)*(this + 0x1A), v55, v56, v43); /*0x89ba37*/
     }
-    if ( v41[0x22]-- == 1 )
+    if ( v41[0x22]-- == 1 ) /*0x89ba42*/
     {
-      if ( v41[0x21] )
+      if ( v41[0x21] ) /*0x89ba4a*/
       {
-        if ( !*((_BYTE *)v41 + 0x90) )
-          sub_899210((int)v41);
+        if ( !*((_BYTE *)v41 + 0x90) ) /*0x89ba54*/
+          sub_899210((int)v41); /*0x89ba60*/
       }
     }
-    if ( v57 >= 0 )
+    if ( v57 >= 0 ) /*0x89ba6b*/
     {
-      v45 = *(_DWORD *)(ThreadLocalStoragePointer[v36] + 0x19C);
-      if ( !v45 )
-        v45 = dword_BA7D9C;
-      sub_8A75D0(v45, v55, 8 * v57, 0x14);
+      v45 = *(_DWORD *)(ThreadLocalStoragePointer[v36] + 0x19C); /*0x89ba70*/
+      if ( !v45 ) /*0x89ba78*/
+        v45 = unk_BA7D9C; /*0x89ba7a*/
+      sub_8A75D0(v45, v55, 8 * v57, 0x14); /*0x89ba92*/
     }
-    v46 = ThreadLocalStoragePointer[v36];
-    if ( *(_DWORD *)(v46 + 0x1A4) < *(_DWORD *)(v46 + 0x1A8) )
+    v46 = ThreadLocalStoragePointer[v36]; /*0x89ba97*/
+    if ( *(_DWORD *)(v46 + 0x1A4) < *(_DWORD *)(v46 + 0x1A8) ) /*0x89baa6*/
     {
-      v47 = ThreadLocalStoragePointer[v36];
-      v48 = *(_DWORD **)(v46 + 0x1A4);
-      *v48 = "lt";
-      v49 = __rdtsc();
-      v48[1] = v49;
-      *(_DWORD *)(v47 + 0x1A4) = v48 + 3;
+      v47 = ThreadLocalStoragePointer[v36]; /*0x89baa8*/
+      v48 = *(_DWORD **)(v46 + 0x1A4); /*0x89baaa*/
+      *v48 = "lt"; /*0x89bab0*/
+      v49 = __rdtsc(); /*0x89bab6*/
+      v48[1] = v49; /*0x89bac0*/
+      *(_DWORD *)(v47 + 0x1A4) = v48 + 3; /*0x89bac6*/
     }
   }
 }

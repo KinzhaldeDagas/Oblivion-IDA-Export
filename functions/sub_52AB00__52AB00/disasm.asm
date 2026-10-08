@@ -33,14 +33,14 @@
 0x52AB72: mov     ecx, edi
 0x52AB74: call    ScriptEventList_destr??
 0x52AB79: push    edi
-0x52AB7A: call    FormHeapFree
+0x52AB7A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x52AB7F: add     esp, 4
 0x52AB82: mov     [esi+58h], ebx
 0x52AB85: mov     ecx, esi
 0x52AB87: call    j_TESForm_ClearComponentReferences
 0x52AB8C: mov     eax, [esi+60h]
 0x52AB8F: push    eax
-0x52AB90: call    FormHeapFree
+0x52AB90: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x52AB95: add     esp, 4
 0x52AB98: lea     ecx, [esi+50h]
 0x52AB9B: mov     [esi+60h], ebx
@@ -50,7 +50,7 @@
 0x52ABAB: call    sub_56A7A0
 0x52ABB0: mov     eax, [esi+34h]
 0x52ABB3: push    eax
-0x52ABB4: call    FormHeapFree
+0x52ABB4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x52ABB9: add     esp, 4
 0x52ABBC: mov     ecx, ebp; void *
 0x52ABBE: mov     [esi+34h], ebx
@@ -70,3 +70,36 @@
 0x52ABF0: pop     ebx
 0x52ABF1: add     esp, 18h
 0x52ABF4: retn
+0x9B84E0: mov     ecx, [ebp-10h]; this
+0x9B84E3: jmp     TESForm_destr
+0x9B84E8: cmp     dword ptr [ebp-10h], 0
+0x9B84EC: jz      loc_9B8500
+0x9B84F2: mov     eax, [ebp-10h]
+0x9B84F5: add     eax, 24h ; '$'
+0x9B84F8: mov     [ebp-14h], eax
+0x9B84FB: jmp     loc_9B8507
+0x9B8500: mov     dword ptr [ebp-14h], 0
+0x9B8507: mov     ecx, [ebp-14h]; void *
+0x9B850A: jmp     j_TESTexture_destr
+0x9B850F: cmp     dword ptr [ebp-10h], 0
+0x9B8513: jz      loc_9B8527
+0x9B8519: mov     eax, [ebp-10h]
+0x9B851C: add     eax, 30h ; '0'
+0x9B851F: mov     [ebp-18h], eax
+0x9B8522: jmp     loc_9B852E
+0x9B8527: mov     dword ptr [ebp-18h], 0
+0x9B852E: mov     ecx, [ebp-18h]
+0x9B8531: jmp     TESFullName_Initialize
+0x9B8536: mov     ecx, [ebp-10h]
+0x9B8539: add     ecx, 50h ; 'P'
+0x9B853C: jmp     sub_56A7A0
+0x9B8541: mov     ecx, [ebp-10h]
+0x9B8544: add     ecx, 60h ; '`'; void *
+0x9B8547: jmp     BSStringT_Clear
+0x9B854C: mov     edx, [esp+arg_4]
+0x9B8550: lea     eax, [edx-1Ch]
+0x9B8553: mov     ecx, [edx-20h]
+0x9B8556: xor     ecx, eax
+0x9B8558: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B855D: mov     eax, offset stru_AE2B8C
+0x9B8562: jmp     ___CxxFrameHandler3

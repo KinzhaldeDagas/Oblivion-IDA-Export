@@ -33,7 +33,7 @@
 0x508C83: push    eax; a2
 0x508C84: push    ecx; a1
 0x508C85: mov     [esp+70h+var_30], 0
-0x508C8D: call    Script_ExtractArgs
+0x508C8D: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x508C92: add     esp, 30h
 0x508C95: test    al, al
 0x508C97: jnz     short loc_508CA1
@@ -72,8 +72,8 @@
 0x508D00: mov     ebx, [esp+44h+var_20]
 0x508D04: mov     ecx, [esp+44h+var_34]; this
 0x508D08: sar     ebx, 0Ch
-0x508D0B: push    ebx; signed int
-0x508D0C: push    edi; signed int
+0x508D0B: push    ebx; cellY
+0x508D0C: push    edi; cellX
 0x508D0D: call    TESWorldSpace__GetCellAtCellCoord
 0x508D12: cmp     ebp, ds:0B333C4h
 0x508D18: mov     esi, eax
@@ -91,7 +91,7 @@
 0x508D3E: mov     ecx, [esp+44h+var_34]
 0x508D42: push    ebx; int
 0x508D43: push    edi; ArgList
-0x508D44: call    sub_4F1630
+0x508D44: call    TESWorldSpace_LoadExteriorCellAtCoord; Verified: exterior-cell loader checks cellMap first, searches master files using cellOffsetsArray fast path or GRUP/CELL fallback, creates a missing TESObjectCELL, post-fixes it, then attaches worldspace-indexed references.
 0x508D49: mov     esi, eax
 0x508D4B: test    esi, esi
 0x508D4D: jz      loc_508E06
@@ -114,7 +114,7 @@
 0x508D82: mov     [eax+4], ecx
 0x508D85: mov     ecx, ds:0B333C4h; int
 0x508D8B: mov     [eax+8], edx
-0x508D8E: call    sub_66EAF0
+0x508D8E: call    PlayerCharacter_ChangeCellAndPosition; World/cell transition path used by fast travel relocation after cell resolution. Leaves normal exterior refresh/SpeedTree/weather side effects intact.
 0x508D93: jmp     short loc_508E06
 0x508D95: mov     ecx, [esp+44h+var_1C]
 0x508D99: mov     edx, [esp+44h+var_18]
@@ -136,18 +136,18 @@
 0x508DC9: jz      short loc_508DDE
 0x508DCB: fld     [esp+44h+var_8]
 0x508DCF: push    ecx
-0x508DD0: mov     ecx, ebp
-0x508DD2: fstp    [esp+48h+var_48]; float
-0x508DD5: call    sub_4D8A10
+0x508DD0: mov     ecx, ebp; this
+0x508DD2: fstp    [esp+48h+radians]; radians
+0x508DD5: call    TESObjectREFR_SetRotationZ; TES4 authoritative: write reference rotation Z at TESObjectREFR+0x28, then notify the reference through virtual slot +0x40 with change mask 4.
 0x508DDA: fldz
 0x508DDC: jmp     short loc_508DEC
 0x508DDE: cmp     ebp, ds:0B333C4h
 0x508DE4: jz      short loc_508DF7
 0x508DE6: fld     dword ptr ds:0A32048h
 0x508DEC: push    ecx
-0x508DED: mov     ecx, ebp
-0x508DEF: fstp    [esp+4Ch+var_4C]; float
-0x508DF2: call    sub_4D89D0
+0x508DED: mov     ecx, ebp; this
+0x508DEF: fstp    [esp+4Ch+var_4C]; radians
+0x508DF2: call    TESObjectREFR_SetRotationX; TES4 authoritative: write reference rotation X at TESObjectREFR+0x20, then notify the reference through virtual slot +0x40 with change mask 4.
 0x508DF7: mov     edx, [esp+4Ch+var_3C]
 0x508DFB: push    edx; int
 0x508DFC: push    esi; int

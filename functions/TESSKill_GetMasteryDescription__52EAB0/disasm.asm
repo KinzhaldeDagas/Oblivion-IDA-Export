@@ -1,4 +1,4 @@
-0x52EAB0: mov     edx, [esp+arg_0]
+0x52EAB0: mov     edx, [esp+mastery]; Return a mastery-specific SKIL description. Novice uses the shared novice text; Apprentice through Master use the four descriptions stored at TESSkill+0x40..+0x58; invalid ranks return empty.
 0x52EAB4: test    edx, edx
 0x52EAB6: jnz     short loc_52EAC0
 0x52EAB8: mov     eax, ds:0B36500h

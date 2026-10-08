@@ -1,1 +1,1 @@
-SERVER_ROUTINE
+typedef LONG (*SERVER_ROUTINE)(void);

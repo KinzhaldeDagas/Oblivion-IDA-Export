@@ -32,8 +32,8 @@
 0x5E344B: mov     edi, [edi+70h]
 0x5E344E: cmp     edi, 0Dh
 0x5E3451: jz      short loc_5E3460
-0x5E3453: push    edi
-0x5E3454: call    sub_612690
+0x5E3453: push    edi; mode
+0x5E3454: call    CombatMode_IsRangedWeaponMode; Returns true only for native combat modes 2 and 4, the two ranged-weapon modes used by the distance and attack-option logic.
 0x5E3459: add     esp, 4
 0x5E345C: test    al, al
 0x5E345E: jz      short loc_5E3465

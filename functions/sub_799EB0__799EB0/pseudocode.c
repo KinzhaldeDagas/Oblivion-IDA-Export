@@ -1,15 +1,16 @@
-void __thiscall sub_799EB0(unsigned int *this, unsigned int a2)
+// CFrondEngine profile setter. Replaces CFrondEngine+0x30, destructing/freeing the old 0x5C profile object when the pointer differs.
+void __thiscall OB_CFrondEngine_SetProfile_010201A0(void *this, void *profile)
 {
-  unsigned int v3; // esi
+  void *v3; // esi
 
-  v3 = *(this + 0xC);
-  if ( v3 != a2 )
+  v3 = *((void **)this + 0xC); /*0x799eb9*/
+  if ( v3 != profile ) /*0x799ebe*/
   {
-    if ( v3 )
+    if ( v3 ) /*0x799ec2*/
     {
-      sub_784B60((unsigned int *)*(this + 0xC));
-      FormHeapFree(v3);
+      OB_StBezierSpline_Dtor_010201A0(*((OB_stBezierSpline_010201A0 **)this + 0xC)); /*0x799ec6*/
+      FormHeapFree((unsigned int)v3); /*0x799ecc*/
     }
-    *(this + 0xC) = a2;
+    *((_DWORD *)this + 0xC) = profile; /*0x799ed4*/
   }
 }

@@ -1,1 +1,34 @@
-unix_funcs
+struct unix_funcs
+{
+NTSTATUS (*DbgUiIssueRemoteBreakin)(HANDLE);
+LONGLONG (*RtlGetSystemTimePrecise)(void);
+NTSTATUS (*RtlWaitOnAddress)(const void *, const void *, SIZE_T, const LARGE_INTEGER_0 *);
+void (*RtlWakeAddressAll)(const void *);
+void (*RtlWakeAddressSingle)(const void *);
+NTSTATUS (*fast_RtlpWaitForCriticalSection)(RTL_CRITICAL_SECTION *, int);
+NTSTATUS (*fast_RtlpUnWaitCriticalSection)(RTL_CRITICAL_SECTION *);
+NTSTATUS (*fast_RtlDeleteCriticalSection)(RTL_CRITICAL_SECTION *);
+NTSTATUS (*fast_RtlTryAcquireSRWLockExclusive)(RTL_SRWLOCK *);
+NTSTATUS (*fast_RtlAcquireSRWLockExclusive)(RTL_SRWLOCK *);
+NTSTATUS (*fast_RtlTryAcquireSRWLockShared)(RTL_SRWLOCK *);
+NTSTATUS (*fast_RtlAcquireSRWLockShared)(RTL_SRWLOCK *);
+NTSTATUS (*fast_RtlReleaseSRWLockExclusive)(RTL_SRWLOCK *);
+NTSTATUS (*fast_RtlReleaseSRWLockShared)(RTL_SRWLOCK *);
+NTSTATUS (*fast_RtlWakeConditionVariable)(RTL_CONDITION_VARIABLE *, int);
+NTSTATUS (*fast_wait_cv)(RTL_CONDITION_VARIABLE *, const void *, const LARGE_INTEGER_0 *);
+double (*atan)(double);
+double (*ceil)(double);
+double (*cos)(double);
+double (*fabs)(double);
+double (*floor)(double);
+double (*log)(double);
+double (*pow)(double, double);
+double (*sin)(double);
+double (*sqrt)(double);
+double (*tan)(double);
+void (*virtual_release_address_space)(void);
+NTSTATUS (*load_so_dll)(UNICODE_STRING *, void **);
+void (*init_builtin_dll)(void *);
+NTSTATUS (*init_unix_lib)(void *, DWORD, const void *, void *);
+NTSTATUS (*unwind_builtin_dll)(ULONG, _DISPATCHER_CONTEXT *, CONTEXT_0 *);
+};

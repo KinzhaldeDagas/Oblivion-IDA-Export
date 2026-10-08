@@ -1,1 +1,5 @@
-entity
+struct entity
+{
+DWORD kind;
+$B0E1A97CEC022AA84BF96692B0C81B6A u;
+};

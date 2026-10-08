@@ -17,11 +17,11 @@
 0x747F6D: test    edi, edi
 0x747F6F: jbe     short loc_747F8F
 0x747F71: mov     ecx, [esi+18h]
-0x747F74: push    edi; Size
+0x747F74: push    edi; byteCount
 0x747F75: add     ecx, eax
-0x747F77: push    ebp; Src
-0x747F78: push    ecx; Dst
-0x747F79: call    _memcpy
+0x747F77: push    ebp; source
+0x747F78: push    ecx; destination
+0x747F79: call    _memcpy;
 0x747F7E: mov     edx, [esi+0Ch]
 0x747F81: add     esp, 0Ch
 0x747F84: add     ebp, edi
@@ -57,10 +57,10 @@
 0x747FC2: retn    8
 0x747FC5: mov     ecx, [esi+18h]
 0x747FC8: add     ecx, [esi+14h]
-0x747FCB: push    ebx; Size
-0x747FCC: push    ebp; Src
-0x747FCD: push    ecx; Dst
-0x747FCE: call    _memcpy
+0x747FCB: push    ebx; byteCount
+0x747FCC: push    ebp; source
+0x747FCD: push    ecx; destination
+0x747FCE: call    _memcpy;
 0x747FD3: mov     edx, [esp+20h+var_4]
 0x747FD7: add     esp, 0Ch
 0x747FDA: add     [esi+14h], ebx

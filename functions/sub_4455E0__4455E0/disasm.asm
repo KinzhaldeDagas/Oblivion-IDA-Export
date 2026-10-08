@@ -9,11 +9,11 @@
 0x4455F3: cmp     byte ptr [esi+52h], 0
 0x4455F7: jnz     short loc_445604
 0x4455F9: mov     ecx, ds:0B33398h
-0x4455FF: call    sub_40D160
+0x4455FF: call    MenuBackground_CaptureWorldToTexture
 0x445604: mov     byte ptr ds:0B43074h, 1
-0x44560B: call    InitBSShaderAccumulator
-0x445610: mov     ecx, eax
-0x445612: call    sub_7AB6F0
+0x44560B: call    BSShaderAccumulator_GetOrCreateGlobal
+0x445610: mov     ecx, eax; this
+0x445612: call    BSShaderAccumulator_ClearAccumulatedPasses; Reset transient BSShaderAccumulator storage. Iterates all 0x1A3 selector buckets at this+0x104 with stride 0x14, releases old free nodes, and moves active nodes to local free chains without destroying borrowed RenderPass payloads. Mode-5 flush uses this after drawing only buckets 6..9 and 0x154..0x155, so every other queued selector, including 0x177..0x17A, is discarded without draw. Separate accumulator-owned special pass lists later in this function explicitly call RenderPass_Destroy plus FormHeapFree.
 0x445617: mov     eax, ds:0B35C24h
 0x44561C: mov     byte ptr [eax+19h], 0
 0x445620: mov     ecx, ds:0B35C24h
@@ -51,7 +51,7 @@
 0x445679: jz      short loc_445684
 0x44567B: push    0; a2
 0x44567D: mov     ecx, esi; this
-0x44567F: call    sub_43FC20
+0x44567F: call    sub_43FC20; TES cleanup/streaming critical-section path; calls SpeedTree cache prune 0x55E390(1) before and after heap/cell cleanup.
 0x445684: test    ebp, ebp
 0x445686: mov     edx, ds:0B33398h
 0x44568C: mov     dword ptr [edx+18h], 0
@@ -64,12 +64,12 @@
 0x4456A9: test    al, al
 0x4456AB: jnz     short loc_4456B8
 0x4456AD: mov     ecx, ds:0B33398h
-0x4456B3: call    sub_40D4D0
+0x4456B3: call    Input_CheckScreenshotHotkey; Verified gamma integration 2026-09-26: frame path tests B34FA4 and calls Renderer_ApplyPendingGammaRamp at40D508 before scene rendering.
 0x4456B8: push    0
 0x4456BA: call    GetShadowSceneNode
 0x4456BF: add     esp, 4
 0x4456C2: mov     ecx, eax
-0x4456C4: call    sub_7C7E50
+0x4456C4: call    ShadowSceneNode_TeardownLightLists; Cell/world transition boundary: tear down all native shadow-light lists before rebuilding reference-attached light sources for the destination cell.
 0x4456C9: test    edi, edi
 0x4456CB: mov     byte ptr [esp+14h+a2], 0
 0x4456D0: jz      short loc_445713
@@ -77,20 +77,20 @@
 0x4456D4: mov     byte ptr [esp+14h+a2], 1
 0x4456D9: call    sub_4D6450
 0x4456DE: push    3
-0x4456E0: call    nullsub_returnTrue_0arg
-0x4456E5: call    sub_7B84E0
+0x4456E0: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
+0x4456E5: call    sub_7B84E0; MoonSugarEffect decode: walks ShaderDefinition cache B42EC0..B42F30; for shaders with type != -1 calls vtable +0x90 to detach pass texture-stage refs before texture-manager rebuild. Does not walk arbitrary plugin-owned shader wrappers or call vertex wrapper +0x5C.
 0x4456EA: push    2
-0x4456EC: call    nullsub_returnTrue_0arg
-0x4456F1: mov     ecx, ds:0B333C4h
+0x4456EC: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
+0x4456F1: mov     ecx, ds:0B333C4h; this
 0x4456F7: add     esp, 8
-0x4456FA: push    0
-0x4456FC: call    PlayerCharacter_GetPlayerNode
+0x4456FA: push    0; firstPerson
+0x4456FC: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x445701: push    eax
 0x445702: push    0
 0x445704: call    GetShadowSceneNode
 0x445709: add     esp, 4
 0x44570C: mov     ecx, eax
-0x44570E: call    ShadowSceneNodeAddShadowCaster
+0x44570E: call    ShadowSceneNodeAddShadowCaster; Direct retail AddShadowCaster caller in player cell/world-transition lifecycle.
 0x445713: push    ebp; a2
 0x445714: mov     ecx, esi; this
 0x445716: call    TES__IsInteriorCellPreloaded
@@ -115,7 +115,7 @@
 0x445756: mov     eax, [esi+24h]
 0x445759: push    0
 0x44575B: push    1
-0x44575D: mov     ecx, esi
+0x44575D: mov     ecx, esi; DX11 interior observer audit, OblivionNew reverified 2026-09-19: native block sets ECX=ESI, copies TES grid coordinates [ESI+20h]/[ESI+24h] into saved coordinates [ESI+48h]/[ESI+4Ch], then calls 441D50 at 445765. The enclosing transition (4455E0) tears down native shadow-light lists at 4456C4 and registers destination cell attached lights at 44591A. External-patch evidence, separate from native behavior: verified EngineBugFixes 2.22 BackgroundCellLoadFix replaces the first 5 bytes here with a jump to module+6380 and resumes at 445765; DX11 validation composes only the exact independently verified patch, not arbitrary code changes.
 0x44575F: mov     [esi+48h], edx
 0x445762: mov     [esi+4Ch], eax
 0x445765: call    sub_441D50
@@ -140,7 +140,7 @@
 0x4457AC: call    sub_45A500
 0x4457B1: mov     ecx, ebp; this
 0x4457B3: mov     bl, al
-0x4457B5: call    TESObjectCELL_IsInterior
+0x4457B5: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x4457BA: test    al, al
 0x4457BC: jz      short loc_4457CA
 0x4457BE: lea     ecx, [ebp+28h]
@@ -179,8 +179,8 @@
 0x445815: call    sub_4AF170
 0x44581A: test    eax, eax
 0x44581C: jz      short loc_445825
-0x44581E: mov     ecx, eax
-0x445820: call    sub_4E7610
+0x44581E: mov     ecx, eax; this
+0x445820: call    TESPathGrid_LoadOrResolveGraph; Verified destination-cell activation path: once destination cell state is attached, obtains TESPathGrid and invokes TESPathGrid_LoadOrResolveGraph; this makes graph resolution part of cell activation.
 0x445825: push    1
 0x445827: mov     ecx, ebp
 0x445829: call    sub_4D5BD0
@@ -223,26 +223,26 @@
 0x44589D: jmp     short loc_4458A3
 0x44589F: test    bl, bl
 0x4458A1: jnz     short loc_4458D2
-0x4458A3: mov     ecx, offset ActorProcessManager_ptr
+0x4458A3: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x4458A8: call    sub_677360
 0x4458AD: mov     ecx, esi
 0x4458AF: call    sub_441610
-0x4458B4: mov     ecx, offset ActorProcessManager_ptr
-0x4458B9: call    sub_678750
-0x4458BE: mov     ecx, offset ActorProcessManager_ptr
+0x4458B4: mov     ecx, (offset qword_B3BB2C+1D4h)
+0x4458B9: call    sub_678750; BunkFix: furniture activation/sit-sleep handoff. For Sleep package, revalidates candidate furniture refs, picks first unused marker via sub_4D73F0, resolves marker transform via sub_4DB9D0, then calls SetSleepState. This is after the actor has already reached/activated the furniture ref.
+0x4458BE: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x4458C3: call    sub_675F40
-0x4458C8: mov     ecx, offset ActorProcessManager_ptr
+0x4458C8: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x4458CD: call    sub_675FC0
 0x4458D2: push    0; a2
 0x4458D4: mov     ecx, esi; this
-0x4458D6: call    sub_43FC20
+0x4458D6: call    sub_43FC20; TES cleanup/streaming critical-section path; calls SpeedTree cache prune 0x55E390(1) before and after heap/cell cleanup.
 0x4458DB: mov     ecx, ds:0B33A98h
 0x4458E1: call    sub_447130
 0x4458E6: mov     ecx, ebp
 0x4458E8: call    sub_4D58B0
 0x4458ED: mov     edi, eax
 0x4458EF: mov     ecx, edi; this
-0x4458F1: call    NiAVObject_InitializePropertyState
+0x4458F1: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x4458F6: mov     ecx, edi
 0x4458F8: call    NiNode_UpdateDynamicEffectState
 0x4458FD: cmp     word ptr [edi+0B8h], 0
@@ -252,10 +252,10 @@
 0x44590B: push    ecx
 0x44590C: fstp    [esp+1Ch+var_1C]; a2
 0x44590F: mov     ecx, edi; this
-0x445911: call    NiAVObject_UpdateNiAVObject
-0x445916: push    1
-0x445918: mov     ecx, ebp
-0x44591A: call    sub_4CB670
+0x445911: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
+0x445916: push    1; registerLights
+0x445918: mov     ecx, ebp; self
+0x44591A: call    TESObjectCELL_RegisterOrUnregisterAttachedLights; Interior-cell activation registers ordinary attached light sources for every reference after the cell node and property state are prepared.
 0x44591F: movzx   ecx, byte ptr [ebp+24h]
 0x445923: shr     ecx, 1
 0x445925: test    cl, 1
@@ -294,21 +294,21 @@
 0x445983: cmp     byte ptr [esp+14h+a2], 0
 0x445988: pop     ebx
 0x445989: jnz     short loc_4459C0
-0x44598B: call    InitBSShaderAccumulator
+0x44598B: call    BSShaderAccumulator_GetOrCreateGlobal
 0x445990: test    eax, eax
 0x445992: jz      short loc_44599B
 0x445994: mov     ecx, eax
 0x445996: call    sub_7A9CF0
 0x44599B: push    3
-0x44599D: call    nullsub_returnTrue_0arg
+0x44599D: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x4459A2: call    sub_7C4D90
 0x4459A7: push    1
 0x4459A9: call    sub_7B2130
 0x4459AE: push    2
-0x4459B0: call    nullsub_returnTrue_0arg
+0x4459B0: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x4459B5: mov     ecx, [esi+8]
 0x4459B8: add     esp, 0Ch
-0x4459BB: call    sub_482670
+0x4459BB: call    ClearCanopyShadowMap; Clear/release canopy shadow-map state.
 0x4459C0: cmp     byte ptr [esi+51h], 0
 0x4459C4: jnz     short loc_4459CC
 0x4459C6: cmp     byte ptr [esi+52h], 0
@@ -322,7 +322,7 @@
 0x4459E2: call    sub_6A9AA0
 0x4459E7: push    0; a2
 0x4459E9: mov     ecx, esi; this
-0x4459EB: call    sub_43FC20
+0x4459EB: call    sub_43FC20; TES cleanup/streaming critical-section path; calls SpeedTree cache prune 0x55E390(1) before and after heap/cell cleanup.
 0x4459F0: push    0
 0x4459F2: call    Player_UpdateHUDHealthBarTarget?
 0x4459F7: add     esp, 4

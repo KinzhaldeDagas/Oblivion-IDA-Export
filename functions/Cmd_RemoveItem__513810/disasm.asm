@@ -38,7 +38,7 @@
 0x51389C: push    edx; a3
 0x51389D: push    ecx; a2
 0x51389E: push    eax; a1
-0x51389F: call    Script_ExtractArgs
+0x51389F: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x5138A4: add     esp, 24h
 0x5138A7: test    al, al
 0x5138A9: jz      loc_513B34
@@ -75,22 +75,22 @@
 0x51390B: jz      loc_513B0C
 0x513911: mov     edx, [esp+140h+var_12C]
 0x513915: fild    dword ptr [esp+140h+ArgList]
-0x513919: lea     ecx, [esp+140h+var_11C]
-0x51391D: push    ecx
-0x51391E: push    0
-0x513920: fstp    [esp+148h+var_11C]
-0x513924: push    edx
-0x513925: push    edi
-0x513926: call    Cmd_GetItemCount
+0x513919: lea     ecx, [esp+140h+value]
+0x51391D: push    ecx; value
+0x51391E: push    0; param2
+0x513920: fstp    [esp+148h+value]
+0x513924: push    edx; objectID
+0x513925: push    edi; subject
+0x513926: call    GetItemCount_Eval; GetItemCount_Eval (index 47 / opcode 0x102F), used 54 times in vanilla core dialogue. Requires a valid item form, a container subject, and ContainerChanges data; returns abs(base TESContainer count plus EntryData.countDelta). If no ContainerChanges data exists it returns 0. Fallout's analogue x4y6:0x823BCE90 also has a special form-type-85 leveled-list expansion loop; this Oblivion handler performs only a single lookup for the supplied ObjectID.
 0x51392B: fild    dword ptr [esp+150h+ArgList]
-0x51392F: fld     [esp+150h+var_11C]
+0x51392F: fld     [esp+150h+value]
 0x513933: add     esp, 10h
 0x513936: fcom    st(1)
 0x513938: fnstsw  ax
 0x51393A: fstp    st(1)
 0x51393C: test    ah, 5
 0x51393F: jp      short loc_51394C
-0x513941: call    Double_To_SInt32
+0x513941: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x513946: mov     dword ptr [esp+140h+ArgList], eax
 0x51394A: jmp     short loc_51394E
 0x51394C: fstp    st
@@ -125,7 +125,7 @@
 0x513993: jz      short loc_51399E
 0x513995: push    0
 0x513997: mov     ecx, ebp
-0x513999: call    sub_41F370
+0x513999: call    ExtraDataList_SetCannotWear; Adds or removes marker extra ExtraCannotWear type 0x47 according to the requested state.
 0x51399E: cmp     dword ptr [esp+140h+ArgList], 0
 0x5139A3: jle     loc_513B32
 0x5139A9: mov     edx, [esp+140h+var_12C]
@@ -171,7 +171,7 @@
 0x513A22: push    eax
 0x513A23: push    ecx
 0x513A24: push    edx; a1
-0x513A25: call    TESFullName_GetNameForForm
+0x513A25: call    TESFullName_GetNameForForm; 3DTheft decode: TESFullName_GetNameForForm only dynamic-casts the passed form to TESFullName and returns its raw name/EmptyString; it does not apply worldspace fallback.
 0x513A2A: add     esp, 4
 0x513A2D: push    eax
 0x513A2E: mov     eax, dword ptr [esp+14Ch+ArgList]
@@ -186,7 +186,7 @@
 0x513A4D: mov     eax, [esp+140h+var_12C]
 0x513A51: push    edx
 0x513A52: push    eax; a1
-0x513A53: call    TESFullName_GetNameForForm
+0x513A53: call    TESFullName_GetNameForForm; 3DTheft decode: TESFullName_GetNameForForm only dynamic-casts the passed form to TESFullName and returns its raw name/EmptyString; it does not apply worldspace fallback.
 0x513A58: add     esp, 4
 0x513A5B: push    eax; ArgList
 0x513A5C: lea     ecx, [esp+148h+a3]
@@ -274,3 +274,16 @@
 0x513B50: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x513B55: add     esp, 12Ch
 0x513B5B: retn
+0x9B70C0: lea     ecx, [ebp-124h]; void *
+0x9B70C6: jmp     BSStringT_Clear
+0x9B70CB: mov     edx, [esp+arg_4]
+0x9B70CF: lea     eax, [edx-130h]
+0x9B70D5: mov     ecx, [edx-134h]
+0x9B70DB: xor     ecx, eax
+0x9B70DD: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B70E2: add     eax, 10h
+0x9B70E5: mov     ecx, [edx-4]
+0x9B70E8: xor     ecx, eax
+0x9B70EA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B70EF: mov     eax, offset stru_AE1D5C
+0x9B70F4: jmp     ___CxxFrameHandler3

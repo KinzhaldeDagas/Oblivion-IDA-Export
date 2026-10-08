@@ -1,11 +1,11 @@
-0x6C9D30: fldz
+0x6C9D30: fldz; Internal temporary-pose transition: activates the generated pose sequence, activates the destination with ease-in, deactivates the pose over that interval, and aligns normalized timing fields. Called by NiControllerManager_BlendFromPose.
 0x6C9D32: push    esi
 0x6C9D33: push    edi
-0x6C9D34: push    1; char
+0x6C9D34: push    1; transition
 0x6C9D36: push    ecx
-0x6C9D37: fstp    [esp+10h+var_10]; float
+0x6C9D37: fstp    [esp+10h+easeOutTime]; easeOutTime
 0x6C9D3A: mov     esi, ecx
-0x6C9D3C: call    sub_6C9CB0
+0x6C9D3C: call    NiControllerSequence_Deactivate; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.
 0x6C9D41: fldz
 0x6C9D43: fcomp   [esp+8+arg_4]
 0x6C9D47: fnstsw  ax
@@ -33,27 +33,27 @@
 0x6C9D96: add     ecx, 4Ch ; 'L'; this
 0x6C9D99: mov     [esp+0Ch+a2], esi
 0x6C9D9D: call    sub_73A5E0
-0x6C9DA2: mov     ecx, [esp+8+arg_18]
+0x6C9DA2: mov     ecx, [esp+8+timeSyncSequence]
 0x6C9DA6: fld     [esp+8+arg_4]
-0x6C9DAA: push    1; int
-0x6C9DAC: push    ecx; int
+0x6C9DAA: push    1; transition
+0x6C9DAC: push    ecx; timeSyncSequence
 0x6C9DAD: sub     esp, 8
-0x6C9DB0: fstp    [esp+18h+var_14]; float
+0x6C9DB0: fstp    [esp+18h+easeInTime]; easeInTime
 0x6C9DB4: fld     [esp+18h+arg_14]
-0x6C9DB8: fstp    [esp+18h+var_18]; float
-0x6C9DBB: push    0; char
-0x6C9DBD: push    edi; int
+0x6C9DB8: fstp    [esp+18h+weight]; weight
+0x6C9DBB: push    0; startOver
+0x6C9DBD: push    edi; priority
 0x6C9DBE: mov     edi, [esp+20h+arg_0]
-0x6C9DC2: mov     ecx, edi
-0x6C9DC4: call    sub_6C9BA0
+0x6C9DC2: mov     ecx, edi; this
+0x6C9DC4: call    NiControllerSequence_Activate; Native controller-sequence activation state machine. Rejects an already-active sequence, validates optional time-sync compatibility, records activation parameters, and queues the active sequence with its manager.
 0x6C9DC9: test    al, al
 0x6C9DCB: jz      short loc_6C9DF8
 0x6C9DCD: fld     [esp+8+arg_4]
-0x6C9DD1: push    1; char
+0x6C9DD1: push    1; transition
 0x6C9DD3: push    ecx
-0x6C9DD4: mov     ecx, esi
-0x6C9DD6: fstp    [esp+10h+var_10]; float
-0x6C9DD9: call    sub_6C9CB0
+0x6C9DD4: mov     ecx, esi; this
+0x6C9DD6: fstp    [esp+10h+easeOutTime]; easeOutTime
+0x6C9DD9: call    NiControllerSequence_Deactivate; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.
 0x6C9DDE: fld     dword ptr [esi+3Ch]
 0x6C9DE1: fdiv    dword ptr [esi+28h]
 0x6C9DE4: mov     al, 1

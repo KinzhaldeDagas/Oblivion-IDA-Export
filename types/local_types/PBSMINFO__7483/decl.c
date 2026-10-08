@@ -1,1 +1,1 @@
-PBSMINFO
+typedef tagBSMINFO *PBSMINFO;

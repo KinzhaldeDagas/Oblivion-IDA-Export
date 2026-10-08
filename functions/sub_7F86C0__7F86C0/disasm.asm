@@ -1,4 +1,4 @@
-0x7F86C0: push    0FFFFFFFFh
+0x7F86C0: push    0FFFFFFFFh; Pass205: Object-batch render path calls shader virtual +0x2C with NiPropertyState returned by sub_405760(geometry).
 0x7F86C2: push    offset SEH_7F86C0
 0x7F86C7: mov     eax, large fs:0
 0x7F86CD: push    eax
@@ -22,7 +22,7 @@
 0x7F8709: mov     ecx, [ecx]
 0x7F870B: mov     ebp, [ecx]
 0x7F870D: mov     eax, [ebp+0B4h]
-0x7F8713: mov     [esp+0DCh+var_C0], ecx
+0x7F8713: mov     [esp+0DCh+renderEntry], ecx
 0x7F8717: lea     esi, [ebp+64h]
 0x7F871A: mov     ecx, 0Dh
 0x7F871F: lea     edi, [esp+0DCh+var_80]
@@ -36,13 +36,13 @@
 0x7F873B: mov     eax, [ebp+28h]
 0x7F873E: mov     [esp+0DCh+var_98], eax
 0x7F8742: mov     ecx, [ebp+2Ch]
-0x7F8745: lea     edx, [esp+0DCh+var_BC]
+0x7F8745: lea     edx, [esp+0DCh+output]
 0x7F8749: mov     [esp+0DCh+var_94], ecx
-0x7F874D: push    edx
-0x7F874E: mov     ecx, ebp
-0x7F8750: call    sub_405760
+0x7F874D: push    edx; output
+0x7F874E: mov     ecx, ebp; this
+0x7F8750: call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.
 0x7F8755: mov     esi, [eax]
-0x7F8757: mov     eax, [esp+0DCh+var_BC]
+0x7F8757: mov     eax, [esp+0DCh+output]
 0x7F875B: test    eax, eax
 0x7F875D: jz      short loc_7F877D
 0x7F875F: mov     edi, eax
@@ -58,28 +58,28 @@
 0x7F8777: push    1
 0x7F8779: mov     ecx, edi
 0x7F877B: call    edx
-0x7F877D: movzx   eax, word ptr [esp+0DCh+arg_4]
+0x7F877D: movzx   eax, word ptr [esp+0DCh+shaderIndex]
 0x7F8785: mov     ebx, [ebp+0BCh]
 0x7F878B: mov     edi, [esi+18h]
 0x7F878E: mov     ds:0B42E90h, eax
-0x7F8793: mov     eax, [esp+0DCh+var_C0]
+0x7F8793: mov     eax, [esp+0DCh+renderEntry]
 0x7F8797: mov     ds:0B42EB8h, eax
-0x7F879C: call    sub_7ECB20
-0x7F87A1: mov     ecx, [esp+0DCh+var_C0]
-0x7F87A5: mov     edx, [esp+0DCh+arg_4]
-0x7F87AC: push    0
-0x7F87AE: push    edi
+0x7F879C: call    OB_BSShader_ResetLightConstantSlots_010201A0; Oblivion Lighting30 light-bank reset: clears eight diffuse/color slots to (0,0,0,1) and eight source/data slots to (0.001,0,0,0); it does not clear ambient c5.
+0x7F87A1: mov     ecx, [esp+0DCh+renderEntry]
+0x7F87A5: mov     edx, [esp+0DCh+shaderIndex]
+0x7F87AC: push    0; previousRenderEntry
+0x7F87AE: push    edi; lightingProperty
 0x7F87AF: mov     edi, [esp+0E4h+var_B4]
-0x7F87B3: push    ecx
-0x7F87B4: push    edx
+0x7F87B3: push    ecx; renderEntry
+0x7F87B4: push    edx; shaderIndex
 0x7F87B5: mov     ecx, edi
-0x7F87B7: call    sub_7F60F0
+0x7F87B7: call    OB_BSShader_RebuildRenderEntryLightConstants_010201A0
 0x7F87BC: push    ebp
 0x7F87BD: mov     ecx, edi
 0x7F87BF: call    sub_7F6A30
 0x7F87C4: mov     eax, [esp+0DCh+var_AC]
 0x7F87C8: mov     edi, [eax+38h]
-0x7F87CB: lea     ecx, [esp+0DCh+var_C8]
+0x7F87CB: lea     ecx, [esp+0DCh+previousRenderEntry]
 0x7F87CF: push    ecx
 0x7F87D0: mov     ecx, ebp
 0x7F87D2: mov     [esp+0E0h+var_90], edi
@@ -99,24 +99,24 @@
 0x7F87F2: mov     ecx, ebx
 0x7F87F4: mov     [esp+0F8h+var_4], 0
 0x7F87FF: call    edx
-0x7F8801: mov     eax, [esp+0DCh+var_C8]
+0x7F8801: mov     eax, [esp+0DCh+previousRenderEntry]
 0x7F8805: test    eax, eax
 0x7F8807: mov     [esp+0DCh+var_4], 0FFFFFFFFh
 0x7F8812: jz      short loc_7F8836
-0x7F8814: mov     [esp+0DCh+var_C4], eax
+0x7F8814: mov     [esp+0DCh+leafProperty], eax
 0x7F8818: add     eax, 4
 0x7F881B: push    eax; lpAddend
 0x7F881C: call    dword ptr ds:0A2807Ch
 0x7F8822: test    eax, eax
 0x7F8824: jnz     short loc_7F8836
-0x7F8826: mov     ecx, [esp+0DCh+var_C4]
+0x7F8826: mov     ecx, [esp+0DCh+leafProperty]
 0x7F882A: test    ecx, ecx
 0x7F882C: jz      short loc_7F8836
 0x7F882E: mov     eax, [ecx]
 0x7F8830: mov     edx, [eax]
 0x7F8832: push    1
 0x7F8834: call    edx
-0x7F8836: lea     eax, [esp+0DCh+var_C8]
+0x7F8836: lea     eax, [esp+0DCh+previousRenderEntry]
 0x7F883A: push    eax
 0x7F883B: mov     ecx, ebp
 0x7F883D: call    sub_7016D0
@@ -135,17 +135,17 @@
 0x7F8859: mov     ecx, ebx
 0x7F885B: mov     [esp+0F8h+var_4], 1
 0x7F8866: call    edx
-0x7F8868: mov     eax, [esp+0DCh+var_C8]
+0x7F8868: mov     eax, [esp+0DCh+previousRenderEntry]
 0x7F886C: test    eax, eax
 0x7F886E: mov     [esp+0DCh+var_4], 0FFFFFFFFh
 0x7F8879: jz      short loc_7F889D
-0x7F887B: mov     [esp+0DCh+var_C4], eax
+0x7F887B: mov     [esp+0DCh+leafProperty], eax
 0x7F887F: add     eax, 4
 0x7F8882: push    eax; lpAddend
 0x7F8883: call    dword ptr ds:0A2807Ch
 0x7F8889: test    eax, eax
 0x7F888B: jnz     short loc_7F889D
-0x7F888D: mov     ecx, [esp+0DCh+var_C4]
+0x7F888D: mov     ecx, [esp+0DCh+leafProperty]
 0x7F8891: test    ecx, ecx
 0x7F8893: jz      short loc_7F889D
 0x7F8895: mov     eax, [ecx]
@@ -157,7 +157,7 @@
 0x7F88A2: mov     ecx, ebx
 0x7F88A4: call    edx
 0x7F88A6: mov     eax, [ebx+3Ch]
-0x7F88A9: lea     ecx, [esp+0DCh+var_C8]
+0x7F88A9: lea     ecx, [esp+0DCh+previousRenderEntry]
 0x7F88AD: push    ecx
 0x7F88AE: mov     ecx, ebp
 0x7F88B0: mov     [esp+0E0h+var_B0], eax
@@ -177,24 +177,24 @@
 0x7F88D0: mov     ecx, ebx
 0x7F88D2: mov     [esp+0F8h+var_4], 2
 0x7F88DD: call    edx
-0x7F88DF: mov     eax, [esp+0DCh+var_C8]
+0x7F88DF: mov     eax, [esp+0DCh+previousRenderEntry]
 0x7F88E3: test    eax, eax
 0x7F88E5: mov     [esp+0DCh+var_4], 0FFFFFFFFh
 0x7F88F0: jz      short loc_7F8914
-0x7F88F2: mov     [esp+0DCh+var_C4], eax
+0x7F88F2: mov     [esp+0DCh+leafProperty], eax
 0x7F88F6: add     eax, 4
 0x7F88F9: push    eax; lpAddend
 0x7F88FA: call    dword ptr ds:0A2807Ch
 0x7F8900: test    eax, eax
 0x7F8902: jnz     short loc_7F8914
-0x7F8904: mov     ecx, [esp+0DCh+var_C4]
+0x7F8904: mov     ecx, [esp+0DCh+leafProperty]
 0x7F8908: test    ecx, ecx
 0x7F890A: jz      short loc_7F8914
 0x7F890C: mov     eax, [ecx]
 0x7F890E: mov     edx, [eax]
 0x7F8910: push    1
 0x7F8912: call    edx
-0x7F8914: lea     eax, [esp+0DCh+var_C8]
+0x7F8914: lea     eax, [esp+0DCh+previousRenderEntry]
 0x7F8918: push    eax
 0x7F8919: mov     ecx, ebp
 0x7F891B: call    sub_7016D0
@@ -214,17 +214,17 @@
 0x7F8939: mov     ecx, ebx
 0x7F893B: mov     [esp+0FCh+var_4], 3
 0x7F8946: call    edx
-0x7F8948: mov     eax, [esp+0DCh+var_C8]
+0x7F8948: mov     eax, [esp+0DCh+previousRenderEntry]
 0x7F894C: test    eax, eax
 0x7F894E: mov     [esp+0DCh+var_4], 0FFFFFFFFh
 0x7F8959: jz      short loc_7F897D
-0x7F895B: mov     [esp+0DCh+var_C4], eax
+0x7F895B: mov     [esp+0DCh+leafProperty], eax
 0x7F895F: add     eax, 4
 0x7F8962: push    eax; lpAddend
 0x7F8963: call    dword ptr ds:0A2807Ch
 0x7F8969: test    eax, eax
 0x7F896B: jnz     short loc_7F897D
-0x7F896D: mov     ecx, [esp+0DCh+var_C4]
+0x7F896D: mov     ecx, [esp+0DCh+leafProperty]
 0x7F8971: test    ecx, ecx
 0x7F8973: jz      short loc_7F897D
 0x7F8975: mov     eax, [ecx]
@@ -239,7 +239,7 @@
 0x7F8986: push    ebp
 0x7F8987: mov     ecx, ebx
 0x7F8989: call    edx
-0x7F898B: lea     eax, [esp+0DCh+var_C8]
+0x7F898B: lea     eax, [esp+0DCh+previousRenderEntry]
 0x7F898F: push    eax
 0x7F8990: mov     ecx, ebp
 0x7F8992: call    sub_7016D0
@@ -259,7 +259,7 @@
 0x7F89B0: mov     ecx, ebx
 0x7F89B2: mov     [esp+0FCh+var_4], 4
 0x7F89BD: call    edx
-0x7F89BF: mov     eax, [esp+0DCh+var_C8]
+0x7F89BF: mov     eax, [esp+0DCh+previousRenderEntry]
 0x7F89C3: test    eax, eax
 0x7F89C5: mov     [esp+0DCh+var_4], 0FFFFFFFFh
 0x7F89D0: jz      short loc_7F89F0
@@ -285,7 +285,7 @@
 0x7F8A04: mov     ecx, ds:0B28CB0h
 0x7F8A0A: mov     eax, [esp+0DCh+var_AC]
 0x7F8A0E: lea     edx, ds:0[ecx*4]
-0x7F8A15: mov     [esp+0DCh+var_BC], eax
+0x7F8A15: mov     [esp+0DCh+output], eax
 0x7F8A19: mov     eax, [esp+0DCh+var_B4]
 0x7F8A1D: mov     ecx, [eax]
 0x7F8A1F: push    edx
@@ -297,25 +297,24 @@
 0x7F8A2F: test    eax, eax
 0x7F8A31: jz      loc_7F8D51
 0x7F8A37: jmp     short loc_7F8A44
-0x7F8A39: align 10h
 0x7F8A40: mov     eax, [esp+0DCh+var_A8]
-0x7F8A44: mov     edx, [esp+0DCh+var_C0]
+0x7F8A44: mov     edx, [esp+0DCh+renderEntry]
 0x7F8A48: lea     ecx, [eax+8]
 0x7F8A4B: mov     eax, [eax]
 0x7F8A4D: mov     [esp+0DCh+var_A8], eax
 0x7F8A51: mov     eax, [ecx]
-0x7F8A53: movzx   ecx, word ptr [esp+0DCh+arg_4]
+0x7F8A53: movzx   ecx, word ptr [esp+0DCh+shaderIndex]
 0x7F8A5B: mov     ds:0B42E90h, ecx
 0x7F8A61: mov     ds:0B42EB8h, eax
 0x7F8A66: mov     ebp, [eax]
 0x7F8A68: mov     ecx, [ebp+0B4h]
-0x7F8A6E: mov     [esp+0DCh+var_C8], edx
+0x7F8A6E: mov     [esp+0DCh+previousRenderEntry], edx
 0x7F8A72: lea     edx, [esp+0DCh+var_8C]
 0x7F8A76: mov     [esp+0DCh+var_AC], ecx
-0x7F8A7A: push    edx
-0x7F8A7B: mov     ecx, ebp
-0x7F8A7D: mov     [esp+0E0h+var_C0], eax
-0x7F8A81: call    sub_405760
+0x7F8A7A: push    edx; output
+0x7F8A7B: mov     ecx, ebp; this
+0x7F8A7D: mov     [esp+0E0h+renderEntry], eax
+0x7F8A81: call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.
 0x7F8A86: mov     esi, [eax]
 0x7F8A88: mov     eax, [esp+0DCh+var_8C]
 0x7F8A8C: test    eax, eax
@@ -341,32 +340,32 @@
 0x7F8AC1: rep movsd
 0x7F8AC3: mov     ecx, [ebp+20h]
 0x7F8AC6: mov     edi, [esp+0DCh+var_AC]
-0x7F8ACA: cmp     [esp+0DCh+var_BC], edi
+0x7F8ACA: cmp     [esp+0DCh+output], edi
 0x7F8ACE: mov     [esp+0DCh+var_A0], ecx
 0x7F8AD2: mov     edx, [ebp+24h]
 0x7F8AD5: mov     [esp+0DCh+var_9C], edx
 0x7F8AD9: mov     ecx, [ebp+28h]
 0x7F8ADC: mov     [esp+0DCh+var_98], ecx
 0x7F8AE0: mov     edx, [ebp+2Ch]
-0x7F8AE3: mov     [esp+0DCh+var_C4], eax
+0x7F8AE3: mov     [esp+0DCh+leafProperty], eax
 0x7F8AE7: mov     [esp+0DCh+var_94], edx
 0x7F8AEB: jz      loc_7F8C15
 0x7F8AF1: mov     esi, [esp+0DCh+var_B4]
 0x7F8AF5: push    ebp
 0x7F8AF6: mov     ecx, esi
 0x7F8AF8: call    sub_7F6A30
-0x7F8AFD: mov     eax, [esp+0DCh+var_C8]
-0x7F8B01: mov     ecx, [esp+0DCh+var_C4]
-0x7F8B05: mov     edx, [esp+0DCh+var_C0]
+0x7F8AFD: mov     eax, [esp+0DCh+previousRenderEntry]
+0x7F8B01: mov     ecx, [esp+0DCh+leafProperty]
+0x7F8B05: mov     edx, [esp+0DCh+renderEntry]
 0x7F8B09: mov     edi, [edi+38h]
-0x7F8B0C: push    eax
-0x7F8B0D: mov     eax, [esp+0E0h+arg_4]
-0x7F8B14: push    ecx
-0x7F8B15: push    edx
-0x7F8B16: push    eax
+0x7F8B0C: push    eax; previousRenderEntry
+0x7F8B0D: mov     eax, [esp+0E0h+shaderIndex]
+0x7F8B14: push    ecx; lightingProperty
+0x7F8B15: push    edx; renderEntry
+0x7F8B16: push    eax; shaderIndex
 0x7F8B17: mov     ecx, esi
 0x7F8B19: mov     [esp+0ECh+var_90], edi
-0x7F8B1D: call    sub_7F60F0
+0x7F8B1D: call    OB_BSShader_RebuildRenderEntryLightConstants_010201A0
 0x7F8B22: lea     ecx, [esp+0DCh+var_88]
 0x7F8B26: push    ecx
 0x7F8B27: mov     ecx, ebp
@@ -384,18 +383,18 @@
 0x7F8B43: push    ebp; float
 0x7F8B44: mov     ecx, ebx
 0x7F8B46: mov     [esp+0F8h+var_4], 5
-0x7F8B51: call    sub_7F0BC0
+0x7F8B51: call    OB_SpeedTreeLeafShader_SetupPass_010201A0; OBLIVION AUTHORITY (2026-08-24): SpeedTree leaf SetupPass. Full-bright forces VS0; otherwise marker count selects base versus point-light VS and active fog selects the fog variant. Selector inputs do not encode leaf layer/card/LOD. The routine uploads transform/light constants, binds the property texture, and uploads fog constants only for an active fog property.
 0x7F8B56: mov     eax, [esp+0DCh+var_88]
 0x7F8B5A: test    eax, eax
 0x7F8B5C: mov     [esp+0DCh+var_4], 0FFFFFFFFh
 0x7F8B67: jz      short loc_7F8B8B
-0x7F8B69: mov     [esp+0DCh+var_BC], eax
+0x7F8B69: mov     [esp+0DCh+output], eax
 0x7F8B6D: add     eax, 4
 0x7F8B70: push    eax; lpAddend
 0x7F8B71: call    dword ptr ds:0A2807Ch
 0x7F8B77: test    eax, eax
 0x7F8B79: jnz     short loc_7F8B8B
-0x7F8B7B: mov     ecx, [esp+0DCh+var_BC]
+0x7F8B7B: mov     ecx, [esp+0DCh+output]
 0x7F8B7F: test    ecx, ecx
 0x7F8B81: jz      short loc_7F8B8B
 0x7F8B83: mov     eax, [ecx]
@@ -406,8 +405,8 @@
 0x7F8B8F: push    0
 0x7F8B91: lea     eax, [esp+0E0h+var_80]
 0x7F8B95: push    eax
-0x7F8B96: call    sub_765480
-0x7F8B9B: lea     ecx, [esp+0DCh+var_4C]
+0x7F8B96: call    NiDX9Renderer_SetModelTransform; MoonSugar build 39: common non-skinned transform upload has many shader-family xrefs (generic, water, grass, precipitation, SpeedTree, LOD, GeometryDecal, Lighting30). Do not globally detour for Moon Sugar; use scoped caller/hook windows.
+0x7F8B9B: lea     ecx, [esp+0DCh+inverseWorld]
 0x7F8BA2: push    ecx
 0x7F8BA3: lea     edx, [esp+0E0h+var_80]
 0x7F8BA7: push    edx
@@ -415,13 +414,13 @@
 0x7F8BAA: call    sub_7F5B80
 0x7F8BAF: fld     [esp+0DCh+var_50]
 0x7F8BB6: push    ecx
-0x7F8BB7: mov     ecx, [esp+0E0h+var_C4]
-0x7F8BBB: fstp    [esp+0E0h+var_E0]; float
-0x7F8BBE: lea     eax, [esp+0E0h+var_4C]
-0x7F8BC5: push    eax; int
-0x7F8BC6: push    ecx; int
+0x7F8BB7: mov     ecx, [esp+0E0h+leafProperty]
+0x7F8BBB: fstp    [esp+0E0h+objectScale]; objectScale
+0x7F8BBE: lea     eax, [esp+0E0h+inverseWorld]
+0x7F8BC5: push    eax; inverseWorld
+0x7F8BC6: push    ecx; leafProperty
 0x7F8BC7: mov     ecx, ebx
-0x7F8BC9: call    sub_7F0100
+0x7F8BC9: call    OB_SpeedTreeLeafShader_UpdateObjectSpaceLightConstants_010201A0; Transforms the global directional light vector into object space and writes leaf c11; optional point-light position becomes c12. Does not touch texture or alpha.
 0x7F8BCE: mov     eax, [esp+0DCh+var_A4]
 0x7F8BD2: mov     edx, [ebx]
 0x7F8BD4: mov     edx, [edx+3Ch]
@@ -448,16 +447,16 @@
 0x7F8C09: mov     ecx, [esp+0DCh+var_B0]
 0x7F8C0D: mov     ecx, [ecx+44h]
 0x7F8C10: jmp     loc_7F8D0D
-0x7F8C15: mov     edx, [esp+0DCh+var_C8]
-0x7F8C19: mov     ecx, [esp+0DCh+arg_4]
+0x7F8C15: mov     edx, [esp+0DCh+previousRenderEntry]
+0x7F8C19: mov     ecx, [esp+0DCh+shaderIndex]
 0x7F8C20: mov     edi, [esp+0DCh+var_B4]
-0x7F8C24: push    edx
-0x7F8C25: push    eax
-0x7F8C26: mov     eax, [esp+0E4h+var_C0]
-0x7F8C2A: push    eax
-0x7F8C2B: push    ecx
+0x7F8C24: push    edx; previousRenderEntry
+0x7F8C25: push    eax; lightingProperty
+0x7F8C26: mov     eax, [esp+0E4h+renderEntry]
+0x7F8C2A: push    eax; renderEntry
+0x7F8C2B: push    ecx; shaderIndex
 0x7F8C2C: mov     ecx, edi
-0x7F8C2E: call    sub_7F60F0
+0x7F8C2E: call    OB_BSShader_RebuildRenderEntryLightConstants_010201A0
 0x7F8C33: lea     edx, [esp+0DCh+var_84]
 0x7F8C37: push    edx
 0x7F8C38: mov     ecx, ebp
@@ -476,8 +475,8 @@
 0x7F8C58: push    ebp; float
 0x7F8C59: mov     ecx, ebx
 0x7F8C5B: mov     [esp+0F8h+var_4], 6
-0x7F8C66: call    sub_7F0BC0
-0x7F8C6B: mov     eax, dword ptr [esp+0DCh+var_84]
+0x7F8C66: call    OB_SpeedTreeLeafShader_SetupPass_010201A0; OBLIVION AUTHORITY (2026-08-24): SpeedTree leaf SetupPass. Full-bright forces VS0; otherwise marker count selects base versus point-light VS and active fog selects the fog variant. Selector inputs do not encode leaf layer/card/LOD. The routine uploads transform/light constants, binds the property texture, and uploads fog constants only for an active fog property.
+0x7F8C6B: mov     eax, [esp+0DCh+var_84]
 0x7F8C6F: test    eax, eax
 0x7F8C71: mov     [esp+0DCh+var_4], 0FFFFFFFFh
 0x7F8C7C: jz      short loc_7F8C9C
@@ -499,22 +498,22 @@
 0x7F8CA2: lea     ecx, [esp+0E0h+var_80]
 0x7F8CA6: push    ecx
 0x7F8CA7: mov     ecx, esi
-0x7F8CA9: call    sub_765480
-0x7F8CAE: lea     edx, [esp+0DCh+var_4C]
+0x7F8CA9: call    NiDX9Renderer_SetModelTransform; MoonSugar build 39: common non-skinned transform upload has many shader-family xrefs (generic, water, grass, precipitation, SpeedTree, LOD, GeometryDecal, Lighting30). Do not globally detour for Moon Sugar; use scoped caller/hook windows.
+0x7F8CAE: lea     edx, [esp+0DCh+inverseWorld]
 0x7F8CB5: push    edx
 0x7F8CB6: lea     eax, [esp+0E0h+var_80]
 0x7F8CBA: push    eax
 0x7F8CBB: mov     ecx, edi
 0x7F8CBD: call    sub_7F5B80
 0x7F8CC2: fld     [esp+0DCh+var_50]
-0x7F8CC9: mov     edx, [esp+0DCh+var_C4]
+0x7F8CC9: mov     edx, [esp+0DCh+leafProperty]
 0x7F8CCD: push    ecx
-0x7F8CCE: fstp    [esp+0E0h+var_E0]; float
-0x7F8CD1: lea     ecx, [esp+0E0h+var_4C]
-0x7F8CD8: push    ecx; int
-0x7F8CD9: push    edx; int
+0x7F8CCE: fstp    [esp+0E0h+objectScale]; objectScale
+0x7F8CD1: lea     ecx, [esp+0E0h+inverseWorld]
+0x7F8CD8: push    ecx; inverseWorld
+0x7F8CD9: push    edx; leafProperty
 0x7F8CDA: mov     ecx, ebx
-0x7F8CDC: call    sub_7F0100
+0x7F8CDC: call    OB_SpeedTreeLeafShader_UpdateObjectSpaceLightConstants_010201A0; Transforms the global directional light vector into object space and writes leaf c11; optional point-light position becomes c12. Does not touch texture or alpha.
 0x7F8CE1: mov     eax, [esp+0DCh+var_B0]
 0x7F8CE5: mov     ecx, [eax+58h]
 0x7F8CE8: mov     edi, [esi+8ACh]
@@ -551,11 +550,11 @@
 0x7F8D39: call    sub_7F6BF0
 0x7F8D3E: cmp     [esp+0DCh+var_A8], 0
 0x7F8D43: mov     edx, [esp+0DCh+var_AC]
-0x7F8D47: mov     [esp+0DCh+var_BC], edx
+0x7F8D47: mov     [esp+0DCh+output], edx
 0x7F8D4B: jnz     loc_7F8A40
 0x7F8D51: mov     esi, [esp+0DCh+arg_0]
-0x7F8D58: mov     ecx, esi
-0x7F8D5A: call    sub_7A9C30
+0x7F8D58: mov     ecx, esi; this
+0x7F8D5A: call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.
 0x7F8D5F: mov     eax, [esi+4]
 0x7F8D62: xor     edi, edi
 0x7F8D64: mov     [esi+0Ch], eax
@@ -581,3 +580,24 @@
 0x7F8DA0: pop     ebx
 0x7F8DA1: add     esp, 0C8h
 0x7F8DA7: retn    8
+0x9D02E0: lea     ecx, [ebp-0C8h]; slot
+0x9D02E6: jmp     NiPointerSlot_Release
+0x9D02EB: lea     ecx, [ebp-0C8h]; slot
+0x9D02F1: jmp     NiPointerSlot_Release
+0x9D02F6: lea     ecx, [ebp-0C8h]; slot
+0x9D02FC: jmp     NiPointerSlot_Release
+0x9D0301: lea     ecx, [ebp-0C8h]; slot
+0x9D0307: jmp     NiPointerSlot_Release
+0x9D030C: lea     ecx, [ebp-0C8h]; slot
+0x9D0312: jmp     NiPointerSlot_Release
+0x9D0317: lea     ecx, [ebp-88h]; slot
+0x9D031D: jmp     NiPointerSlot_Release
+0x9D0322: lea     ecx, [ebp-84h]; slot
+0x9D0328: jmp     NiPointerSlot_Release
+0x9D032D: mov     edx, [esp+shaderIndex]
+0x9D0331: lea     eax, [edx-0CCh]
+0x9D0337: mov     ecx, [edx-0D0h]
+0x9D033D: xor     ecx, eax
+0x9D033F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D0344: mov     eax, offset stru_AF8D00
+0x9D0349: jmp     ___CxxFrameHandler3

@@ -1,4 +1,4 @@
-0x59B670: mov     eax, [esp+arg_0]
+0x59B670: mov     eax, [esp+arg_0]; [Controller decode 2026-07-09] Controls menu row visibility filter. Shows control IDs 0..16, 26, 27, and 28; hides Quick Menu and Quick1..Quick8 rows.
 0x59B674: test    eax, eax
 0x59B676: jz      short loc_59B6DA
 0x59B678: cmp     eax, 1

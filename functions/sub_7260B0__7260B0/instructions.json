@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7260B0",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+blockIndex];",
     "mnemonic": "mov",
     "size": 4
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x72610D",
-    "line": "cmp     [esp+10h+arg_C], 0",
+    "line": "cmp     [esp+10h+copyData], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -289,13 +289,13 @@
   },
   {
     "ea": "0x726128",
-    "line": "mov     edi, eax",
+    "line": "mov     edi, eax;",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x72612A",
-    "line": "mov     eax, [esp+0Ch+Src]",
+    "line": "mov     eax, [esp+10h+data]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -313,25 +313,25 @@
   },
   {
     "ea": "0x726132",
-    "line": "push    ebx; Size",
+    "line": "push    ebx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x726133",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x726134",
-    "line": "push    edi; Dst",
+    "line": "push    edi; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x726135",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,13 +379,13 @@
   },
   {
     "ea": "0x726149",
-    "line": "jmp     short loc_72614F",
+    "line": "jmp     short loc_72614F;",
     "mnemonic": "jmp",
     "size": 2
   },
   {
     "ea": "0x72614B",
-    "line": "mov     edi, [esp+10h+arg_4]",
+    "line": "mov     edi, [esp+10h+data]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x726159",
-    "line": "mov     ebx, [esp+10h+arg_0]",
+    "line": "mov     ebx, [esp+10h+blockIndex]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x72617F",
-    "line": "mov     cl, [esp+10h+arg_C]",
+    "line": "mov     cl, [esp+10h+copyData]",
     "mnemonic": "mov",
     "size": 4
   },

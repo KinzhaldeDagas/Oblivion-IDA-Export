@@ -1,19 +1,36 @@
 {
-  "callees_count": 11,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_423BD0",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x423BD0",
+      "0x423C8B"
+    ],
+    [
+      "0x9C3090",
+      "0x9C30B6"
+    ]
+  ],
+  "chunks_sha256": "40b1131ff914ba98d6c444041b461f708c0c004028339195a3022df6d15eaa1e",
+  "comment_regular": "Verified singleton ExtraData_Seed behavior: signed byte 0xFF removes the extra; other bytes add or replace it. Combined with TESObjectTREE_GetIndexForSeed, this means an empty/missing tree seed entry cannot be persisted as a concrete per-reference seed.",
+  "comment_repeatable": "Verified singleton ExtraData_Seed behavior: signed byte 0xFF removes the extra; other bytes add or replace it. Combined with TESObjectTREE_GetIndexForSeed, this means an empty/missing tree seed entry cannot be persisted as a concrete per-reference seed.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "ExtraDataList_SetOrRemoveTreeSeed",
   "end_ea": "0x423C8B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_423BD0",
+  "name": "ExtraDataList_SetOrRemoveTreeSeed",
   "segment": ".text",
   "sha256": "48c4849a84676ea971ed228da753c875c88e7a7f2338fe49039cb4bdb54bd807",
   "size": 187,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x423BD0",
-  "type": "void __thiscall(ExtraDataList *this, char)",
-  "xrefs_from_count": 71,
+  "total_chunk_size": 225,
+  "type": "void __thiscall(ExtraDataList *this, signed __int8 seed)",
+  "xrefs_from_count": 85,
   "xrefs_to_count": 4
 }

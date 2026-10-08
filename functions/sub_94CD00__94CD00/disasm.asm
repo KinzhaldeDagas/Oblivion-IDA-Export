@@ -19,7 +19,6 @@
 0x94CD31: jmp     short loc_94CD40
 0x94CD33: mov     eax, [esp+28h+arg_0]
 0x94CD37: jmp     short loc_94CD40
-0x94CD39: align 10h
 0x94CD40: mov     edx, [edi+50h]
 0x94CD43: mov     ecx, [edx+0Ch]
 0x94CD46: mov     ebp, [eax+ecx+4]

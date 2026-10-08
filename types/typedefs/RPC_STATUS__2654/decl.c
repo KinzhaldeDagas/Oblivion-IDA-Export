@@ -1,1 +1,1 @@
-RPC_STATUS
+typedef LONG RPC_STATUS;

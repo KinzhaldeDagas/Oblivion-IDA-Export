@@ -37,8 +37,8 @@
 0x74DA45: jnz     short loc_74DA88
 0x74DA47: mov     edx, [esp+14h+var_4]
 0x74DA4B: mov     eax, [edx+1Ch]
-0x74DA4E: mov     ecx, [eax+edi*4]
-0x74DA51: call    sub_700900
+0x74DA4E: mov     ecx, [eax+edi*4]; this
+0x74DA51: call    NiObject_CloneWithPointerMap; Clones a loaded NiObject with a temporary pointer map and runs clone post-processing; the returned scene object is distinct from its source.
 0x74DA56: mov     edi, eax
 0x74DA58: cmp     esi, edi
 0x74DA5A: jz      short loc_74DA88

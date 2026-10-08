@@ -41,7 +41,7 @@
 0x733A56: cmp     eax, ebx
 0x733A58: jz      short loc_733A6E
 0x733A5A: lea     ebx, [ebx+0]
-0x733A60: cmp     eax, offset dword_B3FAD4
+0x733A60: cmp     eax, offset stru_B3FAD4
 0x733A65: jz      short loc_733A86
 0x733A67: mov     eax, [eax+4]
 0x733A6A: cmp     eax, ebx

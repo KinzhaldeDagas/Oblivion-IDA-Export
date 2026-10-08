@@ -1,133 +1,137 @@
-char __usercall sub_59BA40@<al>(double a1@<st2>, double a2@<st1>, double a3@<st0>)
+// [Controller decode 2026-07-09] Opens Controls menu.
+char __usercall ControlsMenu_Open@<al>(double a1@<st2>, double a2@<st1>, double a3@<st0>)
 {
   void (__thiscall ***OpenMenuTile)(_DWORD, int); // eax
-  signed int v5; // ebp
+  signed int v4; // ebp
   InterfaceManager *Singleton; // esi
   double Depth; // st7
-  BSStringT *XML; // edi
+  Tile *File; // edi
   int ParentMenu; // eax
-  Menu *v10; // esi
-  TileMenu *v11; // eax
-  _DWORD *v12; // ebx
-  int v13; // eax
-  _DWORD *v14; // ecx
-  double v15; // st7
-  unsigned int *TileFromTemplate; // eax
-  Tile *v17; // esi
-  char **v18; // eax
-  char *v19; // eax
-  double v21; // st7
-  float v22; // [esp+4h] [ebp-20h]
-  float v23; // [esp+4h] [ebp-20h]
+  Menu *v9; // esi
+  TileMenu *v10; // eax
+  char *v11; // ebx
+  int v12; // eax
+  _DWORD *v13; // ecx
+  Tile *v14; // eax
+  Tile *v15; // esi
+  char **v16; // eax
+  char *v17; // eax
+  double v19; // st7
+  float v20; // [esp+4h] [ebp-20h]
+  float v21; // [esp+4h] [ebp-20h]
   float Float; // [esp+4h] [ebp-20h]
+  float v23; // [esp+4h] [ebp-20h]
+  float v24; // [esp+4h] [ebp-20h]
   float v25; // [esp+4h] [ebp-20h]
-  float v26; // [esp+4h] [ebp-20h]
-  float v27; // [esp+4h] [ebp-20h]
-  float v28; // [esp+18h] [ebp-Ch]
-  float v29; // [esp+18h] [ebp-Ch]
-  _DWORD *v30; // [esp+18h] [ebp-Ch]
-  Menu *v31; // [esp+1Ch] [ebp-8h]
+  float v26; // [esp+18h] [ebp-Ch]
+  float v27; // [esp+18h] [ebp-Ch]
+  _DWORD *v28; // [esp+18h] [ebp-Ch]
+  Menu *v29; // [esp+1Ch] [ebp-8h]
 
-  OpenMenuTile = (void (__thiscall ***)(_DWORD, int))Menu_GetOpenMenuTile(0x3FD);
-  v5 = 0;
-  if ( OpenMenuTile )
-    (**OpenMenuTile)(OpenMenuTile, 1);
-  Singleton = InterfaceManager_GetSingleton(0, 1);
-  Depth = InterfaceManager_GetDepth(a3);
-  v28 = Depth;
-  XML = Menu_LoadXML((BSStringT *)Singleton->menuRoot, a1, a2, Depth, "Data\\Menus\\Options\\controls_menu.xml");
-  ParentMenu = Tile_GetParentMenu(XML);
-  v10 = (Menu *)ParentMenu;
-  v31 = (Menu *)ParentMenu;
-  if ( !ParentMenu )
-    return 0;
-  if ( (*(int (__thiscall **)(int))(*(_DWORD *)ParentMenu + 0x34))(ParentMenu) != 0x3FD )
+  OpenMenuTile = (void (__thiscall ***)(_DWORD, int))Menu_GetOpenMenuTile(0x3FD); /*0x59ba4b*/
+  v4 = 0; /*0x59ba50*/
+  if ( OpenMenuTile ) /*0x59ba57*/
+    (**OpenMenuTile)(OpenMenuTile, 1); /*0x59ba61*/
+  Singleton = InterfaceManager_GetSingleton(0, 1); /*0x59ba6e*/
+  Depth = InterfaceManager_GetDepth(a3); /*0x59ba70*/
+  v26 = Depth; /*0x59ba75*/
+  File = Tile::ReadFile(Singleton->menuRoot, "Data\\Menus\\Options\\controls_menu.xml"); /*0x59ba86*/
+  ParentMenu = Tile_GetParentMenu(File); /*0x59ba8a*/
+  v9 = (Menu *)ParentMenu; /*0x59ba8f*/
+  v29 = (Menu *)ParentMenu; /*0x59ba93*/
+  if ( !ParentMenu ) /*0x59ba97*/
+    return 0; /*0x59ba97*/
+  if ( (*(int (__thiscall **)(int))(*(_DWORD *)ParentMenu + 0x34))(ParentMenu) != 0x3FD ) /*0x59baab*/
   {
-    if ( v10->members.tile )
-      v10->__vftable->Destructor(v10, 1);
-    return 0;
+    if ( v9->members.tile ) /*0x59bd68*/
+      v9->__vftable->Destructor(v9, 1); /*0x59bd75*/
+    return 0; /*0x59bd79*/
   }
-  v11 = (TileMenu *)OblivionDynamicCast(
-                      XML,
+  v10 = (TileMenu *)OblivionDynamicCast( /*0x59babf*/
+                      File,
                       0,
                       (struct _s_RTTICompleteObjectLocator *)&Tile `RTTI Type Descriptor',
                       &TileMenu `RTTI Type Descriptor',
                       0);
-  Menu_SetTileMenu(v10, a2, Depth, v11);
-  v12 = OblivionDynamicCast(
-          v10,
-          0,
-          (struct _s_RTTICompleteObjectLocator *)&Menu `RTTI Type Descriptor',
-          &ControlsMenu `RTTI Type Descriptor',
-          0);
-  if ( !sub_59B920(v12) )
-    ShowUIMessageBox((char *)sOk, 0, a1, a2, Depth, (const char *)dword_B38EC8, 0, 1, (const char *)sOk, 0);
-  v13 = 0;
-  v14 = v12 + 0xA;
-  do
+  Menu_SetTileMenu(v9, a2, Depth, v10); /*0x59baca*/
+  v11 = (char *)OblivionDynamicCast( /*0x59bae1*/
+                  v9,
+                  0,
+                  (struct _s_RTTICompleteObjectLocator *)&Menu `RTTI Type Descriptor',
+                  &ControlsMenu `RTTI Type Descriptor',
+                  0);
+  if ( !ControlsMenu::SelectNextAvailableScheme(v11) ) /*0x59bae8*/
+    ShowUIMessageBox( /*0x59bb03*/
+      (char *)MEMORY[0xB38CF0].value,
+      a1,
+      a2,
+      Depth,
+      (char *)stru_B38EC8.value,
+      0,
+      1,
+      (char *)MEMORY[0xB38CF0].value,
+      0);
+  v12 = 0; /*0x59bb0b*/
+  v13 = v11 + 0x28; /*0x59bb0d*/
+  do /*0x59bb21*/
   {
-    if ( !*v14 )
+    if ( !*v13 ) /*0x59bb12*/
     {
-      PrintError("Controls Menu Creation Failed... Are your menu and art resources up to date?");
-      return 0;
+      PrintError("Controls Menu Creation Failed... Are your menu and art resources up to date?"); /*0x59bc5d*/
+      return 0; /*0x59bc6e*/
     }
-    ++v13;
-    ++v14;
+    ++v12; /*0x59bb18*/
+    ++v13; /*0x59bb1b*/
   }
-  while ( v13 < 0xD );
-  if ( Tile_GetFloat(XML, 0xFA5) == fXMLI_StackingType6006 || Tile_GetFloat(XML, 0xFA5) == fXMLI_NoClickPast )
-    Tile_SetFloat((Tile *)XML, (_DWORD *)0xFAB, v28);
-  v29 = (flt_B14EE8 - dbl_A59B38) / dbl_A6B760 * fCostant_100;
-  Tile_SetFloat((Tile *)v12[0xE], (_DWORD *)0xFB3, v29);
-  v15 = 0.0;
-  Tile_SetFloat((Tile *)v12[0xE], (_DWORD *)0xFB3, 0.0);
-  sub_59B640((_DWORD *)v12[0x10], byte_B14F38);
-  if ( !OSGlobals->input->numJoysticks )
+  while ( v12 < 0xD ); /*0x59bb21*/
+  if ( Tile_GetFloat(File, 0xFA5) == fXMLI_StackingType6006 || Tile_GetFloat(File, 0xFA5) == fXMLI_NoClickPast ) /*0x59bb53*/
+    Tile_SetFloat(File, 0xFABu, v26); /*0x59bb64*/
+  v27 = (flt_B14EE8 - dbl_A59B38) / dbl_A6B760 * fCostant_100; /*0x59bb85*/
+  Tile_SetFloat(*((Tile **)v11 + 0xE), 0xFB3u, v27); /*0x59bb95*/
+  Tile_SetFloat(*((Tile **)v11 + 0xE), 0xFB3u, 0.0); /*0x59bba8*/
+  ControlsMenu::SetInvertYButtonLabel(*((_DWORD **)v11 + 0x10), bInvertYValues); /*0x59bbbb*/
+  if ( !MEMORY[0xB33398]->input->numJoysticks ) /*0x59bbc9*/
+    Tile_SetFloat(*((Tile **)v11 + 0x11), 0xFC9u, 1.0); /*0x59bbdf*/
+  v28 = 0; /*0x59bbe4*/
+  do /*0x59bcf8*/
   {
-    v15 = 1.0;
-    Tile_SetFloat((Tile *)v12[0x11], (_DWORD *)0xFC9, 1.0);
-  }
-  v30 = 0;
-  do
-  {
-    if ( sub_59B670(v5) )
+    if ( ControlsMenu::ShouldShowControlRow(v4) ) /*0x59bbe9*/
     {
-      TileFromTemplate = Menu_CreateTileFromTemplate(v12, a1, a2, v15, (TileWindow *)v12[0xD], "controls_template", 0);
-      v17 = (Tile *)TileFromTemplate;
-      if ( TileFromTemplate )
+      v14 = Menu::RenderTemplate((Menu *)v11, *((Tile **)v11 + 0xD), "controls_template", 0); /*0x59bc06*/
+      v15 = v14; /*0x59bc0b*/
+      if ( v14 ) /*0x59bc0f*/
       {
-        v22 = (float)(v5 + 0xE);
-        Tile_SetFloat((Tile *)TileFromTemplate, (_DWORD *)0xFA8, v22);
-        v23 = (float)(int)v30;
-        Tile_SetFloat(v17, (_DWORD *)0xFAE, v23);
-        v18 = *(char ***)(4 * v5 + 0xB399D0);
-        v30 = (_DWORD *)((char *)v30 + 1);
-        if ( v18 )
-          v19 = *v18;
+        v20 = (float)(v4 + 0xE); /*0x59bc23*/
+        Tile_SetFloat(v14, 0xFA8u, v20); /*0x59bc2b*/
+        v21 = (float)(int)v28; /*0x59bc37*/
+        Tile_SetFloat(v15, 0xFAEu, v21); /*0x59bc3f*/
+        v16 = *(char ***)(4 * v4 + 0xB399D0); /*0x59bc44*/
+        v28 = (_DWORD *)((char *)v28 + 1); /*0x59bc4b*/
+        if ( v16 ) /*0x59bc52*/
+          v17 = *v16; /*0x59bc54*/
         else
-          v19 = 0;
-        Tile_SetString(v17, (_DWORD *)0xFAF, v19);
-        Float = Tile_GetFloat(XML, 0xFAF);
-        Tile_SetFloat(v17, (_DWORD *)0xFCA, Float);
-        v25 = Tile_GetFloat(XML, 0xFCC);
-        Tile_SetFloat(v17, (_DWORD *)0xFCC, v25);
-        v26 = Tile_GetFloat(XML, 0xFCD);
-        Tile_SetFloat(v17, (_DWORD *)0xFCD, v26);
-        v15 = Tile_GetFloat(XML, 0xFCE);
-        v27 = v15;
-        Tile_SetFloat(v17, (_DWORD *)0xFCE, v27);
+          v17 = 0; /*0x59bc6f*/
+        Tile_SetString(v15, (_DWORD *)0xFAF, v17); /*0x59bc79*/
+        Float = Tile_GetFloat(File, 0xFAF); /*0x59bc8b*/
+        Tile_SetFloat(v15, 0xFCAu, Float); /*0x59bc95*/
+        v23 = Tile_GetFloat(File, 0xFCC); /*0x59bca7*/
+        Tile_SetFloat(v15, 0xFCCu, v23); /*0x59bcb1*/
+        v24 = Tile_GetFloat(File, 0xFCD); /*0x59bcc3*/
+        Tile_SetFloat(v15, 0xFCDu, v24); /*0x59bccd*/
+        v25 = Tile_GetFloat(File, 0xFCE); /*0x59bcdf*/
+        Tile_SetFloat(v15, 0xFCEu, v25); /*0x59bce9*/
       }
-      v10 = v31;
+      v9 = v29; /*0x59bcee*/
     }
-    ++v5;
+    ++v4; /*0x59bcf2*/
   }
-  while ( v5 < 0x1D );
-  Tile_SetFloat((Tile *)v12[0xB], (_DWORD *)0xFB3, flt_A6B618);
-  Tile_SetFloat((Tile *)v12[0xB], (_DWORD *)0xFB3, 0.0);
-  *((float *)v12 + 0x37) = Tile_GetFloat((_DWORD *)v12[0xB], 0xFB1);
-  v21 = Tile_GetFloat((_DWORD *)v12[0xB], 0xFB2);
-  *((float *)v12 + 0x38) = v21;
-  *((_BYTE *)v12 + 0xD4) = 1;
-  EnableMenu(v10, a1, a2, v21, 0);
-  return 1;
+  while ( v4 < 0x1D ); /*0x59bcf8*/
+  Tile_SetFloat(*((Tile **)v11 + 0xB), 0xFB3u, flt_A6B618); /*0x59bd10*/
+  Tile_SetFloat(*((Tile **)v11 + 0xB), 0xFB3u, 0.0); /*0x59bd23*/
+  *((float *)v11 + 0x37) = Tile_GetFloat((_DWORD *)*((_DWORD *)v11 + 0xB), 0xFB1); /*0x59bd35*/
+  v19 = Tile_GetFloat((_DWORD *)*((_DWORD *)v11 + 0xB), 0xFB2); /*0x59bd43*/
+  *((float *)v11 + 0x38) = v19; /*0x59bd48*/
+  v11[0xD4] = 1; /*0x59bd52*/
+  EnableMenu(v9, a1, a2, v19, 0); /*0x59bd59*/
+  return 1; /*0x59bc66*/
 }

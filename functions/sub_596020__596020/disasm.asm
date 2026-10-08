@@ -21,9 +21,9 @@
 0x59605A: fld1
 0x59605C: jmp     short loc_596064
 0x59605E: fld     dword ptr ds:0A379B4h
-0x596064: fstp    [esp+2Ch+a2]; a3
-0x596067: push    0FAEh; a2
-0x59606C: call    Tile_SetFloat
+0x596064: fstp    [esp+2Ch+a2]; value
+0x596067: push    0FAEh; propertyCode
+0x59606C: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x596071: mov     eax, [ebp+80h]
 0x596077: mov     edx, [eax+10h]
 0x59607A: lea     edi, [ebp+80h]
@@ -47,9 +47,9 @@
 0x5960B6: fld1
 0x5960B8: mov     ecx, [esi+4]; this
 0x5960BB: push    ecx
-0x5960BC: fstp    [esp+2Ch+a2]; a3
-0x5960BF: push    0FB1h; a2
-0x5960C4: call    Tile_SetFloat
+0x5960BC: fstp    [esp+2Ch+a2]; value
+0x5960BF: push    0FB1h; propertyCode
+0x5960C4: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5960C9: mov     eax, [edi]
 0x5960CB: mov     edx, [eax+10h]
 0x5960CE: push    43534544h
@@ -66,19 +66,19 @@
 0x5960F1: fld     dword ptr ds:0A6B328h
 0x5960F7: mov     ecx, [esi+4]; this
 0x5960FA: push    ecx
-0x5960FB: fstp    [esp+2Ch+a2]; a3
-0x5960FE: push    0FB4h; a2
+0x5960FB: fstp    [esp+2Ch+a2]; value
+0x5960FE: push    0FB4h; propertyCode
 0x596103: mov     [esp+30h+var_4], ebx
-0x596107: call    Tile_SetFloat
+0x596107: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59610C: fldz
 0x59610E: mov     ecx, [esi+4]; this
 0x596111: push    ecx
-0x596112: fstp    [esp+2Ch+a2]; a3
-0x596115: push    0FB4h; a2
-0x59611A: call    Tile_SetFloat
+0x596112: fstp    [esp+2Ch+a2]; value
+0x596115: push    0FB4h; propertyCode
+0x59611A: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59611F: mov     eax, [esp+28h+var_14.m_data]
 0x596123: push    eax
-0x596124: call    FormHeapFree
+0x596124: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x596129: add     esp, 4
 0x59612C: mov     ecx, [esp+28h+var_C.m_data]
 0x596130: mov     large fs:0, ecx
@@ -89,3 +89,12 @@
 0x59613B: pop     ebx
 0x59613C: add     esp, 14h
 0x59613F: retn    8
+0x9B5BD0: lea     ecx, [ebp-14h]; void *
+0x9B5BD3: jmp     BSStringT_Clear
+0x9B5BD8: mov     edx, [esp+arg_4]
+0x9B5BDC: lea     eax, [edx-18h]
+0x9B5BDF: mov     ecx, [edx-1Ch]
+0x9B5BE2: xor     ecx, eax
+0x9B5BE4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B5BE9: mov     eax, offset stru_AE0BB4
+0x9B5BEE: jmp     ___CxxFrameHandler3

@@ -1,5 +1,5 @@
-0x481570: push    0FFFFFFFFh
-0x481572: push    offset SEH_6E3250
+0x481570: push    0FFFFFFFFh; Recursively traverses a NiAVObject hierarchy. For each geometry object lacking property type 0, allocates a 0x1C NiAlphaProperty, sets flags bit 0, and attaches it. Non-geometry nodes recurse through children.
+0x481572: push    offset ExtraDataList_SetReferencePointer_SEH
 0x481577: mov     eax, large fs:0
 0x48157D: push    eax
 0x48157E: push    esi
@@ -20,7 +20,7 @@
 0x4815A9: mov     ecx, esi
 0x4815AB: jz      short loc_481608
 0x4815AD: push    0
-0x4815AF: call    NiNode_GetNiPropertyByID
+0x4815AF: call    NiNode_GetNiPropertyByID;
 0x4815B4: test    eax, eax
 0x4815B6: jnz     loc_48164A
 0x4815BC: push    1Ch; Size
@@ -30,15 +30,15 @@
 0x4815CA: test    eax, eax
 0x4815CC: mov     [esp+18h+var_4], 0
 0x4815D4: jz      short loc_4815DF
-0x4815D6: mov     ecx, eax
-0x4815D8: call    sub_47F920
+0x4815D6: mov     ecx, eax; this
+0x4815D8: call    NiAlphaProperty_ctor; Constructs a 0x1C NiAlphaProperty over NiObjectNET: installs NiAlphaProperty vtable, initializes flags to 0x00EC and threshold byte to 0.
 0x4815DD: jmp     short loc_4815E1
 0x4815DF: xor     eax, eax
 0x4815E1: or      word ptr [eax+18h], 1
 0x4815E6: push    eax; a2
 0x4815E7: mov     ecx, esi; this
 0x4815E9: mov     [esp+1Ch+var_4], 0FFFFFFFFh
-0x4815F1: call    sub_405680
+0x4815F1: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x4815F6: mov     ecx, [esp+18h+var_C]
 0x4815FA: mov     large fs:0, ecx
 0x481601: pop     ecx
@@ -62,8 +62,8 @@
 0x481628: jmp     short loc_481633
 0x48162A: mov     eax, [edi+0B0h]
 0x481630: mov     eax, [eax+esi*4]
-0x481633: push    eax
-0x481634: call    sub_481570
+0x481633: push    eax; object
+0x481634: call    NiAVObject_EnsureAlphaPropertyRecursive; Recursively traverses a NiAVObject hierarchy. For each geometry object lacking property type 0, allocates a 0x1C NiAlphaProperty, sets flags bit 0, and attaches it. Non-geometry nodes recurse through children.
 0x481639: movzx   eax, word ptr [edi+0B6h]
 0x481640: add     esi, 1
 0x481643: add     esp, 4
@@ -76,3 +76,15 @@
 0x481657: pop     esi
 0x481658: add     esp, 0Ch
 0x48165B: retn
+0x9C3090: mov     eax, [ebp+4]
+0x9C3093: push    eax
+0x9C3094: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C3099: pop     ecx
+0x9C309A: retn
+0x9C309B: mov     edx, [esp+arg_4]
+0x9C309F: lea     eax, [edx-8]
+0x9C30A2: mov     ecx, [edx-0Ch]
+0x9C30A5: xor     ecx, eax
+0x9C30A7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C30AC: mov     eax, offset stru_AEBD48
+0x9C30B1: jmp     ___CxxFrameHandler3

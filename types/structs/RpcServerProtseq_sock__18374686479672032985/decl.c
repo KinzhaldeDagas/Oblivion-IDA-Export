@@ -1,1 +1,1 @@
-RpcServerProtseq_sock
+typedef _RpcServerProtseq_sock RpcServerProtseq_sock;

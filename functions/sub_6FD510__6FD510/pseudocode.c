@@ -1,4 +1,4 @@
-bool __thiscall sub_6FD510(_DWORD *this, int a2)
+bool __thiscall sub_6FD510(NiRenderTargetGroup *this, int a2)
 {
-  return sub_715F10(this, a2) != 0;
+  return NiTimeController_RegisterStreamables(this, a2) != 0; /*0x6fd51f*/
 }

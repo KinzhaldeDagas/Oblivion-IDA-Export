@@ -1,38 +1,38 @@
 0x49A8B0: push    ecx
 0x49A8B1: push    ebx
 0x49A8B2: xor     ebx, ebx
-0x49A8B4: cmp     byte ptr [esp+8+arg_0], bl
+0x49A8B4: cmp     byte ptr [esp+8+node], bl
 0x49A8B8: push    ebp
 0x49A8B9: mov     ebp, ecx
 0x49A8BB: mov     ds:0B0703Ch, bl
 0x49A8C1: jz      loc_49AC49
 0x49A8C7: push    3
-0x49A8C9: call    nullsub_returnTrue_0arg
+0x49A8C9: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x49A8CE: mov     eax, [ebp+4]
 0x49A8D1: add     esp, 4
 0x49A8D4: cmp     eax, ebx
 0x49A8D6: jz      short loc_49A8E4
 0x49A8D8: mov     ecx, ds:0B42F50h; this
-0x49A8DE: push    eax; a2
-0x49A8DF: call    sub_7C1EE0
+0x49A8DE: push    eax; texture
+0x49A8DF: call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.
 0x49A8E4: mov     eax, [ebp+8]
 0x49A8E7: cmp     eax, ebx
 0x49A8E9: jz      short loc_49A8F7
 0x49A8EB: mov     ecx, ds:0B42F50h; this
-0x49A8F1: push    eax; a2
-0x49A8F2: call    sub_7C1EE0
+0x49A8F1: push    eax; texture
+0x49A8F2: call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.
 0x49A8F7: mov     eax, [ebp+10h]
 0x49A8FA: cmp     eax, ebx
 0x49A8FC: jz      short loc_49A90A
 0x49A8FE: mov     ecx, ds:0B42F50h; this
-0x49A904: push    eax; a2
-0x49A905: call    sub_7C1EE0
+0x49A904: push    eax; texture
+0x49A905: call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.
 0x49A90A: mov     eax, [ebp+14h]
 0x49A90D: cmp     eax, ebx
 0x49A90F: jz      short loc_49A91D
 0x49A911: mov     ecx, ds:0B42F50h; this
-0x49A917: push    eax; a2
-0x49A918: call    sub_7C1EE0
+0x49A917: push    eax; texture
+0x49A918: call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.
 0x49A91D: push    esi
 0x49A91E: mov     esi, [ebp+4]
 0x49A921: cmp     esi, ebx
@@ -166,10 +166,9 @@
 0x49AA67: call    sub_7DE0B0
 0x49AA6C: mov     eax, [ebp+34h]
 0x49AA6F: cmp     eax, ebx
-0x49AA71: mov     [esp+14h+arg_0], eax
+0x49AA71: mov     [esp+14h+node], eax
 0x49AA75: jz      loc_49AB71
 0x49AA7B: jmp     short loc_49AA80
-0x49AA7D: align 10h
 0x49AA80: test    eax, eax
 0x49AA82: jz      loc_49AC51
 0x49AA88: mov     esi, [eax+8]
@@ -178,14 +177,14 @@
 0x49AA90: test    eax, eax
 0x49AA92: jz      short loc_49AAA0
 0x49AA94: mov     ecx, ds:0B42F50h; this
-0x49AA9A: push    eax; a2
-0x49AA9B: call    sub_7C1EE0
+0x49AA9A: push    eax; texture
+0x49AA9B: call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.
 0x49AAA0: mov     eax, [esi+0Ch]
 0x49AAA3: test    eax, eax
 0x49AAA5: jz      short loc_49AAB3
 0x49AAA7: mov     ecx, ds:0B42F50h; this
-0x49AAAD: push    eax; a2
-0x49AAAE: call    sub_7C1EE0
+0x49AAAD: push    eax; texture
+0x49AAAE: call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.
 0x49AAB3: mov     edi, [esi+8]
 0x49AAB6: test    edi, edi
 0x49AAB8: jz      short loc_49AADD
@@ -218,10 +217,10 @@
 0x49AAFC: mov     ecx, edi
 0x49AAFE: call    eax
 0x49AB00: mov     dword ptr [esi+0Ch], 0
-0x49AB07: lea     ecx, [esp+14h+arg_0]
-0x49AB0B: push    ecx
-0x49AB0C: lea     ecx, [ebp+30h]
-0x49AB0F: call    sub_7AA860
+0x49AB07: lea     ecx, [esp+14h+node]
+0x49AB0B: push    ecx; node
+0x49AB0C: lea     ecx, [ebp+30h]; list
+0x49AB0F: call    NiTPointerList_RemoveNode; [Verified] Generic NiTPointerList node-removal helper. Unlinks the supplied node, updates head/tail and neighboring links, invokes the list's FreeNode vfunc, decrements item count, and returns the removed node's data pointer.
 0x49AB14: mov     eax, [esi+4]
 0x49AB17: mov     ecx, ds:0B35230h
 0x49AB1D: mov     edx, [ecx]
@@ -249,11 +248,11 @@
 0x49AB53: mov     ecx, esi
 0x49AB55: call    sub_4993B0
 0x49AB5A: push    esi
-0x49AB5B: call    FormHeapFree
+0x49AB5B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x49AB60: add     esp, 4
 0x49AB63: test    ebx, ebx
 0x49AB65: mov     eax, ebx
-0x49AB67: mov     [esp+14h+arg_0], eax
+0x49AB67: mov     [esp+14h+node], eax
 0x49AB6B: jnz     loc_49AA80
 0x49AB71: mov     ecx, [ebp+40h]
 0x49AB74: test    ecx, ecx
@@ -265,7 +264,7 @@
 0x49AB84: mov     ecx, esi; this
 0x49AB86: call    sub_6B73E0
 0x49AB8B: push    esi
-0x49AB8C: call    FormHeapFree
+0x49AB8C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x49AB91: add     esp, 4
 0x49AB94: mov     dword ptr [ebp+40h], 0
 0x49AB9B: mov     esi, [ebp+0]
@@ -288,8 +287,8 @@
 0x49ABC8: test    eax, eax
 0x49ABCA: jz      short loc_49AC3D
 0x49ABCC: mov     ecx, ds:0B42F50h; this
-0x49ABD2: push    eax; a2
-0x49ABD3: call    sub_7C1EE0
+0x49ABD2: push    eax; texture
+0x49ABD3: call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.
 0x49ABD8: mov     esi, [ebp+48h]
 0x49ABDB: test    esi, esi
 0x49ABDD: jz      short loc_49AC02
@@ -327,7 +326,7 @@
 0x49AC35: call    eax
 0x49AC37: mov     dword ptr [edi], 0
 0x49AC3D: push    2
-0x49AC3F: call    nullsub_returnTrue_0arg
+0x49AC3F: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x49AC44: add     esp, 4
 0x49AC47: pop     edi
 0x49AC48: pop     esi

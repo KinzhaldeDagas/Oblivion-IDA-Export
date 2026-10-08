@@ -6,12 +6,12 @@
 0x619820: mov     ecx, [esi+3Ch]
 0x619823: mov     eax, [ecx]
 0x619825: mov     edx, [eax+164h]
-0x61982B: push    1
+0x61982B: push    1; slot
 0x61982D: call    edx
-0x61982F: mov     ecx, eax
-0x619831: call    ActorAnimData_GetAnimGroupFromField8Value
+0x61982F: mov     ecx, eax; this
+0x619831: call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.
 0x619836: push    eax
-0x619837: call    sub_51AC80
+0x619837: call    AnimGroup_UsesAttackOrCastNoteTemplate; Returns true when the encoded key is not group 0xFF and the fixed Oblivion group record's note-template class is 4, 5, 6, or 7. Those classes cover AttackLeft/Right, power attacks, BlockAttack, AttackBow, and cast groups. This is a fixed-table classifier, not dynamic group registration.
 0x61983C: mov     ecx, [esi+84h]
 0x619842: add     esp, 4
 0x619845: test    ecx, ecx
@@ -29,7 +29,7 @@
 0x619873: push    0
 0x619875: push    ecx
 0x619876: mov     ecx, esi
-0x619878: call    sub_617340
+0x619878: call    CombatController_TryUseMagicItem
 0x61987D: test    al, al
 0x61987F: jz      loc_619915
 0x619885: fld     dword ptr [esi+44h]

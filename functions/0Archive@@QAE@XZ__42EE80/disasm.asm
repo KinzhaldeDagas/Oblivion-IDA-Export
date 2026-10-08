@@ -15,7 +15,7 @@
 0x42EEAD: push    eax
 0x42EEAE: lea     eax, [esp+170h+var_C]
 0x42EEB5: mov     large fs:0, eax
-0x42EEBB: mov     ebx, dword ptr [esp+170h+ArgList]
+0x42EEBB: mov     ebx, [esp+170h+ArgList]
 0x42EEC2: mov     esi, ecx
 0x42EEC4: lea     edi, [esi+154h]
 0x42EECA: mov     ecx, edi
@@ -30,7 +30,7 @@
 0x42EEE5: push    ebx
 0x42EEE6: mov     ecx, esi
 0x42EEE8: mov     [edi+24h], ebp
-0x42EEEB: call    BSFile_constr
+0x42EEEB: call    BSFile_constr; MEF v57 VERIFY 2026-10-08: VERIFIED PERF-1 eligibility provenance: Archive passes mode0 to BSFile_constr430970, then installs Archive vtableA35D74 at42EEFD. BSFile initializes callback+4=430050, mode+20=0, stream sentinel+30=FFFFFFFF, and existence flag+24. v57's native archive gate additionally requires an open handle+1C; unsupported stream state keeps native fallback. Constructor metadata alone is not evidence that every archive invocation takes the fast path.
 0x42EEF0: lea     ecx, [esi+200h]; lpCriticalSection
 0x42EEF6: mov     [esp+170h+var_4], ebp
 0x42EEFD: mov     dword ptr [esi], offset ??_7Archive@@6BArchive@@@; const Archive::`vftable'{for `Archive'}
@@ -43,7 +43,7 @@
 0x42EF23: mov     [esi+178h], ebp
 0x42EF29: mov     [esi+198h], ebp
 0x42EF2F: mov     [esi+19Ch], ebp
-0x42EF35: mov     [esi+1A0h], ebp
+0x42EF35: mov     [esi+1A0h], ebp; MEF PLAN 2026-09-07: Revalidated in current authoritative IDB. Cached-name owner initialization: +1A0h is setNULL here, +1A4h at42EF3B, and +194h flags cleared42EF41. Proposed construction leaves those ownersNULL and cached bit20h clear until a complete private name buffer plus all folder offset arrays are ready.
 0x42EF3B: mov     [esi+1A4h], ebp
 0x42EF41: mov     byte ptr [esi+194h], 0
 0x42EF48: mov     [esi+1A8h], ebp
@@ -67,9 +67,9 @@
 0x42EF90: call    edx
 0x42EF92: add     esp, 14h
 0x42EF95: cmp     dword ptr [edi], offset loc_415342
-0x42EF9B: jnz     loc_42F481
+0x42EF9B: jnz     loc_42F481; MEF IMPLEMENTED v55 2026-09-07: Private cached-build failure uses this existing invalid-object epilogue after returning to the unchanged constructor stack/SEH. Original factory rejects bit1 and invokes deleting destructor. Tests check synthetic0x170 frame, preserved registers, SEH-link restoration andret16; no engine exception dispatch or security-cookie implementation is executed by fixture.
 0x42EFA1: cmp     dword ptr [esi+158h], 67h ; 'g'
-0x42EFA8: ja      loc_42F481
+0x42EFA8: ja      loc_42F481; MEF IMPLEMENTED v55 2026-09-07: Private cached-build failure uses this existing invalid-object epilogue after returning to the unchanged constructor stack/SEH. Original factory rejects bit1 and invokes deleting destructor. Tests check synthetic0x170 frame, preserved registers, SEH-link restoration andret16; no engine exception dispatch or security-cookie implementation is executed by fixture.
 0x42EFAE: test    byte ptr [esi+194h], 8
 0x42EFB5: jnz     loc_42F359
 0x42EFBB: call    ds:GetTickCount
@@ -102,12 +102,12 @@
 0x42F013: xor     edi, edi
 0x42F015: mov     eax, [esi+164h]
 0x42F01B: shl     eax, 4
-0x42F01E: push    eax
-0x42F01F: push    edi
-0x42F020: mov     ecx, esi
+0x42F01E: push    eax; byteCount
+0x42F01F: push    edi; destination
+0x42F020: mov     ecx, esi; self
 0x42F022: mov     byte ptr [esp+178h+var_4], 1
 0x42F02A: mov     [esi+178h], edi
-0x42F030: call    ReadFile??
+0x42F030: call    Archive_ReadBytes
 0x42F035: test    byte ptr [esi+160h], 1
 0x42F03C: jz      short loc_42F089
 0x42F03E: mov     ecx, esi
@@ -139,7 +139,7 @@
 0x42F097: call    sub_42BD70
 0x42F09C: test    al, al
 0x42F09E: jz      short loc_42F0E0
-0x42F0A0: mov     eax, [esi+170h]
+0x42F0A0: mov     eax, [esi+170h]; MEF PLAN 2026-09-07: Revalidated in current authoritative IDB. Coordinated deferred-construction hook: replace this6-byte mov EAX,[ESI+170h] (8B8670010000) with jump42F0E0. This skips cached flag publication and both unchecked early allocations through42F0DA, leaving owner+1A0/+1A4 NULL. No outstanding cdecl args here.42F0E0 resetsEDI/counters; install only with private builder hook42F24F.
 0x42F0A6: or      byte ptr [esi+194h], 20h
 0x42F0AD: push    eax; Size
 0x42F0AE: call    FormHeapAlloc
@@ -155,7 +155,7 @@
 0x42F0D1: push    ecx; Size
 0x42F0D2: call    FormHeapAlloc
 0x42F0D7: add     esp, 8
-0x42F0DA: mov     [esi+1A4h], eax
+0x42F0DA: mov     [esi+1A4h], eax; MEF PLAN 2026-09-07: Revalidated in current authoritative IDB. Existing top-level filename offset array is published here before any per-folder slots are initialized. Destructor42C114 later frees every slot up to folderCount, without an initialized-prefix count. A simple later failure return is unsafe with this publication; deferred private construction must bypass it.
 0x42F0E0: xor     edi, edi
 0x42F0E2: cmp     [esi+164h], edi
 0x42F0E8: mov     [esp+170h+var_154], edi
@@ -163,9 +163,8 @@
 0x42F0F0: jbe     loc_42F219
 0x42F0F6: xor     ebx, ebx
 0x42F0F8: jmp     short loc_42F104
-0x42F0FA: align 10h
 0x42F100: mov     edi, [esp+170h+var_154]
-0x42F104: test    byte ptr [esi+160h], 1
+0x42F104: test    byte ptr [esi+160h], 1; MEF PLAN 2026-09-07: Intervening folder loop42F0E0..42F219 tests header+160h and sub42BD70; it does not inspect live cached-name bit20h. Deferring cached flag/filename owners does not change these observed gates. Directory storage and file metadata remain separate preconditions.
 0x42F10B: jz      short loc_42F179
 0x42F10D: mov     edx, [esi+4]
 0x42F110: push    1
@@ -185,10 +184,10 @@
 0x42F137: movzx   eax, [esp+170h+var_159]
 0x42F13C: mov     ecx, [esi+198h]
 0x42F142: add     ecx, edi
-0x42F144: push    eax
-0x42F145: push    ecx
-0x42F146: mov     ecx, esi
-0x42F148: call    ReadFile??
+0x42F144: push    eax; byteCount
+0x42F145: push    ecx; destination
+0x42F146: mov     ecx, esi; self
+0x42F148: call    Archive_ReadBytes
 0x42F14D: mov     edx, [esi+19Ch]
 0x42F153: mov     eax, [esp+170h+var_158]
 0x42F157: mov     [edx+eax*4], edi
@@ -197,11 +196,11 @@
 0x42F161: mov     [esp+170h+var_154], edi
 0x42F165: jmp     short loc_42F179
 0x42F167: movzx   edx, [esp+170h+var_159]
-0x42F16C: push    edx
-0x42F16D: lea     eax, [esp+174h+var_110]
-0x42F171: push    eax
-0x42F172: mov     ecx, esi
-0x42F174: call    ReadFile??
+0x42F16C: push    edx; byteCount
+0x42F16D: lea     eax, [esp+174h+destination]
+0x42F171: push    eax; destination
+0x42F172: mov     ecx, esi; self
+0x42F174: call    Archive_ReadBytes
 0x42F179: mov     ecx, [esi+178h]
 0x42F17F: mov     ebp, [ecx+ebx+8]
 0x42F183: xor     ecx, ecx
@@ -212,7 +211,7 @@
 0x42F191: neg     ecx
 0x42F193: or      ecx, eax
 0x42F195: push    ecx; Size
-0x42F196: call    FormHeapAlloc
+0x42F196: call    FormHeapAlloc; MEF PLAN 2026-09-07: Separate earlier metadata defect: per-folder file-entry allocation computes16*count with overflow saturation, but NULL becomesEDI0 then flows to read callback42F1EC for nonzero count. Read byte length instead uses unchecked SHL EDX,4 at42F1D6. Filename-only builder cannot fix this earlier allocation/read path. Metadata correction needs checked count/read extent and partial-array cleanup before using42F481 as a general failure exit.
 0x42F19B: mov     edi, eax
 0x42F19D: add     esp, 4
 0x42F1A0: mov     [esp+170h+var_150], edi
@@ -263,19 +262,18 @@
 0x42F242: call    sub_42BD70
 0x42F247: test    al, al
 0x42F249: jz      loc_42F313
-0x42F24F: mov     eax, [esi+170h]
+0x42F24F: mov     eax, [esi+170h]; MEF PLAN 2026-09-07: Revalidated in current authoritative IDB. Private cached-name builder hook,6-byte8B8670010000. All earlier folder/file arrays have completed; ESI=archive, no pending args, constructor SEH state1. Build exact-length raw table and checked per-folder u32 offset arrays privately; require returned bytes==declared length and each required NUL inside remaining bytes. Commit +1A0/+1A4 and bit20h only after success, then42F30F. On failure free private owners, retainNULL fields/clear bit20h, then42F481 marks invalid and returns object for factory destruction. Paired with42F0A0; plan only.
 0x42F255: mov     ecx, [esi+1A0h]
-0x42F25B: push    eax
-0x42F25C: push    ecx
-0x42F25D: mov     ecx, esi
-0x42F25F: call    ReadFile??
+0x42F25B: push    eax; byteCount
+0x42F25C: push    ecx; destination
+0x42F25D: mov     ecx, esi; self
+0x42F25F: call    Archive_ReadBytes; MEF PLAN 2026-09-07: Cached table read returns a byte count in EAX via42C8E0, but constructor discards it at42F264 and scans declared storage. Require exact declared count before any terminator scan; allocation capacity is not proof of initialized input.
 0x42F264: xor     ebx, ebx
 0x42F266: cmp     [esi+164h], ebx
 0x42F26C: mov     [esp+170h+var_158], ebx
 0x42F270: jbe     loc_42F30F
 0x42F276: xor     ebp, ebp
 0x42F278: jmp     short loc_42F280
-0x42F27A: align 10h
 0x42F280: mov     edx, [esi+178h]
 0x42F286: mov     eax, [edx+ebp+8]
 0x42F28A: xor     ecx, ecx
@@ -296,11 +294,11 @@
 0x42F2BA: lea     ebx, [ebx+0]
 0x42F2C0: mov     eax, [esi+1A4h]
 0x42F2C6: mov     edx, [eax+ebx*4]
-0x42F2C9: mov     [edx+ecx*4], edi
+0x42F2C9: mov     [edx+ecx*4], edi; MEF PLAN 2026-09-07: Revalidated in current authoritative IDB. Original constructor publishes each filename offset before unbounded terminator scan42F2D7. Replacement should record offsets only in its private arrays while bounded scanning; permit original empty strings, lengths within declared buffer, and unused trailing bytes. Do not add a255-character cap or require header totalFileCount equality as an unproven format policy.
 0x42F2CC: mov     eax, [esi+1A0h]
 0x42F2D2: add     eax, edi
 0x42F2D4: lea     ebx, [eax+1]
-0x42F2D7: mov     dl, [eax]
+0x42F2D7: mov     dl, [eax]; MEF PLAN 2026-09-07: Confirmed bounded-construction defect: loop reads [EAX] until NUL with no remaining-table comparison. Missing terminator or short read can scan outside declared allocation. Paired private-construction replacement42F0A0/42F24F fixes this stage only; earlier folder/file metadata validation remains separate.
 0x42F2D9: add     eax, 1
 0x42F2DC: test    dl, dl
 0x42F2DE: jnz     short loc_42F2D7
@@ -316,7 +314,7 @@
 0x42F2FF: cmp     ebx, [esi+164h]
 0x42F305: mov     [esp+170h+var_158], ebx
 0x42F309: jb      loc_42F280
-0x42F30F: mov     ebx, [esp+170h+var_14C]
+0x42F30F: mov     ebx, [esp+170h+var_14C]; MEF PLAN 2026-09-07: Revalidated in current authoritative IDB. Verified private-builder success continuation: reloads EBX filename argument from[ESP+24h], then GetTickCount overwritesEAX. Original loop EBP/EDI totals are dead: EBP reset42F357, EDI overwritten42F35E before next use. Helper should preserve callee-saved registers, ESP and constructor SEH; no need to reproduce native scan counters.
 0x42F313: call    ds:GetTickCount
 0x42F319: sub     eax, [esp+170h+var_148]
 0x42F31D: test    eax, eax
@@ -328,7 +326,7 @@
 0x42F335: mov     ecx, [esi+168h]
 0x42F33B: mov     edx, [esi+164h]
 0x42F341: sub     esp, 8
-0x42F344: fstp    [esp+178h+var_178]
+0x42F344: fstp    qword ptr [esp+178h+var_178]
 0x42F347: push    ecx
 0x42F348: push    edx
 0x42F349: push    ebx; ArgList
@@ -374,7 +372,7 @@
 0x42F3DA: fadd    ds:flt_A2FC78
 0x42F3E0: fdiv    ds:dbl_A2FC70
 0x42F3E6: sub     esp, 8
-0x42F3E9: fstp    [esp+178h+var_178]
+0x42F3E9: fstp    qword ptr [esp+178h+var_178]
 0x42F3EC: push    ebx
 0x42F3ED: push    ebp; ArgList
 0x42F3EE: push    offset aFinishedInvali; "Finished invalidating %i files in archi"...
@@ -389,7 +387,6 @@
 0x42F413: jbe     short loc_42F473
 0x42F415: jmp     short loc_42F422
 0x42F417: jmp     short loc_42F420
-0x42F419: align 10h
 0x42F420: xor     ebp, ebp
 0x42F422: cmp     dword ptr [esi+164h], 0
 0x42F429: jbe     short loc_42F464
@@ -419,7 +416,7 @@
 0x42F478: mov     ecx, esi
 0x42F47A: call    sub_4303F0
 0x42F47F: jmp     short loc_42F488
-0x42F481: or      byte ptr [esi+194h], 1
+0x42F481: or      byte ptr [esi+194h], 1; MEF PLAN 2026-09-07: Revalidated in current authoritative IDB. Existing invalid-archive path ORs owner+194h bit1, then42F488 returnsESI through normal SEH/cookie/RET10h epilogue. Suitable private cached-build failure AFTER helper frees private buffers and leaves name owner pointersNULL. Bypasses later invalidation calls42F3BF/42F44A. Do not returnNULL directly: factory would lose allocated Archive object.
 0x42F488: mov     eax, esi
 0x42F48A: mov     ecx, [esp+170h+var_C]
 0x42F491: mov     large fs:0, ecx
@@ -433,3 +430,29 @@
 0x42F4A6: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x42F4AB: add     esp, 15Ch
 0x42F4B1: retn    10h
+0x9ABBB0: mov     ecx, [ebp-144h]; this
+0x9ABBB6: jmp     ??1BSFile@@UAE@XZ; BSFile::~BSFile(void)
+0x9ABBBB: mov     ecx, [ebp-144h]
+0x9ABBC1: add     ecx, 200h; lpCriticalSection
+0x9ABBC7: jmp     NiDeleteCriticalSection
+0x9ABBCC: mov     eax, [ebp-150h]
+0x9ABBD2: push    eax
+0x9ABBD3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ABBD8: pop     ecx
+0x9ABBD9: retn
+0x9ABBDA: mov     eax, [ebp-150h]
+0x9ABBE0: push    eax
+0x9ABBE1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ABBE6: pop     ecx
+0x9ABBE7: retn
+0x9ABBE8: mov     edx, [esp+arg_4]
+0x9ABBEC: lea     eax, [edx-160h]
+0x9ABBF2: mov     ecx, [edx-164h]
+0x9ABBF8: xor     ecx, eax
+0x9ABBFA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9ABBFF: add     eax, 10h
+0x9ABC02: mov     ecx, [edx-4]
+0x9ABC05: xor     ecx, eax
+0x9ABC07: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9ABC0C: mov     eax, offset stru_AD8980
+0x9ABC11: jmp     ___CxxFrameHandler3

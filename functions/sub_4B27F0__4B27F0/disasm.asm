@@ -1,13 +1,13 @@
-0x4B27F0: sub     esp, 10Ch
+0x4B27F0: sub     esp, 10Ch; Verified cell-unload cleanup: walks BASE_DISTANT_DATA entries, derives each model path, calls QueuedModelLoader_RemoveModel(path, count), frees list nodes/data, then removes the packed-cell map entry.
 0x4B27F6: mov     eax, ds:0B30AACh
 0x4B27FB: xor     eax, esp
 0x4B27FD: mov     [esp+10Ch+var_4], eax
 0x4B2804: push    ebx
-0x4B2805: mov     ebx, [esp+110h+arg_0]
+0x4B2805: mov     ebx, [esp+110h+packedExteriorCellLabel]
 0x4B280C: lea     eax, [esp+110h+var_10C]
 0x4B2810: push    eax
 0x4B2811: push    ebx
-0x4B2812: mov     ecx, offset off_B08300
+0x4B2812: mov     ecx, offset g_DistantLODCellModelUsageMap
 0x4B2817: mov     [esp+118h+var_10C], 0
 0x4B281F: call    NiTMap_GetAt
 0x4B2824: test    al, al
@@ -38,9 +38,9 @@
 0x4B286B: push    1
 0x4B286D: lea     eax, [esp+120h+Str]
 0x4B2871: push    eax
-0x4B2872: call    QueuedModelLoader_RemoveModel
+0x4B2872: call    QueuedModelLoader_RemoveModel; Verified decrements the queued model loader's per-path reference usage by this cell's stored usageCount.
 0x4B2877: push    esi
-0x4B2878: call    FormHeapFree
+0x4B2878: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4B287D: mov     eax, [edi+4]
 0x4B2880: add     esp, 4
 0x4B2883: test    eax, eax
@@ -50,7 +50,7 @@
 0x4B288D: mov     edx, [eax]
 0x4B288F: push    eax
 0x4B2890: mov     [edi], edx
-0x4B2892: call    FormHeapFree
+0x4B2892: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4B2897: add     esp, 4
 0x4B289A: jmp     short loc_4B28A2
 0x4B289C: mov     dword ptr [edi], 0
@@ -60,11 +60,11 @@
 0x4B28AB: jz      short loc_4B2845
 0x4B28AD: pop     esi
 0x4B28AE: push    edi
-0x4B28AF: call    FormHeapFree
+0x4B28AF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4B28B4: add     esp, 4
 0x4B28B7: push    ebx
-0x4B28B8: mov     ecx, offset off_B08300
-0x4B28BD: call    NiTMap_RemoveAt
+0x4B28B8: mov     ecx, offset g_DistantLODCellModelUsageMap
+0x4B28BD: call    NiTMap_RemoveAt; Verified removes the per-cell usage map entry after all listed model paths have been decremented. Fallout's counterpart tracks cell keys under object-keyed DistantLOD shader cache entries and uses RemoveAllDistantLOD/ClearStaticMaps; keep the ownership direction distinct.
 0x4B28C2: pop     edi
 0x4B28C3: mov     ecx, [esp+110h+var_4]
 0x4B28CA: pop     ebx

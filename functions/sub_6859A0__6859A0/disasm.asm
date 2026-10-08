@@ -17,7 +17,7 @@
 0x6859D2: push    eax
 0x6859D3: lea     eax, [esp+114h+var_C]
 0x6859DA: mov     large fs:0, eax
-0x6859E0: mov     esi, [ebp+arg_0]
+0x6859E0: mov     esi, [ebp+worldXY]
 0x6859E3: mov     edi, [ebp+arg_4]
 0x6859E6: xor     ebx, ebx
 0x6859E8: cmp     ds:0B3C089h, bl
@@ -33,10 +33,10 @@
 0x685A0F: test    eax, eax
 0x685A11: jz      short loc_685A72
 0x685A13: mov     ecx, ds:0B333A0h
-0x685A19: push    esi; float *
+0x685A19: push    esi; worldXY
 0x685A1A: call    TES__GetCurrentWorldspace
 0x685A1F: mov     ecx, eax; this
-0x685A21: call    TESWorldSpace__GetCellAtPos
+0x685A21: call    TESWorldSpace_GetCellAtWorldPosition
 0x685A26: cmp     eax, ebx
 0x685A28: mov     [esp+114h+var_100], eax
 0x685A2C: jz      short loc_685A6B
@@ -46,10 +46,10 @@
 0x685A3A: test    al, al
 0x685A3C: jnz     short loc_685A6B
 0x685A3E: mov     ecx, ds:0B333A0h
-0x685A44: push    edi; float *
+0x685A44: push    edi; worldXY
 0x685A45: call    TES__GetCurrentWorldspace
 0x685A4A: mov     ecx, eax; this
-0x685A4C: call    TESWorldSpace__GetCellAtPos
+0x685A4C: call    TESWorldSpace_GetCellAtWorldPosition
 0x685A51: cmp     eax, [esp+114h+var_100]
 0x685A55: jz      short loc_685A72
 0x685A57: cmp     eax, ebx
@@ -110,7 +110,7 @@
 0x685B39: fstp    dword ptr [esp+118h+var_F0+8]
 0x685B3D: movaps  xmm0, [esp+118h+var_F0]
 0x685B42: movaps  xmmword ptr [esp+118h+a2.unk60.x], xmm0
-0x685B4A: call    TES__CastRay
+0x685B4A: call    TES__CastRay; TES4 authoritative: TES::CastRay. Uses current interior cell's bhkWorld or exterior bhkWorldM; calls bhkWorld raycast vfunc +0x88 with bhkWorldRayCastData. Reusable for climbing wall/ledge probes.
 0x685B4F: cmp     [esp+114h+a2.WorldRayCastOutput.RootCollidable], ebx
 0x685B56: jz      short loc_685BAE
 0x685B58: fld     [esp+114h+var_F8]
@@ -132,7 +132,7 @@
 0x685B87: fld     [esp+114h+var_100]
 0x685B8B: fstp    [esp+114h+var_100]
 0x685B8F: fld     [esp+114h+var_100]
-0x685B93: fld     [esp+114h+a2.WorldRayCastOutput.HitFraction]
+0x685B93: fld     [esp+114h+a2.WorldRayCastOutput.HitFraction]; Another native HitFraction use: obstruction/visibility ray scales the total segment length by WorldRayCastOutput.HitFraction and checks remaining clearance. Confirms HitFraction is normalized 0..1 along the ray vector.
 0x685B97: fmul    st, st(1)
 0x685B99: fstp    [esp+114h+var_100]
 0x685B9D: fsub    [esp+114h+var_100]
@@ -154,3 +154,16 @@
 0x685BD2: mov     esp, ebp
 0x685BD4: pop     ebp
 0x685BD5: retn
+0x9C4ED0: lea     ecx, [ebp+var_60]; void *
+0x9C4ED3: jmp     sub_4F5E90
+0x9C4ED8: mov     edx, [esp-4+arg_4]
+0x9C4EDC: lea     eax, [edx-104h]
+0x9C4EE2: mov     ecx, [edx-108h]
+0x9C4EE8: xor     ecx, eax
+0x9C4EEA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C4EEF: add     eax, 0Ch
+0x9C4EF2: mov     ecx, [edx-8]
+0x9C4EF5: xor     ecx, eax
+0x9C4EF7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C4EFC: mov     eax, offset stru_AED764
+0x9C4F01: jmp     ___CxxFrameHandler3

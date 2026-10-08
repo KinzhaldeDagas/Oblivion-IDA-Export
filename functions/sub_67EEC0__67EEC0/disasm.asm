@@ -5,14 +5,14 @@
 0x67EECE: fstp    [esp+14h+var_10]
 0x67EED2: test    edi, edi
 0x67EED4: jz      short loc_67EF41
-0x67EED6: mov     ecx, [esp+14h+arg_4]
+0x67EED6: mov     ecx, [esp+14h+arg_4]; this
 0x67EEDA: test    ecx, ecx
 0x67EEDC: jz      short loc_67EF41
 0x67EEDE: push    esi
-0x67EEDF: call    sub_4BEF40
-0x67EEE4: mov     ecx, edi
+0x67EEDF: call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.
+0x67EEE4: mov     ecx, edi; this
 0x67EEE6: mov     esi, eax
-0x67EEE8: call    sub_4BEF40
+0x67EEE8: call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.
 0x67EEED: fld     dword ptr [eax]
 0x67EEEF: fsub    dword ptr [esi]
 0x67EEF1: fstp    [esp+18h+var_C]

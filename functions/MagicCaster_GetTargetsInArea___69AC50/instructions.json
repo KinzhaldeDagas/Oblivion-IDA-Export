@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x69AC9E",
-    "line": "call    EffectItem_GetArea",
+    "line": "call    EffectItem_GetArea; Effective area: returns 0 for EffectSetting NoArea (0x200) or Self range (0); otherwise raw EffectItem+0x8 area.",
     "mnemonic": "call",
     "size": 5
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x69ACA9",
-    "line": "call    EffectItem_GetArea",
+    "line": "call    EffectItem_GetArea; Effective area: returns 0 for EffectSetting NoArea (0x200) or Self range (0); otherwise raw EffectItem+0x8 area.",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,13 +451,13 @@
   },
   {
     "ea": "0x69AD35",
-    "line": "mov     ecx, offset ActorProcessManager_ptr; this",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x69AD3A",
-    "line": "call    sub_673A50",
+    "line": "call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).",
     "mnemonic": "call",
     "size": 5
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x69AD41",
-    "line": "call    sub_7616D0",
+    "line": "call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.",
     "mnemonic": "call",
     "size": 5
   },
@@ -703,25 +703,25 @@
   },
   {
     "ea": "0x69ADB7",
-    "line": "lea     ecx, [esp+20h+arg_8]",
+    "line": "lea     ecx, [esp+20h+pointXYZ]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x69ADBB",
-    "line": "push    ecx",
+    "line": "push    ecx; pointXYZ",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x69ADBC",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x69ADBE",
-    "line": "call    sub_4D7E30",
+    "line": "call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.",
     "mnemonic": "call",
     "size": 5
   },
@@ -805,7 +805,7 @@
   },
   {
     "ea": "0x69ADE6",
-    "line": "mov     edx, [esp+20h+arg_8]",
+    "line": "mov     edx, [esp+20h+pointXYZ]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x69AE04",
-    "line": "call    sub_69A490",
+    "line": "call    MagicCaster_IsRayClearToActorMidpoint_Layer1C; Area magic target check calls 0x69A490 unless spell ignores obstruction; source point is area origin and target is actor midpoint. Confirms helper is an unobstructed movement-layer ray, not a climb-specific rule.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1207,25 +1207,25 @@
   },
   {
     "ea": "0x69AEAE",
-    "line": "lea     ecx, [esp+20h+arg_8]",
+    "line": "lea     ecx, [esp+20h+pointXYZ]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x69AEB2",
-    "line": "push    ecx",
+    "line": "push    ecx; pointXYZ",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x69AEB3",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x69AEB9",
-    "line": "call    sub_4D7E30",
+    "line": "call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1303,7 +1303,7 @@
   },
   {
     "ea": "0x69AEE6",
-    "line": "mov     ecx, [esp+20h+arg_8]",
+    "line": "mov     ecx, [esp+20h+pointXYZ]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1363,7 +1363,7 @@
   },
   {
     "ea": "0x69AF04",
-    "line": "call    sub_69A490",
+    "line": "call    MagicCaster_IsRayClearToActorMidpoint_Layer1C; Player variant of area magic target obstruction check; same 0x69A490 clear-ray helper on layer 0x1C.",
     "mnemonic": "call",
     "size": 5
   },

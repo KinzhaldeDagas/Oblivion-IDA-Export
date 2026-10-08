@@ -1,4 +1,4 @@
-BSStringT *sub_A0D120()
+NiRTTI *sub_A0D120()
 {
-  return sub_70E220((BSStringT *)dword_B4116C, "NiPSysInitialRotSpeedCtlr", (int)dword_B41F8C);
+  return NiRTTI_Constructor(&stru_B4116C, "NiPSysInitialRotSpeedCtlr", &stru_B41F8C); /*0xa0d134*/
 }

@@ -1,4 +1,4 @@
-0x780D80: mov     eax, [esp+arg_0]
+0x780D80: mov     eax, [esp+arg_0]; MoonSugarEffect decode: NiD3DVertexShader constructor. Base NiD3DShaderProgram attach, clears +0x28/+0x2C/+0x30/+0x34, installs NiD3DVertexShader vtable; CreateVertexShader allocates this 0x38-byte wrapper.
 0x780D84: push    esi
 0x780D85: push    eax
 0x780D86: mov     esi, ecx

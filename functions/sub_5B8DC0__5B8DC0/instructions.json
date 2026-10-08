@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x5B8DC0",
-    "line": "sub     esp, 10h",
+    "line": "sub     esp, 10h; Confirmation callback for accepted world-map fast travel. It re-identifies the selected marker/ref from stored tile data and then calls PlayerCharacter_FastTravelCore with that ref.",
     "mnemonic": "sub",
     "size": 3
   },
   {
     "ea": "0x5B8DC3",
-    "line": "call    sub_578D70",
+    "line": "call    InterfaceManager_ConsumeMessageButton",
     "mnemonic": "call",
     "size": 5
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x5B8DF3",
-    "line": "mov     ebx, [esi+0C4h]",
+    "line": "mov     ebx, [esi+0C4h]; ParentMenu+0xC4 is the map marker/reference list scanned to match selected map tile coordinates/model path.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -445,19 +445,19 @@
   },
   {
     "ea": "0x5B8EC9",
-    "line": "push    eax; Str2",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5B8ECA",
-    "line": "push    ecx; Str1",
+    "line": "push    ecx; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5B8ECB",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -685,7 +685,7 @@
   },
   {
     "ea": "0x5B8F3B",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -727,7 +727,7 @@
   },
   {
     "ea": "0x5B8F4A",
-    "line": "fstp    [esp+24h+a3]; a3",
+    "line": "fstp    [esp+24h+a3]; value",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -739,13 +739,13 @@
   },
   {
     "ea": "0x5B8F4F",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5B8F54",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x5B8F91",
-    "line": "call    sub_5821F0",
+    "line": "call    InterfaceManager_ProcessGlobalHotkeys",
     "mnemonic": "call",
     "size": 5
   },
@@ -901,7 +901,7 @@
   },
   {
     "ea": "0x5B8FA4",
-    "line": "call    sub_583F40",
+    "line": "call    InterfaceManager__UpdateMenuFades; Verified: reads GetTimerPercent and Menu fade state +0x24. State 2 completion sets state 4; if root trait 0x1772==2, destroys MenuTopicManager for DialogMenu at 0x584230 then invokes root tile deleting destructor at 0x584255. Otherwise hides root. State 8 completion sets state 1. This is the normal deferred destruction path, separate from StartFadeOut.",
     "mnemonic": "call",
     "size": 5
   },
@@ -919,7 +919,7 @@
   },
   {
     "ea": "0x5B8FB0",
-    "line": "call    sub_66F420",
+    "line": "call    PlayerCharacter_FastTravelCore; 3DTheft decode: accepted world-map fast-travel confirmation calls PlayerCharacter_FastTravelCore with the selected marker/reference.",
     "mnemonic": "call",
     "size": 5
   },

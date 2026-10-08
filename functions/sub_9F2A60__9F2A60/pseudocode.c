@@ -1,5 +1,5 @@
 int sub_9F2A60()
 {
-  GameSetting_ConstrAndReg((int *)&dword_B38D20, (int)"sGold", (int)"gold");
-  return atexit(sub_A22160);
+  GameSetting_ConstrAndReg(&stru_B38D20, "sGold", "gold"); /*0x9f2a6f*/
+  return atexit(sub_A22160); /*0x9f2a7f*/
 }

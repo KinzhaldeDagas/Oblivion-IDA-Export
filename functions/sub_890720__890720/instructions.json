@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x890720",
-    "line": "mov     eax, [ecx+2A0h]",
+    "line": "mov     eax, [ecx+2A0h]; MorrowindMovements: commits pending state at proxy+0x2A0 into hkCharacterContext state slot proxy+0x1EC, then resets pending state to sentinel 0x0B. Use +0x1EC as active state when +0x2A0 is sentinel.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -19,13 +19,13 @@
   },
   {
     "ea": "0x89072B",
-    "line": "mov     [ecx+1ECh], eax",
+    "line": "mov     [ecx+1ECh], eax; Writes pending state from proxy+0x2A0 into active hkCharacterContext state id at proxy+0x1EC.",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x890731",
-    "line": "mov     dword ptr [ecx+2A0h], 0Bh",
+    "line": "mov     dword ptr [ecx+2A0h], 0Bh; Resets proxy+0x2A0 to transition sentinel 0x0B after committing state.",
     "mnemonic": "mov",
     "size": 10
   },

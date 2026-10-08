@@ -17,4 +17,4 @@
 0x4AF755: jmp     loc_4AF8A0
 0x4AF75A: push    esi
 0x4AF75B: mov     ecx, edi; this
-0x4AF75D: call    TESFile_InitializeFormFromRecord
+0x4AF75D: call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.

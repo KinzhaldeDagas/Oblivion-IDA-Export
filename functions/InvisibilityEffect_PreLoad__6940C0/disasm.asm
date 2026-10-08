@@ -1,7 +1,7 @@
 0x6940C0: push    esi
 0x6940C1: mov     esi, [esp+4+a1]
 0x6940C5: push    esi
-0x6940C6: call    nullsub_returnvVoid_1arg
+0x6940C6: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x6940CB: cmp     byte ptr ds:0B42F3Eh, 0
 0x6940D2: jz      short loc_694106
 0x6940D4: cmp     byte ptr ds:0B42E84h, 0

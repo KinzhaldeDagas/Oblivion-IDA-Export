@@ -1,9 +1,9 @@
-0x4B3210: sub     esp, 108h
+0x4B3210: sub     esp, 108h; Verified: releases model-loader usage for a bound object/reference. For scaled refs, removes the scale-specific key and may also remove the base key depending on load state.
 0x4B3216: mov     eax, ds:0B30AACh
 0x4B321B: xor     eax, esp
 0x4B321D: mov     [esp+108h+var_4], eax
 0x4B3224: push    ebx
-0x4B3225: mov     ebx, [esp+10Ch+arg_0]
+0x4B3225: mov     ebx, [esp+10Ch+reference]
 0x4B322C: push    esi
 0x4B322D: mov     esi, ecx
 0x4B322F: cmp     esi, ds:0B35EA4h
@@ -31,19 +31,19 @@
 0x4B326E: fnstsw  ax
 0x4B3270: test    ah, 44h
 0x4B3273: jnp     short loc_4B32CC
-0x4B3275: lea     eax, [esp+114h+var_108]
-0x4B3279: push    eax
-0x4B327A: push    ebx
-0x4B327B: mov     ecx, esi
-0x4B327D: call    sub_4B2B00
+0x4B3275: lea     eax, [esp+114h+outPath]
+0x4B3279: push    eax; outPath
+0x4B327A: push    ebx; reference
+0x4B327B: mov     ecx, esi; this
+0x4B327D: call    TESBoundObject_BuildReferenceModelPath; Verified: chooses reference-specific model path if available, otherwise the form model path, then appends scale percent (GetScale()*100) to create the per-reference model-loader key.
 0x4B3282: push    1
 0x4B3284: push    1
-0x4B3286: lea     ecx, [esp+11Ch+var_108]
+0x4B3286: lea     ecx, [esp+11Ch+outPath]
 0x4B328A: push    ecx
 0x4B328B: mov     ecx, ds:0B33A1Ch
 0x4B3291: call    QueuedModelLoader_RemoveModel
 0x4B3296: mov     ecx, ds:0B33A1Ch
-0x4B329C: lea     edx, [esp+114h+var_108]
+0x4B329C: lea     edx, [esp+114h+outPath]
 0x4B32A0: push    edx
 0x4B32A1: call    ModelLoader_IsModelLoaded??
 0x4B32A6: test    eax, eax

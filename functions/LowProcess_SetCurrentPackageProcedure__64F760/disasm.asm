@@ -1,9 +1,9 @@
-0x64F760: push    esi
+0x64F760: push    esi; 3DTheft: SetCurrentPackProcedure clamps the stored procedure slot against the active package procedureArrayIndex row length.
 0x64F761: mov     esi, ecx
 0x64F763: mov     eax, [esi]
 0x64F765: mov     edx, [eax+184h]
 0x64F76B: call    edx
-0x64F76D: cmp     dword ptr [esi+0C0h], 0
+0x64F76D: cmp     dword ptr [esi+0C0h], 0; 3DTheft decode: current/editor PackProcedure stores a procedure-row slot index, not the eProcedure enum value. The clamp compares the stored slot against row length from procedureArrayIndex.
 0x64F774: jz      short loc_64F782
 0x64F776: mov     ecx, [esp+4+a2]
 0x64F77A: mov     [esi+0CCh], ecx
@@ -15,7 +15,7 @@
 0x64F78D: mov     eax, [eax+18h]
 0x64F790: push    edi
 0x64F791: push    eax
-0x64F792: call    sub_673980
+0x64F792: call    sub_673980; 3DTheft: returns package procedure row length for procedureArrayIndex. Rows used here include Follow row 7 and Flee row 0x13.
 0x64F797: mov     edi, eax
 0x64F799: mov     eax, [esi]
 0x64F79B: mov     edx, [eax+180h]

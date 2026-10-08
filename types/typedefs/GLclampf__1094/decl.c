@@ -1,1 +1,1 @@
-GLclampf
+typedef float GLclampf;

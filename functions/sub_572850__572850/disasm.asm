@@ -18,7 +18,7 @@
 0x572888: jz      loc_572AF7
 0x57288E: fld     dword ptr [ebp+28h]
 0x572891: mov     [esp+0D4h+var_BD], 0
-0x572896: call    Double_To_SInt32
+0x572896: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x57289B: mov     ecx, [esp+0D4h+arg_8]
 0x5728A2: mov     edx, [esp+0D4h+a2]
 0x5728A9: mov     [esp+0D4h+var_B8], eax
@@ -185,7 +185,7 @@
 0x572AE8: jnz     short loc_572AFE
 0x572AEA: mov     eax, [esp+0D4h+var_B4.m_data]
 0x572AEE: push    eax
-0x572AEF: call    FormHeapFree
+0x572AEF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x572AF4: add     esp, 4
 0x572AF7: xor     al, al
 0x572AF9: jmp     loc_572D67
@@ -202,15 +202,15 @@
 0x572B1A: call    BSStringT_Set
 0x572B1F: fld     dword ptr ds:0A3F3E0h
 0x572B25: push    ecx
-0x572B26: lea     ecx, [esp+0D8h+var_9C]
-0x572B2A: fstp    [esp+0D8h+var_D8]; float
-0x572B2D: call    NiMatrix33_InitRotationTransposedTransform???
+0x572B26: lea     ecx, [esp+0D8h+var_9C]; this
+0x572B2A: fstp    [esp+0D8h+angleX]; angleX
+0x572B2D: call    NiMatrix33_InitRotationXTransposed; Verified matrix coefficients make this an X-axis rotation in the engine's transposed convention: X stays fixed; only the Y/Z submatrix contains sin/cos.
 0x572B32: lea     edi, [esi+30h]
-0x572B35: push    edi
-0x572B36: lea     eax, [esp+0D8h+var_78]
-0x572B3A: push    eax
-0x572B3B: lea     ecx, [esp+0DCh+var_9C]
-0x572B3F: call    NiMAtrix33_Multiply
+0x572B35: push    edi; right
+0x572B36: lea     eax, [esp+0D8h+out]
+0x572B3A: push    eax; out
+0x572B3B: lea     ecx, [esp+0DCh+var_9C]; this
+0x572B3F: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x572B44: fldz
 0x572B46: fst     [esp+0D4h+var_A8]
 0x572B4A: mov     esi, eax
@@ -228,27 +228,27 @@
 0x572B79: mov     [ebp+54h], ecx
 0x572B7C: push    ecx
 0x572B7D: mov     [ebp+58h], edx
-0x572B80: lea     ecx, [esp+0D8h+var_9C]
-0x572B84: fstp    [esp+0D8h+var_D8]; float
+0x572B80: lea     ecx, [esp+0D8h+var_9C]; this
+0x572B84: fstp    [esp+0D8h+angleX]; angleX
 0x572B87: mov     [ebp+5Ch], eax
-0x572B8A: call    NiMatrix33_InitRotationTransposedTransform???
+0x572B8A: call    NiMatrix33_InitRotationXTransposed; Verified matrix coefficients make this an X-axis rotation in the engine's transposed convention: X stays fixed; only the Y/Z submatrix contains sin/cos.
 0x572B8F: push    ecx
 0x572B90: fld     dword ptr ds:0A449C0h
-0x572B96: lea     ecx, [esp+0D8h+var_54]
-0x572B9D: fstp    [esp+0D8h+var_D8]; float
-0x572BA0: call    sub_70FD80
+0x572B96: lea     ecx, [esp+0D8h+right]; this
+0x572B9D: fstp    [esp+0D8h+angleX]; angleY
+0x572BA0: call    NiMatrix33_InitRotationY; Verified matrix coefficients make this a Y-axis rotation: Y stays fixed; only the X/Z submatrix contains sin/cos.
 0x572BA5: lea     edi, [ebp+30h]
-0x572BA8: push    edi
-0x572BA9: lea     ecx, [esp+0D8h+var_78]
-0x572BAD: push    ecx
-0x572BAE: lea     edx, [esp+0DCh+var_54]
-0x572BB5: push    edx
+0x572BA8: push    edi; right
+0x572BA9: lea     ecx, [esp+0D8h+out]
+0x572BAD: push    ecx; out
+0x572BAE: lea     edx, [esp+0DCh+right]
+0x572BB5: push    edx; right
 0x572BB6: lea     eax, [esp+0E0h+var_30]
-0x572BBD: push    eax
-0x572BBE: lea     ecx, [esp+0E4h+var_9C]
-0x572BC2: call    NiMAtrix33_Multiply
-0x572BC7: mov     ecx, eax
-0x572BC9: call    NiMAtrix33_Multiply
+0x572BBD: push    eax; out
+0x572BBE: lea     ecx, [esp+0E4h+var_9C]; this
+0x572BC2: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
+0x572BC7: mov     ecx, eax; this
+0x572BC9: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x572BCE: fld     qword ptr ds:0A2FAA0h
 0x572BD4: fabs
 0x572BD6: mov     esi, eax
@@ -279,7 +279,7 @@
 0x572C31: push    esi; a2
 0x572C32: mov     ecx, ebp; this
 0x572C34: mov     byte ptr [esp+0D8h+var_4], 4
-0x572C3C: call    sub_405680
+0x572C3C: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x572C41: push    1Ch; Size
 0x572C43: call    FormHeapAlloc
 0x572C48: mov     esi, eax
@@ -302,13 +302,13 @@
 0x572C86: mov     ecx, ebp; this
 0x572C88: mov     byte ptr [esp+0D8h+var_4], 4
 0x572C90: mov     [esi+18h], dx
-0x572C94: call    sub_405680
+0x572C94: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x572C99: cmp     [esp+0D4h+var_BD], 0
 0x572C9E: mov     esi, [esp+0D4h+arg_0]
 0x572CA5: jnz     short loc_572CAF
 0x572CA7: push    ebx
 0x572CA8: mov     ecx, esi
-0x572CAA: call    NiNode_AddNiExtraData
+0x572CAA: call    NiObjectNET_AddExtraData; Pass269 ABI and ownership proof: NiObjectNET::AddExtraData consumes one stack argument with RET 4 and also expects owning object in ECX/EBX at this build's callsites. The plugin wrapper must not execute caller-side ADD ESP,4.
 0x572CAF: mov     eax, [esi]
 0x572CB1: mov     edx, [eax+84h]
 0x572CB7: push    1
@@ -316,7 +316,7 @@
 0x572CBA: mov     ecx, esi
 0x572CBC: call    edx
 0x572CBE: mov     ecx, ebp; this
-0x572CC0: call    NiAVObject_InitializePropertyState
+0x572CC0: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x572CC5: mov     ecx, ebp
 0x572CC7: call    NiNode_UpdateDynamicEffectState
 0x572CCC: fldz
@@ -324,7 +324,7 @@
 0x572CD0: push    ecx
 0x572CD1: mov     ecx, ebp; this
 0x572CD3: fstp    [esp+0DCh+var_DC]; a2
-0x572CD6: call    NiAVObject_UpdateNiAVObject
+0x572CD6: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x572CDB: push    1Ch; Size
 0x572CDD: call    FormHeapAlloc
 0x572CE2: add     esp, 4
@@ -359,10 +359,10 @@
 0x572D48: mov     ecx, eax
 0x572D4A: add     esp, 4
 0x572D4D: add     ecx, 15E0h
-0x572D53: call    sub_5B1E20
+0x572D53: call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.
 0x572D58: mov     edx, [esp+0D4h+var_B4.m_data]
 0x572D5C: push    edx
-0x572D5D: call    FormHeapFree
+0x572D5D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x572D62: add     esp, 4
 0x572D65: mov     al, 1
 0x572D67: mov     ecx, dword ptr [esp+0D4h+var_C]
@@ -374,3 +374,47 @@
 0x572D79: pop     ebx
 0x572D7A: add     esp, 0C0h
 0x572D80: retn
+0x9BDF50: mov     eax, [ebp-0BCh]
+0x9BDF56: push    eax
+0x9BDF57: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BDF5C: pop     ecx
+0x9BDF5D: retn
+0x9BDF5E: mov     eax, [ebp-0BCh]
+0x9BDF64: push    eax
+0x9BDF65: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BDF6A: pop     ecx
+0x9BDF6B: retn
+0x9BDF6C: mov     eax, [ebp-0BCh]
+0x9BDF72: push    eax
+0x9BDF73: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BDF78: pop     ecx
+0x9BDF79: retn
+0x9BDF7A: mov     eax, [ebp-0BCh]
+0x9BDF80: push    eax
+0x9BDF81: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BDF86: pop     ecx
+0x9BDF87: retn
+0x9BDF88: lea     ecx, [ebp-0B4h]; void *
+0x9BDF8E: jmp     BSStringT_Clear
+0x9BDF93: mov     eax, [ebp-0BCh]
+0x9BDF99: push    eax
+0x9BDF9A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BDF9F: pop     ecx
+0x9BDFA0: retn
+0x9BDFA1: mov     eax, [ebp-0BCh]
+0x9BDFA7: push    eax
+0x9BDFA8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BDFAD: pop     ecx
+0x9BDFAE: retn
+0x9BDFAF: mov     eax, [ebp-0BCh]
+0x9BDFB5: push    eax
+0x9BDFB6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BDFBB: pop     ecx
+0x9BDFBC: retn
+0x9BDFBD: mov     edx, [esp+a2]
+0x9BDFC1: lea     eax, [edx-0C4h]
+0x9BDFC7: mov     ecx, [edx-0C8h]
+0x9BDFCD: xor     ecx, eax
+0x9BDFCF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BDFD4: mov     eax, offset stru_AE778C
+0x9BDFD9: jmp     ___CxxFrameHandler3

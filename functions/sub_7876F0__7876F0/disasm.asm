@@ -1,9 +1,9 @@
-0x7876F0: push    esi
+0x7876F0: push    esi; Oblivion checked collision-vector index: validates index against the 0x1C-stride size and returns begin + index*0x1C.
 0x7876F1: mov     esi, ecx
 0x7876F3: mov     eax, [esi+4]
 0x7876F6: test    eax, eax
 0x7876F8: push    edi
-0x7876F9: mov     edi, [esp+8+arg_0]
+0x7876F9: mov     edi, [esp+8+index]
 0x7876FD: jz      short loc_78771B
 0x7876FF: mov     ecx, [esi+8]
 0x787702: sub     ecx, eax

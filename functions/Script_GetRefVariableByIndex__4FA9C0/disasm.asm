@@ -1,4 +1,4 @@
-0x4FA9C0: sub     esp, 8
+0x4FA9C0: sub     esp, 8; Hot Reload OBSE decode: Script ref-variable lookup. Uses globals B361B0/B361B4/B361B8/B09E1C as a last-ref cache.
 0x4FA9C3: push    ebp
 0x4FA9C4: mov     ebp, [esp+0Ch+index]
 0x4FA9C8: test    ebp, ebp
@@ -54,16 +54,16 @@
 0x4FAA40: jz      short loc_4FAA67
 0x4FAA42: test    ebx, ebx
 0x4FAA44: jz      short loc_4FAA67
-0x4FAA46: push    edi; a3
-0x4FAA47: push    eax; ArgList
+0x4FAA46: push    edi; sourceScript
+0x4FAA47: push    eax; variableID
 0x4FAA48: mov     ecx, ebx; this
-0x4FAA4A: call    sub_4FA110
+0x4FAA4A: call    ScriptEventList__GetVariableValue; ScriptEventList::GetVariableValue scans `m_vars` for Var.id == variableID and returns Var.data. A single global last-list/last-ID/Var cache accelerates repeated CTDA and script lookups; a cache miss with no variable logs an error and returns 0.
 0x4FAA4F: fstp    [esp+18h+a1]
 0x4FAA53: mov     eax, dword ptr [esp+18h+a1]
 0x4FAA57: test    eax, eax
 0x4FAA59: jz      short loc_4FAA67
 0x4FAA5B: push    eax; a1
-0x4FAA5C: call    TESForm_LookupByFormID
+0x4FAA5C: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4FAA61: add     esp, 4
 0x4FAA64: mov     [esi+8], eax
 0x4FAA67: mov     ds:0B361B8h, esi

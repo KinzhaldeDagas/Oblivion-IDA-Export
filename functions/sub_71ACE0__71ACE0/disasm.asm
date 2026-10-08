@@ -20,7 +20,7 @@
 0x71AD1A: lea     ecx, [esp+4+arg_0]
 0x71AD1E: push    ecx
 0x71AD1F: lea     ecx, [edx+0Ch]
-0x71AD22: call    sub_5B1E20
+0x71AD22: call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.
 0x71AD27: mov     al, 1
 0x71AD29: pop     esi
 0x71AD2A: retn    4

@@ -297,14 +297,14 @@
 0x73F7EE: call    edx
 0x73F7F0: test    eax, eax
 0x73F7F2: jz      short loc_73F802
-0x73F7F4: cmp     eax, offset dword_B401DC
+0x73F7F4: cmp     eax, offset stru_B401DC
 0x73F7F9: jz      short loc_73F815
 0x73F7FB: mov     eax, [eax+4]
 0x73F7FE: test    eax, eax
 0x73F800: jnz     short loc_73F7F4
 0x73F802: mov     eax, [esi+50h]
 0x73F805: push    eax
-0x73F806: call    FormHeapFree
+0x73F806: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x73F80B: add     esp, 4
 0x73F80E: mov     dword ptr [esi+50h], 0
 0x73F815: cmp     dword ptr [edi+0D8h], 0A000110h
@@ -344,7 +344,6 @@
 0x73F892: mov     [esi+54h], eax
 0x73F895: jbe     short loc_73F8D3
 0x73F897: jmp     short loc_73F8A0
-0x73F899: align 10h
 0x73F8A0: mov     eax, [edi+21Ch]
 0x73F8A6: push    1
 0x73F8A8: lea     ecx, [esp+20h+var_4]

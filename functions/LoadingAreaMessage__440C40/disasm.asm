@@ -12,4 +12,4 @@
 0x440C66: call    sub_579220
 0x440C6B: mov     ecx, ds:0B33398h
 0x440C71: mov     byte ptr ds:0B35228h, 1
-0x440C78: jmp     sub_40D4D0
+0x440C78: jmp     Input_CheckScreenshotHotkey; Verified gamma integration 2026-09-26: frame path tests B34FA4 and calls Renderer_ApplyPendingGammaRamp at40D508 before scene rendering.

@@ -10,7 +10,6 @@
 0x923C96: push    ebp
 0x923C97: mov     ebp, [esp+10h+arg_0]
 0x923C9B: jmp     short loc_923CA0
-0x923C9D: align 10h
 0x923CA0: mov     ecx, [esi]
 0x923CA2: mov     ecx, [ecx+50h]
 0x923CA5: mov     eax, [ecx+8]

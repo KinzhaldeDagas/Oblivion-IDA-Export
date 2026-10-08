@@ -1,5 +1,5 @@
 int sub_9F0030()
 {
-  GameSetting_ConstrAndReg((int *)dword_B382F8, (int)"sTitleText", (int)"You have ascended to level");
-  return atexit(sub_A20D10);
+  GameSetting_ConstrAndReg(&stru_B382F8, "sTitleText", "You have ascended to level"); /*0x9f003f*/
+  return atexit(sub_A20D10); /*0x9f004f*/
 }

@@ -1,4 +1,4 @@
-0x5D5B40: mov     eax, [esp+arg_0]
+0x5D5B40: mov     eax, [esp+arg_0]; Native SkillsMenu detail refresh. Resolve the selected native skill AV, then populate the menu from its Oblivion TESSkill description and icon.
 0x5D5B44: cmp     eax, 0FFFFFFFFh
 0x5D5B47: push    ebx
 0x5D5B48: push    esi
@@ -22,14 +22,14 @@
 0x5D5B73: add     eax, 8
 0x5D5B76: push    0FB0h
 0x5D5B7B: call    Tile_GetFloat
-0x5D5B80: call    Double_To_SInt32
+0x5D5B80: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5D5B85: push    eax
 0x5D5B86: push    2
-0x5D5B88: call    ActorValue_GetGroupOffsetFromAV
-0x5D5B8D: mov     ecx, ds:0B33A98h
+0x5D5B88: call    ActorValue_GetGroupOffsetFromAV; RealArenaTraining fidelity pass: ActorValue_GetGroupOffsetFromAV(group, actorValue). Player skill-progress code calls this with group 2 before indexing player skillExp/requiredSkillExp.
+0x5D5B8D: mov     ecx, ds:0B33A98h; this
 0x5D5B93: add     esp, 8
-0x5D5B96: push    eax
-0x5D5B97: call    TESDataHandler_GetTESSkillByCode
+0x5D5B96: push    eax; skillIndex
+0x5D5B97: call    TESDataHandler_GetTESSkillByCode; Return one of exactly 21 inline Oblivion TESSkill records. Reject skillIndex > 20; otherwise return TESDataHandler+0xD8+(skillIndex*0x60).
 0x5D5B9C: mov     edi, eax
 0x5D5B9E: test    edi, edi
 0x5D5BA0: jz      loc_5D5D39
@@ -62,7 +62,7 @@
 0x5D5BF2: add     eax, 8
 0x5D5BF5: push    0FB0h
 0x5D5BFA: call    Tile_GetFloat
-0x5D5BFF: call    Double_To_SInt32
+0x5D5BFF: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5D5C04: mov     edi, eax
 0x5D5C06: mov     ebx, [esi+4]
 0x5D5C09: push    edi

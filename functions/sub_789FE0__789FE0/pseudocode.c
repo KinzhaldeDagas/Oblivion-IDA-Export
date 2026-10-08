@@ -1,193 +1,188 @@
-int __userpurge sub_789FE0@<eax>(float *this@<ecx>, int a2@<edi>, unsigned int Src, rsize_t MaxCount)
+// Oblivion branch export is authoritative: publishes the legacy single wind stream plus distinct diffuse and projected-shadow UV streams into a 0x3C indexed-geometry output block.
+// local variable allocation has failed, the output may be wrong!
+void __thiscall CSpeedTreeRT__GetBranchGeometry(
+        OB_CSpeedTreeRT_010201A0 *this,
+        OB_SpeedTreeGeometryOutput_010201A0 *geometry,
+        __int16 lodLevel)
 {
-  int v5; // eax
-  int v6; // edx
-  unsigned int v7; // ecx
-  unsigned int v8; // edi
-  int v9; // ebx
-  int v10; // eax
-  int v11; // ebx
-  int v12; // ebx
-  int v13; // eax
-  int v14; // ebx
-  int v15; // ebx
-  int v16; // eax
-  int v17; // ebx
-  int v18; // ebx
-  int v19; // eax
-  int v20; // ebx
-  int v21; // ebx
-  int v22; // eax
-  int v23; // ebx
-  int v24; // ebx
-  int v25; // eax
-  int v26; // ebx
-  int v27; // ebx
-  int v28; // eax
-  int v29; // ebx
-  int v30; // ebx
-  int v31; // eax
-  int v32; // ebx
-  int v33; // ebx
-  int v34; // eax
-  int v35; // ebx
-  __int16 v36; // ax
-  bool v37; // zf
-  __int16 v38; // bx
-  int v39; // eax
-  __int16 v40; // cx
-  unsigned __int16 v41; // bx
-  int v42; // ecx
-  double v43; // st7
-  int v44; // edx
-  int result; // eax
-  double v46; // st7
-  int v47; // [esp+34h] [ebp-Ch] BYREF
-  float v48; // [esp+38h] [ebp-8h]
-  int v49; // [esp+3Ch] [ebp-4h] BYREF
+  OB_CIndexedGeometry_010201A0 *branchGeometry; // eax
+  float *begin; // edx
+  unsigned int v6; // ecx
+  OB_SpeedTreeGeometryOutput_010201A0 *v7; // edi
+  OB_CIndexedGeometry_010201A0 *v8; // ebx
+  unsigned int *v9; // eax
+  unsigned int *v10; // ebx
+  OB_CIndexedGeometry_010201A0 *v11; // ebx
+  float *v12; // eax
+  float *v13; // ebx
+  OB_CIndexedGeometry_010201A0 *v14; // ebx
+  float *v15; // eax
+  float *v16; // ebx
+  OB_CIndexedGeometry_010201A0 *v17; // ebx
+  float *v18; // eax
+  float *v19; // ebx
+  OB_CIndexedGeometry_010201A0 *v20; // ebx
+  float *v21; // eax
+  float *v22; // ebx
+  OB_CIndexedGeometry_010201A0 *v23; // ebx
+  float *v24; // eax
+  float *v25; // ebx
+  OB_CIndexedGeometry_010201A0 *v26; // ebx
+  float *v27; // eax
+  float *v28; // ebx
+  OB_CIndexedGeometry_010201A0 *v29; // ebx
+  float *v30; // eax
+  float *v31; // ebx
+  OB_CIndexedGeometry_010201A0 *v32; // ebx
+  unsigned __int8 *v33; // eax
+  unsigned __int8 *v34; // ebx
+  __int16 DiscreteBranchLodLevel; // ax
+  bool v36; // zf
+  __int16 v37; // bx
+  OB_CTreeEngine_010201A0 *treeEngine; // eax
+  __int16 leafLodLevelCount; // cx
+  unsigned __int16 v40; // bx
+  OB_STreeInstanceData *instanceData; // ecx
+  double currentLod; // st7
+  int targetAlphaByte; // edx
+  double v44; // st7
+  float highAlpha; // [esp+34h] [ebp-Ch] BYREF
+  float targetAlpha; // [esp+38h] [ebp-8h]
+  float lowAlpha; // [esp+3Ch] [ebp-4h] BYREF
 
-  v5 = *((_DWORD *)this + 1);
-  if ( v5 )
+  branchGeometry = this->branchGeometry; /*0x789fe6*/
+  if ( branchGeometry ) /*0x789feb*/
   {
-    v6 = *(_DWORD *)(v5 + 0x6C);
-    if ( v6 )
-      v7 = (*(_DWORD *)(v5 + 0x70) - v6) >> 2;
+    begin = branchGeometry->vertexCoords.begin; /*0x789ff1*/
+    if ( begin ) /*0x789ff6*/
+      v6 = branchGeometry->vertexCoords.end - begin; /*0x78a001*/
     else
-      v7 = 0;
-    v8 = Src;
-    *(_WORD *)(Src + 0x10) = v7 / 3;
-    v9 = *((_DWORD *)this + 1);
-    v10 = *(_DWORD *)(v9 + 0x5C);
-    if ( v10 && (*(_DWORD *)(v9 + 0x60) - v10) >> 2 )
-      v11 = *(_DWORD *)(v9 + 0x5C);
+      v6 = 0; /*0x789ff8*/
+    v7 = geometry; /*0x78a00d*/
+    geometry->branches.vertexCount = v6 / 3; /*0x78a013*/
+    v8 = this->branchGeometry; /*0x78a017*/
+    v9 = v8->packedColors.begin; /*0x78a01a*/
+    if ( v9 && v8->packedColors.end - v9 ) /*0x78a026*/
+      v10 = v8->packedColors.begin; /*0x78a042*/
     else
-      v11 = 0;
-    *(_DWORD *)(v8 + 0x14) = v11;
-    v12 = *((_DWORD *)this + 1);
-    v13 = *(_DWORD *)(v12 + 0x6C);
-    if ( v13 && (*(_DWORD *)(v12 + 0x70) - v13) >> 2 )
-      v14 = *(_DWORD *)(v12 + 0x6C);
+      v10 = 0; /*0x78a02b*/
+    v7->branches.packedColors = v10; /*0x78a045*/
+    v11 = this->branchGeometry; /*0x78a048*/
+    v12 = v11->vertexCoords.begin; /*0x78a04b*/
+    if ( v12 && v11->vertexCoords.end - v12 ) /*0x78a057*/
+      v13 = v11->vertexCoords.begin; /*0x78a073*/
     else
-      v14 = 0;
-    *(_DWORD *)(v8 + 0x24) = v14;
-    v15 = *((_DWORD *)this + 1);
-    v16 = *(_DWORD *)(v15 + 0x8C);
-    if ( v16 && (*(_DWORD *)(v15 + 0x90) - v16) >> 2 )
-      v17 = *(_DWORD *)(v15 + 0x8C);
+      v13 = 0; /*0x78a05c*/
+    v7->branches.coords = v13; /*0x78a076*/
+    v14 = this->branchGeometry; /*0x78a079*/
+    v15 = v14->vertexNormals.begin; /*0x78a07c*/
+    if ( v15 && v14->vertexNormals.end - v15 ) /*0x78a08e*/
+      v16 = v14->vertexNormals.begin; /*0x78a0ad*/
     else
-      v17 = 0;
-    *(_DWORD *)(v8 + 0x18) = v17;
-    v18 = *((_DWORD *)this + 1);
-    v19 = *(_DWORD *)(v18 + 0x9C);
-    if ( v19 && (*(_DWORD *)(v18 + 0xA0) - v19) >> 2 )
-      v20 = *(_DWORD *)(v18 + 0x9C);
+      v16 = 0; /*0x78a093*/
+    v7->branches.normals = v16; /*0x78a0b3*/
+    v17 = this->branchGeometry; /*0x78a0b6*/
+    v18 = v17->vertexBinormals.begin; /*0x78a0b9*/
+    if ( v18 && v17->vertexBinormals.end - v18 ) /*0x78a0cb*/
+      v19 = v17->vertexBinormals.begin; /*0x78a0ea*/
     else
-      v20 = 0;
-    *(_DWORD *)(v8 + 0x1C) = v20;
-    v21 = *((_DWORD *)this + 1);
-    v22 = *(_DWORD *)(v21 + 0xAC);
-    if ( v22 && (*(_DWORD *)(v21 + 0xB0) - v22) >> 2 )
-      v23 = *(_DWORD *)(v21 + 0xAC);
+      v19 = 0; /*0x78a0d0*/
+    v7->branches.binormals = v19; /*0x78a0f0*/
+    v20 = this->branchGeometry; /*0x78a0f3*/
+    v21 = v20->vertexTangents.begin; /*0x78a0f6*/
+    if ( v21 && v20->vertexTangents.end - v21 ) /*0x78a108*/
+      v22 = v20->vertexTangents.begin; /*0x78a127*/
     else
-      v23 = 0;
-    *(_DWORD *)(v8 + 0x20) = v23;
-    v24 = *((_DWORD *)this + 1);
-    v25 = *(_DWORD *)(v24 + 0xBC);
-    if ( v25 && (*(_DWORD *)(v24 + 0xC0) - v25) >> 2 )
-      v26 = *(_DWORD *)(v24 + 0xBC);
+      v22 = 0; /*0x78a10d*/
+    v7->branches.tangents = v22; /*0x78a12d*/
+    v23 = this->branchGeometry; /*0x78a130*/
+    v24 = v23->diffuseTexcoords.begin; /*0x78a133*/
+    if ( v24 && v23->diffuseTexcoords.end - v24 ) /*0x78a145*/
+      v25 = v23->diffuseTexcoords.begin; /*0x78a164*/
     else
-      v26 = 0;
-    *(_DWORD *)(v8 + 0x28) = v26;
-    v27 = *((_DWORD *)this + 1);
-    v28 = *(_DWORD *)(v27 + 0xEC);
-    if ( v28 && (*(_DWORD *)(v27 + 0xF0) - v28) >> 2 )
-      v29 = *(_DWORD *)(v27 + 0xEC);
+      v25 = 0; /*0x78a14a*/
+    v7->branches.diffuseTexcoords = v25; /*0x78a16a*/
+    v26 = this->branchGeometry; /*0x78a16d*/
+    v27 = v26->shadowTexcoords.begin; /*0x78a170*/
+    if ( v27 && v26->shadowTexcoords.end - v27 ) /*0x78a182*/
+      v28 = v26->shadowTexcoords.begin; /*0x78a1a1*/
     else
-      v29 = 0;
-    *(_DWORD *)(v8 + 0x2C) = v29;
-    v30 = *((_DWORD *)this + 1);
-    v31 = *(_DWORD *)(v30 + 0xFC);
-    if ( v31 && (*(_DWORD *)(v30 + 0x100) - v31) >> 2 )
-      v32 = *(_DWORD *)(v30 + 0xFC);
+      v28 = 0; /*0x78a187*/
+    v7->branches.shadowTexcoords = v28; /*0x78a1a7*/
+    v29 = this->branchGeometry; /*0x78a1aa*/
+    v30 = v29->primaryWindWeights.begin; /*0x78a1ad*/
+    if ( v30 && v29->primaryWindWeights.end - v30 ) /*0x78a1bf*/
+      v31 = v29->primaryWindWeights.begin; /*0x78a1de*/
     else
-      v32 = 0;
-    *(_DWORD *)(v8 + 0x30) = v32;
-    v33 = *((_DWORD *)this + 1);
-    v34 = *(_DWORD *)(v33 + 0x10C);
-    if ( v34 && *(_DWORD *)(v33 + 0x110) != v34 )
-      v35 = *(_DWORD *)(v33 + 0x10C);
+      v31 = 0; /*0x78a1c4*/
+    v7->branches.windWeights = v31; /*0x78a1e4*/
+    v32 = this->branchGeometry; /*0x78a1e7*/
+    v33 = v32->primaryWindMatrixIndices.begin; /*0x78a1ea*/
+    if ( v33 && v32->primaryWindMatrixIndices.end != v33 ) /*0x78a1fa*/
+      v34 = v32->primaryWindMatrixIndices.begin; /*0x78a215*/
     else
-      v35 = 0;
-    v36 = MaxCount;
-    v37 = (_WORD)MaxCount == 0xFFFF;
-    *(_DWORD *)(v8 + 0x34) = v35;
-    if ( v37 )
-      v36 = sub_787C10(this, flt_A30634);
-    v38 = v36;
-    *(_DWORD *)v8 = v36;
-    *(_WORD *)(v8 + 4) = sub_7886C0(*((_DWORD **)this + 1), v36);
-    *(_DWORD *)(v8 + 8) = sub_788720(*((_DWORD *)this + 1), v38);
-    *(_DWORD *)(v8 + 0xC) = sub_7945B0(*((_DWORD **)this + 1), v38);
-    if ( byte_B4297C )
+      v34 = 0; /*0x78a1fe*/
+    DiscreteBranchLodLevel = lodLevel; /*0x78a21b*/
+    v36 = lodLevel == (__int16)0xFFFF; /*0x78a220*/
+    v7->branches.windMatrixIndices = v34; /*0x78a224*/
+    if ( v36 ) /*0x78a227*/
+      DiscreteBranchLodLevel = CSpeedTreeRT__GetDiscreteBranchLodLevel(this, kTerrainLODQuadRayDirectionZ); /*0x78a235*/
+    v37 = DiscreteBranchLodLevel; /*0x78a23a*/
+    v7->branches.discreteLodLevel = DiscreteBranchLodLevel; /*0x78a240*/
+    v7->branches.numStrips = OB_CIndexedGeometry_GetNumStrips_010201A0(this->branchGeometry, DiscreteBranchLodLevel); /*0x78a24b*/
+    v7->branches.stripLengths = OB_CIndexedGeometry_GetStripLengths_010201A0(this->branchGeometry, v37); /*0x78a258*/
+    v7->branches.strips = OB_CIndexedGeometry_GetStripsPointer_010201A0(this->branchGeometry, v37); /*0x78a264*/
+    if ( CSpeedTreeRT__s_dropToBillboard ) /*0x78a267*/
     {
-      v39 = *(_DWORD *)this;
-      v40 = *(_WORD *)(*(_DWORD *)this + 0xC0);
-      *(float *)&v47 = flt_A30634;
-      v41 = v40 + 1;
-      v42 = *((_DWORD *)this + 0xD);
-      Src = 0xFFFFFFFF;
-      if ( v42 )
-        v43 = *(float *)(v42 + 0x10);
+      treeEngine = this->treeEngine; /*0x78a274*/
+      leafLodLevelCount = this->treeEngine->leafInfo.leafLodLevelCount; /*0x78a27c*/
+      highAlpha = kTerrainLODQuadRayDirectionZ; /*0x78a283*/
+      v40 = leafLodLevelCount + 1; /*0x78a28b*/
+      instanceData = this->instanceData; /*0x78a28e*/
+      geometry = (OB_SpeedTreeGeometryOutput_010201A0 *)0xFFFFFFFF; /*0x78a293*/
+      if ( instanceData ) /*0x78a29b*/
+        currentLod = instanceData->lodLevel; /*0x78a29d*/
       else
-        v43 = *(float *)(v39 + 0x14);
-      v44 = *((unsigned __int8 *)this + 0x44);
-      *(float *)&MaxCount = v43;
-      v48 = (float)v44;
-      sub_787220(
-        *(float *)&MaxCount,
-        v41,
-        *(this + 7),
-        *(this + 0xA),
-        *(this + 8),
-        v48,
-        (float *)&v47,
-        (float *)&v49,
-        (__int16 *)&Src,
-        &MaxCount);
-      result = v41;
-      if ( (__int16)Src == v41 - 2 )
+        currentLod = treeEngine->currentLod; /*0x78a2a2*/
+      targetAlphaByte = this->targetAlphaByte; /*0x78a2a5*/
+      *(float *)&lodLevel = currentLod; /*0x78a2a9*/
+      targetAlpha = (float)targetAlphaByte; /*0x78a2c3*/
+      CSpeedTreeRT__GetTransitionValues( /*0x78a2f5*/
+        *(float *)&lodLevel,
+        v40,
+        this->leafLodTransitionRadius,
+        this->leafTransitionFactor16014,
+        this->leafLodCurveExponent,
+        targetAlpha,
+        &highAlpha,
+        &lowAlpha,
+        (__int16 *)&geometry,
+        (unsigned __int16 *)&lodLevel);
+      if ( (__int16)geometry == v40 - 2 ) /*0x78a30a*/
       {
-        *(float *)(v8 + 0x38) = *(float *)&v47;
+        v7->branches.alphaTestValue = highAlpha; /*0x78a310*/
+      }
+      else if ( (__int16)geometry == v40 - 1 ) /*0x78a321*/
+      {
+        v44 = flt_A40098; /*0x78a323*/
+        v7->branches.discreteLodLevel = 0xFFFFFFFF; /*0x78a329*/
+        v7->branches.alphaTestValue = v44; /*0x78a32f*/
       }
       else
       {
-        result = v41 - 1;
-        if ( (__int16)Src == result )
-        {
-          v46 = flt_A40098;
-          *(_DWORD *)v8 = 0xFFFFFFFF;
-          *(float *)(v8 + 0x38) = v46;
-        }
-        else
-        {
-          *(float *)(v8 + 0x38) = v48;
-        }
+        v7->branches.alphaTestValue = targetAlpha; /*0x78a33f*/
       }
     }
     else
     {
-      result = *((unsigned __int8 *)this + 0x44);
-      *(float *)(v8 + 0x38) = (float)result;
+      v7->branches.alphaTestValue = (float)this->targetAlphaByte; /*0x78a357*/
     }
   }
   else
   {
-    LODWORD(MaxCount) = 0x46;
-    return (int)sub_414500(
-                  &dword_B2B614,
-                  a2,
-                  "no branch geometry exists, possible prior call to DeleteBranchGeometry",
-                  MaxCount);
+    OB_stString28_AssignBytes_010201A0( /*0x78a37c*/
+      &OB_g_strError_010201A0,
+      "no branch geometry exists, possible prior call to DeleteBranchGeometry",
+      0x46u);
   }
-  return result;
 }

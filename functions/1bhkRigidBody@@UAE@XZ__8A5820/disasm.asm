@@ -46,3 +46,15 @@
 0x8A58B2: pop     esi
 0x8A58B3: add     esp, 10h
 0x8A58B6: retn
+0x9D6C50: mov     ecx, [ebp-10h]; this
+0x9D6C53: jmp     ??1bhkEntity@@UAE@XZ; bhkEntity::~bhkEntity(void)
+0x9D6C58: mov     ecx, [ebp-10h]
+0x9D6C5B: add     ecx, 10h; slot
+0x9D6C5E: jmp     NiPointerSlot_Release
+0x9D6C63: mov     edx, [esp+arg_4]
+0x9D6C67: lea     eax, [edx-0Ch]
+0x9D6C6A: mov     ecx, [edx-10h]
+0x9D6C6D: xor     ecx, eax
+0x9D6C6F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D6C74: mov     eax, offset stru_AFE9A0
+0x9D6C79: jmp     ___CxxFrameHandler3

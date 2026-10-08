@@ -1,4 +1,4 @@
-0x4A4890: sub     esp, 8
+0x4A4890: sub     esp, 8; Verified (Oblivion): dispatches RDAT/RDMD/RDNL/RDWT/RDSD/RDSG/RDGS chunks to factory-created region data and virtual loaders. Fallout has additional data IDs/layouts; those are not assumed here.
 0x4A4893: push    ebx
 0x4A4894: push    esi
 0x4A4895: push    edi
@@ -6,11 +6,11 @@
 0x4A489A: test    edi, edi
 0x4A489C: mov     esi, ecx
 0x4A489E: jz      loc_4A49D6
-0x4A48A4: mov     ebx, [esp+14h+arg_4]
+0x4A48A4: mov     ebx, [esp+14h+region]
 0x4A48A8: test    ebx, ebx
 0x4A48AA: jz      loc_4A49D6
 0x4A48B0: mov     ecx, edi
-0x4A48B2: mov     [esi+4], ebx
+0x4A48B2: mov     [esi+4], ebx; Verified: each record-dispatch call assigns TESRegionDataManager.currentRegion before reading the next region chunk.
 0x4A48B5: call    TESFile_GetChunkType
 0x4A48BA: cmp     eax, 504D4452h
 0x4A48BF: jg      short loc_4A490E
@@ -68,13 +68,13 @@
 0x4A4961: mov     ecx, edi; a1
 0x4A4963: mov     dword ptr [esp+1Ch+Dst], eax
 0x4A4967: mov     [esp+1Ch+var_4], eax
-0x4A496B: call    TESFile_GetChunkData
+0x4A496B: call    TESFile_GetChunkData; Verified: RDAT base header reads exactly 8 bytes; first dword selects the Oblivion region-data factory ID, second dword is consumed by TESRegionData_LoadHeader.
 0x4A4970: mov     edx, [esi]
 0x4A4972: mov     eax, dword ptr [esp+14h+Dst]
 0x4A4976: mov     edx, [edx+4]
 0x4A4979: push    eax
 0x4A497A: mov     ecx, esi
-0x4A497C: call    edx
+0x4A497C: call    edx; Verified: factory creates type from RDAT ID; returned object receives the 8-byte base RDAT header, then is linked into TESRegion's data list.
 0x4A497E: test    eax, eax
 0x4A4980: mov     ds:0B3541Ch, eax
 0x4A4985: jz      short loc_4A49CB
@@ -111,7 +111,7 @@
 0x4A49CC: pop     esi
 0x4A49CD: mov     al, 1
 0x4A49CF: pop     ebx
-0x4A49D0: add     esp, 8
+0x4A49D0: add     esp, 8; Verified: manager returns success after processing/ignoring a region chunk; only null file or null region returns false.
 0x4A49D3: retn    8
 0x4A49D6: pop     edi
 0x4A49D7: pop     esi

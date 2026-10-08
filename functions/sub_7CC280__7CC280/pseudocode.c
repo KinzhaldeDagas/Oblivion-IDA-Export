@@ -1,6 +1,9 @@
-void __thiscall sub_7CC280(Ni2DBuffer **this)
+// Oblivion-authoritative ShadowLightShader constant-map builder. Registers the B44FD8 four-float vector as PointLightPos0 at vertex c16; the mode-5 SLS2052..2056 caster vertex programs expose the same register as LightPosition and use c16.w as their depth normalization denominator.
+//
+// SpeedTreeOBSE v156 binding evidence: pixel map Ambient Color c1 <- B46498; Light Color0..3 c2..5 <- B464A8/B464B8/B464C8/B464D8. Size16/stride4/one register, flags10000007, noncopy source. Use actual definition1 map entries when validating; B4551C..2C auxiliary pointers can reflect another map construction. Vertex DiffuseColor0..2 c19..21 read the same first three direct-light vectors.
+void __thiscall ShadowLightShader__BuildConstantMaps(void *this)
 {
-  int *v1; // ebx
+  _DWORD *v1; // ebx
   Ni2DBuffer **v2; // esi
   NiD3DShaderConstantMap *v3; // eax
   NiD3DShaderConstantMap *v4; // eax
@@ -58,29 +61,29 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
   NiD3DShaderConstantMap *v56; // eax
   NiD3DShaderConstantMap *v57; // eax
 
-  v1 = (int *)this;
-  v2 = this + 0xC;
-  if ( !*(this + 0xC) )
+  v1 = this; /*0x7cc2a7*/
+  v2 = (Ni2DBuffer **)((char *)this + 0x30); /*0x7cc2ad*/
+  if ( !*((_DWORD *)this + 0xC) ) /*0x7cc2b3*/
   {
-    v3 = (NiD3DShaderConstantMap *)FormHeapAlloc(0x34u);
-    if ( v3 )
-      v4 = NiD3DShaderCostantMapVertex::Construct(v3, v1[5]);
+    v3 = (NiD3DShaderConstantMap *)FormHeapAlloc(0x34u); /*0x7cc2be*/
+    if ( v3 ) /*0x7cc2d4*/
+      v4 = NiD3DShaderCostantMapVertex::Construct(v3, v1[5]); /*0x7cc2dc*/
     else
-      v4 = 0;
-    NiSmartPointer_Set__(v2, (Ni2DBuffer *)v4);
-    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, CHAR *))(*v2)->__vftable + 7))(
+      v4 = 0; /*0x7cc2e3*/
+    NiSmartPointer_Set__(v2, (Ni2DBuffer *)v4); /*0x7cc2ec*/
+    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, CHAR *))(*v2)->__vftable + 7))( /*0x7cc309*/
       *v2,
       "WorldViewProjTranspose",
       0x20000009,
       0,
       EmptyString);
-    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, int, CHAR *))(*v2)->__vftable + 7))(
+    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, int, CHAR *))(*v2)->__vftable + 7))( /*0x7cc323*/
       *v2,
       "SkinWorldViewProjTranspose",
       0x20000009,
       1,
       EmptyString);
-    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, void *, _DWORD))(*v2)->__vftable
+    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, void *, _DWORD))(*v2)->__vftable /*0x7cc34c*/
      + 6))(
       *v2,
       "ShadowProj",
@@ -93,7 +96,7 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       4,
       &unk_B45560,
       0);
-    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, void *, _DWORD))(*v2)->__vftable
+    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, void *, _DWORD))(*v2)->__vftable /*0x7cc375*/
      + 6))(
       *v2,
       "SkinWorldTranspose",
@@ -106,7 +109,7 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       4,
       &unk_B44F98,
       0);
-    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, void *, _DWORD))(*v2)->__vftable
+    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, void *, _DWORD))(*v2)->__vftable /*0x7cc39e*/
      + 6))(
       *v2,
       "WorldTranspose",
@@ -119,7 +122,7 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       4,
       &unk_B45498,
       0);
-    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*v2)->__vftable
+    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*v2)->__vftable /*0x7cc3c7*/
      + 6))(
       *v2,
       "ShadowProjData",
@@ -130,9 +133,9 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       EmptyString,
       0x10,
       4,
-      &flt_B44EE8,
+      &unk_B44EE8,
       0);
-    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*v2)->__vftable
+    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*v2)->__vftable /*0x7cc3f0*/
      + 6))(
       *v2,
       "ShadowProjTransform",
@@ -143,9 +146,9 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       EmptyString,
       0x10,
       4,
-      &flt_B44EF8,
+      &unk_B44EF8,
       0);
-    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, void *, _DWORD))(*v2)->__vftable
+    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*v2)->__vftable /*0x7cc419*/
      + 6))(
       *v2,
       "HighDetailRange",
@@ -156,9 +159,9 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       EmptyString,
       0x10,
       4,
-      &unk_B46698,
+      &OB_ShaderConstantStorage_010201A0[0x221],
       0);
-    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*v2)->__vftable
+    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*v2)->__vftable /*0x7cc442*/
      + 6))(
       *v2,
       "DirectronalLightDir0",
@@ -169,9 +172,9 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       EmptyString,
       0x10,
       4,
-      &flt_B454D8,
+      &unk_B454D8,
       0);
-    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*v2)->__vftable
+    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*v2)->__vftable /*0x7cc46b*/
      + 6))(
       *v2,
       "DirectronalLightDir1",
@@ -182,9 +185,9 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       EmptyString,
       0x10,
       4,
-      &flt_B454E8,
+      &unk_B454E8,
       0);
-    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, int *, _DWORD))(*v2)->__vftable
+    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*v2)->__vftable /*0x7cc494*/
      + 6))(
       *v2,
       "PointLightPos0",
@@ -195,9 +198,9 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       EmptyString,
       0x10,
       4,
-      &dword_B44FD8,
+      &ShadowLightPointLightPos0Constant,
       0);
-    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*v2)->__vftable
+    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*v2)->__vftable /*0x7cc4bd*/
      + 6))(
       *v2,
       "PointLightPos1",
@@ -208,9 +211,9 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       EmptyString,
       0x10,
       4,
-      &flt_B44FE8,
-      0);
-    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*v2)->__vftable
+      &unk_B44FE8,
+      0);                                       // Register B44FD8 as ShadowLight vertex constant PointLightPos0 at c16, four floats. Mode-5 SLS2052..2056 expose this as LightPosition.
+    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*v2)->__vftable /*0x7cc4e6*/
      + 6))(
       *v2,
       "PointLightPos2",
@@ -221,9 +224,9 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       EmptyString,
       0x10,
       4,
-      &flt_B44FF8,
+      &unk_B44FF8,
       0);
-    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, int *, _DWORD))(*v2)->__vftable
+    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*v2)->__vftable /*0x7cc50f*/
      + 6))(
       *v2,
       "DiffuseColor0",
@@ -234,9 +237,9 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       EmptyString,
       0x10,
       4,
-      &dword_B464A8,
+      &OB_ShaderConstantStorage_010201A0[0x1A5],
       0);
-    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, void *, _DWORD))(*v2)->__vftable
+    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*v2)->__vftable /*0x7cc538*/
      + 6))(
       *v2,
       "DiffuseColor1",
@@ -247,9 +250,9 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       EmptyString,
       0x10,
       4,
-      &unk_B464B8,
+      &OB_ShaderConstantStorage_010201A0[0x1A9],
       0);
-    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, void *, _DWORD))(*v2)->__vftable
+    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*v2)->__vftable /*0x7cc561*/
      + 6))(
       *v2,
       "DiffuseColor2",
@@ -260,9 +263,9 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       EmptyString,
       0x10,
       4,
-      &unk_B464C8,
+      &OB_ShaderConstantStorage_010201A0[0x1AD],
       0);
-    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, int *, _DWORD))(*v2)->__vftable
+    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*v2)->__vftable /*0x7cc58a*/
      + 6))(
       *v2,
       "FogParam | ShadowVolumeFatness",
@@ -273,9 +276,9 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       EmptyString,
       0x10,
       4,
-      &dword_B46638,
-      0);
-    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, int *, _DWORD))(*v2)->__vftable
+      &OB_ShaderConstantStorage_010201A0[0x209],
+      0);                                       // Fog constant-map decode: ShadowLight/shared map declares FogParam | ShadowVolumeFatness at vs c23 from B46638; shared fog vector also has shadow-volume semantics.
+    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*v2)->__vftable /*0x7cc5b3*/
      + 6))(
       *v2,
       "FogColor | ShadowVolumeExtrudeDistance",
@@ -286,9 +289,9 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       EmptyString,
       0x10,
       4,
-      &dword_B46648,
-      0);
-    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*v2)->__vftable
+      &OB_ShaderConstantStorage_010201A0[0x20D],
+      0);                                       // Fog constant-map decode: ShadowLight/shared map declares FogColor | ShadowVolumeExtrudeDistance at vs c24 from B46648; shared fog vector also has shadow-volume semantics.
+    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*v2)->__vftable /*0x7cc5dc*/
      + 6))(
       *v2,
       "EyePosition",
@@ -299,9 +302,9 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       EmptyString,
       0x10,
       4,
-      &flt_B44F08,
+      &unk_B44F08,
       0);
-    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*v2)->__vftable
+    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*v2)->__vftable /*0x7cc605*/
      + 6))(
       *v2,
       "BoundCenter",
@@ -312,9 +315,9 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       EmptyString,
       0x10,
       4,
-      &flt_B44F28,
+      &unk_B44F28,
       0);
-    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, void *, _DWORD))(*v2)->__vftable
+    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*v2)->__vftable /*0x7cc62e*/
      + 6))(
       *v2,
       "LODLandFlags",
@@ -325,9 +328,9 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       EmptyString,
       0x10,
       4,
-      &unk_B466B8,
+      &OB_ShaderConstantStorage_010201A0[0x229],
       0);
-    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, int, int, int, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD))(*v2)->__vftable
+    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, int, int, int, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD))(*v2)->__vftable /*0x7cc654*/
      + 6))(
       *v2,
       "BoneMatrix3",
@@ -340,19 +343,19 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       0,
       0,
       0);
-    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, int, CHAR *))(*v2)->__vftable + 7))(
+    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, int, CHAR *))(*v2)->__vftable + 7))( /*0x7cc66e*/
       *v2,
       "WorldViewTranspose",
       0x20000009,
       4,
       EmptyString);
-    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, int, CHAR *))(*v2)->__vftable + 7))(
+    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, int, CHAR *))(*v2)->__vftable + 7))( /*0x7cc688*/
       *v2,
       "SkinWorldViewTranspose",
       0x20000009,
       5,
       EmptyString);
-    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*v2)->__vftable
+    (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*v2)->__vftable /*0x7cc6b1*/
      + 6))(
       *v2,
       "Time",
@@ -363,115 +366,115 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       EmptyString,
       4,
       4,
-      &flt_B44EE0,
+      &unk_B44EE0,
       0);
-    v5 = (*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))(*v2, "WorldViewProjTranspose");
-    v6 = dword_B45018;
-    if ( dword_B45018 != v5 )
+    v5 = (*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))(*v2, "WorldViewProjTranspose"); /*0x7cc6c1*/
+    v6 = unk_B45018; /*0x7cc6c3*/
+    if ( unk_B45018 != v5 ) /*0x7cc6ca*/
     {
-      if ( v6 )
+      if ( v6 ) /*0x7cc6ce*/
       {
-        v7 = (void (__thiscall ***)(_DWORD, int))dword_B45018;
-        if ( !InterlockedDecrement((volatile LONG *)(v6 + 4)) )
+        v7 = (void (__thiscall ***)(_DWORD, int))unk_B45018; /*0x7cc6d0*/
+        if ( !InterlockedDecrement((volatile LONG *)(v6 + 4)) ) /*0x7cc6d6*/
         {
-          if ( v7 )
-            (**v7)(v7, 1);
+          if ( v7 ) /*0x7cc6e2*/
+            (**v7)(v7, 1); /*0x7cc6ec*/
         }
-        v1 = (int *)this;
+        v1 = this; /*0x7cc6ee*/
       }
-      dword_B45018 = v5;
-      if ( v5 )
-        InterlockedIncrement((volatile LONG *)(v5 + 4));
+      unk_B45018 = v5; /*0x7cc6f4*/
+      if ( v5 ) /*0x7cc6fa*/
+        InterlockedIncrement((volatile LONG *)(v5 + 4)); /*0x7cc700*/
     }
-    v8 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))(
+    v8 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))( /*0x7cc712*/
                          *v2,
                          "WorldTranspose");
-    NiSmartPointer_Set__((Ni2DBuffer **)&dword_B4501C, v8);
-    v9 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))(
+    NiSmartPointer_Set__(&dword_B4501C, v8); /*0x7cc71a*/
+    v9 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))( /*0x7cc72b*/
                          *v2,
                          "SkinWorldTranspose");
-    NiSmartPointer_Set__((Ni2DBuffer **)&dword_B45068, v9);
-    v10 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))(
+    NiSmartPointer_Set__(&dword_B45068, v9); /*0x7cc733*/
+    v10 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))( /*0x7cc744*/
                           *v2,
                           "SkinWorldViewProjTranspose");
-    NiSmartPointer_Set__((Ni2DBuffer **)&dword_B45020, v10);
-    v11 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))(*v2, "ShadowProj");
-    NiSmartPointer_Set__((Ni2DBuffer **)&dword_B45024, v11);
-    v12 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))(
+    NiSmartPointer_Set__(&dword_B45020, v10); /*0x7cc74c*/
+    v11 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))(*v2, "ShadowProj"); /*0x7cc75d*/
+    NiSmartPointer_Set__(&dword_B45024, v11); /*0x7cc765*/
+    v12 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))( /*0x7cc776*/
                           *v2,
                           "ShadowProjData");
-    NiSmartPointer_Set__((Ni2DBuffer **)&dword_B45028, v12);
-    v13 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))(
+    NiSmartPointer_Set__(&dword_B45028, v12); /*0x7cc77e*/
+    v13 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))( /*0x7cc78f*/
                           *v2,
                           "ShadowProjTransform");
-    NiSmartPointer_Set__((Ni2DBuffer **)&dword_B4502C, v13);
-    v14 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))(
+    NiSmartPointer_Set__(&dword_B4502C, v13); /*0x7cc797*/
+    v14 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))( /*0x7cc7a8*/
                           *v2,
                           "HighDetailRange");
-    NiSmartPointer_Set__((Ni2DBuffer **)&dword_B45078, v14);
-    v15 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))(
+    NiSmartPointer_Set__(&dword_B45078, v14); /*0x7cc7b0*/
+    v15 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))( /*0x7cc7c1*/
                           *v2,
                           "DirectronalLightDir0");
-    NiSmartPointer_Set__((Ni2DBuffer **)&dword_B45030, v15);
-    v16 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))(
+    NiSmartPointer_Set__(&dword_B45030, v15); /*0x7cc7c9*/
+    v16 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))( /*0x7cc7da*/
                           *v2,
                           "DirectronalLightDir1");
-    NiSmartPointer_Set__((Ni2DBuffer **)&dword_B45034, v16);
-    v17 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))(
+    NiSmartPointer_Set__(&dword_B45034, v16); /*0x7cc7e2*/
+    v17 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))( /*0x7cc7f3*/
                           *v2,
                           "DirectronalLightDir2");
-    NiSmartPointer_Set__((Ni2DBuffer **)&dword_B45038, v17);
-    v18 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))(
+    NiSmartPointer_Set__(&dword_B45038, v17); /*0x7cc7fb*/
+    v18 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))( /*0x7cc80c*/
                           *v2,
                           "DirectronalLightDir3");
-    NiSmartPointer_Set__((Ni2DBuffer **)&dword_B4503C, v18);
-    v19 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))(
+    NiSmartPointer_Set__(&dword_B4503C, v18); /*0x7cc814*/
+    v19 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))( /*0x7cc825*/
                           *v2,
                           "PointLightPos0");
-    NiSmartPointer_Set__((Ni2DBuffer **)&dword_B45040, v19);
-    v20 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))(
+    NiSmartPointer_Set__(&dword_B45040, v19); /*0x7cc82d*/
+    v20 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))( /*0x7cc83e*/
                           *v2,
                           "PointLightPos1");
-    NiSmartPointer_Set__((Ni2DBuffer **)&dword_B45044, v20);
-    v21 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))(
+    NiSmartPointer_Set__(&dword_B45044, v20); /*0x7cc846*/
+    v21 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))( /*0x7cc857*/
                           *v2,
                           "PointLightPos2");
-    NiSmartPointer_Set__((Ni2DBuffer **)&dword_B45048, v21);
-    v22 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))(
+    NiSmartPointer_Set__(&dword_B45048, v21); /*0x7cc85f*/
+    v22 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))( /*0x7cc870*/
                           *v2,
                           "PointLightPos3");
-    NiSmartPointer_Set__((Ni2DBuffer **)&dword_B4504C, v22);
-    v23 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))(
+    NiSmartPointer_Set__(&dword_B4504C, v22); /*0x7cc878*/
+    v23 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))( /*0x7cc889*/
                           *v2,
-                          "FogParam | ShadowVolumeFatness");
-    NiSmartPointer_Set__((Ni2DBuffer **)&dword_B45050, v23);
-    v24 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))(
+                          "FogParam | ShadowVolumeFatness");// Fog constant-map decode: caches handle for shared FogParam | ShadowVolumeFatness declaration; handle target is B46638.
+    NiSmartPointer_Set__(&dword_B45050, v23); /*0x7cc891*/
+    v24 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))( /*0x7cc8a2*/
                           *v2,
-                          "FogColor | ShadowVolumeExtrudeDistance");
-    NiSmartPointer_Set__((Ni2DBuffer **)&dword_B45054, v24);
-    v25 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))(*v2, "EyePosition");
-    NiSmartPointer_Set__((Ni2DBuffer **)&dword_B45058, v25);
-    v26 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))(*v2, "BoneMatrix3");
-    NiSmartPointer_Set__((Ni2DBuffer **)&dword_B4505C, v26);
-    v27 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))(
+                          "FogColor | ShadowVolumeExtrudeDistance");// Fog constant-map decode: caches handle for shared FogColor | ShadowVolumeExtrudeDistance declaration; handle target is B46648.
+    NiSmartPointer_Set__(&dword_B45054, v24); /*0x7cc8aa*/
+    v25 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))(*v2, "EyePosition"); /*0x7cc8bb*/
+    NiSmartPointer_Set__(&dword_B45058, v25); /*0x7cc8c3*/
+    v26 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))(*v2, "BoneMatrix3"); /*0x7cc8d4*/
+    NiSmartPointer_Set__(&dword_B4505C, v26); /*0x7cc8dc*/
+    v27 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))( /*0x7cc8ed*/
                           *v2,
                           "WorldViewTranspose");
-    NiSmartPointer_Set__((Ni2DBuffer **)&dword_B4506C, v27);
-    v28 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))(
+    NiSmartPointer_Set__(&dword_B4506C, v27); /*0x7cc8f5*/
+    v28 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))( /*0x7cc906*/
                           *v2,
                           "SkinWorldViewTranspose");
-    NiSmartPointer_Set__((Ni2DBuffer **)&dword_B45070, v28);
-    v29 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))(*v2, "Time");
-    NiSmartPointer_Set__((Ni2DBuffer **)&dword_B45074, v29);
-    v30 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))(*v2, "BoundCenter");
-    NiSmartPointer_Set__((Ni2DBuffer **)&dword_B4507C, v30);
-    v31 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))(
+    NiSmartPointer_Set__(&dword_B45070, v28); /*0x7cc90e*/
+    v29 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))(*v2, "Time"); /*0x7cc91f*/
+    NiSmartPointer_Set__(&dword_B45074, v29); /*0x7cc927*/
+    v30 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))(*v2, "BoundCenter"); /*0x7cc938*/
+    NiSmartPointer_Set__(&dword_B4507C, v30); /*0x7cc940*/
+    v31 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))( /*0x7cc951*/
                           *v2,
                           "LODLandFlags");
-    NiSmartPointer_Set__((Ni2DBuffer **)&dword_B45080, v31);
-    if ( ShaderPackage >= 2 )
+    NiSmartPointer_Set__(&dword_B45080, v31); /*0x7cc959*/
+    if ( *(int *)&OB_RendererGlobalState_010201A0[0xAF] >= 2 ) /*0x7cc965*/
     {
-      (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*v2)->__vftable
+      (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*v2)->__vftable /*0x7cc992*/
        + 6))(
         *v2,
         "DecalCount",
@@ -482,13 +485,13 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
         EmptyString,
         0x10,
         4,
-        &flt_B4615C,
+        &OB_ShaderConstantStorage_010201A0[0xD2],
         0);
-      v32 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))(
+      v32 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))( /*0x7cc9a0*/
                             *v2,
                             "DecalCount");
-      NiSmartPointer_Set__((Ni2DBuffer **)&dword_B45060, v32);
-      (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*v2)->__vftable
+      NiSmartPointer_Set__((Ni2DBuffer **)&unk_B45060, v32); /*0x7cc9a8*/
+      (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*v2)->__vftable /*0x7cc9d7*/
        + 6))(
         *v2,
         "decal fade",
@@ -499,13 +502,13 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
         EmptyString,
         0x80,
         4,
-        &flt_B46218,
+        &OB_ShaderConstantStorage_010201A0[0x101],
         0);
-      v33 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))(
+      v33 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))( /*0x7cc9e5*/
                             *v2,
                             "decal fade");
-      NiSmartPointer_Set__((Ni2DBuffer **)&dword_B45084, v33);
-      (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, void *, _DWORD))(*v2)->__vftable
+      NiSmartPointer_Set__(&dword_B45084, v33); /*0x7cc9ed*/
+      (*((void (__thiscall **)(Ni2DBuffer *, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*v2)->__vftable /*0x7cca1c*/
        + 6))(
         *v2,
         "decal proj",
@@ -516,25 +519,25 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
         EmptyString,
         0x200,
         4,
-        &unk_B46298,
+        &OB_ShaderConstantStorage_010201A0[0x121],
         0);
-      v34 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))(
+      v34 = (Ni2DBuffer *)(*((int (__thiscall **)(Ni2DBuffer *, const char *))(*v2)->__vftable + 0xE))( /*0x7cca2a*/
                             *v2,
                             "decal proj");
-      NiSmartPointer_Set__((Ni2DBuffer **)&dword_B44F8C, v34);
+      NiSmartPointer_Set__(&dword_B44F8C, v34); /*0x7cca32*/
     }
-    sub_55E2A0(v1 + 0x26, (int *)v2);
+    OB_NiSmartPointer_Assign_010201A0(v1 + 0x26, (int *)v2); /*0x7cca3e*/
   }
-  v35 = v1 + 0xB;
-  if ( !v1[0xB] )
+  v35 = v1 + 0xB; /*0x7cca47*/
+  if ( !v1[0xB] ) /*0x7cca43*/
   {
-    v36 = (NiD3DShaderConstantMap *)FormHeapAlloc(0x34u);
-    if ( v36 )
-      v37 = NiD3DShaderCostantMapPixel::Construct(v36, v1[5]);
+    v36 = (NiD3DShaderConstantMap *)FormHeapAlloc(0x34u); /*0x7cca52*/
+    if ( v36 ) /*0x7cca68*/
+      v37 = NiD3DShaderCostantMapPixel::Construct(v36, v1[5]); /*0x7cca70*/
     else
-      v37 = 0;
-    NiSmartPointer_Set__((Ni2DBuffer **)v1 + 0xB, (Ni2DBuffer *)v37);
-    (*(void (__thiscall **)(int, const char *, int, _DWORD, _DWORD, int, CHAR *, int, int, float *, _DWORD))(*(_DWORD *)*v35 + 0x18))(
+      v37 = 0; /*0x7cca77*/
+    NiSmartPointer_Set__((Ni2DBuffer **)v1 + 0xB, (Ni2DBuffer *)v37); /*0x7cca80*/
+    (*(void (__thiscall **)(int, const char *, int, _DWORD, _DWORD, int, CHAR *, int, int, float *, _DWORD))(*(_DWORD *)*v35 + 0x18))( /*0x7ccaac*/
       *v35,
       "eye dir",
       0x10000007,
@@ -544,9 +547,9 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       EmptyString,
       0x10,
       4,
-      &flt_B44F18,
+      &unk_B44F18,
       0);
-    (*(void (__thiscall **)(int, const char *, int, _DWORD, int, int, CHAR *, int, int, int *, _DWORD))(*(_DWORD *)*v35 + 0x18))(
+    (*(void (__thiscall **)(int, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*(_DWORD *)*v35 + 0x18))( /*0x7ccad5*/
       *v35,
       "Ambient Color",
       0x10000007,
@@ -556,9 +559,9 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       EmptyString,
       0x10,
       4,
-      &dword_B46498,
+      &OB_ShaderConstantStorage_010201A0[0x1A1],
       0);
-    (*(void (__thiscall **)(int, const char *, int, _DWORD, int, int, CHAR *, int, int, int *, _DWORD))(*(_DWORD *)*v35 + 0x18))(
+    (*(void (__thiscall **)(int, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*(_DWORD *)*v35 + 0x18))( /*0x7ccafe*/
       *v35,
       "Light Color 0",
       0x10000007,
@@ -568,9 +571,9 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       EmptyString,
       0x10,
       4,
-      &dword_B464A8,
+      &OB_ShaderConstantStorage_010201A0[0x1A5],
       0);
-    (*(void (__thiscall **)(int, const char *, int, _DWORD, int, int, CHAR *, int, int, void *, _DWORD))(*(_DWORD *)*v35 + 0x18))(
+    (*(void (__thiscall **)(int, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*(_DWORD *)*v35 + 0x18))( /*0x7ccb27*/
       *v35,
       "Light Color 1",
       0x10000007,
@@ -580,9 +583,9 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       EmptyString,
       0x10,
       4,
-      &unk_B464B8,
+      &OB_ShaderConstantStorage_010201A0[0x1A9],
       0);
-    (*(void (__thiscall **)(int, const char *, int, _DWORD, int, int, CHAR *, int, int, void *, _DWORD))(*(_DWORD *)*v35 + 0x18))(
+    (*(void (__thiscall **)(int, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*(_DWORD *)*v35 + 0x18))( /*0x7ccb50*/
       *v35,
       "Light Color 2",
       0x10000007,
@@ -592,9 +595,9 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       EmptyString,
       0x10,
       4,
-      &unk_B464C8,
+      &OB_ShaderConstantStorage_010201A0[0x1AD],
       0);
-    (*(void (__thiscall **)(int, const char *, int, _DWORD, int, int, CHAR *, int, int, void *, _DWORD))(*(_DWORD *)*v35 + 0x18))(
+    (*(void (__thiscall **)(int, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*(_DWORD *)*v35 + 0x18))( /*0x7ccb79*/
       *v35,
       "Light Color 3",
       0x10000007,
@@ -604,9 +607,9 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       EmptyString,
       0x10,
       4,
-      &unk_B464D8,
+      &OB_ShaderConstantStorage_010201A0[0x1B1],
       0);
-    (*(void (__thiscall **)(int, const char *, int, _DWORD, int, int, CHAR *, int, int, int *, _DWORD))(*(_DWORD *)*v35 + 0x18))(
+    (*(void (__thiscall **)(int, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*(_DWORD *)*v35 + 0x18))( /*0x7ccba2*/
       *v35,
       "Emittance Color",
       0x10000007,
@@ -616,9 +619,9 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       EmptyString,
       0x10,
       4,
-      &dword_B46628,
+      &OB_ShaderConstantStorage_010201A0[0x205],
       0);
-    (*(void (__thiscall **)(int, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*(_DWORD *)*v35 + 0x18))(
+    (*(void (__thiscall **)(int, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*(_DWORD *)*v35 + 0x18))( /*0x7ccbcb*/
       *v35,
       "Toggles",
       0x10000007,
@@ -628,9 +631,9 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       EmptyString,
       0x10,
       4,
-      &flt_B46688,
+      &OB_ShaderConstantStorage_010201A0[0x21D],
       0);
-    (*(void (__thiscall **)(int, const char *, int, _DWORD, int, int, CHAR *, int, int, int *, _DWORD))(*(_DWORD *)*v35 + 0x18))(
+    (*(void (__thiscall **)(int, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*(_DWORD *)*v35 + 0x18))( /*0x7ccbf4*/
       *v35,
       "HairTint",
       0x10000007,
@@ -640,9 +643,9 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       EmptyString,
       0x10,
       4,
-      &dword_B4616C,
+      &OB_ShaderConstantStorage_010201A0[0xD6],
       0);
-    (*(void (__thiscall **)(int, const char *, int, _DWORD, int, int, CHAR *, int, int, void *, _DWORD))(*(_DWORD *)*v35 + 0x18))(
+    (*(void (__thiscall **)(int, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*(_DWORD *)*v35 + 0x18))( /*0x7ccc1d*/
       *v35,
       "STBBColorConstants",
       0x10000007,
@@ -652,9 +655,9 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       EmptyString,
       0x10,
       4,
-      &unk_B466A8,
-      0);
-    (*(void (__thiscall **)(int, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*(_DWORD *)*v35 + 0x18))(
+      &OB_ShaderConstantStorage_010201A0[0x225],
+      0);                                       // Registers shader constant map entry STBBColorConstants using backing globals at B466A8. This supports TES STBB color constants only; it is separate from SpeedTreeRT 360 billboard image selection.
+    (*(void (__thiscall **)(int, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*(_DWORD *)*v35 + 0x18))( /*0x7ccc46*/
       *v35,
       "RefractionPower",
       0x10000004,
@@ -664,47 +667,47 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       EmptyString,
       4,
       4,
-      &flt_B44EDC,
+      &unk_B44EDC,
       0);
-    v38 = (Ni2DBuffer *)(*(int (__thiscall **)(int, const char *))(*(_DWORD *)*v35 + 0x38))(*v35, "HairTint");
-    NiSmartPointer_Set__((Ni2DBuffer **)&dword_B45554, v38);
-    v39 = (*(int (__thiscall **)(int, const char *))(*(_DWORD *)*v35 + 0x38))(*v35, "eye dir");
-    v40 = dword_B45518[0];
-    if ( dword_B45518[0] != v39 )
+    v38 = (Ni2DBuffer *)(*(int (__thiscall **)(int, const char *))(*(_DWORD *)*v35 + 0x38))(*v35, "HairTint"); /*0x7ccc54*/
+    NiSmartPointer_Set__(&dword_B45554, v38); /*0x7ccc5c*/
+    v39 = (*(int (__thiscall **)(int, const char *))(*(_DWORD *)*v35 + 0x38))(*v35, "eye dir"); /*0x7ccc6f*/
+    v40 = unk_B45518[0]; /*0x7ccc71*/
+    if ( unk_B45518[0] != v39 ) /*0x7ccc78*/
     {
-      if ( v40 )
+      if ( v40 ) /*0x7ccc7c*/
       {
-        v41 = (void (__thiscall ***)(_DWORD, int))dword_B45518[0];
-        if ( !InterlockedDecrement((volatile LONG *)(v40 + 4)) )
+        v41 = (void (__thiscall ***)(_DWORD, int))unk_B45518[0]; /*0x7ccc7e*/
+        if ( !InterlockedDecrement((volatile LONG *)(v40 + 4)) ) /*0x7ccc84*/
         {
-          if ( v41 )
-            (**v41)(v41, 1);
+          if ( v41 ) /*0x7ccc90*/
+            (**v41)(v41, 1); /*0x7ccc9a*/
         }
-        v1 = (int *)this;
+        v1 = this; /*0x7ccc9c*/
       }
-      dword_B45518[0] = v39;
-      if ( v39 )
-        InterlockedIncrement((volatile LONG *)(v39 + 4));
+      unk_B45518[0] = v39; /*0x7ccca2*/
+      if ( v39 ) /*0x7ccca8*/
+        InterlockedIncrement((volatile LONG *)(v39 + 4)); /*0x7cccae*/
     }
-    v42 = (Ni2DBuffer *)(*(int (__thiscall **)(int, const char *))(*(_DWORD *)*v35 + 0x38))(*v35, "Ambient Color");
-    NiSmartPointer_Set__((Ni2DBuffer **)&dword_B4551C, v42);
-    v43 = (Ni2DBuffer *)(*(int (__thiscall **)(int, const char *))(*(_DWORD *)*v35 + 0x38))(*v35, "Light Color 0");
-    NiSmartPointer_Set__((Ni2DBuffer **)&dword_B45520, v43);
-    v44 = (Ni2DBuffer *)(*(int (__thiscall **)(int, const char *))(*(_DWORD *)*v35 + 0x38))(*v35, "Light Color 1");
-    NiSmartPointer_Set__((Ni2DBuffer **)&dword_B45524, v44);
-    v45 = (Ni2DBuffer *)(*(int (__thiscall **)(int, const char *))(*(_DWORD *)*v35 + 0x38))(*v35, "Light Color 2");
-    NiSmartPointer_Set__((Ni2DBuffer **)&dword_B45528, v45);
-    v46 = (Ni2DBuffer *)(*(int (__thiscall **)(int, const char *))(*(_DWORD *)*v35 + 0x38))(*v35, "Light Color 3");
-    NiSmartPointer_Set__((Ni2DBuffer **)&dword_B4552C, v46);
-    v47 = (Ni2DBuffer *)(*(int (__thiscall **)(int, const char *))(*(_DWORD *)*v35 + 0x38))(*v35, "Emittance Color");
-    NiSmartPointer_Set__((Ni2DBuffer **)&dword_B45530, v47);
-    v48 = (Ni2DBuffer *)(*(int (__thiscall **)(int, const char *))(*(_DWORD *)*v35 + 0x38))(*v35, "Toggles");
-    NiSmartPointer_Set__((Ni2DBuffer **)&dword_B45534, v48);
-    v49 = (Ni2DBuffer *)(*(int (__thiscall **)(int, const char *))(*(_DWORD *)*v35 + 0x38))(*v35, "RefractionPower");
-    NiSmartPointer_Set__((Ni2DBuffer **)&dword_B45558, v49);
-    if ( ShaderPackage >= 2 )
+    v42 = (Ni2DBuffer *)(*(int (__thiscall **)(int, const char *))(*(_DWORD *)*v35 + 0x38))(*v35, "Ambient Color"); /*0x7cccc0*/
+    NiSmartPointer_Set__(&dword_B4551C, v42); /*0x7cccc8*/
+    v43 = (Ni2DBuffer *)(*(int (__thiscall **)(int, const char *))(*(_DWORD *)*v35 + 0x38))(*v35, "Light Color 0"); /*0x7cccd9*/
+    NiSmartPointer_Set__(&dword_B45520, v43); /*0x7ccce1*/
+    v44 = (Ni2DBuffer *)(*(int (__thiscall **)(int, const char *))(*(_DWORD *)*v35 + 0x38))(*v35, "Light Color 1"); /*0x7cccf2*/
+    NiSmartPointer_Set__(&dword_B45524, v44); /*0x7cccfa*/
+    v45 = (Ni2DBuffer *)(*(int (__thiscall **)(int, const char *))(*(_DWORD *)*v35 + 0x38))(*v35, "Light Color 2"); /*0x7ccd0b*/
+    NiSmartPointer_Set__(&dword_B45528, v45); /*0x7ccd13*/
+    v46 = (Ni2DBuffer *)(*(int (__thiscall **)(int, const char *))(*(_DWORD *)*v35 + 0x38))(*v35, "Light Color 3"); /*0x7ccd24*/
+    NiSmartPointer_Set__(&dword_B4552C, v46); /*0x7ccd2c*/
+    v47 = (Ni2DBuffer *)(*(int (__thiscall **)(int, const char *))(*(_DWORD *)*v35 + 0x38))(*v35, "Emittance Color"); /*0x7ccd3d*/
+    NiSmartPointer_Set__(&dword_B45530, v47); /*0x7ccd45*/
+    v48 = (Ni2DBuffer *)(*(int (__thiscall **)(int, const char *))(*(_DWORD *)*v35 + 0x38))(*v35, "Toggles"); /*0x7ccd56*/
+    NiSmartPointer_Set__(&dword_B45534, v48); /*0x7ccd5e*/
+    v49 = (Ni2DBuffer *)(*(int (__thiscall **)(int, const char *))(*(_DWORD *)*v35 + 0x38))(*v35, "RefractionPower"); /*0x7ccd6f*/
+    NiSmartPointer_Set__(&dword_B45558, v49); /*0x7ccd77*/
+    if ( *(int *)&OB_RendererGlobalState_010201A0[0xAF] >= 2 ) /*0x7ccd83*/
     {
-      (*(void (__thiscall **)(int, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*(_DWORD *)*v35 + 0x18))(
+      (*(void (__thiscall **)(int, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*(_DWORD *)*v35 + 0x18))( /*0x7ccdb0*/
         *v35,
         "DecalCount",
         0x10000007,
@@ -714,11 +717,11 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
         EmptyString,
         0x10,
         4,
-        &flt_B4615C,
+        &OB_ShaderConstantStorage_010201A0[0xD2],
         0);
-      v50 = (Ni2DBuffer *)(*(int (__thiscall **)(int, const char *))(*(_DWORD *)*v35 + 0x38))(*v35, "DecalCount");
-      NiSmartPointer_Set__((Ni2DBuffer **)&dword_B45550, v50);
-      (*(void (__thiscall **)(int, const char *, int, _DWORD, int, int, CHAR *, int, int, int *, _DWORD))(*(_DWORD *)*v35 + 0x18))(
+      v50 = (Ni2DBuffer *)(*(int (__thiscall **)(int, const char *))(*(_DWORD *)*v35 + 0x38))(*v35, "DecalCount"); /*0x7ccdbe*/
+      NiSmartPointer_Set__(&dword_B45550, v50); /*0x7ccdc6*/
+      (*(void (__thiscall **)(int, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*(_DWORD *)*v35 + 0x18))( /*0x7ccdf5*/
         *v35,
         "decal offset",
         0x10000009,
@@ -728,35 +731,35 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
         EmptyString,
         0x80,
         4,
-        &dword_B46198,
+        &OB_ShaderConstantStorage_010201A0[0xE1],
         0);
-      v51 = (Ni2DBuffer *)(*(int (__thiscall **)(int, const char *))(*(_DWORD *)*v35 + 0x38))(*v35, "decal offset");
-      NiSmartPointer_Set__((Ni2DBuffer **)&dword_B44F88, v51);
+      v51 = (Ni2DBuffer *)(*(int (__thiscall **)(int, const char *))(*(_DWORD *)*v35 + 0x38))(*v35, "decal offset"); /*0x7cce03*/
+      NiSmartPointer_Set__(&dword_B44F88, v51); /*0x7cce0b*/
     }
-    sub_55E2A0(v1 + 0x25, v35);
+    OB_NiSmartPointer_Assign_010201A0(v1 + 0x25, v35); /*0x7cce17*/
   }
-  v52 = v1 + 0x24;
-  if ( !v1[0x24] )
+  v52 = v1 + 0x24; /*0x7cce23*/
+  if ( !v1[0x24] ) /*0x7cce1c*/
   {
-    v53 = (NiD3DShaderConstantMap *)FormHeapAlloc(0x34u);
-    if ( v53 )
-      v54 = NiD3DShaderCostantMapVertex::Construct(v53, v1[5]);
+    v53 = (NiD3DShaderConstantMap *)FormHeapAlloc(0x34u); /*0x7cce31*/
+    if ( v53 ) /*0x7cce47*/
+      v54 = NiD3DShaderCostantMapVertex::Construct(v53, v1[5]); /*0x7cce4f*/
     else
-      v54 = 0;
-    NiSmartPointer_Set__((Ni2DBuffer **)v1 + 0x24, (Ni2DBuffer *)v54);
-    (*(void (__thiscall **)(_DWORD, const char *, int, _DWORD, CHAR *))(*(_DWORD *)*v52 + 0x1C))(
+      v54 = 0; /*0x7cce56*/
+    NiSmartPointer_Set__((Ni2DBuffer **)v1 + 0x24, (Ni2DBuffer *)v54); /*0x7cce5f*/
+    (*(void (__thiscall **)(_DWORD, const char *, int, _DWORD, CHAR *))(*(_DWORD *)*v52 + 0x1C))( /*0x7cce7c*/
       *v52,
       "WorldViewProjTranspose",
       0x20000009,
       0,
       EmptyString);
-    (*(void (__thiscall **)(_DWORD, const char *, int, int, CHAR *))(*(_DWORD *)*v52 + 0x1C))(
+    (*(void (__thiscall **)(_DWORD, const char *, int, int, CHAR *))(*(_DWORD *)*v52 + 0x1C))( /*0x7cce96*/
       *v52,
       "SkinWorldViewProjTranspose",
       0x20000009,
       4,
       EmptyString);
-    (*(void (__thiscall **)(_DWORD, const char *, int, int, int, int, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD))(*(_DWORD *)*v52 + 0x18))(
+    (*(void (__thiscall **)(_DWORD, const char *, int, int, int, int, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD))(*(_DWORD *)*v52 + 0x18))( /*0x7ccebc*/
       *v52,
       "BoneMatrix3",
       0x20000009,
@@ -768,7 +771,7 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       0,
       0,
       0);
-    (*(void (__thiscall **)(_DWORD, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*(_DWORD *)*v52 + 0x18))(
+    (*(void (__thiscall **)(_DWORD, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*(_DWORD *)*v52 + 0x18))( /*0x7ccee5*/
       *v52,
       "EyePosition",
       0x10000007,
@@ -778,9 +781,9 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       EmptyString,
       0x10,
       4,
-      &flt_B44F08,
+      &unk_B44F08,
       0);
-    (*(void (__thiscall **)(_DWORD, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*(_DWORD *)*v52 + 0x18))(
+    (*(void (__thiscall **)(_DWORD, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*(_DWORD *)*v52 + 0x18))( /*0x7ccf0e*/
       *v52,
       "U Offset",
       0x10000004,
@@ -790,9 +793,9 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       EmptyString,
       4,
       4,
-      &flt_B44ED0,
+      &g_ShadowLight_TextureEffectUOffset,
       0);
-    (*(void (__thiscall **)(_DWORD, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*(_DWORD *)*v52 + 0x18))(
+    (*(void (__thiscall **)(_DWORD, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*(_DWORD *)*v52 + 0x18))( /*0x7ccf37*/
       *v52,
       "V Offset",
       0x10000004,
@@ -802,9 +805,9 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       EmptyString,
       4,
       4,
-      &flt_B44ED4,
+      &g_ShadowLight_TextureEffectVOffset,
       0);
-    (*(void (__thiscall **)(_DWORD, const char *, int, _DWORD, int, int, CHAR *, int, int, void *, _DWORD))(*(_DWORD *)*v52 + 0x18))(
+    (*(void (__thiscall **)(_DWORD, const char *, int, _DWORD, int, int, CHAR *, int, int, void *, _DWORD))(*(_DWORD *)*v52 + 0x18))( /*0x7ccf60*/
       *v52,
       "Z scaler",
       0x10000004,
@@ -816,7 +819,7 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       4,
       &unk_B44ED8,
       0);
-    (*(void (__thiscall **)(_DWORD, const char *, int, _DWORD, int, int, CHAR *, int, int, int *, _DWORD))(*(_DWORD *)*v52 + 0x18))(
+    (*(void (__thiscall **)(_DWORD, const char *, int, _DWORD, int, int, CHAR *, int, int, int *, _DWORD))(*(_DWORD *)*v52 + 0x18))( /*0x7ccf89*/
       *v52,
       "FogParam",
       0x10000007,
@@ -826,9 +829,9 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       EmptyString,
       0x10,
       4,
-      &dword_B44F78,
-      0);
-    (*(void (__thiscall **)(_DWORD, const char *, int, _DWORD, int, int, CHAR *, int, int, int *, _DWORD))(*(_DWORD *)*v52 + 0x18))(
+      &flt_B44F78,
+      0);                                       // Fog constant-map decode: ShadowLight alternate explicit FogParam at vs c12 uses local/global backing B44F78, not shared B46638.
+    (*(void (__thiscall **)(_DWORD, const char *, int, _DWORD, int, int, CHAR *, int, int, int *, _DWORD))(*(_DWORD *)*v52 + 0x18))( /*0x7ccfb2*/
       *v52,
       "FogColor",
       0x10000007,
@@ -838,19 +841,19 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       EmptyString,
       0x10,
       4,
-      &dword_B44F68,
-      0);
+      &flt_B44F68,
+      0);                                       // Fog constant-map decode: ShadowLight alternate explicit FogColor at vs c13 uses local/global backing B44F68, not shared B46648.
   }
-  v55 = v1 + 0x23;
-  if ( !v1[0x23] )
+  v55 = v1 + 0x23; /*0x7ccfbb*/
+  if ( !v1[0x23] ) /*0x7ccfb4*/
   {
-    v56 = (NiD3DShaderConstantMap *)FormHeapAlloc(0x34u);
-    if ( v56 )
-      v57 = NiD3DShaderCostantMapPixel::Construct(v56, v1[5]);
+    v56 = (NiD3DShaderConstantMap *)FormHeapAlloc(0x34u); /*0x7ccfc9*/
+    if ( v56 ) /*0x7ccfdf*/
+      v57 = NiD3DShaderCostantMapPixel::Construct(v56, v1[5]); /*0x7ccfe7*/
     else
-      v57 = 0;
-    NiSmartPointer_Set__((Ni2DBuffer **)v1 + 0x23, (Ni2DBuffer *)v57);
-    (*(void (__thiscall **)(_DWORD, const char *, int, _DWORD, _DWORD, int, CHAR *, int, int, int *, _DWORD))(*(_DWORD *)*v55 + 0x18))(
+      v57 = 0; /*0x7ccfee*/
+    NiSmartPointer_Set__((Ni2DBuffer **)v1 + 0x23, (Ni2DBuffer *)v57); /*0x7ccff7*/
+    (*(void (__thiscall **)(_DWORD, const char *, int, _DWORD, _DWORD, int, CHAR *, int, int, int *, _DWORD))(*(_DWORD *)*v55 + 0x18))( /*0x7cd023*/
       *v55,
       "Fill Color",
       0x10000007,
@@ -860,9 +863,9 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       EmptyString,
       0x10,
       4,
-      &dword_B44F38,
+      &g_ShadowLight_CurrentFillColor,
       0);
-    (*(void (__thiscall **)(_DWORD, const char *, int, _DWORD, int, int, CHAR *, int, int, int *, _DWORD))(*(_DWORD *)*v55 + 0x18))(
+    (*(void (__thiscall **)(_DWORD, const char *, int, _DWORD, int, int, CHAR *, int, int, int *, _DWORD))(*(_DWORD *)*v55 + 0x18))( /*0x7cd04c*/
       *v55,
       "Rim Color",
       0x10000007,
@@ -872,9 +875,9 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       EmptyString,
       0x10,
       4,
-      &dword_B44F48,
+      &g_ShadowLight_CurrentEdgeColor,
       0);
-    (*(void (__thiscall **)(_DWORD, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*(_DWORD *)*v55 + 0x18))(
+    (*(void (__thiscall **)(_DWORD, const char *, int, _DWORD, int, int, CHAR *, int, int, float *, _DWORD))(*(_DWORD *)*v55 + 0x18))( /*0x7cd075*/
       *v55,
       "fVars",
       0x10000007,
@@ -884,7 +887,7 @@ void __thiscall sub_7CC280(Ni2DBuffer **this)
       EmptyString,
       0x10,
       4,
-      &flt_B44F58,
-      0);
+      &g_ShadowLight_TextureEffectEdgeFalloff,
+      0);                                       // Verified (Oblivion): ShadowLight pixel constant map registers the 16-byte fVars vector at pixel constant c2. The installed shaderpackage002.sdp SLS2076 CTAB independently describes a float4 fVars at c2, but its program-name/source association conflicts with the current loader table (SLS2076 -> SimpleShadow). CTAB confirms the vector shape only as Candidate corroboration; components z/w remain Unknown.
   }
 }

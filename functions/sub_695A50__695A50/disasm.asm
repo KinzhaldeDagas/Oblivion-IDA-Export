@@ -18,12 +18,12 @@
 0x695A7F: mov     ecx, esi
 0x695A81: call    sub_69F1E0
 0x695A86: mov     ecx, esi
-0x695A88: call    sub_695010
-0x695A8D: push    esi; Concurrency::details::SchedulerBase *
+0x695A88: call    MagicBallProjectile_PlaySpecialIdle; MagicBallProjectile SpecialIdle setup. Synchronizes projectile node transform and starts SpecialIdle_Projectile sequence from the controller-manager text-key map.
+0x695A8D: push    esi; reference
 0x695A8E: mov     ecx, esi; this
-0x695A90: call    TESObjectREFR_GetParentCell
-0x695A95: mov     ecx, eax
-0x695A97: call    sub_4D35D0
+0x695A90: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x695A95: mov     ecx, eax; this
+0x695A97: call    TESObjectCELL_AddReference; Verified: persistent-cell AddReference updates the WorldSpace coordinate/fallback persistent-reference index (+0x64) through TESWorldSpace_IndexReference. Ordinary cell additions do not index there. This routine does not populate the separate SubSpace spatial index at +0x60.
 0x695A9C: cmp     dword ptr [esi+80h], 2
 0x695AA3: jz      short loc_695AF5
 0x695AA5: mov     eax, [esi+74h]
@@ -37,7 +37,7 @@
 0x695AC4: mov     ecx, edi; this
 0x695AC6: call    sub_6B73E0
 0x695ACB: push    edi
-0x695ACC: call    FormHeapFree
+0x695ACC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x695AD1: add     esp, 4
 0x695AD4: mov     dword ptr [esi+88h], 0
 0x695ADE: push    1; a5
@@ -119,8 +119,8 @@
 0x695BDF: test    eax, eax
 0x695BE1: jz      short loc_695C22
 0x695BE3: push    offset aSpecialidle_ar; "SpecialIdle_AreaEffect"
-0x695BE8: mov     ecx, eax
-0x695BEA: call    sub_4715A0
+0x695BE8: mov     ecx, eax; this
+0x695BEA: call    NiControllerManager_FindSequenceByName; Looks up a NiControllerSequence by name in the controller manager name map at +0x58; returns null on miss.
 0x695BEF: test    eax, eax
 0x695BF1: jz      short loc_695C22
 0x695BF3: fld     dword ptr [eax+30h]
@@ -143,3 +143,15 @@
 0x695C30: pop     ebx
 0x695C31: add     esp, 0Ch
 0x695C34: retn    8
+0x9AFB80: mov     eax, [ebp+8]
+0x9AFB83: push    eax
+0x9AFB84: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFB89: pop     ecx
+0x9AFB8A: retn
+0x9AFB8B: mov     edx, [esp+arg_4]
+0x9AFB8F: lea     eax, [edx-0Ch]
+0x9AFB92: mov     ecx, [edx-10h]
+0x9AFB95: xor     ecx, eax
+0x9AFB97: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AFB9C: mov     eax, offset stru_ADC078
+0x9AFBA1: jmp     ___CxxFrameHandler3

@@ -10,9 +10,9 @@
 0x759345: cmp     al, [esi+30h]
 0x759348: jnz     short loc_759361
 0x75934A: add     esi, 34h ; '4'
-0x75934D: push    esi
-0x75934E: lea     ecx, [edi+34h]
-0x759351: call    sub_8AA390
+0x75934D: push    esi; other
+0x75934E: lea     ecx, [edi+34h]; this
+0x759351: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x759356: test    al, al
 0x759358: jnz     short loc_759361
 0x75935A: pop     edi

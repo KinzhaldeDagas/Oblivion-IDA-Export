@@ -1,7 +1,7 @@
 0x6608A0: push    ecx
 0x6608A1: push    esi
 0x6608A2: mov     esi, ecx
-0x6608A4: call    Actor_IsSneaking
+0x6608A4: call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.
 0x6608A9: test    al, al
 0x6608AB: jnz     short loc_6608DD
 0x6608AD: mov     ecx, [esi+58h]

@@ -1,1 +1,6 @@
-CHARSETINFO
+struct CHARSETINFO
+{
+UINT ciCharset;
+UINT ciACP;
+FONTSIGNATURE fs;
+};

@@ -1,4 +1,4 @@
-void *sub_8645F0()
+NiRTTI *sub_8645F0()
 {
-  return &unk_B47878;
+  return &stru_B47878; /*0x8645f5*/
 }

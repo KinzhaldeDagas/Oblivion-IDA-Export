@@ -7,9 +7,9 @@
 0x50E5B4: jnz     short loc_50E5BB
 0x50E5B6: cmp     dword ptr [esi], 0
 0x50E5B9: jz      short loc_50E5CB
-0x50E5BB: mov     ecx, [esi]
-0x50E5BD: push    1
-0x50E5BF: call    sub_529820
+0x50E5BB: mov     ecx, [esi]; this
+0x50E5BD: push    1; running
+0x50E5BF: call    TESQuest__SetRunning; TESQuest running/active setter used by StartQuest and StopQuest. Runtime bit 0x01 shares QUST DATA's editor label 'Start Game Enabled'; toggling it marks modified flag 0x04.
 0x50E5C4: mov     esi, [esi+4]
 0x50E5C7: test    esi, esi
 0x50E5C9: jnz     short loc_50E5B0

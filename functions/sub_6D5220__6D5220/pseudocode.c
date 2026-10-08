@@ -1,19 +1,19 @@
 char __thiscall sub_6D5220(_DWORD *this)
 {
   int v1; // ecx
-  int v2; // eax
+  NiRTTI *v2; // eax
 
-  v1 = *(this + 0xC);
-  if ( !v1 )
-    return 0;
-  v2 = (*(int (__thiscall **)(int))(*(_DWORD *)v1 + 4))(v1);
-  if ( !v2 )
-    return 0;
-  while ( (char *)v2 != dword_B3FD5C )
+  v1 = *(this + 0xC); /*0x6d5220*/
+  if ( !v1 ) /*0x6d5225*/
+    return 0; /*0x6d5225*/
+  v2 = (NiRTTI *)(*(int (__thiscall **)(int))(*(_DWORD *)v1 + 4))(v1); /*0x6d522c*/
+  if ( !v2 ) /*0x6d5230*/
+    return 0; /*0x6d5240*/
+  while ( v2 != &stru_B3FD5C ) /*0x6d5237*/
   {
-    v2 = *(_DWORD *)(v2 + 4);
-    if ( !v2 )
-      return 0;
+    v2 = v2->parent; /*0x6d5239*/
+    if ( !v2 ) /*0x6d523e*/
+      return 0; /*0x6d523e*/
   }
-  return 1;
+  return 1; /*0x6d5242*/
 }

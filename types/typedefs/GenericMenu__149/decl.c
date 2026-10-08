@@ -1,1 +1,1 @@
-GenericMenu
+struct GenericMenu;

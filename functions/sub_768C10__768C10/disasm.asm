@@ -1,4 +1,4 @@
-0x768C10: sub     esp, 0Ch
+0x768C10: sub     esp, 0Ch; Rebuilds NiDX9 renderer texture defaults after device creation/reset, including four default format resources and the small clipper/default source texture. Called during both initial creation and RecreateDevice.
 0x768C13: push    ebx; a8
 0x768C14: push    ebp; a7
 0x768C15: push    esi; a6

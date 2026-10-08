@@ -1,4 +1,4 @@
-0x46CC70: push    ecx
+0x46CC70: push    ecx; CustomAnimSupport decode: simple leveled-list resolver evidence; not a form-list target expansion path for animation manifests.
 0x46CC71: mov     eax, [esp+4+arg_4]
 0x46CC75: push    ebx
 0x46CC76: push    esi
@@ -6,11 +6,11 @@
 0x46CC79: mov     ecx, [esp+0Ch+arg_8]
 0x46CC7D: mov     dword ptr [eax], 0
 0x46CC83: mov     word ptr [ecx], 0
-0x46CC88: mov     bl, [esi+0Ch]
+0x46CC88: mov     bl, [esi+0Ch]; 3DTheft decode 2026-05-14: TESLeveledList simple resolver rolls chanceNone at list+0x0C with Game_RandomLargeInteger % 100 before selecting an entry.
 0x46CC8B: test    bl, bl
 0x46CC8D: jbe     short TESLeveledList_SimpleCalcLeveledForm___CalcMinLevel
 0x46CC8F: push    0; Seed
-0x46CC91: call    GetRandomLargeInteger?
+0x46CC91: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x46CC96: mov     ecx, eax
 0x46CC98: mov     eax, 51EB851Fh
 0x46CC9D: imul    ecx

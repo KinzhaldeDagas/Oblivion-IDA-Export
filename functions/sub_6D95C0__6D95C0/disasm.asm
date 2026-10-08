@@ -63,7 +63,6 @@
 0x6D9673: mov     bl, 1
 0x6D9675: mov     edi, 1
 0x6D967A: jmp     short loc_6D9684
-0x6D967C: align 10h
 0x6D9680: mov     ecx, [esp+28h+var_14]
 0x6D9684: cmp     edi, ecx
 0x6D9686: jnb     short loc_6D96B3

@@ -1,15 +1,18 @@
-_DWORD *__thiscall sub_4F0DE0(_DWORD *this, unsigned int a2)
+// Verified 16-byte NiTPointerMap<unsigned int, BSSimpleList<TESObjectREFR *>> constructor used only by TESWorldSpace_IndexSubSpaceReference in this database. Initializes a bucket array with the caller's bucket count; SubSpace index passes 0x25 (37) buckets.
+TESWorldSpaceSubSpaceMap *__thiscall TESWorldSpaceSubSpaceMap_ctor(
+        TESWorldSpaceSubSpaceMap *this,
+        unsigned int bucketCount)
 {
-  int v3; // eax
-  int v5; // [esp-8h] [ebp-Ch]
+  MEF_U32PointerMapEntry32 **v3; // eax
+  unsigned int v5; // [esp-8h] [ebp-Ch]
 
-  *(this + 1) = a2;
-  *this = &NiTMapBase<NiTPointerAllocator<unsigned int>,unsigned int,BSSimpleList<TESObjectREFR *> *>::`vftable';
-  *(this + 3) = 0;
-  v3 = FormHeapAlloc((unsigned __int64)a2 >> 0x1E != 0 ? 0xFFFFFFFF : 4 * a2);
-  v5 = 4 * *(this + 1);
-  *(this + 2) = v3;
-  _memset(v3, 0, v5);
-  *this = &NiTPointerMap<unsigned int,BSSimpleList<TESObjectREFR *> *>::`vftable';
-  return this;
+  this->bucketCount = bucketCount; /*0x4f0de9*/
+  this->vtable = &NiTMapBase<NiTPointerAllocator<unsigned int>,unsigned int,BSSimpleList<TESObjectREFR *> *>::`vftable'; /*0x4f0df6*/
+  this->itemCount = 0; /*0x4f0dfc*/
+  v3 = (MEF_U32PointerMapEntry32 **)FormHeapAlloc((unsigned __int64)bucketCount >> 0x1E != 0 ? 0xFFFFFFFF : 4 * bucketCount);
+  v5 = 4 * this->bucketCount; /*0x4f0e14*/
+  this->buckets = v3; /*0x4f0e18*/
+  _memset((int)v3, 0, v5); /*0x4f0e1b*/
+  this->vtable = &NiTPointerMap<unsigned int,BSSimpleList<TESObjectREFR *> *>::`vftable'; /*0x4f0e23*/
+  return this; /*0x4f0e2b*/
 }

@@ -12,7 +12,7 @@
 0x47C9AD: call    edx
 0x47C9AF: test    eax, eax
 0x47C9B1: jz      short loc_47C9C1
-0x47C9B3: cmp     eax, offset dword_B3CD7C
+0x47C9B3: cmp     eax, offset stru_B3CD7C
 0x47C9B8: jz      short loc_47CA2C
 0x47C9BA: mov     eax, [eax+4]
 0x47C9BD: test    eax, eax
@@ -46,11 +46,11 @@
 0x47C9FD: mov     edx, [eax+74h]
 0x47CA00: call    edx
 0x47CA02: fld     [esp+0Ch+arg_0]
-0x47CA06: push    1; char
+0x47CA06: push    1; updateProperties
 0x47CA08: push    ecx
-0x47CA09: mov     ecx, esi
-0x47CA0B: fstp    [esp+14h+var_14]; float
-0x47CA0E: call    sub_47C930
+0x47CA09: mov     ecx, esi; this
+0x47CA0B: fstp    [esp+14h+applicationTime]; applicationTime
+0x47CA0E: call    NiAVObject_UpdatePropertiesAndControllers; Update one NiAVObject's property controllers and attached NiTimeController chain. If requested, walk the property list at NiAVObject+0x9C and invoke property virtual +0x50 when its controller pointer is non-null. Always walk NiObjectNET.controller at object+0x0C through NiTimeController.next at +0x34 and invoke controller virtual Update +0x54 with applicationTime. No Active-bit prefilter occurs here: NiTimeController.flags+0x08 bit 3 only affects time-cache logic inside the controller. External Crossbow consequence after this Oblivion decode: temporarily clearing the base Active bit inside an already-entered morph hook will not by itself stop the next scene traversal, but pointer discovery still cannot make a graph that is not traversed dispatch Update.
 0x47CA13: mov     eax, [esi]
 0x47CA15: mov     edx, [eax+74h]
 0x47CA18: mov     ecx, esi

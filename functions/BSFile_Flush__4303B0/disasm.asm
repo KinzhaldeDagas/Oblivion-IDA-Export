@@ -11,7 +11,7 @@
 0x4303CD: add     esp, 4
 0x4303D0: mov     ecx, [esi+18h]
 0x4303D3: push    ecx
-0x4303D4: call    FormHeapFree
+0x4303D4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4303D9: add     esp, 4
 0x4303DC: mov     dword ptr [esi+18h], 0
 0x4303E3: mov     dword ptr [esi+1Ch], 0

@@ -1,4 +1,4 @@
-0x7DAC70: push    ecx
+0x7DAC70: push    ecx; [Verified] Map lookup wrapper used by both CreateVertexShader and CreatePixelShader. It delegates the supplied program key to NiTMap_GetAt and returns the associated ShaderBufferEntry pointer, or null when absent.
 0x7DAC71: mov     edx, [esp+4+arg_0]
 0x7DAC75: lea     eax, [esp+4+var_4]
 0x7DAC78: push    eax

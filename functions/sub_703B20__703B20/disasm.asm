@@ -1,5 +1,5 @@
 0x703B20: push    ebx
-0x703B21: mov     ebx, dword ptr [esp+4+ArgList]
+0x703B21: mov     ebx, [esp+4+ArgList]
 0x703B25: push    esi
 0x703B26: mov     eax, ebx
 0x703B28: push    edi

@@ -1,5 +1,5 @@
 0x58CF40: sub     esp, 8
-0x58CF43: mov     eax, [esp+8+arg_0]
+0x58CF43: mov     eax, [esp+8+tileTemplate]
 0x58CF47: mov     ecx, [eax+10h]
 0x58CF4A: push    ebx
 0x58CF4B: push    ebp
@@ -12,13 +12,13 @@
 0x58CF56: mov     [esp+18h+var_8], edi
 0x58CF5A: jz      loc_58D1AC
 0x58CF60: jmp     short loc_58CF66
-0x58CF62: mov     ecx, [esp+18h+arg_0]
+0x58CF62: mov     ecx, [esp+18h+tileTemplate]
 0x58CF66: mov     esi, [ecx+8]
 0x58CF69: lea     eax, [ecx+8]
 0x58CF6C: mov     eax, [esi]
 0x58CF6E: cmp     eax, 28h ; '('
 0x58CF71: mov     ecx, [ecx]
-0x58CF73: mov     [esp+18h+arg_0], ecx
+0x58CF73: mov     [esp+18h+tileTemplate], ecx
 0x58CF77: jnz     short loc_58CF92
 0x58CF79: cmp     [esp+18h+var_8], edi
 0x58CF7D: mov     ebp, [esi+10h]
@@ -33,14 +33,13 @@
 0x58CFA1: cmp     esi, edi
 0x58CFA3: jz      short loc_58CFCB
 0x58CFA5: jmp     short loc_58CFB0
-0x58CFA7: align 10h
-0x58CFB0: mov     ecx, [esi+8]
+0x58CFB0: mov     ecx, [esi+8]; this
 0x58CFB3: cmp     word ptr [ecx+18h], 0FA2h
 0x58CFB9: lea     eax, [esi+8]
 0x58CFBC: mov     esi, [esi]
 0x58CFBE: jz      short loc_58CFC7
-0x58CFC0: push    1
-0x58CFC2: call    DoActionEnumeration
+0x58CFC0: push    1; forceUpdate
+0x58CFC2: call    Tile__Value__CalculateValue; Verified: loader evaluates each Value on closing its tile, skipping class trait 0xFA2. This is a correct Value* CalculateValue call and already initializes injected fragment dependencies.
 0x58CFC7: cmp     esi, edi
 0x58CFC9: jnz     short loc_58CFB0
 0x58CFCB: mov     ebp, [ebp+10h]
@@ -74,17 +73,17 @@
 0x58D01E: cmp     eax, 0FE6h
 0x58D023: jz      short loc_58D050
 0x58D025: fld     dword ptr [esi+4]
-0x58D028: push    eax
-0x58D029: mov     ecx, ebp
+0x58D028: push    eax; trait
+0x58D029: mov     ecx, ebp; this
 0x58D02B: fstp    [esp+1Ch+var_4]
-0x58D02F: call    Tile_GetPropertyByCode?
+0x58D02F: call    Tile__GetOrCreateValue; Verified: sorted trait lookup; if absent allocates 0x1C bytes, constructs Value at 0x589DF0, stores owner Tile at +0 and inserts into Tile value list. Corrects misleading existing-property-only interpretation.
 0x58D034: cmp     eax, edi
 0x58D036: jz      loc_58D1A0
 0x58D03C: fld     [esp+18h+var_4]
 0x58D040: push    ecx
-0x58D041: mov     ecx, eax
-0x58D043: fstp    [esp+1Ch+var_1C]; float
-0x58D046: call    Tile_Property_SetFloatValue?
+0x58D041: mov     ecx, eax; this
+0x58D043: fstp    [esp+1Ch+value]; value
+0x58D046: call    Tile__Value__SetFloat; Verified: marks numeric; if changed or string trait 0xFDE, clears string, stores number, clears own expression actions via 0x588930, then CalculateValue(this,true). Same-value ordinary traits bypass clear/evaluation. Unlike Fallout SetFloat, no abClearActions parameter.
 0x58D04B: jmp     loc_58D1A0
 0x58D050: mov     eax, [esi+10h]
 0x58D053: cmp     eax, 0BBAh
@@ -104,10 +103,10 @@
 0x58D07E: jmp     loc_58D1A0
 0x58D083: cmp     eax, 0FE6h
 0x58D088: mov     esi, [esi+8]
-0x58D08B: mov     ecx, ebp
+0x58D08B: mov     ecx, ebp; this
 0x58D08D: jnz     short loc_58D0AA
-0x58D08F: push    eax
-0x58D090: call    Tile_GetPropertyByCode?
+0x58D08F: push    eax; trait
+0x58D090: call    Tile__GetOrCreateValue; Verified: sorted trait lookup; if absent allocates 0x1C bytes, constructs Value at 0x589DF0, stores owner Tile at +0 and inserts into Tile value list. Corrects misleading existing-property-only interpretation.
 0x58D095: cmp     eax, edi
 0x58D097: jz      short loc_58D0A1
 0x58D099: push    esi
@@ -115,8 +114,8 @@
 0x58D09C: call    sub_58CA50
 0x58D0A1: or      dword ptr [ebp+2Ch], 20h
 0x58D0A5: jmp     loc_58D1A0
-0x58D0AA: push    eax
-0x58D0AB: call    Tile_GetPropertyByCode?
+0x58D0AA: push    eax; trait
+0x58D0AB: call    Tile__GetOrCreateValue; Verified: sorted trait lookup; if absent allocates 0x1C bytes, constructs Value at 0x589DF0, stores owner Tile at +0 and inserts into Tile value list. Corrects misleading existing-property-only interpretation.
 0x58D0B0: cmp     eax, edi
 0x58D0B2: jz      loc_58D1A0
 0x58D0B8: push    esi
@@ -128,7 +127,7 @@
 0x58D0CF: cmp     eax, 1Eh
 0x58D0D2: jnz     short loc_58D0E3
 0x58D0D4: fld     dword ptr [esi+4]
-0x58D0D7: call    Double_To_SInt32
+0x58D0D7: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x58D0DC: mov     ebx, eax
 0x58D0DE: jmp     loc_58D1A0
 0x58D0E3: cmp     eax, 23h ; '#'
@@ -141,16 +140,16 @@
 0x58D0F6: jz      short loc_58D11F
 0x58D0F8: mov     eax, [esi+10h]
 0x58D0FB: fld     dword ptr [esi+4]
-0x58D0FE: push    eax; int
+0x58D0FE: push    eax; opcode
 0x58D0FF: fstp    [esp+1Ch+var_4]
 0x58D103: fld     [esp+1Ch+var_4]
 0x58D107: push    ecx
-0x58D108: fstp    [esp+20h+var_20]; float
-0x58D10B: push    ebx
-0x58D10C: mov     ecx, ebp
-0x58D10E: call    Tile_GetPropertyByCode?
-0x58D113: mov     ecx, eax
-0x58D115: call    sub_58CBE0
+0x58D108: fstp    [esp+20h+operand]; operand
+0x58D10B: push    ebx; trait
+0x58D10C: mov     ecx, ebp; this
+0x58D10E: call    Tile__GetOrCreateValue; Verified: sorted trait lookup; if absent allocates 0x1C bytes, constructs Value at 0x589DF0, stores owner Tile at +0 and inserts into Tile value list. Corrects misleading existing-property-only interpretation.
+0x58D113: mov     ecx, eax; this
+0x58D115: call    Tile__Value__AddFloatAction;
 0x58D11A: jmp     loc_58D1A0
 0x58D11F: push    offset aActionDefinedO; "Action defined outside of any trait."
 0x58D124: jmp     short loc_58D198
@@ -159,22 +158,22 @@
 0x58D12B: cmp     ebx, edi
 0x58D12D: jz      short loc_58D15A
 0x58D12F: mov     eax, [esi+8]
-0x58D132: push    eax; unsigned __int8 *
-0x58D133: push    ebp; int
-0x58D134: call    sub_58B800
+0x58D132: push    eax; selector
+0x58D133: push    ebp; target
+0x58D134: call    Tile__GetTileByName; Verified XML source resolver. sibling() walks parent child list to current tile, returns following list node, and wraps to head if current is last or not found. It does not filter visible, target, or listindex. sibling(name) compares immediate sibling names case-insensitively. Fallout analogue 0x827DC678.
 0x58D139: mov     edi, eax
 0x58D13B: add     esp, 8
 0x58D13E: test    edi, edi
 0x58D140: jz      short loc_58D1A0
 0x58D142: mov     eax, [esi+10h]
 0x58D145: fld     dword ptr [esi+4]
-0x58D148: push    eax
-0x58D149: call    Double_To_SInt32
-0x58D14E: push    eax
-0x58D14F: push    edi
-0x58D150: push    ebx
-0x58D151: mov     ecx, ebp
-0x58D153: call    sub_58CF10
+0x58D148: push    eax; action
+0x58D149: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
+0x58D14E: push    eax; sourceTrait
+0x58D14F: push    edi; source
+0x58D150: push    ebx; destinationTrait
+0x58D151: mov     ecx, ebp; this
+0x58D153: call    Tile__AddReferenceAction; Verified wrapper: gets/creates destination trait Value and forwards source tile/source trait/operator to Value::AddReferenceAction. Called from ConnectTraitsToTree after GetTileByName resolves source.
 0x58D158: jmp     short loc_58D1A0
 0x58D15A: push    offset aActionLinkDefi; "Action link defined outside of any trai"...
 0x58D15F: jmp     short loc_58D198
@@ -192,7 +191,7 @@
 0x58D17C: jz      short loc_58D193
 0x58D17E: push    0Fh
 0x58D180: fld     dword ptr [esi+4]
-0x58D183: call    Double_To_SInt32
+0x58D183: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x58D188: push    eax
 0x58D189: push    ebx
 0x58D18A: mov     ecx, ebp
@@ -202,7 +201,7 @@
 0x58D198: call    PrintError
 0x58D19D: add     esp, 4
 0x58D1A0: xor     edi, edi
-0x58D1A2: cmp     [esp+18h+arg_0], edi
+0x58D1A2: cmp     [esp+18h+tileTemplate], edi
 0x58D1A6: jnz     loc_58CF62
 0x58D1AC: pop     edi
 0x58D1AD: pop     esi

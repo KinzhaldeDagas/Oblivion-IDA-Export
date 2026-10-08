@@ -1,21 +1,21 @@
-float *sub_751D10()
+NiObject *sub_751D10()
 {
-  float *v0; // eax
-  float *v1; // esi
+  NiObject *v0; // eax
+  NiObject *v1; // esi
 
-  v0 = (float *)FormHeapAlloc(0x34u);
-  v1 = v0;
-  if ( !v0 )
-    return 0;
-  sub_752BF0(v0);
-  v1[7] = 1.0;
-  *((_WORD *)v1 + 0xC) = 1;
-  v1[9] = 0.0;
-  *((_WORD *)v1 + 0x10) = 1;
-  v1[0xA] = 0.0;
-  *((_WORD *)v1 + 0x11) = 1;
-  v1[0xB] = 0.0;
-  *(_DWORD *)v1 = &NiPSysSpawnModifier::`vftable';
-  v1[0xC] = 0.0;
-  return v1;
+  v0 = (NiObject *)FormHeapAlloc(0x34u); /*0x751d13*/
+  v1 = v0; /*0x751d18*/
+  if ( !v0 ) /*0x751d1f*/
+    return 0; /*0x751d56*/
+  sub_752BF0(v0); /*0x751d23*/
+  *(float *)&v1[3].members.m_uiRefCount = 1.0; /*0x751d2a*/
+  LOWORD(v1[3].__vftable) = 1; /*0x751d34*/
+  *(float *)&v1[4].members.m_uiRefCount = 0.0; /*0x751d38*/
+  LOWORD(v1[4].__vftable) = 1; /*0x751d3b*/
+  *(float *)&v1[5].__vftable = 0.0; /*0x751d3f*/
+  HIWORD(v1[4].__vftable) = 1; /*0x751d42*/
+  *(float *)&v1[5].members.m_uiRefCount = 0.0; /*0x751d46*/
+  v1->__vftable = (NiObjectVtbl *)&NiPSysSpawnModifier::`vftable'; /*0x751d49*/
+  *(float *)&v1[6].__vftable = 0.0; /*0x751d4f*/
+  return v1; /*0x751d54*/
 }

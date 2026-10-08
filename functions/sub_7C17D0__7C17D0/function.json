@@ -1,19 +1,36 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7C17D0",
+  "chunks": [
+    [
+      "0x7C17D0",
+      "0x7C18F3"
+    ],
+    [
+      "0x9CE1A0",
+      "0x9CE1DC"
+    ]
+  ],
+  "chunks_sha256": "c3f8833b4a9a48dfc62fc76f8c98a69ad58203cca6dd74160b2d1f07de2a46b7",
+  "comment_regular": "Generic refcounted NiT pointer-list RemovePosition helper handling head, tail and middle nodes while returning a strong payload reference and preserving list links/count.",
+  "comment_repeatable": "Generic refcounted NiT pointer-list RemovePosition helper handling head, tail and middle nodes while returning a strong payload reference and preserving list links/count.\n\nMEF LARGE PERF 2026-09-08: PERF-6 splice proof: RemovePosition loads *position, writes next into *position for head/middle (tail ->NULL), unlinks node and returns a strong payload reference. Caller prefix always precedes outer current, so successor exists. Compare with InsertBefore7C6A20; this explains why the caller's remove/reinsert does not move payload order.\nMEF PERF 2026-10-07: Verified position removal: head delegates7C1740, tail7D1FD0, middle relinks previous/next in constant link work. All paths return a strong payload reference and release node via list vtable+8. Position advances to successor (null for tail). Payload destructors/allocator costs are excluded from the constant link-work claim.\nMEF v57 IMPLEMENTED 2026-10-08: v57 RemovePosition observer erases cached node keys BEFORE native node release/callbacks, updates metadata only on confirmed normal result; nested/abnormal mutation discards cache. Original SEH prolog replayed. Native head/tail delegates are also observed.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "NiTRefPointerList__RemovePosition",
   "end_ea": "0x7C18F3",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
-  "name": "sub_7C17D0",
+  "name": "NiTRefPointerList__RemovePosition",
   "segment": ".text",
   "sha256": "ab8df6cee8c616af8190a8320ef5d7012ba4081158a78050089cb7f5485548f1",
   "size": 291,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7C17D0",
-  "type": "int *__thiscall(int **this, int *, int **)",
-  "xrefs_from_count": 111,
+  "total_chunk_size": 351,
+  "type": "void **__thiscall(MEF_RefList32 *self, void **result, MEF_RefListNode32 **position)",
+  "xrefs_from_count": 129,
   "xrefs_to_count": 3
 }

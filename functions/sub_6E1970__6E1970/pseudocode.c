@@ -1,4 +1,4 @@
-void *sub_6E1970()
+NiRTTI *sub_6E1970()
 {
-  return &unk_B3E074;
+  return &stru_B3E074; /*0x6e1975*/
 }

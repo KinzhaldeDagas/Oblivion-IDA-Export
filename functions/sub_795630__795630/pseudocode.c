@@ -1,13 +1,13 @@
-void __userpurge sub_795630(_DWORD *this@<ecx>, unsigned int a2@<ebp>, _DWORD *a3)
+// OBLIVION AUTHORITY (2026-08-30): Swaps two vector<unsigned short> owners via a temporary deep copy and copy assignments; exception cleanup frees the temporary buffer.
+void __thiscall OB_stVectorUShort_Swap_010201A0(OB_stVectorUShort_010201A0 *this, OB_stVectorUShort_010201A0 *other)
 {
-  int v4; // [esp+Ch] [ebp-1Ch] BYREF
-  unsigned int v5; // [esp+10h] [ebp-18h]
-  int v6; // [esp+24h] [ebp-4h]
+  OB_stVectorUShort_010201A0 source; // [esp+Ch] [ebp-1Ch] BYREF
+  int v4; // [esp+24h] [ebp-4h]
 
-  sub_795480(&v4, a2, (unsigned int)this, (int)this);
-  v6 = 0;
-  sub_795510(this, a2, (int)a3);
-  sub_795510(a3, a2, (int)&v4);
-  if ( v5 )
-    FormHeapFree(v5);
+  OB_stVectorUShort_CopyCtor_010201A0(&source, this); /*0x79565c*/
+  v4 = 0; /*0x795668*/
+  OB_stVectorUShort_CopyAssign_010201A0(this, other); /*0x795670*/
+  OB_stVectorUShort_CopyAssign_010201A0(other, &source); /*0x79567c*/
+  if ( source.begin ) /*0x795687*/
+    FormHeapFree((unsigned int)source.begin); /*0x79568a*/
 }

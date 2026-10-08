@@ -25,7 +25,6 @@
 0x629A66: push    ebp
 0x629A67: push    esi
 0x629A68: jmp     short loc_629A74
-0x629A6A: align 10h
 0x629A70: mov     eax, [esp+10h+arg_0]
 0x629A74: mov     ebp, [eax]
 0x629A76: test    ebp, ebp

@@ -1,4 +1,4 @@
-0x9E0790: fld     ds:flt_A3D65C
+0x9E0790: fld     ds:kHeadBodyNormalMatchRadius
 0x9E0796: push    ecx
 0x9E0797: fstp    [esp+4+var_4]; float
 0x9E079A: push    offset aFaidefaultdodg; "fAIDefaultDodgeLeftRightMinTime"

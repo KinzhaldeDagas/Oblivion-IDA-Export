@@ -1,6 +1,6 @@
 0x676D90: push    edi
 0x676D91: add     ecx, 68h ; 'h'; this
-0x676D94: call    sub_7616D0
+0x676D94: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x676D99: mov     edi, eax
 0x676D9B: test    edi, edi
 0x676D9D: jz      loc_676E3C
@@ -19,7 +19,7 @@
 0x676DC2: mov     edi, [edi+4]
 0x676DC5: jz      short loc_676E33
 0x676DC7: mov     ecx, esi
-0x676DC9: call    sub_5E6B40
+0x676DC9: call    Actor_IsInDialogueProcedure; 3DTheft 2026-05-17: returns true when the actor's current package type is 0x12 (Dialogue). AddScriptPackage uses this as a pre-handoff gate.
 0x676DCE: test    al, al
 0x676DD0: jz      short loc_676E33
 0x676DD2: mov     ecx, [esi+58h]

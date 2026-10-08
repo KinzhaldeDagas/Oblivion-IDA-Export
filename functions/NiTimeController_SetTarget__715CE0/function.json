@@ -1,18 +1,31 @@
 {
-  "callees_count": 11,
-  "callers_count": 8,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 9,
+  "chunks": [
+    [
+      "0x715CE0",
+      "0x715D76"
+    ]
+  ],
+  "chunks_sha256": "f805c6badbc038c7029f7f520334b4e383a755f6f5733ca8f82256e507ed468d",
+  "comment_regular": "Retargets a controller while holding a temporary self-reference. Removes it from the previous NiObjectNET controller chain, assigns non-owning target +0x30, avoids duplicate insertion, then inserts into the new target's refcounted chain and propagates manager-controlled target state when applicable.",
+  "comment_repeatable": "Retargets a controller while holding a temporary self-reference. Removes it from the previous NiObjectNET controller chain, assigns non-owning target +0x30, avoids duplicate insertion, then inserts into the new target's refcounted chain and propagates manager-controlled target state when applicable.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "NiTimeController::SetTarget",
   "end_ea": "0x715D76",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "NiTimeController::SetTarget",
   "segment": ".text",
   "sha256": "f805c6badbc038c7029f7f520334b4e383a755f6f5733ca8f82256e507ed468d",
   "size": 150,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x715CE0",
+  "total_chunk_size": 150,
   "type": "void __thiscall(NiTimeController *this, NiObjectNET *a2)",
   "xrefs_from_count": 67,
   "xrefs_to_count": 35

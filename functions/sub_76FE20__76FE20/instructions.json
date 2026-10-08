@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x76FE20",
-    "line": "sub     esp, 38h",
+    "line": "sub     esp, 38h; Oblivion-authoritative vertex-stream packer: ensures declaration state, updates GeometryBufferData declaration/stride/software-VP metadata, allocates or refreshes the vertex-buffer chip, maps it, packs enabled semantics, then unlocks.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x76FE9B",
-    "line": "call    sub_7780D0",
+    "line": "call    sub_7780D0; MoonSugarEffect decode: NiGeometryBufferData SetVertexDeclaration-style input ownership. Releases the previous declaration, AddRefs the new one, stores it, and clears FVF. World mask shaders must not mutate this unless they own/repacked the BuffData layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x76FF4D",
-    "line": "call    NiGeometryBufferData__RefreshVBChips",
+    "line": "call    NiGeometryBufferData__RefreshVBChips; MoonSugarEffect decode: NiGeometryBufferData::RefreshVBChips. Releases the existing geometry-group chip for this stream, creates a replacement chip through NiGeometryGroup, and stores it in VBChip[stream] if stream is in range. This is allocation/lifetime ownership, not a safe mask-pass getter.",
     "mnemonic": "call",
     "size": 5
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x76FF5D",
-    "line": "call    sub_761AC0",
+    "line": "call    sub_761AC0; MoonSugarEffect decode: NiGeometryBufferData VBChip getter. Returns VBChip[stream] only when stream < StreamCount; no allocation or refresh. This is the safe read-side primitive for already-packed mask submission.",
     "mnemonic": "call",
     "size": 5
   },
@@ -727,37 +727,37 @@
   },
   {
     "ea": "0x76FF7C",
-    "line": "push    eax; int",
+    "line": "push    eax; flags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76FF7D",
-    "line": "push    ecx; Size",
+    "line": "push    ecx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76FF7E",
-    "line": "mov     ecx, [ebp+0Ch]",
+    "line": "mov     ecx, [ebp+0Ch]; self",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x76FF81",
-    "line": "push    edx; int",
+    "line": "push    edx; offsetBytes",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76FF82",
-    "line": "push    edi; int",
+    "line": "push    edi; buffer",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76FF83",
-    "line": "call    sub_776C90",
+    "line": "call    NiDX9VertexBufferManager_LockToStaging; MoonSugarEffect decode: VB lock helper. Locks D3D VB, caches original bytes in a staging buffer, and returns a writable pointer; unlock is handled by packers when they own the lock.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1177,7 +1177,7 @@
   },
   {
     "ea": "0x77006D",
-    "line": "call    sub_76F590",
+    "line": "call    NiDX9ShaderDeclaration__PackElement; Per-element vertex declaration pack/copy dispatcher used by PackVertexStream; converts source geometry semantics/types into the declaration's destination layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1333,7 +1333,7 @@
   },
   {
     "ea": "0x7700B9",
-    "line": "call    sub_72AF20",
+    "line": "call    sub_72AF20; Verified shared weighted-skin transform: composes per-bone NiTransforms, traverses per-vertex bone indices/weights, transforms source positions/normals and accumulates into caller-provided output arrays. BSTempEffectGeometryDecal_InitializeUsingSkinnedGeometryData passes its source skinData and NiGeometryData vertex/normal arrays here; NiDX9ShaderDeclaration_PackVertexStream is another caller. This is general renderer skinning code, not a blood-specific routine.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1375,7 +1375,7 @@
   },
   {
     "ea": "0x7700D0",
-    "line": "call    sub_776D80",
+    "line": "call    sub_776D80; MoonSugarEffect decode: vertex-buffer-manager unlock/staging helper. Copies the staging buffer back to the locked D3D buffer, clears lock bookkeeping, leaves the critical section, then calls the vertex buffer Unlock vtable slot.",
     "mnemonic": "call",
     "size": 5
   },

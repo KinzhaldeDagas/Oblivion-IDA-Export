@@ -15,16 +15,16 @@
 0x67D067: mov     [esp+38h+var_14], ecx
 0x67D06B: mov     ecx, ds:0B33B00h
 0x67D071: xor     ebp, ebp
-0x67D073: mov     [esp+38h+var_20], ebp
+0x67D073: mov     [esp+38h+destination], ebp
 0x67D077: xor     ebx, ebx
-0x67D079: call    sub_45A170
+0x67D079: call    TESSaveLoadGame_UseSaveGameBlocks
 0x67D07E: test    al, al
 0x67D080: jz      loc_67D11F
-0x67D086: mov     ecx, ds:0B33B00h
-0x67D08C: push    4; Size
+0x67D086: mov     ecx, ds:0B33B00h; self
+0x67D08C: push    4; byteCount
 0x67D08E: lea     eax, [esp+3Ch+Dst]
-0x67D092: push    eax; Dst
-0x67D093: call    SaveLoad_LoadData
+0x67D092: push    eax; destination
+0x67D093: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x67D098: cmp     [esp+38h+Dst], 4B4F4C42h
 0x67D0A0: jz      short loc_67D10A
 0x67D0A2: mov     eax, ds:0B33B00h
@@ -33,7 +33,7 @@
 0x67D0AF: jz      short loc_67D0EE
 0x67D0B1: mov     ecx, [esi]
 0x67D0B3: push    ecx; a1
-0x67D0B4: call    TESForm_LookupByFormID
+0x67D0B4: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x67D0B9: mov     edx, [esi+5]
 0x67D0BC: movzx   ecx, byte ptr [esi+9]
 0x67D0C0: add     esp, 4
@@ -59,17 +59,17 @@
 0x67D0FD: push    offset aLoadgameBuff_0; "LoadGame Buffer error: Block Header is "...
 0x67D102: call    PrintError
 0x67D107: add     esp, 10h
-0x67D10A: mov     ecx, ds:0B33B00h
+0x67D10A: mov     ecx, ds:0B33B00h; self
 0x67D110: mov     ebx, [ecx+14h]
-0x67D113: push    2; Size
-0x67D115: lea     eax, [esp+3Ch+var_20]
-0x67D119: push    eax; Dst
-0x67D11A: call    SaveLoad_LoadData
-0x67D11F: push    2; Size
+0x67D113: push    2; byteCount
+0x67D115: lea     eax, [esp+3Ch+destination]
+0x67D119: push    eax; destination
+0x67D11A: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
+0x67D11F: push    2; byteCount
 0x67D121: lea     ecx, [esp+3Ch+var_24]
-0x67D125: push    ecx; Dst
-0x67D126: mov     ecx, ds:0B33B00h
-0x67D12C: call    SaveLoad_LoadData
+0x67D125: push    ecx; destination
+0x67D126: mov     ecx, ds:0B33B00h; self
+0x67D12C: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x67D131: cmp     [esp+38h+var_24], bp
 0x67D136: mov     [esp+38h+var_1C], ebp
 0x67D13A: jbe     short loc_67D1B8
@@ -116,7 +116,7 @@
 0x67D1B2: mov     [esp+38h+var_1C], eax
 0x67D1B6: jl      short loc_67D140
 0x67D1B8: mov     ecx, ds:0B33B00h
-0x67D1BE: call    sub_45A170
+0x67D1BE: call    TESSaveLoadGame_UseSaveGameBlocks
 0x67D1C3: test    al, al
 0x67D1C5: jz      loc_67D2E2
 0x67D1CB: mov     ecx, ds:0B33B00h
@@ -126,9 +126,9 @@
 0x67D1DC: jz      loc_67D298
 0x67D1E2: mov     edx, [edi]
 0x67D1E4: push    edx; a1
-0x67D1E5: call    TESForm_LookupByFormID
+0x67D1E5: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x67D1EA: mov     ecx, eax
-0x67D1EC: movzx   eax, word ptr [esp+3Ch+var_20]
+0x67D1EC: movzx   eax, word ptr [esp+3Ch+destination]
 0x67D1F1: add     eax, ebx
 0x67D1F3: add     esp, 4
 0x67D1F6: cmp     esi, eax
@@ -141,7 +141,7 @@
 0x67D205: mov     eax, [edx+0D4h]
 0x67D20B: call    eax
 0x67D20D: mov     ecx, [edi]
-0x67D20F: movzx   edx, word ptr [esp+40h+var_20]
+0x67D20F: movzx   edx, word ptr [esp+40h+destination]
 0x67D214: push    eax
 0x67D215: push    ecx
 0x67D216: push    248h
@@ -169,7 +169,7 @@
 0x67D256: push    edx
 0x67D257: mov     edx, [eax+0D4h]
 0x67D25D: call    edx
-0x67D25F: movzx   ecx, word ptr [esp+40h+var_20]
+0x67D25F: movzx   ecx, word ptr [esp+40h+destination]
 0x67D264: push    eax
 0x67D265: mov     eax, [edi]
 0x67D267: push    eax
@@ -190,7 +190,7 @@
 0x67D293: pop     ebx
 0x67D294: add     esp, 24h
 0x67D297: retn
-0x67D298: movzx   eax, word ptr [esp+38h+var_20]
+0x67D298: movzx   eax, word ptr [esp+38h+destination]
 0x67D29D: lea     edx, [eax+ebx]
 0x67D2A0: cmp     esi, edx
 0x67D2A2: jbe     short loc_67D2BF
@@ -223,3 +223,15 @@
 0x67D2F1: pop     ebx
 0x67D2F2: add     esp, 24h
 0x67D2F5: retn
+0x9C49B0: mov     eax, [ebp-10h]
+0x9C49B3: push    eax
+0x9C49B4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C49B9: pop     ecx
+0x9C49BA: retn
+0x9C49BB: mov     edx, [esp+arg_4]
+0x9C49BF: lea     eax, [edx-28h]
+0x9C49C2: mov     ecx, [edx-2Ch]
+0x9C49C5: xor     ecx, eax
+0x9C49C7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C49CC: mov     eax, offset stru_AED2E8
+0x9C49D1: jmp     ___CxxFrameHandler3

@@ -49,9 +49,9 @@
 0x71F7BB: lea     ecx, [ebp+890h]
 0x71F7C1: mov     byte ptr [esp+24h+var_4], 1
 0x71F7C6: call    ??1?$NiTPointerList@PAVNiImageReader@@@@UAE@XZ; NiTPointerList<NiImageReader *>::~NiTPointerList<NiImageReader *>(void)
-0x71F7CB: lea     ecx, [ebp+680h]; void *
+0x71F7CB: lea     ecx, [ebp+680h]; this
 0x71F7D1: mov     byte ptr [esp+24h+var_4], bl
-0x71F7D5: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x71F7D5: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x71F7DA: mov     ecx, ebp; this
 0x71F7DC: mov     [esp+24h+var_4], 0FFFFFFFFh
 0x71F7E4: call    ??1NiImageConverter@@UAE@XZ; NiImageConverter::~NiImageConverter(void)
@@ -64,3 +64,18 @@
 0x71F7F8: pop     ebx
 0x71F7F9: add     esp, 10h
 0x71F7FC: retn
+0x9CA0F0: mov     ecx, [ebp-10h]; this
+0x9CA0F3: jmp     ??1NiImageConverter@@UAE@XZ; NiImageConverter::~NiImageConverter(void)
+0x9CA0F8: mov     ecx, [ebp-10h]
+0x9CA0FB: add     ecx, 680h; this
+0x9CA101: jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x9CA106: mov     ecx, [ebp-10h]
+0x9CA109: add     ecx, 890h
+0x9CA10F: jmp     j_??1?$NiTPointerList@PAVNiImageReader@@@@UAE@XZ; NiTPointerList<NiImageReader *>::~NiTPointerList<NiImageReader *>(void)
+0x9CA114: mov     edx, [esp+arg_4]
+0x9CA118: lea     eax, [edx-14h]
+0x9CA11B: mov     ecx, [edx-18h]
+0x9CA11E: xor     ecx, eax
+0x9CA120: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA125: mov     eax, offset stru_AF28A8
+0x9CA12A: jmp     ___CxxFrameHandler3

@@ -2,15 +2,18 @@
   "bytes_preview_hex": "",
   "bytes_sha256": "",
   "comments": {
-    "regular": "",
+    "regular": "Global god-mode state byte. SetGodMode writes it, GetGodMode returns it, and Cmd_ToggleGodMode_Execute toggles it while printing 'God Mode enabled/disabled.' PlayerCharacter post-shot AMMO consumption is one consumer that bypasses depletion while this is true.",
     "repeatable": ""
   },
-  "display_name": "g_GodMode",
+  "confidence_scope": "Raw live IDA annotation; bulk synchronization does not independently verify semantic names or comments.",
+  "display_name": "g_godModeEnabled",
   "ea": "0xB3BB06",
+  "evidence_confidence": "Unknown",
   "kind": "data",
-  "name": "g_GodMode",
+  "name": "g_godModeEnabled",
   "segment": ".data",
   "size": 1,
-  "type": "char",
+  "source_annotation_confidence": "Unknown",
+  "type": "bool",
   "xrefs_to_count": 0
 }

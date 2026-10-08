@@ -1,18 +1,19 @@
-float *__thiscall sub_7915C0(float *this, int a2)
+// Compact stock CBranch constructor. Oblivion branch object is 0x40 bytes: parent, percent, child SIdvBranch vector, vertex pointer/count, cross-section/start offsets, volume/fuzzy volume, flare vector.
+OB_CBranch_010201A0 *__thiscall OB_CBranch_ctor_010201A0(OB_CBranch_010201A0 *this, OB_CBranch_010201A0 *parent)
 {
-  *(_DWORD *)this = a2;
-  *(this + 1) = 0.0;
-  *(this + 3) = 0.0;
-  *(this + 4) = 0.0;
-  *(this + 5) = 0.0;
-  *(this + 0xA) = 0.0;
-  *(this + 0xB) = 0.0;
-  *(this + 6) = 0.0;
-  *(this + 7) = NAN;
-  *((_WORD *)this + 0x10) = 0;
-  *(this + 9) = NAN;
-  *(this + 0xD) = 0.0;
-  *(this + 0xE) = 0.0;
-  *(this + 0xF) = 0.0;
-  return this;
+  this->parentBranch = parent; /*0x7915e9*/
+  this->percentAlongParent = 0.0; /*0x7915eb*/
+  this->children.begin = 0; /*0x7915f0*/
+  this->children.end = 0; /*0x7915f3*/
+  this->children.capacityEnd = 0; /*0x7915f6*/
+  this->branchVolume = 0.0; /*0x7915f9*/
+  this->fuzzyBranchVolume = 0.0; /*0x7915ff*/
+  this->branchVertices = 0; /*0x791602*/
+  this->branchVertexCount = 0xFFFFFFFF; /*0x791605*/
+  this->crossSectionSegmentCount = 0; /*0x791608*/
+  this->startVertexOffset = 0xFFFFFFFF; /*0x79160c*/
+  this->flares.begin = 0; /*0x79160f*/
+  this->flares.end = 0; /*0x791612*/
+  this->flares.capacityEnd = 0; /*0x791615*/
+  return this; /*0x791618*/
 }

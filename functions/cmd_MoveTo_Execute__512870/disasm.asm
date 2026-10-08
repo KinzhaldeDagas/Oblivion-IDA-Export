@@ -27,7 +27,7 @@
 0x5128B7: push    edx; a2
 0x5128B8: push    eax; a1
 0x5128B9: mov     dword ptr [esp+40h+var_10], 0
-0x5128C1: call    Script_ExtractArgs
+0x5128C1: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x5128C6: add     esp, 2Ch
 0x5128C9: test    al, al
 0x5128CB: jnz     short loc_5128D4
@@ -47,7 +47,7 @@
 0x5128F3: fstp    [esp+20h+var_20]
 0x5128F6: push    eax
 0x5128F7: push    esi
-0x5128F8: call    TESObjectREFR_Move?
+0x5128F8: call    TESObjectREFR_Move?; MoveTo script command delegates to TESObjectREFR_Move_; player moves eventually flow into PlayerCharacter_ChangeCellAndPosition with a17=true.
 0x5128FD: add     esp, 14h
 0x512900: cmp     esi, ds:0B333C4h
 0x512906: jz      short loc_5128CD

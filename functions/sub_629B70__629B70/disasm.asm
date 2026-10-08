@@ -46,9 +46,9 @@
 0x629BDE: push    ebp
 0x629BDF: push    edi
 0x629BE0: mov     edi, [esp+14h+arg_0]
-0x629BE4: mov     ecx, edi
-0x629BE6: call    sub_5E0380
-0x629BEB: mov     ecx, offset TimeGlobals
+0x629BE4: mov     ecx, edi; this
+0x629BE6: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
+0x629BEB: mov     ecx, 0B332E0h
 0x629BF0: mov     ebp, eax
 0x629BF2: call    TimeGlobals_GetGameHour
 0x629BF7: fstp    [esp+14h+var_4]
@@ -78,16 +78,16 @@
 0x629C3E: test    ah, 1
 0x629C41: jz      short loc_629C54
 0x629C43: fld     [esp+14h+var_4]
-0x629C47: call    Double_To_SInt32
+0x629C47: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x629C4C: cmp     [esi+90h], eax
 0x629C52: jz      short loc_629C7C
 0x629C54: push    ebx
 0x629C55: push    edi
 0x629C56: mov     ecx, esi
-0x629C58: call    sub_649340
+0x629C58: call    sub_649340; RadiantAI: package refresh/reselection bridge. If no current package, calls 0x648E40 to choose one; validates procedure row, checks duration/package flags, can end/reset packages, then calls 0x648E40 again for reselection.
 0x629C5D: fld     [esp+14h+var_4]
 0x629C61: mov     byte ptr [esp+14h+arg_4], al
-0x629C65: call    Double_To_SInt32
+0x629C65: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x629C6A: fld     dword ptr ds:0A417B4h
 0x629C70: fstp    dword ptr [esi+1ACh]
 0x629C76: mov     [esi+90h], eax

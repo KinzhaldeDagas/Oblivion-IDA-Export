@@ -1,4 +1,4 @@
-0x5301E0: push    ebp
+0x5301E0: push    ebp; Oblivion TESTopic::LoadForm recognizes XIDX (unlike TESCS TESTopic_LoadForm 0x4F02D0) and writes it to the separate TESTopic.unk30 U32 field using GetChunkData4. This is raw runtime scalar storage; this loader performs no FormID resolution for XIDX. The TESCS loader's QSTI/QSTR quest-list paths are separate.
 0x5301E1: mov     ebp, esp
 0x5301E3: sub     esp, 8
 0x5301E6: mov     eax, ds:0B30AACh
@@ -17,7 +17,7 @@
 0x530205: jmp     loc_530323
 0x53020A: push    edi
 0x53020B: mov     ecx, ebx; this
-0x53020D: call    TESFile_InitializeFormFromRecord
+0x53020D: call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.
 0x530212: mov     ecx, ebx
 0x530214: call    TESFile_GetChunkType
 0x530219: test    eax, eax
@@ -35,7 +35,7 @@
 0x53024D: push    200h; a4
 0x530252: push    esi; Dst
 0x530253: mov     ecx, ebx; a1
-0x530255: call    TESFile_GetChunkData
+0x530255: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x53025A: mov     eax, [edi]
 0x53025C: mov     edx, [eax+0D8h]
 0x530262: push    esi
@@ -46,20 +46,20 @@
 0x53026E: lea     eax, [edi+24h]
 0x530271: push    eax; Dst
 0x530272: mov     ecx, ebx; a1
-0x530274: call    TESFile_GetChunkData
+0x530274: call    TESFile_GetChunkData; DIAL/DATA writes directly to the existing topicType byte with GetChunkData(maxSize=1). Zero bytes preserve current state; one byte assigns its value; overlong sizes force zero and copy no payload bytes. Repeated DATA entries are replayed in order.
 0x530279: jmp     loc_530301
 0x53027E: lea     ecx, [ebp+var_8]
 0x530281: push    ecx
 0x530282: mov     ecx, ebx
 0x530284: mov     [ebp+var_8], 0
-0x53028B: call    TESFile_GetChunkData4
+0x53028B: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x530290: push    0FFFFFFFFh; a2
 0x530292: mov     ecx, edi; this
-0x530294: call    TESForm_GetOverrideFile
+0x530294: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x530299: push    eax; a2
 0x53029A: lea     edx, [ebp+var_8]
 0x53029D: push    edx; a1
-0x53029E: call    TESForm_ResolveFormID
+0x53029E: call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.
 0x5302A3: mov     eax, [ebp+var_8]
 0x5302A6: add     esp, 8
 0x5302A9: push    0
@@ -73,17 +73,17 @@
 0x5302BC: add     ecx, 64h ; 'd'
 0x5302BF: push    ecx
 0x5302C0: lea     ecx, [esi+4]
-0x5302C3: call    sub_452910
+0x5302C3: call    NiTLargeArray_Resize32
 0x5302C8: mov     dword ptr [esi+18h], 0Ah
 0x5302CF: jmp     short loc_530301
 0x5302D1: cmp     eax, 4C4C5546h
 0x5302D6: jz      short loc_5302EC
 0x5302D8: cmp     eax, 58444958h
-0x5302DD: jnz     short loc_530301
+0x5302DD: jnz     short loc_530301; DIAL XIDX branch: TESFile_GetChunkData4 writes directly into TESTopic.unk30 at 0x5302E5. This is distinct from DATA/topicType at 0x530274. Bounded widths overlay the field; size>4 gets the maxSize-1 forced-zero path, and size0 preserves it.
 0x5302DF: lea     edx, [edi+30h]
 0x5302E2: push    edx
 0x5302E3: mov     ecx, ebx
-0x5302E5: call    TESFile_GetChunkData4
+0x5302E5: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x5302EA: jmp     short loc_530301
 0x5302EC: test    edi, edi
 0x5302EE: jz      short loc_5302F5
@@ -92,7 +92,7 @@
 0x5302F5: xor     eax, eax
 0x5302F7: push    ebx; a2
 0x5302F8: push    eax; a1
-0x5302F9: call    TESFullname_Load
+0x5302F9: call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.
 0x5302FE: add     esp, 8
 0x530301: mov     ecx, ebx
 0x530303: call    TESFile_GetNextChunk

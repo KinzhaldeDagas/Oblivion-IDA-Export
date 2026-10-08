@@ -1,5 +1,5 @@
 0x4268B0: push    0FFFFFFFFh
-0x4268B2: push    offset SEH_6E3250
+0x4268B2: push    offset ExtraDataList_SetReferencePointer_SEH
 0x4268B7: mov     eax, large fs:0
 0x4268BD: push    eax
 0x4268BE: push    esi
@@ -10,17 +10,17 @@
 0x4268C8: lea     eax, [esp+18h+var_C]
 0x4268CC: mov     large fs:0, eax
 0x4268D2: mov     edi, ecx
-0x4268D4: mov     esi, [esp+18h+arg_0]
+0x4268D4: mov     esi, [esp+18h+self]
 0x4268D8: test    esi, esi
 0x4268DA: jz      short loc_426913
-0x4268DC: mov     ecx, esi
-0x4268DE: call    sub_5660A0
+0x4268DC: mov     ecx, esi; self
+0x4268DE: call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).
 0x4268E3: test    al, al
 0x4268E5: jz      short loc_4268F1
 0x4268E7: cmp     byte ptr [esi+20h], 1
 0x4268EB: jnz     loc_4269C6
 0x4268F1: mov     ecx, esi
-0x4268F3: call    sub_5660E0
+0x4268F3: call    sub_5660E0; RadiantAI: package flag helper used by chooser skip logic; tests TESPackage flag 0x8000.
 0x4268F8: test    al, al
 0x4268FA: jnz     loc_4269C6
 0x426900: mov     al, [esi+20h]
@@ -38,7 +38,7 @@
 0x426928: push    1Ch; Size
 0x42692A: call    FormHeapAlloc
 0x42692F: add     esp, 4
-0x426932: mov     [esp+18h+arg_0], eax
+0x426932: mov     [esp+18h+self], eax
 0x426936: test    eax, eax
 0x426938: mov     [esp+18h+var_4], 0
 0x426940: jz      short loc_426960
@@ -96,3 +96,15 @@
 0x4269D3: pop     esi
 0x4269D4: add     esp, 0Ch
 0x4269D7: retn    14h
+0x9C3090: mov     eax, [ebp+4]
+0x9C3093: push    eax
+0x9C3094: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C3099: pop     ecx
+0x9C309A: retn
+0x9C309B: mov     edx, [esp+arg_4]
+0x9C309F: lea     eax, [edx-8]
+0x9C30A2: mov     ecx, [edx-0Ch]
+0x9C30A5: xor     ecx, eax
+0x9C30A7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C30AC: mov     eax, offset stru_AEBD48
+0x9C30B1: jmp     ___CxxFrameHandler3

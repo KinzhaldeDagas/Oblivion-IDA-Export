@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 6,
   "callers_count": 11,
+  "chunks": [
+    [
+      "0x7E27F0",
+      "0x7E28BD"
+    ],
+    [
+      "0x9CF5D0",
+      "0x9CF61F"
+    ]
+  ],
+  "chunks_sha256": "9533da1eab74ca49407f79b6807ad2990fef48dafef2901e179866fba08ad414",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 5,
+  "comment_repeatable": "[constructor audit] Initializes four empty pass lists before calling FreeAllNodes573880; their head pointers are NULL, so those calls perform no virtual callbacks or allocations. Base ObjectNET/Object construction is field initialization. No suballocation in this constructor path.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 6,
   "display_name": "BSShaderProperty::BSShaderProperty(void)",
   "end_ea": "0x7E28BD",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??0BSShaderProperty@@QAE@XZ",
   "segment": ".text",
   "sha256": "39db8dae37db8a5fe835884b15d4c11d88be2c976ecec2f661020aa1ffec2050",
   "size": 205,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7E27F0",
+  "total_chunk_size": 284,
   "type": "BSShaderProperty *__thiscall(BSShaderProperty *__hidden this)",
-  "xrefs_from_count": 73,
+  "xrefs_from_count": 96,
   "xrefs_to_count": 11
 }

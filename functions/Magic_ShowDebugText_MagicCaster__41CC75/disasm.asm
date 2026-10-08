@@ -86,43 +86,43 @@
 0x41CD8A: add     ebx, esi
 0x41CD8C: add     esp, 14h
 0x41CD8F: mov     [esp+arg_14], ebx
-0x41CD93: call    sub_452A60
+0x41CD93: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x41CD98: test    eax, eax
 0x41CD9A: jnz     short loc_41CDA6
 0x41CD9C: mov     eax, offset aNo_spell; "NO_SPELL"
 0x41CDA1: jmp     loc_41CE27
 0x41CDA6: mov     ecx, [esp+arg_18]
-0x41CDAA: call    sub_452A60
+0x41CDAA: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x41CDAF: cmp     eax, 1
 0x41CDB2: jnz     short loc_41CDBB
 0x41CDB4: mov     eax, offset aAim
 0x41CDB9: jmp     short loc_41CE27
 0x41CDBB: mov     ecx, [esp+arg_18]
-0x41CDBF: call    sub_452A60
+0x41CDBF: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x41CDC4: cmp     eax, 2
 0x41CDC7: jnz     short loc_41CDD0
 0x41CDC9: mov     eax, offset aCast; "CAST"
 0x41CDCE: jmp     short loc_41CE27
 0x41CDD0: mov     ecx, [esp+arg_18]
-0x41CDD4: call    sub_452A60
+0x41CDD4: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x41CDD9: cmp     eax, 4
 0x41CDDC: jnz     short loc_41CDE5
 0x41CDDE: mov     eax, offset aFind_targets; "FIND_TARGETS"
 0x41CDE3: jmp     short loc_41CE27
 0x41CDE5: mov     ecx, [esp+arg_18]
-0x41CDE9: call    sub_452A60
+0x41CDE9: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x41CDEE: cmp     eax, 5
 0x41CDF1: jnz     short loc_41CDFA
 0x41CDF3: mov     eax, offset aErr_spell_disa; "ERR_SPELL_DISABLED"
 0x41CDF8: jmp     short loc_41CE27
 0x41CDFA: mov     ecx, [esp+arg_18]
-0x41CDFE: call    sub_452A60
+0x41CDFE: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x41CE03: cmp     eax, 6
 0x41CE06: jnz     short loc_41CE0F
 0x41CE08: mov     eax, offset aErr_already_ca; "ERR_ALREADY_CASTING"
 0x41CE0D: jmp     short loc_41CE27
 0x41CE0F: mov     ecx, [esp+arg_18]
-0x41CE13: call    sub_452A60
+0x41CE13: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x41CE18: cmp     eax, 7
 0x41CE1B: mov     eax, offset aErr_cannot_cas; "ERR_CANNOT_CAST"
 0x41CE20: jz      short loc_41CE27

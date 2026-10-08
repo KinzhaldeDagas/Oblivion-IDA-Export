@@ -1,64 +1,108 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "IDirect3DMaterialVtbl",
+  "definition": "struct IDirect3DMaterialVtbl\n{\nHRESULT (__stdcall *QueryInterface)(IDirect3DMaterial *This, const IID *const riid, LPVOID *ppvObj) __offset(OFF64|AUTO);\nULONG (__stdcall *AddRef)(IDirect3DMaterial *This) __offset(OFF64|AUTO);\nULONG (__stdcall *Release)(IDirect3DMaterial *This) __offset(OFF64|AUTO);\nHRESULT (__stdcall *Initialize)(IDirect3DMaterial *This, LPDIRECT3D) __offset(OFF64|AUTO);\nHRESULT (__stdcall *SetMaterial)(IDirect3DMaterial *This, LPD3DMATERIAL) __offset(OFF64|AUTO);\nHRESULT (__stdcall *GetMaterial)(IDirect3DMaterial *This, LPD3DMATERIAL) __offset(OFF64|AUTO);\nHRESULT (__stdcall *GetHandle)(IDirect3DMaterial *This, LPDIRECT3DDEVICE, LPD3DMATERIALHANDLE) __offset(OFF64|AUTO);\nHRESULT (__stdcall *Reserve)(IDirect3DMaterial *This) __offset(OFF64|AUTO);\nHRESULT (__stdcall *Unreserve)(IDirect3DMaterial *This) __offset(OFF64|AUTO);\n}\n",
   "id": 18374686479671835360,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QueryInterface",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DMaterial *This, const IID *const riid, LPVOID *ppvObj)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddRef",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (__stdcall *)(IDirect3DMaterial *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Release",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (__stdcall *)(IDirect3DMaterial *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Initialize",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DMaterial *This, LPDIRECT3D)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetMaterial",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DMaterial *This, LPD3DMATERIAL)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetMaterial",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DMaterial *This, LPD3DMATERIAL)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetHandle",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DMaterial *This, LPDIRECT3DDEVICE, LPD3DMATERIALHANDLE)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Reserve",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DMaterial *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unreserve",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DMaterial *This)"
     }
   ],
   "name": "IDirect3DMaterialVtbl",
+  "ordinal": 4177,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 36
 }

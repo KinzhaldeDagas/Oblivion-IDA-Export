@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x77AC90",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, [esp+renderDataCreated]; Resolve NiTexture to D3D texture and report render-data creation, actual mip-count>1, and NPOT/special dimensions.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x77AC94",
-    "line": "mov     edx, [esp+arg_C]",
+    "line": "mov     edx, [esp+needsNPOTFallback]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x77AC99",
-    "line": "mov     ebx, [esp+4+arg_0]",
+    "line": "mov     ebx, [esp+4+texture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x77ACA2",
-    "line": "mov     ecx, [esp+8+arg_8]",
+    "line": "mov     ecx, [esp+8+hasMultipleMipLevels]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x77ACE1",
-    "line": "push    offset dword_B3F95C",
+    "line": "push    offset stru_B3F95C",
     "mnemonic": "push",
     "size": 5
   },
@@ -223,13 +223,13 @@
   },
   {
     "ea": "0x77ACF7",
-    "line": "call    sub_761270",
+    "line": "call    OB_NiDX9SourceTextureData_CreateFromSourceTexture_010201A0; DX10OBSE resource decode: creates/loads NiDX9SourceTextureData for NiSourceTexture, creating a managed IDirect3DTexture9 and uploading source mip texels when rendererData is absent.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x77ACFC",
-    "line": "mov     edx, [esp+18h+arg_4]",
+    "line": "mov     edx, [esp+18h+renderDataCreated]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -499,13 +499,13 @@
   },
   {
     "ea": "0x77AD71",
-    "line": "mov     edx, [esp+10h+arg_C]",
+    "line": "mov     edx, [esp+10h+needsNPOTFallback]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x77AD75",
-    "line": "mov     [edx], al",
+    "line": "mov     [edx], al; Resolver output needsNPOTFallback is true when width or height is zero/non-power-of-two; false only when both dimensions are nonzero powers of two.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -739,7 +739,7 @@
   },
   {
     "ea": "0x77ADC6",
-    "line": "mov     ecx, [esp+10h+arg_4]",
+    "line": "mov     ecx, [esp+10h+renderDataCreated]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x77ADE7",
-    "line": "mov     edx, [esp+10h+arg_8]",
+    "line": "mov     edx, [esp+10h+hasMultipleMipLevels]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -835,7 +835,7 @@
   },
   {
     "ea": "0x77ADF1",
-    "line": "mov     [edx], cl",
+    "line": "mov     [edx], cl; Resolver output hasMultipleMipLevels is exact underlying texture level-count > 1.",
     "mnemonic": "mov",
     "size": 2
   },

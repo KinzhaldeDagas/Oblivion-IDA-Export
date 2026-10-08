@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4BA3C0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified Oblivion geometry use: reads float at TESObjectTREE+0x7C, defaults local height to 1400 when <=0, uses half that value as horizontal half-width, and full value as vertical extent. Fallout's directly named BillboardSize.y uses the same 1400 fallback and square-plane construction. This supports (Probable) +0x7C = BillboardSize.y; +0x78 is paired as BillboardSize.x via identical 200 threshold predicate.",
     "mnemonic": "push",
     "size": 2
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x4BA42C",
-    "line": "cmp     byte ptr [esp+34h+arg_4], bl",
+    "line": "cmp     [esp+34h+distantPlane], bl",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -1057,7 +1057,7 @@
   },
   {
     "ea": "0x4BA600",
-    "line": "mov     [esp+34h+arg_4], esi",
+    "line": "mov     dword ptr [esp+34h+distantPlane], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1537,7 +1537,7 @@
   },
   {
     "ea": "0x4BA71B",
-    "line": "mov     [esp+34h+arg_4], eax",
+    "line": "mov     dword ptr [esp+34h+distantPlane], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1627,7 +1627,7 @@
   },
   {
     "ea": "0x4BA73E",
-    "line": "call    sub_71FB40",
+    "line": "call    NiTriShapeData_ConstructWithData; Construct NiTriShapeData around supplied geometry and triangle data; shared-normal storage starts empty.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1651,7 +1651,7 @@
   },
   {
     "ea": "0x4BA749",
-    "line": "mov     esi, [esp+34h+arg_0]",
+    "line": "mov     esi, [esp+34h+outData]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1744,5 +1744,107 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B3E70",
+    "line": "mov     eax, [ebp+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3E73",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B3E74",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3E79",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B3E7A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B3E7B",
+    "line": "mov     eax, [ebp+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3E7E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B3E7F",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3E84",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B3E85",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B3E86",
+    "line": "mov     edx, dword ptr [esp+distantPlane]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B3E8A",
+    "line": "lea     eax, [edx-24h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3E8D",
+    "line": "mov     ecx, [edx-28h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3E90",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B3E92",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3E97",
+    "line": "mov     eax, offset stru_ADF708",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3E9C",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

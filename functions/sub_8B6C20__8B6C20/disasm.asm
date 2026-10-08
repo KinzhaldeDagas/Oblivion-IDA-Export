@@ -43,7 +43,7 @@
 0x8B6CAD: jz      short loc_8B6CB4
 0x8B6CAF: add     eax, 10h
 0x8B6CB2: jmp     short loc_8B6CB9
-0x8B6CB4: mov     eax, offset stru_BA7A40
+0x8B6CB4: mov     eax, offset unk_BA7A40
 0x8B6CB9: push    eax
 0x8B6CBA: lea     ecx, [esp+98h+var_70]
 0x8B6CBE: call    sub_47DCD0
@@ -54,7 +54,7 @@
 0x8B6CCC: jz      short loc_8B6CD3
 0x8B6CCE: add     eax, 20h ; ' '
 0x8B6CD1: jmp     short loc_8B6CD8
-0x8B6CD3: mov     eax, offset stru_BA7A40
+0x8B6CD3: mov     eax, offset unk_BA7A40
 0x8B6CD8: push    eax
 0x8B6CD9: lea     ecx, [esp+98h+var_60]
 0x8B6CDD: call    sub_47DCD0
@@ -122,3 +122,19 @@
 0x8B6DB8: mov     esp, ebp
 0x8B6DBA: pop     ebp
 0x8B6DBB: retn    4
+0x9D6EA0: mov     eax, [ebp+var_44]
+0x9D6EA3: push    eax
+0x9D6EA4: call    sub_8B66A0
+0x9D6EA9: pop     ecx
+0x9D6EAA: retn
+0x9D6EAB: mov     edx, [esp-4+arg_4]
+0x9D6EAF: lea     eax, [edx-84h]
+0x9D6EB5: mov     ecx, [edx-88h]
+0x9D6EBB: xor     ecx, eax
+0x9D6EBD: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D6EC2: add     eax, 8
+0x9D6EC5: mov     ecx, [edx-8]
+0x9D6EC8: xor     ecx, eax
+0x9D6ECA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D6ECF: mov     eax, offset stru_AFEB88
+0x9D6ED4: jmp     ___CxxFrameHandler3

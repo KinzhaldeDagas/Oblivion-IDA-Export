@@ -67,13 +67,13 @@
   },
   {
     "ea": "0x4BDE0A",
-    "line": "mov     ecx, edi; this",
+    "line": "mov     ecx, edi; object",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4BDE0C",
-    "line": "call    TESObjectCELL_GetNiNode?",
+    "line": "call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,19 +151,19 @@
   },
   {
     "ea": "0x4BDE34",
-    "line": "push    ecx",
+    "line": "push    ecx; group_y",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BDE35",
-    "line": "push    eax",
+    "line": "push    eax; group_x",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BDE36",
-    "line": "call    sub_4EF1D0",
+    "line": "call    TESObjectCELL_PackExteriorGroupLabel; Verified exact key encoding used by the DistantLOD cell model map: packed label = (signed cellX << 16) | unsigned cellY.",
     "mnemonic": "call",
     "size": 5
   },

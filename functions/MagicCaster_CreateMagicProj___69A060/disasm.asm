@@ -57,16 +57,16 @@
 0x69A0E4: call    eax
 0x69A0E6: mov     ecx, eax
 0x69A0E8: add     ecx, 0Ch
-0x69A0EB: call    EffectItemList_GetStrongestItem
+0x69A0EB: call    EffectItemList_GetStrongestItem; this=EffectItemList; args are rangeFilter (0 self,1 touch,2 target,3 any) and requireArea. Returns effective (flag 0x400000 clear) qualifying item with greatest truncated MagickaCostForCaster(item,null).
 0x69A0F0: mov     edx, [esi]
 0x69A0F2: mov     ebp, eax
 0x69A0F4: mov     eax, [edx+30h]
-0x69A0F7: push    0
+0x69A0F7: push    0; effectIndex
 0x69A0F9: mov     ecx, esi
-0x69A0FB: mov     [esp+68h+var_3C], ebp
+0x69A0FB: mov     [esp+6Ch+var_40], ebp
 0x69A0FF: call    eax
-0x69A101: mov     ecx, eax
-0x69A103: call    MagicItem_GetFXEffect
+0x69A101: mov     ecx, eax; magicItem
+0x69A103: call    MagicItem_GetFXEffect; Verified (Oblivion): MagicItem_GetFXEffect returns the effect's EffectSetting pointer; MagicShaderHitEffect constructors/PostLink dereference its +0x78 EffectSetting::effectShader field.
 0x69A108: test    ebp, ebp
 0x69A10A: mov     [esp+68h+var_4C], eax
 0x69A10E: jz      loc_69A480
@@ -128,7 +128,7 @@
 0x69A1A9: mov     ebp, ds:0B3F9ACh
 0x69A1AF: mov     dword ptr [esp+68h+var_24], eax
 0x69A1B3: mov     dword ptr [esp+68h+var_24+4], ebp
-0x69A1B7: mov     dword ptr [esp+68h+var_1C], ecx
+0x69A1B7: mov     [esp+68h+var_1C], ecx
 0x69A1BB: mov     [esp+68h+var_30], eax
 0x69A1BF: mov     [esp+68h+var_28], ecx
 0x69A1C3: jz      loc_69A26F
@@ -137,8 +137,8 @@
 0x69A1D1: mov     ecx, ebx
 0x69A1D3: call    eax
 0x69A1D5: fstp    [esp+68h+var_28]
-0x69A1D9: mov     ecx, ebx
-0x69A1DB: call    sub_4A9720
+0x69A1D9: mov     ecx, ebx; this
+0x69A1DB: call    Actor_GetAimPitch; Returns Actor rotation X as the native aim-pitch value used by projectile launch, impact, input, dialogue-camera, and magic-projectile paths.
 0x69A1E0: fstp    [esp+68h+var_30]
 0x69A1E4: mov     edx, [edi]
 0x69A1E6: mov     eax, [edx+174h]
@@ -169,7 +169,7 @@
 0x69A234: fstp    [esp+68h+var_48]
 0x69A238: fld     [esp+68h+var_48]
 0x69A23C: fmul    qword ptr ds:0A56E18h
-0x69A242: fstp    dword ptr [esp+68h+var_1C]
+0x69A242: fstp    [esp+68h+var_1C]
 0x69A246: fld     dword ptr [esp+68h+var_24]
 0x69A24A: fadd    [esp+68h+var_3C]
 0x69A24E: fstp    [esp+68h+var_3C]
@@ -178,7 +178,7 @@
 0x69A25A: fadd    dword ptr [esp+68h+var_24+4]
 0x69A25E: fstp    [esp+68h+var_38]
 0x69A262: fld     [esp+68h+var_34]
-0x69A266: fadd    dword ptr [esp+68h+var_1C]
+0x69A266: fadd    [esp+68h+var_1C]
 0x69A26A: jmp     loc_69A32C
 0x69A26F: mov     eax, [esp+68h+var_4C]
 0x69A273: fld     dword ptr [eax+74h]
@@ -210,8 +210,8 @@
 0x69A2C5: fadd    dword ptr [edi+28h]
 0x69A2C8: mov     [esp+68h+var_30], eax
 0x69A2CC: mov     eax, [edx+174h]
-0x69A2D2: fstp    dword ptr [esp+68h+var_1C]
-0x69A2D6: mov     ecx, dword ptr [esp+68h+var_1C]
+0x69A2D2: fstp    [esp+68h+var_1C]
+0x69A2D6: mov     ecx, [esp+68h+var_1C]
 0x69A2DA: mov     [esp+68h+var_28], ecx
 0x69A2DE: mov     ecx, edi
 0x69A2E0: call    eax
@@ -269,7 +269,7 @@
 0x69A38F: fld     dword ptr [eax+74h]
 0x69A392: jmp     short loc_69A396
 0x69A394: fld1
-0x69A396: mov     ecx, offset flt_B37EE8
+0x69A396: mov     ecx, (offset flt_B37ED0+18h)
 0x69A39B: fstp    [esp+68h+var_48]
 0x69A39F: call    GameSetting_GetSafeFloatPointer
 0x69A3A4: fld     [esp+68h+var_48]
@@ -300,7 +300,7 @@
 0x69A3F1: mov     [eax+8], edi
 0x69A3F4: lea     eax, [esp+84h+var_C]
 0x69A3F8: push    eax
-0x69A3F9: call    sub_6159C0
+0x69A3F9: call    Combat_PredictAimPoint_Setup
 0x69A3FE: mov     ecx, [eax]
 0x69A400: mov     ebp, [eax+4]
 0x69A403: mov     edx, [eax+8]
@@ -343,7 +343,7 @@
 0x69A469: mov     ecx, edi; this
 0x69A46B: call    MagicCaster_CastingVFX_destr
 0x69A470: push    edi
-0x69A471: call    FormHeapFree
+0x69A471: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x69A476: add     esp, 4
 0x69A479: mov     dword ptr [esi+4], 0
 0x69A480: pop     edi

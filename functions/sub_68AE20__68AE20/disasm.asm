@@ -5,7 +5,6 @@
 0x68AE27: test    eax, eax
 0x68AE29: jz      short loc_68AE45
 0x68AE2B: jmp     short loc_68AE30
-0x68AE2D: align 10h
 0x68AE30: mov     ecx, [eax+4]
 0x68AE33: test    ecx, ecx
 0x68AE35: jnz     short loc_68AE3F
@@ -23,19 +22,19 @@
 0x68AE4D: call    ?status@DName@@QBE?AW4DNameStatus@@XZ; DName::status(void)
 0x68AE52: cmp     eax, 1
 0x68AE55: jnz     short loc_68AE6C
-0x68AE57: mov     eax, [esp+8+arg_0]
-0x68AE5B: push    eax
-0x68AE5C: mov     ecx, esi
-0x68AE5E: call    sub_68B200
+0x68AE57: mov     eax, [esp+8+position]
+0x68AE5B: push    eax; position
+0x68AE5C: mov     ecx, esi; this
+0x68AE5E: call    TravelPathNode_SetOwnedPosition; Verified for kind 1 allocates a 12-byte NiPoint3 when payload is null and copies xyz from the supplied position; this record owns that copy until cleared.
 0x68AE63: pop     edi
 0x68AE64: pop     esi
 0x68AE65: retn    4
 0x68AE68: mov     esi, [eax]
 0x68AE6A: jmp     short loc_68AE47
-0x68AE6C: mov     ecx, [esp+8+arg_0]
-0x68AE70: push    ecx
-0x68AE71: mov     ecx, edi
-0x68AE73: call    sub_68A280
+0x68AE6C: mov     ecx, [esp+8+position]
+0x68AE70: push    ecx; position
+0x68AE71: mov     ecx, edi; this
+0x68AE73: call    TravelPath_AppendDestinationPosition; Verified appends the final destination as a kind-1 TravelPathNode with its own copied NiPoint3 payload, even if low-path A* produced no reference nodes.
 0x68AE78: pop     edi
 0x68AE79: pop     esi
 0x68AE7A: retn    4

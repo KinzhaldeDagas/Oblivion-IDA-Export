@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A8090",
-    "line": "sub     esp, 18h",
+    "line": "sub     esp, 18h; Oblivion billboard-leaf shadow adjustment: compares normalized tree-center-to-leaf and tree-center-to-dominant-light directions, interpolates a scalar, scales the one packed leaf color, and reapplies dimming. Later 4.1 source performs this per corner; Oblivion does not.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x7A809A",
-    "line": "mov     edi, [esp+20h+arg_0]",
+    "line": "mov     edi, [esp+20h+treeCenter]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -151,13 +151,13 @@
   },
   {
     "ea": "0x7A80D4",
-    "line": "fstp    [esp+20h+arg_0]",
+    "line": "fstp    [esp+20h+treeCenter]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A80D8",
-    "line": "fld     [esp+20h+arg_0]",
+    "line": "fld     [esp+20h+treeCenter]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -169,19 +169,19 @@
   },
   {
     "ea": "0x7A80E1",
-    "line": "fstp    [esp+20h+arg_0]",
+    "line": "fstp    [esp+20h+treeCenter]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A80E5",
-    "line": "fld     [esp+20h+arg_0]",
+    "line": "fld     [esp+20h+treeCenter]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7A80E9",
-    "line": "mov     eax, [esp+20h+arg_4]",
+    "line": "mov     eax, [esp+20h+lightPosition]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x7A80F1",
-    "line": "fstp    [esp+20h+arg_0]",
+    "line": "fstp    [esp+20h+treeCenter]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x7A80F9",
-    "line": "fld     [esp+20h+arg_0]",
+    "line": "fld     [esp+20h+treeCenter]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x7A811D",
-    "line": "fstp    [esp+20h+var_18]",
+    "line": "fstp    [esp+20h+referenceVector]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x7A8139",
-    "line": "fld     [esp+20h+var_18]",
+    "line": "fld     [esp+20h+referenceVector]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -391,13 +391,13 @@
   },
   {
     "ea": "0x7A8151",
-    "line": "fstp    [esp+20h+arg_0]",
+    "line": "fstp    [esp+20h+treeCenter]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A8155",
-    "line": "fld     [esp+20h+arg_0]",
+    "line": "fld     [esp+20h+treeCenter]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -409,13 +409,13 @@
   },
   {
     "ea": "0x7A815E",
-    "line": "fstp    [esp+20h+arg_0]",
+    "line": "fstp    [esp+20h+treeCenter]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A8162",
-    "line": "fld     [esp+20h+arg_0]",
+    "line": "fld     [esp+20h+treeCenter]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -433,19 +433,19 @@
   },
   {
     "ea": "0x7A816A",
-    "line": "fstp    [esp+20h+arg_0]",
+    "line": "fstp    [esp+20h+treeCenter]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A816E",
-    "line": "fld     [esp+20h+var_18]",
+    "line": "fld     [esp+20h+referenceVector]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7A8172",
-    "line": "fld     [esp+20h+arg_0]",
+    "line": "fld     [esp+20h+treeCenter]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x7A817C",
-    "line": "fstp    [esp+20h+var_18]",
+    "line": "fstp    [esp+20h+referenceVector]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -499,19 +499,19 @@
   },
   {
     "ea": "0x7A818E",
-    "line": "lea     eax, [esp+20h+var_18]",
+    "line": "lea     eax, [esp+20h+referenceVector]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A8192",
-    "line": "push    eax",
+    "line": "push    eax; referenceVector",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A8193",
-    "line": "lea     ecx, [esp+24h+var_C]",
+    "line": "lea     ecx, [esp+24h+var_C]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x7A819B",
-    "line": "call    sub_78FCC0",
+    "line": "call    OB_Vec3_AngleClamped01_010201A0; Vector angle helper. Dot product against reference vector, clamps to [0,1], returns acos result in radians.",
     "mnemonic": "call",
     "size": 5
   },
@@ -535,13 +535,13 @@
   },
   {
     "ea": "0x7A81A5",
-    "line": "fstp    [esp+20h+arg_0]",
+    "line": "fstp    [esp+20h+treeCenter]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A81A9",
-    "line": "fld     [esp+20h+arg_0]",
+    "line": "fld     [esp+20h+treeCenter]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -589,37 +589,37 @@
   },
   {
     "ea": "0x7A81C5",
-    "line": "push    1",
+    "line": "push    1; applyDimming",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7A81C7",
-    "line": "fstp    [esp+24h+arg_0]",
+    "line": "fstp    [esp+24h+treeCenter]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A81CB",
-    "line": "fld     [esp+24h+arg_0]",
+    "line": "fld     [esp+24h+treeCenter]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7A81CF",
-    "line": "mov     [esp+24h+arg_0], ecx",
+    "line": "mov     [esp+24h+treeCenter], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A81D3",
-    "line": "fld     [esp+24h+arg_8]",
+    "line": "fld     [esp+24h+lightScalar]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7A81D7",
-    "line": "lea     ecx, [esp+24h+var_18]",
+    "line": "lea     ecx, [esp+24h+referenceVector]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x7A81DD",
-    "line": "push    ecx",
+    "line": "push    ecx; color",
     "mnemonic": "push",
     "size": 1
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x7A81E0",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -667,19 +667,19 @@
   },
   {
     "ea": "0x7A81E8",
-    "line": "fstp    [esp+28h+arg_4]",
+    "line": "fstp    [esp+28h+lightPosition]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A81EC",
-    "line": "fild    [esp+28h+arg_0]",
+    "line": "fild    [esp+28h+treeCenter]",
     "mnemonic": "fild",
     "size": 4
   },
   {
     "ea": "0x7A81F0",
-    "line": "mov     [esp+28h+arg_0], edx",
+    "line": "mov     [esp+28h+treeCenter], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -709,13 +709,13 @@
   },
   {
     "ea": "0x7A8202",
-    "line": "fild    [esp+28h+arg_0]",
+    "line": "fild    [esp+28h+treeCenter]",
     "mnemonic": "fild",
     "size": 4
   },
   {
     "ea": "0x7A8206",
-    "line": "mov     [esp+28h+arg_0], eax",
+    "line": "mov     [esp+28h+treeCenter], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -733,7 +733,7 @@
   },
   {
     "ea": "0x7A8210",
-    "line": "fild    [esp+28h+arg_0]",
+    "line": "fild    [esp+28h+treeCenter]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -757,7 +757,7 @@
   },
   {
     "ea": "0x7A821E",
-    "line": "fld     [esp+28h+arg_4]",
+    "line": "fld     [esp+28h+lightPosition]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -781,7 +781,7 @@
   },
   {
     "ea": "0x7A8228",
-    "line": "fstp    [esp+28h+var_18]",
+    "line": "fstp    [esp+28h+referenceVector]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x7A823E",
-    "line": "call    sub_7A7F10",
+    "line": "call    OB_CBillboardLeaf_SetColor_010201A0; Static-shadow adjustment calls SetColor(...,true), multiplying decoded packed RGB by colorScaleByte/255 and quantizing again. This is the sole post-generation SetColor call that reapplies the scale.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,19 +1,32 @@
 {
-  "callees_count": 16,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x77A310",
+      "0x77A3E3"
+    ]
+  ],
+  "chunks_sha256": "6248033d0736c79e24da46aa5304e64ac1b6deabd4a44fa54e243c57662333fe",
+  "comment_regular": "Oblivion NiD3DShader geometry binder. Uses the currently selected ShaderDeclaration while packing normal or hardware-skinned geometry buffers, then binds every resulting vertex stream with SetStreamSource and binds the index buffer.\n\nDirectX10OBSE authority: Oblivion NiD3DShader geometry binder. Packs geometry, calls SetStreamSource for each BuffData stream, then SetIndices(BuffData->IB); DX10 bridge captures/restores streams and index bindings from this observed path.\nSpeedTreeOBSE v163 VERIFIED: selected declaration drives PackGeometryBuffers for rigid geometry. Plugin paired branch layout appends float4 TEXCOORD2 sourced from AGD3; unknown program queues retain native primary shaders, which ignore the extra element. Native render admission/visual behavior remain UNVERIFIED.",
+  "comment_repeatable": "Oblivion NiD3DShader geometry binder. Uses the currently selected ShaderDeclaration while packing normal or hardware-skinned geometry buffers, then binds every resulting vertex stream with SetStreamSource and binds the index buffer.\nDX11 input-assembly audit 2026-10-01: verified shader device+10 is the recipient. Binding tail writes streams0..StreamCount-1 using VBChip->VB(+8), offset0 and VertexStride[i], then writes IB(+30), including null. It does not use chip+0C offset as stream offset, does not clear higher stream slots and does not alter stream frequency. Binding occurs before SetupShaderPrograms in the rigid renderer. Skin partition argument retained as opaque record: its+28 buffer field is observed but full record type is not promoted.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_77A310",
+  "display_name": "NiD3DShader_BindGeometryBuffers",
   "end_ea": "0x77A3E3",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_77A310",
+  "name": "NiD3DShader_BindGeometryBuffers",
   "segment": ".text",
   "sha256": "6248033d0736c79e24da46aa5304e64ac1b6deabd4a44fa54e243c57662333fe",
   "size": 211,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x77A310",
-  "type": "NiGeometryBufferData *__thiscall(NiD3DShader *this, int, int, NiGeometryBufferData *, int)",
+  "total_chunk_size": 211,
+  "type": "NiGeometryBufferData *__thiscall(NiD3DShader *this, NiGeometry *geometry, void *skinPartitionRecord, NiGeometryBufferData *existingBuffer, unsigned int unused)",
   "xrefs_from_count": 99,
   "xrefs_to_count": 32
 }

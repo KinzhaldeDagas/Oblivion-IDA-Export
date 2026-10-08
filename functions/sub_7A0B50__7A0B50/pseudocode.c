@@ -1,27 +1,31 @@
-void __thiscall __noreturn sub_7A0B50(unsigned int *this, int a2)
+// Oblivion st_vector<SFrondGuide>::push_back specialization. Placement-deep-copies at end when capacity remains; otherwise delegates to the decoded checked insert-one path.
+void __thiscall OB_stVector_SFrondGuide_PushBack_010201A0(
+        OB_stVector_SFrondGuide_010201A0 *this,
+        const OB_SFrondGuide_010201A0 *value)
 {
-  unsigned int v3; // edi
+  OB_SFrondGuide_010201A0 *begin; // edi
   unsigned int v4; // ecx
-  _DWORD *v5; // edi
-  unsigned int v6; // ebx
-  int v7; // [esp+8h] [ebp-8h] BYREF
+  OB_SFrondGuide_010201A0 *end; // edi
+  OB_SFrondGuide_010201A0 *v6; // ebx
+  OB_stVectorIterator_SFrondGuide_010201A0 result; // [esp+8h] [ebp-8h] BYREF
 
-  v3 = *(this + 1);
-  if ( v3 )
-    v4 = (int)(*(this + 2) - v3) / 0x30;
+  begin = this->begin; /*0x7a0b57*/
+  if ( begin ) /*0x7a0b5c*/
+    v4 = this->end - begin; /*0x7a0b76*/
   else
-    v4 = 0;
-  if ( v3 )
+    v4 = 0; /*0x7a0b5e*/
+  if ( begin && v4 < this->capacityEnd - begin ) /*0x7a0b94*/
   {
-    if ( v4 < (int)(*(this + 3) - v3) / 0x30 )
-    {
-      v5 = (_DWORD *)*(this + 2);
-      LOBYTE(v7) = 0;
-      sub_79E190(v5, 1, a2);
-    }
+    end = this->end; /*0x7a0b9e*/
+    LOBYTE(result.owner) = 0; /*0x7a0ba1*/
+    OB_SFrondGuide_UninitializedFillN_010201A0(end, 1u, value); /*0x7a0bb1*/
+    this->end = end + 1; /*0x7a0bbc*/
   }
-  v6 = *(this + 2);
-  if ( v3 > v6 )
-    _invalid_parameter_noinfo();
-  sub_7A0A50(this, (int)&v7, this, v6, a2);
+  else
+  {
+    v6 = this->end; /*0x7a0bc8*/
+    if ( begin > v6 ) /*0x7a0bcd*/
+      _invalid_parameter_noinfo(); /*0x7a0bcf*/
+    OB_stVector_SFrondGuide_InsertOne_010201A0(this, &result, this, v6, value); /*0x7a0be2*/
+  }
 }

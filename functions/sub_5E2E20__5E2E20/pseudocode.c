@@ -1,132 +1,127 @@
-int *__thiscall sub_5E2E20(
+// Verified actor package movement helper. Finds a reachable PathGrid point for the requested destination; if it has outgoing connections, selects the first linked node and chooses a randomized intermediate position along that edge. Handles empty/unavailable PathGrids by falling back to terrain height or the actor's current position. Multiple HighProcess package-action callers establish the steering-position role.
+float *__thiscall Actor_ChoosePathGridSteeringPosition(
         TESObjectREFR *this,
-        int *arg0,
-        int a2,
-        int a4,
+        float *arg0,
+        NiPoint3 a2,
+        TESObjectCELL *a4,
         float a5,
-        TESObjectCELL *a6,
-        float a7,
-        int a3,
-        char a9)
+        float a3,
+        bool pathMode)
 {
-  TESObjectCELL *v9; // esi
-  char *v11; // eax
-  char *v12; // esi
-  char *v13; // eax
-  char *v14; // edi
-  char *v15; // eax
-  TESObjectREFRVtbl *v16; // edx
-  char *v17; // eax
-  float v18; // edi
-  float v19; // ebx
-  float v20; // ebp
-  float *v21; // eax
-  double v22; // st7
-  int v23; // esi
-  int v24; // edx
-  float v25; // ecx
-  float *v26; // eax
-  double v27; // st7
+  TESObjectCELL *v7; // esi
+  TESPathGridPoint *NearestReachablePointForActor; // eax
+  TESPathGridPoint *v10; // esi
+  BSSimpleList_VoidPtr *Connections; // eax
+  void *data; // edi
+  NiPoint3 *Position; // eax
+  TESObjectREFRVtbl *v14; // edx
+  NiPoint3 *v15; // eax
+  float v16; // edi
+  float v17; // ebx
+  float v18; // ebp
+  NiPoint3 *v19; // eax
+  double v20; // st7
+  float x; // esi
+  float y; // edx
+  float z; // ecx
+  NiPoint3 *v24; // eax
+  double v25; // st7
   TESObjectREFRVtbl *vtbl; // edx
-  int *v29; // eax
-  float *v30; // eax
-  double v32; // [esp+10h] [ebp-18h] BYREF
-  float v33; // [esp+18h] [ebp-10h]
-  float v34; // [esp+1Ch] [ebp-Ch]
-  float v35; // [esp+20h] [ebp-8h]
-  float v36; // [esp+24h] [ebp-4h]
+  float *v27; // eax
+  double v29; // [esp+10h] [ebp-18h] BYREF
+  float v30; // [esp+18h] [ebp-10h]
+  float v31; // [esp+1Ch] [ebp-Ch]
+  float v32; // [esp+20h] [ebp-8h]
+  float v33; // [esp+24h] [ebp-4h]
 
-  v9 = a6;
-  if ( !a6 )
-    goto LABEL_21;
-  if ( !sub_4AF170(a6) )
+  v7 = a4; /*0x5e2e26*/
+  if ( !a4 ) /*0x5e2e2f*/
+    goto LABEL_21; /*0x5e2e2f*/
+  if ( !sub_4AF170(a4) ) /*0x5e2e3e*/
   {
-    if ( !TESObjectCELL_IsInterior(v9) )
+    if ( !TESObjectCELL_IsInterior(v7) ) /*0x5e302d*/
     {
-      GetTerrainHeight(TES, (float *)&a2, (float *)&a3);
-      *(float *)&a3 = *(float *)&a3 + dbl_A46970;
-      if ( LOBYTE(a7) || a5 < (double)*(float *)&a3 )
-        a5 = *(float *)&a3;
+      GetTerrainHeight(MEMORY[0xB333A0], &a2.x, &a3); /*0x5e3046*/
+      a3 = a3 + dbl_A46970; /*0x5e305a*/
+      if ( LOBYTE(a5) || a2.z < (double)a3 ) /*0x5e306f*/
+        a2.z = a3; /*0x5e3071*/
     }
 LABEL_21:
-    v23 = a2;
-    v24 = a4;
-    v25 = a5;
-    goto LABEL_22;
+    x = a2.x; /*0x5e3079*/
+    y = a2.y; /*0x5e307d*/
+    z = a2.z; /*0x5e3081*/
+    goto LABEL_22; /*0x5e3081*/
   }
-  v11 = sub_67D820((int)&a2, this, a9, 0);
-  v12 = v11;
-  if ( !v11 )
-    goto LABEL_16;
-  v13 = sub_4E7DE0(v11);
-  if ( !v13 || !*((_DWORD *)v13 + 1) && !*(_DWORD *)v13 )
+  NearestReachablePointForActor = TESPathGrid_FindNearestReachablePointForActor(&a2, this, pathMode, 0); /*0x5e2e51*/
+  v10 = NearestReachablePointForActor; /*0x5e2e56*/
+  if ( !NearestReachablePointForActor ) /*0x5e2e5d*/
+    goto LABEL_16; /*0x5e2e5d*/
+  Connections = PathGraphNode_GetConnections(NearestReachablePointForActor); /*0x5e2e65*/
+  if ( !Connections || !Connections->firstNode.next && !Connections->firstNode.data ) /*0x5e2e78*/
   {
-    if ( !(_BYTE)a3
-      || (v27 = *((float *)sub_4BEF40(v12) + 2), vtbl = this->vtbl, v32 = v27, vtbl->GetPos(this)[2] == v27) )
+    if ( !LOBYTE(a3) /*0x5e2ff0*/
+      || (v25 = PathGraphNode_GetPosition(v10)->z, vtbl = this->vtbl, v29 = v25, vtbl->GetPos(this)[2] == v25) )
     {
-      v29 = (int *)sub_4BEF40(v12);
-      a2 = *v29;
-      a4 = v29[1];
-      a5 = *((float *)v29 + 2);
+      a2 = *PathGraphNode_GetPosition(v10); /*0x5e2ffb*/
     }
-    goto LABEL_16;
+    goto LABEL_16; /*0x5e2ffb*/
   }
-  v14 = *(char **)v13;
-  if ( !*(_DWORD *)v13
-    || (_BYTE)a3
-    && (v15 = sub_4BEF40(*(char **)v13),
-        v16 = this->vtbl,
-        v32 = *((float *)v15 + 2),
-        *(float *)&a3 = v32 - v16->GetPos(this)[2],
-        *(float *)&a3 = fabs(*(float *)&a3),
-        *(float *)&a3 >= (double)flt_A6B324) )
+  data = Connections->firstNode.data; /*0x5e2e81*/
+  if ( !Connections->firstNode.data /*0x5e2ed0*/
+    || LOBYTE(a3)
+    && (Position = PathGraphNode_GetPosition(Connections->firstNode.data),
+        v14 = this->vtbl,
+        v29 = Position->z,
+        a3 = v29 - v14->GetPos(this)[2],
+        a3 = fabs(a3),
+        a3 >= (double)flt_A6B324) )
   {
 LABEL_16:
-    v30 = this->vtbl->GetPos(this);
-    v23 = *(_DWORD *)v30;
-    a2 = *(_DWORD *)v30;
-    v24 = *((_DWORD *)v30 + 1);
-    a4 = v24;
-    v25 = v30[2];
-    goto LABEL_22;
+    v27 = this->vtbl->GetPos(this); /*0x5e300d*/
+    x = *v27; /*0x5e3019*/
+    a2.x = *v27; /*0x5e301b*/
+    y = v27[1]; /*0x5e301f*/
+    a2.y = y; /*0x5e3022*/
+    z = v27[2]; /*0x5e3026*/
+    goto LABEL_22; /*0x5e3029*/
   }
-  v17 = sub_4BEF40(v14);
-  v18 = *(float *)v17;
-  v19 = *((float *)v17 + 1);
-  v20 = *((float *)v17 + 2);
-  v34 = *(float *)v17;
-  v35 = v19;
-  v36 = v20;
-  v21 = (float *)sub_4BEF40(v12);
-  *(float *)&v32 = v34 - *v21;
-  *((float *)&v32 + 1) = v19 - v21[1];
-  v33 = v20 - v21[2];
-  a7 = sub_43F350((float *)&v32);
-  a3 = GetRandomLargeInteger_(0) % 0x3E8;
-  *(float *)&a3 = (double)a3 / dbl_A2FC70 * a7;
-  v22 = *(float *)&a3;
-  if ( *(float *)&a3 <= (double)a7 )
+  v15 = PathGraphNode_GetPosition(data); /*0x5e2ed8*/
+  v16 = v15->x; /*0x5e2edd*/
+  v17 = v15->y; /*0x5e2edf*/
+  v18 = v15->z; /*0x5e2ee2*/
+  v31 = v15->x; /*0x5e2ee7*/
+  v32 = v17; /*0x5e2eeb*/
+  v33 = v18; /*0x5e2eef*/
+  v19 = PathGraphNode_GetPosition(v10); /*0x5e2ef3*/
+  *(float *)&v29 = v31 - v19->x; /*0x5e2f02*/
+  *((float *)&v29 + 1) = v17 - v19->y; /*0x5e2f0d*/
+  v30 = v18 - v19->z; /*0x5e2f18*/
+  a5 = Vector3_NormalizeInPlace((float *)&v29); /*0x5e2f23*/
+  LODWORD(a3) = Game_RandomLargeInteger(0) % 0x3E8; /*0x5e2f37*/
+  a3 = (double)SLODWORD(a3) / dbl_A2FC70 * a5; /*0x5e2f4f*/
+  v20 = a3; /*0x5e2f5b*/
+  if ( a3 <= (double)a5 ) /*0x5e2f60*/
   {
-    v34 = *(float *)&v32 * v22;
-    v35 = *((float *)&v32 + 1) * v22;
-    v36 = v22 * v33;
-    v26 = (float *)sub_4BEF40(v12);
-    *(float *)&v32 = *v26 + v34;
-    v23 = LODWORD(v32);
-    *((float *)&v32 + 1) = v26[1] + v35;
-    v24 = HIDWORD(v32);
-    v33 = v26[2] + v36;
-    v25 = v33;
+    v31 = *(float *)&v29 * v20; /*0x5e2f77*/
+    v32 = *((float *)&v29 + 1) * v20; /*0x5e2f81*/
+    v33 = v20 * v30; /*0x5e2f89*/
+    v24 = PathGraphNode_GetPosition(v10); /*0x5e2f8d*/
+    *(float *)&v29 = v24->x + v31; /*0x5e2f98*/
+    x = *(float *)&v29; /*0x5e2f9c*/
+    *((float *)&v29 + 1) = v24->y + v32; /*0x5e2fa7*/
+    y = *((float *)&v29 + 1); /*0x5e2fab*/
+    v30 = v24->z + v33; /*0x5e2fb6*/
+    z = v30; /*0x5e2fba*/
   }
   else
   {
-    v23 = LODWORD(v18);
-    v24 = LODWORD(v19);
-    v25 = v20;
+    x = v16; /*0x5e2f64*/
+    y = v17; /*0x5e2f66*/
+    z = v18; /*0x5e2f68*/
   }
 LABEL_22:
-  *arg0 = v23;
-  arg0[1] = v24;
-  *((float *)arg0 + 2) = v25;
-  return arg0;
+  *arg0 = x; /*0x5e3085*/
+  arg0[1] = y; /*0x5e308e*/
+  arg0[2] = z; /*0x5e3091*/
+  return arg0; /*0x5e3089*/
 }

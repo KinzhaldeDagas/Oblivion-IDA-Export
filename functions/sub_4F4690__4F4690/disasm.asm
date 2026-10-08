@@ -9,7 +9,7 @@
 0x4F46A5: test    al, al
 0x4F46A7: jz      short loc_4F46D8
 0x4F46A9: mov     ecx, esi
-0x4F46AB: call    sub_5E3590
+0x4F46AB: call    sub_5E3590; Walk-speed branch used by sub_5E65B0 when run/swim/fly flags are absent. Calls Calc_WalkSpeed, then may clamp to package target actor's walk speed minus close-distance margin.
 0x4F46B0: mov     eax, [esp+4+arg_C]
 0x4F46B4: fst     qword ptr [eax]
 0x4F46B6: cmp     byte ptr ds:0B361ACh, 0

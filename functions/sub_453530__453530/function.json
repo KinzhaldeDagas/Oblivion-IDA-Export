@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
-  "callers_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x453530",
+      "0x45359B"
+    ]
+  ],
+  "chunks_sha256": "a0d69c1c2b4ca24ac094cf22b0815dc6fe96d537784259be7a167069407f50ab",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "Verified: created-form predicate at 45353F gates adjustment; RTTI cast TESObjectREFR -> clear bit4/set bit2; RTTI cast TESObjectCELL -> OR6; otherwise preserves flags. Used by LoadForm 463930, LoadGame 465FEE/4664CD and save-side normalization 4535A0. Unknown broader meanings of flag bits outside these form-specific uses.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 4,
-  "display_name": "sub_453530",
+  "display_name": "SaveLoad_AdjustCreatedFormChangeFlags",
   "end_ea": "0x45359B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_453530",
+  "name": "SaveLoad_AdjustCreatedFormChangeFlags",
   "segment": ".text",
   "sha256": "a0d69c1c2b4ca24ac094cf22b0815dc6fe96d537784259be7a167069407f50ab",
   "size": 107,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x453530",
-  "type": "unsigned int __stdcall(_DWORD *, unsigned int)",
+  "total_chunk_size": 107,
+  "type": "unsigned int __stdcall(TESForm *form, unsigned int flags)",
   "xrefs_from_count": 46,
   "xrefs_to_count": 4
 }

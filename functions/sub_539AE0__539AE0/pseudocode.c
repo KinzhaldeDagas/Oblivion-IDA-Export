@@ -1,4 +1,4 @@
-void *sub_539AE0()
+NiRTTI *sub_539AE0()
 {
-  return &unk_B365AC;
+  return &stru_B365AC; /*0x539ae5*/
 }

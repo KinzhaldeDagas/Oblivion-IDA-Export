@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x96F950",
-    "line": "lea     eax, [esp+3Ch+var_30]",
+    "line": "lea     eax, [esp+3Ch+other]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -235,19 +235,19 @@
   },
   {
     "ea": "0x96F9B5",
-    "line": "fadd    [esp+3Ch+var_30]",
+    "line": "fadd    [esp+3Ch+other.x]",
     "mnemonic": "fadd",
     "size": 4
   },
   {
     "ea": "0x96F9B9",
-    "line": "fstp    [esp+3Ch+var_30]",
+    "line": "fstp    [esp+3Ch+other.x]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x96F9BD",
-    "line": "fld     [esp+3Ch+var_2C]",
+    "line": "fld     [esp+3Ch+other.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -259,13 +259,13 @@
   },
   {
     "ea": "0x96F9C5",
-    "line": "fstp    [esp+3Ch+var_2C]",
+    "line": "fstp    [esp+3Ch+other.y]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x96F9C9",
-    "line": "fld     [esp+3Ch+var_28]",
+    "line": "fld     [esp+3Ch+other.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x96F9D1",
-    "line": "fstp    [esp+3Ch+var_28]",
+    "line": "fstp    [esp+3Ch+other.z]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -367,19 +367,19 @@
   },
   {
     "ea": "0x96FA00",
-    "line": "fadd    [esp+3Ch+var_24]",
+    "line": "fadd    [esp+3Ch+var_24.x]",
     "mnemonic": "fadd",
     "size": 4
   },
   {
     "ea": "0x96FA04",
-    "line": "fstp    [esp+3Ch+var_24]",
+    "line": "fstp    [esp+3Ch+var_24.x]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x96FA08",
-    "line": "fld     [esp+3Ch+var_20]",
+    "line": "fld     [esp+3Ch+var_24.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -391,13 +391,13 @@
   },
   {
     "ea": "0x96FA10",
-    "line": "fstp    [esp+3Ch+var_20]",
+    "line": "fstp    [esp+3Ch+var_24.y]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x96FA14",
-    "line": "fld     [esp+3Ch+var_1C]",
+    "line": "fld     [esp+3Ch+var_24.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -409,19 +409,19 @@
   },
   {
     "ea": "0x96FA1C",
-    "line": "fstp    [esp+3Ch+var_1C]",
+    "line": "fstp    [esp+3Ch+var_24.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x96FA20",
-    "line": "fld     [esp+3Ch+var_24]",
+    "line": "fld     [esp+3Ch+var_24.x]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x96FA24",
-    "line": "fsub    [esp+3Ch+var_30]",
+    "line": "fsub    [esp+3Ch+other.x]",
     "mnemonic": "fsub",
     "size": 4
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x96FA30",
-    "line": "fld     [esp+3Ch+var_20]",
+    "line": "fld     [esp+3Ch+var_24.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x96FA36",
-    "line": "fsub    [esp+3Ch+var_2C]",
+    "line": "fsub    [esp+3Ch+other.y]",
     "mnemonic": "fsub",
     "size": 4
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x96FA42",
-    "line": "fld     [esp+3Ch+var_1C]",
+    "line": "fld     [esp+3Ch+var_24.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x96FA49",
-    "line": "fsub    [esp+3Ch+var_28]",
+    "line": "fsub    [esp+3Ch+other.z]",
     "mnemonic": "fsub",
     "size": 4
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x96FA5A",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x96FA8F",
-    "line": "fadd    [esp+3Ch+var_30]",
+    "line": "fadd    [esp+3Ch+other.x]",
     "mnemonic": "fadd",
     "size": 4
   },
@@ -625,13 +625,13 @@
   },
   {
     "ea": "0x96FA94",
-    "line": "fstp    [esp+38h+var_24]",
+    "line": "fstp    [esp+38h+var_24.x]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x96FA98",
-    "line": "mov     eax, [esp+38h+var_24]",
+    "line": "mov     eax, [esp+38h+var_24.x]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -649,19 +649,19 @@
   },
   {
     "ea": "0x96FAA3",
-    "line": "fadd    [esp+38h+var_2C]",
+    "line": "fadd    [esp+38h+other.y]",
     "mnemonic": "fadd",
     "size": 4
   },
   {
     "ea": "0x96FAA7",
-    "line": "fstp    [esp+38h+var_20]",
+    "line": "fstp    [esp+38h+var_24.y]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x96FAAB",
-    "line": "mov     ecx, [esp+38h+var_20]",
+    "line": "mov     ecx, [esp+38h+var_24.y]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -679,19 +679,19 @@
   },
   {
     "ea": "0x96FAB6",
-    "line": "fadd    [esp+38h+var_28]",
+    "line": "fadd    [esp+38h+other.z]",
     "mnemonic": "fadd",
     "size": 4
   },
   {
     "ea": "0x96FABA",
-    "line": "fstp    [esp+38h+var_1C]",
+    "line": "fstp    [esp+38h+var_24.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x96FABE",
-    "line": "mov     edx, [esp+38h+var_1C]",
+    "line": "mov     edx, [esp+38h+var_24.z]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -721,13 +721,13 @@
   },
   {
     "ea": "0x96FACC",
-    "line": "fld     [esp+38h+var_24]",
+    "line": "fld     [esp+38h+var_24.x]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x96FAD0",
-    "line": "fadd    [esp+38h+var_30]",
+    "line": "fadd    [esp+38h+other.x]",
     "mnemonic": "fadd",
     "size": 4
   },
@@ -739,13 +739,13 @@
   },
   {
     "ea": "0x96FAD8",
-    "line": "fld     [esp+38h+var_20]",
+    "line": "fld     [esp+38h+var_24.y]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x96FADC",
-    "line": "fadd    [esp+38h+var_2C]",
+    "line": "fadd    [esp+38h+other.y]",
     "mnemonic": "fadd",
     "size": 4
   },
@@ -757,13 +757,13 @@
   },
   {
     "ea": "0x96FAE4",
-    "line": "fld     [esp+38h+var_1C]",
+    "line": "fld     [esp+38h+var_24.z]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x96FAE8",
-    "line": "fadd    [esp+38h+var_28]",
+    "line": "fadd    [esp+38h+other.z]",
     "mnemonic": "fadd",
     "size": 4
   },
@@ -829,13 +829,13 @@
   },
   {
     "ea": "0x96FB0F",
-    "line": "lea     eax, [esp+38h+var_30]",
+    "line": "lea     eax, [esp+38h+other]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x96FB13",
-    "line": "push    eax",
+    "line": "push    eax; other",
     "mnemonic": "push",
     "size": 1
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x96FB23",
-    "line": "lea     ecx, [esp+3Ch+var_24]",
+    "line": "lea     ecx, [esp+3Ch+var_24]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -889,7 +889,7 @@
   },
   {
     "ea": "0x96FB32",
-    "line": "call    sub_8AA390",
+    "line": "call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -907,7 +907,7 @@
   },
   {
     "ea": "0x96FB3B",
-    "line": "fld     [esp+38h+var_24]",
+    "line": "fld     [esp+38h+var_24.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -919,7 +919,7 @@
   },
   {
     "ea": "0x96FB42",
-    "line": "fsub    [esp+38h+var_30]",
+    "line": "fsub    [esp+38h+other.x]",
     "mnemonic": "fsub",
     "size": 4
   },
@@ -937,7 +937,7 @@
   },
   {
     "ea": "0x96FB4E",
-    "line": "fld     [esp+38h+var_20]",
+    "line": "fld     [esp+38h+var_24.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -949,7 +949,7 @@
   },
   {
     "ea": "0x96FB54",
-    "line": "fsub    [esp+38h+var_2C]",
+    "line": "fsub    [esp+38h+other.y]",
     "mnemonic": "fsub",
     "size": 4
   },
@@ -967,7 +967,7 @@
   },
   {
     "ea": "0x96FB60",
-    "line": "fld     [esp+38h+var_1C]",
+    "line": "fld     [esp+38h+var_24.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -979,7 +979,7 @@
   },
   {
     "ea": "0x96FB67",
-    "line": "fsub    [esp+38h+var_28]",
+    "line": "fsub    [esp+38h+other.z]",
     "mnemonic": "fsub",
     "size": 4
   },
@@ -1003,7 +1003,7 @@
   },
   {
     "ea": "0x96FB76",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },

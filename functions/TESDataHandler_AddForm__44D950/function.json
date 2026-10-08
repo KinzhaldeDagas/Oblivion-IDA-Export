@@ -1,19 +1,32 @@
 {
-  "callees_count": 50,
-  "callers_count": 8,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 36,
+  "callers_count": 11,
+  "chunks": [
+    [
+      "0x44D950",
+      "0x44DC44"
+    ]
+  ],
+  "chunks_sha256": "ac589d1aa1fca27fb526f2449b0e23845b96d05d506269411885783a5f422306",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 7,
+  "comment_repeatable": "Verified registration path: switches on TESForm+4 type byte. TESGlobal ctor 4F9604 writes type 4; case 4 pushes the form into TESDataHandler.listGlobals at self+0x74 (self+0x1D pointers) and returns success. Called from TESDataHandler_LoadFormRecord 44E596; this list is consumed by TESSaveLoadGame_LoadGlobalValues.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 8,
   "display_name": "TESDataHandler_AddForm",
   "end_ea": "0x44DC44",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "TESDataHandler_AddForm",
   "segment": ".text",
   "sha256": "ac589d1aa1fca27fb526f2449b0e23845b96d05d506269411885783a5f422306",
   "size": 756,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x44D950",
-  "type": "char __userpurge@<al>(TESWorldSpace **this@<ecx>, double st5_0@<st2>, double@<st1>, double@<st0>, unsigned __int8 *)",
+  "total_chunk_size": 756,
+  "type": "char __userpurge@<al>(TESDataHandler *self@<ecx>, double arg2@<st2>, double arg3@<st1>, double arg4@<st0>, TESForm *form)",
   "xrefs_from_count": 357,
   "xrefs_to_count": 11
 }

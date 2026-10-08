@@ -1,134 +1,141 @@
-void __fastcall sub_79A000(_DWORD *a1, float a2)
+// SpeedTree decode: stock CFrondEngine::EndGuide. Computes guide length from vertex positions, selects frond texture/aspect/size/angle, writes map index/radius/offset, and stores surface area as lodSizeScalar * length.
+void __thiscall OB_CFrondEngine_EndGuide_010201A0(OB_CFrondEngine_010201A0 *this, float lodSizeScalar)
 {
-  int v4; // eax
-  unsigned int v5; // ebx
-  int v6; // eax
-  unsigned int v7; // esi
-  int v8; // eax
-  int v9; // esi
-  int v10; // eax
-  int v11; // ebp
-  int v12; // eax
-  double v13; // st7
-  float *v14; // eax
-  float v15; // ecx
-  double v16; // st4
-  double v17; // st6
-  double v18; // st7
-  int v19; // eax
-  int v20; // eax
-  int v21; // eax
-  unsigned int v22; // ebx
-  unsigned int v23; // edx
-  int v24; // eax
-  int v25; // ebx
-  double v26; // st7
-  unsigned int v27; // ebx
-  int v28; // eax
-  double v29; // st7
-  unsigned int v30; // ebx
-  int v31; // eax
-  int v32; // eax
-  int v33; // ebp
-  unsigned int v34; // ebx
-  double v35; // st7
-  int v36; // eax
-  double v37; // st7
-  char v38; // [esp+1Fh] [ebp-19h] BYREF
-  float v39; // [esp+20h] [ebp-18h]
-  __int64 v40; // [esp+24h] [ebp-14h]
-  unsigned int v41; // [esp+34h] [ebp-4h]
+  void *begin; // eax
+  unsigned int v4; // ebx
+  int v5; // eax
+  unsigned int v6; // esi
+  void *v7; // eax
+  const OB_stVector16_010201A0 *v8; // esi
+  void *v9; // eax
+  char *v10; // ebp
+  char *v11; // eax
+  double v12; // st7
+  float *v13; // eax
+  float v14; // ecx
+  double v15; // st4
+  double v16; // st6
+  double v17; // st7
+  void *v18; // eax
+  void *v19; // eax
+  void *v20; // eax
+  unsigned int v21; // ebx
+  unsigned int v22; // edx
+  void *v23; // eax
+  int v24; // ebx
+  double v25; // st7
+  unsigned int end_low; // ebx
+  void *v27; // eax
+  double v28; // st7
+  unsigned int v29; // ebx
+  void *v30; // eax
+  char *v31; // eax
+  float *v32; // ebp
+  unsigned int v33; // ebx
+  double v34; // st7
+  void *v35; // eax
+  double v36; // st7
+  OB_stRandom_010201A0 v37; // [esp+1Fh] [ebp-19h] BYREF
+  float v38; // [esp+20h] [ebp-18h]
+  __int64 Uniform_010201A0; // [esp+24h] [ebp-14h]
+  unsigned int v40; // [esp+34h] [ebp-4h]
 
-  v4 = a1[3];
-  v5 = 0;
-  if ( v4 )
-    v6 = (a1[4] - v4) / 0x30;
+  begin = this->guideVectorWrapper.begin; /*0x79a029*/
+  v4 = 0; /*0x79a02c*/
+  if ( begin ) /*0x79a030*/
+    v5 = ((char *)this->guideVectorWrapper.end - (char *)begin) / 0x30; /*0x79a04a*/
   else
-    v6 = 0;
-  v7 = v6 - 1;
-  v8 = a1[3];
-  if ( !v8 || v7 >= (a1[4] - v8) / 0x30 )
-    _invalid_parameter_noinfo();
-  v9 = a1[3] + 0x30 * v7;
-  if ( sub_799EE0((_DWORD *)v9) != 1 )
+    v5 = 0; /*0x79a032*/
+  v6 = v5 - 1; /*0x79a04c*/
+  v7 = this->guideVectorWrapper.begin; /*0x79a04f*/
+  if ( !v7 || v6 >= ((char *)this->guideVectorWrapper.end - (char *)v7) / 0x30 ) /*0x79a06e*/
+    _invalid_parameter_noinfo(0, (int)this, v6); /*0x79a070*/
+  v8 = (const OB_stVector16_010201A0 *)((char *)this->guideVectorWrapper.begin + 0x30 * v6); /*0x79a07b*/
+  if ( OB_stVector_SFrondVertex_Size_010201A0(v8) != 1 ) /*0x79a088*/
   {
-    v39 = 0.0;
-    do
+    v38 = 0.0; /*0x79a08e*/
+    do /*0x79a147*/
     {
-      v10 = *(_DWORD *)(v9 + 4);
-      if ( !v10 || v5 + 1 >= (*(_DWORD *)(v9 + 8) - v10) / 0x38 )
-        _invalid_parameter_noinfo();
-      v11 = *(_DWORD *)(v9 + 4);
-      if ( !v11 || v5 >= (*(_DWORD *)(v9 + 8) - v11) / 0x38 )
-        _invalid_parameter_noinfo();
-      v12 = *(_DWORD *)(v9 + 4);
-      v13 = *(float *)(LODWORD(v39) + v11 + 0x3C) - *(float *)(v12 + LODWORD(v39) + 4);
-      v14 = (float *)(LODWORD(v39) + v12);
-      LODWORD(v15) = LODWORD(v39) + 0x38;
-      ++v5;
-      v16 = *(float *)(LODWORD(v39) + v11 + 0x38) - *v14;
-      v17 = *(float *)(LODWORD(v39) + 0x38 + v11 + 8) - v14[2];
-      v39 = v13 * v13 + v16 * v16 + v17 * v17;
-      v18 = COERCE_FLOAT((SLODWORD(v39) >> 1) + 0x1FC00000);
-      v39 = v15;
-      *(float *)(v9 + 0x10) = v18 + *(float *)(v9 + 0x10);
+      v9 = v8->begin; /*0x79a092*/
+      if ( !v9 || v4 + 1 >= ((char *)v8->end - (char *)v9) / 0x38 ) /*0x79a0b6*/
+        _invalid_parameter_noinfo(v4, (int)this, (int)v8); /*0x79a0b8*/
+      v10 = (char *)v8->begin; /*0x79a0bd*/
+      if ( !v10 || v4 >= ((char *)v8->end - (char *)v10) / 0x38 ) /*0x79a0de*/
+        _invalid_parameter_noinfo(v4, (int)this, (int)v8); /*0x79a0e0*/
+      v11 = (char *)v8->begin; /*0x79a0ed*/
+      v12 = *(float *)&v10[LODWORD(v38) + 0x3C] - *(float *)&v11[LODWORD(v38) + 4]; /*0x79a0f0*/
+      v13 = (float *)&v11[LODWORD(v38)]; /*0x79a0f4*/
+      LODWORD(v14) = LODWORD(v38) + 0x38; /*0x79a0fa*/
+      ++v4; /*0x79a0ff*/
+      v15 = *(float *)&v10[LODWORD(v38) + 0x38] - *v13; /*0x79a109*/
+      v16 = *(float *)&v10[LODWORD(v38) + 0x40] - v13[2]; /*0x79a111*/
+      v38 = v12 * v12 + v15 * v15 + v16 * v16; /*0x79a119*/
+      v17 = COERCE_FLOAT((SLODWORD(v38) >> 1) + 0x1FC00000); /*0x79a12d*/
+      v38 = v14; /*0x79a131*/
+      *(float *)&v8[1].allocatorState = v17 + *(float *)&v8[1].allocatorState; /*0x79a13a*/
     }
-    while ( v5 < sub_799EE0((_DWORD *)v9) - 1 );
+    while ( v4 < OB_stVector_SFrondVertex_Size_010201A0(v8) - 1 ); /*0x79a147*/
   }
-  sub_78EAF0(&v38);
-  v19 = a1[0x11];
-  v41 = 0;
-  if ( v19 && (a1[0x12] - v19) / 0x2C )
+  OB_stRandom_ctor_010201A0(&v37); /*0x79a151*/
+  v18 = this->frondTextureVectorWrapper.begin;  // CFrondEngine::EndGuide reads the decoded SFrondTexture vector at +0x40; each 0x2C-byte entry supplies aspect ratio, size scale, and angle-offset limits for the chosen map index. /*0x79a156*/
+  v40 = 0; /*0x79a15b*/
+  if ( v18 && ((char *)this->frondTextureVectorWrapper.end - (char *)v18) / 0x2C ) /*0x79a179*/
   {
-    v21 = a1[0x11];
-    if ( v21 )
-      v22 = (a1[0x12] - v21) / 0x2C;
+    v20 = this->frondTextureVectorWrapper.begin; /*0x79a1c7*/
+    if ( v20 ) /*0x79a1cc*/
+      v21 = ((char *)this->frondTextureVectorWrapper.end - (char *)v20) / 0x2C; /*0x79a1e6*/
     else
-      v22 = 0;
-    v40 = (__int64)sub_78EA00(0.0, flt_A3F3D8);
-    v23 = (unsigned int)v40 % v22;
-    *(_BYTE *)(v9 + 0x18) = (unsigned int)v40 % v22;
-    v24 = a1[0x11];
-    v25 = (unsigned __int8)v23;
-    if ( !v24 || (unsigned __int8)v23 >= (unsigned int)((a1[0x12] - v24) / 0x2C) )
-      _invalid_parameter_noinfo();
-    v26 = *(float *)(0x2C * v25 + a1[0x11] + 0x1C);
-    v27 = *(unsigned __int8 *)(v9 + 0x18);
-    *(float *)(v9 + 0x14) = v26 * *(float *)(v9 + 0x10) * dbl_A2FAA0;
-    v28 = a1[0x11];
-    if ( !v28 || v27 >= (a1[0x12] - v28) / 0x2C )
-      _invalid_parameter_noinfo();
-    v29 = *(float *)(0x2C * v27 + a1[0x11] + 0x20);
-    v30 = *(unsigned __int8 *)(v9 + 0x18);
-    *(float *)(v9 + 0x14) = v29 * *(float *)(v9 + 0x14);
-    v31 = a1[0x11];
-    if ( !v31 || v30 >= (a1[0x12] - v31) / 0x2C )
-      _invalid_parameter_noinfo();
-    v32 = a1[0x11];
-    v33 = v32 + 0x2C * v30;
-    v34 = *(unsigned __int8 *)(v9 + 0x18);
-    if ( !v32 || v34 >= (a1[0x12] - v32) / 0x2C )
-      _invalid_parameter_noinfo();
-    *(float *)&v40 = sub_78EA00(*(float *)(a1[0x11] + 0x2C * v34 + 0x24), *(float *)(v33 + 0x28));
-    v35 = *(float *)&v40;
-    *(float *)(v9 + 0x1C) = *(float *)&v40;
-    v36 = a1[3];
-    if ( v36 )
-      v36 = (a1[4] - v36) / 0x30;
-    if ( (v36 & 1) != 0 )
-      *(float *)(v9 + 0x1C) = v35 * dbl_A3D360;
+      v21 = 0; /*0x79a1ce*/
+    Uniform_010201A0 = (__int64)OB_stRandom_GetUniform_010201A0(&v37, 0.0, flt_A3F3D8); /*0x79a21b*/
+    v22 = (unsigned int)Uniform_010201A0 % v21; /*0x79a223*/
+    LOBYTE(v8[1].end) = (unsigned int)Uniform_010201A0 % v21; /*0x79a229*/
+    v23 = this->frondTextureVectorWrapper.begin; /*0x79a22c*/
+    v24 = (unsigned __int8)v22; /*0x79a231*/
+    if ( !v23 /*0x79a24e*/
+      || (unsigned __int8)v22 >= (unsigned int)(((char *)this->frondTextureVectorWrapper.end - (char *)v23) / 0x2C) )
+    {
+      _invalid_parameter_noinfo((unsigned __int8)v22, (int)this, (int)v8); /*0x79a250*/
+    }
+    v25 = *((float *)this->frondTextureVectorWrapper.begin + 0xB * v24 + 7); /*0x79a25b*/
+    end_low = LOBYTE(v8[1].end); /*0x79a25f*/
+    *(float *)&v8[1].begin = v25 * *(float *)&v8[1].allocatorState * dbl_A2FAA0; /*0x79a26c*/
+    v27 = this->frondTextureVectorWrapper.begin; /*0x79a26f*/
+    if ( !v27 || end_low >= ((char *)this->frondTextureVectorWrapper.end - (char *)v27) / 0x2C ) /*0x79a28e*/
+      _invalid_parameter_noinfo(end_low, (int)this, (int)v8); /*0x79a290*/
+    v28 = *((float *)this->frondTextureVectorWrapper.begin + 0xB * end_low + 8); /*0x79a29b*/
+    v29 = LOBYTE(v8[1].end); /*0x79a29f*/
+    *(float *)&v8[1].begin = v28 * *(float *)&v8[1].begin; /*0x79a2a6*/
+    v30 = this->frondTextureVectorWrapper.begin; /*0x79a2a9*/
+    if ( !v30 || v29 >= ((char *)this->frondTextureVectorWrapper.end - (char *)v30) / 0x2C ) /*0x79a2c8*/
+      _invalid_parameter_noinfo(v29, (int)this, (int)v8); /*0x79a2ca*/
+    v31 = (char *)this->frondTextureVectorWrapper.begin; /*0x79a2cf*/
+    v32 = (float *)&v31[0x2C * v29]; /*0x79a2da*/
+    v33 = LOBYTE(v8[1].end); /*0x79a2dc*/
+    if ( !v31 || v33 >= ((char *)this->frondTextureVectorWrapper.end - (char *)v31) / 0x2C ) /*0x79a2fa*/
+      _invalid_parameter_noinfo(v33, (int)this, (int)v8); /*0x79a2fc*/
+    *(float *)&Uniform_010201A0 = OB_stRandom_GetUniform_010201A0( /*0x79a320*/
+                                    &v37,
+                                    *((float *)this->frondTextureVectorWrapper.begin + 0xB * v33 + 9),
+                                    v32[0xA]);
+    v34 = *(float *)&Uniform_010201A0; /*0x79a324*/
+    v8[1].capacityEnd = (void *)Uniform_010201A0; /*0x79a328*/
+    v35 = this->guideVectorWrapper.begin; /*0x79a32b*/
+    if ( v35 ) /*0x79a330*/
+      v35 = (void *)(((char *)this->guideVectorWrapper.end - (char *)v35) / 0x30); /*0x79a346*/
+    if ( ((unsigned __int8)v35 & 1) != 0 ) /*0x79a34a*/
+      *(float *)&v8[1].capacityEnd = v34 * dbl_A3D360; /*0x79a352*/
   }
   else
   {
-    v20 = a1[3];
-    if ( !v20 || v5 >= (a1[4] - v20) / 0x30 )
-      _invalid_parameter_noinfo();
-    *(_BYTE *)(0x30 * v5 + a1[3] + 0x18) = 0;
-    *(float *)(v9 + 0x14) = *(float *)(v9 + 0x10) * dbl_A2FAA0;
-    *(float *)(v9 + 0x1C) = 0.0;
+    v19 = this->guideVectorWrapper.begin; /*0x79a17d*/
+    if ( !v19 || v4 >= ((char *)this->guideVectorWrapper.end - (char *)v19) / 0x30 ) /*0x79a19c*/
+      _invalid_parameter_noinfo(v4, (int)this, (int)v8); /*0x79a19e*/
+    *((_BYTE *)this->guideVectorWrapper.begin + 0x30 * v4 + 0x18) = 0; /*0x79a1ac*/
+    *(float *)&v8[1].begin = *(float *)&v8[1].allocatorState * dbl_A2FAA0; /*0x79a1ba*/
+    *(float *)&v8[1].capacityEnd = 0.0; /*0x79a1bf*/
   }
-  v37 = a2 * *(float *)(v9 + 0x10);
-  v41 = 0xFFFFFFFF;
-  *(float *)(v9 + 0x20) = v37;
-  TESTexture::ClearComponentReferences(&v38);
+  v36 = lodSizeScalar * *(float *)&v8[1].allocatorState; /*0x79a361*/
+  v40 = 0xFFFFFFFF; /*0x79a364*/
+  *(float *)&v8[2].allocatorState = v36; /*0x79a36c*/
+  Shared_NoOpVirtual_60D0A0(&v37); /*0x79a36f*/
 }

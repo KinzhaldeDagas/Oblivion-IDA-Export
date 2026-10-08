@@ -1,4 +1,4 @@
-0x4114E0: push    0FFFFFFFFh
+0x4114E0: push    0FFFFFFFFh; MoonSugarEffect decode: SceneGraph constructor creates camera at +0xDC and cullingProcess at +0xE4; world scenegraph uses these in NiRenderer_Render.
 0x4114E2: push    offset ??0SceneGraph@@QAE@XZ_SEH
 0x4114E7: mov     eax, large fs:0
 0x4114ED: push    eax
@@ -42,16 +42,16 @@
 0x41156A: cmp     eax, esi
 0x41156C: mov     byte ptr [esp+58h+var_4], 2
 0x411571: jz      short loc_41157D
-0x411573: push    esi
-0x411574: mov     ecx, eax
-0x411576: call    NiCullingProcess_NiCullingProcess
+0x411573: push    esi; visibleArray
+0x411574: mov     ecx, eax; self
+0x411576: call    NiCullingProcess_NiCullingProcess; Oblivion NiCullingProcess constructor: initializes append mode, visible-geometry storage, camera state, and culling-plane state.
 0x41157B: jmp     short loc_41157F
 0x41157D: xor     eax, eax
-0x41157F: mov     ecx, offset stru_B34448; this
+0x41157F: mov     ecx, 0B34448h; this
 0x411584: mov     byte ptr [esp+58h+var_4], 1
 0x411589: mov     [ebp+0E4h], eax
 0x41158F: mov     [ebp+0E0h], esi
-0x411595: call    sub_7616D0
+0x411595: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x41159A: push    edi
 0x41159B: mov     esi, eax
 0x41159D: push    offset aSrootNode; "%sRoot Node"
@@ -84,10 +84,10 @@
 0x4115F4: push    esi; Src
 0x4115F5: mov     ecx, edi
 0x4115F7: call    NiObjectNET_SetName
-0x4115FC: push    1
-0x4115FE: push    edi
-0x4115FF: mov     ecx, ebp
-0x411601: call    NiNode__AddObject
+0x4115FC: push    1; firstAvailableSlot
+0x4115FE: push    edi; child
+0x4115FF: mov     ecx, ebp; this
+0x411601: call    NiNode__AddObject; Adds child to this NiNode after reference protection and reparent/detach. firstAvailableSlot selects hole reuse versus append/grow behavior.
 0x411606: mov     eax, [esp+58h+a2]
 0x41160A: test    eax, eax
 0x41160C: jz      short loc_41161B
@@ -154,7 +154,7 @@
 0x4116DA: mov     ecx, ebp; this
 0x4116DC: fstp    dword ptr [eax+108h]
 0x4116E2: mov     ebx, [ebx]
-0x4116E4: call    GetFarPlane
+0x4116E4: call    GetFarPlane; Fog interior decode: GetFarPlane uses TESObjectCELL::LightingData fogClipDistance (+0x20) for interior mode 1 when available.
 0x4116E9: fdiv    NearDistance
 0x4116EF: push    1; a3
 0x4116F1: push    ecx
@@ -162,7 +162,7 @@
 0x4116F4: fstp    dword ptr [ebx+10Ch]
 0x4116FA: fld     g_DefaulFOV
 0x411700: fstp    [esp+60h+var_60]; a2
-0x411703: call    SetCameraFOV_0
+0x411703: call    SetCameraFOV_0; MoonSugarEffect decode: SetCameraFOV_0 rebuilds SceneGraph camera frustum, max far/near ratio, camera LODAdjust, and leaves persistent camera state. Avoid for per-frame Moon Sugar wobble.
 0x411708: mov     ecx, ebp
 0x41170A: call    sub_411100
 0x41170F: mov     eax, ebp
@@ -175,3 +175,30 @@
 0x411720: pop     ebx
 0x411721: add     esp, 44h
 0x411724: retn    0Ch
+0x9AAD00: mov     ecx, [ebp-44h]; this
+0x9AAD03: jmp     ??1NiBSPNode@@UAE@XZ; NiBSPNode::~NiBSPNode(void)
+0x9AAD08: mov     ecx, [ebp-44h]
+0x9AAD0B: add     ecx, 0DCh ; 'Ü'; slot
+0x9AAD11: jmp     NiPointerSlot_Release
+0x9AAD16: mov     eax, [ebp+8]
+0x9AAD19: push    eax
+0x9AAD1A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AAD1F: pop     ecx
+0x9AAD20: retn
+0x9AAD21: mov     eax, [ebp+8]
+0x9AAD24: push    eax
+0x9AAD25: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AAD2A: pop     ecx
+0x9AAD2B: retn
+0x9AAD2C: mov     eax, [ebp+8]
+0x9AAD2F: push    eax
+0x9AAD30: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AAD35: pop     ecx
+0x9AAD36: retn
+0x9AAD37: mov     edx, [esp+arg_4]
+0x9AAD3B: lea     eax, [edx-48h]
+0x9AAD3E: mov     ecx, [edx-4Ch]
+0x9AAD41: xor     ecx, eax
+0x9AAD43: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AAD48: mov     eax, offset stru_AD7C20
+0x9AAD4D: jmp     ___CxxFrameHandler3

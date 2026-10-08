@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x515920",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified via SexChange string 0xA50D84 -> CommandInfo 0xB0BC68 -> execute pointer +0x18. Toggles actor base sex bit at NPC+0x28; component virtual +0x50 receives change mask 0x10. With 3D, detaches both face nodes through parent virtual +0x88 and releases temporary refs. Always clears NPC FaceGen nodes, then process virtual +0x5C(), +0x31C(1), +0x318(actor). Double invocation restores sex bit while repeating invalidation. Not proof of load defect or of immediate texture repair; dynamic process targets remain to be traced.",
     "mnemonic": "push",
     "size": 2
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x515947",
-    "line": "mov     edi, [esp+28h+arg_8]",
+    "line": "mov     edi, [esp+28h+slot]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -205,13 +205,13 @@
   },
   {
     "ea": "0x515983",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x515985",
-    "line": "call    sub_5E32D0",
+    "line": "call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x5159B0",
-    "line": "mov     [esp+28h+arg_8], ebx",
+    "line": "mov     [esp+28h+slot], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x5159BF",
-    "line": "mov     [esp+28h+arg_8], eax",
+    "line": "mov     [esp+28h+slot], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x5159ED",
-    "line": "cmp     [esp+28h+arg_8], ebx",
+    "line": "cmp     [esp+28h+slot], ebx",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x515A14",
-    "line": "lea     eax, [esp+2Ch+arg_8]",
+    "line": "lea     eax, [esp+2Ch+slot]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -535,13 +535,13 @@
   },
   {
     "ea": "0x515A1B",
-    "line": "lea     ecx, [esp+28h+arg_8]; this",
+    "line": "lea     ecx, [esp+28h+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x515A1F",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -643,25 +643,25 @@
   },
   {
     "ea": "0x515A4C",
-    "line": "lea     ecx, [esp+28h+Format]; this",
+    "line": "lea     ecx, [esp+28h+Format]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x515A50",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x515A55",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x515A57",
-    "line": "call    sub_405CE0",
+    "line": "call    TESNPC_ClearFaceGenNodes; SexChange reconstruction boundary: clears NPC cached face nodes (+0x1D4,+0x1D8) after detaching live nodes. Targeted OCO load investigation breakpoint: capture node identities, sex bit, age projections before/after. Candidate repair primitive only; not yet sufficient as standalone post-load correction.",
     "mnemonic": "call",
     "size": 5
   },
@@ -685,7 +685,7 @@
   },
   {
     "ea": "0x515A64",
-    "line": "call    edx",
+    "line": "call    edx; SexChange invokes actor->process vtable+0x5C with no explicit arguments. Record concrete process vtable/target during reproduction; do not assume semantic meaning from Unk_17.",
     "mnemonic": "call",
     "size": 2
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x515A73",
-    "line": "call    edx",
+    "line": "call    edx; SexChange invokes actor->process vtable+0x31C with integer 1, then +0x318(actor) at 0x515A81. Exact targets/lifecycle timing require runtime evidence.",
     "mnemonic": "call",
     "size": 2
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x515AC3",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -934,5 +934,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9B5BD0",
+    "line": "lea     ecx, [ebp-14h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5BD3",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5BD8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B5BDC",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5BDF",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5BE2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B5BE4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5BE9",
+    "line": "mov     eax, offset stru_AE0BB4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5BEE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

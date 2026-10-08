@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x67ED30",
+      "0x67ED45"
+    ]
+  ],
+  "chunks_sha256": "9d37d6e4ab47a080aa3052c764ae90f68ed19b5a02af8e5af903968977fa68cb",
+  "comment_regular": "Verified sets/clears stateFlags bit 0x10 from the result of Actor_IsUnderwater during point traversal-cost evaluation.",
+  "comment_repeatable": "Verified sets/clears stateFlags bit 0x10 from the result of Actor_IsUnderwater during point traversal-cost evaluation.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_67ED30",
+  "display_name": "PathGraphNode_SetUnderwaterCache",
   "end_ea": "0x67ED45",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_67ED30",
+  "name": "PathGraphNode_SetUnderwaterCache",
   "segment": ".text",
   "sha256": "9d37d6e4ab47a080aa3052c764ae90f68ed19b5a02af8e5af903968977fa68cb",
   "size": 21,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x67ED30",
-  "type": "void __thiscall(_BYTE *this, char)",
+  "total_chunk_size": 21,
+  "type": "void __thiscall(void *this, bool value)",
   "xrefs_from_count": 5,
   "xrefs_to_count": 1
 }

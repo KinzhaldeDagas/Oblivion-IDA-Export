@@ -1,64 +1,108 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "TESObjectDOORMembr",
+  "definition": "struct TESObjectDOORMembr\n{\nTESBoundObjectMembr super;\nTESFullName fullName;\nTESModel model;\nTESScriptableForm scriptable;\nUInt32 basePad;\nTESSound *animSounds[3];\nTESObjectDOORFlags doorFlags; ///< Verified byte doorFlags; bit 0x08 is the MinUse flag tested by TESObjectDOOR_HasMinUseFlag.\nUInt8 pad[3];\nTESObjectDOOR_RandomTeleportSpaceNode randomTeleport; ///< Verified TNAM record path: TESObjectDOOR_LoadForm appends raw 32-bit FormIDs; TESObjectDOOR_DoPostFixup rebases/resolves them to TESForm* and removes missing targets; TESObjectDOOR_SaveForm writes each referenced TESForm.refID; TESObjectDOOR_CopyFormData clones the list nodes; the destructor frees them. Probable semantic role: random-teleport destination spaces.\n}\n",
   "id": 18374686479672049855,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00053.",
       "name": "super",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 32
+      "size": 32,
+      "type": "TESBoundObjectMembr"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00054.",
       "name": "fullName",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 12
+      "size": 12,
+      "type": "TESFullName"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00055.",
       "name": "model",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 24
+      "offset_hex": "0x2C",
+      "size": 24,
+      "type": "TESModel"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00056.",
       "name": "scriptable",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 12
+      "size": 12,
+      "type": "TESScriptableForm"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00057.",
       "name": "basePad",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00058.",
       "name": "animSounds",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 12
+      "size": 12,
+      "type": "TESSound *[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified byte doorFlags; bit 0x08 is the MinUse flag tested by TESObjectDOOR_HasMinUseFlag.",
       "name": "doorFlags",
       "offset": 96,
       "offset_hex": "0x60",
-      "size": 1
+      "size": 1,
+      "type": "TESObjectDOORFlags"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000510.",
       "name": "pad",
       "offset": 97,
       "offset_hex": "0x61",
-      "size": 3
+      "size": 3,
+      "type": "UInt8[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified TNAM record path: TESObjectDOOR_LoadForm appends raw 32-bit FormIDs; TESObjectDOOR_DoPostFixup rebases/resolves them to TESForm* and removes missing targets; TESObjectDOOR_SaveForm writes each referenced TESForm.refID; TESObjectDOOR_CopyFormData clones the list nodes; the destructor frees them. Probable semantic role: random-teleport destination spaces.",
       "name": "randomTeleport",
       "offset": 100,
       "offset_hex": "0x64",
-      "size": 8
+      "size": 8,
+      "type": "TESObjectDOOR_RandomTeleportSpaceNode"
     }
   ],
   "name": "TESObjectDOORMembr",
+  "ordinal": 9630,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 108
 }

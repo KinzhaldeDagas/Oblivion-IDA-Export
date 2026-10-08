@@ -1,18 +1,31 @@
 {
-  "callees_count": 12,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7672F0",
+      "0x767516"
+    ]
+  ],
+  "chunks_sha256": "0ee106aedc52b5e1c4a4ad3eb3a0e3a9e748a6ae1180f8fdafa99fcc10559bb4",
+  "comment_regular": "Rigid geometry renderer. Selects the concrete NiD3DShader from geometry state, calls vtable +0x28 preparation and +0x2C SetupRenderPass, then vtable +0x48 BeginPassLoop. Zero queued passes skip all pass state and D3D draw calls; this covers Lighting30 high records and conditionally reachable Hair high records.\n[Leaf RGB v148 2026-10-08] Confirms isolated shader routing: NiRTTI_Cast of geometry+BC selects the concrete NiD3DShader, then virtual+28/+2C/+30/+34/+3C/+38 drive this object before D3D draw. A custom native SpeedTreeLeafShader instance can retain leaf pass0E while preserving native state/constant setup. Global definition6 is not replaced.\n\nOblivion rigid/non-hardware-skinned geometry pass loop: shader preflight, pass construction, pass state/stage application, constants, geometry buffers, programs/maps, then DrawIndexedPrimitive or DrawPrimitive and pass advance.",
+  "comment_repeatable": "Oblivion rigid/non-hardware-skinned geometry submission. After preflight and vtable +0x2C pass setup, it enters pass apply/constants/buffer/program binding and D3D drawing only when vtable +0x48 BeginPassLoop returns nonzero. A zero-pass invalid Lighting30 selector skips every draw-side operation but still calls vtable +0x44 shader-finish cleanup.\nDX11 geometry-finish audit 2026-10-01: after final shader+4C AdvancePassLoop returns0, rigid renderer calls shader+44 at7674F8, then renderer+8AC manager virtual+FC with argument0 at76750C. The latter is77B330 and clears only InternalNormalizeNormals+FF5. This cleanup is outside pass restoration and must run in the prepared state sequence; it does not directly set D3DRS_NORMALIZENORMALS143.\nDX11 current-range audit 2026-10-01: draw arguments come from the post-packing buffer descriptor. With IB nonnull, loop NumArrays(+44), taking primitiveCount=WORD ArrayLengths[i]-2 when lengths(+48) exists, else TriCount(+3C). Every call uses BaseVertexIndex(+34), MinVertexIndex0, VertCount(+14), and running startIndex; advance is primitiveCount+2 even for a triangle-list descriptor. Without IB, one DrawPrimitive uses unsigned startVertex from+34 and TriCount. Zero arrays produce no indexed calls; invalid length underflow is not valid replacement coverage. Refresh mesh ranges from current descriptors, not old observed counts; buffer publication/lifetime and vertex-window validation remain separate.\nDX11 nonindexed-range integration 2026-10-01: when IB is null, DrawPrimitive consumes unsigned startVertex bits from buffer+34 and primitive count+3C; it does not use a native index buffer or the indexed MinVertexIndex/NumVertices window. A prepared DX11 indexed-indirect representation may generate sequential32-bit indices while preserving vertex order/start, provided shader input semantics and owned vertex publications are qualified. This is a backend representation choice, not a native index allocation or traversal permit.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_7672F0",
+  "display_name": "NiDX9Renderer_RenderGeometryNonSkinned",
   "end_ea": "0x767516",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7672F0",
+  "name": "NiDX9Renderer_RenderGeometryNonSkinned",
   "segment": ".text",
   "sha256": "0ee106aedc52b5e1c4a4ad3eb3a0e3a9e748a6ae1180f8fdafa99fcc10559bb4",
   "size": 550,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7672F0",
+  "total_chunk_size": 550,
   "type": "int __thiscall(NiDX9Renderer *this, NiGeometry *, NiGeometryData *, _DWORD *, float *, UInt32, NiGeometryBufferData *)",
   "xrefs_from_count": 236,
   "xrefs_to_count": 2

@@ -1,18 +1,31 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7DAC70",
+      "0x7DAC91"
+    ]
+  ],
+  "chunks_sha256": "0b0bb3cd802640dbd539d30dc15fc3508bbda43e0442d99f4fb569fa73fbec68",
+  "comment_regular": "[Verified] Map lookup wrapper used by both CreateVertexShader and CreatePixelShader. It delegates the supplied program key to NiTMap_GetAt and returns the associated ShaderBufferEntry pointer, or null when absent.",
+  "comment_repeatable": "[Verified] Map lookup wrapper used by both CreateVertexShader and CreatePixelShader. It delegates the supplied program key to NiTMap_GetAt and returns the associated ShaderBufferEntry pointer, or null when absent.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "NiTMap_GetAtIndex",
   "end_ea": "0x7DAC91",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "NiTMap_GetAtIndex",
   "segment": ".text",
   "sha256": "0b0bb3cd802640dbd539d30dc15fc3508bbda43e0442d99f4fb569fa73fbec68",
   "size": 33,
+  "source_annotation_confidence": "Verified",
   "start_ea": "0x7DAC70",
+  "total_chunk_size": 33,
   "type": "int __thiscall(_DWORD *this, int)",
   "xrefs_from_count": 11,
   "xrefs_to_count": 2

@@ -16,7 +16,7 @@
 0x584CE4: mov     ecx, [eax+4]
 0x584CE7: mov     esi, [esi]
 0x584CE9: push    ecx
-0x584CEA: call    FormHeapFree
+0x584CEA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x584CEF: add     esp, 4
 0x584CF2: test    esi, esi
 0x584CF4: jnz     short loc_584CE2

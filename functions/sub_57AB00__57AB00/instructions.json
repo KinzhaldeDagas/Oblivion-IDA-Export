@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x57AB5C",
-    "line": "jmp     loc_59ED30",
+    "line": "jmp     DialogMenu_CreateBody; Verified creation-body tail chunk of Interface::CreateDialogMenu. Null speaker returns NULL; body checks no open DialogMenu, loads dialog_menu.xml, verifies class0x3F1, binds TileMenu, validates fields, sets speaker+0x60, configures camera/menu visibility, initializes topics and starts head response. Retained existing IDA chunk ownership because real tail-JMP explains distant parent.",
     "mnemonic": "jmp",
     "size": 5
   },
@@ -193,6 +193,1398 @@
   },
   {
     "ea": "0x57AB63",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x59ED30",
+    "line": "push    edi; Verified creation-body tail chunk of Interface::CreateDialogMenu. Null speaker returns NULL; body checks no open DialogMenu, loads dialog_menu.xml, verifies class0x3F1, binds TileMenu, validates fields, sets speaker+0x60, configures camera/menu visibility, initializes topics and starts head response. Retained existing IDA chunk ownership because real tail-JMP explains distant parent.",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x59ED31",
+    "line": "mov     edi, [esp+4+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x59ED35",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x59ED37",
+    "line": "jnz     short loc_59ED3D",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x59ED39",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x59ED3B",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x59ED3C",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x59ED3D",
+    "line": "fldz",
+    "mnemonic": "fldz",
+    "size": 2
+  },
+  {
+    "ea": "0x59ED3F",
+    "line": "mov     byte ptr ds:0B2D91Ch, 0; MoonSugarEffect decode: reset/cleanup path clears byte_B2D91C and zeros native Gethit intensity globals.",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x59ED46",
+    "line": "fst     dword ptr ds:0B46124h",
+    "mnemonic": "fst",
+    "size": 6
+  },
+  {
+    "ea": "0x59ED4C",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x59ED4E",
+    "line": "fstp    dword ptr ds:0B46120h",
+    "mnemonic": "fstp",
+    "size": 6
+  },
+  {
+    "ea": "0x59ED54",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59ED56",
+    "line": "mov     eax, [edi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59ED58",
+    "line": "mov     edx, [eax+130h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x59ED5E",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x59ED60",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x59ED62",
+    "line": "jz      short loc_59ED79",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x59ED64",
+    "line": "mov     eax, [edi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59ED66",
+    "line": "mov     edx, [eax+130h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x59ED6C",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x59ED6E",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59ED70",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x59ED72",
+    "line": "mov     byte ptr [eax+112h], 1",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x59ED79",
+    "line": "mov     eax, [edi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59ED7B",
+    "line": "mov     edx, [eax+134h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x59ED81",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x59ED83",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59ED85",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x59ED87",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x59ED89",
+    "line": "jz      short loc_59EDA0",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x59ED8B",
+    "line": "mov     eax, [edi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59ED8D",
+    "line": "mov     edx, [eax+134h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x59ED93",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x59ED95",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59ED97",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x59ED99",
+    "line": "mov     byte ptr [eax+112h], 1",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x59EDA0",
+    "line": "mov     ecx, edi; int",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59EDA2",
+    "line": "call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59EDA7",
+    "line": "mov     ecx, ds:0B333C4h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x59EDAD",
+    "line": "mov     eax, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59EDAF",
+    "line": "mov     edx, [eax+234h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x59EDB5",
+    "line": "push    1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x59EDB7",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x59EDB9",
+    "line": "mov     ecx, ds:0B333C4h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x59EDBF",
+    "line": "mov     eax, [edi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59EDC1",
+    "line": "mov     edx, [eax+2F4h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x59EDC7",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x59EDC9",
+    "line": "push    1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x59EDCB",
+    "line": "push    ecx; a3",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x59EDCC",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59EDCE",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x59EDD0",
+    "line": "push    3F1h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x59EDD5",
+    "line": "call    Menu_GetOpenMenuTile",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59EDDA",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x59EDDD",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x59EDDF",
+    "line": "jnz     loc_59EFFF",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x59EDE5",
+    "line": "push    ebp; a3",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x59EDE6",
+    "line": "push    esi; a3",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x59EDE7",
+    "line": "push    1; arg1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x59EDE9",
+    "line": "push    eax; canCreate",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x59EDEA",
+    "line": "call    InterfaceManager_GetSingleton",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59EDEF",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x59EDF2",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59EDF4",
+    "line": "call    InterfaceManager_GetDepth",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59EDF9",
+    "line": "fstp    [esp+0Ch+arg_0]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x59EDFD",
+    "line": "mov     ecx, [esi+68h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x59EE00",
+    "line": "push    offset aDataMenusDia_1; \"Data\\\\Menus\\\\Dialog\\\\dialog_menu.xml\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x59EE05",
+    "line": "call    Tile__ReadFile; Verified: SDK ReadXML entry. Builds named tree under receiver via 0x590330, connects/evaluates traits via 0x58CF40, registers subtemplates with owning Menu, frees build storage, refreshes returned subtree via 0x58FBA0. Returns first created tile. Fallout analogue 0x827E2588; cache/cleanup differs.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59EE0A",
+    "line": "mov     ebp, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59EE0C",
+    "line": "mov     ecx, ebp",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59EE0E",
+    "line": "call    Tile_GetParentMenu",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59EE13",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59EE15",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x59EE17",
+    "line": "jz      loc_59EFFB",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x59EE1D",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59EE1F",
+    "line": "mov     edx, [eax+34h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x59EE22",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59EE24",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x59EE26",
+    "line": "cmp     eax, 3F1h",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x59EE2B",
+    "line": "jnz     loc_59EFEB",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x59EE31",
+    "line": "call    sub_5A8FA0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59EE36",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x59EE38",
+    "line": "push    offset ??_R0?AVTileMenu@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x59EE3D",
+    "line": "push    offset ??_R0?AVTile@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x59EE42",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x59EE44",
+    "line": "push    ebp; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x59EE45",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59EE4A",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x59EE4D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x59EE4E",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59EE50",
+    "line": "call    Menu_SetTileMenu",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59EE55",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59EE57",
+    "line": "call    DialogMenu__ValidateRequiredTiles; Verified hook contract: ECX=menu; call bool ValidateRequiredTiles; test AL at 0x59EE5C branches to initialization on true. Menu_SetTileMenu precedes validation. This site validates bound XML pointers, not populated topic choices.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59EE5C",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x59EE5E",
+    "line": "jnz     short loc_59EE73",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x59EE60",
+    "line": "push    offset aDialogueMenuCr; \"Dialogue Menu Creation Failed... Are yo\"...",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x59EE65",
+    "line": "call    PrintError",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59EE6A",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x59EE6D",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x59EE6E",
+    "line": "pop     ebp",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x59EE6F",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x59EE71",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x59EE72",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x59EE73",
+    "line": "push    0FA5h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x59EE78",
+    "line": "mov     ecx, ebp",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59EE7A",
+    "line": "call    Tile_GetFloat",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59EE7F",
+    "line": "fcomp   dword ptr ds:0A69770h",
+    "mnemonic": "fcomp",
+    "size": 6
+  },
+  {
+    "ea": "0x59EE85",
+    "line": "fnstsw  ax",
+    "mnemonic": "fnstsw",
+    "size": 2
+  },
+  {
+    "ea": "0x59EE87",
+    "line": "test    ah, 44h",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x59EE8A",
+    "line": "jnp     short loc_59EEA5",
+    "mnemonic": "jnp",
+    "size": 2
+  },
+  {
+    "ea": "0x59EE8C",
+    "line": "push    0FA5h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x59EE91",
+    "line": "mov     ecx, ebp",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59EE93",
+    "line": "call    Tile_GetFloat",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59EE98",
+    "line": "fcomp   qword ptr ds:0A69778h",
+    "mnemonic": "fcomp",
+    "size": 6
+  },
+  {
+    "ea": "0x59EE9E",
+    "line": "fnstsw  ax",
+    "mnemonic": "fnstsw",
+    "size": 2
+  },
+  {
+    "ea": "0x59EEA0",
+    "line": "test    ah, 44h",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x59EEA3",
+    "line": "jp      short loc_59EEB9",
+    "mnemonic": "jp",
+    "size": 2
+  },
+  {
+    "ea": "0x59EEA5",
+    "line": "fld     [esp+0Ch+arg_0]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x59EEA9",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x59EEAA",
+    "line": "fstp    [esp+10h+a3]; value",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x59EEAD",
+    "line": "push    0FABh; propertyCode",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x59EEB2",
+    "line": "mov     ecx, ebp; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59EEB4",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59EEB9",
+    "line": "fldz",
+    "mnemonic": "fldz",
+    "size": 2
+  },
+  {
+    "ea": "0x59EEBB",
+    "line": "mov     ecx, edi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59EEBD",
+    "line": "fstp    dword ptr [esi+68h]",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x59EEC0",
+    "line": "mov     [esi+60h], edi",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x59EEC3",
+    "line": "mov     byte ptr [esi+64h], 1",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x59EEC7",
+    "line": "call    TESObjectREFR_GetName",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59EECC",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x59EECD",
+    "line": "push    0FB2h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x59EED2",
+    "line": "mov     ecx, ebp",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59EED4",
+    "line": "call    Tile_SetString",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59EED9",
+    "line": "fldz",
+    "mnemonic": "fldz",
+    "size": 2
+  },
+  {
+    "ea": "0x59EEDB",
+    "line": "mov     eax, ds:0B333C4h",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x59EEE0",
+    "line": "mov     cl, [eax+588h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x59EEE6",
+    "line": "push    0; a5",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x59EEE8",
+    "line": "mov     [esi+7Ch], cl",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x59EEEB",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x59EEEC",
+    "line": "mov     ecx, ds:0B333C4h; a1",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x59EEF2",
+    "line": "fstp    [esp+14h+a4]; a4",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x59EEF5",
+    "line": "push    edi; a3",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x59EEF6",
+    "line": "call    SetDialogueCamera",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59EEFB",
+    "line": "push    0; char",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x59EEFD",
+    "line": "mov     ecx, esi; int",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59EEFF",
+    "line": "call    EnableMenu",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59EF04",
+    "line": "fld     dword ptr ds:0A379B4h",
+    "mnemonic": "fld",
+    "size": 6
+  },
+  {
+    "ea": "0x59EF0A",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x59EF0B",
+    "line": "fstp    [esp+10h+a3]; value",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x59EF0E",
+    "line": "push    0FA1h; propertyCode",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x59EF13",
+    "line": "mov     ecx, ebp; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59EF15",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59EF1A",
+    "line": "mov     edx, [esp+0Ch+forcedTopic]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x59EF1E",
+    "line": "push    edx; forcedTopic",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x59EF1F",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59EF21",
+    "line": "call    DialogMenu__InitializeTopics; Initialize player dialogue from the optional forced TESTopic or stock GREETING C8. A true return records pending close but does not prevent subsequent head-response playback.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59EF26",
+    "line": "fld1",
+    "mnemonic": "fld1",
+    "size": 2
+  },
+  {
+    "ea": "0x59EF28",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x59EF29",
+    "line": "fstp    [esp+10h+a3]; value",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x59EF2C",
+    "line": "mov     ecx, [esi+3Ch]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x59EF2F",
+    "line": "push    0FA1h; propertyCode",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x59EF34",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59EF39",
+    "line": "call    MenuTopicManager__GetSingleton",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59EF3E",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59EF40",
+    "line": "call    TESHealthForm_GetHealth; Linker-folded +4 pointer getter used here as MenuTopicManager::GetCurrentTopic; despite the shared TESHealthForm_GetHealth name, EAX is the current/head MenuTopic.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59EF45",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x59EF47",
+    "line": "jz      short loc_59EF5D",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x59EF49",
+    "line": "mov     ecx, eax; The restored head MenuTopic is the GREETING/current spoken entry. It is played here even when the GREETING has Goodbye and its AddTopicList/result were already committed during initialization.",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59EF4B",
+    "line": "call    MenuTopic__FirstResponse",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59EF50",
+    "line": "test    al, al; Initial head/GREETING with no retained response takes the immediate processing branch. Player MenuTopic construction filters empty response text, so an authored empty-only GREETING reaches this path.",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x59EF52",
+    "line": "jz      short loc_59EF5D",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x59EF54",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59EF56",
+    "line": "call    DialogMenu__AdvanceTopicResponse; Begin the GREETING response chain. On final-response exhaustion AdvanceTopicResponse calls LoadNextTopicList, which observes Goodbye and lets LoadTopicsList close the menu.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59EF5B",
+    "line": "jmp     short loc_59EF70",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x59EF5D",
+    "line": "push    0; No playable head response: process the current GREETING/forced head immediately through LoadNextTopicList. A non-Goodbye result commits without speech; a precommitted Goodbye greeting adds topics again and proceeds to close without rerunning its result here.",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x59EF5F",
+    "line": "push    1; processCurrentInfo",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x59EF61",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59EF63",
+    "line": "call    DialogMenu__AdvanceTopicList; DialogMenu wrapper around LoadNextTopicList. Every native call site passes clearAll=false; processCurrentInfo is false only for the path that refreshes choices without committing the current INFO.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59EF68",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x59EF6A",
+    "line": "jnz     loc_59EFFB",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x59EF70",
+    "line": "push    3EDh",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x59EF75",
+    "line": "call    Menu_GetOpenMenuTile",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59EF7A",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x59EF7D",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x59EF7F",
+    "line": "jz      short loc_59EF8F",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x59EF81",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59EF83",
+    "line": "call    Tile_GetParentMenu",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59EF88",
+    "line": "mov     ecx, eax; int",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59EF8A",
+    "line": "call    Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59EF8F",
+    "line": "push    1; enableActions",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x59EF91",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59EF93",
+    "line": "call    DialogMenu__RefreshActionAvailability; Refreshes DialogMenu topic/persuasion/service tile availability from the current speaker and package/service flags. Called when entering or leaving response display; it does not run TESTopicInfo results.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59EF98",
+    "line": "push    0; char",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x59EF9A",
+    "line": "mov     ecx, esi; int",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59EF9C",
+    "line": "call    EnableMenu",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59EFA1",
+    "line": "mov     ecx, ds:0B3A6B0h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x59EFA7",
+    "line": "push    2",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x59EFA9",
+    "line": "call    sub_572EA0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59EFAE",
+    "line": "fcomp   dword ptr ds:0A2FAA8h",
+    "mnemonic": "fcomp",
+    "size": 6
+  },
+  {
+    "ea": "0x59EFB4",
+    "line": "fnstsw  ax",
+    "mnemonic": "fnstsw",
+    "size": 2
+  },
+  {
+    "ea": "0x59EFB6",
+    "line": "test    ah, 41h",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x59EFB9",
+    "line": "jnz     short loc_59EFDB",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x59EFBB",
+    "line": "mov     ecx, ds:0B333A0h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x59EFC1",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x59EFC3",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x59EFC5",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x59EFC7",
+    "line": "call    sub_440AF0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59EFCC",
+    "line": "mov     ecx, ds:0B3A6B0h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x59EFD2",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x59EFD4",
+    "line": "push    2",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x59EFD6",
+    "line": "call    sub_572EC0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59EFDB",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x59EFDD",
+    "line": "call    sub_578CF0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59EFE2",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x59EFE5",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x59EFE6",
+    "line": "mov     eax, ebp",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59EFE8",
+    "line": "pop     ebp",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x59EFE9",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x59EFEA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x59EFEB",
+    "line": "cmp     dword ptr [esi+4], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x59EFEF",
+    "line": "jz      short loc_59EFFB",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x59EFF1",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59EFF3",
+    "line": "mov     edx, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59EFF5",
+    "line": "push    1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x59EFF7",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59EFF9",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x59EFFB",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x59EFFC",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x59EFFE",
+    "line": "pop     ebp",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x59EFFF",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x59F000",
     "line": "retn",
     "mnemonic": "retn",
     "size": 1

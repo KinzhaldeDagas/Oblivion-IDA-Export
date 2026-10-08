@@ -1,30 +1,30 @@
 void __thiscall sub_667520(MobileObject *this)
 {
-  int *v1; // ebx
+  float *v1; // ebx
   int v2; // edi
   int v3; // eax
-  _WORD *v4; // esi
+  int v4; // esi
 
-  while ( dword_B3BB48 || dword_B3BB44 )
+  while ( LODWORD(qword_B3BB2C[7]) || LODWORD(qword_B3BB2C[6]) ) /*0x66752d*/
   {
-    v1 = &dword_B3BB44;
-    while ( 1 )
+    v1 = &qword_B3BB2C[6]; /*0x667539*/
+    while ( 1 ) /*0x667540*/
     {
-      v2 = *v1;
-      v3 = (*(int (__thiscall **)(int))(*(_DWORD *)*v1 + 0x154))(*v1);
-      v4 = (_WORD *)v3;
-      if ( !v3 )
-        break;
-      if ( !sub_6670F0(this, v3) )
+      v2 = *(_DWORD *)v1; /*0x667540*/
+      v3 = (*(int (__thiscall **)(_DWORD))(**(_DWORD **)v1 + 0x154))(*(_DWORD *)v1); /*0x66754c*/
+      v4 = v3; /*0x66754e*/
+      if ( !v3 ) /*0x667552*/
+        break; /*0x667552*/
+      if ( !sub_6670F0(this, v3) ) /*0x667559*/
       {
-        v4[0xC] &= ~1u;
-        sub_88CF20(v4, 1u, 1, 0);
-        break;
+        *(_WORD *)(v4 + 0x18) &= ~1u; /*0x667562*/
+        sub_88CF20((NiObjectNET *)v4, 1u, 1, 0); /*0x66756f*/
+        break; /*0x66756f*/
       }
-      v1 = (int *)v1[1];
-      if ( !v1 )
-        return;
+      v1 = *((float **)v1 + 1); /*0x667596*/
+      if ( !v1 ) /*0x66759b*/
+        return; /*0x66759b*/
     }
-    BSSimpleList_Remove(&dword_B3BB44, v2);
+    BSSimpleList_Remove((int *)&qword_B3BB2C[6], v2); /*0x667577*/
   }
 }

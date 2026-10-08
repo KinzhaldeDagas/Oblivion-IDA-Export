@@ -1,1 +1,1 @@
-ArchiveFile
+struct ArchiveFile;

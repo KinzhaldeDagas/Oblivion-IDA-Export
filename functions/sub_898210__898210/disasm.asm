@@ -175,7 +175,7 @@
 0x89841C: xor     ebx, ebx
 0x89841E: mov     ecx, edi
 0x898420: mov     [esp+34h+var_28], bl
-0x898424: call    sub_452A60
+0x898424: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x898429: cmp     eax, ebx
 0x89842B: jz      short loc_898442
 0x89842D: fldz

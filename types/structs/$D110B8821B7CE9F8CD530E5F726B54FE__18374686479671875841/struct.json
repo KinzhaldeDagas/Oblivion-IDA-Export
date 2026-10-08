@@ -1,52 +1,90 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "$D110B8821B7CE9F8CD530E5F726B54FE",
+  "definition": "struct $D110B8821B7CE9F8CD530E5F726B54FE\n{\nDWORD *keys __offset(OFF64|AUTO);\nUSHORT *casemap __offset(OFF64|AUTO);\nWORD *ctypes __offset(OFF64|AUTO);\nBYTE *ctype_idx __offset(OFF64|AUTO);\nDWORD version;\nDWORD guid_count;\nsortguid *guids __offset(OFF64|AUTO);\n}\n",
   "id": 18374686479671875841,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "keys",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DWORD *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "casemap",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "USHORT *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ctypes",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "WORD *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ctype_idx",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "BYTE *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "version",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "guid_count",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "guids",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "sortguid *"
     }
   ],
   "name": "$D110B8821B7CE9F8CD530E5F726B54FE",
+  "ordinal": 8220,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 28
 }

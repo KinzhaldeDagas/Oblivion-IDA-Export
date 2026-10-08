@@ -1,19 +1,36 @@
 {
-  "callees_count": 17,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 5,
-  "display_name": "sub_78B320",
+  "chunks": [
+    [
+      "0x78B320",
+      "0x78B440"
+    ],
+    [
+      "0x9CB590",
+      "0x9CB5BB"
+    ]
+  ],
+  "chunks_sha256": "a35433b2818dd17e5a38feed4140eff585698f33bbe3d3060da042cce4e3be3d",
+  "comment_regular": "\n\nSpeedTreeOBSE v158 preparation: capture authored branch method before stock host call560806 forces dynamic0; also record immediately after successful LoadTree(buffer), covering alternate initializers that bypass stock MakeBase. Loaded authoring is not overwritten by a later host-mode override. Original setter behavior remains. Branch static renderer is NOT connected in v158.\n\nCSpeedTreeRT::SetBranchLightingMethod. Before Compute, mirrors lighting method to branch geometry manual-lighting state and CLightingEngine branch method.",
+  "comment_repeatable": "CSpeedTreeRT::SetBranchLightingMethod. Before Compute, mirrors lighting method to branch geometry manual-lighting state and CLightingEngine branch method.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 7,
+  "display_name": "CSpeedTreeRT__SetBranchLightingMethod",
   "end_ea": "0x78B440",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_78B320",
+  "name": "CSpeedTreeRT__SetBranchLightingMethod",
   "segment": ".text",
   "sha256": "c5773b991acfe4f0a3d5fcdb889c2ed1daaa836e2f2cdb3af1224356b174a117",
   "size": 288,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78B320",
-  "type": "_DWORD *__userpurge@<eax>(int this@<ecx>, int@<edi>, _DWORD *)",
-  "xrefs_from_count": 114,
+  "total_chunk_size": 331,
+  "type": "void __thiscall(OB_CSpeedTreeRT_010201A0 *this, int method)",
+  "xrefs_from_count": 127,
   "xrefs_to_count": 2
 }

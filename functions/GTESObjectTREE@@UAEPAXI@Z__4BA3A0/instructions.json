@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x4BA3A3",
-    "line": "call    ??1TESObjectTREE@@UAE@XZ; TESObjectTREE::~TESObjectTREE(void)",
+    "line": "call    TESObjectTREE_dtor; Verified destructor releases the seed table's backing buffer from TESObjectTREE+0x4C after restoring the NiTArray<unsigned int> vtable at +0x48, then destroys TESIconTree, TESModelTree, and TESObject bases.",
     "mnemonic": "call",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x4BA3B0",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

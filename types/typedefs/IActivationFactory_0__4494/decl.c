@@ -1,1 +1,1 @@
-IActivationFactory_0
+typedef IActivationFactory IActivationFactory_0;

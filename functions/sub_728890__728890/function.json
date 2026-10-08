@@ -1,19 +1,32 @@
 {
-  "callees_count": 29,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 13,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x728890",
+      "0x7289FE"
+    ]
+  ],
+  "chunks_sha256": "58903633b6c1bf88d880464ba62af7cb237df438d59335a31df07d14b90433a9",
+  "comment_regular": "\n\n[v153 isolated native execution] Extracted exact16E-byte function from user Oblivion.exe. In a Win32 fixture, unmodified internal control flow executed with external heap/pool/bound callbacks redirected.37 checks passed for counts4/17/65535: old UV freed once, seven-plane new buffer adopted, original XYZ/N retained, UVcount7 and unrelated format bits preserved, repeat same-pointer call does not free. Nonpooled path only; this is not game allocator/lifecycle validation.\n\n\nSpeedTreeOBSE v168 mixed leaf conversion: replacement card geometry inherits original keep-flags byte+30 before pre-cache, preserving v167 paired/normal-card CPU-buffer retention. No topology or native SetData ABI change. Native reset/clone/unload coverage remains UNVERIFIED.",
+  "comment_repeatable": "\nDX11 production binding audit 2026-10-01: this data mutation/destruction site uses NativeBindPositionObserver in the installed routing, NOT NativeActorWriteObservers generic prelude. Its cache invalidation fanout must therefore notify GPU-world GeometryData dependencies directly. The renderer now does this through ActorBindInvalidated before Original, followed by a short poseMetadataGate barrier outside observer/store/ledger locks. That barrier protects an in-progress CPU capture/commit from mutation/free. SetData/destructor adapters still tail-jump after the prelude: a zero ActiveEntries count is NOT proof of native completion or independent lifetime acquisition. Unknown foreign tails remain subject to the existing conservative lifetime policy.\nVerified 2026-10-01: ECX data object; seven raw DWORD stack slots; RET1C at 7289FB; raw AX result. Vertex count+8; vertex/normal/color/UV pointers +1C/+20/+24/+28. Old differing arrays are released through virtual+44 ownership blocks or FormHeapFree. Virtual+50 gives bound-computation vertex count. Final word+2C = input dataFlags | (textureSetCount & 3F) | (old word & FC0), returned in AX. Fallout PPC 82BEBE80 is a corresponding setter family but differs materially: no old-array free path here, pointer/layout offsets and bound virtual slot differ, and packed word uses a different mask. Oblivion behavior governs.\nDX11 observer update 2026-10-01, superseding the earlier PRE-only/tail-jump implementation note: the plugin bind SetData and data-destructor adapters now invoke Original exactly once on a copied argument frame, retain activity through native completion and SEH unwind, and restore all captured GPR/EFLAGS/FX outputs with verified RET1C/RET0. The source-proof Invocation retains the real entering caller return address; Original sees an adapter continuation. No completion callback dereferences the possibly destroyed object. This closes an activity-count gap, not general scene/resource lifetime, pool or reference-writer authority; a zero count still does not authorize quiescent hook replacement or object access.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_728890",
+  "display_name": "NiGeometryData_SetData",
   "end_ea": "0x7289FE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_728890",
+  "name": "NiGeometryData_SetData",
   "segment": ".text",
   "sha256": "58903633b6c1bf88d880464ba62af7cb237df438d59335a31df07d14b90433a9",
   "size": 366,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x728890",
-  "type": "__int16 __thiscall(unsigned int *this, __int16, unsigned int, unsigned int, unsigned int, int, char, __int16)",
+  "total_chunk_size": 366,
+  "type": "unsigned __int16 __thiscall(NiGeometryData *this, unsigned __int16 vertexCount, NiPoint3 *vertices, NiPoint3 *normals, void *colors, void *texcoords, unsigned __int8 textureSetCount, unsigned __int16 dataFlags)",
   "xrefs_from_count": 159,
   "xrefs_to_count": 3
 }

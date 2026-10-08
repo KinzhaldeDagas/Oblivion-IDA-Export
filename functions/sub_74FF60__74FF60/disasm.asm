@@ -3,7 +3,7 @@
 0x74FF62: mov     edi, [esp+8+arg_0]
 0x74FF66: push    edi
 0x74FF67: mov     esi, ecx
-0x74FF69: call    sub_6C3680
+0x74FF69: call    NiTransformController_RegisterStreamables; Oblivion NiTransformController stream-registration thunk to the generic single-interpolator controller registration path.
 0x74FF6E: test    al, al
 0x74FF70: jnz     short loc_74FF77
 0x74FF72: pop     edi

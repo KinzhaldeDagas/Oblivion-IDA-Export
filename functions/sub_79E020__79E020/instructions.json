@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x79E020",
-    "line": "push    ebx",
+    "line": "push    ebx; Checked erase-range for st_vector<SFrondTexture>. Validates iterator owners, deep-moves [last,end) over [first,last), destroys the vacated tail, updates end, and returns {owner,first}.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x79E022",
-    "line": "mov     ebp, [esp+8+arg_4]",
+    "line": "mov     ebp, [esp+8+firstOwner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x79E02D",
-    "line": "cmp     ebp, [esp+0Ch+arg_C]",
+    "line": "cmp     ebp, [esp+0Ch+lastOwner]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -61,13 +61,13 @@
   },
   {
     "ea": "0x79E038",
-    "line": "mov     ebx, [esp+0Ch+arg_8]",
+    "line": "mov     ebx, [esp+0Ch+first]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79E03C",
-    "line": "mov     eax, [esp+0Ch+arg_10]",
+    "line": "mov     eax, [esp+0Ch+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -97,31 +97,31 @@
   },
   {
     "ea": "0x79E048",
-    "line": "push    ebx",
+    "line": "push    ebx; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E049",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E04A",
-    "line": "push    eax",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E04B",
-    "line": "call    sub_79BDF0",
+    "line": "call    OB_SFrondTexture_CopyAssignRangeForwardThunk_010201A0; Checked/STL trampoline around forward SFrondTexture range assignment; returns destination end.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x79E050",
-    "line": "mov     edx, [esp+1Ch+arg_0]",
+    "line": "mov     edx, [esp+1Ch+result]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -151,19 +151,19 @@
   },
   {
     "ea": "0x79E05B",
-    "line": "push    eax",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E05C",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E05D",
-    "line": "call    sub_79B120",
+    "line": "call    OB_SFrondTexture_DestroyRange_010201A0; Destroys [first,last) SFrondTexture records at 0x2C-byte stride by releasing each embedded filename string.",
     "mnemonic": "call",
     "size": 5
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x79E069",
-    "line": "mov     eax, [esp+0Ch+arg_0]",
+    "line": "mov     eax, [esp+0Ch+result]",
     "mnemonic": "mov",
     "size": 4
   },

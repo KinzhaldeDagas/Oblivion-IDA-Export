@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 10,
+  "chunks": [
+    [
+      "0x67F0F0",
+      "0x67F0FA"
+    ]
+  ],
+  "chunks_sha256": "81a8c12f792728b9f5840f29f043008b672a23b48da09e7f0aee4b772a6809d6",
+  "comment_regular": "Verified: writes policy byte 2 at qword_B3BB2C[0xBA] and returns the assigned value. The second CalcLowPathToPoint boolean is saved/restored through this setter and corresponds to 'allow disabled doors'.",
+  "comment_repeatable": "Verified: writes policy byte 2 at qword_B3BB2C[0xBA] and returns the assigned value. The second CalcLowPathToPoint boolean is saved/restored through this setter and corresponds to 'allow disabled doors'.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_67F0F0",
+  "display_name": "TravelPath_SetAllowDisabledDoors",
   "end_ea": "0x67F0FA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_67F0F0",
+  "name": "TravelPath_SetAllowDisabledDoors",
   "segment": ".text",
   "sha256": "81a8c12f792728b9f5840f29f043008b672a23b48da09e7f0aee4b772a6809d6",
   "size": 10,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x67F0F0",
-  "type": "char __cdecl(char)",
+  "total_chunk_size": 10,
+  "type": "bool __cdecl(bool enabled)",
   "xrefs_from_count": 2,
   "xrefs_to_count": 10
 }

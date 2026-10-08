@@ -1,0 +1,78 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "OB_SIdvBranchVertex_010201A0",
+  "definition": "struct OB_SIdvBranchVertex_010201A0\n{\nfloat direction[3]; ///< Three floats; constructor zeros.\nfloat position[3]; ///< Three floats.\nfloat radius; ///< Consumed by cross-section and volume helpers.\nfloat transform3x3[9]; ///< 3x3 transform; constructor initializes identity diagonal at +0x1C,+0x2C,+0x3C.\nfloat runningLength; ///< Used by child placement helper 0x78F720.\nfloat primaryWindWeight; ///< Only stock wind-weight slot; no secondary wind field exists in 0x48 stride.\n}\n",
+  "kind": "struct",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Three floats; constructor zeros.",
+      "name": "direction",
+      "offset_bits": 0,
+      "offset_bytes": 0,
+      "size_bits": 96,
+      "type": "float[3]"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Three floats.",
+      "name": "position",
+      "offset_bits": 96,
+      "offset_bytes": 12,
+      "size_bits": 96,
+      "type": "float[3]"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Consumed by cross-section and volume helpers.",
+      "name": "radius",
+      "offset_bits": 192,
+      "offset_bytes": 24,
+      "size_bits": 32,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "3x3 transform; constructor initializes identity diagonal at +0x1C,+0x2C,+0x3C.",
+      "name": "transform3x3",
+      "offset_bits": 224,
+      "offset_bytes": 28,
+      "size_bits": 288,
+      "type": "float[9]"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Used by child placement helper 0x78F720.",
+      "name": "runningLength",
+      "offset_bits": 512,
+      "offset_bytes": 64,
+      "size_bits": 32,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Only stock wind-weight slot; no secondary wind field exists in 0x48 stride.",
+      "name": "primaryWindWeight",
+      "offset_bits": 544,
+      "offset_bytes": 68,
+      "size_bits": 32,
+      "type": "float"
+    }
+  ],
+  "name": "OB_SIdvBranchVertex_010201A0",
+  "ordinal": 9723,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 72
+}

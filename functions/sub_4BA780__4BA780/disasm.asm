@@ -1,4 +1,4 @@
-0x4BA780: push    0FFFFFFFFh
+0x4BA780: push    0FFFFFFFFh; Verified Oblivion rendering path is a flat billboard DDS attached to STBB NiTriShape and NiBillboardNode. Fallout's QueuedTreeBillboard::CreateBillboard builds the engine's BSTreeModel distant geometry and inserts it through DistantLODShaderProperty::AddDistantLOD; same queued asset workflow, different renderer integration.
 0x4BA782: push    offset SEH_4BA780
 0x4BA787: mov     eax, large fs:0
 0x4BA78D: push    eax
@@ -38,30 +38,30 @@
 0x4BA7F4: test    ah, 1
 0x4BA7F7: jz      short loc_4BA82B
 0x4BA7F9: lea     eax, [esp+138h+ArgList]
-0x4BA7FD: push    eax
-0x4BA7FE: call    sub_4B9C40
+0x4BA7FD: push    eax; outPath
+0x4BA7FE: call    OB_TESObjectTREE_BuildBillboardTexturePath_010201A0; Verified from byte construction and referenced model getter: emits 'Textures\\Trees\\Billboards\\' + model path basename through first dot + '.dds'. If model path has no dot, suffix isn't appended; path truncation/long-path handling not established.
 0x4BA803: mov     ecx, ds:0B333A0h
 0x4BA809: cmp     ecx, esi
 0x4BA80B: jz      short loc_4BA832
-0x4BA80D: push    esi; char
-0x4BA80E: push    esi; char
+0x4BA80D: push    esi; searchArchives
+0x4BA80E: push    esi; allowMissing
 0x4BA80F: lea     edx, [esp+140h+ArgList]
-0x4BA813: push    edx; ArgList
-0x4BA814: lea     eax, [esp+144h+var_118]
-0x4BA818: push    eax; int
-0x4BA819: call    sub_442890
-0x4BA81E: mov     esi, [esp+138h+var_124]
+0x4BA813: push    edx; path
+0x4BA814: lea     eax, [esp+144h+outTexture]
+0x4BA818: push    eax; outTexture
+0x4BA819: call    OB_TES_LoadOrFindSourceTexture_010201A0; TES texture cache/load helper: checks the global texture map, optionally verifies file existence via FileFinder, loads NiSourceTexture by filename, caches it, and returns a refcounted texture pointer.
+0x4BA81E: mov     esi, [esp+138h+texture]
 0x4BA822: mov     ebx, 1
 0x4BA827: jmp     short loc_4BA83F
 0x4BA829: fstp    st
 0x4BA82B: xor     eax, eax
 0x4BA82D: jmp     loc_4BAA4E
-0x4BA832: mov     [esp+138h+var_124], esi
-0x4BA836: lea     eax, [esp+138h+var_124]
+0x4BA832: mov     [esp+138h+texture], esi
+0x4BA836: lea     eax, [esp+138h+texture]
 0x4BA83A: mov     ebx, 2
 0x4BA83F: mov     edi, [eax]
 0x4BA841: test    edi, edi
-0x4BA843: mov     [esp+138h+var_124], edi
+0x4BA843: mov     [esp+138h+texture], edi
 0x4BA847: jz      short loc_4BA853
 0x4BA849: lea     ecx, [edi+4]
 0x4BA84C: push    ecx; lpAddend
@@ -86,7 +86,7 @@
 0x4BA886: test    bl, 1
 0x4BA889: mov     byte ptr [esp+138h+var_4], 2
 0x4BA891: jz      short loc_4BA8B7
-0x4BA893: mov     esi, [esp+138h+var_118]
+0x4BA893: mov     esi, [esp+138h+outTexture]
 0x4BA897: test    esi, esi
 0x4BA899: jz      short loc_4BA8B7
 0x4BA89B: lea     eax, [esi+4]
@@ -103,12 +103,12 @@
 0x4BA8B5: call    eax
 0x4BA8B7: test    edi, edi
 0x4BA8B9: jz      loc_4BA82B
-0x4BA8BF: mov     ecx, [esp+138h+arg_0]
-0x4BA8C6: push    ecx
+0x4BA8BF: mov     ecx, dword ptr [esp+138h+distantPlane]
+0x4BA8C6: push    ecx; distantPlane
 0x4BA8C7: lea     edx, [esp+13Ch+a2]
-0x4BA8CB: push    edx
-0x4BA8CC: mov     ecx, ebp
-0x4BA8CE: call    sub_4BA3C0
+0x4BA8CB: push    edx; outData
+0x4BA8CC: mov     ecx, ebp; this
+0x4BA8CE: call    TESObjectTREE_BuildBillboardQuadData; Verified Oblivion geometry use: reads float at TESObjectTREE+0x7C, defaults local height to 1400 when <=0, uses half that value as horizontal half-width, and full value as vertical extent. Fallout's directly named BillboardSize.y uses the same 1400 fallback and square-plane construction. This supports (Probable) +0x7C = BillboardSize.y; +0x78 is paired as BillboardSize.x via identical 200 threshold predicate.
 0x4BA8D3: mov     bl, 3
 0x4BA8D5: push    0C0h ; 'À'; Size
 0x4BA8DA: mov     byte ptr [esp+13Ch+var_4], bl
@@ -119,9 +119,9 @@
 0x4BA8EF: mov     ebp, [esp+138h+a2]
 0x4BA8F3: mov     byte ptr [esp+138h+var_4], 4
 0x4BA8FB: jz      short loc_4BA909
-0x4BA8FD: push    ebp; a2
+0x4BA8FD: push    ebp; data
 0x4BA8FE: mov     ecx, eax; this
-0x4BA900: call    NiTriShape_NiTriShape
+0x4BA900: call    OB_NiTriShape_ctorWithData_010201A0
 0x4BA905: mov     edi, eax
 0x4BA907: jmp     short loc_4BA90B
 0x4BA909: xor     edi, edi
@@ -141,19 +141,19 @@
 0x4BA93F: mov     esi, eax
 0x4BA941: jmp     short loc_4BA945
 0x4BA943: xor     esi, esi
-0x4BA945: mov     eax, [esp+138h+var_124]
-0x4BA949: push    eax
-0x4BA94A: mov     ecx, esi
+0x4BA945: mov     eax, [esp+138h+texture]
+0x4BA949: push    eax; texture
+0x4BA94A: mov     ecx, esi; this
 0x4BA94C: mov     byte ptr [esp+13Ch+var_4], bl
-0x4BA953: call    NiTexturingProperty__SetUnk08
-0x4BA958: push    0
-0x4BA95A: mov     ecx, esi
-0x4BA95C: call    sub_405870
+0x4BA953: call    OB_NiTexturingProperty_SetBaseTexture_010201A0
+0x4BA958: push    0; value
+0x4BA95A: mov     ecx, esi; this
+0x4BA95C: call    OB_NiTexturingProperty_SetClampMode_010201A0; NiTexturingProperty map flag helper: ensures map slot 0 exists and writes arg-derived bits into map Unk04 bits 0xC000. 0x560AC0 calls it with 0 for billboard texture property state.
 0x4BA961: push    esi; a2
 0x4BA962: mov     ecx, edi; this
-0x4BA964: call    sub_405680
-0x4BA969: push    1
-0x4BA96B: call    sub_55F7E0
+0x4BA964: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
+0x4BA969: push    1; createIfMissing
+0x4BA96B: call    BSTreeManager_GetInstance; Returns SpeedTree singleton dword_B39E04, creating it on demand when caller passes true.
 0x4BA970: add     eax, 14h
 0x4BA973: mov     eax, [eax]
 0x4BA975: add     esp, 4
@@ -161,7 +161,7 @@
 0x4BA97A: jz      short loc_4BA984
 0x4BA97C: push    eax; a2
 0x4BA97D: mov     ecx, edi; this
-0x4BA97F: call    sub_405680
+0x4BA97F: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x4BA984: push    0E4h ; 'ä'; Size
 0x4BA989: call    FormHeapAlloc
 0x4BA98E: mov     esi, eax
@@ -206,7 +206,7 @@
 0x4BAA1F: push    1
 0x4BAA21: mov     ecx, ebp
 0x4BAA23: call    eax
-0x4BAA25: mov     edi, [esp+138h+var_124]
+0x4BAA25: mov     edi, [esp+138h+texture]
 0x4BAA29: lea     ecx, [edi+4]
 0x4BAA2C: push    ecx; lpAddend
 0x4BAA2D: mov     [esp+13Ch+var_4], 0FFFFFFFFh
@@ -231,3 +231,40 @@
 0x4BAA6A: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x4BAA6F: add     esp, 124h
 0x4BAA75: retn    4
+0x9B3EB0: mov     eax, [ebp-120h]
+0x9B3EB6: and     eax, 1
+0x9B3EB9: jz      locret_9B3ED1
+0x9B3EBF: and     dword ptr [ebp-120h], 0FFFFFFFEh
+0x9B3EC6: lea     ecx, [ebp-118h]; slot
+0x9B3ECC: jmp     NiPointerSlot_Release
+0x9B3ED1: retn
+0x9B3ED2: lea     ecx, [ebp-124h]; slot
+0x9B3ED8: jmp     NiPointerSlot_Release
+0x9B3EDD: lea     ecx, [ebp-120h]; slot
+0x9B3EE3: jmp     NiPointerSlot_Release
+0x9B3EE8: mov     eax, [ebp-11Ch]
+0x9B3EEE: push    eax
+0x9B3EEF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B3EF4: pop     ecx
+0x9B3EF5: retn
+0x9B3EF6: mov     eax, [ebp-11Ch]
+0x9B3EFC: push    eax
+0x9B3EFD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B3F02: pop     ecx
+0x9B3F03: retn
+0x9B3F04: mov     eax, [ebp-11Ch]
+0x9B3F0A: push    eax
+0x9B3F0B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B3F10: pop     ecx
+0x9B3F11: retn
+0x9B3F12: mov     edx, [esp+arg_4]
+0x9B3F16: lea     eax, [edx-128h]
+0x9B3F1C: mov     ecx, [edx-12Ch]
+0x9B3F22: xor     ecx, eax
+0x9B3F24: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B3F29: add     eax, 10h
+0x9B3F2C: mov     ecx, [edx-4]
+0x9B3F2F: xor     ecx, eax
+0x9B3F31: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B3F36: mov     eax, offset stru_ADF72C
+0x9B3F3B: jmp     ___CxxFrameHandler3

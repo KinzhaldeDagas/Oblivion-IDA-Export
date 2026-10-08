@@ -9,7 +9,7 @@
 0x6773C5: fld     dword ptr ds:0B37B60h
 0x6773CB: fstp    [esp+0Ch+var_4]
 0x6773CF: add     ecx, 68h ; 'h'; this
-0x6773D2: call    sub_7616D0
+0x6773D2: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x6773D7: mov     ebp, eax
 0x6773D9: test    ebp, ebp
 0x6773DB: jz      loc_6774E9

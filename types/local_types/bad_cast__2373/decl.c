@@ -1,1 +1,1 @@
-bad_cast
+typedef exception bad_cast;

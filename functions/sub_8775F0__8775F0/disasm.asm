@@ -14,7 +14,7 @@
 0x87760F: mov     large fs:0, eax
 0x877615: mov     ebx, ecx
 0x877617: mov     [esp+24h+var_10], ebx
-0x87761B: mov     eax, [esp+24h+arg_8]
+0x87761B: mov     eax, [esp+24h+value]
 0x87761F: mov     edi, [eax+0Ch]
 0x877622: mov     esi, ds:0B4769Ch
 0x877628: push    edi
@@ -34,7 +34,7 @@
 0x87764D: mov     eax, [edx+88h]
 0x877653: push    0
 0x877655: mov     ecx, ebx
-0x877657: mov     [esp+28h+arg_8], edi
+0x877657: mov     [esp+28h+value], edi
 0x87765B: call    eax
 0x87765D: mov     edi, [edi+4]
 0x877660: mov     ebp, eax
@@ -55,7 +55,7 @@
 0x877682: mov     ecx, edi
 0x877684: call    eax
 0x877686: test    ebp, ebp
-0x877688: mov     ecx, [esp+24h+arg_8]
+0x877688: mov     ecx, [esp+24h+value]
 0x87768C: mov     [ecx+4], ebp
 0x87768F: jz      short loc_87769B
 0x877691: add     ebp, 4
@@ -66,7 +66,7 @@
 0x8776A1: mov     ecx, [esp+24h+var_10]
 0x8776A5: push    0
 0x8776A7: push    ebx
-0x8776A8: mov     [esp+2Ch+arg_8], edi
+0x8776A8: mov     [esp+2Ch+value], edi
 0x8776AC: call    sub_848FD0
 0x8776B1: mov     edi, [edi+4]
 0x8776B4: mov     ebp, eax
@@ -87,7 +87,7 @@
 0x8776D6: mov     ecx, edi
 0x8776D8: call    eax
 0x8776DA: test    ebp, ebp
-0x8776DC: mov     ecx, [esp+24h+arg_8]
+0x8776DC: mov     ecx, [esp+24h+value]
 0x8776E0: mov     [ecx+4], ebp
 0x8776E3: jz      short loc_8776EF
 0x8776E5: add     ebp, 4
@@ -209,21 +209,21 @@
 0x87780A: call    dword ptr ds:0A28078h
 0x877810: mov     ebx, 1
 0x877815: add     [esi+60h], ebx
-0x877818: mov     [esp+24h+arg_8], esi
+0x877818: mov     [esp+24h+value], esi
 0x87781C: mov     edi, [esp+24h+var_10]
 0x877820: mov     edx, [edi+38h]
-0x877823: lea     ecx, [esp+24h+arg_8]
-0x877827: push    ecx
-0x877828: push    edx
-0x877829: lea     ecx, [edi+40h]
+0x877823: lea     ecx, [esp+24h+value]
+0x877827: push    ecx; value
+0x877828: push    edx; index
+0x877829: lea     ecx, [edi+40h]; this
 0x87782C: mov     [esp+2Ch+var_4], 0
-0x877834: call    sub_76CE40
+0x877834: call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.
 0x877839: or      eax, 0FFFFFFFFh
 0x87783C: add     [esi+60h], eax
 0x87783F: mov     [esp+24h+var_4], eax
 0x877843: jnz     short loc_87784C
 0x877845: mov     ecx, esi
-0x877847: call    sub_7604D0
+0x877847: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x87784C: add     [edi+38h], ebx
 0x87784F: mov     ecx, [esp+24h+var_C]
 0x877853: mov     large fs:0, ecx
@@ -234,3 +234,12 @@
 0x87785E: pop     ebx
 0x87785F: add     esp, 10h
 0x877862: retn    10h
+0x9D33F0: lea     ecx, [ebp+0Ch]; void *
+0x9D33F3: jmp     sub_4027D0
+0x9D33F8: mov     edx, [esp+arg_4]
+0x9D33FC: lea     eax, [edx-14h]
+0x9D33FF: mov     ecx, [edx-18h]
+0x9D3402: xor     ecx, eax
+0x9D3404: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D3409: mov     eax, offset stru_AFB818
+0x9D340E: jmp     ___CxxFrameHandler3

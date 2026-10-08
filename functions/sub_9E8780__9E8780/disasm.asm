@@ -2,7 +2,7 @@
 0x9E8786: push    ecx
 0x9E8787: fstp    [esp+4+var_4]; float
 0x9E878A: push    offset aFaifleeconfbas; "fAIFleeConfBase"
-0x9E878F: mov     ecx, offset flt_B36D38
+0x9E878F: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+60h)
 0x9E8794: call    GameSetting_ConstrAndReg_float
 0x9E8799: push    offset sub_A1E190; void (__cdecl *)()
 0x9E879E: call    _atexit

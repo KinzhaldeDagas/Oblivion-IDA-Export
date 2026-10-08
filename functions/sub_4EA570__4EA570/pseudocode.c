@@ -1,4 +1,4 @@
-char __thiscall sub_4EA570(NiTMap_TESCELL *this)
+void __thiscall sub_4EA570(NiTMap_TESCELL *this)
 {
-  return sub_4EA080(this, 0);
+  sub_4EA080(this, 0); /*0x4ea572*/
 }

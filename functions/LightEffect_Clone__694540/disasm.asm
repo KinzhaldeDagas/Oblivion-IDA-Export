@@ -21,11 +21,11 @@
 0x69457B: jz      short loc_694592
 0x69457D: mov     ecx, [esi+0Ch]
 0x694580: mov     edx, [esi+8]
-0x694583: push    ecx; int
+0x694583: push    ecx; effectItem
 0x694584: mov     ecx, [esi+24h]
-0x694587: push    edx; int
-0x694588: push    ecx; int
-0x694589: mov     ecx, eax; this
+0x694587: push    edx; item
+0x694588: push    ecx; caster
+0x694589: mov     ecx, eax; self
 0x69458B: call    LightEffect_constr
 0x694590: mov     edi, eax
 0x694592: mov     edx, [esi]
@@ -42,3 +42,15 @@
 0x6945B3: pop     esi
 0x6945B4: add     esp, 10h
 0x6945B7: retn
+0x9CA7E0: mov     eax, [ebp-10h]
+0x9CA7E3: push    eax
+0x9CA7E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA7E9: pop     ecx
+0x9CA7EA: retn
+0x9CA7EB: mov     edx, [esp+arg_4]
+0x9CA7EF: lea     eax, [edx-0Ch]
+0x9CA7F2: mov     ecx, [edx-10h]
+0x9CA7F5: xor     ecx, eax
+0x9CA7F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA7FC: mov     eax, offset stru_AF2E8C
+0x9CA801: jmp     ___CxxFrameHandler3

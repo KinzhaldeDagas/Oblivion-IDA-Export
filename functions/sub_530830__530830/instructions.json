@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x530830",
-    "line": "mov     eax, ecx",
+    "line": "mov     eax, ecx; Authoritative Oblivion INFO condition gate. Rejects Deleted INFOs, null parent quests, and SayOnce INFOs whose INFO-global spoken byte is set. Otherwise evaluates quest conditions at +0x50 followed by INFO conditions at +0x18 as one continued stream; lowDispositionFailure is set only by a failed GetDisposition >/>= test.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x530842",
-    "line": "mov     ecx, [esp+arg_4]",
+    "line": "mov     ecx, [esp+parentQuest]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x53085C",
-    "line": "add     ecx, 50h ; 'P'",
+    "line": "add     ecx, 50h ; 'P'; this",
     "mnemonic": "add",
     "size": 3
   },
@@ -127,55 +127,55 @@
   },
   {
     "ea": "0x53086A",
-    "line": "mov     ecx, [esp+arg_0]",
+    "line": "mov     ecx, [esp+lowDispositionFailure]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x53086E",
-    "line": "mov     edx, [esp+arg_C]",
+    "line": "mov     edx, [esp+target]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x530872",
-    "line": "push    0",
+    "line": "push    0; continuation",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x530874",
-    "line": "push    ecx",
+    "line": "push    ecx; lowDispositionFailure",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x530875",
-    "line": "mov     ecx, [esp+8+arg_8]",
+    "line": "mov     ecx, [esp+8+speaker]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x530879",
-    "line": "push    edx",
+    "line": "push    edx; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x53087A",
-    "line": "push    ecx",
+    "line": "push    ecx; subject",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x53087B",
-    "line": "lea     ecx, [eax+18h]",
+    "line": "lea     ecx, [eax+18h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x53087E",
-    "line": "call    sub_56A510",
+    "line": "call    ConditionList_EvaluateCombined; If quest.conditions is empty, evaluate the INFO condition list as the whole stream. Otherwise TESTopicInfo::EvaluateConditions passes quest.conditions as the main list and this->conditions as continuation, preserving the evaluator's AND/OR group state across the boundary.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,49 +217,49 @@
   },
   {
     "ea": "0x530894",
-    "line": "mov     edx, [esp+arg_0]",
+    "line": "mov     edx, [esp+lowDispositionFailure]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x530898",
-    "line": "mov     eax, [esp+arg_C]",
+    "line": "mov     eax, [esp+target]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x53089C",
-    "line": "push    0",
+    "line": "push    0; continuation",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x53089E",
-    "line": "push    edx",
+    "line": "push    edx; lowDispositionFailure",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x53089F",
-    "line": "mov     edx, [esp+8+arg_8]",
+    "line": "mov     edx, [esp+8+speaker]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5308A3",
-    "line": "push    eax",
+    "line": "push    eax; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5308A4",
-    "line": "push    edx",
+    "line": "push    edx; subject",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5308A5",
-    "line": "call    sub_56A510",
+    "line": "call    ConditionList_EvaluateCombined; Oblivion condition-stream evaluator. operatorAndFlags bit 0 connects the current predicate to the next predicate by OR; an unflagged item closes that OR group, and groups are combined with AND. TESTopicInfo::EvaluateConditions supplies quest conditions as this list and INFO conditions as continuation, so evaluator state can cross their boundary.",
     "mnemonic": "call",
     "size": 5
   },
@@ -271,49 +271,49 @@
   },
   {
     "ea": "0x5308AD",
-    "line": "mov     edx, [esp+arg_C]",
+    "line": "mov     edx, [esp+target]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5308B1",
-    "line": "push    eax",
+    "line": "push    eax; continuation",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5308B2",
-    "line": "mov     eax, [esp+4+arg_0]",
+    "line": "mov     eax, [esp+4+lowDispositionFailure]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5308B6",
-    "line": "push    eax",
+    "line": "push    eax; lowDispositionFailure",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5308B7",
-    "line": "mov     eax, [esp+8+arg_8]",
+    "line": "mov     eax, [esp+8+speaker]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5308BB",
-    "line": "push    edx",
+    "line": "push    edx; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5308BC",
-    "line": "push    eax",
+    "line": "push    eax; subject",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5308BD",
-    "line": "call    sub_56A510",
+    "line": "call    ConditionList_EvaluateCombined; Oblivion condition-stream evaluator. operatorAndFlags bit 0 connects the current predicate to the next predicate by OR; an unflagged item closes that OR group, and groups are combined with AND. TESTopicInfo::EvaluateConditions supplies quest conditions as this list and INFO conditions as continuation, so evaluator state can cross their boundary.",
     "mnemonic": "call",
     "size": 5
   },

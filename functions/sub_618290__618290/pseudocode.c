@@ -1,35 +1,33 @@
 void *__userpurge sub_618290@<eax>(double a1@<st2>, double a2@<st1>, double a3@<st0>, _DWORD *Dst)
 {
   _DWORD *v4; // esi
-  TESSaveLoad *v5; // ecx
+  TESSaveLoadGame_SerializationView *v5; // ecx
   void *result; // eax
   _DWORD *v7; // eax
-  size_t v8; // [esp-4h] [ebp-8h]
 
-  v4 = Dst;
-  LODWORD(v8) = 1;
-  v5 = SaveLoad_CurrentSavegame;
-  LOBYTE(Dst) = Dst != 0;
-  result = SaveLoad_LoadData((int)v5, &Dst, v8);
-  if ( (_BYTE)Dst )
+  v4 = Dst; /*0x618291*/
+  v5 = g_TESSaveLoadGame; /*0x6182a1*/
+  LOBYTE(Dst) = Dst != 0; /*0x6182a7*/
+  result = SaveLoad_LoadData(v5, &Dst, 1u); /*0x6182ab*/
+  if ( (_BYTE)Dst ) /*0x6182b5*/
   {
-    v7 = (_DWORD *)FormHeapAlloc(8u);
-    if ( v7 )
+    v7 = (_DWORD *)FormHeapAlloc(8u); /*0x6182b9*/
+    if ( v7 ) /*0x6182c3*/
     {
-      *v7 = 0;
-      v7[1] = 0;
-      *v4 = v7;
-      return (void *)sub_614DB0(v7, a1, a2, a3);
+      *v7 = 0; /*0x6182c5*/
+      v7[1] = 0; /*0x6182cb*/
+      *v4 = v7; /*0x6182d4*/
+      return (void *)sub_614DB0(v7, a1, a2, a3); /*0x6182d6*/
     }
     else
     {
-      *v4 = 0;
-      return (void *)sub_614DB0(0, a1, a2, a3);
+      *v4 = 0; /*0x6182e3*/
+      return (void *)sub_614DB0(0, a1, a2, a3); /*0x6182e5*/
     }
   }
   else
   {
-    *v4 = 0;
+    *v4 = 0; /*0x6182ee*/
   }
-  return result;
+  return result; /*0x6182db*/
 }

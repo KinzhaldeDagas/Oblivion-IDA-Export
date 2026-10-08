@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5E58F0",
-    "line": "fld     [esp+arg_0]",
+    "line": "fld     [esp+arg_0]; ODismemberment: Actor_OnPhysicalHit authoritative ABI. Args are (float fatigueLikeDamage, float healthDamage, Actor* attacker); second float is applied to Health AV 8, first is difficulty-adjusted and applied to Fatigue AV 0x0A, return is IsDead.",
     "mnemonic": "fld",
     "size": 4
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x5E5931",
-    "line": "call    sub_613640",
+    "line": "call    CombatController_FindTargetInfo; Attacker TargetInfo+0x10 accumulates difficulty-adjusted fatigue-like physical pressure dealt to this victim; SmartAI v0.7 reads it as bounded engagement momentum.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x5E5963",
-    "line": "call    sub_613640",
+    "line": "call    CombatController_FindTargetInfo; Find victim's TargetInfo for attacker; +0x0C accumulates positive health damage received from this attacker.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x5E599E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; ODismemberment: Actor_OnPhysicalHit applies the second float argument to Health AV 8 through DamageAV_F.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x5E59C8",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; ODismemberment: Actor_OnPhysicalHit applies the first/difficulty-adjusted float argument to Fatigue AV 0x0A, then returns IsDead.",
     "mnemonic": "mov",
     "size": 2
   },

@@ -1,1 +1,1 @@
-DeviceIoControl::DeviceIoProc
+typedef BOOL (*DeviceIoControl::DeviceIoProc)(DWORD, LPVOID, DWORD, LPVOID, DWORD, LPDWORD, LPOVERLAPPED_0);

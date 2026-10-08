@@ -1,6 +1,9 @@
-_DWORD *__thiscall sub_4EA3A0(_DWORD *this, int a2)
+// Verified TESTerrainLODQuadRoot constructor: stores its owner map at +4 and initializes the 0x60-byte quad-data object at +0; caller stores signed quadX/quadY at +8/+0xA.
+TESTerrainLODQuadRoot_OblivionLayout_010Verified *__thiscall TESTerrainLODQuadRoot_ctor(
+        TESTerrainLODQuadRoot_OblivionLayout_010Verified *this,
+        TESWorldSpaceTerrainLODQuadMap_OblivionLayout_Verified *ownerMap)
 {
-  *(this + 1) = a2;
-  sub_4E9F50(this);
-  return this;
+  this->ownerMap = (TESWorldSpaceTerrainLODQuadMap *)ownerMap; /*0x4ea3a7*/
+  TESTerrainLODQuadRoot_InitializeQuadData(this); /*0x4ea3aa*/
+  return this; /*0x4ea3b1*/
 }

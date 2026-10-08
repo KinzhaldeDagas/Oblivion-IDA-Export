@@ -29,7 +29,6 @@
 0x91A781: mov     [esp+0A0h+var_8C], ecx
 0x91A785: jle     loc_91A8D1
 0x91A78B: jmp     short loc_91A790
-0x91A78D: align 10h
 0x91A790: mov     eax, [edx+38h]
 0x91A793: mov     eax, [eax+ecx*4]
 0x91A796: mov     esi, [eax+38h]
@@ -47,7 +46,7 @@
 0x91A7BB: lea     edx, [esi+20h]
 0x91A7BE: push    edx
 0x91A7BF: lea     ecx, [esp+0A4h+var_80]
-0x91A7C3: call    sub_8B1DD0
+0x91A7C3: call    hkMatrix3_SetFromQuaternion; Converts a quaternion into a 3x3 basis matrix. 0x896000 uses this during per-frame movement basis refresh.
 0x91A7C8: movaps  xmm0, xmmword ptr [esi+40h]
 0x91A7CC: movaps  xmm2, [esp+0A0h+var_60]
 0x91A7D1: mov     eax, [esp+0A0h+var_88]
@@ -81,7 +80,7 @@
 0x91A82B: lea     ecx, [esi+30h]
 0x91A82E: push    ecx
 0x91A82F: lea     ecx, [esp+0A4h+var_40]
-0x91A833: call    sub_8B1DD0
+0x91A833: call    hkMatrix3_SetFromQuaternion; Converts a quaternion into a 3x3 basis matrix. 0x896000 uses this during per-frame movement basis refresh.
 0x91A838: movaps  xmm0, xmmword ptr [esi+40h]
 0x91A83C: movaps  xmm2, [esp+0A0h+anonymous_1]
 0x91A844: movaps  xmm3, [esp+0A0h+anonymous_0]

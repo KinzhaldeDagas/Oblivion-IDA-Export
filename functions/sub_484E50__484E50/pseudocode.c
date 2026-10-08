@@ -1,18 +1,19 @@
-void __usercall sub_484E50(ExtraDataList ***a1@<ecx>, char a2@<bpl>, double a3@<st2>, double a4@<st1>, double a5@<st0>)
+// Remove the poison extra from this equipped EntryData and notify/update inventory state. Bow-shot construction calls this at release, after retaining the AlchemyItem on ArrowProjectile.
+void __thiscall EquippedEntryData_ConsumePoison(EntryData *this)
 {
-  ExtraDataList **v5; // eax
-  ExtraDataList *v6; // esi
+  ExtraDataList **extendData; // eax
+  ExtraDataList *v2; // esi
 
-  v5 = *a1;
-  if ( *a1 )
+  extendData = (ExtraDataList **)this->extendData; /*0x484e50*/
+  if ( this->extendData ) /*0x484e50*/
   {
-    v6 = *v5;
-    if ( *v5 )
+    v2 = *extendData; /*0x484e57*/
+    if ( *extendData ) /*0x484e57*/
     {
-      if ( ExtraDataList_GetPoison(*v5) )
+      if ( ExtraDataList_GetPoison(*extendData) ) /*0x484e5f*/
       {
-        sub_41F660(v6);
-        sub_57B230(a2, a3, a4, a5);
+        sub_41F660(v2); /*0x484e6a*/
+        sub_57B230(); /*0x484e70*/
       }
     }
   }

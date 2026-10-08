@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7989B0",
-    "line": "sub     esp, 9Ch",
+    "line": "sub     esp, 9Ch; Oblivion CLeafGeometry::Update. Lazily regenerates selected LOD raw card XYZ (and CPU leaf wind when selected), marks the cache valid, then publishes the first 0x3C bytes as leaf output. Camera-angle parameters do not rotate these corners in this body; final pose is shader-side. RT4.1 Update differs.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x7989C6",
-    "line": "mov     esi, [esp+0A8h+arg_4]",
+    "line": "mov     esi, dword ptr [esp+0A8h+lodLevel]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x798A15",
-    "line": "cmp     byte ptr [ebp+ecx*4+3Ch], 0",
+    "line": "cmp     byte ptr [ebp+ecx*4+3Ch], 0; Dirty test for generated leaf-card vertex table at SLodGeometry+0x3C. Regeneration below writes vertex data and sets this byte, but never rewrites +0x0C or +0x10.",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -205,19 +205,19 @@
   },
   {
     "ea": "0x798A35",
-    "line": "push    esi; float",
+    "line": "push    esi; lodLevel",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x798A36",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x798A38",
-    "line": "call    sub_7987D0",
+    "line": "call    OB_CLeafGeometry_ComputeWindEffect_010201A0; Oblivion CPU leaf wind pass: transforms original leaf centers through one selected 4x4 wind matrix and linearly blends by one per-leaf weight.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x798A4F",
-    "line": "fmul    [esp+0ACh+arg_10]",
+    "line": "fmul    [esp+0ACh+leafSizeIncreaseFactor]",
     "mnemonic": "fmul",
     "size": 7
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x798A60",
-    "line": "push    offset sub_786E40",
+    "line": "push    offset OB_stVec3_ctor_zero_010201A0; SpeedTree decode: stVec3 zero constructor used for CLeafGeometry dimension/origin arrays.",
     "mnemonic": "push",
     "size": 5
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x798A73",
-    "line": "push    offset sub_786E40",
+    "line": "push    offset OB_stVec3_ctor_zero_010201A0; SpeedTree decode: stVec3 zero constructor used for CLeafGeometry dimension/origin arrays.",
     "mnemonic": "push",
     "size": 5
   },
@@ -1261,13 +1261,13 @@
   },
   {
     "ea": "0x798C8C",
-    "line": "mov     byte ptr [ebp+3Ch], 1",
+    "line": "mov     byte ptr [ebp+3Ch], 1; Marks only the generated vertex table valid after refresh. Per-card alternate texture indices remain the post-Compute allocation created by InitLods.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x798C90",
-    "line": "mov     eax, [esp+0ACh+arg_0]",
+    "line": "mov     eax, [esp+0ACh+outLeaf]",
     "mnemonic": "mov",
     "size": 7
   },

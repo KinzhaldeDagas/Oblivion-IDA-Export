@@ -1,1 +1,5 @@
-VarInfoEntry
+struct VarInfoEntry
+{
+VariableInfo *data;
+VarInfoEntry *next;
+};

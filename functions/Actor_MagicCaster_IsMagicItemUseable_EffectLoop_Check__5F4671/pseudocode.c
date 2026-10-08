@@ -1,4 +1,4 @@
-int __usercall Actor_MagicCaster_IsMagicItemUseable_::EffectLoop_Check@<eax>(
+int __userpurge Actor_MagicCaster_IsMagicItemUseable_::EffectLoop_Check@<eax>(
         char bl0@<bl>,
         int ebp0@<ebp>,
         int a3,
@@ -10,7 +10,20 @@ int __usercall Actor_MagicCaster_IsMagicItemUseable_::EffectLoop_Check@<eax>(
         int a9,
         char a10,
         int a11,
-        int a12)
+        _DWORD *a12)
 {
-  return Actor_MagicCaster_IsMagicItemUseable_::EffectLoop_Check_(bl0, ebp0, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12);
+  return Actor_MagicCaster_IsMagicItemUseable_::EffectLoop_Check_(
+           bl0,
+           ebp0,
+           a12,
+           a3,
+           a4,
+           a5,
+           a6,
+           a7,
+           a8,
+           a9,
+           a10,
+           a11,
+           (int)a12);
 }

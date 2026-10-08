@@ -1,19 +1,32 @@
 {
-  "callees_count": 13,
-  "callers_count": 11,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
+  "callers_count": 20,
+  "chunks": [
+    [
+      "0x4CAAC0",
+      "0x4CABB4"
+    ]
+  ],
+  "chunks_sha256": "7782fa325ad26b8f5ff350056948fd86746ac8db5c962a2664275861d9d83d98",
+  "comment_regular": "Verified Oblivion owner predicate: reads the cell's XOWN and XRNK extra data; returns true for an NPC owner matching the actor's base form, or for a faction owner when the actor is an NPC whose faction rank meets the cell's required rank. Player identity is passed into faction-rank evaluation for its special handling. Called by door access/trespass policy and other ownership paths. Fallout has the analogous TESObjectCELL::IsActorBaseCellOwner; it takes TESActorBase* and uses a differently exposed faction-rank path.",
+  "comment_repeatable": "Verified Oblivion owner predicate: reads the cell's XOWN and XRNK extra data; returns true for an NPC owner matching the actor's base form, or for a faction owner when the actor is an NPC whose faction rank meets the cell's required rank. Player identity is passed into faction-rank evaluation for its special handling. Called by door access/trespass policy and other ownership paths. Fallout has the analogous TESObjectCELL::IsActorBaseCellOwner; it takes TESActorBase* and uses a differently exposed faction-rank path.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 6,
-  "display_name": "sub_4CAAC0",
+  "display_name": "TESObjectCELL_IsOwnedByActor",
   "end_ea": "0x4CABB4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4CAAC0",
+  "name": "TESObjectCELL_IsOwnedByActor",
   "segment": ".text",
   "sha256": "7782fa325ad26b8f5ff350056948fd86746ac8db5c962a2664275861d9d83d98",
   "size": 244,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4CAAC0",
-  "type": "char __thiscall(ExtraDataList *this, Actor *)",
+  "total_chunk_size": 244,
+  "type": "bool __thiscall(TESObjectCELL *cell, Actor *actor)",
   "xrefs_from_count": 104,
   "xrefs_to_count": 20
 }

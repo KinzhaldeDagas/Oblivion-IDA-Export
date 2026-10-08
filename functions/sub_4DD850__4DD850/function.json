@@ -1,19 +1,36 @@
 {
-  "callees_count": 51,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 20,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
+  "chunks": [
+    [
+      "0x4DD850",
+      "0x4DDB00"
+    ],
+    [
+      "0x9CA7E0",
+      "0x9CA806"
+    ]
+  ],
+  "chunks_sha256": "8a9264d2377c2175cb13ddf0fb8dff7793ab8f40d2e42f520e90a66eae22e710",
+  "comment_regular": "Verified enable-state activation: this branch runs when the reference's 0x800 disabled bit is set, performs activation/processing work, then clears the bit through TESForm_SetDisabledFlag. It recursively propagates state through ExtraEnableStateChildren.",
+  "comment_repeatable": "Verified enable-state activation: this branch runs when the reference's 0x800 disabled bit is set, performs activation/processing work, then clears the bit through TESForm_SetDisabledFlag. It recursively propagates state through ExtraEnableStateChildren.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
   "display_name": "sub_4DD850",
   "end_ea": "0x4DDB00",
-  "flags": 20480,
+  "evidence_confidence": "Unknown",
+  "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_4DD850",
   "segment": ".text",
   "sha256": "19c3c8b89bcd284217d237b369a43de915be5fe98d98596b529890c2f9cdbdf5",
   "size": 688,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4DD850",
+  "total_chunk_size": 726,
   "type": "void __usercall(int@<ecx>, int@<ebx>, char@<bpl>, double@<st2>, double@<st1>, double@<st0>)",
-  "xrefs_from_count": 283,
+  "xrefs_from_count": 297,
   "xrefs_to_count": 3
 }

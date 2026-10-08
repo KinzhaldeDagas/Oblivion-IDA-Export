@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E6CA0",
-    "line": "push    ecx",
+    "line": "push    ecx; Verified point teardown order under the shared pathgrid critical section: remove reciprocal PGRI cross-cell connections; clear pointsByReference list headers/nodes; destroy each point's owned adjacency list via its point cleanup helper; free point nodes; destroy and null the NiTArray at +0x24. The 512-unit spatial-bucket map at +0x44 is cleared separately by TESPathGrid_ClearSpatialBucketMap.",
     "mnemonic": "push",
     "size": 1
   },
@@ -49,13 +49,13 @@
   },
   {
     "ea": "0x4E6CB1",
-    "line": "push    offset stru_B36000; lpCriticalSection",
+    "line": "push    offset g_PathGridCriticalSection; lpCriticalSection",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x4E6CB6",
-    "line": "call    dword ptr ds:0A2806Ch",
+    "line": "call    dword ptr ds:0A2806Ch; Verified point graph teardown enters g_PathGridCriticalSection before removing reciprocal PGRI links, clearing reference-to-point index, and destroying points. Updates owner-thread/nesting bookkeeping while held.",
     "mnemonic": "call",
     "size": 6
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x4E6CC9",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -85,19 +85,19 @@
   },
   {
     "ea": "0x4E6CD0",
-    "line": "call    sub_4E4F20",
+    "line": "call    TESPathGrid_RemovePGRICrossCellConnections; Verified PGRI teardown: for each record, read its local point index, get the local TESPathGridPoint, then remove the connection to the remote point position stored at record+4; finally the PGRI list records are freed by TESPathGrid_ClearPGRIRecords.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E6CD5",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E6CD7",
-    "line": "call    sub_4E5040",
+    "line": "call    TESPathGrid_ClearPointsByReference; Verified clears TESPathGrid.pointsByReference (+0x34), the map from TESObjectREFR* keys to BSSimpleList<TESPathGridPoint*> values. Frees the list nodes and headers, then calls NiTMap_Clear; it does not destroy referenced forms or point objects. Called only by TESPathGrid_ClearPointsAndReferenceMaps while the pathgrid critical section is held.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,13 +175,13 @@
   },
   {
     "ea": "0x4E6CFD",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E6CFF",
-    "line": "call    sub_4E8200",
+    "line": "call    TESPathGridPoint_Cleanup; Verified point cleanup called before freeing persistent or temporary TESPathGridPoint nodes: frees adjacency-list chain at +0x24, clears the per-point renderNode at +0x28, decrements g_PathGridPointLiveCount, and on the last node releases both shared marker-template references. It does not free the point allocation itself.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x4E6D05",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x4E6D47",
-    "line": "push    offset stru_B36000; lpCriticalSection",
+    "line": "push    offset g_PathGridCriticalSection; lpCriticalSection",
     "mnemonic": "push",
     "size": 5
   },

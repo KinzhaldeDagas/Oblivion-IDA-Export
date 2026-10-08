@@ -1,40 +1,72 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "SC_HSC_A",
+  "definition": "struct __declspec(align(8)) SC_HSC_A\n{\nPSP_FILE_CALLBACK_A msghandler __offset(OFF64|AUTO);\nvoid *context __offset(OFF64|AUTO);\nchar cab_path[260];\nchar last_cab[260];\nchar most_recent_target[260];\n}\n",
   "id": 18374686479671852280,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "msghandler",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "PSP_FILE_CALLBACK_A"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "context",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "void *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cab_path",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 260
+      "size": 260,
+      "type": "char[260]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "last_cab",
       "offset": 268,
-      "offset_hex": "0x10c",
-      "size": 260
+      "offset_hex": "0x10C",
+      "size": 260,
+      "type": "char[260]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "most_recent_target",
       "offset": 528,
       "offset_hex": "0x210",
-      "size": 260
+      "size": 260,
+      "type": "char[260]"
     }
   ],
   "name": "SC_HSC_A",
+  "ordinal": 6081,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 792
 }

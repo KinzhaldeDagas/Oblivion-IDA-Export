@@ -1,6 +1,6 @@
 UInt8 __thiscall sub_629B50(HighProcess *this, UInt8 a2)
 {
-  this->movementFlags &= kMovement_Sneak|kMovement_Swim|kMovement_Jump|kMovement_Fly|kMovement_Fall|kMovement_Slide|0xC0;
-  this->unk0D0 = a2;
-  return a2;
+  this->movementFlags &= kMovement_Sneak|kMovement_Swim|kMovement_Jump|kMovement_Fly|kMovement_Fall|kMovement_Slide|0xC0; /*0x629b54*/
+  this->unk0D0 = a2; /*0x629b5d*/
+  return a2; /*0x629b63*/
 }

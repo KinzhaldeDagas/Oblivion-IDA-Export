@@ -1,1 +1,1 @@
-CPFLAGS
+typedef DWORD CPFLAGS;

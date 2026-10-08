@@ -1,1 +1,1 @@
-UDACCEL
+typedef _UDACCEL UDACCEL;

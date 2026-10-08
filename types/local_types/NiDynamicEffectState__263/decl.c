@@ -1,1 +1,1 @@
-NiDynamicEffectState
+struct NiDynamicEffectState;

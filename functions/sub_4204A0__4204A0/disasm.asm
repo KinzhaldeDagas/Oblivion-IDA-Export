@@ -1,4 +1,4 @@
-0x4204A0: push    esi
+0x4204A0: push    esi; Removes ExtraDroppedItemList type 0x42 when present.
 0x4204A1: push    42h ; 'B'; a2
 0x4204A3: mov     esi, ecx
 0x4204A5: call    BaseExtraList_GetExtraData

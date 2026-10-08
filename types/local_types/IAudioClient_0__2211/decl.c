@@ -1,1 +1,1 @@
-IAudioClient_0
+typedef IAudioClient IAudioClient_0;

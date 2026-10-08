@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x7890F0",
+      "0x78911E"
+    ]
+  ],
+  "chunks_sha256": "629c2aa0677c4e2d5f2fa980394fc6d892e0c36c20bb36b64640783adf3bdce1",
+  "comment_regular": "Oblivion byte-vector uninitialized fill-N primitive: writes count copies of one byte and returns one-past-last.",
+  "comment_repeatable": "Oblivion byte-vector uninitialized fill-N primitive: writes count copies of one byte and returns one-past-last.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7890F0",
+  "display_name": "OB_stVectorByte_UninitializedFillN_010201A0",
   "end_ea": "0x78911E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7890F0",
+  "name": "OB_stVectorByte_UninitializedFillN_010201A0",
   "segment": ".text",
   "sha256": "629c2aa0677c4e2d5f2fa980394fc6d892e0c36c20bb36b64640783adf3bdce1",
   "size": 46,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7890F0",
-  "type": "_BYTE *__stdcall(_BYTE *, int, _BYTE *)",
+  "total_chunk_size": 46,
+  "type": "unsigned __int8 *__stdcall(unsigned __int8 *destination, unsigned int count, const unsigned __int8 *value)",
   "xrefs_from_count": 22,
   "xrefs_to_count": 2
 }

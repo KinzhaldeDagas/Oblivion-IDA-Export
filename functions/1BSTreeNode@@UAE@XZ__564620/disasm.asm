@@ -1,4 +1,4 @@
-0x564620: push    0FFFFFFFFh
+0x564620: push    0FFFFFFFFh; Verified BSTreeNode destructor frees branchNodesByLOD/leafNodesByLOD array headers, releases billboardNode/treeModel smart references, then chains to NiBSPNode destructor.
 0x564622: push    offset ??1BSTreeNode@@UAE@XZ_SEH
 0x564627: mov     eax, large fs:0
 0x56462D: push    eax
@@ -20,13 +20,13 @@
 0x564660: jz      short loc_564689
 0x564662: mov     ecx, [eax-4]
 0x564665: lea     edi, [eax-4]
-0x564668: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x564668: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x56466D: push    ecx; int
 0x56466E: push    4; unsigned int
 0x564670: push    eax; void *
 0x564671: call    $LN21
 0x564676: push    edi
-0x564677: call    FormHeapFree
+0x564677: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x56467C: add     esp, 4
 0x56467F: mov     dword ptr [esi+0E0h], 0
 0x564689: mov     eax, [esi+0E4h]
@@ -34,13 +34,13 @@
 0x564691: jz      short loc_5646BA
 0x564693: mov     edx, [eax-4]
 0x564696: lea     edi, [eax-4]
-0x564699: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x564699: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x56469E: push    edx; int
 0x56469F: push    4; unsigned int
 0x5646A1: push    eax; void *
 0x5646A2: call    $LN21
 0x5646A7: push    edi
-0x5646A8: call    FormHeapFree
+0x5646A8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5646AD: add     esp, 4
 0x5646B0: mov     dword ptr [esi+0E4h], 0
 0x5646BA: mov     edi, [esi+0E8h]
@@ -87,3 +87,18 @@
 0x56472B: pop     ebp
 0x56472C: add     esp, 10h
 0x56472F: retn
+0x9BD510: mov     ecx, [ebp-10h]; this
+0x9BD513: jmp     ??1NiBSPNode@@UAE@XZ; NiBSPNode::~NiBSPNode(void)
+0x9BD518: mov     ecx, [ebp-10h]
+0x9BD51B: add     ecx, 0DCh ; 'Ü'; slot
+0x9BD521: jmp     NiPointerSlot_Release
+0x9BD526: mov     ecx, [ebp-10h]
+0x9BD529: add     ecx, 0E8h ; 'è'; slot
+0x9BD52F: jmp     NiPointerSlot_Release
+0x9BD534: mov     edx, [esp+arg_4]
+0x9BD538: lea     eax, [edx-10h]
+0x9BD53B: mov     ecx, [edx-14h]
+0x9BD53E: xor     ecx, eax
+0x9BD540: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BD545: mov     eax, offset stru_AE6ECC
+0x9BD54A: jmp     ___CxxFrameHandler3

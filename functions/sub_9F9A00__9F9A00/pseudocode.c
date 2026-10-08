@@ -1,5 +1,5 @@
-int sub_9F9A00()
+int InitSetting_sSkillNameMercantile()
 {
-  GameSetting_ConstrAndReg((int *)&sSkillNameMercantile, (int)"sSkillNameMercantile", (int)"Mercantile");
-  return atexit(sub_A23A70);
+  GameSetting_ConstrAndReg(&g_sSkillNameMercantile, "sSkillNameMercantile", "Mercantile"); /*0x9f9a0f*/
+  return atexit(sub_A23A70); /*0x9f9a1f*/
 }

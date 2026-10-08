@@ -1,1 +1,1 @@
-NiPSysFieldModifier
+struct NiPSysFieldModifier;

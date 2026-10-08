@@ -240,12 +240,6 @@
     "size": 2
   },
   {
-    "ea": "0x5A49FD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x5A4A00",
     "line": "mov     cl, [eax]",
     "mnemonic": "mov",
@@ -565,7 +559,7 @@
   },
   {
     "ea": "0x5A4AA5",
-    "line": "call    sub_584740",
+    "line": "call    Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.",
     "mnemonic": "call",
     "size": 5
   },
@@ -865,7 +859,7 @@
   },
   {
     "ea": "0x5A4B45",
-    "line": "call    sub_4D74D0",
+    "line": "call    TESObjectREFR_HasHorseCreatureBase; 0x4D74D0: Travel-horse target predicate decoded 2026-09-05: reference base pointer+0x1C must be nonnull; GetBaseForm virtual slot+0x170 yields typebyte0x24 CREA; creature byte+0x104 must equal4 (horse). XHRS resolver invokes this at0x426681 after target REFR cast. TESCS peer0x53F310 uses ref+0x28, vslot+0x19C, creature+0x138.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1135,7 +1129,7 @@
   },
   {
     "ea": "0x5A4BCE",
-    "line": "call    sub_584740",
+    "line": "call    Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1309,7 +1303,7 @@
   },
   {
     "ea": "0x5A4C26",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1321,7 +1315,7 @@
   },
   {
     "ea": "0x5A4C2D",
-    "line": "call    sub_4D7740",
+    "line": "call    TESObjectREFR_GetEffectiveDoorLock; Verified: returns this reference's ExtraLockData* payload when present; otherwise, if its ExtraTeleport has a linked door, returns that linked reference's ExtraLockData* payload; null when neither exists. Directly supported by ExtraDataList_GetLock, ExtraDataList_GetTeleport, and TeleportData_GetLinkedDoor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1411,19 +1405,19 @@
   },
   {
     "ea": "0x5A4C61",
-    "line": "fstp    [esp+5Ch+var_5C]; a3",
+    "line": "fstp    [esp+5Ch+var_5C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5A4C64",
-    "line": "push    0FB2h; a2",
+    "line": "push    0FB2h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5A4C69",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1435,7 +1429,7 @@
   },
   {
     "ea": "0x5A4C70",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1567,19 +1561,19 @@
   },
   {
     "ea": "0x5A4CBB",
-    "line": "fstp    [esp+5Ch+var_5C]; a3",
+    "line": "fstp    [esp+5Ch+var_5C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5A4CBE",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5A4CC3",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1657,19 +1651,19 @@
   },
   {
     "ea": "0x5A4CF0",
-    "line": "fstp    [esp+5Ch+var_5C]; a3",
+    "line": "fstp    [esp+5Ch+var_5C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5A4CF3",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5A4CF8",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2173,19 +2167,19 @@
   },
   {
     "ea": "0x5A4E11",
-    "line": "fstp    [esp+5Ch+var_5C]; a3",
+    "line": "fstp    [esp+5Ch+var_5C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5A4E14",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5A4E19",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2233,19 +2227,19 @@
   },
   {
     "ea": "0x5A4E36",
-    "line": "fstp    [esp+5Ch+var_5C]; a3",
+    "line": "fstp    [esp+5Ch+var_5C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5A4E39",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5A4E3E",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2299,19 +2293,19 @@
   },
   {
     "ea": "0x5A4E5D",
-    "line": "fstp    [esp+5Ch+var_5C]; a3",
+    "line": "fstp    [esp+5Ch+var_5C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5A4E60",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5A4E65",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2359,19 +2353,19 @@
   },
   {
     "ea": "0x5A4E82",
-    "line": "fstp    [esp+5Ch+var_5C]; a3",
+    "line": "fstp    [esp+5Ch+var_5C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5A4E85",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5A4E8A",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2485,13 +2479,13 @@
   },
   {
     "ea": "0x5A4ECC",
-    "line": "mov     ecx, [esp+58h+var_44]",
+    "line": "mov     ecx, [esp+58h+var_44]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5A4ED0",
-    "line": "call    sub_428E70",
+    "line": "call    ExtraLockData_IsLocked; Verified runtime lock predicate: returns (ExtraLockData.flags & 0x01) != 0. ExtraDataList_Load sets this bit on accepted 12-byte and legacy 16-byte XLOC payloads; serialized flag bits are then preserved. This is a runtime normalization step.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2515,25 +2509,25 @@
   },
   {
     "ea": "0x5A4EE3",
-    "line": "push    1",
+    "line": "push    1; useFactionOwnership",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5A4EE5",
-    "line": "push    ecx",
+    "line": "push    ecx; actorReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5A4EE6",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; reference",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5A4EE8",
-    "line": "call    TESOBjectREFR_IsOwnedBy",
+    "line": "call    TESObjectREFR_IsOwnedBy; Verified ownership predicate and flag meaning: resolve the effective owner; accept exact equality with the actor's template/base form. When the owner differs, a nonzero ownership-global value can permit the access. With useFactionOwnership=true, a Faction owner is instead checked against the actor base's faction rank and the reference's effective required rank; callers passing false skip that faction-rank path. Direct callers include many `true` paths and ContainerExtraData_RemoveForm's item-sweep call with false. Fallout's TESObjectREFR::IsAnOwner/DoorLock::IsAnOwner also expose a `useFaction` boolean, but its implementation uses actor faction membership and has different rank/global handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2569,31 +2563,31 @@
   },
   {
     "ea": "0x5A4EFF",
-    "line": "push    1",
+    "line": "push    1; bypassPolicyWhenNoEffectiveLock",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5A4F01",
-    "line": "push    0",
+    "line": "push    0; unknownPolicyFlag0",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5A4F03",
-    "line": "push    edx",
+    "line": "push    edx; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5A4F04",
-    "line": "push    edi",
+    "line": "push    edi; doorReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5A4F05",
-    "line": "call    sub_4B72C0",
+    "line": "call    TESObjectDOOR_CheckActorAccessPolicy; Verified policy byte 1 behavior: when GetEffectiveDoorLock returns null, bypassPolicyWhenNoEffectiveLock=true returns accessible immediately; false continues through ownership, guard, trespass, and linked-cell checks. Current Oblivion callers: TravelPath_ComputeDoorTransitionPenalty passes (unknownPolicyFlag0=0, bypassPolicyWhenNoEffectiveLock=1), while IsOffLimitToThePlayer passes (0,0). unknownPolicyFlag0 is zero at all identified callers and remains Unknown. Fallout has analogous DoorLock policy methods, but the parameter meaning here is established from Oblivion control flow.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2617,25 +2611,25 @@
   },
   {
     "ea": "0x5A4F15",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5A4F17",
-    "line": "call    sub_4D7780",
+    "line": "call    TESObjectREFR_GetEffectiveDoorLockLevel; Verified effective lock-level helper: returns 0 when neither this reference nor its linked-door reference has ExtraLockData; otherwise tail-calls ExtraLockData_GetPlayerScaledLockLevel and returns its integer result. Callers feed the result to GetLockLevel or compare lock difficulty for lockpick/open behavior.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5A4F1C",
-    "line": "push    eax",
+    "line": "push    eax; numericLockMagnitude",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5A4F1D",
-    "line": "call    GetLockLevel",
+    "line": "call    GetLockLevel; Verified numeric lock magnitude to LOCK_LEVEL mapper. Thresholds are iLockLevelMaxVeryEasy, iLockLevelMaxEasy, iLockLevelMaxAverage, iLockLevelMaxHard, and iLockLevelMaxVeryHard; outputs 0..5 map through LockLevelNames to VeryEasy, Easy, Average, Hard, VeryHard, Impossible. Fallout independently uses the matching LOCK_LEVEL names, but this mapping is directly established by Oblivion code and data.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2749,13 +2743,13 @@
   },
   {
     "ea": "0x5A4F5A",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5A4F5C",
-    "line": "call    sub_4D7780",
+    "line": "call    TESObjectREFR_GetEffectiveDoorLockLevel; Verified effective lock-level helper: returns 0 when neither this reference nor its linked-door reference has ExtraLockData; otherwise tail-calls ExtraLockData_GetPlayerScaledLockLevel and returns its integer result. Callers feed the result to GetLockLevel or compare lock difficulty for lockpick/open behavior.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2785,13 +2779,13 @@
   },
   {
     "ea": "0x5A4F6F",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5A4F71",
-    "line": "call    sub_4D7780",
+    "line": "call    TESObjectREFR_GetEffectiveDoorLockLevel; Verified effective lock-level helper: returns 0 when neither this reference nor its linked-door reference has ExtraLockData; otherwise tail-calls ExtraLockData_GetPlayerScaledLockLevel and returns its integer result. Callers feed the result to GetLockLevel or compare lock difficulty for lockpick/open behavior.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2821,19 +2815,19 @@
   },
   {
     "ea": "0x5A4F81",
-    "line": "fstp    [esp+5Ch+var_5C]; a3",
+    "line": "fstp    [esp+5Ch+var_5C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5A4F84",
-    "line": "push    0FAFh; a2",
+    "line": "push    0FAFh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5A4F89",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2863,13 +2857,13 @@
   },
   {
     "ea": "0x5A4F99",
-    "line": "fstp    [esp+5Ch+var_5C]; a3",
+    "line": "fstp    [esp+5Ch+var_5C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5A4F9C",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -2881,7 +2875,7 @@
   },
   {
     "ea": "0x5A4FA3",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3187,13 +3181,13 @@
   },
   {
     "ea": "0x5A5043",
-    "line": "fstp    [esp+5Ch+var_5C]; a3",
+    "line": "fstp    [esp+5Ch+var_5C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5A5046",
-    "line": "push    0FAFh; a2",
+    "line": "push    0FAFh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -3205,7 +3199,7 @@
   },
   {
     "ea": "0x5A504D",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3265,7 +3259,7 @@
   },
   {
     "ea": "0x5A506D",
-    "line": "call    sub_4891C0",
+    "line": "call    Player_CalcInventoryEntryRating",
     "mnemonic": "call",
     "size": 5
   },
@@ -3295,7 +3289,7 @@
   },
   {
     "ea": "0x5A5082",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3391,19 +3385,19 @@
   },
   {
     "ea": "0x5A50B6",
-    "line": "fstp    [esp+5Ch+var_5C]; a3",
+    "line": "fstp    [esp+5Ch+var_5C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5A50B9",
-    "line": "push    0FAFh; a2",
+    "line": "push    0FAFh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5A50BE",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3457,7 +3451,7 @@
   },
   {
     "ea": "0x5A50DA",
-    "line": "call    sub_4891C0",
+    "line": "call    Player_CalcInventoryEntryRating",
     "mnemonic": "call",
     "size": 5
   },
@@ -3487,7 +3481,7 @@
   },
   {
     "ea": "0x5A50EF",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3757,19 +3751,19 @@
   },
   {
     "ea": "0x5A5179",
-    "line": "fstp    [esp+5Ch+var_5C]; a3",
+    "line": "fstp    [esp+5Ch+var_5C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5A517C",
-    "line": "push    0FAFh; a2",
+    "line": "push    0FAFh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5A5181",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3811,7 +3805,7 @@
   },
   {
     "ea": "0x5A5198",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4021,19 +4015,19 @@
   },
   {
     "ea": "0x5A5208",
-    "line": "fstp    [esp+5Ch+var_5C]; a3",
+    "line": "fstp    [esp+5Ch+var_5C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5A520B",
-    "line": "push    0FAFh; a2",
+    "line": "push    0FAFh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5A5210",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4141,7 +4135,7 @@
   },
   {
     "ea": "0x5A5251",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4297,7 +4291,7 @@
   },
   {
     "ea": "0x5A52A4",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4549,13 +4543,13 @@
   },
   {
     "ea": "0x5A5327",
-    "line": "fstp    [esp+5Ch+var_5C]; a3",
+    "line": "fstp    [esp+5Ch+var_5C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5A532A",
-    "line": "push    0FAFh; a2",
+    "line": "push    0FAFh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -4567,7 +4561,7 @@
   },
   {
     "ea": "0x5A5331",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4621,7 +4615,7 @@
   },
   {
     "ea": "0x5A534C",
-    "line": "call    sub_4891C0",
+    "line": "call    Player_CalcInventoryEntryRating",
     "mnemonic": "call",
     "size": 5
   },
@@ -4651,7 +4645,7 @@
   },
   {
     "ea": "0x5A5361",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4909,19 +4903,19 @@
   },
   {
     "ea": "0x5A53E8",
-    "line": "fstp    [esp+5Ch+var_5C]; a3",
+    "line": "fstp    [esp+5Ch+var_5C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5A53EB",
-    "line": "push    0FAFh; a2",
+    "line": "push    0FAFh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5A53F0",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5227,19 +5221,19 @@
   },
   {
     "ea": "0x5A548F",
-    "line": "fstp    [esp+5Ch+var_5C]; a3",
+    "line": "fstp    [esp+5Ch+var_5C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5A5492",
-    "line": "push    0FAFh; a2",
+    "line": "push    0FAFh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5A5497",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5263,13 +5257,13 @@
   },
   {
     "ea": "0x5A54A7",
-    "line": "fstp    [esp+5Ch+var_5C]; a3",
+    "line": "fstp    [esp+5Ch+var_5C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5A54AA",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -5281,7 +5275,7 @@
   },
   {
     "ea": "0x5A54B1",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5323,7 +5317,7 @@
   },
   {
     "ea": "0x5A54C8",
-    "line": "call    sub_584390",
+    "line": "call    Menu__StartFadeIn; Oblivion ClassMenu step refresh: derives the active step value from tile traits 0xFDB/0xFDC, updates menu state, sets state 8, and refreshes the interface manager.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5377,7 +5371,7 @@
   },
   {
     "ea": "0x5A54EF",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5446,5 +5440,107 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C0300",
+    "line": "lea     ecx, [ebp-30h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C0303",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C0308",
+    "line": "lea     ecx, [ebp-38h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C030B",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C0310",
+    "line": "lea     ecx, [ebp-28h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C0313",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C0318",
+    "line": "lea     ecx, [ebp-28h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C031B",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C0320",
+    "line": "lea     ecx, [ebp-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C0323",
+    "line": "jmp     ContainerEntryExtraData_DestroyDataTable",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C0328",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C032C",
+    "line": "lea     eax, [edx-48h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C032F",
+    "line": "mov     ecx, [edx-4Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C0332",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C0334",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C0339",
+    "line": "mov     eax, offset stru_AE95E8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C033E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

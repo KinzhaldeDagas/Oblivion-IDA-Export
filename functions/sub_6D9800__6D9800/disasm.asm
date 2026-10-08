@@ -19,7 +19,7 @@
 0x6D982E: mov     edx, [ecx+8]
 0x6D9831: mov     [eax+8], edx
 0x6D9834: mov     edx, [ecx+0Ch]
-0x6D9837: push    offset dword_B3EBA0
+0x6D9837: push    offset flt_B3EBA0
 0x6D983C: mov     [eax+0Ch], edx
 0x6D983F: call    sub_73B770
 0x6D9844: test    al, al
@@ -49,7 +49,7 @@
 0x6D9879: lea     eax, [esp+34h+var_10]
 0x6D987D: fstp    [esp+34h+var_34]; float
 0x6D9880: push    eax; int
-0x6D9881: call    sub_6BCF70
+0x6D9881: call    NiRotKey_EvaluateTrack; Oblivion quaternion rotation key-track evaluator. One key/sentinel time normally returns key quaternion at +4; interpolation type 4 uses its dedicated evaluator even for that case. Otherwise performs cursor-assisted timestamp bracketing, normalized segment-time evaluation through the rotation dispatch table, and writes back the lower-key cursor.
 0x6D9886: mov     ecx, [eax]
 0x6D9888: mov     [esi+0Ch], ecx
 0x6D988B: mov     edx, [eax+4]
@@ -62,7 +62,7 @@
 0x6D98A0: jmp     short loc_6D98A4
 0x6D98A2: fstp    st
 0x6D98A4: lea     edi, [esi+0Ch]
-0x6D98A7: push    offset dword_B3EBA0
+0x6D98A7: push    offset flt_B3EBA0
 0x6D98AC: mov     ecx, edi
 0x6D98AE: call    sub_73B770
 0x6D98B3: test    al, al

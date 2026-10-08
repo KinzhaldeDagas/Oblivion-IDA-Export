@@ -1,19 +1,32 @@
 {
-  "callees_count": 12,
-  "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
+  "callers_count": 1,
+  "chunks": [
+    [
+      "0x69DA13",
+      "0x69DAAC"
+    ]
+  ],
+  "chunks_sha256": "549615d1bf7f84e0c998b9ace36595a4300d9a79bcfdc2881415e2f507f7059f",
+  "comment_regular": "Verified (Oblivion): model-hit factory skips when ActiveEffect aeFlags bit 0x4 is set or the global guard is nonzero; allocates 0x38 bytes, uses the target's parent reference and owner ActiveEffect, invokes the virtual initializer, registers successful effects with ActorProcessManager, then chains the shader factory. Failed model initialization is destroyed before shader fallback.",
+  "comment_repeatable": "Verified (Oblivion): model-hit factory skips when ActiveEffect aeFlags bit 0x4 is set or the global guard is nonzero; allocates 0x38 bytes, uses the target's parent reference and owner ActiveEffect, invokes the virtual initializer, registers successful effects with ActorProcessManager, then chains the shader factory. Failed model initialization is destroyed before shader fallback.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
   "display_name": "MagicHitEffect?_BuildHitVFXList:::PlayModelHitEffect",
   "end_ea": "0x69DAAC",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "MagicHitEffect?_BuildHitVFXList:::PlayModelHitEffect",
   "segment": ".text",
   "sha256": "549615d1bf7f84e0c998b9ace36595a4300d9a79bcfdc2881415e2f507f7059f",
   "size": 153,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x69DA13",
-  "type": "int __cdecl(int, int, int, int, int, int, int, float *)",
+  "total_chunk_size": 153,
+  "type": "MagicShaderHitEffect **__cdecl(int, int, int, int, int, int, int, ActiveEffect *)",
   "xrefs_from_count": 64,
   "xrefs_to_count": 1
 }

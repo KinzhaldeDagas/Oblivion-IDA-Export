@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x564A38",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -121,13 +121,13 @@
   },
   {
     "ea": "0x564A57",
-    "line": "lea     ecx, [esp+8+a2]; this",
+    "line": "lea     ecx, [esp+8+a2]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x564A5B",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x564A67",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },

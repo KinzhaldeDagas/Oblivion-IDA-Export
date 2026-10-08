@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x4F70C0",
-    "line": "fldz",
+    "line": "fldz; GetInFaction_Eval (index 71 / opcode 0x1047): the Faction parameter (typeID 0x11) is present when TESActorBaseData_GetFactionRank != -1. This returns a membership predicate, not the numeric rank.",
     "mnemonic": "fldz",
     "size": 2
   },
   {
     "ea": "0x4F70C2",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, [esp+param1]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x4F70C7",
-    "line": "mov     ebx, [esp+4+arg_C]",
+    "line": "mov     ebx, [esp+4+value]",
     "mnemonic": "mov",
     "size": 4
   },

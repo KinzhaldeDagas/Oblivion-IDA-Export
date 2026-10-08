@@ -1,1 +1,3 @@
-enum_2
+enum enum_2
+{
+};

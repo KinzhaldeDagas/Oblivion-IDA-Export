@@ -1,4 +1,4 @@
-0x521E40: push    esi
+0x521E40: push    esi; Reset active vampirism-selected NPC delta (GetAViBase 0x45 chooses +0x108/+0x168), not sex-specific. Copies manager default parameters, ensures dimensions without zeroing existing elements, then releases/clears NPC+0x1DC cached object.
 0x521E41: mov     esi, ecx
 0x521E43: mov     eax, [esi]
 0x521E45: mov     edx, [eax+128h]
@@ -9,10 +9,10 @@
 0x521E52: lea     eax, [esi+168h]
 0x521E58: jnz     short loc_521E60
 0x521E5A: lea     eax, [esi+108h]
-0x521E60: push    eax
-0x521E61: call    sub_5538D0
-0x521E66: push    eax
-0x521E67: call    sub_5528F0
+0x521E60: push    eax; destination
+0x521E61: call    FaceGenManager_GetDefaultHeadParameters; Returns the FaceGen manager's default head-parameter block at manager+0x08, initializing the manager on demand.
+0x521E66: push    eax; source
+0x521E67: call    FaceGenHeadParameters_Copy; Deep-copies all four FaceGen matrices, preserving dimensions and engine ownership of destination coefficient buffers.
 0x521E6C: mov     eax, [esi]
 0x521E6E: mov     edx, [eax+128h]
 0x521E74: add     esp, 8
@@ -23,8 +23,8 @@
 0x521E7F: lea     eax, [esi+168h]
 0x521E85: jnz     short loc_521E8D
 0x521E87: lea     eax, [esi+108h]
-0x521E8D: push    eax
-0x521E8E: call    sub_552880
+0x521E8D: push    eax; parameters
+0x521E8E: call    FaceGenHeadParameters_Initialize; Standard FaceGenHeadParameters dimensions: matrix0 50x1, matrix1 30x1, matrix2 50x1, matrix3 untouched. Thus standard initialized active coefficient count is 130, under PF supported 256 cap. Existing elements survive ResizeFill as documented; this routine is not a full zero reset.
 0x521E93: mov     edi, [esi+1DCh]
 0x521E99: add     esp, 4
 0x521E9C: test    edi, edi

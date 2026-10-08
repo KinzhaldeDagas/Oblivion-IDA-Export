@@ -1,18 +1,31 @@
 {
-  "callees_count": 2,
-  "callers_count": 1,
-  "comment_regular": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x402F50",
+      "0x402F94"
+    ]
+  ],
+  "chunks_sha256": "24336bd677afd0b1264647d26c155171bd044ecb90a12d5006a0f692f366ec17",
+  "comment_regular": "[Controller decode 2026-07-09] Returns one cached DirectInput joystick axis from joystick index n. Axis selectors: 1 lX, 2 lY, 3 lZ, 4 lRx, 5 lRy, 6 lRz. State stride is 0xA0.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
   "display_name": "InputGlobals::GetJoystickAxisMovement",
   "end_ea": "0x402F94",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "InputGlobals::GetJoystickAxisMovement",
   "segment": ".text",
   "sha256": "24336bd677afd0b1264647d26c155171bd044ecb90a12d5006a0f692f366ec17",
   "size": 68,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x402F50",
+  "total_chunk_size": 68,
   "type": "LONG __thiscall(InputGlobal *this, int whichDevice, int a3)",
   "xrefs_from_count": 22,
   "xrefs_to_count": 4

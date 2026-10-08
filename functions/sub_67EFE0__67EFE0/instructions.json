@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x67EFE0",
-    "line": "push    esi",
+    "line": "push    esi; Verified Oblivion AStarNodeList append uses intrusive nodes and appends at the start/head pointer. Fallout's inspected AStarQueue stores each AStarNode in a sorted linked list within one of 20 F-cost buckets; the two layouts/algorithms are distinct.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x67EFE2",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+node]",
     "mnemonic": "mov",
     "size": 4
   },

@@ -1,1 +1,1 @@
-hkIslandPostCollideListener
+struct hkIslandPostCollideListener;

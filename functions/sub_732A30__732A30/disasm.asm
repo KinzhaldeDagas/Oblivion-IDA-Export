@@ -1,4 +1,4 @@
-0x732A30: push    0FFFFFFFFh
+0x732A30: push    0FFFFFFFFh; Verified NiLinesData constructor: initializes vertex/color buffers through NiGeometryData, assigns NiLinesData vtable, and either stores supplied line-flag bytes or allocates default alternating endpoint flags.
 0x732A32: push    offset SEH_732A30
 0x732A37: mov     eax, large fs:0
 0x732A3D: push    eax
@@ -13,14 +13,14 @@
 0x732A4E: mov     large fs:0, eax
 0x732A54: mov     esi, ecx
 0x732A56: mov     [esp+20h+var_10], esi
-0x732A5A: mov     eax, [esp+20h+arg_14]
-0x732A5E: mov     ecx, [esp+20h+arg_10]
-0x732A62: mov     edx, [esp+20h+arg_C]
-0x732A66: mov     edi, [esp+20h+arg_0]
+0x732A5A: mov     eax, dword ptr [esp+20h+arg7]
+0x732A5E: mov     ecx, dword ptr [esp+20h+arg6]
+0x732A62: mov     edx, [esp+20h+arg5]
+0x732A66: mov     edi, dword ptr [esp+20h+vertexCount]
 0x732A6A: push    eax
-0x732A6B: mov     eax, [esp+24h+arg_8]
+0x732A6B: mov     eax, [esp+24h+colors]
 0x732A6F: push    ecx
-0x732A70: mov     ecx, [esp+28h+arg_4]
+0x732A70: mov     ecx, [esp+28h+vertices]
 0x732A74: push    edx
 0x732A75: push    eax
 0x732A76: push    0
@@ -28,7 +28,7 @@
 0x732A79: push    edi
 0x732A7A: mov     ecx, esi
 0x732A7C: call    NiGeometryData__NiGeometryData
-0x732A81: mov     eax, [esp+20h+arg_18]
+0x732A81: mov     eax, [esp+20h+lineFlags]
 0x732A85: test    eax, eax
 0x732A87: mov     [esp+20h+var_4], 0
 0x732A8F: mov     dword ptr [esi], offset ??_7NiLinesData@@6B@; const NiLinesData::`vftable'
@@ -62,3 +62,12 @@
 0x732ADC: pop     ebx
 0x732ADD: add     esp, 10h
 0x732AE0: retn    1Ch
+0x9CA8F0: mov     ecx, [ebp-10h]; this
+0x9CA8F3: jmp     ??1NiGeometryData@@UAE@XZ;
+0x9CA8F8: mov     edx, [esp+vertices]
+0x9CA8FC: lea     eax, [edx-10h]
+0x9CA8FF: mov     ecx, [edx-14h]
+0x9CA902: xor     ecx, eax
+0x9CA904: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA909: mov     eax, offset stru_AF2F80
+0x9CA90E: jmp     ___CxxFrameHandler3

@@ -4,7 +4,7 @@
 0x55EF18: test    [esp+4+arg_0], 1
 0x55EF1D: jz      short loc_55EF28
 0x55EF1F: push    esi
-0x55EF20: call    FormHeapFree
+0x55EF20: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x55EF25: add     esp, 4
 0x55EF28: mov     eax, esi
 0x55EF2A: pop     esi

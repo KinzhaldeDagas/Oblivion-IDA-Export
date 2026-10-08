@@ -1,4 +1,4 @@
-0x413DA8: mov     eax, sMagicEffectItemPercent
+0x413DA8: mov     eax, ds:0B33480h
 0x413DAD: push    eax
 0x413DAE: push    edx
 0x413DAF: push    offset aDS; " %d %s"

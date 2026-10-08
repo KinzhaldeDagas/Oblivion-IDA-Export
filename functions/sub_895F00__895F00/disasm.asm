@@ -15,7 +15,7 @@
 0x895F30: mov     ecx, [ecx+8]
 0x895F33: cmp     ecx, ebx
 0x895F35: jz      short loc_895F3E
-0x895F37: call    sub_8AC0C0
+0x895F37: call    bhkCollisionWrapper_GetHavokObject; bhk collision wrapper accessor: returns stored low-level Havok object pointer at wrapper+0x30.
 0x895F3C: jmp     short loc_895F40
 0x895F3E: xor     eax, eax
 0x895F40: cmp     [eax+8], ebx
@@ -62,3 +62,12 @@
 0x895FDD: pop     ebx
 0x895FDE: add     esp, 120h
 0x895FE4: retn
+0x9D6650: lea     ecx, [ebp-120h]; this
+0x9D6656: jmp     ??1hkAllCdBodyPairCollector@@UAE@XZ; hkAllCdBodyPairCollector::~hkAllCdBodyPairCollector(void)
+0x9D665B: mov     edx, [esp+arg_4]
+0x9D665F: lea     eax, [edx-118h]
+0x9D6665: mov     ecx, [edx-11Ch]
+0x9D666B: xor     ecx, eax
+0x9D666D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D6672: mov     eax, offset stru_AFE46C
+0x9D6677: jmp     ___CxxFrameHandler3

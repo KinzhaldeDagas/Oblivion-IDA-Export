@@ -1,4 +1,4 @@
 void __cdecl sub_A24AB0()
 {
-  GameSetting_destr((int *)flt_B3B29C);
+  GameSetting_destr(&dword_B3B0B4[0x7A]); /*0xa24ab5*/
 }

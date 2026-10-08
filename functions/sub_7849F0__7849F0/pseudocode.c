@@ -1,7 +1,8 @@
-void __stdcall sub_7849F0(char *a1, char *a2)
+// Oblivion 1.2.0.416: destroys [first,last) in 0x18-byte steps through the folded trivial record destructor.
+void __stdcall OB_stVector24_DestroyRange_010201A0(unsigned __int8 *first, unsigned __int8 *last)
 {
-  char *i; // esi
+  unsigned __int8 *i; // esi
 
-  for ( i = a1; i != a2; i += 0x18 )
-    TESTexture::ClearComponentReferences(i);
+  for ( i = first; i != last; i += 0x18 ) /*0x7849fc*/
+    Shared_NoOpVirtual_60D0A0(i); /*0x784a02*/
 }

@@ -1,4 +1,4 @@
-0x776DD0: mov     ecx, [esp+arg_8]
+0x776DD0: mov     ecx, [esp+arg_8]; MoonSugarEffect decode: fallback non-declaration vertex layout calculator. Builds FVF-like flags, stride, and offsets: position is 12 bytes; optional skin weights/indices, normals, color, and UV sets are appended, with UV count clamped by dword_B28CB0.
 0x776DD4: mov     eax, [esp+arg_C]
 0x776DD8: push    esi
 0x776DD9: mov     esi, [esp+4+arg_4]

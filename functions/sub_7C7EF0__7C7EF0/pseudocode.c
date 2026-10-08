@@ -1,43 +1,53 @@
-void __thiscall sub_7C7EF0(_DWORD *this, int a2, int a3)
+// Recursively traverse NiNode children. For each object matching the retail point-light RTTI target, either remove its full-list entry or register it with trackBackingPosition=true.
+void __thiscall ShadowSceneNode_RegisterOrRemovePointLightsRecursive(
+        ShadowSceneNode_DecodedLayout *self,
+        NiNode *root,
+        bool removeExisting)
 {
-  unsigned int v4; // eax
+  NiNode *numObjs; // eax
   unsigned int v5; // edi
-  int v7; // ecx
-  int v8; // esi
+  NiAVObject *data; // ecx
+  NiNode *v8; // esi
   int v9; // eax
-  unsigned int i; // [esp+10h] [ebp+4h]
+  NiNode *roota; // [esp+10h] [ebp+4h]
 
-  v4 = *(unsigned __int16 *)(a2 + 0xB8);
-  v5 = 0;
-  for ( i = v4; v5 < i; ++v5 )
+  numObjs = (NiNode *)root->members.children.numObjs; /*0x7c7ef5*/
+  v5 = 0; /*0x7c7efe*/
+  roota = numObjs; /*0x7c7f04*/
+  if ( numObjs ) /*0x7c7f08*/
   {
-    if ( *(unsigned __int16 *)(a2 + 0xB6) > v5 )
+    do /*0x7c7f64*/
     {
-      v7 = *(_DWORD *)(a2 + 0xB0);
-      v8 = *(_DWORD *)(v7 + 4 * v5);
-      if ( v8 )
+      if ( root->members.children.end > v5 ) /*0x7c7f19*/
       {
-        v9 = (*(int (__thiscall **)(_DWORD))(*(_DWORD *)v8 + 4))(*(_DWORD *)(v7 + 4 * v5));
-        if ( v9 )
+        data = root->members.children.data; /*0x7c7f1b*/
+        v8 = *((NiNode **)&data->vtbl + v5); /*0x7c7f21*/
+        if ( v8 ) /*0x7c7f26*/
         {
-          while ( (char *)v9 != dword_B3FD14 )
+          v9 = (int)v8->vtbl->super.super.GetType(*((_DWORD *)&data->vtbl + v5)); /*0x7c7f2f*/
+          if ( v9 ) /*0x7c7f33*/
           {
-            v9 = *(_DWORD *)(v9 + 4);
-            if ( !v9 )
-              goto LABEL_7;
+            while ( (float *)v9 != &MEMORY[0xB3F9B0][0xD9] ) /*0x7c7f3a*/
+            {
+              v9 = *(_DWORD *)(v9 + 4); /*0x7c7f3c*/
+              if ( !v9 ) /*0x7c7f41*/
+                goto LABEL_7; /*0x7c7f41*/
+            }
+            if ( removeExisting )               // removeExisting=true selects removal by source; false registers the scene-graph point light with trackBackingPosition=true. /*0x7c7f74*/
+              ShadowSceneNode_RemoveFullLightBySource(self, v8); /*0x7c7f77*/
+            else
+              ShadowSceneNode_FindOrCreateFullLightForSource(self, v8, 1);// Scene-graph point lights register with trackBackingPosition=true. /*0x7c7f81*/
           }
-          if ( (_BYTE)a3 )
-            sub_7C7DC0(this, v8);
           else
-            sub_7C6AE0(this, v8, (ShadowSceneLight *)1);
-        }
-        else
-        {
+          {
 LABEL_7:
-          if ( (*(int (__thiscall **)(int))(*(_DWORD *)v8 + 8))(v8) )
-            sub_7C7EF0(this, v8, a3);
+            if ( v8->vtbl->super.super.Unk_02((NiObject *)v8) ) /*0x7c7f4a*/
+              ShadowSceneNode_RegisterOrRemovePointLightsRecursive(self, v8, removeExisting); /*0x7c7f58*/
+          }
         }
       }
+      ++v5; /*0x7c7f5d*/
     }
+    while ( v5 < (unsigned int)roota ); /*0x7c7f64*/
   }
 }

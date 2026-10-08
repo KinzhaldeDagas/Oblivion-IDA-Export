@@ -1,17 +1,17 @@
-0x6C9CB0: xor     edx, edx
+0x6C9CB0: xor     edx, edx; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.
 0x6C9CB2: cmp     [ecx+44h], edx
 0x6C9CB5: jnz     short loc_6C9CBC
 0x6C9CB7: xor     al, al
 0x6C9CB9: retn    8
 0x6C9CBC: fldz
-0x6C9CBE: fld     [esp+arg_0]
+0x6C9CBE: fld     [esp+easeOutTime]
 0x6C9CC2: fcom    st(1)
 0x6C9CC4: fnstsw  ax
 0x6C9CC6: fstp    st(1)
 0x6C9CC8: test    ah, 41h
 0x6C9CCB: jnz     short loc_6C9CEF
 0x6C9CCD: xor     eax, eax
-0x6C9CCF: cmp     [esp+arg_4], dl
+0x6C9CCF: cmp     [esp+transition], dl
 0x6C9CD3: setnz   al
 0x6C9CD6: add     eax, 3
 0x6C9CD9: mov     [ecx+44h], eax

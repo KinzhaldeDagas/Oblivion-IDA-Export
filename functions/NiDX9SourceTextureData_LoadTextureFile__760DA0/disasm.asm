@@ -1,4 +1,4 @@
-0x760DA0: sub     esp, 594h
+0x760DA0: sub     esp, 594h; DDS/BMP/TGA direct-to-render texture loader. Uses d3dx9_27 D3DXGetImageInfoFromFileInMemory and D3DXCreateTextureFromFileInMemory. DDS mip-skip fast path only understands FourCC DXT1-DXT5; DX10/BC7 cannot be accepted here without replacing/hooking the loader and decoding/transcoding before D3D9 texture creation.
 0x760DA6: mov     eax, ds:0B30AACh
 0x760DAB: xor     eax, esp
 0x760DAD: mov     [esp+594h+var_4], eax
@@ -22,9 +22,9 @@
 0x760DF9: push    104h; SizeInBytes
 0x760DFE: push    eax; Dst
 0x760DFF: call    _strcpy_s
-0x760E04: lea     ecx, [esp+5A0h+Dst]; void *
+0x760E04: lea     ecx, [esp+5A0h+Dst]; this
 0x760E0B: push    ecx
-0x760E0C: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x760E0C: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x760E11: add     esp, 10h
 0x760E14: lea     edx, [esp+594h+Dst]
 0x760E1B: push    edx; FullPath
@@ -32,22 +32,22 @@
 0x760E23: call    sub_748760
 0x760E28: lea     eax, [esp+594h+Str1]
 0x760E2F: push    offset a_bmp; ".bmp"
-0x760E34: push    eax; Str1
-0x760E35: call    __strcmp
+0x760E34: push    eax; left
+0x760E35: call    CRT_StricmpLocaleDispatch
 0x760E3A: add     esp, 8
 0x760E3D: test    eax, eax
 0x760E3F: jz      short loc_760E77
 0x760E41: lea     ecx, [esp+594h+Str1]
 0x760E48: push    offset a_tga; ".tga"
-0x760E4D: push    ecx; Str1
-0x760E4E: call    __strcmp
+0x760E4D: push    ecx; left
+0x760E4E: call    CRT_StricmpLocaleDispatch
 0x760E53: add     esp, 8
 0x760E56: test    eax, eax
 0x760E58: jz      short loc_760E77
 0x760E5A: lea     edx, [esp+594h+Str1]
 0x760E61: push    offset a_dds; ".dds"
-0x760E66: push    edx; Str1
-0x760E67: call    __strcmp
+0x760E66: push    edx; left
+0x760E67: call    CRT_StricmpLocaleDispatch
 0x760E6C: add     esp, 8
 0x760E6F: test    eax, eax
 0x760E71: jnz     loc_760DCA
@@ -88,10 +88,10 @@
 0x760ED1: call    FormHeapAlloc
 0x760ED6: add     esp, 4
 0x760ED9: mov     ebp, eax
-0x760EDB: push    edi
-0x760EDC: push    ebp
-0x760EDD: mov     ecx, esi
-0x760EDF: call    ReadFile??
+0x760EDB: push    edi; byteCount
+0x760EDC: push    ebp; destination
+0x760EDD: mov     ecx, esi; self
+0x760EDF: call    Archive_ReadBytes
 0x760EE4: mov     edx, [esi]
 0x760EE6: mov     eax, [edx]
 0x760EE8: push    1
@@ -126,7 +126,7 @@
 0x760F35: cmp     eax, 43h ; 'C'
 0x760F38: jz      short loc_760F4A
 0x760F3A: push    ebp
-0x760F3B: call    FormHeapFree
+0x760F3B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x760F40: add     esp, 4
 0x760F43: xor     al, al
 0x760F45: jmp     loc_7611D0
@@ -141,12 +141,12 @@
 0x760F64: jnz     loc_7610E0
 0x760F6A: cmp     [esp+5A4h+var_560], ecx
 0x760F6E: mov     [esp+5A4h+var_580], esi
-0x760F72: jnz     loc_7610C7
+0x760F72: jnz     loc_7610C7; Oblivion's persistent source-texture fast path recognizes DDS and inspects its embedded D3DXIMAGE_INFO. RGBA32 DDS reaches the native D3DX loader without the DXT-only mip-skip rewrite below.
 0x760F78: test    [ebp+50h], cl
 0x760F7B: mov     esi, ds:0B4205Ch
 0x760F81: mov     edx, ds:0B42060h
 0x760F87: jz      loc_7610C7
-0x760F8D: mov     eax, [ebp+54h]
+0x760F8D: mov     eax, [ebp+54h]; This FourCC branch only implements renderer mip skipping for DXT1-DXT5. It is not the general DDS mip loader and does not rewrite RGBA32 atlas data.
 0x760F90: cmp     eax, 31545844h
 0x760F95: jnz     short loc_760FA1
 0x760F97: mov     [esp+5A4h+var_57C], 2
@@ -162,7 +162,7 @@
 0x760FC1: mov     [esp+5A4h+var_57C], 1
 0x760FC9: mov     eax, [ebp+1Ch]
 0x760FCC: lea     ecx, [ebp+80h]
-0x760FD2: mov     [esp+5A4h+var_584], ecx
+0x760FD2: mov     [esp+5A4h+source], ecx
 0x760FD6: mov     ecx, eax
 0x760FD8: sub     ecx, esi
 0x760FDA: cmp     ecx, edx
@@ -197,7 +197,7 @@
 0x76102A: xor     edx, edx
 0x76102C: div     [esp+5A4h+var_57C]
 0x761030: mov     ecx, 1
-0x761035: add     [esp+5A4h+var_584], eax
+0x761035: add     [esp+5A4h+source], eax
 0x761039: sub     edi, eax
 0x76103B: mov     eax, ebx
 0x76103D: shr     eax, 1
@@ -220,39 +220,39 @@
 0x76106C: jz      short loc_7610C3
 0x76106E: push    edi; Size
 0x76106F: call    FormHeapAlloc
-0x761074: push    80h ; '€'; Size
+0x761074: push    80h ; '€'; byteCount
 0x761079: mov     esi, eax
-0x76107B: push    ebp; Src
-0x76107C: push    esi; Dst
-0x76107D: call    _memcpy
+0x76107B: push    ebp; source
+0x76107C: push    esi; destination
+0x76107D: call    _memcpy;
 0x761082: mov     edx, [esp+5B4h+var_578]
 0x761086: mov     ecx, [esp+5B4h+var_58C]
 0x76108A: mov     [esi+10h], edx
 0x76108D: mov     eax, [esp+5B4h+var_574]
 0x761091: mov     [esi+0Ch], eax
-0x761094: mov     eax, [esp+5B4h+var_584]
+0x761094: mov     eax, [esp+5B4h+source]
 0x761098: mov     [esi+1Ch], ecx
 0x76109B: mov     edx, [esp+5B4h+var_574]
 0x76109F: imul    edx, [esp+5B4h+var_578]
 0x7610A4: add     edi, 0FFFFFF80h
-0x7610A7: push    edi; Size
-0x7610A8: push    eax; Src
+0x7610A7: push    edi; byteCount
+0x7610A8: push    eax; source
 0x7610A9: lea     ecx, [esi+80h]
-0x7610AF: push    ecx; Dst
+0x7610AF: push    ecx; destination
 0x7610B0: mov     [esi+14h], edx
-0x7610B3: call    _memcpy
+0x7610B3: call    _memcpy;
 0x7610B8: push    ebp
-0x7610B9: call    FormHeapFree
+0x7610B9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7610BE: add     esp, 20h
 0x7610C1: mov     ebp, esi
 0x7610C3: mov     edi, [esp+5A4h+var_590]
-0x7610C7: mov     eax, [esp+5A4h+var_588]
+0x7610C7: mov     eax, [esp+5A4h+var_588]; Persistent 2D texture fast path calls d3dx9_27!D3DXCreateTextureFromFileInMemory. The exact d3dx9_27 wrapper passes Width/Height/MipLevels=D3DX_DEFAULT and Filter/MipFilter=D3DX_DEFAULT. Therefore a one-level POT DDS is expanded to a complete D3D mip chain (default image filter TRIANGLE; generated mip filter BOX); stored one-level DDS metadata does not force GetLevelCount()==1.
 0x7610CB: lea     edx, [esp+5A4h+var_580]
 0x7610CF: push    edx
 0x7610D0: push    edi
 0x7610D1: push    ebp
 0x7610D2: push    eax
-0x7610D3: call    D3DXCreateTextureFromFileInMemory_0
+0x7610D3: call    D3DXCreateTextureFromFileInMemory_0; Native file texture creation call: D3DXCreateTextureFromFileInMemory(device, fileBytes, fileSize, &texture). This binds support to d3dx9_27 and D3D9-capable formats.
 0x7610D8: mov     esi, [esp+5A4h+var_580]
 0x7610DC: mov     edi, eax
 0x7610DE: jmp     short loc_761130
@@ -284,7 +284,7 @@
 0x761129: jmp     short loc_761130
 0x76112B: mov     edi, 8876086Ch
 0x761130: push    ebp
-0x761131: call    FormHeapFree
+0x761131: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x761136: add     esp, 4
 0x761139: test    edi, edi
 0x76113B: jl      loc_761220
@@ -352,7 +352,7 @@
 0x761205: lea     edx, [esp+5A4h+a2]
 0x761209: push    edx; a2
 0x76120A: push    eax; a1
-0x76120B: call    D3DFMTToTextureFormat
+0x76120B: call    D3DFMTToTextureFormat; DX10OBSE runtime log pass 2026-05-24: D3D9 texture formats 0x17 R5G6B5 and 0x1A A4R4G4B4 appeared as high-volume mirror failures on the active D3D10 runtime. Plugin now treats legacy packed color texture/surface mirrors as RGBA8 upload targets and expands D3D9 shadow data during UpdateSubresource instead of relying on B5/B4 DXGI formats.
 0x761210: movzx   ecx, [esp+5ACh+var_54F]
 0x761215: add     esp, 8
 0x761218: shr     ecx, 3

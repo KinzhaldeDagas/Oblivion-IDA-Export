@@ -681,7 +681,7 @@
 0x93E8BB: cmp     ecx, eax
 0x93E8BD: jnz     short loc_93E8D4
 0x93E8BF: movaps  xmm0, [esp+3B0h+var_160]
-0x93E8C7: movaps  [esp+3B0h+var_308+8], xmm0
+0x93E8C7: movaps  xmmword ptr [esp+3B0h+var_308+8], xmm0
 0x93E8CF: jmp     loc_93EA44
 0x93E8D4: cmp     [esp+3B0h+var_17C], eax
 0x93E8DB: jnz     short loc_93E90E
@@ -693,10 +693,10 @@
 0x93E8F3: movaps  xmm0, [esp+3B0h+var_E0]
 0x93E8FB: mulps   xmm2, xmm1
 0x93E8FE: addps   xmm0, xmm2
-0x93E901: movaps  [esp+3B0h+var_308+8], xmm0
+0x93E901: movaps  xmmword ptr [esp+3B0h+var_308+8], xmm0
 0x93E909: jmp     loc_93EA44
 0x93E90E: movaps  xmm0, [esp+3B0h+var_50]
-0x93E916: movaps  [esp+3B0h+var_308+8], xmm0
+0x93E916: movaps  xmmword ptr [esp+3B0h+var_308+8], xmm0
 0x93E91E: jmp     loc_93EA44
 0x93E923: mov     ecx, [esp+3B0h+var_17C]
 0x93E92A: movaps  xmm1, [esp+3B0h+anonymous_2]
@@ -836,13 +836,13 @@
 0x93EB16: lea     edx, [esp+3B4h+var_240]
 0x93EB1D: push    edx
 0x93EB1E: lea     ecx, [esp+3B8h+var_258+8]
-0x93EB25: call    sub_88FCC0
+0x93EB25: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x93EB2A: lea     eax, [esp+3B0h+var_320]
 0x93EB31: push    eax
 0x93EB32: lea     ecx, [esp+3B4h+var_240]
 0x93EB39: push    ecx
 0x93EB3A: lea     ecx, [esp+3B8h+var_340]
-0x93EB3E: call    sub_88FE00
+0x93EB3E: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x93EB43: fld     dword ptr [edi+0Ch]
 0x93EB46: movaps  xmm1, xmmword ptr [esp+3B0h+var_340]
 0x93EB4B: fchs

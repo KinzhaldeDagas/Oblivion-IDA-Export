@@ -80,5 +80,5 @@
 0x46A325: push    ebp
 0x46A326: call    sub_57A3B0
 0x46A32B: push    esi
-0x46A32C: call    FormHeapFree
+0x46A32C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x46A331: add     esp, 18h

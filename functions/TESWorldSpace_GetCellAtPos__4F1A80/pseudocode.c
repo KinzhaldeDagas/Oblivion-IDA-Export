@@ -1,4 +1,4 @@
-void __thiscall TESWorldSpace::GetCellAtPos(TESWorldSpace *this, float *a2)
+TESObjectCELL *__thiscall TESWorldSpace_GetCellAtWorldPosition(TESWorldSpace *this, float *worldXY)
 {
-  TESWorldSpace::GetCellAtCellCoord(this, (int)*a2 >> 0xC, (int)a2[1] >> 0xC);
+  return TESWorldSpace::GetCellAtCellCoord(this, (int)*worldXY >> 0xC, (int)worldXY[1] >> 0xC); /*0x4f1ab7*/
 }

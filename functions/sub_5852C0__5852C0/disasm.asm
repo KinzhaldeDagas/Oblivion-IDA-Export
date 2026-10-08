@@ -12,13 +12,13 @@
 0x5852E2: mov     esi, ecx
 0x5852E4: mov     [esp+18h+var_10], esi
 0x5852E8: mov     [esp+18h+var_4], 1
-0x5852F0: call    sub_58BC20
+0x5852F0: call    Tile__TileTemplate__Clear; Verified: walks typed template item list, frees item BSStringT buffer and each item; removes list nodes and decrements count. Mirrors role of Fallout TileTemplate::Clear, but no pooling established here.
 0x5852F5: lea     ecx, [esi+0Ch]
 0x5852F8: mov     byte ptr [esp+18h+var_4], 0
 0x5852FD: call    ??1?$NiTList@PAVTileTemplateItem@Tile@@@@UAE@XZ; NiTList<Tile::TileTemplateItem *>::~NiTList<Tile::TileTemplateItem *>(void)
 0x585302: mov     eax, [esi]
 0x585304: push    eax
-0x585305: call    FormHeapFree
+0x585305: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x58530A: add     esp, 4
 0x58530D: mov     dword ptr [esi], 0
 0x585313: mov     word ptr [esi+6], 0
@@ -29,3 +29,15 @@
 0x58532B: pop     esi
 0x58532C: add     esp, 10h
 0x58532F: retn
+0x9BF870: mov     ecx, [ebp-10h]; void *
+0x9BF873: jmp     BSStringT_Clear
+0x9BF878: mov     ecx, [ebp-10h]
+0x9BF87B: add     ecx, 0Ch
+0x9BF87E: jmp     j_??1?$NiTList@PAVTileTemplateItem@Tile@@@@UAE@XZ; NiTList<Tile::TileTemplateItem *>::~NiTList<Tile::TileTemplateItem *>(void)
+0x9BF883: mov     edx, [esp+arg_4]
+0x9BF887: lea     eax, [edx-8]
+0x9BF88A: mov     ecx, [edx-0Ch]
+0x9BF88D: xor     ecx, eax
+0x9BF88F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BF894: mov     eax, offset stru_AE8D6C
+0x9BF899: jmp     ___CxxFrameHandler3

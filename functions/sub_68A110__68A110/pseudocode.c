@@ -1,10 +1,10 @@
-char __thiscall sub_68A110(_DWORD *this)
+char __thiscall sub_68A110(char **this)
 {
-  int v2; // ecx
+  char *v2; // ecx
   int v3; // eax
 
-  v2 = *(this + 1);
-  if ( !v2 || (v3 = DName::status(v2), v3 != 1) || !*(this + 2) )
-    LOBYTE(v3) = 0;
-  return v3;
+  v2 = *(this + 1); /*0x68a114*/
+  if ( !v2 || (v3 = DName::status(v2), v3 != 1) || !*(this + 2) ) /*0x68a127*/
+    LOBYTE(v3) = 0; /*0x68a12f*/
+  return v3; /*0x68a131*/
 }

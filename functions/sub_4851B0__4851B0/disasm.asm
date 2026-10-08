@@ -8,12 +8,12 @@
 0x4851BB: mov     esi, [eax]
 0x4851BD: test    esi, esi
 0x4851BF: jz      short loc_4851D7
-0x4851C1: mov     ecx, esi
-0x4851C3: call    ExtraDataList_GetOwner
+0x4851C1: mov     ecx, esi; this
+0x4851C3: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x4851C8: test    eax, eax
 0x4851CA: jz      short loc_4851D7
-0x4851CC: mov     ecx, esi
-0x4851CE: call    ExtraDataList_GetOwner
+0x4851CC: mov     ecx, esi; this
+0x4851CE: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x4851D3: mov     esi, eax
 0x4851D5: jmp     short loc_4851D9
 0x4851D7: xor     esi, esi

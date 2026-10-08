@@ -1,4 +1,4 @@
-0x8025F0: mov     eax, ds:0B43104h
+0x8025F0: mov     eax, ds:0B43104h; Generic BSShader initialization used by SpeedTreeFrondShader vtable +0x84: sets renderer, invokes setup/check virtuals, and allocates one pass slot through sub_76CCA0.
 0x8025F5: push    esi
 0x8025F6: push    eax; a2
 0x8025F7: mov     esi, ecx

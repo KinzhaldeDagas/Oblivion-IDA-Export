@@ -9,7 +9,7 @@
 0x405175: push    esi; ArgList
 0x405176: jz      loc_405267
 0x40517C: push    eax
-0x40517D: call    sub_4DC270
+0x40517D: call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.
 0x405182: mov     esi, eax
 0x405184: add     esp, 4
 0x405187: test    esi, esi
@@ -45,7 +45,7 @@
 0x4051DB: push    475h
 0x4051E0: push    offset a_MiscMain_cpp; ".\\Misc\\Main.cpp"
 0x4051E5: push    offset aShaderErrorStr; "Shader error string is too long."
-0x4051EA: call    nullsub_return0_0arg
+0x4051EA: call    nullsub_return0_0arg; [Verified] Shared zero-return leaf. BSTempEffectDecal vtable 0xA6822C uses it at +0x54 for GetTypeID 0 and also in other slots; many unrelated vtables reuse this target. Class meaning must be established from the owning vtable and caller.
 0x4051EF: add     esp, 0Ch
 0x4051F2: mov     edx, [esi]
 0x4051F4: mov     eax, [edx+0D4h]

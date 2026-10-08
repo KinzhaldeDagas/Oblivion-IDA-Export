@@ -1,4 +1,4 @@
-0x663FF0: push    ebp
+0x663FF0: push    ebp; bhkWorldRayCastData::SetCastDirectionVector. Converts a world-space direction vector by hkFactor and writes data+0x60. Used by actor movement probes for downward ground snapping instead of an absolute To point.
 0x663FF1: mov     ebp, esp
 0x663FF3: and     esp, 0FFFFFFF0h
 0x663FF6: sub     esp, 20h

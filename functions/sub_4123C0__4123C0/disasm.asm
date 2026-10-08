@@ -26,7 +26,7 @@
 0x412418: add     edi, 0FFFFF800h
 0x41241E: mov     [ebx], edi
 0x412420: fld     flt_B03174
-0x412426: call    Double_To_SInt32
+0x412426: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x41242B: mov     ecx, eax
 0x41242D: mov     eax, edi
 0x41242F: cdq
@@ -61,7 +61,7 @@
 0x41249C: sub     edi, edx
 0x41249E: mov     [ebx], edi
 0x4124A0: fld     flt_B03174
-0x4124A6: call    Double_To_SInt32
+0x4124A6: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4124AB: mov     ecx, eax
 0x4124AD: mov     eax, edi
 0x4124AF: cdq
@@ -78,7 +78,7 @@
 0x4124D3: mov     edi, [esp+18h+arg_C]
 0x4124D7: mov     [edi], esi
 0x4124D9: fld     flt_B03174
-0x4124DF: call    Double_To_SInt32
+0x4124DF: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4124E4: mov     ecx, eax
 0x4124E6: mov     eax, esi
 0x4124E8: cdq

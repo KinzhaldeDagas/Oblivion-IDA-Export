@@ -1,12 +1,20 @@
-void __cdecl sub_553B70(float a1, int a2, int a3)
+// Oblivion FaceGen randomizer wrapper. Ensures the manager exists, then fills all four output matrices as race base plus independent Gaussian variation.
+void __cdecl FaceGen_GenerateRandomizedHeadParameters(
+        float geneticVariation,
+        const FaceGenHeadParameters *raceParameters,
+        FaceGenHeadParameters *outParameters)
 {
-  if ( a3 )
+  if ( outParameters ) /*0x553b77*/
   {
-    if ( a2 )
+    if ( raceParameters ) /*0x553b80*/
     {
-      if ( !dword_B39B80 )
-        sub_553550();
-      sub_6EE010(a1, a2, a3);
+      if ( !g_faceGenManager ) /*0x553b82*/
+        FaceGenManager_EnsureInitialized(); /*0x553b8b*/
+      FaceGenHeadParameters_AddGaussianVariation( /*0x553ba6*/
+        (char *)g_faceGenManager + 0xC8,
+        geneticVariation,
+        raceParameters,
+        outParameters);                         // Call the manager+0xC8 random-generator method with (geneticVariation, raceParameters, outParameters). The method receives but does not otherwise use its manager subobject.
     }
   }
 }

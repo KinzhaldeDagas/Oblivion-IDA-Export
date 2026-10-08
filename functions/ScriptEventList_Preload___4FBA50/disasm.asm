@@ -1,7 +1,7 @@
 0x4FBA50: push    esi
 0x4FBA51: push    edi
 0x4FBA52: mov     esi, ecx
-0x4FBA54: call    sub_4FA080
+0x4FBA54: call    sub_4FA080; Hot Reload OBSE decode: ScriptEventList var-list destructor. Frees m_vars head, nodes, and Var payloads, then clears m_vars.
 0x4FBA59: mov     eax, [esi+8]
 0x4FBA5C: xor     edi, edi
 0x4FBA5E: cmp     eax, edi
@@ -22,7 +22,7 @@
 0x4FBA83: cmp     eax, edi
 0x4FBA85: jz      short loc_4FBA90
 0x4FBA87: push    eax
-0x4FBA88: call    FormHeapFree
+0x4FBA88: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4FBA8D: add     esp, 4
 0x4FBA90: mov     [esi+10h], edi
 0x4FBA93: pop     edi

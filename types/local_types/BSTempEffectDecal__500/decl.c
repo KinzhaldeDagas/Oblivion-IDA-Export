@@ -1,1 +1,1 @@
-BSTempEffectDecal
+struct BSTempEffectDecal;

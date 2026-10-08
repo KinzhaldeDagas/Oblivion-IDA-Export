@@ -1,1 +1,6 @@
-usp10_language_table
+enum usp10_language_table : __int32
+{
+USP10_LANGUAGE_TABLE_GSUB = 0x0,
+USP10_LANGUAGE_TABLE_GPOS = 0x1,
+USP10_LANGUAGE_TABLE_COUNT = 0x2,
+};

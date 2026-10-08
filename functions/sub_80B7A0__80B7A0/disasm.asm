@@ -6,13 +6,13 @@
 0x80B7B3: push    ebp
 0x80B7B4: push    esi
 0x80B7B5: mov     [esp+104h+var_48], ecx
-0x80B7BC: mov     [esp+104h+var_14], ebx
+0x80B7BC: mov     [esp+104h+self], ebx
 0x80B7C3: jz      loc_80BF57
 0x80B7C9: mov     esi, 2
 0x80B7CE: cmp     ds:0B42F48h, esi
 0x80B7D4: jl      loc_80BF57
-0x80B7DA: mov     ecx, ebx
-0x80B7DC: call    sub_7ED160
+0x80B7DA: mov     ecx, ebx; self
+0x80B7DC: call    BSShaderLightingProperty_GetFirstLightUnfiltered
 0x80B7E1: mov     eax, [ebx+1Ch]
 0x80B7E4: test    eax, 800h
 0x80B7E9: mov     ecx, 1
@@ -22,8 +22,8 @@
 0x80B7F8: test    eax, 1000h
 0x80B7FD: jbe     short loc_80B803
 0x80B7FF: add     [esp+104h+var_F8], ecx
-0x80B803: mov     ecx, ebx
-0x80B805: call    sub_7ED160
+0x80B803: mov     ecx, ebx; self
+0x80B805: call    BSShaderLightingProperty_GetFirstLightUnfiltered
 0x80B80A: cmp     [esp+104h+var_F8], 0
 0x80B80F: mov     ebp, eax
 0x80B811: mov     eax, [esp+104h+arg_0]
@@ -38,7 +38,7 @@
 0x80B840: lea     edx, [ebx+11Ch]
 0x80B846: push    edi
 0x80B847: lea     edi, [ebx+128h]
-0x80B84D: mov     esi, offset flt_B46528
+0x80B84D: mov     esi, (offset flt_B464A0+88h)
 0x80B852: mov     [esp+108h+var_E0], edx
 0x80B856: add     ebx, 0F8h ; 'ø'
 0x80B85C: mov     [esp+108h+var_98], eax
@@ -51,16 +51,16 @@
 0x80B87E: fstp    st
 0x80B880: push    ecx
 0x80B881: mov     ecx, ebp
-0x80B883: call    sub_405AD0
+0x80B883: call    ShadowSceneLight_GetLightRef
 0x80B888: mov     eax, [eax]
 0x80B88A: mov     edx, [eax+88h]
 0x80B890: mov     ecx, [eax+8Ch]
-0x80B896: mov     [esp+108h+var_EC], edx
+0x80B896: mov     [esp+108h+other.x], edx
 0x80B89A: mov     edx, [eax+90h]
 0x80B8A0: mov     eax, [esp+108h+var_44]
 0x80B8A7: test    eax, eax
-0x80B8A9: mov     [esp+108h+var_E8], ecx
-0x80B8AD: mov     [esp+108h+var_E4], edx
+0x80B8A9: mov     [esp+108h+other.y], ecx
+0x80B8AD: mov     [esp+108h+other.z], edx
 0x80B8B1: jz      loc_80B9E2
 0x80B8B7: mov     [esp+108h+var_F8], eax
 0x80B8BB: add     eax, 4
@@ -120,9 +120,9 @@
 0x80B9CB: mov     eax, [esp+108h+var_BC]
 0x80B9CF: mov     [esi+0Ch], ecx
 0x80B9D2: mov     ecx, [esp+108h+var_B8]
-0x80B9D6: mov     [esp+108h+var_EC], edx
-0x80B9DA: mov     [esp+108h+var_E8], eax
-0x80B9DE: mov     [esp+108h+var_E4], ecx
+0x80B9D6: mov     [esp+108h+other.x], edx
+0x80B9DA: mov     [esp+108h+other.y], eax
+0x80B9DE: mov     [esp+108h+other.z], ecx
 0x80B9E2: mov     eax, [esi-7Ch]
 0x80B9E5: mov     edx, [esi-80h]
 0x80B9E8: mov     ecx, [esi-78h]
@@ -134,7 +134,7 @@
 0x80BA01: push    eax
 0x80BA02: mov     ecx, ebp
 0x80BA04: mov     [esp+10Ch+var_A8], edx
-0x80BA08: call    sub_405AD0
+0x80BA08: call    ShadowSceneLight_GetLightRef
 0x80BA0D: mov     ecx, [eax]
 0x80BA0F: mov     eax, [esp+108h+var_64]
 0x80BA16: fld     dword ptr [ecx+0F8h]
@@ -160,19 +160,19 @@
 0x80BA4C: fnstsw  ax
 0x80BA4E: test    ah, 44h
 0x80BA51: jp      short loc_80BA73
-0x80BA53: mov     ecx, [esp+108h+var_EC]
+0x80BA53: mov     ecx, [esp+108h+other.x]
 0x80BA57: fld     [esp+108h+var_F8]
-0x80BA5B: mov     edx, [esp+108h+var_E8]
-0x80BA5F: mov     eax, [esp+108h+var_E4]
+0x80BA5B: mov     edx, [esp+108h+other.y]
+0x80BA5F: mov     eax, [esp+108h+other.z]
 0x80BA63: mov     [ebx], ecx
 0x80BA65: mov     [ebx+4], edx
 0x80BA68: mov     [ebx+8], eax
 0x80BA6B: fstp    dword ptr [ebp+0]
 0x80BA6E: jmp     loc_80BE83
-0x80BA73: lea     ecx, [esp+108h+var_EC]
-0x80BA77: push    ecx
-0x80BA78: mov     ecx, ebx
-0x80BA7A: call    sub_8AA390
+0x80BA73: lea     ecx, [esp+108h+other]
+0x80BA77: push    ecx; other
+0x80BA78: mov     ecx, ebx; this
+0x80BA7A: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x80BA7F: test    al, al
 0x80BA81: jnz     short loc_80BAA7
 0x80BA83: fld     dword ptr [ebp+0]
@@ -191,16 +191,16 @@
 0x80BAAB: lea     ecx, [esp+108h+var_94]
 0x80BAAF: fsub    dword ptr [ebp+0]
 0x80BAB2: fstp    [esp+108h+var_F4]
-0x80BAB6: fld     [esp+108h+var_EC]
+0x80BAB6: fld     [esp+108h+other.x]
 0x80BABA: fsub    [esp+108h+var_DC]
 0x80BABE: fstp    [esp+108h+var_94]
-0x80BAC2: fld     [esp+108h+var_E8]
+0x80BAC2: fld     [esp+108h+other.y]
 0x80BAC6: fsub    [esp+108h+var_D8]
 0x80BACA: fstp    [esp+108h+var_90]
-0x80BACE: fld     [esp+108h+var_E4]
+0x80BACE: fld     [esp+108h+other.z]
 0x80BAD2: fsub    [esp+108h+var_D4]
 0x80BAD6: fstp    [esp+108h+var_8C]
-0x80BADA: call    sub_43F350
+0x80BADA: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x80BADF: fdiv    [esp+108h+var_F8]
 0x80BAE3: lea     ecx, [esp+108h+var_CC]
 0x80BAE7: fstp    [esp+108h+var_D0]
@@ -213,7 +213,7 @@
 0x80BB00: fld     dword ptr [ebx+8]
 0x80BB03: fsub    [esp+108h+var_D4]
 0x80BB07: fstp    [esp+108h+var_C4]
-0x80BB0B: call    sub_43F350
+0x80BB0B: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x80BB10: fstp    st
 0x80BB12: fld     [esp+108h+var_94]
 0x80BB16: fld     st
@@ -277,10 +277,10 @@
 0x80BBBC: test    ah, 5
 0x80BBBF: jnp     loc_80BD50
 0x80BBC5: fld     [esp+108h+var_F4]
-0x80BBC9: mov     eax, [esp+108h+var_EC]
-0x80BBCD: mov     ecx, [esp+108h+var_E8]
+0x80BBC9: mov     eax, [esp+108h+other.x]
+0x80BBCD: mov     ecx, [esp+108h+other.y]
 0x80BBD1: fld     st
-0x80BBD3: mov     edx, [esp+108h+var_E4]
+0x80BBD3: mov     edx, [esp+108h+other.z]
 0x80BBD7: fabs
 0x80BBD9: fstp    [esp+108h+var_F4]
 0x80BBDD: mov     [ebx], eax
@@ -521,8 +521,8 @@
 0x80BF23: mov     [edi+8], eax
 0x80BF26: mov     ecx, ds:0B25ADCh
 0x80BF2C: mov     [edi+0Ch], ecx
-0x80BF2F: mov     ecx, [esp+108h+var_14]
-0x80BF36: call    sub_7ED180
+0x80BF2F: mov     ecx, [esp+108h+self]; self
+0x80BF36: call    BSShaderLightingProperty_GetNextLightUnfiltered
 0x80BF3B: add     [esp+108h+var_E0], 4
 0x80BF40: add     ebx, 0Ch
 0x80BF43: add     esi, 10h
@@ -548,7 +548,7 @@
 0x80BF95: mov     ecx, [esp+11Ch+var_48]
 0x80BF9C: push    edx
 0x80BF9D: push    eax
-0x80BF9E: call    sub_7C9230
+0x80BF9E: call    ShadowLightShader__SetupGeometryConstants; Oblivion ShadowLight per-geometry constant setup. For mode-5 caster selectors 6..9, native PointLightPos0 c16 comes from B44FD8; c16.w is the projected-depth divisor, taken from the current light range/control and divided by object scale for rigid geometry. The positive B44EE4 path supplies the alternate depth-origin variant.
 0x80BFA3: pop     esi
 0x80BFA4: pop     ebp
 0x80BFA5: pop     ebx

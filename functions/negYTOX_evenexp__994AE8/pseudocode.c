@@ -1,4 +1,9 @@
-int negYTOX_::evenexp()
+int __usercall negYTOX_::evenexp@<eax>(int a1@<ebp>)
 {
-  return fFYTOX_::fFXTOY();
+  __asm /*0x994ae8*/
+  {
+    fxch    st(1)
+    fabs
+  }
+  return fFYTOX_::fFXTOY(a1);
 }

@@ -2,7 +2,7 @@
 0x9F2FB6: push    ecx
 0x9F2FB7: fstp    [esp+4+var_4]; float
 0x9F2FBA: push    offset aFpersuasionrea; "fPersuasionReactionLove"
-0x9F2FBF: mov     ecx, offset fPersuasionReactionLove
+0x9F2FBF: mov     ecx, 0B38E58h
 0x9F2FC4: call    GameSetting_ConstrAndReg_float
 0x9F2FC9: push    offset sub_A223D0; void (__cdecl *)()
 0x9F2FCE: call    _atexit

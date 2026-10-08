@@ -1,1 +1,1 @@
-pf_flags_0
+typedef pf_flags_t pf_flags_0;

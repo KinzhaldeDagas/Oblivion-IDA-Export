@@ -5,7 +5,7 @@
 0x862A48: fstp    st(1)
 0x862A4A: push    offset aInvalidSubText; "Invalid sub texture in decal"
 0x862A4F: fstp    st
-0x862A51: call    eax ; dword_B42E8C
+0x862A51: call    eax ; unk_B42E8C
 0x862A53: fld     dword ptr ds:0A3D65Ch
 0x862A59: fldz
 0x862A5B: add     esp, 8

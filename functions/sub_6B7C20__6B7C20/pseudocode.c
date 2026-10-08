@@ -1,10 +1,11 @@
-int __thiscall sub_6B7C20(Unk1C *this)
+// Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.
+void *__thiscall DialogueListCursor::GetCurrent(DialogueListCursorView *this)
 {
-  UInt32 v1; // eax
+  DialogueListNodeView *currentNode; // eax
 
-  v1 = this->unk00[2];
-  if ( v1 )
-    return *(_DWORD *)v1;
+  currentNode = this->currentNode; /*0x6b7c20*/
+  if ( currentNode ) /*0x6b7c25*/
+    return currentNode->item; /*0x6b7c27*/
   else
-    return 0;
+    return 0; /*0x6b7c2a*/
 }

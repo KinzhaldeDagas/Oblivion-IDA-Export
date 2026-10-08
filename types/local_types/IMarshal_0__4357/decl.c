@@ -1,1 +1,1 @@
-IMarshal_0
+typedef IMarshal IMarshal_0;

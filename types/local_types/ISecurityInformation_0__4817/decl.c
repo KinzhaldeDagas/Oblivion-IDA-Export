@@ -1,1 +1,1 @@
-ISecurityInformation_0
+typedef ISecurityInformation ISecurityInformation_0;

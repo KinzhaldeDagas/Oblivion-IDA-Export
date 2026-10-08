@@ -6,7 +6,7 @@
 0x4CA719: cmp     eax, esi
 0x4CA71B: jz      short loc_4CA729
 0x4CA71D: push    eax
-0x4CA71E: call    FormHeapFree
+0x4CA71E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4CA723: add     esp, 4
 0x4CA726: mov     [edi+3Ch], esi
 0x4CA729: test    byte ptr [edi+24h], 1

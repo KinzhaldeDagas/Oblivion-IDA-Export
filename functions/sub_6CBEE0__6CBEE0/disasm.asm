@@ -1,4 +1,4 @@
-0x6CBEE0: sub     esp, 90h
+0x6CBEE0: sub     esp, 90h; Oblivion: evaluates multiple 0x18-byte blend items using item+8 normalized weight. Translation, rotation, and scale validity are tracked independently; missing channels reduce only that channel's weight. Quaternions are hemisphere-corrected before weighted summation and normalized afterward.
 0x6CBEE6: fld1
 0x6CBEE8: mov     eax, ds:0B3F9A8h
 0x6CBEED: mov     edx, ds:0B3F9B0h

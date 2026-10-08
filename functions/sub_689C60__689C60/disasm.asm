@@ -1,4 +1,4 @@
-0x689C60: sub     esp, 0Ch
+0x689C60: sub     esp, 0Ch; Verified route normalization scans teleport references for an earlier route reference in the linked door's spatial container; when one is found, it removes nodes from the list head through the current node. Probable intent is to prune a redundant teleport loop; exact loop policy remains Unknown.
 0x689C63: push    ebx
 0x689C64: push    edi
 0x689C65: mov     edi, ecx
@@ -9,30 +9,29 @@
 0x689C76: push    ebp
 0x689C77: push    esi
 0x689C78: jmp     short loc_689C84
-0x689C7A: align 10h
 0x689C80: mov     edi, [esp+1Ch+var_8]
 0x689C84: cmp     dword ptr [ebx+4], 0
 0x689C88: jnz     short loc_689C93
 0x689C8A: cmp     dword ptr [ebx], 0
 0x689C8D: jz      loc_689D1B
-0x689C93: mov     ecx, [ebx]
+0x689C93: mov     ecx, [ebx]; this
 0x689C95: mov     [esp+1Ch+var_C], ecx
-0x689C99: call    sub_68B0F0
+0x689C99: call    TravelPathNode_GetReference; Verified returns payload as TESObjectREFR* only when kind==0 (reference node); returns null for position nodes or other kinds.
 0x689C9E: test    eax, eax
 0x689CA0: jz      short loc_689D10
 0x689CA2: mov     ecx, eax; this
-0x689CA4: call    GetTeleportExtraData
+0x689CA4: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x689CA9: mov     esi, eax
 0x689CAB: test    esi, esi
 0x689CAD: jz      short loc_689D10
-0x689CAF: mov     ecx, esi
-0x689CB1: call    sub_42B410
+0x689CAF: mov     ecx, esi; this
+0x689CB1: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x689CB6: test    eax, eax
 0x689CB8: jz      short loc_689D10
-0x689CBA: mov     ecx, esi
-0x689CBC: call    sub_42B410
-0x689CC1: mov     ecx, eax
-0x689CC3: call    sub_4D8AF0
+0x689CBA: mov     ecx, esi; this
+0x689CBC: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
+0x689CC1: mov     ecx, eax; this
+0x689CC3: call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.
 0x689CC8: test    eax, eax
 0x689CCA: mov     [esp+1Ch+var_4], eax
 0x689CCE: jz      short loc_689D10
@@ -42,19 +41,18 @@
 0x689CD7: test    esi, esi
 0x689CD9: jz      short loc_689D10
 0x689CDB: jmp     short loc_689CE0
-0x689CDD: align 10h
 0x689CE0: cmp     dword ptr [esi+4], 0
 0x689CE4: jnz     short loc_689CEB
 0x689CE6: cmp     dword ptr [esi], 0
 0x689CE9: jz      short loc_689D10
 0x689CEB: cmp     esi, ebx
 0x689CED: jz      short loc_689D10
-0x689CEF: mov     ecx, [esi]
-0x689CF1: call    sub_68B0F0
+0x689CEF: mov     ecx, [esi]; this
+0x689CF1: call    TravelPathNode_GetReference; Verified returns payload as TESObjectREFR* only when kind==0 (reference node); returns null for position nodes or other kinds.
 0x689CF6: test    eax, eax
 0x689CF8: jz      short loc_689D07
-0x689CFA: mov     ecx, eax
-0x689CFC: call    sub_4D8AF0
+0x689CFA: mov     ecx, eax; this
+0x689CFC: call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.
 0x689D01: cmp     eax, [esp+1Ch+var_4]
 0x689D05: jz      short loc_689D23
 0x689D07: mov     ebp, esi
@@ -80,10 +78,10 @@
 0x689D38: xor     bl, bl
 0x689D3A: test    esi, esi
 0x689D3C: jz      short loc_689D4E
-0x689D3E: mov     ecx, esi
-0x689D40: call    sub_68B1C0
+0x689D3E: mov     ecx, esi; this
+0x689D40: call    TravelPathNode_FreeOwnedPosition; Verified frees only the owned position payload when kind==1; it does not free the TravelPathNode record itself and does not release reference-kind payloads.
 0x689D45: push    esi
-0x689D46: call    FormHeapFree
+0x689D46: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x689D4B: add     esp, 4
 0x689D4E: mov     eax, [edi+4]
 0x689D51: test    eax, eax
@@ -93,7 +91,7 @@
 0x689D5B: mov     edx, [eax]
 0x689D5D: push    eax
 0x689D5E: mov     [edi], edx
-0x689D60: call    FormHeapFree
+0x689D60: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x689D65: add     esp, 4
 0x689D68: jmp     short loc_689D70
 0x689D6A: mov     dword ptr [edi], 0
@@ -112,10 +110,10 @@
 0x689D8E: xor     bl, bl
 0x689D90: test    esi, esi
 0x689D92: jz      short loc_689DA4
-0x689D94: mov     ecx, esi
-0x689D96: call    sub_68B1C0
+0x689D94: mov     ecx, esi; this
+0x689D96: call    TravelPathNode_FreeOwnedPosition; Verified frees only the owned position payload when kind==1; it does not free the TravelPathNode record itself and does not release reference-kind payloads.
 0x689D9B: push    esi
-0x689D9C: call    FormHeapFree
+0x689D9C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x689DA1: add     esp, 4
 0x689DA4: mov     eax, [edi]
 0x689DA6: push    eax

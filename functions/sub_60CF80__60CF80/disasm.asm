@@ -1,4 +1,4 @@
-0x60CF80: mov     eax, [esp+arg_8]
+0x60CF80: mov     eax, [esp+owner]
 0x60CF84: push    esi; int
 0x60CF85: push    0; int
 0x60CF87: push    offset ??_R0?AVActor@@@8; struct TypeDescriptor *
@@ -18,6 +18,6 @@
 0x60CFB4: jnz     short loc_60CFC4
 0x60CFB6: mov     ecx, eax; int
 0x60CFB8: mov     dword ptr [esi+4], 0
-0x60CFBF: call    EvaluatePackage
+0x60CFBF: call    EvaluatePackage; Actor::EvaluatePackage. After current package changes, resets/evaluates actor AI state through sub_5EAE70 and process callbacks; plugin calls this after assigning runtime packages.
 0x60CFC4: pop     esi
 0x60CFC5: retn    0Ch

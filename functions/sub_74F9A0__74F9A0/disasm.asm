@@ -31,7 +31,7 @@
 0x74F9E9: xor     edi, edi
 0x74F9EB: mov     edx, [esi]
 0x74F9ED: push    edx
-0x74F9EE: call    FormHeapFree
+0x74F9EE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x74F9F3: add     esp, 4
 0x74F9F6: mov     [esi], edi
 0x74F9F8: mov     [esi+4], ebp

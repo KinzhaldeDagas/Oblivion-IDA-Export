@@ -1,1 +1,1 @@
-DDCAPS
+typedef _DDCAPS DDCAPS;

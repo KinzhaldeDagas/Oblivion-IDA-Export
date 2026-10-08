@@ -1,19 +1,36 @@
 {
-  "callees_count": 11,
-  "callers_count": 11,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
+  "callers_count": 13,
+  "chunks": [
+    [
+      "0x701E00",
+      "0x701EF3"
+    ],
+    [
+      "0x9CA420",
+      "0x9CA446"
+    ]
+  ],
+  "chunks_sha256": "04075b3842e63043244427b6eaab22102bd55531d98ac24616263bb93b69cc8c",
+  "comment_regular": "SpeedTreeOBSE 2026-07-14: generic NiSourceTexture creation preserves default pixel/alpha/mipmap preferences. Suitable for authored DDS/TGA composite candidates resolved through engine resources.",
+  "comment_repeatable": "SpeedTreeOBSE 2026-07-14: generic NiSourceTexture creation preserves default pixel/alpha/mipmap preferences. Suitable for authored DDS/TGA composite candidates resolved through engine resources.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
   "display_name": "NiSourceTexture::LoadTextureByFilename",
   "end_ea": "0x701EF3",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "NiSourceTexture::LoadTextureByFilename",
   "segment": ".text",
   "sha256": "5a2596870585250ed23a3132e2ab79d48ce9bd9069dd8046bf363cd190129d2f",
   "size": 243,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x701E00",
-  "type": "NiSourceTexture *__cdecl(char *Src, PixelLayout *, UInt8)",
-  "xrefs_from_count": 98,
+  "total_chunk_size": 281,
+  "type": "NiSourceTexture *__cdecl(char *Src, PixelLayout *, char)",
+  "xrefs_from_count": 112,
   "xrefs_to_count": 13
 }

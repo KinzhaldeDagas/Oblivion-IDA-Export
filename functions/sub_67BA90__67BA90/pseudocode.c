@@ -1,78 +1,62 @@
 void __thiscall sub_67BA90(char *this)
 {
-  UInt32 v3; // ebx
-  UInt32 *v4; // esi
-  TESForm *v5; // eax
-  const char *v6; // eax
-  int v7; // eax
-  _DWORD *v8; // esi
-  _DWORD *v9; // edi
-  _DWORD *v10; // eax
-  int v11; // eax
-  TESSaveLoad *v12; // ecx
-  UInt32 *v13; // edi
-  UInt32 v14; // esi
-  TESForm *v15; // ecx
-  UInt32 v16; // eax
-  const char *v17; // eax
-  const char *v18; // eax
-  UInt32 v19; // edx
-  int v20; // [esp-14h] [ebp-4Ch]
-  int v21; // [esp-14h] [ebp-4Ch]
-  size_t v22; // [esp-10h] [ebp-48h]
-  size_t v23; // [esp-10h] [ebp-48h]
-  size_t v24; // [esp-10h] [ebp-48h]
-  size_t v25; // [esp-10h] [ebp-48h]
-  int v26; // [esp-10h] [ebp-48h]
-  int v27; // [esp-10h] [ebp-48h]
-  size_t v28; // [esp-8h] [ebp-40h]
-  size_t v29; // [esp+0h] [ebp-38h]
-  size_t v30; // [esp+0h] [ebp-38h]
-  int v31; // [esp+0h] [ebp-38h]
-  int v32; // [esp+4h] [ebp-34h]
-  int v33; // [esp+4h] [ebp-34h]
-  int v34[2]; // [esp+8h] [ebp-30h]
-  int v35[2]; // [esp+8h] [ebp-30h]
-  int v36; // [esp+8h] [ebp-30h]
-  size_t v37; // [esp+8h] [ebp-30h]
-  int v38; // [esp+8h] [ebp-30h]
-  unsigned __int16 v39; // [esp+8h] [ebp-30h]
+  unsigned __int8 *bufferCursor; // ebx
+  UInt32 *currentlyLoadingFormHeader; // esi
+  TESForm *v4; // eax
+  const char *v5; // eax
+  _DWORD *v6; // esi
+  _DWORD *v7; // edi
+  _DWORD *v8; // eax
+  int v9; // eax
+  TESSaveLoadGame_SerializationView *v10; // ecx
+  UInt32 *v11; // edi
+  unsigned __int8 *v12; // esi
+  TESForm *v13; // ecx
+  unsigned __int8 *v14; // eax
+  const char *v15; // eax
+  const char *v16; // eax
+  unsigned __int8 *v17; // edx
+  int v18; // [esp-14h] [ebp-4Ch]
+  int v19; // [esp-14h] [ebp-4Ch]
+  int v20; // [esp-10h] [ebp-48h]
+  int v21; // [esp-10h] [ebp-48h]
+  int v22; // [esp+4h] [ebp-34h]
+  int v23; // [esp+8h] [ebp-30h]
+  unsigned __int16 v24; // [esp+8h] [ebp-30h]
   int a2; // [esp+10h] [ebp-28h]
-  int a2a; // [esp+10h] [ebp-28h]
-  int v42; // [esp+14h] [ebp-24h]
-  int v43; // [esp+18h] [ebp-20h] BYREF
-  int v44; // [esp+1Ch] [ebp-1Ch] BYREF
-  int v45; // [esp+20h] [ebp-18h] BYREF
-  int v46; // [esp+24h] [ebp-14h]
-  int v47; // [esp+28h] [ebp-10h]
-  int Dst; // [esp+2Ch] [ebp-Ch] BYREF
-  _BYTE v49[8]; // [esp+30h] [ebp-8h] BYREF
+  unsigned __int16 v26; // [esp+14h] [ebp-24h]
+  unsigned int v27; // [esp+18h] [ebp-20h] BYREF
+  int v28; // [esp+1Ch] [ebp-1Ch] BYREF
+  int destination; // [esp+20h] [ebp-18h] BYREF
+  int v30; // [esp+24h] [ebp-14h]
+  int v31; // [esp+28h] [ebp-10h]
+  unsigned int Dst; // [esp+2Ch] [ebp-Ch] BYREF
+  unsigned int v33[2]; // [esp+30h] [ebp-8h] BYREF
 
-  v45 = 0;
-  v3 = 0;
-  if ( sub_45A170() )
+  destination = 0; /*0x67baa1*/
+  bufferCursor = 0; /*0x67baa5*/
+  if ( TESSaveLoadGame_UseSaveGameBlocks() )
   {
-    v34[0] = 4;
-    SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &Dst, *(size_t *)v34);
+    SaveLoad_LoadData(g_TESSaveLoadGame, &Dst, 4u); /*0x67bac1*/
     if ( Dst != 0x4B4F4C42 )
     {
-      v4 = (UInt32 *)SaveLoad_CurrentSavegame[1].unk030[0];
-      if ( v4 )
+      currentlyLoadingFormHeader = (UInt32 *)g_TESSaveLoadGame->currentlyLoadingFormHeader; /*0x67bad5*/
+      if ( currentlyLoadingFormHeader )
       {
-        v5 = TESForm_LookupByFormID(*v4);
-        v6 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v5->vtbl->GetEditorName)(
-                             v5,
-                             *((unsigned __int8 *)v4 + 9),
-                             *(UInt32 *)((char *)v4 + 5));
+        v4 = TESForm_LookupByFormID(*currentlyLoadingFormHeader); /*0x67bae2*/
+        v5 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v4->vtbl->GetEditorName)( /*0x67bafd*/
+                             v4,
+                             *((unsigned __int8 *)currentlyLoadingFormHeader + 9),
+                             *(UInt32 *)((char *)currentlyLoadingFormHeader + 5));
         PrintError(
           "LoadGame Buffer error: Block Header is incorrect in file %s on line %i.  Currently loading form is %08X %s wit"
           "h version %i and flags %08X",
           ".\\AI\\SpectatorPackage.cpp",
           0x14D,
-          *v4,
-          v6,
-          v32,
-          v36);
+          *currentlyLoadingFormHeader,
+          v5,
+          v22,
+          v23);
       }
       else
       {
@@ -80,138 +64,127 @@ void __thiscall sub_67BA90(char *this)
           "LoadGame Buffer error: Block Header is incorrect in file %s on line %i.  Current version is %i",
           ".\\AI\\SpectatorPackage.cpp",
           0x14D,
-          LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next));
+          g_TESSaveLoadGame->currentVersion);
       }
     }
-    v3 = SaveLoad_CurrentSavegame->unk000[5];
-    v35[0] = 2;
-    SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v45, *(size_t *)v35);
+    bufferCursor = g_TESSaveLoadGame->bufferCursor; /*0x67bb3e*/
+    SaveLoad_LoadData(g_TESSaveLoadGame, &destination, 2u); /*0x67bb48*/
   }
-  v34[0] = 2;
-  SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v44, *(size_t *)v34);
-  v46 = 0;
-  if ( (_WORD)v44 )
+  SaveLoad_LoadData(g_TESSaveLoadGame, &v28, 2u);// EngineFix analysis 2026-05-07: AI SpectatorPackage inner saved count; loop consumes at least FormID + 1 byte per entry, plus optional 4 bytes for save version >=0x39. Clamp to remaining / 5; allocation failures can write through NULL at 0x67BB97 and 0x67BBE4. /*0x67bb5a*/
+  v30 = 0; /*0x67bb64*/
+  if ( (_WORD)v28 ) /*0x67bb68*/
   {
-    do
+    do /*0x67bbfe*/
     {
-      v7 = FormHeapAlloc(0xCu);
-      LODWORD(v37) = 4;
-      v8 = (_DWORD *)v7;
-      SaveLoad_LoadFormID(v49, v37, a2, v42, v43);
-      LODWORD(v30) = 1;
-      *v8 = v47;
-      SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, v8 + 1, v30);
-      if ( LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) >= 0x39u )
+      v6 = (_DWORD *)FormHeapAlloc(0xCu); /*0x67bb87*/
+      SaveLoad_LoadFormID(g_TESSaveLoadGame, v33, 4u); /*0x67bb89*/
+      *v6 = v31; /*0x67bb97*/
+      SaveLoad_LoadData(g_TESSaveLoadGame, v6 + 1, 1u); /*0x67bba0*/
+      if ( g_TESSaveLoadGame->currentVersion >= 0x39u ) /*0x67bbaf*/
+        SaveLoad_LoadData(g_TESSaveLoadGame, v6 + 2, 4u); /*0x67bbb7*/
+      v7 = *(_DWORD **)this; /*0x67bbbc*/
+      if ( **(_DWORD **)this ) /*0x67bbbf*/
       {
-        LODWORD(v29) = 4;
-        SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, v8 + 2, v29);
-      }
-      v9 = *(_DWORD **)this;
-      if ( **(_DWORD **)this )
-      {
-        v10 = (_DWORD *)FormHeapAlloc(8u);
-        if ( v10 )
+        v8 = (_DWORD *)FormHeapAlloc(8u); /*0x67bbc6*/
+        if ( v8 )                               // EngineFix implementation 2026-05-07: SpectatorPackage non-empty list-node allocation-failure hook. On failed node allocation, free the just-created entry and continue loop tail without overwriting the existing head/list. /*0x67bbd0*/
         {
-          *v10 = *v9;
-          v10[1] = 0;
+          *v8 = *v7; /*0x67bbd4*/
+          v8[1] = 0; /*0x67bbd6*/
         }
         else
         {
-          v10 = 0;
+          v8 = 0; /*0x67bbdf*/
         }
-        v10[1] = v9[1];
-        v9[1] = v10;
+        v8[1] = v7[1]; /*0x67bbe4*/
+        v7[1] = v8; /*0x67bbe7*/
       }
-      v11 = v44;
-      *v9 = v8;
-      v44 = v11 + 1;
+      v9 = v28; /*0x67bbea*/
+      *v7 = v6; /*0x67bbee*/
+      v28 = v9 + 1; /*0x67bbfa*/
     }
-    while ( v11 + 1 < (unsigned __int16)v42 );
+    while ( v9 + 1 < v26 ); /*0x67bbfe*/
   }
-  LODWORD(v29) = 4;
-  SaveLoad_LoadFormID(&Dst, v29, v37, SHIDWORD(v37), a2);
-  LODWORD(v28) = 4;
-  *((_DWORD *)this + 1) = v46;
-  SaveLoad_LoadFormID(&v43, v28, v31, v33, v38);
-  sub_4606D0((char *)SaveLoad_CurrentSavegame, a2a);
-  TESForm_SetFormID(*((TESForm **)this + 2), a2a, 1);
-  (*(void (__thiscall **)(_DWORD))(**((_DWORD **)this + 2) + 0xE4))(*((_DWORD *)this + 2));
-  LODWORD(v22) = 4;
-  SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, this + 0xC, v22);
-  LODWORD(v23) = 4;
-  SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, this + 0x10, v23);
-  LODWORD(v24) = 0xC;
-  SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, this + 0x14, v24);
-  LODWORD(v25) = 4;
-  SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, this + 0x20, v25);
-  if ( sub_45A170() )
+  SaveLoad_LoadFormID(g_TESSaveLoadGame, &Dst, 4u); /*0x67bc11*/
+  *((_DWORD *)this + 1) = v30; /*0x67bc20*/
+  SaveLoad_LoadFormID(g_TESSaveLoadGame, &v27, 4u); /*0x67bc2a*/
+  sub_4606D0(g_TESSaveLoadGame, a2); /*0x67bc3a*/
+  TESForm_SetFormID(*((TESForm **)this + 2), a2, 1); /*0x67bc49*/
+  (*(void (__thiscall **)(_DWORD))(**((_DWORD **)this + 2) + 0xE4))(*((_DWORD *)this + 2)); /*0x67bc59*/
+  SaveLoad_LoadData(g_TESSaveLoadGame, this + 0xC, 4u); /*0x67bc67*/
+  SaveLoad_LoadData(g_TESSaveLoadGame, this + 0x10, 4u); /*0x67bc78*/
+  SaveLoad_LoadData(g_TESSaveLoadGame, this + 0x14, 0xCu); /*0x67bc89*/
+  SaveLoad_LoadData(g_TESSaveLoadGame, this + 0x20, 4u); /*0x67bc9a*/
+  if ( TESSaveLoadGame_UseSaveGameBlocks() ) /*0x67bca5*/
   {
-    v12 = SaveLoad_CurrentSavegame;
-    v13 = (UInt32 *)SaveLoad_CurrentSavegame[1].unk030[0];
-    v14 = SaveLoad_CurrentSavegame->unk000[5];
-    if ( v13 )
+    v10 = g_TESSaveLoadGame; /*0x67bcb2*/
+    v11 = (UInt32 *)g_TESSaveLoadGame->currentlyLoadingFormHeader; /*0x67bcb8*/
+    v12 = g_TESSaveLoadGame->bufferCursor; /*0x67bcc0*/
+    if ( v11 ) /*0x67bcc3*/
     {
-      v15 = TESForm_LookupByFormID(*v13);
-      v16 = v39 + v3;
-      if ( v14 <= v16 )
+      v13 = TESForm_LookupByFormID(*v11); /*0x67bcd6*/
+      v14 = &bufferCursor[v24]; /*0x67bcd8*/
+      if ( v12 <= v14 ) /*0x67bce0*/
       {
-        if ( v14 < v16 )
+        if ( v12 < v14 ) /*0x67bd22*/
         {
-          v18 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v15->vtbl->GetEditorName)(
-                                v15,
-                                *((unsigned __int8 *)v13 + 9),
-                                *(UInt32 *)((char *)v13 + 5));
-          PrintError(
+          v16 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v13->vtbl->GetEditorName)( /*0x67bd39*/
+                                v13,
+                                *((unsigned __int8 *)v11 + 9),
+                                *(UInt32 *)((char *)v11 + 5));
+          PrintError( /*0x67bd58*/
             "LoadGame Buffer underrun of %i bytes in file %s on line %i.  Currently loading form is %08X %s with version "
             "%i and flags %08X",
-            v3 + v39 - v14,
+            &bufferCursor[v24 - (_DWORD)v12],
             ".\\AI\\SpectatorPackage.cpp",
             0x176,
-            *v13,
-            v18,
-            v21,
-            v27);
+            *v11,
+            v16,
+            v19,
+            v21);
         }
       }
       else
       {
-        v17 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v15->vtbl->GetEditorName)(
-                              v15,
-                              *((unsigned __int8 *)v13 + 9),
-                              *(UInt32 *)((char *)v13 + 5));
-        PrintError(
+        v15 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v13->vtbl->GetEditorName)( /*0x67bcf3*/
+                              v13,
+                              *((unsigned __int8 *)v11 + 9),
+                              *(UInt32 *)((char *)v11 + 5));
+        PrintError( /*0x67bd12*/
           "LoadGame Buffer overrun of %i bytes in file %s on line %i.  Currently loading form is %08X %s with version %i and flags %08X",
-          v14 - v39 - v3,
+          &v12[-v24] - bufferCursor,
           ".\\AI\\SpectatorPackage.cpp",
           0x176,
-          *v13,
-          v17,
-          v20,
-          v26);
+          *v11,
+          v15,
+          v18,
+          v20);
       }
     }
     else
     {
-      v19 = v39 + v3;
-      if ( v14 <= v19 )
+      v17 = &bufferCursor[v24]; /*0x67bd6d*/
+      if ( v12 <= v17 ) /*0x67bd72*/
       {
-        if ( v14 < v19 )
-          PrintError(
+        if ( v12 < v17 ) /*0x67bd9d*/
+          PrintError( /*0x67bdb8*/
             "LoadGame Buffer underrun of %i bytes in file %s on line %i.  Current version is %i",
-            v3 + v39 - v14,
+            &bufferCursor[v24 - (_DWORD)v12],
             ".\\AI\\SpectatorPackage.cpp",
             0x176,
-            LOBYTE(v12[1].createdObjectList.next));
+            v10->currentVersion);
       }
       else
       {
-        PrintError(
+        PrintError( /*0x67bd8d*/
           "LoadGame Buffer overrun of %i bytes in file %s on line %i.  Current version is %i",
-          v14 - v39 - v3,
+          &v12[-v24] - bufferCursor,
           ".\\AI\\SpectatorPackage.cpp",
           0x176,
-          LOBYTE(v12[1].createdObjectList.next));
+          v10->currentVersion);
       }
     }
   }
 }
+/* Orphan comments:
+EngineFix implementation 2026-05-07: SpectatorPackage entry allocation-failure hook. If the 0x0C entry allocation fails before reads, discard exactly one serialized entry (FormID + byte + optional 4 bytes for save >=0x39), then resume loop accounting.
+*/

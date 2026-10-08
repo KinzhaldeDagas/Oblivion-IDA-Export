@@ -1,5 +1,5 @@
 0x4139CB: push    esi
-0x4139CC: call    FormHeapFree
+0x4139CC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4139D1: add     esp, 4
 0x4139D4: mov     ecx, [esp+arg_8]
 0x4139D8: mov     large fs:0, ecx

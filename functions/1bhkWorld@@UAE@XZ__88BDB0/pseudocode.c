@@ -11,53 +11,53 @@ void __thiscall bhkWorld::~bhkWorld(bhkWorld *this)
   signed int unk6C; // eax
   int v11; // ecx
 
-  this->__vftable = (NiObjectVtbl *)&bhkWorld::`vftable';
-  --dword_BA7900;
-  this->__vftable[1].Unk_03(this);
-  unk18 = (void (__thiscall ***)(_DWORD, int))this->unk18;
-  if ( unk18 )
-    (**unk18)(unk18, 1);
-  this->__vftable[1].Unk_03(this);
-  threadingUnkStruct = this->threadingUnkStruct;
-  this->unk18 = 0;
-  if ( threadingUnkStruct )
+  this->__vftable = (NiObjectVtbl *)&bhkWorld::`vftable'; /*0x88bddb*/
+  --unk_BA7900; /*0x88bde1*/
+  this->__vftable[1].Unk_03(this); /*0x88bdf5*/
+  unk18 = (void (__thiscall ***)(_DWORD, int))this->unk18; /*0x88bdf7*/
+  if ( unk18 ) /*0x88bdfe*/
+    (**unk18)(unk18, 1); /*0x88be06*/
+  this->__vftable[1].Unk_03(this); /*0x88be0f*/
+  threadingUnkStruct = this->threadingUnkStruct; /*0x88be11*/
+  this->unk18 = 0; /*0x88be16*/
+  if ( threadingUnkStruct ) /*0x88be19*/
   {
-    sub_8BACC0(threadingUnkStruct);
-    FormHeapFree((unsigned int)threadingUnkStruct);
-    this->threadingUnkStruct = 0;
+    sub_8BACC0(threadingUnkStruct); /*0x88be1d*/
+    FormHeapFree((unsigned int)threadingUnkStruct); /*0x88be23*/
+    this->threadingUnkStruct = 0; /*0x88be2b*/
   }
-  this->__vftable[1].Unk_03(this);
-  sub_89D700(this);
-  this->__vftable[1].Unk_03(this);
-  FormHeapFree((unsigned int)this->unk2C->unk00);
-  FormHeapFree((unsigned int)this->unk34->unk00);
-  FormHeapFree((unsigned int)this->unk3C->unk00);
-  FormHeapFree((unsigned int)this->unk44->unk00);
-  FormHeapFree((unsigned int)this->unk4C->unk00);
-  for ( i = 0; i < (signed int)this->unk68; ++i )
+  this->__vftable[1].Unk_03(this); /*0x88be35*/
+  sub_89D700(this); /*0x88be39*/
+  this->__vftable[1].Unk_03(this); /*0x88be45*/
+  FormHeapFree((unsigned int)this->unk2C->unk00); /*0x88be4b*/
+  FormHeapFree((unsigned int)this->unk34->unk00); /*0x88be54*/
+  FormHeapFree((unsigned int)this->unk3C->unk00); /*0x88be5d*/
+  FormHeapFree((unsigned int)this->unk44->unk00); /*0x88be66*/
+  FormHeapFree((unsigned int)this->unk4C->unk00); /*0x88be6f*/
+  for ( i = 0; i < (signed int)this->unk68; ++i ) /*0x88be7c*/
   {
-    v5 = *(void (__thiscall ****)(_DWORD, int))(this->unk64 + 4 * i);
-    if ( v5 )
-      (**v5)(v5, 1);
+    v5 = *(void (__thiscall ****)(_DWORD, int))(this->unk64 + 4 * i); /*0x88be83*/
+    if ( v5 ) /*0x88be88*/
+      (**v5)(v5, 1); /*0x88be90*/
   }
-  v6 = TlsIndex;
-  ThreadLocalStoragePointer = NtCurrentTeb()->ThreadLocalStoragePointer;
-  this->unk68 = 0;
-  unk78 = this->unk78;
-  if ( unk78 >= 0 )
+  v6 = MEMORY[0xBA9DE4]; /*0x88be9a*/
+  ThreadLocalStoragePointer = NtCurrentTeb()->ThreadLocalStoragePointer; /*0x88bea0*/
+  this->unk68 = 0; /*0x88bea7*/
+  unk78 = this->unk78; /*0x88beaa*/
+  if ( unk78 >= 0 ) /*0x88beb4*/
   {
-    v9 = *(_DWORD *)(ThreadLocalStoragePointer[v6] + 0x19C);
-    if ( !v9 )
-      v9 = dword_BA7D9C;
-    sub_8A75D0(v9, (_DWORD *)this->unk70, 8 * unk78, 0x14);
+    v9 = *(_DWORD *)(ThreadLocalStoragePointer[v6] + 0x19C); /*0x88beba*/
+    if ( !v9 ) /*0x88bec2*/
+      v9 = unk_BA7D9C; /*0x88bec4*/
+    sub_8A75D0(v9, (_DWORD *)this->unk70, 8 * unk78, 0x14); /*0x88bedc*/
   }
-  unk6C = this->unk6C;
-  if ( unk6C >= 0 )
+  unk6C = this->unk6C; /*0x88bee1*/
+  if ( unk6C >= 0 ) /*0x88beea*/
   {
-    v11 = *(_DWORD *)(ThreadLocalStoragePointer[v6] + 0x19C);
-    if ( !v11 )
-      v11 = dword_BA7D9C;
-    sub_8A75D0(v11, (_DWORD *)this->unk64, 4 * unk6C, 0x14);
+    v11 = *(_DWORD *)(ThreadLocalStoragePointer[v6] + 0x19C); /*0x88bef0*/
+    if ( !v11 ) /*0x88bef8*/
+      v11 = unk_BA7D9C; /*0x88befa*/
+    sub_8A75D0(v11, (_DWORD *)this->unk64, 4 * unk6C, 0x14); /*0x88bf10*/
   }
-  bhkSerializable::~bhkSerializable((bhkSerializable *)this);
+  bhkSerializable::~bhkSerializable((bhkSerializable *)this); /*0x88bf1f*/
 }

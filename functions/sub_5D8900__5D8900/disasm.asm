@@ -1,6 +1,6 @@
 0x5D8900: push    esi
 0x5D8901: mov     esi, ecx
-0x5D8903: call    ??0Menu@@QAE@XZ; Menu::Menu(void)
+0x5D8903: call    ??0Menu@@QAE@XZ; Verified constructor sets ownsTemplates byte+0x1C=1, template list+8/+0xC empty, templateContextTile+0x10=NULL, fadeState+0x24=4. Other fields retain prior names when semantics not established.
 0x5D8908: xor     eax, eax
 0x5D890A: mov     dword ptr [esi], offset ??_7SpellPurchaseMenu@@6B@; const SpellPurchaseMenu::`vftable'
 0x5D8910: mov     [esi+60h], eax

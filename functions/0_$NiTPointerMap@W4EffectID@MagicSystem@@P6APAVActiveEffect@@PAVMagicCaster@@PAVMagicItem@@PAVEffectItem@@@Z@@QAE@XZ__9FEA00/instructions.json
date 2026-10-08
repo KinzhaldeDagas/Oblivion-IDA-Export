@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x9FEA00",
-    "line": "xor     ecx, ecx",
+    "line": "xor     ecx, ecx; Verified (Oblivion): constructor allocates and zeroes the 37-bucket NiTMap_AECreatorFuncs (0x94-byte bucket array), installs its NiTPointerMap vtable, and registers the atexit cleanup. Invocation timing relative to the ActiveEffect_Register_* wrappers remains Unknown.",
     "mnemonic": "xor",
     "size": 2
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x9FEA1B",
-    "line": "mov     ecx, dword_B15A10",
+    "line": "mov     ecx, NiTMap_AECreatorFuncs.bucketCount",
     "mnemonic": "mov",
     "size": 6
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x9FEA2C",
-    "line": "mov     dword_B15A14, eax",
+    "line": "mov     NiTMap_AECreatorFuncs.buckets, eax",
     "mnemonic": "mov",
     "size": 5
   },
@@ -97,13 +97,13 @@
   },
   {
     "ea": "0x9FEA36",
-    "line": "push    offset sub_A25F90; void (__cdecl *)()",
+    "line": "push    offset ActiveEffectCreatorMap_AtexitCleanup; void (__cdecl *)()",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x9FEA3B",
-    "line": "mov     NiTMap_AECreatorFuncs, offset ??_7?$NiTPointerMap@W4EffectID@MagicSystem@@P6APAVActiveEffect@@PAVMagicCaster@@PAVMagicItem@@PAVEffectItem@@@Z@@6B@; const NiTPointerMap<MagicSystem::EffectID,ActiveEffect * (*)(MagicCaster *,MagicItem *,EffectItem *)>::`vftable' ...",
+    "line": "mov     NiTMap_AECreatorFuncs.vftable, offset ??_7?$NiTPointerMap@W4EffectID@MagicSystem@@P6APAVActiveEffect@@PAVMagicCaster@@PAVMagicItem@@PAVEffectItem@@@Z@@6B@; Verified (Oblivion): stores the NiTPointerMap vtable in NiTMap_AECreatorFuncs after allocation/zeroing. Do not infer from this initializer alone that the effect factory wrappers have run.",
     "mnemonic": "mov",
     "size": 10
   },

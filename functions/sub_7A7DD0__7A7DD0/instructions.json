@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A7DD0",
-    "line": "push    esi",
+    "line": "push    esi; Copies the complete 0x4C-byte Oblivion billboard-leaf state (position base, angle, packed color/dimming byte, normal/tangent/binormal, texture index, and one wind weight/group).",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x7A7DD2",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+source]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,13 +37,13 @@
   },
   {
     "ea": "0x7A7DDC",
-    "line": "push    edi",
+    "line": "push    edi; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A7DDD",
-    "line": "call    sub_78ED20",
+    "line": "call    OB_CIdvCamera_copy_assign_010201A0; Oblivion CIdvCamera copy assignment. On non-self assignment copies only the three-float position at +0x04..+0x0F and returns this. The function occupies the inherited assignment slot in the CIdvCamera and derived vtables.",
     "mnemonic": "call",
     "size": 5
   },

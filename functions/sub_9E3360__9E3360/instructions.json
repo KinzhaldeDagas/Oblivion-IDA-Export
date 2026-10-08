@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x9E3360",
-    "line": "push    offset stru_B36000; lpCriticalSection",
+    "line": "push    offset g_PathGridCriticalSection; Verified PathGrid startup initializer: calls InitializeCriticalSection(&g_PathGridCriticalSection) and registers TESPathGrid_DeleteCriticalSectionAtExit with atexit.",
     "mnemonic": "push",
     "size": 5
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x9E336B",
-    "line": "push    offset sub_A1BCC0; void (__cdecl *)()",
+    "line": "push    offset TESPathGrid_DeleteCriticalSectionAtExit; void (__cdecl *)()",
     "mnemonic": "push",
     "size": 5
   },

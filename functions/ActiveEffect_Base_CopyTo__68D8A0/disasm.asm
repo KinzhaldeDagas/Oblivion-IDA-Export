@@ -1,4 +1,4 @@
-0x68D8A0: fld     dword ptr [ecx+4]
+0x68D8A0: fld     dword ptr [ecx+4]; Verified ActiveEffect_Base_CopyTo copies fields through object +0x30 (boundObjectOrParentForm) and stops there; it does not copy hitEffectList at +0x34. ActiveEffect_Ctor zeroes +0x34. The registered-effect vtables' copy slots either call this routine directly or call derived copy helpers that chain to it; inspected helpers copy their own fields but do not write +0x34. Therefore standard ActiveEffect clones start with an independent empty hit-effect list.
 0x68D8A3: mov     eax, [esp+arg_0]
 0x68D8A7: fstp    dword ptr [eax+4]
 0x68D8AA: mov     edx, [ecx+8]

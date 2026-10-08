@@ -1,4 +1,4 @@
 void __thiscall BSExtraData::~BSExtraData(BSExtraData *this)
 {
-  this->vtbl = (BSExtraDataVtbl *)&BSExtraData::`vftable';
+  this->vtbl = (BSExtraDataVtbl *)&BSExtraData::`vftable'; /*0x41d7e0*/
 }

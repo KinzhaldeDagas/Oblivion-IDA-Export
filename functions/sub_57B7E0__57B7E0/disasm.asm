@@ -34,22 +34,22 @@
 0x57B857: call    MagicTarget_RemoveNonPersistentEffects
 0x57B85C: fldz
 0x57B85E: push    ecx
-0x57B85F: fstp    [esp+4+var_4]
+0x57B85F: fstp    [esp+4+deltaSeconds]; deltaTime
 0x57B862: mov     ecx, ds:0B333C4h
 0x57B868: add     ecx, 68h ; 'h'; this
-0x57B86B: call    MagicTarget_ProcessEffects
+0x57B86B: call    MagicTarget_ProcessEffects; Verified active-effect manager: obtains the target's active-effect list, checks target parent/node/cell/process conditions, then enters the list loop. Each eligible ActiveEffect goes through ActiveEffect_Base_ProcessEffect; removed effects are unlinked and destroyed by their virtual destructor. Actor_ProcessMagicEffect calls this manager each actor process tick.
 0x57B870: mov     eax, ds:0B333C4h
-0x57B875: push    eax
-0x57B876: mov     ecx, offset ActorProcessManager_ptr
-0x57B87B: call    sub_678D90
+0x57B875: push    eax; targetReference
+0x57B876: mov     ecx, (offset qword_B3BB2C+1D4h); this
+0x57B87B: call    ActorProcessManager_FinishHitEffectsForTarget; Verified (Oblivion): walks the temp-effect RTTI chain to NiRTTI_MagicHitEffect; for matching targetReference, calls the hit-effect detach virtual and marks the effect finished.
 0x57B880: fldz
 0x57B882: push    ecx
-0x57B883: fstp    [esp+4+var_4]
-0x57B886: mov     ecx, offset ActorProcessManager_ptr
-0x57B88B: call    sub_67ACA0
+0x57B883: fstp    [esp+4+deltaSeconds]; deltaSeconds
+0x57B886: mov     ecx, (offset qword_B3BB2C+1D4h); self
+0x57B88B: call    ActorProcessManager_UpdateTempEffects; [Verified] Per-actor temp-effect update loop visits both activeTempEffects (+0x40) and extendedTempEffects (+0x48), dispatches virtual Update(effect, deltaSeconds), removes effects returning false, and releases manager references. Active-list decals (types 0/1) and particles (2) update through this shared manager. Fallout divergence: Fallout updates its separate BGSDecalManager simple-decal/emitter collections through UpdateDecals.
 0x57B890: fldz
 0x57B892: push    0; int
-0x57B894: fst     dword ptr ds:0B46124h
+0x57B894: fst     dword ptr ds:0B46124h; MoonSugarEffect decode: RaceSex/menu reset path zeros native Gethit intensity globals flt_B46124/flt_B46120.
 0x57B89A: push    offset ??_R0?AVRaceSexMenu@@@8; struct TypeDescriptor *
 0x57B89F: fstp    dword ptr ds:0B46120h
 0x57B8A5: push    offset ??_R0?AVMenu@@@8; struct _s_RTTICompleteObjectLocator *

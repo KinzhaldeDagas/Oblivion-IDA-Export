@@ -1,19 +1,36 @@
 {
-  "callees_count": 41,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 15,
-  "display_name": "sub_475020",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 22,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x475020",
+      "0x4752F7"
+    ],
+    [
+      "0x9C6FC0",
+      "0x9C6FE6"
+    ]
+  ],
+  "chunks_sha256": "ad46ee1179aeace28008a489375ae83946ceb1bdc75484abcc8e647697e4dac8",
+  "comment_regular": "Loads one serialized AnimIdle record, resolves its form, reconstructs loader/sequence state, and delegates timing restoration to the native sequence load helper.",
+  "comment_repeatable": "Loads one serialized AnimIdle record, resolves its form, reconstructs loader/sequence state, and delegates timing restoration to the native sequence load helper.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 16,
+  "display_name": "AnimIdle_LoadState",
   "end_ea": "0x4752F7",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_475020",
+  "name": "AnimIdle_LoadState",
   "segment": ".text",
   "sha256": "ccecc8cfcdc4aa5590d0ed4e0756f122a049ebd6acbc00ef40bc2f80c70fbb1e",
   "size": 727,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x475020",
+  "total_chunk_size": 765,
   "type": "Ni2DBuffer **__usercall@<eax>(double st5_0@<st2>, double@<st1>, float)",
-  "xrefs_from_count": 279,
+  "xrefs_from_count": 293,
   "xrefs_to_count": 2
 }

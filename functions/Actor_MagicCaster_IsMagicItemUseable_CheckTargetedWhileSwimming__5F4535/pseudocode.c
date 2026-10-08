@@ -15,10 +15,10 @@ int __usercall Actor_MagicCaster_IsMagicItemUseable_::CheckTargetedWhileSwimming
         int a14,
         int a15)
 {
-  if ( a4[0x16] && ((*(int (__thiscall **)(int))(*(_DWORD *)a4[0x16] + 0x2C0))(a4[0x16]) & 0x800) != 0 && a3 )
+  if ( a4[0x16] && ((*(int (__thiscall **)(int))(*(_DWORD *)a4[0x16] + 0x2C0))(a4[0x16]) & 0x800) != 0 && a3 ) /*0x5f4550*/
   {
-    BYTE1(a9) = EffectItemList_HasOnTarget(a3 + 0xC);
-    return Actor_MagicCaster_IsMagicItemUseable_::CheckMagickaCost(
+    BYTE1(a9) = EffectItemList_HasOnTarget(a3 + 0xC); /*0x5f455a*/
+    return Actor_MagicCaster_IsMagicItemUseable_::CheckMagickaCost( /*0x5f455e*/
              a1,
              a2,
              a3,
@@ -37,8 +37,8 @@ int __usercall Actor_MagicCaster_IsMagicItemUseable_::CheckTargetedWhileSwimming
   }
   else
   {
-    BYTE1(a9) = 0;
-    return Actor_MagicCaster_IsMagicItemUseable_::CheckMagickaCost(
+    BYTE1(a9) = 0; /*0x5f4560*/
+    return Actor_MagicCaster_IsMagicItemUseable_::CheckMagickaCost( /*0x5f4561*/
              a1,
              a2,
              a3,

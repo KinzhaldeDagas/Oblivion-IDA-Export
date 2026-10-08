@@ -1,6 +1,6 @@
 0x5E28F0: push    esi
 0x5E28F1: push    edi
-0x5E28F2: mov     edi, [esp+8+arg_0]
+0x5E28F2: mov     edi, [esp+8+actorValue]
 0x5E28F6: cmp     edi, 0Ah
 0x5E28F9: mov     esi, ecx
 0x5E28FB: jnz     short loc_5E2916
@@ -15,7 +15,7 @@
 0x5E291A: fstp    [esp+8+arg_4]
 0x5E291E: fld     [esp+8+arg_4]
 0x5E2922: fld     st
-0x5E2924: call    Double_To_SInt32
+0x5E2924: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5E2929: mov     [esp+8+arg_4], eax
 0x5E292D: fild    [esp+8+arg_4]
 0x5E2931: fstp    [esp+8+arg_4]
@@ -31,18 +31,18 @@
 0x5E2952: fstp    [esp+8+arg_4]
 0x5E2956: push    ebx
 0x5E2957: fld     [esp+0Ch+arg_4]
-0x5E295B: call    Double_To_SInt32
+0x5E295B: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5E2960: mov     ebx, eax
 0x5E2962: mov     [esp+0Ch+arg_4], ebx
 0x5E2966: fild    [esp+0Ch+arg_4]
-0x5E296A: push    1
+0x5E296A: push    1; allowPositive
 0x5E296C: push    ecx
-0x5E296D: lea     ecx, [esi+88h]
+0x5E296D: lea     ecx, [esi+88h]; self
 0x5E2973: fstp    [esp+14h+arg_4]
 0x5E2977: fld     [esp+14h+arg_4]
-0x5E297B: fstp    [esp+14h+var_14]
-0x5E297E: push    edi
-0x5E297F: call    AVCollection_ModAVLimited
+0x5E297B: fstp    [esp+14h+delta]; delta
+0x5E297E: push    edi; actorValue
+0x5E297F: call    AVCollection_AdjustValue
 0x5E2984: cmp     edi, 8
 0x5E2987: jnz     short loc_5E29A6
 0x5E2989: test    ebx, ebx

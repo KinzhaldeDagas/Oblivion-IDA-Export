@@ -14,7 +14,7 @@
 0x5299CD: push    0
 0x5299CF: push    eax
 0x5299D0: lea     ecx, [ebx+4]
-0x5299D3: call    sub_56A950
+0x5299D3: call    ConditionList_EvaluateForActor; RadiantAI: TESPackage condition-list wrapper used by central package chooser at 0x569020. Delegates to condition evaluator at 0x56A510 with actor and resolved target form; package selection fails if conditions fail.
 0x5299D8: test    al, al
 0x5299DA: jz      short loc_5299ED
 0x5299DC: test    edi, edi

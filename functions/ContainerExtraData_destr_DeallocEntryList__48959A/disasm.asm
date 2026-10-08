@@ -1,6 +1,6 @@
 0x48959A: mov     ecx, [edi]
 0x48959C: push    ecx
-0x48959D: call    FormHeapFree
+0x48959D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4895A2: add     esp, 4
 0x4895A5: pop     edi
 0x4895A6: pop     esi

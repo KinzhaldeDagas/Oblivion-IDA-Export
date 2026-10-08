@@ -79,19 +79,19 @@
 0x4AE9B1: jnz     loc_4AEA5F
 0x4AE9B7: mov     ecx, ds:0B333C4h; this
 0x4AE9BD: call    sub_4D8B90
-0x4AE9C2: mov     ecx, offset ActorProcessManager_ptr
+0x4AE9C2: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x4AE9C7: push    eax
 0x4AE9C8: call    ActorProcessManager__AreHostilesNEarby
 0x4AE9CD: test    al, al
 0x4AE9CF: jnz     short loc_4AEA3A
-0x4AE9D1: mov     ecx, edi; this
-0x4AE9D3: call    TESObjectREFR_GetOwner
+0x4AE9D1: mov     ecx, edi; reference
+0x4AE9D3: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x4AE9D8: test    eax, eax
 0x4AE9DA: jz      short loc_4AEA1C
-0x4AE9DC: push    1
-0x4AE9DE: push    esi
-0x4AE9DF: mov     ecx, edi
-0x4AE9E1: call    TESOBjectREFR_IsOwnedBy
+0x4AE9DC: push    1; useFactionOwnership
+0x4AE9DE: push    esi; actorReference
+0x4AE9DF: mov     ecx, edi; reference
+0x4AE9E1: call    TESObjectREFR_IsOwnedBy; Verified ownership predicate and flag meaning: resolve the effective owner; accept exact equality with the actor's template/base form. When the owner differs, a nonzero ownership-global value can permit the access. With useFactionOwnership=true, a Faction owner is instead checked against the actor base's faction rank and the reference's effective required rank; callers passing false skip that faction-rank path. Direct callers include many `true` paths and ContainerExtraData_RemoveForm's item-sweep call with false. Fallout's TESObjectREFR::IsAnOwner/DoorLock::IsAnOwner also expose a `useFaction` boolean, but its implementation uses actor faction membership and has different rank/global handling.
 0x4AE9E6: test    al, al
 0x4AE9E8: jnz     short loc_4AEA1C
 0x4AE9EA: cmp     esi, ds:0B333C4h
@@ -110,7 +110,7 @@
 0x4AEA15: pop     esi
 0x4AEA16: add     esp, 10h
 0x4AEA19: retn    14h
-0x4AEA1C: mov     ecx, offset ActorProcessManager_ptr
+0x4AEA1C: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x4AEA21: call    sub_676EE0
 0x4AEA26: push    1; a4
 0x4AEA28: call    ShowSleepWaitMenu
@@ -161,14 +161,14 @@
 0x4AEAA1: pop     esi
 0x4AEAA2: add     esp, 10h
 0x4AEAA5: retn    14h
-0x4AEAA8: mov     ecx, edi; this
-0x4AEAAA: call    TESObjectREFR_GetOwner
+0x4AEAA8: mov     ecx, edi; reference
+0x4AEAAA: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x4AEAAF: test    eax, eax
 0x4AEAB1: jz      short loc_4AEAEE
-0x4AEAB3: push    1
-0x4AEAB5: push    esi
-0x4AEAB6: mov     ecx, edi
-0x4AEAB8: call    TESOBjectREFR_IsOwnedBy
+0x4AEAB3: push    1; useFactionOwnership
+0x4AEAB5: push    esi; actorReference
+0x4AEAB6: mov     ecx, edi; reference
+0x4AEAB8: call    TESObjectREFR_IsOwnedBy; Verified ownership predicate and flag meaning: resolve the effective owner; accept exact equality with the actor's template/base form. When the owner differs, a nonzero ownership-global value can permit the access. With useFactionOwnership=true, a Faction owner is instead checked against the actor base's faction rank and the reference's effective required rank; callers passing false skip that faction-rank path. Direct callers include many `true` paths and ContainerExtraData_RemoveForm's item-sweep call with false. Fallout's TESObjectREFR::IsAnOwner/DoorLock::IsAnOwner also expose a `useFaction` boolean, but its implementation uses actor faction membership and has different rank/global handling.
 0x4AEABD: test    al, al
 0x4AEABF: jnz     short loc_4AEAEE
 0x4AEAC1: cmp     esi, ds:0B333C4h

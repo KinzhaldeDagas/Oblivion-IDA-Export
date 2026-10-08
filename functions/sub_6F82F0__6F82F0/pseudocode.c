@@ -6,36 +6,36 @@ _DWORD *__thiscall sub_6F82F0(_DWORD *this, _DWORD *a2, int Offset, int a4, fpos
   int v13; // ecx
   fpos_t Pos; // [esp+4h] [ebp-8h] BYREF
 
-  v9 = *(this + 0x13) == 0;
-  Pos = a5;
-  if ( v9
+  v9 = *(this + 0x13) == 0; /*0x6f82fa*/
+  Pos = a5; /*0x6f8302*/
+  if ( v9 /*0x6f8358*/
     || !sub_6F7AB0(this)
     || fsetpos((FILE *)*(this + 0x13), &Pos)
     || Offset && fseek((FILE *)*(this + 0x13), Offset, 1)
     || fgetpos((FILE *)*(this + 0x13), &Pos) )
   {
-    *a2 = dword_AA3E5C;
-    a2[2] = 0;
-    a2[3] = 0;
-    a2[4] = 0;
-    return a2;
+    *a2 = dword_AA3E5C; /*0x6f83bd*/
+    a2[2] = 0; /*0x6f83bf*/
+    a2[3] = 0; /*0x6f83c6*/
+    a2[4] = 0; /*0x6f83cd*/
+    return a2; /*0x6f83b3*/
   }
   else
   {
-    v10 = (_DWORD **)*(this + 8);
-    *(this + 0x11) = a6;
-    if ( *v10 == this + 0x10 )
+    v10 = (_DWORD **)*(this + 8); /*0x6f8368*/
+    *(this + 0x11) = a6; /*0x6f836b*/
+    if ( *v10 == this + 0x10 ) /*0x6f8373*/
     {
-      *(_DWORD *)*(this + 4) = this + 0x10;
-      *(_DWORD *)*(this + 8) = (char *)this + 0x41;
-      *(_DWORD *)*(this + 0xC) = 0;
+      *(_DWORD *)*(this + 4) = this + 0x10; /*0x6f8378*/
+      *(_DWORD *)*(this + 8) = (char *)this + 0x41; /*0x6f8384*/
+      *(_DWORD *)*(this + 0xC) = 0; /*0x6f838c*/
     }
-    v12 = HIDWORD(Pos);
-    a2[2] = Pos;
-    v13 = *(this + 0x11);
-    *a2 = 0;
-    a2[3] = v12;
-    a2[4] = v13;
-    return a2;
+    v12 = HIDWORD(Pos); /*0x6f8396*/
+    a2[2] = Pos; /*0x6f839a*/
+    v13 = *(this + 0x11); /*0x6f839d*/
+    *a2 = 0; /*0x6f83a0*/
+    a2[3] = v12; /*0x6f83a6*/
+    a2[4] = v13; /*0x6f83a9*/
+    return a2; /*0x6f838e*/
   }
 }

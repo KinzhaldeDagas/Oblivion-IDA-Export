@@ -5,7 +5,7 @@
 0x88F208: test    esi, esi
 0x88F20A: jz      loc_88F2C5
 0x88F210: push    esi
-0x88F211: call    sub_497420
+0x88F211: call    NiAVObject_GetBhkBlendCollisionObject; ODismemberment: authoritative blend-collision getter. Reuses NiAVObject_GetBhkCollisionObject and accepts objects whose class chain includes bhkBlendCollisionObject.
 0x88F216: mov     edi, eax
 0x88F218: add     esp, 4
 0x88F21B: test    edi, edi
@@ -17,7 +17,7 @@
 0x88F230: mov     eax, [esi+0B0h]
 0x88F236: mov     esi, [eax]
 0x88F238: push    esi
-0x88F239: call    sub_497420
+0x88F239: call    NiAVObject_GetBhkBlendCollisionObject; ODismemberment: authoritative blend-collision getter. Reuses NiAVObject_GetBhkCollisionObject and accepts objects whose class chain includes bhkBlendCollisionObject.
 0x88F23E: mov     edi, eax
 0x88F240: add     esp, 4
 0x88F243: test    edi, edi
@@ -32,7 +32,7 @@
 0x88F266: test    esi, esi
 0x88F268: jz      short loc_88F2C5
 0x88F26A: push    esi
-0x88F26B: call    sub_497420
+0x88F26B: call    NiAVObject_GetBhkBlendCollisionObject; ODismemberment: authoritative blend-collision getter. Reuses NiAVObject_GetBhkCollisionObject and accepts objects whose class chain includes bhkBlendCollisionObject.
 0x88F270: mov     edi, eax
 0x88F272: add     esp, 4
 0x88F275: test    edi, edi
@@ -56,7 +56,7 @@
 0x88F29E: mov     eax, [ebx+0B0h]
 0x88F2A4: mov     eax, [eax+esi*4]
 0x88F2A7: push    eax
-0x88F2A8: call    sub_497420
+0x88F2A8: call    NiAVObject_GetBhkBlendCollisionObject; ODismemberment: authoritative blend-collision getter. Reuses NiAVObject_GetBhkCollisionObject and accepts objects whose class chain includes bhkBlendCollisionObject.
 0x88F2AD: mov     edi, eax
 0x88F2AF: add     esp, 4
 0x88F2B2: test    edi, edi

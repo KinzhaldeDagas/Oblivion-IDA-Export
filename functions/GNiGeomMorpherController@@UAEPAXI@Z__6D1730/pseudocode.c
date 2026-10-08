@@ -2,8 +2,8 @@ NiGeomMorpherController *__thiscall NiGeomMorpherController::`scalar deleting de
         NiGeomMorpherController *this,
         char a2)
 {
-  NiGeomMorpherController::~NiGeomMorpherController(this);
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  NiGeomMorpherController::~NiGeomMorpherController(this); /*0x6d1733*/
+  if ( (a2 & 1) != 0 ) /*0x6d173d*/
+    FormHeapFree((unsigned int)this); /*0x6d1740*/
+  return this; /*0x6d174a*/
 }

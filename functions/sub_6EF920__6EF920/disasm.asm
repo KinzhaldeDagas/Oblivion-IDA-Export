@@ -75,7 +75,7 @@
 0x6EF9DD: push    ecx
 0x6EF9DE: mov     ecx, esi
 0x6EF9E0: call    sub_5592A0
-0x6EF9E5: push    offset sub_794EB0; void (__thiscall *)(void *)
+0x6EF9E5: push    offset OB_stVector4_DestroyThiscall_010201A0; void (__thiscall *)(void *)
 0x6EF9EA: push    3; int
 0x6EF9EC: push    10h; unsigned int
 0x6EF9EE: lea     edx, [esp+34h+arg_14]
@@ -91,3 +91,19 @@
 0x6EFA0F: pop     ebx
 0x6EFA10: add     esp, 14h
 0x6EFA13: retn    44h ; 'D'
+0x556E10: push    offset OB_stVector4_DestroyThiscall_010201A0; void (__thiscall *)(void *)
+0x556E15: push    3; int
+0x556E17: push    10h; unsigned int
+0x556E19: add     ecx, 10h
+0x556E1C: push    ecx; void *
+0x556E1D: call    $LN21
+0x556E22: retn
+0x9C85F0: lea     ecx, [ebp+8]
+0x9C85F3: jmp     loc_556E10
+0x9C85F8: mov     edx, [esp+arg_4]
+0x9C85FC: lea     eax, [edx-18h]
+0x9C85FF: mov     ecx, [edx-1Ch]
+0x9C8602: xor     ecx, eax
+0x9C8604: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C8609: mov     eax, offset stru_AF09E4
+0x9C860E: jmp     ___CxxFrameHandler3

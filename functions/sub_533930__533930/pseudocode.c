@@ -5,15 +5,15 @@ NiAVObject *__thiscall sub_533930(_DWORD *this, int a2)
   Atmosphere *v4; // ecx
   int v6; // [esp+4h] [ebp-8h] BYREF
 
-  v2 = *(_DWORD *)(*(this + 4) + 0x30 * a2 + 0x28);
-  if ( v2
+  v2 = *(_DWORD *)(*(this + 4) + 0x30 * a2 + 0x28); /*0x533940*/
+  if ( v2 /*0x533964*/
     && (v3 = (int *)(v2 + *(_DWORD *)(v2 + 0x10))) != 0
-    && (v4 = (Atmosphere *)*sub_47F990(v3, &v6, (int)dword_BA7B80)) != 0 )
+    && (v4 = (Atmosphere *)*sub_47F990(v3, &v6, (int)&stru_BA7B80)) != 0 )
   {
-    return sub_452A60(v4);
+    return Shared_GetPointerAtOffset08(v4); /*0x533966*/
   }
   else
   {
-    return 0;
+    return 0; /*0x533972*/
   }
 }

@@ -99,7 +99,7 @@
 0x8B1DBA: addps   xmm0, xmm3
 0x8B1DBD: mov     ecx, esi
 0x8B1DBF: movaps  xmmword ptr [esi], xmm0
-0x8B1DC2: call    sub_4D6830
+0x8B1DC2: call    hkQuaternion_Normalize; Normalizes a quaternion/vector with reciprocal sqrt refinement. Used before converting movement input orientation to basis vectors.
 0x8B1DC7: pop     edi
 0x8B1DC8: pop     esi
 0x8B1DC9: mov     esp, ebp

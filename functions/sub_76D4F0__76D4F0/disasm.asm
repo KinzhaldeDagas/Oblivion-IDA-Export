@@ -1,4 +1,4 @@
-0x76D4F0: mov     eax, ecx
+0x76D4F0: mov     eax, ecx; Return whether this depth/stencil buffer's surface format advertises a depth component; used to gate D3DCLEAR_ZBUFFER.
 0x76D4F2: mov     ecx, [eax+10h]
 0x76D4F5: test    ecx, ecx
 0x76D4F7: jz      short loc_76D50C

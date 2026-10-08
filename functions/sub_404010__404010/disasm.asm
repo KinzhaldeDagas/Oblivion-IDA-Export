@@ -1,4 +1,4 @@
-0x404010: cmp     [esp+arg_0], 0
+0x404010: cmp     [esp+arg_0], 0; [Controller decode 2026-07-09] Enable/disable joystick support. Enable reruns enumeration; disable unacquires/releases joystick interfaces, clears bit0, sets numJoysticks=0, and clears 0x500 bytes of joystick state.
 0x404015: push    esi
 0x404016: mov     esi, ecx
 0x404018: jz      short loc_404042

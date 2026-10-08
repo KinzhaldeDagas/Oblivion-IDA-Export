@@ -20,7 +20,6 @@
 0x5B1E99: push    ebp
 0x5B1E9A: push    edi
 0x5B1E9B: jmp     short loc_5B1EA4
-0x5B1E9D: align 10h
 0x5B1EA0: mov     al, [esp+18h+var_5]
 0x5B1EA4: test    al, al
 0x5B1EA6: jz      short loc_5B1EE7

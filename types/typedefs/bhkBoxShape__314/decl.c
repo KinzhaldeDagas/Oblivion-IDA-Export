@@ -1,1 +1,1 @@
-bhkBoxShape
+struct bhkBoxShape;

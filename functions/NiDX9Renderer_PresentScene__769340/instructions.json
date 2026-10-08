@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x769340",
-    "line": "push    ecx",
+    "line": "push    ecx; Process the renderer pending-surface list at the scene presentation boundary by invoking each queued buffer's vtable+0x28 update/resolve operation. The shadow texture buffer is never queued because its predicate is false.",
     "mnemonic": "push",
     "size": 1
   },
@@ -82,12 +82,6 @@
     "line": "jmp     short loc_769372",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x76936D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x769370",
@@ -235,7 +229,7 @@
   },
   {
     "ea": "0x7693AD",
-    "line": "call    eax",
+    "line": "call    eax; Deferred surface update/resolve dispatch for an item queued by EndUsingRenderTargetGroup.",
     "mnemonic": "call",
     "size": 2
   },

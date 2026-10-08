@@ -1,4 +1,4 @@
-0x62FBD0: sub     esp, 20h
+0x62FBD0: sub     esp, 20h; RadiantAI: action code 8 used by Cast Magic row, not Alarm.
 0x62FBD3: push    ebx
 0x62FBD4: push    ebp
 0x62FBD5: mov     ebp, ecx
@@ -75,9 +75,9 @@
 0x62FC99: add     esp, 20h
 0x62FC9C: retn    4
 0x62FC9F: mov     ecx, esi
-0x62FCA1: call    Actor_GetBaseClass
+0x62FCA1: call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.
 0x62FCA6: mov     ecx, eax
-0x62FCA8: call    TESClass__IsGuardClass
+0x62FCA8: call    TESClass__IsGuardClass; TESClass::IsGuardClass reads classFlags at +0x60 bit 1.
 0x62FCAD: test    al, al
 0x62FCAF: jnz     loc_63006D
 0x62FCB5: mov     edi, [edi+3Ch]
@@ -224,7 +224,7 @@
 0x62FE51: cmp     byte ptr [esp+30h+arg_0], 0
 0x62FE56: jz      short loc_62FE88
 0x62FE58: mov     ecx, esi; int
-0x62FE5A: call    sub_5EAE70
+0x62FE5A: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x62FE5F: mov     edx, [ebp+0]
 0x62FE62: mov     eax, [edx+228h]
 0x62FE68: push    1
@@ -280,7 +280,7 @@
 0x62FEED: jnz     loc_62FFBC
 0x62FEF3: push    ebx
 0x62FEF4: push    0Ch
-0x62FEF6: mov     ecx, offset dword_B3BDB0
+0x62FEF6: mov     ecx, (offset qword_B3BB2C+284h)
 0x62FEFB: call    sub_67CF50
 0x62FF00: mov     edi, eax
 0x62FF02: test    edi, edi
@@ -305,10 +305,10 @@
 0x62FF34: jnz     short loc_62FF10
 0x62FF36: mov     ebp, [esp+30h+var_1C]
 0x62FF3A: mov     ecx, [esp+30h+arg_0]
-0x62FF3E: call    BSSimpleList_Clear
+0x62FF3E: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x62FF43: mov     ecx, [esp+30h+arg_0]
 0x62FF47: push    ecx
-0x62FF48: call    FormHeapFree
+0x62FF48: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x62FF4D: add     esp, 4
 0x62FF50: lea     ecx, [esi+44h]
 0x62FF53: call    ExtraDataList__GetExtraPackage
@@ -336,9 +336,9 @@
 0x62FF9C: call    eax
 0x62FF9E: mov     esi, [esp+30h+arg_0]
 0x62FFA2: mov     ecx, esi
-0x62FFA4: call    BSSimpleList_Clear
+0x62FFA4: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x62FFA9: push    esi
-0x62FFAA: call    FormHeapFree
+0x62FFAA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x62FFAF: add     esp, 4
 0x62FFB2: pop     edi
 0x62FFB3: pop     esi
@@ -359,9 +359,9 @@
 0x62FFDD: test    al, al
 0x62FFDF: jz      short loc_630022
 0x62FFE1: mov     ecx, esi; int
-0x62FFE3: call    sub_5EAE70
+0x62FFE3: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x62FFE8: lea     ecx, [ebx+44h]
-0x62FFEB: call    sub_41FC70
+0x62FFEB: call    ExtraDataList_GetTrespassPackage; Returns the TrespassPackage stored in ExtraTresPassPackage, or null.
 0x62FFF0: mov     edi, eax
 0x62FFF2: test    edi, edi
 0x62FFF4: jz      short loc_63000B

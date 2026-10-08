@@ -1,4 +1,4 @@
-0x7780A0: mov     eax, [esp+arg_0]
+0x7780A0: mov     eax, [esp+arg_0]; MoonSugarEffect decode: NiGeometryBufferData SetFVF-style input ownership. Stores FVF and releases any cached IDirect3DVertexDeclaration9, so callers switch the buffer to fixed-function input mode.
 0x7780A4: push    esi
 0x7780A5: mov     esi, ecx
 0x7780A7: mov     [esi+8], eax

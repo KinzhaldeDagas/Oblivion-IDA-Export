@@ -1,4 +1,4 @@
-0x761AC0: mov     eax, [esp+arg_0]
+0x761AC0: mov     eax, [esp+arg_0]; MoonSugarEffect decode: NiGeometryBufferData VBChip getter. Returns VBChip[stream] only when stream < StreamCount; no allocation or refresh. This is the safe read-side primitive for already-packed mask submission.
 0x761AC4: cmp     eax, [ecx+1Ch]
 0x761AC7: jnb     short loc_761AD2
 0x761AC9: mov     ecx, [ecx+24h]

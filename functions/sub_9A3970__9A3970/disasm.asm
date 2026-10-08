@@ -1,5 +1,5 @@
 0x9A3970: sub     esp, 8
-0x9A3973: cmp     byte_B4295C, 0
+0x9A3973: cmp     byte ptr unk_B4295C, 0
 0x9A397A: push    ebx
 0x9A397B: push    ebp
 0x9A397C: push    esi

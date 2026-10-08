@@ -103,25 +103,25 @@
   },
   {
     "ea": "0x4F8E97",
-    "line": "mov     edi, [esp+0Ch+arg_4]",
+    "line": "mov     edi, [esp+0Ch+actor]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4F8E9B",
-    "line": "push    edi",
+    "line": "push    edi; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F8E9C",
-    "line": "lea     ecx, [esi+44h]",
+    "line": "lea     ecx, [esi+44h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x4F8E9F",
-    "line": "call    sub_420ED0",
+    "line": "call    ExtraDataList_GetFriendHitCount; Returns the per-actor uint16 friend-hit count, or zero. Confirmed by the Oblivion console path '%s has hit %s ... times'.",
     "mnemonic": "call",
     "size": 5
   },

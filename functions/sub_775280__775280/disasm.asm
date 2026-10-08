@@ -1,4 +1,4 @@
-0x775280: mov     eax, [ecx+138h]
+0x775280: mov     eax, [ecx+138h]; Select a compatible depth/stencil format from cached DX9 device capabilities. For a surface request above 16 depth bits, normalize the selection target to 24 depth bits and 8 stencil bits.
 0x775286: test    eax, eax
 0x775288: jz      short loc_7752A3
 0x77528A: mov     edx, [esp+arg_0]
@@ -27,8 +27,8 @@
 0x7752C7: mov     eax, [esp+4+arg_4]
 0x7752CB: push    edx
 0x7752CC: push    eax
-0x7752CD: call    sub_7750F0
-0x7752D2: retn    10h
+0x7752CD: call    NiDX9FormatCaps_SelectClosestDepthStencilFormat; Choose the supported depth/stencil candidate nearest the requested depth-bit and stencil-bit counts for the render-target format.
+0x7752D2: retn    10h; For the DX9 surface case, rank supported formats against 24 depth bits and 8 stencil bits.
 0x7752D5: cmp     eax, 1
 0x7752D8: jz      short loc_7752F3
 0x7752DA: mov     eax, 8
@@ -37,7 +37,7 @@
 0x7752E4: mov     edx, 18h
 0x7752E9: push    edx
 0x7752EA: push    eax
-0x7752EB: call    sub_7750F0
+0x7752EB: call    NiDX9FormatCaps_SelectClosestDepthStencilFormat; Choose the supported depth/stencil candidate nearest the requested depth-bit and stencil-bit counts for the render-target format.
 0x7752F0: retn    10h
 0x7752F3: mov     eax, 1
 0x7752F8: push    eax
@@ -45,12 +45,12 @@
 0x7752FD: mov     edx, 0Fh
 0x775302: push    edx
 0x775303: push    eax
-0x775304: call    sub_7750F0
+0x775304: call    NiDX9FormatCaps_SelectClosestDepthStencilFormat; Choose the supported depth/stencil candidate nearest the requested depth-bit and stencil-bit counts for the render-target format.
 0x775309: retn    10h
 0x77530C: mov     edx, [esp+arg_8]
 0x775310: push    eax
 0x775311: mov     eax, [esp+4+arg_4]
 0x775315: push    edx
 0x775316: push    eax
-0x775317: call    sub_7750F0
+0x775317: call    NiDX9FormatCaps_SelectClosestDepthStencilFormat; Choose the supported depth/stencil candidate nearest the requested depth-bit and stencil-bit counts for the render-target format.
 0x77531C: retn    10h

@@ -1,1 +1,1 @@
-PMIB_IFROW
+typedef _MIB_IFROW *PMIB_IFROW;

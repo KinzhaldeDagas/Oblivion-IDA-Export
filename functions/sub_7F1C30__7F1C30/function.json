@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7F1C30",
+      "0x7F1CD8"
+    ]
+  ],
+  "chunks_sha256": "84cc8afb6d31dbf390ce18b3f67b4514613774273f0f3481a97fda76267d1067",
+  "comment_regular": "\n\n[2026-10-03 CopyMembers chain] Verified cloningProcess pointer (not flags). Calls7ECB10 ->7E2490 ->73DA70 ->700A60 ->700300 ->700770. The final base copy maps original this to destination in *cloningProcess via NiTMap_SetAt; NiObjectNET layer copies names/extra data/controller. BSShaderProperty copies flags/scalar and clears state+24. This leaf method retains texture+9C and STLSP+A8 and copies Level+AC. None of this chain rewrites destination vptr, so installing the type8 adapter before native CopyMembers is preserved. Fresh constructor pass lists remain fresh.\n\nSpeedTreeLeafShaderProperty copy/apply helper: copies shared STLSPData + leaf LOD index into destination property and calls base property copy.\n\n[2026-10-03 property rollback] Plugin custom property factory checkpoints native copy/processed maps before allocation, guards this copy, verifies registration, then commits. Failure restores maps before releasing copied property and retained STSP/STLSP; properties are never treated as NiAVObjects for hidden-bit writes. Unknown map changes retain unpublished property to avoid dangling native map pointers.",
+  "comment_repeatable": "SpeedTreeLeafShaderProperty copy/apply helper: copies shared STLSPData + leaf LOD index into destination property and calls base property copy.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7F1C30",
+  "display_name": "OB_SpeedTreeLeafShaderProperty_CopyMembers_010201A0",
   "end_ea": "0x7F1CD8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7F1C30",
+  "name": "OB_SpeedTreeLeafShaderProperty_CopyMembers_010201A0",
   "segment": ".text",
   "sha256": "84cc8afb6d31dbf390ce18b3f67b4514613774273f0f3481a97fda76267d1067",
   "size": 168,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7F1C30",
-  "type": "__int16 __thiscall(char **this, int, int)",
+  "total_chunk_size": 168,
+  "type": "void __thiscall(OB_SpeedTreeLeafShaderProperty_010201A0 *this, OB_SpeedTreeLeafShaderProperty_010201A0 *destination, void *cloningProcess)",
   "xrefs_from_count": 60,
   "xrefs_to_count": 1
 }

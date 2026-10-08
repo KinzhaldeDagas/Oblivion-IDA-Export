@@ -1,19 +1,36 @@
 {
-  "callees_count": 40,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 19,
   "callers_count": 0,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x811ED0",
+      "0x8122A0"
+    ],
+    [
+      "0x9D1100",
+      "0x9D1123"
+    ]
+  ],
+  "chunks_sha256": "98fa238ed5a61e0ae8e46547e8df8b21ed4a34853980a458c348abf6015a1f9e",
+  "comment_regular": "\n[2026-10-06 directional distant pass] Texture is property+A0; BILLBOARD vertex variant selected by property flags+1C bit2000. With alpha property, sets shader+E0 to fixed B2E148, ignoring that property threshold for sampled-alpha comparison. Pixel constant c3 points at shader+E0 via810F90. Directional fading needs a scoped per-draw sampled-alpha threshold; changing NiAlphaProperty alone does not supply it. Native fog/distance/packed lighting remain independent.\n[v142 runtime corroboration 2026-10-07] Same archived log, lines3195..3226: 32 capped companion Render samples report shader+E0 sampleAlphaRef equal to the requested threshold to four decimals (0.3294 or0.6953), confirming the scoped Setup override reaches live shader state. Samples cover early frames0/1, not horizontal frame8 or every subsequent draw. Later horizontal submissions at pitch37.572..64.730 are logged, but submitted geometry alone does not prove visible pixels.\n[v142 visual acceptance update 2026-10-07] Supersedes only the earlier pending visual acceptance statements: the human tester now confirms overhead canopy appearance, near/far transitions with fading, and smooth blending between adjacent directional views during a slow orbit. Combined with archived v142 runtime evidence, the required directional plus horizontal billboard goal is accepted. This is human visual evidence, not an automated pixel test. New adapter scene unload/reload and queued-face destruction remain UNVERIFIED; no new runtime session or destruction coverage is claimed. Audit: SpeedTreeOBSE/out/billboard360_distant_v142/runtime_rotation_analysis.json.\n\n\nV259 upstream diagnostic audit (2026-10-07): SetupPass reads property state a5[6], requires virtual+54 ==2 (DistantLODShaderProperty), reads NiTexture pointer property+A0 at812117, and places it into shared pass first texture stage at812164. This is separate from TESObjectTREE/STBB source texture creation and from final D3D9-facing owned slot0. V258 null slot0 does not prove property+A0 was null.\nV261 PID14512 samples554/614/674/734/794: native shared shader188E2DA0, source renderer-data A883C4, backing handles5434C360/5434D818 equal engine cached0 and owned native0. Actual DX11 SRVs are1024x1024 BC2_UNORM with11mips, no null fallback. This supersedes the V258 null-input symptom for THESE draws. SpeedTree same-run distant-render logs report c3 thresholds .9207/.3294 matching DX11 values. Read-only source SetupDistantBillboardPass adjusts shader+E0 after original811ED0; no stale-threshold cause established by sampled data. White nearby/distant tree interaction remains unresolved; do not infer all tree draws a",
   "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_811ED0",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_DistantLOD_SetupPass_010201A0",
   "end_ea": "0x8122A0",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
-  "name": "sub_811ED0",
+  "name": "OB_DistantLOD_SetupPass_010201A0",
   "segment": ".text",
   "sha256": "2764549db9530060a7d1b5ed6762ceb02bb4cb7a08cb5dbe1aa557eb55efaa7b",
   "size": 976,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x811ED0",
+  "total_chunk_size": 1011,
   "type": "int __thiscall(char *this, int, int, int, _DWORD *, int, int, int)",
-  "xrefs_from_count": 304,
+  "xrefs_from_count": 315,
   "xrefs_to_count": 1
 }

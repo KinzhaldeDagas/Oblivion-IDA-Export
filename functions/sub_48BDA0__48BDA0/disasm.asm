@@ -1,11 +1,11 @@
-0x48BDA0: push    ebp
+0x48BDA0: push    ebp; Sidecar NPC decode: deeper equippable-item selector carries actor/base interface context used by weapon rating paths. Wrapper must forward four stack args unchanged while pushing/popping owner context.
 0x48BDA1: mov     ebp, esp
 0x48BDA3: and     esp, 0FFFFFFF8h
 0x48BDA6: sub     esp, 54h
 0x48BDA9: fld     dword ptr ds:0A3B888h
 0x48BDAF: push    ebx
 0x48BDB0: push    esi
-0x48BDB1: fstp    dword ptr [esp+5Ch+var_4C+4]
+0x48BDB1: fstp    [esp+5Ch+var_4C+4]
 0x48BDB5: mov     esi, ecx
 0x48BDB7: mov     ecx, [esi+4]; this
 0x48BDBA: test    ecx, ecx
@@ -48,13 +48,13 @@
 0x48BE1C: mov     ecx, [esi]
 0x48BE1E: test    ecx, ecx
 0x48BE20: jz      short loc_48BE27
-0x48BE22: call    BSSimpleList_Clear
+0x48BE22: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x48BE27: mov     ecx, [esi]
 0x48BE29: push    ecx
-0x48BE2A: call    FormHeapFree
+0x48BE2A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48BE2F: push    esi
 0x48BE30: mov     dword ptr [esi], 0
-0x48BE36: call    FormHeapFree
+0x48BE36: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48BE3B: add     esp, 8
 0x48BE3E: mov     ebx, [ebp+arg_0]
 0x48BE41: mov     edx, [ebx]
@@ -73,7 +73,7 @@
 0x48BE69: push    40h ; '@'
 0x48BE6B: call    eax
 0x48BE6D: mov     byte ptr [esp+5Ch+var_4C+3], al
-0x48BE71: mov     ecx, [esp+5Ch+var_38]
+0x48BE71: mov     ecx, dword ptr [esp+5Ch+var_38]
 0x48BE75: mov     ecx, [ecx+4]; this
 0x48BE78: test    ecx, ecx
 0x48BE7A: jz      short loc_48BE83
@@ -99,13 +99,13 @@
 0x48BEB6: fstp    [esp+60h+var_1C]
 0x48BEBA: jz      short loc_48BEC5
 0x48BEBC: mov     ecx, edi; this
-0x48BEBE: call    Actor_GetFatigueFraction
+0x48BEBE: call    Actor_GetFatigueFraction; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.
 0x48BEC3: jmp     short loc_48BEC7
 0x48BEC5: fld1
 0x48BEC7: test    esi, esi
 0x48BEC9: fstp    [esp+60h+var_28]
 0x48BECD: fld1
-0x48BECF: fstp    [esp+60h+var_38]
+0x48BECF: fstp    dword ptr [esp+60h+var_38]
 0x48BED3: jz      loc_48C41E
 0x48BED9: lea     esp, [esp+0]
 0x48BEE0: mov     eax, [esi]
@@ -122,7 +122,7 @@
 0x48BF05: mov     esi, eax
 0x48BF07: add     esp, 14h
 0x48BF0A: test    esi, esi
-0x48BF0C: mov     dword ptr [esp+60h+var_4C], esi
+0x48BF0C: mov     [esp+60h+var_4C], esi
 0x48BF10: jz      loc_48C40B
 0x48BF16: cmp     byte ptr [esi+90h], 4
 0x48BF1D: jnz     short loc_48BF41
@@ -184,12 +184,12 @@
 0x48BFB9: mov     esi, [eax]
 0x48BFBB: test    esi, esi
 0x48BFBD: jz      short loc_48BFDB
-0x48BFBF: mov     ecx, esi
-0x48BFC1: call    ExtraDataList_GetOwner
+0x48BFBF: mov     ecx, esi; this
+0x48BFC1: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48BFC6: test    eax, eax
 0x48BFC8: jz      short loc_48BFDB
-0x48BFCA: mov     ecx, esi
-0x48BFCC: call    ExtraDataList_GetOwner
+0x48BFCA: mov     ecx, esi; this
+0x48BFCC: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48BFD1: jmp     short loc_48BFDD
 0x48BFD3: test    eax, eax
 0x48BFD5: jz      short loc_48BF6A
@@ -203,10 +203,10 @@
 0x48BFE8: mov     esi, [edi]
 0x48BFEA: test    esi, esi
 0x48BFEC: jz      short loc_48C007
-0x48BFEE: mov     ecx, [esi]
+0x48BFEE: mov     ecx, [esi]; this
 0x48BFF0: test    ecx, ecx
 0x48BFF2: jz      short loc_48C007
-0x48BFF4: call    ExtraDataList_GetOwner
+0x48BFF4: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48BFF9: test    eax, eax
 0x48BFFB: jz      short loc_48C000
 0x48BFFD: add     ebx, 1
@@ -219,12 +219,12 @@
 0x48C00D: mov     esi, [eax]
 0x48C00F: test    esi, esi
 0x48C011: jz      short loc_48C03C
-0x48C013: mov     ecx, esi
-0x48C015: call    ExtraDataList_GetOwner
+0x48C013: mov     ecx, esi; this
+0x48C015: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48C01A: test    eax, eax
 0x48C01C: jz      short loc_48C03C
-0x48C01E: mov     ecx, esi
-0x48C020: call    ExtraDataList_GetOwner
+0x48C01E: mov     ecx, esi; this
+0x48C020: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48C025: test    eax, eax
 0x48C027: jz      short loc_48C03C
 0x48C029: mov     ecx, dword ptr [esp+60h+var_24+4]
@@ -245,16 +245,16 @@
 0x48C055: mov     eax, [ebp+arg_8]
 0x48C058: cmp     eax, 0FFFFFFFFh
 0x48C05B: jz      short loc_48C070
-0x48C05D: mov     edx, dword ptr [esp+60h+var_4C]
+0x48C05D: mov     edx, [esp+60h+var_4C]
 0x48C061: movsx   ecx, byte ptr [edx+90h]
 0x48C068: cmp     eax, ecx
 0x48C06A: jnz     loc_48C3D9
-0x48C070: mov     edx, dword ptr [esp+60h+var_4C]
+0x48C070: mov     edx, [esp+60h+var_4C]
 0x48C074: cmp     byte ptr [edx+90h], 5
 0x48C07B: jnz     short loc_48C088
 0x48C07D: cmp     [esp+60h+var_4], 0
 0x48C082: jz      loc_48C40B
-0x48C088: mov     esi, dword ptr [esp+60h+var_4C]
+0x48C088: mov     esi, [esp+60h+var_4C]
 0x48C08C: mov     eax, [esi+88h]
 0x48C092: mov     edx, [eax+10h]
 0x48C095: lea     ecx, [esi+88h]
@@ -281,7 +281,7 @@
 0x48C0DA: jnz     short loc_48C0EF
 0x48C0DC: fild    [esp+5Ch+var_3C]
 0x48C0E0: fadd    dword ptr ds:0A3D8F4h
-0x48C0E6: call    Double_To_SInt32
+0x48C0E6: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x48C0EB: mov     [esp+5Ch+var_3C], eax
 0x48C0EF: lea     eax, [esi+60h]
 0x48C0F2: test    eax, eax
@@ -291,10 +291,10 @@
 0x48C0FB: xor     eax, eax
 0x48C0FD: mov     ebx, [ebp+arg_0]
 0x48C100: mov     esi, [ebx]
-0x48C102: mov     ecx, dword ptr [esp+5Ch+var_4C+4]
+0x48C102: mov     ecx, [esp+5Ch+var_4C+4]; this
 0x48C106: mov     [esp+5Ch+var_2C], eax
 0x48C10A: add     esi, 12Ch
-0x48C110: call    TESObjectWEAP_GetWeaponSkillAV
+0x48C110: call    TESObjectWEAP_GetWeaponSkillAV; Equippable weapon-rating branch A: TESObjectWEAP_GetWeaponSkillAV returns at 0x48C115 and the joined Calc_WeaponDamage call returns at 0x48C7C0.
 0x48C115: mov     edx, [esi]
 0x48C117: push    eax
 0x48C118: mov     ecx, ebx
@@ -311,8 +311,8 @@
 0x48C13C: mov     esi, [esp+60h+var_30]
 0x48C140: cmp     esi, ebx
 0x48C142: jz      short loc_48C169
-0x48C144: mov     ecx, edi
-0x48C146: call    sub_4849C0
+0x48C144: mov     ecx, edi; this
+0x48C146: call    EquippedEntryData_GetCharge; Return per-instance ExtraCharge when present; otherwise return the TESEnchantableForm base charge. Returns the sentinel/default when the EntryData form is not enchantable.
 0x48C14B: fstp    qword ptr [esp+60h+var_10]
 0x48C14F: mov     eax, [esi+24h]
 0x48C152: mov     edx, [eax]
@@ -330,7 +330,6 @@
 0x48C171: jz      loc_48C3D9
 0x48C177: mov     edi, dword ptr [esp+60h+var_44]
 0x48C17B: jmp     short loc_48C180
-0x48C17D: align 10h
 0x48C180: mov     eax, [esi]
 0x48C182: cmp     eax, ebx
 0x48C184: mov     dword ptr [esp+60h+var_44], eax
@@ -343,7 +342,7 @@
 0x48C19B: mov     ecx, dword ptr [esp+60h+var_44]
 0x48C19F: call    ExtraDataList_GetHealthData
 0x48C1A4: jmp     short loc_48C1C5
-0x48C1A6: mov     eax, dword ptr [esp+60h+var_4C]
+0x48C1A6: mov     eax, [esp+60h+var_4C]
 0x48C1AA: push    eax
 0x48C1AB: call    TESHealthForm_GetHealthForForm
 0x48C1B0: add     esp, 4
@@ -360,8 +359,8 @@
 0x48C1D3: fstp    st(1)
 0x48C1D5: test    ah, 41h
 0x48C1D8: jnz     loc_48C2F9
-0x48C1DE: mov     ecx, dword ptr [esp+60h+var_4C]
-0x48C1E2: fstp    qword ptr [esp+60h+var_38]
+0x48C1DE: mov     ecx, [esp+60h+var_4C]
+0x48C1E2: fstp    [esp+60h+var_38]
 0x48C1E6: push    ecx
 0x48C1E7: call    TESHealthForm_GetHealthForForm
 0x48C1EC: add     esp, 4
@@ -371,8 +370,8 @@
 0x48C1F9: jge     short loc_48C201
 0x48C1FB: fadd    dword ptr ds:0A2FC78h
 0x48C201: cmp     [esp+60h+var_30], ebx
-0x48C205: fdivr   qword ptr [esp+60h+var_38]
-0x48C209: fstp    [esp+60h+var_38]
+0x48C205: fdivr   [esp+60h+var_38]
+0x48C209: fstp    dword ptr [esp+60h+var_38]
 0x48C20D: jz      short loc_48C218
 0x48C20F: mov     esi, [esp+60h+var_30]
 0x48C213: add     esi, 18h
@@ -384,42 +383,42 @@
 0x48C225: fld     [esp+68h+var_28]
 0x48C229: fstp    [esp+68h+var_68]; float
 0x48C22C: fld     [esp+68h+var_1C]
-0x48C230: call    Double_To_SInt32
+0x48C230: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x48C235: fld     [esp+68h+var_18]
 0x48C239: push    eax; int
-0x48C23A: call    Double_To_SInt32
+0x48C23A: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x48C23F: fld     dword ptr [esp+6Ch+var_24]
 0x48C243: push    eax; int
-0x48C244: call    Double_To_SInt32
-0x48C249: fld     [esp+70h+var_38]
-0x48C24D: mov     edx, dword ptr [esp+70h+var_4C]
+0x48C244: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
+0x48C249: fld     dword ptr [esp+70h+var_38]
+0x48C24D: mov     edx, [esp+70h+var_4C]
 0x48C251: push    eax; int
 0x48C252: push    ecx
 0x48C253: fstp    [esp+78h+var_78]; float
 0x48C256: push    esi; int
 0x48C257: push    edx; int
-0x48C258: call    sub_547140
+0x48C258: call    AI_CalculateWeaponAndEnchantmentThreat
 0x48C25D: fstp    [esp+80h+var_10]
 0x48C261: fld     [esp+80h+var_10]
 0x48C265: add     esp, 20h
-0x48C268: fld     dword ptr [esp+60h+var_4C+4]
+0x48C268: fld     [esp+60h+var_4C+4]
 0x48C26C: fcomp   st(1)
 0x48C26E: fnstsw  ax
 0x48C270: test    ah, 5
 0x48C273: jp      loc_48C2FD
 0x48C279: cmp     edi, ebx
-0x48C27B: fstp    dword ptr [esp+60h+var_4C+4]
+0x48C27B: fstp    [esp+60h+var_4C+4]
 0x48C27F: jz      short loc_48C29F
 0x48C281: mov     ecx, [edi]
 0x48C283: cmp     ecx, ebx
 0x48C285: jz      short loc_48C28C
-0x48C287: call    BSSimpleList_Clear
+0x48C287: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x48C28C: mov     eax, [edi]
 0x48C28E: push    eax
-0x48C28F: call    FormHeapFree
+0x48C28F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48C294: push    edi
 0x48C295: mov     [edi], ebx
-0x48C297: call    FormHeapFree
+0x48C297: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48C29C: add     esp, 8
 0x48C29F: push    0Ch; Size
 0x48C2A1: call    FormHeapAlloc
@@ -432,7 +431,7 @@
 0x48C2B5: mov     esi, eax
 0x48C2B7: jmp     short loc_48C2BB
 0x48C2B9: xor     esi, esi
-0x48C2BB: mov     ecx, dword ptr [esp+60h+var_4C]
+0x48C2BB: mov     ecx, [esp+60h+var_4C]
 0x48C2BF: push    8; Size
 0x48C2C1: mov     edi, esi
 0x48C2C3: mov     [esi+8], ecx
@@ -477,43 +476,43 @@
 0x48C335: fld     [esp+68h+var_28]
 0x48C339: fstp    [esp+68h+var_68]; float
 0x48C33C: fld     [esp+68h+var_1C]
-0x48C340: call    Double_To_SInt32
+0x48C340: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x48C345: fld     [esp+68h+var_18]
 0x48C349: push    eax; int
-0x48C34A: call    Double_To_SInt32
+0x48C34A: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x48C34F: fld     dword ptr [esp+6Ch+var_24]
 0x48C353: push    eax; int
-0x48C354: call    Double_To_SInt32
-0x48C359: fld     [esp+70h+var_38]
-0x48C35D: mov     edi, dword ptr [esp+70h+var_4C]
+0x48C354: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
+0x48C359: fld     dword ptr [esp+70h+var_38]
+0x48C35D: mov     edi, [esp+70h+var_4C]
 0x48C361: push    eax; int
 0x48C362: push    ecx
 0x48C363: fstp    [esp+78h+var_78]; float
 0x48C366: push    esi; int
 0x48C367: push    edi; int
-0x48C368: call    sub_547140
+0x48C368: call    AI_CalculateWeaponAndEnchantmentThreat
 0x48C36D: fstp    [esp+80h+var_10]
 0x48C371: fld     [esp+80h+var_10]
 0x48C375: add     esp, 20h
-0x48C378: fld     dword ptr [esp+60h+var_4C+4]
+0x48C378: fld     [esp+60h+var_4C+4]
 0x48C37C: fcomp   st(1)
 0x48C37E: fnstsw  ax
 0x48C380: test    ah, 5
 0x48C383: jp      short loc_48C3DD
 0x48C385: mov     esi, dword ptr [esp+60h+var_44]
-0x48C389: fstp    dword ptr [esp+60h+var_4C+4]
+0x48C389: fstp    [esp+60h+var_4C+4]
 0x48C38D: cmp     esi, ebx
 0x48C38F: jz      short loc_48C3AF
 0x48C391: mov     ecx, [esi]
 0x48C393: cmp     ecx, ebx
 0x48C395: jz      short loc_48C39C
-0x48C397: call    BSSimpleList_Clear
+0x48C397: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x48C39C: mov     eax, [esi]
 0x48C39E: push    eax
-0x48C39F: call    FormHeapFree
+0x48C39F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48C3A4: push    esi
 0x48C3A5: mov     [esi], ebx
-0x48C3A7: call    FormHeapFree
+0x48C3A7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48C3AC: add     esp, 8
 0x48C3AF: push    0Ch; Size
 0x48C3B1: call    FormHeapAlloc
@@ -539,13 +538,13 @@
 0x48C3E9: mov     ecx, [esi]
 0x48C3EB: test    ecx, ecx
 0x48C3ED: jz      short loc_48C3F4
-0x48C3EF: call    BSSimpleList_Clear
+0x48C3EF: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x48C3F4: mov     ecx, [esi]
 0x48C3F6: push    ecx
-0x48C3F7: call    FormHeapFree
+0x48C3F7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48C3FC: push    esi
 0x48C3FD: mov     dword ptr [esi], 0
-0x48C403: call    FormHeapFree
+0x48C403: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48C408: add     esp, 8
 0x48C40B: mov     edx, dword ptr [esp+60h+var_24+4]
 0x48C40F: mov     esi, [edx+4]
@@ -589,12 +588,12 @@
 0x48C48E: mov     esi, [eax]
 0x48C490: test    esi, esi
 0x48C492: jz      short loc_48C4D5
-0x48C494: mov     ecx, esi
-0x48C496: call    ExtraDataList_GetOwner
+0x48C494: mov     ecx, esi; this
+0x48C496: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48C49B: test    eax, eax
 0x48C49D: jz      short loc_48C4D5
-0x48C49F: mov     ecx, esi
-0x48C4A1: call    ExtraDataList_GetOwner
+0x48C49F: mov     ecx, esi; this
+0x48C4A1: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48C4A6: test    eax, eax
 0x48C4A8: jz      short loc_48C4D5
 0x48C4AA: mov     eax, [edi]
@@ -603,12 +602,12 @@
 0x48C4B0: mov     esi, [eax]
 0x48C4B2: test    esi, esi
 0x48C4B4: jz      short loc_48C4CA
-0x48C4B6: mov     ecx, esi
-0x48C4B8: call    ExtraDataList_GetOwner
+0x48C4B6: mov     ecx, esi; this
+0x48C4B8: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48C4BD: test    eax, eax
 0x48C4BF: jz      short loc_48C4CA
-0x48C4C1: mov     ecx, esi
-0x48C4C3: call    ExtraDataList_GetOwner
+0x48C4C1: mov     ecx, esi; this
+0x48C4C3: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48C4C8: jmp     short loc_48C4CC
 0x48C4CA: xor     eax, eax
 0x48C4CC: cmp     eax, [ebp+arg_0]
@@ -657,19 +656,19 @@
 0x48C556: mov     ecx, [esi]
 0x48C558: test    ecx, ecx
 0x48C55A: jz      short loc_48C561
-0x48C55C: call    BSSimpleList_Clear
+0x48C55C: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x48C561: mov     eax, [esi]
 0x48C563: push    eax
-0x48C564: call    FormHeapFree
+0x48C564: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48C569: push    esi
 0x48C56A: mov     dword ptr [esi], 0
-0x48C570: call    FormHeapFree
+0x48C570: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48C575: add     esp, 8
 0x48C578: mov     ecx, [ebp+arg_0]
 0x48C57B: mov     esi, [ecx]
-0x48C57D: mov     ecx, ebx
+0x48C57D: mov     ecx, ebx; this
 0x48C57F: add     esi, 12Ch
-0x48C585: call    TESObjectWEAP_GetWeaponSkillAV
+0x48C585: call    TESObjectWEAP_GetWeaponSkillAV; Equippable weapon-rating branch B: TESObjectWEAP_GetWeaponSkillAV returns at 0x48C58A and the joined Calc_WeaponDamage call returns at 0x48C7C0.
 0x48C58A: mov     ecx, [ebp+arg_0]
 0x48C58D: mov     edx, [esi]
 0x48C58F: push    eax
@@ -690,7 +689,7 @@
 0x48C5C3: jnz     short loc_48C5D4
 0x48C5C5: fild    dword ptr [esp+60h+var_44+4]
 0x48C5C9: fadd    dword ptr ds:0A3D8F4h
-0x48C5CF: call    Double_To_SInt32
+0x48C5CF: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x48C5D4: mov     ecx, [edi]
 0x48C5D6: test    ecx, ecx
 0x48C5D8: jz      loc_48C782
@@ -743,7 +742,7 @@
 0x48C66E: fadd    dword ptr ds:0A2FC78h
 0x48C674: test    esi, esi
 0x48C676: fdivr   qword ptr [esp+60h+var_30]
-0x48C67A: fstp    [esp+60h+var_38]
+0x48C67A: fstp    dword ptr [esp+60h+var_38]
 0x48C67E: jz      short loc_48C685
 0x48C680: add     esi, 18h
 0x48C683: jmp     short loc_48C687
@@ -754,43 +753,43 @@
 0x48C694: fld     [esp+68h+var_28]
 0x48C698: fstp    [esp+68h+var_68]; float
 0x48C69B: fld     [esp+68h+var_1C]
-0x48C69F: call    Double_To_SInt32
+0x48C69F: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x48C6A4: fld     [esp+68h+var_18]
 0x48C6A8: push    eax; int
-0x48C6A9: call    Double_To_SInt32
+0x48C6A9: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x48C6AE: fld     dword ptr [esp+6Ch+var_24]
 0x48C6B2: push    eax; int
-0x48C6B3: call    Double_To_SInt32
-0x48C6B8: fld     [esp+70h+var_38]
+0x48C6B3: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
+0x48C6B8: fld     dword ptr [esp+70h+var_38]
 0x48C6BC: push    eax; int
 0x48C6BD: push    ecx
 0x48C6BE: fstp    [esp+78h+var_78]; float
 0x48C6C1: push    esi; int
 0x48C6C2: push    ebx; int
-0x48C6C3: call    sub_547140
+0x48C6C3: call    AI_CalculateWeaponAndEnchantmentThreat
 0x48C6C8: fstp    [esp+80h+var_10]
 0x48C6CC: fld     [esp+80h+var_10]
 0x48C6D0: add     esp, 20h
-0x48C6D3: fld     dword ptr [esp+60h+var_4C+4]
+0x48C6D3: fld     [esp+60h+var_4C+4]
 0x48C6D7: fcomp   st(1)
 0x48C6D9: fnstsw  ax
 0x48C6DB: test    ah, 5
 0x48C6DE: jp      loc_48C768
 0x48C6E4: mov     esi, dword ptr [esp+60h+var_44]
-0x48C6E8: fstp    dword ptr [esp+60h+var_4C+4]
+0x48C6E8: fstp    [esp+60h+var_4C+4]
 0x48C6EC: xor     edi, edi
 0x48C6EE: cmp     esi, edi
 0x48C6F0: jz      short loc_48C710
 0x48C6F2: mov     ecx, [esi]
 0x48C6F4: cmp     ecx, edi
 0x48C6F6: jz      short loc_48C6FD
-0x48C6F8: call    BSSimpleList_Clear
+0x48C6F8: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x48C6FD: mov     ecx, [esi]
 0x48C6FF: push    ecx
-0x48C700: call    FormHeapFree
+0x48C700: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48C705: push    esi
 0x48C706: mov     [esi], edi
-0x48C708: call    FormHeapFree
+0x48C708: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48C70D: add     esp, 8
 0x48C710: push    0Ch; Size
 0x48C712: call    FormHeapAlloc
@@ -836,45 +835,45 @@
 0x48C784: push    0; float
 0x48C786: sub     esp, 8
 0x48C789: fstp    [esp+6Ch+var_68]; float
-0x48C78D: fld     [esp+6Ch+var_38]
+0x48C78D: fld     dword ptr [esp+6Ch+var_38]
 0x48C791: fstp    [esp+6Ch+var_6C]; float
 0x48C794: fld     [esp+6Ch+var_28]
 0x48C798: push    eax; int
 0x48C799: push    ecx
 0x48C79A: fstp    [esp+74h+var_74]; float
 0x48C79D: fld     [esp+74h+var_1C]
-0x48C7A1: call    Double_To_SInt32
+0x48C7A1: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x48C7A6: fld     [esp+74h+var_18]
 0x48C7AA: push    eax; int
-0x48C7AB: call    Double_To_SInt32
+0x48C7AB: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x48C7B0: fld     dword ptr [esp+78h+var_24]
 0x48C7B4: push    eax; int
-0x48C7B5: call    Double_To_SInt32
+0x48C7B5: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x48C7BA: push    eax; int
-0x48C7BB: call    Calc_WeaponDamage
+0x48C7BB: call    Calc_WeaponDamage; Sidecar decode: Calc_WeaponDamage is actor/weapon agnostic after entry; BladeSkillsRestored substitutes only the skill-level argument after consuming the most recent exact source-return/formula-return token from its bounded per-thread stack. Unmatched or overflowed contexts retain native formula inputs.
 0x48C7C0: fstp    [esp+80h+var_10]
 0x48C7C4: fld     [esp+80h+var_10]
 0x48C7C8: add     esp, 20h
-0x48C7CB: fld     dword ptr [esp+60h+var_4C+4]
+0x48C7CB: fld     [esp+60h+var_4C+4]
 0x48C7CF: fcomp   st(1)
 0x48C7D1: fnstsw  ax
 0x48C7D3: test    ah, 5
 0x48C7D6: jp      short loc_48C82E
 0x48C7D8: mov     esi, dword ptr [esp+60h+var_44]
-0x48C7DC: fstp    dword ptr [esp+60h+var_4C+4]
+0x48C7DC: fstp    [esp+60h+var_4C+4]
 0x48C7E0: xor     edi, edi
 0x48C7E2: cmp     esi, edi
 0x48C7E4: jz      short loc_48C804
 0x48C7E6: mov     ecx, [esi]
 0x48C7E8: cmp     ecx, edi
 0x48C7EA: jz      short loc_48C7F1
-0x48C7EC: call    BSSimpleList_Clear
+0x48C7EC: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x48C7F1: mov     ecx, [esi]
 0x48C7F3: push    ecx
-0x48C7F4: call    FormHeapFree
+0x48C7F4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48C7F9: push    esi
 0x48C7FA: mov     [esi], edi
-0x48C7FC: call    FormHeapFree
+0x48C7FC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48C801: add     esp, 8
 0x48C804: push    0Ch; Size
 0x48C806: call    FormHeapAlloc
@@ -897,7 +896,7 @@
 0x48C837: test    eax, eax
 0x48C839: mov     dword ptr [esp+60h+var_24+4], eax
 0x48C83D: jnz     loc_48C432
-0x48C843: fld     dword ptr [esp+60h+var_4C+4]
+0x48C843: fld     [esp+60h+var_4C+4]
 0x48C847: push    0; float
 0x48C849: push    0; int
 0x48C84B: push    ecx

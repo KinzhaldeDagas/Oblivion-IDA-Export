@@ -21,7 +21,7 @@
 0x43DDB0: call    __allshr
 0x43DDB5: movzx   ecx, al
 0x43DDB8: push    ecx
-0x43DDB9: mov     ecx, ModelLoaderPtr
+0x43DDB9: mov     ecx, ds:0B33A1Ch
 0x43DDBF: push    edi
 0x43DDC0: call    sub_43D000
 0x43DDC5: mov     edx, [esi+20h]
@@ -31,7 +31,7 @@
 0x43DDCF: push    esi
 0x43DDD0: mov     cl, 10h
 0x43DDD2: call    __allshr
-0x43DDD7: mov     ecx, ModelLoaderPtr
+0x43DDD7: mov     ecx, ds:0B33A1Ch
 0x43DDDD: movzx   eax, al
 0x43DDE0: push    eax
 0x43DDE1: push    edi

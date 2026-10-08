@@ -23,7 +23,7 @@
 0x715B75: test    eax, eax
 0x715B77: jz      short loc_715BBE
 0x715B79: lea     esp, [esp+0]
-0x715B80: cmp     eax, offset dword_B3FA80
+0x715B80: cmp     eax, offset stru_B3FA80
 0x715B85: jz      short loc_715B90
 0x715B87: mov     eax, [eax+4]
 0x715B8A: test    eax, eax
@@ -41,7 +41,7 @@
 0x715BAB: cmp     dword ptr [eax+0Ch], 0
 0x715BAF: jz      short loc_715BBA
 0x715BB1: push    eax
-0x715BB2: call    sub_715B40
+0x715BB2: call    NiObjectNET_StartControllersRecursive
 0x715BB7: add     esp, 4
 0x715BBA: test    esi, esi
 0x715BBC: jnz     short loc_715BA0
@@ -62,7 +62,7 @@
 0x715BE5: test    eax, eax
 0x715BE7: jz      short loc_715BF2
 0x715BE9: push    eax
-0x715BEA: call    sub_715B40
+0x715BEA: call    NiObjectNET_StartControllersRecursive
 0x715BEF: add     esp, 4
 0x715BF2: movzx   eax, word ptr [edi+0B6h]
 0x715BF9: add     esi, 1

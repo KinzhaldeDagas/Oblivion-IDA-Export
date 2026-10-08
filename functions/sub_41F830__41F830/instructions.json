@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x41F830",
-    "line": "push    13h; a2",
+    "line": "push    13h; Test ExtraAction flag mask. Missing ExtraAction behaves as default flags byte 1. REFR save calls with 0x08 to decide whether to emit ONAM.",
     "mnemonic": "push",
     "size": 2
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x41F83F",
-    "line": "test    [esp+arg_0], eax",
+    "line": "test    [esp+mask], eax",
     "mnemonic": "test",
     "size": 4
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x41F84E",
-    "line": "test    [esp+arg_0], eax",
+    "line": "test    [esp+mask], eax",
     "mnemonic": "test",
     "size": 4
   },

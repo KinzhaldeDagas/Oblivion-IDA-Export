@@ -1,4 +1,4 @@
-0x42B200: push    esi
+0x42B200: push    esi; XMRK companion loader owns cursor advancement. After XMRK it advances once, optionally consumes adjacent FNAM, requires/loads adjacent FULL, then advances and requires/loads adjacent TNAM. A nonmatching chunk at either required position is swallowed from outer dispatch. FNAM max1: empty retains, exact1 replaces, >1 forces 0. TNAM max2: empty retains, exact/short prefix-overlays existing u16, >2 keeps byte0 and forces byte1=0. FULL empty clears; nonempty replaces via unbounded read+strlen and is unsafe without terminal NUL. Existing marker state is reused across repeated/partial sequences.
 0x42B201: mov     esi, [esp+4+a1]
 0x42B205: test    esi, esi
 0x42B207: push    edi
@@ -20,7 +20,7 @@
 0x42B239: lea     eax, [edi+0Ch]
 0x42B23C: push    eax; Dst
 0x42B23D: mov     ecx, esi; a1
-0x42B23F: call    TESFile_GetChunkData
+0x42B23F: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x42B244: mov     ecx, esi
 0x42B246: call    TESFile_GetNextChunk
 0x42B24B: test    al, al
@@ -31,7 +31,7 @@
 0x42B25B: jnz     short loc_42B292
 0x42B25D: push    esi
 0x42B25E: push    edi
-0x42B25F: call    TESFullname_Load
+0x42B25F: call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.
 0x42B264: add     esp, 8
 0x42B267: mov     ecx, esi
 0x42B269: call    TESFile_GetNextChunk

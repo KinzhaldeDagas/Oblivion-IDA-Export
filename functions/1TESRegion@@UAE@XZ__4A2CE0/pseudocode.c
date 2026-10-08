@@ -1,41 +1,42 @@
-void __thiscall TESRegion::~TESRegion(TESRegion *this)
+// Verified: destroys the owned region-data list (which destroys each TESRegionData object) and each region-area payload/node before TESForm base destruction.
+void __thiscall TESRegion_dtor(TESRegion *this)
 {
-  unsigned int v2; // esi
-  int v3; // eax
-  _DWORD *i; // esi
-  _DWORD *v5; // ecx
+  TESRegionDataList *dataList; // esi
+  OblivionTESRegionAreaList *areas; // eax
+  unsigned int *i; // esi
+  void **overflowNodes; // ecx
 
-  *(_DWORD *)this = &TESRegion::`vftable';
-  v2 = *((_DWORD *)this + 6);
-  if ( v2 )
+  this->form.vtbl = (TESFormVtbl *)&TESRegion::`vftable'; /*0x4a2d09*/
+  dataList = this->dataList; /*0x4a2d0f*/
+  if ( dataList ) /*0x4a2d1c*/
   {
-    sub_4A44C0(v2);
-    FormHeapFree(v2);
+    sub_4A44C0(dataList); /*0x4a2d20*/
+    FormHeapFree((unsigned int)dataList); /*0x4a2d26*/
   }
-  v3 = *((_DWORD *)this + 7);
-  if ( v3 )
+  areas = this->areas; /*0x4a2d2e*/
+  if ( areas ) /*0x4a2d33*/
   {
-    for ( i = *(_DWORD **)v3; *(_DWORD *)v3; i = *(_DWORD **)v3 )
+    for ( i = (unsigned int *)areas->firstArea; areas->firstArea; i = (unsigned int *)areas->firstArea ) /*0x4a2d35*/
     {
-      v5 = *(_DWORD **)(v3 + 4);
-      if ( v5 )
+      overflowNodes = (void **)areas->overflowNodes; /*0x4a2d40*/
+      if ( overflowNodes ) /*0x4a2d45*/
       {
-        *(_DWORD *)(v3 + 4) = v5[1];
-        *(_DWORD *)v3 = *v5;
-        FormHeapFree((unsigned int)v5);
+        areas->overflowNodes = overflowNodes[1]; /*0x4a2d4a*/
+        areas->firstArea = *overflowNodes; /*0x4a2d50*/
+        FormHeapFree((unsigned int)overflowNodes); /*0x4a2d52*/
       }
       else
       {
-        *(_DWORD *)v3 = 0;
+        areas->firstArea = 0; /*0x4a2d5c*/
       }
-      if ( i )
+      if ( i ) /*0x4a2d64*/
       {
-        sub_4A76F0(i);
-        FormHeapFree((unsigned int)i);
+        sub_4A76F0(i); /*0x4a2d68*/
+        FormHeapFree((unsigned int)i); /*0x4a2d6e*/
       }
-      v3 = *((_DWORD *)this + 7);
+      areas = this->areas; /*0x4a2d76*/
     }
-    FormHeapFree(*((_DWORD *)this + 7));
+    FormHeapFree((unsigned int)this->areas); /*0x4a2d83*/
   }
-  TESForm_destr((TESForm *)this);
+  TESForm_destr(&this->form); /*0x4a2d95*/
 }

@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_D3DMATERIAL::$48A7D73869B8DD97079A7DB0052C867A",
+  "definition": "union _D3DMATERIAL::$48A7D73869B8DD97079A7DB0052C867A\n{\nD3DCOLORVALUE specular;\nD3DCOLORVALUE dcvSpecular;\n}\n",
   "id": 18374686479672035599,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "specular",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "D3DCOLORVALUE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dcvSpecular",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "D3DCOLORVALUE"
     }
   ],
   "name": "_D3DMATERIAL::$48A7D73869B8DD97079A7DB0052C867A",
+  "ordinal": 4182,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 16
 }

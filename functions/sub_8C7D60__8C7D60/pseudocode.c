@@ -3,7 +3,7 @@ void __thiscall sub_8C7D60(_DWORD *this, signed int a2)
   _DWORD *v2; // ebp
   int v3; // esi
   unsigned int v4; // eax
-  int *v5; // ebx
+  char *v5; // ebx
   int v6; // edi
   int *v7; // ebx
   unsigned int v8; // ebp
@@ -22,84 +22,84 @@ void __thiscall sub_8C7D60(_DWORD *this, signed int a2)
   int v21; // [esp+1Ch] [ebp-2Ch] BYREF
   int v22; // [esp+20h] [ebp-28h] BYREF
   void **v23; // [esp+24h] [ebp-24h] BYREF
-  int *v24; // [esp+28h] [ebp-20h]
+  char *v24; // [esp+28h] [ebp-20h]
   unsigned int v25; // [esp+2Ch] [ebp-1Ch]
   unsigned int v26; // [esp+30h] [ebp-18h]
   int v27; // [esp+34h] [ebp-14h]
   int v28; // [esp+38h] [ebp-10h]
   int v29; // [esp+44h] [ebp-4h]
 
-  v2 = this;
-  v20 = this;
-  v3 = (*(int (__thiscall **)(_DWORD *, int *))(*this + 0x74))(this, &v22);
-  v4 = 0;
-  v5 = 0;
-  v23 = &NiTLargeArray<hkNiTriStripsData>::`vftable';
-  v25 = 0;
-  v28 = 1;
-  v26 = 0;
-  v27 = 0;
-  v24 = 0;
-  v29 = 1;
-  v19 = 0;
-  if ( v3 )
+  v2 = this; /*0x8c7d87*/
+  v20 = this; /*0x8c7d89*/
+  v3 = (*(int (__thiscall **)(_DWORD *, int *))(*this + 0x74))(this, &v22); /*0x8c7d9c*/
+  v4 = 0; /*0x8c7d9e*/
+  v5 = 0; /*0x8c7da5*/
+  v23 = &NiTLargeArray<hkNiTriStripsData>::`vftable'; /*0x8c7da7*/
+  v25 = 0; /*0x8c7daf*/
+  v28 = 1; /*0x8c7db3*/
+  v26 = 0; /*0x8c7db7*/
+  v27 = 0; /*0x8c7dbb*/
+  v24 = 0; /*0x8c7dbf*/
+  v29 = 1; /*0x8c7dc5*/
+  v19 = 0; /*0x8c7dc9*/
+  if ( v3 ) /*0x8c7dcd*/
   {
-    v6 = 0;
-    v19 = *(_DWORD *)(v3 + 0x14);
-    if ( v19 > 0 )
+    v6 = 0; /*0x8c7dd2*/
+    v19 = *(_DWORD *)(v3 + 0x14); /*0x8c7dd6*/
+    if ( v19 > 0 ) /*0x8c7dda*/
     {
-      while ( 1 )
+      while ( 1 ) /*0x8c7deb*/
       {
-        v7 = (int *)(*(_DWORD *)(v3 + 0xC) + 8 * v6);
-        v8 = v4;
-        if ( v4 >= v25 )
-          sub_8C69C0((int **)&v23, v28 + v4);
-        sub_8C68D0(&v23, v8, v7);
-        if ( ++v6 >= v19 )
-          break;
-        v4 = v26;
+        v7 = (int *)(*(_DWORD *)(v3 + 0xC) + 8 * v6); /*0x8c7deb*/
+        v8 = v4; /*0x8c7dee*/
+        if ( v4 >= v25 ) /*0x8c7df0*/
+          sub_8C69C0((int **)&v23, v28 + v4); /*0x8c7dfd*/
+        sub_8C68D0(&v23, v8, v7); /*0x8c7e08*/
+        if ( ++v6 >= v19 ) /*0x8c7e14*/
+          break; /*0x8c7e14*/
+        v4 = v26; /*0x8c7de0*/
       }
-      v2 = v20;
-      v5 = v24;
+      v2 = v20; /*0x8c7e16*/
+      v5 = v24; /*0x8c7e1a*/
     }
-    sub_8C6BE0((_DWORD *)(v3 + 8));
-    sub_8C69C0((int **)(v3 + 8), 0);
-    *(float *)(v3 + 4) = flt_B2EFC4;
+    sub_8C6BE0((_DWORD *)(v3 + 8)); /*0x8c7e23*/
+    sub_8C69C0((int **)(v3 + 8), 0); /*0x8c7e2c*/
+    *(float *)(v3 + 4) = flt_B2EFC4; /*0x8c7e37*/
   }
-  v9 = (_DWORD *)a2;
-  sub_8A2610(v2, a2);
-  v17 = v9[0x88];
-  v10 = *(void (__cdecl **)(int, int *, int, signed int *, int))(v17 + 8);
-  a2 = 4;
-  v10(v17, &v19, 4, &a2, 1);
-  for ( i = 0; i < v19; ++i )
-    (*(void (__thiscall **)(_DWORD *, int))(*v9 + 0x2C))(v9, v5[2 * i]);
-  v18 = v9[0x88];
-  v12 = *(void (__cdecl **)(int, int *, int, signed int *, int))(v18 + 8);
-  a2 = 4;
-  v12(v18, &v19, 4, &a2, 1);
-  v13 = 0;
-  if ( v19 > 0 )
+  v9 = (_DWORD *)a2; /*0x8c7e3a*/
+  sub_8A2610(v2, a2); /*0x8c7e41*/
+  v17 = v9[0x88]; /*0x8c7e5a*/
+  v10 = *(void (__cdecl **)(int, int *, int, signed int *, int))(v17 + 8); /*0x8c7e5b*/
+  a2 = 4; /*0x8c7e5e*/
+  v10(v17, &v19, 4, &a2, 1); /*0x8c7e66*/
+  for ( i = 0; i < v19; ++i ) /*0x8c7e71*/
+    (*(void (__thiscall **)(_DWORD *, _DWORD))(*v9 + 0x2C))(v9, *(_DWORD *)&v5[8 * i]); /*0x8c7e7e*/
+  v18 = v9[0x88]; /*0x8c7e9d*/
+  v12 = *(void (__cdecl **)(int, int *, int, signed int *, int))(v18 + 8); /*0x8c7e9e*/
+  a2 = 4; /*0x8c7ea1*/
+  v12(v18, &v19, 4, &a2, 1); /*0x8c7ea9*/
+  v13 = 0; /*0x8c7eab*/
+  if ( v19 > 0 ) /*0x8c7eb4*/
   {
-    v14 = v5 + 1;
-    do
+    v14 = (int *)(v5 + 4); /*0x8c7eb6*/
+    do /*0x8c7ef5*/
     {
-      v15 = v9[0x88];
-      v21 = *v14;
-      v16 = *(void (__cdecl **)(int, int *, int, signed int *, int))(v15 + 8);
-      a2 = 4;
-      v16(v15, &v21, 4, &a2, 1);
-      ++v13;
-      v14 += 2;
+      v15 = v9[0x88]; /*0x8c7ec2*/
+      v21 = *v14; /*0x8c7ecf*/
+      v16 = *(void (__cdecl **)(int, int *, int, signed int *, int))(v15 + 8); /*0x8c7ed3*/
+      a2 = 4; /*0x8c7ede*/
+      v16(v15, &v21, 4, &a2, 1); /*0x8c7ee6*/
+      ++v13; /*0x8c7ee8*/
+      v14 += 2; /*0x8c7eee*/
     }
-    while ( v13 < v19 );
-    v5 = v24;
+    while ( v13 < v19 ); /*0x8c7ef5*/
+    v5 = v24; /*0x8c7ef7*/
   }
-  (*(void (__thiscall **)(_DWORD *, int))(*v2 + 0x64))(v2, v22);
-  v29 = 0xFFFFFFFF;
-  if ( v5 )
+  (*(void (__thiscall **)(_DWORD *, int))(*v2 + 0x64))(v2, v22); /*0x8c7f08*/
+  v29 = 0xFFFFFFFF; /*0x8c7f0c*/
+  if ( v5 ) /*0x8c7f14*/
   {
-    _LN21(v5, 8u, v5[0xFFFFFFFF], (void (__thiscall *)(void *))sub_7016A0);
-    FormHeapFree((unsigned int)(v5 + 0xFFFFFFFF));
+    _LN21(v5, 8u, *((_DWORD *)v5 + 0xFFFFFFFF), (void (__thiscall *)(void *))NiPointerSlot_Release); /*0x8c7f25*/
+    FormHeapFree((unsigned int)(v5 + 0xFFFFFFFC)); /*0x8c7f2b*/
   }
 }

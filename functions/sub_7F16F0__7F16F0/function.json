@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 5,
-  "display_name": "sub_7F16F0",
+  "chunks": [
+    [
+      "0x7F16F0",
+      "0x7F1753"
+    ]
+  ],
+  "chunks_sha256": "74bd36757d52a8bf8fad02c27c92a44919f8364ebde4565369ecb805c959d2ce",
+  "comment_regular": "Registers SpeedTree shader constants: TreeData at base register and WindMatrices at base+1 (16 float4 registers).",
+  "comment_repeatable": "Registers SpeedTree shader constants: TreeData at base register and WindMatrices at base+1 (16 float4 registers).",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 6,
+  "display_name": "OB_SpeedTreeShader_RegisterTreeAndWindConstants_010201A0",
   "end_ea": "0x7F1753",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7F16F0",
+  "name": "OB_SpeedTreeShader_RegisterTreeAndWindConstants_010201A0",
   "segment": ".text",
   "sha256": "74bd36757d52a8bf8fad02c27c92a44919f8364ebde4565369ecb805c959d2ce",
   "size": 99,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7F16F0",
-  "type": "int __cdecl(int, int)",
+  "total_chunk_size": 99,
+  "type": "int __cdecl(void *constantMap, int baseRegister)",
   "xrefs_from_count": 41,
   "xrefs_to_count": 3
 }

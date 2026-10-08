@@ -1,31 +1,31 @@
 [
   {
     "ea": "0x5F4068",
-    "line": "mov     ecx, [esp+arg_10]",
+    "line": "mov     ecx, [esp+arg_10]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5F406C",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; repeatOrAction",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F406E",
-    "line": "push    1",
+    "line": "push    1; playImmediately",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F4070",
-    "line": "push    ebp",
+    "line": "push    ebp; encodedKey",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F4071",
-    "line": "call    ActorAnimData_PlayAnimGroup",
+    "line": "call    ActorAnimData_PlayAnimGroup; Native group dispatcher. Reads fixed group-table slot (+0x08) and note-template class (+0x0C), normalizing slot aliases 5->0 and 6->3. For note classes 0/1, playImmediately=0 stores only the encoded key at ActorAnimData +0x70[slot] and repeat/action value at +0x7C[slot]; playImmediately=1 clears that queue and plays now. Classes 2..7 play immediately. No queued sequence pointer or path is stored.",
     "mnemonic": "call",
     "size": 5
   },
@@ -79,19 +79,19 @@
   },
   {
     "ea": "0x5F408F",
-    "line": "mov     ecx, [esp+8+arg_8]",
+    "line": "mov     ecx, [esp+8+arg_8]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5F4093",
-    "line": "push    edx",
+    "line": "push    edx; slotSelector",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F4094",
-    "line": "call    sub_4706E0",
+    "line": "call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,25 +109,25 @@
   },
   {
     "ea": "0x5F40A1",
-    "line": "push    eax",
+    "line": "push    eax; sequence",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F40A2",
-    "line": "push    2",
+    "line": "push    2; action",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F40A4",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F40A6",
-    "line": "call    HighPRocess_DoAction?????",
+    "line": "call    Actor_SetCurrentActionWithBowVisualCleanup; Void Actor action-transition wrapper. Performs transition-specific bow/held-arrow visual cleanup, then commits action and sequence through process vtable +0x2D8. It has no success/result contract; callers/plugins must not consume EAX, so Crossbow's UInt32 HighProcessDoActionFn typedef is incorrect. Meaningful current-action state is HighProcess-only: HighProcess +0x2D0/+0x2D8 read/store +0x1F4/+0x1F8, while MiddleHigh returns None (-1) and its setter is a no-op; Crossbow's process-level-0 action filter therefore matches Oblivion. External Crossbow state-machine contrast: Equip-as-Cocked/first-shot-loaded is plugin policy, repeated action 4 while Reloading can flip state to Cocked and rebuild controller tracking, and interruption/cancellation actions are not modeled, leaving stale Reloading/Cocked phases.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x5F40B0",
-    "line": "push    0",
+    "line": "push    0; effectIndex",
     "mnemonic": "push",
     "size": 2
   },
@@ -163,13 +163,13 @@
   },
   {
     "ea": "0x5F40B6",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; magicItem",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F40B8",
-    "line": "call    MagicItem_GetFXEffect",
+    "line": "call    MagicItem_GetFXEffect; Verified (Oblivion): MagicItem_GetFXEffect returns the effect's EffectSetting pointer; MagicShaderHitEffect constructors/PostLink dereference its +0x78 EffectSetting::effectShader field.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x5F4103",
-    "line": "mov     ecx, [esp+0Ch+arg_14]",
+    "line": "mov     ecx, [esp+24h]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x5F411D",
-    "line": "cmp     [esp+0Ch+arg_C], ecx",
+    "line": "cmp     [esp+8+arg_10], ecx",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x5F4132",
-    "line": "mov     ecx, [esp+0Ch+arg_14]",
+    "line": "mov     ecx, [esp+24h]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x5F416E",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

@@ -28,7 +28,7 @@
 0x5798C5: fnstsw  ax
 0x5798C7: test    ah, 44h
 0x5798CA: jp      short locret_5798E8
-0x5798CC: call    InterfaceManager_IsMenuMode
+0x5798CC: call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.
 0x5798D1: test    al, al
 0x5798D3: jz      short locret_5798E8
 0x5798D5: push    1; arg1

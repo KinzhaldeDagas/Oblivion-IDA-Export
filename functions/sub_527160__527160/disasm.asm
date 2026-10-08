@@ -1,4 +1,4 @@
-0x527160: sub     esp, 8
+0x527160: sub     esp, 8; Vector resize: retain existing prefix, erase surplus elements when shrinking, fill only newly inserted elements when growing. Equal size does not overwrite coefficients. Matrix dimension products must already be valid; no recovery from rows*columns overflow.
 0x527163: push    ebx
 0x527164: push    ebp
 0x527165: push    esi
@@ -26,14 +26,14 @@
 0x527197: cmp     ecx, ebp
 0x527199: jbe     short loc_5271A0
 0x52719B: call    __invalid_parameter_noinfo
-0x5271A0: lea     eax, [esp+18h+arg_4]
-0x5271A4: push    eax; int
+0x5271A0: lea     eax, [esp+18h+value]
+0x5271A4: push    eax; value
 0x5271A5: sub     ebx, edi
-0x5271A7: push    ebx; int
+0x5271A7: push    ebx; count
 0x5271A8: push    ebp; Src
-0x5271A9: push    esi; int
-0x5271AA: mov     ecx, esi
-0x5271AC: call    sub_526FA0
+0x5271A9: push    esi; position
+0x5271AA: mov     ecx, esi; this
+0x5271AC: call    OB_stVectorFloat_InsertFill_CompilerCopy_010201A0; Oblivion 1.2.0.416: compiler-emitted vector<float>::insert(position,count,value) body used by the checked float insert-one wrapper; 4-byte stride, 1.5x growth, alias-safe local fill value, in-place shift or FormHeap reallocation. Named CompilerCopy because equivalent specializations also exist at other addresses.
 0x5271B1: pop     edi
 0x5271B2: pop     esi
 0x5271B3: pop     ebp
@@ -55,21 +55,21 @@
 0x5271D9: cmp     edi, [esi+8]
 0x5271DC: jbe     short loc_5271E3
 0x5271DE: call    __invalid_parameter_noinfo
-0x5271E3: mov     [esp+18h+var_4], edi
+0x5271E3: mov     [esp+18h+result.current], edi
 0x5271E7: lea     edi, [edi+ebx*4]
 0x5271EA: cmp     edi, [esi+8]
 0x5271ED: ja      short loc_5271F4
 0x5271EF: cmp     edi, [esi+4]
 0x5271F2: jnb     short loc_5271F9
 0x5271F4: call    __invalid_parameter_noinfo
-0x5271F9: push    ebp; Src
-0x5271FA: push    esi; int
-0x5271FB: push    edi; Dst
-0x5271FC: push    esi; int
-0x5271FD: lea     ecx, [esp+28h+var_8]
-0x527201: push    ecx; int
-0x527202: mov     ecx, esi
-0x527204: call    sub_439050
+0x5271F9: push    ebp; last
+0x5271FA: push    esi; last
+0x5271FB: push    edi; first
+0x5271FC: push    esi; first
+0x5271FD: lea     ecx, [esp+28h+result]
+0x527201: push    ecx; result
+0x527202: mov     ecx, esi; this
+0x527204: call    OB_stVector4_EraseRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Checked erase-range core for vectors of trivial 4-byte elements. Validates iterator owners, shifts the suffix with memmove_s, updates end, and returns the resulting iterator; directly clears CIndexedGeometry triangle totals.
 0x527209: pop     edi
 0x52720A: pop     esi
 0x52720B: pop     ebp

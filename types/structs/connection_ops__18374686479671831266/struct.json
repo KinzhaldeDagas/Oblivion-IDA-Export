@@ -1,136 +1,216 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "connection_ops",
+  "definition": "struct connection_ops\n{\nconst char *name __offset(OFF64|AUTO);\nunsigned __int8 epm_protocols[2];\nRpcConnection *(*alloc)(void) __offset(OFF64|AUTO);\nRPC_STATUS (*open_connection_client)(RpcConnection *) __offset(OFF64|AUTO);\nRPC_STATUS (*handoff)(RpcConnection *, RpcConnection *) __offset(OFF64|AUTO);\nint (*read)(RpcConnection *, void *, unsigned int) __offset(OFF64|AUTO);\nint (*write)(RpcConnection *, const void *, unsigned int) __offset(OFF64|AUTO);\nint (*close)(RpcConnection *) __offset(OFF64|AUTO);\nvoid (*close_read)(RpcConnection *) __offset(OFF64|AUTO);\nvoid (*cancel_call)(RpcConnection *) __offset(OFF64|AUTO);\nRPC_STATUS (*is_server_listening)(const char *) __offset(OFF64|AUTO);\nint (*wait_for_incoming_data)(RpcConnection *) __offset(OFF64|AUTO);\nsize_t (*get_top_of_tower)(unsigned __int8 *, const char *, const char *) __offset(OFF64|AUTO);\nRPC_STATUS (*parse_top_of_tower)(const unsigned __int8 *, size_t, char **, char **) __offset(OFF64|AUTO);\nRPC_STATUS (*receive_fragment)(RpcConnection *, RpcPktHdr **, void **) __offset(OFF64|AUTO);\nBOOL (*is_authorized)(RpcConnection *) __offset(OFF64|AUTO);\nRPC_STATUS (*authorize)(RpcConnection *, BOOL, unsigned __int8 *, unsigned int, unsigned __int8 *, unsigned int *) __offset(OFF64|AUTO);\nRPC_STATUS (*secure_packet)(RpcConnection *, secure_packet_direction, RpcPktHdr *, unsigned int, unsigned __int8 *, unsigned int, RpcAuthVerifier *, unsigned __int8 *, unsigned int) __offset(OFF64|AUTO);\nRPC_STATUS (*impersonate_client)(RpcConnection *) __offset(OFF64|AUTO);\nRPC_STATUS (*revert_to_self)(RpcConnection *) __offset(OFF64|AUTO);\nRPC_STATUS (*inquire_auth_client)(RpcConnection *, RPC_AUTHZ_HANDLE *, RPC_WSTR *, ULONG *, ULONG *, ULONG *, ULONG) __offset(OFF64|AUTO);\n}\n",
   "id": 18374686479671831266,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "name",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "const char *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "epm_protocols",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 2
+      "size": 2,
+      "type": "unsigned __int8[2]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "alloc",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "RpcConnection *(*)(void)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "open_connection_client",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "RPC_STATUS (*)(RpcConnection *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "handoff",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "RPC_STATUS (*)(RpcConnection *, RpcConnection *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "read",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "int (*)(RpcConnection *, void *, unsigned int)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "write",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "int (*)(RpcConnection *, const void *, unsigned int)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "close",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "int (*)(RpcConnection *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "close_read",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(RpcConnection *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cancel_call",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(RpcConnection *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "is_server_listening",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "RPC_STATUS (*)(const char *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "wait_for_incoming_data",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "int (*)(RpcConnection *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_top_of_tower",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "size_t (*)(unsigned __int8 *, const char *, const char *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "parse_top_of_tower",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "RPC_STATUS (*)(const unsigned __int8 *, size_t, char **, char **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "receive_fragment",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "RPC_STATUS (*)(RpcConnection *, RpcPktHdr **, void **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "is_authorized",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "BOOL (*)(RpcConnection *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "authorize",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "RPC_STATUS (*)(RpcConnection *, BOOL, unsigned __int8 *, unsigned int, unsigned __int8 *, unsigned int *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "secure_packet",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 4
+      "size": 4,
+      "type": "RPC_STATUS (*)(RpcConnection *, secure_packet_direction, RpcPktHdr *, unsigned int, unsigned __int8 *, unsigned int, RpcAuthVerifier *, unsigned __int8 *, unsigned int)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "impersonate_client",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 4
+      "size": 4,
+      "type": "RPC_STATUS (*)(RpcConnection *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "revert_to_self",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 4
+      "offset_hex": "0x4C",
+      "size": 4,
+      "type": "RPC_STATUS (*)(RpcConnection *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "inquire_auth_client",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 4
+      "size": 4,
+      "type": "RPC_STATUS (*)(RpcConnection *, RPC_AUTHZ_HANDLE *, RPC_WSTR *, ULONG *, ULONG *, ULONG *, ULONG)"
     }
   ],
   "name": "connection_ops",
+  "ordinal": 3073,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 84
 }

@@ -1,19 +1,32 @@
 {
-  "callees_count": 13,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x58CC60",
+      "0x58CD2B"
+    ]
+  ],
+  "chunks_sha256": "dd97cac94549a17bc2958e10baa8c863b0b13de43ed5edb1389f0e06a1ec7a93",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "Verified: creates 0x18-byte action, seeds operand from source Tile trait, appends to destination action chain, links same action into source Value reaction chain, then CalculateValue(destination,false). Source selector is resolved before this call; dependency is not re-resolved by sibling/listindex on every evaluation. Fallout named AddAction overload at 0x827DF270.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_58CC60",
+  "display_name": "Tile::Value::AddReferenceAction",
   "end_ea": "0x58CD2B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_58CC60",
+  "name": "Tile::Value::AddReferenceAction",
   "segment": ".text",
   "sha256": "dd97cac94549a17bc2958e10baa8c863b0b13de43ed5edb1389f0e06a1ec7a93",
   "size": 203,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x58CC60",
-  "type": "float *__thiscall(float *this, _DWORD *, int, int)",
+  "total_chunk_size": 203,
+  "type": "OblivionTileActionNode *__thiscall(OblivionTileValueView *this, Tile *source, unsigned int sourceTrait, unsigned int opcode)",
   "xrefs_from_count": 80,
   "xrefs_to_count": 1
 }

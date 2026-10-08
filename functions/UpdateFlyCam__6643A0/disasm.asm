@@ -1,4 +1,4 @@
-0x6643A0: sub     esp, 8Ch
+0x6643A0: sub     esp, 8Ch; [Controller decode 2026-07-09] Non-player QueryControlState consumer: Forward 0, Back 1, SlideLeft 2, SlideRight 3 move flycam.
 0x6643A6: mov     eax, ds:0B33398h
 0x6643AB: push    esi
 0x6643AC: push    edi
@@ -18,7 +18,7 @@
 0x6643D7: mov     [esp+94h+var_80], eax
 0x6643DB: fild    [esp+94h+var_7C]
 0x6643DF: push    ecx
-0x6643E0: lea     ecx, [esp+98h+var_24]
+0x6643E0: lea     ecx, [esp+98h+var_24]; this
 0x6643E4: fmul    dword ptr ds:0B14EE8h
 0x6643EA: fadd    dword ptr [esi+74Ch]
 0x6643F0: fstp    dword ptr [esi+74Ch]
@@ -27,19 +27,19 @@
 0x664400: fadd    dword ptr [esi+750h]
 0x664406: fstp    dword ptr [esi+750h]
 0x66440C: fld     dword ptr [esi+74Ch]
-0x664412: fstp    [esp+98h+var_98]; float
-0x664415: call    NiMatrix33_InitRotationTransform
+0x664412: fstp    [esp+98h+angleZ]; angleZ
+0x664415: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x66441A: fld     dword ptr [esi+750h]
 0x664420: push    ecx
-0x664421: lea     ecx, [esp+98h+var_48]
-0x664425: fstp    [esp+98h+var_98]; float
-0x664428: call    NiMatrix33_InitRotationTransposedTransform???
-0x66442D: lea     ecx, [esp+94h+var_48]
-0x664431: push    ecx
-0x664432: lea     edx, [esp+98h+var_6C]
-0x664436: push    edx
-0x664437: lea     ecx, [esp+9Ch+var_24]
-0x66443B: call    NiMAtrix33_Multiply
+0x664421: lea     ecx, [esp+98h+right]; this
+0x664425: fstp    [esp+98h+angleZ]; angleX
+0x664428: call    NiMatrix33_InitRotationXTransposed; Verified matrix coefficients make this an X-axis rotation in the engine's transposed convention: X stays fixed; only the Y/Z submatrix contains sin/cos.
+0x66442D: lea     ecx, [esp+94h+right]
+0x664431: push    ecx; right
+0x664432: lea     edx, [esp+98h+out]
+0x664436: push    edx; out
+0x664437: lea     ecx, [esp+9Ch+var_24]; this
+0x66443B: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x664440: mov     ecx, ds:0B3F9ACh
 0x664446: mov     eax, ds:0B3F9A8h
 0x66444B: mov     edx, ds:0B3F9B0h
@@ -49,7 +49,7 @@
 0x664459: mov     ecx, edi; this
 0x66445B: mov     dword ptr [esp+9Ch+var_8C], eax
 0x66445F: mov     [esp+9Ch+var_84], edx
-0x664463: call    InputGlobals__QueryControlState
+0x664463: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x664468: test    eax, eax
 0x66446A: jz      short loc_66447A
 0x66446C: fld     dword ptr [esp+94h+var_8C+4]
@@ -58,7 +58,7 @@
 0x66447A: push    0; a3
 0x66447C: push    1; a2
 0x66447E: mov     ecx, edi; this
-0x664480: call    InputGlobals__QueryControlState
+0x664480: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x664485: test    eax, eax
 0x664487: jz      short loc_664497
 0x664489: fld     dword ptr [esp+94h+var_8C+4]
@@ -67,7 +67,7 @@
 0x664497: push    0; a3
 0x664499: push    3; a2
 0x66449B: mov     ecx, edi; this
-0x66449D: call    InputGlobals__QueryControlState
+0x66449D: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x6644A2: test    eax, eax
 0x6644A4: jz      short loc_6644B4
 0x6644A6: fld     dword ptr [esp+94h+var_8C]
@@ -76,7 +76,7 @@
 0x6644B4: push    0; a3
 0x6644B6: push    2; a2
 0x6644B8: mov     ecx, edi; this
-0x6644BA: call    InputGlobals__QueryControlState
+0x6644BA: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x6644BF: test    eax, eax
 0x6644C1: jz      short loc_6644D1
 0x6644C3: fld     dword ptr [esp+94h+var_8C]
@@ -86,7 +86,7 @@
 0x6644D5: push    eax
 0x6644D6: lea     ecx, [esp+98h+var_78]
 0x6644DA: push    ecx
-0x6644DB: lea     ecx, [esp+9Ch+var_6C]
+0x6644DB: lea     ecx, [esp+9Ch+out]
 0x6644DF: call    sub_7101F0
 0x6644E4: fld     dword ptr [esi+754h]
 0x6644EA: mov     edx, [eax]
@@ -124,7 +124,7 @@
 0x664572: mov     ecx, [ecx]
 0x664574: lea     edi, [ecx+30h]
 0x664577: mov     ecx, 9
-0x66457C: lea     esi, [esp+94h+var_6C]
+0x66457C: lea     esi, [esp+94h+out]
 0x664580: rep movsd
 0x664582: cmp     word ptr [eax+0B6h], 0
 0x66458A: pop     edi
@@ -135,7 +135,7 @@
 0x664592: push    ecx; a3
 0x664593: push    ecx
 0x664594: fstp    [esp+94h+a2]; a2
-0x664597: call    NiAVObject_UpdateNiAVObject
+0x664597: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x66459C: add     esp, 8Ch
 0x6645A2: retn
 0x6645A3: mov     edx, [eax+0B0h]
@@ -144,6 +144,6 @@
 0x6645AD: push    0; a3
 0x6645AF: push    ecx
 0x6645B0: fstp    [esp+94h+a2]; a2
-0x6645B3: call    NiAVObject_UpdateNiAVObject
+0x6645B3: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x6645B8: add     esp, 8Ch
 0x6645BE: retn

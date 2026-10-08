@@ -1,17 +1,19 @@
-void __thiscall sub_77E3E0(NiGeometryGroup *this, int a2)
+//
+// DX11 authority audit 2026-10-01: Dynamic A8B03C+14. Same ordinary removal family as 77DAF0, additionally clears buffer VBChip array (+24, StreamCount+1C) before destruction/free and data+38 clear. Verified Fallout 827D3520 family with platform buffer-layout differences.
+void __thiscall NiDynamicGeometryGroup_RemoveGeometryData(NiGeometryGroup *this, NiGeometryData *data)
 {
-  NiGeometryBufferData *v2; // esi
-  NiVBChip **VBChip; // eax
+  NiGeometryBufferData *BuffData; // esi
+  int VBChip; // eax
 
-  v2 = *(NiGeometryBufferData **)(a2 + 0x38);
-  if ( v2 )
+  BuffData = data->member.BuffData; /*0x77e3e6*/
+  if ( BuffData ) /*0x77e3eb*/
   {
-    sub_782930(this, *(NiGeometryBufferData **)(a2 + 0x38));
-    VBChip = v2->VBChip;
-    if ( VBChip )
-      _memset(VBChip, 0, 4 * v2->StreamCount);
-    sub_778110(v2);
-    FormHeapFree((unsigned int)v2);
-    *(_DWORD *)(a2 + 0x38) = 0;
+    NiGeometryGroup_RemoveBufferData(this, data->member.BuffData); /*0x77e3ee*/
+    VBChip = (int)BuffData->VBChip; /*0x77e3f3*/
+    if ( VBChip ) /*0x77e3f8*/
+      _memset(VBChip, 0, 4 * BuffData->StreamCount); /*0x77e405*/
+    NiGeometryBufferData_Destroy(BuffData); /*0x77e40f*/
+    FormHeapFree((unsigned int)BuffData); /*0x77e415*/
+    data->member.BuffData = 0; /*0x77e41d*/
   }
 }

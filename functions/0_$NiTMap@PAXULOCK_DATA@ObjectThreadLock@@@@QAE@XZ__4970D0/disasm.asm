@@ -44,3 +44,12 @@
 0x49716A: pop     esi
 0x49716B: add     esp, 10h
 0x49716E: retn
+0x9B0370: mov     ecx, [ebp-10h]
+0x9B0373: jmp     ??1?$NiTMap@PAXULOCK_DATA@ObjectThreadLock@@@@UAE@XZ; NiTMap<void *,ObjectThreadLock::LOCK_DATA>::~NiTMap<void *,ObjectThreadLock::LOCK_DATA>(void)
+0x9B0378: mov     edx, [esp+arg_4]
+0x9B037C: lea     eax, [edx-8]
+0x9B037F: mov     ecx, [edx-0Ch]
+0x9B0382: xor     ecx, eax
+0x9B0384: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B0389: mov     eax, offset stru_ADC6D0
+0x9B038E: jmp     ___CxxFrameHandler3

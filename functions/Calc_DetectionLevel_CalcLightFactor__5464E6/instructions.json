@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5464E6",
-    "line": "fild    [esp+arg_24]",
+    "line": "fild    [esp+arg_24]; Computes the target-light contribution using light level, detector visual penalties/bonuses (including Blindness/Night Eye inputs), distance normalization, and fSneakLightMult; preserves the stronger accumulated contribution.",
     "mnemonic": "fild",
     "size": 4
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x546529",
-    "line": "jnz     short Calc_DetectionLevel___CalcSneakFactor",
+    "line": "jnz     short Calc_DetectionLevel_SelectSneakFactor; Selects whether the target's sneaking state contributes the alternate sneak factor before skill comparison.",
     "mnemonic": "jnz",
     "size": 2
   },

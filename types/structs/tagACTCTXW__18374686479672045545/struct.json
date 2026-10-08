@@ -1,64 +1,108 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "tagACTCTXW",
+  "definition": "struct tagACTCTXW\n{\nULONG cbSize;\nDWORD dwFlags;\nLPCWSTR lpSource;\nUSHORT wProcessorArchitecture;\nLANGID wLangId;\nLPCWSTR lpAssemblyDirectory;\nLPCWSTR lpResourceName;\nLPCWSTR lpApplicationName;\nHMODULE hModule;\n}\n",
   "id": 18374686479672045545,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cbSize",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwFlags",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lpSource",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "LPCWSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "wProcessorArchitecture",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 2
+      "offset_hex": "0xC",
+      "size": 2,
+      "type": "USHORT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "wLangId",
       "offset": 14,
-      "offset_hex": "0xe",
-      "size": 2
+      "offset_hex": "0xE",
+      "size": 2,
+      "type": "LANGID"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lpAssemblyDirectory",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "LPCWSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lpResourceName",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "LPCWSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lpApplicationName",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "LPCWSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hModule",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "HMODULE"
     }
   ],
   "name": "tagACTCTXW",
+  "ordinal": 8149,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 32
 }

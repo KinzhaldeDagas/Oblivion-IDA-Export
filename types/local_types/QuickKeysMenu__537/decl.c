@@ -1,1 +1,1 @@
-QuickKeysMenu
+struct QuickKeysMenu;

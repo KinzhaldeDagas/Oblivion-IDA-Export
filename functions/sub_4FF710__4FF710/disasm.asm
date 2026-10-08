@@ -21,11 +21,11 @@
 0x4FF75D: mov     esi, [esp+1170h+arg_8]
 0x4FF764: xor     ebx, ebx
 0x4FF766: push    200h
-0x4FF76B: mov     [esp+1174h+var_1158], ecx
+0x4FF76B: mov     [esp+1174h+source], ecx
 0x4FF76F: lea     ecx, [esp+1174h+ArgList]
 0x4FF773: push    ebx
 0x4FF774: push    ecx
-0x4FF775: mov     [esp+117Ch+var_1154], eax
+0x4FF775: mov     [esp+117Ch+byteCount], eax
 0x4FF779: mov     [esp+117Ch+var_F50], ebx
 0x4FF780: mov     [esp+117Ch+var_F44], ebx
 0x4FF787: mov     [esp+117Ch+var_F4C], bl
@@ -61,18 +61,18 @@
 0x4FF80B: mov     eax, [esp+1170h+var_115C]
 0x4FF80F: mov     ecx, [eax-4]
 0x4FF812: lea     edx, [esp+1170h+ArgList]
-0x4FF816: push    edx; Str2
-0x4FF817: push    ecx; Str1
-0x4FF818: call    __strcmp
+0x4FF816: push    edx; right
+0x4FF817: push    ecx; left
+0x4FF818: call    CRT_StricmpLocaleDispatch
 0x4FF81D: add     esp, 8
 0x4FF820: test    eax, eax
 0x4FF822: jz      short loc_4FF87D
 0x4FF824: mov     eax, [esp+1170h+var_115C]
 0x4FF828: mov     ecx, [eax]
 0x4FF82A: lea     edx, [esp+1170h+ArgList]
-0x4FF82E: push    edx; Str2
-0x4FF82F: push    ecx; Str1
-0x4FF830: call    __strcmp
+0x4FF82E: push    edx; right
+0x4FF82F: push    ecx; left
+0x4FF830: call    CRT_StricmpLocaleDispatch
 0x4FF835: add     esp, 8
 0x4FF838: test    eax, eax
 0x4FF83A: jz      short loc_4FF87D
@@ -86,13 +86,13 @@
 0x4FF856: push    edi; int
 0x4FF857: call    sub_4FCE30
 0x4FF85C: add     esp, 8
-0x4FF85F: lea     ecx, [esp+1170h+var_F3C]; void *
+0x4FF85F: lea     ecx, [esp+1170h+var_F3C]; this
 0x4FF866: mov     [esp+1170h+var_4], 0FFFFFFFFh
-0x4FF871: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x4FF871: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x4FF876: xor     al, al
 0x4FF878: jmp     loc_5000C7
 0x4FF87D: mov     edx, [esi+40Ch]
-0x4FF883: mov     ecx, [esp+1170h+var_1158]
+0x4FF883: mov     ecx, [esp+1170h+source]
 0x4FF887: lea     ebx, [ebx+ebx*4]
 0x4FF88A: add     ebx, ebx
 0x4FF88C: add     ebx, ebx
@@ -109,9 +109,9 @@
 0x4FF8B8: push    edi; int
 0x4FF8B9: call    sub_4FCE30
 0x4FF8BE: add     esp, 8
-0x4FF8C1: lea     ecx, [esp+1170h+var_F3C]; void *
+0x4FF8C1: lea     ecx, [esp+1170h+var_F3C]; this
 0x4FF8C8: mov     [esp+1170h+var_4], 0FFFFFFFFh
-0x4FF8D3: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x4FF8D3: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x4FF8D8: xor     al, al
 0x4FF8DA: jmp     loc_5000C7
 0x4FF8DF: mov     ecx, [esi+40Ch]
@@ -133,14 +133,14 @@
 0x4FF929: push    edi; int
 0x4FF92A: call    sub_4FCE30
 0x4FF92F: add     esp, 8
-0x4FF932: lea     ecx, [esp+1170h+var_F3C]; void *
+0x4FF932: lea     ecx, [esp+1170h+var_F3C]; this
 0x4FF939: mov     [esp+1170h+var_4], 0FFFFFFFFh
-0x4FF944: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x4FF944: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x4FF949: xor     al, al
 0x4FF94B: jmp     loc_5000C7
 0x4FF950: mov     edx, [eax+14h]
 0x4FF953: test    edx, edx
-0x4FF955: mov     [esp+1170h+var_1158], edx
+0x4FF955: mov     [esp+1170h+source], edx
 0x4FF959: jz      loc_4FF9FF
 0x4FF95F: movzx   edx, word ptr [eax+12h]
 0x4FF963: mov     ebx, [eax+1Ch]
@@ -157,7 +157,7 @@
 0x4FF98E: test    cl, cl
 0x4FF990: jnz     short loc_4FF986
 0x4FF992: mov     ecx, [esi]
-0x4FF994: mov     eax, [esp+1170h+var_1158]
+0x4FF994: mov     eax, [esp+1170h+source]
 0x4FF998: push    edi
 0x4FF999: lea     edx, [esp+1174h+var_82C]
 0x4FF9A0: push    edx
@@ -172,12 +172,12 @@
 0x4FF9C0: jz      loc_4FF8C1
 0x4FF9C6: mov     edx, [esp+1170h+Size]
 0x4FF9CD: mov     ecx, [esi+40Ch]
-0x4FF9D3: push    edx; Size
+0x4FF9D3: push    edx; byteCount
 0x4FF9D4: lea     eax, [esp+1174h+Src]
-0x4FF9DB: push    eax; Src
+0x4FF9DB: push    eax; source
 0x4FF9DC: lea     edx, [esi+ecx+20Ch]
-0x4FF9E3: push    edx; Dst
-0x4FF9E4: call    _memcpy
+0x4FF9E3: push    edx; destination
+0x4FF9E4: call    _memcpy;
 0x4FF9E9: mov     eax, [esp+117Ch+Size]
 0x4FF9F0: mov     ecx, ds:0B361F8h
 0x4FF9F6: add     esp, 0Ch
@@ -195,9 +195,9 @@
 0x4FFA27: push    edi; int
 0x4FFA28: call    sub_4FCE30
 0x4FFA2D: add     esp, 8
-0x4FFA30: lea     ecx, [esp+1170h+var_F3C]; void *
+0x4FFA30: lea     ecx, [esp+1170h+var_F3C]; this
 0x4FFA37: mov     [esp+1170h+var_4], 0FFFFFFFFh
-0x4FFA42: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x4FFA42: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x4FFA47: xor     al, al
 0x4FFA49: jmp     loc_5000C7
 0x4FFA4E: mov     eax, ds:0B361F8h; jumptable 004FF7DF case 17
@@ -215,9 +215,9 @@
 0x4FFA77: push    edi; int
 0x4FFA78: call    sub_4FCE30
 0x4FFA7D: add     esp, 8
-0x4FFA80: lea     ecx, [esp+1170h+var_F3C]; void *
+0x4FFA80: lea     ecx, [esp+1170h+var_F3C]; this
 0x4FFA87: mov     [esp+1170h+var_4], 0FFFFFFFFh
-0x4FFA92: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x4FFA92: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x4FFA97: xor     al, al
 0x4FFA99: jmp     loc_5000C7
 0x4FFA9E: push    ebx; jumptable 004FF7DF cases 18-20,31
@@ -235,12 +235,12 @@
 0x4FFABB: push    20h ; ' '; Size
 0x4FFABD: call    FormHeapAlloc
 0x4FFAC2: add     esp, 4
-0x4FFAC5: mov     [esp+1170h+var_1158], eax
+0x4FFAC5: mov     [esp+1170h+source], eax
 0x4FFAC9: cmp     eax, ebx
 0x4FFACB: mov     byte ptr [esp+1170h+var_4], 1
 0x4FFAD3: jz      short loc_4FFAE0
 0x4FFAD5: mov     ecx, eax
-0x4FFAD7: call    sub_517A80
+0x4FFAD7: call    ScriptVariableInfo_Constructor; Construct 0x20-byte Script VariableInfo: initializes selected runtime fields and empty BSString at +0x18, but does not guarantee every SLSD data byte is initialized before a short/zero chunk read.
 0x4FFADC: mov     ebp, eax
 0x4FFADE: jmp     short loc_4FFAE2
 0x4FFAE0: xor     ebp, ebp
@@ -260,7 +260,7 @@
 0x4FFB0C: mov     [ebp+10h], al
 0x4FFB0F: call    BSStringT_Set
 0x4FFB14: mov     eax, [ebp+18h]
-0x4FFB17: mov     ecx, [esp+1170h+var_1154]
+0x4FFB17: mov     ecx, [esp+1170h+byteCount]
 0x4FFB1B: push    ebp
 0x4FFB1C: push    eax
 0x4FFB1D: call    sub_4FAA90
@@ -287,9 +287,9 @@
 0x4FFB69: push    edi; int
 0x4FFB6A: call    sub_4FCE30
 0x4FFB6F: add     esp, 8
-0x4FFB72: lea     ecx, [esp+1170h+var_F3C]; void *
+0x4FFB72: lea     ecx, [esp+1170h+var_F3C]; this
 0x4FFB79: mov     [esp+1170h+var_4], 0FFFFFFFFh
-0x4FFB84: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x4FFB84: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x4FFB89: xor     al, al
 0x4FFB8B: jmp     loc_5000C7
 0x4FFB90: push    1; jumptable 004FF7DF case 21
@@ -308,9 +308,9 @@
 0x4FFBB0: push    edi; int
 0x4FFBB1: call    sub_4FCE30
 0x4FFBB6: add     esp, 8
-0x4FFBB9: lea     ecx, [esp+1170h+var_F3C]; void *
+0x4FFBB9: lea     ecx, [esp+1170h+var_F3C]; this
 0x4FFBC0: mov     [esp+1170h+var_4], 0FFFFFFFFh
-0x4FFBCB: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x4FFBCB: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x4FFBD0: xor     al, al
 0x4FFBD2: jmp     loc_5000C7
 0x4FFBD7: cmp     [esp+1170h+var_F4C], 0
@@ -391,19 +391,19 @@
 0x4FFD1C: add     esp, 14h
 0x4FFD1F: lea     ecx, [esp+1170h+var_410]
 0x4FFD26: push    ecx
-0x4FFD27: mov     ecx, [esp+1174h+var_1158]
+0x4FFD27: mov     ecx, [esp+1174h+source]
 0x4FFD2B: lea     eax, [edx+esi+4]
 0x4FFD2F: push    eax
 0x4FFD30: push    esi
 0x4FFD31: push    edi
-0x4FFD32: mov     [esp+1180h+var_1154], ebx
+0x4FFD32: mov     [esp+1180h+byteCount], ebx
 0x4FFD36: call    sub_4FDAF0
 0x4FFD3B: cmp     eax, ebx
-0x4FFD3D: mov     [esp+1170h+var_1154], eax
+0x4FFD3D: mov     [esp+1170h+byteCount], eax
 0x4FFD41: jnz     short loc_4FFD4D
 0x4FFD43: push    offset aSyntaxError__5; "Syntax Error.  Missing expression in se"...
 0x4FFD48: jmp     loc_4FF8B8
-0x4FFD4D: lea     ecx, [esp+1170h+var_1154]
+0x4FFD4D: lea     ecx, [esp+1170h+byteCount]
 0x4FFD51: push    ecx; int
 0x4FFD52: lea     edx, [esp+1174h+var_410]
 0x4FFD59: push    edx; Src
@@ -414,17 +414,17 @@
 0x4FFD6F: push    offset aInfixtopostfix; "InfixToPostfix Error."
 0x4FFD74: jmp     loc_4FF8B8
 0x4FFD79: mov     ecx, [esi+40Ch]
-0x4FFD7F: mov     dx, word ptr [esp+1170h+var_1154]
+0x4FFD7F: mov     dx, word ptr [esp+1170h+byteCount]
 0x4FFD84: mov     [esi+ecx+20Ch], dx
-0x4FFD8C: mov     edx, [esp+1170h+var_1154]
+0x4FFD8C: mov     edx, [esp+1170h+byteCount]
 0x4FFD90: add     dword ptr [esi+40Ch], 2
 0x4FFD97: mov     ecx, [esi+40Ch]
-0x4FFD9D: push    edx; Size
-0x4FFD9E: push    eax; Src
+0x4FFD9D: push    edx; byteCount
+0x4FFD9E: push    eax; source
 0x4FFD9F: lea     eax, [ecx+esi+20Ch]
-0x4FFDA6: push    eax; Dst
-0x4FFDA7: call    _memcpy
-0x4FFDAC: mov     ecx, [esp+117Ch+var_1154]
+0x4FFDA6: push    eax; destination
+0x4FFDA7: call    _memcpy;
+0x4FFDAC: mov     ecx, [esp+117Ch+byteCount]
 0x4FFDB0: add     esp, 0Ch
 0x4FFDB3: add     [esi+40Ch], ecx
 0x4FFDB9: mov     eax, [esi+410h]; jumptable 004FF7DF cases 25,28-30
@@ -446,14 +446,14 @@
 0x4FFE03: lea     ebp, [esi+4]; jumptable 004FF7DF cases 22,24
 0x4FFE06: push    ebx
 0x4FFE07: push    ebp
-0x4FFE08: mov     [esp+1178h+var_1154], ebx
+0x4FFE08: mov     [esp+1178h+byteCount], ebx
 0x4FFE0C: call    sub_4FCB90
 0x4FFE11: add     esp, 8
 0x4FFE14: test    al, al
 0x4FFE16: jnz     short loc_4FFE22
 0x4FFE18: push    offset aMismatchedPare; "Mismatched parentheses."
 0x4FFE1D: jmp     loc_4FF8B8
-0x4FFE22: lea     edx, [esp+1170h+var_1154]
+0x4FFE22: lea     edx, [esp+1170h+byteCount]
 0x4FFE26: push    edx
 0x4FFE27: push    ebp
 0x4FFE28: call    sub_4FCBD0
@@ -462,8 +462,8 @@
 0x4FFE39: push    ebx
 0x4FFE3A: push    eax
 0x4FFE3B: call    __memset
-0x4FFE40: mov     edx, [esp+1184h+var_1154]
-0x4FFE44: mov     ebp, [esp+1184h+var_1158]
+0x4FFE40: mov     edx, [esp+1184h+byteCount]
+0x4FFE44: mov     ebp, [esp+1184h+source]
 0x4FFE48: add     esp, 14h
 0x4FFE4B: lea     ecx, [esp+1170h+var_210]
 0x4FFE52: push    ecx
@@ -483,7 +483,7 @@
 0x4FFE7D: push    edx; Src
 0x4FFE7E: lea     ecx, [esp+1178h+var_F3C]
 0x4FFE85: call    sub_4F4080
-0x4FFE8A: mov     [esp+1170h+var_1158], eax
+0x4FFE8A: mov     [esp+1170h+source], eax
 0x4FFE8E: mov     eax, [esp+1170h+var_F3C]
 0x4FFE95: cmp     eax, ebx
 0x4FFE97: jz      short loc_4FFEA6
@@ -508,16 +508,16 @@
 0x4FFEEA: add     [esi+40Ch], ecx
 0x4FFEF0: mov     ecx, [esp+1170h+var_115C]
 0x4FFEF4: mov     eax, [esi+40Ch]
-0x4FFEFA: mov     edx, [esp+1170h+var_1158]
-0x4FFEFE: push    ecx; Size
-0x4FFEFF: push    edx; Src
+0x4FFEFA: mov     edx, [esp+1170h+source]
+0x4FFEFE: push    ecx; byteCount
+0x4FFEFF: push    edx; source
 0x4FFF00: lea     eax, [eax+esi+20Ch]
-0x4FFF07: push    eax; Dst
-0x4FFF08: call    _memcpy
+0x4FFF07: push    eax; destination
+0x4FFF08: call    _memcpy;
 0x4FFF0D: mov     ecx, [esp+117Ch+var_115C]
 0x4FFF11: add     esp, 0Ch
 0x4FFF14: jmp     loc_4FFDB3
-0x4FFF19: mov     ecx, [esp+1170h+var_1158]; jumptable 004FF7DF case 23
+0x4FFF19: mov     ecx, [esp+1170h+source]; jumptable 004FF7DF case 23
 0x4FFF1D: push    esi
 0x4FFF1E: push    edi
 0x4FFF1F: call    sub_4FD430
@@ -566,7 +566,7 @@
 0x4FFFC2: push    ebx; int
 0x4FFFC3: push    offset ??_R0?AVTESObjectREFR@@@8; struct TypeDescriptor *
 0x4FFFC8: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
-0x4FFFCD: mov     [esp+117Ch+var_1158], eax
+0x4FFFCD: mov     [esp+117Ch+source], eax
 0x4FFFD1: mov     eax, [eax+8]
 0x4FFFD4: push    ebx; int
 0x4FFFD5: push    eax; void *
@@ -574,7 +574,7 @@
 0x4FFFDB: add     esp, 14h
 0x4FFFDE: cmp     eax, ebx
 0x4FFFE0: jnz     short loc_500001
-0x4FFFE2: mov     eax, [esp+1170h+var_1158]
+0x4FFFE2: mov     eax, [esp+1170h+source]
 0x4FFFE6: cmp     [eax+0Ch], ebx
 0x4FFFE9: jnz     short loc_500001
 0x4FFFEB: mov     eax, [eax]
@@ -623,19 +623,19 @@
 0x500083: add     [edi+24h], ecx
 0x500086: mov     ecx, [esi+40Ch]
 0x50008C: mov     eax, [edi+24h]
-0x50008F: push    ecx; Size
+0x50008F: push    ecx; byteCount
 0x500090: mov     ecx, [edi+20h]
 0x500093: lea     edx, [esi+20Ch]
-0x500099: push    edx; Src
+0x500099: push    edx; source
 0x50009A: add     ecx, eax
-0x50009C: push    ecx; Dst
-0x50009D: call    _memcpy
+0x50009C: push    ecx; destination
+0x50009D: call    _memcpy;
 0x5000A2: mov     edx, [esi+40Ch]
 0x5000A8: add     esp, 0Ch
 0x5000AB: add     [edi+24h], edx
-0x5000AE: lea     ecx, [esp+1170h+var_F3C]; void *
+0x5000AE: lea     ecx, [esp+1170h+var_F3C]; this
 0x5000B5: mov     [esp+1170h+var_4], 0FFFFFFFFh
-0x5000C0: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x5000C0: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x5000C5: mov     al, 1
 0x5000C7: mov     ecx, [esp+1170h+var_C]
 0x5000CE: mov     large fs:0, ecx
@@ -649,3 +649,21 @@
 0x5000E3: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x5000E8: add     esp, 115Ch
 0x5000EE: retn    0Ch
+0x9B6D10: lea     ecx, [ebp-0F3Ch]; this
+0x9B6D16: jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x9B6D1B: mov     eax, [ebp-1158h]
+0x9B6D21: push    eax
+0x9B6D22: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B6D27: pop     ecx
+0x9B6D28: retn
+0x9B6D29: mov     edx, [esp+arg_4]
+0x9B6D2D: lea     eax, [edx-1160h]
+0x9B6D33: mov     ecx, [edx-1164h]
+0x9B6D39: xor     ecx, eax
+0x9B6D3B: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B6D40: add     eax, 10h
+0x9B6D43: mov     ecx, [edx-4]
+0x9B6D46: xor     ecx, eax
+0x9B6D48: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B6D4D: mov     eax, offset stru_AE1A60
+0x9B6D52: jmp     ___CxxFrameHandler3

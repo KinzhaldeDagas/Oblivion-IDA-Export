@@ -1,19 +1,36 @@
 {
-  "callees_count": 23,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 18,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_52DED0",
+  "chunks": [
+    [
+      "0x52DED0",
+      "0x52E0C8"
+    ],
+    [
+      "0x9B88A0",
+      "0x9B88F6"
+    ]
+  ],
+  "chunks_sha256": "fb42a42772826742de477d8fe95a47feb3f1567d18058a411fb912be96159f87",
+  "comment_regular": "Create the paired BSFaceGenNiNodeBiped and BSFaceGenNiNodeSkinned nodes with shared animation data, build a FaceGenRenderState, populate head geometry, and optionally apply the resulting appearance to both nodes.",
+  "comment_repeatable": "Create the paired BSFaceGenNiNodeBiped and BSFaceGenNiNodeSkinned nodes with shared animation data, build a FaceGenRenderState, populate head geometry, and optionally apply the resulting appearance to both nodes.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "TESRace_CreateFaceGenNodes",
   "end_ea": "0x52E0C8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_52DED0",
+  "name": "TESRace_CreateFaceGenNodes",
   "segment": ".text",
   "sha256": "d4a69ee69a00195f070e853f3c358ed2ca0614215ee7861316accc6dd5db73b9",
   "size": 504,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x52DED0",
-  "type": "char __thiscall(int *this, int *, int *, int, char, int)",
-  "xrefs_from_count": 167,
+  "total_chunk_size": 590,
+  "type": "bool __thiscall(TESRace *this, NiObjectNET **outBipedNode, NiObjectNET **outSkinnedNode, TESNPC *npc, bool applyAppearance, bool preferBipedGeometry)",
+  "xrefs_from_count": 193,
   "xrefs_to_count": 2
 }

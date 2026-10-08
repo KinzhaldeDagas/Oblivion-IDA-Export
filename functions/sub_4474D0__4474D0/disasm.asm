@@ -15,11 +15,11 @@
 0x4474F4: jz      short loc_447510
 0x4474F6: mov     eax, [edi]
 0x4474F8: mov     edx, [eax+0D4h]
-0x4474FE: push    ebx; Str2
+0x4474FE: push    ebx; right
 0x4474FF: mov     ecx, edi
 0x447501: call    edx
-0x447503: push    eax; Str1
-0x447504: call    __strcmp
+0x447503: push    eax; left
+0x447504: call    CRT_StricmpLocaleDispatch
 0x447509: add     esp, 8
 0x44750C: test    eax, eax
 0x44750E: jz      short loc_44751F

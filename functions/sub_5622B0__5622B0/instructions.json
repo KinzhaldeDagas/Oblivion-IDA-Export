@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5622B0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified leaf layout: +0x18 leafGeometryDataByLOD and +0x28 leafShaderPropertiesByLOD are allocated by leaf LOD count and populated. +0x30 leafCachedPropertiesByLOD is also allocated/zeroed, but no per-slot write occurs in this stock builder; CreateArt only attaches an entry if present. Its field role is Candidate and population source is Unknown.",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,13 +97,13 @@
   },
   {
     "ea": "0x5622E3",
-    "line": "lea     ecx, [esp+1F8h+Src]",
+    "line": "lea     ecx, [esp+1F8h+Src]; this",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x5622EA",
-    "line": "call    sub_7879A0",
+    "line": "call    OB_SpeedTreeGeometryOutput_init_010201A0; 2026-05-26 SpeedTreeOBSE: identified temporary SGeometry/output initializer used by the optional 360 diagnostic candidate export probe before stock GetGeometry(0x08). Must not be treated as live render-resource allocation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x5622F1",
-    "line": "lea     ecx, [esp+1F8h+var_154]",
+    "line": "lea     ecx, [esp+1F8h+texturesOut]; this",
     "mnemonic": "lea",
     "size": 7
   },
@@ -127,19 +127,19 @@
   },
   {
     "ea": "0x5622FF",
-    "line": "call    sub_786FA0",
+    "line": "call    CSpeedTreeRT__STextures_ctor; SpeedTreeOBSE 2026-05-30 frond restoration: initializes the 7-dword compact texture summary before optional generated-frond texture recovery calls 0x78A890.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x562304",
-    "line": "mov     [esp+1F8h+var_1C4], ebx",
+    "line": "mov     [esp+1F8h+stspData], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x562308",
-    "line": "mov     ecx, [esi+0Ch]",
+    "line": "mov     ecx, [esi+0Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x562315",
-    "line": "mov     [esp+1F8h+var_1D9], bl",
+    "line": "mov     [esp+1F8h+var_1D9], bl; Initialize multi-leaf-texture-name flag false.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x56231F",
-    "line": "call    sub_78A740",
+    "line": "call    CSpeedTreeRT__GetLeafLodSizeAdjustments; CSpeedTreeRT::GetLeafLodSizeAdjustments. Lazily allocates one float per leaf LOD and fills entry i as 1.0 + leafSizeIncreaseFactor*i. This older Bethesda API is absent from the supplied 4.1 header but is named in Oblivion diagnostics and Fallout symbols.",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x562343",
-    "line": "push    offset sub_7016A0; void (__thiscall *)(void *)",
+    "line": "push    offset NiPointerSlot_Release; void (__thiscall *)(void *)",
     "mnemonic": "push",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x562352",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x56236A",
-    "line": "push    offset sub_7016A0; void (__thiscall *)(void *)",
+    "line": "push    offset NiPointerSlot_Release; void (__thiscall *)(void *)",
     "mnemonic": "push",
     "size": 5
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x562379",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x562384",
-    "line": "mov     ecx, [esi+0Ch]",
+    "line": "mov     ecx, [esi+0Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x56238B",
-    "line": "call    sub_787200",
+    "line": "call    CSpeedTreeRT__GetNumLeafLodLevels; CSpeedTreeRT::GetNumLeafLodLevels. Returns the 16-bit leaf LOD count at CTreeEngine+0xC0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x56239C",
-    "line": "lea     ecx, [esp+1F8h+var_1C4]; this",
+    "line": "lea     ecx, [esp+1F8h+stspData]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x5623A8",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,31 +439,31 @@
   },
   {
     "ea": "0x5623B2",
-    "line": "mov     ecx, [esi+0Ch]",
+    "line": "mov     ecx, [esi+0Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x5623B5",
-    "line": "lea     eax, [esp+1F8h+var_154]",
+    "line": "lea     eax, [esp+1F8h+texturesOut]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x5623BC",
-    "line": "push    eax",
+    "line": "push    eax; texturesOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5623BD",
-    "line": "call    sub_78A890",
+    "line": "call    CSpeedTreeRT__GetTextures; SpeedTreeOBSE 2026-05-31 leaf/frond level pass: compact texture summary exporter returns frond count at summary[3] and frond filename pointer array at summary[4]; reference layer caches these paths by array index/selector before sidecar map-bank candidates.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5623C2",
-    "line": "mov     eax, [esp+1F8h+var_150]",
+    "line": "mov     eax, [esp+1F8h+texturesOut.leafTextureCount]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x5623CE",
-    "line": "mov     ecx, [esp+1F8h+var_14C]",
+    "line": "mov     ecx, [esp+1F8h+texturesOut.leafTextureFilenames]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x5623E5",
-    "line": "cmp     bp, word ptr [esp+1F8h+var_150]",
+    "line": "cmp     bp, word ptr [esp+1F8h+texturesOut.leafTextureCount]",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x5623F5",
-    "line": "mov     eax, [esp+1F8h+var_14C]",
+    "line": "mov     eax, [esp+1F8h+texturesOut.leafTextureFilenames]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x562400",
-    "line": "mov     ecx, [esp+1F8h+var_150]",
+    "line": "mov     ecx, [esp+1F8h+texturesOut.leafTextureCount]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x562441",
-    "line": "mov     [esp+1F8h+var_1D9], 1",
+    "line": "mov     [esp+1F8h+var_1D9], 1; Set multi-name flag when any two reported leaf texture filenames differ; this selects the alternate UV V-order below.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -871,7 +871,7 @@
   },
   {
     "ea": "0x56249B",
-    "line": "push    offset sub_7016A0; a5",
+    "line": "push    offset NiPointerSlot_Release; a5",
     "mnemonic": "push",
     "size": 5
   },
@@ -1057,7 +1057,7 @@
   },
   {
     "ea": "0x5624F9",
-    "line": "push    offset sub_7016A0; a5",
+    "line": "push    offset NiPointerSlot_Release; a5",
     "mnemonic": "push",
     "size": 5
   },
@@ -1243,7 +1243,7 @@
   },
   {
     "ea": "0x562557",
-    "line": "push    offset sub_7016A0; a5",
+    "line": "push    offset NiPointerSlot_Release; a5",
     "mnemonic": "push",
     "size": 5
   },
@@ -1729,13 +1729,13 @@
   },
   {
     "ea": "0x562648",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x56264A",
-    "line": "call    sub_7F1810",
+    "line": "call    OB_STLSPData_ctor_010201A0; STLSPData ctor: allocates 0x300-byte shared leaf shader data buffer at +0x08 and clears scalar fields +0x0C..+0x14.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1981,7 +1981,7 @@
   },
   {
     "ea": "0x5626BA",
-    "line": "mov     edi, [esp+1F8h+arg_0]",
+    "line": "mov     edi, [esp+1F8h+mode]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2167,7 +2167,7 @@
   },
   {
     "ea": "0x562722",
-    "line": "mov     [esp+1F8h+var_1A8], ebx",
+    "line": "mov     dword ptr [esp+1F8h+leafLodIndex], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2233,7 +2233,7 @@
   },
   {
     "ea": "0x562744",
-    "line": "call    sub_78C6F0",
+    "line": "call    CSpeedTreeRT__GetGeometry; Builder loops each explicit leaf LOD index 0..GetNumLeafLodLevels()-1 and fetches that LOD's own persistent record. Both/all LODs use the same v3 packing recipe but retain per-LOD packedColor arrays.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3139,7 +3139,7 @@
   },
   {
     "ea": "0x562949",
-    "line": "fstp    [esp+1F8h+var_1A0]",
+    "line": "fstp    [esp+1F8h+var_1A0]; OBLIVION AUTHORITY (2026-08-24): Reads byte +1 of packedColors[leaf] (green channel of the per-leaf packed DWORD at SLodGeometry+0x24), then divides by 255.0. This byte is not the CBillboardLeaf colorScaleByte itself; generated leaves may already have colorScale applied when their packed color was produced.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -3169,7 +3169,7 @@
   },
   {
     "ea": "0x562958",
-    "line": "jp      short loc_562964",
+    "line": "jp      short loc_562964; If green/255 reaches 1.0 (green=255), replace with 0.99f so the fractional field does not carry into the integer LeafBase selector. Green=0 remains exactly 0.",
     "mnemonic": "jp",
     "size": 2
   },
@@ -3223,7 +3223,7 @@
   },
   {
     "ea": "0x56297B",
-    "line": "mov     [esp+1F8h+var_1B8], eax",
+    "line": "mov     [esp+1F8h+var_1B8], eax; Leaf-card builder consumes the already prepared direct/mirrored texcoord pointer. It reorders pairs for the multi-filename case but applies no further sign, half-texel, scale, or bias transform.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3271,7 +3271,7 @@
   },
   {
     "ea": "0x5629A2",
-    "line": "jz      short loc_5629DE",
+    "line": "jz      short loc_5629DE; If any leaf texture filenames differ, copy four output pairs as (src0,src7),(src2,src5),(src4,src3),(src6,src1), reversing the conventional quad V order without numeric offsets.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -3367,7 +3367,7 @@
   },
   {
     "ea": "0x5629E4",
-    "line": "fstp    [esp+1F8h+var_1D4]",
+    "line": "fstp    [esp+1F8h+var_1D4]; If all leaf texture filenames are equal, copy authored pairs verbatim: (src0,src1),(src2,src3),(src4,src5),(src6,src7).",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -3427,7 +3427,7 @@
   },
   {
     "ea": "0x562A11",
-    "line": "mov     [eax], ecx",
+    "line": "mov     [eax], ecx; Store selected authored U/V floats directly. No scale, bias, atlas half-texel inset, or runtime LOD adjustment is applied.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -3529,7 +3529,7 @@
   },
   {
     "ea": "0x562A50",
-    "line": "fstp    [esp+1F8h+var_180]",
+    "line": "fstp    [esp+1F8h+var_180]; OBLIVION AUTHORITY (2026-08-24): Packs STSP v3.z = cornerIndex + 4*unsigned leafCardIndex + greenFraction. Integer component drives LeafBase relative-addressing; VS1.1 EXPP.y recovers the fractional dimming term. Zero fraction removes ambient+directional RGB; point-program contribution is added separately.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -3565,7 +3565,7 @@
   },
   {
     "ea": "0x562A6A",
-    "line": "mov     ecx, [eax+0Ch]",
+    "line": "mov     ecx, [eax+0Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -3601,7 +3601,7 @@
   },
   {
     "ea": "0x562A7D",
-    "line": "call    sub_78A740",
+    "line": "call    CSpeedTreeRT__GetLeafLodSizeAdjustments; CSpeedTreeRT::GetLeafLodSizeAdjustments. Lazily allocates one float per leaf LOD and fills entry i as 1.0 + leafSizeIncreaseFactor*i. This older Bethesda API is absent from the supplied 4.1 header but is named in Oblivion diagnostics and Fallout symbols.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3739,7 +3739,7 @@
   },
   {
     "ea": "0x562AF5",
-    "line": "mov     [edi-8], ecx",
+    "line": "mov     [edi-8], ecx; Store packed selector+dimmer into the third float of the 16-byte STSP vertex record, consumed as BLENDINDICES v3.z by every leaf VS variant.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -3811,7 +3811,7 @@
   },
   {
     "ea": "0x562B28",
-    "line": "mov     [edx+eax*2], di",
+    "line": "mov     [edx+eax*2], di; First leaf-card triangle indices: (base+3, base+1, base+2).",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3859,7 +3859,7 @@
   },
   {
     "ea": "0x562B47",
-    "line": "mov     [edx+eax*2+6], cx",
+    "line": "mov     [edx+eax*2+6], cx; Second leaf-card triangle indices: (base+0, base+1, base+3).",
     "mnemonic": "mov",
     "size": 5
   },
@@ -4051,7 +4051,7 @@
   },
   {
     "ea": "0x562BAE",
-    "line": "call    sub_71FB40",
+    "line": "call    NiTriShapeData_ConstructWithData; Build NiTriShapeData with 4 vertices/card, the directly copied UV array, and 6 indices/card. Geometry was captured from this explicit leaf LOD.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4297,13 +4297,13 @@
   },
   {
     "ea": "0x562C30",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x562C32",
-    "line": "call    sub_7F2360",
+    "line": "call    OB_STSPData_ctor_010201A0; STSPData ctor: NiRefObject with data pointer +0x08 null and 16-bit count/ownership gate +0x0C zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4327,7 +4327,7 @@
   },
   {
     "ea": "0x562C3D",
-    "line": "mov     ebx, [esp+1F8h+var_1C4]",
+    "line": "mov     ebx, [esp+1F8h+stspData]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4435,7 +4435,7 @@
   },
   {
     "ea": "0x562C6D",
-    "line": "mov     [esp+1F8h+var_1C4], ebx",
+    "line": "mov     [esp+1F8h+stspData], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4483,7 +4483,7 @@
   },
   {
     "ea": "0x562C8B",
-    "line": "mov     [ebx+8], ecx",
+    "line": "mov     [ebx+8], ecx; Attach the freshly built 16-byte-per-vertex STSP float4 array to this leaf LOD property. Texture replacement does not rewrite this stream.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -4537,25 +4537,25 @@
   },
   {
     "ea": "0x562CAD",
-    "line": "push    ecx",
+    "line": "push    ecx; stlspData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x562CAE",
-    "line": "mov     ecx, [esp+1FCh+var_1A8]",
+    "line": "mov     ecx, dword ptr [esp+1FCh+leafLodIndex]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x562CB2",
-    "line": "push    ebx",
+    "line": "push    ebx; stspData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x562CB3",
-    "line": "push    ecx",
+    "line": "push    ecx; leafLodIndex",
     "mnemonic": "push",
     "size": 1
   },
@@ -4567,7 +4567,7 @@
   },
   {
     "ea": "0x562CB6",
-    "line": "call    ??0SpeedTreeLeafShaderProperty@@QAE@XZ; SpeedTreeLeafShaderProperty::SpeedTreeLeafShaderProperty(void)",
+    "line": "call    ??0SpeedTreeLeafShaderProperty@@QAE@XZ; SpeedTreeLeafShaderProperty ctor: LightingProperty base with STSPData, then stores STLSPData ref at +0xA8 and leaf LOD index word at +0xAC.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4765,7 +4765,7 @@
   },
   {
     "ea": "0x562D1A",
-    "line": "mov     eax, [esi+38h]",
+    "line": "mov     eax, [esi+38h]; SpeedTreeOBSE 2026-07-14: stock leaf-property construction propagates the model leaf texture at model+0x38 through the property setter; renderer later consumes property+0x9C.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -4789,7 +4789,7 @@
   },
   {
     "ea": "0x562D23",
-    "line": "call    eax",
+    "line": "call    eax; Assign the same BSTreeModel leaf texture (+0x38) to every leaf-LOD shader property.",
     "mnemonic": "call",
     "size": 2
   },
@@ -4915,7 +4915,7 @@
   },
   {
     "ea": "0x562D5E",
-    "line": "mov     ebx, [esp+1F8h+var_1A8]",
+    "line": "mov     ebx, dword ptr [esp+1F8h+leafLodIndex]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4975,7 +4975,7 @@
   },
   {
     "ea": "0x562D84",
-    "line": "add     ebx, 1",
+    "line": "add     ebx, 1; OBLIVION AUTHORITY (2026-08-24): End of explicit leaf-LOD loop. Loop bound is CSpeedTreeRT::GetNumLeafLodLevels; therefore each persistent SLodGeometry LOD gets its own packedColors-derived STSP stream.",
     "mnemonic": "add",
     "size": 3
   },
@@ -4993,7 +4993,7 @@
   },
   {
     "ea": "0x562D8F",
-    "line": "mov     [esp+1F8h+var_1A8], ebx",
+    "line": "mov     dword ptr [esp+1F8h+leafLodIndex], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5011,19 +5011,19 @@
   },
   {
     "ea": "0x562D9D",
-    "line": "mov     ecx, [esi+0Ch]",
+    "line": "mov     ecx, [esi+0Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x562DA0",
-    "line": "call    sub_787210",
+    "line": "call    CSpeedTreeRT__FreeLeafLODDataArrays; CSpeedTreeRT::FreeLeafLODDataArrays. If leaf geometry exists, delegates to CLeafGeometry::FreeLODDataArrays.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x562DA5",
-    "line": "mov     esi, [esp+1F8h+var_1C4]",
+    "line": "mov     esi, [esp+1F8h+stspData]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5107,7 +5107,7 @@
   },
   {
     "ea": "0x562DCD",
-    "line": "lea     ecx, [esp+1F8h+var_154]",
+    "line": "lea     ecx, [esp+1F8h+texturesOut]; this",
     "mnemonic": "lea",
     "size": 7
   },
@@ -5119,13 +5119,13 @@
   },
   {
     "ea": "0x562DDC",
-    "line": "call    sub_786FC0",
+    "line": "call    CSpeedTreeRT__STextures_dtor; SpeedTreeOBSE 2026-05-30 frond restoration: frees only the temporary leaf/frond filename arrays allocated by compact GetTextures; optional texture recovery calls this after copying candidates.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x562DE1",
-    "line": "lea     ecx, [esp+1F8h+Src]",
+    "line": "lea     ecx, [esp+1F8h+Src]; this",
     "mnemonic": "lea",
     "size": 7
   },
@@ -5137,7 +5137,7 @@
   },
   {
     "ea": "0x562DF3",
-    "line": "call    sub_787B20",
+    "line": "call    OB_SpeedTreeGeometryOutput_Dtor_010201A0; Oblivion aggregate SpeedTree geometry-output destructor/reset: clears all externally owned branch, frond, leaf, and billboard view pointers without freeing them. Called on stack SGeometry output after Bethesda geometry builders finish.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5194,5 +5194,293 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9BD200",
+    "line": "lea     ecx, [ebp-138h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BD206",
+    "line": "jmp     OB_SpeedTreeGeometryOutput_Dtor_010201A0; Oblivion aggregate SpeedTree geometry-output destructor/reset: clears all externally owned branch, frond, leaf, and billboard view pointers without freeing them. Called on stack SGeometry output after Bethesda geometry builders finish.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD20B",
+    "line": "lea     ecx, [ebp-154h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BD211",
+    "line": "jmp     CSpeedTreeRT__STextures_dtor; SpeedTreeOBSE 2026-05-30 frond restoration: frees only the temporary leaf/frond filename arrays allocated by compact GetTextures; optional texture recovery calls this after copying candidates.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD216",
+    "line": "lea     ecx, [ebp-1C4h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BD21C",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD221",
+    "line": "mov     eax, [ebp-1CCh]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9BD227",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD228",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD22D",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD22E",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD22F",
+    "line": "mov     eax, [ebp-1CCh]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9BD235",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD236",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD23B",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD23C",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD23D",
+    "line": "mov     eax, [ebp-1CCh]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9BD243",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD244",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD249",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD24A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD24B",
+    "line": "mov     eax, [ebp-1CCh]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9BD251",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD252",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD257",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD258",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD259",
+    "line": "mov     eax, [ebp-1CCh]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9BD25F",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD260",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD265",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD266",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD267",
+    "line": "mov     eax, [ebp-1CCh]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9BD26D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD26E",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD273",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD274",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD275",
+    "line": "mov     eax, [ebp-1CCh]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9BD27B",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD27C",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD281",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD282",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD283",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BD287",
+    "line": "lea     eax, [edx-1E8h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BD28D",
+    "line": "mov     ecx, [edx-1ECh]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9BD293",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BD295",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD29A",
+    "line": "mov     eax, offset stru_AE6C4C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD29F",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,1 +1,1 @@
-IrotHandle
+typedef handle_t IrotHandle;

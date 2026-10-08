@@ -1,1 +1,1 @@
-ICatInformation_0
+typedef ICatInformation ICatInformation_0;

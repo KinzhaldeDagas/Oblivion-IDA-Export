@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x680B40",
+      "0x680BAD"
+    ]
+  ],
+  "chunks_sha256": "3a3068744e52c0b425e788f92f4b90b3c50b53fab3f6b18ab3794e050f2fc2d6",
+  "comment_regular": "Verified: Returns/removes the head (minimum-fitness) AStarWorldNodeList item only when its fitness is below the caller's current bound; empty or fitness >= bound returns null. Fallout's homologous TeleportDoorSearch queue instead scans the first non-empty of 20 fitness buckets.",
+  "comment_repeatable": "Verified: Returns/removes the head (minimum-fitness) AStarWorldNodeList item only when its fitness is below the caller's current bound; empty or fitness >= bound returns null. Fallout's homologous TeleportDoorSearch queue instead scans the first non-empty of 20 fitness buckets.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_680B40",
+  "display_name": "AStarWorldNodeList_PopMinUnderBound",
   "end_ea": "0x680BAD",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_680B40",
+  "name": "AStarWorldNodeList_PopMinUnderBound",
   "segment": ".text",
   "sha256": "3a3068744e52c0b425e788f92f4b90b3c50b53fab3f6b18ab3794e050f2fc2d6",
   "size": 109,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x680B40",
-  "type": "float *__thiscall(int **this, float)",
+  "total_chunk_size": 109,
+  "type": "TravelPathSpaceDoorLink *__thiscall(AStarWorldNodeList *this, float fitnessBound)",
   "xrefs_from_count": 43,
   "xrefs_to_count": 2
 }

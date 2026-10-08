@@ -32,7 +32,7 @@
 0x50D936: push    edx; a3
 0x50D937: push    ecx; a2
 0x50D938: push    eax; a1
-0x50D939: call    Script_ExtractArgs
+0x50D939: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x50D93E: add     esp, 24h
 0x50D941: test    al, al
 0x50D943: jnz     short loc_50D95A
@@ -47,8 +47,8 @@
 0x50D959: retn
 0x50D95A: lea     eax, [esp+240h+Str1]
 0x50D95E: push    offset aVelocity; "velocity"
-0x50D963: push    eax; Str1
-0x50D964: call    __strcmp
+0x50D963: push    eax; left
+0x50D964: call    CRT_StricmpLocaleDispatch
 0x50D969: add     esp, 8
 0x50D96C: test    eax, eax
 0x50D96E: mov     bl, 1
@@ -94,8 +94,8 @@
 0x50D9FC: retn
 0x50D9FD: lea     ecx, [esp+240h+Str1]
 0x50DA01: push    offset aDirection; "direction"
-0x50DA06: push    ecx; Str1
-0x50DA07: call    __strcmp
+0x50DA06: push    ecx; left
+0x50DA07: call    CRT_StricmpLocaleDispatch
 0x50DA0C: add     esp, 8
 0x50DA0F: test    eax, eax
 0x50DA11: jnz     loc_50DAA1
@@ -123,7 +123,7 @@
 0x50DA62: fstp    dword ptr ds:0B45FC0h
 0x50DA68: call    sub_7E1710
 0x50DA6D: fld     [esp+240h+var_214]
-0x50DA71: call    Double_To_SInt32
+0x50DA71: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x50DA76: push    eax
 0x50DA77: push    offset aSetWaterDirect; "set water direction to %d"
 0x50DA7C: call    Interface_ConsolePrint
@@ -141,8 +141,8 @@
 0x50DAA0: retn
 0x50DAA1: lea     edx, [esp+240h+Str1]
 0x50DAA5: push    offset aAmplitude; "amplitude"
-0x50DAAA: push    edx; Str1
-0x50DAAB: call    __strcmp
+0x50DAAA: push    edx; left
+0x50DAAB: call    CRT_StricmpLocaleDispatch
 0x50DAB0: add     esp, 8
 0x50DAB3: test    eax, eax
 0x50DAB5: jnz     loc_50DB43
@@ -187,8 +187,8 @@
 0x50DB42: retn
 0x50DB43: lea     eax, [esp+240h+Str1]
 0x50DB47: push    offset aFrequency; "frequency"
-0x50DB4C: push    eax; Str1
-0x50DB4D: call    __strcmp
+0x50DB4C: push    eax; left
+0x50DB4D: call    CRT_StricmpLocaleDispatch
 0x50DB52: add     esp, 8
 0x50DB55: test    eax, eax
 0x50DB57: jnz     loc_50DBE7
@@ -234,8 +234,8 @@
 0x50DBE6: retn
 0x50DBE7: lea     ecx, [esp+240h+Str1]
 0x50DBEB: push    offset aReflectivity; "reflectivity"
-0x50DBF0: push    ecx; Str1
-0x50DBF1: call    __strcmp
+0x50DBF0: push    ecx; left
+0x50DBF1: call    CRT_StricmpLocaleDispatch
 0x50DBF6: add     esp, 8
 0x50DBF9: test    eax, eax
 0x50DBFB: jnz     short loc_50DC57
@@ -270,8 +270,8 @@
 0x50DC56: retn
 0x50DC57: lea     edx, [esp+240h+Str1]
 0x50DC5B: push    offset aFresnel; "fresnel"
-0x50DC60: push    edx; Str1
-0x50DC61: call    __strcmp
+0x50DC60: push    edx; left
+0x50DC61: call    CRT_StricmpLocaleDispatch
 0x50DC66: add     esp, 8
 0x50DC69: test    eax, eax
 0x50DC6B: jnz     short loc_50DCC7
@@ -306,8 +306,8 @@
 0x50DCC6: retn
 0x50DCC7: lea     eax, [esp+240h+Str1]
 0x50DCCB: push    offset aOpacity; "opacity"
-0x50DCD0: push    eax; Str1
-0x50DCD1: call    __strcmp
+0x50DCD0: push    eax; left
+0x50DCD1: call    CRT_StricmpLocaleDispatch
 0x50DCD6: add     esp, 8
 0x50DCD9: test    eax, eax
 0x50DCDB: jnz     short loc_50DD3D
@@ -325,7 +325,7 @@
 0x50DCFF: jnz     loc_50E235
 0x50DD05: fdivr   st, st(1)
 0x50DD07: fstp    dword ptr ds:0B45E4Ch
-0x50DD0D: call    Double_To_SInt32
+0x50DD0D: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x50DD12: push    eax
 0x50DD13: push    offset aSetWaterOpacit; "set water opacity to %d"
 0x50DD18: call    Interface_ConsolePrint
@@ -343,8 +343,8 @@
 0x50DD3C: retn
 0x50DD3D: lea     ecx, [esp+240h+Str1]
 0x50DD41: push    offset aBlend; "blend"
-0x50DD46: push    ecx; Str1
-0x50DD47: call    __strcmp
+0x50DD46: push    ecx; left
+0x50DD47: call    CRT_StricmpLocaleDispatch
 0x50DD4C: add     esp, 8
 0x50DD4F: test    eax, eax
 0x50DD51: jnz     short loc_50DDAF
@@ -364,7 +364,7 @@
 0x50DD75: fstp    dword ptr ds:0B45E50h
 0x50DD7B: jmp     short loc_50DD7F
 0x50DD7D: fstp    st
-0x50DD7F: call    Double_To_SInt32
+0x50DD7F: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x50DD84: push    eax
 0x50DD85: push    offset aSetDetailTextu; "set detail texture blend to %d"
 0x50DD8A: call    Interface_ConsolePrint
@@ -382,8 +382,8 @@
 0x50DDAE: retn
 0x50DDAF: lea     edx, [esp+240h+Str1]
 0x50DDB3: push    offset aScrollx; "scrollx"
-0x50DDB8: push    edx; Str1
-0x50DDB9: call    __strcmp
+0x50DDB8: push    edx; left
+0x50DDB9: call    CRT_StricmpLocaleDispatch
 0x50DDBE: add     esp, 8
 0x50DDC1: test    eax, eax
 0x50DDC3: jnz     short loc_50DE1F
@@ -418,8 +418,8 @@
 0x50DE1E: retn
 0x50DE1F: lea     eax, [esp+240h+Str1]
 0x50DE23: push    offset aScrolly; "scrolly"
-0x50DE28: push    eax; Str1
-0x50DE29: call    __strcmp
+0x50DE28: push    eax; left
+0x50DE29: call    CRT_StricmpLocaleDispatch
 0x50DE2E: add     esp, 8
 0x50DE31: test    eax, eax
 0x50DE33: jnz     short loc_50DE8F
@@ -454,8 +454,8 @@
 0x50DE8E: retn
 0x50DE8F: lea     ecx, [esp+240h+Str1]
 0x50DE93: push    offset aHelp; "help"
-0x50DE98: push    ecx; Str1
-0x50DE99: call    __strcmp
+0x50DE98: push    ecx; left
+0x50DE99: call    CRT_StricmpLocaleDispatch
 0x50DE9E: add     esp, 8
 0x50DEA1: test    eax, eax
 0x50DEA3: jnz     short loc_50DF23
@@ -491,9 +491,9 @@
 0x50DF21: pop     ebp
 0x50DF22: retn
 0x50DF23: lea     edx, [esp+240h+Str1]
-0x50DF27: push    offset aOff_0; Str2
-0x50DF2C: push    edx; Str1
-0x50DF2D: call    __strcmp
+0x50DF27: push    offset aOff_0; right
+0x50DF2C: push    edx; left
+0x50DF2D: call    CRT_StricmpLocaleDispatch
 0x50DF32: add     esp, 8
 0x50DF35: test    eax, eax
 0x50DF37: jnz     short loc_50DF55
@@ -510,8 +510,8 @@
 0x50DF54: retn
 0x50DF55: lea     eax, [esp+240h+Str1]
 0x50DF59: push    offset aDisplaceforce; "displaceforce"
-0x50DF5E: push    eax; Str1
-0x50DF5F: call    __strcmp
+0x50DF5E: push    eax; left
+0x50DF5F: call    CRT_StricmpLocaleDispatch
 0x50DF64: add     esp, 8
 0x50DF67: test    eax, eax
 0x50DF69: jnz     short loc_50DFB2
@@ -541,8 +541,8 @@
 0x50DFB1: retn
 0x50DFB2: lea     ecx, [esp+240h+Str1]
 0x50DFB6: push    offset aDisplaceveloci; "displacevelocity"
-0x50DFBB: push    ecx; Str1
-0x50DFBC: call    __strcmp
+0x50DFBB: push    ecx; left
+0x50DFBC: call    CRT_StricmpLocaleDispatch
 0x50DFC1: add     esp, 8
 0x50DFC4: test    eax, eax
 0x50DFC6: jnz     short loc_50E00F
@@ -572,8 +572,8 @@
 0x50E00E: retn
 0x50E00F: lea     edx, [esp+240h+Str1]
 0x50E013: push    offset aDisplacefallof; "displacefalloff"
-0x50E018: push    edx; Str1
-0x50E019: call    __strcmp
+0x50E018: push    edx; left
+0x50E019: call    CRT_StricmpLocaleDispatch
 0x50E01E: add     esp, 8
 0x50E021: test    eax, eax
 0x50E023: jnz     short loc_50E06C
@@ -603,8 +603,8 @@
 0x50E06B: retn
 0x50E06C: lea     eax, [esp+240h+Str1]
 0x50E070: push    offset aDisplacedampen; "displacedampener"
-0x50E075: push    eax; Str1
-0x50E076: call    __strcmp
+0x50E075: push    eax; left
+0x50E076: call    CRT_StricmpLocaleDispatch
 0x50E07B: add     esp, 8
 0x50E07E: test    eax, eax
 0x50E080: jnz     short loc_50E0CD
@@ -634,8 +634,8 @@
 0x50E0CC: retn
 0x50E0CD: lea     ecx, [esp+240h+Str1]
 0x50E0D1: push    offset aRainforce; "rainforce"
-0x50E0D6: push    ecx; Str1
-0x50E0D7: call    __strcmp
+0x50E0D6: push    ecx; left
+0x50E0D7: call    CRT_StricmpLocaleDispatch
 0x50E0DC: add     esp, 8
 0x50E0DF: test    eax, eax
 0x50E0E1: jnz     short loc_50E12A
@@ -665,8 +665,8 @@
 0x50E129: retn
 0x50E12A: lea     edx, [esp+240h+Str1]
 0x50E12E: push    offset aRainvelocity; "rainvelocity"
-0x50E133: push    edx; Str1
-0x50E134: call    __strcmp
+0x50E133: push    edx; left
+0x50E134: call    CRT_StricmpLocaleDispatch
 0x50E139: add     esp, 8
 0x50E13C: test    eax, eax
 0x50E13E: jnz     short loc_50E187
@@ -696,8 +696,8 @@
 0x50E186: retn
 0x50E187: lea     eax, [esp+240h+Str1]
 0x50E18B: push    offset aRainfalloff; "rainfalloff"
-0x50E190: push    eax; Str1
-0x50E191: call    __strcmp
+0x50E190: push    eax; left
+0x50E191: call    CRT_StricmpLocaleDispatch
 0x50E196: add     esp, 8
 0x50E199: test    eax, eax
 0x50E19B: jnz     short loc_50E1E0
@@ -727,8 +727,8 @@
 0x50E1DF: retn
 0x50E1E0: lea     ecx, [esp+240h+Str1]
 0x50E1E4: push    offset aRainsize; "rainsize"
-0x50E1E9: push    ecx; Str1
-0x50E1EA: call    __strcmp
+0x50E1E9: push    ecx; left
+0x50E1EA: call    CRT_StricmpLocaleDispatch
 0x50E1EF: add     esp, 8
 0x50E1F2: test    eax, eax
 0x50E1F4: jnz     short loc_50E239

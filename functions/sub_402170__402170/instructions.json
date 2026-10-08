@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x402170",
-    "line": "push    edi",
+    "line": "push    edi; Clears the global small-pool registry (0x81 slots) and the high-byte address-to-pool lookup table.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x402178",
-    "line": "mov     edi, offset g_HeapPoolsBySize",
+    "line": "mov     edi, 0B33080h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x402184",
-    "line": "mov     edi, offset g_HeapPoolByAddress",
+    "line": "mov     edi, 0B32C80h",
     "mnemonic": "mov",
     "size": 5
   },

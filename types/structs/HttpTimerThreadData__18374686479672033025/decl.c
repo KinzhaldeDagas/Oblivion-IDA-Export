@@ -1,1 +1,1 @@
-HttpTimerThreadData
+typedef _HttpTimerThreadData HttpTimerThreadData;

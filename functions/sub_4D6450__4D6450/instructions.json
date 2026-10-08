@@ -79,13 +79,13 @@
   },
   {
     "ea": "0x4D647B",
-    "line": "push    0",
+    "line": "push    0; registerLights",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4D647D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x4D6483",
-    "line": "call    sub_4CB670",
+    "line": "call    TESObjectCELL_RegisterOrUnregisterAttachedLights; As a process-level-5/6 cell begins unload, unregister ordinary attached reference lights before removing the cell scene node.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x4D650C",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x4D6520",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x4D652B",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },

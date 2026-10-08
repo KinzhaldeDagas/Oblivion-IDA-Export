@@ -1,19 +1,19 @@
 char __thiscall sub_52F480(char *this, const char *a2)
 {
-  char **v3; // edi
+  unsigned __int8 **v3; // edi
   int v4; // eax
-  char v6[12]; // [esp+0h] [ebp-10h] BYREF
+  int v6[3]; // [esp+0h] [ebp-10h] BYREF
 
-  strlen(a2);
-  _alloca_();
-  strcpy(v6, a2);
-  v3 = (char **)(this + 0x34);
-  if ( v6 && *v3 )
-    v4 = _strcmp(*v3, v6);
+  strlen(a2); /*0x52f4a0*/
+  _alloca_(v6[0]); /*0x52f4ae*/
+  strcpy((char *)v6, a2); /*0x52f4b7*/
+  v3 = (unsigned __int8 **)(this + 0x34); /*0x52f4ce*/
+  if ( v6 && *v3 ) /*0x52f4d3*/
+    v4 = CRT_StricmpLocaleDispatch(*v3, (unsigned __int8 *)v6); /*0x52f4db*/
   else
-    v4 = 2 * (v6 == 0) - 1;
-  if ( !v4 )
-    return 0;
-  BSStringT_Set((BSStringT *)(this + 0x34), v6, 0);
-  return 1;
+    v4 = 2 * (v6 == 0) - 1; /*0x52f4ec*/
+  if ( !v4 ) /*0x52f4f2*/
+    return 0; /*0x52f4f4*/
+  BSStringT_Set((BSStringT *)(this + 0x34), (const char *)v6, 0); /*0x52f4fd*/
+  return 1; /*0x52f507*/
 }

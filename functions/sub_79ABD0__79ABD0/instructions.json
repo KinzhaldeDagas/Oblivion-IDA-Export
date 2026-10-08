@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x79ABD0",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Oblivion st_vector<SFrondVertex>::clear. Validates begin/end and erases the entire initialized range without releasing capacity.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -79,49 +79,49 @@
   },
   {
     "ea": "0x79ABF2",
-    "line": "push    ebx",
+    "line": "push    ebx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79ABF3",
-    "line": "push    esi",
+    "line": "push    esi; lastOwner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79ABF4",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79ABF5",
-    "line": "push    esi",
+    "line": "push    esi; firstOwner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79ABF6",
-    "line": "lea     eax, [esp+24h+var_8]",
+    "line": "lea     eax, [esp+24h+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x79ABFA",
-    "line": "push    eax",
+    "line": "push    eax; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79ABFB",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79ABFD",
-    "line": "call    sub_79AB70",
+    "line": "call    OB_stVector_SFrondVertex_EraseRange_010201A0; Checked erase-range helper for the trivial SFrondVertex vector. Validates both iterator owners, moves [last,end) forward over [first,last), updates end, and returns {owner,first}.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "wm_char_mapping_data",
+  "definition": "struct wm_char_mapping_data\n{\nBYTE lead_byte[6];\nMSG get_msg;\n}\n",
   "id": 18374686479672043023,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lead_byte",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 6
+      "size": 6,
+      "type": "BYTE[6]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_msg",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 40
+      "size": 40,
+      "type": "MSG"
     }
   ],
   "name": "wm_char_mapping_data",
+  "ordinal": 7369,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 48
 }

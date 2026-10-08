@@ -1,4 +1,4 @@
-void *sub_4A1610()
+char *sub_4A1610()
 {
-  return &unk_B3529C;
+  return &MEMORY[0xB33E90][0x140C]; /*0x4a1615*/
 }

@@ -4,52 +4,51 @@ void __usercall LoadingMenu::~LoadingMenu(LoadingMenu *this@<ecx>, double a2@<st
   OSGlobals *v6; // eax
   int sound; // ecx
   int v8; // eax
-  double v9; // st7
-  NiDX9Renderer *v10; // ebx
-  BSShaderAccumulator *inited; // eax
+  NiDX9Renderer *v9; // ebx
+  BSShaderAccumulator *Global; // eax
   volatile LONG *accumulator; // edi
-  NiAccumulator *v13; // ebp
+  NiAccumulator *v12; // ebp
 
-  *(_DWORD *)this = &LoadingMenu::`vftable';
-  *((_DWORD *)this + 0xF) = 0x64;
-  if ( !sub_40FDA0(this) )
-    sub_5ADB40(a2, a4);
-  sub_583DF0(0xFF);
-  if ( *((_DWORD *)this + 0x14) )
+  *(_DWORD *)this = &LoadingMenu::`vftable'; /*0x5adbeb*/
+  *((_DWORD *)this + 0xF) = 0x64; /*0x5adbf7*/
+  if ( !sub_40FDA0(this) ) /*0x5adbfe*/
+    sub_5ADB40(a2, a4); /*0x5adc07*/
+  sub_583DF0(0xFF); /*0x5adc11*/
+  if ( *((_DWORD *)this + 0x14) ) /*0x5adc19*/
   {
-    do
+    do /*0x5adc34*/
     {
-      v5 = *(_DWORD *)(*((_DWORD *)this + 0x14) + 4);
-      FormHeapFree(*((_DWORD *)this + 0x14));
-      *((_DWORD *)this + 0x14) = v5;
+      v5 = *(_DWORD *)(*((_DWORD *)this + 0x14) + 4); /*0x5adc23*/
+      FormHeapFree(*((_DWORD *)this + 0x14)); /*0x5adc27*/
+      *((_DWORD *)this + 0x14) = v5; /*0x5adc31*/
     }
-    while ( v5 );
+    while ( v5 ); /*0x5adc34*/
   }
-  *((_DWORD *)this + 0x13) = 0;
-  FormHeapFree(*((_DWORD *)this + 0x15));
-  v6 = OSGlobals;
-  byte_B3A6D3 = 0;
-  sound = (int)v6->sound;
-  if ( sound )
+  *((_DWORD *)this + 0x13) = 0; /*0x5adc36*/
+  FormHeapFree(*((_DWORD *)this + 0x15)); /*0x5adc3d*/
+  v6 = MEMORY[0xB33398]; /*0x5adc42*/
+  unk_B3A6D3 = 0; /*0x5adc47*/
+  sound = (int)v6->sound; /*0x5adc4d*/
+  if ( sound ) /*0x5adc55*/
   {
-    if ( !ObjectPtr || (v8 = *(_DWORD *)(ObjectPtr + 0x20)) == 0 || v8 == 2 )
-      sub_6A9C00(sound);
+    if ( !MEMORY[0xB33428] || (v8 = *(_DWORD *)(MEMORY[0xB33428] + 0x20)) == 0 || v8 == 2 ) /*0x5adc6f*/
+      sub_6A9C00(sound); /*0x5adc71*/
   }
-  v9 = nullsub_returnTrue_0arg();
-  v10 = g_Renderer;
-  inited = InitBSShaderAccumulator();
-  accumulator = (volatile LONG *)v10->member.super.accumulator;
-  v13 = inited;
-  if ( accumulator != (volatile LONG *)inited )
+  Cmd_AddAchievement_PC_ReturnTrueNoOp(); /*0x5adc78*/
+  v9 = renderer; /*0x5adc7d*/
+  Global = BSShaderAccumulator_GetOrCreateGlobal(); /*0x5adc86*/
+  accumulator = (volatile LONG *)v9->member.super.accumulator; /*0x5adc8b*/
+  v12 = Global; /*0x5adc8e*/
+  if ( accumulator != (volatile LONG *)Global ) /*0x5adc92*/
   {
-    if ( accumulator )
+    if ( accumulator ) /*0x5adc96*/
     {
-      if ( !InterlockedDecrement(accumulator + 1) )
-        (**(void (__thiscall ***)(volatile LONG *, int))accumulator)(accumulator, 1);
+      if ( !InterlockedDecrement(accumulator + 1) ) /*0x5adc9c*/
+        (**(void (__thiscall ***)(volatile LONG *, int))accumulator)(accumulator, 1); /*0x5adcb2*/
     }
-    v10->member.super.accumulator = v13;
-    if ( v13 )
-      v9 = ((double (__stdcall *)(char *))InterlockedIncrement)((char *)v13 + 4);
+    v9->member.super.accumulator = v12; /*0x5adcb6*/
+    if ( v12 ) /*0x5adcb9*/
+      a4 = ((double (__stdcall *)(char *))InterlockedIncrement)((char *)v12 + 4); /*0x5adcbf*/
   }
-  Menu::~Menu((Menu *)this, a2, a3, v9);
+  Menu::~Menu((Menu *)this, a2, a3, a4); /*0x5adccf*/
 }

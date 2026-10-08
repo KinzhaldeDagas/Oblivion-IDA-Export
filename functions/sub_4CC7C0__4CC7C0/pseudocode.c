@@ -1,22 +1,23 @@
-_WORD *__thiscall sub_4CC7C0(_WORD *this)
+// Verified DistantLODCellObjectData constructor/layout: three NiTArray<float> subobjects at +0x00/+0x10/+0x20 and recordCount +0x30. The arrays are rotationAnglesXYZ, positions, and scalePercent in that order. Base-object queued transforms apply angles X/Y/Z in radians.
+DistantLODCellObjectData *__thiscall DistantLODCellObjectData_ctor(DistantLODCellObjectData *this)
 {
-  *(_DWORD *)this = &NiTArray<float>::`vftable';
-  *(this + 4) = 0;
-  *(this + 7) = 1;
-  *(this + 5) = 0;
-  *(this + 6) = 0;
-  *((_DWORD *)this + 1) = 0;
-  *((_DWORD *)this + 4) = &NiTArray<float>::`vftable';
-  *(this + 0xC) = 0;
-  *(this + 0xF) = 1;
-  *(this + 0xD) = 0;
-  *(this + 0xE) = 0;
-  *((_DWORD *)this + 5) = 0;
-  *((_DWORD *)this + 8) = &NiTArray<float>::`vftable';
-  *(this + 0x14) = 0;
-  *(this + 0x17) = 1;
-  *(this + 0x15) = 0;
-  *(this + 0x16) = 0;
-  *((_DWORD *)this + 9) = 0;
-  return this;
+  this->rotationAnglesXYZ.vtbl = &NiTArray<float>::`vftable'; /*0x4cc7ea*/
+  this->rotationAnglesXYZ.capacity = 0; /*0x4cc7f0*/
+  this->rotationAnglesXYZ.growBy = 1; /*0x4cc7f4*/
+  this->rotationAnglesXYZ.size = 0; /*0x4cc7f8*/
+  this->rotationAnglesXYZ.numObjects = 0; /*0x4cc7fc*/
+  this->rotationAnglesXYZ.data = 0; /*0x4cc800*/
+  this->positions.vtbl = &NiTArray<float>::`vftable'; /*0x4cc803*/
+  this->positions.capacity = 0; /*0x4cc80a*/
+  this->positions.growBy = 1; /*0x4cc80e*/
+  this->positions.size = 0; /*0x4cc812*/
+  this->positions.numObjects = 0; /*0x4cc816*/
+  this->positions.data = 0; /*0x4cc81a*/
+  this->scalePercent.vtbl = &NiTArray<float>::`vftable'; /*0x4cc81d*/
+  this->scalePercent.capacity = 0; /*0x4cc824*/
+  this->scalePercent.growBy = 1; /*0x4cc828*/
+  this->scalePercent.size = 0; /*0x4cc82c*/
+  this->scalePercent.numObjects = 0; /*0x4cc830*/
+  this->scalePercent.data = 0; /*0x4cc834*/
+  return this; /*0x4cc837*/
 }

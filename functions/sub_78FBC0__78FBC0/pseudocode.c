@@ -1,29 +1,34 @@
-void __cdecl sub_78FBC0(int a1, int a2, int a3, int a4)
+// MSVC heap push primitive for OB_CBranch pointer ranges. Moves parent pointers down until the new pointer fits the ordering defined by CBranch+0x2C fuzzyBranchVolume. This is part of Oblivion's std::sort expansion.
+void __cdecl OB_BranchPtrVector_PushHeapByFuzzyVolume_010201A0(
+        OB_CBranch_010201A0 **begin,
+        unsigned int holeIndex,
+        unsigned int topIndex,
+        OB_CBranch_010201A0 *value)
 {
-  int v4; // esi
+  unsigned int v4; // esi
   int v5; // ecx
-  int v6; // edx
+  OB_CBranch_010201A0 *v6; // edx
   bool v7; // cc
 
-  v4 = a2;
-  v5 = (a2 - 1) / 2;
-  if ( a3 >= a2 )
+  v4 = holeIndex; /*0x78fbc6*/
+  v5 = (int)(holeIndex - 1) / 2; /*0x78fbd2*/
+  if ( (int)topIndex >= (int)holeIndex ) /*0x78fbd6*/
   {
-    *(_DWORD *)(a1 + 4 * a2) = a4;
+    begin[holeIndex] = value; /*0x78fc17*/
   }
   else
   {
-    do
+    do /*0x78fc05*/
     {
-      v6 = *(_DWORD *)(a1 + 4 * v5);
-      if ( *(float *)(a4 + 0x2C) >= (double)*(float *)(v6 + 0x2C) )
-        break;
-      *(_DWORD *)(a1 + 4 * v4) = v6;
-      v4 = v5;
-      v7 = a3 < v5;
-      v5 = (v5 - 1) / 2;
+      v6 = begin[v5]; /*0x78fbe2*/
+      if ( value->fuzzyBranchVolume >= (double)v6->fuzzyBranchVolume ) /*0x78fbf2*/
+        break; /*0x78fbf2*/
+      begin[v4] = v6; /*0x78fbf7*/
+      v4 = v5; /*0x78fbfd*/
+      v7 = (int)topIndex < v5; /*0x78fc01*/
+      v5 = (v5 - 1) / 2; /*0x78fc03*/
     }
-    while ( v7 );
-    *(_DWORD *)(a1 + 4 * v4) = a4;
+    while ( v7 ); /*0x78fc05*/
+    begin[v4] = value; /*0x78fc07*/
   }
 }

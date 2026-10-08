@@ -1,1 +1,1 @@
-tagMSHCTX
+typedef MSHCTX tagMSHCTX;

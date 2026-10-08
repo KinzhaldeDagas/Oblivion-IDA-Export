@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x5050E2",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -187,37 +187,37 @@
   },
   {
     "ea": "0x5050FD",
-    "line": "mov     ecx, [esp+8+arg_18]",
+    "line": "mov     ecx, [esp+8+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x505101",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x505102",
-    "line": "push    0",
+    "line": "push    0; param2",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x505104",
-    "line": "push    eax",
+    "line": "push    eax; package",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x505105",
-    "line": "push    esi",
+    "line": "push    esi; subject",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x505106",
-    "line": "call    sub_4F7FA0",
+    "line": "call    GetIsCurrentPackage_Eval; GetIsCurrentPackage_Eval requires an actor subject and Package parameter (form type 0x3D). It reads the subject's current package; for a temporary-override package it prefers the actor's ExtraPackage when present, then pointer-compares against the parameter.",
     "mnemonic": "call",
     "size": 5
   },

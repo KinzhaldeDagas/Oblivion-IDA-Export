@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A8E20",
-    "line": "push    ebx",
+    "line": "push    ebx; OBLIVION AUTHORITY (2026-08-30): Constructs/fills the vector<unsigned int> backing-word store used by FindPairs' vector<bool> paired-state table.",
     "mnemonic": "push",
     "size": 1
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x7A8E40",
-    "line": "call    sub_790B90",
+    "line": "call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error(\"vector<T> too long\") and throws; used by multiple element specializations after max_size checks.",
     "mnemonic": "call",
     "size": 5
   },
@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x7A8E46",
-    "line": "push    edi; char *",
+    "line": "push    edi; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A8E47",
-    "line": "call    sub_78FB60",
+    "line": "call    OB_stVector4_Allocate_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded allocator for vectors with 4-byte elements. Validates count*4 overflow, throws bad_alloc on overflow, and allocates through FormHeapAlloc; FindPairs uses it for vector<bool>'s uint32 backing words.",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x7A8E63",
-    "line": "mov     ebx, [esp+0Ch+arg_4]",
+    "line": "mov     ebx, [esp+0Ch+value]",
     "mnemonic": "mov",
     "size": 4
   },

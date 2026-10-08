@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x78FCC0",
+      "0x78FD2E"
+    ]
+  ],
+  "chunks_sha256": "0958ebf89e15255a1262561cddafd3a78f7964e6bc783f9090851caeb95b256c",
+  "comment_regular": "Vector angle helper. Dot product against reference vector, clamps to [0,1], returns acos result in radians.",
+  "comment_repeatable": "Vector angle helper. Dot product against reference vector, clamps to [0,1], returns acos result in radians.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_78FCC0",
+  "display_name": "OB_Vec3_AngleClamped01_010201A0",
   "end_ea": "0x78FD2E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_78FCC0",
+  "name": "OB_Vec3_AngleClamped01_010201A0",
   "segment": ".text",
   "sha256": "0958ebf89e15255a1262561cddafd3a78f7964e6bc783f9090851caeb95b256c",
   "size": 110,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78FCC0",
-  "type": "double __thiscall(float *this, float *)",
+  "total_chunk_size": 110,
+  "type": "double __thiscall(float *this, float *referenceVector)",
   "xrefs_from_count": 38,
   "xrefs_to_count": 2
 }

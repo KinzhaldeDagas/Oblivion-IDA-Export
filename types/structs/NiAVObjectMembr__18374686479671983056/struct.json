@@ -1,64 +1,108 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "NiAVObjectMembr",
+  "definition": "struct NiAVObjectMembr\n{\nNiObjectNETMembr super;\nNiAVObjects_Flags m_flags;\nUInt8 pad01A[2];\nNiNode *m_parent;\nNiBound m_kWorldBound;\nNiTransform m_localTransform;\nNiTransform m_worldTransform;\nNiTList_NiProperty m_propertyList;\nvoid *m_spCollision;\n}\n",
   "id": 18374686479671983056,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00053.",
       "name": "super",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 20
+      "size": 20,
+      "type": "NiObjectNETMembr"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00054.",
       "name": "m_flags",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 2
+      "size": 2,
+      "type": "NiAVObjects_Flags"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00055.",
       "name": "pad01A",
       "offset": 22,
       "offset_hex": "0x16",
-      "size": 2
+      "size": 2,
+      "type": "UInt8[2]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00056.",
       "name": "m_parent",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "NiNode *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00057.",
       "name": "m_kWorldBound",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 16
+      "offset_hex": "0x1C",
+      "size": 16,
+      "type": "NiBound"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00058.",
       "name": "m_localTransform",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 52
+      "offset_hex": "0x2C",
+      "size": 52,
+      "type": "NiTransform"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00059.",
       "name": "m_worldTransform",
       "offset": 96,
       "offset_hex": "0x60",
-      "size": 52
+      "size": 52,
+      "type": "NiTransform"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000510.",
       "name": "m_propertyList",
       "offset": 148,
       "offset_hex": "0x94",
-      "size": 16
+      "size": 16,
+      "type": "NiTList_NiProperty"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000511.",
       "name": "m_spCollision",
       "offset": 164,
-      "offset_hex": "0xa4",
-      "size": 4
+      "offset_hex": "0xA4",
+      "size": 4,
+      "type": "void *"
     }
   ],
   "name": "NiAVObjectMembr",
+  "ordinal": 9134,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 168
 }

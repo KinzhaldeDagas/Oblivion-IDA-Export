@@ -1,1 +1,1 @@
-CInterfaceProxyVtbl_0
+typedef tagCInterfaceProxyVtbl_0 CInterfaceProxyVtbl_0;

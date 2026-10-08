@@ -1,6 +1,6 @@
-0x772150: push    esi
+0x772150: push    esi; Commit texture transform. Stock leaf stage has transform disabled, so this writes D3DTTFF_DISABLE and no matrix.
 0x772151: mov     esi, ecx
-0x772153: cmp     byte ptr [esi+5Ah], 0
+0x772153: cmp     byte ptr [esi+5Ah], 0; When the stage transform flag is false (the stock leaf configuration), commit D3DTTFF_DISABLE and do not upload a texture matrix.
 0x772157: jnz     short loc_772174
 0x772159: mov     ecx, ds:0B42758h
 0x77215F: mov     eax, [ecx]
@@ -27,10 +27,10 @@
 0x772198: jz      short loc_7721C7
 0x77219A: push    ecx
 0x77219B: mov     ecx, esi
-0x77219D: call    sub_771830
+0x77219D: call    sub_771830;
 0x7721A2: test    al, al
 0x7721A4: jz      short loc_7721DD
-0x7721A6: push    offset flt_B42760
+0x7721A6: push    offset unk_B42760
 0x7721AB: jmp     short loc_7721C7
 0x7721AD: and     ecx, 0FFFFFFFh
 0x7721B3: mov     edx, [esi+14h]

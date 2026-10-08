@@ -6,12 +6,12 @@
 0x813B91: push    ecx
 0x813B92: fstp    [esp+8+a2]; a2
 0x813B95: mov     ecx, edi; this
-0x813B97: call    NiAVObject_UpdateNiAVObject
+0x813B97: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x813B9C: cmp     word ptr ds:0B42EACh, 5
 0x813BA4: jz      loc_813D25
 0x813BAA: cmp     dword ptr [edi+148h], 0
 0x813BB1: jz      loc_813CE9
-0x813BB7: call    InitBSShaderAccumulator
+0x813BB7: call    BSShaderAccumulator_GetOrCreateGlobal
 0x813BBC: mov     esi, eax
 0x813BBE: test    esi, esi
 0x813BC0: mov     [esp+arg_14], esi
@@ -28,7 +28,7 @@
 0x813BE3: mov     ecx, ds:0B3F928h
 0x813BE9: mov     ebp, [ecx+8]
 0x813BEC: test    ebp, ebp
-0x813BEE: mov     dword ptr [esp+arg_B0.UseAppendVirtual], ebp
+0x813BEE: mov     dword ptr [esp+cullingProcess.UseAppendVirtual], ebp
 0x813BF5: jz      short loc_813C01
 0x813BF7: lea     edx, [ebp+4]
 0x813BFA: push    edx; lpAddend
@@ -36,29 +36,29 @@
 0x813C01: mov     ecx, ds:0B3F928h; this
 0x813C07: push    esi; a2
 0x813C08: mov     [esp+8+arg_14C], 1
-0x813C10: call    NiDX9Renderer__SetShaderAccumulator
+0x813C10: call    NiDX9Renderer__SetShaderAccumulator;
 0x813C15: mov     eax, [esi]
 0x813C17: mov     edx, [eax+4Ch]
 0x813C1A: push    edi
 0x813C1B: mov     ecx, esi
 0x813C1D: call    edx
-0x813C1F: push    0
-0x813C21: lea     ecx, [esp+0Ch+arg_B0]
+0x813C1F: push    0; visibleArray
+0x813C21: lea     ecx, [esp+0Ch+cullingProcess]; self
 0x813C28: mov     byte ptr [esi+21E0h], 1
-0x813C2F: call    NiCullingProcess_NiCullingProcess
+0x813C2F: call    NiCullingProcess_NiCullingProcess; Oblivion NiCullingProcess constructor: initializes append mode, visible-geometry storage, camera state, and culling-plane state.
 0x813C34: lea     eax, [edi+0ECh]
 0x813C3A: push    eax; a2
-0x813C3B: lea     ecx, [esp+0Ch+arg_B0]; this
+0x813C3B: lea     ecx, [esp+0Ch+cullingProcess]; this
 0x813C42: mov     byte ptr [esp+0Ch+arg_148], 2
-0x813C4A: mov     [esp+0Ch+arg_B0.Camera], edi
-0x813C51: call    NiCullingProcess__SetFrustum
+0x813C4A: mov     [esp+0Ch+cullingProcess.Camera], edi
+0x813C51: call    NiCullingProcess__SetFrustum; Oblivion NiCullingProcess::SetFrustum copies the camera frustum, rebuilds six culling planes, and sets the active-plane mask to 0x3F.
 0x813C56: mov     eax, [edi+148h]
-0x813C5C: push    0
-0x813C5E: lea     ecx, [esp+0Ch+arg_B0]
-0x813C65: push    ecx
-0x813C66: push    eax
-0x813C67: push    edi
-0x813C68: call    sub_70C0B0
+0x813C5C: push    0; visibleArray
+0x813C5E: lea     ecx, [esp+0Ch+cullingProcess]
+0x813C65: push    ecx; cullingProcess
+0x813C66: push    eax; sceneRoot
+0x813C67: push    edi; camera
+0x813C68: call    NiRenderer_CullAndRenderScene; Renderer camera-cull-submit boundary. Installs camera matrices, culls the scene root into the visible array, then submits that visible array through the current renderer accumulator.
 0x813C6D: mov     byte ptr [esi+21E1h], 1
 0x813C74: mov     edx, [esi]
 0x813C76: mov     eax, [edx+50h]
@@ -67,10 +67,10 @@
 0x813C7E: call    eax
 0x813C80: mov     ecx, ds:0B3F928h; this
 0x813C86: push    ebp; a2
-0x813C87: call    NiDX9Renderer__SetShaderAccumulator
-0x813C8C: lea     ecx, [esp+8+arg_B0]; this
+0x813C87: call    NiDX9Renderer__SetShaderAccumulator;
+0x813C8C: lea     ecx, [esp+8+cullingProcess]; this
 0x813C93: mov     byte ptr [esp+8+arg_148], 1
-0x813C9B: call    ??1BSCullingProcess@@UAE@XZ; BSCullingProcess::~BSCullingProcess(void)
+0x813C9B: call    ??1BSCullingProcess@@UAE@XZ; Oblivion BSCullingProcess destructor restores its base culling-process state; no separate visible-array allocation is released here.
 0x813CA0: test    ebp, ebp
 0x813CA2: mov     byte ptr [esp+8+arg_148], 0
 0x813CAA: jz      short loc_813CC5
@@ -94,11 +94,11 @@
 0x813CDF: push    1
 0x813CE1: mov     ecx, esi
 0x813CE3: call    eax
-0x813CE5: mov     ebx, [esp+18h+var_4]
+0x813CE5: mov     ebx, [esp+18h+propertyDimmer]
 0x813CE9: mov     ecx, [edi+14Ch]; this
 0x813CEF: call    j_NiTPointerList__FreeAllNodes
 0x813CF4: push    0Ch; a1
-0x813CF6: call    GetShaderDefinition
+0x813CF6: call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.
 0x813CFB: add     esp, 4
 0x813CFE: test    eax, eax
 0x813D00: jz      short loc_813D15
@@ -107,7 +107,7 @@
 0x813D07: jz      short loc_813D15
 0x813D09: mov     ecx, [edi+14Ch]
 0x813D0F: push    eax
-0x813D10: call    AddImageSpaceShader
+0x813D10: call    AddImageSpaceShader; ImprovedShaders hook target: AddImageSpaceShader(this=list, arg0=BSImageSpaceShader*). Hook calls native trampoline, then appends paired HDR(0x08)/Blur-Bloom(0x07) shader if absent.
 0x813D15: cmp     ebx, 5; switch 6 cases
 0x813D18: ja      def_813D1E; jumptable 00813D1E default case, case 4
 0x813D1E: jmp     ds:jpt_813D1E[ebx*4]; switch jump
@@ -116,10 +116,10 @@
 0x813D2D: jz      short loc_813CE9
 0x813D2F: fld1
 0x813D31: push    ecx
-0x813D32: fstp    [esp+4+var_4]; float
-0x813D35: push    eax; int
-0x813D36: push    0; int
-0x813D38: call    sub_7EE390
+0x813D32: fstp    [esp+4+propertyDimmer]; propertyDimmer
+0x813D35: push    eax; shadowSceneLight
+0x813D36: push    0; lightSlot
+0x813D38: call    OB_BSShader_DispatchLightConstantUpdate_010201A0; Oblivion per-light constant dispatcher. For active BSShaderProperty type 0x1B it calls Lighting30Shader_WriteType1BLightConstants; otherwise it uses the generic color path.
 0x813D3D: mov     ecx, [edi+144h]
 0x813D43: mov     edx, [ecx+114h]
 0x813D49: add     esp, 0Ch
@@ -129,21 +129,21 @@
 0x813D58: mov     eax, [edi+144h]
 0x813D5E: push    eax; a2
 0x813D5F: mov     ecx, edi; this
-0x813D61: call    sub_813300
+0x813D61: call    RenderShadowCategoryObjectListOffscreen; Mode-0 cube-map helper: swaps temporary accumulator/culling state and renders the current ShadowSceneLight's +0xE8 category/object list through ShadowSceneLight_RenderCategoryObjectList.
 0x813D66: jmp     short loc_813CE9
 0x813D68: fld     dword ptr ds:0B3F9A4h; jumptable 00813D1E case 0
 0x813D6E: fmul    qword ptr ds:0A65A18h
 0x813D74: fdiv    qword ptr ds:0A3F418h
-0x813D7A: fstp    [esp+18h+var_4]
-0x813D7E: fld     [esp+18h+var_4]
+0x813D7A: fstp    [esp+18h+propertyDimmer]
+0x813D7E: fld     [esp+18h+propertyDimmer]
 0x813D82: call    __CIcos
 0x813D87: fstp    dword ptr [esp+18h]
 0x813D8B: fld     dword ptr [esp+18h]
 0x813D8F: fstp    [esp+18h+arg_7C]
-0x813D96: fld     [esp+18h+var_4]
+0x813D96: fld     [esp+18h+propertyDimmer]
 0x813D9A: call    __CIsin
-0x813D9F: fstp    [esp+18h+var_4]
-0x813DA3: fld     [esp+18h+var_4]
+0x813D9F: fstp    [esp+18h+propertyDimmer]
+0x813DA3: fld     [esp+18h+propertyDimmer]
 0x813DA7: mov     ecx, [esp+18h+arg_7C]
 0x813DAE: fst     [esp+18h+arg_80]
 0x813DB5: mov     edx, [esp+18h+arg_80]
@@ -183,8 +183,8 @@
 0x813E55: fstp    dword ptr [esp+18h]
 0x813E59: fld     dword ptr [esp+18h]
 0x813E5D: call    __CIcos
-0x813E62: fstp    [esp+18h+var_4]
-0x813E66: fld     [esp+18h+var_4]
+0x813E62: fstp    [esp+18h+propertyDimmer]
+0x813E66: fld     [esp+18h+propertyDimmer]
 0x813E6A: fstp    [esp+18h+arg_4C]
 0x813E6E: fld     dword ptr [esp+18h]
 0x813E72: call    __CIsin
@@ -205,7 +205,7 @@
 0x813EAD: mov     ds:0B474D4h, eax
 0x813EB2: fstp    [esp+18h+arg_5C]
 0x813EB6: mov     ds:0B474D8h, ecx
-0x813EBC: fld     [esp+18h+var_4]
+0x813EBC: fld     [esp+18h+propertyDimmer]
 0x813EC0: mov     edx, [esp+18h+arg_5C]
 0x813EC4: fstp    [esp+18h+arg_60]
 0x813EC8: mov     ds:0B474DCh, edx
@@ -230,8 +230,8 @@
 0x813F22: fstp    dword ptr [esp+18h]
 0x813F26: fld     dword ptr [esp+18h]
 0x813F2A: call    __CIcos
-0x813F2F: fstp    [esp+18h+var_4]
-0x813F33: fld     [esp+18h+var_4]
+0x813F2F: fstp    [esp+18h+propertyDimmer]
+0x813F33: fld     [esp+18h+propertyDimmer]
 0x813F37: fstp    [esp+18h+arg_3C]
 0x813F3B: fld     dword ptr [esp+18h]
 0x813F3F: call    __CIsin
@@ -252,7 +252,7 @@
 0x813F7A: mov     ds:0B474D4h, eax
 0x813F7F: fstp    [esp+18h+arg_2C]
 0x813F83: mov     ds:0B474D8h, ecx
-0x813F89: fld     [esp+18h+var_4]
+0x813F89: fld     [esp+18h+propertyDimmer]
 0x813F8D: mov     edx, [esp+18h+arg_2C]
 0x813F91: fstp    [esp+18h+arg_30]
 0x813F95: mov     ds:0B474DCh, edx
@@ -277,8 +277,8 @@
 0x813FE2: fstp    [esp+18h+arg_6C]
 0x813FE9: fldz
 0x813FEB: call    __CIsin
-0x813FF0: fstp    [esp+18h+var_4]
-0x813FF4: fld     [esp+18h+var_4]
+0x813FF0: fstp    [esp+18h+propertyDimmer]
+0x813FF4: fld     [esp+18h+propertyDimmer]
 0x813FF8: mov     ecx, [esp+18h+arg_6C]
 0x813FFF: fst     [esp+18h+arg_70]
 0x814006: mov     edx, [esp+18h+arg_70]
@@ -318,11 +318,11 @@
 0x81409E: push    eax
 0x81409F: push    ecx
 0x8140A0: mov     ecx, [edi+14Ch]
-0x8140A6: call    ImageShaderList__ProcessImageSpaceShader
+0x8140A6: call    ImageShaderList__ProcessImageSpaceShader; MoonSugarEffect decode: ImageSpaceShaderList processing builds a temporary active shader list, binds each shader to the shared screen element, and ping-pongs source/destination targets.
 0x8140AB: call    NiRenderer_EndScene; jumptable 00813D1E default case, case 4
 0x8140B0: add     ebx, 1
 0x8140B3: cmp     ebx, 6
-0x8140B6: mov     [esp+18h+var_4], ebx
+0x8140B6: mov     [esp+18h+propertyDimmer], ebx
 0x8140BA: jl      loc_813A29
 0x8140C0: mov     ecx, ds:0B43104h
 0x8140C6: mov     edx, [ecx]
@@ -346,7 +346,7 @@
 0x8140F7: mov     ecx, esi
 0x8140F9: call    eax
 0x8140FB: mov     dword ptr ds:0B474ECh, 0
-0x814105: mov     ecx, [esp+24h+arg_B0.Planes.CullingPlanes.Normal.x+48h]
+0x814105: mov     ecx, [esp+24h+cullingProcess.Planes.CullingPlanes.Normal.x+48h]
 0x81410C: mov     large fs:0, ecx
 0x814113: pop     ecx
 0x814114: pop     edi

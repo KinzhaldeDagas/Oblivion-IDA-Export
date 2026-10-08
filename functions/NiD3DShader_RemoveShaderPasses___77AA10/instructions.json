@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x77AA20",
-    "line": "mov     [esp+14h+var_4], ebp",
+    "line": "mov     [esp+14h+value], ebp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -73,31 +73,31 @@
   },
   {
     "ea": "0x77AA27",
-    "line": "lea     eax, [esp+14h+var_4]",
+    "line": "lea     eax, [esp+14h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x77AA2B",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x77AA2C",
-    "line": "push    edi",
+    "line": "push    edi; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x77AA2D",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x77AA2F",
-    "line": "call    sub_76CE40",
+    "line": "call    NiTArray_NiD3DPass_SetAt; Release/null each previously queued NiD3DPass slot before building the current geometry's pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,13 +157,13 @@
   },
   {
     "ea": "0x77AA4A",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x77AA4F",
-    "line": "mov     [esi+3Ch], ebp",
+    "line": "mov     [esi+3Ch], ebp; Prior CurrentPass has been released; clear the pointer so a failed selector cannot reuse it.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -175,13 +175,13 @@
   },
   {
     "ea": "0x77AA53",
-    "line": "mov     [esi+38h], ebp",
+    "line": "mov     [esi+38h], ebp; Reset PassCount to zero before selector resolution.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x77AA56",
-    "line": "mov     [esi+34h], ebp",
+    "line": "mov     [esi+34h], ebp; Reset CurrentPassIndex to zero with the pass queue.",
     "mnemonic": "mov",
     "size": 3
   },

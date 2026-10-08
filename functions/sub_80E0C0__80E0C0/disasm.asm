@@ -1,4 +1,4 @@
-0x80E0C0: sub     esp, 3E0h
+0x80E0C0: sub     esp, 3E0h; SpeedTreeFrondShader program loader. Loads four vs_1_1 STFROND vertex variants from speedtree\frond.v.hlsl into +0x7C..+0x88 and two pixel variants from speedtree\frond.p.hlsl into +0x8C/+0x90; ShaderPackage>=2 uses ps_2_0 STFROND2 names.
 0x80E0C6: mov     eax, ds:0B30AACh
 0x80E0CB: xor     eax, esp
 0x80E0CD: mov     [esp+3E0h+var_4], eax
@@ -100,7 +100,7 @@
 0x80E277: lea     ecx, [esp+404h+FileName]
 0x80E27E: push    ecx; lpFileName
 0x80E27F: mov     ecx, [esp+408h+var_3D8]
-0x80E283: call    CreateVertexShader
+0x80E283: call    CreateVertexShader; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.
 0x80E288: mov     esi, [ebx]
 0x80E28A: mov     edi, eax
 0x80E28C: cmp     esi, edi
@@ -183,7 +183,7 @@
 0x80E371: lea     ecx, [esp+404h+FileName]
 0x80E378: push    ecx; lpFileName
 0x80E379: mov     ecx, [esp+408h+var_3D8]
-0x80E37D: call    CreatePixelShader
+0x80E37D: call    CreatePixelShader; Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.
 0x80E382: mov     esi, [ebx]
 0x80E384: mov     edi, eax
 0x80E386: cmp     esi, edi
@@ -237,7 +237,6 @@
 0x80E402: jmp     loc_80E4E2
 0x80E407: mov     [esp+3F0h+var_3E0], edi
 0x80E40B: jmp     short loc_80E410
-0x80E40D: align 10h
 0x80E410: mov     eax, [edi]
 0x80E412: cmp     eax, ebp
 0x80E414: jz      loc_80E49C
@@ -261,7 +260,7 @@
 0x80E451: lea     ecx, [esp+404h+FileName]
 0x80E458: push    ecx; lpFileName
 0x80E459: mov     ecx, [esp+408h+var_3D8]
-0x80E45D: call    CreatePixelShader
+0x80E45D: call    CreatePixelShader; Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.
 0x80E462: mov     esi, [ebx]
 0x80E464: mov     edi, eax
 0x80E466: cmp     esi, edi

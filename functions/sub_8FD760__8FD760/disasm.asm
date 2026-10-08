@@ -10,7 +10,6 @@
 0x8FD774: push    esi
 0x8FD775: lea     esi, [ebp+2]
 0x8FD778: jmp     short loc_8FD780
-0x8FD77A: align 10h
 0x8FD780: xor     eax, eax
 0x8FD782: mov     ax, [esi]
 0x8FD785: cmp     ax, 0FFFFh

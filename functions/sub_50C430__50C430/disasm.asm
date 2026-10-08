@@ -17,7 +17,7 @@
 0x50C45A: push    edx; a2
 0x50C45B: push    eax; a1
 0x50C45C: mov     dword ptr [esp+2Ch+var_4], 0
-0x50C464: call    Script_ExtractArgs
+0x50C464: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x50C469: add     esp, 20h
 0x50C46C: test    al, al
 0x50C46E: jnz     short loc_50C475
@@ -31,12 +31,12 @@
 0x50C481: call    sub_4D8260
 0x50C486: cmp     dword ptr [esp+0Ch+var_4], 0
 0x50C48B: mov     [esp+0Ch+var_5], al
-0x50C48F: push    8
-0x50C491: mov     ecx, esi
+0x50C48F: push    8; mask
+0x50C491: mov     ecx, esi; this
 0x50C493: jz      short loc_50C49C
-0x50C495: call    sub_4D8270
+0x50C495: call    TESObjectREFR_SetActionFlagBits; Set reference action-state bits and synchronize special bit 0x04 with loaded/runtime open-state handling. ONAM itself represents action flag 0x08; PostLinkModifiedForm tests that bit before selecting set/clear paths.
 0x50C49A: jmp     short loc_50C4A1
-0x50C49C: call    sub_4D82E0
+0x50C49C: call    TESObjectREFR_ClearActionFlagBits
 0x50C4A1: push    ebx
 0x50C4A2: push    edi
 0x50C4A3: push    8
@@ -49,10 +49,10 @@
 0x50C4B8: mov     ecx, esi
 0x50C4BA: call    eax
 0x50C4BC: lea     edi, [esi+44h]
-0x50C4BF: mov     ecx, edi
-0x50C4C1: call    sub_4212F0
+0x50C4BF: mov     ecx, edi; this
+0x50C4C1: call    ExtraDataList_ResetSavedAttachedAnimationData; If saved-attached-animation data exists, frees it and replaces it with a six-byte initialized {4,0,0} word buffer. Observed in Oblivion door default-open/open/close paths.
 0x50C4C6: mov     ecx, edi
-0x50C4C8: call    sub_420FF0
+0x50C4C8: call    ExtraDataList_RemoveLastFinishedSequence; Removes ExtraLastFinishedSequence (type 0x4A).
 0x50C4CD: cmp     byte ptr [esp+10h+var_4+3], bl
 0x50C4D1: jz      short loc_50C4FB
 0x50C4D3: mov     ecx, ds:0B33B00h

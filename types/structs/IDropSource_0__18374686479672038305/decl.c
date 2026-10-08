@@ -1,1 +1,1 @@
-IDropSource_0
+typedef IDropSource IDropSource_0;

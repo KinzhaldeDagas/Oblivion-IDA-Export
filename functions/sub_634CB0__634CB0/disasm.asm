@@ -18,7 +18,7 @@
 0x634CE1: mov     edx, [eax+4]
 0x634CE4: mov     ecx, esi
 0x634CE6: call    edx
-0x634CE8: cmp     eax, offset dword_B3F52C
+0x634CE8: cmp     eax, offset stru_B3F52C
 0x634CED: setz    al
 0x634CF0: test    al, al
 0x634CF2: jnz     short loc_634D00

@@ -341,7 +341,6 @@
 0x55DD78: xor     edi, edi
 0x55DD7A: push    ebx
 0x55DD7B: jmp     short loc_55DD80
-0x55DD7D: align 10h
 0x55DD80: mov     ecx, [ebp+0DCh]
 0x55DD86: mov     eax, [ecx]
 0x55DD88: mov     edx, [eax+54h]
@@ -439,7 +438,6 @@
 0x55DE9E: jl      loc_55DDF2
 0x55DEA4: xor     ebx, ebx
 0x55DEA6: jmp     short loc_55DEB0
-0x55DEA8: align 10h
 0x55DEB0: mov     ecx, [ebp+0DCh]
 0x55DEB6: mov     edx, [ecx]
 0x55DEB8: mov     eax, [edx+68h]

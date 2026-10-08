@@ -1,4 +1,4 @@
-0x550850: mov     eax, [esp+arg_0]
+0x550850: mov     eax, [esp+geometry]
 0x550854: push    esi
 0x550855: push    eax
 0x550856: call    sub_550790
@@ -24,7 +24,7 @@
 0x550887: pop     esi
 0x550888: retn
 0x550889: push    eax
-0x55088A: push    offset unk_B39DA8
+0x55088A: push    offset stru_B39DA8
 0x55088F: call    NiRTTI_Cast
 0x550894: add     esp, 8
 0x550897: pop     esi

@@ -19,13 +19,13 @@
 0x77252F: push    1
 0x772531: call    sub_772040
 0x772536: push    esi
-0x772537: call    FormHeapFree
+0x772537: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x77253C: add     esp, 4
 0x77253F: mov     eax, [edi]
 0x772541: push    eax
-0x772542: call    FormHeapFree
+0x772542: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x772547: push    edi
-0x772548: call    FormHeapFree
+0x772548: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x77254D: add     esp, 8
 0x772550: pop     esi
 0x772551: mov     dword ptr ds:0B4275Ch, 0

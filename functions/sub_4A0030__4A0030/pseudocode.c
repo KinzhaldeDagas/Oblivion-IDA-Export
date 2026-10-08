@@ -1,4 +1,4 @@
-void *sub_4A0030()
+char *sub_4A0030()
 {
-  return &unk_B35280;
+  return &MEMORY[0xB33E90][0x13F0]; /*0x4a0035*/
 }

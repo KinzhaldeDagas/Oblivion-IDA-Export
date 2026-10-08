@@ -1,4 +1,4 @@
-0x9F7FB0: fld     ds:flt_A3D65C
+0x9F7FB0: fld     ds:kHeadBodyNormalMatchRadius
 0x9F7FB6: push    ecx
 0x9F7FB7: fstp    [esp+4+var_4]; float
 0x9F7FBA: push    offset aFdefaultnotice; "fDefaultNoticeTextDisplayTime"

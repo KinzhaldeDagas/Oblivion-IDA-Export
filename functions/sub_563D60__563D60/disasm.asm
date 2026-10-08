@@ -1,4 +1,4 @@
-0x563D60: mov     eax, [ecx]
+0x563D60: mov     eax, [ecx]; BSTreeNode billboard group visibility toggle. Shows child 2/Billboard when flag is true; hides it when false.
 0x563D62: mov     edx, [eax+0A8h]
 0x563D68: call    edx
 0x563D6A: test    eax, eax

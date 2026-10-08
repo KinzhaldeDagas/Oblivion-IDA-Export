@@ -1,25 +1,25 @@
-0x783E70: sub     esp, 20h
-0x783E73: mov     ecx, [esp+20h+arg_4]
-0x783E77: mov     eax, [esp+20h+arg_8]
+0x783E70: sub     esp, 20h; Oblivion cubic Bezier interpolation for the first two components of four stVec control records, implemented by de Casteljau lerps and returned as a 2D stVec. Corroborated by RT4.1 IdvSpline.cpp SplineInterpolate after binary observation.
+0x783E73: mov     ecx, [esp+20h+p0]
+0x783E77: mov     eax, [esp+20h+p1]
 0x783E7B: fld     dword ptr [ecx]
-0x783E7D: fstp    [esp+20h+arg_4]
+0x783E7D: fstp    [esp+20h+p0]
 0x783E81: mov     [esp+20h+var_20], 0
 0x783E88: fld     dword ptr [eax]
 0x783E8A: push    esi
-0x783E8B: fld     [esp+24h+arg_4]
+0x783E8B: fld     [esp+24h+p0]
 0x783E8F: fld     st
 0x783E91: fsubp   st(2), st
-0x783E93: fld     [esp+24h+arg_14]
+0x783E93: fld     [esp+24h+t]
 0x783E97: fld     st
 0x783E99: fmulp   st(3), st
 0x783E9B: fxch    st(2)
 0x783E9D: faddp   st(1), st
 0x783E9F: fstp    [esp+24h+var_18]
 0x783EA3: fld     dword ptr [ecx+4]
-0x783EA6: mov     ecx, [esp+24h+arg_C]
-0x783EAA: fstp    [esp+24h+arg_4]
+0x783EA6: mov     ecx, [esp+24h+p2]
+0x783EAA: fstp    [esp+24h+p0]
 0x783EAE: fld     dword ptr [eax+4]
-0x783EB1: fld     [esp+24h+arg_4]
+0x783EB1: fld     [esp+24h+p0]
 0x783EB5: fld     st
 0x783EB7: fsubp   st(2), st
 0x783EB9: fld     st(2)
@@ -27,9 +27,9 @@
 0x783EBD: faddp   st(1), st
 0x783EBF: fstp    [esp+24h+var_14]
 0x783EC3: fld     dword ptr [eax]
-0x783EC5: fstp    [esp+24h+arg_4]
+0x783EC5: fstp    [esp+24h+p0]
 0x783EC9: fld     dword ptr [ecx]
-0x783ECB: fld     [esp+24h+arg_4]
+0x783ECB: fld     [esp+24h+p0]
 0x783ECF: fld     st
 0x783ED1: fsubp   st(2), st
 0x783ED3: fld     st(2)
@@ -37,10 +37,10 @@
 0x783ED7: faddp   st(1), st
 0x783ED9: fstp    [esp+24h+var_20]
 0x783EDD: fld     dword ptr [eax+4]
-0x783EE0: mov     eax, [esp+24h+arg_10]
-0x783EE4: fstp    [esp+24h+arg_4]
+0x783EE0: mov     eax, [esp+24h+p3]
+0x783EE4: fstp    [esp+24h+p0]
 0x783EE8: fld     dword ptr [ecx+4]
-0x783EEB: fld     [esp+24h+arg_4]
+0x783EEB: fld     [esp+24h+p0]
 0x783EEF: fld     st
 0x783EF1: fsubp   st(2), st
 0x783EF3: fld     st(2)
@@ -48,9 +48,9 @@
 0x783EF7: faddp   st(1), st
 0x783EF9: fstp    [esp+24h+var_1C]
 0x783EFD: fld     dword ptr [ecx]
-0x783EFF: fstp    [esp+24h+arg_4]
+0x783EFF: fstp    [esp+24h+p0]
 0x783F03: fld     dword ptr [eax]
-0x783F05: fld     [esp+24h+arg_4]
+0x783F05: fld     [esp+24h+p0]
 0x783F09: fld     st
 0x783F0B: fsubp   st(2), st
 0x783F0D: fld     st(2)
@@ -58,9 +58,9 @@
 0x783F11: faddp   st(1), st
 0x783F13: fstp    [esp+24h+var_10]
 0x783F17: fld     dword ptr [ecx+4]
-0x783F1A: fstp    [esp+24h+arg_4]
+0x783F1A: fstp    [esp+24h+p0]
 0x783F1E: fld     dword ptr [eax+4]
-0x783F21: fld     [esp+24h+arg_4]
+0x783F21: fld     [esp+24h+p0]
 0x783F25: fld     st
 0x783F27: fsubp   st(2), st
 0x783F29: fld     st(2)
@@ -81,10 +81,10 @@
 0x783F51: fld     [esp+24h+var_14]
 0x783F55: fld     st
 0x783F57: fsubp   st(2), st
-0x783F59: mov     esi, [esp+24h+arg_0]
+0x783F59: mov     esi, [esp+24h+result]
 0x783F5D: fld     st(4)
 0x783F5F: sub     esp, 8
-0x783F62: mov     ecx, esi
+0x783F62: mov     ecx, esi; this
 0x783F64: fmulp   st(2), st
 0x783F66: faddp   st(1), st
 0x783F68: fstp    [esp+2Ch+var_4]
@@ -106,9 +106,9 @@
 0x783F96: fld     st(2)
 0x783F98: fmulp   st(2), st
 0x783F9A: faddp   st(1), st
-0x783F9C: fstp    [esp+2Ch+arg_4]
-0x783FA0: fld     [esp+2Ch+arg_4]
-0x783FA4: fstp    [esp+2Ch+var_28]; float
+0x783F9C: fstp    [esp+2Ch+p0]
+0x783FA0: fld     [esp+2Ch+p0]
+0x783FA4: fstp    [esp+2Ch+y]; y
 0x783FA8: fld     [esp+2Ch+var_18]
 0x783FAC: fld     [esp+2Ch+var_8]
 0x783FB0: fld     st
@@ -116,10 +116,10 @@
 0x783FB4: fxch    st(1)
 0x783FB6: fmulp   st(2), st
 0x783FB8: faddp   st(1), st
-0x783FBA: fstp    [esp+2Ch+arg_4]
-0x783FBE: fld     [esp+2Ch+arg_4]
-0x783FC2: fstp    [esp+2Ch+var_2C]; float
-0x783FC5: call    sub_78E5A0
+0x783FBA: fstp    [esp+2Ch+p0]
+0x783FBE: fld     [esp+2Ch+p0]
+0x783FC2: fstp    [esp+2Ch+x]; x
+0x783FC5: call    OB_stVec_ctor_xy_010201A0; Oblivion stVec(x,y) constructor: stores x/y, zeros z/w/v, and sets logical size to 2. Exact body corroborated by RT4.1 Vec.cpp.
 0x783FCA: mov     eax, esi
 0x783FCC: pop     esi
 0x783FCD: add     esp, 20h

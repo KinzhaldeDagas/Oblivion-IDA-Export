@@ -8,41 +8,41 @@ __m128 *__thiscall sub_9519C0(void *this, _DWORD *a2, __m128 *a3, __m128 *a4)
   unsigned int v12; // [esp+18h] [ebp-8h]
   unsigned int v13; // [esp+1Ch] [ebp-4h]
 
-  for ( i = 0; i < 0xA; ++i )
+  for ( i = 0; i < 0xA; ++i ) /*0x9519d1*/
   {
-    *(_OWORD *)*((_DWORD *)this + 0x1A) = *(_OWORD *)a3[1].m128_i32[1];
-    *(_OWORD *)(*((_DWORD *)this + 0x1A) + 0x10) = *(_OWORD *)a3[2].m128_i32[1];
-    *(_OWORD *)(*((_DWORD *)this + 0x1A) + 0x20) = *(_OWORD *)a3[3].m128_i32[1];
-    sub_8D1700(
-      (__m128 *)&stru_BA7A40,
+    *(_OWORD *)*((_DWORD *)this + 0x1A) = *(_OWORD *)a3[1].m128_i32[1]; /*0x9519dc*/
+    *(_OWORD *)(*((_DWORD *)this + 0x1A) + 0x10) = *(_OWORD *)a3[2].m128_i32[1]; /*0x9519e8*/
+    *(_OWORD *)(*((_DWORD *)this + 0x1A) + 0x20) = *(_OWORD *)a3[3].m128_i32[1]; /*0x9519f5*/
+    sub_8D1700( /*0x951a0f*/
+      (__m128 *)&unk_BA7A40,
       *((__m128 **)this + 0x1A),
       (__m128 *)(*((_DWORD *)this + 0x1A) + 0x10),
       (__m128 *)(*((_DWORD *)this + 0x1A) + 0x20),
       (int)&v11);
-    if ( *(float *)&v11 >= (double)*(float *)&SrcStr
+    if ( *(float *)&v11 >= (double)*(float *)&SrcStr /*0x951a48*/
       && *(float *)&v12 >= (double)*(float *)&SrcStr
       && *(float *)&v13 >= (double)*(float *)&SrcStr )
     {
-      break;
+      break; /*0x951a48*/
     }
-    a3 = sub_958F40(a2, a3);
+    a3 = sub_958F40(a2, a3); /*0x951a57*/
   }
-  v7 = a3[1].m128_i32[1];
-  *(_OWORD *)*((_DWORD *)this + 0x18) = *(_OWORD *)(v7 + 0x10);
-  *(_OWORD *)*((_DWORD *)this + 0x19) = *(_OWORD *)(v7 + 0x20);
-  v8 = a3[2].m128_i32[1];
-  *(_OWORD *)(*((_DWORD *)this + 0x18) + 0x10) = *(_OWORD *)(v8 + 0x10);
-  *(_OWORD *)(*((_DWORD *)this + 0x19) + 0x10) = *(_OWORD *)(v8 + 0x20);
-  v9 = a3[3].m128_i32[1];
-  *(_OWORD *)(*((_DWORD *)this + 0x18) + 0x20) = *(_OWORD *)(v9 + 0x10);
-  *(_OWORD *)(*((_DWORD *)this + 0x19) + 0x20) = *(_OWORD *)(v9 + 0x20);
-  **((_DWORD **)this + 0x1B) = 3;
-  a4[1] = _mm_add_ps(
+  v7 = a3[1].m128_i32[1]; /*0x951a5f*/
+  *(_OWORD *)*((_DWORD *)this + 0x18) = *(_OWORD *)(v7 + 0x10); /*0x951a69*/
+  *(_OWORD *)*((_DWORD *)this + 0x19) = *(_OWORD *)(v7 + 0x20); /*0x951a73*/
+  v8 = a3[2].m128_i32[1]; /*0x951a76*/
+  *(_OWORD *)(*((_DWORD *)this + 0x18) + 0x10) = *(_OWORD *)(v8 + 0x10); /*0x951a80*/
+  *(_OWORD *)(*((_DWORD *)this + 0x19) + 0x10) = *(_OWORD *)(v8 + 0x20); /*0x951a8b*/
+  v9 = a3[3].m128_i32[1]; /*0x951a8f*/
+  *(_OWORD *)(*((_DWORD *)this + 0x18) + 0x20) = *(_OWORD *)(v9 + 0x10); /*0x951a99*/
+  *(_OWORD *)(*((_DWORD *)this + 0x19) + 0x20) = *(_OWORD *)(v9 + 0x20); /*0x951aa4*/
+  **((_DWORD **)this + 0x1B) = 3; /*0x951aab*/
+  a4[1] = _mm_add_ps( /*0x951b10*/
             _mm_add_ps(
               _mm_mul_ps(_mm_shuffle_ps((__m128)v11, (__m128)v11, 0), *(__m128 *)*((_DWORD *)this + 0x18)),
               _mm_mul_ps(_mm_shuffle_ps((__m128)v12, (__m128)v12, 0), *(__m128 *)(*((_DWORD *)this + 0x18) + 0x10))),
             _mm_mul_ps(_mm_shuffle_ps((__m128)v13, (__m128)v13, 0), *(__m128 *)(*((_DWORD *)this + 0x18) + 0x20)));
-  a4[2].m128_f32[0] = -a3[1].m128_f32[0];
-  *a4 = _mm_xor_ps(*a3, (__m128)xmmword_A965C0);
-  return a4;
+  a4[2].m128_f32[0] = -a3[1].m128_f32[0]; /*0x951b19*/
+  *a4 = _mm_xor_ps(*a3, (__m128)xmmword_A965C0); /*0x951b2b*/
+  return a4; /*0x951b2e*/
 }

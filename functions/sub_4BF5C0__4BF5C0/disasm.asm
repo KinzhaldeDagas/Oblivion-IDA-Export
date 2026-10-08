@@ -25,7 +25,6 @@
 0x4BF602: mov     [esp+30h+var_14], ebp
 0x4BF606: mov     [esp+30h+var_18], ebp
 0x4BF60A: jmp     short loc_4BF614
-0x4BF60C: align 10h
 0x4BF610: mov     dl, byte ptr [esp+30h+var_20]
 0x4BF614: cmp     dl, 4
 0x4BF617: jnb     loc_4BF93A

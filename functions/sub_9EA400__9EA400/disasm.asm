@@ -1,7 +1,7 @@
-0x9EA400: push    5
+0x9EA400: push    5; defaultValue
 0x9EA402: push    offset aIperklightarmo; "iPerkLightArmorMasterMinSum"
-0x9EA407: mov     ecx, offset iPerkLightArmorMasterMinSum
-0x9EA40C: call    GameSetting_ConstrAndReg
+0x9EA407: mov     ecx, 0B37260h; self
+0x9EA40C: call    GameSetting_ConstrAndReg; Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.
 0x9EA411: push    offset sub_A1EBE0; void (__cdecl *)()
 0x9EA416: call    _atexit
 0x9EA41B: pop     ecx

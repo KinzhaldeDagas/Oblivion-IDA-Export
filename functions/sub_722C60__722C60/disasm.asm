@@ -14,16 +14,16 @@
 0x722C8A: mov     ecx, [eax+1Ch]
 0x722C8D: mov     esi, [eax+20h]
 0x722C90: mov     [esp+98h+var_88], ebx
-0x722C94: mov     [esp+98h+var_68], ecx
+0x722C94: mov     [esp+98h+vertices], ecx
 0x722C98: mov     [esp+98h+var_64], esi
 0x722C9C: jz      loc_722E35
 0x722CA2: mov     ebx, [esp+98h+arg_0]
 0x722CA9: lea     edi, [ebp+30h]
-0x722CAC: push    edi
-0x722CAD: lea     eax, [esp+9Ch+var_54]
-0x722CB1: push    eax
-0x722CB2: mov     ecx, ebx
-0x722CB4: call    NiMAtrix33_Multiply
+0x722CAC: push    edi; right
+0x722CAD: lea     eax, [esp+9Ch+out]
+0x722CB1: push    eax; out
+0x722CB2: mov     ecx, ebx; this
+0x722CB4: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x722CB9: push    eax
 0x722CBA: lea     ecx, [esp+9Ch+var_24]
 0x722CBE: push    ecx
@@ -61,9 +61,9 @@
 0x722D20: fstp    [esp+0A4h+var_7C]
 0x722D24: fld     dword ptr [ebp+60h]
 0x722D27: fstp    [esp+0A4h+var_6C]
-0x722D2B: call    sub_710250
+0x722D2B: call    NiPoint3_MultiplyMatrix3
 0x722D30: fld     [esp+0A4h+var_6C]
-0x722D34: mov     esi, [esp+0A4h+var_68]
+0x722D34: mov     esi, [esp+0A4h+vertices]
 0x722D38: fld1
 0x722D3A: add     esp, 0Ch
 0x722D3D: test    esi, esi
@@ -111,19 +111,19 @@
 0x722DBF: mov     esi, [esp+98h+var_64]
 0x722DC3: test    esi, esi
 0x722DC5: jz      short loc_722E0D
-0x722DC7: lea     eax, [esp+98h+var_54]
+0x722DC7: lea     eax, [esp+98h+out]
 0x722DCB: push    eax
 0x722DCC: lea     ecx, [esp+9Ch+var_24]
 0x722DD0: call    sub_7102B0
 0x722DD5: cmp     word ptr [esp+98h+var_88], 0
 0x722DDB: jbe     short loc_722E0D
 0x722DDD: movzx   edi, word ptr [esp+98h+var_88]
-0x722DE2: lea     ecx, [esp+98h+var_54]
+0x722DE2: lea     ecx, [esp+98h+out]
 0x722DE6: push    ecx
 0x722DE7: lea     edx, [esp+9Ch+var_60]
 0x722DEB: push    esi
 0x722DEC: push    edx
-0x722DED: call    sub_710250
+0x722DED: call    NiPoint3_MultiplyMatrix3
 0x722DF2: mov     ecx, [eax]
 0x722DF4: mov     [esi], ecx
 0x722DF6: mov     edx, [eax+4]
@@ -135,13 +135,13 @@
 0x722E08: sub     edi, 1
 0x722E0B: jnz     short loc_722DE2
 0x722E0D: mov     ebx, [esp+98h+var_88]
-0x722E11: mov     eax, [esp+98h+var_68]
+0x722E11: mov     eax, [esp+98h+vertices]
 0x722E15: movzx   ecx, bx
-0x722E18: push    eax
-0x722E19: push    ecx
+0x722E18: push    eax; vertices
+0x722E19: push    ecx; vertexCount
 0x722E1A: mov     ecx, [ebp+0B4h]
-0x722E20: add     ecx, 0Ch
-0x722E23: call    sub_72A0F0
+0x722E20: add     ecx, 0Ch; self
+0x722E23: call    NiSphere_ComputeFromVertices; Local bounding sphere for contiguous NiPoint3 array: midpoint of component minima/maxima; radius=max vertex distance to midpoint; zero-count case clears sphere. Writes sphere only, not NiAVObject world bounds or renderer dirty flags. Prettier Faces invokes after morph on direct CPU vertex data; propagation of world bounds remains a separate runtime verification requirement.
 0x722E28: pop     edi
 0x722E29: pop     esi
 0x722E2A: pop     ebp
@@ -184,20 +184,19 @@
 0x722EA3: test    esi, esi
 0x722EA5: jz      loc_722E11
 0x722EAB: mov     ecx, [esp+98h+arg_0]
-0x722EB2: lea     edx, [esp+98h+var_54]
+0x722EB2: lea     edx, [esp+98h+out]
 0x722EB6: push    edx
 0x722EB7: call    sub_7102B0
 0x722EBC: test    bx, bx
 0x722EBF: jbe     loc_722E11
 0x722EC5: movzx   edi, bx
 0x722EC8: jmp     short loc_722ED0
-0x722ECA: align 10h
-0x722ED0: lea     eax, [esp+98h+var_54]
+0x722ED0: lea     eax, [esp+98h+out]
 0x722ED4: push    eax
 0x722ED5: lea     ecx, [esp+9Ch+var_60]
 0x722ED9: push    esi
 0x722EDA: push    ecx
-0x722EDB: call    sub_710250
+0x722EDB: call    NiPoint3_MultiplyMatrix3
 0x722EE0: mov     edx, [eax]
 0x722EE2: mov     [esi], edx
 0x722EE4: mov     ecx, [eax+4]

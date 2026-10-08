@@ -1,1 +1,1 @@
-0x4152C0: push    ecx
+0x4152C0: push    ecx; this=EffectItemList; args are rangeFilter (0 self,1 touch,2 target,3 any) and requireArea. Returns effective (flag 0x400000 clear) qualifying item with greatest truncated MagickaCostForCaster(item,null).

@@ -1,5 +1,5 @@
-0x6508D0: mov     edx, ecx
-0x6508D2: mov     ecx, [esp+arg_0]
+0x6508D0: mov     edx, ecx; High/MiddleHigh process vtable +0x124. Returns cached BackWeapon for 2H blade, 2H blunt, staff, and bow; SideWeapon otherwise. This accessor is adjacent to, but not called by, the native Arrow:0 clone/attach block.
+0x6508D2: mov     ecx, [esp+animData]; this
 0x6508D6: test    ecx, ecx
 0x6508D8: jz      short loc_650917
 0x6508DA: mov     eax, [edx+0E4h]
@@ -13,9 +13,9 @@
 0x6508F6: jle     short loc_6508FD
 0x6508F8: cmp     eax, 5
 0x6508FB: jle     short loc_65090A
-0x6508FD: mov     [esp+arg_0], 5
-0x650905: jmp     sub_477EC0
-0x65090A: mov     [esp+arg_0], 4
-0x650912: jmp     sub_477EC0
+0x6508FD: mov     [esp+animData], 5; nodeIndex
+0x650905: jmp     ActorSkinInfo_GetCachedNode; Returns ActorSkinInfo cached node at +8+nodeIndex*8. Index 6 is QuiverNode at +0x38, the native Arrow:0 clone source.
+0x65090A: mov     [esp+animData], 4; nodeIndex
+0x650912: jmp     ActorSkinInfo_GetCachedNode; Returns ActorSkinInfo cached node at +8+nodeIndex*8. Index 6 is QuiverNode at +0x38, the native Arrow:0 clone source.
 0x650917: mov     eax, [edx+108h]
 0x65091D: retn    4

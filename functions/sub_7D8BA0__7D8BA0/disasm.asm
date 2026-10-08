@@ -23,7 +23,7 @@
 0x7D8BF2: cmp     word ptr [ebp+0B8h], 0Ah
 0x7D8BFA: mov     [esp+140h+var_128], ebp
 0x7D8BFE: mov     [esp+140h+var_120], eax
-0x7D8C02: mov     [esp+140h+var_118], ecx
+0x7D8C02: mov     [esp+140h+outTexture], ecx
 0x7D8C06: jnb     loc_7D8DD3
 0x7D8C0C: push    2Ch ; ','; Size
 0x7D8C0E: call    FormHeapAlloc
@@ -32,7 +32,7 @@
 0x7D8C1A: test    eax, eax
 0x7D8C1C: mov     [esp+140h+var_4], 0
 0x7D8C27: jz      short loc_7D8C48
-0x7D8C29: push    offset sub_7016A0; a5
+0x7D8C29: push    offset NiPointerSlot_Release; a5
 0x7D8C2E: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x7D8C33: push    0Ah; size
 0x7D8C35: lea     esi, [eax+4]
@@ -52,7 +52,7 @@
 0x7D8C65: test    eax, eax
 0x7D8C67: mov     [esp+140h+var_4], 1
 0x7D8C72: jz      short loc_7D8C93
-0x7D8C74: push    offset sub_7016A0; a5
+0x7D8C74: push    offset NiPointerSlot_Release; a5
 0x7D8C79: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x7D8C7E: push    0Ah; size
 0x7D8C80: lea     esi, [eax+4]
@@ -72,7 +72,7 @@
 0x7D8CB2: test    eax, eax
 0x7D8CB4: mov     [esp+140h+var_4], 2
 0x7D8CBF: jz      short loc_7D8CE0
-0x7D8CC1: push    offset sub_7016A0; a5
+0x7D8CC1: push    offset NiPointerSlot_Release; a5
 0x7D8CC6: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x7D8CCB: push    0Ah; size
 0x7D8CCD: lea     esi, [eax+4]
@@ -84,7 +84,7 @@
 0x7D8CE0: xor     esi, esi
 0x7D8CE2: push    0Ah; Size
 0x7D8CE4: mov     [esp+144h+var_4], ebx
-0x7D8CEB: mov     [esp+144h+var_118], esi
+0x7D8CEB: mov     [esp+144h+outTexture], esi
 0x7D8CEF: call    FormHeapAlloc
 0x7D8CF4: push    0Ah; Size
 0x7D8CF6: mov     ebx, eax
@@ -96,13 +96,13 @@
 0x7D8D0C: jz      short loc_7D8D2F
 0x7D8D0E: mov     edx, [eax-4]
 0x7D8D11: lea     ebp, [eax-4]
-0x7D8D14: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x7D8D14: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x7D8D19: push    edx; int
 0x7D8D1A: push    4; unsigned int
 0x7D8D1C: push    eax; void *
 0x7D8D1D: call    $LN21
 0x7D8D22: push    ebp
-0x7D8D23: call    FormHeapFree
+0x7D8D23: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7D8D28: mov     ebp, [esp+144h+var_128]
 0x7D8D2C: add     esp, 4
 0x7D8D2F: mov     eax, [ebp+0C0h]
@@ -110,13 +110,13 @@
 0x7D8D37: jz      short loc_7D8D5A
 0x7D8D39: mov     ecx, [eax-4]
 0x7D8D3C: lea     ebp, [eax-4]
-0x7D8D3F: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x7D8D3F: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x7D8D44: push    ecx; int
 0x7D8D45: push    4; unsigned int
 0x7D8D47: push    eax; void *
 0x7D8D48: call    $LN21
 0x7D8D4D: push    ebp
-0x7D8D4E: call    FormHeapFree
+0x7D8D4E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7D8D53: mov     ebp, [esp+144h+var_128]
 0x7D8D57: add     esp, 4
 0x7D8D5A: mov     eax, [ebp+0C4h]
@@ -124,21 +124,21 @@
 0x7D8D62: jz      short loc_7D8D85
 0x7D8D64: mov     edx, [eax-4]
 0x7D8D67: lea     ebp, [eax-4]
-0x7D8D6A: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x7D8D6A: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x7D8D6F: push    edx; int
 0x7D8D70: push    4; unsigned int
 0x7D8D72: push    eax; void *
 0x7D8D73: call    $LN21
 0x7D8D78: push    ebp
-0x7D8D79: call    FormHeapFree
+0x7D8D79: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7D8D7E: mov     ebp, [esp+144h+var_128]
 0x7D8D82: add     esp, 4
 0x7D8D85: mov     eax, [ebp+0D0h]
 0x7D8D8B: push    eax
-0x7D8D8C: call    FormHeapFree
+0x7D8D8C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7D8D91: mov     eax, [ebp+0C8h]
 0x7D8D97: push    eax
-0x7D8D98: call    FormHeapFree
+0x7D8D98: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7D8D9D: mov     eax, [esp+148h+var_12C]
 0x7D8DA1: mov     ecx, [esp+148h+var_11C]
 0x7D8DA5: mov     edx, [esp+148h+var_124]
@@ -392,7 +392,7 @@
 0x7D902A: mov     [ecx], eax
 0x7D902C: mov     [ecx+4], eax
 0x7D902F: mov     [ecx+8], al
-0x7D9032: mov     ecx, [esp+140h+var_118]
+0x7D9032: mov     ecx, [esp+140h+outTexture]
 0x7D9036: mov     [esp+140h+var_12C], eax
 0x7D903A: mov     eax, [esp+140h+var_120]
 0x7D903E: sub     edi, eax
@@ -401,7 +401,6 @@
 0x7D9044: mov     [esp+140h+var_124], edi
 0x7D9048: mov     [esp+140h+var_120], ecx
 0x7D904C: jmp     short loc_7D9054
-0x7D904E: align 10h
 0x7D9050: mov     edi, [esp+140h+var_124]
 0x7D9054: mov     esi, [edi+ebp]
 0x7D9057: test    esi, esi
@@ -413,7 +412,7 @@
 0x7D9068: test    eax, eax
 0x7D906A: jz      short loc_7D9082
 0x7D906C: lea     esp, [esp+0]
-0x7D9070: cmp     eax, offset dword_B3F95C
+0x7D9070: cmp     eax, offset stru_B3F95C
 0x7D9075: jz      loc_7D916A
 0x7D907B: mov     eax, [eax+4]
 0x7D907E: test    eax, eax
@@ -426,19 +425,19 @@
 0x7D9090: mov     ebx, [eax+38h]
 0x7D9093: push    offset a_n; "_n"
 0x7D9098: lea     ecx, [esp+144h+Src]
-0x7D909C: push    ebx
-0x7D909D: push    ecx
-0x7D909E: call    sub_7B4160
+0x7D909C: push    ebx; sourcePath
+0x7D909D: push    ecx; outPath
+0x7D909E: call    BuildTextureVariantPath; Builds a sibling texture variant path. Keeps the original extension, truncates the basename at its final underscore after the last separator, appends the requested suffix, and prefixes Data\\ for relative paths.
 0x7D90A3: add     esp, 0Ch
 0x7D90A6: cmp     [esp+140h+Src], 0
 0x7D90AB: jz      loc_7D919F
-0x7D90B1: push    1; char
-0x7D90B3: push    1; char
+0x7D90B1: push    1; requireMipmaps
+0x7D90B3: push    1; loadFromCache
 0x7D90B5: lea     edx, [esp+148h+Src]
-0x7D90B9: push    edx; Src
-0x7D90BA: lea     eax, [esp+14Ch+var_118]
-0x7D90BE: push    eax; int
-0x7D90BF: call    sub_7B8200
+0x7D90B9: push    edx; path
+0x7D90BA: lea     eax, [esp+14Ch+outTexture]
+0x7D90BE: push    eax; outTexture
+0x7D90BF: call    NiSourceTexture_LoadChecked; Loads/caches a NiSourceTexture by filename and optionally rejects a loaded texture that lacks mipmaps. The first argument is the returned smart-pointer storage.
 0x7D90C4: add     esp, 10h
 0x7D90C7: mov     edi, eax
 0x7D90C9: mov     esi, [ebp+0]
@@ -466,7 +465,7 @@
 0x7D9104: add     eax, 4
 0x7D9107: push    eax; lpAddend
 0x7D9108: call    dword ptr ds:0A28078h
-0x7D910E: mov     esi, [esp+140h+var_118]
+0x7D910E: mov     esi, [esp+140h+outTexture]
 0x7D9112: test    esi, esi
 0x7D9114: mov     [esp+140h+var_4], 0FFFFFFFFh
 0x7D911F: jz      short loc_7D913D
@@ -519,19 +518,19 @@
 0x7D919C: mov     [ecx+edx], al
 0x7D919F: push    offset a_g; "_g"
 0x7D91A4: lea     edx, [esp+144h+Src]
-0x7D91A8: push    ebx
-0x7D91A9: push    edx
-0x7D91AA: call    sub_7B4160
+0x7D91A8: push    ebx; sourcePath
+0x7D91A9: push    edx; outPath
+0x7D91AA: call    BuildTextureVariantPath; Builds a sibling texture variant path. Keeps the original extension, truncates the basename at its final underscore after the last separator, appends the requested suffix, and prefixes Data\\ for relative paths.
 0x7D91AF: add     esp, 0Ch
 0x7D91B2: cmp     [esp+140h+Src], 0
 0x7D91B7: jz      loc_7D924D
-0x7D91BD: push    1; char
-0x7D91BF: push    1; char
+0x7D91BD: push    1; requireMipmaps
+0x7D91BF: push    1; loadFromCache
 0x7D91C1: lea     eax, [esp+148h+Src]
-0x7D91C5: push    eax; Src
+0x7D91C5: push    eax; path
 0x7D91C6: lea     ecx, [esp+14Ch+var_11C]
-0x7D91CA: push    ecx; int
-0x7D91CB: call    sub_7B8200
+0x7D91CA: push    ecx; outTexture
+0x7D91CB: call    NiSourceTexture_LoadChecked; Loads/caches a NiSourceTexture by filename and optionally rejects a loaded texture that lacks mipmaps. The first argument is the returned smart-pointer storage.
 0x7D91D0: add     esp, 10h
 0x7D91D3: mov     edi, eax
 0x7D91D5: mov     ebx, [esp+140h+var_120]
@@ -604,3 +603,33 @@
 0x7D92A5: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x7D92AA: add     esp, 12Ch
 0x7D92B0: retn    24h ; '$'
+0x9CEE80: mov     eax, [ebp-124h]
+0x9CEE86: push    eax
+0x9CEE87: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CEE8C: pop     ecx
+0x9CEE8D: retn
+0x9CEE8E: mov     eax, [ebp-124h]
+0x9CEE94: push    eax
+0x9CEE95: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CEE9A: pop     ecx
+0x9CEE9B: retn
+0x9CEE9C: mov     eax, [ebp-124h]
+0x9CEEA2: push    eax
+0x9CEEA3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CEEA8: pop     ecx
+0x9CEEA9: retn
+0x9CEEAA: lea     ecx, [ebp-118h]; slot
+0x9CEEB0: jmp     NiPointerSlot_Release
+0x9CEEB5: lea     ecx, [ebp-11Ch]; slot
+0x9CEEBB: jmp     NiPointerSlot_Release
+0x9CEEC0: mov     edx, [esp+arg_4]
+0x9CEEC4: lea     eax, [edx-130h]
+0x9CEECA: mov     ecx, [edx-134h]
+0x9CEED0: xor     ecx, eax
+0x9CEED2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CEED7: add     eax, 10h
+0x9CEEDA: mov     ecx, [edx-4]
+0x9CEEDD: xor     ecx, eax
+0x9CEEDF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CEEE4: mov     eax, offset stru_AF7C70
+0x9CEEE9: jmp     ___CxxFrameHandler3

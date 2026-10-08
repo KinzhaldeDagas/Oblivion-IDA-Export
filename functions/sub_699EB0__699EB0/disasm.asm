@@ -99,12 +99,12 @@
 0x699FCD: fld     dword ptr [edi+1Ch]
 0x699FD0: sub     esp, 8
 0x699FD3: fstp    [esp+24h+a2]; float
-0x699FD7: fstp    [esp+24h+var_24]; float
+0x699FD7: fstp    [esp+24h+a]; float
 0x699FDA: call    Min_Float
-0x699FDF: fstp    [esp+24h+a2]; float
+0x699FDF: fstp    [esp+24h+a2]; b
 0x699FE3: fld     dword ptr ds:0A46B10h
-0x699FE9: fstp    [esp+24h+var_24]; float
-0x699FEC: call    sub_4AC760
+0x699FE9: fstp    [esp+24h+a]; a
+0x699FEC: call    Float_Min; Returns min(a,b) as a single-precision float. Native callers push two floats, clean 8 bytes, and consume ST0 as float; prior double return was an x87 decompiler artifact.
 0x699FF1: fmul    [esp+24h+arg_0]
 0x699FF5: add     esp, 8
 0x699FF8: fstp    [esp+1Ch+arg_0]

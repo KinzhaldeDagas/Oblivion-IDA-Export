@@ -7,7 +7,7 @@
 0x64AE9E: mov     ecx, esi
 0x64AEA0: call    ContainerEntryExtraData_DestroyDataTable
 0x64AEA5: push    esi
-0x64AEA6: call    FormHeapFree
+0x64AEA6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x64AEAB: mov     eax, [esp+0Ch+arg_0]
 0x64AEAF: add     esp, 4
 0x64AEB2: mov     [edi+0E8h], eax

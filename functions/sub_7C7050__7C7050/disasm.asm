@@ -22,7 +22,7 @@
 0x7C707A: pop     ebp
 0x7C707B: pop     esi
 0x7C707C: mov     [esp+arg_0], eax
-0x7C7080: jmp     sub_7C6100
+0x7C7080: jmp     ShadowSceneNode_UpdateGeometryReceiverAssociations; Test one incoming geometry against full-list lights and associate it with each eligible native receiver path.
 0x7C7085: pop     ebp
 0x7C7086: mov     al, 1
 0x7C7088: pop     esi
@@ -30,7 +30,7 @@
 0x7C708A: push    ebx
 0x7C708B: push    edi
 0x7C708C: push    ebp
-0x7C708D: push    offset dword_B3FD70
+0x7C708D: push    offset stru_B3FD70
 0x7C7092: mov     bl, 1
 0x7C7094: xor     edi, edi
 0x7C7096: call    NiRTTI_Cast
@@ -58,7 +58,7 @@
 0x7C70EA: mov     ecx, [esp+10h+arg_4]
 0x7C70EE: push    ecx
 0x7C70EF: push    esi
-0x7C70F0: call    sub_7C6100
+0x7C70F0: call    ShadowSceneNode_UpdateGeometryReceiverAssociations; Test one incoming geometry against full-list lights and associate it with each eligible native receiver path.
 0x7C70F5: add     esp, 8
 0x7C70F8: mov     bl, al
 0x7C70FA: and     bl, 1
@@ -109,7 +109,7 @@
 0x7C7168: mov     eax, [esp+10h+arg_4]
 0x7C716C: push    eax
 0x7C716D: push    esi
-0x7C716E: call    sub_7C6100
+0x7C716E: call    ShadowSceneNode_UpdateGeometryReceiverAssociations; Test one incoming geometry against full-list lights and associate it with each eligible native receiver path.
 0x7C7173: jmp     short loc_7C7193
 0x7C7175: mov     edx, [esi]
 0x7C7177: mov     eax, [edx+8]

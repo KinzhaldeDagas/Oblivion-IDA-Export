@@ -24,7 +24,6 @@
 0x6BEA42: xor     ebx, ebx
 0x6BEA44: add     esi, 14h
 0x6BEA47: jmp     short loc_6BEA50
-0x6BEA49: align 10h
 0x6BEA50: mov     eax, [edi+21Ch]
 0x6BEA56: mov     edx, [eax+4]
 0x6BEA59: push    1
@@ -58,7 +57,7 @@
 0x6BEAA5: mov     eax, ds:0B3D088h[eax*4]
 0x6BEAAC: push    ecx
 0x6BEAAD: push    edi
-0x6BEAAE: call    eax ; dword_B3D088
+0x6BEAAE: call    eax ; unk_B3D088
 0x6BEAB0: add     esp, 1Ch
 0x6BEAB3: mov     [esi+1Ch], eax
 0x6BEAB6: add     ebx, 1

@@ -3,7 +3,7 @@
 0x728F22: mov     edi, [esp+8+arg_0]
 0x728F26: push    edi
 0x728F27: mov     esi, ecx
-0x728F29: call    nullsub_returnvVoid_1arg
+0x728F29: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x728F2E: cmp     dword ptr [edi+0D8h], 0A030007h
 0x728F38: jb      short loc_728F4A
 0x728F3A: mov     ecx, edi

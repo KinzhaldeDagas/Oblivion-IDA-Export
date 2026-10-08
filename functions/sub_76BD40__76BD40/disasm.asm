@@ -1,13 +1,13 @@
-0x76BD40: call    sub_761DF0
+0x76BD40: call    NiDX9Renderer_CreateD3D9Instance; Oblivion-authoritative: lazily loads D3D9.DLL, resolves Direct3DCreate9, and creates the process IDirect3D9 singleton with SDK version 0x20. Returns 0 on success, -1 on failure.
 0x76BD45: cmp     eax, 0FFFFFFFFh
 0x76BD48: jnz     short loc_76BD73
 0x76BD4A: push    0FFh; Src
 0x76BD4F: push    offset aCreationFailed; "Creation failed: Could not initialize D"...
 0x76BD54: push    100h; SizeInBytes
-0x76BD59: push    offset byte_B3F828; Dst
+0x76BD59: push    offset unk_B3F828; Dst
 0x76BD5E: call    _strncpy_s
 0x76BD63: push    offset aNidx9rendererC; "NiDX9Renderer::Create> Invalid device I"...
-0x76BD68: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x76BD68: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x76BD6D: add     esp, 14h
 0x76BD70: xor     eax, eax
 0x76BD72: retn

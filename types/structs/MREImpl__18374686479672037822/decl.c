@@ -1,1 +1,1 @@
-MREImpl
+typedef ManualResetEvent MREImpl;

@@ -1,1 +1,4 @@
-IInputObjectSite
+struct IInputObjectSite
+{
+const IInputObjectSiteVtbl *lpVtbl;
+};

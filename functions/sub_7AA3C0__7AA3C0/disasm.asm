@@ -32,7 +32,7 @@
 0x7AA40B: retn    8
 0x7AA40E: cmp     [esi+19h], bl
 0x7AA411: jz      short loc_7AA485
-0x7AA413: cmp     [esp+10h+arg_4], bl
+0x7AA413: cmp     byte ptr [esp+10h+arg_4], bl
 0x7AA417: jz      short loc_7AA480
 0x7AA419: cmp     ds:0B42CDEh, bl
 0x7AA41F: jz      short loc_7AA46B
@@ -52,7 +52,7 @@
 0x7AA444: jz      short loc_7AA426
 0x7AA446: cmp     eax, ebx
 0x7AA448: jnz     short loc_7AA45B
-0x7AA44A: mov     eax, dword ptr [esp+10h+arg_4]
+0x7AA44A: mov     eax, [esp+10h+arg_4]
 0x7AA44E: cmp     eax, ebx
 0x7AA450: setz    cl
 0x7AA453: mov     [esi+18h], cl

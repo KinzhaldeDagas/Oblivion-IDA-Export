@@ -1,6 +1,6 @@
 0x62EAA0: sub     esp, 8
 0x62EAA3: push    ebx
-0x62EAA4: mov     ebx, [esp+0Ch+arg_0]
+0x62EAA4: mov     ebx, [esp+0Ch+item]
 0x62EAA8: test    ebx, ebx
 0x62EAAA: jz      loc_62EBE9
 0x62EAB0: mov     eax, [ebx+8]
@@ -19,9 +19,9 @@
 0x62EADB: mov     ebp, [esp+10h+arg_4]
 0x62EADF: test    ebp, ebp
 0x62EAE1: jz      short loc_62EAF2
-0x62EAE3: push    ebx
-0x62EAE4: mov     ecx, offset unk_B3B94C
-0x62EAE9: call    sub_446C30
+0x62EAE3: push    ebx; item
+0x62EAE4: mov     ecx, offset stru_B3B94C; this
+0x62EAE9: call    BSSimpleList__Contains; Generic BSSimpleList membership test. Dialogue menu code uses it to avoid duplicate MenuTopics; social AI uses it for the recent-conversation target cooldown list.
 0x62EAEE: test    al, al
 0x62EAF0: jz      short loc_62EAFA
 0x62EAF2: pop     ebp
@@ -57,13 +57,13 @@
 0x62EB45: pop     edi
 0x62EB46: jnz     loc_62EBE0
 0x62EB4C: mov     ecx, ebp; this
-0x62EB4E: call    TESObjectREFR_GetParentCell
+0x62EB4E: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x62EB53: test    eax, eax
 0x62EB55: jz      short loc_62EBAF
 0x62EB57: mov     ecx, ebp; this
-0x62EB59: call    TESObjectREFR_GetParentCell
+0x62EB59: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x62EB5E: mov     ecx, eax; this
-0x62EB60: call    TESObjectCELL_IsInterior
+0x62EB60: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x62EB65: test    al, al
 0x62EB67: jz      short loc_62EBAF
 0x62EB69: mov     edx, [ebx]
@@ -78,11 +78,11 @@
 0x62EB87: call    eax
 0x62EB89: fld     dword ptr [eax+8]
 0x62EB8C: fsubr   [esp+14h+var_8]
-0x62EB90: fstp    [esp+14h+arg_0]
-0x62EB94: fld     [esp+14h+arg_0]
+0x62EB90: fstp    [esp+14h+item]
+0x62EB94: fld     [esp+14h+item]
 0x62EB98: fabs
-0x62EB9A: fstp    [esp+14h+arg_0]
-0x62EB9E: fld     [esp+14h+arg_0]
+0x62EB9A: fstp    [esp+14h+item]
+0x62EB9E: fld     [esp+14h+item]
 0x62EBA2: fcomp   dword ptr ds:0A6B324h
 0x62EBA8: fnstsw  ax
 0x62EBAA: test    ah, 41h

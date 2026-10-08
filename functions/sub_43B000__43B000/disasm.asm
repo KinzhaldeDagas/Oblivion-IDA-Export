@@ -12,8 +12,8 @@
 0x43B01C: test    al, 1
 0x43B01E: jnz     short loc_43B06F
 0x43B020: push    0; a2
-0x43B022: call    TESObjectREFR_GetParentCell
-0x43B027: mov     ecx, TES
+0x43B022: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x43B027: mov     ecx, ds:0B333A0h
 0x43B02D: push    eax; a1
 0x43B02E: call    TESObjectCELL_IsProcessLevel?LowHigh
 0x43B033: test    al, al
@@ -25,19 +25,19 @@
 0x43B041: mov     ecx, [esi+20h]
 0x43B044: push    eax
 0x43B045: push    ecx
-0x43B046: mov     ecx, ModelLoaderPtr
+0x43B046: mov     ecx, ds:0B33A1Ch
 0x43B04C: call    sub_43A8F0
 0x43B051: mov     eax, [esi+2Ch]
 0x43B054: mov     ecx, [esi+20h]; this
 0x43B057: push    0; a8
 0x43B059: push    eax; a7
-0x43B05A: call    TESObjectREFR_GetParentCell
+0x43B05A: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x43B05F: mov     edx, [esi+20h]
-0x43B062: mov     ecx, TES; ecx0
+0x43B062: mov     ecx, ds:0B333A0h; ecx0
 0x43B068: push    eax; a6
 0x43B069: push    edx; a1
 0x43B06A: call    sub_441EF0
-0x43B06F: mov     eax, ModelLoaderPtr
+0x43B06F: mov     eax, ds:0B33A1Ch
 0x43B074: mov     ecx, [eax+8]
 0x43B077: mov     edx, [ecx]
 0x43B079: mov     eax, [esi+20h]

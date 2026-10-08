@@ -1,1 +1,1 @@
-bhkMotorAction
+struct bhkMotorAction;

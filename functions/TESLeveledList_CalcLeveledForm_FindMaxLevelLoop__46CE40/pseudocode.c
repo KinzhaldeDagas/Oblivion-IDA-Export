@@ -1,37 +1,41 @@
-int __usercall TESLeveledList_CalcLeveledForm_::FindMaxLevelLoop@<eax>(
+int __userpurge TESLeveledList_CalcLeveledForm_::FindMaxLevelLoop@<eax>(
         unsigned __int16 **a1@<eax>,
         unsigned __int16 a2@<cx>,
         unsigned __int16 *a3@<ebx>,
-        int a4@<ebp>,
-        int a5@<edi>,
+        unsigned __int8 *a4@<ebp>,
+        unsigned int a5@<edi>,
         unsigned __int16 si0@<si>,
         int a7,
         int a8,
-        int a9,
-        int a10,
-        int a11,
+        void *a9,
+        TESObject *a10,
+        TESObject *a11,
         int a12,
-        int a13,
-        char a14,
-        int a15,
+        TESObject *a13,
+        int a14,
+        void *a15,
         int a16,
         int a17,
         int a18,
         int a19,
-        int a20)
+        TESObject *a20,
+        int a21,
+        int a22,
+        int a23,
+        int a24)
 {
-  unsigned __int16 *v20; // edx
-  unsigned __int16 v21; // ax
+  unsigned __int16 *v24; // edx
+  unsigned __int16 v25; // ax
 
-  v20 = a1[1];
-  if ( v20 == a3 && *a1 == a3 )
-    JUMPOUT(0x46CE5E);
-  v21 = **a1;
-  if ( v21 <= a2 )
-    return TESLeveledList_CalcLeveledForm_::FindMaxLevelLoop_next(
-             (int)v20,
+  v24 = a1[1]; /*0x46ce40*/
+  if ( v24 == a3 && *a1 == a3 ) /*0x46ce49*/
+    JUMPOUT(0x46CE5E); /*0x46ce5e*/
+  v25 = **a1; /*0x46ce4d*/
+  if ( v25 <= a2 ) /*0x46ce53*/
+    return TESLeveledList_CalcLeveledForm_::FindMaxLevelLoop_next( /*0x46ce53*/
+             (unsigned __int16 **)v24,
              a2,
-             (int)a3,
+             a3,
              a4,
              a5,
              si0,
@@ -48,12 +52,16 @@ int __usercall TESLeveledList_CalcLeveledForm_::FindMaxLevelLoop@<eax>(
              a17,
              a18,
              a19,
-             a20);
+             a20,
+             a21,
+             a22,
+             a23,
+             a24);
   else
-    return TESLeveledList_CalcLeveledForm_::FindMaxLevelLoop_next(
-             (int)v20,
-             v21,
-             (int)a3,
+    return TESLeveledList_CalcLeveledForm_::FindMaxLevelLoop_next( /*0x46ce56*/
+             (unsigned __int16 **)v24,
+             v25,
+             a3,
              a4,
              a5,
              si0,
@@ -70,5 +78,9 @@ int __usercall TESLeveledList_CalcLeveledForm_::FindMaxLevelLoop@<eax>(
              a17,
              a18,
              a19,
-             a20);
+             a20,
+             a21,
+             a22,
+             a23,
+             a24);
 }

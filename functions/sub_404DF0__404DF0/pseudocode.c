@@ -1,12 +1,12 @@
-int *__thiscall sub_404DF0(int *this)
+float *__thiscall sub_404DF0(float *this)
 {
-  int *result; // eax
+  float *result; // eax
 
-  result = this;
-  if ( !this )
+  result = this; /*0x404df0*/
+  if ( !this ) /*0x404df4*/
   {
-    LOBYTE(dword_B35464) = 0;
-    return &dword_B35464;
+    LOBYTE(flt_B35464[0]) = 0; /*0x404df6*/
+    return flt_B35464; /*0x404dfc*/
   }
-  return result;
+  return result; /*0x404e01*/
 }

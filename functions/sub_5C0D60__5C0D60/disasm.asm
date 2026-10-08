@@ -1,13 +1,13 @@
 0x5C0D60: mov     ecx, ds:0B33B00h
 0x5C0D66: push    edi
 0x5C0D67: xor     edi, edi
-0x5C0D69: call    sub_45A170
+0x5C0D69: call    TESSaveLoadGame_UseSaveGameBlocks
 0x5C0D6E: test    al, al
 0x5C0D70: jz      short loc_5C0D77
 0x5C0D72: mov     edi, 6
 0x5C0D77: xor     edx, edx
 0x5C0D79: lea     esp, [esp+0]
-0x5C0D80: mov     eax, ds:dword_B3B444[edx]
+0x5C0D80: mov     eax, dword ptr ds:unk_B3B444[edx]
 0x5C0D86: add     edi, 1
 0x5C0D89: test    eax, eax
 0x5C0D8B: jz      short loc_5C0DA2
@@ -31,7 +31,7 @@
 0x5C0DC4: jz      short loc_5C0E06
 0x5C0DC6: mov     ecx, [esi]
 0x5C0DC8: push    ecx; a1
-0x5C0DC9: call    TESForm_LookupByFormID
+0x5C0DC9: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x5C0DCE: mov     edx, [esi+5]
 0x5C0DD1: add     esp, 4
 0x5C0DD4: push    offset a_InterfaceMenu; ".\\Interface\\Menus\\QuickKeysMenu.cpp"

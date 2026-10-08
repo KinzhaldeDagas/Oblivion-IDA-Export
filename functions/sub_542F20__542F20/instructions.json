@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x542F20",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Oblivion's normal Sky frame update: determines underwater state and sky visibility, advances weather/time, calls UpdateColors and UpdateFog, updates wind/effects and every active sky child, publishes the sky vector, and clears transient flags.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x542F4B",
-    "line": "call    nullsub_returnTrue_0arg",
+    "line": "call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x542F53",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x542F6D",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x542FA1",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x542FB8",
-    "line": "or      dword ptr [esi+0FCh], 4",
+    "line": "or      dword ptr [esi+0FCh], 4; Fog water decode: normal sky update sets Flags0FC bit 2 when cell water height exceeds active scene height.",
     "mnemonic": "or",
     "size": 7
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x542FC1",
-    "line": "and     dword ptr [esi+0FCh], 0FFFFFFFBh",
+    "line": "and     dword ptr [esi+0FCh], 0FFFFFFFBh; Fog water decode: normal sky update clears Flags0FC bit 2 when active scene height is not below water.",
     "mnemonic": "and",
     "size": 7
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x543004",
-    "line": "call    sub_5422F0",
+    "line": "call    Sky_UpdateWeatherSelectionAndTransition; Exterior fog decode: updates selected weather and transition state. Maintains Sky::firstWeather, secondWeather, and weatherPercent consumed by fog distance 0x541DD0 and fog color 0x5418F0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -409,25 +409,25 @@
   },
   {
     "ea": "0x54301F",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x543021",
-    "line": "call    sub_5418F0",
+    "line": "call    Sky__UpdateColors; Exterior fog decode: normal sky update refreshes active sky/weather colors before fog distance update.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x543026",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x543028",
-    "line": "call    sub_541DD0",
+    "line": "call    Sky__UpdateFog; Fog decode: normal sky update calls 0x541DD0; this may take water branch if Flags0FC bit 2 was set earlier in 0x542F20.",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x54302F",
-    "line": "call    sub_53FF90",
+    "line": "call    sub_53FF90; Pass231: Updates weather wind globals after fog distance update in normal sky path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x543036",
-    "line": "call    sub_542590",
+    "line": "call    sub_542590; Pass231: Updates sky weather side lists/effects before Atmosphere virtual update.",
     "mnemonic": "call",
     "size": 5
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x543044",
-    "line": "fld     [esp+0Ch+arg_0]",
+    "line": "fld     [esp+0Ch+deltaTime]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x543050",
-    "line": "call    eax",
+    "line": "call    eax; Exterior fog decode: normal sky update calls Atmosphere virtual update after fog distances; this reaches 0x53B0E0 to copy Sky fog into B333E4.",
     "mnemonic": "call",
     "size": 2
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x54305B",
-    "line": "fld     [esp+0Ch+arg_0]",
+    "line": "fld     [esp+0Ch+deltaTime]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x543072",
-    "line": "fld     [esp+0Ch+arg_0]",
+    "line": "fld     [esp+0Ch+deltaTime]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x543089",
-    "line": "fld     [esp+0Ch+arg_0]",
+    "line": "fld     [esp+0Ch+deltaTime]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x5430A0",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -967,7 +967,7 @@
   },
   {
     "ea": "0x543123",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1015,7 +1015,7 @@
   },
   {
     "ea": "0x54313D",
-    "line": "fld     [esp+0Ch+arg_0]",
+    "line": "fld     [esp+0Ch+deltaTime]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1075,7 +1075,7 @@
   },
   {
     "ea": "0x543154",
-    "line": "fld     [esp+0Ch+arg_0]",
+    "line": "fld     [esp+0Ch+deltaTime]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1129,7 +1129,7 @@
   },
   {
     "ea": "0x543169",
-    "line": "fld     [esp+0Ch+arg_0]",
+    "line": "fld     [esp+0Ch+deltaTime]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1201,13 +1201,13 @@
   },
   {
     "ea": "0x543192",
-    "line": "mov     [esp+0Ch+arg_0], eax",
+    "line": "mov     [esp+0Ch+deltaTime], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x543196",
-    "line": "fild    [esp+0Ch+arg_0]",
+    "line": "fild    [esp+0Ch+deltaTime]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -1327,7 +1327,7 @@
   },
   {
     "ea": "0x5431DC",
-    "line": "call    nullsub_returnTrue_0arg",
+    "line": "call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.",
     "mnemonic": "call",
     "size": 5
   },

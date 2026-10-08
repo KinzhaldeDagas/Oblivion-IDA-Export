@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E87C0",
-    "line": "sub     esp, 1Ch",
+    "line": "sub     esp, 1Ch; Verified TESRoad RGRP format is 12-byte target XYZ positions flattened across each source point's edge count. This differs from TESPathGrid PGRR, which stores u16 target point indices; PGRP row size is shared but the connection encoding is not.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x4E8818",
-    "line": "call    sub_6A9030",
+    "line": "call    NiTMapBase_GetFirstNode",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x4E881F",
-    "line": "mov     [esp+2Ch+var_1C], eax",
+    "line": "mov     [esp+2Ch+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -211,61 +211,61 @@
   },
   {
     "ea": "0x4E8830",
-    "line": "lea     eax, [esp+2Ch+var_C]",
+    "line": "lea     eax, [esp+2Ch+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4E8834",
-    "line": "push    eax",
+    "line": "push    eax; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E8835",
-    "line": "lea     ecx, [esp+30h+var_4]",
+    "line": "lea     ecx, [esp+30h+keyOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4E8839",
-    "line": "push    ecx",
+    "line": "push    ecx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E883A",
-    "line": "lea     edx, [esp+34h+var_1C]",
+    "line": "lea     edx, [esp+34h+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4E883E",
-    "line": "push    edx",
+    "line": "push    edx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E883F",
-    "line": "lea     ecx, [esi+1Ch]",
+    "line": "lea     ecx, [esi+1Ch]; self",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x4E8842",
-    "line": "mov     [esp+38h+var_C], ebp",
+    "line": "mov     [esp+38h+valueOut], ebp",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E8846",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E884B",
-    "line": "mov     edi, [esp+2Ch+var_C]",
+    "line": "mov     edi, [esp+2Ch+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x4E886D",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x4E8871",
-    "line": "call    sub_4E7DE0",
+    "line": "call    PathGraphNode_GetConnections; Verified graph-node connection-list accessor: returns this+0x20. TESPathGrid and TESRoad graph code both traverse this as a BSSimpleList of adjacency pointers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -409,13 +409,13 @@
   },
   {
     "ea": "0x4E888F",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E8891",
-    "line": "call    sub_4BEF40",
+    "line": "call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x4E88C6",
-    "line": "cmp     [esp+2Ch+var_1C], ebp",
+    "line": "cmp     [esp+2Ch+position], ebp",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x4E88DD",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x4E88E3",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x4E890A",
-    "line": "mov     [esp+2Ch+var_C], edi",
+    "line": "mov     [esp+2Ch+valueOut], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x4E8910",
-    "line": "call    sub_6A9030",
+    "line": "call    NiTMapBase_GetFirstNode",
     "mnemonic": "call",
     "size": 5
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x4E8917",
-    "line": "mov     [esp+2Ch+var_1C], eax",
+    "line": "mov     [esp+2Ch+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -691,37 +691,37 @@
   },
   {
     "ea": "0x4E8925",
-    "line": "push    eax",
+    "line": "push    eax; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E8926",
-    "line": "lea     ecx, [esp+30h+var_4]",
+    "line": "lea     ecx, [esp+30h+keyOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4E892A",
-    "line": "push    ecx",
+    "line": "push    ecx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E892B",
-    "line": "lea     edx, [esp+34h+var_1C]",
+    "line": "lea     edx, [esp+34h+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4E892F",
-    "line": "push    edx",
+    "line": "push    edx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E8930",
-    "line": "lea     ecx, [esi+1Ch]",
+    "line": "lea     ecx, [esi+1Ch]; self",
     "mnemonic": "lea",
     "size": 3
   },
@@ -733,7 +733,7 @@
   },
   {
     "ea": "0x4E893B",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
@@ -781,13 +781,13 @@
   },
   {
     "ea": "0x4E8954",
-    "line": "mov     ecx, [ebp+0]",
+    "line": "mov     ecx, [ebp+0]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x4E8957",
-    "line": "call    sub_4E7DE0",
+    "line": "call    PathGraphNode_GetConnections; Verified graph-node connection-list accessor: returns this+0x20. TESPathGrid and TESRoad graph code both traverse this as a BSSimpleList of adjacency pointers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -811,7 +811,7 @@
   },
   {
     "ea": "0x4E8962",
-    "line": "mov     ecx, [esp+2Ch+var_C]",
+    "line": "mov     ecx, [esp+2Ch+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -859,13 +859,13 @@
   },
   {
     "ea": "0x4E897B",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E897D",
-    "line": "call    sub_4BEF40",
+    "line": "call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.",
     "mnemonic": "call",
     "size": 5
   },
@@ -961,7 +961,7 @@
   },
   {
     "ea": "0x4E89AA",
-    "line": "cmp     [esp+2Ch+var_1C], 0",
+    "line": "cmp     [esp+2Ch+position], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -973,7 +973,7 @@
   },
   {
     "ea": "0x4E89B5",
-    "line": "mov     edi, [esp+2Ch+var_C]",
+    "line": "mov     edi, [esp+2Ch+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1021,7 +1021,7 @@
   },
   {
     "ea": "0x4E89CB",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1033,7 +1033,7 @@
   },
   {
     "ea": "0x4E89D1",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

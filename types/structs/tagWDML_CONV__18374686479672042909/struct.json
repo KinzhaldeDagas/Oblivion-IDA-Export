@@ -1,88 +1,144 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "tagWDML_CONV",
+  "definition": "struct __declspec(align(8)) tagWDML_CONV\n{\ntagWDML_CONV *next;\ntagWDML_INSTANCE *instance;\nHSZ hszService;\nHSZ hszTopic;\nUINT magic;\nUINT afCmd;\nCONVCONTEXT convContext;\nHWND hwndClient;\nHWND hwndServer;\nWDML_XACT *transactions;\nDWORD hUser;\nDWORD wStatus;\nDWORD wConvst;\n}\n",
   "id": 18374686479672042909,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "next",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "tagWDML_CONV *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "instance",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "tagWDML_INSTANCE *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hszService",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "HSZ"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hszTopic",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HSZ"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "magic",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "afCmd",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "convContext",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 36
+      "size": 36,
+      "type": "CONVCONTEXT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hwndClient",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hwndServer",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "transactions",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 4
+      "size": 4,
+      "type": "WDML_XACT *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hUser",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "wStatus",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 4
+      "offset_hex": "0x4C",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "wConvst",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     }
   ],
   "name": "tagWDML_CONV",
+  "ordinal": 7329,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 88
 }

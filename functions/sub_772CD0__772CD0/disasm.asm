@@ -1,29 +1,29 @@
-0x772CD0: push    ecx
+0x772CD0: push    ecx; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x772CD1: push    ebx
 0x772CD2: push    esi
 0x772CD3: push    edi
 0x772CD4: mov     esi, ecx
-0x772CD6: mov     ecx, [esp+10h+arg_0]
-0x772CDA: lea     eax, [esp+10h+var_1]
-0x772CDE: push    eax
-0x772CDF: push    ecx
-0x772CE0: mov     ecx, esi
-0x772CE2: mov     [esp+18h+var_1], 0
-0x772CE7: call    sub_7727D0
+0x772CD6: mov     ecx, [esp+10h+state]
+0x772CDA: lea     eax, [esp+10h+savePrevious]
+0x772CDE: push    eax; savePrevious
+0x772CDF: push    ecx; state
+0x772CE0: mov     ecx, esi; this
+0x772CE2: mov     [esp+18h+savePrevious], 0
+0x772CE7: call    NiD3DRenderStateGroup_FindRenderStateEntry;
 0x772CEC: mov     edi, eax
 0x772CEE: xor     ebx, ebx
 0x772CF0: cmp     edi, ebx
 0x772CF2: jz      short loc_772D5C
-0x772CF4: mov     al, [esp+10h+var_1]
+0x772CF4: mov     al, [esp+10h+savePrevious]
 0x772CF8: cmp     al, [esp+10h+arg_8]
 0x772CFC: mov     edx, [esp+10h+arg_4]
 0x772D00: mov     [edi+4], edx
 0x772D03: jz      loc_772DE6
 0x772D09: test    al, al
-0x772D0B: push    edi
-0x772D0C: mov     ecx, esi
+0x772D0B: push    edi; entry
+0x772D0C: mov     ecx, esi; this
 0x772D0E: jz      short loc_772D36
-0x772D10: call    sub_772790
+0x772D10: call    NiD3DRenderStateGroup_RemoveSavedEntry;
 0x772D15: mov     eax, [esi+8]
 0x772D18: cmp     eax, ebx
 0x772D1A: jz      short loc_772D25
@@ -38,7 +38,7 @@
 0x772D31: pop     ebx
 0x772D32: pop     ecx
 0x772D33: retn    0Ch
-0x772D36: call    sub_772750
+0x772D36: call    NiD3DRenderStateGroup_RemoveNoSaveEntry;
 0x772D3B: mov     eax, [esi+10h]
 0x772D3E: cmp     eax, ebx
 0x772D40: jz      short loc_772D4B
@@ -62,7 +62,7 @@
 0x772D6D: mov     edx, [ecx+0Ch]
 0x772D70: lea     ebx, [ecx+0Ch]
 0x772D73: push    edx
-0x772D74: call    sub_772A80
+0x772D74: call    sub_772A80;
 0x772D79: mov     eax, [ebx]
 0x772D7B: add     eax, eax
 0x772D7D: mov     [ebx], eax
@@ -74,7 +74,7 @@
 0x772D8E: mov     edi, [edi]
 0x772D90: mov     edx, [ecx+edi*4]
 0x772D93: mov     [ecx], edx
-0x772D95: mov     ecx, [esp+14h+arg_0]
+0x772D95: mov     ecx, [esp+14h+state]
 0x772D99: mov     edx, [esp+14h+arg_4]
 0x772D9D: mov     [eax+8], ebx
 0x772DA0: mov     [eax+0Ch], ebx

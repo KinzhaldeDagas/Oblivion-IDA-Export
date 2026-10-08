@@ -1,19 +1,36 @@
 {
-  "callees_count": 28,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 14,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_794340",
+  "chunks": [
+    [
+      "0x794340",
+      "0x794493"
+    ],
+    [
+      "0x9CBD00",
+      "0x9CBD23"
+    ]
+  ],
+  "chunks_sha256": "295e901d262351f13f080906d69c8917dbb62409c652c0ee7fa6bf67bf427e81",
+  "comment_regular": "Parses Oblivion lighting tokens 8002..8009 into the exact 0xB0 CLightingEngine layout.\n\nOblivion CLightingEngine::Parse. Reads tokens 8002..8009 into the observed 0xB0 lighting-engine layout and terminates on 8001; malformed tokens throw IdvFileError. Fallout/source provide only the historical Parse name after the local token-to-field mapping was established.",
+  "comment_repeatable": "Oblivion CLightingEngine::Parse. Reads tokens 8002..8009 into the observed 0xB0 lighting-engine layout and terminates on 8001; malformed tokens throw IdvFileError. Fallout/source provide only the historical Parse name after the local token-to-field mapping was established.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 8,
+  "display_name": "OB_CLightingEngine_Parse_010201A0",
   "end_ea": "0x794493",
+  "evidence_confidence": "Unknown",
   "flags": 16384,
   "has_pseudocode": true,
-  "name": "sub_794340",
+  "name": "OB_CLightingEngine_Parse_010201A0",
   "segment": ".text",
   "sha256": "b417bfdaec01469f9c40cf2cd45f3be68b608cede1a634db8229fa378d418045",
   "size": 339,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x794340",
-  "type": "int __userpurge@<eax>(int@<ecx>, int@<ebx>, int@<ebp>, float *@<edi>, int@<esi>, unsigned int *)",
-  "xrefs_from_count": 128,
+  "total_chunk_size": 374,
+  "type": "void __thiscall(OB_CLightingEngine_010201A0 *this, OB_CTreeFileAccess_010201A0 *file)",
+  "xrefs_from_count": 143,
   "xrefs_to_count": 1
 }

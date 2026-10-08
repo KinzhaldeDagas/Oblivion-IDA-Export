@@ -30,7 +30,7 @@
 0x4EEFB9: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x4EEFBE: push    0; int
 0x4EEFC0: push    edx; a1
-0x4EEFC1: call    TESForm_LookupByFormID
+0x4EEFC1: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4EEFC6: add     esp, 4
 0x4EEFC9: push    eax; void *
 0x4EEFCA: call    OblivionDynamicCast

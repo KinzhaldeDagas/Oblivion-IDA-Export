@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x79F700",
-    "line": "push    ebp",
+    "line": "push    ebp; Oblivion-authoritative fill insertion for st_vector<SFrondGuide>. Snapshots the deep guide value for alias safety, inserts count 0x30 records, uses exception-safe placement construction, reuses capacity or grows by 1.5x, and deep-moves overlapping guide ranges.",
     "mnemonic": "push",
     "size": 1
   },
@@ -109,25 +109,25 @@
   },
   {
     "ea": "0x79F730",
-    "line": "mov     edi, [ebp+arg_C]",
+    "line": "mov     edi, [ebp+source]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x79F733",
-    "line": "push    edi",
+    "line": "push    edi; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F734",
-    "line": "lea     ecx, [ebp+var_48]",
+    "line": "lea     ecx, [ebp+var_48]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x79F737",
-    "line": "call    sub_79AD70",
+    "line": "call    OB_stVector_SFrondVertex_CopyCtor_010201A0; Oblivion-authoritative copy construction for the 16-byte vector wrapper embedded at SFrondGuide+0x00. Allocates capacity for the exact source count and deep-copies 0x38-byte SFrondVertex records; scalar guide fields are copied separately by callers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x79F7C2",
-    "line": "call    sub_790B90",
+    "line": "call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error(\"vector<T> too long\") and throws; used by multiple element specializations after max_size checks.",
     "mnemonic": "call",
     "size": 5
   },
@@ -661,13 +661,13 @@
   },
   {
     "ea": "0x79F828",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79F82A",
-    "line": "call    sub_799F10",
+    "line": "call    OB_stVector_SFrondGuide_Size_010201A0; Oblivion-authoritative size query for the compact SFrondGuide vector. Computes (end-begin)/0x30; returns zero when begin is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -691,13 +691,13 @@
   },
   {
     "ea": "0x79F835",
-    "line": "push    ebx; char *",
+    "line": "push    ebx; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F836",
-    "line": "call    sub_799FA0",
+    "line": "call    OB_stVector_SFrondGuide_Allocate_010201A0; Allocates count compact 0x30-byte SFrondGuide records from FormHeap and throws std::bad_alloc on count*0x30 overflow.",
     "mnemonic": "call",
     "size": 5
   },
@@ -751,31 +751,31 @@
   },
   {
     "ea": "0x79F84E",
-    "line": "push    eax",
+    "line": "push    eax; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F84F",
-    "line": "mov     [ebp+arg_C], eax",
+    "line": "mov     [ebp+source], eax",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x79F852",
-    "line": "mov     eax, [ebp+arg_4]",
+    "line": "mov     eax, [ebp+last]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x79F855",
-    "line": "push    eax",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F856",
-    "line": "push    ecx",
+    "line": "push    ecx; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -787,7 +787,7 @@
   },
   {
     "ea": "0x79F85B",
-    "line": "call    sub_79C2E0",
+    "line": "call    OB_SFrondGuide_UninitializedCopy_010201A0; Exception-safe uninitialized copy of compact SFrondGuide records. Placement-copy-constructs [first,last) into destination; unwind cleanup destroys the already constructed prefix before rethrowing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -805,25 +805,25 @@
   },
   {
     "ea": "0x79F866",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F867",
-    "line": "push    edi",
+    "line": "push    edi; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F868",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F869",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -835,7 +835,7 @@
   },
   {
     "ea": "0x79F86E",
-    "line": "call    sub_79EAC0",
+    "line": "call    OB_stVector_SFrondGuide_UninitializedFillNThunk_010201A0; Vector-context checked uninitialized_fill_n wrapper for compact SFrondGuide. Exception-safe construction is delegated to 0x79E190; returns destination+count.",
     "mnemonic": "call",
     "size": 5
   },
@@ -889,31 +889,31 @@
   },
   {
     "ea": "0x79F886",
-    "line": "push    eax",
+    "line": "push    eax; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F887",
-    "line": "mov     eax, [ebp+arg_4]",
+    "line": "mov     eax, [ebp+last]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x79F88A",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F88B",
-    "line": "push    eax",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F88C",
-    "line": "call    sub_79C2E0",
+    "line": "call    OB_SFrondGuide_UninitializedCopy_010201A0; Exception-safe uninitialized copy of compact SFrondGuide records. Placement-copy-constructs [first,last) into destination; unwind cleanup destroys the already constructed prefix before rethrowing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1045,19 +1045,19 @@
   },
   {
     "ea": "0x79F8C3",
-    "line": "push    eax",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F8C4",
-    "line": "push    ecx",
+    "line": "push    ecx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F8C5",
-    "line": "call    sub_79E150",
+    "line": "call    OB_SFrondGuide_DestroyRange_010201A0; Destroys every compact SFrondGuide in [first,last), freeing each embedded SFrondVertex vector.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1075,7 +1075,7 @@
   },
   {
     "ea": "0x79F8CE",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1087,7 +1087,7 @@
   },
   {
     "ea": "0x79F8D6",
-    "line": "mov     eax, [ebp+arg_C]",
+    "line": "mov     eax, [ebp+source]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1159,7 +1159,7 @@
   },
   {
     "ea": "0x79F8FA",
-    "line": "mov     esi, [ebp+arg_C]",
+    "line": "mov     esi, [ebp+source]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1171,19 +1171,19 @@
   },
   {
     "ea": "0x79F900",
-    "line": "push    edx",
+    "line": "push    edx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F901",
-    "line": "push    esi",
+    "line": "push    esi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F902",
-    "line": "call    sub_79EAA0",
+    "line": "call    OB_SFrondGuide_DestroyRangeThunk_010201A0; Thin destroy-range trampoline for compact SFrondGuide records.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1195,7 +1195,7 @@
   },
   {
     "ea": "0x79F908",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1231,7 +1231,7 @@
   },
   {
     "ea": "0x79F91C",
-    "line": "mov     ebx, [ebp+arg_4]",
+    "line": "mov     ebx, [ebp+last]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1291,7 +1291,7 @@
   },
   {
     "ea": "0x79F936",
-    "line": "mov     [ebp+arg_C], ecx",
+    "line": "mov     [ebp+source], ecx",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1315,7 +1315,7 @@
   },
   {
     "ea": "0x79F945",
-    "line": "mov     [ebp+arg_C], eax",
+    "line": "mov     [ebp+source], eax",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1327,31 +1327,31 @@
   },
   {
     "ea": "0x79F94A",
-    "line": "push    eax",
+    "line": "push    eax; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F94B",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F94C",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F94D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79F94F",
-    "line": "call    sub_79EA70",
+    "line": "call    OB_stVector_SFrondGuide_UninitializedCopyThunk_010201A0; Vector-context checked trampoline for exception-safe uninitialized SFrondGuide range copy. The vector owner is used by checked-iterator machinery; constructed records are 0x30 bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1369,7 +1369,7 @@
   },
   {
     "ea": "0x79F95A",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -1429,19 +1429,19 @@
   },
   {
     "ea": "0x79F972",
-    "line": "push    edi",
+    "line": "push    edi; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F973",
-    "line": "push    ecx",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F974",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1453,13 +1453,13 @@
   },
   {
     "ea": "0x79F97A",
-    "line": "call    sub_79EAC0",
+    "line": "call    OB_stVector_SFrondGuide_UninitializedFillNThunk_010201A0; Vector-context checked uninitialized_fill_n wrapper for compact SFrondGuide. Exception-safe construction is delegated to 0x79E190; returns destination+count.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x79F97F",
-    "line": "mov     eax, [ebp+arg_C]",
+    "line": "mov     eax, [ebp+source]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1483,7 +1483,7 @@
   },
   {
     "ea": "0x79F98B",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -1495,13 +1495,13 @@
   },
   {
     "ea": "0x79F98E",
-    "line": "push    esi",
+    "line": "push    esi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F98F",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -1513,7 +1513,7 @@
   },
   {
     "ea": "0x79F997",
-    "line": "call    sub_79BEE0",
+    "line": "call    OB_SFrondGuide_FillRange_010201A0; Fills an initialized compact SFrondGuide range from one value using deep vector assignment plus scalar-field copies.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1567,13 +1567,13 @@
   },
   {
     "ea": "0x79F9B2",
-    "line": "push    edx",
+    "line": "push    edx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F9B3",
-    "line": "mov     edx, [ebp+arg_4]",
+    "line": "mov     edx, [ebp+last]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1585,13 +1585,13 @@
   },
   {
     "ea": "0x79F9B8",
-    "line": "push    eax",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F9B9",
-    "line": "call    sub_79EAA0",
+    "line": "call    OB_SFrondGuide_DestroyRangeThunk_010201A0; Thin destroy-range trampoline for compact SFrondGuide records.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1615,7 +1615,7 @@
   },
   {
     "ea": "0x79F9C7",
-    "line": "push    ecx",
+    "line": "push    ecx; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
@@ -1645,19 +1645,19 @@
   },
   {
     "ea": "0x79F9D2",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F9D3",
-    "line": "push    eax",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F9D4",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1669,7 +1669,7 @@
   },
   {
     "ea": "0x79F9D9",
-    "line": "call    sub_79EA70",
+    "line": "call    OB_stVector_SFrondGuide_UninitializedCopyThunk_010201A0; Vector-context checked trampoline for exception-safe uninitialized SFrondGuide range copy. The vector owner is used by checked-iterator machinery; constructed records are 0x30 bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1687,31 +1687,31 @@
   },
   {
     "ea": "0x79F9E4",
-    "line": "mov     eax, [ebp+arg_C]",
+    "line": "mov     eax, [ebp+source]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x79F9E7",
-    "line": "push    eax",
+    "line": "push    eax; destinationLast",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F9E8",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F9E9",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F9EA",
-    "line": "call    sub_79E720",
+    "line": "call    OB_SFrondGuide_CopyAssignRangeBackwardCheckedThunk_010201A0; Checked/STL trampoline for overlap-safe backward SFrondGuide range assignment.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1723,7 +1723,7 @@
   },
   {
     "ea": "0x79F9F2",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -1735,19 +1735,19 @@
   },
   {
     "ea": "0x79F9F5",
-    "line": "push    edi",
+    "line": "push    edi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F9F6",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F9F7",
-    "line": "call    sub_79BEE0",
+    "line": "call    OB_SFrondGuide_FillRange_010201A0; Fills an initialized compact SFrondGuide range from one value using deep vector assignment plus scalar-field copies.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1759,7 +1759,7 @@
   },
   {
     "ea": "0x79F9FF",
-    "line": "mov     eax, [ebp+var_44]",
+    "line": "mov     eax, [ebp+var_48.begin]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1783,7 +1783,7 @@
   },
   {
     "ea": "0x79FA07",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1846,5 +1846,59 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CC500",
+    "line": "lea     ecx, [ebp+var_48]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC503",
+    "line": "jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC508",
+    "line": "mov     edx, [esp-4+last]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CC50C",
+    "line": "lea     eax, [edx+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC50F",
+    "line": "mov     ecx, [edx-4Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC512",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CC514",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC519",
+    "line": "mov     eax, offset stru_AF57E0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC51E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

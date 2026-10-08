@@ -1,15 +1,15 @@
-ActiveEffect *__cdecl DarknessEffect_Make(int a1, int a2, int a3)
+ActiveEffect *__cdecl DarknessEffect_Make(MagicCaster *caster, MagicItem *magicItem, EffectItem *effectItem)
 {
   ActiveEffect *v3; // esi
   ActiveEffect *result; // eax
 
-  v3 = (ActiveEffect *)FormHeapAlloc(0x3Cu);
-  result = 0;
-  if ( v3 )
+  v3 = (ActiveEffect *)FormHeapAlloc(0x3Cu); /*0x692cb9*/
+  result = 0; /*0x692cc2*/
+  if ( v3 ) /*0x692cca*/
   {
-    ValueModifierEffect_constr(v3, a1, a2, a3);
-    v3->vtbl = (ActiveEffectVtbl *)&DarknessEffect::`vftable';
-    return v3;
+    ValueModifierEffect_constr(v3, caster, magicItem, effectItem); /*0x692cdd*/
+    v3->vtbl = (ActiveEffectVtbl *)&DarknessEffect::`vftable'; /*0x692ce2*/
+    return v3; /*0x692ce8*/
   }
-  return result;
+  return result; /*0x692cea*/
 }

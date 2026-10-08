@@ -1,4 +1,4 @@
-0x7601E0: push    ebx
+0x7601E0: push    ebx; DeferredRendering: NiD3DPass ctor authoritatively defines pass layout: name +0x04, stages +0x20, render-state group +0x30, PS map/file/entry/target/shader +0x34..0x44, VS map/file/entry/target/shader +0x48..0x58, SoftwareVP +0x5C.
 0x7601E1: push    esi
 0x7601E2: mov     esi, ecx
 0x7601E4: xor     ebx, ebx

@@ -1,7 +1,7 @@
-0x4F7330: mov     eax, [esp+arg_4]
+0x4F7330: mov     eax, [esp+global]; GetGlobalValue_Eval (index 74 / opcode 0x104A): parameter must be TESGlobal (form type 0x04); returns its float value at +0x24, otherwise numeric 0.
 0x4F7334: fld     qword ptr ds:0A3D360h
 0x4F733A: test    eax, eax
-0x4F733C: mov     ecx, [esp+arg_C]
+0x4F733C: mov     ecx, [esp+value]
 0x4F7340: fstp    qword ptr [ecx]
 0x4F7342: jz      short loc_4F734F
 0x4F7344: cmp     byte ptr [eax+4], 4

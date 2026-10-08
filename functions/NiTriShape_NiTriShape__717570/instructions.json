@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x717570",
-    "line": "mov     eax, [esp+a2]",
+    "line": "mov     eax, [esp+a2]; [constructor audit] Data-taking shape ctor ->722690->7227B0->708450->6FFD30->7005D0. No heap allocation in this path. 7227D3 stores geometry data at+B4, 7227DF retains once; subsequent derived constructors only write vtables. Distinct from no-argument clone constructor7226C0.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x71757D",
-    "line": "mov     dword ptr [esi], offset ??_7NiTriShape@@6B@; const NiTriShape::`vftable'",
+    "line": "mov     dword ptr [esi], offset ??_7NiTriShape@@6B@;",
     "mnemonic": "mov",
     "size": 6
   },

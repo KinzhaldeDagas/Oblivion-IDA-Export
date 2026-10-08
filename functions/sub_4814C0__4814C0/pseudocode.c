@@ -1,36 +1,36 @@
 void sub_4814C0()
 {
-  BSShaderAccumulator *inited; // eax
-  int v1; // eax
+  BSShaderAccumulator *Global; // eax
+  NiNode *ModelData; // eax
   NiAVObject *v2; // esi
-  int v3; // eax
+  NiAVObject *ChildAtIndex; // eax
   int v4; // eax
 
-  inited = InitBSShaderAccumulator();
-  if ( inited )
+  Global = BSShaderAccumulator_GetOrCreateGlobal(); /*0x4814c0*/
+  if ( Global ) /*0x4814c7*/
   {
-    if ( !*((_DWORD *)inited + 0x88A) )
+    if ( !*((_DWORD *)Global + 0x88A) ) /*0x4814cd*/
     {
-      if ( ModelLoaderPtr )
+      if ( MEMORY[0xB33A1C] ) /*0x4814da*/
       {
-        if ( OBSE_g_FileFinder )
+        if ( MEMORY[0xB33A04] ) /*0x4814e3*/
         {
-          if ( OBSE_g_FileFinder->vtbl->FindFile(OBSE_g_FileFinder, "Meshes\\TestSphere.NIF", 0, 0, 0xFFFFFFFF) )
+          if ( MEMORY[0xB33A04]->vtbl->FindFile(MEMORY[0xB33A04], "Meshes\\TestSphere.NIF", 0, 0, 0xFFFFFFFF) ) /*0x4814fd*/
           {
-            v1 = sub_439EB0((int *)ModelLoaderPtr, "Meshes\\TestSphere.NIF", 0, 0, 1);
-            v2 = (NiAVObject *)v1;
-            if ( v1 )
+            ModelData = (NiNode *)ModelLoader_LoadModelData((int *)MEMORY[0xB33A1C], "Meshes\\TestSphere.NIF", 0, 0, 1); /*0x481515*/
+            v2 = (NiAVObject *)ModelData; /*0x48151a*/
+            if ( ModelData ) /*0x48151e*/
             {
-              v3 = sub_405790(v1, 0);
-              while ( v3 )
+              ChildAtIndex = NiNode_GetChildAtIndex(ModelData, 0); /*0x481524*/
+              while ( ChildAtIndex ) /*0x48152b*/
               {
-                v4 = (*(int (__thiscall **)(int))(*(_DWORD *)v3 + 8))(v3);
-                if ( v4 && *(_WORD *)(v4 + 0xB6) )
-                  v3 = **(_DWORD **)(v4 + 0xB0);
+                v4 = (int)ChildAtIndex->vtbl->super.Unk_02((NiObject *)ChildAtIndex); /*0x481537*/
+                if ( v4 && *(_WORD *)(v4 + 0xB6) ) /*0x48153d*/
+                  ChildAtIndex = **(NiAVObject ***)(v4 + 0xB0); /*0x48154d*/
                 else
-                  v3 = 0;
+                  ChildAtIndex = 0; /*0x481551*/
               }
-              NiAVObject_InitializePropertyState(v2);
+              NiAVObject_InitializePropertyState(v2); /*0x48155a*/
             }
           }
         }

@@ -20,7 +20,7 @@
 0x6ECE0E: mov     ecx, [esp+8+arg_0]
 0x6ECE12: push    ecx
 0x6ECE13: mov     ecx, esi
-0x6ECE15: call    NiTimeController__SetTarget
+0x6ECE15: call    NiTimeController__SetTarget; Retargets a controller while holding a temporary self-reference. Removes it from the previous NiObjectNET controller chain, assigns non-owning target +0x30, avoids duplicate insertion, then inserts into the new target's refcounted chain and propagates manager-controlled target state when applicable.
 0x6ECE1A: cmp     dword ptr [esi+30h], 0
 0x6ECE1E: jz      short loc_6ECE27
 0x6ECE20: mov     ecx, esi

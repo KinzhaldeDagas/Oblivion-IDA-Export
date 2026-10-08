@@ -1,9 +1,9 @@
-0x6AAAA0: mov     eax, dword ptr [esp+ArgList]
+0x6AAAA0: mov     eax, [esp+ArgList]
 0x6AAAA4: cmp     eax, 4; switch 5 cases
 0x6AAAA7: push    esi
 0x6AAAA8: ja      def_6AAAAE; jumptable 006AAAAE default case, case 1
 0x6AAAAE: jmp     ds:jpt_6AAAAE[eax*4]; switch jump
-0x6AAAB5: mov     eax, [esp+4+arg_8]; jumptable 006AAAAE case 3
+0x6AAAB5: mov     eax, [esp+4+destination]; jumptable 006AAAAE case 3
 0x6AAAB9: push    8
 0x6AAABB: push    2800h
 0x6AAAC0: push    0
@@ -43,21 +43,21 @@
 0x6AAB1A: pop     esi
 0x6AAB1B: retn    10h
 0x6AAB1E: mov     esi, [esp+4+arg_0]; jumptable 006AAAAE case 0
-0x6AAB22: mov     ecx, [esi+30h]
+0x6AAB22: mov     ecx, [esi+30h]; self
 0x6AAB25: test    ecx, ecx
 0x6AAB27: jnz     short loc_6AAB32
 0x6AAB29: mov     eax, 105h
 0x6AAB2E: pop     esi
 0x6AAB2F: retn    10h
-0x6AAB32: mov     edx, [esp+4+arg_C]
-0x6AAB36: mov     eax, [esp+4+arg_8]
-0x6AAB3A: push    edx
-0x6AAB3B: push    eax
-0x6AAB3C: call    ReadFile??
+0x6AAB32: mov     edx, [esp+4+byteCount]
+0x6AAB36: mov     eax, [esp+4+destination]
+0x6AAB3A: push    edx; byteCount
+0x6AAB3B: push    eax; destination
+0x6AAB3C: call    Archive_ReadBytes
 0x6AAB41: add     [esi+2Ch], eax
 0x6AAB44: pop     esi
 0x6AAB45: retn    10h
-0x6AAB48: mov     ecx, [esp+4+arg_C]; jumptable 006AAAAE case 2
+0x6AAB48: mov     ecx, [esp+4+byteCount]; jumptable 006AAAAE case 2
 0x6AAB4C: test    ecx, ecx
 0x6AAB4E: mov     eax, ds:0A853D4h
 0x6AAB53: jnz     short loc_6AAB5C
@@ -78,7 +78,7 @@
 0x6AAB7C: mov     edx, [esi]
 0x6AAB7E: mov     edx, [edx+0Ch]
 0x6AAB81: push    eax
-0x6AAB82: mov     eax, [esp+0Ch+arg_8]
+0x6AAB82: mov     eax, [esp+0Ch+destination]
 0x6AAB86: push    eax
 0x6AAB87: mov     ecx, esi
 0x6AAB89: call    edx

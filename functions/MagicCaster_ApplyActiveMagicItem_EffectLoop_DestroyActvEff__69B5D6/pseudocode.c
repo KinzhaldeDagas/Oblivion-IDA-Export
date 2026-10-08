@@ -34,7 +34,7 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_DestroyActvEff@<eax
         int a33,
         int a34)
 {
-  (**a2)(a2, 1);
+  (**a2)(a2, 1); /*0x69b5de*/
   return MagicCaster_ApplyActiveMagicItem_::EffectLoop_Next(
            a15,
            a3,

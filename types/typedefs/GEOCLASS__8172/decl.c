@@ -1,1 +1,1 @@
-GEOCLASS
+typedef DWORD GEOCLASS;

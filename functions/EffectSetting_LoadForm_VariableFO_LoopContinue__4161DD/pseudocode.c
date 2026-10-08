@@ -9,9 +9,9 @@ int __userpurge EffectSetting_LoadForm_::VariableFO_LoopContinue@<eax>(
 {
   int v7; // eax
 
-  v7 = a1 + 1;
-  if ( v7 < a2 )
-    return EffectSetting_LoadForm_::VariableFO_LoopBody(v7, a2, a6, ebx0, ebp0, a5, a7);
+  v7 = a1 + 1; /*0x4161dd*/
+  if ( v7 < a2 ) /*0x4161e2*/
+    return EffectSetting_LoadForm_::VariableFO_LoopBody(v7, a2, a6, ebx0, ebp0, a5, a7); /*0x4161e2*/
   else
-    return EffectSetting_LoadForm_::ForcedFlagOverrrides(ebx0, ebp0, a5, a6, a7);
+    return EffectSetting_LoadForm_::ForcedFlagOverrrides(ebx0, ebp0, a5, a6, a7); /*0x4161e3*/
 }

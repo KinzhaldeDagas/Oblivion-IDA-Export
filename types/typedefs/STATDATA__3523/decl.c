@@ -1,1 +1,1 @@
-STATDATA
+typedef tagSTATDATA STATDATA;

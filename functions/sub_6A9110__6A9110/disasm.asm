@@ -28,7 +28,7 @@
 0x6A9167: push    offset aAudioInfo; "AUDIO INFO"
 0x6A916C: mov     [esp+214h+var_1D8], esi
 0x6A9170: mov     [esp+214h+var_1AC], eax
-0x6A9174: mov     [esp+214h+var_1E4], edx
+0x6A9174: mov     [esp+214h+position], edx
 0x6A9178: call    InterfaceMgr_DebugTextLine
 0x6A917D: mov     ebx, [ebp+arg_4]
 0x6A9180: add     ebx, ebx
@@ -129,7 +129,7 @@
 0x6A92BC: mov     edi, [esp+214h+var_1D8]
 0x6A92C0: mov     eax, [edi+304h]
 0x6A92C6: mov     ecx, [eax+0Ch]
-0x6A92C9: mov     edx, [esp+214h+var_1E4]
+0x6A92C9: mov     edx, [esp+214h+position]
 0x6A92CD: mov     esi, [esp+214h+var_1E8]
 0x6A92D1: add     esi, [ebp+arg_4]
 0x6A92D4: push    ecx
@@ -157,7 +157,7 @@
 0x6A931E: add     esp, 14h
 0x6A9321: cmp     eax, ecx
 0x6A9323: mov     [esp+200h+var_1E8], esi
-0x6A9327: mov     [esp+200h+var_1B0], ecx
+0x6A9327: mov     [esp+200h+valueOut], ecx
 0x6A932B: jbe     short loc_6A9341
 0x6A932D: mov     edx, [edx+8]
 0x6A9330: mov     esi, edx
@@ -169,22 +169,22 @@
 0x6A933F: jb      short loc_6A9332
 0x6A9341: xor     ecx, ecx
 0x6A9343: test    ecx, ecx
-0x6A9345: mov     [esp+200h+var_1E4], ecx
+0x6A9345: mov     [esp+200h+position], ecx
 0x6A9349: jz      loc_6A99C2
 0x6A934F: nop
 0x6A9350: mov     esi, [esp+200h+var_1D8]
-0x6A9354: lea     edx, [esp+200h+var_1B0]
-0x6A9358: push    edx
-0x6A9359: lea     eax, [esp+204h+var_1C4]
-0x6A935D: push    eax
-0x6A935E: lea     ecx, [esp+208h+var_1E4]
-0x6A9362: push    ecx
-0x6A9363: mov     ecx, [esi+300h]
-0x6A9369: call    sub_452600
-0x6A936E: mov     ebx, [esp+200h+var_1B0]
+0x6A9354: lea     edx, [esp+200h+valueOut]
+0x6A9358: push    edx; valueOut
+0x6A9359: lea     eax, [esp+204h+keyOut]
+0x6A935D: push    eax; keyOut
+0x6A935E: lea     ecx, [esp+208h+position]
+0x6A9362: push    ecx; position
+0x6A9363: mov     ecx, [esi+300h]; self
+0x6A9369: call    NiTMap_U32Pointer_GetNextEntry
+0x6A936E: mov     ebx, [esp+200h+valueOut]
 0x6A9372: mov     edx, [ebx]
 0x6A9374: mov     ecx, ebx
-0x6A9376: mov     [esp+200h+var_1C4], edx
+0x6A9376: mov     [esp+200h+keyOut], edx
 0x6A937A: call    sub_6B67D0
 0x6A937F: test    eax, eax
 0x6A9381: jnz     short loc_6A939C
@@ -412,3 +412,261 @@
 0x6A9686: jmp     short loc_6A96A6
 0x6A9688: add     eax, 0FFFFFFFFh
 0x6A968B: jmp     short loc_6A9690
+0x6A9690: mov     cl, [eax+1]
+0x6A9693: add     eax, 1
+0x6A9696: test    cl, cl
+0x6A9698: jnz     short loc_6A9690
+0x6A969A: mov     ecx, ds:0A76EECh
+0x6A96A0: mov     edx, ds:0A76EF0h
+0x6A96A6: lea     edi, [esp+200h+var_198]
+0x6A96AA: mov     [eax], ecx
+0x6A96AC: mov     [eax+4], edx
+0x6A96AF: add     edi, 0FFFFFFFFh
+0x6A96B2: mov     al, [edi+1]
+0x6A96B5: add     edi, 1
+0x6A96B8: test    al, al
+0x6A96BA: jnz     short loc_6A96B2
+0x6A96BC: mov     edx, [esp+200h+keyOut]
+0x6A96C0: test    dl, 1
+0x6A96C3: mov     ax, ds:0A61EA8h
+0x6A96C9: mov     [edi], ax
+0x6A96CC: jz      short loc_6A96F2
+0x6A96CE: lea     eax, [esp+200h+var_198]
+0x6A96D2: add     eax, 0FFFFFFFFh
+0x6A96D5: mov     cl, [eax+1]
+0x6A96D8: add     eax, 1
+0x6A96DB: test    cl, cl
+0x6A96DD: jnz     short loc_6A96D5
+0x6A96DF: mov     cx, ds:0A76EE8h
+0x6A96E6: mov     [eax], cx
+0x6A96E9: mov     cl, ds:0A76EEAh
+0x6A96EF: mov     [eax+2], cl
+0x6A96F2: test    dl, 2
+0x6A96F5: jz      short loc_6A971D
+0x6A96F7: lea     eax, [esp+200h+var_198]
+0x6A96FB: add     eax, 0FFFFFFFFh
+0x6A96FE: mov     edi, edi
+0x6A9700: mov     cl, [eax+1]
+0x6A9703: add     eax, 1
+0x6A9706: test    cl, cl
+0x6A9708: jnz     short loc_6A9700
+0x6A970A: mov     cx, ds:0A76EE4h
+0x6A9711: mov     [eax], cx
+0x6A9714: mov     cl, ds:0A76EE6h
+0x6A971A: mov     [eax+2], cl
+0x6A971D: test    dl, 4
+0x6A9720: jz      short loc_6A974D
+0x6A9722: lea     eax, [esp+200h+var_198]
+0x6A9726: add     eax, 0FFFFFFFFh
+0x6A9729: lea     esp, [esp+0]
+0x6A9730: mov     cl, [eax+1]
+0x6A9733: add     eax, 1
+0x6A9736: test    cl, cl
+0x6A9738: jnz     short loc_6A9730
+0x6A973A: mov     ecx, ds:0A76EDCh
+0x6A9740: mov     [eax], ecx
+0x6A9742: mov     cx, ds:0A76EE0h
+0x6A9749: mov     [eax+4], cx
+0x6A974D: test    dl, 8
+0x6A9750: jz      short loc_6A977D
+0x6A9752: lea     eax, [esp+200h+var_198]
+0x6A9756: add     eax, 0FFFFFFFFh
+0x6A9759: lea     esp, [esp+0]
+0x6A9760: mov     cl, [eax+1]
+0x6A9763: add     eax, 1
+0x6A9766: test    cl, cl
+0x6A9768: jnz     short loc_6A9760
+0x6A976A: mov     ecx, ds:0A76ED4h
+0x6A9770: mov     [eax], ecx
+0x6A9772: mov     cx, ds:0A76ED8h
+0x6A9779: mov     [eax+4], cx
+0x6A977D: test    dl, 10h
+0x6A9780: jz      short loc_6A97AD
+0x6A9782: lea     eax, [esp+200h+var_198]
+0x6A9786: add     eax, 0FFFFFFFFh
+0x6A9789: lea     esp, [esp+0]
+0x6A9790: mov     cl, [eax+1]
+0x6A9793: add     eax, 1
+0x6A9796: test    cl, cl
+0x6A9798: jnz     short loc_6A9790
+0x6A979A: mov     ecx, ds:0A76ECCh
+0x6A97A0: mov     [eax], ecx
+0x6A97A2: mov     cx, ds:0A76ED0h
+0x6A97A9: mov     [eax+4], cx
+0x6A97AD: test    dl, 20h
+0x6A97B0: jz      short loc_6A97DD
+0x6A97B2: lea     eax, [esp+200h+var_198]
+0x6A97B6: add     eax, 0FFFFFFFFh
+0x6A97B9: lea     esp, [esp+0]
+0x6A97C0: mov     cl, [eax+1]
+0x6A97C3: add     eax, 1
+0x6A97C6: test    cl, cl
+0x6A97C8: jnz     short loc_6A97C0
+0x6A97CA: mov     ecx, ds:0A76EC4h
+0x6A97D0: mov     [eax], ecx
+0x6A97D2: mov     cx, ds:0A76EC8h
+0x6A97D9: mov     [eax+4], cx
+0x6A97DD: test    dl, 40h
+0x6A97E0: jz      short loc_6A980D
+0x6A97E2: lea     eax, [esp+200h+var_198]
+0x6A97E6: add     eax, 0FFFFFFFFh
+0x6A97E9: lea     esp, [esp+0]
+0x6A97F0: mov     cl, [eax+1]
+0x6A97F3: add     eax, 1
+0x6A97F6: test    cl, cl
+0x6A97F8: jnz     short loc_6A97F0
+0x6A97FA: mov     ecx, ds:0A76EBCh
+0x6A9800: mov     [eax], ecx
+0x6A9802: mov     cx, ds:0A76EC0h
+0x6A9809: mov     [eax+4], cx
+0x6A980D: test    edx, 100h
+0x6A9813: jz      short loc_6A983D
+0x6A9815: lea     eax, [esp+200h+var_198]
+0x6A9819: add     eax, 0FFFFFFFFh
+0x6A981C: lea     esp, [esp+0]
+0x6A9820: mov     cl, [eax+1]
+0x6A9823: add     eax, 1
+0x6A9826: test    cl, cl
+0x6A9828: jnz     short loc_6A9820
+0x6A982A: mov     ecx, ds:0A76EB4h
+0x6A9830: mov     [eax], ecx
+0x6A9832: mov     cx, ds:0A76EB8h
+0x6A9839: mov     [eax+4], cx
+0x6A983D: test    edx, 1000h
+0x6A9843: jz      short loc_6A986B
+0x6A9845: lea     eax, [esp+200h+var_198]
+0x6A9849: add     eax, 0FFFFFFFFh
+0x6A984C: lea     esp, [esp+0]
+0x6A9850: mov     cl, [eax+1]
+0x6A9853: add     eax, 1
+0x6A9856: test    cl, cl
+0x6A9858: jnz     short loc_6A9850
+0x6A985A: mov     edx, ds:0A76EACh
+0x6A9860: mov     cl, ds:0A76EB0h
+0x6A9866: mov     [eax], edx
+0x6A9868: mov     [eax+4], cl
+0x6A986B: cmp     byte ptr [ebx+4Ah], 0
+0x6A986F: jz      short loc_6A9895
+0x6A9871: lea     eax, [esp+200h+var_198]
+0x6A9875: add     eax, 0FFFFFFFFh
+0x6A9878: mov     cl, [eax+1]
+0x6A987B: add     eax, 1
+0x6A987E: test    cl, cl
+0x6A9880: jnz     short loc_6A9878
+0x6A9882: mov     dx, ds:0A76EA8h
+0x6A9889: mov     cl, ds:0A76EAAh
+0x6A988F: mov     [eax], dx
+0x6A9892: mov     [eax+2], cl
+0x6A9895: lea     edi, [esp+200h+var_198]
+0x6A9899: add     edi, 0FFFFFFFFh
+0x6A989C: lea     esp, [esp+0]
+0x6A98A0: mov     al, [edi+1]
+0x6A98A3: add     edi, 1
+0x6A98A6: test    al, al
+0x6A98A8: jnz     short loc_6A98A0
+0x6A98AA: mov     dx, ds:0A61E98h
+0x6A98B1: mov     ecx, ebx
+0x6A98B3: mov     [edi], dx
+0x6A98B6: call    NiDX9TextureData__GetTexture; DX10OBSE resource decode: NiDX9TextureData::GetTexture returns stored IDirect3DBaseTexture9*; this is the object later bound at the D3D9 stage/sampler index.
+0x6A98BB: test    eax, eax
+0x6A98BD: jz      loc_6A9962
+0x6A98C3: mov     ecx, ebx
+0x6A98C5: call    NiDX9TextureData__GetTexture; DX10OBSE resource decode: NiDX9TextureData::GetTexture returns stored IDirect3DBaseTexture9*; this is the object later bound at the D3D9 stage/sampler index.
+0x6A98CA: mov     ecx, [eax]
+0x6A98CC: lea     edx, [esp+200h+var_1A0]
+0x6A98D0: push    edx
+0x6A98D1: push    eax
+0x6A98D2: mov     eax, [ecx+18h]
+0x6A98D5: call    eax
+0x6A98D7: mov     ecx, [esp+200h+var_1A0]
+0x6A98DB: push    ecx
+0x6A98DC: lea     edx, [esp+204h+var_D0]
+0x6A98E3: push    offset aI_1; "[%i]"
+0x6A98E8: push    edx
+0x6A98E9: call    __sprintf
+0x6A98EE: lea     eax, [esp+20Ch+var_D0]
+0x6A98F5: add     esp, 0Ch
+0x6A98F8: mov     ecx, eax
+0x6A98FA: lea     ebx, [ebx+0]
+0x6A9900: mov     dl, [eax]
+0x6A9902: add     eax, 1
+0x6A9905: test    dl, dl
+0x6A9907: jnz     short loc_6A9900
+0x6A9909: lea     edi, [esp+200h+var_198]
+0x6A990D: sub     eax, ecx
+0x6A990F: mov     esi, ecx
+0x6A9911: add     edi, 0FFFFFFFFh
+0x6A9914: mov     cl, [edi+1]
+0x6A9917: add     edi, 1
+0x6A991A: test    cl, cl
+0x6A991C: jnz     short loc_6A9914
+0x6A991E: mov     ecx, eax
+0x6A9920: shr     ecx, 2
+0x6A9923: rep movsd
+0x6A9925: mov     ecx, eax
+0x6A9927: and     ecx, 3
+0x6A992A: rep movsb
+0x6A992C: mov     ecx, ebx
+0x6A992E: call    NiDX9TextureData__GetTexture; DX10OBSE resource decode: NiDX9TextureData::GetTexture returns stored IDirect3DBaseTexture9*; this is the object later bound at the D3D9 stage/sampler index.
+0x6A9933: mov     ecx, [eax]
+0x6A9935: lea     edx, [esp+200h+var_19C]
+0x6A9939: push    edx
+0x6A993A: push    eax
+0x6A993B: mov     eax, [ecx+24h]
+0x6A993E: call    eax
+0x6A9940: test    al, 2
+0x6A9942: jz      short loc_6A9962
+0x6A9944: lea     edi, [esp+200h+var_198]
+0x6A9948: add     edi, 0FFFFFFFFh
+0x6A994B: jmp     short loc_6A9950
+0x6A9950: mov     al, [edi+1]
+0x6A9953: add     edi, 1
+0x6A9956: test    al, al
+0x6A9958: jnz     short loc_6A9950
+0x6A995A: mov     ecx, ds:0A76E9Ch
+0x6A9960: mov     [edi], ecx
+0x6A9962: fild    [esp+200h+var_1E8]
+0x6A9966: push    0FFFFFFFFh; int
+0x6A9968: push    1; int
+0x6A996A: sub     esp, 8
+0x6A996D: fstp    [esp+210h+var_20C]; float
+0x6A9971: lea     edx, [esp+210h+var_198]
+0x6A9975: fild    dword ptr ds:0B02E24h
+0x6A997B: fstp    [esp+210h+var_210]; float
+0x6A997E: push    edx; int
+0x6A997F: call    InterfaceMgr_DebugTextLine
+0x6A9984: mov     eax, [ebp+arg_4]
+0x6A9987: add     [esp+214h+var_1E8], eax
+0x6A998B: add     esp, 14h
+0x6A998E: cmp     [esp+200h+position], 0
+0x6A9993: jnz     loc_6A9350
+0x6A9999: mov     ecx, dword ptr [esp+200h+var_1B8+4]
+0x6A999D: mov     edx, [esp+200h+var_1E8]
+0x6A99A1: mov     eax, [esp+200h+var_1AC]
+0x6A99A5: mov     [ecx], edx
+0x6A99A7: mov     ecx, [esp+200h+var_1C8]
+0x6A99AB: mov     [ecx], eax
+0x6A99AD: pop     edi
+0x6A99AE: pop     esi
+0x6A99AF: pop     ebx
+0x6A99B0: mov     ecx, [esp+1F4h+var_4]
+0x6A99B7: xor     ecx, esp
+0x6A99B9: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x6A99BE: mov     esp, ebp
+0x6A99C0: pop     ebp
+0x6A99C1: retn
+0x6A99C2: mov     edx, [esp+200h+var_1E8]
+0x6A99C6: mov     eax, dword ptr [esp+200h+var_1B8+4]
+0x6A99CA: mov     ecx, [esp+200h+var_1AC]
+0x6A99CE: mov     [eax], edx
+0x6A99D0: mov     edx, [esp+200h+var_1C8]
+0x6A99D4: pop     edi
+0x6A99D5: mov     [edx], ecx
+0x6A99D7: mov     ecx, [esp+1FCh+var_4]
+0x6A99DE: pop     esi
+0x6A99DF: pop     ebx
+0x6A99E0: xor     ecx, esp
+0x6A99E2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x6A99E7: mov     esp, ebp
+0x6A99E9: pop     ebp
+0x6A99EA: retn

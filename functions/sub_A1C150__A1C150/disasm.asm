@@ -1,2 +1,2 @@
-0xA1C150: mov     ecx, (offset stru_B36208.unk18+7Ch)
+0xA1C150: mov     ecx, (offset dword_B361CC+0D0h)
 0xA1C155: jmp     GameSetting_destr

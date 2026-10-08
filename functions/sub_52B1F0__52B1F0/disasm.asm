@@ -38,7 +38,7 @@
 0x52B262: lea     eax, [ebp+var_8]
 0x52B265: push    eax
 0x52B266: mov     ecx, esi
-0x52B268: call    TESFile_GetChunkData4
+0x52B268: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x52B26D: mov     ecx, [ebp+var_8]
 0x52B270: mov     [edi+8], ecx
 0x52B273: push    edi
@@ -57,20 +57,20 @@
 0x52B299: push    0; a4
 0x52B29B: push    ebx; Dst
 0x52B29C: mov     ecx, esi; a1
-0x52B29E: call    TESFile_GetChunkData
+0x52B29E: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x52B2A3: mov     ecx, [ebp+var_8]
 0x52B2A6: push    ebx; Src
 0x52B2A7: push    edi; int
 0x52B2A8: add     ecx, 0Ch
-0x52B2AB: call    sub_4F9DF0
+0x52B2AB: call    Script_SetCompiledData; Replace Script compiled data: free old pointer at Script+0x30, clear it, set ScriptInfo compiledSize at +0x20, then allocate/zero/copy exactly Size bytes when nonzero. A zero-size call clears compiled storage and size.
 0x52B2B0: jmp     short loc_52B2E2
 0x52B2B2: push    0; a4
 0x52B2B4: lea     edi, [ebx+24h]
 0x52B2B7: push    edi; Dst
 0x52B2B8: mov     ecx, esi; a1
-0x52B2BA: call    TESFile_GetChunkData
-0x52B2BF: mov     ecx, edi; void *
-0x52B2C1: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x52B2BA: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
+0x52B2BF: mov     ecx, edi; this
+0x52B2C1: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x52B2C6: jmp     short loc_52B2E2
 0x52B2C8: cmp     eax, 54445351h
 0x52B2CD: jnz     short loc_52B2E2
@@ -79,7 +79,7 @@
 0x52B2D7: push    ebx; Dst
 0x52B2D8: mov     ecx, esi; a1
 0x52B2DA: mov     [ebx+5Ch], edx
-0x52B2DD: call    TESFile_GetChunkData
+0x52B2DD: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x52B2E2: mov     al, 1
 0x52B2E4: lea     esp, [ebp-14h]
 0x52B2E7: pop     edi

@@ -1,19 +1,36 @@
 {
-  "callees_count": 13,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_4EA580",
+  "chunks": [
+    [
+      "0x4EA580",
+      "0x4EA668"
+    ],
+    [
+      "0x9CA5A0",
+      "0x9CA5C6"
+    ]
+  ],
+  "chunks_sha256": "4cb5a6252a2aca9f57226e66aff7b2cc05a988f5ceb6618445dd706ee60468e6",
+  "comment_regular": "Verified quad-root lookup/creation: accepts signed 16-bit quadX/quadY, packs them as (quadX << 16) | uint16(quadY), and optionally allocates/inserts a TESTerrainLODQuadRoot containing quad data, owner map, and coordinates.",
+  "comment_repeatable": "Verified quad-root lookup/creation: accepts signed 16-bit quadX/quadY, packs them as (quadX << 16) | uint16(quadY), and optionally allocates/inserts a TESTerrainLODQuadRoot containing quad data, owner map, and coordinates.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "TESWorldSpaceTerrainLODQuadMap_GetOrCreateRoot",
   "end_ea": "0x4EA668",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4EA580",
+  "name": "TESWorldSpaceTerrainLODQuadMap_GetOrCreateRoot",
   "segment": ".text",
   "sha256": "ae952ee9e10e139167957517bc579d339ab711161fa695f8e6e30d6dc1524c65",
   "size": 232,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4EA580",
-  "type": "_DWORD *__thiscall(_DWORD *this, int, _DWORD *, _DWORD *)",
-  "xrefs_from_count": 84,
+  "total_chunk_size": 270,
+  "type": "TESTerrainLODQuadRoot_OblivionLayout_010Verified *__thiscall(TESWorldSpaceTerrainLODQuadMap *this, int quadX, int quadY, bool createIfMissing)",
+  "xrefs_from_count": 98,
   "xrefs_to_count": 2
 }

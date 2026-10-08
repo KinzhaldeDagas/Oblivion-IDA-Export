@@ -24,7 +24,7 @@
 0x644AAA: fstp    [esp+0Ch+arg_0]
 0x644AAE: test    ecx, ecx
 0x644AB0: jz      short loc_644AC3
-0x644AB2: call    sub_452A60
+0x644AB2: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x644AB7: mov     [esp+0Ch+arg_0], eax
 0x644ABB: fild    [esp+0Ch+arg_0]
 0x644ABF: fstp    [esp+0Ch+arg_0]

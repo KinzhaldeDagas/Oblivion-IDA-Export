@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x68D940",
+      "0x68D970"
+    ]
+  ],
+  "chunks_sha256": "ef42465f1f385fa3373aa760f2d7942805cb11fdebecf3e217983f0c4e706f54",
+  "comment_regular": "Verified registry map destructor: installs base vtable, clears entries, frees the bucket array, and frees the map object when the scalar-deleting flag requests it.",
+  "comment_repeatable": "Verified registry map destructor: installs base vtable, clears entries, frees the bucket array, and frees the map object when the scalar-deleting flag requests it.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
   "display_name": "NiTMapBase_AECreatorFuncs_VDdestr",
   "end_ea": "0x68D970",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "NiTMapBase_AECreatorFuncs_VDdestr",
   "segment": ".text",
   "sha256": "ef42465f1f385fa3373aa760f2d7942805cb11fdebecf3e217983f0c4e706f54",
   "size": 48,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x68D940",
-  "type": "unsigned int *__thiscall(unsigned int *this, char)",
+  "total_chunk_size": 48,
+  "type": "ActiveEffectCreatorMap *__thiscall(ActiveEffectCreatorMap *this, UInt8 freeMemory)",
   "xrefs_from_count": 20,
   "xrefs_to_count": 1
 }

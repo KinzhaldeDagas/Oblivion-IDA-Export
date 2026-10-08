@@ -1,19 +1,32 @@
 {
-  "callees_count": 19,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 4,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x459870",
+      "0x459949"
+    ]
+  ],
+  "chunks_sha256": "2363c6317d42210bae00584ad34da9a59bf28c3516a675ce22c9b54d80ade7e2",
+  "comment_regular": "Verified two-pass deferred deletion drain at manager+30. Pass1 RTTI-tests TESBoundObject and SpellItem; unlinks/deletes all OTHER nonnull forms via scalar deleting destructor slot10 with flag1. Pass2 drains and destructs remaining bound objects/spells. Nodes are removed before payload destruction. Calls40F430(WinMain),4644B1(cleanup),4668BA(load completion),500CC6 confirm scheduling anchors; exact frequency/context beyond these sites not inferred. Previous ValidateCreatedObj label incorrect.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 4,
-  "display_name": "SaveLoad_ValidateCreatedObj??",
+  "display_name": "TESSaveLoadGame_ProcessDeferredDeletions",
   "end_ea": "0x459949",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "SaveLoad_ValidateCreatedObj??",
+  "name": "TESSaveLoadGame_ProcessDeferredDeletions",
   "segment": ".text",
   "sha256": "2363c6317d42210bae00584ad34da9a59bf28c3516a675ce22c9b54d80ade7e2",
   "size": 217,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x459870",
-  "type": "void __thiscall(BSSimpleList_VoidPtr *this)",
+  "total_chunk_size": 217,
+  "type": "void __thiscall(TESSaveLoadGame_SerializationView *self)",
   "xrefs_from_count": 105,
   "xrefs_to_count": 4
 }

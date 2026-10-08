@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x79E080",
-    "line": "push    ecx",
+    "line": "push    ecx; st_vector<SFrondTexture> uninitialized-fill thunk: placement-copy-constructs count values and returns destination+count.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E081",
-    "line": "mov     edx, [esp+4+arg_8]",
+    "line": "mov     edx, [esp+4+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x79E086",
-    "line": "mov     esi, [esp+8+arg_4]",
+    "line": "mov     esi, [esp+8+count]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x79E08B",
-    "line": "mov     edi, [esp+0Ch+arg_0]",
+    "line": "mov     edi, [esp+0Ch+destination]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x79E099",
-    "line": "mov     eax, [esp+10h+arg_8]",
+    "line": "mov     eax, [esp+10h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -73,26 +73,74 @@
   },
   {
     "ea": "0x79E09F",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E0A0",
-    "line": "push    esi",
+    "line": "push    esi; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E0A1",
-    "line": "push    edi",
+    "line": "push    edi; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E0A2",
-    "line": "call    sub_79B620",
+    "line": "call    OB_SFrondTexture_UninitializedFillN_010201A0; Exception-safe uninitialized_fill_n for SFrondTexture. Placement-copy-constructs count records; the SEH cleanup landing path destroys the constructed prefix before rethrowing.",
     "mnemonic": "call",
     "size": 5
+  },
+  {
+    "ea": "0x79E0A7",
+    "line": "mov     eax, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x79E0A9",
+    "line": "imul    eax, 2Ch ; ','",
+    "mnemonic": "imul",
+    "size": 3
+  },
+  {
+    "ea": "0x79E0AC",
+    "line": "add     esp, 18h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x79E0AF",
+    "line": "add     eax, edi",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x79E0B1",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x79E0B2",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x79E0B3",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x79E0B4",
+    "line": "retn    0Ch",
+    "mnemonic": "retn",
+    "size": 3
   }
 ]

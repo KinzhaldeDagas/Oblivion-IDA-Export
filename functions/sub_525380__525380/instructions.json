@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x525380",
-    "line": "mov     eax, [esp+Size]",
+    "line": "mov     eax, [esp+Size]; TESNPC vtable+0x54 modified-save loader. Calls TESActorBase_LoadModified; mask 0x200 reads 21 bytes to NPC+0xEC; mask 0x400 resolves combat style to +0x1E4. FormID 7 skips 0x5239C0 recomputation. No direct FaceGen matrix restoration or cache clear in this short wrapper; does NOT prove appearance state is omitted globally (player/special save paths must be traced).",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,19 +19,19 @@
   },
   {
     "ea": "0x525386",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+changeMask]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x52538A",
-    "line": "push    eax; Size",
+    "line": "push    eax; currentFlags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52538B",
-    "line": "push    edi; void *",
+    "line": "push    edi; changeMask",
     "mnemonic": "push",
     "size": 1
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x52539B",
-    "line": "push    15h; a2",
+    "line": "push    15h; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -73,19 +73,19 @@
   },
   {
     "ea": "0x5253A3",
-    "line": "push    ecx; a1",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5253A4",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5253A6",
-    "line": "call    TESForm_LoadDataFromCurrentSaveGame",
+    "line": "call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.",
     "mnemonic": "call",
     "size": 5
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x5253B3",
-    "line": "push    4; a2",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -115,25 +115,25 @@
   },
   {
     "ea": "0x5253B9",
-    "line": "push    edx; a1",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5253BA",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5253BC",
-    "line": "call    TESForm_LoadFormIDFromCurrentSaveGame",
+    "line": "call    TESForm_LoadFormIDFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadFormIDFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadFormID.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5253C1",
-    "line": "mov     eax, [esp+10h]",
+    "line": "mov     eax, [esp+8+Size]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x5253D4",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x5253F3",
-    "line": "call    sub_5239C0",
+    "line": "call    TESNPC_RecomputeBaseVampirismFromSpells; Non-player base vampirism reconstruction: skips formID 7; scans NPC and race spell lists, selects spell-type 4 and VAMP effect code 0x504D4156, sums EffectItem magnitudes, converts to integer, sets base AV 0x45 via virtual+0x134. Supports identifying FaceGen bank selector 0x45 as vampirism, not sex.",
     "mnemonic": "call",
     "size": 5
   },

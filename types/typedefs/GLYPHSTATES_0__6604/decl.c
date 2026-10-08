@@ -1,1 +1,5 @@
-GLYPHSTATES_0
+enum GLYPHSTATES_0 : __int32
+{
+GLPS_CLOSED_0 = 0x1,
+GLPS_OPENED_0 = 0x2,
+};

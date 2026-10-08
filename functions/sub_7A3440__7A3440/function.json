@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7A3440",
+      "0x7A346A"
+    ]
+  ],
+  "chunks_sha256": "5b07fadcb6a97e264aeba3e745f2c3a68cf6229c5cc51ec2f89ba172fad05c0b",
+  "comment_regular": "Destroys one compact SIdvLeafTexture by releasing its filename only when the 28-byte small string is heap-backed.",
+  "comment_repeatable": "Destroys one compact SIdvLeafTexture by releasing its filename only when the 28-byte small string is heap-backed.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7A3440",
+  "display_name": "OB_SIdvLeafTexture_Destroy_010201A0",
   "end_ea": "0x7A346A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7A3440",
+  "name": "OB_SIdvLeafTexture_Destroy_010201A0",
   "segment": ".text",
   "sha256": "5b07fadcb6a97e264aeba3e745f2c3a68cf6229c5cc51ec2f89ba172fad05c0b",
   "size": 42,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A3440",
-  "type": "int __stdcall(_DWORD *)",
+  "total_chunk_size": 42,
+  "type": "void __stdcall(OB_SIdvLeafTexture_010201A0 *value)",
   "xrefs_from_count": 15,
   "xrefs_to_count": 2
 }

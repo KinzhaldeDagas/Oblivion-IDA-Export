@@ -14,7 +14,7 @@
 0x6D3BF1: mov     large fs:0, eax
 0x6D3BF7: mov     ebp, [esp+38h+arg_0]
 0x6D3BFB: mov     ecx, [ebp+30h]
-0x6D3BFE: push    offset dword_B3CA58
+0x6D3BFE: push    offset unk_B3CA58
 0x6D3C03: mov     [esp+3Ch+var_1C], ecx
 0x6D3C07: mov     [esp+3Ch+var_21], 0
 0x6D3C0C: call    sub_700010
@@ -35,7 +35,7 @@
 0x6D3C31: call    eax
 0x6D3C33: cmp     eax, edi
 0x6D3C35: jz      short loc_6D3C45
-0x6D3C37: cmp     eax, offset dword_B3D91C
+0x6D3C37: cmp     eax, offset stru_B3D91C
 0x6D3C3C: jz      short loc_6D3C7F
 0x6D3C3E: mov     eax, [eax+4]
 0x6D3C41: cmp     eax, edi
@@ -114,7 +114,7 @@
 0x6D3D27: test    eax, eax
 0x6D3D29: jz      loc_6D3E3B
 0x6D3D2F: nop
-0x6D3D30: cmp     eax, offset dword_B3D91C
+0x6D3D30: cmp     eax, offset stru_B3D91C
 0x6D3D35: jz      short loc_6D3D43
 0x6D3D37: mov     eax, [eax+4]
 0x6D3D3A: test    eax, eax
@@ -230,7 +230,7 @@
 0x6D3E6A: jz      short loc_6D3E74
 0x6D3E6C: push    ebp
 0x6D3E6D: mov     ecx, edi
-0x6D3E6F: call    sub_6FFE90
+0x6D3E6F: call    NiObjectNET_RemoveController; Removes a specific NiTimeController from NiObjectNET's refcounted controller chain, relinking predecessor/head and clearing the removed controller's next link with balanced temporary references.
 0x6D3E74: test    esi, esi
 0x6D3E76: mov     [esp+38h+var_4], 0FFFFFFFFh
 0x6D3E7E: jz      short loc_6D3E98
@@ -253,3 +253,32 @@
 0x6D3EA7: pop     ebx
 0x6D3EA8: add     esp, 24h
 0x6D3EAB: retn
+0x9C7A50: mov     eax, [ebp-14h]
+0x9C7A53: push    eax
+0x9C7A54: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C7A59: pop     ecx
+0x9C7A5A: retn
+0x9C7A5B: mov     eax, [ebp-14h]
+0x9C7A5E: push    eax
+0x9C7A5F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C7A64: pop     ecx
+0x9C7A65: retn
+0x9C7A66: lea     ecx, [ebp-10h]; slot
+0x9C7A69: jmp     NiPointerSlot_Release
+0x9C7A6E: mov     eax, [ebp-14h]
+0x9C7A71: push    eax
+0x9C7A72: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C7A77: pop     ecx
+0x9C7A78: retn
+0x9C7A79: mov     eax, [ebp-14h]
+0x9C7A7C: push    eax
+0x9C7A7D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C7A82: pop     ecx
+0x9C7A83: retn
+0x9C7A84: mov     edx, [esp+arg_4]
+0x9C7A88: lea     eax, [edx-28h]
+0x9C7A8B: mov     ecx, [edx-2Ch]
+0x9C7A8E: xor     ecx, eax
+0x9C7A90: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C7A95: mov     eax, offset stru_AEFE14
+0x9C7A9A: jmp     ___CxxFrameHandler3

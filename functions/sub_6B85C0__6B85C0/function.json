@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x6B85C0",
+      "0x6B85ED"
+    ]
+  ],
+  "chunks_sha256": "39d577b12ac0dcf9f59288a7847fa0c43d195257ae5f89a35f683ea83204fc7e",
+  "comment_regular": "FirstTopic(abSkipGreeting). Sets the cursor to the inline head node; when skipGreeting is true it advances once, so callers render/select ordinary TOPIC choices without replaying the greeting.",
+  "comment_repeatable": "FirstTopic(abSkipGreeting). Sets the cursor to the inline head node; when skipGreeting is true it advances once, so callers render/select ordinary TOPIC choices without replaying the greeting.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6B85C0",
+  "display_name": "MenuTopicManager::FirstTopic",
   "end_ea": "0x6B85ED",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6B85C0",
+  "name": "MenuTopicManager::FirstTopic",
   "segment": ".text",
   "sha256": "39d577b12ac0dcf9f59288a7847fa0c43d195257ae5f89a35f683ea83204fc7e",
   "size": 45,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6B85C0",
-  "type": "BOOL __thiscall(_DWORD *this, char)",
+  "total_chunk_size": 45,
+  "type": "bool __thiscall(MenuTopicManagerView *this, bool skipGreeting)",
   "xrefs_from_count": 19,
   "xrefs_to_count": 2
 }

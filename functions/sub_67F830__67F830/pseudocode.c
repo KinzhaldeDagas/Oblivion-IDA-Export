@@ -1,99 +1,109 @@
-void __cdecl sub_67F830(char *a1, _WORD *a2, _DWORD *a3)
+// Verified A* neighbor expansion: resolve the current node's spatial form, enumerate its linked-reference bucket, validate candidate reference/space relationship and traversal cost, update candidate fitness and parent when improved, then reinsert or reopen it as appropriate. Reaching destination space updates the best-route bound.
+void __cdecl TravelPath_ExpandSpaceDoorNeighbors(
+        TESForm *currentSpace,
+        TravelPathSpaceDoorLink *currentNode,
+        AStarWorldNodeList *openNodes)
 {
-  _DWORD *v3; // ecx
-  NiTMap_TESCELL *v4; // esi
-  TESObjectCELL *v5; // ebx
-  TESFormVtbl *vtbl; // esi
-  double v7; // st7
+  float v3; // ecx
+  MEF_U32PointerMapLayout32 *v4; // esi
+  void *v5; // ebx
+  TravelPathSpaceDoorLink *v6; // esi
+  double Fitness; // st7
   char v8; // bl
   double v9; // st7
   double v10; // st7
   bool v11; // zf
-  TESObjectCELL *v12; // [esp+14h] [ebp-30h] BYREF
-  NiTMap_TESCELL *v13; // [esp+18h] [ebp-2Ch] BYREF
-  double v14; // [esp+1Ch] [ebp-28h] BYREF
-  NiTMap_Entry_TESCELL *v15; // [esp+28h] [ebp-1Ch] BYREF
+  void *valueOut; // [esp+14h] [ebp-30h] BYREF
+  MEF_U32PointerMapLayout32 *self; // [esp+18h] [ebp-2Ch] BYREF
+  unsigned int keyOut[2]; // [esp+1Ch] [ebp-28h] BYREF
+  MEF_U32PointerMapEntry32 *position; // [esp+28h] [ebp-1Ch] BYREF
   double v16; // [esp+2Ch] [ebp-18h]
-  float v17[3]; // [esp+38h] [ebp-Ch] BYREF
+  NiPoint3 outPosition; // [esp+38h] [ebp-Ch] BYREF
 
-  if ( a1 )
+  if ( currentSpace ) /*0x67f841*/
   {
-    if ( a3 )
+    if ( openNodes ) /*0x67f84b*/
     {
-      if ( a2 )
+      if ( currentNode ) /*0x67f856*/
       {
-        if ( sub_6803A0(a2, (int)a1, v17) )
+        if ( TravelPathSpaceDoorLink_GetPositionInSpace(currentNode, currentSpace, &outPosition) ) /*0x67f862*/
         {
-          v3 = lowPathWorld_ptr;
-          v13 = 0;
-          if ( NiTMap_GetAt(v3, (int)a1, &v13) )
+          v3 = qword_B3BB2C[0xB5]; /*0x67f874*/
+          self = 0; /*0x67f87b*/
+          if ( NiTMap_GetAt((_DWORD *)LODWORD(v3), (int)currentSpace, &self) ) /*0x67f883*/
           {
-            v4 = v13;
-            if ( v13 )
+            v4 = self; /*0x67f890*/
+            if ( self ) /*0x67f896*/
             {
-              v15 = (NiTMap_Entry_TESCELL *)sub_6A9030(v13);
-              if ( v15 )
+              position = (MEF_U32PointerMapEntry32 *)NiTMapBase_GetFirstNode((unsigned int *)self); /*0x67f8a5*/
+              if ( position ) /*0x67f8a9*/
               {
-                while ( 1 )
+                while ( 1 ) /*0x67f8c6*/
                 {
-                  v12 = 0;
-                  sub_452600(v4, &v15, (void **)&v14, &v12);
-                  v5 = v12;
-                  if ( v12 )
+                  valueOut = 0; /*0x67f8c6*/
+                  NiTMap_U32Pointer_GetNextEntry(v4, &position, keyOut, &valueOut); /*0x67f8ce*/
+                  v5 = valueOut; /*0x67f8d3*/
+                  if ( valueOut ) /*0x67f8d9*/
                   {
-                    while ( *(_DWORD *)&v5->members.super.type || v5->vtbl )
+                    while ( *((_DWORD *)v5 + 1) || *(_DWORD *)v5 ) /*0x67f8e5*/
                     {
-                      vtbl = v5->vtbl;
-                      if ( sub_680790(&v5->vtbl->super.InitializeComponent, (int)a1) )
+                      v6 = *(TravelPathSpaceDoorLink **)v5; /*0x67f8f4*/
+                      if ( TravelPathSpaceDoorLink_IsEligibleInSpace(*(TravelPathSpaceDoorLink **)v5, currentSpace) ) /*0x67f8f9*/
                       {
-                        v14 = sub_680AA0((int)a1, v17, vtbl, (TESObjectREFR *)dword_B3BE08, 1);
-                        v7 = sub_6804B0(a2);
-                        v8 = 0;
-                        *(float *)&v14 = v7 + v14;
-                        if ( !sub_680550((unsigned __int16 *)vtbl) && !sub_6804D0((unsigned __int16 *)vtbl)
-                          || (v16 = *(float *)&v14, v8 = 1, v9 = sub_6804B0(vtbl), v9 > v16) )
+                        *(double *)keyOut = TravelPath_ComputeTransitionDistanceCost( /*0x67f91b*/
+                                              currentSpace,
+                                              &outPosition,
+                                              (TESObjectREFR **)v6,
+                                              (TESObjectREFR *)LODWORD(qword_B3BB2C[0xB7]),
+                                              1);
+                        Fitness = TravelPath_SearchState_GetFitness(currentNode); /*0x67f925*/
+                        v8 = 0; /*0x67f930*/
+                        *(float *)keyOut = Fitness + *(double *)keyOut; /*0x67f932*/
+                        if ( !TravelPath_SearchState_IsDiscovered(v6) && !TravelPath_SearchState_IsExpanded(v6) /*0x67f964*/
+                          || (v16 = *(float *)keyOut, v8 = 1, v9 = TravelPath_SearchState_GetFitness(v6), v9 > v16) )
                         {
-                          sub_680930((unsigned __int16 *)vtbl, *(float *)&v14);
-                          sub_680460(vtbl, (int)a2, a1);
-                          if ( sub_680550((unsigned __int16 *)vtbl) || flt_B1545C <= sub_6804B0(vtbl) )
+                          TravelPath_SearchState_SetFitness(v6, *(float *)keyOut); /*0x67f974*/
+                          TravelPath_SearchState_SetParentAndSpace(v6, currentNode, currentSpace); /*0x67f980*/
+                          if ( TravelPath_SearchState_IsDiscovered(v6) /*0x67f9a4*/
+                            || (double)flt_B1545C <= TravelPath_SearchState_GetFitness(v6) )
                           {
-                            if ( v8 )
-                              sub_680C60(a3, vtbl);
+                            if ( v8 ) /*0x67f9bc*/
+                              AStarWorldNodeList_ReinsertByFitness(openNodes, v6); /*0x67f9c2*/
                           }
                           else
                           {
-                            sub_680570((unsigned __int16 *)vtbl, 1);
-                            sub_680BB0(a3, vtbl);
+                            TravelPath_SearchState_SetDiscoveredFlag(v6, 1); /*0x67f9aa*/
+                            AStarWorldNodeList_InsertByFitness(openNodes, v6); /*0x67f9b3*/
                           }
-                          if ( sub_6803F0(vtbl, (int)a1) == dword_B3BE10 )
+                          if ( TravelPathSpaceDoorLink_GetOtherSpace(v6, currentSpace) == (TESForm *)LODWORD(qword_B3BB2C[0xB9]) ) /*0x67f9d7*/
                           {
-                            v16 = sub_680AA0(
-                                    dword_B3BE10,
-                                    (float *)&qword_B3BE2C,
-                                    vtbl,
-                                    (TESObjectREFR *)dword_B3BE08,
+                            v16 = TravelPath_ComputeTransitionDistanceCost( /*0x67f9ee*/
+                                    (TESForm *)LODWORD(qword_B3BB2C[0xB9]),
+                                    (const NiPoint3 *)&qword_B3BB2C[0xC0],
+                                    (TESObjectREFR **)v6,
+                                    (TESObjectREFR *)LODWORD(qword_B3BB2C[0xB7]),
                                     0);
-                            v10 = sub_6804B0(vtbl);
-                            v11 = dword_B3BE04 == 0;
-                            *(float *)&v14 = v10 + v16;
-                            if ( v11 || flt_B1545C > (double)*(float *)&v14 )
+                            v10 = TravelPath_SearchState_GetFitness(v6); /*0x67f9f7*/
+                            v11 = LODWORD(qword_B3BB2C[0xB6]) == 0; /*0x67fa00*/
+                            *(float *)keyOut = v10 + v16; /*0x67fa07*/
+                            if ( v11 || flt_B1545C > (double)*(float *)keyOut ) /*0x67fa1e*/
                             {
-                              flt_B1545C = *(float *)&v14;
-                              dword_B3BE04 = (int)vtbl;
+                              flt_B1545C = *(float *)keyOut; /*0x67fa20*/
+                              LODWORD(qword_B3BB2C[0xB6]) = v6; /*0x67fa26*/
                             }
                           }
                         }
-                        v5 = v12;
+                        v5 = valueOut; /*0x67fa30*/
                       }
-                      v12 = *(TESObjectCELL **)&v5->members.super.type;
-                      if ( !v12 )
-                        break;
-                      v5 = v12;
+                      valueOut = *((void **)v5 + 1); /*0x67fa39*/
+                      if ( !valueOut ) /*0x67fa3d*/
+                        break; /*0x67fa3d*/
+                      v5 = valueOut; /*0x67f8e1*/
                     }
                   }
-                  if ( !v15 )
-                    break;
-                  v4 = v13;
+                  if ( !position ) /*0x67fa48*/
+                    break; /*0x67fa48*/
+                  v4 = self; /*0x67f8b1*/
                 }
               }
             }
@@ -101,7 +111,7 @@ void __cdecl sub_67F830(char *a1, _WORD *a2, _DWORD *a3)
         }
         else
         {
-          PrintError("Failed to find coord for space.");
+          PrintError("Failed to find coord for space."); /*0x67fa5a*/
         }
       }
     }

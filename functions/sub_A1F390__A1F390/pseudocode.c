@@ -1,4 +1,4 @@
 void __cdecl sub_A1F390()
 {
-  GameSetting_destr((int *)&unk_B37638);
+  GameSetting_destr(&g_iLevelUp04Mult.value); /*0xa1f395*/
 }

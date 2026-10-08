@@ -1,10 +1,26 @@
 {
   "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 2,
   "callers_count": 3,
+  "chunks": [
+    [
+      "0x56B820",
+      "0x56B8D0"
+    ],
+    [
+      "0x56B6F0",
+      "0x56B6FB"
+    ],
+    [
+      "0x9C8260",
+      "0x9C828E"
+    ]
+  ],
   "chunks_sha256": "217b1b03f930e88cee26847f4f9e0516c558a61a3102186dbaf9be0d5e4268a1",
   "comment_regular": "[Verified] BSTECreateTask destructor decrements/releases its NiTimeController slot at +0x0C, then chains to NiRefObject destruction. Field +0x08 remains Unknown.",
   "comment_repeatable": "[Verified] BSTECreateTask destructor decrements/releases its NiTimeController slot at +0x0C, then chains to NiRefObject destruction. Field +0x08 remains Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 6,
   "display_name": "BSTECreateTask_Dtor",
   "end_ea": "0x56B8D0",
@@ -15,6 +31,7 @@
   "segment": ".text",
   "sha256": "68313ff3e949527b9b27829ba9e5c891bf09f14a965514bf849b3a2df1bc8b24",
   "size": 176,
+  "source_annotation_confidence": "Verified",
   "start_ea": "0x56B820",
   "total_chunk_size": 233,
   "type": "void __thiscall(BSTECreateTask_Layout_t *this)",

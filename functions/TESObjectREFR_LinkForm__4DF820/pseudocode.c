@@ -1,170 +1,170 @@
-void __usercall TESObjectREFR_LinkForm(Actor *this@<ecx>, double a2@<st2>, double a3@<st1>, double a4@<st0>)
+void __usercall TESObjectREFR_LinkForm(Actor *this@<ecx>, double a2@<st1>, double a3@<st0>)
 {
-  int v5; // ecx
-  char v6; // bl
+  int v4; // ecx
+  char v5; // bl
   TESForm *baseForm; // eax
   int type; // eax
-  UInt32 flags; // eax
-  BSExtraDataVtbl *v10; // edi
-  bool v11; // zf
+  unsigned int flags; // eax
+  BSExtraDataVtbl *EnableStateParent; // edi
+  bool v10; // zf
   TESObjectCELL *parentCell; // ecx
-  TESObjectCELL *v13; // edi
-  TESForm *v14; // eax
+  TESObjectCELL *v12; // edi
+  TESForm *v13; // eax
   UInt32 refID; // ebp
-  TESForm *v16; // ebx
-  int v17; // eax
-  const char *v18; // eax
-  TESObjectCELL *v19; // ebx
-  TESForm *v20; // eax
-  TESObjectCELL *v21; // edi
-  TESForm *v22; // ebp
+  TESForm *v15; // ebx
+  int v16; // eax
+  const char *v17; // eax
+  TESObjectCELL *v18; // ebx
+  TESForm *v19; // eax
+  TESObjectCELL *v20; // edi
+  TESForm *v21; // ebp
   int XCoordinate; // eax
-  int v24; // eax
-  const char *v25; // eax
-  UInt32 v26; // ebx
-  TESForm *v27; // edi
-  TESForm *v28; // eax
-  const char *v29; // eax
-  double v30; // st7
+  int v23; // eax
+  const char *v24; // eax
+  UInt32 v25; // ebx
+  TESForm *v26; // edi
+  TESForm *v27; // eax
+  const char *v28; // eax
+  double v29; // st7
   float *ContainerExtraDataForRef; // edi
-  int v32; // [esp-10h] [ebp-5Ch]
-  const char *v33; // [esp-Ch] [ebp-58h]
+  int v31; // [esp-10h] [ebp-5Ch]
+  const char *v32; // [esp-Ch] [ebp-58h]
+  int v33; // [esp-8h] [ebp-54h]
   int v34; // [esp-8h] [ebp-54h]
-  int v35; // [esp-8h] [ebp-54h]
+  const char *v35; // [esp-4h] [ebp-50h]
   const char *v36; // [esp-4h] [ebp-50h]
-  const char *v37; // [esp-4h] [ebp-50h]
   int X; // [esp+0h] [ebp-4Ch]
   int Xa; // [esp+0h] [ebp-4Ch]
   int Xb; // [esp+0h] [ebp-4Ch]
   const char *X_4; // [esp+4h] [ebp-48h]
   int X_4a; // [esp+4h] [ebp-48h]
   const char *X_4b; // [esp+4h] [ebp-48h]
-  unsigned int v44; // [esp+8h] [ebp-44h]
+  unsigned int v43; // [esp+8h] [ebp-44h]
+  int v44; // [esp+8h] [ebp-44h]
   int v45; // [esp+8h] [ebp-44h]
-  int v46; // [esp+8h] [ebp-44h]
-  int v47; // [esp+Ch] [ebp-40h]
-  int v48; // [esp+10h] [ebp-3Ch]
-  int v49; // [esp+14h] [ebp-38h]
-  int v50; // [esp+18h] [ebp-34h]
-  int v51; // [esp+1Ch] [ebp-30h]
-  char v52; // [esp+40h] [ebp-Ch]
+  int v46; // [esp+Ch] [ebp-40h]
+  int v47; // [esp+10h] [ebp-3Ch]
+  int v48; // [esp+14h] [ebp-38h]
+  int v49; // [esp+18h] [ebp-34h]
+  int v50; // [esp+1Ch] [ebp-30h]
+  char v51; // [esp+40h] [ebp-Ch]
+  UInt32 v52; // [esp+40h] [ebp-Ch]
   UInt32 v53; // [esp+40h] [ebp-Ch]
-  UInt32 v54; // [esp+40h] [ebp-Ch]
-  int v55; // [esp+44h] [ebp-8h]
+  int v54; // [esp+44h] [ebp-8h]
+  UInt32 v55; // [esp+44h] [ebp-8h]
   UInt32 v56; // [esp+44h] [ebp-8h]
-  UInt32 v57; // [esp+44h] [ebp-8h]
-  UInt32 v58; // [esp+48h] [ebp-4h]
+  UInt32 v57; // [esp+48h] [ebp-4h]
 
   if ( (this->members.super.super.super.flags & 8) == 0 )
   {
-    v5 = dword_B34D88;
-    v6 = bDisableWarning_MESSAGES;
-    bDisableWarning_MESSAGES = 1;
-    dword_B34D88 = 0;
-    baseForm = this->members.super.super.baseForm;
-    v55 = v5;
-    if ( baseForm )
+    v4 = *(_DWORD *)&MEMORY[0xB33E90][0xEF8]; /*0x4df83d*/
+    v5 = bDisableWarning_MESSAGES; /*0x4df843*/
+    bDisableWarning_MESSAGES = 1; /*0x4df849*/
+    *(_DWORD *)&MEMORY[0xB33E90][0xEF8] = 0; /*0x4df850*/
+    baseForm = this->members.super.super.baseForm; /*0x4df85a*/
+    v54 = v4; /*0x4df85f*/
+    if ( baseForm ) /*0x4df863*/
     {
-      if ( (baseForm->member.flags & 0x20) != 0 )
-        ((void (__thiscall *)(Actor *, int))this->vtbl->super.super.super.Unk_23)(this, 1);
+      if ( (baseForm->member.flags & 0x20) != 0 ) /*0x4df86e*/
+        ((void (__thiscall *)(Actor *, int))this->vtbl->super.super.super.Unk_23)(this, 1); /*0x4df87c*/
     }
-    if ( !_finite(this->members.super.super.pos[0])
+    if ( !_finite(this->members.super.super.pos[0]) /*0x4df8f0*/
       || !_finite(this->members.super.super.pos[1])
       || !_finite(this->members.super.super.pos[2])
       || _isnan(this->members.super.super.pos[0])
       || _isnan(this->members.super.super.pos[1])
       || _isnan(this->members.super.super.pos[2]) )
     {
-      PrintError("Corrupt location found on reference, setting to (0, 0, 0).");
-      this->members.super.super.pos[0] = Vector3_InitValue_;
-      this->members.super.super.pos[1] = *(&Vector3_InitValue_ + 1);
-      this->members.super.super.pos[2] = dword_B3F9B0;
+      PrintError("Corrupt location found on reference, setting to (0, 0, 0)."); /*0x4df901*/
+      this->members.super.super.pos[0] = g_zeroNiPoint3.x; /*0x4df90b*/
+      this->members.super.super.pos[1] = g_zeroNiPoint3.y; /*0x4df914*/
+      this->members.super.super.pos[2] = g_zeroNiPoint3.z; /*0x4df920*/
     }
-    if ( !_finite(this->members.super.super.rot.x)
+    if ( !_finite(this->members.super.super.rot.x) /*0x4df995*/
       || !_finite(this->members.super.super.rot.y)
       || !_finite(this->members.super.super.rot.z)
       || _isnan(this->members.super.super.rot.x)
       || _isnan(this->members.super.super.rot.y)
       || _isnan(this->members.super.super.rot.z) )
     {
-      PrintError("Corrupt angle found on reference, setting to (0, 0, 0).");
-      this->members.super.super.rot.x = Vector3_InitValue_;
-      this->members.super.super.rot.y = *(&Vector3_InitValue_ + 1);
-      this->members.super.super.rot.z = dword_B3F9B0;
+      PrintError("Corrupt angle found on reference, setting to (0, 0, 0)."); /*0x4df9a6*/
+      this->members.super.super.rot.x = g_zeroNiPoint3.x; /*0x4df9b0*/
+      this->members.super.super.rot.y = g_zeroNiPoint3.y; /*0x4df9b9*/
+      this->members.super.super.rot.z = g_zeroNiPoint3.z; /*0x4df9c5*/
     }
-    ExtraDataList_Link_(&this->members.super.super.baseExtraList, (TESForm *)this);
-    if ( this->vtbl->super.super.GetBaseForm(this) )
+    ExtraDataList_ResolveLoadedFormIDs(&this->members.super.super.baseExtraList, (TESForm *)this); /*0x4df9ce*/
+    if ( this->vtbl->super.super.GetBaseForm(this) ) /*0x4df9dd*/
     {
-      if ( this->vtbl->super.super.GetBaseForm(this)->member.type == kFormType_Door )
+      if ( this->vtbl->super.super.GetBaseForm(this)->member.type == kFormType_Door ) /*0x4df9f3*/
       {
-        TESObjectREFR::AddToLowPathWorld((TESObjectREFR *)this);
-        if ( this->vtbl->super.super.GetBaseForm(this) == (TESForm *)TESDataHandler_g_PrisonMarker )
-          sub_65FD20(TESDataHandler_g_PlayerRef, (TESObjectREFR *)this);
+        TESObjectREFR::AddToLowPathWorld((TESObjectREFR *)this); /*0x4df9f6*/
+        if ( this->vtbl->super.super.GetBaseForm(this) == (TESForm *)MEMORY[0xB35EBC] ) /*0x4dfa10*/
+          sub_65FD20(reference, (TESObjectREFR *)this); /*0x4dfa19*/
       }
     }
-    if ( this->vtbl->super.super.IsActor((TESObjectREFR *)this) )
+    if ( this->vtbl->super.super.IsActor((TESObjectREFR *)this) ) /*0x4dfa28*/
     {
-      if ( !sub_5E0260(this) )
-        this->vtbl->Unk_DF(this);
-      if ( !Actor_IsPlayer((TESObjectREFR *)this) )
+      if ( !sub_5E0260(this) ) /*0x4dfa30*/
+        this->vtbl->Unk_DF(this); /*0x4dfa43*/
+      if ( !Actor_IsPlayer((TESObjectREFR *)this) ) /*0x4dfa47*/
       {
-        if ( TESObjectREFR_IsDead((TESObjectREFR *)this, 0) )
+        if ( TESObjectREFR_IsDead((TESObjectREFR *)this, 0) ) /*0x4dfa54*/
         {
-          Actor_HandleDeathSTate____(this, 2u);
-          sub_674550((_BYTE)this + 0x44, a2, a3, a4, (int)this, 3);
+          Actor_HandleDeathState(this, 2u); /*0x4dfa61*/
+          sub_674550((int)this, 3); /*0x4dfa6e*/
         }
       }
     }
     else
     {
-      type = this->vtbl->super.super.GetBaseForm(this)->member.type;
-      if ( type != 0x1C && (type <= 0x1D || type > 0x20) )
-        ((void (__thiscall *)(Actor *, _DWORD, _DWORD, _DWORD))this->vtbl->super.super.Unk_3E)(
+      type = this->vtbl->super.super.GetBaseForm(this)->member.type; /*0x4dfa7f*/
+      if ( type != 0x1C && (type <= 0x1D || type > 0x20) ) /*0x4dfa90*/
+        ((void (__thiscall *)(Actor *, _DWORD, _DWORD, _DWORD))this->vtbl->super.super.Unk_3E)( /*0x4dfabb*/
           this,
-          LODWORD(Vector3_InitValue_),
-          *((_DWORD *)&Vector3_InitValue_ + 1),
-          LODWORD(dword_B3F9B0));
+          LODWORD(g_zeroNiPoint3.x),
+          LODWORD(g_zeroNiPoint3.y),
+          LODWORD(g_zeroNiPoint3.z));
     }
-    flags = SaveLoad_CurrentSavegame->flags;
-    if ( (flags & 0x800) == 0 || (flags & 0x40) != 0 )
+    flags = g_TESSaveLoadGame->flags; /*0x4dfac2*/
+    if ( (flags & 0x800) == 0 || (flags & 0x40) != 0 ) /*0x4dfad4*/
     {
-      v10 = sub_420260(&this->members.super.super.baseExtraList);
-      if ( v10 )
+      EnableStateParent = ExtraDataList_GetEnableStateParent(&this->members.super.super.baseExtraList); /*0x4dfadd*/
+      if ( EnableStateParent ) /*0x4dfae1*/
       {
-        v52 = sub_45A500(SaveLoad_CurrentSavegame);
-        if ( (SaveLoad_CurrentSavegame->flags & 0x40) == 0 )
-          sub_45A530(SaveLoad_CurrentSavegame, 0);
-        if ( sub_420340(&this->members.super.super.baseExtraList) )
-          LOBYTE(v44) = ((int)v10[1].Destructor & 0x800) == 0;
+        v51 = sub_45A500(g_TESSaveLoadGame); /*0x4dfafd*/
+        if ( (g_TESSaveLoadGame->flags & 0x40) == 0 ) /*0x4dfb01*/
+          sub_45A530(g_TESSaveLoadGame, 0); /*0x4dfb05*/
+        if ( ExtraDataList_IsEnableStateInverse(&this->members.super.super.baseExtraList) ) /*0x4dfb0c*/
+          LOBYTE(v43) = ((int)EnableStateParent[1].Destructor & 0x800) == 0; /*0x4dfb22*/
         else
-          v44 = ((unsigned int)v10[1].Destructor >> 0xB) & 0xFFFFFF01;
-        TESForm_SetEnabled_((TESForm *)this, v44);
-        sub_45A530(SaveLoad_CurrentSavegame, v52);
+          v43 = ((unsigned int)EnableStateParent[1].Destructor >> 0xB) & 0xFFFFFF01; /*0x4dfb31*/
+        TESForm_SetDisabledFlag((TESForm *)this, v43); /*0x4dfb34*/
+        sub_45A530(g_TESSaveLoadGame, v51); /*0x4dfb44*/
       }
     }
-    sub_4DBF90(this);
-    TESForm_SetIsLinked((TESForm *)this, 1);
-    v11 = dword_B34D88 == 0;
-    bDisableWarning_MESSAGES = v6;
-    dword_B34D88 = v55;
-    if ( !v11 )
+    sub_4DBF90(this); /*0x4dfb4b*/
+    TESForm_SetIsLinked((TESForm *)this, 1); /*0x4dfb54*/
+    v10 = *(_DWORD *)&MEMORY[0xB33E90][0xEF8] == 0; /*0x4dfb5e*/
+    bDisableWarning_MESSAGES = v5; /*0x4dfb64*/
+    *(_DWORD *)&MEMORY[0xB33E90][0xEF8] = v54; /*0x4dfb6a*/
+    if ( !v10 )
     {
-      parentCell = this->members.super.super.parentCell;
+      parentCell = this->members.super.super.parentCell; /*0x4dfb76*/
       if ( parentCell && TESObjectCELL_IsInterior(parentCell) )
       {
-        v13 = this->members.super.super.parentCell;
-        v14 = this->vtbl->super.super.GetBaseForm(this);
-        refID = this->members.super.super.parentCell->members.super.refID;
-        v16 = v14;
-        v56 = this->members.super.super.super.refID;
-        v53 = this->vtbl->super.super.GetBaseForm(this)->member.refID;
-        v17 = ((int (__thiscall *)(TESObjectCELL *, UInt32))v13->vtbl->GetEditorName)(v13, refID);
-        v18 = (const char *)((int (__thiscall *)(TESForm *, UInt32, CHAR *, UInt32, int))v16->vtbl->GetEditorName)(
-                              v16,
-                              v53,
+        v12 = this->members.super.super.parentCell; /*0x4dfb8e*/
+        v13 = this->vtbl->super.super.GetBaseForm(this); /*0x4dfb93*/
+        refID = this->members.super.super.parentCell->members.super.refID; /*0x4dfb9b*/
+        v15 = v13; /*0x4dfb9e*/
+        v55 = this->members.super.super.super.refID; /*0x4dfba2*/
+        v52 = this->vtbl->super.super.GetBaseForm(this)->member.refID; /*0x4dfbb5*/
+        v16 = ((int (__thiscall *)(TESObjectCELL *, UInt32))v12->vtbl->GetEditorName)(v12, refID); /*0x4dfbc2*/
+        v17 = (const char *)((int (__thiscall *)(TESForm *, UInt32, CHAR *, UInt32, int))v15->vtbl->GetEditorName)( /*0x4dfbde*/
+                              v15,
+                              v52,
                               EmptyString,
-                              v56,
-                              v17);
+                              v55,
+                              v16);
         PrintError(
           "Errors were encountered during InitItem for reference:\n"
           "\n"
@@ -173,33 +173,33 @@ void __usercall TESObjectREFR_LinkForm(Actor *this@<ecx>, double a2@<st2>, doubl
           "Cell: '%s' (%08X)\n"
           "\n"
           "See Warnings file for more information.",
-          v18,
-          v34,
-          v36,
+          v17,
+          v33,
+          v35,
           X,
           X_4,
-          v45);
+          v44);
       }
       else
       {
-        v19 = this->members.super.super.parentCell;
-        v20 = this->vtbl->super.super.GetBaseForm(this);
-        if ( v19 )
+        v18 = this->members.super.super.parentCell; /*0x4dfbf3*/
+        v19 = this->vtbl->super.super.GetBaseForm(this); /*0x4dfc04*/
+        if ( v18 )
         {
-          v21 = this->members.super.super.parentCell;
-          v22 = v20;
-          v57 = v21->members.super.refID;
-          v54 = this->members.super.super.super.refID;
-          v58 = this->vtbl->super.super.GetBaseForm(this)->member.refID;
-          X_4a = TESObjectCELL_GetYCoordinate(v21);
-          XCoordinate = TESObjectCELL_GetXCoordinate(v21);
-          v24 = ((int (__thiscall *)(TESObjectCELL *, int))v19->vtbl->GetEditorName)(v19, XCoordinate);
-          v25 = (const char *)((int (__thiscall *)(TESForm *, UInt32, CHAR *, UInt32, int))v22->vtbl->GetEditorName)(
-                                v22,
-                                v58,
+          v20 = this->members.super.super.parentCell; /*0x4dfc06*/
+          v21 = v19; /*0x4dfc0e*/
+          v56 = v20->members.super.refID; /*0x4dfc13*/
+          v53 = this->members.super.super.super.refID; /*0x4dfc1d*/
+          v57 = this->vtbl->super.super.GetBaseForm(this)->member.refID; /*0x4dfc2c*/
+          X_4a = TESObjectCELL_GetYCoordinate(v20); /*0x4dfc38*/
+          XCoordinate = TESObjectCELL_GetXCoordinate(v20); /*0x4dfc3b*/
+          v23 = ((int (__thiscall *)(TESObjectCELL *, int))v18->vtbl->GetEditorName)(v18, XCoordinate); /*0x4dfc4b*/
+          v24 = (const char *)((int (__thiscall *)(TESForm *, UInt32, CHAR *, UInt32, int))v21->vtbl->GetEditorName)( /*0x4dfc68*/
+                                v21,
+                                v57,
                                 EmptyString,
-                                v54,
-                                v24);
+                                v53,
+                                v23);
           PrintError(
             "Errors were encountered during InitItem for reference:\n"
             "\n"
@@ -208,25 +208,25 @@ void __usercall TESObjectREFR_LinkForm(Actor *this@<ecx>, double a2@<st2>, doubl
             "Cell: '%s' (%i, %i) (%08X)\n"
             "\n"
             "See Warnings file for more information.",
-            v25,
+            v24,
+            v31,
             v32,
-            v33,
-            v35,
-            v37,
+            v34,
+            v36,
             Xa,
             X_4a,
-            v57);
+            v56);
         }
         else
         {
-          v26 = this->members.super.super.super.refID;
-          v27 = v20;
-          v28 = this->vtbl->super.super.GetBaseForm(this);
-          v29 = (const char *)((int (__thiscall *)(TESForm *, UInt32, CHAR *, UInt32))v27->vtbl->GetEditorName)(
-                                v27,
-                                v28->member.refID,
+          v25 = this->members.super.super.super.refID; /*0x4dfc86*/
+          v26 = v19; /*0x4dfc89*/
+          v27 = this->vtbl->super.super.GetBaseForm(this); /*0x4dfc93*/
+          v28 = (const char *)((int (__thiscall *)(TESForm *, UInt32, CHAR *, UInt32))v26->vtbl->GetEditorName)( /*0x4dfca9*/
+                                v26,
+                                v27->member.refID,
                                 EmptyString,
-                                v26);
+                                v25);
           PrintError(
             "Errors were encountered during InitItem for reference:\n"
             "\n"
@@ -235,22 +235,22 @@ void __usercall TESObjectREFR_LinkForm(Actor *this@<ecx>, double a2@<st2>, doubl
             "Cell: NONE\n"
             "\n"
             "See Warnings file for more information.",
-            v29,
+            v28,
             Xb,
             X_4b,
-            v46);
+            v45);
         }
       }
     }
-    v30 = sub_4D70E0((TESObjectREFR *)this, a3, a4);
-    if ( TESObjectREFR_GetContainer((TESObjectREFR *)this) )
+    v29 = sub_4D70E0((TESObjectREFR *)this, a2, a3); /*0x4dfcbb*/
+    if ( TESObjectREFR_GetContainer((TESObjectREFR *)this) ) /*0x4dfcc2*/
     {
-      ContainerExtraDataForRef = (float *)ContainerExtraData_GetContainerExtraDataForRef((TESObjectREFR *)this);
-      ContainerExtraData_EvaluateOwnerLeveledItems(v47, v48, v49, v50, v51);
-      ExtraContainerChanges_RunScripts(ContainerExtraDataForRef, v30, a3);
-      if ( !*(_QWORD *)*(_DWORD *)ContainerExtraDataForRef )
-        ExtraDataList_RemoveContainerExtraData(&this->members.super.super.baseExtraList.vtbl);
+      ContainerExtraDataForRef = (float *)ContainerExtraData_GetContainerExtraDataForRef((TESObjectREFR *)this); /*0x4dfcd2*/
+      ContainerExtraData_EvaluateOwnerLeveledItems(v46, v47, v48, v49, v50); /*0x4dfcd9*/
+      ExtraContainerChanges_RunScripts(ContainerExtraDataForRef, v29, a2); /*0x4dfce0*/
+      if ( !*(_QWORD *)*(_DWORD *)ContainerExtraDataForRef ) /*0x4dfced*/
+        ExtraDataList_RemoveContainerExtraData(&this->members.super.super.baseExtraList.vtbl); /*0x4dfcf5*/
     }
-    this->members.super.super.super.flags &= ~0x200000u;
+    this->members.super.super.super.flags &= ~0x200000u; /*0x4dfcfa*/
   }
 }

@@ -1,1 +1,1 @@
-HUDSubtitleMenu
+struct HUDSubtitleMenu;

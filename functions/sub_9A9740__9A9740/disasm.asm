@@ -1,5 +1,5 @@
 0x9A9740: push    ebx
-0x9A9741: mov     ebx, [esp+4+arg_0]
+0x9A9741: mov     ebx, [esp+4+value]
 0x9A9745: push    esi
 0x9A9746: mov     esi, ecx
 0x9A9748: mov     eax, [esi]
@@ -21,12 +21,12 @@
 0x9A9773: push    ebx
 0x9A9774: call    sub_77CB50
 0x9A9779: add     esp, 4
-0x9A977C: lea     edx, [esp+0Ch+arg_0]
-0x9A9780: push    edx
-0x9A9781: push    edi
-0x9A9782: lea     ecx, [esi+0Ch]
-0x9A9785: mov     [esp+14h+arg_0], 0
-0x9A978D: call    sub_9A9670
+0x9A977C: lea     edx, [esp+0Ch+value]
+0x9A9780: push    edx; value
+0x9A9781: push    edi; index
+0x9A9782: lea     ecx, [esi+0Ch]; this
+0x9A9785: mov     [esp+14h+value], 0
+0x9A978D: call    NiTArray_ConstantMapEntry_SetAt; Verified companion to SortByEnabled: array this is map+0C, base pointer this+4, end this+0A and live count this+0C. SetAt updates occupancy/end as needed and assigns the pointer with NiPointer decrement/destructor/increment behavior. The caller retains its current entry while exchanging two positions; model array order without executing native refcounts under metadata gates.
 0x9A9792: mov     eax, [esi+24h]
 0x9A9795: pop     edi
 0x9A9796: pop     esi

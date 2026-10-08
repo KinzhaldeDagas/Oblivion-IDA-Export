@@ -1,1 +1,1 @@
-GridDistantArray
+struct GridDistantArray;

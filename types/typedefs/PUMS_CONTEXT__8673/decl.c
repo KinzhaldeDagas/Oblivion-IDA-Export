@@ -1,1 +1,1 @@
-PUMS_CONTEXT
+typedef void *PUMS_CONTEXT;

@@ -1,18 +1,18 @@
 void __thiscall sub_4DB760(TESObjectREFR *this)
 {
-  BSExtraDataVtbl *Owner; // eax
+  TESForm *Owner; // eax
 
-  Owner = TESObjectREFR_GetOwner(this);
-  if ( Owner )
+  Owner = TESObjectREFR_GetOwner(this); /*0x4db764*/
+  if ( Owner ) /*0x4db76d*/
   {
-    if ( LOBYTE(Owner->CompareTo) != 0x23 )
-      return;
-    goto LABEL_3;
+    if ( Owner->member.type != kFormType_NPC ) /*0x4db775*/
+      return; /*0x4db775*/
+    goto LABEL_3; /*0x4db775*/
   }
-  Owner = (BSExtraDataVtbl *)((int (__thiscall *)(TESObjectREFR *))this->vtbl->GetTemplateForm)(this);
-  if ( !Owner )
-    Owner = (BSExtraDataVtbl *)this->vtbl->GetBaseForm(this);
-  if ( LOBYTE(Owner->CompareTo) == 0x23 )
+  Owner = (TESForm *)((int (__thiscall *)(TESObjectREFR *))this->vtbl->GetTemplateForm)(this); /*0x4db79b*/
+  if ( !Owner ) /*0x4db79f*/
+    Owner = this->vtbl->GetBaseForm(this); /*0x4db7ab*/
+  if ( Owner->member.type == kFormType_NPC ) /*0x4db7b1*/
 LABEL_3:
-    TESActorBaseData_AllFactionsAreEvil(&Owner[4].CompareTo);
+    TESActorBaseData_AllFactionsAreEvil(&Owner[1].member.refID); /*0x4db787*/
 }

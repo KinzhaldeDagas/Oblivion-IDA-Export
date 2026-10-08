@@ -1,1 +1,1 @@
-bhkWorldCinfo
+struct bhkWorldCinfo;

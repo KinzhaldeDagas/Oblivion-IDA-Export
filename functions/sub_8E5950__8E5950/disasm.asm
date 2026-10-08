@@ -120,7 +120,7 @@
 0x8E5AFE: shr     eax, 7
 0x8E5B01: and     edi, 0FFFEh
 0x8E5B07: shr     ecx, 7
-0x8E5B0A: mov     [esp+70h+var_18], edi
+0x8E5B0A: mov     dword ptr [esp+70h+var_18], edi
 0x8E5B0E: movzx   edi, ax
 0x8E5B11: movzx   eax, cx
 0x8E5B14: mov     ecx, [ebx+70h]
@@ -213,7 +213,6 @@
 0x8E5C25: cmp     edx, [esp+70h+var_20]
 0x8E5C29: jnb     short loc_8E5C5B
 0x8E5C2B: jmp     short loc_8E5C30
-0x8E5C2D: align 10h
 0x8E5C30: movzx   ecx, word ptr [eax+2]
 0x8E5C34: mov     edx, ecx
 0x8E5C36: and     ecx, 1Fh
@@ -291,7 +290,7 @@
 0x8E5D20: sub     edx, edi
 0x8E5D22: mov     edi, [ebx+64h]
 0x8E5D25: add     eax, edx
-0x8E5D27: mov     edx, [esp+70h+var_18]
+0x8E5D27: mov     edx, dword ptr [esp+70h+var_18]
 0x8E5D2B: sar     eax, 2
 0x8E5D2E: lea     esi, [ebx+64h]
 0x8E5D31: mov     word ptr [esp+70h+var_48+0Ch], ax

@@ -1,4 +1,4 @@
-0x472030: push    0FFFFFFFFh
+0x472030: push    0FFFFFFFFh; ActorAnimData movement-vector recovery. For an installed TESAnimGroup, samples AccumRoot at current/end times, computes normalized movement delta, stores it back to the TESAnimGroup, and warns when Animate In Place exported zero movement.
 0x472032: push    offset SEH_472030
 0x472037: mov     eax, large fs:0
 0x47203D: push    eax
@@ -14,22 +14,22 @@
 0x472051: mov     large fs:0, eax
 0x472057: mov     ebx, ecx
 0x472059: mov     [esp+88h+var_74], ebx
-0x47205D: mov     ebp, [esp+88h+arg_0]
-0x472064: mov     ecx, ebp
-0x472066: call    TESActorBaseData_GetMagicka
+0x47205D: mov     ebp, [esp+88h+object]
+0x472064: mov     ecx, ebp; object
+0x472066: call    Shared_GetWordAtOffset08; TESAnimGroup encoded key accessor: returns 16-bit group key at TESAnimGroup +0x08.
 0x47206B: movzx   esi, ax
 0x47206E: mov     ecx, ebp
 0x472070: mov     [esp+88h+var_5C], esi
-0x472074: call    TESAnimGroup_GetAnimationGroup
+0x472074: call    TESAnimGroup_GetAnimationGroup; TESAnimGroup native group id accessor: byte at TESAnimGroup +0x08.
 0x472079: mov     edi, eax
 0x47207B: mov     eax, [ebx+98h]
 0x472081: test    eax, eax
 0x472083: jz      loc_4722FB
 0x472089: mov     ecx, [ebx+9Ch]
-0x47208F: lea     eax, [esp+88h+arg_0]
+0x47208F: lea     eax, [esp+88h+object]
 0x472096: push    eax
 0x472097: push    esi
-0x472098: call    sub_470960
+0x472098: call    ActorAnimData_FindAnimMapEntry; CustomAnimSupport decode: anim-map lookup helper used by playback, validators, and save/load restore to test an encoded group key.
 0x47209D: test    al, al
 0x47209F: jz      loc_4722FB
 0x4720A5: cmp     edi, 1
@@ -47,7 +47,7 @@
 0x4720D2: call    PrintError
 0x4720D7: add     esp, 8
 0x4720DA: jmp     loc_4722FB
-0x4720DF: mov     esi, [esp+88h+arg_0]
+0x4720DF: mov     esi, [esp+88h+object]
 0x4720E6: mov     eax, [esi]
 0x4720E8: mov     edx, [eax+10h]
 0x4720EB: push    0FFFFFFFFh
@@ -102,7 +102,7 @@
 0x47218D: mov     esi, [eax+ecx]
 0x472190: fld     dword ptr [edi+30h]
 0x472193: lea     ecx, [esp+88h+var_2C]
-0x472197: fstp    [esp+88h+arg_0]
+0x472197: fstp    [esp+88h+object]
 0x47219E: call    sub_470AB0
 0x4721A3: lea     ecx, [esp+88h+var_4C]
 0x4721A7: call    sub_470AB0
@@ -116,7 +116,7 @@
 0x4721BD: mov     ecx, esi
 0x4721BF: fstp    [esp+94h+var_94]
 0x4721C2: call    edx
-0x4721C4: fld     [esp+88h+arg_0]
+0x4721C4: fld     [esp+88h+object]
 0x4721CB: mov     eax, [esi]
 0x4721CD: mov     edx, [eax+4Ch]
 0x4721D0: lea     ecx, [esp+88h+var_4C]
@@ -137,7 +137,7 @@
 0x4721F9: fld     [esp+88h+var_4C]
 0x4721FD: push    ecx
 0x4721FE: fsub    [esp+8Ch+var_2C]
-0x472202: lea     ecx, [esp+8Ch+var_58]
+0x472202: lea     ecx, [esp+8Ch+position]
 0x472206: fstp    [esp+8Ch+var_68]
 0x47220A: fld     [esp+8Ch+var_48]
 0x47220E: fsub    [esp+8Ch+var_28]
@@ -146,21 +146,21 @@
 0x47221A: fsub    [esp+8Ch+var_24]
 0x47221E: fstp    [esp+8Ch+var_60]
 0x472222: fld     [esp+8Ch+var_68]
-0x472226: fstp    [esp+8Ch+var_58]
+0x472226: fstp    [esp+8Ch+position.x]
 0x47222A: fld     [esp+8Ch+var_64]
-0x47222E: fstp    [esp+8Ch+var_54]
+0x47222E: fstp    [esp+8Ch+position.y]
 0x472232: fld     [esp+8Ch+var_60]
-0x472236: fstp    [esp+8Ch+var_50]
-0x47223A: fld     [esp+8Ch+arg_0]
+0x472236: fstp    [esp+8Ch+position.z]
+0x47223A: fld     [esp+8Ch+object]
 0x472241: fsub    [esp+8Ch+var_70]
-0x472245: fstp    [esp+8Ch+arg_0]
-0x47224C: fld     [esp+8Ch+arg_0]
+0x472245: fstp    [esp+8Ch+object]
+0x47224C: fld     [esp+8Ch+object]
 0x472253: fstp    [esp+8Ch+var_8C]; float
 0x472256: call    sub_4707E0
-0x47225B: lea     eax, [esp+88h+var_58]
-0x47225F: push    eax
-0x472260: mov     ecx, ebp
-0x472262: call    sub_4BEF50
+0x47225B: lea     eax, [esp+88h+position]
+0x47225F: push    eax; position
+0x472260: mov     ecx, ebp; this
+0x472262: call    PathGraphNode_SetPosition; Verified shared graph-node position setter: writes XYZ into this+0x14; called by both TESRoad and TESPathGrid record loaders.
 0x472267: mov     ebx, [esp+88h+var_74]
 0x47226B: lea     ecx, [edi+4]
 0x47226E: push    ecx; lpAddend
@@ -175,13 +175,13 @@
 0x47228C: call    eax
 0x47228E: mov     ecx, [esp+88h+var_5C]; jumptable 00472123 default case, cases 2,3
 0x472292: push    ecx
-0x472293: call    sub_51AA00
+0x472293: call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.
 0x472298: add     eax, 0FFFFFFFDh
 0x47229B: add     esp, 4
 0x47229E: cmp     eax, 0Bh
 0x4722A1: ja      short loc_4722FB
 0x4722A3: mov     ecx, ebp
-0x4722A5: call    sub_51AED0
+0x4722A5: call    TESAnimGroup_GetMovementMagnitude; TESAnimGroup movement magnitude. Computes sqrt(x*x + y*y + z*z) from movement vector floats; used by Animate In Place warning path.
 0x4722AA: fcomp   dword ptr ds:0A2FAA8h
 0x4722B0: fnstsw  ax
 0x4722B2: test    ah, 44h
@@ -190,16 +190,16 @@
 0x4722BA: mov     eax, [edx+8]
 0x4722BD: push    eax
 0x4722BE: mov     ecx, ebp
-0x4722C0: call    TESAnimGroup_GetAnimationGroup
+0x4722C0: call    TESAnimGroup_GetAnimationGroup; TESAnimGroup native group id accessor: byte at TESAnimGroup +0x08.
 0x4722C5: lea     eax, [eax+eax*8]
 0x4722C8: mov     ecx, ds:0B102E0h[eax*4]
 0x4722CF: push    ecx
 0x4722D0: mov     ecx, ebp
-0x4722D2: call    sub_51AC60
+0x4722D2: call    TESAnimGroup_GetWeaponPrefix; Anim key weapon-prefix extractor. Returns the weapon prefix nibble from key word bits 0x0F00.
 0x4722D7: mov     edx, ds:0B102C8h[eax*4]
 0x4722DE: push    edx
 0x4722DF: mov     ecx, ebp
-0x4722E1: call    sub_51AC50
+0x4722E1: call    TESAnimGroup_GetMovementPrefix; Anim key movement-prefix extractor. Returns the high nibble of key word bits 0xF000.
 0x4722E6: mov     eax, ds:0B102B8h[eax*4]
 0x4722ED: push    eax; ArgList
 0x4722EE: push    offset aAnimgroupSSSFo; "AnimGroup '%s%s%s' for '%s' was exporte"...
@@ -214,3 +214,12 @@
 0x47230A: pop     ebx
 0x47230B: add     esp, 74h
 0x47230E: retn    4
+0x9AEC80: lea     ecx, [ebp-6Ch]; slot
+0x9AEC83: jmp     NiPointerSlot_Release
+0x9AEC88: mov     edx, [esp+arg_4]
+0x9AEC8C: lea     eax, [edx-78h]
+0x9AEC8F: mov     ecx, [edx-7Ch]
+0x9AEC92: xor     ecx, eax
+0x9AEC94: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AEC99: mov     eax, offset stru_ADB384
+0x9AEC9E: jmp     ___CxxFrameHandler3

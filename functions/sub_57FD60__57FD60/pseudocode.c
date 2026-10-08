@@ -1,19 +1,23 @@
-void __usercall sub_57FD60(Tile **a1@<ecx>, double a2@<st2>, double a3@<st1>, double a4@<st0>)
+// Verified: invokes ScanForMaxFocus with INT_MIN and null root, sets selected tile via SetCurrentFocusTarget, hides cursor, clears mouse-motion byte +0xB9. Fallout named analogue 0x824F09D0.
+void __thiscall InterfaceManager::GetDefaultFocus(InterfaceManager *this)
 {
-  _DWORD *v5; // eax
+  double v1; // st5
+  double v2; // st6
+  double v3; // st7
+  Tile *v5; // eax
   int v6; // [esp+8h] [ebp-4h] BYREF
 
-  v6 = 0x80000000;
-  v5 = sub_57DA90(a1, a2, a3, a4, &v6, 0);
-  if ( v5 )
+  v6 = 0x80000000; /*0x57fd6b*/
+  v5 = InterfaceManager::ScanForMaxFocus(this, &v6, 0); /*0x57fd73*/
+  if ( v5 ) /*0x57fd83*/
   {
-    sub_57F9F0((float *)a1, a2, a4, a3, *(float *)&v5, (_DWORD *)0xFDD, 0);
-    *(_WORD *)(*((_DWORD *)a1[7] + 9) + 0x18) |= 1u;
-    Tile_SetFloat(a1[7], (_DWORD *)0xFA1, 1.0);
-    *((_BYTE *)a1 + 0xB9) = 0;
+    InterfaceManager::SetCurrentFocusTarget((float *)this, v1, v3, v2, *(float *)&v5, (_DWORD *)0xFDD, 0); /*0x57fd86*/
+    *(_WORD *)(*((_DWORD *)this->cursor + 9) + 0x18) |= 1u; /*0x57fd93*/
+    Tile_SetFloat(this->cursor, 0xFA1u, 1.0); /*0x57fda4*/
+    BYTE1(this->unk0B8) = 0; /*0x57fda9*/
   }
   else
   {
-    sub_57F9F0((float *)a1, a2, a4, a3, 0.0, (_DWORD *)0xFDD, 0);
+    InterfaceManager::SetCurrentFocusTarget((float *)this, v1, v3, v2, 0.0, (_DWORD *)0xFDD, 0); /*0x57fdb5*/
   }
 }

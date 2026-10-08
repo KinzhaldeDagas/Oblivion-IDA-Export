@@ -43,7 +43,7 @@
 0x4A7864: test    al, al
 0x4A7866: jnz     short loc_4A7883
 0x4A7868: push    edi
-0x4A7869: call    FormHeapFree
+0x4A7869: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4A786E: add     esp, 4
 0x4A7871: jmp     short loc_4A7883
 0x4A7873: fldz

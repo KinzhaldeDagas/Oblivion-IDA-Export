@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x663D70",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,73 +151,73 @@
   },
   {
     "ea": "0x663D8C",
-    "line": "call    sub_67F0A0",
+    "line": "call    TravelPath_GetIgnoreLocks; Verified: reads policy byte 0 at qword_B3BB2C[0xBA]. CalcLowPathToPoint's first boolean argument is saved/restored through this accessor. TravelPath_ComputeDoorTransitionPenalty skips its lock/access penalty branch when this flag is true.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x663D91",
-    "line": "push    1",
+    "line": "push    1; enabled",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x663D93",
-    "line": "mov     byte ptr [esp+4Ch+var_34], al",
+    "line": "mov     [esp+4Ch+var_34], al",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x663D97",
-    "line": "call    sub_67F0B0",
+    "line": "call    TravelPath_SetIgnoreLocks; Verified: writes policy byte 0 at qword_B3BB2C[0xBA] and returns the assigned value. The registered CalcLowPathToPoint option description identifies it as ignore locks.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x663D9C",
-    "line": "call    sub_67F0E0",
+    "line": "call    TravelPath_GetAllowDisabledDoors; Verified: reads policy byte 2 at qword_B3BB2C[0xBA]. TravelPathSpaceDoorLink_IsEligibleInSpace permits references with the disabled bit (0x800) when this flag is true.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x663DA1",
-    "line": "push    1",
+    "line": "push    1; enabled",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x663DA3",
-    "line": "mov     byte ptr [esp+50h+var_38], al",
+    "line": "mov     [esp+50h+enabled], al",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x663DA7",
-    "line": "call    sub_67F0F0",
+    "line": "call    TravelPath_SetAllowDisabledDoors; Verified: writes policy byte 2 at qword_B3BB2C[0xBA] and returns the assigned value. The second CalcLowPathToPoint boolean is saved/restored through this setter and corresponds to 'allow disabled doors'.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x663DAC",
-    "line": "call    sub_67F0C0",
+    "line": "call    TravelPath_GetIgnoreMinUse; Verified: reads policy byte 1 at qword_B3BB2C[0xBA]. When false, TravelPath_ComputeDoorTransitionPenalty may add the extra cost for a door whose TESObjectDOOR_HasMinUseFlag is set.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x663DB1",
-    "line": "push    0",
+    "line": "push    0; enabled",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x663DB3",
-    "line": "mov     byte ptr [esp+54h+var_30], al",
+    "line": "mov     [esp+54h+var_30], al",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x663DB7",
-    "line": "call    sub_67F0D0",
+    "line": "call    TravelPath_SetIgnoreMinUse; Verified: writes policy byte 1 at qword_B3BB2C[0xBA] and returns the assigned value. The third CalcLowPathToPoint boolean is saved/restored through this setter and corresponds to 'ignore min use'.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,13 +295,13 @@
   },
   {
     "ea": "0x663DDC",
-    "line": "lea     ecx, [esp+48h+var_20]",
+    "line": "lea     ecx, [esp+48h+var_20]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x663DE0",
-    "line": "call    sub_68A9F0",
+    "line": "call    PathLow_ctor; Verified PathLow constructor: installs the PathLow vtable at +0, initializes the BSSimpleList at +4/+8 to empty, copies unk_B3A458 to +0x0C, and sets byte +0x10 to 1. +0x0C and byte +0x10 semantics remain Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,25 +325,25 @@
   },
   {
     "ea": "0x663DF7",
-    "line": "push    edi",
+    "line": "push    edi; destinationWorldspace",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x663DF8",
-    "line": "mov     [esp+4Ch+var_2C], eax",
+    "line": "mov     [esp+4Ch+destinationPosition.x], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x663DFC",
-    "line": "push    ebx",
+    "line": "push    ebx; destinationCell",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x663DFD",
-    "line": "mov     [esp+50h+var_28], ecx",
+    "line": "mov     [esp+50h+destinationPosition.y], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -355,25 +355,25 @@
   },
   {
     "ea": "0x663E07",
-    "line": "lea     eax, [esp+50h+var_2C]",
+    "line": "lea     eax, [esp+50h+destinationPosition]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x663E0B",
-    "line": "push    eax",
+    "line": "push    eax; destinationPosition",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x663E0C",
-    "line": "push    ecx",
+    "line": "push    ecx; sourceRef",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x663E0D",
-    "line": "lea     ecx, [esp+58h+var_20]",
+    "line": "lea     ecx, [esp+58h+var_20]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -385,13 +385,13 @@
   },
   {
     "ea": "0x663E19",
-    "line": "mov     [esp+58h+var_24], edx",
+    "line": "mov     [esp+58h+destinationPosition.z], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x663E1D",
-    "line": "call    sub_68B030",
+    "line": "call    TravelPath_BuildToDestination; Verified top-level TravelPath build sequence: select the destination's smallest containing interior/exterior SubSpace (fallback to supplied cell/worldspace), call TravelPath_BuildRoute with the source reference and positions, then, on success, augment the route with TESRoad surface samples.",
     "mnemonic": "call",
     "size": 5
   },
@@ -409,13 +409,13 @@
   },
   {
     "ea": "0x663E2B",
-    "line": "mov     edx, [esp+48h+var_38]",
+    "line": "mov     edx, dword ptr [esp+48h+enabled]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x663E2F",
-    "line": "push    edx",
+    "line": "push    edx; enabled",
     "mnemonic": "push",
     "size": 1
   },
@@ -427,43 +427,43 @@
   },
   {
     "ea": "0x663E36",
-    "line": "call    sub_67F0F0",
+    "line": "call    TravelPath_SetAllowDisabledDoors; Verified: writes policy byte 2 at qword_B3BB2C[0xBA] and returns the assigned value. The second CalcLowPathToPoint boolean is saved/restored through this setter and corresponds to 'allow disabled doors'.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x663E3B",
-    "line": "mov     eax, [esp+4Ch+var_34]",
+    "line": "mov     eax, dword ptr [esp+4Ch+var_34]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x663E3F",
-    "line": "push    eax",
+    "line": "push    eax; enabled",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x663E40",
-    "line": "call    sub_67F0B0",
+    "line": "call    TravelPath_SetIgnoreLocks; Verified: writes policy byte 0 at qword_B3BB2C[0xBA] and returns the assigned value. The registered CalcLowPathToPoint option description identifies it as ignore locks.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x663E45",
-    "line": "mov     ecx, [esp+50h+var_30]",
+    "line": "mov     ecx, dword ptr [esp+50h+var_30]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x663E49",
-    "line": "push    ecx",
+    "line": "push    ecx; enabled",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x663E4A",
-    "line": "call    sub_67F0D0",
+    "line": "call    TravelPath_SetIgnoreMinUse; Verified: writes policy byte 1 at qword_B3BB2C[0xBA] and returns the assigned value. The third CalcLowPathToPoint boolean is saved/restored through this setter and corresponds to 'ignore min use'.",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x663E52",
-    "line": "lea     ecx, [esp+48h+var_20]",
+    "line": "lea     ecx, [esp+48h+var_20]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x663E5E",
-    "line": "call    sub_68AA10",
+    "line": "call    PathLow_dtor; Verified PathLow destructor: restores the PathLow vtable and frees/clears owned TravelPathNode records through TravelPath_ClearNodes. This routine does not free the containing object.",
     "mnemonic": "call",
     "size": 5
   },
@@ -538,5 +538,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C3D80",
+    "line": "lea     ecx, [ebp-20h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3D83",
+    "line": "jmp     PathLow_dtor; Verified PathLow destructor: restores the PathLow vtable and frees/clears owned TravelPathNode records through TravelPath_ClearNodes. This routine does not free the containing object.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3D88",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C3D8C",
+    "line": "lea     eax, [edx-38h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3D8F",
+    "line": "mov     ecx, [edx-3Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3D92",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C3D94",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3D99",
+    "line": "mov     eax, offset stru_AEC898",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3D9E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

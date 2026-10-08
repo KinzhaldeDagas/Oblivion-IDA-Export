@@ -1,4 +1,4 @@
-0x9E7CF0: fld     ds:flt_A2FAAC
+0x9E7CF0: fld     ds:kFaceEarNormalMatchRadius
 0x9E7CF6: push    ecx
 0x9E7CF7: fstp    [esp+4+var_4]; float
 0x9E7CFA: push    offset aFvanitymodewhe; "fVanityModeWheelMult"

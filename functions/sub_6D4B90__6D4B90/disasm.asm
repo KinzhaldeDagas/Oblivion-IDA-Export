@@ -40,7 +40,7 @@
 0x6D4BFC: mov     [esi+48h], cl
 0x6D4BFF: mov     eax, ds:0B3D088h[ebx*4]
 0x6D4C06: push    edi
-0x6D4C07: call    eax ; dword_B3D088
+0x6D4C07: call    eax ; unk_B3D088
 0x6D4C09: movzx   ecx, byte ptr [esi+48h]
 0x6D4C0D: mov     edx, [esp+34h+a2]
 0x6D4C11: push    ecx
@@ -48,7 +48,7 @@
 0x6D4C13: mov     [esp+3Ch+var_4], eax
 0x6D4C17: push    eax
 0x6D4C18: mov     eax, ds:0B3D410h[ebx*4]
-0x6D4C1F: call    eax ; dword_B3D410
+0x6D4C1F: call    eax ; unk_B3D410
 0x6D4C21: mov     ecx, [esp+40h+a2]
 0x6D4C25: mov     edx, [esp+40h+var_4]
 0x6D4C29: add     esp, 28h
@@ -89,7 +89,7 @@
 0x6D4C8A: mov     [esi+49h], cl
 0x6D4C8D: mov     eax, ds:0B3D088h[ebx*4]
 0x6D4C94: push    edi
-0x6D4C95: call    eax ; dword_B3D088
+0x6D4C95: call    eax ; unk_B3D088
 0x6D4C97: movzx   ecx, byte ptr [esi+49h]
 0x6D4C9B: mov     edx, [esp+34h+a2]
 0x6D4C9F: push    ecx
@@ -97,7 +97,7 @@
 0x6D4CA1: mov     [esp+3Ch+var_4], eax
 0x6D4CA5: push    eax
 0x6D4CA6: mov     eax, ds:0B3D410h[ebx*4]
-0x6D4CAD: call    eax ; dword_B3D410
+0x6D4CAD: call    eax ; unk_B3D410
 0x6D4CAF: mov     ecx, [esp+40h+a2]
 0x6D4CB3: mov     edx, [esp+40h+var_4]
 0x6D4CB7: add     esp, 28h
@@ -138,7 +138,7 @@
 0x6D4D18: mov     [esi+4Ah], cl
 0x6D4D1B: mov     eax, ds:0B3D088h[ebx*4]
 0x6D4D22: push    edi
-0x6D4D23: call    eax ; dword_B3D088
+0x6D4D23: call    eax ; unk_B3D088
 0x6D4D25: movzx   ecx, byte ptr [esi+4Ah]
 0x6D4D29: mov     edx, [esp+34h+a2]
 0x6D4D2D: push    ecx
@@ -146,7 +146,7 @@
 0x6D4D2F: mov     [esp+3Ch+var_4], eax
 0x6D4D33: push    eax
 0x6D4D34: mov     eax, ds:0B3D410h[ebx*4]
-0x6D4D3B: call    eax ; dword_B3D410
+0x6D4D3B: call    eax ; unk_B3D410
 0x6D4D3D: mov     ecx, [esp+40h+a2]
 0x6D4D41: mov     edx, [esp+40h+var_4]
 0x6D4D45: add     esp, 28h
@@ -187,7 +187,7 @@
 0x6D4DA5: mov     [esi+4Bh], cl
 0x6D4DA8: mov     eax, ds:0B3D088h[ebx*4]
 0x6D4DAF: push    edi
-0x6D4DB0: call    eax ; dword_B3D088
+0x6D4DB0: call    eax ; unk_B3D088
 0x6D4DB2: mov     ecx, [esp+34h+a2]
 0x6D4DB6: mov     edx, ds:0B3D410h[ebx*4]
 0x6D4DBD: mov     edi, eax
@@ -195,7 +195,7 @@
 0x6D4DC3: push    eax
 0x6D4DC4: push    ecx
 0x6D4DC5: push    edi
-0x6D4DC6: call    edx ; dword_B3D410
+0x6D4DC6: call    edx ; unk_B3D410
 0x6D4DC8: mov     eax, [esp+40h+a2]
 0x6D4DCC: add     esp, 28h
 0x6D4DCF: push    ebx

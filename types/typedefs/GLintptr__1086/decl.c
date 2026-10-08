@@ -1,1 +1,1 @@
-GLintptr
+typedef INT_PTR GLintptr;

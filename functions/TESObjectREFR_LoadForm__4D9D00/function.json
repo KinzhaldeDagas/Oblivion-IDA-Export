@@ -1,19 +1,32 @@
 {
-  "callees_count": 90,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 23,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4D9D00",
+      "0x4DA09E"
+    ]
+  ],
+  "chunks_sha256": "43c4ba37027b8af1debe26abb3f72bf44c74dcb76ff743c2afbe3769544cbb46",
+  "comment_regular": "Authoritative common placed-reference loader used by TESObjectREFR, Character/ACHR, and Creature/ACRE vtables (LoadForm slots at 0xA46C60, 0xA6FCB8, 0xA71110; matching SaveFormChunks slots at +8). Replays recognized chunks in stream order and forwards common extras to ExtraDataList_Load; there is no REFR-vs-ACHR/ACRE filter here.",
+  "comment_repeatable": "Authoritative common placed-reference loader used by TESObjectREFR, Character/ACHR, and Creature/ACRE vtables (LoadForm slots at 0xA46C60, 0xA6FCB8, 0xA71110; matching SaveFormChunks slots at +8). Replays recognized chunks in stream order and forwards common extras to ExtraDataList_Load; there is no REFR-vs-ACHR/ACRE filter here.\n\n0x4DA017: Placed owner acceptance pass, 2026-10-01: this REFR/ACHR/ACRE loader forwards CELL-schema XCMT/XCLW/XCCM/XCWT/XCLR tags to shared ExtraDataList_Load0x4259E0. These cases have no placed-owner or CELL-owner discriminator; the extra list and later common writer supply behavior.\n\n0x4DA017: REFR/ACHR/ACRE outer loader forwards CELL-schema XCCM,XCWT,XCMT,XCLW,XCLR chunks into common ExtraDataList_Load0x4259E0 at this dispatcher branch. There is no placed owner-kind gate in the outer loop or these common branches.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 6,
   "display_name": "TESObjectREFR_LoadForm",
   "end_ea": "0x4DA09E",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
   "name": "TESObjectREFR_LoadForm",
   "segment": ".text",
   "sha256": "43c4ba37027b8af1debe26abb3f72bf44c74dcb76ff743c2afbe3769544cbb46",
   "size": 926,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4D9D00",
-  "type": "BOOL __userpurge@<eax>(TESChildCELL *this@<ecx>, double@<st2>, double@<st1>, double@<st0>, void *tesFile)",
+  "total_chunk_size": 926,
+  "type": "BOOL __thiscall(TESObjectREFR *this, Data *tesFile)",
   "xrefs_from_count": 353,
   "xrefs_to_count": 12
 }

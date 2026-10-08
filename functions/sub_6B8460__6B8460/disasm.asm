@@ -10,7 +10,6 @@
 0x6B8476: mov     eax, [ecx]
 0x6B8478: lea     esi, [eax+1]
 0x6B847B: jmp     short loc_6B8480
-0x6B847D: align 10h
 0x6B8480: mov     cl, [eax]
 0x6B8482: add     eax, 1
 0x6B8485: test    cl, cl

@@ -37,7 +37,7 @@
 0x6F6FF8: call    edx
 0x6F6FFA: pop     esi
 0x6F6FFB: push    ebx
-0x6F6FFC: call    FormHeapFree
+0x6F6FFC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F7001: add     esp, 4
 0x6F7004: pop     edi
 0x6F7005: lea     ecx, [ebp+4]

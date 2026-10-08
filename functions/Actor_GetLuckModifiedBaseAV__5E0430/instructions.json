@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5E0430",
-    "line": "push    ebx",
+    "line": "push    ebx; Return a native skill's Luck-adjusted effective base value. Read base Luck and the requested base SkillActorValue, apply Calc_LuckModifiedSkill, and clamp to 0..100. TESClass major/minor status is not consulted.",
     "mnemonic": "push",
     "size": 1
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x5E0489",
-    "line": "push    7",
+    "line": "push    7; Read base Luck (AV 0x07) for the effective-skill adjustment.",
     "mnemonic": "push",
     "size": 2
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x5E048F",
-    "line": "mov     ecx, [esp+0Ch+arg_4]",
+    "line": "mov     ecx, [esp+0Ch+luckValue]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x5E049C",
-    "line": "push    ecx",
+    "line": "push    ecx; Read the requested native base skill before applying Luck. This calculation is independent of major membership and advancement thresholds.",
     "mnemonic": "push",
     "size": 1
   },
@@ -277,13 +277,13 @@
   },
   {
     "ea": "0x5E04A1",
-    "line": "push    eax",
+    "line": "push    eax; skillValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5E04A2",
-    "line": "call    Calc_LuckModifiedSkill",
+    "line": "call    Calc_LuckModifiedSkill; Compute Luck-adjusted effective skill as skill + iActorLuckSkillBase + Luck*fActorLuckSkillMult, then clamp to 0..100. Defaults simplify to skill + (Luck-50)*0.4.",
     "mnemonic": "call",
     "size": 5
   },

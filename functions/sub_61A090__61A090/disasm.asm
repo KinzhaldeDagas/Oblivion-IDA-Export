@@ -105,7 +105,7 @@
 0x61A214: sub     esp, 8
 0x61A217: fstp    [esp+18Ch+var_18C+4]; float
 0x61A21B: lea     ecx, [esp+18Ch+var_128]
-0x61A21F: fld     [esp+18Ch+var_168]
+0x61A21F: fld     [esp+18Ch+outMaximumDistance]
 0x61A223: fstp    [esp+18Ch+var_18C]; float
 0x61A226: push    ecx; int
 0x61A227: call    InterfaceMgr_DebugTextLine
@@ -285,7 +285,7 @@
 0x61A44D: add     esp, 14h
 0x61A450: add     [esp+184h+var_174], esi
 0x61A454: mov     ecx, ebp
-0x61A456: call    Actor_GetCurrentAction
+0x61A456: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x61A45B: cmp     eax, 7
 0x61A45E: jnz     short loc_61A486
 0x61A460: fild    [esp+184h+var_174]
@@ -362,7 +362,7 @@
 0x61A550: fmul    qword ptr ds:0A30DC8h
 0x61A556: mov     ecx, edi
 0x61A558: fstp    qword ptr [esp+18Ch+var_18C]
-0x61A55B: call    sub_615980
+0x61A55B: call    CombatController_GetCachedTargetSurfaceDistance; Returns CombatController cached target surface distance at +0x184, computing it once when negative. The inherited EDI low-byte input belongs to this private compiler ABI and is deliberately retained.
 0x61A560: sub     esp, 8
 0x61A563: fstp    qword ptr [esp+194h+var_194]
 0x61A566: lea     eax, [esp+194h+var_130]
@@ -389,28 +389,28 @@
 0x61A5AA: jz      short loc_61A5B1
 0x61A5AC: cmp     ebp, 4
 0x61A5AF: jnz     short loc_61A5F0
-0x61A5B1: lea     eax, [esp+184h+var_168]
-0x61A5B5: fst     [esp+184h+var_164]
-0x61A5B9: push    eax
-0x61A5BA: fstp    [esp+188h+var_168]
-0x61A5BE: lea     ecx, [esp+188h+var_164]
-0x61A5C2: push    ecx
-0x61A5C3: mov     ecx, edi
-0x61A5C5: call    sub_6142D0
-0x61A5CA: fld     [esp+184h+var_168]
+0x61A5B1: lea     eax, [esp+184h+outMaximumDistance]
+0x61A5B5: fst     [esp+184h+outOptimalDistance]
+0x61A5B9: push    eax; outMaximumDistance
+0x61A5BA: fstp    [esp+188h+outMaximumDistance]
+0x61A5BE: lea     ecx, [esp+188h+outOptimalDistance]
+0x61A5C2: push    ecx; outOptimalDistance
+0x61A5C3: mov     ecx, edi; this
+0x61A5C5: call    CombatController_GetRangedDistanceBounds; Combines projectile/spell bounds with TESCombatStyle optimal/max range multipliers (SDK +0x6C/+0x70).
+0x61A5CA: fld     [esp+184h+outMaximumDistance]
 0x61A5CE: sub     esp, 10h
 0x61A5D1: fstp    qword ptr [esp+194h+var_18C]
 0x61A5D5: lea     edx, [esp+194h+var_130]
-0x61A5D9: fld     [esp+194h+var_164]
+0x61A5D9: fld     [esp+194h+outOptimalDistance]
 0x61A5DD: fstp    qword ptr [esp+194h+var_194]
 0x61A5E0: push    offset aAttackRange_2f; "Attack Range: %.2f(optimal) %.2f(max)"
 0x61A5E5: push    edx
 0x61A5E6: call    __sprintf
 0x61A5EB: add     esp, 18h
 0x61A5EE: jmp     short loc_61A611
-0x61A5F0: mov     ecx, edi
+0x61A5F0: mov     ecx, edi; this
 0x61A5F2: fstp    st
-0x61A5F4: call    sub_615520
+0x61A5F4: call    CombatController_GetDesiredCombatDistance; Caches desired combat distance based on active combat mode and ranged/melee data.
 0x61A5F9: sub     esp, 8
 0x61A5FC: fstp    qword ptr [esp+18Ch+var_18C]
 0x61A5FF: lea     eax, [esp+18Ch+var_130]
@@ -519,7 +519,7 @@
 0x61A74B: lea     edx, [esp+188h+var_67]
 0x61A752: push    0
 0x61A754: push    edx
-0x61A755: mov     [esp+190h+var_164], ecx
+0x61A755: mov     [esp+190h+outOptimalDistance], ecx
 0x61A759: mov     [esp+190h+var_68], 0
 0x61A761: call    __memset
 0x61A766: lea     eax, [ebx-1]; switch 16 cases
@@ -528,7 +528,7 @@
 0x61A76F: ja      def_61A77C; jumptable 0061A77C default case, cases 5-10,12,13,15
 0x61A775: movzx   eax, ds:byte_61B180[eax]
 0x61A77C: jmp     ds:jpt_61A77C[eax*4]; switch jump
-0x61A783: mov     al, byte ptr [esp+184h+var_164]; jumptable 0061A77C case 2
+0x61A783: mov     al, byte ptr [esp+184h+outOptimalDistance]; jumptable 0061A77C case 2
 0x61A787: test    al, 1
 0x61A789: jz      short loc_61A792
 0x61A78B: mov     eax, offset aForward_0; " FORWARD "
@@ -551,8 +551,8 @@
 0x61A7C3: lea     ecx, [esp+194h+var_68]
 0x61A7CA: fld     dword ptr [edi+44h]
 0x61A7CD: fsub    dword ptr [edi+0D4h]
-0x61A7D3: fstp    [esp+194h+var_168]
-0x61A7D7: fld     [esp+194h+var_168]
+0x61A7D3: fstp    [esp+194h+outMaximumDistance]
+0x61A7D7: fld     [esp+194h+outMaximumDistance]
 0x61A7DB: fstp    qword ptr [esp+194h+var_194]
 0x61A7DE: push    eax
 0x61A7DF: push    offset aS_2f_2f; "%s %.2f/%.2f"
@@ -566,8 +566,8 @@
 0x61A7FF: lea     edx, [esp+194h+var_68]
 0x61A806: fld     dword ptr [edi+44h]
 0x61A809: fsub    dword ptr [edi+0D4h]
-0x61A80F: fstp    [esp+194h+var_168]
-0x61A813: fld     [esp+194h+var_168]
+0x61A80F: fstp    [esp+194h+outMaximumDistance]
+0x61A813: fld     [esp+194h+outMaximumDistance]
 0x61A817: fstp    qword ptr [esp+194h+var_194]
 0x61A81A: push    offset a_2f_2f_0; "%.2f/%.2f"
 0x61A81F: push    edx
@@ -580,8 +580,8 @@
 0x61A83A: lea     eax, [esp+194h+var_68]
 0x61A841: fld     dword ptr [edi+44h]
 0x61A844: fsub    dword ptr [edi+0F8h]
-0x61A84A: fstp    [esp+194h+var_168]
-0x61A84E: fld     [esp+194h+var_168]
+0x61A84A: fstp    [esp+194h+outMaximumDistance]
+0x61A84E: fld     [esp+194h+outMaximumDistance]
 0x61A852: fstp    qword ptr [esp+194h+var_194]
 0x61A855: push    offset a_2f_2f_0; "%.2f/%.2f"
 0x61A85A: push    eax
@@ -592,8 +592,8 @@
 0x61A86B: mov     ecx, [edi+28h]
 0x61A86E: fsub    dword ptr [edi+0ECh]
 0x61A874: mov     ebp, [edi+24h]
-0x61A877: fstp    [esp+184h+var_168]
-0x61A87B: call    sub_452A60
+0x61A877: fstp    [esp+184h+outMaximumDistance]
+0x61A87B: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x61A880: push    eax
 0x61A881: mov     ecx, ebp
 0x61A883: call    TESPackage_LocationData_GetRadius
@@ -602,7 +602,7 @@
 0x61A88F: sub     esp, 10h
 0x61A892: fstp    qword ptr [esp+19Ch+var_194]
 0x61A896: lea     ecx, [esp+19Ch+var_68]
-0x61A89D: fld     [esp+19Ch+var_168]
+0x61A89D: fld     [esp+19Ch+outMaximumDistance]
 0x61A8A1: fstp    [esp+19Ch+var_19C]
 0x61A8A4: push    offset a_2f_2fPkgRadiu; "%.2f/%.2f pkg radius/tgt val: %d/%d"
 0x61A8A9: push    ecx
@@ -611,7 +611,7 @@
 0x61A8B3: add     esp, 20h
 0x61A8B6: jmp     short loc_61A8F1
 0x61A8B8: mov     ecx, [edi+3Ch]; jumptable 0061A77C cases 14,16
-0x61A8BB: call    sub_5E0F50
+0x61A8BB: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x61A8C0: mov     edx, [eax]
 0x61A8C2: mov     ecx, eax
 0x61A8C4: mov     eax, [edx+154h]
@@ -655,7 +655,7 @@
 0x61A954: jmp     short loc_61A9D3
 0x61A956: cmp     ebx, 3
 0x61A959: jnz     short loc_61A970
-0x61A95B: test    byte ptr [esp+184h+var_164], 1
+0x61A95B: test    byte ptr [esp+184h+outOptimalDistance], 1
 0x61A960: jz      short loc_61A969
 0x61A962: mov     eax, offset aCloseForward; "CLOSE FORWARD"
 0x61A967: jmp     short loc_61A9D3
@@ -1100,7 +1100,7 @@
 0x61AEE6: add     esp, 14h
 0x61AEE9: add     [esp+184h+var_174], esi
 0x61AEED: mov     ecx, edi
-0x61AEEF: call    sub_614290
+0x61AEEF: call    CombatController_CanReachCurrentTarget; Returns current-target reachability at +0x174, additionally forcing false when a non-water-capable actor cannot fight a swimming target.
 0x61AEF4: test    al, al
 0x61AEF6: jnz     short loc_61AF1E
 0x61AEF8: fild    [esp+184h+var_174]
@@ -1180,9 +1180,9 @@
 0x61B008: mov     cl, al
 0x61B00A: not     cl
 0x61B00C: test    cl, 1
-0x61B00F: mov     [esp+184h+var_164], offset aY_0; "Y"
+0x61B00F: mov     [esp+184h+outOptimalDistance], offset aY_0; "Y"
 0x61B017: jnz     short loc_61B021
-0x61B019: mov     [esp+184h+var_164], offset aN; "N"
+0x61B019: mov     [esp+184h+outOptimalDistance], offset aN; "N"
 0x61B021: mov     ecx, eax
 0x61B023: shr     ecx, 3
 0x61B026: not     cl
@@ -1197,7 +1197,7 @@
 0x61B043: jnz     short loc_61B04A
 0x61B045: mov     eax, offset aN; "N"
 0x61B04A: push    edx
-0x61B04B: mov     edx, [esp+188h+var_164]
+0x61B04B: mov     edx, [esp+188h+outOptimalDistance]
 0x61B04F: push    edx
 0x61B050: push    ecx
 0x61B051: push    eax

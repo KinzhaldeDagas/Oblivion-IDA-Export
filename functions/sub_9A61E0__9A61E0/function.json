@@ -1,19 +1,32 @@
 {
-  "callees_count": 34,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 13,
   "callers_count": 0,
+  "chunks": [
+    [
+      "0x9A61E0",
+      "0x9A636C"
+    ]
+  ],
+  "chunks_sha256": "e541cc4f3efeeb99d49ecc53fbaaf0ba030bbb7a136de4264e7b0a78bd613919",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_9A61E0",
+  "comment_repeatable": "Verified NiD3DSCM_Vertex attribute constant path: when supplied an SCM object, cursor+14 indexes 8-byte entries at+1C. A cache hit compares the key against entry numeric register | (passIndex<<16), reads the NiExtraData pointer, and increments the cursor. Otherwise falls back to GetExtraData by the constant entry name. This is a cursor over a prebuilt attribute lookup cache, not an appended draw record.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "NiD3DSCM_Vertex_SetAttributeConstant",
   "end_ea": "0x9A636C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_9A61E0",
+  "name": "NiD3DSCM_Vertex_SetAttributeConstant",
   "segment": ".text",
   "sha256": "e541cc4f3efeeb99d49ecc53fbaaf0ba030bbb7a136de4264e7b0a78bd613919",
   "size": 396,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x9A61E0",
-  "type": "signed int __stdcall(int, int, NiObjectNET *, int, int, int, int, int, int, int, int, int, int)",
+  "total_chunk_size": 396,
+  "type": "int __stdcall(NiD3DShaderProgram *shaderProgram, NiD3DShaderConstantMapEntry *entry, NiObjectNET *geometry, int a4, int a5, int a6, int a7, int a8, int a9, int a10, unsigned int passIndex, int a12, NiSCMExtraData *cache)",
   "xrefs_from_count": 181,
   "xrefs_to_count": 1
 }

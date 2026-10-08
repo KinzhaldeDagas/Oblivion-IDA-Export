@@ -1,19 +1,36 @@
 {
-  "callees_count": 36,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 14,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_4729F0",
+  "chunks": [
+    [
+      "0x4729F0",
+      "0x472BF1"
+    ],
+    [
+      "0x9AECB0",
+      "0x9AECEC"
+    ]
+  ],
+  "chunks_sha256": "47bad59e98b490855fa7883e3b600a270bd4c545897ef2d0569235f1ed74bbc5",
+  "comment_regular": "AnimIdle owned-resource cleanup. Detaches/releases the two actor-bound resources at +0x1C/+0x20, releases the loaded model/path and sequence references, cleans removed controllers, and cancels matching actor high-process action 0x0B before releasing the held sequence.",
+  "comment_repeatable": "AnimIdle owned-resource cleanup. Detaches/releases the two actor-bound resources at +0x1C/+0x20, releases the loaded model/path and sequence references, cleans removed controllers, and cancels matching actor high-process action 0x0B before releasing the held sequence.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "AnimIdle_CleanupLoadedResources",
   "end_ea": "0x472BF1",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4729F0",
+  "name": "AnimIdle_CleanupLoadedResources",
   "segment": ".text",
   "sha256": "644f65d27aae002534d89a14dcb98d2791d7556e299bb0874b63bbf39b56ae9f",
   "size": 513,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4729F0",
-  "type": "void __thiscall(int *this)",
-  "xrefs_from_count": 214,
+  "total_chunk_size": 573,
+  "type": "void __thiscall(char *this)",
+  "xrefs_from_count": 235,
   "xrefs_to_count": 3
 }

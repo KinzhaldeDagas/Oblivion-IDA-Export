@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x783C30",
-    "line": "mov     eax, ds:0B428C0h",
+    "line": "mov     eax, ds:0B428C0h; Calls IDirect3DDevice9::CreatePixelShader for compiled DWORD bytecode and reports a failed HRESULT.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x783C37",
-    "line": "lea     edx, [esp+arg_0]",
+    "line": "lea     edx, [esp+bytecode]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x783C3C",
-    "line": "mov     edx, [esp+4+arg_0]",
+    "line": "mov     edx, [esp+4+bytecode]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x783C65",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+bytecode]",
     "mnemonic": "mov",
     "size": 4
   },

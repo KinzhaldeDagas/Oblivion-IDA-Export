@@ -10,9 +10,9 @@ int __userpurge EffectSetting_Filter_::CheckFlags@<eax>(
   int v7; // eax
   bool v8; // al
 
-  v7 = *(_DWORD *)(edi0 + 0x58);
+  v7 = *(_DWORD *)(edi0 + 0x58); /*0x416398*/
   if ( v7 && (!(_BYTE)a6 ? (v8 = (v7 & *(_DWORD *)(a1 + 0x58)) == v7) : (v8 = (v7 & *(_DWORD *)(a1 + 0x58)) != 0), !v8) )
-    return EffectSetting_Filter_::Return_0(a3, a4, a5);
+    return EffectSetting_Filter_::Return_0(a3, a4, a5); /*0x4163ba*/
   else
-    return EffectSetting_Filter_::CheckForceFlags(a1, edi0, a3, a4, a5, a6, a7);
+    return EffectSetting_Filter_::CheckForceFlags(a1, edi0, a3, a4, a5, a6, a7); /*0x4163bb*/
 }

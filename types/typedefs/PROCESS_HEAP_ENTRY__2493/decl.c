@@ -1,1 +1,9 @@
-_PROCESS_HEAP_ENTRY
+struct _PROCESS_HEAP_ENTRY
+{
+LPVOID lpData;
+DWORD cbData;
+BYTE cbOverhead;
+BYTE iRegionIndex;
+WORD wFlags;
+$74DBD0738A6B907C436E9BC41CE2E86B _anon_0;
+};

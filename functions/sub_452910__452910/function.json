@@ -1,18 +1,31 @@
 {
-  "callees_count": 13,
-  "callers_count": 12,
-  "comment_regular": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
+  "callers_count": 16,
+  "chunks": [
+    [
+      "0x452910",
+      "0x4529D5"
+    ]
+  ],
+  "chunks_sha256": "68ece69c9b0d3b2b1123eafe748cbb4998dc5a6895a386157f8a9d19fdcfa68a",
+  "comment_regular": "MEF v56 native UInt32 resize boundary suspends/invalidates indices across original resize and restores state with SEH finally. Other array template types pass through. Performance growth publishes checked private buffers only after stable snapshot validation. Required native allocation failures retain original fallback/exception behavior; not generic OOM recovery.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_452910",
+  "display_name": "NiTLargeArray_Resize32",
   "end_ea": "0x4529D5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_452910",
+  "name": "NiTLargeArray_Resize32",
   "segment": ".text",
   "sha256": "68ece69c9b0d3b2b1123eafe748cbb4998dc5a6895a386157f8a9d19fdcfa68a",
   "size": 197,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x452910",
+  "total_chunk_size": 197,
   "type": "void __thiscall(unsigned int *this, unsigned int)",
   "xrefs_from_count": 77,
   "xrefs_to_count": 16

@@ -1,1 +1,1 @@
-pthreadlocinfo_0
+typedef threadlocaleinfostruct_0 *pthreadlocinfo_0;

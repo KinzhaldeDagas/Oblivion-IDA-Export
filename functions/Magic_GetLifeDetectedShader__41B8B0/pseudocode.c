@@ -1,4 +1,4 @@
 int Magic_GetLifeDetectedShader()
 {
-  return LifeDetectedShader;
+  return MEMORY[0xB335B8]; /*0x41b8b5*/
 }

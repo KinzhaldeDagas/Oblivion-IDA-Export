@@ -47,9 +47,9 @@
 0x5DBBA9: push    ecx
 0x5DBBAA: mov     ecx, [esi+28h]; this
 0x5DBBAD: fild    dword ptr [esp+8]
-0x5DBBB1: fstp    [esp+8+a2]; a3
-0x5DBBB4: push    0FB3h; a2
-0x5DBBB9: call    Tile_SetFloat
+0x5DBBB1: fstp    [esp+0Ch+a3]; value
+0x5DBBB4: push    0FB3h; propertyCode
+0x5DBBB9: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5DBBBE: pop     esi
 0x5DBBBF: pop     ecx
 0x5DBBC0: retn

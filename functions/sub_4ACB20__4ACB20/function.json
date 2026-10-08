@@ -1,19 +1,36 @@
 {
-  "callees_count": 13,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_4ACB20",
+  "chunks": [
+    [
+      "0x4ACB20",
+      "0x4ACD8D"
+    ],
+    [
+      "0x9C95E0",
+      "0x9C9606"
+    ]
+  ],
+  "chunks_sha256": "6b1d1586df4c92be2ab4974a739a0a78556eebecda0c5bd2b7e04a97f0df31d3",
+  "comment_regular": "Verified (Oblivion): sole caller is MagicShaderHitEffect_InitializeVisual. Allocates and constructs the 0x6C-byte TextureEffectData object, converts packed fill/edge RGB and alpha into the two color groups at +0x2C/+0x3C, copies edge exponent and four texture blend/Z-test parameters, and retains the source texture. Probable: boundDiameter_58 is twice the supplied NiAVObject bound radius; Oblivion directly stores 2*(visualObject+0x2C), and Fallout explicitly doubles worldBound.radius. Data.cFlags bit 0x10 shifts the edge RGB group into [-1,0]. Fallout's 0x74-byte object adds a block-out texture and alpha-test state.",
+  "comment_repeatable": "Verified (Oblivion): sole caller is MagicShaderHitEffect_InitializeVisual. Allocates and constructs the 0x6C-byte TextureEffectData object, converts packed fill/edge RGB and alpha into the two color groups at +0x2C/+0x3C, copies edge exponent and four texture blend/Z-test parameters, and retains the source texture. Probable: boundDiameter_58 is twice the supplied NiAVObject bound radius; Oblivion directly stores 2*(visualObject+0x2C), and Fallout explicitly doubles worldBound.radius. Data.cFlags bit 0x10 shifts the edge RGB group into [-1,0]. Fallout's 0x74-byte object adds a block-out texture and alpha-test state.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "TESEffectShader_CreateTextureEffectData",
   "end_ea": "0x4ACD8D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4ACB20",
+  "name": "TESEffectShader_CreateTextureEffectData",
   "segment": ".text",
   "sha256": "12ecec5b135b6558f4fc68ce6b6997a20de21f7ab897ea25d60ba3bbec98a2ec",
   "size": 621,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4ACB20",
-  "type": "BSShaderPPLightingProperty::TextureEffectData *__thiscall(float *this, int, int)",
-  "xrefs_from_count": 210,
+  "total_chunk_size": 659,
+  "type": "OblivionTextureEffectData *__thiscall(TESEffectShader *this, NiAVObject *visualObject, NiSourceTexture *sourceTexture)",
+  "xrefs_from_count": 224,
   "xrefs_to_count": 1
 }

@@ -1,22 +1,26 @@
-int __userpurge sub_798300@<eax>(int this@<ecx>, int a2@<esi>, int *a3)
+// Copies LOD 0's generated leaf-card vertex table into the persistent vertex-program billboard table; entryCount is returned in floats.
+const float *__thiscall OB_CLeafGeometry_GetLeafBillboardTable_010201A0(
+        OB_CLeafGeometry_010201A0 *this,
+        unsigned int *entryCount)
 {
-  void *v4; // ebx
+  int v2; // esi
+  float *vertexProgramBillboardTable; // ebx
   int v5; // eax
-  const void **v6; // ecx
+  const void **perLodLeafCardVertexTables; // ecx
   int v7; // esi
   size_t v9; // [esp-8h] [ebp-10h]
 
-  v4 = *(void **)(this + 0x18);
-  v5 = 0x20 * *(unsigned __int16 *)(this + 8) * *(unsigned __int16 *)(this + 0x1C);
-  if ( !v4 )
-    return *(_DWORD *)(this + 0x18);
-  v6 = *(const void ***)(this + 0x10);
-  if ( !v6 || !*v6 )
-    return *(_DWORD *)(this + 0x18);
-  HIDWORD(v9) = a2;
-  v7 = 4 * v5;
-  LODWORD(v9) = 4 * v5;
-  memcpy(v4, *v6, v9);
-  *a3 = ((int)v4 + v7 - *(_DWORD *)(this + 0x18)) >> 2;
-  return *(_DWORD *)(this + 0x18);
+  vertexProgramBillboardTable = this->vertexProgramBillboardTable; /*0x79830c*/
+  v5 = 0x20 * LOWORD(this->rockingGroupCount) * LOWORD(this->leafTextureCount); /*0x798312*/
+  if ( !vertexProgramBillboardTable ) /*0x798317*/
+    return this->vertexProgramBillboardTable; /*0x798317*/
+  perLodLeafCardVertexTables = (const void **)this->perLodLeafCardVertexTables; /*0x798319*/
+  if ( !perLodLeafCardVertexTables || !*perLodLeafCardVertexTables ) /*0x798320*/
+    return this->vertexProgramBillboardTable; /*0x798356*/
+  HIDWORD(v9) = v2; /*0x79832b*/
+  v7 = 4 * v5; /*0x79832c*/
+  LODWORD(v9) = 4 * v5; /*0x798333*/
+  memcpy(vertexProgramBillboardTable, *perLodLeafCardVertexTables, v9); /*0x798336*/
+  *entryCount = (int)((int)vertexProgramBillboardTable + v7 - (unsigned int)this->vertexProgramBillboardTable) >> 2; /*0x79834a*/
+  return this->vertexProgramBillboardTable; /*0x798350*/
 }

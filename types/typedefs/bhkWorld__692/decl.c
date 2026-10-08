@@ -1,1 +1,32 @@
-bhkWorld
+struct __cppobj bhkWorld : bhkRefObject
+{
+UInt32 unk10;
+bhkWorldSubUnk *threadingUnkStruct;
+UInt32 unk18;
+UInt8 unk1C;
+UInt8 unk1D;
+UInt8 unk1E;
+UInt8 unk1F;
+UInt32 unk20;
+UInt32 unk24;
+UInt32 unk28;
+bhkWorldUnk2C *unk2C;
+UInt32 unk30;
+bhkWorldUnk34 *unk34;
+UInt32 unk38;
+bhkWorldUnk3C *unk3C;
+UInt32 unk40;
+bhkWorldUnk34 *unk44;
+UInt32 unk48;
+bhkWorldUnk2C *unk4C;
+UInt32 unk50;
+LONGLONG unk54;
+UInt32 unk5C;
+UInt32 unk60;
+UInt32 unk64;
+UInt32 unk68;
+UInt32 unk6C;
+UInt32 unk70;
+UInt32 unk74;
+UInt32 unk78;
+};

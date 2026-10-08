@@ -1,1 +1,1 @@
-BackgroundLoader
+struct BackgroundLoader;

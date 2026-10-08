@@ -17,8 +17,8 @@
 0x66B742: mov     edx, [eax+1E0h]
 0x66B748: call    edx
 0x66B74A: fstp    dword ptr ds:0B3BAC8h
-0x66B750: mov     ecx, ebp
-0x66B752: call    sub_4A9720
+0x66B750: mov     ecx, ebp; this
+0x66B752: call    Actor_GetAimPitch; Returns Actor rotation X as the native aim-pitch value used by projectile launch, impact, input, dialogue-camera, and magic-projectile paths.
 0x66B757: fstp    dword ptr ds:0B3BAC4h
 0x66B75D: mov     eax, ds:0B333CCh
 0x66B762: mov     edx, [ebp+0]
@@ -41,20 +41,20 @@
 0x66B7A9: jnz     loc_66BA9A
 0x66B7AF: fld     dword ptr ds:0B3BAC8h
 0x66B7B5: push    ecx
-0x66B7B6: lea     ecx, [esp+0F4h+var_90]
-0x66B7BA: fstp    [esp+0F4h+var_F4]; float
-0x66B7BD: call    NiMatrix33_InitRotationTransform
+0x66B7B6: lea     ecx, [esp+0F4h+var_90]; this
+0x66B7BA: fstp    [esp+0F4h+angleZ]; angleZ
+0x66B7BD: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x66B7C2: fld     dword ptr ds:0B3BAC4h
 0x66B7C8: push    ecx
-0x66B7C9: lea     ecx, [esp+0F4h+var_60]
-0x66B7D0: fstp    [esp+0F4h+var_F4]; float
-0x66B7D3: call    NiMatrix33_InitRotationTransposedTransform???
-0x66B7D8: lea     ecx, [esp+0F0h+var_60]
-0x66B7DF: push    ecx
-0x66B7E0: lea     edx, [esp+0F4h+var_3C]
-0x66B7E7: push    edx
-0x66B7E8: lea     ecx, [esp+0F8h+var_90]
-0x66B7EC: call    NiMAtrix33_Multiply
+0x66B7C9: lea     ecx, [esp+0F4h+right]; this
+0x66B7D0: fstp    [esp+0F4h+angleZ]; angleX
+0x66B7D3: call    NiMatrix33_InitRotationXTransposed; Verified matrix coefficients make this an X-axis rotation in the engine's transposed convention: X stays fixed; only the Y/Z submatrix contains sin/cos.
+0x66B7D8: lea     ecx, [esp+0F0h+right]
+0x66B7DF: push    ecx; right
+0x66B7E0: lea     edx, [esp+0F4h+out]
+0x66B7E7: push    edx; out
+0x66B7E8: lea     ecx, [esp+0F8h+var_90]; this
+0x66B7EC: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x66B7F1: mov     esi, eax
 0x66B7F3: mov     ecx, 9
 0x66B7F8: lea     edi, [esp+0F0h+var_90]
@@ -71,20 +71,20 @@
 0x66B817: fstp    [esp+0F0h+var_D8]
 0x66B81B: push    ecx
 0x66B81C: fld     [esp+0F4h+var_D8]
-0x66B820: lea     ecx, [esp+0F4h+var_60]
+0x66B820: lea     ecx, [esp+0F4h+right]; this
 0x66B827: fchs
 0x66B829: fmul    qword ptr ds:0A3D5B8h
 0x66B82F: fmul    qword ptr ds:0A2FAA0h
 0x66B835: fstp    [esp+0F4h+var_D8]
 0x66B839: fld     [esp+0F4h+var_D8]
-0x66B83D: fstp    [esp+0F4h+var_F4]; float
-0x66B840: call    NiMatrix33_InitRotationTransform
-0x66B845: lea     ecx, [esp+0F0h+var_60]
-0x66B84C: push    ecx
-0x66B84D: lea     edx, [esp+0F4h+var_3C]
-0x66B854: push    edx
-0x66B855: lea     ecx, [esp+0F8h+var_90]
-0x66B859: call    NiMAtrix33_Multiply
+0x66B83D: fstp    [esp+0F4h+angleZ]; angleZ
+0x66B840: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
+0x66B845: lea     ecx, [esp+0F0h+right]
+0x66B84C: push    ecx; right
+0x66B84D: lea     edx, [esp+0F4h+out]
+0x66B854: push    edx; out
+0x66B855: lea     ecx, [esp+0F8h+var_90]; this
+0x66B859: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x66B85E: test    bl, bl
 0x66B860: mov     ecx, 9
 0x66B865: mov     esi, eax
@@ -98,19 +98,19 @@
 0x66B87B: fstp    [esp+0F0h+var_D8]
 0x66B87F: push    ecx
 0x66B880: fld     [esp+0F4h+var_D8]
-0x66B884: lea     ecx, [esp+0F4h+var_60]
+0x66B884: lea     ecx, [esp+0F4h+right]; this
 0x66B88B: fmul    qword ptr ds:0A3D5B8h
 0x66B891: fmul    qword ptr ds:0A2FAA0h
 0x66B897: fstp    [esp+0F4h+var_D8]
 0x66B89B: fld     [esp+0F4h+var_D8]
-0x66B89F: fstp    [esp+0F4h+var_F4]; float
-0x66B8A2: call    NiMatrix33_InitRotationTransposedTransform???
-0x66B8A7: lea     ecx, [esp+0F0h+var_60]
-0x66B8AE: push    ecx
-0x66B8AF: lea     edx, [esp+0F4h+var_3C]
-0x66B8B6: push    edx
-0x66B8B7: lea     ecx, [esp+0F8h+var_90]
-0x66B8BB: call    NiMAtrix33_Multiply
+0x66B89F: fstp    [esp+0F4h+angleZ]; angleX
+0x66B8A2: call    NiMatrix33_InitRotationXTransposed; Verified matrix coefficients make this an X-axis rotation in the engine's transposed convention: X stays fixed; only the Y/Z submatrix contains sin/cos.
+0x66B8A7: lea     ecx, [esp+0F0h+right]
+0x66B8AE: push    ecx; right
+0x66B8AF: lea     edx, [esp+0F4h+out]
+0x66B8B6: push    edx; out
+0x66B8B7: lea     ecx, [esp+0F8h+var_90]; this
+0x66B8BB: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x66B8C0: mov     esi, eax
 0x66B8C2: mov     eax, ds:0B3BB0Ch
 0x66B8C7: test    eax, eax
@@ -125,10 +125,10 @@
 0x66B8EC: mov     dword ptr [esp+0F0h+var_B8+4], edx
 0x66B8F0: mov     dword ptr [esp+0F0h+var_B8+8], eax
 0x66B8F4: mov     edx, [ebp+58h]
-0x66B8F7: mov     ecx, [ebp+104h]
+0x66B8F7: mov     ecx, [ebp+104h]; this
 0x66B8FD: mov     esi, [edx+17Ch]
-0x66B903: push    0
-0x66B905: call    sub_477EC0
+0x66B903: push    0; nodeIndex
+0x66B905: call    ActorSkinInfo_GetCachedNode; Returns ActorSkinInfo cached node at +8+nodeIndex*8. Index 6 is QuiverNode at +0x38, the native Arrow:0 clone source.
 0x66B90A: push    eax
 0x66B90B: mov     ecx, esi
 0x66B90D: call    sub_4710B0
@@ -193,7 +193,7 @@
 0x66B9D3: lea     ecx, [esp+0F8h+var_AC]
 0x66B9D7: push    ecx
 0x66B9D8: add     esi, 54h ; 'T'
-0x66B9DB: call    sub_710250
+0x66B9DB: call    NiPoint3_MultiplyMatrix3
 0x66B9E0: fld     dword ptr [eax]
 0x66B9E2: fadd    dword ptr [esi]
 0x66B9E4: add     esp, 0Ch
@@ -217,7 +217,7 @@
 0x66BA1D: mov     [eax+8], edx
 0x66BA20: fstp    [esp+0F8h+var_F8]; a2
 0x66BA23: mov     ecx, ds:0B3BB14h; this
-0x66BA29: call    NiAVObject_UpdateNiAVObject
+0x66BA29: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x66BA2E: jmp     short loc_66BA32
 0x66BA30: fstp    st
 0x66BA32: mov     ecx, [ebp+1F0h]
@@ -246,7 +246,7 @@
 0x66BA90: call    sub_5EE1B0
 0x66BA95: jmp     loc_66BE1B
 0x66BA9A: mov     ecx, ebp; this
-0x66BA9C: call    TESObjectREFR__GetNiNode
+0x66BA9C: call    TESObjectREFR__GetNiNode; ODismemberment: TESObjectREFR::GetNiNode; runtime primitive starts from actor 3D and toggles prepared ODISMEMBER_* nodes.
 0x66BAA1: fldz
 0x66BAA3: cmp     byte ptr ds:0B3BB04h, 0
 0x66BAAA: mov     ecx, [eax+88h]
@@ -283,11 +283,11 @@
 0x66BB1E: call    eax
 0x66BB20: fadd    dword ptr ds:0B3BB34h
 0x66BB26: push    ecx
-0x66BB27: lea     ecx, [esp+0F4h+var_90]
+0x66BB27: lea     ecx, [esp+0F4h+var_90]; this
 0x66BB2B: fstp    [esp+0F4h+a3]
 0x66BB2F: fld     [esp+0F4h+a3]
-0x66BB33: fstp    [esp+0F4h+var_F4]; float
-0x66BB36: call    NiMatrix33_InitRotationTransform
+0x66BB33: fstp    [esp+0F4h+angleZ]; angleZ
+0x66BB36: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x66BB3B: fld     dword ptr ds:0B3BB2Ch
 0x66BB41: jmp     loc_66BBE3
 0x66BB46: fld     dword ptr ds:0B3BB28h
@@ -326,16 +326,16 @@
 0x66BBBC: fstp    dword ptr ds:0B3BB20h
 0x66BBC2: fadd    dword ptr ds:0B3BAC8h
 0x66BBC8: push    ecx
-0x66BBC9: lea     ecx, [esp+0F4h+var_90]
+0x66BBC9: lea     ecx, [esp+0F4h+var_90]; this
 0x66BBCD: fstp    [esp+0F4h+a3]
 0x66BBD1: fld     [esp+0F4h+a3]
-0x66BBD5: fstp    [esp+0F4h+var_F4]; float
-0x66BBD8: call    NiMatrix33_InitRotationTransform
+0x66BBD5: fstp    [esp+0F4h+angleZ]; angleZ
+0x66BBD8: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x66BBDD: fld     dword ptr ds:0B3BB20h
 0x66BBE3: push    ecx
-0x66BBE4: lea     ecx, [esp+0F4h+var_60]
-0x66BBEB: fstp    [esp+0F4h+var_F4]; float
-0x66BBEE: call    NiMatrix33_InitRotationTransposedTransform???
+0x66BBE4: lea     ecx, [esp+0F4h+right]; this
+0x66BBEB: fstp    [esp+0F4h+angleZ]; angleX
+0x66BBEE: call    NiMatrix33_InitRotationXTransposed; Verified matrix coefficients make this an X-axis rotation in the engine's transposed convention: X stays fixed; only the Y/Z submatrix contains sin/cos.
 0x66BBF3: mov     edx, [ebp+0]
 0x66BBF6: mov     eax, [edx+0ECh]
 0x66BBFC: mov     ecx, ebp
@@ -345,27 +345,27 @@
 0x66BC08: fstp    st
 0x66BC0A: push    ecx
 0x66BC0B: fld     dword ptr ds:0B3BAC8h
-0x66BC11: lea     ecx, [esp+0F4h+var_90]
-0x66BC15: fstp    [esp+0F4h+var_F4]; float
-0x66BC18: call    NiMatrix33_InitRotationTransform
+0x66BC11: lea     ecx, [esp+0F4h+var_90]; this
+0x66BC15: fstp    [esp+0F4h+angleZ]; angleZ
+0x66BC18: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x66BC1D: fld     dword ptr ds:0B3BAC4h
 0x66BC23: push    ecx
-0x66BC24: lea     ecx, [esp+0F4h+var_60]
-0x66BC2B: fstp    [esp+0F4h+var_F4]; float
-0x66BC2E: call    NiMatrix33_InitRotationTransposedTransform???
+0x66BC24: lea     ecx, [esp+0F4h+right]; this
+0x66BC2B: fstp    [esp+0F4h+angleZ]; angleX
+0x66BC2E: call    NiMatrix33_InitRotationXTransposed; Verified matrix coefficients make this an X-axis rotation in the engine's transposed convention: X stays fixed; only the Y/Z submatrix contains sin/cos.
 0x66BC33: mov     edx, [ebp+0]
 0x66BC36: mov     eax, [edx+0ECh]
 0x66BC3C: mov     ecx, ebp
 0x66BC3E: call    eax
 0x66BC40: fmul    dword ptr [ebp+5D4h]
 0x66BC46: fadd    [esp+0F0h+PlayerPosition.z]
-0x66BC4A: lea     ecx, [esp+0F0h+var_60]
-0x66BC51: push    ecx
-0x66BC52: lea     edx, [esp+0F4h+var_3C]
-0x66BC59: push    edx
+0x66BC4A: lea     ecx, [esp+0F0h+right]
+0x66BC51: push    ecx; right
+0x66BC52: lea     edx, [esp+0F4h+out]
+0x66BC59: push    edx; out
 0x66BC5A: fstp    [esp+0F8h+PlayerPosition.z]
-0x66BC5E: lea     ecx, [esp+0F8h+var_90]
-0x66BC62: call    NiMAtrix33_Multiply
+0x66BC5E: lea     ecx, [esp+0F8h+var_90]; this
+0x66BC62: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x66BC67: fld     dword ptr ds:0B3BB24h
 0x66BC6D: fchs
 0x66BC6F: mov     esi, eax
@@ -423,7 +423,7 @@
 0x66BD39: mov     dword ptr [esp+0F0h+var_B8+8], ebx
 0x66BD3D: jnz     short loc_66BD73
 0x66BD3F: or      dword ptr ds:0B3BCCCh, 1
-0x66BD46: mov     ecx, offset stru_B3BBA8
+0x66BD46: mov     ecx, (offset qword_B3BB2C+7Ch)
 0x66BD4B: mov     [esp+0F0h+var_4], 0
 0x66BD56: call    sub_70D590
 0x66BD5B: push    offset sub_A25850; void (__cdecl *)()
@@ -434,38 +434,38 @@
 0x66BD75: push    1; a3
 0x66BD77: push    ecx
 0x66BD78: fstp    [esp+0F8h+var_F8]; a2
-0x66BD7B: mov     ecx, offset stru_B3BBA8; this
+0x66BD7B: mov     ecx, (offset qword_B3BB2C+7Ch); this
 0x66BD80: mov     ds:0B3BBFCh, esi
 0x66BD86: mov     ds:0B3BC00h, edi
 0x66BD8C: mov     ds:0B3BC04h, ebx
-0x66BD92: call    NiAVObject_UpdateNiAVObject
-0x66BD97: push    offset dword_B258E8
+0x66BD92: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
+0x66BD97: push    offset rhs
 0x66BD9C: lea     ecx, [esp+0F4h+PlayerPosition]
 0x66BDA0: push    ecx
-0x66BDA1: mov     ecx, offset stru_B3BBA8
+0x66BDA1: mov     ecx, (offset qword_B3BB2C+7Ch)
 0x66BDA6: call    sub_70C340
 0x66BDAB: fld     dword ptr ds:0B3BBE0h
-0x66BDB1: fstp    [esp+0F0h+var_90]
+0x66BDB1: fstp    [esp+0F0h+var_90.data]
 0x66BDB5: mov     ecx, 9
 0x66BDBA: fld     dword ptr ds:0B3BBD8h
-0x66BDC0: mov     esi, offset stru_B3BBA8.members.super.m_localTransform
-0x66BDC5: fstp    [esp+0F0h+var_8C]
-0x66BDC9: lea     edi, [esp+0F0h+var_60]
+0x66BDC0: mov     esi, (offset qword_B3BB2C+0ACh)
+0x66BDC5: fstp    [esp+0F0h+var_90.data+4]
+0x66BDC9: lea     edi, [esp+0F0h+right]
 0x66BDD0: fld     dword ptr ds:0B3BBDCh
 0x66BDD6: rep movsd
-0x66BDD8: fstp    [esp+0F0h+var_88]
+0x66BDD8: fstp    [esp+0F0h+var_90.data+8]
 0x66BDDC: fld     dword ptr ds:0B3BBECh
-0x66BDE2: fstp    [esp+0F0h+var_84]
+0x66BDE2: fstp    [esp+0F0h+var_90.data+0Ch]
 0x66BDE6: fld     dword ptr ds:0B3BBE4h
-0x66BDEC: fstp    [esp+0F0h+var_80]
+0x66BDEC: fstp    [esp+0F0h+var_90.data+10h]
 0x66BDF0: fld     dword ptr ds:0B3BBE8h
-0x66BDF6: fstp    [esp+0F0h+var_7C]
+0x66BDF6: fstp    [esp+0F0h+var_90.data+14h]
 0x66BDFA: fld     dword ptr ds:0B3BBF8h
-0x66BE00: fstp    [esp+0F0h+var_78]
+0x66BE00: fstp    [esp+0F0h+var_90.data+18h]
 0x66BE04: fld     dword ptr ds:0B3BBF0h
-0x66BE0A: fstp    [esp+0F0h+var_74]
+0x66BE0A: fstp    [esp+0F0h+var_90.data+1Ch]
 0x66BE0E: fld     dword ptr ds:0B3BBF4h
-0x66BE14: fstp    [esp+0F0h+var_70]
+0x66BE14: fstp    [esp+0F0h+var_90.data+20h]
 0x66BE1B: mov     ebx, [esp+0F0h+var_DC]
 0x66BE1F: cmp     word ptr [ebx+0B6h], 0
 0x66BE27: ja      short loc_66BE2D
@@ -499,7 +499,7 @@
 0x66BE86: push    0; a3
 0x66BE88: push    ecx
 0x66BE89: fstp    [esp+0F8h+var_F8]; a2
-0x66BE8C: call    NiAVObject_UpdateNiAVObject
+0x66BE8C: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x66BE91: mov     ecx, ds:0B33398h
 0x66BE97: mov     esi, [ecx+24h]
 0x66BE9A: test    esi, esi
@@ -510,7 +510,7 @@
 0x66BEAB: mov     dword ptr [esp+0F0h+var_C4+8], ecx
 0x66BEAF: fld     dword ptr [esp+0F0h+var_C4+8]
 0x66BEB3: sub     esp, 0Ch
-0x66BEB6: fstp    [esp+0FCh+var_F4]; float
+0x66BEB6: fstp    [esp+0FCh+angleZ]; float
 0x66BEBA: mov     dword ptr [esp+0FCh+var_C4+4], eax
 0x66BEBE: fld     dword ptr [esp+0FCh+var_C4+4]
 0x66BEC2: mov     dword ptr [esp+0FCh+var_C4], edx
@@ -534,7 +534,7 @@
 0x66BF03: fstp    [esp+0F0h+a3]
 0x66BF07: fldz
 0x66BF09: sub     esp, 8
-0x66BF0C: fstp    [esp+0F8h+var_F4]; float
+0x66BF0C: fstp    [esp+0F8h+angleZ]; float
 0x66BF10: fld     [esp+0F8h+var_DC]
 0x66BF14: fstp    [esp+0F8h+var_F8]; float
 0x66BF17: fld     [esp+0F8h+a3]
@@ -546,7 +546,7 @@
 0x66BF2B: fstp    [esp+0FCh+a2+4]; float
 0x66BF2E: call    sub_6A8E40
 0x66BF33: mov     ecx, ebp; this
-0x66BF35: call    TESObjectREFR_GetParentCell
+0x66BF35: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x66BF3A: mov     edi, eax
 0x66BF3C: test    edi, edi
 0x66BF3E: jz      short loc_66BFA5
@@ -560,7 +560,7 @@
 0x66BF59: jnz     short loc_66BF82
 0x66BF5B: fld     dword ptr ds:0A73DC8h
 0x66BF61: push    ecx
-0x66BF62: fstp    [esp+0F4h+var_F4]; float
+0x66BF62: fstp    [esp+0F4h+angleZ]; float
 0x66BF65: push    edi; int
 0x66BF66: lea     edx, [ebp+2Ch]
 0x66BF69: push    edx; int
@@ -574,10 +574,10 @@
 0x66BF80: jz      short loc_66BFA5
 0x66BF82: fld     dword ptr ds:0A73DC8h
 0x66BF88: push    ecx
-0x66BF89: fstp    [esp+0F4h+var_F4]; float
-0x66BF8C: push    edi; int
+0x66BF89: fstp    [esp+0F4h+angleZ]; float
+0x66BF8C: push    edi; a3
 0x66BF8D: lea     eax, [ebp+2Ch]
-0x66BF90: push    eax; int
+0x66BF90: push    eax; a2
 0x66BF91: mov     ecx, ebp
 0x66BF93: call    Actor_IsUnderwater??
 0x66BF98: test    al, al
@@ -633,7 +633,7 @@
 0x66C06A: mov     eax, dword ptr [esp+0F0h+var_C4+8]
 0x66C06E: mov     [esp+0F0h+CameraPosition.y], edx
 0x66C072: mov     [esp+0F0h+CameraPosition.z], eax
-0x66C076: call    sub_43F350
+0x66C076: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x66C07B: fstp    st
 0x66C07D: fld     [esp+0F0h+var_A8]
 0x66C081: fld     [esp+0F0h+var_AC]
@@ -690,7 +690,7 @@
 0x66C138: fld     [esp+0F0h+var_DC]
 0x66C13C: mov     edx, dword ptr [esp+0F0h+var_B8+4]
 0x66C140: sub     esp, 10h
-0x66C143: fstp    [esp+100h+var_F4]; float
+0x66C143: fstp    [esp+100h+angleZ]; float
 0x66C147: mov     eax, esp
 0x66C149: mov     [eax], esi
 0x66C14B: mov     [eax+4], edi
@@ -708,7 +708,7 @@
 0x66C173: mov     ecx, ebp
 0x66C175: call    eax
 0x66C177: mov     edx, [eax]
-0x66C179: push    0
+0x66C179: push    0; a4
 0x66C17B: sub     esp, 0Ch
 0x66C17E: mov     ecx, esp
 0x66C180: mov     [ecx], edx
@@ -716,7 +716,7 @@
 0x66C185: mov     eax, [eax+8]
 0x66C188: mov     [ecx+4], edx
 0x66C18B: mov     [ecx+8], eax
-0x66C18E: call    sub_4EA6E0
+0x66C18E: call    DistantLOD_UpdateLandLODAtPosition; Verified position-triggered LandLOD refresh wrapper: resolves current WorldSpace, climbs parentWorldspace to the root, obtains root terrainLODQuadRoots via TESWorldSpace_GetRootTerrainLODQuadMap, and delegates to DistantLOD_UpdateLandLODMap.
 0x66C193: fld     dword ptr [esp+100h+var_B8]
 0x66C197: fstp    [esp+100h+var_AC]
 0x66C19B: mov     ecx, [esp+100h+var_AC]
@@ -744,3 +744,14 @@
 0x66C1F1: pop     ebx
 0x66C1F2: add     esp, 0DCh
 0x66C1F8: retn    4
+0x9C4140: mov     eax, dword ptr qword_B3BB2C+1A0h
+0x9C4145: and     eax, 0FFFFFFFEh
+0x9C4148: mov     dword ptr qword_B3BB2C+1A0h, eax
+0x9C414D: retn
+0x9C414E: mov     edx, [esp+arg_4]
+0x9C4152: lea     eax, [edx-0E0h]
+0x9C4158: mov     ecx, [edx-0E4h]
+0x9C415E: xor     ecx, eax
+0x9C4160: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C4165: mov     eax, offset stru_AECB7C
+0x9C416A: jmp     ___CxxFrameHandler3

@@ -1,4 +1,4 @@
-0x894C70: push    ebp
+0x894C70: push    ebp; [Controller decode 2026-07-09] Updates bhkCharacterController size transition toward target size and restores saved shape type when complete.
 0x894C71: mov     ebp, esp
 0x894C73: and     esp, 0FFFFFFF0h
 0x894C76: sub     esp, 3Ch
@@ -11,7 +11,7 @@
 0x894C8E: jnz     loc_894E6C
 0x894C94: mov     eax, [esi+374h]
 0x894C9A: push    eax
-0x894C9B: push    offset dword_BA7FD8
+0x894C9B: push    offset stru_BA7FD8
 0x894CA0: call    NiRTTI_Cast
 0x894CA5: mov     edx, eax
 0x894CA7: add     esp, 8
@@ -77,24 +77,24 @@
 0x894D6A: fstp    [esp+40h+var_38]
 0x894D6E: lea     eax, [ecx+10h]
 0x894D71: jnz     short loc_894D78
-0x894D73: mov     eax, offset stru_BA7A40
+0x894D73: mov     eax, offset unk_BA7A40
 0x894D78: test    ecx, ecx
 0x894D7A: movaps  xmm0, xmmword ptr [eax]
 0x894D7D: movaps  [esp+40h+var_30], xmm0
 0x894D82: lea     eax, [ecx+20h]
 0x894D85: jnz     short loc_894D8C
-0x894D87: mov     eax, offset stru_BA7A40
+0x894D87: mov     eax, offset unk_BA7A40
 0x894D8C: test    ecx, ecx
 0x894D8E: fld     dword ptr [esp+40h+var_30+8]
 0x894D92: fld     [esp+40h+var_34]
 0x894D96: movaps  xmm0, xmmword ptr [eax]
 0x894D99: fld     st
-0x894D9B: movaps  [esp+40h+var_20], xmm0
+0x894D9B: movaps  xmmword ptr [esp+40h+var_20.x], xmm0
 0x894DA0: fsubp   st(2), st
 0x894DA2: fxch    st(1)
 0x894DA4: fstp    dword ptr [esp+40h+var_30+8]
-0x894DA8: fadd    dword ptr [esp+40h+var_20+8]
-0x894DAC: fstp    dword ptr [esp+40h+var_20+8]
+0x894DA8: fadd    [esp+40h+var_20.z]
+0x894DAC: fstp    [esp+40h+var_20.z]
 0x894DB0: jz      short loc_894DC1
 0x894DB2: movaps  xmm0, [esp+40h+var_30]
 0x894DB7: fld     dword ptr [ecx+0Ch]
@@ -103,7 +103,7 @@
 0x894DC1: mov     eax, [edx+8]
 0x894DC4: test    eax, eax
 0x894DC6: jz      short loc_894DD7
-0x894DC8: movaps  xmm0, [esp+40h+var_20]
+0x894DC8: movaps  xmm0, xmmword ptr [esp+40h+var_20.x]
 0x894DCD: fld     dword ptr [eax+0Ch]
 0x894DD0: movaps  xmmword ptr [eax+20h], xmm0
 0x894DD4: fstp    dword ptr [eax+2Ch]
@@ -132,7 +132,7 @@
 0x894E1E: jz      short loc_894E32
 0x894E20: push    eax
 0x894E21: mov     ecx, esi
-0x894E23: call    sub_894940
+0x894E23: call    bhkCharacterController_SetShapeType
 0x894E28: mov     dword ptr [esi+370h], 2
 0x894E32: mov     dword ptr [esi+3ACh], 0
 0x894E3C: pop     esi

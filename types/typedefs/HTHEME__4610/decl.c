@@ -1,1 +1,1 @@
-HTHEME
+typedef HANDLE HTHEME;

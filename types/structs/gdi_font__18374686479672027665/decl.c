@@ -1,1 +1,42 @@
-gdi_font
+struct __declspec(align(8)) gdi_font
+{
+list entry;
+list unused_entry;
+DWORD refcount;
+DWORD gm_size;
+glyph_metrics **gm;
+OUTLINETEXTMETRICW otm;
+KERNINGPAIR *kern_pairs;
+int kern_count;
+void *private;
+list child_fonts;
+DWORD handle;
+DWORD cache_num;
+DWORD hash;
+UINT charset;
+UINT codepage;
+FONTSIGNATURE fs;
+LOGFONTW lf;
+FMAT2 matrix;
+UINT face_index;
+INT scale_y;
+INT aveWidth;
+INT ppem;
+SHORT yMax;
+SHORT yMin;
+UINT ntmFlags;
+UINT ntmAvgWidth;
+UINT aa_flags;
+ULONG ttc_item_offset;
+__int32 can_use_bitmap : 1;
+__int32 fake_italic : 1;
+__int32 fake_bold : 1;
+__int32 scalable : 1;
+gdi_font *base_font;
+void *gsub_table;
+void *vert_feature;
+void *data_ptr;
+SIZE_T data_size;
+FILETIME writetime;
+WCHAR_0 file[1];
+};

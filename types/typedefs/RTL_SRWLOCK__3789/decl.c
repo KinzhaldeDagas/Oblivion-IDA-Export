@@ -1,1 +1,4 @@
-_RTL_SRWLOCK
+struct _RTL_SRWLOCK
+{
+PVOID Ptr;
+};

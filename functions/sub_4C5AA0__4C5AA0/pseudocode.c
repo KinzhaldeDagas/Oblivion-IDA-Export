@@ -4,8 +4,8 @@ int __thiscall sub_4C5AA0(TESObjectCELL **this, float *a2)
   float v5; // [esp+20h] [ebp-38h]
   unsigned __int16 v6[10]; // [esp+44h] [ebp-14h]
 
-  if ( sub_4C3030(this, (int)v4, a2, 1) )
-    return sub_4C0190(this, v5, v6[0]);
+  if ( sub_4C3030(this, (int)v4, a2, 1) ) /*0x4c5ab7*/
+    return sub_4C0190(this, v5, v6[0]); /*0x4c5acc*/
   else
-    return 0;
+    return 0; /*0x4c5ad9*/
 }

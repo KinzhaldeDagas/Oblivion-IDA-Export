@@ -1,50 +1,65 @@
-void __thiscall sub_7856B0(char **this, unsigned int a2, int a3, int a4, int a5, int a6, int a7, int a8)
+// Oblivion 1.2.0.416: vector<stVec>::resize(newSize,value), with the 24-byte value passed by value; grows through insert-fill or shrinks through checked erase.
+void __thiscall OB_stVector_stVec_ResizeFill_010201A0(
+        OB_stVector_stVec_010201A0 *this,
+        unsigned int newSize,
+        OB_stVec_010201A0 value)
 {
-  unsigned int v9; // ecx
-  int v10; // edi
-  unsigned int v11; // eax
-  char *v12; // ebp
-  char *v13; // edi
-  unsigned int v14; // ebp
-  char *v15; // ebx
-  bool v16; // cc
-  int v17[2]; // [esp+14h] [ebp-14h] BYREF
-  unsigned int v18; // [esp+24h] [ebp-4h]
+  OB_stVec_010201A0 *begin; // ecx
+  int v5; // edi
+  unsigned int v6; // eax
+  OB_stVec_010201A0 *v7; // ebp
+  OB_stVec_010201A0 *end; // edi
+  OB_stVec_010201A0 *v9; // ebp
+  OB_stVec_010201A0 *v10; // ebx
+  bool v11; // cc
+  OB_stVector24Iterator_010201A0 result; // [esp+14h] [ebp-14h] BYREF
+  unsigned int v13; // [esp+24h] [ebp-4h]
 
-  v9 = (unsigned int)*(this + 1);
-  v10 = 0;
-  v18 = 0;
-  if ( v9 )
-    v11 = (int)&(*(this + 2))[-v9] / 0x18;
+  begin = this->begin; /*0x7856d9*/
+  v5 = 0; /*0x7856dc*/
+  v13 = 0; /*0x7856e0*/
+  if ( begin ) /*0x7856e4*/
+    v6 = this->end - begin; /*0x7856fe*/
   else
-    v11 = 0;
-  if ( v11 < a2 )
+    v6 = 0; /*0x7856e6*/
+  if ( v6 >= newSize ) /*0x785706*/
   {
-    if ( v9 )
-      v10 = (int)&(*(this + 2))[-v9] / 0x18;
-    v12 = *(this + 2);
-    if ( v9 > (unsigned int)v12 )
-      _invalid_parameter_noinfo();
-    sub_785050((int)this, (int)this, v12, a2 - v10, &a3);
-  }
-  if ( v9 )
-  {
-    v13 = *(this + 2);
-    if ( a2 < (int)&v13[-v9] / 0x18 )
+    if ( begin ) /*0x785743*/
     {
-      if ( v9 > (unsigned int)v13 )
-        _invalid_parameter_noinfo();
-      v14 = (unsigned int)*(this + 1);
-      if ( v14 > (unsigned int)*(this + 2) )
-        _invalid_parameter_noinfo();
-      v15 = (char *)(v14 + 0x18 * a2);
-      v16 = v15 <= *(this + 2);
-      v17[1] = v14;
-      if ( !v16 || v15 < *(this + 1) )
-        _invalid_parameter_noinfo();
-      sub_784AC0(this, v17, (int)this, v15, (int)this, v13);
+      end = this->end; /*0x785745*/
+      if ( newSize < end - begin ) /*0x78575f*/
+      {
+        if ( begin > end ) /*0x785763*/
+          _invalid_parameter_noinfo(newSize, (int)end, (int)this); /*0x785765*/
+        v9 = this->begin; /*0x78576a*/
+        if ( v9 > this->end ) /*0x785770*/
+          _invalid_parameter_noinfo(newSize, (int)end, (int)this); /*0x785772*/
+        v10 = &v9[newSize]; /*0x78577a*/
+        v11 = v10 <= this->end; /*0x78577e*/
+        result.current = (unsigned __int8 *)v9; /*0x785781*/
+        if ( !v11 || v10 < this->begin ) /*0x78578a*/
+          _invalid_parameter_noinfo((int)v10, (int)end, (int)this); /*0x78578c*/
+        OB_stVector24_EraseRange_010201A0( /*0x78579c*/
+          (OB_stVector24_010201A0 *)this,
+          &result,
+          (OB_stVector24Iterator_010201A0)__PAIR64__((unsigned int)v10, (unsigned int)this),
+          (OB_stVector24Iterator_010201A0)__PAIR64__((unsigned int)end, (unsigned int)this));
+      }
     }
   }
-  v18 = 0xFFFFFFFF;
-  TESTexture::ClearComponentReferences(&a3);
+  else
+  {
+    if ( begin ) /*0x78570a*/
+      v5 = this->end - begin; /*0x785720*/
+    v7 = this->end; /*0x785722*/
+    if ( begin > v7 ) /*0x785727*/
+      _invalid_parameter_noinfo(newSize, v5, (int)this); /*0x785729*/
+    OB_stVector_stVec_InsertFill_010201A0( /*0x78573a*/
+      this,
+      (OB_stVector_stVecIterator_010201A0)__PAIR64__((unsigned int)v7, (unsigned int)this),
+      newSize - v5,
+      &value);
+  }
+  v13 = 0xFFFFFFFF; /*0x7857a5*/
+  Shared_NoOpVirtual_60D0A0(&value); /*0x7857ad*/
 }

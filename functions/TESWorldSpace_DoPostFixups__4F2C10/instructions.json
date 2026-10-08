@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4F2C10",
-    "line": "push    ebp",
+    "line": "push    ebp; Verified: WorldSpace post-fixups resolve Climate, WaterForm and parent WorldSpace links and rebuild/repair exterior cell-map relationships. No confirmed write to the auxiliary spatial candidate map at +0x60 was established in this routine.",
     "mnemonic": "push",
     "size": 1
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x4F2C5A",
-    "line": "call    TESForm_GetOverrideFile",
+    "line": "call    TESForm_GetOverrideFile; Verified post-fixup path: resolves stored Climate FormID through winning override file, looks up and RTTI-casts TESClimate, reports missing Climate, then replaces raw field with pointer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x4F2C65",
-    "line": "call    TESForm_ResolveFormID",
+    "line": "call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x4F2C80",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x4F2CEA",
-    "line": "call    TESForm_GetOverrideFile",
+    "line": "call    TESForm_GetOverrideFile; Verified post-fixup path: resolves stored WaterForm FormID and RTTI-casts TESWaterForm before replacing raw field.",
     "mnemonic": "call",
     "size": 5
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x4F2CF5",
-    "line": "call    TESForm_ResolveFormID",
+    "line": "call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x4F2D10",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -727,7 +727,7 @@
   },
   {
     "ea": "0x4F2D76",
-    "line": "call    TESForm_GetOverrideFile",
+    "line": "call    TESForm_GetOverrideFile; Verified post-fixup path: resolves parentWorldspace FormID and RTTI-casts to TESWorldSpace after Climate and WaterForm fixups.",
     "mnemonic": "call",
     "size": 5
   },
@@ -751,7 +751,7 @@
   },
   {
     "ea": "0x4F2D81",
-    "line": "call    TESForm_ResolveFormID",
+    "line": "call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -799,7 +799,7 @@
   },
   {
     "ea": "0x4F2D9C",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1093,7 +1093,7 @@
   },
   {
     "ea": "0x4F2E26",
-    "line": "mov     [esp+44h+var_24], eax",
+    "line": "mov     [esp+44h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1117,37 +1117,37 @@
   },
   {
     "ea": "0x4F2E34",
-    "line": "push    eax",
+    "line": "push    eax; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F2E35",
-    "line": "lea     ecx, [esp+48h+var_1C]",
+    "line": "lea     ecx, [esp+48h+keyOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4F2E39",
-    "line": "push    ecx",
+    "line": "push    ecx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F2E3A",
-    "line": "mov     ecx, [esi+30h]",
+    "line": "mov     ecx, [esi+30h]; self",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x4F2E3D",
-    "line": "lea     edx, [esp+4Ch+var_24]",
+    "line": "lea     edx, [esp+4Ch+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4F2E41",
-    "line": "push    edx",
+    "line": "push    edx; position",
     "mnemonic": "push",
     "size": 1
   },
@@ -1159,7 +1159,7 @@
   },
   {
     "ea": "0x4F2E46",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
@@ -1201,7 +1201,7 @@
   },
   {
     "ea": "0x4F2E5A",
-    "line": "cmp     [esp+44h+var_24], ebp",
+    "line": "cmp     [esp+44h+position], ebp",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -1273,7 +1273,7 @@
   },
   {
     "ea": "0x4F2E7D",
-    "line": "call    TESForm_GetOverrideFile",
+    "line": "call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1297,7 +1297,7 @@
   },
   {
     "ea": "0x4F2E8C",
-    "line": "call    sub_4520F0",
+    "line": "call    TESFile_GetThreadSafeFile; Returns the root TESFile on the main thread; on worker threads returns the per-thread clone selected by GetCurrentThreadId via TESFile_GetThreadSafeFileForThread.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1381,7 +1381,7 @@
   },
   {
     "ea": "0x4F2EC0",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1405,7 +1405,7 @@
   },
   {
     "ea": "0x4F2ED0",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1435,7 +1435,7 @@
   },
   {
     "ea": "0x4F2EE3",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1459,7 +1459,7 @@
   },
   {
     "ea": "0x4F2EF3",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1621,7 +1621,7 @@
   },
   {
     "ea": "0x4F2F4E",
-    "line": "mov     ebx, eax",
+    "line": "mov     ebx, eax; EngineFix implementation 2026-05-07: narrow DoPostFixups allocation guard. If rebuilt offset-table allocation fails, clean the outstanding cdecl arguments and skip to 0x4F3268 instead of calling memset on NULL. Wider offset-write tracking remains disabled.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1651,7 +1651,7 @@
   },
   {
     "ea": "0x4F2F5B",
-    "line": "mov     [esp+60h+var_24], ebx",
+    "line": "mov     [esp+60h+position], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1663,7 +1663,7 @@
   },
   {
     "ea": "0x4F2F64",
-    "line": "add     esp, 1Ch",
+    "line": "add     esp, 1Ch; EnginePatch v5 CTD hotfix: DoPostFixups rebuilt-offset-table tracker hook is disabled by default pending runtime validation.",
     "mnemonic": "add",
     "size": 3
   },
@@ -1831,7 +1831,7 @@
   },
   {
     "ea": "0x4F2FD1",
-    "line": "call    TESFile__NextGroup",
+    "line": "call    TESFile__NextGroup; MEF v20 fix: TESFile::NextGroup short-GRUP guard. Reject lengths below 0x14 before subtracting the group header and tail-calling TESFile_NextRecord.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1963,7 +1963,7 @@
   },
   {
     "ea": "0x4F3018",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2065,7 +2065,7 @@
   },
   {
     "ea": "0x4F3048",
-    "line": "call    TESWorldSpace__GetIndexForCellCoord",
+    "line": "call    TESWorldSpace__GetIndexForCellCoord; EngineFix trace 2026-05-11: GetIndexForCellCoord validates coordinates against worldspace [0xAC..0xB8] bounds. DoPostFixups offset-table allocation is based on [0x98..0xA4], so callers that write into rebuilt tables must separately check index against the allocation rectangle.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2095,13 +2095,13 @@
   },
   {
     "ea": "0x4F305E",
-    "line": "mov     edx, [esp+44h+var_24]",
+    "line": "mov     edx, [esp+44h+position]; MEF v21 verification correction: guard DoPostFixups rebuilt WRLD offset-table write; only write table[index] when index is within the allocation rectangle derived from [0x98..0xA4].",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4F3062",
-    "line": "mov     [edx+eax*4], ecx",
+    "line": "mov     [edx+eax*4], ecx; EngineIssues review: DoPostFixups offset-table rebuild writes cell offset at computed index without checking index against allocation count; allocation bounds and GetIndex bounds appear different.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -2215,7 +2215,7 @@
   },
   {
     "ea": "0x4F30A9",
-    "line": "mov     ebx, [esp+44h+var_24]",
+    "line": "mov     ebx, [esp+44h+position]; MEF v21 verification correction: track vanilla rebuilt WRLD offset table and count when committing it to TESWorldSpace+0xA8, so fast lookup remains bounded without discarding valid rebuilt tables.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2233,7 +2233,7 @@
   },
   {
     "ea": "0x4F30B8",
-    "line": "cmp     byte ptr ds:0B09DB8h, 0",
+    "line": "cmp     byte ptr ds:0B09DB8h, 0; EngineIssues review: bCheckOffsetOnLoad validation can iterate a full worldspace cell rectangle and load temporary cells without the rebuild path's 0x3E8 dimension cap.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -2251,19 +2251,19 @@
   },
   {
     "ea": "0x4F30CB",
-    "line": "fstp    [esp+44h+var_1C]",
+    "line": "fstp    [esp+44h+keyOut]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4F30CF",
-    "line": "fld     [esp+44h+var_1C]",
+    "line": "fld     [esp+44h+keyOut]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x4F30D3",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2275,7 +2275,7 @@
   },
   {
     "ea": "0x4F30DE",
-    "line": "fstp    [esp+44h+var_1C]",
+    "line": "fstp    [esp+44h+keyOut]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2287,7 +2287,7 @@
   },
   {
     "ea": "0x4F30E4",
-    "line": "fld     [esp+44h+var_1C]",
+    "line": "fld     [esp+44h+keyOut]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2299,7 +2299,7 @@
   },
   {
     "ea": "0x4F30EB",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2317,13 +2317,13 @@
   },
   {
     "ea": "0x4F30F8",
-    "line": "fstp    [esp+44h+var_1C]",
+    "line": "fstp    [esp+44h+keyOut]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4F30FC",
-    "line": "fld     [esp+44h+var_1C]",
+    "line": "fld     [esp+44h+keyOut]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2335,13 +2335,13 @@
   },
   {
     "ea": "0x4F3103",
-    "line": "mov     [esp+44h+var_24], ebx",
+    "line": "mov     [esp+44h+position], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4F3107",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2371,13 +2371,13 @@
   },
   {
     "ea": "0x4F311D",
-    "line": "mov     [esp+44h+var_1C], eax",
+    "line": "mov     [esp+44h+keyOut], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4F3121",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2407,7 +2407,7 @@
   },
   {
     "ea": "0x4F3130",
-    "line": "call    TESForm_GetOverrideFile",
+    "line": "call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2431,7 +2431,7 @@
   },
   {
     "ea": "0x4F313F",
-    "line": "call    sub_4520F0",
+    "line": "call    TESFile_GetThreadSafeFile; Returns the root TESFile on the main thread; on worker threads returns the per-thread clone selected by GetCurrentThreadId via TESFile_GetThreadSafeFileForThread.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2479,7 +2479,7 @@
   },
   {
     "ea": "0x4F315F",
-    "line": "cmp     edi, [esp+44h+var_1C]",
+    "line": "cmp     edi, [esp+44h+keyOut]; EnginePatch v5 CTD hotfix: bCheckOffsetOnLoad rectangle guard hook is disabled by default with the other DoPostFixups replacements pending runtime validation.",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -2502,14 +2502,8 @@
     "size": 2
   },
   {
-    "ea": "0x4F316D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x4F3170",
-    "line": "mov     ebx, [esp+44h+var_24]",
+    "line": "mov     ebx, [esp+44h+position]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2521,7 +2515,7 @@
   },
   {
     "ea": "0x4F3178",
-    "line": "cmp     [esp+44h+var_24], eax",
+    "line": "cmp     [esp+44h+position], eax",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -2551,7 +2545,7 @@
   },
   {
     "ea": "0x4F3186",
-    "line": "call    TESWorldSpace__GetIndexForCellCoord",
+    "line": "call    TESWorldSpace__GetIndexForCellCoord; EngineFix trace 2026-05-11: GetIndexForCellCoord validates coordinates against worldspace [0xAC..0xB8] bounds. DoPostFixups offset-table allocation is based on [0x98..0xA4], so callers that write into rebuilt tables must separately check index against the allocation rectangle.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2575,7 +2569,7 @@
   },
   {
     "ea": "0x4F3195",
-    "line": "mov     ecx, [esi+0A8h]",
+    "line": "mov     ecx, [esi+0A8h]; MEF v21 implementation target: bCheckOffsetOnLoad validation read is guarded by tracked OFST/rebuilt-table count; unknown/out-of-range tables skip this validation cell.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2653,7 +2647,7 @@
   },
   {
     "ea": "0x4F31C6",
-    "line": "cmp     eax, edi",
+    "line": "cmp     eax, edi; EngineFix implementation 2026-05-07: narrow validation-cell allocation guard. If temporary TESObjectCELL allocation fails, restore SEH state and continue the validation loop at 0x4F324E instead of calling TESObjectCELL methods on NULL.",
     "mnemonic": "cmp",
     "size": 2
   },
@@ -2743,7 +2737,7 @@
   },
   {
     "ea": "0x4F31F5",
-    "line": "call    TESDataHandler_LoadForm",
+    "line": "call    TESDataHandler_LoadForm; TESDataHandler_LoadForm supports override reuse: invokes virtual TESForm::LoadForm on the supplied existing object and updates master/active-file flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2971,7 +2965,7 @@
   },
   {
     "ea": "0x4F325E",
-    "line": "cmp     ebp, [esp+44h+var_1C]",
+    "line": "cmp     ebp, [esp+44h+keyOut]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -2983,13 +2977,13 @@
   },
   {
     "ea": "0x4F3268",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; Verified DoPostFixups invokes TESWorldSpace::LoadLODObjects after climate/water/parent and exterior-cell map repair, populating +0xC8 CellsWithLODObjects and the +0xD8/+0xDC LOD metadata fields.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4F326A",
-    "line": "call    TESWorldSpace__LoadLODObjects",
+    "line": "call    TESWorldSpace__LoadLODObjects; Verified Oblivion .cmp mask bits: 0x1 trees, 0x2 buildings/object LOD, 0x4 LandLOD, established by direct mode-test consumers. Fallout divergence: Fallout WorldSpace instead exposes NoLODWater and NoLODNoise flag bits and a DistantLODShaderProperty cache; the Fallout database has no matching Oblivion .cmp cell-map path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3052,5 +3046,77 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9B6A00",
+    "line": "mov     eax, [ebp-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B6A03",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B6A04",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B6A09",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B6A0A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B6A0B",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B6A0F",
+    "line": "lea     eax, [edx-34h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B6A12",
+    "line": "mov     ecx, [edx-38h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B6A15",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B6A17",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B6A1C",
+    "line": "mov     eax, offset stru_AE17C8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B6A21",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

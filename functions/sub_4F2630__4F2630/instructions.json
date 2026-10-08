@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x4F26CC",
-    "line": "mov     [esp+34h+var_24], eax",
+    "line": "mov     [esp+34h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -283,61 +283,61 @@
   },
   {
     "ea": "0x4F26D2",
-    "line": "lea     eax, [esp+34h+var_28]",
+    "line": "lea     eax, [esp+34h+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4F26D6",
-    "line": "push    eax",
+    "line": "push    eax; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F26D7",
-    "line": "lea     ecx, [esp+38h+var_20]",
+    "line": "lea     ecx, [esp+38h+keyOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4F26DB",
-    "line": "push    ecx",
+    "line": "push    ecx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F26DC",
-    "line": "mov     ecx, [esi+30h]",
+    "line": "mov     ecx, [esi+30h]; self",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x4F26DF",
-    "line": "lea     edx, [esp+3Ch+var_24]",
+    "line": "lea     edx, [esp+3Ch+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4F26E3",
-    "line": "push    edx",
+    "line": "push    edx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F26E4",
-    "line": "mov     [esp+40h+var_28], 0",
+    "line": "mov     [esp+40h+valueOut], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x4F26EC",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4F26F1",
-    "line": "mov     ecx, [esp+34h+var_28]",
+    "line": "mov     ecx, [esp+34h+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -367,13 +367,13 @@
   },
   {
     "ea": "0x4F26FE",
-    "line": "call    sub_4CBE50",
+    "line": "call    sub_4CBE50; Verified cell object-list processing: door references with ExtraTeleport are checked for a nonempty TESObjectDOOR.randomTeleport list; if present, RemoveExtraTeleportFromDoorRef removes reciprocal low-path indexing before save/load reset/post-fixup. The nested gate has been verified as a randomTeleport-list nonempty check.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4F2703",
-    "line": "cmp     [esp+34h+var_24], 0",
+    "line": "cmp     [esp+34h+position], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x4F2716",
-    "line": "call    sub_4CBE50",
+    "line": "call    sub_4CBE50; Verified cell object-list processing: door references with ExtraTeleport are checked for a nonempty TESObjectDOOR.randomTeleport list; if present, RemoveExtraTeleportFromDoorRef removes reciprocal low-path indexing before save/load reset/post-fixup. The nested gate has been verified as a randomTeleport-list nonempty check.",
     "mnemonic": "call",
     "size": 5
   },
@@ -530,6 +530,60 @@
   {
     "ea": "0x4F2762",
     "line": "jmp     loc_4F26CA",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B68F0",
+    "line": "lea     ecx, [ebp-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B68F3",
+    "line": "jmp     ??1?$NiTPointerMap@PAVTESObjectCELL@@_N@@UAE@XZ; NiTPointerMap<TESObjectCELL *,bool>::~NiTPointerMap<TESObjectCELL *,bool>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B68F8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B68FC",
+    "line": "lea     eax, [edx-24h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B68FF",
+    "line": "mov     ecx, [edx-28h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B6902",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B6904",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B6909",
+    "line": "mov     eax, offset stru_AE16E0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B690E",
+    "line": "jmp     ___CxxFrameHandler3",
     "mnemonic": "jmp",
     "size": 5
   }

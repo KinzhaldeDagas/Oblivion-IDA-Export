@@ -1,29 +1,26 @@
-void __cdecl EffectSetting::~EffectSetting(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8, int a9)
+void __thiscall EffectSetting::~EffectSetting(int this)
 {
-  TESModel *v9; // ecx
-  TESModel *v10; // esi
-  TESModel *v11; // edi
-  void **p_unk14; // ebp
-  float editorSize; // eax
+  TESModel *v2; // edi
+  _DWORD *v3; // ebp
+  void *v4; // eax
 
-  v10 = v9;
-  v11 = v9 + 1;
-  p_unk14 = &v9[2].unk14;
-  v9->vtbl = (TESModelVtbl *)&EffectSetting::`vftable'{for `EffectSetting'};
-  v9[1].vtbl = (TESModelVtbl *)&EffectSetting::`vftable'{for `TESModel'};
-  v9[2].vtbl = (TESModelVtbl *)&EffectSetting::`vftable'{for `TESDescription'};
-  *(_DWORD *)&v9[2].nifModel.m_dataLen = &EffectSetting::`vftable'{for `TESFullName'};
-  v9[2].unk14 = &EffectSetting::`vftable'{for `TESIcon'};
-  editorSize = v9[6].editorSize;
-  if ( editorSize != 0.0 )
-    MemoryHeap_Free_checked((void *)LODWORD(editorSize));
-  j_TESForm_ClearComponentReferences((TESForm *)v10);
-  TESTexture_destr(p_unk14);
-  FormHeapFree(LODWORD(v10[2].editorSize));
-  v10[2].editorSize = 0.0;
-  *(_WORD *)&v10[2].pad11[1] = 0;
-  *(_WORD *)&v10[2].unk10 = 0;
-  TESModel::~TESModel(v11);
-  TESForm_destr((TESForm *)v10);
-  EffectSetting::~EffectSetting(a1, a2, a3, a4, a5, a6, a7, a8, a9);
+  v2 = (TESModel *)(this + 0x18); /*0x415f3d*/
+  v3 = (_DWORD *)(this + 0x44); /*0x415f40*/
+  *(_DWORD *)this = &EffectSetting::`vftable'{for `EffectSetting'}; /*0x415f43*/
+  *(_DWORD *)(this + 0x18) = &EffectSetting::`vftable'{for `TESModel'}; /*0x415f49*/
+  *(_DWORD *)(this + 0x30) = &EffectSetting::`vftable'{for `TESDescription'}; /*0x415f4f*/
+  *(_DWORD *)(this + 0x38) = &EffectSetting::`vftable'{for `TESFullName'}; /*0x415f56*/
+  *(_DWORD *)(this + 0x44) = &EffectSetting::`vftable'{for `TESIcon'}; /*0x415f5d*/
+  v4 = *(void **)(this + 0x9C); /*0x415f64*/
+  if ( v4 ) /*0x415f76*/
+    MemoryHeap_Free_checked(v4); /*0x415f7e*/
+  j_TESForm_ClearComponentReferences((TESForm *)this); /*0x415f85*/
+  TESTexture_destr(v3); /*0x415f91*/
+  FormHeapFree(*(_DWORD *)(this + 0x3C)); /*0x415f9a*/
+  *(_DWORD *)(this + 0x3C) = 0; /*0x415fa4*/
+  *(_WORD *)(this + 0x42) = 0; /*0x415fa7*/
+  *(_WORD *)(this + 0x40) = 0; /*0x415fab*/
+  TESModel::~TESModel(v2); /*0x415fb3*/
+  TESForm_destr((TESForm *)this); /*0x415fc2*/
+  EffectSetting::~EffectSetting(); /*0x415fc3*/
 }

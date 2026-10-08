@@ -51,7 +51,7 @@
 0x42DE7F: push    ebp; FullPath
 0x42DE80: lea     ecx, [esp+24h+var_8]
 0x42DE84: call    BSHash_constr
-0x42DE89: mov     ebx, ArchiveProvidedLastFile
+0x42DE89: mov     ebx, ds:0B338E4h
 0x42DE8F: test    ebx, ebx
 0x42DE91: jz      short loc_42DED4
 0x42DE93: mov     cx, word ptr [esp+1Ch+arg_8]
@@ -73,7 +73,7 @@
 0x42DEC9: shl     esi, 4
 0x42DECC: add     esi, [ebx+178h]
 0x42DED2: jmp     short loc_42DF37
-0x42DED4: mov     esi, ArchiveList
+0x42DED4: mov     esi, ds:0B338E0h
 0x42DEDA: test    esi, esi
 0x42DEDC: jz      loc_42DFEE
 0x42DEE2: mov     edi, [esi]
@@ -105,7 +105,7 @@
 0x42DF21: retn
 0x42DF22: mov     esi, [esp+1Ch+var_C]
 0x42DF26: shl     esi, 4
-0x42DF29: mov     ArchiveProvidedLastFile, edi
+0x42DF29: mov     ds:0B338E4h, edi
 0x42DF2F: add     esi, [edi+178h]
 0x42DF35: mov     ebx, edi
 0x42DF37: test    esi, esi
@@ -122,7 +122,7 @@
 0x42DF69: call    NiEnterCriticalSection
 0x42DF6E: mov     esi, [esi+8]
 0x42DF71: push    0; Seed
-0x42DF73: call    GetRandomLargeInteger?
+0x42DF73: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x42DF78: xor     edx, edx
 0x42DF7A: div     esi
 0x42DF7C: add     esp, 4
@@ -130,7 +130,7 @@
 0x42DF81: push    edx
 0x42DF82: mov     edx, [esp+20h+var_C]
 0x42DF86: push    edx
-0x42DF87: call    sub_42CC00
+0x42DF87: call    Archive_GetFileNameByFolderAndIndex
 0x42DF8C: mov     edi, [esp+1Ch+Str]
 0x42DF90: mov     edx, edi
 0x42DF92: mov     esi, eax

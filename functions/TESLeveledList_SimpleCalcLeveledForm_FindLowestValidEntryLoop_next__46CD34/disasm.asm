@@ -4,7 +4,7 @@
 0x46CD3B: test    ebx, ebx
 0x46CD3D: jz      TESLeveledList_SimpleCalcLeveledForm___Done_
 0x46CD43: push    0; Seed
-0x46CD45: call    GetRandomLargeInteger?
+0x46CD45: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x46CD4A: cdq
 0x46CD4B: idiv    ebp
 0x46CD4D: mov     eax, ebx

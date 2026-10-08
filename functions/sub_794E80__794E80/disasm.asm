@@ -1,4 +1,4 @@
-0x794E80: mov     eax, [esp+arg_4]
+0x794E80: mov     eax, [esp+last]; OBLIVION AUTHORITY (2026-08-30): Stdcall uninitialized-copy adapter for trivially copyable unsigned-short elements; copies [first,last) and returns the constructed end.
 0x794E84: mov     ecx, [esp+Src]
 0x794E88: mov     edx, [esp+Dst]
 0x794E8C: sub     eax, ecx

@@ -1,4 +1,4 @@
-0x41FB60: push    1Fh; a2
+0x41FB60: push    1Fh; Returns ExtraPackage's target TESObjectREFR pointer, or null.
 0x41FB62: call    BaseExtraList_GetExtraData
 0x41FB67: test    eax, eax
 0x41FB69: jz      short loc_41FB6F

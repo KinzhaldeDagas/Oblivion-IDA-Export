@@ -50,7 +50,7 @@
 0x6F01E4: sub     edx, eax
 0x6F01E6: cmp     edx, edi
 0x6F01E8: jnb     short loc_6F01EF
-0x6F01EA: call    sub_790B90
+0x6F01EA: call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error("vector<T> too long") and throws; used by multiple element specializations after max_size checks.
 0x6F01EF: test    ebx, ebx
 0x6F01F1: jnz     short loc_6F01F7
 0x6F01F3: xor     eax, eax
@@ -146,7 +146,7 @@
 0x6F02D1: test    ebx, ebx
 0x6F02D3: jz      short loc_6F02DE
 0x6F02D5: push    ebx
-0x6F02D6: call    FormHeapFree
+0x6F02D6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F02DB: add     esp, 4
 0x6F02DE: mov     eax, [ebp+arg_C]
 0x6F02E1: mov     ecx, [ebp+var_14]
@@ -167,7 +167,7 @@
 0x6F0306: retn    10h
 0x6F0309: mov     edx, [ebp+arg_C]
 0x6F030C: push    edx
-0x6F030D: call    FormHeapFree
+0x6F030D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F0312: add     esp, 4
 0x6F0315: push    0
 0x6F0317: push    0
@@ -261,3 +261,10 @@
 0x6F03EE: mov     esp, ebp
 0x6F03F0: pop     ebp
 0x6F03F1: retn    10h
+0x9C8670: mov     edx, [esp-4+arg_4]
+0x9C8674: lea     eax, [edx+0Ch]
+0x9C8677: mov     ecx, [edx-20h]
+0x9C867A: xor     ecx, eax
+0x9C867C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C8681: mov     eax, offset stru_AF0A8C
+0x9C8686: jmp     ___CxxFrameHandler3

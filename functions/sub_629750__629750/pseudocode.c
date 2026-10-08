@@ -1,5 +1,6 @@
-char __thiscall sub_629750(_BYTE *this, char a2)
+// Sets and returns HighProcess.dialogueActive. Dialogue producers set it when a DialogueItem is installed and clear it when the response finishes or is cancelled.
+bool __thiscall HighProcess::SetActiveDialogue(HighProcess *this, bool active)
 {
-  *(this + 0x228) = a2;
-  return a2;
+  this->dialogueActive = active; /*0x629754*/
+  return active; /*0x62975a*/
 }

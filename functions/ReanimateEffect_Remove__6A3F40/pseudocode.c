@@ -1,39 +1,39 @@
 void __usercall ReanimateEffect_Remove(int a1@<ecx>, double a2@<st1>, double a3@<st0>)
 {
-  MagicTarget *v5; // ecx
+  MagicTarget *v4; // ecx
   char *ParentActor; // eax
-  Actor *v7; // esi
-  MagicCaster *v8; // ecx
-  Actor *v9; // eax
+  Actor *v6; // esi
+  MagicCaster *v7; // ecx
+  Actor *v8; // eax
 
-  if ( !*(_BYTE *)(TESDataHandler + 0xCD4) )
+  if ( !g_TESDataHandler->activeFileState.unknownAfterActiveFileState[2] ) /*0x6a3f45*/
   {
-    v5 = *(MagicTarget **)(a1 + 0x20);
-    if ( v5 )
+    v4 = *(MagicTarget **)(a1 + 0x20); /*0x6a3f51*/
+    if ( v4 ) /*0x6a3f56*/
     {
-      ParentActor = (char *)MagicTarget_GetParentActor(v5);
-      v7 = (Actor *)ParentActor;
-      if ( ParentActor )
+      ParentActor = (char *)MagicTarget_GetParentActor(v4); /*0x6a3f59*/
+      v6 = (Actor *)ParentActor; /*0x6a3f5e*/
+      if ( ParentActor ) /*0x6a3f62*/
       {
-        if ( *(int *)(a1 + 0x3C) >= 0x32 )
+        if ( *(int *)(a1 + 0x3C) >= 0x32 ) /*0x6a3f6c*/
         {
-          if ( (*(unsigned __int8 (__thiscall **)(char *, _DWORD))(*(_DWORD *)ParentActor + 0x198))(ParentActor, 0) )
-            goto LABEL_9;
+          if ( (*(unsigned __int8 (__thiscall **)(char *, _DWORD))(*(_DWORD *)ParentActor + 0x198))(ParentActor, 0) ) /*0x6a3f92*/
+            goto LABEL_9; /*0x6a3f96*/
         }
         else
         {
-          sub_5E8EC0(ParentActor, 0);
-          if ( *(_DWORD *)(a1 + 0x38) )
-            (*(void (__thiscall **)(_DWORD, int))(**(_DWORD **)(a1 + 0x38) + 0x9C))(*(_DWORD *)(a1 + 0x38), 1);
+          sub_5E8EC0(ParentActor, 0); /*0x6a3f6e*/
+          if ( *(_DWORD *)(a1 + 0x38) ) /*0x6a3f73*/
+            (*(void (__thiscall **)(_DWORD, int))(**(_DWORD **)(a1 + 0x38) + 0x9C))(*(_DWORD *)(a1 + 0x38), 1); /*0x6a3f86*/
         }
-        Actor_Kill(v7, 0.0, a2, a3, 0, COERCE_INT(0.0));
+        Actor_Kill(v6, 0.0, a2, a3, 0, COERCE_INT(0.0)); /*0x6a3fa2*/
 LABEL_9:
-        v8 = *(MagicCaster **)(a1 + 0x24);
-        if ( v8 )
+        v7 = *(MagicCaster **)(a1 + 0x24); /*0x6a3fa7*/
+        if ( v7 ) /*0x6a3fac*/
         {
-          v9 = MagicCaster_GetParentActor(v8);
-          if ( v9 )
-            sub_692660(v7, (int)v9, 0);
+          v8 = MagicCaster_GetParentActor(v7); /*0x6a3fae*/
+          if ( v8 ) /*0x6a3fb5*/
+            sub_692660(v6, (int)v8, 0); /*0x6a3fbb*/
         }
       }
     }

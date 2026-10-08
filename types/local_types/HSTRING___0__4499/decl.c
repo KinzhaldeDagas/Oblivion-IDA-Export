@@ -1,1 +1,1 @@
-HSTRING___0
+typedef HSTRING__ HSTRING___0;

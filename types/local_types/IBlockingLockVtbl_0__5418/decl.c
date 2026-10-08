@@ -1,1 +1,1 @@
-IBlockingLockVtbl_0
+typedef IBlockingLockVtbl IBlockingLockVtbl_0;

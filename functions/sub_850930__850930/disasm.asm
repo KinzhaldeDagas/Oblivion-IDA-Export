@@ -19,7 +19,7 @@
 0x850964: call    sub_848DA0
 0x850969: mov     ecx, [esi+24h]
 0x85096C: mov     ebx, [ecx]
-0x85096E: mov     ecx, [esp+20h+arg_C]
+0x85096E: mov     ecx, [esp+20h+value]
 0x850972: mov     edx, [ecx]
 0x850974: mov     eax, [edx+90h]
 0x85097A: push    0
@@ -56,29 +56,29 @@
 0x8509C8: jz      short loc_8509E6
 0x8509CA: cmp     byte ptr ds:0B42CDDh, 0
 0x8509D1: jz      short loc_8509E6
-0x8509D3: mov     ecx, [esp+20h+arg_C]
+0x8509D3: mov     ecx, [esp+20h+value]
 0x8509D7: mov     edx, [ecx]
 0x8509D9: mov     eax, [edx+78h]
 0x8509DC: call    eax
-0x8509DE: push    eax
-0x8509DF: mov     ecx, ebx
-0x8509E1: call    sub_7715E0
+0x8509DE: push    eax; preset
+0x8509DF: mov     ecx, ebx; this
+0x8509E1: call    NiD3DTextureStage_ApplyAddressModePreset; Apply one native address-preset row to a NiD3DTextureStage: D3DSAMP_ADDRESSU (1) and D3DSAMP_ADDRESSV (2). Lighting30 SimpleShadow uses preset 0 = CLAMP/CLAMP.
 0x8509E6: mov     ebx, 1
 0x8509EB: add     [esi+60h], ebx
-0x8509EE: mov     [esp+20h+arg_C], esi
+0x8509EE: mov     [esp+20h+value], esi
 0x8509F2: mov     edx, [edi+38h]
-0x8509F5: lea     ecx, [esp+20h+arg_C]
-0x8509F9: push    ecx
-0x8509FA: push    edx
-0x8509FB: lea     ecx, [edi+40h]
+0x8509F5: lea     ecx, [esp+20h+value]
+0x8509F9: push    ecx; value
+0x8509FA: push    edx; index
+0x8509FB: lea     ecx, [edi+40h]; this
 0x8509FE: mov     [esp+28h+var_4], 0
-0x850A06: call    sub_76CE40
+0x850A06: call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.
 0x850A0B: or      eax, 0FFFFFFFFh
 0x850A0E: add     [esi+60h], eax
 0x850A11: mov     [esp+20h+var_4], eax
 0x850A15: jnz     short loc_850A1E
 0x850A17: mov     ecx, esi
-0x850A19: call    sub_7604D0
+0x850A19: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x850A1E: add     [edi+38h], ebx
 0x850A21: mov     ecx, dword ptr [esp+20h+var_C]
 0x850A25: mov     large fs:0, ecx
@@ -89,3 +89,12 @@
 0x850A30: pop     ebx
 0x850A31: add     esp, 0Ch
 0x850A34: retn    10h
+0x9D3390: lea     ecx, [ebp+10h]; void *
+0x9D3393: jmp     sub_4027D0
+0x9D3398: mov     edx, [esp+arg_4]
+0x9D339C: lea     eax, [edx-10h]
+0x9D339F: mov     ecx, [edx-14h]
+0x9D33A2: xor     ecx, eax
+0x9D33A4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D33A9: mov     eax, offset stru_AFB7C0
+0x9D33AE: jmp     ___CxxFrameHandler3

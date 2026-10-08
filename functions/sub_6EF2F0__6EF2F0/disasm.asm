@@ -1,4 +1,4 @@
-0x6EF2F0: mov     eax, [esp+arg_C]
+0x6EF2F0: mov     eax, [esp+value]; Oblivion body: checked byte-vector insert-fill. Handles alias-safe in-place insertion and reallocation, uses 1.5x growth, and updates begin/end/capacity. Called by byte insert-one and resize; RT4.1 st_vector_byte corroborates the element role.
 0x6EF2F4: push    ebx
 0x6EF2F5: push    ebp
 0x6EF2F6: push    esi
@@ -6,13 +6,13 @@
 0x6EF2F9: mov     cl, [eax]
 0x6EF2FB: mov     eax, [esi+4]
 0x6EF2FE: test    eax, eax
-0x6EF300: mov     byte ptr [esp+0Ch+arg_C], cl
+0x6EF300: mov     byte ptr [esp+0Ch+value], cl
 0x6EF304: jnz     short loc_6EF30A
 0x6EF306: xor     ebp, ebp
 0x6EF308: jmp     short loc_6EF30F
 0x6EF30A: mov     ebp, [esi+0Ch]
 0x6EF30D: sub     ebp, eax
-0x6EF30F: mov     ebx, [esp+0Ch+arg_8]
+0x6EF30F: mov     ebx, [esp+0Ch+count]
 0x6EF313: test    ebx, ebx
 0x6EF315: jz      loc_6EF48E
 0x6EF31B: test    eax, eax
@@ -25,7 +25,7 @@
 0x6EF32B: sub     edx, ecx
 0x6EF32D: cmp     edx, ebx
 0x6EF32F: jnb     short loc_6EF336
-0x6EF331: call    sub_790B90
+0x6EF331: call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error("vector<T> too long") and throws; used by multiple element specializations after max_size checks.
 0x6EF336: test    eax, eax
 0x6EF338: jnz     short loc_6EF33E
 0x6EF33A: xor     ecx, ecx
@@ -69,7 +69,7 @@
 0x6EF393: add     esp, 4
 0x6EF396: sub     eax, ecx
 0x6EF398: lea     edx, [eax+edi]
-0x6EF39B: mov     [esp+10h+arg_8], edx
+0x6EF39B: mov     [esp+10h+count], edx
 0x6EF39F: jz      short loc_6EF3AD
 0x6EF3A1: push    eax; Src
 0x6EF3A2: push    ecx; Src
@@ -77,13 +77,13 @@
 0x6EF3A4: push    edi; Dst
 0x6EF3A5: call    _memmove_s
 0x6EF3AA: add     esp, 10h
-0x6EF3AD: mov     ecx, [esp+10h+arg_8]
-0x6EF3B1: lea     eax, [esp+10h+arg_C]
-0x6EF3B5: push    eax
-0x6EF3B6: push    ebx
-0x6EF3B7: push    ecx
+0x6EF3AD: mov     ecx, [esp+10h+count]
+0x6EF3B1: lea     eax, [esp+10h+value]
+0x6EF3B5: push    eax; value
+0x6EF3B6: push    ebx; count
+0x6EF3B7: push    ecx; destination
 0x6EF3B8: mov     ecx, esi
-0x6EF3BA: call    sub_7890F0
+0x6EF3BA: call    OB_stVectorByte_UninitializedFillN_010201A0; Oblivion byte-vector uninitialized fill-N primitive: writes count copies of one byte and returns one-past-last.
 0x6EF3BF: mov     ecx, [esi+8]
 0x6EF3C2: mov     edx, [esp+10h+Src]
 0x6EF3C6: sub     ecx, edx
@@ -105,7 +105,7 @@
 0x6EF3E8: test    ecx, ecx
 0x6EF3EA: jz      short loc_6EF3F5
 0x6EF3EC: push    ecx
-0x6EF3ED: call    FormHeapFree
+0x6EF3ED: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6EF3F2: add     esp, 4
 0x6EF3F5: lea     edx, [edi+ebp]
 0x6EF3F8: lea     eax, [edi+ebx]
@@ -131,17 +131,17 @@
 0x6EF422: call    sub_556CD0
 0x6EF427: mov     eax, [esi+8]
 0x6EF42A: mov     edx, edi
-0x6EF42C: lea     ecx, [esp+10h+arg_C]
-0x6EF430: push    ecx
+0x6EF42C: lea     ecx, [esp+10h+value]
+0x6EF430: push    ecx; value
 0x6EF431: sub     edx, eax
 0x6EF433: add     edx, ebx
-0x6EF435: push    edx
-0x6EF436: push    eax
+0x6EF435: push    edx; count
+0x6EF436: push    eax; destination
 0x6EF437: mov     ecx, esi
-0x6EF439: call    sub_7890F0
+0x6EF439: call    OB_stVectorByte_UninitializedFillN_010201A0; Oblivion byte-vector uninitialized fill-N primitive: writes count copies of one byte and returns one-past-last.
 0x6EF43E: add     [esi+8], ebx
 0x6EF441: mov     esi, [esi+8]
-0x6EF444: lea     eax, [esp+10h+arg_C]
+0x6EF444: lea     eax, [esp+10h+value]
 0x6EF448: push    eax
 0x6EF449: sub     esi, ebx
 0x6EF44B: push    esi
@@ -158,15 +158,15 @@
 0x6EF45F: sub     eax, ebx
 0x6EF461: push    ebp; int
 0x6EF462: push    eax; Src
-0x6EF463: mov     [esp+1Ch+arg_8], eax
+0x6EF463: mov     [esp+1Ch+count], eax
 0x6EF467: call    sub_556CD0
-0x6EF46C: mov     ecx, [esp+10h+arg_8]
-0x6EF470: push    ebp; int
-0x6EF471: push    ecx; int
-0x6EF472: push    edi; Src
+0x6EF46C: mov     ecx, [esp+10h+count]
+0x6EF470: push    ebp; destinationEnd
+0x6EF471: push    ecx; last
+0x6EF472: push    edi; first
 0x6EF473: mov     [esi+8], eax
-0x6EF476: call    sub_788A80
-0x6EF47B: lea     edx, [esp+1Ch+arg_C]
+0x6EF476: call    OB_stVectorByte_CopyBackwardRange_010201A0; Oblivion byte-vector copy-backward primitive: computes destinationEnd-(last-first), uses overlap-safe memmove_s for the raw byte span, and returns destination start. Hex-Rays does not decompile this helper; the 17-instruction body is the evidence.
+0x6EF47B: lea     edx, [esp+1Ch+value]
 0x6EF47F: push    edx
 0x6EF480: lea     eax, [edi+ebx]
 0x6EF483: push    eax

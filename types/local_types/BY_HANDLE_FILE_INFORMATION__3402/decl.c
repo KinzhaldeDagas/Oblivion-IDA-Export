@@ -1,1 +1,13 @@
-_BY_HANDLE_FILE_INFORMATION
+struct _BY_HANDLE_FILE_INFORMATION
+{
+DWORD dwFileAttributes;
+FILETIME ftCreationTime;
+FILETIME ftLastAccessTime;
+FILETIME ftLastWriteTime;
+DWORD dwVolumeSerialNumber;
+DWORD nFileSizeHigh;
+DWORD nFileSizeLow;
+DWORD nNumberOfLinks;
+DWORD nFileIndexHigh;
+DWORD nFileIndexLow;
+};

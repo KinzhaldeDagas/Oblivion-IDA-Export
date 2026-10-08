@@ -1,11 +1,11 @@
-0x480340: push    esi
-0x480341: mov     esi, [esp+4+arg_0]
+0x480340: push    esi; Returns the first bhk collision object found on object or recursively beneath its NiNode children. This is structural traversal, independent of node names.
+0x480341: mov     esi, [esp+4+object]
 0x480345: xor     eax, eax
 0x480347: test    esi, esi
 0x480349: jz      short loc_4803AF
 0x48034B: push    ebx
 0x48034C: push    esi
-0x48034D: call    sub_47FAC0
+0x48034D: call    NiAVObject_GetBhkCollisionObject; ODismemberment: authoritative NiAVObject collision getter. Reads NiAVObject+0xA8 and accepts objects whose class chain includes bhkCollisionObject.
 0x480352: mov     ebx, eax
 0x480354: add     esp, 4
 0x480357: test    ebx, ebx
@@ -31,8 +31,8 @@
 0x48038D: jmp     short loc_480398
 0x48038F: mov     ecx, [edi+0B0h]
 0x480395: mov     eax, [ecx+esi*4]
-0x480398: push    eax
-0x480399: call    sub_480340
+0x480398: push    eax; object
+0x480399: call    NiAVObject_FindBhkCollisionObjectRecursive; Returns the first bhk collision object found on object or recursively beneath its NiNode children. This is structural traversal, independent of node names.
 0x48039E: add     esp, 4
 0x4803A1: test    eax, eax
 0x4803A3: jnz     short loc_4803AC

@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x556300",
+      "0x556313"
+    ]
+  ],
+  "chunks_sha256": "42894480f126205b7cf7e24496d8fc9bb3161c94ab6c7238e31186c87354754b",
+  "comment_regular": "Return the number of 64-byte EGT basis records in this bank.",
+  "comment_repeatable": "Return the number of 64-byte basis records in one loaded EGT bank.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_556300",
+  "display_name": "FaceGenEgtBasisBank_GetCount",
   "end_ea": "0x556313",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_556300",
+  "name": "FaceGenEgtBasisBank_GetCount",
   "segment": ".text",
   "sha256": "42894480f126205b7cf7e24496d8fc9bb3161c94ab6c7238e31186c87354754b",
   "size": 19,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x556300",
-  "type": "int __thiscall(_DWORD *this)",
+  "total_chunk_size": 19,
+  "type": "unsigned int __thiscall(const FaceGenEgtBasisBank *self)",
   "xrefs_from_count": 8,
   "xrefs_to_count": 3
 }

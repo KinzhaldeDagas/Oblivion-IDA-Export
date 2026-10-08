@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7F1410",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Creates ShaderDefinition for SpeedTree leaf shader (GetShaderDefinition id 6): declaration id 4, SpeedTreeLeafShader object, programs/pass/constant maps.",
     "mnemonic": "push",
     "size": 2
   },
@@ -151,19 +151,19 @@
   },
   {
     "ea": "0x7F145A",
-    "line": "push    1; StreamCount",
+    "line": "push    1; streamCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F145C",
-    "line": "push    4; a2",
+    "line": "push    4; elementCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F145E",
-    "line": "push    eax; a1",
+    "line": "push    eax; renderer",
     "mnemonic": "push",
     "size": 1
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x7F1467",
-    "line": "call    CreateDX9ShaderDeclaration",
+    "line": "call    CreateDX9ShaderDeclaration; Oblivion NiDX9 declaration factory. Allocates a 0x38-byte NiDX9ShaderDeclaration and initializes elementCount internal element records for each streamCount stream.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x7F14B8",
-    "line": "call    eax",
+    "line": "call    eax; Leaf declaration element 0 is POSITION float3.",
     "mnemonic": "call",
     "size": 2
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x7F14CB",
-    "line": "call    eax",
+    "line": "call    eax; Leaf declaration element 1 is NORMAL float3.",
     "mnemonic": "call",
     "size": 2
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x7F14DE",
-    "line": "call    eax",
+    "line": "call    eax; Leaf declaration element 2 is TEXCOORD float2.",
     "mnemonic": "call",
     "size": 2
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x7F14FA",
-    "line": "call    eax",
+    "line": "call    eax; Leaf declaration element 3 supplies packed BLENDINDICES/card-wind data. No D3DDECLUSAGE_COLOR element is created, matching STLEAF VS bytecode's lack of vertex color input.",
     "mnemonic": "call",
     "size": 2
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x7F1510",
-    "line": "cmp     eax, offset dword_B3F684",
+    "line": "cmp     eax, offset stru_B3F684",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x7F153D",
-    "line": "call    ??0SpeedTreeLeafShader@@QAE@XZ; SpeedTreeLeafShader::SpeedTreeLeafShader(void)",
+    "line": "call    ??0SpeedTreeLeafShader@@QAE@XZ; SpeedTreeLeafShader ctor: BSShader base, four vertex-shader refs at +0x37C, two pixel-shader refs at +0x38C, pass +0x394, clears 0x300-byte leaf constant block and initializes global leaf wind/color scalars.",
     "mnemonic": "call",
     "size": 5
   },
@@ -781,7 +781,7 @@
   },
   {
     "ea": "0x7F156A",
-    "line": "call    sub_7F09D0",
+    "line": "call    OB_SpeedTreeLeafPass_Build_010201A0; SpeedTree leaf pass builder: texture stage uses wrap+linear; render states set ZENABLE=TRUE, ZFUNC=LESSEQUAL, ZWRITEENABLE=TRUE.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1024,5 +1024,107 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9D0CA0",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0CA3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D0CA4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0CA9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D0CAA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D0CAB",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0CAE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D0CAF",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0CB4",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D0CB5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D0CB6",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D0CBA",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0CBD",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0CC0",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D0CC2",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0CC7",
+    "line": "mov     eax, offset stru_AF94E0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0CCC",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

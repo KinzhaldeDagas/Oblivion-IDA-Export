@@ -1,10 +1,22 @@
 {
   "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 22,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x679850",
+      "0x679A53"
+    ],
+    [
+      "0x9C48C0",
+      "0x9C4912"
+    ]
+  ],
   "chunks_sha256": "17184aa876a0480a978347a828d475bc560b730a68f8e25b0e145cd537c45484",
   "comment_regular": "[Verified] ActorProcessManager_LoadTempEffects reads a UInt16 count and one-byte type tags. Type 0 constructs BSTempEffectDecal; type 1 constructs BSTempEffectGeometryDecal; type 2 constructs BSTempEffectParticle; types 5/6 construct MagicModelHitEffect/MagicShaderHitEffect. Successful virtual LoadGame results are re-registered by GetTypeID. The base BSTempEffect type returns 3 but is not saveable; type 4 has no handler in this switch and its producer/restore role remains Unknown.",
   "comment_repeatable": "[Verified] ActorProcessManager_LoadTempEffects reads a UInt16 count and one-byte type tags. Type 0 constructs BSTempEffectDecal; type 1 constructs BSTempEffectGeometryDecal; type 2 constructs BSTempEffectParticle; types 5/6 construct MagicModelHitEffect/MagicShaderHitEffect. Successful virtual LoadGame results are re-registered by GetTypeID. The base BSTempEffect type returns 3 but is not saveable; type 4 has no handler in this switch and its producer/restore role remains Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 5,
   "display_name": "ActorProcessManager_LoadTempEffects",
   "end_ea": "0x679A53",
@@ -15,6 +27,7 @@
   "segment": ".text",
   "sha256": "dd33fa2946e5d5292c13e7749ee6e7d179ce51366e34c8ef2872656f0a0272ec",
   "size": 515,
+  "source_annotation_confidence": "Verified",
   "start_ea": "0x679850",
   "total_chunk_size": 597,
   "type": "void __thiscall(ActorProcessManager *self)",

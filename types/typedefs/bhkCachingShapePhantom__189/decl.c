@@ -1,1 +1,1 @@
-bhkCachingShapePhantom
+struct bhkCachingShapePhantom;

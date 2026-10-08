@@ -1,1 +1,1 @@
-GLYPHSET
+typedef tagGLYPHSET GLYPHSET;

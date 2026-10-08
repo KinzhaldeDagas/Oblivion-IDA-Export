@@ -15,7 +15,7 @@
 0x4349D6: mov     [esp+20h+var_10], edi
 0x4349DA: push    3
 0x4349DC: mov     [esp+24h+var_4], 0
-0x4349E4: call    nullsub_returnTrue_0arg
+0x4349E4: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x4349E9: mov     esi, [edi+8]
 0x4349EC: mov     ebp, ds:InterlockedDecrement
 0x4349F2: add     esp, 4
@@ -35,10 +35,10 @@
 0x434A0F: call    eax
 0x434A11: mov     dword ptr [edi+8], 0
 0x434A18: push    2
-0x434A1A: call    nullsub_returnTrue_0arg
+0x434A1A: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x434A1F: mov     eax, [edi]
 0x434A21: push    eax
-0x434A22: call    FormHeapFree
+0x434A22: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x434A27: mov     edi, [edi+8]
 0x434A2A: add     esp, 8
 0x434A2D: test    edi, edi
@@ -64,3 +64,13 @@
 0x434A5F: pop     ebp
 0x434A60: add     esp, 10h
 0x434A63: retn
+0x9AC1C0: mov     ecx, [ebp-10h]
+0x9AC1C3: add     ecx, 8; slot
+0x9AC1C6: jmp     NiPointerSlot_Release
+0x9AC1CB: mov     edx, [esp+arg_4]
+0x9AC1CF: lea     eax, [edx-10h]
+0x9AC1D2: mov     ecx, [edx-14h]
+0x9AC1D5: xor     ecx, eax
+0x9AC1D7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AC1DC: mov     eax, offset stru_AD8ED8
+0x9AC1E1: jmp     ___CxxFrameHandler3

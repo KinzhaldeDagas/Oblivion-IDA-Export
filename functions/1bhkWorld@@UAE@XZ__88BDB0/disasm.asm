@@ -39,7 +39,7 @@
 0x88BE1B: mov     ecx, edi
 0x88BE1D: call    sub_8BACC0
 0x88BE22: push    edi
-0x88BE23: call    FormHeapFree
+0x88BE23: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x88BE28: add     esp, 4
 0x88BE2B: mov     [esi+10h], ebx
 0x88BE2E: mov     eax, [esi]
@@ -54,19 +54,19 @@
 0x88BE45: call    edx
 0x88BE47: mov     eax, [esi+28h]
 0x88BE4A: push    eax
-0x88BE4B: call    FormHeapFree
+0x88BE4B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x88BE50: mov     eax, [esi+30h]
 0x88BE53: push    eax
-0x88BE54: call    FormHeapFree
+0x88BE54: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x88BE59: mov     eax, [esi+38h]
 0x88BE5C: push    eax
-0x88BE5D: call    FormHeapFree
+0x88BE5D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x88BE62: mov     eax, [esi+40h]
 0x88BE65: push    eax
-0x88BE66: call    FormHeapFree
+0x88BE66: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x88BE6B: mov     eax, [esi+48h]
 0x88BE6E: push    eax
-0x88BE6F: call    FormHeapFree
+0x88BE6F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x88BE74: add     esp, 14h
 0x88BE77: xor     edi, edi
 0x88BE79: cmp     [esi+64h], ebx
@@ -133,3 +133,63 @@
 0x88BF33: pop     ebx
 0x88BF34: add     esp, 10h
 0x88BF37: retn
+0x536DD0: mov     edx, ecx
+0x536DD2: mov     eax, [edx+8]
+0x536DD5: test    eax, eax
+0x536DD7: js      short locret_536E0F
+0x536DD9: mov     ecx, ds:0BA9DE4h
+0x536DDF: push    esi
+0x536DE0: mov     esi, large fs:2Ch
+0x536DE7: mov     ecx, [esi+ecx*4]
+0x536DEA: mov     ecx, [ecx+19Ch]
+0x536DF0: test    ecx, ecx
+0x536DF2: pop     esi
+0x536DF3: jnz     short loc_536DFB
+0x536DF5: mov     ecx, ds:0BA7D9Ch
+0x536DFB: mov     edx, [edx]
+0x536DFD: and     eax, 3FFFFFFFh
+0x536E02: add     eax, eax
+0x536E04: push    14h
+0x536E06: add     eax, eax
+0x536E08: push    eax
+0x536E09: push    edx
+0x536E0A: call    sub_8A75D0
+0x536E0F: retn
+0x88AE60: mov     edx, ecx
+0x88AE62: mov     eax, [edx+8]
+0x88AE65: test    eax, eax
+0x88AE67: js      short locret_88AEA1
+0x88AE69: mov     ecx, ds:0BA9DE4h
+0x88AE6F: push    esi
+0x88AE70: mov     esi, large fs:2Ch
+0x88AE77: mov     ecx, [esi+ecx*4]
+0x88AE7A: mov     ecx, [ecx+19Ch]
+0x88AE80: test    ecx, ecx
+0x88AE82: pop     esi
+0x88AE83: jnz     short loc_88AE8B
+0x88AE85: mov     ecx, ds:0BA7D9Ch
+0x88AE8B: mov     edx, [edx]
+0x88AE8D: and     eax, 3FFFFFFFh
+0x88AE92: add     eax, eax
+0x88AE94: add     eax, eax
+0x88AE96: push    14h
+0x88AE98: add     eax, eax
+0x88AE9A: push    eax
+0x88AE9B: push    edx
+0x88AE9C: call    sub_8A75D0
+0x88AEA1: retn
+0x9D5F10: mov     ecx, [ebp-10h]; this
+0x9D5F13: jmp     ??1bhkSerializable@@UAE@XZ; bhkSerializable::~bhkSerializable(void)
+0x9D5F18: mov     ecx, [ebp-10h]
+0x9D5F1B: add     ecx, 60h ; '`'
+0x9D5F1E: jmp     loc_536DD0
+0x9D5F23: mov     ecx, [ebp-10h]
+0x9D5F26: add     ecx, 6Ch ; 'l'
+0x9D5F29: jmp     loc_88AE60
+0x9D5F2E: mov     edx, [esp+arg_4]
+0x9D5F32: lea     eax, [edx-14h]
+0x9D5F35: mov     ecx, [edx-18h]
+0x9D5F38: xor     ecx, eax
+0x9D5F3A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D5F3F: mov     eax, offset stru_AFDEF0
+0x9D5F44: jmp     ___CxxFrameHandler3

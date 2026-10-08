@@ -40,7 +40,7 @@
 0x401FB7: mov     [esp+14h+var_4], 0FFFFFFFFh
 0x401FBF: jnz     short loc_401FD3
 0x401FC1: mov     ecx, esi
-0x401FC3: call    sub_402400
+0x401FC3: call    MemoryPool_Destroy; Destroys one small allocation pool: releases its 4 KiB pages, removes its registry entry, clears page metadata, frees its table, and deletes its lock.
 0x401FC8: push    esi
 0x401FC9: mov     ecx, offset FormHeap
 0x401FCE: call    MemoryHeap_Free
@@ -50,3 +50,15 @@
 0x401FDF: pop     esi
 0x401FE0: add     esp, 0Ch
 0x401FE3: retn    0Ch
+0x9AFAD0: mov     eax, [ebp+4]
+0x9AFAD3: push    eax
+0x9AFAD4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFAD9: pop     ecx
+0x9AFADA: retn
+0x9AFADB: mov     edx, [esp+arg_4]
+0x9AFADF: lea     eax, [edx-4]
+0x9AFAE2: mov     ecx, [edx-8]
+0x9AFAE5: xor     ecx, eax
+0x9AFAE7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AFAEC: mov     eax, offset stru_ADBFDC
+0x9AFAF1: jmp     ___CxxFrameHandler3

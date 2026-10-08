@@ -61,7 +61,7 @@
 0x88C817: jz      loc_88CBEC
 0x88C81D: mov     ecx, [esp+124h+var_108]
 0x88C821: push    ecx
-0x88C822: push    offset dword_BA8018
+0x88C822: push    offset stru_BA8018
 0x88C827: xor     edi, edi
 0x88C829: call    NiRTTI__IsObjectOfRTTIType
 0x88C82E: add     esp, 8
@@ -71,7 +71,7 @@
 0x88C839: jmp     loc_88C942
 0x88C83E: mov     edx, [esp+124h+var_108]
 0x88C842: push    edx
-0x88C843: push    offset dword_BA7D84
+0x88C843: push    offset stru_BA7D84
 0x88C848: call    NiRTTI_Cast
 0x88C84D: add     esp, 8
 0x88C850: push    eax
@@ -116,7 +116,7 @@
 0x88C8E5: mov     eax, [edx+94h]
 0x88C8EB: movaps  xmmword ptr [esi+30h], xmm0
 0x88C8EF: movaps  xmm0, [esp+124h+var_80]
-0x88C8F7: push    offset stru_BA7A40
+0x88C8F7: push    offset unk_BA7A40
 0x88C8FC: mov     ecx, esi
 0x88C8FE: movaps  xmmword ptr [esi+20h], xmm0
 0x88C902: call    eax
@@ -132,9 +132,9 @@
 0x88C923: push    0; a2
 0x88C925: lea     ecx, [esp+128h+var_108]; this
 0x88C929: call    NiSmartPointer_Set??
-0x88C92E: lea     ecx, [esp+124h+var_108]; this
+0x88C92E: lea     ecx, [esp+124h+var_108]; slot
 0x88C932: mov     [esp+124h+var_4], 0FFFFFFFFh
-0x88C93D: call    sub_7016A0
+0x88C93D: call    NiPointerSlot_Release
 0x88C942: test    edi, edi
 0x88C944: jz      loc_88CB9C
 0x88C94A: lea     ecx, [ebx+30h]
@@ -210,7 +210,7 @@
 0x88CA45: addps   xmm0, xmm2
 0x88CA48: addps   xmm5, xmm0
 0x88CA4B: movaps  [esp+12Ch+var_C0], xmm5
-0x88CA50: call    sub_88FCC0
+0x88CA50: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x88CA55: lea     edx, [esp+124h+var_60]
 0x88CA5C: push    edx
 0x88CA5D: lea     ecx, [esp+128h+var_90]
@@ -288,7 +288,7 @@
 0x88CB64: addps   xmm0, xmm3
 0x88CB67: movaps  [esp+128h+var_C0], xmm0
 0x88CB6C: movaps  xmmword ptr [edi+30h], xmm0
-0x88CB70: movaps  xmm0, xmmword ptr [esp+128h+var_A0]
+0x88CB70: movaps  xmm0, [esp+128h+var_A0]
 0x88CB78: movaps  xmmword ptr [esi], xmm0
 0x88CB7B: call    sub_435CE0
 0x88CB80: push    0
@@ -360,3 +360,21 @@
 0x88CC72: mov     esp, ebp
 0x88CC74: pop     ebp
 0x88CC75: retn    8
+0x9D5F80: lea     ecx, [ebp+var_108]; slot
+0x9D5F86: jmp     NiPointerSlot_Release
+0x9D5F8B: mov     eax, dword ptr [ebp+var_E0+0Ch]
+0x9D5F91: push    eax
+0x9D5F92: call    sub_6078C0
+0x9D5F97: pop     ecx
+0x9D5F98: retn
+0x9D5F99: mov     edx, [esp-4+arg_4]
+0x9D5F9D: lea     eax, [edx-114h]
+0x9D5FA3: mov     ecx, [edx-118h]
+0x9D5FA9: xor     ecx, eax
+0x9D5FAB: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D5FB0: add     eax, 0Ch
+0x9D5FB3: mov     ecx, [edx-8]
+0x9D5FB6: xor     ecx, eax
+0x9D5FB8: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D5FBD: mov     eax, offset stru_AFDF80
+0x9D5FC2: jmp     ___CxxFrameHandler3

@@ -1,1 +1,1 @@
-PVALENTW
+typedef value_entW *PVALENTW;

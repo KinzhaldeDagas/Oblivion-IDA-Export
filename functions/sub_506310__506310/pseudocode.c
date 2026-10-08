@@ -11,12 +11,12 @@ bool __cdecl sub_506310(
   bool result; // al
   UInt16 v9[2]; // [esp+0h] [ebp-4h] BYREF
 
-  *(_DWORD *)v9 = 0;
-  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v9);
-  if ( result )
+  *(_DWORD *)v9 = 0; /*0x50633a*/
+  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v9); /*0x506342*/
+  if ( result ) /*0x50634c*/
   {
-    sub_4F8590((int)a4, *(int *)v9, 0, a7);
-    return 1;
+    sub_4F8590((int)a4, *(int *)v9, 0, a7); /*0x50635e*/
+    return 1; /*0x506366*/
   }
-  return result;
+  return result; /*0x506350*/
 }

@@ -1,19 +1,36 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x717710",
+      "0x717790"
+    ],
+    [
+      "0x9CA7E0",
+      "0x9CA806"
+    ]
+  ],
+  "chunks_sha256": "7bf59d6e1e6db296a91189b98cc3cabd891b013a88d8ba3c9f3040ce36d8dbfc",
+  "comment_regular": "\nVerified thiscall one NiCloningProcess stack arg, ret4. Allocates C0, calls7226C0 then explicitly installs native NiTriShape vtable A7ED5C, and CopyMembers thunk722700. A plugin subclass must override CreateClone to preserve its private vtable and registry metadata; merely inheriting this function loses both. Fallout82BFB5B0 corroborates allocation/constructor/vptr/copy sequence with different size.\n[2026-10-03 implemented frond clone correction] Plugin private shape vtable now overrides+18 with factory: allocateC0, constructor7226C0, install private vtable, reserve per-shape metadata before native CopyMembers722700 registers clone map. Preserves native geometry-data sharing, property/extra-data/controller cloning. Allocation or metadata reservation failure returns null before native map registration. +38 wrapper guards absent clone map entry then calls native723050 and remaps root/group metadata through55E000.\n\n\n\n[2026-10-03 offline clone correction] Plugin private shape clone now checkpoints both NiCloningProcess maps before allocation, guards native CopyMembers722700, verifies source->destination registration and local property copies, and restores maps before releasing a failed clone. Custom shader-property cloning gets the same transaction; groups reuse it. C++ exceptions are rethrown after rollback; AV during member copy becomes incomplete-copy failure.46controlled transaction checks pass; live validation explicitly deferred by user. Constructor faults/unknown map mutations are not claimed fully recoverable.",
   "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_717710",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "OB_NiTriShape_CreateClone",
   "end_ea": "0x717790",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_717710",
+  "name": "OB_NiTriShape_CreateClone",
   "segment": ".text",
   "sha256": "5b63f5214dd7bb4ef86383b57c88c5f245d1e5afcfc476a14d1374bb252746dc",
   "size": 128,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x717710",
-  "type": "NiAVObject *__stdcall(int)",
-  "xrefs_from_count": 45,
+  "total_chunk_size": 166,
+  "type": "void *__thiscall(void *this, void *cloningProcess)",
+  "xrefs_from_count": 59,
   "xrefs_to_count": 2
 }

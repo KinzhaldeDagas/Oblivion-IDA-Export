@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x6EF690",
-    "line": "mov     eax, [ebp+arg_C]",
+    "line": "mov     eax, [ebp+begin]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x6EF69E",
-    "line": "push    offset sub_794EB0; void (__thiscall *)(void *)",
+    "line": "push    offset OB_stVector4_DestroyThiscall_010201A0; void (__thiscall *)(void *)",
     "mnemonic": "push",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x6EF6DD",
-    "line": "mov     edi, [ebp+arg_8]",
+    "line": "mov     edi, [ebp+end]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x6EF6FF",
-    "line": "call    sub_790B90",
+    "line": "call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error(\"vector<T> too long\") and throws; used by multiple element specializations after max_size checks.",
     "mnemonic": "call",
     "size": 5
   },
@@ -619,13 +619,13 @@
   },
   {
     "ea": "0x6EF76E",
-    "line": "mov     [ebp+arg_8], eax",
+    "line": "mov     [ebp+end], eax",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x6EF771",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+end]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x6EF777",
-    "line": "mov     [ebp+arg_C], eax",
+    "line": "mov     [ebp+begin], eax",
     "mnemonic": "mov",
     "size": 3
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x6EF793",
-    "line": "mov     [ebp+arg_8], eax",
+    "line": "mov     [ebp+end], eax",
     "mnemonic": "mov",
     "size": 3
   },
@@ -757,13 +757,13 @@
   },
   {
     "ea": "0x6EF7A6",
-    "line": "mov     [ebp+arg_8], eax",
+    "line": "mov     [ebp+end], eax",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x6EF7A9",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+end]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -895,13 +895,13 @@
   },
   {
     "ea": "0x6EF7DF",
-    "line": "push    edx",
+    "line": "push    edx; end",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6EF7E0",
-    "line": "push    ecx",
+    "line": "push    ecx; begin",
     "mnemonic": "push",
     "size": 1
   },
@@ -913,7 +913,7 @@
   },
   {
     "ea": "0x6EF7E3",
-    "line": "call    sub_557740",
+    "line": "call    FaceGenEgtBasisRecordArray_Destruct; Destroy the three owned image-channel vectors at +0x10 in every 64-byte EGT basis record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -931,7 +931,7 @@
   },
   {
     "ea": "0x6EF7EC",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -943,7 +943,7 @@
   },
   {
     "ea": "0x6EF7F4",
-    "line": "mov     eax, [ebp+arg_C]",
+    "line": "mov     eax, [ebp+begin]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -997,13 +997,13 @@
   },
   {
     "ea": "0x6EF80F",
-    "line": "mov     eax, [ebp+arg_8]",
+    "line": "mov     eax, [ebp+end]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x6EF812",
-    "line": "mov     esi, [ebp+arg_C]",
+    "line": "mov     esi, [ebp+begin]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1015,19 +1015,19 @@
   },
   {
     "ea": "0x6EF818",
-    "line": "push    eax",
+    "line": "push    eax; end",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6EF819",
-    "line": "push    esi",
+    "line": "push    esi; begin",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6EF81A",
-    "line": "call    sub_557740",
+    "line": "call    FaceGenEgtBasisRecordArray_Destruct; Destroy the three owned image-channel vectors at +0x10 in every 64-byte EGT basis record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1039,7 +1039,7 @@
   },
   {
     "ea": "0x6EF820",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1129,7 +1129,7 @@
   },
   {
     "ea": "0x6EF84A",
-    "line": "mov     [ebp+arg_C], ecx",
+    "line": "mov     [ebp+begin], ecx",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1243,7 +1243,7 @@
   },
   {
     "ea": "0x6EF876",
-    "line": "mov     eax, [ebp+arg_C]",
+    "line": "mov     eax, [ebp+begin]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1321,7 +1321,7 @@
   },
   {
     "ea": "0x6EF89B",
-    "line": "mov     eax, [ebp+arg_8]",
+    "line": "mov     eax, [ebp+end]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1345,7 +1345,7 @@
   },
   {
     "ea": "0x6EF8A6",
-    "line": "push    edx",
+    "line": "push    edx; end",
     "mnemonic": "push",
     "size": 1
   },
@@ -1363,13 +1363,13 @@
   },
   {
     "ea": "0x6EF8AC",
-    "line": "push    eax",
+    "line": "push    eax; begin",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6EF8AD",
-    "line": "call    sub_557740",
+    "line": "call    FaceGenEgtBasisRecordArray_Destruct; Destroy the three owned image-channel vectors at +0x10 in every 64-byte EGT basis record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1429,7 +1429,7 @@
   },
   {
     "ea": "0x6EF8C6",
-    "line": "mov     [ebp+arg_C], ecx",
+    "line": "mov     [ebp+begin], ecx",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1489,7 +1489,7 @@
   },
   {
     "ea": "0x6EF8DF",
-    "line": "mov     edx, [ebp+arg_C]",
+    "line": "mov     edx, [ebp+begin]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1537,7 +1537,7 @@
   },
   {
     "ea": "0x6EF8F2",
-    "line": "push    offset sub_794EB0; void (__thiscall *)(void *)",
+    "line": "push    offset OB_stVector4_DestroyThiscall_010201A0; void (__thiscall *)(void *)",
     "mnemonic": "push",
     "size": 5
   },
@@ -1630,5 +1630,101 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x556E10",
+    "line": "push    offset OB_stVector4_DestroyThiscall_010201A0; void (__thiscall *)(void *)",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x556E15",
+    "line": "push    3; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x556E17",
+    "line": "push    10h; unsigned int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x556E19",
+    "line": "add     ecx, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x556E1C",
+    "line": "push    ecx; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x556E1D",
+    "line": "call    $LN21",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x556E22",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C85C0",
+    "line": "lea     ecx, [ebp+var_58]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C85C3",
+    "line": "jmp     loc_556E10",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C85C8",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C85CC",
+    "line": "lea     eax, [edx+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C85CF",
+    "line": "mov     ecx, [edx-5Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C85D2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C85D4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C85D9",
+    "line": "mov     eax, offset stru_AF0968",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C85DE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4DB830",
-    "line": "push    esi",
+    "line": "push    esi; Verified effective ownership-rank lookup order: this reference's XRNK, then linked door XRNK, then parent cell's required rank; missing rank defaults to zero. Fallout's TESObjectREFR::GetOwnershipRank inserts EncounterZone owner-rank between linked-door and parent-cell checks; Oblivion has no encounter-zone branch here.",
     "mnemonic": "push",
     "size": 1
   },
@@ -25,13 +25,13 @@
   },
   {
     "ea": "0x4DB837",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DB839",
-    "line": "call    sub_41E7F0",
+    "line": "call    ExtraDataList_GetRank; Verified accessor: returns ExtraRank.rank as signed 32-bit; returns -1 when kExtraData_Rank is absent. Cell ownership compares this required rank against the actor's faction rank.",
     "mnemonic": "call",
     "size": 5
   },
@@ -79,13 +79,13 @@
   },
   {
     "ea": "0x4DB850",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DB852",
-    "line": "call    sub_42B410",
+    "line": "call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.",
     "mnemonic": "call",
     "size": 5
   },
@@ -103,25 +103,25 @@
   },
   {
     "ea": "0x4DB85B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DB85D",
-    "line": "call    sub_42B410",
+    "line": "call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4DB862",
-    "line": "lea     ecx, [eax+44h]",
+    "line": "lea     ecx, [eax+44h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x4DB865",
-    "line": "call    sub_41E7F0",
+    "line": "call    ExtraDataList_GetRank; Verified accessor: returns ExtraRank.rank as signed 32-bit; returns -1 when kExtraData_Rank is absent. Cell ownership compares this required rank against the actor's faction rank.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x4DB86F",
-    "line": "mov     ecx, [edi+40h]",
+    "line": "mov     ecx, [edi+40h]; cell",
     "mnemonic": "mov",
     "size": 3
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x4DB876",
-    "line": "call    sub_4CA990",
+    "line": "call    TESObjectCELL_GetRequiredOwnerFactionRank; Verified cell helper: returns ExtraRank.rank from the cell's XRNK extra, substituting 0 when no rank extra exists.",
     "mnemonic": "call",
     "size": 5
   },

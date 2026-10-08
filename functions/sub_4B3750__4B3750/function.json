@@ -1,19 +1,36 @@
 {
-  "callees_count": 86,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 37,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 5,
-  "display_name": "sub_4B3750",
+  "chunks": [
+    [
+      "0x4B3750",
+      "0x4B3C63"
+    ],
+    [
+      "0x9B3370",
+      "0x9B33E6"
+    ]
+  ],
+  "chunks_sha256": "176da744007b826473329395bc7c15d342b40989d27d9842c5821fe24cebc8fd",
+  "comment_regular": "Generic bound-object 3D implementation used by many form classes. Obtains/caches the model, clones its NiNode tree for the reference, applies scale, and resets the clone's local transform.",
+  "comment_repeatable": "Generic bound-object 3D implementation used by many form classes. Obtains/caches the model, clones its NiNode tree for the reference, applies scale, and resets the clone's local transform.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 13,
+  "display_name": "TESBoundObject_Create3DImpl",
   "end_ea": "0x4B3C63",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4B3750",
+  "name": "TESBoundObject_Create3DImpl",
   "segment": ".text",
   "sha256": "cd5015793bda7f786f3b29da8f9eebd90a684688086092152fcb94503c30b417",
   "size": 1299,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4B3750",
-  "type": "NiNode *__thiscall(_BYTE *this, TESChildCELL *, int)",
-  "xrefs_from_count": 477,
+  "total_chunk_size": 1417,
+  "type": "NiNode *__thiscall(TESBoundObject *this, TESObjectREFR *reference, int arg1)",
+  "xrefs_from_count": 509,
   "xrefs_to_count": 33
 }

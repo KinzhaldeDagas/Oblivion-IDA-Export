@@ -1,19 +1,36 @@
 {
-  "callees_count": 30,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 22,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 5,
+  "chunks": [
+    [
+      "0x50BB70",
+      "0x50BD7D"
+    ],
+    [
+      "0x9B6DF0",
+      "0x9B6E13"
+    ]
+  ],
+  "chunks_sha256": "cc2fc259805c566eb213eb57684f1a21ac33a26e9a6f28f1eee32697c6b4c8ce",
+  "comment_regular": "Verified behavior: this script-style wrapper extracts a reference and boolean; true sets a target flag, and when the player's current cell owner matches that reference it temporarily enables TravelPath ignore-locks/minimal-use settings, builds a TravelPath from the player to exterior WorldSpace FormID 0x3C at the origin, restores the settings, finds a route reference, and if it has a linked door calls TESObjectDOOR_TransitionPlayerThroughLinkedDoor. False clears the target flag. Candidate command-dispatch role is supported by Script_ExtractArgs/ParamInfo signature; exact command identity remains Unknown because no Oblivion registration entry, command name, or xref was found.",
+  "comment_repeatable": "Verified behavior: this script-style wrapper extracts a reference and boolean; true sets a target flag, and when the player's current cell owner matches that reference it temporarily enables TravelPath ignore-locks/minimal-use settings, builds a TravelPath from the player to exterior WorldSpace FormID 0x3C at the origin, restores the settings, finds a route reference, and if it has a linked door calls TESObjectDOOR_TransitionPlayerThroughLinkedDoor. False clears the target flag. Candidate command-dispatch role is supported by Script_ExtractArgs/ParamInfo signature; exact command identity remains Unknown because no Oblivion registration entry, command name, or xref was found.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 9,
   "display_name": "sub_50BB70",
   "end_ea": "0x50BD7D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_50BB70",
   "segment": ".text",
   "sha256": "f39a15e6456640bda317d2c1d5d29b9470753601eaa0228ed959033d1cc24f24",
   "size": 525,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x50BB70",
+  "total_chunk_size": 560,
   "type": "void __usercall(double st0_0@<st7>, double@<st4>, double st4_0@<st3>, double st5_0@<st2>, double@<st1>, double@<st6>, double@<st5>, ParamInfo *, UInt8 *, TESObjectREFR *, TESObjectREFR *, Script *, ScriptEventList *l, int, UInt32 *)",
-  "xrefs_from_count": 192,
-  "xrefs_to_count": 1
+  "xrefs_from_count": 206,
+  "xrefs_to_count": 0
 }

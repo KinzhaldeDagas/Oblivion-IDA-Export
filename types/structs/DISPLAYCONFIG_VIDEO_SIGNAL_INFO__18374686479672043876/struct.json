@@ -1,52 +1,90 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "DISPLAYCONFIG_VIDEO_SIGNAL_INFO",
+  "definition": "struct DISPLAYCONFIG_VIDEO_SIGNAL_INFO\n{\nUINT64 pixelRate;\nDISPLAYCONFIG_RATIONAL_0 hSyncFreq;\nDISPLAYCONFIG_RATIONAL_0 vSyncFreq;\nDISPLAYCONFIG_2DREGION_0 activeSize;\nDISPLAYCONFIG_2DREGION_0 totalSize;\n$85FCBA166D21D6629CB26B3AAB65A098 u;\nDISPLAYCONFIG_SCANLINE_ORDERING scanLineOrdering;\n}\n",
   "id": 18374686479672043876,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pixelRate",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "UINT64"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hSyncFreq",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 8
+      "size": 8,
+      "type": "DISPLAYCONFIG_RATIONAL_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "vSyncFreq",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 8
+      "size": 8,
+      "type": "DISPLAYCONFIG_RATIONAL_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "activeSize",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 8
+      "size": 8,
+      "type": "DISPLAYCONFIG_2DREGION_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "totalSize",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 8
+      "size": 8,
+      "type": "DISPLAYCONFIG_2DREGION_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "u",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "$85FCBA166D21D6629CB26B3AAB65A098"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "scanLineOrdering",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "DISPLAYCONFIG_SCANLINE_ORDERING"
     }
   ],
   "name": "DISPLAYCONFIG_VIDEO_SIGNAL_INFO",
+  "ordinal": 7632,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 48
 }

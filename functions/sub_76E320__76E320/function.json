@@ -1,18 +1,31 @@
 {
-  "callees_count": 13,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x76E320",
+      "0x76E412"
+    ]
+  ],
+  "chunks_sha256": "7f5a13d4de22a0a73c0c32a2a75ccc30ca14d6dc7a8c7c9aba523176430a6509",
+  "comment_regular": "Oblivion NiDX9 declaration initializer. Binds renderer, buffer manager, and D3D device, then allocates stream descriptors and elementCount 0x1C-byte element records for each stream.\n\nInitializes NiDX9ShaderDeclaration from the renderer/device and stream count, AddRefs the D3D device, and allocates per-stream descriptors with disabled element slots.",
+  "comment_repeatable": "Oblivion NiDX9 declaration initializer. Binds renderer, buffer manager, and D3D device, then allocates stream descriptors and elementCount 0x1C-byte element records for each stream.\nDeclaration family 2026-10-01: initializer allocates StreamCount*10h descriptor bytes and MaxStreamEntryCount*1Ch entry bytes per stream, binds/AddRefs device, renderer and buffer manager. Together with 771150/770150 this validates the typed stream/entry fields independently of the comparative Fallout names.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_76E320",
+  "display_name": "NiDX9ShaderDeclaration__Initialize",
   "end_ea": "0x76E412",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_76E320",
+  "name": "NiDX9ShaderDeclaration__Initialize",
   "segment": ".text",
   "sha256": "7f5a13d4de22a0a73c0c32a2a75ccc30ca14d6dc7a8c7c9aba523176430a6509",
   "size": 242,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x76E320",
+  "total_chunk_size": 242,
   "type": "char __thiscall(NiDX9ShaderDeclaration *this, NiDX9Renderer *a2, int a3, int a4)",
   "xrefs_from_count": 99,
   "xrefs_to_count": 1

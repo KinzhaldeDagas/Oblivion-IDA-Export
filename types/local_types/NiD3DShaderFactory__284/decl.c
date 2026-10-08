@@ -1,1 +1,1 @@
-NiD3DShaderFactory
+struct NiD3DShaderFactory;

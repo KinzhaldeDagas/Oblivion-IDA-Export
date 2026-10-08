@@ -28,10 +28,13 @@
 0x778CD0: call    edx
 0x778CD2: mov     eax, [edi+4]
 0x778CD5: push    eax
-0x778CD6: call    FormHeapFree
+0x778CD6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x778CDB: add     esp, 4
 0x778CDE: mov     ecx, edi
 0x778CE0: pop     edi
 0x778CE1: pop     esi
 0x778CE2: pop     ebx
 0x778CE3: jmp     loc_725D80
+0x725D80: mov     dword ptr [ecx], offset ??_7NiGeometryGroupManager@@6B@; const NiGeometryGroupManager::`vftable'
+0x725D86: mov     dword ptr ds:0B3FD8Ch, 0
+0x725D90: retn

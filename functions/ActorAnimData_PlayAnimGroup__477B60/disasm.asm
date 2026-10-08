@@ -1,11 +1,11 @@
-0x477B60: sub     esp, 0Ch
+0x477B60: sub     esp, 0Ch; Native group dispatcher. Reads fixed group-table slot (+0x08) and note-template class (+0x0C), normalizing slot aliases 5->0 and 6->3. For note classes 0/1, playImmediately=0 stores only the encoded key at ActorAnimData +0x70[slot] and repeat/action value at +0x7C[slot]; playImmediately=1 clears that queue and plays now. Classes 2..7 play immediately. No queued sequence pointer or path is stored.
 0x477B63: push    ebx
-0x477B64: mov     ebx, [esp+10h+arg_0]
+0x477B64: mov     ebx, [esp+10h+encodedKey]
 0x477B68: push    esi
 0x477B69: push    edi
 0x477B6A: push    ebx
 0x477B6B: mov     esi, ecx
-0x477B6D: call    sub_51AA00
+0x477B6D: call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.
 0x477B72: lea     ecx, [eax+eax*8]
 0x477B75: add     ecx, ecx
 0x477B77: mov     edx, ds:dword_B102E8[ecx+ecx]
@@ -26,23 +26,23 @@
 0x477BAC: ja      short ActorAnimData_PlayAnimGroup___def_477BB5
 0x477BAE: movzx   eax, ds:byte_477C38[ecx]
 0x477BB5: jmp     ds:jpt_477BB5[eax*4]; switch jump
-0x477BBC: mov     eax, [esp+18h+arg_4]; jumptable 00477BB5 cases 0,1
+0x477BBC: mov     eax, [esp+18h+playImmediately]; jumptable 00477BB5 cases 0,1
 0x477BC0: sub     eax, 0
 0x477BC3: jz      short loc_477BEC
 0x477BC5: sub     eax, 1
 0x477BC8: jnz     short ActorAnimData_PlayAnimGroup___def_477BB5
-0x477BCA: mov     ecx, [esp+18h+arg_8]
+0x477BCA: mov     ecx, [esp+18h+repeatOrAction]
 0x477BCE: mov     word ptr [esi+edx*2+70h], 0FFh
 0x477BD5: push    0FFFFFFFFh
 0x477BD7: mov     [esi+edx*4+5Ch], ecx
 0x477BDB: push    ebx
 0x477BDC: mov     ecx, esi
-0x477BDE: call    sub_476260
+0x477BDE: call    ActorAnimData_PlayEncodedGroup; CustomAnimSupport hook target: ActorAnimData_PlayEncodedGroup. Resolves encoded key in animsMap, selects single/multiple sequence, then forwards to ActorAnimData_PlaySequence.
 0x477BE3: push    1
 0x477BE5: lea     edx, [esp+1Ch+var_C]
 0x477BE9: push    edx
 0x477BEA: jmp     short loc_477C13
-0x477BEC: mov     eax, [esp+18h+arg_8]
+0x477BEC: mov     eax, [esp+18h+repeatOrAction]
 0x477BF0: mov     [esi+edx*2+70h], bx
 0x477BF5: pop     edi
 0x477BF6: mov     [esi+edx*4+7Ch], eax
@@ -53,7 +53,7 @@
 0x477C02: push    0FFFFFFFFh; jumptable 00477BB5 cases 2-7
 0x477C04: push    ebx
 0x477C05: mov     ecx, esi
-0x477C07: call    sub_476260
+0x477C07: call    ActorAnimData_PlayEncodedGroup; CustomAnimSupport hook target: ActorAnimData_PlayEncodedGroup. Resolves encoded key in animsMap, selects single/multiple sequence, then forwards to ActorAnimData_PlaySequence.
 0x477C0C: push    1; int
 0x477C0E: lea     ecx, [esp+1Ch+var_C]
 0x477C12: push    ecx; int
@@ -61,4 +61,4 @@
 0x477C19: push    ecx
 0x477C1A: mov     ecx, esi
 0x477C1C: fstp    [esp+24h+var_24]; float
-0x477C1F: call    sub_471230
+0x477C1F: call    ActorAnimData_SampleAndExtractRootMotion; Samples the actor scene graph while extracting accumulation/root motion. Seeds AccumNode +0x54 from ActorAnimData +0x18, updates RootNode at the requested time, optionally copies the resulting AccumNode translation to the caller, then zeroes AccumNode +0x54. Used after forced play, animation-state restore, and explicit play-group paths.

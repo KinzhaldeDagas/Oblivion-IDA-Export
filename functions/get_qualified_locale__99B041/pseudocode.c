@@ -1,106 +1,106 @@
-int __cdecl __get_qualified_locale(int a1, _WORD *a2, char *Dst)
+int __usercall __get_qualified_locale@<eax>(int a1@<ebp>, int a2, _WORD *a3, char *Dst)
 {
-  DWORD *v3; // eax
-  int v4; // esi
-  const char **v5; // edi
-  _BYTE *v6; // eax
-  bool v7; // zf
-  const char *v8; // edi
+  DWORD *v4; // eax
+  int v5; // esi
+  const char **v6; // edi
+  _BYTE *v7; // eax
+  bool v8; // zf
   const char *v9; // edi
+  const char *v10; // edi
   LCID UserDefaultLCID; // eax
-  int v11; // eax
-  int v12; // ebx
-  int v13; // edx
-  int v14; // ecx
-  int v16; // [esp+0h] [ebp-10h]
+  int v12; // eax
+  int v13; // ebx
+  int v14; // edx
+  int v15; // ecx
+  int v17; // [esp+0h] [ebp-10h]
 
-  v3 = _getptd();
-  v4 = (int)(v3 + 0x27);
-  if ( !a1 )
+  v4 = _getptd(a1); /*0x99b045*/
+  v5 = (int)(v4 + 0x27); /*0x99b052*/
+  if ( !a2 ) /*0x99b05a*/
   {
-    v3[0x29] |= 0x104u;
+    v4[0x29] |= 0x104u; /*0x99b05c*/
 LABEL_23:
-    UserDefaultLCID = GetUserDefaultLCID();
-    *(_DWORD *)(v4 + 0x18) = UserDefaultLCID;
-    *(_DWORD *)(v4 + 0x1C) = UserDefaultLCID;
-    goto LABEL_24;
+    UserDefaultLCID = GetUserDefaultLCID(); /*0x99b119*/
+    *(_DWORD *)(v5 + 0x18) = UserDefaultLCID; /*0x99b11f*/
+    *(_DWORD *)(v5 + 0x1C) = UserDefaultLCID; /*0x99b122*/
+    goto LABEL_24; /*0x99b122*/
   }
-  v5 = (const char **)(v3 + 0x28);
-  *(_DWORD *)v4 = a1;
-  v3[0x28] = a1 + 0x40;
-  if ( a1 != 0xFFFFFFC0 )
+  v6 = (const char **)(v4 + 0x28); /*0x99b06d*/
+  *(_DWORD *)v5 = a2; /*0x99b070*/
+  v4[0x28] = a2 + 0x40; /*0x99b072*/
+  if ( a2 != 0xFFFFFFC0 ) /*0x99b074*/
   {
-    if ( *(_BYTE *)(a1 + 0x40) )
-      TranslateName((int)&off_AB06F0, 0x16, (unsigned __int8 **)v3 + 0x28);
+    if ( *(_BYTE *)(a2 + 0x40) ) /*0x99b076*/
+      TranslateName((int)&off_AB06F0, 0x16, (const char **)v4 + 0x28); /*0x99b082*/
   }
-  v6 = *(_BYTE **)v4;
-  v7 = *(_DWORD *)v4 == 0;
-  *(_DWORD *)(v4 + 8) = 0;
-  if ( v7 || !*v6 )
+  v7 = *(_BYTE **)v5; /*0x99b08a*/
+  v8 = *(_DWORD *)v5 == 0; /*0x99b08c*/
+  *(_DWORD *)(v5 + 8) = 0; /*0x99b08e*/
+  if ( v8 || !*v7 ) /*0x99b093*/
   {
-    v9 = *v5;
-    if ( !v9 || !*v9 )
+    v10 = *v6; /*0x99b0de*/
+    if ( !v10 || !*v10 ) /*0x99b0e4*/
     {
-      *(_DWORD *)(v4 + 8) = 0x104;
-      goto LABEL_23;
+      *(_DWORD *)(v5 + 8) = 0x104; /*0x99b112*/
+      goto LABEL_23; /*0x99b112*/
     }
-    *(_DWORD *)(v4 + 0x14) = strlen(v9) == 3;
-    EnumSystemLocalesA((LOCALE_ENUMPROCA)CountryEnumProc, 1u);
-    if ( (*(_BYTE *)(v4 + 8) & 4) == 0 )
-      *(_DWORD *)(v4 + 8) = 0;
+    *(_DWORD *)(v5 + 0x14) = strlen(v10) == 3; /*0x99b0fe*/
+    EnumSystemLocalesA((LOCALE_ENUMPROCA)CountryEnumProc, 1u); /*0x99b101*/
+    if ( (*(_BYTE *)(v5 + 8) & 4) == 0 ) /*0x99b10b*/
+      *(_DWORD *)(v5 + 8) = 0; /*0x99b10d*/
 LABEL_24:
-    if ( !*(_DWORD *)(v4 + 8) )
-      return 0;
-    goto LABEL_25;
+    if ( !*(_DWORD *)(v5 + 8) ) /*0x99b128*/
+      return 0; /*0x99b128*/
+    goto LABEL_25; /*0x99b128*/
   }
-  if ( *v5 && **v5 )
-    GetLcidFromLangCountry(v4);
+  if ( *v6 && **v6 ) /*0x99b09d*/
+    GetLcidFromLangCountry(v5); /*0x99b0a1*/
   else
-    GetLcidFromLanguage(v4);
-  if ( !*(_DWORD *)(v4 + 8) )
+    GetLcidFromLanguage(v5); /*0x99b0a8*/
+  if ( !*(_DWORD *)(v5 + 8) ) /*0x99b0ad*/
   {
-    if ( TranslateName((int)&off_AB04E8, 0x40, (unsigned __int8 **)v4) )
+    if ( TranslateName((int)&off_AB04E8, 0x40, (const char **)v5) ) /*0x99b0ba*/
     {
-      v8 = *v5;
-      if ( v8 && *v8 )
-        GetLcidFromLangCountry(v4);
+      v9 = *v6; /*0x99b0c6*/
+      if ( v9 && *v9 ) /*0x99b0cc*/
+        GetLcidFromLangCountry(v5); /*0x99b0d0*/
       else
-        GetLcidFromLanguage(v4);
+        GetLcidFromLanguage(v5); /*0x99b0d7*/
     }
-    goto LABEL_24;
+    goto LABEL_24; /*0x99b0d5*/
   }
 LABEL_25:
-  v11 = ProcessCodePage(a1 != 0 ? (char *)(a1 + 0x80) : 0, v4);
-  v12 = v11;
-  if ( !v11
-    || v11 == 0xFDE8
-    || v11 == 0xFDE9
-    || !IsValidCodePage((unsigned __int16)v11)
-    || !IsValidLocale(*(_DWORD *)(v4 + 0x18), 1u) )
+  v12 = ProcessCodePage(a2 != 0 ? (char *)(a2 + 0x80) : 0, v5);
+  v13 = v12; /*0x99b143*/
+  if ( !v12 /*0x99b17c*/
+    || v12 == 0xFDE8
+    || v12 == 0xFDE9
+    || !IsValidCodePage((unsigned __int16)v12)
+    || !IsValidLocale(*(_DWORD *)(v5 + 0x18), 1u) )
   {
-    return 0;
+    return 0; /*0x99b184*/
   }
-  if ( a2 )
+  if ( a3 ) /*0x99b190*/
   {
-    *a2 = *(_WORD *)(v4 + 0x18);
-    a2[1] = *(_WORD *)(v4 + 0x1C);
-    a2[2] = v12;
+    *a3 = *(_WORD *)(v5 + 0x18); /*0x99b196*/
+    a3[1] = *(_WORD *)(v5 + 0x1C); /*0x99b19d*/
+    a3[2] = v13; /*0x99b1a1*/
   }
-  if ( !Dst )
-    return 1;
-  if ( *a2 == 0x814 )
+  if ( !Dst ) /*0x99b1ab*/
+    return 1; /*0x99b1ab*/
+  if ( *a3 == 0x814 ) /*0x99b1b8*/
   {
-    if ( strcpy_s(Dst, 0x40u, "Norwegian-Nynorsk") )
-      _invoke_watson(0, v13, v14, v12, (int)Dst, v4);
+    if ( strcpy_s(Dst, 0x40u, "Norwegian-Nynorsk") ) /*0x99b1c2*/
+      _invoke_watson(0, v14, v15, v13, (int)Dst, v5); /*0x99b1d5*/
   }
-  else if ( !GetLocaleInfoA(*(_DWORD *)(v4 + 0x18), 0x1001u, Dst, 0x40) )
+  else if ( !GetLocaleInfoA(*(_DWORD *)(v5 + 0x18), 0x1001u, Dst, 0x40) ) /*0x99b1ee*/
   {
-    return 0;
+    return 0; /*0x99b1ee*/
   }
-  if ( GetLocaleInfoA(*(_DWORD *)(v4 + 0x1C), 0x1002u, Dst + 0x40, 0x40) )
+  if ( GetLocaleInfoA(*(_DWORD *)(v5 + 0x1C), 0x1002u, Dst + 0x40, 0x40) ) /*0x99b1fe*/
   {
-    _itoa_s(v12, Dst + 0x80, 0xA00000010uLL, v16);
-    return 1;
+    _itoa_s(v13, Dst + 0x80, 0xA00000010uLL, v17); /*0x99b210*/
+    return 1; /*0x99b21b*/
   }
-  return 0;
+  return 0; /*0x99b21f*/
 }

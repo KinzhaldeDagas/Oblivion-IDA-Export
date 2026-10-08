@@ -4,25 +4,25 @@ signed int __thiscall sub_8989E0(int *this, int a2)
   signed int result; // eax
   _DWORD *v4; // edx
 
-  v2 = *(this + 0x35);
-  result = 0;
-  if ( v2 <= 0 )
+  v2 = *(this + 0x35); /*0x8989e1*/
+  result = 0; /*0x8989e7*/
+  if ( v2 <= 0 ) /*0x8989ec*/
   {
 LABEL_5:
-    *(_DWORD *)(*(this + 0x34) - 4) = 0;
-    return 0xFFFFFFFF;
+    *(_DWORD *)(*(this + 0x34) - 4) = 0; /*0x898a04*/
+    return 0xFFFFFFFF; /*0x898a0b*/
   }
   else
   {
-    v4 = (_DWORD *)*(this + 0x34);
-    while ( *v4 != a2 )
+    v4 = (_DWORD *)*(this + 0x34); /*0x8989ee*/
+    while ( *v4 != a2 ) /*0x8989fa*/
     {
-      ++result;
-      ++v4;
-      if ( result >= v2 )
-        goto LABEL_5;
+      ++result; /*0x8989fc*/
+      ++v4; /*0x8989fd*/
+      if ( result >= v2 ) /*0x898a02*/
+        goto LABEL_5; /*0x898a02*/
     }
-    *(_DWORD *)(*(this + 0x34) + 4 * result) = 0;
+    *(_DWORD *)(*(this + 0x34) + 4 * result) = 0; /*0x898a21*/
   }
-  return result;
+  return result; /*0x898a0a*/
 }

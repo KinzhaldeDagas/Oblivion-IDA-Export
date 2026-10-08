@@ -48,7 +48,7 @@
 0x949E29: lea     eax, [ecx+10h]
 0x949E2C: push    eax
 0x949E2D: mov     ecx, esi
-0x949E2F: call    sub_88FCC0
+0x949E2F: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x949E34: inc     ebx
 0x949E35: add     esi, 10h
 0x949E38: cmp     ebx, 8

@@ -1,19 +1,21 @@
-void __thiscall sub_4DBEA0(_BYTE *this)
+// Verified inverse lock-state helper: if this reference has an ExtraLock wrapper, clears its locked bit; otherwise follows the linked-door reference and clears that wrapper's locked bit. It then marks the owning reference or linked door modified with mask 0x40.
+void __thiscall TESObjectREFR_ClearLockedFlagOnSelfOrLinkedDoor(TESObjectREFR *this)
 {
-  ExtraDataList *v2; // esi
-  BSExtraData *ExtraData; // eax
-  BSExtraData *Teleport; // eax
-  BSExtraData *v5; // esi
-  BSExtraDataVtbl *v6; // eax
+  ExtraDataList *p_baseExtraList; // esi
+  ExtraLock *ExtraData; // eax
+  TeleportData *Teleport; // eax
+  TeleportData *v5; // esi
+  TESObjectREFR *LinkedDoor; // eax
 
-  v2 = (ExtraDataList *)(this + 0x44);
-  ExtraData = BaseExtraList_GetExtraData((ExtraDataList *)(this + 0x44), kExtraData_Lock);
-  if ( ExtraData
-    || (Teleport = (BSExtraData *)ExtraDataList_GetTeleport(v2), (v5 = Teleport) != 0)
-    && sub_42B410(Teleport)
-    && (v6 = sub_42B410(v5), (ExtraData = sub_4D77D0(v6)) != 0) )
+  p_baseExtraList = &this->member.baseExtraList; /*0x4dbea4*/
+  ExtraData = (ExtraLock *)BaseExtraList_GetExtraData(&this->member.baseExtraList, kExtraData_Lock); /*0x4dbeab*/
+  if ( ExtraData /*0x4dbedc*/
+    || (Teleport = ExtraDataList_GetTeleport(p_baseExtraList), (v5 = Teleport) != 0)
+    && TeleportData_GetLinkedDoor(Teleport)
+    && (LinkedDoor = TeleportData_GetLinkedDoor(v5),
+        (ExtraData = TESObjectREFR_FindLockExtraOnLinkedDoorChain(LinkedDoor)) != 0) )
   {
-    sub_428E90(ExtraData);
-    sub_4D9070(this);
+    ExtraLock_ClearLockedFlag(ExtraData); /*0x4dbee0*/
+    TESObjectREFR_MarkLockDataAsModified(this); /*0x4dbee9*/
   }
 }

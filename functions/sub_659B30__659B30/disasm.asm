@@ -9,7 +9,7 @@
 0x659B42: jz      short loc_659B77
 0x659B44: push    1; a2
 0x659B46: mov     ecx, esi; this
-0x659B48: call    TESObjectREFR_GetParentCell
+0x659B48: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x659B4D: mov     ecx, ds:0B333A0h
 0x659B53: push    eax; a1
 0x659B54: call    TESObjectCELL_IsProcessLevel?LowHigh

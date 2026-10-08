@@ -1,1 +1,1 @@
-improper_lock
+typedef exception improper_lock;

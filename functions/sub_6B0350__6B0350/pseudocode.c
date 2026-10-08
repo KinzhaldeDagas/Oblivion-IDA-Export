@@ -1,168 +1,168 @@
 void __cdecl sub_6B0350(int a1, float a2)
 {
-  switch ( a1 )
+  switch ( a1 ) /*0x6b0366*/
   {
-    case 0:
-    case 0x1E:
-      if ( a2 >= dbl_A68FE0 )
+    case 0: /*0x6b0366*/
+    case 0x1E: /*0x6b0366*/
+      if ( a2 >= dbl_A68FE0 ) /*0x6b037c*/
       {
-        if ( *(float *)GameSetting_GetSafeFloatPointer(&dword_B1625C) <= (double)a2 )
+        if ( *GameSetting_GetSafeFloatPointer((float *)&dword_B1625C) <= (double)a2 ) /*0x6b03a6*/
         {
-          if ( *(float *)GameSetting_GetSafeFloatPointer(&dword_B16264) <= (double)a2 )
-            sub_447490("CStoneLarge");
+          if ( *GameSetting_GetSafeFloatPointer((float *)&dword_B16264) <= (double)a2 ) /*0x6b03d6*/
+            SoundMap_ResolveAnimSoundNote("CStoneLarge"); /*0x6b03e8*/
           else
-            sub_447490("CStoneMedium");
+            SoundMap_ResolveAnimSoundNote("CStoneMedium"); /*0x6b03dd*/
         }
         else
         {
-          sub_447490("CStoneSmall");
+          SoundMap_ResolveAnimSoundNote("CStoneSmall"); /*0x6b03b3*/
         }
       }
       else
       {
-        sub_447490("CStoneStatic");
+        SoundMap_ResolveAnimSoundNote("CStoneStatic"); /*0x6b0389*/
       }
-      break;
-    case 1:
-      if ( *(float *)GameSetting_GetSafeFloatPointer(&dword_B162AC) <= (double)a2 )
+      break; /*0x6b038e*/
+    case 1: /*0x6b0366*/
+      if ( *GameSetting_GetSafeFloatPointer((float *)&dword_B162AC) <= (double)a2 ) /*0x6b05aa*/
       {
-        if ( *(float *)GameSetting_GetSafeFloatPointer(&dword_B162B4) <= (double)a2 )
-          sub_447490("CClothLarge");
+        if ( *GameSetting_GetSafeFloatPointer((float *)&dword_B162B4) <= (double)a2 ) /*0x6b05da*/
+          SoundMap_ResolveAnimSoundNote("CClothLarge"); /*0x6b05ec*/
         else
-          sub_447490("CClothMedium");
+          SoundMap_ResolveAnimSoundNote("CClothMedium"); /*0x6b05e1*/
       }
       else
       {
-        sub_447490("CClothSmall");
+        SoundMap_ResolveAnimSoundNote("CClothSmall"); /*0x6b05b7*/
       }
-      break;
-    case 2:
-      if ( *(float *)GameSetting_GetSafeFloatPointer(&dword_B1626C) <= (double)a2 )
+      break; /*0x6b05bc*/
+    case 2: /*0x6b0366*/
+      if ( *GameSetting_GetSafeFloatPointer((float *)&dword_B1626C) <= (double)a2 ) /*0x6b0405*/
       {
-        if ( *(float *)GameSetting_GetSafeFloatPointer(&dword_B16274) <= (double)a2 )
-          sub_447490("CEarthLarge");
+        if ( *GameSetting_GetSafeFloatPointer((float *)&dword_B16274) <= (double)a2 ) /*0x6b0435*/
+          SoundMap_ResolveAnimSoundNote("CEarthLarge"); /*0x6b0447*/
         else
-          sub_447490("CEarthMedium");
+          SoundMap_ResolveAnimSoundNote("CEarthMedium"); /*0x6b043c*/
       }
       else
       {
-        sub_447490("CEarthSmall");
+        SoundMap_ResolveAnimSoundNote("CEarthSmall"); /*0x6b0412*/
       }
-      break;
-    case 3:
-      if ( a2 >= (double)flt_A5977C )
+      break; /*0x6b0417*/
+    case 3: /*0x6b0366*/
+      if ( a2 >= (double)flt_A5977C ) /*0x6b0675*/
       {
-        if ( a2 >= dbl_A492F0 )
-          sub_447490("CGlassLarge");
+        if ( a2 >= dbl_A492F0 ) /*0x6b069b*/
+          SoundMap_ResolveAnimSoundNote("CGlassLarge"); /*0x6b06ad*/
         else
-          sub_447490("CGlassMedium");
+          SoundMap_ResolveAnimSoundNote("CGlassMedium"); /*0x6b06a2*/
       }
       else
       {
-        sub_447490("CGlassSmall");
+        SoundMap_ResolveAnimSoundNote("CGlassSmall"); /*0x6b0684*/
       }
-      break;
-    case 4:
-      if ( a2 >= (double)flt_A5977C )
+      break; /*0x6b0689*/
+    case 4: /*0x6b0366*/
+      if ( a2 >= (double)flt_A5977C ) /*0x6b0460*/
       {
-        if ( a2 >= (double)flt_A77740 )
-          sub_447490("CGrassLarge");
+        if ( a2 >= (double)flt_A77740 ) /*0x6b0486*/
+          SoundMap_ResolveAnimSoundNote("CGrassLarge"); /*0x6b0498*/
         else
-          sub_447490("CGrassMedium");
+          SoundMap_ResolveAnimSoundNote("CGrassMedium"); /*0x6b048d*/
       }
       else
       {
-        sub_447490("CGrassSmall");
+        SoundMap_ResolveAnimSoundNote("CGrassSmall"); /*0x6b046f*/
       }
-      break;
-    case 5:
-      if ( a2 >= dbl_A68FE0 )
+      break; /*0x6b0474*/
+    case 5: /*0x6b0366*/
+      if ( a2 >= dbl_A68FE0 ) /*0x6b04ad*/
       {
-        if ( *(float *)GameSetting_GetSafeFloatPointer(&dword_B1629C) <= (double)a2 )
+        if ( *GameSetting_GetSafeFloatPointer((float *)&dword_B1629C) <= (double)a2 ) /*0x6b04d7*/
         {
-          if ( *(float *)GameSetting_GetSafeFloatPointer(&dword_B162A4) <= (double)a2 )
-            sub_447490("CMetalLarge");
+          if ( *GameSetting_GetSafeFloatPointer((float *)&dword_B162A4) <= (double)a2 ) /*0x6b0507*/
+            SoundMap_ResolveAnimSoundNote("CMetalLarge"); /*0x6b0519*/
           else
-            sub_447490("CMetalMedium");
+            SoundMap_ResolveAnimSoundNote("CMetalMedium"); /*0x6b050e*/
         }
         else
         {
-          sub_447490("CMetalSmall");
+          SoundMap_ResolveAnimSoundNote("CMetalSmall"); /*0x6b04e4*/
         }
       }
       else
       {
-        sub_447490("CMetalStatic");
+        SoundMap_ResolveAnimSoundNote("CMetalStatic"); /*0x6b04ba*/
       }
-      break;
-    case 6:
-      sub_447490("COrganicSmall");
-      break;
-    case 7:
-      if ( *(float *)GameSetting_GetSafeFloatPointer(&dword_B1627C) <= (double)a2 )
+      break; /*0x6b04bf*/
+    case 6: /*0x6b0366*/
+      SoundMap_ResolveAnimSoundNote("COrganicSmall"); /*0x6b05fd*/
+      break; /*0x6b0602*/
+    case 7: /*0x6b0366*/
+      if ( *GameSetting_GetSafeFloatPointer((float *)&dword_B1627C) <= (double)a2 ) /*0x6b061a*/
       {
-        if ( *(float *)GameSetting_GetSafeFloatPointer(&dword_B16284) <= (double)a2 )
-          sub_447490("CSkinLarge");
+        if ( *GameSetting_GetSafeFloatPointer((float *)&dword_B16284) <= (double)a2 ) /*0x6b064a*/
+          SoundMap_ResolveAnimSoundNote("CSkinLarge"); /*0x6b065c*/
         else
-          sub_447490("CSkinMedium");
+          SoundMap_ResolveAnimSoundNote("CSkinMedium"); /*0x6b0651*/
       }
       else
       {
-        sub_447490("CSkinSmall");
+        SoundMap_ResolveAnimSoundNote("CSkinSmall"); /*0x6b0627*/
       }
-      break;
-    case 8:
-      if ( a2 < (double)flt_A5977C )
-        goto LABEL_49;
-      if ( a2 >= dbl_A492F0 )
-        goto LABEL_31;
-      goto LABEL_30;
-    case 9:
-      if ( a2 >= dbl_A68FE0 )
+      break; /*0x6b062c*/
+    case 8: /*0x6b0366*/
+      if ( a2 < (double)flt_A5977C ) /*0x6b06c6*/
+        goto LABEL_49; /*0x6b06c6*/
+      if ( a2 >= dbl_A492F0 ) /*0x6b06ec*/
+        goto LABEL_31; /*0x6b06ec*/
+      goto LABEL_30; /*0x6b06ec*/
+    case 9: /*0x6b0366*/
+      if ( a2 >= dbl_A68FE0 ) /*0x6b052e*/
       {
-        if ( *(float *)GameSetting_GetSafeFloatPointer(&dword_B1624C) > (double)a2 )
+        if ( *GameSetting_GetSafeFloatPointer((float *)&dword_B1624C) > (double)a2 ) /*0x6b0558*/
         {
 LABEL_49:
-          sub_447490("CWoodSmall");
+          SoundMap_ResolveAnimSoundNote("CWoodSmall"); /*0x6b06ca*/
         }
-        else if ( *(float *)GameSetting_GetSafeFloatPointer(&dword_B16254) <= (double)a2 )
+        else if ( *GameSetting_GetSafeFloatPointer((float *)&dword_B16254) <= (double)a2 ) /*0x6b057b*/
         {
 LABEL_31:
-          sub_447490("CWoodLarge");
+          SoundMap_ResolveAnimSoundNote("CWoodLarge"); /*0x6b0588*/
         }
         else
         {
 LABEL_30:
-          sub_447490("CWoodMedium");
+          SoundMap_ResolveAnimSoundNote("CWoodMedium"); /*0x6b057d*/
         }
       }
       else
       {
-        sub_447490("CWoodStatic");
+        SoundMap_ResolveAnimSoundNote("CWoodStatic"); /*0x6b053b*/
       }
-      break;
-    case 0xA:
-      sub_447490("CSpecialHeavyStone");
-      break;
-    case 0xB:
-      sub_447490("CSpecialHeavyMetal");
-      break;
-    case 0xC:
-      sub_447490("CSpecialHeavyWood");
-      break;
-    case 0xD:
-      if ( *(float *)GameSetting_GetSafeFloatPointer(&dword_B1628C) <= (double)a2 )
+      break; /*0x6b0540*/
+    case 0xA: /*0x6b0366*/
+      SoundMap_ResolveAnimSoundNote("CSpecialHeavyStone"); /*0x6b0767*/
+      break; /*0x6b076c*/
+    case 0xB: /*0x6b0366*/
+      SoundMap_ResolveAnimSoundNote("CSpecialHeavyMetal"); /*0x6b0778*/
+      break; /*0x6b077d*/
+    case 0xC: /*0x6b0366*/
+      SoundMap_ResolveAnimSoundNote("CSpecialHeavyWood"); /*0x6b0789*/
+      break; /*0x6b0789*/
+    case 0xD: /*0x6b0366*/
+      if ( *GameSetting_GetSafeFloatPointer((float *)&dword_B1628C) <= (double)a2 ) /*0x6b0714*/
       {
-        if ( *(float *)GameSetting_GetSafeFloatPointer(&dword_B1628C) <= (double)a2 )
-          sub_447490("CChainLarge");
+        if ( *GameSetting_GetSafeFloatPointer((float *)&dword_B1628C) <= (double)a2 ) /*0x6b0744*/
+          SoundMap_ResolveAnimSoundNote("CChainLarge"); /*0x6b0756*/
         else
-          sub_447490("CChainMedium");
+          SoundMap_ResolveAnimSoundNote("CChainMedium"); /*0x6b074b*/
       }
       else
       {
-        sub_447490("CChainSmall");
+        SoundMap_ResolveAnimSoundNote("CChainSmall"); /*0x6b0721*/
       }
-      break;
+      break; /*0x6b0726*/
     default:
       return;
   }

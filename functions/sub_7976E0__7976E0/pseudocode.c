@@ -1,49 +1,66 @@
-void __thiscall sub_7976E0(int *this, unsigned int a2, char a3, unsigned int a4, int a5, int a6)
+// OBLIVION AUTHORITY (2026-08-30): Resizes vector<vector<unsigned short*>>. Its 4-byte pointer element permits structural reuse of the shared vector<vector<4-byte>> insert helper; the semantic type is fixed by CIndexedGeometry callers.
+void __thiscall OB_stVector_stVectorUShortPtr_ResizeFill_010201A0(
+        OB_stVector_stVectorUShortPtr_010201A0 *this,
+        unsigned int newSize,
+        OB_stVectorUShortPtr_010201A0 value)
 {
-  unsigned int v7; // ecx
-  int v8; // ebx
-  unsigned int v9; // eax
-  _DWORD *v10; // ebp
-  unsigned int v11; // ebp
-  unsigned int v12; // ebx
-  unsigned int v13; // edi
-  bool v14; // cc
-  _DWORD v15[5]; // [esp+14h] [ebp-14h] BYREF
+  OB_stVectorUShortPtr_010201A0 *begin; // ecx
+  int v5; // ebx
+  unsigned int v6; // eax
+  OB_stVectorFloat_010201A0 *v7; // ebp
+  OB_stVectorUShortPtr_010201A0 *end; // ebp
+  OB_stVectorUShortPtr_010201A0 *v9; // ebx
+  OB_stVectorUShortPtr_010201A0 *v10; // edi
+  bool v11; // cc
+  OB_stVector_stVectorUShortPtrIterator_010201A0 result; // [esp+14h] [ebp-14h] BYREF
+  int v13; // [esp+24h] [ebp-4h]
 
-  v7 = *(this + 1);
-  v8 = 0;
-  v15[4] = 0;
-  if ( v7 )
-    v9 = (int)(*(this + 2) - v7) >> 4;
+  begin = this->begin; /*0x797709*/
+  v5 = 0; /*0x79770c*/
+  v13 = 0; /*0x797710*/
+  if ( begin ) /*0x797714*/
+    v6 = this->end - begin; /*0x79771f*/
   else
-    v9 = 0;
-  if ( v9 < a2 )
+    v6 = 0; /*0x797716*/
+  if ( v6 >= newSize ) /*0x797728*/
   {
-    if ( v7 )
-      v8 = (int)(*(this + 2) - v7) >> 4;
-    v10 = (_DWORD *)*(this + 2);
-    if ( v7 > (unsigned int)v10 )
-      _invalid_parameter_noinfo();
-    sub_79EBB0(this, (int)this, v10, a2 - v8, (int)&a3);
-  }
-  if ( v7 )
-  {
-    v11 = *(this + 2);
-    if ( a2 < (int)(v11 - v7) >> 4 )
+    if ( begin ) /*0x797757*/
     {
-      if ( v7 > v11 )
-        _invalid_parameter_noinfo();
-      v12 = *(this + 1);
-      if ( v12 > *(this + 2) )
-        _invalid_parameter_noinfo();
-      v13 = v12 + 0x10 * a2;
-      v14 = v13 <= *(this + 2);
-      v15[1] = v12;
-      if ( !v14 || v13 < *(this + 1) )
-        _invalid_parameter_noinfo();
-      sub_796790(this, v15, (int)this, v13, (int)this, v11);
+      end = this->end; /*0x797759*/
+      if ( newSize < end - begin ) /*0x797765*/
+      {
+        if ( begin > end ) /*0x797769*/
+          _invalid_parameter_noinfo(0, newSize, (int)this); /*0x79776b*/
+        v9 = this->begin; /*0x797770*/
+        if ( v9 > this->end ) /*0x797776*/
+          _invalid_parameter_noinfo((int)v9, newSize, (int)this); /*0x797778*/
+        v10 = &v9[newSize]; /*0x797780*/
+        v11 = v10 <= this->end; /*0x797782*/
+        result.current = v9; /*0x797785*/
+        if ( !v11 || v10 < this->begin ) /*0x79778e*/
+          _invalid_parameter_noinfo((int)v9, (int)v10, (int)this); /*0x797790*/
+        OB_stVector_stVectorUShortPtr_EraseRange_010201A0( /*0x7977a0*/
+          this,
+          &result,
+          (OB_stVector_stVectorUShortPtrIterator_010201A0)__PAIR64__((unsigned int)v10, (unsigned int)this),
+          (OB_stVector_stVectorUShortPtrIterator_010201A0)__PAIR64__((unsigned int)end, (unsigned int)this));
+      }
     }
   }
-  if ( a4 )
-    FormHeapFree(a4);
+  else
+  {
+    if ( begin ) /*0x79772c*/
+      v5 = this->end - begin; /*0x797733*/
+    v7 = (OB_stVectorFloat_010201A0 *)this->end; /*0x797736*/
+    if ( begin > (OB_stVectorUShortPtr_010201A0 *)v7 ) /*0x79773b*/
+      _invalid_parameter_noinfo(v5, newSize, (int)this); /*0x79773d*/
+    OB_stVector_stVectorFloat_InsertFill_010201A0( /*0x79774e*/
+      (OB_stVector_stVectorFloat_010201A0 *)this,
+      (OB_stVector_stVectorFloat_010201A0 *)this,
+      v7,
+      newSize - v5,
+      (const OB_stVectorFloat_010201A0 *)&value);
+  }
+  if ( value.begin ) /*0x7977ab*/
+    FormHeapFree((unsigned int)value.begin); /*0x7977ae*/
 }

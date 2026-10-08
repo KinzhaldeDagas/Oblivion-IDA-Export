@@ -1,18 +1,18 @@
-0x560110: cmp     dword ptr ds:0B39E04h, 0
+0x560110: cmp     dword ptr ds:0B39E04h, 0; Verified canopy-shadow cleanup plus version difference: Oblivion releases manager.canopyShadowTexture and an adjacent cached resource, then calls sub_440420 to unload the DDS. Fallout releases the manager pointer and BSShaderManager::pProjectedShadowTexture, then calls TES::RemoveTextureImage.
 0x560117: jnz     short loc_560123
-0x560119: push    0
-0x56011B: call    sub_55F750
+0x560119: push    0; recreate
+0x56011B: call    BSTreeManager_Create; Verified singleton Create(recreate): optionally destroys/frees an existing BSTreeManager, allocates 0x28 bytes, runs BSTreeManager_ctor, and stores the instance.
 0x560120: add     esp, 4
 0x560123: mov     eax, ds:0B39E04h
 0x560128: cmp     dword ptr [eax+4], 0
 0x56012C: jz      locret_5601D1
 0x560132: push    3
-0x560134: call    nullsub_returnTrue_0arg
+0x560134: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x560139: add     esp, 4
 0x56013C: cmp     dword ptr ds:0B39E04h, 0
 0x560143: jnz     short loc_56014F
-0x560145: push    0
-0x560147: call    sub_55F750
+0x560145: push    0; recreate
+0x560147: call    BSTreeManager_Create; Verified singleton Create(recreate): optionally destroys/frees an existing BSTreeManager, allocates 0x28 bytes, runs BSTreeManager_ctor, and stores the instance.
 0x56014C: add     esp, 4
 0x56014F: push    ebx
 0x560150: mov     ebx, ds:0A2807Ch
@@ -57,7 +57,7 @@
 0x5601BA: push    offset aDataTexturesTr; "Data\\Textures\\Trees\\CanopyShadow.dds"
 0x5601BF: call    sub_440420
 0x5601C4: push    2
-0x5601C6: call    nullsub_returnTrue_0arg
+0x5601C6: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x5601CB: add     esp, 4
 0x5601CE: pop     edi
 0x5601CF: pop     esi

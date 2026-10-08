@@ -6,7 +6,7 @@
 0x5E1F6D: cmp     byte ptr [esi+4], 30h ; '0'
 0x5E1F71: jnz     short loc_5E1F84
 0x5E1F73: mov     ecx, esi; this
-0x5E1F75: call    TESObjectCELL_IsInterior
+0x5E1F75: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x5E1F7A: test    al, al
 0x5E1F7C: jnz     short loc_5E1F82
 0x5E1F7E: xor     eax, eax

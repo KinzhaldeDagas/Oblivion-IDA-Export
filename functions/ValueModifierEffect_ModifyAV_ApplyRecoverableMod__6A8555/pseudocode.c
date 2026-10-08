@@ -8,5 +8,5 @@ int __userpurge ValueModifierEffect_ModifyAV_::ApplyRecoverableMod@<eax>(
         int a7,
         int a8)
 {
-  return (*(int (__thiscall **)(int, _DWORD, int, int))(*(_DWORD *)a2 + 0x294))(a2, *(_DWORD *)(a3 + 0x38), a8, a1);
+  return (*(int (__thiscall **)(int, _DWORD, int, int))(*(_DWORD *)a2 + 0x294))(a2, *(_DWORD *)(a3 + 0x38), a8, a1); /*0x6a8571*/
 }

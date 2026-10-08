@@ -1,5 +1,5 @@
 0xA27B50: push    esi
-0xA27B51: mov     esi, dword_BA8138
+0xA27B51: mov     esi, dword ptr unk_BA8138
 0xA27B57: test    esi, esi
 0xA27B59: jz      short loc_A27B77
 0xA27B5B: lea     eax, [esi+4]

@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_LARGE_INTEGER_1",
+  "definition": "union _LARGE_INTEGER_1\n{\n$F50D1B4661C66265C46503353F437A80 u;\nLONGLONG QuadPart;\n}\n",
   "id": 18374686479672028699,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "u",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "$F50D1B4661C66265C46503353F437A80"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QuadPart",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "LONGLONG"
     }
   ],
   "name": "_LARGE_INTEGER_1",
+  "ordinal": 1820,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 8
 }

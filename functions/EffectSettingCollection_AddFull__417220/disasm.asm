@@ -71,13 +71,13 @@
 0x417324: and     eax, 1
 0x417327: cmp     eax, 1
 0x41732A: jle     short loc_417381
-0x41732C: push    3Ch ; '<'; MaxCount
+0x41732C: push    3Ch ; '<'; count
 0x41732E: push    offset aRegisteredEf_0; "Registered EffectSetting contains multi"...
-0x417333: lea     ecx, [esp+0ACh+var_94]
-0x417337: mov     [esp+0ACh+var_7C], 0Fh
-0x41733F: mov     [esp+0ACh+var_80], 0
-0x417347: mov     [esp+0ACh+var_90], 0
-0x41734C: call    sub_414500
+0x417333: lea     ecx, [esp+0ACh+var_94]; this
+0x417337: mov     [esp+0ACh+var_94.capacity], 0Fh
+0x41733F: mov     [esp+0ACh+var_94.size], 0
+0x417347: mov     byte ptr [esp+0ACh+var_94.storage], 0
+0x41734C: call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.
 0x417351: lea     edx, [esp+0A4h+var_94]
 0x417355: push    edx
 0x417356: lea     ecx, [esp+0A8h+var_78]
@@ -111,7 +111,7 @@
 0x4173D5: call    EffectSetting_SetCounterEffects
 0x4173DA: push    esi; a3
 0x4173DB: push    edi; a2
-0x4173DC: mov     ecx, offset EffectSettingCollection; this
+0x4173DC: mov     ecx, 0B33508h; this
 0x4173E1: call    NiTMap_SetAt
 0x4173E6: mov     ecx, dword ptr [esp+0A4h+var_C]
 0x4173ED: mov     large fs:0, ecx
@@ -120,3 +120,19 @@
 0x4173F6: pop     esi
 0x4173F7: add     esp, 98h
 0x4173FD: retn
+0x9AB400: mov     eax, [ebp-98h]
+0x9AB406: push    eax
+0x9AB407: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AB40C: pop     ecx
+0x9AB40D: retn
+0x9AB40E: lea     ecx, [ebp-28h]; this
+0x9AB411: jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
+0x9AB416: lea     ecx, [ebp-94h]; this
+0x9AB41C: jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
+0x9AB421: mov     edx, [esp+arg_4]
+0x9AB425: lea     eax, [edx-94h]
+0x9AB42B: mov     ecx, [edx-98h]
+0x9AB431: xor     ecx, eax
+0x9AB433: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AB438: mov     eax, offset stru_AD8304
+0x9AB43D: jmp     ___CxxFrameHandler3

@@ -1,1 +1,1 @@
-SIZEL
+typedef SIZE SIZEL;

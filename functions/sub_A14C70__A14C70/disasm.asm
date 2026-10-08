@@ -6,7 +6,7 @@
 0xA14C7D: push    0
 0xA14C7F: push    0
 0xA14C81: push    30h ; '0'
-0xA14C83: push    offset dword_BA8620
+0xA14C83: push    offset unk_BA8620
 0xA14C88: push    offset aHkballandsoc_0; "hkBallAndSocketConstraintData"
 0xA14C8D: mov     ecx, offset unk_BA8FB0
 0xA14C92: call    sub_90D190

@@ -1,1 +1,1 @@
-bhkPhantom
+struct bhkPhantom;

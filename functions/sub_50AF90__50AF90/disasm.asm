@@ -17,6 +17,6 @@
 0x50AFBF: test    dl, 1
 0x50AFC2: jnz     short loc_50AFCB
 0x50AFC4: mov     ecx, eax; int
-0x50AFC6: call    EvaluatePackage
+0x50AFC6: call    EvaluatePackage; Actor::EvaluatePackage. After current package changes, resets/evaluates actor AI state through sub_5EAE70 and process callbacks; plugin calls this after assigning runtime packages.
 0x50AFCB: mov     al, 1
 0x50AFCD: retn

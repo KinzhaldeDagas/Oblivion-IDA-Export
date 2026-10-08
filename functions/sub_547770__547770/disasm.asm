@@ -1,4 +1,4 @@
-0x547770: fld     [esp+arg_0]
+0x547770: fld     [esp+arg_0]; ODismemberment combat decode: maps hit/death damage magnitude into a force scalar using fDeathForceDamageMin/Max and fDeathForceForceMin/Max.
 0x547774: fabs
 0x547776: fstp    [esp+arg_0]
 0x54777A: fld     [esp+arg_0]

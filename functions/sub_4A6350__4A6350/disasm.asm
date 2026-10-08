@@ -1,4 +1,4 @@
-0x4A6350: mov     edx, [esp+arg_0]
+0x4A6350: mov     edx, [esp+region]; Verified: inserts region only when not already present, preserving unique TESRegion membership.
 0x4A6354: test    edx, edx
 0x4A6356: jnz     short loc_4A635D
 0x4A6358: xor     al, al

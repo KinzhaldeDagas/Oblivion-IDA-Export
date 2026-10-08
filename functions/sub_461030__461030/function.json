@@ -1,18 +1,31 @@
 {
-  "callees_count": 19,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 11,
   "callers_count": 4,
+  "chunks": [
+    [
+      "0x461030",
+      "0x4610E3"
+    ]
+  ],
+  "chunks_sha256": "e4315724a59e51481efd264ffd4254577b254869b9f3ef6effc5e51a67e22cad",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "MEF PERF 2026-10-02 PASS2: Verified dispatch relationship: guarded path calls animation drain45CE00, attached-animation drain45CEE0, controller drain459140, then later Havok drain45D030. Exact subsystem timing/frequency and all producer/resize paths remain Unknown.\nMEF v57 IMPLEMENTED 2026-10-08: v57 main-thread eligibility proof: reads Main* atB33398 then threadID+10; compares against GetCurrentThreadId at46103C/42. Light-cache runtime uses this engine field, not an assumption that OBSE load thread equals render main thread. Missing/other-thread identity falls back.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
   "display_name": "sub_461030",
   "end_ea": "0x4610E3",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_461030",
   "segment": ".text",
   "sha256": "e4315724a59e51481efd264ffd4254577b254869b9f3ef6effc5e51a67e22cad",
   "size": 179,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x461030",
+  "total_chunk_size": 179,
   "type": "double __userpurge@<st0>(_DWORD *this@<ecx>, double st5_0@<st2>, double@<st1>, double result@<st0>, char)",
   "xrefs_from_count": 75,
   "xrefs_to_count": 4

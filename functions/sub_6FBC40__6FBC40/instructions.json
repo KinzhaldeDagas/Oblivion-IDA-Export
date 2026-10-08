@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x6FBD27",
-    "line": "mov     esi, [esp+28h+arg_4]",
+    "line": "mov     esi, [esp+28h+colors]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -991,7 +991,7 @@
   },
   {
     "ea": "0x6FBEC3",
-    "line": "mov     [esp+24h+arg_4], eax",
+    "line": "mov     [esp+24h+colors], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1477,73 +1477,73 @@
   },
   {
     "ea": "0x6FBFB6",
-    "line": "mov     ecx, [esp+24h+arg_4]",
+    "line": "mov     ecx, [esp+24h+colors]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6FBFBA",
-    "line": "push    ebp",
+    "line": "push    ebp; triangleIndices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6FBFBB",
-    "line": "push    0Ch",
+    "line": "push    0Ch; triangleCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6FBFBD",
-    "line": "push    esi",
+    "line": "push    esi; dataFlags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6FBFBE",
-    "line": "push    esi",
+    "line": "push    esi; hasVertexColors",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6FBFBF",
-    "line": "push    esi",
+    "line": "push    esi; textureCoordinates",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6FBFC0",
-    "line": "push    ecx",
+    "line": "push    ecx; colors",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6FBFC1",
-    "line": "push    esi",
+    "line": "push    esi; normals",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6FBFC2",
-    "line": "push    ebx",
+    "line": "push    ebx; vertices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6FBFC3",
-    "line": "push    8",
+    "line": "push    8; vertexCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6FBFC5",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6FBFC7",
-    "line": "call    sub_7174B0",
+    "line": "call    NiTriShape_ctorWithGeometryData; Verified NiTriShape constructor wrapper: allocate/init NiTriShapeData from caller-supplied vertices, colors and triangle-index buffer; initialize NiTriBasedGeom and install NiTriShape vtable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1645,7 +1645,7 @@
   },
   {
     "ea": "0x6FBFF8",
-    "line": "mov     [esp+24h+arg_4], 0",
+    "line": "mov     [esp+24h+colors], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -1654,5 +1654,77 @@
     "line": "jmp     short loc_6FBF84",
     "mnemonic": "jmp",
     "size": 2
+  },
+  {
+    "ea": "0x9CAD70",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAD73",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CAD74",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CAD79",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CAD7A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CAD7B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CAD7F",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAD82",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAD85",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CAD87",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CAD8C",
+    "line": "mov     eax, offset stru_AF3390",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CAD91",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

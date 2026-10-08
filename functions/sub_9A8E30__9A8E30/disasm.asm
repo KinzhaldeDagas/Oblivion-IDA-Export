@@ -1,23 +1,23 @@
-0x9A8E30: sub     esp, 8
+0x9A8E30: sub     esp, 8; Pass228: NiD3DShaderConstantMap application path; uses D3D shader constant setter slots, not NiRenderer RenderScreenTexture.
 0x9A8E33: push    ebp
-0x9A8E34: mov     ebp, [esp+0Ch+arg_0]
+0x9A8E34: mov     ebp, [esp+0Ch+shaderProgram]
 0x9A8E38: push    esi
 0x9A8E39: mov     esi, ecx
-0x9A8E3B: mov     ecx, [esp+10h+arg_4]
+0x9A8E3B: mov     ecx, [esp+10h+geometry]
 0x9A8E3F: mov     [esi+20h], ebp
 0x9A8E42: mov     eax, off_B29F84; "__NDL_SCMData"
 0x9A8E47: push    eax
-0x9A8E48: mov     byte ptr [esp+14h+arg_0], 1
-0x9A8E4D: call    NiObjectNET_GetExtraData
+0x9A8E48: mov     byte ptr [esp+14h+shaderProgram], 1
+0x9A8E4D: call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.
 0x9A8E52: mov     [esp+10h+var_4], eax
 0x9A8E56: xor     eax, eax
 0x9A8E58: cmp     [esi+16h], ax
 0x9A8E5C: mov     [esp+10h+var_8], eax
 0x9A8E60: jbe     loc_9A902C
 0x9A8E66: push    ebx
-0x9A8E67: mov     ebx, [esp+14h+arg_20]
+0x9A8E67: mov     ebx, [esp+14h+a10]
 0x9A8E6B: push    edi
-0x9A8E6C: mov     edi, [esp+18h+arg_24]
+0x9A8E6C: mov     edi, [esp+18h+a11]
 0x9A8E70: mov     ecx, [esi+10h]
 0x9A8E73: mov     eax, [ecx+eax*4]
 0x9A8E76: test    eax, eax
@@ -26,7 +26,7 @@
 0x9A8E82: jz      loc_9A902A
 0x9A8E88: mov     ecx, [eax+1Ch]
 0x9A8E8B: cmp     ecx, 0FFFFFFFFh
-0x9A8E8E: mov     [esp+18h+arg_24], ecx
+0x9A8E8E: mov     [esp+18h+a11], ecx
 0x9A8E92: jnz     short loc_9A8E9E
 0x9A8E94: cmp     dword ptr [eax+24h], 0
 0x9A8E98: jz      loc_9A9013
@@ -46,12 +46,12 @@
 0x9A8ED0: mov     eax, [eax+30h]
 0x9A8ED3: mov     ecx, [esi+28h]
 0x9A8ED6: push    edx
-0x9A8ED7: mov     [esp+1Ch+arg_20], eax
-0x9A8EDB: mov     edx, [esp+1Ch+arg_20]
+0x9A8ED7: mov     [esp+1Ch+a10], eax
+0x9A8EDB: mov     edx, [esp+1Ch+a10]
 0x9A8EDF: mov     eax, [ecx]
 0x9A8EE1: mov     eax, [eax+178h]
 0x9A8EE7: push    edx
-0x9A8EE8: mov     edx, [esp+20h+arg_24]
+0x9A8EE8: mov     edx, [esp+20h+a11]
 0x9A8EEC: push    edx
 0x9A8EED: push    ecx
 0x9A8EEE: call    eax
@@ -66,12 +66,12 @@
 0x9A8F06: mov     eax, [eax+30h]
 0x9A8F09: mov     ecx, [esi+28h]
 0x9A8F0C: push    edx
-0x9A8F0D: mov     [esp+1Ch+arg_20], eax
-0x9A8F11: mov     edx, [esp+1Ch+arg_20]
+0x9A8F0D: mov     [esp+1Ch+a10], eax
+0x9A8F11: mov     edx, [esp+1Ch+a10]
 0x9A8F15: mov     eax, [ecx]
 0x9A8F17: mov     eax, [eax+1B4h]
 0x9A8F1D: push    edx
-0x9A8F1E: mov     edx, [esp+20h+arg_24]
+0x9A8F1E: mov     edx, [esp+20h+a11]
 0x9A8F22: push    edx
 0x9A8F23: push    ecx
 0x9A8F24: call    eax
@@ -92,25 +92,25 @@
 0x9A8F4B: jnz     short loc_9A8F8C
 0x9A8F4D: mov     ecx, [esp+18h+var_4]
 0x9A8F51: push    ecx
-0x9A8F52: mov     ecx, [esp+1Ch+arg_28]
+0x9A8F52: mov     ecx, [esp+1Ch+a12]
 0x9A8F56: push    ecx
-0x9A8F57: mov     ecx, [esp+20h+arg_1C]
+0x9A8F57: mov     ecx, [esp+20h+a9]
 0x9A8F5B: push    edi
 0x9A8F5C: mov     edx, [esi]
 0x9A8F5E: push    ebx
 0x9A8F5F: push    ecx
-0x9A8F60: mov     ecx, [esp+2Ch+arg_18]
+0x9A8F60: mov     ecx, [esp+2Ch+a8]
 0x9A8F64: push    ecx
-0x9A8F65: mov     ecx, [esp+30h+arg_14]
+0x9A8F65: mov     ecx, [esp+30h+a7]
 0x9A8F69: mov     edx, [edx+5Ch]
 0x9A8F6C: push    ecx
-0x9A8F6D: mov     ecx, [esp+34h+arg_10]
+0x9A8F6D: mov     ecx, [esp+34h+a6]
 0x9A8F71: push    ecx
-0x9A8F72: mov     ecx, [esp+38h+arg_C]
+0x9A8F72: mov     ecx, [esp+38h+a5]
 0x9A8F76: push    ecx
-0x9A8F77: mov     ecx, [esp+3Ch+arg_8]
+0x9A8F77: mov     ecx, [esp+3Ch+a4]
 0x9A8F7B: push    ecx
-0x9A8F7C: mov     ecx, [esp+40h+arg_4]
+0x9A8F7C: mov     ecx, [esp+40h+geometry]
 0x9A8F80: push    ecx
 0x9A8F81: push    eax
 0x9A8F82: push    ebp
@@ -129,19 +129,19 @@
 0x9A8FA0: jmp     short loc_9A900A
 0x9A8FA2: cmp     ecx, 50000000h
 0x9A8FA8: jnz     short loc_9A8FD2
-0x9A8FAA: mov     ecx, [esp+18h+arg_1C]
+0x9A8FAA: mov     ecx, [esp+18h+a9]
 0x9A8FAE: mov     edx, [esi]
 0x9A8FB0: mov     edx, [edx+64h]
 0x9A8FB3: push    edi
 0x9A8FB4: push    ebx
 0x9A8FB5: push    ecx
-0x9A8FB6: mov     ecx, [esp+24h+arg_18]
+0x9A8FB6: mov     ecx, [esp+24h+a8]
 0x9A8FBA: push    ecx
-0x9A8FBB: mov     ecx, [esp+28h+arg_14]
+0x9A8FBB: mov     ecx, [esp+28h+a7]
 0x9A8FBF: push    ecx
-0x9A8FC0: mov     ecx, [esp+2Ch+arg_8]
+0x9A8FC0: mov     ecx, [esp+2Ch+a4]
 0x9A8FC4: push    ecx
-0x9A8FC5: mov     ecx, [esp+30h+arg_4]
+0x9A8FC5: mov     ecx, [esp+30h+geometry]
 0x9A8FC9: push    ecx
 0x9A8FCA: push    eax
 0x9A8FCB: push    ebp
@@ -152,21 +152,21 @@
 0x9A8FD8: jnz     short loc_9A900E
 0x9A8FDA: mov     edx, [esi]
 0x9A8FDC: mov     edx, [edx+6Ch]
-0x9A8FDF: mov     ecx, [esp+18h+arg_1C]
+0x9A8FDF: mov     ecx, [esp+18h+a9]
 0x9A8FE3: push    edi
 0x9A8FE4: push    ebx
 0x9A8FE5: push    ecx
-0x9A8FE6: mov     ecx, [esp+24h+arg_18]
+0x9A8FE6: mov     ecx, [esp+24h+a8]
 0x9A8FEA: push    ecx
-0x9A8FEB: mov     ecx, [esp+28h+arg_14]
+0x9A8FEB: mov     ecx, [esp+28h+a7]
 0x9A8FEF: push    ecx
-0x9A8FF0: mov     ecx, [esp+2Ch+arg_10]
+0x9A8FF0: mov     ecx, [esp+2Ch+a6]
 0x9A8FF4: push    ecx
-0x9A8FF5: mov     ecx, [esp+30h+arg_C]
+0x9A8FF5: mov     ecx, [esp+30h+a5]
 0x9A8FF9: push    ecx
-0x9A8FFA: mov     ecx, [esp+34h+arg_8]
+0x9A8FFA: mov     ecx, [esp+34h+a4]
 0x9A8FFE: push    ecx
-0x9A8FFF: mov     ecx, [esp+38h+arg_4]
+0x9A8FFF: mov     ecx, [esp+38h+geometry]
 0x9A9003: push    ecx
 0x9A9004: push    eax
 0x9A9005: push    ebp
@@ -174,7 +174,7 @@
 0x9A9008: call    edx
 0x9A900A: test    eax, eax
 0x9A900C: jz      short loc_9A9013
-0x9A900E: mov     byte ptr [esp+18h+arg_0], 0
+0x9A900E: mov     byte ptr [esp+18h+shaderProgram], 0
 0x9A9013: mov     eax, [esp+18h+var_8]
 0x9A9017: movzx   ecx, word ptr [esi+16h]
 0x9A901B: add     eax, 1
@@ -184,7 +184,7 @@
 0x9A902A: pop     edi
 0x9A902B: pop     ebx
 0x9A902C: xor     eax, eax
-0x9A902E: cmp     byte ptr [esp+10h+arg_0], al
+0x9A902E: cmp     byte ptr [esp+10h+shaderProgram], al
 0x9A9032: pop     esi
 0x9A9033: setz    al
 0x9A9036: pop     ebp

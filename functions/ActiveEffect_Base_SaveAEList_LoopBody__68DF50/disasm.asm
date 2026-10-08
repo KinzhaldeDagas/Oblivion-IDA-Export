@@ -1,4 +1,4 @@
-0x68DF50: mov     eax, [esi]
+0x68DF50: mov     eax, [esi]; Verified save loop: for each nonnull ActiveEffect in the target list, calls ActiveEffect_Base_Save and increments the saved count. The effect record contains MagicItem FormID, EffectItem index, and virtual effect-specific payload; version >=0x2A also includes a UInt16 record size.
 0x68DF52: push    edi
 0x68DF53: push    eax
 0x68DF54: call    ActiveEffect_Base_Save

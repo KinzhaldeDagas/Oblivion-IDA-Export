@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x674F72",
-    "line": "mov     ebp, [esp+8+arg_0]",
+    "line": "mov     ebp, [esp+8+target]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -133,13 +133,13 @@
   },
   {
     "ea": "0x674FA4",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x674FA6",
-    "line": "call    sub_605E80",
+    "line": "call    Crime_Destructor",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x674FAC",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

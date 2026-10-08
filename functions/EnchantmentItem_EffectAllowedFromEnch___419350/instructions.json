@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x419350",
-    "line": "push    esi",
+    "line": "push    esi; UCWUS decode note: EnchantmentItem_EffectAllowedFromEnch applies global object/effect flag rules for weapon/apparel enchantment effects. UCWUS should not bypass this wholesale; the faithful path is a targeted apparel-cast branch patch plus plugin session/suppression commands.",
     "mnemonic": "push",
     "size": 1
   },
@@ -262,5 +262,329 @@
     "line": "jnz     EnchantmentItem_EffectAllowedFromEnch??___Return_1; jumptable 004193A9 default case, cases 21,23-32",
     "mnemonic": "jnz",
     "size": 6
+  },
+  {
+    "ea": "0x4193E9",
+    "line": "mov     eax, [esi+58h]; jumptable 004193A9 cases 20,22",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4193EC",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4193EE",
+    "line": "shr     ecx, 4",
+    "mnemonic": "shr",
+    "size": 3
+  },
+  {
+    "ea": "0x4193F1",
+    "line": "test    cl, 1",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x4193F4",
+    "line": "jz      short EnchantmentItem_EffectAllowedFromEnch??___Return_0",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4193F6",
+    "line": "mov     edx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4193F8",
+    "line": "shr     edx, 12h",
+    "mnemonic": "shr",
+    "size": 3
+  },
+  {
+    "ea": "0x4193FB",
+    "line": "test    dl, 1",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x4193FE",
+    "line": "jnz     short EnchantmentItem_EffectAllowedFromEnch??___Return_0",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x419400",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x419402",
+    "line": "shr     ecx, 7",
+    "mnemonic": "shr",
+    "size": 3
+  },
+  {
+    "ea": "0x419405",
+    "line": "test    cl, 1",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x419408",
+    "line": "jnz     short EnchantmentItem_EffectAllowedFromEnch??___Return_0",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x41940A",
+    "line": "shr     eax, 8",
+    "mnemonic": "shr",
+    "size": 3
+  },
+  {
+    "ea": "0x41940D",
+    "line": "test    al, 1",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x41940F",
+    "line": "jz      short loc_419433",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x419411",
+    "line": "mov     eax, [esi+98h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x419417",
+    "line": "cmp     eax, 52424157h",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x41941C",
+    "line": "jz      short loc_419433",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x41941E",
+    "line": "cmp     eax, 41574157h",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x419423",
+    "line": "jz      short loc_419433",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x419425",
+    "line": "cmp     eax, 4559454Eh",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x41942A",
+    "line": "jz      short loc_419433",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x41942C",
+    "line": "cmp     eax, 434E4C53h",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x419431",
+    "line": "jnz     short EnchantmentItem_EffectAllowedFromEnch??___Return_0",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x419433",
+    "line": "mov     ecx, [esp+8+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x419437",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x419439",
+    "line": "jz      short loc_419444",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x41943B",
+    "line": "call    sub_41DF40",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x419440",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x419442",
+    "line": "jnz     short EnchantmentItem_EffectAllowedFromEnch??___Return_0",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x419444",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x419446",
+    "line": "push    offset ??_R0?AVTESBipedModelForm@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x41944B",
+    "line": "push    offset ??_R0?AVTESBoundObject@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x419450",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x419452",
+    "line": "push    edi; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x419453",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x419458",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x41945B",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x41945D",
+    "line": "jz      short EnchantmentItem_EffectAllowedFromEnch??___Return_0",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x41945F",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x419461",
+    "line": "call    sub_469050",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x419466",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x419468",
+    "line": "jnz     short loc_419479",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x41946A",
+    "line": "mov     edx, [esi+58h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x41946D",
+    "line": "shr     edx, 11h",
+    "mnemonic": "shr",
+    "size": 3
+  },
+  {
+    "ea": "0x419470",
+    "line": "test    dl, 1",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x419473",
+    "line": "jnz     EnchantmentItem_EffectAllowedFromEnch??___Return_0",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x419479",
+    "line": "cmp     dword ptr [esi+98h], 49564E49h",
+    "mnemonic": "cmp",
+    "size": 10
+  },
+  {
+    "ea": "0x419483",
+    "line": "jz      EnchantmentItem_EffectAllowedFromEnch??___Return_0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x419489",
+    "line": "pop     edi; jumptable 004193A9 default case, cases 21,23-32",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x41948A",
+    "line": "mov     al, 1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x41948C",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x41948D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
   }
 ]

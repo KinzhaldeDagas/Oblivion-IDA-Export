@@ -1,4 +1,4 @@
-0x52E990: mov     eax, [esp+arg_0]
+0x52E990: mov     eax, [esp+arg_0]; Compare the exact five-dword SKIL DATA payload, then compare four separate mastery-tier descriptions. No major/minor state exists in TESSkill.
 0x52E994: push    ebx
 0x52E995: push    ebp
 0x52E996: push    0; int

@@ -1,1 +1,1 @@
-LPBOOL
+typedef int *LPBOOL;

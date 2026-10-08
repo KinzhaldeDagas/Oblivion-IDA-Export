@@ -65,7 +65,7 @@
 0x7B3C81: lea     ecx, [esp+24h+arg_8]
 0x7B3C85: push    ecx
 0x7B3C86: push    edx
-0x7B3C87: mov     ecx, offset off_B2C33C
+0x7B3C87: mov     ecx, offset stru_B2C33C
 0x7B3C8C: mov     [esp+2Ch+arg_8], esi
 0x7B3C90: call    NiTMap_GetAt
 0x7B3C95: test    al, al
@@ -91,7 +91,7 @@
 0x7B3CCD: mov     ecx, [ebx+8]
 0x7B3CD0: push    esi; a3
 0x7B3CD1: push    ecx; a2
-0x7B3CD2: mov     ecx, offset off_B2C33C; this
+0x7B3CD2: mov     ecx, offset stru_B2C33C; this
 0x7B3CD7: call    NiTMap_SetAt
 0x7B3CDC: jmp     short loc_7B3CE2
 0x7B3CDE: mov     esi, [esp+24h+arg_8]
@@ -132,7 +132,7 @@
 0x7B3D41: push    ebp
 0x7B3D42: push    ecx
 0x7B3D43: mov     ecx, eax
-0x7B3D45: call    sub_802E00
+0x7B3D45: call    OB_DistantLOD_CreateInstanceBatch_010201A0
 0x7B3D4A: jmp     short loc_7B3D4E
 0x7B3D4C: xor     eax, eax
 0x7B3D4E: mov     [edi], eax
@@ -140,10 +140,10 @@
 0x7B3D57: mov     ecx, [edi]
 0x7B3D59: push    ebx
 0x7B3D5A: mov     [esp+28h+var_4], 0FFFFFFFFh
-0x7B3D62: call    sub_802A90
+0x7B3D62: call    OB_DistantLOD_BindInstanceDescriptor_010201A0
 0x7B3D67: push    edi
 0x7B3D68: mov     ecx, esi
-0x7B3D6A: call    sub_5B1E20
+0x7B3D6A: call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.
 0x7B3D6F: mov     ecx, ds:0B42D64h
 0x7B3D75: mov     eax, [edi]
 0x7B3D77: mov     edx, [ecx]
@@ -165,3 +165,15 @@
 0x7B3DA1: pop     ebx
 0x7B3DA2: add     esp, 10h
 0x7B3DA5: retn
+0x9C53C0: mov     eax, [ebp+0Ch]
+0x9C53C3: push    eax
+0x9C53C4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C53C9: pop     ecx
+0x9C53CA: retn
+0x9C53CB: mov     edx, [esp+arg_4]
+0x9C53CF: lea     eax, [edx-14h]
+0x9C53D2: mov     ecx, [edx-18h]
+0x9C53D5: xor     ecx, eax
+0x9C53D7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C53DC: mov     eax, offset stru_AEDBA8
+0x9C53E1: jmp     ___CxxFrameHandler3

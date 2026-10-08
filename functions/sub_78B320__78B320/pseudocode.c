@@ -1,22 +1,24 @@
-_DWORD *__userpurge sub_78B320@<eax>(int this@<ecx>, int a2@<edi>, _DWORD *a3)
+// CSpeedTreeRT::SetBranchLightingMethod. Before Compute, mirrors lighting method to branch geometry manual-lighting state and CLightingEngine branch method.
+void __thiscall CSpeedTreeRT__SetBranchLightingMethod(OB_CSpeedTreeRT_010201A0 *this, int method)
 {
-  bool v3; // zf
-  rsize_t v5; // [esp-4h] [ebp-60h] BYREF
-  char *v6; // [esp+4Ch] [ebp-10h]
-  int v7; // [esp+58h] [ebp-4h]
+  bool v2; // zf
+  int v3; // [esp+0h] [ebp-5Ch] BYREF
+  int *v4; // [esp+4Ch] [ebp-10h]
+  int v5; // [esp+58h] [ebp-4h]
 
-  v6 = (char *)&v5 + 4;
-  v3 = *(_BYTE *)(this + 0x45) == 0;
-  v7 = 0;
-  if ( v3 )
+  v4 = &v3; /*0x78b348*/
+  v2 = this->treeComputedFlag == 0; /*0x78b34b*/
+  v5 = 0; /*0x78b34f*/
+  if ( v2 ) /*0x78b356*/
   {
-    *(_BYTE *)(*(_DWORD *)(this + 4) + 9) = a3 == (_DWORD *)1;
-    **(_DWORD **)(this + 0xC) = a3;
-    return a3;
+    this->branchGeometry->manualLighting = method == 1; /*0x78b364*/
+    this->lightingEngine->branchLightingMethod = method; /*0x78b36a*/
   }
   else
   {
-    LODWORD(v5) = 0x47;
-    return sub_414500(&dword_B2B614, a2, "SetBranchLightingMethod() has no effect after Compute() has been called", v5);
+    OB_stString28_AssignBytes_010201A0( /*0x78b38c*/
+      &OB_g_strError_010201A0,
+      "SetBranchLightingMethod() has no effect after Compute() has been called",
+      0x47u);
   }
 }

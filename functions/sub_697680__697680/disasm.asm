@@ -11,7 +11,7 @@
 0x697693: mov     ecx, ebx; int
 0x697695: call    MobilObject_PostLinkModifiedForm
 0x69769A: mov     ecx, ebx; this
-0x69769C: call    MobileObject_GetCharProxy
+0x69769C: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x6976A1: mov     edi, eax
 0x6976A3: test    edi, edi
 0x6976A5: jz      loc_6977C8
@@ -39,15 +39,15 @@
 0x6976DD: jz      short loc_6976F2
 0x6976DF: lea     edx, [esp+54h+arg_4]
 0x6976E3: push    edx
-0x6976E4: call    sub_65ABE0
+0x6976E4: call    MobileObject_GetCollisionFilterInfo; Returns actor/proxy collision filter identity by calling 0x57E270 on MobileObject_GetCharProxy(this). Callers keep high 16 bits and OR in the chosen collision layer.
 0x6976E9: movzx   esi, word ptr [eax+2]
 0x6976ED: jmp     loc_697788
 0x6976F2: mov     eax, [esi]
 0x6976F4: mov     edx, [eax+154h]
 0x6976FA: mov     ecx, esi
 0x6976FC: call    edx
-0x6976FE: push    eax
-0x6976FF: call    sub_480340
+0x6976FE: push    eax; object
+0x6976FF: call    NiAVObject_FindBhkCollisionObjectRecursive; Returns the first bhk collision object found on object or recursively beneath its NiNode children. This is structural traversal, independent of node names.
 0x697704: add     esp, 4
 0x697707: test    eax, eax
 0x697709: jz      short loc_697722
@@ -66,8 +66,8 @@
 0x69772D: mov     eax, [edx+154h]
 0x697733: mov     ecx, ebx
 0x697735: call    eax
-0x697737: push    eax
-0x697738: call    sub_480340
+0x697737: push    eax; object
+0x697738: call    NiAVObject_FindBhkCollisionObjectRecursive; Returns the first bhk collision object found on object or recursively beneath its NiNode children. This is structural traversal, independent of node names.
 0x69773D: add     esp, 4
 0x697740: test    eax, eax
 0x697742: jz      short loc_697766
@@ -95,7 +95,7 @@
 0x697788: lea     ecx, [esp+54h+arg_4]
 0x69778C: push    ecx
 0x69778D: mov     ecx, edi
-0x69778F: call    sub_57E270
+0x69778F: call    bhkCharacterProxy_GetCollisionFilterInfo; Reads collision filter info from proxy metadata: proxy+0x364 -> +8 -> +0x14 -> +0x1C. Used to preserve actor identity in raycast filter high 16 bits.
 0x697794: mov     eax, [esp+54h+arg_4]
 0x697798: mov     ecx, [edi+364h]
 0x69779E: and     eax, 0FFC0h
@@ -264,8 +264,8 @@
 0x6979D0: fld     dword ptr [ebp+1Ch]
 0x6979D3: fstp    [esp+64h+var_64]; float
 0x6979D6: call    sub_7F3530
-0x6979DB: mov     ecx, [ebx+7Ch]
-0x6979DE: call    nullsub_returnFalse_0arg
+0x6979DB: mov     ecx, [ebx+7Ch]; this
+0x6979DE: call    TESForm__IsActor; [Verified] Shared leaf returning false (zero), despite the TESForm::IsActor symbol. BSTempEffect base vtable 0xA681AC uses it at +0x58 for IsSaveable; NiAdditionalGeometryData vtable 0xA45EC4 uses it at +0x4C and other classes reuse it. The leaf has no unique class identity.
 0x6979E3: test    al, al
 0x6979E5: mov     ecx, 2
 0x6979EA: jnz     short loc_6979F4
@@ -275,14 +275,14 @@
 0x6979F8: mov     [ebx+80h], ecx
 0x6979FE: push    edx
 0x6979FF: mov     ecx, ebx; this
-0x697A01: call    MobileObject_GetCharProxy
+0x697A01: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x697A06: mov     ecx, eax
-0x697A08: call    sub_57E270
+0x697A08: call    bhkCharacterProxy_GetCollisionFilterInfo; Reads collision filter info from proxy metadata: proxy+0x364 -> +8 -> +0x14 -> +0x1C. Used to preserve actor identity in raycast filter high 16 bits.
 0x697A0D: mov     eax, [esp+54h+arg_4]
 0x697A11: or      eax, 4000h
 0x697A16: push    eax
 0x697A17: mov     ecx, ebx; this
-0x697A19: call    MobileObject_GetCharProxy
+0x697A19: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x697A1E: mov     ecx, eax
 0x697A20: call    sub_694FC0
 0x697A25: xor     esi, esi
@@ -312,7 +312,7 @@
 0x697A66: cmp     esi, edi
 0x697A68: jb      short loc_697A40
 0x697A6A: push    ebp
-0x697A6B: call    FormHeapFree
+0x697A6B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x697A70: add     esp, 4
 0x697A73: pop     edi
 0x697A74: pop     esi

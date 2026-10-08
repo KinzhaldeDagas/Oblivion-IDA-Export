@@ -2,11 +2,11 @@ EntryData *__thiscall Actor_GetEquippedLightData(HighProcess *this, char a2)
 {
   EntryData *equippedLightData; // ecx
 
-  if ( !a2 )
-    return this->equippedLightData;
-  equippedLightData = this->equippedLightData;
-  if ( equippedLightData && (unsigned __int8)ContainerEntryExtraData_HasWorn(equippedLightData, 0) )
-    return this->equippedLightData;
+  if ( !a2 ) /*0x64b278*/
+    return this->equippedLightData; /*0x64b278*/
+  equippedLightData = this->equippedLightData; /*0x64b284*/
+  if ( equippedLightData && ContainerEntryExtraData_HasWorn(equippedLightData, 0) ) /*0x64b290*/
+    return this->equippedLightData; /*0x64b27a*/
   else
-    return 0;
+    return 0; /*0x64b299*/
 }

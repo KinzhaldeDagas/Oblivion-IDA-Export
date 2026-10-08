@@ -3,7 +3,7 @@
 0x6D0925: push    esi
 0x6D0926: push    ebx
 0x6D0927: mov     esi, ecx
-0x6D0929: call    sub_754EA0
+0x6D0929: call    j_NiTimeController_RegisterStreamables
 0x6D092E: test    al, al
 0x6D0930: jnz     short loc_6D0937
 0x6D0932: pop     esi

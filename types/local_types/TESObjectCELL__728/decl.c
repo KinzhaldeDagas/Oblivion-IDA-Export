@@ -1,1 +1,5 @@
-TESObjectCELL
+struct TESObjectCELL
+{
+TESFormVtbl *vtbl;
+TESObjectCELLMembr members;
+};

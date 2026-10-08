@@ -1,10 +1,10 @@
-0x4C98C0: push    ecx
+0x4C98C0: push    ecx; Fog interior decode: reads TESObjectCELL::LightingData ambient packed RGB at lighting+0x00 and normalizes to float RGB.
 0x4C98C1: test    byte ptr [ecx+24h], 1
 0x4C98C5: jz      short loc_4C98D2
 0x4C98C7: mov     eax, [ecx+3Ch]
 0x4C98CA: test    eax, eax
 0x4C98CC: jz      short loc_4C98D2
-0x4C98CE: mov     eax, [eax]
+0x4C98CE: mov     eax, [eax]; Fog interior decode: load LightingData ambient packed RGB (+0x00).
 0x4C98D0: jmp     short loc_4C98D4
 0x4C98D2: xor     eax, eax
 0x4C98D4: movzx   ecx, al

@@ -39,7 +39,7 @@
 0x436EFB: push    1
 0x436EFD: mov     ecx, esi
 0x436EFF: call    eax
-0x436F01: push    offset Addend; lpAddend
+0x436F01: push    0B33A20h; lpAddend
 0x436F06: mov     dword ptr [edi], offset ??_7?$BSTask@_J@@6B@; const BSTask<__int64>::`vftable'
 0x436F0C: call    ebx ; InterlockedDecrement
 0x436F0E: mov     ecx, dword ptr [esp+20h+var_C]
@@ -50,3 +50,19 @@
 0x436F1C: pop     ebx
 0x436F1D: add     esp, 10h
 0x436F20: retn
+0x436670: push    0B33A20h; lpAddend
+0x436675: mov     dword ptr [ecx], offset ??_7?$BSTask@_J@@6B@; const BSTask<__int64>::`vftable'
+0x43667B: call    ds:InterlockedDecrement
+0x436681: retn
+0x9AC390: mov     ecx, [ebp-10h]
+0x9AC393: jmp     loc_436670
+0x9AC398: mov     ecx, [ebp-10h]
+0x9AC39B: add     ecx, 18h; void *
+0x9AC39E: jmp     sub_4BDDC0
+0x9AC3A3: mov     edx, [esp+arg_4]
+0x9AC3A7: lea     eax, [edx-10h]
+0x9AC3AA: mov     ecx, [edx-14h]
+0x9AC3AD: xor     ecx, eax
+0x9AC3AF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AC3B4: mov     eax, offset stru_AD9068
+0x9AC3B9: jmp     ___CxxFrameHandler3

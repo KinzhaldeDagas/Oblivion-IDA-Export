@@ -1,19 +1,32 @@
 {
-  "callees_count": 12,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 9,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6A2280",
+      "0x6A2320"
+    ]
+  ],
+  "chunks_sha256": "6c0eee3b616a5149d6bf9f441eefaf389fb7eeb5d70815dc5e24fbc0d2f98b21",
+  "comment_regular": "Verified active-effect manager: obtains the target's active-effect list, checks target parent/node/cell/process conditions, then enters the list loop. Each eligible ActiveEffect goes through ActiveEffect_Base_ProcessEffect; removed effects are unlinked and destroyed by their virtual destructor. Actor_ProcessMagicEffect calls this manager each actor process tick.",
+  "comment_repeatable": "Verified active-effect manager: obtains the target's active-effect list, checks target parent/node/cell/process conditions, then enters the list loop. Each eligible ActiveEffect goes through ActiveEffect_Base_ProcessEffect; removed effects are unlinked and destroyed by their virtual destructor. Actor_ProcessMagicEffect calls this manager each actor process tick.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "MagicTarget_ProcessEffects",
   "end_ea": "0x6A2320",
-  "flags": 5120,
+  "evidence_confidence": "Unknown",
+  "flags": 21504,
   "has_pseudocode": true,
   "name": "MagicTarget_ProcessEffects",
   "segment": ".text",
   "sha256": "6c0eee3b616a5149d6bf9f441eefaf389fb7eeb5d70815dc5e24fbc0d2f98b21",
   "size": 160,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6A2280",
-  "type": "void __thiscall(MagicTarget *this, int)",
+  "total_chunk_size": 160,
+  "type": "void __thiscall(MagicTarget *this, float deltaTime)",
   "xrefs_from_count": 68,
   "xrefs_to_count": 9
 }

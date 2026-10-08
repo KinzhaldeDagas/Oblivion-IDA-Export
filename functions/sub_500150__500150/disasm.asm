@@ -1,4 +1,4 @@
-0x500150: mov     eax, [esp+arg_C]
+0x500150: mov     eax, [esp+arg_C]; TES4 authoritative parser exception used by Message. Handles message-style variable argument bytecode, not needed for fixed-param OBSE movement commands.
 0x500154: mov     ecx, [esp+arg_8]
 0x500158: mov     edx, [esp+arg_4]
 0x50015C: push    0

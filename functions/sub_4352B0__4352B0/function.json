@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4352B0",
+      "0x4352DE"
+    ]
+  ],
+  "chunks_sha256": "c84e7b7bf7da12c486033e23140707af8ff306b615fbcec4eedd429a39e2e2ae",
+  "comment_regular": "Async queued-KF completion bridge. If the queued task produced a KFModel at +0x28 and task state +0x0C is not cancelled state 6, forwards the model and AnimIdle context at +0x34 to AnimIdle_OnKFLoadComplete, then unregisters the queued task from the model loader.",
+  "comment_repeatable": "Async queued-KF completion bridge. If the queued task produced a KFModel at +0x28 and task state +0x0C is not cancelled state 6, forwards the model and AnimIdle context at +0x34 to AnimIdle_OnKFLoadComplete, then unregisters the queued task from the model loader.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_4352B0",
+  "display_name": "QueuedIdleKFLoad_AsyncCompletionBridge",
   "end_ea": "0x4352DE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4352B0",
+  "name": "QueuedIdleKFLoad_AsyncCompletionBridge",
   "segment": ".text",
   "sha256": "c84e7b7bf7da12c486033e23140707af8ff306b615fbcec4eedd429a39e2e2ae",
   "size": 46,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4352B0",
-  "type": "int __usercall@<eax>(int@<ecx>, double@<st2>, double@<st1>, double@<st0>)",
+  "total_chunk_size": 46,
+  "type": "int __thiscall(int this)",
   "xrefs_from_count": 22,
   "xrefs_to_count": 1
 }

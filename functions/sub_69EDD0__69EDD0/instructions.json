@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x69EDD0",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, [esp+targetReference]; Verified (Oblivion): model extra size uses the owner ActiveEffect* only as a non-null context for process-data sizing, and uses the target reference for actor/process checks; it adds the resource-stream payload length to base size +2.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,31 +19,31 @@
   },
   {
     "ea": "0x69EDD7",
-    "line": "mov     ecx, [esp+4+arg_0]",
+    "line": "mov     ecx, [esp+4+linkContext]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x69EDDB",
-    "line": "push    eax",
+    "line": "push    eax; targetReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x69EDDC",
-    "line": "push    ecx",
+    "line": "push    ecx; ownerActiveEffect",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x69EDDD",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x69EDDF",
-    "line": "call    sub_69DB90",
+    "line": "call    MagicHitEffect_GetExtraSaveSize; Verified (Oblivion): base GetExtraSaveSize receives owner ActiveEffect* and target TESObjectREFR*; it returns 5 bytes before version 0x72 and 9 bytes from version 0x72.",
     "mnemonic": "call",
     "size": 5
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x69EDF0",
-    "line": "mov     [esp+4+arg_4], edx",
+    "line": "mov     [esp+4+targetReference], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x69EE12",
-    "line": "mov     cx, word ptr [esp+4+arg_4]",
+    "line": "mov     cx, word ptr [esp+4+targetReference]",
     "mnemonic": "mov",
     "size": 5
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x69EE23",
-    "line": "mov     ax, word ptr [esp+arg_4]",
+    "line": "mov     ax, word ptr [esp+targetReference]",
     "mnemonic": "mov",
     "size": 5
   },

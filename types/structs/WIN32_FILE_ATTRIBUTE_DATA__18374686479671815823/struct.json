@@ -1,46 +1,81 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "WIN32_FILE_ATTRIBUTE_DATA",
+  "definition": "typedef _WIN32_FILE_ATTRIBUTES_DATA WIN32_FILE_ATTRIBUTE_DATA\n",
   "id": 18374686479671815823,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwFileAttributes",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ftCreationTime",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 8
+      "size": 8,
+      "type": "FILETIME"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ftLastAccessTime",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 8
+      "offset_hex": "0xC",
+      "size": 8,
+      "type": "FILETIME"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ftLastWriteTime",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 8
+      "size": 8,
+      "type": "FILETIME"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nFileSizeHigh",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nFileSizeLow",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     }
   ],
   "name": "WIN32_FILE_ATTRIBUTE_DATA",
+  "ordinal": 1459,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 36
 }

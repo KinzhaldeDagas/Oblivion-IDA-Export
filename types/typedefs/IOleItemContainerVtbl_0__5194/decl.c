@@ -1,1 +1,1 @@
-IOleItemContainerVtbl_0
+typedef IOleItemContainerVtbl IOleItemContainerVtbl_0;

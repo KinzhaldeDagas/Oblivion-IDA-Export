@@ -14,7 +14,7 @@
 0x80B1B4: mov     edi, [esp+20h+arg_0]
 0x80B1B8: push    4
 0x80B1BA: mov     ecx, edi
-0x80B1BC: call    NiNode_GetNiPropertyByID
+0x80B1BC: call    NiNode_GetNiPropertyByID;
 0x80B1C1: mov     ebp, ds:0A2807Ch
 0x80B1C7: mov     esi, eax
 0x80B1C9: test    esi, esi
@@ -60,14 +60,14 @@
 0x80B230: mov     [esp+20h+var_4], 0
 0x80B238: jz      short loc_80B245
 0x80B23A: mov     ecx, eax; this
-0x80B23C: call    ??0BSShaderPPLightingProperty@@QAE@XZ; BSShaderPPLightingProperty::BSShaderPPLightingProperty(void)
+0x80B23C: call    ??0BSShaderPPLightingProperty@@QAE@XZ; Verified (Oblivion): BSShaderPPLightingProperty constructor initializes the reference-counted TextureEffectData slot at this+0xE0 (DWORD index 0x38) to null. TextureEffectProperty_SetData replaces that same offset; BSShaderPPLightingProperty destructor releases and clears it before chaining to BSShaderLightingProperty. Fallout's typed property layout calls the member spTexEffectData at the same +0xE0 offset.
 0x80B241: mov     esi, eax
 0x80B243: jmp     short loc_80B247
 0x80B245: xor     esi, esi
 0x80B247: push    esi; a2
 0x80B248: mov     ecx, edi; this
 0x80B24A: mov     [esp+24h+var_4], 0FFFFFFFFh
-0x80B252: call    sub_405680
+0x80B252: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x80B257: mov     edx, [esi]
 0x80B259: mov     eax, [edx+58h]
 0x80B25C: push    edi
@@ -119,3 +119,15 @@
 0x80B2D2: pop     ebp
 0x80B2D3: add     esp, 10h
 0x80B2D6: retn    4
+0x9CA420: mov     eax, [ebp-10h]
+0x9CA423: push    eax
+0x9CA424: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA429: pop     ecx
+0x9CA42A: retn
+0x9CA42B: mov     edx, [esp+arg_4]
+0x9CA42F: lea     eax, [edx-10h]
+0x9CA432: mov     ecx, [edx-14h]
+0x9CA435: xor     ecx, eax
+0x9CA437: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA43C: mov     eax, offset stru_AF2B24
+0x9CA441: jmp     ___CxxFrameHandler3

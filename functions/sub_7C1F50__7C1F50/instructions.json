@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x7C1F77",
-    "line": "mov     [esp+0Ch+var_4], eax",
+    "line": "mov     [esp+0Ch+node], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -181,25 +181,25 @@
   },
   {
     "ea": "0x7C1F94",
-    "line": "lea     edx, [esp+14h+var_4]",
+    "line": "lea     edx, [esp+14h+node]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7C1F98",
-    "line": "push    edx",
+    "line": "push    edx; node",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C1F99",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; list",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7C1F9B",
-    "line": "call    sub_7AA860",
+    "line": "call    NiTPointerList_RemoveNode; [Verified] Generic NiTPointerList node-removal helper. Unlinks the supplied node, updates head/tail and neighboring links, invokes the list's FreeNode vfunc, decrements item count, and returns the removed node's data pointer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,13 +301,13 @@
   },
   {
     "ea": "0x7C1FC3",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7C1FC8",
-    "line": "mov     eax, [esp+18h+var_4]",
+    "line": "mov     eax, [esp+18h+node]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x7C1FD6",
-    "line": "mov     [esp+14h+var_4], eax",
+    "line": "mov     [esp+14h+node], eax",
     "mnemonic": "mov",
     "size": 4
   },

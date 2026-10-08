@@ -5,7 +5,7 @@
 0x6E3744: mov     edi, [esp+10h+arg_0]
 0x6E3748: push    edi
 0x6E3749: mov     esi, ecx
-0x6E374B: call    nullsub_returnvVoid_1arg
+0x6E374B: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x6E3750: mov     eax, [edi+220h]
 0x6E3756: mov     edx, [eax+8]
 0x6E3759: push    1
@@ -39,7 +39,7 @@
 0x6E37A5: push    ecx
 0x6E37A6: push    edx
 0x6E37A7: push    edi
-0x6E37A8: call    eax ; dword_B3D5C0
+0x6E37A8: call    eax ; unk_B3D5C0
 0x6E37AA: add     esp, 20h
 0x6E37AD: pop     edi
 0x6E37AE: pop     esi

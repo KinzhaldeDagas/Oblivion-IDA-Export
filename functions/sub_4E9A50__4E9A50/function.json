@@ -1,19 +1,36 @@
 {
-  "callees_count": 52,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 18,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_4E9A50",
+  "chunks": [
+    [
+      "0x4E9A50",
+      "0x4E9C9C"
+    ],
+    [
+      "0x9B6060",
+      "0x9B6086"
+    ]
+  ],
+  "chunks_sha256": "31adb2126de0a2980badc89588461c6d5ebb9fb0f26a0d9053df171d76624b39",
+  "comment_regular": "Verified TESRoad graph copy override: RTTI-checks source TESRoad, clears destination graph, copies every point position into newly allocated 0x28-byte nodes, then resolves each source adjacency target by position and appends the corresponding destination node to the destination connection list.",
+  "comment_repeatable": "Verified TESRoad graph copy override: RTTI-checks source TESRoad, clears destination graph, copies every point position into newly allocated 0x28-byte nodes, then resolves each source adjacency target by position and appends the corresponding destination node to the destination connection list.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "TESRoad_CopyConnectedPointGraph",
   "end_ea": "0x4E9C9C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4E9A50",
+  "name": "TESRoad_CopyConnectedPointGraph",
   "segment": ".text",
   "sha256": "bea74e5a8a132c060f60eef1fb1bbb745575e42d15d266670241647973625af2",
   "size": 588,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E9A50",
-  "type": "NiTMap_Entry_TESCELL *__thiscall(char *this, NiTMap_Entry_TESCELL *)",
-  "xrefs_from_count": 248,
+  "total_chunk_size": 626,
+  "type": "MEF_U32PointerMapEntry32 *__thiscall(char *this, NiTMap_Entry_TESCELL *valueOut)",
+  "xrefs_from_count": 262,
   "xrefs_to_count": 1
 }

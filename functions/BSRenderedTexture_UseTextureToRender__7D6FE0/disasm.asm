@@ -1,4 +1,4 @@
-0x7D6FE0: push    esi
+0x7D6FE0: push    esi; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.
 0x7D6FE1: mov     esi, ecx
 0x7D6FE3: test    esi, esi
 0x7D6FE5: jnz     short loc_7D6FEB
@@ -14,7 +14,7 @@
 0x7D6FF9: test    eax, eax
 0x7D6FFB: jz      short loc_7D700E
 0x7D6FFD: lea     ecx, [ecx+0]
-0x7D7000: cmp     eax, offset unk_BAA880
+0x7D7000: cmp     eax, offset stru_BAA880
 0x7D7005: jz      short loc_7D7013
 0x7D7007: mov     eax, [eax+4]
 0x7D700A: test    eax, eax
@@ -24,7 +24,7 @@
 0x7D7012: retn
 0x7D7013: mov     eax, [esi+20h]
 0x7D7016: push    eax
-0x7D7017: push    offset unk_BAA880
+0x7D7017: push    offset stru_BAA880
 0x7D701C: call    NiRTTI_Cast
 0x7D7021: mov     eax, [eax+40h]
 0x7D7024: mov     eax, [esi+eax*4+8]

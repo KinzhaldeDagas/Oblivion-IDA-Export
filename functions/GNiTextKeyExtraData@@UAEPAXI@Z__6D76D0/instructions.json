@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x6D76D3",
-    "line": "call    ??1NiTextKeyExtraData@@UAE@XZ; NiTextKeyExtraData::~NiTextKeyExtraData(void)",
+    "line": "call    ??1NiTextKeyExtraData@@UAE@XZ; Destroys every 0x08-byte NiTextKey (freeing each text), frees the header-backed array at +0x10, then destroys NiExtraData base state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x6D76E0",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

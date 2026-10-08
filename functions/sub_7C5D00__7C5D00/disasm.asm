@@ -10,7 +10,7 @@
 0x7C5D13: xor     bl, bl
 0x7C5D15: cmp     ds:0B43384h, bl
 0x7C5D1B: jz      short loc_7C5D3C
-0x7C5D1D: push    offset stru_B43400; lpCriticalSection
+0x7C5D1D: push    offset unk_B43400; lpCriticalSection
 0x7C5D22: call    dword ptr ds:0A2806Ch
 0x7C5D28: call    dword ptr ds:0A2808Ch
 0x7C5D2E: add     dword ptr ds:0B4347Ch, 1
@@ -25,7 +25,7 @@
 0x7C5D4E: mov     esi, [esi]
 0x7C5D50: jz      short loc_7C5D58
 0x7C5D52: push    edi
-0x7C5D53: call    ShadowSceneLight_AddToScene????
+0x7C5D53: call    ShadowSceneLight_AddToScene; Native receiver-root gate: require a non-null root, non-null world bound, AppCulled clear, and nonzero bound radius, then recurse through ShadowSceneLight_UpdateLightingProperty.
 0x7C5D58: test    esi, esi
 0x7C5D5A: jnz     short loc_7C5D46
 0x7C5D5C: test    bl, bl
@@ -36,7 +36,7 @@
 0x7C5D6A: mov     dword ptr ds:0B43478h, 0
 0x7C5D74: pop     edi
 0x7C5D75: pop     esi
-0x7C5D76: mov     [esp+arg_0], offset stru_B43400
+0x7C5D76: mov     [esp+arg_0], offset unk_B43400
 0x7C5D7E: jmp     dword ptr ds:0A28074h
 0x7C5D84: pop     edi
 0x7C5D85: pop     esi

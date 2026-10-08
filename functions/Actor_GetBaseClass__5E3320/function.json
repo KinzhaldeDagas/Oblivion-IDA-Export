@@ -1,18 +1,31 @@
 {
-  "callees_count": 3,
-  "callers_count": 19,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 38,
+  "chunks": [
+    [
+      "0x5E3320",
+      "0x5E3348"
+    ]
+  ],
+  "chunks_sha256": "fc54d3596eb463168bc6f2d08eceed9d370f4e9fe6a4ff448fdd278348cd8814",
+  "comment_regular": "Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.",
+  "comment_repeatable": "Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "Actor_GetBaseClass",
   "end_ea": "0x5E3348",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "Actor_GetBaseClass",
   "segment": ".text",
   "sha256": "fc54d3596eb463168bc6f2d08eceed9d370f4e9fe6a4ff448fdd278348cd8814",
   "size": 40,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5E3320",
+  "total_chunk_size": 40,
   "type": "TESForm::ModReferenceList *__thiscall(Actor *this)",
   "xrefs_from_count": 18,
   "xrefs_to_count": 38

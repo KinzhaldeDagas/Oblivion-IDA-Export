@@ -1,1 +1,1 @@
-HGLOBALLockBytesImpl_0
+typedef HGLOBALLockBytesImpl HGLOBALLockBytesImpl_0;

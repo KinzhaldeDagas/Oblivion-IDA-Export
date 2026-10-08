@@ -1,4 +1,4 @@
-0x7AB1D0: push    0FFFFFFFFh
+0x7AB1D0: push    0FFFFFFFFh; MoonSugarEffect decode: mode-4 helper creates/releases global screen-element quads at B42CF8..B42D3C with vertex/z/alpha/stencil/material props; not a Moon Sugar mask API.
 0x7AB1D2: push    offset SEH_7AB1D0
 0x7AB1D7: mov     eax, large fs:0
 0x7AB1DD: push    eax
@@ -95,7 +95,6 @@
 0x7AB30F: mov     [esp+60h+arg_0], ebp
 0x7AB313: mov     [esp+60h+var_40], ebx
 0x7AB317: jmp     short loc_7AB326
-0x7AB319: align 10h
 0x7AB320: mov     ebx, [esp+60h+var_40]
 0x7AB324: xor     ebp, ebp
 0x7AB326: push    0C0h ; 'À'; Size
@@ -159,7 +158,7 @@
 0x7AB3D1: fst     [esp+70h+a4]; a4
 0x7AB3D5: fstp    [esp+70h+a3]; a3
 0x7AB3D8: push    ebp; a2
-0x7AB3D9: call    sub_702EC0
+0x7AB3D9: call    sub_702EC0; MoonSugarEffect decode: sets 4-vertex screen polygon positions. For image-space quad arguments resolve to (-1,1), (-1,-1), (1,-1), (1,1), z=0.
 0x7AB3DE: mov     ecx, [esi+0B4h]; this
 0x7AB3E4: call    sub_703050
 0x7AB3E9: fld1
@@ -172,7 +171,7 @@
 0x7AB402: fstp    [esp+70h+a3]; a4
 0x7AB405: push    ebp; a3
 0x7AB406: push    ebp; a2
-0x7AB407: call    sub_702FC0
+0x7AB407: call    sub_702FC0; MoonSugarEffect decode: sets 4-vertex screen polygon UVs for one texture set. Image-space quad uses UV rectangle 0,0 to 1,1.
 0x7AB40C: push    24h ; '$'; Size
 0x7AB40E: call    FormHeapAlloc
 0x7AB413: mov     edi, eax
@@ -252,30 +251,30 @@
 0x7AB519: mov     eax, [esp+64h+var_10]
 0x7AB51D: mov     ecx, esi; this
 0x7AB51F: mov     [ebp+48h], eax
-0x7AB522: call    sub_405680
+0x7AB522: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x7AB527: push    ebp; a2
 0x7AB528: mov     ecx, esi; this
-0x7AB52A: call    sub_405680
+0x7AB52A: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x7AB52F: mov     ecx, [esp+60h+a2]
 0x7AB533: push    ecx; a2
 0x7AB534: mov     ecx, esi; this
-0x7AB536: call    sub_405680
+0x7AB536: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x7AB53B: mov     edx, [esp+60h+var_48]
 0x7AB53F: push    edx; a2
 0x7AB540: mov     ecx, esi; this
-0x7AB542: call    sub_405680
+0x7AB542: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x7AB547: mov     eax, [esp+60h+var_4C]
 0x7AB54B: push    eax; a2
 0x7AB54C: mov     ecx, esi; this
-0x7AB54E: call    sub_405680
+0x7AB54E: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x7AB553: mov     ecx, esi; this
-0x7AB555: call    NiAVObject_InitializePropertyState
+0x7AB555: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x7AB55A: fldz
 0x7AB55C: push    1; a3
 0x7AB55E: push    ecx
 0x7AB55F: mov     ecx, esi; this
 0x7AB561: fstp    [esp+68h+a5]; a2
-0x7AB564: call    NiAVObject_UpdateNiAVObject
+0x7AB564: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x7AB569: mov     ecx, [esp+60h+arg_0]
 0x7AB56D: mov     ebx, ds:0B42CF8h[ecx*4]
 0x7AB574: cmp     ebx, esi
@@ -386,7 +385,7 @@
 0x7AB68A: add     esp, 4Ch
 0x7AB68D: retn
 0x7AB68E: mov     ebx, ds:0A2807Ch
-0x7AB694: mov     edi, offset dword_B42CF8
+0x7AB694: mov     edi, offset unk_B42CF8
 0x7AB699: lea     esp, [esp+0]
 0x7AB6A0: mov     esi, [edi]
 0x7AB6A2: test    esi, esi
@@ -416,3 +415,57 @@
 0x7AB6DE: pop     ebx
 0x7AB6DF: add     esp, 4Ch
 0x7AB6E2: retn
+0x9CD1C0: mov     eax, [ebp+4]
+0x9CD1C3: push    eax
+0x9CD1C4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CD1C9: pop     ecx
+0x9CD1CA: retn
+0x9CD1CB: lea     ecx, [ebp-30h]; slot
+0x9CD1CE: jmp     NiPointerSlot_Release
+0x9CD1D3: mov     eax, [ebp+4]
+0x9CD1D6: push    eax
+0x9CD1D7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CD1DC: pop     ecx
+0x9CD1DD: retn
+0x9CD1DE: lea     ecx, [ebp-2Ch]; slot
+0x9CD1E1: jmp     NiPointerSlot_Release
+0x9CD1E6: mov     eax, [ebp+4]
+0x9CD1E9: push    eax
+0x9CD1EA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CD1EF: pop     ecx
+0x9CD1F0: retn
+0x9CD1F1: lea     ecx, [ebp-28h]; slot
+0x9CD1F4: jmp     NiPointerSlot_Release
+0x9CD1F9: mov     eax, [ebp-34h]
+0x9CD1FC: push    eax
+0x9CD1FD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CD202: pop     ecx
+0x9CD203: retn
+0x9CD204: mov     eax, [ebp-38h]
+0x9CD207: push    eax
+0x9CD208: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CD20D: pop     ecx
+0x9CD20E: retn
+0x9CD20F: lea     ecx, [ebp-24h]; slot
+0x9CD212: jmp     NiPointerSlot_Release
+0x9CD217: mov     eax, [ebp-34h]
+0x9CD21A: push    eax
+0x9CD21B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CD220: pop     ecx
+0x9CD221: retn
+0x9CD222: lea     ecx, [ebp-20h]; slot
+0x9CD225: jmp     NiPointerSlot_Release
+0x9CD22A: mov     eax, [ebp-34h]
+0x9CD22D: push    eax
+0x9CD22E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CD233: pop     ecx
+0x9CD234: retn
+0x9CD235: lea     ecx, [ebp-1Ch]; slot
+0x9CD238: jmp     NiPointerSlot_Release
+0x9CD23D: mov     edx, [esp+arg_4]
+0x9CD241: lea     eax, [edx-50h]
+0x9CD244: mov     ecx, [edx-54h]
+0x9CD247: xor     ecx, eax
+0x9CD249: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CD24E: mov     eax, offset stru_AF6580
+0x9CD253: jmp     ___CxxFrameHandler3

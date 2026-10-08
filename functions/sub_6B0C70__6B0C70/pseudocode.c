@@ -1,427 +1,238 @@
-int __usercall sub_6B0C70@<eax>(double a1@<st2>, double a2@<st0>, float arg0)
+int __cdecl sub_6B0C70(float arg0)
 {
+  float v3; // esi
   int result; // eax
+  float *sound; // eax
   bool v6; // zf
+  double v7; // st5
   _DWORD *v8; // ecx
-  _DWORD *v9; // ecx
-  char v10; // al
-  char v11; // al
-  int v12; // eax
-  int v13; // ebp
-  unsigned int v14; // ecx
-  TESObjectCELL *v15; // eax
-  int v16; // eax
-  int *v17; // ebx
-  int *v18; // edi
+  double v9; // st5
+  _DWORD *v10; // ecx
+  double v11; // st5
+  char v12; // al
+  char v13; // al
+  int v14; // eax
+  int v15; // ebp
+  int v16; // ecx
+  void *v17; // eax
+  int v18; // eax
+  int *v19; // ebx
+  int *v20; // edi
+  double v21; // st7
+  double v22; // st7
   int v23; // eax
   int *v24; // ecx
-  int v29; // eax
-  int *v30; // ecx
-  int v31; // edi
-  unsigned int v32; // edi
-  float v33; // eax
-  unsigned int v34; // ebx
-  unsigned int v35; // esi
-  int v36; // eax
-  int v37; // edx
-  float v38; // eax
-  float v39; // [esp+Ch] [ebp-48h]
-  float v40; // [esp+Ch] [ebp-48h]
-  float v41; // [esp+10h] [ebp-44h]
-  float v42; // [esp+10h] [ebp-44h]
-  float v43; // [esp+10h] [ebp-44h]
-  float v44; // [esp+10h] [ebp-44h]
-  float v45; // [esp+14h] [ebp-40h]
-  float v46; // [esp+14h] [ebp-40h]
-  float v47; // [esp+14h] [ebp-40h]
-  float v48; // [esp+14h] [ebp-40h]
-  float v49; // [esp+14h] [ebp-40h]
-  float v50; // [esp+14h] [ebp-40h]
-  float v51; // [esp+14h] [ebp-40h]
-  float v52; // [esp+14h] [ebp-40h]
-  float v53; // [esp+14h] [ebp-40h]
-  float v54; // [esp+14h] [ebp-40h]
-  int a3a; // [esp+30h] [ebp-24h]
-  int v58; // [esp+34h] [ebp-20h] BYREF
-  TESObjectCELL *v59; // [esp+38h] [ebp-1Ch] BYREF
-  unsigned int v63; // [esp+50h] [ebp-4h]
+  double v25; // st7
+  double v26; // st7
+  int v27; // eax
+  int *v28; // ecx
+  int v29; // edi
+  unsigned int v30; // edi
+  float v31; // eax
+  int v32; // ebx
+  unsigned int v33; // esi
+  int v34; // eax
+  MEF_U32PointerMapEntry32 **buckets; // edx
+  float v36; // eax
+  float v37; // [esp+10h] [ebp-44h]
+  float v38; // [esp+10h] [ebp-44h]
+  float v39; // [esp+14h] [ebp-40h]
+  float v40; // [esp+14h] [ebp-40h]
+  int v41; // [esp+2Ch] [ebp-28h]
+  float a3a; // [esp+30h] [ebp-24h]
+  int a3; // [esp+30h] [ebp-24h]
+  unsigned int keyOut; // [esp+34h] [ebp-20h] BYREF
+  void *valueOut; // [esp+38h] [ebp-1Ch] BYREF
+  float v46; // [esp+3Ch] [ebp-18h]
+  float v47; // [esp+40h] [ebp-14h]
+  float v48; // [esp+44h] [ebp-10h]
+  unsigned int v49; // [esp+50h] [ebp-4h]
 
-  _ESI = arg0;
-  result = *(_DWORD *)(LODWORD(arg0) + 0x1C);
+  v3 = arg0; /*0x6b0c97*/
+  result = *(_DWORD *)(LODWORD(arg0) + 0x1C); /*0x6b0c9b*/
   if ( result != *(_DWORD *)(LODWORD(arg0) + 0x20) || !result )
   {
-    result = dword_B3C20C;
-    if ( dword_B3C20C < (unsigned int)dword_B16304 )
+    result = unk_B3C20C; /*0x6b0cab*/
+    if ( unk_B3C20C < (unsigned int)dword_B16304 )
     {
-      if ( (dword_B3C180 & 1) == 0 )
+      if ( (dword_B3C180[0] & 1) == 0 ) /*0x6b0cc3*/
       {
-        dword_B3C180 |= 1u;
-        NiInitalizeCriticalSection(&stru_B3C100);
-        atexit(sub_A26270);
-        v63 = 0xFFFFFFFF;
+        dword_B3C180[0] |= 1u; /*0x6b0cc5*/
+        NiInitalizeCriticalSection(&unk_B3C100); /*0x6b0cd9*/
+        atexit(sub_A26270); /*0x6b0ce3*/
+        v49 = 0xFFFFFFFF; /*0x6b0ceb*/
       }
-      NiEnterCriticalSection((struct _RTL_CRITICAL_SECTION *)&stru_B3C100, (int)&aImpactmixerPla);
-      _EAX = (void *)dword_B3C0F0;
-      if ( !dword_B3C0F0 )
+      NiEnterCriticalSection((struct _RTL_CRITICAL_SECTION *)&unk_B3C100, (int)&aImpactmixerPla); /*0x6b0cfd*/
+      sound = (float *)unk_B3C0F0; /*0x6b0d02*/
+      if ( !unk_B3C0F0 ) /*0x6b0d02*/
       {
-        _EAX = OSGlobals->sound;
-        dword_B3C0F0 = (int)_EAX;
+        sound = (float *)MEMORY[0xB33398]->sound; /*0x6b0d11*/
+        unk_B3C0F0 = (int)sound; /*0x6b0d14*/
       }
-      v6 = *(_BYTE *)(LODWORD(_ESI) + 0x14) == 0x1F;
-      __asm
+      v6 = *(_BYTE *)(LODWORD(v3) + 0x14) == 0x1F; /*0x6b0d19*/
+      *(float *)&keyOut = *(float *)(LODWORD(v3) + 0xC) * dbl_A77808; /*0x6b0d26*/
+      *(float *)&v41 = *(float *)(LODWORD(v3) + 0xC) / fConst_200; /*0x6b0d33*/
+      if ( v6 && *(_BYTE *)(LODWORD(v3) + 0x15) == 6 ) /*0x6b0d3d*/
+        *(float *)&v41 = *(float *)&v41 * dbl_A3C800; /*0x6b0d49*/
+      if ( !unk_B333B8 ) /*0x6b0d4d*/
+        goto LABEL_67; /*0x6b0d4d*/
+      v46 = sound[0x20]; /*0x6b0d60*/
+      v47 = sound[0x21]; /*0x6b0d6a*/
+      v48 = sound[0x22]; /*0x6b0d74*/
+      v46 = v46 - *(float *)LODWORD(v3); /*0x6b0d7e*/
+      v47 = v47 - *(float *)(LODWORD(v3) + 4); /*0x6b0d89*/
+      v48 = v48 - *(float *)(LODWORD(v3) + 8); /*0x6b0d94*/
+      arg0 = v48 * v48 + v46 * v46 + v47 * v47; /*0x6b0db6*/
+      arg0 = sqrt(arg0); /*0x6b0dc3*/
+      v7 = arg0; /*0x6b0dc7*/
+      arg0 = flt_B162FC * dbl_A2FAA0; /*0x6b0dd7*/
+      if ( arg0 >= v7 )
       {
-        fld     dword ptr [esi+0Ch]
-        fmul    qword ptr ds:0A77808h
-        fstp    [esp+3Ch+var_20]
-        fld     dword ptr [esi+0Ch]
-        fdiv    qword ptr ds:0A37478h
-        fstp    [esp+3Ch+var_28]
-      }
-      if ( v6 && *(_BYTE *)(LODWORD(_ESI) + 0x15) == 6 )
-      {
-        __asm
+LABEL_67:
+        v8 = *(_DWORD **)(LODWORD(v3) + 0x1C); /*0x6b0dec*/
+        v9 = v8 ? sub_535AC0(v8) : flt_A31E2C;
+        v10 = *(_DWORD **)(LODWORD(v3) + 0x20); /*0x6b0e00*/
+        arg0 = v9; /*0x6b0e03*/
+        v11 = v10 ? sub_535AC0(v10) : flt_A31E2C;
+        v12 = *(_BYTE *)(LODWORD(v3) + 0x14); /*0x6b0e18*/
+        if ( v12 >= 0xF ) /*0x6b0e21*/
+          *(_BYTE *)(LODWORD(v3) + 0x14) = v12 - 0xF; /*0x6b0e25*/
+        v13 = *(_BYTE *)(LODWORD(v3) + 0x15); /*0x6b0e28*/
+        if ( v13 >= 0xF ) /*0x6b0e2d*/
+          *(_BYTE *)(LODWORD(v3) + 0x15) = v13 - 0xF; /*0x6b0e31*/
+        sub_6B0350(*(char *)(LODWORD(v3) + 0x14), arg0); /*0x6b0e41*/
+        v15 = v14; /*0x6b0e4a*/
+        a3a = v11; /*0x6b0e1b*/
+        sub_6B0350(*(char *)(LODWORD(v3) + 0x15), a3a); /*0x6b0e58*/
+        v16 = *(_DWORD *)&MEMORY[0xB33E90][0x10]; /*0x6b0e5d*/
+        valueOut = v17; /*0x6b0e6a*/
+        v18 = *(_DWORD *)(LODWORD(v3) + 0x18); /*0x6b0e6e*/
+        a3 = v16; /*0x6b0e72*/
+        v19 = 0; /*0x6b0e76*/
+        v20 = 0; /*0x6b0e7e*/
+        arg0 = 0.0; /*0x6b0e80*/
+        if ( !NiTMap_GetAt(&self, v18, &arg0) || a3 - LODWORD(arg0) >= (unsigned int)dword_B16244 ) /*0x6b0e9b*/
         {
-          fld     [esp+3Ch+var_28]
-          fmul    qword ptr ds:0A3C800h
-          fstp    [esp+3Ch+var_28]
-        }
-      }
-      if ( byte_B333B8 )
-      {
-        __asm
-        {
-          fld     dword ptr [eax+80h]
-          fstp    [esp+3Ch+var_18]
-          fld     dword ptr [eax+84h]
-          fstp    [esp+3Ch+var_14]
-          fld     dword ptr [eax+88h]
-          fstp    [esp+3Ch+var_10]
-          fld     [esp+3Ch+var_18]
-          fsub    dword ptr [esi]
-          fstp    [esp+3Ch+var_18]
-          fld     [esp+3Ch+var_14]
-          fsub    dword ptr [esi+4]
-          fstp    [esp+3Ch+var_14]
-          fld     [esp+3Ch+var_10]
-          fsub    dword ptr [esi+8]
-          fstp    [esp+3Ch+var_10]
-          fld     [esp+3Ch+var_14]
-          fld     [esp+3Ch+var_18]
-          fld     [esp+3Ch+var_10]
-          fld     st(2)
-          fmulp   st(3), st
-          fld     st(1)
-          fmulp   st(2), st
-          fxch    st(2)
-          faddp   st(1), st
-          fld     st(1)
-          fmulp   st(2), st
-          faddp   st(1), st
-          fstp    [esp+3Ch+arg_0]
-          fld     [esp+3Ch+arg_0]
-        }
-        _CIsqrt(a2);
-        __asm
-        {
-          fstp    [esp+3Ch+arg_0]
-          fld     [esp+3Ch+arg_0]
-          fld     dword ptr ds:0B162FCh
-          fmul    qword ptr ds:0A2FAA0h
-          fstp    [esp+3Ch+arg_0]
-          fld     [esp+3Ch+arg_0]
-          fcompp
-          fnstsw  ax
-        }
-        if ( !__SETP__(HIBYTE(_AX) & 5, 0) )
-          return NiLeaveCriticalSection_0(&stru_B3C100);
-      }
-      v8 = *(_DWORD **)(LODWORD(_ESI) + 0x1C);
-      if ( v8 )
-        sub_535AC0(v8);
-      else
-        __asm { fld     dword ptr ds:0A31E2Ch }
-      v9 = *(_DWORD **)(LODWORD(_ESI) + 0x20);
-      __asm { fstp    [esp+3Ch+arg_0] }
-      if ( v9 )
-        sub_535AC0(v9);
-      else
-        __asm { fld     dword ptr ds:0A31E2Ch }
-      v10 = *(_BYTE *)(LODWORD(_ESI) + 0x14);
-      __asm { fstp    [esp+3Ch+a3] }
-      if ( v10 >= 0xF )
-        *(_BYTE *)(LODWORD(_ESI) + 0x14) = v10 - 0xF;
-      v11 = *(_BYTE *)(LODWORD(_ESI) + 0x15);
-      if ( v11 >= 0xF )
-        *(_BYTE *)(LODWORD(_ESI) + 0x15) = v11 - 0xF;
-      __asm { fld     [esp+3Ch+arg_0] }
-      __asm { fstp    [esp+40h+var_40]; float }
-      sub_6B0350(*(char *)(LODWORD(_ESI) + 0x14), v45);
-      __asm { fld     [esp+44h+a3] }
-      v13 = v12;
-      __asm { fstp    [esp+44h+var_40]; float }
-      sub_6B0350(*(char *)(LODWORD(_ESI) + 0x15), v46);
-      v14 = Seed;
-      v59 = v15;
-      v16 = *(_DWORD *)(LODWORD(_ESI) + 0x18);
-      a3a = v14;
-      v17 = 0;
-      v18 = 0;
-      arg0 = 0.0;
-      if ( NiTMap_GetAt(&off_B1630C, v16, &arg0) )
-      {
-        if ( a3a - LODWORD(arg0) < (unsigned int)dword_B16244 )
-          return NiLeaveCriticalSection_0(&stru_B3C100);
-      }
-      NiTMap_SetAt(&off_B1630C, *(_DWORD *)(LODWORD(_ESI) + 0x18), a3a);
-      if ( v13 )
-      {
-        if ( *(_BYTE *)(LODWORD(_ESI) + 0x14) != 7 || *(_BYTE *)(LODWORD(_ESI) + 0x15) != 7 )
-          v18 = OSGLobals_PlaySound((int *)dword_B3C0F0, *(void **)(v13 + 0xC), 0x4102, 0);
-      }
-      if ( v59 )
-      {
-        if ( *(_BYTE *)(LODWORD(_ESI) + 0x14) != 7 || *(_BYTE *)(LODWORD(_ESI) + 0x15) != 7 )
-          v17 = OSGLobals_PlaySound((int *)dword_B3C0F0, (void *)v59->members.super.refID, 0x4102, 0);
-      }
-      if ( !v18 )
-      {
-LABEL_45:
-        if ( !v17 )
-          goto LABEL_57;
-        __asm { fld     dword ptr [esi+8] }
-        __asm { fstp    [esp+48h+var_40]; float }
-        __asm
-        {
-          fld     dword ptr [esi+4]
-          fstp    [esp+48h+var_44]; float
-          fld     dword ptr [esi]
-          fstp    [esp+48h+var_48]; float
-        }
-        sub_6B7360(v17, v40, v43, v51);
-        __asm
-        {
-          fld     [esp+3Ch+var_20]
-          fdiv    qword ptr ds:0A46E48h
-          fld1
-          fcom    st(1)
-          fnstsw  ax
-        }
-        if ( __SETP__(HIBYTE(_AX) & 5, 0) )
-          __asm { fstp    st }
-        else
-          __asm { fstp    st(1) }
-        __asm { fmul    qword ptr ds:0A38538h }
-        __asm
-        {
-          fadd    qword ptr ds:0A6E700h
-          fstp    [esp+40h+arg_0]
-          fld     [esp+40h+arg_0]
-          fstp    [esp+40h+var_40]; float
-        }
-        sub_6B7310(v17, v52);
-        __asm
-        {
-          fld     [esp+3Ch+var_28]
-          fmul    qword ptr ds:0A2FAA0h
-          fld1
-          fcom    st(1)
-          fnstsw  ax
-        }
-        if ( (_AX & 0x4100) == 0 )
-        {
-          __asm
+          NiTMap_SetAt(&self, *(_DWORD *)(LODWORD(v3) + 0x18), a3); /*0x6b0eaf*/
+          if ( v15 ) /*0x6b0eb6*/
           {
-            fld     st(1)
-            fldz
-            fcom    st(1)
-            fnstsw  ax
-            fstp    st(1)
+            if ( *(_BYTE *)(LODWORD(v3) + 0x14) != 7 || *(_BYTE *)(LODWORD(v3) + 0x15) != 7 ) /*0x6b0ec2*/
+              v20 = OSGLobals_PlaySound((int *)unk_B3C0F0, *(void **)(v15 + 0xC), 0x4102, 0); /*0x6b0eda*/
           }
-          if ( __SETP__(HIBYTE(_AX) & 5, 0) )
+          if ( valueOut ) /*0x6b0ee2*/
           {
-            __asm { fstp    st(2) }
-            goto LABEL_55;
+            if ( *(_BYTE *)(LODWORD(v3) + 0x14) != 7 || *(_BYTE *)(LODWORD(v3) + 0x15) != 7 ) /*0x6b0eee*/
+              v19 = OSGLobals_PlaySound((int *)unk_B3C0F0, *((void **)valueOut + 3), 0x4102, 0); /*0x6b0f06*/
           }
-          __asm { fstp    st }
-        }
-        __asm
-        {
-          fcom    st(1)
-          fnstsw  ax
-        }
-        if ( (_AX & 0x4100) != 0 )
-        {
-          __asm { fstp    st(1) }
-LABEL_56:
-          __asm { fstp    [esp+3Ch+arg_0] }
-          __asm { fld     [esp+40h+arg_0] }
-          __asm { fstp    [esp+40h+var_40]; float }
-          sub_6B7280(v17, v53);
-          __asm { fld     dword ptr ds:0A379CCh }
-          __asm { fnstcw  word ptr [esp+44h+arg_0] }
-          __asm { fstp    [esp+44h+var_40]; float }
-          __asm { fld     [esp+44h+var_28] }
-          v59 = (TESObjectCELL *)(LOWORD(arg0) | 0xC00);
-          __asm { fldcw   word ptr [esp+44h+var_1C] }
-          v29 = *v17;
-          __asm { fistp   [esp+44h+var_1C] }
-          v30 = (int *)dword_B3C0F0;
-          __asm { fldcw   word ptr [esp+44h+arg_0] }
-          LODWORD(arg0) = (unsigned __int8)v59;
-          __asm
+          if ( v20 ) /*0x6b0f0a*/
           {
-            fild    [esp+44h+arg_0]
-            fstp    [esp+44h+var_44]; float
-          }
-          sub_6ACC50(v30, v29, v44, v54);
-          sub_6B7190(v17, 0);
-          sub_6B73E0(v17);
-          FormHeapFree((unsigned int)v17);
-LABEL_57:
-          v31 = dword_B16244;
-          dword_B3C0F4 = *(_DWORD *)LODWORD(_ESI);
-          dword_B3C0F8 = *(_DWORD *)(LODWORD(_ESI) + 4);
-          dword_B3C0FC = *(_DWORD *)(LODWORD(_ESI) + 8);
-          v32 = 4 * v31;
-          v33 = COERCE_FLOAT(sub_6A9030(&off_B1630C));
-          v34 = Seed;
-          v35 = 0;
-          arg0 = v33;
-          if ( v33 != 0.0 )
-          {
-            while ( 1 )
+            sub_6B7360(v20, *(float *)LODWORD(v3), *(float *)(LODWORD(v3) + 4), *(float *)(LODWORD(v3) + 8)); /*0x6b0f28*/
+            v21 = *(float *)&keyOut / dbl_A46E48; /*0x6b0f31*/
+            if ( v21 > 1.0 ) /*0x6b0f40*/
+              v21 = 1.0; /*0x6b0f42*/
+            arg0 = v21 * dbl_A38538 + dbl_A6E700; /*0x6b0f57*/
+            sub_6B7310(v20, arg0); /*0x6b0f62*/
+            v22 = *(float *)&v41 * dbl_A2FAA0; /*0x6b0f6b*/
+            if ( v22 < 1.0 && v22 <= 0.0 ) /*0x6b0f89*/
             {
-              ++v35;
-              sub_452600((NiTMap_TESCELL *)&off_B1630C, (NiTMap_Entry_TESCELL **)&arg0, (void **)&v58, &v59);
-              if ( v34 - (unsigned int)v59 > v32 )
+              v22 = 0.0; /*0x6b0f9a*/
+            }
+            else if ( v22 >= 1.0 ) /*0x6b0f94*/
+            {
+              v22 = 1.0; /*0x6b0f96*/
+            }
+            arg0 = v22; /*0x6b0f9e*/
+            sub_6B7280(v20, arg0); /*0x6b0fac*/
+            v39 = flt_A379CC; /*0x6b0fc3*/
+            valueOut = (void *)(LOWORD(arg0) | 0xC00); /*0x6b0fd0*/
+            v23 = *v20; /*0x6b0fd8*/
+            valueOut = (void *)(int)*(float *)&v41; /*0x6b0fda*/
+            v24 = (int *)unk_B3C0F0; /*0x6b0fe5*/
+            LODWORD(arg0) = (unsigned __int8)valueOut; /*0x6b0fef*/
+            v37 = (float)(unsigned __int8)valueOut; /*0x6b0ff7*/
+            sub_6ACC50(v24, v23, v37, v39); /*0x6b0ffb*/
+            sub_6B7190(v20, 0); /*0x6b1004*/
+            sub_6B73E0(v20); /*0x6b100b*/
+            FormHeapFree((unsigned int)v20); /*0x6b1011*/
+          }
+          if ( v19 ) /*0x6b101b*/
+          {
+            sub_6B7360(v19, *(float *)LODWORD(v3), *(float *)(LODWORD(v3) + 4), *(float *)(LODWORD(v3) + 8)); /*0x6b1039*/
+            v25 = *(float *)&keyOut / dbl_A46E48; /*0x6b1042*/
+            if ( v25 > 1.0 ) /*0x6b1051*/
+              v25 = 1.0; /*0x6b1053*/
+            arg0 = v25 * dbl_A38538 + dbl_A6E700; /*0x6b1068*/
+            sub_6B7310(v19, arg0); /*0x6b1073*/
+            v26 = *(float *)&v41 * dbl_A2FAA0; /*0x6b107c*/
+            if ( v26 < 1.0 && v26 <= 0.0 ) /*0x6b109a*/
+            {
+              v26 = 0.0; /*0x6b10ab*/
+            }
+            else if ( v26 >= 1.0 ) /*0x6b10a5*/
+            {
+              v26 = 1.0; /*0x6b10a7*/
+            }
+            arg0 = v26; /*0x6b10af*/
+            sub_6B7280(v19, arg0); /*0x6b10bd*/
+            v40 = flt_A379CC; /*0x6b10d4*/
+            valueOut = (void *)(LOWORD(arg0) | 0xC00); /*0x6b10e1*/
+            v27 = *v19; /*0x6b10e9*/
+            valueOut = (void *)(int)*(float *)&v41; /*0x6b10eb*/
+            v28 = (int *)unk_B3C0F0; /*0x6b10f6*/
+            LODWORD(arg0) = (unsigned __int8)valueOut; /*0x6b1100*/
+            v38 = (float)(unsigned __int8)valueOut; /*0x6b1108*/
+            sub_6ACC50(v28, v27, v38, v40); /*0x6b110c*/
+            sub_6B7190(v19, 0); /*0x6b1115*/
+            sub_6B73E0(v19); /*0x6b111c*/
+            FormHeapFree((unsigned int)v19); /*0x6b1122*/
+          }
+          v29 = dword_B16244; /*0x6b112c*/
+          unk_B3C0F4 = *(_DWORD *)LODWORD(v3); /*0x6b1132*/
+          unk_B3C0F8 = *(_DWORD *)(LODWORD(v3) + 4); /*0x6b113b*/
+          unk_B3C0FC = *(_DWORD *)(LODWORD(v3) + 8); /*0x6b114b*/
+          v30 = 4 * v29; /*0x6b1150*/
+          v31 = COERCE_FLOAT(NiTMapBase_GetFirstNode((unsigned int *)&self)); /*0x6b1152*/
+          v32 = *(_DWORD *)&MEMORY[0xB33E90][0x10]; /*0x6b1157*/
+          v33 = 0; /*0x6b115d*/
+          arg0 = v31; /*0x6b1161*/
+          if ( v31 != 0.0 ) /*0x6b1165*/
+          {
+            while ( 1 ) /*0x6b117b*/
+            {
+              ++v33; /*0x6b117b*/
+              NiTMap_U32Pointer_GetNextEntry(&self, (MEF_U32PointerMapEntry32 **)&arg0, &keyOut, &valueOut); /*0x6b117e*/
+              if ( v32 - (int)valueOut > v30 ) /*0x6b118b*/
               {
-                NiTMap_RemoveAt(&off_B1630C, v58);
-                v36 = 0;
-                if ( dword_B16310 )
+                NiTMap_RemoveAt(&self, keyOut); /*0x6b1197*/
+                v34 = 0; /*0x6b11a2*/
+                if ( self.bucketCount ) /*0x6b119c*/
                 {
-                  v37 = dword_B16314;
-                  while ( !*(_DWORD *)(v37 + 4 * v36) )
+                  buckets = self.buckets; /*0x6b11a8*/
+                  while ( !buckets[v34] ) /*0x6b11b4*/
                   {
-                    if ( ++v36 >= (unsigned int)dword_B16310 )
-                      goto LABEL_63;
+                    if ( ++v34 >= self.bucketCount ) /*0x6b11bb*/
+                      goto LABEL_57; /*0x6b11bb*/
                   }
-                  v38 = *(float *)(v37 + 4 * v36);
+                  v36 = *(float *)&buckets[v34]; /*0x6b11d4*/
                 }
                 else
                 {
-LABEL_63:
-                  v38 = 0.0;
+LABEL_57:
+                  v36 = 0.0; /*0x6b11bd*/
                 }
-                arg0 = v38;
+                arg0 = v36; /*0x6b11bf*/
               }
-              if ( v35 > 0x100 )
-                break;
-              if ( arg0 == 0.0 )
-                return NiLeaveCriticalSection_0(&stru_B3C100);
+              if ( v33 > 0x100 ) /*0x6b11c9*/
+                break; /*0x6b11c9*/
+              if ( arg0 == 0.0 ) /*0x6b11d0*/
+                return NiLeaveCriticalSection_0(&unk_B3C100); /*0x6b11d0*/
             }
-            NiTMap_Clear(&off_B1630C);
+            NiTMap_Clear(&self); /*0x6b11de*/
           }
-          return NiLeaveCriticalSection_0(&stru_B3C100);
         }
-LABEL_55:
-        __asm { fstp    st }
-        goto LABEL_56;
       }
-      __asm { fld     dword ptr [esi+8] }
-      __asm { fstp    [esp+48h+var_40]; float }
-      __asm
-      {
-        fld     dword ptr [esi+4]
-        fstp    [esp+48h+var_44]; float
-        fld     dword ptr [esi]
-        fstp    [esp+48h+var_48]; float
-      }
-      sub_6B7360(v18, v39, v41, v47);
-      __asm
-      {
-        fld     [esp+3Ch+var_20]
-        fdiv    qword ptr ds:0A46E48h
-        fld1
-        fcom    st(1)
-        fnstsw  ax
-      }
-      if ( __SETP__(HIBYTE(_AX) & 5, 0) )
-        __asm { fstp    st }
-      else
-        __asm { fstp    st(1) }
-      __asm { fmul    qword ptr ds:0A38538h }
-      __asm
-      {
-        fadd    qword ptr ds:0A6E700h
-        fstp    [esp+40h+arg_0]
-        fld     [esp+40h+arg_0]
-        fstp    [esp+40h+var_40]; float
-      }
-      sub_6B7310(v18, v48);
-      __asm
-      {
-        fld     [esp+3Ch+var_28]
-        fmul    qword ptr ds:0A2FAA0h
-        fld1
-        fcom    st(1)
-        fnstsw  ax
-      }
-      if ( (_AX & 0x4100) == 0 )
-      {
-        __asm
-        {
-          fld     st(1)
-          fldz
-          fcom    st(1)
-          fnstsw  ax
-          fstp    st(1)
-        }
-        if ( __SETP__(HIBYTE(_AX) & 5, 0) )
-        {
-          __asm { fstp    st(2) }
-          goto LABEL_43;
-        }
-        __asm { fstp    st }
-      }
-      __asm
-      {
-        fcom    st(1)
-        fnstsw  ax
-      }
-      if ( (_AX & 0x4100) != 0 )
-      {
-        __asm { fstp    st(1) }
-LABEL_44:
-        __asm { fstp    [esp+3Ch+arg_0] }
-        __asm { fld     [esp+40h+arg_0] }
-        __asm { fstp    [esp+40h+var_40]; float }
-        sub_6B7280(v18, v49);
-        __asm { fld     dword ptr ds:0A379CCh }
-        __asm { fnstcw  word ptr [esp+44h+arg_0] }
-        __asm { fstp    [esp+44h+var_40]; float }
-        __asm { fld     [esp+44h+var_28] }
-        v59 = (TESObjectCELL *)(LOWORD(arg0) | 0xC00);
-        __asm { fldcw   word ptr [esp+44h+var_1C] }
-        v23 = *v18;
-        __asm { fistp   [esp+44h+var_1C] }
-        v24 = (int *)dword_B3C0F0;
-        __asm { fldcw   word ptr [esp+44h+arg_0] }
-        LODWORD(arg0) = (unsigned __int8)v59;
-        __asm
-        {
-          fild    [esp+44h+arg_0]
-          fstp    [esp+44h+var_44]; float
-        }
-        sub_6ACC50(v24, v23, v42, v50);
-        sub_6B7190(v18, 0);
-        sub_6B73E0(v18);
-        FormHeapFree((unsigned int)v18);
-        goto LABEL_45;
-      }
-LABEL_43:
-      __asm { fstp    st }
-      goto LABEL_44;
+      return NiLeaveCriticalSection_0(&unk_B3C100); /*0x6b11e3*/
     }
   }
-  return result;
+  return result; /*0x6b11ed*/
 }

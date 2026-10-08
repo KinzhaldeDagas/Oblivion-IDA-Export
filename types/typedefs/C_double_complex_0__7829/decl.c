@@ -1,1 +1,1 @@
-_C_double_complex_0
+typedef _C_double_complex _C_double_complex_0;

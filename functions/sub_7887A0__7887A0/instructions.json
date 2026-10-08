@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7887A0",
-    "line": "sub     esp, 30h",
+    "line": "sub     esp, 30h; 2026-05-25 render dispatch recheck: 360 billboard export wrapper depends on GetGeometry bit 0x08 and CSpeedTreeRT+0x54/+0x6C state. No stock BSTreeModel caller reaches it in the observed resource path.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -19,13 +19,13 @@
   },
   {
     "ea": "0x7887A5",
-    "line": "mov     edi, [esp+38h+arg_0]",
+    "line": "mov     edi, [esp+38h+geometryOut]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7887A9",
-    "line": "push    edi",
+    "line": "push    edi; geometry",
     "mnemonic": "push",
     "size": 1
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x7887AC",
-    "line": "call    sub_788430",
+    "line": "call    CSpeedTreeRT__GetSimpleBillboardGeometry; Simple/horizontal billboard runtime export. Uses byte_B4297C synthetic billboard LOD, target alpha at this+0x44, and horizontal fade scalar flt_B2B604.",
     "mnemonic": "call",
     "size": 5
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x7887BF",
-    "line": "movzx   ebx, word ptr [esi+54h]",
+    "line": "movzx   ebx, word ptr [esi+54h]; 2026-05-26 SpeedTreeOBSE note: 360 exporter activation reads CSpeedTreeRT+0x54 directional image count here. Stock parser/dataflow still has no verified persistent initializer from embedded billboard count; plugin diagnostic may temporarily seed and restore +0x54 only for temp GetGeometry(0x08) logging.",
     "mnemonic": "movzx",
     "size": 4
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x7887D0",
-    "line": "mov     [esp+3Ch+arg_0], eax",
+    "line": "mov     [esp+3Ch+geometryOut], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x7887DA",
-    "line": "fild    [esp+3Ch+arg_0]",
+    "line": "fild    [esp+3Ch+geometryOut]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -223,13 +223,13 @@
   },
   {
     "ea": "0x78882C",
-    "line": "fstp    [esp+3Ch+arg_0]",
+    "line": "fstp    [esp+3Ch+geometryOut]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x788830",
-    "line": "fld     [esp+3Ch+arg_0]",
+    "line": "fld     [esp+3Ch+geometryOut]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x78883A",
-    "line": "fstp    [esp+3Ch+arg_0]",
+    "line": "fstp    [esp+3Ch+geometryOut]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x788840",
-    "line": "fld     [esp+3Ch+arg_0]",
+    "line": "fld     [esp+3Ch+geometryOut]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -307,13 +307,13 @@
   },
   {
     "ea": "0x788859",
-    "line": "fstp    [esp+3Ch+arg_0]",
+    "line": "fstp    [esp+3Ch+geometryOut]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x78885D",
-    "line": "fld     [esp+3Ch+arg_0]",
+    "line": "fld     [esp+3Ch+geometryOut]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x78886A",
-    "line": "fst     [esp+40h+arg_0]",
+    "line": "fst     [esp+40h+geometryOut]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x788871",
-    "line": "fstp    [esp+40h+var_2C]",
+    "line": "fstp    [esp+40h+lowAlpha]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -367,13 +367,13 @@
   },
   {
     "ea": "0x78887C",
-    "line": "lea     ecx, [esp+40h+var_24]",
+    "line": "lea     ecx, [esp+40h+lowLod]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x788880",
-    "line": "push    ecx; int",
+    "line": "push    ecx; lowLod",
     "mnemonic": "push",
     "size": 1
   },
@@ -391,13 +391,13 @@
   },
   {
     "ea": "0x788888",
-    "line": "lea     edx, [esp+44h+var_28]",
+    "line": "lea     edx, [esp+44h+highLod]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x78888C",
-    "line": "push    edx; int",
+    "line": "push    edx; highLod",
     "mnemonic": "push",
     "size": 1
   },
@@ -415,37 +415,37 @@
   },
   {
     "ea": "0x788897",
-    "line": "mov     [esp+48h+var_28], eax",
+    "line": "mov     dword ptr [esp+48h+highLod], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x78889B",
-    "line": "mov     [esp+48h+var_24], eax",
+    "line": "mov     dword ptr [esp+48h+lowLod], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x78889F",
-    "line": "lea     eax, [esp+48h+var_2C]",
+    "line": "lea     eax, [esp+48h+lowAlpha]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7888A3",
-    "line": "push    eax; int",
+    "line": "push    eax; lowAlpha",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7888A4",
-    "line": "lea     ecx, [esp+4Ch+arg_0]",
+    "line": "lea     ecx, [esp+4Ch+geometryOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7888A8",
-    "line": "push    ecx; int",
+    "line": "push    ecx; highAlpha",
     "mnemonic": "push",
     "size": 1
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x7888C0",
-    "line": "fstp    [esp+60h+var_54]; float",
+    "line": "fstp    [esp+60h+targetAlpha]; targetAlpha",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x7888C7",
-    "line": "fstp    [esp+60h+var_58]; float",
+    "line": "fstp    [esp+60h+curveExponent]; curveExponent",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -511,19 +511,19 @@
   },
   {
     "ea": "0x7888CE",
-    "line": "fstp    [esp+60h+var_5C]; float",
+    "line": "fstp    [esp+60h+transitionFactor]; transitionFactor",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7888D2",
-    "line": "fstp    [esp+60h+var_60]; float",
+    "line": "fstp    [esp+60h+overlapRadius]; 360 directional image selection maps camera azimuth to normalized ring position: halfSlice + (1 - 2*halfSlice) * (azimuth / 360).",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7888D5",
-    "line": "push    ebp; int",
+    "line": "push    ebp; lodCount",
     "mnemonic": "push",
     "size": 1
   },
@@ -631,19 +631,19 @@
   },
   {
     "ea": "0x788905",
-    "line": "fstp    [esp+68h+var_68]; float",
+    "line": "fstp    [esp+68h+lodLevel]; lodLevel",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x788908",
-    "line": "call    sub_787220",
+    "line": "call    CSpeedTreeRT__GetTransitionValues; 2026-05-26 SpeedTreeOBSE: shared stock LOD fade/index resolver. Plugin calls it unmodified for candidate 75002 transition-radius and 75005 transition-factor comparisons; optional writes are limited to caller-side SGeometry+0x38 under explicit INI gates. Not patched.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x78890D",
-    "line": "movzx   eax, word ptr [esi+54h]",
+    "line": "movzx   eax, word ptr [esi+54h]; 2026-05-26 SpeedTreeOBSE note: 360 exporter re-reads CSpeedTreeRT+0x54 for reverse/wrap image-index mapping. Treat +0x54 as unverified persistent count in stock; plugin diagnostic seed is temporary and restored.",
     "mnemonic": "movzx",
     "size": 4
   },
@@ -655,13 +655,13 @@
   },
   {
     "ea": "0x788913",
-    "line": "sub     ecx, [esp+68h+var_28]",
+    "line": "sub     ecx, dword ptr [esp+68h+highLod]",
     "mnemonic": "sub",
     "size": 4
   },
   {
     "ea": "0x788917",
-    "line": "sub     eax, [esp+68h+var_24]",
+    "line": "sub     eax, dword ptr [esp+68h+lowLod]",
     "mnemonic": "sub",
     "size": 4
   },
@@ -781,19 +781,19 @@
   },
   {
     "ea": "0x78894A",
-    "line": "test    [esp+40h+arg_4], 20h",
+    "line": "test    [esp+40h+geometryFlags], 20h",
     "mnemonic": "test",
     "size": 5
   },
   {
     "ea": "0x78894F",
-    "line": "jz      loc_7889D8",
+    "line": "jz      loc_7889D8; 2026-05-21 360 gap pass: caller flag 0x20 selects one stronger directional image instead of two blended directional billboard entries; no stock caller reaches this branch.",
     "mnemonic": "jz",
     "size": 6
   },
   {
     "ea": "0x788955",
-    "line": "fld     [esp+40h+arg_0]",
+    "line": "fld     [esp+40h+geometryOut]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -805,7 +805,7 @@
   },
   {
     "ea": "0x788960",
-    "line": "fld     [esp+40h+var_2C]",
+    "line": "fld     [esp+40h+lowAlpha]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -871,13 +871,13 @@
   },
   {
     "ea": "0x788983",
-    "line": "mov     [esp+40h+arg_0], eax",
+    "line": "mov     [esp+40h+geometryOut], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x788987",
-    "line": "fild    [esp+40h+arg_0]",
+    "line": "fild    [esp+40h+geometryOut]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -925,19 +925,19 @@
   },
   {
     "ea": "0x7889A3",
-    "line": "mov     [esp+40h+arg_0], eax",
+    "line": "mov     [esp+40h+geometryOut], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7889A7",
-    "line": "fild    [esp+40h+arg_0]",
+    "line": "fild    [esp+40h+geometryOut]",
     "mnemonic": "fild",
     "size": 4
   },
   {
     "ea": "0x7889AB",
-    "line": "fstp    [esp+40h+arg_0]",
+    "line": "fstp    [esp+40h+geometryOut]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -949,7 +949,7 @@
   },
   {
     "ea": "0x7889B0",
-    "line": "fld     [esp+3Ch+arg_0]",
+    "line": "fld     [esp+3Ch+geometryOut]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1081,7 +1081,7 @@
   },
   {
     "ea": "0x7889F8",
-    "line": "fld     [esp+40h+arg_0]",
+    "line": "fld     [esp+40h+geometryOut]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1225,7 +1225,7 @@
   },
   {
     "ea": "0x788A4D",
-    "line": "fld     [esp+40h+var_2C]",
+    "line": "fld     [esp+40h+lowAlpha]",
     "mnemonic": "fld",
     "size": 4
   },

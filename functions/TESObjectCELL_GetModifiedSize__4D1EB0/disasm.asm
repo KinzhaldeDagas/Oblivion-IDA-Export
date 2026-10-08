@@ -16,7 +16,7 @@
 0x4D1EE4: add     si, ax
 0x4D1EE7: mov     word ptr [esp+14h+var_4], si
 0x4D1EEC: movzx   ebp, si
-0x4D1EEF: call    sub_45A170
+0x4D1EEF: call    TESSaveLoadGame_UseSaveGameBlocks
 0x4D1EF4: test    al, al
 0x4D1EF6: jz      short loc_4D1F02
 0x4D1EF8: add     [esp+14h+var_4], 6
@@ -28,7 +28,7 @@
 0x4D1F11: test    ebx, 10000000h
 0x4D1F17: jz      short loc_4D1F34
 0x4D1F19: lea     ecx, [edi+28h]
-0x4D1F1C: call    sub_420B50
+0x4D1F1C: call    ExtraDataList_GetSeenData; Returns the owned SeenData pointer from ExtraSeenData (type 0x09), or null.
 0x4D1F21: mov     edx, [eax]
 0x4D1F23: mov     ecx, eax
 0x4D1F25: mov     eax, [edx+8]
@@ -58,8 +58,8 @@
 0x4D1F6E: mov     si, word ptr [esp+14h+var_4]
 0x4D1F73: test    ebx, 1000000h
 0x4D1F79: jz      short loc_4D1F86
-0x4D1F7B: mov     ecx, [edi+44h]
-0x4D1F7E: call    sub_4E5A40
+0x4D1F7B: mov     ecx, [edi+44h]; this
+0x4D1F7E: call    TESPathGrid_GetModifiedSize; Verified modified-form size: 2-byte disabled-point count, plus 2 bytes for each non-null point with linkedPointsDisabled set; adds 6 bytes when save-game block framing is enabled.
 0x4D1F83: add     si, ax
 0x4D1F86: cmp     byte ptr ds:0B05BACh, 0
 0x4D1F8D: jz      short loc_4D2009
@@ -69,7 +69,7 @@
 0x4D1F9D: jz      short loc_4D1FE9
 0x4D1F9F: mov     edx, [edi]
 0x4D1FA1: push    edx; a1
-0x4D1FA2: call    TESForm_LookupByFormID
+0x4D1FA2: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4D1FA7: mov     ecx, [edi+5]
 0x4D1FAA: mov     edx, [eax]
 0x4D1FAC: add     esp, 4

@@ -1,4 +1,13 @@
-int __stdcall Actor_MagicTarget_AttemptAddEffect(int a1, int a2, int a3, int a4)
+char __userpurge Actor_MagicTarget_AttemptAddEffect@<al>(
+        int *a1@<ecx>,
+        int a2@<ebx>,
+        int a3,
+        _DWORD *a4,
+        int a5,
+        void *a6,
+        int a7,
+        int a8,
+        char a9)
 {
-  return Actor_MagicTarget_AttemptAddEffect_::CheckGhost(a1, a2, a3, a4);
+  return Actor_MagicTarget_AttemptAddEffect_::CheckGhost((_BYTE *)a1 + 0xFFFFFFDC, a2, a1, a3, a4, a5, a6, a7, a8, a9);
 }

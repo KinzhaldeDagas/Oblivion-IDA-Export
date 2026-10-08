@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 4,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x51C6E0",
+      "0x51C708"
+    ]
+  ],
+  "chunks_sha256": "1aeb9ad700b55ecf11c62da2a8ce6e41900183df798a4944b27cc83d3cc58444",
+  "comment_regular": "Verified: returns TESActorBase size plus 3 bytes for changeMask 0x200 (skills) and 4 bytes for 0x400 (combat-style FormID). Confirmed by save/load partners 0x51DA50/0x51C710. Fallout 0x8240B4D0 shares only the skills extension.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_51C6E0",
+  "display_name": "TESCreature_GetModifiedSize",
   "end_ea": "0x51C708",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_51C6E0",
+  "name": "TESCreature_GetModifiedSize",
   "segment": ".text",
   "sha256": "1aeb9ad700b55ecf11c62da2a8ce6e41900183df798a4944b27cc83d3cc58444",
   "size": 40,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x51C6E0",
-  "type": "int __thiscall(char *this, int)",
+  "total_chunk_size": 40,
+  "type": "unsigned __int16 __thiscall(TESCreature *self, ActorBaseSaveChangeMask changeMask)",
   "xrefs_from_count": 15,
   "xrefs_to_count": 5
 }

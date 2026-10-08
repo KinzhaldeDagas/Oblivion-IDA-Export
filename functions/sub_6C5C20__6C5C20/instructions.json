@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x6C5C2A",
-    "line": "call    sub_715E70",
+    "line": "call    NiTimeController_LinkObject; Resolves streamed next-controller and target links. Next +0x34 is refcounted; target +0x30 is non-owning. For streams older than 0x0A000110, propagates the controller manager-controlled state to the linked target property flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -103,31 +103,31 @@
   },
   {
     "ea": "0x6C5C4C",
-    "line": "push    0",
+    "line": "push    0; validateControlledBlocks",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6C5C4E",
-    "line": "push    0",
+    "line": "push    0; name",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6C5C50",
-    "line": "push    eax",
+    "line": "push    eax; sequence",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6C5C51",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6C5C53",
-    "line": "call    sub_6C5760",
+    "line": "call    NiControllerManager_AddSequence; Adds a controller sequence to a NiControllerManager: rejects an already-owned sequence, binds manager, optionally validates controlled blocks, stores name mapping/list membership, and balances the temporary reference.",
     "mnemonic": "call",
     "size": 5
   },

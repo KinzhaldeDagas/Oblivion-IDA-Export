@@ -1,19 +1,32 @@
 {
-  "callees_count": 15,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 10,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4E9060",
+      "0x4E914F"
+    ]
+  ],
+  "chunks_sha256": "ed7eb487c8b41bcd5551c24f189741307b066cba9b2e51b0c859579594a2f50c",
+  "comment_regular": "Verified: inserts a non-null TESConnectedPoint only if no existing node at that position is found. Buckets the point by packed exterior-cell coordinates (signed X and Y each arithmetic-shifted by 12), creates a BSSimpleList header when absent, pushes the node, and increments the Road node count.",
+  "comment_repeatable": "Verified: inserts a non-null TESConnectedPoint only if no existing node at that position is found. Buckets the point by packed exterior-cell coordinates (signed X and Y each arithmetic-shifted by 12), creates a BSSimpleList header when absent, pushes the node, and increments the Road node count.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4E9060",
+  "display_name": "TESRoad_AddConnectedPointIfMissing",
   "end_ea": "0x4E914F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4E9060",
+  "name": "TESRoad_AddConnectedPointIfMissing",
   "segment": ".text",
   "sha256": "ed7eb487c8b41bcd5551c24f189741307b066cba9b2e51b0c859579594a2f50c",
   "size": 239,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E9060",
-  "type": "void __thiscall(char *this, signed int)",
+  "total_chunk_size": 239,
+  "type": "void __thiscall(TESRoad *this, TESConnectedPoint *point)",
   "xrefs_from_count": 94,
   "xrefs_to_count": 2
 }

@@ -1,4 +1,4 @@
-0x4E9CA0: push    ebp
+0x4E9CA0: push    ebp; Verified TESRoad RGRP loader resolves each 12-byte target XYZ through the road's coordinate lookup and rebuilds adjacency pointers. This differs from TESPathGrid's PGRR u16 point-index stream.
 0x4E9CA1: mov     ebp, esp
 0x4E9CA3: push    0FFFFFFFFh
 0x4E9CA5: push    offset SEH_4E9CA0
@@ -25,7 +25,7 @@
 0x4E9CE0: jmp     loc_4E9EFC
 0x4E9CE5: push    edi
 0x4E9CE6: mov     ecx, ebx
-0x4E9CE8: call    TESFile_InitializeFormFromRecord
+0x4E9CE8: call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.
 0x4E9CED: push    0; a2
 0x4E9CEF: mov     ecx, edi; this
 0x4E9CF1: call    TESForm_SetIsLinked
@@ -55,8 +55,8 @@
 0x4E9D47: push    ecx; a4
 0x4E9D48: push    eax; Dst
 0x4E9D49: mov     ecx, ebx; a1
-0x4E9D4B: mov     [ebp+var_20], eax
-0x4E9D4E: call    TESFile_GetChunkData
+0x4E9D4B: mov     [ebp+position], eax
+0x4E9D4E: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4E9D53: xor     ecx, ecx
 0x4E9D55: mov     eax, esi
 0x4E9D57: mov     edx, 4
@@ -72,7 +72,7 @@
 0x4E9D72: mov     [ebp+var_1C], eax
 0x4E9D75: mov     [ebp+var_14], edi
 0x4E9D78: jbe     loc_4E9E9F
-0x4E9D7E: mov     ebx, [ebp+var_20]
+0x4E9D7E: mov     ebx, [ebp+position]
 0x4E9D81: push    28h ; '('; Size
 0x4E9D83: call    FormHeapAlloc
 0x4E9D88: add     esp, 4
@@ -81,16 +81,16 @@
 0x4E9D90: cmp     eax, esi
 0x4E9D92: mov     [ebp+var_4], esi
 0x4E9D95: jz      short loc_4E9DA0
-0x4E9D97: mov     ecx, eax
-0x4E9D99: call    sub_4BEF70
+0x4E9D97: mov     ecx, eax; this
+0x4E9D99: call    TESConnectedPoint_ctor; Verified: initializes the 0x28-byte point allocation used by ROAD load/copy, zeros its leading 0x14 bytes through sub_67EDC0, initializes its XYZ at +0x14, and zeros the 8-byte connection-list header at +0x20. The meaning of leading bytes +0x00..+0x13 remains Unknown.
 0x4E9D9E: mov     esi, eax
-0x4E9DA0: push    ebx
-0x4E9DA1: mov     ecx, esi
+0x4E9DA0: push    ebx; position
+0x4E9DA1: mov     ecx, esi; this
 0x4E9DA3: mov     [ebp+var_4], 0FFFFFFFFh
-0x4E9DAA: call    sub_4BEF50
-0x4E9DAF: mov     ecx, [ebp+var_18]
-0x4E9DB2: push    esi
-0x4E9DB3: call    sub_4E9060
+0x4E9DAA: call    PathGraphNode_SetPosition; Verified shared graph-node position setter: writes XYZ into this+0x14; called by both TESRoad and TESPathGrid record loaders.
+0x4E9DAF: mov     ecx, [ebp+var_18]; this
+0x4E9DB2: push    esi; point
+0x4E9DB3: call    TESRoad_AddConnectedPointIfMissing; Verified: inserts a non-null TESConnectedPoint only if no existing node at that position is found. Buckets the point by packed exterior-cell coordinates (signed X and Y each arithmetic-shifted by 12), creates a BSSimpleList header when absent, pushes the node, and increments the Road node count.
 0x4E9DB8: mov     eax, [ebp+var_1C]
 0x4E9DBB: mov     [eax+edi*4], esi
 0x4E9DBE: movzx   ecx, byte ptr [ebx+0Ch]
@@ -128,8 +128,8 @@
 0x4E9E25: push    eax; a4
 0x4E9E26: push    edi; Dst
 0x4E9E27: mov     [ebp+var_28], edi
-0x4E9E2A: call    TESFile_GetChunkData
-0x4E9E2F: mov     ebx, [ebp+var_20]
+0x4E9E2A: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
+0x4E9E2F: mov     ebx, [ebp+position]
 0x4E9E32: xor     ecx, ecx
 0x4E9E34: xor     eax, eax
 0x4E9E36: mov     [ebp+var_14], ecx
@@ -143,9 +143,9 @@
 0x4E9E4D: jbe     short loc_4E9E85
 0x4E9E4F: lea     eax, [ecx+ecx*2]
 0x4E9E52: lea     edi, [edi+eax*4]
-0x4E9E55: mov     ecx, [ebp+var_18]
-0x4E9E58: push    edi
-0x4E9E59: call    sub_4E8D00
+0x4E9E55: mov     ecx, [ebp+var_18]; this
+0x4E9E58: push    edi; position
+0x4E9E59: call    TESRoad_FindConnectedPointByPosition; Verified: searches the TESRoad connected-point bucket for the cell containing the requested NiPoint3, compares candidate positions with sub_47D810 using fConstant_2 tolerance, and returns the matching TESConnectedPoint or null.
 0x4E9E5E: test    eax, eax
 0x4E9E60: jz      short loc_4E9E6B
 0x4E9E62: mov     ecx, [ebp+var_30]
@@ -166,15 +166,15 @@
 0x4E9E8E: mov     [ebp+var_24], eax
 0x4E9E91: jb      short loc_4E9E3F
 0x4E9E93: push    edi
-0x4E9E94: call    FormHeapFree
+0x4E9E94: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4E9E99: add     esp, 4
 0x4E9E9C: mov     ebx, [ebp+a1]
-0x4E9E9F: mov     edx, [ebp+var_20]
+0x4E9E9F: mov     edx, [ebp+position]
 0x4E9EA2: push    edx
-0x4E9EA3: call    FormHeapFree
+0x4E9EA3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4E9EA8: mov     eax, [ebp+var_1C]
 0x4E9EAB: push    eax
-0x4E9EAC: call    FormHeapFree
+0x4E9EAC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4E9EB1: mov     edi, [ebp+var_18]
 0x4E9EB4: add     esp, 8
 0x4E9EB7: jmp     short loc_4E9EE0
@@ -184,7 +184,7 @@
 0x4E9EC6: push    200h; a4
 0x4E9ECB: push    esi; Dst
 0x4E9ECC: mov     ecx, ebx; a1
-0x4E9ECE: call    TESFile_GetChunkData
+0x4E9ECE: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4E9ED3: mov     edx, [edi]
 0x4E9ED5: mov     eax, [edx+0D8h]
 0x4E9EDB: push    esi
@@ -212,3 +212,18 @@
 0x4E9F17: mov     esp, ebp
 0x4E9F19: pop     ebp
 0x4E9F1A: retn    4
+0x9B6090: mov     eax, [ebp+var_28]
+0x9B6093: push    eax
+0x9B6094: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B6099: pop     ecx
+0x9B609A: retn
+0x9B609B: mov     edx, [esp-4+arg_4]
+0x9B609F: lea     eax, [edx+0Ch]
+0x9B60A2: mov     ecx, [edx-34h]
+0x9B60A5: xor     ecx, eax
+0x9B60A7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B60AC: mov     ecx, [edx-4]
+0x9B60AF: xor     ecx, eax
+0x9B60B1: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B60B6: mov     eax, offset stru_AE0FE0
+0x9B60BB: jmp     ___CxxFrameHandler3

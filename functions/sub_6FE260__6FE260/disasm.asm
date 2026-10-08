@@ -14,7 +14,7 @@
 0x6FE27A: test    eax, eax
 0x6FE27C: jz      short loc_6FE28E
 0x6FE27E: mov     edi, edi
-0x6FE280: cmp     eax, offset dword_B3FA80
+0x6FE280: cmp     eax, offset stru_B3FA80
 0x6FE285: jz      short loc_6FE2E9
 0x6FE287: mov     eax, [eax+4]
 0x6FE28A: test    eax, eax

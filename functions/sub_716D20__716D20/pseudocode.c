@@ -8,20 +8,20 @@ unsigned int __thiscall sub_716D20(_DWORD *this, unsigned __int16 *a2)
   unsigned int v8; // edi
   unsigned int v9; // edx
 
-  v2 = (NiTArray_NiTexturingPropertyMap *)a2;
-  sub_721730(this, a2);
-  v4 = (unsigned __int16 *)TESOutput_PrintString(*(char **)dword_B3FCC0);
-  end = v2->end;
-  capacity = v2->capacity;
-  a2 = v4;
-  if ( end >= capacity )
-    NiTArray_SetSize((unsigned __int16 *)v2, end + v2->growSize);
-  NiTArray_SetAt(v2, end, &a2);
-  v7 = (unsigned __int16 *)TESOutput_PrintLabeledString("m_pString", (const char *)*(this + 3));
-  v8 = v2->end;
-  v9 = v2->capacity;
-  a2 = v7;
-  if ( v8 >= v9 )
-    NiTArray_SetSize((unsigned __int16 *)v2, v8 + v2->growSize);
-  return NiTArray_SetAt(v2, v8, &a2);
+  v2 = (NiTArray_NiTexturingPropertyMap *)a2; /*0x716d22*/
+  sub_721730(this, a2); /*0x716d2a*/
+  v4 = (unsigned __int16 *)TESOutput_PrintString((char *)stru_B3FCC0.name); /*0x716d35*/
+  end = v2->end; /*0x716d3a*/
+  capacity = v2->capacity; /*0x716d3e*/
+  a2 = v4; /*0x716d47*/
+  if ( end >= capacity ) /*0x716d4b*/
+    NiTArray_SetSize((unsigned __int16 *)v2, end + v2->growSize); /*0x716d56*/
+  NiTArray_SetAt(v2, end, &a2); /*0x716d63*/
+  v7 = (unsigned __int16 *)TESOutput_PrintLabeledString("m_pString", (const char *)*(this + 3)); /*0x716d71*/
+  v8 = v2->end; /*0x716d76*/
+  v9 = v2->capacity; /*0x716d7a*/
+  a2 = v7; /*0x716d83*/
+  if ( v8 >= v9 ) /*0x716d87*/
+    NiTArray_SetSize((unsigned __int16 *)v2, v8 + v2->growSize); /*0x716d92*/
+  return NiTArray_SetAt(v2, v8, &a2); /*0x716da4*/
 }

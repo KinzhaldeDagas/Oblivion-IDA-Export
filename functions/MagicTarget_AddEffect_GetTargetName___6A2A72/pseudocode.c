@@ -2,10 +2,10 @@ int __userpurge MagicTarget_AddEffect_::GetTargetName_@<eax>(int a1@<edi>, int a
 {
   TESObjectREFR *v4; // eax
 
-  if ( (*(int (__thiscall **)(int))(*(_DWORD *)a1 + 4))(a1) )
+  if ( (*(int (__thiscall **)(int))(*(_DWORD *)a1 + 4))(a1) ) /*0x6a2a79*/
   {
-    v4 = (TESObjectREFR *)(*(int (__thiscall **)(int))(*(_DWORD *)a1 + 4))(a1);
-    TESObjectREFR_GetName(v4);
+    v4 = (TESObjectREFR *)(*(int (__thiscall **)(int))(*(_DWORD *)a1 + 4))(a1); /*0x6a2a86*/
+    TESObjectREFR_GetName(v4); /*0x6a2a8a*/
   }
   return MagicTarget_AddEffect_::PrintInvalidTarget_DebugMsg(a2, a3, a4);
 }

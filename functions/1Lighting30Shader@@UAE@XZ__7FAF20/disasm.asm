@@ -16,7 +16,7 @@
 0x7FAF47: mov     [esp+24h+var_10], ebp
 0x7FAF4B: mov     dword ptr [ebp+0], offset ??_7Lighting30Shader@@6B@; const Lighting30Shader::`vftable'
 0x7FAF52: mov     [esp+24h+var_4], 8
-0x7FAF5A: mov     edi, offset dword_B47288
+0x7FAF5A: mov     edi, offset unk_B47288
 0x7FAF5F: xor     ebx, ebx
 0x7FAF61: mov     esi, [edi]
 0x7FAF63: cmp     esi, ebx
@@ -38,7 +38,7 @@
 0x7FAF88: cmp     edi, offset unk_B47308
 0x7FAF8E: jl      short loc_7FAF61
 0x7FAF90: xor     edi, edi
-0x7FAF92: mov     esi, ds:dword_B46ED8[edi]
+0x7FAF92: mov     esi, dword ptr ds:unk_B46ED8[edi]
 0x7FAF98: cmp     esi, ebx
 0x7FAF9A: jz      short loc_7FAFBE
 0x7FAF9C: lea     ecx, [esi+4]
@@ -53,8 +53,8 @@
 0x7FAFB2: push    1
 0x7FAFB4: mov     ecx, esi
 0x7FAFB6: call    eax
-0x7FAFB8: mov     ds:dword_B46ED8[edi], ebx
-0x7FAFBE: mov     esi, ds:dword_B46C20[edi]
+0x7FAFB8: mov     dword ptr ds:unk_B46ED8[edi], ebx
+0x7FAFBE: mov     esi, dword ptr ds:unk_B46C20[edi]
 0x7FAFC4: cmp     esi, ebx
 0x7FAFC6: jz      short loc_7FAFEA
 0x7FAFC8: lea     ecx, [esi+4]
@@ -69,18 +69,18 @@
 0x7FAFDE: push    1
 0x7FAFE0: mov     ecx, esi
 0x7FAFE2: call    eax
-0x7FAFE4: mov     ds:dword_B46C20[edi], ebx
+0x7FAFE4: mov     dword ptr ds:unk_B46C20[edi], ebx
 0x7FAFEA: add     edi, 4
 0x7FAFED: cmp     edi, 9Ch ; 'œ'
 0x7FAFF3: jl      short loc_7FAF92
-0x7FAFF5: mov     esi, offset dword_B473D0
+0x7FAFF5: mov     esi, offset unk_B473D0
 0x7FAFFA: lea     ebx, [ebx+0]
 0x7FB000: mov     ecx, [esi]
 0x7FB002: cmp     ecx, ebx
 0x7FB004: jz      short loc_7FB013
 0x7FB006: add     dword ptr [ecx+60h], 0FFFFFFFFh
 0x7FB00A: jnz     short loc_7FB011
-0x7FB00C: call    sub_7604D0
+0x7FB00C: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x7FB011: mov     [esi], ebx
 0x7FB013: add     esi, 4
 0x7FB016: cmp     esi, offset unk_B474A8
@@ -297,7 +297,7 @@
 0x7FB21E: call    eax
 0x7FB220: mov     ecx, ebp; this
 0x7FB222: mov     [esp+24h+var_4], 0FFFFFFFFh
-0x7FB22A: call    ??1BSShader@@UAE@XZ; BSShader::~BSShader(void)
+0x7FB22A: call    ??1BSShader@@UAE@XZ;
 0x7FB22F: mov     ecx, dword ptr [esp+24h+var_C]
 0x7FB233: mov     large fs:0, ecx
 0x7FB23A: pop     ecx
@@ -307,3 +307,36 @@
 0x7FB23E: pop     ebx
 0x7FB23F: add     esp, 10h
 0x7FB242: retn
+0x9D0530: mov     ecx, [ebp-10h]; this
+0x9D0533: jmp     ??1BSShader@@UAE@XZ;
+0x9D0538: mov     ecx, [ebp-10h]
+0x9D053B: add     ecx, 7Ch ; '|'; slot
+0x9D053E: jmp     NiPointerSlot_Release
+0x9D0543: mov     ecx, [ebp-10h]
+0x9D0546: add     ecx, 80h ; '€'; slot
+0x9D054C: jmp     NiPointerSlot_Release
+0x9D0551: mov     ecx, [ebp-10h]
+0x9D0554: add     ecx, 84h ; '„'; slot
+0x9D055A: jmp     NiPointerSlot_Release
+0x9D055F: mov     ecx, [ebp-10h]
+0x9D0562: add     ecx, 88h ; 'ˆ'; slot
+0x9D0568: jmp     NiPointerSlot_Release
+0x9D056D: mov     ecx, [ebp-10h]
+0x9D0570: add     ecx, 8Ch ; 'Œ'; slot
+0x9D0576: jmp     NiPointerSlot_Release
+0x9D057B: mov     ecx, [ebp-10h]
+0x9D057E: add     ecx, 90h; slot
+0x9D0584: jmp     NiPointerSlot_Release
+0x9D0589: mov     ecx, [ebp-10h]
+0x9D058C: add     ecx, 94h ; '”'; slot
+0x9D0592: jmp     NiPointerSlot_Release
+0x9D0597: mov     ecx, [ebp-10h]
+0x9D059A: add     ecx, 98h ; '˜'; slot
+0x9D05A0: jmp     NiPointerSlot_Release
+0x9D05A5: mov     edx, [esp+arg_4]
+0x9D05A9: lea     eax, [edx-14h]
+0x9D05AC: mov     ecx, [edx-18h]
+0x9D05AF: xor     ecx, eax
+0x9D05B1: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D05B6: mov     eax, offset stru_AF8ED8
+0x9D05BB: jmp     ___CxxFrameHandler3

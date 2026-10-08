@@ -1,4 +1,4 @@
-0x7A0E60: push    0FFFFFFFFh
+0x7A0E60: push    0FFFFFFFFh; Backward ownership move/assignment for overlapping ranges of 16-byte st_vector<SFrondGuide> elements. Swaps the three owned pointer fields while walking from the end.
 0x7A0E62: push    offset SEH_7A0E60
 0x7A0E67: mov     eax, large fs:0
 0x7A0E6D: push    eax
@@ -9,10 +9,10 @@
 0x7A0E77: push    eax
 0x7A0E78: lea     eax, [esp+18h+var_C]
 0x7A0E7C: mov     large fs:0, eax
-0x7A0E82: mov     esi, [esp+18h+arg_0]
-0x7A0E86: mov     ecx, [esp+18h+arg_4]
+0x7A0E82: mov     esi, [esp+18h+first]
+0x7A0E86: mov     ecx, [esp+18h+last]
 0x7A0E8A: cmp     esi, ecx
-0x7A0E8C: mov     eax, [esp+18h+arg_8]
+0x7A0E8C: mov     eax, [esp+18h+destinationEnd]
 0x7A0E90: jz      short loc_7A0EC0
 0x7A0E92: mov     edi, [ecx-0Ch]
 0x7A0E95: mov     edx, [eax-0Ch]
@@ -37,3 +37,10 @@
 0x7A0ECD: pop     esi
 0x7A0ECE: add     esp, 0Ch
 0x7A0ED1: retn
+0x9CC600: mov     edx, [esp+last]
+0x9CC604: lea     eax, [edx-8]
+0x9CC607: mov     ecx, [edx-0Ch]
+0x9CC60A: xor     ecx, eax
+0x9CC60C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CC611: mov     eax, offset stru_AF5978
+0x9CC616: jmp     ___CxxFrameHandler3

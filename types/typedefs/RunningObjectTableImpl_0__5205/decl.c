@@ -1,1 +1,1 @@
-RunningObjectTableImpl_0
+typedef RunningObjectTableImpl RunningObjectTableImpl_0;

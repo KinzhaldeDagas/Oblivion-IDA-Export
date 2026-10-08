@@ -3,13 +3,13 @@ NiTimeController *sub_6C3F00()
   NiTimeController *v0; // esi
   NiTimeController *result; // eax
 
-  v0 = (NiTimeController *)FormHeapAlloc(0x40u);
-  result = 0;
-  if ( v0 )
+  v0 = (NiTimeController *)FormHeapAlloc(0x40u); /*0x6c3f29*/
+  result = 0; /*0x6c3f32*/
+  if ( v0 ) /*0x6c3f3a*/
   {
-    sub_6CE1D0(v0);
-    v0->vtbl = (NiTimeControllerVtbl *)&NiTransformController::`vftable';
-    return v0;
+    NiSingleInterpController_Construct(v0); /*0x6c3f3e*/
+    v0->vtbl = (NiTimeControllerVtbl *)&NiTransformController::`vftable'; /*0x6c3f43*/
+    return v0; /*0x6c3f49*/
   }
-  return result;
+  return result; /*0x6c3f4b*/
 }

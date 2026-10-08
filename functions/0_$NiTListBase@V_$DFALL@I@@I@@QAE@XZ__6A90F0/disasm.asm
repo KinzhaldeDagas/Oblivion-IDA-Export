@@ -4,7 +4,7 @@
 0x6A90F8: mov     dword ptr [esi], offset ??_7?$NiTListBase@V?$DFALL@I@@I@@6B@; const NiTListBase<DFALL<uint>,uint>::`vftable'
 0x6A90FE: jz      short loc_6A9109
 0x6A9100: push    esi
-0x6A9101: call    FormHeapFree
+0x6A9101: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6A9106: add     esp, 4
 0x6A9109: mov     eax, esi
 0x6A910B: pop     esi

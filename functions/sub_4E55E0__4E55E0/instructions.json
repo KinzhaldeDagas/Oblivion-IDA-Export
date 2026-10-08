@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E55E0",
-    "line": "sub     esp, 1Ch",
+    "line": "sub     esp, 1Ch; Verified PGRI index use: the record's first u16 selects the TESPathGridPoint in pointArray, while its indexedPosition at +4 is used to select the nearest eligible point in the owning cell.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x4E55F6",
-    "line": "mov     eax, [esp+24h+arg_0]",
+    "line": "mov     eax, [esp+24h+position]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -228,12 +228,6 @@
     "size": 2
   },
   {
-    "ea": "0x4E565C",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 4
-  },
-  {
     "ea": "0x4E5660",
     "line": "mov     edi, [esp+2Ch+var_1C]",
     "mnemonic": "mov",
@@ -307,13 +301,13 @@
   },
   {
     "ea": "0x4E5685",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E5687",
-    "line": "call    sub_67ED70",
+    "line": "call    PathGraphNode_IsLinkedPointsDisabled; Verified returns PathGrid point flag 0x20, which is the linked-points-disabled state: SetLinkedPointsEnabled stores the inverse of its enabled argument, save/load persists flagged indices, searches skip flagged nodes, and renderer marks them wireframe.",
     "mnemonic": "call",
     "size": 5
   },
@@ -331,7 +325,7 @@
   },
   {
     "ea": "0x4E5690",
-    "line": "mov     eax, [esp+2Ch+arg_0]",
+    "line": "mov     eax, [esp+2Ch+position]",
     "mnemonic": "mov",
     "size": 4
   },

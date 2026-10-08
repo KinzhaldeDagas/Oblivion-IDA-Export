@@ -15,7 +15,7 @@
 0x4F8DD1: test    al, al
 0x4F8DD3: jz      short loc_4F8DD7
 0x4F8DD5: mov     esi, edi
-0x4F8DD7: mov     ecx, [esi+58h]
+0x4F8DD7: mov     ecx, [esi+58h]; MEF v30 verified ActorWithoutProcessCTD site: Actor +0x58 immediate vtable dereference in IsRunning. Null supplies EAX=0 to vanilla flag test at 0x004F8DE4; non-null resumes 0x004F8DDC.
 0x4F8DDA: mov     eax, [ecx]
 0x4F8DDC: mov     edx, [eax+2C0h]
 0x4F8DE2: call    edx

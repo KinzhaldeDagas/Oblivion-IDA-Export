@@ -24,7 +24,7 @@
 0x68497D: mov     ecx, edi
 0x68497F: call    sub_538B60
 0x684984: push    edi
-0x684985: call    FormHeapFree
+0x684985: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x68498A: add     esp, 4
 0x68498D: mov     dword ptr [esi+30h], 0
 0x684994: mov     ecx, esi
@@ -55,3 +55,15 @@
 0x6849DF: pop     esi
 0x6849E0: add     esp, 10h
 0x6849E3: retn
+0x9C4E60: mov     ecx, [ebp-10h]; this
+0x9C4E63: jmp     ??1PathMiddleHigh@@UAE@XZ; PathMiddleHigh::~PathMiddleHigh(void)
+0x9C4E68: mov     ecx, [ebp-10h]
+0x9C4E6B: add     ecx, 28h ; '('; slot
+0x9C4E6E: jmp     NiPointerSlot_Release
+0x9C4E73: mov     edx, [esp+arg_4]
+0x9C4E77: lea     eax, [edx-0Ch]
+0x9C4E7A: mov     ecx, [edx-10h]
+0x9C4E7D: xor     ecx, eax
+0x9C4E7F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C4E84: mov     eax, offset stru_AED70C
+0x9C4E89: jmp     ___CxxFrameHandler3

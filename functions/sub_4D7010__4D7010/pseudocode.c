@@ -1,13 +1,14 @@
-unsigned int __thiscall sub_4D7010(_DWORD *this, char a2)
+// Verified local operation: sets/clears TESObjectREFR flags +0x08 bit 0x80000. Probable semantic name SetTemp3DFlag; the bit is toggled around reference NiNode attachment/removal and matches Fallout's named SetHasTemp3D usage.
+unsigned int __thiscall TESObjectREFR_SetTemp3DFlag(TESObjectREFR *this, bool enabled)
 {
-  int v2; // eax
+  TESForm::FormFlags flags; // eax
   unsigned int result; // eax
 
-  v2 = *(this + 2);
-  if ( a2 )
-    result = v2 | 0x80000;
+  flags = this->member.super.flags; /*0x4d7015*/
+  if ( enabled ) /*0x4d7018*/
+    result = flags | 0x80000; /*0x4d701a*/
   else
-    result = v2 & 0xFFF7FFFF;
-  *(this + 2) = result;
-  return result;
+    result = flags & 0xFFF7FFFF; /*0x4d7025*/
+  this->member.super.flags = result; /*0x4d701f*/
+  return result; /*0x4d7022*/
 }

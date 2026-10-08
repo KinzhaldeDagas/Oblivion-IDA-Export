@@ -1,1 +1,8 @@
-device_0
+struct device_0
+{
+SP_DEVICE_INTERFACE_DETAIL_DATA_W *detail;
+HANDLE file;
+HANDLE handle;
+RID_DEVICE_INFO info;
+PHIDP_PREPARSED_DATA data;
+};

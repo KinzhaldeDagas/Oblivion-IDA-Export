@@ -13,7 +13,7 @@
 0x660477: pop     esi
 0x660478: retn    4
 0x66047B: lea     ecx, [esi+5F8h]
-0x660481: call    BSSimpleList_Clear
+0x660481: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x660486: pop     esi
 0x660487: retn    4
 0x66048A: test    eax, eax

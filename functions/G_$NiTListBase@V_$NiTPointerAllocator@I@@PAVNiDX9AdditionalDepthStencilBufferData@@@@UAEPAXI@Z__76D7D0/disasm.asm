@@ -4,7 +4,7 @@
 0x76D7D8: mov     dword ptr [esi], offset ??_7?$NiTListBase@V?$NiTPointerAllocator@I@@PAVNiDX9AdditionalDepthStencilBufferData@@@@6B@; const NiTListBase<NiTPointerAllocator<uint>,NiDX9AdditionalDepthStencilBufferData *>::`vftable'
 0x76D7DE: jz      short loc_76D7E9
 0x76D7E0: push    esi
-0x76D7E1: call    FormHeapFree
+0x76D7E1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x76D7E6: add     esp, 4
 0x76D7E9: mov     eax, esi
 0x76D7EB: pop     esi

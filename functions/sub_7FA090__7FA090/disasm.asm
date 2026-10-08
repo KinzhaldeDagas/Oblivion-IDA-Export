@@ -37,7 +37,7 @@
 0x7FA108: lea     eax, [esp+2C8h+FileName]
 0x7FA10F: push    eax; lpFileName
 0x7FA110: mov     ecx, esi
-0x7FA112: call    CreateVertexShader
+0x7FA112: call    CreateVertexShader; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.
 0x7FA117: mov     edi, [esi+0C0h]
 0x7FA11D: mov     ebx, eax
 0x7FA11F: cmp     edi, ebx
@@ -91,7 +91,7 @@
 0x7FA1B3: lea     ecx, [esp+2C8h+FileName]
 0x7FA1BA: push    ecx; lpFileName
 0x7FA1BB: mov     ecx, esi
-0x7FA1BD: call    CreatePixelShader
+0x7FA1BD: call    CreatePixelShader; Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.
 0x7FA1C2: mov     edi, [esi+0C4h]
 0x7FA1C8: mov     ebx, eax
 0x7FA1CA: cmp     edi, ebx

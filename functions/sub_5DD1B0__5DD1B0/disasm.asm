@@ -15,7 +15,7 @@
 0x5DD1DA: add     ecx, 34h ; '4'
 0x5DD1DD: call    NiRenderTargetGroup__GetRenderTargetsNum
 0x5DD1E2: push    eax; a2
-0x5DD1E3: mov     ecx, offset stru_B3B738; this
+0x5DD1E3: mov     ecx, offset unk_B3B738; this
 0x5DD1E8: call    BSStringT_Set
 0x5DD1ED: call    sub_5DD0D0
 0x5DD1F2: retn    8

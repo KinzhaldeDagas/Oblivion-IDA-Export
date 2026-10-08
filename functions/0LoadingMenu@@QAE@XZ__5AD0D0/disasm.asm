@@ -19,7 +19,7 @@
 0x5AD10A: mov     large fs:0, eax
 0x5AD110: mov     esi, ecx
 0x5AD112: mov     [esp+584h+var_554], esi
-0x5AD116: call    ??0Menu@@QAE@XZ; Menu::Menu(void)
+0x5AD116: call    ??0Menu@@QAE@XZ; Verified constructor sets ownsTemplates byte+0x1C=1, template list+8/+0xC empty, templateContextTile+0x10=NULL, fadeState+0x24=4. Other fields retain prior names when semantics not established.
 0x5AD11B: fldz
 0x5AD11D: xor     edi, edi
 0x5AD11F: mov     dword ptr [esi], offset ??_7LoadingMenu@@6B@; const LoadingMenu::`vftable'
@@ -43,7 +43,6 @@
 0x5AD15F: lea     ebx, [esi+2Ch]
 0x5AD162: fstp    [esp+584h+var_558]
 0x5AD166: jmp     short loc_5AD170
-0x5AD168: align 10h
 0x5AD170: mov     eax, ds:0B14120h[edi*4]
 0x5AD177: test    eax, eax
 0x5AD179: jnz     short loc_5AD18B
@@ -195,3 +194,21 @@
 0x5AD363: mov     esp, ebp
 0x5AD365: pop     ebp
 0x5AD366: retn
+0x9C0590: mov     ecx, [ebp+var_554]; this
+0x9C0596: jmp     ??1Menu@@UAE@XZ; Verified template ownership: Menu+0x1C byte gates freeing registered template objects; linked list nodes +8/+0xC always removed. Updated MenuMembr preserves size0x24; with vtable Menu total0x28. ReadFile0x5904EF sets Menu ownsTemplates=1 and BuildStorage ownsSubTemplates=0.
+0x9C059B: mov     eax, [ebp+var_558]
+0x9C05A1: push    eax
+0x9C05A2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C05A7: pop     ecx
+0x9C05A8: retn
+0x9C05A9: mov     edx, [esp-4+arg_4]
+0x9C05AD: lea     eax, [edx-574h]
+0x9C05B3: mov     ecx, [edx-578h]
+0x9C05B9: xor     ecx, eax
+0x9C05BB: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C05C0: add     eax, 0Ch
+0x9C05C3: mov     ecx, [edx-38h]
+0x9C05C6: xor     ecx, eax
+0x9C05C8: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C05CD: mov     eax, offset stru_AE9850
+0x9C05D2: jmp     ___CxxFrameHandler3

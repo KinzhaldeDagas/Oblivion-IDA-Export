@@ -11,8 +11,8 @@
 0x4E8C05: mov     edx, [eax+90h]
 0x4E8C0B: push    1
 0x4E8C0D: call    edx
-0x4E8C0F: push    ebx; a2
-0x4E8C10: mov     ecx, esi; this
+0x4E8C0F: push    ebx; fromActiveFile
+0x4E8C10: mov     ecx, esi; self
 0x4E8C12: call    TESForm_SetFromActiveFile
 0x4E8C17: pop     esi
 0x4E8C18: pop     ebx

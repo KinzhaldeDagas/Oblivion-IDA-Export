@@ -1,19 +1,32 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x79A810",
+      "0x79A88C"
+    ]
+  ],
+  "chunks_sha256": "2958aa1b18c5de7c8abe79f8950577f5417b884473333c1690e23babaee24d15",
+  "comment_regular": "Copies one embedded frond texcoord block into stock frond indexed geometry.\n\n[2026-10-03 completed capture] RT+4C embedded object has frond map count+10 and quad pointer+14. These establish whether a material has an embedded mapping, while geometry+CC retains original UVs. The previous unconditional1+V/clamp collapsed positive atlas coordinates; binding-domain selection now replaces that policy.\n\nCFrondEngine::SetTextureCoords per local 4.1: optionally flip T coordinates, reset vertex counter, ChangeTexCoord for every vertex.",
+  "comment_repeatable": "CFrondEngine::SetTextureCoords per local 4.1: optionally flip T coordinates, reset vertex counter, ChangeTexCoord for every vertex.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_79A810",
+  "display_name": "OB_CFrondGeometry_CopyEmbeddedTexCoords_010201A0",
   "end_ea": "0x79A88C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_79A810",
+  "name": "OB_CFrondGeometry_CopyEmbeddedTexCoords_010201A0",
   "segment": ".text",
   "sha256": "2958aa1b18c5de7c8abe79f8950577f5417b884473333c1690e23babaee24d15",
   "size": 124,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x79A810",
-  "type": "unsigned int __stdcall(int, float, const void *, char)",
+  "total_chunk_size": 124,
+  "type": "unsigned int __stdcall(OB_CIndexedGeometry_010201A0 *frondGeometry, float frondMapIndex, const void *texcoordBlock, char flipT)",
   "xrefs_from_count": 49,
   "xrefs_to_count": 1
 }

@@ -1,4 +1,4 @@
-0x4A7D60: push    ebp
+0x4A7D60: push    ebp; Verified generic TESFile GameSettingCollection value loader. On a DATA chunk it branches by the registered setting's type; string-valued settings are read and passed to Setting_SetStringValue. This proves named settings can be updated through the generic file-record path, not that a blood-particle effect selects Extra1/Extra2.
 0x4A7D61: mov     ebp, esp
 0x4A7D63: sub     esp, 8
 0x4A7D66: mov     eax, ds:0B30AACh
@@ -34,7 +34,7 @@
 0x4A7DBF: push    0; a4
 0x4A7DC1: push    edi; Dst
 0x4A7DC2: mov     ecx, esi; a1
-0x4A7DC4: call    TESFile_GetChunkData
+0x4A7DC4: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4A7DC9: push    edi
 0x4A7DCA: mov     ecx, ebx
 0x4A7DCC: mov     [ebp+var_5], al
@@ -43,11 +43,11 @@
 0x4A7DD7: jmp     short loc_4A7DF3
 0x4A7DD9: push    ebx
 0x4A7DDA: mov     ecx, esi
-0x4A7DDC: call    TESFile_GetChunkData4
+0x4A7DDC: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x4A7DE1: jmp     short loc_4A7DF3
 0x4A7DE3: push    ebx
 0x4A7DE4: mov     ecx, esi
-0x4A7DE6: call    TESFile_GetChunkData4
+0x4A7DE6: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x4A7DEB: jmp     short loc_4A7DF3
 0x4A7DED: xor     al, al
 0x4A7DEF: jmp     short loc_4A7DF3

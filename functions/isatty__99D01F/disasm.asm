@@ -9,7 +9,7 @@
 0x99D037: xor     esi, esi
 0x99D039: cmp     eax, esi
 0x99D03B: jl      short loc_99D045
-0x99D03D: cmp     eax, uNumber
+0x99D03D: cmp     eax, ds:0BAAAA0h
 0x99D043: jb      short loc_99D061
 0x99D045: call    __errno
 0x99D04A: push    esi
@@ -27,7 +27,7 @@
 0x99D063: and     eax, 1Fh
 0x99D066: imul    eax, 28h ; '('
 0x99D069: sar     ecx, 5
-0x99D06C: mov     ecx, dword_BAAAC0[ecx*4]
+0x99D06C: mov     ecx, dword ptr unk_BAAAC0[ecx*4]
 0x99D073: movzx   eax, byte ptr [ecx+eax+4]
 0x99D078: and     eax, 40h
 0x99D07B: pop     esi

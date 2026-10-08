@@ -1,1 +1,1 @@
-DebugShader
+struct DebugShader;

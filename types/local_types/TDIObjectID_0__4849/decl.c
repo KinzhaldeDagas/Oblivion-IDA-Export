@@ -1,1 +1,1 @@
-TDIObjectID_0
+typedef TDIObjectID TDIObjectID_0;

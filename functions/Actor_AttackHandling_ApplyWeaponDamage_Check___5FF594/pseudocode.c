@@ -6,7 +6,7 @@ int __usercall Actor_AttackHandling_::ApplyWeaponDamage_Check_@<eax>(
         int a5,
         int a6,
         int a7,
-        float a8,
+        int a8,
         int a9,
         int a10,
         int a11,
@@ -20,7 +20,9 @@ int __usercall Actor_AttackHandling_::ApplyWeaponDamage_Check_@<eax>(
         int a19,
         int a20,
         int a21,
-        int a22)
+        int a22,
+        int a23,
+        int a24)
 {
   return Actor_AttackHandling_::ApplyWeaponDamage_Check(
            a14,
@@ -45,5 +47,7 @@ int __usercall Actor_AttackHandling_::ApplyWeaponDamage_Check_@<eax>(
            a19,
            a20,
            a21,
-           a22);
+           a22,
+           a23,
+           a24);
 }

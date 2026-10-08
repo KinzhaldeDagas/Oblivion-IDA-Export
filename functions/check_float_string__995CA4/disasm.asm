@@ -16,10 +16,10 @@
 0x995CC6: retn
 0x995CC7: mov     eax, [esp+arg_8]
 0x995CCB: mov     dword ptr [eax], 1
-0x995CD1: push    dword ptr [esi]; Size
-0x995CD3: push    [esp+4+Src]; Src
-0x995CD7: push    dword ptr [edi]; Dst
-0x995CD9: call    _memcpy
+0x995CD1: push    dword ptr [esi]; byteCount
+0x995CD3: push    [esp+4+Src]; source
+0x995CD7: push    dword ptr [edi]; destination
+0x995CD9: call    _memcpy;
 0x995CDE: add     esp, 0Ch
 0x995CE1: jmp     short loc_995CF2
 0x995CE3: push    ecx

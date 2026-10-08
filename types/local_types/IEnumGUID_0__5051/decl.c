@@ -1,1 +1,1 @@
-IEnumGUID_0
+typedef IEnumGUID IEnumGUID_0;

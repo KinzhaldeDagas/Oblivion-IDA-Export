@@ -1,4 +1,4 @@
-0x5EC400: push    0FFFFFFFFh
+0x5EC400: push    0FFFFFFFFh; Verified trap-hit blood visuals use both actor-base channels. Early gate calls Actor_ShouldEmitBloodEffects; each repeated pass projects the receiver actor's blood decal path and, when its virtual +0x40 spray path is non-null/nonempty, allocates a 0x20 BSTempEffectParticle, resolves the receiver's cell NiNode, passes its particle path/direction/contact position/scale to the constructor with cached-clone enabled, then registers the result. This path comes from the struck actor's own base form, not an unrelated trap-source particle setting.
 0x5EC402: push    offset SEH_5EC400
 0x5EC407: mov     eax, large fs:0
 0x5EC40D: push    eax
@@ -13,7 +13,7 @@
 0x5EC420: lea     eax, [esp+0C8h+var_C]
 0x5EC427: mov     large fs:0, eax
 0x5EC42D: mov     esi, ecx
-0x5EC42F: call    sub_5E1B30
+0x5EC42F: call    Actor_ShouldEmitBloodEffects; ODismemberment authority: actor blood effects are allowed only when actor-base blood particle/texture disable predicates permit them.
 0x5EC434: test    al, al
 0x5EC436: jz      loc_5ECCB4
 0x5EC43C: fld     dword ptr ds:0B148DCh
@@ -48,7 +48,7 @@
 0x5EC4B8: fld     [esp+0C8h+var_94]
 0x5EC4BC: fld     qword ptr ds:0A3D0C0h
 0x5EC4C2: fmul    st(1), st
-0x5EC4C4: fxch    st(1)
+0x5EC4C4: fxch    st(1); BloodOnDeath decode 2026-05-30: trap blood emitter doubles the source-to-target vector, adds [-0.8,0.8] jitter, normalizes, then projects scene decals. Same outward math as actor hit blood.
 0x5EC4C6: fstp    [esp+0C8h+var_94]
 0x5EC4CA: fld     [esp+0C8h+var_90]
 0x5EC4CE: fmul    st, st(1)
@@ -57,21 +57,21 @@
 0x5EC4DB: fstp    [esp+0C8h+var_A4]
 0x5EC4DF: fld     dword ptr ds:0A524B0h
 0x5EC4E5: sub     esp, 8
-0x5EC4E8: fstp    dword ptr [esp+0D0h+var_D0+4]; float
+0x5EC4E8: fstp    [esp+0D0h+scale+4]; float
 0x5EC4EC: fld     dword ptr ds:0A6E68Ch
-0x5EC4F2: fstp    dword ptr [esp+0D0h+var_D0]; float
+0x5EC4F2: fstp    [esp+0D0h+scale]; float
 0x5EC4F5: call    Rand4
 0x5EC4FA: fstp    [esp+0D0h+var_8C]
 0x5EC4FE: fld     dword ptr ds:0A524B0h
-0x5EC504: fstp    dword ptr [esp+0D0h+var_D0+4]; float
+0x5EC504: fstp    [esp+0D0h+scale+4]; float
 0x5EC508: fld     dword ptr ds:0A6E68Ch
-0x5EC50E: fstp    dword ptr [esp+0D0h+var_D0]; float
+0x5EC50E: fstp    [esp+0D0h+scale]; float
 0x5EC511: call    Rand4
 0x5EC516: fstp    [esp+0D0h+var_88]
 0x5EC51A: fld     dword ptr ds:0A524B0h
-0x5EC520: fstp    dword ptr [esp+0D0h+var_D0+4]; float
+0x5EC520: fstp    [esp+0D0h+scale+4]; float
 0x5EC524: fld     dword ptr ds:0A6E68Ch
-0x5EC52A: fstp    dword ptr [esp+0D0h+var_D0]; float
+0x5EC52A: fstp    [esp+0D0h+scale]; float
 0x5EC52D: call    Rand4
 0x5EC532: fstp    [esp+0D0h+var_84]
 0x5EC536: add     esp, 8
@@ -106,7 +106,7 @@
 0x5EC5B5: mov     edx, [esp+0C8h+var_78]
 0x5EC5B9: lea     ecx, [esp+0C8h+var_B4]
 0x5EC5BD: mov     [esp+0C8h+var_AC], edx
-0x5EC5C1: call    sub_43F350
+0x5EC5C1: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x5EC5C6: fstp    st
 0x5EC5C8: mov     eax, [esi]
 0x5EC5CA: mov     edx, [eax+170h]
@@ -173,8 +173,8 @@
 0x5EC670: mov     edx, [esp+0C8h+var_B0]
 0x5EC674: push    0; int
 0x5EC676: push    0FFFFFFFFh; float
-0x5EC678: push    0; float
-0x5EC67A: push    eax; int
+0x5EC678: push    0; localPosZ
+0x5EC67A: push    eax; localPosY
 0x5EC67B: sub     esp, 0Ch
 0x5EC67E: mov     eax, esp
 0x5EC680: mov     [eax], ecx
@@ -190,9 +190,9 @@
 0x5EC6A8: mov     [eax+4], ecx
 0x5EC6AB: mov     ecx, esi; this
 0x5EC6AD: mov     [eax+8], edx
-0x5EC6B0: call    TESObjectREFR_GetParentCell
+0x5EC6B0: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5EC6B5: mov     ecx, eax
-0x5EC6B7: call    ??0?$NiTPointerListBase@V?$NiTPointerAllocator@I@@PAVNiAVObject@@@@QAE@XZ; NiTPointerListBase<NiTPointerAllocator<uint>,NiAVObject *>::NiTPointerListBase<NiTPointerAllocator<uint>,NiAVObject *>(void)
+0x5EC6B7: call    Decal_ProjectToSceneGeometry; BloodOnDeath decode 2026-05-30: trap blood uses Decal_ProjectToSceneGeometry with explicitTarget=null for persistent scene marks; repeated calls form native trail-like blood paths.
 0x5EC6BC: mov     eax, [esi]
 0x5EC6BE: mov     edx, [eax+170h]
 0x5EC6C4: mov     ecx, esi
@@ -211,7 +211,7 @@
 0x5EC6E2: mov     eax, [ebx+24h]
 0x5EC6E5: mov     edx, [eax+40h]
 0x5EC6E8: lea     ecx, [ebx+24h]
-0x5EC6EB: call    edx
+0x5EC6EB: call    edx; Verified trap particle admission: obtains receiver actor-base virtual +0x40 blood-particle path and enters the particle branch only when non-null.
 0x5EC6ED: test    eax, eax
 0x5EC6EF: jz      loc_5EC849
 0x5EC6F5: mov     eax, [esi]
@@ -233,19 +233,19 @@
 0x5EC71E: mov     edx, [eax+40h]
 0x5EC721: lea     ecx, [edi+24h]
 0x5EC724: call    edx
-0x5EC726: cmp     byte ptr [eax], 0
+0x5EC726: cmp     byte ptr [eax], 0; Verified trap particle path: repeats receiver actor-base +0x40 lookup and requires the returned string to be nonempty before allocation/construction.
 0x5EC729: jz      loc_5EC849
 0x5EC72F: mov     ecx, esi; this
-0x5EC731: call    TESObjectREFR_GetParentCell
+0x5EC731: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5EC736: push    esi; TESObjectREFR *
 0x5EC737: call    sub_4C9BE0
 0x5EC73C: add     esp, 4
 0x5EC73F: mov     ecx, esi; this
 0x5EC741: mov     edi, eax
-0x5EC743: call    TESObjectREFR_GetParentCell
-0x5EC748: mov     ecx, eax; this
+0x5EC743: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x5EC748: mov     ecx, eax; object
 0x5EC74A: add     edi, 2
-0x5EC74D: call    TESObjectCELL_GetNiNode?
+0x5EC74D: call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.
 0x5EC752: test    eax, eax
 0x5EC754: jz      short loc_5EC783
 0x5EC756: movzx   ecx, word ptr [eax+0B6h]
@@ -273,7 +273,7 @@
 0x5EC7A6: mov     edx, [esi]
 0x5EC7A8: mov     eax, [edx+170h]
 0x5EC7AE: mov     ecx, esi
-0x5EC7B0: xor     edi, edi
+0x5EC7B0: xor     edi, edi; Verified trap particle source is this struck TESObjectREFR's TESActorBaseData when it is an actor. The virtual +0x40 call at 0x5EC7D9 selects its blood particle NIF; comments and local names retain this path source.
 0x5EC7B2: call    eax
 0x5EC7B4: test    eax, eax
 0x5EC7B6: mov     [esp+0C8h+var_A0], eax
@@ -288,12 +288,12 @@
 0x5EC7D0: mov     edx, [edi+24h]
 0x5EC7D3: mov     eax, [edx+40h]
 0x5EC7D6: lea     ecx, [edi+24h]
-0x5EC7D9: call    eax
+0x5EC7D9: call    eax; Verified: indirect actor-base virtual +0x40 returns the trap-hit blood particle path; stored as bloodParticlePath and passed to BSTempEffectParticle_Constructor at 0x5EC82E.
 0x5EC7DB: fld1
 0x5EC7DD: mov     edx, [esp+0C8h+arg_10]
-0x5EC7E4: push    1; float
+0x5EC7E4: push    1; useCachedClone
 0x5EC7E6: sub     esp, 10h
-0x5EC7E9: fst     dword ptr [esp+0DCh+var_D0]; float
+0x5EC7E9: fst     [esp+0DCh+scale]; scale
 0x5EC7ED: mov     ecx, esp
 0x5EC7EF: mov     [ecx], edx
 0x5EC7F1: mov     edx, [esp+0DCh+arg_14]
@@ -307,23 +307,23 @@
 0x5EC810: mov     edx, [esp+0E8h+var_B0]
 0x5EC814: mov     [ecx+4], edx
 0x5EC817: mov     edx, [esp+0E8h+var_AC]
-0x5EC81B: push    eax; float
-0x5EC81C: push    ebx; int
+0x5EC81B: push    eax; modelPath
+0x5EC81C: push    ebx; parentNode
 0x5EC81D: mov     [ecx+8], edx
 0x5EC820: push    ecx
 0x5EC821: mov     ecx, esi; this
-0x5EC823: fstp    [esp+0F4h+var_F4]; float
-0x5EC826: call    TESObjectREFR_GetParentCell
-0x5EC82B: push    eax; int
-0x5EC82C: mov     ecx, ebp
-0x5EC82E: call    sub_5713F0
-0x5EC833: push    eax
-0x5EC834: mov     ecx, offset ActorProcessManager_ptr
+0x5EC823: fstp    [esp+0F4h+durationSeconds]; durationSeconds
+0x5EC826: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x5EC82B: push    eax; parentCell
+0x5EC82C: mov     ecx, ebp; self
+0x5EC82E: call    BSTempEffectParticle_Constructor; Verified trap blood constructor call: uses receiver actor's resolved particle NIF, cell, cell NiNode, computed direction vector, local hit position XYZ, scale 1.0 and cached-clone true; then registers the effect. Argument type recovery for the enclosing __userpurge function is imperfect for packed vector coordinates, so do not interpret its current a7/a8/a9 display types literally.
+0x5EC833: push    eax; effect
+0x5EC834: mov     ecx, (offset qword_B3BB2C+1D4h); self
 0x5EC839: mov     [esp+0CCh+var_4], 0FFFFFFFFh
-0x5EC844: call    sub_678D30
+0x5EC844: call    ActorProcessManager_RegisterTempEffect; [Verified] ActorProcessManager_RegisterTempEffect increments the effect reference and routes GetTypeID 4-6 into extendedTempEffects (+0x48), all other IDs into activeTempEffects (+0x40). Vtable evidence confirms decals 0/1 and particles 2 use the active list. Fallout divergence: its BGSDecalManager updates distinct simple-decal and emitter collections instead of using this per-actor temp-effect routing; one-to-one equivalence is Unknown.
 0x5EC849: fld     [esp+0C8h+var_A8]
 0x5EC84D: fmul    qword ptr ds:0A3C770h
-0x5EC853: fstp    [esp+0C8h+var_A8]
+0x5EC853: fstp    [esp+0C8h+var_A8]; BloodOnDeath decode 2026-05-30: trap scene-blood loop decays damage by 0.25 per decal pass, matching actor hit blood. More trails require more calls/pulses or higher effective damage before this decay.
 0x5EC857: fld     [esp+0C8h+var_A8]
 0x5EC85B: fld     [esp+0C8h+var_98]
 0x5EC85F: fcompp
@@ -382,21 +382,21 @@
 0x5EC931: fstp    [esp+0C8h+var_2C]
 0x5EC938: fld     dword ptr ds:0A47E6Ch
 0x5EC93E: sub     esp, 8
-0x5EC941: fstp    dword ptr [esp+0D0h+var_D0+4]; float
+0x5EC941: fstp    [esp+0D0h+scale+4]; float
 0x5EC945: fld     dword ptr ds:0A641B0h
-0x5EC94B: fstp    dword ptr [esp+0D0h+var_D0]; float
+0x5EC94B: fstp    [esp+0D0h+scale]; float
 0x5EC94E: call    Rand4
 0x5EC953: fstp    [esp+0D0h+var_80]
 0x5EC957: add     esp, 4
 0x5EC95A: fld     dword ptr ds:0A524B0h
-0x5EC960: fstp    dword ptr [esp+0CCh+var_D0+4]; float
+0x5EC960: fstp    [esp+0CCh+scale+4]; float
 0x5EC963: call    Rand5
 0x5EC968: fstp    [esp+0CCh+var_7C]
 0x5EC96C: fld     dword ptr ds:0A47E6Ch
-0x5EC972: fstp    dword ptr [esp+0CCh+var_D0+4]; float
+0x5EC972: fstp    [esp+0CCh+scale+4]; float
 0x5EC975: push    ecx
 0x5EC976: fld     dword ptr ds:0A641B0h
-0x5EC97C: fstp    dword ptr [esp+0D0h+var_D0]; float
+0x5EC97C: fstp    [esp+0D0h+scale]; float
 0x5EC97F: call    Rand4
 0x5EC984: fstp    [esp+0D0h+var_78]
 0x5EC988: add     esp, 4
@@ -439,10 +439,10 @@
 0x5ECA34: fadd    [esp+0CCh+arg_18]
 0x5ECA3B: fstp    [esp+0CCh+var_84]
 0x5ECA3F: fld     dword ptr ds:0A46B10h
-0x5ECA45: fstp    dword ptr [esp+0CCh+var_D0+4]; float
+0x5ECA45: fstp    [esp+0CCh+scale+4]; float
 0x5ECA48: call    Rand5
 0x5ECA4D: push    ecx
-0x5ECA4E: fstp    [esp+0D0h+var_D0]; double
+0x5ECA4E: fstp    qword ptr [esp+0D0h+scale]; double
 0x5ECA51: call    _floor
 0x5ECA56: fnstcw  word ptr [esp+0D0h+var_94]
 0x5ECA5A: add     esp, 8
@@ -464,7 +464,7 @@
 0x5ECAA1: fsub    [esp+0C8h+arg_C]
 0x5ECAA8: lea     ecx, [esp+0C8h+var_B4]
 0x5ECAAC: fstp    [esp+0C8h+var_AC]
-0x5ECAB0: call    sub_43F350
+0x5ECAB0: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x5ECAB5: fstp    st
 0x5ECAB7: fld     [esp+0C8h+var_B4]
 0x5ECABB: fld     qword ptr ds:0A3C770h
@@ -492,7 +492,7 @@
 0x5ECB27: mov     ecx, [esp+0C8h+var_38]
 0x5ECB2E: mov     [esp+0C8h+var_AC], ecx
 0x5ECB32: lea     ecx, [esp+0C8h+var_B4]
-0x5ECB36: call    sub_43F350
+0x5ECB36: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x5ECB3B: fstp    st
 0x5ECB3D: fld     [esp+0C8h+var_B4]
 0x5ECB41: push    ecx
@@ -515,7 +515,7 @@
 0x5ECB93: fsub    [esp+0CCh+var_20]
 0x5ECB9A: fstp    [esp+0CCh+var_10]
 0x5ECBA1: fld     dword ptr ds:0A46B14h
-0x5ECBA7: fstp    dword ptr [esp+0CCh+var_D0+4]; float
+0x5ECBA7: fstp    [esp+0CCh+scale+4]; float
 0x5ECBAA: call    Rand5
 0x5ECBAF: mov     edx, [esi]
 0x5ECBB1: fstp    [esp+0CCh+var_A4]
@@ -565,13 +565,13 @@
 0x5ECC29: fld     [esp+0C8h+var_A4]
 0x5ECC2D: push    ecx
 0x5ECC2E: push    ecx
-0x5ECC2F: fstp    dword ptr [esp+0D0h+var_D0]
+0x5ECC2F: fstp    [esp+0D0h+scale]
 0x5ECC32: push    0
 0x5ECC34: lea     edx, [esp+0D4h+var_5C]
 0x5ECC38: push    edx
 0x5ECC39: push    ebp
-0x5ECC3A: mov     ecx, esi
-0x5ECC3C: call    sub_5E1BB0
+0x5ECC3A: mov     ecx, esi; self
+0x5ECC3C: call    Actor_GetBloodDecalTexturePath; ODismemberment authority: resolves actor blood decal texture path through actor-base virtual +0x38, falling back below to default sBloodTextureDefault path.
 0x5ECC41: mov     ecx, [esp+0DCh+var_B4]
 0x5ECC45: mov     edx, [esp+0DCh+var_B0]
 0x5ECC49: push    eax
@@ -590,9 +590,9 @@
 0x5ECC77: mov     [eax+4], ecx
 0x5ECC7A: mov     ecx, esi; this
 0x5ECC7C: mov     [eax+8], edx
-0x5ECC7F: call    TESObjectREFR_GetParentCell
+0x5ECC7F: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5ECC84: mov     ecx, eax
-0x5ECC86: call    sub_4CF1A0
+0x5ECC86: call    Decal_AttachToGeometryRecursive; BloodOnDeath decode 2026-05-30: trap path separately attaches blood decals to the hit actor geometry after scene projection; floor/world trails should use the earlier scene projection call, not this actor-root attachment.
 0x5ECC8B: fld     [esp+0C8h+var_A8]
 0x5ECC8F: fmul    qword ptr ds:0A3C770h
 0x5ECC95: fstp    [esp+0C8h+var_A8]
@@ -614,3 +614,15 @@
 0x5ECCC6: pop     ebx
 0x5ECCC7: add     esp, 0B4h
 0x5ECCCD: retn    2Ch ; ','
+0x9C2700: mov     eax, [ebp-9Ch]
+0x9C2706: push    eax
+0x9C2707: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C270C: pop     ecx
+0x9C270D: retn
+0x9C270E: mov     edx, [esp+arg_4]
+0x9C2712: lea     eax, [edx-0B8h]
+0x9C2718: mov     ecx, [edx-0BCh]
+0x9C271E: xor     ecx, eax
+0x9C2720: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C2725: mov     eax, offset stru_AEB57C
+0x9C272A: jmp     ___CxxFrameHandler3

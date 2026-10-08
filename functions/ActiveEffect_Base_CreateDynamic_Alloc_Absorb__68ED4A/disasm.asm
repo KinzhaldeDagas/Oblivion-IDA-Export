@@ -1,4 +1,4 @@
-0x68ED4A: push    4Ch ; 'L'; Size
+0x68ED4A: push    4Ch ; 'L'; Verified built-in factory helper: allocates an AbsorbEffect for the absorb-family FourCC cases selected by SwitchEffectCode.
 0x68ED4C: call    FormHeapAlloc
 0x68ED51: add     esp, 4
 0x68ED54: mov     [esp+arg_60], eax

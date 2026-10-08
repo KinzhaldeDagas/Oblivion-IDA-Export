@@ -62,10 +62,10 @@
 0x75DBE9: jmp     short loc_75DBED
 0x75DBEB: xor     eax, eax
 0x75DBED: mov     edx, [esi+70h]
-0x75DBF0: push    edx
-0x75DBF1: mov     ecx, eax
+0x75DBF0: push    edx; capacity
+0x75DBF1: mov     ecx, eax; self
 0x75DBF3: mov     [esp+18h+var_4], eax
-0x75DBF7: call    sub_523B10
+0x75DBF7: call    NiTObjectArray_Resize16
 0x75DBFC: lea     eax, [esp+14h+var_4]
 0x75DC00: push    eax
 0x75DC01: push    edi

@@ -1,1 +1,8 @@
-_RGNDATAHEADER
+struct _RGNDATAHEADER
+{
+DWORD dwSize;
+DWORD iType;
+DWORD nCount;
+DWORD nRgnSize;
+RECT rcBound;
+};

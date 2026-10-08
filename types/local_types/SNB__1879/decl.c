@@ -1,1 +1,1 @@
-SNB
+typedef OLECHAR **SNB;

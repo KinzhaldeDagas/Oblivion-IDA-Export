@@ -6,9 +6,9 @@
 0x5AD44E: fldz
 0x5AD450: push    ecx
 0x5AD451: mov     ecx, [ecx+4]; this
-0x5AD454: fstp    [esp+38h+a2]; a3
-0x5AD457: push    0FAEh; a2
-0x5AD45C: call    Tile_SetFloat
+0x5AD454: fstp    [esp+38h+a2]; value
+0x5AD457: push    0FAEh; propertyCode
+0x5AD45C: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5AD461: pop     ebp
 0x5AD462: add     esp, 30h
 0x5AD465: retn    4
@@ -124,7 +124,7 @@
 0x5AD5C0: test    ebp, ebp
 0x5AD5C2: jle     loc_5AD669
 0x5AD5C8: push    0; Seed
-0x5AD5CA: call    GetRandomLargeInteger?
+0x5AD5CA: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x5AD5CF: cdq
 0x5AD5D0: idiv    ebp
 0x5AD5D2: mov     edi, [esp+44h+arg_0]
@@ -190,7 +190,7 @@
 0x5AD67C: lea     esp, [esp+0]
 0x5AD680: mov     esi, [eax+4]
 0x5AD683: push    eax
-0x5AD684: call    FormHeapFree
+0x5AD684: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5AD689: add     esp, 4
 0x5AD68C: cmp     esi, edi
 0x5AD68E: mov     eax, esi
@@ -202,7 +202,7 @@
 0x5AD6A0: jz      short loc_5AD6B8
 0x5AD6A2: mov     esi, [eax+4]
 0x5AD6A5: push    eax
-0x5AD6A6: call    FormHeapFree
+0x5AD6A6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5AD6AB: add     esp, 4
 0x5AD6AE: cmp     esi, edi
 0x5AD6B0: mov     eax, esi
@@ -214,7 +214,7 @@
 0x5AD6C2: jz      short loc_5AD6DA
 0x5AD6C4: mov     esi, [eax+4]
 0x5AD6C7: push    eax
-0x5AD6C8: call    FormHeapFree
+0x5AD6C8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5AD6CD: add     esp, 4
 0x5AD6D0: cmp     esi, edi
 0x5AD6D2: mov     eax, esi

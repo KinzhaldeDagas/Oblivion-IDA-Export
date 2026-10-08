@@ -1,7 +1,7 @@
-void __thiscall bhkPackedNiTriStripsShape::~bhkPackedNiTriStripsShape(bhkPackedNiTriStripsShape *this)
+void __thiscall bhkPackedNiTriStripsShape::~bhkPackedNiTriStripsShape(bhkShape *this)
 {
-  *(_DWORD *)this = &bhkPackedNiTriStripsShape::`vftable';
-  sub_89D700(this);
-  --dword_BA8120;
-  bhkShapeCollection::~bhkShapeCollection(this);
+  this->__vftable = (NiObjectVtbl *)&bhkPackedNiTriStripsShape::`vftable'; /*0x8c50c8*/
+  sub_89D700(this); /*0x8c50d6*/
+  --unk_BA8120; /*0x8c50db*/
+  bhkShapeCollection::~bhkShapeCollection(this); /*0x8c50ec*/
 }

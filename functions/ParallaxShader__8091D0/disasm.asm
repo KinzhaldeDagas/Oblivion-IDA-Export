@@ -1,4 +1,4 @@
-0x8091D0: push    0FFFFFFFFh
+0x8091D0: push    0FFFFFFFFh; MoonSugarEffect decode: Parallax shader definition mirrors Lighting/Skin-style declarations, including tangent/binormal-style raw entries. Generic vertex shader replacement must match these layouts.
 0x8091D2: push    offset SEH_8122A0
 0x8091D7: mov     eax, large fs:0
 0x8091DD: push    eax
@@ -23,11 +23,11 @@
 0x80920E: call    ShaderDefinition__Init
 0x809213: mov     edi, eax
 0x809215: mov     eax, ds:0B43104h
-0x80921A: push    1; StreamCount
-0x80921C: push    6; a2
-0x80921E: push    eax; a1
+0x80921A: push    1; streamCount
+0x80921C: push    6; elementCount
+0x80921E: push    eax; renderer
 0x80921F: mov     [esp+2Ch+var_4], 0FFFFFFFFh
-0x809227: call    CreateDX9ShaderDeclaration
+0x809227: call    CreateDX9ShaderDeclaration; Oblivion NiDX9 declaration factory. Allocates a 0x38-byte NiDX9ShaderDeclaration and initializes elementCount internal element records for each streamCount stream.
 0x80922C: mov     esi, [edi]
 0x80922E: mov     ebx, eax
 0x809230: add     esp, 0Ch
@@ -54,10 +54,10 @@
 0x809260: push    ebx; lpAddend
 0x809261: call    dword ptr ds:0A28078h
 0x809267: mov     ecx, ds:0B43104h
-0x80926D: push    1; StreamCount
-0x80926F: push    8; a2
-0x809271: push    ecx; a1
-0x809272: call    CreateDX9ShaderDeclaration
+0x80926D: push    1; streamCount
+0x80926F: push    8; elementCount
+0x809271: push    ecx; renderer
+0x809272: call    CreateDX9ShaderDeclaration; Oblivion NiDX9 declaration factory. Allocates a 0x38-byte NiDX9ShaderDeclaration and initializes elementCount internal element records for each streamCount stream.
 0x809277: mov     ecx, [edi]
 0x809279: mov     edx, [ecx]
 0x80927B: add     esp, 0Ch
@@ -208,7 +208,7 @@
 0x8093B9: test    eax, eax
 0x8093BB: jz      short loc_8093CE
 0x8093BD: lea     ecx, [ecx+0]
-0x8093C0: cmp     eax, offset dword_B3F684
+0x8093C0: cmp     eax, offset stru_B3F684
 0x8093C5: jz      short loc_809427
 0x8093C7: mov     eax, [eax+4]
 0x8093CA: test    eax, eax
@@ -224,7 +224,7 @@
 0x8093DF: call    eax
 0x8093E1: test    eax, eax
 0x8093E3: jz      short loc_8093F3
-0x8093E5: cmp     eax, offset dword_B3F684
+0x8093E5: cmp     eax, offset stru_B3F684
 0x8093EA: jz      short loc_80942B
 0x8093EC: mov     eax, [eax+4]
 0x8093EF: test    eax, eax
@@ -309,3 +309,20 @@
 0x8094C6: pop     ebx
 0x8094C7: add     esp, 10h
 0x8094CA: retn
+0x9D0CA0: mov     eax, [ebp-10h]
+0x9D0CA3: push    eax
+0x9D0CA4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D0CA9: pop     ecx
+0x9D0CAA: retn
+0x9D0CAB: mov     eax, [ebp-10h]
+0x9D0CAE: push    eax
+0x9D0CAF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D0CB4: pop     ecx
+0x9D0CB5: retn
+0x9D0CB6: mov     edx, [esp+arg_4]
+0x9D0CBA: lea     eax, [edx-10h]
+0x9D0CBD: mov     ecx, [edx-14h]
+0x9D0CC0: xor     ecx, eax
+0x9D0CC2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D0CC7: mov     eax, offset stru_AF94E0
+0x9D0CCC: jmp     ___CxxFrameHandler3

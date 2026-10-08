@@ -6,7 +6,7 @@
 0x754E4D: test    esi, esi
 0x754E4F: jz      short loc_754E6D
 0x754E51: mov     ecx, esi; this
-0x754E53: call    ??0NiTimeController@@QAE@XZ; NiTimeController::NiTimeController(void)
+0x754E53: call    ??0NiTimeController@@QAE@XZ; Constructs a 0x3C-byte NiTimeController. Persistent authored state: flags +0x08, frequency +0x0C, phase +0x10, low/high key times +0x14/+0x18, target +0x30, next controller +0x34. Initializes runtime start/last/cache values +0x1C..+0x28 to sentinels, update byte +0x2C to 1, and force byte +0x38 to 0.
 0x754E58: mov     dword ptr [esi], offset ??_7NiPSysResetOnLoopCtlr@@6B@; const NiPSysResetOnLoopCtlr::`vftable'
 0x754E5E: fld     dword ptr ds:0A7DEB4h
 0x754E64: fchs

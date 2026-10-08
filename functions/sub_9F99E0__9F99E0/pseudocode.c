@@ -1,5 +1,5 @@
-int sub_9F99E0()
+int InitSetting_sSkillNameMarksman()
 {
-  GameSetting_ConstrAndReg((int *)&unk_B3A114, (int)"sSkillNameMarksman", (int)"Marksman");
-  return atexit(sub_A23A60);
+  GameSetting_ConstrAndReg(&g_sSkillNameMarksman, "sSkillNameMarksman", "Marksman"); /*0x9f99ef*/
+  return atexit(sub_A23A60); /*0x9f99ff*/
 }

@@ -13,7 +13,7 @@
 0x4616A0: lea     eax, [esp+0D4h+var_C]
 0x4616A7: mov     large fs:0, eax
 0x4616AD: mov     esi, ecx
-0x4616AF: mov     [esp+0D4h+var_BC], esi
+0x4616AF: mov     [esp+0D4h+self], esi
 0x4616B3: mov     ecx, large fs:2Ch
 0x4616BA: mov     eax, ds:0BA9DE4h
 0x4616BF: mov     eax, [ecx+eax*4]
@@ -43,13 +43,13 @@
 0x461716: call    __memset
 0x46171B: add     esp, 10h
 0x46171E: mov     [esp+0D4h+var_98], offset ??_7?$NiTMap@IPAV?$NiTSimpleList@PAUExpiredCellData@@@@@@6B@; const NiTMap<uint,NiTSimpleList<ExpiredCellData *> *>::`vftable'
-0x461726: mov     ecx, offset TimeGlobals
+0x461726: mov     ecx, 0B332E0h
 0x46172B: mov     [esp+0D4h+var_4], ebp
 0x461732: call    TimeGlobals_GetGameDaysPassed
 0x461737: lea     edi, [eax+eax*2]
 0x46173A: add     edi, edi
 0x46173C: add     edi, edi
-0x46173E: mov     ecx, offset TimeGlobals
+0x46173E: mov     ecx, 0B332E0h
 0x461743: add     edi, edi
 0x461745: call    TimeGlobals_GetGameHour
 0x46174A: fnstcw  word ptr [esp+0D4h+var_B8]
@@ -77,20 +77,20 @@
 0x461792: jb      short loc_461782
 0x461794: xor     ecx, ecx
 0x461796: cmp     ecx, ebp
-0x461798: mov     [esp+0D4h+var_9C], ecx
+0x461798: mov     [esp+0D4h+position], ecx
 0x46179C: jz      loc_461A18
 0x4617A2: xor     eax, eax
-0x4617A4: lea     ecx, [esp+0D4h+var_C0]
-0x4617A8: push    ecx
-0x4617A9: mov     ecx, [esi]
+0x4617A4: lea     ecx, [esp+0D4h+valueOut]
+0x4617A8: push    ecx; valueOut
+0x4617A9: mov     ecx, [esi]; self
 0x4617AB: lea     edx, [esp+0D8h+a1]
-0x4617AF: mov     [esp+0D8h+var_C0], eax
+0x4617AF: mov     [esp+0D8h+valueOut], eax
 0x4617B3: mov     [esp+0D8h+a1], eax
-0x4617B7: push    edx
-0x4617B8: lea     eax, [esp+0DCh+var_9C]
-0x4617BC: push    eax
-0x4617BD: call    sub_452600
-0x4617C2: mov     eax, [esp+0D4h+var_C0]
+0x4617B7: push    edx; keyOut
+0x4617B8: lea     eax, [esp+0DCh+position]
+0x4617BC: push    eax; position
+0x4617BD: call    NiTMap_U32Pointer_GetNextEntry
+0x4617C2: mov     eax, [esp+0D4h+valueOut]
 0x4617C6: mov     ecx, [eax]
 0x4617C8: test    ecx, 8000000h
 0x4617CE: mov     ebp, 7FFFFFFFh
@@ -98,7 +98,7 @@
 0x4617D5: jz      loc_461A0D
 0x4617DB: mov     eax, [eax+4]
 0x4617DE: test    eax, eax
-0x4617E0: mov     [esp+0D4h+var_C0], 0
+0x4617E0: mov     [esp+0D4h+valueOut], 0
 0x4617E8: jz      loc_4618E7
 0x4617EE: mov     [esi+14h], eax
 0x4617F1: mov     edi, ds:0B33B00h
@@ -120,16 +120,16 @@
 0x461832: mov     [ecx+14h], eax
 0x461835: push    edx
 0x461836: mov     ecx, esi
-0x461838: mov     [esp+0D8h+var_C0], edx
+0x461838: mov     [esp+0D8h+valueOut], edx
 0x46183C: call    sub_459990
-0x461841: movsx   ebp, byte ptr [esp+0D4h+var_C0+2]
-0x461846: movsx   ebx, byte ptr [esp+0D4h+var_C0+3]
+0x461841: movsx   ebp, byte ptr [esp+0D4h+valueOut+2]
+0x461846: movsx   ebx, byte ptr [esp+0D4h+valueOut+3]
 0x46184B: mov     edi, eax
 0x46184D: mov     eax, [esi+14h]
 0x461850: mov     ecx, [eax]
 0x461852: add     eax, 4
 0x461855: mov     [esi+14h], eax
-0x461858: mov     [esp+0D4h+var_C0], ecx
+0x461858: mov     [esp+0D4h+valueOut], ecx
 0x46185C: mov     dword ptr [esi+14h], 0
 0x461863: jmp     loc_46193E
 0x461868: mov     ecx, [edx+ecx*4]
@@ -153,7 +153,7 @@
 0x4618A5: add     eax, 4
 0x4618A8: mov     [esi+14h], eax
 0x4618AB: movsx   ebx, bx
-0x4618AE: mov     [esp+0D4h+var_C0], ecx
+0x4618AE: mov     [esp+0D4h+valueOut], ecx
 0x4618B2: mov     dword ptr [esi+14h], 0
 0x4618B9: jmp     loc_46193E
 0x4618BE: mov     eax, [esi+14h]
@@ -161,7 +161,7 @@
 0x4618C3: mov     edi, [esp+0D4h+a1]
 0x4618C7: add     eax, 4
 0x4618CA: mov     [esi+14h], eax
-0x4618CD: mov     [esp+0D4h+var_C0], ecx
+0x4618CD: mov     [esp+0D4h+valueOut], ecx
 0x4618D1: mov     dword ptr [esi+14h], 0
 0x4618D8: jmp     short loc_46193E
 0x4618DA: mov     edi, [esp+0D4h+a1]
@@ -169,7 +169,7 @@
 0x4618E5: jmp     short loc_46193E
 0x4618E7: mov     edi, [esp+0D4h+a1]
 0x4618EB: push    edi; a1
-0x4618EC: call    TESForm_LookupByFormID
+0x4618EC: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4618F1: mov     esi, eax
 0x4618F3: add     esp, 4
 0x4618F6: test    esi, esi
@@ -179,8 +179,8 @@
 0x461908: mov     ecx, esi
 0x46190A: call    TESObjectCELL_GetExtraDetachTime
 0x46190F: mov     ecx, esi; this
-0x461911: mov     [esp+0D4h+var_C0], eax
-0x461915: call    TESObjectCELL_IsInterior
+0x461911: mov     [esp+0D4h+valueOut], eax
+0x461915: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x46191A: test    al, al
 0x46191C: jnz     short loc_46193A
 0x46191E: mov     ecx, esi; this
@@ -192,8 +192,8 @@
 0x461931: mov     ebp, eax
 0x461933: call    TESObjectCELL_GetYCoordinate
 0x461938: mov     ebx, eax
-0x46193A: mov     esi, [esp+0D4h+var_BC]
-0x46193E: mov     eax, [esp+0D4h+var_C0]
+0x46193A: mov     esi, [esp+0D4h+self]
+0x46193E: mov     eax, [esp+0D4h+valueOut]
 0x461942: test    eax, eax
 0x461944: jz      loc_461A0D
 0x46194A: mov     edx, [esp+0D4h+var_A0]
@@ -205,14 +205,14 @@
 0x461968: push    8; Size
 0x46196A: call    FormHeapAlloc
 0x46196F: add     esp, 4
-0x461972: mov     [esp+0D4h+var_A8], eax
+0x461972: mov     [esp+0D4h+source], eax
 0x461976: mov     [eax], ebp
 0x461978: mov     [eax+4], ebx
-0x46197B: lea     eax, [esp+0D4h+var_C0]
+0x46197B: lea     eax, [esp+0D4h+valueOut]
 0x46197F: push    eax
 0x461980: push    edi
 0x461981: lea     ecx, [esp+0DCh+var_98]
-0x461985: mov     [esp+0DCh+var_C0], 0
+0x461985: mov     [esp+0DCh+valueOut], 0
 0x46198D: call    NiTMap_GetAt
 0x461992: test    al, al
 0x461994: jnz     short loc_4619E9
@@ -228,7 +228,7 @@
 0x4619B0: mov     dword ptr [eax+4], 0
 0x4619B7: mov     ebx, eax
 0x4619B9: call    NiTMap_SetAt
-0x4619BE: mov     ecx, [esp+0D4h+var_A8]
+0x4619BE: mov     ecx, [esp+0D4h+source]
 0x4619C2: push    ecx
 0x4619C3: mov     ecx, ebx
 0x4619C5: call    BSSimpleList_PushFront
@@ -239,13 +239,13 @@
 0x4619D0: lea     ecx, [esp+0DCh+var_98]; this
 0x4619D4: mov     ebx, eax
 0x4619D6: call    NiTMap_SetAt
-0x4619DB: mov     ecx, [esp+0D4h+var_A8]
+0x4619DB: mov     ecx, [esp+0D4h+source]
 0x4619DF: push    ecx
 0x4619E0: mov     ecx, ebx
 0x4619E2: call    BSSimpleList_PushFront
 0x4619E7: jmp     short loc_461A0D
-0x4619E9: mov     ecx, [esp+0D4h+var_A8]
-0x4619ED: mov     ebx, [esp+0D4h+var_C0]
+0x4619E9: mov     ecx, [esp+0D4h+source]
+0x4619ED: mov     ebx, [esp+0D4h+valueOut]
 0x4619F1: push    ecx
 0x4619F2: mov     ecx, ebx
 0x4619F4: call    BSSimpleList_PushFront
@@ -255,8 +255,8 @@
 0x4619FE: lea     ecx, [esp+0DCh+var_98]; this
 0x461A02: call    NiTMap_SetAt
 0x461A07: jmp     short loc_461A0D
-0x461A09: mov     esi, [esp+0D4h+var_BC]
-0x461A0D: cmp     [esp+0D4h+var_9C], 0
+0x461A09: mov     esi, [esp+0D4h+self]
+0x461A0D: cmp     [esp+0D4h+position], 0
 0x461A12: jnz     loc_4617A2
 0x461A18: mov     esi, [esi]
 0x461A1A: mov     edx, [esi+4]
@@ -266,7 +266,6 @@
 0x461A23: mov     esi, [esi+8]
 0x461A26: mov     ecx, esi
 0x461A28: jmp     short loc_461A30
-0x461A2A: align 10h
 0x461A30: cmp     dword ptr [ecx], 0
 0x461A33: jnz     loc_461B13
 0x461A39: add     eax, 1
@@ -275,21 +274,21 @@
 0x461A41: jb      short loc_461A30
 0x461A43: xor     eax, eax
 0x461A45: test    eax, eax
-0x461A47: mov     [esp+0D4h+var_9C], eax
+0x461A47: mov     [esp+0D4h+position], eax
 0x461A4B: jz      loc_461E97
-0x461A51: mov     ebx, [esp+0D4h+var_BC]
-0x461A55: lea     edx, [esp+0D4h+var_C0]
-0x461A59: push    edx
+0x461A51: mov     ebx, [esp+0D4h+self]
+0x461A55: lea     edx, [esp+0D4h+valueOut]
+0x461A59: push    edx; valueOut
 0x461A5A: lea     eax, [esp+0D8h+a1]
-0x461A5E: push    eax
-0x461A5F: lea     ecx, [esp+0DCh+var_9C]
+0x461A5E: push    eax; keyOut
+0x461A5F: lea     ecx, [esp+0DCh+position]
 0x461A63: xor     ebp, ebp
-0x461A65: push    ecx
-0x461A66: mov     ecx, [ebx]
-0x461A68: mov     [esp+0E0h+var_C0], ebp
+0x461A65: push    ecx; position
+0x461A66: mov     ecx, [ebx]; self
+0x461A68: mov     [esp+0E0h+valueOut], ebp
 0x461A6C: mov     [esp+0E0h+a1], ebp
-0x461A70: call    sub_452600
-0x461A75: mov     eax, [esp+0D4h+var_C0]
+0x461A70: call    NiTMap_U32Pointer_GetNextEntry
+0x461A75: mov     eax, [esp+0D4h+valueOut]
 0x461A79: mov     edx, [eax]
 0x461A7B: mov     eax, [eax+4]
 0x461A7E: xor     ecx, ecx
@@ -320,17 +319,17 @@
 0x461AD6: jz      short loc_461B1B
 0x461AD8: mov     edi, ds:0B33B00h
 0x461ADE: mov     esi, [edi+14h]
-0x461AE1: push    24h ; '$'; Size
+0x461AE1: push    24h ; '$'; byteCount
 0x461AE3: lea     eax, [esp+0D8h+Dst]
-0x461AE7: push    esi; Src
-0x461AE8: push    eax; Dst
-0x461AE9: call    _memcpy
+0x461AE7: push    esi; source
+0x461AE8: push    eax; destination
+0x461AE9: call    _memcpy;
 0x461AEE: fld     [esp+0E0h+var_50]
 0x461AF5: mov     ebp, [esp+0E0h+var_54]
 0x461AFC: add     esi, 24h ; '$'
 0x461AFF: add     esp, 0Ch
 0x461B02: mov     [edi+14h], esi
-0x461B05: call    Double_To_SInt32
+0x461B05: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x461B0A: fld     [esp+0D4h+var_4C]
 0x461B11: jmp     short loc_461B8C
 0x461B13: mov     eax, [esi+eax*4]
@@ -341,34 +340,34 @@
 0x461B25: mov     edi, ds:0B33B00h
 0x461B2B: mov     esi, [edi+14h]
 0x461B2E: jns     short loc_461B65
-0x461B30: push    2Ch ; ','; Size
-0x461B32: lea     ecx, [esp+0D8h+var_38]
-0x461B39: push    esi; Src
-0x461B3A: push    ecx; Dst
-0x461B3B: call    _memcpy
+0x461B30: push    2Ch ; ','; byteCount
+0x461B32: lea     ecx, [esp+0D8h+destination]
+0x461B39: push    esi; source
+0x461B3A: push    ecx; destination
+0x461B3B: call    _memcpy;
 0x461B40: fld     [esp+0E0h+var_24]
 0x461B47: mov     ebp, [esp+0E0h+var_28]
 0x461B4E: add     esi, 2Ch ; ','
 0x461B51: add     esp, 0Ch
 0x461B54: mov     [edi+14h], esi
-0x461B57: call    Double_To_SInt32
+0x461B57: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x461B5C: fld     [esp+0D4h+var_20]
 0x461B63: jmp     short loc_461B8C
-0x461B65: push    1Ch; Size
+0x461B65: push    1Ch; byteCount
 0x461B67: lea     edx, [esp+0D8h+var_78]
-0x461B6B: push    esi; Src
-0x461B6C: push    edx; Dst
-0x461B6D: call    _memcpy
+0x461B6B: push    esi; source
+0x461B6C: push    edx; destination
+0x461B6D: call    _memcpy;
 0x461B72: fld     [esp+0E0h+var_74]
 0x461B76: mov     ebp, [esp+0E0h+var_78]
 0x461B7A: add     esi, 1Ch
 0x461B7D: add     esp, 0Ch
 0x461B80: mov     [edi+14h], esi
-0x461B83: call    Double_To_SInt32
+0x461B83: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x461B88: fld     [esp+0D4h+var_70]
 0x461B8C: mov     esi, eax
 0x461B8E: sar     esi, 0Ch
-0x461B91: call    Double_To_SInt32
+0x461B91: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x461B96: mov     edi, eax
 0x461B98: sar     edi, 0Ch
 0x461B9B: mov     ecx, ds:0B33A98h
@@ -388,7 +387,7 @@
 0x461BCA: jmp     short loc_461C41
 0x461BCC: mov     ecx, [esp+0D4h+a1]
 0x461BD0: push    ecx; a1
-0x461BD1: call    TESForm_LookupByFormID
+0x461BD1: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x461BD6: add     esp, 4
 0x461BD9: test    eax, eax
 0x461BDB: jz      loc_461E8C
@@ -402,12 +401,12 @@
 0x461BF6: jnz     loc_461E8C
 0x461BFC: mov     ecx, eax; this
 0x461BFE: mov     [esp+0D4h+var_B8], eax
-0x461C02: call    TESObjectREFR_GetParentCell
+0x461C02: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x461C07: mov     edi, eax
 0x461C09: test    edi, edi
 0x461C0B: jz      loc_461E8C
 0x461C11: mov     ecx, edi; this
-0x461C13: call    TESObjectCELL_IsInterior
+0x461C13: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x461C18: test    al, al
 0x461C1A: jz      short loc_461C25
 0x461C1C: mov     ebp, [edi+0Ch]
@@ -429,19 +428,18 @@
 0x461C4F: jz      loc_461E8C
 0x461C55: cmp     edi, 7FFFFFFFh
 0x461C5B: jz      loc_461E8C
-0x461C61: lea     edx, [esp+0D4h+var_A8]
+0x461C61: lea     edx, [esp+0D4h+source]
 0x461C65: push    edx
 0x461C66: push    ebp
 0x461C67: lea     ecx, [esp+0DCh+var_98]
-0x461C6B: mov     [esp+0DCh+var_A8], 0
+0x461C6B: mov     [esp+0DCh+source], 0
 0x461C73: call    NiTMap_GetAt
 0x461C78: test    al, al
 0x461C7A: jz      loc_461E8C
-0x461C80: mov     ecx, [esp+0D4h+var_A8]
+0x461C80: mov     ecx, [esp+0D4h+source]
 0x461C84: test    ecx, ecx
 0x461C86: jz      short loc_461CAF
 0x461C88: jmp     short loc_461C90
-0x461C8A: align 10h
 0x461C90: mov     eax, [ecx]
 0x461C92: test    eax, eax
 0x461C94: jz      loc_461E8C
@@ -461,13 +459,13 @@
 0x461CC5: cmp     ebx, 8
 0x461CC8: jnz     short loc_461CE1
 0x461CCA: mov     eax, [esp+0D4h+a1]
-0x461CCE: mov     ecx, [esp+0D4h+var_BC]
-0x461CD2: mov     ecx, [ecx]
-0x461CD4: push    1
-0x461CD6: push    eax
-0x461CD7: call    sub_452DF0
+0x461CCE: mov     ecx, [esp+0D4h+self]
+0x461CD2: mov     ecx, [ecx]; self
+0x461CD4: push    1; force
+0x461CD6: push    eax; formID
+0x461CD7: call    SaveLoadChangesMap_RemoveChanges;
 0x461CDC: jmp     loc_461DD8
-0x461CE1: mov     edx, [esp+0D4h+var_C0]
+0x461CE1: mov     edx, [esp+0D4h+valueOut]
 0x461CE5: mov     eax, [edx+4]
 0x461CE8: test    eax, eax
 0x461CEA: mov     [esp+0D4h+var_88], eax
@@ -492,37 +490,37 @@
 0x461D37: jz      short loc_461D42
 0x461D39: add     ax, 4
 0x461D3D: mov     word ptr [esp+0D4h+Src], ax
-0x461D42: mov     ecx, [esp+0D4h+var_BC]
+0x461D42: mov     ecx, [esp+0D4h+self]
 0x461D46: movzx   edx, ax
 0x461D49: add     edx, 4
 0x461D4C: push    edx
-0x461D4D: call    sub_453500
-0x461D52: mov     ecx, ds:0B33B00h
+0x461D4D: call    sub_453500; EnginePatch v1: save-buffer allocation hook used to track record buffer base/end for later savegame parser count clamps.
+0x461D52: mov     ecx, ds:0B33B00h; self
 0x461D58: mov     ebx, eax
-0x461D5A: push    4; Size
+0x461D5A: push    4; byteCount
 0x461D5C: lea     eax, [esp+0D8h+Src]
-0x461D60: push    eax; Src
+0x461D60: push    eax; source
 0x461D61: call    SaveLoad_SaveData
 0x461D66: test    esi, esi
 0x461D68: jz      short loc_461D80
-0x461D6A: push    4; Size
-0x461D6C: lea     ecx, [esp+0D8h+var_A8]
-0x461D70: push    ecx; Src
-0x461D71: mov     ecx, ds:0B33B00h
-0x461D77: mov     [esp+0DCh+var_A8], ebp
+0x461D6A: push    4; byteCount
+0x461D6C: lea     ecx, [esp+0D8h+source]
+0x461D70: push    ecx; source
+0x461D71: mov     ecx, ds:0B33B00h; self
+0x461D77: mov     [esp+0DCh+source], ebp
 0x461D7B: call    SaveLoad_SaveData
 0x461D80: mov     edx, [esp+0D4h+Size]
 0x461D84: mov     esi, [esp+0D4h+var_88]
 0x461D88: lea     eax, [edi+esi+4]
-0x461D8C: mov     edi, [esp+0D4h+var_BC]
-0x461D90: push    edx; Size
-0x461D91: push    eax; Src
-0x461D92: mov     ecx, edi
+0x461D8C: mov     edi, [esp+0D4h+self]
+0x461D90: push    edx; byteCount
+0x461D91: push    eax; source
+0x461D92: mov     ecx, edi; self
 0x461D94: call    SaveLoad_SaveData
 0x461D99: push    esi; void *
 0x461D9A: mov     ecx, offset FormHeap
 0x461D9F: call    MemoryHeap_Free_checked
-0x461DA4: mov     eax, [esp+0D4h+var_C0]
+0x461DA4: mov     eax, [esp+0D4h+valueOut]
 0x461DA8: mov     ecx, [esp+0D4h+var_B0]
 0x461DAC: mov     [eax+4], ebx
 0x461DAF: mov     [eax], ecx
@@ -532,15 +530,15 @@
 0x461DBC: cmp     [esp+0D4h+var_B8], 0
 0x461DC1: jz      short loc_461DEC
 0x461DC3: mov     edx, [esp+0D4h+var_B8]
-0x461DC7: mov     eax, [esp+0D4h+var_BC]
-0x461DCB: mov     ecx, [eax]
-0x461DCD: push    80000008h
-0x461DD2: push    edx
-0x461DD3: call    sub_452D60
+0x461DC7: mov     eax, [esp+0D4h+self]
+0x461DCB: mov     ecx, [eax]; self
+0x461DCD: push    80000008h; flags
+0x461DD2: push    edx; form
+0x461DD3: call    ChangesMap_RemoveFormChangeFlags;
 0x461DD8: mov     eax, [esp+0D4h+var_B8]
 0x461DDC: test    eax, eax
 0x461DDE: jz      short loc_461DEC
-0x461DE0: mov     ecx, [esp+0D4h+var_BC]
+0x461DE0: mov     ecx, [esp+0D4h+self]
 0x461DE4: push    0
 0x461DE6: push    eax
 0x461DE7: call    sub_45BB30
@@ -559,7 +557,7 @@
 0x461E12: test    esi, esi
 0x461E14: jz      short loc_461E39
 0x461E16: mov     ecx, esi; this
-0x461E18: call    TESObjectREFR_IsPersistent?
+0x461E18: call    TESObjectREFR_IsPersistent
 0x461E1D: test    al, al
 0x461E1F: jnz     short loc_461E62
 0x461E21: mov     edx, [esi]
@@ -572,11 +570,11 @@
 0x461E30: call    sub_4D9040
 0x461E35: test    al, al
 0x461E37: jnz     short loc_461E62
-0x461E39: mov     ecx, [esp+0D4h+var_BC]
-0x461E3D: mov     ecx, [ecx]
-0x461E3F: push    1
-0x461E41: push    edi
-0x461E42: call    sub_452DF0
+0x461E39: mov     ecx, [esp+0D4h+self]
+0x461E3D: mov     ecx, [ecx]; self
+0x461E3F: push    1; force
+0x461E41: push    edi; formID
+0x461E42: call    SaveLoadChangesMap_RemoveChanges;
 0x461E47: test    esi, esi
 0x461E49: jz      short loc_461E62
 0x461E4B: mov     edx, [esi]
@@ -592,11 +590,11 @@
 0x461E65: jnz     short loc_461E8C
 0x461E67: test    ebx, 20000h
 0x461E6D: jz      short loc_461E8C
-0x461E6F: mov     ecx, [esp+0D4h+var_BC]
-0x461E73: mov     ecx, [ecx]
-0x461E75: push    1
-0x461E77: push    edi
-0x461E78: call    sub_452DF0
+0x461E6F: mov     ecx, [esp+0D4h+self]
+0x461E73: mov     ecx, [ecx]; self
+0x461E75: push    1; force
+0x461E77: push    edi; formID
+0x461E78: call    SaveLoadChangesMap_RemoveChanges;
 0x461E7D: test    esi, esi
 0x461E7F: jz      short loc_461E8C
 0x461E81: mov     edx, [esi]
@@ -604,7 +602,7 @@
 0x461E86: push    1
 0x461E88: mov     ecx, esi
 0x461E8A: call    eax
-0x461E8C: cmp     [esp+0D4h+var_9C], 0
+0x461E8C: cmp     [esp+0D4h+position], 0
 0x461E91: jnz     loc_461A51
 0x461E97: mov     edx, [esp+0D4h+var_94]
 0x461E9B: xor     eax, eax
@@ -653,7 +651,7 @@
 0x461F08: test    eax, eax
 0x461F0A: jz      short loc_461F3D
 0x461F0C: push    eax
-0x461F0D: call    FormHeapFree
+0x461F0D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x461F12: mov     eax, [esi+4]
 0x461F15: add     esp, 4
 0x461F18: test    eax, eax
@@ -663,7 +661,7 @@
 0x461F22: mov     edx, [eax]
 0x461F24: push    eax
 0x461F25: mov     [esi], edx
-0x461F27: call    FormHeapFree
+0x461F27: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x461F2C: add     esp, 4
 0x461F2F: jmp     short loc_461F06
 0x461F31: mov     edi, ecx
@@ -671,7 +669,7 @@
 0x461F35: mov     dword ptr [esi], 0
 0x461F3B: jmp     short loc_461F06
 0x461F3D: push    esi
-0x461F3E: call    FormHeapFree
+0x461F3E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x461F43: add     esp, 4
 0x461F46: test    edi, edi
 0x461F48: jnz     loc_461EC0
@@ -692,3 +690,12 @@
 0x461F8B: pop     ebx
 0x461F8C: add     esp, 0C0h
 0x461F92: retn
+0x9AE600: lea     ecx, [ebp-98h]
+0x9AE606: jmp     ??1?$NiTMap@IPAV?$NiTSimpleList@PAUExpiredCellData@@@@@@UAE@XZ; NiTMap<uint,NiTSimpleList<ExpiredCellData *> *>::~NiTMap<uint,NiTSimpleList<ExpiredCellData *> *>(void)
+0x9AE60B: mov     edx, [esp+arg_4]
+0x9AE60F: lea     eax, [edx-0C4h]
+0x9AE615: mov     ecx, [edx-0C8h]
+0x9AE61B: xor     ecx, eax
+0x9AE61D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AE622: mov     eax, offset stru_ADAE00
+0x9AE627: jmp     ___CxxFrameHandler3

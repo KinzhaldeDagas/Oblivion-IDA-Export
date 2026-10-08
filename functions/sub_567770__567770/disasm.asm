@@ -1,4 +1,4 @@
-0x567770: movsx   ecx, byte ptr [ecx+20h]
+0x567770: movsx   ecx, byte ptr [ecx+20h]; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.
 0x567774: add     ecx, 0FFFFFFF4h; switch 21 cases
 0x567777: xor     al, al
 0x567779: cmp     ecx, 14h

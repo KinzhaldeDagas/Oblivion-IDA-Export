@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4ADAD0",
-    "line": "push    ebp",
+    "line": "push    ebp; Verified (Oblivion): inverse traversal visits the same property ID 4 subtype 5..10 classes (PPLighting/SpeedTree PP, Hair, SpeedTree Branch, SpeedTree Leaf, Lighting30). It clears the TextureEffectData pointer only when it equals the supplied object. No current shader-property vtable returns subtype 8 (Unknown). Fallout StopTextureShader uses property ID 3 and subtype 8..12, so do not transfer these IDs across versions.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x4ADAD2",
-    "line": "mov     esi, [esp+8+arg_0]",
+    "line": "mov     esi, [esp+8+sceneNode]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x4ADAF1",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x4ADB2F",
-    "line": "cmp     ecx, [esp+8+arg_4]",
+    "line": "cmp     ecx, [esp+8+data]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -241,19 +241,19 @@
   },
   {
     "ea": "0x4ADB35",
-    "line": "push    0",
+    "line": "push    0; data",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4ADB37",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; textureEffectProperty",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4ADB39",
-    "line": "call    sub_7D7A70",
+    "line": "call    TextureEffectProperty_SetData; Verified (Oblivion): replaces the TextureEffectData pointer at +0xE0 on the supplied NiProperty-derived shader property, with Interlocked release/addref handling, then clears a 32-bit state at +0x24. BSShaderPPLightingProperty constructor/destructor and viewer export independently confirm +0xE0 is its spTexEffectData ownership slot. Direct callers select property ID 4 subtypes 5..10: PP-lighting/SpeedTree PP (5), Hair (6), SpeedTree Branch (7), SpeedTree Leaf (9), and Lighting30 (10); subtype 8 remains Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x4ADB61",
-    "line": "mov     ebx, [esp+10h+arg_4]",
+    "line": "mov     ebx, [esp+10h+data]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -391,13 +391,13 @@
   },
   {
     "ea": "0x4ADB74",
-    "line": "push    ebx",
+    "line": "push    ebx; data",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4ADB75",
-    "line": "push    eax",
+    "line": "push    eax; sceneRoot",
     "mnemonic": "push",
     "size": 1
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x4ADB78",
-    "line": "call    sub_4ADAD0",
+    "line": "call    TESEffectShader_RemoveTextureEffectFromScenegraph; Verified (Oblivion): inverse traversal visits the same property ID 4 subtype 5..10 classes (PPLighting/SpeedTree PP, Hair, SpeedTree Branch, SpeedTree Leaf, Lighting30). It clears the TextureEffectData pointer only when it equals the supplied object. No current shader-property vtable returns subtype 8 (Unknown). Fallout StopTextureShader uses property ID 3 and subtype 8..12, so do not transfer these IDs across versions.",
     "mnemonic": "call",
     "size": 5
   },

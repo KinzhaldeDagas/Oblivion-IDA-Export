@@ -1,4 +1,4 @@
-BOOL __thiscall sub_718B20(float *this, float *a2)
+BOOL __thiscall sub_718B20(NiPoint3 *this, NiPoint3 *a2)
 {
-  return !sub_70FF20(this, a2) || sub_8AA390(this + 9, a2 + 9) || a2[0xC] != *(this + 0xC);
+  return !sub_70FF20(&this->x, &a2->x) || NiPoint3__NotEqual(this + 3, a2 + 3) || a2[4].x != *((float *)this + 0xC); /*0x718b51*/
 }

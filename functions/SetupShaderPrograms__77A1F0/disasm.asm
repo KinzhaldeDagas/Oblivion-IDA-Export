@@ -1,4 +1,4 @@
-0x77A1F0: push    ebx
+0x77A1F0: push    ebx; Verified (Oblivion): common NiD3DShader pass setup first invokes the current NiD3DPass bind/apply virtual, then applies this shader object's PixelConstantMap to CurrentPass->PixelShader and VertexConstantMap to CurrentPass->VertexShader. ShadowLightShader's vtable slot +0x38 points here, and its slot +0x88 builds those maps; this closes the map ownership path for its 0x18C..0x18F texture-effect selectors.
 0x77A1F1: push    ebp
 0x77A1F2: push    esi
 0x77A1F3: push    edi
@@ -10,7 +10,7 @@
 0x77A200: mov     eax, ds:0B29F84h
 0x77A205: push    eax
 0x77A206: mov     ecx, edi
-0x77A208: call    NiObjectNET_GetExtraData
+0x77A208: call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.
 0x77A20D: cmp     eax, ebx
 0x77A20F: jz      short loc_77A217
 0x77A211: mov     [eax+14h], ebx
@@ -35,7 +35,7 @@
 0x77A241: mov     eax, [esp+2Ch+arg_4]
 0x77A245: push    eax
 0x77A246: push    edi
-0x77A247: call    edx
+0x77A247: call    edx; Current NiD3DPass binds pixel/vertex programs and applies pass-owned constant maps.
 0x77A249: mov     ecx, [esi+2Ch]
 0x77A24C: test    ecx, ecx
 0x77A24E: mov     [esp+10h+arg_0], eax
@@ -65,8 +65,8 @@
 0x77A288: mov     eax, [esp+34h+arg_1C]
 0x77A28C: push    edi
 0x77A28D: push    eax
-0x77A28E: call    edx
-0x77A290: mov     ecx, [esi+30h]
+0x77A28E: call    edx; Apply shader-level PixelConstantMap to the bound pass pixel shader.
+0x77A290: mov     ecx, [esi+30h]; DX11 authority correction: shader+30 vertex map applies after pass-owned vertex map at pass+48 (75FC4C); pass+58 is vertex program. Older +50 comment was incorrect.
 0x77A293: test    ecx, ecx
 0x77A295: jz      short loc_77A2D3
 0x77A297: mov     eax, [esi+3Ch]
@@ -94,7 +94,7 @@
 0x77A2CB: mov     eax, [esp+34h+arg_1C]
 0x77A2CF: push    edi
 0x77A2D0: push    eax
-0x77A2D1: call    edx
+0x77A2D1: call    edx; Apply shader-level VertexConstantMap to the bound pass vertex shader.
 0x77A2D3: cmp     dword ptr [esi+34h], 0
 0x77A2D7: jnz     short loc_77A2FA
 0x77A2D9: mov     ecx, [esi+24h]
@@ -105,11 +105,11 @@
 0x77A2E5: mov     edi, [eax]
 0x77A2E7: mov     eax, [edx+74h]
 0x77A2EA: push    0
-0x77A2EC: call    eax
+0x77A2EC: call    eax; Materialize or reuse the active NiDX9 declaration's IDirect3DVertexDeclaration9.
 0x77A2EE: mov     ecx, [esi+18h]
 0x77A2F1: mov     edx, [edi+0A8h]
 0x77A2F7: push    eax
-0x77A2F8: call    edx
+0x77A2F8: call    edx; Bind the active Lighting30 D3D vertex declaration before drawing pass zero.
 0x77A2FA: mov     eax, [esp+10h+arg_0]
 0x77A2FE: pop     edi
 0x77A2FF: pop     esi

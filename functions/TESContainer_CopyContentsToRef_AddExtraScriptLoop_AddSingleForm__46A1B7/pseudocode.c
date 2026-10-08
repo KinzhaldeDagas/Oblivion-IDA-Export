@@ -3,9 +3,9 @@ int __userpurge TESContainer_CopyContentsToRef_::AddExtraScriptLoop_AddSingleFor
         double a2@<st2>,
         double a3@<st1>,
         int ebp0@<ebp>,
-        int esi0@<esi>,
-        int a6,
-        int a7,
+        ExtraDataList *esi0@<esi>,
+        char *a6@<ebx>,
+        double a7@<st0>,
         int a8,
         int a9,
         int a10,
@@ -13,7 +13,7 @@ int __userpurge TESContainer_CopyContentsToRef_::AddExtraScriptLoop_AddSingleFor
         int a12,
         int a13,
         int a14,
-        int a15,
+        TESObjectREFR *a15,
         int a16,
         int a17,
         int a18,
@@ -63,15 +63,22 @@ int __userpurge TESContainer_CopyContentsToRef_::AddExtraScriptLoop_AddSingleFor
         int a62,
         int a63)
 {
-  if ( a1 )
-    (*(void (__thiscall **)(int, _DWORD, int, int))(*(_DWORD *)a1 + 0x114))(a1, *(_DWORD *)(ebp0 + 4), esi0, 1);
+  int a64; // [esp+E4h] [ebp+E4h]
+
+  if ( a1 ) /*0x46a1bc*/
+    a7 = ((double (__thiscall *)(int, _DWORD, ExtraDataList *, int))*(_DWORD *)(*(_DWORD *)a1 + 0x114))( /*0x46a1cc*/
+           a1,
+           *(_DWORD *)(ebp0 + 4),
+           esi0,
+           1);
   else
-    TESObjectREFR_AddItem_Abbrev((TESObjectREFR *)a13, *(_DWORD *)(ebp0 + 4), esi0, 1);
+    TESObjectREFR_AddItem_Abbrev(a15, *(TESForm **)(ebp0 + 4), esi0, 1); /*0x46a1d8*/
   return TESContainer_CopyContentsToRef_::AddExtraScriptLoop_Next(
            a1,
            a2,
            a3,
            a6,
+           ebp0,
            a7,
            a8,
            a9,
@@ -80,7 +87,7 @@ int __userpurge TESContainer_CopyContentsToRef_::AddExtraScriptLoop_AddSingleFor
            a12,
            a13,
            a14,
-           a15,
+           (int)a15,
            a16,
            a17,
            a18,
@@ -128,5 +135,6 @@ int __userpurge TESContainer_CopyContentsToRef_::AddExtraScriptLoop_AddSingleFor
            a60,
            a61,
            a62,
-           a63);
+           a63,
+           a64);
 }

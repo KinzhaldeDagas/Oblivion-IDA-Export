@@ -1,5 +1,5 @@
 0x701B00: push    esi
-0x701B01: push    offset stru_B3F780; lpCriticalSection
+0x701B01: push    offset unk_B3F780; lpCriticalSection
 0x701B06: mov     esi, ecx
 0x701B08: call    dword ptr ds:0A2806Ch
 0x701B0E: call    dword ptr ds:0A2808Ch
@@ -24,6 +24,6 @@
 0x701B5C: pop     esi
 0x701B5D: jnz     short loc_701B65
 0x701B5F: mov     ds:0B3F7F8h, ecx
-0x701B65: push    offset stru_B3F780; lpCriticalSection
+0x701B65: push    offset unk_B3F780; lpCriticalSection
 0x701B6A: call    dword ptr ds:0A28074h
 0x701B70: retn

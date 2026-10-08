@@ -7,13 +7,13 @@
 0x5B0632: cmp     dword ptr [eax+44h], 0
 0x5B0636: jz      short loc_5B0651
 0x5B0638: mov     eax, ds:0B35ECCh
-0x5B063D: mov     ecx, ds:0B333C4h
-0x5B0643: push    eax
-0x5B0644: call    TESObjectREF_GetItemCount
+0x5B063D: mov     ecx, ds:0B333C4h; this
+0x5B0643: push    eax; item
+0x5B0644: call    TESObjectREFR_GetItemCount; TESObjectREFR inventory count accessor: returns 0 when the reference has no container or no ContainerChanges; otherwise asks ContainerExtraData_GetItemCount(this, item), which combines base TESContainer count with EntryData.countDelta. Exact ABI is thiscall (TESObjectREFR *this, TESForm *item).
 0x5B0649: test    eax, eax
 0x5B064B: jz      loc_5B07D0
 0x5B0651: fld     dword ptr [esi+148h]
-0x5B0657: call    Double_To_SInt32
+0x5B0657: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B065C: push    eax
 0x5B065D: mov     ecx, esi
 0x5B065F: call    sub_5AF190
@@ -26,9 +26,9 @@
 0x5B0674: cmp     byte ptr ds:0B3B3F5h, 0
 0x5B067B: jz      loc_5B07D0
 0x5B0681: mov     edx, ds:0B35ECCh
-0x5B0687: mov     ecx, ds:0B333C4h
-0x5B068D: push    edx
-0x5B068E: call    TESObjectREF_GetItemCount
+0x5B0687: mov     ecx, ds:0B333C4h; this
+0x5B068D: push    edx; item
+0x5B068E: call    TESObjectREFR_GetItemCount; TESObjectREFR inventory count accessor: returns 0 when the reference has no container or no ContainerChanges; otherwise asks ContainerExtraData_GetItemCount(this, item), which combines base TESContainer count with EntryData.countDelta. Exact ABI is thiscall (TESObjectREFR *this, TESForm *item).
 0x5B0693: test    eax, eax
 0x5B0695: mov     ecx, esi
 0x5B0697: jnz     short loc_5B0704
@@ -58,9 +58,9 @@
 0x5B06E3: fild    [esp+8+var_4]
 0x5B06E7: push    ecx
 0x5B06E8: mov     ecx, [esi+28h]; this
-0x5B06EB: fstp    [esp+0Ch+a3]; a3
-0x5B06EE: push    0FB1h; a2
-0x5B06F3: call    Tile_SetFloat
+0x5B06EB: fstp    [esp+0Ch+a3]; value
+0x5B06EE: push    0FB1h; propertyCode
+0x5B06F3: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B06F8: mov     dword ptr [esi+174h], 0
 0x5B0702: jmp     short loc_5B070E
 0x5B0704: push    offset aUilocktumblerf; "UILockTumblerFall"
@@ -90,17 +90,17 @@
 0x5B0759: cmp     byte ptr ds:0B3B3F5h, 0
 0x5B0760: jnz     short loc_5B07BF
 0x5B0762: mov     ecx, ds:0B35ECCh
-0x5B0768: push    ecx
-0x5B0769: mov     ecx, ds:0B333C4h
-0x5B076F: call    TESObjectREF_GetItemCount
+0x5B0768: push    ecx; item
+0x5B0769: mov     ecx, ds:0B333C4h; this
+0x5B076F: call    TESObjectREFR_GetItemCount; TESObjectREFR inventory count accessor: returns 0 when the reference has no container or no ContainerChanges; otherwise asks ContainerExtraData_GetItemCount(this, item), which combines base TESContainer count with EntryData.countDelta. Exact ABI is thiscall (TESObjectREFR *this, TESForm *item).
 0x5B0774: test    eax, eax
 0x5B0776: jnz     short loc_5B07BF
 0x5B0778: fld     dword ptr ds:0A379B4h
 0x5B077E: push    ecx
 0x5B077F: mov     ecx, [esi+178h]; this
-0x5B0785: fstp    [esp+0Ch+a3]; a3
-0x5B0788: push    0FAEh; a2
-0x5B078D: call    Tile_SetFloat
+0x5B0785: fstp    [esp+0Ch+a3]; value
+0x5B0788: push    0FAEh; propertyCode
+0x5B078D: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B0792: mov     ecx, [esi+178h]
 0x5B0798: push    0; float
 0x5B079A: call    sub_58FBA0

@@ -1,4 +1,4 @@
-0x776C40: push    ebx
+0x776C40: push    ebx; MoonSugarEffect decode: NiGeometryBufferData::RefreshVBChips. Releases the existing geometry-group chip for this stream, creates a replacement chip through NiGeometryGroup, and stores it in VBChip[stream] if stream is in range. This is allocation/lifetime ownership, not a safe mask-pass getter.
 0x776C41: mov     ebx, [esp+4+arg_4]
 0x776C45: push    esi
 0x776C46: push    edi

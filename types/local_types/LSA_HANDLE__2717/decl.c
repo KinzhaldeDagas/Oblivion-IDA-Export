@@ -1,1 +1,1 @@
-LSA_HANDLE
+typedef PVOID LSA_HANDLE;

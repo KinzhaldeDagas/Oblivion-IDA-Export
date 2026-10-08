@@ -1,1 +1,1 @@
-SCRIPT_CACHE
+typedef void *SCRIPT_CACHE;

@@ -34,19 +34,19 @@ int __userpurge MagicCaster_ApplyActiveMagicItem_::UnkCleanup_@<eax>(
   unsigned int v31; // eax
   int v32; // eax
 
-  if ( HIBYTE(a6) )
+  if ( HIBYTE(a6) ) /*0x69ba08*/
   {
-    if ( a31 )
+    if ( a31 ) /*0x69ba10*/
     {
-      LOWORD(v31) = *(_WORD *)(a31 + 0x20);
-      if ( (_WORD)v31 == 0xFFFF )
-        v31 = strlen(*(const char **)(a31 + 0x1C));
+      LOWORD(v31) = *(_WORD *)(a31 + 0x20); /*0x69ba12*/
+      if ( (_WORD)v31 == 0xFFFF ) /*0x69ba1a*/
+        v31 = strlen(*(const char **)(a31 + 0x1C)); /*0x69ba1f*/
       else
-        v31 = (unsigned __int16)v31;
-      if ( v31 )
+        v31 = (unsigned __int16)v31; /*0x69ba2f*/
+      if ( v31 ) /*0x69ba34*/
       {
-        v32 = (*(int (__thiscall **)(int))(*(_DWORD *)(a31 + 0x18) + 0x14))(a31 + 0x18);
-        QueuedModelLoader_RemoveModel((int *)ModelLoaderPtr, v32, 0, 1);
+        v32 = (*(int (__thiscall **)(int))(*(_DWORD *)(a31 + 0x18) + 0x14))(a31 + 0x18); /*0x69ba43*/
+        QueuedModelLoader_RemoveModel((int *)MEMORY[0xB33A1C], v32, 0, 1); /*0x69ba4c*/
       }
     }
   }

@@ -1,21 +1,21 @@
-int __stdcall sub_77C120(_DWORD **a1)
+NiD3DShaderProgramFactory *__stdcall sub_77C120(int *a1)
 {
-  int result; // eax
-  int v2; // eax
+  NiD3DShaderProgramFactory *result; // eax
+  int *v2; // eax
 
-  result = sub_77EAE0();
-  if ( result )
+  result = sub_77EAE0(); /*0x77c120*/
+  if ( result ) /*0x77c127*/
   {
-    v2 = (int)*a1;
-    if ( *a1 )
+    v2 = (int *)*a1; /*0x77ec44*/
+    if ( *a1 ) /*0x77ec44*/
     {
-      *a1 = *(_DWORD **)v2;
-      return *(_DWORD *)(v2 + 8);
+      *a1 = *v2; /*0x77ec4c*/
+      return (NiD3DShaderProgramFactory *)v2[2]; /*0x77ec4e*/
     }
     else
     {
-      return 0;
+      return 0; /*0x77ec54*/
     }
   }
-  return result;
+  return result; /*0x77c129*/
 }

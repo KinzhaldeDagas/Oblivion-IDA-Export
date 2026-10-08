@@ -58,13 +58,13 @@
 0x8A3DC8: fst     [esp+88h+var_6C]
 0x8A3DCC: fstp    [esp+88h+var_68]
 0x8A3DD0: fstp    [esp+88h+var_64]
-0x8A3DD4: call    sub_88FCC0
+0x8A3DD4: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x8A3DD9: lea     eax, [esp+80h+var_70]
 0x8A3DDD: push    eax
 0x8A3DDE: lea     ecx, [esp+84h+var_50]
 0x8A3DE2: push    ecx
 0x8A3DE3: lea     ecx, [edi+10h]
-0x8A3DE6: call    sub_88FCC0
+0x8A3DE6: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x8A3DEB: mov     ecx, [esp+80h+var_4]
 0x8A3DEF: pop     edi
 0x8A3DF0: pop     esi

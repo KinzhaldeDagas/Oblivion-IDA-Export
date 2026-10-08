@@ -5,9 +5,9 @@ Menu *__userpurge LockPickMenu::`scalar deleting destructor'@<eax>(
         double a4@<st0>,
         char a5)
 {
-  this->__vftable = (MenuVtbl *)&LockPickMenu::`vftable';
-  Menu::~Menu(this, a2, a3, a4);
-  if ( (a5 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  this->__vftable = (MenuVtbl *)&LockPickMenu::`vftable'; /*0x5af413*/
+  Menu::~Menu(this, a2, a3, a4); /*0x5af419*/
+  if ( (a5 & 1) != 0 ) /*0x5af423*/
+    FormHeapFree((unsigned int)this); /*0x5af426*/
+  return this; /*0x5af430*/
 }

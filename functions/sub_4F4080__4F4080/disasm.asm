@@ -17,12 +17,12 @@
 0x4F40B4: mov     edi, ebp
 0x4F40B6: mov     byte ptr [edi], 28h ; '('
 0x4F40B9: mov     ecx, [ebx]
-0x4F40BB: push    ecx; Size
-0x4F40BC: push    eax; Src
+0x4F40BB: push    ecx; byteCount
+0x4F40BC: push    eax; source
 0x4F40BD: add     edi, 1
-0x4F40C0: push    edi; Dst
+0x4F40C0: push    edi; destination
 0x4F40C1: mov     [esp+78h+var_50], ebx
-0x4F40C5: call    _memcpy
+0x4F40C5: call    _memcpy;
 0x4F40CA: add     esp, 0Ch
 0x4F40CD: add     edi, [ebx]
 0x4F40CF: mov     [esp+6Ch+var_48], ebp
@@ -64,7 +64,6 @@
 0x4F4152: cmp     dword ptr [esi+504h], 0FFFFFFFFh
 0x4F4159: jz      short loc_4F41D1
 0x4F415B: jmp     short loc_4F4160
-0x4F415D: align 10h
 0x4F4160: mov     ecx, [esi+504h]
 0x4F4166: mov     eax, [esi+ecx*4+404h]
 0x4F416D: add     ecx, 0FFFFFFFFh
@@ -83,10 +82,10 @@
 0x4F419F: jnz     short loc_4F4198
 0x4F41A1: sub     eax, ebp
 0x4F41A3: mov     ebp, eax
-0x4F41A5: push    ebp; Size
-0x4F41A6: push    ecx; Src
-0x4F41A7: push    edi; Dst
-0x4F41A8: call    _memcpy
+0x4F41A5: push    ebp; byteCount
+0x4F41A6: push    ecx; source
+0x4F41A7: push    edi; destination
+0x4F41A8: call    _memcpy;
 0x4F41AD: add     esp, 0Ch
 0x4F41B0: add     edi, ebp
 0x4F41B2: cmp     dword ptr [esi+504h], 0FFFFFFFFh
@@ -112,7 +111,6 @@
 0x4F421B: mov     [esi+504h], ecx
 0x4F4221: jz      loc_4F42D3
 0x4F4227: jmp     short loc_4F4230
-0x4F4229: align 10h
 0x4F4230: lea     ecx, ds:0B0A12Dh[eax*8]
 0x4F4237: mov     eax, ecx
 0x4F4239: mov     byte ptr [edi], 20h ; ' '
@@ -124,10 +122,10 @@
 0x4F4249: jnz     short loc_4F4242
 0x4F424B: sub     eax, ebp
 0x4F424D: mov     ebp, eax
-0x4F424F: push    ebp; Size
-0x4F4250: push    ecx; Src
-0x4F4251: push    edi; Dst
-0x4F4252: call    _memcpy
+0x4F424F: push    ebp; byteCount
+0x4F4250: push    ecx; source
+0x4F4251: push    edi; destination
+0x4F4252: call    _memcpy;
 0x4F4257: mov     ecx, [esi+504h]
 0x4F425D: mov     eax, [esi+ecx*4+404h]
 0x4F4264: add     ecx, 0FFFFFFFFh
@@ -145,13 +143,13 @@
 0x4F4291: mov     eax, [esi+504h]
 0x4F4297: mov     dword ptr [esi+eax*4+404h], 0
 0x4F42A2: jmp     short loc_4F42D3
-0x4F42A4: push    ebp; Size
+0x4F42A4: push    ebp; byteCount
 0x4F42A5: lea     edx, [esp+70h+Dst]
 0x4F42A9: mov     byte ptr [edi], 20h ; ' '
-0x4F42AC: push    edx; Src
+0x4F42AC: push    edx; source
 0x4F42AD: add     edi, 1
-0x4F42B0: push    edi; Dst
-0x4F42B1: call    _memcpy
+0x4F42B0: push    edi; destination
+0x4F42B1: call    _memcpy;
 0x4F42B6: add     esp, 0Ch
 0x4F42B9: add     edi, ebp
 0x4F42BB: cmp     ebx, 10h

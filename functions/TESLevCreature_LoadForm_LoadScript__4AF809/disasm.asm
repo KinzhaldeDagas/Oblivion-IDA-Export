@@ -2,7 +2,7 @@
 0x4AF80C: push    eax
 0x4AF80D: mov     ecx, edi
 0x4AF80F: mov     dword ptr [ebp-8], 0
-0x4AF816: call    TESFile_GetChunkData4
+0x4AF816: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x4AF81B: mov     ecx, [ebp-8]
 0x4AF81E: mov     [esi+38h], ecx
 0x4AF821: push    esi

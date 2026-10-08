@@ -1,1 +1,1 @@
-LPABC_0
+typedef ABC *LPABC_0;

@@ -1,5 +1,5 @@
 // attributes: thunk
-int __thiscall sub_4E9050(_DWORD *this)
+int __thiscall j_TESRoad_ClearConnectedPointMap(TESRoad *this)
 {
-  return sub_4E8C20(this);
+  return TESRoad_ClearConnectedPointMap(this);
 }

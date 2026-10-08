@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x564610",
+      "0x564617"
+    ]
+  ],
+  "chunks_sha256": "923d6f5cd887abde3b92c69ff15385a61bfd602a30f7b3e9bd53278560ed3e1d",
+  "comment_regular": "\n[2026-10-06 directional billboard] Verified: returns BSTreeNode+0xE8. Fallout named GetBillboard 0x821FD478 corroborates the role; offsets are Oblivion-specific.\n\nVerified: BSTreeNode_GetBillboard returns the geometry object stored at +0xE8; local producer is NiTriShape STBB. Probable API type NiTriBasedGeom* is corroborated by Fallout's named getter.",
+  "comment_repeatable": "Verified: BSTreeNode_GetBillboard returns the geometry object stored at +0xE8; local producer is NiTriShape STBB. Probable API type NiTriBasedGeom* is corroborated by Fallout's named getter.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_564610",
+  "display_name": "BSTreeNode_GetBillboard",
   "end_ea": "0x564617",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_564610",
+  "name": "BSTreeNode_GetBillboard",
   "segment": ".text",
   "sha256": "923d6f5cd887abde3b92c69ff15385a61bfd602a30f7b3e9bd53278560ed3e1d",
   "size": 7,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x564610",
-  "type": "int __thiscall(_DWORD *this)",
+  "total_chunk_size": 7,
+  "type": "NiTriBasedGeom *__thiscall(BSTreeNode_OblivionLayout_0F0 *this)",
   "xrefs_from_count": 1,
   "xrefs_to_count": 1
 }

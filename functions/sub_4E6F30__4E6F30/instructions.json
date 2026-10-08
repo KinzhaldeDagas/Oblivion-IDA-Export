@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E6F30",
-    "line": "push    ecx",
+    "line": "push    ecx; Verified deferred PGRI resolver. For each PGRI row, low u16 is a local point-array index and XYZ at +4 locates the remote point; it adds reciprocal adjacency if absent and emits the reciprocal request on the remote grid. Out-of-range local indices are removed. Caller is TESPathGrid_LoadOrResolveGraph.",
     "mnemonic": "push",
     "size": 1
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x4E6F50",
-    "line": "push    offset stru_B36000; lpCriticalSection",
+    "line": "push    offset g_PathGridCriticalSection; lpCriticalSection",
     "mnemonic": "push",
     "size": 5
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x4E6F5A",
-    "line": "call    dword ptr ds:0A2806Ch",
+    "line": "call    dword ptr ds:0A2806Ch; Verified cross-cell PGRI resolution runs under the same g_PathGridCriticalSection as point teardown, updating owner-thread/nesting bookkeeping and preventing concurrent graph mutation.",
     "mnemonic": "call",
     "size": 6
   },
@@ -130,12 +130,6 @@
     "line": "jmp     short loc_4E6F80",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x4E6F7D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x4E6F80",
@@ -217,25 +211,25 @@
   },
   {
     "ea": "0x4E6FAD",
-    "line": "push    ebp",
+    "line": "push    ebp; excludedGrid",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E6FAE",
-    "line": "lea     eax, [esp+18h+var_4]",
+    "line": "lea     eax, [esp+18h+outOwningGrid]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4E6FB2",
-    "line": "push    eax",
+    "line": "push    eax; outOwningGrid",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E6FB3",
-    "line": "mov     [esp+1Ch+var_4], 0",
+    "line": "mov     [esp+1Ch+outOwningGrid], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -247,7 +241,7 @@
   },
   {
     "ea": "0x4E6FC0",
-    "line": "push    eax",
+    "line": "push    eax; worldspace",
     "mnemonic": "push",
     "size": 1
   },
@@ -259,13 +253,13 @@
   },
   {
     "ea": "0x4E6FC4",
-    "line": "push    esi",
+    "line": "push    esi; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E6FC5",
-    "line": "call    sub_4E6DF0",
+    "line": "call    TESPathGrid_FindPointInNeighborCell; Verified cross-cell endpoint lookup: compute cellX/cellY by arithmetic-shifting world X/Y by 12, search that WorldSpace's pathgrids, and also test the preceding X and/or Y cell when the point lies exactly on a 4096-unit boundary. Excludes the source PathGrid, returns the matching point, and outputs its owning PathGrid.",
     "mnemonic": "call",
     "size": 5
   },
@@ -307,7 +301,7 @@
   },
   {
     "ea": "0x4E6FD7",
-    "line": "cmp     [esp+14h+var_4], 0",
+    "line": "cmp     [esp+14h+outOwningGrid], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -355,13 +349,13 @@
   },
   {
     "ea": "0x4E6FEB",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E6FED",
-    "line": "call    sub_4E7DE0",
+    "line": "call    PathGraphNode_GetConnections; Verified graph-node connection-list accessor: returns this+0x20. TESPathGrid and TESRoad graph code both traverse this as a BSSimpleList of adjacency pointers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -415,13 +409,13 @@
   },
   {
     "ea": "0x4E7006",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E7008",
-    "line": "call    sub_4E7DE0",
+    "line": "call    PathGraphNode_GetConnections; Verified graph-node connection-list accessor: returns this+0x20. TESPathGrid and TESRoad graph code both traverse this as a BSSimpleList of adjacency pointers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,37 +433,37 @@
   },
   {
     "ea": "0x4E7014",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E7016",
-    "line": "call    sub_4BEF40",
+    "line": "call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E701B",
-    "line": "mov     ecx, [esp+14h+var_4]",
+    "line": "mov     ecx, [esp+14h+outOwningGrid]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E701F",
-    "line": "push    eax",
+    "line": "push    eax; neighborPosition",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E7020",
-    "line": "push    esi",
+    "line": "push    esi; point",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E7021",
-    "line": "call    sub_4E4FE0",
+    "line": "call    TESPathGrid_AddPGRICrossCellLinkRequest; Verified PGRI row creation writes local point index in low u16 and remote point XYZ at +4; bytes +2..+3 are left unwritten here and ignored by inspected readers, so their intended meaning remains Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -535,7 +529,7 @@
   },
   {
     "ea": "0x4E7049",
-    "line": "push    offset stru_B36000; lpCriticalSection",
+    "line": "push    offset g_PathGridCriticalSection; lpCriticalSection",
     "mnemonic": "push",
     "size": 5
   },
@@ -607,7 +601,7 @@
   },
   {
     "ea": "0x4E7067",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -679,7 +673,7 @@
   },
   {
     "ea": "0x4E7086",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -697,7 +691,7 @@
   },
   {
     "ea": "0x4E708F",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -727,7 +721,7 @@
   },
   {
     "ea": "0x4E70A0",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

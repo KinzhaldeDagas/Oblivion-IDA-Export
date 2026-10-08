@@ -1,19 +1,32 @@
 {
-  "callees_count": 47,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 10,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x7ED6C0",
+      "0x7EDCCC"
+    ]
+  ],
+  "chunks_sha256": "f548578c7ac1fca49e01d7ecbf8cdd85d438352a3da54a3e159b20fd2bf2f2e7",
+  "comment_regular": "\nV179 corroboration: multiplies the native light RGB by ShadowSceneLight+D4 after backing dimmer/material dimmer. Thus camera light LOD fade reduces the actual point contribution that the DX11 receiver can shadow. Extending camera coverage should adjust the proven interior cull/fade thresholds, not darken ambient or enlarge physical lamp radii.",
   "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7ED6C0",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
+  "display_name": "OB_BSShader_UpdateLightColorConstant_010201A0",
   "end_ea": "0x7EDCCC",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7ED6C0",
+  "name": "OB_BSShader_UpdateLightColorConstant_010201A0",
   "segment": ".text",
   "sha256": "f548578c7ac1fca49e01d7ecbf8cdd85d438352a3da54a3e159b20fd2bf2f2e7",
   "size": 1548,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7ED6C0",
-  "type": "int *__cdecl(int, int, float)",
+  "total_chunk_size": 1548,
+  "type": "float *__cdecl(int lightSlot, void *shadowSceneLight, float dimmer)",
   "xrefs_from_count": 496,
   "xrefs_to_count": 1
 }

@@ -1,19 +1,36 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_4E9F50",
+  "chunks": [
+    [
+      "0x4E9F50",
+      "0x4E9FB9"
+    ],
+    [
+      "0x9D62E0",
+      "0x9D6306"
+    ]
+  ],
+  "chunks_sha256": "fc172149a985c442ffd878b3d2108df43eb6ed359516a739b39781e7f74c81e6",
+  "comment_regular": "Verified root-data initializer allocates a 0x60-byte TESTerrainLODQuad object, initializes its root pointer and fields, and stores it in TESTerrainLODQuadRoot.quadData.",
+  "comment_repeatable": "Verified root-data initializer allocates a 0x60-byte TESTerrainLODQuad object, initializes its root pointer and fields, and stores it in TESTerrainLODQuadRoot.quadData.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "TESTerrainLODQuadRoot_InitializeQuadData",
   "end_ea": "0x4E9FB9",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4E9F50",
+  "name": "TESTerrainLODQuadRoot_InitializeQuadData",
   "segment": ".text",
   "sha256": "869dab99f682039d56d3feabb7a33e2e15eeeedc6fba074bf905ddb5166a11aa",
   "size": 105,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E9F50",
-  "type": "_DWORD *__thiscall(_WORD *this)",
-  "xrefs_from_count": 36,
+  "total_chunk_size": 143,
+  "type": "TESTerrainLODQuad_OblivionComplete_060 *__thiscall(TESTerrainLODQuadRoot_OblivionLayout_010Verified *this)",
+  "xrefs_from_count": 50,
   "xrefs_to_count": 1
 }

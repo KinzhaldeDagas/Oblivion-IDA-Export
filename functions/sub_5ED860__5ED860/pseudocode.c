@@ -1,5 +1,5 @@
 double __usercall sub_5ED860@<st0>(
-        int *a1@<ecx>,
+        TESObjectREFR *a1@<ecx>,
         float a2@<ebx>,
         int a3@<ebp>,
         int a4@<edi>,
@@ -7,91 +7,111 @@ double __usercall sub_5ED860@<st0>(
         double a6@<st1>,
         double result@<st0>)
 {
-  TESPackage *v8; // ecx
+  void (__thiscall *CopyFromBase)(BaseFormComponent *, BaseFormComponent *); // ecx
   char v9; // al
   int v10; // ecx
   TESObjectREFR *TravelHorse; // edi
   TESObjectCELL *v12; // ebx
-  TESWorldSpace *v13; // ebp
+  TESObjectCELL **v13; // ebp
   char *v14; // ecx
   TESObjectREFR *v15; // eax
-  int v16; // edi
+  TESObjectREFRVtbl *vtbl; // edi
   int v17; // eax
-  TESPackage *v18; // ecx
-  int v19; // eax
-  TESObjectREFRVtbl *vtbl; // ebx
-  int v21; // eax
-  int v22; // [esp+0h] [ebp-3Ch]
-  int v23; // [esp+4h] [ebp-38h]
-  int v24; // [esp+8h] [ebp-34h]
-  float v26; // [esp+14h] [ebp-28h] BYREF
-  int v27; // [esp+18h] [ebp-24h]
-  _BYTE v28[8]; // [esp+1Ch] [ebp-20h] BYREF
+  double v18; // st7
+  TESPackage *v19; // ecx
+  float *v20; // eax
+  TESObjectREFRVtbl *v21; // ebx
+  float *v22; // eax
+  int v23; // [esp+0h] [ebp-3Ch]
+  int v24; // [esp+4h] [ebp-38h]
+  int radians; // [esp+8h] [ebp-34h]
+  float v27; // [esp+14h] [ebp-28h] BYREF
+  TESObjectREFRVtbl *v28; // [esp+18h] [ebp-24h]
+  float v29[2]; // [esp+1Ch] [ebp-20h] BYREF
 
-  if ( (a1[2] & 0x800) == 0 )
+  if ( (a1->member.super.flags & 0x800) == 0 ) /*0x5ed86e*/
   {
-    (*(void (__usercall **)(int@<ecx>, double@<st0>, double@<st1>))(*(_DWORD *)a1[0x16] + 0x20))(a1[0x16], result, a6);
-    if ( TESObjectREFR_IsPersistent_((TESObjectREFR *)a1) )
-      (*(void (__thiscall **)(int, int *, _DWORD))(*(_DWORD *)a1[0x16] + 0x14))(a1[0x16], a1, 0);
-    (*(void (__thiscall **)(int, int *, _DWORD))(*(_DWORD *)a1[0x16] + 0x18))(a1[0x16], a1, 0);
-    v8 = *(TESPackage **)(a1[0x16] + 8);
-    if ( v8 )
+    (*((void (__usercall **)(TESObjectREFRVtbl *@<ecx>, double@<st0>, double@<st1>, double@<st2>))a1[1].vtbl->super.super.InitializeComponent /*0x5ed87c*/
+     + 8))(
+      a1[1].vtbl,
+      result,
+      a6,
+      a5);
+    if ( TESObjectREFR_IsPersistent(a1) ) /*0x5ed880*/
+      (*((void (__thiscall **)(TESObjectREFRVtbl *, TESObjectREFR *, _DWORD))a1[1].vtbl->super.super.InitializeComponent /*0x5ed894*/
+       + 5))(
+        a1[1].vtbl,
+        a1,
+        0);
+    (*((void (__thiscall **)(TESObjectREFRVtbl *, TESObjectREFR *, _DWORD))a1[1].vtbl->super.super.InitializeComponent /*0x5ed8a1*/
+     + 6))(
+      a1[1].vtbl,
+      a1,
+      0);
+    CopyFromBase = a1[1].vtbl->super.super.CopyFromBase; /*0x5ed8a6*/
+    if ( CopyFromBase ) /*0x5ed8ab*/
     {
-      if ( (char)v8->members.type > 2 )
+      if ( *((char *)CopyFromBase + 0x20) > 2 ) /*0x5ed8b5*/
       {
-        result = sub_566DC0(v8, flt_A30634, a6, (Actor *)a1, 0, flt_A30634);
-        if ( !v9 )
+        result = sub_566DC0( /*0x5ed8c8*/
+                   (TESPackage *)CopyFromBase,
+                   kTerrainLODQuadRayDirectionZ,
+                   a6,
+                   a5,
+                   (Actor *)a1,
+                   0,
+                   kTerrainLODQuadRayDirectionZ);
+        if ( !v9 ) /*0x5ed8cf*/
         {
-          v10 = *(_DWORD *)(*(_DWORD *)(a1[0x16] + 8) + 0x1C);
-          v26 = a2;
-          TravelHorse = 0;
-          if ( (v10 & 0x800000) != 0 )
+          v10 = *((_DWORD *)a1[1].vtbl->super.super.CopyFromBase + 7); /*0x5ed8db*/
+          v27 = a2; /*0x5ed8de*/
+          TravelHorse = 0; /*0x5ed8e3*/
+          if ( (v10 & 0x800000) != 0 ) /*0x5ed8e8*/
           {
-            if ( ExtraDataList::GetTravelHorse((ExtraDataList *)(a1 + 0x11)) )
-              TravelHorse = ExtraDataList::GetTravelHorse((ExtraDataList *)(a1 + 0x11));
+            if ( ExtraDataList::GetTravelHorse(&a1->member.baseExtraList) ) /*0x5ed8ef*/
+              TravelHorse = ExtraDataList::GetTravelHorse(&a1->member.baseExtraList); /*0x5ed8ff*/
           }
-          v12 = sub_566A40(*(char ***)(a1[0x16] + 8), (Actor *)a1);
-          v13 = sub_566940(*(TESPackage **)(a1[0x16] + 8), (Actor *)a1);
-          sub_4DD4B0((int)v12, a5, a6, result, (Actor *)a1, v12, v13);
-          result = flt_A32048;
-          sub_4D89D0(flt_A32048);
-          v14 = *(char **)(*(_DWORD *)(a1[0x16] + 8) + 0x24);
-          if ( v14 && sub_569740(v14) == 1 )
+          v12 = (TESObjectCELL *)sub_566A40((char **)a1[1].vtbl->super.super.CopyFromBase, (Actor *)a1); /*0x5ed90e*/
+          v13 = (TESObjectCELL **)sub_566940((TESPackage *)a1[1].vtbl->super.super.CopyFromBase, (Actor *)a1); /*0x5ed91c*/
+          sub_4DD4B0((int)v12, a5, a6, result, (Actor *)a1, v12, v13); /*0x5ed921*/
+          result = flt_A32048; /*0x5ed926*/
+          TESObjectREFR_SetRotationX(a1, flt_A32048); /*0x5ed934*/
+          v14 = *((char **)a1[1].vtbl->super.super.CopyFromBase + 9); /*0x5ed93f*/
+          if ( v14 && sub_569740(v14) == 1 ) /*0x5ed94e*/
           {
-            if ( TESObjectCELL_IsInterior(v12) )
+            if ( TESObjectCELL_IsInterior(v12) ) /*0x5ed952*/
             {
-              v15 = sub_4CBB20(v12, 0x1C, 1);
-              if ( v15 || (v15 = sub_4CBA50(v12)) != 0 )
+              v15 = sub_4CBB20(v12, 0x1C, 1); /*0x5ed965*/
+              if ( v15 || (v15 = sub_4CBA50(v12)) != 0 ) /*0x5ed977*/
               {
-                v16 = *a1;
-                v17 = (int)v15->vtbl->GetPos(v15);
-                (*(void (__thiscall **)(int *, int))(v16 + 0x1CC))(a1, v17);
-                sub_5E6E00((Actor *)a1, v24, a6);
-                return result;
+                vtbl = a1->vtbl; /*0x5ed97f*/
+                v17 = (int)v15->vtbl->GetPos(v15); /*0x5ed989*/
+                v18 = ((double (__thiscall *)(TESObjectREFR *, int))vtbl[1].super.Unk_09)(a1, v17); /*0x5ed994*/
+                return sub_5E6E00((Actor *)a1, radians, a6, v18); /*0x5ed99f*/
               }
             }
           }
           else
           {
-            v18 = *(TESPackage **)(a1[0x16] + 8);
-            v27 = *a1;
-            v19 = sub_566B30(v18, (int)v28, (Actor *)a1);
-            (*(void (__thiscall **)(int *, int))(v27 + 0x1CC))(a1, v19);
-            if ( TravelHorse )
+            v19 = (TESPackage *)a1[1].vtbl->super.super.CopyFromBase; /*0x5ed9af*/
+            v28 = a1->vtbl; /*0x5ed9b2*/
+            v20 = sub_566B30(v19, v29, (Actor *)a1); /*0x5ed9b6*/
+            ((void (__thiscall *)(TESObjectREFR *, float *))v28[1].super.Unk_09)(a1, v20); /*0x5ed9c8*/
+            if ( TravelHorse ) /*0x5ed9cc*/
             {
-              sub_4DD4B0((int)v12, a5, a6, result, (Actor *)TravelHorse, v12, v13);
-              result = flt_A32048;
-              sub_4D89D0(flt_A32048);
-              vtbl = TravelHorse->vtbl;
-              v21 = sub_566B30(*(TESPackage **)(a1[0x16] + 8), (int)&v26, (Actor *)a1);
-              ((void (__thiscall *)(TESObjectREFR *, int, int, int))vtbl[1].super.Unk_09)(TravelHorse, v21, v22, v23);
+              sub_4DD4B0((int)v12, a5, a6, result, (Actor *)TravelHorse, v12, v13); /*0x5ed9d1*/
+              result = flt_A32048; /*0x5ed9d6*/
+              TESObjectREFR_SetRotationX(TravelHorse, flt_A32048); /*0x5ed9e4*/
+              v21 = TravelHorse->vtbl; /*0x5ed9ef*/
+              v22 = sub_566B30((TESPackage *)a1[1].vtbl->super.super.CopyFromBase, &v27, (Actor *)a1); /*0x5ed9f7*/
+              ((void (__thiscall *)(TESObjectREFR *, float *, int, int))v21[1].super.Unk_09)(TravelHorse, v22, v23, v24); /*0x5eda05*/
             }
           }
-          a4 = a3;
+          a4 = a3; /*0x5eda08*/
         }
       }
     }
-    sub_5E6E00((Actor *)a1, a4, a6);
+    return sub_5E6E00((Actor *)a1, a4, a6, result); /*0x5eda10*/
   }
-  return result;
+  return result; /*0x5ed99b*/
 }

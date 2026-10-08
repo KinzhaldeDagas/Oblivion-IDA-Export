@@ -26,7 +26,7 @@
 0x618403: push    ecx; char
 0x618404: push    edx; int
 0x618405: mov     ecx, esi
-0x618407: call    sub_616190
+0x618407: call    CombatController_TryAddTarget; Allocates 0x14-byte TargetInfo: Actor* +0, priority +4, flags byte +8, incoming health damage +0xC, outgoing fatigue-like damage +0x10.
 0x61840C: push    9
 0x61840E: mov     ecx, esi
 0x618410: mov     dword ptr [esi+18h], 0Ch
@@ -42,7 +42,7 @@
 0x618437: movzx   eax, byte ptr [edi+4Dh]
 0x61843B: mov     [esi+4Dh], al
 0x61843E: mov     ecx, [edi+28h]
-0x618441: call    sub_452A60
+0x618441: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x618446: mov     [esp+8+arg_0], eax
 0x61844A: push    ecx
 0x61844B: fild    [esp+0Ch+arg_0]

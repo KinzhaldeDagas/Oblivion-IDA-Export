@@ -1,34 +1,63 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "NighteyeShader",
+  "definition": "struct NighteyeShader\n{\nBSImageSpaceShader super;\nvoid *vertex[1];\nvoid *pixel[1];\nUInt32 Unk90[10];\n}\n",
   "id": 18374686479671985237,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "super",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 144
+      "size": 144,
+      "type": "BSImageSpaceShader"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "vertex",
       "offset": 144,
       "offset_hex": "0x90",
-      "size": 4
+      "size": 4,
+      "type": "void *[1]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pixel",
       "offset": 148,
       "offset_hex": "0x94",
-      "size": 4
+      "size": 4,
+      "type": "void *[1]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk90",
       "offset": 152,
       "offset_hex": "0x98",
-      "size": 40
+      "size": 40,
+      "type": "UInt32[10]"
     }
   ],
   "name": "NighteyeShader",
+  "ordinal": 672,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 192
 }

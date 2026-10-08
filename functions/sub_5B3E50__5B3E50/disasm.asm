@@ -1,4 +1,4 @@
-0x5B3E50: push    400h
+0x5B3E50: push    400h; AchievementsNative evidence: MagicPopupMenu close request. If menu 0x400 is open and parent casts to MagicPopupMenu, sets state at +0x58 to 3 so 0x5B4080 slides the popup closed.
 0x5B3E55: call    Menu_GetOpenMenuTile
 0x5B3E5A: add     esp, 4
 0x5B3E5D: test    eax, eax

@@ -11,7 +11,7 @@
 0x8C8097: jz      short loc_8C809E
 0x8C8099: add     eax, 20h ; ' '
 0x8C809C: jmp     short loc_8C80A3
-0x8C809E: mov     eax, offset stru_BA7A40
+0x8C809E: mov     eax, offset unk_BA7A40
 0x8C80A3: push    eax
 0x8C80A4: lea     ecx, [edi+10h]
 0x8C80A7: call    sub_47DCD0
@@ -22,7 +22,7 @@
 0x8C80B5: jz      short loc_8C80BC
 0x8C80B7: add     eax, 30h ; '0'
 0x8C80BA: jmp     short loc_8C80C1
-0x8C80BC: mov     eax, offset stru_BA7A40
+0x8C80BC: mov     eax, offset unk_BA7A40
 0x8C80C1: push    eax
 0x8C80C2: lea     ecx, [edi+20h]
 0x8C80C5: call    sub_47DCD0

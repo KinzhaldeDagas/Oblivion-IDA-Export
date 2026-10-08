@@ -13,7 +13,6 @@
 0x92B4AE: shufps  xmm1, xmm1, 0
 0x92B4B2: mov     ecx, 17h
 0x92B4B7: jmp     short loc_92B4C0
-0x92B4B9: align 10h
 0x92B4C0: fld     [esp+30h+var_24]
 0x92B4C4: fadd    [esp+30h+var_2C]
 0x92B4C8: fmul    dword ptr ds:0A3D65Ch

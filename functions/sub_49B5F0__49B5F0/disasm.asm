@@ -62,7 +62,7 @@
 0x49B6A8: mov     [eax+8], ecx
 0x49B6AB: fstp    [esp+1Ch+var_1C]; a2
 0x49B6AE: mov     ecx, [esi+4]; this
-0x49B6B1: call    NiAVObject_UpdateNiAVObject
+0x49B6B1: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x49B6B6: pop     edi
 0x49B6B7: pop     esi
 0x49B6B8: add     esp, 0Ch

@@ -48,7 +48,6 @@
 0x76F322: mov     [esp+1Ch+var_4], ebx
 0x76F326: jbe     short loc_76F39A
 0x76F328: jmp     short loc_76F330
-0x76F32A: align 10h
 0x76F330: mov     ecx, [esp+1Ch+arg_0]
 0x76F334: xor     ebp, ebp
 0x76F336: test    cx, cx

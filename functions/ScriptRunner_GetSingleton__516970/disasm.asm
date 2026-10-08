@@ -6,5 +6,5 @@
 0x516988: mov     dword ptr ds:0B36208h, 0
 0x516992: call    _atexit
 0x516997: add     esp, 4
-0x51699A: mov     eax, offset stru_B36208
+0x51699A: mov     eax, (offset dword_B361CC+3Ch)
 0x51699F: retn

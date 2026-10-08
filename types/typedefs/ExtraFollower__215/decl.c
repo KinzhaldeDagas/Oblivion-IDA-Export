@@ -1,1 +1,1 @@
-ExtraFollower
+struct ExtraFollower;

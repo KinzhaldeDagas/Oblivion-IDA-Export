@@ -1,18 +1,31 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x497470",
+      "0x4974F5"
+    ]
+  ],
+  "chunks_sha256": "e9a61b501fc7b8bf5211a8c2fba67dc2fe4496e89455c67306e08487184748fd",
+  "comment_regular": "XRGD singleton loader: count=(size/28)&0xFF, then size % count is tested instead of %28. count==0 faults (including 0..27 and canonical 256-bone size); nonzero remainder cleanly fails and the caller removes the singleton; remainder zero with size!=count*28 is accepted, allocates count*28, then reads size and overflows. Safe success is 1..255 complete 28-byte bones. Successful repeats replace count/buffer and leak the prior buffer.",
+  "comment_repeatable": "XRGD singleton loader: count=(size/28)&0xFF, then size % count is tested instead of %28. count==0 faults (including 0..27 and canonical 256-bone size); nonzero remainder cleanly fails and the caller removes the singleton; remainder zero with size!=count*28 is accepted, allocates count*28, then reads size and overflows. Safe success is 1..255 complete 28-byte bones. Successful repeats replace count/buffer and leak the prior buffer.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_497470",
+  "display_name": "ExtraRagDollDataArray_LoadXRGD",
   "end_ea": "0x4974F5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_497470",
+  "name": "ExtraRagDollDataArray_LoadXRGD",
   "segment": ".text",
   "sha256": "e9a61b501fc7b8bf5211a8c2fba67dc2fe4496e89455c67306e08487184748fd",
   "size": 133,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x497470",
+  "total_chunk_size": 133,
   "type": "char __thiscall(_DWORD *this, Data *)",
   "xrefs_from_count": 61,
   "xrefs_to_count": 1

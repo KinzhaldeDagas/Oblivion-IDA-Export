@@ -21,7 +21,7 @@
 0x5B71BA: mov     ecx, ds:0B333C4h; this
 0x5B71C0: push    edx; int
 0x5B71C1: mov     [esp+4Ch+var_1C], eax
-0x5B71C5: call    TESObjectREFR_GetParentCell
+0x5B71C5: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5B71CA: mov     ecx, eax
 0x5B71CC: call    sub_4CCE20
 0x5B71D1: mov     ecx, ds:0B333C4h; this
@@ -122,7 +122,7 @@
 0x5B7333: fld     [esp+4Ch+var_4]
 0x5B7337: fadd    [esp+4Ch+var_10]
 0x5B733B: fstp    [esp+4Ch+var_28]
-0x5B733F: call    TESObjectREFR_GetParentCell
+0x5B733F: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5B7344: mov     ecx, eax
 0x5B7346: call    sub_4CCE20
 0x5B734B: fld     [esp+40h+var_30]

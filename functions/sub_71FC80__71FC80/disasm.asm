@@ -8,7 +8,7 @@
 0x71FC8F: test    eax, eax
 0x71FC91: jz      short loc_71FC9C
 0x71FC93: push    eax
-0x71FC94: call    FormHeapFree
+0x71FC94: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x71FC99: add     esp, 4
 0x71FC9C: mov     ax, [esp+8+arg_0]
 0x71FCA1: mov     [esi+40h], ax

@@ -1,10 +1,10 @@
-int __thiscall sub_560200(_DWORD *this)
+unsigned __int16 __thiscall BSTreeModel_GetNumLeafLODLevels(BSTreeModel_OblivionLayout_058 *this)
 {
-  void *v1; // ecx
+  OB_CSpeedTreeRT_010201A0 *speedTree; // ecx
 
-  v1 = (void *)*(this + 3);
-  if ( v1 )
-    return (unsigned __int16)sub_787200(v1);
+  speedTree = this->speedTree; /*0x560200*/
+  if ( speedTree ) /*0x560205*/
+    return CSpeedTreeRT__GetNumLeafLodLevels(speedTree); /*0x560207*/
   else
-    return 0;
+    return 0; /*0x560210*/
 }

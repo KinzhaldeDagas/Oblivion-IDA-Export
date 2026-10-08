@@ -47,7 +47,7 @@
 0x575090: mov     eax, dword ptr [esp+48h+var_18]
 0x575094: fst     dword ptr [esp+48h+var_18+4]
 0x575098: mov     edx, dword ptr [esp+48h+var_18+4]
-0x57509C: fild    [esp+48h+arg_18]
+0x57509C: fild    [esp+48h+texture]
 0x5750A0: mov     [edi], eax
 0x5750A2: mov     [edi+4], edx
 0x5750A5: add     esp, 4
@@ -57,8 +57,8 @@
 0x5750B4: fld     st
 0x5750B6: faddp   st(2), st
 0x5750B8: fxch    st(1)
-0x5750BA: fstp    [esp+44h+arg_18]
-0x5750BE: fld     [esp+44h+arg_18]
+0x5750BA: fstp    [esp+44h+texture]
+0x5750BE: fld     [esp+44h+texture]
 0x5750C2: fst     [esp+44h+var_10]
 0x5750C6: mov     eax, [esp+44h+var_10]
 0x5750CA: fxch    st(3)
@@ -78,8 +78,8 @@
 0x5750F8: fst     [esp+44h+var_18]
 0x5750FC: faddp   st(3), st
 0x5750FE: fxch    st(2)
-0x575100: fstp    [esp+44h+arg_18]
-0x575104: fld     [esp+44h+arg_18]
+0x575100: fstp    [esp+44h+texture]
+0x575104: fld     [esp+44h+texture]
 0x575108: fst     [esp+44h+arg_8]
 0x57510C: mov     eax, [esp+44h+arg_8]
 0x575110: fxch    st(1)
@@ -172,7 +172,7 @@
 0x57523B: mov     edx, [esp+44h+arg_C]
 0x57523F: mov     [ebx+18h], eax
 0x575242: mov     [ebx+1Ch], edx
-0x575245: mov     [esp+44h+arg_18], 0
+0x575245: mov     [esp+44h+texture], 0
 0x57524D: mov     ax, word ptr [esp+44h+arg_4]
 0x575252: cmp     ax, 0FFFFh
 0x575256: jnz     short loc_575272
@@ -186,7 +186,7 @@
 0x57526C: sub     eax, [esp+44h+arg_14]
 0x575270: jmp     short loc_575275
 0x575272: movzx   eax, ax
-0x575275: mov     edx, [esp+44h+arg_18]
+0x575275: mov     edx, [esp+44h+texture]
 0x575279: cmp     edx, eax
 0x57527B: mov     eax, [esp+44h+Source]
 0x57527F: jnb     short loc_57529C
@@ -198,18 +198,18 @@
 0x57528D: cmp     byte ptr [eax], 2Fh ; '/'
 0x575290: jnz     short loc_575295
 0x575292: mov     byte ptr [eax], 5Ch ; '\'
-0x575295: add     [esp+44h+arg_18], 1
+0x575295: add     [esp+44h+texture], 1
 0x57529A: jmp     short loc_57524D
 0x57529C: xor     edx, edx
 0x57529E: fstp    [esp+44h+var_30]
 0x5752A2: cmp     eax, edx
-0x5752A4: mov     [esp+44h+arg_18], edx
+0x5752A4: mov     [esp+44h+texture], edx
 0x5752A8: jz      loc_575464
 0x5752AE: cmp     [eax], dl
 0x5752B0: jz      loc_575464
 0x5752B6: push    ecx; int
 0x5752B7: mov     eax, esp
-0x5752B9: mov     [esp+48h+arg_18], esp
+0x5752B9: mov     [esp+48h+texture], esp
 0x5752BD: mov     [eax], edx
 0x5752BF: push    ecx
 0x5752C0: fstp    [esp+4Ch+var_4C]; float
@@ -232,7 +232,7 @@
 0x5752F5: mov     byte ptr [esp+60h+var_4], 0
 0x5752FA: call    sub_591360
 0x5752FF: mov     eax, [eax]
-0x575301: mov     [esp+60h+arg_18], eax
+0x575301: mov     [esp+60h+texture], eax
 0x575305: mov     eax, [esp+60h+arg_14]
 0x575309: add     esp, 1Ch
 0x57530C: test    eax, eax
@@ -250,7 +250,7 @@
 0x57532C: mov     eax, [edx]
 0x57532E: push    1
 0x575330: call    eax
-0x575332: cmp     [esp+44h+arg_18], 0
+0x575332: cmp     [esp+44h+texture], 0
 0x575337: jz      loc_57545E
 0x57533D: fldz
 0x57533F: fst     [esp+44h+arg_8]
@@ -258,7 +258,7 @@
 0x575347: fstp    [esp+44h+arg_C]
 0x57534B: mov     edx, [esp+44h+arg_C]
 0x57534F: mov     [ebx], ecx
-0x575351: mov     ecx, [esp+44h+arg_18]
+0x575351: mov     ecx, [esp+44h+texture]
 0x575355: mov     [ebx+4], edx
 0x575358: fld     [esp+44h+var_30]
 0x57535C: fmul    [esp+44h+var_20]
@@ -282,7 +282,7 @@
 0x57539A: mov     ecx, [esp+44h+var_24]
 0x57539E: mov     [ebx+0Ch], ecx
 0x5753A1: fld     [esp+44h+var_30]
-0x5753A5: mov     ecx, [esp+44h+arg_18]
+0x5753A5: mov     ecx, [esp+44h+texture]
 0x5753A9: fmul    [esp+44h+var_18]
 0x5753AD: mov     edx, [ecx]
 0x5753AF: mov     eax, [edx+4Ch]
@@ -299,7 +299,7 @@
 0x5753D4: mov     ecx, [esp+44h+arg_8]
 0x5753D8: fstp    [esp+44h+arg_C]
 0x5753DC: mov     [ebx+10h], ecx
-0x5753DF: mov     ecx, [esp+44h+arg_18]
+0x5753DF: mov     ecx, [esp+44h+texture]
 0x5753E3: mov     edx, [esp+44h+arg_C]
 0x5753E7: mov     [ebx+14h], edx
 0x5753EA: fld     [esp+44h+var_30]
@@ -314,7 +314,7 @@
 0x575407: jge     short loc_57540F
 0x575409: fadd    dword ptr ds:0A2FC78h
 0x57540F: fdivr   [esp+44h+var_20]
-0x575413: mov     ecx, [esp+44h+arg_18]
+0x575413: mov     ecx, [esp+44h+texture]
 0x575417: mov     eax, [ecx]
 0x575419: mov     edx, [eax+4Ch]
 0x57541C: fstp    [esp+44h+arg_8]
@@ -417,22 +417,22 @@
 0x575575: mov     edi, eax
 0x575577: jmp     short loc_57557B
 0x575579: xor     edi, edi
-0x57557B: mov     edx, [esp+44h+arg_18]
-0x57557F: push    edx
-0x575580: mov     ecx, edi
+0x57557B: mov     edx, [esp+44h+texture]
+0x57557F: push    edx; texture
+0x575580: mov     ecx, edi; this
 0x575582: mov     byte ptr [esp+48h+var_4], 0
-0x575587: call    NiTexturingProperty__SetUnk08
-0x57558C: push    0
-0x57558E: mov     ecx, edi
-0x575590: call    sub_405870
+0x575587: call    OB_NiTexturingProperty_SetBaseTexture_010201A0
+0x57558C: push    0; value
+0x57558E: mov     ecx, edi; this
+0x575590: call    OB_NiTexturingProperty_SetClampMode_010201A0; NiTexturingProperty map flag helper: ensures map slot 0 exists and writes arg-derived bits into map Unk04 bits 0xC000. 0x560AC0 calls it with 0 for billboard texture property state.
 0x575595: push    edi; a2
 0x575596: mov     ecx, esi; this
-0x575598: call    sub_405680
+0x575598: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x57559D: mov     ecx, esi; this
-0x57559F: call    NiAVObject_InitializePropertyState
+0x57559F: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x5755A4: mov     eax, [esp+44h+Source]
 0x5755A8: push    eax
-0x5755A9: call    FormHeapFree
+0x5755A9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5755AE: add     esp, 4
 0x5755B1: mov     eax, esi
 0x5755B3: mov     ecx, [esp+44h+var_C]
@@ -444,3 +444,29 @@
 0x5755C2: pop     ebx
 0x5755C3: add     esp, 30h
 0x5755C6: retn    1Ch
+0x9BE2D0: lea     ecx, [ebp+4]; void *
+0x9BE2D3: jmp     BSStringT_Clear
+0x9BE2D8: mov     eax, [ebp-2Ch]
+0x9BE2DB: push    eax
+0x9BE2DC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BE2E1: pop     ecx
+0x9BE2E2: retn
+0x9BE2E3: mov     ecx, [ebp+1Ch]; slot
+0x9BE2E6: jmp     NiPointerSlot_Release
+0x9BE2EB: mov     eax, [ebp+0Ch]
+0x9BE2EE: push    eax
+0x9BE2EF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BE2F4: pop     ecx
+0x9BE2F5: retn
+0x9BE2F6: mov     eax, [ebp+0Ch]
+0x9BE2F9: push    eax
+0x9BE2FA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BE2FF: pop     ecx
+0x9BE300: retn
+0x9BE301: mov     edx, [esp+arg_4]
+0x9BE305: lea     eax, [edx-34h]
+0x9BE308: mov     ecx, [edx-38h]
+0x9BE30B: xor     ecx, eax
+0x9BE30D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BE312: mov     eax, offset stru_AE7A50
+0x9BE317: jmp     ___CxxFrameHandler3

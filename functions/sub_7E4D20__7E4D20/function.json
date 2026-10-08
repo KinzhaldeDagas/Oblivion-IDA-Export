@@ -1,19 +1,32 @@
 {
-  "callees_count": 16,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 10,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7E4D20",
+      "0x7E5012"
+    ]
+  ],
+  "chunks_sha256": "adb0192b0e9b23004466520fc1a0686d3bc09fec1de718b6bea8d62fd608136b",
+  "comment_regular": "Verified (Oblivion): samples a target geometry with non-null skinData and stores a transformed particle position/direction; this is emitterType_70 value 1, kParticleShaderEmitter_SkinnedGeometry. Fallout calls the analogous mode GenerateFromCollisionBones; correspondence to that exact label is Probable.",
+  "comment_repeatable": "Verified (Oblivion): samples a target geometry with non-null skinData and stores a transformed particle position/direction; this is emitterType_70 value 1, kParticleShaderEmitter_SkinnedGeometry. Fallout calls the analogous mode GenerateFromCollisionBones; correspondence to that exact label is Probable.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7E4D20",
+  "display_name": "ParticleShaderProperty_GenerateFromSkinnedGeometry",
   "end_ea": "0x7E5012",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7E4D20",
+  "name": "ParticleShaderProperty_GenerateFromSkinnedGeometry",
   "segment": ".text",
   "sha256": "adb0192b0e9b23004466520fc1a0686d3bc09fec1de718b6bea8d62fd608136b",
   "size": 754,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7E4D20",
-  "type": "int __thiscall(_WORD *this, int)",
+  "total_chunk_size": 754,
+  "type": "int __thiscall(ParticleShaderProperty *this, unsigned int slotIndex)",
   "xrefs_from_count": 205,
   "xrefs_to_count": 1
 }

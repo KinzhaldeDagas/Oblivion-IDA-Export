@@ -6,7 +6,7 @@
 0x75A878: mov     edi, [esp+0Ch+arg_0]
 0x75A87C: push    eax
 0x75A87D: mov     [esi+18h], di
-0x75A881: call    FormHeapFree
+0x75A881: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x75A886: movsx   eax, di
 0x75A889: add     esp, 4
 0x75A88C: cmp     eax, 1

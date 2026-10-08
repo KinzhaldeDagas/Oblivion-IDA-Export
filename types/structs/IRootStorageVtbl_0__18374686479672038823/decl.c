@@ -1,1 +1,1 @@
-IRootStorageVtbl_0
+typedef IRootStorageVtbl IRootStorageVtbl_0;

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x78B690",
-    "line": "mov     ecx, [esp+arg_0]",
+    "line": "mov     ecx, [esp+positionOut3]; Static CSpeedTreeRT::GetCamera. Copies the process-global camera position and direction vectors to non-NULL output arrays; otherwise records the SDK error.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x78B69B",
-    "line": "mov     eax, [esp+0Ch+arg_4]",
+    "line": "mov     eax, [esp+0Ch+directionOut3]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x78B6EB",
-    "line": "push    3Bh ; ';'; MaxCount",
+    "line": "push    3Bh ; ';'; count",
     "mnemonic": "push",
     "size": 2
   },
@@ -199,13 +199,13 @@
   },
   {
     "ea": "0x78B6F2",
-    "line": "mov     ecx, offset dword_B2B614",
+    "line": "mov     ecx, offset OB_g_strError_010201A0; this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x78B6F7",
-    "line": "call    sub_414500",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
     "mnemonic": "call",
     "size": 5
   },

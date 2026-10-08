@@ -1,15 +1,16 @@
+// Return one 12-byte NiTList node to Oblivion's synchronized global node pool. The caller must already have handled or cleared node+0x08 payload ownership.
 void __stdcall sub_44D880(_DWORD *a1)
 {
   bool v1; // zf
 
-  EnterCriticalSection(&stru_B33F00);
-  dword_B33F78 = GetCurrentThreadId();
-  ++dword_B33F7C;
-  a1[1] = 0;
-  *a1 = dword_B33EAC;
-  v1 = dword_B33F7C-- == 1;
-  dword_B33EAC = (int)a1;
-  if ( v1 )
-    dword_B33F78 = 0;
-  LeaveCriticalSection(&stru_B33F00);
+  EnterCriticalSection((LPCRITICAL_SECTION)&MEMORY[0xB33E90][0x70]); /*0x44d886*/
+  *(_DWORD *)&MEMORY[0xB33E90][0xE8] = GetCurrentThreadId(); /*0x44d892*/
+  ++*(_DWORD *)&MEMORY[0xB33E90][0xEC]; /*0x44d8a0*/
+  a1[1] = 0; /*0x44d8a8*/
+  *a1 = *(_DWORD *)&MEMORY[0xB33E90][0x1C]; /*0x44d8b1*/
+  v1 = (*(_DWORD *)&MEMORY[0xB33E90][0xEC])-- == 1; /*0x44d8b3*/
+  *(_DWORD *)&MEMORY[0xB33E90][0x1C] = a1; /*0x44d8b9*/
+  if ( v1 ) /*0x44d8bf*/
+    *(_DWORD *)&MEMORY[0xB33E90][0xE8] = 0; /*0x44d8c1*/
+  LeaveCriticalSection((LPCRITICAL_SECTION)&MEMORY[0xB33E90][0x70]); /*0x44d8cf*/
 }

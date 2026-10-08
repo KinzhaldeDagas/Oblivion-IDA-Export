@@ -1,4 +1,4 @@
-0x65FBB0: push    esi
+0x65FBB0: push    esi; Consumes and frees the oldest (tail) attribute-bonus bucket after a player level-up, then ensures a current bucket remains available. New buckets are pushed at the front, so pending levels are resolved FIFO.
 0x65FBB1: push    edi
 0x65FBB2: mov     edi, ecx
 0x65FBB4: mov     ecx, [edi+5B4h]
@@ -16,7 +16,7 @@
 0x65FBD4: jnz     short loc_65FC0B
 0x65FBD6: mov     eax, [ecx]
 0x65FBD8: push    eax
-0x65FBD9: call    FormHeapFree
+0x65FBD9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x65FBDE: mov     eax, [edi+5B4h]
 0x65FBE4: mov     ecx, [eax+4]
 0x65FBE7: add     esp, 4
@@ -27,7 +27,7 @@
 0x65FBF4: mov     edx, [ecx]
 0x65FBF6: push    ecx
 0x65FBF7: mov     [eax], edx
-0x65FBF9: call    FormHeapFree
+0x65FBF9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x65FBFE: add     esp, 4
 0x65FC01: jmp     short loc_65FC59
 0x65FC03: mov     dword ptr [eax], 0
@@ -46,7 +46,7 @@
 0x65FC23: push    esi
 0x65FC24: call    BSSimpleList_Remove
 0x65FC29: push    esi
-0x65FC2A: call    FormHeapFree
+0x65FC2A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x65FC2F: add     esp, 4
 0x65FC32: jmp     short loc_65FC59
 0x65FC34: push    8; Size

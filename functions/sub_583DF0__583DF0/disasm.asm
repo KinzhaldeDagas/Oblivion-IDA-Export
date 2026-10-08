@@ -10,7 +10,7 @@
 0x583E11: test    ecx, ecx
 0x583E13: jz      short locret_583E2B
 0x583E15: push    2
-0x583E17: call    NiNode_GetNiPropertyByID
+0x583E17: call    NiNode_GetNiPropertyByID;
 0x583E1C: test    eax, eax
 0x583E1E: jz      short locret_583E2B
 0x583E20: fild    [esp+arg_0]

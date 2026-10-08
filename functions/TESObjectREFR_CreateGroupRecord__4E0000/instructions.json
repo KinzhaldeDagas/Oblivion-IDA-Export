@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E0000",
-    "line": "push    ebx",
+    "line": "push    ebx; Runtime corroboration of TESCS 0x545970: construct owning CELL group type 6 from parent types 1/3/5, then construct the direct reference-role group from type 6. Role is 8 if reference Persistent, else 10 if Visible When Distant, else 9; label remains the owning CELL FormID.",
     "mnemonic": "push",
     "size": 1
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x4E0050",
-    "line": "call    TESForm_GetQuestItem",
+    "line": "call    TESForm_GetQuestItem; TESForm_GetQuestItem: returns TESForm flags bit 0x400. Plugin IsStealableForm uses this, so quest items are skipped before RemoveItem.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x4E0059",
-    "line": "mov     byte ptr [esp+10h+arg_0], 1",
+    "line": "mov     byte ptr [esp+10h+arg_0], 1; For current group type 1, the owning CELL must carry form flag 0x400; this is the persistent exterior-CELL shortcut to type 6.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x4E0060",
-    "line": "call    sub_4CA640",
+    "line": "call    TESObjectCELL_GetCellGroupSubBlockLabel; Compute the CELL group sub-block label. Interior: decimal FormID bucket ((objectID24 % 100) / 10). Exterior: signed cell coordinates divided by 8 and packed X-high/Y-low. Cross-checks TESCS TESObjectCELL_GetCellGroupSubBlockLabel at 0x533F90.",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x4E0078",
-    "line": "mov     dword ptr [esi+0Ch], 6",
+    "line": "mov     dword ptr [esi+0Ch], 6; Emit owning CELL-child GRUP type 6.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x4E0090",
-    "line": "call    TESObjectREFR_IsPersistent?",
+    "line": "call    TESObjectREFR_IsPersistent; From owning type 6, test current reference Persistent first.",
     "mnemonic": "call",
     "size": 5
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x4E0099",
-    "line": "mov     dword ptr [esi+0Ch], 8",
+    "line": "mov     dword ptr [esi+0Ch], 8; Persistent reference => direct role GRUP type 8.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x4E00B3",
-    "line": "mov     [esi+0Ch], eax",
+    "line": "mov     [esi+0Ch], eax; Non-persistent reference => role type 10 if Visible When Distant, otherwise type 9.",
     "mnemonic": "mov",
     "size": 3
   },

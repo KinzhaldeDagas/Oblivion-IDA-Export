@@ -1,502 +1,487 @@
-char __usercall sub_5F9620@<al>(TESObjectREFR *a1@<ecx>, double st6_0@<st1>, double a3@<st0>)
+// Probable name: Actor_ProcessAttackReachProbe. This routine is called from Actor_ProcessAction's two reach/attack branches and from Actor_AttackHandling::DetermineTarget; it returns a byte and contains target/static-hit probing, impact-particle registration, and conditional attack/script follow-up. The two floating x87 inputs are visible in DetermineTarget's caller, but their semantic roles and Actor_ProcessAction's input values remain Unknown.
+char __usercall Actor_ProcessAttackReachProbe@<al>(Actor *a1@<ecx>, double st6_0@<st1>, double a3@<st0>)
 {
-  TESObjectCELL *ParentCell; // eax
-  ExtraDataList *v6; // edi
-  int *v7; // ebx
-  TESObjectREFRVtbl *vtbl; // ecx
+  TESObjectCELL *DwordAtOffset40; // eax
+  ExtraDataList *v5; // edi
+  int *v6; // ebx
+  TESObjectREFRVtbl *process; // ecx
   int *unk1F4; // edi
-  int v10; // eax
-  double v11; // st5
+  int v9; // eax
+  double v10; // st5
   int vtbl_high; // eax
-  int *v13; // ebx
-  int v14; // eax
-  Data *v15; // edi
-  int v16; // ecx
-  int v17; // eax
-  int v18; // ebx
-  TESObjectREFRVtbl *v19; // eax
-  int v20; // eax
-  NiTransform *v21; // edi
-  NiPoint3 *v22; // eax
-  float *v23; // eax
-  float v24; // ecx
-  float v25; // edx
-  float v26; // eax
-  NiPoint3 *v27; // eax
-  float *v28; // eax
-  TESObjectCELL *(__thiscall *v29)(TESChildCELL *); // ecx
-  TESForm *v30; // edx
-  float v31; // eax
-  TESObjectREFRVtbl *v32; // ecx
+  int *v12; // ebx
+  int v13; // eax
+  Data *v14; // edi
+  int v15; // ecx
+  int v16; // eax
+  int v17; // ebx
+  TESObjectREFRVtbl *p_super; // eax
+  int v19; // eax
+  NiTransform *v20; // edi
+  NiPoint3 *v21; // eax
+  float *v22; // eax
+  float v23; // ecx
+  float v24; // edx
+  float v25; // eax
+  NiPoint3 *WeaponTipLocalPointForHit; // eax
+  float *v27; // eax
+  TESObjectCELL *(__thiscall *v28)(TESChildCELL *); // ecx
+  TESForm *v29; // edx
+  float v30; // eax
+  TESObjectREFRVtbl *v31; // ecx
+  int v32; // eax
   int v33; // eax
-  int v34; // eax
-  double v35; // st7
-  int v36; // eax
-  int v37; // edi
-  int v38; // eax
-  int *v39; // eax
-  int v40; // eax
+  double v34; // st7
+  int v35; // eax
+  int v36; // edi
+  int v37; // eax
+  int *v38; // eax
+  int v39; // eax
   int *SafeFloatPointer; // eax
-  float *v42; // ecx
-  double v43; // st7
-  double v44; // st6
+  float *v41; // ecx
+  double v42; // st7
+  double v43; // st6
+  int *v44; // eax
   int *v45; // eax
-  int *v46; // eax
-  int v47; // edi
-  double v48; // st7
-  float *v49; // eax
-  Data *data; // edi
-  TESForm::FormFlags v51; // eax
-  TESObjectCELL *v52; // eax
-  int v53; // ebx
-  TESObjectREFRVtbl *v54; // edi
-  float *v55; // eax
-  TESObjectCELL *v56; // eax
-  int v57; // eax
-  _DWORD *v58; // ebx
-  TESObjectREFRVtbl *v59; // ecx
-  int v60; // eax
-  int v61; // edx
-  int v62; // ebx
-  int v63; // eax
-  int **v64; // eax
-  unsigned int *v65; // edi
-  unsigned __int8 v66; // al
-  int v67; // edx
-  TESObjectCELL *v68; // eax
-  int v69; // eax
-  _DWORD *v70; // esi
-  float v72; // [esp+Ch] [ebp-F0h]
+  int v46; // edi
+  double v47; // st7
+  float *v48; // eax
+  Actor *data; // edi
+  const char *BloodParticlePath; // eax
+  TESObjectCELL *v51; // eax
+  int v52; // ebx
+  TESObjectREFRVtbl *v53; // edi
+  float *v54; // eax
+  UInt32 v55; // eax
+  int v56; // eax
+  _DWORD *v57; // ebx
+  TESObjectREFRVtbl *v58; // ecx
+  EntryData *v59; // eax
+  TESForm *type; // edx
+  int vtbl_low; // ebx
+  int v62; // eax
+  int **v63; // eax
+  unsigned int *v64; // edi
+  unsigned __int8 v65; // al
+  int v66; // edx
+  TESObjectCELL *v67; // eax
+  int v68; // eax
+  _DWORD *v69; // esi
+  float v71; // [esp+Ch] [ebp-F0h]
   const char *flags; // [esp+14h] [ebp-E8h]
   TESObjectCELL *(__thiscall *GetChildCell)(TESChildCELL *); // [esp+18h] [ebp-E4h]
   TESForm *baseForm; // [esp+1Ch] [ebp-E0h]
   int x_low; // [esp+20h] [ebp-DCh]
-  Data *v77; // [esp+20h] [ebp-DCh]
+  Actor *v76; // [esp+20h] [ebp-DCh]
   float scale; // [esp+24h] [ebp-D8h]
+  int v78; // [esp+24h] [ebp-D8h]
   int v79; // [esp+24h] [ebp-D8h]
-  int v80; // [esp+24h] [ebp-D8h]
   void *niNode; // [esp+28h] [ebp-D4h]
-  TESObjectCELL *v82; // [esp+2Ch] [ebp-D0h]
-  char v83; // [esp+2Ch] [ebp-D0h]
-  float v84; // [esp+30h] [ebp-CCh]
-  signed int v85; // [esp+30h] [ebp-CCh]
-  char v86; // [esp+30h] [ebp-CCh]
-  float FatigueFraction; // [esp+34h] [ebp-C8h]
-  float v88; // [esp+38h] [ebp-C4h]
-  double v89; // [esp+3Ch] [ebp-C0h]
-  int v90; // [esp+44h] [ebp-B8h]
-  float v91; // [esp+48h] [ebp-B4h]
-  int v92; // [esp+4Ch] [ebp-B0h]
-  float v93; // [esp+50h] [ebp-ACh]
-  char v94; // [esp+53h] [ebp-A9h]
-  float v95; // [esp+54h] [ebp-A8h] BYREF
-  TESObjectREFR v96; // [esp+58h] [ebp-A4h] BYREF
-  float v97[3]; // [esp+B4h] [ebp-48h] BYREF
+  TESObjectCELL *parentCell; // [esp+2Ch] [ebp-D0h]
+  char v82; // [esp+2Ch] [ebp-D0h]
+  float aa; // [esp+30h] [ebp-CCh]
+  signed int ab; // [esp+30h] [ebp-CCh]
+  char a; // [esp+30h] [ebp-CCh]
+  float damageOffset; // [esp+34h] [ebp-C8h]
+  char v87; // [esp+53h] [ebp-A9h]
+  char v88; // [esp+53h] [ebp-A9h]
+  float Damage; // [esp+54h] [ebp-A8h] BYREF
+  TESObjectREFR v90; // [esp+58h] [ebp-A4h] BYREF
+  float v91[3]; // [esp+B4h] [ebp-48h] BYREF
   float a2[3]; // [esp+C0h] [ebp-3Ch] BYREF
-  float v99[7]; // [esp+CCh] [ebp-30h] BYREF
-  unsigned int v100; // [esp+F8h] [ebp-4h]
-  int savedregs; // [esp+FCh] [ebp+0h] BYREF
+  float v93[7]; // [esp+CCh] [ebp-30h] BYREF
+  unsigned int v94; // [esp+F8h] [ebp-4h]
 
-  HIBYTE(v93) = 0;
-  ParentCell = TESObjectREFR_GetParentCell(a1);
-  v6 = (ExtraDataList *)ParentCell;
-  if ( !ParentCell )
+  v87 = 0; /*0x5f9662*/
+  DwordAtOffset40 = (TESObjectCELL *)Shared_GetDwordAtOffset40(a1); /*0x5f9667*/
+  v5 = (ExtraDataList *)DwordAtOffset40; /*0x5f966c*/
+  if ( !DwordAtOffset40 ) /*0x5f9670*/
   {
-    v7 = 0;
-    goto LABEL_6;
+    v6 = 0; /*0x5f9695*/
+    goto LABEL_6; /*0x5f9695*/
   }
-  if ( !TESObjectCELL_IsInterior(ParentCell) )
+  if ( !TESObjectCELL_IsInterior(DwordAtOffset40) ) /*0x5f967b*/
   {
-    v7 = (int *)bhkWorldM;
+    v6 = (int *)MEMORY[0xB35C24]; /*0x5f968d*/
 LABEL_6:
-    v96.member.super.flags = (TESForm::FormFlags)v7;
-    goto LABEL_7;
+    v90.member.super.flags = (TESForm::FormFlags)v6; /*0x5f9697*/
+    goto LABEL_7; /*0x5f9697*/
   }
-  v7 = (int *)sub_424180(v6 + 2);
-  v96.member.super.flags = (TESForm::FormFlags)v7;
+  v6 = (int *)sub_424180(v5 + 2); /*0x5f9685*/
+  v90.member.super.flags = (TESForm::FormFlags)v6; /*0x5f9687*/
 LABEL_7:
-  vtbl = a1[1].vtbl;
-  unk1F4 = (int *)TESDataHandler_g_PlayerRef->unk1F4;
-  LODWORD(v96.member.rot.y) = unk1F4;
-  if ( vtbl
-    && (v10 = (*((int (__thiscall **)(TESObjectREFRVtbl *, int))vtbl->super.super.InitializeComponent + 0x3B))(vtbl, 1)) != 0
-    && *(_DWORD *)(v10 + 8) )
+  process = (TESObjectREFRVtbl *)a1->members.super.process; /*0x5f969b*/
+  unk1F4 = (int *)reference->unk1F4; /*0x5f96a5*/
+  LODWORD(v90.member.rot.y) = unk1F4; /*0x5f96ab*/
+  if ( process /*0x5f96c1*/
+    && (v9 = (*((int (__thiscall **)(TESObjectREFRVtbl *, int))process->super.super.InitializeComponent + 0x3B))(
+               process,
+               1)) != 0
+    && *(_DWORD *)(v9 + 8) )
   {
-    v11 = flt_B37D38;
+    v10 = unk_B37D38; /*0x5f96c7*/
   }
   else
   {
-    v11 = (double)dword_B37D30;
+    v10 = (double)unk_B37D30; /*0x5f96cf*/
   }
-  *(float *)&v96.member.super.refID = v11;
-  if ( v7 && unk1F4 && !sub_535510(unk1F4) )
+  *(float *)&v90.member.super.refID = v10; /*0x5f96d7*/
+  if ( v6 && unk1F4 && !bhkSphereShapeProbeCollector_GetWorldFromPhantom(unk1F4) ) /*0x5f96eb*/
   {
-    sub_5F11F0(
-      (Actor *)a1,
+    sub_5F11F0( /*0x5f9704*/
+      a1,
       a3,
-      (float *)&v96.member.baseExtraList.members.m_presenceBitfield[4],
-      (float *)&v96.member.baseExtraList);
-    sub_5354C0(unk1F4, v7);
-    vtbl_high = HIWORD(sub_65ABE0(a1, &v96)->vtbl);
-    if ( unk1F4[0x6A] != vtbl_high )
-      sub_535460(unk1F4, vtbl_high);
-    if ( !sub_535540(
+      (float *)&v90.member.baseExtraList.members.m_presenceBitfield[4],
+      (float *)&v90.member.baseExtraList);
+    bhkSphereShapeProbeCollector_GetPhantomTransform(unk1F4, v6); /*0x5f970c*/
+    vtbl_high = HIWORD(MobileObject_GetCollisionFilterInfo((MobileObject *)a1, &v90)->vtbl); /*0x5f971d*/
+    if ( unk1F4[0x6A] != vtbl_high ) /*0x5f9727*/
+      bhkSphereShapeProbeCollector_SetCollisionIdentityHigh16(unk1F4, vtbl_high); /*0x5f972c*/
+    if ( !bhkSphereShapeProbeCollector_CastAlongVector( /*0x5f974c*/
             (float *)unk1F4,
-            (float *)&v96.member.baseExtraList.members.m_presenceBitfield[4],
-            (float *)&v96.member.baseExtraList,
-            *(float *)&v96.member.super.refID) )
-      goto LABEL_97;
-    v13 = unk1F4;
-    sub_4806E0(*(_DWORD *)(unk1F4[4] + 0x28));
-    if ( v14 )
+            (float *)&v90.member.baseExtraList.members.m_presenceBitfield[4],
+            (float *)&v90.member.baseExtraList,
+            *(float *)&v90.member.super.refID) )
+      goto LABEL_97; /*0x5f974c*/
+    v12 = unk1F4; /*0x5f9752*/
+    sub_4806E0(*(_DWORD *)(unk1F4[4] + 0x28)); /*0x5f975b*/
+    if ( v13 ) /*0x5f9765*/
     {
-      v15 = (Data *)sub_4DC270(v14);
-      v96.member.super.modlist.data = v15;
+      v14 = (Data *)sub_4DC270(v13); /*0x5f9770*/
+      v90.member.super.modlist.data = v14; /*0x5f9772*/
     }
     else
     {
-      v15 = 0;
-      v96.member.super.modlist.data = 0;
+      v14 = 0; /*0x5f9778*/
+      v90.member.super.modlist.data = 0; /*0x5f977a*/
     }
-    v16 = v13[4];
-    v17 = *(_DWORD *)(v16 + 0x28);
-    if ( *(_BYTE *)(v17 + 0x18) == 1 )
+    v15 = v12[4]; /*0x5f977e*/
+    v16 = *(_DWORD *)(v15 + 0x28); /*0x5f9781*/
+    if ( *(_BYTE *)(v16 + 0x18) == 1 ) /*0x5f9788*/
     {
-      v18 = v17 + *(_DWORD *)(v17 + 0x10);
-      if ( v18 )
+      v17 = v16 + *(_DWORD *)(v16 + 0x10); /*0x5f9791*/
+      if ( v17 ) /*0x5f9793*/
       {
-        v19 = a1->vtbl;
-        v96.member.super.refID = *(_DWORD *)(v18 + 0xC);
-        v94 = 1;
-        v20 = (int)v19->GetNiNode(a1);
-        if ( v20 )
+        p_super = &a1->vtbl->super.super; /*0x5f979c*/
+        v90.member.super.refID = *(_DWORD *)(v17 + 0xC); /*0x5f979e*/
+        v88 = 1; /*0x5f97aa*/
+        v19 = (int)p_super->GetNiNode((TESObjectREFR *)a1); /*0x5f97af*/
+        if ( v19 ) /*0x5f97b3*/
         {
-          v21 = (NiTransform *)(v20 + 0x64);
-          v22 = (NiPoint3 *)(*((int (__thiscall **)(TESObjectREFRVtbl *))a1[1].vtbl->super.super.InitializeComponent
-                             + 0xC4))(a1[1].vtbl);
-          v23 = sub_53D4B0(v21, (float *)&v96.member.childCell, v22);
-          v24 = *v23;
-          v25 = v23[1];
-          v26 = v23[2];
-          v96.member.rot.z = v24;
-          v96.member.pos[0] = v25;
-          v96.member.pos[1] = v26;
-          v27 = (NiPoint3 *)sub_5E6A40((Actor *)a1, a2);
-          v28 = sub_53D4B0(v21, v97, v27);
-          v29 = *(TESObjectCELL *(__thiscall **)(TESChildCELL *))v28;
-          v30 = *((TESForm **)v28 + 1);
-          v31 = v28[2];
-          v96.member.childCell.GetChildCell = v29;
-          v96.member.baseForm = v30;
-          v96.member.rot.x = v31;
+          v20 = (NiTransform *)(v19 + 0x64); /*0x5f97b8*/
+          v21 = (NiPoint3 *)a1->members.super.process->GetUnk20C(a1->members.super.process); /*0x5f97c3*/
+          v22 = NiTransform_TransformPoint(v20, (float *)&v90.member.childCell, v21); /*0x5f97cd*/
+          v23 = *v22; /*0x5f97d2*/
+          v24 = v22[1]; /*0x5f97d4*/
+          v25 = v22[2]; /*0x5f97d7*/
+          v90.member.rot.z = v23; /*0x5f97da*/
+          v90.member.pos[0] = v24; /*0x5f97e8*/
+          v90.member.pos[1] = v25; /*0x5f97ec*/
+          WeaponTipLocalPointForHit = (NiPoint3 *)Actor_GetWeaponTipLocalPointForHit(a1, a2); /*0x5f97f0*/
+          v27 = NiTransform_TransformPoint(v20, v91, WeaponTipLocalPointForHit); /*0x5f9800*/
+          v28 = *(TESObjectCELL *(__thiscall **)(TESChildCELL *))v27; /*0x5f9805*/
+          v29 = *((TESForm **)v27 + 1); /*0x5f9807*/
+          v30 = v27[2]; /*0x5f980a*/
+          v90.member.childCell.GetChildCell = v28; /*0x5f980d*/
+          v90.member.baseForm = v29; /*0x5f9811*/
+          v90.member.rot.x = v30; /*0x5f9815*/
         }
-        v95 = *(float *)&v96.member.childCell.GetChildCell - v96.member.rot.z;
-        *(float *)&v96.member.super.type = *(float *)&v96.member.baseForm - v96.member.pos[0];
-        *(float *)&v96.member.super.modlist.next = v96.member.rot.x - v96.member.pos[1];
-        v96.member.rot.z = v95;
-        v96.member.pos[0] = *(float *)&v96.member.super.type;
-        v96.member.pos[1] = *(float *)&v96.member.super.modlist.next;
-        sub_43F350(&v96.member.rot.z);
-        sub_43F3E0(&v96.member.scale, *(__m128 **)(LODWORD(v96.member.rot.y) + 0x10));
-        v32 = a1[1].vtbl;
-        if ( v32
-          && (v33 = (*((int (__thiscall **)(TESObjectREFRVtbl *, int))v32->super.super.InitializeComponent + 0x3B))(
-                      v32,
+        Damage = *(float *)&v90.member.childCell.GetChildCell - v90.member.rot.z; /*0x5f9825*/
+        *(float *)&v90.member.super.type = *(float *)&v90.member.baseForm - v90.member.pos[0]; /*0x5f9831*/
+        *(float *)&v90.member.super.modlist.next = v90.member.rot.x - v90.member.pos[1]; /*0x5f983d*/
+        v90.member.rot.z = Damage; /*0x5f9845*/
+        v90.member.pos[0] = *(float *)&v90.member.super.type; /*0x5f984d*/
+        v90.member.pos[1] = *(float *)&v90.member.super.modlist.next; /*0x5f9855*/
+        Vector3_NormalizeInPlace(&v90.member.rot.z); /*0x5f9859*/
+        HavokVector_ToWorldVector(&v90.member.scale, *(__m128 **)(LODWORD(v90.member.rot.y) + 0x10)); /*0x5f986d*/
+        v31 = (TESObjectREFRVtbl *)a1->members.super.process; /*0x5f9872*/
+        if ( v31 /*0x5f988a*/
+          && (v32 = (*((int (__thiscall **)(TESObjectREFRVtbl *, int))v31->super.super.InitializeComponent + 0x3B))(
+                      v31,
                       1)) != 0 )
         {
-          v34 = *(_DWORD *)(v33 + 8);
+          v33 = *(_DWORD *)(v32 + 8); /*0x5f988c*/
         }
         else
         {
-          v34 = 0;
+          v33 = 0; /*0x5f9891*/
         }
-        if ( v34 )
+        if ( v33 ) /*0x5f9895*/
         {
-          v35 = *(float *)(v34 + 0x7C);
+          v34 = *(float *)(v33 + 0x7C); /*0x5f9897*/
         }
         else
         {
-          sub_5E4330(a1, 4);
-          if ( v36 )
+          sub_5E4330(a1, 4); /*0x5f98a0*/
+          if ( v35 ) /*0x5f98a7*/
           {
-            v35 = *(float *)(*(_DWORD *)(v36 + 8) + 0x58);
+            v34 = *(float *)(*(_DWORD *)(v35 + 8) + 0x58); /*0x5f98ac*/
           }
           else
           {
-            v35 = 0.0;
-            v94 = 0;
+            v34 = 0.0; /*0x5f98b1*/
+            v88 = 0; /*0x5f98b3*/
           }
         }
-        *(float *)&v96.member.super.type = v35;
-        v37 = *(_DWORD *)(*(_DWORD *)(LODWORD(v96.member.rot.y) + 0x10) + 0x2C);
-        *(float *)&v96.member.super.type = *(float *)&v96.member.super.type + dbl_A30E48;
-        v95 = 0.0;
-        if ( (*(_BYTE *)sub_497340((_DWORD *)v96.member.super.refID, &v96) & 0x3F) == 0x11 )
+        *(float *)&v90.member.super.type = v34; /*0x5f98bc*/
+        v36 = *(_DWORD *)(*(_DWORD *)(LODWORD(v90.member.rot.y) + 0x10) + 0x2C); /*0x5f98d1*/
+        *(float *)&v90.member.super.type = *(float *)&v90.member.super.type + dbl_A30E48; /*0x5f98d9*/
+        Damage = 0.0; /*0x5f98dd*/
+        if ( (*(_BYTE *)sub_497340((_DWORD *)v90.member.super.refID, &v90) & 0x3F) == 0x11 ) /*0x5f98f2*/
         {
-          *(float *)&v38 = COERCE_FLOAT(sub_440AC0(TES, &v96.member.scale));
+          *(float *)&v37 = COERCE_FLOAT(sub_440AC0(MEMORY[0xB333A0], &v90.member.scale)); /*0x5f98ff*/
         }
         else
         {
-          v39 = (int *)sub_494F10((_DWORD *)v96.member.super.refID);
-          if ( !v39
-            || (v95 = *((float *)v39 + 4), v37 == 0xFFFFFFFF)
-            || (v40 = (*(int (__thiscall **)(int *))(*v39 + 0x88))(v39)) == 0 )
+          v38 = (int *)sub_494F10((_DWORD *)v90.member.super.refID); /*0x5f990a*/
+          if ( !v38 /*0x5f992d*/
+            || (Damage = *((float *)v38 + 4), v36 == 0xFFFFFFFF)
+            || (v39 = (*(int (__thiscall **)(int *))(*v38 + 0x88))(v38)) == 0 )
           {
 LABEL_41:
-            SafeFloatPointer = GameSetting_GetSafeFloatPointer((int *)&unk_B37138);
-            *(float *)&v96.member.super.type = sub_4AC760(*(float *)&v96.member.super.type, *(float *)SafeFloatPointer);
-            v96.member.super.modlist.next = *(TESForm::ModReferenceList **)GameSetting_GetSafeFloatPointer((int *)&unk_B37130);
-            v42 = *(float **)(v18 + 0x50);
-            v43 = *(float *)&v96.member.super.modlist.next;
-            *(float *)&v96.member.super.modlist.next = *(float *)&v96.member.super.modlist.next * v96.member.rot.z;
-            v96.member.pos[2] = v96.member.pos[0] * v43;
-            *(float *)&v96.vtbl = v43 * v96.member.pos[1];
-            *(float *)&v96.member.super.modlist.next = *(float *)&v96.member.super.modlist.next
-                                                     * *(float *)&v96.member.super.type;
-            v96.member.pos[2] = v96.member.pos[2] * *(float *)&v96.member.super.type;
-            *(float *)&v96.vtbl = *(float *)&v96.member.super.type * *(float *)&v96.vtbl;
-            v96.member.childCell.GetChildCell = (TESObjectCELL *(__thiscall *)(TESChildCELL *))v96.member.super.modlist.next;
-            *(float *)&v96.member.baseForm = v96.member.pos[2];
-            v96.member.rot.x = *(float *)&v96.vtbl;
-            *(float *)&v96.member.super.type = sub_89DA90(v42);
-            v44 = *(float *)GameSetting_GetSafeFloatPointer((int *)&unk_B37140);
-            if ( v44 > *(float *)&v96.member.super.type )
+            SafeFloatPointer = GameSetting_GetSafeFloatPointer((int *)&g_GameSettingStringPointers_B36CD8[0x118]); /*0x5f9940*/
+            *(float *)&v90.member.super.type = Float_Min(*(float *)&v90.member.super.type, *(float *)SafeFloatPointer); /*0x5f9962*/
+            v90.member.super.modlist.next = *(TESForm::ModReferenceList **)GameSetting_GetSafeFloatPointer((int *)&g_GameSettingStringPointers_B36CD8[0x116]); /*0x5f9972*/
+            v41 = *(float **)(v17 + 0x50); /*0x5f9976*/
+            v42 = *(float *)&v90.member.super.modlist.next; /*0x5f9979*/
+            *(float *)&v90.member.super.modlist.next = *(float *)&v90.member.super.modlist.next * v90.member.rot.z; /*0x5f9983*/
+            v90.member.pos[2] = v90.member.pos[0] * v42; /*0x5f998d*/
+            *(float *)&v90.vtbl = v42 * v90.member.pos[1]; /*0x5f9995*/
+            *(float *)&v90.member.super.modlist.next = *(float *)&v90.member.super.modlist.next /*0x5f99a7*/
+                                                     * *(float *)&v90.member.super.type;
+            v90.member.pos[2] = v90.member.pos[2] * *(float *)&v90.member.super.type; /*0x5f99b1*/
+            *(float *)&v90.vtbl = *(float *)&v90.member.super.type * *(float *)&v90.vtbl; /*0x5f99b9*/
+            v90.member.childCell.GetChildCell = (TESObjectCELL *(__thiscall *)(TESChildCELL *))v90.member.super.modlist.next; /*0x5f99c1*/
+            *(float *)&v90.member.baseForm = v90.member.pos[2]; /*0x5f99c9*/
+            v90.member.rot.x = *(float *)&v90.vtbl; /*0x5f99d1*/
+            *(float *)&v90.member.super.type = sub_89DA90(v41); /*0x5f99df*/
+            v43 = *(float *)GameSetting_GetSafeFloatPointer((int *)&g_GameSettingStringPointers_B36CD8[0x11A]); /*0x5f99ec*/
+            if ( v43 > *(float *)&v90.member.super.type ) /*0x5f99f5*/
             {
-              v45 = GameSetting_GetSafeFloatPointer((int *)&unk_B37140);
-              *(float *)&v96.vtbl = *(float *)&v96.member.super.type / *(float *)v45;
-              NiPoint3::MutliplyByValue((NiPoint3 *)&v96.member.childCell, *(float *)&v96.vtbl);
+              v44 = GameSetting_GetSafeFloatPointer((int *)&g_GameSettingStringPointers_B36CD8[0x11A]); /*0x5f99fc*/
+              *(float *)&v90.vtbl = *(float *)&v90.member.super.type / *(float *)v44; /*0x5f9a0c*/
+              NiPoint3::MutliplyByValue((NiPoint3 *)&v90.member.childCell, *(float *)&v90.vtbl); /*0x5f9a17*/
             }
-            if ( (*sub_497340((_DWORD *)v96.member.super.refID, &v96) & 0x3F) == 8 )
+            if ( (*sub_497340((_DWORD *)v90.member.super.refID, &v90) & 0x3F) == 8 ) /*0x5f9a32*/
             {
-              v46 = GameSetting_GetSafeFloatPointer((int *)&unk_B37148);
-              NiPoint3::MutliplyByValue((NiPoint3 *)&v96.member.childCell, *(float *)v46);
+              v45 = GameSetting_GetSafeFloatPointer((int *)&g_GameSettingStringPointers_B36CD8[0x11C]); /*0x5f9a39*/
+              NiPoint3::MutliplyByValue((NiPoint3 *)&v90.member.childCell, *(float *)v45); /*0x5f9a48*/
             }
-            sub_4529E0(v99, (float *)&v96.member.childCell);
-            (*(void (__thiscall **)(TESForm::FormFlags))(*(_DWORD *)v96.member.super.flags + 0x58))(v96.member.super.flags);
-            v47 = *(_DWORD *)(LODWORD(v96.member.rot.y) + 0x10);
-            sub_8A6410(v18);
-            (*(void (__thiscall **)(_DWORD, float *, int))(**(_DWORD **)(v18 + 0x50) + 0x60))(
-              *(_DWORD *)(v18 + 0x50),
-              v99,
-              v47);
-            v48 = ((double (__thiscall *)(TESForm::FormFlags))*(_DWORD *)(*(_DWORD *)v96.member.super.flags + 0x58))(v96.member.super.flags);
-            sub_5F05F0(
+            sub_4529E0(v93, (float *)&v90.member.childCell); /*0x5f9a5a*/
+            (*(void (__thiscall **)(TESForm::FormFlags))(*(_DWORD *)v90.member.super.flags + 0x58))(v90.member.super.flags); /*0x5f9a6b*/
+            v46 = *(_DWORD *)(LODWORD(v90.member.rot.y) + 0x10); /*0x5f9a71*/
+            sub_8A6410(v17); /*0x5f9a76*/
+            (*(void (__thiscall **)(_DWORD, float *, int))(**(_DWORD **)(v17 + 0x50) + 0x60))( /*0x5f9a8c*/
+              *(_DWORD *)(v17 + 0x50),
+              v93,
+              v46);
+            v47 = ((double (__thiscall *)(TESForm::FormFlags))*(_DWORD *)(*(_DWORD *)v90.member.super.flags + 0x58))(v90.member.super.flags); /*0x5f9a97*/
+            sub_5F05F0( /*0x5f9ac3*/
               (int)a1,
-              v44,
-              v48,
-              SLODWORD(v96.member.scale),
-              (int)v96.member.niNode,
-              (int)v96.member.parentCell,
-              (int)v96.member.super.modlist.data,
-              (_DWORD *)v96.member.super.refID,
-              SLODWORD(v95));
-            if ( !v94 )
-              goto LABEL_85;
-            v96.member.childCell.GetChildCell = (TESObjectCELL *(__thiscall *)(TESChildCELL *))LODWORD(v96.member.rot.z);
-            v96.member.baseForm = (TESForm *)LODWORD(v96.member.pos[0]);
-            v96.member.rot.x = v96.member.pos[1];
-            v84 = sub_47D9E0((float *)&v96.member.childCell, (float *)&v96.member.baseExtraList);
-            v49 = sub_47DA10(v97, v84, (float *)&v96.member.baseExtraList);
-            sub_43F320((float *)&v96.member.childCell, v49);
-            sub_43F350((float *)&v96.member.childCell);
-            if ( (*sub_497340((_DWORD *)v96.member.super.refID, &v96) & 0x3F) == 8 )
+              v43,
+              v47,
+              SLODWORD(v90.member.scale),
+              (int)v90.member.niNode,
+              (int)v90.member.parentCell,
+              (int)v90.member.super.modlist.data,
+              (_DWORD *)v90.member.super.refID,
+              SLODWORD(Damage));
+            if ( !v88 ) /*0x5f9acd*/
+              goto LABEL_85; /*0x5f9acd*/
+            v90.member.childCell.GetChildCell = (TESObjectCELL *(__thiscall *)(TESChildCELL *))LODWORD(v90.member.rot.z); /*0x5f9adf*/
+            v90.member.baseForm = (TESForm *)LODWORD(v90.member.pos[0]); /*0x5f9ae7*/
+            v90.member.rot.x = v90.member.pos[1]; /*0x5f9aee*/
+            aa = sub_47D9E0((float *)&v90.member.childCell, (float *)&v90.member.baseExtraList); /*0x5f9b04*/
+            v48 = sub_47DA10(v91, aa, (float *)&v90.member.baseExtraList); /*0x5f9b08*/
+            sub_43F320((float *)&v90.member.childCell, v48); /*0x5f9b15*/
+            Vector3_NormalizeInPlace((float *)&v90.member.childCell); /*0x5f9b1e*/
+            if ( (*sub_497340((_DWORD *)v90.member.super.refID, &v90) & 0x3F) == 8 ) /*0x5f9b39*/
             {
-              data = v96.member.super.modlist.data;
-              if ( !v96.member.super.modlist.data
-                || !(*(unsigned __int8 (__thiscall **)(Data *))(v96.member.super.modlist.data->errorState + 0x190))(v96.member.super.modlist.data) )
+              data = (Actor *)v90.member.super.modlist.data; /*0x5f9b3b*/
+              if ( !v90.member.super.modlist.data /*0x5f9b4d*/
+                || !(*(unsigned __int8 (__thiscall **)(Data *))(v90.member.super.modlist.data->errorState + 0x190))(v90.member.super.modlist.data) )
               {
-                v96.member.super.flags = sBloodParticleDefault;
-                goto LABEL_53;
+                *(float *)&v90.member.super.flags = g_GameSettingStringPointers_B36CD8[0x136]; /*0x5f9b62*/
+                goto LABEL_53; /*0x5f9b66*/
               }
-              v51 = sub_5E1BF0(data);
+              BloodParticlePath = Actor_GetBloodParticlePath(data);// Verified: actor/creature hit-target branch obtains the target actor's blood-particle path after target validity/health checks; the other branch selects a static impact-material particle. /*0x5f9b55*/
             }
             else
             {
-              v51 = sub_5361B0(SLODWORD(v95));
+              BloodParticlePath = (const char *)ImpactMaterial_GetHitParticlePath(SLODWORD(Damage));// Verified: non-actor static impact branch obtains its particle path from ImpactMaterial_GetHitParticlePath(material ID), then shares particle construction/registration with actor hits. /*0x5f9b6d*/
             }
-            v96.member.super.flags = v51;
+            v90.member.super.flags = (TESForm::FormFlags)BloodParticlePath; /*0x5f9b75*/
 LABEL_53:
-            if ( v96.member.super.flags )
+            if ( v90.member.super.flags ) /*0x5f9b7e*/
             {
-              TESObjectREFR_GetParentCell(a1);
-              v85 = sub_4C9BE0(a1);
-              v52 = TESObjectREFR_GetParentCell(a1);
-              v53 = sub_441800(v52, v85, 3u);
-              v54 = (TESObjectREFRVtbl *)FormHeapAlloc(0x20u);
-              v96.vtbl = v54;
-              v55 = 0;
-              v100 = 0;
-              if ( v54 )
+              Shared_GetDwordAtOffset40(a1); /*0x5f9b86*/
+              ab = sub_4C9BE0((TESObjectREFR *)a1); /*0x5f9b96*/
+              v51 = (TESObjectCELL *)Shared_GetDwordAtOffset40(a1); /*0x5f9b99*/
+              v52 = sub_441800(v51, ab, 3u); /*0x5f9ba7*/
+              v53 = (TESObjectREFRVtbl *)FormHeapAlloc(0x20u); /*0x5f9bae*/
+              v90.vtbl = v53; /*0x5f9bb3*/
+              v54 = 0; /*0x5f9bb7*/
+              v94 = 0; /*0x5f9bbb*/
+              if ( v53 ) /*0x5f9bc2*/
               {
-                scale = v96.member.scale;
-                niNode = v96.member.niNode;
-                v82 = v96.member.parentCell;
-                GetChildCell = v96.member.childCell.GetChildCell;
-                baseForm = v96.member.baseForm;
-                x_low = LODWORD(v96.member.rot.x);
-                flags = (const char *)v96.member.super.flags;
-                v72 = flt_A31E2C;
-                v56 = TESObjectREFR_GetParentCell(a1);
-                v55 = sub_5713F0(
-                        v54,
-                        (int)v56,
-                        v72,
+                scale = v90.member.scale; /*0x5f9bdf*/
+                niNode = v90.member.niNode; /*0x5f9be5*/
+                parentCell = v90.member.parentCell; /*0x5f9bec*/
+                GetChildCell = v90.member.childCell.GetChildCell; /*0x5f9bf8*/
+                baseForm = v90.member.baseForm; /*0x5f9bfe*/
+                x_low = LODWORD(v90.member.rot.x); /*0x5f9c01*/
+                flags = (const char *)v90.member.super.flags; /*0x5f9c08*/
+                v71 = flt_A31E2C; /*0x5f9c0d*/
+                v55 = Shared_GetDwordAtOffset40(a1); /*0x5f9c10*/
+                v54 = BSTempEffectParticle_Constructor( /*0x5f9c18*/
                         v53,
+                        v55,
+                        v71,
+                        v52,
                         flags,
                         *(float *)&GetChildCell,
                         *(float *)&baseForm,
                         x_low,
                         scale,
                         (UInt32)niNode,
-                        (const char *)v82,
+                        (const char *)parentCell,
                         1.0,
-                        1);
+                        1);                     // Verified: Actor_ProcessAttackReachProbe passes normalized hit direction, the computed three-component particle local position, scale 1.0 and cached-clone true to BSTempEffectParticle_Constructor. Local-position components share the same constructor ABI as body-hit particles.
               }
-              v100 = 0xFFFFFFFF;
-              sub_678D30((int *)&ActorProcessManager_ptr, (volatile LONG *)v55);
+              v94 = 0xFFFFFFFF; /*0x5f9c23*/
+              ActorProcessManager_RegisterTempEffect((int *)&qword_B3BB2C[0x75], (volatile LONG *)v54); /*0x5f9c2e*/
             }
-            goto LABEL_85;
+            goto LABEL_85; /*0x5f9c33*/
           }
-          *(float *)&v38 = COERCE_FLOAT((*(int (__thiscall **)(int, int))(*(_DWORD *)v40 + 0x9C))(v40, v37));
+          *(float *)&v37 = COERCE_FLOAT((*(int (__thiscall **)(int, int))(*(_DWORD *)v39 + 0x9C))(v39, v36)); /*0x5f993a*/
         }
-        v95 = *(float *)&v38;
-        goto LABEL_41;
+        Damage = *(float *)&v37; /*0x5f993c*/
+        goto LABEL_41; /*0x5f993c*/
       }
     }
-    if ( a1 == (TESObjectREFR *)TESDataHandler_g_PlayerRef )
-      goto LABEL_87;
-    v57 = sub_47DDE0(*(_DWORD *)(v16 + 0x28));
-    if ( v57 )
-      v58 = *(_DWORD **)(v57 + 0xC);
+    if ( a1 == (Actor *)reference ) /*0x5f9c3e*/
+      goto LABEL_87; /*0x5f9c3e*/
+    v56 = sub_47DDE0(*(_DWORD *)(v15 + 0x28)); /*0x5f9c45*/
+    if ( v56 ) /*0x5f9c4f*/
+      v57 = *(_DWORD **)(v56 + 0xC); /*0x5f9c51*/
     else
-      v58 = 0;
-    if ( !v15
-      || !(*(unsigned __int8 (__thiscall **)(Data *))(v15->errorState + 0x190))(v15)
-      || (*(unsigned __int8 (__thiscall **)(Data *, _DWORD))(v15->errorState + 0x198))(v15, 0)
-      || !v58
-      || (*(_BYTE *)sub_497340(v58, &v96) & 0x3F) != 0x14 )
+      v57 = 0; /*0x5f9c56*/
+    if ( !v14 /*0x5f9ca6*/
+      || !(*(unsigned __int8 (__thiscall **)(Data *))(v14->errorState + 0x190))(v14)
+      || (*(unsigned __int8 (__thiscall **)(Data *, _DWORD))(v14->errorState + 0x198))(v14, 0)
+      || !v57
+      || (*(_BYTE *)sub_497340(v57, &v90) & 0x3F) != 0x14 )
     {
 LABEL_86:
-      if ( a1 != (TESObjectREFR *)TESDataHandler_g_PlayerRef )
+      if ( a1 != (Actor *)reference ) /*0x5f9e0d*/
       {
 LABEL_97:
-        sub_5354C0((int *)LODWORD(v96.member.rot.y), 0);
-        return HIBYTE(v93);
+        bhkSphereShapeProbeCollector_GetPhantomTransform((int *)LODWORD(v90.member.rot.y), 0); /*0x5f9e6f*/
+        return v87; /*0x5f9e75*/
       }
 LABEL_87:
-      if ( v15 && (v68 = TESObjectREFR_GetParentCell((TESObjectREFR *)v15)) != 0 && (sub_4440C0(v68), v69) )
-        v70 = *(_DWORD **)(v69 + 0x24);
+      if ( v14 && (v67 = (TESObjectCELL *)Shared_GetDwordAtOffset40(v14)) != 0 && (sub_4440C0(v67), v68) ) /*0x5f9e27*/
+        v69 = *(_DWORD **)(v68 + 0x24); /*0x5f9e29*/
       else
-        v70 = 0;
-      if ( v70 )
+        v69 = 0; /*0x5f9e2e*/
+      if ( v69 ) /*0x5f9e32*/
       {
-        if ( v15 == (Data *)InterfaceManager_GetSingleton(0, 1)->unk0C0[2] )
+        if ( v14 == (Data *)InterfaceManager_GetSingleton(0, 1)->unk0C0[2] ) /*0x5f9e46*/
         {
-          if ( sub_536AE0(v70, (int)v15) )
+          if ( sub_536AE0(v69, (int)v14) ) /*0x5f9e4b*/
           {
-            if ( v15 != (Data *)0xFFFFFFBC )
+            if ( v14 != (Data *)0xFFFFFFBC ) /*0x5f9e59*/
             {
-              Script_AddEventToExtraScript(v15, &v15->name[0x28], 0x10000000);
-              HIBYTE(v93) = 1;
+              Script_AddEventToExtraScript(v14, &v14->name[0x28], 0x10000000);// RealArenaTraining: player static reach probe event. Args: source/ref=EDI, targetExtra=EDI+0x44, mask=0x10000000. Used for arena bag/doll melee props after player and crosshair/ref checks. /*0x5f9e62*/
+              v87 = 1; /*0x5f9e6a*/
             }
           }
         }
       }
-      goto LABEL_97;
+      goto LABEL_97; /*0x5f9e6a*/
     }
-    v59 = a1[1].vtbl;
-    if ( v59 )
+    v58 = (TESObjectREFRVtbl *)a1->members.super.process; /*0x5f9cac*/
+    if ( v58 ) /*0x5f9cb1*/
     {
-      v60 = (*((int (__thiscall **)(TESObjectREFRVtbl *, int))v59->super.super.InitializeComponent + 0x3B))(v59, 1);
-      if ( v60 )
+      v59 = (EntryData *)(*((int (__thiscall **)(TESObjectREFRVtbl *, int))v58->super.super.InitializeComponent + 0x3B))( /*0x5f9cbd*/
+                           v58,
+                           1);
+      if ( v59 ) /*0x5f9cc1*/
       {
-        v61 = *(_DWORD *)(v60 + 8);
-        goto LABEL_71;
+        type = v59->type; /*0x5f9cc3*/
+        goto LABEL_71; /*0x5f9cc6*/
       }
     }
     else
     {
-      v60 = 0;
+      v59 = 0; /*0x5f9cc8*/
     }
-    v61 = 0;
+    type = 0; /*0x5f9cca*/
 LABEL_71:
-    if ( v61 )
-      v62 = *(char *)(v61 + 0x90);
+    if ( type ) /*0x5f9cce*/
+      vtbl_low = SLOBYTE(type[6].vtbl); /*0x5f9cd0*/
     else
-      v62 = 0xFFFFFFFF;
-    v95 = 0.0;
-    if ( v60 )
+      vtbl_low = 0xFFFFFFFF; /*0x5f9cd9*/
+    Damage = 0.0; /*0x5f9ce0*/
+    if ( v59 ) /*0x5f9ce4*/
     {
-      EquippedWeaponData_GetDamage(
-        v60,
-        (int)&savedregs,
-        (int *)a1,
-        COERCE_INT(1.0),
-        v88,
-        v89,
-        v90,
-        v91,
-        v92,
-        v93,
-        v95,
-        *(float *)&v96.vtbl);
-      v95 = 1.0;
+      Damage = EquippedWeaponData_GetDamage(v59, a1, 1.0); /*0x5f9cf4*/
     }
-    else if ( Actor_IsCreature((Actor *)a1) )
+    else if ( Actor_IsCreature(a1) ) /*0x5f9cfc*/
     {
-      v96.vtbl = (TESObjectREFRVtbl *)((int (__thiscall *)(TESObjectREFR *))a1->vtbl[1].IsParalyzed)(a1);
-      v95 = (float)(int)v96.vtbl;
+      v90.vtbl = (TESObjectREFRVtbl *)((int (__thiscall *)(Actor *))a1->vtbl->Unk_D3)(a1); /*0x5f9d11*/
+      Damage = (float)(int)v90.vtbl; /*0x5f9d19*/
     }
     else
     {
-      (*(void (__thiscall **)(Data *, float *, TESForm::FormFlags *))(v15->errorState + 0x19C))(
-        v15,
-        &v95,
-        &v96.member.super.flags);
-      FatigueFraction = Actor_GetFatigueFraction((Actor *)a1, v62, (int)v15);
-      v83 = ((int (__thiscall *)(TESObjectREFR *))a1->vtbl[1].Unk_37)(a1);
-      v79 = ((int (__thiscall *)(TESObjectREFR *))a1->vtbl[1].Unk_37)(a1);
-      v63 = ((int (__thiscall *)(TESObjectREFR *))a1->vtbl[1].Unk_37)(a1);
-      Calc_HandToHandDamage(v63, 0x11, v79, COERCE_FLOAT(7), v83, 0, (float *)LODWORD(FatigueFraction));
+      (*(void (__thiscall **)(Data *, float *, TESForm::FormFlags *))(v14->errorState + 0x19C))( /*0x5f9d33*/
+        v14,
+        &Damage,
+        &v90.member.super.flags);
+      damageOffset = Actor_GetFatigueFraction(a1, vtbl_low, (int)v14); /*0x5f9d46*/
+      v82 = ((int (__thiscall *)(Actor *))a1->vtbl->GetActorValue)(a1); /*0x5f9d51*/
+      v78 = ((int (__thiscall *)(Actor *))a1->vtbl->GetActorValue)(a1); /*0x5f9d60*/
+      v62 = ((int (__thiscall *)(Actor *))a1->vtbl->GetActorValue)(a1); /*0x5f9d6b*/
+      Calc_HandToHandDamage(v62, 0x11, v78, COERCE_FLOAT(7), v82, 0, (float *)LODWORD(damageOffset)); /*0x5f9d6e*/
     }
-    if ( Actor_IsCreature((Actor *)v15) )
+    if ( Actor_IsCreature((Actor *)v14) ) /*0x5f9d78*/
     {
-      v86 = 0;
-      v80 = v62;
-      v77 = v15;
+      a = 0; /*0x5f9d83*/
+      v79 = vtbl_low; /*0x5f9d89*/
+      v76 = (Actor *)v14; /*0x5f9d8a*/
     }
     else
     {
-      v64 = sub_5E5A00(v96.member.super.modlist.data);
-      v65 = (unsigned int *)v64;
-      v86 = 1;
-      if ( v64 )
+      v63 = Actor_SelectArmorOrShieldForHitDamage(v90.member.super.modlist.data); /*0x5f9d91*/
+      v64 = (unsigned int *)v63; /*0x5f9d98*/
+      a = 1; /*0x5f9d9c*/
+      if ( v63 ) /*0x5f9da0*/
       {
-        v66 = TESObjectARMO_ISHeavyArmor(v64[2]);
-        sub_6AF880(
-          v11,
+        v65 = TESObjectARMO_ISHeavyArmor(v63[2]); /*0x5f9da5*/
+        sub_6AF880( /*0x5f9dc3*/
           st6_0,
-          (int)a1,
-          v95,
-          SLODWORD(v95),
-          (int)v96.member.super.modlist.data,
-          v62,
-          v66,
+          Damage,
+          a1,
+          Damage,
+          SLODWORD(Damage),
+          (Actor *)v90.member.super.modlist.data,
+          vtbl_low,
+          v65,
           0xFFFFFFFF,
           1,
           0);
-        ContainerEntryExtraData_DestroyDataTable(v65, v67);
-        FormHeapFree((unsigned int)v65);
+        ContainerEntryExtraData_DestroyDataTable(v64, v66); /*0x5f9dcd*/
+        FormHeapFree((unsigned int)v64); /*0x5f9dd3*/
 LABEL_85:
-        v15 = v96.member.super.modlist.data;
-        HIBYTE(v93) = 1;
-        goto LABEL_86;
+        v14 = v90.member.super.modlist.data; /*0x5f9dfe*/
+        v87 = 1; /*0x5f9e02*/
+        goto LABEL_86; /*0x5f9e02*/
       }
-      v80 = v62;
-      v77 = v96.member.super.modlist.data;
+      v79 = vtbl_low; /*0x5f9de3*/
+      v76 = (Actor *)v90.member.super.modlist.data; /*0x5f9de4*/
     }
-    sub_6AF880(v11, st6_0, (int)a1, v95, COERCE_INT(0.0), (int)v77, v80, 0xFFFFFFFF, 0xFFFFFFFF, v86, 0);
-    goto LABEL_85;
+    sub_6AF880(st6_0, Damage, a1, Damage, COERCE_INT(0.0), v76, v79, 0xFFFFFFFF, 0xFFFFFFFF, a, 0); /*0x5f9df6*/
+    goto LABEL_85; /*0x5f9df6*/
   }
-  return HIBYTE(v93);
+  return v87; /*0x5f9e7e*/
 }

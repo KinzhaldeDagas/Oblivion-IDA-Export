@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7FAAD0",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x7FAAD0",
+      "0x7FAAFD"
+    ]
+  ],
+  "chunks_sha256": "fc4e8ba3ebe55338ec3c0e4ca42762df41ba68b00c2bb6cd02c414aff4f58e24",
+  "comment_regular": "Lighting30 per-light pixel constant writer. Slot 0 maps to pixel c10 LightData. On the mode-5 point-light caster path, LightData.w is the underlying light +0xF8 range/control consumed by SM3026 as the view-space depth divisor.\n\nLighting30 LightData writer. Slot 0 maps to pixel c10; mode-5 SM3026 consumes c10.w as its view-space caster-depth divisor.",
+  "comment_repeatable": "Lighting30 per-light pixel constant writer. Slot 0 maps to pixel c10 LightData. On the mode-5 point-light caster path, LightData.w is the underlying light +0xF8 range/control consumed by SM3026 as the view-space depth divisor.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "Lighting30Shader_WriteLightDataConstant",
   "end_ea": "0x7FAAFD",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7FAAD0",
+  "name": "Lighting30Shader_WriteLightDataConstant",
   "segment": ".text",
   "sha256": "fc4e8ba3ebe55338ec3c0e4ca42762df41ba68b00c2bb6cd02c414aff4f58e24",
   "size": 45,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7FAAD0",
-  "type": "_DWORD *__cdecl(unsigned int, int, int, int, int)",
+  "total_chunk_size": 45,
+  "type": "float *__cdecl(unsigned int lightSlot, float x, float y, float z, float w)",
   "xrefs_from_count": 15,
   "xrefs_to_count": 2
 }

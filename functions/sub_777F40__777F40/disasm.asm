@@ -1,4 +1,4 @@
-0x777F40: push    esi
+0x777F40: push    esi; MoonSugarEffect decode: release BuffData index buffer and reset IBSize/IB.
 0x777F41: mov     esi, ecx
 0x777F43: mov     eax, [esi+30h]
 0x777F46: test    eax, eax

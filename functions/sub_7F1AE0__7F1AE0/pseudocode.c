@@ -1,17 +1,20 @@
-void __thiscall sub_7F1AE0(_DWORD *this, int a2)
+// Lighting/leaf property virtual +0x7C. Ref-counts and stores texture/ref pointer at property +0x9C.
+void __thiscall OB_SpeedTreeShaderLightingProperty_SetTextureRef_010201A0(
+        OB_SpeedTreeShaderLightingProperty_010201A0 *this,
+        int textureRef)
 {
   int v3; // esi
 
-  v3 = *(this + 0x27);
-  if ( v3 != a2 )
+  v3 = this->textureRef; /*0x7f1ae4*/
+  if ( v3 != textureRef ) /*0x7f1af1*/
   {
-    if ( v3 )
+    if ( v3 ) /*0x7f1af5*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)(v3 + 4)) )
-        (**(void (__thiscall ***)(int, int))v3)(v3, 1);
+      if ( !InterlockedDecrement((volatile LONG *)(v3 + 4)) ) /*0x7f1afb*/
+        (**(void (__thiscall ***)(int, int))v3)(v3, 1); /*0x7f1b11*/
     }
-    *(this + 0x27) = a2;
-    if ( a2 )
-      InterlockedIncrement((volatile LONG *)(a2 + 4));
+    this->textureRef = textureRef; /*0x7f1b15*/
+    if ( textureRef ) /*0x7f1b1b*/
+      InterlockedIncrement((volatile LONG *)(textureRef + 4)); /*0x7f1b21*/
   }
 }

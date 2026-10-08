@@ -1,1 +1,4 @@
-HACMDRIVER__
+struct HACMDRIVER__
+{
+int unused;
+};

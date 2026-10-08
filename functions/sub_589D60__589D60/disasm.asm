@@ -19,12 +19,12 @@
 0x589D91: jz      short loc_589DAD
 0x589D93: push    6
 0x589D95: mov     ecx, edi
-0x589D97: call    NiNode_GetNiPropertyByID
+0x589D97: call    NiNode_GetNiPropertyByID;
 0x589D9C: test    eax, eax
 0x589D9E: jz      short loc_589DAD
-0x589DA0: push    0
-0x589DA2: mov     ecx, eax
-0x589DA4: call    NiTexturingProperty__SetUnk08
+0x589DA0: push    0; texture
+0x589DA2: mov     ecx, eax; this
+0x589DA4: call    OB_NiTexturingProperty_SetBaseTexture_010201A0
 0x589DA9: or      dword ptr [esi+2Ch], 20h
 0x589DAD: mov     esi, [esi+34h]
 0x589DB0: test    esi, esi

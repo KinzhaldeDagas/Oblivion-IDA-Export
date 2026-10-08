@@ -1,1 +1,3 @@
-CellFlags
+enum CellFlags
+{
+};

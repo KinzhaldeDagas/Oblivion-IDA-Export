@@ -1,15 +1,16 @@
-void __thiscall sub_7D6A40(int **this)
+// Walk the stale reconciliation cursor tail via ShadowSceneLight_RemoveReceiverGeometry, then clear +0x144.
+void __thiscall ShadowSceneLight_RemoveStaleReceivers(ShadowSceneLight_DecodedLayout *self)
 {
-  _DWORD *v2; // esi
-  NiNode *v3; // eax
+  MEF_RefListNode32 *receiverCursor_144; // esi
+  NiNode *payload; // eax
 
-  v2 = *(this + 0x51);
-  while ( v2 )
+  receiverCursor_144 = self->receiverCursor_144; /*0x7d6a44*/
+  while ( receiverCursor_144 ) /*0x7d6a4c*/
   {
-    v3 = (NiNode *)v2[2];
-    v2 = (_DWORD *)*v2;
-    if ( v3 )
-      sub_7D6940(this, v3);
+    payload = (NiNode *)receiverCursor_144->payload; /*0x7d6a53*/
+    receiverCursor_144 = receiverCursor_144->next; /*0x7d6a57*/
+    if ( payload ) /*0x7d6a59*/
+      ShadowSceneLight_RemoveReceiverGeometry((int **)self, payload); /*0x7d6a5e*/
   }
-  *(this + 0x51) = 0;
+  self->receiverCursor_144 = 0; /*0x7d6a67*/
 }

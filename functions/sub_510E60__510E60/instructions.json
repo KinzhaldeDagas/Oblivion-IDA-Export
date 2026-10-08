@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x510E60",
-    "line": "push    ebp",
+    "line": "push    ebp; Verified script registration: CalcLowPathToPoint, alias LP2P, ID 289, callback 0x510E60; description: 'ignore locks, allow disabled doors, ignore min use'. Argument flow is verified: first boolean -> policy byte 0/ignore locks; second -> policy byte 2/allow disabled; third -> policy byte 1/ignore min use. The command saves prior policy bytes, applies these values for route evaluation, then restores them.",
     "mnemonic": "push",
     "size": 1
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x510EE9",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -307,31 +307,31 @@
   },
   {
     "ea": "0x510EF9",
-    "line": "call    sub_67F0A0",
+    "line": "call    TravelPath_GetIgnoreLocks; Verified: reads policy byte 0 at qword_B3BB2C[0xBA]. CalcLowPathToPoint's first boolean argument is saved/restored through this accessor. TravelPath_ComputeDoorTransitionPenalty skips its lock/access penalty branch when this flag is true.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x510EFE",
-    "line": "mov     byte ptr [esp+504h+var_48C], al",
+    "line": "mov     [esp+504h+enabled], al",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x510F02",
-    "line": "call    sub_67F0E0",
+    "line": "call    TravelPath_GetAllowDisabledDoors; Verified: reads policy byte 2 at qword_B3BB2C[0xBA]. TravelPathSpaceDoorLink_IsEligibleInSpace permits references with the disabled bit (0x800) when this flag is true.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x510F07",
-    "line": "mov     byte ptr [esp+504h+var_498], al",
+    "line": "mov     [esp+504h+var_498], al",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x510F0B",
-    "line": "call    sub_67F0C0",
+    "line": "call    TravelPath_GetIgnoreMinUse; Verified: reads policy byte 1 at qword_B3BB2C[0xBA]. When false, TravelPath_ComputeDoorTransitionPenalty may add the extra cost for a door whose TESObjectDOOR_HasMinUseFlag is set.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x510F16",
-    "line": "mov     byte ptr [esp+504h+var_494], al",
+    "line": "mov     [esp+504h+var_494], al",
     "mnemonic": "mov",
     "size": 4
   },
@@ -361,13 +361,13 @@
   },
   {
     "ea": "0x510F1D",
-    "line": "push    eax",
+    "line": "push    eax; enabled",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x510F1E",
-    "line": "call    sub_67F0B0",
+    "line": "call    TravelPath_SetIgnoreLocks; Verified: writes policy byte 0 at qword_B3BB2C[0xBA] and returns the assigned value. The registered CalcLowPathToPoint option description identifies it as ignore locks.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,13 +385,13 @@
   },
   {
     "ea": "0x510F2A",
-    "line": "push    ecx",
+    "line": "push    ecx; enabled",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x510F2B",
-    "line": "call    sub_67F0F0",
+    "line": "call    TravelPath_SetAllowDisabledDoors; Verified: writes policy byte 2 at qword_B3BB2C[0xBA] and returns the assigned value. The second CalcLowPathToPoint boolean is saved/restored through this setter and corresponds to 'allow disabled doors'.",
     "mnemonic": "call",
     "size": 5
   },
@@ -409,13 +409,13 @@
   },
   {
     "ea": "0x510F37",
-    "line": "push    edx",
+    "line": "push    edx; enabled",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x510F38",
-    "line": "call    sub_67F0D0",
+    "line": "call    TravelPath_SetIgnoreMinUse; Verified: writes policy byte 1 at qword_B3BB2C[0xBA] and returns the assigned value. The third CalcLowPathToPoint boolean is saved/restored through this setter and corresponds to 'ignore min use'.",
     "mnemonic": "call",
     "size": 5
   },
@@ -463,19 +463,19 @@
   },
   {
     "ea": "0x510F57",
-    "line": "push    eax",
+    "line": "push    eax; sourceRef",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x510F58",
-    "line": "lea     eax, [esp+508h+var_4B8]",
+    "line": "lea     eax, [esp+508h+outRouteNodes]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x510F5C",
-    "line": "push    eax",
+    "line": "push    eax; outRouteNodes",
     "mnemonic": "push",
     "size": 1
   },
@@ -493,13 +493,13 @@
   },
   {
     "ea": "0x510F65",
-    "line": "mov     [esp+50Ch+var_4B8], esi",
+    "line": "mov     [esp+50Ch+outRouteNodes.firstNode.data], esi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x510F69",
-    "line": "mov     [esp+50Ch+var_4B4], esi",
+    "line": "mov     [esp+50Ch+outRouteNodes.firstNode.next], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -511,19 +511,19 @@
   },
   {
     "ea": "0x510F6F",
-    "line": "push    eax",
+    "line": "push    eax; destinationPosition",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x510F70",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x510F72",
-    "line": "call    sub_4D8AF0",
+    "line": "call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x510F7F",
-    "line": "push    eax",
+    "line": "push    eax; destinationSpace",
     "mnemonic": "push",
     "size": 1
   },
@@ -559,31 +559,31 @@
   },
   {
     "ea": "0x510F88",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x510F8E",
-    "line": "push    eax",
+    "line": "push    eax; sourcePosition",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x510F8F",
-    "line": "call    sub_4D8AF0",
+    "line": "call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x510F94",
-    "line": "push    eax",
+    "line": "push    eax; sourceSpace",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x510F95",
-    "line": "call    sub_680110",
+    "line": "call    TravelPath_FindLowLevelRoute; Verified state layout now typed: TravelPathSpaceDoorLink is 0x14 bytes (16-bit table index, two ref/space endpoint pairs); TravelPathSearchState is 0x10 bytes (fitness, predecessor link, current space, flags). The 0x01 discovered interpretation remains Probable; 0x02 expanded is Verified.",
     "mnemonic": "call",
     "size": 5
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x510FBC",
-    "line": "mov     dword ptr [esp+504h+var_4B0], ecx",
+    "line": "mov     [esp+504h+end.x], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -649,13 +649,13 @@
   },
   {
     "ea": "0x510FC6",
-    "line": "mov     [esp+504h+var_4A8], eax",
+    "line": "mov     [esp+504h+end.z], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x510FCA",
-    "line": "mov     dword ptr [esp+504h+var_4B0+4], edx",
+    "line": "mov     [esp+504h+end.y], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -703,7 +703,7 @@
   },
   {
     "ea": "0x510FE4",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -721,19 +721,19 @@
   },
   {
     "ea": "0x510FF2",
-    "line": "call    sub_4D8AF0",
+    "line": "call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x510FF7",
-    "line": "cmp     [esp+504h+var_4B4], esi",
+    "line": "cmp     [esp+504h+outRouteNodes.firstNode.next], esi",
     "mnemonic": "cmp",
     "size": 4
   },
   {
     "ea": "0x510FFB",
-    "line": "mov     ecx, [esp+504h+var_4B8]",
+    "line": "mov     ecx, [esp+504h+outRouteNodes.firstNode.data]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -787,7 +787,7 @@
   },
   {
     "ea": "0x511017",
-    "line": "mov     dword ptr [esp+504h+var_4B0], ecx",
+    "line": "mov     [esp+504h+end.x], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -799,7 +799,7 @@
   },
   {
     "ea": "0x51101E",
-    "line": "mov     dword ptr [esp+504h+var_4B0+4], edx",
+    "line": "mov     [esp+504h+end.y], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -811,13 +811,13 @@
   },
   {
     "ea": "0x511025",
-    "line": "lea     ecx, [esp+504h+var_4B8]",
+    "line": "lea     ecx, [esp+504h+outRouteNodes]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x511029",
-    "line": "mov     [esp+504h+var_4A8], eax",
+    "line": "mov     [esp+504h+end.z], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -859,13 +859,13 @@
   },
   {
     "ea": "0x511041",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x511046",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -877,19 +877,19 @@
   },
   {
     "ea": "0x51104C",
-    "line": "call    sub_42B410",
+    "line": "call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x511051",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x511053",
-    "line": "call    sub_4D8AF0",
+    "line": "call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1123,7 +1123,7 @@
   },
   {
     "ea": "0x5110D9",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1135,7 +1135,7 @@
   },
   {
     "ea": "0x5110E2",
-    "line": "call    sub_4D7740",
+    "line": "call    TESObjectREFR_GetEffectiveDoorLock; Verified: returns this reference's ExtraLockData* payload when present; otherwise, if its ExtraTeleport has a linked door, returns that linked reference's ExtraLockData* payload; null when neither exists. Directly supported by ExtraDataList_GetLock, ExtraDataList_GetTeleport, and TeleportData_GetLinkedDoor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1153,25 +1153,25 @@
   },
   {
     "ea": "0x5110EB",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5110ED",
-    "line": "call    sub_4D7740",
+    "line": "call    TESObjectREFR_GetEffectiveDoorLock; Verified: returns this reference's ExtraLockData* payload when present; otherwise, if its ExtraTeleport has a linked door, returns that linked reference's ExtraLockData* payload; null when neither exists. Directly supported by ExtraDataList_GetLock, ExtraDataList_GetTeleport, and TeleportData_GetLinkedDoor.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5110F2",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5110F4",
-    "line": "call    sub_428E70",
+    "line": "call    ExtraLockData_IsLocked; Verified runtime lock predicate: returns (ExtraLockData.flags & 0x01) != 0. ExtraDataList_Load sets this bit on accepted 12-byte and legacy 16-byte XLOC payloads; serialized flag bits are then preserved. This is a runtime normalization step.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1231,13 +1231,13 @@
   },
   {
     "ea": "0x511115",
-    "line": "mov     ecx, [esp+504h+var_4BC]",
+    "line": "mov     ecx, [esp+504h+var_4BC]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x511119",
-    "line": "call    sub_42B410",
+    "line": "call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1309,13 +1309,13 @@
   },
   {
     "ea": "0x511143",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x511145",
-    "line": "call    sub_4B6D10",
+    "line": "call    TESObjectDOOR_HasMinUseFlag; Verified: tests bit 0x08 at TESObjectDOOR +0x64. CalcLowPathToPoint prints the suffix '-MinUse' when this helper succeeds; travel search adds a penalty for either endpoint door carrying the bit unless ignore-min-use is enabled.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1333,13 +1333,13 @@
   },
   {
     "ea": "0x51114E",
-    "line": "mov     ecx, [esp+504h+var_4BC]",
+    "line": "mov     ecx, [esp+504h+var_4BC]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x511152",
-    "line": "call    sub_42B410",
+    "line": "call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1369,13 +1369,13 @@
   },
   {
     "ea": "0x511163",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x511165",
-    "line": "call    sub_4B6D10",
+    "line": "call    TESObjectDOOR_HasMinUseFlag; Verified: tests bit 0x08 at TESObjectDOOR +0x64. CalcLowPathToPoint prints the suffix '-MinUse' when this helper succeeds; travel search adds a penalty for either endpoint door carrying the bit unless ignore-min-use is enabled.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1825,7 +1825,7 @@
   },
   {
     "ea": "0x511265",
-    "line": "call    sub_6899C0",
+    "line": "call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1885,7 +1885,7 @@
   },
   {
     "ea": "0x51128E",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1987,7 +1987,7 @@
   },
   {
     "ea": "0x5112C9",
-    "line": "mov     dword ptr [esp+504h+var_4B0], ecx",
+    "line": "mov     [esp+504h+end.x], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1999,7 +1999,7 @@
   },
   {
     "ea": "0x5112D0",
-    "line": "mov     dword ptr [esp+504h+var_4B0+4], edx",
+    "line": "mov     [esp+504h+end.y], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2011,7 +2011,7 @@
   },
   {
     "ea": "0x5112D7",
-    "line": "mov     [esp+504h+var_4A8], eax",
+    "line": "mov     [esp+504h+end.z], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2101,7 +2101,7 @@
   },
   {
     "ea": "0x51130B",
-    "line": "call    sub_404C90",
+    "line": "call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2539,7 +2539,7 @@
   },
   {
     "ea": "0x511409",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2575,7 +2575,7 @@
   },
   {
     "ea": "0x511421",
-    "line": "call    sub_5E65B0",
+    "line": "call    sub_5E65B0; Authoritative actor movement speed selector: process flags +0x2C0 choose run (0x200), swim (0x800), fly-speed (0x2000); when those are absent it falls through to ordinary walk speed. AI callers may supply a movement vector without direction bits.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2731,7 +2731,7 @@
   },
   {
     "ea": "0x51148C",
-    "line": "push    ecx",
+    "line": "push    ecx; endColor",
     "mnemonic": "push",
     "size": 1
   },
@@ -2755,7 +2755,7 @@
   },
   {
     "ea": "0x5114A1",
-    "line": "lea     edx, [esp+508h+var_4B0]",
+    "line": "lea     edx, [esp+508h+end]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2767,7 +2767,7 @@
   },
   {
     "ea": "0x5114AC",
-    "line": "push    edx",
+    "line": "push    edx; end",
     "mnemonic": "push",
     "size": 1
   },
@@ -2785,7 +2785,7 @@
   },
   {
     "ea": "0x5114BB",
-    "line": "push    eax",
+    "line": "push    eax; startColor",
     "mnemonic": "push",
     "size": 1
   },
@@ -2827,13 +2827,13 @@
   },
   {
     "ea": "0x5114DB",
-    "line": "push    eax",
+    "line": "push    eax; start",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5114DC",
-    "line": "call    sub_47F070",
+    "line": "call    NiLines_CreateSegment; Verified generic NiLines_CreateSegment: copies two endpoint positions and two per-vertex colors, supplies line flags [1,0], and returns a two-vertex NiLines segment. TESPathGrid_RebuildRenderedGraph calls it for adjacency edges.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2851,7 +2851,7 @@
   },
   {
     "ea": "0x5114E6",
-    "line": "call    sub_4E70B0",
+    "line": "call    DebugRender_GetOrCreateVertexColorProperty; Verified shared debug property getter/creator, used by PathGrid debug rendering and the registered TestSeenData/TestLocalMap visualization commands, plus other debug-geometry callers. Lazily constructs NiVertexColorProperty, sets its observed render flags, stores the refcounted global g_DebugRenderVertexColorProperty and returns it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2869,7 +2869,7 @@
   },
   {
     "ea": "0x5114EE",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2935,67 +2935,67 @@
   },
   {
     "ea": "0x511518",
-    "line": "lea     ecx, [esp+504h+var_4B8]",
+    "line": "lea     ecx, [esp+504h+outRouteNodes]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x51151C",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x511521",
-    "line": "mov     ecx, [esp+504h+var_48C]",
+    "line": "mov     ecx, dword ptr [esp+504h+enabled]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x511525",
-    "line": "push    ecx",
+    "line": "push    ecx; enabled",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x511526",
-    "line": "call    sub_67F0B0",
+    "line": "call    TravelPath_SetIgnoreLocks; Verified: writes policy byte 0 at qword_B3BB2C[0xBA] and returns the assigned value. The registered CalcLowPathToPoint option description identifies it as ignore locks.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x51152B",
-    "line": "mov     edx, [esp+508h+var_498]",
+    "line": "mov     edx, dword ptr [esp+508h+var_498]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x51152F",
-    "line": "push    edx",
+    "line": "push    edx; enabled",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x511530",
-    "line": "call    sub_67F0F0",
+    "line": "call    TravelPath_SetAllowDisabledDoors; Verified: writes policy byte 2 at qword_B3BB2C[0xBA] and returns the assigned value. The second CalcLowPathToPoint boolean is saved/restored through this setter and corresponds to 'allow disabled doors'.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x511535",
-    "line": "mov     eax, [esp+50Ch+var_494]",
+    "line": "mov     eax, dword ptr [esp+50Ch+var_494]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x511539",
-    "line": "push    eax",
+    "line": "push    eax; enabled",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x51153A",
-    "line": "call    sub_67F0D0",
+    "line": "call    TravelPath_SetIgnoreMinUse; Verified: writes policy byte 1 at qword_B3BB2C[0xBA] and returns the assigned value. The third CalcLowPathToPoint boolean is saved/restored through this setter and corresponds to 'ignore min use'.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3082,5 +3082,83 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9B6FB0",
+    "line": "lea     ecx, [ebp+var_4D8]; void *",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B6FB6",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B6FBB",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B6FBF",
+    "line": "lea     eax, [edx-4F4h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B6FC5",
+    "line": "mov     ecx, [edx-4F8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B6FCB",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B6FCD",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B6FD2",
+    "line": "add     eax, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B6FD5",
+    "line": "mov     ecx, [edx-38h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B6FD8",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B6FDA",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B6FDF",
+    "line": "mov     eax, offset stru_AE1C9C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B6FE4",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

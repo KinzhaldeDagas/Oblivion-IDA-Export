@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7D7150",
-    "line": "mov     eax, ds:0B45D74h",
+    "line": "mov     eax, ds:0B45D74h; Drain and release every render-target stack entry, then end the active group. This path does not rebind a previous/default target or restore viewport/scissor state.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x7D71A6",
-    "line": "mov     ecx, ds:0B3F928h",
+    "line": "mov     ecx, ds:0B3F928h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x7D71B5",
-    "line": "jmp     sub_7D6B00",
+    "line": "jmp     NiDX9Renderer_EndRenderTargetGroupLocked; After releasing all stack references, end the active group; no replacement target is bound here.",
     "mnemonic": "jmp",
     "size": 5
   },

@@ -7,7 +7,7 @@
 0x8AB71C: push    eax
 0x8AB71D: push    ebp
 0x8AB71E: mov     edi, ecx
-0x8AB720: call    sub_715D80
+0x8AB720: call    NiTimeController_CopyMembers; Copies flags and timing values through +0x24. Remaps target +0x30 through the clone map only when runtime types match, and clones the refcounted next-controller chain at +0x34. Runtime cache +0x28 and update/force bytes are not copied here.
 0x8AB725: mov     ecx, [edi+3Ch]
 0x8AB728: mov     [ebp+3Ch], ecx
 0x8AB72B: mov     edx, [edi+50h]

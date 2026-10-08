@@ -1,6 +1,6 @@
 0x5AECA0: push    ebx
 0x5AECA1: push    ebp
-0x5AECA2: call    sub_578D70
+0x5AECA2: call    InterfaceManager_ConsumeMessageButton
 0x5AECA7: push    40Eh
 0x5AECAC: mov     bl, al
 0x5AECAE: call    Menu_GetOpenMenuTile
@@ -100,7 +100,7 @@
 0x5AEDD3: call    GameUI_QueueMessage
 0x5AEDD8: add     esp, 10h
 0x5AEDDB: mov     ecx, ebp
-0x5AEDDD: call    sub_5AE980
+0x5AEDDD: call    LoadgameMenu_RebuildRows; Destroys and rebuilds LoadgameMenu rows. CharacterSpecificSaves v4 uses it for deferred character opening and Back, with focus cleared first; each enumeration recomputes exact-name counts and ordering.
 0x5AEDE2: pop     edi
 0x5AEDE3: pop     esi
 0x5AEDE4: mov     byte ptr [ebp+64h], 0

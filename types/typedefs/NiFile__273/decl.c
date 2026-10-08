@@ -1,1 +1,1 @@
-NiFile
+struct NiFile;

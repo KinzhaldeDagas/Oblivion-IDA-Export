@@ -1,19 +1,36 @@
 {
-  "callees_count": 253,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 175,
   "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 10,
-  "display_name": "sub_5B91E0",
+  "chunks": [
+    [
+      "0x5B91E0",
+      "0x5BA4C3"
+    ],
+    [
+      "0x9C0CA0",
+      "0x9C0CFA"
+    ]
+  ],
+  "chunks_sha256": "711b7152cc9c706498efac3f54036de0dcda61133b860a3791778eafc73a39bf",
+  "comment_regular": "Verified travel-path diagnostic: called from WorldMapMenu interaction paths, repeatedly builds low-level routes to candidate points, prints each travel/door/coordinate segment, total distance and estimated game hours, reports 'No Path found' on failure, and adds a debug line render. Exact UI action name remains Unknown.",
+  "comment_repeatable": "Verified travel-path diagnostic: called from WorldMapMenu interaction paths, repeatedly builds low-level routes to candidate points, prints each travel/door/coordinate segment, total distance and estimated game hours, reports 'No Path found' on failure, and adds a debug line render. Exact UI action name remains Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 39,
+  "display_name": "TravelPath_DebugRouteToPoint",
   "end_ea": "0x5BA4C3",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "sub_5B91E0",
+  "name": "TravelPath_DebugRouteToPoint",
   "segment": ".text",
   "sha256": "d36838a11363f079b38a5f4dfa8fae222b87d8fac43a2778d5218f6cb11a6a91",
   "size": 4835,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5B91E0",
-  "type": "int __usercall@<eax>(double@<st2>, double@<st1>)",
-  "xrefs_from_count": 1587,
+  "total_chunk_size": 4925,
+  "type": "int __usercall@<eax>(double@<st2>)",
+  "xrefs_from_count": 1626,
   "xrefs_to_count": 4
 }

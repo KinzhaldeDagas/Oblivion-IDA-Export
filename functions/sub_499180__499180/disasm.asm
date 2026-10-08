@@ -1,4 +1,4 @@
-0x499180: push    ecx
+0x499180: push    ecx; Exterior fog day/night helper: climate day boundary byte (+0x51) cached as normalized time for weather fog interpolation.
 0x499181: test    dword ptr [ecx+0FCh], 200h
 0x49918B: jz      short loc_4991B4
 0x49918D: mov     eax, [ecx+0Ch]
@@ -8,7 +8,7 @@
 0x499198: mov     [esp+4+var_4], eax
 0x49919B: fild    [esp+4+var_4]
 0x49919E: fdiv    qword ptr ds:0A3F3A0h
-0x4991A4: fstp    dword ptr ds:0B3523Ch
+0x4991A4: fstp    dword ptr ds:0B3523Ch; Fog time-boundary decode: climate byte +0x51 normalized -> cached day boundary B33E90+0x13AC.
 0x4991AA: and     dword ptr [ecx+0FCh], 0FFFFFDFFh
 0x4991B4: fld     dword ptr ds:0B3523Ch
 0x4991BA: pop     ecx

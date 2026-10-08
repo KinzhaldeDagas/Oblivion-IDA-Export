@@ -14,7 +14,7 @@
 0x80CCB1: mov     large fs:0, eax
 0x80CCB7: mov     edi, ecx
 0x80CCB9: push    1; a1
-0x80CCBB: call    GetShaderDefinition
+0x80CCBB: call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.
 0x80CCC0: mov     ebx, [eax+4]
 0x80CCC3: mov     eax, [ebx+2Ch]
 0x80CCC6: add     esp, 4
@@ -213,3 +213,14 @@
 0x80CEDD: pop     ebx
 0x80CEDE: add     esp, 14h
 0x80CEE1: retn
+0x9D0DD0: lea     ecx, [ebp-14h]; slot
+0x9D0DD3: jmp     NiPointerSlot_Release
+0x9D0DD8: lea     ecx, [ebp-10h]; slot
+0x9D0DDB: jmp     NiPointerSlot_Release
+0x9D0DE0: mov     edx, [esp+arg_4]
+0x9D0DE4: lea     eax, [edx-18h]
+0x9D0DE7: mov     ecx, [edx-1Ch]
+0x9D0DEA: xor     ecx, eax
+0x9D0DEC: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D0DF1: mov     eax, offset stru_AF95D8
+0x9D0DF6: jmp     ___CxxFrameHandler3

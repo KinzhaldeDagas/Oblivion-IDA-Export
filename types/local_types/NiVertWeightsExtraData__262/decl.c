@@ -1,1 +1,1 @@
-NiVertWeightsExtraData
+struct NiVertWeightsExtraData;

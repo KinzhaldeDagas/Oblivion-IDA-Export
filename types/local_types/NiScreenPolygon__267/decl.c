@@ -1,1 +1,1 @@
-NiScreenPolygon
+struct NiScreenPolygon;

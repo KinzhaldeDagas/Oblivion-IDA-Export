@@ -1,1 +1,1 @@
-IRunnableObject_0
+typedef IRunnableObject IRunnableObject_0;

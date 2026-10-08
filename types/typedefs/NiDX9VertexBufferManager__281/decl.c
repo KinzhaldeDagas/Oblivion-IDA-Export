@@ -1,1 +1,1 @@
-NiDX9VertexBufferManager
+struct NiDX9VertexBufferManager;

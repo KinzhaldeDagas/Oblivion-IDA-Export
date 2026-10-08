@@ -15,3 +15,7 @@
 0x9816D8: mov     [ebp+var_1C], eax
 0x9816DB: mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
 0x9816E2: call    _V6_HeapAlloc___$LN8_0
+0x9816F0: push    4
+0x9816F2: call    __unlock
+0x9816F7: pop     ecx
+0x9816F8: retn

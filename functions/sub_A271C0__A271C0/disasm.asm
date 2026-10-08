@@ -1,5 +1,5 @@
 0xA271C0: push    esi
-0xA271C1: mov     esi, dword_B430DC
+0xA271C1: mov     esi, flt_B430DC
 0xA271C7: test    esi, esi
 0xA271C9: jz      short loc_A271E7
 0xA271CB: lea     eax, [esi+4]

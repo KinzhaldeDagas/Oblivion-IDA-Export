@@ -1,4 +1,4 @@
-0x70A840: push    0FFFFFFFFh
+0x70A840: push    0FFFFFFFFh; Pass222: Node child property propagation; clones inherited NiPropertyState before children.
 0x70A842: push    offset SEH_7B2A00
 0x70A847: mov     eax, large fs:0
 0x70A84D: push    eax
@@ -16,7 +16,7 @@
 0x70A86B: lea     ecx, [esp+20h+arg_0]
 0x70A86F: push    ecx
 0x70A870: mov     ecx, esi
-0x70A872: call    sub_7077D0
+0x70A872: call    sub_7077D0; Fog property propagation decode: child propagation clones inherited NiPropertyState so B333E4 fog slot +0x0C flows down the scene graph.
 0x70A877: xor     edi, edi
 0x70A879: cmp     [esi+0B6h], di
 0x70A880: mov     [esp+18h+var_4], 0
@@ -58,3 +58,12 @@
 0x70A8F0: pop     esi
 0x70A8F1: add     esp, 0Ch
 0x70A8F4: retn    4
+0x9C9BA0: lea     ecx, [ebp+4]; slot
+0x9C9BA3: jmp     NiPointerSlot_Release
+0x9C9BA8: mov     edx, [esp+arg_4]
+0x9C9BAC: lea     eax, [edx-8]
+0x9C9BAF: mov     ecx, [edx-0Ch]
+0x9C9BB2: xor     ecx, eax
+0x9C9BB4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C9BB9: mov     eax, offset stru_AF23BC
+0x9C9BBE: jmp     ___CxxFrameHandler3

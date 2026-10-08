@@ -25,7 +25,7 @@
 0x69C29A: test    al, 1
 0x69C29C: jnz     loc_69C5EE
 0x69C2A2: mov     ecx, esi; this
-0x69C2A4: call    MobileObject_GetCharProxy
+0x69C2A4: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x69C2A9: fld     dword ptr [eax+318h]
 0x69C2AF: mov     edx, [esi]
 0x69C2B1: fstp    [esp+48h+var_38]
@@ -76,7 +76,7 @@
 0x69C33B: fld1
 0x69C33D: fsubrp  st(1), st
 0x69C33F: fstp    [esp+3Ch+var_2C]
-0x69C343: call    MobileObject_GetCharProxy
+0x69C343: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x69C348: fld     [esp+3Ch+var_2C]
 0x69C34C: mov     ecx, esi
 0x69C34E: fstp    dword ptr [eax+324h]
@@ -133,7 +133,7 @@
 0x69C3F4: fld     [esp+48h+var_28]
 0x69C3F8: fsub    [esp+48h+var_1C]
 0x69C3FC: fstp    [esp+48h+var_4]
-0x69C400: call    sub_404C90
+0x69C400: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x69C405: fstp    [esp+48h+var_38]
 0x69C409: fld     dword ptr [esi+60h]
 0x69C40C: fadd    [esp+48h+var_38]
@@ -240,7 +240,7 @@
 0x69C541: call    _floor
 0x69C546: fstp    [esp+50h+arg_0]
 0x69C54A: fld     [esp+50h+arg_0]
-0x69C54E: call    Double_To_SInt32
+0x69C54E: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x69C553: fld     dword ptr [esi+7Ch]
 0x69C556: fdiv    dword ptr ds:0B37F18h
 0x69C55C: mov     edi, eax
@@ -251,7 +251,7 @@
 0x69C56E: fstp    [esp+50h+arg_0]
 0x69C572: fld     [esp+50h+arg_0]
 0x69C576: add     esp, 8
-0x69C579: call    Double_To_SInt32
+0x69C579: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x69C57E: cmp     edi, eax
 0x69C580: jz      short loc_69C5EE
 0x69C582: fld     dword ptr [esi+80h]
@@ -286,7 +286,7 @@
 0x69C5D8: mov     [ecx+4], edx
 0x69C5DB: mov     [ecx+8], eax
 0x69C5DE: mov     ecx, esi; this
-0x69C5E0: call    TESObjectREFR_GetParentCell
+0x69C5E0: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x69C5E5: push    eax; int
 0x69C5E6: push    edi; int
 0x69C5E7: mov     ecx, ebx

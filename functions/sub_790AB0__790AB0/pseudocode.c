@@ -1,22 +1,13 @@
-int __cdecl sub_790AB0(_DWORD *a1, int a2)
+// Completes heap sort for a CBranch pointer range by repeatedly moving the root to the shrinking tail and adjusting the remaining fuzzy-volume heap.
+void __cdecl OB_BranchPtrVector_SortHeapByFuzzyVolume_010201A0(OB_CBranch_010201A0 **begin, OB_CBranch_010201A0 **end)
 {
-  int v2; // esi
-  int result; // eax
-  int v4; // [esp-Ch] [ebp-14h]
+  int i; // esi
+  OB_CBranch_010201A0 *v3; // [esp-Ch] [ebp-14h]
 
-  v2 = a2 - (_DWORD)a1;
-  result = (a2 - (int)a1) >> 2;
-  if ( result > 1 )
+  for ( i = (char *)end - (char *)begin; i >> 2 > 1; i -= 4 ) /*0x790ac4*/
   {
-    do
-    {
-      v4 = *(_DWORD *)((char *)a1 + v2 - 4);
-      *(_DWORD *)((char *)a1 + v2 - 4) = *a1;
-      sub_7903B0((int)a1, 0, (v2 - 4) >> 2, v4);
-      v2 -= 4;
-      result = v2 >> 2;
-    }
-    while ( v2 >> 2 > 1 );
+    v3 = *(OB_CBranch_010201A0 **)((char *)begin + i - 4); /*0x790ad2*/
+    *(OB_CBranch_010201A0 **)((char *)begin + i - 4) = *begin; /*0x790add*/
+    OB_BranchPtrVector_AdjustHeapByFuzzyVolume_010201A0(begin, 0, (i - 4) >> 2, v3); /*0x790ae1*/
   }
-  return result;
 }

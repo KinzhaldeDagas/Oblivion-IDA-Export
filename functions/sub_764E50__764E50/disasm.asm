@@ -65,7 +65,7 @@
 0x764F06: push    0
 0x764F08: call    edx
 0x764F0A: push    eax
-0x764F0B: push    offset unk_B42654
+0x764F0B: push    offset stru_B42654
 0x764F10: call    sub_497DD0
 0x764F15: mov     esi, [eax+0Ch]
 0x764F18: mov     eax, [esi]
@@ -131,10 +131,10 @@
 0x764FA6: jbe     short loc_764FC8
 0x764FA8: mov     [esp+50h+arg_0], eax
 0x764FAC: lea     esp, [esp+0]
-0x764FB0: push    edi; Size
-0x764FB1: push    ebp; Src
-0x764FB2: push    esi; Dst
-0x764FB3: call    _memcpy
+0x764FB0: push    edi; byteCount
+0x764FB1: push    ebp; source
+0x764FB2: push    esi; destination
+0x764FB3: call    _memcpy;
 0x764FB8: add     ebp, [esp+5Ch+var_38]
 0x764FBC: add     esp, 0Ch
 0x764FBF: add     esi, edi

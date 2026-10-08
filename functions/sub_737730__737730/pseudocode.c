@@ -1,4 +1,4 @@
-bool __stdcall sub_737730(int a1)
+bool __stdcall sub_737730(char *a1)
 {
-  return j_CRT_strcmp(a1, ".bmp") == 0;
+  return j_CRT_strcmp(a1, ".bmp") == 0; /*0x737747*/
 }

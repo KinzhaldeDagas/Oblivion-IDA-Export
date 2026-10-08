@@ -1,18 +1,31 @@
 {
-  "callees_count": 16,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x768580",
+      "0x7686F9"
+    ]
+  ],
+  "chunks_sha256": "27fb3ff14297f34c24f40a27f174ad309b2d2e19e7f78825c410065b9357faf8",
+  "comment_regular": "DX11 V194 audit (2026-09-25): preserve this engine geometry-precache/prepack path. The inspected bodies perform geometry-group/buffer preparation and/or queue per-stream PrePackObject records; this is distinct from the optional IDirect3DResource9::PreLoad residency hint. No direct COM vtable +0x24 call was observed in these bodies; no claim is made about all transitive callees.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_768580",
+  "display_name": "NiDX9Renderer_QueueSkinnedGeometryPrepack",
   "end_ea": "0x7686F9",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_768580",
+  "name": "NiDX9Renderer_QueueSkinnedGeometryPrepack",
   "segment": ".text",
   "sha256": "27fb3ff14297f34c24f40a27f174ad309b2d2e19e7f78825c410065b9357faf8",
   "size": 377,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x768580",
+  "total_chunk_size": 377,
   "type": "char __thiscall(NiDX9Renderer *this, NiGeometry *a2, NiGeometryData *a3, NiSkinInstance *a4, NiD3DShaderDeclaration *a5, UInt32 a6, UInt32 a7)",
   "xrefs_from_count": 132,
   "xrefs_to_count": 1

@@ -19,8 +19,8 @@
 0x4C5BD6: jz      loc_4C6150
 0x4C5BDC: cmp     [eax+4], esi
 0x4C5BDF: jz      loc_4C6150
-0x4C5BE5: mov     ecx, [ebx+20h]; this
-0x4C5BE8: call    TESObjectCELL_GetNiNode?
+0x4C5BE5: mov     ecx, [ebx+20h]; object
+0x4C5BE8: call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.
 0x4C5BED: mov     edx, eax
 0x4C5BEF: test    edx, edx
 0x4C5BF1: mov     [esp+0F0h+var_B0], edx
@@ -32,12 +32,12 @@
 0x4C5C05: mov     edi, [edx]
 0x4C5C07: mov     eax, ecx
 0x4C5C09: push    eax
-0x4C5C0A: lea     eax, [esp+0F4h+var_C8]
+0x4C5C0A: lea     eax, [esp+0F4h+vertices]
 0x4C5C0E: mov     ecx, edx
 0x4C5C10: mov     edx, [edi+88h]
 0x4C5C16: push    eax
 0x4C5C17: call    edx
-0x4C5C19: mov     eax, [esp+0F0h+var_C8]
+0x4C5C19: mov     eax, [esp+0F0h+vertices]
 0x4C5C1D: test    eax, eax
 0x4C5C1F: jz      short loc_4C5C3F
 0x4C5C21: mov     edi, eax
@@ -76,7 +76,7 @@
 0x4C5C79: push    600h; Size
 0x4C5C7E: call    FormHeapAlloc
 0x4C5C83: push    800h; Size
-0x4C5C88: mov     [esp+0F8h+var_C8], eax
+0x4C5C88: mov     [esp+0F8h+vertices], eax
 0x4C5C8C: call    FormHeapAlloc
 0x4C5C91: mov     edi, eax
 0x4C5C93: add     esp, 8
@@ -90,15 +90,15 @@
 0x4C5CB1: push    10h
 0x4C5CB3: push    edi
 0x4C5CB4: call    sub_401080
-0x4C5CB9: mov     [esp+0F0h+var_CC], edi
+0x4C5CB9: mov     [esp+0F0h+colors], edi
 0x4C5CBD: jmp     short loc_4C5CC3
-0x4C5CBF: mov     [esp+0F0h+var_CC], ebp
+0x4C5CBF: mov     [esp+0F0h+colors], ebp
 0x4C5CC3: push    80h ; '€'; Size
 0x4C5CC8: mov     [esp+0F4h+var_4], 0FFFFFFFFh
 0x4C5CD3: call    FormHeapAlloc
 0x4C5CD8: add     esp, 4
 0x4C5CDB: mov     ecx, ebx
-0x4C5CDD: mov     [esp+0F0h+var_C4], eax
+0x4C5CDD: mov     [esp+0F0h+lineFlags], eax
 0x4C5CE1: call    sub_4BF060
 0x4C5CE6: fstp    [esp+0F0h+var_B4]
 0x4C5CEA: mov     ecx, ebx
@@ -152,7 +152,7 @@
 0x4C5D77: jz      short loc_4C5DE7
 0x4C5D79: fild    dword ptr ds:0B08B74h
 0x4C5D7F: shl     eax, 4
-0x4C5D82: add     eax, [esp+0F0h+var_CC]
+0x4C5D82: add     eax, [esp+0F0h+colors]
 0x4C5D86: fdiv    st, st(4)
 0x4C5D88: fstp    [esp+0F0h+var_D4]
 0x4C5D8C: fild    dword ptr ds:0B08B7Ch
@@ -179,7 +179,7 @@
 0x4C5DE5: jmp     short loc_4C5E47
 0x4C5DE7: fild    dword ptr ds:0B08B8Ch
 0x4C5DED: shl     eax, 4
-0x4C5DF0: add     eax, [esp+0F0h+var_CC]
+0x4C5DF0: add     eax, [esp+0F0h+colors]
 0x4C5DF4: fdiv    st, st(4)
 0x4C5DF6: fstp    [esp+0F0h+var_DC]
 0x4C5DFA: fild    dword ptr ds:0B08B94h
@@ -205,7 +205,7 @@
 0x4C5E43: mov     ecx, [esp+0F0h+var_94]
 0x4C5E47: fild    [esp+0F0h+var_BC]
 0x4C5E4B: mov     [eax+8], edx
-0x4C5E4E: mov     edx, [esp+0F0h+var_C4]
+0x4C5E4E: mov     edx, [esp+0F0h+lineFlags]
 0x4C5E52: mov     [eax+0Ch], ecx
 0x4C5E55: fmul    st, st(1)
 0x4C5E57: push    0
@@ -245,7 +245,7 @@
 0x4C5ED8: mov     ecx, ebx
 0x4C5EDA: call    sub_4C44C0
 0x4C5EDF: fld     [esp+0F0h+var_B8]
-0x4C5EE3: mov     edx, [esp+0F0h+var_C8]
+0x4C5EE3: mov     edx, [esp+0F0h+vertices]
 0x4C5EE7: fadd    qword ptr ds:0A3F3F0h
 0x4C5EED: lea     ecx, [esi+esi*2]
 0x4C5EF0: lea     eax, [edx+ecx*4]
@@ -307,18 +307,18 @@
 0x4C5FA8: test    eax, eax
 0x4C5FAA: mov     [esp+0F0h+var_4], 1
 0x4C5FB5: jz      short loc_4C5FDC
-0x4C5FB7: mov     edx, [esp+0F0h+var_C4]
-0x4C5FBB: mov     ecx, [esp+0F0h+var_CC]
-0x4C5FBF: push    edx
-0x4C5FC0: mov     edx, [esp+0F4h+var_C8]
-0x4C5FC4: push    0
-0x4C5FC6: push    0
-0x4C5FC8: push    0
-0x4C5FCA: push    ecx
-0x4C5FCB: push    edx
-0x4C5FCC: push    80h ; '€'
-0x4C5FD1: mov     ecx, eax
-0x4C5FD3: call    sub_7177E0
+0x4C5FB7: mov     edx, [esp+0F0h+lineFlags]
+0x4C5FBB: mov     ecx, [esp+0F0h+colors]
+0x4C5FBF: push    edx; lineFlags
+0x4C5FC0: mov     edx, [esp+0F4h+vertices]
+0x4C5FC4: push    0; arg7
+0x4C5FC6: push    0; arg6
+0x4C5FC8: push    0; arg5
+0x4C5FCA: push    ecx; colors
+0x4C5FCB: push    edx; vertices
+0x4C5FCC: push    80h ; '€'; vertexCount
+0x4C5FD1: mov     ecx, eax; this
+0x4C5FD3: call    NiLines_ctorWithGeometryData; Verified NiLines constructor wrapper: create NiGeometryData via NiLinesData_ctor, initialize NiGeometry, then install NiLines vtable.
 0x4C5FD8: mov     ebp, eax
 0x4C5FDA: jmp     short loc_4C5FDE
 0x4C5FDC: xor     ebp, ebp
@@ -391,7 +391,7 @@
 0x4C60A8: mov     edx, [ebx+24h]
 0x4C60AB: mov     ecx, [edx+14h]; this
 0x4C60AE: push    esi; a2
-0x4C60AF: call    sub_405680
+0x4C60AF: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x4C60B4: push    1Ch; Size
 0x4C60B6: call    FormHeapAlloc
 0x4C60BB: mov     esi, eax
@@ -415,7 +415,7 @@
 0x4C6100: mov     ecx, [edx+14h]; this
 0x4C6103: push    eax; a2
 0x4C6104: mov     [esp+0F4h+var_4], edi
-0x4C610B: call    sub_405680
+0x4C610B: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x4C6110: mov     ecx, [esp+0F0h+var_B0]
 0x4C6114: mov     edx, [ebx+24h]
 0x4C6117: mov     eax, [ecx]
@@ -426,7 +426,7 @@
 0x4C6125: call    eax
 0x4C6127: mov     ecx, [ebx+24h]
 0x4C612A: mov     ecx, [ecx+14h]; this
-0x4C612D: call    NiAVObject_InitializePropertyState
+0x4C612D: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x4C6132: mov     edx, [ebx+24h]
 0x4C6135: mov     ecx, [edx+14h]
 0x4C6138: call    NiNode_UpdateDynamicEffectState
@@ -436,7 +436,7 @@
 0x4C6144: push    ecx
 0x4C6145: mov     ecx, [eax+14h]; this
 0x4C6148: fstp    [esp+0F8h+a2]; a2
-0x4C614B: call    NiAVObject_UpdateNiAVObject
+0x4C614B: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x4C6150: mov     ecx, dword ptr [esp+0F0h+var_C]
 0x4C6157: mov     large fs:0, ecx
 0x4C615E: pop     ecx
@@ -446,3 +446,30 @@
 0x4C6162: pop     ebx
 0x4C6163: add     esp, 0DCh
 0x4C6169: retn    4
+0x9B4A70: mov     eax, [ebp-0DCh]
+0x9B4A76: push    eax
+0x9B4A77: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B4A7C: pop     ecx
+0x9B4A7D: retn
+0x9B4A7E: mov     eax, [ebp-0DCh]
+0x9B4A84: push    eax
+0x9B4A85: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B4A8A: pop     ecx
+0x9B4A8B: retn
+0x9B4A8C: mov     eax, [ebp-0DCh]
+0x9B4A92: push    eax
+0x9B4A93: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B4A98: pop     ecx
+0x9B4A99: retn
+0x9B4A9A: mov     eax, [ebp-0DCh]
+0x9B4AA0: push    eax
+0x9B4AA1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B4AA6: pop     ecx
+0x9B4AA7: retn
+0x9B4AA8: mov     edx, [esp+arg_4]
+0x9B4AAC: lea     eax, [edx-0E0h]
+0x9B4AB2: mov     ecx, [edx-0E4h]
+0x9B4AB8: xor     ecx, eax
+0x9B4ABA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B4ABF: mov     eax, offset stru_ADFEE4
+0x9B4AC4: jmp     ___CxxFrameHandler3

@@ -1,1 +1,1 @@
-IF_INDEX
+typedef NET_IFINDEX IF_INDEX;

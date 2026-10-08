@@ -26,49 +26,49 @@ float *__thiscall sub_976680(float *this, int a2, float *a3)
   float v27; // [esp+24h] [ebp-8h]
   float v28; // [esp+28h] [ebp-4h]
 
-  v4 = *(this + 0x1A);
-  v5 = this + 0xF;
-  v15 = v4;
-  v26 = *(this + 0x15) * v15;
-  v27 = *(this + 0x16) * v15;
-  v28 = v15 * *(this + 0x17);
-  v16 = *(this + 0x19);
-  v17 = *(this + 0x12) * v16;
-  v19 = *(this + 0x13) * v16;
-  v21 = v16 * *(this + 0x14);
-  v23 = *v5 + v17;
-  v24 = v5[1] + v19;
-  v25 = v5[2] + v21;
-  v18 = v23 + v26;
-  v6 = v24;
-  *(this + 8) = v18;
-  v20 = v6 + v27;
-  v7 = v25;
-  *(this + 9) = v20;
-  v22 = v7 + v28;
-  *(this + 0xA) = v22;
-  v8 = sub_9741F0(v5, &v23);
-  v9 = *((_DWORD *)this + 6) == 2;
-  v26 = -*v8;
-  v27 = -v8[1];
-  v10 = v27;
-  v11 = v8[2];
-  result = (float *)LODWORD(v26);
-  *(this + 0xB) = v26;
-  v28 = -v11;
-  v13 = v28;
-  *(this + 0xC) = v10;
-  *(this + 0xD) = v13;
-  if ( v9 )
+  v4 = *(this + 0x1A); /*0x976686*/
+  v5 = this + 0xF; /*0x976689*/
+  v15 = v4; /*0x97668c*/
+  v26 = *(this + 0x15) * v15; /*0x97669d*/
+  v27 = *(this + 0x16) * v15; /*0x9766a6*/
+  v28 = v15 * *(this + 0x17); /*0x9766ad*/
+  v16 = *(this + 0x19); /*0x9766b4*/
+  v17 = *(this + 0x12) * v16; /*0x9766c5*/
+  v19 = *(this + 0x13) * v16; /*0x9766ce*/
+  v21 = v16 * *(this + 0x14); /*0x9766d5*/
+  v23 = *v5 + v17; /*0x9766df*/
+  v24 = v5[1] + v19; /*0x9766ea*/
+  v25 = v5[2] + v21; /*0x9766f5*/
+  v18 = v23 + v26; /*0x976701*/
+  v6 = v24; /*0x976709*/
+  *(this + 8) = v18; /*0x97670d*/
+  v20 = v6 + v27; /*0x976714*/
+  v7 = v25; /*0x97671c*/
+  *(this + 9) = v20; /*0x976720*/
+  v22 = v7 + v28; /*0x97672c*/
+  *(this + 0xA) = v22; /*0x976734*/
+  v8 = sub_9741F0(v5, &v23); /*0x976737*/
+  v9 = *((_DWORD *)this + 6) == 2; /*0x97673e*/
+  v26 = -*v8; /*0x976744*/
+  v27 = -v8[1]; /*0x97674d*/
+  v10 = v27; /*0x976751*/
+  v11 = v8[2]; /*0x976755*/
+  result = (float *)LODWORD(v26); /*0x976758*/
+  *(this + 0xB) = v26; /*0x97675e*/
+  v28 = -v11; /*0x976761*/
+  v13 = v28; /*0x976765*/
+  *(this + 0xC) = v10; /*0x976769*/
+  *(this + 0xD) = v13; /*0x97676c*/
+  if ( v9 ) /*0x97676f*/
   {
-    v14 = *(this + 7);
-    v26 = *a3 * v14;
-    v27 = a3[1] * v14;
-    v28 = v14 * a3[2];
-    *(this + 8) = *(this + 8) + v26;
-    *(this + 9) = *(this + 9) + v27;
-    *(this + 0xA) = v28 + *(this + 0xA);
-    return a3;
+    v14 = *(this + 7); /*0x976782*/
+    v26 = *a3 * v14; /*0x976788*/
+    v27 = a3[1] * v14; /*0x976791*/
+    v28 = v14 * a3[2]; /*0x976798*/
+    *(this + 8) = *(this + 8) + v26; /*0x9767a3*/
+    *(this + 9) = *(this + 9) + v27; /*0x9767ad*/
+    *(this + 0xA) = v28 + *(this + 0xA); /*0x9767b7*/
+    return a3; /*0x976774*/
   }
-  return result;
+  return result; /*0x9767ba*/
 }

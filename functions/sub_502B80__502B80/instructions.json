@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x502BB2",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x502BC1",
-    "line": "mov     ecx, [esp+8+arg_18]",
+    "line": "mov     ecx, [esp+8+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -169,31 +169,31 @@
   },
   {
     "ea": "0x502BC9",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x502BCA",
-    "line": "push    0",
+    "line": "push    0; param2",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x502BCC",
-    "line": "push    edx",
+    "line": "push    edx; quest",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x502BCD",
-    "line": "push    esi",
+    "line": "push    esi; subject",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x502BCE",
-    "line": "call    sub_4F67A0",
+    "line": "call    GetQuestRunning_Eval; GetQuestRunning_Eval (index 56 / opcode 0x1038): tests the Quest parameter's questFlags bit 0. It does not inspect stage or completion state.",
     "mnemonic": "call",
     "size": 5
   },

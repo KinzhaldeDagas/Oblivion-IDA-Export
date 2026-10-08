@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x79AA10",
+      "0x79AA40"
+    ]
+  ],
+  "chunks_sha256": "c20191164de11f38f364cb7ca35a0f1e844bd90d8dbcc3494f25757f7b55696c",
+  "comment_regular": "Low-level uninitialized_fill_n for trivial 0x38-byte SFrondVertex records. Oblivion call sites pass three effective operands plus three checked-iterator/debug operands that this body does not consume.",
+  "comment_repeatable": "Low-level uninitialized_fill_n for trivial 0x38-byte SFrondVertex records. Oblivion call sites pass three effective operands plus three checked-iterator/debug operands that this body does not consume.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_79AA10",
+  "display_name": "OB_SFrondVertex_UninitializedFillN_010201A0",
   "end_ea": "0x79AA40",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_79AA10",
+  "name": "OB_SFrondVertex_UninitializedFillN_010201A0",
   "segment": ".text",
   "sha256": "c20191164de11f38f364cb7ca35a0f1e844bd90d8dbcc3494f25757f7b55696c",
   "size": 48,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x79AA10",
-  "type": "char *__usercall@<eax>(char *result@<eax>, char *, int, const void *)",
+  "total_chunk_size": 48,
+  "type": "void __cdecl(OB_SFrondVertex_010201A0 *destination, unsigned int count, const OB_SFrondVertex_010201A0 *value, const void *debugOwner, const void *debugValue, unsigned int debugCookie)",
   "xrefs_from_count": 24,
   "xrefs_to_count": 2
 }

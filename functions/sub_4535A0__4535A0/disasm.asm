@@ -1,12 +1,12 @@
-0x4535A0: mov     eax, [esp+arg_4]
+0x4535A0: mov     eax, [esp+flags]
 0x4535A4: sub     esp, 18h
 0x4535A7: push    ebx
 0x4535A8: push    esi
 0x4535A9: push    edi
-0x4535AA: mov     edi, [esp+24h+arg_0]
-0x4535AE: push    eax
-0x4535AF: push    edi
-0x4535B0: call    sub_453530
+0x4535AA: mov     edi, [esp+24h+form]
+0x4535AE: push    eax; flags
+0x4535AF: push    edi; form
+0x4535B0: call    SaveLoad_AdjustCreatedFormChangeFlags; Verified: created-form predicate at 45353F gates adjustment; RTTI cast TESObjectREFR -> clear bit4/set bit2; RTTI cast TESObjectCELL -> OR6; otherwise preserves flags. Used by LoadForm 463930, LoadGame 465FEE/4664CD and save-side normalization 4535A0. Unknown broader meanings of flag bits outside these form-specific uses.
 0x4535B5: push    0; int
 0x4535B7: push    offset ??_R0?AVTESObjectREFR@@@8; struct TypeDescriptor *
 0x4535BC: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
@@ -40,7 +40,7 @@
 0x453618: jnz     short loc_453620
 0x45361A: and     ebx, 0FEFFFFFFh
 0x453620: mov     ecx, edi; this
-0x453622: call    TESObjectCELL_IsInterior
+0x453622: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x453627: test    al, al
 0x453629: jnz     loc_4538FB
 0x45362F: mov     ecx, edi; this
@@ -128,15 +128,15 @@
 0x453733: push    offset ??_R0?AVDialoguePackage@@@8; struct TypeDescriptor *
 0x453738: push    offset ??_R0?AVTESPackage@@@8; struct _s_RTTICompleteObjectLocator *
 0x45373D: push    0; int
-0x45373F: mov     ecx, edi
-0x453741: call    sub_5E0380
+0x45373F: mov     ecx, edi; this
+0x453741: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x453746: push    eax; void *
 0x453747: call    OblivionDynamicCast
 0x45374C: add     esp, 14h
 0x45374F: test    eax, eax
 0x453751: jz      short loc_45376C
-0x453753: mov     ecx, eax
-0x453755: call    NiDX9TextureData__GetLevels
+0x453753: mov     ecx, eax; this
+0x453755: call    DialoguePackage__GetSpeaker; DialoguePackage participant accessor: returns the original initiating speaker at +0x5C.
 0x45375A: cmp     eax, edi
 0x45375C: jz      short loc_453766
 0x45375E: or      ebx, 10000h
@@ -163,7 +163,7 @@
 0x4537A1: test    bl, 0Ch
 0x4537A4: jz      loc_4538DC
 0x4537AA: mov     ecx, esi; this
-0x4537AC: call    TESObjectREFR_IsPersistent?
+0x4537AC: call    TESObjectREFR_IsPersistent
 0x4537B1: test    al, al
 0x4537B3: jnz     loc_4538DC
 0x4537B9: cmp     esi, ds:0B333C4h
@@ -188,13 +188,13 @@
 0x4537F0: jnz     short loc_45385E
 0x4537F2: mov     edi, esi
 0x4537F4: mov     ecx, esi; this
-0x4537F6: call    TESObjectREFR_GetParentCell
+0x4537F6: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x4537FB: test    eax, eax
 0x4537FD: jz      loc_4538DB
 0x453803: mov     ecx, esi; this
-0x453805: call    TESObjectREFR_GetParentCell
+0x453805: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x45380A: mov     ecx, eax; this
-0x45380C: call    TESObjectCELL_IsInterior
+0x45380C: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x453811: test    al, al
 0x453813: jnz     loc_4538DB
 0x453819: test    edi, edi
@@ -209,12 +209,12 @@
 0x453837: mov     ecx, esi
 0x453839: call    edx
 0x45383B: fld     [esp+28h+var_18]
-0x45383F: fistp   [esp+28h+arg_0]
+0x45383F: fistp   [esp+28h+form]
 0x453843: fld     [esp+28h+var_14]
-0x453847: fistp   [esp+28h+arg_4]
+0x453847: fistp   [esp+28h+flags]
 0x45384B: mov     ecx, esi; this
 0x45384D: call    TESObjectREFR_GetWorldSpace
-0x453852: mov     ecx, [esp+28h+arg_4]
+0x453852: mov     ecx, [esp+28h+flags]
 0x453856: sar     ecx, 0Ch
 0x453859: push    ecx
 0x45385A: mov     ecx, eax
@@ -234,7 +234,7 @@
 0x453881: mov     [esp+28h+var_10], eax
 0x453885: jz      short loc_453892
 0x453887: mov     ecx, esi; this
-0x453889: call    TESObjectREFR_GetParentCell
+0x453889: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x45388E: cmp     ebp, eax
 0x453890: jmp     short loc_4538D3
 0x453892: test    edi, edi
@@ -244,20 +244,20 @@
 0x45389D: cmp     edi, eax
 0x45389F: jnz     short loc_4538D5
 0x4538A1: fld     [esp+28h+var_18]
-0x4538A5: fistp   [esp+28h+arg_0]
+0x4538A5: fistp   [esp+28h+form]
 0x4538A9: fld     [esp+28h+var_14]
-0x4538AD: fistp   [esp+28h+arg_4]
-0x4538B1: mov     ecx, [esp+28h+arg_4]
+0x4538AD: fistp   [esp+28h+flags]
+0x4538B1: mov     ecx, [esp+28h+flags]
 0x4538B5: sar     ecx, 0Ch
-0x4538B8: push    ecx; signed int
+0x4538B8: push    ecx; cellY
 0x4538B9: mov     ecx, edi; this
-0x4538BB: mov     edx, [esp+2Ch+arg_0]
+0x4538BB: mov     edx, [esp+2Ch+form]
 0x4538BF: sar     edx, 0Ch
-0x4538C2: push    edx; signed int
+0x4538C2: push    edx; cellX
 0x4538C3: call    TESWorldSpace__GetCellAtCellCoord
 0x4538C8: mov     ecx, esi; this
 0x4538CA: mov     edi, eax
-0x4538CC: call    TESObjectREFR_GetParentCell
+0x4538CC: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x4538D1: cmp     edi, eax
 0x4538D3: jz      short loc_4538DB
 0x4538D5: or      ebx, 80000000h

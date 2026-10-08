@@ -11,16 +11,16 @@
 0x6FE878: test    esi, esi
 0x6FE87A: jz      short loc_6FE89D
 0x6FE87C: add     ebx, 58h ; 'X'
-0x6FE87F: push    esi
-0x6FE880: mov     ecx, ebx
-0x6FE882: call    sub_523B10
+0x6FE87F: push    esi; capacity
+0x6FE880: mov     ecx, ebx; self
+0x6FE882: call    NiTObjectArray_Resize16
 0x6FE887: mov     ecx, [edi+5Ch]
 0x6FE88A: sub     esi, 1
 0x6FE88D: lea     edx, [ecx+esi*4]
-0x6FE890: push    edx
-0x6FE891: push    esi
-0x6FE892: mov     ecx, ebx
-0x6FE894: call    sub_4B34E0
+0x6FE890: push    edx; element
+0x6FE891: push    esi; index
+0x6FE892: mov     ecx, ebx; self
+0x6FE894: call    NiTObjectArray_SetAt
 0x6FE899: test    esi, esi
 0x6FE89B: jnz     short loc_6FE887
 0x6FE89D: pop     edi

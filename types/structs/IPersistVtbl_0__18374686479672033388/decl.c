@@ -1,1 +1,1 @@
-IPersistVtbl_0
+typedef IPersistVtbl IPersistVtbl_0;

@@ -1,1 +1,13 @@
-_INTERNET_BUFFERSW
+struct _INTERNET_BUFFERSW
+{
+DWORD dwStructSize;
+_INTERNET_BUFFERSW *Next;
+LPCWSTR lpcszHeader;
+DWORD dwHeadersLength;
+DWORD dwHeadersTotal;
+LPVOID lpvBuffer;
+DWORD dwBufferLength;
+DWORD dwBufferTotal;
+DWORD dwOffsetLow;
+DWORD dwOffsetHigh;
+};

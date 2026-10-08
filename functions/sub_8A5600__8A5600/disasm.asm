@@ -7,10 +7,10 @@
 0x8A560F: lea     ebp, [ecx+10h]
 0x8A5612: test    ebp, ebp
 0x8A5614: jz      short loc_8A5630
-0x8A5616: lea     eax, [esp+1Ch+var_8]
-0x8A561A: push    eax
-0x8A561B: mov     ecx, ebp
-0x8A561D: call    sub_677C70
+0x8A5616: lea     eax, [esp+1Ch+outData]
+0x8A561A: push    eax; outData
+0x8A561B: mov     ecx, ebp; this
+0x8A561D: call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.
 0x8A5622: or      [esp+1Ch+var_C], 1
 0x8A5627: cmp     dword ptr [eax], 0
 0x8A562A: jz      short loc_8A5630
@@ -19,7 +19,7 @@
 0x8A5630: xor     bl, bl
 0x8A5632: test    byte ptr [esp+1Ch+var_C], 1
 0x8A5637: jz      short loc_8A5662
-0x8A5639: mov     esi, [esp+1Ch+var_8]
+0x8A5639: mov     esi, [esp+1Ch+outData]
 0x8A563D: and     [esp+1Ch+var_C], 0FFFFFFFEh
 0x8A5642: test    esi, esi
 0x8A5644: jz      short loc_8A5662
@@ -38,9 +38,9 @@
 0x8A5662: test    bl, bl
 0x8A5664: jz      loc_8A570C
 0x8A566A: lea     ecx, [esp+1Ch+var_4]
-0x8A566E: push    ecx
-0x8A566F: mov     ecx, ebp
-0x8A5671: call    sub_677C70
+0x8A566E: push    ecx; outData
+0x8A566F: mov     ecx, ebp; this
+0x8A5671: call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.
 0x8A5676: mov     esi, [eax]
 0x8A5678: mov     eax, [esp+1Ch+var_4]
 0x8A567C: test    eax, eax
@@ -67,7 +67,7 @@
 0x8A56AB: test    eax, eax
 0x8A56AD: jz      short loc_8A56BE
 0x8A56AF: nop
-0x8A56B0: cmp     eax, offset stru_BA7D50
+0x8A56B0: cmp     eax, 0BA7D50h
 0x8A56B5: jz      short loc_8A56EA
 0x8A56B7: mov     eax, [eax+4]
 0x8A56BA: test    eax, eax
@@ -79,8 +79,7 @@
 0x8A56C7: test    eax, eax
 0x8A56C9: jz      short loc_8A5700
 0x8A56CB: jmp     short loc_8A56D0
-0x8A56CD: align 10h
-0x8A56D0: cmp     eax, offset dword_BA7D04
+0x8A56D0: cmp     eax, offset stru_BA7D04
 0x8A56D5: jz      short loc_8A56EA
 0x8A56D7: mov     eax, [eax+4]
 0x8A56DA: test    eax, eax

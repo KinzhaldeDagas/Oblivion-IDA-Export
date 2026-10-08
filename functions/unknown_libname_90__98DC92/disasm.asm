@@ -73,3 +73,70 @@
 0x98DD49: mov     ecx, [ebp+64h+var_94]
 0x98DD4C: mov     [ecx], eax
 0x98DD4E: jnz     short loc_98DD71
+0x98DD55: push    edi; Memory
+0x98DD56: call    _free
+0x98DD5B: pop     ecx
+0x98DD5C: or      eax, 0FFFFFFFFh
+0x98DD5F: mov     ecx, [ebp+64h+var_4]
+0x98DD62: pop     edi
+0x98DD63: pop     esi
+0x98DD64: xor     ecx, ebp
+0x98DD66: pop     ebx
+0x98DD67: call    @__security_check_cookie@4
+0x98DD6C: add     ebp, 64h ; 'd'
+0x98DD6F: leave
+0x98DD70: retn
+0x98DD71: lea     ecx, [esi-1]
+0x98DD74: push    ecx; Src
+0x98DD75: push    edi; Src
+0x98DD76: push    esi; SizeInBytes
+0x98DD77: push    eax; Dst
+0x98DD78: call    _strncpy_s
+0x98DD7D: add     esp, 10h
+0x98DD80: test    eax, eax
+0x98DD82: jz      short loc_98DD91
+0x98DD84: push    ebx
+0x98DD85: push    ebx
+0x98DD86: push    ebx
+0x98DD87: push    ebx
+0x98DD88: push    ebx
+0x98DD89: call    __invoke_watson
+0x98DD91: cmp     [ebp+64h+var_88], ebx
+0x98DD94: jz      short loc_98DD9D
+0x98DD96: push    edi; Memory
+0x98DD97: call    _free
+0x98DD9C: pop     ecx
+0x98DD9D: xor     eax, eax
+0x98DD9F: jmp     short loc_98DD5F
+0x98DDA1: cmp     [ebp+64h+arg_4], ebx
+0x98DDA4: jnz     short loc_98DD5C
+0x98DDA6: push    ebx; CodePage
+0x98DDA7: push    4; cchData
+0x98DDA9: mov     edi, (offset dword_BA9E10+7D4h)
+0x98DDAE: push    edi; lpLCData
+0x98DDAF: push    [ebp+64h+LCType]; LCType
+0x98DDB2: push    [ebp+64h+Locale]; Locale
+0x98DDB5: push    eax; struct localeinfo_struct *
+0x98DDB6: call    sub_99CE6C
+0x98DDBB: add     esp, 18h
+0x98DDBE: test    eax, eax
+0x98DDC0: jz      short loc_98DD5C
+0x98DDC2: mov     [esi], bl
+0x98DDC4: mov     bl, [edi]
+0x98DDC6: movzx   eax, bl
+0x98DDC9: push    eax; C
+0x98DDCA: call    _isdigit
+0x98DDCF: test    eax, eax
+0x98DDD1: pop     ecx
+0x98DDD2: jz      short loc_98DD9D
+0x98DDD4: mov     al, [esi]
+0x98DDD6: mov     cl, 0Ah
+0x98DDD8: imul    cl
+0x98DDDA: add     al, bl
+0x98DDDC: sub     al, 30h ; '0'
+0x98DDDE: inc     edi
+0x98DDDF: inc     edi
+0x98DDE0: cmp     edi, (offset dword_BA9E10+7DCh)
+0x98DDE6: mov     [esi], al
+0x98DDE8: jl      short loc_98DDC4
+0x98DDEA: jmp     short loc_98DD9D

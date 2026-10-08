@@ -1,4 +1,4 @@
-0x6BF3E0: sub     esp, 24h
+0x6BF3E0: sub     esp, 24h; Oblivion position evaluator for numeric type 1: componentwise lower*(1-t)+upper*t using key value components at +4,+8,+0xC.
 0x6BF3E3: fld     [esp+24h+arg_0]
 0x6BF3E7: mov     eax, [esp+24h+arg_4]
 0x6BF3EB: fld     st

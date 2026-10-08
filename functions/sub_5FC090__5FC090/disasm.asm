@@ -1,4 +1,4 @@
-0x5FC090: sub     esp, 1Ch
+0x5FC090: sub     esp, 1Ch; ODismemberment combat decode: attack-side disarm perk attempt after damage. Requires attack animation group 0x19/0x1A, relevant skill mastery, iPerkAttackDisarmChance, and valid target equipped item.
 0x5FC093: push    edi
 0x5FC094: mov     edi, ecx
 0x5FC096: mov     eax, [edi]
@@ -19,13 +19,13 @@
 0x5FC0C1: jz      short loc_5FC0AA
 0x5FC0C3: mov     eax, [edi]
 0x5FC0C5: mov     edx, [eax+164h]
-0x5FC0CB: push    3
+0x5FC0CB: push    3; slot
 0x5FC0CD: mov     ecx, edi
 0x5FC0CF: call    edx
-0x5FC0D1: mov     ecx, eax
-0x5FC0D3: call    ActorAnimData_GetAnimGroupFromField8Value
+0x5FC0D1: mov     ecx, eax; this
+0x5FC0D3: call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.
 0x5FC0D8: push    eax
-0x5FC0D9: call    sub_51AA00
+0x5FC0D9: call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.
 0x5FC0DE: add     esp, 4
 0x5FC0E1: cmp     eax, 19h
 0x5FC0E4: jz      short loc_5FC0EB
@@ -46,13 +46,13 @@
 0x5FC10A: push    eax
 0x5FC10B: mov     ecx, edi
 0x5FC10D: call    Actor_GetBaseCalcAVi
-0x5FC112: push    eax
-0x5FC113: call    Calc_MasteryFromSkill
+0x5FC112: push    eax; skillValue
+0x5FC113: call    Calc_MasteryFromSkill; Map a base skill value to Oblivion's five mastery tiers using iSkillApprenticeMin=25, iSkillJourneymanMin=50, iSkillExpertMin=75, and iSkillMasterMin=100.
 0x5FC118: add     esp, 4
 0x5FC11B: cmp     eax, 2
 0x5FC11E: jl      short loc_5FC172
 0x5FC120: push    0; Seed
-0x5FC122: call    GetRandomLargeInteger?
+0x5FC122: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x5FC127: cdq
 0x5FC128: mov     ecx, 64h ; 'd'
 0x5FC12D: idiv    ecx
@@ -147,7 +147,7 @@
 0x5FC223: call    sub_4DC000
 0x5FC228: add     esp, 8
 0x5FC22B: mov     ecx, esi
-0x5FC22D: call    Actor_GetCurrentAction
+0x5FC22D: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x5FC232: test    eax, eax
 0x5FC234: jl      short loc_5FC271
 0x5FC236: cmp     eax, 5
@@ -163,15 +163,15 @@
 0x5FC254: call    edx
 0x5FC256: test    eax, eax
 0x5FC258: jnz     short loc_5FC271
-0x5FC25A: push    eax; float
-0x5FC25B: mov     ecx, esi
-0x5FC25D: call    sub_5F4AE0
+0x5FC25A: push    eax; shouldBlock
+0x5FC25B: mov     ecx, esi; this
+0x5FC25D: call    Actor_UpdateBlockingState; Starts or stops the actor blocking animation/current-action state and mirrors the result to CombatController byte +0x49. Native ABI is Actor in ECX plus one shouldBlock byte.
 0x5FC262: test    al, al
 0x5FC264: jnz     short loc_5FC271
-0x5FC266: push    0
-0x5FC268: push    0FFFFFFFFh
-0x5FC26A: mov     ecx, esi
-0x5FC26C: call    HighPRocess_DoAction?????
+0x5FC266: push    0; sequence
+0x5FC268: push    0FFFFFFFFh; action
+0x5FC26A: mov     ecx, esi; this
+0x5FC26C: call    Actor_SetCurrentActionWithBowVisualCleanup; Void Actor action-transition wrapper. Performs transition-specific bow/held-arrow visual cleanup, then commits action and sequence through process vtable +0x2D8. It has no success/result contract; callers/plugins must not consume EAX, so Crossbow's UInt32 HighProcessDoActionFn typedef is incorrect. Meaningful current-action state is HighProcess-only: HighProcess +0x2D0/+0x2D8 read/store +0x1F4/+0x1F8, while MiddleHigh returns None (-1) and its setter is a no-op; Crossbow's process-level-0 action filter therefore matches Oblivion. External Crossbow state-machine contrast: Equip-as-Cocked/first-shot-loaded is plugin policy, repeated action 4 while Reloading can flip state to Cocked and rebuild controller tracking, and interruption/cancellation actions are not modeled, leaving stale Reloading/Cocked phases.
 0x5FC271: mov     eax, [esi]
 0x5FC273: mov     edx, [eax+330h]
 0x5FC279: mov     ecx, esi

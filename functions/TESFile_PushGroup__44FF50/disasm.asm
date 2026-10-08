@@ -6,7 +6,7 @@
 0x44FF5A: jz      short loc_44FF92
 0x44FF5C: push    esi
 0x44FF5D: push    18h; Size
-0x44FF5F: call    FormHeapAlloc
+0x44FF5F: call    FormHeapAlloc; MEF v44 decode-only rejection: TESFile_PushGroup allocation is unchecked, but its void caller immediately assumes +0x284 changed and writes through current top. Local skip would corrupt group state; not implemented.
 0x44FF64: add     esp, 4
 0x44FF67: mov     esi, eax
 0x44FF69: push    esi

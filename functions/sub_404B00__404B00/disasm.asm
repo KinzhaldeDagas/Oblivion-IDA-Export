@@ -1,13 +1,13 @@
-0x404B00: sub     esp, 30Ch
+0x404B00: sub     esp, 30Ch; Reads a text plugin list at basePath + listFile; skips # comments, obtains each TESFile by line, and marks it loaded. Caller falls back to Oblivion.esm when no file is loaded.
 0x404B06: mov     eax, ___security_cookie
 0x404B0B: xor     eax, esp
 0x404B0D: mov     [esp+30Ch+var_4], eax
-0x404B14: mov     eax, [esp+30Ch+arg_0]
+0x404B14: mov     eax, [esp+30Ch+basePath]
 0x404B1B: push    ebx
 0x404B1C: xor     bl, bl
 0x404B1E: lea     edx, [esp+310h+Filename]
 0x404B22: push    esi
-0x404B23: mov     esi, [esp+314h+arg_4]
+0x404B23: mov     esi, [esp+314h+filename]
 0x404B2A: mov     [esp+314h+var_309], bl
 0x404B2E: sub     edx, eax
 0x404B30: mov     cl, [eax]
@@ -54,7 +54,6 @@
 0x404BA0: jz      loc_404C2F
 0x404BA6: mov     bl, 23h ; '#'
 0x404BA8: jmp     short loc_404BB0
-0x404BAA: align 10h
 0x404BB0: lea     eax, [esp+314h+Buf]
 0x404BB7: lea     edx, [eax+1]
 0x404BBA: lea     ebx, [ebx+0]
@@ -71,7 +70,7 @@
 0x404BE1: lea     eax, [esp+eax+314h+var_205]
 0x404BE8: jnz     short loc_404BEC
 0x404BEA: mov     [eax], cl
-0x404BEC: mov     ecx, TESDataHandler
+0x404BEC: mov     ecx, g_TESDataHandler; Verified singleton pointer: allocated as TESDataHandler (0xCE0 bytes) and published at TES_constr 441B8A; passed to LoadFiles and form APIs; TES_destr 446915 destroys and clears it. Field +0x74 is the Global list head used by TESSaveLoadGame_LoadGlobalValues; surrounding layout remains Unknown.
 0x404BF2: lea     edx, [esp+314h+Buf]
 0x404BF9: push    edx
 0x404BFA: call    sub_447C50

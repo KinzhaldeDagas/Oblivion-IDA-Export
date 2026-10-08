@@ -1,8 +1,8 @@
-_BYTE *__thiscall sub_4A34C0(_BYTE *this)
+TESRegionData *__thiscall TESRegionData_InitializeBase(TESRegionData *self)
 {
-  *(_DWORD *)this = &TESRegionData::`vftable';
-  *(this + 4) = 0;
-  *(this + 6) = 0x32;
-  *(this + 5) = 0;
-  return this;
+  self->vtable = &TESRegionData::`vftable'; /*0x4a34c4*/
+  self->bOverride = 0; /*0x4a34ca*/
+  self->priority = 0x32; /*0x4a34cd*/
+  self->bIgnore = 0; /*0x4a34d1*/
+  return self; /*0x4a34d4*/
 }

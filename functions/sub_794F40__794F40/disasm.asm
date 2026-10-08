@@ -1,4 +1,4 @@
-0x794F40: push    ebx
+0x794F40: push    ebx; OBLIVION AUTHORITY (2026-08-30): Clears vector<unsigned short> while retaining capacity by reducing end to begin.
 0x794F41: push    esi
 0x794F42: mov     esi, ecx
 0x794F44: mov     ebx, [esi+8]

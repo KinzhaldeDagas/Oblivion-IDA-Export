@@ -1,52 +1,90 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "file_queue",
+  "definition": "struct __declspec(align(8)) file_queue\n{\nDWORD magic;\nfile_op_queue copy_queue;\nfile_op_queue delete_queue;\nfile_op_queue rename_queue;\nDWORD flags;\nsource_media **sources;\nunsigned int source_count;\n}\n",
   "id": 18374686479672040367,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "magic",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "copy_queue",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 16
+      "size": 16,
+      "type": "file_op_queue"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "delete_queue",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 16
+      "size": 16,
+      "type": "file_op_queue"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "rename_queue",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 16
+      "size": 16,
+      "type": "file_op_queue"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "flags",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "sources",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "source_media **"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "source_count",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "unsigned int"
     }
   ],
   "name": "file_queue",
+  "ordinal": 6052,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 72
 }

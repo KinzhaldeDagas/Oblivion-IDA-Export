@@ -1,5 +1,9 @@
-char *__stdcall sub_788E90(char *a1, int a2, char *a3)
+// Oblivion stdcall adapter for uninitialized fill-N of trivial 28-byte collision records; returns destination + count.
+OB_CollisionObject_010201A0 *__stdcall OB_stVector_CollisionObject_UninitializedFillN_Stdcall_010201A0(
+        OB_CollisionObject_010201A0 *destination,
+        unsigned int count,
+        const OB_CollisionObject_010201A0 *value)
 {
-  sub_788AE0(a3, a1, a2, a3);
-  return &a1[0x1C * a2];
+  OB_stVector_CollisionObject_UninitializedFillN_010201A0(destination, count, value); /*0x788eb2*/
+  return &destination[count]; /*0x788ec6*/
 }

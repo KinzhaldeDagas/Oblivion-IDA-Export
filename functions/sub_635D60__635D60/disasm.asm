@@ -26,20 +26,20 @@
 0x635DAA: push    0; float
 0x635DAC: push    1; float
 0x635DAE: mov     ecx, esi; this
-0x635DB0: call    TESObjectREFR_GetParentCell
+0x635DB0: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x635DB5: mov     ecx, [esp+30h+var_18]
-0x635DB9: mov     edx, [esp+30h+var_14]
+0x635DB9: mov     edx, dword ptr [esp+30h+var_14]
 0x635DBD: push    eax; int
 0x635DBE: sub     esp, 0Ch
 0x635DC1: mov     eax, esp
 0x635DC3: mov     [eax], ecx
-0x635DC5: mov     ecx, [esp+40h+var_10]
+0x635DC5: mov     ecx, dword ptr [esp+40h+var_14+4]
 0x635DC9: mov     [eax+4], edx
 0x635DCC: lea     edx, [esp+40h+var_C]
 0x635DD0: mov     [eax+8], ecx
 0x635DD3: push    edx; int
 0x635DD4: mov     ecx, esi
-0x635DD6: call    sub_5E2E20
+0x635DD6: call    Actor_ChoosePathGridSteeringPosition; Verified actor package movement helper. Finds a reachable PathGrid point for the requested destination; if it has outgoing connections, selects the first linked node and chooses a randomized intermediate position along that edge. Handles empty/unavailable PathGrids by falling back to terrain height or the actor's current position. Multiple HighProcess package-action callers establish the steering-position role.
 0x635DDB: mov     ecx, [eax]
 0x635DDD: mov     edi, [esp+24h+arg_14]
 0x635DE1: mov     [edi], ecx
@@ -51,9 +51,9 @@
 0x635DF1: mov     eax, [edx+174h]
 0x635DF7: mov     ecx, esi
 0x635DF9: call    eax
-0x635DFB: push    eax
-0x635DFC: mov     ecx, edi
-0x635DFE: call    sub_8AA390
+0x635DFB: push    eax; other
+0x635DFC: mov     ecx, edi; this
+0x635DFE: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x635E03: test    al, al
 0x635E05: mov     al, 1
 0x635E07: jnz     short loc_635E0B

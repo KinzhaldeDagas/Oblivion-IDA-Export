@@ -1,4 +1,4 @@
-0x791770: sub     esp, 8
+0x791770: sub     esp, 8; Pushes one 4-byte value into an OB_stVector4. Writes directly at end when capacity remains, otherwise calls the checked insert-one helper. Oblivion uses it for CBranch pointers and other pointer-sized SpeedTree lists.
 0x791773: push    esi
 0x791774: mov     esi, ecx
 0x791776: mov     edx, [esi+4]
@@ -17,7 +17,7 @@
 0x791795: cmp     ecx, eax
 0x791797: jnb     short loc_7917B1
 0x791799: mov     eax, [esi+8]
-0x79179C: mov     ecx, [esp+0Ch+arg_0]
+0x79179C: mov     ecx, [esp+0Ch+value]
 0x7917A0: mov     edx, [ecx]
 0x7917A2: mov     [eax], edx
 0x7917A4: add     eax, 4
@@ -30,14 +30,14 @@
 0x7917B5: cmp     edx, edi
 0x7917B7: jbe     short loc_7917BE
 0x7917B9: call    __invalid_parameter_noinfo
-0x7917BE: mov     eax, [esp+10h+arg_0]
-0x7917C2: push    eax; int
+0x7917BE: mov     eax, [esp+10h+value]
+0x7917C2: push    eax; value
 0x7917C3: push    edi; Src
-0x7917C4: push    esi; int
-0x7917C5: lea     ecx, [esp+1Ch+var_8]
-0x7917C9: push    ecx; int
-0x7917CA: mov     ecx, esi
-0x7917CC: call    sub_7A3620
+0x7917C4: push    esi; position
+0x7917C5: lea     ecx, [esp+1Ch+result]
+0x7917C9: push    ecx; result
+0x7917CA: mov     ecx, esi; this
+0x7917CC: call    OB_stVector4_InsertOne_010201A0; Oblivion binary evidence: inserts one four-byte value at a checked owner/current iterator by calling OB_stVector4_InsertFill, then returns a relocated iterator to the inserted slot. Widely folded across SpeedTree pointer and scalar vectors.
 0x7917D1: pop     edi
 0x7917D2: pop     esi
 0x7917D3: add     esp, 8

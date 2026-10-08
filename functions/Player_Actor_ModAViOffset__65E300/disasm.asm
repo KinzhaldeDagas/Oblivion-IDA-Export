@@ -1,4 +1,4 @@
-0x65E300: cmp     byte ptr ds:0B3BB06h, 0
+0x65E300: cmp     byte ptr ds:0B3BB06h, 0; Player integer script-offset modifier. Store a current-value modifier, refresh UI, and notify with rebuild=false. Skill base values and requiredSkillExp remain unchanged.
 0x65E307: push    esi
 0x65E308: mov     esi, [esp+4+a2]
 0x65E30C: push    edi
@@ -38,8 +38,8 @@
 0x65E374: call    Player_ModAVNode
 0x65E379: fstp    dword ptr [edi+esi*4+324h]
 0x65E380: add     esp, 0Ch
-0x65E383: push    esi; a2
-0x65E384: call    sub_57A6F0
+0x65E383: push    esi; actorValue
+0x65E384: call    UI_UpdateActorValueDisplays; UI_UpdateActorValueDisplays(actorValue), called by player base-AV setters/modifiers after changing base form values.
 0x65E389: add     esp, 4
 0x65E38C: cmp     esi, 8
 0x65E38F: jnz     short loc_65E3AA
@@ -53,10 +53,10 @@
 0x65E3A5: push    ebp
 0x65E3A6: mov     ecx, edi
 0x65E3A8: call    eax
-0x65E3AA: push    0
-0x65E3AC: push    esi
-0x65E3AD: mov     ecx, edi
-0x65E3AF: call    sub_5E2670
+0x65E3AA: push    0; updatePlayerUI
+0x65E3AC: push    esi; actorValue
+0x65E3AD: mov     ecx, edi; this
+0x65E3AF: call    Player_OnActorValueBaseChanged; Handles player base actor-value changes. For native skill AVs, optional UI refresh also recalculates required experience for all 21 skills; major/non-major membership affects the recomputed requirement through TESClass_IsMajorSkillAV.
 0x65E3B4: pop     ebp
 0x65E3B5: pop     ebx
 0x65E3B6: pop     edi

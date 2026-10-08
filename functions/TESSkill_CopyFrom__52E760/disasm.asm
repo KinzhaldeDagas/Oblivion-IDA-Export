@@ -1,4 +1,4 @@
-0x52E760: push    ebx
+0x52E760: push    ebx; Copies all five SKIL DATA dwords, then four separate mastery-tier TESDescription components.
 0x52E761: push    esi
 0x52E762: mov     esi, [esp+8+a2]
 0x52E766: push    edi

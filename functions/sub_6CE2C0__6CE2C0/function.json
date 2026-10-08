@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6CE2C0",
+      "0x6CE2F0"
+    ]
+  ],
+  "chunks_sha256": "ebe53dfa3484d20dbcb0a27a2726cdaec76ccce701198439f11a59edc9bf43da",
+  "comment_regular": "Copies NiTimeController members, clones the source interpolator at +0x3C through the stream clone map, and assigns the clone through the destination smart pointer.",
+  "comment_repeatable": "Copies NiTimeController members, clones the source interpolator at +0x3C through the stream clone map, and assigns the clone through the destination smart pointer.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6CE2C0",
+  "display_name": "NiSingleInterpController_CopyMembers",
   "end_ea": "0x6CE2F0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6CE2C0",
+  "name": "NiSingleInterpController_CopyMembers",
   "segment": ".text",
   "sha256": "ebe53dfa3484d20dbcb0a27a2726cdaec76ccce701198439f11a59edc9bf43da",
   "size": 48,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6CE2C0",
-  "type": "_DWORD *__thiscall(_DWORD *this, int, _DWORD **)",
+  "total_chunk_size": 48,
+  "type": "void __thiscall(float *this, int, int *)",
   "xrefs_from_count": 24,
   "xrefs_to_count": 3
 }

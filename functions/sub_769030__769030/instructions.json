@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x769030",
-    "line": "sub     esp, 20h",
+    "line": "sub     esp, 20h; MoonSugarEffect decode: BeginScene prepack flush. Iterates renderer PrePackObjects, locks/stages shared VB ranges, uses declaration/default/skinned packers, rebuilds IBs, unlocks, clears the map, and heap-frees temporary entries. Plugin mask passes should not borrow this renderer-owned queue/lifetime.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x76903D",
-    "line": "call    sub_763FE0",
+    "line": "call    NiDX9Renderer_EnterRendererAndPrecache",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x76906B",
-    "line": "mov     [esp+30h+var_14], eax",
+    "line": "mov     [esp+30h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -169,43 +169,43 @@
   },
   {
     "ea": "0x769084",
-    "line": "push    eax",
+    "line": "push    eax; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x769085",
-    "line": "lea     ecx, [esp+34h+var_C]",
+    "line": "lea     ecx, [esp+34h+keyOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x769089",
-    "line": "push    ecx",
+    "line": "push    ecx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76908A",
-    "line": "lea     edx, [esp+38h+var_14]",
+    "line": "lea     edx, [esp+38h+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x76908E",
-    "line": "push    edx",
+    "line": "push    edx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76908F",
-    "line": "lea     ecx, [ebp+604h]",
+    "line": "lea     ecx, [ebp+604h]; self",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x769095",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x7690A6",
-    "line": "cmp     [esp+30h+var_C], 0",
+    "line": "cmp     [esp+30h+keyOut], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -262,12 +262,6 @@
     "line": "jmp     short loc_7690C0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x7690BA",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
   },
   {
     "ea": "0x7690C0",
@@ -433,7 +427,7 @@
   },
   {
     "ea": "0x769105",
-    "line": "push    eax; int",
+    "line": "push    eax; flags",
     "mnemonic": "push",
     "size": 1
   },
@@ -445,19 +439,19 @@
   },
   {
     "ea": "0x769108",
-    "line": "push    edx; Size",
+    "line": "push    edx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x769109",
-    "line": "push    ebx; int",
+    "line": "push    ebx; offsetBytes",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76910A",
-    "line": "push    ecx; int",
+    "line": "push    ecx; buffer",
     "mnemonic": "push",
     "size": 1
   },
@@ -469,13 +463,13 @@
   },
   {
     "ea": "0x76910F",
-    "line": "mov     ecx, [ecx+8B0h]",
+    "line": "mov     ecx, [ecx+8B0h]; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x769115",
-    "line": "call    sub_776C90",
+    "line": "call    NiDX9VertexBufferManager_LockToStaging; MoonSugarEffect decode: VB lock helper. Locks D3D VB, caches original bytes in a staging buffer, and returns a writable pointer; unlock is handled by packers when they own the lock.",
     "mnemonic": "call",
     "size": 5
   },
@@ -751,7 +745,7 @@
   },
   {
     "ea": "0x769188",
-    "line": "call    sub_7774C0",
+    "line": "call    sub_7774C0; MoonSugarEffect decode: fallback skinned vertex packer. Uses skin partition remap/weights/bone data, refreshes VB chips if stale/too small, writes packed partition vertices, and unlocks owned VB.",
     "mnemonic": "call",
     "size": 5
   },
@@ -787,7 +781,7 @@
   },
   {
     "ea": "0x76919A",
-    "line": "call    sub_776E90",
+    "line": "call    sub_776E90; MoonSugarEffect decode: fallback FVF/one-stream non-skinned vertex packer. Position begins at stream offset 0, then optional normals/color/UVs. A pack-time wobble here would persist in the geometry VB until a later clean repack.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1009,7 +1003,7 @@
   },
   {
     "ea": "0x769206",
-    "line": "mov     [esp+30h+var_18], edx",
+    "line": "mov     [esp+30h+bufferBytes], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1033,25 +1027,25 @@
   },
   {
     "ea": "0x769212",
-    "line": "push    eax; Dst",
+    "line": "push    eax; usage",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x769213",
-    "line": "push    1; int",
+    "line": "push    1; pool",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x769215",
-    "line": "lea     eax, [esp+38h+var_18]",
+    "line": "lea     eax, [esp+38h+bufferBytes]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x769219",
-    "line": "push    eax; int",
+    "line": "push    eax; bufferBytes",
     "mnemonic": "push",
     "size": 1
   },
@@ -1063,13 +1057,13 @@
   },
   {
     "ea": "0x76921D",
-    "line": "push    edx; int",
+    "line": "push    edx; existing",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76921E",
-    "line": "push    ecx; int",
+    "line": "push    ecx; capacityIndices",
     "mnemonic": "push",
     "size": 1
   },
@@ -1081,31 +1075,31 @@
   },
   {
     "ea": "0x769223",
-    "line": "mov     ecx, [ecx+8B4h]",
+    "line": "mov     ecx, [ecx+8B4h]; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x769229",
-    "line": "push    ebx; Src",
+    "line": "push    ebx; indexCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76922A",
-    "line": "push    eax; int",
+    "line": "push    eax; indices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76922B",
-    "line": "call    sub_7781F0",
+    "line": "call    NiDX9IndexBufferManager_PackBuffer; Pass226: Index-buffer rebuild/upload helper used when NiScreenTexture mask bit 0x08 is active.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x769230",
-    "line": "mov     edx, [esp+30h+var_18]",
+    "line": "mov     edx, [esp+30h+bufferBytes]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1189,7 +1183,7 @@
   },
   {
     "ea": "0x769262",
-    "line": "call    sub_776D80",
+    "line": "call    sub_776D80; MoonSugarEffect decode: vertex-buffer-manager unlock/staging helper. Copies the staging buffer back to the locked D3D buffer, clears lock bookkeeping, leaves the critical section, then calls the vertex buffer Unlock vtable slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1207,7 +1201,7 @@
   },
   {
     "ea": "0x76926F",
-    "line": "cmp     [esp+30h+var_14], 0",
+    "line": "cmp     [esp+30h+position], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1363,7 +1357,7 @@
   },
   {
     "ea": "0x7692BA",
-    "line": "call    NiDX9Renderer__PackSkinnedGeometryBuffer",
+    "line": "call    NiDX9Renderer__PackSkinnedGeometryBuffer; MoonSugarEffect decode: NiDX9Renderer::PackSkinnedGeometryBuffer. Same ownership as non-skinned packer but uses skin partition data for vertex/index counts, stream repacking, and optional software-VP index-buffer usage.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1429,7 +1423,7 @@
   },
   {
     "ea": "0x7692D2",
-    "line": "call    NiDX9Renderer__PackGeometryBuffers",
+    "line": "call    NiDX9Renderer__PackGeometryBuffers; MoonSugarEffect decode: NiDX9Renderer::PackGeometryBuffers for non-skinned geometry. Validates/reuses BuffData when streams are live and not force-dirty; otherwise resizes streams, repacks vertices via NiD3DShaderDeclaration +0x6C or default packer, rebuilds IB through 0x7781F0, and clears low dirty flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1474,12 +1468,6 @@
     "line": "jmp     short loc_76926F",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x7692EA",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
   },
   {
     "ea": "0x7692F0",
@@ -1579,7 +1567,7 @@
   },
   {
     "ea": "0x76931C",
-    "line": "call    sub_765370",
+    "line": "call    sub_765370;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1591,7 +1579,7 @@
   },
   {
     "ea": "0x769322",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1657,7 +1645,7 @@
   },
   {
     "ea": "0x76933B",
-    "line": "jmp     sub_764040",
+    "line": "jmp     NiDX9Renderer_LeavePrecacheAndRenderer",
     "mnemonic": "jmp",
     "size": 5
   }

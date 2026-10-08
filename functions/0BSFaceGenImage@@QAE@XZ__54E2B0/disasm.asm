@@ -15,7 +15,7 @@
 0x54E2D5: mov     esi, ecx
 0x54E2D7: mov     [esp+24h+var_10], esi
 0x54E2DB: xor     ebx, ebx
-0x54E2DD: push    offset NiRefObject_objcount; lpAddend
+0x54E2DD: push    0B3FD64h; lpAddend
 0x54E2E2: mov     dword ptr [esi], offset ??_7NiRefObject@@6B@; const NiRefObject::`vftable'
 0x54E2E8: mov     [esi+4], ebx
 0x54E2EB: call    dword ptr ds:0A28078h
@@ -75,3 +75,18 @@
 0x54E37F: pop     ebx
 0x54E380: add     esp, 10h
 0x54E383: retn    4
+0x9BBA80: mov     ecx, [ebp-10h]
+0x9BBA83: jmp     NiRefObject_destr
+0x9BBA88: mov     ecx, [ebp-10h]
+0x9BBA8B: add     ecx, 8; slot
+0x9BBA8E: jmp     NiPointerSlot_Release
+0x9BBA93: mov     ecx, [ebp-10h]
+0x9BBA96: add     ecx, 0Ch; this
+0x9BBA99: jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.
+0x9BBA9E: mov     edx, [esp+arg_4]
+0x9BBAA2: lea     eax, [edx-14h]
+0x9BBAA5: mov     ecx, [edx-18h]
+0x9BBAA8: xor     ecx, eax
+0x9BBAAA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BBAAF: mov     eax, offset stru_AE57E8
+0x9BBAB4: jmp     ___CxxFrameHandler3

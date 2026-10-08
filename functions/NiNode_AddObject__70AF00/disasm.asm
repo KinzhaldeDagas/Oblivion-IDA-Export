@@ -1,4 +1,4 @@
-0x70AF00: push    0FFFFFFFFh
+0x70AF00: push    0FFFFFFFFh; Adds child to this NiNode after reference protection and reparent/detach. firstAvailableSlot selects hole reuse versus append/grow behavior.
 0x70AF02: push    offset SEH_70AF00
 0x70AF07: mov     eax, large fs:0
 0x70AF0D: push    eax
@@ -12,26 +12,26 @@
 0x70AF1A: lea     eax, [esp+20h+var_C]
 0x70AF1E: mov     large fs:0, eax
 0x70AF24: mov     ebx, ecx
-0x70AF26: mov     esi, [esp+20h+arg_0]
+0x70AF26: mov     esi, [esp+20h+child]
 0x70AF2A: test    esi, esi
 0x70AF2C: jz      loc_70AFDB
 0x70AF32: mov     ebp, ds:0A28078h
 0x70AF38: lea     edi, [esi+4]
 0x70AF3B: push    edi; lpAddend
 0x70AF3C: call    ebp ; InterlockedIncrement
-0x70AF3E: push    ebx
-0x70AF3F: mov     ecx, esi
-0x70AF41: call    sub_7074B0
-0x70AF46: cmp     byte ptr [esp+20h+arg_4], 0
+0x70AF3E: push    ebx; newParent
+0x70AF3F: mov     ecx, esi; this
+0x70AF41: call    NiAVObject_SetParentAndDetachFromOld; MEF PERF 2026-10-08: PERF-16 mutation boundary: SetParentAndDetachFromOld executes BEFORE AddFirstEmpty70AF67, and may alter the relevant array (especially same-parent reattach). A pre-detach density check or blanket firstAvailableSlot=false substitution is not equivalent. Preserve AddObject temporary child references and old-parent callbacks.
+0x70AF46: cmp     [esp+20h+firstAvailableSlot], 0
 0x70AF4B: push    edi; lpAddend
-0x70AF4C: mov     [esp+24h+arg_4], esi
+0x70AF4C: mov     dword ptr [esp+24h+firstAvailableSlot], esi
 0x70AF50: jz      short loc_70AF6E
 0x70AF52: call    ebp ; InterlockedIncrement
-0x70AF54: lea     eax, [esp+20h+arg_4]
-0x70AF58: push    eax
-0x70AF59: lea     ecx, [ebx+0ACh]
+0x70AF54: lea     eax, [esp+20h+firstAvailableSlot]
+0x70AF58: push    eax; element
+0x70AF59: lea     ecx, [ebx+0ACh]; self
 0x70AF5F: mov     [esp+24h+var_4], 0
-0x70AF67: call    NiTArray_AddItem
+0x70AF67: call    NiTObjectArray_AddFirstEmpty; MEF PERF 2026-10-08: PERF-16 concrete child-array route: nonzero firstAvailableSlot passes parent+AC array to4B3680; zero flag uses native append path70AF70..A6. Optimization belongs at actual hole-search decision with current metadata; it must not skip parent detachment.
 0x70AF6C: jmp     short loc_70AFAB
 0x70AF6E: call    ebp ; InterlockedIncrement
 0x70AF70: movzx   ebp, word ptr [ebx+0B6h]
@@ -42,14 +42,14 @@
 0x70AF8E: jb      short loc_70AF9E
 0x70AF90: movzx   edx, word ptr [ebx+0Eh]
 0x70AF94: add     edx, ebp
-0x70AF96: push    edx
-0x70AF97: mov     ecx, ebx
-0x70AF99: call    sub_523B10
-0x70AF9E: lea     eax, [esp+20h+arg_4]
-0x70AFA2: push    eax
-0x70AFA3: push    ebp
-0x70AFA4: mov     ecx, ebx
-0x70AFA6: call    sub_4B34E0
+0x70AF96: push    edx; capacity
+0x70AF97: mov     ecx, ebx; self
+0x70AF99: call    NiTObjectArray_Resize16
+0x70AF9E: lea     eax, [esp+20h+firstAvailableSlot]
+0x70AFA2: push    eax; element
+0x70AFA3: push    ebp; index
+0x70AFA4: mov     ecx, ebx; self
+0x70AFA6: call    NiTObjectArray_SetAt
 0x70AFAB: mov     ebx, ds:0A2807Ch
 0x70AFB1: push    edi; lpAddend
 0x70AFB2: mov     [esp+24h+var_4], 0FFFFFFFFh
@@ -79,3 +79,14 @@
 0x70AFEA: pop     ebx
 0x70AFEB: add     esp, 0Ch
 0x70AFEE: retn    8
+0x9C9930: lea     ecx, [ebp+8]; slot
+0x9C9933: jmp     NiPointerSlot_Release
+0x9C9938: lea     ecx, [ebp+8]; slot
+0x9C993B: jmp     NiPointerSlot_Release
+0x9C9940: mov     edx, dword ptr [esp+firstAvailableSlot]
+0x9C9944: lea     eax, [edx-10h]
+0x9C9947: mov     ecx, [edx-14h]
+0x9C994A: xor     ecx, eax
+0x9C994C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C9951: mov     eax, offset stru_AF21A4
+0x9C9956: jmp     ___CxxFrameHandler3

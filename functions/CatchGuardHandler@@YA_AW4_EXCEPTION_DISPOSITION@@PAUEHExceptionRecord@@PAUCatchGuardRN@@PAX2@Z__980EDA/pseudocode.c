@@ -1,6 +1,6 @@
 int __cdecl CatchGuardHandler(struct EHExceptionRecord *a1, struct CatchGuardRN *a2, void *a3)
 {
-  return __InternalCxxFrameHandler(
+  return __InternalCxxFrameHandler( /*0x980f08*/
            (int)a1,
            *((_DWORD *)a2 + 4),
            (int)a3,

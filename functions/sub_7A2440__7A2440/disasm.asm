@@ -1,4 +1,4 @@
-0x7A2440: push    ecx
+0x7A2440: push    ecx; CTreeEngine::ComputeLod-style helper. Computes LOD from global camera position against tree position and near/far LOD limits at +0x44/+0x40, clamps to [0,1], stores at +0x14.
 0x7A2441: fld     dword ptr [ecx+8]
 0x7A2444: fsub    dword ptr ds:0B429B0h
 0x7A244A: fld     dword ptr [ecx+4]

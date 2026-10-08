@@ -27,14 +27,14 @@
 0x51C5D6: lea     ebx, [esi+2Ch]
 0x51C5D9: mov     ecx, ebx
 0x51C5DB: call    TESTexture_constr
-0x51C5E0: mov     ecx, esi
+0x51C5E0: mov     ecx, esi; this
 0x51C5E2: mov     byte ptr [esp+20h+var_4], 2
 0x51C5E7: mov     dword ptr [esi], offset ??_7TESClass@@6BTESClass@@@; const TESClass::`vftable'{for `TESClass'}
 0x51C5ED: mov     dword ptr [esi+18h], offset ??_7TESClass@@6BTESFullName@@@; const TESClass::`vftable'{for `TESFullName'}
 0x51C5F4: mov     dword ptr [edi], offset ??_7TESClass@@6BTESDescription@@@; const TESClass::`vftable'{for `TESDescription'}
 0x51C5FA: mov     dword ptr [ebx], offset ??_7TESClass@@6BTESTexture@@@; const TESClass::`vftable'{for `TESTexture'}
 0x51C600: mov     byte ptr [esi+4], 5
-0x51C604: call    sub_51C1B0
+0x51C604: call    TESClass_InitializeData; Initialize the fixed 0x34-byte CLAS DATA payload. Defaults: favored attributes Strength and Intelligence; specialization Combat (zeroed); majors Armorer, Athletics, Blade, Block, Blunt, HandToHand, and HeavyArmor. There is no minorSkills field.
 0x51C609: mov     eax, esi
 0x51C60B: mov     ecx, [esp+20h+var_C]
 0x51C60F: mov     large fs:0, ecx
@@ -44,3 +44,18 @@
 0x51C619: pop     ebx
 0x51C61A: add     esp, 10h
 0x51C61D: retn
+0x9B7790: mov     ecx, [ebp-10h]; this
+0x9B7793: jmp     TESForm_destr
+0x9B7798: mov     ecx, [ebp-10h]
+0x9B779B: add     ecx, 18h
+0x9B779E: jmp     TESFullName_Initialize
+0x9B77A3: mov     ecx, [ebp-10h]
+0x9B77A6: add     ecx, 2Ch ; ','; void *
+0x9B77A9: jmp     TESTexture_destr
+0x9B77AE: mov     edx, [esp+arg_4]
+0x9B77B2: lea     eax, [edx-10h]
+0x9B77B5: mov     ecx, [edx-14h]
+0x9B77B8: xor     ecx, eax
+0x9B77BA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B77BF: mov     eax, offset stru_AE2254
+0x9B77C4: jmp     ___CxxFrameHandler3

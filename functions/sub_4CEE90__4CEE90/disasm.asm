@@ -5,7 +5,7 @@
 0x4CEE96: mov     ebp, ecx
 0x4CEE98: push    edi
 0x4CEE99: push    ebp; a2
-0x4CEE9A: mov     ecx, offset stru_B35C80; this
+0x4CEE9A: mov     ecx, offset unk_B35C80; this
 0x4CEE9F: call    sub_496EA0
 0x4CEEA4: mov     ebx, [esp+34h+arg_0]
 0x4CEEA8: xor     esi, esi
@@ -72,23 +72,23 @@
 0x4CEF6D: cmp     [esp+34h+var_21], 0
 0x4CEF72: jnz     loc_4CF011
 0x4CEF78: mov     ecx, esi; this
-0x4CEF7A: call    GetTeleportExtraData
+0x4CEF7A: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x4CEF7F: mov     edi, eax
 0x4CEF81: test    edi, edi
 0x4CEF83: jz      loc_4CF00D
-0x4CEF89: mov     ecx, edi
-0x4CEF8B: call    sub_42B410
+0x4CEF89: mov     ecx, edi; this
+0x4CEF8B: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x4CEF90: test    eax, eax
 0x4CEF92: jz      short loc_4CF00D
-0x4CEF94: mov     ecx, edi
-0x4CEF96: call    sub_42B410
+0x4CEF94: mov     ecx, edi; this
+0x4CEF96: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x4CEF9B: mov     ecx, eax; this
-0x4CEF9D: call    GetTeleportExtraData
+0x4CEF9D: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x4CEFA2: mov     edi, eax
 0x4CEFA4: test    edi, edi
 0x4CEFA6: jz      short loc_4CF00D
 0x4CEFA8: mov     ecx, edi
-0x4CEFAA: call    sub_6899C0
+0x4CEFAA: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x4CEFAF: test    byte ptr [ebp+24h], 1
 0x4CEFB3: mov     ecx, [eax]
 0x4CEFB5: mov     edx, [eax+4]
@@ -158,7 +158,7 @@
 0x4CF077: mov     [esp+34h+var_20], eax
 0x4CF07B: jnz     loc_4CEED0
 0x4CF081: push    ebp; a2
-0x4CF082: mov     ecx, offset stru_B35C80; this
+0x4CF082: mov     ecx, offset unk_B35C80; this
 0x4CF087: call    sub_496F50
 0x4CF08C: test    esi, esi
 0x4CF08E: jnz     short loc_4CF0AF

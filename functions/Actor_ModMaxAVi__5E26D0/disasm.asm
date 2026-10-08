@@ -15,7 +15,7 @@
 0x5E26FA: fstp    [esp+8+arg_4]
 0x5E26FE: fld     [esp+8+arg_4]
 0x5E2702: fld     st
-0x5E2704: call    Double_To_SInt32
+0x5E2704: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5E2709: mov     [esp+8+arg_4], eax
 0x5E270D: fild    [esp+8+arg_4]
 0x5E2711: fstp    [esp+8+arg_4]
@@ -31,7 +31,7 @@
 0x5E2732: fstp    [esp+8+arg_4]
 0x5E2736: push    edi
 0x5E2737: fld     [esp+0Ch+arg_4]
-0x5E273B: call    Double_To_SInt32
+0x5E273B: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5E2740: mov     edi, [esi+58h]
 0x5E2743: test    edi, edi
 0x5E2745: mov     [esp+0Ch+arg_4], eax

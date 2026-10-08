@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x78FC20",
-    "line": "push    ebx",
+    "line": "push    ebx; Rotates the 4-byte CBranch-pointer range [first,last) around middle using gcd-cycle moves. Oblivion's fuzzy-volume insertion-sort helper uses it to move an insertion range without allocating.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78FC21",
-    "line": "mov     ebx, [esp+4+arg_0]",
+    "line": "mov     ebx, [esp+4+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x78FC26",
-    "line": "mov     ebp, [esp+8+arg_8]",
+    "line": "mov     ebp, [esp+8+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x78FC2B",
-    "line": "mov     esi, [esp+0Ch+arg_4]",
+    "line": "mov     esi, [esp+0Ch+middle]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x78FC69",
-    "line": "mov     [esp+10h+arg_4], ecx",
+    "line": "mov     [esp+10h+middle], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x78FC6F",
-    "line": "mov     edx, [esp+10h+arg_0]",
+    "line": "mov     edx, [esp+10h+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x78FC97",
-    "line": "mov     ecx, [esp+10h+arg_0]",
+    "line": "mov     ecx, [esp+10h+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x78FCA2",
-    "line": "mov     edx, [esp+10h+arg_4]",
+    "line": "mov     edx, [esp+10h+middle]",
     "mnemonic": "mov",
     "size": 4
   },

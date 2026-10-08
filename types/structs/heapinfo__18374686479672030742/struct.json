@@ -1,28 +1,54 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_heapinfo",
+  "definition": "struct __declspec(align(8)) _heapinfo\n{\nint *_pentry;\nsize_t _size;\nint _useflag;\n}\n",
   "id": 18374686479672030742,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "_pentry",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "int *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "_size",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 8
+      "size": 8,
+      "type": "size_t"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "_useflag",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "int"
     }
   ],
   "name": "_heapinfo",
+  "ordinal": 2486,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 24
 }

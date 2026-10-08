@@ -1,4 +1,4 @@
-0x608B30: mov     eax, [ecx+364h]
+0x608B30: mov     eax, [ecx+364h]; Character proxy collision-filter helper used by native movement ground probes. Returns high-word collision filter/layer from charProxy+0x364 path; ground probe builds FilterInfo=(return<<16)|0x1B.
 0x608B36: test    eax, eax
 0x608B38: jz      short loc_608B53
 0x608B3A: mov     eax, [eax+8]

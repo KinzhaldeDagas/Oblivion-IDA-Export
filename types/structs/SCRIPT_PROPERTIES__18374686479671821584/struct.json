@@ -1,100 +1,162 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "SCRIPT_PROPERTIES",
+  "definition": "struct SCRIPT_PROPERTIES\n{\nunsigned __int32 langid : 16;\nunsigned __int32 fNumeric : 1;\nunsigned __int32 fComplex : 1;\nunsigned __int32 fNeedsWordBreaking : 1;\nunsigned __int32 fNeedsCaretInfo : 1;\nunsigned __int32 bCharSet : 8;\nunsigned __int32 fControl : 1;\nunsigned __int32 fPrivateUseArea : 1;\nunsigned __int32 fNeedsCharacterJustify : 1;\nunsigned __int32 fInvalidGlyph : 1;\nunsigned __int32 fInvalidLogAttr : 1;\nunsigned __int32 fCDM : 1;\nunsigned __int32 fAmbiguousCharSet : 1;\nunsigned __int32 fClusterSizeVaries : 1;\nunsigned __int32 fRejectInvalid : 1;\n}\n",
   "id": 18374686479671821584,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "langid",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 2
+      "size": 2,
+      "type": "unsigned __int32 : 16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fNumeric",
       "offset": 2,
       "offset_hex": "0x2",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int32 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fComplex",
-      "offset": 2,
+      "offset": 2.125,
       "offset_hex": "0x2",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int32 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fNeedsWordBreaking",
-      "offset": 2,
+      "offset": 2.25,
       "offset_hex": "0x2",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int32 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fNeedsCaretInfo",
-      "offset": 2,
+      "offset": 2.375,
       "offset_hex": "0x2",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int32 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bCharSet",
-      "offset": 2,
+      "offset": 2.5,
       "offset_hex": "0x2",
-      "size": 1
+      "size": 1,
+      "type": "unsigned __int32 : 8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fControl",
-      "offset": 3,
+      "offset": 3.5,
       "offset_hex": "0x3",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int32 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fPrivateUseArea",
-      "offset": 3,
+      "offset": 3.625,
       "offset_hex": "0x3",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int32 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fNeedsCharacterJustify",
-      "offset": 3,
+      "offset": 3.75,
       "offset_hex": "0x3",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int32 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fInvalidGlyph",
-      "offset": 3,
+      "offset": 3.875,
       "offset_hex": "0x3",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int32 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fInvalidLogAttr",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int32 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fCDM",
-      "offset": 4,
+      "offset": 4.125,
       "offset_hex": "0x4",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int32 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fAmbiguousCharSet",
-      "offset": 4,
+      "offset": 4.25,
       "offset_hex": "0x4",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int32 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fClusterSizeVaries",
-      "offset": 4,
+      "offset": 4.375,
       "offset_hex": "0x4",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int32 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fRejectInvalid",
-      "offset": 4,
+      "offset": 4.5,
       "offset_hex": "0x4",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int32 : 1"
     }
   ],
   "name": "SCRIPT_PROPERTIES",
+  "ordinal": 1726,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 8
 }

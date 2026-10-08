@@ -11,28 +11,28 @@ bool __cdecl sub_504BB0(
   double *v8; // ebx
   bool result; // al
   void *v10; // eax
-  unsigned int v11; // [esp-Ch] [ebp-1Ch]
+  double *v11; // [esp-Ch] [ebp-1Ch]
   int v12; // [esp+8h] [ebp-8h] BYREF
   int v13; // [esp+Ch] [ebp-4h] BYREF
 
-  v8 = a7;
-  *a7 = 0.0;
-  a7 = 0;
-  v12 = 0;
-  v13 = 0;
-  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, &a7, &v12, &v13);
-  if ( result )
+  v8 = a7; /*0x504bb6*/
+  *a7 = 0.0; /*0x504bba*/
+  a7 = 0; /*0x504bef*/
+  v12 = 0; /*0x504bf7*/
+  v13 = 0; /*0x504bff*/
+  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, &a7, &v12, &v13); /*0x504c07*/
+  if ( result ) /*0x504c11*/
   {
-    v11 = (unsigned int)a7;
-    v10 = OblivionDynamicCast(
+    v11 = a7; /*0x504c21*/
+    v10 = OblivionDynamicCast( /*0x504c31*/
             a4,
             0,
             (struct _s_RTTICompleteObjectLocator *)&TESObjectREFR `RTTI Type Descriptor',
             &Actor `RTTI Type Descriptor',
             0);
-    if ( sub_675C40(&ActorProcessManager_ptr, v13, v12, (int)v10, v11, 0, 0xFFFFFFFF) )
-      *v8 = 1.0;
-    return 1;
+    if ( sub_675C40(&qword_B3BB2C[0x75], v13, v12, (int)v10, (unsigned int)v11, 0, 0xFFFFFFFF) ) /*0x504c49*/
+      *v8 = 1.0; /*0x504c54*/
+    return 1; /*0x504c57*/
   }
-  return result;
+  return result; /*0x504c13*/
 }

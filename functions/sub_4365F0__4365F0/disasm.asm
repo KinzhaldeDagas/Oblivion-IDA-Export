@@ -3,7 +3,7 @@
 0x4365F2: push    esi
 0x4365F3: push    edi
 0x4365F4: mov     edi, ds:InterlockedIncrement
-0x4365FA: push    offset dword_B33A14; lpAddend
+0x4365FA: push    offset unk_B33A14; lpAddend
 0x4365FF: mov     esi, ecx
 0x436601: call    edi ; InterlockedIncrement
 0x436603: mov     edx, [esi+14h]
@@ -11,7 +11,7 @@
 0x436609: mov     eax, [esi+10h]
 0x43660C: mov     cl, 10h
 0x43660E: call    __allshr
-0x436613: push    offset dword_B33A18; lpAddend
+0x436613: push    offset unk_B33A18; lpAddend
 0x436618: mov     bl, al
 0x43661A: call    edi ; InterlockedIncrement
 0x43661C: xor     ecx, ecx

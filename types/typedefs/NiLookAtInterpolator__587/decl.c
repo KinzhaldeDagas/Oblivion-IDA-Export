@@ -1,1 +1,1 @@
-NiLookAtInterpolator
+struct NiLookAtInterpolator;

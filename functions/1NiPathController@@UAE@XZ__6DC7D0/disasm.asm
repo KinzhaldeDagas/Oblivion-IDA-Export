@@ -50,7 +50,7 @@
 0x6DC853: mov     dword ptr [esi+4Ch], 0
 0x6DC85A: mov     eax, [esi+50h]
 0x6DC85D: push    eax
-0x6DC85E: call    FormHeapFree
+0x6DC85E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6DC863: mov     edi, [esi+4Ch]
 0x6DC866: add     esp, 4
 0x6DC869: test    edi, edi
@@ -95,3 +95,18 @@
 0x6DC8CB: pop     ebp
 0x6DC8CC: add     esp, 10h
 0x6DC8CF: retn
+0x9C7E10: mov     ecx, [ebp-10h]; this
+0x9C7E13: jmp     ??1NiPSysResetOnLoopCtlr@@UAE@XZ; NiPSysResetOnLoopCtlr::~NiPSysResetOnLoopCtlr(void)
+0x9C7E18: mov     ecx, [ebp-10h]
+0x9C7E1B: add     ecx, 48h ; 'H'; slot
+0x9C7E1E: jmp     NiPointerSlot_Release
+0x9C7E23: mov     ecx, [ebp-10h]
+0x9C7E26: add     ecx, 4Ch ; 'L'; slot
+0x9C7E29: jmp     NiPointerSlot_Release
+0x9C7E2E: mov     edx, [esp+arg_4]
+0x9C7E32: lea     eax, [edx-10h]
+0x9C7E35: mov     ecx, [edx-14h]
+0x9C7E38: xor     ecx, eax
+0x9C7E3A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C7E3F: mov     eax, offset stru_AF0178
+0x9C7E44: jmp     ___CxxFrameHandler3

@@ -44,8 +44,8 @@
 0x4D3341: mov     edi, eax
 0x4D3343: cmp     edi, ebx
 0x4D3345: jz      short loc_4D3358
-0x4D3347: mov     ecx, edi
-0x4D3349: call    sub_4A6380
+0x4D3347: mov     ecx, edi; self
+0x4D3349: call    TESRegionList_Clear; Verified: frees all BSSimpleList nodes and, only when ownsRegionMemory is set, destroys each TESRegion object.
 0x4D334E: mov     edx, [edi]
 0x4D3350: mov     eax, [edx]
 0x4D3352: push    1
@@ -78,7 +78,7 @@
 0x4D33AB: call    ExtraDataList_RemoveAllNonpersistentCellData
 0x4D33B0: mov     eax, [esi+3Ch]
 0x4D33B3: push    eax
-0x4D33B4: call    FormHeapFree
+0x4D33B4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4D33B9: mov     [esi+3Ch], ebx
 0x4D33BC: mov     ecx, ds:0B35C08h; this
 0x4D33C2: add     esp, 4
@@ -113,7 +113,7 @@
 0x4D3416: call    BaseExtraList_destr
 0x4D341B: mov     eax, [esi+1Ch]
 0x4D341E: push    eax
-0x4D341F: call    FormHeapFree
+0x4D341F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4D3424: add     esp, 4
 0x4D3427: mov     ecx, esi; this
 0x4D3429: mov     [esi+1Ch], ebx
@@ -130,3 +130,27 @@
 0x4D3450: pop     ebx
 0x4D3451: add     esp, 14h
 0x4D3454: retn
+0x9B5630: mov     ecx, [ebp-10h]; this
+0x9B5633: jmp     TESForm_destr
+0x9B5638: cmp     dword ptr [ebp-10h], 0
+0x9B563C: jz      loc_9B5650
+0x9B5642: mov     eax, [ebp-10h]
+0x9B5645: add     eax, 18h
+0x9B5648: mov     [ebp-14h], eax
+0x9B564B: jmp     loc_9B5657
+0x9B5650: mov     dword ptr [ebp-14h], 0
+0x9B5657: mov     ecx, [ebp-14h]
+0x9B565A: jmp     TESFullName_Initialize
+0x9B565F: mov     ecx, [ebp-10h]
+0x9B5662: add     ecx, 28h ; '('
+0x9B5665: jmp     BaseExtraList_destr
+0x9B566A: mov     ecx, [ebp-10h]
+0x9B566D: add     ecx, 54h ; 'T'; slot
+0x9B5670: jmp     NiPointerSlot_Release
+0x9B5675: mov     edx, [esp+arg_4]
+0x9B5679: lea     eax, [edx-18h]
+0x9B567C: mov     ecx, [edx-1Ch]
+0x9B567F: xor     ecx, eax
+0x9B5681: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B5686: mov     eax, offset stru_AE0710
+0x9B568B: jmp     ___CxxFrameHandler3

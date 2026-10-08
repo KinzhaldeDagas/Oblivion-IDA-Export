@@ -35,14 +35,14 @@
 0x8565A2: push    ecx
 0x8565A3: mov     ecx, [esp+18h+arg_4]
 0x8565A7: push    edx
-0x8565A8: mov     edx, [esp+1Ch+arg_0]
+0x8565A8: mov     edx, [esp+1Ch+vtable]
 0x8565AC: push    ecx
-0x8565AD: push    3
-0x8565AF: push    1
-0x8565B1: push    60h ; '`'
-0x8565B3: push    edx
-0x8565B4: push    eax
-0x8565B5: call    sub_7E2370
+0x8565AD: push    3; lightCount
+0x8565AF: push    1; byte6
+0x8565B1: push    60h ; '`'; selector
+0x8565B3: push    edx; geometry
+0x8565B4: push    eax; outPass
+0x8565B5: call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.
 0x8565BA: add     esp, 20h
 0x8565BD: jmp     loc_856802
 0x8565C2: cmp     byte ptr [esp+14h+arg_14], 1
@@ -59,14 +59,14 @@
 0x8565F3: push    ecx
 0x8565F4: mov     ecx, [esp+18h+arg_4]
 0x8565F8: push    edx
-0x8565F9: mov     edx, [esp+1Ch+arg_0]
+0x8565F9: mov     edx, [esp+1Ch+vtable]
 0x8565FD: push    ecx
-0x8565FE: push    3
-0x856600: push    1
-0x856602: push    6Ah ; 'j'
-0x856604: push    edx
-0x856605: push    eax
-0x856606: call    sub_7E2370
+0x8565FE: push    3; lightCount
+0x856600: push    1; byte6
+0x856602: push    6Ah ; 'j'; selector
+0x856604: push    edx; geometry
+0x856605: push    eax; outPass
+0x856606: call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.
 0x85660B: add     esp, 20h
 0x85660E: jmp     loc_856802
 0x856613: cmp     [esp+14h+arg_34], 0
@@ -85,14 +85,14 @@
 0x85664B: push    ecx
 0x85664C: mov     ecx, [esp+18h+arg_4]
 0x856650: push    edx
-0x856651: mov     edx, [esp+1Ch+arg_0]
+0x856651: mov     edx, [esp+1Ch+vtable]
 0x856655: push    ecx
-0x856656: push    3
-0x856658: push    1
-0x85665A: push    6Bh ; 'k'
-0x85665C: push    edx
-0x85665D: push    eax
-0x85665E: call    sub_7E2370
+0x856656: push    3; lightCount
+0x856658: push    1; byte6
+0x85665A: push    6Bh ; 'k'; selector
+0x85665C: push    edx; geometry
+0x85665D: push    eax; outPass
+0x85665E: call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.
 0x856663: add     esp, 20h
 0x856666: jmp     loc_856802
 0x85666B: cmp     byte ptr [esp+14h+arg_14], 1
@@ -109,14 +109,14 @@
 0x85669C: push    ecx
 0x85669D: mov     ecx, [esp+18h+arg_4]
 0x8566A1: push    edx
-0x8566A2: mov     edx, [esp+1Ch+arg_0]
+0x8566A2: mov     edx, [esp+1Ch+vtable]
 0x8566A6: push    ecx
-0x8566A7: push    3
-0x8566A9: push    1
-0x8566AB: push    75h ; 'u'
-0x8566AD: push    edx
-0x8566AE: push    eax
-0x8566AF: call    sub_7E2370
+0x8566A7: push    3; lightCount
+0x8566A9: push    1; byte6
+0x8566AB: push    75h ; 'u'; selector
+0x8566AD: push    edx; geometry
+0x8566AE: push    eax; outPass
+0x8566AF: call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.
 0x8566B4: add     esp, 20h
 0x8566B7: jmp     loc_856802
 0x8566BC: cmp     [esp+14h+arg_2C], 0
@@ -135,14 +135,14 @@
 0x8566F4: push    ecx
 0x8566F5: mov     ecx, [esp+18h+arg_4]
 0x8566F9: push    edx
-0x8566FA: mov     edx, [esp+1Ch+arg_0]
+0x8566FA: mov     edx, [esp+1Ch+vtable]
 0x8566FE: push    ecx
-0x8566FF: push    3
-0x856701: push    1
-0x856703: push    62h ; 'b'
-0x856705: push    edx
-0x856706: push    eax
-0x856707: call    sub_7E2370
+0x8566FF: push    3; lightCount
+0x856701: push    1; byte6
+0x856703: push    62h ; 'b'; selector
+0x856705: push    edx; geometry
+0x856706: push    eax; outPass
+0x856707: call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.
 0x85670C: add     esp, 20h
 0x85670F: jmp     loc_856802
 0x856714: cmp     byte ptr [esp+14h+arg_14], 1
@@ -159,14 +159,14 @@
 0x856745: push    ecx
 0x856746: mov     ecx, [esp+18h+arg_4]
 0x85674A: push    edx
-0x85674B: mov     edx, [esp+1Ch+arg_0]
+0x85674B: mov     edx, [esp+1Ch+vtable]
 0x85674F: push    ecx
-0x856750: push    3
-0x856752: push    1
-0x856754: push    6Dh ; 'm'
-0x856756: push    edx
-0x856757: push    eax
-0x856758: call    sub_7E2370
+0x856750: push    3; lightCount
+0x856752: push    1; byte6
+0x856754: push    6Dh ; 'm'; selector
+0x856756: push    edx; geometry
+0x856757: push    eax; outPass
+0x856758: call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.
 0x85675D: add     esp, 20h
 0x856760: jmp     loc_856802
 0x856765: cmp     [esp+14h+arg_2C], 0
@@ -185,14 +185,14 @@
 0x856799: push    ecx
 0x85679A: mov     ecx, [esp+18h+arg_4]
 0x85679E: push    edx
-0x85679F: mov     edx, [esp+1Ch+arg_0]
+0x85679F: mov     edx, [esp+1Ch+vtable]
 0x8567A3: push    ecx
-0x8567A4: push    3
-0x8567A6: push    1
-0x8567A8: push    64h ; 'd'
-0x8567AA: push    edx
-0x8567AB: push    eax
-0x8567AC: call    sub_7E2370
+0x8567A4: push    3; lightCount
+0x8567A6: push    1; byte6
+0x8567A8: push    64h ; 'd'; selector
+0x8567AA: push    edx; geometry
+0x8567AB: push    eax; outPass
+0x8567AC: call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.
 0x8567B1: add     esp, 20h
 0x8567B4: jmp     short loc_856802
 0x8567B6: cmp     byte ptr [esp+14h+arg_14], 1
@@ -209,14 +209,14 @@
 0x8567E3: push    ecx
 0x8567E4: mov     ecx, [esp+18h+arg_4]
 0x8567E8: push    edx
-0x8567E9: mov     edx, [esp+1Ch+arg_0]
+0x8567E9: mov     edx, [esp+1Ch+vtable]
 0x8567ED: push    ecx
-0x8567EE: push    3
-0x8567F0: push    1
-0x8567F2: push    6Fh ; 'o'
-0x8567F4: push    edx
-0x8567F5: push    eax
-0x8567F6: call    sub_7E2370
+0x8567EE: push    3; lightCount
+0x8567F0: push    1; byte6
+0x8567F2: push    6Fh ; 'o'; selector
+0x8567F4: push    edx; geometry
+0x8567F5: push    eax; outPass
+0x8567F6: call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.
 0x8567FB: add     esp, 20h
 0x8567FE: jmp     short loc_856802
 0x856800: xor     eax, eax
@@ -225,7 +225,7 @@
 0x85680A: push    eax
 0x85680B: lea     ecx, [esi+28h]
 0x85680E: mov     [esp+18h+var_4], 0FFFFFFFFh
-0x856816: call    sub_5B1E20
+0x856816: call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.
 0x85681B: jmp     loc_856D3C
 0x856820: cmp     [esp+14h+arg_24], 0
 0x856825: jnz     loc_856984
@@ -247,14 +247,14 @@
 0x85686A: push    ecx
 0x85686B: mov     ecx, [esp+18h+arg_4]
 0x85686F: push    edx
-0x856870: mov     edx, [esp+1Ch+arg_0]
+0x856870: mov     edx, [esp+1Ch+vtable]
 0x856874: push    ecx
-0x856875: push    3
-0x856877: push    1
-0x856879: push    61h ; 'a'
-0x85687B: push    edx
-0x85687C: push    eax
-0x85687D: call    sub_7E2370
+0x856875: push    3; lightCount
+0x856877: push    1; byte6
+0x856879: push    61h ; 'a'; selector
+0x85687B: push    edx; geometry
+0x85687C: push    eax; outPass
+0x85687D: call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.
 0x856882: add     esp, 20h
 0x856885: jmp     loc_856802
 0x85688A: cmp     byte ptr [esp+14h+arg_14], 1
@@ -271,14 +271,14 @@
 0x8568BB: push    ecx
 0x8568BC: mov     ecx, [esp+18h+arg_4]
 0x8568C0: push    edx
-0x8568C1: mov     edx, [esp+1Ch+arg_0]
+0x8568C1: mov     edx, [esp+1Ch+vtable]
 0x8568C5: push    ecx
-0x8568C6: push    3
-0x8568C8: push    1
-0x8568CA: push    6Ch ; 'l'
-0x8568CC: push    edx
-0x8568CD: push    eax
-0x8568CE: call    sub_7E2370
+0x8568C6: push    3; lightCount
+0x8568C8: push    1; byte6
+0x8568CA: push    6Ch ; 'l'; selector
+0x8568CC: push    edx; geometry
+0x8568CD: push    eax; outPass
+0x8568CE: call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.
 0x8568D3: add     esp, 20h
 0x8568D6: jmp     loc_856802
 0x8568DB: cmp     [esp+14h+arg_2C], 0
@@ -297,14 +297,14 @@
 0x856913: push    ecx
 0x856914: mov     ecx, [esp+18h+arg_4]
 0x856918: push    edx
-0x856919: mov     edx, [esp+1Ch+arg_0]
+0x856919: mov     edx, [esp+1Ch+vtable]
 0x85691D: push    ecx
-0x85691E: push    3
-0x856920: push    1
-0x856922: push    63h ; 'c'
-0x856924: push    edx
-0x856925: push    eax
-0x856926: call    sub_7E2370
+0x85691E: push    3; lightCount
+0x856920: push    1; byte6
+0x856922: push    63h ; 'c'; selector
+0x856924: push    edx; geometry
+0x856925: push    eax; outPass
+0x856926: call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.
 0x85692B: add     esp, 20h
 0x85692E: jmp     loc_856802
 0x856933: cmp     byte ptr [esp+14h+arg_14], 1
@@ -321,14 +321,14 @@
 0x856964: push    ecx
 0x856965: mov     ecx, [esp+18h+arg_4]
 0x856969: push    edx
-0x85696A: mov     edx, [esp+1Ch+arg_0]
+0x85696A: mov     edx, [esp+1Ch+vtable]
 0x85696E: push    ecx
-0x85696F: push    3
-0x856971: push    1
-0x856973: push    6Eh ; 'n'
-0x856975: push    edx
-0x856976: push    eax
-0x856977: call    sub_7E2370
+0x85696F: push    3; lightCount
+0x856971: push    1; byte6
+0x856973: push    6Eh ; 'n'; selector
+0x856975: push    edx; geometry
+0x856976: push    eax; outPass
+0x856977: call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.
 0x85697C: add     esp, 20h
 0x85697F: jmp     loc_856802
 0x856984: mov     eax, ds:0B42E8Ch
@@ -359,14 +359,14 @@
 0x8569F6: push    ecx
 0x8569F7: mov     ecx, [esp+18h+arg_4]
 0x8569FB: push    edx
-0x8569FC: mov     edx, [esp+1Ch+arg_0]
+0x8569FC: mov     edx, [esp+1Ch+vtable]
 0x856A00: push    ecx
-0x856A01: push    3
-0x856A03: push    1
-0x856A05: push    65h ; 'e'
-0x856A07: push    edx
-0x856A08: push    eax
-0x856A09: call    sub_7E2370
+0x856A01: push    3; lightCount
+0x856A03: push    1; byte6
+0x856A05: push    65h ; 'e'; selector
+0x856A07: push    edx; geometry
+0x856A08: push    eax; outPass
+0x856A09: call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.
 0x856A0E: add     esp, 20h
 0x856A11: jmp     loc_856802
 0x856A16: cmp     byte ptr [esp+14h+arg_14], 1
@@ -383,14 +383,14 @@
 0x856A47: push    ecx
 0x856A48: mov     ecx, [esp+18h+arg_4]
 0x856A4C: push    edx
-0x856A4D: mov     edx, [esp+1Ch+arg_0]
+0x856A4D: mov     edx, [esp+1Ch+vtable]
 0x856A51: push    ecx
-0x856A52: push    3
-0x856A54: push    1
-0x856A56: push    70h ; 'p'
-0x856A58: push    edx
-0x856A59: push    eax
-0x856A5A: call    sub_7E2370
+0x856A52: push    3; lightCount
+0x856A54: push    1; byte6
+0x856A56: push    70h ; 'p'; selector
+0x856A58: push    edx; geometry
+0x856A59: push    eax; outPass
+0x856A5A: call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.
 0x856A5F: add     esp, 20h
 0x856A62: jmp     loc_856802
 0x856A67: cmp     [esp+14h+arg_2C], 0
@@ -409,14 +409,14 @@
 0x856A9F: push    ecx
 0x856AA0: mov     ecx, [esp+18h+arg_4]
 0x856AA4: push    edx
-0x856AA5: mov     edx, [esp+1Ch+arg_0]
+0x856AA5: mov     edx, [esp+1Ch+vtable]
 0x856AA9: push    ecx
-0x856AAA: push    3
-0x856AAC: push    1
-0x856AAE: push    66h ; 'f'
-0x856AB0: push    edx
-0x856AB1: push    eax
-0x856AB2: call    sub_7E2370
+0x856AAA: push    3; lightCount
+0x856AAC: push    1; byte6
+0x856AAE: push    66h ; 'f'; selector
+0x856AB0: push    edx; geometry
+0x856AB1: push    eax; outPass
+0x856AB2: call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.
 0x856AB7: add     esp, 20h
 0x856ABA: jmp     loc_856802
 0x856ABF: cmp     byte ptr [esp+14h+arg_14], 1
@@ -433,14 +433,14 @@
 0x856AF0: push    ecx
 0x856AF1: mov     ecx, [esp+18h+arg_4]
 0x856AF5: push    edx
-0x856AF6: mov     edx, [esp+1Ch+arg_0]
+0x856AF6: mov     edx, [esp+1Ch+vtable]
 0x856AFA: push    ecx
-0x856AFB: push    3
-0x856AFD: push    1
-0x856AFF: push    71h ; 'q'
-0x856B01: push    edx
-0x856B02: push    eax
-0x856B03: call    sub_7E2370
+0x856AFB: push    3; lightCount
+0x856AFD: push    1; byte6
+0x856AFF: push    71h ; 'q'; selector
+0x856B01: push    edx; geometry
+0x856B02: push    eax; outPass
+0x856B03: call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.
 0x856B08: add     esp, 20h
 0x856B0B: jmp     loc_856802
 0x856B10: cmp     [esp+14h+arg_2C], 0
@@ -459,14 +459,14 @@
 0x856B48: push    ecx
 0x856B49: mov     ecx, [esp+18h+arg_4]
 0x856B4D: push    edx
-0x856B4E: mov     edx, [esp+1Ch+arg_0]
+0x856B4E: mov     edx, [esp+1Ch+vtable]
 0x856B52: push    ecx
-0x856B53: push    3
-0x856B55: push    1
-0x856B57: push    69h ; 'i'
-0x856B59: push    edx
-0x856B5A: push    eax
-0x856B5B: call    sub_7E2370
+0x856B53: push    3; lightCount
+0x856B55: push    1; byte6
+0x856B57: push    69h ; 'i'; selector
+0x856B59: push    edx; geometry
+0x856B5A: push    eax; outPass
+0x856B5B: call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.
 0x856B60: add     esp, 20h
 0x856B63: jmp     loc_856802
 0x856B68: cmp     byte ptr [esp+14h+arg_14], 1
@@ -483,14 +483,14 @@
 0x856B99: push    ecx
 0x856B9A: mov     ecx, [esp+18h+arg_4]
 0x856B9E: push    edx
-0x856B9F: mov     edx, [esp+1Ch+arg_0]
+0x856B9F: mov     edx, [esp+1Ch+vtable]
 0x856BA3: push    ecx
-0x856BA4: push    3
-0x856BA6: push    1
-0x856BA8: push    74h ; 't'
-0x856BAA: push    edx
-0x856BAB: push    eax
-0x856BAC: call    sub_7E2370
+0x856BA4: push    3; lightCount
+0x856BA6: push    1; byte6
+0x856BA8: push    74h ; 't'; selector
+0x856BAA: push    edx; geometry
+0x856BAB: push    eax; outPass
+0x856BAC: call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.
 0x856BB1: add     esp, 20h
 0x856BB4: jmp     loc_856802
 0x856BB9: cmp     [esp+14h+arg_24], 0
@@ -513,14 +513,14 @@
 0x856C07: push    ecx
 0x856C08: mov     ecx, [esp+18h+arg_4]
 0x856C0C: push    edx
-0x856C0D: mov     edx, [esp+1Ch+arg_0]
+0x856C0D: mov     edx, [esp+1Ch+vtable]
 0x856C11: push    ecx
-0x856C12: push    3
-0x856C14: push    1
-0x856C16: push    67h ; 'g'
-0x856C18: push    edx
-0x856C19: push    eax
-0x856C1A: call    sub_7E2370
+0x856C12: push    3; lightCount
+0x856C14: push    1; byte6
+0x856C16: push    67h ; 'g'; selector
+0x856C18: push    edx; geometry
+0x856C19: push    eax; outPass
+0x856C1A: call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.
 0x856C1F: add     esp, 20h
 0x856C22: jmp     loc_856802
 0x856C27: cmp     byte ptr [esp+14h+arg_14], 1
@@ -537,14 +537,14 @@
 0x856C58: push    ecx
 0x856C59: mov     ecx, [esp+18h+arg_4]
 0x856C5D: push    edx
-0x856C5E: mov     edx, [esp+1Ch+arg_0]
+0x856C5E: mov     edx, [esp+1Ch+vtable]
 0x856C62: push    ecx
-0x856C63: push    3
-0x856C65: push    1
-0x856C67: push    72h ; 'r'
-0x856C69: push    edx
-0x856C6A: push    eax
-0x856C6B: call    sub_7E2370
+0x856C63: push    3; lightCount
+0x856C65: push    1; byte6
+0x856C67: push    72h ; 'r'; selector
+0x856C69: push    edx; geometry
+0x856C6A: push    eax; outPass
+0x856C6B: call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.
 0x856C70: add     esp, 20h
 0x856C73: jmp     loc_856802
 0x856C78: cmp     [esp+14h+arg_2C], 0
@@ -563,14 +563,14 @@
 0x856CB0: push    ecx
 0x856CB1: mov     ecx, [esp+18h+arg_4]
 0x856CB5: push    edx
-0x856CB6: mov     edx, [esp+1Ch+arg_0]
+0x856CB6: mov     edx, [esp+1Ch+vtable]
 0x856CBA: push    ecx
-0x856CBB: push    3
-0x856CBD: push    1
-0x856CBF: push    68h ; 'h'
-0x856CC1: push    edx
-0x856CC2: push    eax
-0x856CC3: call    sub_7E2370
+0x856CBB: push    3; lightCount
+0x856CBD: push    1; byte6
+0x856CBF: push    68h ; 'h'; selector
+0x856CC1: push    edx; geometry
+0x856CC2: push    eax; outPass
+0x856CC3: call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.
 0x856CC8: add     esp, 20h
 0x856CCB: jmp     loc_856802
 0x856CD0: cmp     byte ptr [esp+14h+arg_14], 1
@@ -587,14 +587,14 @@
 0x856CFD: push    ecx
 0x856CFE: mov     ecx, [esp+18h+arg_4]
 0x856D02: push    edx
-0x856D03: mov     edx, [esp+1Ch+arg_0]
+0x856D03: mov     edx, [esp+1Ch+vtable]
 0x856D07: push    ecx
-0x856D08: push    3
-0x856D0A: push    1
-0x856D0C: push    73h ; 's'
-0x856D0E: push    edx
-0x856D0F: push    eax
-0x856D10: call    sub_7E2370
+0x856D08: push    3; lightCount
+0x856D0A: push    1; byte6
+0x856D0C: push    73h ; 's'; selector
+0x856D0E: push    edx; geometry
+0x856D0F: push    eax; outPass
+0x856D10: call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.
 0x856D15: add     esp, 20h
 0x856D18: jmp     loc_856802
 0x856D1D: mov     eax, [esp+14h+arg_10]
@@ -605,7 +605,7 @@
 0x856D2E: jz      short loc_856D3C
 0x856D30: push    0; _DWORD
 0x856D32: push    offset aShaderError_24; "SHADER ERROR : no shader to handle BSSM"...
-0x856D37: call    eax ; dword_B42E8C
+0x856D37: call    eax ; unk_B42E8C
 0x856D39: add     esp, 8
 0x856D3C: mov     ecx, [esp+14h+arg_18]
 0x856D40: mov     byte ptr [ecx], 0
@@ -615,3 +615,120 @@
 0x856D4F: pop     esi
 0x856D50: add     esp, 0Ch
 0x856D53: retn    38h ; '8'
+0x9D3C60: mov     eax, [ebp+18h]
+0x9D3C63: push    eax
+0x9D3C64: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D3C69: pop     ecx
+0x9D3C6A: retn
+0x9D3C6B: mov     eax, [ebp+18h]
+0x9D3C6E: push    eax
+0x9D3C6F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D3C74: pop     ecx
+0x9D3C75: retn
+0x9D3C76: mov     eax, [ebp+18h]
+0x9D3C79: push    eax
+0x9D3C7A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D3C7F: pop     ecx
+0x9D3C80: retn
+0x9D3C81: mov     eax, [ebp+18h]
+0x9D3C84: push    eax
+0x9D3C85: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D3C8A: pop     ecx
+0x9D3C8B: retn
+0x9D3C8C: mov     eax, [ebp+18h]
+0x9D3C8F: push    eax
+0x9D3C90: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D3C95: pop     ecx
+0x9D3C96: retn
+0x9D3C97: mov     eax, [ebp+18h]
+0x9D3C9A: push    eax
+0x9D3C9B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D3CA0: pop     ecx
+0x9D3CA1: retn
+0x9D3CA2: mov     eax, [ebp+18h]
+0x9D3CA5: push    eax
+0x9D3CA6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D3CAB: pop     ecx
+0x9D3CAC: retn
+0x9D3CAD: mov     eax, [ebp+18h]
+0x9D3CB0: push    eax
+0x9D3CB1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D3CB6: pop     ecx
+0x9D3CB7: retn
+0x9D3CB8: mov     eax, [ebp+18h]
+0x9D3CBB: push    eax
+0x9D3CBC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D3CC1: pop     ecx
+0x9D3CC2: retn
+0x9D3CC3: mov     eax, [ebp+18h]
+0x9D3CC6: push    eax
+0x9D3CC7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D3CCC: pop     ecx
+0x9D3CCD: retn
+0x9D3CCE: mov     eax, [ebp+18h]
+0x9D3CD1: push    eax
+0x9D3CD2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D3CD7: pop     ecx
+0x9D3CD8: retn
+0x9D3CD9: mov     eax, [ebp+18h]
+0x9D3CDC: push    eax
+0x9D3CDD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D3CE2: pop     ecx
+0x9D3CE3: retn
+0x9D3CE4: mov     eax, [ebp+18h]
+0x9D3CE7: push    eax
+0x9D3CE8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D3CED: pop     ecx
+0x9D3CEE: retn
+0x9D3CEF: mov     eax, [ebp+18h]
+0x9D3CF2: push    eax
+0x9D3CF3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D3CF8: pop     ecx
+0x9D3CF9: retn
+0x9D3CFA: mov     eax, [ebp+18h]
+0x9D3CFD: push    eax
+0x9D3CFE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D3D03: pop     ecx
+0x9D3D04: retn
+0x9D3D05: mov     eax, [ebp+18h]
+0x9D3D08: push    eax
+0x9D3D09: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D3D0E: pop     ecx
+0x9D3D0F: retn
+0x9D3D10: mov     eax, [ebp+18h]
+0x9D3D13: push    eax
+0x9D3D14: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D3D19: pop     ecx
+0x9D3D1A: retn
+0x9D3D1B: mov     eax, [ebp+18h]
+0x9D3D1E: push    eax
+0x9D3D1F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D3D24: pop     ecx
+0x9D3D25: retn
+0x9D3D26: mov     eax, [ebp+18h]
+0x9D3D29: push    eax
+0x9D3D2A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D3D2F: pop     ecx
+0x9D3D30: retn
+0x9D3D31: mov     eax, [ebp+18h]
+0x9D3D34: push    eax
+0x9D3D35: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D3D3A: pop     ecx
+0x9D3D3B: retn
+0x9D3D3C: mov     eax, [ebp+18h]
+0x9D3D3F: push    eax
+0x9D3D40: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D3D45: pop     ecx
+0x9D3D46: retn
+0x9D3D47: mov     eax, [ebp+18h]
+0x9D3D4A: push    eax
+0x9D3D4B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D3D50: pop     ecx
+0x9D3D51: retn
+0x9D3D52: mov     edx, [esp+arg_4]
+0x9D3D56: lea     eax, [edx-4]
+0x9D3D59: mov     ecx, [edx-8]
+0x9D3D5C: xor     ecx, eax
+0x9D3D5E: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D3D63: mov     eax, offset stru_AFBED8
+0x9D3D68: jmp     ___CxxFrameHandler3

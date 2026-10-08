@@ -1,4 +1,4 @@
-0x762110: push    esi; MaxCount
+0x762110: push    esi; Initialize Oblivion DX9 device state/capabilities and runtime sampler preset tables. Preset values are written at 0x7622D6..0x76236C; image defaults remain -1.
 0x762111: mov     esi, ecx
 0x762113: mov     eax, [esi+280h]
 0x762119: mov     ecx, [eax]
@@ -12,10 +12,10 @@
 0x76212C: push    0FFh; Src
 0x762131: push    offset aCreationFail_7; "Creation failed: Could not query device"...
 0x762136: push    100h; SizeInBytes
-0x76213B: push    offset byte_B3F828; Dst
+0x76213B: push    offset unk_B3F828; Dst
 0x762140: call    _strncpy_s
 0x762145: push    offset aNidx9render_15; "NiDX9Renderer::Initialize> Could not qu"...
-0x76214A: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x76214A: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x76214F: add     esp, 14h
 0x762152: xor     al, al
 0x762154: pop     esi
@@ -103,13 +103,13 @@
 0x7622CA: mov     edx, [esi+318h]
 0x7622D0: push    edx
 0x7622D1: call    sub_75FA60
-0x7622D6: mov     eax, 3
+0x7622D6: mov     eax, 3; Begin runtime sampler preset initialization. D3DTADDRESS_CLAMP=3; D3DTADDRESS_WRAP=1.
 0x7622DB: xor     ecx, ecx
 0x7622DD: mov     ds:0B42144h, eax
 0x7622E2: mov     ds:0B42138h, eax
 0x7622E7: mov     ds:0B42130h, eax
 0x7622EC: mov     ds:0B42134h, eax
-0x7622F1: mov     eax, 2
+0x7622F1: mov     eax, 2; Initialize native filter rows. D3DTEXF_NONE=0, D3DTEXF_POINT=1, D3DTEXF_LINEAR=2.
 0x7622F6: mov     ds:0B420F0h, ecx
 0x7622FC: mov     ds:0B420FCh, ecx
 0x762302: mov     ds:0B42148h, ebx
@@ -148,10 +148,10 @@
 0x76239B: push    0FFh; Src
 0x7623A0: push    offset aCreationFail_8; "Creation failed: Device does not suppor"...
 0x7623A5: push    100h; SizeInBytes
-0x7623AA: push    offset byte_B3F828; Dst
+0x7623AA: push    offset unk_B3F828; Dst
 0x7623AF: call    _strncpy_s
 0x7623B4: push    offset aNidx9render_16; "NiDX9Renderer::Initialize> Device does "...
-0x7623B9: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x7623B9: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x7623BE: add     esp, 14h
 0x7623C1: pop     edi
 0x7623C2: xor     al, al

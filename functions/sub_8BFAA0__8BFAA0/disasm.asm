@@ -79,3 +79,16 @@
 0x8BFB98: pop     ebx
 0x8BFB99: add     esp, 24h
 0x8BFB9C: retn    4
+0x539AF0: push    0
+0x539AF2: mov     dword ptr [ecx], offset ??_7hkConstraintCinfo@@6B@; const hkConstraintCinfo::`vftable'
+0x539AF8: call    sub_8A0200
+0x539AFD: retn
+0x9D73E0: lea     ecx, [ebp-20h]
+0x9D73E3: jmp     loc_539AF0
+0x9D73E8: mov     edx, [esp+arg_4]
+0x9D73EC: lea     eax, [edx-28h]
+0x9D73EF: mov     ecx, [edx-2Ch]
+0x9D73F2: xor     ecx, eax
+0x9D73F4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D73F9: mov     eax, offset stru_AFF014
+0x9D73FE: jmp     ___CxxFrameHandler3

@@ -1,4 +1,4 @@
 BOOL __stdcall NiTStringMap_IsKeysEqual(char *Str1, char *Str2)
 {
-  return _strcmp(Str1, Str2) == 0;
+  return CRT_StricmpLocaleDispatch(Str1, Str2) == 0; /*0x584d29*/
 }

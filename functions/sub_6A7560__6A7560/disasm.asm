@@ -30,8 +30,8 @@
 0x6A75BF: mov     ebp, eax
 0x6A75C1: test    ebp, ebp
 0x6A75C3: jz      loc_6A780E
-0x6A75C9: push    ebp
-0x6A75CA: call    sub_480340
+0x6A75C9: push    ebp; object
+0x6A75CA: call    NiAVObject_FindBhkCollisionObjectRecursive; Returns the first bhk collision object found on object or recursively beneath its NiNode children. This is structural traversal, independent of node names.
 0x6A75CF: add     esp, 4
 0x6A75D2: test    eax, eax
 0x6A75D4: jz      loc_6A780E
@@ -78,7 +78,7 @@
 0x6A764F: call    sub_68FAF0
 0x6A7654: push    ebp
 0x6A7655: or      edi, 0FFFFFFFFh
-0x6A7658: push    offset dword_B35288
+0x6A7658: push    0B35288h
 0x6A765D: mov     [esp+58h+var_4], edi
 0x6A7661: call    NiRTTI_Cast
 0x6A7666: add     esp, 8
@@ -100,7 +100,7 @@
 0x6A76A2: fld     dword ptr [esi+40h]
 0x6A76A5: push    ecx
 0x6A76A6: mov     ecx, [esi+48h]
-0x6A76A9: fstp    [esp+54h+var_54]; float
+0x6A76A9: fstp    [esp+54h+elapsedSeconds]; float
 0x6A76AC: push    3; int
 0x6A76AE: push    ecx; int
 0x6A76AF: mov     ecx, ds:0B333C4h
@@ -149,7 +149,7 @@
 0x6A775C: fstp    dword ptr [ecx+584h]
 0x6A7762: lea     ecx, [esp+54h+var_18]
 0x6A7766: fld     dword ptr [esi+40h]
-0x6A7769: fstp    [esp+54h+var_54]; float
+0x6A7769: fstp    [esp+54h+elapsedSeconds]; float
 0x6A776C: call    NiPoint3__MutliplyByValue
 0x6A7771: mov     edx, [esi+0Ch]
 0x6A7774: mov     eax, [edx+1Ch]
@@ -168,10 +168,10 @@
 0x6A77A7: mov     ecx, [ecx+78h]
 0x6A77AA: mov     edx, [esi+48h]
 0x6A77AD: push    ecx
-0x6A77AE: fstp    [esp+54h+var_54]; float
-0x6A77B1: push    ecx; int
-0x6A77B2: push    edx; int
-0x6A77B3: mov     ecx, eax
+0x6A77AE: fstp    [esp+54h+elapsedSeconds]; elapsedSeconds
+0x6A77B1: push    ecx; effectShader
+0x6A77B2: push    edx; targetReference
+0x6A77B3: mov     ecx, eax; this
 0x6A77B5: call    MagicShaderHitEffect_constr_args2
 0x6A77BA: mov     esi, eax
 0x6A77BC: jmp     short loc_6A77C0
@@ -183,9 +183,9 @@
 0x6A77CB: call    edx
 0x6A77CD: test    al, al
 0x6A77CF: jz      short loc_6A77F0
-0x6A77D1: push    esi
-0x6A77D2: mov     ecx, offset ActorProcessManager_ptr
-0x6A77D7: call    sub_678D30
+0x6A77D1: push    esi; effect
+0x6A77D2: mov     ecx, (offset qword_B3BB2C+1D4h); self
+0x6A77D7: call    ActorProcessManager_RegisterTempEffect; [Verified] ActorProcessManager_RegisterTempEffect increments the effect reference and routes GetTypeID 4-6 into extendedTempEffects (+0x48), all other IDs into activeTempEffects (+0x40). Vtable evidence confirms decals 0/1 and particles 2 use the active list. Fallout divergence: its BGSDecalManager updates distinct simple-decal and emitter collections instead of using this per-actor temp-effect routing; one-to-one equivalence is Unknown.
 0x6A77DC: mov     ecx, [esp+50h+var_C]
 0x6A77E0: mov     large fs:0, ecx
 0x6A77E7: pop     ecx
@@ -211,7 +211,7 @@
 0x6A780D: retn
 0x6A780E: push    0
 0x6A7810: mov     ecx, esi
-0x6A7812: call    ActiveEffect_Base_Remove
+0x6A7812: call    ActiveEffect_Base_Remove; Verified termination API: sets bTerminated=1. When its flush flag is true, immediately invokes ActiveEffect_Base_ProcessEffect to run termination cleanup.
 0x6A7817: mov     ecx, [esp+50h+var_C]
 0x6A781B: mov     large fs:0, ecx
 0x6A7822: pop     ecx
@@ -221,3 +221,20 @@
 0x6A7826: pop     ebx
 0x6A7827: add     esp, 3Ch
 0x6A782A: retn
+0x9C6290: mov     eax, [ebp-34h]
+0x9C6293: push    eax
+0x9C6294: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C6299: pop     ecx
+0x9C629A: retn
+0x9C629B: mov     eax, [ebp-34h]
+0x9C629E: push    eax
+0x9C629F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C62A4: pop     ecx
+0x9C62A5: retn
+0x9C62A6: mov     edx, [esp+arg_4]
+0x9C62AA: lea     eax, [edx-40h]
+0x9C62AD: mov     ecx, [edx-44h]
+0x9C62B0: xor     ecx, eax
+0x9C62B2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C62B7: mov     eax, offset stru_AEE87C
+0x9C62BC: jmp     ___CxxFrameHandler3

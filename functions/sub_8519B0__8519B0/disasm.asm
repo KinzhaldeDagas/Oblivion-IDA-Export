@@ -58,9 +58,9 @@
 0x851A51: mov     eax, [edx+78h]
 0x851A54: mov     ecx, edi
 0x851A56: call    eax
-0x851A58: push    eax
-0x851A59: mov     ecx, ebp
-0x851A5B: call    sub_7715E0
+0x851A58: push    eax; preset
+0x851A59: mov     ecx, ebp; this
+0x851A5B: call    NiD3DTextureStage_ApplyAddressModePreset; Apply one native address-preset row to a NiD3DTextureStage: D3DSAMP_ADDRESSU (1) and D3DSAMP_ADDRESSV (2). Lighting30 SimpleShadow uses preset 0 = CLAMP/CLAMP.
 0x851A60: mov     ecx, [esp+44h+var_24]
 0x851A64: mov     edx, [ecx+24h]
 0x851A67: mov     esi, [edx+4]
@@ -118,9 +118,9 @@
 0x851AFA: mov     eax, [edx+78h]
 0x851AFD: mov     ecx, edi
 0x851AFF: call    eax
-0x851B01: push    eax
-0x851B02: mov     ecx, esi
-0x851B04: call    sub_7715E0
+0x851B01: push    eax; preset
+0x851B02: mov     ecx, esi; this
+0x851B04: call    NiD3DTextureStage_ApplyAddressModePreset; Apply one native address-preset row to a NiD3DTextureStage: D3DSAMP_ADDRESSU (1) and D3DSAMP_ADDRESSV (2). Lighting30 SimpleShadow uses preset 0 = CLAMP/CLAMP.
 0x851B09: cmp     ebp, 4
 0x851B0C: fld1
 0x851B0E: fldz
@@ -167,9 +167,9 @@
 0x851B87: mov     [eax+8], ecx
 0x851B8A: fstp    [esp+54h+var_10]
 0x851B8E: mov     edx, [esp+54h+var_10]
-0x851B92: push    2
+0x851B92: push    2; slot
 0x851B94: mov     [eax+0Ch], edx
-0x851B97: call    sub_7ECAE0
+0x851B97: call    OB_BSShader_SetSharedFloat4Constant_010201A0; Shader global table helper: store four dwords at dword_B46498 + 0x10 * index.
 0x851B9C: add     esp, 14h
 0x851B9F: cmp     ebp, 8
 0x851BA2: jnz     short loc_851BAE
@@ -215,30 +215,30 @@
 0x851C19: mov     [eax+8], ecx
 0x851C1C: fstp    [esp+54h+var_10]
 0x851C20: mov     edx, [esp+54h+var_10]
-0x851C24: push    3
+0x851C24: push    3; slot
 0x851C26: mov     [eax+0Ch], edx
-0x851C29: call    sub_7ECAE0
+0x851C29: call    OB_BSShader_SetSharedFloat4Constant_010201A0; Shader global table helper: store four dwords at dword_B46498 + 0x10 * index.
 0x851C2E: add     esp, 14h
-0x851C31: cmp     byte ptr [esp+44h+arg_10], 0
+0x851C31: cmp     byte ptr [esp+44h+value], 0
 0x851C36: jz      short loc_851C7B
 0x851C38: mov     edi, [esp+44h+var_24]
 0x851C3C: mov     ebx, 1
 0x851C41: add     [edi+60h], ebx
-0x851C44: mov     [esp+44h+arg_10], edi
+0x851C44: mov     [esp+44h+value], edi
 0x851C48: mov     esi, [esp+44h+var_20]
 0x851C4C: mov     ecx, [esi+38h]
-0x851C4F: lea     eax, [esp+44h+arg_10]
-0x851C53: push    eax
-0x851C54: push    ecx
-0x851C55: lea     ecx, [esi+40h]
+0x851C4F: lea     eax, [esp+44h+value]
+0x851C53: push    eax; value
+0x851C54: push    ecx; index
+0x851C55: lea     ecx, [esi+40h]; this
 0x851C58: mov     [esp+4Ch+var_4], 0
-0x851C60: call    sub_76CE40
+0x851C60: call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.
 0x851C65: or      eax, 0FFFFFFFFh
 0x851C68: add     [edi+60h], eax
 0x851C6B: mov     [esp+44h+var_4], eax
 0x851C6F: jnz     short loc_851C78
 0x851C71: mov     ecx, edi
-0x851C73: call    sub_7604D0
+0x851C73: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x851C78: add     [esi+38h], ebx
 0x851C7B: mov     ecx, dword ptr [esp+44h+var_C]
 0x851C7F: mov     large fs:0, ecx
@@ -249,3 +249,12 @@
 0x851C8A: pop     ebx
 0x851C8B: add     esp, 30h
 0x851C8E: retn    14h
+0x9D3480: lea     ecx, [ebp+14h]; void *
+0x9D3483: jmp     sub_4027D0
+0x9D3488: mov     edx, [esp+arg_4]
+0x9D348C: lea     eax, [edx-34h]
+0x9D348F: mov     ecx, [edx-38h]
+0x9D3492: xor     ecx, eax
+0x9D3494: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D3499: mov     eax, offset stru_AFB89C
+0x9D349E: jmp     ___CxxFrameHandler3

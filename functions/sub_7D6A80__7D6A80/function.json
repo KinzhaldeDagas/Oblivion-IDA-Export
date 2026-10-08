@@ -1,19 +1,32 @@
 {
-  "callees_count": 8,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7D6A80",
+      "0x7D6AFE"
+    ]
+  ],
+  "chunks_sha256": "282355ea10273fe5c83f1323933a7ac4720778d8ea3bbd184d0fddb746e703ee",
+  "comment_regular": "Locked render-target-group begin wrapper. Locks the renderer, invokes BeginUsingRenderTargetGroup with clear flags, and marks the renderer target ready on success.\n\nLocked target-group begin wrapper: require an active scene and no ready target, lock the renderer, bind/clear the group, then set IsReady on success.",
+  "comment_repeatable": "Locked target-group begin wrapper: require an active scene and no ready target, lock the renderer, bind/clear the group, then set IsReady on success.\nDX11 bucket owner audit 2026-10-01: protected read receipt for the ordinary BS branch checks actual Win32 CRITICAL_SECTION at renderer+80 (RecursionCount +88, OwningThread +8C), matching wrapper curThread+F8 / entryCount+FC, active state (renderer+200==1 OR +204==1) and ready byte+20C==1. Requires main OSGlobals thread (+10 via B33398), no parallel-update manager B3F940, current renderer B3F928/device+280/accumulator+8, BS vtable A8CC5C with Flush+50=7AE070 and bucket+60=7AC9A0, and enclosing reference count >=2. Only caller return7C7D56 is accepted; 7C7A79 is the alpha-accumulator branch. Renderer lock virtuals A88FCC/A88FD0 are both60D0A0 RET. Exact helper bodies 405710/763F60/763FA0/7D6A80/7D6B00 are now pinned in the renderer code catalog. These observed owner facts DO NOT acquire a geometry/property/pool/reference-writer lease or authorize replacement alone.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_7D6A80",
+  "display_name": "NiDX9Renderer_BeginRenderTargetGroupLocked",
   "end_ea": "0x7D6AFE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7D6A80",
+  "name": "NiDX9Renderer_BeginRenderTargetGroupLocked",
   "segment": ".text",
   "sha256": "282355ea10273fe5c83f1323933a7ac4720778d8ea3bbd184d0fddb746e703ee",
   "size": 126,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7D6A80",
-  "type": "char __thiscall(NiDX9Renderer *this, NiRenderTargetGroup *a2, ClearFlags clearFlags)",
+  "total_chunk_size": 126,
+  "type": "char __thiscall(NiDX9Renderer *this, NiRenderTargetGroup *targetGroup, ClearFlags clearFlags)",
   "xrefs_from_count": 52,
   "xrefs_to_count": 2
 }

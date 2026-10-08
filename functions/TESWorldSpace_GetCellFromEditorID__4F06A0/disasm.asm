@@ -21,36 +21,36 @@
 0x4F06D1: jb      short loc_4F06C5
 0x4F06D3: xor     eax, eax
 0x4F06D5: test    eax, eax
-0x4F06D7: mov     [esp+18h+var_8], eax
+0x4F06D7: mov     [esp+18h+position], eax
 0x4F06DB: jz      short loc_4F072E
 0x4F06DD: lea     ecx, [ecx+0]
 0x4F06E0: test    edi, edi
 0x4F06E2: jnz     short loc_4F072E
-0x4F06E4: lea     eax, [esp+18h+var_C]
-0x4F06E8: push    eax
-0x4F06E9: lea     ecx, [esp+1Ch+var_4]
-0x4F06ED: push    ecx
-0x4F06EE: mov     ecx, [ebx+30h]
-0x4F06F1: lea     edx, [esp+20h+var_8]
-0x4F06F5: push    edx
-0x4F06F6: mov     [esp+24h+var_C], edi
-0x4F06FA: call    sub_452600
-0x4F06FF: mov     esi, [esp+18h+var_C]
+0x4F06E4: lea     eax, [esp+18h+valueOut]
+0x4F06E8: push    eax; valueOut
+0x4F06E9: lea     ecx, [esp+1Ch+keyOut]
+0x4F06ED: push    ecx; keyOut
+0x4F06EE: mov     ecx, [ebx+30h]; self
+0x4F06F1: lea     edx, [esp+20h+position]
+0x4F06F5: push    edx; position
+0x4F06F6: mov     [esp+24h+valueOut], edi
+0x4F06FA: call    NiTMap_U32Pointer_GetNextEntry
+0x4F06FF: mov     esi, [esp+18h+valueOut]
 0x4F0703: test    esi, esi
 0x4F0705: jz      short loc_4F0727
 0x4F0707: mov     eax, [esp+18h+Str2]
 0x4F070B: mov     edx, [esi]
-0x4F070D: push    eax; Str2
+0x4F070D: push    eax; right
 0x4F070E: mov     eax, [edx+0D4h]
 0x4F0714: mov     ecx, esi
 0x4F0716: call    eax
-0x4F0718: push    eax; Str1
-0x4F0719: call    __strcmp
+0x4F0718: push    eax; left
+0x4F0719: call    CRT_StricmpLocaleDispatch
 0x4F071E: add     esp, 8
 0x4F0721: test    eax, eax
 0x4F0723: jnz     short loc_4F0727
 0x4F0725: mov     edi, esi
-0x4F0727: cmp     [esp+18h+var_8], 0
+0x4F0727: cmp     [esp+18h+position], 0
 0x4F072C: jnz     short loc_4F06E0
 0x4F072E: pop     esi
 0x4F072F: mov     eax, edi

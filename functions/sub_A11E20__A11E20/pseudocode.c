@@ -1,4 +1,4 @@
-BSStringT *sub_A11E20()
+NiRTTI *ParallaxShader_InitializeRTTI()
 {
-  return sub_70E220(&stru_B47614, "ParallaxShader", (int)&stru_B44F90);
+  return NiRTTI_Constructor(&stru_B47614, "ParallaxShader", &stru_B44F90); /*0xa11e34*/
 }

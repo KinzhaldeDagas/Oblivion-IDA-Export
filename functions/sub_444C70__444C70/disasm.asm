@@ -59,7 +59,7 @@
 0x444D23: call    sub_43FFF0
 0x444D28: push    0; a2
 0x444D2A: mov     ecx, esi; this
-0x444D2C: call    sub_43FC20
+0x444D2C: call    sub_43FC20; TES cleanup/streaming critical-section path; calls SpeedTree cache prune 0x55E390(1) before and after heap/cell cleanup.
 0x444D31: push    0
 0x444D33: mov     ecx, esi
 0x444D35: call    sub_4430F0
@@ -116,11 +116,11 @@
 0x444DEA: call    sub_5732D0
 0x444DEF: mov     ecx, esi
 0x444DF1: call    sub_441610
-0x444DF6: mov     ecx, offset ActorProcessManager_ptr
-0x444DFB: call    sub_678750
-0x444E00: mov     ecx, offset ActorProcessManager_ptr
+0x444DF6: mov     ecx, (offset qword_B3BB2C+1D4h)
+0x444DFB: call    sub_678750; BunkFix: furniture activation/sit-sleep handoff. For Sleep package, revalidates candidate furniture refs, picks first unused marker via sub_4D73F0, resolves marker transform via sub_4DB9D0, then calls SetSleepState. This is after the actor has already reached/activated the furniture ref.
+0x444E00: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x444E05: call    sub_675F40
-0x444E0A: mov     ecx, offset ActorProcessManager_ptr
+0x444E0A: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x444E0F: call    sub_675FC0
 0x444E14: jmp     short loc_444E7E
 0x444E16: mov     eax, [esi+24h]
@@ -136,21 +136,21 @@
 0x444E2D: mov     eax, [eax+10h]
 0x444E30: push    edx
 0x444E31: mov     edx, [esi+20h]
-0x444E34: push    edx
+0x444E34: push    edx; a3
 0x444E35: call    eax
 0x444E37: push    1
 0x444E39: mov     ecx, esi
 0x444E3B: call    sub_4430F0
 0x444E40: mov     ecx, esi
 0x444E42: call    sub_444340
-0x444E47: mov     ecx, [esi+74h]
-0x444E4A: call    sub_4EF7E0
+0x444E47: mov     ecx, [esi+74h]; worldspace
+0x444E4A: call    TESWorldSpace_GetRootTerrainLODQuadMap; Verified: climbs parentWorldspace to the root TESWorldSpace and returns its embedded terrainLODQuadRoots map at +0x38.
 0x444E4F: mov     ecx, ds:0B333C4h
 0x444E55: mov     edx, [ecx]
 0x444E57: mov     eax, [edx+174h]
 0x444E5D: call    eax
 0x444E5F: mov     edx, [eax]
-0x444E61: push    1
+0x444E61: push    1; a4
 0x444E63: sub     esp, 0Ch
 0x444E66: mov     ecx, esp
 0x444E68: mov     [ecx], edx
@@ -158,7 +158,7 @@
 0x444E6D: mov     eax, [eax+8]
 0x444E70: mov     [ecx+4], edx
 0x444E73: mov     [ecx+8], eax
-0x444E76: call    sub_4EA6E0
+0x444E76: call    DistantLOD_UpdateLandLODAtPosition; Verified position-triggered LandLOD refresh wrapper: resolves current WorldSpace, climbs parentWorldspace to the root, obtains root terrainLODQuadRoots via TESWorldSpace_GetRootTerrainLODQuadMap, and delegates to DistantLOD_UpdateLandLODMap.
 0x444E7B: add     esp, 10h
 0x444E7E: mov     ecx, esi
 0x444E80: call    ScriptRunner_RunScript
@@ -167,10 +167,10 @@
 0x444E89: push    ecx
 0x444E8A: mov     ecx, [esi+10h]; this
 0x444E8D: fstp    [esp+1Ch+anonymous_0+4]; a2
-0x444E90: call    NiAVObject_UpdateNiAVObject
+0x444E90: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x444E95: push    0; a2
 0x444E97: mov     ecx, esi; this
-0x444E99: call    sub_43FC20
+0x444E99: call    sub_43FC20; TES cleanup/streaming critical-section path; calls SpeedTree cache prune 0x55E390(1) before and after heap/cell cleanup.
 0x444E9E: mov     ecx, ds:0B33A98h
 0x444EA4: call    sub_447130
 0x444EA9: mov     byte ptr ds:0B33A69h, 0

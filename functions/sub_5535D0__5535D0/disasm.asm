@@ -5,7 +5,7 @@
 0x5535DB: mov     esi, ecx
 0x5535DD: call    sub_553000
 0x5535E2: push    esi
-0x5535E3: call    FormHeapFree
+0x5535E3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5535E8: add     esp, 4
 0x5535EB: mov     dword ptr ds:0B39B80h, 0
 0x5535F5: pop     esi

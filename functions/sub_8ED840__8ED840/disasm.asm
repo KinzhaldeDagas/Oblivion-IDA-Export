@@ -295,7 +295,6 @@
 0x8EDCE6: test    ah, 41h
 0x8EDCE9: jp      short loc_8EDD07
 0x8EDCEB: jmp     short loc_8EDCF0
-0x8EDCED: align 10h
 0x8EDCF0: inc     ecx
 0x8EDCF1: mov     [esp+140h+var_114], ecx
 0x8EDCF5: fild    [esp+140h+var_114]
@@ -601,7 +600,6 @@
 0x8EE16D: mov     [esp+140h+var_10C], 0BF800000h
 0x8EE175: jnb     loc_8EE6DD
 0x8EE17B: jmp     short loc_8EE180
-0x8EE17D: align 10h
 0x8EE180: mov     edx, [esp+140h+var_114]
 0x8EE184: cmp     edx, [esi+10h]
 0x8EE187: jnb     loc_8EE6DD

@@ -1,1 +1,1 @@
-data_size_t
+typedef unsigned int data_size_t;

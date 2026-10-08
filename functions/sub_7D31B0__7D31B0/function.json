@@ -1,19 +1,32 @@
 {
-  "callees_count": 15,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x7D31B0",
+      "0x7D3363"
+    ]
+  ],
+  "chunks_sha256": "2136762f2801ad842aa388f82f56b0415d24fd62be895bce970b8c7538954a63",
+  "comment_regular": "Compute this light's influence score at a point, excluding the supplied source and +0xF4 projector mode. NiPointLight sources use 1-(distance/range)^2 falloff, multiplied by the maximum light color component.",
+  "comment_repeatable": "Compute this light's influence score at a point, excluding the supplied source and +0xF4 projector mode. NiPointLight sources use 1-(distance/range)^2 falloff, multiplied by the maximum light color component.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7D31B0",
+  "display_name": "ShadowSceneLight_ComputePointInfluenceScore",
   "end_ea": "0x7D3363",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7D31B0",
+  "name": "ShadowSceneLight_ComputePointInfluenceScore",
   "segment": ".text",
   "sha256": "2136762f2801ad842aa388f82f56b0415d24fd62be895bce970b8c7538954a63",
   "size": 435,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7D31B0",
-  "type": "double __thiscall(int this, float, float, float, float *)",
+  "total_chunk_size": 435,
+  "type": "float __thiscall(ShadowSceneLight_DecodedLayout *self, float x, float y, float z, void *excludedBackingLight)",
   "xrefs_from_count": 141,
   "xrefs_to_count": 3
 }

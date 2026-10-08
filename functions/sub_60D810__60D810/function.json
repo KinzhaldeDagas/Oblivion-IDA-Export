@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x60D810",
+      "0x60D85D"
+    ]
+  ],
+  "chunks_sha256": "8c786f272886c6f9bae9db0e76dd27e04555ad93232abf1b72c8d8adb6011ddd",
+  "comment_regular": "Verified 2026-10-04: BaseProcess revert role from Oblivion process vtable slot +0x404, parent call chain and matching serialization/reset behavior. ECX receiver and RET8 establish stack arity; owner is MobileObject (dispatch 65A835 for Revert). \nVerified reset semantics: mask0x20000 and created editorPackage FormID trigger reset. If mask0x10000 is clear, calls manager helper45C7A0 first; package pointer is then nulled. Unknown helper45C7A0 full ownership semantics; do not call it a destructor solely from this call.\nVerified continuation: helper45C7A0 is now DeleteForm; ordinary form retirement queues at manager+30 rather than immediate destruction. Deferred queue-drain timing remains Unknown.\nVerified continuation: ordinary deferred forms are ultimately destroyed by manager459870, which unlinks before destructor and orders TESBoundObject/SpellItem last. Queue insertion453910, removal453940 and load-completion call4668BA close ownership chain; prior queue-drain Unknown superseded for these anchors.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_60D810",
+  "display_name": "BaseProcess_Revert",
   "end_ea": "0x60D85D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_60D810",
+  "name": "BaseProcess_Revert",
   "segment": ".text",
   "sha256": "8c786f272886c6f9bae9db0e76dd27e04555ad93232abf1b72c8d8adb6011ddd",
   "size": 77,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x60D810",
-  "type": "void __thiscall(_DWORD *this, int, int)",
+  "total_chunk_size": 77,
+  "type": "void __thiscall(BaseProcess *self, ProcessSaveChangeMask changeMask, MobileObject *owner)",
   "xrefs_from_count": 30,
   "xrefs_to_count": 2
 }

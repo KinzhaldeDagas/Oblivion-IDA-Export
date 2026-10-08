@@ -1,19 +1,36 @@
 {
-  "callees_count": 101,
-  "callers_count": 28,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 13,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 36,
+  "callers_count": 45,
+  "chunks": [
+    [
+      "0x801C90",
+      "0x802460"
+    ],
+    [
+      "0x9D0730",
+      "0x9D076C"
+    ]
+  ],
+  "chunks_sha256": "803765432788535f22de738127185be336568e8260b0662b5bca972480f358b9",
+  "comment_regular": "\n\n[2026-10-03 frond program correction] Pixel counterpart of 0x8014E0: package lookup CALL 0x801D2D -> 0x7DAC70. Found record payload+0x104 is borrowed for native CreatePixelShader. The plugin supplies both legacy STFROND000/001.pso (including missing legacy fog) and modern STFROND2000/2001.pso before GPU creation; no shader-package file rewrite is needed.\n\nOblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.\n\n[2026-10-04 resident actor shadow authority] Oblivion-side decompilation confirms this is generic shader CREATION: package/file bytes reach IDirect3DDevice9::CreateVertexShader/CreatePixelShader, then a NiD3D program wrapper adopts the resulting COM object. Caller xrefs include the Lighting30/ShadowLight family LoadVertex/LoadPixel routines. The renderer closed actor-shadow session does not invoke this routine; it reads already resident family slots, verifies exact wrapper/getter identity and canonical owned COM payload/revision, rechecks metadata/programs and both final code seals under existing shader mutation/lifetime exclusion. A proposed resident-only code catalog separates these two creatio",
+  "comment_repeatable": "Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 17,
   "display_name": "CreatePixelShader",
   "end_ea": "0x802460",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "CreatePixelShader",
   "segment": ".text",
   "sha256": "41c0e7ceebe0fbe2e0f9941b134682f71f7a91f408ea049b6b8d72f5e45f00c0",
   "size": 2000,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x801C90",
+  "total_chunk_size": 2060,
   "type": "NiD3DShaderProgram *__stdcall(char *lpFileName, _DWORD *, char *Str1, const char *, int, int)",
-  "xrefs_from_count": 716,
+  "xrefs_from_count": 735,
   "xrefs_to_count": 45
 }

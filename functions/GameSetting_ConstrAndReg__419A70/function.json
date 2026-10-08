@@ -1,19 +1,36 @@
 {
-  "callees_count": 6,
-  "callers_count": 1077,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
+  "callers_count": 1312,
+  "chunks": [
+    [
+      "0x419A70",
+      "0x419B0F"
+    ],
+    [
+      "0x9AB570",
+      "0x9AB593"
+    ]
+  ],
+  "chunks_sha256": "f45eda168b9d69f7e548784a1c7fe39727ef055934e81f321779e012175a9fed",
+  "comment_regular": "Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.",
+  "comment_repeatable": "Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
   "display_name": "GameSetting_ConstrAndReg",
   "end_ea": "0x419B0F",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
   "name": "GameSetting_ConstrAndReg",
   "segment": ".text",
   "sha256": "fcaea5306f0754bf85d073dbfbcc4944964faed9d5d6d3365afa979352d84251",
   "size": 159,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x419A70",
-  "type": "int *__thiscall(int *this, int, int)",
-  "xrefs_from_count": 59,
+  "total_chunk_size": 194,
+  "type": "GameSettingString *__thiscall(GameSettingString *self, const char *name, const char *defaultValue)",
+  "xrefs_from_count": 70,
   "xrefs_to_count": 1312
 }

@@ -75,7 +75,6 @@
 0x43CD00: call    edx
 0x43CD02: jmp     loc_43CC54
 0x43CD07: jmp     short loc_43CD10
-0x43CD09: align 10h
 0x43CD10: mov     edi, ds:WaitForSingleObject
 0x43CD16: mov     edx, [esi+8]
 0x43CD19: push    0FFFFFFFFh; dwMilliseconds
@@ -148,3 +147,14 @@
 0x43CDC8: mov     ebp, [esp+2Ch+var_14]
 0x43CDCC: jnz     loc_43CD10
 0x43CDD2: jmp     loc_43CCC6
+0x9ACCB0: lea     ecx, [ebp-18h]; void *
+0x9ACCB3: jmp     sub_4BDDC0
+0x9ACCB8: lea     ecx, [ebp-10h]; void *
+0x9ACCBB: jmp     sub_4BDDC0
+0x9ACCC0: mov     edx, [esp+arg_4]
+0x9ACCC4: lea     eax, [edx-1Ch]
+0x9ACCC7: mov     ecx, [edx-20h]
+0x9ACCCA: xor     ecx, eax
+0x9ACCCC: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9ACCD1: mov     eax, offset stru_AD98D8
+0x9ACCD6: jmp     ___CxxFrameHandler3

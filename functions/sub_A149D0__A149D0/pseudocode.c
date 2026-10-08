@@ -1,9 +1,9 @@
 _DWORD *sub_A149D0()
 {
-  return sub_90D190(
-           dword_BA8DB8,
+  return sub_90D190( /*0xa149f7*/
+           unk_BA8DB8,
            (int)"hkLinearParametricCurve",
-           (int)&unk_BA9710,
+           (int)unk_BA9710,
            0x40,
            0,
            0,

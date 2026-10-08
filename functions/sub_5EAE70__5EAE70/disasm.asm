@@ -1,4 +1,4 @@
-0x5EAE70: push    ecx
+0x5EAE70: push    ecx; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x5EAE71: push    ebp
 0x5EAE72: push    esi
 0x5EAE73: mov     esi, ecx
@@ -56,8 +56,8 @@
 0x5EAF08: call    eax
 0x5EAF0A: cmp     ebx, ebp
 0x5EAF0C: jz      loc_5EB0EB
-0x5EAF12: mov     ecx, ebx
-0x5EAF14: call    sub_567770
+0x5EAF12: mov     ecx, ebx; this
+0x5EAF14: call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.
 0x5EAF19: test    al, al
 0x5EAF1B: jz      loc_5EB0EB
 0x5EAF21: mov     edx, [esi]
@@ -79,16 +79,16 @@
 0x5EAF52: mov     eax, [edx+8]
 0x5EAF55: push    eax
 0x5EAF56: mov     ecx, esi
-0x5EAF58: call    sub_5E8DE0
+0x5EAF58: call    sub_5E8DE0; 3DTheft: marks actor modified when assigning created package/editor package. For created package refIDs, uses actor modified mask 0x20000, or 0x30000 for types 0x13/0x11.
 0x5EAF5D: mov     ecx, edi
-0x5EAF5F: call    sub_41FB40
+0x5EAF5F: call    ExtraDataList_GetPackageExtraIndex; Returns ExtraPackage's package index field, or zero when absent.
 0x5EAF64: mov     ecx, [esi+58h]
 0x5EAF67: mov     [ecx+4], eax
 0x5EAF6A: mov     ebx, [esi+58h]
 0x5EAF6D: mov     ebp, [ebx]
 0x5EAF6F: mov     ecx, edi
 0x5EAF71: add     ebp, 0D0h ; 'Ð'
-0x5EAF77: call    sub_41FB60
+0x5EAF77: call    ExtraDataList_GetPackageExtraTarget; Returns ExtraPackage's target TESObjectREFR pointer, or null.
 0x5EAF7C: mov     edx, [ebp+0]
 0x5EAF7F: push    eax
 0x5EAF80: mov     ecx, ebx
@@ -106,7 +106,7 @@
 0x5EAFAA: mov     dword ptr [ebx+54h], 0
 0x5EAFB1: mov     edx, [esi]
 0x5EAFB3: mov     eax, [edx+174h]
-0x5EAFB9: push    offset sub_645A30; a6
+0x5EAFB9: push    offset TESObjectREFR_SetOwnedDoorLockedForActor; a6
 0x5EAFBE: push    ecx
 0x5EAFBF: mov     ecx, esi
 0x5EAFC1: fstp    [esp+18h+a5]; a5
@@ -121,7 +121,7 @@
 0x5EAFDB: call    eax
 0x5EAFDD: push    eax; a2
 0x5EAFDE: mov     ecx, esi; this
-0x5EAFE0: call    TESObjectREFR_GetParentCell
+0x5EAFE0: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5EAFE5: mov     ecx, ds:0B33A98h
 0x5EAFEB: push    eax; a1
 0x5EAFEC: call    sub_446B90
@@ -147,7 +147,7 @@
 0x5EB02A: call    edx
 0x5EB02C: mov     ebx, [esi]
 0x5EB02E: mov     ecx, edi
-0x5EB030: call    sub_41FB80
+0x5EB030: call    ExtraDataList_GetPackageExtraComplete; Returns ExtraPackage's completion byte, or false.
 0x5EB035: mov     ecx, esi
 0x5EB037: push    eax
 0x5EB038: mov     eax, [ebx+17Ch]
@@ -156,19 +156,19 @@
 0x5EB043: mov     ebp, [ebx]
 0x5EB045: mov     ecx, edi
 0x5EB047: add     ebp, 394h
-0x5EB04D: call    sub_41FBA0
+0x5EB04D: call    ExtraDataList_GetPackageExtraActivate; Returns ExtraPackage's activation byte, or false.
 0x5EB052: mov     edx, [ebp+0]
 0x5EB055: mov     ecx, ebx
 0x5EB057: push    eax
 0x5EB058: call    edx
 0x5EB05A: mov     ecx, edi
 0x5EB05C: call    sub_4246D0
-0x5EB061: mov     ebx, [esp+14h+var_4]
+0x5EB061: mov     ebx, [esp+14h+self]
 0x5EB065: jmp     short loc_5EB0B7
 0x5EB067: mov     eax, [esi+58h]
-0x5EB06A: mov     [eax+8], ebp
+0x5EB06A: mov     [eax+8], ebp; 3DTheft: no ExtraPackage cleanup branch clears process->editorPackage.
 0x5EB06D: mov     ecx, [esi+58h]
-0x5EB070: mov     [ecx+4], ebp
+0x5EB070: mov     [ecx+4], ebp; 3DTheft: no ExtraPackage cleanup branch resets editorPackProcedure to TRAVEL.
 0x5EB073: mov     edx, [esi]
 0x5EB075: mov     eax, [edx+17Ch]
 0x5EB07B: push    ebp
@@ -193,8 +193,8 @@
 0x5EB0B3: push    ebp
 0x5EB0B4: push    esi
 0x5EB0B5: call    eax
-0x5EB0B7: mov     ecx, ebx
-0x5EB0B9: call    sub_5660A0
+0x5EB0B7: mov     ecx, ebx; self
+0x5EB0B9: call    TESPackage_IsRuntimePackage; 3DTheft: detached dynamic package is destroyed or queued for save cleanup after editor/current package state is restored.
 0x5EB0BE: test    al, al
 0x5EB0C0: pop     edi
 0x5EB0C1: jz      short loc_5EB0EB
@@ -202,9 +202,9 @@
 0x5EB0C9: call    sub_45A500
 0x5EB0CE: test    al, al
 0x5EB0D0: jz      short loc_5EB0E0
-0x5EB0D2: mov     ecx, ds:0B33B00h
-0x5EB0D8: push    ebx
-0x5EB0D9: call    sub_45C7A0
+0x5EB0D2: mov     ecx, ds:0B33B00h; self
+0x5EB0D8: push    ebx; form
+0x5EB0D9: call    TESSaveLoadGame_DeleteForm
 0x5EB0DE: jmp     short loc_5EB0EB
 0x5EB0E0: mov     edx, [ebx]
 0x5EB0E2: mov     eax, [edx+10h]

@@ -33,12 +33,11 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::GetTargetREFR@<eax>(
         int a32,
         char a33)
 {
-  _DWORD *v33; // ebx
+  int v33; // ebx
 
-  if ( !a1 )
-    return MagicCaster_ApplyActiveMagicItem_::GetMagicItemData(
+  if ( !a1 ) /*0x69b153*/
+    return MagicCaster_ApplyActiveMagicItem_::GetMagicItemData( /*0x69b169*/
              a2,
-             0,
              a3,
              a4,
              a5,
@@ -70,10 +69,9 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::GetTargetREFR@<eax>(
              a31,
              a32,
              a33);
-  v33 = (_DWORD *)(*(int (__thiscall **)(int))(*(_DWORD *)a1 + 4))(a1);
+  v33 = (*(int (__thiscall **)(int))(*(_DWORD *)a1 + 4))(a1); /*0x69b15e*/
   return MagicCaster_ApplyActiveMagicItem_::GetMagicItemData(
            a2,
-           v33,
            a3,
            a4,
            a5,
@@ -81,7 +79,7 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::GetTargetREFR@<eax>(
            a7,
            a8,
            a9,
-           (int)v33,
+           v33,
            a11,
            a12,
            a13,

@@ -93,12 +93,12 @@
 0x433CD5: mov     eax, [edx+40h]
 0x433CD8: push    esi
 0x433CD9: mov     [esp+54h+var_39], 1
-0x433CDE: call    eax
+0x433CDE: call    eax; BSTaskManager worker dispatches the selected IOTask through IOManager vtable slot +0x40 (stage 1).
 0x433CE0: mov     ecx, [ebp+24h]
 0x433CE3: mov     edx, [ecx]
 0x433CE5: mov     eax, [edx+44h]
 0x433CE8: push    esi
-0x433CE9: call    eax
+0x433CE9: call    eax; BSTaskManager worker then dispatches IOManager vtable slot +0x44 (stage 2).
 0x433CEB: jmp     short loc_433D1F
 0x433CED: test    [esp+50h+var_14], 2
 0x433CF2: jnz     short loc_433D1F
@@ -140,3 +140,14 @@
 0x433D59: test    [esp+50h+var_14], 2
 0x433D5E: jz      loc_433C31
 0x433D64: jmp     loc_433BF0
+0x9AC040: lea     ecx, [ebp-2Ch]
+0x9AC043: jmp     loc_432090
+0x9AC048: lea     ecx, [ebp-38h]; void *
+0x9AC04B: jmp     sub_4BDDC0
+0x9AC050: mov     edx, [esp+arg_4]
+0x9AC054: lea     eax, [edx-40h]
+0x9AC057: mov     ecx, [edx-44h]
+0x9AC05A: xor     ecx, eax
+0x9AC05C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AC061: mov     eax, offset stru_AD8D68
+0x9AC066: jmp     ___CxxFrameHandler3

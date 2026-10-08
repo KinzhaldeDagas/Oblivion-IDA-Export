@@ -1,4 +1,4 @@
-0x4F13D0: mov     eax, [esp+arg_0]
+0x4F13D0: mov     eax, [esp+valueOut]; Verified local WorldSpace component-copy path copies climate, parent/water, bounds, flags, and cell-map entries but not the owned TESRoad* at +0x54. CreateDuplicateForm has a distinct road-cloning path. +0x4C/+0x50 remain Unknown.
 0x4F13D4: sub     esp, 8
 0x4F13D7: push    esi
 0x4F13D8: push    edi
@@ -22,8 +22,8 @@
 0x4F140D: mov     [esi+7Ch], edx
 0x4F1410: cmp     dword ptr [edi+7Ch], 0
 0x4F1414: jz      short loc_4F1420
-0x4F1416: mov     ecx, [edi+7Ch]
-0x4F1419: call    sub_4EF7A0
+0x4F1416: mov     ecx, [edi+7Ch]; this
+0x4F1419: call    TESWorldSpace_GetClimateFromRoot; Verified: TESWorldSpace component copy uses the resolved root Climate as destination field +0x58.
 0x4F141E: jmp     short loc_4F1423
 0x4F1420: mov     eax, [edi+58h]
 0x4F1423: mov     [esi+58h], eax
@@ -71,25 +71,25 @@
 0x4F14B3: jb      short loc_4F14A6
 0x4F14B5: xor     eax, eax
 0x4F14B7: test    eax, eax
-0x4F14B9: mov     [esp+14h+var_8], eax
+0x4F14B9: mov     [esp+14h+position], eax
 0x4F14BD: pop     ebx
 0x4F14BE: jz      short loc_4F14F8
-0x4F14C0: lea     ecx, [esp+10h+arg_0]
-0x4F14C4: push    ecx
-0x4F14C5: mov     ecx, [edi+30h]
+0x4F14C0: lea     ecx, [esp+10h+valueOut]
+0x4F14C4: push    ecx; valueOut
+0x4F14C5: mov     ecx, [edi+30h]; self
 0x4F14C8: lea     edx, [esp+14h+a2]
-0x4F14CC: push    edx
-0x4F14CD: lea     eax, [esp+18h+var_8]
-0x4F14D1: push    eax
-0x4F14D2: mov     [esp+1Ch+arg_0], 0
-0x4F14DA: call    sub_452600
-0x4F14DF: mov     ecx, [esp+10h+arg_0]
+0x4F14CC: push    edx; keyOut
+0x4F14CD: lea     eax, [esp+18h+position]
+0x4F14D1: push    eax; position
+0x4F14D2: mov     [esp+1Ch+valueOut], 0
+0x4F14DA: call    NiTMap_U32Pointer_GetNextEntry
+0x4F14DF: mov     ecx, [esp+10h+valueOut]
 0x4F14E3: mov     edx, [esp+10h+a2]
 0x4F14E7: push    ecx; a3
 0x4F14E8: mov     ecx, [esi+30h]; this
 0x4F14EB: push    edx; a2
 0x4F14EC: call    NiTMap_SetAt
-0x4F14F1: cmp     [esp+10h+var_8], 0
+0x4F14F1: cmp     [esp+10h+position], 0
 0x4F14F6: jnz     short loc_4F14C0
 0x4F14F8: pop     edi
 0x4F14F9: pop     esi

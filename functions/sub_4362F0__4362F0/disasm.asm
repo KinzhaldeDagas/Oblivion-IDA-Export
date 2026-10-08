@@ -2,13 +2,13 @@
 0x4362F1: push    ebp
 0x4362F2: push    esi
 0x4362F3: mov     ebx, 1
-0x4362F8: test    byte ptr dword_B33A28, bl
+0x4362F8: test    byte ptr unk_B33A28, bl
 0x4362FE: push    edi
 0x4362FF: mov     esi, ecx
 0x436301: jnz     short loc_436320
-0x436303: or      dword_B33A28, ebx
+0x436303: or      dword ptr unk_B33A28, ebx
 0x436309: push    offset sub_A17C30; void (__cdecl *)()
-0x43630E: mov     dword_B33A24, 0
+0x43630E: mov     dword ptr unk_B33A24, 0
 0x436318: call    _atexit
 0x43631D: add     esp, 4
 0x436320: movzx   ecx, word ptr [esi+0Ah]
@@ -19,11 +19,11 @@
 0x436330: lea     edx, [eax+1]
 0x436333: mov     [esi+0Ah], dx
 0x436337: mov     ecx, [ebp+0]
-0x43633A: cmp     ecx, dword_B33A24
+0x43633A: cmp     ecx, dword ptr unk_B33A24
 0x436340: jz      short loc_43636C
 0x436342: add     [esi+0Ch], bx
 0x436346: jmp     short loc_43636C
-0x436348: mov     ecx, dword_B33A24
+0x436348: mov     ecx, dword ptr unk_B33A24
 0x43634E: cmp     [ebp+0], ecx
 0x436351: mov     edx, [esi+4]
 0x436354: jz      short loc_436361

@@ -81,3 +81,18 @@
 0x69E5C1: pop     ebx
 0x69E5C2: add     esp, 10h
 0x69E5C5: retn    0Ch
+0x9C5D00: mov     ecx, [ebp-10h]
+0x9C5D03: jmp     MagicHitEffect_destr
+0x9C5D08: mov     ecx, [ebp-10h]
+0x9C5D0B: add     ecx, 30h ; '0'; slot
+0x9C5D0E: jmp     NiPointerSlot_Release
+0x9C5D13: mov     ecx, [ebp-10h]
+0x9C5D16: add     ecx, 34h ; '4'; slot
+0x9C5D19: jmp     NiPointerSlot_Release
+0x9C5D1E: mov     edx, [esp+arg_4]
+0x9C5D22: lea     eax, [edx-14h]
+0x9C5D25: mov     ecx, [edx-18h]
+0x9C5D28: xor     ecx, eax
+0x9C5D2A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5D2F: mov     eax, offset stru_AEE3DC
+0x9C5D34: jmp     ___CxxFrameHandler3

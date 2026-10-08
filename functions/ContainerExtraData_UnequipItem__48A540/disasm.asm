@@ -246,13 +246,13 @@
 0x48A825: mov     ecx, [eax]
 0x48A827: cmp     [ecx], edi
 0x48A829: jnz     short ContainerExtraData_UnequipItem___def_48A6E6; jumptable 0048A6E6 default case, cases 21,23-25,27-32
-0x48A82B: mov     ecx, ebp
-0x48A82D: call    sub_4DCCF0
+0x48A82B: mov     ecx, ebp; this
+0x48A82D: call    TESObjectREFR_ClearEquippedAmmo3D; AMMO form-type (0x22) unequip path: only when the selected worn ExtraDataList matches current equipped ammo, clear equipped ammo/quiver 3D before clearing process equipped-ammo data at vtable +0x10C.
 0x48A832: mov     ecx, [ebp+58h]
 0x48A835: mov     edx, [ecx]
 0x48A837: mov     eax, [edx+10Ch]
 0x48A83D: push    0
-0x48A83F: call    eax
+0x48A83F: call    eax; After TESObjectREFR_ClearEquippedAmmo3D, call MiddleHighProcess_SetEquippedAmmoData(NULL). Normal unequip therefore performs visual cleanup first and process-entry cleanup second.
 0x48A841: mov     ecx, [esp+18h+arg_14]; jumptable 0048A6E6 default case, cases 21,23-25,27-32
 0x48A845: push    ecx
 0x48A846: push    0
@@ -279,9 +279,9 @@
 0x48A890: jz      loc_48A935
 0x48A896: test    edi, edi
 0x48A898: jz      short loc_48A8F9
-0x48A89A: push    esi
-0x48A89B: mov     ecx, edi
-0x48A89D: call    ExtraDataList_CompareListForContainer
+0x48A89A: push    esi; other
+0x48A89B: mov     ecx, edi; this
+0x48A89D: call    ExtraDataList_CompareListForContainer; Asymmetric container-stack compatibility check (__thiscall, retn 4). Scans only 'other'. Returns true when the lists must remain distinct: other contains Script (0x12) or Ownership (0x27), this lacks a matching extra-data type, or that type's virtual CompareTo reports a difference. Count (0x2A) is deliberately ignored because callers merge counts separately. Returns false only when every relevant node in other is compatible.
 0x48A8A2: test    al, al
 0x48A8A4: jnz     short loc_48A8F9
 0x48A8A6: cmp     edi, esi
@@ -371,13 +371,13 @@
 0x48A986: mov     ecx, [esi]
 0x48A988: test    ecx, ecx
 0x48A98A: jz      short loc_48A991
-0x48A98C: call    BSSimpleList_Clear
+0x48A98C: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x48A991: mov     ecx, [esi]
 0x48A993: push    ecx
-0x48A994: call    FormHeapFree
+0x48A994: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48A999: push    esi
 0x48A99A: mov     dword ptr [esi], 0
-0x48A9A0: call    FormHeapFree
+0x48A9A0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48A9A5: add     esp, 8
 0x48A9A8: pop     edi
 0x48A9A9: pop     ebp
@@ -390,7 +390,7 @@
 0x48A9B8: jge     short loc_48A9C3
 0x48A9BA: test    ecx, ecx
 0x48A9BC: jz      short loc_48A9C3
-0x48A9BE: call    BSSimpleList_Clear
+0x48A9BE: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x48A9C3: mov     edx, [ebp+3Ch]
 0x48A9C6: push    edx
 0x48A9C7: mov     ecx, ebp

@@ -1,10 +1,10 @@
-0x42C3E0: push    ebx
+0x42C3E0: push    ebx; EnginePatch v5 CTD hotfix: bug remains verified here (raw-read clamp can underflow), but the full archive raw-read replacement is disabled by default because this asset-stream primitive is load-critical.
 0x42C3E1: mov     ebx, [esp+4+arg_8]
 0x42C3E5: push    esi
 0x42C3E6: mov     esi, ecx
 0x42C3E8: mov     eax, [esi+154h]
 0x42C3EE: push    edi
-0x42C3EF: mov     edi, [esi+158h]
+0x42C3EF: mov     edi, [esi+158h]; MEF decode: raw archive member read target guard. Validate current <= memberSize, relative <= remaining, base+current+relative does not wrap and does not equal 0xFFFFFFFF sentinel before entering archive critical section.
 0x42C3F5: add     edi, [esi+148h]
 0x42C3FB: add     edi, ebx
 0x42C3FD: test    eax, eax
@@ -26,7 +26,7 @@
 0x42C432: push    edx; Origin
 0x42C433: push    eax; Offset
 0x42C434: call    NiFile_Seek
-0x42C439: mov     edx, [esi+148h]
+0x42C439: mov     edx, [esi+148h]; MEF decode: raw archive member read count clamp. Compute remaining as memberSize - current - relative after bounds checks; clamp requested count or force zero on invalid state before raw fread.
 0x42C43F: mov     ecx, [esp+0Ch+Count]
 0x42C443: mov     eax, [esi+150h]
 0x42C449: push    ebp

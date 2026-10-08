@@ -54,7 +54,7 @@
 0x514BEF: mov     [esp+250h+var_1D4], 1
 0x514BF7: mov     [esp+250h+var_1BC], esi
 0x514BFE: mov     [esp+250h+var_19C], esi
-0x514C05: call    Script_ExtractArgs
+0x514C05: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x514C0A: add     esp, 2Ch
 0x514C0D: test    al, al
 0x514C0F: jnz     short loc_514C18
@@ -148,14 +148,14 @@
 0x514D66: fadd    [esp+224h+var_1E8]
 0x514D6A: fstp    [esp+224h+var_1FC]
 0x514D6E: xor     esi, esi
-0x514D70: mov     ecx, [esp+224h+var_204]
+0x514D70: mov     ecx, [esp+224h+var_204]; PlaceAtMe random-placement setup stores candidate 0 at the requested center, then uses Game_RandomLargeInteger to seed angular offsets for eight more candidates around a 100-unit ring, stepping by pi/4.
 0x514D74: mov     edx, [esp+224h+var_200]
 0x514D78: mov     eax, [esp+224h+var_1FC]
 0x514D7C: push    esi; Seed
-0x514D7D: mov     [esp+228h+var_130], ecx
+0x514D7D: mov     [esp+228h+var_130], ecx; 3DTheft decode: non-leveled PlaceAtMe candidate 0 is the requested center point copied from the caller/offset position.
 0x514D84: mov     [esp+228h+var_12C], edx
 0x514D8B: mov     [esp+228h+var_128], eax
-0x514D92: call    GetRandomLargeInteger?
+0x514D92: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x514D97: mov     [esp+228h+l], eax
 0x514D9B: fild    [esp+228h+l]
 0x514D9F: add     esp, 4
@@ -171,7 +171,7 @@
 0x514DD0: fld     [esp+224h+var_200]
 0x514DD4: fstp    [esp+224h+var_1F0]
 0x514DD8: fld     [esp+224h+l]
-0x514DDC: mov     [esp+224h+l], 8
+0x514DDC: mov     [esp+224h+l], 8; 3DTheft decode: PlaceAtMe builds eight additional 100-unit ring candidates around candidate 0; these are only reached as the per-ref candidate index advances.
 0x514DE4: fadd    [esp+224h+var_1FC]
 0x514DE8: fstp    [esp+224h+var_1C0]
 0x514DEC: lea     esp, [esp+0]
@@ -217,7 +217,7 @@
 0x514E97: jnz     loc_514DF0
 0x514E9D: mov     edi, dword ptr [esp+224h+var_1D8]
 0x514EA1: cmp     byte ptr [edi+4], 25h ; '%'
-0x514EA5: jnz     loc_514FBF
+0x514EA5: jnz     loc_514FBF; 3DTheft decode 2026-05-14: Cmd_PlaceAtMe checks base form type 0x25 (LVLC/TESLevCreature) before normal PlaceObjectRef. LVLC is resolved first, not passed directly to PlaceObjectRef.
 0x514EAB: lea     ecx, [esp+224h+var_1AC]
 0x514EAF: mov     [esp+224h+var_1E0], edi
 0x514EB3: call    TESContainer_constr
@@ -225,60 +225,60 @@
 0x514EBC: lea     ecx, [esp+224h+var_1AC]
 0x514EC0: push    ecx; int
 0x514EC1: mov     ecx, ds:0B333C4h
-0x514EC7: push    edx
+0x514EC7: push    edx; int
 0x514EC8: mov     [esp+22Ch+var_4], esi
 0x514ECF: call    Actor_GetLevel
 0x514ED4: lea     ecx, [edi+24h]; this
 0x514ED7: push    eax; int
-0x514ED8: call    TESLeveledList_CalcLeveledForm
+0x514ED8: call    TESLeveledList_CalcLeveledForm; 3DTheft decode 2026-05-14: PlaceAtMe resolves TESLevCreature.leveledList at player Actor_GetLevel into a temporary TESContainer before spawning concrete forms.
 0x514EDD: push    esi
 0x514EDE: mov     ecx, offset FormHeap
 0x514EE3: call    nullsub_returnFalse_1arg
 0x514EE8: test    al, al
 0x514EEA: jz      short loc_514EF8
-0x514EEC: lea     eax, [esp+224h+var_1AC]
+0x514EEC: lea     eax, [esp+228h+var_1B0]
 0x514EF0: push    eax
 0x514EF1: mov     ecx, edi
 0x514EF3: call    sub_4AFA80
-0x514EF8: lea     eax, [esp+224h+var_1A4]
-0x514EFF: mov     [esp+224h+a3], eax
+0x514EF8: lea     eax, [esp+228h+var_1A8]
+0x514EFF: mov     [esp+228h+var_1FC], eax
 0x514F03: jmp     short loc_514F09
-0x514F05: mov     eax, [esp+224h+a3]
+0x514F05: mov     eax, [esp+22Ch+var_200]
 0x514F09: cmp     [eax+4], esi
 0x514F0C: jnz     short loc_514F16
 0x514F0E: cmp     [eax], esi
 0x514F10: jz      loc_514FA6
 0x514F16: mov     edi, [eax]
 0x514F18: cmp     edi, esi
-0x514F1A: mov     [esp+224h+l], edi
+0x514F1A: mov     [esp+228h+var_20C], edi
 0x514F1E: jz      short loc_514F97
 0x514F20: cmp     [edi+4], esi
 0x514F23: jz      short loc_514F97
 0x514F25: cmp     [edi], esi
 0x514F27: jle     short loc_514F97
 0x514F29: lea     esp, [esp+0]
-0x514F30: push    esi
+0x514F30: push    esi; PlaceAtMe call setup: push existingRef=0, worldspace, parentCell, rot[3], pos[3], baseForm; ECX=*g_dataHandler; call TESDataHandler_PlaceObjectRef.
 0x514F31: mov     ecx, ebx; this
 0x514F33: call    TESObjectREFR_GetWorldSpace
 0x514F38: push    eax
 0x514F39: mov     ecx, ebx; this
-0x514F3B: call    TESObjectREFR_GetParentCell
+0x514F3B: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x514F40: push    eax
 0x514F41: mov     eax, [edi+4]
-0x514F44: lea     ecx, [esp+230h+var_160]
+0x514F44: lea     ecx, [esp+234h+var_164]
 0x514F4B: push    ecx
 0x514F4C: mov     ecx, ds:0B33A98h
-0x514F52: lea     edx, [esp+234h+var_204]
+0x514F52: lea     edx, [esp+238h+l]
 0x514F56: push    edx
 0x514F57: push    eax
-0x514F58: call    TESDataHandler_PlaceObjectRef
+0x514F58: call    TESDataHandler_PlaceObjectRef; PlaceAtMe leveled-list branch calls TESDataHandler::PlaceObjectRef using the calling ref's current parent cell and worldspace.
 0x514F5D: mov     esi, eax
 0x514F5F: test    esi, esi
-0x514F61: mov     [esp+224h+var_1D0], esi
+0x514F61: mov     [esp+228h+var_1D4], esi
 0x514F65: jz      short loc_514F8A
-0x514F67: mov     ecx, [esp+224h+var_1E0]; this
+0x514F67: mov     ecx, [esp+228h+var_1E4]; this
 0x514F6B: mov     edi, [esi]
-0x514F6D: call    TESObjectREFR_GetParentCell
+0x514F6D: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x514F72: mov     edx, [edi+12Ch]
 0x514F78: push    eax
 0x514F79: mov     ecx, esi
@@ -286,28 +286,28 @@
 0x514F7D: push    1
 0x514F7F: mov     ecx, esi
 0x514F81: call    sub_4D7A90
-0x514F86: mov     edi, [esp+224h+l]
+0x514F86: mov     edi, [esp+22Ch+var_210]
 0x514F8A: add     dword ptr [edi], 0FFFFFFFFh
 0x514F8D: xor     esi, esi
 0x514F8F: cmp     [edi], esi
 0x514F91: jg      short loc_514F30
-0x514F93: mov     eax, [esp+224h+a3]
+0x514F93: mov     eax, [esp+22Ch+var_200]
 0x514F97: mov     eax, [eax+4]
 0x514F9A: cmp     eax, esi
-0x514F9C: mov     [esp+224h+a3], eax
+0x514F9C: mov     [esp+22Ch+var_200], eax
 0x514FA0: jnz     loc_514F05
-0x514FA6: lea     ecx, [esp+224h+var_1AC]
-0x514FAA: mov     [esp+224h+var_4], 0FFFFFFFFh
+0x514FA6: lea     ecx, [esp+22Ch+var_1B4]
+0x514FAA: mov     [esp+22Ch+var_C], 0FFFFFFFFh
 0x514FB5: call    TESContainer_destr
 0x514FBA: jmp     loc_5152D9
 0x514FBF: xor     edi, edi
 0x514FC1: cmp     [esp+224h+var_1D4], esi
 0x514FC5: mov     [esp+224h+l], esi
 0x514FC9: jle     loc_5152D9
-0x514FCF: mov     eax, [ebx]
+0x514FCF: mov     eax, [ebx]; 3DTheft decode: direct non-leveled spawn loop starts with candidate index 0, so count=1 uses the requested center point.
 0x514FD1: fld1
 0x514FD3: movaps  xmm0, xmmword ptr ds:0BA7A40h
-0x514FDA: fstp    [esp+224h+a2.WorldRayCastOutput.HitFraction]
+0x514FDA: fstp    [esp+224h+a2.WorldRayCastOutput.HitFraction]; 3DTheft decode: PlaceAtMe initializes bhkWorldRayCastData output hitFraction=1.0 before spawn placement raycast.
 0x514FE1: mov     edx, [eax+174h]
 0x514FE7: mov     ecx, ebx
 0x514FE9: mov     [esp+224h+a2.WorldRayCastInput.EnableShapeCollectionFilter], 0
@@ -316,7 +316,7 @@
 0x514FFF: mov     [esp+224h+a2.RayHitCollector1], esi
 0x515006: mov     [esp+224h+a2.RayHitCollector2], esi
 0x51500D: movaps  xmmword ptr [esp+224h+a2.unk60.x], xmm0
-0x515015: mov     [esp+224h+a2.WorldRayCastInput.FilterInfo], 3001Bh
+0x515015: mov     [esp+224h+a2.WorldRayCastInput.FilterInfo], 3001Bh; 3DTheft decode: PlaceAtMe raycast uses filterInfo 0x3001B and shape collection filter disabled.
 0x515020: call    edx
 0x515022: mov     ecx, [eax]
 0x515024: mov     edx, [eax+4]
@@ -402,7 +402,7 @@
 0x51516C: fstp    st
 0x51516E: fstp    st(1)
 0x515170: fstp    st
-0x515172: call    TES__CastRay
+0x515172: call    TES__CastRay; 3DTheft decode: single PlaceAtMe spawn casts from caller position +64 GU to target +64 GU using TES::CastRay at 0x446A10.
 0x515177: fld     [esp+224h+var_1F0]
 0x51517B: fld     qword ptr [esp+224h+a3]
 0x51517F: fld     [esp+224h+var_170]
@@ -424,11 +424,11 @@
 0x5151BA: fstp    [esp+224h+var_1C4]
 0x5151BE: fsubrp  st(1), st
 0x5151C0: fstp    [esp+224h+var_1C0]
-0x5151C4: call    sub_43F350
+0x5151C4: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x5151C9: mov     edx, dword ptr [esp+224h+var_1D8]
 0x5151CD: fstp    st
 0x5151CF: push    edx
-0x5151D0: call    sub_46D5C0
+0x5151D0: call    sub_46D5C0; 3DTheft decode: on ray hit, PlaceAtMe backs target position away by model radius helper 0x46D5C0 before PlaceObjectRef.
 0x5151D5: fstp    [esp+228h+var_1E0]
 0x5151D9: fld     [esp+228h+var_1E0]
 0x5151DD: add     esp, 4
@@ -476,7 +476,7 @@
 0x515283: call    TESObjectREFR_GetWorldSpace
 0x515288: push    eax
 0x515289: mov     ecx, ebx; this
-0x51528B: call    TESObjectREFR_GetParentCell
+0x51528B: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x515290: mov     edx, dword ptr [esp+22Ch+var_1D8]
 0x515294: push    eax
 0x515295: lea     eax, [esp+230h+var_160]
@@ -485,10 +485,10 @@
 0x5152A1: push    ecx
 0x5152A2: mov     ecx, ds:0B33A98h
 0x5152A8: push    edx
-0x5152A9: call    TESDataHandler_PlaceObjectRef
-0x5152AE: cmp     eax, esi
+0x5152A9: call    TESDataHandler_PlaceObjectRef; 3DTheft decode: direct non-leveled PlaceAtMe call to TESDataHandler::PlaceObjectRef; branch returns without MoveToGroundLevel.
+0x5152AE: cmp     eax, esi; 3DTheft decode: direct PlaceAtMe only checks PlaceObjectRef return for null after call; no post-placement distance validation before success/count advance.
 0x5152B0: mov     [esp+224h+var_1D0], eax
-0x5152B4: jz      loc_514C11
+0x5152B4: jz      loc_514C11; 3DTheft decode: null returned ref is the direct non-leveled PlaceAtMe failure path.
 0x5152BA: add     edi, 1
 0x5152BD: cmp     edi, 9
 0x5152C0: jnz     short loc_5152C4
@@ -498,16 +498,16 @@
 0x5152CB: cmp     eax, [esp+224h+var_1D4]
 0x5152CF: mov     [esp+224h+l], eax
 0x5152D3: jl      loc_514FCF
-0x5152D9: mov     eax, [esp+224h+var_1D0]
+0x5152D9: mov     eax, dword ptr [esp+22Ch+var_1D8]
 0x5152DD: cmp     eax, esi
-0x5152DF: mov     [esp+224h+var_18C], esi
+0x5152DF: mov     dword ptr [esp+22Ch+var_198+4], esi
 0x5152E6: jz      short loc_51530A
-0x5152E8: mov     ecx, [esp+224h+var_164]
+0x5152E8: mov     ecx, dword ptr [esp+22Ch+var_170+4]
 0x5152EF: mov     eax, [eax+0Ch]
 0x5152F2: push    ecx
-0x5152F3: lea     edx, [esp+228h+var_18C]
+0x5152F3: lea     edx, [esp+230h+var_198+4]
 0x5152FA: push    edx
-0x5152FB: mov     [esp+22Ch+var_18C], eax
+0x5152FB: mov     dword ptr [esp+234h+var_198+4], eax
 0x515302: call    sub_4F9FB0
 0x515307: add     esp, 8
 0x51530A: mov     al, 1
@@ -523,3 +523,16 @@
 0x51532C: mov     esp, ebp
 0x51532E: pop     ebp
 0x51532F: retn
+0x9B71A0: lea     ecx, [ebp+var_1AC]
+0x9B71A6: jmp     TESContainer_destr
+0x9B71AB: mov     edx, [esp-4+arg_4]
+0x9B71AF: lea     eax, [edx-214h]
+0x9B71B5: mov     ecx, [edx-218h]
+0x9B71BB: xor     ecx, eax
+0x9B71BD: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B71C2: add     eax, 0Ch
+0x9B71C5: mov     ecx, [edx-8]
+0x9B71C8: xor     ecx, eax
+0x9B71CA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B71CF: mov     eax, offset stru_AE1E14
+0x9B71D4: jmp     ___CxxFrameHandler3

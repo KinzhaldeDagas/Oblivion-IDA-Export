@@ -1,8 +1,8 @@
-0x4E50E0: push    ebx
+0x4E50E0: push    ebx; Verified — PGRL loading populates pointsByReference (+0x34): key is a TESObjectREFR* and value is a BSSimpleList of TESPathGridPoint*. Duplicate point pointers are suppressed. Cross-reference from TESPathGrid_LoadSerializedGraphChunks at 0x4E678A.
 0x4E50E1: mov     ebx, [esp+4+a2]
 0x4E50E5: test    ebx, ebx
 0x4E50E7: jz      short loc_4E5163
-0x4E50E9: cmp     [esp+4+arg_4], 0
+0x4E50E9: cmp     [esp+4+point], 0
 0x4E50EE: jz      short loc_4E5163
 0x4E50F0: push    esi
 0x4E50F1: push    edi
@@ -36,12 +36,12 @@
 0x4E5142: mov     eax, esi
 0x4E5144: jz      short loc_4E5155
 0x4E5146: mov     ecx, [eax]
-0x4E5148: cmp     ecx, [esp+0Ch+arg_4]
+0x4E5148: cmp     ecx, [esp+0Ch+point]
 0x4E514C: jz      short loc_4E5161
 0x4E514E: mov     eax, [eax+4]
 0x4E5151: test    eax, eax
 0x4E5153: jnz     short loc_4E5146
-0x4E5155: mov     edx, [esp+0Ch+arg_4]
+0x4E5155: mov     edx, [esp+0Ch+point]
 0x4E5159: push    edx
 0x4E515A: mov     ecx, esi
 0x4E515C: call    BSSimpleList_PushFront

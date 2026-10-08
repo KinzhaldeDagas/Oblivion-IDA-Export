@@ -1,4 +1,4 @@
-0x502320: fldz
+0x502320: fldz; ScriptEffectFinish begin-block callback: returns 1.0 only when eventList->m_scriptEffectInfo exists and byte 1 is set.
 0x502322: mov     eax, [esp+arg_14]
 0x502326: test    eax, eax
 0x502328: mov     ecx, [esp+arg_18]

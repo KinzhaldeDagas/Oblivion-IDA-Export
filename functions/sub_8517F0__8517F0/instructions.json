@@ -379,19 +379,19 @@
   },
   {
     "ea": "0x8518A2",
-    "line": "push    eax",
+    "line": "push    eax; preset",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8518A3",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8518A5",
-    "line": "call    sub_7715E0",
+    "line": "call    NiD3DTextureStage_ApplyAddressModePreset; Apply one native address-preset row to a NiD3DTextureStage: D3DSAMP_ADDRESSU (1) and D3DSAMP_ADDRESSV (2). Lighting30 SimpleShadow uses preset 0 = CLAMP/CLAMP.",
     "mnemonic": "call",
     "size": 5
   },
@@ -733,25 +733,25 @@
   },
   {
     "ea": "0x851947",
-    "line": "push    eax",
+    "line": "push    eax; preset",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x851948",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x85194A",
-    "line": "call    sub_7715E0",
+    "line": "call    NiD3DTextureStage_ApplyAddressModePreset; Apply one native address-preset row to a NiD3DTextureStage: D3DSAMP_ADDRESSU (1) and D3DSAMP_ADDRESSV (2). Lighting30 SimpleShadow uses preset 0 = CLAMP/CLAMP.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x85194F",
-    "line": "cmp     byte ptr [esp+2Ch+arg_10], 0",
+    "line": "cmp     byte ptr [esp+2Ch+value], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x85195E",
-    "line": "mov     [esp+2Ch+arg_10], edi",
+    "line": "mov     [esp+2Ch+value], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -793,25 +793,25 @@
   },
   {
     "ea": "0x851969",
-    "line": "lea     ecx, [esp+2Ch+arg_10]",
+    "line": "lea     ecx, [esp+2Ch+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x85196D",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x85196E",
-    "line": "push    edx",
+    "line": "push    edx; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x85196F",
-    "line": "lea     ecx, [esi+40h]",
+    "line": "lea     ecx, [esi+40h]; this",
     "mnemonic": "lea",
     "size": 3
   },
@@ -823,7 +823,7 @@
   },
   {
     "ea": "0x85197A",
-    "line": "call    sub_76CE40",
+    "line": "call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -859,7 +859,7 @@
   },
   {
     "ea": "0x85198D",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -922,5 +922,59 @@
     "line": "retn    14h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D34B0",
+    "line": "lea     ecx, [ebp+14h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D34B3",
+    "line": "jmp     sub_4027D0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D34B8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D34BC",
+    "line": "lea     eax, [edx-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D34BF",
+    "line": "mov     ecx, [edx-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D34C2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D34C4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D34C9",
+    "line": "mov     eax, offset stru_AFB8C8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D34CE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

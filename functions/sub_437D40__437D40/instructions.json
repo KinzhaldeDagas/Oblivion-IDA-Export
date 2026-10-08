@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x437D6F",
-    "line": "mov     ecx, ModelLoaderPtr",
+    "line": "mov     ecx, ds:0B33A1Ch",
     "mnemonic": "mov",
     "size": 6
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x437D7A",
-    "line": "lea     eax, [esp+110h+var_10C]",
+    "line": "lea     eax, [esp+110h+slot]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x437D7F",
-    "line": "mov     [esp+114h+var_10C], 0",
+    "line": "mov     [esp+114h+slot], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x437D97",
-    "line": "mov     eax, [esp+110h+var_10C]",
+    "line": "mov     eax, [esp+110h+slot]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x437D9F",
-    "line": "mov     ecx, [eax+8]",
+    "line": "mov     ecx, [eax+8]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x437DA7",
-    "line": "call    sub_700900",
+    "line": "call    NiObject_CloneWithPointerMap; Clones a loaded NiObject with a temporary pointer map and runs clone post-processing; the returned scene object is distinct from its source.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x437DC2",
-    "line": "mov     [esp+118h+var_10C], esi",
+    "line": "mov     [esp+118h+slot], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -301,13 +301,13 @@
   },
   {
     "ea": "0x437DD0",
-    "line": "lea     ecx, [esp+118h+var_10C]; this",
+    "line": "lea     ecx, [esp+118h+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x437DD4",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },

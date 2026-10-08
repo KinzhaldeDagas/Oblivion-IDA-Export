@@ -12,7 +12,7 @@
 0x7E5B6A: lea     eax, [esp+20h+var_C]
 0x7E5B6E: mov     large fs:0, eax
 0x7E5B74: mov     ebp, ecx
-0x7E5B76: mov     esi, [esp+20h+arg_0]
+0x7E5B76: mov     esi, [esp+20h+element]
 0x7E5B7A: test    esi, esi
 0x7E5B7C: jz      loc_7E5C16
 0x7E5B82: mov     eax, [esi]
@@ -27,13 +27,13 @@
 0x7E5B99: jz      short loc_7E5C16
 0x7E5B9B: lea     ebx, [esi+4]
 0x7E5B9E: push    ebx; lpAddend
-0x7E5B9F: mov     [esp+24h+arg_0], esi
+0x7E5B9F: mov     [esp+24h+element], esi
 0x7E5BA3: call    dword ptr ds:0A28078h
-0x7E5BA9: lea     eax, [esp+20h+arg_0]
-0x7E5BAD: push    eax
-0x7E5BAE: lea     ecx, [ebp+110h]
+0x7E5BA9: lea     eax, [esp+20h+element]
+0x7E5BAD: push    eax; element
+0x7E5BAE: lea     ecx, [ebp+110h]; self
 0x7E5BB4: mov     [esp+24h+var_4], 0
-0x7E5BBC: call    NiTArray_AddItem
+0x7E5BBC: call    NiTObjectArray_AddFirstEmpty
 0x7E5BC1: push    ebx; lpAddend
 0x7E5BC2: mov     [esp+24h+var_4], 0FFFFFFFFh
 0x7E5BCA: call    dword ptr ds:0A2807Ch
@@ -72,3 +72,12 @@
 0x7E5C25: pop     ebx
 0x7E5C26: add     esp, 0Ch
 0x7E5C29: retn    4
+0x9CF800: lea     ecx, [ebp+4]; slot
+0x9CF803: jmp     NiPointerSlot_Release
+0x9CF808: mov     edx, [esp+arg_4]
+0x9CF80C: lea     eax, [edx-10h]
+0x9CF80F: mov     ecx, [edx-14h]
+0x9CF812: xor     ecx, eax
+0x9CF814: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CF819: mov     eax, offset stru_AF8414
+0x9CF81E: jmp     ___CxxFrameHandler3

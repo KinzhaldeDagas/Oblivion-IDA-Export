@@ -48,7 +48,7 @@
 0x482449: fld     [esp+10h+arg_0]
 0x48244D: push    ecx
 0x48244E: fstp    [esp+14h+var_14]; float
-0x482451: call    sub_4D4970
+0x482451: call    sub_4D4970; BloodOnDeath decode 2026-05-30: exterior grid update calls sub_4D4970 for selected child cells; the decal counter reset happens inside each child-cell geometry update path.
 0x482456: add     esi, 1
 0x482459: cmp     esi, ebp
 0x48245B: jb      short loc_482402

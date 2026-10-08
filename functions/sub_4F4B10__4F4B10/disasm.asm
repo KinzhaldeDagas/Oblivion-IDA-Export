@@ -1,4 +1,4 @@
-0x4F4B10: fldz
+0x4F4B10: fldz; Shared GetTalkedToPC callback backs GetTalkedToPC and GetTalkedToPCParam; the vanilla-master scan found 540 condition rows for the former. The former requires a subject and has no params; the Param variant permits no subject and declares an Actor param.
 0x4F4B12: push    esi
 0x4F4B13: mov     esi, [esp+4+arg_0]
 0x4F4B17: test    esi, esi

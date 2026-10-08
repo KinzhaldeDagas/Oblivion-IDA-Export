@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x71FEA3",
-    "line": "call    ??1NiTriShapeDynamicData@@UAE@XZ; NiTriShapeDynamicData::~NiTriShapeDynamicData(void)",
+    "line": "call    NiTriShapeData_Destruct; Destroy NiTriShapeData triangle indices, linked shared-normal index-pool blocks, and the per-entry shared-normal array.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x71FEA8",
-    "line": "test    byte ptr [esp+4+arg_0], 1",
+    "line": "test    byte ptr [esp+4+flags], 1",
     "mnemonic": "test",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x71FEB0",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

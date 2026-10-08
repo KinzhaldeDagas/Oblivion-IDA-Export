@@ -1,1 +1,1 @@
-NiBackToFrontAccumulator
+struct NiBackToFrontAccumulator;

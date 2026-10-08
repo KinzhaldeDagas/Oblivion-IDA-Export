@@ -1,4 +1,4 @@
-0x608B60: push    ebp
+0x608B60: push    ebp; ArrowProjectile complete destructor; releases projectile-owned state, then invokes MobileObject destruction and returns this.
 0x608B61: mov     ebp, esp
 0x608B63: and     esp, 0FFFFFFF0h
 0x608B66: push    0FFFFFFFFh
@@ -19,9 +19,9 @@
 0x608B97: mov     [esp+44h+var_34], esi
 0x608B9B: mov     dword ptr [esi], offset ??_7ArrowProjectile@@6BArrowProjectile@@@; const ArrowProjectile::`vftable'{for `ArrowProjectile'}
 0x608BA1: mov     dword ptr [esi+18h], offset ??_7ArrowProjectile@@6BTESChildCell@@@; const ArrowProjectile::`vftable'{for `TESChildCell'}
-0x608BA8: sub     dword ptr ds:0B3B7D0h, 1
+0x608BA8: sub     dword ptr ds:0B3B7D0h, 1; ArrowProjectile destruction decrements g_liveArrowProjectileCount, balancing initialization/construction accounting.
 0x608BAF: push    esi
-0x608BB0: mov     ecx, offset ActorProcessManager_ptr.unk4C
+0x608BB0: mov     ecx, (offset qword_B3BB2C+224h)
 0x608BB5: mov     [esp+48h+var_4], 0
 0x608BBD: call    BSSimpleList_Remove
 0x608BC2: mov     eax, [esi+3Ch]
@@ -32,8 +32,8 @@
 0x608BCE: jz      short loc_608C0C
 0x608BD0: cmp     dword ptr [ecx], 1
 0x608BD3: jnz     short loc_608C0C
-0x608BD5: push    eax
-0x608BD6: call    sub_480340
+0x608BD5: push    eax; object
+0x608BD6: call    NiAVObject_FindBhkCollisionObjectRecursive; Returns the first bhk collision object found on object or recursively beneath its NiNode children. This is structural traversal, independent of node names.
 0x608BDB: add     esp, 4
 0x608BDE: test    eax, eax
 0x608BE0: jz      short loc_608C0C
@@ -52,7 +52,7 @@
 0x608C03: push    eax
 0x608C04: call    sub_535DD0
 0x608C09: add     esp, 8
-0x608C0C: cmp     byte ptr [esi+94h], 0
+0x608C0C: cmp     byte ptr [esi+94h], 0; Destructor skips live target/collision detach notification while +0x94 says the embedded collision link is still an unresolved post-load fixup.
 0x608C13: jnz     short loc_608C56
 0x608C15: mov     eax, [esi+5Ch]
 0x608C18: test    eax, eax
@@ -81,7 +81,7 @@
 0x608C54: call    eax
 0x608C56: mov     eax, [esi+5Ch]
 0x608C59: push    eax
-0x608C5A: call    FormHeapFree
+0x608C5A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x608C5F: add     esp, 4
 0x608C62: push    0; a2
 0x608C64: mov     ecx, esi; this
@@ -105,3 +105,16 @@
 0x608CAA: mov     esp, ebp
 0x608CAC: pop     ebp
 0x608CAD: retn
+0x9C2F30: mov     ecx, [ebp+var_34]
+0x9C2F33: jmp     MobileObject_destr
+0x9C2F38: mov     edx, [esp-4+arg_4]
+0x9C2F3C: lea     eax, [edx-34h]
+0x9C2F3F: mov     ecx, [edx-38h]
+0x9C2F42: xor     ecx, eax
+0x9C2F44: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C2F49: add     eax, 4
+0x9C2F4C: mov     ecx, [edx-8]
+0x9C2F4F: xor     ecx, eax
+0x9C2F51: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C2F56: mov     eax, offset stru_AEBC4C
+0x9C2F5B: jmp     ___CxxFrameHandler3

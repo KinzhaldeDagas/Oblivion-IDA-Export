@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7D70A0",
-    "line": "push    esi",
+    "line": "push    esi; Begin a render-target-group stack entry: resolve null to the default group, end any currently ready group, begin the requested group, then strong-own it on the ten-entry global stack.",
     "mnemonic": "push",
     "size": 1
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x7D70BB",
-    "line": "cmp     byte ptr [esi+20Ch], 0",
+    "line": "cmp     byte ptr [esi+20Ch], 0; If another target group is ready, end it before beginning the new stack entry.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x7D70C6",
-    "line": "call    sub_7D6B00",
+    "line": "call    NiDX9Renderer_EndRenderTargetGroupLocked; Locked target-group end wrapper: run EndUsingRenderTargetGroup, release the renderer lock, and clear IsReady. It does not itself bind another target.",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,13 +151,13 @@
   },
   {
     "ea": "0x7D70E9",
-    "line": "push    eax; a2",
+    "line": "push    eax; targetGroup",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D70EA",
-    "line": "call    sub_7D6A80",
+    "line": "call    NiDX9Renderer_BeginRenderTargetGroupLocked; Begin the selected render-target group with the caller's clear flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x7D70F7",
-    "line": "jnb     short loc_7D710D",
+    "line": "jnb     short loc_7D710D; The global render-target ownership stack accepts at most ten entries.",
     "mnemonic": "jnb",
     "size": 2
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x7D7101",
-    "line": "call    NiSmartPointer_Set??",
+    "line": "call    NiSmartPointer_Set??; Strong-own the selected group in the next stack slot.",
     "mnemonic": "call",
     "size": 5
   },

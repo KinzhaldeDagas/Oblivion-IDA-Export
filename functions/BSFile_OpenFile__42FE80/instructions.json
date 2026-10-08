@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x42FF4F",
-    "line": "add     esp, 4",
+    "line": "add     esp, 4; MEF v41 verified BSFile open-buffer OOM guard: success replays test BL and stores buffer; failure stores null at +0x18, clears open-success byte +0x24, and returns through 0x42FF74 before preload/later buffered I/O can use null.",
     "mnemonic": "add",
     "size": 3
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x42FF74",
-    "line": "mov     al, [esi+24h]",
+    "line": "mov     al, [esi+24h]; MEF v41 allocation-failure continuation returns BSFile +0x24 status through the normal EBX/ESI/EBP epilogue.",
     "mnemonic": "mov",
     "size": 3
   },

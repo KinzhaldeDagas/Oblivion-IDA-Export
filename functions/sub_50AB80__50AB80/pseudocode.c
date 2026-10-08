@@ -16,31 +16,31 @@ bool __cdecl sub_50AB80(
   UInt16 v13[2]; // [esp+4h] [ebp-8h] BYREF
   int v14; // [esp+8h] [ebp-4h] BYREF
 
-  *(_DWORD *)v13 = 0;
-  v14 = 0;
-  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v13, &v14);
-  if ( result )
+  *(_DWORD *)v13 = 0; /*0x50abb1*/
+  v14 = 0; /*0x50abb9*/
+  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v13, &v14); /*0x50abc1*/
+  if ( result ) /*0x50abcb*/
   {
-    *a7 = 0.0;
-    v9 = (Actor *)OblivionDynamicCast(
+    *a7 = 0.0; /*0x50abda*/
+    v9 = (Actor *)OblivionDynamicCast( /*0x50abe9*/
                     a4,
                     0,
                     (struct _s_RTTICompleteObjectLocator *)&TESObjectREFR `RTTI Type Descriptor',
                     &Actor `RTTI Type Descriptor',
                     0);
-    v10 = v9;
-    if ( v9 )
+    v10 = v9; /*0x50abee*/
+    if ( v9 ) /*0x50abf5*/
     {
-      ActorBaseForm = Actor_GetActorBaseForm(v9, 1);
-      if ( !ActorBaseForm[2].member.modlist.data && !ActorBaseForm[2].member.refID )
-        ActorBaseForm = Actor_GetActorBaseForm(v10, 0);
-      if ( ActorBaseForm )
+      ActorBaseForm = Actor_GetActorBaseForm(v9, 1); /*0x50abfb*/
+      if ( !ActorBaseForm[2].member.modlist.data && !ActorBaseForm[2].member.refID ) /*0x50ac06*/
+        ActorBaseForm = Actor_GetActorBaseForm(v10, 0); /*0x50ac10*/
+      if ( ActorBaseForm ) /*0x50ac17*/
       {
-        if ( *(_DWORD *)v13 )
-          TESActorBaseData_SetFactionRank((char *)&ActorBaseForm[1].member.refID, *(int *)v13, v14, v12, v13[0]);
+        if ( *(_DWORD *)v13 ) /*0x50ac1f*/
+          TESActorBaseData_SetFactionRank((char *)&ActorBaseForm[1].member.refID, *(int *)v13, v14, v12, v13[0]); /*0x50ac2a*/
       }
     }
-    return 1;
+    return 1; /*0x50ac2f*/
   }
-  return result;
+  return result; /*0x50abcd*/
 }

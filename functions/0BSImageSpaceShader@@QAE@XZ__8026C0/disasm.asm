@@ -1,4 +1,4 @@
-0x8026C0: push    0FFFFFFFFh
+0x8026C0: push    0FFFFFFFFh; MoonSugarEffect decode: BSImageSpaceShader base ctor calls BSShader ctor, sets vtable, clears source texture +0x7C and scalar fields +0x80..+0x8C.
 0x8026C2: push    offset ??0BSImageSpaceShader@@QAE@XZ_SEH
 0x8026C7: mov     eax, large fs:0
 0x8026CD: push    eax
@@ -46,3 +46,15 @@
 0x80275B: pop     esi
 0x80275C: add     esp, 10h
 0x80275F: retn
+0x9D07B0: mov     ecx, [ebp-10h]; this
+0x9D07B3: jmp     ??1BSShader@@UAE@XZ;
+0x9D07B8: mov     ecx, [ebp-10h]
+0x9D07BB: add     ecx, 7Ch ; '|'; slot
+0x9D07BE: jmp     NiPointerSlot_Release
+0x9D07C3: mov     edx, [esp+arg_4]
+0x9D07C7: lea     eax, [edx-0Ch]
+0x9D07CA: mov     ecx, [edx-10h]
+0x9D07CD: xor     ecx, eax
+0x9D07CF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D07D4: mov     eax, offset stru_AF90C8
+0x9D07D9: jmp     ___CxxFrameHandler3

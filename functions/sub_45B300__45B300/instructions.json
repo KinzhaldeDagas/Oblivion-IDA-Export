@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x45B300",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; MEF v56 lifetime audit: bounded instruction scan452000..467000 and follow-up callees identify owner ID-array writers in ctor45B300, destroy453250, mappings45E0D0/45E180, load45E3D0 and reset462080. Other+74/+78 hits were reads or vtable displacements. Constructor wrapper suspends/invalidates auxiliary indices before/after native body with SEH finally; original prolog trampoline and EAX retained.",
     "mnemonic": "push",
     "size": 2
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x45B3DC",
-    "line": "mov     [esp+24h+var_10], eax",
+    "line": "mov     [esp+24h+value], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -379,13 +379,13 @@
   },
   {
     "ea": "0x45B3E8",
-    "line": "mov     ecx, eax; this",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x45B3EA",
-    "line": "call    ??0ChangesMap@@QAE@XZ",
+    "line": "call    ??0ChangesMap@@QAE@XZ;",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x45B406",
-    "line": "mov     [esp+24h+var_10], eax",
+    "line": "mov     [esp+24h+value], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -463,13 +463,13 @@
   },
   {
     "ea": "0x45B416",
-    "line": "mov     ecx, eax; this",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x45B418",
-    "line": "call    ??0InteriorCellNewReferencesMap@@QAE@XZ",
+    "line": "call    InteriorCellNewReferencesMap_ctor;",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x45B432",
-    "line": "mov     [esp+24h+var_10], eax",
+    "line": "mov     [esp+24h+value], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -541,13 +541,13 @@
   },
   {
     "ea": "0x45B442",
-    "line": "mov     ecx, eax; this",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x45B444",
-    "line": "call    ??0ExteriorCellNewReferencesMap@@QAE@XZ",
+    "line": "call    ExteriorCellNewReferencesMap_ctor;",
     "mnemonic": "call",
     "size": 5
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x45B45E",
-    "line": "mov     [esp+24h+var_10], eax",
+    "line": "mov     [esp+24h+value], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -619,13 +619,13 @@
   },
   {
     "ea": "0x45B46E",
-    "line": "mov     ecx, eax; this",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x45B470",
-    "line": "call    ??0ExteriorCellNewReferencesMap@@QAE@XZ",
+    "line": "call    ExteriorCellNewReferencesMap_ctor;",
     "mnemonic": "call",
     "size": 5
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x45B48A",
-    "line": "mov     [esp+24h+var_10], eax",
+    "line": "mov     [esp+24h+value], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -733,7 +733,7 @@
   },
   {
     "ea": "0x45B4AB",
-    "line": "mov     [esi+54h], eax",
+    "line": "mov     [esi+54h], eax; MEF PERF 2026-09-08: Qualified map ownership connection now verified: constructors45B49C/45B4C8/45B4F4/45B520 instantiate NumericIDBufferMap and publish owner+54/+58/+5C/+60 respectively. Existing v55 raw blob helper still uses bucket-chain lookup. Do not globally alter map bucket counts or iteration order from this performance observation alone.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -751,7 +751,7 @@
   },
   {
     "ea": "0x45B4B6",
-    "line": "mov     [esp+24h+var_10], eax",
+    "line": "mov     [esp+24h+value], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -829,7 +829,7 @@
   },
   {
     "ea": "0x45B4E2",
-    "line": "mov     [esp+24h+var_10], eax",
+    "line": "mov     [esp+24h+value], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -907,7 +907,7 @@
   },
   {
     "ea": "0x45B50E",
-    "line": "mov     [esp+24h+var_10], eax",
+    "line": "mov     [esp+24h+value], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -991,7 +991,7 @@
   },
   {
     "ea": "0x45B53C",
-    "line": "mov     [esp+24h+var_10], edi",
+    "line": "mov     [esp+24h+value], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1027,7 +1027,7 @@
   },
   {
     "ea": "0x45B553",
-    "line": "mov     [edi+8], eax",
+    "line": "mov     [edi+8], eax; MEF PERF 2026-09-08: Verified PERF-4 initialization: owner+74h NumericID array initial capacity100 at45B553, growth50 at45B566, published45B587. Layout:+4data,+8capacity,+Cused,+10nonzeroCount,+14growth. Constructor/reset inserts zero at index0; bulk loader later clears used-size before reading.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1141,7 +1141,7 @@
   },
   {
     "ea": "0x45B591",
-    "line": "mov     [esp+24h+var_10], ebx",
+    "line": "mov     [esp+24h+value], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1171,37 +1171,37 @@
   },
   {
     "ea": "0x45B59D",
-    "line": "call    sub_452910",
+    "line": "call    NiTLargeArray_Resize32",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x45B5A2",
-    "line": "lea     ecx, [esp+24h+var_10]",
+    "line": "lea     ecx, [esp+24h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x45B5A6",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45B5A7",
-    "line": "push    ebx",
+    "line": "push    ebx; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45B5A8",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x45B5AA",
-    "line": "call    sub_446C50",
+    "line": "call    NiTLargeArray32_SetSlot",
     "mnemonic": "call",
     "size": 5
   },
@@ -1231,7 +1231,7 @@
   },
   {
     "ea": "0x45B5BB",
-    "line": "mov     [esp+24h+var_10], edi",
+    "line": "mov     [esp+24h+value], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1267,7 +1267,7 @@
   },
   {
     "ea": "0x45B5D2",
-    "line": "mov     [edi+8], eax",
+    "line": "mov     [edi+8], eax; MEF PERF 2026-09-08: PERF-4 worldspace ID array starts capacity5, growth1 at45B5E5, published owner+78h45B606. Diagnostics in45E220/45E3D0 identify this as WorldSpace ID Array. Growth1 causes a reallocate/copy at every appended entry once capacity is exhausted.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1381,7 +1381,7 @@
   },
   {
     "ea": "0x45B610",
-    "line": "mov     [esp+24h+var_10], ebx",
+    "line": "mov     [esp+24h+value], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1411,37 +1411,37 @@
   },
   {
     "ea": "0x45B61C",
-    "line": "call    sub_452910",
+    "line": "call    NiTLargeArray_Resize32",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x45B621",
-    "line": "lea     ecx, [esp+24h+var_10]",
+    "line": "lea     ecx, [esp+24h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x45B625",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45B626",
-    "line": "push    ebx",
+    "line": "push    ebx; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45B627",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x45B629",
-    "line": "call    sub_446C50",
+    "line": "call    NiTLargeArray32_SetSlot",
     "mnemonic": "call",
     "size": 5
   },
@@ -1558,5 +1558,347 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9AE2C0",
+    "line": "mov     eax, [ebp-10h]; Microsoft VisualC 2-14/net runtime",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE2C3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE2C4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE2C9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE2CA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE2CB",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE2CE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE2CF",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE2D4",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE2D5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE2D6",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE2D9",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE2DA",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE2DF",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE2E0",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE2E1",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE2E4",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE2E5",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE2EA",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE2EB",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE2EC",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE2EF",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE2F0",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE2F5",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE2F6",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE2F7",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE2FA",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE2FB",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE300",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE301",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE302",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE305",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE306",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE30B",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE30C",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE30D",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE310",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE311",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE316",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE317",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE318",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE31B",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE31C",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE321",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE322",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE323",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE326",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE327",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE32C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE32D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE32E",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AE332",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE335",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE338",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AE33A",
+    "line": "call    @__security_check_cookie@4",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE33F",
+    "line": "mov     eax, offset stru_ADAB60",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE344",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

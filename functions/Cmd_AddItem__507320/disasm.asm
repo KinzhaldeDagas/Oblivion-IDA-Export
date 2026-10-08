@@ -31,7 +31,7 @@
 0x507372: push    eax; a1
 0x507373: mov     [esp+58h+var_24], 0
 0x50737B: mov     [esp+58h+a3], 0
-0x507383: call    Script_ExtractArgs
+0x507383: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x507388: add     esp, 24h
 0x50738B: test    al, al
 0x50738D: jnz     short loc_5073A2
@@ -63,11 +63,11 @@
 0x5073E0: mov     ecx, ds:0B333C4h
 0x5073E6: lea     edx, [esp+34h+var_1C]
 0x5073EA: push    edx; int
-0x5073EB: push    eax
+0x5073EB: push    eax; int
 0x5073EC: call    Actor_GetLevel
 0x5073F1: lea     ecx, [esi+24h]; this
 0x5073F4: push    eax; int
-0x5073F5: call    TESLeveledList_CalcLeveledForm
+0x5073F5: call    TESLeveledList_CalcLeveledForm; CustomAnimSupport decode: leveled-list resolver evidence with chance/level/random/container logic; not used as deterministic animation target list.
 0x5073FA: jmp     short loc_507435
 0x5073FC: mov     ecx, [esp+34h+var_24]
 0x507400: test    ecx, ecx
@@ -90,13 +90,13 @@
 0x50742D: call    PrintError
 0x507432: add     esp, 8
 0x507435: push    ebp; ntint
-0x507436: lea     ecx, [esp+38h+var_1C]; this
+0x507436: lea     ecx, [esp+3Ch+a3]; this
 0x50743A: call    TESContainer_CopyContentsToRef
-0x50743F: lea     ecx, [esp+34h+var_1C]
-0x507443: mov     [esp+34h+unk], 0FFFFFFFFh
+0x50743F: lea     ecx, [esp+38h+a3]
+0x507443: mov     [esp+38h+var_8], 0FFFFFFFFh
 0x50744B: call    TESContainer_destr
 0x507450: mov     al, 1
-0x507452: mov     ecx, [esp+34h+var_C]
+0x507452: mov     ecx, [esp+38h+var_1C.list.next]
 0x507456: mov     large fs:0, ecx
 0x50745D: pop     ecx
 0x50745E: pop     esi
@@ -104,3 +104,12 @@
 0x507460: pop     ebx
 0x507461: add     esp, 24h
 0x507464: retn
+0x9B6DC0: lea     ecx, [ebp-1Ch]
+0x9B6DC3: jmp     TESContainer_destr
+0x9B6DC8: mov     edx, [esp+a2]
+0x9B6DCC: lea     eax, [edx-24h]
+0x9B6DCF: mov     ecx, [edx-28h]
+0x9B6DD2: xor     ecx, eax
+0x9B6DD4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B6DD9: mov     eax, offset stru_AE1AE4
+0x9B6DDE: jmp     ___CxxFrameHandler3

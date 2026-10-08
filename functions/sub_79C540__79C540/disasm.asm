@@ -1,4 +1,4 @@
-0x79C540: push    ebp
+0x79C540: push    ebp; Source-match: CFrondEngine::BuildBladeVertices. Builds shared highest-LOD blade vertices for each guide/blade, with diffuse texcoords, static/dynamic lighting data, tangents/binormals, wind weights, and length-adjusted T coords.
 0x79C541: mov     ebp, esp
 0x79C543: and     esp, 0FFFFFFF8h
 0x79C546: push    0FFFFFFFFh
@@ -42,16 +42,16 @@
 0x79C5DC: movzx   eax, ax
 0x79C5DF: mov     [esp+1A4h+var_EC], eax
 0x79C5E6: xor     eax, eax
-0x79C5E8: mov     [esp+1A4h+var_148], eax
-0x79C5EC: mov     [esp+1A4h+var_144], eax
-0x79C5F0: mov     [esp+1A4h+var_140], eax
-0x79C5F4: mov     ecx, ebx
+0x79C5E8: mov     [esp+1A4h+var_14C.begin], eax
+0x79C5EC: mov     [esp+1A4h+var_14C.end], eax
+0x79C5F0: mov     [esp+1A4h+var_14C.capacity], eax
+0x79C5F4: mov     ecx, ebx; this
 0x79C5F6: fst     [esp+1A4h+var_15C]
 0x79C5FA: mov     [esp+1A4h+var_4], eax
 0x79C601: fst     [esp+1A4h+var_160]
 0x79C605: mov     [esp+1A4h+var_178], eax
-0x79C609: fstp    [esp+1A4h+var_164]
-0x79C60D: call    sub_799EE0
+0x79C609: fstp    [esp+1A4h+binormal]
+0x79C60D: call    OB_stVector_SFrondVertex_Size_010201A0; Oblivion-authoritative size query for the SFrondVertex vector. Computes (end-begin)/0x38; returns zero when begin is null.
 0x79C612: test    eax, eax
 0x79C614: jbe     loc_79D5A3
 0x79C61A: mov     ecx, [esp+1A4h+var_114]
@@ -61,8 +61,8 @@
 0x79C62C: fadd    dword ptr ds:0A2FC78h
 0x79C632: fmul    [esp+1A4h+var_A0]
 0x79C639: fstp    [esp+1A4h+var_F8]
-0x79C640: mov     ecx, ebx
-0x79C642: call    sub_799EE0
+0x79C640: mov     ecx, ebx; this
+0x79C642: call    OB_stVector_SFrondVertex_Size_010201A0; Oblivion-authoritative size query for the SFrondVertex vector. Computes (end-begin)/0x38; returns zero when begin is null.
 0x79C647: mov     esi, [esp+1A4h+var_178]
 0x79C64B: sub     eax, 1
 0x79C64E: cmp     esi, eax
@@ -115,50 +115,50 @@
 0x79C6E0: fstp    [esp+1A4h+var_190]
 0x79C6E4: fld     [esp+1A4h+var_190]
 0x79C6E8: push    ecx
-0x79C6E9: lea     ecx, [esp+1A8h+var_44]
-0x79C6F0: fstp    [esp+1A8h+var_1A8]; float
-0x79C6F3: call    sub_793A00
-0x79C6F8: fld     [esp+1A4h+var_44]
-0x79C6FF: lea     eax, [esp+1A4h+var_158]
+0x79C6E9: lea     ecx, [esp+1A8h+var_44]; this
+0x79C6F0: fstp    dword ptr [esp+1A8h+angleDegrees]; angleDegrees
+0x79C6F3: call    OB_stRotTransform_RotateXDegrees_010201A0; Oblivion stRotTransform::RotateX. Converts degrees to radians, builds the X-axis 3x3 rotation, post-multiplies the current transform, and stores the result in place.
+0x79C6F8: fld     [esp+1A4h+var_44.m]
+0x79C6FF: lea     eax, [esp+1A4h+tangent]
 0x79C703: fldz
 0x79C705: push    eax
 0x79C706: fmul    st(1), st
 0x79C708: lea     ecx, [esp+1A8h+var_14C]
-0x79C70C: fld     [esp+1A8h+var_38]
+0x79C70C: fld     [esp+1A8h+var_44.m+0Ch]
 0x79C713: faddp   st(2), st
-0x79C715: fld     [esp+1A8h+var_2C]
+0x79C715: fld     [esp+1A8h+var_44.m+18h]
 0x79C71C: fmul    st, st(1)
 0x79C71E: faddp   st(2), st
 0x79C720: fxch    st(1)
 0x79C722: fstp    [esp+1A8h+var_190]
-0x79C726: fld     [esp+1A8h+var_40]
+0x79C726: fld     [esp+1A8h+var_44.m+4]
 0x79C72D: fmul    st, st(1)
-0x79C72F: fadd    [esp+1A8h+var_34]
-0x79C736: fld     [esp+1A8h+var_28]
+0x79C72F: fadd    [esp+1A8h+var_44.m+10h]
+0x79C736: fld     [esp+1A8h+var_44.m+1Ch]
 0x79C73D: fmul    st, st(2)
 0x79C73F: faddp   st(1), st
 0x79C741: fstp    [esp+1A8h+var_18C]
-0x79C745: fld     [esp+1A8h+var_3C]
+0x79C745: fld     [esp+1A8h+var_44.m+8]
 0x79C74C: fmul    st, st(1)
-0x79C74E: fadd    [esp+1A8h+var_30]
-0x79C755: fld     [esp+1A8h+var_24]
+0x79C74E: fadd    [esp+1A8h+var_44.m+14h]
+0x79C755: fld     [esp+1A8h+var_44.m+20h]
 0x79C75C: fmulp   st(2), st
 0x79C75E: faddp   st(1), st
 0x79C760: fstp    [esp+1A8h+var_184]
 0x79C764: fld     [esp+1A8h+var_190]
-0x79C768: fstp    [esp+1A8h+var_158]
+0x79C768: fstp    [esp+1A8h+tangent]
 0x79C76C: fld     [esp+1A8h+var_18C]
 0x79C770: fstp    [esp+1A8h+var_154]
 0x79C774: fld     [esp+1A8h+var_184]
 0x79C778: fstp    [esp+1A8h+var_150]
-0x79C77C: call    sub_791630
+0x79C77C: call    OB_CBranch_childVectorPush_010201A0; Push helper for compact child-reference vector at CBranch+0x08.
 0x79C781: fldz
 0x79C783: mov     esi, [esp+1A4h+var_178]
 0x79C787: test    esi, esi
 0x79C789: fst     [esp+1A4h+var_16C]
 0x79C78D: mov     eax, [ebx+4]
 0x79C790: fst     [esp+1A4h+var_170]
-0x79C794: fstp    [esp+1A4h+var_174]
+0x79C794: fstp    [esp+1A4h+normal]
 0x79C798: jnz     loc_79C84D
 0x79C79E: test    eax, eax
 0x79C7A0: jz      short loc_79C7BC
@@ -262,8 +262,8 @@
 0x79C8F0: fld     [esp+1A4h+var_184]
 0x79C8F4: fstp    [esp+1A4h+var_7C]
 0x79C8FB: mov     ecx, [esp+1A4h+var_7C]
-0x79C902: mov     [esp+1A4h+var_174], edx
-0x79C906: fld     [esp+1A4h+var_174]
+0x79C902: mov     [esp+1A4h+normal], edx
+0x79C906: fld     [esp+1A4h+normal]
 0x79C90A: mov     [esp+1A4h+var_170], eax
 0x79C90E: fld     [esp+1A4h+var_170]
 0x79C912: mov     [esp+1A4h+var_16C], ecx
@@ -281,14 +281,14 @@
 0x79C932: call    __CIsqrt
 0x79C937: fstp    [esp+1A4h+var_190]
 0x79C93B: fld     [esp+1A4h+var_190]
-0x79C93F: mov     ecx, ebx
+0x79C93F: mov     ecx, ebx; this
 0x79C941: fld1
 0x79C943: fdivrp  st(1), st
 0x79C945: fstp    [esp+1A4h+var_190]
 0x79C949: fld     [esp+1A4h+var_190]
 0x79C94D: fld     st
-0x79C94F: fmul    [esp+1A4h+var_174]
-0x79C953: fstp    [esp+1A4h+var_174]
+0x79C94F: fmul    [esp+1A4h+normal]
+0x79C953: fstp    [esp+1A4h+normal]
 0x79C957: fld     st
 0x79C959: fmul    [esp+1A4h+var_170]
 0x79C95D: fstp    [esp+1A4h+var_170]
@@ -297,23 +297,23 @@
 0x79C969: fldz
 0x79C96B: fst     [esp+1A4h+var_118]
 0x79C972: fst     [esp+1A4h+var_11C]
-0x79C979: fst     [esp+1A4h+var_120]
+0x79C979: fst     [esp+1A4h+coord]
 0x79C980: fst     [esp+1A4h+var_124]
 0x79C987: fst     [esp+1A4h+var_128]
 0x79C98B: fstp    [esp+1A4h+var_12C]
-0x79C98F: call    sub_799EE0
+0x79C98F: call    OB_stVector_SFrondVertex_Size_010201A0; Oblivion-authoritative size query for the SFrondVertex vector. Computes (end-begin)/0x38; returns zero when begin is null.
 0x79C994: sub     eax, 1
 0x79C997: cmp     esi, eax
 0x79C999: jnz     loc_79CBAA
-0x79C99F: mov     ecx, ebx
-0x79C9A1: call    sub_799EE0
+0x79C99F: mov     ecx, ebx; this
+0x79C9A1: call    OB_stVector_SFrondVertex_Size_010201A0; Oblivion-authoritative size query for the SFrondVertex vector. Computes (end-begin)/0x38; returns zero when begin is null.
 0x79C9A6: test    eax, eax
 0x79C9A8: jbe     loc_79CBAA
-0x79C9AE: mov     ecx, [esp+1A4h+var_148]
+0x79C9AE: mov     ecx, [esp+1A4h+var_14C.begin]
 0x79C9B2: test    ecx, ecx
 0x79C9B4: lea     edi, [esi-1]
 0x79C9B7: jz      short loc_79C9D3
-0x79C9B9: mov     edx, [esp+1A4h+var_144]
+0x79C9B9: mov     edx, [esp+1A4h+var_14C.end]
 0x79C9BD: sub     edx, ecx
 0x79C9BF: mov     eax, 2AAAAAABh
 0x79C9C4: imul    edx
@@ -324,7 +324,7 @@
 0x79C9CF: cmp     edi, eax
 0x79C9D1: jb      short loc_79C9DC
 0x79C9D3: call    __invalid_parameter_noinfo
-0x79C9D8: mov     ecx, [esp+1A4h+var_148]
+0x79C9D8: mov     ecx, [esp+1A4h+var_14C.begin]
 0x79C9DC: fld     dword ptr [ebx+14h]
 0x79C9DF: lea     edx, [edi+edi*2]
 0x79C9E2: fstp    [esp+1A4h+var_190]
@@ -355,7 +355,7 @@
 0x79CA28: cmp     esi, eax
 0x79CA2A: jb      short loc_79CA35
 0x79CA2C: call    __invalid_parameter_noinfo
-0x79CA31: mov     ecx, [esp+1A4h+var_148]
+0x79CA31: mov     ecx, [esp+1A4h+var_14C.begin]
 0x79CA35: mov     eax, [ebx+4]
 0x79CA38: fld     [esp+1A4h+var_190]
 0x79CA3C: lea     edi, ds:0[esi*8]
@@ -377,7 +377,7 @@
 0x79CA70: fstp    [esp+1A4h+var_D0]
 0x79CA77: mov     eax, [esp+1A4h+var_D0]
 0x79CA7E: fld     [esp+1A4h+var_18C]
-0x79CA82: mov     [esp+1A4h+var_120], eax
+0x79CA82: mov     [esp+1A4h+coord], eax
 0x79CA89: fstp    [esp+1A4h+var_CC]
 0x79CA90: mov     edx, [esp+1A4h+var_CC]
 0x79CA97: fld     [esp+1A4h+var_184]
@@ -386,7 +386,7 @@
 0x79CAA9: mov     eax, [esp+1A4h+var_C8]
 0x79CAB0: mov     [esp+1A4h+var_118], eax
 0x79CAB7: jz      short loc_79CAD8
-0x79CAB9: mov     eax, [esp+1A4h+var_144]
+0x79CAB9: mov     eax, [esp+1A4h+var_14C.end]
 0x79CABD: sub     eax, ecx
 0x79CABF: mov     edx, eax
 0x79CAC1: mov     eax, 2AAAAAABh
@@ -399,7 +399,7 @@
 0x79CAD4: cmp     edx, eax
 0x79CAD6: jb      short loc_79CAE1
 0x79CAD8: call    __invalid_parameter_noinfo
-0x79CADD: mov     ecx, [esp+1A4h+var_148]
+0x79CADD: mov     ecx, [esp+1A4h+var_14C.begin]
 0x79CAE1: fld     dword ptr [ebx+14h]
 0x79CAE4: lea     eax, [esi-1]
 0x79CAE7: fstp    [esp+1A4h+var_190]
@@ -457,16 +457,16 @@
 0x79CBA5: jmp     loc_79D0C5
 0x79CBAA: test    esi, esi
 0x79CBAC: jbe     loc_79CF42
-0x79CBB2: mov     ecx, ebx
-0x79CBB4: call    sub_799EE0
+0x79CBB2: mov     ecx, ebx; this
+0x79CBB4: call    OB_stVector_SFrondVertex_Size_010201A0; Oblivion-authoritative size query for the SFrondVertex vector. Computes (end-begin)/0x38; returns zero when begin is null.
 0x79CBB9: sub     eax, 1
 0x79CBBC: cmp     esi, eax
 0x79CBBE: jnb     loc_79CF42
-0x79CBC4: mov     eax, [esp+1A4h+var_148]
+0x79CBC4: mov     eax, [esp+1A4h+var_14C.begin]
 0x79CBC8: test    eax, eax
 0x79CBCA: lea     edi, [esi-1]
 0x79CBCD: jz      short loc_79CBE9
-0x79CBCF: mov     ecx, [esp+1A4h+var_144]
+0x79CBCF: mov     ecx, [esp+1A4h+var_14C.end]
 0x79CBD3: sub     ecx, eax
 0x79CBD5: mov     eax, 2AAAAAABh
 0x79CBDA: imul    ecx
@@ -478,7 +478,7 @@
 0x79CBE7: jb      short loc_79CBEE
 0x79CBE9: call    __invalid_parameter_noinfo
 0x79CBEE: fld     dword ptr [ebx+14h]
-0x79CBF1: mov     ecx, [esp+1A4h+var_148]
+0x79CBF1: mov     ecx, [esp+1A4h+var_14C.begin]
 0x79CBF5: fstp    [esp+1A4h+var_190]
 0x79CBF9: lea     eax, [edi+edi*2]
 0x79CBFC: fld     [esp+1A4h+var_190]
@@ -515,7 +515,7 @@
 0x79CC57: add     edi, edi
 0x79CC59: test    eax, eax
 0x79CC5B: fadd    dword ptr [edi+eax]
-0x79CC5E: fstp    [esp+1A4h+var_168]
+0x79CC5E: fstp    [esp+1A4h+value]
 0x79CC62: fld     dword ptr [edi+eax+4]
 0x79CC66: fadd    [esp+1A4h+var_18C]
 0x79CC6A: fstp    [esp+1A4h+var_178]
@@ -526,7 +526,7 @@
 0x79CC7D: fstp    [esp+1A4h+var_190]
 0x79CC81: fld     [esp+1A4h+var_190]
 0x79CC85: fld     st
-0x79CC87: fmul    [esp+1A4h+var_158]
+0x79CC87: fmul    [esp+1A4h+tangent]
 0x79CC8B: fstp    [esp+1A4h+var_190]
 0x79CC8F: fld     st
 0x79CC91: fmul    [esp+1A4h+var_154]
@@ -558,7 +558,7 @@
 0x79CCE2: fadd    [esp+1A4h+var_184]
 0x79CCE6: fstp    [esp+1A4h+var_184]
 0x79CCEA: fld     [esp+1A4h+var_190]
-0x79CCEE: fadd    [esp+1A4h+var_168]
+0x79CCEE: fadd    [esp+1A4h+value]
 0x79CCF2: fstp    [esp+1A4h+var_190]
 0x79CCF6: fld     [esp+1A4h+var_18C]
 0x79CCFA: fadd    [esp+1A4h+var_178]
@@ -581,7 +581,7 @@
 0x79CD38: fstp    [esp+1A4h+var_90]
 0x79CD3F: mov     edx, [esp+1A4h+var_90]
 0x79CD46: fld     [esp+1A4h+var_18C]
-0x79CD4A: mov     [esp+1A4h+var_120], edx
+0x79CD4A: mov     [esp+1A4h+coord], edx
 0x79CD51: fstp    [esp+1A4h+var_8C]
 0x79CD58: mov     eax, [esp+1A4h+var_8C]
 0x79CD5F: fld     [esp+1A4h+var_188]
@@ -589,10 +589,10 @@
 0x79CD6A: fstp    [esp+1A4h+var_88]
 0x79CD71: mov     ecx, [esp+1A4h+var_88]
 0x79CD78: mov     [esp+1A4h+var_118], ecx
-0x79CD7F: mov     ecx, [esp+1A4h+var_148]
+0x79CD7F: mov     ecx, [esp+1A4h+var_14C.begin]
 0x79CD83: test    ecx, ecx
 0x79CD85: jz      short loc_79CDA6
-0x79CD87: mov     eax, [esp+1A4h+var_144]
+0x79CD87: mov     eax, [esp+1A4h+var_14C.end]
 0x79CD8B: sub     eax, ecx
 0x79CD8D: mov     edx, eax
 0x79CD8F: mov     eax, 2AAAAAABh
@@ -607,7 +607,7 @@
 0x79CDA6: fstp    st
 0x79CDA8: call    __invalid_parameter_noinfo
 0x79CDAD: fld     qword ptr ds:0A2FAA0h
-0x79CDB3: mov     ecx, [esp+1A4h+var_148]
+0x79CDB3: mov     ecx, [esp+1A4h+var_14C.begin]
 0x79CDB7: fld     dword ptr [ebx+14h]
 0x79CDBA: lea     eax, [esi-1]
 0x79CDBD: fstp    [esp+1A4h+var_188]
@@ -648,7 +648,7 @@
 0x79CE24: fstp    [esp+1A4h+var_184]
 0x79CE28: fld     dword ptr [edi+eax+4]
 0x79CE2C: fsub    [esp+1A4h+var_190]
-0x79CE30: fstp    [esp+1A4h+var_168]
+0x79CE30: fstp    [esp+1A4h+value]
 0x79CE34: fld     dword ptr [edi+eax+8]
 0x79CE38: fsub    [esp+1A4h+var_18C]
 0x79CE3C: fstp    [esp+1A4h+var_178]
@@ -656,7 +656,7 @@
 0x79CE43: fstp    [esp+1A4h+var_188]
 0x79CE47: fld     [esp+1A4h+var_188]
 0x79CE4B: fld     st
-0x79CE4D: fmul    [esp+1A4h+var_158]
+0x79CE4D: fmul    [esp+1A4h+tangent]
 0x79CE51: fstp    [esp+1A4h+var_188]
 0x79CE55: fld     st
 0x79CE57: fmul    [esp+1A4h+var_154]
@@ -693,7 +693,7 @@
 0x79CEBC: fadd    [esp+1A4h+var_184]
 0x79CEC0: fstp    [esp+1A4h+var_188]
 0x79CEC4: fld     [esp+1A4h+var_190]
-0x79CEC8: fadd    [esp+1A4h+var_168]
+0x79CEC8: fadd    [esp+1A4h+value]
 0x79CECC: fstp    [esp+1A4h+var_190]
 0x79CED0: fld     [esp+1A4h+var_18C]
 0x79CED4: fadd    [esp+1A4h+var_178]
@@ -724,7 +724,7 @@
 0x79CF47: fstp    [esp+1A4h+var_188]
 0x79CF4B: fld     [esp+1A4h+var_188]
 0x79CF4F: fld     st
-0x79CF51: fmul    [esp+1A4h+var_158]
+0x79CF51: fmul    [esp+1A4h+tangent]
 0x79CF55: fstp    [esp+1A4h+var_188]
 0x79CF59: fld     st
 0x79CF5B: fmul    [esp+1A4h+var_154]
@@ -764,7 +764,7 @@
 0x79CFC9: fstp    [esp+1A4h+var_6C]
 0x79CFD0: mov     ecx, [esp+1A4h+var_6C]
 0x79CFD7: fld     [esp+1A4h+var_190]
-0x79CFDB: mov     [esp+1A4h+var_120], ecx
+0x79CFDB: mov     [esp+1A4h+coord], ecx
 0x79CFE2: fstp    [esp+1A4h+var_68]
 0x79CFE9: mov     edx, [esp+1A4h+var_68]
 0x79CFF0: fld     [esp+1A4h+var_18C]
@@ -776,7 +776,7 @@
 0x79D013: fstp    [esp+1A4h+var_188]
 0x79D017: fld     [esp+1A4h+var_188]
 0x79D01B: fld     st
-0x79D01D: fmul    [esp+1A4h+var_158]
+0x79D01D: fmul    [esp+1A4h+tangent]
 0x79D021: fstp    [esp+1A4h+var_188]
 0x79D025: fld     st
 0x79D027: fmul    [esp+1A4h+var_154]
@@ -825,9 +825,9 @@
 0x79D0CD: fild    [esp+1A4h+Src]
 0x79D0D1: jge     short loc_79D0D9
 0x79D0D3: fadd    dword ptr ds:0A2FC78h
-0x79D0D9: mov     ecx, ebx
+0x79D0D9: mov     ecx, ebx; this
 0x79D0DB: fstp    [esp+1A4h+var_188]
-0x79D0DF: call    sub_799EE0
+0x79D0DF: call    OB_stVector_SFrondVertex_Size_010201A0; Oblivion-authoritative size query for the SFrondVertex vector. Computes (end-begin)/0x38; returns zero when begin is null.
 0x79D0E4: test    eax, eax
 0x79D0E6: mov     [esp+1A4h+Src], eax
 0x79D0EA: fild    [esp+1A4h+Src]
@@ -835,43 +835,43 @@
 0x79D0F0: fadd    dword ptr ds:0A2FC78h
 0x79D0F6: fsub    qword ptr ds:0A2F928h
 0x79D0FC: mov     ecx, [esp+1A4h+var_180]
-0x79D100: mov     ecx, [ecx]
-0x79D102: lea     eax, [esp+1A4h+var_120]
+0x79D100: mov     ecx, [ecx]; this
+0x79D102: lea     eax, [esp+1A4h+coord]
 0x79D109: fdivr   [esp+1A4h+var_188]
-0x79D10D: push    eax
+0x79D10D: push    eax; coord
 0x79D10E: fstp    [esp+1A8h+var_188]
-0x79D112: call    sub_796260
+0x79D112: call    OB_CIndexedGeometry_AddVertexCoord_010201A0; Oblivion CIndexedGeometry::AddVertexCoord. Appends xyz; when CPU wind is active it also preserves xyz in originalVertexCoords for later deformation.
 0x79D117: fld1
 0x79D119: movzx   dx, byte ptr [ebx+18h]
-0x79D11E: fstp    [esp+1A4h+var_E8]
+0x79D11E: fstp    [esp+1A4h+diffuseST]
 0x79D125: mov     ecx, [esp+1A4h+var_180]
 0x79D129: fld     [esp+1A4h+var_188]
-0x79D12D: mov     ecx, [ecx]
+0x79D12D: mov     ecx, [ecx]; this
 0x79D12F: fstp    [esp+1A4h+var_E4]
-0x79D136: lea     eax, [esp+1A4h+var_E8]
-0x79D13D: push    edx; float
-0x79D13E: push    eax; int
-0x79D13F: call    sub_796320
+0x79D136: lea     eax, [esp+1A4h+diffuseST]
+0x79D13D: push    edx; mapIndex
+0x79D13E: push    eax; diffuseST
+0x79D13F: call    OB_CIndexedGeometry_AddVertexTexCoord0_010201A0; Legacy TexCoord0 writer: stores diffuse S/T, optionally retains original CAD S/T plus map index, and applies the global T-flip only to the exported diffuse layer.
 0x79D144: fld1
 0x79D146: mov     eax, [esp+1A4h+var_180]
 0x79D14A: fst     [esp+1A4h+var_D4]
-0x79D151: mov     ecx, [eax]
+0x79D151: mov     ecx, [eax]; this
 0x79D153: fst     [esp+1A4h+var_D8]
-0x79D15A: lea     edx, [esp+1A4h+var_E0]
+0x79D15A: lea     edx, [esp+1A4h+rgba]
 0x79D161: fst     [esp+1A4h+var_DC]
-0x79D168: push    edx
-0x79D169: fstp    [esp+1A8h+var_E0]
-0x79D170: call    sub_796230
+0x79D168: push    edx; rgba
+0x79D169: fstp    [esp+1A8h+rgba]
+0x79D170: call    OB_CIndexedGeometry_AddVertexColor_010201A0; Verified first blade-side color is white RGBA; normals/tangents remain separate streams.
 0x79D175: mov     edx, [esp+1A4h+var_180]
-0x79D179: lea     ecx, [esp+1A4h+var_174]
-0x79D17D: push    ecx
-0x79D17E: mov     ecx, [edx]
-0x79D180: call    sub_7962F0
+0x79D179: lea     ecx, [esp+1A4h+normal]
+0x79D17D: push    ecx; normal
+0x79D17E: mov     ecx, [edx]; this
+0x79D180: call    OB_CIndexedGeometry_AddVertexNormal_010201A0; Oblivion CIndexedGeometry::AddVertexNormal. Appends one xyz normal. Unlike SpeedTree 4.1 source, this legacy ABI has no up-axis-adjust boolean.
 0x79D185: mov     ecx, [esp+1A4h+var_180]
-0x79D189: mov     ecx, [ecx]
-0x79D18B: lea     eax, [esp+1A4h+var_158]
-0x79D18F: push    eax
-0x79D190: call    sub_796590
+0x79D189: mov     ecx, [ecx]; this
+0x79D18B: lea     eax, [esp+1A4h+tangent]
+0x79D18F: push    eax; tangent
+0x79D190: call    OB_CIndexedGeometry_AddVertexTangent_010201A0; Oblivion CIndexedGeometry::AddVertexTangent. Appends one xyz tangent to the indexed vertex stream.
 0x79D195: fld     [esp+1A4h+var_16C]
 0x79D199: fld     st
 0x79D19B: fld     [esp+1A4h+var_154]
@@ -885,10 +885,10 @@
 0x79D1B1: fxch    st(4)
 0x79D1B3: fsubrp  st(1), st
 0x79D1B5: fstp    [esp+1A4h+var_18C]
-0x79D1B9: fld     [esp+1A4h+var_174]
+0x79D1B9: fld     [esp+1A4h+normal]
 0x79D1BD: fld     st
 0x79D1BF: fmulp   st(4), st
-0x79D1C1: fld     [esp+1A4h+var_158]
+0x79D1C1: fld     [esp+1A4h+tangent]
 0x79D1C5: fld     st
 0x79D1C7: fmulp   st(6), st
 0x79D1C9: fxch    st(4)
@@ -903,7 +903,7 @@
 0x79D1E1: fst     [esp+1A4h+var_AC]
 0x79D1E8: mov     edx, [esp+1A4h+var_AC]
 0x79D1EF: fld     [esp+1A4h+var_188]
-0x79D1F3: mov     [esp+1A4h+var_164], edx
+0x79D1F3: mov     [esp+1A4h+binormal], edx
 0x79D1F7: fst     [esp+1A4h+var_A8]
 0x79D1FE: mov     eax, [esp+1A4h+var_A8]
 0x79D205: fld     [esp+1A4h+var_190]
@@ -929,13 +929,13 @@
 0x79D24D: fnstsw  ax
 0x79D24F: test    ah, 5
 0x79D252: jp      short loc_79D274
-0x79D254: mov     eax, [esp+1A4h+var_174]
+0x79D254: mov     eax, [esp+1A4h+normal]
 0x79D258: fstp    st
 0x79D25A: mov     ecx, [esp+1A4h+var_170]
 0x79D25E: fstp    st
 0x79D260: mov     edx, [esp+1A4h+var_16C]
 0x79D264: fstp    st
-0x79D266: mov     [esp+1A4h+var_164], eax
+0x79D266: mov     [esp+1A4h+binormal], eax
 0x79D26A: mov     [esp+1A4h+var_160], ecx
 0x79D26E: mov     [esp+1A4h+var_15C], edx
 0x79D272: jmp     short loc_79D2B7
@@ -953,17 +953,17 @@
 0x79D297: fld     [esp+1A4h+var_188]
 0x79D29B: fld     st
 0x79D29D: fmul    [esp+1A4h+var_18C]
-0x79D2A1: fstp    [esp+1A4h+var_164]
+0x79D2A1: fstp    [esp+1A4h+binormal]
 0x79D2A5: fld     [esp+1A4h+var_160]
 0x79D2A9: fmul    st, st(1)
 0x79D2AB: fstp    [esp+1A4h+var_160]
 0x79D2AF: fmul    [esp+1A4h+var_15C]
 0x79D2B3: fstp    [esp+1A4h+var_15C]
 0x79D2B7: mov     ecx, [esp+1A4h+var_180]
-0x79D2BB: mov     ecx, [ecx]
-0x79D2BD: lea     eax, [esp+1A4h+var_164]
-0x79D2C1: push    eax
-0x79D2C2: call    sub_7965E0
+0x79D2BB: mov     ecx, [ecx]; this
+0x79D2BD: lea     eax, [esp+1A4h+binormal]
+0x79D2C1: push    eax; binormal
+0x79D2C2: call    OB_CIndexedGeometry_AddVertexBinormal_010201A0; Oblivion CIndexedGeometry::AddVertexBinormal. Appends one xyz binormal to the indexed vertex stream.
 0x79D2C7: mov     edx, [esp+1A4h+var_180]
 0x79D2CB: mov     eax, [edx]
 0x79D2CD: cmp     byte ptr [eax+8], 0
@@ -1002,49 +1002,49 @@
 0x79D327: mov     ecx, [esp+1A4h+var_18C]
 0x79D32B: movzx   edx, byte ptr [edi+ecx+34h]
 0x79D330: mov     eax, [ebx+4]
-0x79D333: push    edx
+0x79D333: push    edx; windMatrixIndex
 0x79D334: push    ecx
 0x79D335: fld     dword ptr [edi+eax+30h]
 0x79D339: mov     ecx, [esp+1ACh+var_180]
-0x79D33D: mov     ecx, [ecx]
-0x79D33F: fstp    [esp+1ACh+var_1AC]
-0x79D342: call    sub_796540
+0x79D33D: mov     ecx, [ecx]; this
+0x79D33F: fstp    [esp+1ACh+windWeight]; windWeight
+0x79D342: call    OB_CIndexedGeometry_AddVertexWind_010201A0;
 0x79D347: mov     ecx, [esp+1A4h+var_180]
 0x79D34B: mov     eax, [ecx]
 0x79D34D: add     word ptr [eax+22h], 1
-0x79D352: mov     ecx, [ecx]
+0x79D352: mov     ecx, [ecx]; this
 0x79D354: lea     edx, [esp+1A4h+var_12C]
-0x79D358: push    edx
-0x79D359: call    sub_796260
+0x79D358: push    edx; coord
+0x79D359: call    OB_CIndexedGeometry_AddVertexCoord_010201A0; Oblivion CIndexedGeometry::AddVertexCoord. Appends xyz; when CPU wind is active it also preserves xyz in originalVertexCoords for later deformation.
 0x79D35E: fldz
 0x79D360: movzx   ax, byte ptr [ebx+18h]
-0x79D365: fstp    [esp+1A4h+var_E8]
+0x79D365: fstp    [esp+1A4h+diffuseST]
 0x79D36C: mov     edx, [esp+1A4h+var_180]
-0x79D370: lea     ecx, [esp+1A4h+var_E8]
-0x79D377: push    eax; float
-0x79D378: push    ecx; int
-0x79D379: mov     ecx, [edx]
-0x79D37B: call    sub_796320
+0x79D370: lea     ecx, [esp+1A4h+diffuseST]
+0x79D377: push    eax; mapIndex
+0x79D378: push    ecx; diffuseST
+0x79D379: mov     ecx, [edx]; this
+0x79D37B: call    OB_CIndexedGeometry_AddVertexTexCoord0_010201A0; Legacy TexCoord0 writer: stores diffuse S/T, optionally retains original CAD S/T plus map index, and applies the global T-flip only to the exported diffuse layer.
 0x79D380: fld1
 0x79D382: mov     ecx, [esp+1A4h+var_180]
 0x79D386: fst     [esp+1A4h+var_D4]
-0x79D38D: mov     ecx, [ecx]
+0x79D38D: mov     ecx, [ecx]; this
 0x79D38F: fst     [esp+1A4h+var_D8]
-0x79D396: lea     eax, [esp+1A4h+var_E0]
+0x79D396: lea     eax, [esp+1A4h+rgba]
 0x79D39D: fst     [esp+1A4h+var_DC]
-0x79D3A4: push    eax
-0x79D3A5: fstp    [esp+1A8h+var_E0]
-0x79D3AC: call    sub_796230
+0x79D3A4: push    eax; rgba
+0x79D3A5: fstp    [esp+1A8h+rgba]
+0x79D3AC: call    OB_CIndexedGeometry_AddVertexColor_010201A0; Verified second blade-side color is white RGBA.
 0x79D3B1: mov     eax, [esp+1A4h+var_180]
-0x79D3B5: mov     ecx, [eax]
-0x79D3B7: lea     edx, [esp+1A4h+var_174]
-0x79D3BB: push    edx
-0x79D3BC: call    sub_7962F0
+0x79D3B5: mov     ecx, [eax]; this
+0x79D3B7: lea     edx, [esp+1A4h+normal]
+0x79D3BB: push    edx; normal
+0x79D3BC: call    OB_CIndexedGeometry_AddVertexNormal_010201A0; Oblivion CIndexedGeometry::AddVertexNormal. Appends one xyz normal. Unlike SpeedTree 4.1 source, this legacy ABI has no up-axis-adjust boolean.
 0x79D3C1: mov     edx, [esp+1A4h+var_180]
-0x79D3C5: lea     ecx, [esp+1A4h+var_158]
-0x79D3C9: push    ecx
-0x79D3CA: mov     ecx, [edx]
-0x79D3CC: call    sub_796590
+0x79D3C5: lea     ecx, [esp+1A4h+tangent]
+0x79D3C9: push    ecx; tangent
+0x79D3CA: mov     ecx, [edx]; this
+0x79D3CC: call    OB_CIndexedGeometry_AddVertexTangent_010201A0; Oblivion CIndexedGeometry::AddVertexTangent. Appends one xyz tangent to the indexed vertex stream.
 0x79D3D1: fld     [esp+1A4h+var_16C]
 0x79D3D5: fld     st
 0x79D3D7: fld     [esp+1A4h+var_154]
@@ -1058,10 +1058,10 @@
 0x79D3ED: fxch    st(4)
 0x79D3EF: fsubrp  st(1), st
 0x79D3F1: fstp    [esp+1A4h+var_18C]
-0x79D3F5: fld     [esp+1A4h+var_174]
+0x79D3F5: fld     [esp+1A4h+normal]
 0x79D3F9: fld     st
 0x79D3FB: fmulp   st(4), st
-0x79D3FD: fld     [esp+1A4h+var_158]
+0x79D3FD: fld     [esp+1A4h+tangent]
 0x79D401: fld     st
 0x79D403: fmulp   st(6), st
 0x79D405: fxch    st(4)
@@ -1076,7 +1076,7 @@
 0x79D41D: fst     [esp+1A4h+var_9C]
 0x79D424: mov     eax, [esp+1A4h+var_9C]
 0x79D42B: fld     [esp+1A4h+var_188]
-0x79D42F: mov     [esp+1A4h+var_164], eax
+0x79D42F: mov     [esp+1A4h+binormal], eax
 0x79D433: fst     [esp+1A4h+var_98]
 0x79D43A: mov     ecx, [esp+1A4h+var_98]
 0x79D441: fld     [esp+1A4h+var_190]
@@ -1102,13 +1102,13 @@
 0x79D488: fnstsw  ax
 0x79D48A: test    ah, 5
 0x79D48D: jp      short loc_79D4AF
-0x79D48F: mov     ecx, [esp+1A4h+var_174]
+0x79D48F: mov     ecx, [esp+1A4h+normal]
 0x79D493: fstp    st
 0x79D495: mov     edx, [esp+1A4h+var_170]
 0x79D499: fstp    st
 0x79D49B: mov     eax, [esp+1A4h+var_16C]
 0x79D49F: fstp    st
-0x79D4A1: mov     [esp+1A4h+var_164], ecx
+0x79D4A1: mov     [esp+1A4h+binormal], ecx
 0x79D4A5: mov     [esp+1A4h+var_160], edx
 0x79D4A9: mov     [esp+1A4h+var_15C], eax
 0x79D4AD: jmp     short loc_79D4F2
@@ -1126,17 +1126,17 @@
 0x79D4D2: fld     [esp+1A4h+var_188]
 0x79D4D6: fld     st
 0x79D4D8: fmul    [esp+1A4h+var_18C]
-0x79D4DC: fstp    [esp+1A4h+var_164]
+0x79D4DC: fstp    [esp+1A4h+binormal]
 0x79D4E0: fld     [esp+1A4h+var_160]
 0x79D4E4: fmul    st, st(1)
 0x79D4E6: fstp    [esp+1A4h+var_160]
 0x79D4EA: fmul    [esp+1A4h+var_15C]
 0x79D4EE: fstp    [esp+1A4h+var_15C]
 0x79D4F2: mov     edx, [esp+1A4h+var_180]
-0x79D4F6: lea     ecx, [esp+1A4h+var_164]
-0x79D4FA: push    ecx
-0x79D4FB: mov     ecx, [edx]
-0x79D4FD: call    sub_7965E0
+0x79D4F6: lea     ecx, [esp+1A4h+binormal]
+0x79D4FA: push    ecx; binormal
+0x79D4FB: mov     ecx, [edx]; this
+0x79D4FD: call    OB_CIndexedGeometry_AddVertexBinormal_010201A0; Oblivion CIndexedGeometry::AddVertexBinormal. Appends one xyz binormal to the indexed vertex stream.
 0x79D502: mov     eax, [esp+1A4h+var_180]
 0x79D506: mov     ecx, [eax]
 0x79D508: cmp     byte ptr [ecx+8], 0
@@ -1176,34 +1176,34 @@
 0x79D566: movzx   eax, byte ptr [edi+edx+34h]
 0x79D56B: mov     ecx, [ebx+4]
 0x79D56E: mov     edx, [esp+1A4h+var_180]
-0x79D572: push    eax
+0x79D572: push    eax; windMatrixIndex
 0x79D573: fld     dword ptr [edi+ecx+30h]
 0x79D577: push    ecx
-0x79D578: mov     ecx, [edx]
-0x79D57A: fstp    [esp+1ACh+var_1AC]
-0x79D57D: call    sub_796540
+0x79D578: mov     ecx, [edx]; this
+0x79D57A: fstp    [esp+1ACh+windWeight]; windWeight
+0x79D57D: call    OB_CIndexedGeometry_AddVertexWind_010201A0;
 0x79D582: mov     eax, [esp+1A4h+var_180]
 0x79D586: mov     eax, [eax]
 0x79D588: add     word ptr [eax+22h], 1
 0x79D58D: add     esi, 1
-0x79D590: mov     ecx, ebx
+0x79D590: mov     ecx, ebx; this
 0x79D592: mov     [esp+1A4h+var_178], esi
-0x79D596: call    sub_799EE0
+0x79D596: call    OB_stVector_SFrondVertex_Size_010201A0; Oblivion-authoritative size query for the SFrondVertex vector. Computes (end-begin)/0x38; returns zero when begin is null.
 0x79D59B: cmp     esi, eax
 0x79D59D: jb      loc_79C640
 0x79D5A3: fldz
 0x79D5A5: xor     esi, esi
-0x79D5A7: fst     [esp+1A4h+var_168]
-0x79D5AB: mov     [esp+1A4h+var_138], esi
+0x79D5A7: fst     [esp+1A4h+value]
+0x79D5AB: mov     [esp+1A4h+var_13C.begin], esi
 0x79D5AF: fstp    [esp+1A4h+var_184]
-0x79D5B3: mov     [esp+1A4h+var_134], esi
-0x79D5B7: mov     [esp+1A4h+var_130], esi
-0x79D5BB: mov     [esp+1A4h+var_104], esi
-0x79D5C2: mov     [esp+1A4h+var_100], esi
-0x79D5C9: mov     [esp+1A4h+var_FC], esi
-0x79D5D0: mov     ecx, ebx
+0x79D5B3: mov     [esp+1A4h+var_13C.end], esi
+0x79D5B7: mov     [esp+1A4h+var_13C.capacity], esi
+0x79D5BB: mov     [esp+1A4h+var_108.begin], esi
+0x79D5C2: mov     [esp+1A4h+var_108.end], esi
+0x79D5C9: mov     [esp+1A4h+var_108.capacity], esi
+0x79D5D0: mov     ecx, ebx; this
 0x79D5D2: mov     byte ptr [esp+1A4h+var_4], 2
-0x79D5DA: call    sub_799EE0
+0x79D5DA: call    OB_stVector_SFrondVertex_Size_010201A0; Oblivion-authoritative size query for the SFrondVertex vector. Computes (end-begin)/0x38; returns zero when begin is null.
 0x79D5DF: add     eax, 0FFFFFFFFh
 0x79D5E2: mov     [esp+1A4h+var_178], esi
 0x79D5E6: cmp     eax, esi
@@ -1214,15 +1214,15 @@
 0x79D5FA: mov     ecx, [ebx+28h]
 0x79D5FD: add     edi, edi
 0x79D5FF: add     ecx, edi
-0x79D601: push    ecx
-0x79D602: mov     ecx, [esi]
-0x79D604: call    sub_794730
+0x79D601: push    ecx; vertexIndex
+0x79D602: mov     ecx, [esi]; this
+0x79D604: call    OB_CIndexedGeometry_GetVertexCoord_010201A0; CIndexedGeometry::GetVertexCoord: returns &coords[index*3] from the coord float vector.
 0x79D609: mov     edx, [ebx+28h]
-0x79D60C: mov     ecx, [esi]
+0x79D60C: mov     ecx, [esi]; this
 0x79D60E: mov     [esp+1A4h+var_18C], eax
 0x79D612: lea     eax, [edx+edi+2]
-0x79D616: push    eax
-0x79D617: call    sub_794730
+0x79D616: push    eax; vertexIndex
+0x79D617: call    OB_CIndexedGeometry_GetVertexCoord_010201A0; CIndexedGeometry::GetVertexCoord: returns &coords[index*3] from the coord float vector.
 0x79D61C: mov     ecx, [esp+1A4h+var_18C]
 0x79D620: fld     dword ptr [ecx]
 0x79D622: fstp    [esp+1A4h+var_18C]
@@ -1235,7 +1235,7 @@
 0x79D63D: fld     dword ptr [eax+4]
 0x79D640: fstp    [esp+1A4h+var_10C]
 0x79D647: fld     dword ptr [eax+8]
-0x79D64A: mov     eax, [esp+1A4h+var_138]
+0x79D64A: mov     eax, [esp+1A4h+var_13C.begin]
 0x79D64E: fstp    dword ptr [esp+1A4h+var_F8]
 0x79D655: fld     [esp+1A4h+var_188]
 0x79D659: fsub    [esp+1A4h+var_18C]
@@ -1258,54 +1258,54 @@
 0x79D696: test    eax, eax
 0x79D698: mov     [esp+1A4h+Src], ecx
 0x79D69C: fld     [esp+1A4h+Src]
-0x79D6A0: mov     ecx, [esp+1A4h+var_134]
-0x79D6A4: fadd    [esp+1A4h+var_168]
-0x79D6A8: fstp    [esp+1A4h+var_168]
+0x79D6A0: mov     ecx, [esp+1A4h+var_13C.end]
+0x79D6A4: fadd    [esp+1A4h+value]
+0x79D6A8: fstp    [esp+1A4h+value]
 0x79D6AC: jz      short loc_79D6D7
-0x79D6AE: mov     edx, [esp+1A4h+var_130]
+0x79D6AE: mov     edx, [esp+1A4h+var_13C.capacity]
 0x79D6B2: sub     ecx, eax
 0x79D6B4: sub     edx, eax
 0x79D6B6: sar     ecx, 2
 0x79D6B9: sar     edx, 2
 0x79D6BC: cmp     ecx, edx
 0x79D6BE: jnb     short loc_79D6D3
-0x79D6C0: mov     eax, [esp+1A4h+var_134]
-0x79D6C4: fld     [esp+1A4h+var_168]
+0x79D6C0: mov     eax, [esp+1A4h+var_13C.end]
+0x79D6C4: fld     [esp+1A4h+value]
 0x79D6C8: fstp    dword ptr [eax]
 0x79D6CA: add     eax, 4
-0x79D6CD: mov     [esp+1A4h+var_134], eax
+0x79D6CD: mov     [esp+1A4h+var_13C.end], eax
 0x79D6D1: jmp     short loc_79D702
-0x79D6D3: mov     ecx, [esp+1A4h+var_134]
+0x79D6D3: mov     ecx, [esp+1A4h+var_13C.end]
 0x79D6D7: cmp     eax, ecx
 0x79D6D9: mov     [esp+1A4h+Src], ecx
 0x79D6DD: jbe     short loc_79D6E4
 0x79D6DF: call    __invalid_parameter_noinfo
 0x79D6E4: mov     ecx, [esp+1A4h+Src]
-0x79D6E8: lea     edx, [esp+1A4h+var_168]
-0x79D6EC: push    edx; int
+0x79D6E8: lea     edx, [esp+1A4h+value]
+0x79D6EC: push    edx; value
 0x79D6ED: push    ecx; Src
 0x79D6EE: lea     eax, [esp+1ACh+var_13C]
-0x79D6F2: push    eax; int
-0x79D6F3: lea     edx, [esp+1B0h+var_20]
-0x79D6FA: push    edx; int
-0x79D6FB: mov     ecx, eax
-0x79D6FD: call    sub_7996F0
+0x79D6F2: push    eax; position
+0x79D6F3: lea     edx, [esp+1B0h+result]
+0x79D6FA: push    edx; result
+0x79D6FB: mov     ecx, eax; this
+0x79D6FD: call    OB_stVectorFloat_InsertOne_010201A0; Grow a frond blade float work vector with one computed accumulated side length; the surrounding Oblivion loop later normalizes diffuse T coordinates from these distances.
 0x79D702: mov     eax, [ebx+28h]
 0x79D705: lea     ecx, [eax+edi+1]
-0x79D709: push    ecx
-0x79D70A: mov     ecx, [esi]
-0x79D70C: call    sub_794730
+0x79D709: push    ecx; vertexIndex
+0x79D70A: mov     ecx, [esi]; this
+0x79D70C: call    OB_CIndexedGeometry_GetVertexCoord_010201A0; CIndexedGeometry::GetVertexCoord: returns &coords[index*3] from the coord float vector.
 0x79D711: mov     edx, [ebx+28h]
-0x79D714: mov     ecx, [esi]
+0x79D714: mov     ecx, [esi]; this
 0x79D716: mov     [esp+1A4h+var_18C], eax
 0x79D71A: lea     eax, [edx+edi+3]
-0x79D71E: push    eax
-0x79D71F: call    sub_794730
+0x79D71E: push    eax; vertexIndex
+0x79D71F: call    OB_CIndexedGeometry_GetVertexCoord_010201A0; CIndexedGeometry::GetVertexCoord: returns &coords[index*3] from the coord float vector.
 0x79D724: mov     ecx, [esp+1A4h+var_18C]
 0x79D728: fld     dword ptr [ecx]
-0x79D72A: mov     edx, [esp+1A4h+var_104]
+0x79D72A: mov     edx, [esp+1A4h+var_108.begin]
 0x79D731: fstp    dword ptr [esp+1A4h+var_F8]
-0x79D738: mov     edi, [esp+1A4h+var_100]
+0x79D738: mov     edi, [esp+1A4h+var_108.end]
 0x79D73F: fld     dword ptr [ecx+4]
 0x79D742: fstp    [esp+1A4h+var_10C]
 0x79D749: fld     dword ptr [ecx+8]
@@ -1340,7 +1340,7 @@
 0x79D7B2: fadd    [esp+1A4h+var_184]
 0x79D7B6: fstp    [esp+1A4h+var_184]
 0x79D7BA: jz      short loc_79D7E7
-0x79D7BC: mov     ecx, [esp+1A4h+var_FC]
+0x79D7BC: mov     ecx, [esp+1A4h+var_108.capacity]
 0x79D7C3: mov     eax, edi
 0x79D7C5: sub     eax, edx
 0x79D7C7: sub     ecx, edx
@@ -1352,20 +1352,20 @@
 0x79D7D7: mov     eax, edi
 0x79D7D9: add     eax, 4
 0x79D7DC: fstp    dword ptr [edi]
-0x79D7DE: mov     [esp+1A4h+var_100], eax
+0x79D7DE: mov     [esp+1A4h+var_108.end], eax
 0x79D7E5: jmp     short loc_79D812
 0x79D7E7: cmp     edx, edi
 0x79D7E9: jbe     short loc_79D7F0
 0x79D7EB: call    __invalid_parameter_noinfo
 0x79D7F0: lea     edx, [esp+1A4h+var_184]
-0x79D7F4: push    edx; int
+0x79D7F4: push    edx; value
 0x79D7F5: push    edi; Src
 0x79D7F6: lea     eax, [esp+1ACh+var_108]
-0x79D7FD: push    eax; int
+0x79D7FD: push    eax; position
 0x79D7FE: lea     eax, [esp+1B0h+var_18]
-0x79D805: push    eax; int
-0x79D806: lea     ecx, [esp+1B4h+var_108]
-0x79D80D: call    sub_7996F0
+0x79D805: push    eax; result
+0x79D806: lea     ecx, [esp+1B4h+var_108]; this
+0x79D80D: call    OB_stVectorFloat_InsertOne_010201A0; Grow the paired frond blade float work vector with the opposite side's accumulated length for diffuse T-coordinate correction.
 0x79D812: mov     eax, [esp+1A4h+var_178]
 0x79D816: add     eax, 1
 0x79D819: cmp     eax, [esp+1A4h+var_190]
@@ -1386,61 +1386,61 @@
 0x79D859: lea     esp, [esp+0]
 0x79D860: mov     eax, [ebx+28h]
 0x79D863: add     eax, [esp+1A4h+var_178]
-0x79D867: mov     ecx, [esi]
-0x79D869: push    eax
-0x79D86A: call    sub_794760
+0x79D867: mov     ecx, [esi]; this
+0x79D869: push    eax; vertexIndex
+0x79D86A: call    OB_CIndexedGeometry_GetVertexTexCoord0_010201A0; Oblivion CIndexedGeometry::GetVertexTexCoord0. Returns the selected vertex's two-float diffuse UV pair; projected-shadow UVs live in the separate shadowTexcoords stream.
 0x79D86F: fld     dword ptr [eax]
-0x79D871: mov     eax, [esp+1A4h+var_138]
+0x79D871: mov     eax, [esp+1A4h+var_13C.begin]
 0x79D875: fstp    [esp+1A4h+var_54]
 0x79D87C: test    eax, eax
 0x79D87E: jz      short loc_79D88F
-0x79D880: mov     ecx, [esp+1A4h+var_134]
+0x79D880: mov     ecx, [esp+1A4h+var_13C.end]
 0x79D884: sub     ecx, eax
 0x79D886: sar     ecx, 2
 0x79D889: cmp     [esp+1A4h+var_18C], ecx
 0x79D88D: jb      short loc_79D898
 0x79D88F: call    __invalid_parameter_noinfo
-0x79D894: mov     eax, [esp+1A4h+var_138]
+0x79D894: mov     eax, [esp+1A4h+var_13C.begin]
 0x79D898: fld     dword ptr [edi+eax]
 0x79D89B: movzx   cx, byte ptr [ebx+18h]
-0x79D8A0: fdiv    [esp+1A4h+var_168]
+0x79D8A0: fdiv    [esp+1A4h+value]
 0x79D8A4: lea     edx, [esp+1A4h+var_54]
-0x79D8AB: push    ecx; float
-0x79D8AC: mov     ecx, [esi]
-0x79D8AE: push    edx; int
+0x79D8AB: push    ecx; mapIndex
+0x79D8AC: mov     ecx, [esi]; this
+0x79D8AE: push    edx; diffuseST
 0x79D8AF: fmul    qword ptr ds:0A3F460h
 0x79D8B5: fstp    [esp+1ACh+var_50]
-0x79D8BC: call    sub_796320
+0x79D8BC: call    OB_CIndexedGeometry_AddVertexTexCoord0_010201A0; Legacy TexCoord0 writer: stores diffuse S/T, optionally retains original CAD S/T plus map index, and applies the global T-flip only to the exported diffuse layer.
 0x79D8C1: mov     eax, [esi]
 0x79D8C3: add     word ptr [eax+22h], 1
 0x79D8C8: mov     eax, [ebx+28h]
 0x79D8CB: mov     ecx, [esp+1A4h+var_178]
 0x79D8CF: lea     edx, [eax+ecx+1]
-0x79D8D3: mov     ecx, [esi]
-0x79D8D5: push    edx
-0x79D8D6: call    sub_794760
+0x79D8D3: mov     ecx, [esi]; this
+0x79D8D5: push    edx; vertexIndex
+0x79D8D6: call    OB_CIndexedGeometry_GetVertexTexCoord0_010201A0; Oblivion CIndexedGeometry::GetVertexTexCoord0. Returns the selected vertex's two-float diffuse UV pair; projected-shadow UVs live in the separate shadowTexcoords stream.
 0x79D8DB: fld     dword ptr [eax]
-0x79D8DD: mov     eax, [esp+1A4h+var_104]
+0x79D8DD: mov     eax, [esp+1A4h+var_108.begin]
 0x79D8E4: fstp    [esp+1A4h+var_4C]
 0x79D8EB: test    eax, eax
 0x79D8ED: jz      short loc_79D901
-0x79D8EF: mov     ecx, [esp+1A4h+var_100]
+0x79D8EF: mov     ecx, [esp+1A4h+var_108.end]
 0x79D8F6: sub     ecx, eax
 0x79D8F8: sar     ecx, 2
 0x79D8FB: cmp     [esp+1A4h+var_18C], ecx
 0x79D8FF: jb      short loc_79D90D
 0x79D901: call    __invalid_parameter_noinfo
-0x79D906: mov     eax, [esp+1A4h+var_104]
+0x79D906: mov     eax, [esp+1A4h+var_108.begin]
 0x79D90D: fld     dword ptr [edi+eax]
 0x79D910: movzx   ax, byte ptr [ebx+18h]
 0x79D915: fdiv    [esp+1A4h+var_184]
 0x79D919: lea     ecx, [esp+1A4h+var_4C]
-0x79D920: push    eax; float
-0x79D921: push    ecx; int
-0x79D922: mov     ecx, [esi]
+0x79D920: push    eax; mapIndex
+0x79D921: push    ecx; diffuseST
+0x79D922: mov     ecx, [esi]; this
 0x79D924: fmul    qword ptr ds:0A3F460h
 0x79D92A: fstp    [esp+1ACh+var_48]
-0x79D931: call    sub_796320
+0x79D931: call    OB_CIndexedGeometry_AddVertexTexCoord0_010201A0; Legacy TexCoord0 writer: stores diffuse S/T, optionally retains original CAD S/T plus map index, and applies the global T-flip only to the exported diffuse layer.
 0x79D936: mov     eax, [esi]
 0x79D938: add     [esp+1A4h+var_178], 2
 0x79D93D: mov     ecx, 1
@@ -1454,38 +1454,38 @@
 0x79D95E: add     [eax+22h], cx
 0x79D962: mov     eax, [esi]
 0x79D964: add     [eax+22h], cx
-0x79D968: mov     eax, [esp+1A4h+var_104]
+0x79D968: mov     eax, [esp+1A4h+var_108.begin]
 0x79D96F: xor     edi, edi
 0x79D971: cmp     eax, edi
 0x79D973: jz      short loc_79D97E
 0x79D975: push    eax
-0x79D976: call    FormHeapFree
+0x79D976: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x79D97B: add     esp, 4
-0x79D97E: mov     eax, [esp+1A4h+var_138]
+0x79D97E: mov     eax, [esp+1A4h+var_13C.begin]
 0x79D982: cmp     eax, edi
-0x79D984: mov     [esp+1A4h+var_104], edi
-0x79D98B: mov     [esp+1A4h+var_100], edi
-0x79D992: mov     [esp+1A4h+var_FC], edi
+0x79D984: mov     [esp+1A4h+var_108.begin], edi
+0x79D98B: mov     [esp+1A4h+var_108.end], edi
+0x79D992: mov     [esp+1A4h+var_108.capacity], edi
 0x79D999: jz      short loc_79D9A4
 0x79D99B: push    eax
-0x79D99C: call    FormHeapFree
+0x79D99C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x79D9A1: add     esp, 4
-0x79D9A4: mov     eax, [esp+1A4h+var_148]
+0x79D9A4: mov     eax, [esp+1A4h+var_14C.begin]
 0x79D9A8: cmp     eax, edi
-0x79D9AA: mov     [esp+1A4h+var_138], edi
-0x79D9AE: mov     [esp+1A4h+var_134], edi
-0x79D9B2: mov     [esp+1A4h+var_130], edi
+0x79D9AA: mov     [esp+1A4h+var_13C.begin], edi
+0x79D9AE: mov     [esp+1A4h+var_13C.end], edi
+0x79D9B2: mov     [esp+1A4h+var_13C.capacity], edi
 0x79D9B6: mov     [esp+1A4h+var_4], 0FFFFFFFFh
 0x79D9C1: jz      short loc_79D9CC
 0x79D9C3: push    eax
-0x79D9C4: call    FormHeapFree
+0x79D9C4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x79D9C9: add     esp, 4
 0x79D9CC: mov     eax, [esp+1A4h+var_114]
 0x79D9D3: add     eax, 1
 0x79D9D6: cmp     eax, [esi+2Ch]
-0x79D9D9: mov     [esp+1A4h+var_148], edi
-0x79D9DD: mov     [esp+1A4h+var_144], edi
-0x79D9E1: mov     [esp+1A4h+var_140], edi
+0x79D9D9: mov     [esp+1A4h+var_14C.begin], edi
+0x79D9DD: mov     [esp+1A4h+var_14C.end], edi
+0x79D9E1: mov     [esp+1A4h+var_14C.capacity], edi
 0x79D9E5: mov     [esp+1A4h+var_114], eax
 0x79D9EC: jb      loc_79C5D0
 0x79D9F2: mov     ecx, [esp+1A4h+var_C]
@@ -1497,3 +1497,16 @@
 0x79DA04: mov     esp, ebp
 0x79DA06: pop     ebp
 0x79DA07: retn    4
+0x9CC3B0: lea     ecx, [ebp+var_14C]; this
+0x9CC3B6: jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.
+0x9CC3BB: lea     ecx, [ebp+var_13C]; this
+0x9CC3C1: jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.
+0x9CC3C6: lea     ecx, [ebp+var_108]; this
+0x9CC3CC: jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.
+0x9CC3D1: mov     edx, [esp-4+arg_4]
+0x9CC3D5: lea     eax, [edx-194h]
+0x9CC3DB: mov     ecx, [edx-198h]
+0x9CC3E1: xor     ecx, eax
+0x9CC3E3: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CC3E8: mov     eax, offset stru_AF5578
+0x9CC3ED: jmp     ___CxxFrameHandler3

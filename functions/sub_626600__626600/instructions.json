@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x626600",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Post-load identity/cursor fixup. Modern path resolves saved actor FormIDs in package and DialogueItems only; it runs no result script and performs no topic selection.",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x626627",
-    "line": "call    sub_5660F0",
+    "line": "call    TESPackage_InitLoadGame",
     "mnemonic": "call",
     "size": 5
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x62663E",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x626664",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x62668A",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -331,13 +331,13 @@
   },
   {
     "ea": "0x6266A8",
-    "line": "jb      short loc_6266B6",
+    "line": "jb      short loc_6266B6; Modern save version >=0x20: call Conversation::InitLoadGame solely to resolve each DialogueItem's saved speaker FormID.",
     "mnemonic": "jb",
     "size": 2
   },
   {
     "ea": "0x6266AA",
-    "line": "mov     ecx, [esi+50h]",
+    "line": "mov     ecx, [esi+50h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x6266B1",
-    "line": "call    sub_6B7B60",
+    "line": "call    Conversation__InitLoadGame; Modern post-load fixup walks loaded DialogueItems and resolves only each saved speaker FormID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x6266C0",
-    "line": "jnb     loc_626767",
+    "line": "jnb     loc_626767; Legacy save version <0x20: regenerate the Conversation from speaker, target, and startingTopic, then restore item/response indices. Regeneration calls TESTopic::CreateConversation, so ImmediateResult INFOs and their AddTopicList effects are executed again; deferred results are not run by load.",
     "mnemonic": "jnb",
     "size": 6
   },
@@ -463,13 +463,13 @@
   },
   {
     "ea": "0x6266F9",
-    "line": "push    edi",
+    "line": "push    edi; unused",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6266FA",
-    "line": "push    edx",
+    "line": "push    edx; startingTopic",
     "mnemonic": "push",
     "size": 1
   },
@@ -481,25 +481,25 @@
   },
   {
     "ea": "0x6266FE",
-    "line": "push    ecx",
+    "line": "push    ecx; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6266FF",
-    "line": "push    edx",
+    "line": "push    edx; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x626700",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x626702",
-    "line": "call    sub_6B7420",
+    "line": "call    Conversation__Conversation; Legacy-only conversation reconstruction. Because the constructor invokes TESTopic::CreateConversation, selection/random linkage can differ from the original old-save chain and ImmediateResult side effects repeat.",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,19 +541,19 @@
   },
   {
     "ea": "0x62671C",
-    "line": "push    ebx",
+    "line": "push    ebx; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x62671D",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62671F",
-    "line": "call    sub_6B7560",
+    "line": "call    Conversation__GetDialogueItemByIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x626730",
-    "line": "mov     ecx, [esi+54h]",
+    "line": "mov     ecx, [esi+54h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -607,13 +607,13 @@
   },
   {
     "ea": "0x62673D",
-    "line": "push    ebp",
+    "line": "push    ebp; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x62673E",
-    "line": "call    sub_6B7CA0",
+    "line": "call    DialogueItem__GetDialogueResponseByIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -643,19 +643,19 @@
   },
   {
     "ea": "0x626752",
-    "line": "mov     ecx, [esi+50h]",
+    "line": "mov     ecx, [esi+50h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x626755",
-    "line": "push    eax",
+    "line": "push    eax; item",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x626756",
-    "line": "call    sub_6B74F0",
+    "line": "call    DialogueListCursor__SetCurrent; Legacy-only: restore the regenerated Conversation's internal current-item cursor from the saved external index.",
     "mnemonic": "call",
     "size": 5
   },
@@ -667,19 +667,19 @@
   },
   {
     "ea": "0x62675E",
-    "line": "push    ecx",
+    "line": "push    ecx; item",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x62675F",
-    "line": "mov     ecx, [esi+54h]",
+    "line": "mov     ecx, [esi+54h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x626762",
-    "line": "call    sub_6B74F0",
+    "line": "call    DialogueListCursor__SetCurrent; Legacy-only: restore currentItem's internal current-response cursor from the saved external index.",
     "mnemonic": "call",
     "size": 5
   },
@@ -736,5 +736,77 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CAD70",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAD73",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CAD74",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CAD79",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CAD7A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CAD7B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CAD7F",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAD82",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAD85",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CAD87",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CAD8C",
+    "line": "mov     eax, offset stru_AF3390",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CAD91",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

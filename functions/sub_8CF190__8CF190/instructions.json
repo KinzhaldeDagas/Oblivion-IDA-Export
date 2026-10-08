@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8CF190",
-    "line": "push    ebp",
+    "line": "push    ebp; Flying state update. Uses desired movement at proxy+0x290 and special vertical/position assumptions; not suitable as a Climbing substitute.",
     "mnemonic": "push",
     "size": 1
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x8CF242",
-    "line": "call    sub_91F430",
+    "line": "call    bhkCharacterState_SolveVelocityToTarget; Flying solver setup: response=proxy+0x310, basis slots use proxy+0x2C0/+0x2B0, third basis switches to proxy+0x230 when flag 0x100 is set, desired local velocity is swizzled from proxy+0x290, maxDelta=20, reference=proxy+0x280.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x8CF25B",
-    "line": "fstp    [esp+0B0h+var_A4]",
+    "line": "fstp    [esp+0B0h+var_A4]; Flying reads proxy+0x348 as shape vertical offset for water-height threshold logic.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x8CF261",
-    "line": "call    sub_8AC070",
+    "line": "call    bhkCollisionWrapper_GetPositionPtr; Returns low-level Havok object position pointer: *(wrapper+0x30 + 0x1C) + 0x30.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x8CF268",
-    "line": "mov     eax, offset stru_BA7A40",
+    "line": "mov     eax, offset unk_BA7A40",
     "mnemonic": "mov",
     "size": 5
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x8CF274",
-    "line": "fld     dword ptr [esi+318h]",
+    "line": "fld     dword ptr [esi+318h]; Flying state compares proxy+0x318 water height against current position plus shape vertical offset; not a climb/ledge clearance check.",
     "mnemonic": "fld",
     "size": 6
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x8CF281",
-    "line": "jp      short loc_8CF2FA",
+    "line": "jp      short loc_8CF2FA; Flying water-height comparison; not a ledge-clearance or climbability test.",
     "mnemonic": "jp",
     "size": 2
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x8CF30B",
-    "line": "call    sub_890720",
+    "line": "call    sub_890720; MorrowindMovements: commits pending state at proxy+0x2A0 into hkCharacterContext state slot proxy+0x1EC, then resets pending state to sentinel 0x0B. Use +0x1EC as active state when +0x2A0 is sentinel.",
     "mnemonic": "call",
     "size": 5
   },

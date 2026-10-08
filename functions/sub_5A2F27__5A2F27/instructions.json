@@ -127,37 +127,37 @@
   },
   {
     "ea": "0x5A2F53",
-    "line": "call    sub_5C1900",
+    "line": "call    PlayerCharacter_ReconcileHotkeysAfterInventoryRemoval",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5A2F58",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x5A2F5E",
-    "line": "push    1",
+    "line": "push    1; count",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5A2F60",
-    "line": "push    ebx",
+    "line": "push    ebx; extraList",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5A2F61",
-    "line": "push    edi",
+    "line": "push    edi; item",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5A2F62",
-    "line": "call    TESObjectREFR_AddItem_Abbrev",
+    "line": "call    TESObjectREFR_AddItem_Abbrev; Short TESObjectREFR AddItem wrapper: emits the inventory event and delegates item, ExtraDataList, and count to ContainerExtraData_AddItem.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x5A2F9A",
-    "line": "call    sub_5C1900",
+    "line": "call    PlayerCharacter_ReconcileHotkeysAfterInventoryRemoval",
     "mnemonic": "call",
     "size": 5
   },

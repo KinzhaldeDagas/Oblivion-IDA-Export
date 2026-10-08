@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x484F80",
-    "line": "sub     esp, 18h",
+    "line": "sub     esp, 18h; TES4 authoritative call ABI: EntryData in ECX, Actor* owner as first stack argument, float damageOffset as second; returns damage through ST0 and ends with retn 8. This type is required to keep ArrowProjectile constructor stack analysis correct.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x484F8F",
-    "line": "mov     esi, [esp+20h+arg_0]",
+    "line": "mov     esi, [esp+20h+owner]",
     "mnemonic": "mov",
     "size": 4
   },

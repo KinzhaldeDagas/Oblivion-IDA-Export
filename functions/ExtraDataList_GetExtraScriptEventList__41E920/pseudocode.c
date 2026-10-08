@@ -2,9 +2,9 @@ ExtraScript *__thiscall ExtraDataList_GetExtraScriptEventList(ExtraDataList *thi
 {
   BSExtraData *ExtraData; // eax
 
-  ExtraData = BaseExtraList_GetExtraData(this, kExtraData_Script);
-  if ( ExtraData )
-    return *(ExtraScript **)&ExtraData[1].members.type;
+  ExtraData = BaseExtraList_GetExtraData(this, kExtraData_Script); /*0x41e922*/
+  if ( ExtraData ) /*0x41e929*/
+    return *(ExtraScript **)&ExtraData[1].members.type; /*0x41e92b*/
   else
-    return 0;
+    return 0; /*0x41e92f*/
 }

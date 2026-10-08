@@ -1,19 +1,36 @@
 {
-  "callees_count": 78,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 53,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 19,
-  "display_name": "sub_510E60",
+  "chunks": [
+    [
+      "0x510E60",
+      "0x511568"
+    ],
+    [
+      "0x9B6FB0",
+      "0x9B6FE9"
+    ]
+  ],
+  "chunks_sha256": "97f054c08585296ecd84b577a96cbb2890c5cb10ef9da520b14f40594d87d53e",
+  "comment_regular": "Verified script registration: CalcLowPathToPoint, alias LP2P, ID 289, callback 0x510E60; description: 'ignore locks, allow disabled doors, ignore min use'. Argument flow is verified: first boolean -> policy byte 0/ignore locks; second -> policy byte 2/allow disabled; third -> policy byte 1/ignore min use. The command saves prior policy bytes, applies these values for route evaluation, then restores them.",
+  "comment_repeatable": "Verified script registration: CalcLowPathToPoint, alias LP2P, ID 289, callback 0x510E60; description: 'ignore locks, allow disabled doors, ignore min use'. Argument flow is verified: first boolean -> policy byte 0/ignore locks; second -> policy byte 2/allow disabled; third -> policy byte 1/ignore min use. The command saves prior policy bytes, applies these values for route evaluation, then restores them.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 37,
+  "display_name": "ScriptCommand_CalcLowPathToPoint",
   "end_ea": "0x511568",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "sub_510E60",
+  "name": "ScriptCommand_CalcLowPathToPoint",
   "segment": ".text",
   "sha256": "6153e9c72f134469da2fc00cfaea3dc003a9ebd619840205a1de1812fc7226ef",
   "size": 1800,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x510E60",
+  "total_chunk_size": 1857,
   "type": "void __usercall(double st5_0@<st2>, double@<st1>, double st7_0@<st0>, ParamInfo *, UInt8 *, TESObjectCELL **, __int64, ScriptEventList *, int, UInt32 *)",
-  "xrefs_from_count": 603,
+  "xrefs_from_count": 636,
   "xrefs_to_count": 1
 }

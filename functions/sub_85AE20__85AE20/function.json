@@ -1,10 +1,22 @@
 {
   "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 57,
   "callers_count": 0,
+  "chunks": [
+    [
+      "0x85AE20",
+      "0x85BBD4"
+    ],
+    [
+      "0x9D4540",
+      "0x9D457F"
+    ]
+  ],
   "chunks_sha256": "99d05a10136e1d2689ae79bff69bf9ecd30e2a4174e63e4a97d0ab17ba4e2412",
   "comment_regular": "Shared Oblivion BSShaderPPLightingProperty inherited virtual at vtable slot +0x9C. Exact ABI: void __thiscall(BSShaderProperty *this, NiGeometry *geometry, int rendererState, WORD *outContext, int emit). It requires shadow mapping ready, iterates eligible active non-shadow lights with ShadowSceneLight+0xF4 nonnull, constructs light-count-1 RenderPass records, stores pad+7=1, and inserts at this+0x28 head. Selector priority: passInfo bit 0x2 -> 0x178; else bit 0x4000 -> 0x179; else exact SpeedTreeBranch RTTI ancestry -> 0x17A; otherwise 0x177. Hair owns this slot but reaches it only through HairShaderProperty_BuildRenderPasses' image-space + flag fallback and base shader-class>=2 dispatch.\n\nSpeedTreeOBSE v159 static adapter: ordinary mode0 low-mask4 suppresses ordinary ambient/dynamic-light production while retaining texture pass10B and native extra/projector behavior. Full mask check here is (flags&F)==F, unlike class1855240 exact flags==F. Existing logs show renderState1F; adapter preserves upper10 bit (1F->14) and appends fog194 for the class-appropriate full mask. Texture-only final byte+7 is cleared before separate fog. Real game hook behavior remains UNVERIFIED.\n\n[Verified] After inherited lighting passes are assembled, this function passes decalDataList_80.numItems (+0x8C) to BSShaderProperty_AppendDecalPassesByBatch when the decal-path flag is set. This is the 1x consumer of the same list registered by BSTempEffect decal creation/build/restore paths; package batch size is OB_ShaderPassControl.decalPassBatchSize.",
   "comment_repeatable": "[Verified] After inherited lighting passes are assembled, this function passes decalDataList_80.numItems (+0x8C) to BSShaderProperty_AppendDecalPassesByBatch when the decal-path flag is set. This is the 1x consumer of the same list registered by BSTempEffect decal creation/build/restore paths; package batch size is OB_ShaderPassControl.decalPassBatchSize.\n\nInherited +0x9C compatibility: stock high output is reachable for base PP and SpeedTree PP-lighting owners that retain base +0x5C. Lighting30 overrides +0x5C and never enters; Hair's only entry carries Refract/RefractF and returns via 0x160..0x162. Global selector filtering remains invalid because ordinary PP/SpeedTree high passes are consumed.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 8,
   "display_name": "BSShaderPPLightingProperty_BuildInheritedLightPasses",
   "end_ea": "0x85BBD4",
@@ -15,6 +27,7 @@
   "segment": ".text",
   "sha256": "6fb6d7e3a8c44107e0e2553c8d7e6c6086f32c425bed47eb97b23a16b741241c",
   "size": 3508,
+  "source_annotation_confidence": "Verified",
   "start_ea": "0x85AE20",
   "total_chunk_size": 3571,
   "type": "void __thiscall(BSShaderLightingPropertyLayout_t *this, NiGeometry *geometry, int rendererState, unsigned __int16 *outContext, int emit)",

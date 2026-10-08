@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x470F40",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; For a lower-body movement key (group 3..14) in slot 0, gets the Bip01 node name from ActorAnimData +0x24, queries each active sequence's controlled-block priority for that name, and returns true only when slot 0 has the highest priority. Returns false without slot 0, Bip01, or a movement group.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x470F6A",
-    "line": "call    sub_51AA00",
+    "line": "call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x470F91",
-    "line": "call    sub_49FD20",
+    "line": "call    BSAnimGroupSequence_GetControlledBlockPriority; Finds the controlled-block record whose palette-resolved target name exactly matches the supplied node name and returns that record's priority byte at +0x0D; returns zero when absent.",
     "mnemonic": "call",
     "size": 5
   },

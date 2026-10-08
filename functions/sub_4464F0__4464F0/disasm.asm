@@ -14,7 +14,7 @@
 0x446511: mov     ecx, edi
 0x446513: call    sub_4440E0
 0x446518: push    edi
-0x446519: call    FormHeapFree
+0x446519: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x44651E: add     esp, 4
 0x446521: mov     eax, [esi+4]
 0x446524: test    eax, eax
@@ -24,7 +24,7 @@
 0x44652E: mov     edx, [eax]
 0x446530: push    eax
 0x446531: mov     [esi], edx
-0x446533: call    FormHeapFree
+0x446533: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x446538: add     esp, 4
 0x44653B: jmp     short loc_446500
 0x44653D: mov     dword ptr [esi], 0

@@ -1,4 +1,4 @@
 const char *TESTexture_GetBasePath()
 {
-  return "Textures\\";
+  return "Textures\\"; /*0x46ff15*/
 }

@@ -14,9 +14,9 @@
 0x5AF232: fld     dword ptr [edi+6Ch]
 0x5AF235: fchs
 0x5AF237: fstp    dword ptr [eax+90h]
-0x5AF23D: mov     ecx, ds:0B333C4h
-0x5AF243: push    1Eh
-0x5AF245: call    Actor_GetSkillMasteryLevel
+0x5AF23D: mov     ecx, ds:0B333C4h; this
+0x5AF243: push    1Eh; actorValue
+0x5AF245: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x5AF24A: test    eax, eax
 0x5AF24C: jnz     short loc_5AF252
 0x5AF24E: xor     ebx, ebx
@@ -39,9 +39,9 @@
 0x5AF275: sub     ebx, 1
 0x5AF278: and     ebx, 4
 0x5AF27B: mov     ecx, ds:0B35ECCh
-0x5AF281: push    ecx
-0x5AF282: mov     ecx, ds:0B333C4h
-0x5AF288: call    TESObjectREF_GetItemCount
+0x5AF281: push    ecx; item
+0x5AF282: mov     ecx, ds:0B333C4h; this
+0x5AF288: call    TESObjectREFR_GetItemCount; TESObjectREFR inventory count accessor: returns 0 when the reference has no container or no ContainerChanges; otherwise asks ContainerExtraData_GetItemCount(this, item), which combines base TESContainer count with EntryData.countDelta. Exact ABI is thiscall (TESObjectREFR *this, TESForm *item).
 0x5AF28D: test    eax, eax
 0x5AF28F: jz      short loc_5AF294
 0x5AF291: add     ebx, 1
@@ -54,7 +54,7 @@
 0x5AF2A5: jz      short loc_5AF2E4
 0x5AF2A7: test    ebx, ebx
 0x5AF2A9: jg      short loc_5AF2E1
-0x5AF2AB: mov     ecx, [esi+0Bh]
+0x5AF2AB: mov     ecx, [esi+0Bh]; this
 0x5AF2AE: test    ecx, ecx
 0x5AF2B0: mov     byte ptr [esi], 0
 0x5AF2B3: mov     byte ptr [esi-1], 1
@@ -64,7 +64,7 @@
 0x5AF2C0: mov     dword ptr [esi-15h], 0FFFFFFFFh
 0x5AF2C7: fstp    dword ptr [esi-5]
 0x5AF2CA: jz      short loc_5AF2E4
-0x5AF2CC: call    sub_6B7260
+0x5AF2CC: call    SoundHandle__IsPlaying; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.
 0x5AF2D1: test    al, al
 0x5AF2D3: jnz     short loc_5AF2E4
 0x5AF2D5: mov     ecx, [esi+0Bh]

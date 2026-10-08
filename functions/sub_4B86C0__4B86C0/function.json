@@ -1,19 +1,36 @@
 {
-  "callees_count": 79,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 31,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_4B86C0",
+  "chunks": [
+    [
+      "0x4B86C0",
+      "0x4B89F5"
+    ],
+    [
+      "0x9B3C30",
+      "0x9B3C5B"
+    ]
+  ],
+  "chunks_sha256": "ff952b46f3558eaaee9bc4e4fae1402df471eceafd77dc2f95289bfe3bd8c54d",
+  "comment_regular": "Verified Fallout corroboration for this Oblivion helper pair: Fallout's FindRandomTeleportTarget calls PlayerCharacter::GetLastSpaceForDoor before selecting among the door's RandomTeleports, avoids the previous index when possible, and calls SetLastSpaceForDoor with the selected index. Oblivion independently proves its helper pair operates on the same per-door remembered-space behavior; only this behavior is treated as shared.",
+  "comment_repeatable": "Verified Fallout corroboration for this Oblivion helper pair: Fallout's FindRandomTeleportTarget calls PlayerCharacter::GetLastSpaceForDoor before selecting among the door's RandomTeleports, avoids the previous index when possible, and calls SetLastSpaceForDoor with the selected index. Oblivion independently proves its helper pair operates on the same per-door remembered-space behavior; only this behavior is treated as shared.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "DoorTeleport_SelectRandomDestinationDoor",
   "end_ea": "0x4B89F5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4B86C0",
+  "name": "DoorTeleport_SelectRandomDestinationDoor",
   "segment": ".text",
   "sha256": "3809774a10953ce5e1c58a90cc8e50193ec5c6c1cbc8a3bcbdeabbc7b4a08a46",
   "size": 821,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4B86C0",
+  "total_chunk_size": 864,
   "type": "TESChildCELL *__userpurge@<eax>(int@<ecx>, double@<st2>, double@<st1>, double@<st0>, TESObjectREFR *, _BYTE *)",
-  "xrefs_from_count": 345,
+  "xrefs_from_count": 358,
   "xrefs_to_count": 1
 }

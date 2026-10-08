@@ -51,7 +51,7 @@
 0x635ED0: fld     [esp+14h+arg_0]
 0x635ED4: fimul   dword ptr ds:0B367A0h
 0x635EDA: fdivp   st(1), st
-0x635EDC: call    Double_To_SInt32
+0x635EDC: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x635EE1: mov     ecx, [edi+1ECh]
 0x635EE7: mov     esi, eax
 0x635EE9: cmp     esi, [ecx+40h]

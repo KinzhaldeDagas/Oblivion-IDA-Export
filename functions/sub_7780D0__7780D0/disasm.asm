@@ -1,4 +1,4 @@
-0x7780D0: push    esi
+0x7780D0: push    esi; MoonSugarEffect decode: NiGeometryBufferData SetVertexDeclaration-style input ownership. Releases the previous declaration, AddRefs the new one, stores it, and clears FVF. World mask shaders must not mutate this unless they own/repacked the BuffData layout.
 0x7780D1: mov     esi, ecx
 0x7780D3: mov     eax, [esi+0Ch]
 0x7780D6: push    edi

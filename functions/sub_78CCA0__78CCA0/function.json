@@ -1,19 +1,36 @@
 {
-  "callees_count": 59,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 32,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x78CCA0",
+      "0x78D139"
+    ],
+    [
+      "0x9CB890",
+      "0x9CB8CB"
+    ]
+  ],
+  "chunks_sha256": "14b6e45d228be04867e798ec7fcbdba60dc0f3b0ee2a6884d3cf4ecfa19349f2",
+  "comment_regular": "CSpeedTreeRT::Compute. Verified thiscall with transform pointer, seed and compositeStrips stack arguments, AL result, ret0x0C; the former extra EDI input was spurious. Computes tree/frond/leaf geometry, optional embedded texcoord transfer, optional transform/collision transform, extents/tree-size storage, horizontal billboard setup, and sets treeComputed byte. No stock render-resource attachment happens here.\n\n[2026-10-03 supplemental context hook] After storing RT.frondEngine(+5C) into static B429C4, native CALL78CD02 invokes CTreeEngine::Compute7A45F0 with one float leafSizeIncreaseFactor, while EBX remains CSpeedTreeRT*. This is the verified pre-guide generation boundary used by the plugin. FrondCompute call78CD12 is later, after guide generation, and is too late to apply distance/pruning/segment rules.\n\n[2026-10-03 completed export capture] Inner frond compute78CD12 precedes embedded frond UV transfer78CDE1, optional strip combination78CE00, optional geometry transform78CE3D and final treeComputedFlag+45=1 at78D05E. Caching owned vertex/UV copies directly after78CD12 is premature even when vector pointers remain equal. Plugin now wraps caller560888 and captures after this method returns success; a TLS in-progress fence also rejects intermediate exporter callbacks.",
   "comment_repeatable": "",
-  "data_refs_count": 5,
-  "display_name": "sub_78CCA0",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 14,
+  "display_name": "CSpeedTreeRT__Compute",
   "end_ea": "0x78D139",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_78CCA0",
+  "name": "CSpeedTreeRT__Compute",
   "segment": ".text",
   "sha256": "31e3443f4e84b0c1ab489b7bff8459a6b8dd44a3bbfd765d96a2b8d9db61641c",
   "size": 1177,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78CCA0",
-  "type": "char __userpurge@<al>(_BYTE *this@<ecx>, int@<edi>, const void *, int, float)",
-  "xrefs_from_count": 458,
+  "total_chunk_size": 1236,
+  "type": "bool __thiscall(OB_CSpeedTreeRT_010201A0 *this, const float *transform4x4, unsigned int seed, bool compositeStrips)",
+  "xrefs_from_count": 482,
   "xrefs_to_count": 1
 }

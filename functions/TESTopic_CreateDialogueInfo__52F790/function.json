@@ -1,19 +1,36 @@
 {
-  "callees_count": 8,
-  "callers_count": 17,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "TESTopic::CreateDialogueInfo",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
+  "callers_count": 25,
+  "chunks": [
+    [
+      "0x52F790",
+      "0x52F825"
+    ],
+    [
+      "0x9CA5A0",
+      "0x9CA5C6"
+    ]
+  ],
+  "chunks_sha256": "4d07b50fb6b0596c2f33eb034fb9979bde534bcfb7c642c1b4d3a5a8c3134b2c",
+  "comment_regular": "Selects a matching TESTopicInfo and wraps it as a 0x1C DialogueItem containing response list/cursor, INFO, topic, owner quest, and speaker.",
+  "comment_repeatable": "Selects a matching TESTopicInfo and wraps it as a 0x1C DialogueItem containing response list/cursor, INFO, topic, owner quest, and speaker.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "TESTopic::CreateDialogueItem",
   "end_ea": "0x52F825",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "TESTopic::CreateDialogueInfo",
+  "name": "TESTopic::CreateDialogueItem",
   "segment": ".text",
   "sha256": "f1da7535c86e46b15d5ee9de9157c748e43f35e2f07f4e5b06c04bde3649fb8d",
   "size": 149,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x52F790",
-  "type": "Unk1C *__thiscall(TESTopic *this, Actor *, TESObjectREFR *, int, _DWORD *)",
-  "xrefs_from_count": 65,
+  "total_chunk_size": 187,
+  "type": "DialogueItemView *__thiscall(TESTopic *this, Actor *speaker, TESObjectREFR *target, TESTopic *previousTopic, ConversationView *conversation)",
+  "xrefs_from_count": 79,
   "xrefs_to_count": 25
 }

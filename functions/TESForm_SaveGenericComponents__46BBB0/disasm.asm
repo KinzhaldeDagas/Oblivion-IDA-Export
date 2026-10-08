@@ -19,7 +19,7 @@
 0x46BBE3: push    eax; Src
 0x46BBE4: push    41544144h; int
 0x46BBE9: xor     ebx, ebx
-0x46BBEB: call    TESForm_PutFormRecordChunkData
+0x46BBEB: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x46BBF0: mov     ecx, ds:0B33C14h
 0x46BBF6: push    ebx; int
 0x46BBF7: push    offset ??_R0?AVTESUsesForm@@@8; struct TypeDescriptor *
@@ -103,7 +103,7 @@
 0x46BCEE: push    ebx
 0x46BCEF: push    edx
 0x46BCF0: mov     ecx, esi
-0x46BCF2: call    sub_46AED0
+0x46BCF2: call    TESForm_ExpandChunk; Expands an existing record CHUNK by up to 0xFFFF bytes: increases its 16-bit length, grows the global TESForm save buffer, and leaves the appended range ready for the caller to fill.
 0x46BCF7: test    al, al
 0x46BCF9: jz      loc_46BD89
 0x46BCFF: test    edi, edi

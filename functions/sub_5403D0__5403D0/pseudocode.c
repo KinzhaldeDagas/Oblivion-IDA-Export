@@ -1,111 +1,106 @@
-void __thiscall sub_5403D0(Sky *this, int a4)
+void __thiscall sub_5403D0(Sky *this, int a2)
 {
-  int v4; // edi
-  int *v5; // ebp
+  int v2; // edi
+  int v3; // ebp
+  _DWORD *v4; // esi
+  _DWORD *v5; // eax
   _DWORD *v6; // eax
-  _DWORD *v7; // esi
-  _DWORD *v8; // eax
-  _DWORD *v9; // eax
   int *unk0E0; // ecx
-  int v11; // eax
-  bool v12; // dl
-  _DWORD *v13; // eax
-  int v14; // ecx
-  _DWORD *v15; // edi
-  _DWORD *v16; // esi
-  _DWORD *v17; // eax
-  int v18; // [esp+14h] [ebp-18h]
+  int v8; // eax
+  bool v9; // dl
+  _DWORD *v10; // eax
+  int v11; // ecx
+  _DWORD *v12; // edi
+  _DWORD *v13; // esi
+  _DWORD *v14; // eax
+  int *v15; // [esp+14h] [ebp-18h]
 
-  v4 = a4;
-  if ( a4 )
+  v2 = a2; /*0x5403fb*/
+  if ( a2 ) /*0x540403*/
   {
-    v18 = a4 + 0x108;
-    if ( a4 != 0xFFFFFEF8 )
+    v15 = (int *)(a2 + 0x108); /*0x540411*/
+    if ( a2 != 0xFFFFFEF8 ) /*0x540415*/
     {
-      do
+      do /*0x5404fd*/
       {
-        v5 = *(int **)v18;
-        if ( !*(_DWORD *)v18 )
-          break;
-        if ( byte_B11DE4 || v5[1] != 1 )
+        v3 = *v15; /*0x54041f*/
+        if ( !*v15 ) /*0x54041f*/
+          break; /*0x540423*/
+        if ( byte_B11DE4 || *(_DWORD *)(v3 + 4) != 1 ) /*0x540435*/
         {
-          OSGLobals_PlaySound(*v5, 0x21, 0);
-          v7 = v6;
-          if ( v6 )
-            goto LABEL_13;
-          if ( sub_6ACA40((_DWORD *)OSGlobals->sound, *v5) )
+          v4 = OSGLobals_PlaySound((int *)MEMORY[0xB33398]->sound, *(void **)v3, 0x21, 0); /*0x540450*/
+          if ( v4 ) /*0x540454*/
+            goto LABEL_13; /*0x540454*/
+          if ( sub_6ACA40((_DWORD *)MEMORY[0xB33398]->sound, *(_DWORD *)v3) ) /*0x540462*/
           {
-            v8 = (_DWORD *)FormHeapAlloc(4u);
-            if ( v8 )
-              v9 = unknown_libname_1(v8, *v5);
+            v5 = (_DWORD *)FormHeapAlloc(4u); /*0x54046d*/
+            if ( v5 ) /*0x54047f*/
+              v6 = unknown_libname_1(v5, *(_DWORD *)v3); /*0x540487*/
             else
-              v9 = 0;
-            v7 = v9;
+              v6 = 0; /*0x54048e*/
+            v4 = v6; /*0x540498*/
           }
-          if ( v7 )
+          if ( v4 ) /*0x54049c*/
           {
 LABEL_13:
-            unk0E0 = (int *)this->unk0E0;
-            while ( unk0E0 )
+            unk0E0 = (int *)this->unk0E0; /*0x5404a2*/
+            while ( unk0E0 ) /*0x5404b2*/
             {
-              v11 = *unk0E0;
-              if ( !*unk0E0 )
-                break;
-              v12 = **(_DWORD **)v11 == *v7 && *(_DWORD *)(v11 + 4) == v4 && *(_DWORD *)(v11 + 8) == v5[1];
-              unk0E0 = (int *)unk0E0[1];
-              if ( v12 )
+              v8 = *unk0E0; /*0x5404b4*/
+              if ( !*unk0E0 ) /*0x5404b4*/
+                break; /*0x5404b4*/
+              v9 = **(_DWORD **)v8 == *v4 && *(_DWORD *)(v8 + 4) == v2 && *(_DWORD *)(v8 + 8) == *(_DWORD *)(v3 + 4); /*0x5404cf*/
+              unk0E0 = (int *)unk0E0[1]; /*0x5404d7*/
+              if ( v9 ) /*0x5404da*/
               {
-                if ( v7 )
-                {
-                  sub_6B73E0(v7);
-                  FormHeapFree((unsigned int)v7);
-                }
-                goto LABEL_24;
+                sub_6B73E0(v4); /*0x5404e2*/
+                FormHeapFree((unsigned int)v4); /*0x5404e8*/
+                goto LABEL_23; /*0x5404e8*/
               }
             }
-            v13 = (_DWORD *)FormHeapAlloc(0x10u);
-            if ( v13 )
+            v10 = (_DWORD *)FormHeapAlloc(0x10u); /*0x54051f*/
+            if ( v10 ) /*0x540529*/
             {
-              v14 = v5[1];
-              v13[1] = v4;
-              *v13 = v7;
-              v13[2] = v14;
-              v13[3] = 0;
-              v15 = v13;
+              v11 = *(_DWORD *)(v3 + 4); /*0x54052b*/
+              v10[1] = v2; /*0x54052e*/
+              *v10 = v4; /*0x540531*/
+              v10[2] = v11; /*0x540533*/
+              v10[3] = 0; /*0x540536*/
+              v12 = v10; /*0x540539*/
             }
             else
             {
-              v15 = 0;
+              v12 = 0; /*0x54053d*/
             }
-            v16 = (_DWORD *)this->unk0E0;
-            if ( v15 )
+            v13 = (_DWORD *)this->unk0E0; /*0x540545*/
+            if ( v12 ) /*0x54054b*/
             {
-              if ( *v16 )
+              if ( *v13 ) /*0x54054d*/
               {
-                v17 = (_DWORD *)FormHeapAlloc(8u);
-                if ( v17 )
+                v14 = (_DWORD *)FormHeapAlloc(8u); /*0x540553*/
+                if ( v14 ) /*0x54055d*/
                 {
-                  *v17 = *v16;
-                  v17[1] = 0;
+                  *v14 = *v13; /*0x540561*/
+                  v14[1] = 0; /*0x540563*/
                 }
                 else
                 {
-                  v17 = 0;
+                  v14 = 0; /*0x540568*/
                 }
-                v17[1] = v16[1];
-                v16[1] = v17;
+                v14[1] = v13[1]; /*0x54056d*/
+                v13[1] = v14; /*0x540570*/
               }
-              *v16 = v15;
+              *v13 = v12; /*0x540573*/
             }
-            v4 = a4;
-            if ( v5[1] == 3 )
-              ++byte_B365C0;
+            v2 = a2; /*0x540579*/
+            if ( *(_DWORD *)(v3 + 4) == 3 ) /*0x54057d*/
+              ++unk_B365C0; /*0x540583*/
           }
         }
-LABEL_24:
-        v18 = *(_DWORD *)(v18 + 4);
+LABEL_23:
+        v15 = (int *)v15[1]; /*0x5404f9*/
       }
-      while ( v18 );
+      while ( v15 ); /*0x5404fd*/
     }
   }
 }

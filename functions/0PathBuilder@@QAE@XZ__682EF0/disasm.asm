@@ -97,3 +97,18 @@
 0x683023: pop     esi
 0x683024: add     esp, 10h
 0x683027: retn
+0x9C4D40: mov     ecx, [ebp-10h]; this
+0x9C4D43: jmp     ??1BackgroundLoader@@UAE@XZ; BackgroundLoader::~BackgroundLoader(void)
+0x9C4D48: mov     ecx, [ebp-10h]
+0x9C4D4B: add     ecx, 10h
+0x9C4D4E: jmp     ??1?$NiTPointerMap@PAVActor@@PAUPathingData@@@@UAE@XZ; NiTPointerMap<Actor *,PathingData *>::~NiTPointerMap<Actor *,PathingData *>(void)
+0x9C4D53: mov     ecx, [ebp-10h]
+0x9C4D56: add     ecx, 20h ; ' '
+0x9C4D59: jmp     ??1?$NiTPointerMap@PAVActor@@PAUPathingData@@@@UAE@XZ; NiTPointerMap<Actor *,PathingData *>::~NiTPointerMap<Actor *,PathingData *>(void)
+0x9C4D5E: mov     edx, [esp+arg_4]
+0x9C4D62: lea     eax, [edx-0Ch]
+0x9C4D65: mov     ecx, [edx-10h]
+0x9C4D68: xor     ecx, eax
+0x9C4D6A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C4D6F: mov     eax, offset stru_AED61C
+0x9C4D74: jmp     ___CxxFrameHandler3

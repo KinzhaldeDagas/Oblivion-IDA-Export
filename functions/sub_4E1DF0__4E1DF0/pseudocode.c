@@ -1,82 +1,75 @@
-void *__userpurge sub_4E1DF0@<eax>(
-        TESObjectREFR *a1@<ecx>,
-        double a2@<st0>,
-        double st5_0@<st2>,
-        double a4@<st1>,
-        UInt32 a5)
+// Refreshes equipped-AMMO/quiver 3D for a reference. For PlayerCharacter it updates both relevant animation perspectives; then refreshes quiver arrow visibility and actor 3D state.
+void __thiscall TESObjectREFR_RefreshEquippedAmmo3D(TESObjectREFR *this, TESForm *ammo)
 {
-  void *result; // eax
-  int v7; // eax
-  PlayerCharacter *v8; // ecx
-  char *v9; // ebx
-  const char *v10; // eax
-  NiObjectNET *v11; // ebx
+  double v2; // st7
+  ActorSkinInfo *v4; // eax
+  PlayerCharacter *v5; // ecx
+  ActorSkinInfo *v6; // ebx
+  const char *v7; // eax
+  NiObjectNET *CloneAndAttachModel3D; // ebx
   char *m_data; // ebp
-  const char *v13; // [esp-18h] [ebp-4Ch]
-  int v14; // [esp-14h] [ebp-48h]
-  int v15; // [esp+14h] [ebp-20h]
-  int v16; // [esp+18h] [ebp-1Ch]
+  const char *v10; // [esp-18h] [ebp-4Ch]
+  UInt32 refID; // [esp-14h] [ebp-48h]
+  int v12; // [esp+14h] [ebp-20h]
+  ActorSkinInfo *SkinInfoByPerspective; // [esp+18h] [ebp-1Ch]
   BSStringT Src; // [esp+20h] [ebp-14h] BYREF
-  unsigned int v18; // [esp+30h] [ebp-4h]
+  unsigned int v15; // [esp+30h] [ebp-4h]
 
-  result = a1->member.niNode;
-  if ( result )
+  if ( this->member.niNode ) /*0x4e1e19*/
   {
-    v7 = ((int (__thiscall *)(TESObjectREFR *))a1->vtbl->Unk_5A)(a1);
-    v8 = TESDataHandler_g_PlayerRef;
-    v9 = (char *)v7;
-    v16 = v7;
-    v15 = 1;
-    if ( a1 != (TESObjectREFR *)TESDataHandler_g_PlayerRef )
-      goto LABEL_8;
-    v15 = 2;
-    while ( 1 )
+    v4 = this->vtbl->GetActiveSkinInfo(this); /*0x4e1e2e*/
+    v5 = reference; /*0x4e1e30*/
+    v6 = v4; /*0x4e1e38*/
+    SkinInfoByPerspective = v4; /*0x4e1e3f*/
+    v12 = 1; /*0x4e1e43*/
+    if ( this != (TESObjectREFR *)reference ) /*0x4e1e47*/
+      goto LABEL_8; /*0x4e1e47*/
+    v12 = 2; /*0x4e1e49*/
+    while ( 1 ) /*0x4e1e59*/
     {
-      if ( a1 == (TESObjectREFR *)v8 && v15 == 1 )
+      if ( this == (TESObjectREFR *)v5 && v12 == 1 ) /*0x4e1e61*/
       {
-        v16 = sub_6600D0(v8, v8->isThirdPerson);
-        v9 = (char *)v16;
+        SkinInfoByPerspective = Actor_GetSkinInfoByPerspective((Actor *)v5, v5->isThirdPerson); /*0x4e1e77*/
+        v6 = SkinInfoByPerspective; /*0x4e1e7b*/
       }
 LABEL_8:
-      if ( v9 )
+      if ( v6 ) /*0x4e1e7f*/
       {
-        sub_479C40(v9, st5_0, a4, a2, a5);
+        ActorSkinInfo_SetEquippedAmmo3D(v6, ammo); /*0x4e1e88*/
       }
-      else if ( a5 )
+      else if ( ammo ) /*0x4e1e96*/
       {
-        if ( a5 != 0xFFFFFFD0 )
+        if ( ammo != (TESForm *)0xFFFFFFD0 ) /*0x4e1ea5*/
         {
-          v10 = (const char *)(*(int (__thiscall **)(UInt32))(*(_DWORD *)(a5 + 0x30) + 0x14))(a5 + 0x30);
-          v11 = (NiObjectNET *)sub_479450(v10, 0xC, a1, 0);
-          Src.m_data = 0;
-          Src.m_dataLen = 0;
-          Src.m_bufLen = 0;
-          v14 = *(_DWORD *)(a5 + 0xC);
-          v13 = *(const char **)off_B065B8;
-          v18 = 0;
-          BSStringT_Static_Format(&Src, "%s (%08X)", v13, v14);
-          m_data = Src.m_data;
-          NiObjectNET_SetName(v11, Src.m_data);
-          v18 = 0xFFFFFFFF;
-          FormHeapFree((unsigned int)m_data);
-          v9 = (char *)v16;
-          Src.m_data = 0;
-          Src.m_bufLen = 0;
-          Src.m_dataLen = 0;
+          v7 = (const char *)((int (__thiscall *)(TESForm *))ammo[2].vtbl->Unk_05)(&ammo[2]); /*0x4e1eb0*/
+          CloneAndAttachModel3D = (NiObjectNET *)Actor_LoadCloneAndAttachModel3D(v7, 0xC, this, 0); /*0x4e1eb8*/
+          Src.m_data = 0; /*0x4e1eba*/
+          Src.m_dataLen = 0; /*0x4e1ebe*/
+          Src.m_bufLen = 0; /*0x4e1ec3*/
+          refID = ammo->member.refID; /*0x4e1ed5*/
+          v10 = *(const char **)off_B065B8; /*0x4e1ed6*/
+          v15 = 0; /*0x4e1ee1*/
+          BSStringT_Static_Format(&Src, "%s (%08X)", v10, refID); /*0x4e1ee5*/
+          m_data = Src.m_data; /*0x4e1eea*/
+          NiObjectNET_SetName(CloneAndAttachModel3D, Src.m_data); /*0x4e1ef4*/
+          v15 = 0xFFFFFFFF; /*0x4e1efa*/
+          FormHeapFree((unsigned int)m_data); /*0x4e1f02*/
+          v6 = SkinInfoByPerspective; /*0x4e1f07*/
+          Src.m_data = 0; /*0x4e1f0e*/
+          Src.m_bufLen = 0; /*0x4e1f12*/
+          Src.m_dataLen = 0; /*0x4e1f17*/
         }
       }
-      if ( a1->vtbl->IsActor(a1) )
-        sub_5F8300(a1, (int)v9, 0);
-      if ( !--v15 )
-        break;
-      v8 = TESDataHandler_g_PlayerRef;
+      if ( this->vtbl->IsActor(this) ) /*0x4e1f2b*/
+        Actor_RefreshQuiverArrowVisibility((Actor *)this, (ActorAnimData *)v6, 0); /*0x4e1f35*/
+      if ( !--v12 ) /*0x4e1f3e*/
+        break; /*0x4e1f3e*/
+      v5 = reference; /*0x4e1e53*/
     }
-    result = (void *)((int (__thiscall *)(TESObjectREFR *))a1->vtbl->IsActor)(a1);
-    if ( (_BYTE)result )
+    if ( this->vtbl->IsActor(this) ) /*0x4e1f4e*/
     {
-      sub_5EA1A0((int)a1, 1, (_DWORD *)a1->member.niNode);
-      return (void *)sub_5EE1B0((Actor *)a1, a2);
+      sub_5EA1A0((int)this, 1, (_DWORD *)this->member.niNode); /*0x4e1f5a*/
+      sub_5EE1B0((Actor *)this, v2); /*0x4e1f61*/
     }
   }
-  return result;
 }

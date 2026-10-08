@@ -311,7 +311,7 @@
 0x925371: shufps  xmm1, xmm0, 0C9h ; 'É'
 0x925375: movaps  [esp+120h+var_60], xmm4
 0x92537D: movaps  xmm4, xmm1
-0x925380: movaps  xmm1, xmmword ptr [esp+120h+var_C0]
+0x925380: movaps  xmm1, [esp+120h+var_C0]
 0x925385: movaps  xmm5, xmm1
 0x925388: shufps  xmm5, xmm1, 0D2h ; 'Ò'
 0x92538C: mulps   xmm5, xmm4

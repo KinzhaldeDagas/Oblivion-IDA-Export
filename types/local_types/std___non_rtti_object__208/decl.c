@@ -1,1 +1,1 @@
-std::__non_rtti_object
+struct std::__non_rtti_object;

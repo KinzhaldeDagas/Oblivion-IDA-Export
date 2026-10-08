@@ -1,4 +1,4 @@
-0x9F2490: fld     ds:flt_A3D65C
+0x9F2490: fld     ds:kHeadBodyNormalMatchRadius
 0x9F2496: push    ecx
 0x9F2497: fstp    [esp+4+var_4]; float
 0x9F249A: push    offset aFquickkeydownt; "fQuickKeyDownTimer"

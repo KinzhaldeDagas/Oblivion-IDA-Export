@@ -1,4 +1,4 @@
-0x80DDA0: sub     esp, 0C0h
+0x80DDA0: sub     esp, 0C0h; SpeedTreeFrondShader pre-render transform. Builds inverse scaled local transform, converts global directional and point light into object space, stores point-light block at +0x98..+0xA4 and directional-light block at +0xA8..+0xB4.
 0x80DDA6: push    esi
 0x80DDA7: mov     esi, [esp+0C4h+arg_18]
 0x80DDAE: push    edi
@@ -6,7 +6,7 @@
 0x80DDB1: mov     ecx, [edi+14h]
 0x80DDB4: push    0
 0x80DDB6: push    esi
-0x80DDB7: call    sub_765480
+0x80DDB7: call    NiDX9Renderer_SetModelTransform; MoonSugar build 39: common non-skinned transform upload has many shader-family xrefs (generic, water, grass, precipitation, SpeedTree, LOD, GeometryDecal, Lighting30). Do not globally detour for Moon Sugar; use scoped caller/hook windows.
 0x80DDBC: fld     dword ptr [esi+30h]
 0x80DDBF: fmul    dword ptr [esi]
 0x80DDC1: lea     eax, [esp+0C8h+var_8C]

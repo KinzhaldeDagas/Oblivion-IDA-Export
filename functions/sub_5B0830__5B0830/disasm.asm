@@ -14,7 +14,6 @@
 0x5B0851: mov     [esp+1Ch+var_8], 5
 0x5B0859: xor     ebx, ebx
 0x5B085B: jmp     short loc_5B0860
-0x5B085D: align 10h
 0x5B0860: cmp     byte ptr [esi+14h], 1
 0x5B0864: fld     dword ptr ds:0A6C8B8h
 0x5B086A: fldz
@@ -92,11 +91,11 @@
 0x5B094D: fnstsw  ax
 0x5B094F: test    ah, 1
 0x5B0952: jnz     short loc_5B09C6
-0x5B0954: mov     ecx, [esi+20h]
+0x5B0954: mov     ecx, [esi+20h]; this
 0x5B0957: cmp     ecx, ebx
 0x5B0959: jz      short loc_5B0970
 0x5B095B: fstp    st
-0x5B095D: call    sub_6B7260
+0x5B095D: call    SoundHandle__IsPlaying; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.
 0x5B0962: test    al, al
 0x5B0964: jz      short loc_5B096E
 0x5B0966: mov     ecx, [esi+20h]

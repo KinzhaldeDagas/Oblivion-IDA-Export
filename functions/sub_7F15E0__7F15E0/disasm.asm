@@ -1,4 +1,4 @@
-0x7F15E0: sub     esp, 80h
+0x7F15E0: sub     esp, 80h; Per-draw transform slot updates object-space lighting and billboard axes before leaf pass setup. A correct bound texture can therefore render RGB-black if stock lighting/dimmer/fog constants yield zero, independently of atlas RGB.
 0x7F15E6: push    ebx
 0x7F15E7: push    esi
 0x7F15E8: mov     esi, [esp+88h+arg_18]
@@ -7,14 +7,14 @@
 0x7F15F2: mov     ecx, [ebx+14h]
 0x7F15F5: push    0
 0x7F15F7: push    esi
-0x7F15F8: call    sub_765480
+0x7F15F8: call    NiDX9Renderer_SetModelTransform; MoonSugar build 39: common non-skinned transform upload has many shader-family xrefs (generic, water, grass, precipitation, SpeedTree, LOD, GeometryDecal, Lighting30). Do not globally detour for Moon Sugar; use scoped caller/hook windows.
 0x7F15FD: fld     dword ptr [esi+30h]
 0x7F1600: fmul    dword ptr [esi]
 0x7F1602: lea     eax, [esp+8Ch+var_80]
 0x7F1606: push    eax
 0x7F1607: push    0
 0x7F1609: fstp    [esp+94h+var_80]
-0x7F160D: lea     ecx, [esp+94h+var_40]
+0x7F160D: lea     ecx, [esp+94h+inverseWorld]
 0x7F1611: fld     dword ptr [esi+0Ch]
 0x7F1614: push    ecx
 0x7F1615: fmul    dword ptr [esi+30h]
@@ -70,15 +70,15 @@
 0x7F16B5: fld     dword ptr [esi+30h]
 0x7F16B8: push    ecx
 0x7F16B9: neg     eax
-0x7F16BB: fstp    [esp+90h+var_90]; float
-0x7F16BE: lea     edx, [esp+90h+var_40]
+0x7F16BB: fstp    [esp+90h+objectScale]; objectScale
+0x7F16BE: lea     edx, [esp+90h+inverseWorld]
 0x7F16C2: sbb     eax, eax
-0x7F16C4: push    edx; int
+0x7F16C4: push    edx; inverseWorld
 0x7F16C5: and     eax, edi
-0x7F16C7: push    eax; int
+0x7F16C7: push    eax; leafProperty
 0x7F16C8: mov     ecx, ebx
-0x7F16CA: call    sub_7F0100
-0x7F16CF: call    sub_7F1170
+0x7F16CA: call    OB_SpeedTreeLeafShader_UpdateObjectSpaceLightConstants_010201A0; Per-draw transform setup rebuilds leaf c11 (and optional point c12) before leaf pass setup/draw; c11 is not merely consumed stale on the normal path.
+0x7F16CF: call    OB_SpeedTreeLeafShader_UpdateBillboardAxes_010201A0; Leaf shader global leafData updater: copies camera/right/up style vectors from dword_B43124 into B46758..B46774.
 0x7F16D4: pop     edi
 0x7F16D5: pop     esi
 0x7F16D6: xor     eax, eax

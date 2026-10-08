@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5DD4B0",
-    "line": "sub     esp, 13Ch",
+    "line": "sub     esp, 13Ch; Open native TrainingMenu. Resolve the trainer's configured skill and maximum level, calculate cost from the player's current skill, and gate purchase by gold, trainer cap, and per-level session limit.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x5DD504",
-    "line": "mov     ecx, [esi+68h]; TileWindow *",
+    "line": "mov     ecx, [esi+68h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x5DD50C",
-    "line": "call    Menu_LoadXML",
+    "line": "call    Tile__ReadFile; Verified: SDK ReadXML entry. Builds named tree under receiver via 0x590330, connects/evaluates traits via 0x58CF40, registers subtemplates with owning Menu, frees build storage, refreshes returned subtree via 0x58FBA0. Returns first created tile. Fallout analogue 0x827E2588; cache/cleanup differs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -457,13 +457,13 @@
   },
   {
     "ea": "0x5DD5AB",
-    "line": "fstp    [esp+14Ch+a3]; a3",
+    "line": "fstp    [esp+14Ch+a3]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DD5AE",
-    "line": "push    0FABh; a2",
+    "line": "push    0FABh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x5DD5B5",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x5DD5BF",
-    "line": "mov     [esi+54h], edi",
+    "line": "mov     [esi+54h], edi; Store the trainer Actor at TrainingMenu+0x54.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -517,13 +517,13 @@
   },
   {
     "ea": "0x5DD5C9",
-    "line": "add     ecx, 68h ; 'h'",
+    "line": "add     ecx, 68h ; 'h'; this",
     "mnemonic": "add",
     "size": 3
   },
   {
     "ea": "0x5DD5CC",
-    "line": "call    TESAIForm_GetTrainingSkillAV",
+    "line": "call    TESAIForm_GetTrainingSkillAV; Decode TESAIForm's one-byte training-skill index at +0x0C into SkillActorValue by adding kSkillAV_Armorer (0x0C).",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,13 +541,13 @@
   },
   {
     "ea": "0x5DD5D4",
-    "line": "call    ActorValue_GetGroupOffsetFromAV",
+    "line": "call    ActorValue_GetGroupOffsetFromAV; RealArenaTraining fidelity pass: ActorValue_GetGroupOffsetFromAV(group, actorValue). Player skill-progress code calls this with group 2 before indexing player skillExp/requiredSkillExp.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5DD5D9",
-    "line": "mov     ecx, ds:0B33A98h",
+    "line": "mov     ecx, ds:0B33A98h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -559,13 +559,13 @@
   },
   {
     "ea": "0x5DD5E2",
-    "line": "push    eax",
+    "line": "push    eax; skillIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DD5E3",
-    "line": "call    TESDataHandler_GetTESSkillByCode",
+    "line": "call    TESDataHandler_GetTESSkillByCode; Return one of exactly 21 inline Oblivion TESSkill records. Reject skillIndex > 20; otherwise return TESDataHandler+0xD8+(skillIndex*0x60).",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x5DD5EC",
-    "line": "mov     [esi+58h], eax",
+    "line": "mov     [esi+58h], eax; Store the trainer's native TESSkill record at TrainingMenu+0x58.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x5DD601",
-    "line": "mov     [esi+60h], ecx",
+    "line": "mov     [esi+60h], ecx; Store the trainer's maximum teachable skill level at TrainingMenu+0x60.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -661,13 +661,13 @@
   },
   {
     "ea": "0x5DD617",
-    "line": "add     ecx, 68h ; 'h'",
+    "line": "add     ecx, 68h ; 'h'; this",
     "mnemonic": "add",
     "size": 3
   },
   {
     "ea": "0x5DD61A",
-    "line": "call    TESAIForm_GetTrainingSkillAV",
+    "line": "call    TESAIForm_GetTrainingSkillAV; Decode TESAIForm's one-byte training-skill index at +0x0C into SkillActorValue by adding kSkillAV_Armorer (0x0C).",
     "mnemonic": "call",
     "size": 5
   },
@@ -703,13 +703,13 @@
   },
   {
     "ea": "0x5DD634",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5DD639",
-    "line": "mov     [esi+5Ch], eax",
+    "line": "mov     [esi+5Ch], eax; Training cost = current player value of the configured skill multiplied by fTrainingCostMult, converted to integer; store at TrainingMenu+0x5C.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -757,19 +757,19 @@
   },
   {
     "ea": "0x5DD652",
-    "line": "fstp    [esp+14Ch+a3]; a3",
+    "line": "fstp    [esp+14Ch+a3]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DD655",
-    "line": "push    0FAFh; a2",
+    "line": "push    0FAFh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5DD65A",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -781,25 +781,25 @@
   },
   {
     "ea": "0x5DD662",
-    "line": "push    ecx",
+    "line": "push    ecx; skillValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DD663",
-    "line": "call    Calc_MasteryFromSkill",
+    "line": "call    Calc_MasteryFromSkill; Map a base skill value to Oblivion's five mastery tiers using iSkillApprenticeMin=25, iSkillJourneymanMin=50, iSkillExpertMin=75, and iSkillMasterMin=100.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5DD668",
-    "line": "push    eax",
+    "line": "push    eax; mastery",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DD669",
-    "line": "call    ActorValue_GetMasteryName",
+    "line": "call    ActorValue_GetMasteryName; Return the localized mastery-tier name for SkillMasteryLevel 0..4.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1009,7 +1009,7 @@
   },
   {
     "ea": "0x5DD6DD",
-    "line": "call    ActorValue_GetName",
+    "line": "call    ActorValue_GetName; TrainingMenu writes the resolved native skill name at this exact UI callsite. A separated skill should replace the TrainingMenu tile text locally rather than globally detouring ActorValue_GetName.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1279,31 +1279,31 @@
   },
   {
     "ea": "0x5DD776",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x5DD77C",
-    "line": "push    eax",
+    "line": "push    eax; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DD77D",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5DD782",
-    "line": "push    eax",
+    "line": "push    eax; mastery",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DD783",
-    "line": "call    ActorValue_GetMasteryName",
+    "line": "call    ActorValue_GetMasteryName; Return the localized mastery-tier name for SkillMasteryLevel 0..4.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1735,7 +1735,7 @@
   },
   {
     "ea": "0x5DD876",
-    "line": "jl      short loc_5DD880",
+    "line": "jl      short loc_5DD880; Enable purchase only while the player's current skill is below the trainer's configured maximum level.",
     "mnemonic": "jl",
     "size": 2
   },
@@ -1771,7 +1771,7 @@
   },
   {
     "ea": "0x5DD892",
-    "line": "jl      short loc_5DD8D2",
+    "line": "jl      short loc_5DD8D2; Also require trainingSessionsUsed < iTrainingSkills for the current player level.",
     "mnemonic": "jl",
     "size": 2
   },
@@ -1819,7 +1819,7 @@
   },
   {
     "ea": "0x5DD8AB",
-    "line": "fstp    [esp+14Ch+a3]; a3",
+    "line": "fstp    [esp+14Ch+a3]; value",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1831,13 +1831,13 @@
   },
   {
     "ea": "0x5DD8B1",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5DD8B6",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1861,19 +1861,19 @@
   },
   {
     "ea": "0x5DD8C5",
-    "line": "fstp    [esp+14Ch+a3]; a3",
+    "line": "fstp    [esp+14Ch+a3]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DD8C8",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5DD8CD",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1915,19 +1915,19 @@
   },
   {
     "ea": "0x5DD8EB",
-    "line": "push    5",
+    "line": "push    5; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5DD8ED",
-    "line": "push    5",
+    "line": "push    5; topicType",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5DD8EF",
-    "line": "call    TESTopic__GEtTopic",
+    "line": "call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.",
     "mnemonic": "call",
     "size": 5
   },

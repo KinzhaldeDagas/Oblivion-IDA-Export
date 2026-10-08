@@ -54,3 +54,10 @@
 0x557A9E: mov     esp, ebp
 0x557AA0: pop     ebp
 0x557AA1: retn
+0x9BC680: mov     edx, [esp-4+arg_4]
+0x9BC684: lea     eax, [edx+0Ch]
+0x9BC687: mov     ecx, [edx-18h]
+0x9BC68A: xor     ecx, eax
+0x9BC68C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BC691: mov     eax, offset stru_AE62CC
+0x9BC696: jmp     ___CxxFrameHandler3

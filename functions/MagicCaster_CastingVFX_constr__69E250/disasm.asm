@@ -48,7 +48,7 @@
 0x69E2CC: mov     [esi+18h], bl
 0x69E2CF: call    MagicCaster_CastingVFX_initialize??
 0x69E2D4: mov     eax, esi
-0x69E2D6: mov     ecx, dword ptr [esp+20h+var_C]
+0x69E2D6: mov     ecx, [esp+20h+var_C]
 0x69E2DA: mov     large fs:0, ecx
 0x69E2E1: pop     ecx
 0x69E2E2: pop     edi
@@ -56,3 +56,15 @@
 0x69E2E4: pop     ebx
 0x69E2E5: add     esp, 10h
 0x69E2E8: retn    8
+0x9C5CD0: mov     ecx, [ebp-10h]; slot
+0x9C5CD3: jmp     NiPointerSlot_Release
+0x9C5CD8: mov     ecx, [ebp-10h]
+0x9C5CDB: add     ecx, 8; slot
+0x9C5CDE: jmp     NiPointerSlot_Release
+0x9C5CE3: mov     edx, [esp+arg_4]
+0x9C5CE7: lea     eax, [edx-10h]
+0x9C5CEA: mov     ecx, [edx-14h]
+0x9C5CED: xor     ecx, eax
+0x9C5CEF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5CF4: mov     eax, offset stru_AEE3A0
+0x9C5CF9: jmp     ___CxxFrameHandler3

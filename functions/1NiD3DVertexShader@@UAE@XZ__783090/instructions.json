@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x783090",
-    "line": "push    esi",
+    "line": "push    esi; MoonSugarEffect decode: NiD3DVertexShader destructor. Removes shader-program-factory mapping, clears/release-binds the live vertex shader through renderer state, releases the D3D handle, then destructs base program.",
     "mnemonic": "push",
     "size": 1
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x78309A",
-    "line": "call    sub_77EFA0",
+    "line": "call    sub_77EFA0; MoonSugarEffect decode: removes a vertex shader wrapper from shaderProgramFactory+0x18 by key from wrapper base vtable +0x04. Destructor bookkeeping only; pass refs are still handled separately.",
     "mnemonic": "call",
     "size": 5
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x7830AC",
-    "line": "call    sub_763090",
+    "line": "call    sub_763090; MoonSugarEffect decode: vertex shader handle release helper. Clears current vertex shader on renderer state, calls wrapper +0x40 getter, Releases IDirect3DVertexShader9, then wrapper +0x44 stores null.",
     "mnemonic": "call",
     "size": 5
   },

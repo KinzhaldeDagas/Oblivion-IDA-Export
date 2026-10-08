@@ -1,1 +1,1 @@
-IEnumSTATSTG_0
+typedef IEnumSTATSTG IEnumSTATSTG_0;

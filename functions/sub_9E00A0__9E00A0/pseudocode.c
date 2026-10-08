@@ -1,4 +1,4 @@
-BSStringT *sub_9E00A0()
+NiRTTI *sub_9E00A0()
 {
-  return sub_70E220((BSStringT *)dword_B35288, "BSFadeNode", (int)dword_B3FAB0);
+  return NiRTTI_Constructor((NiRTTI *)&MEMORY[0xB33E90][0x13F8], "BSFadeNode", &parent); /*0x9e00b4*/
 }

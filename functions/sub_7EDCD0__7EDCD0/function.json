@@ -1,18 +1,31 @@
 {
-  "callees_count": 35,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7EDCD0",
+  "chunks": [
+    [
+      "0x7EDCD0",
+      "0x7EE1C9"
+    ]
+  ],
+  "chunks_sha256": "57de59976fdb88f4e31f57161245f9f242b1cdd5f0e90ccc966c64a6645d2042",
+  "comment_regular": "Oblivion Lighting30 type-0x1B light decode. Writes paired LightColor/LightData constants. The point/special flavor stores underlying light world position in LightData.xyz and light+0xF8 range/control in .w; selector 0x154/0x155 later applies rigid object-scale correction before SM3026.\nDX11 GPU-world verification 2026-10-01: current light rows start color B47008 and data B47018 with stride0x20, slot<20. Wrapper+0xFC distinguishes directional from point/special source. Color uses backing diffuse, dimmer (upper clamp1 in non-HDR), property dimmer and wrapper strength; wrapper+0xD8 supplies alpha. Point property dimmer<1 uses B3FA90 override. HDR directional scaling follows native enable/global factor. Null and unsupported sources must not be synthesized from prior shader-use masks. Full 1273-byte function retained as code contract.\nDX11 source-state audit 2026-10-01: writes all actual slots below20 before geometry setup. Color/data leaf helpers7FAB00/7FAAD0 independently enforce <=19 and write exactly one float4 at B47008/B47018 +20h*slot. Ordinary7FB6F0 later transforms only the declared directional/clamped-point prefix; written point slots above shader limit retain world XYZ and raw +F8 radius/control.\nDX11 integration boundary 2026-10-01: native LightColor c9/B47008 is distinct from the project G-buffer identity at DX11 constant-buffer slot b9 or an instanced record word. The new bulk deferred IDs are renderer-owned, one-based and scope-token validated; they are not Oblivion object IDs, native material members or native register semantics. Native c0..c39 values and pinned shader recipe identity still determine the resolve record.\n\nLighting30 type-0x1B light decode. Point/special flavor writes light world position to LightData.xyz and underlying NiLight+0xF8 range/control to .w.",
+  "comment_repeatable": "Oblivion Lighting30 type-0x1B light decode. Writes paired LightColor/LightData constants. The point/special flavor stores underlying light world position in LightData.xyz and light+0xF8 range/control in .w; selector 0x154/0x155 later applies rigid object-scale correction before SM3026.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "Lighting30Shader_WriteType1BLightConstants",
   "end_ea": "0x7EE1C9",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7EDCD0",
+  "name": "Lighting30Shader_WriteType1BLightConstants",
   "segment": ".text",
   "sha256": "57de59976fdb88f4e31f57161245f9f242b1cdd5f0e90ccc966c64a6645d2042",
   "size": 1273,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7EDCD0",
+  "total_chunk_size": 1273,
   "type": "void __cdecl(int, int, float)",
   "xrefs_from_count": 401,
   "xrefs_to_count": 1

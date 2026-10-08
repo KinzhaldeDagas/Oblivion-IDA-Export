@@ -4,7 +4,7 @@
 0x6D7093: mov     edi, [esp+0Ch+arg_0]
 0x6D7097: push    edi
 0x6D7098: mov     esi, ecx
-0x6D709A: call    sub_6EC5B0
+0x6D709A: call    j_NiSingleInterpController_SaveBinary
 0x6D709F: mov     al, [esi+48h]
 0x6D70A2: push    1
 0x6D70A4: lea     ecx, [esp+10h+var_4]

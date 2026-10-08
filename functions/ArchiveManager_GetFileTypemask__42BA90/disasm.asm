@@ -15,16 +15,15 @@
 0x42BAB3: add     eax, 2
 0x42BAB6: mov     [esp+10h+arg_0], eax
 0x42BABA: jmp     short loc_42BAC4
-0x42BABC: align 10h
 0x42BAC0: mov     eax, [esp+10h+arg_0]
 0x42BAC4: mov     esi, ebp
 0x42BAC6: sub     esi, ebx
 0x42BAC8: shr     esi, 1
 0x42BACA: lea     edi, [esi+ebx]
 0x42BACD: lea     ecx, ds:0B04368h[edi*8]
-0x42BAD4: push    ecx; Str2
-0x42BAD5: push    eax; Str1
-0x42BAD6: call    __strcmp
+0x42BAD4: push    ecx; right
+0x42BAD5: push    eax; left
+0x42BAD6: call    CRT_StricmpLocaleDispatch
 0x42BADB: add     esp, 8
 0x42BADE: test    eax, eax
 0x42BAE0: jle     short loc_42BAE6

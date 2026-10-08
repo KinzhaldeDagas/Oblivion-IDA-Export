@@ -12,7 +12,7 @@
 0x77600F: mov     [esi+68h], eax
 0x776012: call    __memset
 0x776017: mov     eax, [edi]
-0x776019: mov     edx, [eax+84h]
+0x776019: mov     edx, [eax+84h];
 0x77601F: add     esp, 0Ch
 0x776022: mov     ecx, edi
 0x776024: call    edx

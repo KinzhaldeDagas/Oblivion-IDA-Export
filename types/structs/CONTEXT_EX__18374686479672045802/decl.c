@@ -1,1 +1,7 @@
-_CONTEXT_EX
+struct _CONTEXT_EX
+{
+CONTEXT_CHUNK All;
+CONTEXT_CHUNK Legacy;
+CONTEXT_CHUNK XState;
+ULONG64 align;
+};

@@ -5,7 +5,7 @@
 0x6D03E4: mov     edi, [esp+10h+arg_0]
 0x6D03E8: push    edi
 0x6D03E9: mov     ebx, ecx
-0x6D03EB: call    sub_754EB0
+0x6D03EB: call    j_NiTimeController_SaveBinary
 0x6D03F0: mov     eax, [edi+220h]
 0x6D03F6: mov     edx, [eax+8]
 0x6D03F9: push    1

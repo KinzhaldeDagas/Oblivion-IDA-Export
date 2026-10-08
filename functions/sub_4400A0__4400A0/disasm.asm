@@ -19,7 +19,7 @@
 0x4400CF: jz      short loc_4400DD
 0x4400D1: mov     ecx, ds:0B33A98h
 0x4400D7: push    ebx; a1
-0x4400D8: call    sub_447BA0
+0x4400D8: call    TESObjectCELL_Deactivate; Verified TESObjectCELL deactivation path. Removes cell temp effects, lowers its process level, invokes cell teardown, clears pathgrid graph/render resources, removes the scene node and inactive cell forms, then for exteriors asks TESWorldSpace_UnloadExteriorCellIfEligible to either preserve or remove the cell. Nine call sites are in world/cell transition and TES destruction paths; inspect xrefs for the full lifecycle context.
 0x4400DD: mov     edx, [edi+3Ch]
 0x4400E0: mov     dword ptr [edx+esi*4], 0
 0x4400E7: mov     eax, ds:0B051DCh

@@ -1,9 +1,9 @@
-0x5254A0: mov     eax, [esp+arg_4]
+0x5254A0: mov     eax, [esp+last]; Oblivion binary evidence: compiler-folded trivial four-byte copy_backward. Derives destinationBegin from destinationEnd and the source element count, memmoves the range, and returns destinationBegin.
 0x5254A4: mov     edx, [esp+Src]
 0x5254A8: sub     eax, edx
 0x5254AA: sar     eax, 2
 0x5254AD: push    esi; MaxCount
-0x5254AE: mov     esi, [esp+4+arg_8]
+0x5254AE: mov     esi, [esp+4+destinationEnd]
 0x5254B2: lea     ecx, ds:0[eax*4]
 0x5254B9: sub     esi, ecx
 0x5254BB: test    eax, eax

@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x7871D0",
-    "line": "fld     [esp+arg_4]",
+    "line": "fld     [esp+farDistance]; CSpeedTreeRT::SetLodLimits thin wrapper. Forwards near/far limits to CTreeEngine::SetLodLimits at 0x7A24D0.",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7871D4",
-    "line": "mov     ecx, [ecx]",
+    "line": "mov     ecx, [ecx]; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -19,25 +19,25 @@
   },
   {
     "ea": "0x7871D9",
-    "line": "fstp    [esp+8+var_4]; float",
+    "line": "fstp    [esp+8+var_4]; farDistance",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7871DD",
-    "line": "fld     [esp+8+arg_0]",
+    "line": "fld     [esp+8+nearDistance]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7871E1",
-    "line": "fstp    [esp+8+var_8]; float",
+    "line": "fstp    [esp+8+var_8]; nearDistance",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7871E4",
-    "line": "call    sub_7A24D0",
+    "line": "call    CTreeEngine__SetLodLimits; CTreeEngine::SetLodLimits: stores caller near/far limits at CTreeEngine+0x44/+0x40.",
     "mnemonic": "call",
     "size": 5
   },

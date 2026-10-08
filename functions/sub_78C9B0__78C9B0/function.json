@@ -1,19 +1,32 @@
 {
-  "callees_count": 69,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 34,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_78C9B0",
+  "chunks": [
+    [
+      "0x78C9B0",
+      "0x78CC97"
+    ]
+  ],
+  "chunks_sha256": "72f728feed2b78e9e3ec82144c6c690e85d4cb9118716fab86c100b01fa9c120",
+  "comment_regular": "Xref audit: only 0x56090C (MakeBase load failure) and 0x5635A6 (BSTreeModel destructor) call this function in Oblivion. These are the complete observed shared-ownership release paths.",
+  "comment_repeatable": "Xref audit: only 0x56090C (MakeBase load failure) and 0x5635A6 (BSTreeModel destructor) call this function in Oblivion. These are the complete observed shared-ownership release paths.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
+  "display_name": "CSpeedTreeRT__dtor",
   "end_ea": "0x78CC97",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_78C9B0",
+  "name": "CSpeedTreeRT__dtor",
   "segment": ".text",
   "sha256": "72f728feed2b78e9e3ec82144c6c690e85d4cb9118716fab86c100b01fa9c120",
   "size": 743,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78C9B0",
-  "type": "void __usercall(void (__stdcall ****)(signed int)@<ecx>, void (__stdcall *****)(signed int)@<edi>)",
+  "total_chunk_size": 743,
+  "type": "void __thiscall(void *this)",
   "xrefs_from_count": 328,
   "xrefs_to_count": 2
 }

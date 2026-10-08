@@ -20,5 +20,5 @@
 0x579294: call    InterfaceManager_GetSingleton
 0x579299: add     esp, 8
 0x57929C: mov     ecx, eax
-0x57929E: call    MiscPass
+0x57929E: call    MiscPass; MoonSugarEffect decode: MiscPass constructs a temporary BSCullingProcess with the source scenegraph cullingProcess->VisibleGeo. This confirms visible arrays are opt-in/inherited state, not guaranteed for the normal world path.
 0x5792A3: retn

@@ -1,4 +1,4 @@
-0x404C90: push    ecx
+0x404C90: push    ecx; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x404C91: fld     dword ptr [ecx+4]
 0x404C94: fld     dword ptr [ecx]
 0x404C96: fld     dword ptr [ecx+8]

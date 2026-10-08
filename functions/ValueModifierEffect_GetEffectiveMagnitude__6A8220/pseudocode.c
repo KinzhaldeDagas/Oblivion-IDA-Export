@@ -1,4 +1,4 @@
-int __cdecl ValueModifierEffect_GetEffectiveMagnitude(int a1, int a2, float a3)
+int __cdecl ValueModifierEffect_GetEffectiveMagnitude(float a1, float a2, float a3)
 {
   _DWORD *v3; // ecx
 

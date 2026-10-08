@@ -19,3 +19,11 @@
 0x986741: mov     [ebp+var_20], 1
 0x986748: mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
 0x98674F: call    ??__C@YGXPAX0IHP6EX00@ZP6EX0@Z@Z___$LN11_3
+0x98675C: cmp     [ebp+var_20], 0
+0x986760: jnz     short ??__C@YGXPAX0IHP6EX00@ZP6EX0@Z@Z___$LN10_1
+0x986762: push    [ebp+arg_14]; void (__thiscall *)(void *)
+0x986765: push    [ebp+var_1C]; int
+0x986768: push    [ebp+arg_8]; unsigned int
+0x98676B: push    [ebp+arg_0]; void *
+0x98676E: call    ?__ArrayUnwind@@YGXPAXIHP6EX0@Z@Z
+0x986773: retn

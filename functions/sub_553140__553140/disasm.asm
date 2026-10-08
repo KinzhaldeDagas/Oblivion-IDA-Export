@@ -1,4 +1,4 @@
-0x553140: push    0FFFFFFFFh
+0x553140: push    0FFFFFFFFh; Constructs the 0xDBC-byte FaceGen manager, loads FaceGen\\si.ctl, initializes the four parameter basis lists and FanControls at +0xC8, then creates fallback face textures.
 0x553142: push    offset SEH_553140
 0x553147: mov     eax, large fs:0
 0x55314D: push    eax
@@ -16,7 +16,7 @@
 0x553169: mov     [esp+4Ch+var_2C], ebp
 0x55316D: call    sub_552ED0
 0x553172: push    offset sub_552E50; a5
-0x553177: push    offset sub_6EF4A0; a4
+0x553177: push    offset FaceGenEgtBasisBank_Construct; a4
 0x55317C: push    4; size
 0x55317E: push    10h; a2
 0x553180: lea     esi, [ebp+88h]
@@ -31,63 +31,63 @@
 0x5531A4: mov     [ebp+0DB0h], ebx
 0x5531AA: mov     [ebp+0DB4h], ebx
 0x5531B0: mov     [ebp+0DB8h], ebx
-0x5531B6: push    0Eh; MaxCount
+0x5531B6: push    0Eh; count
 0x5531B8: push    offset aFacegenSi_ctl; "FaceGen\\si.ctl"
-0x5531BD: lea     ecx, [esp+54h+var_28]
+0x5531BD: lea     ecx, [esp+54h+path]; this
 0x5531C1: mov     byte ptr [esp+54h+var_4], 5
-0x5531C6: mov     [esp+54h+var_10], 0Fh
-0x5531CE: mov     [esp+54h+var_14], ebx
-0x5531D2: mov     byte ptr [esp+54h+var_24], bl
-0x5531D6: call    sub_414500
-0x5531DB: push    edi
-0x5531DC: push    esi
+0x5531C6: mov     [esp+54h+path.capacity], 0Fh
+0x5531CE: mov     [esp+54h+path.size], ebx
+0x5531D2: mov     byte ptr [esp+54h+path.storage], bl
+0x5531D6: call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.
+0x5531DB: push    edi; fanControls
+0x5531DC: push    esi; namedControlBanks
 0x5531DD: lea     ebx, [ebp+0D9Ch]
-0x5531E3: push    ebx
+0x5531E3: push    ebx; outBasisDimensions
 0x5531E4: lea     eax, [ebp+4]
-0x5531E7: push    eax
-0x5531E8: lea     eax, [esp+5Ch+var_28]
-0x5531EC: push    ebp
-0x5531ED: push    eax
+0x5531E7: push    eax; outHeader1
+0x5531E8: lea     eax, [esp+5Ch+path]
+0x5531EC: push    ebp; outHeader0
+0x5531ED: push    eax; path
 0x5531EE: mov     byte ptr [esp+64h+var_4], 6
-0x5531F3: call    sub_6ED850
+0x5531F3: call    FaceGen_LoadCtlFile; First CTL load attempt: outputs header scalars at manager+0/+4, four basis dimensions at +0xD9C, named control banks at +0x88, FanControls at +0xC8.
 0x5531F8: add     esp, 18h
 0x5531FB: test    al, al
 0x5531FD: setz    [esp+4Ch+var_35]
-0x553202: cmp     [esp+4Ch+var_10], 10h
+0x553202: cmp     [esp+4Ch+path.capacity], 10h
 0x553207: mov     byte ptr [esp+4Ch+var_4], 5
 0x55320C: jb      short loc_55321B
-0x55320E: mov     ecx, [esp+4Ch+var_24]
+0x55320E: mov     ecx, dword ptr [esp+4Ch+path.storage]
 0x553212: push    ecx
-0x553213: call    FormHeapFree
+0x553213: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x553218: add     esp, 4
 0x55321B: cmp     [esp+4Ch+var_35], 0
 0x553220: jz      short loc_553290
-0x553222: push    0Eh; MaxCount
+0x553222: push    0Eh; count
 0x553224: push    offset aFacegenSi_ctl; "FaceGen\\si.ctl"
-0x553229: lea     ecx, [esp+54h+var_28]
-0x55322D: mov     [esp+54h+var_10], 0Fh
-0x553235: mov     [esp+54h+var_14], 0
-0x55323D: mov     byte ptr [esp+54h+var_24], 0
-0x553242: call    sub_414500
-0x553247: push    edi
-0x553248: push    esi
-0x553249: push    ebx
+0x553229: lea     ecx, [esp+54h+path]; this
+0x55322D: mov     [esp+54h+path.capacity], 0Fh
+0x553235: mov     [esp+54h+path.size], 0
+0x55323D: mov     byte ptr [esp+54h+path.storage], 0
+0x553242: call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.
+0x553247: push    edi; fanControls
+0x553248: push    esi; namedControlBanks
+0x553249: push    ebx; outBasisDimensions
 0x55324A: lea     eax, [ebp+4]
-0x55324D: push    eax
-0x55324E: lea     edx, [esp+5Ch+var_28]
-0x553252: push    ebp
-0x553253: push    edx
+0x55324D: push    eax; outHeader1
+0x55324E: lea     edx, [esp+5Ch+path]
+0x553252: push    ebp; outHeader0
+0x553253: push    edx; path
 0x553254: mov     byte ptr [esp+64h+var_4], 7
-0x553259: call    sub_6ED850
+0x553259: call    FaceGen_LoadCtlFile; Retries the same FaceGen\\si.ctl load after first failure; constructor prints Unable to load CTL file if the second attempt fails.
 0x55325E: add     esp, 18h
 0x553261: test    al, al
 0x553263: setz    bl
-0x553266: cmp     [esp+4Ch+var_10], 10h
+0x553266: cmp     [esp+4Ch+path.capacity], 10h
 0x55326B: mov     byte ptr [esp+4Ch+var_4], 5
 0x553270: jb      short loc_55327F
-0x553272: mov     eax, [esp+4Ch+var_24]
+0x553272: mov     eax, dword ptr [esp+4Ch+path.storage]
 0x553276: push    eax
-0x553277: call    FormHeapFree
+0x553277: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x55327C: add     esp, 4
 0x55327F: test    bl, bl
 0x553281: jz      short loc_553290
@@ -124,17 +124,17 @@
 0x5532E2: imul    eax, ecx
 0x5532E5: push    ecx
 0x5532E6: mov     [esi-8], ecx
-0x5532E9: fstp    [esp+50h+var_50]
+0x5532E9: fstp    dword ptr [esp+50h+var_50]
 0x5532EC: push    eax
 0x5532ED: jmp     short loc_5532FC
 0x5532EF: fldz
 0x5532F1: push    ecx
-0x5532F2: fstp    [esp+50h+var_50]; int
+0x5532F2: fstp    dword ptr [esp+50h+var_50]; int
 0x5532F5: mov     [esi-8], ebx
 0x5532F8: mov     [esi-4], ebx
 0x5532FB: push    ebx; int
 0x5532FC: mov     ecx, esi; int
-0x5532FE: call    sub_527160
+0x5532FE: call    FaceGenFloatVector_ResizeFill; Vector resize: retain existing prefix, erase surplus elements when shrinking, fill only newly inserted elements when growing. Equal size does not overwrite coefficients. Matrix dimension products must already be valid; no recovery from rows*columns overflow.
 0x553303: add     edi, 10h
 0x553306: add     esi, 18h
 0x553309: sub     [esp+4Ch+var_34], 1
@@ -225,7 +225,7 @@
 0x553425: sub     esi, 1
 0x553428: jnz     short loc_553410
 0x55342A: add     dword ptr [eax+68h], 1
-0x55342E: push    offset dword_B256D0; a2
+0x55342E: push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0; a2
 0x553433: push    eax; a1
 0x553434: call    NiSourceTexture__LoadTexturePixelData
 0x553439: mov     esi, [ebp+0DB4h]
@@ -286,7 +286,7 @@
 0x5534D7: sub     esi, 1
 0x5534DA: jnz     short loc_5534C2
 0x5534DC: add     dword ptr [eax+68h], 1
-0x5534E0: push    offset dword_B256D0; a2
+0x5534E0: push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0; a2
 0x5534E5: push    eax; a1
 0x5534E6: call    NiSourceTexture__LoadTexturePixelData
 0x5534EB: mov     esi, [ebp+0DB8h]
@@ -324,3 +324,52 @@
 0x55353F: pop     ebx
 0x553540: add     esp, 38h
 0x553543: retn
+0x552FF0: push    offset sub_552E50; void (__thiscall *)(void *)
+0x552FF5: push    4; int
+0x552FF7: push    10h; unsigned int
+0x552FF9: push    ecx; void *
+0x552FFA: call    $LN21
+0x552FFF: retn
+0x9BBF20: mov     ecx, [ebp-2Ch]
+0x9BBF23: jmp     sub_552F40
+0x9BBF28: mov     ecx, [ebp-2Ch]
+0x9BBF2B: add     ecx, 88h ; 'ˆ'
+0x9BBF31: jmp     loc_552FF0
+0x9BBF36: mov     ecx, [ebp-2Ch]
+0x9BBF39: add     ecx, 0C8h ; 'È'
+0x9BBF3F: jmp     sub_551FE0
+0x9BBF44: mov     ecx, [ebp-2Ch]
+0x9BBF47: add     ecx, 0DB0h; slot
+0x9BBF4D: jmp     NiPointerSlot_Release
+0x9BBF52: mov     ecx, [ebp-2Ch]
+0x9BBF55: add     ecx, 0DB4h; slot
+0x9BBF5B: jmp     NiPointerSlot_Release
+0x9BBF60: mov     ecx, [ebp-2Ch]
+0x9BBF63: add     ecx, 0DB8h; slot
+0x9BBF69: jmp     NiPointerSlot_Release
+0x9BBF6E: lea     ecx, [ebp-28h]; this
+0x9BBF71: jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
+0x9BBF76: lea     ecx, [ebp-28h]; this
+0x9BBF79: jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
+0x9BBF7E: mov     eax, [ebp-30h]
+0x9BBF81: push    eax
+0x9BBF82: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BBF87: pop     ecx
+0x9BBF88: retn
+0x9BBF89: mov     eax, [ebp-30h]
+0x9BBF8C: push    eax
+0x9BBF8D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BBF92: pop     ecx
+0x9BBF93: retn
+0x9BBF94: mov     eax, [ebp-30h]
+0x9BBF97: push    eax
+0x9BBF98: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BBF9D: pop     ecx
+0x9BBF9E: retn
+0x9BBF9F: mov     edx, [esp+arg_4]
+0x9BBFA3: lea     eax, [edx-3Ch]
+0x9BBFA6: mov     ecx, [edx-40h]
+0x9BBFA9: xor     ecx, eax
+0x9BBFAB: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BBFB0: mov     eax, offset stru_AE5BA8
+0x9BBFB5: jmp     ___CxxFrameHandler3

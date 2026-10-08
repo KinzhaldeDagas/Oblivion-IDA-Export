@@ -10,7 +10,6 @@
 0x4917F9: push    ebp
 0x4917FA: push    edi
 0x4917FB: jmp     short loc_491800
-0x4917FD: align 10h
 0x491800: mov     ecx, [eax+4]
 0x491803: test    ecx, ecx
 0x491805: jnz     short loc_49180F
@@ -35,18 +34,18 @@
 0x49184C: mov     esi, [eax]
 0x49184E: test    esi, esi
 0x491850: jz      loc_49190D
-0x491856: mov     ecx, esi
+0x491856: mov     ecx, esi; this
 0x491858: xor     bl, bl
-0x49185A: call    ExtraDataList_GetOwner
+0x49185A: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x49185F: test    eax, eax
 0x491861: jz      loc_491927
 0x491867: mov     ecx, [esp+24h+arg_4]
 0x49186B: mov     edx, [ecx]
 0x49186D: mov     eax, [edx+170h]
 0x491873: call    eax
-0x491875: mov     ecx, esi
+0x491875: mov     ecx, esi; this
 0x491877: mov     edi, eax
-0x491879: call    ExtraDataList_GetOwner
+0x491879: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x49187E: cmp     eax, edi
 0x491880: jz      loc_491927
 0x491886: mov     esi, [ebp+0]

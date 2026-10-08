@@ -1,74 +1,66 @@
-void __cdecl sub_79B9F0(
-        int a1,
-        int a2,
-        int a3,
-        char *a4,
-        unsigned int a5,
-        int a6,
-        int a7,
-        float a8,
-        float a9,
-        char a10,
-        float a11,
-        float a12,
-        float a13,
-        int a14,
-        int a15)
+// Heap push/up operation for 0x30-byte SFrondGuide records ordered by fuzzySurfaceArea at +0x24. Moves parent guides down with deep vector assignment until the saved by-value guide reaches its heap position.
+void __cdecl OB_SFrondGuide_PushHeap_010201A0(
+        OB_SFrondGuide_010201A0 *base,
+        int holeIndex,
+        int topIndex,
+        OB_SFrondGuide_010201A0 value)
 {
-  int v15; // ecx
-  int v16; // ebx
-  int v17; // edi
-  int v18; // esi
-  bool v19; // cc
-  int v20; // esi
-  int v21; // eax
-  char v22; // dl
-  int v23; // ecx
-  double v24; // st7
-  unsigned int v25; // eax
-  double v26; // st7
+  int v4; // ecx
+  int v5; // ebx
+  OB_SFrondGuide_010201A0 *v6; // edi
+  OB_SFrondGuide_010201A0 *v7; // esi
+  bool v8; // cc
+  OB_SFrondGuide_010201A0 *v9; // esi
+  int sharedVertexStartIndex; // eax
+  char frondMapIndex; // dl
+  int verticesPerGuideVertex; // ecx
+  double offsetAngle; // st7
+  unsigned int v14; // eax
+  double fuzzySurfaceArea; // st7
 
-  v15 = a2;
-  v16 = (a2 - 1) / 2;
-  if ( a3 < a2 )
+  v4 = holeIndex; /*0x79ba14*/
+  v5 = (holeIndex - 1) / 2; /*0x79ba24*/
+  if ( topIndex < holeIndex ) /*0x79ba32*/
   {
-    do
+    do /*0x79ba9e*/
     {
-      v17 = 0x30 * v16 + a1;
-      if ( a13 >= (double)*(float *)(v17 + 0x24) )
-        break;
-      v18 = a1 + 0x30 * v15;
-      sub_79B160((char **)v18, (char **)(0x30 * v16 + a1));
-      *(float *)(v18 + 0x10) = *(float *)(v17 + 0x10);
-      *(float *)(v18 + 0x14) = *(float *)(v17 + 0x14);
-      *(_BYTE *)(v18 + 0x18) = *(_BYTE *)(v17 + 0x18);
-      *(float *)(v18 + 0x1C) = *(float *)(v17 + 0x1C);
-      v15 = v16;
-      *(float *)(v18 + 0x20) = *(float *)(v17 + 0x20);
-      *(float *)(v18 + 0x24) = *(float *)(v17 + 0x24);
-      *(_DWORD *)(v18 + 0x28) = *(_DWORD *)(v17 + 0x28);
-      *(_DWORD *)(v18 + 0x2C) = *(_DWORD *)(v17 + 0x2C);
-      v19 = a3 < v16;
-      v16 = (v16 - 1) / 2;
+      v6 = &base[v5]; /*0x79ba3e*/
+      if ( value.fuzzySurfaceArea >= (double)v6->fuzzySurfaceArea ) /*0x79ba4c*/
+        break; /*0x79ba4c*/
+      v7 = &base[v4]; /*0x79ba54*/
+      OB_stVector_SFrondVertex_CopyAssign_010201A0( /*0x79ba59*/
+        (OB_stVector16_010201A0 *)v7,
+        (const OB_stVector16_010201A0 *)&base[v5]);
+      v7->guideLength = v6->guideLength; /*0x79ba61*/
+      v7->radius = v6->radius; /*0x79ba67*/
+      v7->frondMapIndex = v6->frondMapIndex; /*0x79ba6d*/
+      v7->offsetAngle = v6->offsetAngle; /*0x79ba73*/
+      v4 = v5; /*0x79ba76*/
+      v7->surfaceArea = v6->surfaceArea; /*0x79ba7b*/
+      v7->fuzzySurfaceArea = v6->fuzzySurfaceArea; /*0x79ba81*/
+      v7->sharedVertexStartIndex = v6->sharedVertexStartIndex; /*0x79ba87*/
+      v7->verticesPerGuideVertex = v6->verticesPerGuideVertex; /*0x79ba8d*/
+      v8 = topIndex < v5; /*0x79ba98*/
+      v5 = (v5 - 1) / 2; /*0x79ba9c*/
     }
-    while ( v19 );
+    while ( v8 ); /*0x79ba9e*/
   }
-  v20 = a1 + 0x30 * v15;
-  sub_79B160((char **)v20, &a4);
-  v21 = a14;
-  *(float *)(v20 + 0x10) = a8;
-  v22 = a10;
-  v23 = a15;
-  *(float *)(v20 + 0x14) = a9;
-  v24 = a11;
-  *(_DWORD *)(v20 + 0x28) = v21;
-  v25 = a5;
-  *(float *)(v20 + 0x1C) = v24;
-  *(float *)(v20 + 0x20) = a12;
-  *(_BYTE *)(v20 + 0x18) = v22;
-  v26 = a13;
-  *(_DWORD *)(v20 + 0x2C) = v23;
-  *(float *)(v20 + 0x24) = v26;
-  if ( v25 )
-    FormHeapFree(v25);
+  v9 = &base[v4]; /*0x79baaa*/
+  OB_stVector_SFrondVertex_CopyAssign_010201A0((OB_stVector16_010201A0 *)v9, (const OB_stVector16_010201A0 *)&value); /*0x79baaf*/
+  sharedVertexStartIndex = value.sharedVertexStartIndex; /*0x79bab8*/
+  v9->guideLength = value.guideLength; /*0x79babc*/
+  frondMapIndex = value.frondMapIndex; /*0x79bac3*/
+  verticesPerGuideVertex = value.verticesPerGuideVertex; /*0x79bac7*/
+  v9->radius = value.radius; /*0x79bacb*/
+  offsetAngle = value.offsetAngle; /*0x79bace*/
+  v9->sharedVertexStartIndex = sharedVertexStartIndex; /*0x79bad2*/
+  v14 = *(_DWORD *)&value.vertexVector[4]; /*0x79bad5*/
+  v9->offsetAngle = offsetAngle; /*0x79bad9*/
+  v9->surfaceArea = value.surfaceArea; /*0x79bae2*/
+  v9->frondMapIndex = frondMapIndex; /*0x79bae5*/
+  fuzzySurfaceArea = value.fuzzySurfaceArea; /*0x79bae8*/
+  v9->verticesPerGuideVertex = verticesPerGuideVertex; /*0x79baec*/
+  v9->fuzzySurfaceArea = fuzzySurfaceArea; /*0x79baef*/
+  if ( v14 ) /*0x79baf2*/
+    FormHeapFree(v14); /*0x79baf5*/
 }

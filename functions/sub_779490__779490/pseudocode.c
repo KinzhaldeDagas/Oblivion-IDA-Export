@@ -1,4 +1,4 @@
 char __thiscall sub_779490(_BYTE *this)
 {
-  return *(this + 0x64);
+  return *(this + 0x64); /*0x779493*/
 }

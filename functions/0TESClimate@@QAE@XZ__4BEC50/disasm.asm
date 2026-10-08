@@ -1,4 +1,4 @@
-0x4BEC50: push    0FFFFFFFFh
+0x4BEC50: push    0FFFFFFFFh; Verified: constructs Climate FormType 0x2E, list at +0x30, two textures at +0x38, six initialized bytes at +0x50..+0x55; total layout is 0x58.
 0x4BEC52: push    offset ??0TESClimate@@QAE@XZ_SEH
 0x4BEC57: mov     eax, large fs:0
 0x4BEC5D: push    eax
@@ -42,3 +42,18 @@
 0x4BECE3: pop     esi
 0x4BECE4: add     esp, 10h
 0x4BECE7: retn
+0x9B4610: mov     ecx, [ebp-10h]; this
+0x9B4613: jmp     TESForm_destr
+0x9B4618: mov     ecx, [ebp-10h]
+0x9B461B: add     ecx, 18h; this
+0x9B461E: jmp     ??1TESModel@@UAE@XZ; TESModel::~TESModel(void)
+0x9B4623: mov     ecx, [ebp-10h]
+0x9B4626: add     ecx, 30h ; '0'
+0x9B4629: jmp     sub_4EED70
+0x9B462E: mov     edx, [esp+arg_4]
+0x9B4632: lea     eax, [edx-8]
+0x9B4635: mov     ecx, [edx-0Ch]
+0x9B4638: xor     ecx, eax
+0x9B463A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B463F: mov     eax, offset stru_ADFCAC
+0x9B4644: jmp     ___CxxFrameHandler3

@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x575BBF",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -829,7 +829,7 @@
   },
   {
     "ea": "0x575D05",
-    "line": "mov     ecx, offset dword_B35574",
+    "line": "mov     ecx, offset g_GameSettingsByName",
     "mnemonic": "mov",
     "size": 5
   },
@@ -876,12 +876,6 @@
     "size": 2
   },
   {
-    "ea": "0x575D1D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x575D20",
     "line": "mov     edx, [esi+4]",
     "mnemonic": "mov",
@@ -919,7 +913,7 @@
   },
   {
     "ea": "0x575D32",
-    "line": "mov     ecx, offset dword_B35574",
+    "line": "mov     ecx, offset g_GameSettingsByName",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1036,12 +1030,6 @@
     "line": "jmp     short loc_575D70",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x575D6A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
   },
   {
     "ea": "0x575D70",
@@ -1368,12 +1356,6 @@
     "size": 2
   },
   {
-    "ea": "0x575E0D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x575E10",
     "line": "mov     cl, [esp+eax+4F0h+var_410]",
     "mnemonic": "mov",
@@ -1602,12 +1584,6 @@
     "size": 2
   },
   {
-    "ea": "0x575E8D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x575E90",
     "line": "mov     cl, [eax]",
     "mnemonic": "mov",
@@ -1696,12 +1672,6 @@
     "line": "jmp     short loc_575ED0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x575EC9",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
   },
   {
     "ea": "0x575ED0",
@@ -1897,7 +1867,7 @@
   },
   {
     "ea": "0x575F3B",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },

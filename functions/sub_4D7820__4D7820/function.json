@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4D7820",
+      "0x4D7879"
+    ]
+  ],
+  "chunks_sha256": "ed684ea12e564ef9e86afbd513ddba3d793554d261521936a7774c1f11bc496b",
+  "comment_regular": "Verified per-reference seed read. Missing ExtraData_Seed yields index 0xFF, which calls TESObjectTREE_GetRandomSeed. If the tree seed array is empty, that fallback returns 0. Thus an empty array makes getter results 0 and concrete seed writes no-op; runtime array population outside the TREE record loader remains Unknown.",
+  "comment_repeatable": "Verified per-reference seed read. Missing ExtraData_Seed yields index 0xFF, which calls TESObjectTREE_GetRandomSeed. If the tree seed array is empty, that fallback returns 0. Thus an empty array makes getter results 0 and concrete seed writes no-op; runtime array population outside the TREE record loader remains Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4D7820",
+  "display_name": "TESObjectREFR_GetTreeSeed",
   "end_ea": "0x4D7879",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4D7820",
+  "name": "TESObjectREFR_GetTreeSeed",
   "segment": ".text",
   "sha256": "ed684ea12e564ef9e86afbd513ddba3d793554d261521936a7774c1f11bc496b",
   "size": 89,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4D7820",
-  "type": "int __thiscall(_BYTE *this)",
+  "total_chunk_size": 89,
+  "type": "int __thiscall(TESObjectREFR *this)",
   "xrefs_from_count": 43,
   "xrefs_to_count": 1
 }

@@ -10,9 +10,9 @@
 0x6EAD73: pop     esi
 0x6EAD74: retn    4
 0x6EAD77: add     edi, 30h ; '0'
-0x6EAD7A: push    edi
-0x6EAD7B: lea     ecx, [esi+30h]
-0x6EAD7E: call    sub_8AA390
+0x6EAD7A: push    edi; other
+0x6EAD7B: lea     ecx, [esi+30h]; this
+0x6EAD7E: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x6EAD83: test    al, al
 0x6EAD85: pop     edi
 0x6EAD86: setz    al

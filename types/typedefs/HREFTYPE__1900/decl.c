@@ -1,1 +1,1 @@
-HREFTYPE
+typedef DWORD HREFTYPE;

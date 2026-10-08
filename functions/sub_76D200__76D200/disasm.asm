@@ -10,8 +10,8 @@
 0x76D214: jnz     short loc_76D233
 0x76D216: test    esi, esi
 0x76D218: jz      short loc_76D229
-0x76D21A: mov     ecx, esi
-0x76D21C: call    sub_777F10
+0x76D21A: mov     ecx, esi; this
+0x76D21C: call    NiGeometryBufferData_HasLiveStreams; Pass225/226: Tests whether NiGeometryBufferData is live: stream count nonzero and every VBChip has a D3D vertex buffer.
 0x76D221: test    al, al
 0x76D223: jz      short loc_76D229
 0x76D225: test    ebp, ebp

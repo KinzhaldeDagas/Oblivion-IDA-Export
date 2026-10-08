@@ -1,76 +1,81 @@
+// [Controller decode 2026-07-09] Non-player QueryControlState consumer: Wait control 16 closes/cancels Sleep/Wait menu after release gating.
 char __usercall ProcessSleepWaitMenu@<al>(
         char a1@<bpl>,
         double st5_0@<st2>,
         double a3@<st1>,
         double a4@<st0>,
-        int a5@<edi>)
+        int a5@<edi>,
+        double a6@<st7>,
+        double a7@<st6>,
+        double a8@<st5>,
+        double a9@<st4>)
 {
   InputGlobal *input; // esi
-  PlayerCharacter *v6; // eax
+  PlayerCharacter *v10; // eax
   _DWORD *OpenMenuTile; // esi
-  PlayerCharacter *v11; // ecx
+  PlayerCharacter *v15; // ecx
   void *ParentMenu; // eax
-  char *v14; // eax
-  char *v15; // esi
+  char *v18; // eax
+  char *v19; // esi
   double GameHour; // st7
-  char v19; // cl
-  bool v21; // pf
-  const char *v22; // eax
+  char v23; // cl
+  bool v25; // pf
+  const char *v26; // eax
   const char *GameDayOfWeekName; // eax
   BSStringT *a2; // eax
-  int v25; // [esp-8h] [ebp-3Ch]
+  int v29; // [esp-8h] [ebp-3Ch]
   float a2a; // [esp+0h] [ebp-34h]
   float a2b; // [esp+0h] [ebp-34h]
   float a2c; // [esp+0h] [ebp-34h]
   float a2d; // [esp+0h] [ebp-34h]
   const char *a2e; // [esp+0h] [ebp-34h]
-  char v31; // [esp+13h] [ebp-21h]
+  char v35; // [esp+13h] [ebp-21h]
   UInt32 HoursToSleep; // [esp+14h] [ebp-20h]
-  int v34; // [esp+14h] [ebp-20h]
-  BSStringT v35; // [esp+18h] [ebp-1Ch] BYREF
-  BSStringT v36; // [esp+20h] [ebp-14h] BYREF
-  unsigned int v37; // [esp+30h] [ebp-4h]
+  int v38; // [esp+14h] [ebp-20h]
+  BSStringT v39; // [esp+18h] [ebp-1Ch] BYREF
+  BSStringT v40; // [esp+20h] [ebp-14h] BYREF
+  unsigned int v41; // [esp+30h] [ebp-4h]
 
-  input = OSGlobals->input;
-  if ( dword_B3B730 != TESDataHandler_g_PlayerRef->HoursToSleep )
-    byte_B3B72C = 1;
-  if ( InputGlobals::QueryControlState(input, 0x10, 1) || InputGlobals::QueryControlState(input, 0x10, 0) )
+  input = MEMORY[0xB33398]->input; /*0x5d70c0*/
+  if ( unk_B3B730 != reference->HoursToSleep ) /*0x5d70cf*/
+    unk_B3B72C = 1; /*0x5d70d1*/
+  if ( InputGlobals::QueryControlState(input, 0x10, 1) || InputGlobals::QueryControlState(input, 0x10, 0) ) /*0x5d70ee*/
   {
-    if ( byte_B3B729 )
+    if ( unk_B3B729 ) /*0x5d7100*/
     {
-      if ( InputGlobals::QueryControlState(input, 0x10, 1) )
+      if ( InputGlobals::QueryControlState(input, 0x10, 1) ) /*0x5d710e*/
       {
-        if ( PlayerCharacter::IsSleeping_(TESDataHandler_g_PlayerRef) )
+        if ( PlayerCharacter::IsSleeping_(reference) ) /*0x5d711d*/
         {
-          v6 = TESDataHandler_g_PlayerRef;
-          v6->HoursToSleep = 0;
-          v6->isSleeping = 0;
+          v10 = reference; /*0x5d7126*/
+          v10->HoursToSleep = 0; /*0x5d712b*/
+          v10->isSleeping = 0; /*0x5d7131*/
         }
         else
         {
-          byte_B3B72B = 1;
+          unk_B3B72B = 1; /*0x5d7139*/
         }
-        a4 = ClsoeSleepWaitMenu(st5_0, a3, a4);
+        a4 = ClsoeSleepWaitMenu(st5_0, a3, a4, a6, a7, a8, a9); /*0x5d7140*/
       }
     }
   }
   else
   {
-    byte_B3B729 = 1;
+    unk_B3B729 = 1; /*0x5d70f7*/
   }
-  if ( !byte_B3B728 )
-    return 0;
-  OpenMenuTile = (_DWORD *)Menu_GetOpenMenuTile(0x3F4);
-  if ( !OpenMenuTile )
-    return 0;
-  __asm
+  if ( !unk_B3B728 ) /*0x5d7145*/
+    return 0; /*0x5d7145*/
+  OpenMenuTile = (_DWORD *)Menu_GetOpenMenuTile(0x3F4); /*0x5d7157*/
+  if ( !OpenMenuTile ) /*0x5d715e*/
+    return 0; /*0x5d715e*/
+  __asm /*0x5d7160*/
   {
     fld     dword ptr ds:0B3B724h
     fsub    dword ptr ds:0B33E9Ch
     fstp    dword ptr ds:0B3B724h
   }
-  flt_B3B724 = _ET1;
-  __asm
+  unk_B3B724 = _ET1; /*0x5d716c*/
+  __asm /*0x5d7172*/
   {
     fldz
     fld     dword ptr ds:0B3B724h
@@ -78,65 +83,65 @@ char __usercall ProcessSleepWaitMenu@<al>(
     fnstsw  ax
     fstp    st(1)
   }
-  if ( (_AX & 0x4100) == 0 )
+  if ( (_AX & 0x4100) == 0 ) /*0x5d7183*/
   {
-    __asm { fstp    st }
-    return 0;
+    __asm { fstp    st } /*0x5d7185*/
+    return 0; /*0x5d719a*/
   }
-  __asm { fadd    qword ptr ds:0A2F928h }
-  v11 = TESDataHandler_g_PlayerRef;
-  __asm { fstp    dword ptr ds:0B3B724h }
-  flt_B3B724 = _ET1;
-  if ( PlayerCharacter::IsSleeping_(v11) )
+  __asm { fadd    qword ptr ds:0A2F928h } /*0x5d719b*/
+  v15 = reference; /*0x5d71a1*/
+  __asm { fstp    dword ptr ds:0B3B724h } /*0x5d71a7*/
+  unk_B3B724 = _ET1; /*0x5d71a7*/
+  if ( PlayerCharacter::IsSleeping_(v15) ) /*0x5d71ad*/
   {
-    ParentMenu = (void *)Tile_GetParentMenu(OpenMenuTile);
-    if ( !ParentMenu )
-      return 0;
-    v14 = (char *)OblivionDynamicCast(
+    ParentMenu = (void *)Tile_GetParentMenu(OpenMenuTile); /*0x5d71d1*/
+    if ( !ParentMenu ) /*0x5d71d8*/
+      return 0; /*0x5d71d8*/
+    v18 = (char *)OblivionDynamicCast( /*0x5d71e7*/
                     ParentMenu,
                     0,
                     (struct _s_RTTICompleteObjectLocator *)&Menu `RTTI Type Descriptor',
                     &SleepWaitMenu `RTTI Type Descriptor',
                     0);
-    v15 = v14;
-    if ( !v14 )
-      return 0;
-    if ( v14[0x4C] )
+    v19 = v18; /*0x5d71ec*/
+    if ( !v18 ) /*0x5d71f3*/
+      return 0; /*0x5d71f3*/
+    if ( v18[0x4C] ) /*0x5d71f5*/
     {
-      if ( TESDataHandler_g_PlayerRef->bCanLevelUp )
+      if ( reference->bCanLevelUp ) /*0x5d7200*/
       {
-        if ( !byte_B3B72B && !byte_B14E88 )
-          byte_B3A6D1 = 1;
+        if ( !unk_B3B72B && !byte_B14E88 ) /*0x5d7210*/
+          unk_B3A6D1 = 1; /*0x5d7218*/
       }
     }
-    ScriptRunner_RunScript((int)TES, 0, a4, st5_0, a3);
-    sub_65F770((MagicTarget *)TESDataHandler_g_PlayerRef, 0, a5, st5_0, a3);
-    __asm { fld     dword ptr ds:0A6B328h }
-    __asm { fstp    [esp+34h+a2]; a3 }
-    Tile_SetFloat(*((Tile **)v15 + 0xA), (_DWORD *)0xFB3, a2a);
-    HoursToSleep = TESDataHandler_g_PlayerRef->HoursToSleep;
-    __asm { fild    [esp+30h+var_20] }
-    __asm { fstp    [esp+34h+a2]; a3 }
-    Tile_SetFloat(*((Tile **)v15 + 0xA), (_DWORD *)0xFB3, a2b);
-    __asm { fldz }
-    __asm { fstp    [esp+34h+a2]; a3 }
-    Tile_SetFloat(*((Tile **)v15 + 0xA), (_DWORD *)0xFB3, a2c);
-    __asm { fld1 }
-    __asm { fstp    [esp+34h+a2]; a3 }
-    Tile_SetFloat(*((Tile **)v15 + 0x11), (_DWORD *)0xFA1, a2d);
-    v35.m_data = 0;
-    v35.m_dataLen = 0;
-    v35.m_bufLen = 0;
-    v37 = 0;
-    GameHour = TimeGlobals_GetGameHour(&TimeGlobals);
-    __asm
+    ScriptRunner_RunScript((int)MEMORY[0xB333A0], 0, a4, st5_0, a3); /*0x5d7225*/
+    sub_65F770((MagicTarget *)reference, 0, a5, a3); /*0x5d7230*/
+    __asm { fld     dword ptr ds:0A6B328h } /*0x5d7235*/
+    __asm { fstp    [esp+34h+a2]; value }
+    Tile_SetFloat(*((Tile **)v19 + 0xA), 0xFB3u, a2a); /*0x5d7247*/
+    HoursToSleep = reference->HoursToSleep; /*0x5d7257*/
+    __asm { fild    [esp+30h+var_20] } /*0x5d725e*/
+    __asm { fstp    [esp+34h+a2]; value }
+    Tile_SetFloat(*((Tile **)v19 + 0xA), 0xFB3u, a2b); /*0x5d726b*/
+    __asm { fldz } /*0x5d7270*/
+    __asm { fstp    [esp+34h+a2]; value }
+    Tile_SetFloat(*((Tile **)v19 + 0xA), 0xFB3u, a2c); /*0x5d727e*/
+    __asm { fld1 } /*0x5d7283*/
+    __asm { fstp    [esp+34h+a2]; value }
+    Tile_SetFloat(*((Tile **)v19 + 0x11), 0xFA1u, a2d); /*0x5d7291*/
+    v39.m_data = 0; /*0x5d7296*/
+    v39.m_dataLen = 0; /*0x5d729a*/
+    v39.m_bufLen = 0; /*0x5d729f*/
+    v41 = 0; /*0x5d72a9*/
+    GameHour = TimeGlobals_GetGameHour(&MEMORY[0xB332E0]); /*0x5d72ad*/
+    __asm /*0x5d72b2*/
     {
       fstp    [esp+30h+var_20]
       fld     [esp+30h+var_20]
       fld     st
     }
-    v34 = (char)Double_To_SInt32(GameHour);
-    __asm
+    v38 = (char)Double_To_SInt32(GameHour); /*0x5d72c4*/
+    __asm /*0x5d72c8*/
     {
       fild    [esp+30h+var_20]
       fsub    st(1), st
@@ -148,52 +153,52 @@ char __usercall ProcessSleepWaitMenu@<al>(
       fld1
       fcomp   st(1)
     }
-    v31 = Double_To_SInt32(GameHour);
-    __asm
+    v35 = Double_To_SInt32(GameHour); /*0x5d72df*/
+    __asm /*0x5d72e3*/
     {
       fnstsw  ax
       fld     qword ptr ds:0A2F910h
     }
-    if ( (_AX & 0x4100) != 0 )
+    if ( (_AX & 0x4100) != 0 ) /*0x5d72ee*/
     {
-      __asm
+      __asm /*0x5d72f4*/
       {
         fcom    st(1)
         fnstsw  ax
         fld     st(1)
       }
-      if ( !__SETP__(HIBYTE(_AX) & 5, 0) )
-        __asm { fsub    st, st(1) }
+      if ( !__SETP__(HIBYTE(_AX) & 5, 0) ) /*0x5d72fd*/
+        __asm { fsub    st, st(1) } /*0x5d72ff*/
     }
     else
     {
-      __asm { fld     st }
+      __asm { fld     st } /*0x5d72f0*/
     }
-    __asm { fcompp }
-    v19 = Double_To_SInt32(GameHour);
-    __asm { fnstsw  ax }
-    v21 = __SETP__(HIBYTE(_AX) & 0x41, 0);
-    v22 = "pm";
-    if ( v21 )
-      v22 = "am";
-    a2e = v22;
-    v25 = v19;
-    GameDayOfWeekName = TimeGlobals_GetGameDayOfWeekName(&TimeGlobals);
-    BSStringT_Static_Format(&v35, "%s %d:%02d %s", GameDayOfWeekName, v25, v31, a2e);
-    Tile_SetString(*((_DWORD **)v15 + 0xE), (_DWORD *)0xFDE, v35.m_data);
-    a2 = sub_402E50((int *)&TimeGlobals, GameHour, &v36);
-    LOBYTE(v37) = 1;
-    sub_4FB4C0(&v35, (const char **)&a2->m_data);
-    LOBYTE(v37) = 0;
-    BSStringT_Clear((unsigned int *)&v36);
-    Tile_SetString(*((_DWORD **)v15 + 0xF), (_DWORD *)0xFDE, v35.m_data);
-    v37 = 0xFFFFFFFF;
-    BSStringT_Clear((unsigned int *)&v35);
-    return 1;
+    __asm { fcompp } /*0x5d7306*/
+    v23 = Double_To_SInt32(GameHour); /*0x5d7308*/
+    __asm { fnstsw  ax } /*0x5d730a*/
+    v25 = __SETP__(HIBYTE(_AX) & 0x41, 0); /*0x5d730c*/
+    v26 = "pm"; /*0x5d730f*/
+    if ( v25 ) /*0x5d7314*/
+      v26 = "am"; /*0x5d7316*/
+    a2e = v26; /*0x5d731b*/
+    v29 = v23; /*0x5d7325*/
+    GameDayOfWeekName = TimeGlobals_GetGameDayOfWeekName(&MEMORY[0xB332E0]); /*0x5d732b*/
+    BSStringT_Static_Format(&v39, "%s %d:%02d %s", GameDayOfWeekName, v29, v35, a2e); /*0x5d733b*/
+    Tile_SetString(*((_DWORD **)v19 + 0xE), (_DWORD *)0xFDE, v39.m_data); /*0x5d7350*/
+    a2 = TimeGlobals_FormatGameDate((int *)&MEMORY[0xB332E0], GameHour, &v40); /*0x5d735f*/
+    LOBYTE(v41) = 1; /*0x5d7369*/
+    sub_4FB4C0(&v39, (const char **)&a2->m_data); /*0x5d736e*/
+    LOBYTE(v41) = 0; /*0x5d7377*/
+    BSStringT_Clear((unsigned int *)&v40); /*0x5d737b*/
+    Tile_SetString(*((_DWORD **)v19 + 0xF), (_DWORD *)0xFDE, v39.m_data); /*0x5d738d*/
+    v41 = 0xFFFFFFFF; /*0x5d7396*/
+    BSStringT_Clear((unsigned int *)&v39); /*0x5d739e*/
+    return 1; /*0x5d73a3*/
   }
   else
   {
-    ClsoeSleepWaitMenu(st5_0, a3, a4);
-    return 0;
+    ClsoeSleepWaitMenu(st5_0, a3, a4, a6, a7, a8, a9); /*0x5d71b6*/
+    return 0; /*0x5d71bb*/
   }
 }

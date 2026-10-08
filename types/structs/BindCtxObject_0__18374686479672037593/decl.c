@@ -1,1 +1,1 @@
-BindCtxObject_0
+typedef BindCtxObject BindCtxObject_0;

@@ -10,13 +10,13 @@
 0x5BE719: fstp    [esp+hinstDLL]
 0x5BE71D: fld     [esp+hinstDLL]
 0x5BE721: fmul    qword ptr ds:0A30DC8h
-0x5BE727: call    Double_To_SInt32
+0x5BE727: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5BE72C: cmp     eax, 1
 0x5BE72F: mov     [esp+hinstDLL], eax; hinstDLL
 0x5BE733: jge     short loc_5BE744
 0x5BE735: fild    [esp+hinstDLL]
 0x5BE739: fadd    qword ptr ds:0A56CA0h
-0x5BE73F: call    Double_To_SInt32
+0x5BE73F: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5BE744: lea     ecx, [eax-2Dh]
 0x5BE747: cmp     ecx, 10Dh
 0x5BE74D: ja      short _DllMain@12; DllMain(x,x,x)

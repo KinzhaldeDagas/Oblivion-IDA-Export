@@ -1,4 +1,4 @@
-0x73E5B0: push    0FFFFFFFFh
+0x73E5B0: push    0FFFFFFFFh; Pass225/228: NiScreenTexture clone helper; allocates/constructs 0x20 object then delegates to copy helper 0x0073E150.
 0x73E5B2: push    offset SEH_8C8970
 0x73E5B7: mov     eax, large fs:0
 0x73E5BD: push    eax
@@ -20,14 +20,14 @@
 0x73E5E7: mov     [esp+1Ch+var_4], esi
 0x73E5EB: jz      short loc_73E5F6
 0x73E5ED: mov     ecx, eax; this
-0x73E5EF: call    ??0NiScreenTexture@@QAE@XZ; NiScreenTexture::NiScreenTexture(void)
+0x73E5EF: call    ??0NiScreenTexture@@QAE@XZ; Pass225/226: NiScreenTexture constructor; allocates 0x20 layout and zeroes records, +0x14 texturing property, +0x18 pending mask, +0x1C renderer buffer cache.
 0x73E5F4: mov     esi, eax
 0x73E5F6: mov     eax, [esp+1Ch+arg_0]
 0x73E5FA: push    eax
 0x73E5FB: push    esi
 0x73E5FC: mov     ecx, edi
 0x73E5FE: mov     [esp+24h+var_4], 0FFFFFFFFh
-0x73E606: call    sub_73E150
+0x73E606: call    sub_73E150; Pass225/226: NiScreenTexture copy helper; copies records, smart-copies +0x14 texturing property, and preserves +0x18 pending mask.
 0x73E60B: mov     eax, esi
 0x73E60D: mov     ecx, [esp+1Ch+var_C]
 0x73E611: mov     large fs:0, ecx
@@ -36,3 +36,15 @@
 0x73E61A: pop     esi
 0x73E61B: add     esp, 10h
 0x73E61E: retn    4
+0x9CA7E0: mov     eax, [ebp-10h]
+0x9CA7E3: push    eax
+0x9CA7E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA7E9: pop     ecx
+0x9CA7EA: retn
+0x9CA7EB: mov     edx, [esp+arg_4]
+0x9CA7EF: lea     eax, [edx-0Ch]
+0x9CA7F2: mov     ecx, [edx-10h]
+0x9CA7F5: xor     ecx, eax
+0x9CA7F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA7FC: mov     eax, offset stru_AF2E8C
+0x9CA801: jmp     ___CxxFrameHandler3

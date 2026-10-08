@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
-  "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 1,
+  "chunks": [
+    [
+      "0x69B26B",
+      "0x69B2A3"
+    ]
+  ],
+  "chunks_sha256": "1d76f1509cf4286a2ad01b42ff03fd637dd8a0848888b88a03ad4ee50a1390db",
+  "comment_regular": "UCWUS pipeline note: effect-loop enchantment filter calls EnchantmentItem_EffectAllowedFromEnch. Keep this intact; UCWUS 0x00010009 moves selected item/spell/token charge state into a native session via bridge commands instead of bypassing the filter.",
+  "comment_repeatable": "UCWUS pipeline note: effect-loop enchantment filter calls EnchantmentItem_EffectAllowedFromEnch. Keep this intact; UCWUS 0x00010009 moves selected item/spell/token charge state into a native session via bridge commands instead of bypassing the filter.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "MagicCaster_ApplyActiveMagicItem:::EffectLoop_CheckEnchantment",
   "end_ea": "0x69B2A3",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "MagicCaster_ApplyActiveMagicItem:::EffectLoop_CheckEnchantment",
   "segment": ".text",
   "sha256": "1d76f1509cf4286a2ad01b42ff03fd637dd8a0848888b88a03ad4ee50a1390db",
   "size": 56,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x69B26B",
-  "type": "int __usercall@<eax>(int@<ebp>, int@<esi>, TESObjectREFR *ebx0@<ebx>, int@<edi>, int, int, int, int, int, int, int, int, int, int, int, float, int, int, int, __int64, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int)",
+  "total_chunk_size": 56,
+  "type": "int __usercall@<eax>(int@<ebp>, int *@<esi>, TESObjectREFR *ebx0@<ebx>, int edi0@<edi>, int, int, int, int, int, int, int, int, int, int, int, float, int, int, int, __int64, int, int, int, int, int, int, int, int, int, int, int, int, float, int, int)",
   "xrefs_from_count": 26,
   "xrefs_to_count": 1
 }

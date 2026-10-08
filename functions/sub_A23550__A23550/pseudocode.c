@@ -1,4 +1,5 @@
-void __cdecl sub_A23550()
+// Verified atexit thunk deletes g_BSTreeManager_TreeCriticalSection.
+void __cdecl BSTreeManager_TreeCriticalSection_atexit()
 {
-  NiDeleteCriticalSection(&stru_B39E80);
+  NiDeleteCriticalSection(&g_BSTreeManager_TreeCriticalSection); /*0xa23555*/
 }

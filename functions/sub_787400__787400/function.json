@@ -1,19 +1,36 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_787400",
+  "chunks": [
+    [
+      "0x787400",
+      "0x787473"
+    ],
+    [
+      "0x9D62E0",
+      "0x9D6306"
+    ]
+  ],
+  "chunks_sha256": "9d5611d6f10aadfd8bb72f4b41d44523f4af7ef1737e72ff64f69b381acd61c6",
+  "comment_regular": "2026-05-24 SpeedTreeOBSE stock post-load pass: stock shadow projection parser for top-level 18000. Allocates 0x40-byte object at CSpeedTreeRT+0x50 and delegates parse to 0x7A5530. Preserve stock-safe family bytes; no later-family sidecar storage is implied.",
+  "comment_repeatable": "2026-05-24 SpeedTreeOBSE stock post-load pass: stock shadow projection parser for top-level 18000. Allocates 0x40-byte object at CSpeedTreeRT+0x50 and delegates parse to 0x7A5530. Preserve stock-safe family bytes; no later-family sidecar storage is implied.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "CSpeedTreeRT__ParseShadowProjectionInfo",
   "end_ea": "0x787473",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_787400",
+  "name": "CSpeedTreeRT__ParseShadowProjectionInfo",
   "segment": ".text",
   "sha256": "226f4dfb20c48fc38bbdf248be24ab036827b43203447a773ec1622c144127ab",
   "size": 115,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x787400",
-  "type": "int __thiscall(_DWORD *this, unsigned int *)",
-  "xrefs_from_count": 39,
+  "total_chunk_size": 153,
+  "type": "void __thiscall(OB_CSpeedTreeRT_010201A0 *this, OB_CTreeFileAccess_010201A0 *file)",
+  "xrefs_from_count": 53,
   "xrefs_to_count": 1
 }

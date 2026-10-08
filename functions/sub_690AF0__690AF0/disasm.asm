@@ -90,8 +90,8 @@
 0x690C05: test    eax, eax
 0x690C07: jz      short loc_690C3D
 0x690C09: lea     edi, [eax+30h]
-0x690C0C: mov     ecx, edi
-0x690C0E: call    sub_449190
+0x690C0C: mov     ecx, edi; compactString
+0x690C0E: call    OB_CompactString_Length_010201A0; Bethesda compact string length helper. If inline length marker is 0xFFFF, strlen(heap string); otherwise returns the 16-bit stored length. Used here to gate optional TESObjectTREE leaf texture.
 0x690C13: test    eax, eax
 0x690C15: jbe     short loc_690C3D
 0x690C17: mov     eax, [edi]
@@ -103,7 +103,7 @@
 0x690C24: call    edx
 0x690C26: mov     ecx, ds:0B33A1Ch
 0x690C2C: push    eax
-0x690C2D: call    sub_439EB0
+0x690C2D: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
 0x690C32: mov     eax, [esp+3Ch+var_24]
 0x690C36: mov     byte ptr [eax+86h], 1
 0x690C3D: mov     edi, [esi+58h]
@@ -200,7 +200,7 @@
 0x690D3E: push    1
 0x690D40: push    ebp
 0x690D41: mov     ecx, esi
-0x690D43: call    Actor_EquipItem
+0x690D43: call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.
 0x690D48: mov     ecx, [esi+58h]
 0x690D4B: test    ecx, ecx
 0x690D4D: jz      short loc_690D98
@@ -226,9 +226,9 @@
 0x690D84: mov     edi, [ecx]
 0x690D86: push    1
 0x690D88: mov     ecx, edi
-0x690D8A: call    sub_41F370
+0x690D8A: call    ExtraDataList_SetCannotWear; Adds or removes marker extra ExtraCannotWear type 0x47 according to the requested state.
 0x690D8F: mov     ecx, edi
-0x690D91: call    sub_41F2F0
+0x690D91: call    ExtraDataList_AddBoundArmor; Adds marker extra ExtraBoundArmor type 0x50 when it is not already present.
 0x690D96: jmp     short loc_690D9F
 0x690D98: mov     byte ptr [edi+88h], 1
 0x690D9F: mov     ecx, [esi+58h]
@@ -277,7 +277,6 @@
 0x690E25: mov     [esp+3Ch+var_1C], edi
 0x690E29: jmp     short loc_690E34
 0x690E2B: jmp     short loc_690E30
-0x690E2D: align 10h
 0x690E30: mov     ebx, [esp+3Ch+var_14]
 0x690E34: push    0
 0x690E36: push    ebp
@@ -320,7 +319,7 @@
 0x690EA3: call    TESBipedModelForm_GetModelPath
 0x690EA8: mov     ecx, ds:0B33A1Ch
 0x690EAE: push    eax
-0x690EAF: call    sub_439EB0
+0x690EAF: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
 0x690EB4: mov     eax, [esp+3Ch+var_24]
 0x690EB8: mov     byte ptr [eax+87h], 1
 0x690EBF: mov     eax, [ebp+0]
@@ -363,7 +362,7 @@
 0x690F26: mov     [esp+3Ch+var_4], 0FFFFFFFFh
 0x690F2E: call    ContainerEntryExtraData_DestroyDataTable
 0x690F33: push    ebp
-0x690F34: call    FormHeapFree
+0x690F34: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x690F39: add     esp, 4
 0x690F3C: mov     ebp, [esp+3Ch+var_20]
 0x690F40: add     [esp+3Ch+var_1C], 4
@@ -385,7 +384,7 @@
 0x690F7A: xor     edi, edi
 0x690F7C: mov     ecx, edi
 0x690F7E: mov     [esp+3Ch+var_4], 0FFFFFFFFh
-0x690F86: call    sub_41F2F0
+0x690F86: call    ExtraDataList_AddBoundArmor; Adds marker extra ExtraBoundArmor type 0x50 when it is not already present.
 0x690F8B: mov     edx, [esi]
 0x690F8D: mov     eax, [edx+114h]
 0x690F93: push    1
@@ -400,7 +399,7 @@
 0x690FA5: push    1
 0x690FA7: push    edi
 0x690FA8: mov     ecx, esi
-0x690FAA: call    Actor_EquipItem
+0x690FAA: call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.
 0x690FAF: mov     ecx, esi; this
 0x690FB1: call    TESObjectREFR_GetContainer
 0x690FB6: push    eax
@@ -415,7 +414,7 @@
 0x690FCC: jz      short loc_690FEB
 0x690FCE: push    1
 0x690FD0: mov     ecx, eax
-0x690FD2: call    sub_41F370
+0x690FD2: call    ExtraDataList_SetCannotWear; Adds or removes marker extra ExtraCannotWear type 0x47 according to the requested state.
 0x690FD7: mov     ecx, [esp+3Ch+var_C]
 0x690FDB: mov     large fs:0, ecx
 0x690FE2: pop     ecx
@@ -437,7 +436,7 @@
 0x691006: add     esp, 28h
 0x691009: retn
 0x69100A: mov     ecx, edi
-0x69100C: call    ActiveEffect_Base_Remove
+0x69100C: call    ActiveEffect_Base_Remove; Verified termination API: sets bTerminated=1. When its flush flag is true, immediately invokes ActiveEffect_Base_ProcessEffect to run termination cleanup.
 0x691011: mov     ecx, [esp+3Ch+var_C]
 0x691015: mov     large fs:0, ecx
 0x69101C: pop     ecx
@@ -447,3 +446,30 @@
 0x691020: pop     ebx
 0x691021: add     esp, 28h
 0x691024: retn
+0x9C5710: mov     eax, [ebp-14h]
+0x9C5713: push    eax
+0x9C5714: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C5719: pop     ecx
+0x9C571A: retn
+0x9C571B: mov     eax, [ebp-14h]
+0x9C571E: push    eax
+0x9C571F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C5724: pop     ecx
+0x9C5725: retn
+0x9C5726: mov     eax, [ebp-10h]
+0x9C5729: push    eax
+0x9C572A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C572F: pop     ecx
+0x9C5730: retn
+0x9C5731: mov     eax, [ebp-10h]
+0x9C5734: push    eax
+0x9C5735: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C573A: pop     ecx
+0x9C573B: retn
+0x9C573C: mov     edx, [esp+arg_4]
+0x9C5740: lea     eax, [edx-2Ch]
+0x9C5743: mov     ecx, [edx-30h]
+0x9C5746: xor     ecx, eax
+0x9C5748: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C574D: mov     eax, offset stru_AEDED0
+0x9C5752: jmp     ___CxxFrameHandler3

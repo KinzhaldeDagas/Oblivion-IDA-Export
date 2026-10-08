@@ -1,7 +1,7 @@
-int __thiscall sub_405790(int this, unsigned int a2)
+NiAVObject *__thiscall NiNode_GetChildAtIndex(NiNode *this, unsigned int index)
 {
-  if ( *(unsigned __int16 *)(this + 0xB6) > a2 )
-    return *(_DWORD *)(*(_DWORD *)(this + 0xB0) + 4 * a2);
+  if ( this->members.children.end > index ) /*0x40579d*/
+    return *((NiAVObject **)&this->members.children.data->vtbl + index); /*0x4057aa*/
   else
-    return 0;
+    return 0; /*0x40579f*/
 }

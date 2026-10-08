@@ -1,1 +1,1 @@
-hkWorldMaintenanceManager
+struct hkWorldMaintenanceManager;

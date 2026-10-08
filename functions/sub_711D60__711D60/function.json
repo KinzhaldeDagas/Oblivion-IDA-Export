@@ -1,18 +1,31 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x711D60",
+      "0x711D81"
+    ]
+  ],
+  "chunks_sha256": "eb3de2a654259a8c50e658ec9618cf63c7325e89f5e9c0afaf5480cedcf3b6de",
+  "comment_regular": "\n[Collision v143 publication] Attach writes collisionObject+08 target then435CE0 installs the scene collision smart pointer, releasing the old collision and retaining the new one. The plugin creates the collision detached, binds its ready phantom using897670, then publishes here after all shape construction succeeds.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "sub_711D60",
   "end_ea": "0x711D81",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_711D60",
   "segment": ".text",
   "sha256": "eb3de2a654259a8c50e658ec9618cf63c7325e89f5e9c0afaf5480cedcf3b6de",
   "size": 33,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x711D60",
+  "total_chunk_size": 33,
   "type": "void __thiscall(volatile LONG *this, NiAVObject *)",
   "xrefs_from_count": 11,
   "xrefs_to_count": 9

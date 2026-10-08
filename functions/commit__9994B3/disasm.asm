@@ -11,7 +11,7 @@
 0x9994DA: xor     ebx, ebx
 0x9994DC: cmp     eax, ebx
 0x9994DE: jl      short loc_9994E8
-0x9994E0: cmp     eax, uNumber
+0x9994E0: cmp     eax, ds:0BAAAA0h
 0x9994E6: jb      short loc_999502
 0x9994E8: call    __errno
 0x9994ED: mov     dword ptr [eax], 9
@@ -59,3 +59,9 @@
 0x999566: call    __errno
 0x99956B: mov     dword ptr [eax], 9
 0x999571: or      [ebp+var_1C], 0FFFFFFFFh
+0x999584: call    __SEH_epilog4
+0x999589: retn
+0x99958A: push    [ebp+arg_0]
+0x99958D: call    __unlock_fhandle
+0x999592: pop     ecx
+0x999593: retn

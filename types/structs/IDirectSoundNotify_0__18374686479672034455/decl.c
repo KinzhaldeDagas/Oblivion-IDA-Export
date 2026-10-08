@@ -1,1 +1,1 @@
-IDirectSoundNotify_0
+typedef IDirectSoundNotify IDirectSoundNotify_0;

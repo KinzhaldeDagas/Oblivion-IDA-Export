@@ -1,1 +1,1 @@
-IAudioStreamVolume_0
+typedef IAudioStreamVolume IAudioStreamVolume_0;

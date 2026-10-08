@@ -1,52 +1,90 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "cached_font",
+  "definition": "struct cached_font\n{\nlist entry;\nLONG ref;\nDWORD hash;\nLOGFONTW lf;\nXFORM xform;\nUINT aa_flags;\ncached_glyph **glyphs[2][256] __offset(OFF64|AUTO);\n}\n",
   "id": 18374686479671813039,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "entry",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "list"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ref",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hash",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lf",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 92
+      "size": 92,
+      "type": "LOGFONTW"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "xform",
       "offset": 108,
-      "offset_hex": "0x6c",
-      "size": 24
+      "offset_hex": "0x6C",
+      "size": 24,
+      "type": "XFORM"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "aa_flags",
       "offset": 132,
       "offset_hex": "0x84",
-      "size": 4
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "glyphs",
       "offset": 136,
       "offset_hex": "0x88",
-      "size": 2048
+      "size": 2048,
+      "type": "cached_glyph **[2][256]"
     }
   ],
   "name": "cached_font",
+  "ordinal": 1050,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 2184
 }

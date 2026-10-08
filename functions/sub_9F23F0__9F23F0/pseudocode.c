@@ -1,5 +1,5 @@
 int sub_9F23F0()
 {
-  GameSetting_ConstrAndReg(&dword_B38B88, (int)"sQuickKeyString", (int)"Hotkey");
-  return atexit(sub_A21E30);
+  GameSetting_ConstrAndReg(&stru_B38B88, "sQuickKeyString", "Hotkey"); /*0x9f23ff*/
+  return atexit(sub_A21E30); /*0x9f240f*/
 }

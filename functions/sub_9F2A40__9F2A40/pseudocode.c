@@ -1,5 +1,5 @@
 int sub_9F2A40()
 {
-  GameSetting_ConstrAndReg(&dword_B38D18, (int)&off_A60FA4, (int)&unk_A60FA8);
-  return atexit(sub_A22150);
+  GameSetting_ConstrAndReg(&stru_B38D18, (const char *)&off_A60FA4, "to"); /*0x9f2a4f*/
+  return atexit(sub_A22150); /*0x9f2a5f*/
 }

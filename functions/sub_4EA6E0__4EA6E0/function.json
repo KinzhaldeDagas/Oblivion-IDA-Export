@@ -1,19 +1,32 @@
 {
-  "callees_count": 9,
-  "callers_count": 8,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
+  "callers_count": 9,
+  "chunks": [
+    [
+      "0x4EA6E0",
+      "0x4EA744"
+    ]
+  ],
+  "chunks_sha256": "a29b0715c70fa94c6c84ff0cb6d50bf26506a7242d467c499e828fef5cbfe82d",
+  "comment_regular": "Verified position-triggered LandLOD refresh wrapper: resolves current WorldSpace, climbs parentWorldspace to the root, obtains root terrainLODQuadRoots via TESWorldSpace_GetRootTerrainLODQuadMap, and delegates to DistantLOD_UpdateLandLODMap.",
+  "comment_repeatable": "Verified position-triggered LandLOD refresh wrapper: resolves current WorldSpace, climbs parentWorldspace to the root, obtains root terrainLODQuadRoots via TESWorldSpace_GetRootTerrainLODQuadMap, and delegates to DistantLOD_UpdateLandLODMap.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4EA6E0",
+  "display_name": "DistantLOD_UpdateLandLODAtPosition",
   "end_ea": "0x4EA744",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4EA6E0",
+  "name": "DistantLOD_UpdateLandLODAtPosition",
   "segment": ".text",
   "sha256": "a29b0715c70fa94c6c84ff0cb6d50bf26506a7242d467c499e828fef5cbfe82d",
   "size": 100,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4EA6E0",
-  "type": "void __cdecl(int, float, int, int)",
+  "total_chunk_size": 100,
+  "type": "void __cdecl(unsigned int a1, float a2, int a3, int a4)",
   "xrefs_from_count": 43,
   "xrefs_to_count": 9
 }

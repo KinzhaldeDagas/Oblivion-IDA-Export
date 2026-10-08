@@ -1,1 +1,1 @@
-uint8_t
+typedef unsigned __int8 uint8_t;

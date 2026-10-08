@@ -1,4 +1,4 @@
-0x4FC730: push    ebx
+0x4FC730: push    ebx; Hot Reload OBSE decode: script ref-list cleanup. Clears executing-script cache if needed, frees each RefVariable name buffer and payload, removes extra list nodes.
 0x4FC731: xor     ebx, ebx
 0x4FC733: cmp     ds:0B361B0h, ecx
 0x4FC739: push    edi
@@ -18,12 +18,12 @@
 0x4FC75F: jz      short loc_4FC77C
 0x4FC761: mov     eax, [esi]
 0x4FC763: push    eax
-0x4FC764: call    FormHeapFree
+0x4FC764: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4FC769: push    esi
 0x4FC76A: mov     [esi], ebx
 0x4FC76C: mov     [esi+6], bx
 0x4FC770: mov     [esi+4], bx
-0x4FC774: call    FormHeapFree
+0x4FC774: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4FC779: add     esp, 8
 0x4FC77C: mov     eax, [edi+4]
 0x4FC77F: cmp     eax, ebx
@@ -33,7 +33,7 @@
 0x4FC789: mov     edx, [eax]
 0x4FC78B: push    eax
 0x4FC78C: mov     [edi], edx
-0x4FC78E: call    FormHeapFree
+0x4FC78E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4FC793: add     esp, 4
 0x4FC796: jmp     short loc_4FC750
 0x4FC798: mov     [edi], ebx

@@ -101,30 +101,30 @@
 0x8A3A43: test    edi, edi
 0x8A3A45: jz      short loc_8A3A6B
 0x8A3A47: mov     ecx, esi
-0x8A3A49: call    sub_89F570
+0x8A3A49: call    bhkRefObject_UpdateHavokObject
 0x8A3A4E: mov     ecx, edi
 0x8A3A50: call    sub_8A6410
 0x8A3A55: mov     ecx, [edi+50h]
 0x8A3A58: mov     eax, [ecx]
 0x8A3A5A: mov     edx, [eax+54h]
-0x8A3A5D: push    offset stru_BA7A40
+0x8A3A5D: push    offset unk_BA7A40
 0x8A3A62: call    edx
 0x8A3A64: mov     ecx, esi
-0x8A3A66: call    sub_89F570
+0x8A3A66: call    bhkRefObject_UpdateHavokObject
 0x8A3A6B: mov     edi, [esi+8]
 0x8A3A6E: test    edi, edi
 0x8A3A70: jz      loc_8A3D0B
 0x8A3A76: mov     ecx, esi
-0x8A3A78: call    sub_89F570
+0x8A3A78: call    bhkRefObject_UpdateHavokObject
 0x8A3A7D: mov     ecx, edi
 0x8A3A7F: call    sub_8A6410
 0x8A3A84: mov     ecx, [edi+50h]
 0x8A3A87: mov     eax, [ecx]
 0x8A3A89: mov     edx, [eax+58h]
-0x8A3A8C: push    offset stru_BA7A40
+0x8A3A8C: push    offset unk_BA7A40
 0x8A3A91: call    edx
 0x8A3A93: mov     ecx, esi
-0x8A3A95: call    sub_89F570
+0x8A3A95: call    bhkRefObject_UpdateHavokObject
 0x8A3A9A: pop     edi
 0x8A3A9B: pop     esi
 0x8A3A9C: mov     ecx, [esp+0C8h+var_4]
@@ -247,7 +247,7 @@
 0x8A3C50: lea     ecx, [esp+0D8h+var_C0]
 0x8A3C54: call    sub_8A2B40
 0x8A3C59: lea     ecx, [esp+0D0h+var_C0]
-0x8A3C5D: call    sub_4D6830
+0x8A3C5D: call    hkQuaternion_Normalize; Normalizes a quaternion/vector with reciprocal sqrt refinement. Used before converting movement input orientation to basis vectors.
 0x8A3C62: lea     ecx, [esp+0D0h+var_C0]
 0x8A3C66: call    sub_8A2C00
 0x8A3C6B: fstp    dword ptr [esp+0D0h+var_D0+8]

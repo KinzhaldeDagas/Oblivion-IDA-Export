@@ -1,9 +1,9 @@
-char __thiscall sub_6E0A20(_BYTE *this, int a2)
+bool __thiscall sub_6E0A20(_BYTE *this, int a2)
 {
-  char result; // al
+  bool result; // al
 
-  result = sub_6EC5C0(a2);
-  if ( result )
-    return (*(this + 0x40) ^ ~*(_BYTE *)(a2 + 0x40)) & 1;
-  return result;
+  result = j_NiSingleInterpController_IsEqual(this, a2); /*0x6e0a29*/
+  if ( result ) /*0x6e0a30*/
+    return (*(this + 0x40) ^ ~*(_BYTE *)(a2 + 0x40)) & 1; /*0x6e0a40*/
+  return result; /*0x6e0a32*/
 }

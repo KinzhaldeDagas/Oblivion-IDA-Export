@@ -162,3 +162,20 @@
 0x4BE7C3: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x4BE7C8: add     esp, 1C8h
 0x4BE7CE: retn    0Ch
+0x4BE030: mov     dword ptr [ecx], offset ??_7LockFreeMapIterator@?$LockFreeMap@IV?$NiPointer@VExteriorCellLoaderTask@@@@@@6B@; const LockFreeMap<uint,NiPointer<ExteriorCellLoaderTask>>::LockFreeMapIterator::`vftable'
+0x4BE036: retn
+0x9B4510: lea     ecx, [ebp-1B4h]
+0x9B4516: jmp     loc_4BE030
+0x9B451B: lea     ecx, [ebp-1B8h]; void *
+0x9B4521: jmp     sub_4BDDC0
+0x9B4526: mov     edx, [esp+arg_4]
+0x9B452A: lea     eax, [edx-1CCh]
+0x9B4530: mov     ecx, [edx-1D0h]
+0x9B4536: xor     ecx, eax
+0x9B4538: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B453D: add     eax, 10h
+0x9B4540: mov     ecx, [edx-4]
+0x9B4543: xor     ecx, eax
+0x9B4545: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B454A: mov     eax, offset stru_ADFBD4
+0x9B454F: jmp     ___CxxFrameHandler3

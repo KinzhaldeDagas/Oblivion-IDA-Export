@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x523B10",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; MEF PERF 2026-10-08: PERF-17 Verified Resize16: allocate fresh header+pointer slots, retain/copy each old used live pointer, destruct old slots and free backing. Capacity0/grow1 dense N-build makes N resizes,N-1 old-block frees,N*(N-1)/2 copied pointers and N*(N-1) copy/discard Interlocked calls. Excludes ordinary insertion/parent operations; runtime size/timing unmeasured.",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x523B3B",
-    "line": "mov     ebp, [esp+24h+arg_0]",
+    "line": "mov     ebp, [esp+24h+capacity]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x523B58",
-    "line": "mov     [esp+24h+arg_0], ecx",
+    "line": "mov     [esp+24h+capacity], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x523B9E",
-    "line": "mov     ecx, [esp+24h+arg_0]",
+    "line": "mov     ecx, [esp+24h+capacity]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x523BBD",
-    "line": "mov     [esp+24h+arg_0], ecx",
+    "line": "mov     [esp+24h+capacity], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x523BD0",
-    "line": "mov     [esi+8], bp",
+    "line": "mov     [esi+8], bp; MEF PERF 2026-10-08: PERF-17 optional-reserve hazard: capacity is published HERE before allocation; new pointer (possiblyNULL) published523C3E before copy. Native Resize16 is not a transactional optional-reserve primitive. Allocate/initialize privately, recheck destination after callbacks, publish only success; do not promise recovery from allocator abort/exception.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x523C04",
-    "line": "mov     [esp+24h+arg_0], eax",
+    "line": "mov     [esp+24h+capacity], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x523C14",
-    "line": "push    offset sub_7016A0; a5",
+    "line": "push    offset NiPointerSlot_Release; a5",
     "mnemonic": "push",
     "size": 5
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x523C41",
-    "line": "mov     [esp+24h+arg_0], eax",
+    "line": "mov     [esp+24h+capacity], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -622,12 +622,6 @@
     "line": "jmp     short loc_523C50",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x523C49",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
   },
   {
     "ea": "0x523C50",
@@ -811,13 +805,13 @@
   },
   {
     "ea": "0x523C9B",
-    "line": "call    dword ptr ds:0A28078h",
+    "line": "call    dword ptr ds:0A28078h; MEF PERF 2026-10-08: PERF-17 copy cost: each nonnull old slot copied into zero new slot receives InterlockedIncrement; later vector destruction98124F via7016A0 decrements corresponding old slot. Exact extra2 atomics per copied live pointer under successful stable ownership. This is separate from hole-search probes.",
     "mnemonic": "call",
     "size": 6
   },
   {
     "ea": "0x523CA1",
-    "line": "mov     eax, [esp+24h+arg_0]",
+    "line": "mov     eax, [esp+24h+capacity]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -835,7 +829,7 @@
   },
   {
     "ea": "0x523CAC",
-    "line": "mov     [esp+24h+arg_0], eax",
+    "line": "mov     [esp+24h+capacity], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -865,7 +859,7 @@
   },
   {
     "ea": "0x523CBC",
-    "line": "mov     [esp+24h+arg_0], 0",
+    "line": "mov     [esp+24h+capacity], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -1045,7 +1039,7 @@
   },
   {
     "ea": "0x523D1E",
-    "line": "push    offset sub_7016A0; void (__thiscall *)(void *)",
+    "line": "push    offset NiPointerSlot_Release; void (__thiscall *)(void *)",
     "mnemonic": "push",
     "size": 5
   },
@@ -1081,7 +1075,7 @@
   },
   {
     "ea": "0x523D2D",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1156,5 +1150,101 @@
     "line": "jmp     short loc_523D14",
     "mnemonic": "jmp",
     "size": 2
+  },
+  {
+    "ea": "0x9D71B0",
+    "line": "lea     ecx, [ebp-10h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D71B3",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D71B8",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D71BB",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D71BC",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D71C1",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D71C2",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D71C3",
+    "line": "lea     ecx, [ebp+4]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D71C6",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D71CB",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D71CF",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D71D2",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D71D5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D71D7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D71DC",
+    "line": "mov     eax, offset stru_AFEE44",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D71E1",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,4 +1,4 @@
-BSStringT *sub_A11F60()
+NiRTTI *sub_A11F60()
 {
-  return sub_70E220((BSStringT *)dword_B47848, "WaterShaderProperty", (int)dword_B46000);
+  return NiRTTI_Constructor(&stru_B47848, "WaterShaderProperty", (NiRTTI *)&OB_ShaderConstantStorage_010201A0[0x7B]); /*0xa11f74*/
 }

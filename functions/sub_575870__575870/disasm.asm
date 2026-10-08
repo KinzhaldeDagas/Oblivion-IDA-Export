@@ -9,7 +9,6 @@
 0x575885: mov     eax, [ebp+0]
 0x575888: lea     edx, [eax+1]
 0x57588B: jmp     short loc_575890
-0x57588D: align 10h
 0x575890: mov     cl, [eax]
 0x575892: add     eax, 1
 0x575895: test    cl, cl
@@ -168,3 +167,8 @@
 0x575A5F: mov     al, 27h ; '''; jumptable 00575A58 cases 145,146
 0x575A61: jmp     short def_575A58
 0x575A63: mov     al, 22h ; '"'; jumptable 00575A58 cases 147,148
+0x575B25: pop     edi
+0x575B26: xor     eax, eax
+0x575B28: pop     ebp
+0x575B29: add     esp, 30h
+0x575B2C: retn    20h ; ' '

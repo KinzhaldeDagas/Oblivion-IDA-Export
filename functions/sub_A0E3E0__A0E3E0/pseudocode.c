@@ -1,4 +1,4 @@
-BSStringT *sub_A0E3E0()
+NiRTTI *sub_A0E3E0()
 {
-  return sub_70E220((BSStringT *)dword_B415F4, "NiPSysEmitterLifeSpanCtlr", (int)dword_B41F8C);
+  return NiRTTI_Constructor(&stru_B415F4, "NiPSysEmitterLifeSpanCtlr", &stru_B41F8C); /*0xa0e3f4*/
 }

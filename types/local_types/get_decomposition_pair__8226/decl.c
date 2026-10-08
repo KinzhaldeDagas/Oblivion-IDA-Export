@@ -1,1 +1,5 @@
-get_decomposition::pair
+struct get_decomposition::pair
+{
+WCHAR_0 src;
+USHORT dst;
+};

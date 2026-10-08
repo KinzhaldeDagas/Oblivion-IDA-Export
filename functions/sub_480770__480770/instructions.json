@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x480770",
-    "line": "push    ebx",
+    "line": "push    ebx; Scans direct children for exact name 'Scb', removes/releases the first match, and returns true. On the first child whose name begins 'FadeNode ', it immediately abandons remaining siblings and follows only that single child-as-NiNode chain; null cast or exhausted chain returns false. This is not a general recursive tree search.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x480772",
-    "line": "mov     ebp, [esp+8+arg_0]",
+    "line": "mov     ebp, [esp+8+rootNode]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -115,19 +115,19 @@
   },
   {
     "ea": "0x4807A1",
-    "line": "push    offset off_A3CE0C; Str2",
+    "line": "push    offset off_A3CE0C; right",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x4807A6",
-    "line": "push    edi; Str1",
+    "line": "push    edi; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4807A7",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x4807EC",
-    "line": "lea     eax, [esp+14h+arg_0]",
+    "line": "lea     eax, [esp+14h+rootNode]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x4807F5",
-    "line": "mov     esi, [esp+10h+arg_0]",
+    "line": "mov     esi, [esp+10h+rootNode]",
     "mnemonic": "mov",
     "size": 4
   },

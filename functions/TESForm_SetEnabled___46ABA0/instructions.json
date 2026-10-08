@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x46ABA0",
-    "line": "cmp     [esp+arg_0], 0",
+    "line": "cmp     [esp+disabled], 0; Verified Oblivion setter: the bool parameter sets or clears TESFormMembr.flags bit 0x800. TESObjectREFR_LinkModifiedForm propagates this bit through ExtraEnableStateParent and the enable-state activation routine clears it. CalcLowPathToPoint independently appends '-Disabled' when this bit is set. Fallout's mangled TESForm::SetDisabled directly writes the same 0x800 mask; this is a cross-check, not the basis of the Oblivion interpretation.",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x46ABBC",
-    "line": "mov     dword ptr [esp+arg_0], 40000001h",
+    "line": "mov     dword ptr [esp+disabled], 40000001h",
     "mnemonic": "mov",
     "size": 8
   },

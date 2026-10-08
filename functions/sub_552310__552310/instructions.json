@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x552310",
-    "line": "push    ecx",
+    "line": "push    ecx; Matrix scalar multiply: out = this * scale. Dimensions and storage are initialized from the source matrix.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x552313",
-    "line": "mov     ebp, [esp+0Ch+arg_0]",
+    "line": "mov     ebp, [esp+0Ch+out]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,19 +55,19 @@
   },
   {
     "ea": "0x552320",
-    "line": "push    eax",
+    "line": "push    eax; columns",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x552321",
-    "line": "push    ecx",
+    "line": "push    ecx; rows",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x552322",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x55232C",
-    "line": "call    sub_552240",
+    "line": "call    FaceGenMatrix_InitializeDimensions; Initialize FaceGenMatrix dimensions and resize to rows*columns floats. The product is computed in 32 bits without overflow validation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x552356",
-    "line": "mov     [esp+14h+arg_0], eax",
+    "line": "mov     [esp+14h+out], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x55236A",
-    "line": "cmp     esi, [esp+14h+arg_0]",
+    "line": "cmp     esi, [esp+14h+out]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x552386",
-    "line": "fmul    [esp+14h+arg_4]",
+    "line": "fmul    [esp+14h+scale]",
     "mnemonic": "fmul",
     "size": 4
   },

@@ -20,7 +20,7 @@
 0x6830E9: push    0
 0x6830EB: push    eax
 0x6830EC: call    sub_4DB260
-0x6830F1: push    0; int
+0x6830F1: push    0; a2
 0x6830F3: push    offset ??_R0?AVActor@@@8; struct TypeDescriptor *
 0x6830F8: push    offset ??_R0?AVTESObjectREFR@@@8; struct _s_RTTICompleteObjectLocator *
 0x6830FD: push    0; int
@@ -35,7 +35,7 @@
 0x683118: mov     edx, [eax+170h]
 0x68311E: mov     ecx, esi
 0x683120: call    edx
-0x683122: push    eax; a2
+0x683122: push    eax; baseForm
 0x683123: mov     ecx, ebx; this
 0x683125: call    TESObjectREFR_SetBaseForm
 0x68312A: mov     ecx, ebx; this
@@ -46,7 +46,7 @@
 0x683137: mov     ecx, ebx; this
 0x683139: call    TESForm_SetFormID
 0x68313E: mov     ecx, esi; this
-0x683140: call    TESObjectREFR_IsPersistent?
+0x683140: call    TESObjectREFR_IsPersistent
 0x683145: mov     ecx, ebx; this
 0x683147: push    eax; a4
 0x683148: call    TESObjectREFR_SetPersistance
@@ -71,19 +71,19 @@
 0x68317F: mov     [eax+8], edx
 0x683182: call    sub_4D89A0
 0x683187: mov     ecx, esi; this
-0x683189: call    TESObjectREFR_GetParentCell
+0x683189: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x68318E: test    eax, eax
 0x683190: jz      short loc_6831BC
 0x683192: mov     ecx, esi; this
-0x683194: call    TESObjectREFR_GetParentCell
+0x683194: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x683199: mov     ecx, eax; this
-0x68319B: call    TESObjectCELL_IsInterior
+0x68319B: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x6831A0: test    al, al
 0x6831A2: jz      short loc_6831BC
 0x6831A4: mov     edi, [ebx]
 0x6831A6: mov     ecx, esi; this
 0x6831A8: add     edi, 194h
-0x6831AE: call    TESObjectREFR_GetParentCell
+0x6831AE: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6831B3: push    eax
 0x6831B4: mov     eax, [edi]
 0x6831B6: mov     ecx, ebx
@@ -102,7 +102,7 @@
 0x6831D5: mov     edi, [ebx]
 0x6831D7: mov     ecx, esi; this
 0x6831D9: add     edi, 194h
-0x6831DF: call    TESObjectREFR_GetParentCell
+0x6831DF: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6831E4: mov     edx, [edi]
 0x6831E6: push    eax
 0x6831E7: mov     ecx, ebx
@@ -145,7 +145,7 @@
 0x68324A: mov     [esp+30h], edx
 0x68324E: jz      loc_6832D5
 0x683254: jmp     short loc_68325A
-0x683256: mov     edx, [esp+38h+var_8]
+0x683256: mov     edx, [esp+30h]
 0x68325A: mov     edi, [edx]
 0x68325C: test    edi, edi
 0x68325E: jz      short loc_6832CA
@@ -169,22 +169,22 @@
 0x683295: mov     [esp+30h+var_8], eax
 0x683299: jz      short loc_6832B2
 0x68329B: mov     ebx, [edi+8]
-0x68329E: mov     ecx, edi
-0x6832A0: call    TESHealthForm_GetHealth
+0x68329E: mov     ecx, edi; this
+0x6832A0: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x6832A5: push    eax
 0x6832A6: push    ebx
 0x6832A7: mov     ecx, ebp
 0x6832A9: call    ContainerEntryExtraData_constr
 0x6832AE: mov     ebx, [esp+30h+var_1C]
-0x6832B2: mov     ecx, [esp+30h+var_18]
-0x6832B6: push    1
-0x6832B8: push    eax
+0x6832B2: mov     ecx, [esp+30h+var_18]; this
+0x6832B6: push    1; destroyEntryIfMerged
+0x6832B8: push    eax; entry
 0x6832B9: mov     [esp+38h+var_8], 0FFFFFFFFh
-0x6832C1: call    ContainerExtraData_AddEntry
-0x6832C6: mov     edx, [esp+38h+var_8]
+0x6832C1: call    ContainerExtraData_AddEntry; Merge or append a complete EntryData into ExtraContainerChanges. Native ABI is two stack arguments (entry, destroyEntryIfMerged) and retn 0x08; all 14 callers pass exactly two. If a matching form entry exists, it merges counts/extra-data chains and conditionally destroys the supplied entry; otherwise it appends that entry directly. Return register has no contract.
+0x6832C6: mov     edx, [esp+30h]
 0x6832CA: mov     edx, [edx+4]
 0x6832CD: test    edx, edx
-0x6832CF: mov     [esp+38h+var_8], edx
+0x6832CF: mov     [esp+30h], edx
 0x6832D3: jnz     short loc_683256
 0x6832D5: mov     esi, [esi+58h]
 0x6832D8: test    esi, esi
@@ -200,43 +200,75 @@
 0x6832FB: push    90h; jumptable 006832F4 case 3
 0x683300: call    FormHeapAlloc
 0x683305: add     esp, 4
-0x683308: mov     [esp+38h+var_8], eax
+0x683308: mov     [esp+30h], eax
 0x68330C: test    eax, eax
-0x68330E: mov     [esp+38h+var_10], 1
+0x68330E: mov     [esp+30h+var_8], 1
 0x683316: jz      short loc_683393
 0x683318: mov     ecx, eax; this
-0x68331A: call    ??0LowProcess@@QAE@XZ; LowProcess::LowProcess(void)
+0x68331A: call    ??0LowProcess@@QAE@XZ; LowProcess constructor: initializes editorPackage/editorPackProcedure and follow/pathing state, but no currentPackage field used by runtime package assignment.
 0x68331F: jmp     short loc_683395
 0x683321: push    0A8h ; '¨'; jumptable 006832F4 case 2
 0x683326: call    FormHeapAlloc
 0x68332B: add     esp, 4
-0x68332E: mov     [esp+38h+var_8], eax
+0x68332E: mov     [esp+30h], eax
 0x683332: test    eax, eax
-0x683334: mov     [esp+38h+var_10], 2
+0x683334: mov     [esp+30h+var_8], 2
 0x68333C: jz      short loc_683393
 0x68333E: mov     ecx, eax; this
-0x683340: call    ??0MiddleLowProcess@@QAE@XZ; MiddleLowProcess::MiddleLowProcess(void)
+0x683340: call    ??0MiddleLowProcess@@QAE@XZ; MiddleLowProcess constructor: derives from LowProcess and installs MiddleLowProcess vtable; no currentPackage or movementFlags storage.
 0x683345: jmp     short loc_683395
 0x683347: push    18Ch; jumptable 006832F4 case 1
 0x68334C: call    FormHeapAlloc
 0x683351: add     esp, 4
-0x683354: mov     [esp+38h+var_8], eax
+0x683354: mov     [esp+30h], eax
 0x683358: test    eax, eax
-0x68335A: mov     [esp+38h+var_10], 3
+0x68335A: mov     [esp+30h+var_8], 3
 0x683362: jz      short loc_683393
 0x683364: mov     ecx, eax; this
-0x683366: call    ??0MiddleHighProcess@@QAE@XZ; MiddleHighProcess::MiddleHighProcess(void)
+0x683366: call    ??0MiddleHighProcess@@QAE@XZ; MiddleHighProcess constructor: derives from MiddleLowProcess, installs MiddleHighProcess vtable, initializes pathing, currentPackage +0x0C0 and currentPackProcedure. No movementFlags field is initialized here.
 0x68336B: jmp     short loc_683395
 0x68336D: push    2ECh; jumptable 006832F4 case 0
 0x683372: call    FormHeapAlloc
 0x683377: add     esp, 4
-0x68337A: mov     [esp+38h+var_8], eax
+0x68337A: mov     [esp+30h], eax
 0x68337E: test    eax, eax
-0x683380: mov     [esp+38h+var_10], 4
+0x683380: mov     [esp+30h+var_8], 4
 0x683388: jz      short loc_683393
 0x68338A: mov     ecx, eax; this
-0x68338C: call    ??0HighProcess@@QAE@XZ; HighProcess::HighProcess(void)
+0x68338C: call    ??0HighProcess@@QAE@XZ; HighProcess constructor: derives from MiddleHighProcess, then installs HighProcess vtable and initializes movementFlags at +0x1FC to 0. Confirms movement flag storage is HighProcess-only.
 0x683391: jmp     short loc_683395
 0x683393: xor     eax, eax
 0x683395: mov     edi, eax
-0x683397: mov     [esp+38h+var_10], 0FFFFFFFFh
+0x683397: mov     [esp+30h+var_8], 0FFFFFFFFh
+0x9C4D80: mov     eax, [ebp-10h]
+0x9C4D83: push    eax
+0x9C4D84: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C4D89: pop     ecx
+0x9C4D8A: retn
+0x9C4D8B: mov     eax, [ebp+4]
+0x9C4D8E: push    eax
+0x9C4D8F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C4D94: pop     ecx
+0x9C4D95: retn
+0x9C4D96: mov     eax, [ebp+4]
+0x9C4D99: push    eax
+0x9C4D9A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C4D9F: pop     ecx
+0x9C4DA0: retn
+0x9C4DA1: mov     eax, [ebp+4]
+0x9C4DA4: push    eax
+0x9C4DA5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C4DAA: pop     ecx
+0x9C4DAB: retn
+0x9C4DAC: mov     eax, [ebp+4]
+0x9C4DAF: push    eax
+0x9C4DB0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C4DB5: pop     ecx
+0x9C4DB6: retn
+0x9C4DB7: mov     edx, [esp+arg_4]
+0x9C4DBB: lea     eax, [edx-1Ch]
+0x9C4DBE: mov     ecx, [edx-20h]
+0x9C4DC1: xor     ecx, eax
+0x9C4DC3: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C4DC8: mov     eax, offset stru_AED640
+0x9C4DCD: jmp     ___CxxFrameHandler3

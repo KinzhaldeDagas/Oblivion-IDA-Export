@@ -1,1 +1,1 @@
-fexcept_t
+typedef __msvcrt_ulong fexcept_t;

@@ -80,7 +80,6 @@
 0x708403: add     ebx, 0FFFFFFFFh
 0x708406: js      short loc_708423
 0x708408: jmp     short loc_708410
-0x70840A: align 10h
 0x708410: mov     ecx, [ebp+ebx*4+0]
 0x708414: mov     eax, [esi]
 0x708416: mov     edx, [eax+2Ch]
@@ -90,7 +89,7 @@
 0x70841E: sub     ebx, 1
 0x708421: jns     short loc_708410
 0x708423: push    ebp
-0x708424: call    FormHeapFree
+0x708424: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x708429: add     esp, 4
 0x70842C: pop     ebp
 0x70842D: mov     ecx, [edi+0A8h]

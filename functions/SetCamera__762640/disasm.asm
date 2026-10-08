@@ -1,9 +1,9 @@
-0x762640: sub     esp, 24h
+0x762640: sub     esp, 24h; Build and upload camera view/projection state, convert a normalized viewport against current target dimensions, and call IDirect3DDevice9::SetViewport. This function does not set a scissor rectangle or alter D3DRS_SCISSORTESTENABLE.
 0x762643: push    esi
 0x762644: mov     esi, ecx
 0x762646: cmp     byte ptr [esi+6F0h], 0
 0x76264D: jnz     loc_762BCD
-0x762653: mov     eax, [esp+28h+arg_0]
+0x762653: mov     eax, [esp+28h+position]
 0x762657: mov     ecx, [eax]
 0x762659: mov     ds:0B3F92Ch, ecx
 0x76265F: mov     edx, [eax+4]
@@ -14,9 +14,9 @@
 0x762677: mov     ds:0B3F934h, eax
 0x76267C: mov     eax, ds:0B3F9B0h
 0x762681: push    ebx
-0x762682: mov     ebx, [esp+2Ch+arg_8]
+0x762682: mov     ebx, [esp+2Ch+up]
 0x762686: push    edi
-0x762687: mov     edi, [esp+30h+arg_C]
+0x762687: mov     edi, [esp+30h+right]
 0x76268B: fld     dword ptr [edi]
 0x76268D: mov     [esp+30h+var_24], ecx
 0x762691: fstp    dword ptr [esi+980h]
@@ -24,7 +24,7 @@
 0x76269D: fld     dword ptr [ebx]
 0x76269F: mov     [esp+30h+var_1C], eax
 0x7626A3: fstp    dword ptr [esi+984h]
-0x7626A9: mov     eax, [esp+30h+arg_4]
+0x7626A9: mov     eax, [esp+30h+forward]
 0x7626AD: fld     dword ptr [eax]
 0x7626AF: mov     [esp+30h+var_20], edx
 0x7626B3: fstp    dword ptr [esi+988h]
@@ -59,8 +59,8 @@
 0x762722: fmul    dword ptr [edi+8]
 0x762725: faddp   st(2), st
 0x762727: fxch    st(1)
-0x762729: fstp    [esp+30h+arg_0]
-0x76272D: fld     [esp+30h+arg_0]
+0x762729: fstp    [esp+30h+position]
+0x76272D: fld     [esp+30h+position]
 0x762731: fchs
 0x762733: fstp    dword ptr [esi+9B0h]
 0x762739: fld     dword ptr [ebx]
@@ -71,8 +71,8 @@
 0x762744: fld     dword ptr [ebx+8]
 0x762747: fmul    st, st(2)
 0x762749: faddp   st(1), st
-0x76274B: fstp    [esp+30h+arg_0]
-0x76274F: fld     [esp+30h+arg_0]
+0x76274B: fstp    [esp+30h+position]
+0x76274F: fld     [esp+30h+position]
 0x762753: fchs
 0x762755: fstp    dword ptr [esi+9B4h]
 0x76275B: fld     dword ptr [eax]
@@ -83,8 +83,8 @@
 0x762766: fld     dword ptr [eax+8]
 0x762769: fmul    st, st(2)
 0x76276B: faddp   st(1), st
-0x76276D: fstp    [esp+30h+arg_0]
-0x762771: fld     [esp+30h+arg_0]
+0x76276D: fstp    [esp+30h+position]
+0x762771: fld     [esp+30h+position]
 0x762775: push    ecx
 0x762776: fchs
 0x762778: push    2
@@ -152,24 +152,24 @@
 0x762884: fstp    dword ptr [esi+678h]
 0x76288A: fld     dword ptr [edi+14h]
 0x76288D: fsub    dword ptr [edi+10h]
-0x762890: fstp    [esp+28h+arg_8]
-0x762894: fld     [esp+28h+arg_8]
+0x762890: fstp    [esp+28h+up]
+0x762894: fld     [esp+28h+up]
 0x762898: fst     dword ptr [esi+67Ch]
 0x76289E: fld     dword ptr [edi+4]
 0x7628A1: fsub    dword ptr [edi]
-0x7628A3: fstp    [esp+28h+arg_8]
+0x7628A3: fstp    [esp+28h+up]
 0x7628A7: fld     dword ptr [edi+4]
 0x7628AA: fadd    dword ptr [edi]
-0x7628AC: fstp    [esp+28h+arg_14]
+0x7628AC: fstp    [esp+28h+viewport]
 0x7628B0: fld     dword ptr [edi+8]
 0x7628B3: fsub    dword ptr [edi+0Ch]
-0x7628B6: fstp    [esp+28h+arg_10]
+0x7628B6: fstp    [esp+28h+frustum]
 0x7628BA: fld     dword ptr [edi+0Ch]
 0x7628BD: cmp     byte ptr [edi+18h], 0
 0x7628C1: fadd    dword ptr [edi+8]
 0x7628C4: mov     ecx, [esi+8ACh]
 0x7628CA: mov     edx, [ecx]
-0x7628CC: fstp    [esp+28h+arg_C]
+0x7628CC: fstp    [esp+28h+right]
 0x7628D0: mov     eax, [edx+48h]
 0x7628D3: fld1
 0x7628D5: fdivrp  st(1), st
@@ -178,7 +178,7 @@
 0x7628E1: call    eax
 0x7628E3: fld     qword ptr ds:0A3D0C0h
 0x7628E9: test    al, al
-0x7628EB: fld     [esp+28h+arg_8]
+0x7628EB: fld     [esp+28h+up]
 0x7628EF: lea     ecx, [esi+9C0h]
 0x7628F5: fld     st
 0x7628F7: jz      short loc_762915
@@ -187,26 +187,26 @@
 0x762901: fldz
 0x762903: fst     dword ptr [esi+9D0h]
 0x762909: fst     dword ptr [esi+9E0h]
-0x76290F: fld     [esp+28h+arg_14]
+0x76290F: fld     [esp+28h+viewport]
 0x762913: jmp     short loc_76292D
 0x762915: fdivr   st, st(2)
 0x762917: fstp    dword ptr [ecx]
 0x762919: fldz
 0x76291B: fst     dword ptr [esi+9D0h]
 0x762921: fst     dword ptr [esi+9E0h]
-0x762927: fld     [esp+28h+arg_14]
+0x762927: fld     [esp+28h+viewport]
 0x76292B: fchs
 0x76292D: fdivrp  st(2), st
 0x76292F: fxch    st(1)
 0x762931: fstp    dword ptr [esi+9F0h]
 0x762937: fst     dword ptr [esi+9C4h]
-0x76293D: fld     [esp+28h+arg_10]
+0x76293D: fld     [esp+28h+frustum]
 0x762941: fld     st
 0x762943: fdivp   st(3), st
 0x762945: fxch    st(2)
 0x762947: fstp    dword ptr [esi+9D4h]
 0x76294D: fst     dword ptr [esi+9E4h]
-0x762953: fld     [esp+28h+arg_C]
+0x762953: fld     [esp+28h+right]
 0x762957: fchs
 0x762959: fdivrp  st(2), st
 0x76295B: fxch    st(1)
@@ -226,7 +226,7 @@
 0x76299D: call    eax
 0x76299F: fld     qword ptr ds:0A3D0C0h
 0x7629A5: test    al, al
-0x7629A7: fld     [esp+28h+arg_8]
+0x7629A7: fld     [esp+28h+up]
 0x7629AB: lea     ecx, [esi+9C0h]
 0x7629B1: fld     st
 0x7629B3: jz      short loc_7629CB
@@ -234,25 +234,25 @@
 0x7629BB: fstp    dword ptr [ecx]
 0x7629BD: fldz
 0x7629BF: fst     dword ptr [esi+9D0h]
-0x7629C5: fld     [esp+28h+arg_14]
+0x7629C5: fld     [esp+28h+viewport]
 0x7629C9: jmp     short loc_7629DD
 0x7629CB: fdivr   st, st(2)
 0x7629CD: fstp    dword ptr [ecx]
 0x7629CF: fldz
 0x7629D1: fst     dword ptr [esi+9D0h]
-0x7629D7: fld     [esp+28h+arg_14]
+0x7629D7: fld     [esp+28h+viewport]
 0x7629DB: fchs
 0x7629DD: fdivrp  st(2), st
 0x7629DF: fxch    st(1)
 0x7629E1: fstp    dword ptr [esi+9E0h]
 0x7629E7: fst     dword ptr [esi+9F0h]
 0x7629ED: fst     dword ptr [esi+9C4h]
-0x7629F3: fld     [esp+28h+arg_10]
+0x7629F3: fld     [esp+28h+frustum]
 0x7629F7: fld     st
 0x7629F9: fdivp   st(3), st
 0x7629FB: fxch    st(2)
 0x7629FD: fstp    dword ptr [esi+9D4h]
-0x762A03: fld     [esp+28h+arg_C]
+0x762A03: fld     [esp+28h+right]
 0x762A07: fchs
 0x762A09: fdivrp  st(2), st
 0x762A0B: fxch    st(1)
@@ -289,89 +289,89 @@
 0x762A81: push    0
 0x762A83: call    eax
 0x762A85: test    eax, eax
-0x762A87: mov     [esp+28h+arg_8], eax
-0x762A8B: fild    [esp+28h+arg_8]
+0x762A87: mov     [esp+28h+up], eax; Query current render-target width for normalized-to-pixel viewport conversion.
+0x762A8B: fild    [esp+28h+up]
 0x762A8F: jge     short loc_762A97
 0x762A91: fadd    dword ptr ds:0A2FC78h
 0x762A97: mov     ecx, [esi+87Ch]
-0x762A9D: fstp    [esp+28h+arg_8]
+0x762A9D: fstp    [esp+28h+up]
 0x762AA1: mov     edx, [ecx]
 0x762AA3: mov     eax, [edx+50h]
 0x762AA6: push    0
 0x762AA8: call    eax
 0x762AAA: test    eax, eax
-0x762AAC: mov     [esp+28h+arg_14], eax
-0x762AB0: fild    [esp+28h+arg_14]
+0x762AAC: mov     [esp+28h+viewport], eax; Query current render-target height for normalized-to-pixel viewport conversion.
+0x762AB0: fild    [esp+28h+viewport]
 0x762AB4: jge     short loc_762ABC
 0x762AB6: fadd    dword ptr ds:0A2FC78h
 0x762ABC: mov     ecx, [esp+28h+arg_1C]
-0x762AC0: fstp    [esp+28h+arg_10]
+0x762AC0: fstp    [esp+28h+frustum]
 0x762AC4: fld     dword ptr [ecx]
-0x762AC6: fld     [esp+28h+arg_8]
+0x762AC6: fld     [esp+28h+up]
 0x762ACA: fld     st
 0x762ACC: fmulp   st(2), st
-0x762ACE: fnstcw  word ptr [esp+28h+arg_8]
-0x762AD2: movzx   eax, word ptr [esp+28h+arg_8]
+0x762ACE: fnstcw  word ptr [esp+28h+up]
+0x762AD2: movzx   eax, word ptr [esp+28h+up]
 0x762AD7: fxch    st(1)
 0x762AD9: or      eax, 0C00h
-0x762ADE: mov     [esp+28h+arg_14], eax
-0x762AE2: fldcw   word ptr [esp+28h+arg_14]
+0x762ADE: mov     [esp+28h+viewport], eax
+0x762AE2: fldcw   word ptr [esp+28h+viewport]
 0x762AE6: fistp   qword ptr [esp+28h+var_1C]
 0x762AEA: mov     edx, [esp+28h+var_1C]
-0x762AEE: mov     [esp+28h+var_10], edx
-0x762AF2: fldcw   word ptr [esp+28h+arg_8]
+0x762AEE: mov     [esp+28h+var_10], edx; Viewport X = normalized left * target width.
+0x762AF2: fldcw   word ptr [esp+28h+up]
 0x762AF6: fld     dword ptr [ecx+8]
 0x762AF9: fld1
 0x762AFB: fsubrp  st(1), st
-0x762AFD: fld     [esp+28h+arg_10]
+0x762AFD: fld     [esp+28h+frustum]
 0x762B01: fld     st
 0x762B03: fmulp   st(2), st
-0x762B05: fnstcw  word ptr [esp+28h+arg_8]
+0x762B05: fnstcw  word ptr [esp+28h+up]
 0x762B09: fxch    st(1)
-0x762B0B: movzx   eax, word ptr [esp+28h+arg_8]
+0x762B0B: movzx   eax, word ptr [esp+28h+up]
 0x762B10: or      eax, 0C00h
-0x762B15: mov     [esp+28h+arg_14], eax
-0x762B19: fldcw   word ptr [esp+28h+arg_14]
+0x762B15: mov     [esp+28h+viewport], eax
+0x762B19: fldcw   word ptr [esp+28h+viewport]
 0x762B1D: fistp   qword ptr [esp+28h+var_1C]
 0x762B21: mov     eax, [esp+28h+var_1C]
-0x762B25: mov     [esp+28h+var_C], eax
-0x762B29: fldcw   word ptr [esp+28h+arg_8]
+0x762B25: mov     [esp+28h+var_C], eax; Viewport Y = (1 - normalized top) * target height.
+0x762B29: fldcw   word ptr [esp+28h+up]
 0x762B2D: fld     dword ptr [ecx+4]
 0x762B30: fsub    dword ptr [ecx]
-0x762B32: fnstcw  word ptr [esp+28h+arg_8]
+0x762B32: fnstcw  word ptr [esp+28h+up]
 0x762B36: fmulp   st(2), st
-0x762B38: movzx   eax, word ptr [esp+28h+arg_8]
+0x762B38: movzx   eax, word ptr [esp+28h+up]
 0x762B3D: fxch    st(1)
 0x762B3F: or      eax, 0C00h
-0x762B44: mov     [esp+28h+arg_14], eax
-0x762B48: fldcw   word ptr [esp+28h+arg_14]
+0x762B44: mov     [esp+28h+viewport], eax
+0x762B48: fldcw   word ptr [esp+28h+viewport]
 0x762B4C: fistp   qword ptr [esp+28h+var_1C]
 0x762B50: mov     edx, [esp+28h+var_1C]
-0x762B54: mov     [esp+28h+var_8], edx
+0x762B54: mov     [esp+28h+var_8], edx; Viewport width = target width * (right - left).
 0x762B58: lea     edx, [esp+28h+var_10]
 0x762B5C: push    edx
-0x762B5D: fldcw   word ptr [esp+2Ch+arg_8]
+0x762B5D: fldcw   word ptr [esp+2Ch+up]
 0x762B61: fld     dword ptr [ecx+8]
 0x762B64: fsub    dword ptr [ecx+0Ch]
-0x762B67: fnstcw  word ptr [esp+2Ch+arg_8]
+0x762B67: fnstcw  word ptr [esp+2Ch+up]
 0x762B6B: fmulp   st(1), st
-0x762B6D: movzx   eax, word ptr [esp+2Ch+arg_8]
+0x762B6D: movzx   eax, word ptr [esp+2Ch+up]
 0x762B72: or      eax, 0C00h
-0x762B77: mov     [esp+2Ch+arg_14], eax
-0x762B7B: fldcw   word ptr [esp+2Ch+arg_14]
+0x762B77: mov     [esp+2Ch+viewport], eax
+0x762B7B: fldcw   word ptr [esp+2Ch+viewport]
 0x762B7F: fistp   qword ptr [esp+2Ch+var_1C]
 0x762B83: mov     eax, [esp+2Ch+var_1C]
-0x762B87: mov     [esp+2Ch+var_4], eax
+0x762B87: mov     [esp+2Ch+var_4], eax; Viewport height = target height * (top - bottom).
 0x762B8B: mov     eax, [esi+280h]
 0x762B91: push    eax
-0x762B92: fldcw   word ptr [esp+30h+arg_8]
+0x762B92: fldcw   word ptr [esp+30h+up]
 0x762B96: fldz
 0x762B98: fstp    dword ptr [esp+30h]
 0x762B9C: fld1
-0x762B9E: fstp    [esp+30h+arg_0]
+0x762B9E: fstp    [esp+30h+position]
 0x762BA2: mov     ecx, [eax]
 0x762BA4: mov     eax, [ecx+0BCh]
-0x762BAA: call    eax
+0x762BAA: call    eax; Install the computed pixel viewport. The shadow producer supplies (0,1,1,0), yielding the full ShadowSurfaceRes square; no scissor state is paired with this update.
 0x762BAC: fld     dword ptr [edi+14h]
 0x762BAF: mov     esi, [esi+8ACh]
 0x762BB5: mov     edx, [esi]

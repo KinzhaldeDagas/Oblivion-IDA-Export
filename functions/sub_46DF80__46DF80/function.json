@@ -1,18 +1,31 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 0,
+  "chunks": [
+    [
+      "0x46DF80",
+      "0x46DFD5"
+    ]
+  ],
+  "chunks_sha256": "15f8c795d0b270aafe563a12369e13a09cd43534179016664f3a96dbb6cfbf57",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "MEF PERF 2026-09-07: PERF-2 destructor contract: component+4/+8 is embedded head; clear copies following node into head, frees dynamic node and old string, then frees last string. Batch index/scratch memory is separate temporary ownership; never free embedded head or retain pointers after clear. Existing partial-destination OOM semantics need explicit policy before optimization.\nMEF v57 IMPLEMENTED 2026-10-08: PERF-2 FULL replacement, not prolog trampoline: old backedges46DFB7/46DFC9 to+4 would make trampoline unsafe. Replacement preserves embedded-head promotion and node-then-string release, invalidates borrowed keys before callbacks, then delegates texture cleanup46DE10. Old body is unreachable after this entry detour.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "sub_46DF80",
   "end_ea": "0x46DFD5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_46DF80",
   "segment": ".text",
   "sha256": "15f8c795d0b270aafe563a12369e13a09cd43534179016664f3a96dbb6cfbf57",
   "size": 85,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x46DF80",
+  "total_chunk_size": 85,
   "type": "void __thiscall(unsigned int *this)",
   "xrefs_from_count": 37,
   "xrefs_to_count": 2

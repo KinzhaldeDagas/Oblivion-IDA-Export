@@ -1,4 +1,4 @@
-0x9EA7C0: fld     ds:flt_A3D65C
+0x9EA7C0: fld     ds:kHeadBodyNormalMatchRadius
 0x9EA7C6: push    ecx
 0x9EA7C7: fstp    [esp+4+var_4]; float
 0x9EA7CA: push    offset aFcombatdamages; "fCombatDamageScale"

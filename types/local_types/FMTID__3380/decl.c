@@ -1,1 +1,1 @@
-FMTID
+typedef GUID FMTID;

@@ -1,1 +1,4 @@
-HFONT__
+struct HFONT__
+{
+int unused;
+};

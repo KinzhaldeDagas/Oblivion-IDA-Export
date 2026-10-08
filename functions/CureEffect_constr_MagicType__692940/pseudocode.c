@@ -5,9 +5,9 @@ ActiveEffect *__thiscall CureEffect_constr_MagicType(
         EffectItem *a4,
         int a5)
 {
-  ActiveEffect::ActiveEffect(this, a2, a3, a4);
-  *((_DWORD *)this + 0xE) = a5;
-  this->vtbl = (ActiveEffectVtbl *)&CureEffect::`vftable';
-  *((_DWORD *)this + 0xF) = 0xFFFFFFFF;
-  return this;
+  ActiveEffect_Ctor(this, a2, a3, a4); /*0x692954*/
+  *((_DWORD *)this + 0xE) = a5; /*0x69295d*/
+  this->vtbl = (ActiveEffectVtbl *)&CureEffect::`vftable'; /*0x692960*/
+  *((_DWORD *)this + 0xF) = 0xFFFFFFFF; /*0x692966*/
+  return this; /*0x69296f*/
 }

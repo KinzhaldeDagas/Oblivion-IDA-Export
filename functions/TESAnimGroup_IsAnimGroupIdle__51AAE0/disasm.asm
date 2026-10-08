@@ -1,4 +1,4 @@
-0x51AAE0: mov     eax, [esp+arg_0]
+0x51AAE0: mov     eax, [esp+arg_0]; Static native idle-group classifier over a raw group byte: true only for Idle (0), DynamicIdle (1), BlockIdle (27), and TorchIdle (33).
 0x51AAE4: and     eax, 0FFh
 0x51AAE9: cmp     eax, 21h; switch 34 cases
 0x51AAEC: ja      short TESAnimGroup_IsAnimGroupIdle___def_51AAF5; jumptable 0051AAF5 default case, cases 2-26,28-32

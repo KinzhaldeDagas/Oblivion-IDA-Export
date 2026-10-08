@@ -1,19 +1,32 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x782E70",
+      "0x782F2B"
+    ]
+  ],
+  "chunks_sha256": "f443768ababf25657d5bb3c3341f6b50aae7c2df3015bab5797b7be5f09833ea",
+  "comment_regular": "DirectX10OBSE authority: Oblivion NiD3DPixelShader constant setter. Dispatches typed constant entries to D3D SetPixelShaderConstantB/I/F via vtable +0x1C4/+0x1BC/+0x1B4; bridge hooks setters and now seeds active native PS constants after create/reset.",
+  "comment_repeatable": "DirectX10OBSE authority: Oblivion NiD3DPixelShader constant setter. Dispatches typed constant entries to D3D SetPixelShaderConstantB/I/F via vtable +0x1C4/+0x1BC/+0x1B4; bridge hooks setters and now seeds active native PS constants after create/reset.\nDX11 final-bank audit 2026-10-01: numeric setters affect full device register banks independently of shader read/packing metadata. Dispatch type table B428D8[DWORD(entry+14h)&FFh] value1 selects BOOL, value3 int4, otherwise float4. Non-null source override wins over entry+30. Nonzero count override wins over entry+20, which otherwise defaults to1. Keep exact bank, register span and write order; do not drop an unconsumed register or reinterpret an int/BOOL writer as absent. Logical handoff now supports all six banks, but complete current producer coverage remains required before omitting native setup.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_782E70",
+  "display_name": "NiD3DPixelShader_SetNumericConstant",
   "end_ea": "0x782F2B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_782E70",
+  "name": "NiD3DPixelShader_SetNumericConstant",
   "segment": ".text",
   "sha256": "f443768ababf25657d5bb3c3341f6b50aae7c2df3015bab5797b7be5f09833ea",
   "size": 187,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x782E70",
-  "type": "bool __thiscall(_DWORD *this, _DWORD *, int, signed int)",
+  "total_chunk_size": 187,
+  "type": "bool __thiscall(NiD3DPixelShader *self, const NiD3DShaderConstantMapEntry *entry, const void *sourceOverride, unsigned int countOverride)",
   "xrefs_from_count": 77,
   "xrefs_to_count": 1
 }

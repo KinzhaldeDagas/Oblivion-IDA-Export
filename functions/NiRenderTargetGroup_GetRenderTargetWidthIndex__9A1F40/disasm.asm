@@ -1,4 +1,4 @@
-0x9A1F40: mov     eax, [esp+index]
+0x9A1F40: mov     eax, [esp+index]; GetTargetHeight(index): returns RenderTargets[index]->height at Ni2DBuffer+C, or0 for a null target.
 0x9A1F44: mov     eax, [ecx+eax*4+8]
 0x9A1F48: test    eax, eax
 0x9A1F4A: jz      short loc_9A1F52

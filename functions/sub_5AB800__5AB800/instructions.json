@@ -667,37 +667,37 @@
   },
   {
     "ea": "0x5AB941",
-    "line": "push    1",
+    "line": "push    1; requireInventoryTransfer",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5AB943",
-    "line": "push    1",
+    "line": "push    1; destroyImmediately",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5AB945",
-    "line": "push    eax",
+    "line": "push    eax; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5AB946",
-    "line": "push    ecx",
+    "line": "push    ecx; maximumMatches",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5AB947",
-    "line": "push    esi",
+    "line": "push    esi; baseForm",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5AB948",
-    "line": "call    sub_607F90",
+    "line": "call    ArrowProjectile_CleanupMatchingByBaseAndTarget; Scans two ActorProcessManager lists for ArrowProjectile objects matching baseForm and recorded target. Stops at maximumMatches; optionally requires transfer marker +0x95 and either destroys immediately or marks lifecycle state 3.",
     "mnemonic": "call",
     "size": 5
   },

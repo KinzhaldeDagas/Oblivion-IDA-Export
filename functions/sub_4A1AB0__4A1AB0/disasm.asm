@@ -12,7 +12,6 @@
 0x4A1AC7: test    edi, edi
 0x4A1AC9: jz      short loc_4A1AE8
 0x4A1ACB: jmp     short loc_4A1AD0
-0x4A1ACD: align 10h
 0x4A1AD0: mov     eax, [edi+4]
 0x4A1AD3: mov     edx, [esi]
 0x4A1AD5: mov     edx, [edx+8]
@@ -30,10 +29,10 @@
 0x4A1AEA: xor     al, al
 0x4A1AEC: pop     ebx
 0x4A1AED: retn    8
-0x4A1AF0: mov     ecx, [esp+0Ch+arg_4]
+0x4A1AF0: mov     ecx, [esp+0Ch+arg_4]; this
 0x4A1AF4: add     edi, 8
-0x4A1AF7: push    edi
-0x4A1AF8: call    sub_55E2A0
+0x4A1AF7: push    edi; incoming
+0x4A1AF8: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
 0x4A1AFD: pop     edi
 0x4A1AFE: pop     esi
 0x4A1AFF: mov     al, 1

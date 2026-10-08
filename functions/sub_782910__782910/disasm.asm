@@ -1,4 +1,4 @@
-0x782910: push    esi
+0x782910: push    esi; Pass225: Links NiGeometryBufferData to owning geometry group; increments group refcount and writes buffer+0x04.
 0x782911: mov     esi, ecx
 0x782913: lea     eax, [esi+4]
 0x782916: push    eax; lpAddend

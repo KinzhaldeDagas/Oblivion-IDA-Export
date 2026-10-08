@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x65D790",
-    "line": "push    ebx",
+    "line": "push    ebx; Player first-person synchronization caller. For groups whose fixed 0x24-byte metadata record has allow-multiple byte +0x04 set, it obtains the third-person source sequence from metadata slot +0x08 and tries ActorAnimData_PlayFirstPersonBySource. On miss or non-multiple group it falls back to key-based first-person playback.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x65D791",
-    "line": "mov     ebx, [esp+4+arg_0]",
+    "line": "mov     ebx, [esp+4+encodedKey]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x65D79B",
-    "line": "call    sub_51AA00",
+    "line": "call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x65D7B0",
-    "line": "cmp     ds:byte_B102E4[esi], 0",
+    "line": "cmp     ds:byte_B102E4[esi], 0; Fixed AnimGroupInfo +0x04 allow-multiple gate. Native basename source sync is attempted only for groups whose metadata permits multiple sequences.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -91,61 +91,61 @@
   },
   {
     "ea": "0x65D7B9",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x65D7BB",
-    "line": "call    TESObjectREFR_GetAnimData",
+    "line": "call    TESObjectREFR_GetAnimData; Return active ActorAnimData for an actor reference. For actor/creature refs with process level 0 or 1, return process+0x17C; otherwise tail-call the ExtraAnim lookup on the reference extra list. Exact return type is ActorAnimData*.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x65D7C0",
-    "line": "mov     ecx, ds:dword_B102E8[esi]",
+    "line": "mov     ecx, ds:dword_B102E8[esi]; Fixed AnimGroupInfo +0x08 supplies the source slot used to fetch the active third-person BSAnimGroupSequence.",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x65D7C6",
-    "line": "push    ecx",
+    "line": "push    ecx; slotSelector",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x65D7C7",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x65D7C9",
-    "line": "call    sub_4706E0",
+    "line": "call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x65D7CE",
-    "line": "push    ebx",
+    "line": "push    ebx; encodedKey",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x65D7CF",
-    "line": "push    eax",
+    "line": "push    eax; sourceSequence",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x65D7D0",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x65D7D2",
-    "line": "call    sub_474BE0",
+    "line": "call    ActorAnimData_PlayFirstPersonBySource; Calls first-person source sync with the active third-person source sequence and encoded key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,19 +175,19 @@
   },
   {
     "ea": "0x65D7E0",
-    "line": "push    ebx",
+    "line": "push    ebx; Fallback path: if source sync was ineligible or missed, play the encoded key through first-person ActorAnimData when that key exists.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x65D7E1",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x65D7E3",
-    "line": "call    sub_470D00",
+    "line": "call    ActorAnimData_HasAnimKey; Returns whether ActorAnimData +0x9C contains an entry for the encoded animation key. Presence test only; it does not select or play a sequence.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,37 +205,37 @@
   },
   {
     "ea": "0x65D7EC",
-    "line": "mov     edx, [esp+10h+arg_4]",
+    "line": "mov     edx, [esp+10h+playImmediately]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x65D7F0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; repeatOrAction",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x65D7F2",
-    "line": "push    edx",
+    "line": "push    edx; playImmediately",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x65D7F3",
-    "line": "push    ebx",
+    "line": "push    ebx; encodedKey",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x65D7F4",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x65D7F6",
-    "line": "call    ActorAnimData_PlayAnimGroup",
+    "line": "call    ActorAnimData_PlayAnimGroup; Native group dispatcher. Reads fixed group-table slot (+0x08) and note-template class (+0x0C), normalizing slot aliases 5->0 and 6->3. For note classes 0/1, playImmediately=0 stores only the encoded key at ActorAnimData +0x70[slot] and repeat/action value at +0x7C[slot]; playImmediately=1 clears that queue and plays now. Classes 2..7 play immediately. No queued sequence pointer or path is stored.",
     "mnemonic": "call",
     "size": 5
   },

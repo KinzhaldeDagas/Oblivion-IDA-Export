@@ -1,19 +1,32 @@
 {
-  "callees_count": 38,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 16,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x51C210",
+      "0x51C357"
+    ]
+  ],
+  "chunks_sha256": "2e4abfbad18a6e91e2bdb04c3c945264249623ec65f789ae7aa011baa75c0c8b",
+  "comment_regular": "Load an Oblivion CLAS record. DATA is a fixed 0x34-byte payload containing two attributes, specialization, seven majors, flags/services, and training data. Invalid uniqueness/attribute data is reported after loading, but the routine still returns success; no minor list is loaded.",
+  "comment_repeatable": "Load an Oblivion CLAS record. DATA is a fixed 0x34-byte payload containing two attributes, specialization, seven majors, flags/services, and training data. Invalid uniqueness/attribute data is reported after loading, but the routine still returns success; no minor list is loaded.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_51C210",
+  "display_name": "TESClass_LoadForm",
   "end_ea": "0x51C357",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_51C210",
+  "name": "TESClass_LoadForm",
   "segment": ".text",
   "sha256": "2e4abfbad18a6e91e2bdb04c3c945264249623ec65f789ae7aa011baa75c0c8b",
   "size": 327,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x51C210",
-  "type": "char __thiscall(TESForm *this, Data *)",
+  "total_chunk_size": 327,
+  "type": "bool __thiscall(TESClass *this, Data *file)",
   "xrefs_from_count": 149,
   "xrefs_to_count": 1
 }

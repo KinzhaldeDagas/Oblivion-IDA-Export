@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A0D40",
-    "line": "push    ebp",
+    "line": "push    ebp; Exception-safe uninitialized ownership move for guide-LOD level vectors. Constructs an empty destination element, swaps its begin/end/capacity with the source, and advances at 0x10-byte stride; unwind destroys constructed destinations.",
     "mnemonic": "push",
     "size": 1
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x7A0D6B",
-    "line": "mov     esi, [ebp+arg_8]",
+    "line": "mov     esi, [ebp+destinationFirst]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -109,31 +109,31 @@
   },
   {
     "ea": "0x7A0D70",
-    "line": "mov     [ebp+var_14], esi",
+    "line": "mov     [ebp+value], esi",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A0D73",
-    "line": "mov     [ebp+var_24], ecx",
+    "line": "mov     [ebp+source.begin], ecx",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A0D76",
-    "line": "mov     [ebp+var_20], ecx",
+    "line": "mov     [ebp+source.end], ecx",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A0D79",
-    "line": "mov     [ebp+var_1C], ecx",
+    "line": "mov     [ebp+source.capacityEnd], ecx",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A0D7C",
-    "line": "mov     edi, [ebp+arg_0]",
+    "line": "mov     edi, [ebp+first]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x7A0D84",
-    "line": "cmp     edi, [ebp+arg_4]",
+    "line": "cmp     edi, [ebp+last]",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x7A0D8C",
-    "line": "mov     [ebp+arg_0], esi",
+    "line": "mov     [ebp+first], esi",
     "mnemonic": "mov",
     "size": 3
   },
@@ -199,25 +199,25 @@
   },
   {
     "ea": "0x7A0D9A",
-    "line": "lea     eax, [ebp+var_28]",
+    "line": "lea     eax, [ebp+source]",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7A0D9D",
-    "line": "push    eax",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A0D9E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A0DA0",
-    "line": "call    sub_79EE40",
+    "line": "call    OB_stVector_SFrondGuide_CopyCtor_010201A0; Oblivion st_vector<SFrondGuide> copy constructor. Allocates sourceCount*0x30 and deep-copy-constructs each compact guide, including its owned SFrondVertex vector. The executable establishes the by-value layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x7A0DCE",
-    "line": "mov     [ebp+arg_8], esi",
+    "line": "mov     [ebp+destinationFirst], esi",
     "mnemonic": "mov",
     "size": 3
   },
@@ -325,13 +325,13 @@
   },
   {
     "ea": "0x7A0DD6",
-    "line": "mov     esi, [ebp+var_14]",
+    "line": "mov     esi, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A0DD9",
-    "line": "mov     edi, [ebp+arg_8]",
+    "line": "mov     edi, [ebp+destinationFirst]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x7A0DE3",
-    "line": "push    esi",
+    "line": "push    esi; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x7A0DE6",
-    "line": "call    sub_7A0B00",
+    "line": "call    OB_stVector_SFrondGuide_DestroyThunk_010201A0; stdcall cleanup thunk for one st_vector<SFrondGuide> element; used by exception unwind in the outer guide-LOD vector helpers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x7A0DFB",
-    "line": "mov     edi, [ebp+var_24]",
+    "line": "mov     edi, [ebp+source.begin]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x7A0E02",
-    "line": "cmp     edi, [ebp+var_20]",
+    "line": "cmp     edi, [ebp+source.end]",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x7A0E17",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x7A0E2F",
-    "line": "cmp     eax, [ebp+var_20]",
+    "line": "cmp     eax, [ebp+source.end]",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x7A0E34",
-    "line": "mov     edi, [ebp+var_24]",
+    "line": "mov     edi, [ebp+source.begin]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x7A0E38",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -616,5 +616,101 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CC5C0",
+    "line": "lea     ecx, [ebp+source]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC5C3",
+    "line": "jmp     OB_stVector_SFrondGuide_Destroy_010201A0; Destroys one st_vector<SFrondGuide>: deep-destroys the initialized 0x30 guide range, frees its allocation, and clears begin/end/capacityEnd.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC5C8",
+    "line": "mov     eax, [ebp+first]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC5CB",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CC5CC",
+    "line": "mov     ecx, [ebp+var_18]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC5CF",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CC5D0",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC5D5",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC5D8",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CC5D9",
+    "line": "mov     edx, [esp-4+last]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CC5DD",
+    "line": "lea     eax, [edx+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC5E0",
+    "line": "mov     ecx, [edx-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC5E3",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CC5E5",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC5EA",
+    "line": "mov     eax, offset stru_AF5924",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC5EF",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

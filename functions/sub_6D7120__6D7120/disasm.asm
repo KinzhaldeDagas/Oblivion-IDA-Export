@@ -30,14 +30,14 @@
 0x6D7179: mov     [esi+44h], edi
 0x6D717C: push    eax
 0x6D717D: mov     ecx, esi
-0x6D717F: call    NiTimeController__SetTarget
+0x6D717F: call    NiTimeController__SetTarget; Retargets a controller while holding a temporary self-reference. Removes it from the previous NiObjectNET controller chain, assigns non-owning target +0x30, avoids duplicate insertion, then inserts into the new target's refcounted chain and propagates manager-controlled target state when applicable.
 0x6D7184: mov     ebp, [esp+24h+arg_4]
 0x6D7188: cmp     ebp, edi
 0x6D718A: mov     [esi+44h], ebp
 0x6D718D: jnz     short loc_6D71A0
 0x6D718F: mov     ecx, [esi+54h]
 0x6D7192: push    ecx
-0x6D7193: call    FormHeapFree
+0x6D7193: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6D7198: mov     [esi+54h], edi
 0x6D719B: jmp     loc_6D722C
 0x6D71A0: mov     ebx, [esi+30h]
@@ -71,7 +71,7 @@
 0x6D71EB: push    edx
 0x6D71EC: mov     byte ptr [esi+48h], 0
 0x6D71F0: mov     [esi+4Ch], eax
-0x6D71F3: call    FormHeapFree
+0x6D71F3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6D71F8: mov     [esi+54h], edi
 0x6D71FB: jmp     short loc_6D722C
 0x6D71FD: xor     eax, eax
@@ -87,7 +87,7 @@
 0x6D7218: push    edx
 0x6D7219: mov     byte ptr [esi+48h], 1
 0x6D721D: mov     [esi+4Ch], edi
-0x6D7220: call    FormHeapFree
+0x6D7220: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6D7225: mov     dword ptr [esi+54h], 0
 0x6D722C: add     esp, 4
 0x6D722F: mov     eax, esi
@@ -100,3 +100,12 @@
 0x6D7240: pop     ebx
 0x6D7241: add     esp, 10h
 0x6D7244: retn    0Ch
+0x9C7B70: mov     ecx, [ebp-10h]; this
+0x9C7B73: jmp     j_??1NiPoint3InterpController@@UAE@XZ; NiPoint3InterpController::~NiPoint3InterpController(void)
+0x9C7B78: mov     edx, [esp+arg_4]
+0x9C7B7C: lea     eax, [edx-14h]
+0x9C7B7F: mov     ecx, [edx-18h]
+0x9C7B82: xor     ecx, eax
+0x9C7B84: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C7B89: mov     eax, offset stru_AEFF30
+0x9C7B8E: jmp     ___CxxFrameHandler3

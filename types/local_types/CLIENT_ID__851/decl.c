@@ -1,1 +1,1 @@
-CLIENT_ID
+typedef _CLIENT_ID CLIENT_ID;

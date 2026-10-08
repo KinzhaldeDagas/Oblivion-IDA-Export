@@ -1,8 +1,8 @@
-int __usercall ContainerExtraData_EvaluateOwnerLeveledItems_::EvaluateLLLoop_next@<eax>(
+void __usercall ContainerExtraData_EvaluateOwnerLeveledItems_::EvaluateLLLoop_next(
         int a1@<ebp>,
-        int a2,
+        char a2,
         int a3,
-        int a4,
+        char a4,
         int a5,
         int a6,
         int a7,
@@ -13,20 +13,8 @@ int __usercall ContainerExtraData_EvaluateOwnerLeveledItems_::EvaluateLLLoop_nex
         int a12,
         int a13)
 {
-  if ( *(_DWORD *)(a1 + 4) )
-    return ContainerExtraData_EvaluateOwnerLeveledItems_::EvaluateLLLoop(
-             a2,
-             a3,
-             a4,
-             a5,
-             a6,
-             a7,
-             a8,
-             a9,
-             a10,
-             a11,
-             a12,
-             a13);
+  if ( *(_DWORD *)(a1 + 4) ) /*0x48855d*/
+    ContainerExtraData_EvaluateOwnerLeveledItems_::EvaluateLLLoop(a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13); /*0x488562*/
   else
-    return ContainerExtraData_EvaluateOwnerLeveledItems_::Done(a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12);
+    ContainerExtraData_EvaluateOwnerLeveledItems_::Done(); /*0x488563*/
 }

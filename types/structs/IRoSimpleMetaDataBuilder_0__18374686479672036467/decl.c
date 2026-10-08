@@ -1,1 +1,1 @@
-IRoSimpleMetaDataBuilder_0
+typedef IRoSimpleMetaDataBuilder IRoSimpleMetaDataBuilder_0;

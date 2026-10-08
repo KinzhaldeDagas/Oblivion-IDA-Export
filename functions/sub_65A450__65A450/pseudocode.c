@@ -4,33 +4,33 @@ Creature *__thiscall sub_65A450(Actor *this, float a2)
   Actor *v4; // eax
   double v5; // st7
   double v6; // st6
-  float v7; // [esp+Ch] [ebp+4h]
+  float radians; // [esp+Ch] [ebp+4h]
 
-  if ( this->members.super.process )
+  if ( this->members.super.process ) /*0x65a453*/
   {
-    result = (Creature *)((int (__thiscall *)(Actor *))this->vtbl->super.super.GetKnockedState)(this);
-    if ( !(_BYTE)result )
+    result = (Creature *)((int (__thiscall *)(Actor *))this->vtbl->super.super.GetKnockedState)(this); /*0x65a461*/
+    if ( !(_BYTE)result ) /*0x65a465*/
     {
-      switch ( ((int (__thiscall *)(LowProcess *))this->members.super.process->GetSitSleepState)(this->members.super.process) )
+      switch ( ((int (__thiscall *)(LowProcess *))this->members.super.process->GetSitSleepState)(this->members.super.process) ) /*0x65a487*/
       {
-        case 4:
-        case 5:
-        case 9:
-        case 0xA:
-          if ( !this->members.super.process->GetFurniture(this->members.super.process) )
-            goto LABEL_7;
-          v4 = (Actor *)OblivionDynamicCast(
+        case 4: /*0x65a487*/
+        case 5: /*0x65a487*/
+        case 9: /*0x65a487*/
+        case 0xA: /*0x65a487*/
+          if ( !this->members.super.process->GetFurniture(this->members.super.process) ) /*0x65a499*/
+            goto LABEL_7; /*0x65a499*/
+          v4 = (Actor *)OblivionDynamicCast( /*0x65a4ae*/
                           this,
                           0,
                           (struct _s_RTTICompleteObjectLocator *)&MobileObject `RTTI Type Descriptor',
                           &Actor `RTTI Type Descriptor',
                           0);
-          if ( !v4 )
-            goto LABEL_7;
-          result = v4->vtbl->GetMountedHorse(v4);
-          if ( result )
-            goto LABEL_7;
-          break;
+          if ( !v4 ) /*0x65a4b8*/
+            goto LABEL_7; /*0x65a4b8*/
+          result = v4->vtbl->GetMountedHorse(v4); /*0x65a4c4*/
+          if ( result ) /*0x65a4c8*/
+            goto LABEL_7; /*0x65a4c8*/
+          break; /*0x65a4c8*/
         default:
           goto LABEL_7;
       }
@@ -39,20 +39,20 @@ Creature *__thiscall sub_65A450(Actor *this, float a2)
   else
   {
 LABEL_7:
-    v5 = a2;
-    v6 = dbl_A3D5B0;
-    if ( a2 >= 0.0 )
+    v5 = a2; /*0x65a4ca*/
+    v6 = dbl_A3D5B0; /*0x65a4d9*/
+    if ( a2 >= 0.0 ) /*0x65a4df*/
     {
-      if ( v6 < v5 )
-        unknown_libname_14(v6, v5);
-      return (Creature *)sub_4D8A10(a2);
+      if ( v6 < v5 ) /*0x65a512*/
+        unknown_libname_14(v6, v5); /*0x65a514*/
+      return (Creature *)TESObjectREFR_SetRotationZ((TESObjectREFR *)this, a2); /*0x65a527*/
     }
     else
     {
-      v7 = v5 + v6;
-      unknown_libname_14(v6, v7);
-      return (Creature *)sub_4D8A10(v7);
+      radians = v5 + v6; /*0x65a4e5*/
+      unknown_libname_14(v6, radians); /*0x65a4ef*/
+      return (Creature *)TESObjectREFR_SetRotationZ((TESObjectREFR *)this, radians); /*0x65a502*/
     }
   }
-  return result;
+  return result; /*0x65a507*/
 }

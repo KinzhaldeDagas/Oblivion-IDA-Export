@@ -1,7 +1,5 @@
-_DWORD *__usercall sub_7895E0@<eax>(int a1@<edi>, char *Src)
+// Oblivion binary evidence: CSpeedTreeRT static error setter. Assigns the NUL-terminated input into the sole 28-byte global error string at 0xB2B614. After observation, SpeedTreeRT 4.1 SpeedTreeRT.cpp:2671-2677 corroborates SetError and g_strError.
+void __cdecl CSpeedTreeRT__SetError(const char *error)
 {
-  rsize_t v3; // [esp-4h] [ebp-8h]
-
-  LODWORD(v3) = strlen(Src);
-  return sub_414500(&dword_B2B614, a1, Src, v3);
+  OB_stString28_AssignBytes_010201A0(&OB_g_strError_010201A0, error, strlen(error)); /*0x789602*/
 }

@@ -1,91 +1,150 @@
-void __thiscall __noreturn sub_79F700(_DWORD *this, int a2, int a3, unsigned int a4, int a5)
+// Oblivion-authoritative fill insertion for st_vector<SFrondGuide>. Snapshots the deep guide value for alias safety, inserts count 0x30 records, uses exception-safe placement construction, reuses capacity or grows by 1.5x, and deep-moves overlapping guide ranges.
+// positive sp value has been detected, the output may be wrong!
+void __thiscall OB_stVector_SFrondGuide_InsertFill_010201A0(
+        OB_stVector16_010201A0 *this,
+        OB_stVector16_010201A0 *expectedOwner,
+        OB_SFrondGuide_010201A0 *position,
+        unsigned int count,
+        const OB_SFrondGuide_010201A0 *value)
 {
-  char v6; // al
-  int v7; // ecx
-  int v8; // edx
-  double v9; // st7
-  double v10; // st7
-  int v11; // ecx
-  unsigned int v12; // ebx
-  int v13; // eax
-  int v14; // eax
-  char *v15; // ebx
-  int v16; // eax
-  _DWORD *v17; // eax
-  int v18; // ecx
-  _DWORD *v19; // ecx
-  int v20; // [esp+0h] [ebp-58h] BYREF
-  int v21; // [esp+10h] [ebp-48h] BYREF
-  unsigned int v22; // [esp+14h] [ebp-44h]
-  float v23; // [esp+20h] [ebp-38h]
-  float v24; // [esp+24h] [ebp-34h]
-  char v25; // [esp+28h] [ebp-30h]
-  float v26; // [esp+2Ch] [ebp-2Ch]
-  float v27; // [esp+30h] [ebp-28h]
-  float v28; // [esp+34h] [ebp-24h]
-  int v29; // [esp+38h] [ebp-20h]
-  int v30; // [esp+3Ch] [ebp-1Ch]
-  int v31; // [esp+40h] [ebp-18h]
-  _DWORD *v32; // [esp+44h] [ebp-14h]
-  int *v33; // [esp+48h] [ebp-10h]
-  int v34; // [esp+54h] [ebp-4h]
+  unsigned __int8 frondMapIndex; // al
+  unsigned int sharedVertexStartIndex; // ecx
+  unsigned int verticesPerGuideVertex; // edx
+  double offsetAngle; // st7
+  double surfaceArea; // st7
+  void *begin; // ecx
+  unsigned int capacityCount; // ebx
+  int sizeForLimitCheck; // eax
+  int currentSize; // eax
+  unsigned int grownCapacity; // ebx
+  int sizeForGrowth; // eax
+  OB_SFrondGuide_010201A0 *newStorage; // eax
+  const OB_SFrondGuide_010201A0 *v18; // ecx
+  OB_SFrondGuide_010201A0 *constructedPrefixEnd; // eax
+  OB_SFrondGuide_010201A0 *insertedEnd; // eax
+  const OB_SFrondGuide_010201A0 *v21; // ecx
+  OB_SFrondGuide_010201A0 *oldBegin; // ecx
+  int oldSize; // eax
+  unsigned int newSize; // edi
+  OB_SFrondGuide_010201A0 *end; // ecx
+  unsigned int savedCount; // edi
+  OB_SFrondGuide_010201A0 *currentEndForFill; // [esp-10h] [ebp-68h]
+  unsigned int remainingFillCount; // [esp-Ch] [ebp-64h]
+  OB_SFrondGuide_010201A0 *fillEnd; // [esp-Ch] [ebp-64h]
+  int v30; // [esp-4h] [ebp-5Ch] BYREF
+  OB_SFrondGuide_010201A0 copiedValue; // [esp+10h] [ebp-48h] BYREF
+  int v32; // [esp+40h] [ebp-18h]
+  OB_stVector16_010201A0 *v33; // [esp+44h] [ebp-14h]
+  int *v34; // [esp+48h] [ebp-10h]
+  int v35; // [esp+54h] [ebp-4h]
+  OB_SFrondGuide_010201A0 *trailingSource; // [esp+68h] [ebp+10h]
+  OB_SFrondGuide_010201A0 *newStorageBase; // [esp+6Ch] [ebp+14h]
+  OB_SFrondGuide_010201A0 *source; // [esp+6Ch] [ebp+14h]
 
-  v33 = &v20;
-  v32 = this;
-  sub_79AD70(&v21, a5);
-  v6 = *(_BYTE *)(a5 + 0x18);
-  v23 = *(float *)(a5 + 0x10);
-  v7 = *(_DWORD *)(a5 + 0x28);
-  v8 = *(_DWORD *)(a5 + 0x2C);
-  v24 = *(float *)(a5 + 0x14);
-  v9 = *(float *)(a5 + 0x1C);
-  v25 = v6;
-  v26 = v9;
-  v29 = v7;
-  v10 = *(float *)(a5 + 0x20);
-  v30 = v8;
-  v27 = v10;
-  v28 = *(float *)(a5 + 0x24);
-  v11 = *(this + 1);
-  v12 = 0;
-  v34 = 0;
-  if ( v11 )
-    v12 = (*(this + 3) - v11) / 0x30;
-  if ( a4 )
+  v34 = &v30; /*0x79f728*/
+  v33 = this; /*0x79f72d*/
+  OB_stVector_SFrondVertex_CopyCtor_010201A0(&copiedValue.vertexVector, &value->vertexVector); /*0x79f737*/
+  frondMapIndex = value->frondMapIndex; /*0x79f73f*/
+  copiedValue.guideLength = value->guideLength; /*0x79f742*/
+  sharedVertexStartIndex = value->sharedVertexStartIndex; /*0x79f748*/
+  verticesPerGuideVertex = value->verticesPerGuideVertex; /*0x79f74b*/
+  copiedValue.radius = value->radius; /*0x79f74e*/
+  offsetAngle = value->offsetAngle; /*0x79f751*/
+  copiedValue.frondMapIndex = frondMapIndex; /*0x79f754*/
+  copiedValue.offsetAngle = offsetAngle; /*0x79f757*/
+  copiedValue.sharedVertexStartIndex = sharedVertexStartIndex; /*0x79f75a*/
+  surfaceArea = value->surfaceArea; /*0x79f75d*/
+  copiedValue.verticesPerGuideVertex = verticesPerGuideVertex; /*0x79f760*/
+  copiedValue.surfaceArea = surfaceArea; /*0x79f763*/
+  copiedValue.fuzzySurfaceArea = value->fuzzySurfaceArea; /*0x79f769*/
+  begin = this->begin; /*0x79f76c*/
+  capacityCount = 0; /*0x79f76f*/
+  v35 = 0; /*0x79f773*/
+  if ( begin ) /*0x79f776*/
+    capacityCount = ((char *)this->capacityEnd - (char *)begin) / 0x30; /*0x79f78c*/
+  if ( count ) /*0x79f793*/
   {
-    if ( v11 )
-      v13 = (*(this + 2) - v11) / 0x30;
+    if ( begin ) /*0x79f79b*/
+      sizeForLimitCheck = ((char *)this->end - (char *)begin) / 0x30; /*0x79f7b5*/
     else
-      v13 = 0;
-    if ( 0x5555555 - v13 < a4 )
-      sub_790B90(a4);
-    if ( v11 )
-      v14 = (*(this + 2) - v11) / 0x30;
+      sizeForLimitCheck = 0; /*0x79f79d*/
+    if ( 0x5555555 - sizeForLimitCheck < count ) /*0x79f7c0*/
+      OB_stVector_ThrowLengthError_010201A0(count); /*0x79f7c2*/
+    if ( begin ) /*0x79f7c9*/
+      currentSize = ((char *)this->end - (char *)begin) / 0x30; /*0x79f7e3*/
     else
-      v14 = 0;
-    if ( v12 < a4 + v14 )
+      currentSize = 0; /*0x79f7cb*/
+    if ( capacityCount >= count + currentSize ) /*0x79f7e9*/
     {
-      if ( 0x5555555 - (v12 >> 1) >= v12 )
-        v15 = (char *)((v12 >> 1) + v12);
+      end = (OB_SFrondGuide_010201A0 *)this->end; /*0x79f919*/
+      source = end; /*0x79f936*/
+      if ( end - position >= count ) /*0x79f939*/
+      {
+        savedCount = count; /*0x79f9cd*/
+        trailingSource = &end[-count]; /*0x79f9d6*/
+        this->end = OB_stVector_SFrondGuide_UninitializedCopyThunk_010201A0(this, trailingSource, end, end); /*0x79f9e1*/
+        OB_SFrondGuide_CopyAssignRangeBackwardCheckedThunk_010201A0(position, trailingSource, source); /*0x79f9ea*/
+        OB_SFrondGuide_FillRange_010201A0(position, &position[savedCount], &copiedValue); /*0x79f9f7*/
+      }
       else
-        v15 = 0;
-      if ( v11 )
-        v16 = (*(this + 2) - v11) / 0x30;
-      else
-        v16 = 0;
-      if ( (unsigned int)v15 < a4 + v16 )
-        v15 = (char *)(a4 + sub_799F10(this));
-      v17 = sub_799FA0(v15);
-      v18 = *(this + 1);
-      LOBYTE(v31) = 0;
-      LOBYTE(v34) = 1;
-      sub_79C2E0(v18, a3, v17);
+      {
+        OB_stVector_SFrondGuide_UninitializedCopyThunk_010201A0(this, position, end, &position[count]); /*0x79f94f*/
+        remainingFillCount = count - ((char *)this->end - (char *)position) / 0x30; /*0x79f972*/
+        currentEndForFill = (OB_SFrondGuide_010201A0 *)this->end; /*0x79f973*/
+        LOBYTE(v35) = 3; /*0x79f976*/
+        OB_stVector_SFrondGuide_UninitializedFillNThunk_010201A0( /*0x79f97a*/
+          this,
+          currentEndForFill,
+          remainingFillCount,
+          &copiedValue);
+        this->end = (char *)this->end + 0x30 * count; /*0x79f982*/
+        fillEnd = (OB_SFrondGuide_010201A0 *)((char *)this->end + 0xFFFFFFD0 * count); /*0x79f98e*/
+        v35 = 0; /*0x79f990*/
+        OB_SFrondGuide_FillRange_010201A0(position, fillEnd, &copiedValue); /*0x79f997*/
+      }
     }
-    v19 = (_DWORD *)*(this + 2);
-    if ( ((int)v19 - a3) / 0x30 < a4 )
-      sub_79EA70(this, a3, (int)v19, (_DWORD *)(a3 + 0x30 * a4));
-    sub_79EA70(this, (int)&v19[0xFFFFFFF4 * a4], (int)v19, v19);
+    else
+    {
+      if ( 0x5555555 - (capacityCount >> 1) >= capacityCount ) /*0x79f7fc*/
+        grownCapacity = (capacityCount >> 1) + capacityCount; /*0x79f802*/
+      else
+        grownCapacity = 0; /*0x79f7fe*/
+      if ( begin ) /*0x79f806*/
+        sizeForGrowth = ((char *)this->end - (char *)begin) / 0x30; /*0x79f820*/
+      else
+        sizeForGrowth = 0; /*0x79f808*/
+      if ( grownCapacity < count + sizeForGrowth ) /*0x79f826*/
+        grownCapacity = count + OB_stVector_SFrondGuide_Size_010201A0(this); /*0x79f831*/
+      newStorage = OB_stVector_SFrondGuide_Allocate_010201A0(grownCapacity); /*0x79f836*/
+      v18 = (const OB_SFrondGuide_010201A0 *)this->begin; /*0x79f83b*/
+      LOBYTE(v32) = 0; /*0x79f83e*/
+      newStorageBase = newStorage; /*0x79f84f*/
+      LOBYTE(v35) = 1; /*0x79f857*/
+      constructedPrefixEnd = OB_SFrondGuide_UninitializedCopy_010201A0(v18, position, newStorage); /*0x79f85b*/
+      insertedEnd = OB_stVector_SFrondGuide_UninitializedFillNThunk_010201A0( /*0x79f86e*/
+                      this,
+                      constructedPrefixEnd,
+                      count,
+                      &copiedValue);
+      v21 = (const OB_SFrondGuide_010201A0 *)this->end; /*0x79f873*/
+      LOBYTE(v32) = 0; /*0x79f876*/
+      OB_SFrondGuide_UninitializedCopy_010201A0(position, v21, insertedEnd); /*0x79f88c*/
+      oldBegin = (OB_SFrondGuide_010201A0 *)this->begin; /*0x79f891*/
+      if ( oldBegin ) /*0x79f899*/
+        oldSize = ((char *)this->end - (char *)oldBegin) / 0x30; /*0x79f8b3*/
+      else
+        oldSize = 0; /*0x79f89b*/
+      newSize = oldSize + count; /*0x79f8b5*/
+      if ( oldBegin ) /*0x79f8b9*/
+      {
+        OB_SFrondGuide_DestroyRange_010201A0(oldBegin, (OB_SFrondGuide_010201A0 *)this->end); /*0x79f8c5*/
+        FormHeapFree((unsigned int)this->begin); /*0x79f8ce*/
+      }
+      this->capacityEnd = &newStorageBase[grownCapacity]; /*0x79f8e9*/
+      this->end = &newStorageBase[newSize]; /*0x79f8ec*/
+      this->begin = newStorageBase; /*0x79f8ef*/
+    }
   }
-  if ( v22 )
-    FormHeapFree(v22);
+  if ( copiedValue.vertexVector.begin ) /*0x79fa04*/
+    FormHeapFree((unsigned int)copiedValue.vertexVector.begin); /*0x79fa07*/
 }

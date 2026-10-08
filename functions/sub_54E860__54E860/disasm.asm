@@ -10,7 +10,7 @@
 0x54E875: test    eax, eax
 0x54E877: jz      short loc_54E889
 0x54E879: push    eax
-0x54E87A: call    FormHeapFree
+0x54E87A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x54E87F: add     esp, 4
 0x54E882: mov     dword ptr [esi+0Ch], 0
 0x54E889: test    edi, edi

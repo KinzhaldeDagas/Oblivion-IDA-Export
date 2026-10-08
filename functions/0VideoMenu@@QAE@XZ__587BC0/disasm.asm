@@ -1,7 +1,7 @@
 0x587BC0: push    esi
 0x587BC1: push    edi
 0x587BC2: mov     esi, ecx
-0x587BC4: call    ??0Menu@@QAE@XZ; Menu::Menu(void)
+0x587BC4: call    ??0Menu@@QAE@XZ; Verified constructor sets ownsTemplates byte+0x1C=1, template list+8/+0xC empty, templateContextTile+0x10=NULL, fadeState+0x24=4. Other fields retain prior names when semantics not established.
 0x587BC9: xor     edi, edi
 0x587BCB: push    0C0h ; 'À'
 0x587BD0: mov     dword ptr [esi], offset ??_7VideoMenu@@6B@; const VideoMenu::`vftable'

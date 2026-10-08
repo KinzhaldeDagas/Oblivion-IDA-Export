@@ -1,19 +1,32 @@
 {
-  "callees_count": 24,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x771150",
+      "0x7712F9"
+    ]
+  ],
+  "chunks_sha256": "b029f0b0d24c7d4e59f0f648da180a7ed6407f4fb751b043b2d0636fddd08eda",
+  "comment_regular": "Oblivion NiDX9 declaration materializer. Walks enabled internal elements, computes offsets and stream strides, writes D3DVERTEXELEMENT9 records plus D3DDECL_END, then calls IDirect3DDevice9::CreateVertexDeclaration. Returns the cached native declaration when it is still valid.\n\n[v154 declaration ownership] Direct method takes only this and returns the cached/created IDirect3DVertexDeclaration9 pointer; it does not AddRef for the return. Virtual+70 instead points to770120, whose output-parameter ABI must not be confused with this function.\n\nDirectX10OBSE authority: Oblivion vertex declaration materializer. Walks enabled internal elements, computes offsets/stream strides, writes D3DVERTEXELEMENT9 records plus D3DDECL_END, then calls IDirect3DDevice9::CreateVertexDeclaration via vtable +0x158.\n[SpeedTreeOBSE v170] Mesh-motion upload materializes this borrowed declaration handle and compares buffer+0C before accepting unchanged data. A mismatch enters normal precache before forced packing. Runtime device/reset behavior UNVERIFIED.",
+  "comment_repeatable": "Oblivion NiDX9 declaration materializer. Walks enabled internal elements, computes offsets and stream strides, writes D3DVERTEXELEMENT9 records plus D3DDECL_END, then calls IDirect3DDevice9::CreateVertexDeclaration. Returns the cached native declaration when it is still valid.\nDX11 declaration handoff audit 2026-10-01: clean path returns cached IDirect3DVertexDeclaration9 at +30; Modified byte +28 gates materialization. Dirty path releases the old COM declaration before rebuilding, enumerates 16-byte stream records with 28-byte entries, emits 8-byte D3DVERTEXELEMENT9 records and a terminator, invokes device CreateVertexDeclaration, and clears Modified only on success. A pre-bucket snapshot with Modified nonzero cannot reuse the old handle. Comparative Fallout Xenon 82221F00 has homologous traversal/counters but 12-byte output elements, a platform Type encoding/terminator and different handle cleanup; do not transplant those details.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_771150",
+  "display_name": "NiDX9ShaderDeclaration_GetOrCreateD3DDeclaration",
   "end_ea": "0x7712F9",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_771150",
+  "name": "NiDX9ShaderDeclaration_GetOrCreateD3DDeclaration",
   "segment": ".text",
   "sha256": "b029f0b0d24c7d4e59f0f648da180a7ed6407f4fb751b043b2d0636fddd08eda",
   "size": 425,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x771150",
-  "type": "int __thiscall(int this)",
+  "total_chunk_size": 425,
+  "type": "IDirect3DVertexDeclaration9 *__thiscall(NiDX9ShaderDeclaration *this)",
   "xrefs_from_count": 179,
   "xrefs_to_count": 1
 }

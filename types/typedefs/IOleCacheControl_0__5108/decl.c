@@ -1,1 +1,1 @@
-IOleCacheControl_0
+typedef IOleCacheControl IOleCacheControl_0;

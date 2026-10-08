@@ -601,13 +601,13 @@
   },
   {
     "ea": "0x9877E0",
-    "line": "push    ebx",
+    "line": "push    ebx; initializeCRTGlobals",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x9877E1",
-    "line": "call    __InitializeGlobals?",
+    "line": "call    CRT_InitializeGlobals; Verified startup call: __tmainCRTStartup calls CRT_InitializeGlobals(1) before WinMain, which executes the C++ global-initializer pointer range.",
     "mnemonic": "call",
     "size": 5
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x98780E",
-    "line": "call    _WinMain@16",
+    "line": "call    _WinMain@16; Pass230: +0x1C reads here are on player NiNode/property-state derived objects during exit-to-main-menu handling; not proof of TES+0x1C shader fog upload.",
     "mnemonic": "call",
     "size": 5
   },
@@ -748,5 +748,179 @@
     "line": "call    $LN26",
     "mnemonic": "call",
     "size": 5
+  },
+  {
+    "ea": "0x987829",
+    "line": "mov     eax, [ebp+ms_exc.exc_ptr]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x98782C",
+    "line": "mov     ecx, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x98782E",
+    "line": "mov     ecx, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x987830",
+    "line": "mov     [ebp+Code], ecx",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x987833",
+    "line": "push    eax; ExceptionInfo",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x987834",
+    "line": "push    ecx; int",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x987835",
+    "line": "call    __XcptFilter",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x98783A",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x98783B",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x98783C",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x98783D",
+    "line": "mov     esp, [ebp+ms_exc.old_esp]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x987840",
+    "line": "mov     eax, [ebp+Code]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x987843",
+    "line": "mov     [ebp+var_1C], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x987846",
+    "line": "cmp     [ebp+var_20], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x98784A",
+    "line": "jnz     short ___tmainCRTStartup___$LN45",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x98784C",
+    "line": "push    eax; Code",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x98784D",
+    "line": "call    __exit",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x987852",
+    "line": "call    __c_exit",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x987857",
+    "line": "mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x98785E",
+    "line": "mov     eax, [ebp+var_1C]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x987861",
+    "line": "jmp     short loc_987876",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x987863",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x987865",
+    "line": "inc     eax",
+    "mnemonic": "inc",
+    "size": 1
+  },
+  {
+    "ea": "0x987866",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x987867",
+    "line": "mov     esp, [ebp+ms_exc.old_esp]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x98786A",
+    "line": "mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x987871",
+    "line": "mov     eax, 0FFh",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x987876",
+    "line": "call    __SEH_epilog4",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x98787B",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
   }
 ]

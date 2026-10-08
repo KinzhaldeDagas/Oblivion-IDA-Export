@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x68D970",
-    "line": "push    esi",
+    "line": "push    esi; Verified ActiveEffect destructor detaches each associated MagicHitEffect by setting bFinished and ownerActiveEffect=null, clears/frees only the HitEffectNode list, and relies on the ActorProcessManager reference added during PostLink to own the BSTempEffect object's later update/removal.",
     "mnemonic": "push",
     "size": 1
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x68D97E",
-    "line": "jz      short ??1ActiveEffect@@UAE@XZ___ResetHitEffectList",
+    "line": "jz      short ??1ActiveEffect@@UAE@XZ___ResetHitEffectList; Verified BSSimpleList_Clear frees successor HitEffectNode allocations and clears the root node's data; ActiveEffect::~ActiveEffect then frees the root/header. Hit-effect objects are detached first and are not deleted by this list clear.",
     "mnemonic": "jz",
     "size": 2
   },

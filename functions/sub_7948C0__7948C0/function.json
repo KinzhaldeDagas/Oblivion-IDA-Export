@@ -1,19 +1,32 @@
 {
-  "callees_count": 14,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x7948C0",
+      "0x794A8E"
+    ]
+  ],
+  "chunks_sha256": "4d68892bd56e1a2dea8f4812b0ba545f2c3d7df2c70b951c7658f4b880ed5d4e",
+  "comment_regular": "Applies the optional Compute transform to stock indexed geometry.\n\nOblivion CIndexedGeometry::Transform. Applies the 4x4 stTransform to current and CPU-wind source coordinates, and rotates the normal/tangent/binormal streams with the transform's rotational portion.",
+  "comment_repeatable": "Oblivion CIndexedGeometry::Transform. Applies the 4x4 stTransform to current and CPU-wind source coordinates, and rotates the normal/tangent/binormal streams with the transform's rotational portion.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7948C0",
+  "display_name": "OB_CIndexedGeometry_Transform_010201A0",
   "end_ea": "0x794A8E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7948C0",
+  "name": "OB_CIndexedGeometry_Transform_010201A0",
   "segment": ".text",
   "sha256": "4d68892bd56e1a2dea8f4812b0ba545f2c3d7df2c70b951c7658f4b880ed5d4e",
   "size": 462,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7948C0",
-  "type": "float *__thiscall(_DWORD *this, float *)",
+  "total_chunk_size": 462,
+  "type": "void __thiscall(OB_CIndexedGeometry_010201A0 *this, const OB_stTransform_010201A0 *transform)",
   "xrefs_from_count": 175,
   "xrefs_to_count": 2
 }

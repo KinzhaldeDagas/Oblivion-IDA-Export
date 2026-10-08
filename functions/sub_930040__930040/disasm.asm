@@ -341,7 +341,6 @@
 0x930584: add     ecx, 20h ; ' '
 0x930587: mov     [esp+110h+var_B8], ecx
 0x93058B: jmp     short loc_930590
-0x93058D: align 10h
 0x930590: mov     eax, [edx]
 0x930592: mov     ecx, [esp+110h+var_F4]
 0x930596: lea     esi, [eax+ecx]
@@ -738,7 +737,6 @@
 0x930AAE: xor     ecx, ecx
 0x930AB0: mov     edx, 3F800000h
 0x930AB5: jmp     short loc_930AC0
-0x930AB7: align 10h
 0x930AC0: mov     dword ptr [esp+110h+var_D0], 0
 0x930AC8: mov     dword ptr [esp+110h+var_D0+4], 0
 0x930AD0: mov     dword ptr [esp+110h+var_D0+8], 0

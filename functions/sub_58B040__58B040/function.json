@@ -1,19 +1,36 @@
 {
-  "callees_count": 29,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 2,
+  "chunks": [
+    [
+      "0x58B040",
+      "0x58B21E"
+    ],
+    [
+      "0x9BD8A0",
+      "0x9BD8C6"
+    ]
+  ],
+  "chunks_sha256": "4e32b93611b33b4aff35f91f01a51eb99c806d0c3d439c6b1b9543c68f003af4",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_58B040",
+  "comment_repeatable": "Verified 2026-10-07: underscore-prefixed names scan dynamic trait array with case-insensitive comparison; existing entry increments lookupHits and reuses ID. requestedID=-1 allocates ID=endIndex+10000, new entry0x10 with id+0,lookup counter+4,BSStringT name+8; appends to growable array. Non-underscore names search first-character buckets before allocation. Fallout0x827DDCD0 uses map and additional validation; do not transfer its rejection rules.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "Tile::AddUserTrait",
   "end_ea": "0x58B21E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_58B040",
+  "name": "Tile::AddUserTrait",
   "segment": ".text",
   "sha256": "670bc90b7c5a0cdad24fb2c71c70513020a52d9da88dade0111a053894427efa",
   "size": 478,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x58B040",
-  "type": "char *__cdecl(unsigned __int8 *, char *arg4)",
-  "xrefs_from_count": 180,
+  "total_chunk_size": 516,
+  "type": "unsigned int __cdecl(const char *name, int requestedID)",
+  "xrefs_from_count": 194,
   "xrefs_to_count": 2
 }

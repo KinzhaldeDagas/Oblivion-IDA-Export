@@ -1,1 +1,4 @@
-QueuedFile
+struct QueuedFile
+{
+IOTask super;
+};

@@ -16,20 +16,20 @@
 0x4EBD22: jb      short loc_4EBD15
 0x4EBD24: xor     eax, eax
 0x4EBD26: test    eax, eax
-0x4EBD28: mov     [esp+14h+var_8], eax
+0x4EBD28: mov     [esp+14h+position], eax
 0x4EBD2C: jz      short loc_4EBD83
 0x4EBD2E: push    edi
 0x4EBD2F: nop
-0x4EBD30: lea     eax, [esp+18h+var_C]
-0x4EBD34: push    eax
-0x4EBD35: lea     ecx, [esp+1Ch+var_4]
-0x4EBD39: push    ecx
-0x4EBD3A: lea     edx, [esp+20h+var_8]
-0x4EBD3E: push    edx
-0x4EBD3F: mov     ecx, ebx
-0x4EBD41: mov     [esp+24h+var_C], 0
-0x4EBD49: call    sub_452600
-0x4EBD4E: mov     esi, [esp+18h+var_C]
+0x4EBD30: lea     eax, [esp+18h+valueOut]
+0x4EBD34: push    eax; valueOut
+0x4EBD35: lea     ecx, [esp+1Ch+keyOut]
+0x4EBD39: push    ecx; keyOut
+0x4EBD3A: lea     edx, [esp+20h+position]
+0x4EBD3E: push    edx; position
+0x4EBD3F: mov     ecx, ebx; self
+0x4EBD41: mov     [esp+24h+valueOut], 0
+0x4EBD49: call    NiTMap_U32Pointer_GetNextEntry
+0x4EBD4E: mov     esi, [esp+18h+valueOut]
 0x4EBD52: test    esi, esi
 0x4EBD54: jz      short loc_4EBD7B
 0x4EBD56: mov     edi, [esi]
@@ -38,13 +38,13 @@
 0x4EBD5C: mov     ecx, edi
 0x4EBD5E: call    sub_4EC740
 0x4EBD63: push    edi
-0x4EBD64: call    FormHeapFree
+0x4EBD64: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4EBD69: add     esp, 4
 0x4EBD6C: push    esi
 0x4EBD6D: mov     dword ptr [esi], 0
-0x4EBD73: call    FormHeapFree
+0x4EBD73: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4EBD78: add     esp, 4
-0x4EBD7B: cmp     [esp+18h+var_8], 0
+0x4EBD7B: cmp     [esp+18h+position], 0
 0x4EBD80: jnz     short loc_4EBD30
 0x4EBD82: pop     edi
 0x4EBD83: pop     esi

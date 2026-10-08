@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5E3590",
-    "line": "sub     esp, 10h",
+    "line": "sub     esp, 10h; Walk-speed branch used by sub_5E65B0 when run/swim/fly flags are absent. Calls Calc_WalkSpeed, then may clamp to package target actor's walk speed minus close-distance margin.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x5E35E1",
-    "line": "mov     ecx, [esi+58h]",
+    "line": "mov     ecx, [esi+58h]; MEF v30 verified ActorWithoutProcessCTD site: Actor +0x58 immediate vtable dereference. Null supplies AL=0 to vanilla test/setz at 0x005E35EE; non-null resumes 0x005E35E6.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x5E364A",
-    "line": "call    Calc_WalkSpeed",
+    "line": "call    Calc_WalkSpeed; TES4 authoritative: Calc_WalkSpeed. Uses Speed actor value, carried weight/encumbrance, weapon-out branch, creature/character walk min/max game settings, and sneak multiplier; selected by sub_5E65B0 when run/swim/fly-speed flags are absent.",
     "mnemonic": "call",
     "size": 5
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x5E36D0",
-    "line": "call    sub_5E3590",
+    "line": "call    sub_5E3590; Walk-speed branch used by sub_5E65B0 when run/swim/fly flags are absent. Calls Calc_WalkSpeed, then may clamp to package target actor's walk speed minus close-distance margin.",
     "mnemonic": "call",
     "size": 5
   },

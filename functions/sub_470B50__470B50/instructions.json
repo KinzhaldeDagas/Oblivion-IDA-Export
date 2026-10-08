@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x470B50",
-    "line": "fld     [esp+arg_4]",
+    "line": "fld     [esp+easeOutTime]; BSAnimGroupSequence deactivation wrapper. Delegates to NiControllerSequence_Deactivate with the secondary stop flag forced to zero.",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x470B54",
-    "line": "push    0; char",
+    "line": "push    0; transition",
     "mnemonic": "push",
     "size": 2
   },
@@ -19,19 +19,19 @@
   },
   {
     "ea": "0x470B57",
-    "line": "mov     ecx, [esp+8+arg_0]",
+    "line": "mov     ecx, [esp+8+sequence]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x470B5B",
-    "line": "fstp    [esp+8+var_8]; float",
+    "line": "fstp    [esp+8+var_8]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x470B5E",
-    "line": "call    sub_6C9CB0",
+    "line": "call    NiControllerSequence_Deactivate; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.",
     "mnemonic": "call",
     "size": 5
   },

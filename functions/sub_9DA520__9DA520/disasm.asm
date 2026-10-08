@@ -2,7 +2,7 @@
 0x9DA526: push    ecx
 0x9DA527: fstp    [esp+4+var_4]; float
 0x9DA52A: push    offset aFmagicboltopti; "fMagicBoltOptimalDistance"
-0x9DA52F: mov     ecx, offset fMagicBoltOptimalDistance
+0x9DA52F: mov     ecx, 0B3369Ch
 0x9DA534: call    GameSetting_ConstrAndReg_float
 0x9DA539: push    offset sub_A17820; void (__cdecl *)()
 0x9DA53E: call    _atexit

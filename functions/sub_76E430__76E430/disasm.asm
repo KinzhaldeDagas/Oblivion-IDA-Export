@@ -35,10 +35,10 @@
 0x76E47C: cmp     [esi+8], bp
 0x76E480: jbe     short loc_76E4A6
 0x76E482: mov     eax, [esi+1Ch]
-0x76E485: push    eax; Size
-0x76E486: push    ebx; Src
-0x76E487: push    edi; Dst
-0x76E488: call    _memcpy
+0x76E485: push    eax; byteCount
+0x76E486: push    ebx; source
+0x76E487: push    edi; destination
+0x76E488: call    _memcpy;
 0x76E48D: mov     eax, [esi+1Ch]
 0x76E490: add     ebx, [esi+18h]
 0x76E493: add     edi, [esi+20h]

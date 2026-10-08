@@ -1,7 +1,7 @@
 0x5E0340: push    ecx
 0x5E0341: push    esi
 0x5E0342: mov     esi, ecx
-0x5E0344: mov     ecx, offset TimeGlobals
+0x5E0344: mov     ecx, 0B332E0h
 0x5E0349: call    TimeGlobals_GetGameHour
 0x5E034E: fstp    [esp+8+var_4]
 0x5E0352: fld     [esp+8+var_4]

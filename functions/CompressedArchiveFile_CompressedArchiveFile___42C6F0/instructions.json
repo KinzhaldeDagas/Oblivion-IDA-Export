@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x42C730",
-    "line": "push    edi; Size",
+    "line": "push    edi; byteCount",
     "mnemonic": "push",
     "size": 1
   },
@@ -127,19 +127,19 @@
   },
   {
     "ea": "0x42C733",
-    "line": "push    edx; Src",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x42C734",
-    "line": "push    ecx; Dst",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x42C735",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,13 +397,13 @@
   },
   {
     "ea": "0x42C7CA",
-    "line": "cmp     dword ptr [ebx+4], 0",
+    "line": "cmp     dword ptr [ebx+4], 0; MEF v28 decode correction: compressed archive hook must start here and own the avail_in branch plus refill/output-check window. Starting at 0x42C7E8 leaves 0x42C7CE -> 0x42C7EB jumping into overwritten bytes.",
     "mnemonic": "cmp",
     "size": 4
   },
   {
     "ea": "0x42C7CE",
-    "line": "jnz     short loc_42C7EB",
+    "line": "jnz     short loc_42C7EB; MEF v28 proof: this jnz targets 0x42C7EB, so 0x42C7EB is a secondary entry into the output check when zlib still has input.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -457,19 +457,19 @@
   },
   {
     "ea": "0x42C7E3",
-    "line": "call    sub_42C3E0",
+    "line": "call    sub_42C3E0; EnginePatch v5 CTD hotfix: bug remains verified here (raw-read clamp can underflow), but the full archive raw-read replacement is disabled by default because this asset-stream primitive is load-critical.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x42C7E8",
-    "line": "mov     [esi+10h], eax",
+    "line": "mov     [esi+10h], eax; MEF v28 correction: old dormant hook start was unsafe here because 0x42C7EB is an internal branch target inside the overwritten 0x42C7E8..0x42C7F2 window.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x42C7EB",
-    "line": "cmp     dword ptr [ebx+10h], 0",
+    "line": "cmp     dword ptr [ebx+10h], 0; MEF v28 proof: WER at this address matches the secondary branch target that was overwritten by the earlier 0x42C7E8 hook design; archive group remains disabled pending runtime proof.",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -625,7 +625,7 @@
   },
   {
     "ea": "0x42C83B",
-    "line": "push    eax; Size",
+    "line": "push    eax; byteCount",
     "mnemonic": "push",
     "size": 1
   },
@@ -637,19 +637,19 @@
   },
   {
     "ea": "0x42C842",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x42C843",
-    "line": "push    ecx; Dst",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x42C844",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x42C858",
-    "line": "ja      loc_42C763",
+    "line": "ja      loc_42C763; MEF runtime trace 2026-05-30: WER APPCRASH c0000005 reported RVA 0002C859 inside this branch back to refill. It maps to CompressedArchiveFile::Read while v22 archive streaming guards were installed; v23 disables the group.",
     "mnemonic": "ja",
     "size": 6
   },
@@ -745,25 +745,25 @@
   },
   {
     "ea": "0x42C877",
-    "line": "push    ebp; Size",
+    "line": "push    ebp; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x42C878",
-    "line": "push    edx; Src",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x42C879",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x42C87A",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -847,7 +847,7 @@
   },
   {
     "ea": "0x42C8A3",
-    "line": "push    ebp; Size",
+    "line": "push    ebp; byteCount",
     "mnemonic": "push",
     "size": 1
   },
@@ -859,19 +859,19 @@
   },
   {
     "ea": "0x42C8A6",
-    "line": "push    edx; Src",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x42C8A7",
-    "line": "push    ecx; Dst",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x42C8A8",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },

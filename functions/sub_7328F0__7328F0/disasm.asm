@@ -5,7 +5,7 @@
 0x7328F4: mov     edi, [esp+10h+arg_0]
 0x7328F8: push    edi
 0x7328F9: mov     esi, ecx
-0x7328FB: call    nullsub_returnvVoid_1arg
+0x7328FB: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x732900: mov     al, [esi+8]
 0x732903: push    1
 0x732905: lea     ecx, [esp+14h+var_4]

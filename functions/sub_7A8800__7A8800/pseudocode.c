@@ -1,46 +1,50 @@
-unsigned int *__thiscall sub_7A8800(unsigned int *this, int a2)
+// OBLIVION AUTHORITY (2026-08-30): Advances the debug vector<bool> iterator by a signed bit distance, carrying across packed 32-bit words and preserving bitOffset 0..31.
+OB_stVectorBoolIterator_010201A0 *__thiscall OB_stVectorBoolIterator_Advance_010201A0(
+        OB_stVectorBoolIterator_010201A0 *this,
+        int delta)
 {
-  unsigned int v3; // ebx
-  int v4; // ebp
-  unsigned int v5; // eax
-  int v6; // eax
-  int v8; // edx
+  int v2; // ebx
+  unsigned int *begin; // ebx
+  unsigned int bitOffset; // ebp
+  unsigned int v6; // eax
+  unsigned int v7; // eax
+  unsigned int v9; // edx
 
-  if ( !a2 )
-    return this;
-  if ( !*this || !*(this + 1) )
-    _invalid_parameter_noinfo();
-  v3 = *(_DWORD *)(*this + 8);
-  v4 = *(this + 2);
-  if ( a2 >= 0 )
+  if ( !delta ) /*0x7a880a*/
+    return this; /*0x7a880a*/
+  if ( !this->owner || !this->word ) /*0x7a8815*/
+    _invalid_parameter_noinfo(v2, delta, (int)this); /*0x7a881b*/
+  begin = this->owner->words.begin; /*0x7a8823*/
+  bitOffset = this->bitOffset; /*0x7a882c*/
+  if ( delta >= 0 ) /*0x7a882f*/
   {
-    if ( v3 > *(_DWORD *)(*this + 0xC) )
-      _invalid_parameter_noinfo();
-    if ( (unsigned int)(a2 + v4 + 0x20 * ((int)(*(this + 1) - v3) >> 2)) <= *(_DWORD *)*this )
-      goto LABEL_14;
+    if ( begin > this->owner->words.end ) /*0x7a8855*/
+      _invalid_parameter_noinfo((int)begin, delta, (int)this); /*0x7a8857*/
+    if ( delta + bitOffset + 0x20 * (this->word - begin) <= this->owner->logicalSize ) /*0x7a886f*/
+      goto LABEL_14; /*0x7a886f*/
   }
   else
   {
-    if ( v3 > *(_DWORD *)(*this + 0xC) )
-      _invalid_parameter_noinfo();
-    if ( v4 + 0x20 * ((int)(*(this + 1) - v3) >> 2) >= (unsigned int)-a2 )
-      goto LABEL_14;
+    if ( begin > this->owner->words.end ) /*0x7a8834*/
+      _invalid_parameter_noinfo((int)begin, delta, (int)this); /*0x7a8836*/
+    if ( bitOffset + 0x20 * (this->word - begin) >= -delta ) /*0x7a884e*/
+      goto LABEL_14; /*0x7a884e*/
   }
-  _invalid_parameter_noinfo();
+  _invalid_parameter_noinfo((int)begin, delta, (int)this); /*0x7a8871*/
 LABEL_14:
-  if ( a2 < 0 )
+  if ( delta < 0 ) /*0x7a887a*/
   {
-    v5 = *(this + 2);
-    if ( v5 < -a2 )
+    v6 = this->bitOffset; /*0x7a887c*/
+    if ( v6 < -delta ) /*0x7a8885*/
     {
-      v6 = a2 + v5;
-      *(this + 1) += 0xFFFFFFFC - 4 * ((0xFFFFFFFF - v6) >> 5);
-      *(this + 2) = v6 & 0x1F;
-      return this;
+      v7 = delta + v6; /*0x7a888a*/
+      this->word = (unsigned int *)((char *)this->word + 0xFFFFFFFC - 4 * ((0xFFFFFFFF - v7) >> 5)); /*0x7a889c*/
+      this->bitOffset = v7 & 0x1F; /*0x7a88a2*/
+      return this; /*0x7a88a9*/
     }
   }
-  v8 = *(this + 2);
-  *(this + 1) += 4 * ((unsigned int)(v8 + a2) >> 5);
-  *(this + 2) = (v8 + a2) & 0x1F;
-  return this;
+  v9 = this->bitOffset; /*0x7a88ac*/
+  this->word += (v9 + delta) >> 5; /*0x7a88bb*/
+  this->bitOffset = (v9 + delta) & 0x1F; /*0x7a88c1*/
+  return this; /*0x7a88a5*/
 }

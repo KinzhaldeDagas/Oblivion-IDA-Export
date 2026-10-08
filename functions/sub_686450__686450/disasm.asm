@@ -36,7 +36,7 @@
 0x6864CC: test    edi, edi
 0x6864CE: jz      loc_6868E2
 0x6864D4: mov     ecx, edi; this
-0x6864D6: call    MobileObject_GetCharProxy
+0x6864D6: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x6864DB: test    eax, eax
 0x6864DD: jz      loc_6868E2
 0x6864E3: mov     ecx, [edi+58h]
@@ -64,7 +64,7 @@
 0x686527: jz      short loc_68652E
 0x686529: mov     [esp+144h+var_129], 1
 0x68652E: mov     ecx, edi
-0x686530: call    sub_5E0660
+0x686530: call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.
 0x686535: fstp    [esp+144h+var_128]
 0x686539: fldz
 0x68653B: fld     [esp+144h+var_128]
@@ -137,35 +137,35 @@
 0x686616: mov     [esp+144h+var_B0], eax
 0x68661D: lea     ecx, [esp+144h+a2]
 0x686624: mov     [esp+144h+var_4], eax
-0x68662B: call    bhkWorldRayCastData__Init
+0x68662B: call    bhkWorldRayCastData__Init; TES4 authoritative: bhkWorldRayCastData::Init. Raycast input From at +0x00, To at +0x10, enable/filter at +0x20/+0x24, output hit fraction at +0x44, root collidable at +0x50, extra collector pointers at +0x70/+0x74/+0x78.
 0x686630: mov     ecx, edi; this
-0x686632: call    MobileObject_GetCharProxy
+0x686632: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x686637: mov     ecx, eax
-0x686639: call    sub_608B30
+0x686639: call    sub_608B30; Character proxy collision-filter helper used by native movement ground probes. Returns high-word collision filter/layer from charProxy+0x364 path; ground probe builds FilterInfo=(return<<16)|0x1B.
 0x68663E: mov     edx, [esi+8]
 0x686641: shl     eax, 10h
-0x686644: mov     [esp+144h+var_F8], edx
-0x686648: fld     [esp+144h+var_F8]
-0x68664C: fadd    [esp+144h+var_128]
+0x686644: mov     [esp+144h+start.z], edx
+0x686648: fld     [esp+144h+start.z]
+0x68664C: fadd    [esp+144h+var_128]; Actor movement ground-probe setup: From.z = requested position z + actor vertical extent. FilterInfo = (charProxy collision layer << 16) | 0x1B.
 0x686650: or      eax, 1Bh
 0x686653: lea     ecx, [esp+144h+var_E0]
 0x686657: mov     [esp+144h+a2.RayHitCollector1], ecx
 0x68665E: mov     ecx, [esi+4]
-0x686661: fstp    [esp+144h+var_F8]
+0x686661: fstp    [esp+144h+start.z]
 0x686665: mov     [esp+144h+a2.WorldRayCastInput.FilterInfo], eax
 0x68666C: mov     eax, [esi]
-0x68666E: mov     [esp+144h+var_FC], ecx
-0x686672: mov     [esp+144h+var_11C], ecx
-0x686676: lea     ecx, [esp+144h+var_100]
-0x68667A: mov     [esp+144h+var_100], eax
-0x68667E: mov     [esp+144h+var_120], eax
-0x686682: mov     eax, [esp+144h+var_F8]
+0x68666E: mov     [esp+144h+start.y], ecx
+0x686672: mov     [esp+144h+end.y], ecx
+0x686676: lea     ecx, [esp+144h+start]
+0x68667A: mov     [esp+144h+start.x], eax
+0x68667E: mov     [esp+144h+end.x], eax
+0x686682: mov     eax, [esp+144h+start.z]
 0x686686: push    ecx
 0x686687: lea     ecx, [esp+148h+a2]
 0x68668E: mov     [esp+148h+a2.RayHitCollector2], 0
-0x686699: mov     [esp+148h+var_118], eax
-0x68669D: call    bhkWorldRayCastData__SetCastInputFrom
-0x6866A2: fld     [esp+144h+var_124]
+0x686699: mov     [esp+148h+end.z], eax
+0x68669D: call    bhkWorldRayCastData__SetCastInputFrom; TES4 authoritative: bhkWorldRayCastData::SetCastInputFrom; scales world-space NiPoint3 into Havok units using hkFactor and writes ray From.
+0x6866A2: fld     [esp+144h+var_124]; Downward ground-probe ray length = actorHeight + max(256.0, actorHeight). Direction vector passed to 0x663FF0 is (0, 0, -rayLength).
 0x6866A6: fadd    [esp+144h+var_128]
 0x6866AA: lea     edx, [esp+144h+var_114]
 0x6866AE: push    edx
@@ -181,22 +181,22 @@
 0x6866D6: fstp    [esp+148h+var_110]
 0x6866DA: fmul    qword ptr ds:0A3D360h
 0x6866E0: fstp    [esp+148h+var_10C]
-0x6866E4: call    sub_663FF0
+0x6866E4: call    sub_663FF0; bhkWorldRayCastData::SetCastDirectionVector. Converts a world-space direction vector by hkFactor and writes data+0x60. Used by actor movement probes for downward ground snapping instead of an absolute To point.
 0x6866E9: mov     ecx, ds:0B333A0h; this
 0x6866EF: lea     eax, [esp+144h+a2]
 0x6866F6: push    eax; a2
-0x6866F7: call    TES__CastRay
-0x6866FC: fld     [esp+144h+var_118]
+0x6866F7: call    TES__CastRay; Native ground probe raycast. After TES::CastRay, if RootCollidable is set, Oblivion computes snappedZ = fromZ - HitFraction * rayLength; if no hit, it uses fromZ - rayLength.
+0x6866FC: fld     [esp+144h+end.z]
 0x686700: cmp     [esp+144h+a2.WorldRayCastOutput.RootCollidable], 0
 0x686708: mov     esi, eax
 0x68670A: jz      short loc_68671B
-0x68670C: fld     [esp+144h+a2.WorldRayCastOutput.HitFraction]
+0x68670C: fld     [esp+144h+a2.WorldRayCastOutput.HitFraction]; HitFraction application for downward snap: ST0 starts as From.z; HitFraction * rayLength is subtracted to produce the ground/contact z used in TeleportData.
 0x686713: fmul    [esp+144h+var_F0]
 0x686717: fsubp   st(1), st
 0x686719: jmp     short loc_68671F
 0x68671B: fsub    [esp+144h+var_F0]
 0x68671F: mov     edx, [edi]
-0x686721: fstp    [esp+144h+var_118]
+0x686721: fstp    [esp+144h+end.z]
 0x686725: mov     eax, [edx+288h]
 0x68672B: push    38h ; '8'
 0x68672D: mov     ecx, edi
@@ -215,14 +215,14 @@
 0x68674B: jz      short loc_68676C
 0x68674D: test    ebx, ebx
 0x68674F: jz      short loc_68676C
-0x686751: fld     [esp+144h+var_118]
+0x686751: fld     [esp+144h+end.z]
 0x686755: fld     [esp+144h+var_104]
 0x686759: fcom    st(1)
 0x68675B: fnstsw  ax
 0x68675D: fstp    st(1)
 0x68675F: test    ah, 41h
 0x686762: jnz     short loc_68676A
-0x686764: fstp    [esp+144h+var_118]
+0x686764: fstp    [esp+144h+end.z]
 0x686768: jmp     short loc_68676C
 0x68676A: fstp    st
 0x68676C: cmp     [esp+144h+var_129], 0
@@ -230,27 +230,27 @@
 0x686773: fld1
 0x686775: lea     ecx, [esp+144h+var_114]
 0x686779: fst     [esp+144h+var_114]
-0x68677D: push    ecx
+0x68677D: push    ecx; endColor
 0x68677E: fstp    dword ptr [esp+148h+var_F0+4]
-0x686782: lea     edx, [esp+148h+var_120]
-0x686786: push    edx
+0x686782: lea     edx, [esp+148h+end]
+0x686786: push    edx; end
 0x686787: lea     eax, [esp+14Ch+var_F0]
 0x68678B: fst     [esp+14Ch+var_110]
-0x68678F: push    eax
+0x68678F: push    eax; startColor
 0x686790: fst     [esp+150h+var_10C]
-0x686794: lea     ecx, [esp+150h+var_100]
+0x686794: lea     ecx, [esp+150h+start]
 0x686798: fst     [esp+150h+var_108]
-0x68679C: push    ecx
+0x68679C: push    ecx; start
 0x68679D: fst     dword ptr [esp+154h+var_F0]
 0x6867A1: fst     [esp+154h+var_E8]
 0x6867A5: fstp    [esp+154h+var_E4]
-0x6867A9: call    sub_47F070
+0x6867A9: call    NiLines_CreateSegment; Verified generic NiLines_CreateSegment: copies two endpoint positions and two per-vertex colors, supplies line flags [1,0], and returns a two-vertex NiLines segment. TESPathGrid_RebuildRenderedGraph calls it for adjacency edges.
 0x6867AE: add     esp, 10h
 0x6867B1: mov     ebx, eax
-0x6867B3: call    sub_4E70B0
+0x6867B3: call    DebugRender_GetOrCreateVertexColorProperty; Verified shared debug property getter/creator, used by PathGrid debug rendering and the registered TestSeenData/TestLocalMap visualization commands, plus other debug-geometry callers. Lazily constructs NiVertexColorProperty, sets its observed render flags, stores the refcounted global g_DebugRenderVertexColorProperty and returns it.
 0x6867B8: push    eax; a2
 0x6867B9: mov     ecx, ebx; this
-0x6867BB: call    sub_405680
+0x6867BB: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x6867C0: fld     dword ptr ds:0A3D8F0h
 0x6867C6: push    ecx
 0x6867C7: mov     ecx, ds:0B333A0h
@@ -260,7 +260,7 @@
 0x6867D6: jmp     short loc_6867DA
 0x6867D8: fstp    st
 0x6867DA: mov     ebx, [esp+144h+var_F4]
-0x6867DE: lea     edx, [esp+144h+var_120]
+0x6867DE: lea     edx, [esp+144h+end]
 0x6867E2: push    edx
 0x6867E3: mov     ecx, ebx
 0x6867E5: call    TeleportData__SetTeleportPosition
@@ -294,7 +294,7 @@
 0x686847: test    al, al
 0x686849: jz      short loc_68686A
 0x68684B: fld     [esp+144h+var_104]
-0x68684F: fsub    [esp+144h+var_118]
+0x68684F: fsub    [esp+144h+end.z]
 0x686853: fld     [esp+144h+var_128]
 0x686857: fmul    qword ptr ds:0A432F0h
 0x68685D: fcompp
@@ -306,26 +306,26 @@
 0x686871: fldz
 0x686873: lea     eax, [esp+144h+var_114]
 0x686877: fst     [esp+144h+var_114]
-0x68687B: push    eax; int
+0x68687B: push    eax; vertexColor
 0x68687C: fst     [esp+148h+var_110]
 0x686880: push    ecx
 0x686881: fld1
 0x686883: fstp    [esp+14Ch+var_10C]
 0x686887: fstp    [esp+14Ch+var_108]
 0x68688B: fld     dword ptr ds:0A31E2Ch
-0x686891: fstp    [esp+14Ch+var_14C]; float
-0x686894: call    sub_47FD30
+0x686891: fstp    [esp+14Ch+scale]; scale
+0x686894: call    NiTriShape_CreateOctahedronGeometry; Verified generic NiTriShape geometry factory, used by PathGrid rendering and multiple other callers. It builds six octahedron vertices (four ±scale X/Y equatorial points and two ±scale*sqrt(2) Z poles), repeats a supplied NiColorAlpha for all six, writes 24 u16 indices for eight triangular faces, and returns a NiTriShape. This constructs a filled octahedron surface; wireframe is a separate scene property.
 0x686899: add     esp, 8
 0x68689C: mov     esi, eax
-0x68689E: call    sub_4E70B0
+0x68689E: call    DebugRender_GetOrCreateVertexColorProperty; Verified shared debug property getter/creator, used by PathGrid debug rendering and the registered TestSeenData/TestLocalMap visualization commands, plus other debug-geometry callers. Lazily constructs NiVertexColorProperty, sets its observed render flags, stores the refcounted global g_DebugRenderVertexColorProperty and returns it.
 0x6868A3: push    eax; a2
 0x6868A4: mov     ecx, esi; this
-0x6868A6: call    sub_405680
-0x6868AB: mov     ecx, [esp+144h+var_120]
+0x6868A6: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
+0x6868AB: mov     ecx, [esp+144h+end.x]
 0x6868AF: mov     [esi+54h], ecx
-0x6868B2: mov     edx, [esp+144h+var_11C]
+0x6868B2: mov     edx, [esp+144h+end.y]
 0x6868B6: mov     [esi+58h], edx
-0x6868B9: mov     eax, [esp+144h+var_118]
+0x6868B9: mov     eax, [esp+144h+end.z]
 0x6868BD: mov     [esi+5Ch], eax
 0x6868C0: fld     dword ptr ds:0A3D8F0h
 0x6868C6: push    ecx
@@ -363,21 +363,21 @@
 0x686929: lea     ecx, [esp+144h+var_114]
 0x68692D: fstp    [esp+144h+var_108]
 0x686931: fld     dword ptr ds:0A31E2Ch
-0x686937: push    ecx; int
+0x686937: push    ecx; vertexColor
 0x686938: push    ecx
-0x686939: fstp    [esp+14Ch+var_14C]; float
-0x68693C: call    sub_47FD30
+0x686939: fstp    [esp+14Ch+scale]; scale
+0x68693C: call    NiTriShape_CreateOctahedronGeometry; Verified generic NiTriShape geometry factory, used by PathGrid rendering and multiple other callers. It builds six octahedron vertices (four ±scale X/Y equatorial points and two ±scale*sqrt(2) Z poles), repeats a supplied NiColorAlpha for all six, writes 24 u16 indices for eight triangular faces, and returns a NiTriShape. This constructs a filled octahedron surface; wireframe is a separate scene property.
 0x686941: add     esp, 8
 0x686944: mov     esi, eax
-0x686946: call    sub_4E70B0
+0x686946: call    DebugRender_GetOrCreateVertexColorProperty; Verified shared debug property getter/creator, used by PathGrid debug rendering and the registered TestSeenData/TestLocalMap visualization commands, plus other debug-geometry callers. Lazily constructs NiVertexColorProperty, sets its observed render flags, stores the refcounted global g_DebugRenderVertexColorProperty and returns it.
 0x68694B: push    eax; a2
 0x68694C: mov     ecx, esi; this
-0x68694E: call    sub_405680
-0x686953: mov     edx, [esp+144h+var_120]
+0x68694E: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
+0x686953: mov     edx, [esp+144h+end.x]
 0x686957: mov     [esi+54h], edx
-0x68695A: mov     eax, [esp+144h+var_11C]
+0x68695A: mov     eax, [esp+144h+end.y]
 0x68695E: mov     [esi+58h], eax
-0x686961: mov     ecx, [esp+144h+var_118]
+0x686961: mov     ecx, [esp+144h+end.z]
 0x686965: mov     [esi+5Ch], ecx
 0x686968: jmp     loc_6868C0
 0x68696D: cmp     [ebp+arg_C], 0
@@ -385,7 +385,7 @@
 0x686977: test    esi, esi
 0x686979: jz      loc_686A29
 0x68697F: push    esi
-0x686980: call    sub_4DC270
+0x686980: call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.
 0x686985: mov     esi, eax
 0x686987: add     esp, 4
 0x68698A: test    esi, esi
@@ -443,3 +443,16 @@
 0x686A32: add     esp, 0Ch
 0x686A35: mov     al, 1
 0x686A37: jmp     loc_6868E4
+0x9C4F40: lea     ecx, [ebp+var_E0]; void *
+0x9C4F46: jmp     sub_4F5E90
+0x9C4F4B: mov     edx, [esp-4+arg_4]
+0x9C4F4F: lea     eax, [edx-134h]
+0x9C4F55: mov     ecx, [edx-138h]
+0x9C4F5B: xor     ecx, eax
+0x9C4F5D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C4F62: add     eax, 0Ch
+0x9C4F65: mov     ecx, [edx-8]
+0x9C4F68: xor     ecx, eax
+0x9C4F6A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C4F6F: mov     eax, offset stru_AED7C4
+0x9C4F74: jmp     ___CxxFrameHandler3

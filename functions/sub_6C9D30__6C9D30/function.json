@@ -1,19 +1,32 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6C9D30",
+      "0x6C9DFF"
+    ]
+  ],
+  "chunks_sha256": "cc2c29f3aacb1759b70e9880a0a4a71a6791828fab6485c853b732de147183fa",
+  "comment_regular": "Internal temporary-pose transition: activates the generated pose sequence, activates the destination with ease-in, deactivates the pose over that interval, and aligns normalized timing fields. Called by NiControllerManager_BlendFromPose.",
+  "comment_repeatable": "Internal temporary-pose transition: activates the generated pose sequence, activates the destination with ease-in, deactivates the pose over that interval, and aligns normalized timing fields. Called by NiControllerManager_BlendFromPose.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "sub_6C9D30",
   "end_ea": "0x6C9DFF",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_6C9D30",
   "segment": ".text",
   "sha256": "cc2c29f3aacb1759b70e9880a0a4a71a6791828fab6485c853b732de147183fa",
   "size": 207,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6C9D30",
-  "type": "char __thiscall(float *this, float *arg0, float, float, NiD3DPass *, float, float, int)",
+  "total_chunk_size": 207,
+  "type": "char __thiscall(NiControllerSequence *this, NiControllerSequence *arg0, float easeInTime, float, NiD3DPass *, float, float weight, NiControllerSequence *timeSyncSequence)",
   "xrefs_from_count": 77,
   "xrefs_to_count": 1
 }

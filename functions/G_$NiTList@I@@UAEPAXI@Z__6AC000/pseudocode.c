@@ -2,8 +2,8 @@ NiTPointerList__BSImageSpaceShader *__thiscall NiTList<unsigned int>::`scalar de
         NiTPointerList__BSImageSpaceShader *this,
         char a2)
 {
-  NiTList<unsigned int>::~NiTList<unsigned int>(this);
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  NiTList<unsigned int>::~NiTList<unsigned int>(this); /*0x6ac003*/
+  if ( (a2 & 1) != 0 ) /*0x6ac00d*/
+    FormHeapFree((unsigned int)this); /*0x6ac010*/
+  return this; /*0x6ac01a*/
 }

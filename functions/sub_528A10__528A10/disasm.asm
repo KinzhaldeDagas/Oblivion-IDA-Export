@@ -13,7 +13,7 @@
 0x528A30: lea     eax, [esp+13Ch+var_C]
 0x528A37: mov     large fs:0, eax
 0x528A3D: mov     ebx, ecx
-0x528A3F: mov     [esp+13Ch+var_120], ebx
+0x528A3F: mov     [esp+13Ch+npc], ebx
 0x528A43: mov     esi, [esp+13Ch+arg_0]
 0x528A4A: mov     ecx, [esi+3Ch]
 0x528A4D: xor     edi, edi
@@ -25,9 +25,9 @@
 0x528A5C: call    edx
 0x528A5E: mov     [esp+13Ch+var_128], eax
 0x528A62: mov     edi, eax
-0x528A64: mov     ecx, [esp+13Ch+arg_4]
-0x528A6B: push    0
-0x528A6D: call    sub_477EC0
+0x528A64: mov     ecx, [esp+13Ch+arg_4]; this
+0x528A6B: push    0; nodeIndex
+0x528A6D: call    ActorSkinInfo_GetCachedNode; Returns ActorSkinInfo cached node at +8+nodeIndex*8. Index 6 is QuiverNode at +0x38, the native Arrow:0 clone source.
 0x528A72: mov     ebp, eax
 0x528A74: mov     eax, [esi]
 0x528A76: mov     edx, [eax+164h]
@@ -116,7 +116,7 @@
 0x528B88: mov     ecx, [esp+13Ch+var_124]
 0x528B8C: push    ecx
 0x528B8D: push    ebx
-0x528B8E: call    sub_7165B0
+0x528B8E: call    sub_7165B0; CustomAnimSupport evidence: queued idle loader controller-manager data attach/bind helper.
 0x528B93: mov     esi, [esp+144h+arg_0]
 0x528B9A: mov     edi, [esp+144h+var_128]
 0x528B9E: add     esp, 8
@@ -130,26 +130,26 @@
 0x528BC2: test    ecx, ecx
 0x528BC4: jz      short loc_528C1C
 0x528BC6: push    6
-0x528BC8: call    NiNode_GetNiPropertyByID
+0x528BC8: call    NiNode_GetNiPropertyByID;
 0x528BCD: test    eax, eax
 0x528BCF: jz      short loc_528C1C
-0x528BD1: lea     ecx, [esp+13Ch+var_D0]
-0x528BD5: call    FaceGenHeadParameters_Ctor
-0x528BDA: mov     eax, [esp+13Ch+var_120]
-0x528BDE: mov     ecx, [eax+0E8h]
-0x528BE4: lea     edx, [esp+13Ch+var_D0]
-0x528BE8: push    edx
-0x528BE9: push    eax
+0x528BD1: lea     ecx, [esp+13Ch+parameters]; this
+0x528BD5: call    FaceGenRenderState_Construct; Constructs a 0xC4 FaceGenRenderState. The first 0x60 bytes are FaceGenHeadParameters; appearance assets and four 0x10-byte pointer arrays follow.
+0x528BDA: mov     eax, [esp+13Ch+npc]
+0x528BDE: mov     ecx, [eax+0E8h]; this
+0x528BE4: lea     edx, [esp+13Ch+parameters]
+0x528BE8: push    edx; outState
+0x528BE9: push    eax; npc
 0x528BEA: mov     [esp+144h+var_4], 0
-0x528BF5: call    TESRace_GetFaceGenHeadParameters
-0x528BFA: lea     eax, [esp+13Ch+var_D0]
-0x528BFE: push    eax
-0x528BFF: push    ebp
-0x528C00: call    BSFaceGen_DoSomethingWithFaceGenNode
+0x528BF5: call    TESRace_BuildFaceGenRenderState; Builds the complete FaceGenRenderState from this race and an optional TESNPC. Resolves absolute coefficients, appearance selections, the nine head-part resources, texture overrides, race tint data, and fallback eyes.
+0x528BFA: lea     eax, [esp+13Ch+parameters]
+0x528BFE: push    eax; state
+0x528BFF: push    ebp; faceNode
+0x528C00: call    BSFaceGen_ApplyHeadParametersToNode; Applies a complete FaceGenRenderState to a BSFaceGenNiNode: projects age, binds nine head-part resources, handles sex-specific parts, eyes and hair, then rebuilds property state and updates the node.
 0x528C05: add     esp, 8
-0x528C08: lea     ecx, [esp+13Ch+var_D0]
+0x528C08: lea     ecx, [esp+13Ch+parameters]; this
 0x528C0C: mov     [esp+13Ch+var_4], 0FFFFFFFFh
-0x528C17: call    FaceGenHeadParameters_Dtor
+0x528C17: call    FaceGenRenderState_Destruct; Destroys FaceGenRenderState: releases texture-override smart pointers, destroys the four pointer arrays, then destroys the four embedded FaceGen coefficient matrices.
 0x528C1C: mov     edx, [ebp+0]
 0x528C1F: test    ebx, ebx
 0x528C21: setz    al
@@ -196,7 +196,7 @@
 0x528CA8: mov     eax, [esp+13Ch+var_124]
 0x528CAC: push    eax
 0x528CAD: push    ebp
-0x528CAE: call    sub_7165B0
+0x528CAE: call    sub_7165B0; CustomAnimSupport evidence: queued idle loader controller-manager data attach/bind helper.
 0x528CB3: mov     edx, [ebp+0]
 0x528CB6: mov     eax, [edx+0C4h]
 0x528CBC: add     esp, 8
@@ -235,7 +235,7 @@
 0x528D0E: mov     eax, [edx+78h]
 0x528D11: call    eax
 0x528D13: push    ebx; a2
-0x528D14: mov     ebx, [esp+140h+var_120]
+0x528D14: mov     ebx, [esp+140h+npc]
 0x528D18: lea     ecx, [ebx+1D4h]; this
 0x528D1E: call    NiSmartPointer_Set??
 0x528D23: push    ebp; a2
@@ -244,13 +244,13 @@
 0x528D2F: mov     ecx, edi
 0x528D31: call    NiNode_UpdateDynamicEffectState
 0x528D36: mov     ecx, edi; this
-0x528D38: call    NiAVObject_InitializePropertyState
+0x528D38: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x528D3D: fldz
 0x528D3F: push    0; a3
 0x528D41: push    ecx
 0x528D42: mov     ecx, edi; this
 0x528D44: fstp    [esp+144h+var_144]; a2
-0x528D47: call    NiAVObject_UpdateNiAVObject
+0x528D47: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x528D4C: jmp     short loc_528D5F
 0x528D4E: mov     ecx, [ebx+0Ch]
 0x528D51: push    ecx; ArgList
@@ -270,3 +270,12 @@
 0x528D7B: pop     ebx
 0x528D7C: add     esp, 128h
 0x528D82: retn    10h
+0x9B8310: lea     ecx, [ebp-0D0h]; this
+0x9B8316: jmp     FaceGenRenderState_Destruct; Destroys FaceGenRenderState: releases texture-override smart pointers, destroys the four pointer arrays, then destroys the four embedded FaceGen coefficient matrices.
+0x9B831B: mov     edx, [esp+arg_4]
+0x9B831F: lea     eax, [edx-12Ch]
+0x9B8325: mov     ecx, [edx-130h]
+0x9B832B: xor     ecx, eax
+0x9B832D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B8332: mov     eax, offset stru_AE2A10
+0x9B8337: jmp     ___CxxFrameHandler3

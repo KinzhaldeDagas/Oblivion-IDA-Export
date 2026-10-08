@@ -1,4 +1,4 @@
-0x6B1210: sub     esp, 88h
+0x6B1210: sub     esp, 88h; Footstep/creature animation event dispatcher. Handles creature anim sounds, terrain/water/armor/sneak footstep selection, positions played sound at the actor, and applies sound-system range gating.
 0x6B1216: mov     eax, ds:0B3C20Ch
 0x6B121B: push    ebp
 0x6B121C: xor     ebp, ebp
@@ -104,7 +104,7 @@
 0x6B1387: add     esp, 14h
 0x6B138A: push    ecx
 0x6B138B: mov     ecx, eax
-0x6B138D: call    sub_51CEC0
+0x6B138D: call    TESCreature_SelectSoundForAnimEnum; TESCreature sound selector: walks inherited creature data, chooses a sound entry by category index and probability.
 0x6B1392: cmp     eax, ebp
 0x6B1394: jz      loc_6B18AB
 0x6B139A: mov     ecx, ds:0B3C0F0h
@@ -120,7 +120,7 @@
 0x6B13BC: jz      loc_6B18AB
 0x6B13C2: fld     [esp+98h+var_78]
 0x6B13C6: sub     esp, 0Ch
-0x6B13C9: fstp    [esp+0A4h+var_9C]; float
+0x6B13C9: fstp    dword ptr [esp+0A4h+var_9C]; float
 0x6B13CD: mov     ecx, esi
 0x6B13CF: fld     [esp+0A4h+var_7C]
 0x6B13D3: fstp    [esp+0A4h+var_A0]; float
@@ -135,17 +135,17 @@
 0x6B13F2: fld     dword ptr ds:0A52A74h
 0x6B13F8: push    ecx
 0x6B13F9: mov     ecx, esi
-0x6B13FB: fstp    [esp+9Ch+var_9C]; float
+0x6B13FB: fstp    dword ptr [esp+9Ch+var_9C]; float
 0x6B13FE: call    sub_6B7280
 0x6B1403: fld     dword ptr ds:0A57F50h
 0x6B1409: push    ecx
-0x6B140A: fstp    [esp+9Ch+var_9C]; float
+0x6B140A: fstp    dword ptr [esp+9Ch+var_9C]; float
 0x6B140D: call    Rand5
 0x6B1412: fadd    qword ptr ds:0A2F928h
 0x6B1418: mov     ecx, esi
 0x6B141A: fstp    [esp+9Ch+var_70]
 0x6B141E: fld     [esp+9Ch+var_70]
-0x6B1422: fstp    [esp+9Ch+var_9C]; float
+0x6B1422: fstp    dword ptr [esp+9Ch+var_9C]; float
 0x6B1425: call    sub_6B7310
 0x6B142A: push    ebp
 0x6B142B: mov     ecx, esi
@@ -153,7 +153,7 @@
 0x6B1432: mov     ecx, esi; this
 0x6B1434: call    sub_6B73E0
 0x6B1439: push    esi
-0x6B143A: call    FormHeapFree
+0x6B143A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6B143F: add     esp, 4
 0x6B1442: pop     edi
 0x6B1443: pop     esi
@@ -177,14 +177,14 @@
 0x6B147A: fstp    [esp+0A8h+var_A8]; float
 0x6B147D: call    sub_44A270
 0x6B1482: mov     esi, eax
-0x6B1484: mov     ecx, edi
+0x6B1484: mov     ecx, edi; this
 0x6B1486: xor     bl, bl
-0x6B1488: call    Actor_IsSwimming
+0x6B1488: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x6B148D: test    al, al
 0x6B148F: jnz     short loc_6B14DA
 0x6B1491: fld     dword ptr ds:0A77830h
 0x6B1497: push    ecx
-0x6B1498: fstp    [esp+9Ch+var_9C]; float
+0x6B1498: fstp    dword ptr [esp+9Ch+var_9C]; float
 0x6B149B: push    esi; int
 0x6B149C: lea     eax, [esp+0A0h+var_80]
 0x6B14A0: push    eax; int
@@ -193,7 +193,7 @@
 0x6B14A8: test    al, al
 0x6B14AA: jz      short loc_6B14DA
 0x6B14AC: mov     ecx, esi; this
-0x6B14AE: call    TESObjectCELL_IsInterior
+0x6B14AE: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x6B14B3: test    al, al
 0x6B14B5: jz      short loc_6B14C2
 0x6B14B7: movzx   ecx, byte ptr [esi+24h]
@@ -201,7 +201,7 @@
 0x6B14BD: test    cl, 1
 0x6B14C0: jnz     short loc_6B14D8
 0x6B14C2: mov     ecx, esi; this
-0x6B14C4: call    TESObjectCELL_IsInterior
+0x6B14C4: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x6B14C9: test    al, al
 0x6B14CB: jnz     short loc_6B14DA
 0x6B14CD: mov     ecx, esi
@@ -246,11 +246,11 @@
 0x6B1556: test    edi, edi
 0x6B1558: jz      short loc_6B1577
 0x6B155A: mov     ecx, edi; this
-0x6B155C: call    MobileObject_GetCharProxy
+0x6B155C: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x6B1561: test    eax, eax
 0x6B1563: jz      short loc_6B1577
 0x6B1565: mov     ecx, edi; this
-0x6B1567: call    MobileObject_GetCharProxy
+0x6B1567: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x6B156C: add     eax, 1F0h
 0x6B1571: cmp     dword ptr [eax+24h], 1Fh
 0x6B1575: jnz     short loc_6B15C2
@@ -277,11 +277,11 @@
 0x6B15B3: cmp     edi, ebp
 0x6B15B5: jz      short loc_6B15D8
 0x6B15B7: mov     ecx, edi; this
-0x6B15B9: call    MobileObject_GetCharProxy
+0x6B15B9: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x6B15BE: test    eax, eax
 0x6B15C0: jz      short loc_6B15D8
 0x6B15C2: mov     ecx, edi; this
-0x6B15C4: call    MobileObject_GetCharProxy
+0x6B15C4: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x6B15C9: mov     ecx, [eax+214h]
 0x6B15CF: add     eax, 1F0h
 0x6B15D4: mov     [esp+98h+var_88], ecx
@@ -300,7 +300,7 @@
 0x6B15F5: call    TESObjectARMO_ISHeavyArmor
 0x6B15FA: movzx   ebx, al
 0x6B15FD: mov     ecx, edi
-0x6B15FF: call    Actor_IsSneaking
+0x6B15FF: call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.
 0x6B1604: mov     ecx, [esp+98h+var_88]
 0x6B1608: cmp     ecx, 0Fh
 0x6B160B: jl      short loc_6B1610
@@ -383,7 +383,7 @@
 0x6B16D5: mov     ecx, ebp
 0x6B16D7: call    ContainerEntryExtraData_DestroyDataTable
 0x6B16DC: push    ebp
-0x6B16DD: call    FormHeapFree
+0x6B16DD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6B16E2: add     esp, 4
 0x6B16E5: mov     eax, ds:0B36218h[esi*4]
 0x6B16EC: test    eax, eax
@@ -421,7 +421,7 @@
 0x6B1762: mov     ecx, edi
 0x6B1764: fstp    [esp+0A4h+var_64]
 0x6B1768: fld     [esp+0A4h+var_64]
-0x6B176C: fstp    [esp+0A4h+var_9C]; float
+0x6B176C: fstp    dword ptr [esp+0A4h+var_9C]; float
 0x6B1770: fld     [esp+0A4h+var_7C]
 0x6B1774: fstp    [esp+0A4h+var_A0]; float
 0x6B1778: fld     [esp+0A4h+var_80]
@@ -434,26 +434,26 @@
 0x6B178E: call    sub_6AC3E0
 0x6B1793: test    bl, bl
 0x6B1795: jz      short loc_6B17BC
-0x6B1797: mov     ecx, offset unk_B162F4
+0x6B1797: mov     ecx, offset dword_B162F4
 0x6B179C: call    GameSetting_GetSafeFloatPointer
 0x6B17A1: fld     dword ptr [eax]
 0x6B17A3: fstp    qword ptr [esp+98h+var_64]
 0x6B17A7: push    ecx
 0x6B17A8: fld     dword ptr ds:0A2FAACh
-0x6B17AE: fstp    [esp+9Ch+var_9C]; float
+0x6B17AE: fstp    dword ptr [esp+9Ch+var_9C]; float
 0x6B17B1: call    Rand5
 0x6B17B6: fsubr   qword ptr [esp+9Ch+var_64]
 0x6B17BA: jmp     short loc_6B17CF
 0x6B17BC: fld     dword ptr ds:0A2FAACh
 0x6B17C2: push    ecx
-0x6B17C3: fstp    [esp+9Ch+var_9C]; float
+0x6B17C3: fstp    dword ptr [esp+9Ch+var_9C]; float
 0x6B17C6: call    Rand5
 0x6B17CB: fld1
 0x6B17CD: fsubrp  st(1), st
 0x6B17CF: fstp    [esp+9Ch+var_64]
 0x6B17D3: mov     ecx, edi
 0x6B17D5: fld     [esp+9Ch+var_64]
-0x6B17D9: fstp    [esp+9Ch+var_9C]; float
+0x6B17D9: fstp    dword ptr [esp+9Ch+var_9C]; float
 0x6B17DC: call    sub_6B7280
 0x6B17E1: mov     esi, [esp+98h+var_70]
 0x6B17E5: test    esi, esi
@@ -464,7 +464,7 @@
 0x6B17FA: mov     ecx, esi
 0x6B17FC: fstp    [esp+0A4h+var_70]
 0x6B1800: fld     [esp+0A4h+var_70]
-0x6B1804: fstp    [esp+0A4h+var_9C]; float
+0x6B1804: fstp    dword ptr [esp+0A4h+var_9C]; float
 0x6B1808: fld     [esp+0A4h+var_7C]
 0x6B180C: fstp    [esp+0A4h+var_A0]; float
 0x6B1810: fld     [esp+0A4h+var_80]
@@ -477,26 +477,26 @@
 0x6B1826: call    sub_6AC3E0
 0x6B182B: test    bl, bl
 0x6B182D: jz      short loc_6B1854
-0x6B182F: mov     ecx, offset unk_B162F4
+0x6B182F: mov     ecx, offset dword_B162F4
 0x6B1834: call    GameSetting_GetSafeFloatPointer
 0x6B1839: fld     dword ptr [eax]
 0x6B183B: fstp    qword ptr [esp+98h+var_70]
 0x6B183F: push    ecx
 0x6B1840: fld     dword ptr ds:0A2FAACh
-0x6B1846: fstp    [esp+9Ch+var_9C]; float
+0x6B1846: fstp    dword ptr [esp+9Ch+var_9C]; float
 0x6B1849: call    Rand5
 0x6B184E: fsubr   qword ptr [esp+9Ch+var_70]
 0x6B1852: jmp     short loc_6B1867
 0x6B1854: fld     dword ptr ds:0A2FAACh
 0x6B185A: push    ecx
-0x6B185B: fstp    [esp+9Ch+var_9C]; float
+0x6B185B: fstp    dword ptr [esp+9Ch+var_9C]; float
 0x6B185E: call    Rand5
 0x6B1863: fld1
 0x6B1865: fsubrp  st(1), st
 0x6B1867: fstp    [esp+9Ch+var_70]
 0x6B186B: mov     ecx, esi
 0x6B186D: fld     [esp+9Ch+var_70]
-0x6B1871: fstp    [esp+9Ch+var_9C]; float
+0x6B1871: fstp    dword ptr [esp+9Ch+var_9C]; float
 0x6B1874: call    sub_6B7280
 0x6B1879: push    0
 0x6B187B: mov     ecx, esi
@@ -504,7 +504,7 @@
 0x6B1882: mov     ecx, esi; this
 0x6B1884: call    sub_6B73E0
 0x6B1889: push    esi
-0x6B188A: call    FormHeapFree
+0x6B188A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6B188F: add     esp, 4
 0x6B1892: push    0
 0x6B1894: mov     ecx, edi
@@ -512,7 +512,7 @@
 0x6B189B: mov     ecx, edi; this
 0x6B189D: call    sub_6B73E0
 0x6B18A2: push    edi
-0x6B18A3: call    FormHeapFree
+0x6B18A3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6B18A8: add     esp, 4
 0x6B18AB: pop     edi
 0x6B18AC: pop     esi

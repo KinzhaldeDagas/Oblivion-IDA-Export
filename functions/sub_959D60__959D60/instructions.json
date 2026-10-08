@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x959D60",
-    "line": "push    ecx",
+    "line": "push    ecx; Verified NiPick query runner: invokes NiPick_ProcessSceneObject over the configured pick root, gathers hit records, sorts by the record distance field, and leaves the nearest record first in the result list.",
     "mnemonic": "push",
     "size": 1
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x959D7F",
-    "line": "call    sub_95D540",
+    "line": "call    NiPick_ProcessSceneObject; Verified scene-object pick dispatcher: rejects invalid/filtered candidates, delegates NiGeometryData to NiPick_ProcessGeometryIntersection, and has a separate bounds/RTTI fallback that writes hit point and distance but does not explicitly populate the normal field.",
     "mnemonic": "call",
     "size": 5
   },

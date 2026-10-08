@@ -1,70 +1,117 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "ISecurityInformationVtbl",
+  "definition": "struct ISecurityInformationVtbl\n{\nHRESULT_0 (*QueryInterface)(ISecurityInformation_0 *, const IID *const, LPVOID *);\nULONG (*AddRef)(ISecurityInformation_0 *);\nULONG (*Release)(ISecurityInformation_0 *);\nHRESULT_0 (*GetObjectInformation)(ISecurityInformation_0 *, PSI_OBJECT_INFO);\nHRESULT_0 (*GetSecurity)(ISecurityInformation_0 *, SECURITY_INFORMATION, PSECURITY_DESCRIPTOR *, BOOL);\nHRESULT_0 (*SetSecurity)(ISecurityInformation_0 *, SECURITY_INFORMATION, PSECURITY_DESCRIPTOR);\nHRESULT_0 (*GetAccessRights)(ISecurityInformation_0 *, const GUID *, DWORD, PSI_ACCESS *, ULONG *, ULONG *);\nHRESULT_0 (*MapGeneric)(ISecurityInformation_0 *, const GUID *, UCHAR *, ACCESS_MASK *);\nHRESULT_0 (*GetInheritTypes)(ISecurityInformation_0 *, PSI_INHERIT_TYPE *, ULONG *);\nHRESULT_0 (*PropertySheetPageCallback)(ISecurityInformation_0 *, HWND, UINT, SI_PAGE_TYPE);\n}\n",
   "id": 18374686479672036906,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QueryInterface",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(ISecurityInformation_0 *, const IID *const, LPVOID *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddRef",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(ISecurityInformation_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Release",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(ISecurityInformation_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetObjectInformation",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HRESULT_0 (*)(ISecurityInformation_0 *, PSI_OBJECT_INFO)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetSecurity",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(ISecurityInformation_0 *, SECURITY_INFORMATION, PSECURITY_DESCRIPTOR *, BOOL)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetSecurity",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(ISecurityInformation_0 *, SECURITY_INFORMATION, PSECURITY_DESCRIPTOR)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetAccessRights",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(ISecurityInformation_0 *, const GUID *, DWORD, PSI_ACCESS *, ULONG *, ULONG *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "MapGeneric",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "HRESULT_0 (*)(ISecurityInformation_0 *, const GUID *, UCHAR *, ACCESS_MASK *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetInheritTypes",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(ISecurityInformation_0 *, PSI_INHERIT_TYPE *, ULONG *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "PropertySheetPageCallback",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(ISecurityInformation_0 *, HWND, UINT, SI_PAGE_TYPE)"
     }
   ],
   "name": "ISecurityInformationVtbl",
+  "ordinal": 4816,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 40
 }

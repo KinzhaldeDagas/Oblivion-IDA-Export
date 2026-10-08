@@ -1,19 +1,32 @@
 {
-  "callees_count": 123,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 50,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "NiRenderer_ReflectionPass",
+  "chunks": [
+    [
+      "0x49BEF0",
+      "0x49CA4C"
+    ]
+  ],
+  "chunks_sha256": "b00e744cef0f4c6b6f604e0488606a71cc9b2e09c5eec7b87134f94b9362dcc4",
+  "comment_regular": "WaterManager water-reflection render pass. Called with two NiAVObject scene roots. It creates/selects a dedicated BSShaderAccumulator, swaps it into the renderer, sets g_bWaterReflectionPassActive at 0x49C4CC, begins accumulation, renders reflected scene roots with the reflection camera/frustum, flushes the accumulator, restores the previous renderer accumulator, clears the global at 0x49C809, and then ends the scene. This is the only writer of the global.",
+  "comment_repeatable": "WaterManager water-reflection render pass. Called with two NiAVObject scene roots. It creates/selects a dedicated BSShaderAccumulator, swaps it into the renderer, sets g_bWaterReflectionPassActive at 0x49C4CC, begins accumulation, renders reflected scene roots with the reflection camera/frustum, flushes the accumulator, restores the previous renderer accumulator, clears the global at 0x49C809, and then ends the scene. This is the only writer of the global.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "WaterManager_RenderReflectionPass",
   "end_ea": "0x49CA4C",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "NiRenderer_ReflectionPass",
+  "name": "WaterManager_RenderReflectionPass",
   "segment": ".text",
   "sha256": "b00e744cef0f4c6b6f604e0488606a71cc9b2e09c5eec7b87134f94b9362dcc4",
   "size": 2908,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x49BEF0",
-  "type": "void __thiscall(NiDX9Renderer *this, float *arg0, NiAVObject *)",
-  "xrefs_from_count": 938,
+  "total_chunk_size": 2908,
+  "type": "void __thiscall(WaterManager *this, NiAVObject *primaryRoot, NiAVObject *secondaryRoot)",
+  "xrefs_from_count": 940,
   "xrefs_to_count": 1
 }

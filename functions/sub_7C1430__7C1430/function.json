@@ -1,19 +1,36 @@
 {
-  "callees_count": 24,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_7C1430",
+  "chunks": [
+    [
+      "0x7C1430",
+      "0x7C15BF"
+    ],
+    [
+      "0x9CE110",
+      "0x9CE136"
+    ]
+  ],
+  "chunks_sha256": "1c58d902e1f1e8c45ecfbb1a453f0674f802c3bf66e2d5285c43aeb404cb52bc",
+  "comment_regular": "Oblivion BSTextureManager rendered-texture creator. Builds a BSRenderedTexture for the requested dimensions, D3D format override, auxiliary value, and target flags; eligible targets receive the manager depth-stencil unless flags suppress it.",
+  "comment_repeatable": "Oblivion BSTextureManager rendered-texture creator. Builds a BSRenderedTexture for the requested dimensions, D3D format override, auxiliary value, and target flags; eligible targets receive the manager depth-stencil unless flags suppress it.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "BSTextureManager_CreateRenderedTexture",
   "end_ea": "0x7C15BF",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7C1430",
+  "name": "BSTextureManager_CreateRenderedTexture",
   "segment": ".text",
   "sha256": "3ebc9027aec84670bbea049383bed10379f65ff2761d54cef16145ae3bca7877",
   "size": 399,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7C1430",
-  "type": "BSRenderedTexture *__thiscall(BSTextureManager *this, int a2, int a3, int a4, int a5, int a6, __int16 a7)",
-  "xrefs_from_count": 148,
+  "total_chunk_size": 437,
+  "type": "BSRenderedTexture *__thiscall(BSTextureManager *this, NiDX9Renderer *renderer, int width, int height, int d3dFormat, int aux, unsigned __int16 targetFlags)",
+  "xrefs_from_count": 162,
   "xrefs_to_count": 2
 }

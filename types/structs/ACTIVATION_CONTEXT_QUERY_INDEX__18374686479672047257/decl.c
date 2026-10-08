@@ -1,1 +1,5 @@
-_ACTIVATION_CONTEXT_QUERY_INDEX
+struct _ACTIVATION_CONTEXT_QUERY_INDEX
+{
+DWORD ulAssemblyIndex;
+DWORD ulFileIndexInAssembly;
+};

@@ -28,7 +28,7 @@
 0x951A05: lea     ecx, [eax+10h]
 0x951A08: push    ecx
 0x951A09: push    eax
-0x951A0A: push    offset stru_BA7A40
+0x951A0A: push    offset unk_BA7A40
 0x951A0F: call    sub_8D1700
 0x951A14: fld     [esp+34h+var_C]
 0x951A18: fcomp   dword ptr ds:0A2FAA8h

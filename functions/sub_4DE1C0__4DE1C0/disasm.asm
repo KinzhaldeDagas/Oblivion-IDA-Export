@@ -32,7 +32,7 @@
 0x4DE210: movsx   ecx, byte ptr [esi+9]
 0x4DE214: sub     ecx, 12h
 0x4DE217: push    ecx; a1
-0x4DE218: call    TESForm_LookupByFormID
+0x4DE218: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4DE21D: add     esp, 4
 0x4DE220: jmp     short loc_4DE249
 0x4DE222: movsx   edx, byte ptr [esi+9]
@@ -46,35 +46,35 @@
 0x4DE238: call    _tolower
 0x4DE23D: sub     eax, 39h ; '9'
 0x4DE240: push    eax; a1
-0x4DE241: call    TESForm_LookupByFormID
+0x4DE241: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4DE246: add     esp, 8
 0x4DE249: mov     esi, eax
 0x4DE24B: test    esi, esi
 0x4DE24D: jz      short loc_4DE2AD
-0x4DE24F: lea     ecx, [esi+24h]
-0x4DE252: call    sub_449190
+0x4DE24F: lea     ecx, [esi+24h]; compactString
+0x4DE252: call    OB_CompactString_Length_010201A0; Bethesda compact string length helper. If inline length marker is 0xFFFF, strlen(heap string); otherwise returns the 16-bit stored length. Used here to gate optional TESObjectTREE leaf texture.
 0x4DE257: test    eax, eax
 0x4DE259: jz      short loc_4DE2AD
 0x4DE25B: cmp     word ptr [edi+0B8h], 0
 0x4DE263: jz      short loc_4DE2AD
 0x4DE265: push    3
-0x4DE267: call    nullsub_returnTrue_0arg
+0x4DE267: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x4DE26C: mov     edx, [esi]
 0x4DE26E: mov     eax, [edx+0F0h]
 0x4DE274: add     esp, 4
 0x4DE277: push    0
 0x4DE279: mov     ecx, esi
 0x4DE27B: call    eax
-0x4DE27D: lea     ecx, [edi+0ACh]
-0x4DE283: call    sub_477EF0
+0x4DE27D: lea     ecx, [edi+0ACh]; this
+0x4DE283: call    NiTObjectArray_ClearAndRelease; Clears a ref-counted NiT object-pointer array: releases every non-null element, nulls entries, and resets end/count words to zero. At bow release it is invoked on ArrowBone+0xAC, thereby releasing all ArrowBone children including the held Arrow:0 clone.
 0x4DE288: push    2
-0x4DE28A: call    nullsub_returnTrue_0arg
+0x4DE28A: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x4DE28F: add     esp, 4
 0x4DE292: mov     bl, 1
 0x4DE294: jmp     short loc_4DE2AD
 0x4DE296: push    offset aFlamecap; "FlameCap"
-0x4DE29B: push    esi; Str1
-0x4DE29C: call    __strcmp
+0x4DE29B: push    esi; left
+0x4DE29C: call    CRT_StricmpLocaleDispatch
 0x4DE2A1: add     esp, 8
 0x4DE2A4: test    eax, eax
 0x4DE2A6: jnz     short loc_4DE2AD
@@ -83,7 +83,6 @@
 0x4DE2AF: cmp     [edi+0B6h], bp
 0x4DE2B6: jbe     short loc_4DE30A
 0x4DE2B8: jmp     short loc_4DE2C0
-0x4DE2BA: align 10h
 0x4DE2C0: movzx   ecx, word ptr [edi+0B6h]
 0x4DE2C7: cmp     ecx, ebp
 0x4DE2C9: jbe     short loc_4DE2FC
@@ -95,7 +94,7 @@
 0x4DE2DA: mov     edx, [eax+4]
 0x4DE2DD: mov     ecx, esi
 0x4DE2DF: call    edx
-0x4DE2E1: cmp     eax, offset dword_B3FAB0
+0x4DE2E1: cmp     eax, offset parent
 0x4DE2E6: setz    al
 0x4DE2E9: test    al, al
 0x4DE2EB: jz      short loc_4DE2FC

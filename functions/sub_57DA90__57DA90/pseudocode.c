@@ -1,108 +1,110 @@
-_DWORD *__userpurge sub_57DA90@<eax>(
-        void *this@<ecx>,
-        double st5_0@<st2>,
-        double st6_0@<st1>,
-        double a4@<st0>,
-        int *a5,
-        _DWORD *a6)
+// AchievementsNative evidence: default UI hit-test recursively scans visible/non-hidden target tiles, chooses highest depth, and tie-breaks list items by lower listindex; use active/mouseover tile evidence before cursor-sprite coordinate fallbacks.
+// Verified correction: this is default-focus selection, NOT cursor hit testing or depth ranking. Recursively skips visible==1 subtrees, requires target==2, ranks by xdefault trait 0xFF0, and uses lower listindex 0xFAA for equal-ranked candidates. Top-level menu must be shown (1) or fading in (8). Fallout named analogue 0x824ED9A0.
+Tile *__thiscall InterfaceManager::ScanForMaxFocus(InterfaceManager *this, int *maxFocus, Tile *root)
 {
-  _DWORD *v6; // ebx
-  int *v7; // esi
-  int v8; // ebp
-  int v9; // eax
-  double Float; // st5
-  _DWORD *v12; // edi
-  _DWORD *v13; // eax
-  _DWORD *v14; // esi
+  Tile *v3; // ebx
+  int *v4; // esi
+  int v5; // ebp
+  int v6; // eax
+  _DWORD *v8; // edi
+  Tile *v9; // eax
+  Tile *v10; // esi
+  int v11; // eax
+  int v12; // eax
+  int v13; // eax
+  int v14; // eax
   int v15; // eax
   int v16; // eax
-  int v17; // eax
-  _DWORD *v18; // [esp+Ch] [ebp-10h]
-  int v19; // [esp+10h] [ebp-Ch] BYREF
-  int v20; // [esp+14h] [ebp-8h]
-  void *v21; // [esp+18h] [ebp-4h]
+  Tile *v17; // [esp+Ch] [ebp-10h]
+  int v18; // [esp+10h] [ebp-Ch] BYREF
+  int v19; // [esp+14h] [ebp-8h]
+  InterfaceManager *v20; // [esp+18h] [ebp-4h]
 
-  v6 = a6;
-  v7 = a5;
-  v8 = *a5;
-  v21 = this;
-  v18 = 0;
-  v20 = 0x7FFFFFFF;
-  *a5 = 0x80000000;
-  v19 = 0x80000000;
-  if ( !a6 )
+  v3 = root; /*0x57da94*/
+  v4 = maxFocus; /*0x57da9c*/
+  v5 = *maxFocus; /*0x57daa0*/
+  v20 = this; /*0x57daa2*/
+  v17 = 0; /*0x57daa6*/
+  v19 = 0x7FFFFFFF; /*0x57daae*/
+  *maxFocus = 0x80000000; /*0x57dab6*/
+  v18 = 0x80000000; /*0x57dabc*/
+  if ( !root ) /*0x57dac4*/
   {
-    Menu_GetB3A708(1);
-    v9 = sub_5877D0(v8, st5_0, st6_0);
-    if ( !v9 )
-      return 0;
-    v6 = *(_DWORD **)(v9 + 4);
-    if ( (*(int (__thiscall **)(_DWORD *))(*v6 + 0xC))(v6) == 0x389
-      && *(_DWORD *)(Tile_GetParentMenu(v6) + 0x24) != 1
-      && *(_DWORD *)(Tile_GetParentMenu(v6) + 0x24) != 8 )
+    Menu_GetB3A708(1); /*0x57dac8*/
+    v6 = sub_5877D0(); /*0x57dad2*/
+    if ( !v6 ) /*0x57dad9*/
+      return 0; /*0x57dad9*/
+    v3 = *(Tile **)(v6 + 4); /*0x57dadb*/
+    if ( (*(int (__thiscall **)(Tile *))(*(_DWORD *)v3 + 0xC))(v3) == 0x389 /*0x57db06*/
+      && *(_DWORD *)(Tile_GetParentMenu(v3) + 0x24) != 1
+      && *(_DWORD *)(Tile_GetParentMenu(v3) + 0x24) != 8 )
     {
-      return 0;
+      return 0; /*0x57db06*/
     }
   }
-  Float = Tile_GetFloat(v6, 0xFA1);
-  if ( Float == fConstant_1 )
-    return 0;
-  v12 = (_DWORD *)v6[0xD];
-  if ( v12 )
+  if ( Tile_GetFloat(v3, 0xFA1) == fConstant_1 ) /*0x57db2a*/
+    return 0; /*0x57db10*/
+  v8 = *((_DWORD **)v3 + 0xD); /*0x57db2d*/
+  if ( v8 ) /*0x57db32*/
   {
-    while ( 1 )
+    while ( 1 ) /*0x57db3b*/
     {
-      v13 = (_DWORD *)v12[2];
-      v12 = (_DWORD *)*v12;
-      v19 = 0x80000000;
-      v14 = sub_57DA90(v21, Float, st6_0, &v19, v13);
-      if ( v14 )
+      v9 = (Tile *)v8[2]; /*0x57db3b*/
+      v8 = (_DWORD *)*v8; /*0x57db3d*/
+      v18 = 0x80000000; /*0x57db45*/
+      v10 = InterfaceManager::ScanForMaxFocus(v20, &v18, v9); /*0x57db52*/
+      if ( v10 ) /*0x57db56*/
       {
-        if ( v19 <= v8 )
+        if ( v18 <= v5 ) /*0x57db5e*/
         {
-          if ( v19 != v8 )
-            goto LABEL_17;
-          v15 = sub_588B50(v14, 0xFAA);
-          if ( !v15 )
-            goto LABEL_17;
-          Float = *(float *)(v15 + 4);
-          v16 = Double_To_SInt32(a4);
-          if ( v16 >= v20 )
-            goto LABEL_17;
-          v20 = v16;
+          if ( v18 != v5 ) /*0x57db64*/
+            goto LABEL_17; /*0x57db64*/
+          v11 = sub_588B50(v10, 0xFAA); /*0x57db6d*/
+          if ( !v11 ) /*0x57db74*/
+            goto LABEL_17; /*0x57db74*/
+          v12 = Double_To_SInt32(*(float *)(v11 + 4)); /*0x57db79*/
+          if ( v12 >= v19 ) /*0x57db82*/
+            goto LABEL_17; /*0x57db82*/
+          v19 = v12; /*0x57db84*/
         }
         else
         {
-          v8 = v19;
+          v5 = v18; /*0x57db60*/
         }
-        v18 = v14;
+        v17 = v10; /*0x57db88*/
       }
 LABEL_17:
-      if ( !v12 )
+      if ( !v8 ) /*0x57db8e*/
       {
-        v7 = a5;
-        break;
+        v4 = maxFocus; /*0x57db90*/
+        break; /*0x57db90*/
       }
     }
   }
-  if ( Tile_GetFloat(v6, 0xFC9) == fConstant_2 && Tile_GetFloat(v6, 0xFA1) != fConstant_1 && sub_588B50(v6, 0xFF0) )
+  if ( Tile_GetFloat(v3, 0xFC9) == fConstant_2 && Tile_GetFloat(v3, 0xFA1) != fConstant_1 ) /*0x57dbc5*/
   {
-    v17 = Double_To_SInt32(a4);
-    v19 = v17;
-    if ( v17 > v8 )
+    v13 = sub_588B50(v3, 0xFF0); /*0x57dbce*/
+    if ( v13 ) /*0x57dbd5*/
     {
-      *v7 = v17;
-      return v6;
-    }
-    if ( v17 == v8 )
-    {
-      if ( sub_588B50(v6, 0xFAA) )
+      v14 = Double_To_SInt32(*(float *)(v13 + 4)); /*0x57dbda*/
+      v18 = v14; /*0x57dbe1*/
+      if ( v14 > v5 ) /*0x57dbe5*/
       {
-        if ( Double_To_SInt32(a4) < v20 )
-          v18 = v6;
+        *v4 = v14; /*0x57dbe9*/
+        return v3; /*0x57dbf7*/
+      }
+      if ( v14 == v5 ) /*0x57dbfa*/
+      {
+        v15 = sub_588B50(v3, 0xFAA); /*0x57dc03*/
+        if ( v15 ) /*0x57dc0a*/
+        {
+          v16 = Double_To_SInt32(*(float *)(v15 + 4)); /*0x57dc0f*/
+          if ( v16 < v19 ) /*0x57dc18*/
+            v17 = v3; /*0x57dc1a*/
+        }
       }
     }
   }
-  *v7 = v8;
-  return v18;
+  *v4 = v5; /*0x57dc22*/
+  return v17; /*0x57db08*/
 }

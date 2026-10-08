@@ -1,4 +1,5 @@
-int __userpurge Actor_GetDetectionLevel@<eax>(
+// Oblivion authoritative detection pipeline. Computes this detector's level against a target actor: obtains cached/physical LOS and distance, target light, boot weight, movement/running/sneak/combat/underwater/exterior state, Luck-modified Sneak values, detector Blindness AV 0x2D, target Chameleon AV 0x2E, and target Invisibility AV 0x2F; then calls Calc_DetectionLevel and updates the detector's process entry. Positive means detected. Fallout only corroborates the GetDetectionLevelAgainstActor terminology.
+void __userpurge Actor_GetDetectionLevelAgainstActor(
         TESObjectREFR *a1@<ecx>,
         int a2@<edi>,
         double st5_0@<st2>,
@@ -12,123 +13,105 @@ int __userpurge Actor_GetDetectionLevel@<eax>(
         int a11,
         char a12)
 {
-  int v14; // eax
+  int v13; // eax
+  double v14; // st7
   double v15; // st7
-  double v16; // st7
-  char v17; // al
+  char v16; // al
   TESObjectREFRVtbl *vtbl; // edx
-  int v19; // eax
-  _DWORD *v20; // eax
-  int BaseCalcAVi; // eax
-  char v22; // al
-  int v23; // eax
+  int v18; // eax
+  _DWORD *v19; // eax
+  SInt32 BaseCalcAVi; // eax
+  char v21; // al
+  SInt32 v22; // eax
   bool IsSneaking; // al
-  int v25; // eax
+  float *v24; // eax
   char IsUnderwater; // al
-  bool v27; // zf
-  TESObjectCELL *ParentCell; // eax
-  double v29; // st7
-  int v30; // eax
-  double v31; // st7
-  int v32; // eax
-  double v33; // st7
-  int v34; // esi
+  bool v26; // zf
+  TESObjectCELL *DwordAtOffset40; // eax
+  double v28; // st7
+  int v29; // eax
+  double v30; // st7
+  SInt32 v31; // eax
+  double v32; // st7
+  int v33; // esi
   void (__thiscall *Unk_38)(TESObjectREFR *); // eax
-  double v36; // st7
-  int v37; // eax
-  double v38; // st7
-  int v39; // eax
-  double v40; // st7
-  int v41; // edi
+  double v35; // st7
+  int v36; // eax
+  double v37; // st7
+  SInt32 v38; // eax
+  double v39; // st7
+  int v40; // edi
+  int v41; // eax
   int v42; // eax
-  int v43; // eax
-  double v44; // st7
-  int v45; // eax
-  int v46; // esi
+  double v43; // st7
+  int v44; // eax
+  int v45; // esi
   _DWORD *Singleton; // eax
-  double v48; // st7
-  int v49; // esi
-  int v50; // edi
-  double v51; // st7
+  double v47; // st7
+  int v48; // esi
+  int v49; // edi
   char *Name; // eax
+  char *v51; // eax
+  char *v52; // eax
   char *v53; // eax
-  double v54; // st7
-  char *v55; // eax
-  double v56; // st7
+  int v54; // eax
+  TESObjectREFR *v55; // ebx
+  char *v56; // eax
   char *v57; // eax
-  double v58; // st7
-  double v59; // st7
-  double v60; // st7
-  int v61; // eax
-  TESObjectREFR *v62; // ebx
-  char *v63; // eax
-  double v64; // st7
-  char *v65; // eax
-  double v66; // st7
+  char *v58; // eax
+  char *v59; // eax
+  int v60; // edi
+  int v61; // edi
+  int v62; // edi
+  int v63; // edi
+  int v64; // edi
+  int v65; // edi
+  int v66; // edi
   char *v67; // eax
-  double v68; // st7
-  char *v69; // eax
-  double v70; // st7
-  int v71; // edi
-  double v72; // st7
-  int v73; // edi
-  double v74; // st7
-  int v75; // edi
-  double v76; // st7
-  int v77; // edi
-  double v78; // st7
-  int v79; // edi
-  double v80; // st7
-  int v81; // edi
-  double v82; // st7
-  int v83; // edi
-  double v84; // st7
-  char *v85; // eax
-  double v86; // st7
-  int v87; // [esp+38h] [ebp-140h]
-  int v88; // [esp+3Ch] [ebp-13Ch]
-  float v89; // [esp+40h] [ebp-138h]
-  int v90; // [esp+44h] [ebp-134h]
-  size_t v91; // [esp+44h] [ebp-134h]
-  int v92; // [esp+48h] [ebp-130h]
-  int v93; // [esp+54h] [ebp-124h]
-  float v94; // [esp+54h] [ebp-124h]
-  float v95; // [esp+54h] [ebp-124h]
-  size_t v96; // [esp+54h] [ebp-124h]
-  float v97; // [esp+54h] [ebp-124h]
-  size_t v98; // [esp+54h] [ebp-124h]
-  float v99; // [esp+54h] [ebp-124h]
-  float v100; // [esp+54h] [ebp-124h]
-  size_t v101; // [esp+54h] [ebp-124h]
-  float v102; // [esp+54h] [ebp-124h]
-  size_t v103; // [esp+54h] [ebp-124h]
-  int v104; // [esp+58h] [ebp-120h]
-  float v105; // [esp+58h] [ebp-120h]
+  int v68; // [esp+38h] [ebp-140h]
+  int v69; // [esp+3Ch] [ebp-13Ch]
+  float v70; // [esp+40h] [ebp-138h]
+  int v71; // [esp+44h] [ebp-134h]
+  size_t v72; // [esp+44h] [ebp-134h]
+  int v73; // [esp+48h] [ebp-130h]
+  int v74; // [esp+54h] [ebp-124h]
+  float v75; // [esp+54h] [ebp-124h]
+  float v76; // [esp+54h] [ebp-124h]
+  size_t v77; // [esp+54h] [ebp-124h]
+  float v78; // [esp+54h] [ebp-124h]
+  size_t v79; // [esp+54h] [ebp-124h]
+  float v80; // [esp+54h] [ebp-124h]
+  float v81; // [esp+54h] [ebp-124h]
+  size_t v82; // [esp+54h] [ebp-124h]
+  float v83; // [esp+54h] [ebp-124h]
+  size_t v84; // [esp+54h] [ebp-124h]
+  int v85; // [esp+58h] [ebp-120h]
+  float v86; // [esp+58h] [ebp-120h]
   size_t var120c; // [esp+58h] [ebp-120h]
+  float v88; // [esp+58h] [ebp-120h]
+  float v89; // [esp+58h] [ebp-120h]
+  float v90; // [esp+58h] [ebp-120h]
+  float v91; // [esp+58h] [ebp-120h]
+  float v92; // [esp+58h] [ebp-120h]
+  size_t var120i; // [esp+58h] [ebp-120h]
+  float v94; // [esp+58h] [ebp-120h]
+  size_t var120k; // [esp+58h] [ebp-120h]
+  float v96; // [esp+58h] [ebp-120h]
+  size_t var120m; // [esp+58h] [ebp-120h]
+  float v98; // [esp+58h] [ebp-120h]
+  size_t var120o; // [esp+58h] [ebp-120h]
+  float v100; // [esp+58h] [ebp-120h]
+  float v101; // [esp+58h] [ebp-120h]
+  float v102; // [esp+58h] [ebp-120h]
+  size_t v103; // [esp+58h] [ebp-120h]
+  float v104; // [esp+58h] [ebp-120h]
+  float v105; // [esp+58h] [ebp-120h]
+  float v106; // [esp+58h] [ebp-120h]
   float v107; // [esp+58h] [ebp-120h]
   float v108; // [esp+58h] [ebp-120h]
   float v109; // [esp+58h] [ebp-120h]
-  float v110; // [esp+58h] [ebp-120h]
-  float v111; // [esp+58h] [ebp-120h]
-  size_t var120i; // [esp+58h] [ebp-120h]
-  float v113; // [esp+58h] [ebp-120h]
-  size_t var120k; // [esp+58h] [ebp-120h]
-  float v115; // [esp+58h] [ebp-120h]
-  size_t var120m; // [esp+58h] [ebp-120h]
-  float v117; // [esp+58h] [ebp-120h]
-  size_t var120o; // [esp+58h] [ebp-120h]
-  float v119; // [esp+58h] [ebp-120h]
-  float v120; // [esp+58h] [ebp-120h]
-  float v121; // [esp+58h] [ebp-120h]
-  size_t v122; // [esp+58h] [ebp-120h]
-  float v123; // [esp+58h] [ebp-120h]
-  float v124; // [esp+58h] [ebp-120h]
-  float v125; // [esp+58h] [ebp-120h]
-  float v126; // [esp+58h] [ebp-120h]
-  float v127; // [esp+58h] [ebp-120h]
-  float v128; // [esp+58h] [ebp-120h]
   char *Formatf; // [esp+5Ch] [ebp-11Ch]
-  char Formatg; // [esp+5Ch] [ebp-11Ch]
+  char *Formatg; // [esp+5Ch] [ebp-11Ch]
   float Formath; // [esp+5Ch] [ebp-11Ch]
   float Formati; // [esp+5Ch] [ebp-11Ch]
   float Formatj; // [esp+5Ch] [ebp-11Ch]
@@ -147,436 +130,431 @@ int __userpurge Actor_GetDetectionLevel@<eax>(
   size_t Formate; // [esp+5Ch] [ebp-11Ch]
   float Formatr; // [esp+5Ch] [ebp-11Ch]
   float Formats; // [esp+5Ch] [ebp-11Ch]
-  TESChildCELL *v149; // [esp+60h] [ebp-118h]
-  float v150; // [esp+60h] [ebp-118h]
-  int v151; // [esp+60h] [ebp-118h]
-  char *v152; // [esp+60h] [ebp-118h]
-  char *v153; // [esp+60h] [ebp-118h]
-  signed int v154; // [esp+64h] [ebp-114h]
-  int v155; // [esp+64h] [ebp-114h]
-  int v156; // [esp+64h] [ebp-114h]
-  int v157; // [esp+64h] [ebp-114h]
-  int v158; // [esp+64h] [ebp-114h]
-  int v159; // [esp+64h] [ebp-114h]
-  char *v160; // [esp+64h] [ebp-114h]
-  char *v161; // [esp+64h] [ebp-114h]
-  char *v162; // [esp+64h] [ebp-114h]
-  char *v163; // [esp+64h] [ebp-114h]
-  char *v164; // [esp+64h] [ebp-114h]
-  char *v165; // [esp+64h] [ebp-114h]
-  char *v166; // [esp+64h] [ebp-114h]
-  int v167; // [esp+68h] [ebp-110h]
-  int v168; // [esp+6Ch] [ebp-10Ch]
-  char v169; // [esp+70h] [ebp-108h]
-  int v170; // [esp+74h] [ebp-104h]
-  int v171; // [esp+74h] [ebp-104h]
-  int v172; // [esp+74h] [ebp-104h]
-  int v173; // [esp+74h] [ebp-104h]
-  int v174; // [esp+78h] [ebp-100h]
-  int v175; // [esp+78h] [ebp-100h]
-  int v176; // [esp+78h] [ebp-100h]
-  int v177; // [esp+78h] [ebp-100h]
-  int v178; // [esp+7Ch] [ebp-FCh]
-  int v179; // [esp+7Ch] [ebp-FCh]
-  TESChildCELL *v180; // [esp+80h] [ebp-F8h]
-  TESChildCELL *v181; // [esp+80h] [ebp-F8h]
-  TESChildCELL *v182; // [esp+84h] [ebp-F4h] BYREF
-  int v183; // [esp+88h] [ebp-F0h]
-  int v184; // [esp+8Ch] [ebp-ECh]
-  int v185; // [esp+90h] [ebp-E8h]
-  int v186; // [esp+94h] [ebp-E4h]
-  int v187; // [esp+98h] [ebp-E0h]
-  int v188; // [esp+9Ch] [ebp-DCh]
-  int v189; // [esp+A0h] [ebp-D8h]
-  int v190; // [esp+A4h] [ebp-D4h]
-  int v191; // [esp+A8h] [ebp-D0h]
-  int v192; // [esp+ACh] [ebp-CCh]
+  TESChildCELL *v130; // [esp+60h] [ebp-118h]
+  float v131; // [esp+60h] [ebp-118h]
+  int v132; // [esp+60h] [ebp-118h]
+  char *v133; // [esp+60h] [ebp-118h]
+  char *v134; // [esp+60h] [ebp-118h]
+  SInt32 v135; // [esp+64h] [ebp-114h]
+  int v136; // [esp+64h] [ebp-114h]
+  int v137; // [esp+64h] [ebp-114h]
+  int v138; // [esp+64h] [ebp-114h]
+  int v139; // [esp+64h] [ebp-114h]
+  int v140; // [esp+64h] [ebp-114h]
+  char *v141; // [esp+64h] [ebp-114h]
+  char *v142; // [esp+64h] [ebp-114h]
+  char *v143; // [esp+64h] [ebp-114h]
+  char *v144; // [esp+64h] [ebp-114h]
+  char *v145; // [esp+64h] [ebp-114h]
+  char *v146; // [esp+64h] [ebp-114h]
+  char *v147; // [esp+64h] [ebp-114h]
+  int v148; // [esp+68h] [ebp-110h]
+  int v149; // [esp+6Ch] [ebp-10Ch]
+  int v150; // [esp+74h] [ebp-104h]
+  int v151; // [esp+74h] [ebp-104h]
+  int v152; // [esp+74h] [ebp-104h]
+  int v153; // [esp+74h] [ebp-104h]
+  int v154; // [esp+78h] [ebp-100h]
+  int v155; // [esp+78h] [ebp-100h]
+  int v156; // [esp+78h] [ebp-100h]
+  int v157; // [esp+78h] [ebp-100h]
+  int v158; // [esp+78h] [ebp-100h]
+  int v159; // [esp+7Ch] [ebp-FCh]
+  int v160; // [esp+7Ch] [ebp-FCh]
+  TESChildCELL *v161; // [esp+80h] [ebp-F8h]
+  TESChildCELL *v162; // [esp+80h] [ebp-F8h]
+  TESChildCELL *v163; // [esp+84h] [ebp-F4h] BYREF
+  int v164; // [esp+88h] [ebp-F0h]
+  int v165; // [esp+8Ch] [ebp-ECh]
+  int v166; // [esp+90h] [ebp-E8h]
+  int v167; // [esp+94h] [ebp-E4h]
+  int v168; // [esp+98h] [ebp-E0h]
+  int BootWeight; // [esp+9Ch] [ebp-DCh]
+  int v170; // [esp+A0h] [ebp-D8h]
+  int v171; // [esp+A4h] [ebp-D4h]
+  int v172; // [esp+A8h] [ebp-D0h]
+  int v173; // [esp+ACh] [ebp-CCh]
   char Dest[4]; // [esp+B0h] [ebp-C8h] BYREF
-  char v194[192]; // [esp+B4h] [ebp-C4h] BYREF
+  char v175[192]; // [esp+B4h] [ebp-C4h] BYREF
 
-  if ( !a1[1].vtbl )
-    return Actor_GetDetectionLevel_::Return(a6, a7, a8, a9, a10, a11);
-  *a8 = 0;
-  v14 = (*((int (__usercall **)@<eax>(TESObjectREFRVtbl *@<ecx>, TESObjectREFR *, int, double@<st0>, double@<st1>))a1[1].vtbl->super.super.InitializeComponent
-         + 0xEC))(
-          a1[1].vtbl,
-          a7,
-          a2,
-          a5,
-          st6_0);
-  if ( v14 )
+  if ( a1[1].vtbl ) /*0x5f655f*/
   {
-    v178 = *(_DWORD *)(v14 + 0xC);
-    *a8 = *(_BYTE *)(v14 + 8);
-  }
-  if ( !a7->vtbl->GetNiNode(a7) )
-    return Actor_GetDetectionLevel_::Return_Neg1(a6, (int)a7, (int)a8, a9, a10, a11);
-  if ( (_BYTE)a7 || v178 == 0x7FFFFFFF )
-  {
-    *(float *)&v187 = TesObjectREF_GetDistance(a1, a7, 0);
-    ++dword_B333C0;
-    v15 = ((double (__thiscall *)(TESObjectREFRVtbl *, TESObjectREFR *, _DWORD))*((_DWORD *)a7[1].vtbl->super.super.InitializeComponent
-                                                                                + 0xEB))(
-            a7[1].vtbl,
+    *a8 = 0; /*0x5f6574*/
+    v13 = (*((int (__usercall **)@<eax>(TESObjectREFRVtbl *@<ecx>, TESObjectREFR *, int, double@<st0>, double@<st1>, double@<st2>))a1[1].vtbl->super.super.InitializeComponent /*0x5f658d*/
+           + 0xEC))(
+            a1[1].vtbl,
             a7,
-            0);
-    v183 = Double_To_SInt32(v15);
-    v16 = ((double (__thiscall *)(TESObjectREFR *, int))a1->vtbl[1].Unk_38)(a1, 0x29);
-    if ( v16 > *(float *)&SrcStr )
+            a2,
+            a5,
+            st6_0,
+            st5_0);
+    if ( v13 ) /*0x5f6591*/
     {
-      v16 = (double)v183 * fDetectionNightEyeBonus;
-      v183 = Double_To_SInt32(v16);
-      if ( v183 > 0x64 )
-        v183 = 0x64;
+      v159 = *(_DWORD *)(v13 + 0xC); /*0x5f6599*/
+      *a8 = *(_BYTE *)(v13 + 8); /*0x5f659d*/
     }
-    v182 = (TESChildCELL *)3;
-    v17 = sub_5F2820((Actor *)a1, v16, 1, a7, 1, &v182, 0);
-    vtbl = a1->vtbl;
-    LOBYTE(v185) = v17;
-    if ( ((int (__thiscall *)(TESObjectREFR *))vtbl[1].IsMobileObject)(a1) )
+    if ( a7->vtbl->GetNiNode(a7) ) /*0x5f65aa*/
     {
-      v19 = ((int (__thiscall *)(TESObjectREFR *))a1->vtbl[1].IsMobileObject)(a1);
-      if ( (TESObjectREFR *)sub_6135F0(v19) == a7 )
+      if ( (_BYTE)a7 || v159 == 0x7FFFFFFF ) /*0x5f65c2*/
       {
-        v149 = v182;
-        v20 = (_DWORD *)((int (__thiscall *)(TESObjectREFR *))a1->vtbl[1].IsMobileObject)(a1);
-        sub_612810(v20, (int)v149);
+        *(float *)&v168 = TesObjectREF_GetDistance(a1, a7, 0); /*0x5f65d2*/
+        ++unk_B333C0; /*0x5f65d6*/
+        v14 = ((double (__thiscall *)(TESObjectREFRVtbl *, TESObjectREFR *, _DWORD))*((_DWORD *)a7[1].vtbl->super.super.InitializeComponent /*0x5f65eb*/
+                                                                                    + 0xEB))(
+                a7[1].vtbl,
+                a7,
+                0);
+        v164 = Double_To_SInt32(v14); /*0x5f65f2*/
+        v15 = ((double (__thiscall *)(TESObjectREFR *, int))a1->vtbl[1].Unk_38)(a1, 0x29); /*0x5f6602*/
+        if ( v15 > *(float *)&SrcStr ) /*0x5f660f*/
+        {
+          v15 = (double)v164 * MEMORY[0xB37A50]; /*0x5f6615*/
+          v164 = Double_To_SInt32(v15); /*0x5f6623*/
+          if ( v164 > 0x64 ) /*0x5f6627*/
+            v164 = 0x64; /*0x5f6629*/
+        }
+        v163 = (TESChildCELL *)3; /*0x5f663f*/
+        v16 = Actor_LineOfSight((Actor *)a1, v15, 1, a7, 1, &v163, 0); /*0x5f6647*/
+        vtbl = a1->vtbl; /*0x5f664c*/
+        LOBYTE(v166) = v16; /*0x5f664e*/
+        if ( ((int (__thiscall *)(TESObjectREFR *))vtbl[1].IsMobileObject)(a1) ) /*0x5f665a*/
+        {
+          v18 = ((int (__thiscall *)(TESObjectREFR *))a1->vtbl[1].IsMobileObject)(a1); /*0x5f666a*/
+          if ( (TESObjectREFR *)CombatController_GetCurrentTarget(v18) == a7 ) /*0x5f6675*/
+          {
+            v130 = v163; /*0x5f6683*/
+            v19 = (_DWORD *)((int (__thiscall *)(TESObjectREFR *))a1->vtbl[1].IsMobileObject)(a1); /*0x5f6686*/
+            sub_612810(v19, (int)v130); /*0x5f668a*/
+          }
+        }
+        *a8 = v166; /*0x5f6693*/
+        BootWeight = Actor_GetBootWeight((int)a7, (int)a1); /*0x5f669e*/
+        if ( Actor_IsSneaking(a7) ) /*0x5f66a2*/
+        {
+          BaseCalcAVi = Actor_GetBaseCalcAVi((int *)a7, (int)a1, 0x7FFFFFFF, (int)a8, 0x1F); /*0x5f66af*/
+          if ( Calc_MasteryFromSkill(BaseCalcAVi) >= kSkillMastery_Journeyman ) /*0x5f66c0*/
+            BootWeight = 0; /*0x5f66c2*/
+        }
+        if ( !a7[1].vtbl /*0x5f66e4*/
+          || (v21 = (*((int (__thiscall **)(TESObjectREFRVtbl *))a7[1].vtbl->super.super.InitializeComponent + 0xB0))(a7[1].vtbl),
+              LOBYTE(v167) = 1,
+              (v21 & 0xF) == 0) )
+        {
+          LOBYTE(v167) = 0; /*0x5f66e6*/
+        }
+        LOBYTE(v165) = ((*((int (__thiscall **)(TESObjectREFRVtbl *))a7[1].vtbl->super.super.InitializeComponent + 0xB0))(a7[1].vtbl) /*0x5f6703*/
+                      & 0x200) != 0;
+        if ( Actor_IsSneaking(a7) ) /*0x5f670a*/
+        {
+          v22 = Actor_GetBaseCalcAVi((int *)a7, (int)a1, 0x7FFFFFFF, (int)a8, 0x1F); /*0x5f6717*/
+          if ( Calc_MasteryFromSkill(v22) >= kSkillMastery_Expert ) /*0x5f6728*/
+          {
+            LOBYTE(v167) = 0; /*0x5f672a*/
+            LOBYTE(v165) = 0; /*0x5f672f*/
+          }
+        }
+        IsSneaking = Actor_IsSneaking(a7); /*0x5f6736*/
+        v131 = flt_A6E688; /*0x5f6744*/
+        LOBYTE(v170) = IsSneaking; /*0x5f6747*/
+        Formatf = (char *)Shared_GetDwordAtOffset40(a1); /*0x5f6752*/
+        v24 = a1->vtbl->GetPos(a1); /*0x5f675b*/
+        IsUnderwater = Actor_IsUnderwater__(a1, (int)v24, (ExtraDataList *)Formatf, v131); /*0x5f6760*/
+        v26 = a1[1].vtbl == 0; /*0x5f6765*/
+        LOBYTE(v172) = IsUnderwater; /*0x5f6769*/
+        LOBYTE(v163) = !v26 /*0x5f6786*/
+                    && (*((int (__thiscall **)(TESObjectREFRVtbl *))a1[1].vtbl->super.super.InitializeComponent + 0xDB))(a1[1].vtbl) == 9;
+        LOBYTE(v161) = 1; /*0x5f6793*/
+        if ( (_BYTE)a10 ) /*0x5f6798*/
+          LOBYTE(v170) = 0; /*0x5f679a*/
+        if ( Shared_GetDwordAtOffset40(a7) ) /*0x5f67a1*/
+        {
+          DwordAtOffset40 = (TESObjectCELL *)Shared_GetDwordAtOffset40(a7); /*0x5f67ac*/
+          LOBYTE(v161) = TESObjectCELL_IsInterior(DwordAtOffset40) == 0; /*0x5f67bd*/
+        }
+        v28 = ((double (__thiscall *)(TESObjectREFR *, int))a1->vtbl[1].Unk_38)(a1, 7); /*0x5f67cd*/
+        v29 = Double_To_SInt32(v28); /*0x5f67cf*/
+        v30 = ((double (__thiscall *)(TESObjectREFR *, int, int))a1->vtbl[1].Unk_38)(a1, 0x1F, v29); /*0x5f67e1*/
+        v31 = Double_To_SInt32(v30); /*0x5f67e3*/
+        v32 = Calc_LuckModifiedSkill(v31, v135);// AVU hook site: detector Sneak. Oblivion has just rounded detector Luck and Sneak via Double_To_SInt32 and calls Calc_LuckModifiedSkill(skill, luck); the original post-call Double_To_SInt32 remains. /*0x5f67e9*/
+        v33 = Double_To_SInt32(v32); /*0x5f67f9*/
+        Unk_38 = a7->vtbl[1].Unk_38; /*0x5f67fb*/
+        v172 = v33; /*0x5f6805*/
+        v35 = ((double (__thiscall *)(TESObjectREFR *))Unk_38)(a7); /*0x5f6809*/
+        v36 = Double_To_SInt32(v35); /*0x5f680b*/
+        v37 = ((double (__thiscall *)(TESObjectREFR *, int, int))a7->vtbl[1].Unk_38)(a7, 0x1F, v36); /*0x5f681e*/
+        v38 = Double_To_SInt32(v37); /*0x5f6820*/
+        v39 = Calc_LuckModifiedSkill(v38, 7);   // AVU hook site: target Sneak. Oblivion has just rounded target Luck and Sneak via Double_To_SInt32 and calls Calc_LuckModifiedSkill(skill, luck); the original post-call Double_To_SInt32 remains. /*0x5f6826*/
+        v40 = Double_To_SInt32(v39); /*0x5f6836*/
+        v136 = 0x2F;                            // Target Invisibility AV 0x2F check. If current integer invisibility is positive, Oblivion skips normal detection, stores chameleon/invis marker 100, and forces detection result -100. /*0x5f683e*/
+        if ( ((int (__thiscall *)(TESObjectREFR *))a7->vtbl[1].Unk_37)(a7) <= 0 ) /*0x5f684a*/
+        {
+          v41 = ((int (__thiscall *)(TESObjectREFR *, int))a7->vtbl[1].Unk_37)(a7, 0x2E);// AVU hook site: target Chameleon. Vanilla reads current integer AV 0x2E, stores it as the detection invisibility/chameleon parameter, and forces result -100 when value >= 100. /*0x5f686e*/
+          v173 = v41; /*0x5f6873*/
+          if ( v41 < 0x64 ) /*0x5f6877*/
+          {
+            Formatg = (char *)v163; /*0x5f6890*/
+            v85 = v172; /*0x5f6895*/
+            v74 = v165; /*0x5f689d*/
+            v73 = v170; /*0x5f68af*/
+            v71 = v167; /*0x5f68b4*/
+            v70 = *(float *)&BootWeight; /*0x5f68b9*/
+            v69 = v41; /*0x5f68ba*/
+            v68 = v164; /*0x5f68bd*/
+            v42 = ((int (__thiscall *)(TESObjectREFR *, int))a1->vtbl[1].Unk_37)(a1, 0x2D);// AVU hook site: detector Blindness. Vanilla reads current integer AV 0x2D and passes it into Calc_DetectionLevel. /*0x5f68c8*/
+            v160 = Calc_DetectionLevel( /*0x5f68e3*/
+                     v33,
+                     v40,
+                     COERCE_FLOAT((unsigned __int8)v166),
+                     v168,
+                     v42,
+                     v68,
+                     v69,
+                     v70,
+                     v71,
+                     v73,
+                     a11,
+                     a10,
+                     v74,
+                     v85,
+                     (int)Formatg,
+                     (int)v161,
+                     0x2F,
+                     v148,
+                     v149);
+          }
+          else
+          {
+            v160 = 0xFFFFFF9C; /*0x5f6879*/
+          }
+        }
+        else
+        {
+          v173 = 0x64; /*0x5f684c*/
+          v160 = 0xFFFFFF9C; /*0x5f6854*/
+        }
+        if ( *(float *)&v168 <= dbl_A6C820 ) /*0x5f68f6*/
+        {
+          v43 = ((double (__thiscall *)(TESObjectREFRVtbl *))*((_DWORD *)a7[1].vtbl->super.super.InitializeComponent /*0x5f6903*/
+                                                             + 0xD7))(a7[1].vtbl);
+          v160 = Double_To_SInt32(v43 + (double)v160); /*0x5f690e*/
+        }
+        if ( !(_BYTE)a7 || (_BYTE)a11 ) /*0x5f6924*/
+        {
+          v44 = 0; /*0x5f692a*/
+          if ( v160 > 0 ) /*0x5f692e*/
+            v44 = 3; /*0x5f6930*/
+          if ( a1 != (TESObjectREFR *)reference ) /*0x5f693b*/
+            (*((void (__thiscall **)(TESObjectREFRVtbl *, TESObjectREFR *, int, int, int))a1[1].vtbl->super.super.InitializeComponent /*0x5f6950*/
+             + 0x2A))(
+              a1[1].vtbl,
+              a7,
+              v44,
+              v166,
+              v160);
+        }
+        if ( BYTE2(qword_B3BB2C[0x9B]) ) /*0x5f6952*/
+        {
+          if ( !LODWORD(qword_B3BB2C[0x9C]) && a7 == (TESObjectREFR *)reference /*0x5f6972*/
+            || (TESObjectREFR *)LODWORD(qword_B3BB2C[0x9C]) == a7 )
+          {
+            v162 = 0; /*0x5f6980*/
+            if ( MEMORY[0xB333B4] ) /*0x5f6978*/
+            {
+              if ( (*((unsigned __int8 (__thiscall **)(TESChildCELL *))MEMORY[0xB333B4]->vtbl + 0x64))(MEMORY[0xB333B4]) ) /*0x5f6992*/
+                v162 = MEMORY[0xB333B4]; /*0x5f699e*/
+            }
+            v45 = dword_B12DB4 - 1; /*0x5f69a8*/
+            Singleton = FontManager_GetSingleton(); /*0x5f69ab*/
+            v47 = sub_404FB0((_DWORD *)Singleton[v45]); /*0x5f69b3*/
+            v48 = Double_To_SInt32(v47 + dbl_A30E48); /*0x5f69c9*/
+            v49 = v48 + 0xA; /*0x5f69cb*/
+            if ( v162 == (TESChildCELL *)a1 ) /*0x5f69d2*/
+            {
+              v86 = (float)(v48 + 0xA); /*0x5f69ee*/
+              v75 = (float)(0x500 - iDebugTextLeftRightOffset); /*0x5f69fa*/
+              Name = TESObjectREFR_GetName((TESObjectREFR *)v162); /*0x5f69fd*/
+              InterfaceMgr_DebugTextLine(Name, v75, v86, 3, 0xFFFFFFFF); /*0x5f6a03*/
+              v51 = TESObjectREFR_GetName(a7); /*0x5f6a13*/
+              HIDWORD(var120c) = "Running Detection Against %s"; /*0x5f6a19*/
+              LODWORD(var120c) = 0xC8; /*0x5f6a22*/
+              _snprintf(Dest, var120c, v51); /*0x5f6a28*/
+              v88 = (float)(v48 + v49); /*0x5f6a46*/
+              v76 = (float)(0x500 - iDebugTextLeftRightOffset); /*0x5f6a56*/
+              InterfaceMgr_DebugTextLine(Dest, v76, v88, 3, 0xFFFFFFFF); /*0x5f6a5a*/
+              v132 = v171; /*0x5f6a6c*/
+              v150 = v48 + v48 + v49; /*0x5f6a6d*/
+              v52 = TESObjectREFR_GetName((TESObjectREFR *)v162); /*0x5f6a71*/
+              HIDWORD(v77) = "%s sneak value %i"; /*0x5f6a77*/
+              LODWORD(v77) = 0xC8; /*0x5f6a80*/
+              _snprintf(Dest, v77, v52, v132); /*0x5f6a86*/
+              v89 = (float)v150; /*0x5f6aa4*/
+              v171 = 0x500 - iDebugTextLeftRightOffset; /*0x5f6aa8*/
+              v78 = (float)v171; /*0x5f6ab4*/
+              InterfaceMgr_DebugTextLine(Dest, v78, v89, 3, 0xFFFFFFFF); /*0x5f6ab8*/
+              v151 = v48 + v150; /*0x5f6ac9*/
+              v53 = TESObjectREFR_GetName(a7); /*0x5f6acd*/
+              HIDWORD(v79) = "%s sneak value %i"; /*0x5f6ad3*/
+              LODWORD(v79) = 0xC8; /*0x5f6adc*/
+              _snprintf(Dest, v79, v53, 0x7FFFFFFF); /*0x5f6ae2*/
+              v90 = (float)v151; /*0x5f6b00*/
+              v80 = (float)(0x500 - iDebugTextLeftRightOffset); /*0x5f6b10*/
+              InterfaceMgr_DebugTextLine(Dest, v80, v90, 3, 0xFFFFFFFF); /*0x5f6b14*/
+              HIDWORD(v72) = "Line of sight %i"; /*0x5f6b1f*/
+              LODWORD(v72) = 0xC8; /*0x5f6b28*/
+              v152 = v48 + v151; /*0x5f6b30*/
+              _snprintf(Dest, v72, (const char *)(unsigned __int8)v166); /*0x5f6b34*/
+              v91 = (float)v152; /*0x5f6b56*/
+              v81 = (float)(0x500 - iDebugTextLeftRightOffset); /*0x5f6b62*/
+              InterfaceMgr_DebugTextLine(Dest, v81, v91, 3, 0xFFFFFFFF); /*0x5f6b66*/
+              HIDWORD(v82) = "Distance between %.0f"; /*0x5f6b75*/
+              LODWORD(v82) = 0xC8; /*0x5f6b7e*/
+              v153 = v48 + v152; /*0x5f6b86*/
+              _snprintf( /*0x5f6b8a*/
+                Dest,
+                v82,
+                (const char *)COERCE_UNSIGNED_INT64(*(float *)&v168),
+                (_DWORD)HIDWORD(COERCE_UNSIGNED_INT64(*(float *)&v168)));
+              v92 = (float)v153; /*0x5f6ba8*/
+              v154 = 0x500 - iDebugTextLeftRightOffset; /*0x5f6bac*/
+              v83 = (float)v154; /*0x5f6bb8*/
+              InterfaceMgr_DebugTextLine(Dest, v83, v92, 3, 0xFFFFFFFF); /*0x5f6bbc*/
+              v54 = ((int (__thiscall *)(TESObjectREFR *, int, int))a1->vtbl[1].Unk_37)(a1, 0x2D, v136);// AVU hook site: detection debug text only. Vanilla rereads detector Blindness AV 0x2D for the debug line; AVU keeps this display consistent with its optional Blindness DR. /*0x5f6bd6*/
+              v55 = (TESObjectREFR *)v163; /*0x5f6bd8*/
+              v137 = v54; /*0x5f6bdc*/
+              v56 = TESObjectREFR_GetName((TESObjectREFR *)v163); /*0x5f6bdf*/
+              HIDWORD(var120i) = "%s blindess value %i"; /*0x5f6be5*/
+              LODWORD(var120i) = 0xC8; /*0x5f6bee*/
+              _snprintf(v175, var120i, v56, v137); /*0x5f6bf4*/
+              Formath = (float)v154; /*0x5f6c0c*/
+              v94 = (float)(0x500 - iDebugTextLeftRightOffset); /*0x5f6c22*/
+              InterfaceMgr_DebugTextLine(v175, v94, Formath, 3, 0xFFFFFFFF); /*0x5f6c26*/
+              v138 = v165; /*0x5f6c34*/
+              v155 = v48 + v48 + v153; /*0x5f6c37*/
+              v57 = TESObjectREFR_GetName(a7); /*0x5f6c3b*/
+              HIDWORD(var120k) = "Light level on %s is  %i"; /*0x5f6c41*/
+              LODWORD(var120k) = 0xC8; /*0x5f6c4a*/
+              _snprintf(v175, var120k, v57, v138); /*0x5f6c50*/
+              Formati = (float)v155; /*0x5f6c6e*/
+              v96 = (float)(0x500 - iDebugTextLeftRightOffset); /*0x5f6c7e*/
+              InterfaceMgr_DebugTextLine(v175, v96, Formati, 3, 0xFFFFFFFF); /*0x5f6c82*/
+              v139 = *(_DWORD *)Dest; /*0x5f6c8e*/
+              v156 = v48 + v155; /*0x5f6c93*/
+              v58 = TESObjectREFR_GetName(a7); /*0x5f6c97*/
+              HIDWORD(var120m) = "Invisiblity level %s is  %i"; /*0x5f6c9d*/
+              LODWORD(var120m) = 0xC8; /*0x5f6ca6*/
+              _snprintf(v175, var120m, v58, v139); /*0x5f6cac*/
+              Formatj = (float)v156; /*0x5f6cca*/
+              v98 = (float)(0x500 - iDebugTextLeftRightOffset); /*0x5f6cda*/
+              InterfaceMgr_DebugTextLine(v175, v98, Formatj, 3, 0xFFFFFFFF); /*0x5f6cde*/
+              v140 = v170; /*0x5f6cec*/
+              v157 = v48 + v156; /*0x5f6cef*/
+              v59 = TESObjectREFR_GetName(a7); /*0x5f6cf3*/
+              HIDWORD(var120o) = "%s boot weight is  %i"; /*0x5f6cf9*/
+              LODWORD(var120o) = 0xC8; /*0x5f6d02*/
+              _snprintf(v175, var120o, v59, v140); /*0x5f6d08*/
+              Formatk = (float)v157; /*0x5f6d20*/
+              v100 = (float)(0x500 - iDebugTextLeftRightOffset); /*0x5f6d36*/
+              InterfaceMgr_DebugTextLine(v175, v100, Formatk, 3, 0xFFFFFFFF); /*0x5f6d3a*/
+              v60 = v48 + v157; /*0x5f6d3f*/
+              v158 = v48 + v157; /*0x5f6d46*/
+              v141 = TESObjectREFR_GetName(a7); /*0x5f6d54*/
+              if ( (_BYTE)v168 ) /*0x5f6d55*/
+                HIDWORD(Format) = "%s is moving"; /*0x5f6d57*/
+              else
+                HIDWORD(Format) = "%s is not moving"; /*0x5f6d68*/
+              LODWORD(Format) = 0xC8; /*0x5f6d5c*/
+              _snprintf(v175, Format, v141); /*0x5f6d66*/
+              Formatl = (float)v158; /*0x5f6d95*/
+              v101 = (float)(0x500 - iDebugTextLeftRightOffset); /*0x5f6da5*/
+              InterfaceMgr_DebugTextLine(v175, v101, Formatl, 3, 0xFFFFFFFF); /*0x5f6da9*/
+              v61 = v48 + v60; /*0x5f6dae*/
+              v142 = TESObjectREFR_GetName(a7); /*0x5f6dc3*/
+              if ( (_BYTE)v171 ) /*0x5f6dc4*/
+                HIDWORD(Formata) = "%s is sneaking"; /*0x5f6dc6*/
+              else
+                HIDWORD(Formata) = "%s is not sneaking"; /*0x5f6dd7*/
+              LODWORD(Formata) = 0xC8; /*0x5f6dcb*/
+              _snprintf(v175, Formata, v142); /*0x5f6dd5*/
+              Formatm = (float)v61; /*0x5f6e04*/
+              v102 = (float)(0x500 - iDebugTextLeftRightOffset); /*0x5f6e14*/
+              InterfaceMgr_DebugTextLine(v175, v102, Formatm, 3, 0xFFFFFFFF); /*0x5f6e18*/
+              v62 = v48 + v61; /*0x5f6e1d*/
+              v143 = TESObjectREFR_GetName(v55); /*0x5f6e2d*/
+              v133 = TESObjectREFR_GetName(a7); /*0x5f6e3d*/
+              if ( a12 ) /*0x5f6e3e*/
+                HIDWORD(v103) = "%s attaked %s"; /*0x5f6e40*/
+              else
+                HIDWORD(v103) = "%s did not attack %s "; /*0x5f6e51*/
+              LODWORD(v103) = 0xC8; /*0x5f6e45*/
+              _snprintf(v175, v103, v133, v143); /*0x5f6e4f*/
+              Formatn = (float)v62; /*0x5f6e7e*/
+              v104 = (float)(0x500 - iDebugTextLeftRightOffset); /*0x5f6e8e*/
+              InterfaceMgr_DebugTextLine(v175, v104, Formatn, 3, 0xFFFFFFFF); /*0x5f6e92*/
+              v63 = v48 + v62; /*0x5f6e97*/
+              v144 = TESObjectREFR_GetName(a7); /*0x5f6eaf*/
+              if ( (_BYTE)a11 ) /*0x5f6eb0*/
+                HIDWORD(Formatb) = "%s is in combat"; /*0x5f6eb2*/
+              else
+                HIDWORD(Formatb) = "%s is not in combat "; /*0x5f6ec3*/
+              LODWORD(Formatb) = 0xC8; /*0x5f6eb7*/
+              _snprintf(v175, Formatb, v144); /*0x5f6ec1*/
+              Formato = (float)v63; /*0x5f6ef0*/
+              v105 = (float)(0x500 - iDebugTextLeftRightOffset); /*0x5f6f00*/
+              InterfaceMgr_DebugTextLine(v175, v105, Formato, 3, 0xFFFFFFFF); /*0x5f6f04*/
+              v64 = v48 + v63; /*0x5f6f09*/
+              v145 = TESObjectREFR_GetName(a7); /*0x5f6f1e*/
+              if ( (_BYTE)v166 ) /*0x5f6f1f*/
+                HIDWORD(Formatc) = "%s is running"; /*0x5f6f21*/
+              else
+                HIDWORD(Formatc) = "%s is not running"; /*0x5f6f32*/
+              LODWORD(Formatc) = 0xC8; /*0x5f6f26*/
+              _snprintf(v175, Formatc, v145); /*0x5f6f30*/
+              Formatp = (float)v64; /*0x5f6f5f*/
+              v106 = (float)(0x500 - iDebugTextLeftRightOffset); /*0x5f6f6f*/
+              InterfaceMgr_DebugTextLine(v175, v106, Formatp, 3, 0xFFFFFFFF); /*0x5f6f73*/
+              v65 = v48 + v64; /*0x5f6f78*/
+              v146 = TESObjectREFR_GetName(a7); /*0x5f6f8d*/
+              if ( (_BYTE)v173 ) /*0x5f6f8e*/
+                HIDWORD(Formatd) = "%s is underwater"; /*0x5f6f90*/
+              else
+                HIDWORD(Formatd) = "%s is not underwater"; /*0x5f6fa1*/
+              LODWORD(Formatd) = 0xC8; /*0x5f6f95*/
+              _snprintf(v175, Formatd, v146); /*0x5f6f9f*/
+              Formatq = (float)v65; /*0x5f6fce*/
+              v107 = (float)(0x500 - iDebugTextLeftRightOffset); /*0x5f6fde*/
+              InterfaceMgr_DebugTextLine(v175, v107, Formatq, 3, 0xFFFFFFFF); /*0x5f6fe2*/
+              v66 = v48 + v65; /*0x5f6fe7*/
+              v147 = TESObjectREFR_GetName(v55); /*0x5f6ffc*/
+              if ( (_BYTE)v164 ) /*0x5f6ffd*/
+                HIDWORD(Formate) = "%s is sleeping"; /*0x5f6fff*/
+              else
+                HIDWORD(Formate) = "%s is not sleeping"; /*0x5f7010*/
+              LODWORD(Formate) = 0xC8; /*0x5f7004*/
+              _snprintf(v175, Formate, v147); /*0x5f700e*/
+              Formatr = (float)v66; /*0x5f703d*/
+              v108 = (float)(0x500 - iDebugTextLeftRightOffset); /*0x5f704d*/
+              InterfaceMgr_DebugTextLine(v175, v108, Formatr, 3, 0xFFFFFFFF); /*0x5f7051*/
+              v134 = TESObjectREFR_GetName(a7); /*0x5f7065*/
+              v67 = TESObjectREFR_GetName(v55); /*0x5f7068*/
+              HIDWORD(v84) = "%s detection level to %s is  %i"; /*0x5f706e*/
+              LODWORD(v84) = 0xC8; /*0x5f7077*/
+              _snprintf(v175, v84, v67, v134, v162); /*0x5f707d*/
+              Formats = (float)(v48 + v66); /*0x5f70a1*/
+              v109 = (float)(0x500 - iDebugTextLeftRightOffset); /*0x5f70b1*/
+              InterfaceMgr_DebugTextLine(v175, v109, Formats, 3, 0xFFFFFFFF); /*0x5f70b5*/
+            }
+          }
+        }
       }
-    }
-    *a8 = v185;
-    v188 = sub_5F3B50((int)a7, (int)a1);
-    if ( Actor_IsSneaking(a7) )
-    {
-      BaseCalcAVi = Actor_GetBaseCalcAVi((int *)a7, (int)a1, 0x7FFFFFFF, (int)a8, 0x1F);
-      if ( Calc_MasteryFromSkill(BaseCalcAVi) >= 2 )
-        v188 = 0;
-    }
-    if ( !a7[1].vtbl
-      || (v22 = (*((int (__thiscall **)(TESObjectREFRVtbl *))a7[1].vtbl->super.super.InitializeComponent + 0xB0))(a7[1].vtbl),
-          LOBYTE(v186) = 1,
-          (v22 & 0xF) == 0) )
-    {
-      LOBYTE(v186) = 0;
-    }
-    LOBYTE(v184) = ((*((int (__thiscall **)(TESObjectREFRVtbl *))a7[1].vtbl->super.super.InitializeComponent + 0xB0))(a7[1].vtbl)
-                  & 0x200) != 0;
-    if ( Actor_IsSneaking(a7) )
-    {
-      v23 = Actor_GetBaseCalcAVi((int *)a7, (int)a1, 0x7FFFFFFF, (int)a8, 0x1F);
-      if ( Calc_MasteryFromSkill(v23) >= 3 )
-      {
-        LOBYTE(v186) = 0;
-        LOBYTE(v184) = 0;
-      }
-    }
-    IsSneaking = Actor_IsSneaking(a7);
-    v150 = flt_A6E688;
-    LOBYTE(v189) = IsSneaking;
-    Formatf = (char *)TESObjectREFR_GetParentCell(a1);
-    v25 = (int)a1->vtbl->GetPos(a1);
-    IsUnderwater = Actor_IsUnderwater__(a1, v25, (ExtraDataList *)Formatf, v150);
-    v27 = a1[1].vtbl == 0;
-    LOBYTE(v191) = IsUnderwater;
-    LOBYTE(v182) = !v27
-                && (*((int (__thiscall **)(TESObjectREFRVtbl *))a1[1].vtbl->super.super.InitializeComponent + 0xDB))(a1[1].vtbl) == 9;
-    LOBYTE(v180) = 1;
-    if ( (_BYTE)a10 )
-      LOBYTE(v189) = 0;
-    if ( TESObjectREFR_GetParentCell(a7) )
-    {
-      ParentCell = TESObjectREFR_GetParentCell(a7);
-      LOBYTE(v180) = TESObjectCELL_IsInterior(ParentCell) == 0;
-    }
-    v29 = ((double (__thiscall *)(TESObjectREFR *, int))a1->vtbl[1].Unk_38)(a1, 7);
-    v30 = Double_To_SInt32(v29);
-    v31 = ((double (__thiscall *)(TESObjectREFR *, int, int))a1->vtbl[1].Unk_38)(a1, 0x1F, v30);
-    v32 = Double_To_SInt32(v31);
-    v33 = Calc_LuckModifiedSkill(v32, v154);
-    v34 = Double_To_SInt32(v33);
-    Unk_38 = a7->vtbl[1].Unk_38;
-    v191 = v34;
-    v36 = ((double (__thiscall *)(TESObjectREFR *))Unk_38)(a7);
-    v37 = Double_To_SInt32(v36);
-    v38 = ((double (__thiscall *)(TESObjectREFR *, int, int))a7->vtbl[1].Unk_38)(a7, 0x1F, v37);
-    v39 = Double_To_SInt32(v38);
-    v40 = Calc_LuckModifiedSkill(v39, 7);
-    v41 = Double_To_SInt32(v40);
-    v155 = 0x2F;
-    if ( ((int (__thiscall *)(TESObjectREFR *))a7->vtbl[1].Unk_37)(a7) <= 0 )
-    {
-      v42 = ((int (__thiscall *)(TESObjectREFR *, int))a7->vtbl[1].Unk_37)(a7, 0x2E);
-      v192 = v42;
-      if ( v42 < 0x64 )
-      {
-        Formatg = (char)v182;
-        v104 = v191;
-        v93 = v184;
-        v92 = v189;
-        v90 = v186;
-        v89 = *(float *)&v188;
-        v88 = v42;
-        v87 = v183;
-        v43 = ((int (__thiscall *)(TESObjectREFR *, int))a1->vtbl[1].Unk_37)(a1, 0x2D);
-        v179 = Calc_DetectionLevel(
-                 v34,
-                 v41,
-                 (unsigned __int8)v185,
-                 v187,
-                 v43,
-                 v87,
-                 v88,
-                 v89,
-                 v90,
-                 v92,
-                 a11,
-                 a10,
-                 v93,
-                 v104,
-                 Formatg,
-                 (int)v180,
-                 0x2F,
-                 v167,
-                 v168,
-                 v169);
-      }
-      else
-      {
-        v179 = 0xFFFFFF9C;
-      }
+      Actor_GetDetectionLevelAgainstActor_ReturnResult(a6, (int)a7, (int)a8, a9, a10, a11); /*0x5f70bd*/
     }
     else
     {
-      v192 = 0x64;
-      v179 = 0xFFFFFF9C;
-    }
-    if ( *(float *)&v187 <= dbl_A6C820 )
-    {
-      v44 = ((double (__thiscall *)(TESObjectREFRVtbl *))*((_DWORD *)a7[1].vtbl->super.super.InitializeComponent + 0xD7))(a7[1].vtbl);
-      v179 = Double_To_SInt32(v44 + (double)v179);
-    }
-    if ( !(_BYTE)a7 || (_BYTE)a11 )
-    {
-      v45 = 0;
-      if ( v179 > 0 )
-        v45 = 3;
-      if ( a1 != (TESObjectREFR *)TESDataHandler_g_PlayerRef )
-        (*((void (__thiscall **)(TESObjectREFRVtbl *, TESObjectREFR *, int, int, int))a1[1].vtbl->super.super.InitializeComponent
-         + 0x2A))(
-          a1[1].vtbl,
-          a7,
-          v45,
-          v185,
-          v179);
-    }
-    if ( byte_B3BD9A )
-    {
-      if ( !dword_B3BD9C && a7 == (TESObjectREFR *)TESDataHandler_g_PlayerRef || (TESObjectREFR *)dword_B3BD9C == a7 )
-      {
-        v181 = 0;
-        if ( srcObj )
-        {
-          if ( (*((unsigned __int8 (__thiscall **)(TESChildCELL *))srcObj->vtbl + 0x64))(srcObj) )
-            v181 = srcObj;
-        }
-        v46 = dword_B12DB4 - 1;
-        Singleton = FontManager_GetSingleton();
-        v48 = sub_404FB0((_DWORD *)Singleton[v46]);
-        v49 = Double_To_SInt32(v48 + dbl_A30E48);
-        v50 = v49 + 0xA;
-        if ( v181 == (TESChildCELL *)a1 )
-        {
-          v105 = (float)(v49 + 0xA);
-          v51 = (double)(0x500 - iDebugTextLeftRightOffset);
-          v94 = v51;
-          Name = TESObjectREFR_GetName((TESObjectREFR *)v181);
-          InterfaceMgr_DebugTextLine((char)a7, st5_0, st6_0, v51, Name, v94, v105, 3, 0xFFFFFFFF);
-          v53 = TESObjectREFR_GetName(a7);
-          HIDWORD(var120c) = "Running Detection Against %s";
-          LODWORD(var120c) = 0xC8;
-          _snprintf(Dest, var120c, v53);
-          v107 = (float)(v49 + v50);
-          v54 = (double)(0x500 - iDebugTextLeftRightOffset);
-          v95 = v54;
-          InterfaceMgr_DebugTextLine((char)a7, st5_0, st6_0, v54, Dest, v95, v107, 3, 0xFFFFFFFF);
-          v151 = v190;
-          v170 = v49 + v49 + v50;
-          v55 = TESObjectREFR_GetName((TESObjectREFR *)v181);
-          HIDWORD(v96) = "%s sneak value %i";
-          LODWORD(v96) = 0xC8;
-          _snprintf(Dest, v96, v55, v151);
-          v108 = (float)v170;
-          v190 = 0x500 - iDebugTextLeftRightOffset;
-          v56 = (double)v190;
-          v97 = v56;
-          InterfaceMgr_DebugTextLine((char)a7, st5_0, st6_0, v56, Dest, v97, v108, 3, 0xFFFFFFFF);
-          v171 = v49 + v170;
-          v57 = TESObjectREFR_GetName(a7);
-          HIDWORD(v98) = "%s sneak value %i";
-          LODWORD(v98) = 0xC8;
-          _snprintf(Dest, v98, v57, 0x7FFFFFFF);
-          v109 = (float)v171;
-          v58 = (double)(0x500 - iDebugTextLeftRightOffset);
-          v99 = v58;
-          InterfaceMgr_DebugTextLine((char)a7, st5_0, st6_0, v58, Dest, v99, v109, 3, 0xFFFFFFFF);
-          HIDWORD(v91) = "Line of sight %i";
-          LODWORD(v91) = 0xC8;
-          v172 = v49 + v171;
-          _snprintf(Dest, v91, (const char *)(unsigned __int8)v185);
-          v110 = (float)v172;
-          v59 = (double)(0x500 - iDebugTextLeftRightOffset);
-          v100 = v59;
-          InterfaceMgr_DebugTextLine((char)a7, st5_0, st6_0, v59, Dest, v100, v110, 3, 0xFFFFFFFF);
-          HIDWORD(v101) = "Distance between %.0f";
-          LODWORD(v101) = 0xC8;
-          v173 = v49 + v172;
-          _snprintf(
-            Dest,
-            v101,
-            (const char *)COERCE_UNSIGNED_INT64(*(float *)&v187),
-            (_DWORD)HIDWORD(COERCE_UNSIGNED_INT64(*(float *)&v187)));
-          v111 = (float)v173;
-          v60 = (double)(0x500 - iDebugTextLeftRightOffset);
-          v102 = v60;
-          InterfaceMgr_DebugTextLine((char)a7, st5_0, st6_0, v60, Dest, v102, v111, 3, 0xFFFFFFFF);
-          v61 = ((int (__thiscall *)(TESObjectREFR *, int, int))a1->vtbl[1].Unk_37)(a1, 0x2D, v155);
-          v62 = (TESObjectREFR *)v182;
-          v156 = v61;
-          v63 = TESObjectREFR_GetName((TESObjectREFR *)v182);
-          HIDWORD(var120i) = "%s blindess value %i";
-          LODWORD(var120i) = 0xC8;
-          _snprintf(v194, var120i, v63, v156);
-          Formath = v60;
-          v64 = (double)(0x500 - iDebugTextLeftRightOffset);
-          v113 = v64;
-          InterfaceMgr_DebugTextLine((char)a7, st5_0, st6_0, v64, v194, v113, Formath, 3, 0xFFFFFFFF);
-          v157 = v184;
-          v174 = v49 + v49 + v173;
-          v65 = TESObjectREFR_GetName(a7);
-          HIDWORD(var120k) = "Light level on %s is  %i";
-          LODWORD(var120k) = 0xC8;
-          _snprintf(v194, var120k, v65, v157);
-          Formati = (float)v174;
-          v66 = (double)(0x500 - iDebugTextLeftRightOffset);
-          v115 = v66;
-          InterfaceMgr_DebugTextLine((char)a7, st5_0, st6_0, v66, v194, v115, Formati, 3, 0xFFFFFFFF);
-          v158 = *(_DWORD *)Dest;
-          v175 = v49 + v174;
-          v67 = TESObjectREFR_GetName(a7);
-          HIDWORD(var120m) = "Invisiblity level %s is  %i";
-          LODWORD(var120m) = 0xC8;
-          _snprintf(v194, var120m, v67, v158);
-          Formatj = (float)v175;
-          v68 = (double)(0x500 - iDebugTextLeftRightOffset);
-          v117 = v68;
-          InterfaceMgr_DebugTextLine((char)a7, st5_0, st6_0, v68, v194, v117, Formatj, 3, 0xFFFFFFFF);
-          v159 = v189;
-          v176 = v49 + v175;
-          v69 = TESObjectREFR_GetName(a7);
-          HIDWORD(var120o) = "%s boot weight is  %i";
-          LODWORD(var120o) = 0xC8;
-          _snprintf(v194, var120o, v69, v159);
-          Formatk = (float)v176;
-          v70 = (double)(0x500 - iDebugTextLeftRightOffset);
-          v119 = v70;
-          InterfaceMgr_DebugTextLine((char)a7, st5_0, st6_0, v70, v194, v119, Formatk, 3, 0xFFFFFFFF);
-          v71 = v49 + v176;
-          v177 = v49 + v176;
-          v160 = TESObjectREFR_GetName(a7);
-          if ( (_BYTE)v187 )
-            HIDWORD(Format) = "%s is moving";
-          else
-            HIDWORD(Format) = "%s is not moving";
-          LODWORD(Format) = 0xC8;
-          _snprintf(v194, Format, v160);
-          Formatl = (float)v177;
-          v72 = (double)(0x500 - iDebugTextLeftRightOffset);
-          v120 = v72;
-          InterfaceMgr_DebugTextLine((char)a7, st5_0, st6_0, v72, v194, v120, Formatl, 3, 0xFFFFFFFF);
-          v73 = v49 + v71;
-          v161 = TESObjectREFR_GetName(a7);
-          if ( (_BYTE)v190 )
-            HIDWORD(Formata) = "%s is sneaking";
-          else
-            HIDWORD(Formata) = "%s is not sneaking";
-          LODWORD(Formata) = 0xC8;
-          _snprintf(v194, Formata, v161);
-          Formatm = (float)v73;
-          v74 = (double)(0x500 - iDebugTextLeftRightOffset);
-          v121 = v74;
-          InterfaceMgr_DebugTextLine((char)a7, st5_0, st6_0, v74, v194, v121, Formatm, 3, 0xFFFFFFFF);
-          v75 = v49 + v73;
-          v162 = TESObjectREFR_GetName(v62);
-          v152 = TESObjectREFR_GetName(a7);
-          if ( a12 )
-            HIDWORD(v122) = "%s attaked %s";
-          else
-            HIDWORD(v122) = "%s did not attack %s ";
-          LODWORD(v122) = 0xC8;
-          _snprintf(v194, v122, v152, v162);
-          Formatn = (float)v75;
-          v76 = (double)(0x500 - iDebugTextLeftRightOffset);
-          v123 = v76;
-          InterfaceMgr_DebugTextLine((char)a7, st5_0, st6_0, v76, v194, v123, Formatn, 3, 0xFFFFFFFF);
-          v77 = v49 + v75;
-          v163 = TESObjectREFR_GetName(a7);
-          if ( (_BYTE)a11 )
-            HIDWORD(Formatb) = "%s is in combat";
-          else
-            HIDWORD(Formatb) = "%s is not in combat ";
-          LODWORD(Formatb) = 0xC8;
-          _snprintf(v194, Formatb, v163);
-          Formato = (float)v77;
-          v78 = (double)(0x500 - iDebugTextLeftRightOffset);
-          v124 = v78;
-          InterfaceMgr_DebugTextLine((char)a7, st5_0, st6_0, v78, v194, v124, Formato, 3, 0xFFFFFFFF);
-          v79 = v49 + v77;
-          v164 = TESObjectREFR_GetName(a7);
-          if ( (_BYTE)v185 )
-            HIDWORD(Formatc) = "%s is running";
-          else
-            HIDWORD(Formatc) = "%s is not running";
-          LODWORD(Formatc) = 0xC8;
-          _snprintf(v194, Formatc, v164);
-          Formatp = (float)v79;
-          v80 = (double)(0x500 - iDebugTextLeftRightOffset);
-          v125 = v80;
-          InterfaceMgr_DebugTextLine((char)a7, st5_0, st6_0, v80, v194, v125, Formatp, 3, 0xFFFFFFFF);
-          v81 = v49 + v79;
-          v165 = TESObjectREFR_GetName(a7);
-          if ( (_BYTE)v192 )
-            HIDWORD(Formatd) = "%s is underwater";
-          else
-            HIDWORD(Formatd) = "%s is not underwater";
-          LODWORD(Formatd) = 0xC8;
-          _snprintf(v194, Formatd, v165);
-          Formatq = (float)v81;
-          v82 = (double)(0x500 - iDebugTextLeftRightOffset);
-          v126 = v82;
-          InterfaceMgr_DebugTextLine((char)a7, st5_0, st6_0, v82, v194, v126, Formatq, 3, 0xFFFFFFFF);
-          v83 = v49 + v81;
-          v166 = TESObjectREFR_GetName(v62);
-          if ( (_BYTE)v183 )
-            HIDWORD(Formate) = "%s is sleeping";
-          else
-            HIDWORD(Formate) = "%s is not sleeping";
-          LODWORD(Formate) = 0xC8;
-          _snprintf(v194, Formate, v166);
-          Formatr = (float)v83;
-          v84 = (double)(0x500 - iDebugTextLeftRightOffset);
-          v127 = v84;
-          InterfaceMgr_DebugTextLine((char)a7, st5_0, st6_0, v84, v194, v127, Formatr, 3, 0xFFFFFFFF);
-          v153 = TESObjectREFR_GetName(a7);
-          v85 = TESObjectREFR_GetName(v62);
-          HIDWORD(v103) = "%s detection level to %s is  %i";
-          LODWORD(v103) = 0xC8;
-          _snprintf(v194, v103, v85, v153, v181);
-          Formats = (float)(v49 + v83);
-          v86 = (double)(0x500 - iDebugTextLeftRightOffset);
-          v128 = v86;
-          InterfaceMgr_DebugTextLine((char)a7, st5_0, st6_0, v86, v194, v128, Formats, 3, 0xFFFFFFFF);
-        }
-      }
+      Actor_GetDetectionLevelAgainstActor_ReturnNegativeOne(a6, (int)a7, (int)a8, a9, a10, a11); /*0x5f65ae*/
     }
   }
-  return Actor_GetDetectionLevel_::ReturnDetectionLevel(a6, (int)a7, (int)a8, a9, a10, a11);
+  else
+  {
+    Actor_GetDetectionLevelAgainstActor_Epilogue(a6, (int)a7, (int)a8, a9, a10, a11); /*0x5f656f*/
+  }
 }

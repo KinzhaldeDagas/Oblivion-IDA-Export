@@ -1,28 +1,54 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "$3DDF936440EDFABD61A7CD58471D6A3E",
+  "definition": "union $3DDF936440EDFABD61A7CD58471D6A3E\n{\nssize_t next_free;\nLFH_slist_0 entry_defer;\nsize_t alloc_size;\n}\n",
   "id": 18374686479672047825,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "next_free",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "ssize_t"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "entry_defer",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "LFH_slist_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "alloc_size",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "size_t"
     }
   ],
   "name": "$3DDF936440EDFABD61A7CD58471D6A3E",
+  "ordinal": 8862,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 8
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x65D160",
-    "line": "push    esi",
+    "line": "push    esi; Player integer base-AV modifier. Mutate actor-base storage directly, refresh UI, and notify with rebuild=true. This is not Player_SkillLevelIncrease.",
     "mnemonic": "push",
     "size": 1
   },
@@ -79,13 +79,13 @@
   },
   {
     "ea": "0x65D181",
-    "line": "push    edi; a2",
+    "line": "push    edi; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x65D182",
-    "line": "call    sub_57A6F0",
+    "line": "call    UI_UpdateActorValueDisplays; UI_UpdateActorValueDisplays(actorValue), called by player base-AV setters/modifiers after changing base form values.",
     "mnemonic": "call",
     "size": 5
   },
@@ -97,25 +97,25 @@
   },
   {
     "ea": "0x65D18A",
-    "line": "push    1",
+    "line": "push    1; updatePlayerUI",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x65D18C",
-    "line": "push    edi",
+    "line": "push    edi; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x65D18D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x65D18F",
-    "line": "call    sub_5E2670",
+    "line": "call    Player_OnActorValueBaseChanged; Handles player base actor-value changes. For native skill AVs, optional UI refresh also recalculates required experience for all 21 skills; major/non-major membership affects the recomputed requirement through TESClass_IsMajorSkillAV.",
     "mnemonic": "call",
     "size": 5
   },

@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x4FBE6F",
-    "line": "call    Script_RunEvent??",
+    "line": "call    ScriptRunner_RunEvent",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,13 +373,13 @@
   },
   {
     "ea": "0x4FBEA5",
-    "line": "push    0; a3",
+    "line": "push    0; sourceScript",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4FBEA7",
-    "line": "push    ebp; ArgList",
+    "line": "push    ebp; variableID",
     "mnemonic": "push",
     "size": 1
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x4FBEAA",
-    "line": "call    sub_4FA110",
+    "line": "call    ScriptEventList__GetVariableValue; ScriptEventList::GetVariableValue scans `m_vars` for Var.id == variableID and returns Var.data. A single global last-list/last-ID/Var cache accelerates repeated CTDA and script lookups; a cache miss with no variable logs an error and returns 0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -433,13 +433,13 @@
   },
   {
     "ea": "0x4FBEC4",
-    "line": "push    esi; a3",
+    "line": "push    esi; sourceScript",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4FBEC5",
-    "line": "push    ebp; ArgList",
+    "line": "push    ebp; variableID",
     "mnemonic": "push",
     "size": 1
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x4FBEC8",
-    "line": "call    sub_4FA110",
+    "line": "call    ScriptEventList__GetVariableValue; ScriptEventList::GetVariableValue scans `m_vars` for Var.id == variableID and returns Var.data. A single global last-list/last-ID/Var cache accelerates repeated CTDA and script lookups; a cache miss with no variable logs an error and returns 0.",
     "mnemonic": "call",
     "size": 5
   },

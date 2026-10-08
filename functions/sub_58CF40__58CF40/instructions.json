@@ -7,7 +7,7 @@
   },
   {
     "ea": "0x58CF43",
-    "line": "mov     eax, [esp+8+arg_0]",
+    "line": "mov     eax, [esp+8+tileTemplate]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x58CF62",
-    "line": "mov     ecx, [esp+18h+arg_0]",
+    "line": "mov     ecx, [esp+18h+tileTemplate]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x58CF73",
-    "line": "mov     [esp+18h+arg_0], ecx",
+    "line": "mov     [esp+18h+tileTemplate], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -210,14 +210,8 @@
     "size": 2
   },
   {
-    "ea": "0x58CFA7",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x58CFB0",
-    "line": "mov     ecx, [esi+8]",
+    "line": "mov     ecx, [esi+8]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -247,13 +241,13 @@
   },
   {
     "ea": "0x58CFC0",
-    "line": "push    1",
+    "line": "push    1; forceUpdate",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x58CFC2",
-    "line": "call    DoActionEnumeration",
+    "line": "call    Tile__Value__CalculateValue; Verified: loader evaluates each Value on closing its tile, skipping class trait 0xFA2. This is a correct Value* CalculateValue call and already initializes injected fragment dependencies.",
     "mnemonic": "call",
     "size": 5
   },
@@ -457,13 +451,13 @@
   },
   {
     "ea": "0x58D028",
-    "line": "push    eax",
+    "line": "push    eax; trait",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58D029",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -475,7 +469,7 @@
   },
   {
     "ea": "0x58D02F",
-    "line": "call    Tile_GetPropertyByCode?",
+    "line": "call    Tile__GetOrCreateValue; Verified: sorted trait lookup; if absent allocates 0x1C bytes, constructs Value at 0x589DF0, stores owner Tile at +0 and inserts into Tile value list. Corrects misleading existing-property-only interpretation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,19 +499,19 @@
   },
   {
     "ea": "0x58D041",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x58D043",
-    "line": "fstp    [esp+1Ch+var_1C]; float",
+    "line": "fstp    [esp+1Ch+value]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x58D046",
-    "line": "call    Tile_Property_SetFloatValue?",
+    "line": "call    Tile__Value__SetFloat; Verified: marks numeric; if changed or string trait 0xFDE, clears string, stores number, clears own expression actions via 0x588930, then CalculateValue(this,true). Same-value ordinary traits bypass clear/evaluation. Unlike Fallout SetFloat, no abClearActions parameter.",
     "mnemonic": "call",
     "size": 5
   },
@@ -637,7 +631,7 @@
   },
   {
     "ea": "0x58D08B",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -649,13 +643,13 @@
   },
   {
     "ea": "0x58D08F",
-    "line": "push    eax",
+    "line": "push    eax; trait",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58D090",
-    "line": "call    Tile_GetPropertyByCode?",
+    "line": "call    Tile__GetOrCreateValue; Verified: sorted trait lookup; if absent allocates 0x1C bytes, constructs Value at 0x589DF0, stores owner Tile at +0 and inserts into Tile value list. Corrects misleading existing-property-only interpretation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -703,13 +697,13 @@
   },
   {
     "ea": "0x58D0AA",
-    "line": "push    eax",
+    "line": "push    eax; trait",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58D0AB",
-    "line": "call    Tile_GetPropertyByCode?",
+    "line": "call    Tile__GetOrCreateValue; Verified: sorted trait lookup; if absent allocates 0x1C bytes, constructs Value at 0x589DF0, stores owner Tile at +0 and inserts into Tile value list. Corrects misleading existing-property-only interpretation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -781,7 +775,7 @@
   },
   {
     "ea": "0x58D0D7",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -859,7 +853,7 @@
   },
   {
     "ea": "0x58D0FE",
-    "line": "push    eax; int",
+    "line": "push    eax; opcode",
     "mnemonic": "push",
     "size": 1
   },
@@ -883,37 +877,37 @@
   },
   {
     "ea": "0x58D108",
-    "line": "fstp    [esp+20h+var_20]; float",
+    "line": "fstp    [esp+20h+operand]; operand",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x58D10B",
-    "line": "push    ebx",
+    "line": "push    ebx; trait",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58D10C",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x58D10E",
-    "line": "call    Tile_GetPropertyByCode?",
+    "line": "call    Tile__GetOrCreateValue; Verified: sorted trait lookup; if absent allocates 0x1C bytes, constructs Value at 0x589DF0, stores owner Tile at +0 and inserts into Tile value list. Corrects misleading existing-property-only interpretation.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x58D113",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x58D115",
-    "line": "call    sub_58CBE0",
+    "line": "call    Tile__Value__AddFloatAction;",
     "mnemonic": "call",
     "size": 5
   },
@@ -967,19 +961,19 @@
   },
   {
     "ea": "0x58D132",
-    "line": "push    eax; unsigned __int8 *",
+    "line": "push    eax; selector",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58D133",
-    "line": "push    ebp; int",
+    "line": "push    ebp; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58D134",
-    "line": "call    sub_58B800",
+    "line": "call    Tile__GetTileByName; Verified XML source resolver. sibling() walks parent child list to current tile, returns following list node, and wraps to head if current is last or not found. It does not filter visible, target, or listindex. sibling(name) compares immediate sibling names case-insensitively. Fallout analogue 0x827DC678.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1021,43 +1015,43 @@
   },
   {
     "ea": "0x58D148",
-    "line": "push    eax",
+    "line": "push    eax; action",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58D149",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x58D14E",
-    "line": "push    eax",
+    "line": "push    eax; sourceTrait",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58D14F",
-    "line": "push    edi",
+    "line": "push    edi; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58D150",
-    "line": "push    ebx",
+    "line": "push    ebx; destinationTrait",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58D151",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x58D153",
-    "line": "call    sub_58CF10",
+    "line": "call    Tile__AddReferenceAction; Verified wrapper: gets/creates destination trait Value and forwards source tile/source trait/operator to Value::AddReferenceAction. Called from ConnectTraitsToTree after GetTileByName resolves source.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1165,7 +1159,7 @@
   },
   {
     "ea": "0x58D183",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1225,7 +1219,7 @@
   },
   {
     "ea": "0x58D1A2",
-    "line": "cmp     [esp+18h+arg_0], edi",
+    "line": "cmp     [esp+18h+tileTemplate], edi",
     "mnemonic": "cmp",
     "size": 4
   },

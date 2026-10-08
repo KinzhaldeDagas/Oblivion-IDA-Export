@@ -1,1 +1,1 @@
-DESCKIND
+typedef tagDESCKIND DESCKIND;

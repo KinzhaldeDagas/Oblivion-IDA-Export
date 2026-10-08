@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7609C0",
-    "line": "sub     esp, 64h",
+    "line": "sub     esp, 64h; DX10OBSE resource decode: initializes NiDX9SourceTextureData from existing D3D resource descriptions; rejects P8/A8P8, records dimensions, levels, and D3DFORMAT-derived NiSurfaceData.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x7609C6",
-    "line": "mov     esi, [esp+70h+arg_0]",
+    "line": "mov     esi, [esp+70h+resource]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x7609D3",
-    "line": "call    ecx",
+    "line": "call    ecx; Calls IDirect3DBaseTexture9::GetLevelCount on the created resource and records the actual runtime level count. For the persistent D3DX fast path this observes the complete chain synthesized from a one-level input.",
     "mnemonic": "call",
     "size": 2
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x7609E0",
-    "line": "mov     [ebx+65h], dl",
+    "line": "mov     [ebx+65h], dl; Derived hasMultipleMipLevels byte is true whenever actual D3D GetLevelCount()!=1; leaf draw-time resolver uses this to retain or disable MIPFILTER.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -331,13 +331,13 @@
   },
   {
     "ea": "0x760A4F",
-    "line": "call    D3DFMTToTextureFormat",
+    "line": "call    D3DFMTToTextureFormat; DX10OBSE runtime log pass 2026-05-24: D3D9 texture formats 0x17 R5G6B5 and 0x1A A4R4G4B4 appeared as high-volume mirror failures on the active D3D10 runtime. Plugin now treats legacy packed color texture/surface mirrors as RGBA8 upload targets and expands D3D9 shadow data during UpdateSubresource instead of relying on B5/B4 DXGI formats.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x760A54",
-    "line": "mov     esi, [esp+7Ch+arg_0]",
+    "line": "mov     esi, [esp+7Ch+resource]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -691,13 +691,13 @@
   },
   {
     "ea": "0x760AF6",
-    "line": "call    D3DFMTToTextureFormat",
+    "line": "call    D3DFMTToTextureFormat; DX10OBSE runtime log pass 2026-05-24: D3D9 texture formats 0x17 R5G6B5 and 0x1A A4R4G4B4 appeared as high-volume mirror failures on the active D3D10 runtime. Plugin now treats legacy packed color texture/surface mirrors as RGBA8 upload targets and expands D3D9 shadow data during UpdateSubresource instead of relying on B5/B4 DXGI formats.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x760AFB",
-    "line": "mov     esi, [esp+7Ch+arg_0]",
+    "line": "mov     esi, [esp+7Ch+resource]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1039,13 +1039,13 @@
   },
   {
     "ea": "0x760BAB",
-    "line": "call    D3DFMTToTextureFormat",
+    "line": "call    D3DFMTToTextureFormat; DX10OBSE runtime log pass 2026-05-24: D3D9 texture formats 0x17 R5G6B5 and 0x1A A4R4G4B4 appeared as high-volume mirror failures on the active D3D10 runtime. Plugin now treats legacy packed color texture/surface mirrors as RGBA8 upload targets and expands D3D9 shadow data during UpdateSubresource instead of relying on B5/B4 DXGI formats.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x760BB0",
-    "line": "mov     esi, [esp+7Ch+arg_0]",
+    "line": "mov     esi, [esp+7Ch+resource]",
     "mnemonic": "mov",
     "size": 7
   },

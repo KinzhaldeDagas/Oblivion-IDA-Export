@@ -1,1 +1,1 @@
-ExtraEditorID
+struct ExtraEditorID;

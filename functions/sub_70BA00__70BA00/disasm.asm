@@ -1,19 +1,19 @@
 0x70BA00: push    ebx
-0x70BA01: mov     ebx, [esp+4+arg_0]
+0x70BA01: mov     ebx, [esp+4+cloningProcess]
 0x70BA05: push    esi
 0x70BA06: push    edi
 0x70BA07: push    ebx
 0x70BA08: mov     esi, ecx
-0x70BA0A: call    sub_707AB0
+0x70BA0A: call    sub_707AB0; Pass227: Base object-map/reference collection called before NiScreenSpaceCamera child array traversal.
 0x70BA0F: mov     ecx, [ebx]
-0x70BA11: lea     eax, [esp+0Ch+arg_0]
+0x70BA11: lea     eax, [esp+0Ch+cloningProcess]
 0x70BA15: push    eax
 0x70BA16: push    esi
 0x70BA17: call    NiTMap_GetAt
 0x70BA1C: cmp     dword ptr [esi+0C8h], 0
 0x70BA23: lea     eax, [esi+0BCh]
 0x70BA29: jz      short loc_70BA36
-0x70BA2B: mov     ecx, [esp+0Ch+arg_0]
+0x70BA2B: mov     ecx, [esp+0Ch+cloningProcess]
 0x70BA2F: push    ebx
 0x70BA30: push    eax
 0x70BA31: call    sub_70B4E0

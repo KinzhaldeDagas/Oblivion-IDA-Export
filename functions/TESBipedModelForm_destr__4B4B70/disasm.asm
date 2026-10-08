@@ -38,3 +38,26 @@
 0x4B4BEF: pop     esi
 0x4B4BF0: add     esp, 10h
 0x4B4BF3: retn
+0x9B3680: push    offset ??1TESModel@@UAE@XZ; void (__thiscall *)(void *)
+0x9B3685: push    2; int
+0x9B3687: push    18h; unsigned int
+0x9B3689: mov     eax, [ebp-10h]
+0x9B368C: add     eax, 8
+0x9B368F: push    eax; void *
+0x9B3690: call    $LN21
+0x9B3695: retn
+0x9B3696: push    offset ??1TESModel@@UAE@XZ; void (__thiscall *)(void *)
+0x9B369B: push    2; int
+0x9B369D: push    18h; unsigned int
+0x9B369F: mov     eax, [ebp-10h]
+0x9B36A2: add     eax, 38h ; '8'
+0x9B36A5: push    eax; void *
+0x9B36A6: call    $LN21
+0x9B36AB: retn
+0x9B36AC: mov     edx, [esp+arg_4]
+0x9B36B0: lea     eax, [edx-8]
+0x9B36B3: mov     ecx, [edx-0Ch]
+0x9B36B6: xor     ecx, eax
+0x9B36B8: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B36BD: mov     eax, offset stru_ADF26C
+0x9B36C2: jmp     ___CxxFrameHandler3

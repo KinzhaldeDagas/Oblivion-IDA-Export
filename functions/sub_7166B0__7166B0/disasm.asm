@@ -45,7 +45,7 @@
 0x716735: call    eax
 0x716737: mov     ecx, [esp+0Ch+var_4]
 0x71673B: push    ecx
-0x71673C: call    FormHeapFree
+0x71673C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x716741: add     esp, 4
 0x716744: cmp     [esp+0Ch+arg_0], 0
 0x716749: ja      short loc_716700

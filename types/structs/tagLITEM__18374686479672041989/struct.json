@@ -1,46 +1,81 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "tagLITEM",
+  "definition": "struct tagLITEM\n{\nUINT mask;\nint iLink;\nUINT state;\nUINT stateMask;\nWCHAR_0 szID[48];\nWCHAR_0 szUrl[2084];\n}\n",
   "id": 18374686479672041989,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "mask",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "iLink",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "state",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "stateMask",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "szID",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 96
+      "size": 96,
+      "type": "WCHAR_0[48]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "szUrl",
       "offset": 112,
       "offset_hex": "0x70",
-      "size": 4168
+      "size": 4168,
+      "type": "WCHAR_0[2084]"
     }
   ],
   "name": "tagLITEM",
+  "ordinal": 6470,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 4280
 }

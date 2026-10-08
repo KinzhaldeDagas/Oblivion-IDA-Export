@@ -17,7 +17,7 @@
 0x50C588: push    edx; a2
 0x50C589: push    eax; a1
 0x50C58A: mov     dword ptr [esp+28h+var_4], 0
-0x50C592: call    Script_ExtractArgs
+0x50C592: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x50C597: add     esp, 20h
 0x50C59A: test    al, al
 0x50C59C: jnz     short loc_50C5A1
@@ -41,8 +41,8 @@
 0x50C5C7: push    offset aOpen; "Open"
 0x50C5CC: mov     ecx, esi
 0x50C5CE: call    sub_4D90D0
-0x50C5D3: lea     ecx, [esi+44h]
-0x50C5D6: call    sub_4212F0
+0x50C5D3: lea     ecx, [esi+44h]; this
+0x50C5D6: call    ExtraDataList_ResetSavedAttachedAnimationData; If saved-attached-animation data exists, frees it and replaces it with a six-byte initialized {4,0,0} word buffer. Observed in Oblivion door default-open/open/close paths.
 0x50C5DB: mov     al, 1
 0x50C5DD: pop     esi
 0x50C5DE: pop     ecx
@@ -59,8 +59,8 @@
 0x50C5F9: push    offset aClose; "Close"
 0x50C5FE: mov     ecx, esi
 0x50C600: call    sub_4D90D0
-0x50C605: lea     ecx, [esi+44h]
-0x50C608: call    sub_4212F0
+0x50C605: lea     ecx, [esi+44h]; this
+0x50C608: call    ExtraDataList_ResetSavedAttachedAnimationData; If saved-attached-animation data exists, frees it and replaces it with a six-byte initialized {4,0,0} word buffer. Observed in Oblivion door default-open/open/close paths.
 0x50C60D: mov     al, 1
 0x50C60F: pop     esi
 0x50C610: pop     ecx

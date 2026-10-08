@@ -16,7 +16,7 @@
 0x77CBE4: mov     ecx, [eax+4]
 0x77CBE7: mov     esi, [esi]
 0x77CBE9: push    ecx
-0x77CBEA: call    FormHeapFree
+0x77CBEA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x77CBEF: add     esp, 4
 0x77CBF2: test    esi, esi
 0x77CBF4: jnz     short loc_77CBE2
@@ -33,7 +33,7 @@
 0x77CC15: call    NiTMap_Clear
 0x77CC1A: mov     edx, [edi+8]
 0x77CC1D: push    edx
-0x77CC1E: call    FormHeapFree
+0x77CC1E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x77CC23: add     esp, 4
 0x77CC26: pop     edi
 0x77CC27: retn

@@ -14,15 +14,15 @@
 0x76539E: jnz     short loc_7653BA
 0x7653A0: movzx   ecx, word ptr [esi+2Ch]
 0x7653A4: and     ecx, 0F000h
-0x7653AA: push    ecx
-0x7653AB: push    ebx
-0x7653AC: push    ebx
-0x7653AD: push    ebx
-0x7653AE: push    ebx
-0x7653AF: push    ebx
-0x7653B0: push    eax
-0x7653B1: mov     ecx, esi
-0x7653B3: call    sub_728890
+0x7653AA: push    ecx; dataFlags
+0x7653AB: push    ebx; textureSetCount
+0x7653AC: push    ebx; texcoords
+0x7653AD: push    ebx; colors
+0x7653AE: push    ebx; normals
+0x7653AF: push    ebx; vertices
+0x7653B0: push    eax; vertexCount
+0x7653B1: mov     ecx, esi; this
+0x7653B3: call    NiGeometryData_SetData;
 0x7653B8: jmp     short loc_76540F
 0x7653BA: push    ebp
 0x7653BB: push    edi
@@ -47,16 +47,16 @@
 0x7653EA: and     ecx, 3Fh
 0x7653ED: movzx   ebx, word ptr [esi+2Ch]
 0x7653F1: and     ebx, 0F000h
-0x7653F7: push    ebx
-0x7653F8: push    ecx
-0x7653F9: push    eax
+0x7653F7: push    ebx; dataFlags
+0x7653F8: push    ecx; textureSetCount
+0x7653F9: push    eax; texcoords
 0x7653FA: movzx   eax, word ptr [esi+8]
-0x7653FE: push    edi
-0x7653FF: push    ebp
-0x765400: push    edx
-0x765401: push    eax
-0x765402: mov     ecx, esi
-0x765404: call    sub_728890
+0x7653FE: push    edi; colors
+0x7653FF: push    ebp; normals
+0x765400: push    edx; vertices
+0x765401: push    eax; vertexCount
+0x765402: mov     ecx, esi; this
+0x765404: call    NiGeometryData_SetData;
 0x765409: mov     ebx, [esp+10h+arg_0]
 0x76540D: pop     edi
 0x76540E: pop     ebp
@@ -73,7 +73,7 @@
 0x76542C: test    bl, 10h
 0x76542F: jnz     short loc_76547A
 0x765431: push    esi
-0x765432: push    offset dword_B3FD2C
+0x765432: push    offset stru_B3FD2C
 0x765437: call    NiRTTI__IsObjectOfRTTIType
 0x76543C: add     esp, 8
 0x76543F: test    al, al
@@ -87,7 +87,7 @@
 0x765452: pop     esi
 0x765453: retn    0Ch
 0x765456: push    esi
-0x765457: push    offset dword_B3FD0C
+0x765457: push    offset stru_B3FD0C
 0x76545C: call    NiRTTI__IsObjectOfRTTIType
 0x765461: add     esp, 8
 0x765464: test    al, al

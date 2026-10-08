@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x54657B",
-    "line": "fst     [esp+arg_4]; int",
+    "line": "fst     [esp+arg_4]; Applies fSneakTargetAttackBonus when the target has attacked the detector; otherwise retains the current factor.",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x54657F",
-    "line": "jz      short Calc_DetectionLevel___UnderwaterFactors",
+    "line": "jz      short Calc_DetectionLevel_ApplyUnderwaterFactor; When the underwater condition is active, scales the relevant light/visibility term by fSneakSwimmingLightMult.",
     "mnemonic": "jz",
     "size": 2
   },

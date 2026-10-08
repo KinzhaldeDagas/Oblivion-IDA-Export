@@ -1,4 +1,4 @@
-0x7C1B50: sub     esp, 10h
+0x7C1B50: sub     esp, 10h; DX10OBSE resource decode: BSTextureManager rendered-surface cache reuses or allocates BSRenderedTexture wrappers by size/format/depth/usage, moving them to the in-use list.
 0x7C1B53: push    ebx
 0x7C1B54: push    ebp
 0x7C1B55: mov     ebp, [esp+18h+a2]
@@ -28,7 +28,7 @@
 0x7C1B95: call    eax
 0x7C1B97: mov     ebx, [esp+20h+a6]
 0x7C1B9B: test    ebx, ebx
-0x7C1B9D: mov     [esp+20h+var_8], eax
+0x7C1B9D: mov     [esp+20h+height], eax
 0x7C1BA1: jz      loc_7C1C74
 0x7C1BA7: test    byte ptr [esp+20h+a5], 8
 0x7C1BAC: jnz     loc_7C1C74
@@ -134,7 +134,7 @@
 0x7C1CFD: call    eax
 0x7C1CFF: jmp     short loc_7C1D03
 0x7C1D01: xor     eax, eax
-0x7C1D03: cmp     eax, [esp+20h+var_8]
+0x7C1D03: cmp     eax, [esp+20h+height]
 0x7C1D07: jnz     short loc_7C1D2E
 0x7C1D09: cmp     [esi+4], ebx
 0x7C1D0C: jnz     short loc_7C1D2E
@@ -187,25 +187,25 @@
 0x7C1D9A: jmp     short loc_7C1DB0
 0x7C1D9C: mov     ecx, [esp+20h+a5]
 0x7C1DA0: mov     edx, [esp+20h+a6]
-0x7C1DA4: push    ecx
+0x7C1DA4: push    ecx; targetFlags
 0x7C1DA5: mov     ecx, [esp+24h+var_4]
-0x7C1DA9: push    eax
-0x7C1DAA: mov     eax, [esp+28h+var_8]
-0x7C1DAE: push    edx
-0x7C1DAF: push    eax
-0x7C1DB0: push    ecx
-0x7C1DB1: mov     ecx, [esp+34h+var_C]
-0x7C1DB5: push    ebp
-0x7C1DB6: call    sub_7C1430
+0x7C1DA9: push    eax; aux
+0x7C1DAA: mov     eax, [esp+28h+height]
+0x7C1DAE: push    edx; d3dFormat
+0x7C1DAF: push    eax; height
+0x7C1DB0: push    ecx; width
+0x7C1DB1: mov     ecx, [esp+34h+var_C]; this
+0x7C1DB5: push    ebp; renderer
+0x7C1DB6: call    BSTextureManager_CreateRenderedTexture; Oblivion BSTextureManager rendered-texture creator. Builds a BSRenderedTexture for the requested dimensions, D3D format override, auxiliary value, and target flags; eligible targets receive the manager depth-stencil unless flags suppress it.
 0x7C1DBB: push    eax; a2
 0x7C1DBC: mov     ecx, esi; this
 0x7C1DBE: call    NiSmartPointer_Set??
 0x7C1DC3: jmp     short loc_7C1DE5
 0x7C1DC5: mov     [esp+20h+a2], edi
-0x7C1DC9: mov     ecx, [esp+20h+var_C]
+0x7C1DC9: mov     ecx, [esp+20h+var_C]; list
 0x7C1DCD: lea     edx, [esp+20h+a2]
-0x7C1DD1: push    edx
-0x7C1DD2: call    sub_7AA860
+0x7C1DD1: push    edx; node
+0x7C1DD2: call    NiTPointerList_RemoveNode; [Verified] Generic NiTPointerList node-removal helper. Unlinks the supplied node, updates head/tail and neighboring links, invokes the list's FreeNode vfunc, decrements item count, and returns the removed node's data pointer.
 0x7C1DD7: mov     eax, [esp+20h+var_10]
 0x7C1DDB: mov     ebx, 1
 0x7C1DE0: mov     [eax+10h], bl

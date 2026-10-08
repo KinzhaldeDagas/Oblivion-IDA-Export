@@ -2,7 +2,7 @@
 0x9E93F6: push    ecx
 0x9E93F7: fstp    [esp+4+var_4]; float
 0x9E93FA: push    offset aFcombatforward; "fCombatForwardAttackChance"
-0x9E93FF: mov     ecx, offset unk_B36F60
+0x9E93FF: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+288h)
 0x9E9404: call    GameSetting_ConstrAndReg_float
 0x9E9409: push    offset sub_A1E5E0; void (__cdecl *)()
 0x9E940E: call    _atexit

@@ -27,11 +27,11 @@
 0x4F1550: mov     edx, [ebx+7Ch]
 0x4F1553: cmp     edx, [edi+7Ch]
 0x4F1556: jnz     short loc_4F1535
-0x4F1558: mov     ecx, edi
-0x4F155A: call    sub_4EF7A0
-0x4F155F: mov     ecx, ebx
+0x4F1558: mov     ecx, edi; this
+0x4F155A: call    TESWorldSpace_GetClimateFromRoot
+0x4F155F: mov     ecx, ebx; this
 0x4F1561: mov     edx, eax
-0x4F1563: call    sub_4EF7A0
+0x4F1563: call    TESWorldSpace_GetClimateFromRoot
 0x4F1568: cmp     eax, edx
 0x4F156A: jnz     short loc_4F1535
 0x4F156C: mov     ecx, edi; a1

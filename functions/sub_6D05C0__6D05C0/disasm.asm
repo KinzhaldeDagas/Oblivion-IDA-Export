@@ -1,10 +1,10 @@
 0x6D05C0: push    ebx
 0x6D05C1: push    esi
-0x6D05C2: mov     esi, dword ptr [esp+8+arg_0]
+0x6D05C2: mov     esi, [esp+8+arg_0]
 0x6D05C6: push    edi
 0x6D05C7: push    esi
 0x6D05C8: mov     ebx, ecx
-0x6D05CA: call    sub_716140
+0x6D05CA: call    NiTimeController_GetViewerStrings; Viewer output confirms flags: bit 0 anim type APP_TIME/APP_INIT, bits 1..2 cycle LOOP/REVERSE/CLAMP, bit 3 Active, bit 4 Play Backwards; also reports frequency, phase, key range, runtime start/last time, and target.
 0x6D05CF: mov     eax, ds:0B3CDF8h
 0x6D05D4: push    eax; ArgList
 0x6D05D5: call    TESOutput_PrintString
@@ -12,7 +12,7 @@
 0x6D05DE: movzx   ecx, word ptr [esi+8]
 0x6D05E2: add     esp, 4
 0x6D05E5: cmp     edi, ecx
-0x6D05E7: mov     dword ptr [esp+0Ch+arg_0], eax
+0x6D05E7: mov     [esp+0Ch+arg_0], eax
 0x6D05EB: jb      short loc_6D05FB
 0x6D05ED: movzx   edx, word ptr [esi+0Eh]
 0x6D05F1: add     edx, edi
@@ -27,13 +27,13 @@
 0x6D0608: mov     cl, [ebx+8]
 0x6D060B: shr     cl, 5
 0x6D060E: and     cl, 1
-0x6D0611: mov     [esp+0Ch+arg_0], cl
-0x6D0615: mov     edx, dword ptr [esp+0Ch+arg_0]
+0x6D0611: mov     byte ptr [esp+0Ch+arg_0], cl
+0x6D0615: mov     edx, [esp+0Ch+arg_0]
 0x6D0619: push    edx; char
 0x6D061A: push    offset aIsmanagercontr; "IsManagerControlled"
 0x6D061F: call    TESOutput_PrintLabeledBool
 0x6D0624: movzx   edi, word ptr [esi+0Ah]
-0x6D0628: mov     dword ptr [esp+14h+arg_0], eax
+0x6D0628: mov     [esp+14h+arg_0], eax
 0x6D062C: movzx   eax, word ptr [esi+8]
 0x6D0630: add     esp, 8
 0x6D0633: cmp     edi, eax

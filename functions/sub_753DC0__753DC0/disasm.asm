@@ -2,7 +2,7 @@
 0x753DC1: mov     esi, [esp+4+arg_0]
 0x753DC5: push    edi
 0x753DC6: push    esi
-0x753DC7: call    sub_716140
+0x753DC7: call    NiTimeController_GetViewerStrings; Viewer output confirms flags: bit 0 anim type APP_TIME/APP_INIT, bits 1..2 cycle LOOP/REVERSE/CLAMP, bit 3 Active, bit 4 Play Backwards; also reports frequency, phase, key range, runtime start/last time, and target.
 0x753DCC: mov     eax, ds:0B40DFCh
 0x753DD1: push    eax; ArgList
 0x753DD2: call    TESOutput_PrintString

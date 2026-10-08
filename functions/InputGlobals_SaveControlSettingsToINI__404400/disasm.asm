@@ -1,4 +1,4 @@
-0x404400: sub     esp, 148h
+0x404400: sub     esp, 148h; [Controller decode 2026-07-09] Saves 29 logical binding rows to Oblivion.ini [Controls] as 8-digit hex strings: keyboard<<16 | mouse<<8 | joystick, with an unused zero high byte. Axis/invert joystick settings are separate INI values.
 0x404406: mov     eax, ___security_cookie
 0x40440B: xor     eax, esp
 0x40440D: mov     [esp+148h+var_4], eax
@@ -8,8 +8,7 @@
 0x404417: mov     ebx, ecx
 0x404419: xor     eax, eax
 0x40441B: jmp     short loc_404420
-0x40441D: align 10h
-0x404420: mov     cl, byte ptr word_B3F280[eax]
+0x404420: mov     cl, byte ptr unk_B3F280[eax]
 0x404426: mov     [esp+eax+154h+FileName], cl
 0x40442A: add     eax, 1
 0x40442D: test    cl, cl

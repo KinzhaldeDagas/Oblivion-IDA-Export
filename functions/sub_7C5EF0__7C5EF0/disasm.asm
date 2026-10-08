@@ -1,4 +1,4 @@
-0x7C5EF0: push    ebx
+0x7C5EF0: push    ebx; Discard/release every active light map +0x114 and clear the texture manager's current shadow-map slot.
 0x7C5EF1: mov     ebx, [ecx+0F8h]
 0x7C5EF7: test    ebx, ebx
 0x7C5EF9: jz      short loc_7C5F54
@@ -12,8 +12,8 @@
 0x7C5F0A: jz      short loc_7C5F4E
 0x7C5F0C: mov     eax, [edi+114h]
 0x7C5F12: mov     ecx, ds:0B42F50h; this
-0x7C5F18: push    eax; a2
-0x7C5F19: call    BSTextureManager_DiscardShadowMap
+0x7C5F18: push    eax; texture
+0x7C5F19: call    BSTextureManager__ReturnFrustumShadowTexture; Oblivion frustum-shadow pool return. Finds the texture in the used pool, appends it to the unused shadowMaps list, removes the used-list node, and balances strong references.
 0x7C5F1E: mov     esi, [edi+114h]
 0x7C5F24: test    esi, esi
 0x7C5F26: jz      short loc_7C5F4E
@@ -37,3 +37,25 @@
 0x7C5F54: mov     ecx, ds:0B42F50h
 0x7C5F5A: pop     ebx
 0x7C5F5B: jmp     loc_7C13F0
+0x7C13F0: push    esi
+0x7C13F1: push    edi
+0x7C13F2: mov     edi, ecx
+0x7C13F4: mov     esi, [edi+44h]
+0x7C13F7: test    esi, esi
+0x7C13F9: jz      short loc_7C141E
+0x7C13FB: lea     eax, [esi+4]
+0x7C13FE: push    eax; lpAddend
+0x7C13FF: call    dword ptr ds:0A2807Ch
+0x7C1405: test    eax, eax
+0x7C1407: jnz     short loc_7C1417
+0x7C1409: test    esi, esi
+0x7C140B: jz      short loc_7C1417
+0x7C140D: mov     edx, [esi]
+0x7C140F: mov     eax, [edx]
+0x7C1411: push    1
+0x7C1413: mov     ecx, esi
+0x7C1415: call    eax
+0x7C1417: mov     dword ptr [edi+44h], 0
+0x7C141E: pop     edi
+0x7C141F: pop     esi
+0x7C1420: retn

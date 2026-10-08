@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x68AB20",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Verified TravelPath orchestration: clears existing node records; calls TravelPath_FindLowLevelRoute; copies returned kind-0 reference nodes into the TravelPath list; runs the teleport-loop pruning pass; and appends a kind-1 owned position node for the destination only when the A* search succeeded.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -37,19 +37,19 @@
   },
   {
     "ea": "0x68AB2A",
-    "line": "call    sub_689A00",
+    "line": "call    TravelPath_ClearNodes; Verified clears TravelPath.nodes at +4: frees owned kind-1 position payloads, frees every TravelPathNode record and BSSimpleList link, but leaves kind-0 TESObjectREFR payloads unowned/unreleased.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x68AB2F",
-    "line": "mov     eax, [esp+14h+arg_0]",
+    "line": "mov     eax, [esp+14h+sourceSpace]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x68AB33",
-    "line": "mov     edi, [esp+14h+arg_C]",
+    "line": "mov     edi, [esp+14h+destinationPosition]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x68AB3D",
-    "line": "mov     ecx, [esp+14h+arg_8]",
+    "line": "mov     ecx, [esp+14h+destinationSpace]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -91,73 +91,73 @@
   },
   {
     "ea": "0x68AB45",
-    "line": "mov     [esp+14h+var_8], edx",
+    "line": "mov     [esp+14h+sourceNodes.firstNode.data], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x68AB49",
-    "line": "mov     [esp+14h+var_4], edx",
+    "line": "mov     [esp+14h+sourceNodes.firstNode.next], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x68AB4D",
-    "line": "mov     edx, [esp+14h+arg_10]",
+    "line": "mov     edx, [esp+14h+sourceRef]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x68AB51",
-    "line": "push    edx",
+    "line": "push    edx; sourceRef",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x68AB52",
-    "line": "lea     edx, [esp+18h+var_8]",
+    "line": "lea     edx, [esp+18h+sourceNodes]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x68AB56",
-    "line": "push    edx",
+    "line": "push    edx; outRouteNodes",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x68AB57",
-    "line": "push    edi",
+    "line": "push    edi; destinationPosition",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x68AB58",
-    "line": "push    ecx",
+    "line": "push    ecx; destinationSpace",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x68AB59",
-    "line": "mov     ecx, [esp+24h+arg_4]",
+    "line": "mov     ecx, [esp+24h+sourceRouteContext]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x68AB5D",
-    "line": "push    ecx",
+    "line": "push    ecx; sourcePosition",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x68AB5E",
-    "line": "push    eax",
+    "line": "push    eax; sourceSpace",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x68AB5F",
-    "line": "call    sub_680110",
+    "line": "call    TravelPath_FindLowLevelRoute; Verified state layout now typed: TravelPathSpaceDoorLink is 0x14 bytes (16-bit table index, two ref/space endpoint pairs); TravelPathSearchState is 0x10 bytes (fitness, predecessor link, current space, flags). The 0x01 discovered interpretation remains Probable; 0x02 expanded is Verified.",
     "mnemonic": "call",
     "size": 5
   },
@@ -187,49 +187,49 @@
   },
   {
     "ea": "0x68AB6D",
-    "line": "lea     edx, [esp+14h+var_8]",
+    "line": "lea     edx, [esp+14h+sourceNodes]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x68AB71",
-    "line": "push    edx",
+    "line": "push    edx; sourceNodes",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x68AB72",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x68AB74",
-    "line": "call    sub_689A60",
+    "line": "call    TravelPath_CopyRouteNodes; Verified copies low-path route entries into newly allocated TravelPathNode records. Each clone is set to kind 0 and stores the route TESObjectREFR*; these references remain non-owned.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x68AB79",
-    "line": "lea     ecx, [esp+14h+var_8]",
+    "line": "lea     ecx, [esp+14h+sourceNodes]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x68AB7D",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x68AB82",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x68AB84",
-    "line": "call    sub_689C60",
+    "line": "call    TravelPath_PruneTeleportRouteLoop; Verified route normalization scans teleport references for an earlier route reference in the linked door's spatial container; when one is found, it removes nodes from the list head through the current node. Probable intent is to prune a redundant teleport loop; exact loop policy remains Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,19 +247,19 @@
   },
   {
     "ea": "0x68AB8D",
-    "line": "push    edi",
+    "line": "push    edi; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x68AB8E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x68AB90",
-    "line": "call    sub_68A280",
+    "line": "call    TravelPath_AppendDestinationPosition; Verified appends the final destination as a kind-1 TravelPathNode with its own copied NiPoint3 payload, even if low-path A* produced no reference nodes.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x68DA30",
-    "line": "mov     ecx, offset NiTMap_AECreatorFuncs",
+    "line": "mov     ecx, offset NiTMap_AECreatorFuncs; Verified registry-clear helper, called during WinMain shutdown after EffectSettingCollection_Clear; it clears NiTMap_AECreatorFuncs. The map also has a separate atexit destructor that frees its bucket array.",
     "mnemonic": "mov",
     "size": 5
   },

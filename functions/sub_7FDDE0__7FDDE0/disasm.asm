@@ -1,4 +1,4 @@
-0x7FDDE0: sub     esp, 0DCCh
+0x7FDDE0: sub     esp, 0DCCh; Load Oblivion Lighting30 pixel programs. Repeatable comment records the exact SM3023 manual R32F comparison and multiplicative composition ABI.
 0x7FDDE6: mov     eax, ds:0B30AACh
 0x7FDDEB: xor     eax, esp
 0x7FDDED: mov     [esp+0DCCh+var_4], eax
@@ -14,7 +14,7 @@
 0x7FDE06: mov     edi, offset aMaxlights; "MAXLIGHTS"
 0x7FDE0B: push    eax
 0x7FDE0C: mov     [esp+0DE8h+var_DC8], ecx
-0x7FDE10: mov     [esp+0DE8h+var_DA0], ebp
+0x7FDE10: mov     [esp+0DE8h+var_DA0], ebp; DeferredRendering overbright fidelity: SM3Lighting output alpha is material alpha (BaseMap.a * MatAlpha.x in decoded bytecode). Replacement resolve preserves native backbuffer alpha blending; invented luminance clamps remain removed.
 0x7FDE14: mov     [esp+0DE8h+var_D9C], edi
 0x7FDE18: mov     [esp+0DE8h+var_D98], offset a9; "9"
 0x7FDE20: mov     [esp+0DE8h+var_D94], ebx
@@ -27,7 +27,7 @@
 0x7FDE39: mov     [esp+0DF4h+var_D54], ebp
 0x7FDE40: mov     [esp+0DF4h+var_D50], edi
 0x7FDE47: mov     [esp+0DF4h+var_D4C], esi
-0x7FDE4E: mov     [esp+0DF4h+var_D48], offset aSpecular_0; "SPECULAR"
+0x7FDE4E: mov     [esp+0DF4h+var_D48], offset aSpecular_0; DeferredRendering near-wall fix: specular-family Lighting30 pixel routes bind EyePosition c1. Plugin copies c1 to scratch c222 for these material routes so G-buffer position is camera-relative only when the native eye constant is valid.
 0x7FDE59: mov     [esp+0DF4h+var_D44], ebx
 0x7FDE60: mov     [esp+0DF4h+var_D40], ebx
 0x7FDE67: call    __memset
@@ -38,7 +38,7 @@
 0x7FDE77: mov     [esp+0E00h+var_D08], ebp
 0x7FDE7E: mov     [esp+0E00h+var_D04], edi
 0x7FDE85: mov     [esp+0E00h+var_D00], esi
-0x7FDE8C: mov     [esp+0E00h+var_CFC], offset aHair_1; "HAIR"
+0x7FDE8C: mov     [esp+0E00h+var_CFC], offset aHair_1; DeferredRendering hair material contract: B46ED8[2] = SM3002 HAIR, MAXLIGHTS 8, LayerMap s5 + HairTint c2 + MatAlpha c3. Implemented as hair G-buffer albedo tint/layer capture.
 0x7FDE97: mov     [esp+0E00h+var_CF8], offset a1; "1"
 0x7FDEA2: mov     [esp+0E00h+var_CF4], ebx
 0x7FDEA9: call    __memset
@@ -49,7 +49,7 @@
 0x7FDEB9: mov     [esp+0E0Ch+var_CBC], ebp
 0x7FDEC0: mov     [esp+0E0Ch+var_CB8], edi
 0x7FDEC7: mov     [esp+0E0Ch+var_CB4], offset a7; "7"
-0x7FDED2: mov     [esp+0E0Ch+var_CB0], offset aHair_1; "HAIR"
+0x7FDED2: mov     [esp+0E0Ch+var_CB0], offset aHair_1; DeferredRendering hair fidelity: B46ED8[3] = SM3003 HAIR+SPECULAR with AnisoMap s4 plus LayerMap s5/HairTint c2. Not an exact deferred replacement in the current four-MRT payload; material indices 3/13 are forward-native.
 0x7FDEDD: mov     [esp+0E0Ch+var_CAC], offset a1; "1"
 0x7FDEE8: mov     [esp+0E0Ch+var_CA8], offset aSpecular_0; "SPECULAR"
 0x7FDEF3: mov     [esp+0E0Ch+var_CA4], ebx
@@ -63,7 +63,7 @@
 0x7FDF1C: push    ecx
 0x7FDF1D: mov     [esp+0E18h+var_C70], ebp
 0x7FDF24: mov     [esp+0E18h+var_C6C], edi
-0x7FDF2B: mov     [esp+0E18h+var_C64], offset aParallax; "PARALLAX"
+0x7FDF2B: mov     [esp+0E18h+var_C64], offset aParallax; DeferredRendering material edge: B46ED8[4..5] PARALLAX variants. Forward-native until parallax depth/UV behavior is represented.
 0x7FDF36: mov     [esp+0E18h+var_C60], esi
 0x7FDF3D: mov     [esp+0E18h+var_C5C], ebx
 0x7FDF44: call    __memset
@@ -88,7 +88,7 @@
 0x7FDFB7: push    ebx
 0x7FDFB8: push    eax
 0x7FDFB9: mov     [esp+0DE8h+var_BD0], offset a8; "8"
-0x7FDFC4: mov     [esp+0DE8h+var_BCC], offset aFacegenblend; "FACEGENBLEND"
+0x7FDFC4: mov     [esp+0DE8h+var_BCC], offset aFacegenblend; DeferredRendering material edge: B46ED8[6..7] FACEGENBLEND variants. Forward-native until blend payload is represented.
 0x7FDFCF: mov     [esp+0DE8h+var_BC8], esi
 0x7FDFD6: mov     [esp+0DE8h+var_BC4], ebx
 0x7FDFDD: call    __memset
@@ -112,7 +112,7 @@
 0x7FE041: mov     [esp+0E00h+var_B40], ebp
 0x7FE048: mov     [esp+0E00h+var_B3C], edi
 0x7FE04F: mov     [esp+0E00h+var_B38], offset a8; "8"
-0x7FE05A: mov     [esp+0E00h+var_B34], offset aGlow; "GLOW"
+0x7FE05A: mov     [esp+0E00h+var_B34], offset aGlow; DeferredRendering material edge: B46ED8[8..9] GLOW variants. Forward-native until glow/emissive payload is represented.
 0x7FE065: mov     [esp+0E00h+var_B30], esi
 0x7FE06C: mov     [esp+0E00h+var_B2C], ebx
 0x7FE073: call    __memset
@@ -136,7 +136,7 @@
 0x7FE0D7: mov     [esp+0E18h+var_AA8], ebp
 0x7FE0DE: mov     [esp+0E18h+var_AA4], edi
 0x7FE0E5: mov     [esp+0E18h+var_AA0], offset a8; "8"
-0x7FE0F0: mov     [esp+0E18h+var_A9C], offset aProjshadow; "PROJSHADOW"
+0x7FE0F0: mov     [esp+0E18h+var_A9C], offset aProjshadow; DeferredRendering projection contract: B46ED8[10] is SM3Lighting.p.hlsl + PROJSHADOW. Deferred path supports this plain projected material by sampling ShadowMap s2 / ShadowMask s3 in the G-buffer shader.
 0x7FE0FB: mov     [esp+0E18h+var_A98], esi
 0x7FE102: mov     [esp+0E18h+var_A94], ebx
 0x7FE109: call    __memset
@@ -147,9 +147,9 @@
 0x7FE119: mov     [esp+0E24h+var_A5C], ebp
 0x7FE120: mov     [esp+0E24h+var_A58], edi
 0x7FE127: mov     [esp+0E24h+var_A54], offset a8; "8"
-0x7FE132: mov     [esp+0E24h+var_A50], offset aSpecular_0; "SPECULAR"
+0x7FE132: mov     [esp+0E24h+var_A50], offset aSpecular_0; DeferredRendering projected white/hair fix: projected low-light routes are the active runtime replacements; directional diffuse must use the native normalized direction contract before projected shadow modulation.
 0x7FE13D: mov     [esp+0E24h+var_A4C], ebx
-0x7FE144: mov     [esp+0E24h+var_A48], offset aProjshadow; "PROJSHADOW"
+0x7FE144: mov     [esp+0E24h+var_A48], offset aProjshadow; DeferredRendering projection contract: B46ED8[11] is SPECULAR + PROJSHADOW. Deferred path supports it with projected-shadow G-buffer plus normal-alpha specular mask and EyePosition c1 in resolve.
 0x7FE14F: mov     [esp+0E24h+var_A44], esi
 0x7FE156: mov     [esp+0E24h+var_A40], ebx
 0x7FE15D: call    __memset
@@ -158,7 +158,7 @@
 0x7FE167: mov     [esp+0DE0h+var_A10], ebp
 0x7FE16E: mov     [esp+0DE0h+var_A0C], edi
 0x7FE175: mov     [esp+0DE0h+var_A08], offset a8; "8"
-0x7FE180: mov     [esp+0DE0h+var_A04], offset aHair_1; "HAIR"
+0x7FE180: mov     [esp+0DE0h+var_A04], offset aHair_1; DeferredRendering projected hair contract: B46ED8[12] = SM3012 HAIR+PROJSHADOW, ShadowMap s2/ShadowMask s3 plus LayerMap s5/HairTint c2. Implemented as projected hair G-buffer route.
 0x7FE18B: mov     [esp+0DE0h+var_A00], offset a1; "1"
 0x7FE196: mov     [esp+0DE0h+var_9FC], offset aProjshadow; "PROJSHADOW"
 0x7FE1A1: mov     [esp+0DE0h+var_9F8], esi
@@ -178,7 +178,7 @@
 0x7FE1DD: mov     [esp+0DF4h+var_9C4], ebp
 0x7FE1E4: mov     [esp+0DF4h+var_9C0], edi
 0x7FE1EB: mov     [esp+0DF4h+var_9BC], offset a7; "7"
-0x7FE1F6: mov     [esp+0DF4h+var_9B8], offset aHair_1; "HAIR"
+0x7FE1F6: mov     [esp+0DF4h+var_9B8], offset aHair_1; DeferredRendering projected hair specular contract: B46ED8[13] = SM3013 HAIR+SPECULAR+PROJSHADOW. Deferred route preserves tint/layer/shadow inputs; native AnisoMap specular remains the known fidelity limit.
 0x7FE201: mov     [esp+0DF4h+var_9B4], offset a1; "1"
 0x7FE20C: mov     [esp+0DF4h+var_9B0], offset aSpecular_0; "SPECULAR"
 0x7FE217: mov     [esp+0DF4h+var_9AC], ebx
@@ -196,7 +196,7 @@
 0x7FE26B: mov     [esp+0DF4h+var_978], ebp
 0x7FE272: mov     [esp+0DF4h+var_974], edi
 0x7FE279: mov     [esp+0DF4h+var_970], offset a8; "8"
-0x7FE284: mov     [esp+0DF4h+var_96C], offset aParallax; "PARALLAX"
+0x7FE284: mov     [esp+0DF4h+var_96C], offset aParallax; DeferredRendering projected parallax boundary: material index 14 remains a primary Lighting30 wrapper table entry with PARALLAX. Active shaderpackage019 SM3014/SM3LL014 bytecode confirms EyePosition c1, one-step BaseMap.a parallax UV, ShadowMap s2/ShadowMask s3, MatAlpha.x output, and 15/4 light caps. Current deferred route supports only this non-specular projected parallax payload.
 0x7FE28F: mov     [esp+0DF4h+var_968], esi
 0x7FE296: mov     [esp+0DF4h+var_960], esi
 0x7FE29D: mov     [esp+0DF4h+var_95C], ebx
@@ -214,7 +214,7 @@
 0x7FE2D5: mov     [esp+0E00h+var_928], edi
 0x7FE2DC: mov     [esp+0E00h+var_920], offset aParallax; "PARALLAX"
 0x7FE2E7: mov     [esp+0E00h+var_91C], esi
-0x7FE2EE: mov     [esp+0E00h+var_918], offset aSpecular_0; "SPECULAR"
+0x7FE2EE: mov     [esp+0E00h+var_918], offset aSpecular_0; DeferredRendering projected parallax boundary: material index 15 adds SPECULAR to the projected parallax family. Keep forward-native until the specular mask/output contract is encoded from active Oblivion bytecode/source; do not approximate from naming alone.
 0x7FE2F9: mov     [esp+0E00h+var_914], ebx
 0x7FE300: mov     [esp+0E00h+var_910], ecx
 0x7FE307: mov     [esp+0E00h+var_90C], esi
@@ -297,7 +297,7 @@
 0x7FE506: mov     [esp+0E18h+var_7BC], eax
 0x7FE50D: mov     [esp+0E18h+var_7B8], eax
 0x7FE514: mov     [esp+0E18h+var_7B4], eax
-0x7FE51B: mov     [esp+0E18h+var_7B0], offset aLighting2xPEnv; "lighting\\2x\\p\\EnvMap.p.hlsl"
+0x7FE51B: mov     [esp+0E18h+var_7B0], offset aLighting2xPEnv; DeferredRendering: EnvMap normal pixel family start. B46ED8[20..22] remains forward-native until a dedicated cube-reflection deferred contract exists.
 0x7FE526: mov     [esp+0E18h+var_7AC], edi
 0x7FE52D: mov     [esp+0E18h+var_7A8], esi
 0x7FE534: mov     [esp+0E18h+var_7A4], ebx
@@ -325,14 +325,14 @@
 0x7FE5B4: mov     [esp+0DE8h+var_708], ebx
 0x7FE5BB: mov     [esp+0DE8h+var_704], ebx
 0x7FE5C2: call    __memset
-0x7FE5C7: mov     [esp+0DE8h+var_6CC], offset aLighting3xSm_1; "lighting\\3x\\SM3SimpleShadow.p.hlsl"
+0x7FE5C7: mov     [esp+0DE8h+var_6CC], offset aLighting3xSm_1; Load stock Oblivion SM3023. Linked SimpleShadow varyings: TEXCOORD0 base UV, TEXCOORD6 object/skinned position, TEXCOORD1 projected shadow coordinate, TEXCOORD2.w fog amount. Pixel ABI remains s0/s2 and c5/c9/c10; c7 is unused.
 0x7FE5D2: push    34h ; '4'
 0x7FE5D4: lea     ecx, [esp+0DECh+var_6B4]
 0x7FE5DB: push    ebx
 0x7FE5DC: push    ecx
-0x7FE5DD: mov     [esp+0DF4h+var_6C8], offset aSoftshadow; "SOFTSHADOW"
+0x7FE5DD: mov     [esp+0DF4h+var_6C8], offset aSoftshadow; SM3023 compile macro SOFTSHADOW=4.
 0x7FE5E8: mov     [esp+0DF4h+var_6C4], offset a4; "4"
-0x7FE5F3: mov     [esp+0DF4h+var_6C0], offset aDepthbias; "DEPTHBIAS"
+0x7FE5F3: mov     [esp+0DF4h+var_6C0], offset aDepthbias; SM3023 compile macro DEPTHBIAS=-2.
 0x7FE5FE: mov     [esp+0DF4h+var_6BC], offset a2; "-2"
 0x7FE609: mov     [esp+0DF4h+var_6B8], ebx
 0x7FE610: call    __memset
@@ -340,7 +340,7 @@
 0x7FE617: lea     edx, [esp+0DF8h+var_668]
 0x7FE61E: push    ebx
 0x7FE61F: push    edx
-0x7FE620: mov     [esp+0E00h+var_680], offset aLighting2xPD_0; "lighting\\2x\\p\\Decal.p.hlsl"
+0x7FE620: mov     [esp+0E00h+var_680], offset aLighting2xPD_0; DeferredRendering: Decal pixel family start. B46ED8[24..25] uses projected decal inputs/layers; forward-native only for primary deferred replacement.
 0x7FE62B: mov     [esp+0E00h+var_67C], edi
 0x7FE632: mov     [esp+0E00h+var_678], ebx
 0x7FE639: mov     [esp+0E00h+var_674], offset aMaxdecals; "MAXDECALS"
@@ -365,7 +365,7 @@
 0x7FE6B4: push    ebx
 0x7FE6B5: mov     ebp, offset aLighting3xSm_2; "lighting\\3x\\SM3DepthMap.p.hlsl"
 0x7FE6BA: push    ecx
-0x7FE6BB: mov     [esp+0E18h+var_5E8], ebp
+0x7FE6BB: mov     [esp+0E18h+var_5E8], ebp; DeferredRendering support contract: B46ED8[26] DepthMap pixel wrapper writes depth-like support output; not a final-color lighting material.
 0x7FE6C2: mov     [esp+0E18h+var_5E4], ebx
 0x7FE6C9: call    __memset
 0x7FE6CE: push    44h ; 'D'
@@ -381,7 +381,7 @@
 0x7FE6F8: push    ebx
 0x7FE6F9: mov     ebp, offset aLighting2xPRen; "lighting\\2x\\p\\renderNormals.p.hlsl"
 0x7FE6FE: push    eax
-0x7FE6FF: mov     [esp+0DE8h+var_550], ebp
+0x7FE6FF: mov     [esp+0DE8h+var_550], ebp; DeferredRendering support contract: B46ED8[28] RenderNormals pixel wrapper writes encoded normal/refraction support output; not a deferred lighting material.
 0x7FE706: mov     [esp+0DE8h+var_54C], edi
 0x7FE70D: mov     [esp+0DE8h+var_548], ebx
 0x7FE714: mov     [esp+0DE8h+var_544], ebx
@@ -433,7 +433,7 @@
 0x7FE809: lea     edx, [esp+0E1Ch+var_3C4]
 0x7FE810: push    ebx
 0x7FE811: push    edx
-0x7FE812: mov     [esp+0E24h+var_3D4], offset aLighting2xPLoc; "lighting\\2x\\p\\localMap.p.hlsl"
+0x7FE812: mov     [esp+0E24h+var_3D4], offset aLighting2xPLoc; DeferredRendering support contract: B46ED8[33] LocalMap pixel wrapper writes local-map support output; not a deferred lighting material.
 0x7FE81D: mov     [esp+0E24h+var_3D0], edi
 0x7FE824: mov     [esp+0E24h+var_3CC], ebx
 0x7FE82B: mov     [esp+0E24h+var_3C8], ebx
@@ -456,7 +456,7 @@
 0x7FE882: mov     ebp, offset aLighting1xPTex; "lighting\\1x\\p\\texEffect.p.hlsl"
 0x7FE887: mov     edi, offset aHq; "HQ"
 0x7FE88C: push    ecx
-0x7FE88D: mov     [esp+0DF4h+var_33C], ebp
+0x7FE88D: mov     [esp+0DF4h+var_33C], ebp; DeferredRendering: TexEffect pixel family start. B46ED8[35..36] uses alternate shader-slot route; forward-native only until dedicated TexEffect deferred contract.
 0x7FE894: mov     [esp+0DF4h+var_338], edi
 0x7FE89B: mov     [esp+0DF4h+var_334], esi
 0x7FE8A2: mov     [esp+0DF4h+var_330], ebx
@@ -475,7 +475,7 @@
 0x7FE8E3: push    ebx
 0x7FE8E4: mov     esi, offset aLighting3xSm_3; "lighting\\3x\\SM3ZOnly.p.hlsl"
 0x7FE8E9: push    eax
-0x7FE8EA: mov     [esp+0E0Ch+var_2A4], esi
+0x7FE8EA: mov     [esp+0E0Ch+var_2A4], esi; DeferredRendering support contract: B46ED8[37] ZOnly pixel wrapper writes zero color for depth/occlusion support; native-owned.
 0x7FE8F1: mov     [esp+0E0Ch+var_2A0], ebx
 0x7FE8F8: call    __memset
 0x7FE8FD: push    44h ; 'D'
@@ -486,7 +486,7 @@
 0x7FE90F: mov     [esp+0E18h+var_254], ebx
 0x7FE916: call    __memset
 0x7FE91B: push    ebx
-0x7FE91C: call    sub_7B4780
+0x7FE91C: call    BSShaderManager_GetPixelShaderTargetName
 0x7FE921: add     esp, 40h
 0x7FE924: mov     dx, ds:0A93280h
 0x7FE92B: mov     cx, ds:0A900F0h
@@ -542,7 +542,7 @@
 0x7FE9F5: cmp     esi, 0Ch
 0x7FE9F8: jz      short loc_7FE9FF
 0x7FE9FA: cmp     esi, 0Dh
-0x7FE9FD: jnz     short loc_7FEA06
+0x7FE9FD: jnz     short loc_7FEA06; DeferredRendering hair fidelity gate: Oblivion hair-specular variants require additional native AnisoMap/view-light payload. Four-MRT deferred replacement must not claim material indices 3/13 as exact until that semantic is encoded.
 0x7FE9FF: lea     eax, [esp+0DDCh+var_DAC]
 0x7FEA03: mov     [edi+8], eax
 0x7FEA06: cmp     esi, ebx
@@ -634,7 +634,7 @@
 0x7FEAE7: push    edi; int
 0x7FEAE8: lea     eax, [esp+0DF0h+FileName]
 0x7FEAEF: push    eax; lpFileName
-0x7FEAF0: call    CreatePixelShader
+0x7FEAF0: call    CreatePixelShader; Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.
 0x7FEAF5: mov     ebp, ds:0B46ED8h[esi*4]
 0x7FEAFC: cmp     ebp, eax
 0x7FEAFE: mov     [esp+0DDCh+var_DCC], eax
@@ -654,7 +654,7 @@
 0x7FEB20: push    edi; int
 0x7FEB21: lea     edx, [esp+0DF0h+FileName]
 0x7FEB28: push    edx; lpFileName
-0x7FEB29: call    CreatePixelShader
+0x7FEB29: call    CreatePixelShader; Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.
 0x7FEB2E: mov     ebp, ds:0B46ED8h[esi*4]
 0x7FEB35: cmp     ebp, eax
 0x7FEB37: mov     [esp+0DDCh+var_DCC], eax
@@ -686,7 +686,7 @@
 0x7FEB81: lea     ecx, [esp+0DE0h+var_20C]
 0x7FEB88: push    offset aSm3ll03i_pso; "SM3LL%03i.pso"
 0x7FEB8D: push    ecx
-0x7FEB8E: call    __sprintf
+0x7FEB8E: call    __sprintf; DeferredRendering low-light fidelity pass: SM3LL%03i wrappers remain exact-index gated. Supported deferred replacement is restricted to decoded payloads; hair-specular stays forward-native until native AnisoMap s4/specular semantics are carried.
 0x7FEB93: mov     eax, [esp+0DE8h+var_DC4]
 0x7FEB97: add     esp, 0Ch
 0x7FEB9A: push    ebx; int
@@ -701,8 +701,8 @@
 0x7FEBB3: push    edi; int
 0x7FEBB4: lea     eax, [esp+0DF0h+FileName]
 0x7FEBBB: push    eax; lpFileName
-0x7FEBBC: call    CreatePixelShader
-0x7FEBC1: mov     edi, ds:0B46C20h[esi*4]
+0x7FEBBC: call    CreatePixelShader; Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.
+0x7FEBC1: mov     edi, ds:0B46C20h[esi*4]; DeferredRendering: reads existing B46C20[index] before replacing low-light wrapper; table is not an auxiliary family and must stay exact-index gated.
 0x7FEBC8: mov     ebp, eax
 0x7FEBCA: cmp     edi, ebp
 0x7FEBCC: jz      short loc_7FEC03

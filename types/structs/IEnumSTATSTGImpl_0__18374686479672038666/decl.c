@@ -1,1 +1,1 @@
-IEnumSTATSTGImpl_0
+typedef IEnumSTATSTGImpl IEnumSTATSTGImpl_0;

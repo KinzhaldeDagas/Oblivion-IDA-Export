@@ -1,1 +1,4 @@
-IMediaPosition
+struct IMediaPosition
+{
+IMediaPositionVtbl *lpVtbl;
+};

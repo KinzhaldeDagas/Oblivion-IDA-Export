@@ -7,10 +7,10 @@
 0x46D0B2: lea     edx, [esp+4+ArgList]
 0x46D0B6: push    edx; a1
 0x46D0B7: mov     [esp+8+ArgList], eax
-0x46D0BB: call    TESForm_ResolveFormID
+0x46D0BB: call    TESForm_ResolveFormID; 3DTheft decode 2026-05-14: TESLeveledList link resolves each stored list entry FormID to a TESForm pointer in ListData.form at +0x04.
 0x46D0C0: mov     eax, [esp+8+ArgList]
 0x46D0C4: push    eax; a1
-0x46D0C5: call    TESForm_LookupByFormID
+0x46D0C5: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x46D0CA: add     esp, 0Ch
 0x46D0CD: test    eax, eax
 0x46D0CF: mov     [esi+4], eax
@@ -23,12 +23,12 @@
 0x46D0E5: mov     edx, [eax]
 0x46D0E7: push    eax
 0x46D0E8: mov     [edi], edx
-0x46D0EA: call    FormHeapFree
+0x46D0EA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x46D0EF: add     esp, 4
 0x46D0F2: jmp     short loc_46D0FA
 0x46D0F4: mov     dword ptr [edi], 0
 0x46D0FA: push    esi
-0x46D0FB: call    FormHeapFree
+0x46D0FB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x46D100: add     esp, 4
 0x46D103: test    ebp, ebp
 0x46D105: jz      short loc_46D17B

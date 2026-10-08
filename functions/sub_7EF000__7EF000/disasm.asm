@@ -58,7 +58,6 @@
 0x7EF0F5: mov     [esp+354h+var_344], edi
 0x7EF0F9: jmp     short loc_7EF104
 0x7EF0FB: jmp     short loc_7EF100
-0x7EF0FD: align 10h
 0x7EF100: mov     edi, [esp+354h+var_344]
 0x7EF104: mov     edx, [edi-4]
 0x7EF107: lea     ecx, [esp+354h+FileName]
@@ -75,13 +74,13 @@
 0x7EF12C: lea     ecx, [esp+358h+var_20C]
 0x7EF133: push    ebx; int
 0x7EF134: push    ecx; int
-0x7EF135: call    sub_7B47E0
+0x7EF135: call    BSShaderManager_GetVertexShaderTargetName
 0x7EF13A: mov     ecx, [esp+360h+var_340]
 0x7EF13E: push    eax; int
 0x7EF13F: push    edi; int
 0x7EF140: lea     edx, [esp+368h+FileName]
 0x7EF147: push    edx; lpFileName
-0x7EF148: call    CreateVertexShader
+0x7EF148: call    CreateVertexShader; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.
 0x7EF14D: mov     edi, ds:0B466E0h[esi*4]
 0x7EF154: mov     ebp, eax
 0x7EF156: cmp     edi, ebp

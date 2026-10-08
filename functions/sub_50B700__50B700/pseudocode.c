@@ -2,14 +2,13 @@ bool __usercall sub_50B700@<al>(
         char bp0@<bpl>,
         double a2@<st2>,
         double st6_0@<st1>,
-        double st7_0@<st0>,
         ParamInfo *a1,
-        UInt8 *a6,
+        UInt8 *a5,
         TESObjectREFR *a4,
-        TESObjectREFR *a8,
-        Script *a9,
+        TESObjectREFR *a7,
+        Script *a8,
         ScriptEventList *l,
-        int a11,
+        int a10,
         UInt32 *a3)
 {
   bool result; // al
@@ -17,25 +16,25 @@ bool __usercall sub_50B700@<al>(
   UInt32 v14; // ecx
   UInt16 v15[2]; // [esp+0h] [ebp-4h] BYREF
 
-  *(_DWORD *)v15 = 0;
-  result = Script_ExtractArgs(a1, a6, a3, a4, a8, a9, l, v15);
-  if ( result )
+  *(_DWORD *)v15 = 0; /*0x50b728*/
+  result = Script_ExtractArgs(a1, a5, a3, a4, a7, a8, l, v15); /*0x50b730*/
+  if ( result ) /*0x50b73a*/
   {
-    v13 = TESDataHandler_g_PlayerRef;
-    if ( TESDataHandler_g_PlayerRef->isSleeping )
+    v13 = reference; /*0x50b73e*/
+    if ( reference->isSleeping ) /*0x50b743*/
     {
-      v14 = *(_DWORD *)v15;
-      if ( *(int *)v15 < 0 )
+      v14 = *(_DWORD *)v15; /*0x50b74c*/
+      if ( *(int *)v15 < 0 ) /*0x50b751*/
       {
-        v14 = 0;
-        *(_DWORD *)v15 = 0;
+        v14 = 0; /*0x50b753*/
+        *(_DWORD *)v15 = 0; /*0x50b755*/
       }
-      v13->HoursToSleep = v14;
-      v13->isSleeping = 1;
-      if ( !*(_DWORD *)v15 )
-        sub_57B4C0(bp0, a2, st6_0, st7_0);
+      v13->HoursToSleep = v14; /*0x50b758*/
+      v13->isSleeping = 1; /*0x50b75e*/
+      if ( !*(_DWORD *)v15 ) /*0x50b769*/
+        sub_57B4C0(bp0, a2, st6_0); /*0x50b76b*/
     }
-    return 1;
+    return 1; /*0x50b770*/
   }
-  return result;
+  return result; /*0x50b73d*/
 }

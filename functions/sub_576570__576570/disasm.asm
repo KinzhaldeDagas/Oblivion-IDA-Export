@@ -9,7 +9,7 @@
 0x57657E: mov     ecx, edi
 0x576580: call    sub_573E70
 0x576585: push    edi
-0x576586: call    FormHeapFree
+0x576586: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x57658B: add     esp, 4
 0x57658E: mov     dword ptr [ebx+esi*4], 0
 0x576595: add     esi, 1

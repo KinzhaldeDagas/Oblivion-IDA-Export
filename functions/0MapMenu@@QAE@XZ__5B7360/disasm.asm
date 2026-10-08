@@ -12,7 +12,7 @@
 0x5B737D: mov     large fs:0, eax
 0x5B7383: mov     esi, ecx
 0x5B7385: mov     [esp+1Ch+var_10], esi
-0x5B7389: call    ??0Menu@@QAE@XZ; Menu::Menu(void)
+0x5B7389: call    ??0Menu@@QAE@XZ; Verified constructor sets ownsTemplates byte+0x1C=1, template list+8/+0xC empty, templateContextTile+0x10=NULL, fadeState+0x24=4. Other fields retain prior names when semantics not established.
 0x5B738E: xor     ebx, ebx
 0x5B7390: mov     dword ptr [esi], offset ??_7MapMenu@@6B@; const MapMenu::`vftable'
 0x5B7396: mov     [esp+1Ch+var_4], ebx
@@ -77,3 +77,15 @@
 0x5B7473: pop     ebx
 0x5B7474: add     esp, 10h
 0x5B7477: retn
+0x9C0B90: mov     ecx, [ebp-10h]; this
+0x9C0B93: jmp     ??1Menu@@UAE@XZ; Verified template ownership: Menu+0x1C byte gates freeing registered template objects; linked list nodes +8/+0xC always removed. Updated MenuMembr preserves size0x24; with vtable Menu total0x28. ReadFile0x5904EF sets Menu ownsTemplates=1 and BuildStorage ownsSubTemplates=0.
+0x9C0B98: mov     ecx, [ebp-10h]
+0x9C0B9B: add     ecx, 0B0h ; '°'; void *
+0x9C0BA1: jmp     BSStringT_Clear
+0x9C0BA6: mov     edx, [esp+arg_4]
+0x9C0BAA: lea     eax, [edx-0Ch]
+0x9C0BAD: mov     ecx, [edx-10h]
+0x9C0BB0: xor     ecx, eax
+0x9C0BB2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C0BB7: mov     eax, offset stru_AE9D48
+0x9C0BBC: jmp     ___CxxFrameHandler3

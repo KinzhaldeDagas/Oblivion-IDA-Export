@@ -8,7 +8,7 @@ This is not original game source code. It is a structured analysis export intend
 
 ## OctoberPass findings
 
-[OctoberPass](Findings/OctoberPass/README.md) publishes the new decal, temporary-effect, shader-pass, serialization, and asynchronous-task findings with explicit evidence-confidence labels. It refreshes 84 selected function exports and adds current type layouts, global/vtable references, an address inventory, and Fallout comparison evidence. See its manifest for the exact scope; the original full-database graph and type catalogs remain the historical baseline.
+[OctoberPass](Findings/OctoberPass/README.md) publishes the decal, temporary-effect, shader-pass, serialization, and asynchronous-task findings with explicit evidence-confidence labels. Its [complete annotation snapshot](Findings/OctoberPass/database_delta/README.md) refreshes the current function, named-item, type, metadata, and graph catalogs and preserves the wider database annotations. The focused report includes 84 evidence-anchor functions and Fallout comparison evidence; the complete snapshot covers 35,597 live function starts, 27,062 named items, and 10,147 defined local types. See the linked manifests and validation records for scope and confidence provenance.
 
 To reproduce this focused refresh while the Oblivion and Fallout databases are open:
 

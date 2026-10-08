@@ -6,7 +6,7 @@
 0x986CA9: and     eax, 1F80h
 0x986CAE: cmp     eax, 1F80h
 0x986CB3: jnz     short _log10___jnedef_8
-0x986CB5: fnstcw  [esp+8+var_8]
-0x986CB8: mov     ax, [esp+8+var_8]
+0x986CB5: fnstcw  word ptr [esp+8+var_8]
+0x986CB8: mov     ax, word ptr [esp+8+var_8]
 0x986CBC: and     ax, 7Fh
 0x986CC0: cmp     ax, 7Fh

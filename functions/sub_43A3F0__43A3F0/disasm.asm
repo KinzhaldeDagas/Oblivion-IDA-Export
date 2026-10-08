@@ -20,11 +20,11 @@
 0x43A41C: mov     edx, [ecx+4]
 0x43A41F: mov     ebx, eax
 0x43A421: lea     eax, ds:0[ebp*4]
-0x43A428: push    eax; Size
-0x43A429: push    edx; Src
-0x43A42A: push    ebx; Dst
+0x43A428: push    eax; byteCount
+0x43A429: push    edx; source
+0x43A42A: push    ebx; destination
 0x43A42B: mov     [esp+28h+var_4], ebx
-0x43A42F: call    _memcpy
+0x43A42F: call    _memcpy;
 0x43A434: xor     ecx, ecx
 0x43A436: add     esp, 10h
 0x43A439: cmp     [edi+1Ch], ecx
@@ -66,7 +66,7 @@
 0x43A490: mov     ecx, ebx
 0x43A492: call    eax
 0x43A494: push    esi
-0x43A495: call    FormHeapFree
+0x43A495: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x43A49A: mov     ebx, [esp+20h+var_4]
 0x43A49E: add     esp, 4
 0x43A4A1: xor     ecx, ecx
@@ -74,7 +74,7 @@
 0x43A4A6: jnz     short loc_43A447
 0x43A4A8: pop     esi
 0x43A4A9: push    ebx
-0x43A4AA: call    FormHeapFree
+0x43A4AA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x43A4AF: mov     ecx, [esp+1Ch+var_C]
 0x43A4B3: mov     edx, [esp+1Ch+var_8]
 0x43A4B7: add     esp, 4

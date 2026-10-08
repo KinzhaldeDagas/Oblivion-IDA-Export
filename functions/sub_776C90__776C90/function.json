@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 7,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x776C90",
+      "0x776D32"
+    ]
+  ],
+  "chunks_sha256": "7b6d35540912261b889286064b1c3a0e00e82ed5077785118de9a3b17317e3e1",
+  "comment_regular": "Verified 2026-10-02 buffer frontend audit: x86 ECX=this plus exactly four DWORD stack arguments (VB, offsetBytes, byteCount, flags), RET 10h. Corrected prototype removes the erroneous 64-bit size_t/high-word flags split. The native VB Lock occurs before entering manager critical section at BYTE offset +80h; lock owner/count writes are +F8h/+FCh. Staging fields are +40h pointer, +44h capacity, +48h original mapping, +4Ch byte count. The existing decompiler critical-section pointer arithmetic uses database type sizing; byte offsets in disassembly are authoritative. Fallout 827BBC20 LockVB is a direct Xenon API wrapper with no corresponding staging or manager lock sequence, so its algorithm must not replace this Oblivion path.\n\nMoonSugarEffect decode: VB lock helper. Locks D3D VB, caches original bytes in a staging buffer, and returns a writable pointer; unlock is handled by packers when they own the lock.",
+  "comment_repeatable": "MoonSugarEffect decode: VB lock helper. Locks D3D VB, caches original bytes in a staging buffer, and returns a writable pointer; unlock is handled by packers when they own the lock.\nVerified OblivionNew 2026-09-27 for owned VB mapping: helper invokes IDirect3DVertexBuffer9::Lock via vtable+0x2C with caller offset, byte size and flags. It retains the returned pointer at manager+0x48 and byte size at+0x4C, grows CPU staging at+0x40/capacity+0x44, and copies prior mapped bytes to staging unless flags include DISCARD/NOOVERWRITE (mask0x3000). Thus ordinary write locks must expose prior bytes before the packer modifies selected attributes. The caller packers copy staging back and Unlock; e.g. fallback skinned packer0x7774C0 calls this helper0x777662 and VB Unlock0x777A14. Existing decompiler Size/high-word expression conflates 32-bit size/flags; do not infer a 64-bit D3D Lock size.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_776C90",
+  "display_name": "NiDX9VertexBufferManager_LockToStaging",
   "end_ea": "0x776D32",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_776C90",
+  "name": "NiDX9VertexBufferManager_LockToStaging",
   "segment": ".text",
   "sha256": "7b6d35540912261b889286064b1c3a0e00e82ed5077785118de9a3b17317e3e1",
   "size": 162,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x776C90",
-  "type": "int __userpurge@<eax>(char *this@<ecx>, int, int, size_t Size, int)",
+  "total_chunk_size": 162,
+  "type": "void *__thiscall(NiDX9VertexBufferManager *self, IDirect3DVertexBuffer9 *buffer, unsigned int offsetBytes, unsigned int byteCount, unsigned int flags)",
   "xrefs_from_count": 67,
   "xrefs_to_count": 7
 }

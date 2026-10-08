@@ -1,62 +1,58 @@
-void __usercall sub_5DD340(double a1@<st2>, double a2@<st1>)
+// Native TrainingMenu close routine.
+void __usercall TrainingMenu_Close(double a1@<st2>, double a2@<st1>)
 {
-  int v3; // esi
-  TESTopic *v4; // eax
+  int v2; // esi
+  TESTopic *v3; // eax
   Unk1C *DialogueInfo; // eax
-  Unk1C *v6; // ebx
-  char **v7; // edi
+  Unk1C *v5; // ebx
+  char **v6; // edi
   Tile *OpenMenuTile; // eax
-  Tile *v9; // esi
+  Tile *v8; // esi
   _DWORD *ParentMenu; // edi
-  double v11; // st7
-  Tile *v12; // eax
-  Tile *v13; // esi
-  int v14; // edi
-  float v15; // [esp+0h] [ebp-1Ch]
+  double v10; // st7
+  Tile *v11; // eax
+  Tile *v12; // esi
+  int v13; // edi
+  float v14; // [esp+0h] [ebp-1Ch]
 
-  OpenMenuTile = (Tile *)Menu_GetOpenMenuTile(0x404);
-  v9 = OpenMenuTile;
-  if ( OpenMenuTile )
+  OpenMenuTile = (Tile *)Menu_GetOpenMenuTile(0x404); /*0x5dd346*/
+  v8 = OpenMenuTile; /*0x5dd34b*/
+  if ( OpenMenuTile ) /*0x5dd352*/
   {
-    ParentMenu = (_DWORD *)Tile_GetParentMenu(OpenMenuTile);
-    if ( ParentMenu )
+    ParentMenu = (_DWORD *)Tile_GetParentMenu(OpenMenuTile); /*0x5dd360*/
+    if ( ParentMenu ) /*0x5dd364*/
     {
-      v11 = fConstant_2;
-      Tile_SetFloat(v9, (_DWORD *)0x1772, fConstant_2);
-      sub_584740(ParentMenu, a1, a2);
-      sub_6AC3D0((_DWORD *)OSGlobals->sound);
-      v12 = (Tile *)Menu_GetOpenMenuTile(0x3F1);
-      v13 = v12;
-      if ( v12 )
+      v10 = fConstant_2; /*0x5dd366*/
+      Tile_SetFloat(v8, (_DWORD *)0x1772, fConstant_2); /*0x5dd377*/
+      Menu::StartFadeOut(ParentMenu, a2); /*0x5dd37e*/
+      sub_6AC3D0((_DWORD *)MEMORY[0xB33398]->sound); /*0x5dd38b*/
+      v11 = (Tile *)Menu_GetOpenMenuTile(0x3F1); /*0x5dd395*/
+      v12 = v11; /*0x5dd39a*/
+      if ( v11 ) /*0x5dd3a1*/
       {
-        v14 = Tile_GetParentMenu(v12);
-        sub_58FBA0((int)v13, a1, a2, v11, 0);
-        Tile_SetFloat(v13, (_DWORD *)0xFA1, fConstant_2);
-        *(_BYTE *)(v14 + 0x96) = 1;
-        v3 = v14;
-        v4 = (TESTopic *)TESTopic::GEtTopic(5, 0xD);
-        DialogueInfo = TESTopic::CreateDialogueInfo(
-                         v4,
-                         *(Actor **)(v14 + 0x60),
-                         (TESObjectREFR *)TESDataHandler_g_PlayerRef,
-                         0,
-                         0);
-        v6 = DialogueInfo;
-        if ( DialogueInfo )
+        v13 = Tile_GetParentMenu(v11); /*0x5dd3ae*/
+        sub_58FBA0((int)v12, a1, a2, v10, 0); /*0x5dd3b0*/
+        Tile_SetFloat(v12, (_DWORD *)0xFA1, fConstant_2); /*0x5dd3c6*/
+        *(_BYTE *)(v13 + 0x96) = 1; /*0x5dd3cb*/
+        v2 = v13; /*0x59e107*/
+        v3 = (TESTopic *)TESTopic::GetTopic(5, 0xD); /*0x59e109*/
+        DialogueInfo = TESTopic::CreateDialogueItem(v3, *(Actor **)(v13 + 0x60), (TESObjectREFR *)reference, 0, 0); /*0x59e122*/
+        v5 = DialogueInfo; /*0x59e127*/
+        if ( DialogueInfo ) /*0x59e12b*/
         {
-          if ( sub_6B7BA0(DialogueInfo) )
+          if ( DialogueItem::FirstResponse(DialogueInfo) ) /*0x59e133*/
           {
-            v7 = (char **)sub_6B7C20(v6);
-            (*(void (__cdecl **)(_DWORD, char **))(**(_DWORD **)(v3 + 0x60) + 0x304))(0.0, v7);
-            *(float *)(v3 + 0x84) = fConstant_2;
-            *(_DWORD *)(v3 + 0x80) = 2;
-            v15 = (float)((byte_B13200 != 0) + 1);
-            Tile_SetFloat(*(Tile **)(v3 + 0x2C), (_DWORD *)0xFA1, v15);
-            Tile_SetString(*(_DWORD **)(v3 + 0x2C), (_DWORD *)0xFDE, *v7);
-            Tile_SetFloat(*(Tile **)(v3 + 0x3C), (_DWORD *)0xFA1, 1.0);
+            v6 = (char **)DialogueListCursor::GetCurrent(v5); /*0x59e149*/
+            (*(void (__cdecl **)(_DWORD, char **))(**(_DWORD **)(v2 + 0x60) + 0x304))(0.0, v6); /*0x59e158*/
+            *(float *)(v2 + 0x84) = fConstant_2; /*0x59e162*/
+            *(_DWORD *)(v2 + 0x80) = 2; /*0x59e168*/
+            v14 = (float)((byte_B13200 != 0) + 1); /*0x59e18a*/
+            Tile_SetFloat(*(Tile **)(v2 + 0x2C), (_DWORD *)0xFA1, v14); /*0x59e192*/
+            Tile_SetString(*(_DWORD **)(v2 + 0x2C), (_DWORD *)0xFDE, *v6); /*0x59e1a2*/
+            Tile_SetFloat(*(Tile **)(v2 + 0x3C), (_DWORD *)0xFA1, 1.0); /*0x59e1b5*/
           }
-          sub_6B81D0(v6->unk00);
-          FormHeapFree((unsigned int)v6);
+          DialogueItem::Destroy((BSSimpleList_VoidPtr *)v5); /*0x59e1bd*/
+          FormHeapFree((unsigned int)v5); /*0x59e1c3*/
         }
       }
     }

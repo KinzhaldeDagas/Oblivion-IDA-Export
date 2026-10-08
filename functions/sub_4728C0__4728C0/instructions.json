@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4728C0",
-    "line": "mov     eax, ecx",
+    "line": "mov     eax, ecx; Resets ActorAnimData root-motion state: zeroes the cached accumulation vector at +0x18, restores the accumulation/root node transform fields, then finds the matching accumulation controllers and resets them. Used before sequence play and by full actor/animation reset paths.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x472930",
-    "line": "cmp     eax, offset dword_B3CCB0",
+    "line": "cmp     eax, offset stru_B3CCB0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x472970",
-    "line": "cmp     eax, offset dword_B3CD1C",
+    "line": "cmp     eax, offset stru_B3CD1C",
     "mnemonic": "cmp",
     "size": 5
   },

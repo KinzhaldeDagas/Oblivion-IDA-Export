@@ -1,1 +1,7 @@
-_PS_ATTRIBUTE
+struct _PS_ATTRIBUTE
+{
+ULONG_PTR Attribute;
+SIZE_T Size;
+$1EF917DE83F92B16DDB9600CD233F37C _anon_0;
+SIZE_T *ReturnLength;
+};

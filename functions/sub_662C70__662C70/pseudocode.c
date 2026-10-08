@@ -1,37 +1,43 @@
-void __thiscall sub_662C70(unsigned int *this, _BYTE *a2, int a3)
+double __userpurge sub_662C70@<st0>(
+        unsigned int *this@<ecx>,
+        char a2@<bpl>,
+        double result@<st0>,
+        TESBoundObject *a4,
+        int a5)
 {
-  char v3; // al
-  _DWORD *v5; // eax
-  int v6; // eax
+  TESForm::FormType type; // al
   _DWORD *v7; // eax
+  int v8; // eax
+  _DWORD *v9; // eax
 
-  v3 = a2[4];
-  if ( v3 == 0x14 || v3 == 0x16 )
+  type = a4->member.super.type; /*0x662c75*/
+  if ( type == kFormType_Armor || type == kFormType_Clothing ) /*0x662c81*/
   {
-    if ( *(this + 0x7F) )
+    if ( *(this + 0x7F) ) /*0x662c83*/
     {
-      v5 = OblivionDynamicCast(
-             a2,
+      v7 = OblivionDynamicCast( /*0x662c9b*/
+             a4,
              0,
              (struct _s_RTTICompleteObjectLocator *)&TESBoundObject `RTTI Type Descriptor',
              &TESEnchantableForm `RTTI Type Descriptor',
              0);
-      if ( v5 )
-        v6 = v5[1];
+      if ( v7 ) /*0x662ca5*/
+        v8 = v7[1]; /*0x662ca7*/
       else
-        v6 = 0;
-      if ( v6 )
+        v8 = 0; /*0x662cac*/
+      if ( v8 ) /*0x662cb0*/
       {
-        if ( (unsigned __int8)MagicTarget_HasMagicItem(this + 0x1A, v6 + 0x18) )
-          MagicTarget_RemoveBoundObj(a2, 0);
-        BSSimpleList_Remove((int *)*(this + 0x7F), (int)a2);
-        v7 = (_DWORD *)*(this + 0x7F);
-        if ( !v7[1] && !*v7 )
+        if ( (unsigned __int8)MagicTarget_HasMagicItem(this + 0x1A, v8 + 0x18) ) /*0x662cbc*/
+          result = MagicTarget_RemoveBoundObj((int)(this + 0x1A), a2, result, a4, 0); /*0x662cca*/
+        BSSimpleList_Remove((int *)*(this + 0x7F), (int)a4); /*0x662cd6*/
+        v9 = (_DWORD *)*(this + 0x7F); /*0x662cdb*/
+        if ( !v9[1] && !*v9 ) /*0x662ce8*/
         {
-          FormHeapFree(*(this + 0x7F));
-          *(this + 0x7F) = 0;
+          FormHeapFree(*(this + 0x7F)); /*0x662cee*/
+          *(this + 0x7F) = 0; /*0x662cf6*/
         }
       }
     }
   }
+  return result; /*0x662d00*/
 }

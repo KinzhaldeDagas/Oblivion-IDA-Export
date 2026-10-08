@@ -1,19 +1,36 @@
 {
-  "callees_count": 8,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "Lighting30ShaderProperty::~Lighting30ShaderProperty(void)",
+  "chunks": [
+    [
+      "0x863480",
+      "0x863533"
+    ],
+    [
+      "0x9D4760",
+      "0x9D4791"
+    ]
+  ],
+  "chunks_sha256": "b6db6f2f010c6ecd7af1b2e887415f0b70c295d15838cf0002740db27eb0c7b6",
+  "comment_regular": "Oblivion Lighting30ShaderProperty destructor. Reasserts the exact A9576C derived vptr during derived cleanup, releases/nulls the +0x104 reference member, then invokes BSShaderPPLightingProperty destruction. The accumulator cannot encounter this transition while traversing the live property-owned pass list.",
+  "comment_repeatable": "Oblivion Lighting30ShaderProperty destructor. Reasserts the exact A9576C derived vptr during derived cleanup, releases/nulls the +0x104 reference member, then invokes BSShaderPPLightingProperty destruction. The accumulator cannot encounter this transition while traversing the live property-owned pass list.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
+  "display_name": "Lighting30ShaderProperty_Destructor",
   "end_ea": "0x863533",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "??1Lighting30ShaderProperty@@UAE@XZ",
+  "name": "Lighting30ShaderProperty_Destructor",
   "segment": ".text",
   "sha256": "661d5b7ded28c6f90652a05542135d98bcec9557b33dc0538196492e1ace9344",
   "size": 179,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x863480",
+  "total_chunk_size": 228,
   "type": "void __thiscall(Lighting30ShaderProperty *this)",
-  "xrefs_from_count": 71,
+  "xrefs_from_count": 85,
   "xrefs_to_count": 1
 }

@@ -1,1 +1,1 @@
-NiBinaryStream
+struct NiBinaryStream;

@@ -1,4 +1,4 @@
-0x78F2C0: sub     esp, 0Ch
+0x78F2C0: sub     esp, 0Ch; SpeedTreeRT 4.1 source match: SIdvBranchFlare::Distance. Computes wrapped angular distance plus branch-progress falloff using radial and length exponents.
 0x78F2C3: fldz
 0x78F2C5: push    esi
 0x78F2C6: fst     [esp+10h+var_C]

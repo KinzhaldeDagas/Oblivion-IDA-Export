@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x440193",
-    "line": "mov     ecx, [esi+5Ch]",
+    "line": "mov     ecx, [esi+5Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x4401AA",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -79,13 +79,13 @@
   },
   {
     "ea": "0x4401B3",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4401B5",
-    "line": "call    sub_4C9820",
+    "line": "call    TESObjectCELL_HasFlag80",
     "mnemonic": "call",
     "size": 5
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x4401BC",
-    "line": "mov     ecx, [esi+5Ch]",
+    "line": "mov     ecx, [esi+5Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -109,13 +109,13 @@
   },
   {
     "ea": "0x4401C1",
-    "line": "push    2",
+    "line": "push    2; mode",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4401C3",
-    "line": "call    sub_543BB0",
+    "line": "call    Sky__SetMode; Changes Oblivion Sky mode at +0xDC, invoking the appropriate setup/teardown path when crossing between modes 0/1 and 2/3. Fallout was consulted afterward and corroborates Sky::SetMode terminology.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,13 +139,13 @@
   },
   {
     "ea": "0x4401CD",
-    "line": "push    1",
+    "line": "push    1; mode",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4401CF",
-    "line": "call    sub_543BB0",
+    "line": "call    Sky__SetMode; Changes Oblivion Sky mode at +0xDC, invoking the appropriate setup/teardown path when crossing between modes 0/1 and 2/3. Fallout was consulted afterward and corroborates Sky::SetMode terminology.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,19 +169,19 @@
   },
   {
     "ea": "0x4401D9",
-    "line": "mov     ecx, [esi+5Ch]",
+    "line": "mov     ecx, [esi+5Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x4401DC",
-    "line": "push    3",
+    "line": "push    3; mode",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4401DE",
-    "line": "call    sub_543BB0",
+    "line": "call    Sky__SetMode; Changes Oblivion Sky mode at +0xDC, invoking the appropriate setup/teardown path when crossing between modes 0/1 and 2/3. Fallout was consulted afterward and corroborates Sky::SetMode terminology.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,13 +217,13 @@
   },
   {
     "ea": "0x4401EA",
-    "line": "mov     [esp+arg_0], 3",
+    "line": "mov     [esp+arg_0], 3; mode",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x4401F2",
-    "line": "jmp     sub_543BB0",
+    "line": "jmp     Sky__SetMode; Changes Oblivion Sky mode at +0xDC, invoking the appropriate setup/teardown path when crossing between modes 0/1 and 2/3. Fallout was consulted afterward and corroborates Sky::SetMode terminology.",
     "mnemonic": "jmp",
     "size": 5
   }

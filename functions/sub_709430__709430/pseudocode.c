@@ -8,17 +8,17 @@ int __thiscall sub_709430(char *this, signed int a2)
   int v9; // [esp-28h] [ebp-30h]
   int v10; // [esp-14h] [ebp-1Ch]
 
-  v2 = a2;
-  v3 = *(void (__cdecl **)(int, char *, int, signed int *, int))(*(_DWORD *)(a2 + 0x21C) + 4);
-  v10 = *(_DWORD *)(a2 + 0x21C);
-  a2 = 4;
-  v3(v10, this, 4, &a2, 1);
-  v9 = *(_DWORD *)(v2 + 0x21C);
-  v5 = *(void (__cdecl **)(int, char *, int, signed int *, int))(v9 + 4);
-  a2 = 4;
-  v5(v9, this + 4, 4, &a2, 1);
-  v6 = *(_DWORD *)(v2 + 0x21C);
-  v7 = *(int (__cdecl **)(int, char *, int, signed int *, int))(v6 + 4);
-  a2 = 4;
-  return v7(v6, this + 8, 4, &a2, 1);
+  v2 = a2; /*0x709432*/
+  v3 = *(void (__cdecl **)(int, char *, int, signed int *, int))(*(_DWORD *)(a2 + 0x21C) + 4); /*0x70943c*/
+  v10 = *(_DWORD *)(a2 + 0x21C); /*0x70944b*/
+  a2 = 4; /*0x70944c*/
+  v3(v10, this, 4, &a2, 1); /*0x709454*/
+  v9 = *(_DWORD *)(v2 + 0x21C); /*0x709469*/
+  v5 = *(void (__cdecl **)(int, char *, int, signed int *, int))(v9 + 4); /*0x70946a*/
+  a2 = 4; /*0x70946d*/
+  v5(v9, this + 4, 4, &a2, 1); /*0x709475*/
+  v6 = *(_DWORD *)(v2 + 0x21C); /*0x709477*/
+  v7 = *(int (__cdecl **)(int, char *, int, signed int *, int))(v6 + 4); /*0x70947d*/
+  a2 = 4; /*0x70948e*/
+  return v7(v6, this + 8, 4, &a2, 1); /*0x70949b*/
 }

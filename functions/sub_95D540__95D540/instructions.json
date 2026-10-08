@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x95D540",
-    "line": "sub     esp, 18h",
+    "line": "sub     esp, 18h; Verified scene-object pick dispatcher: rejects invalid/filtered candidates, delegates NiGeometryData to NiPick_ProcessGeometryIntersection, and has a separate bounds/RTTI fallback that writes hit point and distance but does not explicitly populate the normal field.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x95D544",
-    "line": "mov     esi, [esp+1Ch+arg_C]",
+    "line": "mov     esi, [esp+1Ch+pickedObject]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x95D5D4",
-    "line": "call    sub_95C530",
+    "line": "call    NiPick_ProcessGeometryIntersection; Verified geometry-hit path: computes intersection point/distance and fills the 0x44-byte NiPickRecord. When requested, its +0x28 vector is either a normalized triangle face normal (NiPoint3_CrossProduct of edge vectors) or an interpolated vertex normal; no-normal cases write zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x95D5F2",
-    "line": "push    offset dword_B4021C",
+    "line": "push    offset stru_B4021C",
     "mnemonic": "push",
     "size": 5
   },
@@ -613,19 +613,19 @@
   },
   {
     "ea": "0x95D63F",
-    "line": "push    esi",
+    "line": "push    esi; pickedObject",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x95D640",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x95D642",
-    "line": "call    sub_95A2D0",
+    "line": "call    NiPickRecord_Initialize; Verified NiPickRecord initialization for the 0x44-byte record: retains the picked object at +0, clears/releases the secondary reference at +4, and zeros tail fields +0x34..+0x40. It does not initialize the intersection point, distance, or +0x28 normal fields; pick paths populate those selectively, so bounds-only records may leave the normal unavailable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -679,25 +679,25 @@
   },
   {
     "ea": "0x95D65D",
-    "line": "call    sub_404C90",
+    "line": "call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x95D662",
-    "line": "fstp    [esp+28h+arg_C]",
+    "line": "fstp    [esp+28h+pickedObject]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x95D666",
-    "line": "fld     [esp+28h+arg_C]",
+    "line": "fld     [esp+28h+pickedObject]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x95D66A",
-    "line": "fst     dword ptr [esi+14h]",
+    "line": "fst     dword ptr [esi+14h]; Verified bounds-only pick path stores hit distance at NiPickRecord +0x14 and intersection XYZ at +0x08..+0x10; it does not explicitly populate the geometry surface-normal field.",
     "mnemonic": "fst",
     "size": 3
   },

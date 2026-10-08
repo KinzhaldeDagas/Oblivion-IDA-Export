@@ -1,19 +1,36 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_4BD050",
+  "chunks": [
+    [
+      "0x4BD050",
+      "0x4BD13A"
+    ],
+    [
+      "0x9B44A0",
+      "0x9B44D1"
+    ]
+  ],
+  "chunks_sha256": "bdf85045e30f2b324adcfe5c2c3a6686b5e559bca2aeae2b8abf831a8c99fb2b",
+  "comment_regular": "Verified specialized map constructor from its vtable assignment: LockFreeMap<unsigned int, NiPointer<DistantLODLoaderTask>>. DistantLODLoaderTaskMap_EnsureCreated invokes it with interfaceCount 2, 37 buckets, and entry size 0x0C.",
+  "comment_repeatable": "Verified specialized map constructor from its vtable assignment: LockFreeMap<unsigned int, NiPointer<DistantLODLoaderTask>>. DistantLODLoaderTaskMap_EnsureCreated invokes it with interfaceCount 2, 37 buckets, and entry size 0x0C.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "DistantLODLoaderTaskMap_ctor",
   "end_ea": "0x4BD13A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4BD050",
+  "name": "DistantLODLoaderTaskMap_ctor",
   "segment": ".text",
   "sha256": "f4e8e13309f5b2b8e1e00c68cef5140f6c5761153f5fc51d76e00caaebdfb3dc",
   "size": 234,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4BD050",
-  "type": "LockFreeMap *__thiscall(LockFreeMap *this, unsigned int, unsigned int, UInt32)",
-  "xrefs_from_count": 85,
+  "total_chunk_size": 283,
+  "type": "LockFreeMap *__thiscall(LockFreeMap *this, unsigned int interfaceCount, UInt32 bucketCount, UInt32 itemSize)",
+  "xrefs_from_count": 104,
   "xrefs_to_count": 1
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7ECB20",
-    "line": "test    byte ptr ds:0B466D8h, 1",
+    "line": "test    byte ptr ds:0B466D8h, 1; OBLIVION AUTHORITY (2026-08-24): Per-pass light reset clears eight shared diffuse slots to (0,0,0,1) and eight source-vector slots to (0.001,0,0,0). It does NOT clear shared ambient c5. Leaf c11 is later rebuilt/normalized from source slot 0 during normal per-draw transform setup, so zero-light c11 is fallback-derived rather than stale on that path.",
     "mnemonic": "test",
     "size": 7
   },
@@ -168,12 +168,6 @@
     "size": 2
   },
   {
-    "ea": "0x7ECB9A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x7ECBA0",
     "line": "movzx   ecx, dx",
     "mnemonic": "movzx",
@@ -199,7 +193,7 @@
   },
   {
     "ea": "0x7ECBAC",
-    "line": "add     eax, offset dword_B46498",
+    "line": "add     eax, offset flt_B46498; Reset source light-vector slots 0..7. Slot 0 becomes (0.001,0,0,0), so this source bank is not stale after reset.",
     "mnemonic": "add",
     "size": 5
   },
@@ -253,7 +247,7 @@
   },
   {
     "ea": "0x7ECBCB",
-    "line": "add     eax, offset dword_B46498",
+    "line": "add     eax, offset flt_B46498; Reset shared diffuse slots 0..7 from dword_B25AD0..ADC = (0,0,0,1). Leaf c6/c7 are therefore black until present lights rebuild them.",
     "mnemonic": "add",
     "size": 5
   },

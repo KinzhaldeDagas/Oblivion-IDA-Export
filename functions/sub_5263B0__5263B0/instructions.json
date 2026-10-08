@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x52640B",
-    "line": "mov     [esp+3Ch+var_1C], eax",
+    "line": "mov     [esp+3Ch+output], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -190,12 +190,6 @@
     "line": "jmp     short loc_526420",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x526419",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
   },
   {
     "ea": "0x526420",
@@ -643,7 +637,7 @@
   },
   {
     "ea": "0x5264F1",
-    "line": "cmp     ebx, [esp+3Ch+var_1C]",
+    "line": "cmp     ebx, [esp+3Ch+output]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -703,7 +697,7 @@
   },
   {
     "ea": "0x526521",
-    "line": "mov     eax, [esp+3Ch+arg_0]",
+    "line": "mov     eax, [esp+3Ch+texture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -829,31 +823,31 @@
   },
   {
     "ea": "0x526565",
-    "line": "push    ebp; char",
+    "line": "push    ebp; searchArchives",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x526566",
-    "line": "push    ebp; char",
+    "line": "push    ebp; allowMissing",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x526567",
-    "line": "push    eax; ArgList",
+    "line": "push    eax; path",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x526568",
-    "line": "lea     ecx, [esp+48h+arg_0]",
+    "line": "lea     ecx, [esp+48h+texture]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x52656C",
-    "line": "push    ecx; int",
+    "line": "push    ecx; outTexture",
     "mnemonic": "push",
     "size": 1
   },
@@ -865,13 +859,13 @@
   },
   {
     "ea": "0x526573",
-    "line": "call    sub_442890",
+    "line": "call    OB_TES_LoadOrFindSourceTexture_010201A0; TES texture cache/load helper: checks the global texture map, optionally verifies file existence via FileFinder, loads NiSourceTexture by filename, caches it, and returns a refcounted texture pointer.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x526578",
-    "line": "mov     eax, [esp+3Ch+arg_0]",
+    "line": "mov     eax, [esp+3Ch+texture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -901,25 +895,25 @@
   },
   {
     "ea": "0x52658D",
-    "line": "lea     edx, [esp+3Ch+var_1C]",
+    "line": "lea     edx, [esp+3Ch+output]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x526591",
-    "line": "push    edx",
+    "line": "push    edx; output",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x526592",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x526594",
-    "line": "call    sub_405760",
+    "line": "call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -931,7 +925,7 @@
   },
   {
     "ea": "0x52659B",
-    "line": "mov     eax, [esp+3Ch+var_1C]",
+    "line": "mov     eax, [esp+3Ch+output]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1027,7 +1021,7 @@
   },
   {
     "ea": "0x5265C1",
-    "line": "mov     ecx, [esp+3Ch+var_24]",
+    "line": "mov     ecx, [esp+3Ch+var_24]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1039,13 +1033,13 @@
   },
   {
     "ea": "0x5265C9",
-    "line": "push    eax",
+    "line": "push    eax; output",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5265CA",
-    "line": "call    sub_405760",
+    "line": "call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1525,7 +1519,7 @@
   },
   {
     "ea": "0x52668E",
-    "line": "mov     eax, [esp+3Ch+arg_0]",
+    "line": "mov     eax, [esp+3Ch+texture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1567,7 +1561,7 @@
   },
   {
     "ea": "0x5266A1",
-    "line": "mov     ecx, [esp+3Ch+arg_0]",
+    "line": "mov     ecx, [esp+3Ch+texture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1609,7 +1603,7 @@
   },
   {
     "ea": "0x5266B4",
-    "line": "lea     ecx, [esp+3Ch+arg_0]; this",
+    "line": "lea     ecx, [esp+3Ch+texture]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1621,7 +1615,7 @@
   },
   {
     "ea": "0x5266BD",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -1645,7 +1639,7 @@
   },
   {
     "ea": "0x5266D0",
-    "line": "lea     ecx, [esp+3Ch+var_24]; this",
+    "line": "lea     ecx, [esp+3Ch+var_24]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1657,13 +1651,13 @@
   },
   {
     "ea": "0x5266D9",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5266DE",
-    "line": "lea     ecx, [esp+3Ch+var_28]; this",
+    "line": "lea     ecx, [esp+3Ch+var_28]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1675,7 +1669,7 @@
   },
   {
     "ea": "0x5266EA",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -1759,19 +1753,19 @@
   },
   {
     "ea": "0x526718",
-    "line": "mov     eax, [esp+3Ch+arg_0]",
+    "line": "mov     eax, [esp+3Ch+texture]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x52671C",
-    "line": "push    eax",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52671D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1783,25 +1777,25 @@
   },
   {
     "ea": "0x526724",
-    "line": "call    NiTexturingProperty__SetUnk08",
+    "line": "call    OB_NiTexturingProperty_SetBaseTexture_010201A0",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x526729",
-    "line": "push    3",
+    "line": "push    3; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x52672B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x52672D",
-    "line": "call    sub_405870",
+    "line": "call    OB_NiTexturingProperty_SetClampMode_010201A0; NiTexturingProperty map flag helper: ensures map slot 0 exists and writes arg-derived bits into map Unk04 bits 0xC000. 0x560AC0 calls it with 0 for billboard texture property state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1819,7 +1813,7 @@
   },
   {
     "ea": "0x526736",
-    "line": "call    sub_405900",
+    "line": "call    NiTexturingProperty_SetBaseMapFilterMode",
     "mnemonic": "call",
     "size": 5
   },
@@ -1837,7 +1831,7 @@
   },
   {
     "ea": "0x52673F",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1993,7 +1987,7 @@
   },
   {
     "ea": "0x52677F",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2017,7 +2011,7 @@
   },
   {
     "ea": "0x52678C",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -2173,13 +2167,13 @@
   },
   {
     "ea": "0x5267CC",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5267D1",
-    "line": "mov     eax, [esp+3Ch+arg_0]",
+    "line": "mov     eax, [esp+3Ch+texture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2305,7 +2299,7 @@
   },
   {
     "ea": "0x526808",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2377,31 +2371,31 @@
   },
   {
     "ea": "0x526832",
-    "line": "push    1",
+    "line": "push    1; arg3",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x526834",
-    "line": "push    1",
+    "line": "push    1; normalMapBypass",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x526836",
-    "line": "push    1",
+    "line": "push    1; shaderId",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x526838",
-    "line": "push    eax",
+    "line": "push    eax; root",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x526839",
-    "line": "call    sub_7B8940",
+    "line": "call    BSShaderManager_AssignShadersRecursive; Generic recursive shader assignment wrapper around 0x7B7FC0. In decoded TES4 tree code it is used for branch shader id 4 and simple/default id 1; no stock call with frond shader id 5 was found in this pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2455,31 +2449,31 @@
   },
   {
     "ea": "0x526857",
-    "line": "push    1",
+    "line": "push    1; arg3",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x526859",
-    "line": "push    1",
+    "line": "push    1; normalMapBypass",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x52685B",
-    "line": "push    1",
+    "line": "push    1; shaderId",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x52685D",
-    "line": "push    eax",
+    "line": "push    eax; root",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52685E",
-    "line": "call    sub_7B8940",
+    "line": "call    BSShaderManager_AssignShadersRecursive; Generic recursive shader assignment wrapper around 0x7B7FC0. In decoded TES4 tree code it is used for branch shader id 4 and simple/default id 1; no stock call with frond shader id 5 was found in this pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2698,5 +2692,125 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B7FC0",
+    "line": "lea     ecx, [ebp-28h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B7FC3",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7FC8",
+    "line": "lea     ecx, [ebp-24h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B7FCB",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7FD0",
+    "line": "lea     ecx, [ebp-14h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B7FD3",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7FD8",
+    "line": "lea     ecx, [ebp+4]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B7FDB",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7FE0",
+    "line": "mov     eax, [ebp-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B7FE3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B7FE4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7FE9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B7FEA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B7FEB",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B7FEF",
+    "line": "lea     eax, [edx-2Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B7FF2",
+    "line": "mov     ecx, [edx-30h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B7FF5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B7FF7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7FFC",
+    "line": "mov     eax, offset stru_AE27A4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8001",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

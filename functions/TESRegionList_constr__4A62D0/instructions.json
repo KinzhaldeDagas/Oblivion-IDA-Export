@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4A62D0",
-    "line": "mov     al, [esp+arg_0]",
+    "line": "mov     al, [esp+arg_0]; Verified: mode byte at +0xC controls ownership and shared region-data cache lifetime. Owning lists reset cache on first owner and increment the manager/list refcount.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -96,14 +96,8 @@
     "size": 2
   },
   {
-    "ea": "0x4A62FA",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x4A6300",
-    "line": "mov     ecx, ds:dword_B35420[esi]",
+    "line": "mov     ecx, dword ptr ds:g_OblivionRegionDataCache.selectedData[esi]; Verified selected TESRegionData pointer used as cache value for a region-data ID.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -121,7 +115,7 @@
   },
   {
     "ea": "0x4A630A",
-    "line": "mov     ds:dword_B35420[esi], ebx",
+    "line": "mov     dword ptr ds:g_OblivionRegionDataCache.selectedData[esi], ebx; Verified selected TESRegionData pointer used as cache value for a region-data ID.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -151,7 +145,7 @@
   },
   {
     "ea": "0x4A6318",
-    "line": "mov     ecx, ds:dword_B35424[esi]",
+    "line": "mov     ecx, ds:g_OblivionRegionDataCache.activeRegionList[esi]; Verified active TESRegionList used to decide cache reuse and compare current input list.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -169,7 +163,7 @@
   },
   {
     "ea": "0x4A6322",
-    "line": "mov     ds:dword_B35424[esi], ebx",
+    "line": "mov     ds:g_OblivionRegionDataCache.activeRegionList[esi], ebx; Verified active TESRegionList used to decide cache reuse and compare current input list.",
     "mnemonic": "mov",
     "size": 6
   },

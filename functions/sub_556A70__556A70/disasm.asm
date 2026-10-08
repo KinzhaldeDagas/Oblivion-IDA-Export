@@ -1,4 +1,4 @@
-0x556A70: push    0FFFFFFFFh
+0x556A70: push    0FFFFFFFFh; Clone the loaded FaceGen model geometry, geometry data, controller, and required FaceGen extra data into an independently deformable NiGeometry.
 0x556A72: push    offset SEH_556A70
 0x556A77: mov     eax, large fs:0
 0x556A7D: push    eax
@@ -38,12 +38,12 @@
 0x556AD4: mov     eax, [ebp+8]
 0x556AD7: cmp     eax, ebx
 0x556AD9: jz      loc_556C50
-0x556ADF: mov     ecx, [eax+10h]
+0x556ADF: mov     ecx, [eax+10h]; this
 0x556AE2: cmp     ecx, ebx
 0x556AE4: jz      loc_556C50
 0x556AEA: cmp     [ecx+0B4h], ebx
 0x556AF0: jz      loc_556C50
-0x556AF6: call    sub_700900
+0x556AF6: call    NiObject_CloneWithPointerMap; Clones a loaded NiObject with a temporary pointer map and runs clone post-processing; the returned scene object is distinct from its source.
 0x556AFB: push    eax; a2
 0x556AFC: mov     ecx, esi; this
 0x556AFE: call    NiSmartPointer_Set??
@@ -97,9 +97,9 @@
 0x556B88: lea     ecx, [esp+30h+var_18]; this
 0x556B8C: mov     byte ptr [esp+30h+var_4], 3
 0x556B91: call    NiSmartPointer_Set??
-0x556B96: lea     ecx, [esp+2Ch+arg_0]; this
+0x556B96: lea     ecx, [esp+2Ch+arg_0]; slot
 0x556B9A: mov     byte ptr [esp+2Ch+var_4], 1
-0x556B9F: call    sub_7016A0
+0x556B9F: call    NiPointerSlot_Release
 0x556BA4: mov     ecx, [esp+2Ch+var_18]
 0x556BA8: push    ecx; a2
 0x556BA9: mov     ecx, edi; this
@@ -127,14 +127,14 @@
 0x556BE7: jz      short loc_556BF1
 0x556BE9: mov     ecx, [esi]
 0x556BEB: push    eax
-0x556BEC: call    NiNode_AddNiExtraData
+0x556BEC: call    NiObjectNET_AddExtraData; Pass269 ABI and ownership proof: NiObjectNET::AddExtraData consumes one stack argument with RET 4 and also expects owning object in ECX/EBX at this build's callsites. The plugin wrapper must not execute caller-side ADD ESP,4.
 0x556BF1: mov     eax, [ebp+8]
 0x556BF4: mov     eax, [eax+20h]
 0x556BF7: test    eax, eax
 0x556BF9: jz      short loc_556C03
 0x556BFB: mov     ecx, [esi]
 0x556BFD: push    eax
-0x556BFE: call    NiNode_AddNiExtraData
+0x556BFE: call    NiObjectNET_AddExtraData; Pass269 ABI and ownership proof: NiObjectNET::AddExtraData consumes one stack argument with RET 4 and also expects owning object in ECX/EBX at this build's callsites. The plugin wrapper must not execute caller-side ADD ESP,4.
 0x556C03: mov     esi, [esp+2Ch+var_18]
 0x556C07: test    esi, esi
 0x556C09: mov     byte ptr [esp+2Ch+var_4], 0
@@ -174,3 +174,23 @@
 0x556C61: pop     ebx
 0x556C62: add     esp, 18h
 0x556C65: retn    4
+0x9BC5B0: lea     ecx, [ebp-14h]; slot
+0x9BC5B3: jmp     NiPointerSlot_Release
+0x9BC5B8: lea     ecx, [ebp-18h]; slot
+0x9BC5BB: jmp     NiPointerSlot_Release
+0x9BC5C0: lea     ecx, [ebp+4]; slot
+0x9BC5C3: jmp     NiPointerSlot_Release
+0x9BC5C8: lea     ecx, [ebp+4]; slot
+0x9BC5CB: jmp     NiPointerSlot_Release
+0x9BC5D0: mov     eax, [ebp-10h]
+0x9BC5D3: push    eax
+0x9BC5D4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BC5D9: pop     ecx
+0x9BC5DA: retn
+0x9BC5DB: mov     edx, [esp+arg_4]
+0x9BC5DF: lea     eax, [edx-1Ch]
+0x9BC5E2: mov     ecx, [edx-20h]
+0x9BC5E5: xor     ecx, eax
+0x9BC5E7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BC5EC: mov     eax, offset stru_AE6168
+0x9BC5F1: jmp     ___CxxFrameHandler3

@@ -1,4 +1,4 @@
-int __usercall EffectItem_BuildDisplayString_::QualifyLockName@<eax>(
+int __userpurge EffectItem_BuildDisplayString_::QualifyLockName@<eax>(
         unsigned int a1@<ebx>,
         _DWORD *a2@<esi>,
         BSStringT *a3@<edi>,
@@ -43,8 +43,8 @@ int __usercall EffectItem_BuildDisplayString_::QualifyLockName@<eax>(
         int a42,
         int a43)
 {
-  if ( *a2 != 0x4B434F4C )
-    return EffectItem_BuildDisplayString_::GetUnqualifiedName(
+  if ( *a2 != 0x4B434F4C ) /*0x413cf8*/
+    return EffectItem_BuildDisplayString_::GetUnqualifiedName( /*0x413cf8*/
              a4,
              a5,
              a6,
@@ -81,7 +81,7 @@ int __usercall EffectItem_BuildDisplayString_::QualifyLockName@<eax>(
              a37,
              a38,
              a39);
-  BSStringT_Set(a3, sMagicEffectItemCreateLock, a1);
+  BSStringT_Set(a3, MEMORY[0xB334B0].value, a1); /*0x413d04*/
   return EffectItem_BuildDisplayString_::CheckMagnitudeType(
            a1,
            a2,

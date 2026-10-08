@@ -1,1 +1,1 @@
-CAI
+typedef tagCAI CAI;

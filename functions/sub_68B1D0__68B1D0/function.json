@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x68B1D0",
+      "0x68B1FF"
+    ]
+  ],
+  "chunks_sha256": "3abacbe8ace16a42c4c80dd941b52e32067d03f3ac0625f3506b8ac1c3fddffd",
+  "comment_regular": "Verified kind setter writes the low byte at +4; when switching away from kind 1 it frees the owned NiPoint3* payload, then clears payload and stores the new kind. Observed kinds are 0=reference, 1=owned position, initial sentinel 0xFF.",
+  "comment_repeatable": "Verified kind setter writes the low byte at +4; when switching away from kind 1 it frees the owned NiPoint3* payload, then clears payload and stores the new kind. Observed kinds are 0=reference, 1=owned position, initial sentinel 0xFF.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_68B1D0",
+  "display_name": "TravelPathNode_SetKind",
   "end_ea": "0x68B1FF",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_68B1D0",
+  "name": "TravelPathNode_SetKind",
   "segment": ".text",
   "sha256": "3abacbe8ace16a42c4c80dd941b52e32067d03f3ac0625f3506b8ac1c3fddffd",
   "size": 47,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x68B1D0",
-  "type": "void __thiscall(int this, int)",
+  "total_chunk_size": 47,
+  "type": "void __thiscall(TravelPathNode *this, TravelPathNodeKind kind)",
   "xrefs_from_count": 21,
   "xrefs_to_count": 4
 }

@@ -1,19 +1,32 @@
 {
-  "callees_count": 10,
-  "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_78EA30",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
+  "callers_count": 6,
+  "chunks": [
+    [
+      "0x78EA30",
+      "0x78EAF0"
+    ]
+  ],
+  "chunks_sha256": "500a57a1604fe3ca9499535b306d74891e729d6142a57a1c2db589c98b821823",
+  "comment_regular": "Oblivion stRandom::Reseed. Seed -1 derives a nonzero fractional seed from time and either 12345 or an existing uniform sample; explicit seeds <=1 clamp to 1 and use Random::SetLong. Marks the shared generator initialized.",
+  "comment_repeatable": "Oblivion stRandom::Reseed. Seed -1 derives a nonzero fractional seed from time and either 12345 or an existing uniform sample; explicit seeds <=1 clamp to 1 and use Random::SetLong. Marks the shared generator initialized.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_stRandom_Reseed_010201A0",
   "end_ea": "0x78EAF0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_78EA30",
+  "name": "OB_stRandom_Reseed_010201A0",
   "segment": ".text",
   "sha256": "500a57a1604fe3ca9499535b306d74891e729d6142a57a1c2db589c98b821823",
   "size": 192,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78EA30",
-  "type": "void __stdcall(int)",
+  "total_chunk_size": 192,
+  "type": "void __thiscall(OB_stRandom_010201A0 *this, int seed)",
   "xrefs_from_count": 64,
   "xrefs_to_count": 6
 }

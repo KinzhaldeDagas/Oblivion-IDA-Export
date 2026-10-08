@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x767B40",
-    "line": "sub     esp, 28h",
+    "line": "sub     esp, 28h; MoonSugarEffect decode: NiDX9Renderer::PackGeometryBuffers for non-skinned geometry. Validates/reuses BuffData when streams are live and not force-dirty; otherwise resizes streams, repacks vertices via NiD3DShaderDeclaration +0x6C or default packer, rebuilds IB through 0x7781F0, and clears low dirty flags.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -73,19 +73,19 @@
   },
   {
     "ea": "0x767B64",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x767B66",
-    "line": "call    sub_777F10",
+    "line": "call    NiGeometryBufferData_HasLiveStreams; Pass225/226: Tests whether NiGeometryBufferData is live: stream count nonzero and every VBChip has a D3D vertex buffer.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x767B6B",
-    "line": "cmp     byte ptr [esp+34h+arg_10], bl",
+    "line": "cmp     byte ptr [esp+34h+bufferBytes], bl",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x767BDB",
-    "line": "mov     [esp+34h+var_28], ebx",
+    "line": "mov     [esp+34h+indices], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x767BF0",
-    "line": "cmp     eax, offset dword_B3FD2C",
+    "line": "cmp     eax, offset stru_B3FD2C",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x767BFF",
-    "line": "push    offset dword_B3FD0C",
+    "line": "push    offset stru_B3FD0C",
     "mnemonic": "push",
     "size": 5
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x767C32",
-    "line": "mov     [esp+34h+var_28], edx",
+    "line": "mov     [esp+34h+indices], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x767C7D",
-    "line": "mov     [esp+34h+var_28], ecx",
+    "line": "mov     [esp+34h+indices], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -739,7 +739,7 @@
   },
   {
     "ea": "0x767CC0",
-    "line": "call    TESObjectREFR_GetNiNode",
+    "line": "call    Shared_GetDwordAtOffset3C; Linker-folded Oblivion accessor: returns the dword at this+0x3C. In TESClass auto-stat calls this is primaryAttribute2; other call contexts may represent unrelated fields.",
     "mnemonic": "call",
     "size": 5
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x767CD8",
-    "line": "call    TESObjectREFR_GetNiNode",
+    "line": "call    Shared_GetDwordAtOffset3C; Linker-folded Oblivion accessor: returns the dword at this+0x3C. In TESClass auto-stat calls this is primaryAttribute2; other call contexts may represent unrelated fields.",
     "mnemonic": "call",
     "size": 5
   },
@@ -811,7 +811,7 @@
   },
   {
     "ea": "0x767CF0",
-    "line": "cmp     byte ptr [esp+38h+arg_10], 0",
+    "line": "cmp     byte ptr [esp+38h+bufferBytes], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -871,7 +871,7 @@
   },
   {
     "ea": "0x767D0F",
-    "line": "call    sub_777F70",
+    "line": "call    sub_777F70; Pass225/226: Forces NiGeometryBufferData stream count; screen-texture render path forces exactly one stream.",
     "mnemonic": "call",
     "size": 5
   },
@@ -979,7 +979,7 @@
   },
   {
     "ea": "0x767D3D",
-    "line": "call    sub_777F70",
+    "line": "call    sub_777F70; Pass225/226: Forces NiGeometryBufferData stream count; screen-texture render path forces exactly one stream.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1033,7 +1033,7 @@
   },
   {
     "ea": "0x767D68",
-    "line": "mov     eax, [esp+38h+var_28]",
+    "line": "mov     eax, [esp+38h+indices]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1111,7 +1111,7 @@
   },
   {
     "ea": "0x767D94",
-    "line": "mov     [esp+38h+arg_10], eax",
+    "line": "mov     [esp+38h+bufferBytes], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1128,14 +1128,8 @@
     "size": 2
   },
   {
-    "ea": "0x767D9C",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 4
-  },
-  {
     "ea": "0x767DA0",
-    "line": "mov     eax, [esp+38h+arg_10]",
+    "line": "mov     eax, [esp+38h+bufferBytes]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1333,7 +1327,7 @@
   },
   {
     "ea": "0x767DEE",
-    "line": "call    sub_776E90",
+    "line": "call    sub_776E90; MoonSugarEffect decode: fallback FVF/one-stream non-skinned vertex packer. Position begins at stream offset 0, then optional normals/color/UVs. A pack-time wobble here would persist in the geometry VB until a later clean repack.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1351,7 +1345,7 @@
   },
   {
     "ea": "0x767DF7",
-    "line": "mov     eax, [esp+38h+arg_10]",
+    "line": "mov     eax, [esp+38h+bufferBytes]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1369,7 +1363,7 @@
   },
   {
     "ea": "0x767E02",
-    "line": "mov     [esp+38h+arg_10], eax",
+    "line": "mov     [esp+38h+bufferBytes], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1381,7 +1375,7 @@
   },
   {
     "ea": "0x767E08",
-    "line": "cmp     [esp+38h+var_28], 0",
+    "line": "cmp     [esp+38h+indices], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1423,7 +1417,7 @@
   },
   {
     "ea": "0x767E1D",
-    "line": "mov     ecx, [esp+38h+var_28]",
+    "line": "mov     ecx, [esp+38h+indices]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1435,7 +1429,7 @@
   },
   {
     "ea": "0x767E23",
-    "line": "mov     [esp+38h+arg_10], edx",
+    "line": "mov     [esp+38h+bufferBytes], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1459,25 +1453,25 @@
   },
   {
     "ea": "0x767E30",
-    "line": "push    eax; Dst",
+    "line": "push    eax; usage",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x767E31",
-    "line": "push    1; int",
+    "line": "push    1; pool",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x767E33",
-    "line": "lea     eax, [esp+40h+arg_10]",
+    "line": "lea     eax, [esp+40h+bufferBytes]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x767E37",
-    "line": "push    eax; int",
+    "line": "push    eax; bufferBytes",
     "mnemonic": "push",
     "size": 1
   },
@@ -1489,37 +1483,37 @@
   },
   {
     "ea": "0x767E3C",
-    "line": "push    ebp; int",
+    "line": "push    ebp; existing",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x767E3D",
-    "line": "push    eax; int",
+    "line": "push    eax; capacityIndices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x767E3E",
-    "line": "push    eax; Src",
+    "line": "push    eax; indexCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x767E3F",
-    "line": "push    ecx; int",
+    "line": "push    ecx; indices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x767E40",
-    "line": "mov     ecx, [edx+8B4h]",
+    "line": "mov     ecx, [edx+8B4h]; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x767E46",
-    "line": "call    sub_7781F0",
+    "line": "call    NiDX9IndexBufferManager_PackBuffer; Pass226: Index-buffer rebuild/upload helper used when NiScreenTexture mask bit 0x08 is active.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1603,7 +1597,7 @@
   },
   {
     "ea": "0x767E63",
-    "line": "call    sub_777F40",
+    "line": "call    sub_777F40; MoonSugarEffect decode: release BuffData index buffer and reset IBSize/IB.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1615,7 +1609,7 @@
   },
   {
     "ea": "0x767E6C",
-    "line": "mov     ecx, [esp+38h+arg_10]",
+    "line": "mov     ecx, [esp+38h+bufferBytes]",
     "mnemonic": "mov",
     "size": 4
   },

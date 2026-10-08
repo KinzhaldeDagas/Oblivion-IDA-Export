@@ -1,5 +1,5 @@
 0x52F570: push    ebx
-0x52F571: mov     ebx, [esp+4+arg_0]
+0x52F571: mov     ebx, [esp+4+info]
 0x52F575: test    ebx, ebx
 0x52F577: jnz     short loc_52F57F
 0x52F579: xor     eax, eax

@@ -37,9 +37,9 @@
 0x567822: mov     ecx, esi
 0x567824: call    edx
 0x567826: push    eax
-0x567827: call    sub_46D5C0
+0x567827: call    sub_46D5C0; Collision/model radius-ish helper used by PlaceAtMe after a ray hit. It dynamic-casts a form to TESModel and reads +0x0C, otherwise resolves from TESObjectREFR via 0x4694A0; result scales the normalized hit vector before final placement point.
 0x56782C: add     esp, 4
-0x56782F: call    Double_To_SInt32
+0x56782F: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x567834: mov     ebx, eax
 0x567836: mov     [esp+30h+var_24], eax
 0x56783A: test    ebx, ebx
@@ -87,7 +87,7 @@
 0x5678C8: test    eax, eax
 0x5678CA: jz      short loc_5678E0
 0x5678CC: mov     ecx, [edi+28h]
-0x5678CF: call    sub_452A60
+0x5678CF: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x5678D4: test    eax, eax
 0x5678D6: mov     [esp+30h+var_24], eax
 0x5678DA: jnz     loc_567B6B
@@ -102,9 +102,9 @@
 0x5678FC: mov     ecx, esi
 0x5678FE: call    eax
 0x567900: push    eax
-0x567901: call    sub_46D5C0
+0x567901: call    sub_46D5C0; Collision/model radius-ish helper used by PlaceAtMe after a ray hit. It dynamic-casts a form to TESModel and reads +0x0C, otherwise resolves from TESObjectREFR via 0x4694A0; result scales the normalized hit vector before final placement point.
 0x567906: add     esp, 4
-0x567909: call    Double_To_SInt32
+0x567909: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x56790E: mov     edx, [esi]
 0x567910: mov     edi, eax
 0x567912: mov     eax, [edx+170h]
@@ -123,7 +123,7 @@
 0x567947: mov     ecx, ebx
 0x567949: call    eax
 0x56794B: fiadd   [esp+30h+var_24]
-0x56794F: call    Double_To_SInt32
+0x56794F: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x567954: mov     edi, eax
 0x567956: mov     ecx, ebx
 0x567958: mov     [esp+30h+var_24], edi
@@ -164,7 +164,7 @@
 0x5679C5: fld     dword ptr [eax+8]
 0x5679C8: fmul    qword ptr ds:0A2FAA0h
 0x5679CE: fiadd   [esp+30h+var_24]
-0x5679D2: call    Double_To_SInt32
+0x5679D2: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5679D7: mov     edi, eax
 0x5679D9: mov     [esp+30h+var_24], edi
 0x5679DD: jmp     short loc_5679E3
@@ -238,13 +238,13 @@
 0x567AA9: mov     ecx, esi
 0x567AAB: call    eax
 0x567AAD: push    eax
-0x567AAE: call    sub_46D5C0
+0x567AAE: call    sub_46D5C0; Collision/model radius-ish helper used by PlaceAtMe after a ray hit. It dynamic-casts a form to TESModel and reads +0x0C, otherwise resolves from TESObjectREFR via 0x4694A0; result scales the normalized hit vector before final placement point.
 0x567AB3: add     esp, 4
-0x567AB6: call    Double_To_SInt32
+0x567AB6: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x567ABB: mov     [esp+30h+arg_0], eax
 0x567ABF: fild    [esp+30h+arg_0]
 0x567AC3: fadd    qword ptr ds:0A46E48h
-0x567AC9: call    Double_To_SInt32
+0x567AC9: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x567ACE: mov     ebx, eax
 0x567AD0: mov     [esp+30h+var_24], ebx
 0x567AD4: test    ebx, ebx
@@ -265,13 +265,13 @@
 0x567B0A: mov     ecx, esi
 0x567B0C: call    eax
 0x567B0E: push    eax
-0x567B0F: call    sub_46D5C0
+0x567B0F: call    sub_46D5C0; Collision/model radius-ish helper used by PlaceAtMe after a ray hit. It dynamic-casts a form to TESModel and reads +0x0C, otherwise resolves from TESObjectREFR via 0x4694A0; result scales the normalized hit vector before final placement point.
 0x567B14: add     esp, 4
-0x567B17: call    Double_To_SInt32
+0x567B17: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x567B1C: mov     [esp+30h+arg_0], eax
 0x567B20: fild    [esp+30h+arg_0]
 0x567B24: fadd    qword ptr ds:0A46E48h
-0x567B2A: call    Double_To_SInt32
+0x567B2A: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x567B2F: mov     ebx, eax
 0x567B31: mov     [esp+30h+var_24], eax
 0x567B35: jmp     short loc_567AD4

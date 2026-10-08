@@ -2,8 +2,8 @@ unsigned int *__thiscall NiTPointerMap<unsigned long,TallGrassShaderProperty::Ca
         unsigned int *this,
         char a2)
 {
-  NiTPointerMap<unsigned long,TallGrassShaderProperty::CachedGrass *>::~NiTPointerMap<unsigned long,TallGrassShaderProperty::CachedGrass *>(this);
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  NiTPointerMap<unsigned long,TallGrassShaderProperty::CachedGrass *>::~NiTPointerMap<unsigned long,TallGrassShaderProperty::CachedGrass *>(this); /*0x7c4b13*/
+  if ( (a2 & 1) != 0 ) /*0x7c4b1d*/
+    FormHeapFree((unsigned int)this); /*0x7c4b20*/
+  return this; /*0x7c4b2a*/
 }

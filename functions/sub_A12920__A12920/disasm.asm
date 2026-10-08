@@ -1,5 +1,5 @@
-0xA12920: push    offset dword_BA8404
+0xA12920: push    offset stru_BA8404; parent
 0xA12925: push    offset aBhkplaneshape; "bhkPlaneShape"
-0xA1292A: mov     ecx, offset dword_BA8110
-0xA1292F: call    sub_70E220
+0xA1292A: mov     ecx, offset stru_BA8110; this
+0xA1292F: call    NiRTTI_Constructor; Constructs one Oblivion NiRTTI descriptor: writes the class-name pointer at +0 and parent NiRTTI pointer at +4, then returns this. This is the native NiRTTI constructor used by the SpeedTree shader-property RTTI initializers decoded in Pass 368.
 0xA12934: retn

@@ -1,12 +1,16 @@
 void __cdecl sub_A1B630()
 {
-  char *v0; // esi
+  NiAVObject **v0; // esi
 
-  off_B082F0 = &NiTArray<NiPointer<NiAVObject>>::`vftable';
-  if ( dword_B082F4 )
+  stru_B082F0._vtbl = &NiTArray<NiPointer<NiAVObject>>::`vftable'; /*0xa1b637*/
+  if ( stru_B082F0.data ) /*0xa1b641*/
   {
-    v0 = (char *)dword_B082F4 + 0xFFFFFFFC;
-    _LN21((char *)dword_B082F4, 4u, *((_DWORD *)dword_B082F4 + 0xFFFFFFFF), (void (__thiscall *)(void *))sub_7016A0);
-    FormHeapFree((unsigned int)v0);
+    v0 = stru_B082F0.data + 0xFFFFFFFF; /*0xa1b647*/
+    _LN21( /*0xa1b653*/
+      (char *)stru_B082F0.data,
+      4u,
+      *((_DWORD *)stru_B082F0.data + 0xFFFFFFFF),
+      (void (__thiscall *)(void *))NiPointerSlot_Release);
+    FormHeapFree((unsigned int)v0); /*0xa1b659*/
   }
 }

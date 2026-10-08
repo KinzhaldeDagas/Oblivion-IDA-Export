@@ -1,58 +1,99 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "stub",
+  "definition": "struct __unaligned __declspec(align(4)) stub\n{\nBYTE movq_rdi[2];\nconst char *dll;\nBYTE movq_rsi[2];\nconst char *name;\nBYTE movq_rsp_rdx[4];\nBYTE movq_rax[2];\nconst void *entry;\nBYTE jmpq_rax[2];\n}\n",
   "id": 18374686479672048012,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "movq_rdi",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 2
+      "size": 2,
+      "type": "BYTE[2]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dll",
       "offset": 2,
       "offset_hex": "0x2",
-      "size": 4
+      "size": 4,
+      "type": "const char *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "movq_rsi",
       "offset": 6,
       "offset_hex": "0x6",
-      "size": 2
+      "size": 2,
+      "type": "BYTE[2]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "name",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "const char *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "movq_rsp_rdx",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "BYTE[4]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "movq_rax",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 2
+      "size": 2,
+      "type": "BYTE[2]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "entry",
       "offset": 18,
       "offset_hex": "0x12",
-      "size": 4
+      "size": 4,
+      "type": "const void *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "jmpq_rax",
       "offset": 22,
       "offset_hex": "0x16",
-      "size": 2
+      "size": 2,
+      "type": "BYTE[2]"
     }
   ],
   "name": "stub",
+  "ordinal": 8922,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 24
 }

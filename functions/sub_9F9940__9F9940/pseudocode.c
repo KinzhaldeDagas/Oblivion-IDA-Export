@@ -1,5 +1,5 @@
-int sub_9F9940()
+int InitSetting_sSkillNameIllusion()
 {
-  GameSetting_ConstrAndReg((int *)&unk_B3A0EC, (int)"sSkillNameIllusion", (int)"Illusion");
-  return atexit(sub_A23A10);
+  GameSetting_ConstrAndReg(&g_sSkillNameIllusion, "sSkillNameIllusion", "Illusion"); /*0x9f994f*/
+  return atexit(sub_A23A10); /*0x9f995f*/
 }

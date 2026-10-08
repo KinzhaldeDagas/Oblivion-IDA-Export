@@ -1,19 +1,36 @@
 {
-  "callees_count": 17,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 10,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_5539E0",
+  "chunks": [
+    [
+      "0x5539E0",
+      "0x553B2B"
+    ],
+    [
+      "0x9BC000",
+      "0x9BC02B"
+    ]
+  ],
+  "chunks_sha256": "0866a495c6aa0e6dbd87ae778d23b51439fe77ea79d2283cdc4c4d9da068ffc8",
+  "comment_regular": "Sets a manual FaceGen slider by projecting its current value, transposing the authored basis, scaling by target-current, and adding the adjustment into the selected parameter matrix.",
+  "comment_repeatable": "Sets a manual FaceGen slider by projecting its current value, transposing the authored basis, scaling by target-current, and adding the adjustment into the selected parameter matrix.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 6,
+  "display_name": "FaceGenHeadParameters_SetSliderValue",
   "end_ea": "0x553B2B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_5539E0",
+  "name": "FaceGenHeadParameters_SetSliderValue",
   "segment": ".text",
   "sha256": "7065c143d81666b983b92e4425e5a065709669d4aa0c27a6b9cfbf81b75e3519",
   "size": 331,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5539E0",
-  "type": "void __cdecl(int, int, int, unsigned int, float)",
-  "xrefs_from_count": 117,
+  "total_chunk_size": 374,
+  "type": "void __cdecl(FaceGenHeadParameters *parameters, int matrixGroup, int matrixChannel, unsigned int sliderIndex, float value)",
+  "xrefs_from_count": 135,
   "xrefs_to_count": 2
 }

@@ -19,3 +19,15 @@
 0x737368: push    esi; lpCriticalSection
 0x737369: mov     [esp+88h+var_64], esi
 0x73736D: call    dword ptr ds:0A2806Ch
+0x9AE3C0: mov     eax, [ebp+8]
+0x9AE3C3: push    eax
+0x9AE3C4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AE3C9: pop     ecx
+0x9AE3CA: retn
+0x9AE3CB: mov     edx, [esp+arg_4]
+0x9AE3CF: lea     eax, [edx-74h]
+0x9AE3D2: mov     ecx, [edx-78h]
+0x9AE3D5: xor     ecx, eax
+0x9AE3D7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AE3DC: mov     eax, offset stru_ADAC34
+0x9AE3E1: jmp     ___CxxFrameHandler3

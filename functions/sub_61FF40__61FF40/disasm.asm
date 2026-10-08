@@ -21,8 +21,8 @@
 0x61FF93: mov     eax, [esi+178h]
 0x61FF99: cmp     eax, ds:0B372B0h
 0x61FF9F: jg      short loc_61FFBF
-0x61FFA1: mov     ecx, [esi+3Ch]
-0x61FFA4: call    Actor_IsSwimming
+0x61FFA1: mov     ecx, [esi+3Ch]; this
+0x61FFA4: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x61FFA9: test    al, al
 0x61FFAB: jnz     short loc_61FFBF
 0x61FFAD: mov     ecx, [esi+9Ch]
@@ -54,17 +54,17 @@
 0x61FFFD: jz      short loc_620008
 0x61FFFF: mov     ecx, [eax]
 0x620001: push    0
-0x620003: call    sub_41A610
+0x620003: call    MagicItem_LoadVFXModels; MagicItem VFX model preload path. Walks spell art and effect-item VFX model references and asks the model loader to load/cache required art resources.
 0x620008: mov     ecx, [esi+68h]
 0x62000B: push    edi
-0x62000C: call    sub_67F100
+0x62000C: call    BSSimpleList_PopHeadWithoutPayloadFree; Verified generic BSSimpleList head removal helper: advances the inline first-node header to its successor and frees the detached list node; if there is no successor, clears the head data pointer.
 0x620011: mov     edi, [esi+68h]
 0x620014: mov     ecx, edi
 0x620016: call    BSSimpleList_IsEmpty
 0x62001B: test    al, al
 0x62001D: jz      short loc_62002F
 0x62001F: push    edi
-0x620020: call    FormHeapFree
+0x620020: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x620025: add     esp, 4
 0x620028: mov     dword ptr [esi+68h], 0
 0x62002F: pop     edi

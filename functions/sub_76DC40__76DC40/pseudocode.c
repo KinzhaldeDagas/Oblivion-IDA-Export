@@ -1,4 +1,4 @@
-void *sub_76DC40()
+NiRTTI *sub_76DC40()
 {
-  return &unk_B42634;
+  return &stru_B42634; /*0x76dc45*/
 }

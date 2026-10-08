@@ -1,294 +1,284 @@
-void __thiscall sub_7A9240(float *this, char a2, unsigned int a3, unsigned int a4, int a5)
+// OBLIVION AUTHORITY 2026-08-27: CLeafLodEngine::FindPairs accepts a 16-byte leaf-vector value. For each primary leaf in source order, it scans a contiguous following prefix only until end or the first already-marked candidate, chooses the nearest position within spacing tolerance, and marks only that chosen match. A leaf already used as a match may later be a primary. It never compares textureIndexByte, colorScaleByte, packedColor, or texture record, so pairs may cross leaf textures/layers.
+// bad sp value at call has been detected, the output may be wrong!
+void __thiscall OB_CLeafLodEngine_FindPairs_010201A0(
+        OB_CLeafLodEngine_010201A0 *this,
+        OB_stVectorBillboardLeafPtr_010201A0 originalLeaves)
 {
-  unsigned int v5; // ebx
-  unsigned int v6; // ebp
-  unsigned int v7; // esi
-  _DWORD *v8; // edi
-  _DWORD *v9; // edi
-  _DWORD *v10; // esi
-  int v11; // edx
-  int v12; // edi
-  unsigned int v13; // esi
-  int *v14; // esi
-  _DWORD *v15; // ebp
-  unsigned int v16; // ebx
-  int v17; // ecx
-  char v18; // bl
-  unsigned int v19; // esi
-  int *v20; // esi
-  _DWORD *v21; // ebx
-  unsigned int v22; // ebp
-  int v23; // ecx
-  char v24; // bp
-  char *v25; // esi
-  _DWORD *v26; // ebx
-  unsigned int v27; // ebp
-  float *v28; // esi
-  double v29; // st4
-  double v30; // st6
-  double v31; // st4
-  double v32; // st5
-  double v33; // st6
-  char *v34; // esi
-  unsigned int v35; // edi
-  int *v36; // ebx
-  _DWORD *v37; // edi
-  unsigned int v38; // eax
-  bool v39; // cc
-  unsigned int *v40; // ecx
-  int v41; // [esp-1Ch] [ebp-B0h] BYREF
-  int *v42; // [esp-10h] [ebp-A4h] BYREF
-  _DWORD *v43; // [esp-Ch] [ebp-A0h]
-  int v44; // [esp-8h] [ebp-9Ch]
-  int *v45; // [esp-4h] [ebp-98h]
-  char v46; // [esp+17h] [ebp-7Dh] BYREF
-  float v47; // [esp+18h] [ebp-7Ch]
-  int v48; // [esp+1Ch] [ebp-78h]
-  float *v49; // [esp+20h] [ebp-74h]
-  int v50; // [esp+24h] [ebp-70h] BYREF
-  int v51; // [esp+28h] [ebp-6Ch]
-  float v52; // [esp+2Ch] [ebp-68h]
-  char *v53; // [esp+30h] [ebp-64h]
-  unsigned int v54; // [esp+34h] [ebp-60h]
-  unsigned int v55; // [esp+3Ch] [ebp-58h]
-  int v56; // [esp+40h] [ebp-54h] BYREF
-  int v57; // [esp+44h] [ebp-50h]
-  char *v58; // [esp+48h] [ebp-4Ch]
-  _DWORD *v59; // [esp+4Ch] [ebp-48h]
-  int *v60; // [esp+50h] [ebp-44h] BYREF
-  _DWORD *v61; // [esp+54h] [ebp-40h]
-  int v62; // [esp+58h] [ebp-3Ch]
-  int *v63; // [esp+5Ch] [ebp-38h] BYREF
-  _DWORD *v64; // [esp+60h] [ebp-34h]
-  int v65; // [esp+64h] [ebp-30h]
-  int *v66; // [esp+68h] [ebp-2Ch] BYREF
-  _DWORD *v67; // [esp+6Ch] [ebp-28h]
-  int v68; // [esp+70h] [ebp-24h]
-  int v69; // [esp+74h] [ebp-20h] BYREF
-  int v70; // [esp+78h] [ebp-1Ch] BYREF
-  _DWORD *v71; // [esp+7Ch] [ebp-18h]
-  unsigned int v72; // [esp+80h] [ebp-14h]
-  int v73; // [esp+84h] [ebp-10h]
-  int v74; // [esp+90h] [ebp-4h]
+  OB_CBillboardLeaf_010201A0 **begin; // ebx
+  OB_CBillboardLeaf_010201A0 **end; // ebp
+  unsigned int v4; // esi
+  unsigned int *v5; // edi
+  unsigned int *v6; // edi
+  OB_CBillboardLeaf_010201A0 **v7; // esi
+  const OB_CBillboardLeaf_010201A0 *v8; // edx
+  unsigned int *v9; // esi
+  OB_stVectorBool_010201A0 *owner; // esi
+  unsigned int *word; // ebp
+  unsigned int v12; // ebx
+  int v13; // ecx
+  unsigned int bitOffset; // ebx
+  unsigned int *v15; // esi
+  OB_stVectorBool_010201A0 *v16; // esi
+  unsigned int *v17; // ebx
+  unsigned int *v18; // ebp
+  int v19; // ecx
+  char v20; // bp
+  int v21; // esi
+  const OB_CBillboardLeaf_010201A0 **v22; // ebx
+  OB_CBillboardLeaf_010201A0 **v23; // ebp
+  float *p_x; // esi
+  double v25; // st4
+  double v26; // st6
+  double v27; // st4
+  double v28; // st5
+  double v29; // st6
+  int v30; // esi
+  unsigned int *v31; // edi
+  OB_stVectorBool_010201A0 *v32; // ebx
+  unsigned int v33; // eax
+  bool v34; // cc
+  OB_stVectorLeafLodEntry_010201A0 *v35; // ecx
+  OB_stVectorBoolIterator_010201A0 v36; // [esp-1Ch] [ebp-B0h] BYREF
+  OB_stVectorBoolIterator_010201A0 v37; // [esp-10h] [ebp-A4h] BYREF
+  const bool *v38; // [esp-4h] [ebp-98h]
+  bool v39; // [esp+17h] [ebp-7Dh] BYREF
+  float v40; // [esp+18h] [ebp-7Ch]
+  int delta; // [esp+1Ch] [ebp-78h]
+  OB_stVectorLeafLodEntry_010201A0 *p_m_vPairs; // [esp+20h] [ebp-74h]
+  unsigned int value; // [esp+24h] [ebp-70h] BYREF
+  int v44; // [esp+28h] [ebp-6Ch]
+  float v45; // [esp+2Ch] [ebp-68h]
+  OB_stVectorBillboardLeafPtr_010201A0 *v46; // [esp+30h] [ebp-64h]
+  unsigned int v47; // [esp+34h] [ebp-60h]
+  OB_CBillboardLeaf_010201A0 **v48; // [esp+3Ch] [ebp-58h]
+  OB_CLeafLodEngine_SLodEntry_010201A0 v49; // [esp+40h] [ebp-54h] BYREF
+  OB_stVectorBillboardLeafPtr_010201A0 *p_originalLeaves; // [esp+48h] [ebp-4Ch]
+  OB_CBillboardLeaf_010201A0 **v51; // [esp+4Ch] [ebp-48h]
+  OB_stVectorBoolIterator_010201A0 v52; // [esp+50h] [ebp-44h] BYREF
+  OB_stVectorBoolIterator_010201A0 v53; // [esp+5Ch] [ebp-38h] BYREF
+  OB_stVectorBoolIterator_010201A0 v54; // [esp+68h] [ebp-2Ch] BYREF
+  OB_stVectorBool_010201A0 v55; // [esp+74h] [ebp-20h] BYREF
+  int v56; // [esp+90h] [ebp-4h]
 
-  v49 = this;
-  v5 = a3;
-  v6 = a4;
-  v74 = 0;
-  if ( a3 )
-    v7 = (int)(a4 - a3) >> 2;
+  p_m_vPairs = &this->m_vPairs; /*0x7a926a*/
+  begin = originalLeaves.begin; /*0x7a926e*/
+  end = originalLeaves.end; /*0x7a9275*/
+  v56 = 0; /*0x7a9280*/
+  if ( originalLeaves.begin ) /*0x7a9287*/
+    v4 = originalLeaves.end - originalLeaves.begin; /*0x7a9291*/
   else
-    v7 = 0;
-  v69 = 0;
-  v50 = 0;
-  sub_7A8E20(&v70, (v7 + 0x1F) >> 5, &v50);
-  LOBYTE(v74) = 1;
-  sub_7A8980((unsigned int *)&v69, v7);
-  v45 = (int *)&v46;
-  LOBYTE(v74) = 2;
-  v46 = 0;
-  v52 = COERCE_FLOAT(&v42);
-  v8 = v71;
-  if ( (unsigned int)v71 > v72 )
-    _invalid_parameter_noinfo();
-  v43 = v8;
-  v44 = 0;
-  v42 = &v69;
-  if ( v69 )
-    sub_7A8800((unsigned int *)&v42, v69);
-  v9 = v71;
-  v52 = COERCE_FLOAT(&v41);
-  if ( (unsigned int)v71 > v72 )
-    _invalid_parameter_noinfo();
-  sub_7A8E90(&v69, v9, 0, (int)v42, v43, v44, v45);
-  if ( v5 > v6 )
-    _invalid_parameter_noinfo();
-  v10 = (_DWORD *)v5;
-  v55 = v5;
-  while ( 1 )
+    v4 = 0; /*0x7a9289*/
+  v55.logicalSize = 0; /*0x7a9294*/
+  value = 0; /*0x7a9298*/
+  OB_stVectorUInt32_ctor_fill_010201A0(&v55.words, (v4 + 0x1F) >> 5, &value); /*0x7a92af*/
+  LOBYTE(v56) = 1; /*0x7a92b9*/
+  OB_stVectorBool_Resize_010201A0(&v55, v4); /*0x7a92c1*/
+  v38 = &v39; /*0x7a92ce*/
+  LOBYTE(v56) = 2; /*0x7a92d9*/
+  v39 = 0; /*0x7a92e1*/
+  v45 = COERCE_FLOAT(&v37); /*0x7a92e6*/
+  v5 = v55.words.begin; /*0x7a92ec*/
+  if ( v55.words.begin > v55.words.end ) /*0x7a92ee*/
+    _invalid_parameter_noinfo((int)begin, (int)v55.words.begin, (int)&v37); /*0x7a92f0*/
+  v37.word = v5; /*0x7a9302*/
+  v37.bitOffset = 0; /*0x7a9305*/
+  v37.owner = &v55; /*0x7a930c*/
+  if ( v55.logicalSize ) /*0x7a9317*/
+    OB_stVectorBoolIterator_Advance_010201A0(&v37, v55.logicalSize); /*0x7a931c*/
+  v6 = v55.words.begin; /*0x7a9321*/
+  v45 = COERCE_FLOAT(&v36); /*0x7a9332*/
+  if ( v55.words.begin > v55.words.end ) /*0x7a9338*/
+    _invalid_parameter_noinfo((int)begin, (int)v55.words.begin, (int)&v36); /*0x7a933a*/
+  v36.word = v6; /*0x7a934c*/
+  v36.bitOffset = 0; /*0x7a934f*/
+  v36.owner = &v55; /*0x7a9356*/
+  OB_stVectorBool_FillRangeChecked_010201A0(v36, v37, v38); /*0x7a9358*/
+  if ( begin > end ) /*0x7a9362*/
+    _invalid_parameter_noinfo((int)begin, (int)v6, (int)&v36); /*0x7a9364*/
+  v7 = begin; /*0x7a9369*/
+  v48 = begin; /*0x7a936b*/
+  while ( 1 ) /*0x7a9370*/
   {
-    if ( v5 > v6 )
-      _invalid_parameter_noinfo();
-    if ( v10 == (_DWORD *)v6 )
-      break;
-    if ( (unsigned int)v10 >= v6 )
-      _invalid_parameter_noinfo();
-    v11 = *v10;
-    v47 = flt_A32048;
-    v56 = v11;
-    v57 = 0;
-    v48 = 0xFFFFFFFF;
-    if ( v5 > v6 )
-      _invalid_parameter_noinfo();
-    v58 = &a2;
-    v12 = ((int)((int)v10 - v5) >> 2) + 1;
-    v59 = v10;
-    v50 = (int)(v10 + 1);
-    if ( (unsigned int)(v10 + 1) > v6 || (unsigned int)(v10 + 1) < v5 )
-      _invalid_parameter_noinfo();
-    v53 = v58;
-    v54 = v50;
-    while ( 1 )
+    if ( begin > end ) /*0x7a9372*/
+      _invalid_parameter_noinfo((int)begin, (int)v6, (int)v7); /*0x7a9374*/
+    if ( v7 == end ) /*0x7a937b*/
+      break; /*0x7a937b*/
+    if ( v7 >= end ) /*0x7a9381*/
+      _invalid_parameter_noinfo((int)begin, (int)v6, (int)v7); /*0x7a9383*/
+    v8 = *v7; /*0x7a9390*/
+    v40 = flt_A32048; /*0x7a9392*/
+    v49.m_pLeaf = v8; /*0x7a9396*/
+    v49.m_pLeafMatch = 0; /*0x7a939a*/
+    delta = 0xFFFFFFFF; /*0x7a93a2*/
+    if ( begin > end ) /*0x7a93aa*/
+      _invalid_parameter_noinfo((int)begin, (int)v6, (int)v7); /*0x7a93ac*/
+    p_originalLeaves = &originalLeaves; /*0x7a93bf*/
+    v6 = (unsigned int *)(v7 - begin + 1); /*0x7a93c6*/
+    v51 = v7; /*0x7a93cb*/
+    value = (unsigned int)(v7 + 1); /*0x7a93cf*/
+    if ( v7 + 1 > end || v7 + 1 < begin ) /*0x7a93d7*/
+      _invalid_parameter_noinfo((int)begin, (int)v6, (int)v7); /*0x7a93d9*/
+    v46 = p_originalLeaves; /*0x7a93e6*/
+    v47 = value; /*0x7a93ea*/
+    while ( 1 ) /*0x7a93f0*/
     {
-      if ( v5 > v6 )
-        _invalid_parameter_noinfo();
-      if ( !v53 || v53 != &a2 )
-        _invalid_parameter_noinfo();
-      if ( v54 == v6 )
-        break;
-      v13 = (unsigned int)v71;
-      if ( (unsigned int)v71 > v72 )
-        _invalid_parameter_noinfo();
-      v64 = (_DWORD *)v13;
-      v65 = 0;
-      v63 = &v69;
-      sub_7A8800((unsigned int *)&v63, v12);
-      v14 = v63;
-      v15 = v64;
-      if ( v63 )
+      if ( begin > end ) /*0x7a93f2*/
+        _invalid_parameter_noinfo((int)begin, (int)v6, (int)v7); /*0x7a93f4*/
+      if ( !v46 || v46 != &originalLeaves ) /*0x7a940a*/
+        _invalid_parameter_noinfo((int)begin, (int)v6, (int)v7); /*0x7a940c*/
+      if ( (OB_CBillboardLeaf_010201A0 **)v47 == end ) /*0x7a9415*/
+        break; /*0x7a9415*/
+      v9 = v55.words.begin; /*0x7a941b*/
+      if ( v55.words.begin > v55.words.end ) /*0x7a9426*/
+        _invalid_parameter_noinfo((int)begin, (int)v6, (int)v55.words.begin); /*0x7a9428*/
+      v53.word = v9; /*0x7a9436*/
+      v53.bitOffset = 0; /*0x7a943a*/
+      v53.owner = &v55; /*0x7a9442*/
+      OB_stVectorBoolIterator_Advance_010201A0(&v53, (int)v6); /*0x7a9446*/
+      owner = v53.owner; /*0x7a944b*/
+      word = v53.word; /*0x7a9451*/
+      if ( v53.owner ) /*0x7a9455*/
       {
-        if ( v64 )
-          goto LABEL_36;
+        if ( v53.word ) /*0x7a9465*/
+          goto LABEL_36; /*0x7a9465*/
       }
       else
       {
-        _invalid_parameter_noinfo();
-        _invalid_parameter_noinfo();
+        _invalid_parameter_noinfo((int)begin, (int)v6, 0); /*0x7a9457*/
+        _invalid_parameter_noinfo((int)begin, (int)v6, 0); /*0x7a945c*/
       }
-      _invalid_parameter_noinfo();
+      _invalid_parameter_noinfo((int)begin, (int)v6, (int)owner); /*0x7a9467*/
 LABEL_36:
-      v16 = v14[2];
-      if ( v16 > v14[3] )
-        _invalid_parameter_noinfo();
-      v17 = (int)v15 - v16;
-      v18 = v65;
-      if ( v65 + 0x20 * (v17 >> 2) >= (unsigned int)*v14 )
-        _invalid_parameter_noinfo();
-      if ( ((1 << v18) & *v15) != 0 )
+      v12 = (unsigned int)owner->words.begin; /*0x7a946c*/
+      if ( (unsigned int *)v12 > owner->words.end ) /*0x7a9472*/
+        _invalid_parameter_noinfo(v12, (int)v6, (int)owner); /*0x7a9474*/
+      v13 = (int)word - v12; /*0x7a947b*/
+      bitOffset = v53.bitOffset; /*0x7a947d*/
+      if ( v53.bitOffset + 0x20 * (v13 >> 2) >= owner->logicalSize ) /*0x7a948b*/
+        _invalid_parameter_noinfo(v53.bitOffset, (int)v6, (int)owner); /*0x7a948d*/
+      if ( ((1 << bitOffset) & *word) != 0 )    // If the current candidate's match bit is already set, breaks the candidate loop. This truncates the scan at the first prior match; it does not skip that entry and continue to later unpaired leaves. /*0x7a949e*/
       {
-        v10 = (_DWORD *)v55;
-        v6 = a4;
-        v5 = a3;
-        break;
+        v7 = v48; /*0x7a9616*/
+        end = originalLeaves.end; /*0x7a961a*/
+        begin = originalLeaves.begin; /*0x7a9621*/
+        break; /*0x7a9621*/
       }
-      v19 = (unsigned int)v71;
-      if ( (unsigned int)v71 > v72 )
-        _invalid_parameter_noinfo();
-      v67 = (_DWORD *)v19;
-      v68 = 0;
-      v66 = &v69;
-      sub_7A8800((unsigned int *)&v66, v12);
-      v20 = v66;
-      v21 = v67;
-      if ( v66 )
+      v15 = v55.words.begin; /*0x7a94a4*/
+      if ( v55.words.begin > v55.words.end ) /*0x7a94af*/
+        _invalid_parameter_noinfo(bitOffset, (int)v6, (int)v55.words.begin); /*0x7a94b1*/
+      v54.word = v15; /*0x7a94bf*/
+      v54.bitOffset = 0; /*0x7a94c3*/
+      v54.owner = &v55; /*0x7a94cb*/
+      OB_stVectorBoolIterator_Advance_010201A0(&v54, (int)v6); /*0x7a94cf*/
+      v16 = v54.owner; /*0x7a94d4*/
+      v17 = v54.word; /*0x7a94da*/
+      if ( v54.owner ) /*0x7a94de*/
       {
-        if ( v67 )
-          goto LABEL_47;
+        if ( v54.word ) /*0x7a94ee*/
+          goto LABEL_47; /*0x7a94ee*/
       }
       else
       {
-        _invalid_parameter_noinfo();
-        _invalid_parameter_noinfo();
+        _invalid_parameter_noinfo((int)v54.word, (int)v6, 0); /*0x7a94e0*/
+        _invalid_parameter_noinfo((int)v17, (int)v6, 0); /*0x7a94e5*/
       }
-      _invalid_parameter_noinfo();
+      _invalid_parameter_noinfo((int)v17, (int)v6, (int)v16); /*0x7a94f0*/
 LABEL_47:
-      v22 = v20[2];
-      if ( v22 > v20[3] )
-        _invalid_parameter_noinfo();
-      v23 = (int)v21 - v22;
-      v24 = v68;
-      if ( v68 + 0x20 * (v23 >> 2) >= (unsigned int)*v20 )
-        _invalid_parameter_noinfo();
-      if ( ((1 << v24) & *v21) != 0 )
+      v18 = v16->words.begin; /*0x7a94f5*/
+      if ( v18 > v16->words.end ) /*0x7a94fb*/
+        _invalid_parameter_noinfo((int)v17, (int)v6, (int)v16); /*0x7a94fd*/
+      v19 = (char *)v17 - (char *)v18; /*0x7a9504*/
+      v20 = v54.bitOffset; /*0x7a9506*/
+      if ( v54.bitOffset + 0x20 * (v19 >> 2) >= v16->logicalSize ) /*0x7a9514*/
+        _invalid_parameter_noinfo((int)v17, (int)v6, (int)v16); /*0x7a9516*/
+      if ( ((1 << v20) & *v17) != 0 ) /*0x7a9526*/
       {
-        v26 = (_DWORD *)v54;
+        v22 = (const OB_CBillboardLeaf_010201A0 **)v47; /*0x7a95d6*/
       }
       else
       {
-        v25 = v53;
-        if ( !v53 )
-          _invalid_parameter_noinfo();
-        v26 = (_DWORD *)v54;
-        if ( v54 >= *((_DWORD *)v25 + 2) )
-          _invalid_parameter_noinfo();
-        v27 = v55;
-        v28 = (float *)(*v26 + 4);
-        if ( v55 >= a4 )
-          _invalid_parameter_noinfo();
-        v29 = *v28 - *(float *)(*(_DWORD *)v27 + 4);
-        v30 = v29 * v29;
-        v31 = v28[1] - *(float *)(*(_DWORD *)v27 + 8);
-        v32 = v30;
-        v33 = v28[2] - *(float *)(*(_DWORD *)v27 + 0xC);
-        *(float *)&v51 = v31 * v31 + v32 + v33 * v33;
-        LODWORD(v52) = (v51 >> 1) + 0x1FC00000;
-        if ( v49[4] > (double)v52 && v47 > (double)v52 )
+        v21 = (int)v46; /*0x7a952c*/
+        if ( !v46 ) /*0x7a9532*/
+          _invalid_parameter_noinfo((int)v17, (int)v6, 0); /*0x7a9534*/
+        v22 = (const OB_CBillboardLeaf_010201A0 **)v47; /*0x7a9539*/
+        if ( v47 >= *(_DWORD *)(v21 + 8) ) /*0x7a9540*/
+          _invalid_parameter_noinfo(v47, (int)v6, v21); /*0x7a9542*/
+        v23 = v48; /*0x7a9549*/
+        p_x = &(*v22)->position.x;              // Candidate pairing input is only the candidate leaf position at +4; no texture-index compatibility test precedes it. /*0x7a954d*/
+        if ( v48 >= originalLeaves.end ) /*0x7a9557*/
+          _invalid_parameter_noinfo((int)v22, (int)v6, (int)p_x); /*0x7a9559*/
+        v25 = *p_x - (*v23)->position.x;        // Computes Euclidean distance between current and candidate leaf positions. Pair eligibility is geometric, not per-texture. /*0x7a9578*/
+        v26 = v25 * v25; /*0x7a957a*/
+        v27 = p_x[1] - (*v23)->position.y; /*0x7a957c*/
+        v28 = v26; /*0x7a9580*/
+        v29 = p_x[2] - (*v23)->position.z; /*0x7a9580*/
+        *(float *)&v44 = v27 * v27 + v28 + v29 * v29; /*0x7a9588*/
+        LODWORD(v45) = (v44 >> 1) + 0x1FC00000; /*0x7a9597*/
+        if ( *(float *)&p_m_vPairs[1].allocatorState > (double)v45 && v40 > (double)v45 )// Within the still-unmarked contiguous candidate prefix, accepts a candidate only when Euclidean position distance is below both spacing tolerance and the current shortest distance. No leaf-texture equality condition exists. /*0x7a95b6*/
         {
-          v47 = v52;
-          if ( (unsigned int)v26 >= *((_DWORD *)v53 + 2) )
-            _invalid_parameter_noinfo();
-          v57 = *v26;
-          v48 = v12;
+          v40 = v45; /*0x7a95bc*/
+          if ( (OB_CBillboardLeaf_010201A0 **)v22 >= v46->end ) /*0x7a95c3*/
+            _invalid_parameter_noinfo((int)v22, (int)v6, (int)p_x); /*0x7a95c5*/
+          v49.m_pLeafMatch = *v22; /*0x7a95cc*/
+          delta = (int)v6; /*0x7a95d0*/
         }
       }
-      v34 = v53;
-      ++v12;
-      if ( !v53 )
-        _invalid_parameter_noinfo();
-      if ( (unsigned int)v26 >= *((_DWORD *)v34 + 2) )
-        _invalid_parameter_noinfo();
-      v10 = (_DWORD *)v55;
-      v6 = a4;
-      v54 = (unsigned int)(v26 + 1);
-      v5 = a3;
+      v30 = (int)v46; /*0x7a95de*/
+      v6 = (unsigned int *)((char *)v6 + 1); /*0x7a95e2*/
+      if ( !v46 ) /*0x7a95e7*/
+        _invalid_parameter_noinfo((int)v22, (int)v6, 0); /*0x7a95e9*/
+      if ( (unsigned int)v22 >= *(_DWORD *)(v30 + 8) ) /*0x7a95f1*/
+        _invalid_parameter_noinfo((int)v22, (int)v6, v30); /*0x7a95f3*/
+      v7 = v48; /*0x7a95f8*/
+      end = originalLeaves.end; /*0x7a95fc*/
+      v47 = (unsigned int)(v22 + 1); /*0x7a9606*/
+      begin = originalLeaves.begin; /*0x7a960a*/
     }
-    if ( v57 )
+    if ( v49.m_pLeafMatch ) /*0x7a962d*/
     {
-      v35 = (unsigned int)v71;
-      if ( (unsigned int)v71 > v72 )
-        _invalid_parameter_noinfo();
-      v60 = &v69;
-      v61 = (_DWORD *)v35;
-      v62 = 0;
-      sub_7A8800((unsigned int *)&v60, v48);
-      v36 = v60;
-      v37 = v61;
-      if ( !v60 )
+      v31 = v55.words.begin; /*0x7a9633*/
+      if ( v55.words.begin > v55.words.end ) /*0x7a963e*/
+        _invalid_parameter_noinfo((int)begin, (int)v55.words.begin, (int)v7); /*0x7a9640*/
+      v52.owner = &v55; /*0x7a964d*/
+      v52.word = v31; /*0x7a9656*/
+      v52.bitOffset = 0; /*0x7a965a*/
+      OB_stVectorBoolIterator_Advance_010201A0(&v52, delta); /*0x7a9662*/
+      v32 = v52.owner; /*0x7a9667*/
+      v6 = v52.word; /*0x7a966d*/
+      if ( !v52.owner ) /*0x7a9671*/
       {
-        _invalid_parameter_noinfo();
-        _invalid_parameter_noinfo();
-        goto LABEL_76;
+        _invalid_parameter_noinfo(0, (int)v52.word, (int)v7); /*0x7a9673*/
+        _invalid_parameter_noinfo(0, (int)v6, (int)v7); /*0x7a9678*/
+        goto LABEL_76; /*0x7a967d*/
       }
-      if ( !v61 )
+      if ( !v52.word ) /*0x7a9681*/
 LABEL_76:
-        _invalid_parameter_noinfo();
-      v38 = v36[2];
-      v39 = v38 <= v36[3];
-      v51 = v38;
-      if ( !v39 )
+        _invalid_parameter_noinfo((int)v32, (int)v6, (int)v7); /*0x7a9683*/
+      v33 = (unsigned int)v32->words.begin; /*0x7a9688*/
+      v34 = (unsigned int *)v33 <= v32->words.end; /*0x7a968b*/
+      v44 = v33; /*0x7a968e*/
+      if ( !v34 ) /*0x7a9692*/
       {
-        _invalid_parameter_noinfo();
-        v38 = v51;
+        _invalid_parameter_noinfo((int)v32, (int)v6, (int)v7); /*0x7a9694*/
+        v33 = v44; /*0x7a9699*/
       }
-      if ( v62 + 0x20 * ((int)((int)v37 - v38) >> 2) >= (unsigned int)*v36 )
-        _invalid_parameter_noinfo();
-      v40 = (unsigned int *)v49;
-      v45 = &v56;
-      *v37 |= 1 << v62;
-      sub_7A8F30(v40, v45);
-      v5 = a3;
+      if ( v52.bitOffset + 0x20 * ((int)((int)v6 - v33) >> 2) >= v32->logicalSize ) /*0x7a96ad*/
+        _invalid_parameter_noinfo((int)v32, (int)v6, (int)v7); /*0x7a96af*/
+      v35 = p_m_vPairs; /*0x7a96bf*/
+      v38 = (const bool *)&v49; /*0x7a96c7*/
+      *v6 |= 1 << SLOBYTE(v52.bitOffset);       // Marks only the selected matching candidate. The current primary leaf is not marked, so a leaf used earlier as a match can later act as a primary. /*0x7a96c8*/
+      OB_stVectorLeafLodEntry_PushBack_010201A0(v35, (const OB_CLeafLodEngine_SLodEntry_010201A0 *)v38);// Pushes {primaryLeaf, nearestLeaf} pair. Because selection never reads +0x40 textureIndexByte, the pair may cross leaf texture/layer records. /*0x7a96ca*/
+      begin = originalLeaves.begin; /*0x7a96cf*/
     }
-    if ( (unsigned int)v10 >= v6 )
-      _invalid_parameter_noinfo();
-    v55 = v50;
-    v10 = (_DWORD *)v50;
+    if ( v7 >= end ) /*0x7a96d8*/
+      _invalid_parameter_noinfo((int)begin, (int)v6, (int)v7); /*0x7a96da*/
+    v48 = (OB_CBillboardLeaf_010201A0 **)value; /*0x7a96e3*/
+    v7 = (OB_CBillboardLeaf_010201A0 **)value; /*0x7a96e7*/
   }
-  v69 = 0;
-  if ( v71 )
-    FormHeapFree((unsigned int)v71);
-  v71 = 0;
-  v72 = 0;
-  v73 = 0;
-  if ( v5 )
-    FormHeapFree(v5);
+  v55.logicalSize = 0; /*0x7a96f6*/
+  if ( v55.words.begin ) /*0x7a96fa*/
+    FormHeapFree((unsigned int)v55.words.begin); /*0x7a96fd*/
+  memset(&v55.words.begin, 0, 0xC); /*0x7a9707*/
+  if ( begin ) /*0x7a9719*/
+    FormHeapFree((unsigned int)begin); /*0x7a971c*/
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x740FA0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Fog decode: startup plain NiFogProperty default producer using B3FA90/94/98; separate from active BSFogProperty world fog path.",
     "mnemonic": "push",
     "size": 2
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x740FC5",
-    "line": "call    FormHeapAlloc",
+    "line": "call    FormHeapAlloc; Fog fixed/default decode: startup default producer allocates 0x2C plain NiFogProperty, not BSFogProperty.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x740FE8",
-    "line": "mov     dword ptr [esi], offset ??_7NiFogProperty@@6B@; const NiFogProperty::`vftable'",
+    "line": "mov     dword ptr [esi], offset ??_7NiFogProperty@@6B@; Fog fixed/default decode: startup default object vtable is NiFogProperty; no +0x2C/+0x30 BSFogProperty fields.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -169,13 +169,13 @@
   },
   {
     "ea": "0x740FF9",
-    "line": "mov     word ptr [esi+18h], 0",
+    "line": "mov     word ptr [esi+18h], 0; Fog fixed/default decode: plain NiFogProperty flags at +0x18 initialized to 0.",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x740FFF",
-    "line": "fstp    dword ptr [esi+1Ch]",
+    "line": "fstp    dword ptr [esi+1Ch]; Fog fixed/default decode: plain NiFogProperty depth at +0x1C initialized to 1.0.",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x741007",
-    "line": "mov     [esi+20h], eax",
+    "line": "mov     [esi+20h], eax; Fog decode: default plain NiFogProperty color.r from B3FA90.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x741010",
-    "line": "mov     [esi+24h], ecx",
+    "line": "mov     [esi+24h], ecx; Fog decode: default plain NiFogProperty color.g from B3FA94.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x741019",
-    "line": "mov     [esi+28h], edx",
+    "line": "mov     [esi+28h], edx; Fog decode: default plain NiFogProperty color.b from B3FA98.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x741055",
-    "line": "mov     ds:0B401FCh, esi",
+    "line": "mov     ds:0B401FCh, esi; Fog decode: installs default plain NiFogProperty global B401FC; not the active B333E4 BSFogProperty used by world shader fog.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -418,5 +418,77 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CA7E0",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA7E3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA7E4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA7E9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA7EA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA7EB",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CA7EF",
+    "line": "lea     eax, [edx-0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA7F2",
+    "line": "mov     ecx, [edx-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA7F5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CA7F7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA7FC",
+    "line": "mov     eax, offset stru_AF2E8C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA801",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,19 +1,44 @@
 {
-  "callees_count": 24,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 11,
+  "callers_count": 5,
+  "chunks": [
+    [
+      "0x8CEAC0",
+      "0x8CED19"
+    ],
+    [
+      "0x536DD0",
+      "0x536E10"
+    ],
+    [
+      "0x8D2490",
+      "0x8D24D2"
+    ],
+    [
+      "0x9D7A70",
+      "0x9D7ABD"
+    ]
+  ],
+  "chunks_sha256": "6ae6e7c46fd783a7c8b12b628e3f37846fc36ea29d8270a4a06f43054e322432",
+  "comment_regular": "TES4 authoritative: bhkCharacterPointCollector destructor releases object refs and dynamic arrays, including 0x30-byte contact storage.",
+  "comment_repeatable": "TES4 authoritative: bhkCharacterPointCollector destructor releases object refs and dynamic arrays, including 0x30-byte contact storage.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
   "display_name": "bhkCharacterPointCollector::~bhkCharacterPointCollector(void)",
   "end_ea": "0x8CED19",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??1bhkCharacterPointCollector@@UAE@XZ",
   "segment": ".text",
   "sha256": "d917d653dc6c03a4f424b0c7e2e33418df83c7a6df9404ad61b1df5103a00387",
   "size": 601,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x8CEAC0",
+  "total_chunk_size": 808,
   "type": "void __thiscall(bhkCharacterPointCollector *this)",
-  "xrefs_from_count": 184,
+  "xrefs_from_count": 252,
   "xrefs_to_count": 5
 }

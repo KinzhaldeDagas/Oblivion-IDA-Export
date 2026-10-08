@@ -1,70 +1,117 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_THEME_FILE",
+  "definition": "struct _THEME_FILE\n{\nDWORD dwRefCount;\nHMODULE hTheme;\nWCHAR_0 szThemeFile[260];\nLPWSTR pszAvailColors;\nLPWSTR pszAvailSizes;\nLPWSTR pszSelectedColor;\nLPWSTR pszSelectedSize;\nPTHEME_CLASS classes;\nPTHEME_PROPERTY metrics;\nPTHEME_IMAGE images;\n}\n",
   "id": 18374686479672036730,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwRefCount",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hTheme",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "HMODULE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "szThemeFile",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 520
+      "size": 520,
+      "type": "WCHAR_0[260]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pszAvailColors",
       "offset": 528,
       "offset_hex": "0x210",
-      "size": 4
+      "size": 4,
+      "type": "LPWSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pszAvailSizes",
       "offset": 532,
       "offset_hex": "0x214",
-      "size": 4
+      "size": 4,
+      "type": "LPWSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pszSelectedColor",
       "offset": 536,
       "offset_hex": "0x218",
-      "size": 4
+      "size": 4,
+      "type": "LPWSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pszSelectedSize",
       "offset": 540,
-      "offset_hex": "0x21c",
-      "size": 4
+      "offset_hex": "0x21C",
+      "size": 4,
+      "type": "LPWSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "classes",
       "offset": 544,
       "offset_hex": "0x220",
-      "size": 4
+      "size": 4,
+      "type": "PTHEME_CLASS"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "metrics",
       "offset": 548,
       "offset_hex": "0x224",
-      "size": 4
+      "size": 4,
+      "type": "PTHEME_PROPERTY"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "images",
       "offset": 552,
       "offset_hex": "0x228",
-      "size": 4
+      "size": 4,
+      "type": "PTHEME_IMAGE"
     }
   ],
   "name": "_THEME_FILE",
+  "ordinal": 4638,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 556
 }

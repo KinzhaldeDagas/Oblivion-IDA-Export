@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x763DE0",
-    "line": "mov     eax, ds:0B42160h",
+    "line": "mov     eax, ds:0B42160h; Oblivion-authoritative: lazily creates IDirect3D9, constructs the global NiTArray<NiDX9AdapterDesc*> wrapper, populates one descriptor per adapter, then releases the temporary IDirect3D9 reference.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x763E22",
-    "line": "call    eax ; dword_B42158",
+    "line": "call    eax ; g_Direct3DCreate9",
     "mnemonic": "call",
     "size": 2
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x763E40",
-    "line": "call    sub_775DF0",
+    "line": "call    NiDX9AdapterDescArray_Construct",
     "mnemonic": "call",
     "size": 5
   },

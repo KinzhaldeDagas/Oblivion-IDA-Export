@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x68283E",
-    "line": "mov     ecx, offset stru_B3C000",
+    "line": "mov     ecx, offset unk_B3C000",
     "mnemonic": "mov",
     "size": 5
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x6828ED",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x6828F5",
-    "line": "mov     ecx, offset stru_B3C000",
+    "line": "mov     ecx, offset unk_B3C000",
     "mnemonic": "mov",
     "size": 5
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x68290F",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x682938",
-    "line": "mov     ecx, offset stru_B3C000",
+    "line": "mov     ecx, offset unk_B3C000",
     "mnemonic": "mov",
     "size": 5
   },

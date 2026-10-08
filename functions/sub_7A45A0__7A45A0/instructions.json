@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x7A45A0",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, [esp+last]; Typed vector wrapper for destruction of an initialized SIdvLeafTexture range.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A45A4",
-    "line": "mov     edx, [esp+arg_0]",
+    "line": "mov     edx, [esp+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,25 +25,25 @@
   },
   {
     "ea": "0x7A45AA",
-    "line": "mov     ecx, [esp+8+arg_4]",
+    "line": "mov     ecx, [esp+8+last]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A45AE",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A45AF",
-    "line": "push    edx",
+    "line": "push    edx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A45B0",
-    "line": "call    sub_7A36B0",
+    "line": "call    OB_SIdvLeafTexture_DestroyRange_010201A0; Destroys [first,last) compact SIdvLeafTexture records at 0x54 stride, releasing each owned filename.",
     "mnemonic": "call",
     "size": 5
   },

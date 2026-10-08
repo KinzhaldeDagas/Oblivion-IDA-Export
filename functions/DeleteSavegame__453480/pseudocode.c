@@ -11,18 +11,18 @@ void __userpurge DeleteSavegame(
         const char *a10,
         char *a11)
 {
-  const char *v12; // esi
-  _DWORD *v13; // ecx
+  const char *Game_ResolveSaveFile; // esi
+  int *v13; // ecx
 
-  if ( a10 )
+  if ( a10 ) /*0x45348a*/
   {
-    v12 = Savegame_Rename((int)this, st7_0, st4_0, a4, a5, a6, a7, a8, a9, (int)a10, a11, 3);
-    if ( !v12 )
-      v12 = a10;
-    DeleteFileA(v12 + 0x3C);
-    v13 = (_DWORD *)*(this + 0x1B);
-    if ( v13 )
-      BSSimpleList_Remove(v13, (int)v12);
-    (**(void (__thiscall ***)(const char *, int))v12)(v12, 1);
+    Game_ResolveSaveFile = TESSaveLoadGame_ResolveSaveFile(this, st7_0, st4_0, a4, a5, a6, a7, a8, a9, (int)a10, a11, 3); /*0x45349a*/
+    if ( !Game_ResolveSaveFile ) /*0x45349e*/
+      Game_ResolveSaveFile = a10; /*0x4534a0*/
+    DeleteFileA(Game_ResolveSaveFile + 0x3C); /*0x4534a6*/
+    v13 = (int *)*(this + 0x1B); /*0x4534b0*/
+    if ( v13 ) /*0x4534b5*/
+      BSSimpleList_Remove(v13, (int)Game_ResolveSaveFile); /*0x4534b8*/
+    (**(void (__thiscall ***)(const char *, int))Game_ResolveSaveFile)(Game_ResolveSaveFile, 1); /*0x4534c5*/
   }
 }

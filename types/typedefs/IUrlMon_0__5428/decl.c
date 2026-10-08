@@ -1,1 +1,1 @@
-IUrlMon_0
+typedef IUrlMon IUrlMon_0;

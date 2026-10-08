@@ -1,1 +1,1 @@
-OleMenuHookItem
+typedef tagOleMenuHookItem OleMenuHookItem;

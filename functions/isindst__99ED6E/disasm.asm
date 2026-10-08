@@ -10,3 +10,7 @@
 0x99ED8E: mov     [ebp+var_1C], eax
 0x99ED91: mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
 0x99ED98: call    __isindst___$LN7_8
+0x99EDA6: push    6
+0x99EDA8: call    __unlock
+0x99EDAD: pop     ecx
+0x99EDAE: retn

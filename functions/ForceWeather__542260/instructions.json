@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x54226E",
-    "line": "mov     [esi+10h], eax",
+    "line": "mov     [esi+10h], eax; ForceWeather writes Sky+0x10 firstWeather immediately. This confirms firstWeather is the current weather pointer used by GetIsCurrentWeather and should be the FormID source for weather-based encounter chances.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x542273",
-    "line": "mov     [esi+1Ch], eax",
+    "line": "mov     [esi+1Ch], eax; ForceWeather override path writes Sky+0x1C weatherOverride only when forced/persistent override is requested; fast travel clears this field before relocation.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x542290",
-    "line": "mov     [esi+14h], ebx",
+    "line": "mov     [esi+14h], ebx; ForceWeather clears Sky+0x14 secondWeather and sets weatherPercent to 1.0, making firstWeather the sole active weather.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x542295",
-    "line": "fstp    dword ptr [esi+0D8h]",
+    "line": "fstp    dword ptr [esi+0D8h]; Sky+0xD8 weatherPercent is set to 1.0 for immediate forced weather; GetCurrentWeatherPercent reads this field.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -163,13 +163,13 @@
   },
   {
     "ea": "0x5422C4",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5422C6",
-    "line": "call    sub_540850",
+    "line": "call    OB_Sky_UpdateHDRWeatherAndTreeDimmerConstants_010201A0; HDR weather/global updater, not merely fog. While HDR is enabled it resolves first/second weather values, including fSunlightDimmer and fTreeDimmer, then writes direct or transitioned renderer globals.",
     "mnemonic": "call",
     "size": 5
   },

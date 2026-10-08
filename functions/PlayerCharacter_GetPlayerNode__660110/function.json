@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
-  "callers_count": 44,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 79,
+  "chunks": [
+    [
+      "0x660110",
+      "0x660128"
+    ]
+  ],
+  "chunks_sha256": "93f1cde752818d633b607e9e6de06e809bd9bfd3eeda7ea47d5fa87c5deb3e61",
+  "comment_regular": "CULLING audit 2026-09-27 (observed Oblivion behavior): Focused CULLING audit confirms true selects firstPersonNiNode(+0x5D0); false tail-calls normal reference-node getter. Main renderer invokes this selector with true before separate call 0x40CE48. Its third-person node at +0x3C is not the root selected at that callsite.\n\nExplicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
+  "comment_repeatable": "Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "PlayerCharacter_GetPlayerNode",
+  "display_name": "PlayerCharacter_GetNodeByPerspective",
   "end_ea": "0x660128",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "PlayerCharacter_GetPlayerNode",
+  "name": "PlayerCharacter_GetNodeByPerspective",
   "segment": ".text",
   "sha256": "93f1cde752818d633b607e9e6de06e809bd9bfd3eeda7ea47d5fa87c5deb3e61",
   "size": 24,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x660110",
-  "type": "NiNode *__thiscall(PlayerCharacter *this, char)",
+  "total_chunk_size": 24,
+  "type": "NiNode *__thiscall(PlayerCharacter *this, bool firstPerson)",
   "xrefs_from_count": 6,
   "xrefs_to_count": 79
 }

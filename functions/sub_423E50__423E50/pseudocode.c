@@ -1,31 +1,31 @@
-void __thiscall sub_423E50(ExtraDataList *this, int a2)
+void __thiscall ExtraDataList_ClearActionFlagBits(ExtraDataList *this, unsigned int mask)
 {
   BSExtraData *ExtraData; // eax
   int vtbl_low; // ebx
-  int v5; // ebx
-  BSExtraData *v6; // eax
+  unsigned int v5; // ebx
+  BSExtraData *Action; // eax
 
-  ExtraData = BaseExtraList_GetExtraData(this, kExtraData_Action);
-  if ( ExtraData )
-    vtbl_low = LOBYTE(ExtraData[1].vtbl);
+  ExtraData = BaseExtraList_GetExtraData(this, kExtraData_Action); /*0x423e56*/
+  if ( ExtraData ) /*0x423e5d*/
+    vtbl_low = LOBYTE(ExtraData[1].vtbl); /*0x423e5f*/
   else
-    vtbl_low = 1;
-  v5 = ~a2 & vtbl_low;
-  v6 = BaseExtraList_GetExtraData(this, kExtraData_Action);
-  if ( v6 )
+    vtbl_low = 1; /*0x423e65*/
+  v5 = ~mask & vtbl_low; /*0x423e74*/
+  Action = BaseExtraList_GetExtraData(this, kExtraData_Action); /*0x423e76*/
+  if ( Action ) /*0x423e7d*/
   {
-    if ( v5 == 1 && !*(_DWORD *)&v6[1].members.type )
+    if ( v5 == 1 && !*(_DWORD *)&Action[1].members.type ) /*0x423e9c*/
     {
-      BaseExtraList_RemoveExtraByPtr(this, (int)v6, 1);
-      return;
+      BaseExtraList_RemoveExtraByPtr(this, (int)Action, 1); /*0x423ea6*/
+      return; /*0x423ea6*/
     }
   }
   else
   {
-    if ( v5 == 1 )
-      return;
-    v6 = sub_41EB90(this);
+    if ( v5 == 1 ) /*0x423e82*/
+      return; /*0x423e82*/
+    Action = ExtraDataList_GetOrCreateAction(this); /*0x423e86*/
   }
-  if ( v6 )
-    LOBYTE(v6[1].vtbl) = v5;
+  if ( Action ) /*0x423e8d*/
+    LOBYTE(Action[1].vtbl) = v5; /*0x423e8f*/
 }

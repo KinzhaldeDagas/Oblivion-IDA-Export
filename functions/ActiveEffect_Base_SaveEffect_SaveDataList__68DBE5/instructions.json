@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x68DBE5",
-    "line": "mov     esi, [ebp+34h]",
+    "line": "mov     esi, [ebp+34h]; Verified SaveHitEffectList serializes the HitEffectNode chain at ActiveEffect+0x34. Each node's BSTempEffect reports a type byte through vtable +0x54 and writes type-specific payload through +0x78; the loop increments a byte count. This data is present only from save version 0x2A.",
     "mnemonic": "mov",
     "size": 3
   },

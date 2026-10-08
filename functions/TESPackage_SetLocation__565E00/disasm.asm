@@ -1,5 +1,5 @@
-0x565E00: push    0FFFFFFFFh
-0x565E02: push    offset SEH_6E3250
+0x565E00: push    0FFFFFFFFh; 3DTheft decode: TESPackage_SetLocation allocates package->location when needed and copies a 0x0C LocationData record; null source clears location data.
+0x565E02: push    offset ExtraDataList_SetReferencePointer_SEH
 0x565E07: mov     eax, large fs:0
 0x565E0D: push    eax
 0x565E0E: push    esi
@@ -31,7 +31,7 @@
 0x565E62: mov     ecx, [esi+24h]
 0x565E65: push    0
 0x565E67: push    edi
-0x565E68: call    TeSPackage_LocationData_CopyFrom
+0x565E68: call    TeSPackage_LocationData_CopyFrom; 3DTheft decode: LocationData_CopyFrom preserves type-specific radius/object data and skips copy when source type is 0xFF unless forced.
 0x565E6D: mov     ecx, [esp+18h+var_C]
 0x565E71: mov     large fs:0, ecx
 0x565E78: pop     ecx
@@ -39,3 +39,15 @@
 0x565E7A: pop     esi
 0x565E7B: add     esp, 0Ch
 0x565E7E: retn    4
+0x9C3090: mov     eax, [ebp+4]
+0x9C3093: push    eax
+0x9C3094: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C3099: pop     ecx
+0x9C309A: retn
+0x9C309B: mov     edx, [esp+arg_4]
+0x9C309F: lea     eax, [edx-8]
+0x9C30A2: mov     ecx, [edx-0Ch]
+0x9C30A5: xor     ecx, eax
+0x9C30A7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C30AC: mov     eax, offset stru_AEBD48
+0x9C30B1: jmp     ___CxxFrameHandler3

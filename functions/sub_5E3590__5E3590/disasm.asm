@@ -1,4 +1,4 @@
-0x5E3590: sub     esp, 10h
+0x5E3590: sub     esp, 10h; Walk-speed branch used by sub_5E65B0 when run/swim/fly flags are absent. Calls Calc_WalkSpeed, then may clamp to package target actor's walk speed minus close-distance margin.
 0x5E3593: push    esi
 0x5E3594: mov     esi, ecx
 0x5E3596: mov     eax, [esi]
@@ -26,7 +26,7 @@
 0x5E35D5: mov     byte ptr [esp+14h+var_C], 1
 0x5E35DA: jz      short loc_5E35E1
 0x5E35DC: mov     byte ptr [esp+14h+var_C], 0
-0x5E35E1: mov     ecx, [esi+58h]
+0x5E35E1: mov     ecx, [esi+58h]; MEF v30 verified ActorWithoutProcessCTD site: Actor +0x58 immediate vtable dereference. Null supplies AL=0 to vanilla test/setz at 0x005E35EE; non-null resumes 0x005E35E6.
 0x5E35E4: mov     eax, [ecx]
 0x5E35E6: mov     edx, [eax+304h]
 0x5E35EC: call    edx
@@ -61,7 +61,7 @@
 0x5E3642: fild    [esp+24h+var_4]
 0x5E3646: push    ecx
 0x5E3647: fstp    [esp+28h+var_28]
-0x5E364A: call    Calc_WalkSpeed
+0x5E364A: call    Calc_WalkSpeed; TES4 authoritative: Calc_WalkSpeed. Uses Speed actor value, carried weight/encumbrance, weapon-out branch, creature/character walk min/max game settings, and sneak multiplier; selected by sub_5E65B0 when run/swim/fly-speed flags are absent.
 0x5E364F: add     esp, 14h
 0x5E3652: fstp    [esp+14h+var_C]
 0x5E3656: cmp     dword ptr [esi+58h], 0
@@ -99,7 +99,7 @@
 0x5E36C8: cmp     dword ptr [edi+58h], 0
 0x5E36CC: jz      short loc_5E3737
 0x5E36CE: mov     ecx, edi
-0x5E36D0: call    sub_5E3590
+0x5E36D0: call    sub_5E3590; Walk-speed branch used by sub_5E65B0 when run/swim/fly flags are absent. Calls Calc_WalkSpeed, then may clamp to package target actor's walk speed minus close-distance margin.
 0x5E36D5: fstp    [esp+18h+var_10]
 0x5E36D9: fldz
 0x5E36DB: fcomp   [esp+18h+var_10]

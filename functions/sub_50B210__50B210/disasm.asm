@@ -49,7 +49,7 @@
 0x50B2CE: push    offset aFbrightclampFF; "    fBrightClamp: %f fBrightScale: %f"
 0x50B2D3: call    Interface_ConsolePrint
 0x50B2D8: push    offset aSsp; "SSP:"
-0x50B2DD: call    Interface_ConsolePrint
+0x50B2DD: call    Interface_ConsolePrint; PrintHDRParam proves fSunlightDimmer (rendererGlobal+0xB3) is distinct from fTreeDimmer (rendererGlobal+0x0F).
 0x50B2E2: fld     dword ptr ds:0B2C73Ch
 0x50B2E8: add     esp, 8
 0x50B2EB: fstp    [esp+50h+var_48]

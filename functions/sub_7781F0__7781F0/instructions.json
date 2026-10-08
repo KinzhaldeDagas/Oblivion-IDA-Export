@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7781F0",
-    "line": "sub     esp, 18h",
+    "line": "sub     esp, 18h; Pass226: Index-buffer rebuild/upload helper used when NiScreenTexture mask bit 0x08 is active.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x778204",
-    "line": "cmp     [esp+18h+arg_0], 0",
+    "line": "cmp     [esp+18h+indices], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x778216",
-    "line": "mov     esi, [esp+24h+arg_C]",
+    "line": "mov     esi, [esp+24h+existing]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x77821B",
-    "line": "mov     edi, [esp+28h+arg_8]",
+    "line": "mov     edi, [esp+28h+capacityIndices]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -133,37 +133,37 @@
   },
   {
     "ea": "0x778229",
-    "line": "lea     ecx, [esp+28h+var_14]",
+    "line": "lea     ecx, [esp+28h+description]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x77822D",
-    "line": "mov     [esp+28h+var_14], eax",
+    "line": "mov     [esp+28h+description.Format], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x778231",
-    "line": "mov     [esp+28h+var_10], eax",
+    "line": "mov     [esp+28h+description.Type], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x778235",
-    "line": "mov     [esp+28h+var_C], eax",
+    "line": "mov     [esp+28h+description.Usage], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x778239",
-    "line": "mov     [esp+28h+var_8], eax",
+    "line": "mov     [esp+28h+description.Pool], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x77823D",
-    "line": "mov     [esp+28h+var_4], eax",
+    "line": "mov     [esp+28h+description.Size], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -181,13 +181,13 @@
   },
   {
     "ea": "0x778246",
-    "line": "push    ecx",
+    "line": "push    ecx; description",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x778247",
-    "line": "push    esi",
+    "line": "push    esi; self",
     "mnemonic": "push",
     "size": 1
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x77824E",
-    "line": "cmp     [esp+28h+var_14], 65h ; 'e'",
+    "line": "cmp     [esp+28h+description.Format], 65h ; 'e'",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x778255",
-    "line": "cmp     [esp+28h+var_10], 7",
+    "line": "cmp     [esp+28h+description.Type], 7",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x77825C",
-    "line": "cmp     [esp+28h+var_C], ebp",
+    "line": "cmp     [esp+28h+description.Usage], ebp",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -247,13 +247,13 @@
   },
   {
     "ea": "0x778262",
-    "line": "mov     eax, [esp+28h+var_8]",
+    "line": "mov     eax, [esp+28h+description.Pool]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x778266",
-    "line": "cmp     eax, [esp+28h+arg_14]",
+    "line": "cmp     eax, [esp+28h+pool]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x77826C",
-    "line": "cmp     [esp+28h+var_4], edi",
+    "line": "cmp     [esp+28h+description.Size], edi",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -289,49 +289,49 @@
   },
   {
     "ea": "0x778279",
-    "line": "push    0",
+    "line": "push    0; sharedHandle",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x77827B",
-    "line": "lea     ecx, [esp+2Ch+arg_8]",
+    "line": "lea     ecx, [esp+2Ch+capacityIndices]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x77827F",
-    "line": "push    ecx",
+    "line": "push    ecx; buffer",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x778280",
-    "line": "mov     ecx, [esp+30h+arg_14]",
+    "line": "mov     ecx, [esp+30h+pool]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x778284",
-    "line": "push    ecx",
+    "line": "push    ecx; pool",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x778285",
-    "line": "push    65h ; 'e'",
+    "line": "push    65h ; 'e'; format",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x778287",
-    "line": "push    ebp",
+    "line": "push    ebp; usage",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x778288",
-    "line": "mov     [esp+3Ch+arg_8], 0",
+    "line": "mov     [esp+3Ch+capacityIndices], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -349,13 +349,13 @@
   },
   {
     "ea": "0x778295",
-    "line": "push    edi",
+    "line": "push    edi; length",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x778296",
-    "line": "push    eax",
+    "line": "push    eax; device",
     "mnemonic": "push",
     "size": 1
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x7782A2",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x7782AC",
-    "line": "mov     [esp+28h+arg_8], esi",
+    "line": "mov     [esp+28h+capacityIndices], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x7782B2",
-    "line": "mov     esi, [esp+28h+arg_8]",
+    "line": "mov     esi, [esp+28h+capacityIndices]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x7782BF",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x7782D3",
-    "line": "mov     eax, [esp+28h+arg_10]",
+    "line": "mov     eax, [esp+28h+bufferBytes]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -529,43 +529,43 @@
   },
   {
     "ea": "0x7782E2",
-    "line": "push    0",
+    "line": "push    0; flags",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7782E4",
-    "line": "lea     edx, [esp+2Ch+arg_14]",
+    "line": "lea     edx, [esp+2Ch+pool]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7782E8",
-    "line": "push    edx",
+    "line": "push    edx; data",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7782E9",
-    "line": "push    ebx",
+    "line": "push    ebx; size",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7782EA",
-    "line": "push    0",
+    "line": "push    0; offset",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7782EC",
-    "line": "push    esi",
+    "line": "push    esi; self",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7782ED",
-    "line": "mov     [esp+3Ch+arg_14], 0",
+    "line": "mov     [esp+3Ch+pool], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -589,37 +589,37 @@
   },
   {
     "ea": "0x7782FB",
-    "line": "mov     ecx, [esp+24h+Src]",
+    "line": "mov     ecx, [esp+28h+indices]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7782FF",
-    "line": "mov     edx, [esp+24h+Dst]",
+    "line": "mov     edx, [esp+28h+pool]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x778303",
-    "line": "push    ebx; Size",
+    "line": "push    ebx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x778304",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x778305",
-    "line": "push    edx; Dst",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x778306",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x778313",
-    "line": "push    esi",
+    "line": "push    esi; self",
     "mnemonic": "push",
     "size": 1
   },
@@ -703,7 +703,7 @@
   },
   {
     "ea": "0x778327",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -727,7 +727,7 @@
   },
   {
     "ea": "0x778334",
-    "line": "push    esi",
+    "line": "push    esi; self",
     "mnemonic": "push",
     "size": 1
   },
@@ -751,7 +751,7 @@
   },
   {
     "ea": "0x77833C",
-    "line": "push    esi",
+    "line": "push    esi; self",
     "mnemonic": "push",
     "size": 1
   },

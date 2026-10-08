@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x80A180",
-    "line": "sub     esp, 808h",
+    "line": "sub     esp, 808h; MoonSugarEffect decode: SkinShader vertex-program loader. Loads 0x14 SKIN2*.vso vs_2_0 variants into this+0x9C from lighting\\2x\\v ADTS/AD/DiffusePt HLSL with SKIN/FACEGENBLEND/LIGHTS/PROJ_SHADOW defines.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -1801,7 +1801,7 @@
   },
   {
     "ea": "0x80A893",
-    "line": "call    __sprintf",
+    "line": "call    __sprintf; MoonSugarEffect decode: SkinShader vertex loader cache name SKIN2%03i.vso; slot index maps to object+0x9C+(i*4). SKIN macro variants occupy odd slots and reserve vertex constants c42-c95 for Bones.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1867,7 +1867,7 @@
   },
   {
     "ea": "0x80A8B7",
-    "line": "call    CreateVertexShader",
+    "line": "call    CreateVertexShader; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.",
     "mnemonic": "call",
     "size": 5
   },

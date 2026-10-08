@@ -61,3 +61,12 @@
 0x6F8FAE: pop     ebx
 0x6F8FAF: add     esp, 14h
 0x6F8FB2: retn    4
+0x9C9090: lea     ecx, [ebp-14h]
+0x9C9093: jmp     sub_6F6E10
+0x9C9098: mov     edx, [esp+arg_4]
+0x9C909C: lea     eax, [edx-14h]
+0x9C909F: mov     ecx, [edx-18h]
+0x9C90A2: xor     ecx, eax
+0x9C90A4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C90A9: mov     eax, offset stru_AF19DC
+0x9C90AE: jmp     ___CxxFrameHandler3

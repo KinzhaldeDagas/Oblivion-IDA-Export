@@ -1,4 +1,4 @@
-0x4EF3E0: mov     eax, [esp+a2]
+0x4EF3E0: mov     eax, [esp+a2]; Verified: WorldSpace save-order comparison orders WorldSpace before same-world CELL, REFR/ACHR/ACRE, PGRD, LAND, ROAD and TLOD records; recursively compares owning worlds where relevant and otherwise delegates to TESForm_LessThan. Fallout's newer navmesh index is a separate system and is not evidence about this Oblivion path-grid ordering.
 0x4EF3E4: push    ebx
 0x4EF3E5: push    esi
 0x4EF3E6: mov     esi, ecx

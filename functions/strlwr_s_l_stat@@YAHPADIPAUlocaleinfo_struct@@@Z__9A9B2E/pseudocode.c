@@ -8,33 +8,34 @@ errno_t __cdecl _strlwr_s_l_stat(char *Str, size_t MaxCount)
   char v7; // al
   int v9; // eax
   int v10; // ecx
-  char *v11; // eax
-  size_t v12[2]; // [esp-4h] [ebp-1Ch] BYREF
-  int v13; // [esp+Ch] [ebp-Ch]
+  int v11; // eax
+  char *v12; // eax
+  size_t v13[2]; // [esp-4h] [ebp-1Ch] BYREF
+  int v14; // [esp+Ch] [ebp-Ch]
   char *Src; // [esp+10h] [ebp-8h]
 
-  if ( !Str )
-    goto LABEL_2;
-  LODWORD(v12[0]) = MaxCount;
-  if ( (unsigned int)strnlen(Str, v12[0]) >= (unsigned int)MaxCount )
+  if ( !Str ) /*0x9a9b48*/
+    goto LABEL_2; /*0x9a9b48*/
+  LODWORD(v13[0]) = MaxCount; /*0x9a9b66*/
+  if ( (unsigned int)strnlen(Str, v13[0]) >= (unsigned int)MaxCount ) /*0x9a9b74*/
   {
-    *Str = 0;
+    *Str = 0; /*0x9a9b76*/
 LABEL_2:
-    v2 = _errno();
-    LODWORD(v12[0]) = 0x16;
+    v2 = _errno(); /*0x9a9b4a*/
+    LODWORD(v13[0]) = 0x16; /*0x9a9b4f*/
 LABEL_3:
-    v3 = v12[0];
-    LODWORD(v12[0]) = 0;
-    *v2 = v3;
-    _invalid_parameter(0, (int)Str, v3);
-    return v3;
+    v3 = v13[0]; /*0x9a9b51*/
+    LODWORD(v13[0]) = 0; /*0x9a9b52*/
+    *v2 = v3; /*0x9a9b57*/
+    _invalid_parameter(0, (int)Str, v3); /*0x9a9b59*/
+    return v3; /*0x9a9c9b*/
   }
-  v4 = *(_DWORD *)HIDWORD(MaxCount);
-  v5 = *(_DWORD *)(*(_DWORD *)HIDWORD(MaxCount) + 0x14);
-  if ( v5 )
+  v4 = *(_DWORD *)HIDWORD(MaxCount); /*0x9a9b7d*/
+  v5 = *(_DWORD *)(*(_DWORD *)HIDWORD(MaxCount) + 0x14); /*0x9a9b7f*/
+  if ( v5 ) /*0x9a9b84*/
   {
-    LODWORD(v12[0]) = 1;
-    v9 = __crtLCMapStringA(
+    LODWORD(v13[0]) = 1; /*0x9a9ba6*/
+    v9 = __crtLCMapStringA( /*0x9a9bb8*/
            (struct localeinfo_struct *)HIDWORD(MaxCount),
            v5,
            0x100u,
@@ -43,80 +44,81 @@ LABEL_3:
            0,
            0,
            *(_DWORD *)(v4 + 4));
-    v10 = v9;
-    v13 = v9;
-    if ( !v9 )
+    v10 = v9; /*0x9a9bbd*/
+    v14 = v9; /*0x9a9bc4*/
+    if ( !v9 ) /*0x9a9bc7*/
     {
-      *_errno() = 0x2A;
-      return *_errno();
+      *_errno() = 0x2A; /*0x9a9bce*/
+      return *_errno(); /*0x9a9bce*/
     }
-    if ( (unsigned int)MaxCount < v9 )
+    if ( (unsigned int)MaxCount < v9 ) /*0x9a9be3*/
     {
-      *Str = 0;
-      v2 = _errno();
-      LODWORD(v12[0]) = 0x22;
-      goto LABEL_3;
+      *Str = 0; /*0x9a9be5*/
+      v2 = _errno(); /*0x9a9be7*/
+      LODWORD(v13[0]) = 0x22; /*0x9a9bec*/
+      goto LABEL_3; /*0x9a9bee*/
     }
-    if ( v9 <= 0 || !(0xFFFFFFE0 / v9) )
+    if ( v9 <= 0 || !(0xFFFFFFE0 / v9) ) /*0x9a9bfc*/
     {
-      Src = 0;
-      goto LABEL_28;
+      Src = 0; /*0x9a9c3c*/
+      goto LABEL_28; /*0x9a9c3c*/
     }
-    if ( (unsigned int)(v9 + 8) > 0x400 )
+    v11 = v9 + 8; /*0x9a9c03*/
+    if ( (unsigned int)(v10 + 8) > 0x400 ) /*0x9a9c0b*/
     {
-      LODWORD(v12[0]) = v9 + 8;
-      v11 = (char *)malloc(v12[0]);
-      if ( v11 )
+      LODWORD(v13[0]) = v10 + 8; /*0x9a9c20*/
+      v12 = (char *)malloc(v13[0]); /*0x9a9c21*/
+      if ( v12 ) /*0x9a9c29*/
       {
-        *(_DWORD *)v11 = 0xDDDD;
-        goto LABEL_25;
+        *(_DWORD *)v12 = 0xDDDD; /*0x9a9c2b*/
+        goto LABEL_25; /*0x9a9c2b*/
       }
     }
     else
     {
-      _alloca_(SHIDWORD(v12[0]));
-      v11 = (char *)v12 + 4;
-      if ( v12 != (size_t *)0xFFFFFFFC )
+      _alloca_(v11); /*0x9a9c0d*/
+      v12 = (char *)v13 + 4; /*0x9a9c12*/
+      if ( v13 != (size_t *)0xFFFFFFFC ) /*0x9a9c16*/
       {
-        HIDWORD(v12[0]) = 0xCCCC;
+        HIDWORD(v13[0]) = 0xCCCC; /*0x9a9c18*/
 LABEL_25:
-        v11 += 8;
+        v12 += 8; /*0x9a9c31*/
       }
     }
-    v10 = v13;
-    Src = v11;
+    v10 = v14; /*0x9a9c34*/
+    Src = v12; /*0x9a9c37*/
 LABEL_28:
-    if ( Src )
+    if ( Src ) /*0x9a9c42*/
     {
-      LODWORD(v12[0]) = 1;
-      if ( __crtLCMapStringA(
+      LODWORD(v13[0]) = 1; /*0x9a9c56*/
+      if ( __crtLCMapStringA( /*0x9a9c67*/
              (struct localeinfo_struct *)HIDWORD(MaxCount),
              *(_DWORD *)(*(_DWORD *)HIDWORD(MaxCount) + 0x14),
              0x100u,
              Str,
              0xFFFFFFFF,
-             (int)Src,
+             Src,
              v10,
              *(_DWORD *)(*(_DWORD *)HIDWORD(MaxCount) + 4)) )
       {
-        v3 = strcpy_s(Str, MaxCount, Src);
+        v3 = strcpy_s(Str, MaxCount, Src); /*0x9a9c82*/
       }
       else
       {
-        *_errno() = 0x2A;
-        v3 = 0x2A;
+        *_errno() = 0x2A; /*0x9a9c8e*/
+        v3 = 0x2A; /*0x9a9c90*/
       }
-      _freea(Src);
-      return v3;
+      _freea(Src); /*0x9a9c95*/
+      return v3; /*0x9a9c95*/
     }
-    *_errno() = 0xC;
-    return *_errno();
+    *_errno() = 0xC; /*0x9a9c49*/
+    return *_errno(); /*0x9a9bdb*/
   }
-  for ( i = Str; *i; ++i )
+  for ( i = Str; *i; ++i ) /*0x9a9b86*/
   {
-    v7 = *i;
-    if ( *i >= 0x41 && v7 <= 0x5A )
-      *i = v7 + 0x20;
+    v7 = *i; /*0x9a9b8c*/
+    if ( *i >= 0x41 && v7 <= 0x5A ) /*0x9a9b94*/
+      *i = v7 + 0x20; /*0x9a9b98*/
   }
-  return 0;
+  return 0; /*0x9a9ca0*/
 }

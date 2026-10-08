@@ -7,10 +7,10 @@ void __thiscall sub_494890(int *this, const char *a2)
 
   if ( !bSkipInitializationFlows_MESSAGES )
   {
-    v3 = clock();
+    v3 = clock(); /*0x4948be*/
     _sprintf(v6, "%02d%02d%02d: %s", v3 / 0x3E8 / 0x3C % 0x3C, v3 / 0x3E8 % 0x3C, v3 / 0x1F4 % 0x64, a2);
-    v4 = *this;
-    v5 = sub_4944F0();
-    (*(void (__thiscall **)(int *, char *, char *, int))(v4 + 0x28))(this, v5, v6, 1);
+    v4 = *this; /*0x494918*/
+    v5 = sub_4944F0(); /*0x494924*/
+    (*(void (__thiscall **)(int *, char *, char *, int))(v4 + 0x28))(this, v5, v6, 1); /*0x49492f*/
   }
 }

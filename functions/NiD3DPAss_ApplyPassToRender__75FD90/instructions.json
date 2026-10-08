@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x75FD90",
-    "line": "push    ebp",
+    "line": "push    ebp; Apply a NiD3DPass to DX9: select vertex-processing mode, apply every authored render state, apply each active texture-stage/sampler group and texture binding, then disable unused stages. This is the last caster state boundary before constants/programs and draw.",
     "mnemonic": "push",
     "size": 1
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x75FD95",
-    "line": "mov     ecx, [edi+58h]",
+    "line": "mov     ecx, [edi+58h]; DeferredRendering: ApplyPass reads VertexShader from NiD3DPass +0x58 before render states and texture stages; use this hook for pass telemetry before draw calls.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x75FDB0",
-    "line": "call    eax",
+    "line": "call    eax; NiD3DPass application: pass render states, then texture-stage/sampler state and texture binding, then disable unused stages.",
     "mnemonic": "call",
     "size": 2
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x75FDDB",
-    "line": "call    NiD3DRenderStateGroup__SetRenderStates",
+    "line": "call    NiD3DRenderStateGroup__SetRenderStates; Apply every state authored by the current caster NiD3DPass RenderStateGroup before its texture stages.",
     "mnemonic": "call",
     "size": 5
   },
@@ -210,12 +210,6 @@
     "size": 2
   },
   {
-    "ea": "0x75FDED",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x75FDF0",
     "line": "mov     ecx, [edi+24h]",
     "mnemonic": "mov",
@@ -223,7 +217,7 @@
   },
   {
     "ea": "0x75FDF3",
-    "line": "mov     ecx, [ecx+esi*4]",
+    "line": "mov     ecx, [ecx+esi*4]; Apply the caster stage state/sampler group and bind its texture (BaseMap for textured variants; null/unused for opaque SLS variants).",
     "mnemonic": "mov",
     "size": 3
   },
@@ -241,7 +235,7 @@
   },
   {
     "ea": "0x75FDFA",
-    "line": "call    sub_772400",
+    "line": "call    OB_NiD3DTextureStage_ApplyForPass_010201A0; Oblivion NiD3DTextureStage pass application: apply its tracked stage/sampler state group, then bind the resolved texture and commit the texture transform.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,7 +289,7 @@
   },
   {
     "ea": "0x75FE13",
-    "line": "call    sub_771790",
+    "line": "call    NiD3DTextureStage_DisableUnusedStages; Disable and clear every texture stage after the active pass range.",
     "mnemonic": "call",
     "size": 5
   },

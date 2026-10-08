@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x6F0A3B",
-    "line": "mov     ebp, [esp+0C0h+arg_0]",
+    "line": "mov     ebp, [esp+0C0h+source]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -139,13 +139,13 @@
   },
   {
     "ea": "0x6F0A5E",
-    "line": "mov     ecx, esp",
+    "line": "mov     ecx, esp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6F0A60",
-    "line": "push    8; MaxCount",
+    "line": "push    8; count",
     "mnemonic": "push",
     "size": 2
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x6F0A79",
-    "line": "call    sub_414500",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x6F0A8D",
-    "line": "mov     ecx, esp",
+    "line": "mov     ecx, esp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -223,13 +223,13 @@
   },
   {
     "ea": "0x6F0A93",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; count",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6F0A95",
-    "line": "push    eax",
+    "line": "push    eax; offset",
     "mnemonic": "push",
     "size": 1
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x6F0AA0",
-    "line": "push    ebp",
+    "line": "push    ebp; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x6F0AAB",
-    "line": "call    sub_414420",
+    "line": "call    OB_stString28_AssignSubstring_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,offset,count). Bounds-checks offset, clamps count to source.size-offset, handles self-assignment by in-place erasure, grows when required, copies the selected bytes, updates size, and writes the terminator.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2974,5 +2974,107 @@
     "line": "jmp     short loc_6F1011",
     "mnemonic": "jmp",
     "size": 2
+  },
+  {
+    "ea": "0x9C8720",
+    "line": "lea     ecx, [ebp-94h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C8726",
+    "line": "jmp     ??1BSFaceGenBinaryFile@@UAE@XZ; BSFaceGenBinaryFile::~BSFaceGenBinaryFile(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C872B",
+    "line": "lea     ecx, [ebp-94h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C8731",
+    "line": "jmp     ??1FutBinaryFileC@@UAE@XZ; FutBinaryFileC::~FutBinaryFileC(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8736",
+    "line": "lea     ecx, [ebp-94h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C873C",
+    "line": "jmp     ??1FutBinaryFileC@@UAE@XZ; FutBinaryFileC::~FutBinaryFileC(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8741",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C8745",
+    "line": "lea     eax, [edx-0B0h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C874B",
+    "line": "mov     ecx, [edx-0B4h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C8751",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C8753",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8758",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C875B",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C875E",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C8760",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8765",
+    "line": "mov     eax, offset stru_AF0C10",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C876A",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

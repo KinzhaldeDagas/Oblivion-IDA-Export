@@ -1,8 +1,8 @@
-0x864900: push    esi
+0x864900: push    esi; [Verified] GeometryDecalShaderProperty vtable slot +0x30 (slot 12) viewer/diagnostic string callback. Calls the base BSShaderProperty viewer-string routine, then appends the class-specific name; this is diagnostic output, not stream serialization.
 0x864901: mov     esi, [esp+4+arg_0]
 0x864905: push    edi
 0x864906: push    esi
-0x864907: call    sub_7EE5D0
+0x864907: call    sub_7EE5D0; BloodOnDeath decode 2026-05-30: shader-property diagnostic dump; no spawn, lifetime, or projection cap is enforced here.
 0x86490C: mov     eax, ds:0B4335Ch
 0x864911: push    eax; ArgList
 0x864912: call    TESOutput_PrintString

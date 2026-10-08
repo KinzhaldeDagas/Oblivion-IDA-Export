@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
   "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7879A0",
+      "0x787B18"
+    ]
+  ],
+  "chunks_sha256": "1d184281114d0df96d8cac62bb23e24cb687759aa567995eee1dfbb4899949f8",
+  "comment_regular": "\n[2026-10-03 frond export storage] Verified required object size 0x12C, 4-byte aligned. Native initializer writes +0x120 DWORD (0x787B0A) and +0x128 WORD (0x787B10); a 0x120-byte temporary overflows even for frond-only mask because constructor initializes every output subobject. Plugin had two undersized public-export scratch buffers and matching undersized memset; correction uses the authoritative full packet size. Fallout SGeometry ctor 0x8281ACF0 also includes the horizontal billboard tail. Later RT4.1 geometry schema differs and must not size this native temporary.\n\n2026-05-26 SpeedTreeOBSE: identified temporary SGeometry/output initializer used by the optional 360 diagnostic candidate export probe before stock GetGeometry(0x08). Must not be treated as live render-resource allocation.",
+  "comment_repeatable": "2026-05-26 SpeedTreeOBSE: identified temporary SGeometry/output initializer used by the optional 360 diagnostic candidate export probe before stock GetGeometry(0x08). Must not be treated as live render-resource allocation.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7879A0",
+  "display_name": "OB_SpeedTreeGeometryOutput_init_010201A0",
   "end_ea": "0x787B18",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7879A0",
+  "name": "OB_SpeedTreeGeometryOutput_init_010201A0",
   "segment": ".text",
   "sha256": "1d184281114d0df96d8cac62bb23e24cb687759aa567995eee1dfbb4899949f8",
   "size": 376,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7879A0",
-  "type": "float *__thiscall(float *this)",
+  "total_chunk_size": 376,
+  "type": "OB_SpeedTreeGeometryOutput_010201A0 *__thiscall(OB_SpeedTreeGeometryOutput_010201A0 *this)",
   "xrefs_from_count": 79,
   "xrefs_to_count": 4
 }

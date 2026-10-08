@@ -1,4 +1,4 @@
-BSStringT *sub_A0E700()
+NiRTTI *sub_A0E700()
 {
-  return sub_70E220((BSStringT *)dword_B416CC, "NiPSysEmitterDeclinationVarCtlr", (int)dword_B41F8C);
+  return NiRTTI_Constructor(&stru_B416CC, "NiPSysEmitterDeclinationVarCtlr", &stru_B41F8C); /*0xa0e714*/
 }

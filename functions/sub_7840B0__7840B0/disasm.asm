@@ -1,4 +1,4 @@
-0x7840B0: push    esi
+0x7840B0: push    esi; Oblivion 1.2.0.416: checked spline-cache iterator pre-decrement using parent/left-subtree traversal and nil-node validation.
 0x7840B1: mov     esi, ecx
 0x7840B3: cmp     dword ptr [esi], 0
 0x7840B6: jnz     short loc_7840BD

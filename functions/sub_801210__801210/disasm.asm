@@ -1,4 +1,4 @@
-0x801210: push    edi
+0x801210: push    edi; MoonSugarEffect decode: builds shader cache filename from CacheOrNullString/FullPath, appends 'HDR.' when UseHDR is active, then appends requested .vso/.pso cache name.
 0x801211: mov     edi, [esp+4+arg_0]
 0x801215: test    edi, edi
 0x801217: jz      loc_8012B9
@@ -8,9 +8,9 @@
 0x80122C: test    eax, eax
 0x80122E: jz      loc_8012B9
 0x801234: cmp     byte ptr ds:0B42D80h, 0
-0x80123B: mov     ecx, offset CacheOrNullString
+0x80123B: mov     ecx, 0B42D80h
 0x801240: jnz     short loc_801247
-0x801242: mov     ecx, offset FullPath
+0x801242: mov     ecx, (offset OB_RendererGlobalState_010201A0.pad_0B3+1Ch)
 0x801247: push    esi
 0x801248: mov     esi, edi
 0x80124A: sub     esi, ecx
@@ -20,7 +20,7 @@
 0x801255: add     ecx, 1
 0x801258: test    dl, dl
 0x80125A: jnz     short loc_801250
-0x80125C: cmp     ds:0B43070h, dl
+0x80125C: cmp     ds:0B43070h, dl; [Verified] When RendererGlobalState+0x1D7 is nonzero, append literal "HDR." to the shader cache/program name before the requested program filename. Combined with WinMain's HDR/non-HDR settings branch, this identifies the field as the HDR-mode selector.
 0x801262: jz      short loc_80128B
 0x801264: mov     ecx, edi
 0x801266: add     ecx, 0FFFFFFFFh

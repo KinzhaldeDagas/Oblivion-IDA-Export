@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7672F0",
-    "line": "push    ecx",
+    "line": "push    ecx; Oblivion rigid/non-hardware-skinned geometry pass loop: shader preflight, pass construction, pass state/stage application, constants, geometry buffers, programs/maps, then DrawIndexedPrimitive or DrawPrimitive and pass advance.",
     "mnemonic": "push",
     "size": 1
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x767306",
-    "line": "push    offset NiD3DShaderInterfaceString",
+    "line": "push    0B42858h",
     "mnemonic": "push",
     "size": 5
   },
@@ -205,13 +205,13 @@
   },
   {
     "ea": "0x767343",
-    "line": "call    edx",
+    "line": "call    edx; NiD3DShader vtable +0x28: render preflight.",
     "mnemonic": "call",
     "size": 2
   },
   {
     "ea": "0x767345",
-    "line": "test    eax, eax",
+    "line": "test    eax, eax; Non-skinned geometry render path forwards renderer->propertyState to the selected shader. For the failing cloned Arrow:0 this pointer is null.",
     "mnemonic": "test",
     "size": 2
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x76736D",
-    "line": "call    edx",
+    "line": "call    edx; Rigid geometry invokes the selected concrete NiD3DShader vtable +0x2C. For Hair, HairShader_SetupRenderPass resets the queue and returns 0 for inherited high selectors; for Lighting30 its high selectors likewise queue no pass.",
     "mnemonic": "call",
     "size": 2
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x767376",
-    "line": "call    edx",
+    "line": "call    edx; Rigid BeginPassLoop guard: PassCount zero skips pass state, constants, programs/buffers, and DrawIndexedPrimitive/DrawPrimitive. This proves no draw for both Lighting30 high records and conditionally reachable Hair high records.",
     "mnemonic": "call",
     "size": 2
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x7673A0",
-    "line": "call    edx",
+    "line": "call    edx; NiD3DShader vtable +0x30: apply current pass render state and texture stages.",
     "mnemonic": "call",
     "size": 2
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x7673C4",
-    "line": "call    edx",
+    "line": "call    edx; NiD3DShader vtable +0x34: write per-object/per-light render constants.",
     "mnemonic": "call",
     "size": 2
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x7673ED",
-    "line": "mov     esi, eax",
+    "line": "mov     esi, eax; NiD3DShader vtable +0x3C: bind vertex streams and index buffer.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x7673FB",
-    "line": "call    edx",
+    "line": "call    edx; NiD3DShader vtable +0x38: bind current shaders and apply pass/shader constant maps.",
     "mnemonic": "call",
     "size": 2
   },
@@ -739,13 +739,13 @@
   },
   {
     "ea": "0x76740E",
-    "line": "call    eax",
+    "line": "call    eax; NiDX9ShaderConstantManager vtable +4 is a no-op in Oblivion DX9; constant maps were uploaded by SetupShaderPrograms.",
     "mnemonic": "call",
     "size": 2
   },
   {
     "ea": "0x767410",
-    "line": "xor     eax, eax",
+    "line": "xor     eax, eax; MoonSugarEffect build 37: post-native D3D vertex shader override now supports primary SM3Lighting, EnvMap, TexEffect, and Decal clones without taking ownership of native pixel shaders/textures.",
     "mnemonic": "xor",
     "size": 2
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x767417",
-    "line": "cmp     [esi+44h], eax",
+    "line": "cmp     [esi+44h], eax; Verified current array-count semantics (2026-10-01): NumArrays +0x44 <= 0 skips indexed device draws to 0x7674A3 but does not skip shader finish +0x40 or pass advance +0x4C. State/constant/program/buffer setup has already executed. Empty geometry still has native state effects. GPU replacement must retain application/restoration and bookkeeping even when emitting zero draws.",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -787,7 +787,7 @@
   },
   {
     "ea": "0x767428",
-    "line": "mov     eax, [esi+48h]",
+    "line": "mov     eax, [esi+48h]; Rigid indexed arrays: between calls at 0x767462 the loop only reads lengths/counts, advances start by primitiveCount+2, and iterates. No shader state, constants or vertex/index binding changes occur between arrays; setup is outside this loop and finish is at 0x7674A3. A changed current NumArrays can be represented by rebuilding current ranges from interchangeable qualified material/input templates rather than requiring old observed draw cardinality. This concerns rigid loop semantics, not hardware skin partitions or permission to suppress unproved native calls.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -853,7 +853,7 @@
   },
   {
     "ea": "0x76744B",
-    "line": "mov     edx, [edx+148h]",
+    "line": "mov     edx, [edx+148h]; DeferredRendering full-TBN capture uses this post-SetupShaderPrograms draw window. Basis pass runs under native pass state before the material G-buffer pass, then stateblock restore replays the native state for the main capture.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -919,7 +919,7 @@
   },
   {
     "ea": "0x767462",
-    "line": "call    edx",
+    "line": "call    edx; Final rigid indexed caster draw. Accepted fragments update the shared hardware depth surface and the bound R32F color target.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1003,7 +1003,7 @@
   },
   {
     "ea": "0x767491",
-    "line": "mov     edx, [edx+144h]",
+    "line": "mov     edx, [edx+144h]; DeferredRendering optional DrawPrimitive wrapper point. Same target-restore and safe replacement rules as 0x0076744B.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1045,7 +1045,7 @@
   },
   {
     "ea": "0x7674A1",
-    "line": "call    edx",
+    "line": "call    edx; Final rigid non-indexed caster draw fallback with the same bound state, hardware Z, and R32F color output.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1147,7 +1147,7 @@
   },
   {
     "ea": "0x7674C5",
-    "line": "call    edx",
+    "line": "call    edx; NiD3DShader vtable +0x40: end current pass.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1171,7 +1171,7 @@
   },
   {
     "ea": "0x7674CE",
-    "line": "call    edx",
+    "line": "call    edx; NiD3DShader vtable +0x4C: advance/refcount next pass.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1279,7 +1279,7 @@
   },
   {
     "ea": "0x7674F8",
-    "line": "call    edx",
+    "line": "call    edx; Rigid path always calls shader vtable +0x44 finish after setup, including the zero-pass invalid-selector path.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1315,7 +1315,7 @@
   },
   {
     "ea": "0x76750C",
-    "line": "call    edx",
+    "line": "call    edx; After shader geometry finish, clear InternalNormalizeNormals via77B330. Does not immediately change render state143; next transform normalization consumes cleared flag.",
     "mnemonic": "call",
     "size": 2
   },

@@ -1,5 +1,5 @@
 char __cdecl sub_4F9F90(char a1)
 {
-  byte_B09E25 = a1;
-  return a1;
+  byte_B09E25 = a1; /*0x4f9f94*/
+  return a1; /*0x4f9f99*/
 }

@@ -1,4 +1,4 @@
-char *sub_531E20()
+NiRTTI *sub_531E20()
 {
-  return dword_BA7F48;
+  return &stru_BA7F48; /*0x531e25*/
 }

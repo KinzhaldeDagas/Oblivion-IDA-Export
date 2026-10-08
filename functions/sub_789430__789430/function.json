@@ -1,19 +1,36 @@
 {
-  "callees_count": 31,
-  "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_789430",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
+  "callers_count": 6,
+  "chunks": [
+    [
+      "0x789430",
+      "0x7895DA"
+    ],
+    [
+      "0x9CB360",
+      "0x9CB399"
+    ]
+  ],
+  "chunks_sha256": "371cfcb833e55682289b675781b8945d2d1e08a39bdef778d050887cc8369acd",
+  "comment_regular": "Oblivion IdvNoPath helper: copies the input 28-byte SSO string, scans backward for '/' or '\\', and constructs the returned basename string. RT4.1 IdvFilename.h corroborates the algorithm/name.",
+  "comment_repeatable": "Oblivion IdvNoPath helper: copies the input 28-byte SSO string, scans backward for '/' or '\\', and constructs the returned basename string. RT4.1 IdvFilename.h corroborates the algorithm/name.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 8,
+  "display_name": "OB_IdvNoPath_010201A0",
   "end_ea": "0x7895DA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_789430",
+  "name": "OB_IdvNoPath_010201A0",
   "segment": ".text",
   "sha256": "9e72b0622a7269107657a07de52f21e23aa5d17332be364f5cb8df7c3f2ddc41",
   "size": 426,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x789430",
-  "type": "int __thiscall(char *this, int)",
-  "xrefs_from_count": 157,
+  "total_chunk_size": 483,
+  "type": "OB_stString28_010201A0 *__thiscall(const OB_stString28_010201A0 *filename, OB_stString28_010201A0 *result)",
+  "xrefs_from_count": 180,
   "xrefs_to_count": 6
 }

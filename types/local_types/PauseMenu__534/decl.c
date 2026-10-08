@@ -1,1 +1,1 @@
-PauseMenu
+struct PauseMenu;

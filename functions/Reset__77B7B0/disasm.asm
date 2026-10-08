@@ -1,4 +1,4 @@
-0x77B7B0: sub     esp, 8
+0x77B7B0: sub     esp, 8; Reset tracked DX9 render state and common Gamebryo defaults, including blend/test, depth, cull, fill, fog, and texture state caches.
 0x77B7B3: push    esi
 0x77B7B4: mov     esi, ecx
 0x77B7B6: mov     eax, [esi]
@@ -117,7 +117,7 @@
 0x77B8B7: push    0
 0x77B8B9: push    1Ch
 0x77B8BB: mov     ecx, esi
-0x77B8BD: call    edx
+0x77B8BD: call    edx; Fog decode: Reset disables fixed-function fog with D3DRS_FOGENABLE=0; shader paths upload their own fog constants.
 0x77B8BF: mov     cl, [esi+8]
 0x77B8C2: mov     eax, [esi]
 0x77B8C4: mov     edx, [eax+64h]
@@ -136,21 +136,21 @@
 0x77B8E1: push    3
 0x77B8E3: push    8Ch ; 'Œ'
 0x77B8E8: mov     ecx, esi
-0x77B8EA: call    edx
+0x77B8EA: call    edx; Fog decode: Reset sets fixed-function vertex fog mode default.
 0x77B8EC: mov     eax, [esi]
 0x77B8EE: mov     edx, [eax+64h]
 0x77B8F1: push    0
 0x77B8F3: push    0
 0x77B8F5: push    30h ; '0'
 0x77B8F7: mov     ecx, esi
-0x77B8F9: call    edx
+0x77B8F9: call    edx; Fog decode: Reset disables fixed-function range fog.
 0x77B8FB: mov     eax, [esi]
 0x77B8FD: mov     edx, [eax+64h]
 0x77B900: push    0
 0x77B902: push    0
 0x77B904: push    22h ; '"'
 0x77B906: mov     ecx, esi
-0x77B908: call    edx
+0x77B908: call    edx; Fog decode: Reset initializes fixed-function D3DRS_FOGCOLOR to 0.
 0x77B90A: mov     eax, [esi]
 0x77B90C: mov     edx, [eax+64h]
 0x77B90F: push    0
@@ -174,14 +174,14 @@
 0x77B93B: call    edx
 0x77B93D: fnstcw  [esp+0Ch+var_6]
 0x77B941: mov     eax, ds:0B3FA90h
-0x77B946: mov     [esi+8Ch], eax
+0x77B946: mov     [esi+8Ch], eax; Fog decode: Reset copies default fog color R from B3FA90 into renderer current fog color cache.
 0x77B94C: movzx   eax, [esp+0Ch+var_6]
 0x77B951: mov     ecx, ds:0B3FA94h
-0x77B957: mov     [esi+90h], ecx
+0x77B957: mov     [esi+90h], ecx; Fog decode: Reset copies default fog color G from B3FA94 into renderer current fog color cache.
 0x77B95D: mov     edx, ds:0B3FA98h
 0x77B963: or      eax, 0C00h
 0x77B968: mov     [esp+0Ch+var_4], eax
-0x77B96C: mov     [esi+94h], edx
+0x77B96C: mov     [esi+94h], edx; Fog decode: Reset copies default fog color B from B3FA98 into renderer current fog color cache.
 0x77B972: fld     dword ptr [esi+8Ch]
 0x77B978: fld     qword ptr ds:0A3DDD8h
 0x77B97E: fmul    st(1), st
@@ -217,7 +217,7 @@
 0x77B9F6: movzx   eax, dl
 0x77B9F9: fldcw   [esp+0Ch+var_6]
 0x77B9FD: or      ecx, eax
-0x77B9FF: mov     [esi+98h], ecx
+0x77B9FF: mov     [esi+98h], ecx; Fog decode: packs cached current fog color; fixed-function/cache boundary, not world shader fog source.
 0x77BA05: pop     esi
 0x77BA06: add     esp, 8
 0x77BA09: retn

@@ -1,8 +1,9 @@
+// Verified active-effect list save layout: TESSaveLoadGame_UseSaveGameBlocks controls whether the list emits a BLOK header and reserves/backpatches a block size. The list always reserves and patches a UInt16 effect count. Per-effect records separately use the save version threshold 0x2A to include a UInt16 record-size field.
 int __cdecl ActiveEffect_Base_SaveAEList(
         int a1,
         int a2,
         int a3,
-        char a4,
+        int a4,
         int a5,
         int a6,
         int a7,

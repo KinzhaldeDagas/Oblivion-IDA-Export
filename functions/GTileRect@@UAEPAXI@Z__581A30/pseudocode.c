@@ -1,13 +1,7 @@
-TileRect *__userpurge TileRect::`scalar deleting destructor'@<eax>(
-        TileRect *this@<ecx>,
-        char a2@<bpl>,
-        double a3@<st2>,
-        double a4@<st1>,
-        double a5@<st0>,
-        char a6)
+TileRect *__thiscall TileRect::`scalar deleting destructor'(TileRect *this, char a2)
 {
-  TileRect::~TileRect(this, a2, a3, a4, a5);
-  if ( (a6 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  TileRect::~TileRect(this); /*0x581a33*/
+  if ( (a2 & 1) != 0 ) /*0x581a3d*/
+    FormHeapFree((unsigned int)this); /*0x581a40*/
+  return this; /*0x581a4a*/
 }

@@ -1,11 +1,11 @@
-int *__stdcall sub_7AD1C0(_DWORD *a1, int a2)
+BSTPersistentListPointerNode *__stdcall sub_7AD1C0(BSTPersistentListPointer *a1, void *payloadAddress)
 {
-  int *result; // eax
+  BSTPersistentListPointerNode *result; // eax
 
-  if ( a1 )
+  if ( a1 ) /*0x7ad1c6*/
   {
-    if ( a2 )
-      return sub_7ABDE0(a1, &a2);
+    if ( payloadAddress ) /*0x7ad1cd*/
+      return BSTPersistentList_AppendTailReusingFreeNode(a1, &payloadAddress); /*0x7ad1d4*/
   }
-  return result;
+  return result; /*0x7ad1d9*/
 }

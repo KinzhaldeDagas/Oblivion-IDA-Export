@@ -26,8 +26,8 @@
 0x6092E4: cmp     dword ptr [eax], 1
 0x6092E7: jnz     short loc_609307
 0x6092E9: mov     ecx, [eax+2Ch]
-0x6092EC: push    ecx
-0x6092ED: call    sub_480340
+0x6092EC: push    ecx; object
+0x6092ED: call    NiAVObject_FindBhkCollisionObjectRecursive; Returns the first bhk collision object found on object or recursively beneath its NiNode children. This is structural traversal, independent of node names.
 0x6092F2: add     esp, 4
 0x6092F5: test    eax, eax
 0x6092F7: jnz     short loc_60931E
@@ -64,7 +64,7 @@
 0x609352: rep movsd
 0x609354: mov     esi, [esp+170h+var_158]
 0x609358: push    esi
-0x609359: push    offset dword_BA8018
+0x609359: push    offset stru_BA8018
 0x60935E: call    NiRTTI__IsObjectOfRTTIType
 0x609363: add     esp, 8
 0x609366: test    al, al
@@ -72,7 +72,7 @@
 0x60936A: lea     edx, [esi+20h]
 0x60936D: push    edx
 0x60936E: lea     ecx, [esp+174h+var_50]
-0x609375: call    sub_8B1DD0
+0x609375: call    hkMatrix3_SetFromQuaternion; Converts a quaternion into a 3x3 basis matrix. 0x896000 uses this during per-frame movement basis refresh.
 0x60937A: movaps  xmm0, xmmword ptr [esi+30h]
 0x60937E: lea     eax, [esp+170h+var_50]
 0x609385: push    eax
@@ -84,13 +84,13 @@
 0x60939B: lea     edx, [esp+170h+a3]
 0x60939F: mov     ecx, 0Dh
 0x6093A4: lea     esi, [esp+170h+var_120]
-0x6093A8: lea     edi, [esp+170h+var_B8]
-0x6093AF: push    edx
-0x6093B0: lea     eax, [esp+174h+var_84]
+0x6093A8: lea     edi, [esp+170h+parent]
+0x6093AF: push    edx; local
+0x6093B0: lea     eax, [esp+174h+out]
 0x6093B7: rep movsd
-0x6093B9: push    eax
-0x6093BA: lea     ecx, [esp+178h+var_B8]
-0x6093C1: call    sub_53D7A0
+0x6093B9: push    eax; out
+0x6093BA: lea     ecx, [esp+178h+parent]; parent
+0x6093C1: call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.
 0x6093C6: mov     ecx, 0Dh
 0x6093CB: mov     esi, eax
 0x6093CD: lea     edi, [esp+170h+var_120]
@@ -98,7 +98,7 @@
 0x6093D3: mov     esi, [esp+170h+var_15C]
 0x6093D7: mov     eax, [esi+5Ch]
 0x6093DA: fld1
-0x6093DC: fst     [esp+170h+var_F0]
+0x6093DC: fst     [esp+170h+var_120.scale]
 0x6093E3: lea     esi, [eax+30h]
 0x6093E6: mov     ecx, 9
 0x6093EB: lea     edi, [esp+170h+a4]
@@ -109,13 +109,13 @@
 0x609401: mov     [esp+170h+var_C4], edx
 0x609408: mov     eax, [eax+0Ch]
 0x60940B: lea     ecx, [esp+170h+a4]
-0x609412: push    ecx; a4
+0x609412: push    ecx; local
 0x609413: fstp    [esp+174h+var_BC]
 0x60941A: lea     edx, [esp+174h+a3]
-0x60941E: push    edx; a3
-0x60941F: lea     ecx, [esp+178h+var_120]
+0x60941E: push    edx; out
+0x60941F: lea     ecx, [esp+178h+var_120]; parent
 0x609423: mov     [esp+178h+var_C0], eax
-0x60942A: call    sub_53D7A0
+0x60942A: call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.
 0x60942F: mov     esi, [esp+170h+var_130]
 0x609433: mov     edi, [esp+170h+var_12C]
 0x609437: mov     ecx, [esp+170h+var_128]
@@ -139,7 +139,7 @@
 0x60946E: mov     ecx, ebx; this
 0x609470: mov     [ebx+5Ch], edx
 0x609473: fstp    [esp+178h+a2]; a2
-0x609476: call    NiAVObject_UpdateNiAVObject
+0x609476: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x60947B: mov     ecx, [esp+170h+var_4]
 0x609482: pop     edi
 0x609483: pop     esi

@@ -36,7 +36,7 @@
 0x6A4DD3: jz      short loc_6A4DDE
 0x6A4DD5: push    0
 0x6A4DD7: mov     ecx, ebx
-0x6A4DD9: call    ActiveEffect_Base_Remove
+0x6A4DD9: call    ActiveEffect_Base_Remove; Verified termination API: sets bTerminated=1. When its flush flag is true, immediately invokes ActiveEffect_Base_ProcessEffect to run termination cleanup.
 0x6A4DDE: pop     edi
 0x6A4DDF: pop     esi
 0x6A4DE0: pop     ebx

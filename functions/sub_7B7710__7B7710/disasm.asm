@@ -81,7 +81,7 @@
 0x7B7818: retn
 0x7B7819: push    offset aTangentSpaceBi; "Tangent space (binormal & tangent vecto"...
 0x7B781E: mov     ecx, edi
-0x7B7820: call    NiObjectNET_GetExtraData
+0x7B7820: call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.
 0x7B7825: cmp     eax, esi
 0x7B7827: jz      loc_7B78C8
 0x7B782D: mov     ecx, [edi+0B4h]
@@ -91,7 +91,7 @@
 0x7B783D: add     esi, esi
 0x7B783F: add     esi, esi
 0x7B7841: lea     edx, [esi+eax]
-0x7B7844: mov     [esp+0B4h+var_7C], eax
+0x7B7844: mov     [esp+0B4h+source], eax
 0x7B7848: mov     [esp+0B4h+Src], edx
 0x7B784C: xor     ecx, ecx
 0x7B784E: mov     eax, edi
@@ -115,16 +115,16 @@
 0x7B787F: mov     ecx, [ebx+0Ch]
 0x7B7882: mov     [ebx+10h], eax
 0x7B7885: mov     eax, [esp+0BCh+Src]
-0x7B7889: push    esi; Size
-0x7B788A: push    eax; Src
-0x7B788B: push    ecx; Dst
-0x7B788C: call    _memcpy
-0x7B7891: mov     edx, [esp+0C8h+var_7C]
+0x7B7889: push    esi; byteCount
+0x7B788A: push    eax; source
+0x7B788B: push    ecx; destination
+0x7B788C: call    _memcpy;
+0x7B7891: mov     edx, [esp+0C8h+source]
 0x7B7895: mov     eax, [ebx+10h]
-0x7B7898: push    esi; Size
-0x7B7899: push    edx; Src
-0x7B789A: push    eax; Dst
-0x7B789B: call    _memcpy
+0x7B7898: push    esi; byteCount
+0x7B7899: push    edx; source
+0x7B789A: push    eax; destination
+0x7B789B: call    _memcpy;
 0x7B78A0: mov     ecx, [ebp+arg_0]
 0x7B78A3: add     esp, 20h
 0x7B78A6: push    offset aTangentSpaceBi; "Tangent space (binormal & tangent vecto"...
@@ -201,7 +201,7 @@
 0x7B7973: mov     [esp+0B4h+var_98], ecx
 0x7B7977: mov     ecx, [eax+20h]
 0x7B797A: push    esi
-0x7B797B: push    offset dword_B3FD04
+0x7B797B: push    offset stru_B3FD04
 0x7B7980: mov     [esp+0BCh+var_18], esi
 0x7B7987: mov     dword ptr [esp+0BCh+var_38], edx
 0x7B798E: mov     dword ptr [esp+0BCh+var_40+4], ebx
@@ -263,7 +263,7 @@
 0x7B7A3C: or      ecx, eax
 0x7B7A3E: push    ecx; Size
 0x7B7A3F: call    FormHeapAlloc
-0x7B7A44: mov     [esp+0C8h+var_7C], eax
+0x7B7A44: mov     [esp+0C8h+source], eax
 0x7B7A48: mov     eax, [esp+0C8h+var_98]
 0x7B7A4C: xor     ecx, ecx
 0x7B7A4E: mov     edx, 0Ch
@@ -535,7 +535,7 @@
 0x7B7DC6: add     eax, eax
 0x7B7DC8: add     eax, eax
 0x7B7DCA: fld     dword ptr [eax+esi+4]
-0x7B7DCE: mov     ecx, [esp+0B4h+var_7C]
+0x7B7DCE: mov     ecx, [esp+0B4h+source]
 0x7B7DD2: fld     dword ptr [eax+edx+4]
 0x7B7DD6: add     ecx, eax
 0x7B7DD8: fld     dword ptr [eax+esi]
@@ -610,22 +610,22 @@
 0x7B7E99: fstp    [esp+0B4h+var_48]
 0x7B7E9D: mov     eax, [esp+0B4h+var_48]
 0x7B7EA1: mov     [edi+8], eax
-0x7B7EA4: call    sub_43F350
+0x7B7EA4: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x7B7EA9: fstp    st
 0x7B7EAB: mov     ecx, edi
-0x7B7EAD: call    sub_43F350
+0x7B7EAD: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x7B7EB2: fstp    st
 0x7B7EB4: add     ebx, 1
 0x7B7EB7: movzx   eax, bx
 0x7B7EBA: cmp     eax, [esp+0B4h+var_98]
 0x7B7EBE: jb      loc_7B7DBF
-0x7B7EC4: mov     ecx, [esp+0B4h+var_7C]
+0x7B7EC4: mov     ecx, [esp+0B4h+source]
 0x7B7EC8: mov     edi, [esp+0B4h+var_78]
 0x7B7ECC: mov     edx, [esp+0B4h+Src]
 0x7B7ED0: push    esi
 0x7B7ED1: mov     [edi+0Ch], ecx
 0x7B7ED4: mov     [edi+10h], edx
-0x7B7ED7: call    FormHeapFree
+0x7B7ED7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7B7EDC: add     esp, 4
 0x7B7EDF: mov     eax, edi
 0x7B7EE1: mov     ecx, [esp+0B4h+var_C]
@@ -637,3 +637,15 @@
 0x7B7EF3: mov     esp, ebp
 0x7B7EF5: pop     ebp
 0x7B7EF6: retn
+0x9CDAB0: mov     eax, [ebp+var_80]
+0x9CDAB3: push    eax
+0x9CDAB4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CDAB9: pop     ecx
+0x9CDABA: retn
+0x9CDABB: mov     edx, [esp-4+arg_4]
+0x9CDABF: lea     eax, [edx-0A4h]
+0x9CDAC5: mov     ecx, [edx-0A8h]
+0x9CDACB: xor     ecx, eax
+0x9CDACD: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CDAD2: mov     eax, offset stru_AF6C90
+0x9CDAD7: jmp     ___CxxFrameHandler3

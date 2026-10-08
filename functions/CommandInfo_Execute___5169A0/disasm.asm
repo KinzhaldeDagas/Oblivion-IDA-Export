@@ -1,4 +1,4 @@
-0x5169A0: push    0FFFFFFFFh
+0x5169A0: push    0FFFFFFFFh; TES4 authoritative script instruction executor. Handles expression/control opcodes directly and dispatches ordinary CommandInfo execute callbacks for vanilla script commands.
 0x5169A2: push    offset CommandInfo_Execute?_SEH
 0x5169A7: mov     eax, large fs:0
 0x5169AD: push    eax
@@ -29,7 +29,7 @@
 0x516A15: mov     [esp+75Ch+var_730], edx
 0x516A19: mov     [esp+75Ch+a3], eax
 0x516A1D: jnz     loc_516B55
-0x516A23: movsx   ecx, word ptr [edi+eax]
+0x516A23: movsx   ecx, word ptr [edi+eax]; Begin-block event id dispatch: opcode 0x10 reads event id, uses the event callback table at 0xB0AF58, and skips the block when the callback result is 0.
 0x516A27: cmp     ecx, 1Eh
 0x516A2A: lea     edx, [eax+2]
 0x516A2D: mov     [esp+75Ch+a3], edx
@@ -63,7 +63,7 @@
 0x516A8F: push    ecx; a3
 0x516A90: push    edi; a2
 0x516A91: push    eax; a1
-0x516A92: call    Script_ExtractArgs
+0x516A92: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x516A97: add     esp, 1Ch
 0x516A9A: jmp     loc_5172D3; jumptable 00516B76 cases 16,17,28,29
 0x516A9F: cmp     ds:byte_B0AF58[eax], 0
@@ -161,7 +161,7 @@
 0x516BD1: push    eax; int
 0x516BD2: push    ecx; int
 0x516BD3: mov     ecx, ebp; int
-0x516BD5: call    Script_GetRefVariableByIndex
+0x516BD5: call    Script_GetRefVariableByIndex; Hot Reload OBSE decode: Script ref-variable lookup. Uses globals B361B0/B361B4/B361B8/B09E1C as a last-ref cache.
 0x516BDA: cmp     byte ptr [esp+75Ch+a12], 0
 0x516BE2: mov     [esp+75Ch+var_730], eax
 0x516BE6: jnz     short loc_516C60
@@ -248,9 +248,9 @@
 0x516CF5: call    PrintError
 0x516CFA: add     esp, 10h
 0x516CFD: mov     dword ptr [ebp+20h], 0
-0x516D04: lea     ecx, [esp+75Ch+var_720]; void *
+0x516D04: lea     ecx, [esp+75Ch+var_720]; this
 0x516D08: mov     [esp+75Ch+var_4], 0FFFFFFFFh
-0x516D13: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x516D13: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x516D18: xor     al, al
 0x516D1A: jmp     loc_5172D5
 0x516D1F: cmp     byte ptr [esp+75Ch+a12], 0
@@ -286,7 +286,7 @@
 0x516D86: jz      short loc_516D90
 0x516D88: cmp     al, 73h ; 's'
 0x516D8A: jnz     loc_516E12
-0x516D90: call    Double_To_SInt32
+0x516D90: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x516D95: movsx   esi, word ptr [esp+75Ch+var_73C]
 0x516D9A: mov     ebx, eax
 0x516D9C: mov     [esp+75Ch+var_734], ebx
@@ -354,11 +354,11 @@
 0x516E59: test    dl, 1
 0x516E5C: jnz     short loc_516E86
 0x516E5E: mov     ecx, esi; this
-0x516E60: call    TESObjectREFR_GetParentCell
+0x516E60: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x516E65: test    eax, eax
 0x516E67: jz      short loc_516E76
 0x516E69: mov     ecx, esi; this
-0x516E6B: call    TESObjectREFR_GetParentCell
+0x516E6B: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x516E70: cmp     byte ptr [eax+26h], 6
 0x516E74: jz      short loc_516E86
 0x516E76: mov     ecx, ds:0B333A0h
@@ -366,9 +366,9 @@
 0x516E7D: call    sub_441670
 0x516E82: jmp     short loc_516E86
 0x516E84: fstp    st
-0x516E86: lea     ecx, [esp+75Ch+var_720]; void *
+0x516E86: lea     ecx, [esp+75Ch+var_720]; this
 0x516E8A: mov     [esp+75Ch+var_4], 0FFFFFFFFh
-0x516E95: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x516E95: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x516E9A: jmp     loc_5172D3; jumptable 00516B76 cases 16,17,28,29
 0x516E9F: mov     eax, [esi+20h]; jumptable 00516B76 case 22
 0x516EA2: cmp     dword ptr [esi+eax*4+24h], 0
@@ -483,9 +483,9 @@
 0x517023: jmp     loc_5172D3; jumptable 00516B76 cases 16,17,28,29
 0x517028: cmp     byte ptr [esp+75Ch+a12], 0; jumptable 00516B76 case 30
 0x517030: jnz     loc_5172D3; jumptable 00516B76 cases 16,17,28,29
-0x517036: mov     eax, [esp+75Ch+ArgList]; jumptable 00516B76 default case, cases 18-20,26,27
+0x517036: mov     eax, [esp+75Ch+ArgList]; Default script-command path: lookup CommandInfo by opcode, error if the opcode is not in the vanilla lookup ranges.
 0x51703D: push    eax; a1
-0x51703E: call    ScriptRunner_LookupCommandByOpcode
+0x51703E: call    ScriptRunner_LookupCommandInfoByOpcode; TES4 authoritative: vanilla command lookup. Supports opcode ranges 0x100..0x182 at 0xB0B420 and 0x1000..0x1170 at 0xB0C8C0; each CommandInfo record is 0x28 bytes.
 0x517043: add     esp, 4
 0x517046: test    eax, eax
 0x517048: jnz     short loc_5170C9
@@ -512,18 +512,18 @@
 0x517099: call    Interface_ConsolePrint
 0x51709E: add     esp, 4
 0x5170A1: push    esi
-0x5170A2: call    FormHeapFree
+0x5170A2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5170A7: add     esp, 4
 0x5170AA: xor     al, al
 0x5170AC: jmp     loc_5172D5
 0x5170B1: call    PrintError
 0x5170B6: add     esp, 4
 0x5170B9: push    esi
-0x5170BA: call    FormHeapFree
+0x5170BA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5170BF: add     esp, 4
 0x5170C2: xor     al, al
 0x5170C4: jmp     loc_5172D5
-0x5170C9: cmp     byte ptr [eax+10h], 0
+0x5170C9: cmp     byte ptr [eax+10h], 0; Checks CommandInfo packed field at +0x10 low byte: command requires a parent/reference when nonzero.
 0x5170CD: mov     ecx, [eax+14h]
 0x5170D0: mov     [esp+75Ch+a1], ecx
 0x5170D4: jz      loc_517171
@@ -566,9 +566,9 @@
 0x51716A: xor     al, al
 0x51716C: jmp     loc_5172D5
 0x517171: cmp     byte ptr [esp+75Ch+a12], 0
-0x517179: jz      loc_517295
+0x517179: jz      loc_517295; Execution gate: when a12/skip-mode is clear, vanilla calls CommandInfo.execute; when set, it falls through to the argument-consume path without invoking the command.
 0x51717F: test    ecx, ecx
-0x517181: jz      loc_5172D3; jumptable 00516B76 cases 16,17,28,29
+0x517181: jz      loc_5172D3; Skip-mode/reference-missing fallthrough: if parameters exist, vanilla consumes compiled args with Script_ExtractArgs so the opcode offset remains synchronized.
 0x517187: mov     ecx, [esp+75Ch+var_73C]
 0x51718B: cmp     dword ptr [ecx], 0
 0x51718E: jz      loc_5172D3; jumptable 00516B76 cases 16,17,28,29
@@ -583,7 +583,7 @@
 0x5171A5: push    ecx; a3
 0x5171A6: push    edi; a2
 0x5171A7: push    edx; a1
-0x5171A8: call    Script_ExtractArgs
+0x5171A8: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x5171AD: mov     eax, [esp+778h+ArgList]
 0x5171B4: add     esp, 1Ch
 0x5171B7: sub     eax, 1000h
@@ -624,3 +624,98 @@
 0x517224: movzx   edx, ax
 0x517227: mov     [esp+75Ch+var_73C], edx
 0x51722B: jmp     short loc_517230
+0x517230: mov     eax, [esi+8]
+0x517233: mov     ecx, [esi]
+0x517235: push    1
+0x517237: push    eax
+0x517238: push    ebp
+0x517239: push    ecx
+0x51723A: push    ebx
+0x51723B: lea     edx, [esp+770h+a3]
+0x51723F: push    edx
+0x517240: lea     eax, [esp+774h+var_728]
+0x517244: push    edi
+0x517245: push    eax
+0x517246: call    ExecuteScriptInstruction?
+0x51724B: add     esp, 20h
+0x51724E: sub     [esp+75Ch+var_73C], 1
+0x517253: jnz     short loc_517230
+0x517255: mov     ecx, [esp+75Ch+a3]
+0x517259: movzx   eax, word ptr [edi+ecx]
+0x51725D: add     ecx, 2
+0x517260: test    ax, ax
+0x517263: mov     [esp+75Ch+a3], ecx
+0x517267: jle     short loc_5172D3; jumptable 00516B76 cases 16,17,28,29
+0x517269: movzx   ecx, ax
+0x51726C: mov     [esp+75Ch+var_73C], ecx
+0x517270: mov     edx, [esi+8]
+0x517273: mov     eax, [esi]
+0x517275: push    edx; l
+0x517276: mov     edx, [esp+760h+a1]
+0x51727A: push    ebp; a6
+0x51727B: push    eax; a5
+0x51727C: push    ebx; a4
+0x51727D: lea     ecx, [esp+76Ch+a3]
+0x517281: push    ecx; a3
+0x517282: push    edi; a2
+0x517283: push    edx; a1
+0x517284: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
+0x517289: add     esp, 1Ch
+0x51728C: sub     [esp+75Ch+var_73C], 1
+0x517291: jnz     short loc_517270
+0x517293: jmp     short loc_5172D3; jumptable 00516B76 cases 16,17,28,29
+0x517295: cmp     byte ptr [eax+25h], 0; CommandInfo +0x24 flag byte1 marks commands that set ScriptRunner +0xA1 before execute; observed on side-effecting commands such as Activate/MoveTo/Position/ForceFlee.
+0x517299: mov     ecx, [eax+18h]; Calls CommandInfo.execute with vanilla command ABI: ParamInfo*, script data, thisObj, containingObj, Script*, ScriptEventList*, result storage, opcode offset pointer.
+0x51729C: jz      short loc_5172A5
+0x51729E: mov     byte ptr [esi+0A1h], 1
+0x5172A5: test    ecx, ecx
+0x5172A7: jz      loc_516ACF
+0x5172AD: lea     eax, [esp+75Ch+a3]
+0x5172B1: push    eax
+0x5172B2: mov     eax, [esi+8]
+0x5172B5: lea     edx, [esp+760h+var_730]
+0x5172B9: push    edx
+0x5172BA: mov     edx, [esi]
+0x5172BC: push    eax
+0x5172BD: mov     eax, [esp+768h+a1]
+0x5172C1: push    ebp
+0x5172C2: push    edx
+0x5172C3: push    ebx
+0x5172C4: push    edi
+0x5172C5: push    eax
+0x5172C6: call    ecx
+0x5172C8: add     esp, 20h
+0x5172CB: test    al, al
+0x5172CD: jz      loc_516ACF
+0x5172D3: mov     al, 1; jumptable 00516B76 cases 16,17,28,29
+0x5172D5: mov     ecx, dword ptr [esp+75Ch+var_C]
+0x5172DC: mov     large fs:0, ecx
+0x5172E3: pop     ecx
+0x5172E4: pop     edi
+0x5172E5: pop     esi
+0x5172E6: pop     ebp
+0x5172E7: pop     ebx
+0x5172E8: mov     ecx, [esp+748h+var_10]
+0x5172EF: xor     ecx, esp
+0x5172F1: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x5172F6: add     esp, 748h
+0x5172FC: retn    24h ; '$'
+0x9B72F0: lea     ecx, [ebp-720h]; this
+0x9B72F6: jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x9B72FB: lea     ecx, [ebp-720h]; this
+0x9B7301: jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x9B7306: lea     ecx, [ebp-744h]; void *
+0x9B730C: jmp     BSStringT_Clear
+0x9B7311: lea     ecx, [ebp-744h]; void *
+0x9B7317: jmp     BSStringT_Clear
+0x9B731C: mov     edx, [esp+ArgList]
+0x9B7320: lea     eax, [edx-74Ch]
+0x9B7326: mov     ecx, [edx-750h]
+0x9B732C: xor     ecx, eax
+0x9B732E: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B7333: add     eax, 10h
+0x9B7336: mov     ecx, [edx-4]
+0x9B7339: xor     ecx, eax
+0x9B733B: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B7340: mov     eax, offset stru_AE1F38
+0x9B7345: jmp     ___CxxFrameHandler3

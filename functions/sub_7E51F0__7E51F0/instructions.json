@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x7E51F0",
-    "line": "sub     esp, 28h",
+    "line": "sub     esp, 28h; Verified (Oblivion): updates the ParticleShaderProperty particleInstanceBuffer_6C using elapsed time, currentParticleLevel_80 and fParticleLifetime_84; it retires expired slots, increments/decrements activeParticleCount_7C, and dispatches new particles by emitterType_70. Each Oblivion record is 0x20 bytes. Fallout's UpdateParticles uses 0x30-byte ParticleData records and different field offsets.",
     "mnemonic": "sub",
     "size": 3
   },
   {
     "ea": "0x7E51F3",
-    "line": "fld     [esp+28h+arg_0]",
+    "line": "fld     [esp+28h+elapsedSeconds]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x7E5219",
-    "line": "call    sub_7E2D60",
+    "line": "call    ParticleShaderProperty_GetSlotCapacity; Verified (Oblivion): returns the cached slot capacity, initialized to 40 or 120 according to renderer capability, and used to size particleInstanceBuffer_6C and update iteration.",
     "mnemonic": "call",
     "size": 5
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x7E522E",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x7E5239",
-    "line": "jl      short loc_7E523F",
+    "line": "jl      short loc_7E523F; Verified (Oblivion): currentParticleLevel_80 multiplied by slotCapacity sets the desired maximum active-particle count.",
     "mnemonic": "jl",
     "size": 2
   },
@@ -163,13 +163,13 @@
   },
   {
     "ea": "0x7E524D",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7E5252",
-    "line": "cmp     [esp+38h+arg_4], 0",
+    "line": "cmp     [esp+38h+applyWorldOffset], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x7E5280",
-    "line": "mov     eax, [eax+1Ch]",
+    "line": "mov     eax, [eax+1Ch]; Verified (Oblivion): when applyWorldOffset is enabled, UpdateParticles follows geometry_120's parent/node hierarchy and searches for Bip01 to compute the coordinate offset.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -250,12 +250,6 @@
     "line": "jmp     short loc_7E5290",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x7E5289",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
   },
   {
     "ea": "0x7E5290",
@@ -469,7 +463,7 @@
   },
   {
     "ea": "0x7E5313",
-    "line": "fld     [esp+38h+arg_0]",
+    "line": "fld     [esp+38h+elapsedSeconds]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -553,7 +547,7 @@
   },
   {
     "ea": "0x7E533F",
-    "line": "jp      loc_7E542C",
+    "line": "jp      loc_7E542C; Verified (Oblivion): particle slots expire when elapsedSeconds - birthTime exceeds fParticleLifetime_84 scaled by lifetimeRandomFactor_1C.",
     "mnemonic": "jp",
     "size": 6
   },
@@ -691,7 +685,7 @@
   },
   {
     "ea": "0x7E538C",
-    "line": "add     dword ptr [ebp+7Ch], 0FFFFFFFFh",
+    "line": "add     dword ptr [ebp+7Ch], 0FFFFFFFFh; Verified (Oblivion): expiring an active particle clears its slot and decrements activeParticleCount_7C.",
     "mnemonic": "add",
     "size": 4
   },
@@ -703,7 +697,7 @@
   },
   {
     "ea": "0x7E5392",
-    "line": "cmp     [esp+38h+arg_8], 0",
+    "line": "cmp     [esp+38h+allowEmission], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -763,7 +757,7 @@
   },
   {
     "ea": "0x7E53B9",
-    "line": "jz      short loc_7E53DB",
+    "line": "jz      short loc_7E53DB; Verified (Oblivion): emitterType_70 value 0 dispatches to GenerateFromGeometry.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -775,7 +769,7 @@
   },
   {
     "ea": "0x7E53BD",
-    "line": "jz      short loc_7E53CF",
+    "line": "jz      short loc_7E53CF; Verified (Oblivion): emitterType_70 value 1 dispatches to GenerateFromSkinnedGeometry, which samples NiGeometry with skinData. Fallout labels its homolog GenerateFromCollisionBones; that terminology is a Probable correspondence.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -787,13 +781,13 @@
   },
   {
     "ea": "0x7E53C1",
-    "line": "jnz     short loc_7E53E7",
+    "line": "jnz     short loc_7E53E7; Verified (Oblivion): emitterType_70 value 2 dispatches to GenerateFromRay.",
     "mnemonic": "jnz",
     "size": 2
   },
   {
     "ea": "0x7E53C3",
-    "line": "push    edi",
+    "line": "push    edi; slotIndex",
     "mnemonic": "push",
     "size": 1
   },
@@ -805,13 +799,13 @@
   },
   {
     "ea": "0x7E53C6",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7E53C8",
-    "line": "call    sub_7E5020",
+    "line": "call    ParticleShaderProperty_GenerateFromRay; Verified (Oblivion): generates a particle along the target node's local ray using rayLength_74, optionally transforms it to world coordinates when bWorldspace_78 is set, and writes the 0x20-byte slot record. This is emitterType_70 value 2, kParticleShaderEmitter_Ray.",
     "mnemonic": "call",
     "size": 5
   },
@@ -823,7 +817,7 @@
   },
   {
     "ea": "0x7E53CF",
-    "line": "push    edi",
+    "line": "push    edi; slotIndex",
     "mnemonic": "push",
     "size": 1
   },
@@ -835,13 +829,13 @@
   },
   {
     "ea": "0x7E53D2",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7E53D4",
-    "line": "call    sub_7E4D20",
+    "line": "call    ParticleShaderProperty_GenerateFromSkinnedGeometry; Verified (Oblivion): samples a target geometry with non-null skinData and stores a transformed particle position/direction; this is emitterType_70 value 1, kParticleShaderEmitter_SkinnedGeometry. Fallout calls the analogous mode GenerateFromCollisionBones; correspondence to that exact label is Probable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -853,7 +847,7 @@
   },
   {
     "ea": "0x7E53DB",
-    "line": "push    edi",
+    "line": "push    edi; slotIndex",
     "mnemonic": "push",
     "size": 1
   },
@@ -865,13 +859,13 @@
   },
   {
     "ea": "0x7E53DE",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7E53E0",
-    "line": "call    sub_7E4960",
+    "line": "call    ParticleShaderProperty_GenerateFromGeometry; Verified (Oblivion): samples NiGeometryData vertices/normals from a target geometry and writes a new particle instance record at slotIndex. This is emitterType_70 value 0, kParticleShaderEmitter_Geometry.",
     "mnemonic": "call",
     "size": 5
   },
@@ -889,13 +883,13 @@
   },
   {
     "ea": "0x7E53EB",
-    "line": "add     [ebp+7Ch], ebx",
+    "line": "add     [ebp+7Ch], ebx; Verified (Oblivion): successful emission increments activeParticleCount_7C.",
     "mnemonic": "add",
     "size": 3
   },
   {
     "ea": "0x7E53EE",
-    "line": "cmp     [esp+38h+arg_4], 0",
+    "line": "cmp     [esp+38h+applyWorldOffset], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1021,7 +1015,7 @@
   },
   {
     "ea": "0x7E5435",
-    "line": "jl      loc_7E5310",
+    "line": "jl      loc_7E5310; Verified (Oblivion): UpdateParticles iterates particle slots with a 0x20-byte stride, unlike Fallout's 0x30-byte ParticleData stride.",
     "mnemonic": "jl",
     "size": 6
   },
@@ -1039,7 +1033,7 @@
   },
   {
     "ea": "0x7E543F",
-    "line": "fld     [esp+38h+arg_0]",
+    "line": "fld     [esp+38h+elapsedSeconds]",
     "mnemonic": "fld",
     "size": 4
   },

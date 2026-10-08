@@ -1,19 +1,19 @@
 [
   {
     "ea": "0x79AA40",
-    "line": "push    ecx",
+    "line": "push    ecx; Thin forward-copy trampoline for initialized SFrondVertex ranges; delegates to 0x79A950.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79AA41",
-    "line": "mov     ecx, [esp+4+arg_4]",
+    "line": "mov     ecx, [esp+4+last]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79AA45",
-    "line": "mov     edx, [esp+4+arg_4]",
+    "line": "mov     edx, [esp+4+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x79AA51",
-    "line": "mov     eax, [esp+8+arg_8]",
+    "line": "mov     eax, [esp+8+destinationFirst]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x79AA56",
-    "line": "mov     ecx, [esp+0Ch+arg_4]",
+    "line": "mov     ecx, [esp+0Ch+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,31 +61,31 @@
   },
   {
     "ea": "0x79AA5B",
-    "line": "mov     edx, [esp+10h+arg_0]",
+    "line": "mov     edx, [esp+10h+first]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79AA5F",
-    "line": "push    eax",
+    "line": "push    eax; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79AA60",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79AA61",
-    "line": "push    edx",
+    "line": "push    edx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79AA62",
-    "line": "call    sub_79A950",
+    "line": "call    OB_SFrondVertex_CopyForward_010201A0; Forward copy/assignment of initialized 0x38-byte SFrondVertex records from [first,last) into destinationFirst; returns destination end.",
     "mnemonic": "call",
     "size": 5
   },

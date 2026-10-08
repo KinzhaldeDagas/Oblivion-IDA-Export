@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E7D10",
-    "line": "cmp     byte ptr ds:0B35F84h, 0",
+    "line": "cmp     byte ptr ds:0B35F84h, 0; Verified `TogglePathGrid` action: flips g_PathGridDebugRenderingEnabled, updates the shared debug root, then rebuilds or clears the PathGrid visuals for the current interior grid or every loaded exterior grid cell. It is reached by ScriptCommand_TogglePathGrid. Fallout comparison: Script::ToggleNavMeshFunction (Fallout 0x823CED68) handles selectable draw modes, cover/connection overlays and transparency, and adds per-cell navmesh draws; Oblivion exposes one PathGrid display toggle and updates loaded PathGrid roots. This is a directly observed subsystem divergence.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x4E7D1A",
-    "line": "push    eax",
+    "line": "push    eax; enabled",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E7D1B",
-    "line": "call    sub_4E76D0",
+    "line": "call    TESPathGrid_SetDebugRenderingEnabled; Verified debug-render root setter. Updates g_PathGridDebugRenderingEnabled. Enabling creates a shared NiNode, attaches DebugRender_GetOrCreateVertexColorProperty, and adds the root to TES/ObjectLODRoot; disabling removes the root, clears its child objects, releases it, and nulls g_PathGridDebugRenderRoot. Called by TESPathGrid_ToggleDebugRendering before per-cell render rebuild/clear.",
     "mnemonic": "call",
     "size": 5
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x4E7D35",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x4E7D44",
-    "line": "jmp     sub_4E71A0",
+    "line": "jmp     TESPathGrid_RebuildRenderedGraph; Verified rebuilds this PathGrid's render root and point/linked-reference visualization. It owns a NiNode at TESPathGrid+0x1C; each point receives a NiNode renderNode at +0x28 with an octahedron clone; adjacency uses NiLines segments; PGRL-associated references receive a marker/edge overlay from pointsByReference. It then attaches the grid root beneath the shared world ObjectLODRoot. Verified Fallout divergence: Fallout's TESObjectCELL::AttachToWorld adds draw-only navmeshes to NavMeshRender::spRootDrawNode, and TESObjectCELL::Detach removes them. Fallout uses a cell-scoped manager/root path; Oblivion uses per-PathGrid/per-point nodes.",
     "mnemonic": "jmp",
     "size": 5
   },
   {
     "ea": "0x4E7D49",
-    "line": "jmp     sub_4E5400",
+    "line": "jmp     TESPathGrid_ClearRenderedPointGeometry; Verified cleanup of TESPathGrid.renderNode (+0x1C): resets point render helpers, detaches the generated root from shared path-grid visual state, updates the root node, releases it, and clears the field.",
     "mnemonic": "jmp",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x4E7D7F",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x4E7D8E",
-    "line": "call    sub_4E71A0",
+    "line": "call    TESPathGrid_RebuildRenderedGraph; Verified rebuilds this PathGrid's render root and point/linked-reference visualization. It owns a NiNode at TESPathGrid+0x1C; each point receives a NiNode renderNode at +0x28 with an octahedron clone; adjacency uses NiLines segments; PGRL-associated references receive a marker/edge overlay from pointsByReference. It then attaches the grid root beneath the shared world ObjectLODRoot. Verified Fallout divergence: Fallout's TESObjectCELL::AttachToWorld adds draw-only navmeshes to NavMeshRender::spRootDrawNode, and TESObjectCELL::Detach removes them. Fallout uses a cell-scoped manager/root path; Oblivion uses per-PathGrid/per-point nodes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x4E7D9D",
-    "line": "call    sub_4E5400",
+    "line": "call    TESPathGrid_ClearRenderedPointGeometry; Verified cleanup of TESPathGrid.renderNode (+0x1C): resets point render helpers, detaches the generated root from shared path-grid visual state, updates the root node, releases it, and clears the field.",
     "mnemonic": "call",
     "size": 5
   },

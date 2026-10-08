@@ -1,12 +1,12 @@
-BSShaderProperty *__thiscall sub_7ED640(char **this, int a2)
+BSShaderProperty *__thiscall BSShaderProperty_CreateClone(BSShaderProperty *this, void *cloneProcess)
 {
   BSShaderProperty *v3; // eax
   BSShaderProperty *v4; // esi
 
-  v3 = (BSShaderProperty *)FormHeapAlloc(0x6Cu);
-  v4 = 0;
-  if ( v3 )
-    v4 = BSShaderProperty::BSShaderProperty(v3);
-  sub_7E2490(this, (int)v4, a2);
-  return v4;
+  v3 = (BSShaderProperty *)FormHeapAlloc(0x6Cu); /*0x7ed667*/
+  v4 = 0; /*0x7ed673*/
+  if ( v3 ) /*0x7ed67b*/
+    v4 = BSShaderProperty::BSShaderProperty(v3); /*0x7ed684*/
+  BSShaderProperty_CopyCloneMembers(this, v4, cloneProcess); /*0x7ed696*/
+  return v4; /*0x7ed69d*/
 }

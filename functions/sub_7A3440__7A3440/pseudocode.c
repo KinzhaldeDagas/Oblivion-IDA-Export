@@ -1,9 +1,9 @@
-int __stdcall sub_7A3440(_DWORD *a1)
+// Destroys one compact SIdvLeafTexture by releasing its filename only when the 28-byte small string is heap-backed.
+void __stdcall OB_SIdvLeafTexture_Destroy_010201A0(OB_SIdvLeafTexture_010201A0 *value)
 {
-  if ( a1[0xB] >= 0x10u )
-    FormHeapFree(a1[6]);
-  a1[0xB] = 0xF;
-  a1[0xA] = 0;
-  *((_BYTE *)a1 + 0x18) = 0;
-  return 0;
+  if ( value->filename.capacity >= 0x10 ) /*0x7a3449*/
+    FormHeapFree((unsigned int)value->filename.storage.heapData); /*0x7a344f*/
+  value->filename.capacity = 0xF; /*0x7a3459*/
+  value->filename.size = 0; /*0x7a3460*/
+  value->filename.storage.inlineData[0] = 0; /*0x7a3463*/
 }

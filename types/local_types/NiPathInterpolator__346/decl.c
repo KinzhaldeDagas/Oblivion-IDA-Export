@@ -1,1 +1,1 @@
-NiPathInterpolator
+struct NiPathInterpolator;

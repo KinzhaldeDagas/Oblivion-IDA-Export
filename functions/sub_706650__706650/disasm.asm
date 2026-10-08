@@ -1,4 +1,4 @@
-0x706650: push    esi
+0x706650: push    esi; Pass223: Clears default NiVertexColorProperty global 0x00B3F980.
 0x706651: mov     esi, ds:0B3F980h
 0x706657: test    esi, esi
 0x706659: jz      short loc_706681

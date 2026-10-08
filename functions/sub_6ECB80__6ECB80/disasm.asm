@@ -12,7 +12,7 @@
 0x6ECB98: test    eax, eax
 0x6ECB9A: jz      short loc_6ECBAE
 0x6ECB9C: lea     esp, [esp+0]
-0x6ECBA0: cmp     eax, offset dword_B3DCF0
+0x6ECBA0: cmp     eax, offset stru_B3DCF0
 0x6ECBA5: jz      short loc_6ECBF1
 0x6ECBA7: mov     eax, [eax+4]
 0x6ECBAA: test    eax, eax

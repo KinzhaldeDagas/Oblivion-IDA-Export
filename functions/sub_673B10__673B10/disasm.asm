@@ -1,4 +1,4 @@
-0x673B10: fld     [esp+arg_0]
+0x673B10: fld     [esp+arg_0]; ActorProcessManager accumulates a fractional fast-travel/update remainder in flt_B3BCF0; NaN/large values are reset to 0.
 0x673B14: fst     dword ptr ds:0B3BCF0h
 0x673B1A: fcomp   dword ptr ds:0A3F3D8h
 0x673B20: fnstsw  ax

@@ -1,220 +1,342 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "LowProcess",
+  "definition": "struct __cppobj LowProcess : BaseProcess\n{\nfloat unk00C;\nfloat unk010;\nfloat curHour;\nUInt32 curPackedDate;\nUInt8 unk01C;\nbool procedureCompleted;\nUInt8 unk01E;\nUInt8 isAlerted;\nUInt8 unk020;\nUInt8 pad021[3];\nTESForm *usedItem;\nfloat unk028;\nActor *follow;\nTESObjectREFR *unk030;\nPathLow *pathing;\nUInt32 unk038;\nUInt32 unk03C;\nUInt32 unk040;\nUInt32 unk044;\nUInt32 unk048;\nUInt32 unk04C;\nUInt32 unk050;\nUInt32 unk054;\nUInt32 unk058;\nUInt32 unk05C;\nUInt32 unk060;\nUInt32 unk064;\nUInt32 unk068;\nUInt32 unk06C;\nAVCollection avDamageModifiers; ///< Verified 2026-10-04: same collection storage type. LowProcess ctor 0x643945 and dtor 0x648E10 pass +0x70; current-damage methods clamp through allowPositive=0.\nUInt8 unk084;\nUInt8 pad085[3];\nfloat unk088;\nfloat unk08C;\n}\n",
   "id": 18374686479671990908,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00052.",
       "name": "",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 12
+      "size": 12,
+      "type": "BaseProcess"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00053.",
       "name": "unk00C",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00054.",
       "name": "unk010",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00055.",
       "name": "curHour",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00056.",
       "name": "curPackedDate",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00057.",
       "name": "unk01C",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 1
+      "offset_hex": "0x1C",
+      "size": 1,
+      "type": "UInt8"
     },
     {
-      "name": "unk01D",
+      "annotation_confidence": "Unknown",
+      "comment": "\u00058.",
+      "name": "procedureCompleted",
       "offset": 29,
-      "offset_hex": "0x1d",
-      "size": 1
+      "offset_hex": "0x1D",
+      "size": 1,
+      "type": "bool"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00059.",
       "name": "unk01E",
       "offset": 30,
-      "offset_hex": "0x1e",
-      "size": 1
+      "offset_hex": "0x1E",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000510.",
       "name": "isAlerted",
       "offset": 31,
-      "offset_hex": "0x1f",
-      "size": 1
+      "offset_hex": "0x1F",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000511.",
       "name": "unk020",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 1
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000512.",
       "name": "pad021",
       "offset": 33,
       "offset_hex": "0x21",
-      "size": 3
+      "size": 3,
+      "type": "UInt8[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000513.",
       "name": "usedItem",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "TESForm *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000514.",
       "name": "unk028",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000515.",
       "name": "follow",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "Actor *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000516.",
       "name": "unk030",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "TESObjectREFR *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000517.",
       "name": "pathing",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "PathLow *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000518.",
       "name": "unk038",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000519.",
       "name": "unk03C",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000520.",
       "name": "unk040",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000521.",
       "name": "unk044",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000522.",
       "name": "unk048",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000523.",
       "name": "unk04C",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 4
+      "offset_hex": "0x4C",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000524.",
       "name": "unk050",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000525.",
       "name": "unk054",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000526.",
       "name": "unk058",
       "offset": 88,
       "offset_hex": "0x58",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000527.",
       "name": "unk05C",
       "offset": 92,
-      "offset_hex": "0x5c",
-      "size": 4
+      "offset_hex": "0x5C",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000528.",
       "name": "unk060",
       "offset": 96,
       "offset_hex": "0x60",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000529.",
       "name": "unk064",
       "offset": 100,
       "offset_hex": "0x64",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000530.",
       "name": "unk068",
       "offset": 104,
       "offset_hex": "0x68",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000531.",
       "name": "unk06C",
       "offset": 108,
-      "offset_hex": "0x6c",
-      "size": 4
+      "offset_hex": "0x6C",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified 2026-10-04: same collection storage type. LowProcess ctor 0x643945 and dtor 0x648E10 pass +0x70; current-damage methods clamp through allowPositive=0.",
       "name": "avDamageModifiers",
       "offset": 112,
       "offset_hex": "0x70",
-      "size": 20
+      "size": 20,
+      "type": "AVCollection"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000533.",
       "name": "unk084",
       "offset": 132,
       "offset_hex": "0x84",
-      "size": 1
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000534.",
       "name": "pad085",
       "offset": 133,
       "offset_hex": "0x85",
-      "size": 3
+      "size": 3,
+      "type": "UInt8[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000535.",
       "name": "unk088",
       "offset": 136,
       "offset_hex": "0x88",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000536.",
       "name": "unk08C",
       "offset": 140,
-      "offset_hex": "0x8c",
-      "size": 4
+      "offset_hex": "0x8C",
+      "size": 4,
+      "type": "float"
     }
   ],
   "name": "LowProcess",
+  "ordinal": 9517,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 144
 }

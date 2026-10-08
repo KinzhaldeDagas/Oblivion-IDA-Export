@@ -1,19 +1,32 @@
 {
-  "callees_count": 10,
-  "callers_count": 7,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
+  "callers_count": 9,
+  "chunks": [
+    [
+      "0x4D9070",
+      "0x4D90D0"
+    ]
+  ],
+  "chunks_sha256": "f7c651d17ebf639338c886dfcf7e7bb708637cac0e00e319019fa5b7bf23be1e",
+  "comment_regular": "Verified modified-state propagation: if this reference has lock data, calls TESFormVtbl::MarkAsModified with mask 0x40; otherwise, if its linked-door chain has lock data, marks that linked-door reference with the same mask.",
+  "comment_repeatable": "Verified modified-state propagation: if this reference has lock data, calls TESFormVtbl::MarkAsModified with mask 0x40; otherwise, if its linked-door chain has lock data, marks that linked-door reference with the same mask.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4D9070",
+  "display_name": "TESObjectREFR_MarkLockDataAsModified",
   "end_ea": "0x4D90D0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4D9070",
+  "name": "TESObjectREFR_MarkLockDataAsModified",
   "segment": ".text",
   "sha256": "f7c651d17ebf639338c886dfcf7e7bb708637cac0e00e319019fa5b7bf23be1e",
   "size": 96,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4D9070",
-  "type": "void __thiscall(_BYTE *this)",
+  "total_chunk_size": 96,
+  "type": "void __thiscall(TESObjectREFR *this)",
   "xrefs_from_count": 49,
   "xrefs_to_count": 9
 }

@@ -1,77 +1,73 @@
-BSRenderedTexture *__thiscall BSTextureManager_ReserveShadowMaps(
+// Oblivion frustum-shadow pool reservation. Creates default render target type 0x17, attaches the shared shadow depth-stencil, and adds each texture to the unused shadowMaps list.
+void __thiscall BSTextureManager__ReserveFrustumShadowTextures(
         BSTextureManager *this,
-        NiDX9Renderer *a2,
-        BSRenderedTexture *a3)
+        NiDX9Renderer *renderer,
+        unsigned int desiredCount)
 {
-  BSRenderedTexture *result; // eax
-  int v5; // ebx
+  UInt32 numItems; // eax
+  UInt32 v5; // ebx
   NiRenderTargetGroup *v6; // eax
-  BSRenderedTexture *v7; // esi
+  void (__thiscall ***v7)(_DWORD, int); // esi
   BSRenderedTexture *DefaultRenderTarget; // eax
   BSRenderedTexture *v9; // edi
   NiRenderTargetGroup *v10; // ebx
-  void (__thiscall **p_AttachDepthStencilBuffer)(NiRenderTargetGroup *, int); // esi
-  int v12; // eax
+  void (__thiscall **p_AttachDepthStencilBuffer)(NiRenderTargetGroup *, void *); // esi
+  void *ShadowDepthStencil; // eax
   BSRenderedTexture *v13; // [esp+14h] [ebp-10h] BYREF
   int v14; // [esp+20h] [ebp-4h]
 
-  result = (BSRenderedTexture *)this->unk30.numItems;
-  if ( !result )
+  if ( !this->unk30.numItems ) /*0x7c2737*/
   {
-    result = (BSRenderedTexture *)this->shadowMaps.numItems;
-    if ( result <= a3 )
+    numItems = this->shadowMaps.numItems; /*0x7c2742*/
+    if ( numItems <= desiredCount ) /*0x7c274b*/
     {
-      if ( result < a3 )
+      if ( numItems < desiredCount ) /*0x7c27c0*/
       {
-        a3 = (BSRenderedTexture *)((char *)a3 - (int)result);
-        do
+        desiredCount -= numItems; /*0x7c27c8*/
+        do /*0x7c2848*/
         {
-          DefaultRenderTarget = BSTextureManager_GetDefaultRenderTarget(this, a2, 0x17);
-          v9 = DefaultRenderTarget;
-          v13 = DefaultRenderTarget;
-          if ( DefaultRenderTarget )
-            InterlockedIncrement((volatile LONG *)&DefaultRenderTarget->members);
-          v14 = 1;
-          v10 = BSRenderedTexture::UseTextureToRender(v9);
-          p_AttachDepthStencilBuffer = (void (__thiscall **)(NiRenderTargetGroup *, int))&v10->vtbl->AttachDepthStencilBuffer;
-          v12 = sub_7C1360((int *)this);
-          (*p_AttachDepthStencilBuffer)(v10, v12);
-          result = (BSRenderedTexture *)sub_7C16B0(&this->shadowMaps.__vftable, (int *)&v13);
-          v14 = 0xFFFFFFFF;
-          if ( v9 )
+          DefaultRenderTarget = BSTextureManager_GetDefaultRenderTarget(this, renderer, 0x17);// Reserve a pooled default render target of type 0x17 for a frustum shadow map. /*0x7c27d5*/
+          v9 = DefaultRenderTarget; /*0x7c27da*/
+          v13 = DefaultRenderTarget; /*0x7c27de*/
+          if ( DefaultRenderTarget ) /*0x7c27e2*/
+            InterlockedIncrement((volatile LONG *)&DefaultRenderTarget->members); /*0x7c27e8*/
+          v14 = 1; /*0x7c27f0*/
+          v10 = BSRenderedTexture::UseTextureToRender(v9); /*0x7c27fd*/
+          p_AttachDepthStencilBuffer = (void (__thiscall **)(NiRenderTargetGroup *, void *))&v10->vtbl->AttachDepthStencilBuffer; /*0x7c2803*/
+          ShadowDepthStencil = BSTextureManager__GetOrCreateShadowDepthStencil(this);// Obtain the shared shadow depth-stencil sized for ShadowSurfaceRes. /*0x7c2806*/
+          (*p_AttachDepthStencilBuffer)(v10, ShadowDepthStencil);// Attach the shared shadow depth-stencil to the newly reserved frustum shadow texture. /*0x7c2810*/
+          NiTRefPointerList__AddTail(&this->shadowMaps.__vftable, (int *)&v13); /*0x7c281a*/
+          v14 = 0xFFFFFFFF; /*0x7c2821*/
+          if ( v9 ) /*0x7c2829*/
           {
-            result = (BSRenderedTexture *)InterlockedDecrement((volatile LONG *)&v9->members);
-            if ( !result )
-              result = (BSRenderedTexture *)(*(int (__thiscall **)(BSRenderedTexture *, int))v9->vtbl)(v9, 1);
+            if ( !InterlockedDecrement((volatile LONG *)&v9->members) ) /*0x7c282f*/
+              (*(void (__thiscall **)(BSRenderedTexture *, int))v9->vtbl)(v9, 1); /*0x7c2841*/
           }
-          a3 = (BSRenderedTexture *)((char *)a3 + 0xFFFFFFFF);
+          --desiredCount; /*0x7c2843*/
         }
-        while ( a3 );
+        while ( desiredCount ); /*0x7c2848*/
       }
     }
     else
     {
-      v5 = (char *)result - (char *)a3;
-      do
+      v5 = numItems - desiredCount; /*0x7c2752*/
+      do /*0x7c27b9*/
       {
-        sub_7C1740((int **)&this->shadowMaps, &a3);
-        v14 = 0;
-        v6 = BSRenderedTexture::UseTextureToRender(a3);
-        v6->vtbl->AttachDepthStencilBuffer(v6, 0);
-        sub_7C1EE0(this, a3);
-        result = a3;
-        v14 = 0xFFFFFFFF;
-        if ( a3 )
+        NiTRefPointerList__RemoveHead((int ***)&this->shadowMaps, (int **)&desiredCount); /*0x7c275b*/
+        v14 = 0; /*0x7c2764*/
+        v6 = BSRenderedTexture::UseTextureToRender((BSRenderedTexture *)desiredCount); /*0x7c276c*/
+        v6->vtbl->AttachDepthStencilBuffer(v6, 0); /*0x7c277a*/
+        BSTextureManager__ReturnRenderedTexture(this, (BSRenderedTexture *)desiredCount); /*0x7c2783*/
+        v14 = 0xFFFFFFFF; /*0x7c278e*/
+        if ( desiredCount ) /*0x7c2796*/
         {
-          v7 = a3;
-          result = (BSRenderedTexture *)InterlockedDecrement((volatile LONG *)&a3->members);
-          if ( !result )
-            result = (BSRenderedTexture *)(*(int (__thiscall **)(BSRenderedTexture *, int))v7->vtbl)(v7, 1);
+          v7 = (void (__thiscall ***)(_DWORD, int))desiredCount; /*0x7c2798*/
+          if ( !InterlockedDecrement((volatile LONG *)(desiredCount + 4)) ) /*0x7c279e*/
+            (**v7)(v7, 1); /*0x7c27b4*/
         }
-        --v5;
+        --v5; /*0x7c27b6*/
       }
-      while ( v5 );
+      while ( v5 ); /*0x7c27b9*/
     }
   }
-  return result;
 }

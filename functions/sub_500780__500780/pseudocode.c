@@ -1,6 +1,6 @@
-char __usercall sub_500780@<al>(double a1@<st2>, double a2@<st1>, double a3@<st0>)
+char sub_500780()
 {
-  sub_676B40(a1, a2, a3, 1);
-  Interface_ConsolePrint("Detection list printed");
-  return 1;
+  sub_676B40((ActorProcessManager *)&qword_B3BB2C[0x75], 1); /*0x500787*/
+  Interface_ConsolePrint("Detection list printed"); /*0x500791*/
+  return 1; /*0x50079b*/
 }

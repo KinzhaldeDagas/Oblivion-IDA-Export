@@ -1,19 +1,32 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x530830",
+      "0x5308C5"
+    ]
+  ],
+  "chunks_sha256": "920d19fccf35095c03e25416acacaca42312a2307f88c70be0a0100ad32a5b6c",
+  "comment_regular": "Authoritative Oblivion INFO condition gate. Rejects Deleted INFOs, null parent quests, and SayOnce INFOs whose INFO-global spoken byte is set. Otherwise evaluates quest conditions at +0x50 followed by INFO conditions at +0x18 as one continued stream; lowDispositionFailure is set only by a failed GetDisposition >/>= test.",
+  "comment_repeatable": "Authoritative Oblivion INFO condition gate. Rejects Deleted INFOs, null parent quests, and SayOnce INFOs whose INFO-global spoken byte is set. Otherwise evaluates quest conditions at +0x50 followed by INFO conditions at +0x18 as one continued stream; lowDispositionFailure is set only by a failed GetDisposition >/>= test.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_530830",
+  "display_name": "TESTopicInfo::EvaluateConditions",
   "end_ea": "0x5308C5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_530830",
+  "name": "TESTopicInfo::EvaluateConditions",
   "segment": ".text",
   "sha256": "920d19fccf35095c03e25416acacaca42312a2307f88c70be0a0100ad32a5b6c",
   "size": 149,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x530830",
-  "type": "char __thiscall(int this, _BYTE *a2, int a3, Actor *a4, TESObjectREFR *a5)",
+  "total_chunk_size": 149,
+  "type": "bool __thiscall(OblivionTopicInfo *this, bool *lowDispositionFailure, TESQuest *parentQuest, Actor *speaker, TESObjectREFR *target)",
   "xrefs_from_count": 61,
   "xrefs_to_count": 1
 }

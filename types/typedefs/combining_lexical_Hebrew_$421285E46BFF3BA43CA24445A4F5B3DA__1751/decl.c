@@ -1,1 +1,23 @@
-combining_lexical_Hebrew::$421285E46BFF3BA43CA24445A4F5B3DA
+enum combining_lexical_Hebrew::$421285E46BFF3BA43CA24445A4F5B3DA : __int32
+{
+Hebr_Norm = 0x0,
+Hebr_DIAC = 0x1,
+Hebr_CANT1 = 0x2,
+Hebr_CANT2 = 0x3,
+Hebr_CANT3 = 0x4,
+Hebr_CANT4 = 0x5,
+Hebr_CANT5 = 0x6,
+Hebr_CANT6 = 0x7,
+Hebr_CANT7 = 0x8,
+Hebr_CANT8 = 0x9,
+Hebr_CANT9 = 0xA,
+Hebr_CANT10 = 0xB,
+Hebr_DAGESH = 0xC,
+Hebr_DOTABV = 0xD,
+Hebr_HOLAM = 0xE,
+Hebr_METEG = 0xF,
+Hebr_PATAH = 0x10,
+Hebr_QAMATS = 0x11,
+Hebr_RAFE = 0x12,
+Hebr_SHINSIN = 0x13,
+};

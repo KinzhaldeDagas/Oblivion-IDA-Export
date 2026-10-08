@@ -1,19 +1,32 @@
 {
-  "callees_count": 39,
-  "callers_count": 21,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
+  "callers_count": 27,
+  "chunks": [
+    [
+      "0x5EFFD0",
+      "0x5F01AC"
+    ]
+  ],
+  "chunks_sha256": "401283884a305dafa53936319028018be5c0537ebd68afcc0bbaae54c0e384ff",
+  "comment_regular": "Void Actor action-transition wrapper. Performs transition-specific bow/held-arrow visual cleanup, then commits action and sequence through process vtable +0x2D8. It has no success/result contract; callers/plugins must not consume EAX, so Crossbow's UInt32 HighProcessDoActionFn typedef is incorrect. Meaningful current-action state is HighProcess-only: HighProcess +0x2D0/+0x2D8 read/store +0x1F4/+0x1F8, while MiddleHigh returns None (-1) and its setter is a no-op; Crossbow's process-level-0 action filter therefore matches Oblivion. External Crossbow state-machine contrast: Equip-as-Cocked/first-shot-loaded is plugin policy, repeated action 4 while Reloading can flip state to Cocked and rebuild controller tracking, and interruption/cancellation actions are not modeled, leaving stale Reloading/Cocked phases.",
+  "comment_repeatable": "Void Actor action-transition wrapper. Performs transition-specific bow/held-arrow visual cleanup, then commits action and sequence through process vtable +0x2D8. It has no success/result contract; callers/plugins must not consume EAX, so Crossbow's UInt32 HighProcessDoActionFn typedef is incorrect. Meaningful current-action state is HighProcess-only: HighProcess +0x2D0/+0x2D8 read/store +0x1F4/+0x1F8, while MiddleHigh returns None (-1) and its setter is a no-op; Crossbow's process-level-0 action filter therefore matches Oblivion. External Crossbow state-machine contrast: Equip-as-Cocked/first-shot-loaded is plugin policy, repeated action 4 while Reloading can flip state to Cocked and rebuild controller tracking, and interruption/cancellation actions are not modeled, leaving stale Reloading/Cocked phases.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "HighPRocess_DoAction?????",
+  "display_name": "Actor_SetCurrentActionWithBowVisualCleanup",
   "end_ea": "0x5F01AC",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "HighPRocess_DoAction?????",
+  "name": "Actor_SetCurrentActionWithBowVisualCleanup",
   "segment": ".text",
   "sha256": "401283884a305dafa53936319028018be5c0537ebd68afcc0bbaae54c0e384ff",
   "size": 476,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5EFFD0",
-  "type": "BSExtraDataVtbl *__thiscall(PlayerCharacter *this, int, int)",
+  "total_chunk_size": 476,
+  "type": "void __thiscall(Actor *this, ActorCurrentAction action, BSAnimGroupSequence *sequence)",
   "xrefs_from_count": 180,
   "xrefs_to_count": 27
 }

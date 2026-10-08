@@ -1,9 +1,9 @@
-0x4B3460: sub     esp, 108h
+0x4B3460: sub     esp, 108h; Verified DMTL load path: allocates a TESTextureList header, derives model path, parses texture-hash entries, and replaces the global cache entry keyed by form ID. Paired Oblivion save handler invokes a writer whose terminal thunk is a no-op.
 0x4B3466: mov     eax, ds:0B30AACh
 0x4B346B: xor     eax, esp
 0x4B346D: mov     [esp+108h+var_4], eax
 0x4B3474: push    ebx
-0x4B3475: mov     ebx, [esp+10Ch+arg_0]
+0x4B3475: mov     ebx, [esp+10Ch+file]
 0x4B347C: push    esi
 0x4B347D: push    edi
 0x4B347E: push    8; Size
@@ -23,14 +23,14 @@
 0x4B34A4: call    sub_46D540
 0x4B34A9: add     esp, 8
 0x4B34AC: lea     ecx, [esp+114h+Str]
-0x4B34B0: push    ecx
-0x4B34B1: push    esi
-0x4B34B2: push    ebx
-0x4B34B3: mov     ecx, edi
-0x4B34B5: call    sub_46D750
-0x4B34BA: push    edi
-0x4B34BB: mov     ecx, esi
-0x4B34BD: call    sub_4B3400
+0x4B34B0: push    ecx; modelPath
+0x4B34B1: push    esi; form
+0x4B34B2: push    ebx; file
+0x4B34B3: mov     ecx, edi; this
+0x4B34B5: call    TESModel_ReadAndReplaceTextureHashEntries; Verified: MODT chunks are accepted only when byte length is a nonzero multiple of 24. Each valid chunk is decoded into runtime texture-hash entries and replaces the TESTextureList state; zero/invalid-width chunks leave the old state unchanged. The 24-byte field meanings remain Unknown.
+0x4B34BA: push    edi; newList
+0x4B34BB: mov     ecx, esi; this
+0x4B34BD: call    TESObjectTREE_ReplaceTextureHashCache; Verified: replaces global TESTextureList cache value keyed by this form's FormID; clears/frees prior value before storing new parsed list.
 0x4B34C2: mov     ecx, [esp+114h+var_4]
 0x4B34C9: pop     edi
 0x4B34CA: pop     esi

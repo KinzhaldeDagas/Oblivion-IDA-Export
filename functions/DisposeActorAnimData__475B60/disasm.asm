@@ -1,4 +1,4 @@
-0x475B60: push    0FFFFFFFFh
+0x475B60: push    0FFFFFFFFh; Destroys ActorAnimData-owned state. Releases current/queued/cleanup idles; deactivates and releases the controller manager; deleting-destructs every +0x9C animation-map entry; frees the +0xB8 pending-KF linked list; clears/destroys the map; and nulls the accumulation node. Confirms map entries and pending-KF nodes are ActorAnimData-owned.
 0x475B62: push    offset DisposeActorAnimData_SEH
 0x475B67: mov     eax, large fs:0
 0x475B6D: push    eax
@@ -20,13 +20,13 @@
 0x475B9B: mov     [esp+30h+var_4], ebp
 0x475B9F: jz      short loc_475BA7
 0x475BA1: push    edi
-0x475BA2: call    sub_472ED0
+0x475BA2: call    AnimIdle_DestroyAndRelease; Destroys one ActorAnimData-owned AnimIdle slot. Resolves the idle KF encoded key from KFModel +0x08, removes the matching sequence from the controller manager/map entry where appropriate, runs AnimIdle_CleanupLoadedResources, frees the 0x2C-byte holder, nulls the caller slot, and balances native references.
 0x475BA7: cmp     [esi+0D0h], ebp
 0x475BAD: lea     eax, [esi+0D0h]
 0x475BB3: jz      short loc_475BBF
 0x475BB5: push    eax
 0x475BB6: mov     ecx, esi
-0x475BB8: call    sub_472ED0
+0x475BB8: call    AnimIdle_DestroyAndRelease; Destroys one ActorAnimData-owned AnimIdle slot. Resolves the idle KF encoded key from KFModel +0x08, removes the matching sequence from the controller manager/map entry where appropriate, runs AnimIdle_CleanupLoadedResources, frees the 0x2C-byte holder, nulls the caller slot, and balances native references.
 0x475BBD: jmp     short loc_475BC3
 0x475BBF: mov     [edi], ebp
 0x475BC1: mov     [eax], ebp
@@ -37,7 +37,7 @@
 0x475BD2: jz      short loc_475BDE
 0x475BD4: push    edi
 0x475BD5: mov     ecx, esi
-0x475BD7: call    sub_472ED0
+0x475BD7: call    AnimIdle_DestroyAndRelease; Destroys one ActorAnimData-owned AnimIdle slot. Resolves the idle KF encoded key from KFModel +0x08, removes the matching sequence from the controller manager/map entry where appropriate, runs AnimIdle_CleanupLoadedResources, frees the 0x2C-byte holder, nulls the caller slot, and balances native references.
 0x475BDC: mov     [edi], ebp
 0x475BDE: add     edi, 4
 0x475BE1: sub     ebx, 1
@@ -50,11 +50,11 @@
 0x475BF9: jbe     short loc_475C15
 0x475BFB: mov     eax, [ebx+4Ch]
 0x475BFE: fldz
-0x475C00: mov     ecx, [eax+edi*4]
-0x475C03: push    ebp; char
+0x475C00: mov     ecx, [eax+edi*4]; this
+0x475C03: push    ebp; transition
 0x475C04: push    ecx
-0x475C05: fstp    [esp+38h+var_38]; float
-0x475C08: call    sub_6C9CB0
+0x475C05: fstp    [esp+38h+easeOutTime]; easeOutTime
+0x475C08: call    NiControllerSequence_Deactivate; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.
 0x475C0D: add     edi, 1
 0x475C10: cmp     edi, [ebx+54h]
 0x475C13: jb      short loc_475BFB
@@ -73,7 +73,7 @@
 0x475C3A: mov     eax, [esi+98h]
 0x475C40: push    eax
 0x475C41: mov     ecx, edi
-0x475C43: call    sub_6FFE90
+0x475C43: call    NiObjectNET_RemoveController; Removes a specific NiTimeController from NiObjectNET's refcounted controller chain, relinking predecessor/head and clearing the removed controller's next link with balanced temporary references.
 0x475C48: mov     edi, [esi+98h]
 0x475C4E: cmp     edi, ebp
 0x475C50: jz      short loc_475C74
@@ -115,7 +115,7 @@
 0x475CB4: lea     eax, [esp+38h+var_14]
 0x475CB8: push    eax
 0x475CB9: mov     [esp+3Ch+var_18], ebp
-0x475CBD: call    sub_4709C0
+0x475CBD: call    AnimKeyMap_GetNext; Advances an encoded-key map iterator. Returns the current UInt16 key and AnimSequenceBase payload, then moves along the collision chain or to the next non-empty bucket.
 0x475CC2: mov     ecx, [esp+30h+var_18]
 0x475CC6: cmp     ecx, ebp
 0x475CC8: jz      short loc_475CD2
@@ -130,7 +130,7 @@
 0x475CE0: mov     eax, [esi+0B8h]
 0x475CE6: mov     edi, [eax+4]
 0x475CE9: push    eax
-0x475CEA: call    FormHeapFree
+0x475CEA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x475CEF: add     esp, 4
 0x475CF2: cmp     edi, ebp
 0x475CF4: mov     [esi+0B8h], edi
@@ -174,3 +174,13 @@
 0x475D69: retn
 0x475D6A: mov     eax, [edi+eax*4]
 0x475D6D: jmp     loc_475C9C
+0x9AEE50: mov     ecx, [ebp-10h]
+0x9AEE53: add     ecx, 98h ; '˜'; slot
+0x9AEE59: jmp     NiPointerSlot_Release
+0x9AEE5E: mov     edx, [esp+arg_4]
+0x9AEE62: lea     eax, [edx-20h]
+0x9AEE65: mov     ecx, [edx-24h]
+0x9AEE68: xor     ecx, eax
+0x9AEE6A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AEE6F: mov     eax, offset stru_ADB51C
+0x9AEE74: jmp     ___CxxFrameHandler3

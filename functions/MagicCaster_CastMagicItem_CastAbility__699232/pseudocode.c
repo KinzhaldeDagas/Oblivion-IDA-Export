@@ -9,13 +9,13 @@ char __userpurge MagicCaster_CastMagicItem_::CastAbility@<al>(
   void (__thiscall **v5)(_DWORD, void *); // ebx
   void *v6; // eax
 
-  v5 = *a2;
-  v6 = OblivionDynamicCast(
+  v5 = *a2; /*0x699236*/
+  v6 = OblivionDynamicCast( /*0x699248*/
          a1,
          0,
          (struct _s_RTTICompleteObjectLocator *)&MagicItem `RTTI Type Descriptor',
          &SpellItem `RTTI Type Descriptor',
          0);
-  (*v5)(a2, v6);
-  return 1;
+  (*v5)(a2, v6); /*0x699255*/
+  return 1; /*0x69925c*/
 }

@@ -6,14 +6,14 @@ char __userpurge sub_571660@<al>(float *this@<ecx>, int a2@<edi>, unsigned __int
   unsigned int v10; // eax
   size_t v11; // [esp-Ch] [ebp-Ch]
 
-  HIDWORD(v11) = a2;
-  v6 = 0;
-  for ( i = this + 2; a4 != i[0xFFFFFFFE] || a5 != i[0xFFFFFFFF] || *(_DWORD *)i != a6; i += 7 )
+  HIDWORD(v11) = a2; /*0x571669*/
+  v6 = 0; /*0x57166e*/
+  for ( i = this + 2; a4 != i[0xFFFFFFFE] || a5 != i[0xFFFFFFFF] || *(_DWORD *)i != a6; i += 7 ) /*0x571670*/
   {
-    if ( ++v6 >= 0xC8 )
+    if ( ++v6 >= 0xC8 ) /*0x57169f*/
     {
-      *a3 = 0;
-      return 0;
+      *a3 = 0; /*0x5716aa*/
+      return 0; /*0x5716b0*/
     }
   }
   if ( a3
@@ -22,13 +22,13 @@ char __userpurge sub_571660@<al>(float *this@<ecx>, int a2@<edi>, unsigned __int
       : (v10 = strlen(*(const char **)v9)),
         v10) )
   {
-    LODWORD(v11) = 0x7FE;
-    _mbsnbcpy(a3, *(const unsigned __int8 **)v9, v11);
-    return 1;
+    LODWORD(v11) = 0x7FE; /*0x5716f6*/
+    _mbsnbcpy(a3, *(const unsigned __int8 **)v9, v11); /*0x5716fd*/
+    return 1; /*0x571706*/
   }
   else
   {
-    *a3 = 0;
-    return 1;
+    *a3 = 0; /*0x57170c*/
+    return 1; /*0x571710*/
   }
 }

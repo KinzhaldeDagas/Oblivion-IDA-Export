@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x524280",
-    "line": "sub     esp, 10h",
+    "line": "sub     esp, 10h; TESNPC::InitWorn (confirmed by native diagnostic strings). Enumerates equipped biped objects: index 9 configures WEAP slot at ActorAnimData+0xDC; index 12 configures AMMO/quiver slot at +0x10C; index 14 configures light/torch.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x5242D1",
-    "line": "mov     ebp, [esp+1Ch+arg_4]",
+    "line": "mov     ebp, [esp+1Ch+animData]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x5242DF",
-    "line": "mov     [esp+1Ch+arg_4], esi",
+    "line": "mov     [esp+1Ch+animData], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x524309",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -331,13 +331,13 @@
   },
   {
     "ea": "0x52432B",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x52432D",
-    "line": "call    sub_478CA0",
+    "line": "call    ActorSkinInfo_SetWeaponSlotForm; Installs only form type 0x21 (WEAP) into ActorSkinInfo WeaponForm at +0xDC after clearing prior state; WeaponModel at +0xE0 points to the form's embedded TESModel at form+0x30.",
     "mnemonic": "call",
     "size": 5
   },
@@ -493,19 +493,19 @@
   },
   {
     "ea": "0x52437C",
-    "line": "push    edi",
+    "line": "push    edi; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52437D",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x52437F",
-    "line": "call    sub_478DF0",
+    "line": "call    ActorSkinInfo_SetLightSlotForm; Set ActorSkinInfo light slot form at +0x12C after validating Oblivion form type 0x1A (LIGH).",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,13 +523,13 @@
   },
   {
     "ea": "0x52438A",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x52438C",
-    "line": "call    sub_478D70",
+    "line": "call    ActorSkinInfo_SetAmmoSlotForm; Installs only form type 0x22 (AMMO) into ActorSkinInfo AmmoForm at +0x10C after clearing prior state; AmmoModel at +0x110 points to the form's embedded TESModel at form+0x30.",
     "mnemonic": "call",
     "size": 5
   },
@@ -967,7 +967,7 @@
   },
   {
     "ea": "0x52445F",
-    "line": "call    TESFullName_GetNameForForm",
+    "line": "call    TESFullName_GetNameForForm; 3DTheft decode: TESFullName_GetNameForForm only dynamic-casts the passed form to TESFullName and returns its raw name/EmptyString; it does not apply worldspace fallback.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1123,13 +1123,13 @@
   },
   {
     "ea": "0x5244B1",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5244B6",
-    "line": "mov     esi, [esp+24h+arg_4]",
+    "line": "mov     esi, [esp+24h+animData]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1153,7 +1153,7 @@
   },
   {
     "ea": "0x5244C3",
-    "line": "mov     [esp+20h+arg_4], esi",
+    "line": "mov     [esp+20h+animData], esi",
     "mnemonic": "mov",
     "size": 4
   },

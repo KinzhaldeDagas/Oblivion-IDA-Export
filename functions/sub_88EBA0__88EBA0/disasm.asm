@@ -6,7 +6,7 @@
 0x88EBB5: test    [esp+4+arg_0], 1
 0x88EBBA: jz      short loc_88EBC5
 0x88EBBC: push    esi
-0x88EBBD: call    FormHeapFree
+0x88EBBD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x88EBC2: add     esp, 4
 0x88EBC5: mov     eax, esi
 0x88EBC7: pop     esi

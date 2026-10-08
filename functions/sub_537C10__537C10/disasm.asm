@@ -13,7 +13,7 @@
 0x537C2B: call    edx
 0x537C2D: test    eax, eax
 0x537C2F: jz      short loc_537C3F
-0x537C31: cmp     eax, offset dword_BA7D84
+0x537C31: cmp     eax, offset stru_BA7D84
 0x537C36: jz      short loc_537C72
 0x537C38: mov     eax, [eax+4]
 0x537C3B: test    eax, eax

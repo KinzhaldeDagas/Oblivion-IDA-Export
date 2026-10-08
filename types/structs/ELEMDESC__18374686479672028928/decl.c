@@ -1,1 +1,1 @@
-ELEMDESC
+typedef tagELEMDESC ELEMDESC;

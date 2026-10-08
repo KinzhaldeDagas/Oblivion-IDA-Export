@@ -1,74 +1,68 @@
-void __userpurge sub_478780(
-        char *this@<ecx>,
-        char bp0@<bpl>,
-        double st5_0@<st2>,
-        double st6_0@<st1>,
-        double a5@<st0>,
-        int a6,
-        char a7,
-        int a8)
+// ActorSkinInfo equipment-slot teardown/replacement. Slot is exactly {TESForm*, TESModel*, NiAVObject*}; native code removes loaded 3D from shadow/parent ownership, releases loader/scene state, clears object3D, and optionally replaces form/model metadata. Known slots include rings, amulet, WEAP, AMMO, shield, and light. External Crossbow contrast after this native ownership behavior: retained raw controller/target pointers are invalidated when the owning WeaponObject graph is torn down; pointer equality alone is not a lifetime or generation check. Current removal/reset erases tracking without restoring original controller timing state, and target mismatch leaves null-controller tombstones instead of generation-validating/rescanning.
+void __thiscall ActorSkinInfo_ClearOrReplaceEquipmentSlot(
+        ActorSkinInfo *this,
+        ActorSkinInfoEquipmentSlot *slot,
+        bool replaceMetadata,
+        TESModel *newModelData)
 {
-  int v8; // esi
-  _DWORD *ShadowSceneNode; // eax
-  void (__thiscall ***v11)(_DWORD, int); // edi
-  int v12; // edi
-  int v13; // edi
-  int v14; // eax
-  int v15; // ecx
-  int v16; // [esp-8h] [ebp-10h]
+  ActorSkinInfoEquipmentSlot *v4; // esi
+  void *ShadowSceneNode; // eax
+  ActorSkinInfoEquipmentSlot *v7; // edi
+  NiNode *BackWeaponNode; // edi
+  NiNode *SideWeaponNode; // edi
+  int v10; // eax
+  TESModel *v11; // ecx
+  NiAVObject *object3D; // [esp-8h] [ebp-10h]
 
-  v8 = a6;
-  if ( *(_DWORD *)(a6 + 8) )
+  v4 = slot; /*0x478782*/
+  if ( slot->object3D ) /*0x478786*/
   {
-    if ( (_UNKNOWN *)a6 == &unk_B33D60 || (char *)a6 == this + 0x12C )
-      sub_4DE1C0(*(_DWORD *)(a6 + 8));
-    v16 = *(_DWORD *)(v8 + 8);
-    ShadowSceneNode = (_DWORD *)GetShadowSceneNode(0);
-    sub_7C5E70(ShadowSceneNode, v16);
-    sub_481350(*(_DWORD **)(v8 + 8));
-    if ( *(_DWORD *)(*(_DWORD *)(v8 + 8) + 0x1C) )
+    if ( slot == (ActorSkinInfoEquipmentSlot *)&unk_B33D60 || slot == (ActorSkinInfoEquipmentSlot *)&this->LightForm ) /*0x4787a3*/
+      sub_4DE1C0((int)slot, (int)slot->object3D); /*0x4787a6*/
+    object3D = v4->object3D; /*0x4787b2*/
+    ShadowSceneNode = (void *)GetShadowSceneNode(0); /*0x4787b5*/
+    ShadowSceneNode_RemoveObjectReceivers(ShadowSceneNode, object3D); /*0x4787bf*/
+    sub_481350((NiNode *)v4->object3D); /*0x4787c8*/
+    if ( v4->object3D->members.m_parent ) /*0x4787d3*/
     {
-      nullsub_returnTrue_0arg();
-      (*(void (__thiscall **)(_DWORD, int *, _DWORD))(**(_DWORD **)(*(_DWORD *)(v8 + 8) + 0x1C) + 0x88))(
-        *(_DWORD *)(*(_DWORD *)(v8 + 8) + 0x1C),
-        &a6,
-        *(_DWORD *)(v8 + 8));
-      if ( a6 )
+      Cmd_AddAchievement_PC_ReturnTrueNoOp(); /*0x4787db*/
+      v4->object3D->members.m_parent->vtbl->RemoveObject( /*0x4787f7*/
+        v4->object3D->members.m_parent,
+        (NiAVObject **)&slot,
+        v4->object3D);
+      if ( slot ) /*0x4787ff*/
       {
-        v11 = (void (__thiscall ***)(_DWORD, int))a6;
-        if ( !InterlockedDecrement((volatile LONG *)(a6 + 4)) )
-          (**v11)(v11, 1);
+        v7 = slot; /*0x478801*/
+        if ( !InterlockedDecrement((volatile LONG *)&slot->model) ) /*0x478807*/
+          ((void (__thiscall *)(ActorSkinInfoEquipmentSlot *, int))v7->form->vtbl)(v7, 1); /*0x47881d*/
       }
-      a5 = nullsub_returnTrue_0arg();
+      Cmd_AddAchievement_PC_ReturnTrueNoOp(); /*0x478821*/
     }
-    if ( (_UNKNOWN *)v8 == &unk_B33D10 || (char *)v8 == this + 0xDC )
+    if ( v4 == (ActorSkinInfoEquipmentSlot *)&unk_B33D10 || v4 == (ActorSkinInfoEquipmentSlot *)&this->WeaponForm ) /*0x478839*/
     {
-      v12 = *((_DWORD *)this + 0xA);
-      if ( v12 )
+      BackWeaponNode = this->BackWeaponNode; /*0x47883b*/
+      if ( BackWeaponNode ) /*0x478840*/
       {
-        sub_897A90(v12, 0);
-        sub_477EF0((_WORD *)(v12 + 0xAC));
+        sub_897A90((int)BackWeaponNode, 0); /*0x478845*/
+        NiTObjectArray_ClearAndRelease(&BackWeaponNode->members.children); /*0x478853*/
       }
-      v13 = *((_DWORD *)this + 0xC);
-      if ( v13 )
+      SideWeaponNode = this->SideWeaponNode; /*0x478858*/
+      if ( SideWeaponNode ) /*0x47885d*/
       {
-        sub_897A90(v13, 0);
-        sub_477EF0((_WORD *)(v13 + 0xAC));
+        sub_897A90((int)SideWeaponNode, 0); /*0x478862*/
+        NiTObjectArray_ClearAndRelease(&SideWeaponNode->members.children); /*0x478870*/
       }
-      if ( *((PlayerCharacter **)this + 0x54) == TESDataHandler_g_PlayerRef
-        && this == (char *)sub_6600D0(TESDataHandler_g_PlayerRef, 0) )
-      {
-        sub_57B190(bp0, st5_0, st6_0, a5, dword_B33D84);
-      }
+      if ( (PlayerCharacter *)this->owner == reference && this == Actor_GetSkinInfoByPerspective((Actor *)reference, 0) ) /*0x47888c*/
+        sub_57B190((unsigned __int8 *)stru_B33D84.value); /*0x478895*/
     }
-    v14 = (*(int (__thiscall **)(_DWORD))(**(_DWORD **)(v8 + 4) + 0x14))(*(_DWORD *)(v8 + 4));
-    QueuedModelLoader_RemoveModel((int *)ModelLoaderPtr, v14, 1, 1);
-    *(_DWORD *)(v8 + 8) = 0;
+    v10 = (int)v4->model->vtbl->GetModelPath(v4->model); /*0x4788a5*/
+    QueuedModelLoader_RemoveModel((int *)MEMORY[0xB33A1C], v10, 1, 1); /*0x4788b2*/
+    v4->object3D = 0; /*0x4788b7*/
   }
-  if ( a7 )
+  if ( replaceMetadata ) /*0x4788c4*/
   {
-    v15 = a8;
-    *(_DWORD *)v8 = 0;
-    *(_DWORD *)(v8 + 4) = v15;
+    v11 = newModelData; /*0x4788c6*/
+    v4->form = 0; /*0x4788ca*/
+    v4->model = v11; /*0x4788d0*/
   }
 }

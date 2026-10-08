@@ -104,8 +104,8 @@
 0x5A2E3D: jz      loc_5A2FF7
 0x5A2E43: mov     ecx, [edx+8]
 0x5A2E46: movzx   eax, byte ptr [ecx+4]
-0x5A2E4A: push    eax; a1
-0x5A2E4B: call    TESForm_CreateDynamic
+0x5A2E4A: push    eax; formType
+0x5A2E4B: call    TESForm_CreateDynamic; Verified runtime serialized-form factory dispatch: form type 0x29 constructs a 0x30-byte TESSubSpace; constructor sets default bounds and the TESSubSpace vtable.
 0x5A2E50: mov     edi, eax
 0x5A2E52: mov     eax, [esi+30h]
 0x5A2E55: mov     ecx, [eax+8]
@@ -116,9 +116,9 @@
 0x5A2E64: mov     ecx, edi
 0x5A2E66: call    edx
 0x5A2E68: mov     eax, [esi+28h]
-0x5A2E6B: mov     ecx, ds:0B33A98h
-0x5A2E71: push    eax
-0x5A2E72: call    TESDataHandler_AddForm
+0x5A2E6B: mov     ecx, ds:0B33A98h; self
+0x5A2E71: push    eax; form
+0x5A2E72: call    TESDataHandler_AddForm; Verified registration path: switches on TESForm+4 type byte. TESGlobal ctor 4F9604 writes type 4; case 4 pushes the form into TESDataHandler.listGlobals at self+0x74 (self+0x1D pointers) and returns success. Called from TESDataHandler_LoadFormRecord 44E596; this list is consumed by TESSaveLoadGame_LoadGlobalValues.
 0x5A2E77: mov     ecx, [esi+98h]
 0x5A2E7D: call    NiRenderTargetGroup__GetRenderTargetsNum
 0x5A2E82: push    ebx; int
@@ -149,7 +149,7 @@
 0x5A2EC7: call    sub_484D70
 0x5A2ECC: mov     [esp+20h+var_10], eax
 0x5A2ED0: fild    [esp+20h+var_10]
-0x5A2ED4: mov     ecx, offset unk_B3B2CC
+0x5A2ED4: mov     ecx, (offset dword_B3B0B4+218h)
 0x5A2ED9: fstp    qword ptr [esp+20h+var_C]
 0x5A2EDD: call    GameSetting_GetSafeFloatPointer
 0x5A2EE2: fld     dword ptr [eax]
@@ -163,6 +163,7 @@
 0x5A2F02: mov     dx, word ptr [esp+20h+var_C]
 0x5A2F07: mov     [ebp+8], dx
 0x5A2F0B: fldcw   word ptr [esp+20h+var_10]
-0x5A2F0F: mov     ecx, ds:0B33A98h
-0x5A2F15: push    edi
-0x5A2F16: call    TESDataHandler_AddForm
+0x5A2F0F: mov     ecx, ds:0B33A98h; self
+0x5A2F15: push    edi; form
+0x5A2F16: call    TESDataHandler_AddForm; Verified registration path: switches on TESForm+4 type byte. TESGlobal ctor 4F9604 writes type 4; case 4 pushes the form into TESDataHandler.listGlobals at self+0x74 (self+0x1D pointers) and returns success. Called from TESDataHandler_LoadFormRecord 44E596; this list is consumed by TESSaveLoadGame_LoadGlobalValues.
+0x5A2FF7: mov     edx, ds:0B389D0h

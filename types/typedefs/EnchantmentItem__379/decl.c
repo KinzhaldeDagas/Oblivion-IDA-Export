@@ -1,1 +1,1 @@
-EnchantmentItem
+struct EnchantmentItem;

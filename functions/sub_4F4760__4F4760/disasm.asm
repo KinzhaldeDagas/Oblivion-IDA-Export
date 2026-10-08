@@ -1,15 +1,15 @@
 0x4F4760: fldz
-0x4F4762: mov     ecx, [esp+arg_0]
+0x4F4762: mov     ecx, [esp+arg_0]; this
 0x4F4766: test    ecx, ecx
 0x4F4768: push    esi
 0x4F4769: mov     esi, [esp+4+arg_C]
 0x4F476D: fstp    qword ptr [esi]
 0x4F476F: jz      short loc_4F4789
-0x4F4771: call    sub_4D7740
+0x4F4771: call    TESObjectREFR_GetEffectiveDoorLock; Verified: returns this reference's ExtraLockData* payload when present; otherwise, if its ExtraTeleport has a linked door, returns that linked reference's ExtraLockData* payload; null when neither exists. Directly supported by ExtraDataList_GetLock, ExtraDataList_GetTeleport, and TeleportData_GetLinkedDoor.
 0x4F4776: test    eax, eax
 0x4F4778: jz      short loc_4F4789
-0x4F477A: mov     ecx, eax
-0x4F477C: call    sub_428E70
+0x4F477A: mov     ecx, eax; this
+0x4F477C: call    ExtraLockData_IsLocked; Verified runtime lock predicate: returns (ExtraLockData.flags & 0x01) != 0. ExtraDataList_Load sets this bit on accepted 12-byte and legacy 16-byte XLOC payloads; serialized flag bits are then preserved. This is a runtime normalization step.
 0x4F4781: test    al, al
 0x4F4783: jz      short loc_4F4789
 0x4F4785: fld1

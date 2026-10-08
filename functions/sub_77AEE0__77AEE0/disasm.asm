@@ -13,7 +13,7 @@
 0x77AEFA: pop     esi
 0x77AEFB: retn    4
 0x77AEFE: push    esi
-0x77AEFF: push    offset dword_B3F95C
+0x77AEFF: push    offset stru_B3F95C
 0x77AF04: call    NiRTTI_Cast
 0x77AF09: add     esp, 8
 0x77AF0C: test    eax, eax

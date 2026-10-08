@@ -1,1 +1,5 @@
-OT_ScriptRecord
+struct OT_ScriptRecord
+{
+CHAR ScriptTag[4];
+WORD Script;
+};

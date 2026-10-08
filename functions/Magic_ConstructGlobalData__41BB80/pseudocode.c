@@ -1,4 +1,4 @@
-TESForm *__cdecl Magic_ConstructGlobalData()
+void __cdecl Magic_ConstructGlobalData()
 {
   TESForm *v0; // eax
   TESSound *v1; // eax
@@ -55,568 +55,530 @@ TESForm *__cdecl Magic_ConstructGlobalData()
   TESSound *v52; // eax
   TESForm *v53; // eax
   TESForm *v54; // eax
-  unsigned int *DefaultPlayerSpell; // eax
+  SpellItem *DefaultPlayerSpell; // eax
   TESForm *v56; // eax
   SpellItem *DefaultMarksmanSpell; // eax
   TESForm *v58; // eax
   TESEffectShader *v59; // eax
-  TESForm *v60; // eax
+  TESEffectShader *v60; // eax
   TESForm *v61; // eax
   TESEffectShader *v62; // eax
-  TESForm *v63; // eax
+  TESEffectShader *v63; // eax
   TESForm *v64; // eax
-  TESForm *result; // eax
+  TESEffectShader *v65; // eax
   TESEffectShader *v66; // eax
 
-  v0 = TESDataHandler_LookupFormByID((TESForm *)0x12C);
-  MagicFailureSoundAlteration = (int)OblivionDynamicCast(
-                                       v0,
-                                       0,
-                                       (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                                       &TESSound `RTTI Type Descriptor',
-                                       0);
-  if ( !MagicFailureSoundAlteration )
+  v0 = TESDataHandler_LookupFormByID((TESForm *)0x12C); /*0x41bbbb*/
+  MEMORY[0xB33560] = (int)OblivionDynamicCast( /*0x41bbce*/
+                            v0,
+                            0,
+                            (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                            &TESSound `RTTI Type Descriptor',
+                            0);
+  if ( !MEMORY[0xB33560] ) /*0x41bbd3*/
   {
-    v1 = (TESSound *)FormHeapAlloc(0x44u);
-    if ( v1 )
-      v2 = (TESForm *)TESSound::TESSound(v1);
+    v1 = (TESSound *)FormHeapAlloc(0x44u); /*0x41bbd7*/
+    if ( v1 ) /*0x41bbed*/
+      v2 = (TESForm *)TESSound::TESSound(v1); /*0x41bbf1*/
     else
-      v2 = 0;
-    MagicFailureSoundAlteration = (int)v2;
-    TESForm_SetFormID(v2, 0x12C, 1);
-    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MagicFailureSoundAlteration + 0xD8))(
-      MagicFailureSoundAlteration,
+      v2 = 0; /*0x41bbf8*/
+    MEMORY[0xB33560] = (int)v2; /*0x41bc07*/
+    TESForm_SetFormID(v2, 0x12C, 1); /*0x41bc0c*/
+    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MEMORY[0xB33560] + 0xD8))( /*0x41bc24*/
+      MEMORY[0xB33560],
       "MagicFailureSoundAlteration");
-    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MagicFailureSoundAlteration + 0x90))(
-      MagicFailureSoundAlteration,
-      0);
-    BSSimpleList_PushFront((_DWORD *)(TESDataHandler + 0x6C), MagicFailureSoundAlteration);
+    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MEMORY[0xB33560] + 0x90))(MEMORY[0xB33560], 0); /*0x41bc36*/
+    BSSimpleList_PushFront(&g_TESDataHandler->soundList.item, MEMORY[0xB33560]); /*0x41bc47*/
   }
-  v3 = TESDataHandler_LookupFormByID((TESForm *)0x12D);
-  MagicFailureSoundConjuration = (int)OblivionDynamicCast(
-                                        v3,
-                                        0,
-                                        (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                                        &TESSound `RTTI Type Descriptor',
-                                        0);
-  if ( !MagicFailureSoundConjuration )
+  v3 = TESDataHandler_LookupFormByID((TESForm *)0x12D); /*0x41bc65*/
+  MEMORY[0xB33564] = (int)OblivionDynamicCast( /*0x41bc75*/
+                            v3,
+                            0,
+                            (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                            &TESSound `RTTI Type Descriptor',
+                            0);
+  if ( !MEMORY[0xB33564] ) /*0x41bc7a*/
   {
-    v4 = (TESSound *)FormHeapAlloc(0x44u);
-    if ( v4 )
-      v5 = (TESForm *)TESSound::TESSound(v4);
+    v4 = (TESSound *)FormHeapAlloc(0x44u); /*0x41bc7e*/
+    if ( v4 ) /*0x41bc94*/
+      v5 = (TESForm *)TESSound::TESSound(v4); /*0x41bc98*/
     else
-      v5 = 0;
-    MagicFailureSoundConjuration = (int)v5;
-    TESForm_SetFormID(v5, 0x12D, 1);
-    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MagicFailureSoundConjuration + 0xD8))(
-      MagicFailureSoundConjuration,
+      v5 = 0; /*0x41bc9f*/
+    MEMORY[0xB33564] = (int)v5; /*0x41bcae*/
+    TESForm_SetFormID(v5, 0x12D, 1); /*0x41bcb3*/
+    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MEMORY[0xB33564] + 0xD8))( /*0x41bccb*/
+      MEMORY[0xB33564],
       "MagicFailureSoundConjuration");
-    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MagicFailureSoundConjuration + 0x90))(
-      MagicFailureSoundConjuration,
-      0);
-    BSSimpleList_PushFront((_DWORD *)(TESDataHandler + 0x6C), MagicFailureSoundConjuration);
+    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MEMORY[0xB33564] + 0x90))(MEMORY[0xB33564], 0); /*0x41bcdd*/
+    BSSimpleList_PushFront(&g_TESDataHandler->soundList.item, MEMORY[0xB33564]); /*0x41bcef*/
   }
-  v6 = TESDataHandler_LookupFormByID((TESForm *)0x12E);
-  MagicFailureSoundDestruction = (int)OblivionDynamicCast(
-                                        v6,
-                                        0,
-                                        (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                                        &TESSound `RTTI Type Descriptor',
-                                        0);
-  if ( !MagicFailureSoundDestruction )
+  v6 = TESDataHandler_LookupFormByID((TESForm *)0x12E); /*0x41bd0d*/
+  MEMORY[0xB33568] = (int)OblivionDynamicCast( /*0x41bd1d*/
+                            v6,
+                            0,
+                            (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                            &TESSound `RTTI Type Descriptor',
+                            0);
+  if ( !MEMORY[0xB33568] ) /*0x41bd22*/
   {
-    v7 = (TESSound *)FormHeapAlloc(0x44u);
-    if ( v7 )
-      v8 = (TESForm *)TESSound::TESSound(v7);
+    v7 = (TESSound *)FormHeapAlloc(0x44u); /*0x41bd26*/
+    if ( v7 ) /*0x41bd3c*/
+      v8 = (TESForm *)TESSound::TESSound(v7); /*0x41bd40*/
     else
-      v8 = 0;
-    MagicFailureSoundDestruction = (int)v8;
-    TESForm_SetFormID(v8, 0x12E, 1);
-    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MagicFailureSoundDestruction + 0xD8))(
-      MagicFailureSoundDestruction,
+      v8 = 0; /*0x41bd47*/
+    MEMORY[0xB33568] = (int)v8; /*0x41bd56*/
+    TESForm_SetFormID(v8, 0x12E, 1); /*0x41bd5b*/
+    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MEMORY[0xB33568] + 0xD8))( /*0x41bd73*/
+      MEMORY[0xB33568],
       "MagicFailureSoundDestruction");
-    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MagicFailureSoundDestruction + 0x90))(
-      MagicFailureSoundDestruction,
-      0);
-    BSSimpleList_PushFront((_DWORD *)(TESDataHandler + 0x6C), MagicFailureSoundDestruction);
+    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MEMORY[0xB33568] + 0x90))(MEMORY[0xB33568], 0); /*0x41bd85*/
+    BSSimpleList_PushFront(&g_TESDataHandler->soundList.item, MEMORY[0xB33568]); /*0x41bd97*/
   }
-  v9 = TESDataHandler_LookupFormByID((TESForm *)0x12F);
-  MagicFailureSoundIllusion = (int)OblivionDynamicCast(
-                                     v9,
-                                     0,
-                                     (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                                     &TESSound `RTTI Type Descriptor',
-                                     0);
-  if ( !MagicFailureSoundIllusion )
+  v9 = TESDataHandler_LookupFormByID((TESForm *)0x12F); /*0x41bdb5*/
+  MEMORY[0xB3356C] = (int)OblivionDynamicCast( /*0x41bdc5*/
+                            v9,
+                            0,
+                            (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                            &TESSound `RTTI Type Descriptor',
+                            0);
+  if ( !MEMORY[0xB3356C] ) /*0x41bdca*/
   {
-    v10 = (TESSound *)FormHeapAlloc(0x44u);
-    if ( v10 )
-      v11 = (TESForm *)TESSound::TESSound(v10);
+    v10 = (TESSound *)FormHeapAlloc(0x44u); /*0x41bdce*/
+    if ( v10 ) /*0x41bde4*/
+      v11 = (TESForm *)TESSound::TESSound(v10); /*0x41bde8*/
     else
-      v11 = 0;
-    MagicFailureSoundIllusion = (int)v11;
-    TESForm_SetFormID(v11, 0x12F, 1);
-    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MagicFailureSoundIllusion + 0xD8))(
-      MagicFailureSoundIllusion,
+      v11 = 0; /*0x41bdef*/
+    MEMORY[0xB3356C] = (int)v11; /*0x41bdfe*/
+    TESForm_SetFormID(v11, 0x12F, 1); /*0x41be03*/
+    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MEMORY[0xB3356C] + 0xD8))( /*0x41be1b*/
+      MEMORY[0xB3356C],
       "MagicFailureSoundIllusion");
-    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MagicFailureSoundIllusion + 0x90))(MagicFailureSoundIllusion, 0);
-    BSSimpleList_PushFront((_DWORD *)(TESDataHandler + 0x6C), MagicFailureSoundIllusion);
+    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MEMORY[0xB3356C] + 0x90))(MEMORY[0xB3356C], 0); /*0x41be2d*/
+    BSSimpleList_PushFront(&g_TESDataHandler->soundList.item, MEMORY[0xB3356C]); /*0x41be3f*/
   }
-  v12 = TESDataHandler_LookupFormByID((TESForm *)0x130);
-  MagicFailureSoundMysticism = (int)OblivionDynamicCast(
-                                      v12,
-                                      0,
-                                      (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                                      &TESSound `RTTI Type Descriptor',
-                                      0);
-  if ( !MagicFailureSoundMysticism )
+  v12 = TESDataHandler_LookupFormByID((TESForm *)0x130); /*0x41be5d*/
+  MEMORY[0xB33570] = (int)OblivionDynamicCast( /*0x41be6d*/
+                            v12,
+                            0,
+                            (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                            &TESSound `RTTI Type Descriptor',
+                            0);
+  if ( !MEMORY[0xB33570] ) /*0x41be72*/
   {
-    v13 = (TESSound *)FormHeapAlloc(0x44u);
-    if ( v13 )
-      v14 = (TESForm *)TESSound::TESSound(v13);
+    v13 = (TESSound *)FormHeapAlloc(0x44u); /*0x41be76*/
+    if ( v13 ) /*0x41be8c*/
+      v14 = (TESForm *)TESSound::TESSound(v13); /*0x41be90*/
     else
-      v14 = 0;
-    MagicFailureSoundMysticism = (int)v14;
-    TESForm_SetFormID(v14, 0x130, 1);
-    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MagicFailureSoundMysticism + 0xD8))(
-      MagicFailureSoundMysticism,
+      v14 = 0; /*0x41be97*/
+    MEMORY[0xB33570] = (int)v14; /*0x41bea6*/
+    TESForm_SetFormID(v14, 0x130, 1); /*0x41beab*/
+    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MEMORY[0xB33570] + 0xD8))( /*0x41bec3*/
+      MEMORY[0xB33570],
       "MagicFailureSoundMysticism");
-    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MagicFailureSoundMysticism + 0x90))(MagicFailureSoundMysticism, 0);
-    BSSimpleList_PushFront((_DWORD *)(TESDataHandler + 0x6C), MagicFailureSoundMysticism);
+    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MEMORY[0xB33570] + 0x90))(MEMORY[0xB33570], 0); /*0x41bed5*/
+    BSSimpleList_PushFront(&g_TESDataHandler->soundList.item, MEMORY[0xB33570]); /*0x41bee7*/
   }
-  v15 = TESDataHandler_LookupFormByID((TESForm *)0x131);
-  MagicFailureSoundRestoration = (int)OblivionDynamicCast(
-                                        v15,
-                                        0,
-                                        (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                                        &TESSound `RTTI Type Descriptor',
-                                        0);
-  if ( !MagicFailureSoundRestoration )
+  v15 = TESDataHandler_LookupFormByID((TESForm *)0x131); /*0x41bf05*/
+  MEMORY[0xB33574] = (int)OblivionDynamicCast( /*0x41bf15*/
+                            v15,
+                            0,
+                            (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                            &TESSound `RTTI Type Descriptor',
+                            0);
+  if ( !MEMORY[0xB33574] ) /*0x41bf1a*/
   {
-    v16 = (TESSound *)FormHeapAlloc(0x44u);
-    if ( v16 )
-      v17 = (TESForm *)TESSound::TESSound(v16);
+    v16 = (TESSound *)FormHeapAlloc(0x44u); /*0x41bf1e*/
+    if ( v16 ) /*0x41bf34*/
+      v17 = (TESForm *)TESSound::TESSound(v16); /*0x41bf38*/
     else
-      v17 = 0;
-    MagicFailureSoundRestoration = (int)v17;
-    TESForm_SetFormID(v17, 0x131, 1);
-    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MagicFailureSoundRestoration + 0xD8))(
-      MagicFailureSoundRestoration,
+      v17 = 0; /*0x41bf3f*/
+    MEMORY[0xB33574] = (int)v17; /*0x41bf4e*/
+    TESForm_SetFormID(v17, 0x131, 1); /*0x41bf53*/
+    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MEMORY[0xB33574] + 0xD8))( /*0x41bf6b*/
+      MEMORY[0xB33574],
       "MagicFailureSoundRestoration");
-    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MagicFailureSoundRestoration + 0x90))(
-      MagicFailureSoundRestoration,
-      0);
-    BSSimpleList_PushFront((_DWORD *)(TESDataHandler + 0x6C), MagicFailureSoundRestoration);
+    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MEMORY[0xB33574] + 0x90))(MEMORY[0xB33574], 0); /*0x41bf7d*/
+    BSSimpleList_PushFront(&g_TESDataHandler->soundList.item, MEMORY[0xB33574]); /*0x41bf8f*/
   }
-  v18 = TESDataHandler_LookupFormByID((TESForm *)0x138);
-  MagicEnchantDrawSoundAlteration = (int)OblivionDynamicCast(
-                                           v18,
-                                           0,
-                                           (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                                           &TESSound `RTTI Type Descriptor',
-                                           0);
-  if ( !MagicEnchantDrawSoundAlteration )
-  {
-    v19 = (TESSound *)FormHeapAlloc(0x44u);
-    if ( v19 )
-      v20 = (TESForm *)TESSound::TESSound(v19);
-    else
-      v20 = 0;
-    MagicEnchantDrawSoundAlteration = (int)v20;
-    TESForm_SetFormID(v20, 0x138, 1);
-    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MagicEnchantDrawSoundAlteration + 0xD8))(
-      MagicEnchantDrawSoundAlteration,
-      "MagicEnchantDrawSoundAlteration");
-    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MagicEnchantDrawSoundAlteration + 0x90))(
-      MagicEnchantDrawSoundAlteration,
-      0);
-    BSSimpleList_PushFront((_DWORD *)(TESDataHandler + 0x6C), MagicEnchantDrawSoundAlteration);
-  }
-  v21 = TESDataHandler_LookupFormByID((TESForm *)0x139);
-  MagicEnchantDrawSoundConjuration = (int)OblivionDynamicCast(
-                                            v21,
-                                            0,
-                                            (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                                            &TESSound `RTTI Type Descriptor',
-                                            0);
-  if ( !MagicEnchantDrawSoundConjuration )
-  {
-    v22 = (TESSound *)FormHeapAlloc(0x44u);
-    if ( v22 )
-      v23 = (TESForm *)TESSound::TESSound(v22);
-    else
-      v23 = 0;
-    MagicEnchantDrawSoundConjuration = (int)v23;
-    TESForm_SetFormID(v23, 0x139, 1);
-    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MagicEnchantDrawSoundConjuration + 0xD8))(
-      MagicEnchantDrawSoundConjuration,
-      "MagicEnchantDrawSoundConjuration");
-    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MagicEnchantDrawSoundConjuration + 0x90))(
-      MagicEnchantDrawSoundConjuration,
-      0);
-    BSSimpleList_PushFront((_DWORD *)(TESDataHandler + 0x6C), MagicEnchantDrawSoundConjuration);
-  }
-  v24 = TESDataHandler_LookupFormByID((TESForm *)0x13A);
-  MagicEnchantDrawSoundDestruction = (int)OblivionDynamicCast(
-                                            v24,
-                                            0,
-                                            (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                                            &TESSound `RTTI Type Descriptor',
-                                            0);
-  if ( !MagicEnchantDrawSoundDestruction )
-  {
-    v25 = (TESSound *)FormHeapAlloc(0x44u);
-    if ( v25 )
-      v26 = (TESForm *)TESSound::TESSound(v25);
-    else
-      v26 = 0;
-    MagicEnchantDrawSoundDestruction = (int)v26;
-    TESForm_SetFormID(v26, 0x13A, 1);
-    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MagicEnchantDrawSoundDestruction + 0xD8))(
-      MagicEnchantDrawSoundDestruction,
-      "MagicEnchantDrawSoundDestruction");
-    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MagicEnchantDrawSoundDestruction + 0x90))(
-      MagicEnchantDrawSoundDestruction,
-      0);
-    BSSimpleList_PushFront((_DWORD *)(TESDataHandler + 0x6C), MagicEnchantDrawSoundDestruction);
-  }
-  v27 = TESDataHandler_LookupFormByID((TESForm *)0x13B);
-  MagicEnchantDrawSoundIllusion = (int)OblivionDynamicCast(
-                                         v27,
-                                         0,
-                                         (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                                         &TESSound `RTTI Type Descriptor',
-                                         0);
-  if ( !MagicEnchantDrawSoundIllusion )
-  {
-    v28 = (TESSound *)FormHeapAlloc(0x44u);
-    if ( v28 )
-      v29 = (TESForm *)TESSound::TESSound(v28);
-    else
-      v29 = 0;
-    MagicEnchantDrawSoundIllusion = (int)v29;
-    TESForm_SetFormID(v29, 0x13B, 1);
-    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MagicEnchantDrawSoundIllusion + 0xD8))(
-      MagicEnchantDrawSoundIllusion,
-      "MagicEnchantDrawSoundIllusion");
-    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MagicEnchantDrawSoundIllusion + 0x90))(
-      MagicEnchantDrawSoundIllusion,
-      0);
-    BSSimpleList_PushFront((_DWORD *)(TESDataHandler + 0x6C), MagicEnchantDrawSoundIllusion);
-  }
-  v30 = TESDataHandler_LookupFormByID((TESForm *)0x13C);
-  MagicEnchantDrawSoundMysticism = (int)OblivionDynamicCast(
-                                          v30,
-                                          0,
-                                          (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                                          &TESSound `RTTI Type Descriptor',
-                                          0);
-  if ( !MagicEnchantDrawSoundMysticism )
-  {
-    v31 = (TESSound *)FormHeapAlloc(0x44u);
-    if ( v31 )
-      v32 = (TESForm *)TESSound::TESSound(v31);
-    else
-      v32 = 0;
-    MagicEnchantDrawSoundMysticism = (int)v32;
-    TESForm_SetFormID(v32, 0x13C, 1);
-    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MagicEnchantDrawSoundMysticism + 0xD8))(
-      MagicEnchantDrawSoundMysticism,
-      "MagicEnchantDrawSoundMysticism");
-    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MagicEnchantDrawSoundMysticism + 0x90))(
-      MagicEnchantDrawSoundMysticism,
-      0);
-    BSSimpleList_PushFront((_DWORD *)(TESDataHandler + 0x6C), MagicEnchantDrawSoundMysticism);
-  }
-  v33 = TESDataHandler_LookupFormByID((TESForm *)0x13D);
-  MagicEnchantDrawSoundRestoration = (int)OblivionDynamicCast(
-                                            v33,
-                                            0,
-                                            (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                                            &TESSound `RTTI Type Descriptor',
-                                            0);
-  if ( !MagicEnchantDrawSoundRestoration )
-  {
-    v34 = (TESSound *)FormHeapAlloc(0x44u);
-    if ( v34 )
-      v35 = (TESForm *)TESSound::TESSound(v34);
-    else
-      v35 = 0;
-    MagicEnchantDrawSoundRestoration = (int)v35;
-    TESForm_SetFormID(v35, 0x13D, 1);
-    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MagicEnchantDrawSoundRestoration + 0xD8))(
-      MagicEnchantDrawSoundRestoration,
-      "MagicEnchantDrawSoundRestoration");
-    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MagicEnchantDrawSoundRestoration + 0x90))(
-      MagicEnchantDrawSoundRestoration,
-      0);
-    BSSimpleList_PushFront((_DWORD *)(TESDataHandler + 0x6C), MagicEnchantDrawSoundRestoration);
-  }
-  v36 = TESDataHandler_LookupFormByID((TESForm *)0x13E);
-  MagicEnchantHitSoundAlteration = (int)OblivionDynamicCast(
-                                          v36,
-                                          0,
-                                          (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                                          &TESSound `RTTI Type Descriptor',
-                                          0);
-  if ( !MagicEnchantHitSoundAlteration )
-  {
-    v37 = (TESSound *)FormHeapAlloc(0x44u);
-    if ( v37 )
-      v38 = (TESForm *)TESSound::TESSound(v37);
-    else
-      v38 = 0;
-    MagicEnchantHitSoundAlteration = (int)v38;
-    TESForm_SetFormID(v38, 0x13E, 1);
-    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MagicEnchantHitSoundAlteration + 0xD8))(
-      MagicEnchantHitSoundAlteration,
-      "MagicEnchantHitSoundAlteration");
-    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MagicEnchantHitSoundAlteration + 0x90))(
-      MagicEnchantHitSoundAlteration,
-      0);
-    BSSimpleList_PushFront((_DWORD *)(TESDataHandler + 0x6C), MagicEnchantHitSoundAlteration);
-  }
-  v39 = TESDataHandler_LookupFormByID((TESForm *)0x13F);
-  MagicEnchantHitSoundConjuration = (int)OblivionDynamicCast(
-                                           v39,
-                                           0,
-                                           (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                                           &TESSound `RTTI Type Descriptor',
-                                           0);
-  if ( !MagicEnchantHitSoundConjuration )
-  {
-    v40 = (TESSound *)FormHeapAlloc(0x44u);
-    if ( v40 )
-      v41 = (TESForm *)TESSound::TESSound(v40);
-    else
-      v41 = 0;
-    MagicEnchantHitSoundConjuration = (int)v41;
-    TESForm_SetFormID(v41, 0x13F, 1);
-    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MagicEnchantHitSoundConjuration + 0xD8))(
-      MagicEnchantHitSoundConjuration,
-      "MagicEnchantHitSoundConjuration");
-    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MagicEnchantHitSoundConjuration + 0x90))(
-      MagicEnchantHitSoundConjuration,
-      0);
-    BSSimpleList_PushFront((_DWORD *)(TESDataHandler + 0x6C), MagicEnchantHitSoundConjuration);
-  }
-  v42 = TESDataHandler_LookupFormByID((TESForm *)0x140);
-  MagicEnchantHitSoundDestruction = (int)OblivionDynamicCast(
-                                           v42,
-                                           0,
-                                           (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                                           &TESSound `RTTI Type Descriptor',
-                                           0);
-  if ( !MagicEnchantHitSoundDestruction )
-  {
-    v43 = (TESSound *)FormHeapAlloc(0x44u);
-    if ( v43 )
-      v44 = (TESForm *)TESSound::TESSound(v43);
-    else
-      v44 = 0;
-    MagicEnchantHitSoundDestruction = (int)v44;
-    TESForm_SetFormID(v44, 0x140, 1);
-    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MagicEnchantHitSoundDestruction + 0xD8))(
-      MagicEnchantHitSoundDestruction,
-      "MagicEnchantHitSoundDestruction");
-    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MagicEnchantHitSoundDestruction + 0x90))(
-      MagicEnchantHitSoundDestruction,
-      0);
-    BSSimpleList_PushFront((_DWORD *)(TESDataHandler + 0x6C), MagicEnchantHitSoundDestruction);
-  }
-  v45 = TESDataHandler_LookupFormByID((TESForm *)0x141);
-  MagicEnchantHitSoundIllusion = (int)OblivionDynamicCast(
-                                        v45,
-                                        0,
-                                        (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                                        &TESSound `RTTI Type Descriptor',
-                                        0);
-  if ( !MagicEnchantHitSoundIllusion )
-  {
-    v46 = (TESSound *)FormHeapAlloc(0x44u);
-    if ( v46 )
-      v47 = (TESForm *)TESSound::TESSound(v46);
-    else
-      v47 = 0;
-    MagicEnchantHitSoundIllusion = (int)v47;
-    TESForm_SetFormID(v47, 0x141, 1);
-    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MagicEnchantHitSoundIllusion + 0xD8))(
-      MagicEnchantHitSoundIllusion,
-      "MagicEnchantHitSoundIllusion");
-    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MagicEnchantHitSoundIllusion + 0x90))(
-      MagicEnchantHitSoundIllusion,
-      0);
-    BSSimpleList_PushFront((_DWORD *)(TESDataHandler + 0x6C), MagicEnchantHitSoundIllusion);
-  }
-  v48 = TESDataHandler_LookupFormByID((TESForm *)0x142);
-  MagicEnchantHitSoundMysticism = (int)OblivionDynamicCast(
-                                         v48,
-                                         0,
-                                         (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                                         &TESSound `RTTI Type Descriptor',
-                                         0);
-  if ( !MagicEnchantHitSoundMysticism )
-  {
-    v49 = (TESSound *)FormHeapAlloc(0x44u);
-    if ( v49 )
-      v50 = (TESForm *)TESSound::TESSound(v49);
-    else
-      v50 = 0;
-    MagicEnchantHitSoundMysticism = (int)v50;
-    TESForm_SetFormID(v50, 0x142, 1);
-    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MagicEnchantHitSoundMysticism + 0xD8))(
-      MagicEnchantHitSoundMysticism,
-      "MagicEnchantHitSoundMysticism");
-    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MagicEnchantHitSoundMysticism + 0x90))(
-      MagicEnchantHitSoundMysticism,
-      0);
-    BSSimpleList_PushFront((_DWORD *)(TESDataHandler + 0x6C), MagicEnchantHitSoundMysticism);
-  }
-  v51 = TESDataHandler_LookupFormByID((TESForm *)0x143);
-  MagicEnchantHitSoundRestoration = (int)OblivionDynamicCast(
-                                           v51,
-                                           0,
-                                           (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                                           &TESSound `RTTI Type Descriptor',
-                                           0);
-  if ( !MagicEnchantHitSoundRestoration )
-  {
-    v52 = (TESSound *)FormHeapAlloc(0x44u);
-    if ( v52 )
-      v53 = (TESForm *)TESSound::TESSound(v52);
-    else
-      v53 = 0;
-    MagicEnchantHitSoundRestoration = (int)v53;
-    TESForm_SetFormID(v53, 0x143, 1);
-    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MagicEnchantHitSoundRestoration + 0xD8))(
-      MagicEnchantHitSoundRestoration,
-      "MagicEnchantHitSoundRestoration");
-    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MagicEnchantHitSoundRestoration + 0x90))(
-      MagicEnchantHitSoundRestoration,
-      0);
-    BSSimpleList_PushFront((_DWORD *)(TESDataHandler + 0x6C), MagicEnchantHitSoundRestoration);
-  }
-  v54 = TESDataHandler_LookupFormByID((TESForm *)0x136);
-  TESDataHandler_g_DefaultPlayerSpell = (int)OblivionDynamicCast(
-                                               v54,
-                                               0,
-                                               (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                                               &SpellItem `RTTI Type Descriptor',
-                                               0);
-  if ( !TESDataHandler_g_DefaultPlayerSpell )
-  {
-    DefaultPlayerSpell = SpellItem_MakeDefaultPlayerSpell();
-    TESDataHandler_g_DefaultPlayerSpell = (int)DefaultPlayerSpell;
-    if ( DefaultPlayerSpell )
-    {
-      TESForm_SetFormID((TESForm *)DefaultPlayerSpell, 0x136, 1);
-      (*(void (__thiscall **)(int, const char *))(*(_DWORD *)TESDataHandler_g_DefaultPlayerSpell + 0xD8))(
-        TESDataHandler_g_DefaultPlayerSpell,
-        "DefaultPlayerSpell");
-      (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)TESDataHandler_g_DefaultPlayerSpell + 0x90))(
-        TESDataHandler_g_DefaultPlayerSpell,
-        0);
-      BSSimpleList_PushFront((_DWORD *)(TESDataHandler + 0x2C), TESDataHandler_g_DefaultPlayerSpell);
-    }
-  }
-  v56 = TESDataHandler_LookupFormByID((TESForm *)0x137);
-  TESDataHandler_g_MarksmanParalyzeSpell = (int)OblivionDynamicCast(
-                                                  v56,
-                                                  0,
-                                                  (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                                                  &SpellItem `RTTI Type Descriptor',
-                                                  0);
-  if ( !TESDataHandler_g_MarksmanParalyzeSpell )
-  {
-    DefaultMarksmanSpell = SpellItem_MakeDefaultMarksmanSpell();
-    TESDataHandler_g_MarksmanParalyzeSpell = (int)DefaultMarksmanSpell;
-    if ( DefaultMarksmanSpell )
-    {
-      TESForm_SetFormID((TESForm *)DefaultMarksmanSpell, 0x137, 1);
-      (*(void (__thiscall **)(int, const char *))(*(_DWORD *)TESDataHandler_g_MarksmanParalyzeSpell + 0xD8))(
-        TESDataHandler_g_MarksmanParalyzeSpell,
-        "DefaultMarksmanParalyzeSpell");
-      (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)TESDataHandler_g_MarksmanParalyzeSpell + 0x90))(
-        TESDataHandler_g_MarksmanParalyzeSpell,
-        0);
-      BSSimpleList_PushFront((_DWORD *)(TESDataHandler + 0x2C), TESDataHandler_g_MarksmanParalyzeSpell);
-    }
-  }
-  v58 = TESDataHandler_LookupFormByID((TESForm *)0x144);
-  effectReflectShader = (int)OblivionDynamicCast(
-                               v58,
+  v18 = TESDataHandler_LookupFormByID((TESForm *)0x138); /*0x41bfad*/
+  MEMORY[0xB33578][0] = (int)OblivionDynamicCast( /*0x41bfbd*/
+                               v18,
                                0,
                                (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                               &TESEffectShader `RTTI Type Descriptor',
+                               &TESSound `RTTI Type Descriptor',
                                0);
-  if ( !effectReflectShader )
+  if ( !MEMORY[0xB33578][0] ) /*0x41bfc2*/
   {
-    v59 = (TESEffectShader *)FormHeapAlloc(0x110u);
-    if ( v59 )
-      v60 = (TESForm *)TESEffectShader::TESEffectShader(v59);
+    v19 = (TESSound *)FormHeapAlloc(0x44u); /*0x41bfc6*/
+    if ( v19 ) /*0x41bfdc*/
+      v20 = (TESForm *)TESSound::TESSound(v19); /*0x41bfe0*/
     else
-      v60 = 0;
-    effectReflectShader = (int)v60;
-    if ( v60 )
+      v20 = 0; /*0x41bfe7*/
+    MEMORY[0xB33578][0] = (int)v20; /*0x41bff6*/
+    TESForm_SetFormID(v20, 0x138, 1); /*0x41bffb*/
+    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MEMORY[0xB33578][0] + 0xD8))( /*0x41c013*/
+      MEMORY[0xB33578][0],
+      "MagicEnchantDrawSoundAlteration");
+    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MEMORY[0xB33578][0] + 0x90))(MEMORY[0xB33578][0], 0); /*0x41c025*/
+    BSSimpleList_PushFront(&g_TESDataHandler->soundList.item, MEMORY[0xB33578][0]); /*0x41c037*/
+  }
+  v21 = TESDataHandler_LookupFormByID((TESForm *)0x139); /*0x41c055*/
+  MEMORY[0xB33578][1] = (int)OblivionDynamicCast( /*0x41c065*/
+                               v21,
+                               0,
+                               (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                               &TESSound `RTTI Type Descriptor',
+                               0);
+  if ( !MEMORY[0xB33578][1] ) /*0x41c06a*/
+  {
+    v22 = (TESSound *)FormHeapAlloc(0x44u); /*0x41c06e*/
+    if ( v22 ) /*0x41c084*/
+      v23 = (TESForm *)TESSound::TESSound(v22); /*0x41c088*/
+    else
+      v23 = 0; /*0x41c08f*/
+    MEMORY[0xB33578][1] = (int)v23; /*0x41c09e*/
+    TESForm_SetFormID(v23, 0x139, 1); /*0x41c0a3*/
+    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MEMORY[0xB33578][1] + 0xD8))( /*0x41c0bb*/
+      MEMORY[0xB33578][1],
+      "MagicEnchantDrawSoundConjuration");
+    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MEMORY[0xB33578][1] + 0x90))(MEMORY[0xB33578][1], 0); /*0x41c0cd*/
+    BSSimpleList_PushFront(&g_TESDataHandler->soundList.item, MEMORY[0xB33578][1]); /*0x41c0df*/
+  }
+  v24 = TESDataHandler_LookupFormByID((TESForm *)0x13A); /*0x41c0fd*/
+  MEMORY[0xB33578][2] = (int)OblivionDynamicCast( /*0x41c10d*/
+                               v24,
+                               0,
+                               (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                               &TESSound `RTTI Type Descriptor',
+                               0);
+  if ( !MEMORY[0xB33578][2] ) /*0x41c112*/
+  {
+    v25 = (TESSound *)FormHeapAlloc(0x44u); /*0x41c116*/
+    if ( v25 ) /*0x41c12c*/
+      v26 = (TESForm *)TESSound::TESSound(v25); /*0x41c130*/
+    else
+      v26 = 0; /*0x41c137*/
+    MEMORY[0xB33578][2] = (int)v26; /*0x41c146*/
+    TESForm_SetFormID(v26, 0x13A, 1); /*0x41c14b*/
+    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MEMORY[0xB33578][2] + 0xD8))( /*0x41c163*/
+      MEMORY[0xB33578][2],
+      "MagicEnchantDrawSoundDestruction");
+    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MEMORY[0xB33578][2] + 0x90))(MEMORY[0xB33578][2], 0); /*0x41c175*/
+    BSSimpleList_PushFront(&g_TESDataHandler->soundList.item, MEMORY[0xB33578][2]); /*0x41c187*/
+  }
+  v27 = TESDataHandler_LookupFormByID((TESForm *)0x13B); /*0x41c1a5*/
+  MEMORY[0xB33578][3] = (int)OblivionDynamicCast( /*0x41c1b5*/
+                               v27,
+                               0,
+                               (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                               &TESSound `RTTI Type Descriptor',
+                               0);
+  if ( !MEMORY[0xB33578][3] ) /*0x41c1ba*/
+  {
+    v28 = (TESSound *)FormHeapAlloc(0x44u); /*0x41c1be*/
+    if ( v28 ) /*0x41c1d4*/
+      v29 = (TESForm *)TESSound::TESSound(v28); /*0x41c1d8*/
+    else
+      v29 = 0; /*0x41c1df*/
+    MEMORY[0xB33578][3] = (int)v29; /*0x41c1ee*/
+    TESForm_SetFormID(v29, 0x13B, 1); /*0x41c1f3*/
+    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MEMORY[0xB33578][3] + 0xD8))( /*0x41c20b*/
+      MEMORY[0xB33578][3],
+      "MagicEnchantDrawSoundIllusion");
+    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MEMORY[0xB33578][3] + 0x90))(MEMORY[0xB33578][3], 0); /*0x41c21d*/
+    BSSimpleList_PushFront(&g_TESDataHandler->soundList.item, MEMORY[0xB33578][3]); /*0x41c22f*/
+  }
+  v30 = TESDataHandler_LookupFormByID((TESForm *)0x13C); /*0x41c24d*/
+  MEMORY[0xB33578][4] = (int)OblivionDynamicCast( /*0x41c25d*/
+                               v30,
+                               0,
+                               (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                               &TESSound `RTTI Type Descriptor',
+                               0);
+  if ( !MEMORY[0xB33578][4] ) /*0x41c262*/
+  {
+    v31 = (TESSound *)FormHeapAlloc(0x44u); /*0x41c266*/
+    if ( v31 ) /*0x41c27c*/
+      v32 = (TESForm *)TESSound::TESSound(v31); /*0x41c280*/
+    else
+      v32 = 0; /*0x41c287*/
+    MEMORY[0xB33578][4] = (int)v32; /*0x41c296*/
+    TESForm_SetFormID(v32, 0x13C, 1); /*0x41c29b*/
+    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MEMORY[0xB33578][4] + 0xD8))( /*0x41c2b3*/
+      MEMORY[0xB33578][4],
+      "MagicEnchantDrawSoundMysticism");
+    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MEMORY[0xB33578][4] + 0x90))(MEMORY[0xB33578][4], 0); /*0x41c2c5*/
+    BSSimpleList_PushFront(&g_TESDataHandler->soundList.item, MEMORY[0xB33578][4]); /*0x41c2d7*/
+  }
+  v33 = TESDataHandler_LookupFormByID((TESForm *)0x13D); /*0x41c2f5*/
+  MEMORY[0xB33578][5] = (int)OblivionDynamicCast( /*0x41c305*/
+                               v33,
+                               0,
+                               (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                               &TESSound `RTTI Type Descriptor',
+                               0);
+  if ( !MEMORY[0xB33578][5] ) /*0x41c30a*/
+  {
+    v34 = (TESSound *)FormHeapAlloc(0x44u); /*0x41c30e*/
+    if ( v34 ) /*0x41c324*/
+      v35 = (TESForm *)TESSound::TESSound(v34); /*0x41c328*/
+    else
+      v35 = 0; /*0x41c32f*/
+    MEMORY[0xB33578][5] = (int)v35; /*0x41c33e*/
+    TESForm_SetFormID(v35, 0x13D, 1); /*0x41c343*/
+    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MEMORY[0xB33578][5] + 0xD8))( /*0x41c35b*/
+      MEMORY[0xB33578][5],
+      "MagicEnchantDrawSoundRestoration");
+    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MEMORY[0xB33578][5] + 0x90))(MEMORY[0xB33578][5], 0); /*0x41c36d*/
+    BSSimpleList_PushFront(&g_TESDataHandler->soundList.item, MEMORY[0xB33578][5]); /*0x41c37f*/
+  }
+  v36 = TESDataHandler_LookupFormByID((TESForm *)0x13E); /*0x41c39d*/
+  MEMORY[0xB33578][6] = (int)OblivionDynamicCast( /*0x41c3ad*/
+                               v36,
+                               0,
+                               (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                               &TESSound `RTTI Type Descriptor',
+                               0);
+  if ( !MEMORY[0xB33578][6] ) /*0x41c3b2*/
+  {
+    v37 = (TESSound *)FormHeapAlloc(0x44u); /*0x41c3b6*/
+    if ( v37 ) /*0x41c3cc*/
+      v38 = (TESForm *)TESSound::TESSound(v37); /*0x41c3d0*/
+    else
+      v38 = 0; /*0x41c3d7*/
+    MEMORY[0xB33578][6] = (int)v38; /*0x41c3e6*/
+    TESForm_SetFormID(v38, 0x13E, 1); /*0x41c3eb*/
+    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MEMORY[0xB33578][6] + 0xD8))( /*0x41c403*/
+      MEMORY[0xB33578][6],
+      "MagicEnchantHitSoundAlteration");
+    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MEMORY[0xB33578][6] + 0x90))(MEMORY[0xB33578][6], 0); /*0x41c415*/
+    BSSimpleList_PushFront(&g_TESDataHandler->soundList.item, MEMORY[0xB33578][6]); /*0x41c427*/
+  }
+  v39 = TESDataHandler_LookupFormByID((TESForm *)0x13F); /*0x41c445*/
+  MEMORY[0xB33578][7] = (int)OblivionDynamicCast( /*0x41c455*/
+                               v39,
+                               0,
+                               (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                               &TESSound `RTTI Type Descriptor',
+                               0);
+  if ( !MEMORY[0xB33578][7] ) /*0x41c45a*/
+  {
+    v40 = (TESSound *)FormHeapAlloc(0x44u); /*0x41c45e*/
+    if ( v40 ) /*0x41c474*/
+      v41 = (TESForm *)TESSound::TESSound(v40); /*0x41c478*/
+    else
+      v41 = 0; /*0x41c47f*/
+    MEMORY[0xB33578][7] = (int)v41; /*0x41c48e*/
+    TESForm_SetFormID(v41, 0x13F, 1); /*0x41c493*/
+    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MEMORY[0xB33578][7] + 0xD8))( /*0x41c4ab*/
+      MEMORY[0xB33578][7],
+      "MagicEnchantHitSoundConjuration");
+    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MEMORY[0xB33578][7] + 0x90))(MEMORY[0xB33578][7], 0); /*0x41c4bd*/
+    BSSimpleList_PushFront(&g_TESDataHandler->soundList.item, MEMORY[0xB33578][7]); /*0x41c4cf*/
+  }
+  v42 = TESDataHandler_LookupFormByID((TESForm *)0x140); /*0x41c4ed*/
+  MEMORY[0xB33578][8] = (int)OblivionDynamicCast( /*0x41c4fd*/
+                               v42,
+                               0,
+                               (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                               &TESSound `RTTI Type Descriptor',
+                               0);
+  if ( !MEMORY[0xB33578][8] ) /*0x41c502*/
+  {
+    v43 = (TESSound *)FormHeapAlloc(0x44u); /*0x41c506*/
+    if ( v43 ) /*0x41c51c*/
+      v44 = (TESForm *)TESSound::TESSound(v43); /*0x41c520*/
+    else
+      v44 = 0; /*0x41c527*/
+    MEMORY[0xB33578][8] = (int)v44; /*0x41c536*/
+    TESForm_SetFormID(v44, 0x140, 1); /*0x41c53b*/
+    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MEMORY[0xB33578][8] + 0xD8))( /*0x41c553*/
+      MEMORY[0xB33578][8],
+      "MagicEnchantHitSoundDestruction");
+    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MEMORY[0xB33578][8] + 0x90))(MEMORY[0xB33578][8], 0); /*0x41c565*/
+    BSSimpleList_PushFront(&g_TESDataHandler->soundList.item, MEMORY[0xB33578][8]); /*0x41c577*/
+  }
+  v45 = TESDataHandler_LookupFormByID((TESForm *)0x141); /*0x41c595*/
+  MEMORY[0xB33578][9] = (int)OblivionDynamicCast( /*0x41c5a5*/
+                               v45,
+                               0,
+                               (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                               &TESSound `RTTI Type Descriptor',
+                               0);
+  if ( !MEMORY[0xB33578][9] ) /*0x41c5aa*/
+  {
+    v46 = (TESSound *)FormHeapAlloc(0x44u); /*0x41c5ae*/
+    if ( v46 ) /*0x41c5c4*/
+      v47 = (TESForm *)TESSound::TESSound(v46); /*0x41c5c8*/
+    else
+      v47 = 0; /*0x41c5cf*/
+    MEMORY[0xB33578][9] = (int)v47; /*0x41c5de*/
+    TESForm_SetFormID(v47, 0x141, 1); /*0x41c5e3*/
+    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MEMORY[0xB33578][9] + 0xD8))( /*0x41c5fb*/
+      MEMORY[0xB33578][9],
+      "MagicEnchantHitSoundIllusion");
+    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MEMORY[0xB33578][9] + 0x90))(MEMORY[0xB33578][9], 0); /*0x41c60d*/
+    BSSimpleList_PushFront(&g_TESDataHandler->soundList.item, MEMORY[0xB33578][9]); /*0x41c61f*/
+  }
+  v48 = TESDataHandler_LookupFormByID((TESForm *)0x142); /*0x41c63d*/
+  MEMORY[0xB33578][0xA] = (int)OblivionDynamicCast( /*0x41c64d*/
+                                 v48,
+                                 0,
+                                 (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                                 &TESSound `RTTI Type Descriptor',
+                                 0);
+  if ( !MEMORY[0xB33578][0xA] ) /*0x41c652*/
+  {
+    v49 = (TESSound *)FormHeapAlloc(0x44u); /*0x41c656*/
+    if ( v49 ) /*0x41c66c*/
+      v50 = (TESForm *)TESSound::TESSound(v49); /*0x41c670*/
+    else
+      v50 = 0; /*0x41c677*/
+    MEMORY[0xB33578][0xA] = (int)v50; /*0x41c686*/
+    TESForm_SetFormID(v50, 0x142, 1); /*0x41c68b*/
+    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MEMORY[0xB33578][0xA] + 0xD8))( /*0x41c6a3*/
+      MEMORY[0xB33578][0xA],
+      "MagicEnchantHitSoundMysticism");
+    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MEMORY[0xB33578][0xA] + 0x90))(MEMORY[0xB33578][0xA], 0); /*0x41c6b5*/
+    BSSimpleList_PushFront(&g_TESDataHandler->soundList.item, MEMORY[0xB33578][0xA]); /*0x41c6c7*/
+  }
+  v51 = TESDataHandler_LookupFormByID((TESForm *)0x143); /*0x41c6e5*/
+  MEMORY[0xB33578][0xB] = (int)OblivionDynamicCast( /*0x41c6f5*/
+                                 v51,
+                                 0,
+                                 (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                                 &TESSound `RTTI Type Descriptor',
+                                 0);
+  if ( !MEMORY[0xB33578][0xB] ) /*0x41c6fa*/
+  {
+    v52 = (TESSound *)FormHeapAlloc(0x44u); /*0x41c6fe*/
+    if ( v52 ) /*0x41c714*/
+      v53 = (TESForm *)TESSound::TESSound(v52); /*0x41c718*/
+    else
+      v53 = 0; /*0x41c71f*/
+    MEMORY[0xB33578][0xB] = (int)v53; /*0x41c72e*/
+    TESForm_SetFormID(v53, 0x143, 1); /*0x41c733*/
+    (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MEMORY[0xB33578][0xB] + 0xD8))( /*0x41c74b*/
+      MEMORY[0xB33578][0xB],
+      "MagicEnchantHitSoundRestoration");
+    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MEMORY[0xB33578][0xB] + 0x90))(MEMORY[0xB33578][0xB], 0); /*0x41c75d*/
+    BSSimpleList_PushFront(&g_TESDataHandler->soundList.item, MEMORY[0xB33578][0xB]); /*0x41c76f*/
+  }
+  v54 = TESDataHandler_LookupFormByID((TESForm *)0x136); /*0x41c78d*/
+  MEMORY[0xB33578][0xC] = (int)OblivionDynamicCast( /*0x41c79d*/
+                                 v54,
+                                 0,
+                                 (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                                 &SpellItem `RTTI Type Descriptor',
+                                 0);
+  if ( !MEMORY[0xB33578][0xC] ) /*0x41c7a2*/
+  {
+    DefaultPlayerSpell = SpellItem_MakeDefaultPlayerSpell(); /*0x41c7a4*/
+    MEMORY[0xB33578][0xC] = (int)DefaultPlayerSpell; /*0x41c7ab*/
+    if ( DefaultPlayerSpell ) /*0x41c7b0*/
     {
-      TESForm_SetFormID(v60, 0x144, 1);
-      (*(void (__thiscall **)(int, const char *))(*(_DWORD *)effectReflectShader + 0xD8))(
-        effectReflectShader,
+      TESForm_SetFormID((TESForm *)DefaultPlayerSpell, 0x136, 1); /*0x41c7bb*/
+      (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MEMORY[0xB33578][0xC] + 0xD8))( /*0x41c7d3*/
+        MEMORY[0xB33578][0xC],
+        "DefaultPlayerSpell");
+      (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MEMORY[0xB33578][0xC] + 0x90))(MEMORY[0xB33578][0xC], 0); /*0x41c7e5*/
+      BSSimpleList_PushFront(&g_TESDataHandler->spellList.item, MEMORY[0xB33578][0xC]); /*0x41c7f7*/
+    }
+  }
+  v56 = TESDataHandler_LookupFormByID((TESForm *)0x137); /*0x41c815*/
+  MEMORY[0xB33578][0xD] = (int)OblivionDynamicCast( /*0x41c825*/
+                                 v56,
+                                 0,
+                                 (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                                 &SpellItem `RTTI Type Descriptor',
+                                 0);
+  if ( !MEMORY[0xB33578][0xD] ) /*0x41c82a*/
+  {
+    DefaultMarksmanSpell = SpellItem_MakeDefaultMarksmanSpell(); /*0x41c82c*/
+    MEMORY[0xB33578][0xD] = (int)DefaultMarksmanSpell; /*0x41c833*/
+    if ( DefaultMarksmanSpell ) /*0x41c838*/
+    {
+      TESForm_SetFormID((TESForm *)DefaultMarksmanSpell, 0x137, 1); /*0x41c843*/
+      (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MEMORY[0xB33578][0xD] + 0xD8))( /*0x41c85b*/
+        MEMORY[0xB33578][0xD],
+        "DefaultMarksmanParalyzeSpell");
+      (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MEMORY[0xB33578][0xD] + 0x90))(MEMORY[0xB33578][0xD], 0); /*0x41c86d*/
+      BSSimpleList_PushFront(&g_TESDataHandler->spellList.item, MEMORY[0xB33578][0xD]); /*0x41c87f*/
+    }
+  }
+  v58 = TESDataHandler_LookupFormByID((TESForm *)0x144); /*0x41c89d*/
+  MEMORY[0xB33578][0xE] = (int)OblivionDynamicCast( /*0x41c8ad*/
+                                 v58,
+                                 0,
+                                 (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                                 &TESEffectShader `RTTI Type Descriptor',
+                                 0);
+  if ( !MEMORY[0xB33578][0xE] ) /*0x41c8b2*/
+  {
+    v59 = (TESEffectShader *)FormHeapAlloc(0x110u); /*0x41c8bd*/
+    if ( v59 ) /*0x41c8d3*/
+      v60 = TESEffectShader::TESEffectShader(v59); /*0x41c8d7*/
+    else
+      v60 = 0; /*0x41c8de*/
+    MEMORY[0xB33578][0xE] = (int)v60; /*0x41c8e6*/
+    if ( v60 ) /*0x41c8eb*/
+    {
+      TESForm_SetFormID(&v60->super, 0x144, 1); /*0x41c8f6*/
+      (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MEMORY[0xB33578][0xE] + 0xD8))( /*0x41c90e*/
+        MEMORY[0xB33578][0xE],
         "effectAbsorb");
-      (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)effectReflectShader + 0x90))(effectReflectShader, 0);
-      BSSimpleList_PushFront((_DWORD *)(TESDataHandler + 0xAC), effectReflectShader);
+      (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MEMORY[0xB33578][0xE] + 0x90))(MEMORY[0xB33578][0xE], 0); /*0x41c920*/
+      BSSimpleList_PushFront(&g_TESDataHandler->effectShaderList.item, MEMORY[0xB33578][0xE]); /*0x41c935*/
     }
   }
-  v61 = TESDataHandler_LookupFormByID((TESForm *)0x145);
-  effectAbsorbShader = (int)OblivionDynamicCast(
-                              v61,
-                              0,
-                              (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                              &TESEffectShader `RTTI Type Descriptor',
-                              0);
-  if ( !effectAbsorbShader )
+  v61 = TESDataHandler_LookupFormByID((TESForm *)0x145); /*0x41c953*/
+  MEMORY[0xB33578][0xF] = (int)OblivionDynamicCast( /*0x41c963*/
+                                 v61,
+                                 0,
+                                 (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                                 &TESEffectShader `RTTI Type Descriptor',
+                                 0);
+  if ( !MEMORY[0xB33578][0xF] ) /*0x41c968*/
   {
-    v62 = (TESEffectShader *)FormHeapAlloc(0x110u);
-    if ( v62 )
-      v63 = (TESForm *)TESEffectShader::TESEffectShader(v62);
+    v62 = (TESEffectShader *)FormHeapAlloc(0x110u); /*0x41c973*/
+    if ( v62 ) /*0x41c989*/
+      v63 = TESEffectShader::TESEffectShader(v62); /*0x41c98d*/
     else
-      v63 = 0;
-    effectAbsorbShader = (int)v63;
-    if ( v63 )
+      v63 = 0; /*0x41c994*/
+    MEMORY[0xB33578][0xF] = (int)v63; /*0x41c99c*/
+    if ( v63 ) /*0x41c9a1*/
     {
-      TESForm_SetFormID(v63, 0x145, 1);
-      (*(void (__thiscall **)(int, const char *))(*(_DWORD *)effectAbsorbShader + 0xD8))(
-        effectAbsorbShader,
+      TESForm_SetFormID(&v63->super, 0x145, 1); /*0x41c9ac*/
+      (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MEMORY[0xB33578][0xF] + 0xD8))( /*0x41c9c4*/
+        MEMORY[0xB33578][0xF],
         "effectReflect");
-      (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)effectAbsorbShader + 0x90))(effectAbsorbShader, 0);
-      BSSimpleList_PushFront((_DWORD *)(TESDataHandler + 0xAC), effectAbsorbShader);
+      (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MEMORY[0xB33578][0xF] + 0x90))(MEMORY[0xB33578][0xF], 0); /*0x41c9d6*/
+      BSSimpleList_PushFront(&g_TESDataHandler->effectShaderList.item, MEMORY[0xB33578][0xF]); /*0x41c9eb*/
     }
   }
-  v64 = TESDataHandler_LookupFormByID((TESForm *)0x146);
-  result = (TESForm *)OblivionDynamicCast(
-                        v64,
-                        0,
-                        (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                        &TESEffectShader `RTTI Type Descriptor',
-                        0);
-  LifeDetectedShader = (int)result;
-  if ( !result )
+  v64 = TESDataHandler_LookupFormByID((TESForm *)0x146); /*0x41ca09*/
+  MEMORY[0xB33578][0x10] = (int)OblivionDynamicCast( /*0x41ca19*/
+                                  v64,
+                                  0,
+                                  (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                                  &TESEffectShader `RTTI Type Descriptor',
+                                  0);
+  if ( !MEMORY[0xB33578][0x10] ) /*0x41ca1e*/
   {
-    v66 = (TESEffectShader *)FormHeapAlloc(0x110u);
-    if ( v66 )
-      result = (TESForm *)TESEffectShader::TESEffectShader(v66);
+    v65 = (TESEffectShader *)FormHeapAlloc(0x110u); /*0x41ca29*/
+    if ( v65 ) /*0x41ca3f*/
+      v66 = TESEffectShader::TESEffectShader(v65); /*0x41ca43*/
     else
-      result = 0;
-    LifeDetectedShader = (int)result;
-    if ( result )
+      v66 = 0; /*0x41ca4a*/
+    MEMORY[0xB33578][0x10] = (int)v66; /*0x41ca52*/
+    if ( v66 ) /*0x41ca57*/
     {
-      TESForm_SetFormID(result, 0x146, 1);
-      (*(void (__thiscall **)(int, const char *))(*(_DWORD *)LifeDetectedShader + 0xD8))(
-        LifeDetectedShader,
+      TESForm_SetFormID(&v66->super, 0x146, 1); /*0x41ca62*/
+      (*(void (__thiscall **)(int, const char *))(*(_DWORD *)MEMORY[0xB33578][0x10] + 0xD8))( /*0x41ca7a*/
+        MEMORY[0xB33578][0x10],
         "LifeDetected");
-      (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)LifeDetectedShader + 0x90))(LifeDetectedShader, 0);
-      return (TESForm *)BSSimpleList_PushFront((_DWORD *)(TESDataHandler + 0xAC), LifeDetectedShader);
+      (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)MEMORY[0xB33578][0x10] + 0x90))(MEMORY[0xB33578][0x10], 0); /*0x41ca8c*/
+      BSSimpleList_PushFront(&g_TESDataHandler->effectShaderList.item, MEMORY[0xB33578][0x10]); /*0x41caa1*/
     }
   }
-  return result;
 }

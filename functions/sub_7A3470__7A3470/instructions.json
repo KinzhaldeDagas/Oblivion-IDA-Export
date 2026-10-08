@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A3470",
-    "line": "push    esi",
+    "line": "push    esi; Deep copy-assigns a compact 0x54 SIdvLeafTexture: byte blossom flag, color/variance, owned filename, origin, size, and sizeUsed.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x7A3474",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+source]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -67,13 +67,13 @@
   },
   {
     "ea": "0x7A348B",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; count",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7A348D",
-    "line": "push    0",
+    "line": "push    0; offset",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x7A3498",
-    "line": "push    ecx",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -109,13 +109,13 @@
   },
   {
     "ea": "0x7A349C",
-    "line": "lea     ecx, [esi+14h]",
+    "line": "lea     ecx, [esi+14h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7A349F",
-    "line": "call    sub_414420",
+    "line": "call    OB_stString28_AssignSubstring_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,offset,count). Bounds-checks offset, clamps count to source.size-offset, handles self-assignment by in-place erasure, grows when required, copies the selected bytes, updates size, and writes the terminator.",
     "mnemonic": "call",
     "size": 5
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x7A34A7",
-    "line": "mov     [esi+30h], edx",
+    "line": "mov     [esi+30h], edx; SpeedTreeOBSE 2026-07-09: copies compact SIdvLeafTexture m_cOrigin from source +0x30; this is not the exported per-card texcoord table.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x7A34B9",
-    "line": "mov     [esi+3Ch], edx",
+    "line": "mov     [esi+3Ch], edx; SpeedTreeOBSE 2026-07-09: copies compact SIdvLeafTexture m_cSize from source +0x3C.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x7A34CD",
-    "line": "mov     [esi+48h], edx",
+    "line": "mov     [esi+48h], edx; SpeedTreeOBSE 2026-07-09: copies compact SIdvLeafTexture m_cSizeUsed from source +0x48; world-space leaf sizing, not a UV texture extent.",
     "mnemonic": "mov",
     "size": 3
   },

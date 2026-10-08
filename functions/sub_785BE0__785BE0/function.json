@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_785BE0",
+  "callers_count": 6,
+  "chunks": [
+    [
+      "0x785BE0",
+      "0x785C4E"
+    ],
+    [
+      "0x9CB060",
+      "0x9CB0A7"
+    ]
+  ],
+  "chunks_sha256": "ad6ed655f04d36827cce0500d9d65616c7b8f29a4491093f3bd7b5971401f03d",
+  "comment_regular": "Oblivion 1.2.0.416: default spline constructor sets min=0, max=1, variance=0 and empties five owned vectors. RT4.1 source corroborates defaults/member roles but uses a different stack/heap spill layout; Oblivion's 92-byte vector layout is authoritative.",
+  "comment_repeatable": "Oblivion 1.2.0.416: default spline constructor sets min=0, max=1, variance=0 and empties five owned vectors. RT4.1 source corroborates defaults/member roles but uses a different stack/heap spill layout; Oblivion's 92-byte vector layout is authoritative.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_StBezierSpline_DefaultCtor_010201A0",
   "end_ea": "0x785C4E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_785BE0",
+  "name": "OB_StBezierSpline_DefaultCtor_010201A0",
   "segment": ".text",
   "sha256": "234e6e6bb2ff60519610d8ea23cb0b21ca4eee404ad145b478cd599fcfbb07f5",
   "size": 110,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x785BE0",
-  "type": "float *__thiscall(float *this)",
-  "xrefs_from_count": 37,
+  "total_chunk_size": 181,
+  "type": "OB_stBezierSpline_010201A0 *__thiscall(OB_stBezierSpline_010201A0 *this)",
+  "xrefs_from_count": 58,
   "xrefs_to_count": 6
 }

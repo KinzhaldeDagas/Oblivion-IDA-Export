@@ -1,15 +1,15 @@
-0x788B10: push    ebp
-0x788B11: mov     ebp, [esp+4+arg_4]
+0x788B10: push    ebp; Oblivion checked byte-vector erase-range: verifies both iterators belong to this vector, overlap-moves the suffix, updates end, and returns the resulting checked iterator.
+0x788B11: mov     ebp, [esp+4+first.owner]
 0x788B15: test    ebp, ebp
 0x788B17: push    esi
 0x788B18: push    edi
 0x788B19: mov     edi, ecx
 0x788B1B: jz      short loc_788B23
-0x788B1D: cmp     ebp, [esp+0Ch+arg_C]
+0x788B1D: cmp     ebp, [esp+0Ch+last.owner]
 0x788B21: jz      short loc_788B28
 0x788B23: call    __invalid_parameter_noinfo
-0x788B28: mov     esi, [esp+0Ch+Dst]
-0x788B2C: mov     ecx, [esp+0Ch+Src]
+0x788B28: mov     esi, [esp+0Ch+first.current]
+0x788B2C: mov     ecx, [esp+0Ch+last.current]
 0x788B30: cmp     esi, ecx
 0x788B32: jz      short loc_788B51
 0x788B34: mov     eax, [edi+8]
@@ -26,7 +26,7 @@
 0x788B4A: add     esp, 10h
 0x788B4D: mov     [edi+8], ebx
 0x788B50: pop     ebx
-0x788B51: mov     eax, [esp+0Ch+arg_0]
+0x788B51: mov     eax, [esp+0Ch+result]
 0x788B55: pop     edi
 0x788B56: mov     [eax+4], esi
 0x788B59: pop     esi

@@ -1,1 +1,4 @@
-IMediaEvent
+struct IMediaEvent
+{
+IMediaEventVtbl *lpVtbl;
+};

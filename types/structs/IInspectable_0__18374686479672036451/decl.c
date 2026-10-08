@@ -1,1 +1,1 @@
-IInspectable_0
+typedef IInspectable IInspectable_0;

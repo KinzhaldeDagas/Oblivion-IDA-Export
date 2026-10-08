@@ -13,7 +13,7 @@
 0x558586: call    sub_557430
 0x55858B: mov     eax, [esi+4]
 0x55858E: push    eax
-0x55858F: call    FormHeapFree
+0x55858F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x558594: add     esp, 14h
 0x558597: mov     dword ptr [esi+4], 0
 0x55859E: mov     dword ptr [esi+8], 0

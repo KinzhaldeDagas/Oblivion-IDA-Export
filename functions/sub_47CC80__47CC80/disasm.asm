@@ -8,7 +8,7 @@
 0x47CC8F: call    edx
 0x47CC91: test    eax, eax
 0x47CC93: jz      short loc_47CCA3
-0x47CC95: cmp     eax, offset dword_B3CD7C
+0x47CC95: cmp     eax, offset stru_B3CD7C
 0x47CC9A: jz      short loc_47CCB8
 0x47CC9C: mov     eax, [eax+4]
 0x47CC9F: test    eax, eax

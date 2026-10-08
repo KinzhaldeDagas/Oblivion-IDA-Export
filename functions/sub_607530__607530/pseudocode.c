@@ -1,29 +1,29 @@
-char __usercall sub_607530@<al>(_DWORD *a1@<ecx>, char a2@<bpl>, double a3@<st2>, double a4@<st1>, double a5@<st0>)
+char __thiscall sub_607530(MobileObject *this)
 {
-  int v6; // ecx
-  int v7; // eax
-  HighProcess *v8; // eax
-  HighProcess *v9; // edi
-  void (__thiscall ***v10)(_DWORD, int); // ecx
+  LowProcess *process; // ecx
+  int v3; // eax
+  HighProcess *v4; // eax
+  HighProcess *v5; // edi
+  LowProcess *v6; // ecx
 
-  v6 = a1[0x16];
-  if ( !v6 || (*(int (__thiscall **)(int))(*(_DWORD *)v6 + 8))(v6) )
+  process = this->process; /*0x607555*/
+  if ( !process || process->GetProcessLevel(process) ) /*0x607561*/
   {
-    v7 = (*(int (__thiscall **)(_DWORD))(*(_DWORD *)a1[0x16] + 8))(a1[0x16]);
-    sub_674550(a2, a3, a4, a5, (int)a1, v7);
-    v8 = (HighProcess *)FormHeapAlloc(0x2ECu);
-    if ( v8 )
-      v9 = HighProcess::HighProcess(v8);
+    v3 = this->process->GetProcessLevel(this->process); /*0x607573*/
+    sub_674550((int)this, v3); /*0x60757c*/
+    v4 = (HighProcess *)FormHeapAlloc(0x2ECu); /*0x607586*/
+    if ( v4 ) /*0x60759c*/
+      v5 = HighProcess::HighProcess(v4); /*0x6075a5*/
     else
-      v9 = 0;
-    v9->Copy(v9, (BaseProcess *)a1[0x16]);
-    v10 = (void (__thiscall ***)(_DWORD, int))a1[0x16];
-    if ( v10 )
-      (**v10)(v10, 1);
-    a1[0x16] = v9;
-    sub_673A90((int)a1, 0, 0, 0, 0);
-    (*(void (__thiscall **)(_DWORD *, _DWORD))(*a1 + 0x178))(a1, 0);
-    (*(void (__thiscall **)(_DWORD))(*(_DWORD *)a1[0x16] + 0x4C))(a1[0x16]);
+      v5 = 0; /*0x6075a9*/
+    v5->Copy(v5, this->process); /*0x6075be*/
+    v6 = this->process; /*0x6075c0*/
+    if ( v6 ) /*0x6075c5*/
+      ((void (__thiscall *)(LowProcess *, int))v6->Destructor)(v6, 1); /*0x6075cd*/
+    this->process = v5; /*0x6075dd*/
+    ActorProcessManager_AddMobileObject((ActorProcessManager *)&qword_B3BB2C[0x75], this, 0, 0, 0, 0); /*0x6075e0*/
+    ((void (__thiscall *)(MobileObject *, _DWORD))this->vtbl->super.Unk_5E)(this, 0); /*0x6075f1*/
+    this->process->Unk_13(this->process); /*0x6075fb*/
   }
-  return 1;
+  return 1; /*0x6075ff*/
 }

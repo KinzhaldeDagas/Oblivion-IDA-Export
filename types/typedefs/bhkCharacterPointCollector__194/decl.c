@@ -1,1 +1,1 @@
-bhkCharacterPointCollector
+struct bhkCharacterPointCollector;

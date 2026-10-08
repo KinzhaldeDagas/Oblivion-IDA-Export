@@ -17,7 +17,6 @@
 0x764673: mov     [ebx-10h], edi
 0x764676: xor     eax, eax
 0x764678: jmp     short loc_764680
-0x76467A: align 10h
 0x764680: mov     ecx, [esp+eax*4+2Ch+var_18]
 0x764684: lea     edx, [ecx+ebp+1BDh]
 0x76468B: cmp     [esi+edx*4], edi

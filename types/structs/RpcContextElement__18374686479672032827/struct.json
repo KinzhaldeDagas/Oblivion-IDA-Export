@@ -1,40 +1,72 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "RpcContextElement",
+  "definition": "struct RpcContextElement\n{\nunsigned __int16 context_id;\nunsigned __int8 num_syntaxes;\nunsigned __int8 reserved;\nRPC_SYNTAX_IDENTIFIER abstract_syntax;\nRPC_SYNTAX_IDENTIFIER transfer_syntaxes[1];\n}\n",
   "id": 18374686479672032827,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "context_id",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 2
+      "size": 2,
+      "type": "unsigned __int16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "num_syntaxes",
       "offset": 2,
       "offset_hex": "0x2",
-      "size": 1
+      "size": 1,
+      "type": "unsigned __int8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "reserved",
       "offset": 3,
       "offset_hex": "0x3",
-      "size": 1
+      "size": 1,
+      "type": "unsigned __int8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "abstract_syntax",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 20
+      "size": 20,
+      "type": "RPC_SYNTAX_IDENTIFIER"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "transfer_syntaxes",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 20
+      "size": 20,
+      "type": "RPC_SYNTAX_IDENTIFIER[1]"
     }
   ],
   "name": "RpcContextElement",
+  "ordinal": 3259,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 44
 }

@@ -1,580 +1,882 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "HighProcess",
+  "definition": "struct __cppobj HighProcess : MiddleHighProcess\n{\nDetectionList *detectionList;\nNode190 recentSocialTargets;\nfloat recentSocialTargetCooldown;\nfloat unk19C;\nUInt8 unk1A0;\nUInt8 pad1A1[3];\nUInt32 unk1A4;\nfloat conversationScanCooldown;\nfloat unk1AC;\nfloat unk1B0;\nfloat unk1B4;\nfloat unk1B8;\nUnk1BC unk1BC;\nUInt32 unk1CC;\nUInt8 unk1D0;\nUInt8 unk1D1;\nUInt32 unk1D4;\nfloat unk1D8;\nfloat unk1DC;\nfloat unk1E0;\nUInt8 unk1E4;\nUInt8 pad1E5[3];\nfloat unk1E8;\nUInt32 unk1EC;\nUInt32 unk1F0;\nSInt16 currentAction;\nUInt8 pad1F6[2];\nBSAnimGroupSequence *animgroupSequence;\nUInt16 movementFlags;\nUInt8 pad1FE[2];\nUInt32 unk200;\nfloat unk204;\nUInt16 unk208;\nUInt8 pad20A[2];\nUnk20C unk20C;\nUInt32 unk218;\nfloat dialogueResponseTimer;\nUInt32 unk220[2];\nUInt8 dialogueActive;\nUInt8 pad229[3];\nfloat unk22C;\nfloat unk230;\nfloat unk234;\nfloat swimBreath;\nUInt8 unk23C;\nUInt8 unk23D[3];\nfloat unk240;\nUInt8 unk244;\nUInt8 unk245[3];\nfloat unk248;\nUInt8 unk24C;\nUInt8 pad24D[3];\nUnk1C *activeDialogueItem;\nUInt32 unk254;\nUInt32 unk258;\nUInt8 unk25C;\nUInt8 unk25D;\nUInt8 pad25E[2];\nfloat unk260;\nfloat unk264;\nNiObject *unk268;\nfloat unk26C;\nfloat unk270;\nUInt32 unk274;\nUInt8 unk278;\nUInt8 pad279[3];\nUnk27C unk27C;\nUInt32 unk288;\nfloat unk28C;\nUInt8 unk290;\nUInt8 pad291[3];\nfloat unk294;\nUInt32 unk298;\nUInt32 unk29C;\nUInt32 unk2A0;\nUInt32 unk2A4;\nUInt8 unk2A8;\nUInt8 unk2A9;\nUInt8 pad2AA[2];\nfloat unk2AC;\nfloat unk2B0;\nUInt32 unk2B4;\nUInt8 unk2B8;\nUInt8 unk2B9;\nUInt8 pad2BA[2];\nUInt32 unk2BC;\nfloat unk2C0;\nUInt32 unk2C4;\nTESObjectREFR *actionTarget[5];\nUInt8 actionActive[5];\nUInt8 pad2E1[3];\nTESObjectREFR *unk2E4;\nUInt8 unk2E8;\nUInt8 pad2E9[3];\n}\n",
   "id": 18374686479671991664,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 396
+      "size": 396,
+      "type": "MiddleHighProcess"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "detectionList",
       "offset": 396,
-      "offset_hex": "0x18c",
-      "size": 4
+      "offset_hex": "0x18C",
+      "size": 4,
+      "type": "DetectionList *"
     },
     {
-      "name": "unk190",
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "recentSocialTargets",
       "offset": 400,
       "offset_hex": "0x190",
-      "size": 8
+      "size": 8,
+      "type": "Node190"
     },
     {
-      "name": "unk198",
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "recentSocialTargetCooldown",
       "offset": 408,
       "offset_hex": "0x198",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk19C",
       "offset": 412,
-      "offset_hex": "0x19c",
-      "size": 4
+      "offset_hex": "0x19C",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk1A0",
       "offset": 416,
-      "offset_hex": "0x1a0",
-      "size": 1
+      "offset_hex": "0x1A0",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad1A1",
       "offset": 417,
-      "offset_hex": "0x1a1",
-      "size": 3
+      "offset_hex": "0x1A1",
+      "size": 3,
+      "type": "UInt8[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk1A4",
       "offset": 420,
-      "offset_hex": "0x1a4",
-      "size": 4
+      "offset_hex": "0x1A4",
+      "size": 4,
+      "type": "UInt32"
     },
     {
-      "name": "unk1A8",
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "conversationScanCooldown",
       "offset": 424,
-      "offset_hex": "0x1a8",
-      "size": 4
+      "offset_hex": "0x1A8",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk1AC",
       "offset": 428,
-      "offset_hex": "0x1ac",
-      "size": 4
+      "offset_hex": "0x1AC",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk1B0",
       "offset": 432,
-      "offset_hex": "0x1b0",
-      "size": 4
+      "offset_hex": "0x1B0",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk1B4",
       "offset": 436,
-      "offset_hex": "0x1b4",
-      "size": 4
+      "offset_hex": "0x1B4",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk1B8",
       "offset": 440,
-      "offset_hex": "0x1b8",
-      "size": 4
+      "offset_hex": "0x1B8",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk1BC",
       "offset": 444,
-      "offset_hex": "0x1bc",
-      "size": 16
+      "offset_hex": "0x1BC",
+      "size": 16,
+      "type": "Unk1BC"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk1CC",
       "offset": 460,
-      "offset_hex": "0x1cc",
-      "size": 4
+      "offset_hex": "0x1CC",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk1D0",
       "offset": 464,
-      "offset_hex": "0x1d0",
-      "size": 1
+      "offset_hex": "0x1D0",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk1D1",
       "offset": 465,
-      "offset_hex": "0x1d1",
-      "size": 1
+      "offset_hex": "0x1D1",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk1D4",
       "offset": 468,
-      "offset_hex": "0x1d4",
-      "size": 4
+      "offset_hex": "0x1D4",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk1D8",
       "offset": 472,
-      "offset_hex": "0x1d8",
-      "size": 4
+      "offset_hex": "0x1D8",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk1DC",
       "offset": 476,
-      "offset_hex": "0x1dc",
-      "size": 4
+      "offset_hex": "0x1DC",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk1E0",
       "offset": 480,
-      "offset_hex": "0x1e0",
-      "size": 4
+      "offset_hex": "0x1E0",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk1E4",
       "offset": 484,
-      "offset_hex": "0x1e4",
-      "size": 1
+      "offset_hex": "0x1E4",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad1E5",
       "offset": 485,
-      "offset_hex": "0x1e5",
-      "size": 3
+      "offset_hex": "0x1E5",
+      "size": 3,
+      "type": "UInt8[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk1E8",
       "offset": 488,
-      "offset_hex": "0x1e8",
-      "size": 4
+      "offset_hex": "0x1E8",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk1EC",
       "offset": 492,
-      "offset_hex": "0x1ec",
-      "size": 4
+      "offset_hex": "0x1EC",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk1F0",
       "offset": 496,
-      "offset_hex": "0x1f0",
-      "size": 4
+      "offset_hex": "0x1F0",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "currentAction",
       "offset": 500,
-      "offset_hex": "0x1f4",
-      "size": 2
+      "offset_hex": "0x1F4",
+      "size": 2,
+      "type": "SInt16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad1F6",
       "offset": 502,
-      "offset_hex": "0x1f6",
-      "size": 2
+      "offset_hex": "0x1F6",
+      "size": 2,
+      "type": "UInt8[2]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "animgroupSequence",
       "offset": 504,
-      "offset_hex": "0x1f8",
-      "size": 4
+      "offset_hex": "0x1F8",
+      "size": 4,
+      "type": "BSAnimGroupSequence *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "movementFlags",
       "offset": 508,
-      "offset_hex": "0x1fc",
-      "size": 2
+      "offset_hex": "0x1FC",
+      "size": 2,
+      "type": "UInt16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad1FE",
       "offset": 510,
-      "offset_hex": "0x1fe",
-      "size": 2
+      "offset_hex": "0x1FE",
+      "size": 2,
+      "type": "UInt8[2]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk200",
       "offset": 512,
       "offset_hex": "0x200",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk204",
       "offset": 516,
       "offset_hex": "0x204",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk208",
       "offset": 520,
       "offset_hex": "0x208",
-      "size": 2
+      "size": 2,
+      "type": "UInt16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad20A",
       "offset": 522,
-      "offset_hex": "0x20a",
-      "size": 2
+      "offset_hex": "0x20A",
+      "size": 2,
+      "type": "UInt8[2]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk20C",
       "offset": 524,
-      "offset_hex": "0x20c",
-      "size": 12
+      "offset_hex": "0x20C",
+      "size": 12,
+      "type": "Unk20C"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk218",
       "offset": 536,
       "offset_hex": "0x218",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
-      "name": "unk21C",
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "dialogueResponseTimer",
       "offset": 540,
-      "offset_hex": "0x21c",
-      "size": 4
+      "offset_hex": "0x21C",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk220",
       "offset": 544,
       "offset_hex": "0x220",
-      "size": 8
+      "size": 8,
+      "type": "UInt32[2]"
     },
     {
-      "name": "unk228",
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "dialogueActive",
       "offset": 552,
       "offset_hex": "0x228",
-      "size": 1
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad229",
       "offset": 553,
       "offset_hex": "0x229",
-      "size": 3
+      "size": 3,
+      "type": "UInt8[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk22C",
       "offset": 556,
-      "offset_hex": "0x22c",
-      "size": 4
+      "offset_hex": "0x22C",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk230",
       "offset": 560,
       "offset_hex": "0x230",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk234",
       "offset": 564,
       "offset_hex": "0x234",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "swimBreath",
       "offset": 568,
       "offset_hex": "0x238",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk23C",
       "offset": 572,
-      "offset_hex": "0x23c",
-      "size": 1
+      "offset_hex": "0x23C",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk23D",
       "offset": 573,
-      "offset_hex": "0x23d",
-      "size": 3
+      "offset_hex": "0x23D",
+      "size": 3,
+      "type": "UInt8[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk240",
       "offset": 576,
       "offset_hex": "0x240",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk244",
       "offset": 580,
       "offset_hex": "0x244",
-      "size": 1
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk245",
       "offset": 581,
       "offset_hex": "0x245",
-      "size": 3
+      "size": 3,
+      "type": "UInt8[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk248",
       "offset": 584,
       "offset_hex": "0x248",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk24C",
       "offset": 588,
-      "offset_hex": "0x24c",
-      "size": 1
+      "offset_hex": "0x24C",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad24D",
       "offset": 589,
-      "offset_hex": "0x24d",
-      "size": 3
+      "offset_hex": "0x24D",
+      "size": 3,
+      "type": "UInt8[3]"
     },
     {
-      "name": "unk250",
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "activeDialogueItem",
       "offset": 592,
       "offset_hex": "0x250",
-      "size": 4
+      "size": 4,
+      "type": "Unk1C *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk254",
       "offset": 596,
       "offset_hex": "0x254",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk258",
       "offset": 600,
       "offset_hex": "0x258",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk25C",
       "offset": 604,
-      "offset_hex": "0x25c",
-      "size": 1
+      "offset_hex": "0x25C",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk25D",
       "offset": 605,
-      "offset_hex": "0x25d",
-      "size": 1
+      "offset_hex": "0x25D",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad25E",
       "offset": 606,
-      "offset_hex": "0x25e",
-      "size": 2
+      "offset_hex": "0x25E",
+      "size": 2,
+      "type": "UInt8[2]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk260",
       "offset": 608,
       "offset_hex": "0x260",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk264",
       "offset": 612,
       "offset_hex": "0x264",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk268",
       "offset": 616,
       "offset_hex": "0x268",
-      "size": 4
+      "size": 4,
+      "type": "NiObject *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk26C",
       "offset": 620,
-      "offset_hex": "0x26c",
-      "size": 4
+      "offset_hex": "0x26C",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk270",
       "offset": 624,
       "offset_hex": "0x270",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk274",
       "offset": 628,
       "offset_hex": "0x274",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk278",
       "offset": 632,
       "offset_hex": "0x278",
-      "size": 1
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad279",
       "offset": 633,
       "offset_hex": "0x279",
-      "size": 3
+      "size": 3,
+      "type": "UInt8[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk27C",
       "offset": 636,
-      "offset_hex": "0x27c",
-      "size": 12
+      "offset_hex": "0x27C",
+      "size": 12,
+      "type": "Unk27C"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk288",
       "offset": 648,
       "offset_hex": "0x288",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk28C",
       "offset": 652,
-      "offset_hex": "0x28c",
-      "size": 4
+      "offset_hex": "0x28C",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk290",
       "offset": 656,
       "offset_hex": "0x290",
-      "size": 1
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad291",
       "offset": 657,
       "offset_hex": "0x291",
-      "size": 3
+      "size": 3,
+      "type": "UInt8[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk294",
       "offset": 660,
       "offset_hex": "0x294",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk298",
       "offset": 664,
       "offset_hex": "0x298",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk29C",
       "offset": 668,
-      "offset_hex": "0x29c",
-      "size": 4
+      "offset_hex": "0x29C",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk2A0",
       "offset": 672,
-      "offset_hex": "0x2a0",
-      "size": 4
+      "offset_hex": "0x2A0",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk2A4",
       "offset": 676,
-      "offset_hex": "0x2a4",
-      "size": 4
+      "offset_hex": "0x2A4",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk2A8",
       "offset": 680,
-      "offset_hex": "0x2a8",
-      "size": 1
+      "offset_hex": "0x2A8",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk2A9",
       "offset": 681,
-      "offset_hex": "0x2a9",
-      "size": 1
+      "offset_hex": "0x2A9",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad2AA",
       "offset": 682,
-      "offset_hex": "0x2aa",
-      "size": 2
+      "offset_hex": "0x2AA",
+      "size": 2,
+      "type": "UInt8[2]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk2AC",
       "offset": 684,
-      "offset_hex": "0x2ac",
-      "size": 4
+      "offset_hex": "0x2AC",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk2B0",
       "offset": 688,
-      "offset_hex": "0x2b0",
-      "size": 4
+      "offset_hex": "0x2B0",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk2B4",
       "offset": 692,
-      "offset_hex": "0x2b4",
-      "size": 4
+      "offset_hex": "0x2B4",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk2B8",
       "offset": 696,
-      "offset_hex": "0x2b8",
-      "size": 1
+      "offset_hex": "0x2B8",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk2B9",
       "offset": 697,
-      "offset_hex": "0x2b9",
-      "size": 1
+      "offset_hex": "0x2B9",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad2BA",
       "offset": 698,
-      "offset_hex": "0x2ba",
-      "size": 2
+      "offset_hex": "0x2BA",
+      "size": 2,
+      "type": "UInt8[2]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk2BC",
       "offset": 700,
-      "offset_hex": "0x2bc",
-      "size": 4
+      "offset_hex": "0x2BC",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk2C0",
       "offset": 704,
-      "offset_hex": "0x2c0",
-      "size": 4
+      "offset_hex": "0x2C0",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk2C4",
       "offset": 708,
-      "offset_hex": "0x2c4",
-      "size": 4
+      "offset_hex": "0x2C4",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "actionTarget",
       "offset": 712,
-      "offset_hex": "0x2c8",
-      "size": 20
+      "offset_hex": "0x2C8",
+      "size": 20,
+      "type": "TESObjectREFR *[5]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "actionActive",
       "offset": 732,
-      "offset_hex": "0x2dc",
-      "size": 5
+      "offset_hex": "0x2DC",
+      "size": 5,
+      "type": "UInt8[5]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad2E1",
       "offset": 737,
-      "offset_hex": "0x2e1",
-      "size": 3
+      "offset_hex": "0x2E1",
+      "size": 3,
+      "type": "UInt8[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk2E4",
       "offset": 740,
-      "offset_hex": "0x2e4",
-      "size": 4
+      "offset_hex": "0x2E4",
+      "size": 4,
+      "type": "TESObjectREFR *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk2E8",
       "offset": 744,
-      "offset_hex": "0x2e8",
-      "size": 1
+      "offset_hex": "0x2E8",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad2E9",
       "offset": 745,
-      "offset_hex": "0x2e9",
-      "size": 3
+      "offset_hex": "0x2E9",
+      "size": 3,
+      "type": "UInt8[3]"
     }
   ],
   "name": "HighProcess",
+  "ordinal": 9534,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 748
 }

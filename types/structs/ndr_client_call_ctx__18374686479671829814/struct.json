@@ -1,52 +1,90 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "ndr_client_call_ctx",
+  "definition": "struct ndr_client_call_ctx\n{\nMIDL_STUB_MESSAGE *stub_msg __offset(OFF64|AUTO);\nINTERPRETER_OPT_FLAGS Oif_flags;\nINTERPRETER_OPT_FLAGS2 ext_flags;\nconst NDR_PROC_HEADER *proc_header __offset(OFF64|AUTO);\nvoid *This __offset(OFF64|AUTO);\nPFORMAT_STRING handle_format __offset(OFF64|AUTO);\nhandle_t hbinding __offset(OFF64|AUTO);\n}\n",
   "id": 18374686479671829814,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "stub_msg",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "MIDL_STUB_MESSAGE *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Oif_flags",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 1
+      "size": 1,
+      "type": "INTERPRETER_OPT_FLAGS"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ext_flags",
       "offset": 5,
       "offset_hex": "0x5",
-      "size": 1
+      "size": 1,
+      "type": "INTERPRETER_OPT_FLAGS2"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "proc_header",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "const NDR_PROC_HEADER *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "This",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "void *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "handle_format",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "PFORMAT_STRING"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hbinding",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "handle_t"
     }
   ],
   "name": "ndr_client_call_ctx",
+  "ordinal": 3168,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 24
 }

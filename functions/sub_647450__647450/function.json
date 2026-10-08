@@ -1,19 +1,32 @@
 {
-  "callees_count": 59,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 36,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x647450",
+      "0x6478DD"
+    ]
+  ],
+  "chunks_sha256": "ae29bf5d71c94ee42ff944810d4e1f490079258cda573bb7da0cd37b161123ac",
+  "comment_regular": "Verified 2026-10-04: LowProcess load role from Oblivion process vtable slot +0x3F8, parent call chain and matching serialization/reset behavior. ECX receiver and RET12 establish stack arity; owner is MobileObject (dispatch 65A835 for Revert). Probable: currentFlags semantic name follows matching Fallout and forwarded extra load word; broader policy unverified.\nVerified paired low-process load, plus legacy branches: version<36 reads/converts a legacy4-byte date representation; version<33 with mask200000 skips a UInt16-counted8-byte legacy payload. Follow(+2C) and unk030(+30) temporarily hold loaded FormIDs until InitLoadGame resolves them. FormID-helper RET8 stack deltas corrected at6476C0/647710/647729.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 14,
-  "display_name": "sub_647450",
+  "display_name": "LowProcess_LoadGame",
   "end_ea": "0x6478DD",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_647450",
+  "name": "LowProcess_LoadGame",
   "segment": ".text",
   "sha256": "ae29bf5d71c94ee42ff944810d4e1f490079258cda573bb7da0cd37b161123ac",
   "size": 1165,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x647450",
-  "type": "char __userpurge@<al>(TESForm **ecx0@<ecx>, int@<ebx>, float, int, int)",
+  "total_chunk_size": 1165,
+  "type": "void __thiscall(LowProcess *self, ProcessSaveChangeMask changeMask, unsigned int currentFlags, MobileObject *owner)",
   "xrefs_from_count": 419,
   "xrefs_to_count": 2
 }

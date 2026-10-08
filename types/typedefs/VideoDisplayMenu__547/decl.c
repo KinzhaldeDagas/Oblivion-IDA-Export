@@ -1,1 +1,1 @@
-VideoDisplayMenu
+struct VideoDisplayMenu;

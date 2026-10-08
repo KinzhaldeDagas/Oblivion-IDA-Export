@@ -9,7 +9,7 @@
 0x75846E: mov     ecx, [esi+10h]
 0x758471: mov     edx, ds:0B3D2C8h[ecx*4]
 0x758478: push    eax
-0x758479: call    edx ; dword_B3D2C8
+0x758479: call    edx ; unk_B3D2C8
 0x75847B: add     esp, 4
 0x75847E: mov     edi, [esp+0Ch+arg_0]
 0x758482: cmp     edi, ebx

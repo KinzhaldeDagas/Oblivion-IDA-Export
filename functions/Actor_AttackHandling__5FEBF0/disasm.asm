@@ -1,4 +1,4 @@
-0x5FEBF0: push    0FFFFFFFFh
+0x5FEBF0: push    0FFFFFFFFh; Actor attack-handling virtual with three stack arguments. Drives attack eligibility/target handling and selects the native attack animation path; its former x87-heavy prototype was decompiler pollution.
 0x5FEBF2: push    offset Actor_AttackHandling_SEH
 0x5FEBF7: mov     eax, large fs:0
 0x5FEBFD: push    eax
@@ -15,9 +15,9 @@
 0x5FEC1D: push    eax
 0x5FEC1E: lea     eax, [esp+1E0h+var_C]
 0x5FEC25: mov     large fs:0, eax
-0x5FEC2B: mov     ebx, [esp+1E0h+arg_8]
+0x5FEC2B: mov     ebx, [esp+1E0h+targetRef]
 0x5FEC32: test    ebx, ebx
-0x5FEC34: mov     esi, [esp+1E0h+arg_4]
+0x5FEC34: mov     esi, [esp+1E0h+arg1]
 0x5FEC3B: mov     edi, ecx
 0x5FEC3D: mov     [esp+1E0h+var_1BC], esi; int
 0x5FEC41: jz      short loc_5FECA2
@@ -106,7 +106,7 @@
 0x5FED7D: lea     ecx, [esp+1E4h+var_1A0]
 0x5FED81: push    ecx
 0x5FED82: mov     ecx, ebp
-0x5FED84: call    sub_53D4B0
+0x5FED84: call    NiTransform_TransformPoint; ODismemberment: __thiscall NiTransform point transform helper. Plugin hit capture must pass transform in ECX; cdecl here crashes on actor hits.
 0x5FED89: mov     edx, [eax]
 0x5FED8B: mov     ecx, [eax+4]
 0x5FED8E: mov     [esp+1E0h+var_178], edx
@@ -116,12 +116,12 @@
 0x5FED9D: push    eax; a2
 0x5FED9E: mov     ecx, edi; this
 0x5FEDA0: mov     [esp+1E4h+var_170], edx
-0x5FEDA4: call    sub_5E6A40
+0x5FEDA4: call    Actor_GetWeaponTipLocalPointForHit; ODismemberment combat decode: returns a local-space weapon/reach point for hit visuals. Uses actor GetNiNode, equipped weapon combat distance, named weapon node lookup, and native transform helpers. Attack tail passes this as one of Actor_HandleHitVisualEffects' vector inputs.
 0x5FEDA9: push    eax
 0x5FEDAA: lea     ecx, [esp+1E4h+var_168]
 0x5FEDAE: push    ecx
 0x5FEDAF: mov     ecx, ebp
-0x5FEDB1: call    sub_53D4B0
+0x5FEDB1: call    NiTransform_TransformPoint; ODismemberment: __thiscall NiTransform point transform helper. Plugin hit capture must pass transform in ECX; cdecl here crashes on actor hits.
 0x5FEDB6: mov     edx, [eax]
 0x5FEDB8: mov     ecx, [eax+4]
 0x5FEDBB: mov     [esp+1E0h+var_1A0], edx
@@ -150,7 +150,7 @@
 0x5FEE16: mov     edx, [esp+1E0h+var_188]
 0x5FEE1A: lea     ecx, [esp+1E0h+var_178]
 0x5FEE1E: mov     [esp+1E0h+var_170], edx
-0x5FEE22: call    sub_43F350
+0x5FEE22: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x5FEE27: fstp    st
 0x5FEE29: fld     [esp+1E0h+var_178]
 0x5FEE2D: lea     eax, [esp+1E0h+var_158]
@@ -212,7 +212,7 @@
 0x5FEEF8: mov     ecx, ebp; this
 0x5FEEFA: mov     [esp+1E4h+var_4], 0FFFFFFFFh
 0x5FEF05: mov     [eax+18h], dx
-0x5FEF09: call    sub_405680
+0x5FEF09: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x5FEF0E: push    1Ch; Size
 0x5FEF10: call    FormHeapAlloc
 0x5FEF15: mov     esi, eax
@@ -234,7 +234,7 @@
 0x5FEF51: mov     ecx, ebp; this
 0x5FEF53: mov     [esp+1E4h+var_4], 0FFFFFFFFh
 0x5FEF5E: mov     [esi+18h], ax
-0x5FEF62: call    sub_405680
+0x5FEF62: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x5FEF67: fld     dword ptr ds:0B148D4h
 0x5FEF6D: push    ecx
 0x5FEF6E: mov     ecx, ds:0B333A0h
@@ -245,3 +245,24 @@
 0x5FEF81: jmp     short Actor_AttackHandling___EquippedWeaponAndAttackReach
 0x5FEF83: fstp    st(1)
 0x5FEF85: fstp    st
+0x9C2B80: mov     eax, [ebp-1A0h]
+0x9C2B86: push    eax
+0x9C2B87: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C2B8C: pop     ecx
+0x9C2B8D: retn
+0x9C2B8E: mov     eax, [ebp-1A0h]
+0x9C2B94: push    eax
+0x9C2B95: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C2B9A: pop     ecx
+0x9C2B9B: retn
+0x9C2B9C: mov     edx, [esp+arg1]
+0x9C2BA0: lea     eax, [edx-1D0h]
+0x9C2BA6: mov     ecx, [edx-1D4h]
+0x9C2BAC: xor     ecx, eax
+0x9C2BAE: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C2BB3: add     eax, 10h
+0x9C2BB6: mov     ecx, [edx-4]
+0x9C2BB9: xor     ecx, eax
+0x9C2BBB: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C2BC0: mov     eax, offset stru_AEB91C
+0x9C2BC5: jmp     ___CxxFrameHandler3

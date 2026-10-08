@@ -25,7 +25,7 @@
 0x6BE6F5: mov     ecx, [edi]
 0x6BE6F7: mov     eax, ds:0B3D358h[ecx*4]
 0x6BE6FE: push    ebx
-0x6BE6FF: call    eax ; dword_B3D358
+0x6BE6FF: call    eax ; unk_B3D358
 0x6BE701: mov     edx, [esp+20h+arg_0]
 0x6BE705: mov     [edx], eax
 0x6BE707: mov     eax, [edi]

@@ -18,7 +18,6 @@
 0x74D736: test    ax, ax
 0x74D739: jbe     short loc_74D777
 0x74D73B: jmp     short loc_74D740
-0x74D73D: align 10h
 0x74D740: movzx   edx, word ptr [ebx+22h]
 0x74D744: cmp     esi, edx
 0x74D746: mov     eax, [edi+1Ch]

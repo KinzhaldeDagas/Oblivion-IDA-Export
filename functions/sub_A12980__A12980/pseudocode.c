@@ -1,4 +1,4 @@
-BSStringT *sub_A12980()
+NiRTTI *sub_A12980()
 {
-  return sub_70E220((BSStringT *)dword_BA8130, "bhkNiTriStripsShape", (int)dword_BA8170);
+  return NiRTTI_Constructor(&stru_BA8130, "bhkNiTriStripsShape", &stru_BA8170); /*0xa12994*/
 }

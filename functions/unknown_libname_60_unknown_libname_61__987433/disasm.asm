@@ -117,7 +117,6 @@
 0x987577: cmp     edi, esi
 0x987579: jnb     short loc_9875A0
 0x98757B: jmp     short loc_987580
-0x98757D: align 10h
 0x987580: sub     esi, ebp
 0x987582: cmp     esi, edi
 0x987584: jbe     short loc_9875A0

@@ -8,7 +8,7 @@
 0x570905: push    ebp
 0x570906: push    edi
 0x570907: push    esi
-0x570908: push    offset dword_B40864
+0x570908: push    offset stru_B40864
 0x57090D: call    NiRTTI_Cast
 0x570912: mov     ebx, [esp+20h+arg_8]
 0x570916: mov     ebp, [esp+20h+arg_4]
@@ -21,7 +21,6 @@
 0x570931: mov     [esp+18h+arg_8], ecx
 0x570935: jbe     loc_5709D8
 0x57093B: jmp     short loc_570940
-0x57093D: align 10h
 0x570940: push    ecx
 0x570941: mov     ecx, eax
 0x570943: call    sub_4954B0
@@ -35,8 +34,7 @@
 0x570957: test    eax, eax
 0x570959: jz      short loc_57096E
 0x57095B: jmp     short loc_570960
-0x57095D: align 10h
-0x570960: cmp     eax, offset dword_B40C3C
+0x570960: cmp     eax, offset stru_B40C3C
 0x570965: jz      short loc_57099A
 0x570967: mov     eax, [eax+4]
 0x57096A: test    eax, eax

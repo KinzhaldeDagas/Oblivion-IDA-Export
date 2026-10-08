@@ -3,29 +3,29 @@
 0x8978D7: push    esi
 0x8978D8: mov     esi, ecx
 0x8978DA: mov     [esp+0ACh+var_A0], esi
-0x8978DE: call    sub_452A60
+0x8978DE: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x8978E3: mov     ebx, eax
 0x8978E5: test    ebx, ebx
 0x8978E7: jz      loc_897A10
 0x8978ED: mov     cl, [esi+0Ch]
 0x8978F0: mov     eax, [ebx+1Ch]
 0x8978F3: push    ebp
-0x8978F4: mov     ebp, [esp+0B0h+arg_0]
+0x8978F4: mov     ebp, [esp+0B0h+local]
 0x8978FB: shr     cl, 3
 0x8978FE: test    cl, 1
 0x897901: push    edi
 0x897902: jz      short loc_89795B
 0x897904: test    eax, eax
 0x897906: jz      short loc_89792B
-0x897908: lea     edx, [esp+0B4h+var_68]
+0x897908: lea     edx, [esp+0B4h+parent]
 0x89790C: push    edx
 0x89790D: lea     ecx, [eax+64h]
-0x897910: call    sub_718A80
-0x897915: push    ebp
-0x897916: lea     eax, [esp+0B8h+var_34]
-0x89791D: push    eax
-0x89791E: lea     ecx, [esp+0BCh+var_68]
-0x897922: call    sub_53D7A0
+0x897910: call    sub_718A80;
+0x897915: push    ebp; local
+0x897916: lea     eax, [esp+0B8h+out]
+0x89791D: push    eax; out
+0x89791E: lea     ecx, [esp+0BCh+parent]; parent
+0x897922: call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.
 0x897927: mov     esi, eax
 0x897929: jmp     short loc_89792D
 0x89792B: mov     esi, ebp
@@ -95,7 +95,7 @@
 0x897A03: mov     edx, [esp+0B4h+var_A4]
 0x897A07: push    edx
 0x897A08: push    ecx
-0x897A09: call    eax ; dword_BA7A88
+0x897A09: call    eax ; unk_BA7A88
 0x897A0B: add     esp, 8
 0x897A0E: pop     edi
 0x897A0F: pop     ebp

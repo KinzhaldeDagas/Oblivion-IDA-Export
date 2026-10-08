@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7C6020",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; Refresh a moved backing NiPointLight: require +0xFC, +0x104, and normal +0xF4 state; compare cached +0x108..+0x110 against light world position, then rebuild/relink if moved.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -25,13 +25,13 @@
   },
   {
     "ea": "0x7C6026",
-    "line": "mov     esi, [esp+18h+arg_0]",
+    "line": "mov     esi, [esp+18h+light]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7C602A",
-    "line": "cmp     byte ptr [esi+0FCh], 0",
+    "line": "cmp     byte ptr [esi+0FCh], 0; Gate source-motion refresh on backingIsNiPointLight (+0xFC).",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x7C603A",
-    "line": "cmp     byte ptr [esi+104h], 0",
+    "line": "cmp     byte ptr [esi+104h], 0; Only lights registered with trackBackingPosition=true participate in native moving-source position refresh.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x7C6054",
-    "line": "lea     eax, [esp+1Ch+arg_0]",
+    "line": "lea     eax, [esp+1Ch+light]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x7C605B",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x7C6062",
-    "line": "mov     eax, [esp+1Ch+arg_0]",
+    "line": "mov     eax, [esp+1Ch+light]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x7C609A",
-    "line": "mov     [esp+1Ch+var_C], ecx",
+    "line": "mov     [esp+1Ch+var_C.x], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -235,31 +235,31 @@
   },
   {
     "ea": "0x7C60A4",
-    "line": "push    edi",
+    "line": "push    edi; other",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C60A5",
-    "line": "lea     ecx, [esp+20h+var_C]",
+    "line": "lea     ecx, [esp+20h+var_C]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7C60A9",
-    "line": "mov     [esp+20h+var_8], edx",
+    "line": "mov     [esp+20h+var_C.y], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7C60AD",
-    "line": "mov     [esp+20h+var_4], eax",
+    "line": "mov     [esp+20h+var_C.z], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7C60B1",
-    "line": "call    sub_8AA390",
+    "line": "call    NiPoint3__NotEqual; Compare cached source position +0x108..+0x110 against the backing NiPointLight world position.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,31 +337,31 @@
   },
   {
     "ea": "0x7C60DA",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7C60DC",
-    "line": "call    sub_7C5720",
+    "line": "call    ShadowSceneLight_SetCachedSourcePosition; When a tracked source moved and cull status permits, refresh the cached position before receiver reconciliation.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7C60E1",
-    "line": "push    esi",
+    "line": "push    esi; light",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C60E2",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7C60E4",
-    "line": "call    sub_7C5F60",
+    "line": "call    ShadowSceneNode_ReconcileSourceLightReceivers; MEF PERF 2026-10-07 PASS2: PERF-13 movement trigger: RefreshMovedPointLightSource calls full receiver reconciliation after tracked ordinary point source changes cached world position and cullStatus is notFF. Called from full-light visibility at7C7988. This makes repeated source-motion reconciliation reachable; actual per-frame counts remain unmeasured.",
     "mnemonic": "call",
     "size": 5
   },

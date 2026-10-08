@@ -23,14 +23,14 @@
 0x5A6723: call    sub_5A5810
 0x5A6728: push    eax
 0x5A6729: add     esi, 1
-0x5A672C: call    FormHeapFree
+0x5A672C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5A6731: add     esp, 4
 0x5A6734: cmp     esi, [edi+0Ch]
 0x5A6737: jb      short loc_5A6720
 0x5A6739: mov     eax, [edi+4]
 0x5A673C: push    eax
 0x5A673D: mov     dword ptr [edi], offset ??_7?$NiTLargeArray@PAUHUDEffectIcon@@@@6B@; const NiTLargeArray<HUDEffectIcon *>::`vftable'
-0x5A6743: call    FormHeapFree
+0x5A6743: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5A6748: add     esp, 4
 0x5A674B: mov     ecx, [esp+1Ch+var_C]
 0x5A674F: mov     large fs:0, ecx
@@ -39,3 +39,18 @@
 0x5A6758: pop     esi
 0x5A6759: add     esp, 10h
 0x5A675C: retn
+0x5A57C0: mov     eax, [ecx+4]
+0x5A57C3: push    eax
+0x5A57C4: mov     dword ptr [ecx], offset ??_7?$NiTLargeArray@PAUHUDEffectIcon@@@@6B@; const NiTLargeArray<HUDEffectIcon *>::`vftable'
+0x5A57CA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x5A57CF: pop     ecx
+0x5A57D0: retn
+0x9C0350: mov     ecx, [ebp-10h]
+0x9C0353: jmp     loc_5A57C0
+0x9C0358: mov     edx, [esp+arg_4]
+0x9C035C: lea     eax, [edx-0Ch]
+0x9C035F: mov     ecx, [edx-10h]
+0x9C0362: xor     ecx, eax
+0x9C0364: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C0369: mov     eax, offset stru_AE963C
+0x9C036E: jmp     ___CxxFrameHandler3

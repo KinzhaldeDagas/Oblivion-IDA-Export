@@ -31,7 +31,7 @@
 0x514562: push    eax; a3
 0x514563: push    ecx; a2
 0x514564: push    edx; a1
-0x514565: call    Script_ExtractArgs
+0x514565: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x51456A: add     esp, 24h
 0x51456D: test    al, al
 0x51456F: jnz     short loc_514582
@@ -94,7 +94,7 @@
 0x514636: call    BSStringT_Set
 0x51463B: call    sub_57C370
 0x514640: push    esi
-0x514641: call    FormHeapFree
+0x514641: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x514646: add     esp, 0Ch
 0x514649: mov     al, 1
 0x51464B: mov     ecx, [esp+2Ch+var_C]
@@ -103,3 +103,12 @@
 0x514657: pop     esi
 0x514658: add     esp, 24h
 0x51465B: retn
+0x9C2A40: lea     ecx, [ebp-14h]; void *
+0x9C2A43: jmp     BSStringT_Clear
+0x9C2A48: mov     edx, [esp+arg_4]
+0x9C2A4C: lea     eax, [edx-1Ch]
+0x9C2A4F: mov     ecx, [edx-20h]
+0x9C2A52: xor     ecx, eax
+0x9C2A54: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C2A59: mov     eax, offset stru_AEB7F4
+0x9C2A5E: jmp     ___CxxFrameHandler3

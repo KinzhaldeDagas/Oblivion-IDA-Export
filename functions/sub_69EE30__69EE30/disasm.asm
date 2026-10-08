@@ -1,13 +1,13 @@
-0x69EE30: push    ebx
+0x69EE30: push    ebx; Verified (Oblivion): model save receives owner ActiveEffect* and target TESObjectREFR*, writes base data, then a 16-bit length and serialized NiStreamable model resource payload. Fallout instead serializes controller-manager save data.
 0x69EE31: push    ebp
-0x69EE32: mov     ebp, [esp+8+arg_0]
+0x69EE32: mov     ebp, [esp+8+contextA]
 0x69EE36: push    esi
 0x69EE37: push    edi
 0x69EE38: mov     edi, [esp+10h+Src]
-0x69EE3C: push    edi
-0x69EE3D: push    ebp
+0x69EE3C: push    edi; targetReference
+0x69EE3D: push    ebp; ownerActiveEffect
 0x69EE3E: mov     esi, ecx
-0x69EE40: call    sub_69DBB0
+0x69EE40: call    MagicHitEffect_SaveExtraData; Verified (Oblivion): base SaveExtraData receives owner ActiveEffect* and target TESObjectREFR*, writes base elapsedSeconds + finished flag, and writes durationSeconds from version 0x72.
 0x69EE45: mov     esi, [esi+30h]
 0x69EE48: xor     ebx, ebx
 0x69EE4A: test    esi, esi
@@ -26,16 +26,16 @@
 0x69EE73: movzx   eax, ax
 0x69EE76: add     esp, 4
 0x69EE79: mov     [esp+10h+Src], eax
-0x69EE7D: push    2; Size
+0x69EE7D: push    2; byteCount
 0x69EE7F: lea     ecx, [esp+14h+Src]
-0x69EE83: push    ecx; Src
-0x69EE84: mov     ecx, ds:0B33B00h
+0x69EE83: push    ecx; source
+0x69EE84: mov     ecx, ds:0B33B00h; self
 0x69EE8A: call    SaveLoad_SaveData
 0x69EE8F: cmp     word ptr [esp+10h+Src], 0
 0x69EE95: jz      short loc_69EEFC
 0x69EE97: test    edi, edi
 0x69EE99: fld     dword ptr ds:0A30634h
-0x69EE9F: fstp    [esp+10h+arg_0]
+0x69EE9F: fstp    [esp+10h+contextA]
 0x69EEA3: jz      short loc_69EEEB
 0x69EEA5: mov     edx, [edi]
 0x69EEA7: mov     eax, [edx+190h]
@@ -59,10 +59,10 @@
 0x69EEDD: test    eax, eax
 0x69EEDF: jz      short loc_69EEEB
 0x69EEE1: fld     dword ptr [eax+94h]
-0x69EEE7: fstp    [esp+10h+arg_0]
-0x69EEEB: fld     [esp+10h+arg_0]
+0x69EEE7: fstp    [esp+10h+contextA]
+0x69EEEB: fld     [esp+10h+contextA]
 0x69EEEF: push    ecx
-0x69EEF0: fstp    [esp+14h+var_14]; float
+0x69EEF0: fstp    dword ptr [esp+14h+var_14]; float
 0x69EEF3: push    ebx; int
 0x69EEF4: call    sub_4DA7F0
 0x69EEF9: add     esp, 8

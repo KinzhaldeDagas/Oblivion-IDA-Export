@@ -8,7 +8,7 @@
 0x633554: jnz     short loc_633587
 0x633556: mov     ecx, ds:0B33A98h
 0x63355C: push    offset aItmtorchheldlp; "ITMTorchHeldLP"
-0x633561: call    sub_447490
+0x633561: call    SoundMap_ResolveAnimSoundNote; Animation Sound: note resolver. Looks up the note token in global sound map off_B06164 and accepts only entries whose form/type byte is 0x0A; returns the sound entry or 0.
 0x633566: mov     ecx, [esp+4+arg_0]; this
 0x63356A: test    ecx, ecx
 0x63356C: jz      short loc_633587

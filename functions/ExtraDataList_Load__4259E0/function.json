@@ -1,19 +1,36 @@
 {
-  "callees_count": 190,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 98,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 5,
+  "chunks": [
+    [
+      "0x4259E0",
+      "0x426267"
+    ],
+    [
+      "0x9AB8C0",
+      "0x9AB91D"
+    ]
+  ],
+  "chunks_sha256": "d640278d3aef0b8e90a4d2ff2b2ea3e7e487111f8160f8ee345903f9eda8304e",
+  "comment_regular": "Common ExtraDataList single-chunk dispatcher reached by REFR/ACHR/ACRE. TESFile_GetChunkData(max) semantics at 0x450C20: length 0 leaves destination unchanged; <=max copies a prefix only; >max copies max-1 and writes a terminal zero. Each explicitly zeroed scratch therefore gives deterministic malformed-width behavior; singleton setters make repeats last-wins/remove as noted per branch.",
+  "comment_repeatable": "Common ExtraDataList single-chunk dispatcher reached by REFR/ACHR/ACRE. TESFile_GetChunkData(max) semantics at 0x450C20: length 0 leaves destination unchanged; <=max copies a prefix only; >max copies max-1 and writes a terminal zero. Each explicitly zeroed scratch therefore gives deterministic malformed-width behavior; singleton setters make repeats last-wins/remove as noted per branch.\n\n0x425b0d: XLOC runtime-only load mutation verified 2026-09-05: both accepted12 andlegacy16 paths converge at0x425B05 then OR byte[lockData+8] with1 here. Thus loaded flags = serialized flags |0x01, including zero input. TESCS peers0x45F4A8/0x45F4D5 exit without this OR. CELL rich semantics expose flags by executable; lossless raw recompile/remapping preserve serialized flags. This shared-loader instruction also applies to placed owners, whose broader flag presentation is a separate audit target.\n\n0x425B0D: XLOC load flag decoding correction 2026-10-01: after either exact12 or legacy16 bytes are stored, this instruction ORs lock flags+8 with1. The runtime predicate ExtraLock_IsLocked0x428E70 tests that exact bit; IsOffLimitToThePlayer0x4DEBF0 uses it to mark the door unavailable. Runtime bit2 is the leveled difficulty branch at0x42999E. Structured and semantic output now names these native loaded meanings while preserving serialized flags and unchanged recompile output.\n\n0x425EE3: Oblivion common XCCM path uses a fresh zeroed bounded U32 then TESObjectCELL_SetInteriorClimate; it installs ExtraCellClimate with no owner-class guard. The subsequent common LinkFormIDs climate case0x0C at0x426429 validates the target as TESClimate and removes failure. Shared writer emits retained XCCM as exact4.\n\n0x42624C: Oblivion common XCWT loader uses fresh-zero bounded U32 then ExtraDataList_SetWaterType; no owner filter. Shared LinkFormIDs water case0x05 casts to TESWaterForm and removes unresolved/wrong-kind data. Common writer emits retained XCWT size4.\n\n0x42618A: Oblivion common XCMT loader reads a fresh zeroed byte with bounded max1 and calls ExtraDataList_SetCellMusicType0x4242C0. Zero removes; nonzero stores the byte regardless of owner. Shared writer case0x0B emits retained XCMT size1. xEdit declares the field on CELL.\n\n0x42622A: Oblivion common XCLW loader reads fresh-zero bounded U32, bitcasts float, then calls ExtraDataList_SetWaterHeight0x423FF0. Either signed zero removes; nonzero and NaN values store/update. Common writer case4 emits retained raw float bits as exact4, with no owner-type filter.\n\n0x42601F: Oblivion common XCLR loader accepts only size divisible by4. It rebases and looks up each candidate in the loaded Region map before calling ExtraDataList_SetRegionList0x4241E0; valid occurrences replace prior list, malformed ones preserve it. No owner type check occurs; region lookup happens during list construction.\n\n0x425EE3: Placed-owner XCCM reaches TESObjectCELL_SetInteriorClimate from shared ExtraDataList_Load. Fresh-zero bounded u32 is stored as an extra without owner validation. Common LinkFormIDs type12 casts the loaded candidate to TESClimate and removes unresolved/wrong-type values; writer type0x0C emits exact4.\n\n0x42624C: Placed-owner XCWT reaches ExtraDataList_SetWaterType0x4204E0 from common loader, without owner validation. Common LinkFormIDs type5 resolves the candidate as TESWaterForm and removes failure; common writer type5 emits exact4 for surviving state.\n\n0x42618A: Placed-owner XCMT is read with a fresh zeroed bounded byte and sent to ExtraDataList_SetCellMusicType0x4242C0. Zero removes; nonzero stores the byte with no owner check. Common writer type0x0B emits one byte for an extant extra.\n\n0x42622A: Placed-owner XCLW reads a fresh zeroed bounded U32 and bitcasts to f32, then ExtraDataList_SetWaterHeight0x423FF0 removes either signed zero or sets nonzero/NaN value. Common writer type4 emits exact4 for retained state. No owner-kind validation.\n\n0x42601F: Placed-owner XCLR size must be divisible by4. Loader resolves each candidate through the loaded Region map at0x426076..0x42609B then calls ExtraDataList_SetRegionList0x4241E0 to replace previous state; malformed widths are no-ops and valid empty lists clear. Shared writer type8 emits resolved nonempty candidate lists.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 7,
   "display_name": "ExtraDataList_Load",
   "end_ea": "0x426267",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "ExtraDataList_Load",
   "segment": ".text",
   "sha256": "18c730a14fb9379287c8cb26fe661004308e30af4b832eabf266832ca8ce9bf5",
   "size": 2183,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4259E0",
-  "type": "void __thiscall(ExtraDataList *this, signed int, int)",
-  "xrefs_from_count": 780,
+  "total_chunk_size": 2276,
+  "type": "void __thiscall(ExtraDataList *this, Data *tesFile, TESForm *owner)",
+  "xrefs_from_count": 819,
   "xrefs_to_count": 2
 }

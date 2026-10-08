@@ -11,13 +11,13 @@ char __userpurge TESObjectREF_UnequipItem@<al>(
   float *ContainerExtraDataForRef; // edi
   char v11; // [esp+7h] [ebp-1h] BYREF
 
-  v11 = 1;
-  if ( !TESObjectREFR_GetContainer(this) )
-    return 1;
-  ContainerExtraDataForRef = (float *)ContainerExtraData_GetContainerExtraDataForRef(this);
-  if ( !sub_45A500(SaveLoad_CurrentSavegame) )
-    a5 = Script_AddEventToExtraScript(this, a8, 8);
-  ContainerExtraData_UnequipItem(
+  v11 = 1; /*0x4d881d*/
+  if ( !TESObjectREFR_GetContainer(this) ) /*0x4d8814*/
+    return 1; /*0x4d8877*/
+  ContainerExtraDataForRef = (float *)ContainerExtraData_GetContainerExtraDataForRef(this); /*0x4d8835*/
+  if ( !sub_45A500(g_TESSaveLoadGame) ) /*0x4d8837*/
+    a5 = Script_AddEventToExtraScript(this, a8, 8); /*0x4d8848*/
+  ContainerExtraData_UnequipItem( /*0x4d8867*/
     ContainerExtraDataForRef,
     ebp0,
     (int)ContainerExtraDataForRef,
@@ -31,5 +31,5 @@ char __userpurge TESObjectREF_UnequipItem@<al>(
     a8,
     0,
     0);
-  return v11;
+  return v11; /*0x4d8872*/
 }

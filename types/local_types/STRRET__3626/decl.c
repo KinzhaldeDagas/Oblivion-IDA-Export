@@ -1,1 +1,1 @@
-STRRET
+typedef _STRRET STRRET;

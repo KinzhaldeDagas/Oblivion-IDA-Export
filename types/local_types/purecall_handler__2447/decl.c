@@ -1,1 +1,1 @@
-_purecall_handler
+typedef void (*_purecall_handler)(void);

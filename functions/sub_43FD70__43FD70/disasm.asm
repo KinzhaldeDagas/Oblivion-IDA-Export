@@ -46,7 +46,7 @@
 0x43FDF0: mov     edx, [eax]
 0x43FDF2: mov     ecx, ds:0B33A98h
 0x43FDF8: push    edx; a1
-0x43FDF9: call    sub_447BA0
+0x43FDF9: call    TESObjectCELL_Deactivate; Verified TESObjectCELL deactivation path. Removes cell temp effects, lowers its process level, invokes cell teardown, clears pathgrid graph/render resources, removes the scene node and inactive cell forms, then for exteriors asks TESWorldSpace_UnloadExteriorCellIfEligible to either preserve or remove the cell. Nine call sites are in world/cell transition and TES destruction paths; inspect xrefs for the full lifecycle context.
 0x43FDFE: test    esi, esi
 0x43FE00: jz      short loc_43FE10
 0x43FE02: mov     eax, [edi+38h]

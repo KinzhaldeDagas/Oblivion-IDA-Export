@@ -23,7 +23,7 @@
 0x93EE73: push    ecx
 0x93EE74: push    edx
 0x93EE75: lea     ecx, [esp+88h+var_40]
-0x93EE79: call    sub_88FCC0
+0x93EE79: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x93EE7E: movaps  xmm0, [esp+80h+var_20]
 0x93EE83: movaps  xmm1, [esp+80h+var_40]
 0x93EE88: mov     eax, [edi]
@@ -46,7 +46,7 @@
 0x93EEBC: lea     ecx, [esp+88h+var_60]
 0x93EEC0: mov     [esi], ax
 0x93EEC3: movaps  [esp+88h+var_70], xmm1
-0x93EEC8: call    sub_88FD90
+0x93EEC8: call    hkBasis_ProjectVector; TES4 authoritative: basis projection helper, computes local components from basis columns and source vector without translation.
 0x93EECD: movaps  xmm1, [esp+80h+var_60]
 0x93EED2: movaps  xmm0, xmmword ptr ds:0A965C0h
 0x93EED9: mov     eax, [ebx]

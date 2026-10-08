@@ -1,19 +1,32 @@
 {
-  "callees_count": 38,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 22,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x625FE0",
+      "0x62622D"
+    ]
+  ],
+  "chunks_sha256": "635526c19591b4f27f2b47653b98006957263e09f077369ff192344c006d9607",
+  "comment_regular": "Serializes exact random-conversation resume state. The generated Conversation is saved rather than regenerated; package-level current item/response indices complement the list-internal cursors. Save does not execute INFO results.",
+  "comment_repeatable": "Serializes exact random-conversation resume state. The generated Conversation is saved rather than regenerated; package-level current item/response indices complement the list-internal cursors. Save does not execute INFO results.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 6,
-  "display_name": "sub_625FE0",
+  "display_name": "DialoguePackage::SaveGame",
   "end_ea": "0x62622D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_625FE0",
+  "name": "DialoguePackage::SaveGame",
   "segment": ".text",
   "sha256": "635526c19591b4f27f2b47653b98006957263e09f077369ff192344c006d9607",
   "size": 589,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x625FE0",
-  "type": "void __usercall(_DWORD *this@<ecx>, double@<st0>)",
+  "total_chunk_size": 589,
+  "type": "void __thiscall(DialoguePackageRuntimeView *this)",
   "xrefs_from_count": 232,
   "xrefs_to_count": 1
 }

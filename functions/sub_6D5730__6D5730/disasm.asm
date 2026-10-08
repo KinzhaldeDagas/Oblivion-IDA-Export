@@ -4,7 +4,7 @@
 0x6D5736: push    edi
 0x6D5737: push    esi
 0x6D5738: mov     edi, ecx
-0x6D573A: call    sub_715E70
+0x6D573A: call    NiTimeController_LinkObject; Resolves streamed next-controller and target links. Next +0x34 is refcounted; target +0x30 is non-owning. For streams older than 0x0A000110, propagates the controller manager-controlled state to the linked target property flags.
 0x6D573F: mov     ecx, esi
 0x6D5741: call    sub_7124A0
 0x6D5746: mov     esi, [edi+50h]

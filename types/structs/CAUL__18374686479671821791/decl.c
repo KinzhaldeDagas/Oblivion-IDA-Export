@@ -1,1 +1,1 @@
-CAUL
+typedef tagCAUL CAUL;

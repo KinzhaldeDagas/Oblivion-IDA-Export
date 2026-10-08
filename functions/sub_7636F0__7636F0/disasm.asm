@@ -42,11 +42,11 @@
 0x763749: call    ecx
 0x76374B: test    eax, eax
 0x76374D: jge     short loc_76376B
-0x76374F: push    eax
-0x763750: call    sub_7736F0
+0x76374F: push    eax; hresult
+0x763750: call    D3D9_HResultToString; Maps common COM/D3D9 HRESULT values to diagnostic names, including DEVICELOST, DEVICENOTRESET, INVALIDCALL, OUTOFVIDEOMEMORY, and format/state failures.
 0x763755: push    eax
 0x763756: push    offset aNidx9rendererU; "NiDX9Renderer::UnLockDynamicTexture Fai"...
-0x76375B: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x76375B: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x763760: add     esp, 0Ch
 0x763763: pop     edi
 0x763764: pop     esi
@@ -70,11 +70,11 @@
 0x76378F: call    eax
 0x763791: test    eax, eax
 0x763793: jge     short loc_7637B1
-0x763795: push    eax
-0x763796: call    sub_7736F0
+0x763795: push    eax; hresult
+0x763796: call    D3D9_HResultToString; Maps common COM/D3D9 HRESULT values to diagnostic names, including DEVICELOST, DEVICENOTRESET, INVALIDCALL, OUTOFVIDEOMEMORY, and format/state failures.
 0x76379B: push    eax
 0x76379C: push    offset aNidx9render_21; "NiDX9Renderer::UnLockDynamicTexture Fai"...
-0x7637A1: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x7637A1: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x7637A6: add     esp, 0Ch
 0x7637A9: pop     edi
 0x7637AA: pop     esi

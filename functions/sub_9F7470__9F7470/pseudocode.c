@@ -1,5 +1,5 @@
 int sub_9F7470()
 {
-  GameSetting_ConstrAndReg(&dword_B39290, (int)"sEyelidslight", (int)"Eyelids light/dark");
-  return atexit(sub_A22C40);
+  GameSetting_ConstrAndReg(&stru_B39290, "sEyelidslight", "Eyelids light/dark"); /*0x9f747f*/
+  return atexit(sub_A22C40); /*0x9f748f*/
 }

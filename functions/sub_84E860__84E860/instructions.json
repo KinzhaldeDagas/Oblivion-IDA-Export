@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x84E8AE",
-    "line": "mov     ecx, [esp+24h+arg_8]",
+    "line": "mov     ecx, [esp+24h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x84E8F7",
-    "line": "mov     [esp+24h+arg_8], eax",
+    "line": "mov     [esp+24h+value], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x84E90B",
-    "line": "mov     [esp+24h+arg_8], eax",
+    "line": "mov     [esp+24h+value], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x84E917",
-    "line": "mov     [esp+24h+arg_8], ecx",
+    "line": "mov     [esp+24h+value], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x84E91E",
-    "line": "cmp     ebx, [esp+24h+arg_8]",
+    "line": "cmp     ebx, [esp+24h+value]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x84E944",
-    "line": "mov     eax, [esp+24h+arg_8]",
+    "line": "mov     eax, [esp+24h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -535,19 +535,19 @@
   },
   {
     "ea": "0x84E97A",
-    "line": "push    eax",
+    "line": "push    eax; preset",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x84E97B",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x84E97D",
-    "line": "call    sub_7715E0",
+    "line": "call    NiD3DTextureStage_ApplyAddressModePreset; Apply one native address-preset row to a NiD3DTextureStage: D3DSAMP_ADDRESSU (1) and D3DSAMP_ADDRESSV (2). Lighting30 SimpleShadow uses preset 0 = CLAMP/CLAMP.",
     "mnemonic": "call",
     "size": 5
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x84E98A",
-    "line": "mov     [esp+24h+arg_8], esi",
+    "line": "mov     [esp+24h+value], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -577,25 +577,25 @@
   },
   {
     "ea": "0x84E991",
-    "line": "lea     eax, [esp+24h+arg_8]",
+    "line": "lea     eax, [esp+24h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x84E995",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x84E996",
-    "line": "push    ecx",
+    "line": "push    ecx; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x84E997",
-    "line": "lea     ecx, [edi+40h]",
+    "line": "lea     ecx, [edi+40h]; this",
     "mnemonic": "lea",
     "size": 3
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x84E9A2",
-    "line": "call    sub_76CE40",
+    "line": "call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x84E9B5",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -706,5 +706,59 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D33F0",
+    "line": "lea     ecx, [ebp+0Ch]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D33F3",
+    "line": "jmp     sub_4027D0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D33F8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D33FC",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D33FF",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3402",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D3404",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3409",
+    "line": "mov     eax, offset stru_AFB818",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D340E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

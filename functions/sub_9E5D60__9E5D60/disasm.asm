@@ -2,7 +2,7 @@
 0x9E5D66: push    ecx
 0x9E5D67: fstp    [esp+4+var_4]; float
 0x9E5D6A: push    offset aFsecundaangl_0; "fSecundaAngleFadeEnd"
-0x9E5D6F: mov     ecx, offset fSecundaAngleFadeEnd
+0x9E5D6F: mov     ecx, 0B36600h
 0x9E5D74: call    GameSetting_ConstrAndReg_float
 0x9E5D79: push    offset sub_A1D2D0; void (__cdecl *)()
 0x9E5D7E: call    _atexit

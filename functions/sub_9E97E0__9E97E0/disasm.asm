@@ -2,7 +2,7 @@
 0x9E97E6: push    ecx
 0x9E97E7: fstp    [esp+4+var_4]; float
 0x9E97EA: push    offset aFfatiguebloc_0; "fFatigueBlockSkillMult"
-0x9E97EF: mov     ecx, offset fFatigueBlockSkillMult
+0x9E97EF: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+330h)
 0x9E97F4: call    GameSetting_ConstrAndReg_float
 0x9E97F9: push    offset sub_A1E730; void (__cdecl *)()
 0x9E97FE: call    _atexit

@@ -48,7 +48,7 @@
 0x5285EE: mov     eax, [edx+10h]
 0x5285F1: call    eax
 0x5285F3: test    eax, eax
-0x5285F5: mov     [esp+0F4h+var_D8], eax
+0x5285F5: mov     [esp+0F4h+targetGeometry], eax
 0x5285F9: jz      loc_5289E8
 0x5285FF: test    esi, esi
 0x528601: jz      loc_5289E8
@@ -71,9 +71,9 @@
 0x52863A: mov     ebp, eax
 0x52863C: test    ebp, ebp
 0x52863E: jz      loc_5287B1
-0x528644: push    0
-0x528646: mov     ecx, ebp
-0x528648: call    sub_405790
+0x528644: push    0; index
+0x528646: mov     ecx, ebp; this
+0x528648: call    NiNode_GetChildAtIndex
 0x52864D: test    eax, eax
 0x52864F: jz      loc_528713
 0x528655: mov     edx, [eax]
@@ -89,9 +89,9 @@
 0x528673: mov     [esp+0F4h+var_DC], eax
 0x528677: jbe     loc_5287B1
 0x52867D: lea     ecx, [ecx+0]
-0x528680: push    edi
-0x528681: mov     ecx, ebp
-0x528683: call    sub_405790
+0x528680: push    edi; index
+0x528681: mov     ecx, ebp; this
+0x528683: call    NiNode_GetChildAtIndex
 0x528688: test    eax, eax
 0x52868A: jz      short loc_5286F0
 0x52868C: mov     edx, [eax]
@@ -103,9 +103,9 @@
 0x528699: jz      short loc_5286F0
 0x52869B: push    2
 0x52869D: mov     ecx, esi
-0x52869F: call    NiNode_GetNiPropertyByID
+0x52869F: call    NiNode_GetNiPropertyByID;
 0x5286A4: push    eax
-0x5286A5: push    offset dword_B3FA9C
+0x5286A5: push    offset stru_B3FA9C
 0x5286AA: call    NiRTTI_Cast
 0x5286AF: add     esp, 8
 0x5286B2: test    eax, eax
@@ -121,14 +121,14 @@
 0x5286CD: test    eax, eax
 0x5286CF: jnz     short loc_5286F0
 0x5286D1: fld     dword ptr ds:0A3D65Ch
-0x5286D7: push    eax; char
-0x5286D8: push    1; int
+0x5286D7: push    eax; offsetVerticesAlongNormals
+0x5286D8: push    1; unused
 0x5286DA: push    ecx
-0x5286DB: mov     ecx, [esp+100h+var_D8]
-0x5286DF: fstp    [esp+100h+var_100]; float
-0x5286E2: push    ecx; int
-0x5286E3: push    esi; int
-0x5286E4: call    ??0?$NiTMap@IUVertexDist@@@@QAE@XZ; NiTMap<uint,VertexDist>::NiTMap<uint,VertexDist>(void)
+0x5286DB: mov     ecx, [esp+100h+targetGeometry]
+0x5286DF: fstp    [esp+100h+maxDistance]; maxDistance
+0x5286E2: push    ecx; targetGeometry
+0x5286E3: push    esi; sourceGeometry
+0x5286E4: call    NiGeometry_CopyNearestVertexNormals; Actor-3D seam repair variant: copy normals from an UpperBody geometry whose material name starts with Skin to the named head geometry, using Oblivion's wider 0.50-unit radius.
 0x5286E9: add     esp, 14h
 0x5286EC: test    al, al
 0x5286EE: jnz     short loc_5286FE
@@ -146,9 +146,9 @@
 0x52871A: xor     edi, edi
 0x52871C: test    ebx, ebx
 0x52871E: jbe     loc_5287AD
-0x528724: push    edi
-0x528725: mov     ecx, ebp
-0x528727: call    sub_405790
+0x528724: push    edi; index
+0x528725: mov     ecx, ebp; this
+0x528727: call    NiNode_GetChildAtIndex
 0x52872C: test    eax, eax
 0x52872E: jz      short loc_528794
 0x528730: mov     edx, [eax]
@@ -160,9 +160,9 @@
 0x52873D: jz      short loc_528794
 0x52873F: push    2
 0x528741: mov     ecx, esi
-0x528743: call    NiNode_GetNiPropertyByID
+0x528743: call    NiNode_GetNiPropertyByID;
 0x528748: push    eax
-0x528749: push    offset dword_B3FA9C
+0x528749: push    offset stru_B3FA9C
 0x52874E: call    NiRTTI_Cast
 0x528753: add     esp, 8
 0x528756: test    eax, eax
@@ -178,14 +178,14 @@
 0x528771: test    eax, eax
 0x528773: jnz     short loc_528794
 0x528775: fld     dword ptr ds:0A3D65Ch
-0x52877B: push    eax; char
-0x52877C: push    1; int
+0x52877B: push    eax; offsetVerticesAlongNormals
+0x52877C: push    1; unused
 0x52877E: push    ecx
-0x52877F: mov     ecx, [esp+100h+var_D8]
-0x528783: fstp    [esp+100h+var_100]; float
-0x528786: push    ecx; int
-0x528787: push    esi; int
-0x528788: call    ??0?$NiTMap@IUVertexDist@@@@QAE@XZ; NiTMap<uint,VertexDist>::NiTMap<uint,VertexDist>(void)
+0x52877F: mov     ecx, [esp+100h+targetGeometry]
+0x528783: fstp    [esp+100h+maxDistance]; maxDistance
+0x528786: push    ecx; targetGeometry
+0x528787: push    esi; sourceGeometry
+0x528788: call    NiGeometry_CopyNearestVertexNormals; Fallback UpperBody traversal performs the same Skin-to-head normal copy at 0.50 units when the nested child layout is absent.
 0x52878D: add     esp, 14h
 0x528790: test    al, al
 0x528792: jnz     short loc_52879D
@@ -201,8 +201,8 @@
 0x5287AD: mov     ebx, [esp+0F4h+var_DC]
 0x5287B1: cmp     dword ptr [ebx+0E8h], 0
 0x5287B8: jz      loc_5289E8
-0x5287BE: lea     ecx, [esp+0F4h+var_D0]
-0x5287C2: call    FaceGenHeadParameters_Ctor
+0x5287BE: lea     ecx, [esp+0F4h+outAbsolute]; this
+0x5287C2: call    FaceGenRenderState_Construct; Constructs a 0xC4 FaceGenRenderState. The first 0x60 bytes are FaceGenHeadParameters; appearance assets and four 0x10-byte pointer arrays follow.
 0x5287C7: fld     dword ptr [ebx+1CCh]
 0x5287CD: mov     ecx, [ebx+1C8h]
 0x5287D3: fstp    [esp+0F4h+var_68]
@@ -212,13 +212,13 @@
 0x5287E9: mov     [esp+0F4h+var_4], 0
 0x5287F4: mov     [esp+0F4h+var_64], edx
 0x5287FB: call    TESActorBase_IsFemale
-0x528800: lea     ecx, [esp+0F4h+var_D0]
+0x528800: lea     ecx, [esp+0F4h+outAbsolute]
 0x528804: mov     [esp+0F4h+var_60], eax
 0x52880B: mov     eax, [ebx+1E8h]
-0x528811: push    ecx
-0x528812: mov     ecx, ebx
+0x528811: push    ecx; outAbsolute
+0x528812: mov     ecx, ebx; this
 0x528814: mov     [esp+0F8h+var_6C], eax
-0x52881B: call    sub_5221C0
+0x52881B: call    TESNPC_BuildAbsoluteFaceGenParameters; Builds absolute FaceGen parameters by combining race base with active NPC delta. CORRECTION: bank selection uses base actor value 0x45 (vampirism), zero -> +0x108, nonzero -> +0x168; earlier sex-selected description was incorrect. Null race copies manager default parameters.
 0x528820: cmp     [esp+0F4h+var_64], 0
 0x528828: jnz     short loc_528856
 0x52882A: mov     esi, [ebx+0E8h]
@@ -289,7 +289,7 @@
 0x528942: cmp     byte ptr ds:0B10D3Ch, 0
 0x528949: jz      short loc_528997
 0x52894B: push    esi
-0x52894C: lea     edx, [esp+0F8h+var_D8]
+0x52894C: lea     edx, [esp+0F8h+targetGeometry]
 0x528950: push    edx
 0x528951: mov     ecx, ebx
 0x528953: call    sub_524100
@@ -297,7 +297,7 @@
 0x528959: lea     ecx, [esp+0F8h+var_2C]
 0x528960: mov     byte ptr [esp+0F8h+var_4], 1
 0x528968: call    sub_526A30
-0x52896D: mov     eax, [esp+0F4h+var_D8]
+0x52896D: mov     eax, [esp+0F4h+targetGeometry]
 0x528971: test    eax, eax
 0x528973: mov     byte ptr [esp+0F4h+var_4], 0
 0x52897B: jz      short loc_528997
@@ -318,22 +318,22 @@
 0x52899A: cmp     esi, 9
 0x52899D: jl      loc_528860
 0x5289A3: mov     al, ds:0B10D3Ch
-0x5289A8: lea     ecx, [esp+0F4h+var_D0]
+0x5289A8: lea     ecx, [esp+0F4h+outAbsolute]
 0x5289AC: mov     [esp+0F4h+var_1C], al
 0x5289B3: mov     eax, [ebx+1D4h]
-0x5289B9: push    ecx
-0x5289BA: push    eax
-0x5289BB: call    BSFaceGen_DoSomethingWithFaceGenNode
+0x5289B9: push    ecx; state
+0x5289BA: push    eax; faceNode
+0x5289BB: call    BSFaceGen_ApplyHeadParametersToNode; Applies a complete FaceGenRenderState to a BSFaceGenNiNode: projects age, binds nine head-part resources, handles sex-specific parts, eyes and hair, then rebuilds property state and updates the node.
 0x5289C0: mov     edx, [esp+0FCh+var_D4]
 0x5289C4: mov     eax, [edx]
-0x5289C6: lea     ecx, [esp+0FCh+var_D0]
-0x5289CA: push    ecx
-0x5289CB: push    eax
-0x5289CC: call    BSFaceGen_DoSomethingWithFaceGenNode
+0x5289C6: lea     ecx, [esp+0FCh+outAbsolute]
+0x5289CA: push    ecx; state
+0x5289CB: push    eax; faceNode
+0x5289CC: call    BSFaceGen_ApplyHeadParametersToNode; Applies a complete FaceGenRenderState to a BSFaceGenNiNode: projects age, binds nine head-part resources, handles sex-specific parts, eyes and hair, then rebuilds property state and updates the node.
 0x5289D1: add     esp, 10h
-0x5289D4: lea     ecx, [esp+0F4h+var_D0]
+0x5289D4: lea     ecx, [esp+0F4h+outAbsolute]; this
 0x5289D8: mov     [esp+0F4h+var_4], 0FFFFFFFFh
-0x5289E3: call    FaceGenHeadParameters_Dtor
+0x5289E3: call    FaceGenRenderState_Destruct; Destroys FaceGenRenderState: releases texture-override smart pointers, destroys the four pointer arrays, then destroys the four embedded FaceGen coefficient matrices.
 0x5289E8: mov     ecx, [esp+0F4h+var_C]
 0x5289EF: mov     large fs:0, ecx
 0x5289F6: pop     ecx
@@ -343,3 +343,14 @@
 0x5289FA: pop     ebx
 0x5289FB: add     esp, 0E0h
 0x528A01: retn    4
+0x9B82D0: lea     ecx, [ebp-0D0h]; this
+0x9B82D6: jmp     FaceGenRenderState_Destruct; Destroys FaceGenRenderState: releases texture-override smart pointers, destroys the four pointer arrays, then destroys the four embedded FaceGen coefficient matrices.
+0x9B82DB: lea     ecx, [ebp-0D8h]; slot
+0x9B82E1: jmp     NiPointerSlot_Release
+0x9B82E6: mov     edx, [esp+arg_4]
+0x9B82EA: lea     eax, [edx-0E4h]
+0x9B82F0: mov     ecx, [edx-0E8h]
+0x9B82F6: xor     ecx, eax
+0x9B82F8: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B82FD: mov     eax, offset stru_AE29E4
+0x9B8302: jmp     ___CxxFrameHandler3

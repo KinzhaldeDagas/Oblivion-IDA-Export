@@ -1,10 +1,11 @@
-int __thiscall sub_52EA90(int *this)
+// mwMediumArmor: Returns the display name for an Oblivion skill actor value stored at skill+0x2C. No MediumArmor actor value exists in this table.
+const char *__thiscall TESSkill_GetName(void *this)
 {
-  int v1; // eax
+  unsigned int v1; // eax
 
-  v1 = *(this + 0xB);
-  if ( (unsigned int)(v1 - 0xC) > 0x14 )
-    return 0;
+  v1 = *((_DWORD *)this + 0xB); /*0x52ea90*/
+  if ( v1 - 0xC > 0x14 ) /*0x52ea99*/
+    return 0; /*0x52eaa5*/
   else
-    return ActorValue_GetName(v1);
+    return (const char *)ActorValue_GetName(v1); /*0x52ea9c*/
 }

@@ -21,7 +21,7 @@
 0x4ABBEF: call    edx
 0x4ABBF1: push    esi
 0x4ABBF2: mov     ecx, ebx
-0x4ABBF4: call    TESFile_InitializeFormFromRecord
+0x4ABBF4: call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.
 0x4ABBF9: push    0; a2
 0x4ABBFB: mov     ecx, esi; this
 0x4ABBFD: call    TESForm_SetIsLinked
@@ -61,7 +61,7 @@
 0x4ABC87: mov     [esi+88h], al
 0x4ABC8D: fld     dword ptr ds:0B35780h
 0x4ABC93: fstp    dword ptr [esi+8Ch]
-0x4ABC99: call    TESFile_GetChunkData
+0x4ABC99: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4ABC9E: fldz
 0x4ABCA0: fcom    dword ptr [esi+74h]
 0x4ABCA3: fnstsw  ax
@@ -92,7 +92,7 @@
 0x4ABD07: push    200h; a4
 0x4ABD0C: push    edi; Dst
 0x4ABD0D: mov     ecx, ebx; a1
-0x4ABD0F: call    TESFile_GetChunkData
+0x4ABD0F: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4ABD14: mov     edx, [esi]
 0x4ABD16: mov     eax, [edx+0D8h]
 0x4ABD1C: push    edi
@@ -103,7 +103,7 @@
 0x4ABD29: test    eax, eax
 0x4ABD2B: jz      short loc_4ABD40
 0x4ABD2D: push    eax
-0x4ABD2E: call    FormHeapFree
+0x4ABD2E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4ABD33: add     esp, 4
 0x4ABD36: mov     dword ptr [esi+94h], 0
 0x4ABD40: push    54h ; 'T'; Size
@@ -119,7 +119,7 @@
 0x4ABD5B: push    eax; Dst
 0x4ABD5C: mov     ecx, ebx; a1
 0x4ABD5E: mov     [esi+94h], eax
-0x4ABD64: call    TESFile_GetChunkData
+0x4ABD64: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4ABD69: or      byte ptr [esi+68h], 1
 0x4ABD6D: mov     ecx, ebx
 0x4ABD6F: call    TESFile_GetNextChunk

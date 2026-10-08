@@ -1,82 +1,135 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "wow_handlers16",
+  "definition": "struct wow_handlers16\n{\nLRESULT_0 (*button_proc)(HWND, UINT, WPARAM_0, LPARAM_0, BOOL) __offset(OFF64|AUTO);\nLRESULT_0 (*combo_proc)(HWND, UINT, WPARAM_0, LPARAM_0, BOOL) __offset(OFF64|AUTO);\nLRESULT_0 (*edit_proc)(HWND, UINT, WPARAM_0, LPARAM_0, BOOL) __offset(OFF64|AUTO);\nLRESULT_0 (*listbox_proc)(HWND, UINT, WPARAM_0, LPARAM_0, BOOL) __offset(OFF64|AUTO);\nLRESULT_0 (*mdiclient_proc)(HWND, UINT, WPARAM_0, LPARAM_0, BOOL) __offset(OFF64|AUTO);\nLRESULT_0 (*scrollbar_proc)(HWND, UINT, WPARAM_0, LPARAM_0, BOOL) __offset(OFF64|AUTO);\nLRESULT_0 (*static_proc)(HWND, UINT, WPARAM_0, LPARAM_0, BOOL) __offset(OFF64|AUTO);\nDWORD (*wait_message)(DWORD, const HANDLE *, DWORD, DWORD, DWORD) __offset(OFF64|AUTO);\nHWND (*create_window)(CREATESTRUCTW *, LPCWSTR, HINSTANCE, BOOL) __offset(OFF64|AUTO);\nLRESULT_0 (*call_window_proc)(HWND, UINT, WPARAM_0, LPARAM_0, LRESULT_0 *, void *) __offset(OFF64|AUTO);\nLRESULT_0 (*call_dialog_proc)(HWND, UINT, WPARAM_0, LPARAM_0, LRESULT_0 *, void *) __offset(OFF64|AUTO);\nvoid (*free_icon_param)(ULONG_PTR) __offset(OFF64|AUTO);\n}\n",
   "id": 18374686479671865491,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "button_proc",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "LRESULT_0 (*)(HWND, UINT, WPARAM_0, LPARAM_0, BOOL)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "combo_proc",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "LRESULT_0 (*)(HWND, UINT, WPARAM_0, LPARAM_0, BOOL)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "edit_proc",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "LRESULT_0 (*)(HWND, UINT, WPARAM_0, LPARAM_0, BOOL)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "listbox_proc",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "LRESULT_0 (*)(HWND, UINT, WPARAM_0, LPARAM_0, BOOL)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "mdiclient_proc",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "LRESULT_0 (*)(HWND, UINT, WPARAM_0, LPARAM_0, BOOL)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "scrollbar_proc",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "LRESULT_0 (*)(HWND, UINT, WPARAM_0, LPARAM_0, BOOL)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "static_proc",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "LRESULT_0 (*)(HWND, UINT, WPARAM_0, LPARAM_0, BOOL)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "wait_message",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "DWORD (*)(DWORD, const HANDLE *, DWORD, DWORD, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "create_window",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "HWND (*)(CREATESTRUCTW *, LPCWSTR, HINSTANCE, BOOL)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "call_window_proc",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "LRESULT_0 (*)(HWND, UINT, WPARAM_0, LPARAM_0, LRESULT_0 *, void *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "call_dialog_proc",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "LRESULT_0 (*)(HWND, UINT, WPARAM_0, LPARAM_0, LRESULT_0 *, void *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "free_icon_param",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "void (*)(ULONG_PTR)"
     }
   ],
   "name": "wow_handlers16",
+  "ordinal": 7285,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 48
 }

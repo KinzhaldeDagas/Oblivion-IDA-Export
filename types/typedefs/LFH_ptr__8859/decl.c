@@ -1,1 +1,1 @@
-LFH_ptr
+struct LFH_ptr;

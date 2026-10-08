@@ -30,7 +30,7 @@
 0x69A7B0: mov     [esp+0B4h+var_94], ecx
 0x69A7B4: jz      MagicCaster_ExplosionCalcs????___Done
 0x69A7BA: mov     ecx, edi
-0x69A7BC: call    EffectItem_GetArea
+0x69A7BC: call    EffectItem_GetArea; Effective area: returns 0 for EffectSetting NoArea (0x200) or Self range (0); otherwise raw EffectItem+0x8 area.
 0x69A7C1: mov     [esp+0B4h+var_9C], eax
 0x69A7C5: fild    [esp+0B4h+var_9C]
 0x69A7C9: fmul    dword ptr ds:0B37DB8h
@@ -53,17 +53,17 @@
 0x69A802: mov     [esp+0B8h+var_9C], eax
 0x69A806: fild    [esp+0B8h+var_9C]
 0x69A80A: fmul    [ebp+arg_1C]
-0x69A80D: call    Double_To_SInt32
+0x69A80D: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x69A812: push    eax; int
 0x69A813: mov     ecx, edi
 0x69A815: call    EffectItem_GetDuration
 0x69A81A: mov     [esp+0BCh+var_9C], eax
 0x69A81E: fild    [esp+0BCh+var_9C]
 0x69A822: fmul    [ebp+arg_1C]
-0x69A825: call    Double_To_SInt32
+0x69A825: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x69A82A: push    eax; float
 0x69A82B: mov     ecx, edi
-0x69A82D: call    EffectItem_GetArea
+0x69A82D: call    EffectItem_GetArea; Effective area: returns 0 for EffectSetting NoArea (0x200) or Self range (0); otherwise raw EffectItem+0x8 area.
 0x69A832: fld     [esp+0C0h+var_A0]
 0x69A836: push    eax; float
 0x69A837: push    ecx
@@ -82,7 +82,7 @@
 0x69A86A: mov     [esp+0B4h+var_5C], esi
 0x69A86E: mov     [esp+0B4h+var_58], 2
 0x69A873: movaps  [esp+0B4h+var_40], xmm0
-0x69A878: movaps  [esp+0B4h+var_30], xmm0
+0x69A878: movaps  xmmword ptr [esp+0B4h+var_30], xmm0
 0x69A880: fld     [esp+0B4h+var_A0]
 0x69A884: fld     st
 0x69A886: mov     [esp+0B4h+var_4], esi
@@ -93,12 +93,12 @@
 0x69A89B: fst     [esp+0B4h+var_7C]
 0x69A89F: fstp    [esp+0B4h+var_78]
 0x69A8A3: fld     [esp+0B4h+var_80]
-0x69A8A7: fld     [ebp+arg_0]
+0x69A8A7: fld     dword ptr [ebp+pointXYZ]
 0x69A8AA: fld     st
 0x69A8AC: faddp   st(2), st
 0x69A8AE: fxch    st(1)
 0x69A8B0: fstp    [esp+0B4h+var_A0]
-0x69A8B4: fld     [ebp+arg_4]
+0x69A8B4: fld     dword ptr [ebp+pointXYZ+4]
 0x69A8B7: fld     st
 0x69A8B9: fadd    [esp+0B4h+var_7C]
 0x69A8BD: fstp    [esp+0B4h+var_8C]
@@ -134,12 +134,12 @@
 0x69A91E: fstp    [esp+0B4h+var_A0]
 0x69A922: fld     [esp+0B4h+var_88]
 0x69A926: fmul    st, st(1)
-0x69A928: fstp    dword ptr [esp+0B4h+var_30]
+0x69A928: fstp    [esp+0B4h+var_30]
 0x69A92F: fld     [esp+0B4h+var_8C]
 0x69A933: fmul    st, st(1)
-0x69A935: fstp    dword ptr [esp+0B4h+var_30+4]
+0x69A935: fstp    [esp+0B4h+var_30+4]
 0x69A93C: fmul    [esp+0B4h+var_A0]
-0x69A940: fstp    dword ptr [esp+0B4h+var_30+8]
+0x69A940: fstp    [esp+0B4h+var_30+8]
 0x69A947: jnz     short loc_69A953
 0x69A949: mov     eax, 0Ah
 0x69A94E: mov     ds:0B2EB3Ch, eax
@@ -152,7 +152,7 @@
 0x69A966: call    sub_699CE0
 0x69A96B: mov     ecx, ebx; this
 0x69A96D: mov     byte ptr [esp+0B4h+var_4], 1
-0x69A975: call    TESObjectCELL_IsInterior
+0x69A975: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x69A97A: test    al, al
 0x69A97C: jz      short loc_69A988
 0x69A97E: lea     ecx, [ebx+28h]
@@ -178,14 +178,14 @@
 0x69A9BD: add     ecx, eax
 0x69A9BF: jz      short loc_69A9EA
 0x69A9C1: fld     [esp+0B4h+var_9C]
-0x69A9C5: mov     edx, [ebp+arg_0]
+0x69A9C5: mov     edx, dword ptr [ebp+pointXYZ]
 0x69A9C8: push    ecx
 0x69A9C9: fstp    [esp+0B8h+var_B8]; float
 0x69A9CC: push    edi; int
 0x69A9CD: sub     esp, 0Ch
 0x69A9D0: mov     eax, esp
 0x69A9D2: mov     [eax], edx
-0x69A9D4: mov     edx, [ebp+arg_4]
+0x69A9D4: mov     edx, dword ptr [ebp+pointXYZ+4]
 0x69A9D7: mov     [eax+4], edx
 0x69A9DA: mov     edx, [ebp+arg_8]
 0x69A9DD: push    ecx; float
@@ -239,10 +239,10 @@
 0x69AA79: call    edx
 0x69AA7B: test    eax, eax
 0x69AA7D: jz      short loc_69AAF7
-0x69AA7F: lea     eax, [ebp+arg_0]
-0x69AA82: push    eax
-0x69AA83: mov     ecx, esi
-0x69AA85: call    sub_4D7E30
+0x69AA7F: lea     eax, [ebp+pointXYZ]
+0x69AA82: push    eax; pointXYZ
+0x69AA83: mov     ecx, esi; this
+0x69AA85: call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.
 0x69AA8A: fstp    [esp+0B4h+var_94]
 0x69AA8E: fld     [esp+0B4h+var_94]
 0x69AA92: fld     [esp+0B4h+var_90]
@@ -270,9 +270,9 @@
 0x69AACC: test    al, al
 0x69AACE: jz      short loc_69AAF7
 0x69AAD0: fld     [esp+0B8h+var_A0]
-0x69AAD4: mov     edx, [ebp+arg_4]
+0x69AAD4: mov     edx, dword ptr [ebp+pointXYZ+4]
 0x69AAD7: push    ecx
-0x69AAD8: mov     ecx, [ebp+arg_0]
+0x69AAD8: mov     ecx, dword ptr [ebp+pointXYZ]
 0x69AADB: fstp    [esp+0BCh+var_BC]; float
 0x69AADE: push    edi; int
 0x69AADF: sub     esp, 0Ch
@@ -299,10 +299,10 @@
 0x69AB2A: call    edx
 0x69AB2C: test    eax, eax
 0x69AB2E: jz      loc_69ABCA
-0x69AB34: mov     ecx, ds:0B333C4h
-0x69AB3A: lea     eax, [ebp+arg_0]
-0x69AB3D: push    eax
-0x69AB3E: call    sub_4D7E30
+0x69AB34: mov     ecx, ds:0B333C4h; this
+0x69AB3A: lea     eax, [ebp+pointXYZ]
+0x69AB3D: push    eax; pointXYZ
+0x69AB3E: call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.
 0x69AB43: fstp    [esp+0B8h+var_98]
 0x69AB47: fld     [esp+0B8h+var_98]
 0x69AB4B: fld     [esp+0B8h+var_94]
@@ -335,9 +335,9 @@
 0x69AB9A: test    al, al
 0x69AB9C: jz      short loc_69ABCA
 0x69AB9E: fld     [esp+0BCh+var_A4]
-0x69ABA2: mov     edx, [ebp+arg_0]
+0x69ABA2: mov     edx, dword ptr [ebp+pointXYZ]
 0x69ABA5: push    ecx
-0x69ABA6: mov     ecx, [ebp+arg_4]
+0x69ABA6: mov     ecx, dword ptr [ebp+pointXYZ+4]
 0x69ABA9: fstp    [esp+0C0h+var_C0]; float
 0x69ABAC: push    edi; int
 0x69ABAD: sub     esp, 0Ch
@@ -373,3 +373,18 @@
 0x69AC1F: push    eax
 0x69AC20: push    edx
 0x69AC21: call    sub_8A75D0
+0x9C5C00: lea     ecx, [ebp+var_60]
+0x9C5C03: jmp     sub_8A5090
+0x9C5C08: lea     ecx, [ebp+var_74]; this
+0x9C5C0B: jmp     ??1bhkAabbPhantom@@UAE@XZ; bhkAabbPhantom::~bhkAabbPhantom(void)
+0x9C5C10: mov     edx, dword ptr [esp-4+pointXYZ+4]
+0x9C5C14: lea     eax, [edx-0A4h]
+0x9C5C1A: mov     ecx, [edx-0A8h]
+0x9C5C20: xor     ecx, eax
+0x9C5C22: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5C27: add     eax, 0Ch
+0x9C5C2A: mov     ecx, [edx-8]
+0x9C5C2D: xor     ecx, eax
+0x9C5C2F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5C34: mov     eax, offset stru_AEE2E0
+0x9C5C39: jmp     ___CxxFrameHandler3

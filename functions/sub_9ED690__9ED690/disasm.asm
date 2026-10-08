@@ -2,7 +2,7 @@
 0x9ED696: push    ecx
 0x9ED697: fstp    [esp+4+var_4]; float
 0x9ED69A: push    offset aFhostileactori; "fHostileActorInteriorDistance"
-0x9ED69F: mov     ecx, offset flt_B37B60
+0x9ED69F: mov     ecx, 0B37B60h
 0x9ED6A4: call    GameSetting_ConstrAndReg_float
 0x9ED6A9: push    offset sub_A1FDE0; void (__cdecl *)()
 0x9ED6AE: call    _atexit

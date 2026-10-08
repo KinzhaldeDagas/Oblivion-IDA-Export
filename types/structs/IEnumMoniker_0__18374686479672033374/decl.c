@@ -1,1 +1,1 @@
-IEnumMoniker_0
+typedef IEnumMoniker IEnumMoniker_0;

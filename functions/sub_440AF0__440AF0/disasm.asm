@@ -38,8 +38,8 @@
 0x440B61: mov     eax, [esi+24h]
 0x440B64: cmp     eax, 7FFFFFFFh
 0x440B69: jz      short loc_440B7F
-0x440B6B: push    eax; signed int
-0x440B6C: push    ecx; signed int
+0x440B6B: push    eax; cellY
+0x440B6C: push    ecx; cellX
 0x440B6D: mov     ecx, [esi+74h]; this
 0x440B70: call    TESWorldSpace__GetCellAtCellCoord
 0x440B75: mov     edi, eax
@@ -79,7 +79,7 @@
 0x440BBC: push    0
 0x440BBE: push    0
 0x440BC0: push    0
-0x440BC2: call    TESObjectCELL_GetMusicType
+0x440BC2: call    TESObjectCELL_GetMusicType; Verified: resolves the music type for a cell by using region-data ID 7, virtual sound-type lookup, and a position/cell cache; falls back to worldspace music when no region sound type is selected.
 0x440BC7: push    eax
 0x440BC8: mov     ecx, ebp
 0x440BCA: call    SoundManager_OpenMusicFile

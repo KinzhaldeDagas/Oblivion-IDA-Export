@@ -1,7 +1,7 @@
 0x6FBBA0: sub     esp, 8
 0x6FBBA3: fld     dword ptr [ecx]
 0x6FBBA5: push    esi
-0x6FBBA6: mov     esi, [esp+0Ch+arg_0]
+0x6FBBA6: mov     esi, [esp+0Ch+out]
 0x6FBBAA: fabs
 0x6FBBAC: fstp    [esp+0Ch+var_8]
 0x6FBBB0: fld     dword ptr [ecx+4]
@@ -22,16 +22,16 @@
 0x6FBBDB: fnstsw  ax
 0x6FBBDD: test    ah, 5
 0x6FBBE0: jp      short loc_6FBBF6
-0x6FBBE2: push    offset dword_B258E8
-0x6FBBE7: push    esi
-0x6FBBE8: call    sub_4BF9E0
+0x6FBBE2: push    offset rhs; rhs
+0x6FBBE7: push    esi; out
+0x6FBBE8: call    NiPoint3__NormalizedCrossProduct; Computes and normalizes the cross product of two NiPoint3 vectors, returning zero for near-degenerate input. ShadowSceneLight uses it to construct an orthonormal shadow-camera basis.
 0x6FBBED: mov     eax, esi
 0x6FBBEF: pop     esi
 0x6FBBF0: add     esp, 8
 0x6FBBF3: retn    4
-0x6FBBF6: push    offset dword_B258D0
-0x6FBBFB: push    esi
-0x6FBBFC: call    sub_4BF9E0
+0x6FBBF6: push    offset stru_B258D0; rhs
+0x6FBBFB: push    esi; out
+0x6FBBFC: call    NiPoint3__NormalizedCrossProduct; Computes and normalizes the cross product of two NiPoint3 vectors, returning zero for near-degenerate input. ShadowSceneLight uses it to construct an orthonormal shadow-camera basis.
 0x6FBC01: mov     eax, esi
 0x6FBC03: pop     esi
 0x6FBC04: add     esp, 8
@@ -45,9 +45,9 @@
 0x6FBC1B: fnstsw  ax
 0x6FBC1D: test    ah, 5
 0x6FBC20: jnp     short loc_6FBBE2
-0x6FBC22: push    offset dword_B258DC
-0x6FBC27: push    esi
-0x6FBC28: call    sub_4BF9E0
+0x6FBC22: push    offset stru_B258DC; rhs
+0x6FBC27: push    esi; out
+0x6FBC28: call    NiPoint3__NormalizedCrossProduct; Computes and normalizes the cross product of two NiPoint3 vectors, returning zero for near-degenerate input. ShadowSceneLight uses it to construct an orthonormal shadow-camera basis.
 0x6FBC2D: mov     eax, esi
 0x6FBC2F: pop     esi
 0x6FBC30: add     esp, 8

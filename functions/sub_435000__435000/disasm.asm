@@ -1,4 +1,4 @@
-0x435000: mov     eax, [ecx+2Ch]
+0x435000: mov     eax, [ecx+2Ch]; QueuedModel post-load callback wrapper: forwards optional child block (+0x2C + 0x10) to vtable slot +0x30.
 0x435003: xor     edx, edx
 0x435005: test    eax, eax
 0x435007: jz      short loc_43500C

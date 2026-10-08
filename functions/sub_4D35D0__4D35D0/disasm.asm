@@ -1,4 +1,4 @@
-0x4D35D0: push    esi
+0x4D35D0: push    esi; Verified: persistent-cell AddReference updates the WorldSpace coordinate/fallback persistent-reference index (+0x64) through TESWorldSpace_IndexReference. Ordinary cell additions do not index there. This routine does not populate the separate SubSpace spatial index at +0x60.
 0x4D35D1: mov     esi, [esp+4+arg_0]
 0x4D35D5: test    esi, esi
 0x4D35D7: push    edi
@@ -13,24 +13,24 @@
 0x4D35F4: test    dword ptr [edi+8], 400h
 0x4D35FB: jz      short loc_4D3667
 0x4D35FD: push    edi; a2
-0x4D35FE: mov     ecx, offset stru_B35C80; this
+0x4D35FE: mov     ecx, offset unk_B35C80; this
 0x4D3603: call    sub_496EA0
 0x4D3608: push    esi
 0x4D3609: lea     ecx, [edi+48h]
 0x4D360C: call    BSSimpleList_PushFront
 0x4D3611: push    edi; a2
-0x4D3612: mov     ecx, offset stru_B35C80; this
+0x4D3612: mov     ecx, offset unk_B35C80; this
 0x4D3617: call    sub_496F50
 0x4D361C: push    edi
 0x4D361D: lea     ecx, [esi+44h]
 0x4D3620: call    sub_4247B0
 0x4D3625: test    byte ptr [edi+24h], 1
 0x4D3629: jnz     short loc_4D3638
-0x4D362B: mov     ecx, [edi+50h]
+0x4D362B: mov     ecx, [edi+50h]; this
 0x4D362E: test    ecx, ecx
 0x4D3630: jz      short loc_4D3638
-0x4D3632: push    esi
-0x4D3633: call    sub_4F0120
+0x4D3632: push    esi; reference
+0x4D3633: call    TESWorldSpace_IndexReference; Verified: persistent-cell reference indexer routes kFormType_SubSpace references into referencesByCell (+0x64), alongside the other explicit eligible base types. This +0x64 index supports reattachment to exterior cells; the separate +0x60 SubSpace bounds index is built later by TESWorldSpace_IndexPersistentCellSubSpaces.
 0x4D3638: mov     eax, ds:0BA9DE4h
 0x4D363D: mov     ecx, large fs:2Ch
 0x4D3644: mov     edx, [ecx+eax*4]
@@ -45,14 +45,14 @@
 0x4D3663: pop     esi
 0x4D3664: retn    4
 0x4D3667: mov     ecx, esi; this
-0x4D3669: call    TESObjectREFR_GetParentCell
+0x4D3669: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x4D366E: test    eax, eax
 0x4D3670: jz      short loc_4D367A
-0x4D3672: push    esi
-0x4D3673: mov     ecx, eax
-0x4D3675: call    sub_4CECD0
+0x4D3672: push    esi; reference
+0x4D3673: mov     ecx, eax; this
+0x4D3675: call    TESObjectCELL_RemoveReference; Verified: removes a reference from the cell object list under the cell lock. For persistent cells, clears the reference's ExtraDataList cell pointer and removes it from the owning WorldSpace persistent-reference index (+0x64); for normal cells, clears its parent cell and updates changed state. No write to the separate SubSpace index (+0x60) is present.
 0x4D367A: push    edi; a2
-0x4D367B: mov     ecx, offset stru_B35C80; this
+0x4D367B: mov     ecx, offset unk_B35C80; this
 0x4D3680: call    sub_496EA0
 0x4D3685: push    esi
 0x4D3686: lea     ecx, [edi+48h]
@@ -63,7 +63,7 @@
 0x4D3697: mov     ecx, esi
 0x4D3699: call    edx
 0x4D369B: push    edi; a2
-0x4D369C: mov     ecx, offset stru_B35C80; this
+0x4D369C: mov     ecx, offset unk_B35C80; this
 0x4D36A1: call    sub_496F50
 0x4D36A6: mov     eax, [esi+8]
 0x4D36A9: shr     eax, 0Bh
@@ -97,7 +97,7 @@
 0x4D36F8: mov     ebp, large fs:2Ch
 0x4D36FF: jnz     short loc_4D3726
 0x4D3701: mov     ecx, esi; this
-0x4D3703: call    TESObjectREFR_IsPersistent?
+0x4D3703: call    TESObjectREFR_IsPersistent
 0x4D3708: test    al, al
 0x4D370A: jnz     short loc_4D3726
 0x4D370C: mov     edx, [ebp+ebx*4+0]
@@ -144,7 +144,7 @@
 0x4D3793: jz      short loc_4D37CC
 0x4D3795: push    esi; a2
 0x4D3796: mov     ecx, eax; this
-0x4D3798: call    sub_474510
+0x4D3798: call    ActorAnimData_ApplyToActor; Applies actor-dependent scene/node state through 0x471C00 and then calls ActorAnimData::ApplyActorAnimData. Called during NiNode generation, animation updates, body toggles, resurrection/fast travel, and first-person transitions.
 0x4D379D: mov     eax, [esi]
 0x4D379F: mov     edx, [eax+190h]
 0x4D37A5: mov     ecx, esi
@@ -152,11 +152,11 @@
 0x4D37A9: test    al, al
 0x4D37AB: jz      loc_4D38D4
 0x4D37B1: push    esi
-0x4D37B2: mov     ecx, offset ActorProcessManager_ptr
+0x4D37B2: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x4D37B7: call    sub_6748B0
-0x4D37BC: push    0
-0x4D37BE: mov     ecx, esi
-0x4D37C0: call    sub_4D80C0
+0x4D37BC: push    0; useSpellEffectExtraLight
+0x4D37BE: mov     ecx, esi; self
+0x4D37C0: call    TESObjectREFR_RegisterAttachedLightWithShadowScene; This retail reference/cell lifecycle call passes useSpellEffectExtraLight=false; it registers only ordinary ExtraLight.
 0x4D37C5: pop     ebp
 0x4D37C6: pop     ebx
 0x4D37C7: pop     edi
@@ -167,7 +167,7 @@
 0x4D37D0: push    ecx
 0x4D37D1: fstp    [esp+18h+a2]; a2
 0x4D37D4: mov     ecx, ebp; this
-0x4D37D6: call    NiAVObject_UpdateNiAVObject
+0x4D37D6: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x4D37DB: jmp     short loc_4D379D
 0x4D37DD: push    0; int
 0x4D37DF: push    offset ??_R0?AVActor@@@8; struct TypeDescriptor *
@@ -223,9 +223,9 @@
 0x4D3880: push    eax
 0x4D3881: push    esi
 0x4D3882: call    sub_438060
-0x4D3887: push    0
-0x4D3889: mov     ecx, esi
-0x4D388B: call    sub_4D80C0
+0x4D3887: push    0; useSpellEffectExtraLight
+0x4D3889: mov     ecx, esi; self
+0x4D388B: call    TESObjectREFR_RegisterAttachedLightWithShadowScene; This retail reference/cell lifecycle call passes useSpellEffectExtraLight=false; it registers only ordinary ExtraLight.
 0x4D3890: pop     ebp
 0x4D3891: pop     ebx
 0x4D3892: pop     edi
@@ -251,9 +251,9 @@
 0x4D38CE: push    0
 0x4D38D0: mov     ecx, esi
 0x4D38D2: call    eax
-0x4D38D4: push    0
-0x4D38D6: mov     ecx, esi
-0x4D38D8: call    sub_4D80C0
+0x4D38D4: push    0; useSpellEffectExtraLight
+0x4D38D6: mov     ecx, esi; self
+0x4D38D8: call    TESObjectREFR_RegisterAttachedLightWithShadowScene; This retail reference/cell lifecycle call passes useSpellEffectExtraLight=false; it registers only ordinary ExtraLight.
 0x4D38DD: pop     ebp
 0x4D38DE: pop     ebx
 0x4D38DF: pop     edi

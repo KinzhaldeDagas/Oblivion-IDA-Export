@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "JoystickObjectsInfo",
+  "definition": "struct JoystickObjectsInfo\n{\nUInt32 axisMask; ///< [Controller decode 2026-07-09] bit0 X, bit1 Y, bit2 Z, bit3 Rx, bit4 Ry, bit5 Rz.\nUInt32 povMask; ///< [Controller decode 2026-07-09] POV/object mask from DirectInput EnumObjects instance numbers.\n}\n",
   "id": 18374686479671809105,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
-      "name": "axis",
+      "annotation_confidence": "Unknown",
+      "comment": "[Controller decode 2026-07-09] bit0 X, bit1 Y, bit2 Z, bit3 Rx, bit4 Ry, bit5 Rz.",
+      "name": "axisMask",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
-      "name": "buttons",
+      "annotation_confidence": "Unknown",
+      "comment": "[Controller decode 2026-07-09] POV/object mask from DirectInput EnumObjects instance numbers.",
+      "name": "povMask",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     }
   ],
   "name": "JoystickObjectsInfo",
+  "ordinal": 736,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 8
 }

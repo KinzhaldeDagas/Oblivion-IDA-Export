@@ -1,19 +1,32 @@
 {
-  "callees_count": 66,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 16,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 8,
-  "display_name": "sub_8AD7D0",
+  "chunks": [
+    [
+      "0x8AD7D0",
+      "0x8AE0FF"
+    ]
+  ],
+  "chunks_sha256": "70ba03df0691463ae6436162cc88875897a73abbf3b803bee9e4928410fc2acc",
+  "comment_regular": "TES4 authoritative: low-level character proxy move loop uses the same active-surface solver for sliding/corrected motion after manifold constraints are built.",
+  "comment_repeatable": "TES4 authoritative: low-level character proxy move loop uses the same active-surface solver for sliding/corrected motion after manifold constraints are built.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 19,
+  "display_name": "hkpCharacterProxy_MoveAndUpdateManifold",
   "end_ea": "0x8AE0FF",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "sub_8AD7D0",
+  "name": "hkpCharacterProxy_MoveAndUpdateManifold",
   "segment": ".text",
   "sha256": "70ba03df0691463ae6436162cc88875897a73abbf3b803bee9e4928410fc2acc",
   "size": 2351,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x8AD7D0",
-  "type": "int __thiscall(__m128 *this, int, __m128 *, int *, int)",
-  "xrefs_from_count": 699,
+  "total_chunk_size": 2351,
+  "type": "int __thiscall(__m128 *this, int moveInput, __m128 *contextVec, int *collector, int collectorState)",
+  "xrefs_from_count": 704,
   "xrefs_to_count": 1
 }

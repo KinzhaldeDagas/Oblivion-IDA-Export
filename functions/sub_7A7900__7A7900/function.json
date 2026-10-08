@@ -1,19 +1,36 @@
 {
-  "callees_count": 93,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 49,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 5,
-  "display_name": "sub_7A7900",
+  "chunks": [
+    [
+      "0x7A7900",
+      "0x7A7CBA"
+    ],
+    [
+      "0x9CCE10",
+      "0x9CCE52"
+    ]
+  ],
+  "chunks_sha256": "e7e3f9f64283042e322eea8c947131b301bc4ae4675597c5ec5e78801e7e59d8",
+  "comment_regular": "Compact stock SIdvBranchInfo parser. Allocates 0x74 bytes, accepts only core branch-level tokens 6000..6017, and stores spline/profile pointers at +0x50..+0x70.",
+  "comment_repeatable": "Compact stock SIdvBranchInfo parser. Allocates 0x74 bytes, accepts only core branch-level tokens 6000..6017, and stores spline/profile pointers at +0x50..+0x70.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 14,
+  "display_name": "OB_SIdvBranchInfo_Parse_010201A0",
   "end_ea": "0x7A7CBA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7A7900",
+  "name": "OB_SIdvBranchInfo_Parse_010201A0",
   "segment": ".text",
   "sha256": "e24579e9d25cf31a08996c132ef611fe781152cd40ef6d1b3820a72c27cc6d92",
   "size": 954,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A7900",
-  "type": "float *__cdecl(unsigned int *)",
-  "xrefs_from_count": 374,
+  "total_chunk_size": 1020,
+  "type": "OB_SIdvBranchInfo_010201A0 *__cdecl(OB_CTreeFileAccess_010201A0 *)",
+  "xrefs_from_count": 400,
   "xrefs_to_count": 1
 }

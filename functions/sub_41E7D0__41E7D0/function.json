@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x41E7D0",
+      "0x41E7E2"
+    ]
+  ],
+  "chunks_sha256": "b2696b427652957dffdd93068417b5182c3757ebe8c69427dfd289517ef8b78e",
+  "comment_regular": "Verified accessor: returns the TESGlobal* in ExtraGlobal (extra type 0x28/XGLB), or null if the extra is absent.",
+  "comment_repeatable": "Verified accessor: returns the TESGlobal* in ExtraGlobal (extra type 0x28/XGLB), or null if the extra is absent.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_41E7D0",
+  "display_name": "ExtraDataList_GetGlobal",
   "end_ea": "0x41E7E2",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_41E7D0",
+  "name": "ExtraDataList_GetGlobal",
   "segment": ".text",
   "sha256": "b2696b427652957dffdd93068417b5182c3757ebe8c69427dfd289517ef8b78e",
   "size": 18,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x41E7D0",
-  "type": "BSExtraDataVtbl *__thiscall(ExtraDataList *this)",
+  "total_chunk_size": 18,
+  "type": "TESGlobal *__thiscall(ExtraDataList *this)",
   "xrefs_from_count": 8,
   "xrefs_to_count": 4
 }

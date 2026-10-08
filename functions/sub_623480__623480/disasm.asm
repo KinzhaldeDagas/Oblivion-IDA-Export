@@ -10,18 +10,18 @@
 0x62349C: fnstsw  ax
 0x62349E: test    ah, 41h
 0x6234A1: jnz     short loc_6234BA
-0x6234A3: push    0; a4
-0x6234A5: call    sub_6135F0
-0x6234AA: push    eax; a3
-0x6234AB: push    ebp; a2
-0x6234AC: call    TESObjectREFR_GetDistanceBetween?
+0x6234A3: push    0; useActorProjection
+0x6234A5: call    CombatController_GetCurrentTarget
+0x6234AA: push    eax; to
+0x6234AB: push    ebp; from
+0x6234AC: call    TESObjectREFR_GetSurfaceDistance; Three-argument cdecl routine: returns float surface distance from 'from' to 'to'. All 24 callers push exactly from, to, and useActorProjection then reclaim 0x0C. The prior EDI register argument, fourth stack byte, and double return were analysis pollution.
 0x6234B1: fstp    dword ptr [esi+184h]
 0x6234B7: add     esp, 0Ch
 0x6234BA: fld     dword ptr [esi+184h]
 0x6234C0: push    edi
-0x6234C1: mov     ecx, esi
+0x6234C1: mov     ecx, esi; this
 0x6234C3: fstp    [esp+1Ch+var_8]
-0x6234C7: call    sub_615520
+0x6234C7: call    CombatController_GetDesiredCombatDistance; Caches desired combat distance based on active combat mode and ranged/melee data.
 0x6234CC: fstp    [esp+1Ch+var_C]
 0x6234D0: mov     ecx, esi
 0x6234D2: call    sub_6163A0
@@ -85,13 +85,13 @@
 0x6235B0: fld     dword ptr ds:0A30634h
 0x6235B6: fstp    dword ptr [esi+0DCh]
 0x6235BC: mov     ecx, esi
-0x6235BE: call    sub_6135F0
+0x6235BE: call    CombatController_GetCurrentTarget
 0x6235C3: test    eax, eax
 0x6235C5: jz      short loc_623634
 0x6235C7: mov     ecx, esi
-0x6235C9: call    sub_6135F0
-0x6235CE: mov     ecx, eax
-0x6235D0: call    Actor_IsSwimming
+0x6235C9: call    CombatController_GetCurrentTarget
+0x6235CE: mov     ecx, eax; this
+0x6235D0: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x6235D5: test    al, al
 0x6235D7: jz      short loc_623634
 0x6235D9: mov     eax, [esi+70h]
@@ -101,8 +101,8 @@
 0x6235E3: jz      short loc_6235EA
 0x6235E5: cmp     eax, 3
 0x6235E8: jnz     short loc_623634
-0x6235EA: mov     ecx, ebp
-0x6235EC: call    Actor_IsSwimming
+0x6235EA: mov     ecx, ebp; this
+0x6235EC: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x6235F1: test    al, al
 0x6235F3: jnz     short loc_623634
 0x6235F5: mov     ecx, ebp
@@ -191,7 +191,7 @@
 0x6236E2: mov     ecx, edi
 0x6236E4: pop     edi
 0x6236E5: pop     ebp
-0x6236E6: mov     byte ptr [esi+174h], 0
+0x6236E6: mov     byte ptr [esi+174h], 0; Explicit pathing-failed branch sets CombatController+0x174 false before entering combat alert state.
 0x6236ED: pop     esi
 0x6236EE: add     esp, 10h
 0x6236F1: jmp     sub_620E50
@@ -242,12 +242,12 @@
 0x623787: add     esp, 10h
 0x62378A: retn
 0x62378B: mov     ecx, ebp
-0x62378D: call    Actor_IsBlocking
+0x62378D: call    Actor_IsBlocking; Actor_IsBlocking: process current-action vfunc +0x2D0 equals 6. Player jump path treats this specially; climb activation should reject or require explicit design override while blocking.
 0x623792: test    al, al
 0x623794: jz      short loc_62379F
-0x623796: push    0; float
-0x623798: mov     ecx, ebp
-0x62379A: call    sub_5F4AE0
+0x623796: push    0; shouldBlock
+0x623798: mov     ecx, ebp; this
+0x62379A: call    Actor_UpdateBlockingState; Starts or stops the actor blocking animation/current-action state and mirrors the result to CombatController byte +0x49. Native ABI is Actor in ECX plus one shouldBlock byte.
 0x62379F: mov     eax, [edi+70h]
 0x6237A2: cmp     eax, 2
 0x6237A5: jz      short loc_6237AC
@@ -257,13 +257,13 @@
 0x6237B0: jnz     loc_6239BB
 0x6237B6: jmp     loc_623857
 0x6237BB: fld     [esp+20h+var_C]
-0x6237BF: push    0; int
+0x6237BF: push    0; unused
 0x6237C1: sub     esp, 8
-0x6237C4: fstp    [esp+2Ch+var_28]; float
-0x6237C8: mov     ecx, edi
+0x6237C4: fstp    [esp+2Ch+maximumDistance]; maximumDistance
+0x6237C8: mov     ecx, edi; this
 0x6237CA: fld     [esp+2Ch+var_8]
-0x6237CE: fstp    [esp+2Ch+var_2C]; float
-0x6237D1: call    sub_613440
+0x6237CE: fstp    [esp+2Ch+surfaceDistance]; surfaceDistance
+0x6237D1: call    CombatController_IsTargetWithinRangedDistance; Tests surfaceDistance against maximumDistance plus a combat-style-controlled tolerance. Ranged weapon modes 2 and 4 suppress that extra tolerance.
 0x6237D6: test    al, al
 0x6237D8: jz      loc_623871
 0x6237DE: cmp     byte ptr [edi+158h], 0
@@ -314,16 +314,16 @@
 0x623871: cmp     dword ptr [edi+74h], 0
 0x623875: jz      loc_62399B
 0x62387B: fld     [esp+20h+var_C]
-0x62387F: push    0; int
+0x62387F: push    0; unused
 0x623881: fadd    st, st
 0x623883: sub     esp, 8
-0x623886: mov     ecx, edi
+0x623886: mov     ecx, edi; this
 0x623888: fstp    [esp+2Ch+var_4]
 0x62388C: fld     [esp+2Ch+var_4]
-0x623890: fstp    [esp+2Ch+var_28]; float
+0x623890: fstp    [esp+2Ch+maximumDistance]; maximumDistance
 0x623894: fld     [esp+2Ch+var_8]
-0x623898: fstp    [esp+2Ch+var_2C]; float
-0x62389B: call    sub_613440
+0x623898: fstp    [esp+2Ch+surfaceDistance]; surfaceDistance
+0x62389B: call    CombatController_IsTargetWithinRangedDistance; Tests surfaceDistance against maximumDistance plus a combat-style-controlled tolerance. Ranged weapon modes 2 and 4 suppress that extra tolerance.
 0x6238A0: test    al, al
 0x6238A2: jz      loc_62399B
 0x6238A8: cmp     byte ptr [edi+158h], 0
@@ -333,8 +333,8 @@
 0x6238BD: test    al, al
 0x6238BF: jz      loc_62399B
 0x6238C5: mov     ecx, [edi+70h]
-0x6238C8: push    ecx
-0x6238C9: call    sub_612670
+0x6238C8: push    ecx; mode
+0x6238C9: call    CombatMode_IsNonRangedMode; Returns true for native combat modes 0, 1, or 3; returns false for ranged weapon modes 2 and 4 and for values above 3.
 0x6238CE: add     esp, 4
 0x6238D1: test    al, al
 0x6238D3: jz      loc_62399B
@@ -344,17 +344,17 @@
 0x6238E3: call    eax
 0x6238E5: test    al, al
 0x6238E7: jz      loc_62399B
-0x6238ED: push    0
+0x6238ED: push    0; outAngleDegrees
 0x6238EF: mov     ecx, edi
-0x6238F1: call    sub_6135F0
-0x6238F6: push    eax
-0x6238F7: push    ebp
-0x6238F8: call    sub_6131D0
+0x6238F1: call    CombatController_GetCurrentTarget
+0x6238F6: push    eax; target
+0x6238F7: push    ebp; actor
+0x6238F8: call    Actor_IsFacingReferenceWithinCombatAngle; Computes the absolute XY heading difference from actor to target, normalizes across the 360-degree boundary, optionally returns degrees, and tests it against the combat-facing threshold game setting.
 0x6238FD: add     esp, 0Ch
 0x623900: test    al, al
 0x623902: jz      loc_6239BB
 0x623908: mov     ecx, edi
-0x62390A: call    sub_612D60
+0x62390A: call    CombatController_GetEquippedWeaponForm
 0x62390F: test    eax, eax
 0x623911: jz      loc_6239BB
 0x623917: mov     al, [eax+90h]
@@ -362,14 +362,14 @@
 0x62391F: jz      loc_6239BB
 0x623925: cmp     al, 4
 0x623927: jz      loc_6239BB
-0x62392D: mov     ecx, offset unk_B36F68
+0x62392D: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+290h)
 0x623932: call    GameSetting_GetSafeFloatPointer
 0x623937: fld     dword ptr [eax]
 0x623939: fmul    qword ptr ds:0A309F0h
-0x62393F: call    Double_To_SInt32
+0x62393F: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x623944: push    0; Seed
 0x623946: mov     ebx, eax
-0x623948: call    GetRandomLargeInteger?
+0x623948: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x62394D: cdq
 0x62394E: mov     ecx, 64h ; 'd'
 0x623953: idiv    ecx
@@ -386,7 +386,7 @@
 0x623972: mov     ecx, esi
 0x623974: call    edx
 0x623976: mov     ecx, eax
-0x623978: call    sub_4727E0
+0x623978: call    ActorAnimData_GetNextTextKeySuffixChar; Searches the active sequence at ActorAnimData +0xA0 + 4*slot for the first case-insensitive prefix match whose text-key time is >= sequence current time at +0x3C. Optionally writes the matched time and returns tolower(text[prefixLength]); returns 0 when absent. Observed with "m:" and compared with suffix 'l' to choose left/right attacks.
 0x62397D: xor     ecx, ecx
 0x62397F: cmp     al, 6Ch ; 'l'
 0x623981: setnz   cl
@@ -395,7 +395,7 @@
 0x623989: mov     eax, ecx
 0x62398B: push    eax
 0x62398C: mov     ecx, edi
-0x62398E: call    sub_612BD0
+0x62398E: call    CombatController_TryStartAttackAction; Attempts to start the selected attack animation group; on success it saves the prior mode, sets combat mode +0x74 to 0, and records the chosen attack group at +0x50. Private register-carried inputs are retained.
 0x623993: pop     ebx
 0x623994: pop     edi
 0x623995: pop     ebp
@@ -409,7 +409,7 @@
 0x6239A9: fstp    [esp+28h+var_24]; float
 0x6239AD: mov     ecx, edi
 0x6239AF: fld     [esp+28h+var_8]
-0x6239B3: fstp    [esp+28h+var_28]; float
+0x6239B3: fstp    [esp+28h+maximumDistance]; float
 0x6239B6: call    sub_61E5A0
 0x6239BB: pop     ebx
 0x6239BC: pop     edi

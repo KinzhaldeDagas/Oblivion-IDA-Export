@@ -7,7 +7,7 @@
 0x4DDDEC: push    offset loc_800000
 0x4DDDF1: call    edx
 0x4DDDF3: lea     ecx, [esi+44h]
-0x4DDDF6: call    sub_420190
+0x4DDDF6: call    ExtraDataList_GetOblivionEntry; Returns ExtraOblivionEntry type 0x3E itself, or null.
 0x4DDDFB: mov     edi, eax
 0x4DDDFD: test    edi, edi
 0x4DDDFF: jz      loc_4DDF7C
@@ -25,7 +25,7 @@
 0x4DDE26: mov     ebp, esi
 0x4DDE28: jz      short loc_4DDE31
 0x4DDE2A: mov     ecx, esi; int
-0x4DDE2C: call    sub_5EAE70
+0x4DDE2C: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x4DDE31: mov     ecx, [edi+18h]
 0x4DDE34: mov     eax, [ecx]
 0x4DDE36: mov     edx, [eax+174h]
@@ -49,7 +49,7 @@
 0x4DDE71: fldz
 0x4DDE73: fst     [esp+30h+var_14]
 0x4DDE77: fstp    [esp+30h+var_10]
-0x4DDE7B: call    sub_683CB0
+0x4DDE7B: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x4DDE80: fstp    [esp+30h+var_C]
 0x4DDE84: mov     ecx, [esp+30h+var_14]
 0x4DDE88: mov     edx, [esp+30h+var_10]
@@ -93,7 +93,7 @@
 0x4DDEED: test    edi, edi
 0x4DDEEF: jz      short loc_4DDEFE
 0x4DDEF1: mov     ecx, edi; this
-0x4DDEF3: call    TESObjectCELL_IsInterior
+0x4DDEF3: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x4DDEF8: test    al, al
 0x4DDEFA: jnz     short loc_4DDEFE
 0x4DDEFC: xor     edi, edi
@@ -129,7 +129,7 @@
 0x4DDF4A: pop     ebp
 0x4DDF4B: jz      short loc_4DDF63
 0x4DDF4D: lea     ecx, [esi+44h]
-0x4DDF50: call    sub_4212E0
+0x4DDF50: call    ExtraDataList_RemoveSavedMovementData; Removes the combined Oblivion ExtraSavedMovementData record (type 0x4B).
 0x4DDF55: mov     edx, [esi]
 0x4DDF57: mov     eax, [edx+9Ch]
 0x4DDF5D: push    0
@@ -138,7 +138,7 @@
 0x4DDF63: push    0
 0x4DDF65: push    esi
 0x4DDF66: lea     ecx, [esi+44h]
-0x4DDF69: call    sub_4201A0
+0x4DDF69: call    ExtraDataList_SetOrRemoveOblivionEntry; Creates/updates ExtraOblivionEntry from a reference position plus entry reference; removes type 0x3E when either required input is null.
 0x4DDF6E: mov     edx, [esi]
 0x4DDF70: mov     eax, [edx+44h]
 0x4DDF73: push    4000h

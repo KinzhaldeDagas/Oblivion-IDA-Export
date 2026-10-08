@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4BD380",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified per-cell cancellation path: looks up the packed cell label in g_DistantLODLoaderTasksByCell, cancels the referenced task through generic IOTask cancellation, then releases the lookup reference. GridDistantArray_UnloadCell calls this before clearing the cell slot.",
     "mnemonic": "push",
     "size": 2
   },
@@ -67,31 +67,31 @@
   },
   {
     "ea": "0x4BD3A3",
-    "line": "mov     eax, [esp+14h+arg_4]",
+    "line": "mov     eax, dword ptr [esp+14h+group_y]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4BD3A7",
-    "line": "mov     ecx, [esp+14h+arg_0]",
+    "line": "mov     ecx, dword ptr [esp+14h+group_x]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4BD3AB",
-    "line": "push    eax",
+    "line": "push    eax; group_y",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BD3AC",
-    "line": "push    ecx",
+    "line": "push    ecx; group_x",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BD3AD",
-    "line": "call    sub_4EF1D0",
+    "line": "call    TESObjectCELL_PackExteriorGroupLabel; Verified exact key encoding used by the DistantLOD cell model map: packed label = (signed cellX << 16) | unsigned cellY.",
     "mnemonic": "call",
     "size": 5
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x4BD3B5",
-    "line": "mov     [esp+14h+arg_4], 0",
+    "line": "mov     dword ptr [esp+14h+group_y], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x4BD3C2",
-    "line": "lea     ecx, [esp+14h+arg_4]",
+    "line": "lea     ecx, [esp+14h+group_y]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x4BD3D8",
-    "line": "mov     eax, [esp+14h+arg_4]",
+    "line": "mov     eax, dword ptr [esp+14h+group_y]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -181,19 +181,19 @@
   },
   {
     "ea": "0x4BD3E2",
-    "line": "push    eax",
+    "line": "push    eax; task",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BD3E3",
-    "line": "call    sub_432130",
+    "line": "call    IOTask_Cancel; Verified cell unload retrieves and cancels the cell's loader task through IOTask_Cancel; the generic state machine transitions active states to 6 before invoking task completion.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4BD3E8",
-    "line": "mov     esi, [esp+14h+arg_4]",
+    "line": "mov     esi, dword ptr [esp+14h+group_y]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -322,5 +322,59 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B4320",
+    "line": "lea     ecx, [ebp+8]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B4323",
+    "line": "jmp     sub_4BDDC0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4328",
+    "line": "mov     edx, dword ptr [esp+group_y]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B432C",
+    "line": "lea     eax, [edx-4]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B432F",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B4332",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B4334",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4339",
+    "line": "mov     eax, offset stru_ADFA34",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B433E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

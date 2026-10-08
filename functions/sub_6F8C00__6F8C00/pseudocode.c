@@ -14,63 +14,63 @@ struct std::locale::facet *__cdecl sub_6F8C00(int *a1)
   _BYTE v13[12]; // [esp+1Ch] [ebp-18h] BYREF
   unsigned int v14; // [esp+30h] [ebp-4h]
 
-  std::_Lockit::_Lockit((std::_Lockit *)v12, 0);
-  v1 = dword_BA9B64 == 0;
-  v2 = (struct std::locale::facet *)dword_B3F170;
-  v14 = 0;
-  v10 = v2;
-  if ( v1 )
+  std::_Lockit::_Lockit((std::_Lockit *)v12, 0); /*0x6f8c2c*/
+  v1 = unk_BA9B64 == 0; /*0x6f8c31*/
+  v2 = *(struct std::locale::facet **)&destination[0x104]; /*0x6f8c38*/
+  v14 = 0; /*0x6f8c3e*/
+  v10 = v2; /*0x6f8c46*/
+  if ( v1 ) /*0x6f8c4a*/
   {
-    std::_Lockit::_Lockit((std::_Lockit *)v11, 0);
-    if ( !dword_BA9B64 )
+    std::_Lockit::_Lockit((std::_Lockit *)v11, 0); /*0x6f8c52*/
+    if ( !unk_BA9B64 ) /*0x6f8c57*/
     {
-      v3 = dword_BA9B60 + 1;
-      dword_BA9B60 = v3;
-      dword_BA9B64 = v3;
+      v3 = unk_BA9B60 + 1; /*0x6f8c65*/
+      unk_BA9B60 = v3; /*0x6f8c68*/
+      unk_BA9B64 = v3; /*0x6f8c6d*/
     }
-    std::_Lockit::~_Lockit((std::_Lockit *)v11);
+    std::_Lockit::~_Lockit((std::_Lockit *)v11); /*0x6f8c76*/
   }
-  v4 = dword_BA9B64;
-  v5 = *a1;
-  if ( (unsigned int)dword_BA9B64 >= *(_DWORD *)(*a1 + 0xC) )
+  v4 = unk_BA9B64; /*0x6f8c7f*/
+  v5 = *a1; /*0x6f8c85*/
+  if ( (unsigned int)unk_BA9B64 >= *(_DWORD *)(*a1 + 0xC) ) /*0x6f8c8a*/
   {
-    v6 = 0;
+    v6 = 0; /*0x6f8cb8*/
   }
   else
   {
-    v6 = *(struct std::locale::facet **)(*(_DWORD *)(v5 + 8) + 4 * v4);
-    if ( v6 )
-      goto LABEL_17;
+    v6 = *(struct std::locale::facet **)(*(_DWORD *)(v5 + 8) + 4 * v4); /*0x6f8c8f*/
+    if ( v6 ) /*0x6f8c94*/
+      goto LABEL_17; /*0x6f8c94*/
   }
-  if ( !*(_BYTE *)(v5 + 0x14) )
-    goto LABEL_10;
-  v7 = sub_98083E();
-  if ( v4 < *(_DWORD *)(v7 + 0xC) )
+  if ( !*(_BYTE *)(v5 + 0x14) ) /*0x6f8c9a*/
+    goto LABEL_10; /*0x6f8c9a*/
+  v7 = sub_98083E(); /*0x6f8c9c*/
+  if ( v4 < *(_DWORD *)(v7 + 0xC) ) /*0x6f8ca4*/
   {
-    v6 = *(struct std::locale::facet **)(*(_DWORD *)(v7 + 8) + 4 * v4);
+    v6 = *(struct std::locale::facet **)(*(_DWORD *)(v7 + 8) + 4 * v4); /*0x6f8ca9*/
 LABEL_10:
-    if ( v6 )
-      goto LABEL_17;
+    if ( v6 ) /*0x6f8cae*/
+      goto LABEL_17; /*0x6f8cae*/
   }
-  if ( v2 )
+  if ( v2 ) /*0x6f8cb2*/
   {
-    v6 = v2;
+    v6 = v2; /*0x6f8cb4*/
   }
   else
   {
-    if ( sub_6F8920(v4, &v10) == 0xFFFFFFFF )
+    if ( sub_6F8920(&v10) == 0xFFFFFFFF ) /*0x6f8ccc*/
     {
-      std::bad_cast::bad_cast((std::bad_cast *)v13, "bad cast");
-      ThrowException__((int)v13, &_TI2_AVbad_cast_std__);
+      std::bad_cast::bad_cast((std::bad_cast *)v13, "bad cast"); /*0x6f8cd7*/
+      ThrowException__((DWORD)v13, &_TI2_AVbad_cast_std__); /*0x6f8ce6*/
     }
-    v6 = v10;
-    v8 = v10;
-    dword_B3F170 = (int)v10;
-    sub_6F6D90(v8);
-    std::locale::facet::facet_Register(v6);
+    v6 = v10; /*0x6f8ceb*/
+    v8 = v10; /*0x6f8cef*/
+    *(_DWORD *)&destination[0x104] = v10; /*0x6f8cf1*/
+    sub_6F6D90(v8); /*0x6f8cf7*/
+    std::locale::facet::facet_Register(v6); /*0x6f8cfd*/
   }
 LABEL_17:
-  v14 = 0xFFFFFFFF;
-  std::_Lockit::~_Lockit((std::_Lockit *)v12);
-  return v6;
+  v14 = 0xFFFFFFFF; /*0x6f8d05*/
+  std::_Lockit::~_Lockit((std::_Lockit *)v12); /*0x6f8d11*/
+  return v6; /*0x6f8d18*/
 }

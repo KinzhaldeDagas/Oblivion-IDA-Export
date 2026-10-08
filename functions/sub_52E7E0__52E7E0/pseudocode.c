@@ -1,9 +1,10 @@
-int __cdecl sub_52E7E0(unsigned int a1)
+// Oblivion-native specialization display helper: returns the localized name for specialization IDs 0..2 (Combat, Magic, Stealth); invalid IDs return the fallback string.
+const char *__cdecl ActorValue_GetSpecializationName(UInt32 specialization)
 {
-  int v1; // eax
+  const char **v1; // eax
 
-  if ( a1 <= 2 && (v1 = *(_DWORD *)(4 * a1 + 0xB10D90)) != 0 )
-    return *(_DWORD *)v1;
+  if ( specialization <= 2 && (v1 = *(const char ***)(4 * specialization + 0xB10D90)) != 0 ) /*0x52e7f2*/
+    return *v1; /*0x52e7f4*/
   else
-    return 0;
+    return 0; /*0x52e7f7*/
 }

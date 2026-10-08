@@ -1,19 +1,32 @@
 {
-  "callees_count": 25,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 14,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x60D1F0",
+      "0x60D3B8"
+    ]
+  ],
+  "chunks_sha256": "0c47a73d576211356fbd8cc8f55cda26f8477f222f2740c6eb2a9f58bb97eb8b",
+  "comment_regular": "Verified 2026-10-04: BaseProcess save role from Oblivion process vtable slot +0x3F4, parent call chain and matching serialization/reset behavior. ECX receiver and RET8 establish stack arity; owner is MobileObject (dispatch 65A835 for Revert). ",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 6,
-  "display_name": "sub_60D1F0",
+  "display_name": "BaseProcess_SaveGame",
   "end_ea": "0x60D3B8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_60D1F0",
+  "name": "BaseProcess_SaveGame",
   "segment": ".text",
   "sha256": "0c47a73d576211356fbd8cc8f55cda26f8477f222f2740c6eb2a9f58bb97eb8b",
   "size": 456,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x60D1F0",
-  "type": "void __thiscall(_DWORD *this, int, int)",
+  "total_chunk_size": 456,
+  "type": "void __thiscall(BaseProcess *self, ProcessSaveChangeMask changeMask, MobileObject *owner)",
   "xrefs_from_count": 162,
   "xrefs_to_count": 2
 }

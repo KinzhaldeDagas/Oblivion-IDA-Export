@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x51CC90",
+      "0x51CCB6"
+    ]
+  ],
+  "chunks_sha256": "47abe2cdc41d0e75d56b6ae544e2bb8fc92b276c46fc94401dbfb115af606156",
+  "comment_regular": "Verified: component vslot +0x2C sets/clears only NoBloodSpray (0x800), then tail-dispatches MarkAsModified(+0x50) with changeMask 0x10. Complete creature flags offset +0x28.\nVerified persistence link: MarkAsModified mask 0x10 is consumed by TESActorBaseData size/save/load 0x467A20/0x467AF0/0x467CA0, which transfer the 16-byte base-data block including this flag. Runtime setter persistence is now linked to actual save payload.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_51CC90",
+  "display_name": "TESCreature_SetNoBloodSpray",
   "end_ea": "0x51CCB6",
-  "flags": 5120,
+  "evidence_confidence": "Unknown",
+  "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_51CC90",
+  "name": "TESCreature_SetNoBloodSpray",
   "segment": ".text",
   "sha256": "47abe2cdc41d0e75d56b6ae544e2bb8fc92b276c46fc94401dbfb115af606156",
   "size": 38,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x51CC90",
-  "type": "int __thiscall(_DWORD *this, char)",
+  "total_chunk_size": 38,
+  "type": "void __thiscall(TESActorBaseData *__shifted(TESCreature,0x24) self, bool disabled)",
   "xrefs_from_count": 9,
   "xrefs_to_count": 1
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x680620",
-    "line": "mov     ax, ds:0B3BF04h",
+    "line": "mov     ax, ds:0B3BF04h; Verified reallocation helper: grows the table to the requested capacity, allocates and zeroes capacity*0x10 bytes, copies old entries, frees the old allocation, and records the new capacity.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x680627",
-    "line": "mov     di, [esp+4+arg_0]",
+    "line": "mov     di, [esp+4+newCapacity]",
     "mnemonic": "mov",
     "size": 5
   },
@@ -241,25 +241,25 @@
   },
   {
     "ea": "0x680693",
-    "line": "push    ecx; Size",
+    "line": "push    ecx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x680694",
-    "line": "push    ebp; Src",
+    "line": "push    ebp; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x680695",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x680696",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x68069F",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

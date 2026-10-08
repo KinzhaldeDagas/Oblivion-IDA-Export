@@ -9,7 +9,7 @@
 0x547DE4: fstp    [esp+18h+var_14]
 0x547DE8: fld     [esp+18h+arg_0]
 0x547DEC: fstp    [esp+18h+var_18]
-0x547DEF: call    Calc_WalkSpeed
+0x547DEF: call    Calc_WalkSpeed; TES4 authoritative: Calc_WalkSpeed. Uses Speed actor value, carried weight/encumbrance, weapon-out branch, creature/character walk min/max game settings, and sneak multiplier; selected by sub_5E65B0 when run/swim/fly-speed flags are absent.
 0x547DF4: fadd    qword ptr ds:0A2FC68h
 0x547DFA: fstp    [esp+18h+var_4]
 0x547DFE: fld     [esp+18h+var_4]

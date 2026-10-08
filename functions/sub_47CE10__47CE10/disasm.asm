@@ -10,6 +10,6 @@
 0x47CE29: push    ecx
 0x47CE2A: mov     ecx, esi
 0x47CE2C: fstp    [esp+0Ch+var_C]; float
-0x47CE2F: call    sub_70A0D0
+0x47CE2F: call    NiNode_UpdateDownwardPass; NiNode virtual UpdateDownwardPass (+0x60). Optionally updates this node's properties/controllers, invokes virtual UpdateWorldTransform (+0x74), clears its world-bound radius, recursively updates every non-null child in +0xB0/count +0xB6, and copies/merges nonempty child spheres into the node bound.
 0x47CE34: pop     esi
 0x47CE35: retn    8

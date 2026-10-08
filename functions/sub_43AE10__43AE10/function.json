@@ -1,18 +1,31 @@
 {
-  "callees_count": 13,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x43AE10",
+      "0x43AF2C"
+    ]
+  ],
+  "chunks_sha256": "e281cd01d8344b6d7726db200c34ebfd18b7b7280cb252f111f7de7606a8af81",
+  "comment_regular": "Verified shared queued-reference callback: the same implementation appears in QueuedReference, QueuedTree, QueuedCharacter, QueuedCreature, and QueuedPlayer vtables. It stores the generated NiNode on the reference, refreshes/attaches its 3D, then sets bit 0x80000; off-main-thread calls enqueue AttachDistant3DTask. Fallout's named QueuedReference::AttachDistant3D follows the same flow and calls TESObjectREFR::SetHasTemp3D.",
+  "comment_repeatable": "Verified shared queued-reference callback: the same implementation appears in QueuedReference, QueuedTree, QueuedCharacter, QueuedCreature, and QueuedPlayer vtables. It stores the generated NiNode on the reference, refreshes/attaches its 3D, then sets bit 0x80000; off-main-thread calls enqueue AttachDistant3DTask. Fallout's named QueuedReference::AttachDistant3D follows the same flow and calls TESObjectREFR::SetHasTemp3D.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 10,
-  "display_name": "sub_43AE10",
+  "display_name": "QueuedReference_AttachDistant3D",
   "end_ea": "0x43AF2C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_43AE10",
+  "name": "QueuedReference_AttachDistant3D",
   "segment": ".text",
   "sha256": "e281cd01d8344b6d7726db200c34ebfd18b7b7280cb252f111f7de7606a8af81",
   "size": 284,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x43AE10",
+  "total_chunk_size": 284,
   "type": "LONG __userpurge@<eax>(int@<ecx>, double@<st2>, double@<st1>, double@<st0>, _DWORD *)",
   "xrefs_from_count": 120,
   "xrefs_to_count": 5

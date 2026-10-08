@@ -61,7 +61,7 @@
 0x59D0F1: jz      short loc_59D104
 0x59D0F3: mov     eax, [esi+38h]
 0x59D0F6: push    eax
-0x59D0F7: call    FormHeapFree
+0x59D0F7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x59D0FC: mov     [esi+38h], edi
 0x59D0FF: jmp     loc_59D608
 0x59D104: push    0DCh ; 'Ü'; Size
@@ -123,7 +123,7 @@
 0x59D1CA: mov     ecx, [esi+2Ch]; this
 0x59D1CD: push    edi; a2
 0x59D1CE: mov     byte ptr [esp+1A8h+var_4], 0
-0x59D1D6: call    sub_405680
+0x59D1D6: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x59D1DB: mov     edi, [esi+3Ch]
 0x59D1DE: call    FontManager_GetSingleton
 0x59D1E3: mov     ebx, [eax+edi*4]
@@ -146,7 +146,7 @@
 0x59D222: fstp    [esp+1A4h+var_178]
 0x59D226: fild    dword ptr [esi+48h]
 0x59D229: fsub    [esp+1A4h+var_178]
-0x59D22D: call    Double_To_SInt32
+0x59D22D: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x59D232: mov     [esi+48h], eax
 0x59D235: cmp     byte ptr [edi], 0Ah
 0x59D238: jz      loc_59D588
@@ -218,7 +218,7 @@
 0x59D30F: fstp    [esp+1A4h+var_194]
 0x59D313: fild    dword ptr [esi+48h]
 0x59D316: fsub    [esp+1A4h+var_194]
-0x59D31A: call    Double_To_SInt32
+0x59D31A: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x59D31F: mov     [esi+48h], eax
 0x59D322: jmp     loc_59D578
 0x59D327: add     eax, 1
@@ -423,11 +423,11 @@
 0x59D5BF: xor     edi, edi
 0x59D5C1: mov     eax, [esi+38h]
 0x59D5C4: push    eax
-0x59D5C5: call    FormHeapFree
+0x59D5C5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x59D5CA: mov     ecx, [esi+2Ch]; this
 0x59D5CD: add     esp, 4
 0x59D5D0: mov     [esi+38h], edi
-0x59D5D3: call    NiAVObject_InitializePropertyState
+0x59D5D3: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x59D5D8: mov     ecx, [esi+2Ch]
 0x59D5DB: call    NiNode_UpdateDynamicEffectState
 0x59D5E0: fldz
@@ -435,10 +435,10 @@
 0x59D5E4: push    ecx
 0x59D5E5: mov     ecx, [esi+2Ch]; this
 0x59D5E8: fstp    [esp+1ACh+a2]; a2
-0x59D5EB: call    NiAVObject_UpdateNiAVObject
+0x59D5EB: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x59D5F0: mov     edx, [esp+1A4h+Src]
 0x59D5F4: push    edx
-0x59D5F5: call    FormHeapFree
+0x59D5F5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x59D5FA: mov     [esp+1A8h+Src], edi
 0x59D5FE: mov     word ptr [esp+1A8h+var_188+2], di
 0x59D603: mov     word ptr [esp+1A8h+var_188], di
@@ -458,3 +458,23 @@
 0x59D63F: mov     esp, ebp
 0x59D641: pop     ebp
 0x59D642: retn
+0x9C0050: lea     ecx, [ebp+var_170]; this
+0x9C0056: jmp     ??1BSFile@@UAE@XZ; BSFile::~BSFile(void)
+0x9C005B: mov     eax, [ebp+var_194]
+0x9C0061: push    eax
+0x9C0062: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C0067: pop     ecx
+0x9C0068: retn
+0x9C0069: mov     eax, [ebp+var_194]
+0x9C006F: push    eax
+0x9C0070: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C0075: pop     ecx
+0x9C0076: retn
+0x9C0077: lea     ecx, [ebp+Src]; void *
+0x9C007D: jmp     BSStringT_Clear
+0x9C0082: mov     edx, [esp-4+arg_4]
+0x9C0086: lea     eax, [edx-194h]
+0x9C008C: mov     ecx, [edx-198h]
+0x9C0092: xor     ecx, eax
+0x9C0094: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C0099: add     eax, 0Ch

@@ -23,3 +23,12 @@
 0x416A76: pop     esi
 0x416A77: add     esp, 10h
 0x416A7A: retn
+0x9AB3D0: mov     ecx, [ebp-10h]
+0x9AB3D3: jmp     ??1?$NiTMap@W4EffectID@MagicSystem@@PAVEffectSetting@@@@UAE@XZ; NiTMap<MagicSystem::EffectID,EffectSetting *>::~NiTMap<MagicSystem::EffectID,EffectSetting *>(void)
+0x9AB3D8: mov     edx, [esp+arg_4]
+0x9AB3DC: lea     eax, [edx-8]
+0x9AB3DF: mov     ecx, [edx-0Ch]
+0x9AB3E2: xor     ecx, eax
+0x9AB3E4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AB3E9: mov     eax, offset stru_AD82A8
+0x9AB3EE: jmp     ___CxxFrameHandler3

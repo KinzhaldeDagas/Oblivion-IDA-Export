@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x532928",
-    "line": "call    sub_8AC070",
+    "line": "call    bhkCollisionWrapper_GetPositionPtr; Returns low-level Havok object position pointer: *(wrapper+0x30 + 0x1C) + 0x30.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x53292F",
-    "line": "mov     eax, offset stru_BA7A40",
+    "line": "mov     eax, offset unk_BA7A40",
     "mnemonic": "mov",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x532942",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x532949",
-    "line": "jnz     short loc_532997",
+    "line": "jnz     short loc_532997; TES4 authoritative camera collision: chooses the first camera phantom when testing the player's own proxy; otherwise uses the second phantom.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x5329F5",
-    "line": "call    sub_8AC0C0",
+    "line": "call    bhkCollisionWrapper_GetHavokObject; bhk collision wrapper accessor: returns stored low-level Havok object pointer at wrapper+0x30.",
     "mnemonic": "call",
     "size": 5
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x532A10",
-    "line": "call    sub_8AC0C0",
+    "line": "call    bhkCollisionWrapper_GetHavokObject; bhk collision wrapper accessor: returns stored low-level Havok object pointer at wrapper+0x30.",
     "mnemonic": "call",
     "size": 5
   },
@@ -931,7 +931,7 @@
   },
   {
     "ea": "0x532A9C",
-    "line": "call    sub_89F570",
+    "line": "call    bhkRefObject_UpdateHavokObject",
     "mnemonic": "call",
     "size": 5
   },
@@ -973,7 +973,7 @@
   },
   {
     "ea": "0x532AAE",
-    "line": "call    sub_8ABAC0",
+    "line": "call    sub_8ABAC0; TES4 authoritative camera collision overlap: temporarily moves the chosen camera sphere phantom to the candidate Havok position before testing against the actor proxy shape.",
     "mnemonic": "call",
     "size": 5
   },
@@ -985,7 +985,7 @@
   },
   {
     "ea": "0x532AB5",
-    "line": "call    sub_89F570",
+    "line": "call    bhkRefObject_UpdateHavokObject",
     "mnemonic": "call",
     "size": 5
   },
@@ -1207,7 +1207,7 @@
   },
   {
     "ea": "0x532B2A",
-    "line": "fstp    dword ptr [esi+0Ch]",
+    "line": "fstp    dword ptr [esi+0Ch]; TES4 authoritative camera collision overlap: temporarily overwrites the camera sphere shape radius/extent field with camera_size before dispatching the collision agent, then restores it at 0x532B42.",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1237,7 +1237,7 @@
   },
   {
     "ea": "0x532B34",
-    "line": "call    eax",
+    "line": "call    eax; TES4 authoritative: calls a Havok collision-agent function pointer for camera sphere phantom vs actor proxy shape and stores contacts in hkAllCdPointCollector. This is an overlap/intersection test, not the 0x5326B0 segment cast.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1378,5 +1378,83 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B8E40",
+    "line": "lea     ecx, [ebp+var_1C0]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B8E46",
+    "line": "jmp     ??1hkAllCdPointCollector@@UAE@XZ; hkAllCdPointCollector::~hkAllCdPointCollector(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8E4B",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B8E4F",
+    "line": "lea     eax, [edx-214h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B8E55",
+    "line": "mov     ecx, [edx-218h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B8E5B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B8E5D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8E62",
+    "line": "add     eax, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B8E65",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B8E68",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B8E6A",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8E6F",
+    "line": "mov     eax, offset stru_AE3268",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8E74",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

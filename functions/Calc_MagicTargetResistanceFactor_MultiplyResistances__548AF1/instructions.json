@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x548AF1",
-    "line": "fxch    st(2)",
+    "line": "fxch    st(2); Resistance combine path: converts both percentages to fractions and combines them as independent resist factors after both <100 checks pass.",
     "mnemonic": "fxch",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x548B17",
-    "line": "fstp    [esp+arg_10]",
+    "line": "fstp    [esp+arg_10]; Final vanilla exposure factor is (1 - magicItemResistance/100) * (1 - effectSpecificResistance/100); either channel >= 100 returns 0.",
     "mnemonic": "fstp",
     "size": 4
   },

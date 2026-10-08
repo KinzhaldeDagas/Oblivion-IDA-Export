@@ -1,4 +1,4 @@
-0x811ED0: push    0FFFFFFFFh
+0x811ED0: push    0FFFFFFFFh;
 0x811ED2: push    offset SEH_80E9A0
 0x811ED7: mov     eax, large fs:0
 0x811EDD: push    eax
@@ -47,9 +47,9 @@
 0x811F5D: mov     [eax+4], ecx
 0x811F60: mov     ecx, [esp+58h+var_20]
 0x811F64: mov     [eax+8], edx
-0x811F67: push    esi
+0x811F67: push    esi; slot
 0x811F68: mov     [eax+0Ch], ecx
-0x811F6B: call    sub_7ECAE0
+0x811F6B: call    OB_BSShader_SetSharedFloat4Constant_010201A0; Shader global table helper: store four dwords at dword_B46498 + 0x10 * index.
 0x811F70: add     esp, 14h
 0x811F73: cmp     [ebp+8], esi
 0x811F76: fldz
@@ -147,7 +147,7 @@
 0x812114: push    ebx
 0x812115: mov     ecx, edi
 0x812117: mov     [esp+4Ch+a2], edx
-0x81211B: call    sub_8115C0
+0x81211B: call    OB_DistantLOD_CopyInstancesAndSetTriangles_010201A0
 0x812120: xor     ebp, ebp
 0x812122: cmp     dword ptr ds:0B42F48h, 2
 0x812129: mov     [esp+48h+var_34], esi
@@ -165,9 +165,9 @@
 0x812153: add     dword ptr [eax+5Ch], 1
 0x812157: mov     [esp+48h+arg_C], eax
 0x81215B: mov     ecx, [esp+48h+a2]
-0x81215F: push    ecx; a2
+0x81215F: push    ecx; texture
 0x812160: mov     ecx, [esp+4Ch+arg_C]; this
-0x812164: call    sub_76C910
+0x812164: call    NiD3DTextureStage_SetTexture;
 0x812169: test    dword ptr [ebx+1Ch], 2000h
 0x812170: mov     ecx, [esi]; this
 0x812172: jbe     short loc_812180
@@ -177,58 +177,58 @@
 0x812180: movzx   eax, bp
 0x812183: mov     eax, [edi+eax*4+8Ch]
 0x81218A: push    eax; a2
-0x81218B: call    sub_7AECB0
+0x81218B: call    NiD3DPass_SetVertexShader; Reference-counted NiD3DPass vertex-shader setter. Replaces pass+0x58 and AddRefs the new NiD3DVertexShader.
 0x812190: movzx   ecx, word ptr [esp+48h+var_34]
 0x812195: mov     eax, [edi+ecx*4+9Ch]
 0x81219C: mov     ecx, [esi]; this
-0x81219E: push    eax; a2
-0x81219F: call    sub_7AEC60
+0x81219E: push    eax; shader
+0x81219F: call    NiD3DPass_SetPixelShader; Reference-counted NiD3DPass pixel-shader setter. Replaces pass+0x44 and AddRefs the new NiD3DPixelShader.
 0x8121A4: cmp     word ptr ds:0B42EACh, 4
 0x8121AC: mov     ebx, [esi]
 0x8121AE: jnz     loc_812242
 0x8121B4: cmp     dword ptr [ebx+30h], 0
 0x8121B8: jnz     short loc_8121C2
-0x8121BA: call    sub_772DF0
+0x8121BA: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x8121BF: mov     [ebx+30h], eax
 0x8121C2: mov     ecx, [ebx+30h]
 0x8121C5: push    0
 0x8121C7: push    1
 0x8121C9: push    34h ; '4'
-0x8121CB: call    sub_772CD0
+0x8121CB: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x8121D0: mov     ebx, [esi]
 0x8121D2: cmp     dword ptr [ebx+30h], 0
 0x8121D6: jnz     short loc_8121E0
-0x8121D8: call    sub_772DF0
+0x8121D8: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x8121DD: mov     [ebx+30h], eax
 0x8121E0: mov     ecx, [ebx+30h]
 0x8121E3: push    0
 0x8121E5: push    8
 0x8121E7: push    38h ; '8'
-0x8121E9: call    sub_772CD0
+0x8121E9: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x8121EE: mov     ebx, [esi]
 0x8121F0: cmp     dword ptr [ebx+30h], 0
 0x8121F4: jnz     short loc_8121FE
-0x8121F6: call    sub_772DF0
+0x8121F6: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x8121FB: mov     [ebx+30h], eax
 0x8121FE: mov     ecx, [ebx+30h]
 0x812201: push    0
 0x812203: push    7
 0x812205: push    37h ; '7'
-0x812207: call    sub_772CD0
+0x812207: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81220C: mov     ebx, [esi]
 0x81220E: cmp     dword ptr [ebx+30h], 0
 0x812212: jnz     short loc_81221C
-0x812214: call    sub_772DF0
+0x812214: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x812219: mov     [ebx+30h], eax
 0x81221C: mov     ecx, [ebx+30h]
 0x81221F: push    0
 0x812221: push    1
 0x812223: push    35h ; '5'
-0x812225: call    sub_772CD0
+0x812225: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81222A: mov     ebx, [esi]
 0x81222C: cmp     dword ptr [ebx+30h], 0
 0x812230: jnz     short loc_81223A
-0x812232: call    sub_772DF0
+0x812232: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x812237: mov     [ebx+30h], eax
 0x81223A: push    0
 0x81223C: push    1
@@ -236,18 +236,18 @@
 0x812240: jmp     short loc_812256
 0x812242: cmp     dword ptr [ebx+30h], 0
 0x812246: jnz     short loc_812250
-0x812248: call    sub_772DF0
+0x812248: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81224D: mov     [ebx+30h], eax
 0x812250: push    0
 0x812252: push    0
 0x812254: push    34h ; '4'
 0x812256: mov     ecx, [ebx+30h]
-0x812259: call    sub_772CD0
+0x812259: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81225E: mov     edx, [edi+38h]
-0x812261: push    esi
-0x812262: push    edx
-0x812263: lea     ecx, [edi+40h]
-0x812266: call    sub_76CE40
+0x812261: push    esi; value
+0x812262: push    edx; index
+0x812263: lea     ecx, [edi+40h]; this
+0x812266: call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.
 0x81226B: mov     ecx, [esp+48h+arg_C]
 0x81226F: add     dword ptr [edi+38h], 1
 0x812273: or      eax, 0FFFFFFFFh
@@ -256,7 +256,7 @@
 0x81227C: jz      short loc_812288
 0x81227E: add     [ecx+5Ch], eax
 0x812281: jnz     short loc_812288
-0x812283: call    sub_772560
+0x812283: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x812288: xor     eax, eax
 0x81228A: mov     ecx, [esp+48h+var_C]
 0x81228E: mov     large fs:0, ecx
@@ -267,3 +267,12 @@
 0x812299: pop     ebx
 0x81229A: add     esp, 34h
 0x81229D: retn    1Ch
+0x9D1100: lea     ecx, [ebp+10h]
+0x9D1103: jmp     loc_75FA70
+0x9D1108: mov     edx, [esp+arg_4]
+0x9D110C: lea     eax, [edx-38h]
+0x9D110F: mov     ecx, [edx-3Ch]
+0x9D1112: xor     ecx, eax
+0x9D1114: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D1119: mov     eax, offset stru_AF9820
+0x9D111E: jmp     ___CxxFrameHandler3

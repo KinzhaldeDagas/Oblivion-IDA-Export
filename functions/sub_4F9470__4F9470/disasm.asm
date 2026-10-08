@@ -17,7 +17,7 @@
 0x4F9494: jmp     loc_4F9520
 0x4F9499: push    ebx
 0x4F949A: mov     ecx, esi
-0x4F949C: call    TESFile_InitializeFormFromRecord
+0x4F949C: call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.
 0x4F94A1: mov     ecx, esi
 0x4F94A3: call    TESFile_GetChunkType
 0x4F94A8: test    eax, eax
@@ -32,13 +32,13 @@
 0x4F94C5: lea     eax, [ebx+24h]
 0x4F94C8: push    eax
 0x4F94C9: mov     ecx, esi
-0x4F94CB: call    TESFile_GetChunkData4
+0x4F94CB: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x4F94D0: jmp     short loc_4F9508
 0x4F94D2: push    1; a4
 0x4F94D4: lea     ecx, [ebx+20h]
 0x4F94D7: push    ecx; Dst
 0x4F94D8: mov     ecx, esi; a1
-0x4F94DA: call    TESFile_GetChunkData
+0x4F94DA: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4F94DF: jmp     short loc_4F9508
 0x4F94E1: mov     eax, [esi+254h]
 0x4F94E7: call    __alloca?
@@ -46,7 +46,7 @@
 0x4F94EE: push    200h; a4
 0x4F94F3: push    edi; Dst
 0x4F94F4: mov     ecx, esi; a1
-0x4F94F6: call    TESFile_GetChunkData
+0x4F94F6: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4F94FB: mov     edx, [ebx]
 0x4F94FD: mov     eax, [edx+0D8h]
 0x4F9503: push    edi

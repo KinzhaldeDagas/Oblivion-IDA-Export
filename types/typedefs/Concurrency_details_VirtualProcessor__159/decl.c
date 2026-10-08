@@ -1,1 +1,1 @@
-Concurrency::details::VirtualProcessor
+struct Concurrency::details::VirtualProcessor;

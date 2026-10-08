@@ -10,7 +10,6 @@
 0x674E4F: mov     [esp+18h+var_4], esi
 0x674E53: mov     [esp+18h+var_8], eax
 0x674E57: jmp     short loc_674E64
-0x674E59: align 10h
 0x674E60: mov     eax, [esp+18h+var_8]
 0x674E64: cmp     eax, ebp
 0x674E66: jnz     short loc_674E6B
@@ -26,9 +25,9 @@
 0x674E79: jmp     short loc_674E7D
 0x674E7B: push    3; a2
 0x674E7D: mov     ecx, esi; this
-0x674E7F: call    sub_673A50
+0x674E7F: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x674E84: mov     ecx, eax; this
-0x674E86: call    sub_7616D0
+0x674E86: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x674E8B: mov     edi, eax
 0x674E8D: cmp     edi, ebp
 0x674E8F: jz      loc_674F47

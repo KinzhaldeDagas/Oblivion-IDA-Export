@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x503B32",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x503B41",
-    "line": "mov     ecx, [esp+8+arg_18]",
+    "line": "mov     ecx, [esp+8+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -169,31 +169,31 @@
   },
   {
     "ea": "0x503B49",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x503B4A",
-    "line": "push    0",
+    "line": "push    0; param2",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x503B4C",
-    "line": "push    edx",
+    "line": "push    edx; actorBase",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x503B4D",
-    "line": "push    esi",
+    "line": "push    esi; subject",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x503B4E",
-    "line": "call    sub_4F5010",
+    "line": "call    GetDeadCount_Eval; GetDeadCount_Eval uses its Actor Base parameter to query the engine's global form-to-dead-count list. The helper returns the matching 16-bit count or 0 when no entry exists; no subject reference is required.",
     "mnemonic": "call",
     "size": 5
   },

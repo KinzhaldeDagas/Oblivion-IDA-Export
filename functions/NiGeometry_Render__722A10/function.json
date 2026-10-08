@@ -1,18 +1,31 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 6,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x722A10",
+      "0x722A44"
+    ]
+  ],
+  "chunks_sha256": "5b927d42c37e740e4bf801674109c213658bfedf1171e6bcd084bd7d35125cb3",
+  "comment_regular": "CULLING goal 2026-09-27: base geometry Render sets renderer propertyState from geometry+0xAC and dynamicEffectState from +0xB0, then invokes attached controller callbacks. It is a state/update stage, not proof of a GPU draw. Preserve these semantics when choosing later submission guards.\n\nPass221/222: NiGeometry::Render copies NiGeometry +0xAC NiPropertyState to NiRenderer::propertyState.",
+  "comment_repeatable": "Pass221/222: NiGeometry::Render copies NiGeometry +0xAC NiPropertyState to NiRenderer::propertyState.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "NiGeometry::Render",
   "end_ea": "0x722A44",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "NiGeometry::Render",
   "segment": ".text",
   "sha256": "5b927d42c37e740e4bf801674109c213658bfedf1171e6bcd084bd7d35125cb3",
   "size": 52,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x722A10",
+  "total_chunk_size": 52,
   "type": "NiDX9Renderer *__thiscall(NiGeometry *this, NiDX9Renderer *)",
   "xrefs_from_count": 20,
   "xrefs_to_count": 15

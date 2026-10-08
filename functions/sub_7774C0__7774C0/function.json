@@ -1,18 +1,31 @@
 {
-  "callees_count": 58,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7774C0",
+      "0x777A3D"
+    ]
+  ],
+  "chunks_sha256": "b5abf52511d0d9f88cc705f20d42b7ec1a7dfb0ab6900589940209d929ef39c6",
+  "comment_regular": "MoonSugarEffect decode: fallback skinned vertex packer. Uses skin partition remap/weights/bone data, refreshes VB chips if stale/too small, writes packed partition vertices, and unlocks owned VB.",
+  "comment_repeatable": "MoonSugarEffect decode: fallback skinned vertex packer. Uses skin partition remap/weights/bone data, refreshes VB chips if stale/too small, writes packed partition vertices, and unlocks owned VB.\nVerified OblivionNew 2026-09-27: staging-lock call0x777662 takes active VB-chip fields native VB+0x08, byte offset+0x0C, lock flags+0x10 and byte length+0x14 (loads0x77764E..657). It calls NiDX9VertexBufferManager_LockToStaging; flags are chip-provided, not a hardcoded mode inferred from this caller. Existing packer semantics otherwise unchanged.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
   "display_name": "sub_7774C0",
   "end_ea": "0x777A3D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_7774C0",
   "segment": ".text",
   "sha256": "b5abf52511d0d9f88cc705f20d42b7ec1a7dfb0ab6900589940209d929ef39c6",
   "size": 1405,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7774C0",
+  "total_chunk_size": 1405,
   "type": "int *__thiscall(char *this, int, int, int, char, int *, int)",
   "xrefs_from_count": 459,
   "xrefs_to_count": 2

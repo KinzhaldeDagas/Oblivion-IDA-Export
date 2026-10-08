@@ -1,4 +1,4 @@
-0x6FFE90: push    0FFFFFFFFh
+0x6FFE90: push    0FFFFFFFFh; Removes a specific NiTimeController from NiObjectNET's refcounted controller chain, relinking predecessor/head and clearing the removed controller's next link with balanced temporary references.
 0x6FFE92: push    offset SEH_6FFE90
 0x6FFE97: mov     eax, large fs:0
 0x6FFE9D: push    eax
@@ -11,7 +11,7 @@
 0x6FFEA9: push    eax
 0x6FFEAA: lea     eax, [esp+20h+var_C]
 0x6FFEAE: mov     large fs:0, eax
-0x6FFEB4: mov     esi, [esp+20h+arg_0]
+0x6FFEB4: mov     esi, [esp+20h+slot]
 0x6FFEB8: test    esi, esi
 0x6FFEBA: jz      loc_6FFFB4
 0x6FFEC0: mov     edi, [ecx+0Ch]
@@ -22,7 +22,7 @@
 0x6FFED0: jnz     short loc_6FFF3E
 0x6FFED2: lea     ebp, [esi+4]
 0x6FFED5: push    ebp; lpAddend
-0x6FFED6: mov     [esp+24h+arg_0], esi
+0x6FFED6: mov     [esp+24h+slot], esi
 0x6FFEDA: call    dword ptr ds:0A28078h
 0x6FFEE0: mov     eax, [esi+34h]
 0x6FFEE3: push    eax; a2
@@ -71,7 +71,7 @@
 0x6FFF56: jz      short loc_6FFFB4
 0x6FFF58: lea     ecx, [esi+4]
 0x6FFF5B: push    ecx; lpAddend
-0x6FFF5C: mov     [esp+24h+arg_0], esi
+0x6FFF5C: mov     [esp+24h+slot], esi
 0x6FFF60: call    dword ptr ds:0A28078h
 0x6FFF66: mov     eax, [esi+34h]
 0x6FFF69: push    eax
@@ -94,9 +94,9 @@
 0x6FFF98: mov     ecx, edi
 0x6FFF9A: call    edx
 0x6FFF9C: mov     dword ptr [esi+34h], 0
-0x6FFFA3: lea     ecx, [esp+20h+arg_0]; this
+0x6FFFA3: lea     ecx, [esp+20h+slot]; slot
 0x6FFFA7: mov     [esp+20h+var_4], 0FFFFFFFFh
-0x6FFFAF: call    sub_7016A0
+0x6FFFAF: call    NiPointerSlot_Release
 0x6FFFB4: mov     ecx, dword ptr [esp+20h+var_C]
 0x6FFFB8: mov     large fs:0, ecx
 0x6FFFBF: pop     ecx
@@ -106,3 +106,14 @@
 0x6FFFC3: pop     ebx
 0x6FFFC4: add     esp, 0Ch
 0x6FFFC7: retn    4
+0x9C9350: lea     ecx, [ebp+4]; slot
+0x9C9353: jmp     NiPointerSlot_Release
+0x9C9358: lea     ecx, [ebp+4]; slot
+0x9C935B: jmp     NiPointerSlot_Release
+0x9C9360: mov     edx, [esp+arg_4]
+0x9C9364: lea     eax, [edx-10h]
+0x9C9367: mov     ecx, [edx-14h]
+0x9C936A: xor     ecx, eax
+0x9C936C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C9371: mov     eax, offset stru_AF1C5C
+0x9C9376: jmp     ___CxxFrameHandler3

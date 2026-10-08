@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x707610",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "push",
     "size": 2
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x707641",
-    "line": "push    offset stru_B3FA00; lpCriticalSection",
+    "line": "push    offset unk_B3FA00; lpCriticalSection",
     "mnemonic": "push",
     "size": 5
   },
@@ -181,19 +181,19 @@
   },
   {
     "ea": "0x707678",
-    "line": "call    sub_70A3E0",
+    "line": "call    sub_70A3E0; Pass222: Recursive inherited property-state build; creates root default state then calls 0x7077D0 cloneInherited=0.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x70767D",
-    "line": "push    eax",
+    "line": "push    eax; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x70767E",
-    "line": "lea     ecx, [esp+2Ch+var_14]",
+    "line": "lea     ecx, [esp+2Ch+var_14]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x707687",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x7076E7",
-    "line": "push    offset stru_B3FA00; lpCriticalSection",
+    "line": "push    offset unk_B3FA00; lpCriticalSection",
     "mnemonic": "push",
     "size": 5
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x70773F",
-    "line": "call    sub_7319E0",
+    "line": "call    sub_7319E0; Pass222: Constructs 0x30-byte NiPropertyState with ten managed smart-pointer slots at +0x08..+0x2C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -698,6 +698,102 @@
   {
     "ea": "0x707764",
     "line": "jmp     loc_7076B4",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C9660",
+    "line": "lea     ecx, [ebp-14h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C9663",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C9668",
+    "line": "lea     ecx, [ebp-10h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C966B",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C9670",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C9673",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C9674",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C9679",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C967A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C967B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C967F",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C9682",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C9685",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C9687",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C968C",
+    "line": "mov     eax, offset stru_AF1F24",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C9691",
+    "line": "jmp     ___CxxFrameHandler3",
     "mnemonic": "jmp",
     "size": 5
   }

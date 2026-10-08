@@ -1,4 +1,4 @@
-0x51B490: push    0FFFFFFFFh
+0x51B490: push    0FFFFFFFFh; Authoritative Oblivion KF-to-TESAnimGroup parser. Consumes a NiControllerSequence and model path, resolves the fixed 43-group table, encodes filename movement/weapon prefixes, parses required action notes plus m:/Blend:/Sound:/Enum:, builds the +0x24/+0x28 event array, validates required-note ordering, and returns the constructed TESAnimGroup. Native scheduling uses each KF's authored note times; it does not impose fixed Hit timestamps. External StarShooting contrast after this native decode: deployed AttackLeft/AttackRight files instantiate class 4 as Start, Hit, a:R/a:L, End; TES3 Shoot Follow Attach is motion-only and not an Oblivion scheduler phase. The current CAS manifest applies groups 17/18/20/21 by broad weapon-name substrings Star/Throwing/Dart (12 rules over 8 files), so unrelated names can match. Its lightweight package validator checks only first/last Start/End and would not catch missing class-4 Hit/a: notes; the older six-file import log is stale.
 0x51B492: push    offset SEH_51B490
 0x51B497: mov     eax, large fs:0
 0x51B49D: push    eax
@@ -17,7 +17,7 @@
 0x51B4C5: mov     large fs:0, eax
 0x51B4CB: mov     eax, [esp+1C0h+Str]
 0x51B4D2: mov     cl, ds:0B06B18h
-0x51B4D8: mov     edi, [esp+1C0h+arg_0]
+0x51B4D8: mov     edi, [esp+1C0h+sequence]
 0x51B4DF: xor     esi, esi
 0x51B4E1: push    5Ch ; '\'; Ch
 0x51B4E3: push    eax; Str
@@ -34,8 +34,8 @@
 0x51B512: mov     byte ptr ds:0B06B18h, 1
 0x51B519: mov     edi, [edi+5Ch]
 0x51B51C: push    edi
-0x51B51D: lea     edx, [esp+1CCh+var_154]
-0x51B521: push    offset aSNonaccum; "%s NonAccum"
+0x51B51D: lea     edx, [esp+1CCh+left]
+0x51B521: push    offset aSNonaccum; Interior of TESAnimGroup_ParseKFModel (actual function start 0x51B490), not a standalone parser entry. This instruction begins construction of the '<name> NonAccum' sequence-name candidate.
 0x51B526: push    edx
 0x51B527: mov     [esp+1D4h+Str1], eax
 0x51B52B: or      ebx, 0FFFFFFFFh
@@ -51,26 +51,26 @@
 0x51B54F: push    esi
 0x51B550: call    sub_6C66B0
 0x51B555: mov     edx, [esp+1C0h+Str2]
-0x51B559: push    edx; Str2
-0x51B55A: push    edi; Str1
-0x51B55B: call    __strcmp
+0x51B559: push    edx; right
+0x51B55A: push    edi; left
+0x51B55B: call    CRT_StricmpLocaleDispatch
 0x51B560: add     esp, 8
 0x51B563: test    eax, eax
 0x51B565: jnz     short loc_51B56B
 0x51B567: mov     ebx, esi
 0x51B569: jmp     short loc_51B583
 0x51B56B: mov     eax, [esp+1C0h+Str2]
-0x51B56F: push    eax; Str2
-0x51B570: lea     ecx, [esp+1C4h+var_154]
-0x51B574: push    ecx; Str1
-0x51B575: call    __strcmp
+0x51B56F: push    eax; right
+0x51B570: lea     ecx, [esp+1C4h+left]
+0x51B574: push    ecx; left
+0x51B575: call    CRT_StricmpLocaleDispatch
 0x51B57A: add     esp, 8
 0x51B57D: test    eax, eax
 0x51B57F: jnz     short loc_51B583
 0x51B581: mov     ebp, esi
 0x51B583: mov     edx, [esp+1C0h+Str2]
 0x51B587: push    edx
-0x51B588: call    FormHeapFree
+0x51B588: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x51B58D: add     esp, 4
 0x51B590: cmp     ebx, 0FFFFFFFFh
 0x51B593: jz      short loc_51B59A
@@ -100,7 +100,6 @@
 0x51B5DE: mov     esi, 1
 0x51B5E3: add     [esp+1C0h+Str1], esi
 0x51B5E7: jmp     short loc_51B5F0
-0x51B5E9: align 10h
 0x51B5F0: mov     edx, ds:0B102B8h[esi*4]
 0x51B5F7: mov     eax, edx
 0x51B5F9: lea     edi, [eax+1]
@@ -133,7 +132,6 @@
 0x51B641: add     ebx, eax
 0x51B643: mov     esi, 1
 0x51B648: jmp     short loc_51B650
-0x51B64A: align 10h
 0x51B650: mov     edx, ds:0B102C8h[esi*4]
 0x51B657: mov     eax, edx
 0x51B659: lea     edi, [eax+1]
@@ -188,7 +186,6 @@
 0x51B6EC: call    PrintError
 0x51B6F1: add     esp, 14h
 0x51B6F4: jmp     loc_51BA36
-0x51B6F9: align 10h
 0x51B700: mov     eax, ebp
 0x51B702: lea     edx, [eax+1]
 0x51B705: mov     cl, [eax]
@@ -206,7 +203,6 @@
 0x51B727: test    eax, eax
 0x51B729: jz      short loc_51B745
 0x51B72B: jmp     short loc_51B730
-0x51B72D: align 10h
 0x51B730: mov     cl, [eax]
 0x51B732: test    cl, cl
 0x51B734: jz      short loc_51B745
@@ -290,9 +286,9 @@
 0x51B824: mov     eax, [edx+8]
 0x51B827: lea     ecx, [esi+esi*8]
 0x51B82A: mov     edx, ds:0B102E0h[ecx*4]
-0x51B831: push    edx; Str2
-0x51B832: push    eax; Str1
-0x51B833: call    __strcmp
+0x51B831: push    edx; right
+0x51B832: push    eax; left
+0x51B833: call    CRT_StricmpLocaleDispatch
 0x51B838: add     esp, 8
 0x51B83B: test    eax, eax
 0x51B83D: jz      short loc_51B854
@@ -315,7 +311,7 @@
 0x51B880: lea     eax, [esi+esi*8]
 0x51B883: mov     ecx, ds:0B102ECh[eax*4]
 0x51B88A: lea     eax, [ecx+edx*8]
-0x51B88D: mov     ecx, ds:0B10900h[eax*4]
+0x51B88D: mov     ecx, ds:0B10900h[eax*4]; TESAnimGroup_ParseKFModel validates required KF text keys through flattened templates: descriptor.requiredNoteBase + 8*phaseIndex. AttackBow base 7 resolves Start, Attach, Hold, Release, End.
 0x51B894: mov     eax, ecx
 0x51B896: lea     edi, [eax+1]
 0x51B899: lea     esp, [esp+0]
@@ -345,7 +341,7 @@
 0x51B8E6: jz      short loc_51B91B
 0x51B8E8: push    esi
 0x51B8E9: mov     ecx, eax; this
-0x51B8EB: call    ??0TESAnimGroup@@QAE@XZ; TESAnimGroup::TESAnimGroup(void)
+0x51B8EB: call    TESAnimGroup_ctor; Constructs ref-counted TESAnimGroup state: encoded key/required-note array, zero morph and blend bytes, zero movement vector, and empty parsed-event count/pointer at +0x24/+0x28.
 0x51B8F0: jmp     short loc_51B91D
 0x51B8F2: test    eax, eax
 0x51B8F4: mov     [esp+1C0h+var_4], 1
@@ -357,7 +353,7 @@
 0x51B90F: add     ecx, esi
 0x51B911: push    ecx
 0x51B912: mov     ecx, eax; this
-0x51B914: call    ??0TESAnimGroup@@QAE@XZ; TESAnimGroup::TESAnimGroup(void)
+0x51B914: call    TESAnimGroup_ctor; Constructs ref-counted TESAnimGroup state: encoded key/required-note array, zero morph and blend bytes, zero movement vector, and empty parsed-event count/pointer at +0x24/+0x28.
 0x51B919: jmp     short loc_51B91D
 0x51B91B: xor     eax, eax
 0x51B91D: mov     ecx, eax
@@ -488,14 +484,14 @@
 0x51BAC2: lea     eax, [esi+6]
 0x51BAC5: jnz     short loc_51BACA
 0x51BAC7: lea     eax, [esi+7]
-0x51BACA: lea     edx, [esp+1C0h+var_114]
+0x51BACA: lea     edx, [esp+1C0h+right]
 0x51BAD1: sub     edx, eax
 0x51BAD3: mov     cl, [eax]
 0x51BAD5: mov     [edx+eax], cl
 0x51BAD8: add     eax, 1
 0x51BADB: test    cl, cl
 0x51BADD: jnz     short loc_51BAD3
-0x51BADF: lea     edx, [esp+1C0h+var_114]
+0x51BADF: lea     edx, [esp+1C0h+right]
 0x51BAE6: push    2Ch ; ','; Val
 0x51BAE8: xor     esi, esi
 0x51BAEA: push    edx; Str
@@ -504,7 +500,7 @@
 0x51BAF4: add     esp, 8
 0x51BAF7: test    eax, eax
 0x51BAF9: jnz     short loc_51BB11
-0x51BAFB: lea     eax, [esp+1C0h+var_114]
+0x51BAFB: lea     eax, [esp+1C0h+right]
 0x51BB02: push    20h ; ' '; Val
 0x51BB04: push    eax; Str
 0x51BB05: call    _strchr
@@ -547,10 +543,10 @@
 0x51BB68: xor     ebx, ebx
 0x51BB6A: lea     ebx, [ebx+0]
 0x51BB70: mov     ecx, ds:0B109C0h[ebx*4]
-0x51BB77: lea     eax, [esp+1C0h+var_114]
-0x51BB7E: push    eax; Str2
-0x51BB7F: push    ecx; Str1
-0x51BB80: call    __strcmp
+0x51BB77: lea     eax, [esp+1C0h+right]
+0x51BB7E: push    eax; right
+0x51BB7F: push    ecx; left
+0x51BB80: call    CRT_StricmpLocaleDispatch
 0x51BB85: add     esp, 8
 0x51BB88: test    eax, eax
 0x51BB8A: jz      loc_51BC22
@@ -606,7 +602,7 @@
 0x51BC3C: or      edi, [esp+1C0h+Str2]
 0x51BC40: push    edx
 0x51BC41: mov     ecx, ebp
-0x51BC43: call    sub_51ACF0
+0x51BC43: call    TESAnimGroup_ResizeTextKeyEvents; Resizes TESAnimGroup's parsed text-key event array at +0x24/+0x28. Each record is 0x10 bytes; preserved records are copied, new records initialize time=0, byte/enum=0xFA, float scale=1.0, and sound pointer=null; a zero count frees the array.
 0x51BC48: cmp     esi, [ebp+24h]
 0x51BC4B: jnb     short loc_51BC63
 0x51BC4D: mov     eax, [ebp+28h]
@@ -627,9 +623,9 @@
 0x51BC7E: mov     [esi+edx+8], edi
 0x51BC82: jmp     loc_51BBCF
 0x51BC87: mov     ecx, ds:0B33A98h
-0x51BC8D: lea     eax, [esp+1C0h+var_114]
+0x51BC8D: lea     eax, [esp+1C0h+right]
 0x51BC94: push    eax
-0x51BC95: call    sub_447490
+0x51BC95: call    SoundMap_ResolveAnimSoundNote; Animation Sound: note resolver. Looks up the note token in global sound map off_B06164 and accepts only entries whose form/type byte is 0x0A; returns the sound entry or 0.
 0x51BC9A: mov     ebx, eax
 0x51BC9C: test    ebx, ebx
 0x51BC9E: jz      loc_51BB98
@@ -637,7 +633,7 @@
 0x51BCA7: lea     ecx, [edi+1]
 0x51BCAA: push    ecx
 0x51BCAB: mov     ecx, ebp
-0x51BCAD: call    sub_51ACF0
+0x51BCAD: call    TESAnimGroup_ResizeTextKeyEvents; Resizes TESAnimGroup's parsed text-key event array at +0x24/+0x28. Each record is 0x10 bytes; preserved records are copied, new records initialize time=0, byte/enum=0xFA, float scale=1.0, and sound pointer=null; a zero count frees the array.
 0x51BCB2: cmp     edi, [ebp+24h]
 0x51BCB5: jnb     short loc_51BCDF
 0x51BCB7: mov     eax, [ebp+28h]
@@ -706,12 +702,12 @@
 0x51BD8E: jmp     short def_51BA7B; jumptable 0051BA7B default case, case 6
 0x51BD90: mov     ecx, 2; jumptable 0051BA7B cases 2,3,5
 0x51BD95: push    ecx; jumptable 0051BA7B default case, case 6
-0x51BD96: mov     ecx, esi
-0x51BD98: call    sub_51AE20
+0x51BD96: mov     ecx, esi; this
+0x51BD98: call    TESAnimGroup_GetRequiredNoteTime; Returns a 32-bit required-note time from TESAnimGroup +0x10 by zero-based note index after validating count, storage, and QNaN. Invalid entries report an error and return 0.0f.
 0x51BD9D: fstp    [esp+1C0h+var_17C]
-0x51BDA1: push    0; ArgList
-0x51BDA3: mov     ecx, esi
-0x51BDA5: call    sub_51AE20
+0x51BDA1: push    0; noteIndex
+0x51BDA3: mov     ecx, esi; this
+0x51BDA5: call    TESAnimGroup_GetRequiredNoteTime; Returns a 32-bit required-note time from TESAnimGroup +0x10 by zero-based note index after validating count, storage, and QNaN. Invalid entries report an error and return 0.0f.
 0x51BDAA: fcomp   [esp+1C0h+var_17C]
 0x51BDAE: fnstsw  ax
 0x51BDB0: test    ah, 1
@@ -748,3 +744,24 @@
 0x51BE1F: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x51BE24: add     esp, 1ACh
 0x51BE2A: retn
+0x9B76C0: mov     eax, [ebp-17Ch]
+0x9B76C6: push    eax
+0x9B76C7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B76CC: pop     ecx
+0x9B76CD: retn
+0x9B76CE: mov     eax, [ebp-17Ch]
+0x9B76D4: push    eax
+0x9B76D5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B76DA: pop     ecx
+0x9B76DB: retn
+0x9B76DC: mov     edx, [esp+Str]
+0x9B76E0: lea     eax, [edx-1B0h]
+0x9B76E6: mov     ecx, [edx-1B4h]
+0x9B76EC: xor     ecx, eax
+0x9B76EE: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B76F3: add     eax, 10h
+0x9B76F6: mov     ecx, [edx-4]
+0x9B76F9: xor     ecx, eax
+0x9B76FB: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B7700: mov     eax, offset stru_AE21DC
+0x9B7705: jmp     ___CxxFrameHandler3

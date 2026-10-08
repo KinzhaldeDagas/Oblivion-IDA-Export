@@ -1,7 +1,7 @@
 0x9F99A0: push    offset aAcrobatics; "Acrobatics"
 0x9F99A5: push    offset aSskillnameacro; "sSkillNameAcrobatics"
-0x9F99AA: mov     ecx, offset unk_B3A104
-0x9F99AF: call    GameSetting_ConstrAndReg
+0x9F99AA: mov     ecx, offset g_sSkillNameAcrobatics; self
+0x9F99AF: call    GameSetting_ConstrAndReg; Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.
 0x9F99B4: push    offset sub_A23A40; void (__cdecl *)()
 0x9F99B9: call    _atexit
 0x9F99BE: pop     ecx

@@ -1,4 +1,4 @@
-0x71E790: push    0FFFFFFFFh
+0x71E790: push    0FFFFFFFFh; NiDevImageConverter conversion entry. The generateMipmaps flag triggers a full-chain path only for one-level, power-of-two, supported RGB/RGBA-style pixel data; otherwise it preserves/converts the available levels.
 0x71E792: push    offset SEH_71E790
 0x71E797: mov     eax, large fs:0
 0x71E79D: push    eax
@@ -21,7 +21,7 @@
 0x71E7CB: test    byte ptr [eax+8], 1
 0x71E7CF: mov     esi, eax
 0x71E7D1: jz      loc_71EA46
-0x71E7D7: mov     ebx, [esp+28h+arg_4]
+0x71E7D7: mov     ebx, [esp+28h+dstPixelFormat]
 0x71E7DB: test    byte ptr [ebx], 1
 0x71E7DE: jz      loc_71EA46
 0x71E7E4: mov     ecx, [eax+0Ch]
@@ -41,11 +41,11 @@
 0x71E80F: mov     esi, [esp+28h+var_14]
 0x71E813: mov     [esp+28h+arg_0], 0
 0x71E81B: cmp     byte ptr [esp+28h+arg_C], 0
-0x71E820: mov     edi, [esp+28h+arg_8]
+0x71E820: mov     edi, [esp+28h+reusePixelData]
 0x71E824: mov     byte ptr [esp+28h+var_4], 1
 0x71E829: jz      short loc_71E88B
 0x71E82B: cmp     dword ptr [esi+60h], 1
-0x71E82F: ja      short loc_71E88B
+0x71E82F: ja      short loc_71E88B; Mip generation is considered only when source NiPixelData levelCount (+0x60) is <=1.
 0x71E831: mov     eax, [esi+54h]
 0x71E834: mov     eax, [eax]
 0x71E836: test    eax, eax
@@ -58,7 +58,7 @@
 0x71E846: mov     edx, [esi+58h]
 0x71E849: mov     eax, [edx]
 0x71E84B: push    eax
-0x71E84C: call    sub_71B460
+0x71E84C: call    sub_71B460; Both dimensions must be nonzero powers of two before the converter synthesizes a mip chain.
 0x71E851: add     esp, 4
 0x71E854: test    al, al
 0x71E856: jz      short loc_71E88B
@@ -71,10 +71,10 @@
 0x71E867: jz      short loc_71E86E
 0x71E869: cmp     eax, 9
 0x71E86C: jnz     short loc_71E88B
-0x71E86E: push    edi
-0x71E86F: push    esi
-0x71E870: mov     ecx, ebp
-0x71E872: call    sub_71B8D0
+0x71E86E: push    edi; reusePixelData
+0x71E86F: push    esi; srcPixelData
+0x71E870: mov     ecx, ebp; this
+0x71E872: call    OB_NiDevImageConverter_GenerateMipChain_Box_010201A0; Calls the decoded full-chain generator. A reusable output is accepted only when format matches and its level count is >1.
 0x71E877: push    eax; a2
 0x71E878: lea     ecx, [esp+2Ch+arg_0]; this
 0x71E87C: call    NiSmartPointer_Set??
@@ -95,12 +95,12 @@
 0x71E8A7: jbe     short loc_71E8E5
 0x71E8A9: cmp     edi, esi
 0x71E8AB: jnz     short loc_71E8D3
-0x71E8AD: lea     ecx, [esp+28h+arg_0]; this
+0x71E8AD: lea     ecx, [esp+28h+arg_0]; slot
 0x71E8B1: mov     byte ptr [esp+28h+var_4], 0
-0x71E8B6: call    sub_7016A0
-0x71E8BB: lea     ecx, [esp+28h+var_14]; this
+0x71E8B6: call    NiPointerSlot_Release
+0x71E8BB: lea     ecx, [esp+28h+var_14]; slot
 0x71E8BF: mov     [esp+28h+var_4], 0FFFFFFFFh
-0x71E8C7: call    sub_7016A0
+0x71E8C7: call    NiPointerSlot_Release
 0x71E8CC: mov     eax, edi
 0x71E8CE: jmp     loc_71EA48
 0x71E8D3: mov     eax, [ebp+0]
@@ -137,7 +137,7 @@
 0x71E91F: call    FormHeapAlloc
 0x71E924: mov     ebx, eax
 0x71E926: add     esp, 4
-0x71E929: mov     [esp+28h+arg_8], ebx
+0x71E929: mov     [esp+28h+reusePixelData], ebx
 0x71E92D: test    ebx, ebx
 0x71E92F: mov     byte ptr [esp+28h+var_4], 3
 0x71E934: jz      short loc_71E95E
@@ -148,7 +148,7 @@
 0x71E941: mov     ecx, [esi+54h]
 0x71E944: mov     ecx, [ecx]
 0x71E946: push    edx
-0x71E947: mov     edx, [esp+2Ch+arg_4]
+0x71E947: mov     edx, [esp+2Ch+dstPixelFormat]
 0x71E94B: push    ebp
 0x71E94C: push    edx
 0x71E94D: push    eax
@@ -264,3 +264,21 @@
 0x71EA57: pop     ebx
 0x71EA58: add     esp, 14h
 0x71EA5B: retn    10h
+0x9C9FF0: lea     ecx, [ebp-14h]; slot
+0x9C9FF3: jmp     NiPointerSlot_Release
+0x9C9FF8: lea     ecx, [ebp+4]; slot
+0x9C9FFB: jmp     NiPointerSlot_Release
+0x9CA000: lea     ecx, [ebp+10h]; slot
+0x9CA003: jmp     NiPointerSlot_Release
+0x9CA008: mov     eax, [ebp+0Ch]
+0x9CA00B: push    eax
+0x9CA00C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA011: pop     ecx
+0x9CA012: retn
+0x9CA013: mov     edx, [esp+dstPixelFormat]
+0x9CA017: lea     eax, [edx-18h]
+0x9CA01A: mov     ecx, [edx-1Ch]
+0x9CA01D: xor     ecx, eax
+0x9CA01F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA024: mov     eax, offset stru_AF27C0
+0x9CA029: jmp     ___CxxFrameHandler3

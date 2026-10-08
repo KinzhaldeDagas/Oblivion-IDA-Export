@@ -1,64 +1,108 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "DataCacheEntry",
+  "definition": "struct DataCacheEntry\n{\nlist entry;\nFORMATETC fmtetc;\nSTGMEDIUM_0 stgmedium;\nDWORD id;\nBOOL dirty;\nint load_stream_num;\nint save_stream_num;\nDWORD sink_id;\nDWORD advise_flags;\n}\n",
   "id": 18374686479672037901,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "entry",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "list"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fmtetc",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 24
+      "size": 24,
+      "type": "FORMATETC"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "stgmedium",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 12
+      "size": 12,
+      "type": "STGMEDIUM_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "id",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dirty",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "load_stream_num",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "save_stream_num",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "sink_id",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "advise_flags",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     }
   ],
   "name": "DataCacheEntry",
+  "ordinal": 5119,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 72
 }

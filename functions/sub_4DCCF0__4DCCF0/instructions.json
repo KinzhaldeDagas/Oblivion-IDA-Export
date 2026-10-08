@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4DCCF0",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Clears this reference's equipped-ammunition 3D and related actor-animation ammo slot state. No explicit stack arguments.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -79,19 +79,19 @@
   },
   {
     "ea": "0x4DCD18",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DCD1A",
-    "line": "call    sub_478DB0",
+    "line": "call    ActorSkinInfo_ClearAmmoSlot; Clears ActorSkinInfo ammo form/model/3D state at +0x10C/+0x110/+0x114.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4DCD1F",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -103,25 +103,25 @@
   },
   {
     "ea": "0x4DCD2B",
-    "line": "mov     byte ptr [esp+0Ch+var_4], al",
+    "line": "mov     [esp+0Ch+firstPerson], al",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4DCD2F",
-    "line": "mov     edx, [esp+0Ch+var_4]",
+    "line": "mov     edx, dword ptr [esp+0Ch+firstPerson]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4DCD33",
-    "line": "push    edx",
+    "line": "push    edx; firstPerson",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4DCD34",
-    "line": "call    sub_6600D0",
+    "line": "call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,13 +139,13 @@
   },
   {
     "ea": "0x4DCD3D",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DCD3F",
-    "line": "call    sub_478DB0",
+    "line": "call    ActorSkinInfo_ClearAmmoSlot; Clears ActorSkinInfo ammo form/model/3D state at +0x10C/+0x110/+0x114.",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x4DCDF8",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x4DCE01",
-    "line": "push    ebp",
+    "line": "push    ebp; object",
     "mnemonic": "push",
     "size": 1
   },
@@ -565,13 +565,13 @@
   },
   {
     "ea": "0x4DCE0C",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DCE0E",
-    "line": "call    sub_7C5E70",
+    "line": "call    ShadowSceneNode_RemoveObjectReceivers; Removes an object's geometry from shadow-light receiver lists under the shadow-scene critical section. It obtains the object's node/container through virtual +0x08 and recurses; it does not detach the object from its parent or clear NiNode children.",
     "mnemonic": "call",
     "size": 5
   },
@@ -601,13 +601,13 @@
   },
   {
     "ea": "0x4DCE1E",
-    "line": "lea     ecx, [ebx+0ACh]",
+    "line": "lea     ecx, [ebx+0ACh]; this",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x4DCE24",
-    "line": "call    sub_477EF0",
+    "line": "call    NiTObjectArray_ClearAndRelease; Clears a ref-counted NiT object-pointer array: releases every non-null element, nulls entries, and resets end/count words to zero. At bow release it is invoked on ArrowBone+0xAC, thereby releasing all ArrowBone children including the held Arrow:0 clone.",
     "mnemonic": "call",
     "size": 5
   },

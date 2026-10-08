@@ -1,64 +1,108 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "dispatch_params",
+  "definition": "struct __declspec(align(8)) dispatch_params\n{\nRPCOLEMESSAGE *msg;\nIRpcStubBuffer_0 *stub;\nIRpcChannelBuffer_0 *chan;\nIID iid;\nIUnknown_0 *iface;\nHANDLE handle;\nBOOL bypass_rpcrt;\nRPC_STATUS status;\nHRESULT_0 hr;\n}\n",
   "id": 18374686479672036004,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "msg",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "RPCOLEMESSAGE *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "stub",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "IRpcStubBuffer_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "chan",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "IRpcChannelBuffer_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "iid",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 16
+      "offset_hex": "0xC",
+      "size": 16,
+      "type": "IID"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "iface",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "IUnknown_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "handle",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "HANDLE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bypass_rpcrt",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "status",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "RPC_STATUS"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hr",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "HRESULT_0"
     }
   ],
   "name": "dispatch_params",
+  "ordinal": 4351,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 48
 }

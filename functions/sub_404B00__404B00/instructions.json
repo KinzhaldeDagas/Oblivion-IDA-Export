@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x404B00",
-    "line": "sub     esp, 30Ch",
+    "line": "sub     esp, 30Ch; Reads a text plugin list at basePath + listFile; skips # comments, obtains each TESFile by line, and marks it loaded. Caller falls back to Oblivion.esm when no file is loaded.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x404B14",
-    "line": "mov     eax, [esp+30Ch+arg_0]",
+    "line": "mov     eax, [esp+30Ch+basePath]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x404B23",
-    "line": "mov     esi, [esp+314h+arg_4]",
+    "line": "mov     esi, [esp+314h+filename]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -336,12 +336,6 @@
     "size": 2
   },
   {
-    "ea": "0x404BAA",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x404BB0",
     "line": "lea     eax, [esp+314h+Buf]",
     "mnemonic": "lea",
@@ -439,7 +433,7 @@
   },
   {
     "ea": "0x404BEC",
-    "line": "mov     ecx, TESDataHandler",
+    "line": "mov     ecx, g_TESDataHandler; Verified singleton pointer: allocated as TESDataHandler (0xCE0 bytes) and published at TES_constr 441B8A; passed to LoadFiles and form APIs; TES_destr 446915 destroys and clears it. Field +0x74 is the Global list head used by TESSaveLoadGame_LoadGlobalValues; surrounding layout remains Unknown.",
     "mnemonic": "mov",
     "size": 6
   },

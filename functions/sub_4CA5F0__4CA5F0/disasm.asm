@@ -12,10 +12,10 @@
 0x4CA60A: jmp     short loc_4CA60E
 0x4CA60C: xor     eax, eax
 0x4CA60E: sar     ecx, 5
-0x4CA611: push    ecx
+0x4CA611: push    ecx; group_y
 0x4CA612: sar     eax, 5
-0x4CA615: push    eax
-0x4CA616: call    sub_4EF1D0
+0x4CA615: push    eax; group_x
+0x4CA616: call    TESObjectCELL_PackExteriorGroupLabel; Verified exact key encoding used by the DistantLOD cell model map: packed label = (signed cellX << 16) | unsigned cellY.
 0x4CA61B: add     esp, 8
 0x4CA61E: retn
 0x4CA61F: mov     eax, [ecx+0Ch]

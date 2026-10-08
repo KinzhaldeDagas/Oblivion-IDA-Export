@@ -17,7 +17,7 @@
 0x503618: push    edx; a2
 0x503619: push    eax; a1
 0x50361A: mov     dword ptr [esp+28h+var_4], 0
-0x503622: call    Script_ExtractArgs
+0x503622: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x503627: add     esp, 20h
 0x50362A: test    al, al
 0x50362C: jnz     short loc_503631
@@ -30,7 +30,7 @@
 0x50363A: push    0
 0x50363C: push    edx
 0x50363D: push    esi
-0x50363E: call    sub_4F4CE0
+0x50363E: call    GetIsID_Eval; GetIsID_Eval (index 72 / opcode 0x1048): ObjectID ParamInfo is a TESForm pointer. The parameter must pass TESForm::IsActor (base implementation at 0x69D990 returns false); then the function pointer-compares it with the subject reference's BaseForm. No editor-ID/name comparison occurs.
 0x503643: add     esp, 10h
 0x503646: pop     esi
 0x503647: pop     ecx

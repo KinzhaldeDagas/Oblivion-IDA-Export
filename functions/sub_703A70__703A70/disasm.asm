@@ -1,5 +1,5 @@
 0x703A70: push    ebx
-0x703A71: mov     ebx, dword ptr [esp+4+ArgList]
+0x703A71: mov     ebx, [esp+4+ArgList]
 0x703A75: push    esi
 0x703A76: mov     eax, ebx
 0x703A78: push    edi

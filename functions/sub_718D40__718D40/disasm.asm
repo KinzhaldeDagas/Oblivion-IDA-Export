@@ -1,5 +1,5 @@
 0x718D40: push    ebx
-0x718D41: mov     ebx, dword ptr [esp+4+ArgList]
+0x718D41: mov     ebx, [esp+4+ArgList]
 0x718D45: push    esi
 0x718D46: mov     eax, ebx
 0x718D48: push    edi

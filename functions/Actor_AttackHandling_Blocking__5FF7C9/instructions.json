@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5FF7C9",
-    "line": "mov     edx, [esi]",
+    "line": "mov     edx, [esi]; ODismemberment combat decode: Hex-Rays failed here. This tail applies target blocking, block reduction, block/shield/weapon damage, armor durability damage and hit/block sounds, then dispatches hit visuals and calls target vtbl+0x220 Actor_OnPhysicalHit with final health/fatigue damage before post-hit stagger/knockdown/disarm handling.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x5FF7DF",
-    "line": "call    Actor_IsBlocking",
+    "line": "call    Actor_IsBlocking; Actor_IsBlocking: process current-action vfunc +0x2D0 equals 6. Player jump path treats this specially; climb activation should reject or require explicit design override while blocking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,31 +217,31 @@
   },
   {
     "ea": "0x5FF836",
-    "line": "mov     ecx, [esp+arg_1C]",
+    "line": "mov     ecx, [esp+target]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5FF83A",
-    "line": "push    0",
+    "line": "push    0; outAngleDegrees",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FF83C",
-    "line": "push    ecx",
+    "line": "push    ecx; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FF83D",
-    "line": "push    esi",
+    "line": "push    esi; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FF83E",
-    "line": "call    sub_6131D0",
+    "line": "call    Actor_IsFacingReferenceWithinCombatAngle; Computes the absolute XY heading difference from actor to target, normalizes across the 360-degree boundary, optionally returns degrees, and tests it against the combat-facing threshold game setting.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x5FF872",
-    "line": "mov     byte ptr [esp+arg_1C], 1",
+    "line": "mov     byte ptr [esp+target], 1",
     "mnemonic": "mov",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x5FF879",
-    "line": "mov     byte ptr [esp+arg_1C], 0",
+    "line": "mov     byte ptr [esp+target], 0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -415,13 +415,13 @@
   },
   {
     "ea": "0x5FF898",
-    "line": "mov     edx, [esp+arg_1C]",
+    "line": "mov     edx, [esp+target]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5FF89C",
-    "line": "push    ecx; char",
+    "line": "push    ecx; Block mitigation path: Calc_BlockDamageReduction uses Block AV 0x0F, actor fatigue fraction, shield/weapon/hand-to-hand block mode, and fBlock* settings.",
     "mnemonic": "push",
     "size": 1
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x5FF8A0",
-    "line": "call    Actor_GetFatigueFraction",
+    "line": "call    Actor_GetFatigueFraction; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x5FF8D9",
-    "line": "mov     edx, [eax+3B4h]",
+    "line": "mov     edx, [eax+3B4h]; Calls attacker vtbl+0x3B4 Actor_HandleBlockedHitDamage(attacker, target, rawDamage, blockReduction, blockHitVector): logs block percent, damages blocking item, applies block fatigue loss, and may play shield/weapon break handling.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x5FF904",
-    "line": "fld1",
+    "line": "fld1; If block reduction is positive, final health damage is scaled by (1.0 - blockReduction) before armor/hit/damage application.",
     "mnemonic": "fld1",
     "size": 2
   },
@@ -727,7 +727,7 @@
   },
   {
     "ea": "0x5FF92B",
-    "line": "cmp     byte ptr [esp+arg_1C], 0",
+    "line": "cmp     byte ptr [esp+target], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1021,7 +1021,7 @@
   },
   {
     "ea": "0x5FF9C0",
-    "line": "call    sub_6AFFF0",
+    "line": "call    Combat_PlayBlockHitSound; ODismemberment combat decode: block-hit sound router. Chooses WPNBlockHand/Blade/Blunt/Staff/Bow or enchanted hit variants, then routes through the same positioned sound tail as weapon hit audio.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1207,7 +1207,7 @@
   },
   {
     "ea": "0x5FFA17",
-    "line": "call    sub_6AFFF0",
+    "line": "call    Combat_PlayBlockHitSound; ODismemberment combat decode: block-hit sound router. Chooses WPNBlockHand/Blade/Blunt/Staff/Bow or enchanted hit variants, then routes through the same positioned sound tail as weapon hit audio.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1231,19 +1231,19 @@
   },
   {
     "ea": "0x5FFA2C",
-    "line": "push    0Fh",
+    "line": "push    0Fh; actorValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FFA2E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FFA30",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1669,7 +1669,7 @@
   },
   {
     "ea": "0x5FFAFB",
-    "line": "call    sub_6AFFF0",
+    "line": "call    Combat_PlayBlockHitSound; ODismemberment combat decode: block-hit sound router. Chooses WPNBlockHand/Blade/Blunt/Staff/Bow or enchanted hit variants, then routes through the same positioned sound tail as weapon hit audio.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2227,7 +2227,7 @@
   },
   {
     "ea": "0x5FFC1B",
-    "line": "call    sub_5E5A00",
+    "line": "call    Actor_SelectArmorOrShieldForHitDamage; ODismemberment combat decode: selects a random equipped armor/shield/container entry for durability damage using iArmorDamage* chances, falling back to equipped weapon entry if no armor entry is chosen.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2299,7 +2299,7 @@
   },
   {
     "ea": "0x5FFC3F",
-    "line": "call    Actor_IsBlocking",
+    "line": "call    Actor_IsBlocking; Actor_IsBlocking: process current-action vfunc +0x2D0 equals 6. Player jump path treats this specially; climb activation should reject or require explicit design override while blocking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2317,19 +2317,19 @@
   },
   {
     "ea": "0x5FFC48",
-    "line": "push    0Fh",
+    "line": "push    0Fh; actorValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FFC4A",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FFC4C",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2347,7 +2347,7 @@
   },
   {
     "ea": "0x5FFC56",
-    "line": "mov     eax, [esi]",
+    "line": "mov     eax, [esi]; Oblivion combat durability boundary: calls target Actor vtable +0x2C4 with the selected armor entry and damage.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -2443,7 +2443,7 @@
   },
   {
     "ea": "0x5FFC81",
-    "line": "call    TESObjectARMO_ISHeavyArmor",
+    "line": "call    TESObjectARMO_ISHeavyArmor; Oblivion armor classification branch: TESObjectARMO_ISHeavyArmor selects HeavyArmor; otherwise LightArmor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2521,13 +2521,13 @@
   },
   {
     "ea": "0x5FFCA2",
-    "line": "call    edx",
+    "line": "call    edx; Qualifying armor hit: HeavyArmor (0x12) or LightArmor (0x1B), useValue0, identity scale (0.0).",
     "mnemonic": "call",
     "size": 2
   },
   {
     "ea": "0x5FFCA4",
-    "line": "cmp     [esp+arg_28], 0",
+    "line": "cmp     [esp+arg_28], 0; Immediate return site from combat armor-use Actor::ModExperience dispatch at 0x5FFCA2. Medium Armor sidecar XP transactions must be consumed only from this return address with useType/useIndex 0; mismatches fail closed to vanilla.",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -2689,7 +2689,7 @@
   },
   {
     "ea": "0x5FFCF5",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3019,7 +3019,7 @@
   },
   {
     "ea": "0x5FFD8E",
-    "line": "mov     ecx, [esp+arg_20]",
+    "line": "mov     ecx, [esp+arg_20]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3037,7 +3037,7 @@
   },
   {
     "ea": "0x5FFD9A",
-    "line": "call    TESWorldSpace_GetParentWorldpsace",
+    "line": "call    Shared_GetPointerAtOffset7C; Shared four-byte accessor returning *(this+0x7C). Verified contexts include TESWorldSpace::parentWorldspace and ArrowProjectile::arrowEnch; class-specific naming is unsafe.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3049,7 +3049,7 @@
   },
   {
     "ea": "0x5FFDA1",
-    "line": "mov     ecx, [esp+arg_20]",
+    "line": "mov     ecx, [esp+arg_20]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3067,7 +3067,7 @@
   },
   {
     "ea": "0x5FFDA9",
-    "line": "call    TESWorldSpace_GetParentWorldpsace",
+    "line": "call    Shared_GetPointerAtOffset7C; Shared four-byte accessor returning *(this+0x7C). Verified contexts include TESWorldSpace::parentWorldspace and ArrowProjectile::arrowEnch; class-specific naming is unsafe.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3115,7 +3115,7 @@
   },
   {
     "ea": "0x5FFDBE",
-    "line": "mov     ecx, [esp+arg_20]",
+    "line": "mov     ecx, [esp+arg_20]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3133,7 +3133,7 @@
   },
   {
     "ea": "0x5FFDC6",
-    "line": "call    sub_607400",
+    "line": "call    ArrowProjectile_GetBowEnchantment; Post-hit combat path queries projectile-held bow enchantment when a projectile object is supplied.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3169,13 +3169,13 @@
   },
   {
     "ea": "0x5FFDD6",
-    "line": "mov     ecx, [esp+arg_20]",
+    "line": "mov     ecx, [esp+arg_20]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5FFDDA",
-    "line": "call    sub_607410",
+    "line": "call    ArrowProjectile_GetPoison; If no projectile bow enchantment is selected, query projectile-held poison for post-hit magic application.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3187,13 +3187,13 @@
   },
   {
     "ea": "0x5FFDE1",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FFDE3",
-    "line": "call    sub_484DF0",
+    "line": "call    EquippedEntryData_GetPoison; Return the AlchemyItem poison attached to this EntryData's first ExtraDataList stack, or NULL. EntryData layout is extendData@+0, countDelta@+4, type@+8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3253,13 +3253,13 @@
   },
   {
     "ea": "0x5FFE0D",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FFE0F",
-    "line": "call    sub_4849C0",
+    "line": "call    EquippedEntryData_GetCharge; Return per-instance ExtraCharge when present; otherwise return the TESEnchantableForm base charge. Returns the sentinel/default when the EntryData form is not enchantable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3727,19 +3727,19 @@
   },
   {
     "ea": "0x5FFEF8",
-    "line": "push    11h",
+    "line": "push    11h; actorValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FFEFA",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FFEFC",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3805,19 +3805,19 @@
   },
   {
     "ea": "0x5FFF23",
-    "line": "push    0Fh",
+    "line": "push    0Fh; actorValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FFF25",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FFF27",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3841,7 +3841,7 @@
   },
   {
     "ea": "0x5FFF33",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3889,7 +3889,7 @@
   },
   {
     "ea": "0x5FFF4D",
-    "line": "call    sub_5F4F00",
+    "line": "call    Actor_PlayStaggerAnimGroup",
     "mnemonic": "call",
     "size": 5
   },
@@ -3937,7 +3937,7 @@
   },
   {
     "ea": "0x5FFF69",
-    "line": "call    sub_5E6A40",
+    "line": "call    Actor_GetWeaponTipLocalPointForHit; ODismemberment combat decode: returns a local-space weapon/reach point for hit visuals. Uses actor GetNiNode, equipped weapon combat distance, named weapon node lookup, and native transform helpers. Attack tail passes this as one of Actor_HandleHitVisualEffects' vector inputs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4009,7 +4009,7 @@
   },
   {
     "ea": "0x5FFF8F",
-    "line": "fld     [esp+0Ch+arg_18]",
+    "line": "fld     [esp+0Ch+arg_18]; OBSE-side hook target via vtable +0x398: record target/attacker/final damage and transform the supplied weapon/reach local point through the attacker root to estimate nearest target limb before original hit visuals run.",
     "mnemonic": "fld",
     "size": 4
   },
@@ -4081,7 +4081,7 @@
   },
   {
     "ea": "0x5FFFB3",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4099,7 +4099,7 @@
   },
   {
     "ea": "0x5FFFBB",
-    "line": "call    Actor_GetFatigueFraction",
+    "line": "call    Actor_GetFatigueFraction; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4285,7 +4285,7 @@
   },
   {
     "ea": "0x600013",
-    "line": "mov     ecx, offset fKnockbackForceMax",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+2F0h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -4297,7 +4297,7 @@
   },
   {
     "ea": "0x60001D",
-    "line": "fld     [esp+arg_1C]",
+    "line": "fld     [esp+target]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -4333,7 +4333,7 @@
   },
   {
     "ea": "0x60002C",
-    "line": "mov     ecx, offset fKnockbackForceMax",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+2F0h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -4351,7 +4351,7 @@
   },
   {
     "ea": "0x600038",
-    "line": "fstp    [esp+arg_1C]",
+    "line": "fstp    [esp+target]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -4363,7 +4363,7 @@
   },
   {
     "ea": "0x600040",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4375,7 +4375,7 @@
   },
   {
     "ea": "0x600047",
-    "line": "fld     [esp+arg_1C]",
+    "line": "fld     [esp+target]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -4471,7 +4471,7 @@
   },
   {
     "ea": "0x60008A",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4495,7 +4495,7 @@
   },
   {
     "ea": "0x600095",
-    "line": "mov     ecx, offset fKnockbackTime",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+2F8h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -4543,7 +4543,7 @@
   },
   {
     "ea": "0x6000AF",
-    "line": "call    sub_8907A0",
+    "line": "call    bhkCharacterController_SetTransientPushVector; Blocking/attack handling calls transient push setter with fKnockbackTime; confirms +0x2F0/+0x300 are knockback/push semantics.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4669,7 +4669,7 @@
   },
   {
     "ea": "0x6000FA",
-    "line": "call    ActorValue_GetName",
+    "line": "call    ActorValue_GetName; Return the localized actor-value display name through g_actorValueNameSettings. Native skills occupy the contiguous SkillActorValue range 0x0C..0x20.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4831,7 +4831,7 @@
   },
   {
     "ea": "0x60014B",
-    "line": "call    ActorValue_GetName",
+    "line": "call    ActorValue_GetName; Return the localized actor-value display name through g_actorValueNameSettings. Native skills occupy the contiguous SkillActorValue range 0x0C..0x20.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5017,7 +5017,7 @@
   },
   {
     "ea": "0x6001AB",
-    "line": "mov     eax, [esi]",
+    "line": "mov     eax, [esi]; ODismemberment: attack tail checks target vtable +0x198 Actor_IsDead(0) after hit visuals and before Actor_OnPhysicalHit stack setup. Plugin hit capture mirrors this to avoid post-death corpse hits overwriting captured limb context.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -5095,7 +5095,7 @@
   },
   {
     "ea": "0x6001D2",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; ODismemberment: stack setup for Actor_OnPhysicalHit vtable +0x220; first float is attack tail arg_14, second float is arg_38, attacker is pushed before the reserved float slots.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -5113,7 +5113,7 @@
   },
   {
     "ea": "0x6001DB",
-    "line": "call    edx",
+    "line": "call    edx; ODismemberment: attack tail calls target vtable +0x220 Actor_OnPhysicalHit; AL is stored as the death result. Hook can use this result as a post-call fallback if the earlier Actor_Kill pre-ragdoll hook did not consume.",
     "mnemonic": "call",
     "size": 2
   },
@@ -5137,7 +5137,7 @@
   },
   {
     "ea": "0x6001E5",
-    "line": "test    al, al",
+    "line": "test    al, al; ODismemberment: after Actor_OnPhysicalHit, AL true means the target is dead. Nonfatal hit preview is plugin-only validation; faithful automatic dismemberment remains gated to this death result or Actor_Kill pre-ragdoll state.",
     "mnemonic": "test",
     "size": 2
   },
@@ -5221,13 +5221,13 @@
   },
   {
     "ea": "0x600208",
-    "line": "call    sub_5F0EE0",
+    "line": "call    Actor_ApplyHitPhysicsImpulseToTarget",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x60020D",
-    "line": "cmp     byte ptr [esp+arg_18+3], 0",
+    "line": "cmp     byte ptr [esp+arg_18+3], 0; ODismemberment: death result byte gates the remaining nonlethal post-hit handling. If nonzero, Oblivion skips toward cleanup; if zero, knockdown/stagger/disarm/paralyze logic can continue.",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -5353,7 +5353,7 @@
   },
   {
     "ea": "0x600253",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5371,7 +5371,7 @@
   },
   {
     "ea": "0x60025B",
-    "line": "call    Actor_GetFatigueFraction",
+    "line": "call    Actor_GetFatigueFraction; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5461,7 +5461,7 @@
   },
   {
     "ea": "0x600282",
-    "line": "call    sub_5475D0",
+    "line": "call    Calc_CheckKnockdownChance; Nonlethal knockdown chance path: Calc_CheckKnockdownChance uses agility/luck/fatigue/damage through fKnockdown* settings and can mark the target for knockdown/stagger handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5527,7 +5527,7 @@
   },
   {
     "ea": "0x6002A6",
-    "line": "push    3",
+    "line": "push    3; slot",
     "mnemonic": "push",
     "size": 2
   },
@@ -5545,13 +5545,13 @@
   },
   {
     "ea": "0x6002AC",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6002AE",
-    "line": "call    ActorAnimData_GetAnimGroupFromField8Value",
+    "line": "call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5563,7 +5563,7 @@
   },
   {
     "ea": "0x6002B4",
-    "line": "call    sub_51AA00",
+    "line": "call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5677,25 +5677,25 @@
   },
   {
     "ea": "0x6002EA",
-    "line": "mov     eax, [esp+arg_60]",
+    "line": "mov     eax, [esp+actorValue]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6002EE",
-    "line": "push    eax",
+    "line": "push    eax; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6002EF",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6002F1",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Sidecar hook boundary: Expert backward/sweeping post-hit mastery gate (native knockdown path). Effective equipped sidecar weapon mastery is substituted here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5749,7 +5749,7 @@
   },
   {
     "ea": "0x600312",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5827,25 +5827,25 @@
   },
   {
     "ea": "0x60033C",
-    "line": "mov     edx, [esp+arg_60]",
+    "line": "mov     edx, [esp+actorValue]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x600340",
-    "line": "push    edx",
+    "line": "push    edx; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x600341",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x600343",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Sidecar hook boundary: Master forward/rushing post-hit mastery gate (native paralyze path). Effective equipped sidecar weapon mastery is substituted here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6097,7 +6097,7 @@
   },
   {
     "ea": "0x6003BC",
-    "line": "call    sub_547770",
+    "line": "call    Calc_DeathForceFromDamage; ODismemberment combat decode: maps hit/death damage magnitude into a force scalar using fDeathForceDamageMin/Max and fDeathForceForceMin/Max.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6319,7 +6319,7 @@
   },
   {
     "ea": "0x60042E",
-    "line": "mov     eax, [esp+arg_60]",
+    "line": "mov     eax, [esp+actorValue]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6355,7 +6355,7 @@
   },
   {
     "ea": "0x60043E",
-    "line": "call    sub_5FC090",
+    "line": "call    Actor_AttemptAttackDisarmPerkOnHit; Attack disarm perk path after damage: attacker attempts disarm against target using the current attack skill/mastery and iPerkAttackDisarmChance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6379,7 +6379,7 @@
   },
   {
     "ea": "0x60044C",
-    "line": "mov     ecx, offset unk_B36F58",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+280h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -6433,7 +6433,7 @@
   },
   {
     "ea": "0x600467",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6457,7 +6457,7 @@
   },
   {
     "ea": "0x600477",
-    "line": "mov     ecx, offset unk_B36F50",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+278h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -6631,25 +6631,25 @@
   },
   {
     "ea": "0x6004CE",
-    "line": "push    0",
+    "line": "push    0; outAngleDegrees",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6004D0",
-    "line": "push    edi",
+    "line": "push    edi; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6004D1",
-    "line": "push    esi",
+    "line": "push    esi; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6004D2",
-    "line": "call    sub_6131D0",
+    "line": "call    Actor_IsFacingReferenceWithinCombatAngle; Computes the absolute XY heading difference from actor to target, normalizes across the 360-degree boundary, optionally returns degrees, and tests it against the combat-facing threshold game setting.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6787,7 +6787,7 @@
   },
   {
     "ea": "0x60051E",
-    "line": "call    sub_5F4FD0",
+    "line": "call    Actor_PlayKnockdownAnimGroup",
     "mnemonic": "call",
     "size": 5
   },
@@ -6829,7 +6829,7 @@
   },
   {
     "ea": "0x600535",
-    "line": "call    sub_5F3C30",
+    "line": "call    Actor_CheckBlockStaggerPerk; ODismemberment combat decode: block stagger perk chance helper using shield/weapon/hand-to-hand state, mastery gate, and iPerkBlockStaggerChance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6883,7 +6883,7 @@
   },
   {
     "ea": "0x600550",
-    "line": "push    edi",
+    "line": "push    edi; Block disarm/stagger path: target-side block perk checks can disarm/stagger the attacker using iPerkBlockDisarmChance/iPerkBlockStaggerChance.",
     "mnemonic": "push",
     "size": 1
   },
@@ -6895,7 +6895,7 @@
   },
   {
     "ea": "0x600553",
-    "line": "call    sub_5FC2B0",
+    "line": "call    Actor_AttemptBlockDisarmPerkOnHit; ODismemberment combat decode: block-side disarm perk attempt. Uses block/weapon skill mastery and iPerkBlockDisarmChance to make the blocker disarm the attacker.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6931,7 +6931,7 @@
   },
   {
     "ea": "0x600565",
-    "line": "call    sub_5F4F00",
+    "line": "call    Actor_PlayStaggerAnimGroup",
     "mnemonic": "call",
     "size": 5
   },
@@ -6949,13 +6949,13 @@
   },
   {
     "ea": "0x600572",
-    "line": "push    1",
+    "line": "push    1; MoonSugarEffect decode: only observed direct trigger of native Gethit effect: player Actor_AttackHandling::Blocking calls sub_7EB010(1).",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x600574",
-    "line": "call    sub_7EB010",
+    "line": "call    sub_7EB010; MoonSugarEffect decode: triggers native Gethit/double-vision if byte_B2D91C is set. Uses configured blocked/nonblocked offsets and updates flt_B46124/flt_B46120.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7075,13 +7075,13 @@
   },
   {
     "ea": "0x6005A7",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x6005AC",
-    "line": "call    TemporaryObjects_PlayMagicShieldShader",
+    "line": "call    TemporaryObjects_PlayMagicShieldShader; Final visual cleanup: if target process reports active magic shield state, ActorProcessManager plays the magic shield shader before ActorMagicHit/done.",
     "mnemonic": "call",
     "size": 5
   }

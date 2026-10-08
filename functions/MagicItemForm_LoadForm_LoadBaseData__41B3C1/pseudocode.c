@@ -6,6 +6,6 @@ void __usercall MagicItemForm_LoadForm_::LoadBaseData(
         int a5@<edi>,
         int a6)
 {
-  (*(void (__thiscall **)(int, int *, int))(*(_DWORD *)a3 + 0x3C))(a3, a2, a1);
-  MagicItemForm_LoadForm_::LoadAdditionalData(a2, a4, a5, a3, a6);
+  (*(void (__thiscall **)(int, int *, int))(*(_DWORD *)a3 + 0x3C))(a3, a2, a1); /*0x41b3ca*/
+  MagicItemForm_LoadForm_::LoadAdditionalData(a2, a4, a5, a3, a6); /*0x41b3cb*/
 }

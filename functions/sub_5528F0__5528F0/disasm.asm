@@ -1,9 +1,9 @@
-0x5528F0: push    ecx
+0x5528F0: push    ecx; Deep-copies all four FaceGen matrices, preserving dimensions and engine ownership of destination coefficient buffers.
 0x5528F1: push    edi
-0x5528F2: mov     edi, [esp+8+arg_0]
+0x5528F2: mov     edi, [esp+8+source]
 0x5528F6: test    edi, edi
 0x5528F8: jz      loc_552989
-0x5528FE: mov     eax, [esp+8+arg_4]
+0x5528FE: mov     eax, [esp+8+destination]
 0x552902: test    eax, eax
 0x552904: jz      loc_552989
 0x55290A: push    ebx
@@ -13,7 +13,7 @@
 0x552910: push    esi
 0x552911: mov     [esp+14h+var_4], ebx
 0x552915: lea     esi, [eax+4]
-0x552918: mov     [esp+14h+arg_0], 2
+0x552918: mov     [esp+14h+source], 2
 0x552920: mov     ebp, 2
 0x552925: mov     eax, [edi]
 0x552927: fldz
@@ -30,10 +30,10 @@
 0x55293F: lea     ecx, [esi+4]; int
 0x552942: fstp    [esp+18h+var_18]; int
 0x552945: push    eax; int
-0x552946: call    sub_527160
-0x55294B: push    edi
-0x55294C: mov     ecx, ebx
-0x55294E: call    sub_5520E0
+0x552946: call    FaceGenFloatVector_ResizeFill; Vector resize: retain existing prefix, erase surplus elements when shrinking, fill only newly inserted elements when growing. Equal size does not overwrite coefficients. Matrix dimension products must already be valid; no recovery from rows*columns overflow.
+0x55294B: push    edi; source
+0x55294C: mov     ecx, ebx; this
+0x55294E: call    FaceGenMatrix_Assign; Deep matrix assignment. Copies rows/columns, resizes coefficient storage, then copies rows*columns floats.
 0x552953: mov     ebx, [esp+14h+var_4]
 0x552957: jmp     short loc_552974
 0x552959: push    ecx
@@ -42,12 +42,12 @@
 0x55295F: lea     ecx, [esi+4]; int
 0x552962: mov     dword ptr [esi-4], 0
 0x552969: mov     dword ptr [esi], 0
-0x55296F: call    sub_527160
+0x55296F: call    FaceGenFloatVector_ResizeFill; Vector resize: retain existing prefix, erase surplus elements when shrinking, fill only newly inserted elements when growing. Equal size does not overwrite coefficients. Matrix dimension products must already be valid; no recovery from rows*columns overflow.
 0x552974: add     edi, 18h
 0x552977: add     esi, 18h
 0x55297A: sub     ebp, 1
 0x55297D: jnz     short loc_552925
-0x55297F: sub     [esp+14h+arg_0], 1
+0x55297F: sub     [esp+14h+source], 1
 0x552984: jnz     short loc_552920
 0x552986: pop     esi
 0x552987: pop     ebp

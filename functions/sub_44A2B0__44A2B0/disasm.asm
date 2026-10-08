@@ -42,7 +42,7 @@
 0x44A335: mov     edx, [eax]
 0x44A337: push    eax
 0x44A338: mov     [esi], edx
-0x44A33A: call    FormHeapFree
+0x44A33A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x44A33F: add     esp, 4
 0x44A342: mov     ecx, edi
 0x44A344: call    TESFile_Close
@@ -99,10 +99,10 @@
 0x44A3F2: cmp     edi, ebx
 0x44A3F4: jz      short loc_44A41C
 0x44A3F6: lea     eax, [edi+1Ch]
-0x44A3F9: push    eax; Str2
+0x44A3F9: push    eax; right
 0x44A3FA: lea     ecx, [esp+388h+FindFileData.cFileName]
-0x44A3FE: push    ecx; Str1
-0x44A3FF: call    __strcmp
+0x44A3FE: push    ecx; left
+0x44A3FF: call    CRT_StricmpLocaleDispatch
 0x44A404: add     esp, 8
 0x44A407: test    eax, eax
 0x44A409: jz      short loc_44A414
@@ -255,7 +255,7 @@
 0x44A5DC: mov     edx, [eax]
 0x44A5DE: push    eax
 0x44A5DF: mov     [esi], edx
-0x44A5E1: call    FormHeapFree
+0x44A5E1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x44A5E6: add     esp, 4
 0x44A5E9: jmp     short loc_44A5ED
 0x44A5EB: mov     [esi], ebx
@@ -264,7 +264,7 @@
 0x44A5F1: mov     ecx, edi
 0x44A5F3: call    TESFile_destr
 0x44A5F8: push    edi
-0x44A5F9: call    FormHeapFree
+0x44A5F9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x44A5FE: add     esp, 4
 0x44A601: jmp     short loc_44A60F
 0x44A603: mov     ebp, esi
@@ -299,7 +299,7 @@
 0x44A660: lea     ebx, [edi+1]
 0x44A663: push    ebx
 0x44A664: mov     ecx, ebp
-0x44A666: call    TESFile_GetMasterByIndex
+0x44A666: call    TESFile_GetMasterByIndex; Oblivion TESFile_GetMasterByIndex returns masterFiles[slot-1] for a one-based MAST index, bounded by masterCount. FormID owner-byte resolution can therefore select distinct alias slots for duplicate filenames.
 0x44A66B: mov     edi, eax
 0x44A66D: test    edi, edi
 0x44A66F: jz      short loc_44A6BA
@@ -352,7 +352,7 @@
 0x44A6EE: mov     ecx, [esi]
 0x44A6F0: push    ebx
 0x44A6F1: push    edi
-0x44A6F2: call    TESFile_BuildLoadedMasterArray
+0x44A6F2: call    TESFile_BuildLoadedMasterArray; MEF PERF 2026-09-08: PERF-5 another producer: discovery routine's final pass resolves masters for each candidate file; earlier pass44A64E also resolves before dependency-driven list reorder44A683..44A6B3. A persistent filename cache must account for list reorder/reload and first-match priority, not just pointer identity.
 0x44A6F7: mov     esi, [esi+4]
 0x44A6FA: cmp     esi, ebx
 0x44A6FC: jnz     short loc_44A6E5
@@ -379,3 +379,19 @@
 0x44A737: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x44A73C: add     esp, 370h
 0x44A742: retn    4
+0x9AD990: mov     eax, [ebp-35Ch]
+0x9AD996: push    eax
+0x9AD997: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AD99C: pop     ecx
+0x9AD99D: retn
+0x9AD99E: mov     edx, [esp+arg_4]
+0x9AD9A2: lea     eax, [edx-374h]
+0x9AD9A8: mov     ecx, [edx-378h]
+0x9AD9AE: xor     ecx, eax
+0x9AD9B0: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AD9B5: add     eax, 10h
+0x9AD9B8: mov     ecx, [edx-4]
+0x9AD9BB: xor     ecx, eax
+0x9AD9BD: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AD9C2: mov     eax, offset stru_ADA41C
+0x9AD9C7: jmp     ___CxxFrameHandler3

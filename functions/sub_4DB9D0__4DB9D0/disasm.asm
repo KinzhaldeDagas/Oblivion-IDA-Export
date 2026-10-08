@@ -1,4 +1,4 @@
-0x4DB9D0: sub     esp, 30h
+0x4DB9D0: sub     esp, 30h; BunkFix: plugin activation assist uses this helper as a guard to ensure the selected free marker has a resolvable BSFurnitureMarker transform before applying SetSleepState.
 0x4DB9D3: push    ebx
 0x4DB9D4: push    edi
 0x4DB9D5: mov     edi, ecx

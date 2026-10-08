@@ -1,19 +1,36 @@
 {
-  "callees_count": 25,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_4F1AC0",
+  "chunks": [
+    [
+      "0x4F1AC0",
+      "0x4F1D11"
+    ],
+    [
+      "0x9B6850",
+      "0x9B6876"
+    ]
+  ],
+  "chunks_sha256": "631757885ffae5b05055697c07aaa0c3e4127855d3c9df254c80a601dcbc1499",
+  "comment_regular": "Verified SubSpace spatial-index insertion. Its sole direct caller is TESObjectCELL_IndexSubSpaceReferences, and no direct removal caller was found; current evidence places insertion in the WorldSpace persistent-cell build during TESDataHandler_LoadFiles. Runtime add/remove maintenance beyond this build path is Unknown.",
+  "comment_repeatable": "Verified SubSpace spatial-index insertion. Its sole direct caller is TESObjectCELL_IndexSubSpaceReferences, and no direct removal caller was found; current evidence places insertion in the WorldSpace persistent-cell build during TESDataHandler_LoadFiles. Runtime add/remove maintenance beyond this build path is Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "TESWorldSpace_IndexSubSpaceReference",
   "end_ea": "0x4F1D11",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4F1AC0",
+  "name": "TESWorldSpace_IndexSubSpaceReference",
   "segment": ".text",
   "sha256": "0d87da9e28fae6d5cda59a89aae1ed65541312161764bbd50d14a871fb25ef29",
   "size": 593,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4F1AC0",
-  "type": "double __userpurge@<st0>(int@<ecx>, double result@<st0>, int)",
-  "xrefs_from_count": 201,
+  "total_chunk_size": 631,
+  "type": "double __usercall@<st0>(TESWorldSpace *this@<ecx>, double carry@<st0>, TESObjectREFR *reference)",
+  "xrefs_from_count": 215,
   "xrefs_to_count": 1
 }

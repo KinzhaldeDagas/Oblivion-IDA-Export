@@ -1,19 +1,36 @@
 {
-  "callees_count": 8,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 6,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
+  "chunks": [
+    [
+      "0x46C360",
+      "0x46C42A"
+    ],
+    [
+      "0x9B5BD0",
+      "0x9B5BF3"
+    ]
+  ],
+  "chunks_sha256": "eb73c807210fe6ba8c748008dc5d72eed4a414ef016d5403aadc4610e66615df",
+  "comment_regular": "Verified ordinary form-clone path: allocates via TESForm_CreateDynamic, invokes the destination CopyFrom virtual, restores EditorID and records the cloneMap entry. This does not dispatch CreateDuplicateForm; WorldSpace's deep cell/persistent-cell clone is a separate +0x38 virtual path.",
+  "comment_repeatable": "Verified ordinary form-clone path: allocates via TESForm_CreateDynamic, invokes the destination CopyFrom virtual, restores EditorID and records the cloneMap entry. This does not dispatch CreateDuplicateForm; WorldSpace's deep cell/persistent-cell clone is a separate +0x38 virtual path.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 7,
   "display_name": "TESForm_Clone",
   "end_ea": "0x46C42A",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
   "name": "TESForm_Clone",
   "segment": ".text",
   "sha256": "13db78cb55494a67590f2d5ac135bada3c0590228ddb8d0f1da0ee18164075b5",
   "size": 202,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x46C360",
+  "total_chunk_size": 237,
   "type": "TESForm *__thiscall(TESForm *this, int a2, void *cloneMap)",
-  "xrefs_from_count": 82,
+  "xrefs_from_count": 93,
   "xrefs_to_count": 75
 }

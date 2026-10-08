@@ -1,18 +1,31 @@
 {
-  "callees_count": 14,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x45FB50",
+      "0x45FC53"
+    ]
+  ],
+  "chunks_sha256": "49021a8663e66fd6c8fbf13d638a9349f55000c79465bdb0226dd93e50720675",
+  "comment_regular": "[Verified] TESSaveLoadGame_SaveTempEffectsList obtains the actor process manager's temp-effect save size, writes a bounded Temp Effects List chunk, calls ActorProcessManager_SaveTempEffects, checks full-buffer consumption, and frees the temporary buffer.",
+  "comment_repeatable": "[Verified] TESSaveLoadGame_SaveTempEffectsList obtains the actor process manager's temp-effect save size, writes a bounded Temp Effects List chunk, calls ActorProcessManager_SaveTempEffects, checks full-buffer consumption, and frees the temporary buffer.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 7,
-  "display_name": "sub_45FB50",
+  "display_name": "TESSaveLoadGame_SaveTempEffectsList",
   "end_ea": "0x45FC53",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_45FB50",
+  "name": "TESSaveLoadGame_SaveTempEffectsList",
   "segment": ".text",
   "sha256": "49021a8663e66fd6c8fbf13d638a9349f55000c79465bdb0226dd93e50720675",
   "size": 259,
+  "source_annotation_confidence": "Verified",
   "start_ea": "0x45FB50",
+  "total_chunk_size": 259,
   "type": "int __thiscall(_DWORD *this, int)",
   "xrefs_from_count": 102,
   "xrefs_to_count": 1

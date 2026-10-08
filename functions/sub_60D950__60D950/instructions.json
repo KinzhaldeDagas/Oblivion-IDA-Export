@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x60D950",
-    "line": "sub     esp, 18h",
+    "line": "sub     esp, 18h; Arrow projectile Havok-contact callback. Resolves the collidable to a live NiAVObject/TESObjectREFR, classifies Actor versus non-Actor impact, converts contact vectors, and dispatches the corresponding impact handler.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x60D954",
-    "line": "mov     ebx, [esp+1Ch+arg_4]",
+    "line": "mov     ebx, [esp+1Ch+collidable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x60D95B",
-    "line": "push    ebx",
+    "line": "push    ebx; collidable",
     "mnemonic": "push",
     "size": 1
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x60D95E",
-    "line": "call    sub_8AFCE0",
+    "line": "call    bhkCollidable_ResolveNiAVObject; Resolve Havok collidable to NiAVObject and then owning TESObjectREFR; projectile impact never substitutes the equipped WEAP reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x60D96B",
-    "line": "call    sub_4DC270",
+    "line": "call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x60D990",
-    "line": "mov     esi, eax",
+    "line": "mov     esi, eax; Classify struck reference as Actor for actor damage/embedding versus non-actor reference impact.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x60DA0E",
-    "line": "mov     eax, [esp+28h+arg_0]",
+    "line": "mov     eax, [esp+28h+projectile]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x60DA60",
-    "line": "mov     edx, [esp+28h+arg_8]",
+    "line": "mov     edx, [esp+28h+havokPoint]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x60DA65",
-    "line": "lea     eax, [esp+2Ch+var_18]",
+    "line": "lea     eax, [esp+2Ch+impactPosition]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -553,13 +553,13 @@
   },
   {
     "ea": "0x60DA6A",
-    "line": "call    sub_43F3E0",
+    "line": "call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x60DA6F",
-    "line": "mov     ecx, [esp+30h+arg_C]",
+    "line": "mov     ecx, [esp+30h+havokNormal]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x60DA74",
-    "line": "lea     edx, [esp+34h+var_C]",
+    "line": "lea     edx, [esp+34h+impactNormal]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -607,43 +607,43 @@
   },
   {
     "ea": "0x60DA86",
-    "line": "mov     esi, [esp+28h+arg_0]",
+    "line": "mov     esi, [esp+28h+projectile]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x60DA8A",
-    "line": "lea     eax, [esp+28h+var_C]",
+    "line": "lea     eax, [esp+28h+impactNormal]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x60DA8E",
-    "line": "push    eax",
+    "line": "push    eax; impactNormal",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60DA8F",
-    "line": "lea     ecx, [esp+2Ch+var_18]",
+    "line": "lea     ecx, [esp+2Ch+impactPosition]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x60DA93",
-    "line": "push    ecx",
+    "line": "push    ecx; impactPosition",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60DA94",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60DA96",
-    "line": "call    sub_60BAC0",
+    "line": "call    ArrowProjectile_HandleCollisionLayer1Impact; Handle collision-filter layer/category 1 without a TESObjectREFR target. Builds state-2 world placement data from impact position/normal, records material effects, and applies all retained projectile magic items through the shooter with a null casting target.",
     "mnemonic": "call",
     "size": 5
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x60DAA6",
-    "line": "mov     edx, [esp+28h+var_18]",
+    "line": "mov     edx, [esp+28h+impactPosition.x]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -703,7 +703,7 @@
   },
   {
     "ea": "0x60DAB5",
-    "line": "mov     edx, [esp+3Ch+var_14]",
+    "line": "mov     edx, [esp+3Ch+impactPosition.y]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x60DABC",
-    "line": "mov     edx, [esp+3Ch+var_10]",
+    "line": "mov     edx, [esp+3Ch+impactPosition.z]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -727,7 +727,7 @@
   },
   {
     "ea": "0x60DAC1",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -829,7 +829,7 @@
   },
   {
     "ea": "0x60DAF1",
-    "line": "mov     ebx, [esp+28h+arg_0]",
+    "line": "mov     ebx, [esp+28h+projectile]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -943,7 +943,7 @@
   },
   {
     "ea": "0x60DB21",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -955,43 +955,43 @@
   },
   {
     "ea": "0x60DB2B",
-    "line": "push    esi",
+    "line": "push    esi; struckActor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60DB2C",
-    "line": "lea     ecx, [esp+2Ch+var_C]",
+    "line": "lea     ecx, [esp+2Ch+impactNormal]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x60DB30",
-    "line": "push    ecx",
+    "line": "push    ecx; impactNormal",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60DB31",
-    "line": "lea     edx, [esp+30h+var_18]",
+    "line": "lea     edx, [esp+30h+impactPosition]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x60DB35",
-    "line": "push    edx",
+    "line": "push    edx; impactPosition",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60DB36",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60DB38",
-    "line": "call    sub_60A640",
+    "line": "call    ArrowProjectile_HandleActorImpact; Resolve an Actor impact from world impact position/normal. Records state-0 attachment data, delegates combat damage/effects through the shooter, selects an embed collision node or fallback state, and may transfer one unenchanted AMMO base form to the struck Actor inventory.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1033,7 +1033,7 @@
   },
   {
     "ea": "0x60DB45",
-    "line": "push    ebx",
+    "line": "push    ebx; RealArenaTraining decode: non-actor arrow collision branch after collidable -> TESObjectREFR resolution; Actor dynamic cast was null.",
     "mnemonic": "push",
     "size": 1
   },
@@ -1081,55 +1081,55 @@
   },
   {
     "ea": "0x60DB59",
-    "line": "mov     esi, [esp+28h+arg_0]",
+    "line": "mov     esi, [esp+28h+projectile]; RealArenaTraining decode: ESI is ArrowProjectile*, EDI is resolved hit TESObjectREFR before calling sub_60B120.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x60DB5D",
-    "line": "push    eax",
+    "line": "push    eax; collisionObject",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60DB5E",
-    "line": "push    edi",
+    "line": "push    edi; struckReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60DB5F",
-    "line": "lea     eax, [esp+30h+var_C]",
+    "line": "lea     eax, [esp+30h+impactNormal]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x60DB63",
-    "line": "push    eax",
+    "line": "push    eax; impactNormal",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60DB64",
-    "line": "lea     ecx, [esp+34h+var_18]",
+    "line": "lea     ecx, [esp+34h+impactPosition]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x60DB68",
-    "line": "push    ecx",
+    "line": "push    ecx; impactPosition",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60DB69",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60DB6B",
-    "line": "call    sub_60B120",
+    "line": "call    ArrowProjectile_HandleReferenceImpact; RealArenaTraining decode: earlier arrow non-actor collision call to sub_60B120. Plugin hooks this call so TargetHay01 Marksman does not depend on later optional Script_AddEventToExtraScript branches.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1243,7 +1243,7 @@
   },
   {
     "ea": "0x60DB9D",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },

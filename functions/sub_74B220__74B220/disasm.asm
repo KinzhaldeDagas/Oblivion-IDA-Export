@@ -101,7 +101,7 @@
 0x74B35B: cmp     dword ptr [eax+20h], 0
 0x74B35F: jz      short loc_74B397
 0x74B361: mov     ecx, ebp
-0x74B363: call    sub_404C90
+0x74B363: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x74B368: fstp    [esp+28h+arg_4]
 0x74B36C: fld     [esp+28h+arg_4]
 0x74B370: lea     ecx, [esp+28h+var_C]

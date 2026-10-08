@@ -1,52 +1,90 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_SERVICE_NOTIFY_STATUS_CHANGE_PARAMS_1",
+  "definition": "struct _SERVICE_NOTIFY_STATUS_CHANGE_PARAMS_1\n{\nULONGLONG ullThreadId;\nDWORD dwNotifyMask;\nUCHAR CallbackAddressArray[16];\nUCHAR CallbackParamAddressArray[16];\nSERVICE_STATUS_PROCESS ServiceStatus;\nDWORD dwNotificationStatus;\nDWORD dwSequence;\n}\n",
   "id": 18374686479672039702,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ullThreadId",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "ULONGLONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwNotifyMask",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CallbackAddressArray",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 16
+      "offset_hex": "0xC",
+      "size": 16,
+      "type": "UCHAR[16]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CallbackParamAddressArray",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 16
+      "offset_hex": "0x1C",
+      "size": 16,
+      "type": "UCHAR[16]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ServiceStatus",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 36
+      "offset_hex": "0x2C",
+      "size": 36,
+      "type": "SERVICE_STATUS_PROCESS"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwNotificationStatus",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwSequence",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     }
   ],
   "name": "_SERVICE_NOTIFY_STATUS_CHANGE_PARAMS_1",
+  "ordinal": 5798,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 88
 }

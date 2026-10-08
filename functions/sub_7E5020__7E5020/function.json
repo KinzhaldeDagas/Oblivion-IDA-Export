@@ -1,19 +1,32 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7E5020",
+      "0x7E51E3"
+    ]
+  ],
+  "chunks_sha256": "ccfd6a4c0a970bab0278604054cd331864d725e72663895a27be92363dc53626",
+  "comment_regular": "Verified (Oblivion): generates a particle along the target node's local ray using rayLength_74, optionally transforms it to world coordinates when bWorldspace_78 is set, and writes the 0x20-byte slot record. This is emitterType_70 value 2, kParticleShaderEmitter_Ray.",
+  "comment_repeatable": "Verified (Oblivion): generates a particle along the target node's local ray using rayLength_74, optionally transforms it to world coordinates when bWorldspace_78 is set, and writes the 0x20-byte slot record. This is emitterType_70 value 2, kParticleShaderEmitter_Ray.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7E5020",
+  "display_name": "ParticleShaderProperty_GenerateFromRay",
   "end_ea": "0x7E51E3",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7E5020",
+  "name": "ParticleShaderProperty_GenerateFromRay",
   "segment": ".text",
   "sha256": "ccfd6a4c0a970bab0278604054cd331864d725e72663895a27be92363dc53626",
   "size": 451,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7E5020",
-  "type": "int __thiscall(int this, int)",
+  "total_chunk_size": 451,
+  "type": "int __thiscall(ParticleShaderProperty *this, unsigned int slotIndex)",
   "xrefs_from_count": 130,
   "xrefs_to_count": 1
 }

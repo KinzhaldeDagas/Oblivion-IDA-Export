@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x9A92E2",
-    "line": "mov     esi, [esp+8+arg_0]",
+    "line": "mov     esi, [esp+8+entry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x9A92EE",
-    "line": "cmp     byte_B4295B, 0",
+    "line": "cmp     g_D3DXParameterDispatchInitialized, 0",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x9A92FD",
-    "line": "call    sub_783C70",
+    "line": "call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x9A9308",
-    "line": "mov     edi, dword_B428D8[edi*4]",
+    "line": "mov     edi, g_D3DXParameterClassDispatch[edi*4]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -151,13 +151,13 @@
   },
   {
     "ea": "0x9A9336",
-    "line": "mov     dword_BAA930, edx",
+    "line": "mov     g_NiD3DConstantMap_MappedBool, edx",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x9A933C",
-    "line": "mov     eax, offset dword_BAA930",
+    "line": "mov     eax, offset g_NiD3DConstantMap_MappedBool",
     "mnemonic": "mov",
     "size": 5
   },
@@ -211,31 +211,31 @@
   },
   {
     "ea": "0x9A9351",
-    "line": "mov     dword_BAA934, eax",
+    "line": "mov     g_NiD3DConstantMap_MappedInt4, eax",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x9A9356",
-    "line": "mov     dword_BAA938, eax",
+    "line": "mov     g_NiD3DConstantMap_MappedInt4+4, eax",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x9A935B",
-    "line": "mov     dword_BAA93C, eax",
+    "line": "mov     g_NiD3DConstantMap_MappedInt4+8, eax",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x9A9360",
-    "line": "mov     dword_BAA940, eax",
+    "line": "mov     g_NiD3DConstantMap_MappedInt4+0Ch, eax",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x9A9365",
-    "line": "mov     eax, offset dword_BAA934",
+    "line": "mov     eax, offset g_NiD3DConstantMap_MappedInt4",
     "mnemonic": "mov",
     "size": 5
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x9A9374",
-    "line": "fstp    flt_BAA990",
+    "line": "fstp    g_NiD3DConstantMap_MappedFloat4",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -283,19 +283,19 @@
   },
   {
     "ea": "0x9A937B",
-    "line": "fld     flt_BAA990",
+    "line": "fld     g_NiD3DConstantMap_MappedFloat4",
     "mnemonic": "fld",
     "size": 6
   },
   {
     "ea": "0x9A9381",
-    "line": "mov     eax, offset flt_BAA990",
+    "line": "mov     eax, offset g_NiD3DConstantMap_MappedFloat4",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x9A9386",
-    "line": "fst     flt_BAA994",
+    "line": "fst     g_NiD3DConstantMap_MappedFloat4+4",
     "mnemonic": "fst",
     "size": 6
   },
@@ -307,13 +307,13 @@
   },
   {
     "ea": "0x9A938D",
-    "line": "fst     flt_BAA998",
+    "line": "fst     g_NiD3DConstantMap_MappedFloat4+8",
     "mnemonic": "fst",
     "size": 6
   },
   {
     "ea": "0x9A9393",
-    "line": "fstp    flt_BAA99C",
+    "line": "fstp    g_NiD3DConstantMap_MappedFloat4+0Ch",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x9A93A6",
-    "line": "mov     dword_BAA934, eax",
+    "line": "mov     g_NiD3DConstantMap_MappedInt4, eax",
     "mnemonic": "mov",
     "size": 5
   },
@@ -367,13 +367,13 @@
   },
   {
     "ea": "0x9A93AF",
-    "line": "mov     dword_BAA938, esi",
+    "line": "mov     g_NiD3DConstantMap_MappedInt4+4, esi",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x9A93B5",
-    "line": "mov     dword_BAA940, esi",
+    "line": "mov     g_NiD3DConstantMap_MappedInt4+0Ch, esi",
     "mnemonic": "mov",
     "size": 6
   },
@@ -385,13 +385,13 @@
   },
   {
     "ea": "0x9A93BC",
-    "line": "mov     dword_BAA93C, eax",
+    "line": "mov     g_NiD3DConstantMap_MappedInt4+8, eax",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x9A93C1",
-    "line": "mov     eax, offset dword_BAA934",
+    "line": "mov     eax, offset g_NiD3DConstantMap_MappedInt4",
     "mnemonic": "mov",
     "size": 5
   },
@@ -421,13 +421,13 @@
   },
   {
     "ea": "0x9A93CD",
-    "line": "fstp    flt_BAA990",
+    "line": "fstp    g_NiD3DConstantMap_MappedFloat4",
     "mnemonic": "fstp",
     "size": 6
   },
   {
     "ea": "0x9A93D3",
-    "line": "mov     eax, offset flt_BAA990",
+    "line": "mov     eax, offset g_NiD3DConstantMap_MappedFloat4",
     "mnemonic": "mov",
     "size": 5
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x9A93DC",
-    "line": "fstp    flt_BAA994",
+    "line": "fstp    g_NiD3DConstantMap_MappedFloat4+4",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -457,25 +457,25 @@
   },
   {
     "ea": "0x9A93E3",
-    "line": "fld     flt_BAA990",
+    "line": "fld     g_NiD3DConstantMap_MappedFloat4",
     "mnemonic": "fld",
     "size": 6
   },
   {
     "ea": "0x9A93E9",
-    "line": "fstp    flt_BAA998",
+    "line": "fstp    g_NiD3DConstantMap_MappedFloat4+8",
     "mnemonic": "fstp",
     "size": 6
   },
   {
     "ea": "0x9A93EF",
-    "line": "fld     flt_BAA994",
+    "line": "fld     g_NiD3DConstantMap_MappedFloat4+4",
     "mnemonic": "fld",
     "size": 6
   },
   {
     "ea": "0x9A93F5",
-    "line": "fstp    flt_BAA99C",
+    "line": "fstp    g_NiD3DConstantMap_MappedFloat4+0Ch",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x9A9408",
-    "line": "mov     dword_BAA934, edx",
+    "line": "mov     g_NiD3DConstantMap_MappedInt4, edx",
     "mnemonic": "mov",
     "size": 6
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x9A9411",
-    "line": "mov     dword_BAA938, eax",
+    "line": "mov     g_NiD3DConstantMap_MappedInt4+4, eax",
     "mnemonic": "mov",
     "size": 5
   },
@@ -547,19 +547,19 @@
   },
   {
     "ea": "0x9A941B",
-    "line": "mov     dword_BAA93C, ecx",
+    "line": "mov     g_NiD3DConstantMap_MappedInt4+8, ecx",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x9A9421",
-    "line": "mov     dword_BAA940, 1",
+    "line": "mov     g_NiD3DConstantMap_MappedInt4+0Ch, 1",
     "mnemonic": "mov",
     "size": 10
   },
   {
     "ea": "0x9A942B",
-    "line": "mov     eax, offset dword_BAA934",
+    "line": "mov     eax, offset g_NiD3DConstantMap_MappedInt4",
     "mnemonic": "mov",
     "size": 5
   },
@@ -589,13 +589,13 @@
   },
   {
     "ea": "0x9A9437",
-    "line": "fstp    flt_BAA990",
+    "line": "fstp    g_NiD3DConstantMap_MappedFloat4",
     "mnemonic": "fstp",
     "size": 6
   },
   {
     "ea": "0x9A943D",
-    "line": "mov     eax, offset flt_BAA990",
+    "line": "mov     eax, offset g_NiD3DConstantMap_MappedFloat4",
     "mnemonic": "mov",
     "size": 5
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x9A9445",
-    "line": "fstp    flt_BAA994",
+    "line": "fstp    g_NiD3DConstantMap_MappedFloat4+4",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -625,7 +625,7 @@
   },
   {
     "ea": "0x9A944F",
-    "line": "fstp    flt_BAA998",
+    "line": "fstp    g_NiD3DConstantMap_MappedFloat4+8",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x9A9458",
-    "line": "fstp    flt_BAA99C",
+    "line": "fstp    g_NiD3DConstantMap_MappedFloat4+0Ch",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x9A946F",
-    "line": "fstp    flt_BAA9A0",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x9A9478",
-    "line": "fstp    flt_BAA9A4",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix+4",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x9A9481",
-    "line": "fstp    flt_BAA9A8",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix+8",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -733,7 +733,7 @@
   },
   {
     "ea": "0x9A948A",
-    "line": "fstp    flt_BAA9AC",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix+0Ch",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x9A9493",
-    "line": "fstp    flt_BAA9B0",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix+10h",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -757,7 +757,7 @@
   },
   {
     "ea": "0x9A949C",
-    "line": "fstp    flt_BAA9B4",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix+14h",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -769,7 +769,7 @@
   },
   {
     "ea": "0x9A94A5",
-    "line": "fstp    flt_BAA9B8",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix+18h",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -781,7 +781,7 @@
   },
   {
     "ea": "0x9A94AE",
-    "line": "fstp    flt_BAA9BC",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix+1Ch",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -793,25 +793,25 @@
   },
   {
     "ea": "0x9A94B6",
-    "line": "fst     flt_BAA9C0",
+    "line": "fst     g_NiD3DConstantMap_MappedMatrix+20h",
     "mnemonic": "fst",
     "size": 6
   },
   {
     "ea": "0x9A94BC",
-    "line": "fst     flt_BAA9C4",
+    "line": "fst     g_NiD3DConstantMap_MappedMatrix+24h",
     "mnemonic": "fst",
     "size": 6
   },
   {
     "ea": "0x9A94C2",
-    "line": "fst     flt_BAA9C8",
+    "line": "fst     g_NiD3DConstantMap_MappedMatrix+28h",
     "mnemonic": "fst",
     "size": 6
   },
   {
     "ea": "0x9A94C8",
-    "line": "fst     flt_BAA9CC",
+    "line": "fst     g_NiD3DConstantMap_MappedMatrix+2Ch",
     "mnemonic": "fst",
     "size": 6
   },
@@ -823,13 +823,13 @@
   },
   {
     "ea": "0x9A94CF",
-    "line": "fst     flt_BAA9D0",
+    "line": "fst     g_NiD3DConstantMap_MappedMatrix+30h",
     "mnemonic": "fst",
     "size": 6
   },
   {
     "ea": "0x9A94D5",
-    "line": "fst     flt_BAA9D4",
+    "line": "fst     g_NiD3DConstantMap_MappedMatrix+34h",
     "mnemonic": "fst",
     "size": 6
   },
@@ -841,19 +841,19 @@
   },
   {
     "ea": "0x9A94DC",
-    "line": "fst     flt_BAA9D8",
+    "line": "fst     g_NiD3DConstantMap_MappedMatrix+38h",
     "mnemonic": "fst",
     "size": 6
   },
   {
     "ea": "0x9A94E2",
-    "line": "mov     eax, offset flt_BAA9A0",
+    "line": "mov     eax, offset g_NiD3DConstantMap_MappedMatrix",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x9A94E7",
-    "line": "fstp    flt_BAA9DC",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix+3Ch",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -883,7 +883,7 @@
   },
   {
     "ea": "0x9A94F6",
-    "line": "fstp    flt_BAA9A0",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -895,7 +895,7 @@
   },
   {
     "ea": "0x9A94FF",
-    "line": "fstp    flt_BAA9A4",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix+4",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -907,7 +907,7 @@
   },
   {
     "ea": "0x9A9508",
-    "line": "fstp    flt_BAA9A8",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix+8",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -919,7 +919,7 @@
   },
   {
     "ea": "0x9A9510",
-    "line": "fst     flt_BAA9AC",
+    "line": "fst     g_NiD3DConstantMap_MappedMatrix+0Ch",
     "mnemonic": "fst",
     "size": 6
   },
@@ -931,7 +931,7 @@
   },
   {
     "ea": "0x9A9519",
-    "line": "fstp    flt_BAA9B0",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix+10h",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -943,7 +943,7 @@
   },
   {
     "ea": "0x9A9522",
-    "line": "fstp    flt_BAA9B4",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix+14h",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -955,13 +955,13 @@
   },
   {
     "ea": "0x9A952B",
-    "line": "fstp    flt_BAA9B8",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix+18h",
     "mnemonic": "fstp",
     "size": 6
   },
   {
     "ea": "0x9A9531",
-    "line": "fst     flt_BAA9BC",
+    "line": "fst     g_NiD3DConstantMap_MappedMatrix+1Ch",
     "mnemonic": "fst",
     "size": 6
   },
@@ -973,7 +973,7 @@
   },
   {
     "ea": "0x9A953A",
-    "line": "fstp    flt_BAA9C0",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix+20h",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -985,7 +985,7 @@
   },
   {
     "ea": "0x9A9543",
-    "line": "fstp    flt_BAA9C4",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix+24h",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -997,7 +997,7 @@
   },
   {
     "ea": "0x9A954C",
-    "line": "fstp    flt_BAA9C8",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix+28h",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -1021,7 +1021,7 @@
   },
   {
     "ea": "0x9A955C",
-    "line": "fstp    flt_BAA9A0",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -1033,7 +1033,7 @@
   },
   {
     "ea": "0x9A9565",
-    "line": "fstp    flt_BAA9A4",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix+4",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -1045,7 +1045,7 @@
   },
   {
     "ea": "0x9A956E",
-    "line": "fstp    flt_BAA9A8",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix+8",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -1057,7 +1057,7 @@
   },
   {
     "ea": "0x9A9577",
-    "line": "fstp    flt_BAA9AC",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix+0Ch",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -1069,7 +1069,7 @@
   },
   {
     "ea": "0x9A9580",
-    "line": "fstp    flt_BAA9B0",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix+10h",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -1081,7 +1081,7 @@
   },
   {
     "ea": "0x9A9589",
-    "line": "fstp    flt_BAA9B4",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix+14h",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -1093,7 +1093,7 @@
   },
   {
     "ea": "0x9A9592",
-    "line": "fstp    flt_BAA9B8",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix+18h",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -1105,7 +1105,7 @@
   },
   {
     "ea": "0x9A959B",
-    "line": "fstp    flt_BAA9BC",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix+1Ch",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -1117,7 +1117,7 @@
   },
   {
     "ea": "0x9A95A4",
-    "line": "fstp    flt_BAA9C0",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix+20h",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -1129,7 +1129,7 @@
   },
   {
     "ea": "0x9A95AD",
-    "line": "fstp    flt_BAA9C4",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix+24h",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -1141,7 +1141,7 @@
   },
   {
     "ea": "0x9A95B6",
-    "line": "fstp    flt_BAA9C8",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix+28h",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -1153,7 +1153,7 @@
   },
   {
     "ea": "0x9A95BF",
-    "line": "fstp    flt_BAA9CC",
+    "line": "fstp    g_NiD3DConstantMap_MappedMatrix+2Ch",
     "mnemonic": "fstp",
     "size": 6
   },

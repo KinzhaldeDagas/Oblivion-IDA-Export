@@ -1,1 +1,1 @@
-NiControllerManager
+struct NiControllerManager;

@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
+  "chunks": [
+    [
+      "0x41E4D0",
+      "0x41E54A"
+    ]
+  ],
+  "chunks_sha256": "ea2e08a61eb694624308d02f1215413429641f2ccadef5162b03b37e3c8200b3",
+  "comment_regular": "Asymmetric container-stack compatibility check (__thiscall, retn 4). Scans only 'other'. Returns true when the lists must remain distinct: other contains Script (0x12) or Ownership (0x27), this lacks a matching extra-data type, or that type's virtual CompareTo reports a difference. Count (0x2A) is deliberately ignored because callers merge counts separately. Returns false only when every relevant node in other is compatible.",
+  "comment_repeatable": "Asymmetric container-stack compatibility check (__thiscall, retn 4). Scans only 'other'. Returns true when the lists must remain distinct: other contains Script (0x12) or Ownership (0x27), this lacks a matching extra-data type, or that type's virtual CompareTo reports a difference. Count (0x2A) is deliberately ignored because callers merge counts separately. Returns false only when every relevant node in other is compatible.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
   "display_name": "ExtraDataList_CompareListForContainer",
-  "end_ea": "0x41E4F0",
-  "flags": 5120,
+  "end_ea": "0x41E54A",
+  "evidence_confidence": "Unknown",
+  "flags": 21504,
   "has_pseudocode": true,
   "name": "ExtraDataList_CompareListForContainer",
   "segment": ".text",
-  "sha256": "4f903fed7ff18f1acb255065b5a777713f5ee7c18db9efa38fcb6aa965dcb3b3",
-  "size": 32,
+  "sha256": "ea2e08a61eb694624308d02f1215413429641f2ccadef5162b03b37e3c8200b3",
+  "size": 122,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x41E4D0",
-  "type": "int __cdecl(int, int, int)",
-  "xrefs_from_count": 15,
+  "total_chunk_size": 122,
+  "type": "bool __thiscall(ExtraDataList *this, ExtraDataList *other)",
+  "xrefs_from_count": 60,
   "xrefs_to_count": 4
 }

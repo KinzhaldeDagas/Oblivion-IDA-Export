@@ -29,7 +29,7 @@
 0x5D9019: push    eax
 0x5D901A: call    edx
 0x5D901C: fmul    dword ptr ds:0B37FE0h
-0x5D9022: call    Double_To_SInt32
+0x5D9022: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5D9027: mov     ecx, [esp+8+arg_4]
 0x5D902B: mov     edx, ds:0B333C4h
 0x5D9031: mov     esi, eax
@@ -39,7 +39,7 @@
 0x5D903B: push    edx
 0x5D903C: call    eax
 0x5D903E: fmul    dword ptr ds:0B37FE0h
-0x5D9044: call    Double_To_SInt32
+0x5D9044: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5D9049: cmp     esi, eax
 0x5D904B: jge     short loc_5D9098
 0x5D904D: or      eax, 0FFFFFFFFh
@@ -54,7 +54,7 @@
 0x5D9064: add     ecx, 24h ; '$'
 0x5D9067: push    eax
 0x5D9068: call    edx
-0x5D906A: call    Double_To_SInt32
+0x5D906A: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5D906F: mov     ecx, [esp+8+arg_4]
 0x5D9073: mov     edx, ds:0B333C4h
 0x5D9079: mov     esi, eax
@@ -63,7 +63,7 @@
 0x5D9080: add     ecx, 24h ; '$'
 0x5D9083: push    edx
 0x5D9084: call    eax
-0x5D9086: call    Double_To_SInt32
+0x5D9086: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5D908B: cmp     esi, eax
 0x5D908D: jge     short loc_5D9098
 0x5D908F: or      eax, 0FFFFFFFFh

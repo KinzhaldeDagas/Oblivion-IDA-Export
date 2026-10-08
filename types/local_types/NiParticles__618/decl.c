@@ -1,1 +1,1 @@
-NiParticles
+struct NiParticles;

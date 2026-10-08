@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x5173A3",
-    "line": "push    offset stru_B36208.eventList; lpFrequency",
+    "line": "push    (offset dword_B361CC+44h); lpFrequency",
     "mnemonic": "push",
     "size": 5
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x51745B",
-    "line": "mov     eax, [esp+76Ch+arg_8]",
+    "line": "mov     eax, [esp+76Ch+arg_8]; Event run uses caller-provided ScriptEventList when available; otherwise it creates a temporary event list for this run.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x517471",
-    "line": "mov     [esi+8], eax",
+    "line": "mov     [esi+8], eax; Hot Reload OBSE decode: ScriptRunner::RunEventScript stores the effective ScriptEventList in runner->eventList here.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x51747B",
-    "line": "cmp     [ecx+10h], ebx",
+    "line": "cmp     [ecx+10h], ebx; For script-effect scripts, ensure eventList->m_scriptEffectInfo exists before storing event flags/delta.",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x5174A4",
-    "line": "mov     [ecx], dl",
+    "line": "mov     [ecx], dl; Store ScriptEffectStart boolean in low byte of m_scriptEffectInfo->scriptRefID.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x5174B3",
-    "line": "mov     [ecx+1], dl",
+    "line": "mov     [ecx+1], dl; Store ScriptEffectFinish boolean in second byte of m_scriptEffectInfo->scriptRefID.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -655,13 +655,13 @@
   },
   {
     "ea": "0x5174BC",
-    "line": "fstp    dword ptr [ecx+4]",
+    "line": "fstp    dword ptr [ecx+4]; Store ScriptEffectElapsedSeconds/update delta in m_scriptEffectInfo +4.",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5174BF",
-    "line": "xor     ebp, ebp",
+    "line": "xor     ebp, ebp; Hot Reload OBSE hook point: eventList is valid and bytecode execution has not started. Plugin rebuilds reloaded script event vars here, then restores xor ebp/cmp dataLength.",
     "mnemonic": "xor",
     "size": 2
   },
@@ -979,7 +979,7 @@
   },
   {
     "ea": "0x51754D",
-    "line": "call    CommandInfo_Execute?",
+    "line": "call    ScriptRunner_ExecuteCompiledInstruction; TES4 authoritative script instruction executor. Handles expression/control opcodes directly and dispatches ordinary CommandInfo execute callbacks for vanilla script commands.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1129,7 +1129,7 @@
   },
   {
     "ea": "0x5175A2",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1261,7 +1261,7 @@
   },
   {
     "ea": "0x5175F6",
-    "line": "lea     ecx, [esp+76Ch+var_720]; void *",
+    "line": "lea     ecx, [esp+76Ch+var_720]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1273,7 +1273,7 @@
   },
   {
     "ea": "0x517605",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1366,5 +1366,83 @@
     "line": "retn    20h ; ' '",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B7350",
+    "line": "lea     ecx, [ebp-720h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B7356",
+    "line": "jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B735B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B735F",
+    "line": "lea     eax, [edx-75Ch]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B7365",
+    "line": "mov     ecx, [edx-760h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B736B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B736D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7372",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B7375",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B7378",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B737A",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B737F",
+    "line": "mov     eax, offset stru_AE1F64",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7384",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

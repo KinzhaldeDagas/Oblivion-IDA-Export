@@ -196,12 +196,12 @@
 0x53F6DE: mov     ecx, edi
 0x53F6E0: call    eax
 0x53F6E2: mov     edx, [ebx]
-0x53F6E4: push    eax; Str2
+0x53F6E4: push    eax; right
 0x53F6E5: mov     eax, [edx+14h]
 0x53F6E8: mov     ecx, ebx
 0x53F6EA: call    eax
-0x53F6EC: push    eax; Str1
-0x53F6ED: call    __strcmp
+0x53F6EC: push    eax; left
+0x53F6ED: call    CRT_StricmpLocaleDispatch
 0x53F6F2: add     esp, 8
 0x53F6F5: test    eax, eax
 0x53F6F7: jnz     short loc_53F731
@@ -295,11 +295,11 @@
 0x53F7E4: fadd    [esp+30h+arg_0]
 0x53F7E8: fstp    dword ptr ds:0B2DAECh
 0x53F7EE: jz      short loc_53F855
-0x53F7F0: call    TESObjectREFR_GetParentCell
+0x53F7F0: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x53F7F5: test    eax, eax
 0x53F7F7: jz      short loc_53F855
 0x53F7F9: mov     ecx, ds:0B333C4h; this
-0x53F7FF: call    TESObjectREFR_GetParentCell
+0x53F7FF: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x53F804: movzx   ecx, byte ptr [eax+24h]
 0x53F808: shr     ecx, 1
 0x53F80A: test    cl, 1
@@ -314,7 +314,7 @@
 0x53F829: fld     dword ptr [eax+90h]
 0x53F82F: mov     ecx, ds:0B333C4h; this
 0x53F835: fstp    [esp+30h+var_8]
-0x53F839: call    TESObjectREFR_GetParentCell
+0x53F839: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x53F83E: mov     ecx, eax
 0x53F840: call    TESObjectCELL_GetWaterHeight
 0x53F845: fcomp   [esp+30h+var_8]
@@ -344,7 +344,6 @@
 0x53F889: mov     dword ptr [esp+30h+var_18+4], 0
 0x53F891: mov     edi, dword ptr [esp+30h+var_18+4]
 0x53F895: jmp     short loc_53F8A0
-0x53F897: align 10h
 0x53F8A0: mov     eax, [esp+30h+var_1C]
 0x53F8A4: mov     eax, [eax+4]
 0x53F8A7: movzx   ecx, word ptr [eax+0B6h]
@@ -360,12 +359,12 @@
 0x53F8C8: jz      loc_53F999
 0x53F8CE: push    4
 0x53F8D0: mov     ecx, esi
-0x53F8D2: call    NiNode_GetNiPropertyByID
+0x53F8D2: call    NiNode_GetNiPropertyByID;
 0x53F8D7: test    eax, eax
 0x53F8D9: jz      short loc_53F8A0
 0x53F8DB: push    4
 0x53F8DD: mov     ecx, esi
-0x53F8DF: call    NiNode_GetNiPropertyByID
+0x53F8DF: call    NiNode_GetNiPropertyByID;
 0x53F8E4: mov     edx, [eax]
 0x53F8E6: mov     ecx, eax
 0x53F8E8: mov     eax, [edx+54h]
@@ -378,7 +377,7 @@
 0x53F8F9: jz      short loc_53F8A0
 0x53F8FB: push    4
 0x53F8FD: mov     ecx, esi
-0x53F8FF: call    NiNode_GetNiPropertyByID
+0x53F8FF: call    NiNode_GetNiPropertyByID;
 0x53F904: mov     ebx, eax
 0x53F906: test    ebx, ebx
 0x53F908: jz      short loc_53F8A0
@@ -452,7 +451,6 @@
 0x53F9D2: jmp     short loc_53F9E0
 0x53F9D4: mov     edi, [esp+30h+var_C]
 0x53F9D8: jmp     short loc_53F9E0
-0x53F9DA: align 10h
 0x53F9E0: mov     ecx, [esp+30h+var_1C]
 0x53F9E4: mov     eax, [ecx+8]
 0x53F9E7: movzx   edx, word ptr [eax+0B6h]
@@ -468,12 +466,12 @@
 0x53FA08: jz      loc_53FAD9
 0x53FA0E: push    4
 0x53FA10: mov     ecx, esi
-0x53FA12: call    NiNode_GetNiPropertyByID
+0x53FA12: call    NiNode_GetNiPropertyByID;
 0x53FA17: test    eax, eax
 0x53FA19: jz      short loc_53F9E0
 0x53FA1B: push    4
 0x53FA1D: mov     ecx, esi
-0x53FA1F: call    NiNode_GetNiPropertyByID
+0x53FA1F: call    NiNode_GetNiPropertyByID;
 0x53FA24: mov     edx, [eax]
 0x53FA26: mov     ecx, eax
 0x53FA28: mov     eax, [edx+54h]
@@ -486,7 +484,7 @@
 0x53FA39: jz      short loc_53F9E0
 0x53FA3B: push    4
 0x53FA3D: mov     ecx, esi
-0x53FA3F: call    NiNode_GetNiPropertyByID
+0x53FA3F: call    NiNode_GetNiPropertyByID;
 0x53FA44: mov     ebx, eax
 0x53FA46: test    ebx, ebx
 0x53FA48: jz      short loc_53F9D4

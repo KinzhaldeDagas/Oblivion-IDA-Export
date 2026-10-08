@@ -1,1 +1,1 @@
-PNMLINK
+typedef tagNMLINK *PNMLINK;

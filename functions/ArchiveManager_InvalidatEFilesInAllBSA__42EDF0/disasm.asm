@@ -1,6 +1,6 @@
 0x42EDF0: sub     esp, 8
 0x42EDF3: push    ebx
-0x42EDF4: mov     ebx, ArchiveList
+0x42EDF4: mov     ebx, ds:0B338E0h
 0x42EDFA: test    ebx, ebx
 0x42EDFC: jz      short loc_42EE76
 0x42EDFE: push    ebp

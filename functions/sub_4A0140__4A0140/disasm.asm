@@ -12,7 +12,7 @@
 0x4A0159: test    eax, eax
 0x4A015B: jz      short loc_4A016E
 0x4A015D: lea     ecx, [ecx+0]
-0x4A0160: cmp     eax, offset dword_B42CEC
+0x4A0160: cmp     eax, offset stru_B42CEC
 0x4A0165: jz      short loc_4A019D
 0x4A0167: mov     eax, [eax+4]
 0x4A016A: test    eax, eax
@@ -27,7 +27,7 @@
 0x4A0181: mov     ecx, [esp+8+a2]
 0x4A0185: push    ecx; a2
 0x4A0186: mov     ecx, edi; this
-0x4A0188: call    NiNode__OnVisible
+0x4A0188: call    NiNode__OnVisible; Retail NiNode OnVisible entry; visible nonempty child arrays recurse through ordinary child traversal.
 0x4A018D: test    esi, esi
 0x4A018F: jz      short loc_4A0198
 0x4A0191: mov     byte ptr [esi+21E0h], 1

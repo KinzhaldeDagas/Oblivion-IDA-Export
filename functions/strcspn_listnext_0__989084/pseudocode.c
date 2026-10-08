@@ -1,15 +1,15 @@
-int __fastcall strcspn_::listnext_0(int a1, char *a2)
+int __usercall strcspn_::listnext_0@<eax>(char *a2@<edx>, int ebp0@<ebp>)
 {
-  char v2; // al
+  char v3; // al
   _UNKNOWN *retaddr; // [esp+0h] [ebp+0h] BYREF
 
-  while ( 1 )
+  while ( 1 ) /*0x989084*/
   {
-    v2 = *a2;
-    if ( !*a2 )
-      break;
-    ++a2;
-    _bittestandset((signed __int32 *)&retaddr, v2);
+    v3 = *a2; /*0x989084*/
+    if ( !*a2 ) /*0x989084*/
+      break; /*0x989084*/
+    ++a2; /*0x98908a*/
+    _bittestandset((signed __int32 *)&retaddr, v3); /*0x98908d*/
   }
-  return strcspn_::listdone_0();
+  return strcspn_::listdone_0(ebp0);
 }

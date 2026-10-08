@@ -5,7 +5,6 @@
 0x707D87: test    esi, esi
 0x707D89: jz      short loc_707DA4
 0x707D8B: jmp     short loc_707D90
-0x707D8D: align 10h
 0x707D90: mov     eax, [esi]
 0x707D92: mov     edx, [eax+5Ch]
 0x707D95: mov     ecx, esi

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x795AD0",
-    "line": "push    ebp",
+    "line": "push    ebp; OBLIVION AUTHORITY (2026-08-30): Exception-safe uninitialized copy of inner vector<unsigned short> owners. Deep-copy-constructs the destination range, destroys only its constructed prefix on unwind, and normally returns the constructed end at 0x795B5E; prior noreturn metadata was false.",
     "mnemonic": "push",
     "size": 1
   },
@@ -97,13 +97,13 @@
   },
   {
     "ea": "0x795AFB",
-    "line": "mov     esi, [ebp+arg_8]",
+    "line": "mov     esi, [ebp+destination]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x795AFE",
-    "line": "mov     edi, [ebp+arg_0]",
+    "line": "mov     edi, [ebp+first]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x795B10",
-    "line": "cmp     edi, [ebp+arg_4]",
+    "line": "cmp     edi, [ebp+last]",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x795B15",
-    "line": "mov     [ebp+arg_0], esi",
+    "line": "mov     [ebp+first], esi",
     "mnemonic": "mov",
     "size": 3
   },
@@ -175,19 +175,19 @@
   },
   {
     "ea": "0x795B23",
-    "line": "push    edi",
+    "line": "push    edi; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x795B24",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x795B26",
-    "line": "call    sub_795480",
+    "line": "call    OB_stVectorUShort_CopyCtor_010201A0; OBLIVION AUTHORITY (2026-08-30): Deep copy constructor for vector<unsigned short>; allocates exact source size and copies its 2-byte elements.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x795B31",
-    "line": "mov     [ebp+arg_8], esi",
+    "line": "mov     [ebp+destination], esi",
     "mnemonic": "mov",
     "size": 3
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x795B3C",
-    "line": "mov     edi, [ebp+arg_8]",
+    "line": "mov     edi, [ebp+destination]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x795B46",
-    "line": "push    esi",
+    "line": "push    esi; this",
     "mnemonic": "push",
     "size": 1
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x795B49",
-    "line": "call    sub_79BFF0",
+    "line": "call    OB_stVector4_DestroyStdcall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded stdcall destructor for a 0x10-byte vector owner. Frees and clears the pointer triplet. Calls from SFrondGuide destruction reflect its first-member vector layout; calls from vector<vector<float>> operate directly on inner float vectors.",
     "mnemonic": "call",
     "size": 5
   },
@@ -370,5 +370,89 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CBD90",
+    "line": "mov     eax, [ebp+first]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CBD93",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CBD94",
+    "line": "mov     ecx, [ebp+var_18]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CBD97",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CBD98",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CBD9D",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CBDA0",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CBDA1",
+    "line": "mov     edx, [esp-4+last]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CBDA5",
+    "line": "lea     eax, [edx+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CBDA8",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CBDAB",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CBDAD",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CBDB2",
+    "line": "mov     eax, offset stru_AF4D00",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CBDB7",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

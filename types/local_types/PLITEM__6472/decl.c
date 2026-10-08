@@ -1,1 +1,1 @@
-PLITEM
+typedef tagLITEM *PLITEM;

@@ -36,7 +36,7 @@
 0x6AC09E: mov     ecx, esi; this
 0x6AC0A0: call    sub_6B73E0
 0x6AC0A5: push    esi
-0x6AC0A6: call    FormHeapFree
+0x6AC0A6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6AC0AB: add     esp, 4
 0x6AC0AE: mov     ecx, [edi+300h]
 0x6AC0B4: cmp     ecx, ebp
@@ -55,25 +55,25 @@
 0x6AC0D6: jb      short loc_6AC0C6
 0x6AC0D8: xor     eax, eax
 0x6AC0DA: cmp     eax, ebp
-0x6AC0DC: mov     [esp+18h+var_C], eax
+0x6AC0DC: mov     [esp+18h+position], eax
 0x6AC0E0: jz      short loc_6AC11A
-0x6AC0E2: lea     eax, [esp+18h+var_8]
-0x6AC0E6: push    eax
-0x6AC0E7: lea     ecx, [esp+1Ch+var_4]
-0x6AC0EB: push    ecx
-0x6AC0EC: mov     ecx, [edi+300h]
-0x6AC0F2: lea     edx, [esp+20h+var_C]
-0x6AC0F6: push    edx
-0x6AC0F7: call    sub_452600
-0x6AC0FC: mov     esi, [esp+18h+var_8]
+0x6AC0E2: lea     eax, [esp+18h+valueOut]
+0x6AC0E6: push    eax; valueOut
+0x6AC0E7: lea     ecx, [esp+1Ch+keyOut]
+0x6AC0EB: push    ecx; keyOut
+0x6AC0EC: mov     ecx, [edi+300h]; self
+0x6AC0F2: lea     edx, [esp+20h+position]
+0x6AC0F6: push    edx; position
+0x6AC0F7: call    NiTMap_U32Pointer_GetNextEntry
+0x6AC0FC: mov     esi, [esp+18h+valueOut]
 0x6AC100: cmp     esi, ebp
 0x6AC102: jz      short loc_6AC114
 0x6AC104: mov     ecx, esi
 0x6AC106: call    sub_6B6700
 0x6AC10B: push    esi
-0x6AC10C: call    FormHeapFree
+0x6AC10C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6AC111: add     esp, 4
-0x6AC114: cmp     [esp+18h+var_C], ebp
+0x6AC114: cmp     [esp+18h+position], ebp
 0x6AC118: jnz     short loc_6AC0E2
 0x6AC11A: mov     ecx, [edi+300h]
 0x6AC120: cmp     ecx, ebp
@@ -139,7 +139,7 @@
 0x6AC1BC: mov     ecx, esi
 0x6AC1BE: call    eax
 0x6AC1C0: push    ebx
-0x6AC1C1: call    FormHeapFree
+0x6AC1C1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6AC1C6: add     esp, 4
 0x6AC1C9: mov     ecx, [edi+308h]
 0x6AC1CF: cmp     [ecx+0Ch], ebp
@@ -165,3 +165,5 @@
 0x6AC1FE: pop     edi
 0x6AC1FF: add     esp, 0Ch
 0x6AC202: jmp     loc_6AF870
+0x6AF870: mov     ecx, offset self
+0x6AF875: jmp     NiTMap_Clear

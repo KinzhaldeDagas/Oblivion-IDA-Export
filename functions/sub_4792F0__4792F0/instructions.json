@@ -133,13 +133,13 @@
   },
   {
     "ea": "0x479338",
-    "line": "lea     ecx, [esp+3Ch+var_28]",
+    "line": "lea     ecx, [esp+3Ch+var_28]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x47933C",
-    "line": "call    sub_478B90",
+    "line": "call    OB_NiCloningProcess_ctor",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x47939D",
-    "line": "push    offset dword_B35288",
+    "line": "push    0B35288h",
     "mnemonic": "push",
     "size": 5
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x4793EC",
-    "line": "lea     ecx, [esp+3Ch+arg_0]; this",
+    "line": "lea     ecx, [esp+3Ch+arg_0]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x4793F4",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x47940E",
-    "line": "lea     ecx, [esp+3Ch+arg_0]; this",
+    "line": "lea     ecx, [esp+3Ch+arg_0]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x479416",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -592,5 +592,71 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AF0B0",
+    "line": "lea     ecx, [ebp-28h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF0B3",
+    "line": "jmp     sub_4781A0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF0B8",
+    "line": "lea     ecx, [ebp+4]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF0BB",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF0C0",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AF0C4",
+    "line": "lea     eax, [edx-2Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF0C7",
+    "line": "mov     ecx, [edx-30h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF0CA",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AF0CC",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF0D1",
+    "line": "mov     eax, offset stru_ADB73C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF0D6",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

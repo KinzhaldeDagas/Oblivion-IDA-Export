@@ -1,4 +1,5 @@
-void __thiscall sub_5239C0(int *this)
+// Non-player base vampirism reconstruction: skips formID 7; scans NPC and race spell lists, selects spell-type 4 and VAMP effect code 0x504D4156, sums EffectItem magnitudes, converts to integer, sets base AV 0x45 via virtual+0x134. Supports identifying FaceGen bank selector 0x45 as vampirism, not sex.
+void __thiscall TESNPC_RecomputeBaseVampirismFromSpells(int *this)
 {
   int *v2; // edi
   int v3; // esi
@@ -15,79 +16,79 @@ void __thiscall sub_5239C0(int *this)
   int v14; // eax
   float v15; // [esp+4h] [ebp-8h]
 
-  if ( *(this + 3) != 7 )
+  if ( *(this + 3) != 7 ) /*0x5239ca*/
   {
-    v15 = 0.0;
-    v2 = this + 0x16;
-    if ( this != (int *)0xFFFFFFA8 )
+    v15 = 0.0; /*0x5239d4*/
+    v2 = this + 0x16; /*0x5239d8*/
+    if ( this != (int *)0xFFFFFFA8 ) /*0x5239dd*/
     {
-      do
+      do /*0x523a47*/
       {
-        if ( !v2[1] && !*v2 )
-          break;
-        v3 = *v2;
-        if ( *v2 )
+        if ( !v2[1] && !*v2 ) /*0x5239e6*/
+          break; /*0x5239e9*/
+        v3 = *v2; /*0x5239eb*/
+        if ( *v2 ) /*0x5239eb*/
         {
-          if ( (*(int (__thiscall **)(int))(*(_DWORD *)(v3 + 0x18) + 0x18))(v3 + 0x18) == 4 )
+          if ( (*(int (__thiscall **)(int))(*(_DWORD *)(v3 + 0x18) + 0x18))(v3 + 0x18) == 4 ) /*0x5239ff*/
           {
-            for ( i = v3 + 0x24; i; i = v6 - 4 )
+            for ( i = v3 + 0x24; i; i = v6 - 4 ) /*0x523a04*/
             {
-              if ( !*(_DWORD *)(i + 8) && !*(_DWORD *)(i + 4) )
-                break;
-              v5 = *(_DWORD **)(i + 4);
-              if ( v5 )
+              if ( !*(_DWORD *)(i + 8) && !*(_DWORD *)(i + 4) ) /*0x523a0c*/
+                break; /*0x523a10*/
+              v5 = *(_DWORD **)(i + 4); /*0x523a12*/
+              if ( v5 ) /*0x523a17*/
               {
-                if ( *v5 == 0x504D4156 )
-                  v15 = (double)EffectItem_GetMagnitude(v5) + v15;
+                if ( *v5 == 0x504D4156 ) /*0x523a1f*/
+                  v15 = (double)EffectItem_GetMagnitude(v5) + v15; /*0x523a32*/
               }
-              v6 = *(_DWORD *)(i + 8);
-              if ( !v6 )
-                break;
+              v6 = *(_DWORD *)(i + 8); /*0x523a36*/
+              if ( !v6 ) /*0x523a3b*/
+                break; /*0x523a3b*/
             }
           }
         }
-        v2 = (int *)v2[1];
+        v2 = (int *)v2[1]; /*0x523a42*/
       }
-      while ( v2 );
+      while ( v2 ); /*0x523a47*/
     }
-    v7 = *(this + 0x3A);
-    if ( v7 )
+    v7 = *(this + 0x3A); /*0x523a49*/
+    if ( v7 ) /*0x523a51*/
     {
-      v8 = (int *)(v7 + 0x30);
-      if ( v7 != 0xFFFFFFD0 )
+      v8 = (int *)(v7 + 0x30); /*0x523a53*/
+      if ( v7 != 0xFFFFFFD0 ) /*0x523a58*/
       {
-        do
+        do /*0x523ac7*/
         {
-          if ( !v8[1] && !*v8 )
-            break;
-          v9 = *v8;
-          if ( *v8 )
+          if ( !v8[1] && !*v8 ) /*0x523a66*/
+            break; /*0x523a69*/
+          v9 = *v8; /*0x523a6b*/
+          if ( *v8 ) /*0x523a6b*/
           {
-            if ( (*(int (__thiscall **)(int))(*(_DWORD *)(v9 + 0x18) + 0x18))(v9 + 0x18) == 4 )
+            if ( (*(int (__thiscall **)(int))(*(_DWORD *)(v9 + 0x18) + 0x18))(v9 + 0x18) == 4 ) /*0x523a7f*/
             {
-              for ( j = v9 + 0x24; j; j = v12 - 4 )
+              for ( j = v9 + 0x24; j; j = v12 - 4 ) /*0x523a84*/
               {
-                if ( !*(_DWORD *)(j + 8) && !*(_DWORD *)(j + 4) )
-                  break;
-                v11 = *(_DWORD **)(j + 4);
-                if ( v11 )
+                if ( !*(_DWORD *)(j + 8) && !*(_DWORD *)(j + 4) ) /*0x523a8c*/
+                  break; /*0x523a90*/
+                v11 = *(_DWORD **)(j + 4); /*0x523a92*/
+                if ( v11 ) /*0x523a97*/
                 {
-                  if ( *v11 == 0x504D4156 )
-                    v15 = (double)EffectItem_GetMagnitude(v11) + v15;
+                  if ( *v11 == 0x504D4156 ) /*0x523a9f*/
+                    v15 = (double)EffectItem_GetMagnitude(v11) + v15; /*0x523ab2*/
                 }
-                v12 = *(_DWORD *)(j + 8);
-                if ( !v12 )
-                  break;
+                v12 = *(_DWORD *)(j + 8); /*0x523ab6*/
+                if ( !v12 ) /*0x523abb*/
+                  break; /*0x523abb*/
               }
             }
           }
-          v8 = (int *)v8[1];
+          v8 = (int *)v8[1]; /*0x523ac2*/
         }
-        while ( v8 );
+        while ( v8 ); /*0x523ac7*/
       }
     }
-    v13 = *this;
-    v14 = Double_To_SInt32(v15);
-    (*(void (__thiscall **)(int *, int, int))(v13 + 0x134))(this, 0x45, v14);
+    v13 = *this; /*0x523acd*/
+    v14 = Double_To_SInt32(v15); /*0x523acf*/
+    (*(void (__thiscall **)(int *, int, int))(v13 + 0x134))(this, 0x45, v14); /*0x523adf*/
   }
 }

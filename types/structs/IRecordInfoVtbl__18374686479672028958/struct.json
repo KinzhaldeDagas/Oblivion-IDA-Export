@@ -1,124 +1,198 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "IRecordInfoVtbl",
+  "definition": "struct IRecordInfoVtbl\n{\nHRESULT_0 (*QueryInterface)(IRecordInfo_0 *, const IID *const, void **);\nULONG (*AddRef)(IRecordInfo_0 *);\nULONG (*Release)(IRecordInfo_0 *);\nHRESULT_0 (*RecordInit)(IRecordInfo_0 *, PVOID);\nHRESULT_0 (*RecordClear)(IRecordInfo_0 *, PVOID);\nHRESULT_0 (*RecordCopy)(IRecordInfo_0 *, PVOID, PVOID);\nHRESULT_0 (*GetGuid)(IRecordInfo_0 *, GUID *);\nHRESULT_0 (*GetName)(IRecordInfo_0 *, BSTR *);\nHRESULT_0 (*GetSize)(IRecordInfo_0 *, ULONG *);\nHRESULT_0 (*GetTypeInfo)(IRecordInfo_0 *, ITypeInfo_0 **);\nHRESULT_0 (*GetField)(IRecordInfo_0 *, PVOID, LPCOLESTR, VARIANT *);\nHRESULT_0 (*GetFieldNoCopy)(IRecordInfo_0 *, PVOID, LPCOLESTR, VARIANT *, PVOID *);\nHRESULT_0 (*PutField)(IRecordInfo_0 *, ULONG, PVOID, LPCOLESTR, VARIANT *);\nHRESULT_0 (*PutFieldNoCopy)(IRecordInfo_0 *, ULONG, PVOID, LPCOLESTR, VARIANT *);\nHRESULT_0 (*GetFieldNames)(IRecordInfo_0 *, ULONG *, BSTR *);\nBOOL (*IsMatchingType)(IRecordInfo_0 *, IRecordInfo_0 *);\nPVOID (*RecordCreate)(IRecordInfo_0 *);\nHRESULT_0 (*RecordCreateCopy)(IRecordInfo_0 *, PVOID, PVOID *);\nHRESULT_0 (*RecordDestroy)(IRecordInfo_0 *, PVOID);\n}\n",
   "id": 18374686479672028958,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QueryInterface",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IRecordInfo_0 *, const IID *const, void **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddRef",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(IRecordInfo_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Release",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(IRecordInfo_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RecordInit",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IRecordInfo_0 *, PVOID)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RecordClear",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IRecordInfo_0 *, PVOID)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RecordCopy",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IRecordInfo_0 *, PVOID, PVOID)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetGuid",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IRecordInfo_0 *, GUID *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetName",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IRecordInfo_0 *, BSTR *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetSize",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IRecordInfo_0 *, ULONG *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetTypeInfo",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IRecordInfo_0 *, ITypeInfo_0 **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetField",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IRecordInfo_0 *, PVOID, LPCOLESTR, VARIANT *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetFieldNoCopy",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IRecordInfo_0 *, PVOID, LPCOLESTR, VARIANT *, PVOID *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "PutField",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IRecordInfo_0 *, ULONG, PVOID, LPCOLESTR, VARIANT *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "PutFieldNoCopy",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IRecordInfo_0 *, ULONG, PVOID, LPCOLESTR, VARIANT *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetFieldNames",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IRecordInfo_0 *, ULONG *, BSTR *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IsMatchingType",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "BOOL (*)(IRecordInfo_0 *, IRecordInfo_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RecordCreate",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "PVOID (*)(IRecordInfo_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RecordCreateCopy",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IRecordInfo_0 *, PVOID, PVOID *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RecordDestroy",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IRecordInfo_0 *, PVOID)"
     }
   ],
   "name": "IRecordInfoVtbl",
+  "ordinal": 1932,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 76
 }

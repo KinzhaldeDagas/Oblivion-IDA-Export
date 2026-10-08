@@ -2,7 +2,7 @@
 0x677A01: push    edi
 0x677A02: mov     edi, ecx
 0x677A04: lea     ecx, [edi+68h]; this
-0x677A07: call    sub_7616D0
+0x677A07: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x677A0C: mov     esi, eax
 0x677A0E: test    esi, esi
 0x677A10: jz      short loc_677A3F
@@ -24,7 +24,7 @@
 0x677A3B: test    esi, esi
 0x677A3D: jnz     short loc_677A12
 0x677A3F: mov     ecx, edi; this
-0x677A41: call    sub_7616D0
+0x677A41: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x677A46: mov     esi, eax
 0x677A48: test    esi, esi
 0x677A4A: jz      short loc_677A7D

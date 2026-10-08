@@ -1,1 +1,7 @@
-types_clbk_flags
+enum types_clbk_flags : __int32
+{
+TYPE_CLBK_VA_LIST = 0x1,
+TYPE_CLBK_POSITIONAL = 0x2,
+TYPE_CLBK_ERROR_POS = 0x4,
+TYPE_CLBK_ERROR_TYPE = 0x8,
+};

@@ -1,9 +1,9 @@
-UInt32 __thiscall sub_5E0EA0(Actor *this, float a2)
+Creature *__thiscall sub_5E0EA0(Actor *this, float a2)
 {
-  UInt32 result; // eax
+  Creature *result; // eax
 
-  result = this->members.DeadState;
-  if ( !result || result == 4 )
-    return sub_65A450(this, a2);
-  return result;
+  result = (Creature *)this->members.DeadState; /*0x5e0ea0*/
+  if ( !result || result == (Creature *)4 ) /*0x5e0ead*/
+    return sub_65A450(this, a2); /*0x5e0eb7*/
+  return result; /*0x5e0ebc*/
 }

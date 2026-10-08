@@ -1,6 +1,6 @@
 0x7401C0: push    ebx
 0x7401C1: push    ebp
-0x7401C2: mov     bp, [esp+8+arg_0]
+0x7401C2: mov     bp, word ptr [esp+8+arg_0]
 0x7401C7: push    esi
 0x7401C8: mov     esi, ecx
 0x7401CA: cmp     bp, [esi+48h]
@@ -15,7 +15,7 @@
 0x7401E3: lea     edx, [esp+14h+arg_0]
 0x7401E7: push    edx
 0x7401E8: call    eax
-0x7401EA: mov     eax, dword ptr [esp+10h+arg_0]
+0x7401EA: mov     eax, [esp+10h+arg_0]
 0x7401EE: test    eax, eax
 0x7401F0: jz      short loc_740210
 0x7401F2: mov     edi, eax

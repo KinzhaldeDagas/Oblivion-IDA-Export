@@ -1,19 +1,32 @@
 {
-  "callees_count": 14,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x76BE00",
+      "0x76BEC1"
+    ]
+  ],
+  "chunks_sha256": "bd509d8c8259273a44406ab1168813cd698d291cbd95275f403b8b29c847d674",
+  "comment_regular": "Native NiDX9Renderer scene begin: restore a lost device if needed, flush prepacked geometry state, initialize shader/light state, call IDirect3DDevice9::BeginScene, and clean any stale pending-surface references.",
+  "comment_repeatable": "Native NiDX9Renderer scene begin: restore a lost device if needed, flush prepacked geometry state, initialize shader/light state, call IDirect3DDevice9::BeginScene, and clean any stale pending-surface references.\n\nDX11 concurrency audit 2026-09-24: inspected body calls 769030 prepack (its renderer/precache lock is released at 76933B) before D3D BeginScene at 76BE40. This body does not establish a renderer-lock lease spanning the subsequent scene; no whole-frame synchronization guarantee follows from prepack locking.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "NiRenderer_BeginScene_0",
+  "display_name": "NiDX9Renderer_BeginScene",
   "end_ea": "0x76BEC1",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "NiRenderer_BeginScene_0",
+  "name": "NiDX9Renderer_BeginScene",
   "segment": ".text",
   "sha256": "bd509d8c8259273a44406ab1168813cd698d291cbd95275f403b8b29c847d674",
   "size": 193,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x76BE00",
-  "type": "char __thiscall(NiDX9Renderer *this)",
+  "total_chunk_size": 193,
+  "type": "bool __thiscall(NiDX9Renderer *this)",
   "xrefs_from_count": 81,
   "xrefs_to_count": 1
 }

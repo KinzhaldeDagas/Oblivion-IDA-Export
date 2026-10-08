@@ -1,30 +1,30 @@
-NiTList_NiProperty *__thiscall sub_7EFDB0(BSShaderProperty *this, int a2, int a3, int a4, int a5)
+NiTList_NiProperty *__thiscall sub_7EFDB0(BSShaderProperty *this, void *vtable, int a3, int a4, int a5)
 {
-  int v6; // eax
-  int v7; // ebx
+  RenderPass_DecodedLayout *v6; // eax
+  RenderPass_DecodedLayout *v7; // ebx
   NiTList_Entry_NiProperty *v8; // eax
   NiTList_Entry_NiProperty *start; // ecx
 
-  if ( this->member.lastRenderPassState != a3 )
+  if ( this->member.lastRenderPassState != a3 ) /*0x7efddd*/
   {
-    sub_7E24C0(this);
-    v6 = FormHeapAlloc(0x10u);
-    if ( v6 )
-      v7 = sub_7E2370(v6, a2, 0x19B, 1, 0, 0);
+    BSShaderProperty_ClearRenderPassLists(this); /*0x7efde3*/
+    v6 = (RenderPass_DecodedLayout *)FormHeapAlloc(0x10u); /*0x7efdea*/
+    if ( v6 ) /*0x7efe00*/
+      v7 = RenderPass_Construct(v6, vtable, 0x19Bu, 1u, 0, 0); /*0x7efe1b*/
     else
-      v7 = 0;
-    v8 = (NiTList_Entry_NiProperty *)(*((int (__thiscall **)(void ***))this->member.passes.vtlb + 1))(&this->member.passes.vtlb);
-    v8->data = (NiProperty *)v7;
-    v8->prev = 0;
-    v8->next = this->member.passes.start;
-    start = this->member.passes.start;
-    if ( start )
-      start->prev = v8;
+      v7 = 0; /*0x7efe1f*/
+    v8 = (NiTList_Entry_NiProperty *)(*((int (__thiscall **)(NiTList_NiProperty *))this->member.passes.vtlb + 1))(&this->member.passes); /*0x7efe34*/
+    v8->data = (NiProperty *)v7; /*0x7efe36*/
+    v8->prev = 0; /*0x7efe39*/
+    v8->next = this->member.passes.start; /*0x7efe43*/
+    start = this->member.passes.start; /*0x7efe45*/
+    if ( start ) /*0x7efe4a*/
+      start->prev = v8; /*0x7efe4c*/
     else
-      this->member.passes.end = v8;
-    ++this->member.passes.numItems;
-    this->member.passes.start = v8;
-    this->member.lastRenderPassState = a3 | (LOWORD(dword_B42EAC) << 8);
+      this->member.passes.end = v8; /*0x7efe51*/
+    ++this->member.passes.numItems; /*0x7efe54*/
+    this->member.passes.start = v8; /*0x7efe58*/
+    this->member.lastRenderPassState = a3 | (*(unsigned __int16 *)&OB_RendererGlobalState_010201A0.pad_00D[6] << 8); /*0x7efe69*/
   }
-  return &this->member.passes;
+  return &this->member.passes; /*0x7efe6f*/
 }

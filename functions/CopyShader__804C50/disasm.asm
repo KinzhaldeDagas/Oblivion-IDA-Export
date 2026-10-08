@@ -1,4 +1,4 @@
-0x804C50: push    0FFFFFFFFh
+0x804C50: push    0FFFFFFFFh; MoonSugarEffect decode: CopyShader definition constructor pattern: allocate ShaderDefinition, create two-element screen-space declaration, allocate CopyShader object, load programs, build passes, refcount into definition.
 0x804C52: push    offset SEH_8122A0
 0x804C57: mov     eax, large fs:0
 0x804C5D: push    eax
@@ -23,11 +23,11 @@
 0x804C8E: call    ShaderDefinition__Init
 0x804C93: mov     edi, eax
 0x804C95: mov     eax, ds:0B43104h
-0x804C9A: push    1; StreamCount
-0x804C9C: push    2; a2
-0x804C9E: push    eax; a1
+0x804C9A: push    1; streamCount
+0x804C9C: push    2; elementCount
+0x804C9E: push    eax; renderer
 0x804C9F: mov     [esp+2Ch+var_4], 0FFFFFFFFh
-0x804CA7: call    CreateDX9ShaderDeclaration
+0x804CA7: call    CreateDX9ShaderDeclaration; Oblivion NiDX9 declaration factory. Allocates a 0x38-byte NiDX9ShaderDeclaration and initializes elementCount internal element records for each streamCount stream.
 0x804CAC: mov     esi, [edi]
 0x804CAE: mov     ebx, eax
 0x804CB0: add     esp, 0Ch
@@ -80,7 +80,7 @@
 0x804D1A: test    eax, eax
 0x804D1C: jz      short loc_804D2E
 0x804D1E: mov     edi, edi
-0x804D20: cmp     eax, offset dword_B3F684
+0x804D20: cmp     eax, offset stru_B3F684
 0x804D25: jz      short loc_804D2E
 0x804D27: mov     eax, [eax+4]
 0x804D2A: test    eax, eax
@@ -93,7 +93,7 @@
 0x804D41: mov     [esp+20h+var_4], 1
 0x804D49: jz      short loc_804D56
 0x804D4B: mov     ecx, eax; this
-0x804D4D: call    ??0CopyShader@@QAE@XZ; CopyShader::CopyShader(void)
+0x804D4D: call    ??0CopyShader@@QAE@XZ; MoonSugarEffect decode: CopyShader ctor derives from BSImageSpaceShader, owns 2 vertex programs at +0x90, 3 pixel programs at +0x98, and mode/variant field +0xA4.
 0x804D52: mov     esi, eax
 0x804D54: jmp     short loc_804D58
 0x804D56: xor     esi, esi
@@ -146,3 +146,20 @@
 0x804DD5: pop     ebx
 0x804DD6: add     esp, 10h
 0x804DD9: retn
+0x9D0CA0: mov     eax, [ebp-10h]
+0x9D0CA3: push    eax
+0x9D0CA4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D0CA9: pop     ecx
+0x9D0CAA: retn
+0x9D0CAB: mov     eax, [ebp-10h]
+0x9D0CAE: push    eax
+0x9D0CAF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D0CB4: pop     ecx
+0x9D0CB5: retn
+0x9D0CB6: mov     edx, [esp+arg_4]
+0x9D0CBA: lea     eax, [edx-10h]
+0x9D0CBD: mov     ecx, [edx-14h]
+0x9D0CC0: xor     ecx, eax
+0x9D0CC2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D0CC7: mov     eax, offset stru_AF94E0
+0x9D0CCC: jmp     ___CxxFrameHandler3

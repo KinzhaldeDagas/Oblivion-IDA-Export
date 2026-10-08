@@ -4,9 +4,9 @@
 0x760243: mov     esi, ecx
 0x760245: mov     eax, [esi+30h]
 0x760248: push    edi
-0x760249: push    eax
+0x760249: push    eax; group
 0x76024A: mov     dword ptr [esi], offset ??_7NiD3DPass@@6B@; const NiD3DPass::`vftable'
-0x760250: call    sub_772E30
+0x760250: call    NiD3DRenderStateGroup_ReleaseToPool;
 0x760255: mov     edi, [esi+34h]
 0x760258: mov     ebp, ds:0A2807Ch
 0x76025E: xor     ebx, ebx
@@ -28,13 +28,13 @@
 0x76027F: mov     [esi+34h], ebx
 0x760282: mov     ecx, [esi+38h]
 0x760285: push    ecx
-0x760286: call    FormHeapFree
+0x760286: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x76028B: mov     edx, [esi+3Ch]
 0x76028E: push    edx
-0x76028F: call    FormHeapFree
+0x76028F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x760294: mov     eax, [esi+40h]
 0x760297: push    eax
-0x760298: call    FormHeapFree
+0x760298: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x76029D: mov     edi, [esi+44h]
 0x7602A0: add     esp, 0Ch
 0x7602A3: cmp     edi, ebx
@@ -70,13 +70,13 @@
 0x7602E1: mov     [esi+48h], ebx
 0x7602E4: mov     ecx, [esi+4Ch]
 0x7602E7: push    ecx
-0x7602E8: call    FormHeapFree
+0x7602E8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7602ED: mov     edx, [esi+50h]
 0x7602F0: push    edx
-0x7602F1: call    FormHeapFree
+0x7602F1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7602F6: mov     eax, [esi+54h]
 0x7602F9: push    eax
-0x7602FA: call    FormHeapFree
+0x7602FA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7602FF: mov     edi, [esi+58h]
 0x760302: add     esp, 0Ch
 0x760305: cmp     edi, ebx

@@ -26,7 +26,7 @@
 0x536E8A: mov     esi, [esp+14h+var_4]
 0x536E8E: push    edi
 0x536E8F: mov     [edi+10h], ebp
-0x536E92: call    FormHeapFree
+0x536E92: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x536E97: add     esp, 4
 0x536E9A: cmp     ebx, ebp
 0x536E9C: mov     edi, ebx
@@ -37,10 +37,9 @@
 0x536EA6: mov     [esi+18h], ebp
 0x536EA9: jz      short loc_536ECE
 0x536EAB: jmp     short loc_536EB0
-0x536EAD: align 10h
 0x536EB0: mov     esi, [eax+4]
 0x536EB3: push    eax
-0x536EB4: call    FormHeapFree
+0x536EB4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x536EB9: add     esp, 4
 0x536EBC: cmp     esi, ebp
 0x536EBE: mov     eax, esi

@@ -27,7 +27,7 @@
 0x7DC9F0: call    ArrayConstructor
 0x7DC9F5: mov     [esi+0BCh], ebx
 0x7DC9FB: mov     [esi+0C0h], ebx
-0x7DCA01: push    offset sub_7016A0; a5
+0x7DCA01: push    offset NiPointerSlot_Release; a5
 0x7DCA06: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x7DCA0B: push    10h; size
 0x7DCA0D: push    4; a2
@@ -152,3 +152,49 @@
 0x7DCBA7: pop     ebx
 0x7DCBA8: add     esp, 20h
 0x7DCBAB: retn
+0x9CF110: mov     ecx, [ebp-20h]; this
+0x9CF113: jmp     ??1BSShader@@UAE@XZ;
+0x9CF118: push    offset sub_4027D0; void (__thiscall *)(void *)
+0x9CF11D: push    10h; int
+0x9CF11F: push    4; unsigned int
+0x9CF121: mov     eax, [ebp-20h]
+0x9CF124: add     eax, 7Ch ; '|'
+0x9CF127: push    eax; void *
+0x9CF128: call    $LN21
+0x9CF12D: retn
+0x9CF12E: mov     ecx, [ebp-20h]
+0x9CF131: add     ecx, 0BCh ; '¼'; slot
+0x9CF137: jmp     NiPointerSlot_Release
+0x9CF13C: mov     ecx, [ebp-20h]
+0x9CF13F: add     ecx, 0C0h ; 'À'; slot
+0x9CF145: jmp     NiPointerSlot_Release
+0x9CF14A: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9CF14F: push    10h; int
+0x9CF151: push    4; unsigned int
+0x9CF153: mov     eax, [ebp-20h]
+0x9CF156: add     eax, 0C4h ; 'Ä'
+0x9CF15B: push    eax; void *
+0x9CF15C: call    $LN21
+0x9CF161: retn
+0x9CF162: mov     ecx, [ebp-20h]
+0x9CF165: add     ecx, 104h; slot
+0x9CF16B: jmp     NiPointerSlot_Release
+0x9CF170: mov     ecx, [ebp-20h]
+0x9CF173: add     ecx, 108h; slot
+0x9CF179: jmp     NiPointerSlot_Release
+0x9CF17E: mov     ecx, [ebp-20h]
+0x9CF181: add     ecx, 10Ch; slot
+0x9CF187: jmp     NiPointerSlot_Release
+0x9CF18C: mov     ecx, [ebp-20h]
+0x9CF18F: add     ecx, 110h; slot
+0x9CF195: jmp     NiPointerSlot_Release
+0x9CF19A: mov     ecx, [ebp-20h]
+0x9CF19D: add     ecx, 114h; slot
+0x9CF1A3: jmp     NiPointerSlot_Release
+0x9CF1A8: mov     edx, [esp+arg_4]
+0x9CF1AC: lea     eax, [edx-24h]
+0x9CF1AF: mov     ecx, [edx-28h]
+0x9CF1B2: xor     ecx, eax
+0x9CF1B4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CF1B9: mov     eax, offset stru_AF7E5C
+0x9CF1BE: jmp     ___CxxFrameHandler3

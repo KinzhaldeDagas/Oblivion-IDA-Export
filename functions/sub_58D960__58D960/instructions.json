@@ -19,13 +19,13 @@
   },
   {
     "ea": "0x58D966",
-    "line": "push    esi",
+    "line": "push    esi; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58D967",
-    "line": "call    sub_583D50",
+    "line": "call    InterfaceManager__GetTimerPercent; Verified: searches timer by owner/index; missing timer returns 1; positive duration returns elapsed/duration clamped to [0,1]. Consumed by menu fade processing and Tile animation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x58D979",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x58D97E",
-    "line": "push    eax",
+    "line": "push    eax; trait",
     "mnemonic": "push",
     "size": 1
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x58D98A",
-    "line": "call    Tile_GetPropertyByCode?",
+    "line": "call    Tile__GetOrCreateValue; Verified: sorted trait lookup; if absent allocates 0x1C bytes, constructs Value at 0x589DF0, stores owner Tile at +0 and inserts into Tile value list. Corrects misleading existing-property-only interpretation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -121,19 +121,19 @@
   },
   {
     "ea": "0x58D998",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x58D99A",
-    "line": "fstp    [esp+10h+var_10]; float",
+    "line": "fstp    [esp+10h+value]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x58D99D",
-    "line": "call    Tile_Property_SetFloatValue?",
+    "line": "call    Tile__Value__SetFloat; Verified: marks numeric; if changed or string trait 0xFDE, clears string, stores number, clears own expression actions via 0x588930, then CalculateValue(this,true). Same-value ordinary traits bypass clear/evaluation. Unlike Fallout SetFloat, no abClearActions parameter.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x58D9BE",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -205,13 +205,13 @@
   },
   {
     "ea": "0x58D9C4",
-    "line": "push    eax",
+    "line": "push    eax; trait",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58D9C5",
-    "line": "call    Tile_GetPropertyByCode?",
+    "line": "call    Tile__GetOrCreateValue; Verified: sorted trait lookup; if absent allocates 0x1C bytes, constructs Value at 0x589DF0, stores owner Tile at +0 and inserts into Tile value list. Corrects misleading existing-property-only interpretation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,19 +241,19 @@
   },
   {
     "ea": "0x58D9D3",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x58D9D5",
-    "line": "fstp    [esp+10h+var_10]; float",
+    "line": "fstp    [esp+10h+value]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x58D9D8",
-    "line": "call    Tile_Property_SetFloatValue?",
+    "line": "call    Tile__Value__SetFloat; Verified: marks numeric; if changed or string trait 0xFDE, clears string, stores number, clears own expression actions via 0x588930, then CalculateValue(this,true). Same-value ordinary traits bypass clear/evaluation. Unlike Fallout SetFloat, no abClearActions parameter.",
     "mnemonic": "call",
     "size": 5
   },

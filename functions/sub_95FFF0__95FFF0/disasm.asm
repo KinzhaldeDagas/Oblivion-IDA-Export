@@ -2,7 +2,7 @@
 0x95FFF1: push    ebp
 0x95FFF2: push    esi
 0x95FFF3: push    edi
-0x95FFF4: mov     edi, dword ptr [esp+10h+ArgList]
+0x95FFF4: mov     edi, [esp+10h+ArgList]
 0x95FFF8: mov     eax, edi
 0x95FFFA: mov     ebp, ecx
 0x95FFFC: lea     edx, [eax+1]
@@ -19,7 +19,7 @@
 0x960015: push    offset aSUnion_bv; "%s = UNION_BV"
 0x96001A: push    esi; SizeInBytes
 0x96001B: push    eax; DstBuf
-0x96001C: mov     dword ptr [esp+24h+ArgList], eax
+0x96001C: mov     [esp+24h+ArgList], eax
 0x960020: call    sub_6C5D40
 0x960025: mov     ebx, [esp+24h+arg_4]
 0x960029: movzx   esi, word ptr [ebx+0Ah]
@@ -41,7 +41,6 @@
 0x960055: cmp     [ebp+0Eh], si
 0x960059: jbe     short loc_9600A0
 0x96005B: jmp     short loc_960060
-0x96005D: align 10h
 0x960060: push    0Dh; Size
 0x960062: call    FormHeapAlloc
 0x960067: push    esi; ArgList

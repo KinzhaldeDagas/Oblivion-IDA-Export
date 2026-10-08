@@ -1,4 +1,4 @@
-0x472EA0: cmp     dword ptr [ecx+0D0h], 0
+0x472EA0: cmp     dword ptr [ecx+0D0h], 0; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.
 0x472EA7: jz      short loc_472EAC
 0x472EA9: xor     al, al
 0x472EAB: retn

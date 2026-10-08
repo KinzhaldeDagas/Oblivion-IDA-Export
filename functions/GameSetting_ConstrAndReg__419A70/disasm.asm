@@ -1,4 +1,4 @@
-0x419A70: push    0FFFFFFFFh
+0x419A70: push    0FFFFFFFFh; Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.
 0x419A72: push    offset SEH_404850
 0x419A77: mov     eax, large fs:0
 0x419A7D: push    eax
@@ -11,17 +11,17 @@
 0x419A8C: mov     large fs:0, eax
 0x419A92: mov     esi, ecx
 0x419A94: mov     [esp+18h+var_10], esi
-0x419A98: mov     eax, [esp+18h+arg_0]
-0x419A9C: mov     ecx, [esp+18h+arg_4]
+0x419A98: mov     eax, [esp+18h+name]
+0x419A9C: mov     ecx, [esp+18h+defaultValue]
 0x419AA0: mov     [esi+4], eax
 0x419AA3: mov     [esi], ecx
 0x419AA5: test    eax, eax
 0x419AA7: mov     [esp+18h+var_4], 0
 0x419AAF: jz      short loc_419AFA
-0x419AB1: lea     edx, [esp+18h+arg_0]
+0x419AB1: lea     edx, [esp+18h+name]
 0x419AB5: push    edx
 0x419AB6: push    eax
-0x419AB7: mov     ecx, offset dword_B35574
+0x419AB7: mov     ecx, offset g_GameSettingsByName
 0x419ABC: call    NiTMap_GetAt
 0x419AC1: test    al, al
 0x419AC3: jz      short loc_419AEB
@@ -40,7 +40,7 @@
 0x419AEB: mov     ecx, [esi+4]
 0x419AEE: push    esi
 0x419AEF: push    ecx
-0x419AF0: mov     ecx, offset dword_B35574
+0x419AF0: mov     ecx, offset g_GameSettingsByName
 0x419AF5: call    sub_412D30
 0x419AFA: mov     eax, esi
 0x419AFC: mov     ecx, [esp+18h+var_C]
@@ -49,3 +49,12 @@
 0x419B08: pop     esi
 0x419B09: add     esp, 10h
 0x419B0C: retn    8
+0x9AB570: mov     ecx, [ebp-10h]
+0x9AB573: jmp     loc_403BC0
+0x9AB578: mov     edx, [esp+arg_4]
+0x9AB57C: lea     eax, [edx-8]
+0x9AB57F: mov     ecx, [edx-0Ch]
+0x9AB582: xor     ecx, eax
+0x9AB584: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AB589: mov     eax, offset stru_AD8444
+0x9AB58E: jmp     ___CxxFrameHandler3

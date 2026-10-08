@@ -1,5 +1,5 @@
 int sub_9F1AA0()
 {
-  GameSetting_ConstrAndReg(&dword_B38990, (int)"sDuplicateName", (int)"A spell with this name already exists.");
-  return atexit(sub_A21A40);
+  GameSetting_ConstrAndReg(&stru_B38990, "sDuplicateName", "A spell with this name already exists."); /*0x9f1aaf*/
+  return atexit(sub_A21A40); /*0x9f1abf*/
 }

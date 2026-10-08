@@ -1,1 +1,1 @@
-ISynchronizeHandleVtbl_0
+typedef ISynchronizeHandleVtbl ISynchronizeHandleVtbl_0;

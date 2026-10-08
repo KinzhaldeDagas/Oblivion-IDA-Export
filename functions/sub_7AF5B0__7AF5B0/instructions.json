@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7AF5B0",
-    "line": "sub     esp, 18h",
+    "line": "sub     esp, 18h; MoonSugarEffect decode: viewport-aware image-space shader render helper; computes source/default target ratios, binds source texture, starts target/default with kClear_BACKBUFFER, SetupScreenSpaceCamera(viewport), draws quad, then pops RT stack.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -859,7 +859,7 @@
   },
   {
     "ea": "0x7AF756",
-    "line": "call    sub_802890",
+    "line": "call    sub_802890; MoonSugarEffect decode: stores source BSRenderedTexture in BSImageSpaceShader +0x7C with refcounting; render pass then samples this as primary scene texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -889,7 +889,7 @@
   },
   {
     "ea": "0x7AF765",
-    "line": "call    BSRenderedTexture__UseTextureToRender",
+    "line": "call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -943,7 +943,7 @@
   },
   {
     "ea": "0x7AF780",
-    "line": "call    StartUsingRenderTarget",
+    "line": "call    NiRenderer_PushAndBeginRenderTargetGroup; Begin a render-target-group stack entry: resolve null to the default group, end any currently ready group, begin the requested group, then strong-own it on the ten-entry global stack.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1045,13 +1045,13 @@
   },
   {
     "ea": "0x7AF7C1",
-    "line": "call    sub_709C60",
+    "line": "call    sub_709C60; MoonSugarEffect decode: NiScreenElements render thunk. Callers push NiDX9Renderer on the stack, then this thunk jumps to object vtable +0x84.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7AF7C6",
-    "line": "call    sub_7D7110",
+    "line": "call    NiRenderer_PopRenderTargetGroupAndRestore; Pop the current render-target group, then resume the preceding stack entry (or the default group) with kClear_NONE.",
     "mnemonic": "call",
     "size": 5
   },

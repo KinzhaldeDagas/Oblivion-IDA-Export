@@ -22,15 +22,15 @@ void __userpurge def_953F05(
         int a21,
         char a22)
 {
-  sub_8BBFB0((int)&a19, a1, &a22, 0x200u, 1);
-  sub_8BBDB0(&a19, "Unknown class member found during write of data.");
-  (*(void (__thiscall **)(int, int, int, char *, const char *, int))(*(_DWORD *)dword_BA7FB0 + 8))(
-    dword_BA7FB0,
+  sub_8BBFB0((int)&a19, a1, &a22, 0x200u, 1); /*0x95459c*/
+  sub_8BBDB0(&a19, "Unknown class member found during write of data."); /*0x9545aa*/
+  (*(void (__thiscall **)(int, int, int, char *, const char *, int))(*(_DWORD *)unk_BA7FB0 + 8))( /*0x9545cd*/
+    unk_BA7FB0,
     3,
     0x641E3E05,
     &a22,
     ".\\copier\\hkObjectCopier.cpp",
     0x26C);
-  sub_8BC000(&a19);
-  JUMPOUT(0x954000);
+  sub_8BC000(&a19); /*0x9545d4*/
+  JUMPOUT(0x954000); /*0x954000*/
 }

@@ -1,18 +1,31 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7D3370",
+      "0x7D33FF"
+    ]
+  ],
+  "chunks_sha256": "0856546925b3054314f1f7273387fd0a047b04fd76ab955a6ce4266f18e17677",
+  "comment_regular": "Set per-source projected-light mode at +0xF4. A mode change may discard/release shadow map +0x114; this selector is not actor-only.",
+  "comment_repeatable": "Set per-source projected-light mode at +0xF4. A mode change may discard/release shadow map +0x114; this selector is not actor-only.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7D3370",
+  "display_name": "ShadowSceneLight_SetPerSourceProjectorMode",
   "end_ea": "0x7D33FF",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7D3370",
+  "name": "ShadowSceneLight_SetPerSourceProjectorMode",
   "segment": ".text",
   "sha256": "0856546925b3054314f1f7273387fd0a047b04fd76ab955a6ce4266f18e17677",
   "size": 143,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7D3370",
+  "total_chunk_size": 143,
   "type": "void __thiscall(int this, char)",
   "xrefs_from_count": 54,
   "xrefs_to_count": 3

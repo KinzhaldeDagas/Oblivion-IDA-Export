@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 7,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_437050",
+  "chunks": [
+    [
+      "0x437050",
+      "0x43710E"
+    ],
+    [
+      "0x9AC3C0",
+      "0x9AC3FB"
+    ]
+  ],
+  "chunks_sha256": "4f2f69e0252ee7dccfc6795d1b0e4cff6cb3ead6e69e87c4c04e1fad633d4ede",
+  "comment_regular": "Verified base initializer for QueuedTexture: initializes IOTask fields, stores normalized path and resolves archive/file entry via HashFilePath + ArchiveManager_LazyFileLookup.",
+  "comment_repeatable": "Verified base initializer for QueuedTexture: initializes IOTask fields, stores normalized path and resolves archive/file entry via HashFilePath + ArchiveManager_LazyFileLookup.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
+  "display_name": "QueuedTexture_ctor",
   "end_ea": "0x43710E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_437050",
+  "name": "QueuedTexture_ctor",
   "segment": ".text",
   "sha256": "f897d4d7728526bff09db5d2283eab99064c7424f70867905c934e2293865694",
   "size": 190,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x437050",
-  "type": "IOTask *__thiscall(IOTask *this, const char *arg0, unsigned __int8)",
-  "xrefs_from_count": 73,
+  "total_chunk_size": 249,
+  "type": "QueuedTexture *__thiscall(QueuedTexture *this, const char *path, unsigned __int8 taskType)",
+  "xrefs_from_count": 92,
   "xrefs_to_count": 2
 }

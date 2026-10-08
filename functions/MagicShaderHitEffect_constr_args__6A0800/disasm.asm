@@ -14,8 +14,8 @@
 0x6A081F: mov     large fs:0, eax
 0x6A0825: mov     esi, ecx
 0x6A0827: mov     [esp+24h+var_10], esi
-0x6A082B: mov     edi, [esp+24h+arg_4]
-0x6A082F: mov     eax, [esp+24h+arg_0]
+0x6A082B: mov     edi, [esp+24h+ownerActiveEffect]
+0x6A082F: mov     eax, [esp+24h+targetReference]
 0x6A0833: push    edi
 0x6A0834: push    eax
 0x6A0835: call    MagicHitEffect_constr_args
@@ -25,13 +25,13 @@
 0x6A0846: mov     [esi+3Ch], ebx
 0x6A0849: mov     [esi+40h], ebx
 0x6A084C: mov     [esi+48h], ebx
-0x6A084F: mov     [esi+34h], ebx
-0x6A0852: mov     ecx, [edi+8]
-0x6A0855: push    ebx
+0x6A084F: mov     [esi+34h], ebx; Verified (Oblivion): the owner-based constructor sets effectShader_34 from EffectSetting::effectShader at +0x78. EffectSetting_LinkForm resolves that field as TESEffectShader* using Oblivion RTTI, and the shader effect update compares it with Magic_GetLifeDetectedShader.
+0x6A0852: mov     ecx, [edi+8]; magicItem
+0x6A0855: push    ebx; effectIndex
 0x6A0856: mov     byte ptr [esp+28h+var_4], 3
-0x6A085B: call    MagicItem_GetFXEffect
+0x6A085B: call    MagicItem_GetFXEffect; Verified (Oblivion): MagicItem_GetFXEffect returns the effect's EffectSetting pointer; MagicShaderHitEffect constructors/PostLink dereference its +0x78 EffectSetting::effectShader field.
 0x6A0860: fldz
-0x6A0862: mov     ecx, [eax+78h]
+0x6A0862: mov     ecx, [eax+78h]; Verified (Oblivion): owner-based shader constructor obtains EffectSetting from MagicItem_GetFXEffect and copies its typed TESEffectShader* effectShader field (+0x78) into effectShader_34.
 0x6A0865: fstp    dword ptr [esi+38h]
 0x6A0868: mov     ebp, ds:0A2807Ch
 0x6A086E: mov     [esi+34h], ecx
@@ -84,22 +84,22 @@
 0x6A08D2: call    eax
 0x6A08D4: mov     [esi+40h], ebx
 0x6A08D7: mov     ecx, [esi+18h]
-0x6A08DA: mov     [esi+28h], bl
+0x6A08DA: mov     [esi+28h], bl; Verified (Oblivion): ordinary owner-based shader effects initialize bWeaponEnchantment_28 to false; Process_UpdateWeaponEnchantmentShader sets it to true only for effects created from an equipped item's enchantment shader.
 0x6A08DD: mov     edx, [ecx+0Ch]
 0x6A08E0: mov     eax, [edx+1Ch]
 0x6A08E3: mov     ecx, [eax+98h]
-0x6A08E9: mov     [esi+2Ch], ecx
+0x6A08E9: mov     [esi+2Ch], ecx; Verified (Oblivion): effectCode_2C is copied from EffectSetting::effectCode at +0x98. The DIAR and DIWE values are each mapped by startup factory registrations to DisintegrateArmorEffect_Make and DisintegrateWeaponEffect_Make respectively.
 0x6A08EC: mov     [esi+30h], ebx
-0x6A08EF: mov     ecx, ds:0B333C4h
+0x6A08EF: mov     ecx, ds:0B333C4h; this
 0x6A08F5: cmp     [esi+1Ch], ecx
 0x6A08F8: jnz     short loc_6A0927
-0x6A08FA: push    ebx
-0x6A08FB: call    PlayerCharacter_GetPlayerNode
+0x6A08FA: push    ebx; Verified (Oblivion): perspectiveState_44 is set only for the player based on the selected node's flag bit; the visual-target helper later uses it to select actor skin/node perspective.
+0x6A08FB: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x6A0900: test    eax, eax
 0x6A0902: jz      short loc_6A0920
-0x6A0904: mov     ecx, ds:0B333C4h
-0x6A090A: push    ebx
-0x6A090B: call    PlayerCharacter_GetPlayerNode
+0x6A0904: mov     ecx, ds:0B333C4h; this
+0x6A090A: push    ebx; firstPerson
+0x6A090B: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x6A0910: test    byte ptr [eax+18h], 1
 0x6A0914: jnz     short loc_6A0920
 0x6A0916: mov     eax, 1
@@ -136,3 +136,21 @@
 0x6A096D: pop     ebx
 0x6A096E: add     esp, 10h
 0x6A0971: retn    8
+0x9C5ED0: mov     ecx, [ebp-10h]
+0x9C5ED3: jmp     MagicHitEffect_destr
+0x9C5ED8: mov     ecx, [ebp-10h]
+0x9C5EDB: add     ecx, 3Ch ; '<'; slot
+0x9C5EDE: jmp     NiPointerSlot_Release
+0x9C5EE3: mov     ecx, [ebp-10h]
+0x9C5EE6: add     ecx, 40h ; '@'; slot
+0x9C5EE9: jmp     NiPointerSlot_Release
+0x9C5EEE: mov     ecx, [ebp-10h]
+0x9C5EF1: add     ecx, 48h ; 'H'; slot
+0x9C5EF4: jmp     NiPointerSlot_Release
+0x9C5EF9: mov     edx, [esp+arg_4]
+0x9C5EFD: lea     eax, [edx-14h]
+0x9C5F00: mov     ecx, [edx-18h]
+0x9C5F03: xor     ecx, eax
+0x9C5F05: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5F0A: mov     eax, offset stru_AEE584
+0x9C5F0F: jmp     ___CxxFrameHandler3

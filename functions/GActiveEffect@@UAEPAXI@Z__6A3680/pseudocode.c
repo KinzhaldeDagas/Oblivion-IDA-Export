@@ -1,7 +1,8 @@
-ActiveEffect *__thiscall ActiveEffect::`scalar deleting destructor'(ActiveEffect *this, char a2)
+// Verified scalar deleting destructor invokes ActiveEffect::~ActiveEffect and FormHeapFree(this) only when freeMemory bit 0 is set.
+ActiveEffect *__thiscall ActiveEffect_ScalarDeletingDestructor(ActiveEffect *this, bool freeMemory)
 {
-  ActiveEffect::~ActiveEffect(this);
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  ActiveEffect::~ActiveEffect(this); /*0x6a3683*/
+  if ( freeMemory ) /*0x6a3688*/
+    FormHeapFree((unsigned int)this); /*0x6a3690*/
+  return this; /*0x6a369a*/
 }

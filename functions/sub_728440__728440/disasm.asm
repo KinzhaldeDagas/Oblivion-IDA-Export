@@ -79,7 +79,6 @@
 0x728534: jbe     short loc_728594
 0x728536: movzx   ebp, [esp+18h+arg_4]
 0x72853B: jmp     short loc_728540
-0x72853D: align 10h
 0x728540: movzx   eax, bx
 0x728543: lea     edx, [eax+ebp]
 0x728546: lea     ecx, [edi+edx*8]

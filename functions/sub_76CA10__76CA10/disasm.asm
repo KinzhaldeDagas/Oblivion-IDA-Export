@@ -17,7 +17,7 @@
 0x76CA3B: lea     ecx, [esp+0Ch+a3]
 0x76CA3F: push    esi
 0x76CA40: push    ecx
-0x76CA41: call    sub_772630
+0x76CA41: call    NiD3DTextureStagePool_Acquire; Acquire a renderer-owned NiD3DTextureStage from the global texture-stage pool and return it with a reference.
 0x76CA46: mov     esi, [esp+14h+a3]
 0x76CA4A: mov     ecx, [esi+0Ch]
 0x76CA4D: add     esp, 4
@@ -32,9 +32,9 @@
 0x76CA68: mov     eax, [ebp+8]
 0x76CA6B: test    eax, eax
 0x76CA6D: jz      loc_76CB44
-0x76CA73: push    eax; a2
+0x76CA73: push    eax; texture
 0x76CA74: mov     ecx, ebx; this
-0x76CA76: call    sub_76C910
+0x76CA76: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
 0x76CA7B: mov     edx, [esp+10h+arg_4]
 0x76CA7F: mov     ecx, [esi]
 0x76CA81: push    0
@@ -80,15 +80,15 @@
 0x76CAE9: call    sub_772FF0
 0x76CAEE: movzx   eax, byte ptr [ebp+5]
 0x76CAF2: and     eax, 0Fh
-0x76CAF5: push    eax
-0x76CAF6: mov     ecx, ebx
-0x76CAF8: call    sub_771640
+0x76CAF5: push    eax; filterPreset
+0x76CAF6: mov     ecx, ebx; this
+0x76CAF8: call    NiD3DTextureStage_ApplyFilterPreset; Apply one native filter-preset row to a NiD3DTextureStage: D3DSAMP_MAGFILTER (5) from row.MAG, D3DSAMP_MINFILTER (6) from row.MIN, and D3DSAMP_MIPFILTER (7) from row.MIP. Lighting30 SimpleShadow uses preset 1 = MIN/MAG LINEAR, MIP NONE.
 0x76CAFD: movzx   ecx, word ptr [ebp+4]
 0x76CB01: shr     ecx, 0Ch
 0x76CB04: and     ecx, 3
-0x76CB07: push    ecx
-0x76CB08: mov     ecx, ebx
-0x76CB0A: call    sub_7715E0
+0x76CB07: push    ecx; preset
+0x76CB08: mov     ecx, ebx; this
+0x76CB0A: call    NiD3DTextureStage_ApplyAddressModePreset; Apply one native address-preset row to a NiD3DTextureStage: D3DSAMP_ADDRESSU (1) and D3DSAMP_ADDRESSV (2). Lighting30 SimpleShadow uses preset 0 = CLAMP/CLAMP.
 0x76CB0F: mov     ebp, [ebp+0Ch]
 0x76CB12: test    ebp, ebp
 0x76CB14: jnz     short loc_76CB2E
@@ -156,7 +156,7 @@
 0x76CBBE: push    ebx; a3
 0x76CBBF: push    edx; a2
 0x76CBC0: mov     ecx, edi; this
-0x76CBC2: call    sub_760010
+0x76CBC2: call    NiD3DPass_SetTextureStage; Attach or replace a NiD3DTextureStage at a pass stage index while maintaining stage count, current-stage bookkeeping, and references.
 0x76CBC7: mov     eax, [esp+10h+a3]
 0x76CBCB: test    eax, eax
 0x76CBCD: jz      short loc_76CBE2
@@ -165,7 +165,7 @@
 0x76CBD5: add     eax, 5Ch ; '\'
 0x76CBD8: cmp     dword ptr [eax], 0
 0x76CBDB: jnz     short loc_76CBE2
-0x76CBDD: call    sub_772560
+0x76CBDD: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x76CBE2: pop     esi
 0x76CBE3: mov     eax, ebx
 0x76CBE5: pop     ebx

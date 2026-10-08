@@ -1,19 +1,36 @@
 {
-  "callees_count": 14,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_784210",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
+  "callers_count": 15,
+  "chunks": [
+    [
+      "0x784210",
+      "0x784368"
+    ],
+    [
+      "0x9CAEB0",
+      "0x9CAED9"
+    ]
+  ],
+  "chunks_sha256": "af2ee8d02d813183ec31d566e035bbb4abb93393b8ab0ef3ef39f81d11c260bf",
+  "comment_regular": "\n[2026-10-05 roots] Root bridge supplies plugin-owned NativeSpline views: range/variance0/4/8; evenlySpaced vector+3C with begin+4/end+8, exactly500 elements, stride18, y+4. Core curves retain signed variance and normalized samples. NativeData lifetime covers synchronous Compute+LOD construction; CBranch does not retain these profile pointers.\n\nOblivion compact stBezierSpline Evaluate: requires the 500-entry vector at +0x3C, samples/interpolates its y values, maps normalized output through min@0x00/max@0x04, then adds uniform +/- variance@0x08. This executable field order overrides the differing RT4.1 header declaration order.",
+  "comment_repeatable": "Oblivion compact stBezierSpline Evaluate: requires the 500-entry vector at +0x3C, samples/interpolates its y values, maps normalized output through min@0x00/max@0x04, then adds uniform +/- variance@0x08. This executable field order overrides the differing RT4.1 header declaration order.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "OB_stBezierSpline_Evaluate_010201A0",
   "end_ea": "0x784368",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_784210",
+  "name": "OB_stBezierSpline_Evaluate_010201A0",
   "segment": ".text",
   "sha256": "ef373a384c48e8652a18a97fd03be527fb9fa391a402f6b3ed808f2d60fc36ea",
   "size": 344,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x784210",
-  "type": "double __thiscall(float *this, float)",
-  "xrefs_from_count": 119,
+  "total_chunk_size": 385,
+  "type": "float __thiscall(const OB_stBezierSpline_010201A0 *this, float percent)",
+  "xrefs_from_count": 133,
   "xrefs_to_count": 15
 }

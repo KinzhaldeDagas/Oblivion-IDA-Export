@@ -1,7 +1,7 @@
 0x9F0A50: push    offset aThisNpcCannotH; "This NPC cannot help you train any high"...
 0x9F0A55: push    offset aScannottrainhi; "sCanNotTrainHigher"
-0x9F0A5A: mov     ecx, offset dword_B38580
-0x9F0A5F: call    GameSetting_ConstrAndReg
+0x9F0A5A: mov     ecx, offset stru_B38580; self
+0x9F0A5F: call    GameSetting_ConstrAndReg; Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.
 0x9F0A64: push    offset sub_A21220; void (__cdecl *)()
 0x9F0A69: call    _atexit
 0x9F0A6E: pop     ecx

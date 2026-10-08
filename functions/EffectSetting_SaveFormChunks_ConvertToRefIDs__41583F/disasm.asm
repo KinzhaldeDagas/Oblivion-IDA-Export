@@ -1,4 +1,4 @@
-0x41583F: mov     eax, [esi+80h]
+0x41583F: mov     eax, [esi+80h]; Verified (Oblivion): save conversion changes EffectSetting pointer fields at +0x70..+0x8C—including effectShader +0x78 and enchantEffect +0x7C—from TESForm pointers into FormIDs before writing the data block.
 0x415845: test    eax, eax
 0x415847: mov     [esp+arg_0], eax
 0x41584B: jz      short loc_415852

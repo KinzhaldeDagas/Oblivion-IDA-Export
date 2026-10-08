@@ -1,0 +1,1127 @@
+{
+  "reconciled_at": "2026-10-08T22:08:00.113637+00:00",
+  "refreshed_functions": 113,
+  "source_drift": {
+    "observed_at": "2026-10-08T22:05:15.148117+00:00",
+    "records": [
+      {
+        "ea": "0x404B00",
+        "fields": {
+          "comment_regular": {
+            "exported": "Reads a text plugin list at basePath + listFile; skips # comments, obtains each TESFile by line, and marks it loaded. Caller falls back to Oblivion.esm when no file is loaded.",
+            "live": "Reads a text plugin list at basePath + listFile; skips # comments, obtains each TESFile by line, and marks it loaded. Caller falls back to Oblivion.esm when no file is loaded.\nVerified aPortable 2026-10-08: stdcall basePath and filename are concatenated into char[260], fopen r, # comments skipped, matching TESFile marked active. Fallout Main::LoadPluginsFromFile 8260A658 is a semantic homolog (same comment/line/TESFile activation loop), but PPC console path treatment differs; Oblivion concatenation remains authoritative."
+          },
+          "type": {
+            "exported": "char __stdcall(const char *, const char *)",
+            "live": "bool __stdcall(const char *basePath, const char *filename)"
+          }
+        }
+      },
+      {
+        "ea": "0x40D800",
+        "fields": {
+          "comment_repeatable": {
+            "exported": "Main frame/update loop; calls 0x55FA50 with world camera and menu-mode state once per frame.",
+            "live": "Main frame/update loop; calls 0x55FA50 with world camera and menu-mode state once per frame.\n2026-10-08 V265 EXTERNAL actor publication: real epoch marker CALL40F270->40D800 may defer actor epoch start while counted metadata work is active. Retry only in an outermost owner pre-update callback BEFORE Original, all other mutation domains quiet; new registry generation, no old-pose revival.32bit lockfree readiness/generation CAS prevents reopening after a concurrent hard abort. Normal counted clone/attachment activity revokes oldposes but allowsfresh ownerproof afterward; hard/unbounded failures stillblock. Exact retained-dependency filtering preserves unrelated actor poses during bounded attachments. Release/runtime16640/registry49983checks pass; liveflicker acceptance pending. Evidence stage-v265-pose-continuity.\n2026-10-08 V265 LIVE continuity evidence PID11700, ending13:55:43-04: user reports actor shadows working correctly, FPS unchanged vsV263, normalexit. Log:0actor epoch-gate closures/0retention declines; sampled hard barriers empty despite4095clones/4236associations/1283links.31033unrelated bounded writes filtered; pose gaps recovered within retained-map ages1-2. Deferred-epoch retry counters0(not exercised live). One frame1015zero-caster interval had7valid poses and79OutsideNearRegion exclusions, not publication failure. Different autosave/heavier scene: no matched FPS comparison. Evidence stage-v265-pose-continuity/runtime-20261008-135543."
+          }
+        }
+      },
+      {
+        "ea": "0x413C52",
+        "fields": {
+          "flags": {
+            "exported": 5120,
+            "live": 21504
+          },
+          "type": {
+            "exported": "int __usercall@<eax>(_DWORD *esi0@<esi>, unsigned int@<ebx>, BSStringT *@<edi>, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int)",
+            "live": "int __userpurge@<eax>(int *esi0@<esi>, unsigned int@<ebx>, BSStringT *@<edi>, int ebp0@<ebp>, int, int, int, int, unsigned int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int)"
+          }
+        }
+      },
+      {
+        "ea": "0x413E54",
+        "fields": {
+          "type": {
+            "exported": "_DWORD __cdecl(_DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, char)",
+            "live": "int __usercall@<eax>(int@<ebx>, int@<ebp>, BSStringT *@<edi>, _DWORD *@<esi>, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, char, char)"
+          }
+        }
+      },
+      {
+        "ea": "0x413E68",
+        "fields": {
+          "type": {
+            "exported": "int __userpurge@<eax>(int@<ebx>, int@<ebp>, _DWORD *@<esi>, BSStringT *@<edi>, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, char, char)",
+            "live": "int __userpurge@<eax>(int@<ebx>, int@<ebp>, _DWORD *@<esi>, int@<edi>, int, int, int, int, int, int, int, int, char, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, char, char)"
+          }
+        }
+      },
+      {
+        "ea": "0x413F7C",
+        "fields": {
+          "type": {
+            "exported": "int(void)",
+            "live": "int __userpurge@<eax>(BSStringT *@<edi>, int@<esi>, int, int, int, int, int, int, int, int, char)"
+          }
+        }
+      },
+      {
+        "ea": "0x414059",
+        "fields": {
+          "flags": {
+            "exported": 5120,
+            "live": 21504
+          },
+          "type": {
+            "exported": "int __usercall@<eax>(int@<ebp>, int@<edi>, int@<esi>, int@<ecx>, double@<st0>, int _4, int _8, int, int, int)",
+            "live": "int __userpurge@<eax>(int@<ebp>, int@<edi>, int@<esi>, int@<ecx>, double@<st0>, int _4, int _8, int, int, int)"
+          }
+        }
+      },
+      {
+        "ea": "0x414B44",
+        "fields": {
+          "flags": {
+            "exported": 5120,
+            "live": 21504
+          },
+          "type": {
+            "exported": "int __usercall@<eax>(int@<eax>, int@<ebx>, int@<ebp>, int *@<edi>, int@<esi>)",
+            "live": "int __userpurge@<eax>(int@<eax>, int@<ebx>, int@<ebp>, int *@<edi>, int@<esi>, int)"
+          }
+        }
+      },
+      {
+        "ea": "0x41625A",
+        "fields": {
+          "type": {
+            "exported": "int __userpurge@<eax>(int *@<edi>, int@<ebx>, int)",
+            "live": "void __usercall(Data *@<edi>, int@<ebx>)"
+          }
+        }
+      },
+      {
+        "ea": "0x41B391",
+        "fields": {
+          "type": {
+            "exported": "int __usercall@<eax>(Data *@<ebx>, int@<ebp>, int@<edi>)",
+            "live": "void __usercall(Data *@<ebx>, int@<ebp>, int@<edi>, int@<esi>, int)"
+          }
+        }
+      },
+      {
+        "ea": "0x41B671",
+        "fields": {
+          "type": {
+            "exported": "int __usercall@<eax>(Data *@<ebx>, int@<ebp>, int@<edi>)",
+            "live": "void __usercall(Data *@<ebx>, int@<ebp>, int@<edi>, int@<esi>, int)"
+          }
+        }
+      },
+      {
+        "ea": "0x42F610",
+        "fields": {
+          "comment_regular": {
+            "exported": "MEF data-streaming pass: archive list builder uses fixed 0x8000 heap buffer and case-sensitive .esp-associated BSA discovery. Decoded as future policy/bounds improvement candidate, not included in narrow compatibility patch.",
+            "live": "MEF data-streaming pass: archive list builder uses fixed 0x8000 heap buffer and case-sensitive .esp-associated BSA discovery. Decoded as future policy/bounds improvement candidate, not included in narrow compatibility patch.\nVerified aPortable: second independent Plugins.txt reader for ESP-associated BSA discovery. 42F74E supplies user-local root; 42F75A supplies %sPlugins.txt; fopen at 42F772. Must route with activation reader 404B00 to avoid split profiles."
+          },
+          "name": {
+            "exported": "sub_42F610",
+            "live": "ArchiveManager_LoadConfiguredAndPluginArchives"
+          }
+        }
+      },
+      {
+        "ea": "0x45F2E0",
+        "fields": {
+          "comment_regular": {
+            "exported": "",
+            "live": "Verified ABI: ECX save/load manager, stack existingFile/stem/mode, RET0Ch at45F78C. EBP carries mode through sprintf at45F3AD. aPortable resolver bridge duplicates five cdecl formatting arguments and passes EBP as sixth; offline compiled bridge test checks reads with10 backups and saves with1 versus10. Co-save allowance is SDK-derived: .obse adds one byte vs .ess, and backup sidecars need base+5+4*count+NUL within260."
+          },
+          "type": {
+            "exported": "const char *__userpurge@<eax>(_DWORD *@<ecx>, double@<st0>, double st4_0@<st3>, double st5_0@<st2>, double st6_0@<st1>, double@<st4>, double@<st7>, double@<st6>, double@<st5>, int, char *, int)",
+            "live": "BSFile *__thiscall(TESSaveLoadGame_SerializationView *this, BSFile *existingFile, const char *stem, int mode)"
+          }
+        }
+      },
+      {
+        "ea": "0x46CE40",
+        "fields": {
+          "flags": {
+            "exported": 5120,
+            "live": 21504
+          },
+          "type": {
+            "exported": "int __usercall@<eax>(unsigned __int16 **@<eax>, unsigned __int16@<cx>, unsigned __int16 *@<ebx>, int@<ebp>, unsigned int@<edi>, unsigned __int16 si0@<si>, int, int, int, int, int, int, int, char, int, int, int, int, int, int)",
+            "live": "int __userpurge@<eax>(unsigned __int16 **@<eax>, unsigned __int16@<cx>, unsigned __int16 *@<ebx>, unsigned __int8 *@<ebp>, unsigned int@<edi>, unsigned __int16 si0@<si>, int, int, void *, TESObject *, TESObject *, int, TESObject *, int, void *, int, int, int, int, TESObject *, int, int, int, int)"
+          }
+        }
+      },
+      {
+        "ea": "0x4AF7E0",
+        "fields": {
+          "type": {
+            "exported": "int __userpurge@<eax>(Data *@<edi>, int@<esi>, int)",
+            "live": "char __userpurge@<al>(Data *@<edi>, TESForm *@<esi>, int@<ebp>, int)"
+          }
+        }
+      },
+      {
+        "ea": "0x4B6D20",
+        "fields": {
+          "name": {
+            "exported": "sub_4B6D20",
+            "live": "callback"
+          },
+          "type": {
+            "exported": "char __usercall@<al>(double@<st2>, double@<st1>, double@<st0>)",
+            "live": "void __cdecl()"
+          }
+        }
+      },
+      {
+        "ea": "0x4BBAC2",
+        "fields": {
+          "type": {
+            "exported": "int __userpurge@<eax>(int *@<ebx>, int@<esi>, int)",
+            "live": "void __usercall(Data *@<ebx>, int@<esi>)"
+          }
+        }
+      },
+      {
+        "ea": "0x5003E0",
+        "fields": {
+          "type": {
+            "exported": "UInt8()",
+            "live": "void __cdecl()"
+          }
+        }
+      },
+      {
+        "ea": "0x521B60",
+        "fields": {
+          "type": {
+            "exported": "char __usercall@<al>(double@<st2>, double@<st1>, double@<st0>)",
+            "live": "void __cdecl()"
+          }
+        }
+      },
+      {
+        "ea": "0x560220",
+        "fields": {
+          "comment_regular": {
+            "exported": "\n\n[2026-10-02 Fallout comparative pass]\nVerified leaf-map update edge: call 0x56059D obtains base-tree (InstanceOf if present) GetLeafBillboardTable and float count; 0x5605AB copies into shared model+0x20 STLSPData. SetLeafMaps count zero preserves old values rather than clearing the table.\n\n[2026-10-03 frond completion] Authoritative void thiscall(model,node). Plugin runtime wrapper corrected from fabricated int return to void and retains exactly one original call. Fade extension executes after original under existing renderer/cache/lifecycle scope; verifies tracked shape remains a direct child of the supplied live node before mutation.\n\nVerified BSTreeModel_Update operates on a typed BSTreeNode_OblivionLayout_0F0; local visibility and per-reference scale flow through its NiNode base and treeModel member.",
+            "live": "\n\n[2026-10-02 Fallout comparative pass]\nVerified leaf-map update edge: call 0x56059D obtains base-tree (InstanceOf if present) GetLeafBillboardTable and float count; 0x5605AB copies into shared model+0x20 STLSPData. SetLeafMaps count zero preserves old values rather than clearing the table.\n\n[2026-10-03 frond completion] Authoritative void thiscall(model,node). Plugin runtime wrapper corrected from fabricated int return to void and retains exactly one original call. Fade extension executes after original under existing renderer/cache/lifecycle scope; verifies tracked shape remains a direct child of the supplied live node before mutation.\n\nVerified BSTreeModel_Update operates on a typed BSTreeNode_OblivionLayout_0F0; local visibility and per-reference scale flow through its NiNode base and treeModel member.\n[SpeedTreeOBSE v172 CPU scheduling] Native update sets this model RT tree position and LOD, then selects node branches/leaves. Plugin post-native sync now resolves SDK instance parent to a base and dispatches reference ComputeWindEffects-style branch/frond updates at the highest normalized SDK-instance LOD. It preserves native method0 GPU defaults. Scheduler requires a ready CPU weather-matrix bridge and successful indexed entry installation. This changes SDK coordinate data only; native NiGeometryData remapping/upload and GPU neutralization are still missing, so rendered CPU support remains INCOMPLETE."
+          }
+        }
+      },
+      {
+        "ea": "0x578D70",
+        "fields": {
+          "comment_regular": {
+            "exported": "",
+            "live": "Verified aPortable: returns InterfaceManager+0xB0 and resets to FF. Use actual selected index, not script last-button global B09E24, in native callbacks."
+          },
+          "name": {
+            "exported": "sub_578D70",
+            "live": "InterfaceManager_ConsumeMessageButton"
+          },
+          "type": {
+            "exported": "UInt8()",
+            "live": "unsigned __int8 __cdecl()"
+          }
+        }
+      },
+      {
+        "ea": "0x579C10",
+        "fields": {
+          "comment_regular": {
+            "exported": "",
+            "live": "Verified aPortable: cdecl varargs message, void callback(), base button index, NULL-terminated button labels. Requires InterfaceManager cursor; mode selects message menu builder. Fallout queued MessageMenu API is architecturally related but is NOT the same calling convention or lifetime."
+          },
+          "type": {
+            "exported": "char __usercall@<al>(char *@<ecx>, double st5_0@<st2>, double st6_0@<st1>, double st7_0@<st0>, char *, int, char, char *, char)",
+            "live": "bool(const char *message, void (__cdecl *callback)(), unsigned int baseButtonIndex, const char *firstButton, ...)"
+          }
+        }
+      },
+      {
+        "ea": "0x57C140",
+        "fields": {
+          "comment_regular": {
+            "exported": "arg1",
+            "live": "arg1\nVerified aPortable: native ABI is cdecl one uint32 menu ID (plain RET at 57C1EB/57C1F5/57C1F8), despite SDK MenuModeHasFocus using a ThisStdCall convenience wrapper. Requires live cursor/menuRoot and menu mode before comparing top visible menu. Use ID414 to gate setup on main-menu focus, not merely MainMenu singleton existence."
+          }
+        }
+      },
+      {
+        "ea": "0x593810",
+        "fields": {
+          "type": {
+            "exported": "int __usercall@<eax>(double st5_0@<st2>, double st7_0@<st0>, double st6_0@<st1>, ExtraDataList ***, _DWORD *, int, int, int, _DWORD *, int, char)",
+            "live": "int __usercall@<eax>(double st7_0@<st0>, double st6_0@<st1>, ExtraDataList ***, ExtraDataList ***, int, int, int, _DWORD *, int, char)"
+          }
+        }
+      },
+      {
+        "ea": "0x596A00",
+        "fields": {
+          "type": {
+            "exported": "double __usercall@<st0>(int@<ebx>, int@<edi>, double@<st2>, double@<st1>, double result@<st0>, double@<st7>, double@<st6>, double@<st5>, double@<st4>)",
+            "live": "void __cdecl()"
+          }
+        }
+      },
+      {
+        "ea": "0x5974E0",
+        "fields": {
+          "type": {
+            "exported": "void()",
+            "live": "void __cdecl()"
+          }
+        }
+      },
+      {
+        "ea": "0x597B10",
+        "fields": {
+          "type": {
+            "exported": "UInt8()",
+            "live": "void __cdecl()"
+          }
+        }
+      },
+      {
+        "ea": "0x59B8C0",
+        "fields": {
+          "type": {
+            "exported": "char()",
+            "live": "void __cdecl()"
+          }
+        }
+      },
+      {
+        "ea": "0x5ACB40",
+        "fields": {
+          "type": {
+            "exported": "int()",
+            "live": "void __cdecl()"
+          }
+        }
+      },
+      {
+        "ea": "0x5AE190",
+        "fields": {
+          "type": {
+            "exported": "void __usercall(char@<bpl>, double@<st7>, double@<st6>, double@<st5>, double@<st4>, double@<st3>, double@<st2>, double@<st1>, double@<st0>)",
+            "live": "void __cdecl()"
+          }
+        }
+      },
+      {
+        "ea": "0x5AECA0",
+        "fields": {
+          "type": {
+            "exported": "BSStringT *__usercall@<eax>(double@<st7>, double@<st6>, double@<st5>, double@<st4>, double@<st3>, double@<st2>, double@<st1>, double Float@<st0>)",
+            "live": "void __cdecl()"
+          }
+        }
+      },
+      {
+        "ea": "0x5B59B0",
+        "fields": {
+          "comment_regular": {
+            "exported": "",
+            "live": "Verified aPortable: consumes native message result; only result 1 sets OSGlobals.quitGame. Path includes OBSE hook site 5B5A0D and normal main-menu render cleanup. Reuse this native quit route after own modal has closed rather than TerminateProcess."
+          },
+          "name": {
+            "exported": "sub_5B59B0",
+            "live": "MainMenu_QuitConfirmationCallback"
+          },
+          "type": {
+            "exported": "char __usercall@<al>(double@<st2>, double@<st1>)",
+            "live": "void __cdecl()"
+          }
+        }
+      },
+      {
+        "ea": "0x5B5D60",
+        "fields": {
+          "type": {
+            "exported": "void __usercall(char@<bpl>, double@<st2>, double@<st1>, double@<st7>, double@<st6>, double@<st5>, double@<st4>, double@<st3>, double@<st0>)",
+            "live": "void __cdecl()"
+          }
+        }
+      },
+      {
+        "ea": "0x5B5DF0",
+        "fields": {
+          "type": {
+            "exported": "void __usercall(char *@<ecx>, double@<st2>, double@<st1>, double@<st0>)",
+            "live": "void __cdecl()"
+          }
+        }
+      },
+      {
+        "ea": "0x5B8DC0",
+        "fields": {
+          "type": {
+            "exported": "void __usercall(double@<st7>, double@<st6>, double st2_0@<st5>, double@<st4>, double@<st3>, double@<st2>)",
+            "live": "void __cdecl()"
+          }
+        }
+      },
+      {
+        "ea": "0x5BB350",
+        "fields": {
+          "type": {
+            "exported": "void __usercall(double@<st2>, double@<st1>, double st7_0@<st0>)",
+            "live": "void __cdecl()"
+          }
+        }
+      },
+      {
+        "ea": "0x5BC450",
+        "fields": {
+          "type": {
+            "exported": "MessageMenu *__thiscall(MessageMenu *__hidden this)",
+            "live": "MessageMenu *__thiscall(MessageMenu *this)"
+          }
+        }
+      },
+      {
+        "ea": "0x5BC4A0",
+        "fields": {
+          "comment_regular": {
+            "exported": "",
+            "live": "Verified aPortable: destructor transfers MessageMenu+0x5C callback into InterfaceManager+0xB4 before base Menu teardown. Do not create next message reentrantly from destruction; defer workflow to next safe UI dispatch."
+          },
+          "type": {
+            "exported": "void __usercall(Menu *this@<ecx>, double@<st2>, double@<st1>, double@<st0>)",
+            "live": "void __thiscall(MessageMenu *this)"
+          }
+        }
+      },
+      {
+        "ea": "0x5BCDD0",
+        "fields": {
+          "comment_regular": {
+            "exported": "",
+            "live": "Verified aPortable: ID >=4 writes InterfaceManager+0xB0 = ID + MessageMenu+0x60 - 4 then closes message. Constructor slots 34..58 hold ten buttons, +5C callback and +60 base index. Fallout MessageMenu::DoClick 8256B008 likewise publishes result then invokes callback/clears queue; Oblivion defers callback via destructor and InterfaceManager+0xB4."
+          },
+          "name": {
+            "exported": "sub_5BCDD0",
+            "live": "MessageMenu_HandleButtonClick"
+          },
+          "type": {
+            "exported": "void __userpurge(int@<ecx>, double@<st2>, double@<st7>, double@<st6>, double@<st5>, double@<st4>, double@<st0>, signed int, int)",
+            "live": "void __thiscall(MessageMenu *this, int buttonID, Tile *clickedButton)"
+          }
+        }
+      },
+      {
+        "ea": "0x5BDDE0",
+        "fields": {
+          "type": {
+            "exported": "void __usercall(double@<st2>, double@<st1>)",
+            "live": "void __cdecl()"
+          }
+        }
+      },
+      {
+        "ea": "0x5C2BA0",
+        "fields": {
+          "type": {
+            "exported": "void __usercall(int@<ebx>, unsigned __int16 *@<ebp>, double@<st7>, double@<st6>, double@<st5>, double@<st4>, double@<st3>, double@<st2>, double@<st1>)",
+            "live": "void __cdecl()"
+          }
+        }
+      },
+      {
+        "ea": "0x5CF9B0",
+        "fields": {
+          "type": {
+            "exported": "void __usercall(double@<st2>, double st6_0@<st1>)",
+            "live": "void __cdecl()"
+          }
+        }
+      },
+      {
+        "ea": "0x5D1E50",
+        "fields": {
+          "type": {
+            "exported": "void __usercall(double@<st2>, double st6_0@<st1>)",
+            "live": "void __cdecl()"
+          }
+        }
+      },
+      {
+        "ea": "0x5D1FC0",
+        "fields": {
+          "type": {
+            "exported": "void __usercall(double st5_0@<st2>, double st6_0@<st1>, double@<st0>)",
+            "live": "void __cdecl()"
+          }
+        }
+      },
+      {
+        "ea": "0x5D3390",
+        "fields": {
+          "type": {
+            "exported": "void __usercall(double@<st7>, double@<st6>, double@<st5>, double@<st4>, double@<st3>, double@<st2>, double@<st1>)",
+            "live": "void __cdecl()"
+          }
+        }
+      },
+      {
+        "ea": "0x5D3B70",
+        "fields": {
+          "type": {
+            "exported": "void __usercall(double@<st7>, double@<st6>, double@<st5>, double@<st4>, double@<st3>, double@<st2>, double@<st1>)",
+            "live": "void __cdecl()"
+          }
+        }
+      },
+      {
+        "ea": "0x5D5A50",
+        "fields": {
+          "type": {
+            "exported": "double __usercall@<st0>(double result@<st0>)",
+            "live": "void __cdecl()"
+          }
+        }
+      },
+      {
+        "ea": "0x5D9730",
+        "fields": {
+          "type": {
+            "exported": "void __usercall(double@<st2>, double@<st1>, double@<st0>)",
+            "live": "void __cdecl()"
+          }
+        }
+      },
+      {
+        "ea": "0x5DE960",
+        "fields": {
+          "type": {
+            "exported": "char __usercall@<al>(double@<st2>, double@<st1>, double@<st0>)",
+            "live": "void __cdecl()"
+          }
+        }
+      },
+      {
+        "ea": "0x5F45B9",
+        "fields": {
+          "flags": {
+            "exported": 5120,
+            "live": 21504
+          },
+          "type": {
+            "exported": "int __usercall@<eax>(PlayerCharacter *@<ebp>, int@<edi>, Actor *@<esi>, int, int, int, int, void *, int, int, char, int, int)",
+            "live": "int __userpurge@<eax>(PlayerCharacter *@<ebp>, int@<edi>, Actor *@<esi>, int, int, int, int, void *, int, int, char, int, _DWORD *)"
+          }
+        }
+      },
+      {
+        "ea": "0x5F4679",
+        "fields": {
+          "type": {
+            "exported": "int __userpurge@<eax>(char@<bl>, int ebp0@<ebp>, _DWORD *@<esi>, int, int, int, int, int, int, int, char, int, int)",
+            "live": "void __userpurge(char@<bl>, int ebp0@<ebp>, _DWORD *@<esi>, void *edi0@<edi>, double st7_0@<st0>, int, int, int, int, int, int, int, int, int, int)"
+          }
+        }
+      },
+      {
+        "ea": "0x5F46B1",
+        "fields": {
+          "flags": {
+            "exported": 5120,
+            "live": 21504
+          },
+          "type": {
+            "exported": "int __usercall@<eax>(int ebp0@<ebp>, int esi0@<esi>, char bl0@<bl>, int edi0@<edi>, int, int, int, int, int, int, int, char, int, int)",
+            "live": "int __userpurge@<eax>(int ebp0@<ebp>, int esi0@<esi>, char bl0@<bl>, int edi0@<edi>, int, int, int, int, int, int, int, char, int, int)"
+          }
+        }
+      },
+      {
+        "ea": "0x5F46BC",
+        "fields": {
+          "flags": {
+            "exported": 5120,
+            "live": 21504
+          },
+          "type": {
+            "exported": "int __usercall@<eax>(int ebp0@<ebp>, int esi0@<esi>, char bl0@<bl>, int edi0@<edi>, int, int, int, int, int, int, int, char, int, int)",
+            "live": "int __userpurge@<eax>(int ebp0@<ebp>, int esi0@<esi>, char bl0@<bl>, int edi0@<edi>, int, int, int, int, int, int, int, char, int, int)"
+          }
+        }
+      },
+      {
+        "ea": "0x5F46E1",
+        "fields": {
+          "flags": {
+            "exported": 5120,
+            "live": 21504
+          },
+          "type": {
+            "exported": "int __usercall@<eax>(int ebp0@<ebp>, int esi0@<esi>, char@<bl>, int@<edi>, int, int, int, int, int, int, int, char, int, int)",
+            "live": "int __userpurge@<eax>(int ebp0@<ebp>, int esi0@<esi>, char@<bl>, int@<edi>, int, int, int, int, int, int, int, char, int, int)"
+          }
+        }
+      },
+      {
+        "ea": "0x5F46E8",
+        "fields": {
+          "type": {
+            "exported": "int __userpurge@<eax>(int ebp0@<ebp>, char@<bl>, int, int, int, int, int, int, int, char, int, int)",
+            "live": "int __userpurge@<eax>(int ebp0@<ebp>, char@<bl>, int, int, int, int, int, int, int, char, int, _DWORD *)"
+          }
+        }
+      },
+      {
+        "ea": "0x64EC50",
+        "fields": {
+          "type": {
+            "exported": "char __userpurge@<al>(TESObjectREFR **this@<ecx>, double@<st1>, double@<st0>, double@<st4>, double@<st2>, TESForm *, int, char)",
+            "live": "char __userpurge@<al>(TESObjectREFR **this@<ecx>, double@<st1>, double@<st0>, double@<st2>, double@<st7>, double@<st3>, Actor *, int, char)"
+          }
+        }
+      },
+      {
+        "ea": "0x662ED0",
+        "fields": {
+          "type": {
+            "exported": "OSGlobals *()",
+            "live": "void __cdecl()"
+          }
+        }
+      },
+      {
+        "ea": "0x663270",
+        "fields": {
+          "type": {
+            "exported": "char __usercall@<al>(char@<bpl>, double@<st7>, double@<st6>, double@<st5>, double@<st4>, double@<st3>, double@<st2>, double@<st1>, double@<st0>)",
+            "live": "void __cdecl()"
+          }
+        }
+      },
+      {
+        "ea": "0x666890",
+        "fields": {
+          "type": {
+            "exported": "PlayerCharacter *__usercall@<eax>(double@<st2>, double@<st1>)",
+            "live": "void __cdecl()"
+          }
+        }
+      },
+      {
+        "ea": "0x671600",
+        "fields": {
+          "type": {
+            "exported": "UInt8 __usercall@<al>(char *@<ebx>, signed int@<edi>, double@<st7>, double@<st4>, double@<st3>, double@<st2>, double@<st1>, double@<st0>, double@<st6>, double@<st5>)",
+            "live": "void __cdecl()"
+          }
+        }
+      },
+      {
+        "ea": "0x681D90",
+        "fields": {
+          "type": {
+            "exported": "char __thiscall(_DWORD *this, MobileObject *)",
+            "live": "bool __thiscall(_DWORD *this, MobileObject *)"
+          }
+        }
+      },
+      {
+        "ea": "0x68D785",
+        "fields": {
+          "type": {
+            "exported": "int(void)",
+            "live": "void __usercall(char *@<esi>)"
+          }
+        }
+      },
+      {
+        "ea": "0x68DC94",
+        "fields": {
+          "flags": {
+            "exported": 5120,
+            "live": 21504
+          },
+          "type": {
+            "exported": "int __usercall@<eax>(int@<edi>, int, int, int)",
+            "live": "int __userpurge@<eax>(int@<edi>, int, int, int)"
+          }
+        }
+      },
+      {
+        "ea": "0x68E4B8",
+        "fields": {
+          "type": {
+            "exported": "int __userpurge@<eax>(float *@<ebx>, int@<ebp>, int, int, int, int, int Dst, int, int, int, int, int, int, int, int, int, int)",
+            "live": "void __userpurge(float *@<ebx>, int@<ebp>, int, int, int, int, int Dst, int, int, int, int, int, int, int, int, int, int)"
+          }
+        }
+      },
+      {
+        "ea": "0x68E620",
+        "fields": {
+          "flags": {
+            "exported": 5120,
+            "live": 21504
+          },
+          "type": {
+            "exported": "int __usercall@<eax>(int@<ebx>, int@<ebp>, volatile LONG **@<esi>)",
+            "live": "int __userpurge@<eax>(int@<ebx>, int@<ebp>, BSTempEffect **@<esi>, int)"
+          }
+        }
+      },
+      {
+        "ea": "0x68E62B",
+        "fields": {
+          "type": {
+            "exported": "int __usercall@<eax>(int@<ebx>, int@<ebp>, BSTempEffect **@<esi>)",
+            "live": "int __usercall@<eax>(int@<ebx>, int@<ebp>, BSTempEffect **@<esi>, int)"
+          }
+        }
+      },
+      {
+        "ea": "0x68E672",
+        "fields": {
+          "type": {
+            "exported": "int __usercall@<eax>(ActiveEffect *@<ecx>, char@<bpl>, double@<st2>, double@<st1>, double@<st0>, int)",
+            "live": "void __usercall(ActiveEffect *@<ecx>, char@<bpl>, double@<st2>, double@<st1>, double@<st0>, int, float)"
+          }
+        }
+      },
+      {
+        "ea": "0x68E778",
+        "fields": {
+          "flags": {
+            "exported": 5120,
+            "live": 21504
+          }
+        }
+      },
+      {
+        "ea": "0x68E792",
+        "fields": {
+          "flags": {
+            "exported": 5120,
+            "live": 21504
+          }
+        }
+      },
+      {
+        "ea": "0x68E7D2",
+        "fields": {
+          "flags": {
+            "exported": 5120,
+            "live": 21504
+          }
+        }
+      },
+      {
+        "ea": "0x68E81C",
+        "fields": {
+          "type": {
+            "exported": "int __usercall@<eax>(int _ESI@<esi>, char bp0@<bpl>, double@<st2>, double@<st1>, double@<st0>, int)",
+            "live": "int __usercall@<eax>(int _ESI@<esi>, double@<st2>, int)"
+          }
+        }
+      },
+      {
+        "ea": "0x69B151",
+        "fields": {
+          "flags": {
+            "exported": 5120,
+            "live": 21504
+          }
+        }
+      },
+      {
+        "ea": "0x69B6B1",
+        "fields": {
+          "type": {
+            "exported": "int __usercall@<eax>(float *@<eax>, TESObjectREFR *@<edi>, char *@<esi>, double@<st0>, double@<st1>, int, int, int, int, int, int, int, TESObjectREFR *, int, int, int, int, int, int, int, double self, int unknownChildName, int, float, float, float, int, int, const char *, int, int, int, int, int, float parentNode, float *unknownChildTag)",
+            "live": "void __usercall(float *@<eax>, TESObjectREFR *@<edi>, char *@<esi>, double@<st0>, double@<st1>, int, int, int, int, int, int, int, TESObjectREFR *, int, int, int, int, int, int, int, double self, int unknownChildName, int, float, float, float, int, int, const char *, int, int, int, int, int, float parentNode, float unknownChildTag)"
+          }
+        }
+      },
+      {
+        "ea": "0x6A28E0",
+        "fields": {
+          "type": {
+            "exported": "int __usercall@<eax>(int@<ebp>, int@<edi>, int@<esi>, double@<st0>, int, int, int, int, int, float, int, int, int, int, int)",
+            "live": "int __usercall@<eax>(int ebp0@<ebp>, int edi0@<edi>, int@<esi>, double@<st0>, int, int, int, int, int, float, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int)"
+          }
+        }
+      },
+      {
+        "ea": "0x6A2954",
+        "fields": {
+          "type": {
+            "exported": "int __usercall@<eax>(int@<eax>, int@<ecx>, int@<ebx>, int@<edi>, int, int, int, int, int, char, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int)",
+            "live": "int __usercall@<eax>(int@<eax>, int@<ecx>, int@<ebx>, int@<edi>, int, int, int, int, int, char, int, int, float, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int)"
+          }
+        }
+      },
+      {
+        "ea": "0x717900",
+        "fields": {
+          "type": {
+            "exported": "LONG __thiscall(unsigned __int16 *this, _DWORD *)",
+            "live": "void __thiscall(NiGeometry *this, void *)"
+          }
+        }
+      },
+      {
+        "ea": "0x719AB0",
+        "fields": {
+          "type": {
+            "exported": "LONG __thiscall(unsigned __int16 *this, _DWORD *)",
+            "live": "void __thiscall(NiGeometry *this, void *)"
+          }
+        }
+      },
+      {
+        "ea": "0x7226F0",
+        "fields": {
+          "type": {
+            "exported": "_DWORD *__thiscall(NiTriBasedGeom *this, NiGeometryData *)",
+            "live": "void __thiscall(NiTriBasedGeom *this, NiGeometryData *modelData)"
+          }
+        }
+      },
+      {
+        "ea": "0x7260B0",
+        "fields": {
+          "comment_regular": {
+            "exported": "\n\n[2026-10-03 ABI correction] Verified thiscall ECX, four stack arguments (index, data, byte size, copy flag), AL boolean result, ret 0x10. Previous decompiler prototype incorrectly promoted EDI to an input argument. Leaf caller 0x7F1DB0 and Fallout SetDataBlock 0x82BF9350 corroborate roles.\n\n\n\n[2026-10-03 VERIFIED owned stream lifetime] copyData=false borrows raw bytes with no reference to the originating STSP/property. Geometry/additional-data can outlive a replaced shader property, so plugin now uses independent owned copies of all4 float4 streams. It first registers (data=NULL,size=N,copy=false), then fills same block with copy=true. Native allocator can returnNULL and memcpy would fault; registering the block first leaves it reachable for wrapper failure cleanup. Fixture executes actual native SetDataBlock and Free instructions with heap/array call adapters:30 checks pass,16 and65535vertices, source destruction, block/raw allocation failure, retry and native owned release.",
+            "live": "\n\n[2026-10-03 ABI correction] Verified thiscall ECX, four stack arguments (index, data, byte size, copy flag), AL boolean result, ret 0x10. Previous decompiler prototype incorrectly promoted EDI to an input argument. Leaf caller 0x7F1DB0 and Fallout SetDataBlock 0x82BF9350 corroborate roles.\n\n\n\n[2026-10-03 VERIFIED owned stream lifetime] copyData=false borrows raw bytes with no reference to the originating STSP/property. Geometry/additional-data can outlive a replaced shader property, so plugin now uses independent owned copies of all4 float4 streams. It first registers (data=NULL,size=N,copy=false), then fills same block with copy=true. Native allocator can returnNULL and memcpy would fault; registering the block first leaves it reachable for wrapper failure cleanup. Fixture executes actual native SetDataBlock and Free instructions with heap/array call adapters:30 checks pass,16 and65535vertices, source destruction, block/raw allocation failure, retry and native owned release.\nSpeedTreeOBSE v165 owned paired-frond stream fixture executes this native copy path at80 bytes/vertex for16 and65535 vertices, including injected allocator failure and source destruction. Native small-buffer flag remains vertexCount<64 (72611D), independent of payload byte count. Native live scene allocations remain UNVERIF"
+          }
+        }
+      },
+      {
+        "ea": "0x7262A0",
+        "fields": {
+          "comment_regular": {
+            "exported": "\n\n[2026-10-03 ABI] Verified thiscall seven stack arguments, AL bool, ret 0x1C. Rejects vertex count unequal to this+0xC; descriptor index is bounded by this+0x10 and descriptor array is this+0x14. Fallout SetDataStream 0x82BF8D50 corroborates index/block/offset/type/count/unit-size/stride roles.",
+            "live": "\n\n[2026-10-03 ABI] Verified thiscall seven stack arguments, AL bool, ret 0x1C. Rejects vertex count unequal to this+0xC; descriptor index is bounded by this+0x10 and descriptor array is this+0x14. Fallout SetDataStream 0x82BF8D50 corroborates index/block/offset/type/count/unit-size/stride roles.\n\n\nSpeedTreeOBSE v165 VERIFIED extension contract: stream index is bounded by object+10, descriptor array at+14 has0x1C stride, vertex count must equal WORD+C. No fixed four-stream cap in this setter. Plugin constructs5-stream AGD and declares index4 with block offset64*vertexCount,4 components and16-byte element/stride.\nSpeedTreeOBSE v168: six-stream owned AGD uses stream5, float4, block offset80*vertexCount,16-byte stride. Existing generic bounds accept this only when object stream count is6. Isolated native copy/free tests passed at96 bytes/vertex; game allocation/descriptor integration remains UNVERIFIED."
+          }
+        }
+      },
+      {
+        "ea": "0x728890",
+        "fields": {
+          "comment_regular": {
+            "exported": "\n\n[v153 isolated native execution] Extracted exact16E-byte function from user Oblivion.exe. In a Win32 fixture, unmodified internal control flow executed with external heap/pool/bound callbacks redirected.37 checks passed for counts4/17/65535: old UV freed once, seven-plane new buffer adopted, original XYZ/N retained, UVcount7 and unrelated format bits preserved, repeat same-pointer call does not free. Nonpooled path only; this is not game allocator/lifecycle validation.",
+            "live": "\n\n[v153 isolated native execution] Extracted exact16E-byte function from user Oblivion.exe. In a Win32 fixture, unmodified internal control flow executed with external heap/pool/bound callbacks redirected.37 checks passed for counts4/17/65535: old UV freed once, seven-plane new buffer adopted, original XYZ/N retained, UVcount7 and unrelated format bits preserved, repeat same-pointer call does not free. Nonpooled path only; this is not game allocator/lifecycle validation.\n\n\nSpeedTreeOBSE v168 mixed leaf conversion: replacement card geometry inherits original keep-flags byte+30 before pre-cache, preserving v167 paired/normal-card CPU-buffer retention. No topology or native SetData ABI change. Native reset/clone/unload coverage remains UNVERIFIED."
+          }
+        }
+      },
+      {
+        "ea": "0x767B40",
+        "fields": {
+          "comment_regular": {
+            "exported": "\n\n[v154 declaration transition] Confirmed static4000/live-stream early return ignores a changed declaration. Normal UV draw scope compares GeometryBufferData+0C native declaration and explicitly calls this routine with force=1 on mismatch; retained CPU streams permit repacking. Failure attempts original layout and suppresses draw if restoration cannot prepare valid buffers. Actual native repack execution remains UNVERIFIED.\n\nSpeedTreeOBSE v160: RGB geometry now selects its color declaration across render modes, optionally combining normal UVset2 with COLOR0 in an8-element declaration. This removes the plugin own mode-based declaration switch that otherwise could force repacking via this routine. Actual native pack-call counts/performance remain UNVERIFIED.\n\nMoonSugarEffect decode: NiDX9Renderer::PackGeometryBuffers for non-skinned geometry. Validates/reuses BuffData when streams are live and not force-dirty; otherwise resizes streams, repacks vertices via NiD3DShaderDeclaration +0x6C or default packer, rebuilds IB through 0x7781F0, and clears low dirty flags.",
+            "live": "\n\n[v154 declaration transition] Confirmed static4000/live-stream early return ignores a changed declaration. Normal UV draw scope compares GeometryBufferData+0C native declaration and explicitly calls this routine with force=1 on mismatch; retained CPU streams permit repacking. Failure attempts original layout and suppresses draw if restoration cannot prepare valid buffers. Actual native repack execution remains UNVERIFIED.\n\nSpeedTreeOBSE v160: RGB geometry now selects its color declaration across render modes, optionally combining normal UVset2 with COLOR0 in an8-element declaration. This removes the plugin own mode-based declaration switch that otherwise could force repacking via this routine. Actual native pack-call counts/performance remain UNVERIFIED.\n\nMoonSugarEffect decode: NiDX9Renderer::PackGeometryBuffers for non-skinned geometry. Validates/reuses BuffData when streams are live and not force-dirty; otherwise resizes streams, repacks vertices via NiD3DShaderDeclaration +0x6C or default packer, rebuilds IB through 0x7781F0, and clears low dirty flags.\n[SpeedTreeOBSE v170] Local mesh rocking uses this rigid geometry packer with final force argument=1 after changing retained position/normal arrays and both STSP-owner/AGD tangent frames. Native4000/live-stream early return otherwise ignores low dirty bits. Failed pack rolls CPU pose back and attempts one forced old-pose upload; unrecovered failure hides the owned mesh until retry. Source/synthetic validation only; live execution UNVERIFIED."
+          }
+        }
+      },
+      {
+        "ea": "0x771150",
+        "fields": {
+          "comment_regular": {
+            "exported": "Oblivion NiDX9 declaration materializer. Walks enabled internal elements, computes offsets and stream strides, writes D3DVERTEXELEMENT9 records plus D3DDECL_END, then calls IDirect3DDevice9::CreateVertexDeclaration. Returns the cached native declaration when it is still valid.\n\n[v154 declaration ownership] Direct method takes only this and returns the cached/created IDirect3DVertexDeclaration9 pointer; it does not AddRef for the return. Virtual+70 instead points to770120, whose output-parameter ABI must not be confused with this function.\n\nDirectX10OBSE authority: Oblivion vertex declaration materializer. Walks enabled internal elements, computes offsets/stream strides, writes D3DVERTEXELEMENT9 records plus D3DDECL_END, then calls IDirect3DDevice9::CreateVertexDeclaration via vtable +0x158.",
+            "live": "Oblivion NiDX9 declaration materializer. Walks enabled internal elements, computes offsets and stream strides, writes D3DVERTEXELEMENT9 records plus D3DDECL_END, then calls IDirect3DDevice9::CreateVertexDeclaration. Returns the cached native declaration when it is still valid.\n\n[v154 declaration ownership] Direct method takes only this and returns the cached/created IDirect3DVertexDeclaration9 pointer; it does not AddRef for the return. Virtual+70 instead points to770120, whose output-parameter ABI must not be confused with this function.\n\nDirectX10OBSE authority: Oblivion vertex declaration materializer. Walks enabled internal elements, computes offsets/stream strides, writes D3DVERTEXELEMENT9 records plus D3DDECL_END, then calls IDirect3DDevice9::CreateVertexDeclaration via vtable +0x158.\n[SpeedTreeOBSE v170] Mesh-motion upload materializes this borrowed declaration handle and compares buffer+0C before accepting unchanged data. A mismatch enters normal precache before forced packing. Runtime device/reset behavior UNVERIFIED."
+          }
+        }
+      },
+      {
+        "ea": "0x777F10",
+        "fields": {
+          "comment_regular": {
+            "exported": "Pass225/226: Tests whether NiGeometryBufferData is live: stream count nonzero and every VBChip has a D3D vertex buffer.",
+            "live": "Pass225/226: Tests whether NiGeometryBufferData is live: stream count nonzero and every VBChip has a D3D vertex buffer.\n[SpeedTreeOBSE v170] Unchanged local mesh pose may skip upload only with clean low dirty flags, matching materialized declaration and this native live-stream predicate. A buffer pointer alone is insufficient. Predicate is allocation evidence, not GPU-byte or rendering proof."
+          }
+        }
+      },
+      {
+        "ea": "0x78A740",
+        "fields": {
+          "comment_regular": {
+            "exported": "CSpeedTreeRT::GetLeafLodSizeAdjustments. Lazily allocates one float per leaf LOD and fills entry i as 1.0 + leafSizeIncreaseFactor*i. This older Bethesda API is absent from the supplied 4.1 header but is named in Oblivion diagnostics and Fallout symbols.",
+            "live": "CSpeedTreeRT::GetLeafLodSizeAdjustments. Lazily allocates one float per leaf LOD and fills entry i as 1.0 + leafSizeIncreaseFactor*i. This older Bethesda API is absent from the supplied 4.1 header but is named in Oblivion diagnostics and Fallout symbols.\nSpeedTreeOBSE v169 VERIFIED: size adjustment i=1+leafSizeIncreaseFactor*i, matching RT4.1 LeafGeometry::InitClusters width/height multiplier. New mesh scale consumes the already-published native STSP.w, avoiding a separate guessed LOD formula."
+          }
+        }
+      },
+      {
+        "ea": "0x78C4D0",
+        "fields": {
+          "comment_regular": {
+            "exported": "Static CSpeedTreeRT::NotifyAllTreesOfEvent. Iterates registered unique trees: wind/time invalidation clears wind-dependent branch/frond/leaf caches; camera invalidation clears leaf LOD and simple-billboard caches.",
+            "live": "Static CSpeedTreeRT::NotifyAllTreesOfEvent. Iterates registered unique trees: wind/time invalidation clears wind-dependent branch/frond/leaf caches; camera invalidation clears leaf LOD and simple-billboard caches.\n[SpeedTreeOBSE v171] Verified event0 clears branch geometry+12 at78C588 only for windEngine+8==1 and frond geometry+12 at78C5AF only for windEngine+C==1. SetTime78D3F0 already invokes this event. The paired indexed CPU entry preserves this validity gate; a higher-level CPU update/scene scheduler remains missing. No extra time advancement or invalidation was installed in v171."
+          }
+        }
+      },
+      {
+        "ea": "0x78D9E0",
+        "fields": {
+          "comment_regular": {
+            "exported": "CSpeedTreeRT hidden instance initializer. Shallow-copies shared heavy pointers from source tree, increments shared refcount/list state, allocates per-instance STreeInstanceData, and records source-tree pointer in instance data.",
+            "live": "CSpeedTreeRT hidden instance initializer. Shallow-copies shared heavy pointers from source tree, increments shared refcount/list state, allocates per-instance STreeInstanceData, and records source-tree pointer in instance data.\n[SpeedTreeOBSE v172 instance scheduler] Native instance init copies shared tree+30 refcount and+38 vector pointer, appends the new RT pointer to that vector, increments refcount and creates instanceData0x14 with parent+0 and LOD+10. The scheduler snapshots this existing membership under plugin cache/lifecycle scope; it does not invent instance LODs or keep native ownership references. Native live scheduling/lifetime remain UNVERIFIED."
+          }
+        }
+      },
+      {
+        "ea": "0x793B90",
+        "fields": {
+          "comment_regular": {
+            "exported": "Sets wind strength, recomputes leaf frequency/throw, preserves phase continuity via timeFrequencyShift, and disables external rocking-angle input.",
+            "live": "Sets wind strength, recomputes leaf frequency/throw, preserves phase continuity via timeFrequencyShift, and disables external rocking-angle input.\nSpeedTreeOBSE v169 source comparison confirmed8*strength*leafFactors[1] frequency and180*strength*leafFactors[0] throw with continuity shift time*oldFrequency+oldShift-time*newFrequency. Source reference fixture compares unmodified body and both RockMesh overloads; native geometry consumption remains incomplete."
+          }
+        }
+      },
+      {
+        "ea": "0x794AE0",
+        "fields": {
+          "comment_regular": {
+            "exported": "Oblivion CPU indexed-geometry wind pass: transforms each referenced original vertex through its primary matrix, blends by primary weight, and computes each vertex once.",
+            "live": "Oblivion CPU indexed-geometry wind pass: transforms each referenced original vertex through its primary matrix, blends by primary weight, and computes each vertex once.\n[SpeedTreeOBSE v171] Optional paired CPU consumer detours the exact six-byte prefix83EC3C568BF1. Native fallback reproduces SUB ESP,3C / PUSH ESI / MOV ESI,ECX and resumes794AE6; native RET4 consumes one signed-short LOD argument in a four-byte slot. Only method1 plus matching owned branch/frond canonical pair metadata uses the extension. It snapshots current/original coordinates and selected LOD strips, applies reference first then second matrix interpolation once per vertex, commits coordinates, then sets valid+12. Unowned or other methods use the stock body. Invalid owned input stays invalid and returnsfalse. Reference/synthetic checks passed; actual detour/game execution UNVERIFIED."
+          }
+        }
+      },
+      {
+        "ea": "0x7A7D10",
+        "fields": {
+          "comment_regular": {
+            "exported": "SpeedTreeRT 4.1 source match: CBillboardLeaf constructor. Initializes position, wind fields, texture index/color defaults, and orientation state.",
+            "live": "SpeedTreeRT 4.1 source match: CBillboardLeaf constructor. Initializes position, wind fields, texture index/color defaults, and orientation state.\nSpeedTreeOBSE v166 source comparison: the older summary source-match is partial. This native ctor has one weight/group and does not apply the reference constructor two-weight clamp. Plugin owns the separately clamped reference pair; native card/mesh consumption is still pending in this version."
+          }
+        }
+      },
+      {
+        "ea": "0x7A7D80",
+        "fields": {
+          "comment_regular": {
+            "exported": "Compact stock CBillboardLeaf default constructor. Initializes only the 0x4C-byte Oblivion layout: position, angle/color/colorScale, one normal/tangent/binormal block, texture index, primary wind weight/group.",
+            "live": "Compact stock CBillboardLeaf default constructor. Initializes only the 0x4C-byte Oblivion layout: position, angle/color/colorScale, one normal/tangent/binormal block, texture index, primary wind weight/group.\nSpeedTreeOBSE v166 VERIFIED default primary weight/group0. RT4.1 default ctor additionally sets raw weight2/group2=0. BillboardLeaf::Parse has only primary weight/group tokens; LeafGeometry::InitLods later inverts raw weight2 to1 and maps group0 through the local matrix window. Do not invent a zero-effect secondary default for parsed clusters."
+          }
+        }
+      },
+      {
+        "ea": "0x7A7E50",
+        "fields": {
+          "comment_regular": {
+            "exported": "Allocates a 0x4C-byte CBillboardLeaf, default-constructs it, then applies the local copy-assignment helper.",
+            "live": "Allocates a 0x4C-byte CBillboardLeaf, default-constructs it, then applies the local copy-assignment helper.\nSpeedTreeOBSE v166 VERIFIED clone allocates4C, calls default ctor7A7D80 then copy assignment7A7DD0. Side metadata propagation is attached at caller7A9089, with failed provenance disabling prepared leaf wind rather than guessing."
+          }
+        }
+      },
+      {
+        "ea": "0x7A8250",
+        "fields": {
+          "comment_regular": {
+            "exported": "Static Oblivion billboard-leaf parser for the compact 0x4C record.\n\n2026-05-21 SpeedTreeOBSE billboard-leaf core/tail load pass: Oblivion CBillboardLeaf::Parse allocates the compact 0x4C stock record and consumes post-core 7004 payloads until 7005. Accepted cursor tokens are 7006 padded color, byte tokens 7007/7008/7011/7012, vec3 tokens 7010/7015, u32 token 7013, and discarded float 7016. Local-only 7009/7014 are not stock grammar and remain malformed. Compatibility cursor fixtures now mirror this before known-family supplemental-tail sanitizing.",
+            "live": "Static Oblivion billboard-leaf parser for the compact 0x4C record.\n\n2026-05-21 SpeedTreeOBSE billboard-leaf core/tail load pass: Oblivion CBillboardLeaf::Parse allocates the compact 0x4C stock record and consumes post-core 7004 payloads until 7005. Accepted cursor tokens are 7006 padded color, byte tokens 7007/7008/7011/7012, vec3 tokens 7010/7015, u32 token 7013, and discarded float 7016. Local-only 7009/7014 are not stock grammar and remain malformed. Compatibility cursor fixtures now mirror this before known-family supplemental-tail sanitizing.\nSpeedTreeOBSE v166 parsed-leaf capture reads completed native primary weight at+44 and group at+48. Native7012 byte/255 and7013 int agree with reference Parse; secondary values come from the verified RT4.1 default ctor. Parsed source is admitted only when CTreeEngine parsedLeafLodFlag+D8 is1."
+          }
+        }
+      },
+      {
+        "ea": "0x7AE070",
+        "fields": {
+          "comment_repeatable": {
+            "exported": "Culling.dll decode: BSShaderAccumulator flush entry at vtable slot +0x50. Sorts and dispatches queued render passes, processes query/refraction/special lists, then clears pending state via 0x733830.\nV165/V166 boundary proof (2026-09-19, authoritative sum7): thiscall ECX accumulator, zero stack arguments, RET0 at 7AE130 and 7AEC11. Exact entry 6A FF 68 D3 D4 9C 00 is seven whole instruction bytes with no relative operand. Complete chunks 7AE070..7AEC12 (2978, FNV1a64 2256683E76C9CAB9) and 9CD4C0..9CD4EE (46, BD8B463CC8BA0095). Body writes accumulator/pass/query/proxy-geometry and render/camera state; inspected direct helpers do not mutate canonical full-light source lists or owning receipts. RenderLighting observer is context only, not blanket read permission: keep parent CullFullLights writer across Flush gaps/prefix/cleanup; any suspended-parent read phase is restricted to a separately verified nested DrawRenderPass.\nDX11 bucket-context verification 2026-09-30: virtual+0x60 uses the same ECX accumulator as this Flush. Return sites / full DWORD selector ranges / specialMode: 7AE0EF = 6..9 / 0; 7AE10B = 154..155 / 0; 7AE670 = 4..17B / 0; 7AE6F2 = 17C..197 / 0; 7AEA6D = 198..19F / 1. EBX is zeroed at 7AE099, EBP is 1 for the final loop. These establish nested bucket identities only; they do not authorize pre-flush reads, native draw suppression, or GPU traversal replacement. Existing exact Cull->Flush and actual draw scope proofs remain necessary.",
+            "live": "Culling.dll decode: BSShaderAccumulator flush entry at vtable slot +0x50. Sorts and dispatches queued render passes, processes query/refraction/special lists, then clears pending state via 0x733830.\nV165/V166 boundary proof (2026-09-19, authoritative sum7): thiscall ECX accumulator, zero stack arguments, RET0 at 7AE130 and 7AEC11. Exact entry 6A FF 68 D3 D4 9C 00 is seven whole instruction bytes with no relative operand. Complete chunks 7AE070..7AEC12 (2978, FNV1a64 2256683E76C9CAB9) and 9CD4C0..9CD4EE (46, BD8B463CC8BA0095). Body writes accumulator/pass/query/proxy-geometry and render/camera state; inspected direct helpers do not mutate canonical full-light source lists or owning receipts. RenderLighting observer is context only, not blanket read permission: keep parent CullFullLights writer across Flush gaps/prefix/cleanup; any suspended-parent read phase is restricted to a separately verified nested DrawRenderPass.\nDX11 bucket-context verification 2026-09-30: virtual+0x60 uses the same ECX accumulator as this Flush. Return sites / full DWORD selector ranges / specialMode: 7AE0EF = 6..9 / 0; 7AE10B = 154..155 / 0; 7AE670 = 4..17B / 0; 7AE6F2 = 17C..197 / 0; 7AEA6D = 198..19F / 1. EBX is zeroed at 7AE099, EBP is 1 for the final loop. These establish nested bucket identities only; they do not authorize pre-flush reads, native draw suppression, or GPU traversal replacement. Existing exact Cull->Flush and actual draw scope proofs remain necessary.\n\n2026-10-08 V266 local code-gate diagnostic provenance (external frozen bridge/log evidence): ExistingNormalizer rejects the256-byte read7AE670, which includes retained LOD call7AE6DD at offset6D. Logged allocation6E100000/read-only/non-exec fields are NOT that native chunk owner: NativeLocalLightHookInstaller::Operation updates operation/address/bytes but retains prior Region fields from Member(mxcsr,4,false) against its own module pinned from observer::Entries. Thus6E100000 denotes the renderer observer-module region. Raw read precedes ExistingPatches; its rejection can yield NativeRead/read0 without OS read failure.\nSeparate runtime LOD Failure::Target6/module0 occurs because frozen owner preparation knows only oldRVA65440; actual owner row identifies SpeedTree currentRVA85320/header6AC7034C/1C4000. Second exact profile source preserves full wrapper/context/device/stability seals and permits observation/code-copy comparison only, never outer-call or bucket suppression. Source is unbuilt/unrun at this annotation. Evidence: analysis/dx11_completion/stage-local-normalizer-current-owner/findings.md and static-installed-wrapper.json. Independent RenderBucket mismatch near7ACDE5 remains outside this correction.\n\n2026-10-08 current LOD-profile VALIDATION update: Release renderer passed; existing focused LodBatchOuterCallPatchTests passed263 prior-profile checks,526 cumulative both-profile checks, and86139 total with the installed DLL read as raw PE data (28308 relocation records). Actual preparation now shares exact NT/timestamp/size/RVA matching, making currentRVA85320 eligible for the existing pin-and-full-seal path. Static/mocked ownership only: no DLL loading/execution, no new live preparation/capture/bucket outcome proven. Observation-only normalization retains the real outer call and sampler reset. Independent7ACDE5 RenderBucket mismatch remains. Receipts: stage-local-normalizer-current-owner/test.log/result.md and stage-fixed-raster-texgen/grouped-fix-build.log."
+          }
+        }
+      },
+      {
+        "ea": "0x7F07D0",
+        "fields": {
+          "comment_regular": {
+            "exported": "\n\n[v151 normal-card shader] Verified native leaf constant map retained by isolated normal-map shader. New VS2 programs derive from installed STLEAF000..003 in packages001/019; original VS1 integer addressing is preserved with floor before MOVA and EXPP.y fractions with FRC. 514 offscreen native/new comparisons passed coverage, missing-map lighting/fog, flat-normal point lighting (inside/outside radius), HDR and reset. This establishes tested shader behavior, not in-game pass integration.\n\nSpeedTreeOBSE v157: leaf authored30004/global30005/ambient30006 adapter validates this shader object vertex map and scopes native B46498/B464A8/B464B8 RGBs around setup-program virtual A9287C->77A1F0. Exact bindings here are VS c5 ambient,c6 directional diffuse,c7 point diffuse; flags10000007,size16,stride4,one register,borrowed sources. NiD3DSCM_Vertex ctor9A8490 installs vtableAB2BAC with Apply slot+40=9A8E30. Game execution remains UNVERIFIED.\n\nPass230: SpeedTree leaf vertex map uses shared FogParam/ShadowVolumeFatness 0x00B46638 and FogColor/ShadowVolumeExtrudeDistance 0x00B46648.",
+            "live": "\n\n[v151 normal-card shader] Verified native leaf constant map retained by isolated normal-map shader. New VS2 programs derive from installed STLEAF000..003 in packages001/019; original VS1 integer addressing is preserved with floor before MOVA and EXPP.y fractions with FRC. 514 offscreen native/new comparisons passed coverage, missing-map lighting/fog, flat-normal point lighting (inside/outside radius), HDR and reset. This establishes tested shader behavior, not in-game pass integration.\n\nSpeedTreeOBSE v157: leaf authored30004/global30005/ambient30006 adapter validates this shader object vertex map and scopes native B46498/B464A8/B464B8 RGBs around setup-program virtual A9287C->77A1F0. Exact bindings here are VS c5 ambient,c6 directional diffuse,c7 point diffuse; flags10000007,size16,stride4,one register,borrowed sources. NiD3DSCM_Vertex ctor9A8490 installs vtableAB2BAC with Apply slot+40=9A8E30. Game execution remains UNVERIFIED.\n\nPass230: SpeedTree leaf vertex map uses shared FogParam/ShadowVolumeFatness 0x00B46638 and FogColor/ShadowVolumeExtrudeDistance 0x00B46648.\nSpeedTreeOBSE v167 paired leaf shader reuses native constant-map setup and wind bank c18..c33 plus LeafBase c34..c81. New vertex programs move leaf centers with both matrices and add saved local card offsets afterward, matching the permitted RT4.1 CPU center-wind ordering. Exact RT4.1 standard GPU-renderer equivalence is UNVERIFIED; native rocking/rustling polynomial logic is retained. Shader2 is required for the expanded vertex programs."
+          }
+        }
+      },
+      {
+        "ea": "0x7F13B0",
+        "fields": {
+          "comment_regular": {
+            "exported": "\n\n[v151 normal-card integration] Verified actual leaf shader virtual+2C entry is7F13B0 (A92844+2C), not internal helper7F0BC0. Resets pass queue through+80, calls helper with seven stack arguments, appends native pass+394. Plugin private copy of43-entry leaf shader vtable wraps this entry to bind paired normal texture stage1 after native setup; native type9/property layout retained. Offscreen native-bytecode comparison passed514 draws; native scene execution remains UNVERIFIED.\n\nSpeedTreeLeafShader render/setup virtual: calls vtable +0x80 pre-pass, then leaf setup 0x7F0BC0, appends pass +0x394 to the current pass list.",
+            "live": "\n\n[v151 normal-card integration] Verified actual leaf shader virtual+2C entry is7F13B0 (A92844+2C), not internal helper7F0BC0. Resets pass queue through+80, calls helper with seven stack arguments, appends native pass+394. Plugin private copy of43-entry leaf shader vtable wraps this entry to bind paired normal texture stage1 after native setup; native type9/property layout retained. Offscreen native-bytecode comparison passed514 draws; native scene execution remains UNVERIFIED.\n\nSpeedTreeLeafShader render/setup virtual: calls vtable +0x80 pre-pass, then leaf setup 0x7F0BC0, appends pass +0x394 to the current pass list.\nSpeedTreeOBSE v167 VERIFIED seven-stack-argument leaf setup ABI reused by isolated wind shader vtable. Native pass reset/append remains; plugin binds normal texture stage1 only for normal material mode. Plain path retains native pixel programs; RGB and normal modes retain existing plugin pixel formulas."
+          }
+        }
+      },
+      {
+        "ea": "0x7F1760",
+        "fields": {
+          "comment_regular": {
+            "exported": "Updates one global SpeedTree wind matrix. Builds yaw/pitch rotation, transposes it, writes WindMatrixes + 0x40*index; valid indices are 0..3.",
+            "live": "Updates one global SpeedTree wind matrix. Builds yaw/pitch rotation, transposes it, writes WindMatrixes + 0x40*index; valid indices are 0..3.\n[SpeedTreeOBSE v172 CPU bridge] Native D3DXMatrixRotationYawPitchRoll output is transposed before256-byte four-matrix storage rooted atB45E14+269*4=B467B8. For registered CPU indexed clients only, the post55E060 bridge transposes existing shader matrices back into the first min(bankCount,4) SDK matrices atB42A10/+4, preserves later matrices and notifies event0 after change. A failed copy restores prior bytes and blocks host CPU scheduling until a successful bridge. Host choice to share Bethesda weather matrices with CPU is INFERRED application integration; storage/orientation are directly inspected."
+          }
+        }
+      },
+      {
+        "ea": "0x7F1DB0",
+        "fields": {
+          "comment_regular": {
+            "exported": "Leaf shader-property stream builder. Emits one 0x10-stride STSP stream with four components per vertex.\n\n[2026-10-03 owned-stream correction] Verified same one-stream ABI as Fallout CreateRendererSpecificProperty 0x828CE150: virtual +6C supplies STSPData+8 and +70 supplies ushort count +C through retained property+A4. One 16-byte/4-component stream, copyData=false. The plugin no longer needs a 128-entry auxiliary property cache; native leaf fallback is layout-compatible, not a different declaration. Current adapter reads owner metadata each request and rejects invalid/overflowing spans before allocation. Native lifetime remains governed by the retained STSPData.\n\n[v150 leaf normal map audit] Verified native leaf AdditionalGeometryData has one FLOAT4 STSP stream (stride10, descriptor0), no T/B streams. RT4.1 SourceCode/LeafGeometry.cpp702-729 exports four corner N/T/B vectors for dynamic leaves. Normal-mapped card support must carry these into a compatible native declaration; v150 does not yet change this native method.\n\n[v151 normal-card integration] Property vtable slotA92A60 (+94) is wrapped only for plugin-tagged normal STSP owners. Ordinary owners still call original method. Tagged owners hold three planar FLOAT4 streams: native wind/selector, tangent/normal-enable, binormal. Native property clones retain that STSP and continue using the same global property vtable, so future stream rebuilds must preserve all three streams. Plugin-owned input blocks are copied into AdditionalGeometryData; clone/game execution UNVERIFIED.\n\nBuild leaf auxiliary input stream: one float4 per vertex, stride 0x10. Stock builder field z contains integer LeafBase selector plus packed-green fractional dimmer.",
+            "live": "Leaf shader-property stream builder. Emits one 0x10-stride STSP stream with four components per vertex.\n\n[2026-10-03 owned-stream correction] Verified same one-stream ABI as Fallout CreateRendererSpecificProperty 0x828CE150: virtual +6C supplies STSPData+8 and +70 supplies ushort count +C through retained property+A4. One 16-byte/4-component stream, copyData=false. The plugin no longer needs a 128-entry auxiliary property cache; native leaf fallback is layout-compatible, not a different declaration. Current adapter reads owner metadata each request and rejects invalid/overflowing spans before allocation. Native lifetime remains governed by the retained STSPData.\n\n[v150 leaf normal map audit] Verified native leaf AdditionalGeometryData has one FLOAT4 STSP stream (stride10, descriptor0), no T/B streams. RT4.1 SourceCode/LeafGeometry.cpp702-729 exports four corner N/T/B vectors for dynamic leaves. Normal-mapped card support must carry these into a compatible native declaration; v150 does not yet change this native method.\n\n[v151 normal-card integration] Property vtable slotA92A60 (+94) is wrapped only for plugin-tagged normal STSP owners. Ordinary owners still call original method. Tagged owners hold three planar FLOAT4 streams: native wind/selector, tangent/normal-enable, binormal. Native property clones retain that STSP and continue using the same global property vtable, so future stream rebuilds must preserve all three streams. Plugin-owned input blocks are copied into AdditionalGeometryData; clone/game execution UNVERIFIED.\n\nBuild leaf auxiliary input stream: one float4 per vertex, stride 0x10. Stock builder field z contains integer LeafBase selector plus packed-green fractional dimmer.\nSpeedTreeOBSE v167 integration: existing A92A60 stream-builder hook recognizes the new paired leaf owner. It creates four owned float4 AGD streams: unchanged native STSP0, optional normal bases1/2, and pair3. Prefix stream+8/count+C remains compatible with native leaf consumers and owned publication."
+          }
+        }
+      },
+      {
+        "ea": "0x7F9410",
+        "fields": {
+          "comment_repeatable": {
+            "exported": "ABI: void __thiscall(batchScratch in ECX, renderPassList on stack, shaderIndex on stack); single epilogue uses retn 8. The only Oblivion caller is 0x7AE6DD and ignores EAX.",
+            "live": "ABI: void __thiscall(batchScratch in ECX, renderPassList on stack, shaderIndex on stack); single epilogue uses retn 8. The only Oblivion caller is 0x7AE6DD and ignores EAX.\n\n2026-10-08 retained-wrapper update: static installed SpeedTree file SHA440f09fd08bdfac22e49f00b23d2efe193ef8110e36b5de6efa7f9c5f0933c58 has the exact same55-byte wrapper as prior known build, now RVA85320 with NT108/timestamp6AC7034C/image1C4000; no relocation entry in those55bytes and INT3 follows. It calls this function with incomingECX/list/selector intact, then reads native renderer[B3F928]/device+280 and if nonnull calls owned device slot69 with sampler0/type8/value0 beforeRET8. Oblivion disassembly reconfirms sole caller7AE6DD, selector195, native bias write7F94D0, only valid-path reset7F9B1C and bypass via empty cleanup to7F9B1E. Extra outer reset is observable and must remain; current-profile normalization only concerns comparison copies, not suppression. Fallout related batch/list machinery8221DFE8/828ACED8/828ACDD0 has different architecture/pass enums1EC/1ED; no direct bias-reset wrapper homolog verified. Evidence stage-local-normalizer-current-owner; new profile source is not yet validated.\n\n2026-10-08 current retained-wrapper VALIDATION update: Release and focused synthetic/raw-DLL invocation passed (526 synthetic cumulative;86139 total incl28308 PE relocation records). Current installed SpeedTree SHA440f09fd...3c58/RVA85320/NT108/time6AC7034C/size1C4000 matches all55 body bytes with no wrapper relocation. File was not loaded/executed; native context/page/owner callbacks were simulated. Actual owner-preparation source now uses the same exact matcher, but live pinning/capture remains unverified. Native7F9410 plus the observable sampler0/type8/value0 reset still execute; no suppression authority or FPS claim. Evidence stage-local-normalizer-current-owner/result.md/test.log."
+          }
+        }
+      },
+      {
+        "ea": "0x80E500",
+        "fields": {
+          "comment_regular": {
+            "exported": "\n\n[2026-10-03 compiled frond audit] Verified installed STFROND002/003 vertex bytecode consumes c9 as object-space point position and c10.x as radius: length(c9-position)/c10.x then 1-saturate(distance/radius)^2. Constant map binds c9 shader+98, c10 generic light-data slot0, while c7 diffuse uses slot1. Together with transform 0x80DDA0 and sun/local pass ordering this establishes an inconsistent point-light binding for restored sun+local frond passes. Correct slot1 position/radius, including world-to-object radius scale, remains unimplemented. Local SDK Frond.fx is reimplemented and not stock bytecode authority.\n\n[2026-10-03 implemented correction] Verified PUSH at 0x80E668 has pointer operand 0x80E669=B465A8 (generic data slot0). Plugin redirects this frond c10 binding to a persistent float4 containing the object-scaled slot1 radius written by its transform callback. Install must precede definition5 creation because the map retains the pointer. HDR flag B43070 controls native c16 TreeDimmer binding and embedded VS selection.\n\n[2026-10-03 material scalar correction] Verified pointer operands80E598=B46498 for c5 Ambient,80E5C1=B464A8 for c6 Diff0,80E5EA=B464B8 for c7 Diff1. Plugin redirects these three bindings to private per-draw float4 copies. Current tracked frond asset scales RGB ambient by retained30006 and both diffuse sources by30003*30005. Alpha components and shared source globals remain untouched. RT4.1 reference SpeedTreeForest::RenderFronds uses frond*global diffuse scalar; SpeedTreeWrapper scales material ambient separately. Legacy assets without30000 retain identity factors.\n[2026-10-03 shadow motion constant] Native map uses c0..3,5..10,14..33 (c11 shader literal). Plugin wraps vtable+88 to add c12 float4 Frond Self Shadow Motion via AddConstant virtual+18, flags10000007, register12,count1,bytes16,type4, persistent pointer,extra0. The ten-stack-word ABI is verified in9A8660. The added XY offset affects only projected-shadow texture coordinates.\n\n[v149 static mesh integration] Verified frond vertex ABI MVP c0, primary wind c18 (register helper base11), fog c14/c15. Isolated baked-RGB mesh shader uses these constants and native map builder directly; it does not require projected shadow c12. Plugin direct construction must not overwrite global projected-shadow readiness.\n\nPass230: SpeedTree frond vertex map uses shared FogParam/ShadowVolumeFatness 0x00B46638 and FogColor/ShadowVolumeExtrudeDistance 0x00B46648.",
+            "live": "\n\n[2026-10-03 compiled frond audit] Verified installed STFROND002/003 vertex bytecode consumes c9 as object-space point position and c10.x as radius: length(c9-position)/c10.x then 1-saturate(distance/radius)^2. Constant map binds c9 shader+98, c10 generic light-data slot0, while c7 diffuse uses slot1. Together with transform 0x80DDA0 and sun/local pass ordering this establishes an inconsistent point-light binding for restored sun+local frond passes. Correct slot1 position/radius, including world-to-object radius scale, remains unimplemented. Local SDK Frond.fx is reimplemented and not stock bytecode authority.\n\n[2026-10-03 implemented correction] Verified PUSH at 0x80E668 has pointer operand 0x80E669=B465A8 (generic data slot0). Plugin redirects this frond c10 binding to a persistent float4 containing the object-scaled slot1 radius written by its transform callback. Install must precede definition5 creation because the map retains the pointer. HDR flag B43070 controls native c16 TreeDimmer binding and embedded VS selection.\n\n[2026-10-03 material scalar correction] Verified pointer operands80E598=B46498 for c5 Ambient,80E5C1=B464A8 for c6 Diff0,80E5EA=B464B8 for c7 Diff1. Plugin redirects these three bindings to private per-draw float4 copies. Current tracked frond asset scales RGB ambient by retained30006 and both diffuse sources by30003*30005. Alpha components and shared source globals remain untouched. RT4.1 reference SpeedTreeForest::RenderFronds uses frond*global diffuse scalar; SpeedTreeWrapper scales material ambient separately. Legacy assets without30000 retain identity factors.\n[2026-10-03 shadow motion constant] Native map uses c0..3,5..10,14..33 (c11 shader literal). Plugin wraps vtable+88 to add c12 float4 Frond Self Shadow Motion via AddConstant virtual+18, flags10000007, register12,count1,bytes16,type4, persistent pointer,extra0. The ten-stack-word ABI is verified in9A8660. The added XY offset affects only projected-shadow texture coordinates.\n\n[v149 static mesh integration] Verified frond vertex ABI MVP c0, primary wind c18 (register helper base11), fog c14/c15. Isolated baked-RGB mesh shader uses these constants and native map builder directly; it does not require projected shadow c12. Plugin direct construction must not overwrite global projected-shadow readiness.\n\nPass230: SpeedTree frond vertex map uses shared FogParam/ShadowVolumeFatness 0x00B46638 and FogColor/ShadowVolumeExtrudeDistance 0x00B46648.\nSpeedTreeOBSE v165 shader consumer uses existing native wind constant bank c18..c33 for sequential two-matrix wind; no extra clock advance or constant-map slot is introduced. Reference IndexedGeometry::ComputeWindEffect transforms the first blended point by the second matrix. Missing retained pairs encode old primary wind plus second weight0. Static mesh shader still reads its original primary input and ignores the extra declaration element.\nSpeedTreeOBSE v168 center-wind shaders still use c18..c33 for both wind matrices. Enabled mesh input subtracts the authored local vertex offset, transforms center twice, then restores that unchanged offset. This follows permitted CPU center-wind semantics; exact standard RT4.1 GPU renderer equivalence remains UNVERIFIED. RockMesh local rotation is not yet wired."
+          }
+        }
+      },
+      {
+        "ea": "0x9826EE",
+        "fields": {
+          "type": {
+            "exported": "int __usercall@<eax>(_BYTE *@<edi>, char@<al>, unsigned int@<ecx>, int, int, int, int)",
+            "live": "int __usercall@<eax>(_BYTE *@<edi>, char@<al>, unsigned int@<ecx>, int)"
+          }
+        }
+      },
+      {
+        "ea": "0x98270C",
+        "fields": {
+          "type": {
+            "exported": "int __usercall@<eax>(unsigned int@<ecx>, char@<al>, _BYTE *@<edi>)",
+            "live": "int __usercall@<eax>(unsigned int@<ecx>, char@<al>, _BYTE *@<edi>, int, int)"
+          }
+        }
+      },
+      {
+        "ea": "0x985494",
+        "fields": {
+          "type": {
+            "exported": "int __fastcall(int, char *)",
+            "live": "int __usercall@<eax>(char *@<edx>, int ebp0@<ebp>)"
+          }
+        }
+      },
+      {
+        "ea": "0x988FF1",
+        "fields": {
+          "type": {
+            "exported": "int __usercall@<eax>(unsigned int@<eax>, _DWORD *@<edx>, int@<ebx>)",
+            "live": "void __usercall(unsigned int@<eax>, char *@<edx>, int@<ebx>)"
+          }
+        }
+      },
+      {
+        "ea": "0x989084",
+        "fields": {
+          "type": {
+            "exported": "int __fastcall(int, char *)",
+            "live": "int __usercall@<eax>(char *@<edx>, int ebp0@<ebp>)"
+          }
+        }
+      },
+      {
+        "ea": "0x9893AB",
+        "fields": {
+          "flags": {
+            "exported": 5196,
+            "live": 21580
+          }
+        }
+      },
+      {
+        "ea": "0x9893BC",
+        "fields": {
+          "flags": {
+            "exported": 5196,
+            "live": 21580
+          },
+          "type": {
+            "exported": "int __usercall@<eax>(_DWORD *@<edi>, int, int, int, int, int)",
+            "live": "int __usercall@<eax>(_DWORD *@<edi>, int, int, int, int, char)"
+          }
+        }
+      },
+      {
+        "ea": "0x993F20",
+        "fields": {
+          "type": {
+            "exported": "void __usercall(__int64@<st1>, double@<st0>, __m128i@<xmm4>)",
+            "live": "void __usercall(__int64@<st1>, double@<st0>, __m128i@<xmm4>, __m128i@<xmm0>, __m128i@<xmm1>, __m128d@<xmm2>, __m128i@<xmm3>, __m128d@<xmm7>)"
+          }
+        }
+      },
+      {
+        "ea": "0x994287",
+        "fields": {
+          "type": {
+            "exported": "double __usercall@<st0>(int@<edx>, __m128i@<xmm0>, __m128i@<xmm1>, __m128d@<xmm2>, __m128i@<xmm3>, __m128i@<xmm4>, __m128d@<xmm6>, __m128i@<xmm7>, double@<xmm5>, double, __int64)",
+            "live": "double __usercall@<st0>(int@<edx>, __m128i@<xmm0>, __m128i@<xmm1>, __m128d@<xmm2>, __m128i@<xmm3>, __m128i@<xmm4>, __m128d@<xmm6>, __m128i@<xmm7>, double@<xmm5>, __int64, double)"
+          }
+        }
+      },
+      {
+        "ea": "0x994A80",
+        "fields": {
+          "flags": {
+            "exported": 5196,
+            "live": 21580
+          },
+          "type": {
+            "exported": "int __usercall@<eax>(char@<ch>, int@<ebp>)",
+            "live": "int __usercall@<eax>(char@<ch>, int@<ebp>, double@<st0>)"
+          }
+        }
+      },
+      {
+        "ea": "0x994A9E",
+        "fields": {
+          "flags": {
+            "exported": 5196,
+            "live": 21580
+          },
+          "type": {
+            "exported": "int __usercall@<eax>(int@<ebp>, double@<st0>)",
+            "live": "int __usercall@<eax>(int@<ebp>, double@<st0>, char@<ch>)"
+          }
+        }
+      },
+      {
+        "ea": "0x996B6C",
+        "fields": {
+          "type": {
+            "exported": "int __usercall@<eax>(_BYTE *@<edi>, _BYTE *@<esi>)",
+            "live": "void *__usercall@<eax>(_BYTE *@<edi>, _BYTE *@<esi>, char@<dh>, int@<ecx>, __int16@<bx>)"
+          }
+        }
+      },
+      {
+        "ea": "0x996B92",
+        "fields": {
+          "type": {
+            "exported": "int __usercall@<eax>(__int16@<ax>, int@<ecx>, _BYTE *@<edi>, _BYTE *@<esi>)",
+            "live": "void *__usercall@<eax>(__int16 ax0@<ax>, int ecx0@<ecx>, _BYTE *@<edi>, _BYTE *@<esi>, char@<dh>, __int16@<bx>)"
+          }
+        }
+      }
+    ]
+  },
+  "targeted_function_contracts_passed": true
+}

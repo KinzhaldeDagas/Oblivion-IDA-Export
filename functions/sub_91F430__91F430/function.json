@@ -1,18 +1,31 @@
 {
-  "callees_count": 4,
-  "callers_count": 5,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 6,
+  "chunks": [
+    [
+      "0x91F430",
+      "0x91F6AD"
+    ]
+  ],
+  "chunks_sha256": "b914ff29f552ad51d3782786b6e205526b25eaf2d7f0794b6e2890d0735a1e4f",
+  "comment_regular": "TES4 authoritative shared character-state velocity solver. Input block is eight hkVector4-sized slots: +0x00 response scalar x, +0x10 basis vector A, +0x20 basis vector B, +0x30 solver up/third basis, +0x40 current velocity, +0x50 desired local velocity, +0x60 max local delta x, +0x70 reference/bias velocity. Output writes the solved world/Havok velocity to the second argument.",
+  "comment_repeatable": "TES4 authoritative shared character-state velocity solver. Input block is eight hkVector4-sized slots: +0x00 response scalar x, +0x10 basis vector A, +0x20 basis vector B, +0x30 solver up/third basis, +0x40 current velocity, +0x50 desired local velocity, +0x60 max local delta x, +0x70 reference/bias velocity. Output writes the solved world/Havok velocity to the second argument.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_91F430",
+  "display_name": "bhkCharacterState_SolveVelocityToTarget",
   "end_ea": "0x91F6AD",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "sub_91F430",
+  "name": "bhkCharacterState_SolveVelocityToTarget",
   "segment": ".text",
   "sha256": "b914ff29f552ad51d3782786b6e205526b25eaf2d7f0794b6e2890d0735a1e4f",
   "size": 637,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x91F430",
+  "total_chunk_size": 637,
   "type": "void __cdecl(__m128 *, __m128 *)",
   "xrefs_from_count": 183,
   "xrefs_to_count": 6

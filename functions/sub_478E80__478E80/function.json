@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x478E80",
+      "0x478EA0"
+    ]
+  ],
+  "chunks_sha256": "cb5c71490159becf1a61108c6a1275227d749f70b26525f415dbd13d4c1bf4d4",
+  "comment_regular": "Clear one ActorSkinInfo ring equipment slot: secondSlot=false selects biped slot 6 at +0xAC, true selects biped slot 7 at +0xBC. Exact left/right polarity is not proven.",
+  "comment_repeatable": "Clear one ActorSkinInfo ring equipment slot: secondSlot=false selects biped slot 6 at +0xAC, true selects biped slot 7 at +0xBC. Exact left/right polarity is not proven.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_478E80",
+  "display_name": "ActorSkinInfo_ClearRingSlot",
   "end_ea": "0x478EA0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_478E80",
+  "name": "ActorSkinInfo_ClearRingSlot",
   "segment": ".text",
   "sha256": "cb5c71490159becf1a61108c6a1275227d749f70b26525f415dbd13d4c1bf4d4",
   "size": 32,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x478E80",
-  "type": "void __userpurge(char *this@<ecx>, char bp0@<bpl>, double@<st2>, double@<st1>, double@<st0>, char)",
+  "total_chunk_size": 32,
+  "type": "void __thiscall(ActorSkinInfo *this, bool secondSlot)",
   "xrefs_from_count": 11,
   "xrefs_to_count": 2
 }

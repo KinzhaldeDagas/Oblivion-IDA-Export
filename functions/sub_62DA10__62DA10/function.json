@@ -1,19 +1,32 @@
 {
-  "callees_count": 154,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 67,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 7,
-  "display_name": "sub_62DA10",
+  "chunks": [
+    [
+      "0x62DA10",
+      "0x62E3ED"
+    ]
+  ],
+  "chunks_sha256": "307a5631944069ac642229d25802a3ad1141862f61b2f691048e207533eda892",
+  "comment_regular": "HighProcess package-procedure action 5. Its completed/idle branch performs the first random-social scan while the separate +0x230 idle-window timer is positive; it does not test conversationScanCooldown. A nonpositive idle timer skips one scan update and is reseeded to 1.000..5.999 seconds.",
+  "comment_repeatable": "HighProcess package-procedure action 5. Its completed/idle branch performs the first random-social scan while the separate +0x230 idle-window timer is positive; it does not test conversationScanCooldown. A nonpositive idle timer skips one scan update and is reseeded to 1.000..5.999 seconds.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 9,
+  "display_name": "HighProcess::UpdatePackageProcedureAction5",
   "end_ea": "0x62E3ED",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_62DA10",
+  "name": "HighProcess::UpdatePackageProcedureAction5",
   "segment": ".text",
   "sha256": "307a5631944069ac642229d25802a3ad1141862f61b2f691048e207533eda892",
   "size": 2525,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x62DA10",
-  "type": "void __userpurge(_DWORD *@<ecx>, double st0_0@<st7>, double st1_0@<st6>, double@<st5>, double st3_0@<st4>, double@<st3>, double@<st2>, double@<st1>, double@<st0>, TESChildCELL *)",
+  "total_chunk_size": 2525,
+  "type": "void __thiscall(HighProcess *this, Actor *actor)",
   "xrefs_from_count": 969,
   "xrefs_to_count": 1
 }

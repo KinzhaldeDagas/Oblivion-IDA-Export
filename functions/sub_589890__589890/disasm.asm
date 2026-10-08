@@ -19,8 +19,7 @@
 0x5898B7: test    eax, eax
 0x5898B9: jz      short loc_5898CE
 0x5898BB: jmp     short loc_5898C0
-0x5898BD: align 10h
-0x5898C0: cmp     eax, offset dword_B3FD44
+0x5898C0: cmp     eax, offset stru_B3FD44
 0x5898C5: jz      short loc_5898E5
 0x5898C7: mov     eax, [eax+4]
 0x5898CA: test    eax, eax

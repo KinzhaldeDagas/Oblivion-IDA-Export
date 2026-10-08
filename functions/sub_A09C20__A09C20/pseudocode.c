@@ -1,4 +1,4 @@
-BSStringT *sub_A09C20()
+NiRTTI *sub_A09C20()
 {
-  return sub_70E220((BSStringT *)dword_B3FA88, "NiDynamicEffect", (int)dword_B3FA80);
+  return NiRTTI_Constructor(&stru_B3FA88, "NiDynamicEffect", &stru_B3FA80); /*0xa09c34*/
 }

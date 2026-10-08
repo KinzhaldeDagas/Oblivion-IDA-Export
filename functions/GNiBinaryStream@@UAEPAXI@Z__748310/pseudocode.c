@@ -1,7 +1,7 @@
 NiBinaryStream *__thiscall NiBinaryStream::`scalar deleting destructor'(NiBinaryStream *this, char a2)
 {
-  *(_DWORD *)this = &NiBinaryStream::`vftable';
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  *(_DWORD *)this = &NiBinaryStream::`vftable'; /*0x748318*/
+  if ( (a2 & 1) != 0 ) /*0x74831e*/
+    FormHeapFree((unsigned int)this); /*0x748321*/
+  return this; /*0x74832b*/
 }

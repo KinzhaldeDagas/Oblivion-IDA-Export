@@ -1,18 +1,31 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 7,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x776C40",
+      "0x776C83"
+    ]
+  ],
+  "chunks_sha256": "f0ecc560dbbe94ae01ed8a1a09c6fe7b2581341df3ed491383a46f7a07ac60e2",
+  "comment_regular": "Verified 2026-10-02 homologous allocation wrapper: Oblivion receives geometryBufferData and stream as two stack arguments/RET8 (ECX is not an input); group is bufferData+4, release old chip via group virtual+1C, allocate via virtual+18, then store result at bufferData+24 array if stream < bufferData+1C. Bool return reports allocation success even when stream index is not stored. Fallout NiXenonVertexBufferManager::AllocateBufferSpace 827BBBA0 has same ordered virtual-call pattern but group/count/array offsets +8/+20/+28. This is a correspondence, not permission to transplant layouts.\n\nMoonSugarEffect decode: NiGeometryBufferData::RefreshVBChips. Releases the existing geometry-group chip for this stream, creates a replacement chip through NiGeometryGroup, and stores it in VBChip[stream] if stream is in range. This is allocation/lifetime ownership, not a safe mask-pass getter.",
+  "comment_repeatable": "MoonSugarEffect decode: NiGeometryBufferData::RefreshVBChips. Releases the existing geometry-group chip for this stream, creates a replacement chip through NiGeometryGroup, and stores it in VBChip[stream] if stream is in range. This is allocation/lifetime ownership, not a safe mask-pass getter.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "NiGeometryBufferData::RefreshVBChips",
   "end_ea": "0x776C83",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "NiGeometryBufferData::RefreshVBChips",
   "segment": ".text",
   "sha256": "f0ecc560dbbe94ae01ed8a1a09c6fe7b2581341df3ed491383a46f7a07ac60e2",
   "size": 67,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x776C40",
+  "total_chunk_size": 67,
   "type": "char __stdcall(NiGeometryBufferData *, UInt32)",
   "xrefs_from_count": 34,
   "xrefs_to_count": 7

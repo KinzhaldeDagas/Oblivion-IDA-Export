@@ -1,49 +1,49 @@
 void __cdecl _free_lc_time(void **a1)
 {
-  if ( a1 )
+  if ( a1 ) /*0x99a376*/
   {
-    free(a1[1]);
-    free(a1[2]);
-    free(a1[3]);
-    free(a1[4]);
-    free(a1[5]);
-    free(a1[6]);
-    free(*a1);
-    free(a1[8]);
-    free(a1[9]);
-    free(a1[0xA]);
-    free(a1[0xB]);
-    free(a1[0xC]);
-    free(a1[0xD]);
-    free(a1[7]);
-    free(a1[0xE]);
-    free(a1[0xF]);
-    free(a1[0x10]);
-    free(a1[0x11]);
-    free(a1[0x12]);
-    free(a1[0x13]);
-    free(a1[0x14]);
-    free(a1[0x15]);
-    free(a1[0x16]);
-    free(a1[0x17]);
-    free(a1[0x18]);
-    free(a1[0x19]);
-    free(a1[0x1A]);
-    free(a1[0x1B]);
-    free(a1[0x1C]);
-    free(a1[0x1D]);
-    free(a1[0x1E]);
-    free(a1[0x1F]);
-    free(a1[0x20]);
-    free(a1[0x21]);
-    free(a1[0x22]);
-    free(a1[0x23]);
-    free(a1[0x24]);
-    free(a1[0x25]);
-    free(a1[0x26]);
-    free(a1[0x27]);
-    free(a1[0x28]);
-    free(a1[0x29]);
-    free(a1[0x2A]);
+    free(a1[1]); /*0x99a37f*/
+    free(a1[2]); /*0x99a387*/
+    free(a1[3]); /*0x99a38f*/
+    free(a1[4]); /*0x99a397*/
+    free(a1[5]); /*0x99a39f*/
+    free(a1[6]); /*0x99a3a7*/
+    free(*a1); /*0x99a3ae*/
+    free(a1[8]); /*0x99a3b6*/
+    free(a1[9]); /*0x99a3be*/
+    free(a1[0xA]); /*0x99a3c6*/
+    free(a1[0xB]); /*0x99a3ce*/
+    free(a1[0xC]); /*0x99a3d6*/
+    free(a1[0xD]); /*0x99a3de*/
+    free(a1[7]); /*0x99a3e6*/
+    free(a1[0xE]); /*0x99a3ee*/
+    free(a1[0xF]); /*0x99a3f6*/
+    free(a1[0x10]); /*0x99a401*/
+    free(a1[0x11]); /*0x99a409*/
+    free(a1[0x12]); /*0x99a411*/
+    free(a1[0x13]); /*0x99a419*/
+    free(a1[0x14]); /*0x99a421*/
+    free(a1[0x15]); /*0x99a429*/
+    free(a1[0x16]); /*0x99a431*/
+    free(a1[0x17]); /*0x99a439*/
+    free(a1[0x18]); /*0x99a441*/
+    free(a1[0x19]); /*0x99a449*/
+    free(a1[0x1A]); /*0x99a451*/
+    free(a1[0x1B]); /*0x99a459*/
+    free(a1[0x1C]); /*0x99a461*/
+    free(a1[0x1D]); /*0x99a469*/
+    free(a1[0x1E]); /*0x99a471*/
+    free(a1[0x1F]); /*0x99a479*/
+    free(a1[0x20]); /*0x99a487*/
+    free(a1[0x21]); /*0x99a492*/
+    free(a1[0x22]); /*0x99a49d*/
+    free(a1[0x23]); /*0x99a4a8*/
+    free(a1[0x24]); /*0x99a4b3*/
+    free(a1[0x25]); /*0x99a4be*/
+    free(a1[0x26]); /*0x99a4c9*/
+    free(a1[0x27]); /*0x99a4d4*/
+    free(a1[0x28]); /*0x99a4df*/
+    free(a1[0x29]); /*0x99a4ea*/
+    free(a1[0x2A]); /*0x99a4f5*/
   }
 }

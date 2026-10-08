@@ -1,1 +1,1 @@
-TESObjectARMO
+struct TESObjectARMO;

@@ -6,83 +6,82 @@ void __userpurge sub_69CC80(
         int a5,
         int a6,
         int a7,
-        Actor *a8,
+        TESObjectREFR *a8,
         char a9)
 {
   bhkCharacterProxy *CharProxy; // eax
-  int v12; // edi
-  _DWORD *v13; // ecx
+  int v11; // edi
+  _DWORD *v12; // ecx
+  int v13; // eax
   int v14; // eax
-  int v15; // eax
-  double v16; // st7
-  char *v17; // edi
-  char *v18; // ebp
-  int v19; // eax
-  double v20; // st7
-  TESObjectCELL *ParentCell; // eax
-  int v22; // eax
-  int *v23; // eax
-  int *v24; // edi
-  float *v25; // eax
-  float v26; // ecx
-  float v27; // edx
-  int v28; // [esp-14h] [ebp-40h]
-  __int64 v29; // [esp-10h] [ebp-3Ch]
-  float v30; // [esp+4h] [ebp-28h]
-  float v31[3]; // [esp+1Ch] [ebp-10h] BYREF
-  float v32; // [esp+28h] [ebp-4h]
+  double v15; // st7
+  char *v16; // edi
+  char *v17; // ebp
+  int v18; // eax
+  double v19; // st7
+  int *sound; // ecx
+  int v21; // eax
+  int *v22; // edi
+  float *v23; // eax
+  float v24; // ecx
+  float v25; // edx
+  __int64 v26; // [esp-18h] [ebp-44h]
+  __int64 v27; // [esp-10h] [ebp-3Ch]
+  float v28; // [esp+4h] [ebp-28h]
+  float v29[3]; // [esp+1Ch] [ebp-10h] BYREF
+  float v30; // [esp+28h] [ebp-4h]
 
-  CharProxy = MobileObject_GetCharProxy((MobileObject *)a1);
-  sub_57E270(CharProxy, v31);
-  v12 = LODWORD(v31[0]) | 0x4000;
-  v13 = *((_DWORD **)MobileObject_GetCharProxy((MobileObject *)a1) + 0xD9);
-  if ( v13 )
+  CharProxy = MobileObject_GetCharProxy((MobileObject *)a1); /*0x69cc8e*/
+  bhkCharacterProxy_GetCollisionFilterInfo(CharProxy, v29); /*0x69cc95*/
+  v11 = LODWORD(v29[0]) | 0x4000; /*0x69cca0*/
+  v12 = *((_DWORD **)MobileObject_GetCharProxy((MobileObject *)a1) + 0xD9); /*0x69ccab*/
+  if ( v12 ) /*0x69ccb3*/
   {
-    v14 = v13[2];
-    if ( v14 )
+    v13 = v12[2]; /*0x69ccb5*/
+    if ( v13 ) /*0x69ccba*/
     {
-      v15 = v14 + 0x14;
-      if ( v15 )
-        *(_DWORD *)(v15 + 0x1C) = v12;
+      v14 = v13 + 0x14; /*0x69ccbc*/
+      if ( v14 ) /*0x69ccbf*/
+        *(_DWORD *)(v14 + 0x1C) = v11; /*0x69ccc1*/
     }
-    (*(void (__thiscall **)(_DWORD *))(*v13 + 0x80))(v13);
+    (*(void (__thiscall **)(_DWORD *))(*v12 + 0x80))(v12); /*0x69cccc*/
   }
-  v16 = *(float *)(a1 + 0x80) - *(float *)(a1 + 0x7C);
-  *(_DWORD *)(a1 + 0x88) = 1;
-  v31[0] = v16 / *(float *)(a1 + 0x80);
-  if ( !a9 && v31[0] > 0.0 )
+  v15 = *(float *)(a1 + 0x80) - *(float *)(a1 + 0x7C); /*0x69ccda*/
+  *(_DWORD *)(a1 + 0x88) = 1; /*0x69ccdd*/
+  v29[0] = v15 / *(float *)(a1 + 0x80); /*0x69cced*/
+  if ( !a9 && v29[0] > 0.0 ) /*0x69ccfe*/
   {
-    v17 = *(char **)(a1 + 0x6C);
-    v18 = *(char **)(a1 + 0x68);
-    v19 = (*(int (__thiscall **)(int))(*(_DWORD *)a1 + 0x174))(a1);
-    v20 = v31[0];
-    v30 = v31[0];
-    v28 = *(_DWORD *)v19;
-    v29 = *(_QWORD *)(v19 + 4);
-    ParentCell = TESObjectREFR_GetParentCell((TESObjectREFR *)a1);
-    MagicCaster_TargetEffectHit__(v18, a2, v20, a3, v17, ParentCell, v28, v29, a1, a8, 0, v30, 1.0);
+    v16 = *(char **)(a1 + 0x6C); /*0x69cd08*/
+    v17 = *(char **)(a1 + 0x68); /*0x69cd0b*/
+    v18 = (*(int (__thiscall **)(int))(*(_DWORD *)a1 + 0x174))(a1); /*0x69cd10*/
+    v19 = v29[0]; /*0x69cd21*/
+    v28 = v29[0]; /*0x69cd25*/
+    HIDWORD(v26) = *(_DWORD *)v18; /*0x69cd31*/
+    v27 = *(_QWORD *)(v18 + 4); /*0x69cd39*/
+    LODWORD(v26) = Shared_GetDwordAtOffset40((void *)a1); /*0x69cd46*/
+    MagicCaster_TargetEffectHit__(v17, a2, v19, a3, v16, v26, v27, a1, a8, 0, v28, 1.0); /*0x69cd4a*/
   }
-  if ( OSGlobals->sound )
+  sound = (int *)MEMORY[0xB33398]->sound; /*0x69cd55*/
+  if ( sound ) /*0x69cd5a*/
   {
-    v22 = *(_DWORD *)(*(_DWORD *)(a1 + 0x74) + 0x8C);
-    if ( v22 )
+    v21 = *(_DWORD *)(*(_DWORD *)(a1 + 0x74) + 0x8C); /*0x69cd63*/
+    if ( v21 ) /*0x69cd6b*/
     {
-      if ( !a9 )
+      if ( !a9 ) /*0x69cd6f*/
       {
-        OSGLobals_PlaySound(*(_DWORD *)(v22 + 0xC), 0x102, 1);
-        v24 = v23;
-        if ( v23 )
+        v22 = OSGLobals_PlaySound(sound, *(void **)(v21 + 0xC), 0x102, 1); /*0x69cd81*/
+        if ( v22 ) /*0x69cd85*/
         {
-          v25 = (float *)(*(int (__thiscall **)(int))(*(_DWORD *)a1 + 0x174))(a1);
-          v26 = *v25;
-          v27 = v25[1];
-          v32 = v25[2];
-          v31[2] = v27;
-          v31[1] = v26;
-          sub_6B7360(v24, v26, v27, v32);
-          sub_6B71C0(v24, 0);
-          sub_6B73E0(v24);
-          FormHeapFree((unsigned int)v24);
+          v23 = (float *)(*(int (__thiscall **)(int))(*(_DWORD *)a1 + 0x174))(a1); /*0x69cd91*/
+          v24 = *v23; /*0x69cd93*/
+          v25 = v23[1]; /*0x69cd95*/
+          v30 = v23[2]; /*0x69cd9e*/
+          v29[2] = v25; /*0x69cdaa*/
+          v29[1] = v24; /*0x69cdb2*/
+          sub_6B7360(v22, v24, v25, v30); /*0x69cdc3*/
+          sub_6B71C0(v22, 0); /*0x69cdcc*/
+          sub_6B73E0(v22); /*0x69cdd3*/
+          FormHeapFree((unsigned int)v22); /*0x69cdd9*/
         }
       }
     }

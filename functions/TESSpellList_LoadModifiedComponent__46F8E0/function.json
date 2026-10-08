@@ -1,19 +1,32 @@
 {
-  "callees_count": 47,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 23,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x46F8E0",
+      "0x46FBFF"
+    ]
+  ],
+  "chunks_sha256": "2b043029c13bbea904f7677fc2567a5fcd7e6af06287a2006be791d3a40f9753",
+  "comment_regular": "Verified: ECX component receiver; one stack mask for save (RET 4), two stack words for load (RET 8). No extra register parameters. Mask 0x20 gates the spell-list serialization path; connected from TESActorBase save/load dispatcher.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 17,
   "display_name": "TESSpellList_LoadModifiedComponent",
   "end_ea": "0x46FBFF",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "TESSpellList_LoadModifiedComponent",
   "segment": ".text",
   "sha256": "2b043029c13bbea904f7677fc2567a5fcd7e6af06287a2006be791d3a40f9753",
   "size": 799,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x46F8E0",
-  "type": "void __userpurge(int@<ecx>, int@<ebp>, int@<edi>, int@<esi>, __int16, int)",
+  "total_chunk_size": 799,
+  "type": "void __thiscall(TESSpellList *self, ActorBaseSaveChangeMask changeMask, unsigned int currentFlags)",
   "xrefs_from_count": 314,
   "xrefs_to_count": 4
 }

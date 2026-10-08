@@ -1,1 +1,1 @@
-bhkCharacterListener
+struct bhkCharacterListener;

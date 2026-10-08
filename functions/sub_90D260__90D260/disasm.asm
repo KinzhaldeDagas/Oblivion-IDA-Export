@@ -4,7 +4,6 @@
 0x90D266: mov     esi, [ecx+1Ch]
 0x90D269: jz      short loc_90D27C
 0x90D26B: jmp     short loc_90D270
-0x90D26D: align 10h
 0x90D270: mov     edx, [eax+1Ch]
 0x90D273: mov     eax, [eax+4]
 0x90D276: add     esi, edx

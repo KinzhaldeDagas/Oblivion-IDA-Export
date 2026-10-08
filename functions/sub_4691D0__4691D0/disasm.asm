@@ -9,7 +9,6 @@
 0x4691E7: push    esi
 0x4691E8: lea     esi, [eax+1]
 0x4691EB: jmp     short loc_4691F0
-0x4691ED: align 10h
 0x4691F0: mov     dl, [eax]
 0x4691F2: add     eax, 1
 0x4691F5: test    dl, dl
@@ -35,6 +34,6 @@
 0x469228: mov     ecx, [esp+20h+arg_0]
 0x46922C: add     esp, 14h
 0x46922F: push    eax
-0x469230: call    TESBipedModelForm_GetBodyPartModel????
+0x469230: call    TESBipedModelForm_GetBodyPartModel????; ODismemberment: biped slot attach/replace path can rebuild loaded 3D; plugin state must be reapplied after equipment/body changes.
 0x469235: pop     edi
 0x469236: retn    0Ch

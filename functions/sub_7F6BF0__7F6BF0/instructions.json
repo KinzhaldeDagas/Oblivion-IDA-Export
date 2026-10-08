@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x7F6C75",
-    "line": "call    sub_75FB10",
+    "line": "call    sub_75FB10; MoonSugarEffect decode: NiD3DTextureStage texture getter with AddRef. Used by pass cleanup before comparing against global default texture dword_B43110.",
     "mnemonic": "call",
     "size": 5
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x7F6CD9",
-    "line": "call    sub_75FB10",
+    "line": "call    sub_75FB10; MoonSugarEffect decode: NiD3DTextureStage texture getter with AddRef. Used by pass cleanup before comparing against global default texture dword_B43110.",
     "mnemonic": "call",
     "size": 5
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x7F6D17",
-    "line": "call    sub_75FB10",
+    "line": "call    sub_75FB10; MoonSugarEffect decode: NiD3DTextureStage texture getter with AddRef. Used by pass cleanup before comparing against global default texture dword_B43110.",
     "mnemonic": "call",
     "size": 5
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x7F6D5D",
-    "line": "call    sub_75FB10",
+    "line": "call    sub_75FB10; MoonSugarEffect decode: NiD3DTextureStage texture getter with AddRef. Used by pass cleanup before comparing against global default texture dword_B43110.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1003,7 +1003,7 @@
   },
   {
     "ea": "0x7F6DE5",
-    "line": "cmp     byte ptr [esp+4Ch+arg_C], 0",
+    "line": "cmp     byte ptr [esp+4Ch+output], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1033,7 +1033,7 @@
   },
   {
     "ea": "0x7F6DF3",
-    "line": "call    NiD3DRenderStateGroup__SetRenderStates",
+    "line": "call    NiD3DRenderStateGroup__SetRenderStates;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1057,7 +1057,7 @@
   },
   {
     "ea": "0x7F6E01",
-    "line": "call    sub_771790",
+    "line": "call    NiD3DTextureStage_DisableUnusedStages; Disable and clear every texture stage after the active pass range.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1135,19 +1135,19 @@
   },
   {
     "ea": "0x7F6E30",
-    "line": "lea     eax, [esp+4Ch+arg_C]",
+    "line": "lea     eax, [esp+4Ch+output]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7F6E34",
-    "line": "push    eax",
+    "line": "push    eax; output",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7F6E35",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1159,7 +1159,7 @@
   },
   {
     "ea": "0x7F6E3F",
-    "line": "call    sub_405760",
+    "line": "call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1297,7 +1297,7 @@
   },
   {
     "ea": "0x7F6E72",
-    "line": "mov     eax, [esp+4Ch+arg_C]",
+    "line": "mov     eax, [esp+4Ch+output]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1573,13 +1573,13 @@
   },
   {
     "ea": "0x7F6EF8",
-    "line": "push    eax",
+    "line": "push    eax; output",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7F6EF9",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1591,7 +1591,7 @@
   },
   {
     "ea": "0x7F6F03",
-    "line": "call    sub_405760",
+    "line": "call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2014,5 +2014,107 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D0130",
+    "line": "lea     ecx, [ebp-14h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0133",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0138",
+    "line": "lea     ecx, [ebp+4]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D013B",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0140",
+    "line": "lea     ecx, [ebp+10h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0143",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0148",
+    "line": "lea     ecx, [ebp+8]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D014B",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0150",
+    "line": "lea     ecx, [ebp+0Ch]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0153",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0158",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D015C",
+    "line": "lea     eax, [edx-3Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D015F",
+    "line": "mov     ecx, [edx-40h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0162",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D0164",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0169",
+    "line": "mov     eax, offset stru_AF8BA0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D016E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

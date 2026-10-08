@@ -1,19 +1,40 @@
 {
-  "callees_count": 1499,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 872,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_85E660",
+  "chunks": [
+    [
+      "0x85E660",
+      "0x8625FA"
+    ],
+    [
+      "0x75FA70",
+      "0x75FA82"
+    ],
+    [
+      "0x9D4670",
+      "0x9D4753"
+    ]
+  ],
+  "chunks_sha256": "7e75cb0ad0758f97dc2e8f9937eb34a0fe37fabe39b98919c5ebb289fc534206",
+  "comment_regular": "Oblivion Lighting30 pass-pool initializer. SimpleShadow pool rows 36..39/selectors 0x14E..0x151 use SM3013..SM3016 with SM3023, seven stages, Z test LESS_EQUAL with no Z write, alpha blend DESTCOLOR/ZERO, stencil disabled, and six clip planes enabled. Mode-5 pool rows 42/43/selectors 0x154/0x155 use SM3018/SM3019 with SM3026, one BaseMap stage, alpha blending and stencil disabled, and Z test/write LESS_EQUAL. Alpha-test state is supplied by Lighting30 geometry-state preparation, not these pass groups.\n\nInitialize Lighting30 pass pool, including SimpleShadow receiver rows 36..39 and mode-5 caster rows 42..43.",
+  "comment_repeatable": "Oblivion Lighting30 pass-pool initializer. SimpleShadow pool rows 36..39/selectors 0x14E..0x151 use SM3013..SM3016 with SM3023, seven stages, Z test LESS_EQUAL with no Z write, alpha blend DESTCOLOR/ZERO, stencil disabled, and six clip planes enabled. Mode-5 pool rows 42/43/selectors 0x154/0x155 use SM3018/SM3019 with SM3026, one BaseMap stage, alpha blending and stencil disabled, and Z test/write LESS_EQUAL. Alpha-test state is supplied by Lighting30 geometry-state preparation, not these pass groups.\nDX11 ordinary vertex mapping verified 2026-09-30: selectors12D..146 map to offsets [0,1,2,0,0,1,0,1,2,3,2,2,3,4,5,6,4,4,5,4,5,6,7,6,6,7] in the eight program slots beginning B47288 (storage indices51D..524). The initializer contains both inlined pass+58 assignments and calls7AECB0, so setter xrefs alone are incomplete. Frame observation compares the selector pass+58 against the current constructor slot, then validates the program class/manager and reads existing native VS at program+30. A mismatch is an override/reinitialization boundary, never permission to silently use the constructor value. Full initializer chunks85E660..8625FA,75FA70..75FA82,9D4670..9D4753 are included in the code contract.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 15,
+  "display_name": "Lighting30Shader_InitializePassPool",
   "end_ea": "0x8625FA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_85E660",
+  "name": "Lighting30Shader_InitializePassPool",
   "segment": ".text",
   "sha256": "481fd8c31aa647eef8cdb7c226eea20e408ad286dd476f506d35392db2f4b0c6",
   "size": 16282,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x85E660",
-  "type": "void()",
-  "xrefs_from_count": 6719,
+  "total_chunk_size": 16527,
+  "type": "void __cdecl()",
+  "xrefs_from_count": 6786,
   "xrefs_to_count": 2
 }

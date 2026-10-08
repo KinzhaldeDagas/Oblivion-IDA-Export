@@ -1,4 +1,4 @@
-0x7814C0: sub     esp, 0Ch
+0x7814C0: sub     esp, 0Ch; Creates an Oblivion NiD3DHLSLVertexShader: chooses default entry 'main' and the device vertex profile, compiles the source, creates the D3D9 shader object, and retains source/bytecode/profile/constant-table metadata.
 0x7814C3: push    ebp
 0x7814C4: push    esi
 0x7814C5: push    edi
@@ -24,7 +24,7 @@
 0x781505: mov     [esi+3Ch], edi
 0x781508: mov     [esi+40h], edi
 0x78150B: mov     [esp+18h+var_4], edi
-0x78150F: mov     [esp+18h+var_C], edi
+0x78150F: mov     [esp+18h+bytecode], edi
 0x781513: mov     [esp+18h+var_8], edi
 0x781517: jnz     short loc_781521
 0x781519: mov     [esp+18h+arg_8], offset aMain; "main"
@@ -40,14 +40,14 @@
 0x781540: lea     eax, [esp+1Ch+var_4]
 0x781544: push    eax
 0x781545: mov     eax, [esp+20h+arg_8]
-0x781549: lea     ecx, [esp+20h+var_C]
+0x781549: lea     ecx, [esp+20h+bytecode]
 0x78154D: push    ecx
 0x78154E: mov     ecx, [esp+24h+arg_0]
 0x781552: push    edx
 0x781553: push    eax
 0x781554: push    ecx
 0x781555: mov     ecx, ebp
-0x781557: call    sub_781170
+0x781557: call    NiD3DShaderProgramCreatorHLSL__CompileShaderFromFile; Oblivion-authoritative HLSL compiler path: resolves the shader file, calls D3DXCompileShaderFromFileA with entry/profile and creator flags, returns a heap copy of bytecode plus the optional constant table, and reports compiler diagnostics.
 0x78155C: test    al, al
 0x78155E: jnz     short loc_781575
 0x781560: mov     edx, [esi]
@@ -61,23 +61,23 @@
 0x78156E: pop     ebp
 0x78156F: add     esp, 0Ch
 0x781572: retn    1Ch
-0x781575: mov     ecx, [esp+18h+arg_14]
-0x781579: mov     eax, [esp+18h+var_C]
+0x781575: mov     ecx, [esp+18h+unused3]
+0x781579: mov     eax, [esp+18h+bytecode]
 0x78157D: push    ebx
-0x78157E: mov     ebx, [esp+1Ch+arg_18]
-0x781582: push    ebx
-0x781583: push    edi
-0x781584: push    edi
-0x781585: push    ecx
-0x781586: lea     edx, [esp+2Ch+arg_10]
-0x78158A: push    edx
-0x78158B: push    eax
+0x78157E: mov     ebx, [esp+1Ch+unused6]
+0x781582: push    ebx; unused6
+0x781583: push    edi; unused5
+0x781584: push    edi; unused4
+0x781585: push    ecx; unused3
+0x781586: lea     edx, [esp+2Ch+unused2]
+0x78158A: push    edx; unused2
+0x78158B: push    eax; bytecode
 0x78158C: mov     ecx, ebp
-0x78158E: call    sub_783BF0
+0x78158E: call    NiDX9Renderer__CreateVertexShader; Calls IDirect3DDevice9::CreateVertexShader for compiled DWORD bytecode and reports a failed HRESULT.
 0x781593: mov     edi, eax
 0x781595: test    edi, edi
 0x781597: jnz     short loc_7815C4
-0x781599: mov     ecx, dword ptr [esp+1Ch+ArgList]
+0x781599: mov     ecx, [esp+1Ch+ArgList]
 0x78159D: push    ecx; ArgList
 0x78159E: push    offset aFailedCreateve; "Failed CreateVertexShader call on %s\n"
 0x7815A3: push    eax; int
@@ -97,7 +97,7 @@
 0x7815BE: add     esp, 0Ch
 0x7815C1: retn    1Ch
 0x7815C4: mov     edx, [esi]
-0x7815C6: mov     eax, dword ptr [esp+1Ch+ArgList]
+0x7815C6: mov     eax, [esp+1Ch+ArgList]
 0x7815CA: mov     edx, [edx+8]
 0x7815CD: push    eax
 0x7815CE: mov     ecx, esi
@@ -108,7 +108,7 @@
 0x7815DB: push    ecx
 0x7815DC: mov     ecx, esi
 0x7815DE: call    edx
-0x7815E0: mov     ecx, [esp+1Ch+var_C]
+0x7815E0: mov     ecx, [esp+1Ch+bytecode]
 0x7815E4: mov     eax, [esi]
 0x7815E6: mov     edx, [esp+1Ch+var_4]
 0x7815EA: mov     eax, [eax+1Ch]
@@ -127,7 +127,7 @@
 0x781603: mov     ecx, esi
 0x781605: call    eax
 0x781607: mov     edx, [esi]
-0x781609: mov     eax, [esp+1Ch+arg_14]
+0x781609: mov     eax, [esp+1Ch+unused3]
 0x78160D: mov     edx, [edx+3Ch]
 0x781610: push    eax
 0x781611: mov     ecx, esi

@@ -1,4 +1,4 @@
-0x4ECF90: sub     esp, 414h
+0x4ECF90: sub     esp, 414h; Verified generated-texture retrieval: resolves the color and `_FN` normal DDS through the texture manager into task fields +0x40/+0x44, then submits the task to IOManager when dependencies are ready.
 0x4ECF96: mov     eax, ds:0B30AACh
 0x4ECF9B: xor     eax, esp
 0x4ECF9D: mov     [esp+414h+var_4], eax
@@ -44,12 +44,12 @@
 0x4ED01E: push    edx; int
 0x4ED01F: lea     eax, [esp+44Ch+Str1]
 0x4ED026: push    eax; Str1
-0x4ED027: call    sub_47D8F0
+0x4ED027: call    sub_47D8F0; SpeedTreeOBSE 2026-07-14: normalizes texture palette keys in a fixed 256-byte local buffer. Plugin loader inputs are therefore capped at 255 characters.
 0x4ED02C: lea     ecx, [esp+450h+var_108]
 0x4ED033: push    ecx; int
 0x4ED034: lea     edx, [esp+454h+var_414]
 0x4ED038: push    edx; Str1
-0x4ED039: call    sub_47D8F0
+0x4ED039: call    sub_47D8F0; SpeedTreeOBSE 2026-07-14: normalizes texture palette keys in a fixed 256-byte local buffer. Plugin loader inputs are therefore capped at 255 characters.
 0x4ED03E: mov     ecx, ds:0B35300h
 0x4ED044: mov     eax, [ecx]
 0x4ED046: mov     eax, [eax+4]

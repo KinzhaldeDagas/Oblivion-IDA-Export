@@ -1,1 +1,1 @@
-IServiceProviderVtbl_0
+typedef IServiceProviderVtbl IServiceProviderVtbl_0;

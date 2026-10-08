@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x449070",
-    "line": "push    ebx",
+    "line": "push    ebx; MEF PERF 2026-10-08: PERF-16 related RAW 32-bit AddFirstEmpty:24-byte array has DWORD cap8,usedEndC,occupied10,grow14. It also scans dense prefix from0, then grows/appends. No smart-pointer refs here. Do not reuse16-bit offsets/ownership. Sole direct caller observed46C68A.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x449072",
-    "line": "mov     ebp, [esp+8+arg_0]",
+    "line": "mov     ebp, [esp+8+element]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x44908A",
-    "line": "mov     edi, [esi+0Ch]",
+    "line": "mov     edi, [esi+0Ch]; MEF v57 IMPLEMENTED 2026-10-08: PERF-16 raw analogue restricted to active-form arrayB0614C/vtableA37AAC. Dense safe metadata branches to native4490A7; other folded arrays and sparse/unsupported states preserve native44908F. Separate TESForm duplicate scan remains.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x449091",
-    "line": "jbe     short loc_4490A7",
+    "line": "jbe     short loc_4490A7; MEF PERF 2026-10-08: Comparative naming only after Oblivion observation: Fallout822B5148 names raw32 analogue NiTLargeArray<TESForm*>::AddFirstEmpty; Fallout82856390 names strong16 NiAVObject analogue. Both still scan prefixes in that corpus. Oblivion bodies, widths and ownership determine this decode; no PPC ABI/layout copied.",
     "mnemonic": "jbe",
     "size": 2
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x4490A7",
-    "line": "cmp     edi, [esi+8]",
+    "line": "cmp     edi, [esi+8]; MEF PERF 2026-10-08: Comparative naming only after Oblivion observation: Fallout822B5148 names raw32 analogue NiTLargeArray<TESForm*>::AddFirstEmpty; Fallout82856390 names strong16 NiAVObject analogue. Both still scan prefixes in that corpus. Oblivion bodies, widths and ownership determine this decode; no PPC ABI/layout copied.",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x4490B4",
-    "line": "call    sub_452910",
+    "line": "call    NiTLargeArray_Resize32",
     "mnemonic": "call",
     "size": 5
   },

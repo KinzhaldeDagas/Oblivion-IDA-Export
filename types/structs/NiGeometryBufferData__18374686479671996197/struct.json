@@ -1,136 +1,216 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "NiGeometryBufferData",
+  "definition": "struct NiGeometryBufferData\n{\nUInt32 Flags;\nNiGeometryGroup *GeometryGroup;\nUInt32 FVF;\nIDirect3DVertexDeclaration9 *VertexDeclaration;\nUInt8 SoftwareVP;\nUInt8 pad10[3];\nUInt32 VertCount;\nUInt32 MaxVertCount;\nUInt32 StreamCount;\nUInt32 *VertexStride;\nNiVBChip **VBChip;\nUInt32 IndexCount;\nUInt32 IBSize;\nIDirect3DIndexBuffer9 *IB;\nUInt32 BaseVertexIndex;\nD3DPRIMITIVETYPE PrimitiveType;\nUInt32 TriCount;\nUInt32 MaxTriCount;\nUInt32 NumArrays;\nUInt16 *ArrayLengths;\nUInt16 *IndexArray;\n}\n",
   "id": 18374686479671996197,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Flags",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GeometryGroup",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "NiGeometryGroup *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "FVF",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "VertexDeclaration",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "IDirect3DVertexDeclaration9 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SoftwareVP",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 1
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad10",
       "offset": 17,
       "offset_hex": "0x11",
-      "size": 3
+      "size": 3,
+      "type": "UInt8[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "VertCount",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "MaxVertCount",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "StreamCount",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "VertexStride",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "UInt32 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "VBChip",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "NiVBChip **"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IndexCount",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IBSize",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IB",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "IDirect3DIndexBuffer9 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "BaseVertexIndex",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "PrimitiveType",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "D3DPRIMITIVETYPE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "TriCount",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "MaxTriCount",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "NumArrays",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ArrayLengths",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 4
+      "size": 4,
+      "type": "UInt16 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IndexArray",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 4
+      "offset_hex": "0x4C",
+      "size": 4,
+      "type": "UInt16 *"
     }
   ],
   "name": "NiGeometryBufferData",
+  "ordinal": 9602,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 80
 }

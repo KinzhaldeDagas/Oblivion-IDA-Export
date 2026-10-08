@@ -8,7 +8,7 @@
 0x481670: call    edx
 0x481672: test    eax, eax
 0x481674: jz      short loc_481684
-0x481676: cmp     eax, offset dword_B40864
+0x481676: cmp     eax, offset stru_B40864
 0x48167B: jz      short loc_4816A9
 0x48167D: mov     eax, [eax+4]
 0x481680: test    eax, eax

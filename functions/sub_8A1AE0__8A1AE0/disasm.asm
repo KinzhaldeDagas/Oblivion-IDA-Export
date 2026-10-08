@@ -9,7 +9,7 @@
 0x8A1AF2: mov     ecx, esi
 0x8A1AF4: call    sub_893510
 0x8A1AF9: push    esi
-0x8A1AFA: call    FormHeapFree
+0x8A1AFA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x8A1AFF: add     esp, 4
 0x8A1B02: mov     dword ptr [edi+0Ch], 0
 0x8A1B09: pop     esi

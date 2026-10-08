@@ -1,4 +1,4 @@
-0x470960: push    ebx
+0x470960: push    ebx; CustomAnimSupport decode: anim-map lookup helper used by playback, validators, and save/load restore to test an encoded group key.
 0x470961: mov     ebx, [esp+4+arg_0]
 0x470965: push    esi
 0x470966: mov     esi, ecx
@@ -12,7 +12,6 @@
 0x470977: test    edi, edi
 0x470979: jz      short loc_470999
 0x47097B: jmp     short loc_470980
-0x47097D: align 10h
 0x470980: movzx   eax, word ptr [edi+4]
 0x470984: mov     edx, [esi]
 0x470986: mov     edx, [edx+8]

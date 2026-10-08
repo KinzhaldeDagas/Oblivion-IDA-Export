@@ -31,14 +31,14 @@
 0x7BB2F7: lea     ecx, [esp+8D8h+var_36C]
 0x7BB2FE: push    edi; int
 0x7BB2FF: push    ecx; int
-0x7BB300: call    sub_7B47E0
+0x7BB300: call    BSShaderManager_GetVertexShaderTargetName
 0x7BB305: push    eax; int
 0x7BB306: lea     edx, [esp+8E4h+var_498]
 0x7BB30D: push    edx; int
 0x7BB30E: lea     eax, [esp+8E8h+FileName]
 0x7BB315: push    eax; lpFileName
 0x7BB316: mov     ecx, esi
-0x7BB318: call    CreateVertexShader
+0x7BB318: call    CreateVertexShader; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.
 0x7BB31D: mov     ebx, [esi+7Ch]
 0x7BB320: mov     ebp, eax
 0x7BB322: cmp     ebx, ebp
@@ -87,14 +87,14 @@
 0x7BB3BD: lea     edx, [esp+8D8h+var_36C]
 0x7BB3C4: push    edi; int
 0x7BB3C5: push    edx; int
-0x7BB3C6: call    sub_7B47E0
+0x7BB3C6: call    BSShaderManager_GetVertexShaderTargetName
 0x7BB3CB: push    eax; int
 0x7BB3CC: lea     eax, [esp+8E4h+var_530]
 0x7BB3D3: push    eax; int
 0x7BB3D4: lea     ecx, [esp+8E8h+FileName]
 0x7BB3DB: push    ecx; lpFileName
 0x7BB3DC: mov     ecx, esi
-0x7BB3DE: call    CreateVertexShader
+0x7BB3DE: call    CreateVertexShader; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.
 0x7BB3E3: mov     ebx, [esi+80h]
 0x7BB3E9: mov     ebp, eax
 0x7BB3EB: cmp     ebx, ebp
@@ -142,14 +142,14 @@
 0x7BB47E: lea     ecx, [esp+8D8h+var_36C]
 0x7BB485: push    edi; int
 0x7BB486: push    ecx; int
-0x7BB487: call    sub_7B47E0
+0x7BB487: call    BSShaderManager_GetVertexShaderTargetName
 0x7BB48C: push    eax; int
 0x7BB48D: lea     edx, [esp+8E4h+var_3B4]
 0x7BB494: push    edx; int
 0x7BB495: lea     eax, [esp+8E8h+FileName]
 0x7BB49C: push    eax; lpFileName
 0x7BB49D: mov     ecx, esi
-0x7BB49F: call    CreateVertexShader
+0x7BB49F: call    CreateVertexShader; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.
 0x7BB4A4: mov     ebx, [esi+84h]
 0x7BB4AA: mov     ebp, eax
 0x7BB4AC: cmp     ebx, ebp
@@ -198,14 +198,14 @@
 0x7BB54A: lea     edx, [esp+8D8h+var_36C]
 0x7BB551: push    edi; int
 0x7BB552: push    edx; int
-0x7BB553: call    sub_7B47E0
+0x7BB553: call    BSShaderManager_GetVertexShaderTargetName
 0x7BB558: push    eax; int
 0x7BB559: lea     eax, [esp+8E4h+var_5C8]
 0x7BB560: push    eax; int
 0x7BB561: lea     ecx, [esp+8E8h+FileName]
 0x7BB568: push    ecx; lpFileName
 0x7BB569: mov     ecx, esi
-0x7BB56B: call    CreateVertexShader
+0x7BB56B: call    CreateVertexShader; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.
 0x7BB570: mov     ebx, [esi+88h]
 0x7BB576: mov     ebp, eax
 0x7BB578: cmp     ebx, ebp
@@ -254,14 +254,14 @@
 0x7BB616: lea     ecx, [esp+8D8h+var_36C]
 0x7BB61D: push    edi; int
 0x7BB61E: push    ecx; int
-0x7BB61F: call    sub_7B47E0
+0x7BB61F: call    BSShaderManager_GetVertexShaderTargetName
 0x7BB624: push    eax; int
 0x7BB625: lea     edx, [esp+8E4h+var_660]
 0x7BB62C: push    edx; int
 0x7BB62D: lea     eax, [esp+8E8h+FileName]
 0x7BB634: push    eax; lpFileName
 0x7BB635: mov     ecx, esi
-0x7BB637: call    CreateVertexShader
+0x7BB637: call    CreateVertexShader; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.
 0x7BB63C: mov     ebx, [esi+8Ch]
 0x7BB642: mov     ebp, eax
 0x7BB644: cmp     ebx, ebp
@@ -311,14 +311,14 @@
 0x7BB6D5: lea     edx, [esp+8D8h+var_36C]
 0x7BB6DC: push    edi; int
 0x7BB6DD: push    edx; int
-0x7BB6DE: call    sub_7B47E0
+0x7BB6DE: call    BSShaderManager_GetVertexShaderTargetName
 0x7BB6E3: push    eax; int
 0x7BB6E4: lea     eax, [esp+8E4h+var_874]
 0x7BB6E8: push    eax; int
 0x7BB6E9: lea     ecx, [esp+8E8h+FileName]
 0x7BB6F0: push    ecx; lpFileName
 0x7BB6F1: mov     ecx, esi
-0x7BB6F3: call    CreateVertexShader
+0x7BB6F3: call    CreateVertexShader; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.
 0x7BB6F8: mov     ebx, [esi+90h]
 0x7BB6FE: mov     ebp, eax
 0x7BB700: cmp     ebx, ebp
@@ -370,14 +370,14 @@
 0x7BB7B8: lea     ecx, [esp+8D8h+var_36C]
 0x7BB7BF: push    edi; int
 0x7BB7C0: push    ecx; int
-0x7BB7C1: call    sub_7B47E0
+0x7BB7C1: call    BSShaderManager_GetVertexShaderTargetName
 0x7BB7C6: push    eax; int
 0x7BB7C7: lea     edx, [esp+8E4h+var_828]
 0x7BB7CE: push    edx; int
 0x7BB7CF: lea     eax, [esp+8E8h+FileName]
 0x7BB7D6: push    eax; lpFileName
 0x7BB7D7: mov     ecx, esi
-0x7BB7D9: call    CreateVertexShader
+0x7BB7D9: call    CreateVertexShader; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.
 0x7BB7DE: mov     ebx, [esi+94h]
 0x7BB7E4: mov     ebp, eax
 0x7BB7E6: cmp     ebx, ebp
@@ -426,7 +426,7 @@
 0x7BB87A: lea     edx, [esp+8DCh+var_36C]
 0x7BB881: push    edx; int
 0x7BB882: push    edi
-0x7BB883: call    sub_7B4780
+0x7BB883: call    BSShaderManager_GetPixelShaderTargetName
 0x7BB888: add     esp, 4
 0x7BB88B: push    eax; Str1
 0x7BB88C: lea     eax, [esp+8E4h+var_400]
@@ -434,7 +434,7 @@
 0x7BB894: lea     ecx, [esp+8E8h+FileName]
 0x7BB89B: push    ecx; lpFileName
 0x7BB89C: mov     ecx, esi
-0x7BB89E: call    CreatePixelShader
+0x7BB89E: call    CreatePixelShader; Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.
 0x7BB8A3: mov     ebx, [esi+0A0h]
 0x7BB8A9: mov     ebp, eax
 0x7BB8AB: cmp     ebx, ebp
@@ -484,7 +484,7 @@
 0x7BB94A: lea     ecx, [esp+8DCh+var_36C]
 0x7BB951: push    ecx; int
 0x7BB952: push    edi
-0x7BB953: call    sub_7B4780
+0x7BB953: call    BSShaderManager_GetPixelShaderTargetName
 0x7BB958: add     esp, 4
 0x7BB95B: push    eax; Str1
 0x7BB95C: lea     edx, [esp+8E4h+var_7DC]
@@ -492,7 +492,7 @@
 0x7BB964: lea     eax, [esp+8E8h+FileName]
 0x7BB96B: push    eax; lpFileName
 0x7BB96C: mov     ecx, esi
-0x7BB96E: call    CreatePixelShader
+0x7BB96E: call    CreatePixelShader; Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.
 0x7BB973: mov     ebx, [esi+98h]
 0x7BB979: mov     ebp, eax
 0x7BB97B: cmp     ebx, ebp
@@ -544,7 +544,7 @@
 0x7BBA2C: lea     edx, [esp+8DCh+var_36C]
 0x7BBA33: push    edx; int
 0x7BBA34: push    edi
-0x7BBA35: call    sub_7B4780
+0x7BBA35: call    BSShaderManager_GetPixelShaderTargetName
 0x7BBA3A: add     esp, 4
 0x7BBA3D: push    eax; Str1
 0x7BBA3E: lea     eax, [esp+8E4h+var_6F8]
@@ -552,7 +552,7 @@
 0x7BBA46: lea     ecx, [esp+8E8h+FileName]
 0x7BBA4D: push    ecx; lpFileName
 0x7BBA4E: mov     ecx, esi
-0x7BBA50: call    CreatePixelShader
+0x7BBA50: call    CreatePixelShader; Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.
 0x7BBA55: mov     ebx, [esi+9Ch]
 0x7BBA5B: mov     ebp, eax
 0x7BBA5D: cmp     ebx, ebp
@@ -608,7 +608,7 @@
 0x7BBB10: lea     edx, [esp+8DCh+var_36C]
 0x7BBB17: push    edx; int
 0x7BBB18: push    edi
-0x7BBB19: call    sub_7B4780
+0x7BBB19: call    BSShaderManager_GetPixelShaderTargetName
 0x7BBB1E: add     esp, 4
 0x7BBB21: push    eax; Str1
 0x7BBB22: lea     eax, [esp+8E4h+var_44C]
@@ -616,7 +616,7 @@
 0x7BBB2A: lea     ecx, [esp+8E8h+FileName]
 0x7BBB31: push    ecx; lpFileName
 0x7BBB32: mov     ecx, esi
-0x7BBB34: call    CreatePixelShader
+0x7BBB34: call    CreatePixelShader; Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.
 0x7BBB39: mov     ebx, [esi+0A4h]
 0x7BBB3F: mov     ebp, eax
 0x7BBB41: cmp     ebx, ebp
@@ -666,7 +666,7 @@
 0x7BBBE0: lea     ecx, [esp+8DCh+var_36C]
 0x7BBBE7: push    ecx; int
 0x7BBBE8: push    edi
-0x7BBBE9: call    sub_7B4780
+0x7BBBE9: call    BSShaderManager_GetPixelShaderTargetName
 0x7BBBEE: add     esp, 4
 0x7BBBF1: push    eax; Str1
 0x7BBBF2: lea     edx, [esp+8E4h+var_614]
@@ -674,7 +674,7 @@
 0x7BBBFA: lea     eax, [esp+8E8h+FileName]
 0x7BBC01: push    eax; lpFileName
 0x7BBC02: mov     ecx, esi
-0x7BBC04: call    CreatePixelShader
+0x7BBC04: call    CreatePixelShader; Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.
 0x7BBC09: mov     ebx, [esi+0A8h]
 0x7BBC0F: mov     ebp, eax
 0x7BBC11: cmp     ebx, ebp
@@ -724,14 +724,14 @@
 0x7BBCBE: lea     edx, [esp+8D8h+var_36C]
 0x7BBCC5: push    edi; int
 0x7BBCC6: push    edx; int
-0x7BBCC7: call    sub_7B47E0
+0x7BBCC7: call    BSShaderManager_GetVertexShaderTargetName
 0x7BBCCC: push    eax; int
 0x7BBCCD: lea     eax, [esp+8E4h+var_790]
 0x7BBCD4: push    eax; int
 0x7BBCD5: lea     ecx, [esp+8E8h+FileName]
 0x7BBCDC: push    ecx; lpFileName
 0x7BBCDD: mov     ecx, esi
-0x7BBCDF: call    CreateVertexShader
+0x7BBCDF: call    CreateVertexShader; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.
 0x7BBCE4: mov     ebx, [esi+0C4h]
 0x7BBCEA: mov     ebp, eax
 0x7BBCEC: cmp     ebx, ebp
@@ -783,14 +783,14 @@
 0x7BBD91: lea     ecx, [esp+8D8h+var_36C]
 0x7BBD98: push    edi; int
 0x7BBD99: push    ecx; int
-0x7BBD9A: call    sub_7B47E0
+0x7BBD9A: call    BSShaderManager_GetVertexShaderTargetName
 0x7BBD9F: push    eax; int
 0x7BBDA0: lea     edx, [esp+8E4h+var_8C0]
 0x7BBDA4: push    edx; int
 0x7BBDA5: lea     eax, [esp+8E8h+FileName]
 0x7BBDAC: push    eax; lpFileName
 0x7BBDAD: mov     ecx, esi
-0x7BBDAF: call    CreateVertexShader
+0x7BBDAF: call    CreateVertexShader; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.
 0x7BBDB4: mov     ebx, [esi+0C8h]
 0x7BBDBA: mov     ebp, eax
 0x7BBDBC: cmp     ebx, ebp
@@ -839,14 +839,14 @@
 0x7BBE5A: lea     edx, [esp+8D8h+var_36C]
 0x7BBE61: push    edi; int
 0x7BBE62: push    edx; int
-0x7BBE63: call    sub_7B47E0
+0x7BBE63: call    BSShaderManager_GetVertexShaderTargetName
 0x7BBE68: push    eax; int
 0x7BBE69: lea     eax, [esp+8E4h+var_57C]
 0x7BBE70: push    eax; int
 0x7BBE71: lea     ecx, [esp+8E8h+FileName]
 0x7BBE78: push    ecx; lpFileName
 0x7BBE79: mov     ecx, esi
-0x7BBE7B: call    CreateVertexShader
+0x7BBE7B: call    CreateVertexShader; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.
 0x7BBE80: mov     ebx, [esi+0CCh]
 0x7BBE86: mov     ebp, eax
 0x7BBE88: cmp     ebx, ebp
@@ -904,7 +904,7 @@
 0x7BBF49: lea     eax, [esp+8DCh+var_36C]
 0x7BBF50: push    eax; int
 0x7BBF51: push    edi
-0x7BBF52: call    sub_7B4780
+0x7BBF52: call    BSShaderManager_GetPixelShaderTargetName
 0x7BBF57: add     esp, 4
 0x7BBF5A: push    eax; Str1
 0x7BBF5B: lea     ecx, [esp+8E4h+var_4E4]
@@ -912,7 +912,7 @@
 0x7BBF63: lea     edx, [esp+8E8h+FileName]
 0x7BBF6A: push    edx; lpFileName
 0x7BBF6B: mov     ecx, esi
-0x7BBF6D: call    CreatePixelShader
+0x7BBF6D: call    CreatePixelShader; Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.
 0x7BBF72: mov     ebx, [esi+0D0h]
 0x7BBF78: mov     ebp, eax
 0x7BBF7A: cmp     ebx, ebp
@@ -971,7 +971,7 @@
 0x7BC046: lea     ecx, [esp+8DCh+var_36C]
 0x7BC04D: push    ecx; int
 0x7BC04E: push    edi
-0x7BC04F: call    sub_7B4780
+0x7BC04F: call    BSShaderManager_GetPixelShaderTargetName
 0x7BC054: add     esp, 4
 0x7BC057: push    eax; Str1
 0x7BC058: lea     edx, [esp+8E4h+var_744]
@@ -979,7 +979,7 @@
 0x7BC060: lea     eax, [esp+8E8h+FileName]
 0x7BC067: push    eax; lpFileName
 0x7BC068: mov     ecx, esi
-0x7BC06A: call    CreatePixelShader
+0x7BC06A: call    CreatePixelShader; Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.
 0x7BC06F: mov     ebx, [esi+0D4h]
 0x7BC075: mov     ebp, eax
 0x7BC077: cmp     ebx, ebp
@@ -1030,7 +1030,7 @@
 0x7BC121: lea     edx, [esp+8DCh+var_36C]
 0x7BC128: push    edx; int
 0x7BC129: push    edi
-0x7BC12A: call    sub_7B4780
+0x7BC12A: call    BSShaderManager_GetPixelShaderTargetName
 0x7BC12F: add     esp, 4
 0x7BC132: push    eax; Str1
 0x7BC133: lea     eax, [esp+8E4h+var_6AC]
@@ -1038,7 +1038,7 @@
 0x7BC13B: lea     ecx, [esp+8E8h+FileName]
 0x7BC142: push    ecx; lpFileName
 0x7BC143: mov     ecx, esi
-0x7BC145: call    CreatePixelShader
+0x7BC145: call    CreatePixelShader; Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.
 0x7BC14A: mov     ebx, [esi+0D8h]
 0x7BC150: mov     ebp, eax
 0x7BC152: cmp     ebx, ebp

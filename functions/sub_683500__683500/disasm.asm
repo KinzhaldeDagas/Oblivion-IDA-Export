@@ -25,19 +25,19 @@
 0x683540: jb      short loc_683530
 0x683542: xor     eax, eax
 0x683544: cmp     eax, ebp
-0x683546: mov     [esp+1Ch+var_C], eax
+0x683546: mov     [esp+1Ch+position], eax
 0x68354A: jz      short loc_6835A0
 0x68354C: lea     esp, [esp+0]
-0x683550: lea     eax, [esp+1Ch+var_8]
-0x683554: push    eax
-0x683555: lea     ecx, [esp+20h+var_4]
-0x683559: push    ecx
-0x68355A: lea     edx, [esp+24h+var_C]
-0x68355E: push    edx
-0x68355F: mov     ecx, edi
-0x683561: mov     [esp+28h+var_8], ebp
-0x683565: call    sub_452600
-0x68356A: mov     esi, [esp+1Ch+var_8]
+0x683550: lea     eax, [esp+1Ch+valueOut]
+0x683554: push    eax; valueOut
+0x683555: lea     ecx, [esp+20h+keyOut]
+0x683559: push    ecx; keyOut
+0x68355A: lea     edx, [esp+24h+position]
+0x68355E: push    edx; position
+0x68355F: mov     ecx, edi; self
+0x683561: mov     [esp+28h+valueOut], ebp
+0x683565: call    NiTMap_U32Pointer_GetNextEntry
+0x68356A: mov     esi, [esp+1Ch+valueOut]
 0x68356E: cmp     esi, ebp
 0x683570: jz      short loc_68359A
 0x683572: mov     ecx, [esi+4]
@@ -55,9 +55,9 @@
 0x68358D: push    1
 0x68358F: call    edx
 0x683591: push    esi
-0x683592: call    FormHeapFree
+0x683592: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x683597: add     esp, 4
-0x68359A: cmp     [esp+1Ch+var_C], ebp
+0x68359A: cmp     [esp+1Ch+position], ebp
 0x68359E: jnz     short loc_683550
 0x6835A0: mov     ecx, edi
 0x6835A2: call    NiTMap_Clear
@@ -76,18 +76,18 @@
 0x6835C8: jb      short loc_6835B8
 0x6835CA: xor     eax, eax
 0x6835CC: cmp     eax, ebp
-0x6835CE: mov     [esp+1Ch+var_C], eax
+0x6835CE: mov     [esp+1Ch+position], eax
 0x6835D2: jz      short loc_683624
-0x6835D4: lea     eax, [esp+1Ch+var_8]
-0x6835D8: push    eax
-0x6835D9: lea     ecx, [esp+20h+var_4]
-0x6835DD: push    ecx
-0x6835DE: lea     edx, [esp+24h+var_C]
-0x6835E2: push    edx
-0x6835E3: mov     ecx, edi
-0x6835E5: mov     [esp+28h+var_8], ebp
-0x6835E9: call    sub_452600
-0x6835EE: mov     esi, [esp+1Ch+var_8]
+0x6835D4: lea     eax, [esp+1Ch+valueOut]
+0x6835D8: push    eax; valueOut
+0x6835D9: lea     ecx, [esp+20h+keyOut]
+0x6835DD: push    ecx; keyOut
+0x6835DE: lea     edx, [esp+24h+position]
+0x6835E2: push    edx; position
+0x6835E3: mov     ecx, edi; self
+0x6835E5: mov     [esp+28h+valueOut], ebp
+0x6835E9: call    NiTMap_U32Pointer_GetNextEntry
+0x6835EE: mov     esi, [esp+1Ch+valueOut]
 0x6835F2: cmp     esi, ebp
 0x6835F4: jz      short loc_68361E
 0x6835F6: mov     ecx, [esi+4]
@@ -105,9 +105,9 @@
 0x683611: push    1
 0x683613: call    edx
 0x683615: push    esi
-0x683616: call    FormHeapFree
+0x683616: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x68361B: add     esp, 4
-0x68361E: cmp     [esp+1Ch+var_C], ebp
+0x68361E: cmp     [esp+1Ch+position], ebp
 0x683622: jnz     short loc_6835D4
 0x683624: mov     ecx, edi
 0x683626: call    NiTMap_Clear
@@ -127,19 +127,19 @@
 0x683650: jb      short loc_683640
 0x683652: xor     eax, eax
 0x683654: cmp     eax, ebp
-0x683656: mov     [esp+1Ch+var_C], eax
+0x683656: mov     [esp+1Ch+position], eax
 0x68365A: jz      short loc_6836B0
 0x68365C: lea     esp, [esp+0]
-0x683660: lea     eax, [esp+1Ch+var_8]
-0x683664: push    eax
-0x683665: lea     ecx, [esp+20h+var_4]
-0x683669: push    ecx
-0x68366A: lea     edx, [esp+24h+var_C]
-0x68366E: push    edx
-0x68366F: mov     ecx, edi
-0x683671: mov     [esp+28h+var_8], ebp
-0x683675: call    sub_452600
-0x68367A: mov     esi, [esp+1Ch+var_8]
+0x683660: lea     eax, [esp+1Ch+valueOut]
+0x683664: push    eax; valueOut
+0x683665: lea     ecx, [esp+20h+keyOut]
+0x683669: push    ecx; keyOut
+0x68366A: lea     edx, [esp+24h+position]
+0x68366E: push    edx; position
+0x68366F: mov     ecx, edi; self
+0x683671: mov     [esp+28h+valueOut], ebp
+0x683675: call    NiTMap_U32Pointer_GetNextEntry
+0x68367A: mov     esi, [esp+1Ch+valueOut]
 0x68367E: cmp     esi, ebp
 0x683680: jz      short loc_6836AA
 0x683682: mov     ecx, [esi+4]
@@ -157,9 +157,9 @@
 0x68369D: push    1
 0x68369F: call    edx
 0x6836A1: push    esi
-0x6836A2: call    FormHeapFree
+0x6836A2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6836A7: add     esp, 4
-0x6836AA: cmp     [esp+1Ch+var_C], ebp
+0x6836AA: cmp     [esp+1Ch+position], ebp
 0x6836AE: jnz     short loc_683660
 0x6836B0: mov     ecx, edi
 0x6836B2: pop     edi

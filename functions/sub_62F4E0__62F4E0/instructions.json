@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x62F4E0",
-    "line": "sub     esp, 24h",
+    "line": "sub     esp, 24h; HighProcess dialogue-procedure update. Turns awake participants toward each other, counts down response timing, waits for the current sound handle, invokes DialoguePackage::Speak(true), and cleans the shared dynamic package after procedureCompleted becomes true.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -55,19 +55,19 @@
   },
   {
     "ea": "0x62F4F6",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62F4F8",
-    "line": "call    sub_779480",
+    "line": "call    DialoguePackage__GetTarget; DialoguePackage participant accessor: returns the target at +0x60.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x62F4FD",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x62F501",
-    "line": "call    NiDX9TextureData__GetLevels",
+    "line": "call    DialoguePackage__GetSpeaker; DialoguePackage participant accessor: returns the original initiating speaker at +0x5C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x62F52F",
-    "line": "cmp     esi, [esp+34h+arg_0]",
+    "line": "cmp     esi, [esp+34h+owner]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x62F585",
-    "line": "call    sub_683CB0",
+    "line": "call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).",
     "mnemonic": "call",
     "size": 5
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x62F610",
-    "line": "call    sub_5E05F0",
+    "line": "call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x62F67D",
-    "line": "call    sub_683CB0",
+    "line": "call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1033,7 +1033,7 @@
   },
   {
     "ea": "0x62F708",
-    "line": "call    sub_5E05F0",
+    "line": "call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1063,7 +1063,7 @@
   },
   {
     "ea": "0x62F717",
-    "line": "jp      short loc_62F72F",
+    "line": "jp      short loc_62F72F; High-detail playback is gated by responseTimeRemaining. While positive it is reduced by the frame delta; at zero the sound/procedure state decides whether to speak, wait, or clean up.",
     "mnemonic": "jp",
     "size": 2
   },
@@ -1159,7 +1159,7 @@
   },
   {
     "ea": "0x62F745",
-    "line": "mov     ecx, [ebx+3Ch]",
+    "line": "mov     ecx, [ebx+3Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1177,7 +1177,7 @@
   },
   {
     "ea": "0x62F74C",
-    "line": "call    sub_6B7260",
+    "line": "call    SoundHandle__IsPlaying; If procedure is not complete, wait while dialogue sound is playing and call Speak(true) only when no live sound handle remains. If procedure is complete and sound is no longer playing, enter package cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1195,7 +1195,7 @@
   },
   {
     "ea": "0x62F755",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1207,13 +1207,13 @@
   },
   {
     "ea": "0x62F759",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x62F75E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1225,7 +1225,7 @@
   },
   {
     "ea": "0x62F762",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1249,7 +1249,7 @@
   },
   {
     "ea": "0x62F76D",
-    "line": "mov     ebp, [esp+34h+arg_0]",
+    "line": "mov     ebp, [esp+34h+owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1273,7 +1273,7 @@
   },
   {
     "ea": "0x62F77C",
-    "line": "call    edx",
+    "line": "call    edx; Completed high-detail conversation: Character::CleanupCurrentPackage restores participant package state and destroys the shared dynamic DialoguePackage/Conversation.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1291,7 +1291,7 @@
   },
   {
     "ea": "0x62F782",
-    "line": "call    sub_5E05F0",
+    "line": "call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1459,7 +1459,7 @@
   },
   {
     "ea": "0x62F7C8",
-    "line": "mov     ecx, [ebx+3Ch]",
+    "line": "mov     ecx, [ebx+3Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1477,7 +1477,7 @@
   },
   {
     "ea": "0x62F7CF",
-    "line": "call    sub_6B7260",
+    "line": "call    SoundHandle__IsPlaying; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1495,19 +1495,19 @@
   },
   {
     "ea": "0x62F7DC",
-    "line": "push    1; AnimSequenceSingle *",
+    "line": "push    1; startSpeech",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x62F7DE",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62F7E0",
-    "line": "call    sub_6267A0",
+    "line": "call    DialoguePackage__Speak; HighProcess audible advance: starts the selected DialogueResponse, or advances/commits an exhausted item, with startSpeech=true.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1549,7 +1549,7 @@
   },
   {
     "ea": "0x62F7EF",
-    "line": "mov     eax, [esp+30h+arg_0]",
+    "line": "mov     eax, [esp+30h+owner]",
     "mnemonic": "mov",
     "size": 4
   },

@@ -1,4 +1,4 @@
-BSStringT *sub_A16360()
+NiRTTI *sub_A16360()
 {
-  return sub_70E220(&stru_BAA890, "NiSCMExtraData", (int)dword_B3FD44);
+  return NiRTTI_Constructor(&stru_BAA890, "NiSCMExtraData", &stru_B3FD44); /*0xa16374*/
 }

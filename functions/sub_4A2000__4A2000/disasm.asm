@@ -5,7 +5,7 @@
 0x4A2014: push    esi
 0x4A2015: mov     esi, [esp+11Ch+Str1]
 0x4A201C: push    edi
-0x4A201D: push    offset CriticalSection; lpCriticalSection
+0x4A201D: push    0B35380h; lpCriticalSection
 0x4A2022: mov     edi, ecx
 0x4A2024: call    dword ptr ds:0A2806Ch
 0x4A202A: call    dword ptr ds:0A2808Ch
@@ -14,7 +14,7 @@
 0x4A203C: lea     eax, [esp+120h+FullPath]
 0x4A2040: push    eax; int
 0x4A2041: push    esi; Str1
-0x4A2042: call    sub_47D8F0
+0x4A2042: call    sub_47D8F0; SpeedTreeOBSE 2026-07-14: normalizes texture palette keys in a fixed 256-byte local buffer. Plugin loader inputs are therefore capped at 255 characters.
 0x4A2047: lea     ecx, [esp+128h+var_114]
 0x4A204B: push    ecx; int
 0x4A204C: lea     edx, [esp+12Ch+var_10C]
@@ -60,7 +60,7 @@
 0x4A20BE: sub     dword ptr ds:0B353FCh, 1
 0x4A20C5: jnz     short loc_4A20D1
 0x4A20C7: mov     dword ptr ds:0B353F8h, 0
-0x4A20D1: push    offset CriticalSection; lpCriticalSection
+0x4A20D1: push    0B35380h; lpCriticalSection
 0x4A20D6: call    dword ptr ds:0A28074h
 0x4A20DC: mov     ecx, [esp+120h+var_4]
 0x4A20E3: pop     edi

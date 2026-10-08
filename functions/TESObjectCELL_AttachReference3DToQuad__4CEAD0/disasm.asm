@@ -39,7 +39,7 @@
 0x4CEB44: test    ebp, ebp
 0x4CEB46: jz      loc_4CEC09
 0x4CEB4C: lea     ebx, [ebp+54h]
-0x4CEB4F: push    offset Vector3_InitValue?
+0x4CEB4F: push    offset g_zeroNiPoint3
 0x4CEB54: mov     ecx, ebx
 0x4CEB56: call    sub_8AA350
 0x4CEB5B: test    al, al
@@ -76,7 +76,7 @@
 0x4CEBC2: mov     ecx, edi
 0x4CEBC4: call    eax
 0x4CEBC6: mov     ecx, eax
-0x4CEBC8: call    NiObjectNET_GetExtraData
+0x4CEBC8: call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.
 0x4CEBCD: test    eax, eax
 0x4CEBCF: jz      short loc_4CEBD7
 0x4CEBD1: test    byte ptr [eax+0Ch], 1
@@ -98,48 +98,48 @@
 0x4CEBFD: push    2
 0x4CEBFF: push    ebx
 0x4CEC00: mov     ecx, esi
-0x4CEC02: call    sub_441800
+0x4CEC02: call    sub_441800; ODismemberment authority: loaded cell effect child lookup by quadrant/index; hit particles use index 3 after sub_4C9BE0(ref).
 0x4CEC07: mov     esi, eax
 0x4CEC09: test    esi, esi
 0x4CEC0B: jz      loc_4CECC8
-0x4CEC11: mov     ecx, ds:0B333C4h
+0x4CEC11: mov     ecx, ds:0B333C4h; this
 0x4CEC17: cmp     edi, ecx
 0x4CEC19: push    1
 0x4CEC1B: jnz     loc_4CECA8
 0x4CEC21: mov     edi, [esi]
-0x4CEC23: push    0
-0x4CEC25: call    PlayerCharacter_GetPlayerNode
+0x4CEC23: push    0; firstPerson
+0x4CEC25: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x4CEC2A: mov     edx, [edi+84h]
 0x4CEC30: push    eax
 0x4CEC31: mov     ecx, esi
 0x4CEC33: call    edx
-0x4CEC35: mov     ecx, ds:0B333C4h
-0x4CEC3B: push    0
-0x4CEC3D: call    PlayerCharacter_GetPlayerNode
+0x4CEC35: mov     ecx, ds:0B333C4h; this
+0x4CEC3B: push    0; firstPerson
+0x4CEC3D: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x4CEC42: mov     ecx, eax; this
-0x4CEC44: call    NiAVObject_InitializePropertyState
-0x4CEC49: mov     ecx, ds:0B333C4h
-0x4CEC4F: push    0
-0x4CEC51: call    PlayerCharacter_GetPlayerNode
+0x4CEC44: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
+0x4CEC49: mov     ecx, ds:0B333C4h; this
+0x4CEC4F: push    0; firstPerson
+0x4CEC51: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x4CEC56: mov     ecx, eax
 0x4CEC58: call    NiNode_UpdateDynamicEffectState
-0x4CEC5D: mov     ecx, ds:0B333C4h
+0x4CEC5D: mov     ecx, ds:0B333C4h; this
 0x4CEC63: mov     edi, [esi]
 0x4CEC65: push    1
-0x4CEC67: push    1
-0x4CEC69: call    PlayerCharacter_GetPlayerNode
+0x4CEC67: push    1; firstPerson
+0x4CEC69: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x4CEC6E: push    eax
 0x4CEC6F: mov     eax, [edi+84h]
 0x4CEC75: mov     ecx, esi
 0x4CEC77: call    eax
-0x4CEC79: mov     ecx, ds:0B333C4h
-0x4CEC7F: push    1
-0x4CEC81: call    PlayerCharacter_GetPlayerNode
+0x4CEC79: mov     ecx, ds:0B333C4h; this
+0x4CEC7F: push    1; firstPerson
+0x4CEC81: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x4CEC86: mov     ecx, eax; this
-0x4CEC88: call    NiAVObject_InitializePropertyState
-0x4CEC8D: mov     ecx, ds:0B333C4h
-0x4CEC93: push    1
-0x4CEC95: call    PlayerCharacter_GetPlayerNode
+0x4CEC88: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
+0x4CEC8D: mov     ecx, ds:0B333C4h; this
+0x4CEC93: push    1; firstPerson
+0x4CEC95: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x4CEC9A: mov     ecx, eax
 0x4CEC9C: call    NiNode_UpdateDynamicEffectState
 0x4CECA1: pop     ebp
@@ -154,7 +154,7 @@
 0x4CECB4: mov     ecx, esi
 0x4CECB6: call    edx
 0x4CECB8: mov     ecx, [edi+3Ch]; this
-0x4CECBB: call    NiAVObject_InitializePropertyState
+0x4CECBB: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x4CECC0: mov     ecx, [edi+3Ch]
 0x4CECC3: call    NiNode_UpdateDynamicEffectState
 0x4CECC8: pop     ebp

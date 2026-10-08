@@ -1,109 +1,97 @@
-void __usercall sub_5976B0(
-        int a1@<ecx>,
-        int a2@<ebp>,
-        double a3@<st2>,
-        double a4@<st1>,
-        double a5@<st0>,
-        int a6,
-        int a7,
-        int a8,
-        int a9,
-        int a10,
-        int a11,
-        int a12)
+void __usercall sub_5976B0(int a1@<ecx>, double a2@<st2>, double a3@<st1>, double a4@<st0>)
 {
-  int v13; // edi
+  int v5; // edi
+  int v6; // ebp
   char *m_data; // eax
-  bool v15; // zf
-  const char *v16; // esi
-  const char *v17; // eax
-  const char *v18; // esi
-  const char *v19; // ecx
-  BSStringT v20; // [esp+14h] [ebp-14h] BYREF
-  unsigned int v21; // [esp+24h] [ebp-4h]
+  bool v8; // zf
+  char *v9; // esi
+  const char *v10; // eax
+  const char *v11; // esi
+  const char *v12; // ecx
+  BSStringT v13; // [esp+14h] [ebp-14h] BYREF
+  unsigned int v14; // [esp+24h] [ebp-4h]
 
-  if ( sub_578FE0() != 0x41B )
+  if ( sub_578FE0() != 0x41B ) /*0x5976e3*/
   {
-    v13 = (*(int (__thiscall **)(int))(*(_DWORD *)a1 + 0x34))(a1);
-    if ( sub_578FE0() == v13 && !*(_BYTE *)(a1 + 0x54) )
+    v5 = (*(int (__thiscall **)(int))(*(_DWORD *)a1 + 0x34))(a1); /*0x597709*/
+    if ( sub_578FE0() == v5 && !*(_BYTE *)(a1 + 0x54) ) /*0x59771a*/
     {
-      if ( byte_B3B274 )
+      if ( LOBYTE(dword_B3B0B4[0x70]) ) /*0x597726*/
       {
-        a2 = (*(int (__thiscall **)(int))(*(_DWORD *)a1 + 0x34))(a1);
-        if ( sub_578FE0() == a2 )
+        v6 = (*(int (__thiscall **)(int))(*(_DWORD *)a1 + 0x34))(a1); /*0x597737*/
+        if ( sub_578FE0() == v6 ) /*0x597740*/
         {
-          m_data = stru_B3B738.m_data;
-          v15 = stru_B3B738.m_data == 0;
-          byte_B3B274 = 0;
-          if ( v15 || !*m_data )
+          m_data = unk_B3B738.m_data; /*0x597742*/
+          v8 = unk_B3B738.m_data == 0; /*0x597747*/
+          LOBYTE(dword_B3B0B4[0x70]) = 0; /*0x597749*/
+          if ( v8 || !*m_data ) /*0x597751*/
           {
-            --*(_DWORD *)(a1 + 0x58);
+            --*(_DWORD *)(a1 + 0x58); /*0x597767*/
           }
           else
           {
-            sub_488810((BSStringT *)(a1 + 0x84), m_data);
-            ++*(_DWORD *)(a1 + 0x58);
+            sub_488810((BSStringT *)(a1 + 0x84), m_data); /*0x59775c*/
+            ++*(_DWORD *)(a1 + 0x58); /*0x597761*/
           }
         }
       }
-      switch ( *(_DWORD *)(a1 + 0x58) )
+      switch ( *(_DWORD *)(a1 + 0x58) ) /*0x597779*/
       {
-        case 1:
-          sub_5D6390(a3, a4, *(_DWORD *)(a1 + 0x50));
-          return;
-        case 2:
-          sub_5D6390(a3, a4, *(_DWORD *)(a1 + 0x4C));
-          return;
-        case 3:
-          sub_5D6390(a3, a4, *(_DWORD *)(a1 + 0x48));
-          return;
-        case 4:
-          v16 = *(const char **)(*(_DWORD *)(a1 + 0x40) + 0x1C);
-          if ( !v16 )
-            v16 = EmptyString;
-          TextMenu_Create(a2, a3, a4, (const char *)dword_B38658, v16);
-          return;
-        case 5:
-          *(_BYTE *)(a1 + 0x54) = 1;
-          v20.m_data = 0;
-          v20.m_dataLen = 0;
-          v20.m_bufLen = 0;
-          v15 = *(_DWORD *)(a1 + 0x34) == 0;
-          v17 = (const char *)dword_B38F40;
-          v21 = 0;
-          if ( v15 )
+        case 1: /*0x597779*/
+          SkillsMenu_Create(a2, a4, *(_DWORD *)(a1 + 0x50)); /*0x597786*/
+          return; /*0x5977a1*/
+        case 2: /*0x597779*/
+          SkillsMenu_Create(a2, a4, *(_DWORD *)(a1 + 0x4C)); /*0x5977a8*/
+          return; /*0x5977c3*/
+        case 3: /*0x597779*/
+          SkillsMenu_Create(a2, a4, *(_DWORD *)(a1 + 0x48)); /*0x5977c9*/
+          return; /*0x5977e4*/
+        case 4: /*0x597779*/
+          v9 = *(char **)(*(_DWORD *)(a1 + 0x40) + 0x1C); /*0x5977eb*/
+          if ( !v9 ) /*0x5977f0*/
+            v9 = EmptyString; /*0x5977f2*/
+          TextMenu_Create(a2, a3, a4, (char *)stru_B38658, v9); /*0x5977fe*/
+          return; /*0x597819*/
+        case 5: /*0x597779*/
+          *(_BYTE *)(a1 + 0x54) = 1; /*0x59781a*/
+          v13.m_data = 0; /*0x59781e*/
+          v13.m_dataLen = 0; /*0x597822*/
+          v13.m_bufLen = 0; /*0x597827*/
+          v8 = *(_DWORD *)(a1 + 0x34) == 0; /*0x59782c*/
+          v10 = (const char *)stru_B38F40; /*0x59782f*/
+          v14 = 0; /*0x597834*/
+          if ( v8 ) /*0x597838*/
           {
-            v18 = *(const char **)(a1 + 0x84);
-            v19 = (const char *)dword_B38648;
+            v11 = *(const char **)(a1 + 0x84); /*0x597854*/
+            v12 = (const char *)stru_B38648; /*0x59785a*/
           }
           else
           {
-            v18 = *(const char **)(*(_DWORD *)(a1 + 0x40) + 0x1C);
-            if ( !v18 )
-              v18 = EmptyString;
-            v19 = *(const char **)dword_B38650;
+            v11 = *(const char **)(*(_DWORD *)(a1 + 0x40) + 0x1C); /*0x597840*/
+            if ( !v11 ) /*0x597845*/
+              v11 = EmptyString; /*0x597847*/
+            v12 = *(const char **)stru_B38650; /*0x59784c*/
           }
-          BSStringT_Static_Format(&v20, "%s %s %s?", v19, v18, v17);
-          ShowUIMessageBox(
-            (char *)MessageButtonTextYes,
+          BSStringT_Static_Format(&v13, "%s %s %s?", v12, v11, v10); /*0x59786d*/
+          ShowUIMessageBox( /*0x59788f*/
+            (char *)MEMORY[0xB38CF8],
             a2,
             a3,
             a4,
-            a5,
-            v20.m_data,
+            v13.m_data,
             (int)sub_5974E0,
             1,
-            (const char *)MessageButtonTextYes,
-            MessageButtonTextNo);
-          v21 = 0xFFFFFFFF;
-          BSStringT_Clear((unsigned int *)&v20);
-          def_597779(a6, a7, a8, a9, a10, a11, a12);
-          return;
+            (char *)MEMORY[0xB38CF8],
+            MEMORY[0xB38D00]);
+          v14 = 0xFFFFFFFF; /*0x59789b*/
+          BSStringT_Clear((unsigned int *)&v13); /*0x59789f*/
+          def_597779(); /*0x5978a0*/
+          return; /*0x5978a0*/
         default:
           break;
       }
     }
-    JUMPOUT(0x5978A4);
+    JUMPOUT(0x5978A4); /*0x5978a4*/
   }
-  byte_B3B274 = 1;
+  LOBYTE(dword_B3B0B4[0x70]) = 1; /*0x5976e5*/
 }

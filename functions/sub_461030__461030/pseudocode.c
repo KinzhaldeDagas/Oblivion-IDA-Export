@@ -7,39 +7,39 @@ double __userpurge sub_461030@<st0>(
 {
   float v5; // edi
   int v7; // eax
-  TESObjectCELL *ParentCell; // eax
+  TESObjectCELL *DwordAtOffset40; // eax
   ExtraDataList *v9; // edi
   BSExtraDataVtbl *v10; // eax
 
-  v5 = *(float *)&OSGlobals->mainThreadID;
-  if ( ((int (__usercall *)@<eax>(double@<st0>, double@<st1>))GetCurrentThreadId)(result, a3) == LODWORD(v5) )
-    LOBYTE(v7) = *((_BYTE *)this + 0x18);
+  v5 = *(float *)&MEMORY[0xB33398]->mainThreadID; /*0x461037*/
+  if ( ((int (__usercall *)@<eax>(double@<st0>, double@<st1>))GetCurrentThreadId)(result, a3) == LODWORD(v5) ) /*0x461044*/
+    LOBYTE(v7) = *((_BYTE *)this + 0x18); /*0x461046*/
   else
-    v7 = *(this + 6) >> 0x12;
-  if ( (v7 & 1) != 0 )
+    v7 = *(this + 6) >> 0x12; /*0x46104e*/
+  if ( (v7 & 1) != 0 ) /*0x461055*/
   {
-    sub_45CE00(this, st5_0, a3, result);
-    sub_45CEE0(this);
-    sub_459140(this);
-    if ( a5 )
+    SaveLoad_DrainAnimationBlobs(this, st5_0, a3, result); /*0x46105d*/
+    SaveLoad_DrainAttachedAnimationBlobs(this); /*0x461064*/
+    SaveLoad_DrainCharacterControllerBlobs(this); /*0x46106b*/
+    if ( a5 ) /*0x461075*/
     {
-      sub_677EC0((int)&ActorProcessManager_ptr, v5, st5_0, 0.0, 0.0, 0.0);
-      result = 0.0;
-      sub_4424D0(TES, 0.0);
-      ParentCell = TESObjectREFR_GetParentCell((TESObjectREFR *)TESDataHandler_g_PlayerRef);
-      v9 = (ExtraDataList *)ParentCell;
-      if ( ParentCell )
+      sub_677EC0((int)&qword_B3BB2C[0x75], v5, 0.0, a3, 0.0, 0.0); /*0x461084*/
+      result = 0.0; /*0x461089*/
+      sub_4424D0((ExtraDataList **)MEMORY[0xB333A0], 0.0);// ModernWindowsCompatible decode: secondary sub_4424D0 caller passes 0.0 during this flagged world/cell update path; not a fire-specific animation routine. /*0x461095*/
+      DwordAtOffset40 = (TESObjectCELL *)Shared_GetDwordAtOffset40(reference); /*0x4610a0*/
+      v9 = (ExtraDataList *)DwordAtOffset40; /*0x4610a5*/
+      if ( DwordAtOffset40 ) /*0x4610a9*/
       {
-        if ( TESObjectCELL_IsInterior(ParentCell) )
-          v10 = sub_424180(v9 + 2);
+        if ( TESObjectCELL_IsInterior(DwordAtOffset40) ) /*0x4610ad*/
+          v10 = sub_424180(v9 + 2); /*0x4610b9*/
         else
-          v10 = (BSExtraDataVtbl *)bhkWorldM;
-        if ( v10 )
-          sub_88BC20(v10);
+          v10 = (BSExtraDataVtbl *)MEMORY[0xB35C24]; /*0x4610c0*/
+        if ( v10 ) /*0x4610c7*/
+          sub_88BC20(v10); /*0x4610cb*/
       }
     }
-    sub_45D030(this);
-    sub_45D190(this);
+    SaveLoad_DrainHavokBlobs(this); /*0x4610d2*/
+    sub_45D190(this); /*0x4610d9*/
   }
-  return result;
+  return result; /*0x4610de*/
 }

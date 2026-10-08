@@ -1,58 +1,58 @@
 void __thiscall sub_6DD980(_DWORD *this, _DWORD *a2)
 {
-  int v4; // eax
-  int v5; // edi
-  int v6; // ebp
-  int v7; // eax
-  int v8; // edi
-  int v9; // ebx
-  _DWORD *v10; // eax
-  int v11; // ecx
-  int v12; // edx
-  int v13; // eax
+  int v3; // eax
+  int v4; // edi
+  int v5; // ebp
+  int v6; // eax
+  int v7; // edi
+  int v8; // ebx
+  _DWORD *v9; // eax
+  int v10; // ecx
+  int v11; // edx
+  int v12; // eax
 
-  sub_715E70(this, a2);
-  v4 = sub_7124A0(a2);
-  v5 = this[0x12];
-  v6 = v4;
-  if ( v5 != v4 )
+  NiTimeController_LinkObject(this, a2); /*0x6dd98b*/
+  v3 = sub_7124A0(a2); /*0x6dd992*/
+  v4 = *(this + 0x12); /*0x6dd997*/
+  v5 = v3; /*0x6dd99a*/
+  if ( v4 != v3 ) /*0x6dd99e*/
   {
-    if ( v5 )
+    if ( v4 ) /*0x6dd9a2*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)(v5 + 4)) )
-        (**(void (__thiscall ***)(int, int))v5)(v5, 1);
+      if ( !InterlockedDecrement((volatile LONG *)(v4 + 4)) ) /*0x6dd9a8*/
+        (**(void (__thiscall ***)(int, int))v4)(v4, 1); /*0x6dd9be*/
     }
-    this[0x12] = v6;
-    if ( v6 )
-      InterlockedIncrement((volatile LONG *)(v6 + 4));
+    *(this + 0x12) = v5; /*0x6dd9c2*/
+    if ( v5 ) /*0x6dd9c5*/
+      InterlockedIncrement((volatile LONG *)(v5 + 4)); /*0x6dd9cb*/
   }
-  v7 = sub_7124A0(a2);
-  v8 = this[0x13];
-  v9 = v7;
-  if ( v8 != v7 )
+  v6 = sub_7124A0(a2); /*0x6dd9d3*/
+  v7 = *(this + 0x13); /*0x6dd9d8*/
+  v8 = v6; /*0x6dd9db*/
+  if ( v7 != v6 ) /*0x6dd9df*/
   {
-    if ( v8 )
+    if ( v7 ) /*0x6dd9e3*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)(v8 + 4)) )
-        (**(void (__thiscall ***)(int, int))v8)(v8, 1);
+      if ( !InterlockedDecrement((volatile LONG *)(v7 + 4)) ) /*0x6dd9e9*/
+        (**(void (__thiscall ***)(int, int))v7)(v7, 1); /*0x6dd9ff*/
     }
-    this[0x13] = v9;
-    if ( v9 )
-      InterlockedIncrement((volatile LONG *)(v9 + 4));
+    *(this + 0x13) = v8; /*0x6dda03*/
+    if ( v8 ) /*0x6dda06*/
+      InterlockedIncrement((volatile LONG *)(v8 + 4)); /*0x6dda0c*/
   }
-  *((_WORD *)this + 0x1E) |= 1u;
-  if ( (this[0xF] & 0x10) != 0 && (this[0xF] & 1) != 0 )
+  *((_WORD *)this + 0x1E) |= 1u; /*0x6dda12*/
+  if ( (*(_WORD *)(this + 0xF) & 0x10) != 0 && (*(_BYTE *)(this + 0xF) & 1) != 0 ) /*0x6dda26*/
   {
-    *((float *)this + 0x15) = sub_6DD490((int)this);
-    *((_WORD *)this + 0x1E) &= ~1u;
+    *((float *)this + 0x15) = sub_6DD490((int)this); /*0x6dda2f*/
+    *((_WORD *)this + 0x1E) &= ~1u; /*0x6dda32*/
   }
-  v10 = (_DWORD *)this[0x12];
-  if ( v10 )
+  v9 = (_DWORD *)*(this + 0x12); /*0x6dda38*/
+  if ( v9 ) /*0x6dda3d*/
   {
-    v11 = v10[2];
-    v12 = v10[4];
-    v13 = v10[3];
-    if ( v11 )
-      *((float *)this + 0x19) = ((double (__cdecl *)(int, int))*(_DWORD *)(4 * v12 + 0xB3D130))(v13, v11);
+    v10 = v9[2]; /*0x6dda3f*/
+    v11 = v9[4]; /*0x6dda44*/
+    v12 = v9[3]; /*0x6dda47*/
+    if ( v10 ) /*0x6dda4a*/
+      *((float *)this + 0x19) = ((double (__cdecl *)(int, int))*(_DWORD *)(4 * v11 + 0xB3D130))(v12, v10); /*0x6dda5d*/
   }
 }

@@ -1,1 +1,1 @@
-0x717900: jmp     sub_723350
+0x717900: jmp     NiGeometry_LinkObject; 2026-10-08 verified NiGeometry LinkObject: first base7081B0 links inherited properties/collision, then two7124A0 stream object resolutions replace+B4 modelData and+B8 skinInstance with exact reference accounting; RET4. Strong family correspondence to Fallout/Xenon82C08C18 (NiAVObject::LinkObject and two object-link resolutions), independently checked in Oblivion body. Base/virtual/destructor side effects prevent narrow ECX-only invalidation without more proof.

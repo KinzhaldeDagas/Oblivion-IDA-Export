@@ -1,4 +1,4 @@
-0x49E280: push    0FFFFFFFFh
+0x49E280: push    0FFFFFFFFh; Pass205/206: LODWaterRoot jump-table loop creates four generated child quads under 0x00B35234 and reaches shared child-creation tail.
 0x49E282: push    offset SEH_49E280
 0x49E287: mov     eax, large fs:0
 0x49E28D: push    eax
@@ -34,7 +34,7 @@
 0x49E2EE: jmp     short loc_49E2F2
 0x49E2F0: xor     eax, eax
 0x49E2F2: push    eax; a2
-0x49E2F3: mov     ecx, offset LodWaterRoot; this
+0x49E2F3: mov     ecx, 0B35234h; this
 0x49E2F8: mov     [esp+40h+var_4], 0FFFFFFFFh
 0x49E300: call    NiSmartPointer_Set??
 0x49E305: mov     ecx, ds:0B35234h
@@ -61,7 +61,6 @@
 0x49E35E: fld     dword ptr ds:0A3F4E0h
 0x49E364: jmp     short loc_49E39E
 0x49E366: jmp     short loc_49E370
-0x49E368: align 10h
 0x49E370: fld     dword ptr ds:0A3F4E8h
 0x49E376: fld     dword ptr ds:0A3F4ECh
 0x49E37C: fld     dword ptr ds:0A3F4F0h
@@ -76,7 +75,7 @@
 0x49E39A: fxch    st(2)
 0x49E39C: fxch    st(1)
 0x49E39E: cmp     edi, 3; switch 4 cases
-0x49E3A1: ja      short def_49E3A3
+0x49E3A1: ja      short def_49E3A3; Pass205/206: Internal shared child-creation tail inside 0x0049E280; not standalone function. Later writes +0x71 for LODWaterRoot children.
 0x49E3A3: jmp     ds:jpt_49E3A3[edi*4]; switch jump
 0x49E3AA: fstp    st(1); jumptable 0049E3A3 case 0
 0x49E3AC: fstp    st
@@ -107,3 +106,15 @@
 0x49E3F6: fstp    st(3); jumptable 0049E3A3 case 3
 0x49E3F8: fstp    st(1)
 0x49E3FA: jmp     short loc_49E3DE
+0x9B1C00: mov     eax, [ebp-1Ch]
+0x9B1C03: push    eax
+0x9B1C04: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B1C09: pop     ecx
+0x9B1C0A: retn
+0x9B1C0B: mov     edx, [esp+arg_4]
+0x9B1C0F: lea     eax, [edx-2Ch]
+0x9B1C12: mov     ecx, [edx-30h]
+0x9B1C15: xor     ecx, eax
+0x9B1C17: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B1C1C: mov     eax, offset stru_ADDCD4
+0x9B1C21: jmp     ___CxxFrameHandler3

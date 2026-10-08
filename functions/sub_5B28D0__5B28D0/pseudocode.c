@@ -11,45 +11,45 @@ char __userpurge sub_5B28D0@<al>(
         int ArgList,
         float a11)
 {
-  _DWORD *v13; // ecx
+  _DWORD *v12; // ecx
   char *m_data; // edi
-  BSStringT v16; // [esp+14h] [ebp-14h] BYREF
-  int v17; // [esp+24h] [ebp-4h]
+  BSStringT v15; // [esp+14h] [ebp-14h] BYREF
+  int v16; // [esp+24h] [ebp-4h]
 
   if ( InterfaceManager_MenuModeHasFocus(0x3FE) )
   {
-    v16.m_data = 0;
-    v16.m_dataLen = 0;
-    v16.m_bufLen = 0;
-    v17 = 0;
-    BSStringT_Static_Format(&v16, "Button: %i   - %0.2f", ArgList, a11);
-    v13 = *(_DWORD **)(a1 + 4);
-    m_data = v16.m_data;
-    Tile_SetString(v13, (_DWORD *)0xFBD, v16.m_data);
-    switch ( ArgList )
+    v15.m_data = 0; /*0x5b290e*/
+    v15.m_dataLen = 0; /*0x5b2912*/
+    v15.m_bufLen = 0; /*0x5b2917*/
+    v16 = 0; /*0x5b292b*/
+    BSStringT_Static_Format(&v15, "Button: %i   - %0.2f", ArgList, a11);
+    v12 = *(_DWORD **)(a1 + 4); /*0x5b293e*/
+    m_data = v15.m_data; /*0x5b2941*/
+    Tile_SetString(v12, (_DWORD *)0xFBD, v15.m_data); /*0x5b294e*/
+    switch ( ArgList ) /*0x5b2956*/
     {
-      case 0xD:
-        if ( a11 >= 1.0 )
+      case 0xD: /*0x5b2956*/
+        if ( a11 >= 1.0 ) /*0x5b2963*/
         {
-          sub_5A5EF0(a9, a8, a2, 1.0);
-          FormHeapFree((unsigned int)m_data);
-          return 1;
+          sub_5A5EF0(a9, a8, a2, 1.0); /*0x5b2969*/
+          FormHeapFree((unsigned int)m_data); /*0x5b296f*/
+          return 1; /*0x5b298a*/
         }
         break;
-      case 0xE:
-        if ( a11 >= 1.0 )
+      case 0xE: /*0x5b2956*/
+        if ( a11 >= 1.0 ) /*0x5b299d*/
         {
-          sub_5A5FD0(a8, a9, a2, 1.0);
-          FormHeapFree((unsigned int)m_data);
-          return 1;
+          sub_5A5FD0(a8, a9, a2, 1.0); /*0x5b299f*/
+          FormHeapFree((unsigned int)m_data); /*0x5b29a5*/
+          return 1; /*0x5b29c0*/
         }
         break;
-      case 0xC:
-        sub_5C1F70(a2, a3, a4, a5, a6, a7, a8, a9, a11);
-        FormHeapFree((unsigned int)m_data);
-        return 1;
+      case 0xC: /*0x5b2956*/
+        Input_ProcessQuickSlotHotkeys(a2, a3, a4, a5, a6, a7, a8, a9, a11); /*0x5b29c8*/
+        FormHeapFree((unsigned int)m_data); /*0x5b29ce*/
+        return 1; /*0x5b29e9*/
     }
-    FormHeapFree((unsigned int)m_data);
+    FormHeapFree((unsigned int)m_data); /*0x5b29ed*/
   }
-  return 0;
+  return 0; /*0x5b2979*/
 }

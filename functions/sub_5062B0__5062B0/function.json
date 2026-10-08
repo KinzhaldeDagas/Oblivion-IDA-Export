@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x5062B0",
+      "0x5062C6"
+    ]
+  ],
+  "chunks_sha256": "949aef1ec7c1d0ce362c47bfde2d763cf542c11b67999bd6e75820e21ff7bddf",
+  "comment_regular": "Verified callback behavior: when its TESObjectREFR argument is non-null, enables that reference's linked PathGrid points across the active interior or loaded exterior grids, then returns success. Candidate command-name association: Oblivion contains an `EnableLinkedPathPoints` string at A4E3D4, which matches this behavior; no direct string/table xref was recovered, so the registration link is not Verified.",
+  "comment_repeatable": "Verified callback behavior: when its TESObjectREFR argument is non-null, enables that reference's linked PathGrid points across the active interior or loaded exterior grids, then returns success. Candidate command-name association: Oblivion contains an `EnableLinkedPathPoints` string at A4E3D4, which matches this behavior; no direct string/table xref was recovered, so the registration link is not Verified.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_5062B0",
+  "display_name": "TESPathGrid_EnableLinkedPointsCallback",
   "end_ea": "0x5062C6",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_5062B0",
+  "name": "TESPathGrid_EnableLinkedPointsCallback",
   "segment": ".text",
   "sha256": "949aef1ec7c1d0ce362c47bfde2d763cf542c11b67999bd6e75820e21ff7bddf",
   "size": 22,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5062B0",
-  "type": "char __cdecl(int, int, int)",
+  "total_chunk_size": 22,
+  "type": "char __cdecl(int arg1, int arg2, TESObjectREFR *reference)",
   "xrefs_from_count": 10,
-  "xrefs_to_count": 1
+  "xrefs_to_count": 0
 }

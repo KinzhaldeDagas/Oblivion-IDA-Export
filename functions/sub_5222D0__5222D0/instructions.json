@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5222D0",
-    "line": "sub     esp, 1Ch",
+    "line": "sub     esp, 1Ch; Authoritative Oblivion TESNPC auto-stat calculation. For each of 21 skills: major = 25+(level-1), non-major = 5+0.1*(level-1), then add 5+0.5*(level-1) for matching class specialization, then the signed race bonus, cap at 100, and store in TESNPC::baseSkills. The chargen placeholder class suppresses major/specialization contributions. Attributes start from sex-specific race values, add configured +5 class-primary bonuses, then add (level-1) per governed major skill or 0.2*(level-1) per governed non-major skill, capped at 100.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x52233B",
-    "line": "call    ActorValue_GetAVFromGroupOffset",
+    "line": "call    ActorValue_GetAVFromGroupOffset; mwMediumArmor: Oblivion group 2 maps skill offset to actor value by adding 0x0C. OpenMW/Morrowind skill index 2 is MediumArmor, but Oblivion offset 2 becomes actor value 0x0E (Blade). Do not pass Morrowind skill indexes directly through this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,13 +337,13 @@
   },
   {
     "ea": "0x52239C",
-    "line": "mov     ecx, [edi+104h]",
+    "line": "mov     ecx, [edi+104h]; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x5223A2",
-    "line": "call    ValueModifierEffect_GetAV",
+    "line": "call    Shared_GetDwordAtOffset38; TESClass context: read primaryAttribute1 through the linker-folded +0x38 getter.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x5223AB",
-    "line": "fld     dword ptr ds:0B362E4h",
+    "line": "fld     dword ptr ds:0B362E4h; If this attribute is TESClass::primaryAttribute1, add g_fAttributeClassPrimaryBonus (default +5).",
     "mnemonic": "fld",
     "size": 6
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x5223B9",
-    "line": "call    TESObjectREFR_GetNiNode",
+    "line": "call    Shared_GetDwordAtOffset3C; TESClass context: read primaryAttribute2 through the linker-folded +0x3C getter.",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x5223C2",
-    "line": "fld     dword ptr ds:0B362ECh",
+    "line": "fld     dword ptr ds:0B362ECh; If this attribute is TESClass::primaryAttribute2, add g_fAttributeClassSecondaryBonus (default +5).",
     "mnemonic": "fld",
     "size": 6
   },
@@ -415,31 +415,31 @@
   },
   {
     "ea": "0x5223D0",
-    "line": "mov     byte ptr [esp+2Ch+var_10], 0",
+    "line": "mov     [esp+2Ch+skillIndex], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x5223D5",
-    "line": "mov     esi, [esp+2Ch+var_10]",
+    "line": "mov     esi, dword ptr [esp+2Ch+skillIndex]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5223D9",
-    "line": "mov     ecx, ds:0B33A98h",
+    "line": "mov     ecx, ds:0B33A98h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x5223DF",
-    "line": "push    esi",
+    "line": "push    esi; skillIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5223E0",
-    "line": "call    TESDataHandler_GetTESSkillByCode",
+    "line": "call    TESDataHandler_GetTESSkillByCode; Return one of exactly 21 inline Oblivion TESSkill records. Reject skillIndex > 20; otherwise return TESDataHandler+0xD8+(skillIndex*0x60).",
     "mnemonic": "call",
     "size": 5
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x5223ED",
-    "line": "call    ActorValue_GetAVFromGroupOffset",
+    "line": "call    ActorValue_GetAVFromGroupOffset; Oblivion group 2 maps native skill index 0..20 to SkillActorValue 0x0C..0x20.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,19 +499,19 @@
   },
   {
     "ea": "0x522401",
-    "line": "mov     ecx, [edi+104h]",
+    "line": "mov     ecx, [edi+104h]; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x522407",
-    "line": "push    esi",
+    "line": "push    esi; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x522408",
-    "line": "call    sub_51BF00",
+    "line": "call    TESClass_GetMajorSkillAV; TESNPC auto-stat major branch: scan exactly seven class major AVs; a match selects the governed-major attribute contribution and major skill base formula.",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,13 +541,13 @@
   },
   {
     "ea": "0x522414",
-    "line": "call    ActorValue_GetGroupOffsetFromAV",
+    "line": "call    ActorValue_GetGroupOffsetFromAV; Oblivion group 2 maps a SkillActorValue back to its native skill index for TESSkill lookup.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x522419",
-    "line": "mov     ecx, ds:0B33A98h",
+    "line": "mov     ecx, ds:0B33A98h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -559,13 +559,13 @@
   },
   {
     "ea": "0x522422",
-    "line": "push    eax",
+    "line": "push    eax; skillIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x522423",
-    "line": "call    TESDataHandler_GetTESSkillByCode",
+    "line": "call    TESDataHandler_GetTESSkillByCode; Return one of exactly 21 inline Oblivion TESSkill records. Reject skillIndex > 20; otherwise return TESDataHandler+0xD8+(skillIndex*0x60).",
     "mnemonic": "call",
     "size": 5
   },
@@ -625,7 +625,7 @@
   },
   {
     "ea": "0x522448",
-    "line": "jz      short loc_522450",
+    "line": "jz      short loc_522450; Attribute scaling by governing skills: add (level-1) for a governed major skill; otherwise multiply by 0.2 before adding.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x522458",
-    "line": "mov     al, byte ptr [esp+2Ch+var_10]",
+    "line": "mov     al, [esp+2Ch+skillIndex]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x522460",
-    "line": "mov     byte ptr [esp+2Ch+var_10], al",
+    "line": "mov     [esp+2Ch+skillIndex], al",
     "mnemonic": "mov",
     "size": 4
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x52249D",
-    "line": "call    TESAttributes_SetAVi",
+    "line": "call    TESAttributes_SetAVi; TESAttributes_SetAVi: attributes are stored as single bytes in TESAttributes. AVU base-AV guards clamp attributes to 0..configuredLimit before player integer base setters/modifiers reach this storage.",
     "mnemonic": "call",
     "size": 5
   },
@@ -805,7 +805,7 @@
   },
   {
     "ea": "0x5224B8",
-    "line": "fstp    [esp+2Ch+var_10]",
+    "line": "fstp    dword ptr [esp+2Ch+skillIndex]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -829,7 +829,7 @@
   },
   {
     "ea": "0x5224C3",
-    "line": "call    ActorValue_GetAVFromGroupOffset",
+    "line": "call    ActorValue_GetAVFromGroupOffset; Convert native Oblivion skill index 0..20 to SkillActorValue 0x0C..0x20 before testing major membership.",
     "mnemonic": "call",
     "size": 5
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x5224D9",
-    "line": "xor     esi, esi",
+    "line": "xor     esi, esi; Scans exactly seven TESClass major-skill slots using TESClass_GetMajorSkillAV. Membership controls the major versus non-major base formula.",
     "mnemonic": "xor",
     "size": 2
   },
@@ -876,26 +876,20 @@
     "size": 2
   },
   {
-    "ea": "0x5224DD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x5224E0",
-    "line": "mov     ecx, [edi+104h]",
+    "line": "mov     ecx, [edi+104h]; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x5224E6",
-    "line": "push    esi",
+    "line": "push    esi; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5224E7",
-    "line": "call    sub_51BF00",
+    "line": "call    TESClass_GetMajorSkillAV; TESNPC auto-stat membership scan across exactly seven major slots. Failure is the non-major formula; no minor list or flag exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -937,7 +931,7 @@
   },
   {
     "ea": "0x5224FF",
-    "line": "fld     [esp+2Ch+var_10]",
+    "line": "fld     dword ptr [esp+2Ch+skillIndex]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -955,7 +949,7 @@
   },
   {
     "ea": "0x522508",
-    "line": "jz      short loc_522518",
+    "line": "jz      short loc_522518; Base skill branch: major = 25+(level-1); every skill absent from majorSkills[7] uses non-major/minor = 5+0.1*(level-1).",
     "mnemonic": "jz",
     "size": 2
   },
@@ -997,13 +991,13 @@
   },
   {
     "ea": "0x522527",
-    "line": "jz      short loc_52256B",
+    "line": "jz      short loc_52256B; Specialization is independent of major membership: a matching TESSkill specialization adds 5+0.5*(level-1). Level 1 results before race bonus: major+spec 30, major 25, non-major+spec 10, non-major 5.",
     "mnemonic": "jz",
     "size": 2
   },
   {
     "ea": "0x522529",
-    "line": "mov     ecx, ds:0B33A98h",
+    "line": "mov     ecx, ds:0B33A98h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1015,13 +1009,13 @@
   },
   {
     "ea": "0x522535",
-    "line": "push    ebx",
+    "line": "push    ebx; skillIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x522536",
-    "line": "call    TESDataHandler_GetTESSkillByCode",
+    "line": "call    TESDataHandler_GetTESSkillByCode; Return one of exactly 21 inline Oblivion TESSkill records. Reject skillIndex > 20; otherwise return TESDataHandler+0xD8+(skillIndex*0x60).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1039,7 +1033,7 @@
   },
   {
     "ea": "0x522540",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1069,7 +1063,7 @@
   },
   {
     "ea": "0x522553",
-    "line": "fstp    [esp+2Ch+var_C]",
+    "line": "fstp    [esp+2Ch+var_C]; Executed specialization contribution begins by adding 5.0 to the current major/non-major base.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1081,7 +1075,7 @@
   },
   {
     "ea": "0x52255B",
-    "line": "fld     [esp+2Ch+var_10]",
+    "line": "fld     dword ptr [esp+2Ch+skillIndex]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1099,7 +1093,7 @@
   },
   {
     "ea": "0x522567",
-    "line": "fstp    [esp+2Ch+var_18]",
+    "line": "fstp    [esp+2Ch+var_18]; Executed specialization level scaling then adds 0.5*(actorLevel-1).",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1117,7 +1111,7 @@
   },
   {
     "ea": "0x522575",
-    "line": "add     eax, 50h ; 'P'",
+    "line": "add     eax, 50h ; 'P'; Applies race skill bonus from the seven (skillAV, signed bonus) pairs at TESRace+0x50 after class major/non-major and specialization contributions.",
     "mnemonic": "add",
     "size": 3
   },
@@ -1261,7 +1255,7 @@
   },
   {
     "ea": "0x5225CA",
-    "line": "mov     [edi+ebx+0ECh], dl",
+    "line": "mov     [edi+ebx+0ECh], dl; Caps the fully composed starting skill at 100 and stores it in TESNPC::baseSkills[skillOffset] (21 native entries at TESNPC+0xEC).",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1303,7 +1297,7 @@
   },
   {
     "ea": "0x5225E9",
-    "line": "mov     ecx, [edi+104h]",
+    "line": "mov     ecx, [edi+104h]; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1315,7 +1309,7 @@
   },
   {
     "ea": "0x5225F4",
-    "line": "call    ValueModifierEffect_GetAV",
+    "line": "call    Shared_GetDwordAtOffset38; Linker-folded Oblivion accessor: returns the dword at this+0x38. In TESClass auto-stat calls this is primaryAttribute1; other call contexts may represent unrelated fields.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1339,7 +1333,7 @@
   },
   {
     "ea": "0x522604",
-    "line": "call    TESObjectREFR_GetNiNode",
+    "line": "call    Shared_GetDwordAtOffset3C; Linker-folded Oblivion accessor: returns the dword at this+0x3C. In TESClass auto-stat calls this is primaryAttribute2; other call contexts may represent unrelated fields.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1513,7 +1507,7 @@
   },
   {
     "ea": "0x522662",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1585,7 +1579,7 @@
   },
   {
     "ea": "0x522684",
-    "line": "cmp     [esp+2Ch+arg_0], 0",
+    "line": "cmp     [esp+2Ch+skipDerivedStats], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1735,7 +1729,7 @@
   },
   {
     "ea": "0x5226CB",
-    "line": "mov     [esp+30h+arg_0], al",
+    "line": "mov     [esp+30h+skipDerivedStats], al",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1771,7 +1765,7 @@
   },
   {
     "ea": "0x5226E1",
-    "line": "movzx   ecx, [esp+2Ch+arg_0]",
+    "line": "movzx   ecx, [esp+2Ch+skipDerivedStats]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -1921,19 +1915,19 @@
   },
   {
     "ea": "0x52272B",
-    "line": "push    eax",
+    "line": "push    eax; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52272C",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x52272E",
-    "line": "call    TESAIForm_SetTrainingSkill",
+    "line": "call    TESAIForm_SetTrainingSkill; Accept only SkillActorValue 0x0C..0x20 and store its zero-based 0..20 index in TESAIForm+0x0C.",
     "mnemonic": "call",
     "size": 5
   },

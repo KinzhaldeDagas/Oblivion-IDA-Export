@@ -1,5 +1,5 @@
 0x6E3250: push    0FFFFFFFFh
-0x6E3252: push    offset SEH_6E3250
+0x6E3252: push    offset ExtraDataList_SetReferencePointer_SEH
 0x6E3257: mov     eax, large fs:0
 0x6E325D: push    eax
 0x6E325E: push    esi
@@ -12,7 +12,7 @@
 0x6E3272: mov     edi, ecx
 0x6E3274: mov     esi, [esp+18h+arg_0]
 0x6E3278: push    esi
-0x6E3279: call    sub_75E480
+0x6E3279: call    j_NiSingleInterpController_LinkObject
 0x6E327E: cmp     dword ptr [esi+0D8h], 0A010068h
 0x6E3288: jnb     short loc_6E32D5
 0x6E328A: mov     ecx, esi
@@ -46,3 +46,15 @@
 0x6E32E2: pop     esi
 0x6E32E3: add     esp, 0Ch
 0x6E32E6: retn    4
+0x9C3090: mov     eax, [ebp+4]
+0x9C3093: push    eax
+0x9C3094: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C3099: pop     ecx
+0x9C309A: retn
+0x9C309B: mov     edx, [esp+arg_4]
+0x9C309F: lea     eax, [edx-8]
+0x9C30A2: mov     ecx, [edx-0Ch]
+0x9C30A5: xor     ecx, eax
+0x9C30A7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C30AC: mov     eax, offset stru_AEBD48
+0x9C30B1: jmp     ___CxxFrameHandler3

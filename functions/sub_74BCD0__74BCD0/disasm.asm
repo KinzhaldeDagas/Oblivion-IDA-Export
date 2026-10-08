@@ -201,7 +201,7 @@
 0x74BF5C: fstp    [esp+7Ch+var_50]
 0x74BF60: fmul    [esp+7Ch+var_1C]
 0x74BF64: fstp    [esp+7Ch+var_4C]
-0x74BF68: call    sub_4BFAA0
+0x74BF68: call    NiPoint3_NormalizeApproximateInPlace
 0x74BF6D: fld     dword ptr [ebp+4]
 0x74BF70: add     esp, 4
 0x74BF73: fld     dword ptr [ebp+0]
@@ -362,8 +362,7 @@
 0x74C197: cmp     eax, ebp
 0x74C199: jz      short loc_74C1AE
 0x74C19B: jmp     short loc_74C1A0
-0x74C19D: align 10h
-0x74C1A0: cmp     eax, offset dword_B3FCDC
+0x74C1A0: cmp     eax, offset stru_B3FCDC
 0x74C1A5: jz      short loc_74C1B9
 0x74C1A7: mov     eax, [eax+4]
 0x74C1AA: cmp     eax, ebp

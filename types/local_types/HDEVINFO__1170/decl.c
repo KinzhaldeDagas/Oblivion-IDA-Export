@@ -1,1 +1,1 @@
-HDEVINFO
+typedef PVOID HDEVINFO;

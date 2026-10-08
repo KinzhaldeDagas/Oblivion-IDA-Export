@@ -49,11 +49,11 @@
 0x8CBB7C: mov     ecx, [edi+50h]
 0x8CBB7F: mov     edx, [ecx]
 0x8CBB81: add     esp, 8
-0x8CBB84: push    offset stru_BA7A40
+0x8CBB84: push    offset unk_BA7A40
 0x8CBB89: call    dword ptr [edx+54h]
 0x8CBB8C: mov     ecx, [edi+50h]
 0x8CBB8F: mov     eax, [ecx]
-0x8CBB91: push    offset stru_BA7A40
+0x8CBB91: push    offset unk_BA7A40
 0x8CBB96: call    dword ptr [eax+58h]
 0x8CBB99: mov     eax, [esi+38h]
 0x8CBB9C: inc     ebx

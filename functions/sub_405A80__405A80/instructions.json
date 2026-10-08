@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x405A80",
-    "line": "cmp     ShaderPackage, 3",
+    "line": "cmp     dword ptr OB_RendererGlobalState_010201A0.shaderPackageVersion_le, 3; [Verified] Returns true only when BSShaderPackageVersion (RendererGlobalState+0xAF) >= 3 and BSShaderFeatureMask (RendererGlobalState+0xA7) contains native shadow-map bit 0x10. The version comparison independently corroborates the selector field read by GetShaderProgramPackageIndex.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x405A89",
-    "line": "test    byte ptr dword_B42F40, 10h",
+    "line": "test    OB_RendererGlobalState_010201A0.pad_00D+9Ah, 10h",
     "mnemonic": "test",
     "size": 7
   },

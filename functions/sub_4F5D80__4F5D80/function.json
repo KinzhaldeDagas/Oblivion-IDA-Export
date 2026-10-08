@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4F5D80",
+      "0x4F5DAC"
+    ]
+  ],
+  "chunks_sha256": "e13079a6d52e85633309c373ae32103512142bc0dfcf5ddc89e930ca31736921",
+  "comment_regular": "[Controller decode 2026-07-09] IsXBox eval callback: writes 0.0 to the script result and returns success. This tests platform build, not attached controller type.\n\n[Controller decode 2026-07-09] Central decoded PC controller/joystick/IsXBox summary is stored in IDB netnode \"$ ControllerStuff\"; full external doc is C:\\src\\OblivionIDA\\ControllerStuff.md.\n\n[Controller decode 2026-07-09] Controller decode completion estimate stored in IDB netnode \"$ ControllerStuff\" sup 200. Current overall decoded PC Controller/IsXBox/Joystick knowledge is about 92%.\n\n[Controller decode 2026-07-09] Full ControllerStuff.md is embedded in IDB netnode \"$ ControllerStuff\" sup 1000..1065; metadata at sup 999; completion estimate at sup 200.\n\n[Controller decode 2026-07-09] Full ControllerStuff.md is embedded in IDB netnode \"$ ControllerStuff\" sup 1000..1067; metadata at sup 999; completion estimate at sup 200.\n\nAchievementsNative decode: stock IsXBox eval stores 0.0 into result on PC; MGPostQuestScript gates addachievement 40 behind isxbox == 1.\n\n[Controller decode 2026-07-09] IsXBox eval callback: writes 0.0 to the script result and returns success. This tests platform build, not attached controller type.\n\n[Controller decode 2026-07-09] Central decoded PC controller/joystick/IsXBox summary is stored in IDB netnode \"$ ControllerStuff\"; full external doc is C:\\src\\OblivionIDA\\ControllerStuff.md.\n\n[Controller decode 2026-07-09] Controller decode completion estimate stored in IDB netnode \"$ ControllerStuff\" sup 200. Current overall decoded PC Controller/IsXBox/Joystick knowledge is about 92%.\n\n[Controller decode 2026-07-09] Full ControllerStuff.md is embedded in IDB netnode \"$ ControllerStuff\" sup 1000..1065; metadata at sup 999; completion estimate at sup 200.\n\n[Controller decode 2026-07-09] Full ControllerStuff.md is embedded in IDB netnode \"$ ControllerStuff\" sup 1000..1067; metadata at sup 999; completion estimate ",
+  "comment_repeatable": "AchievementsNative decode: stock IsXBox eval stores 0.0 into result on PC; MGPostQuestScript gates addachievement 40 behind isxbox == 1.\nVerified (Oblivion 1.2.0416): CommandInfo row 0xB0F908 names IsXBox/opcode 0x1135 and binds Eval=0x4F5D80; this callback writes floating result 0.0 at +4 and returns callback success 1. Official compiled trigger scripts guard many AddAchievement calls with IsXBox==1, so this PC eval path is false absent plugin replacement. Verified Fallout Xbox PPC-32 divergence: IsXBoxFunction 0x823DB900 delegates to IsXboxConditionFunction 0x823BA0D0, which writes 1.0 to its result. Do not infer PC result from Fallout.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_4F5D80",
+  "display_name": "Cmd_IsXBox_Eval",
   "end_ea": "0x4F5DAC",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4F5D80",
+  "name": "Cmd_IsXBox_Eval",
   "segment": ".text",
   "sha256": "e13079a6d52e85633309c373ae32103512142bc0dfcf5ddc89e930ca31736921",
   "size": 44,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4F5D80",
+  "total_chunk_size": 44,
   "type": "char __cdecl(int, int, int, double *)",
   "xrefs_from_count": 16,
-  "xrefs_to_count": 2
+  "xrefs_to_count": 1
 }

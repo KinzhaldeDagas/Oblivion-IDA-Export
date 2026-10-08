@@ -6,19 +6,19 @@
 0x6433EB: mov     esi, [esp+14h+arg_8]
 0x6433EF: test    esi, esi
 0x6433F1: push    edi
-0x6433F2: mov     edi, [esp+18h+arg_4]
+0x6433F2: mov     edi, [esp+18h+actorValue]
 0x6433F6: mov     ebx, ecx
 0x6433F8: jz      short loc_64340A
-0x6433FA: push    edi
-0x6433FB: lea     ecx, [esi+88h]
+0x6433FA: push    edi; actorValue
+0x6433FB: lea     ecx, [esi+88h]; self
 0x643401: call    AVCollection_GetAV
 0x643406: fstp    dword ptr [esp+18h+var_C]
 0x64340A: cmp     edi, 0Bh
 0x64340D: jnz     short loc_643440
 0x64340F: test    esi, esi
 0x643411: jz      short loc_643440
-0x643413: push    edi
-0x643414: lea     ecx, [ebx+70h]
+0x643413: push    edi; actorValue
+0x643414: lea     ecx, [ebx+70h]; self
 0x643417: call    AVCollection_GetAV
 0x64341C: fstp    [esp+18h+var_C+4]
 0x643420: mov     ecx, esi
@@ -32,8 +32,8 @@
 0x643436: fld     [esp+0Ch+arg_8]
 0x64343A: add     esp, 0Ch
 0x64343D: retn    0Ch
-0x643440: push    edi
-0x643441: lea     ecx, [ebx+70h]
+0x643440: push    edi; actorValue
+0x643441: lea     ecx, [ebx+70h]; self
 0x643444: call    AVCollection_GetAV
 0x643449: fstp    [esp+18h+var_C+4]
 0x64344D: mov     ecx, [esp+18h+arg_0]

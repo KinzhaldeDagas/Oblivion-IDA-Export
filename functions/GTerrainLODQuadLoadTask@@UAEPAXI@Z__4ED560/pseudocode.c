@@ -2,8 +2,8 @@ TerrainLODQuadLoadTask *__thiscall TerrainLODQuadLoadTask::`scalar deleting dest
         TerrainLODQuadLoadTask *this,
         char a2)
 {
-  TerrainLODQuadLoadTask::~TerrainLODQuadLoadTask(this);
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  TerrainLODQuadLoadTask::~TerrainLODQuadLoadTask(this); /*0x4ed563*/
+  if ( (a2 & 1) != 0 ) /*0x4ed56d*/
+    FormHeapFree((unsigned int)this); /*0x4ed570*/
+  return this; /*0x4ed57a*/
 }

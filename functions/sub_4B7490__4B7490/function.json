@@ -1,19 +1,32 @@
 {
-  "callees_count": 54,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 22,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4B7490",
+      "0x4B7694"
+    ]
+  ],
+  "chunks_sha256": "1e866c0b0e51b1f1130c2bde1eee323fe38d0cb65689226926b767d62e4f915a",
+  "comment_regular": "Verified door access helper: handles linked-cell ownership, door ownership, guards, trespass, effective ExtraLockData, TESKey inventory, and lockpick tools. In the trespass branch, an interior linked cell passes the cell check when TESObjectCELL_HasPublicFlag20 (flags0 bit 0x20) is set. If no key matches, Lockpick/Skeleton Key with effective level <100 sets mustLockpickOut=1.",
+  "comment_repeatable": "Verified door access helper: handles linked-cell ownership, door ownership, guards, trespass, effective ExtraLockData, TESKey inventory, and lockpick tools. In the trespass branch, an interior linked cell passes the cell check when TESObjectCELL_HasPublicFlag20 (flags0 bit 0x20) is set. If no key matches, Lockpick/Skeleton Key with effective level <100 sets mustLockpickOut=1.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4B7490",
+  "display_name": "TESObjectDOOR_CheckActorAccess",
   "end_ea": "0x4B7694",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4B7490",
+  "name": "TESObjectDOOR_CheckActorAccess",
   "segment": ".text",
   "sha256": "1e866c0b0e51b1f1130c2bde1eee323fe38d0cb65689226926b767d62e4f915a",
   "size": 516,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4B7490",
-  "type": "char __cdecl(TESObjectREFR *, TESObjectREFR *, _BYTE *)",
+  "total_chunk_size": 516,
+  "type": "bool __cdecl(TESObjectREFR *doorReference, Actor *actor, UInt8 *mustLockpickOut)",
   "xrefs_from_count": 225,
   "xrefs_to_count": 2
 }

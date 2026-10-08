@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x679240",
-    "line": "push    ecx",
+    "line": "push    ecx; Verified (Oblivion): walks the temp-effect RTTI chain to NiRTTI_MagicShaderHitEffect, then filters by targetReference, bWeaponEnchantment_28, bFinished and TESEffectShader pointer. It keeps one match and marks duplicate/different-shader entries finished. Fallout's analogous ProcessLists routine uses a distinct NiShader collection; Oblivion uses ActorProcessManager::extendedTempEffects.",
     "mnemonic": "push",
     "size": 1
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x679249",
-    "line": "mov     [esp+10h+var_4], eax",
+    "line": "mov     [esp+10h+outData], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x679264",
-    "line": "mov     edi, [esp+14h+arg_0]",
+    "line": "mov     edi, [esp+14h+targetReference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -235,37 +235,37 @@
   },
   {
     "ea": "0x6792A0",
-    "line": "lea     ecx, [esp+14h+var_4]",
+    "line": "lea     ecx, [esp+14h+outData]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6792A4",
-    "line": "push    ecx",
+    "line": "push    ecx; outData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6792A5",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6792A7",
-    "line": "call    sub_677C70",
+    "line": "call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6792AC",
-    "line": "mov     esi, [eax]",
+    "line": "mov     esi, [eax]; Verified (Oblivion): weapon-shader manager scan obtains a temporary AddRef of each NodeVoid data object before reading its RTTI/fields.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6792AE",
-    "line": "mov     eax, [esp+14h+var_4]",
+    "line": "mov     eax, [esp+14h+outData]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x6792E5",
-    "line": "cmp     eax, offset unk_B3C0D4",
+    "line": "cmp     eax, offset NiRTTI_MagicShaderHitEffect",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x6792F5",
-    "line": "mov     ecx, [esp+14h+arg_0]",
+    "line": "mov     ecx, [esp+14h+targetReference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x6792FE",
-    "line": "cmp     byte ptr [esi+28h], 0",
+    "line": "cmp     byte ptr [esi+28h], 0; Verified (Oblivion): only bWeaponEnchantment_28 entries are considered by this de-duplication helper; finished entries are skipped.",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x67930A",
-    "line": "mov     edx, [esp+14h+arg_4]",
+    "line": "mov     edx, [esp+14h+effectShader]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x679315",
-    "line": "jnz     short loc_67931B",
+    "line": "jnz     short loc_67931B; Verified (Oblivion): a matching target with a different TESEffectShader, or a second duplicate, is marked bFinished so the old weapon enchantment visual will retire.",
     "mnemonic": "jnz",
     "size": 2
   },

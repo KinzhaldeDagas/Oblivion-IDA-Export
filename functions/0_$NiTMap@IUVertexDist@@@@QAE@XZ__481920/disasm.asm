@@ -1,4 +1,4 @@
-0x481920: push    0FFFFFFFFh
+0x481920: push    0FFFFFFFFh; Native nearest-normal stitch stores primary and optional secondary target per source, copies normalized source normal, optionally displaces vertices, and marks target dirty flags |=3. Prettier Faces extends coincident shared-normal groups afterward. 1.19.8 code audit: reject nonfinite squared distances and nonfinite copied normals before group propagation; old distance>epsilon test accepted NaN. This is a plugin guard correction; malformed-asset occurrence in game has not been demonstrated.
 0x481922: push    offset ??0?$NiTMap@IUVertexDist@@@@QAE@XZ_SEH
 0x481927: mov     eax, large fs:0
 0x48192D: push    eax
@@ -34,12 +34,12 @@
 0x48198C: call    __memset
 0x481991: add     esp, 10h
 0x481994: mov     [esp+134h+var_10C], offset ??_7?$NiTMap@IUVertexDist@@@@6B@; const NiTMap<uint,VertexDist>::`vftable'
-0x48199C: mov     ebp, [esp+134h+arg_0]
+0x48199C: mov     ebp, [esp+134h+sourceGeometry]
 0x4819A3: cmp     ebp, ebx
 0x4819A5: mov     [esp+134h+var_4], ebx
 0x4819AC: mov     [esp+134h+var_11D], bl
 0x4819B0: jz      loc_481A50
-0x4819B6: mov     esi, [esp+134h+arg_4]
+0x4819B6: mov     esi, [esp+134h+targetGeometry]
 0x4819BD: cmp     esi, ebx
 0x4819BF: jz      loc_481A50
 0x4819C5: cmp     ebp, esi
@@ -73,20 +73,20 @@
 0x481A1F: cmp     eax, ebx
 0x481A21: jz      short loc_481A50
 0x481A23: push    ebp
-0x481A24: call    sub_4802E0
+0x481A24: call    NiGeometry_AllocateWorldVertices
 0x481A29: mov     edi, eax
 0x481A2B: add     esp, 4
 0x481A2E: cmp     edi, ebx
 0x481A30: mov     [esp+134h+var_F0], edi
 0x481A34: jz      short loc_481A50
 0x481A36: push    esi
-0x481A37: call    sub_4802E0
+0x481A37: call    NiGeometry_AllocateWorldVertices
 0x481A3C: add     esp, 4
 0x481A3F: cmp     eax, ebx
 0x481A41: mov     [esp+134h+var_F4], eax
 0x481A45: jnz     short loc_481A80
 0x481A47: push    edi
-0x481A48: call    FormHeapFree
+0x481A48: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x481A4D: add     esp, 4
 0x481A50: lea     ecx, [esp+134h+var_10C]
 0x481A54: mov     [esp+134h+var_4], 0FFFFFFFFh
@@ -105,17 +105,17 @@
 0x481A87: add     esi, 64h ; 'd'
 0x481A8A: push    eax
 0x481A8B: mov     ecx, esi
-0x481A8D: call    sub_718A80
+0x481A8D: call    sub_718A80;
 0x481A92: lea     ecx, [ebp+64h]
-0x481A95: push    ecx
-0x481A96: lea     edx, [esp+138h+var_64]
-0x481A9D: push    edx
+0x481A95: push    ecx; right
+0x481A96: lea     edx, [esp+138h+out]
+0x481A9D: push    edx; out
 0x481A9E: lea     eax, [esp+13Ch+var_88]
 0x481AA5: push    eax
 0x481AA6: mov     ecx, esi
 0x481AA8: call    sub_7103C0
-0x481AAD: mov     ecx, eax
-0x481AAF: call    NiMAtrix33_Multiply
+0x481AAD: mov     ecx, eax; this
+0x481AAF: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x481AB4: fld     dword ptr ds:0A32048h
 0x481ABA: cmp     [esp+134h+var_11C], ebx
 0x481ABE: fstp    [esp+134h+var_114]
@@ -126,7 +126,7 @@
 0x481AD2: jbe     loc_481C08
 0x481AD8: mov     ecx, [esp+134h+var_F4]
 0x481ADC: mov     [esp+134h+var_F8], ecx
-0x481AE0: fld     [esp+134h+arg_8]
+0x481AE0: fld     [esp+134h+maxDistance]; A negative maxDistance means unbounded nearest-vertex search; FaceGen supplies 0.1.
 0x481AE7: mov     ebp, [esp+134h+var_110]
 0x481AEB: fldz
 0x481AED: fcomp   st(1)
@@ -144,9 +144,9 @@
 0x481B14: push    edi
 0x481B15: lea     edx, [esp+138h+var_C4]
 0x481B19: push    edx
-0x481B1A: call    sub_4121A0
+0x481B1A: call    sub_4121A0; Transform the target vertex into source geometry space and measure distance to each source vertex.
 0x481B1F: mov     ecx, eax
-0x481B21: call    sub_404C90
+0x481B21: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x481B26: fstp    [esp+134h+var_FC]
 0x481B2A: fld     [esp+134h+var_FC]
 0x481B2E: fld     [esp+134h+var_118]
@@ -176,7 +176,7 @@
 0x481B75: fstp    [esp+138h+var_DC]
 0x481B79: push    ebp
 0x481B7A: lea     ecx, [esp+13Ch+var_10C]
-0x481B7E: call    sub_47DB90
+0x481B7E: call    NiTMap_UInt_VertexDist_Get; VertexDist map is keyed by source vertex. Each 20-byte node stores key, primary target index, one secondary target index, and nearest distance.
 0x481B83: test    al, al
 0x481B85: jz      short loc_481BD0
 0x481B87: fld     dword ptr ds:0A37080h
@@ -186,7 +186,7 @@
 0x481B98: fstp    [esp+140h+var_13C]; float
 0x481B9C: fld     [esp+140h+var_118]
 0x481BA0: fstp    [esp+140h+var_140]; float
-0x481BA3: call    sub_47DF40
+0x481BA3: call    FloatNearlyEqualAbsolute; Treat target distances within 0.001 as coincident. The replacement stores the new target plus only the previous primary target; any earlier secondary target is discarded.
 0x481BA8: add     esp, 0Ch
 0x481BAB: test    al, al
 0x481BAD: jz      short loc_481BBF
@@ -195,7 +195,7 @@
 0x481BB6: mov     eax, esp
 0x481BB8: mov     [eax], ebx
 0x481BBA: mov     [eax+4], ecx
-0x481BBD: jmp     short loc_481BDE
+0x481BBD: jmp     short loc_481BDE; Equal-distance insertion rotates two target slots. Targets are visited in ascending index order, so only the final two coincident target indices survive; earlier UV-split targets are dropped.
 0x481BBF: fld     [esp+134h+var_118]
 0x481BC3: fld     [esp+134h+var_C8]
 0x481BC7: fcompp
@@ -211,14 +211,14 @@
 0x481BE2: mov     [eax+8], ecx
 0x481BE5: push    ebp
 0x481BE6: lea     ecx, [esp+144h+var_10C]
-0x481BEA: call    sub_47DAD0
+0x481BEA: call    NiTMap_UInt_VertexDist_Set
 0x481BEF: add     [esp+134h+var_F8], 0Ch
 0x481BF4: add     ebx, 1
 0x481BF7: cmp     ebx, [esp+134h+var_11C]
 0x481BFB: jb      loc_481AE0
-0x481C01: mov     ebp, [esp+134h+arg_0]
+0x481C01: mov     ebp, [esp+134h+sourceGeometry]
 0x481C08: lea     ecx, [esp+134h+var_10C]
-0x481C0C: call    sub_6A9030
+0x481C0C: call    NiTMapBase_GetFirstNode
 0x481C11: test    eax, eax
 0x481C13: mov     [esp+134h+var_114], eax
 0x481C17: jz      loc_481D7F
@@ -230,7 +230,7 @@
 0x481C2C: lea     ecx, [esp+13Ch+var_114]
 0x481C30: push    ecx
 0x481C31: lea     ecx, [esp+140h+var_10C]
-0x481C35: call    sub_47DBF0
+0x481C35: call    NiTMap_UInt_VertexDist_GetNext; Enumerate one VertexDist record: source index, primary target index, optional secondary target index, distance.
 0x481C3A: mov     eax, [esp+134h+var_FC]
 0x481C3E: mov     edx, [esp+134h+var_E8]
 0x481C42: lea     ebp, [eax+eax*2]
@@ -241,7 +241,7 @@
 0x481C4D: lea     eax, [esp+138h+var_C4]
 0x481C51: push    eax
 0x481C52: lea     ecx, [esp+13Ch+var_AC]
-0x481C59: call    sub_7101F0
+0x481C59: call    sub_7101F0; Transform the matched source normal into target geometry space.
 0x481C5E: mov     ecx, [esp+134h+var_E4]
 0x481C62: mov     edx, [eax]
 0x481C64: lea     edi, [ecx+ecx*2]
@@ -255,11 +255,11 @@
 0x481C7A: mov     edx, [eax+8]
 0x481C7D: mov     ecx, esi
 0x481C7F: mov     [esi+8], edx
-0x481C82: call    sub_43F350
+0x481C82: call    Vector3_NormalizeInPlace; Normalize the copied target normal before storing it.
 0x481C87: fstp    st
 0x481C89: mov     ebx, [esp+134h+var_E0]
 0x481C8D: cmp     ebx, [esp+134h+var_11C]
-0x481C91: jnb     short loc_481CAD
+0x481C91: jnb     short loc_481CAD; Copy the source normal to the one optional secondary target only. VertexDist cannot represent additional coincident targets.
 0x481C93: mov     ecx, [esp+134h+var_EC]
 0x481C97: mov     edx, [esi]
 0x481C99: lea     eax, [ebx+ebx*2]
@@ -269,9 +269,9 @@
 0x481CA4: mov     [eax+4], ecx
 0x481CA7: mov     edx, [esi+8]
 0x481CAA: mov     [eax+8], edx
-0x481CAD: cmp     [esp+134h+arg_10], 0
-0x481CB5: jz      loc_481D3C
-0x481CBB: mov     eax, [esp+134h+arg_0]
+0x481CAD: cmp     [esp+134h+copyTangents], 0
+0x481CB5: jz      loc_481D3C; Optional position-offset path: move matched source and target vertices by 10 units along their normals. Disabled by the FaceGen head builder.
+0x481CBB: mov     eax, [esp+134h+sourceGeometry]
 0x481CC2: cmp     ds:0B34408h, eax
 0x481CC8: jz      short loc_481CF6
 0x481CCA: mov     ecx, [esp+134h+var_E8]
@@ -313,22 +313,22 @@
 0x481D39: mov     [eax+8], ecx
 0x481D3C: cmp     [esp+134h+var_114], 0
 0x481D41: jnz     loc_481C22
-0x481D47: cmp     [esp+134h+arg_10], 0
+0x481D47: cmp     [esp+134h+copyTangents], 0
 0x481D4F: mov     ecx, 3
 0x481D54: jz      short loc_481D67
-0x481D56: mov     edx, [esp+134h+arg_0]
+0x481D56: mov     edx, [esp+134h+sourceGeometry]
 0x481D5D: mov     eax, [edx+0B4h]
-0x481D63: or      [eax+2Eh], cx
-0x481D67: mov     eax, [esp+134h+arg_4]
+0x481D63: or      [eax+2Eh], cx; Mark vertex/normal geometry channels dirty after normal copying and any optional position offsets.
+0x481D67: mov     eax, [esp+134h+targetGeometry]
 0x481D6E: mov     eax, [eax+0B4h]
 0x481D74: or      [eax+2Eh], cx
-0x481D78: mov     ebp, [esp+134h+arg_0]
+0x481D78: mov     ebp, [esp+134h+sourceGeometry]
 0x481D7F: mov     ecx, [esp+134h+var_F0]
 0x481D83: push    ecx
-0x481D84: call    FormHeapFree
+0x481D84: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x481D89: mov     edx, [esp+138h+var_F4]
 0x481D8D: push    edx
-0x481D8E: call    FormHeapFree
+0x481D8E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x481D93: add     esp, 8
 0x481D96: lea     ecx, [esp+134h+var_10C]
 0x481D9A: mov     ds:0B34408h, ebp
@@ -336,3 +336,12 @@
 0x481DAB: call    ??1?$NiTMap@IUVertexDist@@@@UAE@XZ; NiTMap<uint,VertexDist>::~NiTMap<uint,VertexDist>(void)
 0x481DB0: mov     al, [esp+134h+var_11D]
 0x481DB4: jmp     loc_481A66
+0x9AF630: lea     ecx, [ebp-10Ch]
+0x9AF636: jmp     ??1?$NiTMap@IUVertexDist@@@@UAE@XZ; NiTMap<uint,VertexDist>::~NiTMap<uint,VertexDist>(void)
+0x9AF63B: mov     edx, [esp+targetGeometry]
+0x9AF63F: lea     eax, [edx-124h]
+0x9AF645: mov     ecx, [edx-128h]
+0x9AF64B: xor     ecx, eax
+0x9AF64D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AF652: mov     eax, offset stru_ADBBCC
+0x9AF657: jmp     ___CxxFrameHandler3

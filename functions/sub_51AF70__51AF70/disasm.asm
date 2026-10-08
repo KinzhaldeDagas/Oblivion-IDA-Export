@@ -1,4 +1,4 @@
-0x51AF70: sub     esp, 34h
+0x51AF70: sub     esp, 34h; Dispatches parsed TESAnimGroup events whose timestamps are crossed between previous and current sequence time, including wrap-around. Sound records have a non-null +0x0C sound entry; Enum records use the +0x04 ID and packed source-text position at +0x08. This is reached from ActorAnimData's sampled-slot update.
 0x51AF73: fld     [esp+34h+arg_8]
 0x51AF77: mov     [esp+34h+var_28], ecx
 0x51AF7B: fld     [esp+34h+arg_4]
@@ -138,7 +138,7 @@
 0x51B11D: jmp     ds:jpt_51B11D[eax*4]; switch jump
 0x51B124: mov     ecx, ds:0B333C4h; jumptable 0051B11D case 13
 0x51B12A: push    edi
-0x51B12B: call    sub_65DC50
+0x51B12B: call    Player_UpdateSoundDistanceFromRef; Player/reference sound-distance helper. Computes distance from player to target ref and feeds the result into the sound system scaling/update path.
 0x51B130: jmp     def_51B11D; jumptable 0051B11D default case, cases 7,8
 0x51B135: mov     edx, [esp+44h+arg_C]; jumptable 0051B11D case 12
 0x51B139: fld1
@@ -163,7 +163,7 @@
 0x51B179: fstp    [esp+48h+var_48]; float
 0x51B17C: mov     ecx, [ecx+24h]
 0x51B17F: push    edi; int
-0x51B180: call    sub_6AC420
+0x51B180: call    SoundManager_StopRefLoopingSoundsWithFade; Sound manager animation event helper. Finds active sounds associated with a reference, marks/removes loop entries, and either fades/stops or schedules stop based on the passed fade time.
 0x51B185: jmp     def_51B11D; jumptable 0051B11D default case, cases 7,8
 0x51B18A: mov     edx, [edi]; jumptable 0051B11D case 14
 0x51B18C: mov     eax, [edx+190h]
@@ -192,14 +192,14 @@
 0x51B1DA: push    0
 0x51B1DC: push    offset aFsthorsesoft; "FSTHorseSoft"
 0x51B1E1: mov     ecx, esi
-0x51B1E3: call    sub_65A970
+0x51B1E3: call    TESObjectREFR_PlayResolvedAnimSoundNote; Reference animation sound-note playback. Resolves a Sound: note token through SoundMap_ResolveAnimSoundNote, plays it, positions it on the reference when requested, and applies volume/loop flags.
 0x51B1E8: mov     esi, eax
 0x51B1EA: test    esi, esi
 0x51B1EC: jz      def_51B11D; jumptable 0051B11D default case, cases 7,8
 0x51B1F2: mov     ecx, esi; this
 0x51B1F4: call    sub_6B73E0
 0x51B1F9: push    esi
-0x51B1FA: call    FormHeapFree
+0x51B1FA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x51B1FF: add     esp, 4
 0x51B202: jmp     def_51B11D; jumptable 0051B11D default case, cases 7,8
 0x51B207: mov     edx, [edi]; jumptable 0051B11D case 15
@@ -231,7 +231,7 @@
 0x51B25E: jmp     short loc_51B1E1
 0x51B260: push    eax; jumptable 0051B11D cases 0-3
 0x51B261: push    edi
-0x51B262: call    sub_6B1210
+0x51B262: call    SoundManager_PlayFootstepAnimEvent; Footstep/creature animation event dispatcher. Handles creature anim sounds, terrain/water/armor/sneak footstep selection, positions played sound at the actor, and applies sound-system range gating.
 0x51B267: add     esp, 8
 0x51B26A: jmp     def_51B11D; jumptable 0051B11D default case, cases 7,8
 0x51B26F: mov     edx, [edi]; jumptable 0051B11D cases 4-6
@@ -269,7 +269,7 @@
 0x51B2DE: add     esp, 14h
 0x51B2E1: push    edx
 0x51B2E2: mov     ecx, eax
-0x51B2E4: call    sub_51CEC0
+0x51B2E4: call    TESCreature_SelectSoundForAnimEnum; TESCreature sound selector: walks inherited creature data, chooses a sound entry by category index and probability.
 0x51B2E9: test    eax, eax
 0x51B2EB: jz      def_51B11D; jumptable 0051B11D default case, cases 7,8
 0x51B2F1: test    ebx, ebx
@@ -323,12 +323,12 @@
 0x51B388: jmp     loc_51B1F2
 0x51B38D: push    9; jumptable 0051B11D case 9
 0x51B38F: push    edi
-0x51B390: call    sub_6B07F0
+0x51B390: call    SoundManager_PlayWeaponEquipAnimEvent; Weapon equip/unequip animation sound event dispatcher. Selects sound descriptor by equipped weapon anim type, appends Equip/Unequip variant, positions sound, and adjusts volume/pitch for sneaking/weapon speed.
 0x51B395: add     esp, 8
 0x51B398: jmp     short def_51B11D; jumptable 0051B11D default case, cases 7,8
 0x51B39A: push    0Ah; jumptable 0051B11D case 10
 0x51B39C: push    edi
-0x51B39D: call    sub_6B07F0
+0x51B39D: call    SoundManager_PlayWeaponEquipAnimEvent; Weapon equip/unequip animation sound event dispatcher. Selects sound descriptor by equipped weapon anim type, appends Equip/Unequip variant, positions sound, and adjusts volume/pitch for sneaking/weapon speed.
 0x51B3A2: add     esp, 8
 0x51B3A5: jmp     short def_51B11D; jumptable 0051B11D default case, cases 7,8
 0x51B3A7: cmp     [esp+44h+arg_C], 0; jumptable 0051B11D case 11

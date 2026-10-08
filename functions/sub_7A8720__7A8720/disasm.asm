@@ -1,8 +1,8 @@
-0x7A8720: mov     ecx, [esp+arg_4]
+0x7A8720: mov     ecx, [esp+count]; OBLIVION AUTHORITY (2026-08-30): Placement-fills count uninitialized 8-byte SLodEntry slots from one source pair.
 0x7A8724: test    ecx, ecx
 0x7A8726: jbe     short locret_7A874A
-0x7A8728: mov     edx, [esp+arg_8]
-0x7A872C: mov     eax, [esp+arg_0]
+0x7A8728: mov     edx, [esp+value]
+0x7A872C: mov     eax, [esp+destination]
 0x7A8730: push    esi
 0x7A8731: test    eax, eax
 0x7A8733: jz      short loc_7A873F

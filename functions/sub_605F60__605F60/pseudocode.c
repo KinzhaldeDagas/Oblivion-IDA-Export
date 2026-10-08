@@ -1,98 +1,76 @@
-void __thiscall sub_605F60(int *this, int a2, int a3)
+// Verified: disposition-cost switch consumes fCrimeDisp* settings; useBase=false scales by observer actor-value36(Responsibility)/100. Returns truncated integer through Double_To_SInt32. Rejoined default/shared epilogue60611C (local-only incoming jumps and shared stack RET8); bytecode unchanged.
+int __thiscall Crime_GetDispositionPenalty(Crime *self, Actor *observer, bool useBase)
 {
   double v3; // st7
-  int v4; // eax
-  float v5; // [esp+0h] [ebp-8h]
-  float v6; // [esp+0h] [ebp-8h]
-  float v7; // [esp+0h] [ebp-8h]
-  float v8; // [esp+0h] [ebp-8h]
+  unsigned int Value; // eax
+  float v6; // [esp+4h] [ebp-4h]
+  int v7; // [esp+4h] [ebp-4h]
+  float v8; // [esp+4h] [ebp-4h]
   float v9; // [esp+4h] [ebp-4h]
-  int v10; // [esp+4h] [ebp-4h]
+  float v10; // [esp+4h] [ebp-4h]
   float v11; // [esp+4h] [ebp-4h]
+  float v12; // [esp+4h] [ebp-4h]
 
-  v3 = 0.0;
-  v9 = 0.0;
-  switch ( *(this + 1) )
+  v3 = 0.0; /*0x605f61*/
+  v6 = 0.0; /*0x605f69*/
+  switch ( self->category ) /*0x605f72*/
   {
-    case 0:
-      if ( *(this + 5) )
-        sub_470520((void *)*(this + 5));
+    case kCrime_Theft: /*0x605f72*/
+      if ( self->object14 ) /*0x605f79*/
+        Value = TESForm_GetValue((TESForm *)self->object14); /*0x605f86*/
       else
-        v4 = *(this + 6);
-      v10 = v4;
-      if ( !v4 )
-        v10 = 1;
-      if ( (_BYTE)a3 )
-        goto LABEL_8;
-      v3 = ((double (__thiscall *)(int))*(_DWORD *)(*(_DWORD *)a2 + 0x288))(a2);
-      goto LABEL_10;
-    case 1:
-      if ( (_BYTE)a3 )
-      {
-        Double_To_SInt32(fCrimeDispPickpocket);
-      }
-      else
-      {
-        v8 = ((double (__thiscall *)(int, int, _DWORD))*(_DWORD *)(*(_DWORD *)a2 + 0x288))(a2, 0x24, LODWORD(v9))
-           / fCostant_100
-           * fCrimeDispPickpocket;
-        Double_To_SInt32(v8);
-      }
-      return;
-    case 2:
-      if ( (_BYTE)a3 )
-      {
-        Double_To_SInt32(flt_B376E0);
-      }
-      else
-      {
-        ((double (__thiscall *)(int, int, _DWORD))*(_DWORD *)(*(_DWORD *)a2 + 0x288))(a2, 0x24, LODWORD(v9));
-        def_605F72(a2, a3);
-      }
-      return;
-    case 3:
-      if ( (_BYTE)a3 )
-      {
-        Double_To_SInt32(fCrimeDispAttack);
-      }
-      else
-      {
-        v6 = ((double (__thiscall *)(int, int, _DWORD))*(_DWORD *)(*(_DWORD *)a2 + 0x288))(a2, 0x24, LODWORD(v9))
-           / fCostant_100
-           * fCrimeDispAttack;
-        Double_To_SInt32(v6);
-      }
-      return;
-    case 4:
-      if ( (_BYTE)a3 )
-      {
-        Double_To_SInt32(fCrimeDispMurder);
-      }
-      else
-      {
-        v7 = ((double (__thiscall *)(int, int, _DWORD))*(_DWORD *)(*(_DWORD *)a2 + 0x288))(a2, 0x24, LODWORD(v9))
-           / fCostant_100
-           * fCrimeDispMurder;
-        Double_To_SInt32(v7);
-      }
-      return;
-    case 5:
-      v10 = dword_B376B0;
-      if ( (_BYTE)a3 )
+        Value = self->value18; /*0x605f80*/
+      v7 = Value; /*0x605f90*/
+      if ( !Value ) /*0x605f93*/
+        v7 = 1; /*0x605f95*/
+      if ( useBase ) /*0x605fa1*/
+        goto LABEL_8; /*0x605fa1*/
+      v3 = ((double (__thiscall *)(Actor *, int))observer->vtbl->GetAV_F)(observer, 0x24); /*0x605fc9*/
+      goto LABEL_10; /*0x605fc9*/
+    case kCrime_Pickpocket: /*0x605f72*/
+      if ( useBase ) /*0x60609f*/
+        return Double_To_SInt32(g_fCrimeDispPickpocket_Value); /*0x6060ad*/
+      v12 = ((double (__thiscall *)(Actor *, int))observer->vtbl->GetAV_F)(observer, 0x24) /*0x6060d2*/
+          / fCostant_100
+          * g_fCrimeDispPickpocket_Value;
+      return Double_To_SInt32(v12); /*0x6060b3*/
+    case kCrime_Trespass: /*0x605f72*/
+      if ( useBase ) /*0x6060e6*/
+        return Double_To_SInt32(g_fCrimeDispTresspass_Value); /*0x6060f4*/
+      v6 = ((double (__thiscall *)(Actor *, int))observer->vtbl->GetAV_F)(observer, 0x24) /*0x606119*/
+         / fCostant_100
+         * g_fCrimeDispTresspass_Value;
+      return Double_To_SInt32(v6);
+    case kCrime_Attack: /*0x605f72*/
+      if ( useBase ) /*0x606011*/
+        return Double_To_SInt32(g_fCrimeDispAttack_Value); /*0x60601f*/
+      v10 = ((double (__thiscall *)(Actor *, int))observer->vtbl->GetAV_F)(observer, 0x24) /*0x606044*/
+          / fCostant_100
+          * g_fCrimeDispAttack_Value;
+      return Double_To_SInt32(v10); /*0x606025*/
+    case kCrime_Murder: /*0x605f72*/
+      if ( useBase ) /*0x606058*/
+        return Double_To_SInt32(g_fCrimeDispMurder_Value); /*0x606066*/
+      v11 = ((double (__thiscall *)(Actor *, int))observer->vtbl->GetAV_F)(observer, 0x24) /*0x60608b*/
+          / fCostant_100
+          * g_fCrimeDispMurder_Value;
+      return Double_To_SInt32(v11); /*0x60606c*/
+    case kCrime_StealHorse: /*0x605f72*/
+      v7 = g_iCrimeGoldStealHorse_Value; /*0x605ff5*/
+      if ( useBase ) /*0x605ff8*/
       {
 LABEL_8:
-        v11 = (double)v10 * fCrimeDispSteal;
-        Double_To_SInt32(v11);
+        v8 = (double)v7 * g_fCrimeDispSteal_Value; /*0x605fa3*/
+        return Double_To_SInt32(v8); /*0x605fb2*/
       }
       else
       {
-        (*(void (__thiscall **)(int))(*(_DWORD *)a2 + 0x288))(a2);
+        observer->vtbl->GetAV_F(observer, kActorVal_Responsibility); /*0x606008*/
 LABEL_10:
-        v5 = v3 / fCostant_100 * ((double)0x24 * fCrimeDispSteal);
-        Double_To_SInt32(v5);
+        v9 = v3 / fCostant_100 * ((double)v7 * g_fCrimeDispSteal_Value); /*0x605fcb*/
+        return Double_To_SInt32(v9); /*0x605fe2*/
       }
-      return;
     default:
-      JUMPOUT(0x60611C);
+      return Double_To_SInt32(v6);
   }
 }

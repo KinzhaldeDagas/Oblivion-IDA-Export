@@ -1,1 +1,5 @@
-tagCY_0
+union tagCY_0
+{
+$D96A8A426170D937378A950ED80BF508 _anon_0;
+LONGLONG int64;
+};

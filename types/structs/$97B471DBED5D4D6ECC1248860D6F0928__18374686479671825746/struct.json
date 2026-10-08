@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "$97B471DBED5D4D6ECC1248860D6F0928",
+  "definition": "union $97B471DBED5D4D6ECC1248860D6F0928\n{\n_beginthread_start_routine_t start_address __offset(OFF64|AUTO);\n_beginthreadex_start_routine_t start_address_ex __offset(OFF64|AUTO);\n}\n",
   "id": 18374686479671825746,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "start_address",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "_beginthread_start_routine_t"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "start_address_ex",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "_beginthreadex_start_routine_t"
     }
   ],
   "name": "$97B471DBED5D4D6ECC1248860D6F0928",
+  "ordinal": 2582,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 4
 }

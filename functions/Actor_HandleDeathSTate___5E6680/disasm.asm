@@ -29,10 +29,10 @@
 0x5E66C4: jz      short loc_5E66CB
 0x5E66C6: cmp     ebp, 1
 0x5E66C9: jnz     short loc_5E66D2
-0x5E66CB: mov     ebp, 6
+0x5E66CB: mov     ebp, 6; BloodOnDeath decode 2026-05-27: essential actors can remap requested death states 1/2 to DeadState 6. Hook logic must inspect final actor->DeadState after the native call.
 0x5E66D0: jmp     short loc_5E6717
 0x5E66D2: cmp     ebp, 2
-0x5E66D5: jnz     short loc_5E6713
+0x5E66D5: jnz     short loc_5E6713; BloodOnDeath decode 2026-05-27: Actor_HandleDeathState treats requested state 2 as a nonzero death-state path with process/container cleanup before writing DeadState. BloodOnDeath should trigger on transition from DeadState 0 to any nonzero final DeadState, not only requested state 1.
 0x5E66D7: mov     ecx, [esi+58h]
 0x5E66DA: test    ecx, ecx
 0x5E66DC: jz      short loc_5E66FD
@@ -91,7 +91,7 @@
 0x5E6767: mov     ecx, esi
 0x5E6769: call    eax
 0x5E676B: pop     edi
-0x5E676C: mov     [esi+0B0h], ebp
+0x5E676C: mov     [esi+0B0h], ebp; BloodOnDeath decode 2026-05-27: final DeadState write. Death blood hook runs after this callsite target returns and now accepts any 0 -> nonzero transition.
 0x5E6772: pop     esi
 0x5E6773: pop     ebp
 0x5E6774: retn    4

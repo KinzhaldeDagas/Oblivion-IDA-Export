@@ -1,5 +1,11 @@
-int __usercall Setting_SetStringValue_::GetValueLen@<eax>(char *a1@<edi>, int a2, int a3, int a4, _DWORD *a5)
+int __usercall Setting_SetStringValue_::GetValueLen@<eax>(
+        char *a1@<edi>,
+        int a2@<ebx>,
+        int a3@<ebp>,
+        int a4,
+        int a5,
+        int a6,
+        _DWORD *a7)
 {
-  strlen(a1);
-  return Setting_SetStringValue_::AllocNewSpace();
+  return Setting_SetStringValue_::AllocNewSpace(strlen(a1) + a2 + 1, a3, a4);
 }

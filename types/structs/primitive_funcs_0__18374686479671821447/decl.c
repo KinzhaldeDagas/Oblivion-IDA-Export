@@ -1,1 +1,1 @@
-primitive_funcs_0
+typedef primitive_funcs primitive_funcs_0;

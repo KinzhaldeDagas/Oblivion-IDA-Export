@@ -7,7 +7,7 @@
 0x43AD6A: jz      short loc_43AD7E
 0x43AD6C: mov     ecx, [esi+28h]
 0x43AD6F: push    ecx
-0x43AD70: mov     ecx, dword_B35300
+0x43AD70: mov     ecx, dword ptr unk_B35300
 0x43AD76: push    eax
 0x43AD77: call    sub_4A1F90
 0x43AD7C: jmp     short loc_43AD97
@@ -15,7 +15,7 @@
 0x43AD81: test    eax, eax
 0x43AD83: jz      short loc_43AD97
 0x43AD85: mov     edi, [esi+28h]
-0x43AD88: mov     ecx, dword_B35300
+0x43AD88: mov     ecx, dword ptr unk_B35300
 0x43AD8E: mov     edx, [ecx]
 0x43AD90: push    edi
 0x43AD91: push    eax
@@ -25,7 +25,7 @@
 0x43AD99: mov     eax, [edx+28h]
 0x43AD9C: mov     ecx, esi
 0x43AD9E: call    eax
-0x43ADA0: mov     edi, ioManager
+0x43ADA0: mov     edi, ds:0B33A10h
 0x43ADA6: push    ecx
 0x43ADA7: mov     eax, esp
 0x43ADA9: mov     [eax], esi

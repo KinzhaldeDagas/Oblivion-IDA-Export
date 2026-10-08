@@ -25,7 +25,7 @@
 0x62898D: fstp    [esp+0Ch+arg_8]
 0x628991: add     esp, 8
 0x628994: fld     [esp+4+arg_8]
-0x628998: call    Double_To_SInt32
+0x628998: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x62899D: pop     esi
 0x62899E: retn    0Ch
 0x6289A1: cmp     eax, 30h ; '0'

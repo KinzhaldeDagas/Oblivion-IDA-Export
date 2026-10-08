@@ -17,46 +17,46 @@
 0x614586: push    ebx
 0x614587: lea     ebx, [esi+190h]
 0x61458D: jnz     loc_614620
-0x614593: mov     ecx, [esi+3Ch]
-0x614596: push    eax
-0x614597: push    eax
-0x614598: push    5
-0x61459A: call    Actor_LoadAnimGroup?
+0x614593: mov     ecx, [esi+3Ch]; this
+0x614596: push    eax; forceWeaponPrefix
+0x614597: push    eax; weaponEntryDataArg
+0x614598: push    5; groupID
+0x61459A: call    Actor_LoadAnimGroup_; Builds an initial encoded key from live actor movement/weapon state and requested fixed group ID, then returns ActorAnimData_ResolveAnimKeyFallback's concrete playable key or sentinel 0x00FF when no ActorAnimData exists.
 0x61459F: push    eax
-0x6145A0: call    sub_51AA00
+0x6145A0: call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.
 0x6145A5: add     esp, 4
 0x6145A8: cmp     eax, 5
-0x6145AB: push    0
+0x6145AB: push    0; forceWeaponPrefix
 0x6145AD: setz    cl
-0x6145B0: push    0
+0x6145B0: push    0; weaponEntryDataArg
 0x6145B2: mov     [esi+194h], cl
-0x6145B8: mov     ecx, [esi+3Ch]
-0x6145BB: push    6
-0x6145BD: call    Actor_LoadAnimGroup?
+0x6145B8: mov     ecx, [esi+3Ch]; this
+0x6145BB: push    6; groupID
+0x6145BD: call    Actor_LoadAnimGroup_; Builds an initial encoded key from live actor movement/weapon state and requested fixed group ID, then returns ActorAnimData_ResolveAnimKeyFallback's concrete playable key or sentinel 0x00FF when no ActorAnimData exists.
 0x6145C2: push    eax
-0x6145C3: call    sub_51AA00
-0x6145C8: mov     ecx, [esi+3Ch]
+0x6145C3: call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.
+0x6145C8: mov     ecx, [esi+3Ch]; this
 0x6145CB: add     esp, 4
-0x6145CE: push    0
+0x6145CE: push    0; forceWeaponPrefix
 0x6145D0: cmp     eax, 6
-0x6145D3: push    0
+0x6145D3: push    0; weaponEntryDataArg
 0x6145D5: setz    dl
-0x6145D8: push    3
+0x6145D8: push    3; groupID
 0x6145DA: mov     [esi+195h], dl
-0x6145E0: call    Actor_LoadAnimGroup?
+0x6145E0: call    Actor_LoadAnimGroup_; Builds an initial encoded key from live actor movement/weapon state and requested fixed group ID, then returns ActorAnimData_ResolveAnimKeyFallback's concrete playable key or sentinel 0x00FF when no ActorAnimData exists.
 0x6145E5: push    eax
-0x6145E6: call    sub_51AA00
-0x6145EB: mov     ecx, [esi+3Ch]
+0x6145E6: call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.
+0x6145EB: mov     ecx, [esi+3Ch]; this
 0x6145EE: add     esp, 4
-0x6145F1: push    0
+0x6145F1: push    0; forceWeaponPrefix
 0x6145F3: cmp     eax, 3
-0x6145F6: push    0
+0x6145F6: push    0; weaponEntryDataArg
 0x6145F8: setz    al
-0x6145FB: push    4
+0x6145FB: push    4; groupID
 0x6145FD: mov     [esi+196h], al
-0x614603: call    Actor_LoadAnimGroup?
+0x614603: call    Actor_LoadAnimGroup_; Builds an initial encoded key from live actor movement/weapon state and requested fixed group ID, then returns ActorAnimData_ResolveAnimKeyFallback's concrete playable key or sentinel 0x00FF when no ActorAnimData exists.
 0x614608: push    eax
-0x614609: call    sub_51AA00
+0x614609: call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.
 0x61460E: add     esp, 4
 0x614611: cmp     eax, 4
 0x614614: setz    cl
@@ -99,7 +99,7 @@
 0x614685: call    GameSetting_GetSafeFloatPointer
 0x61468A: lea     ecx, [esp+90h+var_80+8]
 0x61468E: mov     edi, eax
-0x614690: call    sub_404C90
+0x614690: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x614695: fld     dword ptr [edi]
 0x614697: fcompp
 0x614699: fnstsw  ax
@@ -120,9 +120,9 @@
 0x6146D0: mov     eax, [edx+1E0h]
 0x6146D6: call    eax
 0x6146D8: push    ecx
-0x6146D9: lea     ecx, [esp+94h+var_24]
-0x6146DD: fstp    [esp+94h+var_94]; float
-0x6146E0: call    NiMatrix33_InitRotationTransform
+0x6146D9: lea     ecx, [esp+94h+var_24]; this
+0x6146DD: fstp    [esp+94h+angleZ]; angleZ
+0x6146E0: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x6146E5: mov     edi, [esi+3Ch]
 0x6146E8: mov     edx, [edi]
 0x6146EA: mov     edx, [edx+15Ch]
@@ -398,3 +398,94 @@
 0x614A6D: push    eax
 0x614A6E: push    2
 0x614A70: call    sub_612910
+0x614A87: cmp     ebp, 3; switch 4 cases
+0x614A8A: ja      short def_614A8C
+0x614A8C: jmp     ds:jpt_614A8C[ebp*4]; switch jump
+0x614A93: cmp     byte ptr [esi+197h], 0; jumptable 00614A8C case 0
+0x614A9A: jz      short loc_614AAB
+0x614A9C: mov     ecx, [esi+3Ch]
+0x614A9F: lea     edx, [esp+0A0h+var_80+4]
+0x614AA3: push    edx
+0x614AA4: call    sub_5FA0A0
+0x614AA9: jmp     short loc_614AAD
+0x614AAB: xor     al, al
+0x614AAD: push    eax
+0x614AAE: push    2
+0x614AB0: mov     ecx, ebx
+0x614AB2: call    sub_612910
+0x614AB7: pop     edi
+0x614AB8: xor     eax, eax
+0x614ABA: cmp     [esi+197h], al
+0x614AC0: pop     ebp
+0x614AC1: pop     ebx
+0x614AC2: setz    al
+0x614AC5: pop     esi
+0x614AC6: add     esp, 80h
+0x614ACC: retn    4
+0x614ACF: cmp     byte ptr [esi+196h], 0; jumptable 00614A8C case 1
+0x614AD6: jz      short loc_614AE7
+0x614AD8: mov     ecx, [esi+3Ch]
+0x614ADB: lea     eax, [esp+0A0h+var_70]
+0x614ADF: push    eax
+0x614AE0: call    sub_5FA0A0
+0x614AE5: jmp     short loc_614AE9
+0x614AE7: xor     al, al
+0x614AE9: push    eax
+0x614AEA: push    1
+0x614AEC: mov     ecx, ebx
+0x614AEE: call    sub_612910
+0x614AF3: pop     edi
+0x614AF4: xor     eax, eax
+0x614AF6: cmp     [esi+196h], al
+0x614AFC: pop     ebp
+0x614AFD: pop     ebx
+0x614AFE: setz    al
+0x614B01: pop     esi
+0x614B02: add     esp, 80h
+0x614B08: retn    4
+0x614B0B: cmp     byte ptr [esi+194h], 0; jumptable 00614A8C case 2
+0x614B12: jz      short loc_614B23
+0x614B14: mov     ecx, [esi+3Ch]
+0x614B17: lea     edx, [esp+0A0h+var_64]
+0x614B1B: push    edx
+0x614B1C: call    sub_5FA0A0
+0x614B21: jmp     short loc_614B25
+0x614B23: xor     al, al
+0x614B25: push    eax
+0x614B26: push    4
+0x614B28: mov     ecx, ebx
+0x614B2A: call    sub_612910
+0x614B2F: pop     edi
+0x614B30: xor     eax, eax
+0x614B32: cmp     [esi+194h], al
+0x614B38: pop     ebp
+0x614B39: pop     ebx
+0x614B3A: setz    al
+0x614B3D: pop     esi
+0x614B3E: add     esp, 80h
+0x614B44: retn    4
+0x614B47: cmp     byte ptr [esi+195h], 0; jumptable 00614A8C case 3
+0x614B4E: jz      short loc_614B5F
+0x614B50: mov     ecx, [esi+3Ch]
+0x614B53: lea     eax, [esp+0A0h+var_58]
+0x614B57: push    eax
+0x614B58: call    sub_5FA0A0
+0x614B5D: jmp     short loc_614B61
+0x614B5F: xor     al, al
+0x614B61: push    eax
+0x614B62: push    8
+0x614B64: mov     ecx, ebx
+0x614B66: call    sub_612910
+0x614B6B: pop     edi
+0x614B6C: xor     eax, eax
+0x614B6E: cmp     [esi+195h], al
+0x614B74: pop     ebp
+0x614B75: pop     ebx
+0x614B76: setz    al
+0x614B79: pop     esi
+0x614B7A: add     esp, 80h
+0x614B80: retn    4
+0x614B83: mov     eax, 4
+0x614B88: pop     esi
+0x614B89: add     esp, 80h
+0x614B8F: retn    4

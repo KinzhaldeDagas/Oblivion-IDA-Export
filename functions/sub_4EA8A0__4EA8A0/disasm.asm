@@ -15,8 +15,8 @@
 0x4EA8C5: lea     eax, [esp+104h+var_C]
 0x4EA8CC: mov     large fs:0, eax
 0x4EA8D2: xor     edi, edi
-0x4EA8D4: mov     [esp+104h+var_6C], edi
-0x4EA8DB: movzx   eax, [ebp+arg_44]
+0x4EA8D4: mov     [esp+104h+slot], edi
+0x4EA8DB: movzx   eax, byte ptr [ebp+arg_44]
 0x4EA8DF: mov     [esp+104h+var_F0], eax
 0x4EA8E3: mov     [esp+104h+var_4], edi
 0x4EA8EA: fild    [esp+104h+var_F0]
@@ -43,7 +43,7 @@
 0x4EA945: push    523h
 0x4EA94A: push    offset a__TesSharedT_0; "..\\TES Shared\\TESTerrainLODManager.cp"...
 0x4EA94F: push    offset aTesterrainlodm; "TESTerrainLODManager::CreateGrass - NUL"...
-0x4EA954: call    nullsub_return0_0arg
+0x4EA954: call    nullsub_return0_0arg; [Verified] Shared zero-return leaf. BSTempEffectDecal vtable 0xA6822C uses it at +0x54 for GetTypeID 0 and also in other slots; many unrelated vtables reuse this target. Class meaning must be established from the owning vtable and caller.
 0x4EA959: add     esp, 0Ch
 0x4EA95C: mov     ecx, esi
 0x4EA95E: call    sub_4BF150
@@ -149,7 +149,7 @@
 0x4EAAD1: fisub   [esp+104h+var_B0]
 0x4EAAD5: fstp    [esp+104h+a3]
 0x4EAAD9: fld     dword ptr [edi+ecx*4]
-0x4EAADC: fstp    dword ptr [esp+104h+var_E8]
+0x4EAADC: fstp    [esp+104h+var_E8]
 0x4EAAE0: fld     [esp+104h+var_EC]
 0x4EAAE4: fld     qword ptr ds:0A3D8E8h
 0x4EAAEA: fcom    st(1)
@@ -205,7 +205,7 @@
 0x4EAB6D: fsubrp  st(2), st
 0x4EAB6F: fld     [esp+104h+a3]
 0x4EAB73: fmul    st, st(4)
-0x4EAB75: fld     dword ptr [esp+104h+var_E8]
+0x4EAB75: fld     [esp+104h+var_E8]
 0x4EAB79: fmul    st, st(3)
 0x4EAB7B: faddp   st(1), st
 0x4EAB7D: fld     st(3)
@@ -222,18 +222,18 @@
 0x4EAB9C: or      eax, 0C00h
 0x4EABA1: fmulp   st(1), st
 0x4EABA3: faddp   st(1), st
-0x4EABA5: fstp    dword ptr [esp+104h+var_E8]
-0x4EABA9: fld     dword ptr [esp+104h+var_E8]
-0x4EABAD: mov     dword ptr [esp+104h+var_E8], eax
+0x4EABA5: fstp    [esp+104h+var_E8]
+0x4EABA9: fld     [esp+104h+var_E8]
+0x4EABAD: mov     [esp+104h+var_E8], eax
 0x4EABB1: fmul    qword ptr ds:0A47A50h
 0x4EABB7: fldcw   word ptr [esp+104h+var_E8]
-0x4EABBB: fistp   [esp+104h+var_E8]
-0x4EABBF: mov     esi, dword ptr [esp+104h+var_E8]
+0x4EABBB: fistp   qword ptr [esp+104h+var_E8]
+0x4EABBF: mov     esi, [esp+104h+var_E8]
 0x4EABC3: test    esi, esi
 0x4EABC5: fldcw   word ptr [esp+104h+var_EC]
 0x4EABC9: jz      loc_4EB051
 0x4EABCF: push    7FFFh
-0x4EABD4: call    Rand3
+0x4EABD4: call    Game_RandomIntBelow; Engine RNG upper-bound helper: returns max*rand()/0x7FFF after lazy time seed.
 0x4EABD9: add     esp, 4
 0x4EABDC: cmp     eax, esi
 0x4EABDE: jge     loc_4EB051
@@ -253,11 +253,11 @@
 0x4EAC16: fstp    [esp+104h+var_D0]
 0x4EAC1A: fld     [esp+104h+a2]
 0x4EAC1E: fld     st
-0x4EAC20: call    Double_To_SInt32
-0x4EAC25: mov     dword ptr [esp+104h+var_E8], eax
-0x4EAC29: fild    dword ptr [esp+104h+var_E8]
-0x4EAC2D: fstp    dword ptr [esp+104h+var_E8]
-0x4EAC31: fld     dword ptr [esp+104h+var_E8]
+0x4EAC20: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
+0x4EAC25: mov     [esp+104h+var_E8], eax
+0x4EAC29: fild    [esp+104h+var_E8]
+0x4EAC2D: fstp    [esp+104h+var_E8]
+0x4EAC31: fld     [esp+104h+var_E8]
 0x4EAC35: fld     st
 0x4EAC37: fsubp   st(2), st
 0x4EAC39: fldz
@@ -270,11 +270,11 @@
 0x4EAC4C: fstp    [esp+104h+a2]; float
 0x4EAC50: fld     [esp+104h+var_D0]
 0x4EAC54: fld     st
-0x4EAC56: call    Double_To_SInt32
-0x4EAC5B: mov     dword ptr [esp+104h+var_E8], eax
-0x4EAC5F: fild    dword ptr [esp+104h+var_E8]
-0x4EAC63: fstp    dword ptr [esp+104h+var_E8]; int
-0x4EAC67: fld     dword ptr [esp+104h+var_E8]
+0x4EAC56: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
+0x4EAC5B: mov     [esp+104h+var_E8], eax
+0x4EAC5F: fild    [esp+104h+var_E8]
+0x4EAC63: fstp    [esp+104h+var_E8]; int
+0x4EAC67: fld     [esp+104h+var_E8]
 0x4EAC6B: fld     st
 0x4EAC6D: fsubp   st(2), st
 0x4EAC6F: fxch    st(1)
@@ -306,10 +306,10 @@
 0x4EACC1: cmp     eax, 5; switch 6 cases
 0x4EACC4: ja      def_4EACCA
 0x4EACCA: jmp     ds:jpt_4EACCA[eax*4]; switch jump
-0x4EACD1: movzx   edx, [ebp+arg_38]; jumptable 004EACCA case 0
+0x4EACD1: movzx   edx, word ptr [ebp+arg_38]; jumptable 004EACCA case 0
 0x4EACD5: fld     [ebp+arg_40]
-0x4EACD8: mov     dword ptr [esp+104h+var_E8], edx; int
-0x4EACDC: fild    dword ptr [esp+104h+var_E8]
+0x4EACD8: mov     [esp+104h+var_E8], edx; int
+0x4EACDC: fild    [esp+104h+var_E8]
 0x4EACE0: fsubp   st(1), st
 0x4EACE2: fcomp   st(1)
 0x4EACE4: fnstsw  ax
@@ -321,19 +321,19 @@
 0x4EACF9: fnstsw  ax
 0x4EACFB: test    ah, 41h
 0x4EACFE: jz      loc_4EB04D
-0x4EAD04: movzx   eax, [ebp+arg_38]
-0x4EAD08: mov     dword ptr [esp+104h+var_E8], eax; int
-0x4EAD0C: fild    dword ptr [esp+104h+var_E8]
+0x4EAD04: movzx   eax, word ptr [ebp+arg_38]
+0x4EAD08: mov     [esp+104h+var_E8], eax; int
+0x4EAD0C: fild    [esp+104h+var_E8]
 0x4EAD10: faddp   st(1), st
 0x4EAD12: fcomp   st(1)
 0x4EAD14: fnstsw  ax
 0x4EAD16: test    ah, 5
 0x4EAD19: jp      def_4EACCA
 0x4EAD1F: jmp     loc_4EB04F
-0x4EAD24: movzx   ecx, [ebp+arg_38]; jumptable 004EACCA case 2
+0x4EAD24: movzx   ecx, word ptr [ebp+arg_38]; jumptable 004EACCA case 2
 0x4EAD28: fld     [ebp+arg_40]
-0x4EAD2B: mov     dword ptr [esp+104h+var_E8], ecx; int
-0x4EAD2F: fild    dword ptr [esp+104h+var_E8]
+0x4EAD2B: mov     [esp+104h+var_E8], ecx; int
+0x4EAD2F: fild    [esp+104h+var_E8]
 0x4EAD33: fsubp   st(1), st
 0x4EAD35: fcomp   st(1)
 0x4EAD37: fnstsw  ax
@@ -345,18 +345,18 @@
 0x4EAD4C: fnstsw  ax
 0x4EAD4E: test    ah, 5
 0x4EAD51: jnp     loc_4EB04D
-0x4EAD57: movzx   edx, [ebp+arg_38]
-0x4EAD5B: mov     dword ptr [esp+104h+var_E8], edx; int
-0x4EAD5F: fild    dword ptr [esp+104h+var_E8]
+0x4EAD57: movzx   edx, word ptr [ebp+arg_38]
+0x4EAD5B: mov     [esp+104h+var_E8], edx; int
+0x4EAD5F: fild    [esp+104h+var_E8]
 0x4EAD63: fsubp   st(1), st
 0x4EAD65: fcomp   st(1)
 0x4EAD67: fnstsw  ax
 0x4EAD69: test    ah, 41h
 0x4EAD6C: jnz     short def_4EACCA
 0x4EAD6E: jmp     loc_4EB04F
-0x4EAD73: movzx   eax, [ebp+arg_38]; jumptable 004EACCA case 4
-0x4EAD77: mov     dword ptr [esp+104h+var_E8], eax; int
-0x4EAD7B: fild    dword ptr [esp+104h+var_E8]
+0x4EAD73: movzx   eax, word ptr [ebp+arg_38]; jumptable 004EACCA case 4
+0x4EAD77: mov     [esp+104h+var_E8], eax; int
+0x4EAD7B: fild    [esp+104h+var_E8]
 0x4EAD7F: fld     [ebp+arg_40]
 0x4EAD82: fld     st
 0x4EAD84: fadd    st, st(2)
@@ -370,9 +370,9 @@
 0x4EAD95: test    ah, 5
 0x4EAD98: jnp     loc_4EB04F
 0x4EAD9E: jmp     short def_4EACCA
-0x4EADA0: movzx   ecx, [ebp+arg_38]; jumptable 004EACCA case 5
-0x4EADA4: mov     dword ptr [esp+104h+var_E8], ecx; int
-0x4EADA8: fild    dword ptr [esp+104h+var_E8]
+0x4EADA0: movzx   ecx, word ptr [ebp+arg_38]; jumptable 004EACCA case 5
+0x4EADA4: mov     [esp+104h+var_E8], ecx; int
+0x4EADA8: fild    [esp+104h+var_E8]
 0x4EADAC: fld     [ebp+arg_40]
 0x4EADAF: fld     st
 0x4EADB1: fadd    st, st(2)
@@ -388,3 +388,12 @@
 0x4EADCF: jmp     short def_4EACCA
 0x4EADD1: fstp    st(1)
 0x4EADD3: fstp    st
+0x9B6150: lea     ecx, [ebp+slot]; slot
+0x9B6153: jmp     NiPointerSlot_Release
+0x9B6158: mov     edx, [esp-4+arg_4]
+0x9B615C: lea     eax, [edx-0F4h]
+0x9B6162: mov     ecx, [edx-0F8h]
+0x9B6168: xor     ecx, eax
+0x9B616A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B616F: mov     eax, offset stru_AE1090
+0x9B6174: jmp     ___CxxFrameHandler3

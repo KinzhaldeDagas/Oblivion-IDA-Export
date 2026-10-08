@@ -55,12 +55,12 @@
 0x462050: add     eax, edi
 0x462052: push    eax
 0x462053: mov     ecx, esi
-0x462055: call    sub_452910
-0x46205A: lea     ecx, [esp+20h+arg_0]
-0x46205E: push    ecx
-0x46205F: push    edi
-0x462060: mov     ecx, esi
-0x462062: call    sub_446C50
+0x462055: call    NiTLargeArray_Resize32
+0x46205A: lea     ecx, [esp+20h+value]
+0x46205E: push    ecx; value
+0x46205F: push    edi; index
+0x462060: mov     ecx, esi; self
+0x462062: call    NiTLargeArray32_SetSlot
 0x462067: mov     ecx, [esp+20h+var_C]
 0x46206B: mov     large fs:0, ecx
 0x462072: pop     ecx
@@ -69,3 +69,15 @@
 0x462075: pop     ebp
 0x462076: add     esp, 10h
 0x462079: retn    4
+0x9CA420: mov     eax, [ebp-10h]
+0x9CA423: push    eax
+0x9CA424: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA429: pop     ecx
+0x9CA42A: retn
+0x9CA42B: mov     edx, [esp+arg_4]
+0x9CA42F: lea     eax, [edx-10h]
+0x9CA432: mov     ecx, [edx-14h]
+0x9CA435: xor     ecx, eax
+0x9CA437: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA43C: mov     eax, offset stru_AF2B24
+0x9CA441: jmp     ___CxxFrameHandler3

@@ -1,1 +1,1 @@
-hkIslandActivationListener
+struct hkIslandActivationListener;

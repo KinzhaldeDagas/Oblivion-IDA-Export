@@ -5,7 +5,7 @@
 0x6E8AF4: mov     edi, [esp+10h+arg_0]
 0x6E8AF8: push    edi
 0x6E8AF9: mov     esi, ecx
-0x6E8AFB: call    nullsub_returnvVoid_1arg
+0x6E8AFB: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x6E8B00: mov     eax, [edi+220h]
 0x6E8B06: mov     edx, [eax+8]
 0x6E8B09: push    1
@@ -39,7 +39,7 @@
 0x6E8B55: push    ecx
 0x6E8B56: push    edx
 0x6E8B57: push    edi
-0x6E8B58: call    eax ; dword_B3D638
+0x6E8B58: call    eax ; unk_B3D638
 0x6E8B5A: add     esp, 20h
 0x6E8B5D: pop     edi
 0x6E8B5E: pop     esi

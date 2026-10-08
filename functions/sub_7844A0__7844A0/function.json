@@ -1,19 +1,36 @@
 {
-  "callees_count": 23,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 10,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7844A0",
+  "chunks": [
+    [
+      "0x7844A0",
+      "0x7846C6"
+    ],
+    [
+      "0x9CAF10",
+      "0x9CAF44"
+    ]
+  ],
+  "chunks_sha256": "825bdfa528ff35fb1d3208dab5c52211f03dde96e699f6604bfe2f3a73b5d5ce",
+  "comment_regular": "Oblivion compact stBezierSpline control-curve sampler. Constructs a 2D result, clamps percent to [0,1], returns the terminal control point at the final segment, otherwise cubic-interpolates four splinePoints records. Sole caller is CreateEvenlySpacedPoints.",
+  "comment_repeatable": "Oblivion compact stBezierSpline control-curve sampler. Constructs a 2D result, clamps percent to [0,1], returns the terminal control point at the final segment, otherwise cubic-interpolates four splinePoints records. Sole caller is CreateEvenlySpacedPoints.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_StBezierSpline_SampleControlCurve_010201A0",
   "end_ea": "0x7846C6",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7844A0",
+  "name": "OB_StBezierSpline_SampleControlCurve_010201A0",
   "segment": ".text",
   "sha256": "f69c9c2ba2c544853c66fedc6f8e4e2e6a551497cbcddc5bb340765444f4cc14",
   "size": 550,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7844A0",
-  "type": "int __thiscall(_DWORD *this, int, float)",
-  "xrefs_from_count": 200,
+  "total_chunk_size": 602,
+  "type": "OB_stVec_010201A0 *__thiscall(const OB_stBezierSpline_010201A0 *this, OB_stVec_010201A0 *result, float percent)",
+  "xrefs_from_count": 216,
   "xrefs_to_count": 1
 }

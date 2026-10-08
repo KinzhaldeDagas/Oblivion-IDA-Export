@@ -19,11 +19,11 @@
 0x69CE21: call    sub_69F1E0
 0x69CE26: mov     ecx, esi
 0x69CE28: call    sub_69CB30
-0x69CE2D: push    esi; Concurrency::details::SchedulerBase *
+0x69CE2D: push    esi; reference
 0x69CE2E: mov     ecx, esi; this
-0x69CE30: call    TESObjectREFR_GetParentCell
-0x69CE35: mov     ecx, eax
-0x69CE37: call    sub_4D35D0
+0x69CE30: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x69CE35: mov     ecx, eax; this
+0x69CE37: call    TESObjectCELL_AddReference; Verified: persistent-cell AddReference updates the WorldSpace coordinate/fallback persistent-reference index (+0x64) through TESWorldSpace_IndexReference. Ordinary cell additions do not index there. This routine does not populate the separate SubSpace spatial index at +0x60.
 0x69CE3C: cmp     dword ptr [esi+88h], 1
 0x69CE43: jz      short loc_69CE95
 0x69CE45: mov     eax, [esi+74h]
@@ -37,7 +37,7 @@
 0x69CE64: mov     ecx, edi; this
 0x69CE66: call    sub_6B73E0
 0x69CE6B: push    edi
-0x69CE6C: call    FormHeapFree
+0x69CE6C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x69CE71: add     esp, 4
 0x69CE74: mov     dword ptr [esi+90h], 0
 0x69CE7E: push    1; a5
@@ -109,7 +109,7 @@
 0x69CF5C: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x69CF61: push    0; int
 0x69CF63: push    eax; a1
-0x69CF64: call    TESForm_LookupByFormID
+0x69CF64: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x69CF69: add     esp, 4
 0x69CF6C: push    eax; void *
 0x69CF6D: call    OblivionDynamicCast
@@ -134,3 +134,15 @@
 0x69CFA3: pop     ebx
 0x69CFA4: add     esp, 0Ch
 0x69CFA7: retn    8
+0x9C8290: mov     eax, [ebp+4]
+0x9C8293: push    eax
+0x9C8294: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C8299: pop     ecx
+0x9C829A: retn
+0x9C829B: mov     edx, [esp+arg_4]
+0x9C829F: lea     eax, [edx-0Ch]
+0x9C82A2: mov     ecx, [edx-10h]
+0x9C82A5: xor     ecx, eax
+0x9C82A7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C82AC: mov     eax, offset stru_AF0554
+0x9C82B1: jmp     ___CxxFrameHandler3

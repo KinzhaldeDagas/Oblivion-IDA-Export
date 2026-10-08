@@ -16,17 +16,17 @@
 0x502DF6: push    eax; a2
 0x502DF7: push    ecx; a1
 0x502DF8: mov     dword ptr [esp+24h+var_4], 0
-0x502E00: call    Script_ExtractArgs
+0x502E00: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x502E05: add     esp, 20h
 0x502E08: test    al, al
 0x502E0A: jnz     short loc_502E0E
 0x502E0C: pop     ecx
 0x502E0D: retn
-0x502E0E: mov     ecx, dword ptr [esp+4+var_4]
+0x502E0E: mov     ecx, dword ptr [esp+4+var_4]; this
 0x502E11: test    ecx, ecx
 0x502E13: jz      short loc_502E1C
-0x502E15: push    1
-0x502E17: call    Quest_CompleteQuest
+0x502E15: push    1; completed
+0x502E17: call    TESQuest__SetCompleted; TESQuest completed-state setter used by CompleteQuest. Runtime bit 0x02 is saved through the same one-byte questFlags field.
 0x502E1C: mov     al, 1
 0x502E1E: pop     ecx
 0x502E1F: retn

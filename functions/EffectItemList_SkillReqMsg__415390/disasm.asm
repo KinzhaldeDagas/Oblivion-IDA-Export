@@ -26,7 +26,7 @@
 0x4153E2: push    ebp
 0x4153E3: mov     [esp+9Ch+var_4], ebp
 0x4153EA: mov     [esp+9Ch+var_80], 1
-0x4153F2: call    FormHeapFree
+0x4153F2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4153F7: add     esp, 4
 0x4153FA: push    ebp
 0x4153FB: push    3
@@ -34,20 +34,20 @@
 0x4153FF: mov     [esi], ebp
 0x415401: mov     [esi+6], bp
 0x415405: mov     [esi+4], bp
-0x415409: call    EffectItemList_GetStrongestItem
+0x415409: call    EffectItemList_GetStrongestItem; this=EffectItemList; args are rangeFilter (0 self,1 touch,2 target,3 any) and requireArea. Returns effective (flag 0x400000 clear) qualifying item with greatest truncated MagickaCostForCaster(item,null).
 0x41540E: mov     ebx, eax
 0x415410: cmp     ebx, ebp
 0x415412: jz      short EffectItemList_SkillReqMsg___Done
-0x415414: mov     eax, sMagicCostliestEffectSkillOf
-0x415419: mov     ecx, sMagicCostliestEffectRequires
+0x415414: mov     eax, ds:0B334F8h
+0x415419: mov     ecx, ds:0B334F0h
 0x41541F: mov     edx, [edi]
 0x415421: mov     [esp+98h+var_7C], eax
 0x415425: mov     eax, [edx+8]
 0x415428: mov     [esp+98h+var_84], ecx
 0x41542C: mov     ecx, edi
 0x41542E: call    eax
-0x415430: push    eax
-0x415431: call    ActorValue_GetMasterySkill
+0x415430: push    eax; mastery
+0x415431: call    ActorValue_GetMinimumSkillForMastery; Return the minimum skill value for a mastery tier: Novice 0, Apprentice 25, Journeyman 50, Expert 75, Master 100.
 0x415436: mov     ecx, [esp+9Ch+var_7C]
 0x41543A: add     esp, 4
 0x41543D: push    eax
@@ -57,7 +57,7 @@
 0x415446: push    eax
 0x415447: call    Magic_GetSkillAVFromSchool
 0x41544C: push    eax
-0x41544D: call    ActorValue_GetName
+0x41544D: call    ActorValue_GetName; Return the localized actor-value display name through g_actorValueNameSettings. Native skills occupy the contiguous SkillActorValue range 0x0C..0x20.
 0x415452: mov     edx, [esp+0A8h+var_84]
 0x415456: add     esp, 8
 0x415459: push    eax
@@ -72,3 +72,21 @@
 0x415472: push    ecx; a2
 0x415473: mov     ecx, esi; this
 0x415475: call    BSStringT_Set
+0x9AB1F0: mov     eax, [ebp-80h]
+0x9AB1F3: and     eax, 1
+0x9AB1F6: jz      locret_9AB208
+0x9AB1FC: and     dword ptr [ebp-80h], 0FFFFFFFEh
+0x9AB200: mov     ecx, [ebp-78h]; void *
+0x9AB203: jmp     BSStringT_Clear
+0x9AB208: retn
+0x9AB209: mov     edx, [esp+arg_4]
+0x9AB20D: lea     eax, [edx-88h]
+0x9AB213: mov     ecx, [edx-8Ch]
+0x9AB219: xor     ecx, eax
+0x9AB21B: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AB220: add     eax, 10h
+0x9AB223: mov     ecx, [edx-4]
+0x9AB226: xor     ecx, eax
+0x9AB228: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AB22D: mov     eax, offset stru_AD8168
+0x9AB232: jmp     ___CxxFrameHandler3

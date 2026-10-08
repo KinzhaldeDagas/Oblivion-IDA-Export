@@ -1,412 +1,630 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "NiDX9RenderStateVtbl",
+  "definition": "struct __cppobj NiDX9RenderStateVtbl\n{\nNiRefObjectVtbl super;\nvoid (__thiscall *UpdateRenderState)(NiDX9RenderState this, const NiPropertyState *pkNew);\nvoid (__thiscall *SetAlpha)(NiDX9RenderState this, void *AlphaProperty);\nvoid (__thiscall *SetDither)(NiDX9RenderState this, void *DitherProperty);\nvoid (__thiscall *SetFog)(NiDX9RenderState this, void *FogProperty);\nvoid (__thiscall *SetMaterial)(NiDX9RenderState this, void *u1);\nvoid (__thiscall *SetShadeMode)(NiDX9RenderState this, void *ShadeProperty);\nvoid (__thiscall *SetSpecular)(NiDX9RenderState this, void *SpecularProperty);\nvoid (__thiscall *SetStencil)(NiDX9RenderState this, void *StencilProperty);\nvoid (__thiscall *SetWireframe)(NiDX9RenderState this, void *WireframeProperty);\nvoid (__thiscall *SetZBuffer)(NiDX9RenderState this, void *ZBufferProperty);\nvoid (__thiscall *RestoreAlpha)(NiDX9RenderState this);\nvoid (__thiscall *SetVertexBlending)(NiDX9RenderState this, UInt16 u1);\nvoid (__thiscall *SetNormalization)(NiDX9RenderState this, void *u1);\nvoid (__thiscall *func_0E)(NiDX9RenderState this, UInt32 u1);\nfloat (__thiscall *GetVar088)(NiDX9RenderState this);\nvoid (__thiscall *func_10)(NiDX9RenderState this, float u1);\nvoid (__thiscall *func_11)(NiDX9RenderState this, float u1, float u2);\nUInt8 (__thiscall *GetLeftHanded)(NiDX9RenderState this);\nvoid (__thiscall *func_13)(NiDX9RenderState this, UInt8 u1);\nvoid (__thiscall *func_14)(NiDX9RenderState this, UInt32 u1);\nvoid (__thiscall *InitializeRenderStates)(NiDX9RenderState this);\nvoid (__thiscall *BackUpAllStates)(NiDX9RenderState this);\nvoid (__thiscall *RestoreRenderState)(NiDX9RenderState this, D3DRENDERSTATETYPE state);\nvoid (__thiscall *RestoreAllRenderStates)(NiDX9RenderState this);\nvoid (__thiscall *SetRenderState)(NiDX9RenderState this, D3DRENDERSTATETYPE state, UInt32 value, UInt8 BackUp);\nUInt32 (__thiscall *GetRenderState)(NiDX9RenderState this, D3DRENDERSTATETYPE state);\nvoid (__thiscall *ClearPixelShaders)(NiDX9RenderState this);\nvoid (__thiscall *BackUpPixelShader)(NiDX9RenderState this);\nvoid (__thiscall *func_1D)(NiDX9RenderState this);\nvoid (__thiscall *SetPixelShader)(NiDX9RenderState this, IDirect3DPixelShader9 *PixelShader, UInt8 BackUp);\nIDirect3DPixelShader9 *(__thiscall *GetPixelShader)(NiDX9RenderState this);\nvoid (__thiscall *RestorePixelShader)(NiDX9RenderState this);\nvoid (__thiscall *RemovePixelShader)(NiDX9RenderState this, IDirect3DPixelShader9 *PixelShader);\nvoid (__thiscall *SetVertexShader)(NiDX9RenderState this, IDirect3DVertexShader9 *pShader, UInt8 BackUp);\nIDirect3DVertexShader9 *(__thiscall *GetVertexShader)(NiDX9RenderState this);\nvoid (__thiscall *RestoreVertexShader)(NiDX9RenderState this);\nvoid (__thiscall *RemoveVertexShader)(NiDX9RenderState *self, IDirect3DVertexShader9 *shader);\nvoid (__thiscall *SetFVF)(NiDX9RenderState this, UInt32 FVF, UInt8 BackUp);\nUInt32 (__thiscall *GetFVF)(NiDX9RenderState this);\nvoid (__thiscall *RestoreFVF)(NiDX9RenderState this);\nvoid (__thiscall *ClearFVF)(NiDX9RenderState this, UInt32 FVF);\nvoid (__thiscall *SetVertexDeclaration)(NiDX9RenderState this, IDirect3DVertexDeclaration9 *pDecl, UInt8 BackUp);\nIDirect3DVertexDeclaration9 *(__thiscall *GetVertexDeclaration)(NiDX9RenderState this);\nvoid (__thiscall *RestoreVertexDeclaration)(NiDX9RenderState this);\nvoid (__thiscall *ClearVertexDeclatation)(NiDX9RenderState this, IDirect3DVertexDeclaration9 *pDecl);\nvoid (__thiscall *func_02E)(NiDX9RenderState this);\nvoid (__thiscall *func_02F)(NiDX9RenderState this);\nvoid (__thiscall *func_030)(NiDX9RenderState this);\nvoid (__thiscall *func_031)(NiDX9RenderState this);\nvoid (__thiscall *SetTextureStageState)(NiDX9RenderState this, UInt32 Stage, D3DTEXTURESTAGESTATETYPE Type, UInt32 Value, UInt8 BackUp);\nUInt32 (__thiscall *GetTextureStageState)(NiDX9RenderState this, UInt32 Stage, D3DTEXTURESTAGESTATETYPE Type);\nHRESULT (__thiscall *SetSamplerState)(NiDX9RenderState this, UInt32 Sampler, D3DSAMPLERSTATETYPE Type, UInt32 Value, UInt8 BackUp);\nUInt32 (__thiscall *GetSamplerState)(NiDX9RenderState this, UInt32 Sampler, D3DSAMPLERSTATETYPE Type);\nvoid (__thiscall *RestoreSamplerState)(NiDX9RenderState this, UInt32 Sampler, D3DSAMPLERSTATETYPE Type);\nvoid (__thiscall *ClearTextureList)(NiDX9RenderState this);\nvoid (__thiscall *SetTexture)(NiDX9RenderState this, UInt32 Sampler, IDirect3DBaseTexture9 *pTexture);\nIDirect3DBaseTexture9 *(__thiscall *GetTexture)(NiDX9RenderState this, UInt32 Sampler);\nvoid (__thiscall *RemoveTexture)(NiDX9RenderState this, IDirect3DBaseTexture9 *pTexture);\nvoid (__thiscall *SetSoftwareVertexProcessing)(NiDX9RenderState *self, unsigned __int8 enabled);\nunsigned __int8 (__thiscall *GetSoftwareVertexProcessing)(NiDX9RenderState *self);\nvoid (__thiscall *SetVar_0FF4)(NiDX9RenderState this, UInt8 u1);\nUInt8 (__thiscall *GetVar_0FF4)(NiDX9RenderState this);\nvoid (__thiscall *SetVar_0FF5)(NiDX9RenderState this, UInt8 u1);\nUInt8 (__thiscall *GetVar_0FF5)(NiDX9RenderState this);\nvoid (__thiscall *Reset)(NiDX9RenderState this);\nvoid (__thiscall *func_042)(NiDX9RenderState this);\n}\n",
   "id": 18374686479671990479,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00053.",
       "name": "super",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "NiRefObjectVtbl"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00054.",
       "name": "UpdateRenderState",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this, const NiPropertyState *pkNew)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00055.",
       "name": "SetAlpha",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this, void *AlphaProperty)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00056.",
       "name": "SetDither",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this, void *DitherProperty)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00057.",
       "name": "SetFog",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this, void *FogProperty)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00058.",
       "name": "SetMaterial",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this, void *u1)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00059.",
       "name": "SetShadeMode",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this, void *ShadeProperty)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000510.",
       "name": "SetSpecular",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this, void *SpecularProperty)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000511.",
       "name": "SetStencil",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this, void *StencilProperty)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000512.",
       "name": "SetWireframe",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this, void *WireframeProperty)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000513.",
       "name": "SetZBuffer",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this, void *ZBufferProperty)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000514.",
       "name": "RestoreAlpha",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000515.",
       "name": "SetVertexBlending",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this, UInt16 u1)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000516.",
       "name": "SetNormalization",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this, void *u1)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000517.",
       "name": "func_0E",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this, UInt32 u1)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000518.",
       "name": "GetVar088",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "float (__thiscall *)(NiDX9RenderState this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000519.",
       "name": "func_10",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this, float u1)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000520.",
       "name": "func_11",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this, float u1, float u2)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000521.",
       "name": "GetLeftHanded",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 4
+      "size": 4,
+      "type": "UInt8 (__thiscall *)(NiDX9RenderState this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000522.",
       "name": "func_13",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 4
+      "offset_hex": "0x4C",
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this, UInt8 u1)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000523.",
       "name": "func_14",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this, UInt32 u1)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000524.",
       "name": "InitializeRenderStates",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000525.",
       "name": "BackUpAllStates",
       "offset": 88,
       "offset_hex": "0x58",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000526.",
       "name": "RestoreRenderState",
       "offset": 92,
-      "offset_hex": "0x5c",
-      "size": 4
+      "offset_hex": "0x5C",
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this, D3DRENDERSTATETYPE state)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000527.",
       "name": "RestoreAllRenderStates",
       "offset": 96,
       "offset_hex": "0x60",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000528.",
       "name": "SetRenderState",
       "offset": 100,
       "offset_hex": "0x64",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this, D3DRENDERSTATETYPE state, UInt32 value, UInt8 BackUp)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000529.",
       "name": "GetRenderState",
       "offset": 104,
       "offset_hex": "0x68",
-      "size": 4
+      "size": 4,
+      "type": "UInt32 (__thiscall *)(NiDX9RenderState this, D3DRENDERSTATETYPE state)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000530.",
       "name": "ClearPixelShaders",
       "offset": 108,
-      "offset_hex": "0x6c",
-      "size": 4
+      "offset_hex": "0x6C",
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000531.",
       "name": "BackUpPixelShader",
       "offset": 112,
       "offset_hex": "0x70",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000532.",
       "name": "func_1D",
       "offset": 116,
       "offset_hex": "0x74",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000533.",
       "name": "SetPixelShader",
       "offset": 120,
       "offset_hex": "0x78",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this, IDirect3DPixelShader9 *PixelShader, UInt8 BackUp)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000534.",
       "name": "GetPixelShader",
       "offset": 124,
-      "offset_hex": "0x7c",
-      "size": 4
+      "offset_hex": "0x7C",
+      "size": 4,
+      "type": "IDirect3DPixelShader9 *(__thiscall *)(NiDX9RenderState this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000535.",
       "name": "RestorePixelShader",
       "offset": 128,
       "offset_hex": "0x80",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000536.",
       "name": "RemovePixelShader",
       "offset": 132,
       "offset_hex": "0x84",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this, IDirect3DPixelShader9 *PixelShader)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000537.",
       "name": "SetVertexShader",
       "offset": 136,
       "offset_hex": "0x88",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this, IDirect3DVertexShader9 *pShader, UInt8 BackUp)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000538.",
       "name": "GetVertexShader",
       "offset": 140,
-      "offset_hex": "0x8c",
-      "size": 4
+      "offset_hex": "0x8C",
+      "size": 4,
+      "type": "IDirect3DVertexShader9 *(__thiscall *)(NiDX9RenderState this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000539.",
       "name": "RestoreVertexShader",
       "offset": 144,
       "offset_hex": "0x90",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000540.",
       "name": "RemoveVertexShader",
       "offset": 148,
       "offset_hex": "0x94",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState *self, IDirect3DVertexShader9 *shader)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000541.",
       "name": "SetFVF",
       "offset": 152,
       "offset_hex": "0x98",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this, UInt32 FVF, UInt8 BackUp)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000542.",
       "name": "GetFVF",
       "offset": 156,
-      "offset_hex": "0x9c",
-      "size": 4
+      "offset_hex": "0x9C",
+      "size": 4,
+      "type": "UInt32 (__thiscall *)(NiDX9RenderState this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000543.",
       "name": "RestoreFVF",
       "offset": 160,
-      "offset_hex": "0xa0",
-      "size": 4
+      "offset_hex": "0xA0",
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000544.",
       "name": "ClearFVF",
       "offset": 164,
-      "offset_hex": "0xa4",
-      "size": 4
+      "offset_hex": "0xA4",
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this, UInt32 FVF)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000545.",
       "name": "SetVertexDeclaration",
       "offset": 168,
-      "offset_hex": "0xa8",
-      "size": 4
+      "offset_hex": "0xA8",
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this, IDirect3DVertexDeclaration9 *pDecl, UInt8 BackUp)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000546.",
       "name": "GetVertexDeclaration",
       "offset": 172,
-      "offset_hex": "0xac",
-      "size": 4
+      "offset_hex": "0xAC",
+      "size": 4,
+      "type": "IDirect3DVertexDeclaration9 *(__thiscall *)(NiDX9RenderState this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000547.",
       "name": "RestoreVertexDeclaration",
       "offset": 176,
-      "offset_hex": "0xb0",
-      "size": 4
+      "offset_hex": "0xB0",
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000548.",
       "name": "ClearVertexDeclatation",
       "offset": 180,
-      "offset_hex": "0xb4",
-      "size": 4
+      "offset_hex": "0xB4",
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this, IDirect3DVertexDeclaration9 *pDecl)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000549.",
       "name": "func_02E",
       "offset": 184,
-      "offset_hex": "0xb8",
-      "size": 4
+      "offset_hex": "0xB8",
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000550.",
       "name": "func_02F",
       "offset": 188,
-      "offset_hex": "0xbc",
-      "size": 4
+      "offset_hex": "0xBC",
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000551.",
       "name": "func_030",
       "offset": 192,
-      "offset_hex": "0xc0",
-      "size": 4
+      "offset_hex": "0xC0",
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000552.",
       "name": "func_031",
       "offset": 196,
-      "offset_hex": "0xc4",
-      "size": 4
+      "offset_hex": "0xC4",
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000553.",
       "name": "SetTextureStageState",
       "offset": 200,
-      "offset_hex": "0xc8",
-      "size": 4
+      "offset_hex": "0xC8",
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this, UInt32 Stage, D3DTEXTURESTAGESTATETYPE Type, UInt32 Value, UInt8 BackUp)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000554.",
       "name": "GetTextureStageState",
       "offset": 204,
-      "offset_hex": "0xcc",
-      "size": 4
+      "offset_hex": "0xCC",
+      "size": 4,
+      "type": "UInt32 (__thiscall *)(NiDX9RenderState this, UInt32 Stage, D3DTEXTURESTAGESTATETYPE Type)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000555.",
       "name": "SetSamplerState",
       "offset": 208,
-      "offset_hex": "0xd0",
-      "size": 4
+      "offset_hex": "0xD0",
+      "size": 4,
+      "type": "HRESULT (__thiscall *)(NiDX9RenderState this, UInt32 Sampler, D3DSAMPLERSTATETYPE Type, UInt32 Value, UInt8 BackUp)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000556.",
       "name": "GetSamplerState",
       "offset": 212,
-      "offset_hex": "0xd4",
-      "size": 4
+      "offset_hex": "0xD4",
+      "size": 4,
+      "type": "UInt32 (__thiscall *)(NiDX9RenderState this, UInt32 Sampler, D3DSAMPLERSTATETYPE Type)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000557.",
       "name": "RestoreSamplerState",
       "offset": 216,
-      "offset_hex": "0xd8",
-      "size": 4
+      "offset_hex": "0xD8",
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this, UInt32 Sampler, D3DSAMPLERSTATETYPE Type)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000558.",
       "name": "ClearTextureList",
       "offset": 220,
-      "offset_hex": "0xdc",
-      "size": 4
+      "offset_hex": "0xDC",
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000559.",
       "name": "SetTexture",
       "offset": 224,
-      "offset_hex": "0xe0",
-      "size": 4
+      "offset_hex": "0xE0",
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this, UInt32 Sampler, IDirect3DBaseTexture9 *pTexture)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000560.",
       "name": "GetTexture",
       "offset": 228,
-      "offset_hex": "0xe4",
-      "size": 4
+      "offset_hex": "0xE4",
+      "size": 4,
+      "type": "IDirect3DBaseTexture9 *(__thiscall *)(NiDX9RenderState this, UInt32 Sampler)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000561.",
       "name": "RemoveTexture",
       "offset": 232,
-      "offset_hex": "0xe8",
-      "size": 4
+      "offset_hex": "0xE8",
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this, IDirect3DBaseTexture9 *pTexture)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000562.",
       "name": "SetSoftwareVertexProcessing",
       "offset": 236,
-      "offset_hex": "0xec",
-      "size": 4
+      "offset_hex": "0xEC",
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState *self, unsigned __int8 enabled)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000563.",
       "name": "GetSoftwareVertexProcessing",
       "offset": 240,
-      "offset_hex": "0xf0",
-      "size": 4
+      "offset_hex": "0xF0",
+      "size": 4,
+      "type": "unsigned __int8 (__thiscall *)(NiDX9RenderState *self)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000564.",
       "name": "SetVar_0FF4",
       "offset": 244,
-      "offset_hex": "0xf4",
-      "size": 4
+      "offset_hex": "0xF4",
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this, UInt8 u1)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000565.",
       "name": "GetVar_0FF4",
       "offset": 248,
-      "offset_hex": "0xf8",
-      "size": 4
+      "offset_hex": "0xF8",
+      "size": 4,
+      "type": "UInt8 (__thiscall *)(NiDX9RenderState this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000566.",
       "name": "SetVar_0FF5",
       "offset": 252,
-      "offset_hex": "0xfc",
-      "size": 4
+      "offset_hex": "0xFC",
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this, UInt8 u1)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000567.",
       "name": "GetVar_0FF5",
       "offset": 256,
       "offset_hex": "0x100",
-      "size": 4
+      "size": 4,
+      "type": "UInt8 (__thiscall *)(NiDX9RenderState this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000568.",
       "name": "Reset",
       "offset": 260,
       "offset_hex": "0x104",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000569.",
       "name": "func_042",
       "offset": 264,
       "offset_hex": "0x108",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX9RenderState this)"
     }
   ],
   "name": "NiDX9RenderStateVtbl",
+  "ordinal": 9484,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 268
 }

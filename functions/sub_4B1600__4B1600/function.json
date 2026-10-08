@@ -1,19 +1,36 @@
 {
-  "callees_count": 48,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 19,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_4B1600",
+  "chunks": [
+    [
+      "0x4B1600",
+      "0x4B1A41"
+    ],
+    [
+      "0x9B2FC0",
+      "0x9B2FFC"
+    ]
+  ],
+  "chunks_sha256": "d918d4b6a1ab9414962db52033982d22cac9cb9809c99c135c52f865d3da7483",
+  "comment_regular": "Create/find and configure the NiPointLight attached to a TESObjectLIGH reference. Its ShadowSceneLight registration uses trackBackingPosition=false because reference lifecycle supplies the attachment path.",
+  "comment_repeatable": "Create/find and configure the NiPointLight attached to a TESObjectLIGH reference. lightFlags_7C bit 0x20 ('Off by default') suppresses the normal non-actor path; bit 0x04 ('Negative') negates RGB. The routine registers the source with ShadowSceneNode and seeds attenuation/dimmer, but does not read editor bits 0x200/0x400 and does not admit shadow casters.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 7,
+  "display_name": "TESObjectLIGH_ConfigureReferencePointLight",
   "end_ea": "0x4B1A41",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4B1600",
+  "name": "TESObjectLIGH_ConfigureReferencePointLight",
   "segment": ".text",
   "sha256": "0b315e0365cfbfe3ee540a39706f50471d57f9c963a7948ffbcf6ceb5c0b0c16",
   "size": 1089,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4B1600",
-  "type": "void __thiscall(void *this, TESObjectREFR *, int)",
-  "xrefs_from_count": 347,
+  "total_chunk_size": 1149,
+  "type": "void __thiscall(TESObjectLIGH_DecodedLayout *self, TESObjectREFR *reference, NiNode *referenceRoot)",
+  "xrefs_from_count": 366,
   "xrefs_to_count": 3
 }

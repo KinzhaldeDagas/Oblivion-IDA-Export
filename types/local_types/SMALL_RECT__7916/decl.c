@@ -1,1 +1,1 @@
-SMALL_RECT
+typedef tagSMALL_RECT SMALL_RECT;

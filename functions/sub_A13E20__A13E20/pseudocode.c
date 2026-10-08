@@ -1,4 +1,4 @@
-BSStringT *sub_A13E20()
+NiRTTI *sub_A13E20()
 {
-  return sub_70E220(&stru_BA8510, "bhkPointToPathConstraint", (int)&stru_BA7D50);
+  return NiRTTI_Constructor(&stru_BA8510, "bhkPointToPathConstraint", &MEMORY[0xBA7D50]); /*0xa13e34*/
 }

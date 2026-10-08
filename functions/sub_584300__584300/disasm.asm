@@ -1,7 +1,7 @@
 0x584300: push    esi
-0x584301: mov     esi, [esp+4+arg_0]
-0x584305: push    esi
-0x584306: call    sub_583CF0
+0x584301: mov     esi, [esp+4+index]
+0x584305: push    esi; index
+0x584306: call    InterfaceManager__ClearTimer; Verified: finds timer by opaque owner/index pointer, unlinks and frees only the timer node. Used by NewTimer and fade cancellation.
 0x58430B: push    14h; Size
 0x58430D: call    FormHeapAlloc
 0x584312: fldz
@@ -16,7 +16,7 @@
 0x58432C: mov     [eax], ecx
 0x58432E: fstp    dword ptr [eax+8]
 0x584331: mov     ecx, eax
-0x584333: fld     [esp+4+arg_4]
+0x584333: fld     [esp+4+duration]
 0x584337: mov     [ecx], esi
 0x584339: fcom    st(1)
 0x58433B: pop     esi
@@ -26,8 +26,8 @@
 0x584343: fstp    st(1)
 0x584345: jmp     short loc_584349
 0x584347: fstp    st
-0x584349: fstp    [esp+arg_0]
-0x58434D: fld     [esp+arg_0]
+0x584349: fstp    [esp+index]
+0x58434D: fld     [esp+index]
 0x584351: fstp    dword ptr [ecx+8]
 0x584354: mov     eax, ds:0B3A6E0h
 0x584359: mov     edx, [eax+130h]

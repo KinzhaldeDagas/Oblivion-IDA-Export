@@ -225,3 +225,106 @@
 0x8C7152: pop     ebx
 0x8C7153: add     esp, 10h
 0x8C7156: retn
+0x4C16A0: mov     edx, ecx
+0x4C16A2: mov     eax, [edx+8]
+0x4C16A5: test    eax, eax
+0x4C16A7: js      short locret_4C16DB
+0x4C16A9: mov     ecx, ds:0BA9DE4h
+0x4C16AF: push    esi
+0x4C16B0: mov     esi, large fs:2Ch
+0x4C16B7: mov     ecx, [esi+ecx*4]
+0x4C16BA: mov     ecx, [ecx+19Ch]
+0x4C16C0: test    ecx, ecx
+0x4C16C2: pop     esi
+0x4C16C3: jnz     short loc_4C16CB
+0x4C16C5: mov     ecx, ds:0BA7D9Ch
+0x4C16CB: mov     edx, [edx]
+0x4C16CD: push    14h
+0x4C16CF: and     eax, 3FFFFFFFh
+0x4C16D4: push    eax
+0x4C16D5: push    edx
+0x4C16D6: call    sub_8A75D0
+0x4C16DB: retn
+0x536DD0: mov     edx, ecx
+0x536DD2: mov     eax, [edx+8]
+0x536DD5: test    eax, eax
+0x536DD7: js      short locret_536E0F
+0x536DD9: mov     ecx, ds:0BA9DE4h
+0x536DDF: push    esi
+0x536DE0: mov     esi, large fs:2Ch
+0x536DE7: mov     ecx, [esi+ecx*4]
+0x536DEA: mov     ecx, [ecx+19Ch]
+0x536DF0: test    ecx, ecx
+0x536DF2: pop     esi
+0x536DF3: jnz     short loc_536DFB
+0x536DF5: mov     ecx, ds:0BA7D9Ch
+0x536DFB: mov     edx, [edx]
+0x536DFD: and     eax, 3FFFFFFFh
+0x536E02: add     eax, eax
+0x536E04: push    14h
+0x536E06: add     eax, eax
+0x536E08: push    eax
+0x536E09: push    edx
+0x536E0A: call    sub_8A75D0
+0x536E0F: retn
+0x8BAD10: mov     edx, ecx
+0x8BAD12: mov     eax, [edx+8]
+0x8BAD15: test    eax, eax
+0x8BAD17: js      short locret_8BAD4E
+0x8BAD19: mov     ecx, ds:0BA9DE4h
+0x8BAD1F: push    esi
+0x8BAD20: mov     esi, large fs:2Ch
+0x8BAD27: mov     ecx, [esi+ecx*4]
+0x8BAD2A: mov     ecx, [ecx+19Ch]
+0x8BAD30: test    ecx, ecx
+0x8BAD32: pop     esi
+0x8BAD33: jnz     short loc_8BAD3B
+0x8BAD35: mov     ecx, ds:0BA7D9Ch
+0x8BAD3B: mov     edx, [edx]
+0x8BAD3D: and     eax, 3FFFFFFFh
+0x8BAD42: push    14h
+0x8BAD44: shl     eax, 2
+0x8BAD47: push    eax
+0x8BAD48: push    edx
+0x8BAD49: call    sub_8A75D0
+0x8BAD4E: retn
+0x9D77D0: mov     ecx, [ebp-10h]
+0x9D77D3: add     ecx, 24h ; '$'
+0x9D77D6: jmp     loc_536DD0
+0x9D77DB: mov     ecx, [ebp-10h]
+0x9D77DE: add     ecx, 30h ; '0'
+0x9D77E1: jmp     loc_8BAD10
+0x9D77E6: mov     ecx, [ebp-10h]
+0x9D77E9: add     ecx, 3Ch ; '<'
+0x9D77EC: jmp     loc_8BAD10
+0x9D77F1: mov     ecx, [ebp-10h]
+0x9D77F4: add     ecx, 48h ; 'H'
+0x9D77F7: jmp     loc_536DD0
+0x9D77FC: mov     ecx, [ebp-10h]
+0x9D77FF: add     ecx, 54h ; 'T'
+0x9D7802: jmp     loc_4C16A0
+0x9D7807: mov     ecx, [ebp-10h]
+0x9D780A: add     ecx, 60h ; '`'
+0x9D780D: jmp     loc_8BAD10
+0x9D7812: mov     ecx, [ebp-10h]
+0x9D7815: add     ecx, 6Ch ; 'l'
+0x9D7818: jmp     loc_8BAD10
+0x9D781D: mov     ecx, [ebp-10h]
+0x9D7820: add     ecx, 78h ; 'x'
+0x9D7823: jmp     loc_536DD0
+0x9D7828: mov     ecx, [ebp-10h]
+0x9D782B: add     ecx, 84h ; '„'
+0x9D7831: jmp     loc_8BAD10
+0x9D7836: mov     ecx, [ebp-10h]
+0x9D7839: add     ecx, 90h
+0x9D783F: jmp     loc_536DD0
+0x9D7844: mov     ecx, [ebp-10h]
+0x9D7847: add     ecx, 9Ch ; 'œ'
+0x9D784D: jmp     loc_8BAD10
+0x9D7852: mov     edx, [esp+arg_4]
+0x9D7856: lea     eax, [edx-10h]
+0x9D7859: mov     ecx, [edx-14h]
+0x9D785C: xor     ecx, eax
+0x9D785E: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D7863: mov     eax, offset stru_AFF384
+0x9D7868: jmp     ___CxxFrameHandler3

@@ -1,19 +1,36 @@
 {
-  "callees_count": 29,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
   "callers_count": 3,
+  "chunks": [
+    [
+      "0x77AA80",
+      "0x77ABE4"
+    ],
+    [
+      "0x779160",
+      "0x779195"
+    ]
+  ],
+  "chunks_sha256": "e10235900e1fb845f40fe6c7db668f7498631dd3f9dac7645858fd97fb1dc906",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 5,
+  "comment_repeatable": "\nDX11 shader-child lifetime audit 2026-10-01: NiD3DShader destructor77AA80 releases pooled render-state group, clears/destroys the instance pass array, drops CurrentPass at shader+3C using NiD3DPass+60 then its pool return, and releases active VS map+30, PS map+2C and declaration+24 using pointee+4 InterlockedDecrement/destroy-on-zero. Retaining the shader prevents its destructor, but does NOT prevent replacement of those child bindings or mutation/reallocation of their arrays. Those lifetimes and writer intervals remain separate replacement requirements. Comparative Fallout827C6178 shares factory unregister, renderer release, pooled state group and map/declaration cleanup, but its decoded current-pass handling differs; do not infer Oblivion ownership offsets or pass-pool rules from it.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 6,
   "display_name": "NiD3DShader::~NiD3DShader(void)",
   "end_ea": "0x77ABE4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??1NiD3DShader@@UAE@XZ",
   "segment": ".text",
   "sha256": "155305b8042d351a0d3860f8f23828c2d8fddd72af92bad1dbe78255188bb321",
   "size": 356,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x77AA80",
+  "total_chunk_size": 409,
   "type": "void __thiscall(NiD3DShader *__hidden this)",
-  "xrefs_from_count": 181,
+  "xrefs_from_count": 199,
   "xrefs_to_count": 3
 }

@@ -1,11 +1,11 @@
-0x7DACA0: sub     esp, 11Ch
+0x7DACA0: sub     esp, 11Ch; [Verified] Loads the supplied shader package from Data\Shaders\<filename>, validates its header (observed values 0x0C and 0x64), reads the record payload, and inserts entries into the ShaderBufferEntry string map. [Unknown] Internal meaning of package header fields and variant-specific payloads is not established. [Candidate cross-build note] Fallout's observed HLSL creator compiles resolved source files directly; no same-name .sdp load path was located in its IDB, which remains an incomplete search rather than a proven absence.
 0x7DACA6: mov     eax, ds:0B30AACh
 0x7DACAB: xor     eax, esp
 0x7DACAD: mov     [esp+11Ch+var_4], eax
 0x7DACB4: push    ebp
 0x7DACB5: push    edi
 0x7DACB6: mov     ebp, ecx
-0x7DACB8: mov     ecx, [esp+124h+arg_0]
+0x7DACB8: mov     ecx, [esp+124h+filename]
 0x7DACBF: xor     al, al
 0x7DACC1: xor     edi, edi
 0x7DACC3: cmp     ecx, edi
@@ -47,11 +47,11 @@
 0x7DAD2A: call    FormHeapAlloc
 0x7DAD2F: mov     ecx, [esp+12Ch+Size]
 0x7DAD33: add     esp, 4
-0x7DAD36: push    ecx
-0x7DAD37: push    eax
-0x7DAD38: mov     ecx, ebx
+0x7DAD36: push    ecx; byteCount
+0x7DAD37: push    eax; destination
+0x7DAD38: mov     ecx, ebx; self
 0x7DAD3A: mov     [ebp+4], eax
-0x7DAD3D: call    ReadFile??
+0x7DAD3D: call    Archive_ReadBytes
 0x7DAD42: cmp     eax, [esp+128h+Size]
 0x7DAD46: jnz     short loc_7DAD81
 0x7DAD48: cmp     [esp+128h+var_110], edi
@@ -72,7 +72,7 @@
 0x7DAD7F: jmp     short loc_7DAD90
 0x7DAD81: mov     eax, [ebp+4]
 0x7DAD84: push    eax
-0x7DAD85: call    FormHeapFree
+0x7DAD85: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7DAD8A: add     esp, 4
 0x7DAD8D: mov     [ebp+4], edi
 0x7DAD90: mov     edx, [ebx]

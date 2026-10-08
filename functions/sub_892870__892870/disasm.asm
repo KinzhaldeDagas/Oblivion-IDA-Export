@@ -21,7 +21,7 @@
 0x8928B3: ja      loc_892D6D
 0x8928B9: test    dword ptr [esi+1F4h], 4000h
 0x8928C3: jnz     loc_892D6D
-0x8928C9: call    sub_8AC0A0
+0x8928C9: call    bhkWorldObject_GetLinearVelocityPtr; TES4 authoritative: returns pointer to bhk collision object's velocity vector at object+0x10. 0x896000 copies this into proxy +0x2E0 before state update.
 0x8928CE: fldz
 0x8928D0: movaps  xmm0, xmmword ptr [ebx+10h]
 0x8928D4: movaps  [esp+80h+var_40], xmm0
@@ -65,11 +65,11 @@
 0x89296A: test    ecx, ecx
 0x89296C: jz      short loc_89297E
 0x89296E: fstp    st
-0x892970: call    sub_8AC0A0
+0x892970: call    bhkWorldObject_GetLinearVelocityPtr; TES4 authoritative: returns pointer to bhk collision object's velocity vector at object+0x10. 0x896000 copies this into proxy +0x2E0 before state update.
 0x892975: movaps  xmm2, [esp+80h+var_40]
 0x89297A: fldz
 0x89297C: jmp     short loc_892983
-0x89297E: mov     eax, offset stru_BA7A40
+0x89297E: mov     eax, offset unk_BA7A40
 0x892983: cmp     [esp+80h+var_64], 2
 0x892988: movaps  xmm0, xmmword ptr [eax]
 0x89298B: movaps  [esp+80h+var_50], xmm0
@@ -105,7 +105,7 @@
 0x8929FC: shufps  xmm1, xmm0, 0
 0x892A00: mulps   xmm1, xmm2
 0x892A03: movaps  [esp+88h+var_40], xmm1
-0x892A08: call    sub_43F3E0
+0x892A08: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x892A0D: fld     dword ptr ds:0A34BA0h
 0x892A13: movaps  xmm0, xmmword ptr [esi+350h]
 0x892A1A: fstp    [esp+88h+var_84]; float
@@ -118,7 +118,7 @@
 0x892A39: add     [esi+360h], edx
 0x892A3F: push    eax; int
 0x892A40: mov     ecx, esi
-0x892A42: call    sub_8907A0
+0x892A42: call    bhkCharacterController_SetTransientPushVector; Character proxy collision/response path feeds transient push setter after world conversion; use as push-channel evidence, not as climbing ledge behavior.
 0x892A47: test    [esi+1F4h], dl
 0x892A4D: jz      loc_892D6D
 0x892A53: mov     ecx, [esi+8]
@@ -126,10 +126,10 @@
 0x892A58: movaps  xmm0, xmmword ptr [ebx]
 0x892A5B: movaps  [esp+80h+var_40], xmm0
 0x892A60: jz      short loc_892A6E
-0x892A62: call    sub_8AC070
+0x892A62: call    bhkCollisionWrapper_GetPositionPtr; Returns low-level Havok object position pointer: *(wrapper+0x30 + 0x1C) + 0x30.
 0x892A67: movaps  xmm0, [esp+80h+var_40]
 0x892A6C: jmp     short loc_892A73
-0x892A6E: mov     eax, offset stru_BA7A40
+0x892A6E: mov     eax, offset unk_BA7A40
 0x892A73: movaps  xmm1, xmmword ptr [eax]
 0x892A76: fldz
 0x892A78: subps   xmm0, xmm1
@@ -226,7 +226,7 @@
 0x892BE3: test    ecx, ecx
 0x892BE5: jz      short loc_892C0B
 0x892BE7: fstp    st
-0x892BE9: call    sub_8AC0A0
+0x892BE9: call    bhkWorldObject_GetLinearVelocityPtr; TES4 authoritative: returns pointer to bhk collision object's velocity vector at object+0x10. 0x896000 copies this into proxy +0x2E0 before state update.
 0x892BEE: movaps  xmm1, [esp+80h+var_30]
 0x892BF3: fldz
 0x892BF5: movaps  xmm7, [esp+80h+var_40]
@@ -234,7 +234,7 @@
 0x892BFF: movaps  xmm4, [esp+80h+var_60]
 0x892C04: movaps  xmm3, [esp+80h+var_20]
 0x892C09: jmp     short loc_892C10
-0x892C0B: mov     eax, offset stru_BA7A40
+0x892C0B: mov     eax, offset unk_BA7A40
 0x892C10: movaps  xmm0, xmmword ptr [eax]
 0x892C13: movaps  [esp+80h+var_50], xmm0
 0x892C18: fst     dword ptr [esp+80h+var_50+8]

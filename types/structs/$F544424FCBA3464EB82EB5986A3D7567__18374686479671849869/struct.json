@@ -1,52 +1,90 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "$F544424FCBA3464EB82EB5986A3D7567",
+  "definition": "union $F544424FCBA3464EB82EB5986A3D7567\n{\nSERVICE_DESCRIPTIONA *descr __offset(OFF64|AUTO);\nSERVICE_FAILURE_ACTIONSA *actions __offset(OFF64|AUTO);\nSERVICE_DELAYED_AUTO_START_INFO *delayedstart __offset(OFF64|AUTO);\nSERVICE_FAILURE_ACTIONS_FLAG *actionsflag __offset(OFF64|AUTO);\nSERVICE_SID_INFO *sid __offset(OFF64|AUTO);\nSERVICE_RPC_REQUIRED_PRIVILEGES_INFO *privinfo __offset(OFF64|AUTO);\nSERVICE_PRESHUTDOWN_INFO *preshutdown __offset(OFF64|AUTO);\n}\n",
   "id": 18374686479671849869,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "descr",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "SERVICE_DESCRIPTIONA *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "actions",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "SERVICE_FAILURE_ACTIONSA *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "delayedstart",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "SERVICE_DELAYED_AUTO_START_INFO *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "actionsflag",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "SERVICE_FAILURE_ACTIONS_FLAG *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "sid",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "SERVICE_SID_INFO *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "privinfo",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "SERVICE_RPC_REQUIRED_PRIVILEGES_INFO *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "preshutdown",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "SERVICE_PRESHUTDOWN_INFO *"
     }
   ],
   "name": "$F544424FCBA3464EB82EB5986A3D7567",
+  "ordinal": 5834,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 4
 }

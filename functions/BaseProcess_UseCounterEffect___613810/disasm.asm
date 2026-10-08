@@ -36,7 +36,7 @@
 0x61385F: jnz     short loc_61386A
 0x613861: mov     ecx, [ebx]
 0x613863: push    0
-0x613865: call    sub_41A610
+0x613865: call    MagicItem_LoadVFXModels; MagicItem VFX model preload path. Walks spell art and effect-item VFX model references and asks the model loader to load/cache required art resources.
 0x61386A: pop     edi
 0x61386B: pop     ebp
 0x61386C: pop     esi

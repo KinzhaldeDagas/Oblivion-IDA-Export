@@ -1,19 +1,36 @@
 {
-  "callees_count": 22,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
+  "chunks": [
+    [
+      "0x49FD90",
+      "0x49FEFA"
+    ],
+    [
+      "0x9B2150",
+      "0x9B2186"
+    ]
+  ],
+  "chunks_sha256": "26e37a2d75113fdcc3a646ff090b0159944a574ba2c5212969bfb8330746836f",
+  "comment_regular": "CustomAnimSupport decode: BSAnimGroupSequence constructor; stores parsed TESAnimGroup at +0x68 and clones controller sequence state.",
+  "comment_repeatable": "BSAnimGroupSequence ctor: stores parsed TESAnimGroup at +0x68 with refcount, copies source sequence/controller data from KF model.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
   "display_name": "BSAnimGroupSequence::BSAnimGroupSequence(void)",
   "end_ea": "0x49FEFA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??0BSAnimGroupSequence@@QAE@XZ",
   "segment": ".text",
   "sha256": "592d956a13b06ce792245b27e81aa755fbdd0ab92666fb22be2db6f97bdf0d98",
   "size": 362,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x49FD90",
+  "total_chunk_size": 416,
   "type": "BSAnimGroupSequence *__thiscall(BSAnimGroupSequence *this, int, int)",
-  "xrefs_from_count": 156,
+  "xrefs_from_count": 172,
   "xrefs_to_count": 1
 }

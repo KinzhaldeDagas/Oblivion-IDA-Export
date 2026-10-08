@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x55DF70",
-    "line": "mov     ecx, [ecx+24h]",
+    "line": "mov     ecx, [ecx+24h]; Verified map insertion for asynchronous tree build results. Stores TESObjectREFR* -> BSTreeNode*; if insertion fails, releases/destroys the node.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x55DF75",
-    "line": "mov     edx, [esp+arg_0]",
+    "line": "mov     edx, [esp+reference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x55DF7D",
-    "line": "mov     esi, [esp+4+arg_4]",
+    "line": "mov     esi, [esp+4+node]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x55DF85",
-    "line": "call    eax",
+    "line": "call    eax; Verified: inserts TESObjectREFR* -> BSTreeNode* into pendingReferenceNodes; failed insertion destroys/releases the unaccepted node. Fallout AddBackgroundLoadedTree has matching set-and-release-on-failure behavior.",
     "mnemonic": "call",
     "size": 2
   },

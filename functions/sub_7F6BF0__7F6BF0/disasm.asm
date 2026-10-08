@@ -38,7 +38,7 @@
 0x7F6C6E: lea     ecx, [esp+4Ch+var_24]
 0x7F6C72: push    ecx
 0x7F6C73: mov     ecx, esi
-0x7F6C75: call    sub_75FB10
+0x7F6C75: call    sub_75FB10; MoonSugarEffect decode: NiD3DTextureStage texture getter with AddRef. Used by pass cleanup before comparing against global default texture dword_B43110.
 0x7F6C7A: mov     edx, [esp+4Ch+var_30]
 0x7F6C7E: mov     eax, [eax]
 0x7F6C80: mov     ecx, [edx]
@@ -70,7 +70,7 @@
 0x7F6CD2: lea     eax, [esp+4Ch+var_20]
 0x7F6CD6: push    eax
 0x7F6CD7: mov     ecx, esi
-0x7F6CD9: call    sub_75FB10
+0x7F6CD9: call    sub_75FB10; MoonSugarEffect decode: NiD3DTextureStage texture getter with AddRef. Used by pass cleanup before comparing against global default texture dword_B43110.
 0x7F6CDE: mov     ecx, [esp+4Ch+var_30]
 0x7F6CE2: mov     eax, [eax]
 0x7F6CE4: mov     edx, [ecx]
@@ -94,7 +94,7 @@
 0x7F6D10: lea     eax, [esp+4Ch+var_1C]
 0x7F6D14: push    eax
 0x7F6D15: mov     ecx, esi
-0x7F6D17: call    sub_75FB10
+0x7F6D17: call    sub_75FB10; MoonSugarEffect decode: NiD3DTextureStage texture getter with AddRef. Used by pass cleanup before comparing against global default texture dword_B43110.
 0x7F6D1C: cmp     dword ptr [eax], 0
 0x7F6D1F: mov     eax, [esp+4Ch+var_1C]
 0x7F6D23: setnz   byte ptr [esp+4Ch+arg_0]
@@ -118,7 +118,7 @@
 0x7F6D56: lea     ecx, [esp+4Ch+var_14]
 0x7F6D5A: push    ecx
 0x7F6D5B: mov     ecx, esi
-0x7F6D5D: call    sub_75FB10
+0x7F6D5D: call    sub_75FB10; MoonSugarEffect decode: NiD3DTextureStage texture getter with AddRef. Used by pass cleanup before comparing against global default texture dword_B43110.
 0x7F6D62: mov     edx, [esp+4Ch+var_2C]
 0x7F6D66: mov     eax, [eax]
 0x7F6D68: mov     ebp, [esp+4Ch+var_18]
@@ -165,16 +165,16 @@
 0x7F6DD7: cmp     edi, [esp+4Ch+var_10]
 0x7F6DDB: jb      loc_7F6C60
 0x7F6DE1: mov     ebp, [esp+4Ch+arg_8]
-0x7F6DE5: cmp     byte ptr [esp+4Ch+arg_C], 0
+0x7F6DE5: cmp     byte ptr [esp+4Ch+output], 0
 0x7F6DEA: jz      short loc_7F6DF8
 0x7F6DEC: mov     ecx, [ebp+30h]; this
 0x7F6DEF: test    ecx, ecx
 0x7F6DF1: jz      short loc_7F6DF8
-0x7F6DF3: call    NiD3DRenderStateGroup__SetRenderStates
+0x7F6DF3: call    NiD3DRenderStateGroup__SetRenderStates;
 0x7F6DF8: cmp     edi, ds:0B28CB8h
 0x7F6DFE: jnb     short loc_7F6E09
 0x7F6E00: push    edi
-0x7F6E01: call    sub_771790
+0x7F6E01: call    NiD3DTextureStage_DisableUnusedStages; Disable and clear every texture stage after the active pass range.
 0x7F6E06: add     esp, 4
 0x7F6E09: cmp     dword ptr [ebp+44h], 0
 0x7F6E0D: jz      loc_7F6EC9
@@ -187,11 +187,11 @@
 0x7F6E27: mov     ecx, ebx
 0x7F6E29: call    sub_7016D0
 0x7F6E2E: mov     edi, eax
-0x7F6E30: lea     eax, [esp+4Ch+arg_C]
-0x7F6E34: push    eax
-0x7F6E35: mov     ecx, ebx
+0x7F6E30: lea     eax, [esp+4Ch+output]
+0x7F6E34: push    eax; output
+0x7F6E35: mov     ecx, ebx; this
 0x7F6E37: mov     [esp+50h+var_4], 1
-0x7F6E3F: call    sub_405760
+0x7F6E3F: call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.
 0x7F6E44: mov     ecx, [ebp+44h]
 0x7F6E47: mov     edi, [edi]
 0x7F6E49: mov     eax, [eax]
@@ -214,7 +214,7 @@
 0x7F6E69: mov     ecx, esi
 0x7F6E6B: mov     byte ptr [esp+78h+var_4], 2
 0x7F6E70: call    edx
-0x7F6E72: mov     eax, [esp+4Ch+arg_C]
+0x7F6E72: mov     eax, [esp+4Ch+output]
 0x7F6E76: test    eax, eax
 0x7F6E78: mov     byte ptr [esp+4Ch+var_4], 1
 0x7F6E7D: jz      short loc_7F6E9D
@@ -260,10 +260,10 @@
 0x7F6EED: call    sub_7016D0
 0x7F6EF2: mov     edi, eax
 0x7F6EF4: lea     eax, [esp+4Ch+arg_8]
-0x7F6EF8: push    eax
-0x7F6EF9: mov     ecx, ebx
+0x7F6EF8: push    eax; output
+0x7F6EF9: mov     ecx, ebx; this
 0x7F6EFB: mov     [esp+50h+var_4], 3
-0x7F6F03: call    sub_405760
+0x7F6F03: call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.
 0x7F6F08: mov     ecx, [ebp+58h]
 0x7F6F0B: mov     edi, [edi]
 0x7F6F0D: mov     eax, [eax]
@@ -334,3 +334,20 @@
 0x7F6FAE: pop     ebx
 0x7F6FAF: add     esp, 38h
 0x7F6FB2: retn    10h
+0x9D0130: lea     ecx, [ebp-14h]; slot
+0x9D0133: jmp     NiPointerSlot_Release
+0x9D0138: lea     ecx, [ebp+4]; slot
+0x9D013B: jmp     NiPointerSlot_Release
+0x9D0140: lea     ecx, [ebp+10h]; slot
+0x9D0143: jmp     NiPointerSlot_Release
+0x9D0148: lea     ecx, [ebp+8]; slot
+0x9D014B: jmp     NiPointerSlot_Release
+0x9D0150: lea     ecx, [ebp+0Ch]; slot
+0x9D0153: jmp     NiPointerSlot_Release
+0x9D0158: mov     edx, [esp+arg_4]
+0x9D015C: lea     eax, [edx-3Ch]
+0x9D015F: mov     ecx, [edx-40h]
+0x9D0162: xor     ecx, eax
+0x9D0164: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D0169: mov     eax, offset stru_AF8BA0
+0x9D016E: jmp     ___CxxFrameHandler3

@@ -4,19 +4,19 @@ int __thiscall TESObjectREFR_ChangeCell(TESObjectREFR *this, TESObjectCELL *a2)
   int result; // eax
   int v5; // ecx
 
-  if ( a2 )
+  if ( a2 ) /*0x4d8aaa*/
   {
-    if ( this->member.parentCell != a2 )
-      this->vtbl->super.MarkAsModified((TESForm *)this, 4);
+    if ( this->member.parentCell != a2 ) /*0x4d8aaf*/
+      this->vtbl->super.MarkAsModified((TESForm *)this, 4); /*0x4d8ab8*/
   }
-  IsActor = this->vtbl->IsActor;
-  this->member.parentCell = a2;
-  result = ((int (__thiscall *)(TESObjectREFR *))IsActor)(this);
-  if ( (_BYTE)result )
+  IsActor = this->vtbl->IsActor; /*0x4d8abc*/
+  this->member.parentCell = a2; /*0x4d8ac4*/
+  result = ((int (__thiscall *)(TESObjectREFR *))IsActor)(this); /*0x4d8ac7*/
+  if ( (_BYTE)result ) /*0x4d8acb*/
   {
-    v5 = *((_DWORD *)this + 0x16);
-    if ( v5 )
-      return (*(int (__thiscall **)(int, TESObjectREFR *))(*(_DWORD *)v5 + 0x500))(v5, this);
+    v5 = *((_DWORD *)this + 0x16); /*0x4d8acd*/
+    if ( v5 ) /*0x4d8ad2*/
+      return (*(int (__thiscall **)(int, TESObjectREFR *))(*(_DWORD *)v5 + 0x500))(v5, this); /*0x4d8add*/
   }
-  return result;
+  return result; /*0x4d8adf*/
 }

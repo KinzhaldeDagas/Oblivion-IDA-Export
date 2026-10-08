@@ -8,7 +8,7 @@
 0x699171: mov     ecx, edi; this
 0x699173: call    MagicCaster_CastingVFX_destr
 0x699178: push    edi
-0x699179: call    FormHeapFree
+0x699179: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x69917E: add     esp, 4
 0x699181: pop     edi
 0x699182: mov     dword ptr [esi+4], 0

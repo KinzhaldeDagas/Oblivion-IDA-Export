@@ -36,3 +36,12 @@
 0x5378A5: pop     esi
 0x5378A6: add     esp, 10h
 0x5378A9: retn
+0x9B93B0: mov     ecx, [ebp-10h]; this
+0x9B93B3: jmp     j_??1bhkWaterListener@@UAE@XZ; bhkWaterListener::~bhkWaterListener(void)
+0x9B93B8: mov     edx, [esp+arg_4]
+0x9B93BC: lea     eax, [edx-8]
+0x9B93BF: mov     ecx, [edx-0Ch]
+0x9B93C2: xor     ecx, eax
+0x9B93C4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B93C9: mov     eax, offset stru_AE3744
+0x9B93CE: jmp     ___CxxFrameHandler3

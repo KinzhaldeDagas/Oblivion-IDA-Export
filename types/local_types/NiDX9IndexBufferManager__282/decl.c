@@ -1,1 +1,1 @@
-NiDX9IndexBufferManager
+struct NiDX9IndexBufferManager;

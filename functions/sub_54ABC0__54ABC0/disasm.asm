@@ -68,3 +68,12 @@
 0x54AC97: pop     esi
 0x54AC98: add     esp, 20h
 0x54AC9B: retn    8
+0x9BB670: lea     ecx, [ebp-20h]; this
+0x9BB673: jmp     ??1BSFaceGenKeyframeMultiple@@UAE@XZ; BSFaceGenKeyframeMultiple::~BSFaceGenKeyframeMultiple(void)
+0x9BB678: mov     edx, [esp+arg_4]
+0x9BB67C: lea     eax, [edx-1Ch]
+0x9BB67F: mov     ecx, [edx-20h]
+0x9BB682: xor     ecx, eax
+0x9BB684: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BB689: mov     eax, offset stru_AE5464
+0x9BB68E: jmp     ___CxxFrameHandler3

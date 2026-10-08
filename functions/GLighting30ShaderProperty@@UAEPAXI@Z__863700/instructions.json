@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x863703",
-    "line": "call    ??1Lighting30ShaderProperty@@UAE@XZ; Lighting30ShaderProperty::~Lighting30ShaderProperty(void)",
+    "line": "call    Lighting30ShaderProperty_Destructor; Oblivion Lighting30ShaderProperty destructor. Reasserts the exact A9576C derived vptr during derived cleanup, releases/nulls the +0x104 reference member, then invokes BSShaderPPLightingProperty destruction. The accumulator cannot encounter this transition while traversing the live property-owned pass list.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x863708",
-    "line": "test    byte ptr [esp+4+arg_0], 1",
+    "line": "test    byte ptr [esp+4+deleteFlags], 1",
     "mnemonic": "test",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x863710",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

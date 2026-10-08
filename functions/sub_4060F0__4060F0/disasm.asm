@@ -23,7 +23,7 @@
 0x406141: ja      short loc_4061B8
 0x406143: shr     ecx, 10h
 0x406146: jnz     short loc_4061B8
-0x406148: mov     eax, OSGlobals
+0x406148: mov     eax, ds:0B33398h
 0x40614D: test    eax, eax
 0x40614F: jz      short loc_4061B8
 0x406151: mov     ecx, [eax+20h]; this
@@ -34,7 +34,7 @@
 0x40615D: call    InputGlobals__FlushKeyboardBuffer
 0x406162: mov     ecx, [esi]; this
 0x406164: call    InputGlobals__PollAndUpdateInputState
-0x406169: mov     ecx, offset TimeInfo
+0x406169: mov     ecx, 0B33E90h
 0x40616E: call    sub_47D0F0
 0x406173: mov     byte ptr [edi+2], 1
 0x406177: pop     edi
@@ -43,10 +43,10 @@
 0x40617A: xor     eax, eax
 0x40617C: pop     ebx
 0x40617D: retn    10h
-0x406180: mov     eax, OSGlobals
+0x406180: mov     eax, ds:0B33398h
 0x406185: test    eax, eax
 0x406187: jz      short loc_4061B8
-0x406189: cmp     dword_B333F0, 0
+0x406189: cmp     dword ptr unk_B333F0, 0
 0x406190: jnz     short loc_4061B8
 0x406192: mov     ecx, [eax+20h]; this
 0x406195: test    ecx, ecx
@@ -56,7 +56,7 @@
 0x40619E: call    InputGlobals__FlushKeyboardBuffer
 0x4061A3: mov     ecx, [esi]; this
 0x4061A5: call    InputGlobals__PollAndUpdateInputState
-0x4061AA: mov     ecx, offset TimeInfo
+0x4061AA: mov     ecx, 0B33E90h
 0x4061AF: call    OsGlobalsTime__UpdatetimeInfo
 0x4061B4: mov     byte ptr [edi+2], 0
 0x4061B8: pop     edi
@@ -65,7 +65,7 @@
 0x4061BB: xor     eax, eax
 0x4061BD: pop     ebx
 0x4061BE: retn    10h
-0x4061C1: cmp     dword_B350D8, 0; jumptable 00406129 case 71
+0x4061C1: cmp     dword ptr ds:0B350D8h, 0; jumptable 00406129 case 71
 0x4061C8: jz      def_406129; jumptable 00406129 default case, cases 3-5,7-19,21-70
 0x4061CE: mov     ecx, [edi+0Ch]
 0x4061D1: mov     edx, [edi+8]
@@ -83,7 +83,7 @@
 0x4061EA: pop     ebp
 0x4061EB: pop     ebx
 0x4061EC: retn    10h
-0x4061EF: mov     eax, OSGlobals; jumptable 00406129 case 2
+0x4061EF: mov     eax, ds:0B33398h; jumptable 00406129 case 2
 0x4061F4: test    eax, eax
 0x4061F6: jz      def_406129; jumptable 00406129 default case, cases 3-5,7-19,21-70
 0x4061FC: push    edi; lParam
@@ -97,7 +97,7 @@
 0x40620B: pop     ebp
 0x40620C: pop     ebx
 0x40620D: retn    10h
-0x406210: cmp     hWnd, ebp; jumptable 00406129 case 20
+0x406210: cmp     ds:0B34FA8h, ebp; jumptable 00406129 case 20
 0x406216: jnz     def_406129; jumptable 00406129 default case, cases 3-5,7-19,21-70
 0x40621C: pop     edi
 0x40621D: pop     esi
@@ -114,7 +114,7 @@
 0x406239: push    edx; hWnd
 0x40623A: call    ds:DefWindowProcA
 0x406240: mov     edi, eax
-0x406242: mov     eax, OSGlobals
+0x406242: mov     eax, ds:0B33398h
 0x406247: test    eax, eax
 0x406249: jz      short loc_406295
 0x40624B: cmp     dword ptr [eax+20h], 0
@@ -158,7 +158,7 @@
 0x4062BC: movzx   ecx, di
 0x4062BF: push    eax; a7
 0x4062C0: push    ecx; a6
-0x4062C1: mov     ecx, OSGlobals; a1
+0x4062C1: mov     ecx, ds:0B33398h; a1
 0x4062C7: call    sub_405370
 0x4062CC: test    al, al
 0x4062CE: jz      short def_406129; jumptable 00406129 default case, cases 3-5,7-19,21-70
@@ -170,7 +170,7 @@
 0x4062D6: retn    10h
 0x4062D9: test    ebx, ebx
 0x4062DB: jnz     short def_406129; jumptable 00406129 default case, cases 3-5,7-19,21-70
-0x4062DD: mov     byte_B333F5, 1
+0x4062DD: mov     byte ptr unk_B333F5, 1
 0x4062E4: push    edi; jumptable 00406129 default case, cases 3-5,7-19,21-70
 0x4062E5: push    ebx; wParam
 0x4062E6: push    esi; Msg

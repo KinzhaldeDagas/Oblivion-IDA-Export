@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x78ED20",
-    "line": "mov     eax, ecx",
+    "line": "mov     eax, ecx; Oblivion CIdvCamera copy assignment. On non-self assignment copies only the three-float position at +0x04..+0x0F and returns this. The function occupies the inherited assignment slot in the CIdvCamera and derived vtables.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x78ED22",
-    "line": "mov     ecx, [esp+arg_0]",
+    "line": "mov     ecx, [esp+source]",
     "mnemonic": "mov",
     "size": 4
   },

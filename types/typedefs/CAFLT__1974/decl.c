@@ -1,1 +1,1 @@
-CAFLT
+typedef tagCAFLT CAFLT;

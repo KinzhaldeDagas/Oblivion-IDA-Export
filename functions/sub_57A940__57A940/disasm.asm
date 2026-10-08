@@ -28,6 +28,6 @@
 0x57A995: fnstsw  ax
 0x57A997: test    ah, 44h
 0x57A99A: jp      short loc_57A9A1
-0x57A99C: jmp     sub_5DD4B0
+0x57A99C: jmp     TrainingMenu_Open; Sidecar decode: TrainingMenu open dispatch tail-jump into TrainingMenu_Open (0x5DD4B0). Chain hooks must preserve the original stack/tail-jump shape.
 0x57A9A1: xor     eax, eax
 0x57A9A3: retn

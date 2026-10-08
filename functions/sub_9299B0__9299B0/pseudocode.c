@@ -1,10 +1,10 @@
 _DWORD *__thiscall sub_9299B0(_DWORD *this, char a2)
 {
-  sub_9299E0(this);
-  if ( (a2 & 1) != 0 )
-    (*(void (__stdcall **)(_DWORD *, _DWORD, int))(*(_DWORD *)dword_BA7D98 + 0x14))(
+  sub_9299E0(this); /*0x9299b3*/
+  if ( (a2 & 1) != 0 ) /*0x9299bd*/
+    (*(void (__stdcall **)(_DWORD *, _DWORD, int))(*(_DWORD *)unk_BA7D98 + 0x14))( /*0x9299cf*/
       this,
       *((unsigned __int16 *)this + 2),
       0x24);
-  return this;
+  return this; /*0x9299d4*/
 }

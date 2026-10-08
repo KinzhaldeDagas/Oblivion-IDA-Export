@@ -108,24 +108,24 @@
 0x85D0F4: push    edx
 0x85D0F5: mov     ecx, esi
 0x85D0F7: call    sub_848FA0
-0x85D0FC: cmp     byte ptr [esp+20h+arg_10], 0
+0x85D0FC: cmp     byte ptr [esp+20h+value], 0
 0x85D101: jnz     short loc_85D13E
 0x85D103: mov     ebx, 1
 0x85D108: add     [edi+60h], ebx
-0x85D10B: mov     [esp+20h+arg_10], edi
+0x85D10B: mov     [esp+20h+value], edi
 0x85D10F: mov     ecx, [esi+38h]
-0x85D112: lea     eax, [esp+20h+arg_10]
-0x85D116: push    eax
-0x85D117: push    ecx
-0x85D118: lea     ecx, [esi+40h]
+0x85D112: lea     eax, [esp+20h+value]
+0x85D116: push    eax; value
+0x85D117: push    ecx; index
+0x85D118: lea     ecx, [esi+40h]; this
 0x85D11B: mov     [esp+28h+var_4], 0
-0x85D123: call    sub_76CE40
+0x85D123: call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.
 0x85D128: or      eax, 0FFFFFFFFh
 0x85D12B: add     [edi+60h], eax
 0x85D12E: mov     [esp+20h+var_4], eax
 0x85D132: jnz     short loc_85D13B
 0x85D134: mov     ecx, edi
-0x85D136: call    sub_7604D0
+0x85D136: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x85D13B: add     [esi+38h], ebx
 0x85D13E: mov     ecx, [esp+20h+var_C]
 0x85D142: mov     large fs:0, ecx
@@ -136,3 +136,12 @@
 0x85D14D: pop     ebx
 0x85D14E: add     esp, 0Ch
 0x85D151: retn    14h
+0x9D4610: lea     ecx, [ebp+14h]; void *
+0x9D4613: jmp     sub_4027D0
+0x9D4618: mov     edx, [esp+arg_4]
+0x9D461C: lea     eax, [edx-10h]
+0x9D461F: mov     ecx, [edx-14h]
+0x9D4622: xor     ecx, eax
+0x9D4624: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D4629: mov     eax, offset stru_AFC698
+0x9D462E: jmp     ___CxxFrameHandler3

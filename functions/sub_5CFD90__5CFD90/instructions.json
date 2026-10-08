@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x5CFE11",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,13 +649,13 @@
   },
   {
     "ea": "0x5CFF02",
-    "line": "fstp    [esp+168h+a2]; a3",
+    "line": "fstp    [esp+168h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5CFF05",
-    "line": "push    0FF0h; a2",
+    "line": "push    0FF0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x5CFF0C",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -895,25 +895,25 @@
   },
   {
     "ea": "0x5CFF92",
-    "line": "push    0",
+    "line": "push    0; referenceFormIDOrZero",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5CFF94",
-    "line": "push    1",
+    "line": "push    1; unusedAlwaysOne",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5CFF96",
-    "line": "push    eax",
+    "line": "push    eax; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5CFF97",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -925,7 +925,7 @@
   },
   {
     "ea": "0x5CFFA4",
-    "line": "call    ContainerExtraData_GetEntryForForm",
+    "line": "call    ContainerExtraData_GetEntryForForm; Find EntryData for an exact TESForm in ExtraContainerChanges. Native ABI is three stack arguments and retn 0x0C. The middle Boolean is not read; callers conventionally pass true. If referenceFormIDOrZero is nonzero, require an extend-data list whose ExtraReferencePointer target has that form ID; otherwise return the form entry directly.",
     "mnemonic": "call",
     "size": 5
   },
@@ -937,7 +937,7 @@
   },
   {
     "ea": "0x5CFFAB",
-    "line": "mov     eax, [esp+16Ch+var_158]",
+    "line": "mov     eax, [esp+164h+var_150]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1033,7 +1033,7 @@
   },
   {
     "ea": "0x5CFFD2",
-    "line": "mov     ecx, [esp+16Ch+var_158]",
+    "line": "mov     ecx, [esp+164h+var_150]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1135,19 +1135,19 @@
   },
   {
     "ea": "0x5D0003",
-    "line": "mov     ecx, [esp+170h+var_15C]",
+    "line": "mov     ecx, [esp+164h+var_150]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5D0007",
-    "line": "call    sub_4849C0",
+    "line": "call    EquippedEntryData_GetCharge; Return per-instance ExtraCharge when present; otherwise return the TESEnchantableForm base charge. Returns the sentinel/default when the EntryData form is not enchantable.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5D000C",
-    "line": "mov     ecx, [esp+170h+var_14C]",
+    "line": "mov     ecx, [esp+164h+var_140]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1171,31 +1171,31 @@
   },
   {
     "ea": "0x5D0016",
-    "line": "fstp    [esp+174h+var_158]",
+    "line": "fstp    [esp+168h+var_14C]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x5D001A",
-    "line": "fld     [esp+174h+var_158]",
+    "line": "fld     [esp+168h+var_14C]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x5D001E",
-    "line": "fstp    [esp+174h+var_174]; float",
+    "line": "fstp    [esp+168h+a2]; float",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5D0021",
-    "line": "call    sub_41EE90",
+    "line": "call    ExtraDataList_SetCharge; Updates or creates ExtraCharge type 0x2E with the supplied float.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5D0026",
-    "line": "fild    [esp+170h+var_154]",
+    "line": "fild    [esp+164h+var_148]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -1207,7 +1207,7 @@
   },
   {
     "ea": "0x5D002C",
-    "line": "fstp    [esp+170h+var_158]",
+    "line": "fstp    [esp+164h+var_14C]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1219,7 +1219,7 @@
   },
   {
     "ea": "0x5D0035",
-    "line": "fld     [esp+170h+var_158]",
+    "line": "fld     [esp+164h+var_14C]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1375,7 +1375,7 @@
   },
   {
     "ea": "0x5D007A",
-    "line": "mov     ecx, [esp+17Ch+var_150]",
+    "line": "mov     ecx, [esp+170h+var_144]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1450,12 +1450,6 @@
     "line": "jmp     short loc_5D00A0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x5D009D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x5D00A0",
@@ -1543,7 +1537,7 @@
   },
   {
     "ea": "0x5D00C2",
-    "line": "mov     esi, [esp+174h+var_150]",
+    "line": "mov     esi, [esp+164h+var_140]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1687,7 +1681,7 @@
   },
   {
     "ea": "0x5D0100",
-    "line": "call    sub_5C1900",
+    "line": "call    PlayerCharacter_ReconcileHotkeysAfterInventoryRemoval",
     "mnemonic": "call",
     "size": 5
   },
@@ -1855,7 +1849,7 @@
   },
   {
     "ea": "0x5D015F",
-    "line": "mov     ebp, [esp+19Ch+var_188]",
+    "line": "mov     ebp, [esp+164h+var_150]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1873,7 +1867,7 @@
   },
   {
     "ea": "0x5D016D",
-    "line": "mov     ebp, [esp+19Ch+var_188]",
+    "line": "mov     ebp, [esp+164h+var_150]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1975,13 +1969,13 @@
   },
   {
     "ea": "0x5D01AE",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5D01B0",
-    "line": "call    sub_4849C0",
+    "line": "call    EquippedEntryData_GetCharge; Return per-instance ExtraCharge when present; otherwise return the TESEnchantableForm base charge. Returns the sentinel/default when the EntryData form is not enchantable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2299,7 +2293,7 @@
   },
   {
     "ea": "0x5D0266",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2380,5 +2374,101 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C1D00",
+    "line": "mov     eax, [ebp-14Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C1D06",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C1D07",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1D0C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C1D0D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C1D0E",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C1D12",
+    "line": "lea     eax, [edx-154h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C1D18",
+    "line": "mov     ecx, [edx-158h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C1D1E",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C1D20",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1D25",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C1D28",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C1D2B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C1D2D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1D32",
+    "line": "mov     eax, offset stru_AEAD04",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1D37",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x4B8A43",
-    "line": "call    ??1TESObjectDOOR@@UAE@XZ; TESObjectDOOR::~TESObjectDOOR(void)",
+    "line": "call    ??1TESObjectDOOR@@UAE@XZ; Verified destructor restores TESObjectDOOR/base-component vtables, frees the random teleport-space list and clears form component references, destroys the model/name, then destroys the base object.",
     "mnemonic": "call",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x4B8A50",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

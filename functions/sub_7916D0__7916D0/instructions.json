@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7916D0",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Pushes one 0x18-byte OB_CBranchFlareEntry. Constructs directly at end when capacity remains; otherwise routes through the checked insertion/reallocation helper. CBranch::ComputeFlareEntries is the authoritative caller.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -175,13 +175,13 @@
   },
   {
     "ea": "0x791716",
-    "line": "mov     ecx, [esp+10h+arg_0]",
+    "line": "mov     ecx, [esp+10h+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79171A",
-    "line": "mov     edx, [esp+10h+arg_0]",
+    "line": "mov     edx, [esp+10h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -193,13 +193,13 @@
   },
   {
     "ea": "0x791721",
-    "line": "mov     byte ptr [esp+10h+var_8], 0",
+    "line": "mov     byte ptr [esp+10h+resultIterator], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x791726",
-    "line": "mov     eax, [esp+10h+var_8]",
+    "line": "mov     eax, [esp+10h+resultIterator]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -223,25 +223,25 @@
   },
   {
     "ea": "0x79172D",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79172E",
-    "line": "push    1",
+    "line": "push    1; count",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x791730",
-    "line": "push    edi",
+    "line": "push    edi; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x791731",
-    "line": "call    sub_7848E0",
+    "line": "call    OB_stVector24_UninitializedFillN_010201A0; Oblivion 1.2.0.416: placement/uninitialized fill of count six-dword records; returns the advanced destination.",
     "mnemonic": "call",
     "size": 5
   },
@@ -319,49 +319,49 @@
   },
   {
     "ea": "0x791754",
-    "line": "mov     eax, [esp+14h+arg_0]",
+    "line": "mov     eax, [esp+14h+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x791758",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x791759",
-    "line": "push    ebx",
+    "line": "push    ebx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79175A",
-    "line": "push    esi",
+    "line": "push    esi; expectedOwner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79175B",
-    "line": "lea     ecx, [esp+20h+var_8]",
+    "line": "lea     ecx, [esp+20h+resultIterator]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x79175F",
-    "line": "push    ecx",
+    "line": "push    ecx; resultIterator",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x791760",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x791762",
-    "line": "call    sub_791510",
+    "line": "call    OB_CBranch_flareVectorInsertRealloc_010201A0; Reallocation/insert-one wrapper for the CBranch flare vector at CBranch+0x30. Preserves the iterator index across growth and delegates the 0x18-byte record insertion to 0x791140.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x723EF0",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, [esp+cloningProcess]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,19 +19,19 @@
   },
   {
     "ea": "0x723EF6",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+destination]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x723EFA",
-    "line": "push    eax",
+    "line": "push    eax; cloningProcess",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x723EFB",
-    "line": "push    edi",
+    "line": "push    edi; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x723EFE",
-    "line": "call    sub_70AC60",
+    "line": "call    OB_NiNode_CopyMembersForClone",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,19 +1,36 @@
 {
-  "callees_count": 8,
-  "callers_count": 23,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
+  "callers_count": 24,
+  "chunks": [
+    [
+      "0x565EC0",
+      "0x565F3F"
+    ],
+    [
+      "0x9C3090",
+      "0x9C30B6"
+    ]
+  ],
+  "chunks_sha256": "fbae0029e0e86b807ce0062999ef3670bf2623f7b318d725d011b000201cb3c0",
+  "comment_regular": "3DTheft decode: TESPackage_SetTarget allocates package->target when needed, copies a 0x0C TargetData record, and leaves later callers to set target type/ref/count fields.",
+  "comment_repeatable": "3DTheft decode: TESPackage_SetTarget allocates package->target when needed, copies a 0x0C TargetData record, and leaves later callers to set target type/ref/count fields.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
   "display_name": "TESPackage_SetTarget",
   "end_ea": "0x565F3F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "TESPackage_SetTarget",
   "segment": ".text",
   "sha256": "2d22d8ca8581ad15103f7f1c29d6a02aff24447aeabc02e7c4d81e6a6d434626",
   "size": 127,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x565EC0",
+  "total_chunk_size": 165,
   "type": "void __thiscall(_DWORD *this, unsigned __int8 *)",
-  "xrefs_from_count": 46,
+  "xrefs_from_count": 60,
   "xrefs_to_count": 24
 }

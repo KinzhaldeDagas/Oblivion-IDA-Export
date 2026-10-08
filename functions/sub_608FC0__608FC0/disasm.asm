@@ -1,4 +1,4 @@
-0x608FC0: sub     esp, 8
+0x608FC0: sub     esp, 8; Collision state 0: restore saved local transform, reparent the projectile NiNode beneath the recorded Actor attachment node, refresh shadow state, remove incompatible child collision nodes, and register the embedded projectile with the Actor process.
 0x608FC3: push    ebx
 0x608FC4: push    esi; ArgList
 0x608FC5: mov     esi, ecx
@@ -64,15 +64,15 @@
 0x609076: call    GetShadowSceneNode
 0x60907B: add     esp, 14h
 0x60907E: mov     esi, eax
-0x609080: push    ebx
-0x609081: mov     ecx, esi
-0x609083: call    sub_7C5E70
+0x609080: push    ebx; object
+0x609081: mov     ecx, esi; this
+0x609083: call    ShadowSceneNode_RemoveObjectReceivers; Removes an object's geometry from shadow-light receiver lists under the shadow-scene critical section. It obtains the object's node/container through virtual +0x08 and recurses; it does not detach the object from its parent or clear NiNode children.
 0x609088: mov     eax, [ebp+0]
 0x60908B: mov     edx, [eax+84h]
 0x609091: push    1
 0x609093: push    ebx
 0x609094: mov     ecx, ebp
-0x609096: call    edx
+0x609096: call    edx; State 0 reparents the projectile NiNode into the recorded actor attachment node after restoring recorded local transform.
 0x609098: push    ebx
 0x609099: mov     ecx, esi
 0x60909B: call    sub_7C5D00
@@ -80,7 +80,6 @@
 0x6090A2: cmp     [ebx+14h], di
 0x6090A6: jbe     short loc_609101
 0x6090A8: jmp     short loc_6090B0
-0x6090AA: align 10h
 0x6090B0: mov     ecx, [ebx+10h]
 0x6090B3: movzx   ebp, di
 0x6090B6: movzx   eax, bp
@@ -94,7 +93,7 @@
 0x6090C9: test    eax, eax
 0x6090CB: jz      short loc_6090DE
 0x6090CD: lea     ecx, [ecx+0]
-0x6090D0: cmp     eax, offset dword_B35ACC
+0x6090D0: cmp     eax, offset stru_B35ACC
 0x6090D5: jz      short loc_6090F2
 0x6090D7: mov     eax, [eax+4]
 0x6090DA: test    eax, eax

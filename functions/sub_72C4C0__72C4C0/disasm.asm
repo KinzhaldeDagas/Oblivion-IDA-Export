@@ -220,7 +220,6 @@
 0x72C706: cmp     eax, 4
 0x72C709: jb      short loc_72C724
 0x72C70B: jmp     short loc_72C710
-0x72C70D: align 10h
 0x72C710: mov     esi, [edx]
 0x72C712: cmp     esi, [ecx]
 0x72C714: jnz     short loc_72C728

@@ -1,5 +1,5 @@
 // attributes: thunk
-_DWORD *__thiscall NiGeometry::SetGeomData(NiTriBasedGeom *this, NiGeometryData *a2)
+void __thiscall NiGeometry::SetGeomData(NiTriBasedGeom *this, NiGeometryData *modelData)
 {
-  return sub_722A50((NiGeometry *)this, a2);
+  NiGeometry_SetModelData((NiGeometry *)this, modelData); /*0x7226f0*/
 }

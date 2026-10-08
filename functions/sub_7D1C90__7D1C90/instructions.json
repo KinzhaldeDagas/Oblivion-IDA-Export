@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7D1C90",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, [esp+output]; Verified (Oblivion): shared by all four 1x/2x texture-effect pass handlers used from ShadowLight, Skin, and Hair shader setup. Reads TextureEffectData from shaderProperty+0xE0, copies current fill/edge RGBA into ShadowLight shader-map backing, copies U/V offsets and edge exponent, writes the second fVars component as 1.0, then updates separate per-geometry property-state constants.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x7D1D61",
-    "line": "mov     ecx, [esp+20h+arg_0]",
+    "line": "mov     ecx, [esp+20h+geometry]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -361,19 +361,19 @@
   },
   {
     "ea": "0x7D1D8C",
-    "line": "lea     edx, [esp+24h+arg_4]",
+    "line": "lea     edx, [esp+24h+output]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7D1D90",
-    "line": "push    edx",
+    "line": "push    edx; output",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D1D91",
-    "line": "call    sub_405760",
+    "line": "call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x7D1D98",
-    "line": "mov     eax, [esp+24h+arg_4]",
+    "line": "mov     eax, [esp+24h+output]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x7D1DCF",
-    "line": "fstp    [esp+20h+arg_0]",
+    "line": "fstp    [esp+20h+geometry]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x7D1DD6",
-    "line": "fstp    [esp+20h+arg_4]",
+    "line": "fstp    [esp+20h+output]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x7D1DDE",
-    "line": "fld     [esp+20h+arg_4]",
+    "line": "fld     [esp+20h+output]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x7D1DEB",
-    "line": "fld     [esp+20h+arg_0]",
+    "line": "fld     [esp+20h+geometry]",
     "mnemonic": "fld",
     "size": 4
   },

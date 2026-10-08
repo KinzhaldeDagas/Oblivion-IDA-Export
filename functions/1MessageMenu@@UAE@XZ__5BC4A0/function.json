@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 3,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x5BC4A0",
+      "0x5BC50B"
+    ],
+    [
+      "0x9C0380",
+      "0x9C03A3"
+    ]
+  ],
+  "chunks_sha256": "67a4139c50ab291c72429c85974022549f0b5d952d4a48b63d379ecf2f367428",
+  "comment_regular": "Verified aPortable: destructor transfers MessageMenu+0x5C callback into InterfaceManager+0xB4 before base Menu teardown. Do not create next message reentrantly from destruction; defer workflow to next safe UI dispatch.",
   "comment_repeatable": "",
-  "data_refs_count": 1,
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
   "display_name": "MessageMenu::~MessageMenu(void)",
   "end_ea": "0x5BC50B",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
   "name": "??1MessageMenu@@UAE@XZ",
   "segment": ".text",
   "sha256": "a68cd2a06408d0a13bce2c6e8a6cac0096ff33250118f4274401aceb58e653d3",
   "size": 107,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5BC4A0",
-  "type": "void __usercall(MessageMenu *this@<ecx>, double@<st2>, double@<st1>, double@<st0>)",
-  "xrefs_from_count": 33,
+  "total_chunk_size": 142,
+  "type": "void __thiscall(MessageMenu *this)",
+  "xrefs_from_count": 44,
   "xrefs_to_count": 1
 }

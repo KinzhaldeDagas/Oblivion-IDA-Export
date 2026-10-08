@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_79C490",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x79C490",
+      "0x79C531"
+    ]
+  ],
+  "chunks_sha256": "cc8eae71e053a3166e164e11a440768412a059e7c965db3ac1fee36eb134e362",
+  "comment_regular": "Oblivion-authoritative CFrondEngine::AddGuideVertex. Builds a 0x38-byte vertex from position, 3x3 rotation transform, primary cross-section/wind weight, and primary wind group, then pushes it into the final compact guide. Unlike local RT 4.1 source, Oblivion has no secondary frond wind fields here.\nSpeedTreeOBSE v164 VERIFIED: AddGuideVertex is thiscall(engine, vec3 by value, rot3x3 by value, float weight, int group), stack payload56 bytes. After the native append, current last guide is engine.guideVectorWrapper(+8).end -30; its vector count must match the already observed branch-spine point count. Plugin retains packed pairs in a separate table; native record/layout unchanged.",
+  "comment_repeatable": "Oblivion-authoritative CFrondEngine::AddGuideVertex. Builds a 0x38-byte vertex from position, 3x3 rotation transform, primary cross-section/wind weight, and primary wind group, then pushes it into the final compact guide. Unlike local RT 4.1 source, Oblivion has no secondary frond wind fields here.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 9,
+  "display_name": "OB_CFrondEngine_AddGuideVertex_010201A0",
   "end_ea": "0x79C531",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_79C490",
+  "name": "OB_CFrondEngine_AddGuideVertex_010201A0",
   "segment": ".text",
   "sha256": "cc8eae71e053a3166e164e11a440768412a059e7c965db3ac1fee36eb134e362",
   "size": 161,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x79C490",
-  "type": "char *__thiscall(int *this, int, int, int, char, int, int, int, int, int, int, int, int, float, int)",
-  "xrefs_from_count": 60,
+  "total_chunk_size": 161,
+  "type": "void __thiscall(OB_CFrondEngine_010201A0 *this, OB_stVec3_010201A0 position, OB_stRotTransform_010201A0 transform, float primaryCrossSectionOrWindWeight, int primaryWindGroup)",
+  "xrefs_from_count": 69,
   "xrefs_to_count": 2
 }

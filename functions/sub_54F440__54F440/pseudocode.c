@@ -1,21 +1,21 @@
 int __cdecl sub_54F440(char *Str2)
 {
   int v1; // esi
-  char *v2; // eax
+  const char *v2; // eax
 
-  if ( !Str2 )
-    return 0xFFFFFFFF;
-  v1 = 0;
-  while ( 1 )
+  if ( !Str2 ) /*0x54f447*/
+    return 0xFFFFFFFF; /*0x54f47c*/
+  v1 = 0; /*0x54f44a*/
+  while ( 1 ) /*0x54f450*/
   {
-    v2 = *(char **)(4 * v1 + 0xB11FE0);
-    if ( v2 )
+    v2 = *(const char **)(4 * v1 + 0xB11FE0); /*0x54f450*/
+    if ( v2 ) /*0x54f459*/
     {
-      if ( _strcmp(v2, Str2) )
-        break;
+      if ( CRT_StricmpLocaleDispatch(v2, Str2) ) /*0x54f45d*/
+        break; /*0x54f45d*/
     }
-    if ( ++v1 >= 4 )
-      return 0xFFFFFFFF;
+    if ( ++v1 >= 4 ) /*0x54f46f*/
+      return 0xFFFFFFFF; /*0x54f476*/
   }
-  return v1;
+  return v1; /*0x54f475*/
 }

@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
-  "callers_count": 5,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 6,
+  "chunks": [
+    [
+      "0x7074B0",
+      "0x707523"
+    ]
+  ],
+  "chunks_sha256": "3576e6e3bf23198c3d600717a45f4c5748710d636c4faf5028506c631b8064a0",
+  "comment_regular": "Sets NiAVObject parent at +0x1C. If already parented, first asks the old parent to remove this child, then installs the new parent. Used by NiNode child insertion/replacement.",
+  "comment_repeatable": "Sets NiAVObject parent at +0x1C. If already parented, first asks the old parent to remove this child, then installs the new parent. Used by NiNode child insertion/replacement.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7074B0",
+  "display_name": "NiAVObject_SetParentAndDetachFromOld",
   "end_ea": "0x707523",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7074B0",
+  "name": "NiAVObject_SetParentAndDetachFromOld",
   "segment": ".text",
   "sha256": "3576e6e3bf23198c3d600717a45f4c5748710d636c4faf5028506c631b8064a0",
   "size": 115,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7074B0",
-  "type": "void __thiscall(_DWORD *this, int)",
+  "total_chunk_size": 115,
+  "type": "void __thiscall(NiAVObject *this, NiNode *newParent)",
   "xrefs_from_count": 51,
   "xrefs_to_count": 6
 }

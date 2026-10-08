@@ -92,14 +92,14 @@
 0x86294D: fst     [esp+0D4h+var_AC]
 0x862951: mov     eax, [esp+0D4h+var_AC]
 0x862955: fxch    st(1)
-0x862957: mov     ss:dword_B47008[ebp], ecx
+0x862957: mov     dword ptr ss:unk_B47008[ebp], ecx
 0x86295D: fst     [esp+0D4h+var_B0]
 0x862961: mov     edx, [esp+0D4h+var_B0]
 0x862965: fst     [esp+0D4h+var_A8]
 0x862969: mov     ecx, [esp+0D4h+var_A8]
-0x86296D: mov     ss:dword_B4700C[ebp], edx
-0x862973: mov     ss:dword_B47010[ebp], eax
-0x862979: mov     ss:flt_B47014[ebp], ecx
+0x86296D: mov     dword ptr ss:unk_B4700C[ebp], edx
+0x862973: mov     dword ptr ss:unk_B47010[ebp], eax
+0x862979: mov     dword ptr ss:unk_B47014[ebp], ecx
 0x86297F: jmp     loc_862A60
 0x862984: fxch    st(1); jumptable 0086293E case 1
 0x862986: fst     [esp+0D4h+var_94]
@@ -107,40 +107,40 @@
 0x86298E: fst     [esp+0D4h+var_90]
 0x862992: mov     eax, [esp+0D4h+var_90]
 0x862996: fst     [esp+0D4h+var_88]
-0x86299A: mov     ss:dword_B47008[ebp], edx
+0x86299A: mov     dword ptr ss:unk_B47008[ebp], edx
 0x8629A0: mov     edx, [esp+0D4h+var_88]
 0x8629A4: fxch    st(1)
 0x8629A6: fst     [esp+0D4h+var_8C]
 0x8629AA: mov     ecx, [esp+0D4h+var_8C]
-0x8629AE: mov     ss:dword_B4700C[ebp], eax
-0x8629B4: mov     ss:dword_B47010[ebp], ecx
-0x8629BA: mov     ss:flt_B47014[ebp], edx
+0x8629AE: mov     dword ptr ss:unk_B4700C[ebp], eax
+0x8629B4: mov     dword ptr ss:unk_B47010[ebp], ecx
+0x8629BA: mov     dword ptr ss:unk_B47014[ebp], edx
 0x8629C0: jmp     loc_862A5E
 0x8629C5: fst     [esp+0D4h+var_84]; jumptable 0086293E case 2
 0x8629C9: mov     eax, [esp+0D4h+var_84]
 0x8629CD: fxch    st(1)
-0x8629CF: mov     ss:dword_B47008[ebp], eax
+0x8629CF: mov     dword ptr ss:unk_B47008[ebp], eax
 0x8629D5: fst     [esp+0D4h+var_80]
 0x8629D9: mov     ecx, [esp+0D4h+var_80]
 0x8629DD: fst     [esp+0D4h+var_7C]
 0x8629E1: mov     edx, [esp+0D4h+var_7C]
 0x8629E5: fst     [esp+0D4h+var_78]
 0x8629E9: mov     eax, [esp+0D4h+var_78]
-0x8629ED: mov     ss:dword_B4700C[ebp], ecx
-0x8629F3: mov     ss:dword_B47010[ebp], edx
-0x8629F9: mov     ss:flt_B47014[ebp], eax
+0x8629ED: mov     dword ptr ss:unk_B4700C[ebp], ecx
+0x8629F3: mov     dword ptr ss:unk_B47010[ebp], edx
+0x8629F9: mov     dword ptr ss:unk_B47014[ebp], eax
 0x8629FF: jmp     short loc_862A60
 0x862A01: fxch    st(1); jumptable 0086293E case 3
 0x862A03: fst     [esp+0D4h+var_A4]
 0x862A07: mov     ecx, [esp+0D4h+var_A4]
 0x862A0B: fst     [esp+0D4h+var_A0]
 0x862A0F: mov     edx, [esp+0D4h+var_A0]
-0x862A13: mov     ss:dword_B47008[ebp], ecx
+0x862A13: mov     dword ptr ss:unk_B47008[ebp], ecx
 0x862A19: fst     [esp+0D4h+var_9C]
 0x862A1D: mov     eax, [esp+0D4h+var_9C]
 0x862A21: fst     [esp+0D4h+var_98]
 0x862A25: mov     ecx, [esp+0D4h+var_98]
-0x862A29: mov     ss:dword_B4700C[ebp], edx
-0x862A2F: mov     ss:dword_B47010[ebp], eax
-0x862A35: mov     ss:flt_B47014[ebp], ecx
+0x862A29: mov     dword ptr ss:unk_B4700C[ebp], edx
+0x862A2F: mov     dword ptr ss:unk_B47010[ebp], eax
+0x862A35: mov     dword ptr ss:unk_B47014[ebp], ecx
 0x862A3B: jmp     short loc_862A60

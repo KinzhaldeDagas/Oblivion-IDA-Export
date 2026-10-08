@@ -22,15 +22,15 @@
 0x4D2277: jb      short loc_4D22A1
 0x4D2279: test    [esp+13Ch+Dst], 8000000h
 0x4D2284: jz      short loc_4D22A1
-0x4D2286: push    4; a2
-0x4D2288: lea     ecx, [esp+140h+a1.member.pad]
-0x4D228C: push    ecx; a1
-0x4D228D: mov     ecx, esi
-0x4D228F: call    TESForm_LoadDataFromCurrentSaveGame
-0x4D2294: mov     edx, dword ptr [esp+13Ch+a1.member.pad]
-0x4D2298: push    edx
-0x4D2299: lea     ecx, [esi+28h]
-0x4D229C: call    ExtraDataList?_SetDetachTime
+0x4D2286: push    4; byteCount
+0x4D2288: lea     ecx, [esp+140h+a1+5]
+0x4D228C: push    ecx; destination
+0x4D228D: mov     ecx, esi; self
+0x4D228F: call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.
+0x4D2294: mov     edx, dword ptr [esp+13Ch+a1+5]
+0x4D2298: push    edx; detachTime
+0x4D2299: lea     ecx, [esi+28h]; this
+0x4D229C: call    ExtraDataList_SetDetachTime; Sets ExtraDetachTime; a zero value removes type 0x10, otherwise updates or creates it.
 0x4D22A1: mov     eax, [esp+13Ch+a3]
 0x4D22A8: mov     ecx, [esp+13Ch+Dst]
 0x4D22AF: push    eax; a3
@@ -39,16 +39,16 @@
 0x4D22B3: call    TESForm_LoadModifiedForm
 0x4D22B8: mov     ecx, ds:0B33B00h
 0x4D22BE: xor     ebx, ebx
-0x4D22C0: mov     [esp+13Ch+a1.vtbl+1], ebx
-0x4D22C4: call    sub_45A170
+0x4D22C0: mov     dword ptr [esp+13Ch+a1+1], ebx
+0x4D22C4: call    TESSaveLoadGame_UseSaveGameBlocks
 0x4D22C9: test    al, al
 0x4D22CB: jz      loc_4D236A
-0x4D22D1: mov     ecx, ds:0B33B00h
-0x4D22D7: push    4; Size
-0x4D22D9: lea     edx, [esp+140h+a1.member.pad]
-0x4D22DD: push    edx; Dst
-0x4D22DE: call    SaveLoad_LoadData
-0x4D22E3: cmp     dword ptr [esp+13Ch+a1.member.pad], 4B4F4C42h
+0x4D22D1: mov     ecx, ds:0B33B00h; self
+0x4D22D7: push    4; byteCount
+0x4D22D9: lea     edx, [esp+140h+a1+5]
+0x4D22DD: push    edx; destination
+0x4D22DE: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
+0x4D22E3: cmp     dword ptr [esp+13Ch+a1+5], 4B4F4C42h
 0x4D22EB: jz      short loc_4D2355
 0x4D22ED: mov     eax, ds:0B33B00h
 0x4D22F2: mov     edi, [eax+80h]
@@ -56,7 +56,7 @@
 0x4D22FA: jz      short loc_4D2339
 0x4D22FC: mov     eax, [edi]
 0x4D22FE: push    eax; a1
-0x4D22FF: call    TESForm_LookupByFormID
+0x4D22FF: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4D2304: mov     ecx, [edi+5]
 0x4D2307: movzx   edx, byte ptr [edi+9]
 0x4D230B: add     esp, 4
@@ -82,21 +82,21 @@
 0x4D2348: push    offset aLoadgameBuff_0; "LoadGame Buffer error: Block Header is "...
 0x4D234D: call    PrintError
 0x4D2352: add     esp, 10h
-0x4D2355: mov     ecx, ds:0B33B00h
+0x4D2355: mov     ecx, ds:0B33B00h; self
 0x4D235B: mov     ebx, [ecx+14h]
-0x4D235E: push    2; Size
-0x4D2360: lea     eax, [esp+140h+a1.vtbl+1]
-0x4D2364: push    eax; Dst
-0x4D2365: call    SaveLoad_LoadData
+0x4D235E: push    2; byteCount
+0x4D2360: lea     eax, [esp+140h+a1+1]
+0x4D2364: push    eax; destination
+0x4D2365: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x4D236A: test    byte ptr [esp+13Ch+Dst], 8
 0x4D2372: jz      short loc_4D2396
-0x4D2374: push    1; a2
+0x4D2374: push    1; byteCount
 0x4D2376: lea     ecx, [esp+140h+a1]
-0x4D237A: push    ecx; a1
-0x4D237B: mov     ecx, esi
-0x4D237D: call    TESForm_LoadDataFromCurrentSaveGame
+0x4D237A: push    ecx; destination
+0x4D237B: mov     ecx, esi; self
+0x4D237D: call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.
 0x4D2382: mov     dl, [esi+24h]
-0x4D2385: mov     al, byte ptr [esp+13Ch+a1.vtbl]
+0x4D2385: mov     al, [esp+13Ch+a1]
 0x4D2389: xor     dl, al
 0x4D238B: and     dl, 60h
 0x4D238E: xor     [esi+24h], dl
@@ -106,7 +106,7 @@
 0x4D23A1: jz      loc_4D242C
 0x4D23A7: lea     ebp, [esi+28h]
 0x4D23AA: mov     ecx, ebp
-0x4D23AC: call    sub_420B50
+0x4D23AC: call    ExtraDataList_GetSeenData; Returns the owned SeenData pointer from ExtraSeenData (type 0x09), or null.
 0x4D23B1: mov     edi, eax
 0x4D23B3: test    edi, edi
 0x4D23B5: jnz     short loc_4D241E
@@ -115,7 +115,7 @@
 0x4D23BD: push    2Ch ; ','; Size
 0x4D23BF: call    FormHeapAlloc
 0x4D23C4: add     esp, 4
-0x4D23C7: mov     [esp+13Ch+a1.member.flags+1], eax
+0x4D23C7: mov     dword ptr [esp+13Ch+a1+9], eax
 0x4D23CB: test    eax, eax
 0x4D23CD: mov     [esp+13Ch+var_4], edi
 0x4D23D4: jz      short loc_4D2407
@@ -127,7 +127,7 @@
 0x4D23E1: push    24h ; '$'; Size
 0x4D23E3: call    FormHeapAlloc
 0x4D23E8: add     esp, 4
-0x4D23EB: mov     [esp+13Ch+a1.member.flags+1], eax
+0x4D23EB: mov     dword ptr [esp+13Ch+a1+9], eax
 0x4D23EF: test    eax, eax
 0x4D23F1: mov     [esp+13Ch+var_4], 1
 0x4D23FC: jz      short loc_4D2407
@@ -139,7 +139,7 @@
 0x4D240B: push    edi
 0x4D240C: mov     ecx, ebp
 0x4D240E: mov     [esp+140h+var_4], 0FFFFFFFFh
-0x4D2419: call    sub_420B70
+0x4D2419: call    ExtraDataList_SetSeenData; Replaces the owned SeenData pointer, destroying the previous object; null removes ExtraSeenData.
 0x4D241E: mov     eax, [edi]
 0x4D2420: mov     edx, [eax+10h]
 0x4D2423: push    0FFFFh
@@ -150,53 +150,53 @@
 0x4D2435: jnb     short loc_4D245F
 0x4D2437: test    [esp+13Ch+Dst], 8000000h
 0x4D2442: jz      short loc_4D245F
-0x4D2444: push    4; a2
-0x4D2446: lea     ecx, [esp+140h+a1.member.refID+1]
-0x4D244A: push    ecx; a1
-0x4D244B: mov     ecx, esi
-0x4D244D: call    TESForm_LoadDataFromCurrentSaveGame
-0x4D2452: mov     edx, [esp+13Ch+a1.member.refID+1]
-0x4D2456: push    edx
-0x4D2457: lea     ecx, [esi+28h]
-0x4D245A: call    ExtraDataList?_SetDetachTime
+0x4D2444: push    4; byteCount
+0x4D2446: lea     ecx, [esp+140h+a1+0Dh]
+0x4D244A: push    ecx; destination
+0x4D244B: mov     ecx, esi; self
+0x4D244D: call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.
+0x4D2452: mov     edx, dword ptr [esp+13Ch+a1+0Dh]
+0x4D2456: push    edx; detachTime
+0x4D2457: lea     ecx, [esi+28h]; this
+0x4D245A: call    ExtraDataList_SetDetachTime; Sets ExtraDetachTime; a zero value removes type 0x10, otherwise updates or creates it.
 0x4D245F: test    byte ptr [esp+13Ch+Dst], 10h
 0x4D2467: jz      short loc_4D24B2
 0x4D2469: push    104h
-0x4D246E: lea     eax, [esp+140h+a1.member.modlist.data+1]
+0x4D246E: lea     eax, [esp+140h+a1+11h]
 0x4D2472: push    0
 0x4D2474: push    eax
 0x4D2475: call    __memset
 0x4D247A: add     esp, 0Ch
-0x4D247D: push    1; a2
+0x4D247D: push    1; byteCount
 0x4D247F: lea     ecx, [esp+140h+a1]
-0x4D2483: push    ecx; a1
-0x4D2484: mov     ecx, esi
-0x4D2486: call    TESForm_LoadDataFromCurrentSaveGame
-0x4D248B: mov     al, byte ptr [esp+13Ch+a1.vtbl]
+0x4D2483: push    ecx; destination
+0x4D2484: mov     ecx, esi; self
+0x4D2486: call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.
+0x4D248B: mov     al, [esp+13Ch+a1]
 0x4D248F: test    al, al
 0x4D2491: jz      short loc_4D24A3
 0x4D2493: movzx   edx, al
-0x4D2496: push    edx; a2
-0x4D2497: lea     eax, [esp+140h+a1.member.modlist.data+1]
-0x4D249B: push    eax; a1
-0x4D249C: mov     ecx, esi
-0x4D249E: call    TESForm_LoadDataFromCurrentSaveGame
+0x4D2496: push    edx; byteCount
+0x4D2497: lea     eax, [esp+140h+a1+11h]
+0x4D249B: push    eax; destination
+0x4D249C: mov     ecx, esi; self
+0x4D249E: call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.
 0x4D24A3: push    0; a3
-0x4D24A5: lea     ecx, [esp+140h+a1.member.modlist.data+1]
+0x4D24A5: lea     ecx, [esp+140h+a1+11h]
 0x4D24A9: push    ecx; a2
 0x4D24AA: lea     ecx, [esi+1Ch]; this
 0x4D24AD: call    BSStringT_Set
 0x4D24B2: test    byte ptr [esp+13Ch+Dst], 20h
 0x4D24BA: jz      short loc_4D24E2
-0x4D24BC: push    4; a2
-0x4D24BE: lea     edx, [esp+140h+a1.member.flags+1]
-0x4D24C2: push    edx; a1
-0x4D24C3: mov     ecx, esi
-0x4D24C5: call    TESForm_LoadFormIDFromCurrentSaveGame
-0x4D24CA: mov     eax, [esp+144h+a1.vtbl+1]
-0x4D24CE: push    eax
-0x4D24CF: lea     ecx, [esi+28h]
-0x4D24D2: call    ExtraDataList__SetOrRemoveExtraOwnership
+0x4D24BC: push    4; byteCount
+0x4D24BE: lea     edx, [esp+140h+a1+9]
+0x4D24C2: push    edx; destination
+0x4D24C3: mov     ecx, esi; self
+0x4D24C5: call    TESForm_LoadFormIDFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadFormIDFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadFormID.
+0x4D24CA: mov     eax, dword ptr [esp+144h+a1+1]
+0x4D24CE: push    eax; owner
+0x4D24CF: lea     ecx, [esi+28h]; this
+0x4D24D2: call    ExtraDataList__SetOrRemoveExtraOwnership; Verified XOWN mutator: update ExtraOwnership.ownerForm when owner is nonnull; remove the XOWN extra when null; otherwise allocate a 16-byte ExtraOwnership payload and add it to the list. During plugin load the initial dword is a FormID temporarily held in the same union slot; ExtraDataList_ResolveLoadedFormIDs converts it to TESForm*. TESObjectCELL_LinkForm removes direct XOWN, XRNK, and XGLB from an exterior cell when an owner exists.
 0x4D24D7: mov     edx, [esi]
 0x4D24D9: mov     eax, [edx+40h]
 0x4D24DC: push    20h ; ' '
@@ -204,26 +204,26 @@
 0x4D24E0: call    eax
 0x4D24E2: test    [esp+13Ch+Dst], 1000000h
 0x4D24ED: jz      short loc_4D2551
-0x4D24EF: mov     ecx, [esi+44h]
+0x4D24EF: mov     ecx, [esi+44h]; this
 0x4D24F2: test    ecx, ecx
 0x4D24F4: jz      short loc_4D24FD
-0x4D24F6: call    sub_4E5CC0
+0x4D24F6: call    TESPathGrid_LoadModifiedForm; Verified load path for linked-point state: reads the u16 count and indices, range-checks each against the point array capacity, then sets linkedPointsDisabled on valid non-null points. Save-block boundary diagnostics are performed after the payload read.
 0x4D24FB: jmp     short loc_4D2551
 0x4D24FD: push    54h ; 'T'; Size
 0x4D24FF: call    FormHeapAlloc
 0x4D2504: add     esp, 4
-0x4D2507: mov     [esp+13Ch+a1.member.refID+1], eax
+0x4D2507: mov     dword ptr [esp+13Ch+a1+0Dh], eax
 0x4D250B: test    eax, eax
 0x4D250D: mov     [esp+13Ch+var_4], 2
 0x4D2518: jz      short loc_4D2523
 0x4D251A: mov     ecx, eax; this
-0x4D251C: call    ??0TESPathGrid@@QAE@XZ; TESPathGrid::TESPathGrid(void)
+0x4D251C: call    TESPathGrid_ctor; Verified TESPathGrid form type 0x34 constructor and 0x54-byte layout. It initializes a secondary TESChildCELL vtable at +0x18, rendered NiNode at +0x1C, parent-cell slot +0x20, point-array pointer +0x24, PGRI list header +0x28, point-count word +0x30, and two 37-bucket maps at +0x34 and +0x44.
 0x4D2521: jmp     short loc_4D2525
 0x4D2523: xor     eax, eax
-0x4D2525: mov     ecx, eax
+0x4D2525: mov     ecx, eax; this
 0x4D2527: mov     [esp+13Ch+var_4], 0FFFFFFFFh
 0x4D2532: mov     [esi+44h], eax
-0x4D2535: call    sub_4E5CC0
+0x4D2535: call    TESPathGrid_LoadModifiedForm; Verified load path for linked-point state: reads the u16 count and indices, range-checks each against the point array capacity, then sets linkedPointsDisabled on valid non-null points. Save-block boundary diagnostics are performed after the payload read.
 0x4D253A: mov     ecx, [esi+44h]
 0x4D253D: test    ecx, ecx
 0x4D253F: jz      short loc_4D254A
@@ -233,7 +233,7 @@
 0x4D2548: call    eax
 0x4D254A: mov     dword ptr [esi+44h], 0
 0x4D2551: mov     ecx, ds:0B33B00h
-0x4D2557: call    sub_45A170
+0x4D2557: call    TESSaveLoadGame_UseSaveGameBlocks
 0x4D255C: test    al, al
 0x4D255E: jz      loc_4D265B
 0x4D2564: mov     ecx, ds:0B33B00h
@@ -243,8 +243,8 @@
 0x4D2575: jz      loc_4D2611
 0x4D257B: mov     ecx, [edi]
 0x4D257D: push    ecx; a1
-0x4D257E: call    TESForm_LookupByFormID
-0x4D2583: movzx   edx, word ptr [esp+140h+a1.vtbl+1]
+0x4D257E: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
+0x4D2583: movzx   edx, word ptr [esp+140h+a1+1]
 0x4D2588: mov     ecx, eax
 0x4D258A: lea     eax, [edx+ebx]
 0x4D258D: add     esp, 4
@@ -257,7 +257,7 @@
 0x4D259E: push    edx
 0x4D259F: mov     edx, [eax+0D4h]
 0x4D25A5: call    edx
-0x4D25A7: movzx   ecx, word ptr [esp+144h+a1.vtbl+1]
+0x4D25A7: movzx   ecx, word ptr [esp+144h+a1+1]
 0x4D25AC: push    eax
 0x4D25AD: mov     eax, [edi]
 0x4D25AF: push    eax
@@ -279,7 +279,7 @@
 0x4D25E2: mov     eax, [edx+0D4h]
 0x4D25E8: call    eax
 0x4D25EA: mov     ecx, [edi]
-0x4D25EC: movzx   edx, word ptr [esp+144h+a1.vtbl+1]
+0x4D25EC: movzx   edx, word ptr [esp+144h+a1+1]
 0x4D25F1: push    eax
 0x4D25F2: push    ecx
 0x4D25F3: push    31D1h
@@ -291,7 +291,7 @@
 0x4D2607: call    PrintError
 0x4D260C: add     esp, 20h
 0x4D260F: jmp     short loc_4D265B
-0x4D2611: movzx   eax, word ptr [esp+13Ch+a1.vtbl+1]
+0x4D2611: movzx   eax, word ptr [esp+13Ch+a1+1]
 0x4D2616: lea     edx, [eax+ebx]
 0x4D2619: cmp     esi, edx
 0x4D261B: jbe     short loc_4D2638
@@ -327,3 +327,29 @@
 0x4D2677: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x4D267C: add     esp, 128h
 0x4D2682: retn    8
+0x9B5550: mov     eax, [ebp-11Ch]
+0x9B5556: push    eax
+0x9B5557: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B555C: pop     ecx
+0x9B555D: retn
+0x9B555E: mov     eax, [ebp-11Ch]
+0x9B5564: push    eax
+0x9B5565: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B556A: pop     ecx
+0x9B556B: retn
+0x9B556C: mov     eax, [ebp-118h]
+0x9B5572: push    eax
+0x9B5573: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B5578: pop     ecx
+0x9B5579: retn
+0x9B557A: mov     edx, [esp+a3]
+0x9B557E: lea     eax, [edx-12Ch]
+0x9B5584: mov     ecx, [edx-130h]
+0x9B558A: xor     ecx, eax
+0x9B558C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B5591: add     eax, 10h
+0x9B5594: mov     ecx, [edx-4]
+0x9B5597: xor     ecx, eax
+0x9B5599: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B559E: mov     eax, offset stru_AE065C
+0x9B55A3: jmp     ___CxxFrameHandler3

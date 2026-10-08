@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x77F481",
-    "line": "lea     ecx, [ebp+8]",
+    "line": "lea     ecx, [ebp+8]; list",
     "mnemonic": "lea",
     "size": 3
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x77F49A",
-    "line": "mov     [esp+14h+var_4], esi",
+    "line": "mov     [esp+14h+node], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -181,19 +181,19 @@
   },
   {
     "ea": "0x77F4A0",
-    "line": "lea     eax, [esp+14h+var_4]",
+    "line": "lea     eax, [esp+14h+node]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x77F4A4",
-    "line": "push    eax",
+    "line": "push    eax; node",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x77F4A5",
-    "line": "call    sub_7AA860",
+    "line": "call    NiTPointerList_RemoveNode; [Verified] Generic NiTPointerList node-removal helper. Unlinks the supplied node, updates head/tail and neighboring links, invokes the list's FreeNode vfunc, decrements item count, and returns the removed node's data pointer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x77F4AB",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

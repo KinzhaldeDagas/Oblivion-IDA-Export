@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x787740",
+      "0x7877A0"
+    ]
+  ],
+  "chunks_sha256": "9d9cb06c8c9fb646a77e93d80b788af479a80dcb446d949b53d76081d56f4d56",
+  "comment_regular": "Oblivion collision-vector allocator: checks count*0x1C for overflow, throws std::bad_alloc on overflow, and allocates through FormHeap.",
+  "comment_repeatable": "Oblivion collision-vector allocator: checks count*0x1C for overflow, throws std::bad_alloc on overflow, and allocates through FormHeap.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_787740",
+  "display_name": "OB_stVector_CollisionObject_Allocate_010201A0",
   "end_ea": "0x7877A0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_787740",
+  "name": "OB_stVector_CollisionObject_Allocate_010201A0",
   "segment": ".text",
   "sha256": "9d9cb06c8c9fb646a77e93d80b788af479a80dcb446d949b53d76081d56f4d56",
   "size": 96,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x787740",
-  "type": "int __cdecl(char *)",
+  "total_chunk_size": 96,
+  "type": "OB_CollisionObject_010201A0 *__cdecl(unsigned int count)",
   "xrefs_from_count": 34,
   "xrefs_to_count": 1
 }

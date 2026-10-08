@@ -1,19 +1,32 @@
 {
-  "callees_count": 16,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x764FE0",
+      "0x765119"
+    ]
+  ],
+  "chunks_sha256": "cef98f02f410c0fe737f875813b46683d14e1269dae7b9ccb60ce9125529c163",
+  "comment_regular": "Oblivion-authoritative NiDX9Renderer::FastCopy. Rejects lost-device, missing-surface, and incompatible-format cases; converts an optional source rectangle plus destination X/Y into D3D RECTs and calls IDirect3DDevice9::StretchRect with D3DTEXF_NONE. Intended for format-compatible copies.",
+  "comment_repeatable": "Oblivion-authoritative NiDX9Renderer::FastCopy. Rejects lost-device, missing-surface, and incompatible-format cases; converts an optional source rectangle plus destination X/Y into D3D RECTs and calls IDirect3DDevice9::StretchRect with D3DTEXF_NONE. Intended for format-compatible copies.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 5,
-  "display_name": "sub_764FE0",
+  "display_name": "NiDX9Renderer::FastCopy",
   "end_ea": "0x765119",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_764FE0",
+  "name": "NiDX9Renderer::FastCopy",
   "segment": ".text",
   "sha256": "cef98f02f410c0fe737f875813b46683d14e1269dae7b9ccb60ce9125529c163",
   "size": 313,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x764FE0",
-  "type": "char __thiscall(_BYTE *this, int, _DWORD *, int *, int, int)",
+  "total_chunk_size": 313,
+  "type": "bool __thiscall(NiDX9Renderer *this, const Ni2DBuffer *source, Ni2DBuffer *destination, const void *sourceRect, unsigned int destinationX, unsigned int destinationY)",
   "xrefs_from_count": 125,
   "xrefs_to_count": 1
 }

@@ -1,22 +1,23 @@
-void __usercall sub_59F970(double a1@<st2>, double a2@<st1>, double a3@<st0>)
+// External dialog-menu refresh callback: if menu 0x3F1 and its MenuTopicManager are live, processes the current info, rebuilds the topic list, then refreshes topic/service tile availability. It is not the per-response speech-completion callback.
+void __cdecl DialogMenu::CommitCurrentTopicAndRefresh()
 {
   _DWORD *OpenMenuTile; // esi
-  UnkBohBoh *v5; // eax
-  int ParentMenu; // eax
-  int *v7; // esi
+  MenuTopicManagerView *Singleton; // eax
+  DialogMenu *ParentMenu; // eax
+  DialogMenu *v3; // esi
 
-  OpenMenuTile = (_DWORD *)Menu_GetOpenMenuTile(0x3F1);
-  v5 = sub_6B8660();
-  if ( OpenMenuTile )
+  OpenMenuTile = (_DWORD *)Menu_GetOpenMenuTile(0x3F1); /*0x59f97e*/
+  Singleton = MenuTopicManager::GetSingleton(); /*0x59f980*/
+  if ( OpenMenuTile ) /*0x59f987*/
   {
-    if ( v5 )
+    if ( Singleton ) /*0x59f98b*/
     {
-      ParentMenu = Tile_GetParentMenu(OpenMenuTile);
-      v7 = (int *)ParentMenu;
-      if ( ParentMenu )
+      ParentMenu = (DialogMenu *)Tile_GetParentMenu(OpenMenuTile); /*0x59f98f*/
+      v3 = ParentMenu; /*0x59f994*/
+      if ( ParentMenu ) /*0x59f998*/
       {
-        sub_59EA10(ParentMenu, a1, a2, a3, 1, 0);
-        sub_59E2B0(v7, 1);
+        DialogMenu::AdvanceTopicList(ParentMenu, 1, 0); /*0x59f9a0*/
+        DialogMenu::RefreshActionAvailability(v3, 1); /*0x59f9a9*/
       }
     }
   }

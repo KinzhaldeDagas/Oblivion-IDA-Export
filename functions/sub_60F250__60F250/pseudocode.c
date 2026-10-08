@@ -1,61 +1,74 @@
-int __thiscall sub_60F250(_DWORD *this, _DWORD *a2, int a3, int a4, int a5)
+void __userpurge sub_60F250(
+        Actor *this@<ecx>,
+        double a2@<st2>,
+        double a3@<st1>,
+        _DWORD *a4,
+        char a5,
+        int a6,
+        int a7,
+        int a8,
+        int a9,
+        PlayerCharacter *a10)
 {
-  int v5; // eax
-  int v6; // eax
-  _DWORD *v7; // ebp
-  _DWORD *v8; // ebp
-  _DWORD *v9; // ebp
-  _DWORD *v10; // ebp
-  _DWORD *v11; // ebp
-  _DWORD *v12; // ebp
+  LowProcess *process; // eax
+  TESPackage *editorPackage; // eax
+  ExtraDataList *v13; // ebp
+  double v14; // st7
+  ExtraDataList *v15; // ebp
+  ExtraDataList *p_baseExtraList; // ebp
+  ExtraDataList *v17; // ebp
+  ExtraDataList *v18; // ebp
+  ExtraDataList *v19; // ebp
 
-  v5 = *(this + 0x16);
-  if ( v5 )
+  process = this->members.super.process; /*0x60f276*/
+  if ( process ) /*0x60f27b*/
   {
-    v6 = *(_DWORD *)(v5 + 8);
-    if ( v6 )
+    editorPackage = process->editorPackage; /*0x60f27d*/
+    if ( editorPackage ) /*0x60f282*/
     {
-      if ( *(_BYTE *)(v6 + 0x20) == 0xF )
-        JUMPOUT(0x60FB86);
+      if ( editorPackage->members.type == kPackageType_Alarm ) /*0x60f288*/
+        JUMPOUT(0x60FB86); /*0x60fb86*/
     }
   }
-  if ( a2 )
+  if ( a4 ) /*0x60f294*/
   {
-    switch ( a2[1] )
+    switch ( a4[1] ) /*0x60f2a6*/
     {
-      case 0:
-        v9 = this + 0x11;
-        Script_AddEventToExtraScript(a2[3], this + 0x11, 0x10000);
-        Script_AddEventToExtraScript(a2[2], v9, 0x400000);
-        return def_60F2A6(a2, a3, a4, a5);
-      case 1:
-        v12 = this + 0x11;
-        Script_AddEventToExtraScript(a2[3], this + 0x11, 0x20000);
-        Script_AddEventToExtraScript(a2[2], v12, &loc_800000);
-        return def_60F2A6(a2, a3, a4, a5);
-      case 2:
-        v10 = this + 0x11;
-        Script_AddEventToExtraScript(a2[3], this + 0x11, 0x40000);
-        Script_AddEventToExtraScript(a2[2], v10, 0x1000000);
-        return def_60F2A6(a2, a3, a4, a5);
-      case 3:
-        v7 = this + 0x11;
-        Script_AddEventToExtraScript(a2[3], this + 0x11, 0x80000);
-        Script_AddEventToExtraScript(a2[2], v7, 0x2000000);
-        return def_60F2A6(a2, a3, a4, a5);
-      case 4:
-        v8 = this + 0x11;
-        Script_AddEventToExtraScript(a2[3], this + 0x11, 0x100000);
-        Script_AddEventToExtraScript(a2[2], v8, 0x4000000);
-        return def_60F2A6(a2, a3, a4, a5);
-      case 5:
-        v11 = this + 0x11;
-        Script_AddEventToExtraScript(a2[3], this + 0x11, 0x200000);
-        Script_AddEventToExtraScript(a2[2], v11, 0x8000000);
-        return def_60F2A6(a2, a3, a4, a5);
+      case 0: /*0x60f2a6*/
+        p_baseExtraList = &this->members.super.super.baseExtraList; /*0x60f2e7*/
+        Script_AddEventToExtraScript(a4[3], &this->members.super.super.baseExtraList, 0x10000); /*0x60f2ec*/
+        v14 = Script_AddEventToExtraScript(a4[2], p_baseExtraList, 0x400000); /*0x60f2f6*/
+        goto LABEL_12; /*0x60f2f6*/
+      case 1: /*0x60f2a6*/
+        v19 = &this->members.super.super.baseExtraList; /*0x60f332*/
+        Script_AddEventToExtraScript(a4[3], &this->members.super.super.baseExtraList, 0x20000); /*0x60f337*/
+        v14 = Script_AddEventToExtraScript(a4[2], v19, &loc_800000); /*0x60f346*/
+        goto LABEL_12; /*0x60f346*/
+      case 2: /*0x60f2a6*/
+        v17 = &this->members.super.super.baseExtraList; /*0x60f300*/
+        Script_AddEventToExtraScript(a4[3], &this->members.super.super.baseExtraList, 0x40000); /*0x60f305*/
+        v14 = Script_AddEventToExtraScript(a4[2], v17, 0x1000000); /*0x60f30f*/
+        goto LABEL_12; /*0x60f30f*/
+      case 3: /*0x60f2a6*/
+        v13 = &this->members.super.super.baseExtraList; /*0x60f2b5*/
+        Script_AddEventToExtraScript(a4[3], &this->members.super.super.baseExtraList, 0x80000); /*0x60f2ba*/
+        v14 = Script_AddEventToExtraScript(a4[2], v13, 0x2000000); /*0x60f2c4*/
+        goto LABEL_12; /*0x60f2c4*/
+      case 4: /*0x60f2a6*/
+        v15 = &this->members.super.super.baseExtraList; /*0x60f2ce*/
+        Script_AddEventToExtraScript(a4[3], &this->members.super.super.baseExtraList, 0x100000); /*0x60f2d3*/
+        v14 = Script_AddEventToExtraScript(a4[2], v15, 0x4000000); /*0x60f2dd*/
+        goto LABEL_12; /*0x60f2dd*/
+      case 5: /*0x60f2a6*/
+        v18 = &this->members.super.super.baseExtraList; /*0x60f319*/
+        Script_AddEventToExtraScript(a4[3], &this->members.super.super.baseExtraList, 0x200000); /*0x60f31e*/
+        v14 = Script_AddEventToExtraScript(a4[2], v18, 0x8000000); /*0x60f328*/
+LABEL_12:
+        def_60F2A6(this, (int)a4, a2, a3, v14, (int)a4, a5, a6, a7, a8, a9, a10); /*0x60f34b*/
+        return;
       default:
         break;
     }
   }
-  JUMPOUT(0x60F34E);
+  JUMPOUT(0x60F34E); /*0x60f34e*/
 }

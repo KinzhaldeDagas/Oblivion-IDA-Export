@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x4B2906",
-    "line": "mov     esi, [esp+0Ch+arg_0]",
+    "line": "mov     esi, [esp+0Ch+reference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x4B2911",
-    "line": "call    ExtraDataList_GetExtraCount",
+    "line": "call    ExtraDataList_GetExtraCount; Pickup obtains ExtraCount from the activated world reference and transfers that count through the activating Actor's pickup virtual.",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x4B295A",
-    "line": "call    edx",
+    "line": "call    edx; Transfer activated reference/count to Actor inventory. Recovery is ordinary base-object pickup, not restoration of the shooter's previously consumed stack entry.",
     "mnemonic": "call",
     "size": 2
   },

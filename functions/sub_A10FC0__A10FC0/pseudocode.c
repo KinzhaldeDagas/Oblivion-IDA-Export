@@ -1,4 +1,4 @@
 int sub_A10FC0()
 {
-  return atexit(sub_A27430);
+  return atexit(sub_A27430); /*0xa10fcb*/
 }

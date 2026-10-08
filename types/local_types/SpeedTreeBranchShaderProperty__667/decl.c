@@ -1,1 +1,1 @@
-SpeedTreeBranchShaderProperty
+struct SpeedTreeBranchShaderProperty;

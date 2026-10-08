@@ -3,5 +3,5 @@ double __stdcall ContainerEntryExtraData_GetHealthFracOrUses_::Return(int a1, in
 {
   float v5; // [esp-8h] [ebp-8h]
 
-  return v5;
+  return v5; /*0x4853a4*/
 }

@@ -1,1 +1,1 @@
-LPMMTIME
+typedef mmtime_tag *LPMMTIME;

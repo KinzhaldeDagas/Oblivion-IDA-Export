@@ -1,35 +1,36 @@
-float *__thiscall sub_680B40(int **this, float a2)
+// Verified: Returns/removes the head (minimum-fitness) AStarWorldNodeList item only when its fitness is below the caller's current bound; empty or fitness >= bound returns null. Fallout's homologous TeleportDoorSearch queue instead scans the first non-empty of 20 fitness buckets.
+TravelPathSpaceDoorLink *__thiscall AStarWorldNodeList_PopMinUnderBound(AStarWorldNodeList *this, float fitnessBound)
 {
-  float *result; // eax
-  int *v4; // ecx
-  _WORD *v5; // edi
-  int v6; // eax
+  TravelPathSpaceDoorLink *result; // eax
+  void *start; // ecx
+  TravelPathSpaceDoorLink *v5; // edi
+  _DWORD *v6; // eax
   bool v7; // zf
 
-  result = 0;
-  if ( *(this + 3) )
+  result = 0; /*0x680b43*/
+  if ( this->count ) /*0x680b45*/
   {
-    v4 = *(this + 1);
-    v5 = (_WORD *)v4[2];
-    if ( *v5 < (unsigned __int16)word_B3BF04 )
-      result = (float *)((char *)dword_B3BF00 + 0x10 * (unsigned __int16)*v5);
-    if ( a2 <= (double)*result )
+    start = this->start; /*0x680b4a*/
+    v5 = *((TravelPathSpaceDoorLink **)start + 2); /*0x680b4e*/
+    if ( v5->searchNodeIndex < LOWORD(qword_B3BB2C[0xF6]) ) /*0x680b5b*/
+      result = (TravelPathSpaceDoorLink *)(LODWORD(qword_B3BB2C[0xF5]) + 0x10 * v5->searchNodeIndex); /*0x680b63*/
+    if ( fitnessBound <= (double)*(float *)&result->searchNodeIndex ) /*0x680b76*/
     {
-      return 0;
+      return 0; /*0x680ba6*/
     }
     else
     {
-      v6 = *v4;
-      v7 = *v4 == 0;
-      *(this + 1) = (int *)*v4;
-      if ( v7 )
-        *(this + 2) = 0;
+      v6 = *(_DWORD **)start; /*0x680b78*/
+      v7 = *(_DWORD *)start == 0; /*0x680b7a*/
+      this->start = *(void **)start; /*0x680b7c*/
+      if ( v7 ) /*0x680b7f*/
+        this->end = 0; /*0x680b8a*/
       else
-        *(_DWORD *)(v6 + 4) = 0;
-      ((void (__thiscall *)(int **, int *))(*this)[2])(this, v4);
-      *(this + 3) = (int *)((char *)*(this + 3) + 0xFFFFFFFF);
-      return (float *)v5;
+        v6[1] = 0; /*0x680b81*/
+      (*((void (__thiscall **)(AStarWorldNodeList *, void *))this->vtable + 2))(this, start); /*0x680b99*/
+      --this->count; /*0x680b9b*/
+      return v5; /*0x680b9f*/
     }
   }
-  return result;
+  return result; /*0x680ba2*/
 }

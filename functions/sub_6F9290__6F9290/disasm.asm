@@ -6,7 +6,7 @@
 0x6F92A3: lea     ecx, [esp+24h+var_24]
 0x6F92A6: mov     [esp+24h+var_24], eax
 0x6F92A9: mov     [esp+24h+var_1C], edx
-0x6F92AD: call    sub_43F350
+0x6F92AD: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x6F92B2: fstp    st
 0x6F92B4: fld     [esp+24h+var_24]
 0x6F92B7: fld     st
@@ -77,7 +77,7 @@
 0x6F936F: lea     ecx, [esp+24h+arg_4]
 0x6F9373: mov     [esp+24h+arg_4], eax
 0x6F9377: mov     [esp+24h+arg_C], edx
-0x6F937B: call    sub_43F350
+0x6F937B: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x6F9380: fstp    st
 0x6F9382: fld     [esp+24h+arg_8]
 0x6F9386: fld     st
@@ -113,7 +113,7 @@
 0x6F93D9: fstp    [esp+24h+var_4]
 0x6F93DD: mov     edx, [esp+24h+var_4]
 0x6F93E1: mov     [esp+24h+var_10], edx
-0x6F93E5: call    sub_43F350
+0x6F93E5: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x6F93EA: fstp    st
 0x6F93EC: fld     [esp+24h+var_14]
 0x6F93F0: fld     st
@@ -149,7 +149,7 @@
 0x6F9443: fstp    [esp+24h+var_4]
 0x6F9447: mov     edx, [esp+24h+var_4]
 0x6F944B: mov     [esp+24h+arg_C], edx
-0x6F944F: call    sub_43F350
+0x6F944F: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x6F9454: mov     eax, [esp+24h+arg_0]
 0x6F9458: fstp    st
 0x6F945A: fld     [esp+24h+arg_4]

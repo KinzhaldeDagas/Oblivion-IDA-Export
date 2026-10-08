@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x68E80F",
-    "line": "fldz",
+    "line": "fldz; Verified first-application completion: sets ActiveEffect.bApplied=1 and resets timeElapsed to 0 before update processing.",
     "mnemonic": "fldz",
     "size": 2
   },
   {
     "ea": "0x68E811",
-    "line": "mov     byte ptr [esi+10h], 1",
+    "line": "mov     byte ptr [esi+10h], 1; Verified: after first Apply processing and HUD/effect-setting checks, sets bApplied=true and resets timeElapsed to 0.",
     "mnemonic": "mov",
     "size": 4
   },

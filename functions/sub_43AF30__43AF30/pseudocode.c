@@ -1,6 +1,6 @@
 char __thiscall sub_43AF30(TESObjectREFR **this)
 {
-  TESObjectCELL *ParentCell; // eax
+  TESObjectCELL *DwordAtOffset40; // eax
   char result; // al
   int v4; // esi
   char v5; // al
@@ -10,47 +10,47 @@ char __thiscall sub_43AF30(TESObjectREFR **this)
   IOManager *v9; // esi
   int v10[5]; // [esp-4h] [ebp-14h] BYREF
 
-  ParentCell = TESObjectREFR_GetParentCell(*(this + 8));
-  result = TESObjectCELL_IsProcessLevel_LowHigh(ParentCell, 0);
-  if ( result )
+  DwordAtOffset40 = (TESObjectCELL *)Shared_GetDwordAtOffset40(*(this + 8)); /*0x43af3b*/
+  result = TESObjectCELL_IsProcessLevel_LowHigh(DwordAtOffset40, 0); /*0x43af47*/
+  if ( result ) /*0x43af4e*/
   {
-    v4 = 0;
-    if ( !byte_B350D5 || (nullsub_returnTrue_0arg(), v5) )
+    v4 = 0; /*0x43af54*/
+    if ( !MEMORY[0xB33E90][0x1245] || (Cmd_AddAchievement_PC_ReturnTrueNoOp(), v5) ) /*0x43af66*/
     {
 LABEL_7:
-      if ( !(*(this + 8))->vtbl->IsActor(*(this + 8)) )
+      if ( !(*(this + 8))->vtbl->IsActor(*(this + 8)) ) /*0x43af99*/
       {
-        if ( sub_441E90(*(this + 8)) )
+        if ( sub_441E90(*(this + 8)) ) /*0x43afa9*/
         {
-          v7 = *(this + 8);
-          if ( !v7[0xF] )
+          v7 = *(this + 8); /*0x43afb2*/
+          if ( !v7[0xF] ) /*0x43afb5*/
           {
-            v8 = (Ni2DBuffer *)(*(int (__thiscall **)(_DWORD *))(*v7 + 0x14C))(v7);
-            NiSmartPointer_Set__((Ni2DBuffer **)this + 0xB, v8);
+            v8 = (Ni2DBuffer *)(*(int (__thiscall **)(_DWORD *))(*v7 + 0x14C))(v7); /*0x43afc3*/
+            NiSmartPointer_Set__((Ni2DBuffer **)this + 0xB, v8); /*0x43afc9*/
           }
         }
       }
     }
     else
     {
-      while ( v4 < 3 )
+      while ( v4 < 3 ) /*0x43af73*/
       {
-        Sleep(5u);
-        ++v4;
-        if ( byte_B350D5 )
+        Sleep(5u); /*0x43af77*/
+        ++v4; /*0x43af79*/
+        if ( MEMORY[0xB33E90][0x1245] ) /*0x43af83*/
         {
-          nullsub_returnTrue_0arg();
-          if ( !v6 )
-            continue;
+          Cmd_AddAchievement_PC_ReturnTrueNoOp(); /*0x43af85*/
+          if ( !v6 ) /*0x43af8c*/
+            continue; /*0x43af8c*/
         }
-        goto LABEL_7;
+        goto LABEL_7; /*0x43af8c*/
       }
     }
-    v9 = ioManager;
-    v10[0] = (int)this;
-    v10[4] = (int)v10;
-    InterlockedIncrement((volatile LONG *)this + 2);
-    return sub_43A5F0(&v9->members.taskQueue->vtbl, v10[0]);
+    v9 = MEMORY[0xB33A10]; /*0x43afce*/
+    v10[0] = (int)this; /*0x43afd7*/
+    v10[4] = (int)v10; /*0x43afd9*/
+    InterlockedIncrement((volatile LONG *)this + 2); /*0x43afe1*/
+    return sub_43A5F0(&v9->members.taskQueue->vtbl, v10[0]); /*0x43afea*/
   }
-  return result;
+  return result; /*0x43afef*/
 }

@@ -1,4 +1,4 @@
-0x41E790: push    26h ; '&'; a2
+0x41E790: push    26h ; '&'; Return the TESObjectREFR payload stored in ExtraOriginalReference type 0x26. It cannot redirect an AMMO-keyed inventory entry to a WEAP form.
 0x41E792: call    BaseExtraList_GetExtraData
 0x41E797: test    eax, eax
 0x41E799: jz      short loc_41E79F

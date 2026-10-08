@@ -1,1 +1,1 @@
-HairShaderProperty
+struct HairShaderProperty;

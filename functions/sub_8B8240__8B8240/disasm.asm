@@ -31,11 +31,11 @@
 0x8B8292: test    edi, edi
 0x8B8294: lea     eax, [edi+10h]
 0x8B8297: jnz     short loc_8B829E
-0x8B8299: mov     eax, offset stru_BA7A40
+0x8B8299: mov     eax, offset unk_BA7A40
 0x8B829E: push    eax
 0x8B829F: lea     ecx, [esp+28h+var_C]
 0x8B82A3: push    ecx
-0x8B82A4: call    sub_43F3E0
+0x8B82A4: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x8B82A9: mov     edx, [eax]
 0x8B82AB: mov     [esp+2Ch+var_18], edx
 0x8B82AF: mov     ecx, [eax+4]

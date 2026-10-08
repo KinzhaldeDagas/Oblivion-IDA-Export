@@ -1,1 +1,1 @@
-BSTexturePalette
+struct BSTexturePalette;

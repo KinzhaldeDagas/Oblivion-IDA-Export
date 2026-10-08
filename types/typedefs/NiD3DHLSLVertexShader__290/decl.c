@@ -1,1 +1,1 @@
-NiD3DHLSLVertexShader
+struct NiD3DHLSLVertexShader;

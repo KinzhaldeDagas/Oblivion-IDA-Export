@@ -1,18 +1,31 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x717690",
+      "0x7176CD"
+    ]
+  ],
+  "chunks_sha256": "b31840b9895e0dd97f6ab7f39b1dabe9b4986eb4822f5088a450f6fdb2fcaa8c",
+  "comment_regular": "CULLING goal 2026-09-27: NiTriShape render entry first calls geometry base Render for state/controller work, then only in an active ready scene dispatches renderer virtual +0x160. This is not the terminal D3D draw; observation/rejection at later layers must preserve required preceding side effects.\n\nCULLING pipeline clarification 2026-09-27: renderer slot +0x160 resolves to 0x7693E0 in the authoritative NiDX9Renderer table, the same implementation used by the TriStrips +0x164 slot. Distinct virtual slots converge before shader dispatch.\n\nNiGeometry render virtual used by accumulated casters: publish this geometry property/dynamic state, then call NiDX9Renderer_RenderTriGeometries.",
+  "comment_repeatable": "MoonSugarEffect decode: NiGeometry/NiScreenElements render entry. Calls NiGeometry::Render to set renderer states, then active-scene path calls NiDX9Renderer vtable +0x160, which resolves to RenderTriGeometries, not the final DrawPrimitive shortcut.\n\n[2026-10-04 evidence limits] Latest v111 log proves entry/return and shader setup for Ponytail shape18751228/property1CF1B784 AFTER its creation at log1427. That address previously belonged to another tree. Renderer dispatch/return is not a terminal D3D draw or pixel visibility proof; recorded EAX00A8A900 is not an HRESULT success assertion. Bucket scan renderedByMainLoop flag is a computed bucket-range classification.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "sub_717690",
   "end_ea": "0x7176CD",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_717690",
   "segment": ".text",
   "sha256": "b31840b9895e0dd97f6ab7f39b1dabe9b4986eb4822f5088a450f6fdb2fcaa8c",
   "size": 61,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x717690",
+  "total_chunk_size": 61,
   "type": "int __thiscall(NiGeometry *this, NiDX9Renderer *)",
   "xrefs_from_count": 24,
   "xrefs_to_count": 5

@@ -23,7 +23,7 @@
 0x735AA7: mov     [esp+30h+arg_14], ebx
 0x735AAB: call    eax
 0x735AAD: add     esp, 14h
-0x735AB0: cmp     word ptr [esp+1Ch+var_10], 1DAh
+0x735AB0: cmp     [esp+1Ch+var_10], 1DAh
 0x735AB7: jz      short loc_735AC4
 0x735AB9: pop     edi
 0x735ABA: pop     esi

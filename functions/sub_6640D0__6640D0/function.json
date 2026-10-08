@@ -1,18 +1,31 @@
 {
-  "callees_count": 42,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 20,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6640D0",
+      "0x66431E"
+    ]
+  ],
+  "chunks_sha256": "2150c06604d06869ceec3f3647ff5d29b1dc4343c52f521943228ee81147a77b",
+  "comment_regular": "Fast-travel eligibility gate for the player: blocks combat, guard alarm, damaging active effects, script-disabled travel flag at PlayerCharacter+0x5A9, invalid/dead player states, and non-travel-enabled current cell/worldspace. It does not execute the travel.",
+  "comment_repeatable": "Fast-travel eligibility gate for the player: blocks combat, guard alarm, damaging active effects, script-disabled travel flag at PlayerCharacter+0x5A9, invalid/dead player states, and non-travel-enabled current cell/worldspace. It does not execute the travel.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_6640D0",
+  "display_name": "PlayerCharacter_CanStartFastTravel",
   "end_ea": "0x66431E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6640D0",
+  "name": "PlayerCharacter_CanStartFastTravel",
   "segment": ".text",
   "sha256": "2150c06604d06869ceec3f3647ff5d29b1dc4343c52f521943228ee81147a77b",
   "size": 590,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6640D0",
+  "total_chunk_size": 590,
   "type": "bool __thiscall(TESObjectREFR *this)",
   "xrefs_from_count": 225,
   "xrefs_to_count": 1

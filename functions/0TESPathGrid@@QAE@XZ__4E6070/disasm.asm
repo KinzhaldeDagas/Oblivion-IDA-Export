@@ -1,4 +1,4 @@
-0x4E6070: push    0FFFFFFFFh
+0x4E6070: push    0FFFFFFFFh; Verified TESPathGrid form type 0x34 constructor and 0x54-byte layout. It initializes a secondary TESChildCELL vtable at +0x18, rendered NiNode at +0x1C, parent-cell slot +0x20, point-array pointer +0x24, PGRI list header +0x28, point-count word +0x30, and two 37-bucket maps at +0x34 and +0x44.
 0x4E6072: push    offset ??1TESPathGrid@@UAE@XZ_SEH
 0x4E6077: mov     eax, large fs:0
 0x4E607D: push    eax
@@ -50,7 +50,7 @@
 0x4E6118: mul     edx
 0x4E611A: seto    cl
 0x4E611D: mov     byte ptr [esp+30h+var_4], 2
-0x4E6122: mov     dword ptr [esi+44h], offset ??_7?$NiTMapBase@V?$NiTPointerAllocator@I@@IPAV?$BSSimpleList@PAVTESPathGridPoint@@@@@@6B@; const NiTMapBase<NiTPointerAllocator<uint>,uint,BSSimpleList<TESPathGridPoint *> *>::`vftable'
+0x4E6122: mov     dword ptr [esi+44h], offset ??_7?$NiTMapBase@V?$NiTPointerAllocator@I@@IPAV?$BSSimpleList@PAVTESPathGridPoint@@@@@@6B@; Verified map at TESPathGrid+0x44 is initialized as NiTPointerMap<u32, BSSimpleList<TESPathGridPoint*>*> with 37 buckets. Despite the legacy pointsByCell member/type spelling, its key is packed world X/Y at 512-unit granularity (see TESPathGrid_PackSpatialBucketKey).
 0x4E6129: mov     dword ptr [esi+48h], 25h ; '%'
 0x4E6130: mov     [esi+50h], edi
 0x4E6133: neg     ecx
@@ -100,3 +100,21 @@
 0x4E61B0: pop     ebx
 0x4E61B1: add     esp, 10h
 0x4E61B4: retn
+0x9B5D90: mov     ecx, [ebp-10h]; this
+0x9B5D93: jmp     TESForm_destr
+0x9B5D98: mov     ecx, [ebp-10h]
+0x9B5D9B: add     ecx, 1Ch; slot
+0x9B5D9E: jmp     NiPointerSlot_Release
+0x9B5DA3: mov     ecx, [ebp-10h]
+0x9B5DA6: add     ecx, 34h ; '4'
+0x9B5DA9: jmp     ??1?$NiTPointerMap@PAVTESObjectREFR@@PAV?$BSSimpleList@PAVTESPathGridPoint@@@@@@UAE@XZ; NiTPointerMap<TESObjectREFR *,BSSimpleList<TESPathGridPoint *> *>::~NiTPointerMap<TESObjectREFR *,BSSimpleList<TESPathGridPoint *> *>(void)
+0x9B5DAE: mov     ecx, [ebp-10h]
+0x9B5DB1: add     ecx, 44h ; 'D'
+0x9B5DB4: jmp     ??1?$NiTPointerMap@IPAV?$BSSimpleList@PAVTESPathGridPoint@@@@@@UAE@XZ; NiTPointerMap<uint,BSSimpleList<TESPathGridPoint *> *>::~NiTPointerMap<uint,BSSimpleList<TESPathGridPoint *> *>(void)
+0x9B5DB9: mov     edx, [esp+arg_4]
+0x9B5DBD: lea     eax, [edx-10h]
+0x9B5DC0: mov     ecx, [edx-14h]
+0x9B5DC3: xor     ecx, eax
+0x9B5DC5: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B5DCA: mov     eax, offset stru_AE0D54
+0x9B5DCF: jmp     ___CxxFrameHandler3

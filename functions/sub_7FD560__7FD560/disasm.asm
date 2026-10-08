@@ -1,4 +1,4 @@
-0x7FD560: sub     esp, 0B98h
+0x7FD560: sub     esp, 0B98h; Loads Oblivion Lighting30Shader vertex programs. Builds SM3Lighting and SimpleShadow/TexEffect variants using SKIN, vertex-color and projected-shadow feature macros; the observed fog register layouts remain Oblivion-specific.
 0x7FD566: mov     eax, ds:0B30AACh
 0x7FD56B: xor     eax, esp
 0x7FD56D: mov     [esp+0B98h+var_4], eax
@@ -52,7 +52,7 @@
 0x7FD645: push    esi
 0x7FD646: push    ecx
 0x7FD647: mov     [esp+0BE4h+var_A5C], ebx
-0x7FD64E: mov     [esp+0BE4h+var_A58], offset aProjshadow; "PROJSHADOW"
+0x7FD64E: mov     [esp+0BE4h+var_A58], offset aProjshadow; DeferredRendering projection contract: B47288[4] is SM3Lighting.v.hlsl + PROJSHADOW. Native projected primary VS writes shadow projection as TEXCOORD1 and fog as TEXCOORD7 to the pixel shader.
 0x7FD659: mov     [esp+0BE4h+var_A54], edi
 0x7FD660: mov     [esp+0BE4h+var_A50], esi
 0x7FD667: call    __memset
@@ -170,14 +170,14 @@
 0x7FD910: lea     eax, [esp+0BACh+var_7A8]
 0x7FD917: push    esi
 0x7FD918: push    eax
-0x7FD919: mov     [esp+0BB4h+var_7B0], offset aLighting3xSm3s; "lighting\\3x\\SM3SimpleShadow.v.hlsl"
+0x7FD919: mov     [esp+0BB4h+var_7B0], offset aLighting3xSm3s; Load Oblivion SM3013 SimpleShadow VS (no macros). Stock bytecode hash F61E9AB7...; inputs POSITION/TEXCOORD0.
 0x7FD924: mov     [esp+0BB4h+var_7AC], esi
 0x7FD92B: call    __memset
 0x7FD930: push    3Ch ; '<'
 0x7FD932: lea     ecx, [esp+0BB8h+var_754]
 0x7FD939: push    esi
 0x7FD93A: push    ecx
-0x7FD93B: mov     [esp+0BC0h+var_764], offset aLighting3xSm3s; "lighting\\3x\\SM3SimpleShadow.v.hlsl"
+0x7FD93B: mov     [esp+0BC0h+var_764], offset aLighting3xSm3s; Load Oblivion SM3014 SimpleShadow VS (VC). Stock bytecode is identical to SM3013 and declares no COLOR input.
 0x7FD946: mov     [esp+0BC0h+var_760], offset aVc; "VC"
 0x7FD951: mov     [esp+0BC0h+var_75C], esi
 0x7FD958: mov     [esp+0BC0h+var_758], esi
@@ -186,7 +186,7 @@
 0x7FD966: lea     edx, [esp+0BC4h+var_708]
 0x7FD96D: push    esi
 0x7FD96E: push    edx
-0x7FD96F: mov     [esp+0BCCh+var_718], offset aLighting3xSm3s; "lighting\\3x\\SM3SimpleShadow.v.hlsl"
+0x7FD96F: mov     [esp+0BCCh+var_718], offset aLighting3xSm3s; Load Oblivion SM3015 SimpleShadow VS (SKIN). Stock bytecode hash CC2CA4CC...; inputs POSITION/TEXCOORD0/BLENDWEIGHT/BLENDINDICES.
 0x7FD97A: mov     [esp+0BCCh+var_714], ebp
 0x7FD981: mov     [esp+0BCCh+var_710], edi
 0x7FD988: mov     [esp+0BCCh+var_70C], esi
@@ -195,7 +195,7 @@
 0x7FD996: lea     eax, [esp+0BD0h+var_6B4]
 0x7FD99D: push    esi
 0x7FD99E: push    eax
-0x7FD99F: mov     [esp+0BD8h+var_6CC], offset aLighting3xSm3s; "lighting\\3x\\SM3SimpleShadow.v.hlsl"
+0x7FD99F: mov     [esp+0BD8h+var_6CC], offset aLighting3xSm3s; Load Oblivion SM3016 SimpleShadow VS (SKIN+VC). Stock bytecode is identical to SM3015 and declares no COLOR input.
 0x7FD9AA: mov     [esp+0BD8h+var_6C8], ebp
 0x7FD9B1: mov     [esp+0BD8h+var_6C4], edi
 0x7FD9B8: mov     [esp+0BD8h+var_6C0], offset aVc; "VC"
@@ -353,7 +353,7 @@
 0x7FDCFB: mov     [esp+0BB4h+var_24C], esi
 0x7FDD02: call    __memset
 0x7FDD07: add     esp, 0Ch
-0x7FDD0A: call    sub_7B47E0
+0x7FDD0A: call    BSShaderManager_GetVertexShaderTargetName
 0x7FDD0F: mov     [esp+0BA8h+var_B90], eax
 0x7FDD13: xor     edi, edi
 0x7FDD15: lea     ebx, [esp+0BA8h+var_B88]
@@ -379,7 +379,7 @@
 0x7FDD5A: push    ebx; int
 0x7FDD5B: lea     eax, [esp+0BBCh+FileName]
 0x7FDD62: push    eax; lpFileName
-0x7FDD63: call    CreateVertexShader
+0x7FDD63: call    CreateVertexShader; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.
 0x7FDD68: mov     ebp, ds:0B47288h[edi*4]
 0x7FDD6F: cmp     ebp, eax
 0x7FDD71: mov     [esp+0BA8h+var_B98], eax

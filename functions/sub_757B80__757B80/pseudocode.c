@@ -1,20 +1,20 @@
-NiTimeController *__stdcall sub_757B80(int a1)
+NiTimeController *__thiscall sub_757B80(const char **this, _DWORD **a2)
 {
-  NiTimeController *v1; // eax
-  NiTimeController *v2; // esi
+  NiTimeController *v3; // eax
+  NiTimeController *v4; // esi
 
-  v1 = (NiTimeController *)FormHeapAlloc(0x48u);
-  v2 = v1;
-  if ( v1 )
+  v3 = (NiTimeController *)FormHeapAlloc(0x48u); /*0x757b86*/
+  v4 = v3; /*0x757b8b*/
+  if ( v3 ) /*0x757b92*/
   {
-    sub_75F510(v1);
-    v2->vtbl = (NiTimeControllerVtbl *)&NiPSysFieldAttenuationCtlr::`vftable';
-    sub_75F5A0(v2, a1);
-    return v2;
+    sub_75F510(v3); /*0x757b96*/
+    v4->vtbl = (NiTimeControllerVtbl *)&NiPSysFieldAttenuationCtlr::`vftable'; /*0x757ba3*/
+    sub_75F5A0(this, (int)v4, a2); /*0x757ba9*/
+    return v4; /*0x757baf*/
   }
   else
   {
-    sub_75F5A0(0, a1);
-    return 0;
+    sub_75F5A0(this, 0, a2); /*0x757bbf*/
+    return 0; /*0x757bc5*/
   }
 }

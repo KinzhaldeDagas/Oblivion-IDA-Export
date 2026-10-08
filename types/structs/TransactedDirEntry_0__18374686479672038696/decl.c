@@ -1,1 +1,1 @@
-TransactedDirEntry_0
+typedef TransactedDirEntry TransactedDirEntry_0;

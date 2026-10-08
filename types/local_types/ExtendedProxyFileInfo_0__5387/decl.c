@@ -1,1 +1,1 @@
-ExtendedProxyFileInfo_0
+typedef ProxyFileInfo ExtendedProxyFileInfo_0;

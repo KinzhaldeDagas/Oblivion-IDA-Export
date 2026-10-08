@@ -1,270 +1,387 @@
 TESForm *__thiscall sub_443550(int *this)
 {
   LONG (__stdcall *v1)(volatile LONG *); // edi
-  void (__thiscall ***v3)(_DWORD, int); // esi
-  void (__thiscall ***v4)(_DWORD, int); // esi
-  void (__thiscall ***v5)(_DWORD, int); // esi
-  void (__thiscall ***v6)(_DWORD, int); // esi
-  void (__thiscall ***v7)(_DWORD, int); // esi
-  void (__thiscall ***v8)(_DWORD, int); // esi
-  void (__thiscall ***v9)(_DWORD, int); // esi
-  void (__thiscall ***v10)(_DWORD, int); // esi
-  void (__thiscall ***v11)(_DWORD, int); // esi
-  void (__thiscall ***v12)(_DWORD, int); // esi
-  void (__thiscall ***v13)(_DWORD, int); // esi
-  void (__thiscall ***v14)(_DWORD, int); // esi
-  void (__thiscall ***v15)(_DWORD, int); // esi
-  void (__thiscall ***v16)(_DWORD, int); // esi
-  void (__thiscall ***v17)(_DWORD, int); // esi
-  void (__thiscall ***v18)(_DWORD, int); // esi
-  int *v19; // eax
-  void (__thiscall ***v20)(_DWORD, int); // esi
+  NiSourceTexture *v3; // esi
+  NiSourceTexture *v4; // esi
+  NiSourceTexture *v5; // esi
+  NiSourceTexture *v6; // esi
+  NiSourceTexture *v7; // esi
+  NiSourceTexture *v8; // esi
+  NiSourceTexture *v9; // esi
+  NiSourceTexture *v10; // esi
+  NiSourceTexture *v11; // esi
+  NiSourceTexture *v12; // esi
+  NiSourceTexture *v13; // esi
+  NiSourceTexture *v14; // esi
+  NiSourceTexture *v15; // esi
+  NiSourceTexture *v16; // esi
+  NiSourceTexture *v17; // esi
+  NiSourceTexture *v18; // esi
+  int *SourceTexture_010201A0; // eax
+  NiSourceTexture *v20; // esi
   int *v21; // eax
-  void (__thiscall ***v22)(_DWORD, int); // esi
+  NiSourceTexture *v22; // esi
   int *v23; // eax
   LONG (__stdcall *v24)(volatile LONG *); // ebp
-  void (__thiscall ***v25)(_DWORD, int); // esi
+  NiSourceTexture *v25; // esi
   int i; // edi
   TESForm *result; // eax
   unsigned int v28; // ecx
   const char *v29; // eax
   TESForm *v30; // esi
-  int v31; // [esp+48h] [ebp-11Ch] BYREF
+  NiSourceTexture *outTexture; // [esp+48h] [ebp-11Ch] BYREF
   TESForm *v32; // [esp+4Ch] [ebp-118h] BYREF
   char ArgList[260]; // [esp+50h] [ebp-114h] BYREF
   int v34; // [esp+160h] [ebp-4h]
 
-  v1 = InterlockedDecrement;
-  if ( *(_BYTE *)dword_B37150 )
+  v1 = InterlockedDecrement; /*0x443592*/
+  if ( *(_BYTE *)LODWORD(g_GameSettingStringPointers_B36CD8[0x11E]) ) /*0x44358f*/
   {
-    sub_43B420((int *)ModelLoaderPtr, (IOTask **)&v31, (const char *)dword_B37150, 5u, 0, 0, 0, 1, 1);
-    if ( v31 )
+    sub_43B420( /*0x4435b4*/
+      (int *)MEMORY[0xB33A1C],
+      (IOTask **)&outTexture,
+      (const char *)LODWORD(g_GameSettingStringPointers_B36CD8[0x11E]),
+      5u,
+      0,
+      0,
+      0,
+      1,
+      1);
+    if ( outTexture ) /*0x4435bf*/
     {
-      v3 = (void (__thiscall ***)(_DWORD, int))v31;
-      if ( !v1((volatile LONG *)(v31 + 8)) )
-        (**v3)(v3, 1);
+      v3 = outTexture; /*0x4435c1*/
+      if ( !v1((volatile LONG *)&outTexture->members.super.super.m_pcName) ) /*0x4435c7*/
+        v3->vtbl->super.super.super.Destructor((NiRefObject *)v3, 1); /*0x4435d9*/
     }
   }
-  if ( *(_BYTE *)dword_B37158 )
+  if ( *(_BYTE *)LODWORD(g_GameSettingStringPointers_B36CD8[0x120]) ) /*0x4435e0*/
   {
-    sub_43B420((int *)ModelLoaderPtr, (IOTask **)&v31, (const char *)dword_B37158, 5u, 0, 0, 0, 1, 1);
-    if ( v31 )
+    sub_43B420( /*0x4435fd*/
+      (int *)MEMORY[0xB33A1C],
+      (IOTask **)&outTexture,
+      (const char *)LODWORD(g_GameSettingStringPointers_B36CD8[0x120]),
+      5u,
+      0,
+      0,
+      0,
+      1,
+      1);
+    if ( outTexture ) /*0x443608*/
     {
-      v4 = (void (__thiscall ***)(_DWORD, int))v31;
-      if ( !v1((volatile LONG *)(v31 + 8)) )
-        (**v4)(v4, 1);
+      v4 = outTexture; /*0x44360a*/
+      if ( !v1((volatile LONG *)&outTexture->members.super.super.m_pcName) ) /*0x443610*/
+        v4->vtbl->super.super.super.Destructor((NiRefObject *)v4, 1); /*0x443622*/
     }
   }
-  if ( *(_BYTE *)dword_B37160 )
+  if ( *(_BYTE *)LODWORD(g_GameSettingStringPointers_B36CD8[0x122]) ) /*0x443629*/
   {
-    sub_43B420((int *)ModelLoaderPtr, (IOTask **)&v31, (const char *)dword_B37160, 5u, 0, 0, 0, 1, 1);
-    if ( v31 )
+    sub_43B420( /*0x443646*/
+      (int *)MEMORY[0xB33A1C],
+      (IOTask **)&outTexture,
+      (const char *)LODWORD(g_GameSettingStringPointers_B36CD8[0x122]),
+      5u,
+      0,
+      0,
+      0,
+      1,
+      1);
+    if ( outTexture ) /*0x443651*/
     {
-      v5 = (void (__thiscall ***)(_DWORD, int))v31;
-      if ( !v1((volatile LONG *)(v31 + 8)) )
-        (**v5)(v5, 1);
+      v5 = outTexture; /*0x443653*/
+      if ( !v1((volatile LONG *)&outTexture->members.super.super.m_pcName) ) /*0x443659*/
+        v5->vtbl->super.super.super.Destructor((NiRefObject *)v5, 1); /*0x44366b*/
     }
   }
-  if ( *(_BYTE *)dword_B37168 )
+  if ( *(_BYTE *)LODWORD(g_GameSettingStringPointers_B36CD8[0x124]) ) /*0x443672*/
   {
-    sub_43B420((int *)ModelLoaderPtr, (IOTask **)&v31, (const char *)dword_B37168, 5u, 0, 0, 0, 1, 1);
-    if ( v31 )
+    sub_43B420( /*0x44368f*/
+      (int *)MEMORY[0xB33A1C],
+      (IOTask **)&outTexture,
+      (const char *)LODWORD(g_GameSettingStringPointers_B36CD8[0x124]),
+      5u,
+      0,
+      0,
+      0,
+      1,
+      1);
+    if ( outTexture ) /*0x44369a*/
     {
-      v6 = (void (__thiscall ***)(_DWORD, int))v31;
-      if ( !v1((volatile LONG *)(v31 + 8)) )
-        (**v6)(v6, 1);
+      v6 = outTexture; /*0x44369c*/
+      if ( !v1((volatile LONG *)&outTexture->members.super.super.m_pcName) ) /*0x4436a2*/
+        v6->vtbl->super.super.super.Destructor((NiRefObject *)v6, 1); /*0x4436b4*/
     }
   }
-  if ( *(_BYTE *)dword_B37170 )
+  if ( *(_BYTE *)LODWORD(g_GameSettingStringPointers_B36CD8[0x126]) ) /*0x4436bb*/
   {
-    sub_43B420((int *)ModelLoaderPtr, (IOTask **)&v31, (const char *)dword_B37170, 5u, 0, 0, 0, 1, 1);
-    if ( v31 )
+    sub_43B420( /*0x4436d8*/
+      (int *)MEMORY[0xB33A1C],
+      (IOTask **)&outTexture,
+      (const char *)LODWORD(g_GameSettingStringPointers_B36CD8[0x126]),
+      5u,
+      0,
+      0,
+      0,
+      1,
+      1);
+    if ( outTexture ) /*0x4436e3*/
     {
-      v7 = (void (__thiscall ***)(_DWORD, int))v31;
-      if ( !v1((volatile LONG *)(v31 + 8)) )
-        (**v7)(v7, 1);
+      v7 = outTexture; /*0x4436e5*/
+      if ( !v1((volatile LONG *)&outTexture->members.super.super.m_pcName) ) /*0x4436eb*/
+        v7->vtbl->super.super.super.Destructor((NiRefObject *)v7, 1); /*0x4436fd*/
     }
   }
-  if ( *(_BYTE *)dword_B37178 )
+  if ( *(_BYTE *)LODWORD(g_GameSettingStringPointers_B36CD8[0x128]) ) /*0x443704*/
   {
-    sub_43B420((int *)ModelLoaderPtr, (IOTask **)&v31, (const char *)dword_B37178, 5u, 0, 0, 0, 1, 1);
-    if ( v31 )
+    sub_43B420( /*0x443721*/
+      (int *)MEMORY[0xB33A1C],
+      (IOTask **)&outTexture,
+      (const char *)LODWORD(g_GameSettingStringPointers_B36CD8[0x128]),
+      5u,
+      0,
+      0,
+      0,
+      1,
+      1);
+    if ( outTexture ) /*0x44372c*/
     {
-      v8 = (void (__thiscall ***)(_DWORD, int))v31;
-      if ( !v1((volatile LONG *)(v31 + 8)) )
-        (**v8)(v8, 1);
+      v8 = outTexture; /*0x44372e*/
+      if ( !v1((volatile LONG *)&outTexture->members.super.super.m_pcName) ) /*0x443734*/
+        v8->vtbl->super.super.super.Destructor((NiRefObject *)v8, 1); /*0x443746*/
     }
   }
-  if ( *(_BYTE *)dword_B37180 )
+  if ( *(_BYTE *)LODWORD(g_GameSettingStringPointers_B36CD8[0x12A]) ) /*0x44374d*/
   {
-    sub_43B420((int *)ModelLoaderPtr, (IOTask **)&v31, (const char *)dword_B37180, 5u, 0, 0, 0, 1, 1);
-    if ( v31 )
+    sub_43B420( /*0x44376a*/
+      (int *)MEMORY[0xB33A1C],
+      (IOTask **)&outTexture,
+      (const char *)LODWORD(g_GameSettingStringPointers_B36CD8[0x12A]),
+      5u,
+      0,
+      0,
+      0,
+      1,
+      1);
+    if ( outTexture ) /*0x443775*/
     {
-      v9 = (void (__thiscall ***)(_DWORD, int))v31;
-      if ( !v1((volatile LONG *)(v31 + 8)) )
-        (**v9)(v9, 1);
+      v9 = outTexture; /*0x443777*/
+      if ( !v1((volatile LONG *)&outTexture->members.super.super.m_pcName) ) /*0x44377d*/
+        v9->vtbl->super.super.super.Destructor((NiRefObject *)v9, 1); /*0x44378f*/
     }
   }
-  if ( *(_BYTE *)dword_B37188 )
+  if ( *(_BYTE *)LODWORD(g_GameSettingStringPointers_B36CD8[0x12C]) ) /*0x443796*/
   {
-    sub_43B420((int *)ModelLoaderPtr, (IOTask **)&v31, (const char *)dword_B37188, 5u, 0, 0, 0, 1, 1);
-    if ( v31 )
+    sub_43B420( /*0x4437b3*/
+      (int *)MEMORY[0xB33A1C],
+      (IOTask **)&outTexture,
+      (const char *)LODWORD(g_GameSettingStringPointers_B36CD8[0x12C]),
+      5u,
+      0,
+      0,
+      0,
+      1,
+      1);
+    if ( outTexture ) /*0x4437be*/
     {
-      v10 = (void (__thiscall ***)(_DWORD, int))v31;
-      if ( !v1((volatile LONG *)(v31 + 8)) )
-        (**v10)(v10, 1);
+      v10 = outTexture; /*0x4437c0*/
+      if ( !v1((volatile LONG *)&outTexture->members.super.super.m_pcName) ) /*0x4437c6*/
+        v10->vtbl->super.super.super.Destructor((NiRefObject *)v10, 1); /*0x4437d8*/
     }
   }
-  if ( *(_BYTE *)dword_B37190 )
+  if ( *(_BYTE *)LODWORD(g_GameSettingStringPointers_B36CD8[0x12E]) ) /*0x4437df*/
   {
-    sub_43B420((int *)ModelLoaderPtr, (IOTask **)&v31, (const char *)dword_B37190, 5u, 0, 0, 0, 1, 1);
-    if ( v31 )
+    sub_43B420( /*0x4437fc*/
+      (int *)MEMORY[0xB33A1C],
+      (IOTask **)&outTexture,
+      (const char *)LODWORD(g_GameSettingStringPointers_B36CD8[0x12E]),
+      5u,
+      0,
+      0,
+      0,
+      1,
+      1);
+    if ( outTexture ) /*0x443807*/
     {
-      v11 = (void (__thiscall ***)(_DWORD, int))v31;
-      if ( !v1((volatile LONG *)(v31 + 8)) )
-        (**v11)(v11, 1);
+      v11 = outTexture; /*0x443809*/
+      if ( !v1((volatile LONG *)&outTexture->members.super.super.m_pcName) ) /*0x44380f*/
+        v11->vtbl->super.super.super.Destructor((NiRefObject *)v11, 1); /*0x443821*/
     }
   }
-  if ( *(_BYTE *)dword_B37198 )
+  if ( *(_BYTE *)LODWORD(g_GameSettingStringPointers_B36CD8[0x130]) ) /*0x443828*/
   {
-    sub_43B420((int *)ModelLoaderPtr, (IOTask **)&v31, (const char *)dword_B37198, 5u, 0, 0, 0, 1, 1);
-    if ( v31 )
+    sub_43B420( /*0x443845*/
+      (int *)MEMORY[0xB33A1C],
+      (IOTask **)&outTexture,
+      (const char *)LODWORD(g_GameSettingStringPointers_B36CD8[0x130]),
+      5u,
+      0,
+      0,
+      0,
+      1,
+      1);
+    if ( outTexture ) /*0x443850*/
     {
-      v12 = (void (__thiscall ***)(_DWORD, int))v31;
-      if ( !v1((volatile LONG *)(v31 + 8)) )
-        (**v12)(v12, 1);
+      v12 = outTexture; /*0x443852*/
+      if ( !v1((volatile LONG *)&outTexture->members.super.super.m_pcName) ) /*0x443858*/
+        v12->vtbl->super.super.super.Destructor((NiRefObject *)v12, 1); /*0x44386a*/
     }
   }
-  if ( *(_BYTE *)dword_B371A0 )
+  if ( *(_BYTE *)LODWORD(g_GameSettingStringPointers_B36CD8[0x132]) ) /*0x443871*/
   {
-    sub_43B420((int *)ModelLoaderPtr, (IOTask **)&v31, (const char *)dword_B371A0, 5u, 0, 0, 0, 1, 1);
-    if ( v31 )
+    sub_43B420( /*0x44388e*/
+      (int *)MEMORY[0xB33A1C],
+      (IOTask **)&outTexture,
+      (const char *)LODWORD(g_GameSettingStringPointers_B36CD8[0x132]),
+      5u,
+      0,
+      0,
+      0,
+      1,
+      1);
+    if ( outTexture ) /*0x443899*/
     {
-      v13 = (void (__thiscall ***)(_DWORD, int))v31;
-      if ( !v1((volatile LONG *)(v31 + 8)) )
-        (**v13)(v13, 1);
+      v13 = outTexture; /*0x44389b*/
+      if ( !v1((volatile LONG *)&outTexture->members.super.super.m_pcName) ) /*0x4438a1*/
+        v13->vtbl->super.super.super.Destructor((NiRefObject *)v13, 1); /*0x4438b3*/
     }
   }
-  if ( *(_BYTE *)dword_B371A8 )
+  if ( *(_BYTE *)LODWORD(g_GameSettingStringPointers_B36CD8[0x134]) ) /*0x4438ba*/
   {
-    sub_43B420((int *)ModelLoaderPtr, (IOTask **)&v31, (const char *)dword_B371A8, 5u, 0, 0, 0, 1, 1);
-    if ( v31 )
+    sub_43B420( /*0x4438d7*/
+      (int *)MEMORY[0xB33A1C],
+      (IOTask **)&outTexture,
+      (const char *)LODWORD(g_GameSettingStringPointers_B36CD8[0x134]),
+      5u,
+      0,
+      0,
+      0,
+      1,
+      1);
+    if ( outTexture ) /*0x4438e2*/
     {
-      v14 = (void (__thiscall ***)(_DWORD, int))v31;
-      if ( !v1((volatile LONG *)(v31 + 8)) )
-        (**v14)(v14, 1);
+      v14 = outTexture; /*0x4438e4*/
+      if ( !v1((volatile LONG *)&outTexture->members.super.super.m_pcName) ) /*0x4438ea*/
+        v14->vtbl->super.super.super.Destructor((NiRefObject *)v14, 1); /*0x4438fc*/
     }
   }
-  if ( *(_BYTE *)sBloodParticleDefault )
+  if ( *MEMORY[0xB371B0].value ) /*0x443903*/
   {
-    sub_43B420((int *)ModelLoaderPtr, (IOTask **)&v31, (const char *)sBloodParticleDefault, 5u, 0, 0, 0, 1, 1);
-    if ( v31 )
+    sub_43B420((int *)MEMORY[0xB33A1C], (IOTask **)&outTexture, MEMORY[0xB371B0].value, 5u, 0, 0, 0, 1, 1); /*0x443920*/
+    if ( outTexture ) /*0x44392b*/
     {
-      v15 = (void (__thiscall ***)(_DWORD, int))v31;
-      if ( !v1((volatile LONG *)(v31 + 8)) )
-        (**v15)(v15, 1);
+      v15 = outTexture; /*0x44392d*/
+      if ( !v1((volatile LONG *)&outTexture->members.super.super.m_pcName) ) /*0x443933*/
+        v15->vtbl->super.super.super.Destructor((NiRefObject *)v15, 1); /*0x443945*/
     }
   }
-  if ( *(_BYTE *)dword_B371B8 )
+  if ( *stru_B371B8.value ) /*0x44394c*/
   {
-    sub_43B420((int *)ModelLoaderPtr, (IOTask **)&v31, (const char *)dword_B371B8, 5u, 0, 0, 0, 1, 1);
-    if ( v31 )
+    sub_43B420((int *)MEMORY[0xB33A1C], (IOTask **)&outTexture, stru_B371B8.value, 5u, 0, 0, 0, 1, 1); /*0x443969*/
+    if ( outTexture ) /*0x443974*/
     {
-      v16 = (void (__thiscall ***)(_DWORD, int))v31;
-      if ( !v1((volatile LONG *)(v31 + 8)) )
-        (**v16)(v16, 1);
+      v16 = outTexture; /*0x443976*/
+      if ( !v1((volatile LONG *)&outTexture->members.super.super.m_pcName) ) /*0x44397c*/
+        v16->vtbl->super.super.super.Destructor((NiRefObject *)v16, 1); /*0x44398e*/
     }
   }
-  if ( *(_BYTE *)dword_B371C0 )
+  if ( *stru_B371C0.value ) /*0x443995*/
   {
-    sub_43B420((int *)ModelLoaderPtr, (IOTask **)&v31, (const char *)dword_B371C0, 5u, 0, 0, 0, 1, 1);
-    if ( v31 )
+    sub_43B420((int *)MEMORY[0xB33A1C], (IOTask **)&outTexture, stru_B371C0.value, 5u, 0, 0, 0, 1, 1); /*0x4439b2*/
+    if ( outTexture ) /*0x4439bd*/
     {
-      v17 = (void (__thiscall ***)(_DWORD, int))v31;
-      if ( !v1((volatile LONG *)(v31 + 8)) )
-        (**v17)(v17, 1);
+      v17 = outTexture; /*0x4439bf*/
+      if ( !v1((volatile LONG *)&outTexture->members.super.super.m_pcName) ) /*0x4439c5*/
+        v17->vtbl->super.super.super.Destructor((NiRefObject *)v17, 1); /*0x4439d7*/
     }
   }
-  if ( *(_BYTE *)LODWORD(dword_B37B38) )
+  if ( *(_BYTE *)LODWORD(MEMORY[0xB37A58][0x38]) ) /*0x4439de*/
   {
-    sub_43B420((int *)ModelLoaderPtr, (IOTask **)&v31, (const char *)LODWORD(dword_B37B38), 5u, 0, 0, 0, 1, 1);
-    if ( v31 )
+    sub_43B420( /*0x4439fb*/
+      (int *)MEMORY[0xB33A1C],
+      (IOTask **)&outTexture,
+      (const char *)LODWORD(MEMORY[0xB37A58][0x38]),
+      5u,
+      0,
+      0,
+      0,
+      1,
+      1);
+    if ( outTexture ) /*0x443a06*/
     {
-      v18 = (void (__thiscall ***)(_DWORD, int))v31;
-      if ( !v1((volatile LONG *)(v31 + 8)) )
-        (**v18)(v18, 1);
+      v18 = outTexture; /*0x443a08*/
+      if ( !v1((volatile LONG *)&outTexture->members.super.super.m_pcName) ) /*0x443a0e*/
+        v18->vtbl->super.super.super.Destructor((NiRefObject *)v18, 1); /*0x443a20*/
     }
   }
-  if ( *(_BYTE *)sBloodTextureDefault )
+  if ( *MEMORY[0xB371C8].value ) /*0x443a2a*/
   {
-    _sprintf(ArgList, "%s\\%s\\%s", "Data", "Textures", (const char *)sBloodTextureDefault);
-    v19 = (int *)sub_442890((UInt32 *)&v31, ArgList, 0, 0);
-    v34 = 0;
-    sub_55E2A0(this + 0x25, v19);
-    v34 = 0xFFFFFFFF;
-    if ( v31 )
+    _sprintf(ArgList, "%s\\%s\\%s", "Data", "Textures", MEMORY[0xB371C8].value); /*0x443a44*/
+    SourceTexture_010201A0 = (int *)OB_TES_LoadOrFindSourceTexture_010201A0(&outTexture, ArgList, 0, 0); /*0x443a5c*/
+    v34 = 0; /*0x443a68*/
+    OB_NiSmartPointer_Assign_010201A0(this + 0x25, SourceTexture_010201A0); /*0x443a73*/
+    v34 = 0xFFFFFFFF; /*0x443a7e*/
+    if ( outTexture ) /*0x443a85*/
     {
-      v20 = (void (__thiscall ***)(_DWORD, int))v31;
-      if ( !InterlockedDecrement((volatile LONG *)(v31 + 4)) )
-        (**v20)(v20, 1);
+      v20 = outTexture; /*0x443a87*/
+      if ( !InterlockedDecrement((volatile LONG *)&outTexture->members) ) /*0x443a8d*/
+        v20->vtbl->super.super.super.Destructor((NiRefObject *)v20, 1); /*0x443aa3*/
     }
   }
-  if ( *(_BYTE *)dword_B371D0 )
+  if ( *stru_B371D0.value ) /*0x443aaa*/
   {
-    _sprintf(ArgList, "%s\\%s\\%s", "Data", "Textures", (const char *)dword_B371D0);
-    v21 = (int *)sub_442890((UInt32 *)&v31, ArgList, 0, 0);
-    v34 = 1;
-    sub_55E2A0(this + 0x26, v21);
-    v34 = 0xFFFFFFFF;
-    if ( v31 )
+    _sprintf(ArgList, "%s\\%s\\%s", "Data", "Textures", stru_B371D0.value); /*0x443ac4*/
+    v21 = (int *)OB_TES_LoadOrFindSourceTexture_010201A0(&outTexture, ArgList, 0, 0); /*0x443adc*/
+    v34 = 1; /*0x443ae8*/
+    OB_NiSmartPointer_Assign_010201A0(this + 0x26, v21); /*0x443af3*/
+    v34 = 0xFFFFFFFF; /*0x443afe*/
+    if ( outTexture ) /*0x443b05*/
     {
-      v22 = (void (__thiscall ***)(_DWORD, int))v31;
-      if ( !InterlockedDecrement((volatile LONG *)(v31 + 4)) )
-        (**v22)(v22, 1);
+      v22 = outTexture; /*0x443b07*/
+      if ( !InterlockedDecrement((volatile LONG *)&outTexture->members) ) /*0x443b0d*/
+        v22->vtbl->super.super.super.Destructor((NiRefObject *)v22, 1); /*0x443b23*/
     }
   }
-  if ( *(_BYTE *)dword_B371D8
-    && (_sprintf(ArgList, "%s\\%s\\%s", "Data", "Textures", (const char *)dword_B371D8),
-        v23 = (int *)sub_442890((UInt32 *)&v31, ArgList, 0, 0),
+  if ( *stru_B371D8.value /*0x443b85*/
+    && (_sprintf(ArgList, "%s\\%s\\%s", "Data", "Textures", stru_B371D8.value),
+        v23 = (int *)OB_TES_LoadOrFindSourceTexture_010201A0(&outTexture, ArgList, 0, 0),
         v34 = 2,
-        sub_55E2A0(this + 0x27, v23),
+        OB_NiSmartPointer_Assign_010201A0(this + 0x27, v23),
         v34 = 0xFFFFFFFF,
-        v31) )
+        outTexture) )
   {
-    v24 = InterlockedDecrement;
-    v25 = (void (__thiscall ***)(_DWORD, int))v31;
-    if ( !InterlockedDecrement((volatile LONG *)(v31 + 4)) )
-      (**v25)(v25, 1);
+    v24 = InterlockedDecrement; /*0x443b87*/
+    v25 = outTexture; /*0x443b8d*/
+    if ( !InterlockedDecrement((volatile LONG *)&outTexture->members) ) /*0x443b93*/
+      v25->vtbl->super.super.super.Destructor((NiRefObject *)v25, 1); /*0x443ba5*/
   }
   else
   {
-    v24 = InterlockedDecrement;
+    v24 = InterlockedDecrement; /*0x443ba9*/
   }
-  for ( i = 0; i < 0x15; ++i )
+  for ( i = 0; i < 0x15; ++i ) /*0x443baf*/
   {
-    result = TESForm_LookupByFormID(dword_B067C0[i]);
-    if ( result )
+    result = TESForm_LookupByFormID(dword_B067C0[i]); /*0x443bb8*/
+    if ( result ) /*0x443bc2*/
     {
-      LOWORD(v28) = result[1].member.modlist.next;
-      if ( (_WORD)v28 == 0xFFFF )
-        v28 = strlen((const char *)result[1].member.modlist.data);
+      LOWORD(v28) = result[1].member.modlist.next; /*0x443bc4*/
+      if ( (_WORD)v28 == 0xFFFF ) /*0x443bcd*/
+        v28 = strlen((const char *)result[1].member.modlist.data); /*0x443bd2*/
       else
-        v28 = (unsigned __int16)v28;
-      if ( v28 )
+        v28 = (unsigned __int16)v28; /*0x443be2*/
+      if ( v28 ) /*0x443be7*/
       {
-        v29 = (const char *)(*(int (__thiscall **)(UInt32 *))(result[1].member.refID + 0x14))(&result[1].member.refID);
-        sub_43B420((int *)ModelLoaderPtr, (IOTask **)&v32, v29, 5u, 0, 0, 0, 1, 1);
-        result = v32;
-        if ( v32 )
+        v29 = (const char *)(*(int (__thiscall **)(UInt32 *))(result[1].member.refID + 0x14))(&result[1].member.refID); /*0x443bfe*/
+        sub_43B420((int *)MEMORY[0xB33A1C], (IOTask **)&v32, v29, 5u, 0, 0, 0, 1, 1); /*0x443c0c*/
+        result = v32; /*0x443c11*/
+        if ( v32 ) /*0x443c17*/
         {
-          v30 = v32;
-          result = (TESForm *)v24((volatile LONG *)&v32->member.flags);
-          if ( !result )
-            result = (TESForm *)((int (__thiscall *)(TESForm *, int))v30->vtbl->super.InitializeComponent)(v30, 1);
+          v30 = v32; /*0x443c19*/
+          result = (TESForm *)v24((volatile LONG *)&v32->member.flags); /*0x443c1f*/
+          if ( !result ) /*0x443c23*/
+            result = (TESForm *)((int (__thiscall *)(TESForm *, int))v30->vtbl->super.InitializeComponent)(v30, 1); /*0x443c31*/
         }
       }
     }
-    dword_B35E50[i] = 0;
+    unk_B35E50[i] = 0; /*0x443c33*/
   }
-  return result;
+  return result; /*0x443c49*/
 }

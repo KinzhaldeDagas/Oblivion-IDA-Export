@@ -33,7 +33,7 @@
 0x7668EA: mov     ecx, [ebx+8A0h]
 0x7668F0: push    eax; NiGeometryGroup *
 0x7668F1: mov     [esp+9Ch+var_38], edx
-0x7668F5: call    NiGeometryGroup__AddGeometryDataToGroup
+0x7668F5: call    NiGeometryGroup__AddGeometryDataToGroup; MoonSugarEffect decode: NiGeometryGroup::AddGeometryDataToGroup. For hardware-skinned geometry, adds each partition object when the partition is compatible; for non-skinned geometry it only calls AddObject when BuffData is missing. Existing BuffData returns false, so this is packing/registration ownership rather than draw ownership.
 0x7668FA: mov     ecx, [esp+84h+var_44]
 0x7668FE: mov     edx, [esp+84h+var_40]
 0x766902: mov     eax, [esp+84h+var_3C]
@@ -76,14 +76,14 @@
 0x7669A2: mov     ecx, [eax+38h]; this
 0x7669A5: push    1; streamCount
 0x7669A7: mov     [esp+88h+var_64], ecx
-0x7669AB: call    sub_777F70
+0x7669AB: call    sub_777F70; Pass225/226: Forces NiGeometryBufferData stream count; screen-texture render path forces exactly one stream.
 0x7669B0: mov     eax, [esp+84h+var_6C]
 0x7669B4: mov     ecx, [esp+84h+var_64]
 0x7669B8: mov     edx, [esp+84h+var_70]
 0x7669BC: push    edx
 0x7669BD: mov     [ecx+14h], eax
 0x7669C0: mov     [ecx+18h], eax
-0x7669C3: call    sub_7780A0
+0x7669C3: call    sub_7780A0; MoonSugarEffect decode: NiGeometryBufferData SetFVF-style input ownership. Stores FVF and releases any cached IDirect3DVertexDeclaration9, so callers switch the buffer to fixed-function input mode.
 0x7669C8: mov     eax, [esp+84h+var_64]
 0x7669CC: cmp     dword ptr [eax+1Ch], 0
 0x7669D0: jbe     short loc_7669DB
@@ -93,7 +93,7 @@
 0x7669DB: mov     ecx, [ebx+8B0h]
 0x7669E1: push    0
 0x7669E3: push    eax
-0x7669E4: call    NiGeometryBufferData__RefreshVBChips
+0x7669E4: call    NiGeometryBufferData__RefreshVBChips; MoonSugarEffect decode: NiGeometryBufferData::RefreshVBChips. Releases the existing geometry-group chip for this stream, creates a replacement chip through NiGeometryGroup, and stores it in VBChip[stream] if stream is in range. This is allocation/lifetime ownership, not a safe mask-pass getter.
 0x7669E9: mov     eax, [esp+84h+var_64]
 0x7669ED: cmp     dword ptr [eax+1Ch], 0
 0x7669F1: jbe     short loc_7669FE
@@ -107,14 +107,14 @@
 0x766A0D: test    ecx, ecx
 0x766A0F: jz      loc_766F18
 0x766A15: mov     edx, [eax+10h]
-0x766A18: push    edx; int
+0x766A18: push    edx; flags
 0x766A19: mov     edx, [eax+14h]
 0x766A1C: mov     eax, [eax+0Ch]
-0x766A1F: push    edx; Size
-0x766A20: push    eax; int
-0x766A21: push    ecx; int
-0x766A22: mov     ecx, [ebx+8B0h]
-0x766A28: call    sub_776C90
+0x766A1F: push    edx; byteCount
+0x766A20: push    eax; offsetBytes
+0x766A21: push    ecx; buffer
+0x766A22: mov     ecx, [ebx+8B0h]; self
+0x766A28: call    NiDX9VertexBufferManager_LockToStaging; MoonSugarEffect decode: VB lock helper. Locks D3D VB, caches original bytes in a staging buffer, and returns a writable pointer; unlock is handled by packers when they own the lock.
 0x766A2D: test    edi, edi
 0x766A2F: jz      loc_766BF3
 0x766A35: test    ebp, ebp
@@ -356,7 +356,7 @@
 0x766D4F: mov     ecx, [ebp+8]
 0x766D52: push    ecx
 0x766D53: mov     ecx, [ebx+8B0h]
-0x766D59: call    sub_776D80
+0x766D59: call    sub_776D80; MoonSugarEffect decode: vertex-buffer-manager unlock/staging helper. Copies the staging buffer back to the locked D3D buffer, clears lock bookkeeping, leaves the critical section, then calls the vertex buffer Unlock vtable slot.
 0x766D5E: mov     esi, [esp+84h+var_64]
 0x766D62: mov     ecx, [ebx+0A94h]
 0x766D68: mov     edx, [ecx]
@@ -421,7 +421,6 @@
 0x766E00: test    edi, edi
 0x766E02: jz      loc_766EF4
 0x766E08: jmp     short loc_766E10
-0x766E0A: align 10h
 0x766E10: mov     ecx, [ebx+0A94h]
 0x766E16: mov     edx, [ecx]
 0x766E18: mov     edx, [edx+30h]

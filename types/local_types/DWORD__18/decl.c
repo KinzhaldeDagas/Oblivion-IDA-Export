@@ -1,1 +1,1 @@
-DWORD
+typedef unsigned int DWORD;

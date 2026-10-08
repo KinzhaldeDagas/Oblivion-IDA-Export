@@ -1,1 +1,1 @@
-IRpcStubBufferVtbl_0
+typedef IRpcStubBufferVtbl IRpcStubBufferVtbl_0;

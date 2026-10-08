@@ -1,7 +1,7 @@
 0x41FD70: push    esi; lpCriticalSection
 0x41FD71: mov     esi, ecx
 0x41FD73: push    offset aExtradatalistI
-0x41FD78: mov     ecx, offset BSExtraDataCS
+0x41FD78: mov     ecx, 0B33800h
 0x41FD7D: call    NiEnterCriticalSection
 0x41FD82: mov     eax, [esi+4]
 0x41FD85: test    eax, eax
@@ -26,11 +26,11 @@
 0x41FDC8: mov     eax, [eax+8]; jumptable 0041FDA7 cases 18,27,34,38,39,42,45,54,55,85
 0x41FDCB: test    eax, eax
 0x41FDCD: jnz     short loc_41FD90
-0x41FDCF: mov     ecx, offset BSExtraDataCS; lpCriticalSection
+0x41FDCF: mov     ecx, 0B33800h; lpCriticalSection
 0x41FDD4: call    NiLeaveCriticalSection_0
 0x41FDD9: mov     al, 1
 0x41FDDB: retn    4
-0x41FDDE: mov     ecx, offset BSExtraDataCS; jumptable 0041FDA7 default case, cases 19-26,28-33,35-37,40,41,43,44,46-53,56-84
+0x41FDDE: mov     ecx, 0B33800h; jumptable 0041FDA7 default case, cases 19-26,28-33,35-37,40,41,43,44,46-53,56-84
 0x41FDE3: call    NiLeaveCriticalSection_0
 0x41FDE8: xor     al, al
 0x41FDEA: retn    4

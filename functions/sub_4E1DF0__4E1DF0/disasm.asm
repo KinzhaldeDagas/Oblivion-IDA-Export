@@ -1,4 +1,4 @@
-0x4E1DF0: push    0FFFFFFFFh
+0x4E1DF0: push    0FFFFFFFFh; Refreshes equipped-AMMO/quiver 3D for a reference. For PlayerCharacter it updates both relevant animation perspectives; then refreshes quiver arrow visibility and actor 3D state.
 0x4E1DF2: push    offset SEH_4F28B0
 0x4E1DF7: mov     eax, large fs:0
 0x4E1DFD: push    eax
@@ -29,44 +29,44 @@
 0x4E1E47: jnz     short loc_4E1E7D
 0x4E1E49: mov     [esp+34h+var_20], 2
 0x4E1E51: jmp     short loc_4E1E59
-0x4E1E53: mov     ecx, ds:0B333C4h
+0x4E1E53: mov     ecx, ds:0B333C4h; this
 0x4E1E59: cmp     edi, ecx
 0x4E1E5B: jnz     short loc_4E1E7D
 0x4E1E5D: cmp     [esp+34h+var_20], ebp
 0x4E1E61: jnz     short loc_4E1E7D
 0x4E1E63: mov     al, [ecx+588h]
-0x4E1E69: mov     byte ptr [esp+34h+var_18], al
-0x4E1E6D: mov     edx, [esp+34h+var_18]
-0x4E1E71: push    edx
-0x4E1E72: call    sub_6600D0
+0x4E1E69: mov     [esp+34h+firstPerson], al
+0x4E1E6D: mov     edx, dword ptr [esp+34h+firstPerson]
+0x4E1E71: push    edx; firstPerson
+0x4E1E72: call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.
 0x4E1E77: mov     [esp+34h+var_1C], eax
 0x4E1E7B: mov     ebx, eax
 0x4E1E7D: cmp     ebx, esi
 0x4E1E7F: jz      short loc_4E1E92
-0x4E1E81: mov     eax, [esp+34h+arg_0]
-0x4E1E85: push    eax
-0x4E1E86: mov     ecx, ebx
-0x4E1E88: call    sub_479C40
+0x4E1E81: mov     eax, [esp+34h+ammo]
+0x4E1E85: push    eax; ammo
+0x4E1E86: mov     ecx, ebx; this
+0x4E1E88: call    ActorSkinInfo_SetEquippedAmmo3D; Oblivion equipped-AMMO 3D path on ActorSkinInfo. Clears/rebuilds AmmoForm/AmmoModel/AmmoObject at +0x10C/+0x110/+0x114, attaches through native Prn handling, and caches the loaded 3D.
 0x4E1E8D: jmp     loc_4E1F21
-0x4E1E92: cmp     [esp+34h+arg_0], esi
+0x4E1E92: cmp     [esp+34h+ammo], esi
 0x4E1E96: jz      loc_4E1F21
-0x4E1E9C: mov     ecx, [esp+34h+arg_0]
+0x4E1E9C: mov     ecx, [esp+34h+ammo]
 0x4E1EA0: add     ecx, 30h ; '0'
 0x4E1EA3: cmp     ecx, esi
 0x4E1EA5: jz      short loc_4E1F21
 0x4E1EA7: mov     edx, [ecx]
 0x4E1EA9: mov     eax, [edx+14h]
-0x4E1EAC: push    esi
-0x4E1EAD: push    edi
-0x4E1EAE: push    0Ch
+0x4E1EAC: push    esi; skeletonRoot
+0x4E1EAD: push    edi; actorRef
+0x4E1EAE: push    0Ch; slot
 0x4E1EB0: call    eax
-0x4E1EB2: push    eax
-0x4E1EB3: call    sub_479450
+0x4E1EB2: push    eax; modelPath
+0x4E1EB3: call    Actor_LoadCloneAndAttachModel3D; Loads and clones a model for an actor equipment/add-on slot, binds actor-specific resources, applies the stock attachment transform, attaches through Prn metadata, and initializes render property/dynamic-effect state.
 0x4E1EB8: mov     ebx, eax
 0x4E1EBA: mov     [esp+44h+Src], esi
 0x4E1EBE: mov     [esp+44h+var_10], si
 0x4E1EC3: mov     [esp+44h+var_E], si
-0x4E1EC8: mov     ecx, [esp+44h+arg_0]
+0x4E1EC8: mov     ecx, [esp+44h+ammo]
 0x4E1ECC: mov     eax, [ecx+0Ch]
 0x4E1ECF: mov     edx, ds:0B065B8h
 0x4E1ED5: push    eax
@@ -83,7 +83,7 @@
 0x4E1EF4: call    NiObjectNET_SetName
 0x4E1EF9: push    ebp
 0x4E1EFA: mov     [esp+38h+var_4], 0FFFFFFFFh
-0x4E1F02: call    FormHeapFree
+0x4E1F02: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4E1F07: mov     ebx, [esp+38h+var_1C]
 0x4E1F0B: add     esp, 4
 0x4E1F0E: mov     [esp+34h+Src], esi
@@ -96,10 +96,10 @@
 0x4E1F2B: call    eax
 0x4E1F2D: test    al, al
 0x4E1F2F: jz      short loc_4E1F3A
-0x4E1F31: push    esi
-0x4E1F32: push    ebx
-0x4E1F33: mov     ecx, edi
-0x4E1F35: call    sub_5F8300
+0x4E1F31: push    esi; quiverNode
+0x4E1F32: push    ebx; animData
+0x4E1F33: mov     ecx, edi; this
+0x4E1F35: call    Actor_RefreshQuiverArrowVisibility; Recomputes Quiver Arrow:0/ArrowN visibility from the current equipped-AMMO inventory count. animData selects the perspective/cache and quiverNode may supply an already resolved node.
 0x4E1F3A: sub     [esp+34h+var_20], ebp
 0x4E1F3E: jnz     loc_4E1E53
 0x4E1F44: mov     edx, [edi]
@@ -123,3 +123,12 @@
 0x4E1F75: pop     ebx
 0x4E1F76: add     esp, 20h
 0x4E1F79: retn    4
+0x9B6950: lea     ecx, [ebp-14h]; void *
+0x9B6953: jmp     BSStringT_Clear
+0x9B6958: mov     edx, [esp+arg_4]
+0x9B695C: lea     eax, [edx-24h]
+0x9B695F: mov     ecx, [edx-28h]
+0x9B6962: xor     ecx, eax
+0x9B6964: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B6969: mov     eax, offset stru_AE1738
+0x9B696E: jmp     ___CxxFrameHandler3

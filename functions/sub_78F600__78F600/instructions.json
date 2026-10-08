@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x78F600",
-    "line": "fld     [esp+arg_4]",
+    "line": "fld     [esp+arg_4]; SpeedTreeRT 4.1 source match: leaf blossom/probability helper used by CBranch::MakeLeaf. Applies blossom distance/probability logic with parent fallback.",
     "mnemonic": "fld",
     "size": 4
   },
@@ -193,13 +193,13 @@
   },
   {
     "ea": "0x78F656",
-    "line": "fstp    [esp+10h+var_C]; float",
+    "line": "fstp    [esp+10h+maxValue]; maxValue",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x78F65A",
-    "line": "mov     ecx, offset unk_B429C9",
+    "line": "mov     ecx, offset stru_B429C9; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -211,13 +211,13 @@
   },
   {
     "ea": "0x78F661",
-    "line": "fstp    [esp+10h+var_10]; float",
+    "line": "fstp    [esp+10h+minValue]; minValue",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x78F664",
-    "line": "call    sub_78EA00",
+    "line": "call    OB_stRandom_GetUniform_010201A0; Oblivion stRandom::GetUniform. Returns minValue + (maxValue - minValue) * SIdvRandomImpl::m_cUniform.Next(). Used throughout spline, branch, frond, tree, leaf-LOD, and seed generation paths.",
     "mnemonic": "call",
     "size": 5
   },

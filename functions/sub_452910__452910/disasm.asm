@@ -1,4 +1,4 @@
-0x452910: mov     eax, [esp+arg_0]
+0x452910: mov     eax, [esp+arg_0]; MEF v56 native UInt32 resize boundary suspends/invalidates indices across original resize and restores state with SEH finally. Other array template types pass through. Performance growth publishes checked private buffers only after stable snapshot validation. Required native allocation failures retain original fallback/exception behavior; not generic OOM recovery.
 0x452914: push    esi
 0x452915: mov     esi, ecx
 0x452917: cmp     eax, [esi+8]
@@ -9,7 +9,6 @@
 0x452926: mov     edx, eax
 0x452928: or      edi, 0FFFFFFFFh
 0x45292B: jmp     short loc_452930
-0x45292D: align 10h
 0x452930: mov     ecx, [esi+4]
 0x452933: cmp     dword ptr [ecx+edx*4], 0
 0x452937: lea     ecx, [ecx+edx*4]
@@ -21,7 +20,7 @@
 0x45294B: jb      short loc_452930
 0x45294D: mov     [esi+0Ch], eax
 0x452950: test    eax, eax
-0x452952: mov     edi, [esi+4]
+0x452952: mov     edi, [esi+4]; MEF PERF 2026-09-08: PERF-4 Resize32 snapshots old data, writes new capacity before allocation45296B, publishes new pointer452970, copies every used element452980..98F, zeros new tail, then frees olddata4529B3/9C8. This is allocation/copy/free, not in-place realloc or geometric growth. Existing helper has no checked NULL-failure contract.
 0x452955: mov     [esi+8], eax
 0x452958: jbe     short loc_4529C0
 0x45295A: xor     ecx, ecx
@@ -54,14 +53,14 @@
 0x4529AD: cmp     eax, [esi+8]
 0x4529B0: jb      short loc_4529A0
 0x4529B2: push    edi
-0x4529B3: call    FormHeapFree
+0x4529B3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4529B8: add     esp, 4
 0x4529BB: pop     edi
 0x4529BC: pop     esi
 0x4529BD: retn    4
 0x4529C0: mov     dword ptr [esi+4], 0
 0x4529C7: push    edi
-0x4529C8: call    FormHeapFree
+0x4529C8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4529CD: add     esp, 4
 0x4529D0: pop     edi
 0x4529D1: pop     esi

@@ -1,1 +1,1 @@
-ContextProperty
+typedef tagContextProperty ContextProperty;

@@ -1,0 +1,5 @@
+struct OB_stVectorIterator_stVector_SFrondGuide_010201A0
+{
+OB_stVector_stVector_SFrondGuide_010201A0 *owner;
+OB_stVector_SFrondGuide_010201A0 *current;
+};

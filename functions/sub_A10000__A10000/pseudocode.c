@@ -1,4 +1,4 @@
-BSStringT *sub_A10000()
+NiRTTI *sub_A10000()
 {
-  return sub_70E220(&stru_B41D28, "NiPSysUpdateTask", (int)&stru_B3FF14);
+  return NiRTTI_Constructor(&stru_B41D28, "NiPSysUpdateTask", &stru_B3FF14); /*0xa10014*/
 }

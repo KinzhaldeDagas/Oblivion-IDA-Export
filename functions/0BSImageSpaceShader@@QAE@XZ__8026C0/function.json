@@ -1,19 +1,36 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 11,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
+  "chunks": [
+    [
+      "0x8026C0",
+      "0x802760"
+    ],
+    [
+      "0x9D07B0",
+      "0x9D07DE"
+    ]
+  ],
+  "chunks_sha256": "6618df6657f905aa353eb6883d778391a24523f3961076407297f5b570fe5ca1",
+  "comment_regular": "MoonSugarEffect decode: BSImageSpaceShader base ctor calls BSShader ctor, sets vtable, clears source texture +0x7C and scalar fields +0x80..+0x8C.",
+  "comment_repeatable": "MoonSugarEffect decode: BSImageSpaceShader base ctor calls BSShader ctor, sets vtable, clears source texture +0x7C and scalar fields +0x80..+0x8C.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
   "display_name": "BSImageSpaceShader::BSImageSpaceShader(void)",
   "end_ea": "0x802760",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??0BSImageSpaceShader@@QAE@XZ",
   "segment": ".text",
   "sha256": "1f272766b573421c7348a971c957324cc9161baf6c83851402bb71f81cb60667",
   "size": 160,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x8026C0",
+  "total_chunk_size": 206,
   "type": "BSImageSpaceShader *__thiscall(BSImageSpaceShader *__hidden this)",
-  "xrefs_from_count": 53,
+  "xrefs_from_count": 67,
   "xrefs_to_count": 11
 }

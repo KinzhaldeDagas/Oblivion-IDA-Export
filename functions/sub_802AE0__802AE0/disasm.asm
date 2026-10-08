@@ -170,7 +170,7 @@
 0x802CE6: test    eax, eax
 0x802CE8: jz      short loc_802CFE
 0x802CEA: lea     ebx, [ebx+0]
-0x802CF0: cmp     eax, offset unk_B47878
+0x802CF0: cmp     eax, offset stru_B47878
 0x802CF5: jz      short loc_802D4B
 0x802CF7: mov     eax, [eax+4]
 0x802CFA: test    eax, eax
@@ -211,7 +211,7 @@
 0x802D4F: mov     edi, [esp+40h+var_2C]
 0x802D53: mov     eax, [edi]
 0x802D55: push    eax
-0x802D56: push    offset unk_B4786C
+0x802D56: push    offset stru_B4786C
 0x802D5B: call    NiRTTI_Cast
 0x802D60: mov     esi, eax
 0x802D62: add     esp, 8

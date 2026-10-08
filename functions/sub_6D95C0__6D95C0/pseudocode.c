@@ -19,64 +19,64 @@ int __thiscall sub_6D95C0(_DWORD *this)
   int v18; // [esp+14h] [ebp-8h]
   int v19; // [esp+18h] [ebp-4h]
 
-  result = *(this + 7);
-  if ( result )
+  result = *(this + 7); /*0x6d95c6*/
+  if ( result ) /*0x6d95cb*/
   {
-    v3 = *(_DWORD *)(result + 8);
-    v4 = *(_DWORD **)(result + 0xC);
-    v5 = *(_DWORD *)(result + 0x10);
-    v15 = v3;
-    v14 = *(_BYTE *)(result + 0x14);
-    if ( !v3 )
+    v3 = *(_DWORD *)(result + 8); /*0x6d95d1*/
+    v4 = *(_DWORD **)(result + 0xC); /*0x6d95da*/
+    v5 = *(_DWORD *)(result + 0x10); /*0x6d95de*/
+    v15 = v3; /*0x6d95e1*/
+    v14 = *(_BYTE *)(result + 0x14); /*0x6d95e5*/
+    if ( !v3 ) /*0x6d95e9*/
     {
-      v6 = (void (__thiscall ***)(_DWORD, int))result;
-      if ( !InterlockedDecrement((volatile LONG *)(result + 4)) )
-        (**v6)(v6, 1);
-      *(this + 7) = 0;
-      *(this + 3) = dword_B3EBA0;
-      *(this + 4) = dword_B3EBA4;
-      result = dword_B3EBA8;
-      *(this + 5) = dword_B3EBA8;
-      *(this + 6) = dword_B3EBAC;
-      return result;
+      v6 = (void (__thiscall ***)(_DWORD, int))result; /*0x6d95eb*/
+      if ( !InterlockedDecrement((volatile LONG *)(result + 4)) ) /*0x6d95f5*/
+        (**v6)(v6, 1); /*0x6d960b*/
+      *(this + 7) = 0; /*0x6d960d*/
+      *(this + 3) = LODWORD(flt_B3EBA0[0]); /*0x6d961a*/
+      *(this + 4) = LODWORD(flt_B3EBA0[1]); /*0x6d9623*/
+      result = LODWORD(flt_B3EBA0[2]); /*0x6d9626*/
+      *(this + 5) = LODWORD(flt_B3EBA0[2]); /*0x6d962b*/
+      *(this + 6) = LODWORD(flt_B3EBA0[3]); /*0x6d9636*/
+      return result; /*0x6d963d*/
     }
-    v7 = v4[2];
-    v16 = v4[1];
-    v8 = v4[3];
-    v17 = v7;
-    result = v4[4];
-    v18 = v8;
-    v19 = result;
-    if ( v3 == 1 && v5 != 4 )
-      goto LABEL_17;
-    if ( v5 == 1 || v5 == 5 )
+    v7 = v4[2]; /*0x6d9644*/
+    v16 = v4[1]; /*0x6d9647*/
+    v8 = v4[3]; /*0x6d964b*/
+    v17 = v7; /*0x6d964e*/
+    result = v4[4]; /*0x6d9652*/
+    v18 = v8; /*0x6d9656*/
+    v19 = result; /*0x6d965a*/
+    if ( v3 == 1 && v5 != 4 ) /*0x6d9663*/
+      goto LABEL_17; /*0x6d9663*/
+    if ( v5 == 1 || v5 == 5 ) /*0x6d966d*/
     {
-      v9 = 1;
-      for ( i = 1; i < v3; ++i )
+      v9 = 1; /*0x6d9673*/
+      for ( i = 1; i < v3; ++i ) /*0x6d9675*/
       {
-        result = sub_6D5A40((float *)((char *)v4 + i * v14 + 4), (float *)&v16);
-        if ( (_BYTE)result )
-          v9 = 0;
-        if ( !v9 )
-          return result;
-        v3 = v15;
+        result = sub_6D5A40((float *)((char *)v4 + i * v14 + 4), (float *)&v16); /*0x6d9699*/
+        if ( (_BYTE)result ) /*0x6d96a0*/
+          v9 = 0; /*0x6d96a2*/
+        if ( !v9 ) /*0x6d96a9*/
+          return result; /*0x6d96a9*/
+        v3 = v15; /*0x6d9680*/
       }
 LABEL_17:
-      v11 = *(this + 7);
-      if ( v11 )
+      v11 = *(this + 7); /*0x6d96b7*/
+      if ( v11 ) /*0x6d96bc*/
       {
-        if ( !InterlockedDecrement((volatile LONG *)(v11 + 4)) )
-          (**(void (__thiscall ***)(int, int))v11)(v11, 1);
-        *(this + 7) = 0;
+        if ( !InterlockedDecrement((volatile LONG *)(v11 + 4)) ) /*0x6d96c2*/
+          (**(void (__thiscall ***)(int, int))v11)(v11, 1); /*0x6d96d8*/
+        *(this + 7) = 0; /*0x6d96da*/
       }
-      v12 = v17;
-      result = v18;
-      *(this + 3) = v16;
-      v13 = v19;
-      *(this + 4) = v12;
-      *(this + 5) = result;
-      *(this + 6) = v13;
+      v12 = v17; /*0x6d96e5*/
+      result = v18; /*0x6d96e9*/
+      *(this + 3) = v16; /*0x6d96ed*/
+      v13 = v19; /*0x6d96f0*/
+      *(this + 4) = v12; /*0x6d96f4*/
+      *(this + 5) = result; /*0x6d96f7*/
+      *(this + 6) = v13; /*0x6d96fa*/
     }
   }
-  return result;
+  return result; /*0x6d9639*/
 }

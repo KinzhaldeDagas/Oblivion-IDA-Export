@@ -1,40 +1,72 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_D3DMATERIAL9",
+  "definition": "struct _D3DMATERIAL9\n{\nD3DCOLORVALUE Diffuse;\nD3DCOLORVALUE Ambient;\nD3DCOLORVALUE Specular;\nD3DCOLORVALUE Emissive;\nfloat Power;\n}\n",
   "id": 18374686479672048992,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Diffuse",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "D3DCOLORVALUE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Ambient",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 16
+      "size": 16,
+      "type": "D3DCOLORVALUE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Specular",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 16
+      "size": 16,
+      "type": "D3DCOLORVALUE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Emissive",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 16
+      "size": 16,
+      "type": "D3DCOLORVALUE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Power",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "float"
     }
   ],
   "name": "_D3DMATERIAL9",
+  "ordinal": 9242,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 68
 }

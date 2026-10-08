@@ -1,19 +1,36 @@
 {
-  "callees_count": 77,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 43,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "ShadowSceneLight_Render???",
+  "chunks": [
+    [
+      "0x7D46C0",
+      "0x7D531A"
+    ],
+    [
+      "0x9CEB00",
+      "0x9CEB50"
+    ]
+  ],
+  "chunks_sha256": "7469320c0f606b07bfb4095ddefcdfacaf69f4d1574e8caba005de7f759deeb9",
+  "comment_regular": "Oblivion per-source shadow-map producer. Borrows and owns a pooled type-0x17 texture at +0x114, configures the perspective projector/camera and expanded clip planes at +0x150, clears and renders eligible caster geometry offscreen through mode-5 accumulator buckets, publishes view +0x50, projection +0x90, combined view-projection +0x10, invalidates clip-plane cache +0x214, and returns the map when no longer eligible.\n\nCULLING audit 2026-09-27 (observed Oblivion behavior): Focused shadow route: creates temporary base process at 0x7D4E43, sets shadow camera/frustum, writes ActivePlanes=0 at 0x7D4E7E, then calls 0x70C0B0 at 0x7D4E89. IMPORTANT: virtual Process subsequently calls SetFrustum and resets mask to 0x3F; pre-call zero alone does not establish a persistent no-frustum bypass. Uses separate camera/process/accumulator ownership.\n\nOblivion per-source shadow-map producer. Binds and clears the pooled R32F texture plus shared compatible depth/stencil, installs the full-map projector viewport, draws mode-5 caster buckets, captures matrices, and ends the target. The texture buffer uses its own level-0 D3D surface and requires no end-of-target copy or resolve.",
+  "comment_repeatable": "Oblivion per-source shadow-map producer. Binds and clears the pooled R32F texture plus shared compatible depth/stencil, installs the full-map projector viewport, draws mode-5 caster buckets, captures matrices, and ends the target. The texture buffer uses its own level-0 D3D surface and requires no end-of-target copy or resolve.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 88,
+  "display_name": "ShadowSceneLight_RenderPerSourceShadowMap",
   "end_ea": "0x7D531A",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "ShadowSceneLight_Render???",
+  "name": "ShadowSceneLight_RenderPerSourceShadowMap",
   "segment": ".text",
   "sha256": "c5f0306b1af3afdaeb5497ff30388db0b237b078b4149b7f0f893d57f993fb74",
   "size": 3162,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7D46C0",
+  "total_chunk_size": 3242,
   "type": "void __thiscall(int this, int)",
-  "xrefs_from_count": 905,
+  "xrefs_from_count": 1007,
   "xrefs_to_count": 1
 }

@@ -29,7 +29,7 @@
 0x430E55: push    0; lpThreadAttributes
 0x430E57: mov     [esi+20h], eax
 0x430E5A: call    ds:CreateThread
-0x430E60: mov     [esi+4], eax
+0x430E60: mov     [esi+4], eax; Creates the actual Win32 task thread; start routine is BSTaskThread_Runnable at 0x430DE0.
 0x430E63: pop     edi
 0x430E64: mov     eax, esi
 0x430E66: pop     esi

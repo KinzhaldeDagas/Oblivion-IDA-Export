@@ -1,18 +1,31 @@
 {
-  "callees_count": 52,
-  "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 7,
+  "chunks": [
+    [
+      "0x76C3B0",
+      "0x76C5AD"
+    ]
+  ],
+  "chunks_sha256": "ea79cf7460af68d9ce6df6fe57bc3f57447669ca5576051bde3639eb40b0253e",
+  "comment_regular": "DX10OBSE runtime log pass 2026-05-24: D3D9 texture formats 0x17 R5G6B5 and 0x1A A4R4G4B4 appeared as high-volume mirror failures on the active D3D10 runtime. Plugin now treats legacy packed color texture/surface mirrors as RGBA8 upload targets and expands D3D9 shadow data during UpdateSubresource instead of relying on B5/B4 DXGI formats.",
+  "comment_repeatable": "DX10OBSE runtime log pass 2026-05-24: D3D9 texture formats 0x17 R5G6B5 and 0x1A A4R4G4B4 appeared as high-volume mirror failures on the active D3D10 runtime. Plugin now treats legacy packed color texture/surface mirrors as RGBA8 upload targets and expands D3D9 shadow data during UpdateSubresource instead of relying on B5/B4 DXGI formats.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 57,
   "display_name": "D3DFMTToTextureFormat",
   "end_ea": "0x76C5AD",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "D3DFMTToTextureFormat",
   "segment": ".text",
   "sha256": "ea79cf7460af68d9ce6df6fe57bc3f57447669ca5576051bde3639eb40b0253e",
   "size": 509,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x76C3B0",
+  "total_chunk_size": 509,
   "type": "_DWORD *__cdecl(D3DFORMAT a1, NiSurfaceData *a2)",
   "xrefs_from_count": 221,
   "xrefs_to_count": 7

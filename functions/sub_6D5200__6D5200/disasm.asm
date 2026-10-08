@@ -5,4 +5,4 @@
 0x6D520B: fld1
 0x6D520D: fst     dword ptr [eax+40h]
 0x6D5210: fstp    dword ptr [eax+44h]
-0x6D5213: jmp     NiTimeController__SetTarget
+0x6D5213: jmp     NiTimeController__SetTarget; Retargets a controller while holding a temporary self-reference. Removes it from the previous NiObjectNET controller chain, assigns non-owning target +0x30, avoids duplicate insertion, then inserts into the new target's refcounted chain and propagates manager-controlled target state when applicable.

@@ -14,7 +14,7 @@
 0x69B064: call    eax
 0x69B066: test    eax, eax
 0x69B068: jz      MagicCaster_ApplyActiveMagicItem___CheckCasterNiNode??
-0x69B06E: mov     ecx, offset fMagicDefaultTouchDistance
+0x69B06E: mov     ecx, 0B37E68h
 0x69B073: call    GameSetting_GetSafeFloatPointer
 0x69B078: fld     dword ptr [eax]
 0x69B07A: mov     edx, [edi]
@@ -64,13 +64,13 @@
 0x69B0FA: mov     edx, [ebx]
 0x69B0FC: mov     eax, [edx+4]
 0x69B0FF: add     esp, 8
-0x69B102: push    0; a4
+0x69B102: push    0; useActorProjection
 0x69B104: fstp    [esp+4+arg_24]
 0x69B108: mov     ecx, ebx
 0x69B10A: call    eax
-0x69B10C: push    eax; a3
-0x69B10D: push    edi; a2
-0x69B10E: call    TESObjectREFR_GetDistanceBetween?
+0x69B10C: push    eax; to
+0x69B10D: push    edi; from
+0x69B10E: call    TESObjectREFR_GetSurfaceDistance; Three-argument cdecl routine: returns float surface distance from 'from' to 'to'. All 24 callers push exactly from, to, and useActorProjection then reclaim 0x0C. The prior EDI register argument, fourth stack byte, and double return were analysis pollution.
 0x69B113: fld     [esp+0Ch+arg_24]
 0x69B117: fcompp
 0x69B119: add     esp, 0Ch

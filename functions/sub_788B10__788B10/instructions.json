@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x788B10",
-    "line": "push    ebp",
+    "line": "push    ebp; Oblivion checked byte-vector erase-range: verifies both iterators belong to this vector, overlap-moves the suffix, updates end, and returns the resulting checked iterator.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x788B11",
-    "line": "mov     ebp, [esp+4+arg_4]",
+    "line": "mov     ebp, [esp+4+first.owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x788B1D",
-    "line": "cmp     ebp, [esp+0Ch+arg_C]",
+    "line": "cmp     ebp, [esp+0Ch+last.owner]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -61,13 +61,13 @@
   },
   {
     "ea": "0x788B28",
-    "line": "mov     esi, [esp+0Ch+Dst]",
+    "line": "mov     esi, [esp+0Ch+first.current]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x788B2C",
-    "line": "mov     ecx, [esp+0Ch+Src]",
+    "line": "mov     ecx, [esp+0Ch+last.current]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x788B51",
-    "line": "mov     eax, [esp+0Ch+arg_0]",
+    "line": "mov     eax, [esp+0Ch+result]",
     "mnemonic": "mov",
     "size": 4
   },

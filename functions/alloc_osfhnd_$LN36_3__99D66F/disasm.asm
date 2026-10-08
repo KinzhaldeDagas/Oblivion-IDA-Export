@@ -9,3 +9,17 @@
 0x99D686: call    ds:LeaveCriticalSection
 0x99D68C: add     esi, 28h ; '('
 0x99D68F: jmp     short loc_99D613
+0x99D6A0: cmp     dword ptr [ebp-24h], 0
+0x99D6A4: jnz     short loc_99D68C
+0x99D6A6: mov     byte ptr [esi+4], 1
+0x99D6AA: or      dword ptr [esi], 0FFFFFFFFh
+0x99D6AD: mov     eax, esi
+0x99D6AF: sub     eax, dword ptr unk_BAAAC0[edi*4]
+0x99D6B6: cdq
+0x99D6B7: push    28h ; '('
+0x99D6B9: pop     ecx
+0x99D6BA: idiv    ecx
+0x99D6BC: mov     ecx, edi
+0x99D6BE: shl     ecx, 5
+0x99D6C1: add     eax, ecx
+0x99D6C3: mov     [ebp-1Ch], eax

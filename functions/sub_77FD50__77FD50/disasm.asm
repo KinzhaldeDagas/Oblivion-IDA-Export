@@ -1,4 +1,4 @@
-0x77FD50: mov     edx, [esp+arg_0]
+0x77FD50: mov     edx, [esp+arg_0]; Apply NiWireframeProperty to DX9 render state. Property flag bit 0 selects D3DFILL_WIREFRAME versus D3DFILL_SOLID through D3DRS_FILLMODE.
 0x77FD54: movzx   edx, byte ptr [edx+18h]
 0x77FD58: mov     eax, [ecx]
 0x77FD5A: mov     eax, [eax+64h]

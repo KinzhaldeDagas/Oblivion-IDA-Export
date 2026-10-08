@@ -3,7 +3,7 @@
 0x774554: push    esi
 0x774555: mov     esi, [esp+10h+a3]
 0x774559: xor     ebp, ebp
-0x77455B: lea     ecx, [esi+7A4h]; void *
+0x77455B: lea     ecx, [esi+7A4h]; this
 0x774561: xor     eax, eax
 0x774563: cmp     [ecx+eax*4], ebp
 0x774566: jnz     short loc_77457B
@@ -17,7 +17,7 @@
 0x77457B: cmp     eax, 16h
 0x77457E: jnz     short loc_774595
 0x774580: push    offset aNidx9sourcecub; "NiDX9SourceCubeMapData::Create> No Cube"...
-0x774585: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x774585: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x77458A: add     esp, 4
 0x77458D: pop     esi
 0x77458E: xor     eax, eax

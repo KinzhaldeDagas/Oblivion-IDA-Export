@@ -1,5 +1,5 @@
 // attributes: thunk
-void __thiscall sub_6B80C0(unsigned int **this)
+void __thiscall j_TESResponseList::Clear(TESResponseListView *this)
 {
-  sub_5308E0(this);
+  TESResponseList::Clear(this); /*0x6b80c0*/
 }

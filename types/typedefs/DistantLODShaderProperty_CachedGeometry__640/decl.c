@@ -1,1 +1,1 @@
-DistantLODShaderProperty::CachedGeometry
+struct DistantLODShaderProperty::CachedGeometry;

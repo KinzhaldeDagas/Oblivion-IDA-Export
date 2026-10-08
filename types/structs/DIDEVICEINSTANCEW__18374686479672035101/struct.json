@@ -1,64 +1,108 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "DIDEVICEINSTANCEW",
+  "definition": "struct DIDEVICEINSTANCEW\n{\nDWORD dwSize;\nGUID guidInstance;\nGUID guidProduct;\nDWORD dwDevType;\nWCHAR tszInstanceName[260];\nWCHAR tszProductName[260];\nGUID guidFFDriver;\nWORD wUsagePage;\nWORD wUsage;\n}\n",
   "id": 18374686479672035101,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwSize",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "guidInstance",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 16
+      "size": 16,
+      "type": "GUID"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "guidProduct",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 16
+      "size": 16,
+      "type": "GUID"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwDevType",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "tszInstanceName",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 520
+      "size": 520,
+      "type": "WCHAR[260]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "tszProductName",
       "offset": 560,
       "offset_hex": "0x230",
-      "size": 520
+      "size": 520,
+      "type": "WCHAR[260]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "guidFFDriver",
       "offset": 1080,
       "offset_hex": "0x438",
-      "size": 16
+      "size": 16,
+      "type": "GUID"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "wUsagePage",
       "offset": 1096,
       "offset_hex": "0x448",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "wUsage",
       "offset": 1098,
-      "offset_hex": "0x44a",
-      "size": 2
+      "offset_hex": "0x44A",
+      "size": 2,
+      "type": "WORD"
     }
   ],
   "name": "DIDEVICEINSTANCEW",
+  "ordinal": 4027,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 1100
 }

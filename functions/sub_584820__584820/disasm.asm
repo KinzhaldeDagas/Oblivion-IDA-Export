@@ -5,9 +5,9 @@
 0x584829: fld     dword ptr ds:0A379B4h
 0x58482F: push    ecx
 0x584830: mov     ecx, [esi+4]; this
-0x584833: fstp    [esp+8+a2]; a3
-0x584836: push    0FA1h; a2
-0x58483B: call    Tile_SetFloat
+0x584833: fstp    [esp+8+a2]; value
+0x584836: push    0FA1h; propertyCode
+0x58483B: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x584840: fldz
 0x584842: mov     eax, [esi+4]
 0x584845: mov     eax, [eax+24h]
@@ -22,9 +22,9 @@
 0x58485E: add     esp, 8
 0x584861: mov     ecx, eax
 0x584863: call    sub_57EA20
-0x584868: push    esi
+0x584868: push    esi; index
 0x584869: mov     dword ptr [esi+24h], 1
-0x584870: call    sub_583CF0
+0x584870: call    InterfaceManager__ClearTimer; Verified: finds timer by opaque owner/index pointer, unlinks and frees only the timer node. Used by NewTimer and fade cancellation.
 0x584875: add     esp, 4
 0x584878: pop     esi
 0x584879: retn

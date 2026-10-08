@@ -1,4 +1,4 @@
-0x41617B: mov     eax, [ebx+60h]
+0x41617B: mov     eax, [ebx+60h]; Verified (Oblivion): EffectSetting load reads a 0x40-byte data block into EffectSetting+0x58, which includes the effectShader FormID at +0x78. EffectSetting_LinkForm later resolves that slot to a TESEffectShader*.
 0x41617E: mov     edi, [ebx+58h]
 0x416181: lea     esi, [ebx+58h]
 0x416184: mov     [ebp-0Ch], eax
@@ -15,4 +15,4 @@
 0x4161A1: add     esp, 0Ch
 0x4161A4: push    40h ; '@'; a4
 0x4161A6: push    esi; Dst
-0x4161A7: call    TESFile_GetChunkData
+0x4161A7: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.

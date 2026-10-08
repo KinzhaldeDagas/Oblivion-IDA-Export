@@ -33,26 +33,26 @@
 0x43CB3C: jnz     short loc_43CB82
 0x43CB3E: mov     ecx, [esi+20h]; this
 0x43CB41: push    0; a2
-0x43CB43: call    TESObjectREFR_GetParentCell
-0x43CB48: mov     ecx, TES
+0x43CB43: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x43CB48: mov     ecx, ds:0B333A0h
 0x43CB4E: push    eax; a1
 0x43CB4F: call    TESObjectCELL_IsProcessLevel?LowHigh
 0x43CB54: test    al, al
 0x43CB56: jz      short loc_43CB82
 0x43CB58: mov     ecx, [esi+20h]
 0x43CB5B: push    ecx
-0x43CB5C: mov     ecx, TES
+0x43CB5C: mov     ecx, ds:0B333A0h
 0x43CB62: call    sub_441E90
 0x43CB67: test    al, al
 0x43CB69: jz      short loc_43CB82
 0x43CB6B: mov     edx, [esi+20h]
 0x43CB6E: cmp     dword ptr [edx+3Ch], 0
 0x43CB72: jnz     short loc_43CB82
-0x43CB74: mov     ecx, ModelLoaderPtr
+0x43CB74: mov     ecx, ds:0B33A1Ch
 0x43CB7A: push    esi
 0x43CB7B: call    sub_43C530
 0x43CB80: pop     esi
 0x43CB81: retn
 0x43CB82: mov     ecx, esi
 0x43CB84: pop     esi
-0x43CB85: jmp     sub_4BD750
+0x43CB85: jmp     DistantLODLoaderTask_SubmitToIOManager; Verified submission callback (+0x08 vtable): retains the DistantLODLoaderTask and inserts it into IOManager.taskQueue via sub_43A5F0.

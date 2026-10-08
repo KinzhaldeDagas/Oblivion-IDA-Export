@@ -1,5 +1,5 @@
 // attributes: thunk
-NiRenderTargetGroup *__thiscall sub_73D800(NiRenderTargetGroup *this, int *a2)
+void __thiscall j_OB_NiNode_ProcessClone(NiRenderTargetGroup *this, void *cloningProcess)
 {
-  return sub_70BA00(this, a2);
+  OB_NiNode_ProcessClone(this, cloningProcess); /*0x73d800*/
 }

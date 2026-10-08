@@ -1,1 +1,9 @@
-_WINE_ACMNOTIFYWND
+struct _WINE_ACMNOTIFYWND
+{
+WINE_ACMOBJ obj;
+HWND hNotifyWnd;
+DWORD dwNotifyMsg;
+DWORD fdwSupport;
+PWINE_ACMNOTIFYWND pNextACMNotifyWnd;
+PWINE_ACMNOTIFYWND pPrevACMNotifyWnd;
+};

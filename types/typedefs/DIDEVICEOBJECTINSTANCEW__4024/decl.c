@@ -1,1 +1,18 @@
-DIDEVICEOBJECTINSTANCEW
+struct DIDEVICEOBJECTINSTANCEW
+{
+DWORD dwSize;
+GUID guidType;
+DWORD dwOfs;
+DWORD dwType;
+DWORD dwFlags;
+WCHAR tszName[260];
+DWORD dwFFMaxForce;
+DWORD dwFFForceResolution;
+WORD wCollectionNumber;
+WORD wDesignatorIndex;
+WORD wUsagePage;
+WORD wUsage;
+DWORD dwDimension;
+WORD wExponent;
+WORD wReserved;
+};

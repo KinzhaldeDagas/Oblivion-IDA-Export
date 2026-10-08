@@ -4,37 +4,37 @@ LONG __thiscall sub_4BE330(void *this, __int16 a2, __int16 a3)
   unsigned int i; // ebp
   unsigned int j; // edi
   int v7; // eax
-  int (__thiscall *v8)(void *, int, volatile LONG **); // edx
+  int (__thiscall *v8)(void *, int, IOTask **); // edx
   LONG result; // eax
-  volatile LONG *v10; // ebx
-  volatile LONG *v11; // [esp+14h] [ebp-10h] BYREF
+  IOTask *v10; // ebx
+  IOTask *task; // [esp+14h] [ebp-10h] BYREF
   unsigned int v12; // [esp+20h] [ebp-4h]
 
-  v4 = uGridsToLoad;
-  for ( i = 0; i < v4; ++i )
+  v4 = uGridsToLoad; /*0x4be357*/
+  for ( i = 0; i < v4; ++i ) /*0x4be35f*/
   {
-    for ( j = 0; j < v4; ++j )
+    for ( j = 0; j < v4; ++j ) /*0x4be369*/
     {
-      v7 = sub_4EF1D0(a2 + i - (v4 >> 1), a3 + j - (v4 >> 1));
-      v11 = 0;
-      v8 = *(int (__thiscall **)(void *, int, volatile LONG **))(*(_DWORD *)this + 4);
-      v12 = 0;
-      result = v8(this, v7, &v11);
-      if ( (_BYTE)result )
-        sub_432130(v11);
-      v10 = v11;
-      v12 = 0xFFFFFFFF;
-      if ( v11 )
+      v7 = TESObjectCELL_PackExteriorGroupLabel(a2 + i - (v4 >> 1), a3 + j - (v4 >> 1)); /*0x4be38c*/
+      task = 0; /*0x4be394*/
+      v8 = *(int (__thiscall **)(void *, int, IOTask **))(*(_DWORD *)this + 4); /*0x4be39a*/
+      v12 = 0; /*0x4be3a5*/
+      result = v8(this, v7, &task); /*0x4be3a9*/
+      if ( (_BYTE)result ) /*0x4be3ad*/
+        IOTask_Cancel(task); /*0x4be3ba*/
+      v10 = task; /*0x4be3bf*/
+      v12 = 0xFFFFFFFF; /*0x4be3c5*/
+      if ( task ) /*0x4be3cd*/
       {
-        result = InterlockedDecrement(v11 + 2);
-        if ( !result )
+        result = InterlockedDecrement((volatile LONG *)&task->members.unk08); /*0x4be3d3*/
+        if ( !result ) /*0x4be3db*/
         {
-          if ( v10 )
-            result = (**(int (__thiscall ***)(volatile LONG *, int))v10)(v10, 1);
+          if ( v10 ) /*0x4be3df*/
+            result = (*(int (__thiscall **)(IOTask *, int))v10->vtbl)(v10, 1); /*0x4be3e9*/
         }
       }
-      v4 = uGridsToLoad;
+      v4 = uGridsToLoad; /*0x4be3eb*/
     }
   }
-  return result;
+  return result; /*0x4be403*/
 }

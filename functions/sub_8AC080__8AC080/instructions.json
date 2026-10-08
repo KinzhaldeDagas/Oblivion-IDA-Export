@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8AC080",
-    "line": "mov     eax, ecx",
+    "line": "mov     eax, ecx; Writes low-level Havok object position via 0x8ABAC0 with wrapper vertical/shape adjustment from +0x58/+0x5C.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x8AC098",
-    "line": "call    sub_8ABAC0",
+    "line": "call    sub_8ABAC0; Low-level position writer: stores target at object+0xA0 and updates Havok transform when shape data exists.",
     "mnemonic": "call",
     "size": 5
   },

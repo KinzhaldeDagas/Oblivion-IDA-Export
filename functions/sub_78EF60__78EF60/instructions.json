@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x78EF60",
-    "line": "sub     esp, 50h",
+    "line": "sub     esp, 50h; stRotTransform RotateYZ-style helper. Builds Y/Z rotation matrix from two degree angles and post-multiplies the 3x3 transform in-place.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x78EFD3",
-    "line": "push    edi",
+    "line": "push    edi; rhs",
     "mnemonic": "push",
     "size": 1
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x78EFD8",
-    "line": "lea     eax, [esp+5Ch+var_24]",
+    "line": "lea     eax, [esp+5Ch+outTransform]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x78EFE0",
-    "line": "push    eax",
+    "line": "push    eax; outTransform",
     "mnemonic": "push",
     "size": 1
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x78EFE3",
-    "line": "lea     ecx, [esp+60h+var_48]",
+    "line": "lea     ecx, [esp+60h+var_48]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x78EFF1",
-    "line": "fstp    [esp+60h+var_48]",
+    "line": "fstp    [esp+60h+var_48.m]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x78EFFD",
-    "line": "fstp    [esp+60h+var_44]",
+    "line": "fstp    [esp+60h+var_48.m+4]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x78F009",
-    "line": "fstp    [esp+60h+var_40]",
+    "line": "fstp    [esp+60h+var_48.m+8]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x78F011",
-    "line": "fstp    [esp+60h+var_3C]",
+    "line": "fstp    [esp+60h+var_48.m+0Ch]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x78F017",
-    "line": "fst     [esp+60h+var_38]",
+    "line": "fst     [esp+60h+var_48.m+10h]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x78F01D",
-    "line": "fstp    [esp+60h+var_34]",
+    "line": "fstp    [esp+60h+var_48.m+14h]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x78F023",
-    "line": "fstp    [esp+60h+var_30]",
+    "line": "fstp    [esp+60h+var_48.m+18h]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -361,19 +361,19 @@
   },
   {
     "ea": "0x78F02B",
-    "line": "fstp    [esp+60h+var_2C]",
+    "line": "fstp    [esp+60h+var_48.m+1Ch]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x78F02F",
-    "line": "fstp    [esp+60h+var_28]",
+    "line": "fstp    [esp+60h+var_48.m+20h]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x78F033",
-    "line": "call    sub_78EDD0",
+    "line": "call    OB_stRotTransform_MultiplyCopy_010201A0; Oblivion stRotTransform 3x3 multiply (C++ operator* with an explicit hidden result pointer). Computes this*rhs into the supplied 0x24-byte output transform.",
     "mnemonic": "call",
     "size": 5
   },

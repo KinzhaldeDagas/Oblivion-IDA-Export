@@ -1,4 +1,4 @@
-0x728B20: push    esi
+0x728B20: push    esi; Corrected audit: if locked, checks additional-data virtual predicate +0x4C; calls sub_7261D0(additional,0) only when saved lock-mode byte +0x3D is ZERO, then clears locked byte +0x3C. Earlier description as committing a write lock was unsupported/opposite to this branch. Exact additional-data operation remains unresolved.
 0x728B21: mov     esi, ecx
 0x728B23: cmp     byte ptr [esi+3Ch], 0
 0x728B27: jz      short loc_728B52

@@ -1,19 +1,19 @@
 [
   {
     "ea": "0x45BB00",
-    "line": "push    ecx",
+    "line": "push    ecx; EnginePatch v2: byte-checked save-file read wrapper. Short reads are zero-filled before callers parse destination buffers.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45BB01",
-    "line": "mov     ecx, [esp+4+arg_8]",
+    "line": "mov     ecx, [esp+4+byteCount]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x45BB05",
-    "line": "mov     edx, [esp+4+arg_4]",
+    "line": "mov     edx, [esp+4+destination]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x45BB10",
-    "line": "mov     eax, [esp+0Ch+arg_0]",
+    "line": "mov     eax, [esp+0Ch+stream]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x45BB17",
-    "line": "mov     eax, [eax+4]",
+    "line": "mov     eax, [eax+4]; EngineIssues review: save-file read wrapper returns short-read count; audit callers for parsing destination buffers without zero-fill or byte-count validation.",
     "mnemonic": "mov",
     "size": 3
   },

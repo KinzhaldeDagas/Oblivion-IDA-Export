@@ -1,4 +1,4 @@
-0x4590E0: mov     eax, [esp+arg_0]
+0x4590E0: mov     eax, [esp+arg_0]; MEF v27 verification: same raw blob consumed-length contract as sub_458E50 for SaveLoad+0x5C map; guarded skips must advance/discard payload.
 0x4590E4: push    ebx
 0x4590E5: push    ebp
 0x4590E6: mov     ebp, [eax+0Ch]
@@ -17,11 +17,11 @@
 0x45910B: mov     ax, [esp+10h+arg_4]
 0x459110: mov     [ebx], ax
 0x459113: mov     ecx, [esi+14h]
-0x459116: push    edi; Size
-0x459117: push    ecx; Src
+0x459116: push    edi; byteCount
+0x459117: push    ecx; source
 0x459118: lea     edx, [ebx+2]
-0x45911B: push    edx; Dst
-0x45911C: call    _memcpy
+0x45911B: push    edx; destination
+0x45911C: call    _memcpy; MEF decode note: raw save-buffer memcpy into SaveLoad map +0x5C using caller UInt16 length. Candidate for future bounded copy/skip once active save-record remaining bytes are tracked.
 0x459121: mov     ecx, [esp+1Ch+arg_0]; this
 0x459125: add     [esi+14h], edi
 0x459128: add     esp, 0Ch

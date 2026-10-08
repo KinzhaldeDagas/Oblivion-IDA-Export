@@ -1,0 +1,105 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "TESRegionDataManagerVtable",
+  "definition": "struct TESRegionDataManagerVtable\n{\nvoid *unknown00; ///< Unknown slot0, raw target shared with TESHealthForm_GetHealth; no class-specific role established.\nvoid *constructRegionData; ///< Verified factory: Oblivion switch cases 3..7 construct Weather/Map/Landscape/Grass/Sound data.\nvoid *filterDataID2; ///< Verified candidate filter checks derived GetID()==2; Fallout calls this Objects data, but Oblivion factory for ID2 is not observed.\nvoid *filterDataID3; ///< Verified filter for RegionData ID3; constructor RTTI identifies TESRegionDataWeather.\nvoid *filterDataID4; ///< Verified filter for ID4; constructor RTTI identifies TESRegionDataMap.\nvoid *filterDataID5; ///< Verified filter for ID5; constructor RTTI identifies TESRegionDataLandscape.\nvoid *filterDataID6; ///< Verified filter for ID6; constructor RTTI identifies TESRegionDataGrass.\nvoid *filterDataID7; ///< Verified filter for ID7; constructor RTTI identifies TESRegionDataSound.\nvoid *loadRegionDataRecord; ///< Verified region data chunk loader, attached to TESRegionDataManager vtable slot +0x20.\n}\n",
+  "kind": "struct",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Unknown slot0, raw target shared with TESHealthForm_GetHealth; no class-specific role established.",
+      "name": "unknown00",
+      "offset_bits": 0,
+      "offset_bytes": 0,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified factory: Oblivion switch cases 3..7 construct Weather/Map/Landscape/Grass/Sound data.",
+      "name": "constructRegionData",
+      "offset_bits": 32,
+      "offset_bytes": 4,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified candidate filter checks derived GetID()==2; Fallout calls this Objects data, but Oblivion factory for ID2 is not observed.",
+      "name": "filterDataID2",
+      "offset_bits": 64,
+      "offset_bytes": 8,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified filter for RegionData ID3; constructor RTTI identifies TESRegionDataWeather.",
+      "name": "filterDataID3",
+      "offset_bits": 96,
+      "offset_bytes": 12,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified filter for ID4; constructor RTTI identifies TESRegionDataMap.",
+      "name": "filterDataID4",
+      "offset_bits": 128,
+      "offset_bytes": 16,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified filter for ID5; constructor RTTI identifies TESRegionDataLandscape.",
+      "name": "filterDataID5",
+      "offset_bits": 160,
+      "offset_bytes": 20,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified filter for ID6; constructor RTTI identifies TESRegionDataGrass.",
+      "name": "filterDataID6",
+      "offset_bits": 192,
+      "offset_bytes": 24,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified filter for ID7; constructor RTTI identifies TESRegionDataSound.",
+      "name": "filterDataID7",
+      "offset_bits": 224,
+      "offset_bytes": 28,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified region data chunk loader, attached to TESRegionDataManager vtable slot +0x20.",
+      "name": "loadRegionDataRecord",
+      "offset_bits": 256,
+      "offset_bytes": 32,
+      "size_bits": 32,
+      "type": "void *"
+    }
+  ],
+  "name": "TESRegionDataManagerVtable",
+  "ordinal": 10024,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 36
+}

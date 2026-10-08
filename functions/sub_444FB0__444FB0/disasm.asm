@@ -10,7 +10,7 @@
 0x444FC0: mov     eax, [esi+7Ch]
 0x444FC3: mov     edi, [eax+4]
 0x444FC6: push    eax
-0x444FC7: call    FormHeapFree
+0x444FC7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x444FCC: add     esp, 4
 0x444FCF: test    edi, edi
 0x444FD1: mov     [esi+7Ch], edi
@@ -128,7 +128,6 @@
 0x445155: mov     [esp+20h+arg_4], eax
 0x445159: jg      short loc_445185
 0x44515B: jmp     short loc_445160
-0x44515D: align 10h
 0x445160: mov     eax, [esi+2Ch]
 0x445163: mov     ecx, [esp+20h+arg_4]
 0x445167: mov     edx, [esi+74h]
@@ -297,7 +296,7 @@
 0x44536B: jz      short loc_445376
 0x44536D: push    0; a2
 0x44536F: mov     ecx, esi; this
-0x445371: call    sub_43FC20
+0x445371: call    sub_43FC20; TES cleanup/streaming critical-section path; calls SpeedTree cache prune 0x55E390(1) before and after heap/cell cleanup.
 0x445376: mov     eax, ds:0B33398h
 0x44537B: mov     dword ptr [eax+18h], 0
 0x445382: cmp     dword ptr [esi+74h], 0
@@ -367,7 +366,7 @@
 0x445452: mov     edx, [ecx]
 0x445454: mov     eax, [edx+10h]
 0x445457: push    ebp
-0x445458: push    edi
+0x445458: push    edi; a3
 0x445459: call    eax
 0x44545B: cmp     [esp+20h+var_D], 0
 0x445460: jnz     short loc_445474
@@ -416,25 +415,25 @@
 0x4454E6: call    sub_665260
 0x4454EB: push    0; a2
 0x4454ED: mov     ecx, esi; this
-0x4454EF: call    sub_43FC20
+0x4454EF: call    sub_43FC20; TES cleanup/streaming critical-section path; calls SpeedTree cache prune 0x55E390(1) before and after heap/cell cleanup.
 0x4454F4: mov     ecx, esi
 0x4454F6: call    sub_440200
 0x4454FB: cmp     dword ptr [esi+34h], 0
 0x4454FF: jnz     short loc_445506
-0x445501: call    sub_499E40
+0x445501: call    sub_499E40; Pass205: Water-related callsite included in pass-data producer verification; cross-check before naming high-level field semantics.
 0x445506: mov     ecx, ds:0B33B00h
 0x44550C: call    sub_45A500
 0x445511: test    al, al
 0x445513: jnz     short loc_44551D
 0x445515: mov     ecx, [esi+54h]
-0x445518: call    WaterSurfaceLoop
+0x445518: call    WaterSurfaceLoop; Pass202/205: WaterSurfaceLoop. Native producer for persistent water height/depth target and updater of WaterShaderProperty pass-data fields for water grid cells.
 0x44551D: call    sub_537D40
 0x445522: mov     ecx, ds:0B333C4h
 0x445528: mov     eax, [ecx]
 0x44552A: mov     edx, [eax+174h]
 0x445530: call    edx
 0x445532: mov     edx, [eax]
-0x445534: push    0
+0x445534: push    0; a4
 0x445536: sub     esp, 0Ch
 0x445539: mov     ecx, esp
 0x44553B: mov     [ecx], edx
@@ -442,7 +441,7 @@
 0x445540: mov     eax, [eax+8]
 0x445543: mov     [ecx+4], edx
 0x445546: mov     [ecx+8], eax
-0x445549: call    sub_4EA6E0
+0x445549: call    DistantLOD_UpdateLandLODAtPosition; Verified position-triggered LandLOD refresh wrapper: resolves current WorldSpace, climbs parentWorldspace to the root, obtains root terrainLODQuadRoots via TESWorldSpace_GetRootTerrainLODQuadMap, and delegates to DistantLOD_UpdateLandLODMap.
 0x44554E: mov     ecx, ds:0B33A10h
 0x445554: add     esp, 10h
 0x445557: call    sub_432890

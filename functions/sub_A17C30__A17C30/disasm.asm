@@ -1,5 +1,5 @@
 0xA17C30: push    esi
-0xA17C31: mov     esi, dword_B33A24
+0xA17C31: mov     esi, dword ptr unk_B33A24
 0xA17C37: test    esi, esi
 0xA17C39: jz      short loc_A17C57
 0xA17C3B: lea     eax, [esi+8]

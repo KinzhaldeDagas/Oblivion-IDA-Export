@@ -61,11 +61,11 @@
 0x5C1E87: push    ebx
 0x5C1E88: call    sub_5C1100
 0x5C1E8D: shl     eax, 4
-0x5C1E90: mov     esi, ds:dword_B3B44C[eax]
+0x5C1E90: mov     esi, dword ptr ds:unk_B3B44C[eax]
 0x5C1E96: call    sub_5C1100
 0x5C1E9B: shl     eax, 4
 0x5C1E9E: test    esi, esi
-0x5C1EA0: mov     ebx, ds:dword_B3B444[eax]
+0x5C1EA0: mov     ebx, dword ptr ds:unk_B3B444[eax]
 0x5C1EA6: jbe     short loc_5C1F26
 0x5C1EA8: mov     [esp+10h+arg_0], esi
 0x5C1EAC: push    edi
@@ -78,7 +78,7 @@
 0x5C1EBE: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x5C1EC3: push    0; int
 0x5C1EC5: push    eax; void *
-0x5C1EC6: mov     [esp+28h+var_4], eax
+0x5C1EC6: mov     [esp+28h+data], eax
 0x5C1ECA: call    OblivionDynamicCast
 0x5C1ECF: mov     edi, eax
 0x5C1ED1: add     esp, 14h
@@ -98,13 +98,13 @@
 0x5C1EF3: call    TESBipedModelForm_CoversSlot
 0x5C1EF8: test    al, al
 0x5C1EFA: jz      short loc_5C1F16
-0x5C1EFC: lea     eax, [esp+14h+var_4]
-0x5C1F00: push    eax
+0x5C1EFC: lea     eax, [esp+14h+data]
+0x5C1F00: push    eax; data
 0x5C1F01: call    sub_5C1100
 0x5C1F06: mov     ecx, eax
 0x5C1F08: shl     ecx, 4
-0x5C1F0B: add     ecx, offset quickKeyList_ptr
-0x5C1F11: call    sub_776690
+0x5C1F0B: add     ecx, 0B3B440h; list
+0x5C1F11: call    NiTPointerList_RemoveByData; [Verified] Generic NiTPointerList remove-by-data helper. Scans node payloads for the supplied pointer, then delegates removal of the matching node to NiTPointerList_RemoveNode. The decal-list path calls it with the DECAL_DATA* payload address.
 0x5C1F16: add     esi, 1
 0x5C1F19: cmp     esi, 10h
 0x5C1F1C: jl      short loc_5C1EE0

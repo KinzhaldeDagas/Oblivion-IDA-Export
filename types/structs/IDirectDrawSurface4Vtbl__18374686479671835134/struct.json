@@ -1,280 +1,432 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "IDirectDrawSurface4Vtbl",
+  "definition": "struct IDirectDrawSurface4Vtbl\n{\nHRESULT (__stdcall *QueryInterface)(IDirectDrawSurface4 *This, const IID *const riid, LPVOID *ppvObj) __offset(OFF64|AUTO);\nULONG (__stdcall *AddRef)(IDirectDrawSurface4 *This) __offset(OFF64|AUTO);\nULONG (__stdcall *Release)(IDirectDrawSurface4 *This) __offset(OFF64|AUTO);\nHRESULT (__stdcall *AddAttachedSurface)(IDirectDrawSurface4 *This, LPDIRECTDRAWSURFACE4) __offset(OFF64|AUTO);\nHRESULT (__stdcall *AddOverlayDirtyRect)(IDirectDrawSurface4 *This, LPRECT) __offset(OFF64|AUTO);\nHRESULT (__stdcall *Blt)(IDirectDrawSurface4 *This, LPRECT, LPDIRECTDRAWSURFACE4, LPRECT, DWORD, LPDDBLTFX) __offset(OFF64|AUTO);\nHRESULT (__stdcall *BltBatch)(IDirectDrawSurface4 *This, LPDDBLTBATCH, DWORD, DWORD) __offset(OFF64|AUTO);\nHRESULT (__stdcall *BltFast)(IDirectDrawSurface4 *This, DWORD, DWORD, LPDIRECTDRAWSURFACE4, LPRECT, DWORD) __offset(OFF64|AUTO);\nHRESULT (__stdcall *DeleteAttachedSurface)(IDirectDrawSurface4 *This, DWORD, LPDIRECTDRAWSURFACE4) __offset(OFF64|AUTO);\nHRESULT (__stdcall *EnumAttachedSurfaces)(IDirectDrawSurface4 *This, LPVOID, LPDDENUMSURFACESCALLBACK2) __offset(OFF64|AUTO);\nHRESULT (__stdcall *EnumOverlayZOrders)(IDirectDrawSurface4 *This, DWORD, LPVOID, LPDDENUMSURFACESCALLBACK2) __offset(OFF64|AUTO);\nHRESULT (__stdcall *Flip)(IDirectDrawSurface4 *This, LPDIRECTDRAWSURFACE4, DWORD) __offset(OFF64|AUTO);\nHRESULT (__stdcall *GetAttachedSurface)(IDirectDrawSurface4 *This, LPDDSCAPS2, LPDIRECTDRAWSURFACE4 *) __offset(OFF64|AUTO);\nHRESULT (__stdcall *GetBltStatus)(IDirectDrawSurface4 *This, DWORD) __offset(OFF64|AUTO);\nHRESULT (__stdcall *GetCaps)(IDirectDrawSurface4 *This, LPDDSCAPS2) __offset(OFF64|AUTO);\nHRESULT (__stdcall *GetClipper)(IDirectDrawSurface4 *This, LPDIRECTDRAWCLIPPER *) __offset(OFF64|AUTO);\nHRESULT (__stdcall *GetColorKey)(IDirectDrawSurface4 *This, DWORD, LPDDCOLORKEY) __offset(OFF64|AUTO);\nHRESULT (__stdcall *GetDC)(IDirectDrawSurface4 *This, HDC *) __offset(OFF64|AUTO);\nHRESULT (__stdcall *GetFlipStatus)(IDirectDrawSurface4 *This, DWORD) __offset(OFF64|AUTO);\nHRESULT (__stdcall *GetOverlayPosition)(IDirectDrawSurface4 *This, LPLONG, LPLONG) __offset(OFF64|AUTO);\nHRESULT (__stdcall *GetPalette)(IDirectDrawSurface4 *This, LPDIRECTDRAWPALETTE *) __offset(OFF64|AUTO);\nHRESULT (__stdcall *GetPixelFormat)(IDirectDrawSurface4 *This, LPDDPIXELFORMAT) __offset(OFF64|AUTO);\nHRESULT (__stdcall *GetSurfaceDesc)(IDirectDrawSurface4 *This, LPDDSURFACEDESC2) __offset(OFF64|AUTO);\nHRESULT (__stdcall *Initialize)(IDirectDrawSurface4 *This, LPDIRECTDRAW, LPDDSURFACEDESC2) __offset(OFF64|AUTO);\nHRESULT (__stdcall *IsLost)(IDirectDrawSurface4 *This) __offset(OFF64|AUTO);\nHRESULT (__stdcall *Lock)(IDirectDrawSurface4 *This, LPRECT, LPDDSURFACEDESC2, DWORD, HANDLE) __offset(OFF64|AUTO);\nHRESULT (__stdcall *ReleaseDC)(IDirectDrawSurface4 *This, HDC) __offset(OFF64|AUTO);\nHRESULT (__stdcall *Restore)(IDirectDrawSurface4 *This) __offset(OFF64|AUTO);\nHRESULT (__stdcall *SetClipper)(IDirectDrawSurface4 *This, LPDIRECTDRAWCLIPPER) __offset(OFF64|AUTO);\nHRESULT (__stdcall *SetColorKey)(IDirectDrawSurface4 *This, DWORD, LPDDCOLORKEY) __offset(OFF64|AUTO);\nHRESULT (__stdcall *SetOverlayPosition)(IDirectDrawSurface4 *This, LONG, LONG) __offset(OFF64|AUTO);\nHRESULT (__stdcall *SetPalette)(IDirectDrawSurface4 *This, LPDIRECTDRAWPALETTE) __offset(OFF64|AUTO);\nHRESULT (__stdcall *Unlock)(IDirectDrawSurface4 *This, LPRECT) __offset(OFF64|AUTO);\nHRESULT (__stdcall *UpdateOverlay)(IDirectDrawSurface4 *This, LPRECT, LPDIRECTDRAWSURFACE4, LPRECT, DWORD, LPDDOVERLAYFX) __offset(OFF64|AUTO);\nHRESULT (__stdcall *UpdateOverlayDisplay)(IDirectDrawSurface4 *This, DWORD) __offset(OFF64|AUTO);\nHRESULT (__stdcall *UpdateOverlayZOrder)(IDirectDrawSurface4 *This, DWORD, LPDIRECTDRAWSURFACE4) __offset(OFF64|AUTO);\nHRESULT (__stdcall *GetDDInterface)(IDirectDrawSurface4 *This, LPVOID *) __offset(OFF64|AUTO);\nHRESULT (__stdcall *PageLock)(IDirectDrawSurface4 *This, DWORD) __offset(OFF64|AUTO);\nHRESULT (__stdcall *PageUnlock)(IDirectDrawSurface4 *This, DWORD) __offset(OFF64|AUTO);\nHRESULT (__stdcall *SetSurfaceDesc)(IDirectDrawSurface4 *This, LPDDSURFACEDESC2, DWORD) __offset(OFF64|AUTO);\nHRESULT (__stdcall *SetPrivateData)(IDirectDrawSurface4 *This, const GUID *const, LPVOID, DWORD, DWORD) __offset(OFF64|AUTO);\nHRESULT (__stdcall *GetPrivateData)(IDirectDrawSurface4 *This, const GUID *const, LPVOID, LPDWORD) __offset(OFF64|AUTO);\nHRESULT (__stdcall *FreePrivateData)(IDirectDrawSurface4 *This, const GUID *const) __offset(OFF64|AUTO);\nHRESULT (__stdcall *GetUniquenessValue)(IDirectDrawSurface4 *This, LPDWORD) __offset(OFF64|AUTO);\nHRESULT (__stdcall *ChangeUniquenessValue)(IDirectDrawSurface4 *This) __offset(OFF64|AUTO);\n}\n",
   "id": 18374686479671835134,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QueryInterface",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, const IID *const riid, LPVOID *ppvObj)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddRef",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (__stdcall *)(IDirectDrawSurface4 *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Release",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (__stdcall *)(IDirectDrawSurface4 *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddAttachedSurface",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, LPDIRECTDRAWSURFACE4)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddOverlayDirtyRect",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, LPRECT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Blt",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, LPRECT, LPDIRECTDRAWSURFACE4, LPRECT, DWORD, LPDDBLTFX)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "BltBatch",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, LPDDBLTBATCH, DWORD, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "BltFast",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, DWORD, DWORD, LPDIRECTDRAWSURFACE4, LPRECT, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DeleteAttachedSurface",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, DWORD, LPDIRECTDRAWSURFACE4)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "EnumAttachedSurfaces",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, LPVOID, LPDDENUMSURFACESCALLBACK2)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "EnumOverlayZOrders",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, DWORD, LPVOID, LPDDENUMSURFACESCALLBACK2)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Flip",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, LPDIRECTDRAWSURFACE4, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetAttachedSurface",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, LPDDSCAPS2, LPDIRECTDRAWSURFACE4 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetBltStatus",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetCaps",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, LPDDSCAPS2)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetClipper",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, LPDIRECTDRAWCLIPPER *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetColorKey",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, DWORD, LPDDCOLORKEY)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetDC",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, HDC *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetFlipStatus",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetOverlayPosition",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 4
+      "offset_hex": "0x4C",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, LPLONG, LPLONG)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetPalette",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, LPDIRECTDRAWPALETTE *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetPixelFormat",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, LPDDPIXELFORMAT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetSurfaceDesc",
       "offset": 88,
       "offset_hex": "0x58",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, LPDDSURFACEDESC2)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Initialize",
       "offset": 92,
-      "offset_hex": "0x5c",
-      "size": 4
+      "offset_hex": "0x5C",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, LPDIRECTDRAW, LPDDSURFACEDESC2)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IsLost",
       "offset": 96,
       "offset_hex": "0x60",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Lock",
       "offset": 100,
       "offset_hex": "0x64",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, LPRECT, LPDDSURFACEDESC2, DWORD, HANDLE)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ReleaseDC",
       "offset": 104,
       "offset_hex": "0x68",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, HDC)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Restore",
       "offset": 108,
-      "offset_hex": "0x6c",
-      "size": 4
+      "offset_hex": "0x6C",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetClipper",
       "offset": 112,
       "offset_hex": "0x70",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, LPDIRECTDRAWCLIPPER)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetColorKey",
       "offset": 116,
       "offset_hex": "0x74",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, DWORD, LPDDCOLORKEY)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetOverlayPosition",
       "offset": 120,
       "offset_hex": "0x78",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, LONG, LONG)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetPalette",
       "offset": 124,
-      "offset_hex": "0x7c",
-      "size": 4
+      "offset_hex": "0x7C",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, LPDIRECTDRAWPALETTE)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unlock",
       "offset": 128,
       "offset_hex": "0x80",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, LPRECT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "UpdateOverlay",
       "offset": 132,
       "offset_hex": "0x84",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, LPRECT, LPDIRECTDRAWSURFACE4, LPRECT, DWORD, LPDDOVERLAYFX)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "UpdateOverlayDisplay",
       "offset": 136,
       "offset_hex": "0x88",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "UpdateOverlayZOrder",
       "offset": 140,
-      "offset_hex": "0x8c",
-      "size": 4
+      "offset_hex": "0x8C",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, DWORD, LPDIRECTDRAWSURFACE4)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetDDInterface",
       "offset": 144,
       "offset_hex": "0x90",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, LPVOID *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "PageLock",
       "offset": 148,
       "offset_hex": "0x94",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "PageUnlock",
       "offset": 152,
       "offset_hex": "0x98",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetSurfaceDesc",
       "offset": 156,
-      "offset_hex": "0x9c",
-      "size": 4
+      "offset_hex": "0x9C",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, LPDDSURFACEDESC2, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetPrivateData",
       "offset": 160,
-      "offset_hex": "0xa0",
-      "size": 4
+      "offset_hex": "0xA0",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, const GUID *const, LPVOID, DWORD, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetPrivateData",
       "offset": 164,
-      "offset_hex": "0xa4",
-      "size": 4
+      "offset_hex": "0xA4",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, const GUID *const, LPVOID, LPDWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "FreePrivateData",
       "offset": 168,
-      "offset_hex": "0xa8",
-      "size": 4
+      "offset_hex": "0xA8",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, const GUID *const)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetUniquenessValue",
       "offset": 172,
-      "offset_hex": "0xac",
-      "size": 4
+      "offset_hex": "0xAC",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This, LPDWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ChangeUniquenessValue",
       "offset": 176,
-      "offset_hex": "0xb0",
-      "size": 4
+      "offset_hex": "0xB0",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDrawSurface4 *This)"
     }
   ],
   "name": "IDirectDrawSurface4Vtbl",
+  "ordinal": 4120,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 180
 }

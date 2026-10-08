@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x79B160",
-    "line": "push    ebp",
+    "line": "push    ebp; Oblivion-authoritative copy assignment for the SFrondGuide vertex vector at +0x00. Reuses existing 0x38-byte-element capacity when possible, otherwise frees/reserves and deep-copies the source range.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B161",
-    "line": "mov     ebp, [esp+4+arg_0]",
+    "line": "mov     ebp, [esp+4+source]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -115,13 +115,13 @@
   },
   {
     "ea": "0x79B191",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79B193",
-    "line": "call    sub_79ABD0",
+    "line": "call    OB_stVector_SFrondVertex_Clear_010201A0; Oblivion st_vector<SFrondVertex>::clear. Validates begin/end and erases the entire initialized range without releasing capacity.",
     "mnemonic": "call",
     "size": 5
   },
@@ -259,25 +259,25 @@
   },
   {
     "ea": "0x79B1C8",
-    "line": "mov     byte ptr [esp+10h+arg_0], 0",
+    "line": "mov     byte ptr [esp+10h+source], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x79B1CD",
-    "line": "mov     eax, [esp+10h+arg_0]",
+    "line": "mov     eax, [esp+10h+source]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79B1D1",
-    "line": "mov     ecx, [esp+10h+arg_0]",
+    "line": "mov     ecx, [esp+10h+source]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79B1D5",
-    "line": "mov     edx, [esp+10h+arg_0]",
+    "line": "mov     edx, [esp+10h+source]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -307,13 +307,13 @@
   },
   {
     "ea": "0x79B1DF",
-    "line": "push    edi",
+    "line": "push    edi; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B1E0",
-    "line": "push    eax",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
@@ -325,13 +325,13 @@
   },
   {
     "ea": "0x79B1E4",
-    "line": "push    eax",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B1E5",
-    "line": "call    sub_79A950",
+    "line": "call    OB_SFrondVertex_CopyForward_010201A0; Forward copy/assignment of initialized 0x38-byte SFrondVertex records from [first,last) into destinationFirst; returns destination end.",
     "mnemonic": "call",
     "size": 5
   },
@@ -637,13 +637,13 @@
   },
   {
     "ea": "0x79B266",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79B268",
-    "line": "call    sub_799EE0",
+    "line": "call    OB_stVector_SFrondVertex_Size_010201A0; Oblivion-authoritative size query for the SFrondVertex vector. Computes (end-begin)/0x38; returns zero when begin is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -673,25 +673,25 @@
   },
   {
     "ea": "0x79B27C",
-    "line": "push    edi",
+    "line": "push    edi; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B27D",
-    "line": "push    ebx",
+    "line": "push    ebx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B27E",
-    "line": "push    eax",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B27F",
-    "line": "call    sub_79AA40",
+    "line": "call    OB_SFrondVertex_CopyForwardThunk_010201A0; Thin forward-copy trampoline for initialized SFrondVertex ranges; delegates to 0x79A950.",
     "mnemonic": "call",
     "size": 5
   },
@@ -715,19 +715,19 @@
   },
   {
     "ea": "0x79B28D",
-    "line": "push    edx",
+    "line": "push    edx; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B28E",
-    "line": "push    eax",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B28F",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -739,7 +739,7 @@
   },
   {
     "ea": "0x79B292",
-    "line": "call    sub_79AAD0",
+    "line": "call    OB_SFrondVertex_UninitializedCopyThunk_010201A0; Checked/uninitialized-copy trampoline for SFrondVertex ranges; delegates to 0x79A9B0 and returns the constructed end.",
     "mnemonic": "call",
     "size": 5
   },
@@ -805,7 +805,7 @@
   },
   {
     "ea": "0x79B2A8",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -817,31 +817,31 @@
   },
   {
     "ea": "0x79B2B0",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79B2B2",
-    "line": "call    sub_799EE0",
+    "line": "call    OB_stVector_SFrondVertex_Size_010201A0; Oblivion-authoritative size query for the SFrondVertex vector. Computes (end-begin)/0x38; returns zero when begin is null.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x79B2B7",
-    "line": "push    eax; char *",
+    "line": "push    eax; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B2B8",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79B2BA",
-    "line": "call    sub_79ACC0",
+    "line": "call    OB_stVector_SFrondVertex_Buy_010201A0; Initializes an empty 16-byte SFrondVertex vector wrapper and, when count is nonzero, buys exact count capacity. Maximum count is 0x04924924 (0xFFFFFFFF/0x38).",
     "mnemonic": "call",
     "size": 5
   },
@@ -877,19 +877,19 @@
   },
   {
     "ea": "0x79B2CC",
-    "line": "push    ecx",
+    "line": "push    ecx; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B2CD",
-    "line": "push    edx",
+    "line": "push    edx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B2CE",
-    "line": "push    eax",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -901,7 +901,7 @@
   },
   {
     "ea": "0x79B2D1",
-    "line": "call    sub_79AAD0",
+    "line": "call    OB_SFrondVertex_UninitializedCopyThunk_010201A0; Checked/uninitialized-copy trampoline for SFrondVertex ranges; delegates to 0x79A9B0 and returns the constructed end.",
     "mnemonic": "call",
     "size": 5
   },

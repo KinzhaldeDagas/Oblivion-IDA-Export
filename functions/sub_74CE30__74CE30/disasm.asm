@@ -53,7 +53,7 @@
 0x74CEEB: fstp    dword ptr [esi+4]
 0x74CEEE: fmul    [esp+34h+var_18]
 0x74CEF2: fstp    dword ptr [esi+8]
-0x74CEF5: call    sub_53D4B0
+0x74CEF5: call    NiTransform_TransformPoint; ODismemberment: __thiscall NiTransform point transform helper. Plugin hit capture must pass transform in ECX; cdecl here crashes on actor hits.
 0x74CEFA: mov     ecx, [eax]
 0x74CEFC: mov     [esi], ecx
 0x74CEFE: mov     edx, [eax+4]

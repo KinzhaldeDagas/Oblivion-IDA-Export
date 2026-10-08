@@ -57,9 +57,9 @@
 0x45BBE5: call    edx
 0x45BBE7: fld     dword ptr [eax+8]
 0x45BBEA: push    ecx
-0x45BBEB: mov     ecx, esi
-0x45BBED: fstp    [esp+58h+var_58]; float
-0x45BBF0: call    sub_4D8A10
+0x45BBEB: mov     ecx, esi; this
+0x45BBED: fstp    [esp+58h+radians]; radians
+0x45BBF0: call    TESObjectREFR_SetRotationZ; TES4 authoritative: write reference rotation Z at TESObjectREFR+0x28, then notify the reference through virtual slot +0x40 with change mask 4.
 0x45BBF5: mov     bl, byte ptr [esp+58h+arg_4]
 0x45BBF9: test    bl, bl
 0x45BBFB: jz      short loc_45BC05
@@ -172,18 +172,18 @@
 0x45BD46: test    eax, eax
 0x45BD48: jz      short loc_45BD77
 0x45BD4A: mov     ecx, eax; this
-0x45BD4C: call    MobileObject_GetCharProxy
+0x45BD4C: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x45BD51: test    eax, eax
 0x45BD53: mov     [esp+58h+arg_4], eax
 0x45BD57: jz      short loc_45BD77
 0x45BD59: lea     ecx, [eax+1E0h]
-0x45BD5F: call    sub_88D370
+0x45BD5F: call    hkCharacterContext_GetStateId; hkCharacterContext state id accessor used by controller update; proxy+0x1E0 context stores current state id at +0x0C.
 0x45BD64: cmp     eax, 4
 0x45BD67: jz      short loc_45BD77
 0x45BD69: lea     ecx, [esp+58h+a2]
 0x45BD6D: push    ecx; a2
 0x45BD6E: mov     ecx, [esp+5Ch+arg_4]; this
-0x45BD72: call    sub_452A10
+0x45BD72: call    sub_452A10; TES4 authoritative: converts TES/world NiPoint3 into Havok units with hkFactor, then writes proxy position through 0x891560.
 0x45BD77: mov     edx, [esp+58h+var_34]
 0x45BD7B: mov     [ebp+54h], edi
 0x45BD7E: lea     eax, [esp+58h+var_24]
@@ -205,7 +205,7 @@
 0x45BDAB: push    ecx
 0x45BDAC: mov     ecx, ebp; this
 0x45BDAE: fstp    [esp+60h+var_60]; a2
-0x45BDB1: call    NiAVObject_UpdateNiAVObject
+0x45BDB1: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x45BDB6: mov     cl, [esp+58h+var_45]
 0x45BDBA: mov     edx, [esp+58h+var_40]
 0x45BDBE: mov     al, [esp+58h+var_46]

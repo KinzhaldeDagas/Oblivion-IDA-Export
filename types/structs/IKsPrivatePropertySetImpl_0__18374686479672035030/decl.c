@@ -1,1 +1,1 @@
-IKsPrivatePropertySetImpl_0
+typedef IKsPrivatePropertySetImpl IKsPrivatePropertySetImpl_0;

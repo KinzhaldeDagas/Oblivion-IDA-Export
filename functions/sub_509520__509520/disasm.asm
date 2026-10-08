@@ -22,7 +22,7 @@
 0x509562: push    edx; a3
 0x509563: push    eax; a2
 0x509564: push    ecx; a1
-0x509565: call    Script_ExtractArgs
+0x509565: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x50956A: add     esp, 20h
 0x50956D: test    al, al
 0x50956F: jz      loc_5095FC
@@ -69,7 +69,7 @@
 0x5095EB: mov     ecx, esi; this
 0x5095ED: call    sub_6B73E0
 0x5095F2: push    esi
-0x5095F3: call    FormHeapFree
+0x5095F3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5095F8: add     esp, 4
 0x5095FB: pop     esi
 0x5095FC: pop     edi

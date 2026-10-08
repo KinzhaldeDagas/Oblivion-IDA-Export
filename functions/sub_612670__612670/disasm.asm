@@ -1,4 +1,4 @@
-0x612670: mov     eax, [esp+arg_0]
+0x612670: mov     eax, [esp+mode]; Returns true for native combat modes 0, 1, or 3; returns false for ranged weapon modes 2 and 4 and for values above 3.
 0x612674: test    eax, eax
 0x612676: jz      short loc_612685
 0x612678: cmp     eax, 1

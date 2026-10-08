@@ -20,7 +20,7 @@
 0x44672E: mov     eax, ds:0B33A98h
 0x446733: mov     byte ptr [eax+0CD4h], 1
 0x44673A: call    sub_4BE910
-0x44673F: call    sub_4BDD40
+0x44673F: call    DistantLODLoaderTaskMap_Destroy; Verified singleton teardown: destroys and frees g_DistantLODLoaderTasksByCell, then clears the global pointer.
 0x446744: mov     ecx, ds:0B333C4h
 0x44674A: mov     edx, [ecx]
 0x44674C: mov     eax, [edx+150h]
@@ -34,12 +34,12 @@
 0x44676D: mov     ecx, [esi+88h]
 0x446773: cmp     ecx, ebx
 0x446775: jz      short loc_44678B
-0x446777: call    BSSimpleList_Clear
+0x446777: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x44677C: mov     eax, [esi+88h]
 0x446782: push    eax
-0x446783: call    FormHeapFree
+0x446783: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x446788: add     esp, 4
-0x44678B: mov     ecx, offset ActorProcessManager_ptr
+0x44678B: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x446790: mov     [esi+1Ch], ebx
 0x446793: mov     [esi+18h], ebx
 0x446796: mov     [esi+5Ch], ebx
@@ -50,7 +50,7 @@
 0x4467A5: mov     ecx, edi
 0x4467A7: call    sub_49CFB0
 0x4467AC: push    edi
-0x4467AD: call    FormHeapFree
+0x4467AD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4467B2: add     esp, 4
 0x4467B5: mov     edi, [esi+58h]
 0x4467B8: cmp     edi, ebx
@@ -58,7 +58,7 @@
 0x4467BC: mov     ecx, edi
 0x4467BE: call    sub_49E500
 0x4467C3: push    edi
-0x4467C4: call    FormHeapFree
+0x4467C4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4467C9: add     esp, 4
 0x4467CC: mov     [esi+58h], ebx
 0x4467CF: cmp     [esi+7Ch], ebx
@@ -66,7 +66,7 @@
 0x4467D4: mov     eax, [esi+7Ch]
 0x4467D7: mov     edi, [eax+4]
 0x4467DA: push    eax
-0x4467DB: call    FormHeapFree
+0x4467DB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4467E0: add     esp, 4
 0x4467E3: cmp     edi, ebx
 0x4467E5: mov     [esi+7Ch], edi
@@ -78,7 +78,7 @@
 0x4467F5: call    GetShadowSceneNode
 0x4467FA: add     esp, 4
 0x4467FD: mov     ecx, eax
-0x4467FF: call    sub_7C7E50
+0x4467FF: call    ShadowSceneNode_TeardownLightLists; TES destruction tears down the native full and active shadow-light lists.
 0x446804: mov     ecx, ds:0B33398h
 0x44680A: mov     ecx, [ecx+24h]
 0x44680D: cmp     ecx, ebx
@@ -98,7 +98,7 @@
 0x446830: jnz     short loc_44683E
 0x446832: mov     ecx, ds:0B33A98h
 0x446838: push    edi; a1
-0x446839: call    sub_447BA0
+0x446839: call    TESObjectCELL_Deactivate; Verified TESObjectCELL deactivation path. Removes cell temp effects, lowers its process level, invokes cell teardown, clears pathgrid graph/render resources, removes the scene node and inactive cell forms, then for exteriors asks TESWorldSpace_UnloadExteriorCellIfEligible to either preserve or remove the cell. Nine call sites are in world/cell transition and TES destruction paths; inspect xrefs for the full lifecycle context.
 0x44683E: push    ebx
 0x44683F: mov     ecx, esi
 0x446841: call    sub_43FE30
@@ -109,15 +109,15 @@
 0x446857: mov     ecx, esi
 0x446859: call    sub_440F20
 0x44685E: call    sub_54FE20
-0x446863: push    ebx
-0x446864: call    sub_55E390
+0x446863: push    ebx; unusedModelsOnly
+0x446864: call    BSTreeManager_ClearModelCache; Verified cache maintenance: with unusedModelsOnly=true removes tree-form/seed model entries whose model is null or only map-owned; false releases and clears every model cache entry. Called during TES destruction and BSTreeManager destruction.
 0x446869: add     esp, 4
 0x44686C: mov     ecx, esi
 0x44686E: call    sub_4464F0
 0x446873: mov     ecx, esi
 0x446875: call    sub_443C70
-0x44687A: mov     ecx, ds:0B33A98h
-0x446880: call    TESDataHandler_Clear
+0x44687A: mov     ecx, ds:0B33A98h; self
+0x446880: call    TESDataHandler_Clear; Verified reader of activeFileState.retainActiveFile (+0xCD1): when zero, cleanup destroys and clears the stored active TESFile; when set, that file is retained. The only direct writer located so far is constructor initialization to zero; runtime setter remains Unknown.
 0x446885: mov     edx, ds:0B33A98h
 0x44688B: mov     byte ptr [edx+0CD4h], 1
 0x446892: mov     ecx, ds:0B33A1Ch; this
@@ -126,7 +126,7 @@
 0x44689C: jz      short loc_4468AC
 0x44689E: call    ModelLoader_destr
 0x4468A3: push    edi
-0x4468A4: call    FormHeapFree
+0x4468A4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4468A9: add     esp, 4
 0x4468AC: mov     ecx, ds:0B33A10h
 0x4468B2: cmp     ecx, ebx
@@ -151,37 +151,37 @@
 0x4468E3: mov     edx, [eax]
 0x4468E5: push    1
 0x4468E7: call    edx
-0x4468E9: mov     ecx, ds:0B33B00h
+0x4468E9: mov     ecx, ds:0B33B00h; self
 0x4468EF: cmp     ecx, ebx
 0x4468F1: mov     edi, ecx
 0x4468F3: jz      short loc_446903
-0x4468F5: call    sub_453250
+0x4468F5: call    TESSaveLoadGame_DestroyOwnedState; Verified: TES_destr calls at 4468F5 then frees the manager allocation at 4468FB. Destroys ChangesMap and all reference-map objects through scalar-deleting vtables, frees the remap table and buffer, resets/frees both ID arrays, and releases deferred form/list state. Constructor-to-manager-destructor lifecycle established. Fallout has analogous named map clear/destructor paths, but no layout was copied.
 0x4468FA: push    edi
-0x4468FB: call    FormHeapFree
+0x4468FB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x446900: add     esp, 4
-0x446903: mov     ecx, ds:0B33A98h
+0x446903: mov     ecx, ds:0B33A98h; self
 0x446909: cmp     ecx, ebx
 0x44690B: mov     ds:0B33B00h, ebx
 0x446911: mov     edi, ecx
 0x446913: jz      short loc_446923
 0x446915: call    TESDataHandler_destr
 0x44691A: push    edi
-0x44691B: call    FormHeapFree
+0x44691B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x446920: add     esp, 4
 0x446923: mov     ds:0B33A98h, ebx
 0x446929: mov     eax, [esi+38h]
 0x44692C: push    eax
-0x44692D: call    FormHeapFree
+0x44692D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x446932: mov     eax, [esi+3Ch]
 0x446935: push    eax
-0x446936: call    FormHeapFree
+0x446936: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x44693B: add     esp, 8
 0x44693E: cmp     [esi+7Ch], ebx
 0x446941: jz      short loc_446959
 0x446943: mov     eax, [esi+7Ch]
 0x446946: mov     edi, [eax+4]
 0x446949: push    eax
-0x44694A: call    FormHeapFree
+0x44694A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x44694F: add     esp, 4
 0x446952: cmp     edi, ebx
 0x446954: mov     [esi+7Ch], edi
@@ -189,7 +189,7 @@
 0x446959: mov     [esi+78h], ebx
 0x44695C: call    sub_49B6C0
 0x446961: call    sub_533CD0
-0x446966: call    sub_4B2C80
+0x446966: call    TESObjectTREE_ClearTextureHashCache; Verified: clears and frees all TESTextureList values in the global form-ID cache, then clears the map. Called by TES destruction/teardown; exact lifecycle boundary is process-level object teardown.
 0x44696B: call    sub_4A08E0
 0x446970: mov     edi, [esi+9Ch]
 0x446976: cmp     edi, ebx
@@ -249,3 +249,19 @@
 0x4469FC: pop     ebx
 0x4469FD: add     esp, 10h
 0x446A00: retn
+0x9AD220: mov     ecx, [ebp-10h]
+0x9AD223: add     ecx, 94h ; '”'; slot
+0x9AD229: jmp     NiPointerSlot_Release
+0x9AD22E: mov     ecx, [ebp-10h]
+0x9AD231: add     ecx, 98h ; '˜'; slot
+0x9AD237: jmp     NiPointerSlot_Release
+0x9AD23C: mov     ecx, [ebp-10h]
+0x9AD23F: add     ecx, 9Ch ; 'œ'; slot
+0x9AD245: jmp     NiPointerSlot_Release
+0x9AD24A: mov     edx, [esp+arg_4]
+0x9AD24E: lea     eax, [edx-14h]
+0x9AD251: mov     ecx, [edx-18h]
+0x9AD254: xor     ecx, eax
+0x9AD256: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AD25B: mov     eax, offset stru_AD9E04
+0x9AD260: jmp     ___CxxFrameHandler3

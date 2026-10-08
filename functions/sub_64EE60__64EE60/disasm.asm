@@ -31,10 +31,10 @@
 0x64EEB1: push    ecx
 0x64EEB2: mov     ecx, ebp
 0x64EEB4: call    sub_566B30
-0x64EEB9: mov     ecx, [esi+2Ch]
-0x64EEBC: push    eax
-0x64EEBD: call    sub_4D7E30
-0x64EEC2: call    Double_To_SInt32
+0x64EEB9: mov     ecx, [esi+2Ch]; this
+0x64EEBC: push    eax; pointXYZ
+0x64EEBD: call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.
+0x64EEC2: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x64EEC7: mov     [esp+20h+arg_0], eax
 0x64EECB: fild    [esp+20h+arg_0]
 0x64EECF: mov     ecx, ebp
@@ -58,16 +58,16 @@
 0x64EF0A: mov     ecx, esi
 0x64EF0C: call    eax
 0x64EF0E: mov     ecx, [esi+2Ch]; this
-0x64EF11: call    GetTeleportExtraData
+0x64EF11: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x64EF16: test    eax, eax
 0x64EF18: jz      loc_64EFE4
 0x64EF1E: mov     edx, [edi]
 0x64EF20: mov     eax, [edx+174h]
 0x64EF26: mov     ecx, edi
 0x64EF28: call    eax
-0x64EF2A: mov     ecx, [esi+2Ch]
+0x64EF2A: mov     ecx, [esi+2Ch]; this
 0x64EF2D: mov     ebp, eax
-0x64EF2F: call    sub_4D76F0
+0x64EF2F: call    TESObjectREFR_GetLinkedTeleportMarkerPosition; Verified linked-door marker resolver: read this door's TeleportData, follow its linkedDoor pointer, fetch the linked door's TeleportData, then return a pointer to that record's xyz fields at +4. Return g_zeroNiPoint3 when the source data or linked-door target is missing.
 0x64EF34: fld     dword ptr [eax]
 0x64EF36: fsub    dword ptr [ebp+0]
 0x64EF39: fstp    [esp+20h+var_C]
@@ -138,15 +138,15 @@
 0x64F00A: mov     ecx, esi
 0x64F00C: call    eax
 0x64F00E: mov     ecx, [esi+2Ch]; this
-0x64F011: call    GetTeleportExtraData
+0x64F011: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x64F016: test    eax, eax
-0x64F018: mov     ecx, [esi+2Ch]
+0x64F018: mov     ecx, [esi+2Ch]; this
 0x64F01B: jnz     short loc_64F029
 0x64F01D: mov     edx, [ecx]
 0x64F01F: mov     eax, [edx+174h]
 0x64F025: call    eax
 0x64F027: jmp     short loc_64F02E
-0x64F029: call    sub_4D76F0
+0x64F029: call    TESObjectREFR_GetLinkedTeleportMarkerPosition; Verified linked-door marker resolver: read this door's TeleportData, follow its linkedDoor pointer, fetch the linked door's TeleportData, then return a pointer to that record's xyz fields at +4. Return g_zeroNiPoint3 when the source data or linked-door target is missing.
 0x64F02E: mov     ecx, [eax]
 0x64F030: fld     dword ptr ds:0A30634h
 0x64F036: mov     ebx, [esi]
@@ -163,7 +163,7 @@
 0x64F05D: call    TESObjectREFR_GetWorldSpace
 0x64F062: mov     ecx, [esi+2Ch]; this
 0x64F065: push    eax
-0x64F066: call    TESObjectREFR_GetParentCell
+0x64F066: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x64F06B: mov     edx, [ebx+418h]
 0x64F071: push    eax
 0x64F072: lea     ecx, [esp+30h+var_C]

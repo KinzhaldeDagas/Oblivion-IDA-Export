@@ -1,134 +1,144 @@
-void __thiscall sub_6575B0(_BYTE *this, PlayerCharacter *a2, char a3, char a4, char a5)
+// Verified (Oblivion): the same method is present in HighProcess and MiddleHighProcess vtable groups. It refreshes per-target enchantment shader state and the PlayerCharacter cache; the exact shared subobject interface name remains Candidate.
+void __thiscall Process_UpdateWeaponEnchantmentShader(
+        void *processOrCaster,
+        TESObjectREFR *targetReference,
+        bool arg3,
+        bool arg4,
+        bool arg5)
 {
   int v6; // eax
-  TESObjectREFRVtbl *process; // ecx
+  TESObjectREFRVtbl *vtbl; // ecx
   int v8; // eax
   int FormEnchantment; // edi
-  void **v10; // eax
-  int FXEffect; // eax
-  int v12; // eax
+  EntryData *v10; // eax
+  EffectSetting *FXEffect; // eax
+  TESEffectShader *enchantEffect; // eax
   int v13; // eax
   int v14; // eax
-  float *v15; // edi
-  int v16; // eax
-  int v17; // edi
+  MagicShaderHitEffect *v15; // edi
+  TESEffectShader *v16; // eax
+  MagicShaderHitEffect *v17; // edi
   int v18; // eax
   _DWORD *unk5E0; // esi
-  int v20; // edi
-  float *v21; // eax
-  UInt32 v22; // eax
-  float v23; // [esp+20h] [ebp-2Ch]
-  double v24; // [esp+38h] [ebp-14h]
-  char v25; // [esp+58h] [ebp+Ch]
+  TESEffectShader *v20; // edi
+  MagicShaderHitEffect *v21; // eax
+  MagicShaderHitEffect *v22; // eax
+  float elapsedSeconds; // [esp+20h] [ebp-2Ch]
+  double Charge; // [esp+38h] [ebp-14h]
+  bool arg4a; // [esp+58h] [ebp+Ch]
 
-  *(this + 0x160) = 0;
-  if ( a4 )
+  *((_BYTE *)processOrCaster + 0x160) = 0; /*0x6575e2*/
+  if ( arg4 ) /*0x6575e9*/
   {
-    v6 = sub_679120((int *)&ActorProcessManager_ptr, (int)a2);
-    if ( v6 )
-      (*(void (__thiscall **)(int))(*(_DWORD *)v6 + 0x68))(v6);
+    v6 = ActorProcessManager_FindTargetNonWeaponShaderHitEffect((int *)&qword_B3BB2C[0x75], (int)targetReference);// Verified (Oblivion): weapon-enchantment refresh first queries the manager for an existing non-weapon shader candidate on this target and reinitializes the returned object before handling the weapon-enchantment-specific instance. /*0x6575f1*/
+    if ( v6 ) /*0x6575f8*/
+      (*(void (__thiscall **)(int))(*(_DWORD *)v6 + 0x68))(v6); /*0x657601*/
   }
-  if ( a3 )
+  if ( arg3 ) /*0x657608*/
   {
-    (*(void (__thiscall **)(_BYTE *, _DWORD))(*(_DWORD *)this + 0x420))(this, 0);
-    process = (TESObjectREFRVtbl *)a2->super.super.super.process;
-    if ( process )
+    (*(void (__thiscall **)(void *, _DWORD))(*(_DWORD *)processOrCaster + 0x420))(processOrCaster, 0); /*0x65761a*/
+    vtbl = targetReference[1].vtbl; /*0x65761c*/
+    if ( vtbl ) /*0x657621*/
     {
-      if ( (*((int (__thiscall **)(TESObjectREFRVtbl *, int))process->super.super.InitializeComponent + 0x3B))(
-             process,
-             1) )
+      if ( (*((int (__thiscall **)(TESObjectREFRVtbl *, int))vtbl->super.super.InitializeComponent + 0x3B))(vtbl, 1) ) /*0x657631*/
       {
-        if ( !a2->super.super.super.process->Unk_4E(a2->super.super.super.process) )
+        if ( !(*((unsigned __int8 (__thiscall **)(TESObjectREFRVtbl *))targetReference[1].vtbl->super.super.InitializeComponent /*0x657646*/
+               + 0x4F))(targetReference[1].vtbl) )
         {
-          v8 = (*(int (__thiscall **)(_BYTE *, int))(*(_DWORD *)this + 0xEC))(this, 1);
-          FormEnchantment = TESEnchantableForm_GetFormEnchantment(*(void **)(v8 + 8));
-          if ( FormEnchantment )
+          v8 = (*(int (__thiscall **)(void *, int))(*(_DWORD *)processOrCaster + 0xEC))(processOrCaster, 1); /*0x657658*/
+          FormEnchantment = TESEnchantableForm_GetFormEnchantment(*(void **)(v8 + 8)); /*0x657663*/
+          if ( FormEnchantment ) /*0x65766a*/
           {
-            v10 = (void **)a2->super.super.super.process->GetEquippedWeaponData(a2->super.super.super.process, 1);
-            v24 = sub_4849C0(v10);
-            if ( ((double (__thiscall *)(int, PlayerCharacter *))**(_DWORD **)(FormEnchantment + 0x24))(
+            v10 = (EntryData *)(*((int (__thiscall **)(TESObjectREFRVtbl *, int))targetReference[1].vtbl->super.super.InitializeComponent /*0x657679*/
+                                + 0x3B))(
+                                 targetReference[1].vtbl,
+                                 1);
+            Charge = EquippedEntryData_GetCharge(v10); /*0x657682*/
+            if ( ((double (__thiscall *)(int, TESObjectREFR *))**(_DWORD **)(FormEnchantment + 0x24))( /*0x65769a*/
                    FormEnchantment + 0x24,
-                   a2) <= v24 )
+                   targetReference) <= Charge )
             {
-              FXEffect = MagicItem_GetFXEffect((_DWORD *)(FormEnchantment + 0x18), 0);
-              if ( FXEffect )
+              FXEffect = MagicItem_GetFXEffect((void *)(FormEnchantment + 0x18), 0); /*0x6576a1*/
+              if ( FXEffect ) /*0x6576a8*/
               {
-                v12 = *(_DWORD *)(FXEffect + 0x7C);
-                if ( v12 )
-                  (*(void (__thiscall **)(_BYTE *, int))(*(_DWORD *)this + 0x420))(this, v12);
+                enchantEffect = FXEffect->enchantEffect; /*0x6576aa*/
+                if ( enchantEffect ) /*0x6576af*/
+                  (*(void (__thiscall **)(void *, TESEffectShader *))(*(_DWORD *)processOrCaster + 0x420))( /*0x6576bc*/
+                    processOrCaster,
+                    enchantEffect);
               }
             }
           }
         }
       }
     }
-    v25 = 0;
-    v13 = (*(int (__thiscall **)(_BYTE *))(*(_DWORD *)this + 0x41C))(this);
-    v14 = sub_679240((int *)&ActorProcessManager_ptr, (int)a2, v13);
-    if ( v14 )
+    arg4a = 0; /*0x6576c8*/
+    v13 = (*(int (__thiscall **)(void *))(*(_DWORD *)processOrCaster + 0x41C))(processOrCaster); /*0x6576cd*/
+    v14 = ActorProcessManager_FindWeaponEnchantmentShader((int *)&qword_B3BB2C[0x75], (int)targetReference, v13);// Verified (Oblivion): weapon-enchantment refresh first asks ActorProcessManager_FindWeaponEnchantmentShader for an active matching effect. Existing effects are reinitialized; otherwise a new effect is created, flagged bWeaponEnchantment_28, and registered. /*0x6576d6*/
+    if ( v14 ) /*0x6576dd*/
     {
-      (*(void (__thiscall **)(int))(*(_DWORD *)v14 + 0x68))(v14);
+      (*(void (__thiscall **)(int))(*(_DWORD *)v14 + 0x68))(v14); /*0x6576e6*/
     }
-    else if ( (*(int (__thiscall **)(_BYTE *))(*(_DWORD *)this + 0x41C))(this) )
+    else if ( (*(int (__thiscall **)(void *))(*(_DWORD *)processOrCaster + 0x41C))(processOrCaster) ) /*0x6576f7*/
     {
-      v15 = (float *)FormHeapAlloc(0x4Cu);
-      if ( v15 )
+      v15 = (MagicShaderHitEffect *)FormHeapAlloc(0x4Cu); /*0x657704*/
+      if ( v15 ) /*0x657717*/
       {
-        v23 = flt_A30634;
-        v16 = (*(int (__thiscall **)(_BYTE *))(*(_DWORD *)this + 0x41C))(this);
-        v17 = MagicShaderHitEffect_constr_args2(v15, (int)a2, v16, v23);
+        elapsedSeconds = kTerrainLODQuadRayDirectionZ; /*0x65772a*/
+        v16 = (TESEffectShader *)(*(int (__thiscall **)(void *))(*(_DWORD *)processOrCaster + 0x41C))(processOrCaster); /*0x65772d*/
+        v17 = MagicShaderHitEffect_constr_args2(v15, targetReference, v16, elapsedSeconds); /*0x657738*/
       }
       else
       {
-        v17 = 0;
+        v17 = 0; /*0x65773c*/
       }
-      *(_BYTE *)(v17 + 0x28) = 1;
-      if ( a5 )
-        *(float *)(v17 + 0x38) = flt_A2FE7C;
-      if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)v17 + 0x68))(v17) )
+      v17->bWeaponEnchantment_28 = 1;           // Verified (Oblivion): sets bWeaponEnchantment_28 immediately after constructing the shader from the equipped item's enchantment shader (EffectSetting.enchantEffect). /*0x65774c*/
+      if ( arg5 ) /*0x657750*/
+        v17->elapsedVisualSeconds_38 = flt_A2FE7C; /*0x657758*/
+      if ( ((unsigned __int8 (__thiscall *)(MagicShaderHitEffect *))v17->super.super.vtable[1].super.super.Destructor)(v17) ) /*0x657762*/
       {
-        sub_678D30((int *)&ActorProcessManager_ptr, (volatile LONG *)v17);
-        if ( !a5 )
-          v25 = 1;
+        ActorProcessManager_RegisterTempEffect((ActorProcessManager *)&qword_B3BB2C[0x75], &v17->super.super); /*0x65776e*/
+        if ( !arg5 ) /*0x657775*/
+          arg4a = 1; /*0x657777*/
       }
     }
-    if ( a2 == TESDataHandler_g_PlayerRef && TESDataHandler_g_PlayerRef->inventoryPC )
+    if ( targetReference == (TESObjectREFR *)reference && reference->inventoryPC ) /*0x65778b*/
     {
-      v18 = (*(int (__thiscall **)(_BYTE *))(*(_DWORD *)this + 0x41C))(this);
-      unk5E0 = (_DWORD *)TESDataHandler_g_PlayerRef->unk5E0;
-      v20 = v18;
-      if ( v18 )
+      v18 = (*(int (__thiscall **)(void *))(*(_DWORD *)processOrCaster + 0x41C))(processOrCaster); /*0x6577a1*/
+      unk5E0 = (_DWORD *)reference->unk5E0; /*0x6577a9*/
+      v20 = (TESEffectShader *)v18; /*0x6577af*/
+      if ( v18 ) /*0x6577b3*/
       {
-        if ( unk5E0 )
+        if ( unk5E0 ) /*0x6577bb*/
         {
-          if ( unk5E0[0xD] == v18 )
+          if ( unk5E0[0xD] == v18 ) /*0x6577c0*/
           {
 LABEL_35:
-            if ( !(*(unsigned __int8 (__thiscall **)(_DWORD *))(*unk5E0 + 0x68))(unk5E0) )
+            if ( !(*(unsigned __int8 (__thiscall **)(_DWORD *))(*unk5E0 + 0x68))(unk5E0) ) /*0x657834*/
             {
-              (*(void (__thiscall **)(_DWORD *, int))*unk5E0)(unk5E0, 1);
-              TESDataHandler_g_PlayerRef->unk5E0 = 0;
+              (*(void (__thiscall **)(_DWORD *, int))*unk5E0)(unk5E0, 1); /*0x657842*/
+              reference->unk5E0 = 0; /*0x65784a*/
             }
-            return;
+            return; /*0x65784a*/
           }
-          (*(void (__thiscall **)(_DWORD *, int))*unk5E0)(unk5E0, 1);
+          (*(void (__thiscall **)(_DWORD *, int))*unk5E0)(unk5E0, 1); /*0x6577ca*/
         }
-        v21 = (float *)FormHeapAlloc(0x4Cu);
-        if ( v21 )
-          v22 = MagicShaderHitEffect_constr_args2(v21, (int)TESDataHandler_g_PlayerRef, v20, flt_A30634);
+        v21 = (MagicShaderHitEffect *)FormHeapAlloc(0x4Cu); /*0x6577ce*/
+        if ( v21 ) /*0x6577e4*/
+          v22 = MagicShaderHitEffect_constr_args2(v21, (TESObjectREFR *)reference, v20, kTerrainLODQuadRayDirectionZ); /*0x6577fa*/
         else
-          v22 = 0;
-        *(_BYTE *)(v22 + 0x28) = 1;
-        unk5E0 = (_DWORD *)v22;
-        TESDataHandler_g_PlayerRef->unk5E0 = v22;
-        if ( !v25 )
-          *(float *)(v22 + 0x38) = flt_A2FE7C;
-        goto LABEL_35;
+          v22 = 0; /*0x657801*/
+        v22->bWeaponEnchantment_28 = 1;         // Verified (Oblivion): sets bWeaponEnchantment_28 on the player's cached weapon-enchantment shader before storing it in PlayerCharacter::unk5E0. /*0x657808*/
+        unk5E0 = &v22->super.super.vtable; /*0x65781a*/
+        reference->unk5E0 = (UInt32)v22; /*0x65781c*/
+        if ( !arg4a ) /*0x657822*/
+          v22->elapsedVisualSeconds_38 = flt_A2FE7C; /*0x65782a*/
+        goto LABEL_35; /*0x65782a*/
       }
-      if ( unk5E0 )
+      if ( unk5E0 ) /*0x657868*/
       {
-        (*(void (__thiscall **)(_DWORD *, int))*unk5E0)(unk5E0, 1);
-        TESDataHandler_g_PlayerRef->unk5E0 = 0;
+        (*(void (__thiscall **)(_DWORD *, int))*unk5E0)(unk5E0, 1); /*0x657872*/
+        reference->unk5E0 = 0; /*0x657879*/
       }
     }
   }

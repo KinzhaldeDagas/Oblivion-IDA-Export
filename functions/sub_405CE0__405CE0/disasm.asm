@@ -1,4 +1,4 @@
-0x405CE0: push    ebx
+0x405CE0: push    ebx; Releases and clears TESNPC cached FaceGen nodes at +0x1D4/+0x1D8. SexChange invokes at 0x515A57 after live-node detachment, then actor-process refresh virtuals. OCO dossier hypothesis: double sex change may repair stale appearance by forcing these transitions; missing native LoadGame invalidation and sufficiency of this helper alone remain UNRESOLVED. Controlled capture plan in analysis/oco_load/investigation.json.
 0x405CE1: mov     ebx, ds:InterlockedDecrement
 0x405CE7: push    esi
 0x405CE8: push    edi

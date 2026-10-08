@@ -1,24 +1,25 @@
-float *__thiscall sub_793B40(float *this)
+// Initializes the exact Oblivion CWindEngine per-instance defaults: strength 0.25, method fields 2, rocking enabled, matrix span 4, leaf factors/scalars 1, and angle pointers/count zero. Unlike RT4.1's constructor, this Oblivion body contains no wind-matrix resize or reference-count side effects.
+OB_CWindEngine_010201A0 *__thiscall OB_CWindEngine_ctor_010201A0(OB_CWindEngine_010201A0 *this)
 {
   double v2; // st6
 
-  *this = 0.0;
-  v2 = flt_A41304;
-  *((_DWORD *)this + 2) = 2;
-  *(this + 1) = v2;
-  *((_DWORD *)this + 3) = 2;
-  *((_DWORD *)this + 4) = 2;
-  *(this + 8) = 0.0;
-  *((_BYTE *)this + 0x14) = 1;
-  *(this + 9) = 0.0;
-  *(this + 0xA) = 0.0;
-  *((_DWORD *)this + 0xB) = 4;
-  *(this + 0xF) = 1.0;
-  *(this + 0xC) = 0.0;
-  *(this + 0x10) = 1.0;
-  *(this + 0xD) = 0.0;
-  *(this + 7) = 1.0;
-  *(this + 0xE) = 0.0;
-  *(this + 6) = 1.0;
-  return this;
+  this->timeFrequencyShift = 0.0; /*0x793b44*/
+  v2 = flt_A41304; /*0x793b4b*/
+  this->branchWindMethod = 2; /*0x793b51*/
+  this->windStrength = v2; /*0x793b54*/
+  this->frondWindMethod = 2; /*0x793b57*/
+  this->leafWindMethod = 2; /*0x793b5a*/
+  this->leafFrequency = 0.0; /*0x793b5f*/
+  this->rockingLeaves = 1; /*0x793b62*/
+  this->leafThrow = 0.0; /*0x793b66*/
+  this->startingMatrix = 0; /*0x793b69*/
+  this->matrixSpan = 4; /*0x793b6e*/
+  this->speedWindRockScalar = 1.0; /*0x793b75*/
+  this->leafAngleCount = 0; /*0x793b78*/
+  this->speedWindRustleScalar = 1.0; /*0x793b7b*/
+  this->rockingAngles = 0; /*0x793b7e*/
+  this->leafFactors[1] = 1.0; /*0x793b81*/
+  this->rustleAngles = 0; /*0x793b84*/
+  this->leafFactors[0] = 1.0; /*0x793b87*/
+  return this; /*0x793b8a*/
 }

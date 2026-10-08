@@ -1,1 +1,1 @@
-IBindCtxVtbl_0
+typedef IBindCtxVtbl IBindCtxVtbl_0;

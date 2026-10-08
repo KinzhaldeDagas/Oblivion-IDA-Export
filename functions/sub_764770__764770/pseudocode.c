@@ -1,20 +1,30 @@
-NiSurfaceData *__thiscall sub_764770(_DWORD **this, int a2, unsigned int a3, int a4)
+// DX9 compatible-surface selector: convert the render-target pixel format, query device-format capabilities, choose a compatible depth/stencil D3DFORMAT, and return its NiSurfaceData.
+NiSurfaceData *__thiscall NiDX9Renderer_SelectCompatibleSurfaceData(
+        NiDX9Renderer *this,
+        NiSurfaceData *renderTargetSurfaceData,
+        unsigned int desiredDepthBits,
+        unsigned int desiredStencilBits)
 {
-  int v6; // eax
+  void *v6; // eax
   int v7; // edi
-  signed int v8; // eax
+  D3DFORMAT v8; // eax
   D3DFORMAT v9; // eax
 
-  if ( a2
-    && (v6 = (*(int (__thiscall **)(_DWORD, _DWORD))(**(this + 0x21E) + 0x80))(*(this + 0x21E), 0),
-        v7 = sub_497DD0((int)&unk_B4265C, v6),
-        v8 = sub_76BEF0(a2),
-        (v9 = sub_775280(*(this + 0x174), *(_DWORD *)(v7 + 0x1C), v8, a3, a4)) != D3DFMT_UNKNOWN) )
+  if ( renderTargetSurfaceData /*0x7647c9*/
+    && (v6 = this->member.defaultRTGroup->vtbl->GetRenderTargetData(this->member.defaultRTGroup, 0),
+        v7 = sub_497DD0((int)&stru_B4265C, (int)v6),
+        v8 = NiDX9Renderer_ConvertPixelFormatToD3DFormat(renderTargetSurfaceData),
+        (v9 = NiDX9DeviceDesc_SelectCompatibleDepthStencilFormat(
+                (_DWORD *)this->member.deviceDesc,
+                *(_DWORD *)(v7 + 0x1C),
+                v8,
+                desiredDepthBits,
+                desiredStencilBits)) != D3DFMT_UNKNOWN) )
   {
-    return CreateSurfaceData(v9);
+    return CreateSurfaceData(v9); /*0x7647cc*/
   }
   else
   {
-    return 0;
+    return 0; /*0x76477d*/
   }
 }

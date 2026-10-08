@@ -38,3 +38,12 @@
 0x72A980: pop     esi
 0x72A981: add     esp, 10h
 0x72A984: retn
+0x9CA570: mov     ecx, [ebp-10h]; this
+0x9CA573: jmp     ??1NiTexture@@UAE@XZ; NiTexture::~NiTexture(void)
+0x9CA578: mov     edx, [esp+arg_4]
+0x9CA57C: lea     eax, [edx-0Ch]
+0x9CA57F: mov     ecx, [edx-10h]
+0x9CA582: xor     ecx, eax
+0x9CA584: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA589: mov     eax, offset stru_AF2C68
+0x9CA58E: jmp     ___CxxFrameHandler3

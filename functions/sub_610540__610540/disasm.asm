@@ -1,4 +1,4 @@
-0x610540: push    0FFFFFFFFh
+0x610540: push    0FFFFFFFFh; RadiantAI: final pickpocket crime side-effect path. Builds crime type 1 record and notifies witnesses/dialogue/combat processing.
 0x610542: push    offset SEH_610540
 0x610547: mov     eax, large fs:0
 0x61054D: push    eax
@@ -27,7 +27,7 @@
 0x61059F: mov     ebp, eax
 0x6105A1: add     esp, 14h
 0x6105A4: mov     ecx, ebp; this
-0x6105A6: call    sub_5E6C60
+0x6105A6: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x6105AB: test    al, al
 0x6105AD: jnz     short loc_6105F5
 0x6105AF: mov     ecx, ebp
@@ -58,13 +58,13 @@
 0x61060B: cmp     eax, 64h ; 'd'
 0x61060E: jnz     short loc_61061F
 0x610610: mov     ecx, ebx
-0x610612: call    Actor_IsSneaking
+0x610612: call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.
 0x610617: test    al, al
 0x610619: jnz     loc_6108FB
 0x61061F: push    30h ; '0'; Size
 0x610621: call    FormHeapAlloc
 0x610626: add     esp, 4
-0x610629: mov     [esp+154h+var_140], eax
+0x610629: mov     dword ptr [esp+154h+useBase], eax
 0x61062D: test    eax, eax
 0x61062F: mov     [esp+154h+var_4], 0
 0x61063A: jz      short loc_610656
@@ -76,19 +76,19 @@
 0x610648: push    esi
 0x610649: push    1
 0x61064B: mov     ecx, eax
-0x61064D: call    sub_6070B0
+0x61064D: call    sub_6070B0; RadiantAI: crime event record constructor. type field at +4: observed 0=steal item, 1=pickpocket, 2=trespass, 3=attack, 4=murder, 5=horse theft.
 0x610652: mov     edi, eax
 0x610654: jmp     short loc_610658
 0x610656: xor     edi, edi
-0x610658: mov     ecx, [edi+8]; this
+0x610658: mov     ecx, [edi+8]; reference
 0x61065B: cmp     esi, ecx
 0x61065D: mov     [esp+154h+var_4], 0FFFFFFFFh
-0x610668: mov     byte ptr [esp+154h+var_140], 0
+0x610668: mov     [esp+154h+useBase], 0
 0x61066D: jz      short loc_610678
-0x61066F: call    TESObjectREFR_GetOwner
+0x61066F: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x610674: cmp     eax, esi
 0x610676: jnz     short loc_61067D
-0x610678: mov     byte ptr [esp+154h+var_140], 1
+0x610678: mov     [esp+154h+useBase], 1
 0x61067D: mov     ecx, [esi+58h]
 0x610680: mov     eax, [edi+0Ch]
 0x610683: mov     edx, [ecx]
@@ -137,20 +137,20 @@
 0x610701: call    ShowUIMessageBox
 0x610706: add     esp, 28h
 0x610709: jmp     loc_610889
-0x61070E: mov     ecx, [esp+154h+var_140]
-0x610712: push    ecx
-0x610713: push    esi
-0x610714: mov     ecx, edi
-0x610716: call    sub_605F60
+0x61070E: mov     ecx, dword ptr [esp+154h+useBase]
+0x610712: push    ecx; useBase
+0x610713: push    esi; observer
+0x610714: mov     ecx, edi; self
+0x610716: call    Crime_GetDispositionPenalty
 0x61071B: mov     edx, [esi]
 0x61071D: mov     edx, [edx+374h]
-0x610723: mov     [esp+154h+var_140], eax
-0x610727: fild    [esp+154h+var_140]
+0x610723: mov     dword ptr [esp+154h+useBase], eax
+0x610727: fild    dword ptr [esp+154h+useBase]
 0x61072B: mov     eax, [edi+0Ch]
 0x61072E: push    ecx
-0x61072F: fstp    [esp+158h+var_140]
+0x61072F: fstp    dword ptr [esp+158h+useBase]
 0x610733: mov     ecx, esi
-0x610735: fld     [esp+158h+var_140]
+0x610735: fld     dword ptr [esp+158h+useBase]
 0x610739: fstp    [esp+158h+var_158]
 0x61073C: push    eax
 0x61073D: call    edx
@@ -197,15 +197,15 @@
 0x6107B2: mov     eax, [edx+170h]
 0x6107B8: mov     ecx, ebp
 0x6107BA: call    eax
-0x6107BC: push    ebx
-0x6107BD: mov     ecx, edi
+0x6107BC: push    ebx; actor
+0x6107BD: mov     ecx, edi; self
 0x6107BF: mov     ds:0B361C4h, eax
-0x6107C4: call    sub_605F00
+0x6107C4: call    Crime_AddWitness
 0x6107C9: mov     ecx, [edi+0Ch]
-0x6107CC: push    7
-0x6107CE: push    2
+0x6107CC: push    7; index
+0x6107CE: push    2; topicType
 0x6107D0: mov     [esi+0E4h], ecx
-0x6107D6: call    TESTopic__GEtTopic
+0x6107D6: call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.
 0x6107DB: mov     ecx, [esi+58h]
 0x6107DE: mov     edx, [ecx]
 0x6107E0: add     esp, 8
@@ -232,10 +232,10 @@
 0x61081D: call    eax
 0x61081F: mov     ds:0B361C4h, eax
 0x610824: mov     ecx, [edi+0Ch]
-0x610827: push    0Dh
-0x610829: push    2
+0x610827: push    0Dh; index
+0x610829: push    2; topicType
 0x61082B: mov     [esi+0E4h], ecx
-0x610831: call    TESTopic__GEtTopic
+0x610831: call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.
 0x610836: mov     ebx, eax
 0x610838: mov     eax, [edi+0Ch]
 0x61083B: add     esp, 8
@@ -268,19 +268,19 @@
 0x61087C: push    esi
 0x61087D: call    edx
 0x61087F: mov     dword ptr ds:0B361C4h, 0
-0x610889: mov     ecx, edi
-0x61088B: call    sub_605F30
+0x610889: mov     ecx, edi; self
+0x61088B: call    Crime_GetWitnessCount
 0x610890: test    eax, eax
 0x610892: jnz     short loc_6108A6
-0x610894: mov     ecx, edi
-0x610896: call    sub_605E80
+0x610894: mov     ecx, edi; self
+0x610896: call    Crime_Destructor
 0x61089B: push    edi
-0x61089C: call    FormHeapFree
+0x61089C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6108A1: add     esp, 4
 0x6108A4: jmp     short loc_6108FB
-0x6108A6: push    edi
-0x6108A7: mov     ecx, offset ActorProcessManager_ptr
-0x6108AC: call    sub_675B30
+0x6108A6: push    edi; crime
+0x6108A7: mov     ecx, (offset qword_B3BB2C+1D4h); self
+0x6108AC: call    ActorProcessManager_AddCrime
 0x6108B1: mov     edi, [edi+0Ch]
 0x6108B4: push    1; a2
 0x6108B6: mov     ecx, esi; this
@@ -316,3 +316,19 @@
 0x610917: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x61091C: add     esp, 140h
 0x610922: retn    0Ch
+0x9C31A0: mov     eax, [ebp-140h]
+0x9C31A6: push    eax
+0x9C31A7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C31AC: pop     ecx
+0x9C31AD: retn
+0x9C31AE: mov     edx, [esp+arg_4]
+0x9C31B2: lea     eax, [edx-144h]
+0x9C31B8: mov     ecx, [edx-148h]
+0x9C31BE: xor     ecx, eax
+0x9C31C0: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C31C5: add     eax, 10h
+0x9C31C8: mov     ecx, [edx-4]
+0x9C31CB: xor     ecx, eax
+0x9C31CD: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C31D2: mov     eax, offset stru_AEBE28
+0x9C31D7: jmp     ___CxxFrameHandler3

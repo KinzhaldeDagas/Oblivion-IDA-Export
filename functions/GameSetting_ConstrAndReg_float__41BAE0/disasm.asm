@@ -21,7 +21,7 @@
 0x41BB21: lea     ecx, [esp+18h+arg_0]
 0x41BB25: push    ecx
 0x41BB26: push    eax
-0x41BB27: mov     ecx, offset dword_B35574
+0x41BB27: mov     ecx, offset g_GameSettingsByName
 0x41BB2C: call    NiTMap_GetAt
 0x41BB31: test    al, al
 0x41BB33: jz      short loc_41BB5B
@@ -40,7 +40,7 @@
 0x41BB5B: mov     eax, [esi+4]
 0x41BB5E: push    esi
 0x41BB5F: push    eax
-0x41BB60: mov     ecx, offset dword_B35574
+0x41BB60: mov     ecx, offset g_GameSettingsByName
 0x41BB65: call    sub_412D30
 0x41BB6A: mov     eax, esi
 0x41BB6C: mov     ecx, [esp+18h+var_C]
@@ -49,3 +49,12 @@
 0x41BB78: pop     esi
 0x41BB79: add     esp, 10h
 0x41BB7C: retn    8
+0x9AB570: mov     ecx, [ebp-10h]
+0x9AB573: jmp     loc_403BC0
+0x9AB578: mov     edx, [esp+arg_4]
+0x9AB57C: lea     eax, [edx-8]
+0x9AB57F: mov     ecx, [edx-0Ch]
+0x9AB582: xor     ecx, eax
+0x9AB584: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AB589: mov     eax, offset stru_AD8444
+0x9AB58E: jmp     ___CxxFrameHandler3

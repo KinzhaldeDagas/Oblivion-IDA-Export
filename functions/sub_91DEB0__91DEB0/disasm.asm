@@ -20,7 +20,6 @@
 0x91DEDF: mov     [esp+10h+arg_0], eax
 0x91DEE3: push    edi
 0x91DEE4: jmp     short loc_91DEF0
-0x91DEE6: align 10h
 0x91DEF0: mov     edx, [esp+14h+var_4]
 0x91DEF4: mov     edi, ds:0BA8458h
 0x91DEFA: mov     esi, [edx-10h]

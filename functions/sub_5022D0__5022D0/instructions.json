@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x5022D0",
-    "line": "push    ecx",
+    "line": "push    ecx; GameMode begin-block callback: returns true when InterfaceManager_IsMenuMode() is false.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5022D1",
-    "line": "call    InterfaceManager_IsMenuMode",
+    "line": "call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.",
     "mnemonic": "call",
     "size": 5
   },

@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x646580",
-    "line": "call    sub_6836E0",
+    "line": "call    sub_6836E0; Verified: path request/cache builder resolves a containing TESSubSpace candidate by interior cell list or WorldSpace +0x60 coordinate lookup, compares candidate identity with the current choice, and rebuilds the path request when it changes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -103,13 +103,13 @@
   },
   {
     "ea": "0x6465A6",
-    "line": "mov     ecx, [esi+34h]",
+    "line": "mov     ecx, [esi+34h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x6465A9",
-    "line": "push    edi",
+    "line": "push    edi; sourceRef",
     "mnemonic": "push",
     "size": 1
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x6465AF",
-    "line": "call    sub_689DC0",
+    "line": "call    TravelPath_AddRoadSegmentsForPath; Verified post-A* road augmentation. It walks TravelPath nodes, switches to the linked door's WorldSpace and TeleportData marker position on teleport transitions, then asks that world's TESRoad to add surface-derived position nodes for applicable segments. TravelPath_ComputeDistance subsequently sums the added node segments, so road data changes the measured travel distance; this is route measurement/surface sampling, not the A* route search.",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,49 +211,49 @@
   },
   {
     "ea": "0x6465D2",
-    "line": "mov     ecx, [esp-10h+arg_3C]",
+    "line": "mov     ecx, [esp-10h+destinationWorldspace]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6465D6",
-    "line": "push    ecx",
+    "line": "push    ecx; destinationWorldspace",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6465D7",
-    "line": "mov     ecx, [esi+34h]",
+    "line": "mov     ecx, [esi+34h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x6465DA",
-    "line": "push    ebp",
+    "line": "push    ebp; destinationCell",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6465DB",
-    "line": "lea     edx, [esp-8+arg_2C]",
+    "line": "lea     edx, [esp-8+destinationPosition]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6465DF",
-    "line": "push    edx",
+    "line": "push    edx; destinationPosition",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6465E0",
-    "line": "push    edi",
+    "line": "push    edi; sourceRef",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6465E1",
-    "line": "call    sub_68B030",
+    "line": "call    TravelPath_BuildToDestination; Verified top-level TravelPath build sequence: select the destination's smallest containing interior/exterior SubSpace (fallback to supplied cell/worldspace), call TravelPath_BuildRoute with the source reference and positions, then, on success, augment the route with TESRoad surface samples.",
     "mnemonic": "call",
     "size": 5
   },

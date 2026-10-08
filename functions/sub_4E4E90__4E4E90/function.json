@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x4E4E90",
+      "0x4E4ECE"
+    ]
+  ],
+  "chunks_sha256": "ac503a7e2dcc62f1e4246e6dc1a7b9a7c06570faebb822895d4d1d559656133b",
+  "comment_regular": "Verified scans the TESPathGrid point array for pointer identity and returns its u16 array index; returns 0xFFFFFFFF if no point array or no matching point.",
+  "comment_repeatable": "Verified scans the TESPathGrid point array for pointer identity and returns its u16 array index; returns 0xFFFFFFFF if no point array or no matching point.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4E4E90",
+  "display_name": "TESPathGrid_GetPointIndex",
   "end_ea": "0x4E4ECE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4E4E90",
+  "name": "TESPathGrid_GetPointIndex",
   "segment": ".text",
   "sha256": "ac503a7e2dcc62f1e4246e6dc1a7b9a7c06570faebb822895d4d1d559656133b",
   "size": 62,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E4E90",
-  "type": "int __thiscall(int this, int)",
+  "total_chunk_size": 62,
+  "type": "int __thiscall(TESPathGrid *this, TESPathGridPoint *point)",
   "xrefs_from_count": 33,
   "xrefs_to_count": 3
 }

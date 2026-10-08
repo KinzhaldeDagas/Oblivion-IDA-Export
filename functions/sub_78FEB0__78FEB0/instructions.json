@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x78FEB0",
-    "line": "sub     esp, 64h",
+    "line": "sub     esp, 64h; CBranch::BuildCrossSection consumes stock branch vertex position (+0x0C), radius (+0x18), and transform rows (+0x28..+0x3C) plus explicit fixed cross-section segment count.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x78FF2C",
-    "line": "fstp    [esp+68h+var_10]",
+    "line": "fstp    [esp+68h+rgba]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x78FF76",
-    "line": "push    0FFFFFFFFh; float",
+    "line": "push    0FFFFFFFFh; mapIndex",
     "mnemonic": "push",
     "size": 2
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x78FF7A",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x78FF9C",
-    "line": "fstp    [esp+78h+var_5C]",
+    "line": "fstp    [esp+78h+diffuseST]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x78FFA3",
-    "line": "lea     eax, [esp+78h+var_5C]",
+    "line": "lea     eax, [esp+78h+diffuseST]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x78FFAB",
-    "line": "push    eax; int",
+    "line": "push    eax; diffuseST",
     "mnemonic": "push",
     "size": 1
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x78FFB0",
-    "line": "call    sub_796320",
+    "line": "call    OB_CIndexedGeometry_AddVertexTexCoord0_010201A0; Legacy TexCoord0 writer: stores diffuse S/T, optionally retains original CAD S/T plus map index, and applies the global T-flip only to the exported diffuse layer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -787,7 +787,7 @@
   },
   {
     "ea": "0x7900AB",
-    "line": "fstp    [esp+74h+var_40]",
+    "line": "fstp    [esp+74h+tangent]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -835,7 +835,7 @@
   },
   {
     "ea": "0x7900C2",
-    "line": "lea     ecx, [esp+74h+var_40]",
+    "line": "lea     ecx, [esp+74h+tangent]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -847,13 +847,13 @@
   },
   {
     "ea": "0x7900C8",
-    "line": "push    ecx",
+    "line": "push    ecx; tangent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7900C9",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -877,7 +877,7 @@
   },
   {
     "ea": "0x7900D4",
-    "line": "call    sub_796590",
+    "line": "call    OB_CIndexedGeometry_AddVertexTangent_010201A0; Oblivion CIndexedGeometry::AddVertexTangent. Appends one xyz tangent to the indexed vertex stream.",
     "mnemonic": "call",
     "size": 5
   },
@@ -889,7 +889,7 @@
   },
   {
     "ea": "0x7900DD",
-    "line": "lea     edx, [esp+74h+var_1C]",
+    "line": "lea     edx, [esp+74h+binormal]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -901,7 +901,7 @@
   },
   {
     "ea": "0x7900E3",
-    "line": "push    edx",
+    "line": "push    edx; binormal",
     "mnemonic": "push",
     "size": 1
   },
@@ -913,7 +913,7 @@
   },
   {
     "ea": "0x7900E8",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -973,7 +973,7 @@
   },
   {
     "ea": "0x790100",
-    "line": "fstp    [esp+78h+var_1C]",
+    "line": "fstp    [esp+78h+binormal]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -997,7 +997,7 @@
   },
   {
     "ea": "0x79010C",
-    "line": "fld     [esp+78h+var_40]",
+    "line": "fld     [esp+78h+tangent]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1063,7 +1063,7 @@
   },
   {
     "ea": "0x790128",
-    "line": "call    sub_7965E0",
+    "line": "call    OB_CIndexedGeometry_AddVertexBinormal_010201A0; Oblivion CIndexedGeometry::AddVertexBinormal. Appends one xyz binormal to the indexed vertex stream.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1291,13 +1291,13 @@
   },
   {
     "ea": "0x7901A2",
-    "line": "fstp    [esp+7Ch+var_7C]; float",
+    "line": "fstp    [esp+7Ch+windWeight]; float",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7901A5",
-    "line": "call    sub_78F2C0",
+    "line": "call    OB_CBranchFlare_Distance_010201A0; Computes flare angular/progress falloff for a 0x18-byte branch flare entry.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1387,7 +1387,7 @@
   },
   {
     "ea": "0x7901E7",
-    "line": "fstp    [esp+74h+var_34]",
+    "line": "fstp    [esp+74h+coord]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1591,7 +1591,7 @@
   },
   {
     "ea": "0x790246",
-    "line": "mov     [esp+74h+var_34], eax",
+    "line": "mov     [esp+74h+coord], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1717,49 +1717,49 @@
   },
   {
     "ea": "0x790281",
-    "line": "lea     eax, [esp+74h+var_34]",
+    "line": "lea     eax, [esp+74h+coord]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x790285",
-    "line": "push    eax",
+    "line": "push    eax; coord",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790286",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x790288",
-    "line": "call    sub_796260",
+    "line": "call    OB_CIndexedGeometry_AddVertexCoord_010201A0; Oblivion CIndexedGeometry::AddVertexCoord. Appends xyz; when CPU wind is active it also preserves xyz in originalVertexCoords for later deformation.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x79028D",
-    "line": "lea     ecx, [esp+74h+var_10]",
+    "line": "lea     ecx, [esp+74h+rgba]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x790291",
-    "line": "push    ecx",
+    "line": "push    ecx; rgba",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790292",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x790294",
-    "line": "call    sub_796230",
+    "line": "call    OB_CIndexedGeometry_AddVertexColor_010201A0; Oblivion CIndexedGeometry::AddVertexColor. Packs four float channels to the engine's uint color format and appends one packed color.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1777,7 +1777,7 @@
   },
   {
     "ea": "0x79029F",
-    "line": "mov     edx, [esp+74h+arg_1C]",
+    "line": "mov     edx, dword ptr [esp+74h+windMatrixIndex]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1789,7 +1789,7 @@
   },
   {
     "ea": "0x7902AD",
-    "line": "push    edx",
+    "line": "push    edx; windMatrixIndex",
     "mnemonic": "push",
     "size": 1
   },
@@ -1801,19 +1801,19 @@
   },
   {
     "ea": "0x7902AF",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7902B1",
-    "line": "fstp    [esp+7Ch+var_7C]",
+    "line": "fstp    [esp+7Ch+windWeight]; windWeight",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7902B4",
-    "line": "call    sub_796540",
+    "line": "call    OB_CIndexedGeometry_AddVertexWind_010201A0; Oblivion legacy CIndexedGeometry::AddVertexWind. Stores 1-weight and maps the input index into the CWindEngine local matrix window. Only one weight/index stream exists here; 4.1 later split this into Wind1/Wind2.",
     "mnemonic": "call",
     "size": 5
   },

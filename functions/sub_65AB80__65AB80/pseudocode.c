@@ -1,16 +1,16 @@
-char __thiscall sub_65AB80(_DWORD *this)
+char __thiscall sub_65AB80(NiObjectNET **this)
 {
   char v2; // al
-  _WORD *v3; // esi
+  NiObjectNET *v3; // esi
   char v4; // bl
 
-  v2 = (*(int (__thiscall **)(_DWORD *))(*this + 0x1C8))(this);
-  v3 = (_WORD *)*(this + 0xF);
-  v4 = v2;
-  if ( v3 )
+  v2 = ((int (__thiscall *)(NiObjectNET **))(*this)[0x13].vtbl)(this); /*0x65ab8c*/
+  v3 = *(this + 0xF); /*0x65ab8e*/
+  v4 = v2; /*0x65ab93*/
+  if ( v3 ) /*0x65ab95*/
   {
-    sub_88CD50(v3, 1, 0);
-    return v4 | 1;
+    sub_88CD50(v3, 1, 0); /*0x65ab9c*/
+    return v4 | 1; /*0x65aba4*/
   }
-  return v4;
+  return v4; /*0x65aba7*/
 }

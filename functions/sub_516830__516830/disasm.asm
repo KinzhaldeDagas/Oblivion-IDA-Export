@@ -30,7 +30,7 @@
 0x516888: push    edx; int
 0x516889: push    ecx; int
 0x51688A: mov     ecx, edi; int
-0x51688C: call    Script_GetRefVariableByIndex
+0x51688C: call    Script_GetRefVariableByIndex; Hot Reload OBSE decode: Script ref-variable lookup. Uses globals B361B0/B361B4/B361B8/B09E1C as a last-ref cache.
 0x516891: test    eax, eax
 0x516893: jz      short loc_5168C2
 0x516895: cmp     dword ptr [eax+0Ch], 0
@@ -62,7 +62,7 @@
 0x5168E4: jnz     short loc_516955
 0x5168E6: mov     eax, [ebp+0]
 0x5168E9: push    eax; a1
-0x5168EA: call    ScriptRunner_LookupCommandByOpcode
+0x5168EA: call    ScriptRunner_LookupCommandInfoByOpcode; TES4 authoritative: vanilla command lookup. Supports opcode ranges 0x100..0x182 at 0xB0B420 and 0x1000..0x1170 at 0xB0C8C0; each CommandInfo record is 0x28 bytes.
 0x5168EF: mov     esi, eax
 0x5168F1: add     esp, 4
 0x5168F4: test    esi, esi

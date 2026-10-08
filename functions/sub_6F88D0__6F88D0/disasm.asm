@@ -11,13 +11,13 @@
 0x6F88EB: jge     short loc_6F88F9
 0x6F88ED: mov     ecx, [esi+10h]
 0x6F88F0: push    ecx
-0x6F88F1: call    FormHeapFree
+0x6F88F1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F88F6: add     esp, 4
 0x6F88F9: test    [esp+4+arg_0], 1
 0x6F88FE: mov     dword ptr [esi], offset ??_7facet@locale@std@@6B@; const std::locale::facet::`vftable'
 0x6F8904: jz      short loc_6F890F
 0x6F8906: push    esi
-0x6F8907: call    FormHeapFree
+0x6F8907: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F890C: add     esp, 4
 0x6F890F: mov     eax, esi
 0x6F8911: pop     esi

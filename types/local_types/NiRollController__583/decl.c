@@ -1,1 +1,1 @@
-NiRollController
+struct NiRollController;

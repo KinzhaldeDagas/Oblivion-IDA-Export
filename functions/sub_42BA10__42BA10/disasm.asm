@@ -10,15 +10,15 @@
 0x42BA21: pop     esi
 0x42BA22: retn    4
 0x42BA25: lea     ecx, [edi+4]
-0x42BA28: push    ecx
-0x42BA29: lea     ecx, [esi+4]
-0x42BA2C: call    sub_8AA390
+0x42BA28: push    ecx; other
+0x42BA29: lea     ecx, [esi+4]; this
+0x42BA2C: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x42BA31: test    al, al
 0x42BA33: jnz     short loc_42BA1E
 0x42BA35: add     edi, 10h
-0x42BA38: push    edi
-0x42BA39: lea     ecx, [esi+10h]
-0x42BA3C: call    sub_8AA390
+0x42BA38: push    edi; other
+0x42BA39: lea     ecx, [esi+10h]; this
+0x42BA3C: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x42BA41: test    al, al
 0x42BA43: pop     edi
 0x42BA44: setnz   al

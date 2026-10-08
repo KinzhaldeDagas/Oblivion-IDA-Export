@@ -14,7 +14,7 @@
 0x57EA3E: push    2
 0x57EA40: mov     ecx, esi
 0x57EA42: mov     edi, eax
-0x57EA44: call    NiNode_GetNiPropertyByID
+0x57EA44: call    NiNode_GetNiPropertyByID;
 0x57EA49: push    edi
 0x57EA4A: mov     ebx, eax
 0x57EA4C: call    sub_588E60
@@ -55,9 +55,9 @@
 0x57EAB2: test    ah, 41h
 0x57EAB5: jnz     short loc_57EACE
 0x57EAB7: fstp    st(1)
-0x57EAB9: fstp    [esp+18h+a2]; a3
-0x57EABC: push    0FA1h; a2
-0x57EAC1: call    Tile_SetFloat
+0x57EAB9: fstp    [esp+18h+a2]; value
+0x57EABC: push    0FA1h; propertyCode
+0x57EAC1: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x57EAC6: pop     edi
 0x57EAC7: pop     ebp
 0x57EAC8: pop     ebx
@@ -65,9 +65,9 @@
 0x57EACA: pop     ecx
 0x57EACB: retn    0Ch
 0x57EACE: fstp    st
-0x57EAD0: fstp    [esp+18h+a2]; a3
-0x57EAD3: push    0FA1h; a2
-0x57EAD8: call    Tile_SetFloat
+0x57EAD0: fstp    [esp+18h+a2]; value
+0x57EAD3: push    0FA1h; propertyCode
+0x57EAD8: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x57EADD: pop     edi
 0x57EADE: pop     ebp
 0x57EADF: pop     ebx
@@ -81,7 +81,7 @@
 0x57EAF3: fdiv    qword ptr ds:0A3DDD8h
 0x57EAF9: fstp    [esp+14h+arg_0]
 0x57EAFD: push    esi
-0x57EAFE: push    offset dword_B3FCD4
+0x57EAFE: push    offset stru_B3FCD4
 0x57EB03: call    NiRTTI_Cast
 0x57EB08: fld     [esp+1Ch+arg_0]
 0x57EB0C: fld     [esp+1Ch+arg_4]
@@ -215,7 +215,6 @@
 0x57EC54: pop     ecx
 0x57EC55: retn    0Ch
 0x57EC58: jmp     short loc_57EC60
-0x57EC5A: align 10h
 0x57EC60: fld     [esp+14h+arg_0]
 0x57EC64: fld     [esp+14h+arg_4]
 0x57EC68: cmp     eax, esi

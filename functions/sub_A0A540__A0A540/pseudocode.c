@@ -1,4 +1,4 @@
-BSStringT *sub_A0A540()
+NiRTTI *sub_A0A540()
 {
-  return sub_70E220((BSStringT *)dword_B40168, "NiVectorExtraData", (int)dword_B3FD44);
+  return NiRTTI_Constructor(&stru_B40168, "NiVectorExtraData", &stru_B3FD44); /*0xa0a554*/
 }

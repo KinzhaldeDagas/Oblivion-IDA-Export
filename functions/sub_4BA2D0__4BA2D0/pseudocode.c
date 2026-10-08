@@ -1,22 +1,31 @@
-int *__thiscall sub_4BA2D0(int *this, int a2, int a3, int a4, int a5, int a6, void *Src, void *a8)
+// Verified Oblivion context has a 0x1C-byte payload; Fallout's RTTI-named TREE_BILLBOARD_DATA is also 0x1C bytes and its constructor copies an instanceCount-sized NiPoint3 locations array and float color array. Probable field mapping follows matching argument order and downstream use; Oblivion field semantics are not promoted beyond what its own callsites establish.
+DistantTreeBillboardContext *__thiscall DistantTreeBillboardContext_ctor(
+        DistantTreeBillboardContext *this,
+        TESObjectTREE_BillboardTail *tree,
+        unsigned int cellChunk,
+        unsigned int cellKey,
+        NiNode *instancedNode,
+        unsigned int instanceCount,
+        NiPoint3 *positions,
+        float *colorValues)
 {
-  void *v9; // eax
-  void *v10; // eax
-  size_t v12; // [esp-18h] [ebp-1Ch]
-  size_t v13; // [esp-8h] [ebp-Ch]
+  NiPoint3 *v9; // eax
+  float *v10; // eax
+  unsigned int v12; // [esp-18h] [ebp-1Ch]
+  unsigned int v13; // [esp-8h] [ebp-Ch]
 
-  *this = a2;
-  *(this + 1) = a3;
-  *(this + 3) = a5;
-  *(this + 2) = a4;
-  *(this + 4) = a6;
-  v9 = (void *)FormHeapAlloc((0xC * (unsigned __int64)(unsigned int)a6) >> 0x20 != 0 ? 0xFFFFFFFF : 0xC * a6);
-  LODWORD(v13) = 0xC * *(this + 4);
-  *(this + 5) = (int)v9;
-  memcpy(v9, Src, v13);
-  v10 = (void *)FormHeapAlloc((unsigned __int64)(unsigned int)*(this + 4) >> 0x1E != 0 ? 0xFFFFFFFF : 4 * *(this + 4));
-  LODWORD(v12) = 4 * *(this + 4);
-  *(this + 6) = (int)v10;
-  memcpy(v10, a8, v12);
-  return this;
+  this->treeObject = tree; /*0x4ba2df*/
+  this->cellChunk = cellChunk; /*0x4ba2e5*/
+  this->instancedNode = instancedNode; /*0x4ba2e8*/
+  this->cellKey = cellKey; /*0x4ba2ef*/
+  this->instanceCount = instanceCount; /*0x4ba2f4*/
+  v9 = (NiPoint3 *)FormHeapAlloc((0xC * (unsigned __int64)instanceCount) >> 0x20 != 0 ? 0xFFFFFFFF : 0xC * instanceCount);
+  v13 = 0xC * this->instanceCount; /*0x4ba319*/
+  this->locations = v9; /*0x4ba31c*/
+  memcpy(v9, positions, v13); /*0x4ba31f*/
+  v10 = (float *)FormHeapAlloc((unsigned __int64)this->instanceCount >> 0x1E != 0 ? 0xFFFFFFFF : 4 * this->instanceCount);
+  v12 = 4 * this->instanceCount; /*0x4ba348*/
+  this->colorValues = v10; /*0x4ba34b*/
+  memcpy(v10, colorValues, v12); /*0x4ba34e*/
+  return this; /*0x4ba358*/
 }

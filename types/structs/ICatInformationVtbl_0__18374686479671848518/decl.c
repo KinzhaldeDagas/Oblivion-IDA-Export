@@ -1,1 +1,1 @@
-ICatInformationVtbl_0
+typedef ICatInformationVtbl ICatInformationVtbl_0;

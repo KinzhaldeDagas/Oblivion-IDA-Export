@@ -170,7 +170,7 @@
 0x5A5B2D: mov     [eax+8], ecx
 0x5A5B30: fstp    [esp+70h+a2]; a2
 0x5A5B33: mov     ecx, [ebx+60h]; this
-0x5A5B36: call    NiAVObject_UpdateNiAVObject
+0x5A5B36: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x5A5B3B: pop     edi
 0x5A5B3C: pop     esi
 0x5A5B3D: pop     ebp

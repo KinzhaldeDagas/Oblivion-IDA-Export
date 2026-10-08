@@ -1,1 +1,1 @@
-ExtraFriendHitList
+struct ExtraFriendHitList;

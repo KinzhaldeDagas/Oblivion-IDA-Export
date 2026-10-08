@@ -1,64 +1,67 @@
-_DWORD *__thiscall sub_785580(_DWORD *this, int a2)
+// OBLIVION AUTHORITY (2026-08-30): Deep copy assignment for vector<unsigned int>, covering self, empty, capacity-reuse, and reallocation paths. CIndexedGeometry::CombineStrips uses it for per-LOD triangle totals.
+OB_stVectorUInt32_010201A0 *__thiscall OB_stVectorUInt32_CopyAssign_010201A0(
+        OB_stVectorUInt32_010201A0 *this,
+        const OB_stVectorUInt32_010201A0 *source)
 {
-  char *v3; // ebx
+  unsigned int *begin; // ebx
   unsigned int v4; // edx
-  int v6; // eax
+  unsigned int *v6; // eax
   unsigned int v7; // ecx
-  int v8; // eax
-  int v9; // ecx
+  unsigned int *v8; // eax
+  unsigned int *v9; // ecx
   unsigned int v10; // ecx
   int v11; // ecx
-  char *v12; // ebx
-  int v13; // ecx
+  const unsigned int *v12; // ebx
+  unsigned int *v13; // ecx
   unsigned int v14; // eax
 
-  if ( this == (_DWORD *)a2 )
-    return this;
-  v3 = *(char **)(a2 + 4);
-  if ( !v3 || (v4 = (*(_DWORD *)(a2 + 8) - (int)v3) >> 2) == 0 )
+  if ( this == source ) /*0x78558a*/
+    return this; /*0x78558a*/
+  begin = source->begin; /*0x785591*/
+  if ( !begin || (v4 = source->end - begin) == 0 ) /*0x7855a3*/
   {
-    sub_784A70((char **)this);
-    return this;
+    OB_stVector4_Clear_010201A0((OB_stVector4_010201A0 *)this); /*0x7855a5*/
+    return this; /*0x7855b0*/
   }
-  v6 = *(this + 1);
-  if ( v6 )
-    v7 = (*(this + 2) - v6) >> 2;
+  v6 = this->begin; /*0x7855b3*/
+  if ( v6 ) /*0x7855b8*/
+    v7 = this->end - v6; /*0x7855c3*/
   else
-    v7 = 0;
-  if ( v4 <= v7 )
+    v7 = 0; /*0x7855ba*/
+  if ( v4 <= v7 ) /*0x7855c8*/
   {
-    sub_790420(v3, *(_DWORD *)(a2 + 8), (void *)*(this + 1));
-    v8 = *(_DWORD *)(a2 + 4);
-    if ( v8 )
-      v9 = *(this + 1) + 4 * ((*(_DWORD *)(a2 + 8) - v8) >> 2);
+    OB_stVector4_CopyRange_010201A0(begin, source->end, this->begin); /*0x7855cd*/
+    v8 = source->begin; /*0x7855d2*/
+    if ( v8 ) /*0x7855da*/
+      v9 = &this->begin[source->end - v8]; /*0x7855fc*/
     else
-      v9 = *(this + 1);
-    *(this + 2) = v9;
-    return this;
+      v9 = this->begin; /*0x7855e2*/
+    this->end = v9; /*0x7855e7*/
+    return this; /*0x7855ed*/
   }
-  if ( v6 )
-    v10 = (*(this + 3) - v6) >> 2;
+  if ( v6 ) /*0x78560c*/
+    v10 = this->capacity - v6; /*0x785617*/
   else
-    v10 = 0;
-  if ( v4 > v10 )
+    v10 = 0; /*0x78560e*/
+  if ( v4 > v10 ) /*0x78561c*/
   {
-    if ( v6 )
-      FormHeapFree(*(this + 1));
-    v13 = *(_DWORD *)(a2 + 4);
-    if ( v13 )
-      v14 = (*(_DWORD *)(a2 + 8) - v13) >> 2;
+    if ( v6 ) /*0x78565c*/
+      FormHeapFree((unsigned int)this->begin); /*0x78565f*/
+    v13 = source->begin; /*0x785667*/
+    if ( v13 ) /*0x78566c*/
+      v14 = source->end - v13; /*0x785677*/
     else
-      v14 = 0;
-    if ( sub_795000(this, v14) )
-      *(this + 2) = sub_7A25C0(*(void **)(a2 + 4), *(_DWORD *)(a2 + 8), (void *)*(this + 1));
-    return this;
+      v14 = 0; /*0x78566e*/
+    if ( OB_stVectorUInt32_Buy_010201A0(this, v14) ) /*0x78567d*/
+      this->end = OB_stVector4_UninitializedCopyRange_010201A0(source->begin, source->end, this->begin); /*0x785699*/
+    return this; /*0x78569f*/
   }
-  if ( v6 )
-    v11 = (*(this + 2) - v6) >> 2;
+  if ( v6 ) /*0x785620*/
+    v11 = this->end - v6; /*0x78562b*/
   else
-    v11 = 0;
-  v12 = &v3[4 * v11];
-  sub_790420(*(void **)(a2 + 4), (int)v12, (void *)*(this + 1));
-  *(this + 2) = sub_7A25C0(v12, *(_DWORD *)(a2 + 8), (void *)*(this + 2));
-  return this;
+    v11 = 0; /*0x785622*/
+  v12 = &begin[v11]; /*0x785631*/
+  OB_stVector4_CopyRange_010201A0(source->begin, v12, this->begin); /*0x785636*/
+  this->end = OB_stVector4_UninitializedCopyRange_010201A0(v12, source->end, this->end); /*0x785650*/
+  return this; /*0x7855ac*/
 }

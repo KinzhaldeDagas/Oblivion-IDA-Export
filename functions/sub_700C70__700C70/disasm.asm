@@ -221,11 +221,11 @@
 0x700F5E: shr     ecx, 4
 0x700F61: cmp     eax, ecx
 0x700F63: setnz   dl
-0x700F66: push    ebp; Size
+0x700F66: push    ebp; byteCount
 0x700F67: lea     eax, [esp+edx*4+38h+Src]
-0x700F6B: push    eax; Src
-0x700F6C: push    edi; Dst
-0x700F6D: call    _memcpy
+0x700F6B: push    eax; source
+0x700F6C: push    edi; destination
+0x700F6D: call    _memcpy;
 0x700F72: add     ebx, 1
 0x700F75: add     esp, 0Ch
 0x700F78: add     edi, ebp
@@ -251,3 +251,15 @@
 0x700FB7: pop     ebx
 0x700FB8: add     esp, 20h
 0x700FBB: retn
+0x9C2850: mov     eax, [ebp-1Ch]
+0x9C2853: push    eax
+0x9C2854: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C2859: pop     ecx
+0x9C285A: retn
+0x9C285B: mov     edx, [esp+arg_4]
+0x9C285F: lea     eax, [edx-24h]
+0x9C2862: mov     ecx, [edx-28h]
+0x9C2865: xor     ecx, eax
+0x9C2867: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C286C: mov     eax, offset stru_AEB65C
+0x9C2871: jmp     ___CxxFrameHandler3

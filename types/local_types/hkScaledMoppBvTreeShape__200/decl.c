@@ -1,1 +1,1 @@
-hkScaledMoppBvTreeShape
+struct hkScaledMoppBvTreeShape;

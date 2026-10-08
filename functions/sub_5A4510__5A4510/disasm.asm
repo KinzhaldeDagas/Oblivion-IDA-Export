@@ -4,7 +4,7 @@
 0x5A4520: jz      loc_5A4656
 0x5A4526: push    0
 0x5A4528: push    3F1h
-0x5A452D: call    sub_5790E0
+0x5A452D: call    InterfaceManager_IsMenuVisibleByID; CustomAnimSupport evidence: player node/control-state check used by install/defer and playback paths.
 0x5A4532: add     esp, 8
 0x5A4535: test    al, al
 0x5A4537: jz      short loc_5A4557
@@ -25,7 +25,7 @@
 0x5A4570: mov     edx, [eax]
 0x5A4572: push    eax
 0x5A4573: mov     ds:0B3B334h, edx
-0x5A4579: call    FormHeapFree
+0x5A4579: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5A457E: add     esp, 4
 0x5A4581: jmp     short loc_5A458D
 0x5A4583: mov     dword ptr ds:0B3B334h, 0
@@ -90,7 +90,7 @@
 0x5A4643: call    InterfaceManager_GetSingleton
 0x5A4648: add     esp, 8
 0x5A464B: mov     ecx, eax
-0x5A464D: call    sub_57F9F0
+0x5A464D: call    InterfaceManager__SetCurrentFocusTarget; AchievementsNative evidence: focused tile with xlist=&xitem drives parent xscroll by pulsing the xscroll target's user5 through -999999, tile xscroll, then 0; do not leave scroll target user5 at the desired scroll value.
 0x5A4652: mov     al, 1
 0x5A4654: pop     esi
 0x5A4655: retn

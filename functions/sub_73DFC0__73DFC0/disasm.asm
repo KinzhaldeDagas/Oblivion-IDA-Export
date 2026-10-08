@@ -1,10 +1,10 @@
-0x73DFC0: push    ebx
+0x73DFC0: push    ebx; Pass225: NiScreenTexture post-load resolver; resolves queued object ref and assigns/refcounts +0x14 texturing property.
 0x73DFC1: push    esi
 0x73DFC2: mov     esi, [esp+8+arg_0]
 0x73DFC6: push    edi
 0x73DFC7: push    esi
 0x73DFC8: mov     edi, ecx
-0x73DFCA: call    nullsub_returnvVoid_1arg
+0x73DFCA: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x73DFCF: mov     ecx, esi
 0x73DFD1: call    sub_7124A0
 0x73DFD6: mov     esi, [edi+14h]

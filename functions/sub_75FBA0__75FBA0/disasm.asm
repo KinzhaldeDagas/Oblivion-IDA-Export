@@ -1,4 +1,4 @@
-0x75FBA0: push    ebx
+0x75FBA0: push    ebx; Verified (Oblivion): pass-level binder applies the active NiD3DPass PixelConstantMap and VertexConstantMap after binding its shader programs. The ShadowLightShader pixel/vertex maps are then applied by NiD3DShader_SetupShaderPrograms, so texture-effect constants flow through shader-owned maps after any pass-owned map entries.
 0x75FBA1: mov     ebx, [esp+4+arg_8]
 0x75FBA5: push    ebp
 0x75FBA6: push    esi
@@ -94,7 +94,6 @@
 0x75FC88: cmp     ds:0B28CB0h, ebp
 0x75FC8E: jbe     loc_75FD7F
 0x75FC94: jmp     short loc_75FCA0
-0x75FC96: align 10h
 0x75FCA0: mov     ecx, ds:0B42040h
 0x75FCA6: mov     eax, [ecx]
 0x75FCA8: mov     edx, [eax+0C8h]
@@ -121,7 +120,7 @@
 0x75FCD9: mov     ecx, eax
 0x75FCDB: mov     [esp+1Ch+arg_20], ebp
 0x75FCDF: mov     byte ptr [esp+1Ch+arg_0], bl
-0x75FCE3: call    sub_7730A0
+0x75FCE3: call    sub_7730A0; DX10OBSE mesh-texturing decode: D3D texture-stage state lookup. Uses B427E0 state-to-slot table; returns override/current value plus source flag when state is tracked by the stage state group.
 0x75FCE8: test    al, al
 0x75FCEA: jz      short loc_75FCFB
 0x75FCEC: test    [esp+10h+arg_20], 100h

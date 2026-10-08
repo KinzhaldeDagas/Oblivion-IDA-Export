@@ -1,4 +1,4 @@
-0x6804D0: movzx   ecx, word ptr [ecx]
+0x6804D0: movzx   ecx, word ptr [ecx]; Verified: tests state flag bit 0x02. The main A* loop sets this bit after expanding the popped node, so expanded/closed is Verified.
 0x6804D3: xor     eax, eax
 0x6804D5: cmp     cx, ds:0B3BF04h
 0x6804DC: jnb     short loc_6804EA

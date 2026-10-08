@@ -55,3 +55,12 @@
 0x64321B: pop     ebx
 0x64321C: add     esp, 0Ch
 0x64321F: retn    10h
+0x9C3950: lea     ecx, [ebp+0Ch]; void *
+0x9C3953: jmp     sub_4BDDC0
+0x9C3958: mov     edx, [esp+arg_4]
+0x9C395C: lea     eax, [edx-0Ch]
+0x9C395F: mov     ecx, [edx-10h]
+0x9C3962: xor     ecx, eax
+0x9C3964: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C3969: mov     eax, offset stru_AEC4C8
+0x9C396E: jmp     ___CxxFrameHandler3

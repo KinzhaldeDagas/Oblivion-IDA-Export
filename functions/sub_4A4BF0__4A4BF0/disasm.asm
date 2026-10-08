@@ -1,4 +1,4 @@
-0x4A4BF0: push    0FFFFFFFFh
+0x4A4BF0: push    0FFFFFFFFh; Verified: merges Map region-data fields with priority/override handling and invokes Map's data-application virtual; exact semantic name of the applied payload remains Candidate.
 0x4A4BF2: push    offset SEH_4A4BF0
 0x4A4BF7: mov     eax, large fs:0
 0x4A4BFD: push    eax
@@ -46,7 +46,7 @@
 0x4A4C7E: call    eax
 0x4A4C80: mov     ecx, dword ptr [esp+28h+var_1C]
 0x4A4C84: push    ecx
-0x4A4C85: call    FormHeapFree
+0x4A4C85: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4A4C8A: add     esp, 4
 0x4A4C8D: mov     ecx, [esp+28h+var_C]
 0x4A4C91: mov     large fs:0, ecx
@@ -175,3 +175,18 @@
 0x4A4E25: pop     esi
 0x4A4E26: add     esp, 1Ch
 0x4A4E29: retn    8
+0x9B2810: lea     ecx, [ebp-1Ch]; void *
+0x9B2813: jmp     BSStringT_Clear
+0x9B2818: lea     ecx, [ebp-1Ch]; void *
+0x9B281B: jmp     BSStringT_Clear
+0x9B2820: lea     ecx, [ebp-1Ch]; void *
+0x9B2823: jmp     BSStringT_Clear
+0x9B2828: lea     ecx, [ebp-14h]; void *
+0x9B282B: jmp     BSStringT_Clear
+0x9B2830: mov     edx, [esp+arg_4]
+0x9B2834: lea     eax, [edx-18h]
+0x9B2837: mov     ecx, [edx-1Ch]
+0x9B283A: xor     ecx, eax
+0x9B283C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B2841: mov     eax, offset stru_ADE7B8
+0x9B2846: jmp     ___CxxFrameHandler3

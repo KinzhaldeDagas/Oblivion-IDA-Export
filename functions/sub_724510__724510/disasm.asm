@@ -39,16 +39,16 @@
 0x72458A: cmp     edi, eax
 0x72458C: jb      short loc_724523
 0x72458E: pop     ebx
-0x72458F: lea     ecx, [esp+3Ch+var_34]
+0x72458F: lea     ecx, [esp+3Ch+transform]
 0x724593: push    ecx
 0x724594: lea     ecx, [esi+64h]
-0x724597: call    sub_718A80
-0x72459C: lea     edx, [esp+3Ch+var_34]
-0x7245A0: push    edx
+0x724597: call    sub_718A80;
+0x72459C: lea     edx, [esp+3Ch+transform]
+0x7245A0: push    edx; transform
 0x7245A1: lea     eax, [esi+20h]
-0x7245A4: push    eax
-0x7245A5: lea     ecx, [esi+0CCh]
-0x7245AB: call    sub_72A820
+0x7245A4: push    eax; input
+0x7245A5: lea     ecx, [esi+0CCh]; output
+0x7245AB: call    NiBound_TransformInto
 0x7245B0: pop     edi
 0x7245B1: pop     esi
 0x7245B2: add     esp, 34h

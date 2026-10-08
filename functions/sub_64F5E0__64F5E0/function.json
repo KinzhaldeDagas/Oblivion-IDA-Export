@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x64F5E0",
+      "0x64F649"
+    ]
+  ],
+  "chunks_sha256": "7cd0b3c75b8dd65d381f0d6b966b8a22de969331882c09cee726bea43d997f90",
+  "comment_regular": "Caches exact-name ArrowBone from ActorAnimData->RootNode. Ordinary/third-person results go to MiddleHighProcess+0x110; player first-person ActorAnimData (+0x5CC) selects global cache 0xB3BA98. Returns true unconditionally, including null input and lookup failure. This function takes ActorAnimData, unlike the +0x128/+0x12C accessors that take ActorSkinInfo.",
+  "comment_repeatable": "Caches exact-name ArrowBone from ActorAnimData->RootNode. Ordinary/third-person results go to MiddleHighProcess+0x110; player first-person ActorAnimData (+0x5CC) selects global cache 0xB3BA98. Returns true unconditionally, including null input and lookup failure. This function takes ActorAnimData, unlike the +0x128/+0x12C accessors that take ActorSkinInfo.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_64F5E0",
+  "display_name": "MiddleHighProcess_CacheArrowBoneNode",
   "end_ea": "0x64F649",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_64F5E0",
+  "name": "MiddleHighProcess_CacheArrowBoneNode",
   "segment": ".text",
   "sha256": "7cd0b3c75b8dd65d381f0d6b966b8a22de969331882c09cee726bea43d997f90",
   "size": 105,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x64F5E0",
-  "type": "char __thiscall(HighProcess *this, _DWORD *a2)",
+  "total_chunk_size": 105,
+  "type": "bool __thiscall(MiddleHighProcess *this, ActorAnimData *animData)",
   "xrefs_from_count": 39,
   "xrefs_to_count": 2
 }

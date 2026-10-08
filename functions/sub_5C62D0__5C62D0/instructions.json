@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x5C630D",
-    "line": "push    eax; a2",
+    "line": "push    eax; categoryName",
     "mnemonic": "push",
     "size": 1
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x5C6340",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x5C634A",
-    "line": "call    sub_5C3440",
+    "line": "call    RaceSexMenu_FindControlTile; Resolve the localized Hair > Length control Tile.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x5C6356",
-    "line": "fstp    [esp+20h+var_14]",
+    "line": "fstp    [esp+20h+var_14]; Hair > Length commit reads Tile user0 (0xFAE), not TESNPC+0x1CC, and immediately writes that value back to NPC+0x1CC at 0x5C636F. If Randomize Face left the Tile stale, a subsequent commit can overwrite the generated hair length. Native source path verified, runtime UI event ordering pending.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x5C636F",
-    "line": "fstp    dword ptr [eax+1CCh]",
+    "line": "fstp    dword ptr [eax+1CCh]; Commit the slider value to TESNPC::hairLength (+0x1CC).",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -346,5 +346,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C13A0",
+    "line": "mov     ecx, [ebp-14h]; void *",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C13A3",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C13A8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C13AC",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C13AF",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C13B2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C13B4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C13B9",
+    "line": "mov     eax, offset stru_AEA470",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C13BE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

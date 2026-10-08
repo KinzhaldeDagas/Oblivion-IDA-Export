@@ -1,1 +1,1 @@
-std::_Fac_node
+struct std::_Fac_node;

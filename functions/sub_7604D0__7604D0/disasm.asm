@@ -1,4 +1,4 @@
-0x7604D0: push    ecx
+0x7604D0: push    ecx; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x7604D1: push    ebx
 0x7604D2: push    esi
 0x7604D3: mov     esi, ecx
@@ -81,32 +81,32 @@
 0x760573: call    eax
 0x760575: mov     [esi+58h], ebx
 0x760578: mov     ecx, [esi+30h]
-0x76057B: push    ecx
-0x76057C: call    sub_772E30
+0x76057B: push    ecx; group
+0x76057C: call    NiD3DRenderStateGroup_ReleaseToPool;
 0x760581: mov     edx, [esi+38h]
 0x760584: push    edx
 0x760585: mov     [esi+30h], ebx
-0x760588: call    FormHeapFree
+0x760588: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x76058D: mov     eax, [esi+3Ch]
 0x760590: push    eax
 0x760591: mov     [esi+38h], ebx
-0x760594: call    FormHeapFree
+0x760594: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x760599: mov     ecx, [esi+40h]
 0x76059C: push    ecx
 0x76059D: mov     [esi+3Ch], ebx
-0x7605A0: call    FormHeapFree
+0x7605A0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7605A5: mov     edx, [esi+4Ch]
 0x7605A8: push    edx
 0x7605A9: mov     [esi+40h], ebx
-0x7605AC: call    FormHeapFree
+0x7605AC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7605B1: mov     eax, [esi+50h]
 0x7605B4: push    eax
 0x7605B5: mov     [esi+4Ch], ebx
-0x7605B8: call    FormHeapFree
+0x7605B8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7605BD: mov     ecx, [esi+54h]
 0x7605C0: push    ecx
 0x7605C1: mov     [esi+50h], ebx
-0x7605C4: call    FormHeapFree
+0x7605C4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7605C9: add     esp, 1Ch
 0x7605CC: lea     ecx, [esi+20h]
 0x7605CF: mov     [esi+54h], ebx

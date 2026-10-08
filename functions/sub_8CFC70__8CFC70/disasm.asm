@@ -1,4 +1,4 @@
-0x8CFC70: push    ebp
+0x8CFC70: push    ebp; Swimming state update. Uses desired movement at proxy+0x290 and water/depth constraints; sets near-surface/landing flag 0x400 and handles vertical buoyancy. Not suitable as a Climbing substitute.
 0x8CFC71: mov     ebp, esp
 0x8CFC73: and     esp, 0FFFFFFF0h
 0x8CFC76: sub     esp, 0C8h
@@ -48,14 +48,14 @@
 0x8CFD54: lea     ecx, [esp+0D0h+var_90]
 0x8CFD58: push    edi
 0x8CFD59: push    ecx
-0x8CFD5A: call    sub_91F430
+0x8CFD5A: call    bhkCharacterState_SolveVelocityToTarget; Swimming solver setup: response=1.0, basis slots use proxy+0x2C0/+0x2B0, third basis switches to proxy+0x230 when flag 0x100 is set, desired local velocity is swizzled from proxy+0x290, maxDelta=100, reference=proxy+0x280.
 0x8CFD5F: mov     ecx, [esi+8]
 0x8CFD62: add     esp, 8
 0x8CFD65: test    ecx, ecx
 0x8CFD67: jz      short loc_8CFD70
-0x8CFD69: call    sub_8AC070
+0x8CFD69: call    bhkCollisionWrapper_GetPositionPtr; Returns low-level Havok object position pointer: *(wrapper+0x30 + 0x1C) + 0x30.
 0x8CFD6E: jmp     short loc_8CFD75
-0x8CFD70: mov     eax, offset stru_BA7A40
+0x8CFD70: mov     eax, offset unk_BA7A40
 0x8CFD75: movaps  xmm0, xmmword ptr [eax]
 0x8CFD78: shufps  xmm0, xmm0, 0AAh ; 'ª'
 0x8CFD7C: movss   dword ptr [esp+0D0h+var_B0], xmm0
@@ -91,13 +91,13 @@
 0x8CFDEB: fcomp   st(1)
 0x8CFDED: fnstsw  ax
 0x8CFDEF: test    ah, 5
-0x8CFDF2: jp      short loc_8CFE51
+0x8CFDF2: jp      short loc_8CFE51; Swimming state compares proxy+0x318 water height against computed swimmer surface/depth height and sets flag 0x400 near/above water surface.
 0x8CFDF4: or      dword ptr [esi+1F4h], 400h
 0x8CFDFE: fstp    st
 0x8CFE00: cmp     dword ptr [esi+2A0h], 1
 0x8CFE07: jnz     short loc_8CFE15
 0x8CFE09: mov     ecx, esi
-0x8CFE0B: call    sub_890720
+0x8CFE0B: call    sub_890720; MorrowindMovements: commits pending state at proxy+0x2A0 into hkCharacterContext state slot proxy+0x1EC, then resets pending state to sentinel 0x0B. Use +0x1EC as active state when +0x2A0 is sentinel.
 0x8CFE10: jmp     loc_8CFFF8
 0x8CFE15: movaps  xmm0, xmmword ptr [edi]
 0x8CFE18: fldz
@@ -133,7 +133,7 @@
 0x8CFE9C: jz      short loc_8CFEAC
 0x8CFE9E: mov     ecx, esi
 0x8CFEA0: fstp    st
-0x8CFEA2: call    sub_890720
+0x8CFEA2: call    sub_890720; MorrowindMovements: commits pending state at proxy+0x2A0 into hkCharacterContext state slot proxy+0x1EC, then resets pending state to sentinel 0x0B. Use +0x1EC as active state when +0x2A0 is sentinel.
 0x8CFEA7: jmp     loc_8CFFF8
 0x8CFEAC: fld     dword ptr [esi+318h]
 0x8CFEB2: fsub    qword ptr ds:0A99EC0h
@@ -225,11 +225,11 @@
 0x8CFFF2: addps   xmm2, xmm0
 0x8CFFF5: movaps  xmmword ptr [edi], xmm2
 0x8CFFF8: mov     ecx, esi
-0x8CFFFA: call    sub_890970
+0x8CFFFA: call    sub_890970; Transient velocity-add channel: when proxy+0x300 timer is positive, adds timer * proxy+0x2F0 vector to velocity unless gravity-suppress flags 0x1800 are set. Setter not confirmed in current movement slice.
 0x8CFFFF: cmp     dword ptr [esi+2A0h], 0
 0x8D0006: jnz     short loc_8D000F
 0x8D0008: mov     ecx, esi
-0x8D000A: call    sub_890720
+0x8D000A: call    sub_890720; MorrowindMovements: commits pending state at proxy+0x2A0 into hkCharacterContext state slot proxy+0x1EC, then resets pending state to sentinel 0x0B. Use +0x1EC as active state when +0x2A0 is sentinel.
 0x8D000F: mov     ecx, [esp+0D0h+var_4]
 0x8D0016: pop     edi
 0x8D0017: pop     esi

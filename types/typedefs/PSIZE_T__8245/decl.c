@@ -1,1 +1,1 @@
-PSIZE_T
+typedef ULONG_PTR *PSIZE_T;

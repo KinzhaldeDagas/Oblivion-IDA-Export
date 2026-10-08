@@ -1,5 +1,7 @@
-int __usercall _pow_default@<eax>(int a1@<ecx>, double a2@<st0>, int a3, int a4, int a5, int a6)
+int __thiscall _pow_default(int this, int a2, char a3, int a4, int a5)
 {
-  unknown_libname_160(a1);
-  return start_3(a3, a4, a5, a6, a2);
+  __int16 v6; // ax
+
+  unknown_libname_160(this, &a4); /*0x985bc8*/
+  return start_3(v6, a2, a3);
 }

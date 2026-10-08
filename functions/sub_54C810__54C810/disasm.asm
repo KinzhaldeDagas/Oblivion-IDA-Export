@@ -116,7 +116,7 @@
 0x54C95F: lea     eax, [esp+20h+arg_C]
 0x54C963: push    eax
 0x54C964: push    edi
-0x54C965: call    sub_589640
+0x54C965: call    NiTPointerList__InsertBeforePosition
 0x54C96A: pop     ebx
 0x54C96B: pop     ebp
 0x54C96C: pop     edi
@@ -138,7 +138,7 @@
 0x54C994: lea     ecx, [esp+20h+arg_C]
 0x54C998: push    ecx
 0x54C999: mov     ecx, [esp+24h+arg_8]
-0x54C99D: call    sub_5B1E20
+0x54C99D: call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.
 0x54C9A2: pop     ebx
 0x54C9A3: pop     ebp
 0x54C9A4: pop     edi

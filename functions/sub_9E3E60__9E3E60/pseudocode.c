@@ -1,8 +1,8 @@
 int sub_9E3E60()
 {
-  GameSetting_ConstrAndReg(
-    &dword_B36368,
-    (int)"sRaceFemaleUpperBodyTextureModel",
-    (int)"Characters\\_Male\\UpperBodyHumanFemale.egt");
-  return atexit(sub_A1C380);
+  GameSetting_ConstrAndReg( /*0x9e3e6f*/
+    &stru_B36368,
+    "sRaceFemaleUpperBodyTextureModel",
+    "Characters\\_Male\\UpperBodyHumanFemale.egt");
+  return atexit(sub_A1C380); /*0x9e3e7f*/
 }

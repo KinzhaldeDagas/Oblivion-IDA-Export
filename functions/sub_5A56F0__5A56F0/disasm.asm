@@ -49,14 +49,14 @@
 0x5A576C: cmp     eax, [esi+0Ch]
 0x5A576F: jb      short loc_5A5760
 0x5A5771: push    edi
-0x5A5772: call    FormHeapFree
+0x5A5772: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5A5777: add     esp, 4
 0x5A577A: pop     edi
 0x5A577B: pop     esi
 0x5A577C: retn
 0x5A577D: mov     dword ptr [esi+4], 0
 0x5A5784: push    edi
-0x5A5785: call    FormHeapFree
+0x5A5785: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5A578A: add     esp, 4
 0x5A578D: pop     edi
 0x5A578E: pop     esi

@@ -30,13 +30,13 @@
 0x68A353: call    IsWeaponReady
 0x68A358: test    al, al
 0x68A35A: jz      loc_68A6CA
-0x68A360: mov     ecx, [ebx+4]
+0x68A360: mov     ecx, [ebx+4]; this
 0x68A363: test    ecx, ecx
 0x68A365: jz      short loc_68A370
-0x68A367: call    sub_68B110
+0x68A367: call    TravelPathNode_GetPosition; Verified TravelPathNode_GetPosition returns a stored NiPoint3* for kind 1; for kind 0, returns reference GetPos unless the ref has TeleportData, in which case it returns the linked door's TeleportData xyz marker. Null payloads and unrecognized kinds return g_zeroNiPoint3.
 0x68A36C: mov     edi, eax
 0x68A36E: jmp     short loc_68A375
-0x68A370: mov     edi, offset Vector3_InitValue?
+0x68A370: mov     edi, offset g_zeroNiPoint3
 0x68A375: mov     eax, [esi]
 0x68A377: mov     edx, [eax+174h]
 0x68A37D: mov     ecx, esi
@@ -51,9 +51,9 @@
 0x68A395: fld     dword ptr [edi+8]
 0x68A398: fsub    dword ptr [eax+8]
 0x68A39B: fstp    [esp+40h+var_10]
-0x68A39F: call    sub_5E65B0
+0x68A39F: call    sub_5E65B0; Authoritative actor movement speed selector: process flags +0x2C0 choose run (0x200), swim (0x800), fly-speed (0x2000); when those are absent it falls through to ordinary walk speed. AI callers may supply a movement vector without direction bits.
 0x68A3A4: fmul    dword ptr ds:0B3A4C8h
-0x68A3AA: fstp    [esp+40h+var_30]
+0x68A3AA: fstp    [esp+40h+var_30]; AI world/path movement uses sub_5E65B0(actor) * scalar for segment speed; absence of run/swim/fly flags falls through to walk speed.
 0x68A3AE: fld     [esp+40h+var_14]
 0x68A3B2: fld     [esp+40h+var_18]
 0x68A3B6: fld     [esp+40h+var_10]
@@ -78,12 +78,12 @@
 0x68A3F1: fnstsw  ax
 0x68A3F3: test    ah, 5
 0x68A3F6: jp      short loc_68A428
-0x68A3F8: mov     ecx, [ebx+4]
+0x68A3F8: mov     ecx, [ebx+4]; this
 0x68A3FB: test    ecx, ecx
 0x68A3FD: jz      short loc_68A406
-0x68A3FF: call    sub_68B110
+0x68A3FF: call    TravelPathNode_GetPosition; Verified TravelPathNode_GetPosition returns a stored NiPoint3* for kind 1; for kind 0, returns reference GetPos unless the ref has TeleportData, in which case it returns the linked door's TeleportData xyz marker. Null payloads and unrecognized kinds return g_zeroNiPoint3.
 0x68A404: jmp     short loc_68A40B
-0x68A406: mov     eax, offset Vector3_InitValue?
+0x68A406: mov     eax, offset g_zeroNiPoint3
 0x68A40B: mov     ecx, [eax]
 0x68A40D: fld     [esp+40h+arg_4]
 0x68A411: fsub    [esp+40h+arg_0]
@@ -93,7 +93,7 @@
 0x68A420: mov     eax, [eax+8]
 0x68A423: jmp     loc_68A4BD
 0x68A428: lea     ecx, [esp+40h+var_18]
-0x68A42C: call    sub_43F350
+0x68A42C: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x68A431: fstp    st
 0x68A433: fld     [esp+40h+var_18]
 0x68A437: mov     edx, [esi]
@@ -139,12 +139,12 @@
 0x68A4BD: mov     ecx, esi; this
 0x68A4BF: fstp    [esp+40h+var_28]
 0x68A4C3: mov     [esp+40h+var_1C], eax
-0x68A4C7: call    TESObjectREFR_GetParentCell
+0x68A4C7: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x68A4CC: mov     ebp, eax
 0x68A4CE: test    ebp, ebp
 0x68A4D0: jz      short loc_68A4E1
 0x68A4D2: mov     ecx, ebp; this
-0x68A4D4: call    TESObjectCELL_IsInterior
+0x68A4D4: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x68A4D9: test    al, al
 0x68A4DB: jnz     loc_68A615
 0x68A4E1: mov     edx, [esi]
@@ -205,7 +205,7 @@
 0x68A5A0: fld     dword ptr ds:0A427E4h
 0x68A5A6: mov     edx, [esi]
 0x68A5A8: push    ecx
-0x68A5A9: fstp    [esp+44h+var_44]; float
+0x68A5A9: fstp    [esp+44h+radians]; float
 0x68A5AC: lea     eax, [esp+44h+var_C]
 0x68A5B0: push    eax; int
 0x68A5B1: mov     eax, [edx+174h]
@@ -253,9 +253,9 @@
 0x68A63E: call    TESObjectREFR_SetPosition
 0x68A643: fld     dword ptr ds:0A32048h
 0x68A649: push    ecx
-0x68A64A: mov     ecx, esi
-0x68A64C: fstp    [esp+44h+var_44]; float
-0x68A64F: call    sub_4D89D0
+0x68A64A: mov     ecx, esi; this
+0x68A64C: fstp    [esp+44h+radians]; radians
+0x68A64F: call    TESObjectREFR_SetRotationX; TES4 authoritative: write reference rotation X at TESObjectREFR+0x20, then notify the reference through virtual slot +0x40 with change mask 4.
 0x68A654: test    edi, edi
 0x68A656: jz      short loc_68A689
 0x68A658: mov     edx, [esp+44h+var_28]
@@ -270,11 +270,11 @@
 0x68A673: call    TESObjectREFR_SetPosition
 0x68A678: fld     dword ptr ds:0A32048h
 0x68A67E: push    ecx
-0x68A67F: mov     ecx, edi
-0x68A681: fstp    [esp+48h+var_48]; float
-0x68A684: call    sub_4D89D0
+0x68A67F: mov     ecx, edi; this
+0x68A681: fstp    [esp+48h+var_48]; radians
+0x68A684: call    TESObjectREFR_SetRotationX; TES4 authoritative: write reference rotation X at TESObjectREFR+0x20, then notify the reference through virtual slot +0x40 with change mask 4.
 0x68A689: mov     ecx, esi; this
-0x68A68B: call    TESObjectREFR_GetParentCell
+0x68A68B: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x68A690: cmp     ebp, eax
 0x68A692: jz      short loc_68A6BC
 0x68A694: test    edi, edi

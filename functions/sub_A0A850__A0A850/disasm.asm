@@ -1,5 +1,5 @@
 0xA0A850: mov     ecx, 1Fh
-0xA0A855: mov     eax, offset byte_B40618
+0xA0A855: mov     eax, (offset dword_B40614+4)
 0xA0A85A: or      edx, 0FFFFFFFFh
 0xA0A85D: lea     ecx, [ecx+0]
 0xA0A860: mov     byte ptr [eax-8], 0

@@ -33,7 +33,7 @@
 0x62A142: call    edx
 0x62A144: test    al, al
 0x62A146: jnz     short loc_62A164
-0x62A148: mov     ecx, [esp+1Ch+arg_0]
+0x62A148: mov     ecx, [esp+1Ch+speaker]
 0x62A14C: mov     eax, [esi]
 0x62A14E: mov     edx, [eax+188h]
 0x62A154: push    1
@@ -47,10 +47,10 @@
 0x62A161: retn    4
 0x62A164: cmp     dword ptr [ebp+50h], 1
 0x62A168: push    edi
-0x62A169: mov     edi, [esp+20h+arg_0]
+0x62A169: mov     edi, [esp+20h+speaker]
 0x62A16D: jge     short loc_62A176
 0x62A16F: mov     ecx, edi; this
-0x62A171: call    sub_5E6C60
+0x62A171: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x62A176: fldz
 0x62A178: fcom    dword ptr [ebp+3Ch]
 0x62A17B: fnstsw  ax
@@ -58,13 +58,13 @@
 0x62A180: jnz     loc_62A2DA
 0x62A186: mov     ecx, ds:0B333C4h; this
 0x62A18C: fstp    st
-0x62A18E: call    TESObjectREFR_GetParentCell
-0x62A193: mov     ecx, eax
-0x62A195: call    TESObjectCELL_GetOwner
-0x62A19A: push    4
-0x62A19C: push    2
+0x62A18E: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x62A193: mov     ecx, eax; cell
+0x62A195: call    TESObjectCELL_GetOwner; Verified Oblivion getter: returns only the direct XOWN/ExtraOwnership form stored in the cell extra list at cell+8. Unlike Fallout TESObjectCELL::GetOwner, it does not fall back to an encounter-zone owner.
+0x62A19A: push    4; index
+0x62A19C: push    2; topicType
 0x62A19E: mov     ds:0B361C4h, eax
-0x62A1A3: call    TESTopic__GEtTopic
+0x62A1A3: call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.
 0x62A1A8: mov     ebx, eax
 0x62A1AA: add     esp, 8
 0x62A1AD: test    ebx, ebx
@@ -76,12 +76,12 @@
 0x62A1C9: mov     ecx, esi
 0x62A1CB: call    edx
 0x62A1CD: mov     eax, [esi+2Ch]
-0x62A1D0: push    0
-0x62A1D2: push    0
-0x62A1D4: push    eax
-0x62A1D5: push    edi
-0x62A1D6: mov     ecx, ebx
-0x62A1D8: call    TESTopic__CreateDialogueInfo
+0x62A1D0: push    0; conversation
+0x62A1D2: push    0; previousTopic
+0x62A1D4: push    eax; target
+0x62A1D5: push    edi; speaker
+0x62A1D6: mov     ecx, ebx; this
+0x62A1D8: call    TESTopic__CreateDialogueItem; Selects a matching TESTopicInfo and wraps it as a 0x1C DialogueItem containing response list/cursor, INFO, topic, owner quest, and speaker.
 0x62A1DD: mov     edx, [esi]
 0x62A1DF: mov     edx, [edx+484h]
 0x62A1E5: mov     ebx, eax
@@ -92,10 +92,10 @@
 0x62A1F1: call    edx
 0x62A1F3: test    ebx, ebx
 0x62A1F5: jz      loc_62A2AE
-0x62A1FB: mov     ecx, ebx
-0x62A1FD: call    sub_6B7BA0
-0x62A202: mov     ecx, ebx
-0x62A204: call    sub_6B7C20
+0x62A1FB: mov     ecx, ebx; this
+0x62A1FD: call    DialogueItem__FirstResponse
+0x62A202: mov     ecx, ebx; this
+0x62A204: call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.
 0x62A209: mov     edi, eax
 0x62A20B: test    edi, edi
 0x62A20D: jz      loc_62A2AE
@@ -110,7 +110,7 @@
 0x62A22B: push    eax
 0x62A22C: mov     eax, [edi+8]
 0x62A22F: push    ebx
-0x62A230: mov     ebx, [esp+38h+arg_0]
+0x62A230: mov     ebx, [esp+38h+speaker]
 0x62A234: push    eax
 0x62A235: mov     eax, [edi+10h]
 0x62A238: push    ebp
@@ -154,7 +154,7 @@
 0x62A2A6: mov     ebp, dword ptr [esp+20h+var_10]
 0x62A2AA: mov     ebx, dword ptr [esp+20h+var_10+4]
 0x62A2AE: mov     [esi+250h], ebx
-0x62A2B4: mov     byte ptr [esi+228h], 1
+0x62A2B4: mov     byte ptr [esi+228h], 1; Installing the trespass/warning DialogueItem sets HighProcess.dialogueActive=1; the same path later runs the pending result, destroys the item, and clears dialogue state.
 0x62A2BB: fld     dword ptr [ebp+3Ch]
 0x62A2BE: fadd    dword ptr ds:0B33E9Ch
 0x62A2C4: push    1
@@ -176,17 +176,17 @@
 0x62A2F3: fstp    dword ptr [esi+21Ch]
 0x62A2F9: jmp     short loc_62A2FD
 0x62A2FB: mov     bl, 1
-0x62A2FD: mov     ecx, [esi+250h]; int
+0x62A2FD: mov     ecx, [esi+250h]; this
 0x62A303: test    ecx, ecx
 0x62A305: jz      short loc_62A330
-0x62A307: call    sub_6B7C30
+0x62A307: call    DialogueItem__RunResult; Deferred ambient INFO commit. When INFO exists and ImmediateResult is clear, expose addedTopics and then run the result on DialogueItem.speaker at response-list exhaustion. Goodbye and RunForRumors are ignored; interruption before exhaustion drops this deferred commit.
 0x62A30C: mov     ebp, [esi+250h]
 0x62A312: test    ebp, ebp
 0x62A314: jz      short loc_62A326
-0x62A316: mov     ecx, ebp
-0x62A318: call    sub_6B81D0
+0x62A316: mov     ecx, ebp; this
+0x62A318: call    DialogueItem__Destroy
 0x62A31D: push    ebp
-0x62A31E: call    FormHeapFree
+0x62A31E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x62A323: add     esp, 4
 0x62A326: mov     dword ptr [esi+250h], 0
 0x62A330: test    bl, bl

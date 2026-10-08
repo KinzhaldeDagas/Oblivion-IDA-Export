@@ -1,4 +1,4 @@
-0x4ECEA0: sub     esp, 414h
+0x4ECEA0: sub     esp, 414h; Verified child dependency queue: formats the quad's generated color DDS and `_FN.dds` normal map, attaches both texture tasks to TerrainLODQuadLoadTask, sets the dependency flag, then continues the base queued-model path.
 0x4ECEA6: mov     eax, ds:0B30AACh
 0x4ECEAB: xor     eax, esp
 0x4ECEAD: mov     [esp+414h+var_4], eax
@@ -26,39 +26,39 @@
 0x4ECEE9: push    offset aTexturesLand_0; "Textures\\LandscapeLOD\\Generated\\%i.%"...
 0x4ECEEE: push    ecx
 0x4ECEEF: call    __sprintf
-0x4ECEF4: lea     edx, [esp+448h+var_310]
+0x4ECEF4: lea     edx, [esp+448h+path]
 0x4ECEFB: push    edx; int
 0x4ECEFC: lea     eax, [esp+44Ch+Str1]
 0x4ECF03: push    eax; Str1
-0x4ECF04: call    sub_47D8F0
+0x4ECF04: call    sub_47D8F0; SpeedTreeOBSE 2026-07-14: normalizes texture palette keys in a fixed 256-byte local buffer. Plugin loader inputs are therefore capped at 255 characters.
 0x4ECF09: lea     ecx, [esp+450h+var_108]
 0x4ECF10: push    ecx; int
 0x4ECF11: lea     edx, [esp+454h+var_414]
 0x4ECF15: push    edx; Str1
-0x4ECF16: call    sub_47D8F0
+0x4ECF16: call    sub_47D8F0; SpeedTreeOBSE 2026-07-14: normalizes texture palette keys in a fixed 256-byte local buffer. Plugin loader inputs are therefore capped at 255 characters.
 0x4ECF1B: mov     eax, [esi+10h]
 0x4ECF1E: mov     edx, [esi+14h]
 0x4ECF21: add     esp, 40h
-0x4ECF24: push    esi
+0x4ECF24: push    esi; parent
 0x4ECF25: mov     cl, 10h
 0x4ECF27: call    __allshr
 0x4ECF2C: movzx   eax, al
-0x4ECF2F: push    eax
-0x4ECF30: lea     ecx, [esp+420h+var_310]
-0x4ECF37: push    ecx
+0x4ECF2F: push    eax; priority
+0x4ECF30: lea     ecx, [esp+420h+path]
+0x4ECF37: push    ecx; path
 0x4ECF38: mov     ecx, ds:0B33A1Ch
-0x4ECF3E: call    sub_43B0D0
+0x4ECF3E: call    QueuedTexture_QueueOrAttachPath; Verified neighboring subsystem: generated landscape LOD color and normal textures are each submitted through QueuedTexture_QueueOrAttachPath as child dependencies of their parent task.
 0x4ECF43: mov     eax, [esi+10h]
 0x4ECF46: mov     edx, [esi+14h]
-0x4ECF49: push    esi
+0x4ECF49: push    esi; parent
 0x4ECF4A: mov     cl, 10h
 0x4ECF4C: call    __allshr
 0x4ECF51: mov     ecx, ds:0B33A1Ch
 0x4ECF57: movzx   edx, al
-0x4ECF5A: push    edx
+0x4ECF5A: push    edx; priority
 0x4ECF5B: lea     eax, [esp+420h+var_108]
-0x4ECF62: push    eax
-0x4ECF63: call    sub_43B0D0
+0x4ECF62: push    eax; path
+0x4ECF63: call    QueuedTexture_QueueOrAttachPath; Verified shared texture dependency helper used by tree, landscape, and generated landscape-LOD paths. It queries the texture/resource cache; on a miss it creates and queues a QueuedTexture, while a hit with a parent creates an attached wrapper task so the dependency participates in parent completion. Caller priority and parent task are forwarded.
 0x4ECF68: mov     edx, [esi]
 0x4ECF6A: mov     eax, [edx+28h]
 0x4ECF6D: mov     ecx, esi

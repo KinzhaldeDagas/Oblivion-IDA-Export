@@ -1,6 +1,6 @@
-0x78E8A0: push    ecx
+0x78E8A0: push    ecx; Oblivion compiler-lowered stVec::operator*(float): initializes the hidden return object with lhs.size and scales every active component. Exact behavior corroborated by RT4.1 Vec.cpp.
 0x78E8A1: fldz
-0x78E8A3: mov     eax, [esp+4+arg_0]
+0x78E8A3: mov     eax, [esp+4+result]
 0x78E8A7: push    ebx
 0x78E8A8: fst     dword ptr [eax+10h]
 0x78E8AB: push    ebp
@@ -16,7 +16,7 @@
 0x78E8C4: mov     [esp+0Ch+var_4], ebp
 0x78E8C8: jle     short loc_78E8CF
 0x78E8CA: mov     ecx, 5
-0x78E8CF: fld     [esp+0Ch+arg_4]
+0x78E8CF: fld     [esp+0Ch+scalar]
 0x78E8D3: mov     [eax+14h], ecx
 0x78E8D6: xor     ecx, ecx
 0x78E8D8: cmp     ebx, 4

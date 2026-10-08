@@ -1,2 +1,2 @@
-0x51EAC0: sub     ecx, 68h ; 'h'
-0x51EAC3: jmp     sub_51C6E0
+0x51EAC0: sub     ecx, 68h ; 'h'; self
+0x51EAC3: jmp     TESCreature_GetModifiedSize

@@ -1,7 +1,7 @@
-0x79E9F0: push    ebx
-0x79E9F1: mov     ebx, [esp+4+arg_0]
+0x79E9F0: push    ebx; Insertion-sort cleanup for short SFrondGuide ranges (threshold 32 in the caller). Finds the descending fuzzySurfaceArea insertion point and rotates whole guide ranges to preserve embedded vector ownership.
+0x79E9F1: mov     ebx, [esp+4+first]
 0x79E9F5: push    ebp
-0x79E9F6: mov     ebp, [esp+8+arg_4]
+0x79E9F6: mov     ebp, [esp+8+last]
 0x79E9FA: cmp     ebx, ebp
 0x79E9FC: jz      short loc_79EA6D
 0x79E9FE: push    esi
@@ -44,10 +44,10 @@
 0x79EA50: jz      short loc_79EA61
 0x79EA52: push    0
 0x79EA54: push    0
-0x79EA56: push    edi
-0x79EA57: push    esi
-0x79EA58: push    edx
-0x79EA59: call    sub_79BB20
+0x79EA56: push    edi; last
+0x79EA57: push    esi; middle
+0x79EA58: push    edx; first
+0x79EA59: call    OB_SFrondGuide_RotateRange_010201A0; Rotates the SFrondGuide range [first,middle) with [middle,last). Uses a greatest-common-divisor cycle decomposition and deep guide movement so embedded vertex-vector ownership remains valid.
 0x79EA5E: add     esp, 14h
 0x79EA61: add     esi, 30h ; '0'
 0x79EA64: add     edi, 30h ; '0'

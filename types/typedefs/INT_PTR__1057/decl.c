@@ -1,1 +1,1 @@
-INT_PTR
+typedef __int64 INT_PTR;

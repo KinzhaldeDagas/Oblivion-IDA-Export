@@ -1,40 +1,72 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "ScriptEventList",
+  "definition": "struct ScriptEventList\n{\nScript *m_script;\nUInt32 m_unk1;\nEventEntry *m_eventList;\nVarEntry *m_vars;\nScriptEffectInfo *m_scriptEffectInfo;\n}\n",
   "id": 18374686479671990801,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "m_script",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "Script *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "m_unk1",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "m_eventList",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "EventEntry *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "m_vars",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "VarEntry *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "m_scriptEffectInfo",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "ScriptEffectInfo *"
     }
   ],
   "name": "ScriptEventList",
+  "ordinal": 9499,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 20
 }

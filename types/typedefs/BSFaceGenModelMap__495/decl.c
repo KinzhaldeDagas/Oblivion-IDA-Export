@@ -1,1 +1,1 @@
-BSFaceGenModelMap
+struct BSFaceGenModelMap;

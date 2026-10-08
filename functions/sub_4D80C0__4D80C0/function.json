@@ -1,19 +1,32 @@
 {
-  "callees_count": 12,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
+  "callers_count": 5,
+  "chunks": [
+    [
+      "0x4D80C0",
+      "0x4D814D"
+    ]
+  ],
+  "chunks_sha256": "100cca7f3b43300b43e369ce6d3c089c8959acf19bfb2b37120af576aee1aa1f",
+  "comment_regular": "Register ExtraLight or ExtraSpellEffectLight backing NiLight in the native full-light list with trackBackingPosition=false. All five retail direct callers pass useSpellEffectExtraLight=false; no code/data xref selects this helper's true branch.",
+  "comment_repeatable": "Register the ExtraLight-backed NiLight in the native full-light list. Retail direct callers use ordinary ExtraLight; registration explicitly calls ShadowSceneLight_SetPerSourceProjectorMode(..., false), clears renderGateOverride_120, and copies falloff/FOV. It does not read TESObjectLIGH::lightFlags_7C, so Construction Set 'Spot Light' (0x200) and 'Spot Shadow' (0x400) labels do not establish an active retail projected-shadow branch here.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4D80C0",
+  "display_name": "TESObjectREFR_RegisterAttachedLightWithShadowScene",
   "end_ea": "0x4D814D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4D80C0",
+  "name": "TESObjectREFR_RegisterAttachedLightWithShadowScene",
   "segment": ".text",
   "sha256": "100cca7f3b43300b43e369ce6d3c089c8959acf19bfb2b37120af576aee1aa1f",
   "size": 141,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4D80C0",
-  "type": "void __thiscall(_DWORD *this, char)",
+  "total_chunk_size": 141,
+  "type": "void __thiscall(TESObjectREFR *self, bool useSpellEffectExtraLight)",
   "xrefs_from_count": 58,
   "xrefs_to_count": 5
 }

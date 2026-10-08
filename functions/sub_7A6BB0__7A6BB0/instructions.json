@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A6BB0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; stRegion constructor/helper: initializes min to large positive and max to large negative sentinel values.",
     "mnemonic": "push",
     "size": 2
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x7A6BD9",
-    "line": "call    sub_78E550",
+    "line": "call    OB_stVec_ctor_zero3_010201A0; Oblivion stVec default constructor: zeros all five float slots and sets logical size to 3. Exact body corroborated after binary observation by RT4.1 LibVector Vec.cpp stVec().",
     "mnemonic": "call",
     "size": 5
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x7A6BE1",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x7A6BEB",
-    "line": "call    sub_78E550",
+    "line": "call    OB_stVec_ctor_zero3_010201A0; Oblivion stVec default constructor: zeros all five float slots and sets logical size to 3. Exact body corroborated after binary observation by RT4.1 LibVector Vec.cpp stVec().",
     "mnemonic": "call",
     "size": 5
   },
@@ -208,5 +208,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CCCE0",
+    "line": "mov     ecx, [ebp-10h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCCE3",
+    "line": "jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCCE8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CCCEC",
+    "line": "lea     eax, [edx-0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCCEF",
+    "line": "mov     ecx, [edx-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCCF2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CCCF4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCCF9",
+    "line": "mov     eax, offset stru_AF60D0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCCFE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

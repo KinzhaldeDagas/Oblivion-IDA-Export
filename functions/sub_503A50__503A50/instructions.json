@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x503A91",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x503AD5",
-    "line": "mov     ecx, [esp+0Ch+arg_18]",
+    "line": "mov     ecx, [esp+0Ch+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -289,31 +289,31 @@
   },
   {
     "ea": "0x503ADD",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x503ADE",
-    "line": "push    0",
+    "line": "push    0; param2",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x503AE0",
-    "line": "push    edx",
+    "line": "push    edx; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x503AE1",
-    "line": "push    esi",
+    "line": "push    esi; subject",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x503AE2",
-    "line": "call    sub_4F4E20",
+    "line": "call    GetDisposition_Eval; GetDisposition_Eval (index 76 / opcode 0x104C): for valid actor subject and Actor parameter, returns the subject's disposition toward that target. A global one-pair cache reuses the last result; non-actor inputs leave numeric result 0.",
     "mnemonic": "call",
     "size": 5
   },

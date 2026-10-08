@@ -1,34 +1,63 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "CUSTOMBUTTON",
+  "definition": "struct CUSTOMBUTTON\n{\nTBBUTTON btn;\nBOOL bVirtual;\nBOOL bRemovable;\nWCHAR_0 text[64];\n}\n",
   "id": 18374686479672042297,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "btn",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 32
+      "size": 32,
+      "type": "TBBUTTON"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bVirtual",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bRemovable",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "text",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 128
+      "size": 128,
+      "type": "WCHAR_0[64]"
     }
   ],
   "name": "CUSTOMBUTTON",
+  "ordinal": 6562,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 168
 }

@@ -1,49 +1,46 @@
-void __thiscall sub_4BEE70(unsigned int *this)
+// Verified: inserts default weather FormID 0x15E into the climate list with selectionWeight 100; the Oblivion selector confirms this controls weighted selection.
+void __thiscall TESClimate_MakeDefault(TESClimate *this)
 {
-  unsigned int *v2; // esi
-  unsigned int v3; // edi
+  OblivionTESWeatherList *p_weatherList; // esi
+  OblivionTESWeatherListNode *next; // edi
   _DWORD *v4; // edi
   TESForm *v5; // eax
   void *v6; // eax
 
-  BSStringT_Set((BSStringT *)(this + 0xF), "Sky\\Sun.dds", 0);
-  BSStringT_Set((BSStringT *)this + 9, "Sky\\SunGlare.dds", 0);
-  (*(void (__thiscall **)(unsigned int *, const char *))(*(this + 6) + 0x18))(this + 6, "Sky\\Stars.nif");
-  *((_BYTE *)this + 0x50) = 0x24;
-  *((_BYTE *)this + 0x51) = 0x2A;
-  *((_BYTE *)this + 0x52) = 0x6C;
-  *((_BYTE *)this + 0x53) = 0x72;
-  *((_BYTE *)this + 0x54) = 0;
-  *((_BYTE *)this + 0x55) = 0xC3;
-  v2 = this + 0xC;
-  if ( v2[1] )
+  BSStringT_Set(&this->weatherTextures[0].path, "Sky\\Sun.dds", 0); /*0x4bee7e*/
+  BSStringT_Set(&this->weatherTextures[1].path, "Sky\\SunGlare.dds", 0); /*0x4bee8d*/
+  this->model.vtbl->SetModelPath(&this->model, "Sky\\Stars.nif"); /*0x4beea0*/
+  this->unknown50 = 0x726C2A24; /*0x4beea2*/
+  this->weatherAndMoonFlags = 0xC300;           // Verified: built-in default climate writes byte +0x54 = 0 and +0x55 = 0xC3. Field semantic remains Unknown; Sky reads the low byte for weather-reselection timing. /*0x4beeb2*/
+  p_weatherList = &this->weatherList;           // Verified Oblivion default Climate writes high climate flag byte 0xC3 (moon bits 0x80 and 0x40 enable Masser/Secunda). Fallout default Climate writes 0xFF at the corresponding byte; meaning of remaining bits is Unknown. /*0x4beeba*/
+  if ( p_weatherList->overflowNodes ) /*0x4beebd*/
   {
-    do
+    do /*0x4beed7*/
     {
-      v3 = *(_DWORD *)(v2[1] + 4);
-      FormHeapFree(v2[1]);
-      v2[1] = v3;
+      next = p_weatherList->overflowNodes->next; /*0x4beec6*/
+      FormHeapFree((unsigned int)p_weatherList->overflowNodes); /*0x4beeca*/
+      p_weatherList->overflowNodes = next; /*0x4beed4*/
     }
-    while ( v3 );
+    while ( next ); /*0x4beed7*/
   }
-  *v2 = 0;
-  v4 = (_DWORD *)FormHeapAlloc(8u);
-  v5 = TESForm_LookupByFormID(0x15Eu);
-  v6 = OblivionDynamicCast(
+  p_weatherList->firstEntry = 0; /*0x4beedb*/
+  v4 = (_DWORD *)FormHeapAlloc(8u); /*0x4beefc*/
+  v5 = TESForm_LookupByFormID(0x15Eu); /*0x4beefe*/
+  v6 = OblivionDynamicCast( /*0x4bef07*/
          v5,
          0,
          (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
          &TESWeather `RTTI Type Descriptor',
          0);
-  *v4 = v6;
-  v4[1] = 0x64;
-  if ( v6 )
+  *v4 = v6; /*0x4bef11*/
+  v4[1] = 0x64; /*0x4bef13*/
+  if ( v6 ) /*0x4bef1b*/
   {
-    BSSimpleList_PushFront(v2, (int)v4);
+    BSSimpleList_PushFront(p_weatherList, (int)v4); /*0x4bef1f*/
   }
   else
   {
-    FormHeapFree((unsigned int)v4);
-    PrintError("Unable to add default weather to default climate.  ( TESClimate::MakeDefault() )");
+    FormHeapFree((unsigned int)v4); /*0x4bef27*/
+    PrintError("Unable to add default weather to default climate.  ( TESClimate::MakeDefault() )"); /*0x4bef31*/
   }
 }

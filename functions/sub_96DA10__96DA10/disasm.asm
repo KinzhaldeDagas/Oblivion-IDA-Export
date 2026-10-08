@@ -1,5 +1,5 @@
 0x96DA10: push    ebx
-0x96DA11: mov     ebx, dword ptr [esp+4+ArgList]
+0x96DA11: mov     ebx, [esp+4+ArgList]
 0x96DA15: push    esi
 0x96DA16: mov     eax, ebx
 0x96DA18: push    edi

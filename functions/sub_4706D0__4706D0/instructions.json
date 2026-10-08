@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4706D0",
-    "line": "mov     al, [esp+arg_0]",
+    "line": "mov     al, [esp+state]; Oblivion ActorAnimData update-control setter: stores one byte at +0x90. Observed callers write state 3 for attack/action synchronization and state 5 from Cmd_SkipAnim. Do not infer KF unloading or map mutation from this setter.",
     "mnemonic": "mov",
     "size": 4
   },

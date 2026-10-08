@@ -46,7 +46,7 @@
 0x6630F1: cmp     eax, 2
 0x6630F4: jz      short loc_6630FD
 0x6630F6: mov     ecx, esi; int
-0x6630F8: call    sub_584740
+0x6630F8: call    Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.
 0x6630FD: test    edi, edi
 0x6630FF: jz      short loc_663115
 0x663101: mov     eax, [edi+24h]
@@ -55,7 +55,7 @@
 0x663109: cmp     eax, 2
 0x66310C: jz      short loc_663115
 0x66310E: mov     ecx, edi; int
-0x663110: call    sub_584740
+0x663110: call    Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.
 0x663115: push    0
 0x663117: call    sub_578CF0
 0x66311C: fld1
@@ -64,7 +64,7 @@
 0x663127: push    0; int
 0x663129: call    sub_5732D0
 0x66312E: mov     ecx, ebx; this
-0x663130: call    MobileObject_GetCharProxy
+0x663130: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x663135: pop     edi
 0x663136: pop     esi
 0x663137: mov     dword ptr [eax+3B0h], 0
@@ -80,13 +80,13 @@
 0x663159: cmp     byte ptr [eax+31h], 0
 0x66315D: jg      short loc_663166
 0x66315F: mov     ecx, edi; int
-0x663161: call    sub_584390
+0x663161: call    Menu__StartFadeIn; Oblivion ClassMenu step refresh: derives the active step value from tile traits 0xFDB/0xFDC, updates menu state, sets state 8, and refreshes the interface manager.
 0x663166: push    1
 0x663168: call    GetGlobalScriptStateObj??
 0x66316D: add     esp, 4
 0x663170: cmp     byte ptr [eax+31h], 0
 0x663174: jg      short loc_663189
-0x663176: call    InterfaceManager_IsMenuMode
+0x663176: call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.
 0x66317B: test    al, al
 0x66317D: jnz     short loc_663189
 0x66317F: push    1
@@ -97,7 +97,7 @@
 0x663191: push    0
 0x663193: call    sub_572EC0
 0x663198: mov     ecx, ebx; this
-0x66319A: call    MobileObject_GetCharProxy
+0x66319A: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x66319F: pop     edi
 0x6631A0: pop     esi
 0x6631A1: mov     dword ptr [eax+3B0h], 3E8h

@@ -1,4 +1,4 @@
 void __cdecl unknown_libname_7(LPCRITICAL_SECTION lpCriticalSection)
 {
-  InitializeCriticalSection(lpCriticalSection);
+  InitializeCriticalSection(lpCriticalSection); /*0x980d5d*/
 }

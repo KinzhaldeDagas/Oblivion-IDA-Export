@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5E5520",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+arg_0]; AVU decode: MagicTarget::AttemptReflect. Dynamic-casts caster to Actor, rejects self/invalid caster, then rolls Game_RandomLargeInteger()%100 against target AV 0x35 SpellReflectChance.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x5E5558",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x5E5579",
-    "line": "cmp     esi, eax",
+    "line": "cmp     esi, eax; Spell reflection succeeds when the 0..99 engine roll is below current actor value 0x35, then redirects the active effect to the caster.",
     "mnemonic": "cmp",
     "size": 2
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x5E5581",
-    "line": "test    ebx, ebx",
+    "line": "test    ebx, ebx; Reflect success branch. AVU jumps here when roll is below the possibly diminished-return reflect chance.",
     "mnemonic": "test",
     "size": 2
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x5E561D",
-    "line": "pop     edi",
+    "line": "pop     edi; Reflect failure/self/invalid-caster branch. AVU jumps here when reflect roll fails.",
     "mnemonic": "pop",
     "size": 1
   },

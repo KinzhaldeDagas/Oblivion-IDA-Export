@@ -1,71 +1,79 @@
-void __userpurge sub_5DBBD0(int a1@<ecx>, double st6_0@<st1>, double st7_0@<st0>, double a4@<st3>, int a5, _DWORD *a6)
+// Native StatsMenu mouseover/detail renderer for attributes and the fixed Oblivion skill rows.
+void __userpurge StatsMenu_HandleMouseover(
+        int a1@<ecx>,
+        double st6_0@<st1>,
+        double st7_0@<st0>,
+        double a4@<st3>,
+        int a5,
+        _DWORD *a6)
 {
-  double v8; // st5
-  double v9; // st7
-  unsigned int v10; // edi
+  double v7; // st5
+  double v8; // st7
+  unsigned int v9; // edi
   char *Icon; // eax
   char *Description; // eax
-  int v13; // eax
-  unsigned int v14; // edi
-  const char *v15; // eax
+  int v12; // eax
+  unsigned int v13; // edi
+  const char *v14; // eax
   char *m_data; // ebp
   unsigned int m_dataLen; // eax
-  char *v18; // eax
+  char *v17; // eax
   TESRace *RaceIfNPC; // eax
-  char *v20; // eax
-  int v21; // eax
-  char *v22; // eax
-  CHAR *v23; // eax
-  CHAR *v24; // edi
-  unsigned int v25; // eax
-  unsigned int v26; // ebp
-  const char *v27; // ecx
-  CHAR *v28; // edx
-  int v29; // edi
-  unsigned int v30; // eax
-  unsigned __int8 *v31; // ecx
-  unsigned __int8 *v32; // edx
-  unsigned int v33; // eax
-  unsigned __int8 *v34; // ecx
-  unsigned __int8 *v35; // edx
-  unsigned __int8 *v36; // ecx
-  unsigned __int8 *v37; // edx
-  int v38; // eax
-  char *v39; // eax
-  char v40; // cl
+  char *v19; // eax
+  int v20; // eax
+  char *v21; // eax
+  CHAR *v22; // eax
+  CHAR *v23; // edi
+  unsigned int v24; // eax
+  unsigned int v25; // ebp
+  const char *v26; // ecx
+  CHAR *v27; // edx
+  int v28; // edi
+  unsigned int v29; // eax
+  unsigned __int8 *v30; // ecx
+  unsigned __int8 *v31; // edx
+  unsigned int v32; // eax
+  unsigned __int8 *v33; // ecx
+  unsigned __int8 *v34; // edx
+  unsigned __int8 *v35; // ecx
+  unsigned __int8 *v36; // edx
+  int v37; // eax
+  char *v38; // eax
+  char v39; // cl
   char *i; // eax
-  int BaseClass; // eax
-  char *v43; // eax
-  Actor *v44; // ecx
-  _DWORD *unk654; // edi
-  CHAR *v46; // edi
-  unsigned int v47; // eax
-  unsigned int v48; // ebp
-  const char *v49; // ecx
-  CHAR *v50; // edx
-  int v51; // edi
-  unsigned int v52; // eax
-  unsigned __int8 *v53; // ecx
-  unsigned __int8 *v54; // edx
-  unsigned int v55; // eax
-  unsigned __int8 *v56; // ecx
-  unsigned __int8 *v57; // edx
-  unsigned __int8 *v58; // ecx
-  unsigned __int8 *v59; // edx
-  int v60; // eax
-  char *v61; // eax
-  char v62; // cl
-  const char *v63; // edi
-  TESObjectREFR *v64; // eax
-  TESObjectCELL *ParentCell; // eax
-  const char *v66; // eax
-  int v67; // ebp
-  char *TESSkillByCode; // edi
-  char *v69; // eax
-  unsigned int v70; // edx
-  char *v71; // eax
+  TESForm::ModReferenceList *BaseClass; // eax
+  char *v42; // eax
+  Actor *v43; // ecx
+  TESForm::ModReferenceList *unk654; // edi
+  CHAR *data; // edi
+  unsigned int v46; // eax
+  unsigned int v47; // ebp
+  const char *v48; // ecx
+  CHAR *v49; // edx
+  int v50; // edi
+  unsigned int v51; // eax
+  unsigned __int8 *v52; // ecx
+  unsigned __int8 *v53; // edx
+  unsigned int v54; // eax
+  unsigned __int8 *v55; // ecx
+  unsigned __int8 *v56; // edx
+  unsigned __int8 *v57; // ecx
+  unsigned __int8 *v58; // edx
+  int v59; // eax
+  char *v60; // eax
+  char v61; // cl
+  const char *v62; // edi
+  TESForm::ModReferenceList *v63; // eax
+  UInt32 DwordAtOffset40; // eax
+  const char *SpecializationName; // eax
+  SkillActorValue v66; // ebp
+  TESSkill_RecordView *TESSkillByCode; // edi
+  char *v68; // eax
+  unsigned int governingAttribute; // edx
+  char *v70; // eax
+  Actor *v71; // ecx
   const char *v72; // ebx
-  unsigned int SkillMasteryLevel; // eax
+  SkillMasteryLevel SkillMasteryLevel; // eax
   const char *v74; // eax
   float v75; // [esp+8h] [ebp-64h]
   float v76; // [esp+8h] [ebp-64h]
@@ -85,7 +93,7 @@ void __userpurge sub_5DBBD0(int a1@<ecx>, double st6_0@<st1>, double st7_0@<st0>
   float a3f; // [esp+28h] [ebp-44h]
   CHAR *a3; // [esp+28h] [ebp-44h]
   CHAR *a3a; // [esp+28h] [ebp-44h]
-  char a3g; // [esp+28h] [ebp-44h]
+  UInt8 a3g; // [esp+28h] [ebp-44h]
   unsigned int a3h; // [esp+28h] [ebp-44h]
   int a3b; // [esp+28h] [ebp-44h]
   BSStringT v96; // [esp+2Ch] [ebp-40h] BYREF
@@ -93,337 +101,337 @@ void __userpurge sub_5DBBD0(int a1@<ecx>, double st6_0@<st1>, double st7_0@<st0>
   char ArgList[32]; // [esp+3Ch] [ebp-30h] BYREF
   int v99; // [esp+68h] [ebp-4h]
 
-  if ( a5 == 0x22 || a5 == 0x18 || a5 == 0xE )
+  if ( a5 == 0x22 || a5 == 0x18 || a5 == 0xE ) /*0x5dbc19*/
   {
-    sub_57DE50(4);
-    v8 = sub_588D90(a6, st7_0);
-    a3c = st7_0 - dbl_A2FAA0;
-    Tile_SetFloat(*(Tile **)(a1 + 0x54), (_DWORD *)0xFAB, a3c);
-    a3d = Tile_GetFloat(a6, 0xFCB) - dbl_A49310;
-    Tile_SetFloat(*(Tile **)(a1 + 0x54), (_DWORD *)0xFCB, a3d);
-    a3e = Tile_GetFloat(a6, 0xFCA) - dbl_A49310;
-    Tile_SetFloat(*(Tile **)(a1 + 0x54), (_DWORD *)0xFCA, a3e);
-    a2 = sub_588C50(a6);
-    Tile_SetFloat(*(Tile **)(a1 + 0x54), (_DWORD *)0xFAD, a2);
-    v9 = sub_588CF0(a6);
-    a3f = a4 + dbl_A3D0C0;
-    Tile_SetFloat(*(Tile **)(a1 + 0x54), (_DWORD *)0xFAC, a3f);
-    Tile_SetFloat(*(Tile **)(a1 + 0x54), (_DWORD *)0xFA1, fConstant_2);
-    if ( a5 == 0x18 )
+    sub_57DE50(4); /*0x5dbc21*/
+    v7 = sub_588D90(a6, st7_0); /*0x5dbc2b*/
+    a3c = st7_0 - dbl_A2FAA0; /*0x5dbc3a*/
+    Tile_SetFloat(*(Tile **)(a1 + 0x54), (_DWORD *)0xFAB, a3c); /*0x5dbc4a*/
+    a3d = Tile_GetFloat(a6, 0xFCB) - dbl_A49310; /*0x5dbc65*/
+    Tile_SetFloat(*(Tile **)(a1 + 0x54), (_DWORD *)0xFCB, a3d); /*0x5dbc75*/
+    a3e = Tile_GetFloat(a6, 0xFCA) - dbl_A49310; /*0x5dbc90*/
+    Tile_SetFloat(*(Tile **)(a1 + 0x54), (_DWORD *)0xFCA, a3e); /*0x5dbca0*/
+    a2 = sub_588C50(a6); /*0x5dbcb0*/
+    Tile_SetFloat(*(Tile **)(a1 + 0x54), (_DWORD *)0xFAD, a2); /*0x5dbcb8*/
+    v8 = sub_588CF0(a6); /*0x5dbcbf*/
+    a3f = a4 + dbl_A3D0C0; /*0x5dbcce*/
+    Tile_SetFloat(*(Tile **)(a1 + 0x54), (_DWORD *)0xFAC, a3f); /*0x5dbcde*/
+    Tile_SetFloat(*(Tile **)(a1 + 0x54), (_DWORD *)0xFA1, fConstant_2); /*0x5dbcf5*/
+    if ( a5 == 0x18 ) /*0x5dbcfd*/
     {
-      Tile_GetFloat(a6, 0xFAE);
-      v10 = Double_To_SInt32(v9);
-      Tile_SetFloat(*(Tile **)(a1 + 0x58), (_DWORD *)0xFB2, fConstant_2);
-      Icon = (char *)ActorValue_GetIcon(v10);
-      Tile_SetString(*(_DWORD **)(a1 + 0x58), (_DWORD *)0xFB0, Icon);
-      Description = (char *)ActorValue_GetDescription(v10);
-      Tile_SetString(*(_DWORD **)(a1 + 0x58), (_DWORD *)0xFB1, Description);
+      Tile_GetFloat(a6, 0xFAE); /*0x5dbd06*/
+      v9 = Double_To_SInt32(v8); /*0x5dbd22*/
+      Tile_SetFloat(*(Tile **)(a1 + 0x58), (_DWORD *)0xFB2, fConstant_2); /*0x5dbd24*/
+      Icon = (char *)ActorValue_GetIcon(v9); /*0x5dbd2a*/
+      Tile_SetString(*(_DWORD **)(a1 + 0x58), (_DWORD *)0xFB0, Icon); /*0x5dbd3b*/
+      Description = (char *)ActorValue_GetDescription(v9); /*0x5dbd41*/
+      Tile_SetString(*(_DWORD **)(a1 + 0x58), (_DWORD *)0xFB1, Description); /*0x5dbd52*/
 LABEL_87:
-      a2f = Tile_GetFloat((_DWORD *)*(_DWORD *)(a1 + 0x58), 0xFAF);
-      Float = Tile_GetFloat((_DWORD *)*(_DWORD *)(a1 + 0x58), 0xFAE);
-      sub_589980(*(_DWORD **)(a1 + 0x58), 0xFAE, Float, 1.0, a2f);
-      return;
+      a2f = Tile_GetFloat((_DWORD *)*(_DWORD *)(a1 + 0x58), 0xFAF); /*0x5dc4c1*/
+      Float = Tile_GetFloat((_DWORD *)*(_DWORD *)(a1 + 0x58), 0xFAE); /*0x5dc4eb*/
+      sub_589980(*(_DWORD **)(a1 + 0x58), 0xFAE, Float, 1.0, a2f); /*0x5dc4f3*/
+      return; /*0x5dc4f3*/
     }
-    if ( a5 != 0xE )
+    if ( a5 != 0xE ) /*0x5dbd5f*/
     {
-      Tile_GetFloat(a6, 0xFB4);
-      v67 = Double_To_SInt32(v9);
-      a3g = ActorValue_GetGroupOffsetFromAV(2, v67);
-      TESSkillByCode = TESDataHandler_GetTESSkillByCode((char *)TESDataHandler, a3g);
-      if ( TESSkillByCode )
+      Tile_GetFloat(a6, 0xFB4); /*0x5dc387*/
+      v66 = Double_To_SInt32(v8); /*0x5dc391*/
+      a3g = ActorValue_GetGroupOffsetFromAV(2, v66); /*0x5dc39b*/
+      TESSkillByCode = TESDataHandler_GetTESSkillByCode((void *)g_TESDataHandler, a3g); /*0x5dc3b2*/
+      if ( TESSkillByCode ) /*0x5dc3b6*/
       {
-        Tile_SetFloat(*(Tile **)(a1 + 0x58), (_DWORD *)0xFB2, fConstant_2);
-        v69 = *((char **)TESSkillByCode + 9);
-        if ( !v69 )
-          v69 = EmptyString;
-        Tile_SetString(*(_DWORD **)(a1 + 0x58), (_DWORD *)0xFB0, v69);
-        v97.m_data = 0;
-        v97.m_dataLen = 0;
-        v97.m_bufLen = 0;
-        v70 = *((_DWORD *)TESSkillByCode + 0xC);
-        v71 = (char *)dword_B383C8;
-        v72 = (const char *)dword_B383D0;
-        v99 = 7;
-        a3h = v70;
-        v96.m_data = v71;
-        SkillMasteryLevel = Actor_GetSkillMasteryLevel(v67);
-        a2d = (const char *)ActorValue_GetMasteryName(SkillMasteryLevel);
-        Name = (const char *)ActorValue_GetName(a3h);
-        v74 = (const char *)(*(int (__thiscall **)(char *, _DWORD, int))(*((_DWORD *)TESSkillByCode + 6) + 0x10))(
-                              TESSkillByCode + 0x18,
+        Tile_SetFloat(*(Tile **)(a1 + 0x58), (_DWORD *)0xFB2, fConstant_2); /*0x5dc3ce*/
+        v68 = *(char **)&TESSkillByCode->formComponentsAndIcon[0x24]; /*0x5dc3d3*/
+        if ( !v68 ) /*0x5dc3d8*/
+          v68 = EmptyString; /*0x5dc3da*/
+        Tile_SetString(*(_DWORD **)(a1 + 0x58), (_DWORD *)0xFB0, v68); /*0x5dc3e8*/
+        v97.m_data = 0; /*0x5dc3ef*/
+        v97.m_dataLen = 0; /*0x5dc3f3*/
+        v97.m_bufLen = 0; /*0x5dc3f8*/
+        governingAttribute = TESSkillByCode->data.governingAttribute; /*0x5dc3fd*/
+        v70 = (char *)stru_B383C8; /*0x5dc400*/
+        v71 = (Actor *)reference; /*0x5dc405*/
+        v72 = (const char *)stru_B383D0; /*0x5dc40b*/
+        v99 = 7; /*0x5dc412*/
+        a3h = governingAttribute; /*0x5dc41a*/
+        v96.m_data = v70; /*0x5dc41e*/
+        SkillMasteryLevel = Actor_GetSkillMasteryLevel(v71, v66); /*0x5dc425*/
+        a2d = ActorValue_GetMasteryName(SkillMasteryLevel); /*0x5dc437*/
+        Name = (const char *)ActorValue_GetName(a3h); /*0x5dc446*/
+        v74 = (const char *)(*(int (__thiscall **)(unsigned __int8 *, _DWORD, int))(*(_DWORD *)&TESSkillByCode->formComponentsAndIcon[0x18] /*0x5dc456*/
+                                                                                  + 0x10))(
+                              &TESSkillByCode->formComponentsAndIcon[0x18],
                               0,
                               0x43534544);
-        BSStringT_Static_Format(&v97, "%s\n\n%s%s\n\n%s%s", v74, v96.m_data, Name, v72, a2d);
-        Tile_SetString(*(_DWORD **)(a1 + 0x58), (_DWORD *)0xFB1, v97.m_data);
-        if ( v67 == 0x11 )
-          a3b = ((int (__thiscall *)(PlayerCharacter *))TESDataHandler_g_PlayerRef->vtbl->super.Unk_D3)(TESDataHandler_g_PlayerRef);
+        BSStringT_Static_Format(&v97, "%s\n\n%s%s\n\n%s%s", v74, v96.m_data, Name, v72, a2d); /*0x5dc463*/
+        Tile_SetString(*(_DWORD **)(a1 + 0x58), (_DWORD *)0xFB1, v97.m_data); /*0x5dc478*/
+        if ( v66 == kSkillAV_HandToHand ) /*0x5dc483*/
+          a3b = ((int (__thiscall *)(PlayerCharacter *))reference->vtbl->super.Unk_D3)(reference); /*0x5dc495*/
         else
-          a3b = 0xFFFFFFFF;
-        a2e = (float)a3b;
-        Tile_SetFloat(*(Tile **)(a1 + 0x58), (_DWORD *)0xFB3, a2e);
-        v99 = 0xFFFFFFFF;
-        BSStringT_Clear((unsigned int *)&v97);
+          a3b = 0xFFFFFFFF; /*0x5dc49b*/
+        a2e = (float)a3b; /*0x5dc4a7*/
+        Tile_SetFloat(*(Tile **)(a1 + 0x58), (_DWORD *)0xFB3, a2e); /*0x5dc4af*/
+        v99 = 0xFFFFFFFF; /*0x5dc4b8*/
+        BSStringT_Clear((unsigned int *)&v97); /*0x5dc4bc*/
       }
-      goto LABEL_87;
+      goto LABEL_87; /*0x5dc4bc*/
     }
-    Tile_GetFloat(a6, 0xFAE);
-    v13 = Double_To_SInt32(v9);
-    if ( v13 >= 4 )
+    Tile_GetFloat(a6, 0xFAE); /*0x5dbd6c*/
+    v12 = Double_To_SInt32(v8); /*0x5dbd71*/
+    if ( v12 >= 4 ) /*0x5dbd79*/
     {
-      v14 = v13 + 4;
-      v15 = (const char *)ActorValue_GetDescription(v13 + 4);
-      v96.m_data = 0;
-      v96.m_dataLen = 0;
-      v96.m_bufLen = 0;
-      BSStringT_Set(&v96, v15, 0);
-      m_data = v96.m_data;
-      v99 = 0;
-      if ( v96.m_dataLen == (__int16)0xFFFF )
-        m_dataLen = strlen(v96.m_data);
+      v13 = v12 + 4; /*0x5dbd7f*/
+      v14 = (const char *)ActorValue_GetDescription(v12 + 4); /*0x5dbd83*/
+      v96.m_data = 0; /*0x5dbd93*/
+      v96.m_dataLen = 0; /*0x5dbd97*/
+      v96.m_bufLen = 0; /*0x5dbd9c*/
+      BSStringT_Set(&v96, v14, 0); /*0x5dbda1*/
+      m_data = v96.m_data; /*0x5dbdaf*/
+      v99 = 0; /*0x5dbdb3*/
+      if ( v96.m_dataLen == (__int16)0xFFFF ) /*0x5dbdb7*/
+        m_dataLen = strlen(v96.m_data); /*0x5dbdbb*/
       else
-        m_dataLen = (unsigned __int16)v96.m_dataLen;
-      if ( m_dataLen )
+        m_dataLen = (unsigned __int16)v96.m_dataLen; /*0x5dbdcd*/
+      if ( m_dataLen ) /*0x5dbdd2*/
       {
-        Tile_SetFloat(*(Tile **)(a1 + 0x58), (_DWORD *)0xFB2, 1.0);
-        v18 = (char *)ActorValue_GetIcon(v14);
-        Tile_SetString(*(_DWORD **)(a1 + 0x58), (_DWORD *)0xFB0, v18);
-        Tile_SetString(*(_DWORD **)(a1 + 0x58), (_DWORD *)0xFB1, m_data);
-        a2a = Tile_GetFloat((_DWORD *)*(_DWORD *)(a1 + 0x58), 0xFAF);
-        v75 = Tile_GetFloat((_DWORD *)*(_DWORD *)(a1 + 0x58), 0xFAE);
-        sub_589980(*(_DWORD **)(a1 + 0x58), 0xFAE, v75, 1.0, a2a);
+        Tile_SetFloat(*(Tile **)(a1 + 0x58), (_DWORD *)0xFB2, 1.0); /*0x5dbde2*/
+        v17 = (char *)ActorValue_GetIcon(v13); /*0x5dbde8*/
+        Tile_SetString(*(_DWORD **)(a1 + 0x58), (_DWORD *)0xFB0, v17); /*0x5dbdf9*/
+        Tile_SetString(*(_DWORD **)(a1 + 0x58), (_DWORD *)0xFB1, m_data); /*0x5dbe07*/
+        a2a = Tile_GetFloat((_DWORD *)*(_DWORD *)(a1 + 0x58), 0xFAF); /*0x5dbe1f*/
+        v75 = Tile_GetFloat((_DWORD *)*(_DWORD *)(a1 + 0x58), 0xFAE); /*0x5dbe36*/
+        sub_589980(*(_DWORD **)(a1 + 0x58), 0xFAE, v75, 1.0, a2a); /*0x5dbe3e*/
       }
-      FormHeapFree((unsigned int)m_data);
-      return;
+      FormHeapFree((unsigned int)m_data); /*0x5dbe44*/
+      return; /*0x5dbe4c*/
     }
-    if ( !v13 )
+    if ( !v12 ) /*0x5dbe53*/
     {
-      RaceIfNPC = Actor::GetRaceIfNPC((Actor *)TESDataHandler_g_PlayerRef);
-      v20 = (char *)RaceIfNPC->desc.vtbl->GetText(&RaceIfNPC->desc, 0, 0x43534544);
-      BSStringT_constr_str(&v97, v20);
-      v99 = 1;
-      goto LABEL_76;
+      RaceIfNPC = Actor::GetRaceIfNPC((Actor *)reference); /*0x5dbe5b*/
+      v19 = (char *)RaceIfNPC->desc.vtbl->GetText(&RaceIfNPC->desc, 0, 0x43534544); /*0x5dbe6f*/
+      BSStringT_constr_str(&v97, v19); /*0x5dbe76*/
+      v99 = 1; /*0x5dbe7b*/
+      goto LABEL_76; /*0x5dbe83*/
     }
-    if ( v13 == 1 )
+    if ( v12 == 1 ) /*0x5dbe8b*/
     {
-      if ( !((int (__thiscall *)(PlayerCharacter *))TESDataHandler_g_PlayerRef->vtbl->super.Unk_9A)(TESDataHandler_g_PlayerRef) )
-        return;
-      v21 = ((int (__usercall *)@<eax>(PlayerCharacter *@<ecx>, double@<st0>, double@<st1>, double@<st2>))TESDataHandler_g_PlayerRef->vtbl->super.Unk_9A)(
-              TESDataHandler_g_PlayerRef,
-              v9,
+      if ( !((int (__thiscall *)(PlayerCharacter *))reference->vtbl->super.Unk_9A)(reference) ) /*0x5dbea3*/
+        return; /*0x5dbea3*/
+      v20 = ((int (__usercall *)@<eax>(PlayerCharacter *@<ecx>, double@<st0>, double@<st1>, double@<st2>))reference->vtbl->super.Unk_9A)( /*0x5dbeb7*/
+              reference,
+              v8,
               st6_0,
-              v8);
-      v22 = (char *)(*(int (__thiscall **)(int, _DWORD, int))(*(_DWORD *)(v21 + 0x30) + 0x10))(
-                      v21 + 0x30,
+              v7);
+      v21 = (char *)(*(int (__thiscall **)(int, _DWORD, int))(*(_DWORD *)(v20 + 0x30) + 0x10))( /*0x5dbec9*/
+                      v20 + 0x30,
                       0,
                       0x43534544);
-      BSStringT_constr_str(&v97, v22);
-      v99 = 2;
-      if ( !BSStringT_GetLen(&v97) )
-        goto LABEL_79;
-      Tile_SetFloat(*(Tile **)(a1 + 0x58), (_DWORD *)0xFB2, fConstant_2);
-      v23 = *(CHAR **)(((int (__thiscall *)(PlayerCharacter *))TESDataHandler_g_PlayerRef->vtbl->super.Unk_9A)(TESDataHandler_g_PlayerRef)
-                     + 0x28);
-      if ( v23 )
+      BSStringT_constr_str(&v97, v21); /*0x5dbed0*/
+      v99 = 2; /*0x5dbed9*/
+      if ( !BSStringT_GetLen(&v97) ) /*0x5dbee8*/
+        goto LABEL_79; /*0x5dbee8*/
+      Tile_SetFloat(*(Tile **)(a1 + 0x58), (_DWORD *)0xFB2, fConstant_2); /*0x5dbf00*/
+      v22 = *(CHAR **)(((int (__thiscall *)(PlayerCharacter *))reference->vtbl->super.Unk_9A)(reference) + 0x28); /*0x5dbf18*/
+      if ( v22 ) /*0x5dbf1d*/
       {
-        v24 = v23;
-        a3 = v23;
+        v23 = v22; /*0x5dbf1f*/
+        a3 = v22; /*0x5dbf21*/
       }
       else
       {
-        v24 = EmptyString;
-        a3 = EmptyString;
+        v23 = EmptyString; /*0x5dbf27*/
+        a3 = EmptyString; /*0x5dbf2c*/
       }
-      v25 = strlen("Menus\\BirthSign\\Birthsign_");
-      v26 = v25;
-      v27 = "Menus\\BirthSign\\Birthsign_";
-      v28 = v24;
-      if ( v25 < 4 )
+      v24 = strlen("Menus\\BirthSign\\Birthsign_"); /*0x5dbf30*/
+      v25 = v24; /*0x5dbf43*/
+      v26 = "Menus\\BirthSign\\Birthsign_"; /*0x5dbf48*/
+      v27 = v23; /*0x5dbf4d*/
+      if ( v24 < 4 ) /*0x5dbf4f*/
       {
 LABEL_25:
-        if ( !v25 )
-          goto LABEL_35;
+        if ( !v24 ) /*0x5dbf67*/
+          goto LABEL_35; /*0x5dbf67*/
       }
       else
       {
-        while ( *(_DWORD *)v28 == *(_DWORD *)v27 )
+        while ( *(_DWORD *)v27 == *(_DWORD *)v26 ) /*0x5dbf55*/
         {
-          v25 -= 4;
-          v27 += 4;
-          v28 += 4;
-          if ( v25 < 4 )
-            goto LABEL_25;
+          v24 -= 4; /*0x5dbf57*/
+          v26 += 4; /*0x5dbf5a*/
+          v27 += 4; /*0x5dbf5d*/
+          if ( v24 < 4 ) /*0x5dbf63*/
+            goto LABEL_25; /*0x5dbf63*/
         }
       }
-      v29 = (unsigned __int8)*v28 - *(unsigned __int8 *)v27;
-      if ( v29 )
-        goto LABEL_33;
-      v30 = v25 - 1;
-      v31 = (unsigned __int8 *)(v27 + 1);
-      v32 = (unsigned __int8 *)(v28 + 1);
-      if ( v30 )
+      v28 = (unsigned __int8)*v27 - *(unsigned __int8 *)v26; /*0x5dbf6f*/
+      if ( v28 ) /*0x5dbf71*/
+        goto LABEL_33; /*0x5dbf71*/
+      v29 = v24 - 1; /*0x5dbf73*/
+      v30 = (unsigned __int8 *)(v26 + 1); /*0x5dbf76*/
+      v31 = (unsigned __int8 *)(v27 + 1); /*0x5dbf79*/
+      if ( v29 ) /*0x5dbf7e*/
       {
-        v29 = *v32 - *v31;
-        if ( v29
-          || (v33 = v30 - 1, v34 = v31 + 1, v35 = v32 + 1, v33)
-          && ((v29 = *v35 - *v34) != 0 || (v36 = v34 + 1, v37 = v35 + 1, v33 != 1) && (v29 = *v37 - *v36) != 0) )
+        v28 = *v31 - *v30; /*0x5dbf86*/
+        if ( v28 /*0x5dbfb6*/
+          || (v32 = v29 - 1, v33 = v30 + 1, v34 = v31 + 1, v32)
+          && ((v28 = *v34 - *v33) != 0 || (v35 = v33 + 1, v36 = v34 + 1, v32 != 1) && (v28 = *v36 - *v35) != 0) )
         {
 LABEL_33:
-          v38 = 1;
-          if ( v29 <= 0 )
-            v38 = 0xFFFFFFFF;
-          goto LABEL_36;
+          v37 = 1; /*0x5dbfba*/
+          if ( v28 <= 0 ) /*0x5dbfbf*/
+            v37 = 0xFFFFFFFF; /*0x5dbfc1*/
+          goto LABEL_36; /*0x5dbfc4*/
         }
       }
 LABEL_35:
-      v38 = 0;
+      v37 = 0; /*0x5dbfc6*/
 LABEL_36:
-      if ( !v38 )
+      if ( !v37 ) /*0x5dbfca*/
       {
-        v39 = &a3[v26];
-        do
+        v38 = &a3[v25]; /*0x5dbfd4*/
+        do /*0x5dbfea*/
         {
-          v40 = *v39;
-          v39[ArgList - &a3[v26]] = *v39;
-          ++v39;
+          v39 = *v38; /*0x5dbfe0*/
+          v38[ArgList - &a3[v25]] = *v38; /*0x5dbfe2*/
+          ++v38; /*0x5dbfe5*/
         }
-        while ( v40 );
-        for ( i = ArgList; *i; ++i )
+        while ( v39 ); /*0x5dbfea*/
+        for ( i = ArgList; *i; ++i ) /*0x5dbff4*/
         {
-          if ( *i == 0x20 )
-            *i = 0x5F;
+          if ( *i == 0x20 ) /*0x5dbff9*/
+            *i = 0x5F; /*0x5dbffb*/
         }
-        v96.m_data = 0;
-        v96.m_dataLen = 0;
-        v96.m_bufLen = 0;
-        LOBYTE(v99) = 3;
-        BSStringT_Static_Format(&v96, "Menus\\Stats\\small_birthsign\\small_%s", ArgList);
-        Tile_SetString(*(_DWORD **)(a1 + 0x58), (_DWORD *)0xFB0, v96.m_data);
-        LOBYTE(v99) = 2;
-        BSStringT_Clear((unsigned int *)&v96);
+        v96.m_data = 0; /*0x5dc006*/
+        v96.m_dataLen = 0; /*0x5dc00e*/
+        v96.m_bufLen = 0; /*0x5dc015*/
+        LOBYTE(v99) = 3; /*0x5dc02b*/
+        BSStringT_Static_Format(&v96, "Menus\\Stats\\small_birthsign\\small_%s", ArgList); /*0x5dc030*/
+        Tile_SetString(*(_DWORD **)(a1 + 0x58), (_DWORD *)0xFB0, v96.m_data); /*0x5dc045*/
+        LOBYTE(v99) = 2; /*0x5dc04e*/
+        BSStringT_Clear((unsigned int *)&v96); /*0x5dc053*/
       }
-      goto LABEL_78;
+      goto LABEL_78; /*0x5dc058*/
     }
-    if ( v13 != 2 )
+    if ( v12 != 2 ) /*0x5dc060*/
     {
-      if ( v13 != 3 )
-        return;
-      BSStringT_constr_str(&v97, (char *)dword_B383E0);
-      v99 = 6;
+      if ( v12 != 3 ) /*0x5dc2da*/
+        return; /*0x5dc2da*/
+      BSStringT_constr_str(&v97, (char *)stru_B383E0); /*0x5dc2eb*/
+      v99 = 6; /*0x5dc2f0*/
 LABEL_76:
-      if ( BSStringT_GetLen(&v97) )
+      if ( BSStringT_GetLen(&v97) ) /*0x5dc2fc*/
       {
-        Tile_SetFloat(*(Tile **)(a1 + 0x58), (_DWORD *)0xFB2, 1.0);
+        Tile_SetFloat(*(Tile **)(a1 + 0x58), (_DWORD *)0xFB2, 1.0); /*0x5dc313*/
 LABEL_78:
-        Tile_SetString(*(_DWORD **)(a1 + 0x58), (_DWORD *)0xFB1, v97.m_data);
-        a2c = Tile_GetFloat((_DWORD *)*(_DWORD *)(a1 + 0x58), 0xFAF);
-        v77 = Tile_GetFloat((_DWORD *)*(_DWORD *)(a1 + 0x58), 0xFAE);
-        sub_589980(*(_DWORD **)(a1 + 0x58), 0xFAE, v77, 1.0, a2c);
+        Tile_SetString(*(_DWORD **)(a1 + 0x58), (_DWORD *)0xFB1, v97.m_data); /*0x5dc318*/
+        a2c = Tile_GetFloat((_DWORD *)*(_DWORD *)(a1 + 0x58), 0xFAF); /*0x5dc33d*/
+        v77 = Tile_GetFloat((_DWORD *)*(_DWORD *)(a1 + 0x58), 0xFAE); /*0x5dc354*/
+        sub_589980(*(_DWORD **)(a1 + 0x58), 0xFAE, v77, 1.0, a2c); /*0x5dc35c*/
       }
 LABEL_79:
-      v99 = 0xFFFFFFFF;
-      BSStringT_Clear((unsigned int *)&v97);
-      return;
+      v99 = 0xFFFFFFFF; /*0x5dc361*/
+      BSStringT_Clear((unsigned int *)&v97); /*0x5dc36d*/
+      return; /*0x5dc372*/
     }
-    if ( Actor_GetBaseClass((Actor *)TESDataHandler_g_PlayerRef)
-      && *TESObjectREFR_GetName((TESObjectREFR *)TESDataHandler_g_PlayerRef) != 0x2D )
+    if ( Actor_GetBaseClass((Actor *)reference) && *TESObjectREFR_GetName((TESObjectREFR *)reference) != 0x2D ) /*0x5dc087*/
     {
-      BaseClass = Actor_GetBaseClass((Actor *)TESDataHandler_g_PlayerRef);
-      v43 = (char *)(*(int (__thiscall **)(int, _DWORD, int))(*(_DWORD *)(BaseClass + 0x24) + 0x10))(
-                      BaseClass + 0x24,
+      BaseClass = Actor_GetBaseClass((Actor *)reference); /*0x5dc093*/
+      v42 = (char *)((int (__thiscall *)(TESForm::ModReferenceList **, _DWORD, int))BaseClass[4].next[2].data)( /*0x5dc0a8*/
+                      &BaseClass[4].next,
                       0,
                       0x43534544);
-      BSStringT_constr_str(&v97, v43);
-      v99 = 4;
-      if ( !BSStringT_GetLen(&v97) )
-        goto LABEL_79;
-      Tile_SetFloat(*(Tile **)(a1 + 0x58), (_DWORD *)0xFB2, fConstant_2);
-      v96.m_data = 0;
-      v96.m_dataLen = 0;
-      v96.m_bufLen = 0;
-      v44 = (Actor *)TESDataHandler_g_PlayerRef;
-      LOBYTE(v99) = 5;
-      unk654 = (_DWORD *)Actor_GetBaseClass(v44);
-      if ( unk654 == TESDataHandler_LookupTESClassByFormID((void *)iPlayerCustomClass) )
-        unk654 = (_DWORD *)TESDataHandler_g_PlayerRef->unk654;
-      if ( !unk654 || !TESClass_IsPlayable(unk654) )
+      BSStringT_constr_str(&v97, v42); /*0x5dc0af*/
+      v99 = 4; /*0x5dc0b8*/
+      if ( !BSStringT_GetLen(&v97) ) /*0x5dc0c7*/
+        goto LABEL_79; /*0x5dc0c7*/
+      Tile_SetFloat(*(Tile **)(a1 + 0x58), (_DWORD *)0xFB2, fConstant_2); /*0x5dc0df*/
+      v96.m_data = 0; /*0x5dc0e4*/
+      v96.m_dataLen = 0; /*0x5dc0ec*/
+      v96.m_bufLen = 0; /*0x5dc0f3*/
+      v43 = (Actor *)reference; /*0x5dc0fa*/
+      LOBYTE(v99) = 5; /*0x5dc100*/
+      unk654 = Actor_GetBaseClass(v43); /*0x5dc117*/
+      if ( unk654 == TESDataHandler_LookupTESClassByFormID((void *)LODWORD(g_GameSettingStringPointers_B36CD8[0x3EC])) ) /*0x5dc120*/
+        unk654 = (TESForm::ModReferenceList *)reference->unk654; /*0x5dc128*/
+      if ( !unk654 || !TESClass_IsPlayable(unk654) ) /*0x5dc138*/
       {
-        Tile_SetString(*(_DWORD **)(a1 + 0x58), (_DWORD *)0xFB0, "Menus\\Stats\\small_class\\small_thief.dds");
+        Tile_SetString(*(_DWORD **)(a1 + 0x58), (_DWORD *)0xFB0, "Menus\\Stats\\small_class\\small_thief.dds"); /*0x5dc23f*/
 LABEL_73:
-        v63 = (const char *)dword_B383D8;
-        v64 = (TESObjectREFR *)Actor_GetBaseClass((Actor *)TESDataHandler_g_PlayerRef);
-        ParentCell = TESObjectREFR_GetParentCell(v64);
-        v66 = (const char *)sub_52E7E0((unsigned int)ParentCell);
-        BSStringT_Static_Format(&v96, "%s\n\n%s%s", v97.m_data, v63, v66);
-        Tile_SetString(*(_DWORD **)(a1 + 0x58), (_DWORD *)0xFB1, v96.m_data);
-        a2b = Tile_GetFloat((_DWORD *)*(_DWORD *)(a1 + 0x58), 0xFAF);
-        v76 = Tile_GetFloat((_DWORD *)*(_DWORD *)(a1 + 0x58), 0xFAE);
-        sub_589980(*(_DWORD **)(a1 + 0x58), 0xFAE, v76, 1.0, a2b);
-        LOBYTE(v99) = 4;
-        BSStringT_Clear((unsigned int *)&v96);
-        goto LABEL_79;
+        v62 = (const char *)stru_B383D8; /*0x5dc244*/
+        v63 = Actor_GetBaseClass((Actor *)reference); /*0x5dc250*/
+        DwordAtOffset40 = Shared_GetDwordAtOffset40(v63); /*0x5dc257*/
+        SpecializationName = ActorValue_GetSpecializationName(DwordAtOffset40); /*0x5dc25d*/
+        BSStringT_Static_Format(&v96, "%s\n\n%s%s", v97.m_data, v62, SpecializationName); /*0x5dc273*/
+        Tile_SetString(*(_DWORD **)(a1 + 0x58), (_DWORD *)0xFB1, v96.m_data); /*0x5dc288*/
+        a2b = Tile_GetFloat((_DWORD *)*(_DWORD *)(a1 + 0x58), 0xFAF); /*0x5dc2a0*/
+        v76 = Tile_GetFloat((_DWORD *)*(_DWORD *)(a1 + 0x58), 0xFAE); /*0x5dc2b7*/
+        sub_589980(*(_DWORD **)(a1 + 0x58), 0xFAE, v76, 1.0, a2b); /*0x5dc2bf*/
+        LOBYTE(v99) = 4; /*0x5dc2c8*/
+        BSStringT_Clear((unsigned int *)&v96); /*0x5dc2cd*/
+        goto LABEL_79; /*0x5dc2d2*/
       }
-      v46 = (CHAR *)unk654[0xC];
-      if ( !v46 )
-        v46 = EmptyString;
-      a3a = v46;
-      v47 = strlen("Menus\\Level_up\\class_creation\\class_creation_");
-      v48 = v47;
-      v49 = "Menus\\Level_up\\class_creation\\class_creation_";
-      v50 = v46;
-      if ( v47 < 4 )
+      data = (CHAR *)unk654[6].data; /*0x5dc145*/
+      if ( !data ) /*0x5dc14a*/
+        data = EmptyString; /*0x5dc14c*/
+      a3a = data; /*0x5dc156*/
+      v46 = strlen("Menus\\Level_up\\class_creation\\class_creation_"); /*0x5dc160*/
+      v47 = v46; /*0x5dc16b*/
+      v48 = "Menus\\Level_up\\class_creation\\class_creation_"; /*0x5dc170*/
+      v49 = data; /*0x5dc175*/
+      if ( v46 < 4 ) /*0x5dc177*/
       {
 LABEL_57:
-        if ( !v47 )
-          goto LABEL_67;
+        if ( !v46 ) /*0x5dc196*/
+          goto LABEL_67; /*0x5dc196*/
       }
       else
       {
-        while ( *(_DWORD *)v50 == *(_DWORD *)v49 )
+        while ( *(_DWORD *)v49 == *(_DWORD *)v48 ) /*0x5dc184*/
         {
-          v47 -= 4;
-          v49 += 4;
-          v50 += 4;
-          if ( v47 < 4 )
-            goto LABEL_57;
+          v46 -= 4; /*0x5dc186*/
+          v48 += 4; /*0x5dc189*/
+          v49 += 4; /*0x5dc18c*/
+          if ( v46 < 4 ) /*0x5dc192*/
+            goto LABEL_57; /*0x5dc192*/
         }
       }
-      v51 = (unsigned __int8)*v50 - *(unsigned __int8 *)v49;
-      if ( v51 )
-        goto LABEL_65;
-      v52 = v47 - 1;
-      v53 = (unsigned __int8 *)(v49 + 1);
-      v54 = (unsigned __int8 *)(v50 + 1);
-      if ( v52 )
+      v50 = (unsigned __int8)*v49 - *(unsigned __int8 *)v48; /*0x5dc19e*/
+      if ( v50 ) /*0x5dc1a0*/
+        goto LABEL_65; /*0x5dc1a0*/
+      v51 = v46 - 1; /*0x5dc1a2*/
+      v52 = (unsigned __int8 *)(v48 + 1); /*0x5dc1a5*/
+      v53 = (unsigned __int8 *)(v49 + 1); /*0x5dc1a8*/
+      if ( v51 ) /*0x5dc1ad*/
       {
-        v51 = *v54 - *v53;
-        if ( v51
-          || (v55 = v52 - 1, v56 = v53 + 1, v57 = v54 + 1, v55)
-          && ((v51 = *v57 - *v56) != 0 || (v58 = v56 + 1, v59 = v57 + 1, v55 != 1) && (v51 = *v59 - *v58) != 0) )
+        v50 = *v53 - *v52; /*0x5dc1b5*/
+        if ( v50 /*0x5dc1e5*/
+          || (v54 = v51 - 1, v55 = v52 + 1, v56 = v53 + 1, v54)
+          && ((v50 = *v56 - *v55) != 0 || (v57 = v55 + 1, v58 = v56 + 1, v54 != 1) && (v50 = *v58 - *v57) != 0) )
         {
 LABEL_65:
-          v60 = 1;
-          if ( v51 <= 0 )
-            v60 = 0xFFFFFFFF;
-          goto LABEL_68;
+          v59 = 1; /*0x5dc1e9*/
+          if ( v50 <= 0 ) /*0x5dc1ee*/
+            v59 = 0xFFFFFFFF; /*0x5dc1f0*/
+          goto LABEL_68; /*0x5dc1f3*/
         }
       }
 LABEL_67:
-      v60 = 0;
+      v59 = 0; /*0x5dc1f5*/
 LABEL_68:
-      if ( !v60 )
+      if ( !v59 ) /*0x5dc1f9*/
       {
-        v61 = &a3a[v48];
-        do
+        v60 = &a3a[v47]; /*0x5dc1ff*/
+        do /*0x5dc212*/
         {
-          v62 = *v61;
-          v61[ArgList - &a3a[v48]] = *v61;
-          ++v61;
+          v61 = *v60; /*0x5dc208*/
+          v60[ArgList - &a3a[v47]] = *v60; /*0x5dc20a*/
+          ++v60; /*0x5dc20d*/
         }
-        while ( v62 );
-        BSStringT_Static_Format(&v96, "Menus\\Stats\\small_class\\small_%s", ArgList);
-        Tile_SetString(*(_DWORD **)(a1 + 0x58), (_DWORD *)0xFB0, v96.m_data);
+        while ( v61 ); /*0x5dc212*/
+        BSStringT_Static_Format(&v96, "Menus\\Stats\\small_class\\small_%s", ArgList); /*0x5dc223*/
+        Tile_SetString(*(_DWORD **)(a1 + 0x58), (_DWORD *)0xFB0, v96.m_data); /*0x5dc230*/
       }
-      goto LABEL_73;
+      goto LABEL_73; /*0x5dc230*/
     }
   }
 }

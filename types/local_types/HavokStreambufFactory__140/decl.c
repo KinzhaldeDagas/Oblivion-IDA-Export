@@ -1,1 +1,1 @@
-HavokStreambufFactory
+struct HavokStreambufFactory;

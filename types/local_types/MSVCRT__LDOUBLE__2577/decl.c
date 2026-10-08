@@ -1,1 +1,4 @@
-MSVCRT__LDOUBLE
+struct MSVCRT__LDOUBLE
+{
+ULONG x80[3];
+};

@@ -12,7 +12,7 @@
 0x4F665C: call    edx
 0x4F665E: test    al, al
 0x4F6660: jz      short loc_4F6679
-0x4F6662: mov     ecx, [esi+58h]
+0x4F6662: mov     ecx, [esi+58h]; MEF v30 verified ActorWithoutProcessCTD site: Actor +0x58 immediate vtable dereference in current-furniture-reference query. Null routes to existing no-result path 0x004F6679.
 0x4F6665: mov     eax, [ecx]
 0x4F6667: mov     edx, [eax+378h]
 0x4F666D: call    edx

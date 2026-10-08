@@ -37,7 +37,7 @@
 0x5C04AD: pop     esi
 0x5C04AE: retn    8
 0x5C04B1: mov     ecx, esi; jumptable 005C0486 cases 0,1,26
-0x5C04B3: call    sub_5BFB90
+0x5C04B3: call    sub_5BFB90; Persuasion minigame action/round resolver. Completing the four-action round can award Speechcraft useValue0 after the native disposition-state checks.
 0x5C04B8: pop     edi; jumptable 005C0486 default case, cases 2-7,10-23,25
 0x5C04B9: pop     esi
 0x5C04BA: retn    8

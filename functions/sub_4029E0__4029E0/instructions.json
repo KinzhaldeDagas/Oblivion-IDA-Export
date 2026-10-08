@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4029E0",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; Advances GameHour by TimeScale * elapsedSeconds / 3600; rolls GameDay, GameMonth, GameYear, and DaysPassed after 24-hour boundaries.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x402A3D",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x402A5D",
-    "line": "mov     ecx, TESDataHandler_g_PlayerRef",
+    "line": "mov     ecx, dword ptr reference",
     "mnemonic": "mov",
     "size": 6
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x402A82",
-    "line": "mov     eax, TESDataHandler_g_PlayerRef",
+    "line": "mov     eax, dword ptr reference",
     "mnemonic": "mov",
     "size": 5
   },

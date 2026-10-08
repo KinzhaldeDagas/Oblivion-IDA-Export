@@ -55,25 +55,25 @@
   },
   {
     "ea": "0x8A5616",
-    "line": "lea     eax, [esp+1Ch+var_8]",
+    "line": "lea     eax, [esp+1Ch+outData]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x8A561A",
-    "line": "push    eax",
+    "line": "push    eax; outData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8A561B",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8A561D",
-    "line": "call    sub_677C70",
+    "line": "call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x8A5639",
-    "line": "mov     esi, [esp+1Ch+var_8]",
+    "line": "mov     esi, [esp+1Ch+outData]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -241,19 +241,19 @@
   },
   {
     "ea": "0x8A566E",
-    "line": "push    ecx",
+    "line": "push    ecx; outData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8A566F",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8A5671",
-    "line": "call    sub_677C70",
+    "line": "call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x8A56B0",
-    "line": "cmp     eax, offset stru_BA7D50",
+    "line": "cmp     eax, 0BA7D50h",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -486,14 +486,8 @@
     "size": 2
   },
   {
-    "ea": "0x8A56CD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x8A56D0",
-    "line": "cmp     eax, offset dword_BA7D04",
+    "line": "cmp     eax, offset stru_BA7D04",
     "mnemonic": "cmp",
     "size": 5
   },

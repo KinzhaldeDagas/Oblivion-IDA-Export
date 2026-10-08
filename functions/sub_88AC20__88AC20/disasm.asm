@@ -20,7 +20,7 @@
 0x88AC4C: call    edx
 0x88AC4E: test    eax, eax
 0x88AC50: jz      short loc_88AC64
-0x88AC52: cmp     eax, offset dword_BA7A20
+0x88AC52: cmp     eax, 0BA7A20h
 0x88AC57: jz      loc_88AD79
 0x88AC5D: mov     eax, [eax+4]
 0x88AC60: test    eax, eax
@@ -40,8 +40,7 @@
 0x88AC82: test    eax, eax
 0x88AC84: jz      short loc_88ACA2
 0x88AC86: jmp     short loc_88AC90
-0x88AC88: align 10h
-0x88AC90: cmp     eax, offset dword_BA7D84
+0x88AC90: cmp     eax, offset stru_BA7D84
 0x88AC95: jz      loc_88AD80
 0x88AC9B: mov     eax, [eax+4]
 0x88AC9E: test    eax, eax

@@ -1,12 +1,12 @@
-0x790B60: push    esi
-0x790B61: mov     esi, [esp+4+arg_4]
+0x790B60: push    esi; Oblivion binary evidence: uninitialized fill_n for count four-byte slots, returning destination + count. Used by the folded vector insertion implementation.
+0x790B61: mov     esi, [esp+4+count]
 0x790B65: test    esi, esi
 0x790B67: push    edi
-0x790B68: mov     edi, [esp+8+arg_0]
+0x790B68: mov     edi, [esp+8+destination]
 0x790B6C: mov     eax, esi
 0x790B6E: mov     ecx, edi
 0x790B70: jbe     short loc_790B86
-0x790B72: mov     edx, [esp+8+arg_8]
+0x790B72: mov     edx, [esp+8+value]
 0x790B76: push    ebx
 0x790B77: mov     ebx, [edx]
 0x790B79: mov     [ecx], ebx

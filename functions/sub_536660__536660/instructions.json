@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x536660",
-    "line": "push    ebp",
+    "line": "push    ebp; ODismemberment: recursively walks NiAVObject children and pushes a translated vector into each bhkCollisionObject-backed Havok object via sub_4D6AF0.",
     "mnemonic": "push",
     "size": 1
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x536686",
-    "line": "call    sub_47FAC0",
+    "line": "call    NiAVObject_GetBhkCollisionObject; ODismemberment: authoritative NiAVObject collision getter. Reads NiAVObject+0xA8 and accepts objects whose class chain includes bhkCollisionObject.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x5366C4",
-    "line": "mov     eax, offset stru_BA7A40",
+    "line": "mov     eax, offset unk_BA7A40",
     "mnemonic": "mov",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x536712",
-    "line": "call    sub_536660",
+    "line": "call    sub_536660; ODismemberment: recursively walks NiAVObject children and pushes a translated vector into each bhkCollisionObject-backed Havok object via sub_4D6AF0.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6A1590",
-    "line": "push    ebx",
+    "line": "push    ebx; Verified MagicShaderHitEffect detach stops its looping reference sound when applicable, detaches Ni objects from the target's node, releases its NiPointer-held objects, and clears its targetReference pointer.",
     "mnemonic": "push",
     "size": 1
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x6A15CA",
-    "line": "call    sub_6AC420",
+    "line": "call    SoundManager_StopRefLoopingSoundsWithFade; Sound manager animation event helper. Finds active sounds associated with a reference, marks/removes loop entries, and either fades/stops or schedules stop based on the passed fade time.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x6A15D7",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -193,13 +193,13 @@
   },
   {
     "ea": "0x6A15E1",
-    "line": "push    1",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6A15E3",
-    "line": "call    PlayerCharacter_GetPlayerNode",
+    "line": "call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x6A15EF",
-    "line": "push    ecx",
+    "line": "push    ecx; data",
     "mnemonic": "push",
     "size": 1
   },
@@ -235,31 +235,31 @@
   },
   {
     "ea": "0x6A15F3",
-    "line": "push    eax",
+    "line": "push    eax; sceneRoot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A15F4",
-    "line": "call    sub_4ADAD0",
+    "line": "call    TESEffectShader_RemoveTextureEffectFromScenegraph; Verified (Oblivion): MagicShaderHitEffect_Detach invokes TESEffectShader_RemoveTextureEffectFromScenegraph for its target node and exact textureEffectData_48 pointer before releasing that retained object.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6A15F9",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x6A15FF",
-    "line": "push    ebp",
+    "line": "push    ebp; firstPerson",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A1600",
-    "line": "call    PlayerCharacter_GetPlayerNode",
+    "line": "call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x6A1626",
-    "line": "push    ecx",
+    "line": "push    ecx; data",
     "mnemonic": "push",
     "size": 1
   },
@@ -361,13 +361,13 @@
   },
   {
     "ea": "0x6A162A",
-    "line": "push    eax",
+    "line": "push    eax; sceneRoot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A162B",
-    "line": "call    sub_4ADAD0",
+    "line": "call    TESEffectShader_RemoveTextureEffectFromScenegraph; Verified (Oblivion): inverse traversal visits the same property ID 4 subtype 5..10 classes (PPLighting/SpeedTree PP, Hair, SpeedTree Branch, SpeedTree Leaf, Lighting30). It clears the TextureEffectData pointer only when it equals the supplied object. No current shader-property vtable returns subtype 8 (Unknown). Fallout StopTextureShader uses property ID 3 and subtype 8..12, so do not transfer these IDs across versions.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,19 +403,19 @@
   },
   {
     "ea": "0x6A163D",
-    "line": "push    edx",
+    "line": "push    edx; property",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A163E",
-    "line": "push    eax",
+    "line": "push    eax; rootNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A163F",
-    "line": "call    sub_4AC740",
+    "line": "call    NiProperty_DetachFromActorScenegraphs; Verified (Oblivion): removes the exact ParticleShaderProperty instance from the attached actor scenegraph before releasing the retained reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x6A166C",
-    "line": "mov     ecx, [esi+40h]",
+    "line": "mov     ecx, [esi+40h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -541,13 +541,13 @@
   },
   {
     "ea": "0x6A1673",
-    "line": "push    ebp",
+    "line": "push    ebp; newParent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A1674",
-    "line": "call    sub_7074B0",
+    "line": "call    NiAVObject_SetParentAndDetachFromOld; Sets NiAVObject parent at +0x1C. If already parented, first asks the old parent to remove this child, then installs the new parent. Used by NiNode child insertion/replacement.",
     "mnemonic": "call",
     "size": 5
   },

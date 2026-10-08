@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6A84D0",
-    "line": "push    esi",
+    "line": "push    esi; OBMEFix 2026-05-30: vanilla ValueModifierEffect::ApplyToActor clamps negative DamageAV_F so non-fatigue actor values cannot be driven below zero. OBME's replacement helper omits this clamp; OBMEFix restores it for OBME-origin PlayerCharacter::DamageAV_F calls.",
     "mnemonic": "push",
     "size": 1
   },

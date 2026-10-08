@@ -1,1 +1,1 @@
-IGlobalInterfaceTable_0
+typedef IGlobalInterfaceTable IGlobalInterfaceTable_0;

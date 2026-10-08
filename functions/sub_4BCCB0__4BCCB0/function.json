@@ -1,19 +1,32 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4BCCB0",
+      "0x4BCD46"
+    ]
+  ],
+  "chunks_sha256": "96aa2b33c81d75fc555a2c616f51ba9ed93a3520c5018b5d244238546a90c6ea",
+  "comment_regular": "Verified completion callback: on taskStatus zero, releases the task-data scene node and Ni2DBuffer; regardless of status, it removes the packed cell key from the owner map at task+0x28. Exact status-code semantics remain Unknown.",
+  "comment_repeatable": "Verified completion callback: on taskStatus zero, releases the task-data scene node and Ni2DBuffer; regardless of status, it removes the packed cell key from the owner map at task+0x28. Exact status-code semantics remain Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_4BCCB0",
+  "display_name": "DistantLODLoaderTask_FinalizeCellTask",
   "end_ea": "0x4BCD46",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4BCCB0",
+  "name": "DistantLODLoaderTask_FinalizeCellTask",
   "segment": ".text",
   "sha256": "96aa2b33c81d75fc555a2c616f51ba9ed93a3520c5018b5d244238546a90c6ea",
   "size": 150,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4BCCB0",
-  "type": "int __thiscall(_DWORD *this, int)",
+  "total_chunk_size": 150,
+  "type": "int __thiscall(void *task, int taskStatus)",
   "xrefs_from_count": 75,
   "xrefs_to_count": 1
 }

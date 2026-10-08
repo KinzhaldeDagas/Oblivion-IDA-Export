@@ -36,7 +36,7 @@
 0x500B78: push    edx; a3
 0x500B79: push    ecx; a2
 0x500B7A: push    eax; a1
-0x500B7B: call    Script_ExtractArgs
+0x500B7B: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x500B80: add     esp, 20h
 0x500B83: test    al, al
 0x500B85: pop     edi
@@ -69,13 +69,13 @@
 0x500BE7: add     eax, 1
 0x500BEA: test    cl, cl
 0x500BEC: jnz     short loc_500BE4
-0x500BEE: mov     ecx, ds:0A3A4D4h
+0x500BEE: mov     ecx, ds:0A3A4D4h; this
 0x500BF4: mov     dl, ds:0A3A4D8h
 0x500BFA: mov     [eax], ecx
 0x500BFC: mov     [eax+4], dl
 0x500BFF: lea     eax, [esp+208h+Str]
 0x500C03: push    eax
-0x500C04: call    nullsub_returnFalse_0arg
+0x500C04: call    TESForm__IsActor; [Verified] Shared leaf returning false (zero), despite the TESForm::IsActor symbol. BSTempEffect base vtable 0xA681AC uses it at +0x58 for IsSaveable; NiAdditionalGeometryData vtable 0xA45EC4 uses it at +0x4C and other classes reuse it. The leaf has no unique class identity.
 0x500C09: add     esp, 4
 0x500C0C: test    al, al
 0x500C0E: jz      short loc_500C39

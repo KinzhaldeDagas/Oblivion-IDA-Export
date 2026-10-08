@@ -1,6 +1,6 @@
-0x680500: movzx   ecx, word ptr [ecx]
+0x680500: movzx   ecx, word ptr [ecx]; Verified: Sets or clears bit 0x02 at byte +0x0C of the 0x10-byte state record selected by the node's 16-bit index. The route loop sets it after expanding a popped node, so its expanded/closed-set role is Probable; the full record layout remains Unknown.
 0x680503: xor     eax, eax
-0x680505: cmp     [esp+arg_0], al
+0x680505: cmp     [esp+expanded], al
 0x680509: jz      short loc_680527
 0x68050B: cmp     cx, ds:0B3BF04h
 0x680512: jnb     short loc_680520

@@ -8,11 +8,11 @@ int __usercall write_char@<eax>(FILE *File@<ecx>, int result@<eax>, _DWORD *a3@<
       : (*File->_ptr = result, ++File->_ptr, result = (unsigned __int8)result),
         result == 0xFFFFFFFF) )
   {
-    *a3 = 0xFFFFFFFF;
+    *a3 = 0xFFFFFFFF; /*0x997ca4*/
   }
   else
   {
-    ++*a3;
+    ++*a3; /*0x997ca7*/
   }
-  return result;
+  return result; /*0x997ca6*/
 }

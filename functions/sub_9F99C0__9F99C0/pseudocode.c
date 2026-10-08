@@ -1,5 +1,5 @@
-int sub_9F99C0()
+int InitSetting_sSkillNameLightArmor()
 {
-  GameSetting_ConstrAndReg((int *)&unk_B3A10C, (int)"sSkillNameLightArmor", (int)"Light Armor");
-  return atexit(sub_A23A50);
+  GameSetting_ConstrAndReg(&g_sSkillNameLightArmor, "sSkillNameLightArmor", "Light Armor"); /*0x9f99cf*/
+  return atexit(sub_A23A50); /*0x9f99df*/
 }

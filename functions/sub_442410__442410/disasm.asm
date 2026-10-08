@@ -40,9 +40,9 @@
 0x442472: mov     ecx, ds:0B333A0h
 0x442478: mov     ecx, [ecx+74h]; this
 0x44247B: lea     eax, [esi+edx]
-0x44247E: push    eax; signed int
+0x44247E: push    eax; cellY
 0x44247F: lea     edx, [edi+ebp]
-0x442482: push    edx; signed int
+0x442482: push    edx; cellX
 0x442483: call    TESWorldSpace__GetCellAtCellCoord
 0x442488: test    eax, eax
 0x44248A: jz      short loc_4424BA

@@ -11,9 +11,9 @@
 0x447C67: test    edi, edi
 0x447C69: jz      short loc_447C83
 0x447C6B: lea     eax, [edi+1Ch]
-0x447C6E: push    eax; Str2
-0x447C6F: push    ebx; Str1
-0x447C70: call    __strcmp
+0x447C6E: push    eax; right
+0x447C6F: push    ebx; left
+0x447C70: call    CRT_StricmpLocaleDispatch
 0x447C75: add     esp, 8
 0x447C78: test    eax, eax
 0x447C7A: jz      short loc_447C8B

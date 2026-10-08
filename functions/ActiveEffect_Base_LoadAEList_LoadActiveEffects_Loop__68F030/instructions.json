@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x68F035",
-    "line": "call    ActiveEffect_Base_Load",
+    "line": "call    ActiveEffect_Base_Load; OBMEFix 2026-06-01 verification: vanilla call shape is ActiveEffect_Base_Load(parent). OBME owns this call after its loader wrapper is installed; OBMEFix chains only the OBME target and returns NULL only after consuming a verified non-actor duration SEFF record so 0x0068F07E skips insertion and 0x0068F094 handles normal loop increment.",
     "mnemonic": "call",
     "size": 5
   },

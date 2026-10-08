@@ -1,11 +1,11 @@
-0x784880: sub     esp, 8
-0x784883: mov     edx, [esp+8+arg_8]
+0x784880: sub     esp, 8; Oblivion 1.2.0.416: copy-range adapter for 0x18-byte records; returns destination advanced by the source count.
+0x784883: mov     edx, [esp+8+destination]
 0x784887: push    ebx
-0x784888: mov     ebx, [esp+0Ch+arg_0]
+0x784888: mov     ebx, [esp+0Ch+first]
 0x78488C: push    esi
-0x78488D: mov     esi, [esp+10h+arg_4]
+0x78488D: mov     esi, [esp+10h+last]
 0x784891: push    edi
-0x784892: mov     edi, [esp+14h+arg_8]
+0x784892: mov     edi, [esp+14h+destination]
 0x784896: xor     al, al
 0x784898: mov     byte ptr [esp+14h+var_4], al
 0x78489C: mov     ecx, [esp+14h+var_4]
@@ -14,10 +14,10 @@
 0x7848A8: push    eax
 0x7848A9: push    ecx
 0x7848AA: push    edx
-0x7848AB: push    edi
-0x7848AC: push    esi
-0x7848AD: push    ebx
-0x7848AE: call    sub_784180
+0x7848AB: push    edi; destination
+0x7848AC: push    esi; last
+0x7848AD: push    ebx; first
+0x7848AE: call    OB_stVector24_CopyRange_010201A0; Oblivion 1.2.0.416: forward-copies six-dword records from [first,last) and returns the advanced destination.
 0x7848B3: sub     esi, ebx
 0x7848B5: mov     eax, 2AAAAAABh
 0x7848BA: imul    esi

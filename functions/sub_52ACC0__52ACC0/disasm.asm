@@ -42,3 +42,16 @@
 0x52AD3B: pop     ebx
 0x52AD3C: add     esp, 10h
 0x52AD3F: retn
+0x9B85A0: mov     ecx, [ebp-10h]
+0x9B85A3: add     ecx, 4
+0x9B85A6: jmp     sub_56A7A0
+0x9B85AB: mov     ecx, [ebp-10h]
+0x9B85AE: add     ecx, 0Ch
+0x9B85B1: jmp     Script_StaticDestructor
+0x9B85B6: mov     edx, [esp+arg_4]
+0x9B85BA: lea     eax, [edx-10h]
+0x9B85BD: mov     ecx, [edx-14h]
+0x9B85C0: xor     ecx, eax
+0x9B85C2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B85C7: mov     eax, offset stru_AE2C14
+0x9B85CC: jmp     ___CxxFrameHandler3

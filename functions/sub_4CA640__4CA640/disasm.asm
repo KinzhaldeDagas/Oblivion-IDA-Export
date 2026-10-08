@@ -1,4 +1,4 @@
-0x4CA640: test    byte ptr [ecx+24h], 1
+0x4CA640: test    byte ptr [ecx+24h], 1; Compute the CELL group sub-block label. Interior: decimal FormID bucket ((objectID24 % 100) / 10). Exterior: signed cell coordinates divided by 8 and packed X-high/Y-low. Cross-checks TESCS TESObjectCELL_GetCellGroupSubBlockLabel at 0x533F90.
 0x4CA644: jnz     short loc_4CA66F
 0x4CA646: mov     eax, [ecx+3Ch]
 0x4CA649: test    eax, eax
@@ -12,10 +12,10 @@
 0x4CA65A: jmp     short loc_4CA65E
 0x4CA65C: xor     eax, eax
 0x4CA65E: sar     ecx, 3
-0x4CA661: push    ecx
+0x4CA661: push    ecx; group_y
 0x4CA662: sar     eax, 3
-0x4CA665: push    eax
-0x4CA666: call    sub_4EF1D0
+0x4CA665: push    eax; group_x
+0x4CA666: call    TESObjectCELL_PackExteriorGroupLabel; Verified exact key encoding used by the DistantLOD cell model map: packed label = (signed cellX << 16) | unsigned cellY.
 0x4CA66B: add     esp, 8
 0x4CA66E: retn
 0x4CA66F: mov     eax, [ecx+0Ch]

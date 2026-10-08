@@ -1,1 +1,1 @@
-IOleInPlaceActiveObject_0
+typedef IOleInPlaceActiveObject IOleInPlaceActiveObject_0;

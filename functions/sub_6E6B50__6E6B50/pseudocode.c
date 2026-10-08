@@ -127,268 +127,268 @@ int __thiscall sub_6E6B50(float *this, float a2, _DWORD *a3, int *a4)
   float v129; // [esp+34h] [ebp+Ch]
   float v130; // [esp+34h] [ebp+Ch]
 
-  if ( LODWORD(a2) == *((_DWORD *)this + 5) )
+  if ( LODWORD(a2) == *((_DWORD *)this + 5) ) /*0x6e6b5d*/
   {
-    *a3 = *((_DWORD *)this + 6);
-    *a4 = *((_DWORD *)this + 7);
-    return (int)a4;
+    *a3 = *((_DWORD *)this + 6); /*0x6e6b66*/
+    *a4 = *((_DWORD *)this + 7); /*0x6e6b6f*/
+    return (int)a4; /*0x6e6b6b*/
   }
   else
   {
-    v6 = *(_DWORD *)this;
-    v7 = a2;
-    *(this + 5) = a2;
-    v8 = v6 - 3;
-    v67 = v6 - 3;
-    if ( a2 >= 1.0 )
-      result = v6 - 1;
+    v6 = *(_DWORD *)this; /*0x6e6b7a*/
+    v7 = a2; /*0x6e6b7c*/
+    *(this + 5) = a2; /*0x6e6b80*/
+    v8 = v6 - 3; /*0x6e6b86*/
+    v67 = v6 - 3; /*0x6e6b89*/
+    if ( a2 >= 1.0 ) /*0x6e6b92*/
+      result = v6 - 1; /*0x6e6ba4*/
     else
-      result = Double_To_SInt32(1.0) + 3;
-    *a3 = result - 3;
-    v86 = (float)v67;
-    *((_DWORD *)this + 6) = result - 3;
-    *a4 = result;
-    v9 = *(_DWORD *)this;
-    v10 = v7 * v86;
-    v11 = v86;
-    v12 = *(_DWORD *)this < 7;
-    v87 = v10;
-    *((_DWORD *)this + 7) = result;
-    if ( v12 )
+      result = Double_To_SInt32(1.0) + 3; /*0x6e6b9f*/
+    *a3 = result - 3; /*0x6e6bb2*/
+    v86 = (float)v67; /*0x6e6bb4*/
+    *((_DWORD *)this + 6) = result - 3; /*0x6e6bb8*/
+    *a4 = result; /*0x6e6bc9*/
+    v9 = *(_DWORD *)this; /*0x6e6bcd*/
+    v10 = v7 * v86; /*0x6e6bcf*/
+    v11 = v86; /*0x6e6bcf*/
+    v12 = *(_DWORD *)this < 7; /*0x6e6bd1*/
+    v87 = v10; /*0x6e6bd4*/
+    *((_DWORD *)this + 7) = result; /*0x6e6bdc*/
+    if ( v12 ) /*0x6e6bdf*/
     {
-      switch ( v9 )
+      switch ( v9 ) /*0x6e6dd5*/
       {
-        case 6:
-          v39 = v87;
-          if ( result == 3 )
+        case 6: /*0x6e6dd5*/
+          v39 = v87; /*0x6e6dde*/
+          if ( result == 3 ) /*0x6e6de2*/
           {
-            v89 = 1.0 - v39;
-            v123 = dbl_A3D0C0 - v39;
-            v40 = dbl_A2FAA0;
-            v109 = v39 * v40;
-            v41 = v89;
-            v90 = v89 * v89;
-            v42 = v109;
-            v43 = v123;
-            v110 = v40 * (v109 * v123 + v41 * v39);
-            v124 = v42 * (v39 * dbl_A7C030);
-            *(this + 1) = v41 * v90;
-            *(this + 2) = v90 * v39 + v43 * v110;
-            v91 = dbl_A30E48 - v39;
-            *(this + 3) = v110 * v39 + v91 * v124;
-            *(this + 4) = v39 * v124;
+            v89 = 1.0 - v39; /*0x6e6def*/
+            v123 = dbl_A3D0C0 - v39; /*0x6e6dfb*/
+            v40 = dbl_A2FAA0; /*0x6e6e09*/
+            v109 = v39 * v40; /*0x6e6e0b*/
+            v41 = v89; /*0x6e6e0f*/
+            v90 = v89 * v89; /*0x6e6e17*/
+            v42 = v109; /*0x6e6e1b*/
+            v43 = v123; /*0x6e6e33*/
+            v110 = v40 * (v109 * v123 + v41 * v39); /*0x6e6e35*/
+            v124 = v42 * (v39 * dbl_A7C030); /*0x6e6e43*/
+            *(this + 1) = v41 * v90; /*0x6e6e51*/
+            *(this + 2) = v90 * v39 + v43 * v110; /*0x6e6e64*/
+            v91 = dbl_A30E48 - v39; /*0x6e6e6f*/
+            *(this + 3) = v110 * v39 + v91 * v124; /*0x6e6e89*/
+            *(this + 4) = v39 * v124; /*0x6e6e8e*/
           }
           else
           {
-            if ( result == 4 )
+            if ( result == 4 ) /*0x6e6e9b*/
             {
-              v111 = v39 - 1.0;
-              v125 = dbl_A30E48 - v39;
-              v44 = dbl_A2FAA0;
-              v92 = v39 * v44;
-              v93 = 1.0 - v92;
-              v45 = v111;
-              v112 = v44 * v111;
-              v83 = v93 * v93;
-              v46 = v112;
-              v47 = v125;
-              v113 = (v93 * v39 + v112 * v125) * dbl_A7C030;
-              v126 = v46 * v46;
-              v94 = dbl_A3D0C0 - v39;
-              *(this + 1) = v94 * v83;
-              *(this + 2) = v83 * v39 + v113 * v47;
-              *(this + 3) = v39 * v113 + v47 * v126;
-              v48 = v126 * v45;
+              v111 = v39 - 1.0; /*0x6e6eaa*/
+              v125 = dbl_A30E48 - v39; /*0x6e6eb6*/
+              v44 = dbl_A2FAA0; /*0x6e6ebc*/
+              v92 = v39 * v44; /*0x6e6ec6*/
+              v93 = 1.0 - v92; /*0x6e6ed2*/
+              v45 = v111; /*0x6e6ede*/
+              v112 = v44 * v111; /*0x6e6ee0*/
+              v83 = v93 * v93; /*0x6e6eec*/
+              v46 = v112; /*0x6e6ef0*/
+              v47 = v125; /*0x6e6f06*/
+              v113 = (v93 * v39 + v112 * v125) * dbl_A7C030; /*0x6e6f0e*/
+              v126 = v46 * v46; /*0x6e6f14*/
+              v94 = dbl_A3D0C0 - v39; /*0x6e6f20*/
+              *(this + 1) = v94 * v83; /*0x6e6f32*/
+              *(this + 2) = v83 * v39 + v113 * v47; /*0x6e6f45*/
+              *(this + 3) = v39 * v113 + v47 * v126; /*0x6e6f5a*/
+              v48 = v126 * v45; /*0x6e6f5d*/
             }
             else
             {
-              v127 = v39 - dbl_A2F928;
-              v114 = v39 - dbl_A3D0C0;
-              v95 = dbl_A30E48 - v39;
-              v49 = v95;
-              v50 = dbl_A2FAA0;
-              v96 = v95 * v50;
-              v51 = v114;
-              v84 = v114 * v114;
-              v52 = v96;
-              v97 = v49 * dbl_A7C030 * v96;
-              v115 = v50 * (v52 * v127 + v49 * v114);
-              *(this + 1) = v97 * v49;
-              *(this + 2) = v39 * v97 + v115 * v49;
-              *(this + 3) = v127 * v115 + v49 * v84;
-              v48 = v84 * v51;
+              v127 = v39 - dbl_A2F928; /*0x6e6f72*/
+              v114 = v39 - dbl_A3D0C0; /*0x6e6f7e*/
+              v95 = dbl_A30E48 - v39; /*0x6e6f8a*/
+              v49 = v95; /*0x6e6f8e*/
+              v50 = dbl_A2FAA0; /*0x6e6f9c*/
+              v96 = v95 * v50; /*0x6e6f9e*/
+              v51 = v114; /*0x6e6fa2*/
+              v84 = v114 * v114; /*0x6e6faa*/
+              v52 = v96; /*0x6e6fbe*/
+              v97 = v49 * dbl_A7C030 * v96; /*0x6e6fc0*/
+              v115 = v50 * (v52 * v127 + v49 * v114); /*0x6e6fda*/
+              *(this + 1) = v97 * v49; /*0x6e6fe6*/
+              *(this + 2) = v39 * v97 + v115 * v49; /*0x6e6ffb*/
+              *(this + 3) = v127 * v115 + v49 * v84; /*0x6e700e*/
+              v48 = v84 * v51; /*0x6e7011*/
             }
-            *(this + 4) = v48;
+            *(this + 4) = v48; /*0x6e6f5f*/
           }
           break;
-        case 5:
-          v53 = v87;
-          v54 = v87;
-          if ( result == 3 )
+        case 5: /*0x6e6dd5*/
+          v53 = v87; /*0x6e7029*/
+          v54 = v87; /*0x6e702d*/
+          if ( result == 3 ) /*0x6e7031*/
           {
-            v98 = 1.0 - v54;
-            v128 = dbl_A3D0C0 - v53;
-            v55 = dbl_A2FAA0;
-            v116 = v53 * v55;
-            v56 = v98;
-            v99 = v98 * v98;
-            v57 = v116;
-            v58 = v128;
-            v117 = v55 * (v116 * v128 + v56 * v53);
-            v129 = v57 * v57;
-            *(this + 1) = v56 * v99;
-            *(this + 2) = v99 * v53 + v117 * v58;
-            v59 = v58 * v129;
-            v60 = v129;
-            v61 = v117 * v53 + v59;
+            v98 = 1.0 - v54; /*0x6e703a*/
+            v128 = dbl_A3D0C0 - v53; /*0x6e7046*/
+            v55 = dbl_A2FAA0; /*0x6e7054*/
+            v116 = v53 * v55; /*0x6e7056*/
+            v56 = v98; /*0x6e705a*/
+            v99 = v98 * v98; /*0x6e7062*/
+            v57 = v116; /*0x6e7066*/
+            v58 = v128; /*0x6e707e*/
+            v117 = v55 * (v116 * v128 + v56 * v53); /*0x6e7080*/
+            v129 = v57 * v57; /*0x6e7086*/
+            *(this + 1) = v56 * v99; /*0x6e7094*/
+            *(this + 2) = v99 * v53 + v117 * v58; /*0x6e70a7*/
+            v59 = v58 * v129; /*0x6e70b6*/
+            v60 = v129; /*0x6e70b6*/
+            v61 = v117 * v53 + v59; /*0x6e70b8*/
           }
           else
           {
-            v100 = v54 - 1.0;
-            v130 = dbl_A3D0C0 - v53;
-            v118 = v53 * dbl_A2FAA0;
-            v62 = v100;
-            v85 = v100 * v100;
-            v101 = 1.0 - v118;
-            v63 = v101;
-            v102 = v101 * v101;
-            v60 = v62;
-            v119 = (v118 + v62) * v63;
-            *(this + 1) = v102 * v130;
-            *(this + 2) = v102 * v53 + v119 * v130;
-            v61 = v53 * v119 + v130 * v85;
-            v53 = v85;
+            v100 = v54 - 1.0; /*0x6e70ce*/
+            v130 = dbl_A3D0C0 - v53; /*0x6e70da*/
+            v118 = v53 * dbl_A2FAA0; /*0x6e70e6*/
+            v62 = v100; /*0x6e70ea*/
+            v85 = v100 * v100; /*0x6e70f2*/
+            v101 = 1.0 - v118; /*0x6e7100*/
+            v63 = v101; /*0x6e7104*/
+            v102 = v101 * v101; /*0x6e710c*/
+            v60 = v62; /*0x6e7116*/
+            v119 = (v118 + v62) * v63; /*0x6e7118*/
+            *(this + 1) = v102 * v130; /*0x6e712c*/
+            *(this + 2) = v102 * v53 + v119 * v130; /*0x6e713f*/
+            v61 = v53 * v119 + v130 * v85; /*0x6e7150*/
+            v53 = v85; /*0x6e7150*/
           }
-          *(this + 3) = v61;
-          *(this + 4) = v53 * v60;
+          *(this + 3) = v61; /*0x6e70ba*/
+          *(this + 4) = v53 * v60; /*0x6e70bf*/
           break;
-        case 4:
-          v64 = v87;
-          v103 = 1.0 - v87;
-          v120 = v64 * v64;
-          v65 = v103;
-          v104 = v103 * v103;
-          *(this + 1) = v104 * v65;
-          v66 = dbl_A30E48;
-          *(this + 2) = v104 * (v64 * v66);
-          *(this + 3) = v65 * (v66 * v120);
-          *(this + 4) = v64 * v120;
+        case 4: /*0x6e6dd5*/
+          v64 = v87; /*0x6e7166*/
+          v103 = 1.0 - v87; /*0x6e7170*/
+          v120 = v64 * v64; /*0x6e7178*/
+          v65 = v103; /*0x6e717c*/
+          v104 = v103 * v103; /*0x6e7184*/
+          *(this + 1) = v104 * v65; /*0x6e7190*/
+          v66 = dbl_A30E48; /*0x6e71a1*/
+          *(this + 2) = v104 * (v64 * v66); /*0x6e71a3*/
+          *(this + 3) = v65 * (v66 * v120); /*0x6e71b4*/
+          *(this + 4) = v64 * v120; /*0x6e71b9*/
           break;
       }
     }
     else
     {
-      v13 = 0.0;
-      v14 = v8 + 1;
-      v15 = v8 + 2;
-      if ( result <= 5 )
-        v74 = 0.0;
+      v13 = 0.0; /*0x6e6be8*/
+      v14 = v8 + 1; /*0x6e6bea*/
+      v15 = v8 + 2; /*0x6e6bee*/
+      if ( result <= 5 ) /*0x6e6bf1*/
+        v74 = 0.0; /*0x6e6c04*/
       else
-        v74 = (float)(result - 5);
-      if ( result > 4 )
-        v13 = (double)(result - 4);
-      v68 = v13;
-      if ( result >= v14 )
-        v70 = v11;
+        v74 = (float)(result - 5); /*0x6e6bfe*/
+      if ( result > 4 ) /*0x6e6c0b*/
+        v13 = (double)(result - 4); /*0x6e6c16*/
+      v68 = v13; /*0x6e6c1c*/
+      if ( result >= v14 ) /*0x6e6c37*/
+        v70 = v11; /*0x6e6c4a*/
       else
-        v70 = (float)(result - 1);
-      if ( result < v8 )
-        v11 = (double)result;
-      v75 = v11;
-      if ( result == 3 )
+        v70 = (float)(result - 1); /*0x6e6c44*/
+      if ( result < v8 ) /*0x6e6c51*/
+        v11 = (double)result; /*0x6e6c55*/
+      v75 = v11; /*0x6e6c5c*/
+      if ( result == 3 ) /*0x6e6c66*/
       {
-        v16 = 1.0;
-        v17 = flt_A3D65C;
-        v69 = 1.0;
+        v16 = 1.0; /*0x6e6c68*/
+        v17 = kHeadBodyNormalMatchRadius; /*0x6e6c68*/
+        v69 = 1.0; /*0x6e6c6a*/
       }
       else
       {
-        v69 = flt_A3D65C;
-        v16 = 1.0;
-        v17 = v69;
+        v69 = kHeadBodyNormalMatchRadius; /*0x6e6c70*/
+        v16 = 1.0; /*0x6e6c74*/
+        v17 = v69; /*0x6e6c74*/
       }
-      if ( result == v15 )
-        v72 = v16;
+      if ( result == v15 ) /*0x6e6c78*/
+        v72 = v16; /*0x6e6c7a*/
       else
-        v72 = v17;
-      if ( result == 3 )
+        v72 = v17; /*0x6e6c82*/
+      if ( result == 3 ) /*0x6e6c91*/
       {
-        v18 = v16;
-        v19 = flt_A7C038;
-        v105 = v18;
-        v20 = v18;
-        v21 = v17;
-        v22 = v20;
-        v73 = v21;
+        v18 = v16; /*0x6e6c93*/
+        v19 = flt_A7C038; /*0x6e6c93*/
+        v105 = v18; /*0x6e6c95*/
+        v20 = v18; /*0x6e6c99*/
+        v21 = v17; /*0x6e6c99*/
+        v22 = v20; /*0x6e6c99*/
+        v73 = v21; /*0x6e6c9b*/
       }
       else
       {
-        if ( result == 4 )
+        if ( result == 4 ) /*0x6e6ca4*/
         {
-          v23 = v17;
-          v24 = flt_A7C038;
-          v105 = v23;
+          v23 = v17; /*0x6e6ca6*/
+          v24 = flt_A7C038; /*0x6e6ca6*/
+          v105 = v23; /*0x6e6ca8*/
         }
         else
         {
-          v105 = flt_A7C038;
-          v23 = v17;
-          v24 = v105;
+          v105 = flt_A7C038; /*0x6e6cae*/
+          v23 = v17; /*0x6e6cb2*/
+          v24 = v105; /*0x6e6cb2*/
         }
-        v25 = v23;
-        v26 = v24;
-        v27 = v25;
-        if ( result == v15 )
+        v25 = v23; /*0x6e6cb6*/
+        v26 = v24; /*0x6e6cb6*/
+        v27 = v25; /*0x6e6cb6*/
+        if ( result == v15 ) /*0x6e6cb8*/
         {
-          v31 = v26;
-          v32 = v16;
-          v19 = v31;
-          v33 = v32;
-          v21 = v27;
-          v22 = v33;
-          v73 = v21;
+          v31 = v26; /*0x6e6ccc*/
+          v32 = v16; /*0x6e6ccc*/
+          v19 = v31; /*0x6e6ccc*/
+          v33 = v32; /*0x6e6cce*/
+          v21 = v27; /*0x6e6cce*/
+          v22 = v33; /*0x6e6cce*/
+          v73 = v21; /*0x6e6cd0*/
         }
         else
         {
-          v73 = v26;
-          v28 = v26;
-          v29 = v16;
-          v19 = v28;
-          v30 = v29;
-          v21 = v27;
-          v22 = v30;
+          v73 = v26; /*0x6e6cba*/
+          v28 = v26; /*0x6e6cbe*/
+          v29 = v16; /*0x6e6cbe*/
+          v19 = v28; /*0x6e6cbe*/
+          v30 = v29; /*0x6e6cc0*/
+          v21 = v27; /*0x6e6cc0*/
+          v22 = v30; /*0x6e6cc0*/
         }
       }
-      if ( result != v15 )
+      if ( result != v15 ) /*0x6e6cc4*/
       {
-        v22 = v21;
-        if ( result != v14 )
-          v22 = v19;
+        v22 = v21; /*0x6e6cd8*/
+        if ( result != v14 ) /*0x6e6cda*/
+          v22 = v19; /*0x6e6cdc*/
       }
-      v121 = v22;
-      v34 = v87;
-      v88 = v87 - v68;
-      v76 = (float)(result - 3);
-      v77 = v34 - v76;
-      v79 = (float)(result - 2);
-      v80 = v79 - v34;
-      v71 = v70 - v34;
-      v35 = v80;
-      v81 = v80 * v69;
-      v36 = v77;
-      v78 = v77 * v72;
-      v106 = v35 * v105 * v81;
-      v82 = (v81 * v88 + v78 * v71) * v73;
-      v122 = v78 * (v36 * v121);
-      v37 = v35 * v106;
-      v38 = v106;
-      *(this + 1) = v37;
-      v107 = v34 - v74;
-      *(this + 2) = v71 * v82 + v38 * v107;
-      v108 = v75 - v34;
-      *(this + 3) = v82 * v88 + v108 * v122;
-      *(this + 4) = v36 * v122;
+      v121 = v22; /*0x6e6cde*/
+      v34 = v87; /*0x6e6ce3*/
+      v88 = v87 - v68; /*0x6e6ced*/
+      v76 = (float)(result - 3); /*0x6e6c2b*/
+      v77 = v34 - v76; /*0x6e6cf7*/
+      v79 = (float)(result - 2); /*0x6e6c33*/
+      v80 = v79 - v34; /*0x6e6d01*/
+      v71 = v70 - v34; /*0x6e6d0b*/
+      v35 = v80; /*0x6e6d0f*/
+      v81 = v80 * v69; /*0x6e6d19*/
+      v36 = v77; /*0x6e6d1d*/
+      v78 = v77 * v72; /*0x6e6d27*/
+      v106 = v35 * v105 * v81; /*0x6e6d3b*/
+      v82 = (v81 * v88 + v78 * v71) * v73; /*0x6e6d5f*/
+      v122 = v78 * (v36 * v121); /*0x6e6d6b*/
+      v37 = v35 * v106; /*0x6e6d77*/
+      v38 = v106; /*0x6e6d77*/
+      *(this + 1) = v37; /*0x6e6d79*/
+      v107 = v34 - v74; /*0x6e6d82*/
+      *(this + 2) = v71 * v82 + v38 * v107; /*0x6e6d98*/
+      v108 = v75 - v34; /*0x6e6da3*/
+      *(this + 3) = v82 * v88 + v108 * v122; /*0x6e6dbf*/
+      *(this + 4) = v36 * v122; /*0x6e6dc4*/
     }
   }
-  return result;
+  return result; /*0x6e6b71*/
 }

@@ -5,7 +5,7 @@
 0x46F629: mov     edi, ecx
 0x46F62B: jz      TESSpellList_ModifiedComponentSize___Done
 0x46F631: mov     ecx, ds:0B33B00h
-0x46F637: call    sub_45A170
+0x46F637: call    TESSaveLoadGame_UseSaveGameBlocks
 0x46F63C: test    al, al
 0x46F63E: jz      short loc_46F645
 0x46F640: mov     esi, 6
@@ -41,7 +41,7 @@
 0x46F698: jz      short loc_46F6DC
 0x46F69A: mov     ecx, [esi]
 0x46F69C: push    ecx; a1
-0x46F69D: call    TESForm_LookupByFormID
+0x46F69D: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x46F6A2: mov     edx, [esi+5]
 0x46F6A5: add     esp, 4
 0x46F6A8: push    offset a__TesSharedT_4; "..\\TES Shared\\TESSpellList.cpp"

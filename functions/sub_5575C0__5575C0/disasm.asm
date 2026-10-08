@@ -101,7 +101,7 @@
 0x557692: test    eax, eax
 0x557694: jz      short loc_55769F
 0x557696: push    eax
-0x557697: call    FormHeapFree
+0x557697: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x55769C: add     esp, 4
 0x55769F: mov     ecx, [ebx+4]
 0x5576A2: test    ecx, ecx

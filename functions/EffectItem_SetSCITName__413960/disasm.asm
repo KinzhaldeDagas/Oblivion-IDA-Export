@@ -20,8 +20,17 @@
 0x41399B: mov     eax, [eax+8]
 0x41399E: test    eax, eax
 0x4139A0: jz      short EffectItem_SetSCITName___BadArg
-0x4139A2: push    esi; Str2
-0x4139A3: push    eax; Str1
-0x4139A4: call    __strcmp
+0x4139A2: push    esi; right
+0x4139A3: push    eax; left
+0x4139A4: call    CRT_StricmpLocaleDispatch
 0x4139A9: add     esp, 8
 0x4139AC: jmp     short EffectItem_SetSCITName___CopyName
+0x9C0F80: lea     ecx, [ebp+4]; void *
+0x9C0F83: jmp     BSStringT_Clear
+0x9C0F88: mov     edx, [esp+arg_4]
+0x9C0F8C: lea     eax, [edx-8]
+0x9C0F8F: mov     ecx, [edx-0Ch]
+0x9C0F92: xor     ecx, eax
+0x9C0F94: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C0F99: mov     eax, offset stru_AEA0A8
+0x9C0F9E: jmp     ___CxxFrameHandler3

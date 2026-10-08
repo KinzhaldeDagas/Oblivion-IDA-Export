@@ -1,4 +1,4 @@
-0x6116D0: sub     esp, 0Ch
+0x6116D0: sub     esp, 0Ch; Character current-package cleanup. DialoguePackage receives special two-participant cleanup: stop active playback, detach both actors, restore saved ExtraPackage state where present, reset procedure state, and destroy the one shared dynamic package/owned Conversation.
 0x6116D3: push    ebx
 0x6116D4: mov     ebx, ecx
 0x6116D6: cmp     dword ptr [ebx+58h], 0
@@ -25,23 +25,23 @@
 0x611725: mov     edi, eax
 0x611727: add     esp, 14h
 0x61172A: test    edi, edi
-0x61172C: mov     [esp+18h+var_4], edi
+0x61172C: mov     [esp+18h+form], edi
 0x611730: jz      loc_611AA2
 0x611736: cmp     dword ptr [edi+3Ch], 0
 0x61173A: jz      short loc_611743
-0x61173C: mov     ecx, edi
-0x61173E: call    sub_625D70
-0x611743: mov     ecx, edi
-0x611745: call    NiDX9TextureData__GetLevels
-0x61174A: mov     ecx, edi
+0x61173C: mov     ecx, edi; this
+0x61173E: call    DialoguePackage__StopActiveSpeakerDialogue; Stops dialogue playback on activeSpeaker when a DialoguePackage is being torn down or replaced.
+0x611743: mov     ecx, edi; this
+0x611745: call    DialoguePackage__GetSpeaker; DialoguePackage participant accessor: returns the original initiating speaker at +0x5C.
+0x61174A: mov     ecx, edi; this
 0x61174C: mov     esi, eax
-0x61174E: call    sub_779480
+0x61174E: call    DialoguePackage__GetTarget; DialoguePackage participant accessor: returns the target at +0x60.
 0x611753: push    esi
-0x611754: mov     ecx, offset unk_B3BD7C
+0x611754: mov     ecx, (offset qword_B3BB2C+250h)
 0x611759: mov     edi, eax
 0x61175B: call    sub_642B40
 0x611760: push    edi
-0x611761: mov     ecx, offset unk_B3BD7C
+0x611761: mov     ecx, (offset qword_B3BB2C+250h)
 0x611766: call    sub_642B40
 0x61176B: test    esi, esi
 0x61176D: jz      short loc_61177C
@@ -91,7 +91,7 @@
 0x6117ED: push    0
 0x6117EF: push    1
 0x6117F1: mov     ecx, eax
-0x6117F3: call    sub_475440
+0x6117F3: call    ActorAnimData_CleanupOrPromoteQueuedIdles; Owns current/queued idle retirement and promotion across ActorAnimData +0xCC/+0xD0/+0xD4/+0xD8. Depending on caller flags, stops a still-active sequence, moves stale holders into the two cleanup slots, destroys them when no slot is available or forced, or promotes queued +0xD0 into current +0xCC.
 0x6117F8: mov     eax, [edi]
 0x6117FA: mov     edx, [eax+164h]
 0x611800: mov     ecx, edi
@@ -101,7 +101,7 @@
 0x611808: push    0
 0x61180A: push    1
 0x61180C: mov     ecx, eax
-0x61180E: call    sub_475440
+0x61180E: call    ActorAnimData_CleanupOrPromoteQueuedIdles; Owns current/queued idle retirement and promotion across ActorAnimData +0xCC/+0xD0/+0xD4/+0xD8. Depending on caller flags, stops a still-active sequence, moves stale holders into the two cleanup slots, destroys them when no slot is available or forced, or promotes queued +0xD0 into current +0xCC.
 0x611813: mov     ecx, [esi+58h]
 0x611816: test    ecx, ecx
 0x611818: jz      short loc_611826
@@ -117,10 +117,10 @@
 0x611835: push    0
 0x611837: call    edx
 0x611839: push    ebp
-0x61183A: mov     ecx, edi
-0x61183C: call    sub_5E0380
-0x611841: mov     ecx, esi
-0x611843: call    sub_5E0380
+0x61183A: mov     ecx, edi; this
+0x61183C: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
+0x611841: mov     ecx, esi; this
+0x611843: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x611848: mov     eax, [esi]
 0x61184A: mov     edx, [eax+44h]
 0x61184D: push    30000h
@@ -139,10 +139,10 @@
 0x611878: mov     ecx, [eax+8]
 0x61187B: push    ecx
 0x61187C: mov     ecx, [esp+14h]
-0x611880: call    sub_5E8DE0
+0x611880: call    sub_5E8DE0; 3DTheft: marks actor modified when assigning created package/editor package. For created package refIDs, uses actor modified mask 0x20000, or 0x30000 for types 0x13/0x11.
 0x611885: mov     ebx, [esi+58h]
 0x611888: mov     ecx, ebp
-0x61188A: call    sub_41FB40
+0x61188A: call    ExtraDataList_GetPackageExtraIndex; Returns ExtraPackage's package index field, or zero when absent.
 0x61188F: mov     [ebx+4], eax
 0x611892: mov     eax, [esi+58h]
 0x611895: mov     ebx, [esp+10h]
@@ -151,14 +151,14 @@
 0x61189E: mov     ecx, ebx
 0x6118A0: mov     [esp+10h+arg_0], eax
 0x6118A4: add     ebp, 0D0h ; 'Ð'
-0x6118AA: call    sub_41FB60
+0x6118AA: call    ExtraDataList_GetPackageExtraTarget; Returns ExtraPackage's target TESObjectREFR pointer, or null.
 0x6118AF: mov     ecx, [esp+10h+arg_0]
 0x6118B3: mov     edx, [ebp+0]
 0x6118B6: push    eax
 0x6118B7: call    edx
 0x6118B9: mov     ebp, [esi]
 0x6118BB: mov     ecx, ebx
-0x6118BD: call    sub_41FB80
+0x6118BD: call    ExtraDataList_GetPackageExtraComplete; Returns ExtraPackage's completion byte, or false.
 0x6118C2: mov     ecx, esi
 0x6118C4: push    eax
 0x6118C5: mov     eax, [ebp+17Ch]
@@ -166,10 +166,10 @@
 0x6118CD: mov     eax, [esi+58h]
 0x6118D0: mov     ebp, [eax]
 0x6118D2: mov     ecx, ebx
-0x6118D4: mov     [esp+18h+var_4], eax
+0x6118D4: mov     [esp+18h+form], eax
 0x6118D8: add     ebp, 394h
-0x6118DE: call    sub_41FBA0
-0x6118E3: mov     ecx, [esp+18h+var_4]
+0x6118DE: call    ExtraDataList_GetPackageExtraActivate; Returns ExtraPackage's activation byte, or false.
+0x6118E3: mov     ecx, [esp+18h+form]
 0x6118E7: mov     edx, [ebp+0]
 0x6118EA: push    eax
 0x6118EB: call    edx
@@ -186,7 +186,7 @@
 0x61190E: call    eax
 0x611910: mov     ebx, [esp+1Ch+var_C]
 0x611914: mov     ecx, edi
-0x611916: call    sub_5E6B40
+0x611916: call    Actor_IsInDialogueProcedure; 3DTheft 2026-05-17: returns true when the actor's current package type is 0x12 (Dialogue). AddScriptPackage uses this as a pre-handoff gate.
 0x61191B: test    al, al
 0x61191D: jz      loc_611A82
 0x611923: mov     edx, [edi]
@@ -207,16 +207,16 @@
 0x611953: mov     edx, [ecx+8]
 0x611956: push    edx
 0x611957: mov     ecx, ebx
-0x611959: call    sub_5E8DE0
+0x611959: call    sub_5E8DE0; 3DTheft: marks actor modified when assigning created package/editor package. For created package refIDs, uses actor modified mask 0x20000, or 0x30000 for types 0x13/0x11.
 0x61195E: mov     ebx, [edi+58h]
 0x611961: mov     ecx, esi
-0x611963: call    sub_41FB40
+0x611963: call    ExtraDataList_GetPackageExtraIndex; Returns ExtraPackage's package index field, or zero when absent.
 0x611968: mov     [ebx+4], eax
 0x61196B: mov     ebx, [edi+58h]
 0x61196E: mov     ebp, [ebx]
 0x611970: mov     ecx, esi
 0x611972: add     ebp, 0D0h ; 'Ð'
-0x611978: call    sub_41FB60
+0x611978: call    ExtraDataList_GetPackageExtraTarget; Returns ExtraPackage's target TESObjectREFR pointer, or null.
 0x61197D: push    eax
 0x61197E: mov     eax, [ebp+0]
 0x611981: mov     ecx, ebx
@@ -225,7 +225,7 @@
 0x611989: mov     ebp, [edi]
 0x61198B: add     ebx, 44h ; 'D'
 0x61198E: mov     ecx, ebx
-0x611990: call    sub_41FB80
+0x611990: call    ExtraDataList_GetPackageExtraComplete; Returns ExtraPackage's completion byte, or false.
 0x611995: mov     edx, [ebp+17Ch]
 0x61199B: mov     ecx, edi
 0x61199D: push    eax
@@ -235,7 +235,7 @@
 0x6119A5: mov     ecx, ebx
 0x6119A7: mov     [esp+1Ch+var_8], eax
 0x6119AB: add     ebp, 394h
-0x6119B1: call    sub_41FBA0
+0x6119B1: call    ExtraDataList_GetPackageExtraActivate; Returns ExtraPackage's activation byte, or false.
 0x6119B6: mov     ecx, [esp+1Ch+var_8]
 0x6119BA: push    eax
 0x6119BB: mov     eax, [ebp+0]
@@ -311,16 +311,16 @@
 0x611A8D: test    al, al
 0x611A8F: pop     ebp
 0x611A90: jz      short loc_611AA9
-0x611A92: mov     eax, [esp+18h+var_4]
-0x611A96: mov     ecx, ds:0B33B00h
-0x611A9C: push    eax
-0x611A9D: call    sub_45C7A0
+0x611A92: mov     eax, [esp+18h+form]
+0x611A96: mov     ecx, ds:0B33B00h; self
+0x611A9C: push    eax; form
+0x611A9D: call    TESSaveLoadGame_DeleteForm
 0x611AA2: pop     edi
 0x611AA3: pop     esi
 0x611AA4: pop     ebx
 0x611AA5: add     esp, 0Ch
 0x611AA8: retn
-0x611AA9: mov     ecx, [esp+18h+var_4]
+0x611AA9: mov     ecx, [esp+18h+form]
 0x611AAD: mov     edx, [ecx]
 0x611AAF: mov     eax, [edx+10h]
 0x611AB2: push    1

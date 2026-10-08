@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 3,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_78EEC0",
+  "chunks": [
+    [
+      "0x78EEC0",
+      "0x78EF55"
+    ]
+  ],
+  "chunks_sha256": "8311383b38a50df87d07a15a0af513ae21f7e58d3f223fba1dccbab743dd33be",
+  "comment_regular": "\n[RT4.1 parity v146 2026-10-07] RotateY forms Ry then MultiplyCopy(Ry,this), premultiplying. Reference SourceCode/LibVector_Source/IdvVector.h1025 matches this: transformed normal row = sin(angle)*tangent + cos(angle)*normal. Vector Normalize at reference header660 uses1/(sqrt(sum) when sum>100*FLT_EPSILON else0.01), including zero/small vectors. v146 helper compared to unmodified reference smoothing excerpt with reference inline math.\n\nstRotTransform RotateY-style helper. Builds Y-axis rotation matrix from degrees and post-multiplies the 3x3 transform in-place.",
+  "comment_repeatable": "Y-rotation helper used by branch/bud generation.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 9,
+  "display_name": "OB_Mat3_RotateY_010201A0",
   "end_ea": "0x78EF55",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_78EEC0",
+  "name": "OB_Mat3_RotateY_010201A0",
   "segment": ".text",
   "sha256": "8311383b38a50df87d07a15a0af513ae21f7e58d3f223fba1dccbab743dd33be",
   "size": 149,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78EEC0",
-  "type": "float *__thiscall(float *this, float)",
-  "xrefs_from_count": 47,
+  "total_chunk_size": 149,
+  "type": "OB_stRotTransform_010201A0 *__thiscall(OB_stRotTransform_010201A0 *this, float)",
+  "xrefs_from_count": 56,
   "xrefs_to_count": 1
 }

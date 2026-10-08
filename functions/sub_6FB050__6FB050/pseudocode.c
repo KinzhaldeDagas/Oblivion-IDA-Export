@@ -2,10 +2,10 @@ unsigned int *__thiscall sub_6FB050(unsigned int *this, char a2)
 {
   unsigned int v4; // [esp-4h] [ebp-8h]
 
-  v4 = *(this + 1);
-  *this = (unsigned int)&NiTArray<FurnitureMark>::`vftable';
-  FormHeapFree(v4);
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  v4 = *(this + 1); /*0x6fb056*/
+  *this = (unsigned int)&NiTArray<FurnitureMark>::`vftable'; /*0x6fb057*/
+  FormHeapFree(v4); /*0x6fb05d*/
+  if ( (a2 & 1) != 0 ) /*0x6fb06a*/
+    FormHeapFree((unsigned int)this); /*0x6fb06d*/
+  return this; /*0x6fb077*/
 }

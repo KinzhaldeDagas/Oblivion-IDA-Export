@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
-  "callers_count": 24,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 30,
+  "chunks": [
+    [
+      "0x6C9CB0",
+      "0x6C9D2F"
+    ]
+  ],
+  "chunks_sha256": "bf7a0415b0b85f2e17f7b9198313a4c65a21c58d4988e53326480cea5c079be3",
+  "comment_regular": "Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.",
+  "comment_repeatable": "Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6C9CB0",
+  "display_name": "NiControllerSequence_Deactivate",
   "end_ea": "0x6C9D2F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6C9CB0",
+  "name": "NiControllerSequence_Deactivate",
   "segment": ".text",
   "sha256": "bf7a0415b0b85f2e17f7b9198313a4c65a21c58d4988e53326480cea5c079be3",
   "size": 127,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6C9CB0",
-  "type": "char __thiscall(int this, float, char)",
+  "total_chunk_size": 127,
+  "type": "char __thiscall(NiControllerSequence *this, float easeOutTime, char transition)",
   "xrefs_from_count": 45,
   "xrefs_to_count": 30
 }

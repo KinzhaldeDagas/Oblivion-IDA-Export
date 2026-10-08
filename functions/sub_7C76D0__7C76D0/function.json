@@ -1,19 +1,36 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_7C76D0",
+  "chunks": [
+    [
+      "0x7C76D0",
+      "0x7C77BD"
+    ],
+    [
+      "0x9A9F20",
+      "0x9A9F43"
+    ]
+  ],
+  "chunks_sha256": "3f9042985ec1667320565e0d6da74d2ed27974aca77a658b8e8608f31453858b",
+  "comment_regular": "Inverse caster-root removal: match exact light+0x130 in the active list and remove through native list/refcount ownership.",
+  "comment_repeatable": "Inverse caster-root removal: match exact light+0x130 in the active list and remove through native list/refcount ownership.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "ShadowSceneNode_RemoveActiveLightByCasterRoot",
   "end_ea": "0x7C77BD",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
-  "name": "sub_7C76D0",
+  "name": "ShadowSceneNode_RemoveActiveLightByCasterRoot",
   "segment": ".text",
   "sha256": "651a485f6fd58bf15b4f09091e08012ade7695d385ffcaa0a895ec6694655462",
   "size": 237,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7C76D0",
-  "type": "void __thiscall(_DWORD *this, int)",
-  "xrefs_from_count": 93,
+  "total_chunk_size": 272,
+  "type": "void __thiscall(int **this, int)",
+  "xrefs_from_count": 104,
   "xrefs_to_count": 1
 }

@@ -1,19 +1,32 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4A6410",
+      "0x4A6454"
+    ]
+  ],
+  "chunks_sha256": "014855885436f11d88df37242740619186edd16049fe1dcb28a3985d5e99290f",
+  "comment_regular": "Verified: compares region-list membership; used to decide whether cached region-data selection remains valid.",
+  "comment_repeatable": "Verified: compares region-list membership; used to decide whether cached region-data selection remains valid.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4A6410",
+  "display_name": "TESRegionList_AreEqual",
   "end_ea": "0x4A6454",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4A6410",
+  "name": "TESRegionList_AreEqual",
   "segment": ".text",
   "sha256": "014855885436f11d88df37242740619186edd16049fe1dcb28a3985d5e99290f",
   "size": 68,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4A6410",
-  "type": "bool __thiscall(_DWORD *this, int)",
+  "total_chunk_size": 68,
+  "type": "bool __thiscall(TESRegionList *self, TESRegionList *other)",
   "xrefs_from_count": 36,
   "xrefs_to_count": 1
 }

@@ -1,19 +1,36 @@
 {
-  "callees_count": 22,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 4,
-  "display_name": "sub_78D9E0",
+  "chunks": [
+    [
+      "0x78D9E0",
+      "0x78DC03"
+    ],
+    [
+      "0x9CBA00",
+      "0x9CBA2B"
+    ]
+  ],
+  "chunks_sha256": "1ef65ce7ddfddb6c830d74677723cd276eab79267547955669f91f3add57bcdc",
+  "comment_regular": "CSpeedTreeRT hidden instance initializer. Shallow-copies shared heavy pointers from source tree, increments shared refcount/list state, allocates per-instance STreeInstanceData, and records source-tree pointer in instance data.\n[SpeedTreeOBSE v172 instance scheduler] Native instance init copies shared tree+30 refcount and+38 vector pointer, appends the new RT pointer to that vector, increments refcount and creates instanceData0x14 with parent+0 and LOD+10. The scheduler snapshots this existing membership under plugin cache/lifecycle scope; it does not invent instance LODs or keep native ownership references. Native live scheduling/lifetime remain UNVERIFIED.",
+  "comment_repeatable": "CSpeedTreeRT hidden instance initializer. Shallow-copies shared heavy pointers from source tree, increments shared refcount/list state, allocates per-instance STreeInstanceData, and records source-tree pointer in instance data.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "CSpeedTreeRT__InstanceInit",
   "end_ea": "0x78DC03",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_78D9E0",
+  "name": "CSpeedTreeRT__InstanceInit",
   "segment": ".text",
   "sha256": "fd8b806103b0f7bd53ed55b560e59222159bec161804c3d49b4cb53e130eac83",
   "size": 547,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78D9E0",
-  "type": "float *__thiscall(float *this, int)",
-  "xrefs_from_count": 199,
+  "total_chunk_size": 590,
+  "type": "void *__thiscall(void *this, void *sourceTree)",
+  "xrefs_from_count": 212,
   "xrefs_to_count": 1
 }

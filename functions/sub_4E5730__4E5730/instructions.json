@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E5730",
-    "line": "push    ebp",
+    "line": "push    ebp; Verified PathGrid candidate search: scans point lists in nearby packed cell buckets, skips null/disabled points and exclusions, scores candidates using actor-aware connected-point cost, and optionally tests a short segment/line-of-sight before returning the best point. The exact semantics of the extraFilter and outFallbackUsed parameters remain Candidate.",
     "mnemonic": "push",
     "size": 1
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x4E5739",
-    "line": "mov     eax, [ebp+arg_10]",
+    "line": "mov     eax, [ebp+outFallbackUsed]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x4E5741",
-    "line": "mov     edi, [ebp+arg_0]",
+    "line": "mov     edi, [ebp+from]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x4E5754",
-    "line": "cmp     [ebp+arg_4], ebx",
+    "line": "cmp     [ebp+actor], ebx",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -163,13 +163,13 @@
   },
   {
     "ea": "0x4E5783",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E5785",
-    "line": "call    sub_4BEF40",
+    "line": "call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.",
     "mnemonic": "call",
     "size": 5
   },
@@ -310,12 +310,6 @@
     "line": "jmp     short loc_4E57E0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x4E57D9",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
   },
   {
     "ea": "0x4E57E0",
@@ -511,13 +505,13 @@
   },
   {
     "ea": "0x4E585A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E585C",
-    "line": "call    sub_67ED70",
+    "line": "call    PathGraphNode_IsLinkedPointsDisabled; Verified returns PathGrid point flag 0x20, which is the linked-points-disabled state: SetLinkedPointsEnabled stores the inverse of its enabled argument, save/load persists flagged indices, searches skip flagged nodes, and renderer marks them wireframe.",
     "mnemonic": "call",
     "size": 5
   },
@@ -535,13 +529,13 @@
   },
   {
     "ea": "0x4E5869",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E586B",
-    "line": "call    sub_4E7DE0",
+    "line": "call    PathGraphNode_GetConnections; Verified graph-node connection-list accessor: returns this+0x20. TESPathGrid and TESRoad graph code both traverse this as a BSSimpleList of adjacency pointers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -571,7 +565,7 @@
   },
   {
     "ea": "0x4E587D",
-    "line": "mov     eax, [ebp+arg_C]",
+    "line": "mov     eax, [ebp+excludedPoints]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -619,73 +613,73 @@
   },
   {
     "ea": "0x4E5893",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E5895",
-    "line": "call    sub_4E8040",
+    "line": "call    PathGraphNode_IsPreferred; Verified preferred-node predicate: reads the least-significant bit of the Z float at graph-node+0x1C. The registered fPathPreferredPointBonus setting applies a bonus to this marked point for non-creature actors.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E589A",
-    "line": "push    ebx",
+    "line": "push    ebx; preferred",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E589B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E589D",
-    "line": "mov     byte ptr [esp+74h+var_38], al",
+    "line": "mov     [esp+74h+preferred], al",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E58A1",
-    "line": "call    sub_4E8060",
+    "line": "call    PathGraphNode_SetPreferred; Verified preferred-node setter: sets/clears the least-significant bit of the Z float at graph-node+0x1C while preserving the remaining position bits. PathGrid candidate search temporarily clears/restores it around actor-aware cost evaluation.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E58A6",
-    "line": "mov     eax, [ebp+arg_4]",
+    "line": "mov     eax, [ebp+actor]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x4E58A9",
-    "line": "mov     ecx, [ebp+arg_0]",
+    "line": "mov     ecx, [ebp+from]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x4E58AC",
-    "line": "push    eax",
+    "line": "push    eax; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E58AD",
-    "line": "push    esi",
+    "line": "push    esi; to",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E58AE",
-    "line": "push    ecx",
+    "line": "push    ecx; from",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E58AF",
-    "line": "call    sub_67EDE0",
+    "line": "call    TESConnectedPoint_ComputeActorAwareEdgeCost; Verified actor-aware edge cost: TESObjectREFR_GetPathGraphMovementCost(from, actor) + Euclidean distance + fPathWaterExitPenalty when below-water bit 0x08 differs + fPathSpaceExitPenalty when SubSpace bit 0x40 differs. Current defaults: 20,000 for each boundary penalty; exact tuning rationale Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -697,7 +691,7 @@
   },
   {
     "ea": "0x4E58B8",
-    "line": "mov     edx, [esp+7Ch+var_38]",
+    "line": "mov     edx, dword ptr [esp+7Ch+preferred]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -709,19 +703,19 @@
   },
   {
     "ea": "0x4E58BF",
-    "line": "push    edx",
+    "line": "push    edx; preferred",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E58C0",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E58C2",
-    "line": "call    sub_4E8060",
+    "line": "call    PathGraphNode_SetPreferred; Verified preferred-node setter: sets/clears the least-significant bit of the Z float at graph-node+0x1C while preserving the remaining position bits. PathGrid candidate search temporarily clears/restores it around actor-aware cost evaluation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -787,7 +781,7 @@
   },
   {
     "ea": "0x4E58E4",
-    "line": "cmp     [ebp+arg_8], bl",
+    "line": "cmp     [ebp+extraFilter], bl",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -811,7 +805,7 @@
   },
   {
     "ea": "0x4E58F0",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -823,13 +817,13 @@
   },
   {
     "ea": "0x4E58F5",
-    "line": "call    sub_4BEF40",
+    "line": "call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E58FA",
-    "line": "mov     ecx, [ebp+arg_0]",
+    "line": "mov     ecx, [ebp+from]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -841,7 +835,7 @@
   },
   {
     "ea": "0x4E58FE",
-    "line": "call    sub_4BEF40",
+    "line": "call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1015,7 +1009,7 @@
   },
   {
     "ea": "0x4E5965",
-    "line": "cmp     [ebp+arg_8], bl",
+    "line": "cmp     [ebp+extraFilter], bl",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -1033,7 +1027,7 @@
   },
   {
     "ea": "0x4E5974",
-    "line": "mov     esi, [ebp+arg_0]",
+    "line": "mov     esi, [ebp+from]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1045,7 +1039,7 @@
   },
   {
     "ea": "0x4E5978",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1057,13 +1051,13 @@
   },
   {
     "ea": "0x4E597D",
-    "line": "call    sub_4BEF40",
+    "line": "call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E5982",
-    "line": "mov     ecx, [esp+74h+var_64]",
+    "line": "mov     ecx, [esp+74h+var_64]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1075,7 +1069,7 @@
   },
   {
     "ea": "0x4E5987",
-    "line": "call    sub_4BEF40",
+    "line": "call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1111,13 +1105,13 @@
   },
   {
     "ea": "0x4E5999",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E599B",
-    "line": "call    sub_4BEF40",
+    "line": "call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1165,7 +1159,7 @@
   },
   {
     "ea": "0x4E59B6",
-    "line": "mov     ecx, [esp+esi*8+70h+var_28]",
+    "line": "mov     ecx, [esp+esi*8+70h+var_28]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1183,13 +1177,13 @@
   },
   {
     "ea": "0x4E59BE",
-    "line": "call    sub_4BEF40",
+    "line": "call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E59C3",
-    "line": "mov     edx, [ebp+arg_4]",
+    "line": "mov     edx, [ebp+actor]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1303,7 +1297,7 @@
   },
   {
     "ea": "0x4E59EE",
-    "line": "mov     eax, [ebp+arg_10]",
+    "line": "mov     eax, [ebp+outFallbackUsed]",
     "mnemonic": "mov",
     "size": 3
   },

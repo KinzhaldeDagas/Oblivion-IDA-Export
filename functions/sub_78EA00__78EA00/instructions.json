@@ -1,25 +1,25 @@
 [
   {
     "ea": "0x78EA00",
-    "line": "mov     ecx, offset off_B2B684",
+    "line": "mov     ecx, offset OB_SIdvRandomImpl_m_cUniform_010201A0; Oblivion stRandom::GetUniform. Returns minValue + (maxValue - minValue) * SIdvRandomImpl::m_cUniform.Next(). Used throughout spline, branch, frond, tree, leaf-LOD, and seed generation paths.",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x78EA05",
-    "line": "call    sub_7A6FD0",
+    "line": "call    OB_Random_Next_010201A0; Oblivion Random::Next. Rejects an uninitialized seed, selects Buffer[int(Raw()*128)], replaces that entry with another Raw() result, and returns the prior buffered sample.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x78EA0A",
-    "line": "fld     [esp+arg_4]",
+    "line": "fld     [esp+maxValue]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x78EA0E",
-    "line": "fld     [esp+arg_0]",
+    "line": "fld     [esp+minValue]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -55,13 +55,13 @@
   },
   {
     "ea": "0x78EA1C",
-    "line": "fstp    [esp+arg_4]",
+    "line": "fstp    [esp+maxValue]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x78EA20",
-    "line": "fld     [esp+arg_4]",
+    "line": "fld     [esp+maxValue]",
     "mnemonic": "fld",
     "size": 4
   },

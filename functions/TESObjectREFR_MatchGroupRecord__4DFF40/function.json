@@ -1,18 +1,31 @@
 {
-  "callees_count": 17,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4DFF40",
+      "0x4DFFFB"
+    ]
+  ],
+  "chunks_sha256": "72cd9459884f30b003a9ab8ebbf6458c63b0db2d23a4a0b613ffa10c7ccfea8f",
+  "comment_regular": "Runtime corroboration of TESCS 0x545820: TESObjectREFR/ACHR/ACRE group matcher accepts owning CELL group type 6 as an ancestor, or strict direct role type 8 when reference flag 0x400 (Persistent), else type 10 when flag 0x8000 (Visible When Distant), else type 9. Persistent is tested first; labels match the owning CELL FormID in the low 24 bits.",
+  "comment_repeatable": "Runtime corroboration of TESCS 0x545820: TESObjectREFR/ACHR/ACRE group matcher accepts owning CELL group type 6 as an ancestor, or strict direct role type 8 when reference flag 0x400 (Persistent), else type 10 when flag 0x8000 (Visible When Distant), else type 9. Persistent is tested first; labels match the owning CELL FormID in the low 24 bits.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "TESObjectREFR_MatchGroupRecord",
   "end_ea": "0x4DFFFB",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "TESObjectREFR_MatchGroupRecord",
   "segment": ".text",
   "sha256": "72cd9459884f30b003a9ab8ebbf6458c63b0db2d23a4a0b613ffa10c7ccfea8f",
   "size": 187,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4DFF40",
+  "total_chunk_size": 187,
   "type": "char __thiscall(TESChildCELL *this, void *a2, bool a3, bool a4)",
   "xrefs_from_count": 85,
   "xrefs_to_count": 12

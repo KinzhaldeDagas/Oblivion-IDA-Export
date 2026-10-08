@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x4ECAE0",
-    "line": "push    ebx",
+    "line": "push    ebx; Verified recursive unload state machine: Attached(3)->LoadedDetached(2) removes the terrain node; LoadedDetached(2)->UnloadPending(4); the next unload pass releases the mesh and reaches Unloaded(5). The same transition recurses over four child pointers at +0x30..+0x3C.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4ECAE1",
-    "line": "mov     ebx, [esp+4+arg_0]",
+    "line": "mov     ebx, [esp+4+landLODParent]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x4ECAFB",
-    "line": "call    sub_4EC810",
+    "line": "call    TESTerrainLODQuad_ReleaseMesh; Verified release path: releases terrainLODNode and finishes in Unloaded (5); if not already UnloadPending (4), first moves into state 4.",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x4ECB0E",
-    "line": "lea     edx, [esp+10h+arg_0]",
+    "line": "lea     edx, [esp+10h+landLODParent]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x4ECB17",
-    "line": "mov     edi, [esp+0Ch+arg_0]",
+    "line": "mov     edi, [esp+0Ch+landLODParent]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x4ECB3B",
-    "line": "mov     dword ptr [esi+8], 2",
+    "line": "mov     dword ptr [esi+8], 2; Verified detach transition: removes terrainLODNode from LandLOD and changes state from Attached (3) to LoadedDetached (2).",
     "mnemonic": "mov",
     "size": 7
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x4ECB44",
-    "line": "mov     dword ptr [esi+8], 4",
+    "line": "mov     dword ptr [esi+8], 4; Verified deferred-unload transition: a LoadedDetached quad moves to UnloadPending (4); a later update releases its mesh and transitions to Unloaded (5).",
     "mnemonic": "mov",
     "size": 7
   },
@@ -259,25 +259,25 @@
   },
   {
     "ea": "0x4ECB53",
-    "line": "mov     edi, 4",
+    "line": "mov     edi, 4; Verified recursion over the four child-quad pointers at +0x30..+0x3C applies the same detach/unload state progression to descendants.",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x4ECB58",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4ECB5A",
-    "line": "push    ebx",
+    "line": "push    ebx; landLODParent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4ECB5B",
-    "line": "call    sub_4ECAE0",
+    "line": "call    TESTerrainLODQuad_AdvanceUnloadState; Verified recursive unload state machine: Attached(3)->LoadedDetached(2) removes the terrain node; LoadedDetached(2)->UnloadPending(4); the next unload pass releases the mesh and reaches Unloaded(5). The same transition recurses over four child pointers at +0x30..+0x3C.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,19 +1,32 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4F6F40",
+      "0x4F6FBF"
+    ]
+  ],
+  "chunks_sha256": "b94319e51f00d1cd6cf603b958688934bb27384fe43514027d72ba086fd22049",
+  "comment_regular": "GetIsRace_Eval (index 69 / opcode 0x1045): requires TESNPC BaseForm (type 0x23), then pointer-compares its actual race field at +0xE8 with the Race parameter (typeID 0x0F). Result is numeric 1 or 0.",
+  "comment_repeatable": "GetIsRace_Eval (index 69 / opcode 0x1045): requires TESNPC BaseForm (type 0x23), then pointer-compares its actual race field at +0xE8 with the Race parameter (typeID 0x0F). Result is numeric 1 or 0.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "GetIsRace",
+  "display_name": "GetIsRace_Eval",
   "end_ea": "0x4F6FBF",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "GetIsRace",
+  "name": "GetIsRace_Eval",
   "segment": ".text",
   "sha256": "b94319e51f00d1cd6cf603b958688934bb27384fe43514027d72ba086fd22049",
   "size": 127,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4F6F40",
+  "total_chunk_size": 127,
   "type": "char __cdecl(int, int, int, double *)",
   "xrefs_from_count": 58,
-  "xrefs_to_count": 4
+  "xrefs_to_count": 3
 }

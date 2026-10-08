@@ -1,85 +1,86 @@
-void __thiscall sub_65FBB0(unsigned int **this)
+// Consumes and frees the oldest (tail) attribute-bonus bucket after a player level-up, then ensures a current bucket remains available. New buckets are pushed at the front, so pending levels are resolved FIFO.
+void __thiscall Player_ConsumeOldestAttributeBonusBucket(PlayerCharacter *this)
 {
-  unsigned int *v2; // ecx
+  unsigned int *attributeBonuses; // ecx
   int v3; // edx
   unsigned int *v4; // eax
-  _DWORD *v5; // eax
-  _DWORD *v6; // ecx
+  UInt8 **v5; // eax
+  UInt8 **v6; // ecx
   int *v7; // edx
   int *i; // eax
   unsigned int v9; // esi
-  unsigned int *v10; // eax
-  _DWORD *v11; // eax
+  int v10; // eax
+  UInt8 **v11; // eax
   _DWORD *v12; // eax
 
-  v2 = *(this + 0x16D);
-  if ( v2 )
+  attributeBonuses = (unsigned int *)this->attributeBonuses; /*0x65fbb4*/
+  if ( attributeBonuses ) /*0x65fbbc*/
   {
-    v3 = 0;
-    v4 = v2;
-    do
+    v3 = 0; /*0x65fbbe*/
+    v4 = attributeBonuses; /*0x65fbc0*/
+    do /*0x65fbcf*/
     {
-      if ( *v4 )
-        ++v3;
-      v4 = (unsigned int *)v4[1];
+      if ( *v4 ) /*0x65fbc2*/
+        ++v3; /*0x65fbc7*/
+      v4 = (unsigned int *)v4[1]; /*0x65fbca*/
     }
-    while ( v4 );
-    if ( v3 == 1 )
+    while ( v4 ); /*0x65fbcf*/
+    if ( v3 == 1 ) /*0x65fbd4*/
     {
-      FormHeapFree(*v2);
-      v5 = *(this + 0x16D);
-      v6 = (_DWORD *)v5[1];
-      if ( v6 )
+      FormHeapFree(*attributeBonuses); /*0x65fbd9*/
+      v5 = this->attributeBonuses; /*0x65fbde*/
+      v6 = (UInt8 **)v5[1]; /*0x65fbe4*/
+      if ( v6 ) /*0x65fbec*/
       {
-        v5[1] = v6[1];
-        *v5 = *v6;
-        FormHeapFree((unsigned int)v6);
+        v5[1] = v6[1]; /*0x65fbf1*/
+        *v5 = *v6; /*0x65fbf7*/
+        FormHeapFree((unsigned int)v6); /*0x65fbf9*/
       }
       else
       {
-        *v5 = 0;
+        *v5 = 0; /*0x65fc03*/
       }
     }
     else
     {
-      v7 = (int *)v2;
-      for ( i = (int *)v2[1]; i; i = (int *)i[1] )
-        v7 = i;
-      v9 = *v7;
-      if ( *v7 )
+      v7 = (int *)attributeBonuses; /*0x65fc0b*/
+      for ( i = (int *)attributeBonuses[1]; i; i = (int *)i[1] ) /*0x65fc12*/
+        v7 = i; /*0x65fc14*/
+      v9 = *v7; /*0x65fc1d*/
+      if ( *v7 ) /*0x65fc1d*/
       {
-        BSSimpleList_Remove((int *)v2, *v7);
-        FormHeapFree(v9);
+        BSSimpleList_Remove((int *)attributeBonuses, *v7); /*0x65fc24*/
+        FormHeapFree(v9); /*0x65fc2a*/
       }
     }
   }
   else
   {
-    v10 = (unsigned int *)FormHeapAlloc(8u);
-    if ( v10 )
+    v10 = FormHeapAlloc(8u); /*0x65fc36*/
+    if ( v10 ) /*0x65fc40*/
     {
-      *v10 = 0;
-      v10[1] = 0;
+      *(_DWORD *)v10 = 0; /*0x65fc42*/
+      *(_DWORD *)(v10 + 4) = 0; /*0x65fc48*/
     }
     else
     {
-      v10 = 0;
+      v10 = 0; /*0x65fc51*/
     }
-    *(this + 0x16D) = v10;
+    this->attributeBonuses = (UInt8 **)v10; /*0x65fc53*/
   }
-  v11 = *(this + 0x16D);
-  if ( !v11[1] && !*v11 )
+  v11 = this->attributeBonuses; /*0x65fc59*/
+  if ( !v11[1] && !*v11 ) /*0x65fc65*/
   {
-    v12 = (_DWORD *)FormHeapAlloc(8u);
-    if ( v12 )
+    v12 = (_DWORD *)FormHeapAlloc(8u); /*0x65fc6c*/
+    if ( v12 ) /*0x65fc76*/
     {
-      *v12 = 0;
-      v12[1] = 0;
-      BSSimpleList_PushFront(*(this + 0x16D), (int)v12);
+      *v12 = 0; /*0x65fc7a*/
+      v12[1] = 0; /*0x65fc7c*/
+      BSSimpleList_PushFront(this->attributeBonuses, (int)v12); /*0x65fc86*/
     }
     else
     {
-      BSSimpleList_PushFront(*(this + 0x16D), 0);
+      BSSimpleList_PushFront(this->attributeBonuses, 0); /*0x65fc97*/
     }
   }
 }

@@ -1,0 +1,63 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "NiDX9AdditionalDepthStencilBufferData",
+  "definition": "struct NiDX9AdditionalDepthStencilBufferData\n{\nNiDX92DBufferDataVtbl *__vftable;\nNiDX92DBufferDataMembr super;\nD3DFORMAT depthFormat; ///< Requested depth format saved at0x14 by factory76DF2B; checked and reused by Recreate76D5C0. Native CreateDepthStencilSurface uses NONE/quality0.\nBOOL discardDepthStencil; ///< BOOL discard policy at0x18 copied fromB294EC by factory76DEAE and passed to device slot29; not an MSAA setting.\n}\n",
+  "id": 18374686479672050056,
+  "is_union": false,
+  "kind": "struct",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "__vftable",
+      "offset": 0,
+      "offset_hex": "0x0",
+      "size": 4,
+      "type": "NiDX92DBufferDataVtbl *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "super",
+      "offset": 4,
+      "offset_hex": "0x4",
+      "size": 16,
+      "type": "NiDX92DBufferDataMembr"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Requested depth format saved at0x14 by factory76DF2B; checked and reused by Recreate76D5C0. Native CreateDepthStencilSurface uses NONE/quality0.",
+      "name": "depthFormat",
+      "offset": 20,
+      "offset_hex": "0x14",
+      "size": 4,
+      "type": "D3DFORMAT"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "BOOL discard policy at0x18 copied fromB294EC by factory76DEAE and passed to device slot29; not an MSAA setting.",
+      "name": "discardDepthStencil",
+      "offset": 24,
+      "offset_hex": "0x18",
+      "size": 4,
+      "type": "BOOL"
+    }
+  ],
+  "name": "NiDX9AdditionalDepthStencilBufferData",
+  "ordinal": 175,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 28
+}

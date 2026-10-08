@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A3C80",
-    "line": "push    ebp",
+    "line": "push    ebp; Source-match: CTreeEngine::BuildBranchLods. Builds a flat branch list, ranks by volume with large-branch retention and fuzziness, then emits branch LOD strips through CBranch::ComputeLod.",
     "mnemonic": "push",
     "size": 1
   },
@@ -127,19 +127,19 @@
   },
   {
     "ea": "0x7A3CB7",
-    "line": "mov     [esp+6Ch+var_2C], edi",
+    "line": "mov     [esp+6Ch+var_30.begin], edi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A3CBB",
-    "line": "mov     [esp+6Ch+var_28], ebp",
+    "line": "mov     [esp+6Ch+var_30.end], ebp",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A3CBF",
-    "line": "mov     [esp+6Ch+var_24], ebp",
+    "line": "mov     [esp+6Ch+var_30.capacity], ebp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -271,13 +271,13 @@
   },
   {
     "ea": "0x7A3CFA",
-    "line": "call    sub_7917E0",
+    "line": "call    OB_CBranch_BuildBranchVector_010201A0; Recursively flattens compact CBranch tree into a pointer vector for branch LOD ranking.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A3CFF",
-    "line": "mov     edi, [esp+6Ch+var_2C]",
+    "line": "mov     edi, [esp+6Ch+var_30.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x7A3D05",
-    "line": "lea     ecx, [esp+6Ch+var_30]",
+    "line": "lea     ecx, [esp+6Ch+var_30]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x7A3D13",
-    "line": "call    sub_78FA80",
+    "line": "call    OB_stVector4_Size_010201A0; Returns the number of 4-byte elements in an Oblivion vector as (end-begin)/4, or zero when begin is null. Callers use it for branch-pointer and leaf-pointer collections.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x7A3D20",
-    "line": "mov     eax, [esp+6Ch+var_28]",
+    "line": "mov     eax, [esp+6Ch+var_30.end]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x7A3D32",
-    "line": "mov     edi, [esp+6Ch+var_2C]",
+    "line": "mov     edi, [esp+6Ch+var_30.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x7A3D63",
-    "line": "lea     ecx, [esp+6Ch+var_30]",
+    "line": "lea     ecx, [esp+6Ch+var_30]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x7A3D6A",
-    "line": "call    sub_78FA80",
+    "line": "call    OB_stVector4_Size_010201A0; Returns the number of 4-byte elements in an Oblivion vector as (end-begin)/4, or zero when begin is null. Callers use it for branch-pointer and leaf-pointer collections.",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,13 +505,13 @@
   },
   {
     "ea": "0x7A3D73",
-    "line": "lea     ecx, [esp+6Ch+var_51]",
+    "line": "lea     ecx, [esp+6Ch+var_51]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A3D77",
-    "line": "call    sub_78EAF0",
+    "line": "call    OB_stRandom_ctor_010201A0; Oblivion stRandom constructor. The class has no per-instance generator state; if the shared SIdvRandomImpl state is not initialized, it invokes Reseed(-1).",
     "mnemonic": "call",
     "size": 5
   },
@@ -547,19 +547,19 @@
   },
   {
     "ea": "0x7A3D8A",
-    "line": "mov     [esp+6Ch+var_1C], esi",
+    "line": "mov     [esp+6Ch+var_20.begin], esi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A3D8E",
-    "line": "mov     [esp+6Ch+Src], ebp",
+    "line": "mov     [esp+6Ch+var_20.end], ebp",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A3D92",
-    "line": "mov     [esp+6Ch+var_14], edi",
+    "line": "mov     [esp+6Ch+var_20.capacity], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -571,13 +571,13 @@
   },
   {
     "ea": "0x7A3D9A",
-    "line": "mov     ecx, [esp+6Ch+var_28]",
+    "line": "mov     ecx, [esp+6Ch+var_30.end]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A3D9E",
-    "line": "mov     edx, [esp+6Ch+var_2C]",
+    "line": "mov     edx, [esp+6Ch+var_30.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -733,19 +733,19 @@
   },
   {
     "ea": "0x7A3DF3",
-    "line": "mov     edx, [esp+6Ch+var_2C]",
+    "line": "mov     edx, [esp+6Ch+var_30.begin]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A3DF7",
-    "line": "mov     edi, [esp+6Ch+var_14]",
+    "line": "mov     edi, [esp+6Ch+var_20.capacity]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A3DFB",
-    "line": "mov     esi, [esp+6Ch+var_1C]",
+    "line": "mov     esi, [esp+6Ch+var_20.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -757,7 +757,7 @@
   },
   {
     "ea": "0x7A3E01",
-    "line": "mov     ecx, [esp+6Ch+Src]",
+    "line": "mov     ecx, [esp+6Ch+var_20.end]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -841,7 +841,7 @@
   },
   {
     "ea": "0x7A3E23",
-    "line": "mov     [esp+6Ch+Src], eax",
+    "line": "mov     [esp+6Ch+var_20.end], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -877,7 +877,7 @@
   },
   {
     "ea": "0x7A3E34",
-    "line": "push    ebx; int",
+    "line": "push    ebx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -895,43 +895,43 @@
   },
   {
     "ea": "0x7A3E3A",
-    "line": "push    eax; int",
+    "line": "push    eax; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A3E3B",
-    "line": "lea     eax, [esp+78h+var_38]",
+    "line": "lea     eax, [esp+78h+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A3E3F",
-    "line": "push    eax; int",
+    "line": "push    eax; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A3E40",
-    "line": "lea     ecx, [esp+7Ch+var_20]",
+    "line": "lea     ecx, [esp+7Ch+var_20]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A3E44",
-    "line": "call    sub_7A3620",
+    "line": "call    OB_stVector4_InsertOne_010201A0; Oblivion binary evidence: inserts one four-byte value at a checked owner/current iterator by calling OB_stVector4_InsertFill, then returns a relocated iterator to the inserted slot. Widely folded across SpeedTree pointer and scalar vectors.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A3E49",
-    "line": "mov     edx, [esp+6Ch+var_2C]",
+    "line": "mov     edx, [esp+6Ch+var_30.begin]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A3E4D",
-    "line": "mov     ecx, [esp+6Ch+var_28]",
+    "line": "mov     ecx, [esp+6Ch+var_30.end]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -961,13 +961,13 @@
   },
   {
     "ea": "0x7A3E5C",
-    "line": "mov     ecx, [esp+6Ch+var_28]",
+    "line": "mov     ecx, [esp+6Ch+var_30.end]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A3E60",
-    "line": "mov     edx, [esp+6Ch+var_2C]",
+    "line": "mov     edx, [esp+6Ch+var_30.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1009,13 +1009,13 @@
   },
   {
     "ea": "0x7A3E74",
-    "line": "mov     ecx, [esp+6Ch+var_28]",
+    "line": "mov     ecx, [esp+6Ch+var_30.end]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A3E78",
-    "line": "mov     edx, [esp+6Ch+var_2C]",
+    "line": "mov     edx, [esp+6Ch+var_30.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1099,13 +1099,13 @@
   },
   {
     "ea": "0x7A3E97",
-    "line": "mov     ecx, [esp+7Ch+var_28]",
+    "line": "mov     ecx, [esp+7Ch+var_30.end]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A3E9B",
-    "line": "mov     edx, [esp+7Ch+var_2C]",
+    "line": "mov     edx, [esp+7Ch+var_30.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1123,13 +1123,13 @@
   },
   {
     "ea": "0x7A3EA6",
-    "line": "mov     edi, [esp+6Ch+var_14]",
+    "line": "mov     edi, [esp+6Ch+var_20.capacity]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A3EAA",
-    "line": "mov     esi, [esp+6Ch+var_1C]",
+    "line": "mov     esi, [esp+6Ch+var_20.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1147,7 +1147,7 @@
   },
   {
     "ea": "0x7A3EB4",
-    "line": "mov     [esp+6Ch+var_28], ecx",
+    "line": "mov     [esp+6Ch+var_30.end], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1177,13 +1177,13 @@
   },
   {
     "ea": "0x7A3EC9",
-    "line": "fstp    [esp+74h+var_70]; float",
+    "line": "fstp    [esp+74h+maxValue]; maxValue",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A3ECD",
-    "line": "lea     ecx, [esp+74h+var_51]",
+    "line": "lea     ecx, [esp+74h+var_51]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1195,13 +1195,13 @@
   },
   {
     "ea": "0x7A3ED3",
-    "line": "fstp    [esp+74h+var_74]; float",
+    "line": "fstp    [esp+74h+minValue]; minValue",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7A3ED6",
-    "line": "call    sub_78EA00",
+    "line": "call    OB_stRandom_GetUniform_010201A0; Oblivion stRandom::GetUniform. Returns minValue + (maxValue - minValue) * SIdvRandomImpl::m_cUniform.Next(). Used throughout spline, branch, frond, tree, leaf-LOD, and seed generation paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1327,7 +1327,7 @@
   },
   {
     "ea": "0x7A3F16",
-    "line": "mov     ecx, [esp+6Ch+var_2C]",
+    "line": "mov     ecx, [esp+6Ch+var_30.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1345,7 +1345,7 @@
   },
   {
     "ea": "0x7A3F1E",
-    "line": "mov     eax, [esp+6Ch+var_28]",
+    "line": "mov     eax, [esp+6Ch+var_30.end]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1381,7 +1381,7 @@
   },
   {
     "ea": "0x7A3F30",
-    "line": "mov     ecx, [esp+6Ch+var_2C]",
+    "line": "mov     ecx, [esp+6Ch+var_30.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1405,25 +1405,25 @@
   },
   {
     "ea": "0x7A3F3E",
-    "line": "mov     ecx, [esp+6Ch+var_28]",
+    "line": "mov     ecx, [esp+6Ch+var_30.end]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A3F42",
-    "line": "mov     edx, [esp+6Ch+var_2C]",
+    "line": "mov     edx, [esp+6Ch+var_30.begin]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A3F46",
-    "line": "mov     edi, [esp+6Ch+var_14]",
+    "line": "mov     edi, [esp+6Ch+var_20.capacity]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A3F4A",
-    "line": "mov     esi, [esp+6Ch+var_1C]",
+    "line": "mov     esi, [esp+6Ch+var_20.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1453,7 +1453,7 @@
   },
   {
     "ea": "0x7A3F5B",
-    "line": "call    sub_791410",
+    "line": "call    OB_CBranch_SortBranchVector_010201A0; Sort helper for compact branch pointer vectors used by branch LOD ranking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1471,7 +1471,7 @@
   },
   {
     "ea": "0x7A3F65",
-    "line": "call    sub_791410",
+    "line": "call    OB_CBranch_SortBranchVector_010201A0; Sort helper for compact branch pointer vectors used by branch LOD ranking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1483,7 +1483,7 @@
   },
   {
     "ea": "0x7A3F6D",
-    "line": "lea     ecx, [esp+6Ch+var_20]",
+    "line": "lea     ecx, [esp+6Ch+var_20]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1495,7 +1495,7 @@
   },
   {
     "ea": "0x7A3F73",
-    "line": "call    sub_78FA80",
+    "line": "call    OB_stVector4_Size_010201A0; Returns the number of 4-byte elements in an Oblivion vector as (end-begin)/4, or zero when begin is null. Callers use it for branch-pointer and leaf-pointer collections.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1519,7 +1519,7 @@
   },
   {
     "ea": "0x7A3F80",
-    "line": "mov     ecx, [esp+6Ch+var_1C]",
+    "line": "mov     ecx, [esp+6Ch+var_20.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1537,7 +1537,7 @@
   },
   {
     "ea": "0x7A3F88",
-    "line": "mov     eax, [esp+6Ch+Src]",
+    "line": "mov     eax, [esp+6Ch+var_20.end]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1573,19 +1573,19 @@
   },
   {
     "ea": "0x7A3F9A",
-    "line": "mov     ecx, [esp+6Ch+var_1C]",
+    "line": "mov     ecx, [esp+6Ch+var_20.begin]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A3F9E",
-    "line": "mov     eax, [esp+6Ch+var_2C]",
+    "line": "mov     eax, [esp+6Ch+var_30.begin]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A3FA2",
-    "line": "cmp     eax, [esp+6Ch+var_28]",
+    "line": "cmp     eax, [esp+6Ch+var_30.end]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -1615,7 +1615,7 @@
   },
   {
     "ea": "0x7A3FB2",
-    "line": "push    edi; int",
+    "line": "push    edi; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -1627,37 +1627,37 @@
   },
   {
     "ea": "0x7A3FB4",
-    "line": "push    ebx; int",
+    "line": "push    ebx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A3FB5",
-    "line": "lea     ecx, [esp+78h+var_38]",
+    "line": "lea     ecx, [esp+78h+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A3FB9",
-    "line": "push    ecx; int",
+    "line": "push    ecx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A3FBA",
-    "line": "lea     ecx, [esp+7Ch+var_30]",
+    "line": "lea     ecx, [esp+7Ch+var_30]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A3FBE",
-    "line": "call    sub_7A3620",
+    "line": "call    OB_stVector4_InsertOne_010201A0; Oblivion binary evidence: inserts one four-byte value at a checked owner/current iterator by calling OB_stVector4_InsertFill, then returns a relocated iterator to the inserted slot. Widely folded across SpeedTree pointer and scalar vectors.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A3FC3",
-    "line": "lea     ecx, [esp+6Ch+var_20]",
+    "line": "lea     ecx, [esp+6Ch+var_20]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1669,7 +1669,7 @@
   },
   {
     "ea": "0x7A3FCA",
-    "line": "call    sub_78FA80",
+    "line": "call    OB_stVector4_Size_010201A0; Returns the number of 4-byte elements in an Oblivion vector as (end-begin)/4, or zero when begin is null. Callers use it for branch-pointer and leaf-pointer collections.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1728,12 +1728,6 @@
     "size": 2
   },
   {
-    "ea": "0x7A3FEA",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x7A3FF0",
     "line": "mov     esi, [esp+6Ch+var_50]",
     "mnemonic": "mov",
@@ -1759,19 +1753,19 @@
   },
   {
     "ea": "0x7A3FFC",
-    "line": "mov     ecx, [edi+5Ch]",
+    "line": "mov     ecx, [edi+5Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A3FFF",
-    "line": "push    ebx",
+    "line": "push    ebx; lodLevel",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A4000",
-    "line": "call    sub_794630",
+    "line": "call    OB_CIndexedGeometry_DeleteLodStrip_010201A0; Oblivion legacy CIndexedGeometry::DeleteLodStrip. Frees and nulls every heap strip pointer for one LOD while retaining the outer per-LOD vector.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1921,7 +1915,7 @@
   },
   {
     "ea": "0x7A4055",
-    "line": "lea     ecx, [esp+6Ch+var_30]",
+    "line": "lea     ecx, [esp+6Ch+var_30]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1969,7 +1963,7 @@
   },
   {
     "ea": "0x7A406F",
-    "line": "call    sub_78FA80",
+    "line": "call    OB_stVector4_Size_010201A0; Returns the number of 4-byte elements in an Oblivion vector as (end-begin)/4, or zero when begin is null. Callers use it for branch-pointer and leaf-pointer collections.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1987,7 +1981,7 @@
   },
   {
     "ea": "0x7A4078",
-    "line": "mov     edi, [esp+6Ch+var_2C]",
+    "line": "mov     edi, [esp+6Ch+var_30.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2041,7 +2035,7 @@
   },
   {
     "ea": "0x7A4091",
-    "line": "mov     eax, [esp+6Ch+var_28]",
+    "line": "mov     eax, [esp+6Ch+var_30.end]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2077,7 +2071,7 @@
   },
   {
     "ea": "0x7A40A3",
-    "line": "mov     edi, [esp+6Ch+var_2C]",
+    "line": "mov     edi, [esp+6Ch+var_30.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2095,7 +2089,7 @@
   },
   {
     "ea": "0x7A40AD",
-    "line": "lea     ecx, [esp+6Ch+var_30]",
+    "line": "lea     ecx, [esp+6Ch+var_30]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2137,7 +2131,7 @@
   },
   {
     "ea": "0x7A40C7",
-    "line": "call    sub_78FA80",
+    "line": "call    OB_stVector4_Size_010201A0; Returns the number of 4-byte elements in an Oblivion vector as (end-begin)/4, or zero when begin is null. Callers use it for branch-pointer and leaf-pointer collections.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2161,19 +2155,19 @@
   },
   {
     "ea": "0x7A40D4",
-    "line": "mov     ecx, [edi+5Ch]",
+    "line": "mov     ecx, [edi+5Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A40D7",
-    "line": "push    ebx",
+    "line": "push    ebx; lodLevel",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A40D8",
-    "line": "call    sub_794A90",
+    "line": "call    OB_CIndexedGeometry_ResetStripCounter_010201A0; Oblivion legacy CIndexedGeometry::ResetStripCounter(lod). Selects the active LOD, resets the current strip index, and clears that LOD's accumulated triangle count. This differs from the later 4.1 no-argument inline reset.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2203,31 +2197,31 @@
   },
   {
     "ea": "0x7A40E5",
-    "line": "mov     ecx, [edi+5Ch]",
+    "line": "mov     ecx, [edi+5Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A40E8",
-    "line": "push    ebp",
+    "line": "push    ebp; stripLength",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A40E9",
-    "line": "push    ebp",
+    "line": "push    ebp; strip",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A40EA",
-    "line": "push    ebp",
+    "line": "push    ebp; lodLevel",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A40EB",
-    "line": "call    sub_796100",
+    "line": "call    OB_CIndexedGeometry_AddStrip_010201A0; OBLIVION AUTHORITY (2026-08-30): CIndexedGeometry::AddStrip receives ownership of a caller FormHeap-allocated unsigned-short array (for example allocation at 0x78F477 before call 0x78F48C), appends its unsigned-short length and pointer to per-LOD nested vectors, then adds the 32-bit result of zero_extend(stripLength)-2 to the per-LOD triangle total. There is no clamp in this function; callers are expected to provide a valid strip length (at least two). RT4.1's later contiguous vector<int> representation is contrast only and was not projected onto Oblivion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2257,7 +2251,7 @@
   },
   {
     "ea": "0x7A40F8",
-    "line": "mov     ecx, [esp+6Ch+var_2C]",
+    "line": "mov     ecx, [esp+6Ch+var_30.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2275,7 +2269,7 @@
   },
   {
     "ea": "0x7A4100",
-    "line": "mov     eax, [esp+6Ch+var_28]",
+    "line": "mov     eax, [esp+6Ch+var_30.end]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2311,7 +2305,7 @@
   },
   {
     "ea": "0x7A4112",
-    "line": "mov     ecx, [esp+6Ch+var_2C]",
+    "line": "mov     ecx, [esp+6Ch+var_30.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2323,25 +2317,25 @@
   },
   {
     "ea": "0x7A4119",
-    "line": "mov     ecx, [ecx+esi*4]",
+    "line": "mov     ecx, [ecx+esi*4]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A411C",
-    "line": "push    edx",
+    "line": "push    edx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A411D",
-    "line": "push    ebx",
+    "line": "push    ebx; lodIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A411E",
-    "line": "call    sub_78F420",
+    "line": "call    OB_CBranch_ComputeLod_010201A0;",
     "mnemonic": "call",
     "size": 5
   },
@@ -2383,7 +2377,7 @@
   },
   {
     "ea": "0x7A4137",
-    "line": "mov     eax, [esp+6Ch+var_1C]",
+    "line": "mov     eax, [esp+6Ch+var_20.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2413,7 +2407,7 @@
   },
   {
     "ea": "0x7A4142",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2425,25 +2419,25 @@
   },
   {
     "ea": "0x7A414A",
-    "line": "lea     ecx, [esp+6Ch+var_51]; void *",
+    "line": "lea     ecx, [esp+6Ch+var_51]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A414E",
-    "line": "mov     [esp+6Ch+var_1C], esi",
+    "line": "mov     [esp+6Ch+var_20.begin], esi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A4152",
-    "line": "mov     [esp+6Ch+Src], esi",
+    "line": "mov     [esp+6Ch+var_20.end], esi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A4156",
-    "line": "mov     [esp+6Ch+var_14], esi",
+    "line": "mov     [esp+6Ch+var_20.capacity], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2455,13 +2449,13 @@
   },
   {
     "ea": "0x7A415F",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A4164",
-    "line": "mov     eax, [esp+6Ch+var_2C]",
+    "line": "mov     eax, [esp+6Ch+var_30.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2485,7 +2479,7 @@
   },
   {
     "ea": "0x7A416D",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2554,5 +2548,83 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CC9D0",
+    "line": "lea     ecx, [ebp-30h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC9D3",
+    "line": "jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC9D8",
+    "line": "lea     ecx, [ebp-51h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC9DB",
+    "line": "jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC9E0",
+    "line": "lea     ecx, [ebp-20h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC9E3",
+    "line": "jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC9E8",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CC9EC",
+    "line": "lea     eax, [edx-5Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC9EF",
+    "line": "mov     ecx, [edx-60h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC9F2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CC9F4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC9F9",
+    "line": "mov     eax, offset stru_AF5D9C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC9FE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

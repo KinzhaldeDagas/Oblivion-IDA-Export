@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x472C40",
-    "line": "push    ecx",
+    "line": "push    ecx; Writes one AnimIdle slot state: presence/state metadata, idle form reference, optional loaded sequence marker, and nested BSAnimGroupSequence state.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,19 +19,19 @@
   },
   {
     "ea": "0x472C44",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x472C4A",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x472C4C",
-    "line": "push    esi; Src",
+    "line": "push    esi; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -43,13 +43,13 @@
   },
   {
     "ea": "0x472C52",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x472C58",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x472C5D",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x472C63",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -85,13 +85,13 @@
   },
   {
     "ea": "0x472C68",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x472C69",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -127,13 +127,13 @@
   },
   {
     "ea": "0x472C84",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x472C8A",
-    "line": "push    1; Size",
+    "line": "push    1; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x472C90",
-    "line": "push    edx; Src",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x472CA4",
-    "line": "mov     [esp+8+var_1], 0FFh",
+    "line": "mov     [esp+8+source], 0FFh",
     "mnemonic": "mov",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x472CB8",
-    "line": "call    TESAnimGroup_GetAnimationGroup",
+    "line": "call    TESAnimGroup_GetAnimationGroup; TESAnimGroup native group id accessor: byte at TESAnimGroup +0x08.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x472CC0",
-    "line": "call    sub_470960",
+    "line": "call    ActorAnimData_FindAnimMapEntry; CustomAnimSupport decode: anim-map lookup helper used by playback, validators, and save/load restore to test an encoded group key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,31 +295,31 @@
   },
   {
     "ea": "0x472CD9",
-    "line": "mov     [esp+8+var_1], al",
+    "line": "mov     [esp+8+source], al",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x472CDD",
-    "line": "push    1; Size",
+    "line": "push    1; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x472CDF",
-    "line": "lea     ecx, [esp+0Ch+var_1]",
+    "line": "lea     ecx, [esp+0Ch+source]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x472CE3",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x472CE4",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x472CFA",
-    "line": "call    sub_49F570",
+    "line": "call    BSAnimGroupSequence_SaveState; Serializes BSAnimGroupSequence effective sample time, active state, fields +0x34/+0x38 and +0x54; save versions below 0x71 include the legacy extra time copy.",
     "mnemonic": "call",
     "size": 5
   },

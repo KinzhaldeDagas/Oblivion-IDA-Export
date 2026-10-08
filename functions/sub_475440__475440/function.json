@@ -1,18 +1,31 @@
 {
-  "callees_count": 25,
-  "callers_count": 14,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
+  "callers_count": 19,
+  "chunks": [
+    [
+      "0x475440",
+      "0x475583"
+    ]
+  ],
+  "chunks_sha256": "2574740030d9702ca69437cfde0355d97c4d042222c75d433f585578b669cefa",
+  "comment_regular": "Owns current/queued idle retirement and promotion across ActorAnimData +0xCC/+0xD0/+0xD4/+0xD8. Depending on caller flags, stops a still-active sequence, moves stale holders into the two cleanup slots, destroys them when no slot is available or forced, or promotes queued +0xD0 into current +0xCC.",
+  "comment_repeatable": "Owns current/queued idle retirement and promotion across ActorAnimData +0xCC/+0xD0/+0xD4/+0xD8. Depending on caller flags, stops a still-active sequence, moves stale holders into the two cleanup slots, destroys them when no slot is available or forced, or promotes queued +0xD0 into current +0xCC.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_475440",
+  "display_name": "ActorAnimData_CleanupOrPromoteQueuedIdles",
   "end_ea": "0x475583",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_475440",
+  "name": "ActorAnimData_CleanupOrPromoteQueuedIdles",
   "segment": ".text",
   "sha256": "2574740030d9702ca69437cfde0355d97c4d042222c75d433f585578b669cefa",
   "size": 323,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x475440",
+  "total_chunk_size": 323,
   "type": "void __thiscall(ActorAnimData *this, char a2, char a3)",
   "xrefs_from_count": 122,
   "xrefs_to_count": 19

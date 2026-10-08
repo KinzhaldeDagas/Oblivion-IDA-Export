@@ -1,9 +1,9 @@
-0x468860: push    ebx
+0x468860: push    ebx; CustomAnimSupport decode: append KFFZ string if absent; heap-copies strlen+1 bytes.
 0x468861: push    edi
 0x468862: mov     edi, [esp+8+arg_0]
 0x468866: push    edi
 0x468867: mov     ebx, ecx
-0x468869: call    TESAnimation_HasAnimation
+0x468869: call    TESAnimation_HasAnimation; TESAnimation has exact animation string: linear strcmp over BSSimpleList, used for dedupe before append.
 0x46886E: test    al, al
 0x468870: jnz     short loc_4688AB
 0x468872: mov     eax, edi

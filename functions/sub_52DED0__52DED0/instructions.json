@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x52DED0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Create the paired BSFaceGenNiNodeBiped and BSFaceGenNiNodeSkinned nodes with shared animation data, build a FaceGenRenderState, populate head geometry, and optionally apply the resulting appearance to both nodes.",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x52DF01",
-    "line": "mov     esi, [esp+0ECh+arg_0]",
+    "line": "mov     esi, [esp+0ECh+outBipedNode]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x52DF08",
-    "line": "mov     edi, [esp+0ECh+arg_4]",
+    "line": "mov     edi, [esp+0ECh+outSkinnedNode]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -565,43 +565,43 @@
   },
   {
     "ea": "0x52E016",
-    "line": "lea     ecx, [esp+0ECh+var_D0]",
+    "line": "lea     ecx, [esp+0ECh+parameters]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x52E01A",
-    "line": "call    FaceGenHeadParameters_Ctor",
+    "line": "call    FaceGenRenderState_Construct; Constructs a 0xC4 FaceGenRenderState. The first 0x60 bytes are FaceGenHeadParameters; appearance assets and four 0x10-byte pointer arrays follow.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x52E01F",
-    "line": "mov     ebp, [esp+0ECh+arg_8]",
+    "line": "mov     ebp, [esp+0ECh+npc]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x52E026",
-    "line": "mov     ecx, [esp+0ECh+var_D4]",
+    "line": "mov     ecx, [esp+0ECh+var_D4]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x52E02A",
-    "line": "lea     eax, [esp+0ECh+var_D0]",
+    "line": "lea     eax, [esp+0ECh+parameters]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x52E02E",
-    "line": "push    eax",
+    "line": "push    eax; outState",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52E02F",
-    "line": "push    ebp",
+    "line": "push    ebp; npc",
     "mnemonic": "push",
     "size": 1
   },
@@ -613,49 +613,49 @@
   },
   {
     "ea": "0x52E03B",
-    "line": "call    TESRace_GetFaceGenHeadParameters",
+    "line": "call    TESRace_BuildFaceGenRenderState; Builds the complete FaceGenRenderState from this race and an optional TESNPC. Resolves absolute coefficients, appearance selections, the nine head-part resources, texture overrides, race tint data, and fallback eyes.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x52E040",
-    "line": "mov     ecx, [esp+0ECh+arg_10]",
+    "line": "mov     ecx, dword ptr [esp+0ECh+preferBipedGeometry]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x52E047",
-    "line": "push    ecx",
+    "line": "push    ecx; preferBipedGeometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52E048",
-    "line": "lea     edx, [esp+0F0h+var_D0]",
+    "line": "lea     edx, [esp+0F0h+parameters]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x52E04C",
-    "line": "push    edx",
+    "line": "push    edx; state",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52E04D",
-    "line": "push    edi",
+    "line": "push    edi; skinnedNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52E04E",
-    "line": "push    esi",
+    "line": "push    esi; bipedNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52E04F",
-    "line": "call    sub_555A80",
+    "line": "call    BSFaceGen_BuildHeadGeometryNodes; Build nine head-part slots through the common BSFaceGenModel_CreateMorphedGeometry path: Face, sex-specific Ears, Mouth, TeethLower, TeethUpper, Tongue, EyeLeft, and EyeRight. Native EGM changes positions for every part but no full normal regeneration occurs before attachment.",
     "mnemonic": "call",
     "size": 5
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x52E057",
-    "line": "cmp     [esp+0ECh+arg_C], 0",
+    "line": "cmp     [esp+0ECh+applyAppearance], 0",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -685,25 +685,25 @@
   },
   {
     "ea": "0x52E063",
-    "line": "lea     eax, [esp+0ECh+var_D0]",
+    "line": "lea     eax, [esp+0ECh+parameters]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x52E067",
-    "line": "push    eax",
+    "line": "push    eax; state",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52E068",
-    "line": "push    ecx",
+    "line": "push    ecx; faceNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52E069",
-    "line": "call    BSFaceGen_DoSomethingWithFaceGenNode",
+    "line": "call    BSFaceGen_ApplyHeadParametersToNode; Applies a complete FaceGenRenderState to a BSFaceGenNiNode: projects age, binds nine head-part resources, handles sex-specific parts, eyes and hair, then rebuilds property state and updates the node.",
     "mnemonic": "call",
     "size": 5
   },
@@ -715,25 +715,25 @@
   },
   {
     "ea": "0x52E070",
-    "line": "lea     edx, [esp+0F4h+var_D0]",
+    "line": "lea     edx, [esp+0F4h+parameters]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x52E074",
-    "line": "push    edx",
+    "line": "push    edx; state",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52E075",
-    "line": "push    eax",
+    "line": "push    eax; faceNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52E076",
-    "line": "call    BSFaceGen_DoSomethingWithFaceGenNode",
+    "line": "call    BSFaceGen_ApplyHeadParametersToNode; Applies a complete FaceGenRenderState to a BSFaceGenNiNode: projects age, binds nine head-part resources, handles sex-specific parts, eyes and hair, then rebuilds property state and updates the node.",
     "mnemonic": "call",
     "size": 5
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x52E09A",
-    "line": "lea     ecx, [esp+0ECh+var_D0]",
+    "line": "lea     ecx, [esp+0ECh+parameters]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -805,7 +805,7 @@
   },
   {
     "ea": "0x52E0A5",
-    "line": "call    FaceGenHeadParameters_Dtor",
+    "line": "call    FaceGenRenderState_Destruct; Destroys FaceGenRenderState: releases texture-override smart pointers, destroys the four pointer arrays, then destroys the four embedded FaceGen coefficient matrices.",
     "mnemonic": "call",
     "size": 5
   },
@@ -868,5 +868,149 @@
     "line": "retn    14h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B88A0",
+    "line": "mov     eax, [ebp-0D8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B88A6",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B88A7",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B88AC",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B88AD",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B88AE",
+    "line": "mov     eax, [ebp-0D8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B88B4",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B88B5",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B88BA",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B88BB",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B88BC",
+    "line": "mov     eax, [ebp-0D8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B88C2",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B88C3",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B88C8",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B88C9",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B88CA",
+    "line": "lea     ecx, [ebp-0D0h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B88D0",
+    "line": "jmp     FaceGenRenderState_Destruct; Destroys FaceGenRenderState: releases texture-override smart pointers, destroys the four pointer arrays, then destroys the four embedded FaceGen coefficient matrices.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B88D5",
+    "line": "mov     edx, [esp+outSkinnedNode]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B88D9",
+    "line": "lea     eax, [edx-0DCh]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B88DF",
+    "line": "mov     ecx, [edx-0E0h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B88E5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B88E7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B88EC",
+    "line": "mov     eax, offset stru_AE2DBC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B88F1",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

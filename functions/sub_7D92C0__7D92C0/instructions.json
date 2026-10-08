@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7D92C0",
-    "line": "push    esi",
+    "line": "push    esi; Recursively set/clear native refraction state on shader-property subtypes 5..10. useRefractF selects passInfo 0x10000 instead of 0x8000; stores power and optional period and invalidates pass caches.",
     "mnemonic": "push",
     "size": 1
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x7D92E2",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x7D935A",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -396,12 +396,6 @@
     "size": 2
   },
   {
-    "ea": "0x7D938A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x7D9390",
     "line": "movzx   ecx, word ptr [edi+0B6h]",
     "mnemonic": "movzx",
@@ -457,13 +451,13 @@
   },
   {
     "ea": "0x7D93AD",
-    "line": "fstp    [esp+14h+var_14]; a5",
+    "line": "fstp    [esp+14h+period]; period",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7D93B0",
-    "line": "push    ebx; a4",
+    "line": "push    ebx; useRefractF",
     "mnemonic": "push",
     "size": 1
   },
@@ -487,25 +481,25 @@
   },
   {
     "ea": "0x7D93BA",
-    "line": "fstp    [esp+1Ch+var_1C]; a3",
+    "line": "fstp    [esp+1Ch+power]; power",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7D93BD",
-    "line": "push    ecx; a2",
+    "line": "push    ecx; enabled",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D93BE",
-    "line": "push    eax; a1",
+    "line": "push    eax; root",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D93BF",
-    "line": "call    sub_7D92C0",
+    "line": "call    NiAVObject_SetShaderRefractionStateRecursive; Recursively set/clear native refraction state on shader-property subtypes 5..10. useRefractF selects passInfo 0x10000 instead of 0x8000; stores power and optional period and invalidates pass caches.",
     "mnemonic": "call",
     "size": 5
   },

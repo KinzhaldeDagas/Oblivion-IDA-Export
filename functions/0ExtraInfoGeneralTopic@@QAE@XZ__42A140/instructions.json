@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x42A140",
-    "line": "mov     eax, ecx",
+    "line": "mov     eax, ecx; Construct the actor's type-0x59 cache entry and transfer ownership of the supplied MenuTopic pointer to it.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x42A146",
-    "line": "mov     byte ptr [eax+4], 59h ; 'Y'",
+    "line": "mov     byte ptr [eax+4], 59h ; 'Y'; Oblivion registers this cache as extra-data type 0x59. Fallout's analogous ExtraInfoGeneralTopic uses type 0x4D (x4y6:0x82276370), so extra-data numeric IDs are executable-specific.",
     "mnemonic": "mov",
     "size": 4
   },

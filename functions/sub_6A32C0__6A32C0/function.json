@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6A32C0",
+      "0x6A32CA"
+    ]
+  ],
+  "chunks_sha256": "5940df69b60defd9e87bf6c4f1f44706b7d3bc501eab25edf30198be533ee258",
+  "comment_regular": "Verified setter for NonActorMagicTarget.parentReference at +0x14; the sole direct caller is the modified-extra load path.",
+  "comment_repeatable": "Verified setter for NonActorMagicTarget.parentReference at +0x14; the sole direct caller is the modified-extra load path.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6A32C0",
+  "display_name": "NonActorMagicTarget_SetParentReference",
   "end_ea": "0x6A32CA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6A32C0",
+  "name": "NonActorMagicTarget_SetParentReference",
   "segment": ".text",
   "sha256": "5940df69b60defd9e87bf6c4f1f44706b7d3bc501eab25edf30198be533ee258",
   "size": 10,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6A32C0",
-  "type": "int __thiscall(_DWORD *this, int)",
+  "total_chunk_size": 10,
+  "type": "TESObjectREFR *__thiscall(NonActorMagicTarget *this, TESObjectREFR *parentReference)",
   "xrefs_from_count": 2,
   "xrefs_to_count": 1
 }

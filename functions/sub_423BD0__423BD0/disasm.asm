@@ -1,5 +1,5 @@
-0x423BD0: push    0FFFFFFFFh
-0x423BD2: push    offset SEH_6E3250
+0x423BD0: push    0FFFFFFFFh; Verified singleton ExtraData_Seed behavior: signed byte 0xFF removes the extra; other bytes add or replace it. Combined with TESObjectTREE_GetIndexForSeed, this means an empty/missing tree seed entry cannot be persisted as a concrete per-reference seed.
+0x423BD2: push    offset ExtraDataList_SetReferencePointer_SEH
 0x423BD7: mov     eax, large fs:0
 0x423BDD: push    eax
 0x423BDE: push    ebx
@@ -12,7 +12,7 @@
 0x423BF2: mov     esi, ecx
 0x423BF4: push    38h ; '8'; a2
 0x423BF6: call    BaseExtraList_GetExtraData
-0x423BFB: mov     ebx, [esp+18h+arg_0]
+0x423BFB: mov     ebx, dword ptr [esp+18h+seed]
 0x423BFF: cmp     bl, 0FFh
 0x423C02: jz      short loc_423C69
 0x423C04: test    eax, eax
@@ -20,7 +20,7 @@
 0x423C08: push    10h; Size
 0x423C0A: call    FormHeapAlloc
 0x423C0F: add     esp, 4
-0x423C12: mov     [esp+18h+arg_0], eax
+0x423C12: mov     dword ptr [esp+18h+seed], eax
 0x423C16: test    eax, eax
 0x423C18: mov     [esp+18h+var_4], 0
 0x423C20: jz      short loc_423C2C
@@ -61,3 +61,15 @@
 0x423C84: pop     ebx
 0x423C85: add     esp, 0Ch
 0x423C88: retn    4
+0x9C3090: mov     eax, [ebp+4]
+0x9C3093: push    eax
+0x9C3094: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C3099: pop     ecx
+0x9C309A: retn
+0x9C309B: mov     edx, [esp+arg_4]
+0x9C309F: lea     eax, [edx-8]
+0x9C30A2: mov     ecx, [edx-0Ch]
+0x9C30A5: xor     ecx, eax
+0x9C30A7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C30AC: mov     eax, offset stru_AEBD48
+0x9C30B1: jmp     ___CxxFrameHandler3

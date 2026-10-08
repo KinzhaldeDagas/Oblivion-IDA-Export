@@ -1,4 +1,4 @@
-0x4E5400: push    ecx
+0x4E5400: push    ecx; Verified cleanup of TESPathGrid.renderNode (+0x1C): resets point render helpers, detaches the generated root from shared path-grid visual state, updates the root node, releases it, and clears the field.
 0x4E5401: push    edi
 0x4E5402: mov     edi, ecx
 0x4E5404: cmp     dword ptr [edi+1Ch], 0
@@ -9,10 +9,10 @@
 0x4E5415: jbe     short loc_4E5434
 0x4E5417: mov     eax, [edi+24h]
 0x4E541A: mov     ecx, [eax+4]
-0x4E541D: mov     ecx, [ecx+esi*4]
+0x4E541D: mov     ecx, [ecx+esi*4]; this
 0x4E5420: test    ecx, ecx
 0x4E5422: jz      short loc_4E5429
-0x4E5424: call    sub_4E8190
+0x4E5424: call    TESPathGridPoint_ClearRenderNode; Verified rendered-graph teardown calls TESPathGridPoint_ClearRenderNode for every non-null point before detaching and releasing the pathgrid root NiNode.
 0x4E5429: movzx   edx, word ptr [edi+30h]
 0x4E542D: add     esi, 1
 0x4E5430: cmp     esi, edx
@@ -29,7 +29,7 @@
 0x4E5451: lea     edx, [esp+14h+var_4]
 0x4E5455: push    edx
 0x4E5456: call    eax
-0x4E5458: mov     eax, dword ptr [esp+10h+var_4]
+0x4E5458: mov     eax, [esp+10h+var_4]
 0x4E545C: test    eax, eax
 0x4E545E: jz      short loc_4E547A
 0x4E5460: mov     esi, eax
@@ -46,7 +46,7 @@
 0x4E5476: mov     ecx, esi
 0x4E5478: call    eax
 0x4E547A: mov     ecx, ds:0B35F88h; this
-0x4E5480: call    NiAVObject_InitializePropertyState
+0x4E5480: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x4E5485: mov     ecx, ds:0B35F88h
 0x4E548B: call    NiNode_UpdateDynamicEffectState
 0x4E5490: fldz
@@ -54,7 +54,7 @@
 0x4E5494: push    ecx
 0x4E5495: mov     ecx, ds:0B35F88h; this
 0x4E549B: fstp    [esp+18h+a2]; a2
-0x4E549E: call    NiAVObject_UpdateNiAVObject
+0x4E549E: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x4E54A3: mov     esi, [edi+1Ch]
 0x4E54A6: test    esi, esi
 0x4E54A8: jz      short loc_4E54C9

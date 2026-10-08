@@ -1,1 +1,8 @@
-tagPOINTER_INPUT_TYPE
+enum tagPOINTER_INPUT_TYPE : __int32
+{
+PT_POINTER = 0x1,
+PT_TOUCH = 0x2,
+PT_PEN = 0x3,
+PT_MOUSE = 0x4,
+PT_TOUCHPAD = 0x5,
+};

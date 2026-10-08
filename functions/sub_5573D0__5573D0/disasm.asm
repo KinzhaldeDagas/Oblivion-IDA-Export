@@ -12,7 +12,7 @@
 0x5573E7: cmp     eax, ebx
 0x5573E9: jz      short loc_5573F4
 0x5573EB: push    eax
-0x5573EC: call    FormHeapFree
+0x5573EC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5573F1: add     esp, 4
 0x5573F4: mov     [esi], ebx
 0x5573F6: mov     [esi+4], ebx
@@ -21,7 +21,7 @@
 0x557400: jb      short loc_55740E
 0x557402: mov     eax, [esi-1Ch]
 0x557405: push    eax
-0x557406: call    FormHeapFree
+0x557406: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x55740B: add     esp, 4
 0x55740E: mov     dword ptr [esi-8], 0Fh
 0x557415: mov     [esi-0Ch], ebx

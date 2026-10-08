@@ -1,4 +1,4 @@
-0x479450: push    0FFFFFFFFh
+0x479450: push    0FFFFFFFFh; Loads and clones a model for an actor equipment/add-on slot, binds actor-specific resources, applies the stock attachment transform, attaches through Prn metadata, and initializes render property/dynamic-effect state.
 0x479452: push    offset SEH_479450
 0x479457: mov     eax, large fs:0
 0x47945D: push    eax
@@ -16,10 +16,10 @@
 0x47947B: xor     esi, esi
 0x47947D: cmp     ecx, esi
 0x47947F: jz      loc_4796CC
-0x479485: mov     edi, [esp+40h+arg_8]
+0x479485: mov     edi, [esp+40h+actorRef]
 0x479489: cmp     edi, esi
 0x47948B: jz      loc_4796CC
-0x479491: mov     eax, [esp+40h+arg_C]
+0x479491: mov     eax, [esp+40h+skeletonRoot]
 0x479495: cmp     eax, esi
 0x479497: mov     [esp+40h+a1], eax
 0x47949B: jnz     short loc_4794AC
@@ -32,10 +32,10 @@
 0x4794B0: push    1
 0x4794B2: push    ecx
 0x4794B3: mov     ecx, ds:0B33A1Ch
-0x4794B9: call    sub_439EB0
-0x4794BE: lea     ecx, [esp+40h+var_28]
+0x4794B9: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
+0x4794BE: lea     ecx, [esp+40h+var_28]; this
 0x4794C2: mov     ebx, eax
-0x4794C4: call    sub_478B90
+0x4794C4: call    OB_NiCloningProcess_ctor
 0x4794C9: fld1
 0x4794CB: fst     [esp+40h+var_10]
 0x4794CF: fst     [esp+40h+var_14]
@@ -64,7 +64,7 @@
 0x479519: mov     ecx, ebx
 0x47951B: call    sub_700610
 0x479520: mov     ebp, eax
-0x479522: mov     edx, [esp+40h+arg_4]
+0x479522: mov     edx, [esp+40h+slot]
 0x479526: push    edi
 0x479527: push    edx
 0x479528: push    ebp
@@ -76,7 +76,7 @@
 0x479539: test    ebp, ebp
 0x47953B: jz      loc_47966D
 0x479541: push    ebp
-0x479542: push    offset dword_B35288
+0x479542: push    0B35288h
 0x479547: call    NiRTTI__IsObjectOfRTTIType
 0x47954C: add     esp, 8
 0x47954F: test    al, al
@@ -106,13 +106,13 @@
 0x4795A0: add     esp, 8
 0x4795A3: jmp     loc_47965B
 0x4795A8: mov     eax, [esp+40h+a1]
-0x4795AC: push    0
-0x4795AE: push    0FFFFFFFFh
-0x4795B0: push    0
-0x4795B2: push    ebx
-0x4795B3: push    ebp
-0x4795B4: push    eax
-0x4795B5: call    sub_479140
+0x4795AC: push    0; unusedTrailing
+0x4795AE: push    0FFFFFFFFh; modelType
+0x4795B0: push    0; unusedContext
+0x4795B2: push    ebx; sourceModelRoot
+0x4795B3: push    ebp; modelRoot
+0x4795B4: push    eax; skeletonRoot
+0x4795B5: call    AttachModelUsingPrnExtraData; Six-argument cdecl helper (all ten native callers push 6 arguments; unusedContext and unusedTrailing are not read). Reads NiStringExtraData 'Prn' from sourceModelRoot, falling back to modelRoot; resolves that exact parent in skeletonRoot and attaches modelRoot. For modelType==7 it forces Prn string byte 6 to 'L' for lookup, then writes it back to 'R'. It then finds exact-name 'Scb' inside modelRoot and attaches that object separately to the same parent, reparenting Scb as modelRoot's sibling before refreshing property/effect state. Missing creature parents invoke the narrow FadeNode-chain Scb removal. Every exit returns the bool result of sub_88D000(modelRoot,1,1), which is not proven to be general attachment success.
 0x4795BA: mov     edx, [ebp+0]
 0x4795BD: mov     eax, [edx+8]
 0x4795C0: add     esp, 18h
@@ -121,7 +121,7 @@
 0x4795C7: test    eax, eax
 0x4795C9: jz      loc_47965B
 0x4795CF: mov     ebx, [ebp+1Ch]
-0x4795D2: mov     edi, [esp+40h+arg_4]
+0x4795D2: mov     edi, [esp+40h+slot]
 0x4795D6: xor     esi, esi
 0x4795D8: test    ebx, ebx
 0x4795DA: jz      short loc_4795E6
@@ -147,7 +147,7 @@
 0x479615: jz      short loc_47961C
 0x479617: cmp     edi, 6
 0x47961A: jnz     short loc_47965B
-0x47961C: mov     ecx, [esp+40h+arg_8]
+0x47961C: mov     ecx, [esp+40h+actorRef]
 0x479620: mov     eax, [ecx]
 0x479622: mov     edx, [eax+168h]
 0x479628: call    edx
@@ -175,7 +175,7 @@
 0x47965B: mov     ecx, ebp
 0x47965D: call    NiNode_UpdateDynamicEffectState
 0x479662: mov     ecx, ebp; this
-0x479664: call    NiAVObject_InitializePropertyState
+0x479664: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x479669: mov     esi, [esp+40h+var_2C]
 0x47966D: test    esi, esi
 0x47966F: mov     byte ptr [esp+40h+var_4], 0
@@ -225,3 +225,14 @@
 0x4796DD: pop     ebx
 0x4796DE: add     esp, 2Ch
 0x4796E1: retn
+0x9AF0E0: lea     ecx, [ebp-28h]
+0x9AF0E3: jmp     sub_4781A0
+0x9AF0E8: lea     ecx, [ebp-2Ch]; slot
+0x9AF0EB: jmp     NiPointerSlot_Release
+0x9AF0F0: mov     edx, [esp+slot]
+0x9AF0F4: lea     eax, [edx-30h]
+0x9AF0F7: mov     ecx, [edx-34h]
+0x9AF0FA: xor     ecx, eax
+0x9AF0FC: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AF101: mov     eax, offset stru_ADB770
+0x9AF106: jmp     ___CxxFrameHandler3

@@ -5,7 +5,7 @@
 0x6D2034: mov     edi, [esp+10h+arg_0]
 0x6D2038: push    edi
 0x6D2039: mov     esi, ecx
-0x6D203B: call    sub_6EC5B0
+0x6D203B: call    j_NiSingleInterpController_SaveBinary
 0x6D2040: mov     eax, [edi+220h]
 0x6D2046: push    1
 0x6D2048: lea     ecx, [esp+14h+var_4]

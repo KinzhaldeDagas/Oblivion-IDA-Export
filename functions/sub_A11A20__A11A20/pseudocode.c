@@ -1,4 +1,4 @@
-BSStringT *sub_A11A20()
+NiRTTI *sub_A11A20()
 {
-  return sub_70E220(&stru_B46798, "SpeedTreeLeafShader", (int)&ImageSpaceShaderRTTI___);
+  return NiRTTI_Constructor((NiRTTI *)&flt_B46638[0x58], "SpeedTreeLeafShader", &MEMORY[0xB4257C]); /*0xa11a34*/
 }

@@ -1,1 +1,1 @@
-invalid_scheduler_policy_key
+typedef exception invalid_scheduler_policy_key;

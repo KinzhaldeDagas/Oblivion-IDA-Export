@@ -14,34 +14,34 @@ unsigned int __userpurge sub_73D4B0@<eax>(float *this@<ecx>, int a2@<ebp>, NiTAr
   unsigned int v15; // edi
   unsigned int v16; // ecx
 
-  v3 = a3;
-  sub_725740(this, a2, a3);
-  v5 = TESOutput_PrintString(*(char **)dword_B40190);
-  end = v3->end;
-  capacity = v3->capacity;
-  a3 = (NiTArray_NiTexturingPropertyMap *)v5;
-  if ( end >= capacity )
-    NiTArray_SetSize((unsigned __int16 *)v3, end + v3->growSize);
-  NiTArray_SetAt(v3, end, &a3);
-  v8 = sub_707280(this + 0x45, "m_kWorldDir");
-  v9 = v3->end;
-  v10 = v3->capacity;
-  a3 = (NiTArray_NiTexturingPropertyMap *)v8;
-  if ( v9 >= v10 )
-    NiTArray_SetSize((unsigned __int16 *)v3, v9 + v3->growSize);
-  NiTArray_SetAt(v3, v9, &a3);
-  v11 = TESOutput_PrintLabeledFloat("m_fSpotAngle", *(this + 0x48));
-  v12 = v3->end;
-  v13 = v3->capacity;
-  a3 = (NiTArray_NiTexturingPropertyMap *)v11;
-  if ( v12 >= v13 )
-    NiTArray_SetSize((unsigned __int16 *)v3, v12 + v3->growSize);
-  NiTArray_SetAt(v3, v12, &a3);
-  v14 = TESOutput_PrintLabeledFloat("m_fSpotExponent", *(this + 0x49));
-  v15 = v3->end;
-  v16 = v3->capacity;
-  a3 = (NiTArray_NiTexturingPropertyMap *)v14;
-  if ( v15 >= v16 )
-    NiTArray_SetSize((unsigned __int16 *)v3, v15 + v3->growSize);
-  return NiTArray_SetAt(v3, v15, &a3);
+  v3 = a3; /*0x73d4b2*/
+  sub_725740(this, a2, a3); /*0x73d4ba*/
+  v5 = TESOutput_PrintString((char *)stru_B40190.name); /*0x73d4c5*/
+  end = v3->end; /*0x73d4ca*/
+  capacity = v3->capacity; /*0x73d4ce*/
+  a3 = (NiTArray_NiTexturingPropertyMap *)v5; /*0x73d4d7*/
+  if ( end >= capacity ) /*0x73d4db*/
+    NiTArray_SetSize((unsigned __int16 *)v3, end + v3->growSize); /*0x73d4e6*/
+  NiTArray_SetAt(v3, end, &a3); /*0x73d4f3*/
+  v8 = sub_707280(this + 0x45, "m_kWorldDir"); /*0x73d503*/
+  v9 = v3->end; /*0x73d508*/
+  v10 = v3->capacity; /*0x73d50c*/
+  a3 = (NiTArray_NiTexturingPropertyMap *)v8; /*0x73d512*/
+  if ( v9 >= v10 ) /*0x73d516*/
+    NiTArray_SetSize((unsigned __int16 *)v3, v9 + v3->growSize); /*0x73d521*/
+  NiTArray_SetAt(v3, v9, &a3); /*0x73d52e*/
+  v11 = TESOutput_PrintLabeledFloat("m_fSpotAngle", *(this + 0x48)); /*0x73d542*/
+  v12 = v3->end; /*0x73d547*/
+  v13 = v3->capacity; /*0x73d54b*/
+  a3 = (NiTArray_NiTexturingPropertyMap *)v11; /*0x73d554*/
+  if ( v12 >= v13 ) /*0x73d558*/
+    NiTArray_SetSize((unsigned __int16 *)v3, v12 + v3->growSize); /*0x73d563*/
+  NiTArray_SetAt(v3, v12, &a3); /*0x73d570*/
+  v14 = TESOutput_PrintLabeledFloat("m_fSpotExponent", *(this + 0x49)); /*0x73d584*/
+  v15 = v3->end; /*0x73d589*/
+  v16 = v3->capacity; /*0x73d58d*/
+  a3 = (NiTArray_NiTexturingPropertyMap *)v14; /*0x73d596*/
+  if ( v15 >= v16 ) /*0x73d59a*/
+    NiTArray_SetSize((unsigned __int16 *)v3, v15 + v3->growSize); /*0x73d5a5*/
+  return NiTArray_SetAt(v3, v15, &a3); /*0x73d5b7*/
 }

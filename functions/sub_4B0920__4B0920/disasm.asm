@@ -78,7 +78,7 @@
 0x4B09E0: mov     eax, [ebx+4]
 0x4B09E3: mov     esi, [eax+4]
 0x4B09E6: push    eax
-0x4B09E7: call    FormHeapFree
+0x4B09E7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4B09EC: add     esp, 4
 0x4B09EF: test    esi, esi
 0x4B09F1: mov     [ebx+4], esi
@@ -86,7 +86,7 @@
 0x4B09F6: mov     ebp, [esp+18h+var_8]
 0x4B09FA: mov     dword ptr [ebx], 0
 0x4B0A00: push    ebx
-0x4B0A01: call    FormHeapFree
+0x4B0A01: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4B0A06: add     ebp, 1
 0x4B0A09: add     esp, 4
 0x4B0A0C: cmp     ebp, 6

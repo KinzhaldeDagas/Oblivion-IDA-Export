@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x4F5010",
-    "line": "fldz",
+    "line": "fldz; GetDeadCount_Eval uses its Actor Base parameter to query the engine's global form-to-dead-count list. The helper returns the matching 16-bit count or 0 when no entry exists; no subject reference is required.",
     "mnemonic": "fldz",
     "size": 2
   },
   {
     "ea": "0x4F5012",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, [esp+actorBase]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x4F5019",
-    "line": "mov     esi, [esp+4+arg_C]",
+    "line": "mov     esi, [esp+4+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x4F5028",
-    "line": "call    sub_440F70",
+    "line": "call    sub_440F70; Lookup in the global dead-count list: compare each entry's form pointer with the supplied Actor Base and return its 16-bit count; missing entries return 0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -67,13 +67,13 @@
   },
   {
     "ea": "0x4F5030",
-    "line": "mov     [esp+4+arg_C], eax",
+    "line": "mov     [esp+4+value], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4F5034",
-    "line": "fild    [esp+4+arg_C]",
+    "line": "fild    [esp+4+value]",
     "mnemonic": "fild",
     "size": 4
   },

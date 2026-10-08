@@ -1,7 +1,7 @@
 0x9EC9B0: fldz
 0x9EC9B2: push    ecx
 0x9EC9B3: fstp    [esp+4+var_4]; float
-0x9EC9B6: mov     ecx, offset fPersuasionAccuracyMinSelect
+0x9EC9B6: mov     ecx, 0B37928h
 0x9EC9BB: push    offset aFpersuasiona_1; "fPersuasionAccuracyMinSelect"
 0x9EC9C0: call    GameSetting_ConstrAndReg_float
 0x9EC9C5: push    offset sub_A1F970; void (__cdecl *)()

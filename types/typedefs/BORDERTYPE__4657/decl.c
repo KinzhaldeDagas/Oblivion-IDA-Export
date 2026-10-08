@@ -1,1 +1,6 @@
-BORDERTYPE
+enum BORDERTYPE : __int32
+{
+BT_RECT = 0x0,
+BT_ROUNDRECT = 0x1,
+BT_ELLIPSE = 0x2,
+};

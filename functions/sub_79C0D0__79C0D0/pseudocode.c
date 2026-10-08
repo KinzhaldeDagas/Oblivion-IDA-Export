@@ -1,9 +1,13 @@
-void __cdecl sub_79C0D0(int a1, int a2, int a3)
+// Orders three SFrondGuide samples in descending fuzzySurfaceArea order using full-guide swaps. This is the median/pivot primitive for the guide introsort partitioner.
+void __cdecl OB_SFrondGuide_SortThreeByFuzzyArea_010201A0(
+        OB_SFrondGuide_010201A0 *first,
+        OB_SFrondGuide_010201A0 *middle,
+        OB_SFrondGuide_010201A0 *last)
 {
-  if ( *(float *)(a1 + 0x24) < (double)*(float *)(a2 + 0x24) )
-    sub_79B8D0(a2, a1);
-  if ( *(float *)(a2 + 0x24) < (double)*(float *)(a3 + 0x24) )
-    sub_79B8D0(a3, a2);
-  if ( *(float *)(a1 + 0x24) < (double)*(float *)(a2 + 0x24) )
-    sub_79B8D0(a2, a1);
+  if ( first->fuzzySurfaceArea < (double)middle->fuzzySurfaceArea ) /*0x79c0e7*/
+    OB_SFrondGuide_Swap_010201A0(middle, first); /*0x79c0eb*/
+  if ( middle->fuzzySurfaceArea < (double)last->fuzzySurfaceArea ) /*0x79c104*/
+    OB_SFrondGuide_Swap_010201A0(last, middle); /*0x79c108*/
+  if ( first->fuzzySurfaceArea < (double)middle->fuzzySurfaceArea ) /*0x79c11d*/
+    OB_SFrondGuide_Swap_010201A0(middle, first); /*0x79c121*/
 }

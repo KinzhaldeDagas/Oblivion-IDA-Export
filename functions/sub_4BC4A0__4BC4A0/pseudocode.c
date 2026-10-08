@@ -1,40 +1,45 @@
-float *__cdecl sub_4BC4A0(float *a1, float **a2)
+// Verified: scans SubSpace reference candidates, keeps only references whose local scaled bounds contain the query, and returns the containing reference with the smallest base-form bound radius (+0x2C). This is smallest-volume/radius selection, not nearest reference-center selection.
+TESObjectREFR *__cdecl TESSubSpace_FindSmallestContainingPosition(
+        float *worldPosition,
+        TESSubSpaceReferenceList *candidateList)
 {
-  double v2; // st7
-  float **v3; // edi
-  float *i; // ebp
-  float *v5; // esi
-  char v6; // al
-  int v7; // ecx
-  float v9; // [esp+8h] [ebp-4h]
+  float v2; // st7
+  TESSubSpaceReferenceList *v3; // edi
+  TESObjectREFR *i; // ebp
+  TESObjectREFR *firstReference; // esi
 
-  v2 = flt_A32048;
-  v9 = flt_A32048;
-  v3 = a2;
-  for ( i = 0; v3; v3 = (float **)v3[1] )
+  __asm { fld     dword ptr ds:0A32048h } /*0x4bc4a1*/
+  __asm { fstp    [esp+0Ch+var_4] }
+  v3 = candidateList; /*0x4bc4ad*/
+  for ( i = 0; v3; v3 = (TESSubSpaceReferenceList *)v3->overflowNodes ) /*0x4bc4b5*/
   {
-    v5 = *v3;
-    if ( *v3 )
+    firstReference = v3->firstReference; /*0x4bc4c0*/
+    if ( v3->firstReference ) /*0x4bc4c0*/
     {
-      if ( (*(int (__thiscall **)(float *))(*(_DWORD *)v5 + 0x170))(*v3) )
+      if ( firstReference->vtbl->GetBaseForm(v3->firstReference) ) /*0x4bc4d0*/
       {
-        if ( *(_BYTE *)((*(int (__thiscall **)(float *))(*(_DWORD *)v5 + 0x170))(v5) + 4) == 0x29 )
+        if ( firstReference->vtbl->GetBaseForm(firstReference)->member.type == kFormType_SubSpace ) /*0x4bc4e6*/
         {
-          v2 = sub_4BC2E0(v2, a1, v5);
-          if ( v6 )
+          if ( TESSubSpace_ContainsPosition(worldPosition, firstReference, v2) ) /*0x4bc4ea*/
           {
-            v7 = (*(int (__thiscall **)(float *))(*(_DWORD *)v5 + 0x170))(v5);
-            v2 = *(float *)(v7 + 0x2C);
-            if ( v9 > v2 )
+            _ECX = (int)firstReference->vtbl->GetBaseForm(firstReference); /*0x4bc502*/
+            __asm /*0x4bc504*/
             {
-              v2 = *(float *)(v7 + 0x2C);
-              i = v5;
-              v9 = *(float *)(v7 + 0x2C);
+              fld     dword ptr [ecx+2Ch]
+              fld     [esp+14h+var_4]
+              fcompp
+              fnstsw  ax
+            }
+            if ( (_AX & 0x4100) == 0 ) /*0x4bc512*/
+            {
+              __asm { fld     dword ptr [ecx+2Ch] } /*0x4bc514*/
+              i = firstReference; /*0x4bc517*/
+              __asm { fstp    [esp+14h+var_4] } /*0x4bc519*/
             }
           }
         }
       }
     }
   }
-  return i;
+  return i; /*0x4bc526*/
 }

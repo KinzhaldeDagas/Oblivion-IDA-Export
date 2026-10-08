@@ -7,14 +7,14 @@
 0x5B007E: fld     [esp+4+arg_8]
 0x5B0082: fdiv    qword ptr ds:0A3F3F0h
 0x5B0088: fstp    [esp+4+arg_10]
-0x5B008C: call    GetRandomLargeInteger?
+0x5B008C: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x5B0091: mov     edx, ds:0B33EA0h
 0x5B0097: push    edx; Seed
 0x5B0098: mov     esi, eax
-0x5B009A: call    GetRandomLargeInteger?
+0x5B009A: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x5B009F: push    esi; Seed
 0x5B00A0: mov     ds:0B3B3FCh, eax
-0x5B00A5: call    GetRandomLargeInteger?
+0x5B00A5: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x5B00AA: mov     eax, ds:0B3B400h
 0x5B00AF: lea     ecx, [eax+eax]
 0x5B00B2: mov     [esp+0Ch+arg_8], ecx
@@ -37,7 +37,7 @@
 0x5B00F0: mov     [esp+arg_10], edx
 0x5B00F4: fild    [esp+arg_10]
 0x5B00F8: faddp   st(1), st
-0x5B00FA: call    Double_To_SInt32
+0x5B00FA: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B00FF: fld     dword ptr [edi+64h]
 0x5B0102: fstp    [esp+arg_10]
 0x5B0106: mov     [esp+arg_8], eax
@@ -116,11 +116,11 @@
 0x5B01EB: test    ebx, ebx
 0x5B01ED: jz      short loc_5B0235
 0x5B01EF: lea     edx, [edx+edx*4+14h]
-0x5B01F3: mov     ecx, [edi+edx*8]
+0x5B01F3: mov     ecx, [edi+edx*8]; this
 0x5B01F6: test    ecx, ecx
 0x5B01F8: lea     esi, [edi+edx*8]
 0x5B01FB: jz      short loc_5B0223
-0x5B01FD: call    sub_6B7260
+0x5B01FD: call    SoundHandle__IsPlaying; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.
 0x5B0202: test    al, al
 0x5B0204: jnz     short loc_5B0223
 0x5B0206: mov     ecx, [esi]
@@ -131,7 +131,7 @@
 0x5B0213: mov     ecx, edi; this
 0x5B0215: call    sub_6B73E0
 0x5B021A: push    edi
-0x5B021B: call    FormHeapFree
+0x5B021B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5B0220: add     esp, 4
 0x5B0223: push    1
 0x5B0225: push    31h ; '1'

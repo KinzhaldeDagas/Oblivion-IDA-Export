@@ -1,63 +1,65 @@
-void __thiscall InteriorCellNewReferencesMap::~InteriorCellNewReferencesMap(NiTMap_Entry_TESCELL *this)
+//
+// Verified: walks map values, frees 8-byte overflow list nodes, clears head ID, clears map then base pointer-map destructor. Vtable scalar destructor 45F090.
+void __thiscall InteriorCellNewReferencesMap_dtor(InteriorCellNewReferencesMap *self)
 {
-  char *v2; // eax
+  unsigned int v2; // eax
   bool v3; // zf
-  TESObjectCELL *data; // edx
-  TESObjectCELL *v5; // ecx
-  NiTMap_Entry_TESCELL *v6; // eax
-  TESObjectCELL *v7; // esi
+  InteriorCellNewReferencesMapEntry **buckets; // edx
+  InteriorCellNewReferencesMapEntry **v5; // ecx
+  MEF_U32PointerMapEntry32 *v6; // eax
+  _DWORD *v7; // esi
   int v8; // edi
-  TESObjectCELL *v9; // [esp+10h] [ebp-1Ch] BYREF
-  NiTMap_Entry_TESCELL *v10[2]; // [esp+14h] [ebp-18h] BYREF
-  void *v11; // [esp+1Ch] [ebp-10h] BYREF
+  void *valueOut; // [esp+10h] [ebp-1Ch] BYREF
+  MEF_U32PointerMapEntry32 *position[2]; // [esp+14h] [ebp-18h] BYREF
+  unsigned int keyOut; // [esp+1Ch] [ebp-10h] BYREF
   unsigned int v12; // [esp+28h] [ebp-4h]
 
-  v10[1] = this;
-  this->next = &InteriorCellNewReferencesMap::`vftable';
-  v2 = 0;
-  v3 = this->key == 0;
-  v12 = 0;
-  if ( v3 )
+  position[1] = (MEF_U32PointerMapEntry32 *)self; /*0x45a9b8*/
+  self->vtable = &InteriorCellNewReferencesMap::`vftable'; /*0x45a9bc*/
+  v2 = 0; /*0x45a9c2*/
+  v3 = self->bucketCount == 0; /*0x45a9c4*/
+  v12 = 0; /*0x45a9c7*/
+  if ( v3 ) /*0x45a9cf*/
   {
 LABEL_5:
-    v6 = 0;
+    v6 = 0; /*0x45a9ea*/
   }
   else
   {
-    data = this->data;
-    v5 = data;
-    while ( !v5->vtbl )
+    buckets = self->buckets; /*0x45a9d1*/
+    v5 = buckets; /*0x45a9d4*/
+    while ( !*v5 ) /*0x45a9d9*/
     {
-      ++v2;
-      v5 = (TESObjectCELL *)((char *)v5 + 4);
-      if ( v2 >= this->key )
-        goto LABEL_5;
+      ++v2; /*0x45a9df*/
+      ++v5; /*0x45a9e2*/
+      if ( v2 >= self->bucketCount ) /*0x45a9e8*/
+        goto LABEL_5; /*0x45a9e8*/
     }
-    v6 = *((NiTMap_Entry_TESCELL **)&data->vtbl + (_DWORD)v2);
+    v6 = (MEF_U32PointerMapEntry32 *)buckets[v2]; /*0x45aa75*/
   }
-  v10[0] = v6;
-  while ( v10[0] )
+  position[0] = v6; /*0x45a9ee*/
+  while ( position[0] ) /*0x45a9f2*/
   {
-    v9 = 0;
-    sub_452600((NiTMap_TESCELL *)this, v10, &v11, &v9);
-    v7 = v9;
-    if ( v9 )
+    valueOut = 0; /*0x45aa05*/
+    NiTMap_U32Pointer_GetNextEntry((MEF_U32PointerMapLayout32 *)self, position, &keyOut, &valueOut); /*0x45aa0d*/
+    v7 = valueOut; /*0x45aa12*/
+    if ( valueOut ) /*0x45aa18*/
     {
-      if ( *(_DWORD *)&v9->members.super.type )
+      if ( *((_DWORD *)valueOut + 1) ) /*0x45aa1a*/
       {
-        do
+        do /*0x45aa34*/
         {
-          v8 = *(_DWORD *)(*(_DWORD *)&v7->members.super.type + 4);
-          FormHeapFree(*(_DWORD *)&v7->members.super.type);
-          *(_DWORD *)&v7->members.super.type = v8;
+          v8 = *(_DWORD *)(v7[1] + 4); /*0x45aa23*/
+          FormHeapFree(v7[1]); /*0x45aa27*/
+          v7[1] = v8; /*0x45aa31*/
         }
-        while ( v8 );
+        while ( v8 ); /*0x45aa34*/
       }
-      v7->vtbl = 0;
-      FormHeapFree((unsigned int)v7);
+      *v7 = 0; /*0x45aa37*/
+      FormHeapFree((unsigned int)v7); /*0x45aa3d*/
     }
   }
-  NiTMap_Clear(this);
-  v12 = 0xFFFFFFFF;
-  NiTPointerMap<unsigned int,BSSimpleList<unsigned int> *>::~NiTPointerMap<unsigned int,BSSimpleList<unsigned int> *>((unsigned int *)this);
+  NiTMap_Clear(self); /*0x45aa4e*/
+  v12 = 0xFFFFFFFF; /*0x45aa55*/
+  NiTPointerMap<unsigned int,BSSimpleList<unsigned int> *>::~NiTPointerMap<unsigned int,BSSimpleList<unsigned int> *>((unsigned int *)self); /*0x45aa5d*/
 }

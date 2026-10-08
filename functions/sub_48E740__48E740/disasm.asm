@@ -16,7 +16,7 @@
 0x48E75B: add     esp, 1Ch
 0x48E75E: retn    4
 0x48E761: mov     ecx, esi; this
-0x48E763: call    TESObjectREFR_GetParentCell
+0x48E763: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x48E768: mov     edi, [edi]
 0x48E76A: mov     ecx, edi
 0x48E76C: xor     edx, edx
@@ -105,7 +105,7 @@
 0x48E86F: call    sub_4D7620
 0x48E874: mov     eax, [ebp+8]
 0x48E877: mov     ecx, ds:0B34428h; this
-0x48E87D: push    eax; a2
+0x48E87D: push    eax; baseForm
 0x48E87E: call    TESObjectREFR_SetBaseForm
 0x48E883: mov     ecx, [esp+2Ch+arg_0]
 0x48E887: push    0; ArgList
@@ -191,7 +191,7 @@
 0x48E97D: push    0
 0x48E97F: call    edx
 0x48E981: mov     ecx, ds:0B34428h; this
-0x48E987: push    0; a2
+0x48E987: push    0; baseForm
 0x48E989: call    TESObjectREFR_SetBaseForm
 0x48E98E: mov     al, [esp+2Ch+var_19]
 0x48E992: pop     edi

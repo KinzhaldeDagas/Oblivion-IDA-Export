@@ -1,36 +1,36 @@
-int *__thiscall sub_531200(TESForm *this, unsigned int *a2, char a3)
+int *__thiscall TESTopicInfo::GetInfoDisplayText(TESForm *this, unsigned int *a2, char a3)
 {
   int *result; // eax
   int *v5; // esi
-  _DWORD *v6; // ecx
+  TESResponse *v6; // ecx
   bool v7; // zf
-  char *v8; // eax
+  char *Text; // eax
 
-  FormHeapFree(*a2);
-  *a2 = 0;
-  *((_WORD *)a2 + 3) = 0;
-  *((_WORD *)a2 + 2) = 0;
-  result = sub_530C40(this);
-  v5 = result;
-  if ( result )
+  FormHeapFree(*a2); /*0x53120b*/
+  *a2 = 0; /*0x531215*/
+  *((_WORD *)a2 + 3) = 0; /*0x53121b*/
+  *((_WORD *)a2 + 2) = 0; /*0x531221*/
+  result = (int *)TESTopicInfo::GetResponseList((OblivionTopicInfo *)this); /*0x531227*/
+  v5 = result; /*0x53122c*/
+  if ( result ) /*0x531230*/
   {
-    do
+    do /*0x531266*/
     {
-      v6 = (_DWORD *)*v5;
-      v7 = *v5 == 0;
-      v5 = (int *)v5[1];
-      if ( !v7 )
+      v6 = (TESResponse *)*v5; /*0x531232*/
+      v7 = *v5 == 0; /*0x531234*/
+      v5 = (int *)v5[1]; /*0x531236*/
+      if ( !v7 ) /*0x531239*/
       {
-        v8 = sub_52E100(v6);
-        result = (int *)BSStringT_Append((BSStringT *)a2, v8);
-        if ( v5 )
+        Text = (char *)TESResponse::GetText(v6); /*0x53123b*/
+        result = (int *)BSStringT_Append((BSStringT *)a2, Text); /*0x531243*/
+        if ( v5 ) /*0x53124a*/
         {
-          if ( *v5 )
-            result = (int *)BSStringT_Append((BSStringT *)a2, " | ");
+          if ( *v5 ) /*0x53124c*/
+            result = (int *)BSStringT_Append((BSStringT *)a2, " | "); /*0x531258*/
         }
       }
     }
-    while ( !a3 && v5 );
+    while ( !a3 && v5 ); /*0x531266*/
   }
-  return result;
+  return result; /*0x531268*/
 }

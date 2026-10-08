@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x68F00A",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -19,31 +19,31 @@
   },
   {
     "ea": "0x68F016",
-    "line": "push    ecx; Dst",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x68F017",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; MEF candidate verification 2026-05-30: ActiveEffect list UInt16 count verified, but entries are variable-size and the load call is OBME-sensitive. Decode-only for v23.",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x68F01D",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x68F022",
-    "line": "xor     ebp, ebp",
+    "line": "xor     ebp, ebp; MEF hook feasibility 2026-05-30: active-effect count boundary verified but remains decode-only. Variable-size entries and OBME-sensitive load call make a minimum-entry clamp incomplete.",
     "mnemonic": "xor",
     "size": 2
   },
   {
     "ea": "0x68F024",
-    "line": "cmp     [esp+Dst], bp",
+    "line": "cmp     word ptr [esp+Dst], bp; EnginePatch analysis 2026-05-07: ActiveEffect list saved count is UInt16. ActiveEffect_Base_Load consumes at least 7 bytes for save version >=0x2A or 5 bytes for older format before effect-specific load. Clamp count to remaining bytes.",
     "mnemonic": "cmp",
     "size": 5
   },

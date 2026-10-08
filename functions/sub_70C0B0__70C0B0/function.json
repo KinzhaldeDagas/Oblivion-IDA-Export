@@ -1,19 +1,32 @@
 {
-  "callees_count": 7,
-  "callers_count": 7,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 9,
+  "chunks": [
+    [
+      "0x70C0B0",
+      "0x70C119"
+    ]
+  ],
+  "chunks_sha256": "895c43974438a47336f98a8e8f78306597298a9c03e0d82de3f7ef4623aa4707",
+  "comment_regular": "Renderer camera-cull-submit boundary. Installs camera matrices, culls the scene root into the visible array, then submits that visible array through the current renderer accumulator.\n\nCULLING audit 2026-09-27 (observed Oblivion behavior): Accepts a generic NiAVObject root (the player call passes a NiNode), not only SceneGraph. Installs camera renderer state. Chooses explicit array or process+0x08. If present, zeroes array count, calls virtual Process(+8), then submits/flushed array through 0x70C000 AFTER Process returns and clears process.Camera. Otherwise calls Process with null array. This is a candidate ownership/lifetime observation boundary, not a universally main-view function.\n\nCULLING runtime correspondence 2026-09-27: installed disk executable SHA256 035dba38fddd325b3ca18afdaacd086eecf7a8a33fce1abdb057e5cd831e1ee4 differs from IDA input afe430894d29dbf0e615b8c8b0bfd6f03dcbc0667378a7f0ea740e0c9af843d9. Four callsites, 18 culling/geometry vtable entries including unpatched water, full 92-byte classifier, and 13 relevant primary function bodies matched database bytes. This bounded comparison is not full executable identity or proof against runtime plugin patches.\n\nOR/TESReloaded RenderObject detour target and native camera->NiCullingProcess::Process boundary. CULLING process hook runs under this traversal when vtable slots remain vanilla at install.\n2026-10-08 V263 EXTERNAL DX11 census policy at primary-world entry: ActorProcessManager B3BD00 list fields are reused only inside one closed census; every unique observed byte is reread at final seal. No cross-frame membership cache. V262 runtime has 5119 low-process entries, mostly missing roots, which still must be enumerated. Targeted changed-byte/read-failure tests pass. Runtime improvement awaits user run; see stage-v263-frame-actor-capture.",
+  "comment_repeatable": "Renderer camera-cull-submit boundary. Installs camera matrices, culls the scene root into the visible array, then submits that visible array through the current renderer accumulator.\n2026-10-08 V263 runtime PID17760 (external DX11 evidence): user confirms correct actor shadows except whole-shadow blink, +5-8FPS,~24FPS low, normal exit. Actor meshes drop8->0->8 at625/626,636/638;7->0->7 at745/747,796/804. Native actor epoch unavailable/pose gaps precede drops. Completed-map policy expires after2frames (declines625,745,796 atage3) or camera shift>64 (636). No caster-failure log; same-frame compatible reuse/invalidation counters0. V263 source CloneBefore broadly blocks epoch; CloneAfter waits forlater epoch. Do not bypass writer/pose guards or equate longer stale-map retention with fresh animation. Evidence stage-v263-frame-actor-capture/runtime-20261008-122151.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_70C0B0",
+  "display_name": "NiRenderer_CullAndRenderScene",
   "end_ea": "0x70C119",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_70C0B0",
+  "name": "NiRenderer_CullAndRenderScene",
   "segment": ".text",
   "sha256": "895c43974438a47336f98a8e8f78306597298a9c03e0d82de3f7ef4623aa4707",
   "size": 105,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x70C0B0",
-  "type": "void __cdecl(NiCamera *a1, SceneGraph *a2, NiCullingProcess *a3, _DWORD *a4)",
+  "total_chunk_size": 105,
+  "type": "void __cdecl(NiCamera *camera, NiAVObject *sceneRoot, NiCullingProcess *cullingProcess, CullingVisibleGeometryArray *visibleArray)",
   "xrefs_from_count": 55,
   "xrefs_to_count": 9
 }

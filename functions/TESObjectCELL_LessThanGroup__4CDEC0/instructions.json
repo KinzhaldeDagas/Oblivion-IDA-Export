@@ -166,5 +166,383 @@
     "line": "mov     bl, 1; jumptable 004CDEE1 case 7",
     "mnemonic": "mov",
     "size": 2
+  },
+  {
+    "ea": "0x4CDF10",
+    "line": "test    byte ptr [esi+24h], 1; jumptable 004CDEE1 case 3",
+    "mnemonic": "test",
+    "size": 4
+  },
+  {
+    "ea": "0x4CDF14",
+    "line": "jz      short TESObjectCELL_LessThanGroup___def_4CDEE1",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4CDF16",
+    "line": "call    TESObjectCELL_GetCellGroupSubBlockLabel; Compute the CELL group sub-block label. Interior: decimal FormID bucket ((objectID24 % 100) / 10). Exterior: signed cell coordinates divided by 8 and packed X-high/Y-low. Cross-checks TESCS TESObjectCELL_GetCellGroupSubBlockLabel at 0x533F90.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4CDF1B",
+    "line": "jmp     short loc_4CDF01",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4CDF1D",
+    "line": "mov     ecx, [edi+8]; jumptable 004CDEE1 cases 6,8-10",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4CDF20",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4CDF22",
+    "line": "push    offset ??_R0?AVTESObjectCELL@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4CDF27",
+    "line": "push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4CDF2C",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4CDF2E",
+    "line": "push    ecx; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4CDF2F",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4CDF34",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4CDF37",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4CDF38",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4CDF3D",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4CDF40",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4CDF42",
+    "line": "jz      short TESObjectCELL_LessThanGroup___def_4CDEE1",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4CDF44",
+    "line": "mov     edx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4CDF46",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4CDF47",
+    "line": "mov     eax, [edx+34h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4CDF4A",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4CDF4C",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x4CDF4E",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4CDF4F",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4CDF50",
+    "line": "mov     bl, al",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4CDF52",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4CDF53",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x4CDF56",
+    "line": "test    byte ptr [esi+24h], 1; jumptable 004CDEE1 case 4",
+    "mnemonic": "test",
+    "size": 4
+  },
+  {
+    "ea": "0x4CDF5A",
+    "line": "jnz     short loc_4CDF06; jumptable 004CDEE1 case 7",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x4CDF5C",
+    "line": "test    dword ptr [esi+8], 400h",
+    "mnemonic": "test",
+    "size": 7
+  },
+  {
+    "ea": "0x4CDF63",
+    "line": "jnz     short loc_4CDF06; jumptable 004CDEE1 case 7",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x4CDF65",
+    "line": "jmp     short loc_4CDEFC",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4CDF67",
+    "line": "test    byte ptr [esi+24h], 1; jumptable 004CDEE1 case 5",
+    "mnemonic": "test",
+    "size": 4
+  },
+  {
+    "ea": "0x4CDF6B",
+    "line": "jnz     short loc_4CDF06; jumptable 004CDEE1 case 7",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x4CDF6D",
+    "line": "test    dword ptr [esi+8], 400h",
+    "mnemonic": "test",
+    "size": 7
+  },
+  {
+    "ea": "0x4CDF74",
+    "line": "jnz     short loc_4CDF06; jumptable 004CDEE1 case 7",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x4CDF76",
+    "line": "call    TESObjectCELL_GetCellGroupSubBlockLabel; Compute the CELL group sub-block label. Interior: decimal FormID bucket ((objectID24 % 100) / 10). Exterior: signed cell coordinates divided by 8 and packed X-high/Y-low. Cross-checks TESCS TESObjectCELL_GetCellGroupSubBlockLabel at 0x533F90.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4CDF7B",
+    "line": "jmp     short loc_4CDF01",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4CDF7D",
+    "line": "test    byte ptr [esi+24h], 1; jumptable 004CDEE1 case 1",
+    "mnemonic": "test",
+    "size": 4
+  },
+  {
+    "ea": "0x4CDF81",
+    "line": "jnz     short loc_4CDF06; jumptable 004CDEE1 case 7",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x4CDF83",
+    "line": "mov     ecx, [edi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4CDF86",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4CDF88",
+    "line": "push    offset ??_R0?AVTESWorldSpace@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4CDF8D",
+    "line": "push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4CDF92",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4CDF94",
+    "line": "push    ecx; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4CDF95",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4CDF9A",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4CDF9D",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4CDF9E",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4CDFA3",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4CDFA6",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4CDFA8",
+    "line": "jz      TESObjectCELL_LessThanGroup___def_4CDEE1",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x4CDFAE",
+    "line": "mov     edx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4CDFB0",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4CDFB1",
+    "line": "mov     eax, [edx+34h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4CDFB4",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4CDFB6",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x4CDFB8",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4CDFB9",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4CDFBA",
+    "line": "mov     bl, al",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4CDFBC",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4CDFBD",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
   }
 ]

@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x51E5F8",
-    "line": "call    TESAnimation_constr",
+    "line": "call    TESAnimation_constr; TESAnimation constructor: vtable plus BSSimpleList head/tail initialized empty. Used at TESActorBase +0x94.",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x51E63D",
-    "line": "lea     ecx, [esi+0D0h]",
+    "line": "lea     ecx, [esi+0D0h]; self",
     "mnemonic": "lea",
     "size": 6
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x51E649",
-    "line": "mov     dword ptr [edi], offset ??_7TESActorBase@@6BTESActorBaseData@@@; const TESActorBase::`vftable'{for `TESActorBaseData'}",
+    "line": "mov     dword ptr [edi], offset ??_7TESActorBase@@6BTESActorBaseData@@@; Verified typed prefix through +0x50 only; complete table extends further. Blood slots +0x28/+0x30 are independent disable flags; +0x38/+0x40 are texture/particle getters. TESCreature ctor 0x51EB80 installs its component vtable at complete-object +0x24. Unknown slots intentionally remain untyped.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -448,5 +448,203 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9B77D0",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B77D3",
+    "line": "jmp     TESObject_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B77D8",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B77DB",
+    "line": "add     ecx, 24h ; '$'",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B77DE",
+    "line": "jmp     TESActorBaseData_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B77E3",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B77E6",
+    "line": "add     ecx, 44h ; 'D'",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B77E9",
+    "line": "jmp     TESContainer_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B77EE",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B77F1",
+    "line": "add     ecx, 54h ; 'T'",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B77F4",
+    "line": "jmp     TESSpellList_destr?",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B77F9",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B77FC",
+    "line": "add     ecx, 68h ; 'h'",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B77FF",
+    "line": "jmp     TESAIForm_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7804",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B7807",
+    "line": "add     ecx, 80h ; '€'",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9B780D",
+    "line": "jmp     TESHealthForm_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7812",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B7815",
+    "line": "add     ecx, 88h ; 'ˆ'",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9B781B",
+    "line": "jmp     TESAttributes_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7820",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B7823",
+    "line": "add     ecx, 0A0h ; ' '",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9B7829",
+    "line": "jmp     TESFullName_Initialize",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B782E",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B7831",
+    "line": "add     ecx, 0ACh ; '¬'; this",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9B7837",
+    "line": "jmp     ??1TESModel@@UAE@XZ; TESModel::~TESModel(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B783C",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B7840",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B7843",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B7846",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B7848",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B784D",
+    "line": "mov     eax, offset stru_AE2278",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7852",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

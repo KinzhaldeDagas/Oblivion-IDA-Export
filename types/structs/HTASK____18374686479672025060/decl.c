@@ -1,1 +1,4 @@
-HTASK__
+struct HTASK__
+{
+int unused;
+};

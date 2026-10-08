@@ -1,13 +1,13 @@
-0x7890F0: push    ebp
-0x7890F1: mov     ebp, [esp+4+arg_0]
+0x7890F0: push    ebp; Oblivion byte-vector uninitialized fill-N primitive: writes count copies of one byte and returns one-past-last.
+0x7890F1: mov     ebp, [esp+4+destination]
 0x7890F5: push    edi
-0x7890F6: mov     edi, [esp+8+arg_4]
+0x7890F6: mov     edi, [esp+8+count]
 0x7890FA: test    edi, edi
 0x7890FC: mov     eax, edi
 0x7890FE: mov     ecx, ebp
 0x789100: jbe     short loc_789116
 0x789102: push    esi
-0x789103: mov     esi, [esp+0Ch+arg_8]
+0x789103: mov     esi, [esp+0Ch+value]
 0x789107: mov     dl, [esi]
 0x789109: mov     [ecx], dl
 0x78910B: sub     eax, 1

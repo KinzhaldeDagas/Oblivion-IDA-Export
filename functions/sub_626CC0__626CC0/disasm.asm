@@ -1,6 +1,6 @@
 0x626CC0: push    ecx
 0x626CC1: push    esi
-0x626CC2: mov     esi, [esp+8+arg_0]
+0x626CC2: mov     esi, [esp+8+reference]
 0x626CC6: test    esi, esi
 0x626CC8: jz      loc_626DCE
 0x626CCE: mov     eax, [esi+8]
@@ -16,7 +16,7 @@
 0x626CF0: test    al, 1
 0x626CF2: jnz     loc_626DCE
 0x626CF8: push    ebx
-0x626CF9: mov     ebx, [esp+0Ch+arg_4]
+0x626CF9: mov     ebx, [esp+0Ch+actorReference]
 0x626CFD: test    ebx, ebx
 0x626CFF: mov     [esp+0Ch+var_4], 0
 0x626D07: jz      loc_626DC8
@@ -31,11 +31,11 @@
 0x626D2D: jz      short loc_626D40
 0x626D2F: call    sub_4D8B90
 0x626D34: test    al, al
-0x626D36: mov     [esp+0Ch+arg_0], 80h ; '€'
+0x626D36: mov     [esp+0Ch+reference], 80h ; '€'
 0x626D3E: jnz     short loc_626D48
-0x626D40: mov     [esp+0Ch+arg_0], 320h
+0x626D40: mov     [esp+0Ch+reference], 320h
 0x626D48: mov     ecx, esi; this
-0x626D4A: call    GetTeleportExtraData
+0x626D4A: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x626D4F: test    eax, eax
 0x626D51: jz      short loc_626DC8
 0x626D53: mov     eax, ds:0B3B924h
@@ -43,25 +43,25 @@
 0x626D5A: push    eax
 0x626D5B: mov     ecx, esi
 0x626D5D: call    TesObjectREF_GetDistance
-0x626D62: fild    [esp+0Ch+arg_0]
+0x626D62: fild    [esp+0Ch+reference]
 0x626D66: fcompp
 0x626D68: fnstsw  ax
 0x626D6A: test    ah, 5
 0x626D6D: jp      short loc_626DC8
 0x626D6F: push    edi
-0x626D70: mov     ecx, esi
-0x626D72: call    sub_4D7740
+0x626D70: mov     ecx, esi; this
+0x626D72: call    TESObjectREFR_GetEffectiveDoorLock; Verified: returns this reference's ExtraLockData* payload when present; otherwise, if its ExtraTeleport has a linked door, returns that linked reference's ExtraLockData* payload; null when neither exists. Directly supported by ExtraDataList_GetLock, ExtraDataList_GetTeleport, and TeleportData_GetLinkedDoor.
 0x626D77: mov     edi, eax
 0x626D79: test    edi, edi
 0x626D7B: jz      short loc_626DBB
-0x626D7D: mov     ecx, edi
-0x626D7F: call    sub_428E70
+0x626D7D: mov     ecx, edi; this
+0x626D7F: call    ExtraLockData_IsLocked; Verified runtime lock predicate: returns (ExtraLockData.flags & 0x01) != 0. ExtraDataList_Load sets this bit on accepted 12-byte and legacy 16-byte XLOC payloads; serialized flag bits are then preserved. This is a runtime normalization step.
 0x626D84: test    al, al
 0x626D86: jz      short loc_626DBB
-0x626D88: push    1
-0x626D8A: push    ebx
-0x626D8B: mov     ecx, esi
-0x626D8D: call    TESOBjectREFR_IsOwnedBy
+0x626D88: push    1; useFactionOwnership
+0x626D8A: push    ebx; actorReference
+0x626D8B: mov     ecx, esi; reference
+0x626D8D: call    TESObjectREFR_IsOwnedBy; Verified ownership predicate and flag meaning: resolve the effective owner; accept exact equality with the actor's template/base form. When the owner differs, a nonzero ownership-global value can permit the access. With useFactionOwnership=true, a Faction owner is instead checked against the actor base's faction rank and the reference's effective required rank; callers passing false skip that faction-rank path. Direct callers include many `true` paths and ContainerExtraData_RemoveForm's item-sweep call with false. Fallout's TESObjectREFR::IsAnOwner/DoorLock::IsAnOwner also expose a `useFaction` boolean, but its implementation uses actor faction membership and has different rank/global handling.
 0x626D92: test    al, al
 0x626D94: jnz     short loc_626DBB
 0x626D96: mov     eax, [edi+4]

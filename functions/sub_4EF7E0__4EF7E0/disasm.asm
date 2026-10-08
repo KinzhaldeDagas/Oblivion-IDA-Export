@@ -1,4 +1,4 @@
-0x4EF7E0: mov     eax, [ecx+7Ch]
+0x4EF7E0: mov     eax, [ecx+7Ch]; Verified: climbs parentWorldspace to the root TESWorldSpace and returns its embedded terrainLODQuadRoots map at +0x38.
 0x4EF7E3: test    eax, eax
 0x4EF7E5: jz      short loc_4EF7F0
 0x4EF7E7: mov     ecx, eax

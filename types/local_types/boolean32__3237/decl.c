@@ -1,1 +1,1 @@
-boolean32
+typedef unsigned32 boolean32;

@@ -1,1 +1,1 @@
-AverageEntry
+struct AverageEntry;

@@ -1,4 +1,4 @@
-0x7ED1A0: sub     esp, 8
+0x7ED1A0: sub     esp, 8; Begins Oblivion BSShaderLightingProperty non-shadow-light iteration. Skips lights with frustum-cull value 0xFF or a disabled backing NiLight flag and stores the next list cursor in the property.
 0x7ED1A3: push    ebp
 0x7ED1A4: mov     ebp, ecx
 0x7ED1A6: mov     eax, [ebp+70h]
@@ -24,7 +24,7 @@
 0x7ED1DB: lea     edx, [esp+18h+var_4]
 0x7ED1DF: push    edx
 0x7ED1E0: mov     ecx, edi
-0x7ED1E2: call    sub_405AD0
+0x7ED1E2: call    ShadowSceneLight_GetLightRef
 0x7ED1E7: mov     eax, [eax]
 0x7ED1E9: or      [esp+18h+var_8], 1
 0x7ED1EE: test    byte ptr [eax+18h], 1
@@ -61,7 +61,7 @@
 0x7ED242: lea     edx, [esp+18h+var_4]
 0x7ED246: push    edx
 0x7ED247: mov     ecx, edi
-0x7ED249: call    sub_405AD0
+0x7ED249: call    ShadowSceneLight_GetLightRef
 0x7ED24E: mov     eax, [eax]
 0x7ED250: or      [esp+18h+var_8], 2
 0x7ED255: test    byte ptr [eax+18h], 1

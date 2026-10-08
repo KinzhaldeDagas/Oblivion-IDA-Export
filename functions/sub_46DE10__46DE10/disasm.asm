@@ -11,10 +11,10 @@
 0x46DE24: mov     ebx, [eax+edi*4]
 0x46DE27: test    ebx, ebx
 0x46DE29: jz      short loc_46DE3B
-0x46DE2B: mov     ecx, ebx
-0x46DE2D: call    sub_46D450
+0x46DE2B: mov     ecx, ebx; this
+0x46DE2D: call    TESTextureList_Clear
 0x46DE32: push    ebx
-0x46DE33: call    FormHeapFree
+0x46DE33: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x46DE38: add     esp, 4
 0x46DE3B: add     edi, 1
 0x46DE3E: cmp     edi, [esi]
@@ -22,7 +22,7 @@
 0x46DE42: pop     ebx
 0x46DE43: mov     ecx, [esi+4]
 0x46DE46: push    ecx
-0x46DE47: call    FormHeapFree
+0x46DE47: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x46DE4C: add     esp, 4
 0x46DE4F: mov     dword ptr [esi+4], 0
 0x46DE56: pop     edi

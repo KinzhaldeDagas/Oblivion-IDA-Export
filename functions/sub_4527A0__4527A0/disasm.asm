@@ -12,7 +12,6 @@
 0x4527B7: test    edi, edi
 0x4527B9: jz      short loc_4527D9
 0x4527BB: jmp     short loc_4527C0
-0x4527BD: align 10h
 0x4527C0: movzx   eax, byte ptr [edi+4]
 0x4527C4: mov     edx, [esi]
 0x4527C6: mov     edx, [edx+8]

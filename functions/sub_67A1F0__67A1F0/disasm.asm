@@ -19,7 +19,7 @@
 0x67A216: test    [esp+8+arg_0], 1
 0x67A21B: jz      short loc_67A226
 0x67A21D: push    edi
-0x67A21E: call    FormHeapFree
+0x67A21E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x67A223: add     esp, 4
 0x67A226: mov     eax, edi
 0x67A228: pop     edi

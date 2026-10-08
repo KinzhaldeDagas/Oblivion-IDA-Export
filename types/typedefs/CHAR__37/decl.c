@@ -1,1 +1,1 @@
-CHAR
+typedef char CHAR;

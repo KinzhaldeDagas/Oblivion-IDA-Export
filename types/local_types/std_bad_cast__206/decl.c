@@ -1,1 +1,1 @@
-std::bad_cast
+struct std::bad_cast;

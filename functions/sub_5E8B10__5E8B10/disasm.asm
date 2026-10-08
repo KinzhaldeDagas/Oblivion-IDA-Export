@@ -31,7 +31,7 @@
 0x5E8B5C: test    eax, eax
 0x5E8B5E: jz      short loc_5E8B6D
 0x5E8B60: mov     ecx, eax; this
-0x5E8B62: call    sub_5E6C60
+0x5E8B62: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x5E8B67: test    al, al
 0x5E8B69: jz      short loc_5E8B6D
 0x5E8B6B: mov     bl, 1

@@ -1,18 +1,31 @@
 {
-  "callees_count": 75,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 21,
   "callers_count": 5,
+  "chunks": [
+    [
+      "0x583F40",
+      "0x5842F6"
+    ]
+  ],
+  "chunks_sha256": "52630ea481af7bb33088576896edd29fef323c4553e9deeccf122c43184ef5af",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "Verified: reads GetTimerPercent and Menu fade state +0x24. State 2 completion sets state 4; if root trait 0x1772==2, destroys MenuTopicManager for DialogMenu at 0x584230 then invokes root tile deleting destructor at 0x584255. Otherwise hides root. State 8 completion sets state 1. This is the normal deferred destruction path, separate from StartFadeOut.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_583F40",
+  "display_name": "InterfaceManager::UpdateMenuFades",
   "end_ea": "0x5842F6",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_583F40",
+  "name": "InterfaceManager::UpdateMenuFades",
   "segment": ".text",
   "sha256": "52630ea481af7bb33088576896edd29fef323c4553e9deeccf122c43184ef5af",
   "size": 950,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x583F40",
+  "total_chunk_size": 950,
   "type": "void __usercall(_DWORD *this@<ecx>, char@<bpl>, double@<st2>, double@<st1>, double@<st0>)",
   "xrefs_from_count": 350,
   "xrefs_to_count": 5

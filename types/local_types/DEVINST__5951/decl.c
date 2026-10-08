@@ -1,1 +1,1 @@
-DEVINST
+typedef DWORD DEVINST;

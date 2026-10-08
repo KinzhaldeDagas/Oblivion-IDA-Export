@@ -10,9 +10,9 @@
 0x526F23: push    edi
 0x526F24: mov     edi, [ecx+eax*4-4]
 0x526F28: add     edx, 29Ch
-0x526F2E: push    edx
-0x526F2F: push    edi
-0x526F30: call    sub_5528F0
+0x526F2E: push    edx; destination
+0x526F2F: push    edi; source
+0x526F30: call    FaceGenHeadParameters_Copy; Deep-copies all four FaceGen matrices, preserving dimensions and engine ownership of destination coefficient buffers.
 0x526F35: mov     eax, [esi]
 0x526F37: mov     edx, [eax+128h]
 0x526F3D: add     esp, 8
@@ -23,10 +23,10 @@
 0x526F48: lea     eax, [esi+168h]
 0x526F4E: jnz     short loc_526F56
 0x526F50: lea     eax, [esi+108h]
-0x526F56: push    eax
+0x526F56: push    eax; destination
 0x526F57: lea     eax, [edi+60h]
-0x526F5A: push    eax
-0x526F5B: call    sub_5528F0
+0x526F5A: push    eax; source
+0x526F5B: call    FaceGenHeadParameters_Copy; Deep-copies all four FaceGen matrices, preserving dimensions and engine ownership of destination coefficient buffers.
 0x526F60: movzx   ecx, word ptr [esi+1FAh]
 0x526F67: sub     ecx, 1
 0x526F6A: add     esp, 8
@@ -39,7 +39,7 @@
 0x526F7F: mov     ecx, edi
 0x526F81: call    sub_526E70
 0x526F86: push    edi
-0x526F87: call    FormHeapFree
+0x526F87: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x526F8C: add     esp, 4
 0x526F8F: pop     edi
 0x526F90: mov     ecx, ebx

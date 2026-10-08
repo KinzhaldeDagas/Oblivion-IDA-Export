@@ -104,3 +104,21 @@
 0x721106: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x72110B: add     esp, 234h
 0x721111: retn
+0x9CA2E0: mov     eax, [ebp-224h]
+0x9CA2E6: push    eax
+0x9CA2E7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA2EC: pop     ecx
+0x9CA2ED: retn
+0x9CA2EE: lea     ecx, [ebp-220h]; this
+0x9CA2F4: jmp     ??1BSSearchPath@@UAE@XZ; BSSearchPath::~BSSearchPath(void)
+0x9CA2F9: mov     edx, [esp+arg_4]
+0x9CA2FD: lea     eax, [edx-238h]
+0x9CA303: mov     ecx, [edx-23Ch]
+0x9CA309: xor     ecx, eax
+0x9CA30B: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA310: add     eax, 10h
+0x9CA313: mov     ecx, [edx-4]
+0x9CA316: xor     ecx, eax
+0x9CA318: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA31D: mov     eax, offset stru_AF2A34
+0x9CA322: jmp     ___CxxFrameHandler3

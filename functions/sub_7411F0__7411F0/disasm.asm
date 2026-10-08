@@ -1,6 +1,6 @@
-0x7411F0: push    ebx
+0x7411F0: push    ebx; Pass231: Base NiFogProperty dump confirms flags/function +0x18, depth +0x1C, color +0x20/+0x24/+0x28.
 0x7411F1: push    esi
-0x7411F2: mov     esi, dword ptr [esp+8+arg_0]
+0x7411F2: mov     esi, [esp+8+arg_0]
 0x7411F6: push    edi
 0x7411F7: push    esi
 0x7411F8: mov     edi, ecx
@@ -12,7 +12,7 @@
 0x74120E: movzx   ecx, word ptr [esi+8]
 0x741212: add     esp, 4
 0x741215: cmp     ebx, ecx
-0x741217: mov     dword ptr [esp+0Ch+arg_0], eax
+0x741217: mov     [esp+0Ch+arg_0], eax
 0x74121B: jb      short loc_74122B
 0x74121D: movzx   edx, word ptr [esi+0Eh]
 0x741221: add     edx, ebx
@@ -26,13 +26,13 @@
 0x741233: call    NiTArray_SetAt; Actually first arg is a generic NiTArray
 0x741238: mov     cl, [edi+18h]
 0x74123B: and     cl, 1
-0x74123E: mov     [esp+0Ch+arg_0], cl
-0x741242: mov     edx, dword ptr [esp+0Ch+arg_0]
+0x74123E: mov     byte ptr [esp+0Ch+arg_0], cl
+0x741242: mov     edx, [esp+0Ch+arg_0]
 0x741246: push    edx; char
 0x741247: push    offset aEnable; "Enable"
 0x74124C: call    TESOutput_PrintLabeledBool
 0x741251: movzx   ebx, word ptr [esi+0Ah]
-0x741255: mov     dword ptr [esp+14h+arg_0], eax
+0x741255: mov     [esp+14h+arg_0], eax
 0x741259: movzx   eax, word ptr [esi+8]
 0x74125D: add     esp, 8
 0x741260: cmp     ebx, eax
@@ -53,7 +53,7 @@
 0x741286: push    offset aDepth_1; "Depth"
 0x74128B: call    TESOutput_PrintLabeledFloat
 0x741290: movzx   ebx, word ptr [esi+0Ah]
-0x741294: mov     dword ptr [esp+14h+arg_0], eax
+0x741294: mov     [esp+14h+arg_0], eax
 0x741298: movzx   eax, word ptr [esi+8]
 0x74129C: add     esp, 8
 0x74129F: cmp     ebx, eax
@@ -75,7 +75,7 @@
 0x7412C8: push    offset aFunction; "Function"
 0x7412CD: call    sub_740D30
 0x7412D2: movzx   ebx, word ptr [esi+0Ah]
-0x7412D6: mov     dword ptr [esp+14h+arg_0], eax
+0x7412D6: mov     [esp+14h+arg_0], eax
 0x7412DA: movzx   eax, word ptr [esi+8]
 0x7412DE: add     esp, 8
 0x7412E1: cmp     ebx, eax
@@ -94,7 +94,7 @@
 0x741305: lea     ecx, [edi+20h]
 0x741308: call    sub_709370
 0x74130D: movzx   edi, word ptr [esi+0Ah]
-0x741311: mov     dword ptr [esp+0Ch+arg_0], eax
+0x741311: mov     [esp+0Ch+arg_0], eax
 0x741315: movzx   eax, word ptr [esi+8]
 0x741319: cmp     edi, eax
 0x74131B: jb      short loc_74132B

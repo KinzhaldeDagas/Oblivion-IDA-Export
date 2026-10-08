@@ -3,7 +3,7 @@
 0x583E66: push    edi; a3
 0x583E67: mov     edi, [eax+20h]
 0x583E6A: mov     esi, ecx
-0x583E6C: call    sub_583C30
+0x583E6C: call    InterfaceManager__UpdateAllTimers; Verified: advances elapsed time and unlinks/frees expired 0x14-byte timer nodes; does not destroy their owner objects. Fallout named analogue 0x824EA970; Fallout additionally adjusts delta during VATS playback.
 0x583E71: mov     al, [esi+8]
 0x583E74: cmp     al, 3
 0x583E76: jnz     loc_583F2B
@@ -18,9 +18,9 @@
 0x583E9D: and     word ptr [eax+18h], 0FFFEh
 0x583EA3: push    ecx
 0x583EA4: mov     ecx, [esi+1Ch]; this
-0x583EA7: fstp    [esp+0Ch+a2]; a3
-0x583EAA: push    0FA1h; a2
-0x583EAF: call    Tile_SetFloat
+0x583EA7: fstp    [esp+0Ch+a2]; value
+0x583EAA: push    0FA1h; propertyCode
+0x583EAF: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x583EB4: mov     ecx, [esi+1Ch]
 0x583EB7: push    offset aMenusMiscCurso; "Menus\\Misc\\cursor.dds"
 0x583EBC: push    0FE6h
@@ -55,7 +55,7 @@
 0x583F22: pop     edi
 0x583F23: mov     ecx, eax; int
 0x583F25: pop     esi
-0x583F26: jmp     sub_584740
+0x583F26: jmp     Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.
 0x583F2B: cmp     al, 5
 0x583F2D: jnz     short loc_583F33
 0x583F2F: mov     byte ptr [esi+8], 2

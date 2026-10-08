@@ -1,4 +1,4 @@
-0x4F90C0: push    ebp
+0x4F90C0: push    ebp; TES4 authoritative: bhkWorldRayCastData::SetCastInputTo; scales world-space NiPoint3 into Havok units, writes ray To, resets sentinel vector at +0x60.
 0x4F90C1: mov     ebp, esp
 0x4F90C3: and     esp, 0FFFFFFF0h
 0x4F90C6: sub     esp, 20h
@@ -18,7 +18,7 @@
 0x4F90F4: fstp    [esp+20h+var_20+4]
 0x4F90F8: fmul    dword ptr [ecx+8]
 0x4F90FB: mov     ecx, [esp+20h+var_4]
-0x4F90FF: movaps  xmmword ptr [eax+60h], xmm0
+0x4F90FF: movaps  xmmword ptr [eax+60h], xmm0; TES4 authoritative: SetCastInputTo resets ray data +0x60 sentinel/all-ones vector after scaling the TES/world endpoint to Havok units.
 0x4F9103: xor     ecx, esp
 0x4F9105: fstp    [esp+20h+var_20+8]
 0x4F9109: movaps  xmm0, xmmword ptr [esp+20h+var_20]

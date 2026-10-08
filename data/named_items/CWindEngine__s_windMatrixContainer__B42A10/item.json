@@ -1,0 +1,19 @@
+{
+  "bytes_preview_hex": "",
+  "bytes_sha256": "",
+  "comments": {
+    "regular": "Process-global Oblivion CWindMatrices object: ushort count at +0 and stTransform* array at +4. Initialized to four identity matrices during CRT startup and freed at exit.\n[SpeedTreeOBSE v171] CPU snapshot reads WORD matrixCount at+0 and contiguous0x40-byte transform pointer at+4. Packed geometry selectors are bytes, so snapshot covers min(count,256) actual entries, without imposing the four-GPU-matrix limit. This does not implement matrix-update scheduling or public setters. These remain incomplete.",
+    "repeatable": ""
+  },
+  "confidence_scope": "Raw live IDA annotation; bulk synchronization does not independently verify semantic names or comments.",
+  "display_name": "CWindEngine__s_windMatrixContainer",
+  "ea": "0xB42A10",
+  "evidence_confidence": "Unknown",
+  "kind": "data",
+  "name": "CWindEngine__s_windMatrixContainer",
+  "segment": ".data",
+  "size": 8,
+  "source_annotation_confidence": "Unknown",
+  "type": "struct OB_CWindMatrices_010201A0",
+  "xrefs_to_count": 3
+}

@@ -1,40 +1,40 @@
 int sub_5877D0()
 {
-  int v3; // ebx
+  int v0; // ebx
   _DWORD *i; // edi
-  _DWORD *v5; // ecx
+  _DWORD *v2; // ecx
   int ParentMenu; // eax
-  int v7; // esi
-  _DWORD *v8; // ecx
+  int v4; // esi
+  _DWORD *v5; // ecx
   float Float; // [esp+8h] [ebp-4h]
 
-  Float = flt_A6A044;
-  v3 = 0;
-  for ( i = *((_DWORD **)InterfaceManager_GetSingleton(0, 1)->menuRoot + 0xD); i; i = (_DWORD *)*i )
+  Float = flt_A6A044; /*0x5877d9*/
+  v0 = 0; /*0x5877dd*/
+  for ( i = *((_DWORD **)InterfaceManager_GetSingleton(0, 1)->menuRoot + 0xD); i; i = (_DWORD *)*i ) /*0x5877f2*/
   {
-    InterfaceManager_GetSingleton(0, 1);
-    v5 = (_DWORD *)i[2];
-    if ( v5 )
+    InterfaceManager_GetSingleton(0, 1); /*0x587804*/
+    v2 = (_DWORD *)i[2]; /*0x587809*/
+    if ( v2 ) /*0x587811*/
     {
-      ParentMenu = Tile_GetParentMenu(v5);
-      v7 = ParentMenu;
-      if ( ParentMenu )
+      ParentMenu = Tile_GetParentMenu(v2); /*0x587813*/
+      v4 = ParentMenu; /*0x587818*/
+      if ( ParentMenu ) /*0x58781c*/
       {
-        v8 = *(_DWORD **)(ParentMenu + 4);
-        if ( v8 )
+        v5 = *(_DWORD **)(ParentMenu + 4); /*0x58781e*/
+        if ( v5 ) /*0x587823*/
         {
-          if ( Tile_GetFloat(v8, 0xFA1) != fConstant_1
-            && Float < Tile_GetFloat((_DWORD *)*(_DWORD *)(v7 + 4), 0xFAB)
-            && Tile_GetFloat((_DWORD *)*(_DWORD *)(v7 + 4), 0xFA5) != flt_A6A040
-            && *(_DWORD *)(v7 + 0x24) != 2 )
+          if ( Tile_GetFloat(v5, 0xFA1) != fConstant_1 /*0x587874*/
+            && Float < Tile_GetFloat((_DWORD *)*(_DWORD *)(v4 + 4), 0xFAB)
+            && Tile_GetFloat((_DWORD *)*(_DWORD *)(v4 + 4), 0xFA5) != flt_A6A040
+            && *(_DWORD *)(v4 + 0x24) != 2 )
           {
-            Float = Tile_GetFloat((_DWORD *)*(_DWORD *)(v7 + 4), 0xFAB);
-            v3 = v7;
+            Float = Tile_GetFloat((_DWORD *)*(_DWORD *)(v4 + 4), 0xFAB); /*0x587883*/
+            v0 = v4; /*0x587887*/
           }
         }
       }
     }
-    InterfaceManager_GetSingleton(0, 1);
+    InterfaceManager_GetSingleton(0, 1); /*0x58788d*/
   }
-  return v3;
+  return v0; /*0x5878a0*/
 }

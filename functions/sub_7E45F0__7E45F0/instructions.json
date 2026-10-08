@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7E45F0",
-    "line": "mov     ecx, [esp+arg_0]",
+    "line": "mov     ecx, [esp+targetNode]; Verified (Oblivion): clones and attaches the effect's scenegraph property, then returns it only when it is ParticleShaderProperty (virtual subtype ID 0xE). This supplies the concrete type stored at MagicShaderHitEffect +0x3C.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -85,19 +85,19 @@
   },
   {
     "ea": "0x7E4614",
-    "line": "call    sub_7E4120",
+    "line": "call    ParticleShaderProperty_CreateTemplateGeometry; Verified (Oblivion): lazily creates and caches a NiTriShape template with particle geometry data; NiNode_CreateAttachedParticleShaderProperty clones this template before asking BSShaderManager_AssignShadersRecursive to assign shader properties.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7E4619",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7E461B",
-    "line": "call    sub_700900",
+    "line": "call    NiObject_CloneWithPointerMap; Clones a loaded NiObject with a temporary pointer map and runs clone post-processing; the returned scene object is distinct from its source.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x7E4638",
-    "line": "mov     eax, [esp+20h+arg_4]",
+    "line": "mov     eax, [esp+20h+secondaryNode]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x7E4641",
-    "line": "fstp    [esp+20h+arg_0]",
+    "line": "fstp    [esp+20h+targetNode]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x7E4649",
-    "line": "fld     [esp+20h+arg_0]",
+    "line": "fld     [esp+20h+targetNode]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -229,13 +229,13 @@
   },
   {
     "ea": "0x7E465F",
-    "line": "fstp    [esp+20h+arg_0]",
+    "line": "fstp    [esp+20h+targetNode]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7E4663",
-    "line": "fld     [esp+20h+arg_0]",
+    "line": "fld     [esp+20h+targetNode]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -337,37 +337,37 @@
   },
   {
     "ea": "0x7E4691",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7E4696",
-    "line": "push    1",
+    "line": "push    1; arg3",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7E4698",
-    "line": "push    0",
+    "line": "push    0; normalMapBypass",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7E469A",
-    "line": "push    16h",
+    "line": "push    16h; shaderId",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7E469C",
-    "line": "push    esi",
+    "line": "push    esi; root",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7E469D",
-    "line": "call    sub_7B8940",
+    "line": "call    BSShaderManager_AssignShadersRecursive; Generic recursive shader assignment wrapper around 0x7B7FC0. In decoded TES4 tree code it is used for branch shader id 4 and simple/default id 1; no stock call with frond shader id 5 was found in this pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x7E46A9",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x7E46C5",
-    "line": "mov     eax, ecx",
+    "line": "mov     eax, ecx; Verified (Oblivion): cloned property is retained only when its virtual subtype returns 0xE. The ParticleShaderProperty vtable's +0x54 slot targets ParticleShaderProperty_GetSubtype, which returns 0xE; this directly identifies shaderProperty_3C as ParticleShaderProperty*.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x7E46D1",
-    "line": "call    sub_7E4120",
+    "line": "call    ParticleShaderProperty_CreateTemplateGeometry; Verified (Oblivion): lazily creates and caches a NiTriShape template with particle geometry data; NiNode_CreateAttachedParticleShaderProperty clones this template before asking BSShaderManager_AssignShadersRecursive to assign shader properties.",
     "mnemonic": "call",
     "size": 5
   },

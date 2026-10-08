@@ -1,19 +1,36 @@
 {
-  "callees_count": 5,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_561030",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x561030",
+      "0x5610B2"
+    ],
+    [
+      "0x9D62E0",
+      "0x9D6306"
+    ]
+  ],
+  "chunks_sha256": "533a11841563365da2bdbd54d940186c4dcad3025c60f9a22d39979a5d8dbd62",
+  "comment_regular": "Leaf geometry installs alpha-test property flags 0x12EC, function GREATER, ref=84. Therefore sampled alpha <=84 is discarded/invisible, not rendered RGB-black.",
+  "comment_repeatable": "Leaf geometry installs alpha-test property flags 0x12EC, function GREATER, ref=84. Therefore sampled alpha <=84 is discarded/invisible, not rendered RGB-black.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "BSTreeModel_CreateAlphaProperty",
   "end_ea": "0x5610B2",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_561030",
+  "name": "BSTreeModel_CreateAlphaProperty",
   "segment": ".text",
   "sha256": "4e4c61e11e9387cc05218af6e73b8bd4636107c546ddaf7c946ed28556946983",
   "size": 130,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x561030",
-  "type": "NiObjectNET *()",
-  "xrefs_from_count": 42,
+  "total_chunk_size": 168,
+  "type": "void *__cdecl()",
+  "xrefs_from_count": 56,
   "xrefs_to_count": 3
 }

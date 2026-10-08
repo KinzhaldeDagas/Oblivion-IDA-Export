@@ -9,7 +9,6 @@
 0x4A71EA: fld     dword ptr [ecx+14h]
 0x4A71ED: pop     ecx
 0x4A71EE: retn
-0x4A71EF: align 10h
 0x4A71F0: mov     edx, [ecx]
 0x4A71F2: test    edx, edx
 0x4A71F4: jz      short loc_4A7212

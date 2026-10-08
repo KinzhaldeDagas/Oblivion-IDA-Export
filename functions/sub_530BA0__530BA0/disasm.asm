@@ -42,7 +42,7 @@
 0x530BFB: mov     ecx, esi
 0x530BFD: call    sub_530500
 0x530C02: push    esi
-0x530C03: call    FormHeapFree
+0x530C03: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x530C08: add     esp, 4
 0x530C0B: mov     [edi+30h], ebx
 0x530C0E: push    10h; Size

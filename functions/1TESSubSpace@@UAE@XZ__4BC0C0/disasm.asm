@@ -23,3 +23,12 @@
 0x4BC116: pop     esi
 0x4BC117: add     esp, 10h
 0x4BC11A: retn
+0x9B41D0: mov     ecx, [ebp-10h]
+0x9B41D3: jmp     TESObject_destr
+0x9B41D8: mov     edx, [esp+arg_4]
+0x9B41DC: lea     eax, [edx-8]
+0x9B41DF: mov     ecx, [edx-0Ch]
+0x9B41E2: xor     ecx, eax
+0x9B41E4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B41E9: mov     eax, offset stru_ADF8F4
+0x9B41EE: jmp     ___CxxFrameHandler3

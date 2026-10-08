@@ -1,4 +1,4 @@
-int __thiscall sub_71BE30(void *this, int a2, int a3, int a4, int a5)
+unsigned int __thiscall sub_71BE30(void *this, int a2, int a3, int a4, int a5)
 {
   int v7; // ebp
   _DWORD *v8; // eax
@@ -6,20 +6,20 @@ int __thiscall sub_71BE30(void *this, int a2, int a3, int a4, int a5)
   NiPixelData *v11; // edi
   NiPixelData *v12; // [esp+3Ch] [ebp+Ch]
 
-  v7 = a4 + 8;
-  v8 = (_DWORD *)(*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)this + 0x38))(this, a2, a3, a4 + 8, a5);
-  v9 = (int)v8;
-  if ( v8 == (_DWORD *)(a4 + 8) )
-    return a4;
-  if ( !v8 )
-    return 0;
-  if ( sub_71AD40(v8, v7) )
-    return a4;
-  if ( !(*(unsigned __int8 (__thiscall **)(void *, int, int))(*(_DWORD *)this + 0xC))(this, v7, v9) )
-    return 0;
-  v12 = (NiPixelData *)FormHeapAlloc(0x70u);
-  if ( v12 )
-    v11 = NiPixelData::NiPixelData(
+  v7 = a4 + 8; /*0x71be69*/
+  v8 = (_DWORD *)(*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)this + 0x38))(this, a2, a3, a4 + 8, a5); /*0x71be74*/
+  v9 = (int)v8; /*0x71be76*/
+  if ( v8 == (_DWORD *)(a4 + 8) ) /*0x71be7a*/
+    return a4; /*0x71be7a*/
+  if ( !v8 ) /*0x71be82*/
+    return 0; /*0x71be82*/
+  if ( sub_71AD40(v8, v7) ) /*0x71be8b*/
+    return a4; /*0x71be7e*/
+  if ( !(*(unsigned __int8 (__thiscall **)(void *, int, int))(*(_DWORD *)this + 0xC))(this, v7, v9) ) /*0x71be9d*/
+    return 0; /*0x71be84*/
+  v12 = (NiPixelData *)FormHeapAlloc(0x70u); /*0x71bead*/
+  if ( v12 ) /*0x71bebb*/
+    v11 = NiPixelData::NiPixelData( /*0x71bedb*/
             v12,
             **(_DWORD **)(a4 + 0x54),
             **(_DWORD **)(a4 + 0x58),
@@ -27,7 +27,7 @@ int __thiscall sub_71BE30(void *this, int a2, int a3, int a4, int a5)
             *(_DWORD *)(a4 + 0x60),
             *(_DWORD *)(a4 + 0x6C));
   else
-    v11 = 0;
+    v11 = 0; /*0x71bedf*/
   return (*(unsigned __int8 (__thiscall **)(void *, NiPixelData *, int, unsigned int))(*(_DWORD *)this + 0x2C))(
            this,
            v11,

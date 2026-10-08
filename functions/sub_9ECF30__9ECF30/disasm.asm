@@ -2,7 +2,7 @@
 0x9ECF36: push    ecx
 0x9ECF37: fstp    [esp+4+var_4]; float
 0x9ECF3A: push    offset aFpotiont2caldu; "fPotionT2CalDurMult"
-0x9ECF3F: mov     ecx, offset fPotionT2CalDurMult
+0x9ECF3F: mov     ecx, 0B37A20h
 0x9ECF44: call    GameSetting_ConstrAndReg_float
 0x9ECF49: push    offset sub_A1FB60; void (__cdecl *)()
 0x9ECF4E: call    _atexit

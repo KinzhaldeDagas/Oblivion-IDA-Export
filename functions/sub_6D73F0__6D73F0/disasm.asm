@@ -1,4 +1,4 @@
-0x6D73F0: fld     dword ptr [ecx]
+0x6D73F0: fld     dword ptr [ecx]; Returns different when float timestamps differ or case-sensitive strcmp of text differs; returns equal only when both match exactly.
 0x6D73F2: mov     edx, [esp+arg_0]
 0x6D73F6: fld     dword ptr [edx]
 0x6D73F8: fucompp

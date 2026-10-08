@@ -4,7 +4,7 @@
 0x5B1528: mov     dword ptr [esi], offset ??_7?$NiTListBase@V?$DFALL@PAVMagicItemAndIndex@@@@PAVMagicItemAndIndex@@@@6B@; const NiTListBase<DFALL<MagicItemAndIndex *>,MagicItemAndIndex *>::`vftable'
 0x5B152E: jz      short loc_5B1539
 0x5B1530: push    esi
-0x5B1531: call    FormHeapFree
+0x5B1531: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5B1536: add     esp, 4
 0x5B1539: mov     eax, esi
 0x5B153B: pop     esi

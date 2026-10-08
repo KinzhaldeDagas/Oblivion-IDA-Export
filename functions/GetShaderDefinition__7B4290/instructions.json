@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7B4290",
-    "line": "push    esi",
+    "line": "push    esi; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.",
     "mnemonic": "push",
     "size": 1
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x7B42EC",
-    "line": "call    GetShaderDefinition",
+    "line": "call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x7B42F4",
-    "line": "call    sub_810B90",
+    "line": "call    OB_CreateSpeedTreeBranchShaderDefinition_010201A0; Creates ShaderDefinition for SpeedTree branch shader (GetShaderDefinition id 4): declaration id 6, SpeedTreeBranchShader object, branch lighting/TREE program sets.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x7B4302",
-    "line": "call    sub_80EE10; jumptable 007B42B9 case 5",
+    "line": "call    OB_SpeedTreeFrondShader_CreateDefinition_010201A0; SpeedTree frond shader definition dispatch: GetShaderDefinition case 5 calls 0x80EE10. Oblivion evidence only.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x7B4310",
-    "line": "call    sub_7F1410; jumptable 007B42B9 case 6",
+    "line": "call    OB_CreateSpeedTreeLeafShaderDefinition_010201A0; jumptable 007B42B9 case 6",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x7B4349",
-    "line": "jz      short loc_7B4359",
+    "line": "jz      short loc_7B4359; [Verified] GetShaderDefinition creates the HDRShader definition (ID 8) only when RendererGlobalState+0x1D7 is nonzero; this independently confirms the field's HDR-mode behavior.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x7B4414",
-    "line": "call    RefractionShader",
+    "line": "call    RefractionShader; MoonSugarEffect decode: RefractionShader definition uses the same two-element image-space declaration as Copy/Hit/NightEye, then allocates, initializes, loads, builds, and refcounts its concrete shader.",
     "mnemonic": "call",
     "size": 5
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x7B4475",
-    "line": "cmp     ds:0B42EA5h, cl; jumptable 007B42B9 case 26",
+    "line": "cmp     ds:0B42EA5h, cl; [Verified] RendererGlobalState+0xC gates creation of ShaderDefinition ID 0x1A (Lighting30); the same byte changes package variants in GetShaderProgramPackageIndex. [Unknown] Its originating setting/configuration name is not established.",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -805,7 +805,7 @@
   },
   {
     "ea": "0x7B4481",
-    "line": "call    LighteningShaders?",
+    "line": "call    Lighting30ShaderDefinition_Create; Create the concrete Lighting30 ShaderDefinition and Lighting30Shader for definition ID 0x1A.",
     "mnemonic": "call",
     "size": 5
   },

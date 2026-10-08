@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
+  "chunks": [
+    [
+      "0x701C00",
+      "0x701C48"
+    ]
+  ],
+  "chunks_sha256": "6a424f94c84a1f08ffc7e47517a531285af3e364a21d1645404871e1dc076cd6",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "[2026-10-04 v110 texture acceptance] Verified AL bool: no renderer or failed renderer+104 call returns AL0 at701C0D; success/already-created returns AL1 at701C44. VtableA7D8CC+5C. Frond loader may prepare deferred NiSourceTexture under its existing paired renderer/cache lock, then independently checks data. Bool success does not exclude error pixels.\n[v111 deferred guard] Plugin now defers BEFORE TES texture loading when the renderer lock/context is unavailable. Otherwise a normalNULL from automatic native preparation could be misclassified as a missing file. Deferred output is not a permanent negative optional-map result; retries occur in the live model/node callback.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "NiSourceTexture::LoadTexture",
+  "display_name": "OB_NiSourceTexture_CreateRendererData_010201A0",
   "end_ea": "0x701C48",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "NiSourceTexture::LoadTexture",
+  "name": "OB_NiSourceTexture_CreateRendererData_010201A0",
   "segment": ".text",
   "sha256": "6a424f94c84a1f08ffc7e47517a531285af3e364a21d1645404871e1dc076cd6",
   "size": 72,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x701C00",
-  "type": "void __thiscall(NiSourceTexture *this)",
+  "total_chunk_size": 72,
+  "type": "bool __thiscall(NiSourceTexture *this)",
   "xrefs_from_count": 33,
   "xrefs_to_count": 1
 }

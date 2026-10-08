@@ -1,18 +1,31 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 7,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_8913C0",
+  "chunks": [
+    [
+      "0x8913C0",
+      "0x89143F"
+    ]
+  ],
+  "chunks_sha256": "d5203706c88e10ba2d85a46c0e0ff4b618d3653ea629c7b0c18e5fd4bf23c488",
+  "comment_regular": "Controller radius helper. Returns shape radius from proxy+0x374 object when available, else proxy+0x3A0/E8 default. MobileObject::Move converts this from Havok to world with 0xA372E0.",
+  "comment_repeatable": "Controller radius helper. Returns shape radius from proxy+0x374 object when available, else proxy+0x3A0/E8 default. MobileObject::Move converts this from Havok to world with 0xA372E0.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "bhkCharacterController_GetRadius",
   "end_ea": "0x89143F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_8913C0",
+  "name": "bhkCharacterController_GetRadius",
   "segment": ".text",
   "sha256": "d5203706c88e10ba2d85a46c0e0ff4b618d3653ea629c7b0c18e5fd4bf23c488",
   "size": 127,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x8913C0",
+  "total_chunk_size": 127,
   "type": "double __thiscall(float *this)",
   "xrefs_from_count": 58,
   "xrefs_to_count": 7

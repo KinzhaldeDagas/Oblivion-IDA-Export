@@ -1,1 +1,1 @@
-RpcAssoc
+typedef _RpcAssoc RpcAssoc;

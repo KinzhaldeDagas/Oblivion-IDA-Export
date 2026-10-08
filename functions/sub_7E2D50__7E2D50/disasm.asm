@@ -1,1 +1,1 @@
-0x7E2D50: jmp     sub_779710
+0x7E2D50: jmp     sub_779710; MoonSugar build 39: base shader +0x34 transform slot branches skinned partition to CalculateBoneMatrixes/sub_765560, otherwise pass-0 non-skinned to sub_765480. Confirms hardware skin needs separate post-flush hook.

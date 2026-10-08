@@ -1,1 +1,1 @@
-IMMNotificationClientVtbl_0
+typedef IMMNotificationClientVtbl IMMNotificationClientVtbl_0;

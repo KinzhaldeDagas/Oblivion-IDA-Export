@@ -4,7 +4,7 @@
 0x5F191A: fstp    [esp+arg_0]
 0x5F191E: fld     [esp+arg_0]
 0x5F1922: fld     st
-0x5F1924: call    Double_To_SInt32
+0x5F1924: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5F1929: mov     [esp+arg_0], eax
 0x5F192D: fild    [esp+arg_0]
 0x5F1931: fstp    [esp+arg_0]
@@ -19,5 +19,5 @@
 0x5F194C: fsub    qword ptr ds:0A2F928h
 0x5F1952: fstp    [esp+arg_0]
 0x5F1956: fld     [esp+arg_0]
-0x5F195A: call    Double_To_SInt32
+0x5F195A: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5F195F: retn    4

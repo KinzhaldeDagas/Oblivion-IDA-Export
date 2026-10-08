@@ -1,5 +1,5 @@
-0x78ED20: mov     eax, ecx
-0x78ED22: mov     ecx, [esp+arg_0]
+0x78ED20: mov     eax, ecx; Oblivion CIdvCamera copy assignment. On non-self assignment copies only the three-float position at +0x04..+0x0F and returns this. The function occupies the inherited assignment slot in the CIdvCamera and derived vtables.
+0x78ED22: mov     ecx, [esp+source]
 0x78ED26: cmp     ecx, eax
 0x78ED28: jz      short locret_78ED3E
 0x78ED2A: lea     edx, [ecx+4]

@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x4CE0CA",
-    "line": "mov     ecx, [esi+50h]",
+    "line": "mov     ecx, [esi+50h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -307,13 +307,13 @@
   },
   {
     "ea": "0x4CE126",
-    "line": "push    eax",
+    "line": "push    eax; candidate_form_id",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4CE127",
-    "line": "call    sub_46AF50",
+    "line": "call    TESForm_FormIDMatchesObjectID24; Compares only the low 24-bit object-ID portions of this form's FormID and a serialized group label; load-order/master byte is intentionally ignored.",
     "mnemonic": "call",
     "size": 5
   },
@@ -445,13 +445,13 @@
   },
   {
     "ea": "0x4CE16C",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4CE16E",
-    "line": "call    sub_4CA640",
+    "line": "call    TESObjectCELL_GetCellGroupSubBlockLabel; Compute the CELL group sub-block label. Interior: decimal FormID bucket ((objectID24 % 100) / 10). Exterior: signed cell coordinates divided by 8 and packed X-high/Y-low. Cross-checks TESCS TESObjectCELL_GetCellGroupSubBlockLabel at 0x533F90.",
     "mnemonic": "call",
     "size": 5
   },

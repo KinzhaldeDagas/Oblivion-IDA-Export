@@ -1,23 +1,24 @@
-BSExtraData *__usercall sub_4212F0@<eax>(ExtraDataList *this@<ecx>, char a2@<bpl>)
+// If saved-attached-animation data exists, frees it and replaces it with a six-byte initialized {4,0,0} word buffer. Observed in Oblivion door default-open/open/close paths.
+void __thiscall ExtraDataList_ResetSavedAttachedAnimationData(ExtraDataList *this)
 {
-  BSExtraData *result; // eax
+  char v1; // bp
+  BSExtraData *ExtraData; // eax
   BSExtraData *v3; // esi
-  int v4; // [esp+0h] [ebp-4h]
+  FreeEntry *v4; // eax
+  int v5; // [esp+0h] [ebp-4h]
 
-  result = BaseExtraList_GetExtraData(this, kExtraData_SavedMovementData);
-  v3 = result;
-  if ( result )
+  ExtraData = BaseExtraList_GetExtraData(this, kExtraData_SavedMovementData); /*0x4212f3*/
+  v3 = ExtraData; /*0x4212f8*/
+  if ( ExtraData ) /*0x4212fc*/
   {
-    result = result[1].members.next;
-    if ( result )
+    if ( ExtraData[1].members.next ) /*0x4212fe*/
     {
-      MemoryHeap_Free_checked(v3[1].members.next);
-      result = (BSExtraData *)j_MemoryHeap_Alloc(&FormHeap, a2, 0x100000006uLL, v4);
-      v3[1].members.next = result;
-      LOWORD(result->vtbl) = 4;
-      HIWORD(result->vtbl) = 0;
-      *(_WORD *)&result->members.type = 0;
+      MemoryHeap_Free_checked(ExtraData[1].members.next); /*0x42130b*/
+      v4 = j_MemoryHeap_Alloc(&FormHeap, v1, 0x100000006uLL, v5); /*0x421319*/
+      v3[1].members.next = (BSExtraData *)v4; /*0x42131e*/
+      LOWORD(v4->prev) = 4; /*0x421321*/
+      HIWORD(v4->prev) = 0; /*0x421326*/
+      LOWORD(v4->next) = 0; /*0x42132c*/
     }
   }
-  return result;
 }

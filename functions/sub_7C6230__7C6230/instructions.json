@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7C6230",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Search the native ShadowSceneNode full-light list for a ShadowSceneLight whose backing NiLight identity matches the supplied source.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -109,13 +109,13 @@
   },
   {
     "ea": "0x7C625A",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7C625F",
-    "line": "mov     ecx, [esp+18h+arg_0]",
+    "line": "mov     ecx, [esp+18h+backingLight]",
     "mnemonic": "mov",
     "size": 4
   },

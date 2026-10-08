@@ -1,1 +1,1 @@
-SInt8
+typedef char SInt8;

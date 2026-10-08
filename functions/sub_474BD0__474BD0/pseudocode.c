@@ -1,4 +1,5 @@
-int __thiscall sub_474BD0(_DWORD *this)
+// Convenience wrapper returning the first active BSAnimGroupSequence from ActorAnimData.
+BSAnimGroupSequence *__thiscall ActorAnimData_FindFirstActiveAnimGroupSequence(ActorAnimData *this)
 {
-  return sub_472690(this, 0);
+  return ActorAnimData_FindNextActiveAnimGroupSequence(this, 0); /*0x474bd7*/
 }

@@ -6,10 +6,10 @@
 0x53C1FD: push    edi
 0x53C1FE: mov     edi, [esp+98h+arg_0]
 0x53C205: push    ecx
-0x53C206: fstp    [esp+9Ch+var_9C]
+0x53C206: fstp    [esp+9Ch+angleX]
 0x53C209: push    edi
 0x53C20A: mov     ebp, ecx
-0x53C20C: call    nullsub_returnVoid_2arg
+0x53C20C: call    nullsub_returnVoid_2arg; nullsub_returnVoid_2arg; used by Low/MiddleLow movement/package setter slots and MiddleHigh movement flag setter slot.
 0x53C211: fld     dword ptr [ebp+78h]
 0x53C214: fcomp   qword ptr ds:0A3A5B0h
 0x53C21A: fnstsw  ax
@@ -24,7 +24,7 @@
 0x53C23A: test    al, al
 0x53C23C: mov     ebx, 1
 0x53C241: jz      short loc_53C275
-0x53C243: mov     ecx, offset TimeGlobals
+0x53C243: mov     ecx, 0B332E0h
 0x53C248: call    TimeGlobals_GetGameDaysPassed
 0x53C24D: sub     eax, ebx
 0x53C24F: test    eax, eax
@@ -165,27 +165,27 @@
 0x53C3EE: fld     dword ptr [ebp+74h]
 0x53C3F1: push    ecx
 0x53C3F2: fchs
-0x53C3F4: lea     ecx, [esp+9Ch+var_6C]
+0x53C3F4: lea     ecx, [esp+9Ch+var_6C]; this
 0x53C3F8: fmul    qword ptr ds:0A31C78h
 0x53C3FE: fstp    [esp+9Ch+var_84]
 0x53C402: fld     [esp+9Ch+var_84]
-0x53C406: fstp    [esp+9Ch+var_9C]; float
-0x53C409: call    NiMatrix33_InitRotationTransposedTransform???
+0x53C406: fstp    [esp+9Ch+angleX]; angleX
+0x53C409: call    NiMatrix33_InitRotationXTransposed; Verified matrix coefficients make this an X-axis rotation in the engine's transposed convention: X stays fixed; only the Y/Z submatrix contains sin/cos.
 0x53C40E: fld     dword ptr [ebp+68h]
 0x53C411: push    ecx
 0x53C412: fmul    qword ptr ds:0A31C78h
-0x53C418: lea     ecx, [esp+9Ch+var_48]
+0x53C418: lea     ecx, [esp+9Ch+right]; this
 0x53C41C: fstp    [esp+9Ch+var_84]
 0x53C420: fld     [esp+9Ch+var_84]
-0x53C424: fstp    [esp+9Ch+var_9C]; float
-0x53C427: call    NiMatrix33_InitRotationTransform
+0x53C424: fstp    [esp+9Ch+angleX]; angleZ
+0x53C427: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x53C42C: mov     edi, [ebp+4]
-0x53C42F: lea     eax, [esp+98h+var_48]
-0x53C433: push    eax
-0x53C434: lea     ecx, [esp+9Ch+var_24]
-0x53C438: push    ecx
-0x53C439: lea     ecx, [esp+0A0h+var_6C]
-0x53C43D: call    NiMAtrix33_Multiply
+0x53C42F: lea     eax, [esp+98h+right]
+0x53C433: push    eax; right
+0x53C434: lea     ecx, [esp+9Ch+out]
+0x53C438: push    ecx; out
+0x53C439: lea     ecx, [esp+0A0h+var_6C]; this
+0x53C43D: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x53C442: fldz
 0x53C444: fld     [esp+98h+var_80]
 0x53C448: mov     esi, eax
@@ -229,12 +229,12 @@
 0x53C4B3: and     [eax+18h], si
 0x53C4B7: mov     ecx, [ebp+10h]
 0x53C4BA: push    4
-0x53C4BC: call    NiNode_GetNiPropertyByID
+0x53C4BC: call    NiNode_GetNiPropertyByID;
 0x53C4C1: test    eax, eax
 0x53C4C3: jz      short loc_53C4FB
 0x53C4C5: mov     ecx, [ebp+10h]
 0x53C4C8: push    4
-0x53C4CA: call    NiNode_GetNiPropertyByID
+0x53C4CA: call    NiNode_GetNiPropertyByID;
 0x53C4CF: mov     edx, [eax]
 0x53C4D1: mov     ecx, eax
 0x53C4D3: mov     eax, [edx+54h]
@@ -247,7 +247,7 @@
 0x53C4E4: jz      short loc_53C4FB
 0x53C4E6: mov     ecx, [ebp+10h]
 0x53C4E9: push    4
-0x53C4EB: call    NiNode_GetNiPropertyByID
+0x53C4EB: call    NiNode_GetNiPropertyByID;
 0x53C4F0: test    eax, eax
 0x53C4F2: jz      short loc_53C4FB
 0x53C4F4: fld     [esp+98h+var_80]
@@ -266,12 +266,12 @@
 0x53C520: and     [eax+18h], si
 0x53C524: mov     ecx, [ebp+14h]
 0x53C527: push    4
-0x53C529: call    NiNode_GetNiPropertyByID
+0x53C529: call    NiNode_GetNiPropertyByID;
 0x53C52E: test    eax, eax
 0x53C530: jz      loc_53C5C5
 0x53C536: mov     ecx, [ebp+14h]
 0x53C539: push    4
-0x53C53B: call    NiNode_GetNiPropertyByID
+0x53C53B: call    NiNode_GetNiPropertyByID;
 0x53C540: mov     edx, [eax]
 0x53C542: mov     ecx, eax
 0x53C544: mov     eax, [edx+54h]
@@ -284,7 +284,7 @@
 0x53C555: jz      short loc_53C5C5
 0x53C557: mov     ecx, [ebp+14h]
 0x53C55A: push    4
-0x53C55C: call    NiNode_GetNiPropertyByID
+0x53C55C: call    NiNode_GetNiPropertyByID;
 0x53C561: test    eax, eax
 0x53C563: jz      short loc_53C5C5
 0x53C565: mov     ecx, [esp+98h+arg_0]

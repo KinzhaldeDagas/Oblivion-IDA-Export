@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x71B8D0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Stock fallback mip synthesis averages RGBA independently with no alpha-coverage preservation. For cutout atlases this can drive terminal mip alpha below ref84 even when surviving high-resolution texels have correct nonblack RGB.",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x71B8FD",
-    "line": "mov     ebx, [esp+7Ch+arg_0]",
+    "line": "mov     ebx, [esp+7Ch+srcPixelData]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x71B93C",
-    "line": "mov     ebp, [esp+7Ch+arg_4]",
+    "line": "mov     ebp, [esp+7Ch+reusePixelData]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x71B97B",
-    "line": "mov     [esp+7Ch+arg_4], eax",
+    "line": "mov     [esp+7Ch+reusePixelData], eax",
     "mnemonic": "mov",
     "size": 7
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x71B9A7",
-    "line": "call    NiPixelData__NiPixelData",
+    "line": "call    NiPixelData__NiPixelData; Constructs NiPixelData with requested levelCount=0. NiPixelData resolves zero to floor(log2(max(width,height)))+1 via 0x70E2F0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x71B9E0",
-    "line": "mov     [esp+7Ch+arg_4], 0",
+    "line": "mov     [esp+7Ch+reusePixelData], 0",
     "mnemonic": "mov",
     "size": 11
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x71BA27",
-    "line": "imul    eax, [esp+7Ch+arg_4]",
+    "line": "imul    eax, [esp+7Ch+reusePixelData]",
     "mnemonic": "imul",
     "size": 8
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x71BA65",
-    "line": "jnz     short loc_71BAB3",
+    "line": "jnz     short loc_71BAB3; RGB one-dimensional mip tail: when previous width is 1, average two vertically adjacent RGB texels per output; this is a 1x2 filter, not a four-sample box.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -925,7 +925,7 @@
   },
   {
     "ea": "0x71BAB7",
-    "line": "jnz     short loc_71BB05",
+    "line": "jnz     short loc_71BB05; RGB one-dimensional mip tail: when previous height is 1, average two horizontally adjacent RGB texels per output; this is a 2x1 filter.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -1110,12 +1110,6 @@
     "size": 2
   },
   {
-    "ea": "0x71BB17",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x71BB20",
     "line": "mov     edx, [esp+7Ch+var_60]",
     "mnemonic": "mov",
@@ -1201,7 +1195,7 @@
   },
   {
     "ea": "0x71BB4D",
-    "line": "mov     [ecx], dl",
+    "line": "mov     [ecx], dl; RGB 2x2 box filter: each destination channel is the integer average of the four corresponding source bytes.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1489,7 +1483,7 @@
   },
   {
     "ea": "0x71BBFB",
-    "line": "imul    eax, [esp+7Ch+arg_4]",
+    "line": "imul    eax, [esp+7Ch+reusePixelData]",
     "mnemonic": "imul",
     "size": 8
   },
@@ -1603,7 +1597,7 @@
   },
   {
     "ea": "0x71BC3D",
-    "line": "jnz     short loc_71BCA2",
+    "line": "jnz     short loc_71BCA2; RGBA one-dimensional mip tail: previous width 1 uses a two-sample vertical average for R,G,B,A independently.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -1630,12 +1624,6 @@
     "line": "jmp     short loc_71BC50",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x71BC4D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x71BC50",
@@ -1813,7 +1801,7 @@
   },
   {
     "ea": "0x71BCA6",
-    "line": "jnz     short loc_71BD06",
+    "line": "jnz     short loc_71BD06; RGBA one-dimensional mip tail: previous height 1 uses a two-sample horizontal average for R,G,B,A independently.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -2034,12 +2022,6 @@
     "size": 2
   },
   {
-    "ea": "0x71BD18",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x71BD20",
     "line": "mov     edx, [esp+7Ch+var_5C]",
     "mnemonic": "mov",
@@ -2125,7 +2107,7 @@
   },
   {
     "ea": "0x71BD4D",
-    "line": "mov     [ecx], dl",
+    "line": "mov     [ecx], dl; RGBA 2x2 box filter: each destination channel is the integer average of the four corresponding source bytes. Alpha is treated exactly like R/G/B.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -2395,13 +2377,13 @@
   },
   {
     "ea": "0x71BDEB",
-    "line": "mov     ebx, [esp+7Ch+arg_0]",
+    "line": "mov     ebx, [esp+7Ch+srcPixelData]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x71BDF2",
-    "line": "mov     eax, [esp+7Ch+arg_4]",
+    "line": "mov     eax, [esp+7Ch+reusePixelData]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2419,7 +2401,7 @@
   },
   {
     "ea": "0x71BDFF",
-    "line": "mov     [esp+7Ch+arg_4], eax",
+    "line": "mov     [esp+7Ch+reusePixelData], eax",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2500,5 +2482,77 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C9F80",
+    "line": "mov     eax, [ebp+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C9F83",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C9F84",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C9F89",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C9F8A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C9F8B",
+    "line": "mov     edx, [esp+reusePixelData]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C9F8F",
+    "line": "lea     eax, [edx-6Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C9F92",
+    "line": "mov     ecx, [edx-70h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C9F95",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C9F97",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C9F9C",
+    "line": "mov     eax, offset stru_AF2740",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C9FA1",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

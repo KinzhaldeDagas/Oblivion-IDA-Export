@@ -1,7 +1,8 @@
-int __thiscall MiddleProcess_ModAViMax(_DWORD *this, int a2, int a3, signed int a4)
+// Verified: integer max-value delta goes to MiddleLowProcess +0x94 with allowPositive=1.
+void __thiscall MiddleProcess_ModAViMax(MiddleLowProcess *self, int context, int actorValue, int delta)
 {
-  int v5; // [esp+0h] [ebp-8h]
+  float deltaa; // [esp+0h] [ebp-8h]
 
-  *(float *)&v5 = (float)a4;
-  return AVCollection_ModAVLimited(this + 0x25, a3, v5, 1);
+  deltaa = (float)delta; /*0x65883b*/
+  AVCollection_AdjustValue(&self->maxAVModifiers, actorValue, deltaa, 1u); /*0x658845*/
 }

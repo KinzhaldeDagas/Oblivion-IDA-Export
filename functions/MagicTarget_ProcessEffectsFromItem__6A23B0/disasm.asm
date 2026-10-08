@@ -31,7 +31,7 @@
 0x6A23FD: mov     ecx, edi
 0x6A23FF: call    eax
 0x6A2401: mov     ecx, eax; this
-0x6A2403: call    TESObjectREFR_GetParentCell
+0x6A2403: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6A2408: test    eax, eax
 0x6A240A: jz      MagicTarget_ProcessEffectsFromItem___Done_
 0x6A2410: mov     edx, [edi]
@@ -39,9 +39,9 @@
 0x6A2415: mov     ecx, edi
 0x6A2417: call    eax
 0x6A2419: mov     ecx, eax; this
-0x6A241B: call    TESObjectREFR_GetParentCell
-0x6A2420: mov     ecx, eax; this
-0x6A2422: call    TESObjectCELL_GetNiNode?
+0x6A241B: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x6A2420: mov     ecx, eax; object
+0x6A2422: call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.
 0x6A2427: test    eax, eax
 0x6A2429: jz      short MagicTarget_ProcessEffectsFromItem___Done_
 0x6A242B: test    ebx, ebx

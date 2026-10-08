@@ -1,4 +1,4 @@
-0x46C640: cmp     byte ptr [esp+arg_0], 0
+0x46C640: cmp     [esp+fromActiveFile], 0
 0x46C645: push    esi
 0x46C646: mov     esi, ecx
 0x46C648: mov     eax, [esi+8]
@@ -16,16 +16,16 @@
 0x46C667: jbe     short TESForm_SetFromActiveFile___AddToActiveFile
 0x46C669: mov     edx, ds:0B06150h
 0x46C66F: nop
-0x46C670: cmp     [edx+eax*4], esi
+0x46C670: cmp     [edx+eax*4], esi; MEF PERF 2026-10-08: PERF-16 scope limit: TESForm active-list admission separately scans for duplicate pointer BEFORE449070 first-empty scan. For N qualifying distinct additions fromempty, each scan contributes N*(N-1)/2; eliminating hole scan leaves duplicate scan quadratic. Existing flags/gates/removal semantics must stay; bool parameter prototype corrected.
 0x46C673: jz      short TESForm_SetFromActiveFile___SetFlag_FromActiveFile
 0x46C675: add     eax, 1
 0x46C678: cmp     eax, ecx
-0x46C67A: jb      short loc_46C670
-0x46C67C: lea     edx, [esp+4+arg_0]
-0x46C680: push    edx
-0x46C681: mov     ecx, offset TESForm_ActiveFileFormList
-0x46C686: mov     [esp+8+arg_0], esi
-0x46C68A: call    NiTArray_AddItem?
+0x46C67A: jb      short loc_46C670; MEF PERF 2026-10-08: PERF-16 scope limit: TESForm active-list admission separately scans for duplicate pointer BEFORE449070 first-empty scan. For N qualifying distinct additions fromempty, each scan contributes N*(N-1)/2; eliminating hole scan leaves duplicate scan quadratic. Existing flags/gates/removal semantics must stay; bool parameter prototype corrected.
+0x46C67C: lea     edx, [esp+4+fromActiveFile]
+0x46C680: push    edx; element
+0x46C681: mov     ecx, offset TESForm_ActiveFileFormList; self
+0x46C686: mov     dword ptr [esp+8+fromActiveFile], esi
+0x46C68A: call    NiTLargeArray_RawPointer_AddFirstEmpty
 0x46C68F: or      dword ptr [esi+8], 2
 0x46C693: pop     esi
 0x46C694: retn    4

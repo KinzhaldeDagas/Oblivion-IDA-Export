@@ -1,4 +1,4 @@
 int __stdcall sub_4943A0(int a1)
 {
-  return 0;
+  return 0; /*0x4943a2*/
 }

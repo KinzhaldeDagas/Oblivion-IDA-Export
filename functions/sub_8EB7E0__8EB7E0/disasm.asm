@@ -1,4 +1,4 @@
-0x8EB7E0: push    ebp
+0x8EB7E0: push    ebp; Sorts active surface constraints before recomputing the active-set solution.
 0x8EB7E1: mov     ebp, esp
 0x8EB7E3: and     esp, 0FFFFFFF0h
 0x8EB7E6: sub     esp, 24h

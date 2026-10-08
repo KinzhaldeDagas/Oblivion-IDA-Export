@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x7C50AE",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -931,7 +931,7 @@
   },
   {
     "ea": "0x7C5144",
-    "line": "mov     ecx, offset off_B2CBC4",
+    "line": "mov     ecx, offset stru_B2CBC4",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1063,7 +1063,7 @@
   },
   {
     "ea": "0x7C5180",
-    "line": "call    sub_5B1E20",
+    "line": "call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,4 +1,4 @@
-0x6A2B73: mov     eax, [ebp+0]
+0x6A2B73: mov     eax, [ebp+0]; Verified AddEffect clone path calls the source ActiveEffect vtable clone slot (+4), then sets the clone's target before insertion. Fresh clone constructors null hitEffectList, and the registered clone/copy overrides do not overwrite +0x34. A nonempty source list is not shared by the clone.
 0x6A2B76: mov     edx, [eax+4]
 0x6A2B79: mov     ecx, ebp
 0x6A2B7B: call    edx

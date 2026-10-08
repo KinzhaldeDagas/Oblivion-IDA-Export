@@ -1,4 +1,4 @@
-0x78FEB0: sub     esp, 64h
+0x78FEB0: sub     esp, 64h; CBranch::BuildCrossSection consumes stock branch vertex position (+0x0C), radius (+0x18), and transform rows (+0x28..+0x3C) plus explicit fixed cross-section segment count.
 0x78FEB3: fldz
 0x78FEB5: mov     eax, ds:0B429B8h
 0x78FEBA: test    eax, eax
@@ -40,7 +40,7 @@
 0x78FF22: test    eax, eax
 0x78FF24: fst     [esp+68h+var_8]
 0x78FF28: fst     [esp+68h+var_C]
-0x78FF2C: fstp    [esp+68h+var_10]
+0x78FF2C: fstp    [esp+68h+rgba]
 0x78FF30: fstp    [esp+68h+var_4]
 0x78FF34: jl      loc_7902E5
 0x78FF3A: fld     st
@@ -58,9 +58,9 @@
 0x78FF65: fld     dword ptr ds:0B2B714h
 0x78FF6B: mov     eax, [esp+74h+arg_14]
 0x78FF72: fld     [esp+74h+var_64]
-0x78FF76: push    0FFFFFFFFh; float
+0x78FF76: push    0FFFFFFFFh; mapIndex
 0x78FF78: fld     st
-0x78FF7A: mov     ecx, ebp
+0x78FF7A: mov     ecx, ebp; this
 0x78FF7C: fmulp   st(2), st
 0x78FF7E: fxch    st(1)
 0x78FF80: fstp    [esp+78h+arg_C]
@@ -69,13 +69,13 @@
 0x78FF90: fld     dword ptr [eax+8]
 0x78FF93: fmulp   st(1), st
 0x78FF95: fadd    [esp+78h+arg_8]
-0x78FF9C: fstp    [esp+78h+var_5C]
+0x78FF9C: fstp    [esp+78h+diffuseST]
 0x78FFA0: fld     dword ptr [eax+4]
-0x78FFA3: lea     eax, [esp+78h+var_5C]
+0x78FFA3: lea     eax, [esp+78h+diffuseST]
 0x78FFA7: fmul    [esp+78h+var_54]
-0x78FFAB: push    eax; int
+0x78FFAB: push    eax; diffuseST
 0x78FFAC: fstp    [esp+7Ch+var_58]
-0x78FFB0: call    sub_796320
+0x78FFB0: call    OB_CIndexedGeometry_AddVertexTexCoord0_010201A0; Legacy TexCoord0 writer: stores diffuse S/T, optionally retains original CAD S/T plus map index, and applies the global T-flip only to the exported diffuse layer.
 0x78FFB5: fld     [esp+74h+arg_C]
 0x78FFBC: call    __CIcos
 0x78FFC1: fstp    [esp+74h+arg_8]
@@ -129,7 +129,7 @@
 0x7900A4: fmul    dword ptr [esi+28h]
 0x7900A7: faddp   st(3), st
 0x7900A9: fxch    st(2)
-0x7900AB: fstp    [esp+74h+var_40]
+0x7900AB: fstp    [esp+74h+tangent]
 0x7900AF: fld     dword ptr [esi+2Ch]
 0x7900B2: fmul    st, st(2)
 0x7900B4: fld     st(1)
@@ -137,20 +137,20 @@
 0x7900B9: faddp   st(1), st
 0x7900BB: fstp    [esp+74h+var_3C]
 0x7900BF: fld     dword ptr [esi+30h]
-0x7900C2: lea     ecx, [esp+74h+var_40]
+0x7900C2: lea     ecx, [esp+74h+tangent]
 0x7900C6: fmulp   st(2), st
-0x7900C8: push    ecx
-0x7900C9: mov     ecx, ebp
+0x7900C8: push    ecx; tangent
+0x7900C9: mov     ecx, ebp; this
 0x7900CB: fmul    dword ptr [esi+3Ch]
 0x7900CE: faddp   st(1), st
 0x7900D0: fstp    [esp+78h+var_38]
-0x7900D4: call    sub_796590
+0x7900D4: call    OB_CIndexedGeometry_AddVertexTangent_010201A0; Oblivion CIndexedGeometry::AddVertexTangent. Appends one xyz tangent to the indexed vertex stream.
 0x7900D9: fld     [esp+74h+var_3C]
-0x7900DD: lea     edx, [esp+74h+var_1C]
+0x7900DD: lea     edx, [esp+74h+binormal]
 0x7900E1: fld     st
-0x7900E3: push    edx
+0x7900E3: push    edx; binormal
 0x7900E4: fld     [esp+78h+var_44]
-0x7900E8: mov     ecx, ebp
+0x7900E8: mov     ecx, ebp; this
 0x7900EA: fld     st
 0x7900EC: fmulp   st(2), st
 0x7900EE: fld     [esp+78h+var_38]
@@ -160,11 +160,11 @@
 0x7900FA: fmulp   st(2), st
 0x7900FC: fxch    st(4)
 0x7900FE: fsubrp  st(1), st
-0x790100: fstp    [esp+78h+var_1C]
+0x790100: fstp    [esp+78h+binormal]
 0x790104: fld     [esp+78h+var_4C]
 0x790108: fld     st
 0x79010A: fmulp   st(2), st
-0x79010C: fld     [esp+78h+var_40]
+0x79010C: fld     [esp+78h+tangent]
 0x790110: fld     st
 0x790112: fmulp   st(4), st
 0x790114: fxch    st(2)
@@ -175,7 +175,7 @@
 0x790120: fmulp   st(2), st
 0x790122: fsubrp  st(1), st
 0x790124: fstp    [esp+78h+var_14]
-0x790128: call    sub_7965E0
+0x790128: call    OB_CIndexedGeometry_AddVertexBinormal_010201A0; Oblivion CIndexedGeometry::AddVertexBinormal. Appends one xyz binormal to the indexed vertex stream.
 0x79012D: fldz
 0x79012F: xor     ebx, ebx
 0x790131: mov     [esp+74h+arg_8], ebx
@@ -213,8 +213,8 @@
 0x790194: sub     esp, 8
 0x790197: fstp    [esp+7Ch+var_78]; float
 0x79019B: fld     [esp+7Ch+arg_C]
-0x7901A2: fstp    [esp+7Ch+var_7C]; float
-0x7901A5: call    sub_78F2C0
+0x7901A2: fstp    [esp+7Ch+windWeight]; float
+0x7901A5: call    OB_CBranchFlare_Distance_010201A0; Computes flare angular/progress falloff for a 0x18-byte branch flare entry.
 0x7901AA: fadd    [esp+74h+arg_24]
 0x7901B1: add     ebx, 1
 0x7901B4: add     [esp+74h+arg_8], 18h
@@ -229,7 +229,7 @@
 0x7901E0: fld     dword ptr [esi+0Ch]
 0x7901E3: faddp   st(2), st
 0x7901E5: fxch    st(1)
-0x7901E7: fstp    [esp+74h+var_34]
+0x7901E7: fstp    [esp+74h+coord]
 0x7901EB: fld     dword ptr [esi+18h]
 0x7901EE: fld     [esp+74h+var_48]
 0x7901F2: fld     st
@@ -263,7 +263,7 @@
 0x79023B: fstp    [esp+74h+var_28]
 0x79023F: mov     eax, [esp+74h+var_28]
 0x790243: fld     dword ptr [esi+18h]
-0x790246: mov     [esp+74h+var_34], eax
+0x790246: mov     [esp+74h+coord], eax
 0x79024A: fmulp   st(2), st
 0x79024C: fld     st(2)
 0x79024E: fmulp   st(2), st
@@ -284,23 +284,23 @@
 0x79027B: fstp    st
 0x79027D: fstp    st
 0x79027F: fstp    st
-0x790281: lea     eax, [esp+74h+var_34]
-0x790285: push    eax
-0x790286: mov     ecx, ebp
-0x790288: call    sub_796260
-0x79028D: lea     ecx, [esp+74h+var_10]
-0x790291: push    ecx
-0x790292: mov     ecx, ebp
-0x790294: call    sub_796230
+0x790281: lea     eax, [esp+74h+coord]
+0x790285: push    eax; coord
+0x790286: mov     ecx, ebp; this
+0x790288: call    OB_CIndexedGeometry_AddVertexCoord_010201A0; Oblivion CIndexedGeometry::AddVertexCoord. Appends xyz; when CPU wind is active it also preserves xyz in originalVertexCoords for later deformation.
+0x79028D: lea     ecx, [esp+74h+rgba]
+0x790291: push    ecx; rgba
+0x790292: mov     ecx, ebp; this
+0x790294: call    OB_CIndexedGeometry_AddVertexColor_010201A0; Oblivion CIndexedGeometry::AddVertexColor. Packs four float channels to the engine's uint color format and appends one packed color.
 0x790299: cmp     byte ptr [ebp+8], 0
 0x79029D: jz      short loc_7902B9
-0x79029F: mov     edx, [esp+74h+arg_1C]
+0x79029F: mov     edx, dword ptr [esp+74h+windMatrixIndex]
 0x7902A6: fld     [esp+74h+arg_18]
-0x7902AD: push    edx
+0x7902AD: push    edx; windMatrixIndex
 0x7902AE: push    ecx
-0x7902AF: mov     ecx, ebp
-0x7902B1: fstp    [esp+7Ch+var_7C]
-0x7902B4: call    sub_796540
+0x7902AF: mov     ecx, ebp; this
+0x7902B1: fstp    [esp+7Ch+windWeight]; windWeight
+0x7902B4: call    OB_CIndexedGeometry_AddVertexWind_010201A0; Oblivion legacy CIndexedGeometry::AddVertexWind. Stores 1-weight and maps the input index into the CWindEngine local matrix window. Only one weight/index stream exists here; 4.1 later split this into Wind1/Wind2.
 0x7902B9: fld     [esp+74h+var_60]
 0x7902BD: mov     eax, 1
 0x7902C2: fadd    [esp+74h+var_64]

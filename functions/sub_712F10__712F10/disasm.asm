@@ -89,3 +89,12 @@
 0x71301E: pop     ebx
 0x71301F: add     esp, 18h
 0x713022: retn
+0x9C9BD0: lea     ecx, [ebp-14h]; slot
+0x9C9BD3: jmp     NiPointerSlot_Release
+0x9C9BD8: mov     edx, [esp+arg_4]
+0x9C9BDC: lea     eax, [edx-1Ch]
+0x9C9BDF: mov     ecx, [edx-20h]
+0x9C9BE2: xor     ecx, eax
+0x9C9BE4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C9BE9: mov     eax, offset stru_AF23E8
+0x9C9BEE: jmp     ___CxxFrameHandler3

@@ -22,7 +22,6 @@
 0x9202E0: lea     eax, [esi+40h]
 0x9202E3: mov     [esp+0B0h+var_98], eax
 0x9202E7: jmp     short loc_9202F0
-0x9202E9: align 10h
 0x9202F0: movsx   eax, byte ptr [ecx]
 0x9202F3: cmp     eax, 10h; switch 17 cases
 0x9202F6: ja      def_9202FC; jumptable 009202FC default case
@@ -981,7 +980,6 @@
 0x920FEC: jnz     loc_9202E0
 0x920FF2: jmp     loc_9202D0; jumptable 009202FC case 1
 0x920FF7: jmp     short loc_921000; jumptable 009202FC case 9
-0x920FF9: align 10h
 0x921000: movaps  xmm0, xmmword ptr [esi+10h]; jumptable 009202FC case 9
 0x921004: fld     dword ptr [esi+1Ch]
 0x921007: movaps  xmm1, xmmword ptr [ebx+20h]
@@ -1144,7 +1142,6 @@
 0x92120B: jz      loc_9210E2; jumptable 009202FC case 10
 0x921211: mov     [esp+0B0h+var_94], edx
 0x921215: jmp     loc_9202DC
-0x92121A: align 10h
 0x921220: movaps  xmm0, xmmword ptr [esi+10h]; jumptable 009202FC case 4
 0x921224: fld     dword ptr [ecx+0Ch]
 0x921227: fadd    dword ptr [esi+1Ch]
@@ -1229,7 +1226,6 @@
 0x921320: jz      loc_921220; jumptable 009202FC case 4
 0x921326: mov     [esp+0B0h+var_94], edx
 0x92132A: jmp     loc_9202DC
-0x92132F: align 10h
 0x921330: movaps  xmm2, xmmword ptr [esi+10h]; jumptable 009202FC case 12
 0x921334: fld     dword ptr [esi+1Ch]
 0x921337: movaps  xmm0, xmmword ptr [ebx+20h]
@@ -1283,7 +1279,6 @@
 0x9213E2: mov     [esp+0B0h+var_94], edx
 0x9213E6: jmp     loc_9202DC
 0x9213EB: jmp     short loc_9213F0; jumptable 009202FC case 13
-0x9213ED: align 10h
 0x9213F0: movaps  xmm0, xmmword ptr [ebx+10h]; jumptable 009202FC case 13
 0x9213F4: fld     dword ptr [esi+0Ch]
 0x9213F7: movaps  xmm1, xmmword ptr [edi+10h]
@@ -1444,7 +1439,6 @@
 0x92160E: jz      loc_9214F2; jumptable 009202FC case 6
 0x921614: mov     [esp+0B0h+var_94], edx
 0x921618: jmp     loc_9202DC
-0x92161D: align 10h
 0x921620: movaps  xmm0, xmmword ptr [ebx+10h]; jumptable 009202FC case 11
 0x921624: movaps  xmm1, xmmword ptr [edi+10h]
 0x921628: movaps  xmm2, xmmword ptr [ebx+20h]
@@ -1581,7 +1575,6 @@
 0x9217F4: mov     edx, [esp+0B0h+var_94]
 0x9217F8: mov     ecx, eax
 0x9217FA: jmp     loc_9202E0
-0x9217FF: align 10h
 0x921800: movaps  xmm1, xmmword ptr [ebx+10h]; jumptable 009202FC case 5
 0x921804: fld     dword ptr [ecx+0Ch]
 0x921807: movaps  xmm0, xmmword ptr [esi]

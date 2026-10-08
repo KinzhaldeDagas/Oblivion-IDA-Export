@@ -54,9 +54,9 @@
 0x65A4F4: fstp    [esp+4+arg_0]
 0x65A4F8: fld     [esp+4+arg_0]
 0x65A4FC: push    ecx
-0x65A4FD: mov     ecx, esi
-0x65A4FF: fstp    [esp+8+var_8]; float
-0x65A502: call    sub_4D8A10
+0x65A4FD: mov     ecx, esi; this
+0x65A4FF: fstp    [esp+8+radians]; radians
+0x65A502: call    TESObjectREFR_SetRotationZ; TES4 authoritative: write reference rotation Z at TESObjectREFR+0x28, then notify the reference through virtual slot +0x40 with change mask 4.
 0x65A507: pop     esi
 0x65A508: retn    4
 0x65A50B: fcom    st(1)
@@ -67,15 +67,15 @@
 0x65A519: fstp    [esp+4+arg_0]
 0x65A51D: fld     [esp+4+arg_0]
 0x65A521: push    ecx
-0x65A522: mov     ecx, esi
-0x65A524: fstp    [esp+8+var_8]; float
-0x65A527: call    sub_4D8A10
+0x65A522: mov     ecx, esi; this
+0x65A524: fstp    [esp+8+radians]; radians
+0x65A527: call    TESObjectREFR_SetRotationZ; TES4 authoritative: write reference rotation Z at TESObjectREFR+0x28, then notify the reference through virtual slot +0x40 with change mask 4.
 0x65A52C: pop     esi
 0x65A52D: retn    4
 0x65A530: push    ecx
 0x65A531: fstp    st
-0x65A533: mov     ecx, esi
-0x65A535: fstp    [esp+8+var_8]; float
-0x65A538: call    sub_4D8A10
+0x65A533: mov     ecx, esi; this
+0x65A535: fstp    [esp+8+radians]; radians
+0x65A538: call    TESObjectREFR_SetRotationZ; TES4 authoritative: write reference rotation Z at TESObjectREFR+0x28, then notify the reference through virtual slot +0x40 with change mask 4.
 0x65A53D: pop     esi
 0x65A53E: retn    4

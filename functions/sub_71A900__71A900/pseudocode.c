@@ -1,4 +1,4 @@
-_DWORD *sub_71A900()
+NiRTTI *sub_71A900()
 {
-  return dword_B3FD1C;
+  return &stru_B3FD1C; /*0x71a905*/
 }

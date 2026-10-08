@@ -1,18 +1,31 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
   "callers_count": 2,
+  "chunks": [
+    [
+      "0x430050",
+      "0x430066"
+    ]
+  ],
+  "chunks_sha256": "b1c074f7d076e9a89ec56b3a0e17f60a1d6f7fb0f39fe093988a53b50a193b19",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "MEF SAVE AUDIT 2026-10-08: SR-1 callback dispatch: BSFile read callback forwards first three cdecl arguments to virtual+38, resolving native BSFile vtableA3636C slot to4302B0. Generic save wrapper supplies two extra component arguments, ignored by this body. Read returns actual bytes; no tail initialization here.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "BSFile_ReadFunc",
   "end_ea": "0x430066",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "BSFile_ReadFunc",
   "segment": ".text",
   "sha256": "b1c074f7d076e9a89ec56b3a0e17f60a1d6f7fb0f39fe093988a53b50a193b19",
   "size": 22,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x430050",
+  "total_chunk_size": 22,
   "type": "int __cdecl(int, int, int)",
   "xrefs_from_count": 8,
   "xrefs_to_count": 2

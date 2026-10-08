@@ -1,7 +1,7 @@
 0x9F2430: push    offset aUnequipped_; "unequipped."
 0x9F2435: push    offset aSquickkeyunsel; "sQuickKeyUnSelectedString"
-0x9F243A: mov     ecx, offset dword_B38B98
-0x9F243F: call    GameSetting_ConstrAndReg
+0x9F243A: mov     ecx, offset stru_B38B98; self
+0x9F243F: call    GameSetting_ConstrAndReg; Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.
 0x9F2444: push    offset sub_A21E50; void (__cdecl *)()
 0x9F2449: call    _atexit
 0x9F244E: pop     ecx

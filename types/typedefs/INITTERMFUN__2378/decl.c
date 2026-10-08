@@ -1,1 +1,1 @@
-_INITTERMFUN
+typedef void (*_INITTERMFUN)(void);

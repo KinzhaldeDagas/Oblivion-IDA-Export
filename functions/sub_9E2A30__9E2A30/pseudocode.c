@@ -1,5 +1,5 @@
 int sub_9E2A30()
 {
-  GameSetting_ConstrAndReg(&iSoulLevelValueGrand, (int)"iSoulLevelValueGrand", 0xBB8);
-  return atexit(sub_A1B7D0);
+  GameSetting_ConstrAndReg(&MEMORY[0xB35B84], "iSoulLevelValueGrand", (const char *)0xBB8); /*0x9e2a3f*/
+  return atexit(sub_A1B7D0); /*0x9e2a4f*/
 }

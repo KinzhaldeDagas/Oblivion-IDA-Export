@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x543A00",
-    "line": "sub     esp, 18h",
+    "line": "sub     esp, 18h; Throttled Oblivion sky reflection-cube refresh, called only from ShadowPass. For interiors it temporarily forces sky mode 2, refreshes colors/fog, updates atmosphere/clouds, hides moons, substitutes the sky vector, renders the sky root through ShadowSceneNode mode 3, then restores every altered state.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x543A2E",
-    "line": "fld     [esp+20h+arg_0]",
+    "line": "fld     [esp+20h+deltaTime]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -205,25 +205,25 @@
   },
   {
     "ea": "0x543A78",
-    "line": "mov     dword ptr [esi+0DCh], 2",
+    "line": "mov     dword ptr [esi+0DCh], 2; Exterior fog decode boundary: reflection/interior-style sky path temporarily forces mode 2 and calls 0x541DD0; not the normal exterior world update path.",
     "mnemonic": "mov",
     "size": 10
   },
   {
     "ea": "0x543A82",
-    "line": "call    sub_5418F0",
+    "line": "call    Sky__UpdateColors; Oblivion Sky color synthesis. Interior mode reads TESObjectCELL lighting colors; exterior modes blend current/next TESWeather colors, update Sky color vectors, and publish the active fog color. Fallout was consulted afterward and corroborates the conventional Sky::UpdateColors label.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x543A87",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x543A89",
-    "line": "call    sub_541DD0",
+    "line": "call    Sky__UpdateFog; Exterior fog decode boundary: temporary/reflection path calls 0x541DD0 after forcing mode 2; distinguish from normal 0x542F20 exterior update.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x543A97",
-    "line": "fld     [esp+24h+arg_0]",
+    "line": "fld     [esp+24h+deltaTime]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x543AAE",
-    "line": "fld     [esp+24h+arg_0]",
+    "line": "fld     [esp+24h+deltaTime]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -529,31 +529,31 @@
   },
   {
     "ea": "0x543B37",
-    "line": "push    edx",
+    "line": "push    edx; releasePreviousTarget",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x543B38",
-    "line": "push    ecx",
+    "line": "push    ecx; unused",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x543B39",
-    "line": "push    edi",
+    "line": "push    edi; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x543B3A",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x543B3C",
-    "line": "call    sub_7C6310",
+    "line": "call    ShadowSceneNode_RenderMode3CubeFaceForSource; Oblivion mode-3 cube-face path: own target type 0x18, position the cube camera at the source, render one face or all faces, and preserve the source cull bit.",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,13 +631,13 @@
   },
   {
     "ea": "0x543B69",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x543B6B",
-    "line": "fstp    [esp+28h+var_28]; float",
+    "line": "fstp    [esp+28h+var_28]; deltaTime",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x543B74",
-    "line": "call    sub_542F20",
+    "line": "call    Sky__Update; Oblivion's normal Sky frame update: determines underwater state and sky visibility, advances weather/time, calls UpdateColors and UpdateFog, updates wind/effects and every active sky child, publishes the sky vector, and clears transient flags.",
     "mnemonic": "call",
     "size": 5
   },

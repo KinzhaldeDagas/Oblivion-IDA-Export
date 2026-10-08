@@ -2,7 +2,7 @@
 0x85BE51: mov     esi, [esp+4+arg_0]
 0x85BE55: push    edi
 0x85BE56: push    esi
-0x85BE57: call    sub_7E28E0
+0x85BE57: call    sub_7E28E0; Shader/property diagnostic dumper. Prints pass names via BSShaderProperty_GetRenderPassName; BSSM_FRONDS from this path is diagnostic text only.
 0x85BE5C: mov     eax, ds:0B47848h
 0x85BE61: push    eax; ArgList
 0x85BE62: call    TESOutput_PrintString

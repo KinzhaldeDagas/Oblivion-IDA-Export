@@ -6,7 +6,7 @@
 0x4027FA: mov     edi, ecx
 0x4027FC: jz      short loc_402828
 0x4027FE: mov     eax, [edi-4]
-0x402801: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x402801: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x402806: lea     esi, [edi-4]
 0x402809: push    eax; int
 0x40280A: push    4; unsigned int
@@ -15,7 +15,7 @@
 0x402812: test    bl, 1
 0x402815: jz      short loc_402820
 0x402817: push    esi
-0x402818: call    FormHeapFree
+0x402818: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x40281D: add     esp, 4
 0x402820: pop     edi
 0x402821: mov     eax, esi
@@ -40,7 +40,7 @@
 0x40284A: test    bl, 1
 0x40284D: jz      short loc_402858
 0x40284F: push    edi
-0x402850: call    FormHeapFree
+0x402850: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x402855: add     esp, 4
 0x402858: mov     eax, edi
 0x40285A: pop     edi

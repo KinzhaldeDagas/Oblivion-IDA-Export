@@ -1,7 +1,7 @@
 0x4D4970: push    ebp
 0x4D4971: mov     ebp, ecx
 0x4D4973: push    esi
-0x4D4974: mov     dword ptr ds:0B35C04h, 0
+0x4D4974: mov     dword ptr ds:0B35C04h, 0; BloodOnDeath decode 2026-05-30: resets global decal-per-frame counter unk_B35C04 at the start of cell/child-cell geometry update. Trail bursts can avoid this cap by spreading projections across update ticks.
 0x4D497E: test    byte ptr [ebp+24h], 1
 0x4D4982: push    edi
 0x4D4983: jz      short loc_4D49A3

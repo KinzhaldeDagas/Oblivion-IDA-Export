@@ -11,7 +11,7 @@
 0x4A1EEC: mov     large fs:0, eax
 0x4A1EF2: mov     esi, ecx
 0x4A1EF4: mov     [esp+18h+var_10], 0
-0x4A1EFC: push    offset CriticalSection; lpCriticalSection
+0x4A1EFC: push    0B35380h; lpCriticalSection
 0x4A1F01: mov     [esp+1Ch+var_4], 0
 0x4A1F09: call    dword ptr ds:0A2806Ch
 0x4A1F0F: call    dword ptr ds:0A2808Ch
@@ -26,7 +26,7 @@
 0x4A1F33: sub     dword ptr ds:0B353FCh, 1
 0x4A1F3A: jnz     short loc_4A1F46
 0x4A1F3C: mov     dword ptr ds:0B353F8h, 0
-0x4A1F46: push    offset CriticalSection; lpCriticalSection
+0x4A1F46: push    0B35380h; lpCriticalSection
 0x4A1F4B: call    dword ptr ds:0A28074h
 0x4A1F51: mov     esi, [esp+18h+var_10]
 0x4A1F55: test    esi, esi
@@ -49,3 +49,12 @@
 0x4A1F87: pop     esi
 0x4A1F88: add     esp, 10h
 0x4A1F8B: retn    8
+0x9B22C0: lea     ecx, [ebp-10h]; slot
+0x9B22C3: jmp     NiPointerSlot_Release
+0x9B22C8: mov     edx, [esp+arg_4]
+0x9B22CC: lea     eax, [edx-8]
+0x9B22CF: mov     ecx, [edx-0Ch]
+0x9B22D2: xor     ecx, eax
+0x9B22D4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B22D9: mov     eax, offset stru_ADE2C8
+0x9B22DE: jmp     ___CxxFrameHandler3

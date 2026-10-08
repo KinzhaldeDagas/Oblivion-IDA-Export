@@ -1,4 +1,4 @@
-0x49E750: sub     esp, 0Ch
+0x49E750: sub     esp, 0Ch; Pass205: Produces single generated displacement quad under global/root 0x00B35230 for water displacement setup.
 0x49E753: fld     [esp+0Ch+arg_4]
 0x49E757: push    esi
 0x49E758: push    1; float
@@ -42,11 +42,11 @@
 0x49E7CF: call    eax
 0x49E7D1: mov     ecx, esi
 0x49E7D3: call    NiNode_UpdateDynamicEffectState
-0x49E7D8: push    1
-0x49E7DA: push    0
-0x49E7DC: push    11h
-0x49E7DE: push    esi
-0x49E7DF: call    sub_7B8940
+0x49E7D8: push    1; arg3
+0x49E7DA: push    0; normalMapBypass
+0x49E7DC: push    11h; shaderId
+0x49E7DE: push    esi; root
+0x49E7DF: call    BSShaderManager_AssignShadersRecursive; Generic recursive shader assignment wrapper around 0x7B7FC0. In decoded TES4 tree code it is used for branch shader id 4 and simple/default id 1; no stock call with frond shader id 5 was found in this pass.
 0x49E7E4: add     esp, 10h
 0x49E7E7: mov     eax, esi
 0x49E7E9: pop     esi

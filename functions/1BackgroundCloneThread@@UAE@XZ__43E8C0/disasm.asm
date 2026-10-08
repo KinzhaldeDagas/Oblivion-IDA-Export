@@ -25,9 +25,9 @@
 0x43E910: mov     [esp+1Ch+var_10], eax
 0x43E914: mov     ecx, [esp+1Ch+var_10]
 0x43E918: push    ecx
-0x43E919: call    FormHeapFree
+0x43E919: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x43E91E: push    esi
-0x43E91F: call    FormHeapFree
+0x43E91F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x43E924: add     esp, 8
 0x43E927: mov     ecx, edi
 0x43E929: mov     [esp+1Ch+var_4], 0FFFFFFFFh
@@ -39,3 +39,12 @@
 0x43E943: pop     esi
 0x43E944: add     esp, 10h
 0x43E947: retn
+0x9ACEB0: mov     ecx, [ebp-10h]
+0x9ACEB3: jmp     ??1?$BSTaskManagerThread@_J@@UAE@XZ; BSTaskManagerThread<__int64>::~BSTaskManagerThread<__int64>(void)
+0x9ACEB8: mov     edx, [esp+arg_4]
+0x9ACEBC: lea     eax, [edx-0Ch]
+0x9ACEBF: mov     ecx, [edx-10h]
+0x9ACEC2: xor     ecx, eax
+0x9ACEC4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9ACEC9: mov     eax, offset stru_AD9B1C
+0x9ACECE: jmp     ___CxxFrameHandler3

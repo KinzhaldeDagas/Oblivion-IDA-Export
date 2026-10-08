@@ -1,1 +1,1 @@
-_off_t
+typedef int _off_t;

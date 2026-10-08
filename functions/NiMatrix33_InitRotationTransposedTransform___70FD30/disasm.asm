@@ -1,7 +1,7 @@
-0x70FD30: sub     esp, 8
-0x70FD33: fld     [esp+8+arg_0]
+0x70FD30: sub     esp, 8; Verified matrix coefficients make this an X-axis rotation in the engine's transposed convention: X stays fixed; only the Y/Z submatrix contains sin/cos.
+0x70FD33: fld     [esp+8+angleX]
 0x70FD37: fsincos
-0x70FD39: fstp    [esp+8+var_8]
+0x70FD39: fstp    [esp+8+var_8]; Verified matrix helper consumes angleX directly in sin/cos with no degree conversion; its units are radians.
 0x70FD3C: fstp    [esp+8+var_4]
 0x70FD40: fld1
 0x70FD42: fstp    dword ptr [ecx]

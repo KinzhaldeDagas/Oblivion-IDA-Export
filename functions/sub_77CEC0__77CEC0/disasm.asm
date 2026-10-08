@@ -8,7 +8,7 @@
 0x77CED0: mov     ebp, ds:0A2807Ch
 0x77CED6: push    esi
 0x77CED7: mov     ecx, eax
-0x77CED9: call    sub_452A60
+0x77CED9: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x77CEDE: mov     ecx, [edi+20h]
 0x77CEE1: push    eax
 0x77CEE2: call    NiTMap_RemoveAt

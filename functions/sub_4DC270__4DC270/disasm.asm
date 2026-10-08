@@ -1,4 +1,4 @@
-0x4DC270: mov     ecx, ds:0B333C4h
+0x4DC270: mov     ecx, ds:0B333C4h; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.
 0x4DC276: push    ebx
 0x4DC277: push    ebp
 0x4DC278: push    esi
@@ -10,8 +10,8 @@
 0x4DC284: mov     ebx, edi
 0x4DC286: mov     [esp+10h+arg_0], esi
 0x4DC28A: jz      short loc_4DC297
-0x4DC28C: push    1
-0x4DC28E: call    PlayerCharacter_GetPlayerNode
+0x4DC28C: push    1; firstPerson
+0x4DC28E: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x4DC293: mov     [esp+10h+arg_0], eax
 0x4DC297: test    edi, edi
 0x4DC299: jz      loc_4DC34D
@@ -35,7 +35,7 @@
 0x4DC2C9: test    eax, eax
 0x4DC2CB: jz      short loc_4DC2DE
 0x4DC2CD: lea     ecx, [ecx+0]
-0x4DC2D0: cmp     eax, offset dword_B35ACC
+0x4DC2D0: cmp     eax, offset stru_B35ACC
 0x4DC2D5: jz      short loc_4DC2F0
 0x4DC2D7: mov     eax, [eax+4]
 0x4DC2DA: test    eax, eax
@@ -85,7 +85,7 @@
 0x4DC339: jnz     short loc_4DC34D
 0x4DC33B: mov     eax, [ebx+1Ch]
 0x4DC33E: push    eax
-0x4DC33F: call    sub_4DC270
+0x4DC33F: call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.
 0x4DC344: add     esp, 4
 0x4DC347: test    eax, eax
 0x4DC349: jz      short loc_4DC34D

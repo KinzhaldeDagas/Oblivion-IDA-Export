@@ -1,9 +1,9 @@
 int __usercall Actor_AttackHandling_::RunWeaponOnHitScript_@<eax>(
         int a1@<ebx>,
         int a2@<esi>,
-        int a3,
-        int a4,
-        int a5,
+        int a3@<edi>,
+        double a4@<st2>,
+        double a5@<st1>,
         int a6,
         int a7,
         int a8,
@@ -11,9 +11,46 @@ int __usercall Actor_AttackHandling_::RunWeaponOnHitScript_@<eax>(
         int a10,
         int a11,
         int a12,
-        int a13)
+        int a13,
+        int a14,
+        int a15,
+        int a16,
+        int a17,
+        int a18,
+        int a19,
+        int a20,
+        int a21,
+        int a22,
+        int a23,
+        int a24,
+        float a25)
 {
-  Script_AddEventToExtraScript(a13, a2 + 0x44, 0x100);
-  Script_AddEventToExtraScript(*(_DWORD *)(a1 + 8), a2 + 0x44, 0x100);
-  return Actor_AttackHandling_::RunOnHitByScript_();
+  Script_AddEventToExtraScript(a16, a2 + 0x44, 0x100);// RealArenaTraining decode pass: actor melee weapon OnHitWith script event, target extra is ESI+0x44; flows into actor OnHit at 0x5FF630 and does not prove static prop handling. /*0x5ff608*/
+  Script_AddEventToExtraScript(*(_DWORD *)(a1 + 8), a2 + 0x44, 0x100);// RealArenaTraining decode pass: second actor melee weapon OnHitWith script event for equipped object/source; still actor-target path before 0x5FF630. /*0x5ff61a*/
+  return Actor_AttackHandling_::RunOnHitByScript_(
+           a3,
+           a2,
+           a14,
+           a4,
+           a5,
+           a6,
+           a7,
+           a8,
+           a9,
+           a10,
+           a11,
+           a12,
+           a13,
+           a14,
+           a15,
+           a16,
+           a17,
+           a18,
+           a19,
+           a20,
+           a21,
+           a22,
+           a23,
+           a24,
+           a25);
 }

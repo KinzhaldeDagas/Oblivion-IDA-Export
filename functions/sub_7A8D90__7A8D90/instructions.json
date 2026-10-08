@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A8D90",
-    "line": "push    ecx",
+    "line": "push    ecx; OBLIVION AUTHORITY (2026-08-30): Inserts one SLodEntry at a debug vector iterator and returns the relocated iterator.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x7A8D93",
-    "line": "mov     ebp, [esp+0Ch+arg_4]",
+    "line": "mov     ebp, [esp+0Ch+position.owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x7A8DC8",
-    "line": "mov     ebx, [esp+14h+arg_8]",
+    "line": "mov     ebx, [esp+14h+position.current]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -169,49 +169,49 @@
   },
   {
     "ea": "0x7A8DD1",
-    "line": "mov     edx, [esp+14h+arg_C]",
+    "line": "mov     edx, [esp+14h+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A8DD5",
-    "line": "mov     eax, [esp+14h+arg_8]",
+    "line": "mov     eax, [esp+14h+position.current]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A8DD9",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A8DDA",
-    "line": "push    1",
+    "line": "push    1; count",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7A8DDC",
-    "line": "push    eax",
+    "line": "push    eax; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A8DDD",
-    "line": "push    ebp",
+    "line": "push    ebp; positionOwner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A8DDE",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A8DE0",
-    "line": "call    sub_7A8A40",
+    "line": "call    OB_stVectorLeafLodEntry_InsertFill_010201A0; OBLIVION AUTHORITY (2026-08-30): Core fill-insert for the 0x10-byte vector<CLeafLodEngine::SLodEntry>; handles capacity growth, relocation, and repeated 8-byte pair insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x7A8DF2",
-    "line": "mov     [esp+14h+arg_8], edi",
+    "line": "mov     [esp+14h+position.current], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x7A8E08",
-    "line": "mov     eax, [esp+14h+arg_0]",
+    "line": "mov     eax, [esp+14h+result]",
     "mnemonic": "mov",
     "size": 4
   },

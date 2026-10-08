@@ -1,1 +1,7 @@
-CLOSESTATES
+enum CLOSESTATES : __int32
+{
+CLOSEStateFiller0 = 0x0,
+TTCS_NORMAL = 0x1,
+TTCS_HOT = 0x2,
+TTCS_PRESSED = 0x3,
+};

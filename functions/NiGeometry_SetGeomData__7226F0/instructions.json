@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7226F0",
-    "line": "jmp     sub_722A50",
+    "line": "jmp     NiGeometry_SetModelData; 2026-10-08 verified Oblivion behavior: ECX geometry, raw stack modelData, RET4. Null modelData returns without mutation. Non-null reads collision at+A8, invokes vtable+54 then+50 with no stack arguments, then assigns geometryData+B4 through smart pointer helper. Correspondence to decoded Fallout/Xenon NiGeometry::SetModelData8224D988 is strong by control/call/data flow, but Fallout UpdateWorldData receives an update-data argument whereas Oblivion does not; offsets/ABI are not transplanted. Collision/destructor callbacks forbid treating this as an isolated pointer store. V265 keeps complete-call exclusion and old-pose revocation; only fresh subsequent owner proofs may publish.",
     "mnemonic": "jmp",
     "size": 5
   }

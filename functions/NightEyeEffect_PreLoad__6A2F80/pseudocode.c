@@ -1,9 +1,9 @@
 void __stdcall NightEyeEffect_PreLoad(PlayerCharacter *a1)
 {
-  UInt32 v1; // eax
+  unsigned int resetSelector; // eax
 
-  nullsub_returnvVoid_1arg((int)a1);
-  v1 = SaveLoad_CurrentSavegame->unk030[5];
-  if ( (v1 == 0x1FFFF000 || v1 == 0x7FFFF000) && a1 == TESDataHandler_g_PlayerRef )
-    NightEyeEffect_SetPlayerShader_();
+  nullsub_returnvVoid_1arg((int)a1); /*0x6a2f86*/
+  resetSelector = g_TESSaveLoadGame->resetSelector; /*0x6a2f90*/
+  if ( (resetSelector == 0x1FFFF000 || resetSelector == 0x7FFFF000) && a1 == reference ) /*0x6a2fa7*/
+    NightEyeEffect_SetPlayerShader_(); /*0x6a2fa9*/
 }

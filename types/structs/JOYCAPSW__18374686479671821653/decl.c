@@ -1,1 +1,1 @@
-JOYCAPSW
+typedef tagJOYCAPSW JOYCAPSW;

@@ -57,7 +57,6 @@
 0x4E4AB5: cmp     ax, [esi+8]
 0x4E4AB9: jnb     short loc_4E4AEC
 0x4E4ABB: jmp     short loc_4E4AC0
-0x4E4ABD: align 10h
 0x4E4AC0: mov     edx, [esi+4]
 0x4E4AC3: movzx   ecx, ax
 0x4E4AC6: add     eax, 1
@@ -65,7 +64,7 @@
 0x4E4AD0: cmp     ax, [esi+8]
 0x4E4AD4: jb      short loc_4E4AC0
 0x4E4AD6: push    edi
-0x4E4AD7: call    FormHeapFree
+0x4E4AD7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4E4ADC: add     esp, 4
 0x4E4ADF: pop     edi
 0x4E4AE0: pop     ebx
@@ -73,7 +72,7 @@
 0x4E4AE2: retn    4
 0x4E4AE5: mov     dword ptr [esi+4], 0
 0x4E4AEC: push    edi
-0x4E4AED: call    FormHeapFree
+0x4E4AED: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4E4AF2: add     esp, 4
 0x4E4AF5: pop     edi
 0x4E4AF6: pop     ebx

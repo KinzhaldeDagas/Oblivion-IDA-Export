@@ -1,4 +1,4 @@
-0x72A6B0: sub     esp, 20h
+0x72A6B0: sub     esp, 20h; Merges a source NiSphere into the destination sphere. Preserves a containing destination, copies a containing source, otherwise computes the minimal enclosing center/radius. NiNode_UpdateDownwardPass uses it to aggregate nonempty child world bounds.
 0x72A6B3: push    esi
 0x72A6B4: mov     esi, ecx
 0x72A6B6: fld     dword ptr [esi]

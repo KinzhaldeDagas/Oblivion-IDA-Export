@@ -4,7 +4,7 @@
 0x431F38: test    [esp+4+arg_0], 1
 0x431F3D: jz      short loc_431F48
 0x431F3F: push    esi
-0x431F40: call    FormHeapFree
+0x431F40: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x431F45: add     esp, 4
 0x431F48: mov     eax, esi
 0x431F4A: pop     esi

@@ -1,4 +1,4 @@
-0x4712B0: xor     eax, eax
+0x4712B0: xor     eax, eax; Counts pending KFModel installs represented by the ActorAnimData +0xB4 head and +0xB8 linked continuation. The debug animation-state command prints this as Anims Loading.
 0x4712B2: add     ecx, 0B4h ; '´'
 0x4712B8: cmp     [ecx+4], eax
 0x4712BB: jnz     short loc_4712C1

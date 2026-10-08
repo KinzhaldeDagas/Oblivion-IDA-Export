@@ -1,1 +1,1 @@
-IKsPropertySetVtbl_0
+typedef IKsPropertySetVtbl IKsPropertySetVtbl_0;

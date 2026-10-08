@@ -12,7 +12,7 @@
 0x559F28: mov     ecx, esi
 0x559F2A: call    sub_559CE0
 0x559F2F: push    esi
-0x559F30: call    FormHeapFree
+0x559F30: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x559F35: add     esp, 4
 0x559F38: mov     dword ptr [edi+8], 0
 0x559F3F: pop     edi

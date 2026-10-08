@@ -1,1 +1,1 @@
-PSI_ACCESS
+typedef _SI_ACCESS *PSI_ACCESS;

@@ -99,7 +99,7 @@
 0x633001: mov     eax, [edi+4]
 0x633004: mov     ebp, [eax+4]
 0x633007: push    eax
-0x633008: call    FormHeapFree
+0x633008: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x63300D: add     esp, 4
 0x633010: cmp     ebp, ebx
 0x633012: mov     [edi+4], ebp

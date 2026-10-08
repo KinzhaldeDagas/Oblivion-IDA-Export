@@ -32,7 +32,7 @@
 0x566B9F: test    eax, eax
 0x566BA1: jnz     loc_566C57
 0x566BA7: mov     ecx, ebx; this
-0x566BA9: call    TESObjectCELL_IsInterior
+0x566BA9: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x566BAE: test    al, al
 0x566BB0: jnz     def_566B80; jumptable 00566B80 default case, case 2
 0x566BB6: mov     ecx, edi
@@ -66,7 +66,7 @@
 0x566C0C: mov     ecx, edi
 0x566C0E: call    sub_5697E0
 0x566C13: mov     ecx, eax
-0x566C15: call    sub_4D74D0
+0x566C15: call    TESObjectREFR_HasHorseCreatureBase; 0x4D74D0: Travel-horse target predicate decoded 2026-09-05: reference base pointer+0x1C must be nonnull; GetBaseForm virtual slot+0x170 yields typebyte0x24 CREA; creature byte+0x104 must equal4 (horse). XHRS resolver invokes this at0x426681 after target REFR cast. TESCS peer0x53F310 uses ref+0x28, vslot+0x19C, creature+0x138.
 0x566C1A: test    al, al
 0x566C1C: jz      short loc_566C50
 0x566C1E: mov     ecx, edi

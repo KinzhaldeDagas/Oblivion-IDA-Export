@@ -53,3 +53,23 @@
 0x6D8C22: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x6D8C27: add     esp, 4A0h
 0x6D8C2D: retn
+0x9C7D40: lea     ecx, [ebp-498h]; this
+0x9C7D46: jmp     ??1NiStream@@UAE@XZ; NiStream::~NiStream(void)
+0x9C7D4B: mov     eax, [ebp-4A0h]
+0x9C7D51: and     eax, 1
+0x9C7D54: jz      locret_9C7D6C
+0x9C7D5A: and     dword ptr [ebp-4A0h], 0FFFFFFFEh
+0x9C7D61: mov     ecx, [ebp-49Ch]; slot
+0x9C7D67: jmp     NiPointerSlot_Release
+0x9C7D6C: retn
+0x9C7D6D: mov     edx, [esp+arg_4]
+0x9C7D71: lea     eax, [edx-4A0h]
+0x9C7D77: mov     ecx, [edx-4A4h]
+0x9C7D7D: xor     ecx, eax
+0x9C7D7F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C7D84: add     eax, 0Ch
+0x9C7D87: mov     ecx, [edx-4]
+0x9C7D8A: xor     ecx, eax
+0x9C7D8C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C7D91: mov     eax, offset stru_AF00D4
+0x9C7D96: jmp     ___CxxFrameHandler3

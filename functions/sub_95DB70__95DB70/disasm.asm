@@ -11,7 +11,7 @@
 0x95DB8D: mov     [esp+18h+var_4], ecx
 0x95DB91: lea     ecx, [esp+18h+var_C]
 0x95DB95: mov     [esp+18h+var_8], edx
-0x95DB99: call    sub_43F350
+0x95DB99: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x95DB9E: fdivr   [esp+18h+var_14]
 0x95DBA2: mov     edx, [esp+18h+var_C]
 0x95DBA6: mov     eax, [esp+18h+var_8]

@@ -2,7 +2,7 @@
 0x4D5A91: push    ebp
 0x4D5A92: mov     ebp, ecx
 0x4D5A94: push    ebp; a2
-0x4D5A95: mov     ecx, offset stru_B35C80; this
+0x4D5A95: mov     ecx, offset unk_B35C80; this
 0x4D5A9A: call    sub_496EA0
 0x4D5A9F: lea     ebx, [ebp+48h]
 0x4D5AA2: test    ebx, ebx
@@ -90,13 +90,13 @@
 0x4D5B8B: fstp    [esp+14h+var_14]; int
 0x4D5B8E: push    0; int
 0x4D5B90: mov     ecx, esi; int
-0x4D5B92: call    Actor_Kill
-0x4D5B97: mov     ecx, edi
-0x4D5B99: call    sub_4D7740
+0x4D5B92: call    Actor_Kill; ODismemberment: candidate future death/kill integration point after visual/state pipeline is stable.
+0x4D5B97: mov     ecx, edi; this
+0x4D5B99: call    TESObjectREFR_GetEffectiveDoorLock; Verified: returns this reference's ExtraLockData* payload when present; otherwise, if its ExtraTeleport has a linked door, returns that linked reference's ExtraLockData* payload; null when neither exists. Directly supported by ExtraDataList_GetLock, ExtraDataList_GetTeleport, and TeleportData_GetLinkedDoor.
 0x4D5B9E: test    eax, eax
 0x4D5BA0: jz      short loc_4D5BA9
-0x4D5BA2: mov     ecx, edi
-0x4D5BA4: call    sub_4DBEA0
+0x4D5BA2: mov     ecx, edi; this
+0x4D5BA4: call    TESObjectREFR_ClearLockedFlagOnSelfOrLinkedDoor; Verified inverse lock-state helper: if this reference has an ExtraLock wrapper, clears its locked bit; otherwise follows the linked-door reference and clears that wrapper's locked bit. It then marks the owning reference or linked door modified with mask 0x40.
 0x4D5BA9: call    sub_4D5370
 0x4D5BAE: mov     ebx, [ebx+4]
 0x4D5BB1: test    ebx, ebx
@@ -104,7 +104,7 @@
 0x4D5BB9: pop     edi
 0x4D5BBA: pop     esi
 0x4D5BBB: push    ebp; a2
-0x4D5BBC: mov     ecx, offset stru_B35C80; this
+0x4D5BBC: mov     ecx, offset unk_B35C80; this
 0x4D5BC1: call    sub_496F50
 0x4D5BC6: pop     ebp
 0x4D5BC7: pop     ebx

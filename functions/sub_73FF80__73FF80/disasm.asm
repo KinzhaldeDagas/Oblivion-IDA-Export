@@ -1,4 +1,4 @@
-0x73FF80: push    esi
+0x73FF80: push    esi; Pass223: Clears default NiRendererSpecificProperty global 0x00B401D8.
 0x73FF81: mov     esi, ds:0B401D8h
 0x73FF87: test    esi, esi
 0x73FF89: jz      short loc_73FFB1

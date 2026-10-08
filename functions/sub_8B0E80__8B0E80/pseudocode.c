@@ -6,19 +6,19 @@ int __thiscall sub_8B0E80(char **this, unsigned int a2, int a3)
   unsigned int i; // eax
   char *v8; // ecx
 
-  v4 = (int)*(this + 2);
-  if ( 2 * (int)*(this + 1) > v4 )
-    sub_8B1060(this, 2 * v4 + 2);
-  v5 = (int)*(this + 2);
-  v6 = *this;
-  for ( i = v5 & (0x9E3779B1 * (a2 >> 4)); *(_DWORD *)&(*this)[4 * i]; i = v5 & (i + 1) )
+  v4 = (int)*(this + 2); /*0x8b0e88*/
+  if ( 2 * (int)*(this + 1) > v4 ) /*0x8b0e90*/
+    sub_8B1060(this, 2 * v4 + 2); /*0x8b0e99*/
+  v5 = (int)*(this + 2); /*0x8b0ea2*/
+  v6 = *this; /*0x8b0ea5*/
+  for ( i = v5 & (0x9E3779B1 * (a2 >> 4)); *(_DWORD *)&(*this)[4 * i]; i = v5 & (i + 1) ) /*0x8b0eb4*/
   {
-    if ( *(_DWORD *)&v6[4 * i] == a2 )
-      break;
+    if ( *(_DWORD *)&v6[4 * i] == a2 ) /*0x8b0ec3*/
+      break; /*0x8b0ec3*/
   }
-  *(this + 1) += *(_DWORD *)&v6[4 * i] != a2;
-  *(_DWORD *)&v6[4 * i] = a2;
-  v8 = &(*(this + 2))[i];
-  *(_DWORD *)&(*this)[4 * (_DWORD)v8 + 4] = a3;
-  return a3;
+  *(this + 1) += *(_DWORD *)&v6[4 * i] != a2; /*0x8b0edf*/
+  *(_DWORD *)&v6[4 * i] = a2; /*0x8b0ee2*/
+  v8 = &(*(this + 2))[i]; /*0x8b0eec*/
+  *(_DWORD *)&(*this)[4 * (_DWORD)v8 + 4] = a3; /*0x8b0ef3*/
+  return a3; /*0x8b0eea*/
 }

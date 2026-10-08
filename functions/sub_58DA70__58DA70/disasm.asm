@@ -14,10 +14,10 @@
 0x58DA88: mov     byte ptr [ebp+5], 1
 0x58DA8C: jz      short loc_58DAA1
 0x58DA8E: mov     edi, edi
-0x58DA90: mov     ecx, [edx+8]
+0x58DA90: mov     ecx, [edx+8]; this
 0x58DA93: lea     eax, [edx+8]
 0x58DA96: mov     edx, [edx]
-0x58DA98: call    sub_588B20
+0x58DA98: call    Tile__MarkSubtreeReleasing; Verified: sets Tile byte +5 recursively for unreleased/non-releasing descendants. Value calculation tests owner +5 to suppress evaluation during teardown.
 0x58DA9D: cmp     edx, ebx
 0x58DA9F: jnz     short loc_58DA90
 0x58DAA1: push    1; arg1
@@ -35,10 +35,10 @@
 0x58DAD4: mov     ecx, ebp
 0x58DAD6: mov     byte ptr [ebp+4], 1
 0x58DADA: call    sub_589890
-0x58DADF: push    ebx
-0x58DAE0: push    ebx
-0x58DAE1: mov     ecx, ebp
-0x58DAE3: call    sub_58D1C0
+0x58DADF: push    ebx; sibling
+0x58DAE0: push    ebx; parent
+0x58DAE1: mov     ecx, ebp; this
+0x58DAE3: call    Tile__SetParent; Verified: detaches from old parent list and decrements child-count trait 0xFD0, assigns parent +0x10, increments new parent count, inserts in new parent child list. Optional sibling argument controls placement; null uses AddHead. This is attachment, not a float-value setter.
 0x58DAE8: cmp     [ebp+20h], ebx
 0x58DAEB: jz      short loc_58DB2E
 0x58DAED: lea     esi, [ebp+14h]
@@ -59,10 +59,10 @@
 0x58DB11: add     dword ptr [esi+0Ch], 0FFFFFFFFh
 0x58DB15: cmp     edi, ebx
 0x58DB17: jz      short loc_58DB29
-0x58DB19: mov     ecx, edi; void *
-0x58DB1B: call    sub_589BB0
+0x58DB19: mov     ecx, edi; this
+0x58DB1B: call    Tile__Value__Destroy; Verified: unlinks/frees own action chain and incoming reaction actions, unlinking crosslinks from both chains; frees sentinels/string and clears owner. Source deletion removes references rather than re-resolving selector to replacement Tile. Fallout Value destructor 0x827DBC60 uses a reaction map and nulls reference operands instead.
 0x58DB20: push    edi
-0x58DB21: call    FormHeapFree
+0x58DB21: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x58DB26: add     esp, 4
 0x58DB29: cmp     [ebp+20h], ebx
 0x58DB2C: jnz     short loc_58DAF0
@@ -72,7 +72,7 @@
 0x58DB35: cmp     [eax+1Ch], ebx
 0x58DB38: jz      short loc_58DB8A
 0x58DB3A: push    3
-0x58DB3C: call    nullsub_returnTrue_0arg
+0x58DB3C: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x58DB41: mov     eax, [ebp+24h]
 0x58DB44: mov     ecx, [eax+1Ch]
 0x58DB47: mov     edx, [ecx]
@@ -99,7 +99,7 @@
 0x58DB7C: mov     ecx, esi
 0x58DB7E: call    edx
 0x58DB80: push    2
-0x58DB82: call    nullsub_returnTrue_0arg
+0x58DB82: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x58DB87: add     esp, 4
 0x58DB8A: cmp     [ebp+3Ch], ebx
 0x58DB8D: jz      short loc_58DBCA

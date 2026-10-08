@@ -1,4 +1,4 @@
-0x53B3F0: push    0FFFFFFFFh
+0x53B3F0: push    0FFFFFFFFh; Pass231/241: Atmosphere initializer stores third argument at Atmosphere+0x0C as active fogProperty.
 0x53B3F2: push    offset SEH_53B3F0
 0x53B3F7: mov     eax, large fs:0
 0x53B3FD: push    eax
@@ -21,7 +21,7 @@
 0x53B43B: mov     [esp+4C0h+a2], ecx
 0x53B43F: push    eax
 0x53B440: mov     ecx, edi
-0x53B442: call    sub_543D30
+0x53B442: call    SkyObject__CreateRootNodeAndAttach; Allocates a NiNode, stores it as the sky-object root with refcount ownership, sets flags 0x2 and 0x20, and attaches it to the supplied parent through virtual slot +0x84.
 0x53B447: mov     ecx, [edi+4]
 0x53B44A: push    offset aAtmosphereRoot; "Atmosphere Root"
 0x53B44F: call    NiObjectNET_SetName
@@ -33,10 +33,10 @@
 0x53B467: call    sub_7BD0D0
 0x53B46C: add     esp, 4
 0x53B46F: lea     ebp, [edi+14h]
-0x53B472: push    eax
-0x53B473: mov     ecx, ebp
+0x53B472: push    eax; incoming
+0x53B473: mov     ecx, ebp; this
 0x53B475: mov     [esp+4C4h+var_4], ebx
-0x53B47C: call    sub_55E2A0
+0x53B47C: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
 0x53B481: mov     eax, [esp+4C0h+Src]
 0x53B485: cmp     eax, ebx
 0x53B487: mov     [esp+4C0h+var_4], 0FFFFFFFFh
@@ -113,7 +113,7 @@
 0x53B570: call    eax
 0x53B572: lea     ecx, [esp+4C0h+var_4A0]; this
 0x53B576: call    ??0NiStream@@QAE@XZ; NiStream::NiStream(void)
-0x53B57B: mov     [esp+4C0h+var_4A0], offset ??_7BSStream@@6B@; const BSStream::`vftable'
+0x53B57B: mov     dword ptr [esp+4C0h+var_4A0], offset ??_7BSStream@@6B@; const BSStream::`vftable'
 0x53B583: mov     [esp+4C0h+var_14], ebx
 0x53B58A: mov     [esp+4C0h+var_18], ebx
 0x53B591: mov     [esp+4C0h+var_4], 2
@@ -145,12 +145,12 @@
 0x53B5F5: call    edx
 0x53B5F7: test    eax, eax
 0x53B5F9: jz      short loc_53B605
-0x53B5FB: push    ebx
-0x53B5FC: mov     ecx, esi
-0x53B5FE: call    sub_405790
+0x53B5FB: push    ebx; index
+0x53B5FC: mov     ecx, esi; this
+0x53B5FE: call    NiNode_GetChildAtIndex
 0x53B603: jmp     short loc_53B619
 0x53B605: push    esi
-0x53B606: push    offset dword_B3FCD4
+0x53B606: push    offset stru_B3FCD4
 0x53B60B: call    NiRTTI__IsObjectOfRTTIType
 0x53B610: add     esp, 8
 0x53B613: test    al, al
@@ -161,7 +161,7 @@
 0x53B61D: push    offset aCannotLoadTheA; "Cannot load the atmosphere model."
 0x53B622: call    PrintError
 0x53B627: push    ebp
-0x53B628: call    FormHeapFree
+0x53B628: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x53B62D: add     esp, 8
 0x53B630: lea     ecx, [esp+4C0h+var_4A0]; this
 0x53B634: mov     [esp+4C0h+var_4], 0FFFFFFFFh
@@ -184,7 +184,7 @@
 0x53B672: push    esi
 0x53B673: call    edx
 0x53B675: push    ebp
-0x53B676: call    FormHeapFree
+0x53B676: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x53B67B: add     esp, 4
 0x53B67E: lea     ecx, [esp+4C0h+var_4A0]; this
 0x53B682: mov     [esp+4C0h+var_4], 0FFFFFFFFh
@@ -192,7 +192,7 @@
 0x53B692: mov     eax, [esp+4C0h+a2]
 0x53B696: push    eax; a2
 0x53B697: lea     ecx, [edi+0Ch]; this
-0x53B69A: call    NiSmartPointer_Set??
+0x53B69A: call    NiSmartPointer_Set??; Fog property decode: Atmosphere::Initialize stores active B333E4 BSFogProperty into Atmosphere+0x0C.
 0x53B69F: mov     ecx, dword ptr [esp+4C0h+var_C]
 0x53B6A6: mov     large fs:0, ecx
 0x53B6AD: pop     ecx
@@ -205,3 +205,25 @@
 0x53B6BB: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x53B6C0: add     esp, 4ACh
 0x53B6C6: retn    8
+0x9BA240: lea     ecx, [ebp-4ACh]; slot
+0x9BA246: jmp     NiPointerSlot_Release
+0x9BA24B: mov     eax, [ebp-4ACh]
+0x9BA251: push    eax
+0x9BA252: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BA257: pop     ecx
+0x9BA258: retn
+0x9BA259: lea     ecx, [ebp-4A0h]; this
+0x9BA25F: jmp     ??1BSStream@@UAE@XZ; BSStream::~BSStream(void)
+0x9BA264: lea     ecx, [ebp-4ACh]; void *
+0x9BA26A: jmp     BSStringT_Clear
+0x9BA26F: mov     edx, [esp+arg_4]
+0x9BA273: lea     eax, [edx-4B0h]
+0x9BA279: mov     ecx, [edx-4B4h]
+0x9BA27F: xor     ecx, eax
+0x9BA281: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BA286: add     eax, 10h
+0x9BA289: mov     ecx, [edx-4]
+0x9BA28C: xor     ecx, eax
+0x9BA28E: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BA293: mov     eax, offset stru_AE4474
+0x9BA298: jmp     ___CxxFrameHandler3

@@ -16,7 +16,6 @@
 0x716C16: jz      short loc_716C49
 0x716C18: mov     ecx, [edx+0Ch]
 0x716C1B: jmp     short loc_716C20
-0x716C1D: align 10h
 0x716C20: mov     dl, [eax]
 0x716C22: cmp     dl, [ecx]
 0x716C24: jnz     short loc_716C40

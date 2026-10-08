@@ -17,7 +17,7 @@
 0x5123CA: push    edx; a2
 0x5123CB: push    eax; a1
 0x5123CC: mov     dword ptr [esp+2Ch+var_8], 0
-0x5123D4: call    Script_ExtractArgs
+0x5123D4: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x5123D9: add     esp, 20h
 0x5123DC: test    al, al
 0x5123DE: jnz     short loc_5123E5
@@ -37,7 +37,7 @@
 0x512406: cmp     dword ptr [esp+0Ch+var_8], 0
 0x51240B: jz      loc_512530
 0x512411: mov     ecx, esi
-0x512413: call    sub_5E6B40
+0x512413: call    Actor_IsInDialogueProcedure; 3DTheft 2026-05-17: AddScriptPackage skips runtime package handoff if Actor_IsInDialoguePackage is true.
 0x512418: test    al, al
 0x51241A: jnz     loc_512530
 0x512420: mov     eax, [esi+58h]
@@ -50,19 +50,19 @@
 0x512437: lea     ecx, [esi+44h]
 0x51243A: push    ecx
 0x51243B: push    eax
-0x51243C: call    Script_AddEventToExtraScript
+0x51243C: call    Script_AddEventToExtraScript; 3DTheft decode: AddScriptPackage queues event mask 0x800 for the actor's previous editor package when present.
 0x512441: add     esp, 0Ch
 0x512444: mov     eax, dword ptr [esp+0Ch+var_8]
 0x512448: push    200h
 0x51244D: lea     edx, [esi+44h]
 0x512450: push    edx
 0x512451: push    eax
-0x512452: call    Script_AddEventToExtraScript
+0x512452: call    Script_AddEventToExtraScript; 3DTheft decode: AddScriptPackage queues event mask 0x200 for the new script package before handoff.
 0x512457: mov     ecx, dword ptr [esp+18h+var_8]
 0x51245B: add     esp, 0Ch
 0x51245E: cmp     dword ptr [ecx+18h], 0FFFFFFFFh
 0x512462: jnz     short loc_512469
-0x512464: call    sub_5672A0
+0x512464: call    sub_5672A0; 3DTheft decode: TESPackage procedure-array resolver is a mutator. It writes TESPackage+0x18/procedureArrayIndex directly; callers should not use EAX as the row result.
 0x512469: mov     edx, [esi]
 0x51246B: fld     dword ptr [esi+28h]
 0x51246E: mov     eax, [edx+174h]
@@ -72,23 +72,23 @@
 0x51247A: call    eax
 0x51247C: push    eax; int
 0x51247D: mov     ecx, esi; this
-0x51247F: call    TESObjectREFR_GetParentCell
+0x51247F: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x512484: push    eax; int
 0x512485: mov     ecx, esi; this
 0x512487: call    TESObjectREFR_GetWorldSpace
 0x51248C: push    eax; int
 0x51248D: mov     ecx, esi
-0x51248F: call    sub_4D7A20
+0x51248F: call    TESObjectREFR_SetStartLocation; 3DTheft decode: AddScriptPackage records ExtraStartingPosition for the actor via TESObjectREFR::RecordStartLocation before package handoff.
 0x512494: mov     ecx, dword ptr [esp+0Ch+var_8]
 0x512498: push    1
-0x51249A: call    sub_5660C0
+0x51249A: call    sub_5660C0; 3DTheft decode: AddScriptPackage sets package flag 0x4000 through TESPackage_SetScriptPackageFlag before Actor_AddPackage_.
 0x51249F: mov     ecx, dword ptr [esp+0Ch+var_8]
 0x5124A3: push    0; a4
 0x5124A5: push    0; a3
 0x5124A7: push    ecx; a2
 0x5124A8: mov     ecx, esi; this
-0x5124AA: call    Actor_AddPackage?
-0x5124AF: mov     ecx, [esi+58h]
+0x5124AA: call    Actor_AddPackage?; 3DTheft decode: AddScriptPackage hands off with Actor_AddPackage_(actor, package, setCurrent=0, markDynamic=0). Use this for external script-style runtime package assignment.
+0x5124AF: mov     ecx, [esi+58h]; 3DTheft decode: after Actor_AddPackage_, AddScriptPackage only enters the time/process refresh block for non-high process levels; high process level 0 does not call Actor::EvaluatePackage here.
 0x5124B2: test    ecx, ecx
 0x5124B4: jz      short loc_512530
 0x5124B6: mov     edx, [ecx]
@@ -100,7 +100,7 @@
 0x5124C2: mov     ebx, [esi+58h]
 0x5124C5: push    edi
 0x5124C6: mov     edi, [ebx]
-0x5124C8: mov     ecx, offset TimeGlobals
+0x5124C8: mov     ecx, 0B332E0h
 0x5124CD: add     edi, 1Ch
 0x5124D0: call    TimeGlobals_GetGameHour
 0x5124D5: fsub    qword ptr ds:0A2F928h
@@ -125,19 +125,19 @@
 0x512506: call    edx
 0x512508: push    eax
 0x512509: push    esi
-0x51250A: mov     ecx, offset ActorProcessManager_ptr
+0x51250A: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x51250F: call    sub_674550
 0x512514: mov     ecx, [esi+58h]
 0x512517: mov     eax, [ecx]
 0x512519: mov     edx, [eax+8]
-0x51251C: push    0
-0x51251E: push    0
-0x512520: push    0
+0x51251C: push    0; relativeTo
+0x51251E: push    0; insertRelative
+0x512520: push    0; append
 0x512522: call    edx
-0x512524: push    eax
-0x512525: push    esi
-0x512526: mov     ecx, offset ActorProcessManager_ptr
-0x51252B: call    sub_673A90
+0x512524: push    eax; processLevel
+0x512525: push    esi; object
+0x512526: mov     ecx, (offset qword_B3BB2C+1D4h); this
+0x51252B: call    ActorProcessManager_AddMobileObject; Generic ActorProcessManager insertion. Selects process-level collection 0..3, silently returns if object->GetProcessLevel() does not match, then inserts with ordering controls. Returns void; there is no insertion-success result. Used for actors, load/resurrection paths, and projectiles.
 0x512530: mov     al, 1
 0x512532: pop     esi
 0x512533: add     esp, 8

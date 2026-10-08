@@ -1,1 +1,1 @@
-STATSTG
+typedef tagSTATSTG STATSTG;

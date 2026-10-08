@@ -1,3 +1,4 @@
+// Verified (Oblivion): save conversion changes EffectSetting pointer fields at +0x70..+0x8C—including effectShader +0x78 and enchantEffect +0x7C—from TESForm pointers into FormIDs before writing the data block.
 int __usercall EffectSetting_SaveFormChunks_::ConvertToRefIDs@<eax>(
         _DWORD *a1@<esi>,
         int a2,
@@ -30,51 +31,51 @@ int __usercall EffectSetting_SaveFormChunks_::ConvertToRefIDs@<eax>(
   int v28; // [esp+Ch] [ebp+Ch]
   int v29; // [esp+10h] [ebp+10h]
 
-  v11 = a1[0x20];
-  v26 = v11;
-  if ( v11 )
-    v12 = *(_DWORD *)(v11 + 0xC);
+  v11 = a1[0x20]; /*0x41583f*/
+  v26 = v11; /*0x415847*/
+  if ( v11 ) /*0x41584b*/
+    v12 = *(_DWORD *)(v11 + 0xC); /*0x41584d*/
   else
-    v12 = 0;
-  a1[0x20] = v12;
-  v13 = a1[0x21];
-  v27 = v13;
-  if ( v13 )
-    v14 = *(_DWORD *)(v13 + 0xC);
+    v12 = 0; /*0x415852*/
+  a1[0x20] = v12; /*0x415854*/
+  v13 = a1[0x21]; /*0x41585a*/
+  v27 = v13; /*0x415862*/
+  if ( v13 ) /*0x415866*/
+    v14 = *(_DWORD *)(v13 + 0xC); /*0x415868*/
   else
-    v14 = 0;
-  a1[0x21] = v14;
-  v15 = a1[0x22];
-  v28 = v15;
-  if ( v15 )
-    v16 = *(_DWORD *)(v15 + 0xC);
+    v14 = 0; /*0x41586d*/
+  a1[0x21] = v14; /*0x41586f*/
+  v15 = a1[0x22]; /*0x415875*/
+  v28 = v15; /*0x41587d*/
+  if ( v15 ) /*0x415881*/
+    v16 = *(_DWORD *)(v15 + 0xC); /*0x415883*/
   else
-    v16 = 0;
-  a1[0x22] = v16;
-  v17 = a1[0x23];
-  v29 = v17;
-  if ( v17 )
-    v18 = *(_DWORD *)(v17 + 0xC);
+    v16 = 0; /*0x415888*/
+  a1[0x22] = v16; /*0x41588a*/
+  v17 = a1[0x23]; /*0x415890*/
+  v29 = v17; /*0x415898*/
+  if ( v17 ) /*0x41589c*/
+    v18 = *(_DWORD *)(v17 + 0xC); /*0x41589e*/
   else
-    v18 = 0;
-  v19 = a1[0x1E];
-  a1[0x23] = v18;
-  if ( v19 )
-    v20 = *(_DWORD *)(v19 + 0xC);
+    v18 = 0; /*0x4158a3*/
+  v19 = a1[0x1E]; /*0x4158a7*/
+  a1[0x23] = v18; /*0x4158ad*/
+  if ( v19 ) /*0x4158b3*/
+    v20 = *(_DWORD *)(v19 + 0xC); /*0x4158b5*/
   else
-    v20 = 0;
-  v21 = a1[0x1F];
-  a1[0x1E] = v20;
-  if ( v21 )
-    v22 = *(_DWORD *)(v21 + 0xC);
+    v20 = 0; /*0x4158ba*/
+  v21 = a1[0x1F]; /*0x4158bc*/
+  a1[0x1E] = v20; /*0x4158c1*/
+  if ( v21 ) /*0x4158c4*/
+    v22 = *(_DWORD *)(v21 + 0xC); /*0x4158c6*/
   else
-    v22 = 0;
-  v23 = a1[0x1C];
-  a1[0x1F] = v22;
-  if ( v23 )
-    v24 = *(_DWORD *)(v23 + 0xC);
+    v22 = 0; /*0x4158cb*/
+  v23 = a1[0x1C]; /*0x4158cd*/
+  a1[0x1F] = v22; /*0x4158d2*/
+  if ( v23 ) /*0x4158d5*/
+    v24 = *(_DWORD *)(v23 + 0xC); /*0x4158d7*/
   else
-    v24 = 0;
-  a1[0x1C] = v24;
+    v24 = 0; /*0x4158dc*/
+  a1[0x1C] = v24; /*0x4158de*/
   return EffectSetting_SaveFormChunks_::SaveDataBlock((int)a1, v26, v27, v28, v29, a6, a7, a8, a9, a10, a11);
 }

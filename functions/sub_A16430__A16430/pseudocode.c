@@ -1,9 +1,9 @@
-void __cdecl sub_A16430()
+void __cdecl INISetting_Destroy_bUseJoystick()
 {
-  BSSimpleList_Remove(dword_B07CFC, (int)&bUseJoystick);
-  if ( off_B02C30 )
+  BSSimpleList_Remove(dword_B07CFC, (int)&bUseJoystick); /*0xa1643a*/
+  if ( bUseJoystickSettingName ) /*0xa16446*/
   {
-    if ( *off_B02C30 == 0x53 )
-      FormHeapFree((unsigned int)off_B02C30);
+    if ( *bUseJoystickSettingName == 0x53 ) /*0xa1644b*/
+      FormHeapFree((unsigned int)bUseJoystickSettingName); /*0xa1644e*/
   }
 }

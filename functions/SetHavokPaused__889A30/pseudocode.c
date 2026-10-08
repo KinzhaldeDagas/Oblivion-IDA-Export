@@ -2,15 +2,15 @@ int __cdecl SetHavokPaused(char a1)
 {
   int result; // eax
 
-  if ( HavokGamePausedFlag != a1 )
+  if ( MEMORY[0xBA790A] != a1 ) /*0x889a3a*/
   {
-    dword_BA7924 = 0;
-    dword_BA7928 = 0;
-    dword_BA792C = 0;
-    dword_BA7930 = 0;
-    dword_BA7934 = 0;
-    HavokGamePausedFlag = a1;
-    return 0;
+    unk_BA7924 = 0; /*0x889a3e*/
+    unk_BA7928 = 0; /*0x889a43*/
+    unk_BA792C = 0; /*0x889a48*/
+    unk_BA7930 = 0; /*0x889a4d*/
+    unk_BA7934 = 0; /*0x889a52*/
+    MEMORY[0xBA790A] = a1; /*0x889a57*/
+    return 0; /*0x889a3c*/
   }
-  return result;
+  return result; /*0x889a5d*/
 }

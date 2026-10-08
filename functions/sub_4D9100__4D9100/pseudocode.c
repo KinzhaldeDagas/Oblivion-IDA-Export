@@ -1,18 +1,19 @@
-void __userpurge sub_4D9100(
-        int a1@<ecx>,
+// TESObjectREFR single-topic speech path. Selects one INFO with ambient conversation rules, immediately runs its result and AddTopicList, then plays only the first decoded response at this reference. Named from observed Oblivion behavior.
+void __userpurge TESObjectREFR::SayTopic(
+        TESObjectREFR *a1@<ecx>,
         double a2@<st1>,
-        double a3@<st0>,
-        TESTopic *a4,
-        Actor *a5,
+        TESTopic *a3,
+        Actor *speaker,
+        char a5,
         char a6,
-        char a7,
-        int a8)
+        int a7)
 {
-  Unk1C *DialogueInfo; // esi
-  TESForm *form; // ebx
+  DialogueItemView *DialogueItem; // esi
+  OblivionTopicInfo *info; // ebx
   int *sound; // edi
-  int v13; // eax
-  const char **v14; // ebx
+  const char **Current; // eax
+  const char **v13; // ebx
+  double v14; // st7
   int *v15; // eax
   int *v16; // esi
   float *v17; // eax
@@ -20,58 +21,63 @@ void __userpurge sub_4D9100(
   int durationa; // [esp+8h] [ebp-228h]
   int v20[128]; // [esp+2Ch] [ebp-204h] BYREF
 
-  DialogueInfo = TESTopic::CreateDialogueInfo(a4, a5, 0, 0, 0);
-  if ( DialogueInfo )
+  DialogueItem = TESTopic::CreateDialogueItem(a3, speaker, 0, 0, 0); /*0x4d9138*/
+  if ( DialogueItem ) /*0x4d913c*/
   {
-    form = DialogueInfo->form;
-    sound = (int *)OSGlobals->sound;
-    if ( form )
+    info = DialogueItem->info; /*0x4d9148*/
+    sound = (int *)MEMORY[0xB33398]->sound; /*0x4d914e*/
+    if ( info ) /*0x4d9151*/
     {
-      sub_531470(form, a2, a3, a1);
-      sub_5308D0((int)form);
+      TESTopicInfo::RunResult(info, a1);        // Reference single-topic speech likewise commits selected INFO state before playing the first response. /*0x4d9156*/
+      TESTopicInfo::AddTopicList(info); /*0x4d915d*/
     }
-    if ( sound )
+    if ( sound ) /*0x4d9164*/
     {
-      sub_6B7BA0(DialogueInfo);
-      v13 = sub_6B7C20(DialogueInfo);
-      v14 = (const char **)v13;
-      if ( v13 )
+      DialogueItem::FirstResponse(DialogueItem); /*0x4d916c*/
+      Current = (const char **)DialogueListCursor::GetCurrent((DialogueListCursorView *)DialogueItem); /*0x4d9173*/
+      v13 = Current; /*0x4d9178*/
+      if ( Current ) /*0x4d917c*/
       {
-        BSStringT_Static_StrCpy((char *)v20, *(const char **)(v13 + 0x10));
-        if ( a6 || !(*(int (__thiscall **)(int))(*(_DWORD *)a1 + 0x154))(a1) )
+        BSStringT_Static_StrCpy((char *)v20, Current[4]); /*0x4d918b*/
+        if ( a5 || !a1->vtbl->GetNiNode(a1) ) /*0x4d91a8*/
         {
-          *(float *)&durationa = 0.0;
-          if ( a7 )
-            v15 = sub_6AE370(sound, (const char *)v20, 1, 0, durationa);
+          v14 = 0.0; /*0x4d91d5*/
+          *(float *)&durationa = 0.0; /*0x4d91d8*/
+          if ( a6 ) /*0x4d91dd*/
+            v15 = sub_6AE370(sound, (char *)v20, 1, 0, durationa); /*0x4d91e6*/
           else
-            v15 = sub_6AE370(sound, (const char *)v20, 5, 0, durationa);
+            v15 = sub_6AE370(sound, (char *)v20, 5, 0, durationa); /*0x4d91f1*/
         }
         else
         {
-          *(float *)&duration = 0.0;
-          if ( a7 )
-            v15 = sub_6AE370(sound, (const char *)v20, 2, 0, duration);
+          v14 = 0.0; /*0x4d91b6*/
+          *(float *)&duration = 0.0; /*0x4d91b9*/
+          if ( a6 ) /*0x4d91be*/
+            v15 = sub_6AE370(sound, (char *)v20, 2, 0, duration); /*0x4d91c2*/
           else
-            v15 = sub_6AE370(sound, (const char *)v20, 6, 0, duration);
+            v15 = sub_6AE370(sound, (char *)v20, 6, 0, duration); /*0x4d91cb*/
         }
-        v16 = v15;
-        if ( v15 )
+        v16 = v15; /*0x4d91f6*/
+        if ( v15 ) /*0x4d91fa*/
         {
-          if ( !a6 )
+          if ( !a5 ) /*0x4d9208*/
           {
-            if ( (*(int (__thiscall **)(int))(*(_DWORD *)a1 + 0x154))(a1) )
+            if ( a1->vtbl->GetNiNode(a1) ) /*0x4d9219*/
             {
-              v17 = (float *)(*(int (__thiscall **)(int))(*(_DWORD *)a1 + 0x154))(a1);
-              sub_6B7360(v16, v17[0x22], v17[0x23], v17[0x24]);
-              sub_6ACC50(sound, *v16, flt_B161C8, flt_B161D0);
-              sub_6AC3E0((_DWORD **)sound, *v16, a1);
+              v17 = (float *)((int (__usercall *)@<eax>(TESObjectREFR *@<ecx>, double@<st0>, double@<st1>))a1->vtbl->GetNiNode)( /*0x4d922a*/
+                               a1,
+                               v14,
+                               a2);
+              sub_6B7360(v16, v17[0x22], v17[0x23], v17[0x24]); /*0x4d9266*/
+              sub_6ACC50(sound, *v16, flt_B161C8, flt_B161D0); /*0x4d9286*/
+              sub_6AC3E0((_DWORD **)sound, *v16, (LONG)a1); /*0x4d9291*/
             }
           }
-          sub_6B7340(v16);
-          sub_6B7190(v16, 0);
+          sub_6B7340(v16); /*0x4d9298*/
+          sub_6B7190(v16, 0); /*0x4d92b6*/
         }
-        if ( byte_B13208 )
-          GameUI_QueueMessage(*v14, (UInt32)v16, 0, flt_A30634);
+        if ( byte_B13208 ) /*0x4d92bb*/
+          GameUI_QueueMessage(*v13, (UInt32)v16, 0, kTerrainLODQuadRayDirectionZ); /*0x4d92d4*/
       }
     }
   }

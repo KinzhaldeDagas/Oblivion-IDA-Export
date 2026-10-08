@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6C9D30",
-    "line": "fldz",
+    "line": "fldz; Internal temporary-pose transition: activates the generated pose sequence, activates the destination with ease-in, deactivates the pose over that interval, and aligns normalized timing fields. Called by NiControllerManager_BlendFromPose.",
     "mnemonic": "fldz",
     "size": 2
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x6C9D34",
-    "line": "push    1; char",
+    "line": "push    1; transition",
     "mnemonic": "push",
     "size": 2
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x6C9D37",
-    "line": "fstp    [esp+10h+var_10]; float",
+    "line": "fstp    [esp+10h+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x6C9D3C",
-    "line": "call    sub_6C9CB0",
+    "line": "call    NiControllerSequence_Deactivate; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x6C9DA2",
-    "line": "mov     ecx, [esp+8+arg_18]",
+    "line": "mov     ecx, [esp+8+timeSyncSequence]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -223,13 +223,13 @@
   },
   {
     "ea": "0x6C9DAA",
-    "line": "push    1; int",
+    "line": "push    1; transition",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6C9DAC",
-    "line": "push    ecx; int",
+    "line": "push    ecx; timeSyncSequence",
     "mnemonic": "push",
     "size": 1
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x6C9DB0",
-    "line": "fstp    [esp+18h+var_14]; float",
+    "line": "fstp    [esp+18h+easeInTime]; easeInTime",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -253,19 +253,19 @@
   },
   {
     "ea": "0x6C9DB8",
-    "line": "fstp    [esp+18h+var_18]; float",
+    "line": "fstp    [esp+18h+weight]; weight",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6C9DBB",
-    "line": "push    0; char",
+    "line": "push    0; startOver",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6C9DBD",
-    "line": "push    edi; int",
+    "line": "push    edi; priority",
     "mnemonic": "push",
     "size": 1
   },
@@ -277,13 +277,13 @@
   },
   {
     "ea": "0x6C9DC2",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6C9DC4",
-    "line": "call    sub_6C9BA0",
+    "line": "call    NiControllerSequence_Activate; Native controller-sequence activation state machine. Rejects an already-active sequence, validates optional time-sync compatibility, records activation parameters, and queues the active sequence with its manager.",
     "mnemonic": "call",
     "size": 5
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x6C9DD1",
-    "line": "push    1; char",
+    "line": "push    1; transition",
     "mnemonic": "push",
     "size": 2
   },
@@ -319,19 +319,19 @@
   },
   {
     "ea": "0x6C9DD4",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6C9DD6",
-    "line": "fstp    [esp+10h+var_10]; float",
+    "line": "fstp    [esp+10h+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6C9DD9",
-    "line": "call    sub_6C9CB0",
+    "line": "call    NiControllerSequence_Deactivate; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.",
     "mnemonic": "call",
     "size": 5
   },

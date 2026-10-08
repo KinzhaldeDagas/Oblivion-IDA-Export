@@ -1,1 +1,1 @@
-TRUSTEEW
+typedef _TRUSTEE_W TRUSTEEW;

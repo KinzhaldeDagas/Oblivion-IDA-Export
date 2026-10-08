@@ -1,11 +1,11 @@
-void __thiscall sub_4416D0(_DWORD *this, int a2)
+void __thiscall sub_4416D0(int **this, int a2)
 {
-  _DWORD *v2; // ecx
+  int *v2; // ecx
 
-  if ( a2 )
+  if ( a2 ) /*0x4416d6*/
   {
-    v2 = (_DWORD *)*(this + 0x22);
-    if ( v2 )
-      BSSimpleList_Remove(v2, a2);
+    v2 = *(this + 0x22); /*0x4416d8*/
+    if ( v2 ) /*0x4416e0*/
+      BSSimpleList_Remove(v2, a2); /*0x4416e6*/
   }
 }

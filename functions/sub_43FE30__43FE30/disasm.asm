@@ -29,7 +29,7 @@
 0x43FE71: mov     edx, [ecx+esi*4]
 0x43FE74: mov     ecx, ds:0B33A98h
 0x43FE7A: push    edx; a1
-0x43FE7B: call    sub_447BA0
+0x43FE7B: call    TESObjectCELL_Deactivate; Verified TESObjectCELL deactivation path. Removes cell temp effects, lowers its process level, invokes cell teardown, clears pathgrid graph/render resources, removes the scene node and inactive cell forms, then for exteriors asks TESWorldSpace_UnloadExteriorCellIfEligible to either preserve or remove the cell. Nine call sites are in world/cell transition and TES destruction paths; inspect xrefs for the full lifecycle context.
 0x43FE80: mov     eax, [edi+38h]
 0x43FE83: mov     dword ptr [eax+esi*4], 0
 0x43FE8A: add     ebp, 1

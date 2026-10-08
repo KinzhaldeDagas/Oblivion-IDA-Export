@@ -1,7 +1,7 @@
-0x9EA350: push    5
+0x9EA350: push    5; defaultValue
 0x9EA352: push    offset aIperkblockstag; "iPerkBlockStaggerChance"
-0x9EA357: mov     ecx, offset dword_B37238
-0x9EA35C: call    GameSetting_ConstrAndReg
+0x9EA357: mov     ecx, 0B37238h; self
+0x9EA35C: call    GameSetting_ConstrAndReg; Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.
 0x9EA361: push    offset sub_A1EB90; void (__cdecl *)()
 0x9EA366: call    _atexit
 0x9EA36B: pop     ecx

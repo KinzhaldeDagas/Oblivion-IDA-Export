@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4B3310",
-    "line": "sub     esp, 10Ch",
+    "line": "sub     esp, 10Ch; Probable: obtains or loads reference-specific model data for a TESBoundObject/TESObjectREFR pair. Direct code checks model path, scale, loaded-state reference count and loader data before falling back to ModelLoader_LoadModelData.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x4B3326",
-    "line": "mov     esi, [esp+114h+arg_0]",
+    "line": "mov     esi, [esp+114h+reference]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -241,37 +241,37 @@
   },
   {
     "ea": "0x4B3387",
-    "line": "lea     eax, [esp+118h+var_108]",
+    "line": "lea     eax, [esp+118h+outPath]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4B338B",
-    "line": "push    eax",
+    "line": "push    eax; outPath",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B338C",
-    "line": "push    esi",
+    "line": "push    esi; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B338D",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B338F",
-    "line": "call    sub_4B2B00",
+    "line": "call    TESBoundObject_BuildReferenceModelPath; Verified: chooses reference-specific model path if available, otherwise the form model path, then appends scale percent (GetScale()*100) to create the per-reference model-loader key.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4B3394",
-    "line": "lea     ecx, [esp+118h+var_108]",
+    "line": "lea     ecx, [esp+118h+outPath]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -361,13 +361,13 @@
   },
   {
     "ea": "0x4B33C4",
-    "line": "push    edi",
+    "line": "push    edi; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B33C5",
-    "line": "call    sub_4A2A30",
+    "line": "call    TESForm_GetLODMult; Verified control flow: returns 2 for form-type bytes {0x13,0x14,0x15,0x16,0x19,0x1B,0x21,0x22,0x26,0x27,0x28,0x2A}, 3 for {0x23,0x24}, otherwise 1. Probable semantic name TESForm_GetLODMult is supported by the direct queued-tree argument use and Fallout's named TES::GetLODMult; individual type-group meanings are not decoded here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x4B33DA",
-    "line": "call    sub_439EB0",
+    "line": "call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.",
     "mnemonic": "call",
     "size": 5
   },

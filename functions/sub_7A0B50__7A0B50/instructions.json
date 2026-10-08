@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A0B50",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Oblivion st_vector<SFrondGuide>::push_back specialization. Placement-deep-copies at end when capacity remains; otherwise delegates to the decoded checked insert-one path.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -175,13 +175,13 @@
   },
   {
     "ea": "0x7A0B96",
-    "line": "mov     ecx, [esp+10h+arg_0]",
+    "line": "mov     ecx, [esp+10h+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A0B9A",
-    "line": "mov     edx, [esp+10h+arg_0]",
+    "line": "mov     edx, [esp+10h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -193,13 +193,13 @@
   },
   {
     "ea": "0x7A0BA1",
-    "line": "mov     byte ptr [esp+10h+var_8], 0",
+    "line": "mov     byte ptr [esp+10h+result.owner], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x7A0BA6",
-    "line": "mov     eax, [esp+10h+var_8]",
+    "line": "mov     eax, [esp+10h+result.owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -223,25 +223,25 @@
   },
   {
     "ea": "0x7A0BAD",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A0BAE",
-    "line": "push    1",
+    "line": "push    1; count",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7A0BB0",
-    "line": "push    edi",
+    "line": "push    edi; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A0BB1",
-    "line": "call    sub_79E190",
+    "line": "call    OB_SFrondGuide_UninitializedFillN_010201A0; Exception-safe uninitialized_fill_n for compact SFrondGuide records. Placement-copy-constructs count values; unwind cleanup destroys the constructed prefix before rethrowing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -319,50 +319,80 @@
   },
   {
     "ea": "0x7A0BD4",
-    "line": "mov     eax, [esp+14h+arg_0]",
+    "line": "mov     eax, [esp+14h+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A0BD8",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A0BD9",
-    "line": "push    ebx",
+    "line": "push    ebx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A0BDA",
-    "line": "push    esi",
+    "line": "push    esi; expectedOwner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A0BDB",
-    "line": "lea     ecx, [esp+20h+var_8]",
+    "line": "lea     ecx, [esp+20h+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A0BDF",
-    "line": "push    ecx",
+    "line": "push    ecx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A0BE0",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A0BE2",
-    "line": "call    sub_7A0A50",
+    "line": "call    OB_stVector_SFrondGuide_InsertOne_010201A0; Checked insert-one wrapper for st_vector<SFrondGuide>. Preserves the iterator index across possible reallocation, delegates to InsertFill(count=1), and returns the 8-byte {owner,current} iterator.",
     "mnemonic": "call",
     "size": 5
+  },
+  {
+    "ea": "0x7A0BE7",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7A0BE8",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7A0BE9",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7A0BEA",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x7A0BED",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
   }
 ]

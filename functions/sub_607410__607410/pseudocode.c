@@ -1,4 +1,5 @@
-int __thiscall sub_607410(_DWORD *this)
+// Return projectile-retained AlchemyItem poison at ArrowProjectile+0x84. The equipped weapon's poison extra is consumed at release.
+AlchemyItem *__thiscall ArrowProjectile_GetPoison(ArrowProjectile *this)
 {
-  return *(this + 0x21);
+  return this->poison; /*0x607416*/
 }

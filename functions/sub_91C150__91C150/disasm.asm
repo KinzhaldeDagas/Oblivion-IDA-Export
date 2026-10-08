@@ -23,7 +23,7 @@
 0x91C192: lea     eax, [esp+284h+var_268]
 0x91C196: push    eax
 0x91C197: mov     ecx, ebx
-0x91C199: call    sub_47F990
+0x91C199: call    sub_47F990; TES4 authoritative metadata map lookup: map count at +0x48, entries pointer at +0x44, each entry 0x10 bytes: key, unknown, valueLow, valueHigh.
 0x91C19E: mov     eax, [esp+280h+var_268]
 0x91C1A2: test    eax, eax
 0x91C1A4: jnz     loc_91C44D
@@ -65,7 +65,7 @@
 0x91C212: mov     [esp+288h+var_254], eax
 0x91C216: mov     [esp+288h+var_250], 0
 0x91C21E: mov     [esp+288h+var_24C], 80000008h
-0x91C226: call    sub_47F990
+0x91C226: call    sub_47F990; TES4 authoritative metadata map lookup: map count at +0x48, entries pointer at +0x44, each entry 0x10 bytes: key, unknown, valueLow, valueHigh.
 0x91C22B: mov     esi, [eax]
 0x91C22D: test    esi, esi
 0x91C22F: jz      short loc_91C294
@@ -189,7 +189,7 @@
 0x91C3B5: lea     eax, [esp+284h+var_260]
 0x91C3B9: push    eax
 0x91C3BA: mov     ecx, ebx
-0x91C3BC: call    sub_47F990
+0x91C3BC: call    sub_47F990; TES4 authoritative metadata map lookup: map count at +0x48, entries pointer at +0x44, each entry 0x10 bytes: key, unknown, valueLow, valueHigh.
 0x91C3C1: mov     eax, [eax]
 0x91C3C3: test    eax, eax
 0x91C3C5: jnz     short loc_91C3DB

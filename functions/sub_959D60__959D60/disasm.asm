@@ -1,4 +1,4 @@
-0x959D60: push    ecx
+0x959D60: push    ecx; Verified NiPick query runner: invokes NiPick_ProcessSceneObject over the configured pick root, gathers hit records, sorts by the record distance field, and leaves the nearest record first in the result list.
 0x959D61: cmp     byte ptr [esp+4+arg_8], 0
 0x959D66: push    ebp
 0x959D67: mov     ebp, ecx
@@ -11,7 +11,7 @@
 0x959D7C: push    ebp
 0x959D7D: push    eax
 0x959D7E: push    ecx
-0x959D7F: call    sub_95D540
+0x959D7F: call    NiPick_ProcessSceneObject; Verified scene-object pick dispatcher: rejects invalid/filtered candidates, delegates NiGeometryData to NiPick_ProcessGeometryIntersection, and has a separate bounds/RTTI fallback that writes hit point and distance but does not explicitly populate the normal field.
 0x959D84: add     esp, 10h
 0x959D87: test    al, al
 0x959D89: jnz     short loc_959D92

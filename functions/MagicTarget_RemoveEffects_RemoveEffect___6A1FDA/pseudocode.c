@@ -6,6 +6,6 @@ int __userpurge MagicTarget_RemoveEffects_::RemoveEffect_@<eax>(
         int a5,
         int a6)
 {
-  ActiveEffect_Base_Remove(a1, a2, a3, 1);
+  ActiveEffect_Base_Remove(a1, a2, a3, 1); /*0x6a1fde*/
   return MagicTarget_RemoveEffects_::Done_(a4, a5, a6);
 }

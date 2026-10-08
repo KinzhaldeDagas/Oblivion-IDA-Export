@@ -1,19 +1,32 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x78D4E0",
+      "0x78D543"
+    ]
+  ],
+  "chunks_sha256": "b864d26014b8d54681f6868f3f7d6bf85820b418d037976255c83b20afddfa6a",
+  "comment_regular": "Oblivion byte-vector push_back: appends in available capacity or delegates to checked insert-one at end. Called by CIndexedGeometry::AddVertexWind for matrix indices.",
+  "comment_repeatable": "Oblivion byte-vector push_back: appends in available capacity or delegates to checked insert-one at end. Called by CIndexedGeometry::AddVertexWind for matrix indices.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_78D4E0",
+  "display_name": "OB_stVectorByte_PushBack_010201A0",
   "end_ea": "0x78D543",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_78D4E0",
+  "name": "OB_stVectorByte_PushBack_010201A0",
   "segment": ".text",
   "sha256": "b864d26014b8d54681f6868f3f7d6bf85820b418d037976255c83b20afddfa6a",
   "size": 99,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78D4E0",
-  "type": "unsigned int **__thiscall(unsigned int *this, _BYTE *)",
+  "total_chunk_size": 99,
+  "type": "void __thiscall(OB_stVectorByte_010201A0 *this, const unsigned __int8 *value)",
   "xrefs_from_count": 46,
   "xrefs_to_count": 1
 }

@@ -1,4 +1,4 @@
 int __thiscall sub_422C60(_DWORD *this)
 {
-  return BaseExtraList_RemoveExtraByType(this, 0x55u);
+  return BaseExtraList_RemoveExtraByType(this, 0x55u); /*0x422c67*/
 }

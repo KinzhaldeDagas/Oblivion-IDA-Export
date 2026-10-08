@@ -1,1 +1,30 @@
-DEVMODEA_0
+struct DEVMODEA_0
+{
+BYTE dmDeviceName[32];
+WORD dmSpecVersion;
+WORD dmDriverVersion;
+WORD dmSize;
+WORD dmDriverExtra;
+DWORD dmFields;
+$F6AE2C8209B3F8FB4E265F03FC89D224 u1;
+__int16 dmColor;
+__int16 dmDuplex;
+__int16 dmYResolution;
+__int16 dmTTOption;
+__int16 dmCollate;
+BYTE dmFormName[32];
+WORD dmLogPixels;
+DWORD dmBitsPerPel;
+DWORD dmPelsWidth;
+DWORD dmPelsHeight;
+$D1F703E461D6815F25454A92424A7B4A u2;
+DWORD dmDisplayFrequency;
+DWORD dmICMMethod;
+DWORD dmICMIntent;
+DWORD dmMediaType;
+DWORD dmDitherType;
+DWORD dmReserved1;
+DWORD dmReserved2;
+DWORD dmPanningWidth;
+DWORD dmPanningHeight;
+};

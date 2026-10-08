@@ -1,19 +1,32 @@
 {
-  "callees_count": 48,
-  "callers_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 23,
+  "callers_count": 6,
+  "chunks": [
+    [
+      "0x58B800",
+      "0x58BAB3"
+    ]
+  ],
+  "chunks_sha256": "89332e08a8e2f59d450020aa9f958988b12d6f126a88b4ab65629ceab41286a8",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "Verified XML source resolver. sibling() walks parent child list to current tile, returns following list node, and wraps to head if current is last or not found. It does not filter visible, target, or listindex. sibling(name) compares immediate sibling names case-insensitively. Fallout analogue 0x827DC678.\n\nSilt Strider consequence: injected NorthernUI row uses sibling() in y expression. With AddHead attachment and pre-existing children, source is the prior head child. It is not the previous visible row by listindex. Single-child self-reference is a conditional cycle risk; actual NorthernUI parent contents must be checked.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_58B800",
+  "display_name": "Tile::GetTileByName",
   "end_ea": "0x58BAB3",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_58B800",
+  "name": "Tile::GetTileByName",
   "segment": ".text",
   "sha256": "89332e08a8e2f59d450020aa9f958988b12d6f126a88b4ab65629ceab41286a8",
   "size": 691,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x58B800",
-  "type": "Tile *__cdecl(_DWORD *, unsigned __int8 *)",
+  "total_chunk_size": 691,
+  "type": "Tile *__cdecl(Tile *target, const char *selector)",
   "xrefs_from_count": 274,
   "xrefs_to_count": 6
 }

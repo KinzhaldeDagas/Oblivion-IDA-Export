@@ -16,7 +16,7 @@
 0x504036: push    eax; a2
 0x504037: push    ecx; a1
 0x504038: mov     dword ptr [esp+24h+var_4], 0
-0x504040: call    Script_ExtractArgs
+0x504040: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x504045: test    al, al
 0x504047: setnz   al
 0x50404A: add     esp, 24h

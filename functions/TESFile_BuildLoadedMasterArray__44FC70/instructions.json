@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x44FC70",
-    "line": "push    ecx",
+    "line": "push    ecx; MEF v56 indexed master resolver: zero-initialized output, checked allocation, first-wins candidate index for >=8 masters in default CRT locale. Other locales/long names/aux OOM use original comparator search. Locale rechecked after indexed lookup; diagnostics invalidate snapshot. Missing/null or inconsistent lists returnfalse safely. Supersedes44FCBF interior hook while retaining its signature.",
     "mnemonic": "push",
     "size": 1
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x44FC8D",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x44FCBF",
-    "line": "call    FormHeapAlloc",
+    "line": "call    FormHeapAlloc; MEF v51 bridge-stack audit confirms v45 guard: replacement CALL entry has injected return at [ESP] and pending size at [ESP+4]. Failure removes both, restores EDI/ESI/EBP and the saved ECX/local slot, returns false with retn 8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x44FCD7",
-    "line": "mov     ebx, eax",
+    "line": "mov     ebx, eax; Oblivion masterFiles array is allocated for masterCount entries and populated one slot per MAST list occurrence. The loaded-file search restarts for every slot.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x44FCE6",
-    "line": "mov     edi, [esp+14h+arg_0]",
+    "line": "mov     edi, [esp+14h+arg_0]; MEF PERF 2026-09-08: PERF-5 repeated inner lookup reloads EDI from the same candidate-list argument for each master. Full-function indexed replacement must preserve first matching TESFile pointer in list order, locale-aware equality, master order, missing-master diagnostics/AL result and thiscall RET8.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x44FCF4",
-    "line": "jz      short loc_44FD41",
+    "line": "jz      short loc_44FD41; MEF PERF 2026-09-08: PERF-5 correctness prerequisite: null initial candidate/list data branches to next master before initializing its result slot; ordinary end-of-search path44FD1B instead writesNULL and clears success. Performance replacement must define missing-master behavior safely; do not preserve uninitialized-pointer publication as an optimization contract.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -301,19 +301,19 @@
   },
   {
     "ea": "0x44FCFC",
-    "line": "push    ecx; Str2",
+    "line": "push    ecx; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x44FCFD",
-    "line": "push    eax; Str1",
+    "line": "push    eax; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x44FCFE",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x44FD08",
-    "line": "jz      short loc_44FD3F",
+    "line": "jz      short loc_44FD3F; Each ordered MAST slot restarts a case-insensitive loaded-file scan; comparison uses the MAST list pointer as a C string and the first matching TESFile is stored at 0x44FD3F. Duplicate MAST entries remain distinct pointer slots. The MAST reader at 0x451C00 uses an exact-length allocation and maxSize=0 read without adding NUL, so unterminated names may overread.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x44FD3F",
-    "line": "mov     [ebx], esi",
+    "line": "mov     [ebx], esi; Stores the resolved first-match TESFile pointer into this MAST slot, then advances the pointer slot while iterating the original MAST list. Duplicate list entries are preserved, not collapsed.",
     "mnemonic": "mov",
     "size": 2
   },

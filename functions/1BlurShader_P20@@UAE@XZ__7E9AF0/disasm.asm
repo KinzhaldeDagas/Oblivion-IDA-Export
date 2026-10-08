@@ -53,14 +53,14 @@
 0x7E9B92: add     edi, 4
 0x7E9B95: sub     [esp+24h+var_14], 1
 0x7E9B9A: jnz     short loc_7E9B40
-0x7E9B9C: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x7E9B9C: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x7E9BA1: push    5; int
 0x7E9BA3: push    4; unsigned int
 0x7E9BA5: lea     eax, [ebp+0A8h]
 0x7E9BAB: push    eax; void *
 0x7E9BAC: mov     byte ptr [esp+34h+var_4], 1
 0x7E9BB1: call    $LN21
-0x7E9BB6: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x7E9BB6: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x7E9BBB: push    5; int
 0x7E9BBD: push    4; unsigned int
 0x7E9BBF: lea     ecx, [ebp+94h]
@@ -69,7 +69,7 @@
 0x7E9BCB: call    $LN21
 0x7E9BD0: mov     ecx, ebp; this
 0x7E9BD2: mov     [esp+24h+var_4], 0FFFFFFFFh
-0x7E9BDA: call    ??1BSImageSpaceShader@@UAE@XZ; BSImageSpaceShader::~BSImageSpaceShader(void)
+0x7E9BDA: call    ??1BSImageSpaceShader@@UAE@XZ; MoonSugarEffect decode: BSImageSpaceShader dtor releases source BSRenderedTexture at +0x7C, clears +0x80..+0x8C, then calls BSShader dtor.
 0x7E9BDF: mov     ecx, [esp+24h+var_C]
 0x7E9BE3: mov     large fs:0, ecx
 0x7E9BEA: pop     ecx
@@ -78,3 +78,28 @@
 0x7E9BED: pop     ebp
 0x7E9BEE: add     esp, 14h
 0x7E9BF1: retn
+0x9CF950: mov     ecx, [ebp-10h]; this
+0x9CF953: jmp     ??1BSImageSpaceShader@@UAE@XZ; MoonSugarEffect decode: BSImageSpaceShader dtor releases source BSRenderedTexture at +0x7C, clears +0x80..+0x8C, then calls BSShader dtor.
+0x9CF958: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9CF95D: push    5; int
+0x9CF95F: push    4; unsigned int
+0x9CF961: mov     eax, [ebp-10h]
+0x9CF964: add     eax, 94h ; '”'
+0x9CF969: push    eax; void *
+0x9CF96A: call    $LN21
+0x9CF96F: retn
+0x9CF970: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9CF975: push    5; int
+0x9CF977: push    4; unsigned int
+0x9CF979: mov     eax, [ebp-10h]
+0x9CF97C: add     eax, 0A8h ; '¨'
+0x9CF981: push    eax; void *
+0x9CF982: call    $LN21
+0x9CF987: retn
+0x9CF988: mov     edx, [esp+arg_4]
+0x9CF98C: lea     eax, [edx-14h]
+0x9CF98F: mov     ecx, [edx-18h]
+0x9CF992: xor     ecx, eax
+0x9CF994: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CF999: mov     eax, offset stru_AF8544
+0x9CF99E: jmp     ___CxxFrameHandler3

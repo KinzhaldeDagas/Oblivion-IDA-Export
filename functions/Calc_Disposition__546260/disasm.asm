@@ -10,7 +10,7 @@
 0x54627E: fadd    dword ptr ds:0B367B8h
 0x546284: faddp   st(1), st
 0x546286: fmul    qword ptr ds:0A2FAA0h
-0x54628C: call    Double_To_SInt32
+0x54628C: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x546291: mov     bl, byte ptr [esp+10h+arg_30]
 0x546295: xor     esi, esi
 0x546297: test    bl, bl
@@ -18,7 +18,7 @@
 0x54629B: jnz     short loc_5462AE
 0x54629D: fild    [esp+10h+arg_C]
 0x5462A1: fmul    dword ptr ds:0B367D8h
-0x5462A7: call    Double_To_SInt32
+0x5462A7: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5462AC: mov     esi, eax
 0x5462AE: test    bl, bl
 0x5462B0: fldz
@@ -42,12 +42,12 @@
 0x5462F0: fild    [esp+10h+arg_14]
 0x5462F4: fmul    dword ptr ds:0B367F8h
 0x5462FA: fmulp   st(1), st
-0x5462FC: call    Double_To_SInt32
+0x5462FC: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x546301: mov     edi, eax
 0x546303: mov     [esp+10h+arg_4], eax
 0x546307: fild    [esp+10h+arg_18]
 0x54630B: fmul    dword ptr ds:0B36810h
-0x546311: call    Double_To_SInt32
+0x546311: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x546316: fild    [esp+10h+arg_20]
 0x54631A: fld     dword ptr ds:0B36818h
 0x546320: mov     [esp+10h+arg_18], eax
@@ -57,15 +57,15 @@
 0x54632E: faddp   st(2), st
 0x546330: fimul   [esp+10h+arg_1C]
 0x546334: fmulp   st(1), st
-0x546336: call    Double_To_SInt32
+0x546336: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x54633B: fild    [esp+10h+arg_24]
 0x54633F: mov     [esp+10h+arg_20], eax
 0x546343: fmul    dword ptr ds:0B36830h
-0x546349: call    Double_To_SInt32
+0x546349: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x54634E: fild    [esp+10h+arg_28]
 0x546352: mov     [esp+10h+arg_1C], eax
 0x546356: fmul    dword ptr ds:0B36838h
-0x54635C: call    Double_To_SInt32
+0x54635C: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x546361: fld     [esp+10h+arg_30]
 0x546365: fld     dword ptr ds:0B36CF8h
 0x54636B: mov     [esp+10h+arg_24], eax
@@ -113,4 +113,4 @@
 0x5463DB: fiadd   [esp+arg_1C]
 0x5463DF: fiadd   [esp+arg_24]
 0x5463E3: fiadd   [esp+arg_2C]
-0x5463E7: jmp     Double_To_SInt32
+0x5463E7: jmp     Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.

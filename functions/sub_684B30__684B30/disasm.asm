@@ -28,19 +28,19 @@
 0x684B80: fld     [esp+2Ch+var_10]
 0x684B84: fsub    dword ptr [edi+8]
 0x684B87: fstp    [esp+2Ch+var_4]
-0x684B8B: call    MobileObject_GetCharProxy
+0x684B8B: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x684B90: mov     ebp, eax
 0x684B92: test    ebp, ebp
 0x684B94: jz      short loc_684BAD
 0x684B96: lea     ecx, [ebp+1E0h]
-0x684B9C: call    sub_88D370
+0x684B9C: call    hkCharacterContext_GetStateId; hkCharacterContext state id accessor used by controller update; proxy+0x1E0 context stores current state id at +0x0C.
 0x684BA1: test    eax, eax
 0x684BA3: jz      short loc_684BAD
 0x684BA5: fldz
 0x684BA7: fstp    [esp+2Ch+var_4]
 0x684BAB: jmp     short loc_684C21
 0x684BAD: mov     ecx, esi
-0x684BAF: call    sub_5E0660
+0x684BAF: call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.
 0x684BB4: fstp    [esp+2Ch+arg_0]
 0x684BB8: fldz
 0x684BBA: fcom    [esp+2Ch+arg_0]
@@ -87,8 +87,8 @@
 0x684C32: fld     dword ptr ds:0A427E4h
 0x684C38: fstp    [esp+2Ch+arg_0]
 0x684C3C: jz      short loc_684C7B
-0x684C3E: mov     ecx, ebp
-0x684C40: call    sub_8913C0
+0x684C3E: mov     ecx, ebp; this
+0x684C40: call    bhkCharacterController_GetRadius; Controller radius helper. Returns shape radius from proxy+0x374 object when available, else proxy+0x3A0/E8 default. MobileObject::Move converts this from Havok to world with 0xA372E0.
 0x684C45: fmul    qword ptr ds:0A372E0h
 0x684C4B: test    byte ptr [ebp+1F4h], 1
 0x684C52: fstp    [esp+2Ch+arg_0]

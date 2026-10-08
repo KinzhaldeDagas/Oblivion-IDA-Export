@@ -17,7 +17,7 @@
 0x517CD6: jmp     loc_517DB8
 0x517CDB: push    esi
 0x517CDC: mov     ecx, edi
-0x517CDE: call    TESFile_InitializeFormFromRecord
+0x517CDE: call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.
 0x517CE3: mov     ecx, edi
 0x517CE5: call    TESFile_GetChunkType
 0x517CEA: test    eax, eax
@@ -35,7 +35,7 @@
 0x517D1E: push    200h; a4
 0x517D23: push    ebx; Dst
 0x517D24: mov     ecx, edi; a1
-0x517D26: call    TESFile_GetChunkData
+0x517D26: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x517D2B: mov     eax, [esi]
 0x517D2D: mov     edx, [eax+0D8h]
 0x517D33: push    ebx
@@ -47,7 +47,7 @@
 0x517D3F: push    eax; Dst
 0x517D40: push    edi; a2
 0x517D41: mov     ecx, esi; this
-0x517D43: call    TESForm_LoadGenericComponents
+0x517D43: call    TESForm_LoadGenericComponents; Generic fixed-prefix/component DATA overlay. Copies min(chunk_length,fixed_prefix_size), then updates later components only when their starting offset is below chunk_length; omitted suffix components retain prior in-memory values.
 0x517D48: mov     cl, [ebp+Dst]
 0x517D4B: mov     dl, [ebp+var_B]
 0x517D4E: mov     al, [ebp+var_A]
@@ -63,7 +63,7 @@
 0x517D6F: push    0; a4
 0x517D71: push    ebx; Dst
 0x517D72: mov     ecx, edi; a1
-0x517D74: call    TESFile_GetChunkData
+0x517D74: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x517D79: mov     edx, [esi+24h]
 0x517D7C: mov     eax, [edx+10h]
 0x517D7F: lea     ecx, [esi+24h]
@@ -77,7 +77,7 @@
 0x517D93: push    ecx; Dst
 0x517D94: push    edi; a2
 0x517D95: mov     ecx, esi; this
-0x517D97: call    TESForm_LoadGenericComponents
+0x517D97: call    TESForm_LoadGenericComponents; Generic fixed-prefix/component DATA overlay. Copies min(chunk_length,fixed_prefix_size), then updates later components only when their starting offset is below chunk_length; omitted suffix components retain prior in-memory values.
 0x517D9C: mov     ecx, edi
 0x517D9E: call    TESFile_GetNextChunk
 0x517DA3: test    al, al

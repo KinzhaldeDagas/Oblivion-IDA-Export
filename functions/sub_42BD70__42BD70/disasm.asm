@@ -1,4 +1,4 @@
-0x42BD70: cmp     bInvalidateOlderFiles_Archive, 0
+0x42BD70: cmp     bInvalidateOlderFiles_Archive, 0; MEF PLAN 2026-09-07: Revalidated in current authoritative IDB. Cache-build policy depends on INI globals and archive header+160h, including helper42BD30/42BD50; it does not test live cached bit20h in+194h. Therefore bypassing early allocation/flag publication42F0A0 does not suppress the later42F242 decision. Preserve both existing policy gates; no new retention policy.
 0x42BD77: push    esi
 0x42BD78: mov     esi, ecx
 0x42BD7A: jnz     short loc_42BDCA

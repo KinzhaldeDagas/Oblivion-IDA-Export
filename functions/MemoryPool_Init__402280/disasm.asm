@@ -69,7 +69,6 @@
 0x402363: cmp     [esi+10Ch], eax
 0x402369: jbe     short loc_402387
 0x40236B: jmp     short loc_402370
-0x40236D: align 10h
 0x402370: mov     ecx, [esi+108h]
 0x402376: mov     word ptr [ecx+eax*2], 0FFFFh
 0x40237C: add     eax, 1
@@ -77,7 +76,7 @@
 0x402385: jb      short loc_402370
 0x402387: mov     edx, [esi+100h]
 0x40238D: shr     edx, 2
-0x402390: mov     g_HeapPoolsBySize[edx*4], esi
+0x402390: mov     ds:0B33080h[edx*4], esi
 0x402397: mov     eax, [esi+110h]
 0x40239D: mov     ecx, eax
 0x40239F: shr     ecx, 18h
@@ -110,3 +109,13 @@
 0x4023EB: pop     ebx
 0x4023EC: add     esp, 10h
 0x4023EF: retn    0Ch
+0x9A9D80: mov     ecx, [ebp-10h]
+0x9A9D83: add     ecx, 80h ; '€'; lpCriticalSection
+0x9A9D89: jmp     NiDeleteCriticalSection
+0x9A9D8E: mov     edx, [esp+arg_4]
+0x9A9D92: lea     eax, [edx-14h]
+0x9A9D95: mov     ecx, [edx-18h]
+0x9A9D98: xor     ecx, eax
+0x9A9D9A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9A9D9F: mov     eax, offset stru_AD6E44
+0x9A9DA4: jmp     ___CxxFrameHandler3

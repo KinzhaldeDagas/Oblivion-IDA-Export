@@ -1,1 +1,1 @@
-type_info
+struct type_info;

@@ -1,6 +1,6 @@
-0x4B2B00: push    ecx
+0x4B2B00: push    ecx; Verified: chooses reference-specific model path if available, otherwise the form model path, then appends scale percent (GetScale()*100) to create the per-reference model-loader key.
 0x4B2B01: push    ebx
-0x4B2B02: mov     ebx, [esp+8+arg_0]
+0x4B2B02: mov     ebx, [esp+8+reference]
 0x4B2B06: push    esi
 0x4B2B07: push    edi
 0x4B2B08: mov     edi, ecx
@@ -22,9 +22,9 @@
 0x4B2B31: fmul    qword ptr ds:0A309F0h
 0x4B2B37: fstp    [esp+10h+var_4]
 0x4B2B3B: fld     [esp+10h+var_4]
-0x4B2B3F: fistp   [esp+10h+arg_0]
-0x4B2B43: mov     eax, [esp+10h+arg_0]
-0x4B2B47: mov     ecx, [esp+10h+arg_4]
+0x4B2B3F: fistp   [esp+10h+reference]
+0x4B2B43: mov     eax, [esp+10h+reference]
+0x4B2B47: mov     ecx, [esp+10h+outPath]
 0x4B2B4B: push    eax
 0x4B2B4C: push    esi
 0x4B2B4D: push    offset aSI; "%s%i"

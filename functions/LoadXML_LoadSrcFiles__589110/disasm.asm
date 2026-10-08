@@ -43,8 +43,8 @@
 0x5891AC: mov     [esp+248h+Str1+7], al
 0x5891B0: lea     ecx, [esp+248h+Str1]
 0x5891B4: push    offset aInclude; "<INCLUDE"
-0x5891B9: push    ecx; Str1
-0x5891BA: call    __strcmp
+0x5891B9: push    ecx; left
+0x5891BA: call    CRT_StricmpLocaleDispatch
 0x5891BF: add     esp, 8
 0x5891C2: test    eax, eax
 0x5891C4: jnz     loc_589355
@@ -160,7 +160,7 @@
 0x58930E: test    eax, eax
 0x589310: jz      short loc_58931B
 0x589312: push    eax
-0x589313: call    FormHeapFree
+0x589313: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x589318: add     esp, 4
 0x58931B: cmp     [esp+248h+arg_4], 0
 0x589323: mov     [esp+248h+var_22C], edi
@@ -171,11 +171,11 @@
 0x589334: test    eax, eax
 0x589336: jz      short loc_589341
 0x589338: push    eax
-0x589339: call    FormHeapFree
+0x589339: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x58933E: add     esp, 4
 0x589341: push    edi
 0x589342: mov     dword ptr [edi+4], 0
-0x589349: call    FormHeapFree
+0x589349: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x58934E: add     esp, 4
 0x589351: mov     edi, [esp+248h+var_234]
 0x589355: add     esi, 1

@@ -1,0 +1,69 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "TravelPath",
+  "definition": "struct TravelPath\n{\nunsigned int vtable; ///< Verified vtable identity: constructor installs PathLow vtable. The remaining TravelPath layout follows at +4.\nBSSimpleList_VoidPtr nodes; ///< Verified BSSimpleList of TravelPathNode pointers. The list occupies +0x04..+0x0B.\nint unknown0C; ///< Unknown: constructor copies unk_B3A458 here; all later semantics remain unresolved.\nchar initializedByte10; ///< Verified: constructor initializes this byte to 1. Its runtime meaning is Unknown.\nchar padding11[3];\n}\n",
+  "kind": "struct",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified vtable identity: constructor installs PathLow vtable. The remaining TravelPath layout follows at +4.",
+      "name": "vtable",
+      "offset_bits": 0,
+      "offset_bytes": 0,
+      "size_bits": 32,
+      "type": "unsigned int"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified BSSimpleList of TravelPathNode pointers. The list occupies +0x04..+0x0B.",
+      "name": "nodes",
+      "offset_bits": 32,
+      "offset_bytes": 4,
+      "size_bits": 64,
+      "type": "BSSimpleList_VoidPtr"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Unknown: constructor copies unk_B3A458 here; all later semantics remain unresolved.",
+      "name": "unknown0C",
+      "offset_bits": 96,
+      "offset_bytes": 12,
+      "size_bits": 32,
+      "type": "int"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified: constructor initializes this byte to 1. Its runtime meaning is Unknown.",
+      "name": "initializedByte10",
+      "offset_bits": 128,
+      "offset_bytes": 16,
+      "size_bits": 8,
+      "type": "char"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "padding11",
+      "offset_bits": 136,
+      "offset_bytes": 17,
+      "size_bits": 24,
+      "type": "char[3]"
+    }
+  ],
+  "name": "TravelPath",
+  "ordinal": 10131,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 20
+}

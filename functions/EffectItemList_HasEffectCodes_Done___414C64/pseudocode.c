@@ -1,5 +1,5 @@
 // positive sp value has been detected, the output may be wrong!
-int EffectItemList_HasEffectCodes_::Done_()
+void EffectItemList_HasEffectCodes_::Done_()
 {
-  return EffectItemList_HasEffectCodes_::Done();
+  EffectItemList_HasEffectCodes_::Done(); /*0x414c65*/
 }

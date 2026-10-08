@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x56B1D0",
-    "line": "mov     ecx, [esp+arg_0]",
+    "line": "mov     ecx, [esp+functionIndex]; Looks up Script_CommandList[functionIndex]. If paramIndex exists and its ParamInfo type is ObjectReferenceID (4) or Actor (6), a missing condition param1 may fall back to the current resolved/swapped target. Other types (Quest, Global, Class, Race, Sex, etc.) do not use this target fallback.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x56B1DE",
-    "line": "mov     edx, [esp+arg_4]",
+    "line": "mov     edx, [esp+paramIndex]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x56B1EC",
-    "line": "movzx   esi, ds:Script_CommandList?.numParams[ecx]",
+    "line": "movzx   esi, ds:Script_CommandList.numParams[ecx]",
     "mnemonic": "movzx",
     "size": 7
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x56B1F8",
-    "line": "mov     ecx, ds:Script_CommandList?.params[ecx]",
+    "line": "mov     ecx, ds:Script_CommandList.params[ecx]",
     "mnemonic": "mov",
     "size": 6
   },
@@ -121,13 +121,13 @@
   },
   {
     "ea": "0x56B20D",
-    "line": "jnz     short locret_56B211",
+    "line": "jnz     short locret_56B211; Bounds check against Script_CommandList's 0x171 (369) rows before reading the opcode's ParamInfo metadata.",
     "mnemonic": "jnz",
     "size": 2
   },
   {
     "ea": "0x56B20F",
-    "line": "mov     al, 1",
+    "line": "mov     al, 1; Only ObjectReferenceID and Actor ParamInfo types request a target fallback for missing param1; Quest/Global/Form-specific condition parameters remain null.",
     "mnemonic": "mov",
     "size": 2
   },

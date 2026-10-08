@@ -1,34 +1,35 @@
+// local variable allocation has failed, the output may be wrong!
 int __userpurge TESLeveledList_CalcLeveledForm_::CalcForEachItemInCount@<eax>(
-        int a1@<ebx>,
+        TESObject *a1@<ebx>,
         unsigned __int16 a2@<si>,
-        int a3@<ebp>,
+        unsigned __int8 *a3@<ebp>,
         int a4,
         int a5,
         int a6,
-        int a7,
+        TESObject *a7,
         int a8,
         int a9,
-        char a10,
-        char a11,
+        int a10,
+        int a11,
         int a12,
         int a13,
         int a14,
         int a15,
         int a16,
         int a17,
-        int a18,
+        TESObject *a18,
         int a19,
-        int a20,
+        TESObject *a20,
         int a21)
 {
-  if ( a2 <= a1 )
-    return TESLeveledList_CalcLeveledForm_::SetReturnValues(
-             a1,
-             a3,
+  if ( a2 <= (int)a1 ) /*0x46ce85*/
+    return TESLeveledList_CalcLeveledForm_::SetReturnValues( /*0x46ce85*/
+             (int)a1,
+             (int)a3,
              a4,
              a5,
              a6,
-             a7,
+             (int)a7,
              a8,
              a9,
              a10,
@@ -39,10 +40,27 @@ int __userpurge TESLeveledList_CalcLeveledForm_::CalcForEachItemInCount@<eax>(
              a15,
              a16,
              a17,
+             (int)a18,
+             a19,
+             (int)a20,
+             a21);
+  else
+    return TESLeveledList_CalcLeveledForm_::CalcForEachItemInCount_Loop( /*0x46ce8f*/
+             a1,
+             a3,
+             a4,
+             a5,
+             a6,
+             a7,
+             a8,
+             a9,
+             a2,
+             a11,
+             a12,
+             *(TESContainer *)&a13,
+             a17,
              a18,
              a19,
              a20,
              a21);
-  else
-    return TESLeveledList_CalcLeveledForm_::CalcForEachItemInCount_Loop(a4, a5, a6, a7, a8, a9, a2);
 }

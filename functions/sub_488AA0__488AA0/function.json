@@ -1,19 +1,36 @@
 {
-  "callees_count": 32,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 17,
   "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_488AA0",
+  "chunks": [
+    [
+      "0x488AA0",
+      "0x488CA2"
+    ],
+    [
+      "0x9AFC20",
+      "0x9AFC51"
+    ]
+  ],
+  "chunks_sha256": "c04ae972ecd0aa839a9c5e0dfce572bae75d76c6551764d444982b329281e242",
+  "comment_regular": "Set per-instance charge for a specific EntryData stack. Creates ExtraDataList/ExtraCharge as needed, or removes redundant charge data when newCharge exceeds the base maximum. containerChanges identifies the owning inventory; targetStack selects the equipped instance.",
+  "comment_repeatable": "Set per-instance charge for a specific EntryData stack. Creates ExtraDataList/ExtraCharge as needed, or removes redundant charge data when newCharge exceeds the base maximum. containerChanges identifies the owning inventory; targetStack selects the equipped instance.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "EquippedEntryData_SetCharge",
   "end_ea": "0x488CA2",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_488AA0",
+  "name": "EquippedEntryData_SetCharge",
   "segment": ".text",
   "sha256": "7d566f9568271cde8ea21ce2bbfc684d9ebe8a3f940585df0f2886a569d26610",
   "size": 514,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x488AA0",
-  "type": "void __thiscall(void **this, BSExtraDataVtbl *, _DWORD **, ExtraDataList *)",
-  "xrefs_from_count": 201,
+  "total_chunk_size": 563,
+  "type": "void __thiscall(EntryData *this, float newCharge, ExtraContainerChanges_Data *containerChanges, ExtraDataList *targetStack)",
+  "xrefs_from_count": 220,
   "xrefs_to_count": 4
 }

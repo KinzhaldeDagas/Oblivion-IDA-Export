@@ -1,4 +1,4 @@
-0x453500: mov     eax, [esp+arg_0]
+0x453500: mov     eax, [esp+arg_0]; EnginePatch v1: save-buffer allocation hook used to track record buffer base/end for later savegame parser count clamps.
 0x453504: push    esi; ArgList
 0x453505: push    1
 0x453507: mov     esi, ecx

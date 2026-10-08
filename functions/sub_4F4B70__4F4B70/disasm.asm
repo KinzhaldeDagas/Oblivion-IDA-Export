@@ -1,14 +1,14 @@
-0x4F4B70: fldz
-0x4F4B72: mov     ecx, [esp+arg_4]
+0x4F4B70: fldz; GetStage_Eval (index 58 / opcode 0x103A): returns TESQuest::GetCurrentStage for the Quest parameter; it does not query the stage-done list.
+0x4F4B72: mov     ecx, [esp+quest]; this
 0x4F4B76: test    ecx, ecx
 0x4F4B78: push    esi
-0x4F4B79: mov     esi, [esp+4+arg_C]
+0x4F4B79: mov     esi, [esp+4+value]
 0x4F4B7D: fstp    qword ptr [esi]
 0x4F4B7F: jz      short loc_4F4B9A
-0x4F4B81: call    sub_529750
+0x4F4B81: call    TESQuest__GetCurrentStage
 0x4F4B86: test    eax, eax
-0x4F4B88: mov     [esp+4+arg_C], eax
-0x4F4B8C: fild    [esp+4+arg_C]
+0x4F4B88: mov     [esp+4+value], eax
+0x4F4B8C: fild    [esp+4+value]
 0x4F4B90: jge     short loc_4F4B98
 0x4F4B92: fadd    dword ptr ds:0A2FC78h
 0x4F4B98: fstp    qword ptr [esi]

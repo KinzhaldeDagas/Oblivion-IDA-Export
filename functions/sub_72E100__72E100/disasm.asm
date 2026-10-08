@@ -5,7 +5,7 @@
 0x72E104: mov     edi, [esp+10h+arg_0]
 0x72E108: push    edi
 0x72E109: mov     esi, ecx
-0x72E10B: call    nullsub_returnvVoid_1arg
+0x72E10B: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x72E110: mov     eax, [edi+220h]
 0x72E116: mov     edx, [eax+8]
 0x72E119: push    1

@@ -19,7 +19,6 @@
 0x4803F3: test    ebp, ebp
 0x4803F5: jbe     loc_48047D
 0x4803FB: jmp     short loc_480400
-0x4803FD: align 10h
 0x480400: movzx   eax, word ptr [ebx+0B6h]
 0x480407: cmp     eax, edi
 0x480409: ja      short loc_48040F
@@ -74,7 +73,7 @@
 0x480490: call    eax
 0x480492: test    eax, eax
 0x480494: jz      short loc_4804A4
-0x480496: cmp     eax, offset dword_BA7D24
+0x480496: cmp     eax, 0BA7D24h
 0x48049B: jz      short loc_4804B3
 0x48049D: mov     eax, [eax+4]
 0x4804A0: test    eax, eax

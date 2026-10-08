@@ -1,30 +1,33 @@
-_DWORD *__thiscall sub_791770(unsigned int *this, _DWORD *a2)
+// Pushes one 4-byte value into an OB_stVector4. Writes directly at end when capacity remains, otherwise calls the checked insert-one helper. Oblivion uses it for CBranch pointers and other pointer-sized SpeedTree lists.
+void __thiscall OB_stVector4_PushBack_010201A0(OB_stVector4_010201A0 *this, const unsigned int *value)
 {
-  unsigned int v3; // edx
-  unsigned int v4; // ecx
-  _DWORD *v5; // eax
-  _DWORD *result; // eax
-  void *v7; // edi
-  int v8; // [esp+4h] [ebp-8h] BYREF
+  int v2; // ebx
+  unsigned int *begin; // edx
+  unsigned int v5; // ecx
+  unsigned int *end; // eax
+  unsigned int *v7; // edi
+  OB_stVector4Iterator_010201A0 result; // [esp+4h] [ebp-8h] BYREF
 
-  v3 = *(this + 1);
-  if ( v3 )
-    v4 = (int)(*(this + 2) - v3) >> 2;
+  begin = this->begin; /*0x791776*/
+  if ( begin ) /*0x79177b*/
+    v5 = this->end - begin; /*0x791786*/
   else
-    v4 = 0;
-  if ( v3 && v4 < (int)(*(this + 3) - v3) >> 2 )
+    v5 = 0; /*0x79177d*/
+  if ( begin && v5 < this->capacity - begin ) /*0x791797*/
   {
-    v5 = (_DWORD *)*(this + 2);
-    *v5 = *a2;
-    result = v5 + 1;
-    *(this + 2) = (unsigned int)result;
+    end = this->end; /*0x791799*/
+    *end = *value; /*0x7917a2*/
+    this->end = end + 1; /*0x7917a7*/
   }
   else
   {
-    v7 = (void *)*(this + 2);
-    if ( v3 > (unsigned int)v7 )
-      _invalid_parameter_noinfo();
-    return (_DWORD *)sub_7A3620(this, (int)&v8, (int)this, v7, (int)a2);
+    v7 = this->end; /*0x7917b2*/
+    if ( begin > v7 ) /*0x7917b7*/
+      _invalid_parameter_noinfo(v2, (int)v7, (int)this); /*0x7917b9*/
+    OB_stVector4_InsertOne_010201A0( /*0x7917cc*/
+      this,
+      &result,
+      (OB_stVector4Iterator_010201A0)__PAIR64__((unsigned int)v7, (unsigned int)this),
+      value);
   }
-  return result;
 }

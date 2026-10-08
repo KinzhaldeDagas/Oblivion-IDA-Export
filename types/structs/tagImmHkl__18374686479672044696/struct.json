@@ -1,148 +1,234 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_tagImmHkl",
+  "definition": "struct _tagImmHkl\n{\nlist entry;\nHKL hkl;\nHMODULE hIME;\nIMEINFO imeInfo;\nWCHAR_0 imeClassName[17];\nULONG uSelected;\nHWND UIWnd;\nBOOL (*pImeInquire)(IMEINFO *, WCHAR_0 *, const WCHAR_0 *);\nBOOL (*pImeConfigure)(HKL, HWND, DWORD, void *);\nBOOL (*pImeDestroy)(UINT);\nLRESULT_0 (*pImeEscape)(HIMC, UINT, void *);\nBOOL (*pImeSelect)(HIMC, BOOL);\nBOOL (*pImeSetActiveContext)(HIMC, BOOL);\nUINT (*pImeToAsciiEx)(UINT, UINT, const BYTE *, DWORD *, UINT, HIMC);\nBOOL (*pNotifyIME)(HIMC, DWORD, DWORD, DWORD);\nBOOL (*pImeRegisterWord)(const WCHAR_0 *, DWORD, const WCHAR_0 *);\nBOOL (*pImeUnregisterWord)(const WCHAR_0 *, DWORD, const WCHAR_0 *);\nUINT (*pImeEnumRegisterWord)(REGISTERWORDENUMPROCW, const WCHAR_0 *, DWORD, const WCHAR_0 *, void *);\nBOOL (*pImeSetCompositionString)(HIMC, DWORD, const void *, DWORD, const void *, DWORD);\nDWORD (*pImeConversionList)(HIMC, const WCHAR_0 *, CANDIDATELIST *, DWORD, UINT);\nBOOL (*pImeProcessKey)(HIMC, UINT, LPARAM_0, const BYTE *);\nUINT (*pImeGetRegisterWordStyle)(UINT, STYLEBUFW *);\nDWORD (*pImeGetImeMenuItems)(HIMC, DWORD, DWORD, IMEMENUITEMINFOW *, IMEMENUITEMINFOW *, DWORD);\n}\n",
   "id": 18374686479672044696,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "entry",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "list"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hkl",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "HKL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hIME",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HMODULE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "imeInfo",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 28
+      "size": 28,
+      "type": "IMEINFO"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "imeClassName",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 34
+      "offset_hex": "0x2C",
+      "size": 34,
+      "type": "WCHAR_0[17]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "uSelected",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "UIWnd",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 4
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pImeInquire",
       "offset": 88,
       "offset_hex": "0x58",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(IMEINFO *, WCHAR_0 *, const WCHAR_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pImeConfigure",
       "offset": 92,
-      "offset_hex": "0x5c",
-      "size": 4
+      "offset_hex": "0x5C",
+      "size": 4,
+      "type": "BOOL (*)(HKL, HWND, DWORD, void *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pImeDestroy",
       "offset": 96,
       "offset_hex": "0x60",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(UINT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pImeEscape",
       "offset": 100,
       "offset_hex": "0x64",
-      "size": 4
+      "size": 4,
+      "type": "LRESULT_0 (*)(HIMC, UINT, void *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pImeSelect",
       "offset": 104,
       "offset_hex": "0x68",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(HIMC, BOOL)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pImeSetActiveContext",
       "offset": 108,
-      "offset_hex": "0x6c",
-      "size": 4
+      "offset_hex": "0x6C",
+      "size": 4,
+      "type": "BOOL (*)(HIMC, BOOL)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pImeToAsciiEx",
       "offset": 112,
       "offset_hex": "0x70",
-      "size": 4
+      "size": 4,
+      "type": "UINT (*)(UINT, UINT, const BYTE *, DWORD *, UINT, HIMC)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pNotifyIME",
       "offset": 116,
       "offset_hex": "0x74",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(HIMC, DWORD, DWORD, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pImeRegisterWord",
       "offset": 120,
       "offset_hex": "0x78",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(const WCHAR_0 *, DWORD, const WCHAR_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pImeUnregisterWord",
       "offset": 124,
-      "offset_hex": "0x7c",
-      "size": 4
+      "offset_hex": "0x7C",
+      "size": 4,
+      "type": "BOOL (*)(const WCHAR_0 *, DWORD, const WCHAR_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pImeEnumRegisterWord",
       "offset": 128,
       "offset_hex": "0x80",
-      "size": 4
+      "size": 4,
+      "type": "UINT (*)(REGISTERWORDENUMPROCW, const WCHAR_0 *, DWORD, const WCHAR_0 *, void *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pImeSetCompositionString",
       "offset": 132,
       "offset_hex": "0x84",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(HIMC, DWORD, const void *, DWORD, const void *, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pImeConversionList",
       "offset": 136,
       "offset_hex": "0x88",
-      "size": 4
+      "size": 4,
+      "type": "DWORD (*)(HIMC, const WCHAR_0 *, CANDIDATELIST *, DWORD, UINT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pImeProcessKey",
       "offset": 140,
-      "offset_hex": "0x8c",
-      "size": 4
+      "offset_hex": "0x8C",
+      "size": 4,
+      "type": "BOOL (*)(HIMC, UINT, LPARAM_0, const BYTE *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pImeGetRegisterWordStyle",
       "offset": 144,
       "offset_hex": "0x90",
-      "size": 4
+      "size": 4,
+      "type": "UINT (*)(UINT, STYLEBUFW *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pImeGetImeMenuItems",
       "offset": 148,
       "offset_hex": "0x94",
-      "size": 4
+      "size": 4,
+      "type": "DWORD (*)(HIMC, DWORD, DWORD, IMEMENUITEMINFOW *, IMEMENUITEMINFOW *, DWORD)"
     }
   ],
   "name": "_tagImmHkl",
+  "ordinal": 7902,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 152
 }

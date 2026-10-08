@@ -1,6 +1,6 @@
 0x77F8B0: push    esi
 0x77F8B1: push    edi
-0x77F8B2: mov     edi, [esp+8+arg_0]
+0x77F8B2: mov     edi, [esp+8+alphaProperty]
 0x77F8B6: test    byte ptr [edi+18h], 1
 0x77F8BA: mov     esi, ecx
 0x77F8BC: mov     eax, [esi]
@@ -40,7 +40,7 @@
 0x77F910: test    al, 1
 0x77F912: push    0
 0x77F914: mov     ecx, esi
-0x77F916: jz      short loc_77F956
+0x77F916: jz      short loc_77F956; Authoritative NiAlphaProperty application: flag bit 9 gates D3DRS_ALPHATESTENABLE.
 0x77F918: mov     edx, [esi]
 0x77F91A: mov     eax, [edx+64h]
 0x77F91D: push    1
@@ -56,7 +56,7 @@
 0x77F938: push    ecx
 0x77F939: push    19h
 0x77F93B: mov     ecx, esi
-0x77F93D: call    edx
+0x77F93D: call    edx; Applies D3DRS_ALPHAFUNC from selector bits 10..12. Tree flags 0x12EC select index 4, mapped to D3DCMP_GREATER by NiD3DRenderState construction.
 0x77F93F: movzx   ecx, byte ptr [edi+1Ah]
 0x77F943: mov     eax, [esi]
 0x77F945: mov     edx, [eax+64h]
@@ -65,7 +65,7 @@
 0x77F94B: push    18h
 0x77F94D: mov     ecx, esi
 0x77F94F: call    edx
-0x77F951: pop     edi
+0x77F951: pop     edi; Applies NiAlphaProperty reference byte at +0x1A to D3DRS_ALPHAREF. Tree leaf LOD sync updates this byte dynamically.
 0x77F952: pop     esi
 0x77F953: retn    4
 0x77F956: mov     eax, [esi]

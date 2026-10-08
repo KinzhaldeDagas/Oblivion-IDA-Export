@@ -1,19 +1,36 @@
 {
-  "callees_count": 13,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 12,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 8,
+  "chunks": [
+    [
+      "0x4F2A10",
+      "0x4F2C06"
+    ],
+    [
+      "0x9B6980",
+      "0x9B69F6"
+    ]
+  ],
+  "chunks_sha256": "867bc4035ea23a99b4483efa47c8806b1dd0b76bcb15afd99f3d43a042489c39",
+  "comment_regular": "Verified: TESWorldSpace constructor initializes road (+0x54) to null. In this Oblivion build, the field is a TESRoad* owned by WorldSpace: the destructor releases it, CreateDuplicateForm clones it and verifies the clone's TESRoad RTTI, and TESRoad grouping code uses the reciprocal owner pointer. The adjacent +0x4C and +0x50 fields remain Unknown. Fallout's TESWorldSpace has a different layout and no TESRoad-named type or function was found in the available name/type searches; no Fallout homolog is claimed.",
+  "comment_repeatable": "Verified: TESWorldSpace constructor initializes road (+0x54) to null. In this Oblivion build, the field is a TESRoad* owned by WorldSpace: the destructor releases it, CreateDuplicateForm clones it and verifies the clone's TESRoad RTTI, and TESRoad grouping code uses the reciprocal owner pointer. The adjacent +0x4C and +0x50 fields remain Unknown. Fallout's TESWorldSpace has a different layout and no TESRoad-named type or function was found in the available name/type searches; no Fallout homolog is claimed.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 9,
   "display_name": "TESWorldSpace::TESWorldSpace(void)",
   "end_ea": "0x4F2C06",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??0TESWorldSpace@@QAE@XZ",
   "segment": ".text",
   "sha256": "d075a00ccecc823ac32f002bd04f9ff4858bc7b94ea1fc5b1e135fac1305dd57",
   "size": 502,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4F2A10",
+  "total_chunk_size": 620,
   "type": "TESWorldSpace *__thiscall(TESWorldSpace *__hidden this)",
-  "xrefs_from_count": 149,
+  "xrefs_from_count": 183,
   "xrefs_to_count": 3
 }

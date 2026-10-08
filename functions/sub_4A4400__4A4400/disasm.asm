@@ -1,4 +1,4 @@
-0x4A4400: push    esi
+0x4A4400: push    esi; Verified: clears TESRegionDataList nodes and destroys each payload only when ownsData at +8 is nonzero.
 0x4A4401: mov     esi, ecx
 0x4A4403: call    BSSimpleList_Count
 0x4A4408: test    eax, eax
@@ -14,7 +14,7 @@
 0x4A441F: mov     edx, [eax]
 0x4A4421: push    eax
 0x4A4422: mov     [esi], edx
-0x4A4424: call    FormHeapFree
+0x4A4424: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4A4429: add     esp, 4
 0x4A442C: jmp     short loc_4A4434
 0x4A442E: mov     dword ptr [esi], 0

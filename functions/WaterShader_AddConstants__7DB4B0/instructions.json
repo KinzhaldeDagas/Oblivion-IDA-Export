@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7DB4B0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Pass230: WaterShader::AddConstants declares WaterSM3 FogParam ps c9 at 0x00B45E74 and FogColor ps c10 at 0x00B45E84.",
     "mnemonic": "push",
     "size": 2
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x7DB524",
-    "line": "push    offset flt_B45E64",
+    "line": "push    (offset OB_ShaderConstantStorage_010201A0+50h)",
     "mnemonic": "push",
     "size": 5
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x7DB54D",
-    "line": "push    offset dword_B45DD4",
+    "line": "push    offset flt_B45DD4",
     "mnemonic": "push",
     "size": 5
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x7DB576",
-    "line": "push    offset flt_B45DF4",
+    "line": "push    offset unk_B45DF4",
     "mnemonic": "push",
     "size": 5
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x7DB59F",
-    "line": "push    offset flt_B45E04",
+    "line": "push    offset unk_B45E04",
     "mnemonic": "push",
     "size": 5
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x7DB5C8",
-    "line": "push    offset dword_B45EC4",
+    "line": "push    (offset OB_ShaderConstantStorage_010201A0+0B0h)",
     "mnemonic": "push",
     "size": 5
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x7DB5EE",
-    "line": "push    offset dword_B45E14",
+    "line": "push    offset OB_ShaderConstantStorage_010201A0",
     "mnemonic": "push",
     "size": 5
   },
@@ -727,7 +727,7 @@
   },
   {
     "ea": "0x7DB61A",
-    "line": "push    offset dword_B45E24",
+    "line": "push    (offset OB_ShaderConstantStorage_010201A0+10h)",
     "mnemonic": "push",
     "size": 5
   },
@@ -811,7 +811,7 @@
   },
   {
     "ea": "0x7DB643",
-    "line": "push    offset dword_B45E34",
+    "line": "push    (offset OB_ShaderConstantStorage_010201A0+20h)",
     "mnemonic": "push",
     "size": 5
   },
@@ -895,7 +895,7 @@
   },
   {
     "ea": "0x7DB66C",
-    "line": "push    offset flt_B45E44",
+    "line": "push    (offset OB_ShaderConstantStorage_010201A0+30h)",
     "mnemonic": "push",
     "size": 5
   },
@@ -979,7 +979,7 @@
   },
   {
     "ea": "0x7DB695",
-    "line": "push    offset dword_B45E74",
+    "line": "push    (offset OB_ShaderConstantStorage_010201A0+60h)",
     "mnemonic": "push",
     "size": 5
   },
@@ -1033,7 +1033,7 @@
   },
   {
     "ea": "0x7DB6B3",
-    "line": "call    eax",
+    "line": "call    eax; Fog constant-map decode: WaterShader pixel map declares FogParam at ps c9 from B45E14[0x18] / B45E74; writer is WaterShader fog consumer 0x7DCBD0.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1063,7 +1063,7 @@
   },
   {
     "ea": "0x7DB6BE",
-    "line": "push    offset dword_B45E84",
+    "line": "push    (offset OB_ShaderConstantStorage_010201A0+70h)",
     "mnemonic": "push",
     "size": 5
   },
@@ -1117,7 +1117,7 @@
   },
   {
     "ea": "0x7DB6DC",
-    "line": "call    eax",
+    "line": "call    eax; Fog constant-map decode: WaterShader pixel map declares FogColor at ps c10 from B45E14[0x1C] / B45E84; writer is WaterShader fog consumer 0x7DCBD0.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1141,7 +1141,7 @@
   },
   {
     "ea": "0x7DB6E4",
-    "line": "push    offset flt_B45E94",
+    "line": "push    (offset OB_ShaderConstantStorage_010201A0+80h)",
     "mnemonic": "push",
     "size": 5
   },
@@ -1231,7 +1231,7 @@
   },
   {
     "ea": "0x7DB710",
-    "line": "push    offset flt_B45EB4",
+    "line": "push    (offset OB_ShaderConstantStorage_010201A0+0A0h)",
     "mnemonic": "push",
     "size": 5
   },
@@ -1567,7 +1567,7 @@
   },
   {
     "ea": "0x7DB7BC",
-    "line": "push    offset flt_B45EA4",
+    "line": "push    (offset OB_ShaderConstantStorage_010201A0+90h)",
     "mnemonic": "push",
     "size": 5
   },
@@ -1651,7 +1651,7 @@
   },
   {
     "ea": "0x7DB7E5",
-    "line": "push    offset flt_B45ED4",
+    "line": "push    (offset OB_ShaderConstantStorage_010201A0+0C0h)",
     "mnemonic": "push",
     "size": 5
   },
@@ -1735,7 +1735,7 @@
   },
   {
     "ea": "0x7DB80E",
-    "line": "push    offset dword_B45EE4",
+    "line": "push    (offset OB_ShaderConstantStorage_010201A0+0D0h)",
     "mnemonic": "push",
     "size": 5
   },
@@ -1834,5 +1834,107 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9D00B0",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D00B3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D00B4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D00B9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D00BA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D00BB",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D00BE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D00BF",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D00C4",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D00C5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D00C6",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D00CA",
+    "line": "lea     eax, [edx-0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D00CD",
+    "line": "mov     ecx, [edx-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D00D0",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D00D2",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D00D7",
+    "line": "mov     eax, offset stru_AF8B40",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D00DC",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

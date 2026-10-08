@@ -3,7 +3,7 @@
 0x5DCEF3: call    sub_5DBB00
 0x5DCEF8: push    0FFFFFFFFh
 0x5DCEFA: mov     ecx, esi
-0x5DCEFC: call    sub_5DA1A0
+0x5DCEFC: call    StatsMenu_UpdateAttributesAndSkills; Full refresh (actorValue == -1) scans exactly 21 native Oblivion skills, counts strict TESClass major matches, publishes that count to the Stats XML, and orders major rows before one optional separator and all non-major rows. A targeted refresh updates only the requested native actor value and does not reorder rows.
 0x5DCF01: mov     ecx, esi
 0x5DCF03: call    sub_5DC950
 0x5DCF08: mov     ecx, esi

@@ -1,1 +1,1 @@
-EffectSettingMenu
+struct EffectSettingMenu;

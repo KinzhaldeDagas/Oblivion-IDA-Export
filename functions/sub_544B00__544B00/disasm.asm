@@ -2,12 +2,12 @@
 0x544B01: mov     esi, ecx
 0x544B03: mov     ecx, [esi+14h]
 0x544B06: push    4
-0x544B08: call    NiNode_GetNiPropertyByID
+0x544B08: call    NiNode_GetNiPropertyByID;
 0x544B0D: test    eax, eax
 0x544B0F: jz      short loc_544B45
 0x544B11: mov     ecx, [esi+14h]
 0x544B14: push    4
-0x544B16: call    NiNode_GetNiPropertyByID
+0x544B16: call    NiNode_GetNiPropertyByID;
 0x544B1B: mov     edx, [eax]
 0x544B1D: mov     ecx, eax
 0x544B1F: mov     eax, [edx+54h]
@@ -20,7 +20,7 @@
 0x544B30: jz      short loc_544B45
 0x544B32: mov     ecx, [esi+14h]
 0x544B35: push    4
-0x544B37: call    NiNode_GetNiPropertyByID
+0x544B37: call    NiNode_GetNiPropertyByID;
 0x544B3C: test    eax, eax
 0x544B3E: jz      short loc_544B45
 0x544B40: fld     dword ptr [eax+78h]

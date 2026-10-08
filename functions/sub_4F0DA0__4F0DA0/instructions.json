@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4F0DA0",
-    "line": "cmp     byte ptr [ecx+0D8h], 0",
+    "line": "cmp     byte ptr [ecx+0D8h], 0; Verified cell-LOD filter: if +0xD8 cellLODMapLoaded is set, checks the +0xC8 CellsWithLODObjects map for the packed cell coordinate; otherwise returns true as a permissive fallback.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -13,25 +13,25 @@
   },
   {
     "ea": "0x4F0DA9",
-    "line": "movsx   edx, [esp+arg_0]",
+    "line": "movsx   edx, [esp+cellX]",
     "mnemonic": "movsx",
     "size": 5
   },
   {
     "ea": "0x4F0DAE",
-    "line": "lea     eax, [esp+arg_0]",
+    "line": "lea     eax, [esp+cellX]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4F0DB2",
-    "line": "push    eax",
+    "line": "push    eax; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F0DB3",
-    "line": "movzx   eax, [esp+4+arg_4]",
+    "line": "movzx   eax, [esp+4+cellY]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -49,19 +49,19 @@
   },
   {
     "ea": "0x4F0DBD",
-    "line": "push    edx",
+    "line": "push    edx; key",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F0DBE",
-    "line": "add     ecx, 0C8h ; 'È'",
+    "line": "add     ecx, 0C8h ; 'È'; this",
     "mnemonic": "add",
     "size": 6
   },
   {
     "ea": "0x4F0DC4",
-    "line": "call    sub_4D6760",
+    "line": "call    NiTMap_TryGetAtByteValue; Verified generic NiTMap lookup helper: hashes the UInt32 key through the map vtable, walks the bucket chain using the map's key comparator, returns false when absent, and on a match writes the low byte of the entry data field to valueOut and returns true. Callers use it for byte/boolean-valued maps, including PlayerCharacter_GetLastSpaceForDoor and cell/worldspace visited or filter maps; this helper does not establish the full map value width.",
     "mnemonic": "call",
     "size": 5
   },

@@ -10,4 +10,4 @@
 0x68D1B0: fld     [esp+arg_C]
 0x68D1B4: fstp    dword ptr [esp+0]
 0x68D1B7: push    ebp
-0x68D1B8: call    ValueModifierEffect_ModifyAV
+0x68D1B8: call    ValueModifierEffect_ModifyAV; OBMEFix 2026-05-30: vanilla ValueModifierEffect::ApplyToActor clamps negative DamageAV_F so non-fatigue actor values cannot be driven below zero. OBME's replacement helper omits this clamp; OBMEFix restores it for OBME-origin PlayerCharacter::DamageAV_F calls.

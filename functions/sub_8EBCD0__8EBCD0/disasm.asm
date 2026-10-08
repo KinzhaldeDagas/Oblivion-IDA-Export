@@ -1,12 +1,12 @@
-0x8EBCD0: push    ebp
+0x8EBCD0: push    ebp; Projects a point/motion against two active surface planes; falls back to single-plane projections when the pair is degenerate or incompatible.
 0x8EBCD1: mov     ebp, esp
 0x8EBCD3: and     esp, 0FFFFFFF0h
 0x8EBCD6: sub     esp, 48h
 0x8EBCD9: push    ebx
-0x8EBCDA: mov     ebx, [ebp+arg_4]
+0x8EBCDA: mov     ebx, [ebp+surfaceB]
 0x8EBCDD: movaps  xmm6, xmmword ptr [ebx]
 0x8EBCE0: push    esi
-0x8EBCE1: mov     esi, [ebp+arg_0]
+0x8EBCE1: mov     esi, [ebp+surfaceA]
 0x8EBCE4: movaps  xmm0, xmmword ptr [esi]
 0x8EBCE7: movaps  xmm1, xmm0
 0x8EBCEA: shufps  xmm1, xmm0, 0D2h ; 'Ò'
@@ -127,7 +127,7 @@
 0x8EBE9C: cmp     cl, 7
 0x8EBE9F: jz      loc_8EBF33
 0x8EBEA5: push    edi
-0x8EBEA6: call    sub_8EB7E0
+0x8EBEA6: call    hkSurfaceConstraintUtil_SortActiveConstraints; Sorts active surface constraints before recomputing the active-set solution.
 0x8EBEAB: mov     edx, [edi+38h]
 0x8EBEAE: mov     eax, [edx+48h]
 0x8EBEB1: mov     edx, [edi+3Ch]
@@ -148,42 +148,42 @@
 0x8EBEDE: mov     [edx+ecx+0Ch], eax
 0x8EBEE2: mov     edx, [esi+30h]
 0x8EBEE5: mov     eax, [ebx+30h]
-0x8EBEE8: mov     esi, [ebp+arg_C]
+0x8EBEE8: mov     esi, [ebp+outPoint]; outPoint
 0x8EBEEB: add     esp, 4
 0x8EBEEE: cmp     edx, eax
 0x8EBEF0: jle     short loc_8EBF11
-0x8EBEF2: push    esi
-0x8EBEF3: push    edi
-0x8EBEF4: mov     ecx, ebx
-0x8EBEF6: call    sub_8EB970
-0x8EBEFB: mov     eax, [ebp+arg_8]
-0x8EBEFE: mov     ecx, [ebp+arg_0]
-0x8EBF01: push    eax
-0x8EBF02: push    edi
-0x8EBF03: call    sub_8EB970
+0x8EBEF2: push    esi; inputPoint
+0x8EBEF3: push    edi; solverState
+0x8EBEF4: mov     ecx, ebx; surface
+0x8EBEF6: call    hkSurfaceConstraintUtil_ProjectAgainstSinglePlane; Projects a point/motion against a single active surface plane with tolerance/radius fields from the surface entry.
+0x8EBEFB: mov     eax, [ebp+inputPoint]
+0x8EBEFE: mov     ecx, [ebp+surfaceA]; surface
+0x8EBF01: push    eax; inputPoint
+0x8EBF02: push    edi; solverState
+0x8EBF03: call    hkSurfaceConstraintUtil_ProjectAgainstSinglePlane; Projects a point/motion against a single active surface plane with tolerance/radius fields from the surface entry.
 0x8EBF08: add     esp, 10h
 0x8EBF0B: pop     esi
 0x8EBF0C: pop     ebx
 0x8EBF0D: mov     esp, ebp
 0x8EBF0F: pop     ebp
 0x8EBF10: retn
-0x8EBF11: mov     ecx, [ebp+arg_8]
-0x8EBF14: push    ecx
-0x8EBF15: mov     ecx, [ebp+arg_0]
-0x8EBF18: push    edi
-0x8EBF19: call    sub_8EB970
-0x8EBF1E: mov     esi, [ebp+arg_C]
-0x8EBF21: push    esi
-0x8EBF22: push    edi
-0x8EBF23: mov     ecx, ebx
-0x8EBF25: call    sub_8EB970
+0x8EBF11: mov     ecx, [ebp+inputPoint]
+0x8EBF14: push    ecx; inputPoint
+0x8EBF15: mov     ecx, [ebp+surfaceA]; surface
+0x8EBF18: push    edi; solverState
+0x8EBF19: call    hkSurfaceConstraintUtil_ProjectAgainstSinglePlane; Projects a point/motion against a single active surface plane with tolerance/radius fields from the surface entry.
+0x8EBF1E: mov     esi, [ebp+outPoint]; outPoint
+0x8EBF21: push    esi; inputPoint
+0x8EBF22: push    edi; solverState
+0x8EBF23: mov     ecx, ebx; surface
+0x8EBF25: call    hkSurfaceConstraintUtil_ProjectAgainstSinglePlane; Projects a point/motion against a single active surface plane with tolerance/radius fields from the surface entry.
 0x8EBF2A: add     esp, 10h
 0x8EBF2D: pop     esi
 0x8EBF2E: pop     ebx
 0x8EBF2F: mov     esp, ebp
 0x8EBF31: pop     ebp
 0x8EBF32: retn
-0x8EBF33: mov     edx, [ebp+arg_8]
+0x8EBF33: mov     edx, [ebp+inputPoint]
 0x8EBF36: movaps  xmm2, xmmword ptr [edx]
 0x8EBF39: subps   xmm2, xmm1
 0x8EBF3C: movaps  xmm3, xmm2
@@ -250,7 +250,7 @@
 0x8EC00D: test    ah, 1
 0x8EC010: fstp    st
 0x8EC012: jnz     short loc_8EC022
-0x8EC014: mov     ecx, [ebp+arg_C]
+0x8EC014: mov     ecx, [ebp+outPoint]
 0x8EC017: fstp    st
 0x8EC019: movaps  xmmword ptr [ecx], xmm1
 0x8EC01C: pop     esi
@@ -283,7 +283,7 @@
 0x8EC06C: fmulp   st(1), st
 0x8EC06E: fadd    [esp+50h+var_3C]
 0x8EC072: fmul    [esp+50h+var_40]
-0x8EC076: mov     edx, [ebp+arg_C]
+0x8EC076: mov     edx, [ebp+outPoint]
 0x8EC079: fstp    [esp+50h+var_34]
 0x8EC07D: movss   xmm2, [esp+50h+var_34]
 0x8EC083: movaps  xmm3, xmm2

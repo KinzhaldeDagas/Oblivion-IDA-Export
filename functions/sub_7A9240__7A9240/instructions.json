@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A9240",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; OBLIVION AUTHORITY 2026-08-27: CLeafLodEngine::FindPairs accepts a 16-byte leaf-vector value. For each primary leaf in source order, it scans a contiguous following prefix only until end or the first already-marked candidate, chooses the nearest position within spacing tolerance, and marks only that chosen match. A leaf already used as a match may later be a primary. It never compares textureIndexByte, colorScaleByte, packedColor, or texture record, so pairs may cross leaf textures/layers.",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x7A926E",
-    "line": "mov     ebx, [esp+94h+arg_4]",
+    "line": "mov     ebx, [esp+94h+originalLeaves.begin]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x7A9275",
-    "line": "mov     ebp, [esp+94h+arg_8]",
+    "line": "mov     ebp, [esp+94h+originalLeaves.end]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -157,19 +157,19 @@
   },
   {
     "ea": "0x7A9294",
-    "line": "mov     [esp+94h+var_20], eax",
+    "line": "mov     [esp+94h+var_20.logicalSize], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A9298",
-    "line": "mov     [esp+94h+var_70], eax",
+    "line": "mov     [esp+94h+value], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A929C",
-    "line": "lea     eax, [esp+94h+var_70]",
+    "line": "lea     eax, [esp+94h+value]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -187,37 +187,37 @@
   },
   {
     "ea": "0x7A92A6",
-    "line": "push    eax; int",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A92A7",
-    "line": "push    ecx; char *",
+    "line": "push    ecx; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A92A8",
-    "line": "lea     ecx, [esp+9Ch+var_1C]",
+    "line": "lea     ecx, [esp+9Ch+var_20.words]; this",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x7A92AF",
-    "line": "call    sub_7A8E20",
+    "line": "call    OB_stVectorUInt32_ctor_fill_010201A0; OBLIVION AUTHORITY (2026-08-30): Constructs/fills the vector<unsigned int> backing-word store used by FindPairs' vector<bool> paired-state table.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A92B4",
-    "line": "push    esi",
+    "line": "push    esi; newSize",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A92B5",
-    "line": "lea     ecx, [esp+98h+var_20]",
+    "line": "lea     ecx, [esp+98h+var_20]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -229,13 +229,13 @@
   },
   {
     "ea": "0x7A92C1",
-    "line": "call    sub_7A8980",
+    "line": "call    OB_stVectorBool_Resize_010201A0; OBLIVION AUTHORITY (2026-08-30): Resizes the 0x14-byte vector<bool>: logicalSize is followed by a 0x10-byte vector<unsigned int> word store; unused high bits in the last word are cleared.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A92C6",
-    "line": "mov     eax, [esp+94h+var_18]",
+    "line": "mov     eax, [esp+94h+var_20.words.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x7A92CE",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x7A92D2",
-    "line": "cmp     eax, [esp+0A4h+var_14]",
+    "line": "cmp     eax, [esp+0A4h+var_20.words.end]",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x7A930E",
-    "line": "mov     eax, [esp+0A4h+var_20]",
+    "line": "mov     eax, [esp+0A4h+var_20.logicalSize]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -355,25 +355,25 @@
   },
   {
     "ea": "0x7A9319",
-    "line": "push    eax",
+    "line": "push    eax; delta",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A931A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A931C",
-    "line": "call    sub_7A8800",
+    "line": "call    OB_stVectorBoolIterator_Advance_010201A0; OBLIVION AUTHORITY (2026-08-30): Advances the debug vector<bool> iterator by a signed bit distance, carrying across packed 32-bit words and preserving bitOffset 0..31.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A9321",
-    "line": "mov     edi, [esp+0A4h+var_18]",
+    "line": "mov     edi, [esp+0A4h+var_20.words.begin]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x7A932B",
-    "line": "cmp     edi, [esp+0B0h+var_14]",
+    "line": "cmp     edi, [esp+0B0h+var_20.words.end]",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x7A9358",
-    "line": "call    sub_7A8E90",
+    "line": "call    OB_stVectorBool_FillRangeChecked_010201A0; OBLIVION AUTHORITY (2026-08-30): Validates the begin/end debug iterators and dispatches the packed vector<bool> range fill.",
     "mnemonic": "call",
     "size": 5
   },
@@ -559,19 +559,19 @@
   },
   {
     "ea": "0x7A9396",
-    "line": "mov     [esp+94h+var_54], edx",
+    "line": "mov     [esp+94h+var_54.m_pLeaf], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A939A",
-    "line": "mov     [esp+94h+var_50], 0",
+    "line": "mov     [esp+94h+var_54.m_pLeafMatch], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x7A93A2",
-    "line": "mov     [esp+94h+var_78], 0FFFFFFFFh",
+    "line": "mov     [esp+94h+delta], 0FFFFFFFFh",
     "mnemonic": "mov",
     "size": 8
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x7A93B5",
-    "line": "lea     eax, [esp+94h+arg_0]",
+    "line": "lea     eax, [esp+94h+originalLeaves]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x7A93CF",
-    "line": "mov     [esp+94h+var_70], eax",
+    "line": "mov     [esp+94h+value], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x7A93E2",
-    "line": "mov     ecx, [esp+94h+var_70]",
+    "line": "mov     ecx, [esp+94h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -739,7 +739,7 @@
   },
   {
     "ea": "0x7A9401",
-    "line": "lea     edx, [esp+94h+arg_0]",
+    "line": "lea     edx, [esp+94h+originalLeaves]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -775,13 +775,13 @@
   },
   {
     "ea": "0x7A941B",
-    "line": "mov     esi, [esp+94h+var_18]",
+    "line": "mov     esi, [esp+94h+var_20.words.begin]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A941F",
-    "line": "cmp     esi, [esp+94h+var_14]",
+    "line": "cmp     esi, [esp+94h+var_20.words.end]",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -805,43 +805,43 @@
   },
   {
     "ea": "0x7A9431",
-    "line": "push    edi",
+    "line": "push    edi; delta",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A9432",
-    "line": "lea     ecx, [esp+98h+var_38]",
+    "line": "lea     ecx, [esp+98h+var_38]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A9436",
-    "line": "mov     [esp+98h+var_34], esi",
+    "line": "mov     [esp+98h+var_38.word], esi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A943A",
-    "line": "mov     [esp+98h+var_30], 0",
+    "line": "mov     [esp+98h+var_38.bitOffset], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x7A9442",
-    "line": "mov     [esp+98h+var_38], eax",
+    "line": "mov     [esp+98h+var_38.owner], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A9446",
-    "line": "call    sub_7A8800",
+    "line": "call    OB_stVectorBoolIterator_Advance_010201A0; OBLIVION AUTHORITY (2026-08-30): Advances the debug vector<bool> iterator by a signed bit distance, carrying across packed 32-bit words and preserving bitOffset 0..31.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A944B",
-    "line": "mov     esi, [esp+94h+var_38]",
+    "line": "mov     esi, [esp+94h+var_38.owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -853,7 +853,7 @@
   },
   {
     "ea": "0x7A9451",
-    "line": "mov     ebp, [esp+94h+var_34]",
+    "line": "mov     ebp, [esp+94h+var_38.word]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -937,7 +937,7 @@
   },
   {
     "ea": "0x7A947D",
-    "line": "mov     ebx, [esp+94h+var_30]",
+    "line": "mov     ebx, [esp+94h+var_38.bitOffset]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1003,19 +1003,19 @@
   },
   {
     "ea": "0x7A949E",
-    "line": "jnz     loc_7A9616",
+    "line": "jnz     loc_7A9616; If the current candidate's match bit is already set, breaks the candidate loop. This truncates the scan at the first prior match; it does not skip that entry and continue to later unpaired leaves.",
     "mnemonic": "jnz",
     "size": 6
   },
   {
     "ea": "0x7A94A4",
-    "line": "mov     esi, [esp+94h+var_18]",
+    "line": "mov     esi, [esp+94h+var_20.words.begin]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A94A8",
-    "line": "cmp     esi, [esp+94h+var_14]",
+    "line": "cmp     esi, [esp+94h+var_20.words.end]",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -1039,43 +1039,43 @@
   },
   {
     "ea": "0x7A94BA",
-    "line": "push    edi",
+    "line": "push    edi; delta",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A94BB",
-    "line": "lea     ecx, [esp+98h+var_2C]",
+    "line": "lea     ecx, [esp+98h+var_2C]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A94BF",
-    "line": "mov     [esp+98h+var_28], esi",
+    "line": "mov     [esp+98h+var_2C.word], esi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A94C3",
-    "line": "mov     [esp+98h+var_24], 0",
+    "line": "mov     [esp+98h+var_2C.bitOffset], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x7A94CB",
-    "line": "mov     [esp+98h+var_2C], eax",
+    "line": "mov     [esp+98h+var_2C.owner], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A94CF",
-    "line": "call    sub_7A8800",
+    "line": "call    OB_stVectorBoolIterator_Advance_010201A0; OBLIVION AUTHORITY (2026-08-30): Advances the debug vector<bool> iterator by a signed bit distance, carrying across packed 32-bit words and preserving bitOffset 0..31.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A94D4",
-    "line": "mov     esi, [esp+94h+var_2C]",
+    "line": "mov     esi, [esp+94h+var_2C.owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1087,7 +1087,7 @@
   },
   {
     "ea": "0x7A94DA",
-    "line": "mov     ebx, [esp+94h+var_28]",
+    "line": "mov     ebx, [esp+94h+var_2C.word]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1171,7 +1171,7 @@
   },
   {
     "ea": "0x7A9506",
-    "line": "mov     ebp, [esp+94h+var_24]",
+    "line": "mov     ebp, [esp+94h+var_2C.bitOffset]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1303,13 +1303,13 @@
   },
   {
     "ea": "0x7A954D",
-    "line": "add     esi, 4",
+    "line": "add     esi, 4; Candidate pairing input is only the candidate leaf position at +4; no texture-index compatibility test precedes it.",
     "mnemonic": "add",
     "size": 3
   },
   {
     "ea": "0x7A9550",
-    "line": "cmp     ebp, [esp+94h+arg_8]",
+    "line": "cmp     ebp, [esp+94h+originalLeaves.end]",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -1381,7 +1381,7 @@
   },
   {
     "ea": "0x7A9578",
-    "line": "fld     st(1)",
+    "line": "fld     st(1); Computes Euclidean distance between current and candidate leaf positions. Pair eligibility is geometric, not per-texture.",
     "mnemonic": "fld",
     "size": 2
   },
@@ -1519,7 +1519,7 @@
   },
   {
     "ea": "0x7A95B6",
-    "line": "jnz     short loc_7A95DC",
+    "line": "jnz     short loc_7A95DC; Within the still-unmarked contiguous candidate prefix, accepts a candidate only when Euclidean position distance is below both spacing tolerance and the current shortest distance. No leaf-texture equality condition exists.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -1561,13 +1561,13 @@
   },
   {
     "ea": "0x7A95CC",
-    "line": "mov     [esp+94h+var_50], eax",
+    "line": "mov     [esp+94h+var_54.m_pLeafMatch], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A95D0",
-    "line": "mov     [esp+94h+var_78], edi",
+    "line": "mov     [esp+94h+delta], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1651,7 +1651,7 @@
   },
   {
     "ea": "0x7A95FC",
-    "line": "mov     ebp, [esp+94h+arg_8]",
+    "line": "mov     ebp, [esp+94h+originalLeaves.end]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1669,7 +1669,7 @@
   },
   {
     "ea": "0x7A960A",
-    "line": "mov     ebx, [esp+94h+arg_4]",
+    "line": "mov     ebx, [esp+94h+originalLeaves.begin]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1687,19 +1687,19 @@
   },
   {
     "ea": "0x7A961A",
-    "line": "mov     ebp, [esp+94h+arg_8]",
+    "line": "mov     ebp, [esp+94h+originalLeaves.end]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x7A9621",
-    "line": "mov     ebx, [esp+94h+arg_4]",
+    "line": "mov     ebx, [esp+94h+originalLeaves.begin]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x7A9628",
-    "line": "cmp     [esp+94h+var_50], 0",
+    "line": "cmp     [esp+94h+var_54.m_pLeafMatch], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1711,13 +1711,13 @@
   },
   {
     "ea": "0x7A9633",
-    "line": "mov     edi, [esp+94h+var_18]",
+    "line": "mov     edi, [esp+94h+var_20.words.begin]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A9637",
-    "line": "cmp     edi, [esp+94h+var_14]",
+    "line": "cmp     edi, [esp+94h+var_20.words.end]",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -1735,7 +1735,7 @@
   },
   {
     "ea": "0x7A9645",
-    "line": "mov     edx, [esp+94h+var_78]",
+    "line": "mov     edx, [esp+94h+delta]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1747,43 +1747,43 @@
   },
   {
     "ea": "0x7A964D",
-    "line": "mov     [esp+94h+var_44], ecx",
+    "line": "mov     [esp+94h+var_44.owner], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A9651",
-    "line": "push    edx",
+    "line": "push    edx; delta",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A9652",
-    "line": "lea     ecx, [esp+98h+var_44]",
+    "line": "lea     ecx, [esp+98h+var_44]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A9656",
-    "line": "mov     [esp+98h+var_40], edi",
+    "line": "mov     [esp+98h+var_44.word], edi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A965A",
-    "line": "mov     [esp+98h+var_3C], 0",
+    "line": "mov     [esp+98h+var_44.bitOffset], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x7A9662",
-    "line": "call    sub_7A8800",
+    "line": "call    OB_stVectorBoolIterator_Advance_010201A0; OBLIVION AUTHORITY (2026-08-30): Advances the debug vector<bool> iterator by a signed bit distance, carrying across packed 32-bit words and preserving bitOffset 0..31.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A9667",
-    "line": "mov     ebx, [esp+94h+var_44]",
+    "line": "mov     ebx, [esp+94h+var_44.owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1795,7 +1795,7 @@
   },
   {
     "ea": "0x7A966D",
-    "line": "mov     edi, [esp+94h+var_40]",
+    "line": "mov     edi, [esp+94h+var_44.word]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1903,7 +1903,7 @@
   },
   {
     "ea": "0x7A96A7",
-    "line": "add     ecx, [esp+94h+var_3C]",
+    "line": "add     ecx, [esp+94h+var_44.bitOffset]",
     "mnemonic": "add",
     "size": 4
   },
@@ -1927,7 +1927,7 @@
   },
   {
     "ea": "0x7A96B4",
-    "line": "mov     ecx, [esp+94h+var_3C]",
+    "line": "mov     ecx, [esp+94h+var_44.bitOffset]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1945,7 +1945,7 @@
   },
   {
     "ea": "0x7A96BF",
-    "line": "mov     ecx, [esp+94h+var_74]",
+    "line": "mov     ecx, [esp+94h+var_74]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1957,25 +1957,25 @@
   },
   {
     "ea": "0x7A96C7",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A96C8",
-    "line": "or      [edi], edx",
+    "line": "or      [edi], edx; Marks only the selected matching candidate. The current primary leaf is not marked, so a leaf used earlier as a match can later act as a primary.",
     "mnemonic": "or",
     "size": 2
   },
   {
     "ea": "0x7A96CA",
-    "line": "call    sub_7A8F30",
+    "line": "call    OB_stVectorLeafLodEntry_PushBack_010201A0; Pushes {primaryLeaf, nearestLeaf} pair. Because selection never reads +0x40 textureIndexByte, the pair may cross leaf texture/layer records.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A96CF",
-    "line": "mov     ebx, [esp+94h+arg_4]",
+    "line": "mov     ebx, [esp+94h+originalLeaves.begin]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1999,7 +1999,7 @@
   },
   {
     "ea": "0x7A96DF",
-    "line": "mov     ecx, [esp+94h+var_70]",
+    "line": "mov     ecx, [esp+94h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2023,7 +2023,7 @@
   },
   {
     "ea": "0x7A96EE",
-    "line": "mov     eax, [esp+94h+var_18]",
+    "line": "mov     eax, [esp+94h+var_20.words.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2041,7 +2041,7 @@
   },
   {
     "ea": "0x7A96F6",
-    "line": "mov     [esp+94h+var_20], esi",
+    "line": "mov     [esp+94h+var_20.logicalSize], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2059,7 +2059,7 @@
   },
   {
     "ea": "0x7A96FD",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2077,19 +2077,19 @@
   },
   {
     "ea": "0x7A9707",
-    "line": "mov     [esp+94h+var_18], esi",
+    "line": "mov     [esp+94h+var_20.words.begin], esi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A970B",
-    "line": "mov     [esp+94h+var_14], esi",
+    "line": "mov     [esp+94h+var_20.words.end], esi",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x7A9712",
-    "line": "mov     [esp+94h+var_10], esi",
+    "line": "mov     [esp+94h+var_20.words.capacity], esi",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2107,7 +2107,7 @@
   },
   {
     "ea": "0x7A971C",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2170,5 +2170,167 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x7A87D0",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7A87D1",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7A87D3",
+    "line": "mov     dword ptr [esi], 0",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x7A87D9",
+    "line": "mov     eax, [esi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7A87DC",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x7A87DE",
+    "line": "jz      short loc_7A87E9",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x7A87E0",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7A87E1",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7A87E6",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x7A87E9",
+    "line": "mov     dword ptr [esi+8], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x7A87F0",
+    "line": "mov     dword ptr [esi+0Ch], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x7A87F7",
+    "line": "mov     dword ptr [esi+10h], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x7A87FE",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7A87FF",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CCF30",
+    "line": "lea     ecx, [ebp+4]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCF33",
+    "line": "jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCF38",
+    "line": "lea     ecx, [ebp-1Ch]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCF3B",
+    "line": "jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCF40",
+    "line": "lea     ecx, [ebp-20h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCF43",
+    "line": "jmp     loc_7A87D0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCF48",
+    "line": "mov     edx, [esp+originalLeaves.begin]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CCF4C",
+    "line": "lea     eax, [edx-84h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CCF52",
+    "line": "mov     ecx, [edx-88h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9CCF58",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CCF5A",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCF5F",
+    "line": "mov     eax, offset stru_AF636C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCF64",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

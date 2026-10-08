@@ -1,19 +1,19 @@
 [
   {
     "ea": "0x78F250",
-    "line": "sub     esp, 18h",
+    "line": "sub     esp, 18h; Computes result = start + (end - start) * percent for all three components. CBranch::MakeLeaf passes parent direction, geometric normal, and the leaf texture color-variance scalar. RT4.1 Branch.cpp/IdvVector.h corroborate the VecInterpolate role.",
     "mnemonic": "sub",
     "size": 3
   },
   {
     "ea": "0x78F253",
-    "line": "mov     eax, [esp+18h+arg_8]",
+    "line": "mov     eax, [esp+18h+end]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x78F257",
-    "line": "mov     ecx, [esp+18h+arg_4]",
+    "line": "mov     ecx, [esp+18h+start]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x78F26F",
-    "line": "mov     eax, [esp+18h+arg_0]",
+    "line": "mov     eax, [esp+18h+result]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x78F27D",
-    "line": "fld     [esp+18h+arg_C]",
+    "line": "fld     [esp+18h+percent]",
     "mnemonic": "fld",
     "size": 4
   },

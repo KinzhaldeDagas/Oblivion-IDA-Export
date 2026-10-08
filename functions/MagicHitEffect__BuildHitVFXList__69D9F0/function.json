@@ -1,19 +1,36 @@
 {
-  "callees_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "MagicHitEffect?_BuildHitVFXList",
+  "chunks": [
+    [
+      "0x69D9F0",
+      "0x69DA13"
+    ],
+    [
+      "0x9B3B90",
+      "0x9B3BC1"
+    ]
+  ],
+  "chunks_sha256": "65425a7dd841372f79129f6e3bd9ca65ef000520dcdbb951c2d761f35c39a1db",
+  "comment_regular": "Verified (Oblivion): build-list dispatcher invoked by ActiveEffect_Base_ProcessEffect when creating a fresh hit-effect list and when applying queued hit VFX. Its outlined path tries model-hit creation first, then chains shader-hit creation with the resulting BSSimpleList.",
+  "comment_repeatable": "Verified (Oblivion): build-list dispatcher invoked by ActiveEffect_Base_ProcessEffect when creating a fresh hit-effect list and when applying queued hit VFX. Its outlined path tries model-hit creation first, then chains shader-hit creation with the resulting BSSimpleList.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "MagicHitEffect_BuildHitVFXList",
   "end_ea": "0x69DA13",
+  "evidence_confidence": "Unknown",
   "flags": 4096,
   "has_pseudocode": true,
-  "name": "MagicHitEffect?_BuildHitVFXList",
+  "name": "MagicHitEffect_BuildHitVFXList",
   "segment": ".text",
   "sha256": "b724f623c5afffbb045f59742e579a800b7c4aefad934b0b7cba35f268e4aec6",
   "size": 35,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x69D9F0",
-  "type": "int __cdecl(int, int, int, int, int, int, int, float *)",
-  "xrefs_from_count": 13,
+  "total_chunk_size": 84,
+  "type": "MagicShaderHitEffect **__cdecl(int, int, int, int, int, int, int, ActiveEffect *)",
+  "xrefs_from_count": 32,
   "xrefs_to_count": 2
 }

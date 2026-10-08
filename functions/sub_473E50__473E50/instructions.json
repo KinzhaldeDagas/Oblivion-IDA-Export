@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x473E50",
-    "line": "push    esi",
+    "line": "push    esi; AnimSequenceMultiple remove sequence: removes one BSAnimGroupSequence from the list and returns true when list is empty.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x473E51",
-    "line": "mov     esi, [esp+4+arg_0]",
+    "line": "mov     esi, [esp+4+data]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -97,25 +97,25 @@
   },
   {
     "ea": "0x473E74",
-    "line": "lea     ecx, [esp+8+arg_0]",
+    "line": "lea     ecx, [esp+8+data]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x473E78",
-    "line": "push    ecx",
+    "line": "push    ecx; data",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x473E79",
-    "line": "mov     ecx, [edi+4]",
+    "line": "mov     ecx, [edi+4]; list",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x473E7C",
-    "line": "call    sub_776690",
+    "line": "call    NiTPointerList_RemoveByData; [Verified] Generic NiTPointerList remove-by-data helper. Scans node payloads for the supplied pointer, then delegates removal of the matching node to NiTPointerList_RemoveNode. The decal-list path calls it with the DECAL_DATA* payload address.",
     "mnemonic": "call",
     "size": 5
   },

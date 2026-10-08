@@ -1,19 +1,32 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_4E6CA0",
+  "chunks": [
+    [
+      "0x4E6CA0",
+      "0x4E6D56"
+    ]
+  ],
+  "chunks_sha256": "8aeb6c4d295d11521c8b28eb3db55a0d33dc804bc116255ccf32e984e092e9fb",
+  "comment_regular": "Verified point teardown order under the shared pathgrid critical section: remove reciprocal PGRI cross-cell connections; clear pointsByReference list headers/nodes; destroy each point's owned adjacency list via its point cleanup helper; free point nodes; destroy and null the NiTArray at +0x24. The 512-unit spatial-bucket map at +0x44 is cleared separately by TESPathGrid_ClearSpatialBucketMap.",
+  "comment_repeatable": "Verified point teardown order under the shared pathgrid critical section: remove reciprocal PGRI cross-cell connections; clear pointsByReference list headers/nodes; destroy each point's owned adjacency list via its point cleanup helper; free point nodes; destroy and null the NiTArray at +0x24. The 512-unit spatial-bucket map at +0x44 is cleared separately by TESPathGrid_ClearSpatialBucketMap.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "TESPathGrid_ClearPointsAndReferenceMaps",
   "end_ea": "0x4E6D56",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4E6CA0",
+  "name": "TESPathGrid_ClearPointsAndReferenceMaps",
   "segment": ".text",
   "sha256": "8aeb6c4d295d11521c8b28eb3db55a0d33dc804bc116255ccf32e984e092e9fb",
   "size": 182,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E6CA0",
-  "type": "void __thiscall(_DWORD *this)",
+  "total_chunk_size": 182,
+  "type": "void __thiscall(TESPathGrid *this)",
   "xrefs_from_count": 74,
   "xrefs_to_count": 4
 }

@@ -26,89 +26,89 @@ void __thiscall sub_757580(int this, float a2, int a3)
   float v27; // [esp+70h] [ebp-E0h]
   float v28; // [esp+74h] [ebp-DCh]
   double v29; // [esp+78h] [ebp-D8h]
-  NiTransform v30; // [esp+80h] [ebp-D0h] BYREF
-  NiTransform v31; // [esp+B4h] [ebp-9Ch] BYREF
+  NiTransform out; // [esp+80h] [ebp-D0h] BYREF
+  NiTransform local; // [esp+B4h] [ebp-9Ch] BYREF
   float v32[13]; // [esp+E8h] [ebp-68h] BYREF
-  NiTransform v33; // [esp+11Ch] [ebp-34h] BYREF
+  NiTransform parent; // [esp+11Ch] [ebp-34h] BYREF
   NiPoint3 pos; // 0:^1C.12
 
-  if ( 0.0 != *(float *)(this + 0x1C) )
+  if ( 0.0 != *(float *)(this + 0x1C) ) /*0x75759b*/
   {
-    if ( *(_WORD *)(a3 + 0x48) )
+    if ( *(_WORD *)(a3 + 0x48) ) /*0x7575a4*/
     {
-      v4 = *(_DWORD *)(this + 0x18);
-      if ( v4 )
+      v4 = *(_DWORD *)(this + 0x18); /*0x7575af*/
+      if ( v4 ) /*0x7575b4*/
       {
-        if ( *(_BYTE *)(this + 0x24) || 0.0 != *(float *)(this + 0x20) )
+        if ( *(_BYTE *)(this + 0x24) || 0.0 != *(float *)(this + 0x20) ) /*0x7575c8*/
         {
-          qmemcpy(&v31, (const void *)(v4 + 0x64), sizeof(v31));
-          qmemcpy(v32, (const void *)(*(_DWORD *)(this + 0x10) + 0x64), sizeof(v32));
-          sub_718A80(v32, &v33);
-          sub_53D7A0(&v33, &v30, &v31);
-          v5 = *(float *)(this + 0x20) * dbl_A2FAA0;
-          *(NiPoint3 *)&v22.rot.data[1][0] = v30.pos;
-          v25 = v5;
-          sub_7101F0(&v30, &v22, (NiPoint3 *)(this + 0x3C));
-          v6 = 0;
-          v21 = 0;
-          if ( *(_WORD *)(a3 + 0x48) )
+          qmemcpy(&local, (const void *)(v4 + 0x64), sizeof(local)); /*0x7575f3*/
+          qmemcpy(v32, (const void *)(*(_DWORD *)(this + 0x10) + 0x64), sizeof(v32)); /*0x75760e*/
+          sub_718A80(v32, &parent); /*0x757618*/
+          NiTransform_Compose(&parent, &out, &local); /*0x757631*/
+          v5 = *(float *)(this + 0x20) * dbl_A2FAA0; /*0x757647*/
+          *(NiPoint3 *)&v22.rot.data[1][0] = out.pos; /*0x757654*/
+          v25 = v5; /*0x75765c*/
+          sub_7101F0(&out, &v22, (NiPoint3 *)(this + 0x3C)); /*0x757674*/
+          v6 = 0; /*0x75767c*/
+          v21 = 0; /*0x757682*/
+          if ( *(_WORD *)(a3 + 0x48) ) /*0x75767e*/
           {
-            v7 = 0.0;
-            do
+            v7 = 0.0; /*0x75768c*/
+            do /*0x75783d*/
             {
-              v8 = (float *)(*(_DWORD *)(a3 + 0x5C) + 0x1C * (unsigned __int16)v6);
-              v16 = a2 - v8[5];
-              v9 = v16;
-              if ( v16 != v7 )
+              v8 = (float *)(*(_DWORD *)(a3 + 0x5C) + 0x1C * (unsigned __int16)v6); /*0x7576a0*/
+              v16 = a2 - v8[5]; /*0x7576a6*/
+              v9 = v16; /*0x7576b4*/
+              if ( v16 != v7 ) /*0x7576b9*/
               {
-                v10 = *(_BYTE *)(this + 0x24) == 0;
-                v11 = (float *)(*(_DWORD *)(a3 + 0x1C) + 0xC * (unsigned __int16)v6);
-                v22.scale = *v11;
-                v12 = v11[1];
-                v13 = v11[2];
-                v23 = v12;
-                v26 = v22.scale - v22.rot.data[1][0];
-                v24 = v13;
-                v27 = v12 - v22.rot.data[1][1];
-                v28 = v13 - v22.rot.data[1][2];
-                v17 = v27 * v27 + v26 * v26 + v28 * v28;
-                v14 = v17;
-                if ( v10 || *(float *)(this + 0x2C) >= v14 )
+                v10 = *(_BYTE *)(this + 0x24) == 0; /*0x7576bf*/
+                v11 = (float *)(*(_DWORD *)(a3 + 0x1C) + 0xC * (unsigned __int16)v6); /*0x7576c9*/
+                v22.scale = *v11; /*0x7576ce*/
+                v12 = v11[1]; /*0x7576da*/
+                v13 = v11[2]; /*0x7576dd*/
+                v23 = v12; /*0x7576e0*/
+                v26 = v22.scale - v22.rot.data[1][0]; /*0x7576e4*/
+                v24 = v13; /*0x7576e8*/
+                v27 = v12 - v22.rot.data[1][1]; /*0x7576f4*/
+                v28 = v13 - v22.rot.data[1][2]; /*0x757700*/
+                v17 = v27 * v27 + v26 * v26 + v28 * v28; /*0x757720*/
+                v14 = v17; /*0x757724*/
+                if ( v10 || *(float *)(this + 0x2C) >= v14 ) /*0x757734*/
                 {
-                  if ( v7 == *(float *)(this + 0x20) || v7 == v14 )
+                  if ( v7 == *(float *)(this + 0x20) || v7 == v14 ) /*0x757753*/
                   {
-                    v20 = v9 * *(float *)(this + 0x1C);
-                    v22.pos.x = v22.rot.data[0][0] * v20;
-                    v22.pos.y = v22.rot.data[0][1] * v20;
-                    v22.pos.z = v20 * v22.rot.data[0][2];
-                    pos = v22.pos;
+                    v20 = v9 * *(float *)(this + 0x1C); /*0x7577d0*/
+                    v22.pos.x = v22.rot.data[0][0] * v20; /*0x7577e2*/
+                    v22.pos.y = v22.rot.data[0][1] * v20; /*0x7577f4*/
+                    v22.pos.z = v20 * v22.rot.data[0][2]; /*0x757804*/
+                    pos = v22.pos; /*0x75780c*/
                   }
                   else
                   {
-                    v29 = v9 * *(float *)(this + 0x1C);
-                    v18 = pow(v14, v25);
-                    v15 = Min_Float(1.0, v18);
-                    v19 = v29 / v15;
-                    v22.rot.data[2][0] = v19 * v22.rot.data[0][0];
-                    v22.rot.data[2][1] = v22.rot.data[0][1] * v19;
-                    v6 = v21;
-                    v22.rot.data[2][2] = v19 * v22.rot.data[0][2];
-                    v7 = 0.0;
-                    pos = *(NiPoint3 *)&v22.rot.data[2][0];
+                    v29 = v9 * *(float *)(this + 0x1C); /*0x75775a*/
+                    v18 = pow(v14, v25); /*0x757767*/
+                    v15 = Min_Float(1.0, v18); /*0x75777b*/
+                    v19 = v29 / v15; /*0x757787*/
+                    v22.rot.data[2][0] = v19 * v22.rot.data[0][0]; /*0x757795*/
+                    v22.rot.data[2][1] = v22.rot.data[0][1] * v19; /*0x7577a7*/
+                    v6 = v21; /*0x7577b7*/
+                    v22.rot.data[2][2] = v19 * v22.rot.data[0][2]; /*0x7577bb*/
+                    v7 = 0.0; /*0x7577c3*/
+                    pos = *(NiPoint3 *)&v22.rot.data[2][0]; /*0x7577c5*/
                   }
-                  *v8 = *v8 + pos.x;
-                  v8[1] = v8[1] + pos.y;
-                  v8[2] = pos.z + v8[2];
+                  *v8 = *v8 + pos.x; /*0x757816*/
+                  v8[1] = v8[1] + pos.y; /*0x75781f*/
+                  v8[2] = pos.z + v8[2]; /*0x757829*/
                 }
               }
-              v21 = ++v6;
+              v21 = ++v6; /*0x757839*/
             }
-            while ( (unsigned __int16)v6 < *(_WORD *)(a3 + 0x48) );
+            while ( (unsigned __int16)v6 < *(_WORD *)(a3 + 0x48) ); /*0x75783d*/
           }
         }
         else
         {
-          sub_7573E0((float *)this, a2, a3);
+          sub_7573E0((float *)this, a2, a3); /*0x7575d4*/
         }
       }
     }

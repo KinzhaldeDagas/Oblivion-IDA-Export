@@ -1,4 +1,4 @@
-BSStringT *sub_9E0150()
+NiRTTI *sub_9E0150()
 {
-  return sub_70E220(&stru_B3529C, "BSScissorNode", (int)dword_B3FAB0);
+  return NiRTTI_Constructor((NiRTTI *)&MEMORY[0xB33E90][0x140C], "BSScissorNode", &parent); /*0x9e0164*/
 }

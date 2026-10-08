@@ -6,18 +6,18 @@
 0x4DA800: jp      short loc_4DA80C
 0x4DA802: fld     dword ptr ds:0B33A30h
 0x4DA808: fstp    [esp+4+arg_4]
-0x4DA80C: mov     ecx, ds:0B33B00h
+0x4DA80C: mov     ecx, ds:0B33B00h; self
 0x4DA812: push    ebx
 0x4DA813: push    ebp
 0x4DA814: push    edi
-0x4DA815: push    2; Size
+0x4DA815: push    2; byteCount
 0x4DA817: lea     eax, [esp+14h+Src]
 0x4DA81B: xor     edi, edi
 0x4DA81D: mov     [esp+14h+Src], edi
 0x4DA821: mov     ebp, [ecx+14h]
-0x4DA824: push    eax; Src
+0x4DA824: push    eax; source
 0x4DA825: call    SaveLoad_SaveData
-0x4DA82A: mov     ebx, [esp+10h+arg_0]
+0x4DA82A: mov     ebx, [esp+10h+source]
 0x4DA82E: cmp     ebx, edi
 0x4DA830: jz      loc_4DA8D8
 0x4DA836: mov     cl, [ebx+8]
@@ -40,24 +40,24 @@
 0x4DA868: add     eax, 1
 0x4DA86B: test    cl, cl
 0x4DA86D: jnz     short loc_4DA866
-0x4DA86F: mov     ecx, ds:0B33B00h
+0x4DA86F: mov     ecx, ds:0B33B00h; self
 0x4DA875: sub     eax, edx
-0x4DA877: mov     byte ptr [esp+14h+arg_0], al
-0x4DA87B: push    1; Size
-0x4DA87D: lea     eax, [esp+18h+arg_0]
-0x4DA881: push    eax; Src
+0x4DA877: mov     byte ptr [esp+14h+source], al
+0x4DA87B: push    1; byteCount
+0x4DA87D: lea     eax, [esp+18h+source]
+0x4DA881: push    eax; source
 0x4DA882: call    SaveLoad_SaveData
-0x4DA887: movzx   ecx, byte ptr [esp+14h+arg_0]
+0x4DA887: movzx   ecx, byte ptr [esp+14h+source]
 0x4DA88C: mov     edx, [esi+8]
-0x4DA88F: push    ecx; Size
-0x4DA890: mov     ecx, ds:0B33B00h
-0x4DA896: push    edx; Src
+0x4DA88F: push    ecx; byteCount
+0x4DA890: mov     ecx, ds:0B33B00h; self
+0x4DA896: push    edx; source
 0x4DA897: call    SaveLoad_SaveData
 0x4DA89C: push    ecx
 0x4DA89D: fld     [esp+18h+arg_4]
 0x4DA8A1: mov     ecx, esi
 0x4DA8A3: fstp    [esp+18h+var_18]; Src
-0x4DA8A6: call    sub_49F570
+0x4DA8A6: call    BSAnimGroupSequence_SaveState; Serializes BSAnimGroupSequence effective sample time, active state, fields +0x34/+0x38 and +0x54; save versions below 0x71 include the legacy extra time copy.
 0x4DA8AB: add     [esp+14h+Src], 1
 0x4DA8B0: movzx   eax, word ptr [ebx+46h]
 0x4DA8B4: add     edi, 1

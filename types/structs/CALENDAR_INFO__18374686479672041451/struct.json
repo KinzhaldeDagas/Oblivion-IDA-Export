@@ -1,52 +1,90 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_CALENDAR_INFO",
+  "definition": "struct _CALENDAR_INFO\n{\nRECT title;\nRECT titlemonth;\nRECT titleyear;\nRECT wdays;\nRECT days;\nRECT weeknums;\nSYSTEMTIME month;\n}\n",
   "id": 18374686479672041451,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "title",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "RECT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "titlemonth",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 16
+      "size": 16,
+      "type": "RECT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "titleyear",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 16
+      "size": 16,
+      "type": "RECT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "wdays",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 16
+      "size": 16,
+      "type": "RECT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "days",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 16
+      "size": 16,
+      "type": "RECT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "weeknums",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 16
+      "size": 16,
+      "type": "RECT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "month",
       "offset": 96,
       "offset_hex": "0x60",
-      "size": 16
+      "size": 16,
+      "type": "SYSTEMTIME"
     }
   ],
   "name": "_CALENDAR_INFO",
+  "ordinal": 6356,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 112
 }

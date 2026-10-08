@@ -13,10 +13,10 @@
 0x8A48D9: mov     ecx, [esi+8]
 0x8A48DC: test    ecx, ecx
 0x8A48DE: jz      short loc_8A48F5
-0x8A48E0: push    offset dword_BA7B80
+0x8A48E0: push    offset stru_BA7B80
 0x8A48E5: lea     edx, [esp+24h+var_8]
 0x8A48E9: push    edx
-0x8A48EA: call    sub_47F990
+0x8A48EA: call    sub_47F990; TES4 authoritative metadata map lookup: map count at +0x48, entries pointer at +0x44, each entry 0x10 bytes: key, unknown, valueLow, valueHigh.
 0x8A48EF: mov     edi, [eax]
 0x8A48F1: test    edi, edi
 0x8A48F3: jnz     short loc_8A48F9
@@ -28,7 +28,7 @@
 0x8A4900: call    edx
 0x8A4902: test    eax, eax
 0x8A4904: jz      short loc_8A4914
-0x8A4906: cmp     eax, offset dword_BA7A20
+0x8A4906: cmp     eax, 0BA7A20h
 0x8A490B: jz      short loc_8A496D
 0x8A490D: mov     eax, [eax+4]
 0x8A4910: test    eax, eax
@@ -93,7 +93,7 @@
 0x8A49AD: mov     eax, [eax+50h]
 0x8A49B0: add     eax, 0D0h ; 'Ð'
 0x8A49B5: jmp     short loc_8A49BC
-0x8A49B7: mov     eax, offset stru_BA7A40
+0x8A49B7: mov     eax, offset unk_BA7A40
 0x8A49BC: movss   xmm0, dword ptr ds:0A37080h
 0x8A49C4: movaps  xmm3, xmmword ptr [eax]
 0x8A49C7: movaps  xmm1, xmmword ptr ds:0BA7A40h
@@ -114,7 +114,7 @@
 0x8A49F9: mov     eax, [eax+50h]
 0x8A49FC: add     eax, 0E0h ; 'à'
 0x8A4A01: jmp     short loc_8A4A08
-0x8A4A03: mov     eax, offset stru_BA7A40
+0x8A4A03: mov     eax, offset unk_BA7A40
 0x8A4A08: movaps  xmm3, xmmword ptr [eax]
 0x8A4A0B: subps   xmm3, xmm1
 0x8A4A0E: andps   xmm3, xmm2
@@ -128,11 +128,11 @@
 0x8A4A24: test    edi, edi
 0x8A4A26: jz      short loc_8A4A3D
 0x8A4A28: mov     ecx, esi
-0x8A4A2A: call    sub_89F570
+0x8A4A2A: call    bhkRefObject_UpdateHavokObject
 0x8A4A2F: mov     ecx, edi
 0x8A4A31: call    sub_8A6440
 0x8A4A36: mov     ecx, esi
-0x8A4A38: call    sub_89F570
+0x8A4A38: call    bhkRefObject_UpdateHavokObject
 0x8A4A3D: mov     edi, [esp+20h+var_C]
 0x8A4A41: push    edi
 0x8A4A42: mov     ecx, esi

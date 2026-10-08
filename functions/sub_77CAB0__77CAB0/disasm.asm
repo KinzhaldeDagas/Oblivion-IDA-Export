@@ -32,8 +32,8 @@
 0x77CAFC: add     esp, 4
 0x77CAFF: test    eax, eax
 0x77CB01: jz      short loc_77CB20
-0x77CB03: mov     ecx, [esp+8+arg_C]
-0x77CB07: mov     edx, [esp+8+arg_8]
+0x77CB03: mov     ecx, dword ptr [esp+8+arg_8+4]
+0x77CB07: mov     edx, dword ptr [esp+8+arg_8]
 0x77CB0B: push    ecx
 0x77CB0C: mov     ecx, [esp+0Ch+arg_4]
 0x77CB10: push    edx

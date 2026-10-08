@@ -1,1 +1,1 @@
-NiColorInterpolator
+struct NiColorInterpolator;

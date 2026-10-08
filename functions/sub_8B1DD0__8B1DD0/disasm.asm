@@ -1,4 +1,4 @@
-0x8B1DD0: sub     esp, 1Ch
+0x8B1DD0: sub     esp, 1Ch; Converts a quaternion into a 3x3 basis matrix. 0x896000 uses this during per-frame movement basis refresh.
 0x8B1DD3: mov     eax, [esp+1Ch+arg_0]
 0x8B1DD7: fld     dword ptr [eax]
 0x8B1DD9: fadd    st, st

@@ -1,1 +1,1 @@
-0x78E990: jmp     sub_7A6FD0
+0x78E990: jmp     OB_Random_Next_010201A0; Oblivion Uniform::Next thunk. Dispatches directly to the shared Random::Next shuffled-generator implementation.

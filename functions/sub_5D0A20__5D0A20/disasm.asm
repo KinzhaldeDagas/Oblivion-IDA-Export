@@ -77,10 +77,10 @@
 0x5D0B0B: push    eax; a2
 0x5D0B0C: call    ExtraDataList_GetContainerChanges
 0x5D0B11: mov     ecx, eax; this
-0x5D0B13: call    ContainerExtraData_GetItemCount
-0x5D0B18: push    eax
-0x5D0B19: mov     ecx, edi
-0x5D0B1B: call    sub_60D020
+0x5D0B13: call    ContainerExtraData_GetItemCount; ContainerChanges item-count logic: start with the base TESContainer count (made absolute), find matching EntryData, then combine countDelta. If the base count and delta are both 0 but an EntryData exists, return 1; the GetItemCount evaluator takes the final absolute value.
+0x5D0B18: push    eax; value
+0x5D0B19: mov     ecx, edi; this
+0x5D0B1B: call    Shared_SetDwordAtOffset04; Identical-code-folded setter shared by unrelated engine classes: writes value to *(int *)(this+4) and returns value. In EntryData call sites, +0x04 is the canonical signed countDelta; shader/process vtable users give the same bytes unrelated meanings. Do not assign a globally EntryData-specific prototype.
 0x5D0B20: mov     eax, ds:0B3B270h
 0x5D0B25: mov     esi, [ebx+eax*4+0B0h]
 0x5D0B2C: test    esi, esi
@@ -88,7 +88,7 @@
 0x5D0B30: mov     ecx, esi
 0x5D0B32: call    ContainerEntryExtraData_DestroyDataTable
 0x5D0B37: push    esi
-0x5D0B38: call    FormHeapFree
+0x5D0B38: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5D0B3D: add     esp, 4
 0x5D0B40: mov     ecx, ds:0B3B270h
 0x5D0B46: push    1Fh; int

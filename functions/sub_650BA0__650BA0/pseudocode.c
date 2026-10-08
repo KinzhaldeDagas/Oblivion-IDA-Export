@@ -10,85 +10,85 @@ void __thiscall sub_650BA0(_DWORD *this, TESObjectREFR *arg0)
   int *v11; // eax
   float a5; // [esp+8h] [ebp-28h]
   int a2[3]; // [esp+24h] [ebp-Ch] BYREF
-  TESObjectCELL *ParentCell; // [esp+34h] [ebp+4h]
+  TESChildCELL *DwordAtOffset40; // [esp+34h] [ebp+4h]
 
-  v3 = *(this + 2);
-  v4 = *(char **)(v3 + 0x24);
-  if ( v4 )
+  v3 = *(this + 2); /*0x650ba7*/
+  v4 = *(char **)(v3 + 0x24); /*0x650baa*/
+  if ( v4 ) /*0x650baf*/
   {
-    if ( sub_569740(*(char **)(v3 + 0x24)) )
+    if ( sub_569740(*(char **)(v3 + 0x24)) ) /*0x650bb7*/
     {
-      if ( sub_569A10(v4) )
+      if ( sub_569A10(v4) ) /*0x650bd2*/
       {
-        v6 = this + 0x13;
-        if ( *(this + 0x14) )
-          goto LABEL_19;
-        if ( !*v6 )
+        v6 = this + 0x13; /*0x650be9*/
+        if ( *(this + 0x14) ) /*0x650bdf*/
+          goto LABEL_19; /*0x650bdf*/
+        if ( !*v6 ) /*0x650bf2*/
         {
-          ParentCell = TESObjectREFR_GetParentCell(arg0);
-          v7 = (int *)arg0->vtbl->GetPos(arg0);
-          a2[0] = *v7;
-          a2[1] = v7[1];
-          a2[2] = v7[2];
-          v8 = sub_569740(v4);
-          if ( v8 == 4 )
+          DwordAtOffset40 = (TESChildCELL *)Shared_GetDwordAtOffset40(arg0); /*0x650c05*/
+          v7 = (int *)arg0->vtbl->GetPos(arg0); /*0x650c11*/
+          a2[0] = *v7; /*0x650c15*/
+          a2[1] = v7[1]; /*0x650c1c*/
+          a2[2] = v7[2]; /*0x650c25*/
+          v8 = sub_569740(v4); /*0x650c29*/
+          if ( v8 == 4 ) /*0x650c31*/
           {
-            *(this + 0x1A) = sub_569820(v4);
-            *(this + 0x1B) = 0;
+            *(this + 0x1A) = sub_569820(v4); /*0x650c3a*/
+            *(this + 0x1B) = 0; /*0x650c3d*/
           }
-          else if ( v8 == 5 )
+          else if ( v8 == 5 ) /*0x650c49*/
           {
-            *(this + 0x1A) = 0;
-            *(this + 0x1B) = sub_569830(v4);
+            *(this + 0x1A) = 0; /*0x650c4d*/
+            *(this + 0x1B) = sub_569830(v4); /*0x650c59*/
           }
-          a5 = fAIAcquireObjectDistance;
-          v9 = arg0->vtbl->GetPos(arg0);
-          sub_446B90(
-            ParentCell,
+          a5 = flt_B36778[0x5C]; /*0x650c73*/
+          v9 = arg0->vtbl->GetPos(arg0); /*0x650c76*/
+          sub_446B90( /*0x650c93*/
+            (TESObjectCELL *)DwordAtOffset40,
             (float *)a2,
-            fAIAcquireObjectDistance,
+            flt_B36778[0x5C],
             v9,
             a5,
             (unsigned __int8 (__cdecl *)(TESObjectREFR *, int))sub_646A80,
             (int)arg0);
-          v10 = this + 0x17;
-          *(this + 0x1B) = 0;
-          *(this + 0x1A) = 0;
-          if ( this != (_DWORD *)0xFFFFFFA4 )
+          v10 = this + 0x17; /*0x650c9a*/
+          *(this + 0x1B) = 0; /*0x650c9f*/
+          *(this + 0x1A) = 0; /*0x650ca2*/
+          if ( this != (_DWORD *)0xFFFFFFA4 ) /*0x650ca5*/
           {
-            while ( *v10 )
+            while ( *v10 ) /*0x650cab*/
             {
-              BSSimpleList_PushFront(this + 0x13, *v10);
-              v11 = (int *)*(this + 0x18);
-              if ( v11 )
+              BSSimpleList_PushFront(this + 0x13, *v10); /*0x650cb0*/
+              v11 = (int *)*(this + 0x18); /*0x650cb5*/
+              if ( v11 ) /*0x650cba*/
               {
-                *(this + 0x18) = v11[1];
-                *v10 = *v11;
-                FormHeapFree((unsigned int)v11);
+                *(this + 0x18) = v11[1]; /*0x650cbf*/
+                *v10 = *v11; /*0x650cc5*/
+                FormHeapFree((unsigned int)v11); /*0x650cc7*/
               }
               else
               {
-                *v10 = 0;
+                *v10 = 0; /*0x650cd1*/
               }
             }
           }
-          BSSimpleList_Clear(this + 0x17);
+          BSSimpleList_Clear(this + 0x17); /*0x650cdb*/
         }
-        if ( *(this + 0x14) || *v6 )
+        if ( *(this + 0x14) || *v6 ) /*0x650ce6*/
         {
 LABEL_19:
-          *(this + 0xC) = *v6;
-          sub_67F100(this + 0x13);
+          *(this + 0xC) = *v6; /*0x650cf1*/
+          BSSimpleList_PopHeadWithoutPayloadFree(this + 0x13); /*0x650cf4*/
         }
         else
         {
-          (*(void (__thiscall **)(_DWORD *, TESObjectREFR *, int))(*this + 0x188))(this, arg0, 1);
+          (*(void (__thiscall **)(_DWORD *, TESObjectREFR *, int))(*this + 0x188))(this, arg0, 1); /*0x650d10*/
         }
       }
     }
     else
     {
-      *(this + 0xC) = sub_5697E0(v4);
+      *(this + 0xC) = sub_5697E0(v4); /*0x650bc7*/
     }
   }
 }

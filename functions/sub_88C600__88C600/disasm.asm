@@ -44,7 +44,7 @@
 0x88C68E: lea     edx, [esp+6Ch+var_30]
 0x88C692: push    edx
 0x88C693: call    eax
-0x88C695: movaps  xmm0, [esp+64h+var_4C+0Ch]
+0x88C695: movaps  xmm0, xmmword ptr [esp+64h+var_4C+0Ch]
 0x88C69A: movaps  xmm1, xmmword ptr [esi+50h]
 0x88C69E: addps   xmm1, xmm0
 0x88C6A1: movaps  xmmword ptr [esi+50h], xmm1
@@ -52,7 +52,7 @@
 0x88C6AC: addps   xmm1, xmm0
 0x88C6AF: movaps  xmmword ptr [edi+280h], xmm1
 0x88C6B6: movaps  xmm0, xmmword ptr [edi+290h]
-0x88C6BD: movaps  xmm1, [esp+64h+var_4C+0Ch]
+0x88C6BD: movaps  xmm1, xmmword ptr [esp+64h+var_4C+0Ch]
 0x88C6C2: addps   xmm0, xmm1
 0x88C6C5: movaps  xmmword ptr [edi+290h], xmm0
 0x88C6CC: mov     edx, [esi]
@@ -89,3 +89,38 @@
 0x88C734: mov     esp, ebp
 0x88C736: pop     ebp
 0x88C737: retn    4
+0x536DD0: mov     edx, ecx
+0x536DD2: mov     eax, [edx+8]
+0x536DD5: test    eax, eax
+0x536DD7: js      short locret_536E0F
+0x536DD9: mov     ecx, ds:0BA9DE4h
+0x536DDF: push    esi
+0x536DE0: mov     esi, large fs:2Ch
+0x536DE7: mov     ecx, [esi+ecx*4]
+0x536DEA: mov     ecx, [ecx+19Ch]
+0x536DF0: test    ecx, ecx
+0x536DF2: pop     esi
+0x536DF3: jnz     short loc_536DFB
+0x536DF5: mov     ecx, ds:0BA7D9Ch
+0x536DFB: mov     edx, [edx]
+0x536DFD: and     eax, 3FFFFFFFh
+0x536E02: add     eax, eax
+0x536E04: push    14h
+0x536E06: add     eax, eax
+0x536E08: push    eax
+0x536E09: push    edx
+0x536E0A: call    sub_8A75D0
+0x536E0F: retn
+0x9D5F50: lea     ecx, [ebp+var_4C]
+0x9D5F53: jmp     loc_536DD0
+0x9D5F58: mov     edx, [esp-4+arg_4]
+0x9D5F5C: lea     eax, [edx-54h]
+0x9D5F5F: mov     ecx, [edx-58h]
+0x9D5F62: xor     ecx, eax
+0x9D5F64: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D5F69: add     eax, 8
+0x9D5F6C: mov     ecx, [edx-8]
+0x9D5F6F: xor     ecx, eax
+0x9D5F71: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D5F76: mov     eax, offset stru_AFDF4C
+0x9D5F7B: jmp     ___CxxFrameHandler3

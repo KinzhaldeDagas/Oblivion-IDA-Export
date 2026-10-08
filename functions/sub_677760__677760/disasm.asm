@@ -18,10 +18,10 @@
 0x677795: mov     [esp+28h+var_8], 1
 0x67779A: call    edx
 0x67779C: mov     ecx, eax
-0x67779E: call    sub_6135F0
+0x67779E: call    CombatController_GetCurrentTarget
 0x6777A3: mov     [esp+28h+var_18], eax
 0x6777A7: lea     ecx, [esi+68h]; this
-0x6777AA: call    sub_7616D0
+0x6777AA: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x6777AF: mov     edi, eax
 0x6777B1: test    edi, edi
 0x6777B3: mov     [esp+28h+var_14], edi
@@ -64,10 +64,10 @@
 0x677832: shr     eax, 0Bh
 0x677835: test    al, 1
 0x677837: jnz     loc_6779D8
-0x67783D: lea     ecx, [esp+2Ch+arg_4]
-0x677841: push    ecx
-0x677842: mov     ecx, esi
-0x677844: call    sub_4D7E30
+0x67783D: lea     ecx, [esp+2Ch+pointXYZ]
+0x677841: push    ecx; pointXYZ
+0x677842: mov     ecx, esi; this
+0x677844: call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.
 0x677849: fld     dword ptr ds:0B36948h
 0x67784F: fcompp
 0x677851: fnstsw  ax
@@ -82,7 +82,7 @@
 0x677868: push    0; int
 0x67786A: mov     ecx, esi; int
 0x67786C: mov     byte ptr [esp+44h+friendlyFight_], 0
-0x677871: call    Actor_GetDetectionLevel
+0x677871: call    Actor_GetDetectionLevelAgainstActor; Oblivion authoritative detection pipeline. Computes this detector's level against a target actor: obtains cached/physical LOS and distance, target light, boot weight, movement/running/sneak/combat/underwater/exterior state, Luck-modified Sneak values, detector Blindness AV 0x2D, target Chameleon AV 0x2E, and target Invisibility AV 0x2F; then calls Calc_DetectionLevel and updates the detector's process entry. Positive means detected. Fallout only corroborates the GetDetectionLevelAgainstActor terminology.
 0x677876: mov     [esp+2Ch+var_4], eax
 0x67787A: mov     eax, [esp+2Ch+var_18]
 0x67787E: xor     ebx, ebx
@@ -106,7 +106,7 @@
 0x6778B0: fadd    dword ptr ds:0B36948h
 0x6778B6: jmp     short loc_6778BE
 0x6778B8: fadd    dword ptr ds:0B36CA0h
-0x6778BE: call    Double_To_SInt32
+0x6778BE: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x6778C3: mov     [esp+28h+var_18], eax
 0x6778C7: mov     eax, [esp+28h+var_14]
 0x6778CB: test    eax, eax
@@ -114,14 +114,13 @@
 0x6778D2: jz      short loc_677934
 0x6778D4: push    eax
 0x6778D5: push    0Ch
-0x6778D7: mov     ecx, offset dword_B3BDB0
+0x6778D7: mov     ecx, (offset qword_B3BB2C+284h)
 0x6778DC: call    sub_67CF50
 0x6778E1: mov     edi, eax
 0x6778E3: test    edi, edi
 0x6778E5: mov     [esp+28h+var_C], edi
 0x6778E9: jz      short loc_677923
 0x6778EB: jmp     short loc_6778F0
-0x6778ED: align 10h
 0x6778F0: mov     ecx, [edi]
 0x6778F2: test    ecx, ecx
 0x6778F4: jz      short loc_67791A
@@ -139,10 +138,10 @@
 0x677913: jmp     short loc_67791A
 0x677915: mov     [esp+28h+var_8], 1
 0x67791A: mov     ecx, [esp+28h+var_C]
-0x67791E: call    BSSimpleList_Clear
+0x67791E: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x677923: mov     eax, [esp+28h+var_C]
 0x677927: push    eax
-0x677928: call    FormHeapFree
+0x677928: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x67792D: mov     edi, [esp+2Ch+var_10]
 0x677931: add     esp, 4
 0x677934: mov     edx, [esi]
@@ -201,8 +200,8 @@
 0x6779B8: push    esi
 0x6779B9: call    edx
 0x6779BB: jmp     short loc_6779D8
-0x6779BD: mov     ecx, esi
-0x6779BF: call    sub_5E0F30
+0x6779BD: mov     ecx, esi; this
+0x6779BF: call    Actor__IsSleeping; Returns true exactly when Actor.process exists and GetSleepState() == kSitSleep_Sleeping (9). This is a SitSleep-state test, not a combat/procedure test.
 0x6779C4: test    al, al
 0x6779C6: jz      short loc_6779D8
 0x6779C8: test    ebx, ebx

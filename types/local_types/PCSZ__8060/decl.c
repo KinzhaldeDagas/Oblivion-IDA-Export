@@ -1,1 +1,1 @@
-PCSZ
+typedef const char *PCSZ;

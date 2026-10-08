@@ -1,19 +1,32 @@
 {
-  "callees_count": 12,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x42B5F0",
+      "0x42B649"
+    ]
+  ],
+  "chunks_sha256": "a9ed23ca5fb09ef4eefe12dd362d6b77cf959f87306bb7df780298db5b65f026",
+  "comment_regular": "Verified Oblivion path: for each available endpoint cell with an owner, writes its bit-0x40 temp-public state to the unlocked argument; Lock callers pass false and Unlock callers true. Fallout homolog DoorTeleportData::SetConnectedCellsPublic likewise applies TESObjectCELL::SetTempPublic to the linked and local endpoint cells when owned. Divergence: Oblivion exposes this as a standalone linked-door lock-state helper, while Fallout places it on DoorTeleportData and names the boolean public state.",
+  "comment_repeatable": "Verified Oblivion path: for each available endpoint cell with an owner, writes its bit-0x40 temp-public state to the unlocked argument; Lock callers pass false and Unlock callers true. Fallout homolog DoorTeleportData::SetConnectedCellsPublic likewise applies TESObjectCELL::SetTempPublic to the linked and local endpoint cells when owned. Divergence: Oblivion exposes this as a standalone linked-door lock-state helper, while Fallout places it on DoorTeleportData and names the boolean public state.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_42B5F0",
+  "display_name": "TESObjectREFR_PropagateLockStateToLinkedDoorCells",
   "end_ea": "0x42B649",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_42B5F0",
+  "name": "TESObjectREFR_PropagateLockStateToLinkedDoorCells",
   "segment": ".text",
   "sha256": "a9ed23ca5fb09ef4eefe12dd362d6b77cf959f87306bb7df780298db5b65f026",
   "size": 89,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x42B5F0",
-  "type": "void __thiscall(TESObjectREFR **this, TESObjectREFR *, char)",
+  "total_chunk_size": 89,
+  "type": "void __thiscall(TESObjectREFR **linkedDoorSlot, TESObjectREFR *otherEndpoint, bool unlocked)",
   "xrefs_from_count": 48,
   "xrefs_to_count": 4
 }

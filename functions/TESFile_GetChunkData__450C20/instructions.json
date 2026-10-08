@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x450C20",
-    "line": "sub     esp, 18h",
+    "line": "sub     esp, 18h; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x450C36",
-    "line": "cmp     dword ptr [esi+254h], 0",
+    "line": "cmp     dword ptr [esi+254h], 0; Generic chunk read treats length zero as successful no-op and does not initialize the destination. SCPT callers that use stack/object destinations therefore retain prior or uninitialized bytes.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -259,13 +259,13 @@
   },
   {
     "ea": "0x450CB7",
-    "line": "jbe     loc_450E0A",
+    "line": "jbe     loc_450E0A; HEDR caller TESFile_Open passes maxSize=12. Size 0 exits without touching destination; sizes 1..12 copy only that prefix, preserving prior/default suffix. Size >12 takes this branch, writes byte 11=0 and copies exactly 11 bytes. Each occurrence therefore overlays shared header storage rather than invalidating all fields.",
     "mnemonic": "jbe",
     "size": 6
   },
   {
     "ea": "0x450CBD",
-    "line": "mov     byte ptr [edi+ebp-1], 0",
+    "line": "mov     byte ptr [edi+ebp-1], 0; Oversized HEDR terminator write: maxSize 12 means destination[11]=0, followed by an 11-byte payload copy. TESFile_Open applies its minimum-next-ID clamp after each read at 0x451C36.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x450CD8",
-    "line": "mov     ecx, [esi+10h]",
+    "line": "mov     ecx, [esi+10h]; self",
     "mnemonic": "mov",
     "size": 3
   },
@@ -313,19 +313,19 @@
   },
   {
     "ea": "0x450CDE",
-    "line": "push    ebx",
+    "line": "push    ebx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x450CDF",
-    "line": "push    ebp",
+    "line": "push    ebp; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x450CE0",
-    "line": "call    ReadFile??",
+    "line": "call    Archive_ReadBytes",
     "mnemonic": "call",
     "size": 5
   },
@@ -553,13 +553,13 @@
   },
   {
     "ea": "0x450D61",
-    "line": "call    TESFile_GetDecompressedRecordData",
+    "line": "call    TESFile_GetDecompressedRecordData; EngineIssues review: compressed TES record loader trusts advertised decompressed size and subtracts 4 from compressed length before inflate; verify length>=4 and cap decompressed size.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x450D66",
-    "line": "mov     ecx, [esi+414h]",
+    "line": "mov     ecx, [esi+414h]; MEF v20 fix: bounded truncated compressed chunk copy. Clip source range to currentRecordDCLength and zero-fill missing destination bytes instead of memcpy overreading decompressed buffer.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -577,25 +577,25 @@
   },
   {
     "ea": "0x450D73",
-    "line": "push    ebx; Size",
+    "line": "push    ebx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x450D74",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x450D75",
-    "line": "push    ebp; Dst",
+    "line": "push    ebp; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x450D76",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x450E34",
-    "line": "push    ecx",
+    "line": "push    ecx; With max=0 (SCHR/SCDA), GetChunkData copies the full current chunk length with no destination bound or structural-size validation.",
     "mnemonic": "push",
     "size": 1
   },
@@ -1123,13 +1123,13 @@
   },
   {
     "ea": "0x450EC3",
-    "line": "call    TESFile_GetDecompressedRecordData",
+    "line": "call    TESFile_GetDecompressedRecordData; EngineIssues review: compressed TES record loader trusts advertised decompressed size and subtracts 4 from compressed length before inflate; verify length>=4 and cap decompressed size.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x450EC8",
-    "line": "mov     ecx, [esi+254h]",
+    "line": "mov     ecx, [esi+254h]; MEF v20 fix: bounded full compressed chunk copy. Validate source range against currentRecordDCLength before returning through normal success path.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1141,7 +1141,7 @@
   },
   {
     "ea": "0x450ED4",
-    "line": "push    ecx; Size",
+    "line": "push    ecx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
@@ -1153,19 +1153,19 @@
   },
   {
     "ea": "0x450ED7",
-    "line": "push    edx; Src",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x450ED8",
-    "line": "push    ebp; Dst",
+    "line": "push    ebp; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x450ED9",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },

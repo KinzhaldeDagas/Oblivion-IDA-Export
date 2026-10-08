@@ -28,7 +28,7 @@
 0x4320E6: test    al, al
 0x4320E8: jnz     short loc_432120
 0x4320EA: mov     edi, ds:InterlockedIncrement
-0x4320F0: push    offset dword_B33A14; lpAddend
+0x4320F0: push    offset unk_B33A14; lpAddend
 0x4320F5: call    edi ; InterlockedIncrement
 0x4320F7: mov     ecx, [esi+10h]
 0x4320FA: mov     ebp, [esi+14h]

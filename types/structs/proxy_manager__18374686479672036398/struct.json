@@ -1,106 +1,171 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "proxy_manager",
+  "definition": "struct proxy_manager\n{\nIMultiQI_0 IMultiQI_iface;\nIMarshal_0 IMarshal_iface;\nIClientSecurity_0 IClientSecurity_iface;\napartment *parent;\nlist entry;\nOXID oxid;\nOXID_INFO oxid_info;\nOID oid;\nlist interfaces;\nLONG refs;\nCRITICAL_SECTION cs;\nULONG sorflags;\nIRemUnknown_0 *remunk;\nHANDLE remoting_mutex;\nMSHCTX dest_context;\nvoid *dest_context_data;\n}\n",
   "id": 18374686479672036398,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IMultiQI_iface",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "IMultiQI_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IMarshal_iface",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "IMarshal_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IClientSecurity_iface",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "IClientSecurity_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "parent",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "apartment *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "entry",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 8
+      "size": 8,
+      "type": "list"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "oxid",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 8
+      "size": 8,
+      "type": "OXID"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "oxid_info",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 32
+      "size": 32,
+      "type": "OXID_INFO"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "oid",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 8
+      "size": 8,
+      "type": "OID"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "interfaces",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 8
+      "size": 8,
+      "type": "list"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "refs",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cs",
       "offset": 88,
       "offset_hex": "0x58",
-      "size": 32
+      "size": 32,
+      "type": "CRITICAL_SECTION"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "sorflags",
       "offset": 120,
       "offset_hex": "0x78",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "remunk",
       "offset": 124,
-      "offset_hex": "0x7c",
-      "size": 4
+      "offset_hex": "0x7C",
+      "size": 4,
+      "type": "IRemUnknown_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "remoting_mutex",
       "offset": 128,
       "offset_hex": "0x80",
-      "size": 4
+      "size": 4,
+      "type": "HANDLE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dest_context",
       "offset": 132,
       "offset_hex": "0x84",
-      "size": 4
+      "size": 4,
+      "type": "MSHCTX"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dest_context_data",
       "offset": 136,
       "offset_hex": "0x88",
-      "size": 4
+      "size": 4,
+      "type": "void *"
     }
   ],
   "name": "proxy_manager",
+  "ordinal": 4487,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 144
 }

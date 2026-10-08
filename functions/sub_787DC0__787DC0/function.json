@@ -1,19 +1,32 @@
 {
-  "callees_count": 33,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x787DC0",
+      "0x788119"
+    ]
+  ],
+  "chunks_sha256": "63937d4244fb4e0d9dd501c7090c1ced3e95ccaccc4d4d1e4d7cc2b7738425fa",
+  "comment_regular": "\n\n[2026-10-03 source reconciliation] Retired prior plugin experiment substituting75002/75005 into this native mesh-alpha resolver. RT4.1 GetBranchGeometry exports75002 as per-vertex guide fade distance;75005 is m_fBillboardTransition used by ComputeLodCurveBB for angular billboard-view interpolation and exported billboard metadata. It is distinct from m_fLeafTransitionFactor used by mesh-to-billboard GetLodValues. Current plugin no longer rewrites output+38 from these fields; native branch/frond transition coherence is preserved.\n\n2026-05-23 75000 supplemental LOD probe boundary: stock old-LOD-to-SGeometry output helper. Uses existing CSpeedTreeRT old LOD fields and shared resolver 0x787220; no decoded stock read of supplemental 75000 branch/frond fade, extrusion fade, or billboard transition sidecar data.",
+  "comment_repeatable": "2026-05-23 75000 supplemental LOD probe boundary: stock old-LOD-to-SGeometry output helper. Uses existing CSpeedTreeRT old LOD fields and shared resolver 0x787220; no decoded stock read of supplemental 75000 branch/frond fade, extrusion fade, or billboard transition sidecar data.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_787DC0",
+  "display_name": "CSpeedTreeRT__GetBSGeometryLODData",
   "end_ea": "0x788119",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_787DC0",
+  "name": "CSpeedTreeRT__GetBSGeometryLODData",
   "segment": ".text",
   "sha256": "63937d4244fb4e0d9dd501c7090c1ced3e95ccaccc4d4d1e4d7cc2b7738425fa",
   "size": 857,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x787DC0",
-  "type": "void __thiscall(float *this, int, float)",
+  "total_chunk_size": 857,
+  "type": "void __thiscall(OB_CSpeedTreeRT_010201A0 *this, OB_SpeedTreeGeometryOutput_010201A0 *geometry, float lodLevel)",
   "xrefs_from_count": 286,
   "xrefs_to_count": 1
 }

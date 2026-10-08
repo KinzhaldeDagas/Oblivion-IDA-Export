@@ -23,11 +23,11 @@
 0x759978: mov     eax, [esi+1Ch]
 0x75997B: add     ebp, ebp
 0x75997D: add     ebp, ebp
-0x75997F: push    ebp; Size
-0x759980: push    eax; Src
-0x759981: push    ecx; Dst
+0x75997F: push    ebp; byteCount
+0x759980: push    eax; source
+0x759981: push    ecx; destination
 0x759982: mov     [esp+20h+arg_0], ecx
-0x759986: call    _memcpy
+0x759986: call    _memcpy;
 0x75998B: xor     ebx, ebx
 0x75998D: add     esp, 10h
 0x759990: cmp     [esi+20h], ebx
@@ -43,10 +43,10 @@
 0x7599AA: call    FormHeapAlloc
 0x7599AF: mov     ebx, eax
 0x7599B1: mov     eax, [esi+20h]
-0x7599B4: push    ebp; Size
-0x7599B5: push    eax; Src
-0x7599B6: push    ebx; Dst
-0x7599B7: call    _memcpy
+0x7599B4: push    ebp; byteCount
+0x7599B5: push    eax; source
+0x7599B6: push    ebx; destination
+0x7599B7: call    _memcpy;
 0x7599BC: add     esp, 10h
 0x7599BF: xor     ebp, ebp
 0x7599C1: cmp     [esi+24h], ebp
@@ -77,22 +77,22 @@
 0x759A05: movzx   ecx, word ptr [esi+8]
 0x759A09: mov     edx, [esi+24h]
 0x759A0C: shl     ecx, 4
-0x759A0F: push    ecx; Size
-0x759A10: push    edx; Src
-0x759A11: push    ebp; Dst
-0x759A12: call    _memcpy
+0x759A0F: push    ecx; byteCount
+0x759A10: push    edx; source
+0x759A11: push    ebp; destination
+0x759A12: call    _memcpy;
 0x759A17: add     esp, 0Ch
 0x759A1A: movzx   ecx, word ptr [esi+8]
 0x759A1E: mov     eax, [esp+10h+arg_0]
-0x759A22: push    0
-0x759A24: push    0
-0x759A26: push    0
-0x759A28: push    ebp
-0x759A29: push    ebx
-0x759A2A: push    eax
-0x759A2B: push    ecx
-0x759A2C: mov     ecx, edi
-0x759A2E: call    sub_728890
+0x759A22: push    0; dataFlags
+0x759A24: push    0; textureSetCount
+0x759A26: push    0; texcoords
+0x759A28: push    ebp; colors
+0x759A29: push    ebx; normals
+0x759A2A: push    eax; vertices
+0x759A2B: push    ecx; vertexCount
+0x759A2C: mov     ecx, edi; this
+0x759A2E: call    NiGeometryData_SetData;
 0x759A33: xor     ebx, ebx
 0x759A35: cmp     [esi+50h], ebx
 0x759A38: jz      short loc_759A6B
@@ -109,10 +109,10 @@
 0x759A57: mov     ebx, eax
 0x759A59: movzx   eax, word ptr [esi+8]
 0x759A5D: shl     eax, 4
-0x759A60: push    eax; Size
-0x759A61: push    ecx; Src
-0x759A62: push    ebx; Dst
-0x759A63: call    _memcpy
+0x759A60: push    eax; byteCount
+0x759A61: push    ecx; source
+0x759A62: push    ebx; destination
+0x759A63: call    _memcpy;
 0x759A68: add     esp, 10h
 0x759A6B: push    ebx
 0x759A6C: mov     ecx, edi
@@ -131,10 +131,10 @@
 0x759A93: mov     ebx, eax
 0x759A95: mov     eax, [esi+4Ch]
 0x759A98: add     ebp, ebp
-0x759A9A: push    ebp; Size
-0x759A9B: push    eax; Src
-0x759A9C: push    ebx; Dst
-0x759A9D: call    _memcpy
+0x759A9A: push    ebp; byteCount
+0x759A9B: push    eax; source
+0x759A9C: push    ebx; destination
+0x759A9D: call    _memcpy;
 0x759AA2: add     esp, 10h
 0x759AA5: push    ebx
 0x759AA6: mov     ecx, edi
@@ -150,10 +150,10 @@
 0x759AC2: call    FormHeapAlloc
 0x759AC7: mov     ebx, eax
 0x759AC9: mov     eax, [esi+44h]
-0x759ACC: push    ebp; Size
-0x759ACD: push    eax; Src
-0x759ACE: push    ebx; Dst
-0x759ACF: call    _memcpy
+0x759ACC: push    ebp; byteCount
+0x759ACD: push    eax; source
+0x759ACE: push    ebx; destination
+0x759ACF: call    _memcpy;
 0x759AD4: add     esp, 10h
 0x759AD7: push    ebx
 0x759AD8: mov     ecx, edi
@@ -173,10 +173,10 @@
 0x759B02: call    FormHeapAlloc
 0x759B07: mov     ebx, eax
 0x759B09: mov     eax, [esi+54h]
-0x759B0C: push    ebp; Size
-0x759B0D: push    eax; Src
-0x759B0E: push    ebx; Dst
-0x759B0F: call    _memcpy
+0x759B0C: push    ebp; byteCount
+0x759B0D: push    eax; source
+0x759B0E: push    ebx; destination
+0x759B0F: call    _memcpy;
 0x759B14: add     esp, 10h
 0x759B17: push    ebx
 0x759B18: mov     ecx, edi
@@ -198,10 +198,10 @@
 0x759B48: lea     eax, [eax+eax*2]
 0x759B4B: add     eax, eax
 0x759B4D: add     eax, eax
-0x759B4F: push    eax; Size
-0x759B50: push    ecx; Src
-0x759B51: push    ebx; Dst
-0x759B52: call    _memcpy
+0x759B4F: push    eax; byteCount
+0x759B50: push    ecx; source
+0x759B51: push    ebx; destination
+0x759B52: call    _memcpy;
 0x759B57: add     esp, 10h
 0x759B5A: push    ebx
 0x759B5B: mov     ecx, edi
@@ -236,14 +236,14 @@
 0x759BAE: sub     ecx, eax
 0x759BB0: add     ecx, ecx
 0x759BB2: add     ecx, ecx
-0x759BB4: push    ecx; Size
-0x759BB5: push    edx; Src
-0x759BB6: push    ebx; Dst
-0x759BB7: call    _memcpy
+0x759BB4: push    ecx; byteCount
+0x759BB5: push    edx; source
+0x759BB6: push    ebx; destination
+0x759BB7: call    _memcpy;
 0x759BBC: add     esp, 0Ch
 0x759BBF: mov     eax, [edi+5Ch]
 0x759BC2: push    eax
-0x759BC3: call    FormHeapFree
+0x759BC3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x759BC8: mov     [edi+5Ch], ebx
 0x759BCB: xor     ebx, ebx
 0x759BCD: add     esp, 4
@@ -263,14 +263,14 @@
 0x759BF4: movzx   eax, word ptr [esi+8]
 0x759BF8: add     eax, eax
 0x759BFA: add     eax, eax
-0x759BFC: push    eax; Size
-0x759BFD: push    ecx; Src
-0x759BFE: push    ebx; Dst
-0x759BFF: call    _memcpy
+0x759BFC: push    eax; byteCount
+0x759BFD: push    ecx; source
+0x759BFE: push    ebx; destination
+0x759BFF: call    _memcpy;
 0x759C04: add     esp, 10h
 0x759C07: mov     edx, [edi+60h]
 0x759C0A: push    edx
-0x759C0B: call    FormHeapFree
+0x759C0B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x759C10: mov     [edi+60h], ebx
 0x759C13: mov     ax, [esi+64h]
 0x759C17: mov     [edi+64h], ax

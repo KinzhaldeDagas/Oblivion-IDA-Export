@@ -1,32 +1,37 @@
-int __thiscall sub_78F720(int *this, int a2, float a3)
+// Finds the parent branch segment containing childDistanceAlongBranch by scanning OB_SIdvBranchVertex_010201A0.runningLength and returns placement index/percent.
+OB_SIdvBranchVertex_010201A0 *__thiscall OB_CBranch_FillBranch_010201A0(
+        OB_CBranch_010201A0 *this,
+        OB_CBranchFillResult_010201A0 *outPlacement,
+        float childDistanceAlongBranch)
 {
   double v3; // st7
-  int v4; // esi
+  int branchVertexCount; // esi
   int v5; // edx
-  float *v6; // edi
-  int result; // eax
+  float *p_runningLength; // edi
+  OB_SIdvBranchVertex_010201A0 *result; // eax
 
-  if ( *(this + 6) && *(this + 7) >= 2 )
+  if ( this->branchVertices && this->branchVertexCount >= 2 ) /*0x78f72a*/
   {
-    v3 = a3;
-    *(_DWORD *)a2 = 0;
-    v4 = *(this + 7);
-    v5 = 1;
-    if ( v4 > 1 )
+    v3 = childDistanceAlongBranch; /*0x78f72c*/
+    outPlacement->preVertexIndex = 0; /*0x78f736*/
+    branchVertexCount = this->branchVertexCount; /*0x78f73c*/
+    v5 = 1; /*0x78f73f*/
+    if ( branchVertexCount > 1 ) /*0x78f746*/
     {
-      v6 = (float *)(*(this + 6) + 0x88);
-      while ( *v6 <= v3 )
+      p_runningLength = &this->branchVertices[1].runningLength; /*0x78f74c*/
+      while ( *p_runningLength <= v3 ) /*0x78f75b*/
       {
-        ++v5;
-        v6 += 0x12;
-        if ( v5 >= v4 )
-          goto LABEL_9;
+        ++v5; /*0x78f75d*/
+        p_runningLength += 0x12; /*0x78f760*/
+        if ( v5 >= branchVertexCount ) /*0x78f765*/
+          goto LABEL_9; /*0x78f765*/
       }
-      *(_DWORD *)a2 = v5 - 1;
+      outPlacement->preVertexIndex = v5 - 1; /*0x78f76c*/
     }
 LABEL_9:
-    result = *(this + 6) + 0x48 * *(_DWORD *)a2;
-    *(float *)(a2 + 4) = (v3 - *(float *)(result + 0x40)) / (*(float *)(result + 0x88) - *(float *)(result + 0x40));
+    result = &this->branchVertices[outPlacement->preVertexIndex]; /*0x78f76f*/
+    outPlacement->percentBetweenVertices = (v3 - result->runningLength) /*0x78f78a*/
+                                         / (result[1].runningLength - result->runningLength);
   }
-  return result;
+  return result; /*0x78f78e*/
 }

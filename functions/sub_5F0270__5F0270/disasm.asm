@@ -4,7 +4,7 @@
 0x5F0275: push    edi
 0x5F0276: mov     esi, ecx
 0x5F0278: mov     bl, 1
-0x5F027A: call    MobileObject_GetCharProxy
+0x5F027A: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x5F027F: mov     edi, eax
 0x5F0281: test    edi, edi
 0x5F0283: jz      short loc_5F02F8
@@ -25,9 +25,9 @@
 0x5F02B6: push    ecx
 0x5F02B7: mov     ecx, edi
 0x5F02B9: mov     [esp+2Ch+var_14], edx
-0x5F02BD: mov     dword ptr [esp+2Ch+var_10], eax
-0x5F02C1: call    sub_5E1500
-0x5F02C6: fld     dword ptr [esp+28h+var_10]
+0x5F02BD: mov     [esp+2Ch+var_10], eax
+0x5F02C1: call    sub_5E1500; TES4 authoritative: reads proxy position via 0x891440 and converts Havok units back to TES/world units via 0x43F3E0.
+0x5F02C6: fld     [esp+28h+var_10]
 0x5F02CA: fsub    [esp+28h+var_4]
 0x5F02CE: fstp    [esp+28h+var_1C]
 0x5F02D2: fld     [esp+28h+var_1C]

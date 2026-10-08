@@ -12,10 +12,10 @@
 0x5ADEE2: jz      loc_5AE05B
 0x5ADEE8: fld     dword ptr ds:0A379B4h
 0x5ADEEE: push    ecx
-0x5ADEEF: fstp    [esp+0Ch+a2]; a3
-0x5ADEF2: push    0FA1h; a2
+0x5ADEEF: fstp    [esp+0Ch+a2]; value
+0x5ADEF2: push    0FA1h; propertyCode
 0x5ADEF7: mov     ecx, esi; this
-0x5ADEF9: call    Tile_SetFloat
+0x5ADEF9: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5ADEFE: push    0; float
 0x5ADF00: mov     ecx, esi
 0x5ADF02: call    sub_58FBA0
@@ -29,7 +29,7 @@
 0x5ADF1E: call    sub_572F60
 0x5ADF23: cmp     byte ptr ds:0B14130h, 0
 0x5ADF2A: push    ebx
-0x5ADF2B: mov     ebx, dword ptr [esp+0Ch+ArgList]
+0x5ADF2B: mov     ebx, [esp+0Ch+ArgList]
 0x5ADF2F: push    edi
 0x5ADF30: jz      short loc_5ADF7C
 0x5ADF32: cmp     [esi+28h], ebx
@@ -42,7 +42,7 @@
 0x5ADF4F: jmp     short loc_5ADF7C
 0x5ADF51: fld     [esp+10h+arg_4]
 0x5ADF55: fdiv    qword ptr ds:0A3F3E8h
-0x5ADF5B: call    Double_To_SInt32
+0x5ADF5B: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5ADF60: cmp     eax, ds:0B3B3ECh
 0x5ADF66: jle     short loc_5ADF7C
 0x5ADF68: push    eax
@@ -90,24 +90,24 @@
 0x5ADFE6: fstp    st(1)
 0x5ADFE8: test    ah, 41h
 0x5ADFEB: jnz     short loc_5ADFF8
-0x5ADFED: call    Double_To_SInt32
+0x5ADFED: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5ADFF2: mov     [esi+ebx*4+2Ch], eax
 0x5ADFF6: jmp     short loc_5ADFFA
 0x5ADFF8: fstp    st
 0x5ADFFA: fldz
-0x5ADFFC: mov     eax, offset flt_B3B3DC
+0x5ADFFC: mov     eax, (offset dword_B3B0B4+328h)
 0x5AE001: fstp    [esp+10h+var_4]
 0x5AE005: lea     ecx, [esi+2Ch]
 0x5AE008: fild    dword ptr [ecx]
 0x5AE00A: add     eax, 4
 0x5AE00D: add     ecx, 4
-0x5AE010: cmp     eax, offset dword_B3B3EC
+0x5AE010: cmp     eax, (offset dword_B3B0B4+338h)
 0x5AE015: fmul    dword ptr [eax-4]
 0x5AE018: fadd    [esp+10h+var_4]
 0x5AE01C: fstp    [esp+10h+var_4]
 0x5AE020: jl      short loc_5AE008
 0x5AE022: fld     [esp+10h+var_4]
-0x5AE026: call    Double_To_SInt32
+0x5AE026: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5AE02B: push    0
 0x5AE02D: mov     [esi+3Ch], eax
 0x5AE030: call    sub_5AD980

@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x7F16F0",
-    "line": "push    esi",
+    "line": "push    esi; Registers SpeedTree shader constants: TreeData at base register and WindMatrices at base+1 (16 float4 registers).",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7F16F1",
-    "line": "mov     esi, [esp+4+arg_0]",
+    "line": "mov     esi, [esp+4+constantMap]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x7F16FB",
-    "line": "mov     edi, [esp+8+arg_4]",
+    "line": "mov     edi, [esp+8+baseRegister]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x7F1701",
-    "line": "push    offset flt_B467A0",
+    "line": "push    (offset flt_B46638+168h)",
     "mnemonic": "push",
     "size": 5
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x7F1729",
-    "line": "push    offset WindMatrixes",
+    "line": "push    (offset flt_B46638+180h)",
     "mnemonic": "push",
     "size": 5
   },

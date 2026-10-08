@@ -1,30 +1,33 @@
-void __cdecl __noreturn sub_795D50(char *a1, unsigned int a2, int a3)
+// OBLIVION AUTHORITY (2026-08-30): Exception-safe uninitialized_fill_n for vector<unsigned short> owners. Deep-copy-constructs count values and normally returns at 0x795DE0; prior noreturn metadata was false.
+OB_stVectorUShort_010201A0 *__cdecl OB_stVector_stVectorUShort_UninitializedFillN_010201A0(
+        OB_stVectorUShort_010201A0 *destination,
+        unsigned int count,
+        const OB_stVectorUShort_010201A0 *value)
 {
-  char *v3; // esi
-  char *i; // esi
-  int v6; // [esp+0h] [ebp-28h] BYREF
-  void *v7; // [esp+10h] [ebp-18h]
-  int v8; // [esp+14h] [ebp-14h]
-  int *v9; // [esp+18h] [ebp-10h]
-  int v10; // [esp+24h] [ebp-4h]
-  int savedregs; // [esp+28h] [ebp+0h] BYREF
+  OB_stVectorUShort_010201A0 *v3; // esi
+  OB_stVector16_010201A0 *i; // esi
+  int v7; // [esp+0h] [ebp-28h] BYREF
+  void *v8; // [esp+10h] [ebp-18h]
+  OB_stVector16_010201A0 *v9; // [esp+14h] [ebp-14h]
+  int *v10; // [esp+18h] [ebp-10h]
+  int v11; // [esp+24h] [ebp-4h]
 
-  v9 = &v6;
-  v3 = a1;
-  v8 = (int)a1;
-  v10 = 0;
-  while ( a2 )
+  v10 = &v7; /*0x795d78*/
+  v3 = destination; /*0x795d7b*/
+  v9 = (OB_stVector16_010201A0 *)destination; /*0x795d83*/
+  v11 = 0; /*0x795d86*/
+  while ( count ) /*0x795d92*/
   {
-    v7 = v3;
-    LOBYTE(v10) = 1;
-    if ( v3 )
-      sub_795480(v3, (unsigned int)&savedregs, (unsigned int)v3, a3);
-    --a2;
-    v3 += 0x10;
-    LOBYTE(v10) = 0;
-    a1 = v3;
+    v8 = v3; /*0x795d97*/
+    LOBYTE(v11) = 1; /*0x795d9c*/
+    if ( v3 ) /*0x795da0*/
+      OB_stVectorUShort_CopyCtor_010201A0(v3, value); /*0x795da8*/
+    --count; /*0x795dad*/
+    ++v3; /*0x795db0*/
+    LOBYTE(v11) = 0; /*0x795db3*/
+    destination = v3; /*0x795db6*/
   }
-  for ( i = (char *)v8; i != a1; i += 0x10 )
-    sub_79BFF0(i);
-  ThrowException__(0, 0);
+  for ( i = v9; i != (OB_stVector16_010201A0 *)destination; ++i ) /*0x795dc3*/
+    OB_stVector4_DestroyStdcall_010201A0((OB_stVector4_010201A0 *)i); /*0x795dcb*/
+  ThrowException__(0, 0); /*0x795ddb*/
 }

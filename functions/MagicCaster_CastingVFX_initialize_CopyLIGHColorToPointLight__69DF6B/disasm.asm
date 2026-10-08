@@ -62,10 +62,10 @@
 0x69E061: test    eax, eax
 0x69E063: jz      short loc_69E071
 0x69E065: mov     edx, [esi]
-0x69E067: push    1
-0x69E069: push    edx
-0x69E06A: mov     ecx, eax
-0x69E06C: call    sub_7C6AE0
+0x69E067: push    1; trackBackingPosition
+0x69E069: push    edx; backingLight
+0x69E06A: mov     ecx, eax; self
+0x69E06C: call    ShadowSceneNode_FindOrCreateFullLightForSource; Magic-casting VFX NiPointLight registration uses trackBackingPosition=true.
 0x69E071: mov     eax, [esp+a2]
 0x69E075: push    eax; a2
 0x69E076: mov     ecx, edi; this

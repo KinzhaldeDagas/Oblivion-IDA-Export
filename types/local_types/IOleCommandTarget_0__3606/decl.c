@@ -1,1 +1,1 @@
-IOleCommandTarget_0
+typedef IOleCommandTarget IOleCommandTarget_0;

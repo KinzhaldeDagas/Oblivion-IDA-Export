@@ -33,3 +33,18 @@
 0x6F8E72: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x6F8E77: add     esp, 88h
 0x6F8E7D: retn    4
+0x6F6E00: mov     dword ptr [ecx], offset ??_7facet@locale@std@@6B@
+0x6F6E06: retn
+0x9C9050: mov     ecx, [ebp-88h]
+0x9C9056: jmp     loc_6F6E00
+0x9C905B: mov     edx, [esp+arg_4]
+0x9C905F: lea     eax, [edx-80h]
+0x9C9062: mov     ecx, [edx-84h]
+0x9C9068: xor     ecx, eax
+0x9C906A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C906F: add     eax, 4
+0x9C9072: mov     ecx, [edx-4]
+0x9C9075: xor     ecx, eax
+0x9C9077: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C907C: mov     eax, offset stru_AF19B0
+0x9C9081: jmp     ___CxxFrameHandler3

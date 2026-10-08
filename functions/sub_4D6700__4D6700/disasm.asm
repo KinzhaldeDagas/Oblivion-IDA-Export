@@ -15,7 +15,7 @@
 0x4D672C: call    ModelLoader_IsModelLoaded??
 0x4D6731: test    eax, eax
 0x4D6733: jz      short loc_4D6755
-0x4D6735: mov     ecx, offset dword_B35E50
+0x4D6735: mov     ecx, offset unk_B35E50
 0x4D673A: lea     ebx, [ebx+0]
 0x4D6740: mov     edx, [ecx]
 0x4D6742: test    edx, edx
@@ -23,7 +23,7 @@
 0x4D6746: cmp     edx, eax
 0x4D6748: jz      short loc_4D6758
 0x4D674A: add     ecx, 4
-0x4D674D: cmp     ecx, offset TESDataHandler_g_DoorMarker
+0x4D674D: cmp     ecx, 0B35EA4h
 0x4D6753: jl      short loc_4D6740
 0x4D6755: xor     al, al
 0x4D6757: retn

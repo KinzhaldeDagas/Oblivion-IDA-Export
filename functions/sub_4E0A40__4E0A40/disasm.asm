@@ -6,18 +6,18 @@
 0x4E0A4A: test    ebx, ebx
 0x4E0A4C: jz      short loc_4E0A9D
 0x4E0A4E: push    esi
-0x4E0A4F: mov     esi, [esp+28h+a1]
-0x4E0A53: push    1; a2
-0x4E0A55: push    esi; a1
+0x4E0A4F: mov     esi, dword ptr [esp+28h+a1]
+0x4E0A53: push    1; byteCount
+0x4E0A55: push    esi; source
 0x4E0A56: call    TESForm_SaveDataToCurrentSaveGame
 0x4E0A5B: mov     ax, [esi+4]
 0x4E0A5F: add     ax, [esi+2]
-0x4E0A63: push    2; a2
+0x4E0A63: push    2; byteCount
 0x4E0A65: movzx   ecx, ax
 0x4E0A68: lea     edx, [esp+2Ch+a1]
-0x4E0A6C: mov     [esp+2Ch+a1], ecx
-0x4E0A70: push    edx; a1
-0x4E0A71: mov     ecx, edi
+0x4E0A6C: mov     dword ptr [esp+2Ch+a1], ecx
+0x4E0A70: push    edx; source
+0x4E0A71: mov     ecx, edi; self
 0x4E0A73: call    TESForm_SaveDataToCurrentSaveGame
 0x4E0A78: push    offset sub_4DACF0
 0x4E0A7D: lea     eax, [esp+2Ch+var_1C]

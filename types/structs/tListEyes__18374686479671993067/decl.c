@@ -1,1 +1,4 @@
-tListEyes
+struct tListEyes
+{
+NodeEyes node;
+};

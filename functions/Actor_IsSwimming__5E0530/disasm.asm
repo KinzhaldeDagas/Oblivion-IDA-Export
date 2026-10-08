@@ -1,4 +1,4 @@
-0x5E0530: cmp     dword ptr [ecx+58h], 0
+0x5E0530: cmp     dword ptr [ecx+58h], 0; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x5E0534: jz      short loc_5E054C
 0x5E0536: mov     ecx, [ecx+58h]
 0x5E0539: mov     eax, [ecx]

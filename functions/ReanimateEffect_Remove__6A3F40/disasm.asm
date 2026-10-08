@@ -34,7 +34,7 @@
 0x6A3F9B: fstp    [esp+0Ch+var_C]; int
 0x6A3F9E: mov     ecx, esi; int
 0x6A3FA0: push    0; int
-0x6A3FA2: call    Actor_Kill
+0x6A3FA2: call    Actor_Kill; ODismemberment: candidate future death/kill integration point after visual/state pipeline is stable.
 0x6A3FA7: mov     ecx, [edi+24h]; this
 0x6A3FAA: test    ecx, ecx
 0x6A3FAC: jz      short loc_6A3FC3

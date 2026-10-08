@@ -21,7 +21,7 @@
 0x572418: cmp     [eax+70h], ebx
 0x57241B: jz      loc_572519
 0x572421: push    3
-0x572423: call    nullsub_returnTrue_0arg
+0x572423: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x572428: mov     eax, [esp+3Ch+arg_18]
 0x57242C: add     esp, 4
 0x57242F: cmp     eax, ebx
@@ -98,7 +98,7 @@
 0x57250C: cmp     edx, ecx
 0x57250E: jnz     short loc_572520
 0x572510: push    eax
-0x572511: call    FormHeapFree
+0x572511: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x572516: add     esp, 4
 0x572519: xor     eax, eax
 0x57251B: jmp     loc_57282B
@@ -141,7 +141,6 @@
 0x572575: mov     [esp+38h+var_1C], esi
 0x572579: jz      short loc_572599
 0x57257B: jmp     short loc_572580
-0x57257D: align 10h
 0x572580: mov     ecx, [esp+38h+var_1C]
 0x572584: add     ecx, 1
 0x572587: mov     edx, eax
@@ -199,10 +198,10 @@
 0x57261F: push    offset aTooManyUniqueD; "Too many unique debug text items. \n"
 0x572624: call    PrintError
 0x572629: push    2
-0x57262B: call    nullsub_returnTrue_0arg
+0x57262B: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x572630: mov     ecx, [esp+40h+Src]
 0x572634: push    ecx
-0x572635: call    FormHeapFree
+0x572635: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x57263A: add     esp, 0Ch
 0x57263D: or      eax, 0FFFFFFFFh
 0x572640: jmp     loc_57282B
@@ -220,9 +219,9 @@
 0x57266B: mov     eax, [eax+10h]
 0x57266E: test    eax, eax
 0x572670: jz      short loc_57267E
-0x572672: push    ecx; Str2
-0x572673: push    eax; Str1
-0x572674: call    __strcmp
+0x572672: push    ecx; right
+0x572673: push    eax; left
+0x572674: call    CRT_StricmpLocaleDispatch
 0x572679: add     esp, 8
 0x57267C: jmp     short loc_572689
 0x57267E: xor     eax, eax
@@ -370,10 +369,10 @@
 0x57280A: fld     dword ptr ds:0A30634h
 0x572810: fstp    dword ptr [esi+18h]
 0x572813: push    2
-0x572815: call    nullsub_returnTrue_0arg
+0x572815: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x57281A: mov     edx, [esp+3Ch+Src]
 0x57281E: push    edx
-0x57281F: call    FormHeapFree
+0x57281F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x572824: mov     eax, [esp+40h+var_1C]
 0x572828: add     esp, 8
 0x57282B: mov     ecx, [esp+38h+var_C]
@@ -385,3 +384,12 @@
 0x57283A: pop     ebx
 0x57283B: add     esp, 24h
 0x57283E: retn    1Ch
+0x9BDF20: lea     ecx, [ebp-14h]; void *
+0x9BDF23: jmp     BSStringT_Clear
+0x9BDF28: mov     edx, [esp+arg_4]
+0x9BDF2C: lea     eax, [edx-28h]
+0x9BDF2F: mov     ecx, [edx-2Ch]
+0x9BDF32: xor     ecx, eax
+0x9BDF34: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BDF39: mov     eax, offset stru_AE7768
+0x9BDF3E: jmp     ___CxxFrameHandler3

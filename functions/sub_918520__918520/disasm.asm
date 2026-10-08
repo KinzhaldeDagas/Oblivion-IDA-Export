@@ -4,7 +4,7 @@
 0x918528: mov     dword ptr [esi], offset off_A9D1D8
 0x91852E: jz      short loc_918539
 0x918530: push    esi
-0x918531: call    FormHeapFree
+0x918531: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x918536: add     esp, 4
 0x918539: mov     eax, esi
 0x91853B: pop     esi

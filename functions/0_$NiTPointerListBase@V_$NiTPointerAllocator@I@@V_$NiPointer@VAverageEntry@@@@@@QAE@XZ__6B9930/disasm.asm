@@ -45,26 +45,26 @@
 0x6B99A7: push    ebx
 0x6B99A8: call    unknown_libname_60
 0x6B99AD: add     esp, 10h
-0x6B99B0: mov     [esp+38h+var_10], edi
-0x6B99B4: mov     [esp+38h+var_18], edi
-0x6B99B8: mov     [esp+38h+var_14], edi
-0x6B99BC: mov     [esp+38h+var_1C], offset ??_7?$NiTPointerList@V?$NiPointer@VAverageEntry@@@@@@6B@; const NiTPointerList<NiPointer<AverageEntry>>::`vftable'
+0x6B99B0: mov     [esp+38h+self.count], edi
+0x6B99B4: mov     [esp+38h+self.head], edi
+0x6B99B8: mov     [esp+38h+self.tail], edi
+0x6B99BC: mov     [esp+38h+self.vtable], offset ??_7?$NiTPointerList@V?$NiPointer@VAverageEntry@@@@@@6B@; const NiTPointerList<NiPointer<AverageEntry>>::`vftable' ...
 0x6B99C4: cmp     ebp, edi
 0x6B99C6: mov     [esp+38h+var_4], edi
 0x6B99CA: jbe     short loc_6B9A20
 0x6B99CC: lea     esp, [esp+0]
 0x6B99D0: mov     esi, [ebx+edi*4]
 0x6B99D3: test    esi, esi
-0x6B99D5: mov     [esp+38h+var_20], esi
+0x6B99D5: mov     [esp+38h+payload], esi
 0x6B99D9: jz      short loc_6B99E5
 0x6B99DB: lea     eax, [esi+4]
 0x6B99DE: push    eax; lpAddend
 0x6B99DF: call    dword ptr ds:0A28078h
-0x6B99E5: lea     ecx, [esp+38h+var_20]
-0x6B99E9: push    ecx
-0x6B99EA: lea     ecx, [esp+3Ch+var_1C]
+0x6B99E5: lea     ecx, [esp+38h+payload]
+0x6B99E9: push    ecx; payload
+0x6B99EA: lea     ecx, [esp+3Ch+self]; self
 0x6B99EE: mov     byte ptr [esp+3Ch+var_4], 1
-0x6B99F3: call    sub_749800
+0x6B99F3: call    NiTRefPointerList__AddHead; Pass221: Refcounted NiTPointerList head-insert helper; node+0x08 owns the payload reference.
 0x6B99F8: test    esi, esi
 0x6B99FA: mov     byte ptr [esp+38h+var_4], 0
 0x6B99FF: jz      short loc_6B9A19
@@ -82,7 +82,7 @@
 0x6B9A1C: cmp     edi, ebp
 0x6B9A1E: jb      short loc_6B99D0
 0x6B9A20: push    ebx
-0x6B9A21: call    FormHeapFree
+0x6B9A21: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6B9A26: mov     edi, [esp+3Ch+var_24]
 0x6B9A2A: mov     esi, [edi+14h]
 0x6B9A2D: add     edi, 10h
@@ -100,7 +100,7 @@
 0x6B9A4C: call    eax
 0x6B9A4E: cmp     esi, ebx
 0x6B9A50: jnz     short loc_6B9A40
-0x6B9A52: mov     esi, [esp+38h+var_18]
+0x6B9A52: mov     esi, [esp+38h+self.head]
 0x6B9A56: cmp     esi, ebx
 0x6B9A58: mov     [edi+0Ch], ebx
 0x6B9A5B: mov     [edi+4], ebx
@@ -109,16 +109,16 @@
 0x6B9A63: jz      short loc_6B9AB7
 0x6B9A65: mov     esi, [ebp+8]
 0x6B9A68: cmp     esi, ebx
-0x6B9A6A: mov     [esp+38h+var_20], esi
+0x6B9A6A: mov     [esp+38h+payload], esi
 0x6B9A6E: jz      short loc_6B9A7A
 0x6B9A70: lea     ecx, [esi+4]
 0x6B9A73: push    ecx; lpAddend
 0x6B9A74: call    dword ptr ds:0A28078h
-0x6B9A7A: lea     edx, [esp+38h+var_20]
-0x6B9A7E: push    edx
-0x6B9A7F: mov     ecx, edi
+0x6B9A7A: lea     edx, [esp+38h+payload]
+0x6B9A7E: push    edx; payload
+0x6B9A7F: mov     ecx, edi; self
 0x6B9A81: mov     byte ptr [esp+3Ch+var_4], 2
-0x6B9A86: call    sub_749800
+0x6B9A86: call    NiTRefPointerList__AddHead; Pass221: Refcounted NiTPointerList head-insert helper; node+0x08 owns the payload reference.
 0x6B9A8B: cmp     esi, ebx
 0x6B9A8D: mov     byte ptr [esp+38h+var_4], 0
 0x6B9A92: jz      short loc_6B9AAC
@@ -135,26 +135,26 @@
 0x6B9AAC: mov     ebp, [ebp+0]
 0x6B9AAF: cmp     ebp, ebx
 0x6B9AB1: jnz     short loc_6B9A65
-0x6B9AB3: mov     esi, [esp+38h+var_18]
-0x6B9AB7: mov     [esp+38h+var_1C], offset ??_7?$NiTPointerListBase@V?$NiTPointerAllocator@I@@V?$NiPointer@VAverageEntry@@@@@@6B@; const NiTPointerListBase<NiTPointerAllocator<uint>,NiPointer<AverageEntry>>::`vftable'
+0x6B9AB3: mov     esi, [esp+38h+self.head]
+0x6B9AB7: mov     [esp+38h+self.vtable], offset ??_7?$NiTPointerListBase@V?$NiTPointerAllocator@I@@V?$NiPointer@VAverageEntry@@@@@@6B@; const NiTPointerListBase<NiTPointerAllocator<uint>,NiPointer<AverageEntry>>::`vftable' ...
 0x6B9ABF: cmp     esi, ebx
 0x6B9AC1: mov     [esp+38h+var_4], 3
 0x6B9AC9: jz      short loc_6B9AE1
-0x6B9ACB: mov     edx, [esp+38h+var_1C]
+0x6B9ACB: mov     edx, [esp+38h+self.vtable]
 0x6B9ACF: mov     eax, esi
 0x6B9AD1: mov     esi, [esi]
 0x6B9AD3: push    eax
 0x6B9AD4: mov     eax, [edx+8]
-0x6B9AD7: lea     ecx, [esp+3Ch+var_1C]
+0x6B9AD7: lea     ecx, [esp+3Ch+self]
 0x6B9ADB: call    eax
 0x6B9ADD: cmp     esi, ebx
 0x6B9ADF: jnz     short loc_6B9ACB
 0x6B9AE1: mov     esi, [esp+38h+var_24]
-0x6B9AE5: mov     [esp+38h+var_10], ebx
-0x6B9AE9: mov     [esp+38h+var_18], ebx
-0x6B9AED: mov     [esp+38h+var_14], ebx
+0x6B9AE5: mov     [esp+38h+self.count], ebx
+0x6B9AE9: mov     [esp+38h+self.head], ebx
+0x6B9AED: mov     [esp+38h+self.tail], ebx
 0x6B9AF1: mov     [esp+38h+var_4], 0FFFFFFFFh
-0x6B9AF9: mov     [esp+38h+var_1C], offset ??_7?$NiTListBase@V?$NiTPointerAllocator@I@@V?$NiPointer@VAverageEntry@@@@@@6B@; const NiTListBase<NiTPointerAllocator<uint>,NiPointer<AverageEntry>>::`vftable'
+0x6B9AF9: mov     [esp+38h+self.vtable], offset ??_7?$NiTListBase@V?$NiTPointerAllocator@I@@V?$NiPointer@VAverageEntry@@@@@@6B@; const NiTListBase<NiTPointerAllocator<uint>,NiPointer<AverageEntry>>::`vftable' ...
 0x6B9B01: jmp     short loc_6B9B05
 0x6B9B03: xor     ebx, ebx
 0x6B9B05: mov     esi, [esi+14h]
@@ -175,3 +175,20 @@
 0x6B9B2D: pop     ebx
 0x6B9B2E: add     esp, 24h
 0x6B9B31: retn
+0x6B95E0: mov     dword ptr [ecx], offset ??_7?$NiTListBase@V?$NiTPointerAllocator@I@@V?$NiPointer@VAverageEntry@@@@@@6B@; const NiTListBase<NiTPointerAllocator<uint>,NiPointer<AverageEntry>>::`vftable'
+0x6B95E6: retn
+0x9C7090: lea     ecx, [ebp-1Ch]
+0x9C7093: jmp     j_??1?$NiTPointerList@V?$NiPointer@VAverageEntry@@@@@@UAE@XZ; NiTPointerList<NiPointer<AverageEntry>>::~NiTPointerList<NiPointer<AverageEntry>>(void)
+0x9C7098: lea     ecx, [ebp-20h]; slot
+0x9C709B: jmp     NiPointerSlot_Release
+0x9C70A0: lea     ecx, [ebp-20h]; slot
+0x9C70A3: jmp     NiPointerSlot_Release
+0x9C70A8: lea     ecx, [ebp-1Ch]
+0x9C70AB: jmp     loc_6B95E0
+0x9C70B0: mov     edx, [esp+arg_4]
+0x9C70B4: lea     eax, [edx-28h]
+0x9C70B7: mov     ecx, [edx-2Ch]
+0x9C70BA: xor     ecx, eax
+0x9C70BC: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C70C1: mov     eax, offset stru_AEF514
+0x9C70C6: jmp     ___CxxFrameHandler3

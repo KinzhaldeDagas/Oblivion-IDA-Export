@@ -1,4 +1,4 @@
-void *sub_8D2760()
+NiRTTI *sub_8D2760()
 {
-  return &unk_BA8178;
+  return &stru_BA8178; /*0x8d2765*/
 }

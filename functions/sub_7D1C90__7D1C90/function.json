@@ -1,19 +1,32 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7D1C90",
+      "0x7D1EA5"
+    ]
+  ],
+  "chunks_sha256": "05470d8982520db2a9e66681798fcef3ce7d814e34c5115a722d1b776bd9ca85",
+  "comment_regular": "Verified (Oblivion): shared by all four 1x/2x texture-effect pass handlers used from ShadowLight, Skin, and Hair shader setup. Reads TextureEffectData from shaderProperty+0xE0, copies current fill/edge RGBA into ShadowLight shader-map backing, copies U/V offsets and edge exponent, writes the second fVars component as 1.0, then updates separate per-geometry property-state constants.",
+  "comment_repeatable": "Verified (Oblivion): shared by all four 1x/2x texture-effect pass handlers used from ShadowLight, Skin, and Hair shader setup. Reads TextureEffectData from shaderProperty+0xE0, copies current fill/edge RGBA into ShadowLight shader-map backing, copies U/V offsets and edge exponent, writes the second fVars component as 1.0, then updates separate per-geometry property-state constants.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7D1C90",
+  "display_name": "BSShaderProperty_SetupTextureEffectConstants",
   "end_ea": "0x7D1EA5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7D1C90",
+  "name": "BSShaderProperty_SetupTextureEffectConstants",
   "segment": ".text",
   "sha256": "05470d8982520db2a9e66681798fcef3ce7d814e34c5115a722d1b776bd9ca85",
   "size": 533,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7D1C90",
-  "type": "void __stdcall(NiGeometry *, int)",
+  "total_chunk_size": 533,
+  "type": "void __stdcall(NiGeometry *geometry, BSShaderProperty *shaderProperty)",
   "xrefs_from_count": 155,
   "xrefs_to_count": 4
 }

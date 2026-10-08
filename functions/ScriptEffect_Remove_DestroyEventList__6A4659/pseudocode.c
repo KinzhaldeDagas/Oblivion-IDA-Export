@@ -1,13 +1,14 @@
-int __usercall ScriptEffect_Remove_::DestroyEventList@<eax>(ScriptEffect *a1@<esi>)
+// DestroyEventList chunk: destruct and FormHeapFree the ScriptEventList at +0x3C, then null the field.
+void __usercall ScriptEffect_Remove_::DestroyEventList(ScriptEffect *a1@<esi>)
 {
   unsigned int v1; // edi
 
-  v1 = *((_DWORD *)a1 + 0xF);
-  if ( v1 )
+  v1 = *((_DWORD *)a1 + 0xF); /*0x6a4659*/
+  if ( v1 ) /*0x6a465e*/
   {
-    ScriptEventList_destr__(*((ScriptEventList **)a1 + 0xF));
-    FormHeapFree(v1);
-    *((_DWORD *)a1 + 0xF) = 0;
+    ScriptEventList_destr__(*((ScriptEventList **)a1 + 0xF)); /*0x6a4662*/
+    FormHeapFree(v1); /*0x6a4668*/
+    *((_DWORD *)a1 + 0xF) = 0; /*0x6a4670*/
   }
-  return ScriptEffect_Remove_::DOne();
+  ScriptEffect_Remove_::DOne(); /*0x6a465e*/
 }

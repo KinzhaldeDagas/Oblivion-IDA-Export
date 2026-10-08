@@ -6,6 +6,6 @@
 0xA000A2: fadd    st, st
 0xA000A4: fld1
 0xA000A6: fdivrp  st(1), st
-0xA000A8: fstp    flt_B3C1F8
+0xA000A8: fstp    dword_B3C180+78h
 0xA000AE: pop     ecx
 0xA000AF: retn

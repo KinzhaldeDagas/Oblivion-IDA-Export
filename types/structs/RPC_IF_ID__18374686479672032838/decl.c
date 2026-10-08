@@ -1,1 +1,1 @@
-RPC_IF_ID
+typedef _RPC_IF_ID RPC_IF_ID;

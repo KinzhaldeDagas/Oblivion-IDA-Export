@@ -14,7 +14,7 @@
 0x96DF0B: call    edx
 0x96DF0D: cmp     eax, ebp
 0x96DF0F: jz      short loc_96DF1F
-0x96DF11: cmp     eax, offset dword_B3FCD4
+0x96DF11: cmp     eax, offset stru_B3FCD4
 0x96DF16: jz      short loc_96DF58
 0x96DF18: mov     eax, [eax+4]
 0x96DF1B: cmp     eax, ebp
@@ -28,7 +28,7 @@
 0x96DF31: cmp     eax, ebp
 0x96DF33: jz      loc_96E0AE
 0x96DF39: lea     esp, [esp+0]
-0x96DF40: cmp     eax, offset dword_B3FD04
+0x96DF40: cmp     eax, offset stru_B3FD04
 0x96DF45: jz      short loc_96DFC4
 0x96DF47: mov     eax, [eax+4]
 0x96DF4A: cmp     eax, ebp
@@ -158,7 +158,7 @@
 0x96E09E: mov     edx, [esp+24h+var_C]
 0x96E0A2: push    edx
 0x96E0A3: mov     [edi+34h], eax
-0x96E0A6: call    FormHeapFree
+0x96E0A6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x96E0AB: add     esp, 4
 0x96E0AE: pop     edi
 0x96E0AF: pop     esi

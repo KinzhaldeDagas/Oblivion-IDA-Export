@@ -4,14 +4,14 @@ void __thiscall _Fac_tidy(void *this)
   unsigned int v2; // esi
   void *v3; // [esp+0h] [ebp-4h] BYREF
 
-  v3 = this;
-  std::_Lockit::_Lockit((std::_Lockit *)&v3, 0);
-  for ( i = dword_BA9B54; dword_BA9B54; i = dword_BA9B54 )
+  v3 = this; /*0x9808cc*/
+  std::_Lockit::_Lockit((std::_Lockit *)&v3, 0); /*0x9808d2*/
+  for ( i = unk_BA9B54; unk_BA9B54; i = unk_BA9B54 ) /*0x9808d7*/
   {
-    v2 = (unsigned int)i;
-    dword_BA9B54 = *(std::_Fac_node **)i;
-    std::_Fac_node::~_Fac_node(i);
-    FormHeapFree(v2);
+    v2 = (unsigned int)i; /*0x9808e1*/
+    unk_BA9B54 = *(std::_Fac_node **)i; /*0x9808e7*/
+    std::_Fac_node::~_Fac_node(i); /*0x9808ec*/
+    FormHeapFree(v2); /*0x9808f2*/
   }
-  std::_Lockit::~_Lockit((std::_Lockit *)&v3);
+  std::_Lockit::~_Lockit((std::_Lockit *)&v3); /*0x980905*/
 }

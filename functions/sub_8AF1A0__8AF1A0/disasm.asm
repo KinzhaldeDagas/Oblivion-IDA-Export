@@ -1,4 +1,4 @@
-0x8AF1A0: push    ebp
+0x8AF1A0: push    ebp; 2026-05-18 73000 consumer decode: bhkSimpleShapePhantom setup consumes cinfo +0x04 shape pointer and cinfo +0x20 4x4 phantom transform. Treetop collision leaves this phantom transform identity; sidecar rotations should normally use per-shape transform/endpoints before this final wrapper.
 0x8AF1A1: mov     ebp, esp
 0x8AF1A3: and     esp, 0FFFFFFF0h
 0x8AF1A6: push    0FFFFFFFFh
@@ -36,7 +36,7 @@
 0x8AF207: push    ecx
 0x8AF208: lea     ecx, [esi+20h]
 0x8AF20B: mov     [esp+7Ch+var_4], 0
-0x8AF213: call    sub_8A2050
+0x8AF213: call    sub_8A2050; 2026-05-18 73000 consumer decode: copies a full 4x4 transform matrix from cinfo into the Havok construction object; rows 0..2 via 0x8A1FB0 and row 3 here. 0x565510 stock callers leave rotation identity and write translation only.
 0x8AF218: mov     edx, [esi+4]
 0x8AF21B: push    eax
 0x8AF21C: push    edx
@@ -68,3 +68,19 @@
 0x8AF263: mov     esp, ebp
 0x8AF265: pop     ebp
 0x8AF266: retn    4
+0x9D7280: mov     eax, [ebp+var_64]
+0x9D7283: push    eax
+0x9D7284: call    sub_88D520
+0x9D7289: pop     ecx
+0x9D728A: retn
+0x9D728B: mov     edx, [esp-4+arg_4]
+0x9D728F: lea     eax, [edx-64h]
+0x9D7292: mov     ecx, [edx-68h]
+0x9D7295: xor     ecx, eax
+0x9D7297: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D729C: add     eax, 0Ch
+0x9D729F: mov     ecx, [edx-8]
+0x9D72A2: xor     ecx, eax
+0x9D72A4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D72A9: mov     eax, offset stru_AFEF0C
+0x9D72AE: jmp     ___CxxFrameHandler3

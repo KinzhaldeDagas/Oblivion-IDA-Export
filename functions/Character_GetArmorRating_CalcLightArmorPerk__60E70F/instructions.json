@@ -7,13 +7,13 @@
   },
   {
     "ea": "0x60E715",
-    "line": "push    1Bh",
+    "line": "push    1Bh; actorValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x60E717",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x60E71D",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x60E72B",
-    "line": "call    Actor_GetArmorCoverage",
+    "line": "call    Actor_GetArmorCoverage; Light Master purity call: Actor_GetArmorCoverage(actor, heavy=1). A third-class Medium item must make this test nonzero so native Light Master cannot multiply Medium/mixed sets.",
     "mnemonic": "call",
     "size": 5
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x60E737",
-    "line": "call    Actor_GetArmorCoverage",
+    "line": "call    Actor_GetArmorCoverage; Light Master minimum-coverage call: Actor_GetArmorCoverage(actor, heavy=0), compared with the weighted minimum at 0xB37260. Medium-only mastery should mirror this minimum-coverage gate after proving every worn armor form is Medium.",
     "mnemonic": "call",
     "size": 5
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x60E754",
-    "line": "call    Actor_GetArmorRating",
+    "line": "call    Actor_GetArmorRating; Adds Actor_GetArmorRating(this), which is GetAVfCur(0x2B DefendBonus), to the worn-armor total before the fMaxArmorRating cap.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x60E774",
-    "line": "jnz     short loc_60E79F",
+    "line": "jnz     short loc_60E79F; Vanilla fMaxArmorRating cap branch. AVU jumps to the no-cap return so its wrapper can apply DR to worn armor + DefendBonus first, then reapply fMaxArmorRating.",
     "mnemonic": "jnz",
     "size": 2
   },

@@ -1,1 +1,1 @@
-StdGlobalInterfaceTableImpl_0
+typedef StdGlobalInterfaceTableImpl StdGlobalInterfaceTableImpl_0;

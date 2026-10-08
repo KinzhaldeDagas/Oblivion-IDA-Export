@@ -5,7 +5,7 @@
 0x725DBE: mov     dword ptr ds:0B3FD8Ch, 0
 0x725DC8: jz      short loc_725DD3
 0x725DCA: push    esi
-0x725DCB: call    FormHeapFree
+0x725DCB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x725DD0: add     esp, 4
 0x725DD3: mov     eax, esi
 0x725DD5: pop     esi

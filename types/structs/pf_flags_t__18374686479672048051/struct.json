@@ -1,76 +1,126 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "pf_flags_t",
+  "definition": "struct __declspec(align(4)) pf_flags_t\n{\n$F58DE4B91B9200A9A45F979F026E3AC2 IntegerLength;\nBOOLEAN IntegerDouble;\nBOOLEAN IntegerNative;\nBOOLEAN LeftAlign;\nBOOLEAN Alternate;\nBOOLEAN PadZero;\nBOOLEAN WideString;\nint FieldLength;\nint Precision;\nchar Sign;\nchar Format;\n}\n",
   "id": 18374686479672048051,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IntegerLength",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "$F58DE4B91B9200A9A45F979F026E3AC2"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IntegerDouble",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 1
+      "size": 1,
+      "type": "BOOLEAN"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IntegerNative",
       "offset": 5,
       "offset_hex": "0x5",
-      "size": 1
+      "size": 1,
+      "type": "BOOLEAN"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "LeftAlign",
       "offset": 6,
       "offset_hex": "0x6",
-      "size": 1
+      "size": 1,
+      "type": "BOOLEAN"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Alternate",
       "offset": 7,
       "offset_hex": "0x7",
-      "size": 1
+      "size": 1,
+      "type": "BOOLEAN"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "PadZero",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 1
+      "size": 1,
+      "type": "BOOLEAN"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "WideString",
       "offset": 9,
       "offset_hex": "0x9",
-      "size": 1
+      "size": 1,
+      "type": "BOOLEAN"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "FieldLength",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Precision",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Sign",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 1
+      "size": 1,
+      "type": "char"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Format",
       "offset": 21,
       "offset_hex": "0x15",
-      "size": 1
+      "size": 1,
+      "type": "char"
     }
   ],
   "name": "pf_flags_t",
+  "ordinal": 8943,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 24
 }

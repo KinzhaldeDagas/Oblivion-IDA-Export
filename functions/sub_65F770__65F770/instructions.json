@@ -49,13 +49,13 @@
   },
   {
     "ea": "0x65F78B",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x65F790",
-    "line": "call    sub_4029D0",
+    "line": "call    TimeGlobals_GetTimeScale; Returns TimeGlobals field +5 TESGlobal value (time scale). Observed callers use it for magic cooldown and fast-travel time calculations.",
     "mnemonic": "call",
     "size": 5
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x65F79B",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x65F7AE",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x65F7BE",
-    "line": "call    sub_673B10",
+    "line": "call    sub_673B10; ActorProcessManager accumulates a fractional fast-travel/update remainder in flt_B3BCF0; NaN/large values are reset to 0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,19 +181,19 @@
   },
   {
     "ea": "0x65F7EB",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x65F7F0",
-    "line": "fstp    [esp+14h+var_14]; float",
+    "line": "fstp    [esp+14h+deltaTime]; float",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x65F7F3",
-    "line": "call    sub_677EC0",
+    "line": "call    sub_677EC0; ActorProcessManager high/process list update used during fast-travel time simulation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,19 +217,19 @@
   },
   {
     "ea": "0x65F801",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x65F806",
-    "line": "fstp    [esp+14h+var_14]; float",
+    "line": "fstp    [esp+14h+deltaTime]; float",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x65F809",
-    "line": "call    sub_674200",
+    "line": "call    sub_674200; ActorProcessManager process-level-1 list update used during fast-travel time simulation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,19 +253,19 @@
   },
   {
     "ea": "0x65F817",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x65F81C",
-    "line": "fstp    [esp+14h+var_14]; float",
+    "line": "fstp    [esp+14h+deltaTime]; float",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x65F81F",
-    "line": "call    sub_673E90",
+    "line": "call    sub_673E90; ActorProcessManager process-level-2 list update used during fast-travel time simulation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -289,19 +289,19 @@
   },
   {
     "ea": "0x65F82D",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x65F832",
-    "line": "fstp    [esp+14h+var_14]; float",
+    "line": "fstp    [esp+14h+deltaTime]; float",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x65F835",
-    "line": "call    sub_673C10",
+    "line": "call    sub_673C10; ActorProcessManager process-level-3 list update used during fast-travel time simulation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,13 +325,13 @@
   },
   {
     "ea": "0x65F840",
-    "line": "fstp    [esp+10h+var_10]",
+    "line": "fstp    [esp+10h+var_10]; deltaTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x65F843",
-    "line": "call    MagicTarget_ProcessEffects",
+    "line": "call    MagicTarget_ProcessEffects; Verified active-effect manager: obtains the target's active-effect list, checks target parent/node/cell/process conditions, then enters the list loop. Each eligible ActiveEffect goes through ActiveEffect_Base_ProcessEffect; removed effects are unlinked and destroyed by their virtual destructor. Actor_ProcessMagicEffect calls this manager each actor process tick.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x65F85C",
-    "line": "call    sub_5F2530",
+    "line": "call    sub_5F2530; Fast-travel loop player AV update: clamps/restores health toward base+modifier over travel time.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,13 +403,13 @@
   },
   {
     "ea": "0x65F870",
-    "line": "fstp    [esp+14h+var_14]; float",
+    "line": "fstp    [esp+14h+deltaTime]; float",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x65F873",
-    "line": "call    sub_5F25F0",
+    "line": "call    sub_5F25F0; Fast-travel loop player AV update: magicka regeneration/active magic adjustment over travel time.",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x65F888",
-    "line": "call    sub_5F2720",
+    "line": "call    sub_5F2720; Fast-travel loop player AV update: fatigue regeneration over travel time.",
     "mnemonic": "call",
     "size": 5
   },
@@ -463,19 +463,19 @@
   },
   {
     "ea": "0x65F893",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x65F898",
-    "line": "fstp    [esp+14h+var_14]; float",
+    "line": "fstp    [esp+14h+deltaTime]; float",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x65F89B",
-    "line": "call    sub_4029E0",
+    "line": "call    TimeGlobals_AdvanceGameTime; Advances GameHour by TimeScale * elapsedSeconds / 3600; rolls GameDay, GameMonth, GameYear, and DaysPassed after 24-hour boundaries.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,19 +499,19 @@
   },
   {
     "ea": "0x65F8AD",
-    "line": "fstp    [esp+14h+var_14]; float",
+    "line": "fstp    [esp+14h+deltaTime]; deltaTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x65F8B0",
-    "line": "mov     ecx, [ecx+5Ch]",
+    "line": "mov     ecx, [ecx+5Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x65F8B3",
-    "line": "call    sub_542F20",
+    "line": "call    Sky__Update; Oblivion's normal Sky frame update: determines underwater state and sky visibility, advances weather/time, calls UpdateColors and UpdateFog, updates wind/effects and every active sky child, publishes the sky vector, and clears transient flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x65F8BA",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x65F8CD",
-    "line": "fstp    [esp+14h+var_14]",
+    "line": "fstp    [esp+14h+deltaTime]",
     "mnemonic": "fstp",
     "size": 3
   },

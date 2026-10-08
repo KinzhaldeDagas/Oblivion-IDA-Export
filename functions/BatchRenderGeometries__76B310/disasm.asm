@@ -1,1 +1,1 @@
-0x76B310: jmp     sub_769960
+0x76B310: jmp     sub_769960; MoonSugarEffect decode: NiDX9Renderer BatchRenderGeometries vtable thunk. Forwards to 0x769960, the batch/prepack entry builder, not the immediate RenderTriGeometries draw path.

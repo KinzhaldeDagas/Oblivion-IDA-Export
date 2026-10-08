@@ -1,1 +1,1 @@
-LCID
+typedef DWORD LCID;

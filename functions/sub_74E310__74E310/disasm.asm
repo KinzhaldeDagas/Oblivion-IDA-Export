@@ -37,9 +37,9 @@
 0x74E369: cmp     cl, [esi+34h]
 0x74E36C: jnz     short loc_74E385
 0x74E36E: add     esi, 28h ; '('
-0x74E371: push    esi
-0x74E372: lea     ecx, [edi+28h]
-0x74E375: call    sub_8AA390
+0x74E371: push    esi; other
+0x74E372: lea     ecx, [edi+28h]; this
+0x74E375: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x74E37A: test    al, al
 0x74E37C: jnz     short loc_74E385
 0x74E37E: pop     edi

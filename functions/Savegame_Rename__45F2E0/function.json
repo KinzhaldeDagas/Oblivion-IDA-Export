@@ -1,19 +1,36 @@
 {
-  "callees_count": 67,
-  "callers_count": 7,
-  "comment_regular": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 19,
+  "callers_count": 8,
+  "chunks": [
+    [
+      "0x45F2E0",
+      "0x45F78F"
+    ],
+    [
+      "0x9AE510",
+      "0x9AE55A"
+    ]
+  ],
+  "chunks_sha256": "94905e7fad78a48785935bb7c553544c1ac056876ebaba3c63272dd7403fae79",
+  "comment_regular": "Verified ABI: ECX save/load manager, stack existingFile/stem/mode, RET0Ch at45F78C. EBP carries mode through sprintf at45F3AD. aPortable resolver bridge duplicates five cdecl formatting arguments and passes EBP as sixth; offline compiled bridge test checks reads with10 backups and saves with1 versus10. Co-save allowance is SDK-derived: .obse adds one byte vs .ess, and backup sidecars need base+5+4*count+NUL within260.",
   "comment_repeatable": "",
-  "data_refs_count": 5,
-  "display_name": "Savegame_Rename",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 9,
+  "display_name": "TESSaveLoadGame_ResolveSaveFile",
   "end_ea": "0x45F78F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "Savegame_Rename",
+  "name": "TESSaveLoadGame_ResolveSaveFile",
   "segment": ".text",
   "sha256": "6e11147bebb5a916a57ea3f357118cb7ba8126b173301cd661918c81748aa1e0",
   "size": 1199,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x45F2E0",
-  "type": "const char *__userpurge@<eax>(_DWORD *@<ecx>, double@<st0>, double st4_0@<st3>, double st5_0@<st2>, double st6_0@<st1>, double@<st4>, double@<st7>, double@<st6>, double@<st5>, int, char *, int)",
-  "xrefs_from_count": 422,
+  "total_chunk_size": 1273,
+  "type": "BSFile *__thiscall(TESSaveLoadGame_SerializationView *this, BSFile *existingFile, const char *stem, int mode)",
+  "xrefs_from_count": 446,
   "xrefs_to_count": 8
 }

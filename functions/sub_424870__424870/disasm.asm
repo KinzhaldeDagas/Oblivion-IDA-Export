@@ -53,7 +53,7 @@
 0x4248FF: mov     [esp+1Ch+var_4], esi
 0x424903: jz      short loc_42490E
 0x424905: mov     ecx, eax; this
-0x424907: call    ??0ExtraRagDollData@@QAE@XZ; ExtraRagDollData::ExtraRagDollData(void)
+0x424907: call    ??0ExtraRagDollData@@QAE@XZ; MEF v35 cleanup proof: ExtraRagDollData constructor only sets type/vtable and zeroes fields +8/+C. Before payload attachment, direct FormHeapFree is complete cleanup.
 0x42490C: mov     esi, eax
 0x42490E: push    8; Size
 0x424910: mov     [esp+20h+var_4], 0FFFFFFFFh
@@ -83,3 +83,20 @@
 0x424964: pop     ebp
 0x424965: add     esp, 0Ch
 0x424968: retn    4
+0x9B3B90: mov     eax, [ebp+4]
+0x9B3B93: push    eax
+0x9B3B94: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B3B99: pop     ecx
+0x9B3B9A: retn
+0x9B3B9B: mov     eax, [ebp+4]
+0x9B3B9E: push    eax
+0x9B3B9F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B3BA4: pop     ecx
+0x9B3BA5: retn
+0x9B3BA6: mov     edx, [esp+arg_4]
+0x9B3BAA: lea     eax, [edx-0Ch]
+0x9B3BAD: mov     ecx, [edx-10h]
+0x9B3BB0: xor     ecx, eax
+0x9B3BB2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B3BB7: mov     eax, offset stru_ADF520
+0x9B3BBC: jmp     ___CxxFrameHandler3

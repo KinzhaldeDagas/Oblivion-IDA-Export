@@ -5,8 +5,8 @@ void __userpurge MagicItemForm_LoadForm_::EffectLoopBody(
         int a4@<edi>,
         int a5)
 {
-  if ( *a1 )
-    MagicItemForm_LoadForm_::EffectLoopContinue(a3, a4, (int)a1, a2 + 1, a5);
+  if ( *a1 ) /*0x41b440*/
+    MagicItemForm_LoadForm_::EffectLoopContinue(a3, a4, (int)a1, a2 + 1, a5); /*0x41b446*/
   else
-    MagicItemForm_LoadForm_::EffectLoopContinue(a3, a4, (int)a1, a2, a5);
+    MagicItemForm_LoadForm_::EffectLoopContinue(a3, a4, (int)a1, a2, a5); /*0x41b443*/
 }

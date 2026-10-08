@@ -1,5 +1,10 @@
 // positive sp value has been detected, the output may be wrong!
-double Calc_MagicTargetResistanceFactor_::Return_0f()
+void Calc_MagicTargetResistanceFactor_::Return_0f()
 {
-  return 0.0;
+  __asm /*0x548b23*/
+  {
+    fstp    st
+    fstp    st
+    fldz
+  }
 }

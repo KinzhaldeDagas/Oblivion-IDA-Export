@@ -74,32 +74,32 @@
 0x692526: lea     eax, [esp+34h+var_18]
 0x69252A: push    eax
 0x69252B: mov     ecx, esi
-0x69252D: call    TESPackage_SetLocation
+0x69252D: call    TESPackage_SetLocation; 3DTheft decode: TESPackage_SetLocation allocates package->location when needed and copies a 0x0C LocationData record; null source clears location data.
 0x692532: lea     ecx, [esp+34h+var_24]
-0x692536: call    TESPackage_TargetData_constr
+0x692536: call    TESPackage_TargetData_constr; 3DTheft decode: TESPackage_TargetData constructor initializes targetType=2, target/object=0, count=0.
 0x69253B: push    0
 0x69253D: lea     ecx, [esp+38h+var_24]
 0x692541: mov     byte ptr [esp+38h+var_4], 2
-0x692546: call    TESPackage_TargetData_SetType
+0x692546: call    TESPackage_TargetData_SetType; 3DTheft decode: TargetData_SetType writes targetType and clears the target/object field for refr/base/type target modes.
 0x69254B: push    edi
 0x69254C: lea     ecx, [esp+38h+var_24]
-0x692550: call    TeSPackage_TargetData_SetTargetREFR
+0x692550: call    TeSPackage_TargetData_SetTargetREFR; 3DTheft decode: TargetData_SetTargetREFR only writes the reference field when targetType is 0 (reference target). It does not set count.
 0x692555: push    12Ch
 0x69255A: lea     ecx, [esp+38h+var_24]
 0x69255E: call    TESAIForm_SetServiceFlags
 0x692563: lea     ecx, [esp+34h+var_24]
 0x692567: push    ecx
 0x692568: mov     ecx, esi
-0x69256A: call    TESPackage_SetTarget
+0x69256A: call    TESPackage_SetTarget; 3DTheft decode: TESPackage_SetTarget allocates package->target when needed, copies a 0x0C TargetData record, and leaves later callers to set target type/ref/count fields.
 0x69256F: push    1; a4
 0x692571: push    0; a3
 0x692573: push    esi; a2
 0x692574: mov     ecx, ebp; this
 0x692576: mov     dword ptr [esi+18h], 26h ; '&'
-0x69257D: call    Actor_AddPackage?
-0x692582: lea     ecx, [esp+34h+var_24]; void *
+0x69257D: call    Actor_AddPackage?; 3DTheft: xrefs ignore this function's return value; use current package/process state after call, not AL/EAX, as the package assignment result.
+0x692582: lea     ecx, [esp+34h+var_24]; this
 0x692586: mov     byte ptr [esp+34h+var_4], 1
-0x69258B: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x69258B: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x692590: lea     ecx, [esp+34h+var_18]
 0x692594: mov     [esp+34h+var_4], 0FFFFFFFFh
 0x69259C: call    TESPackage_LocationData_destr
@@ -111,3 +111,19 @@
 0x6925AF: pop     ebp
 0x6925B0: add     esp, 24h
 0x6925B3: retn
+0x9C5760: mov     eax, [ebp+4]
+0x9C5763: push    eax
+0x9C5764: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C5769: pop     ecx
+0x9C576A: retn
+0x9C576B: lea     ecx, [ebp-18h]
+0x9C576E: jmp     TESPackage_LocationData_destr
+0x9C5773: lea     ecx, [ebp-24h]; this
+0x9C5776: jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x9C577B: mov     edx, [esp+arg_4]
+0x9C577F: lea     eax, [edx-24h]
+0x9C5782: mov     ecx, [edx-28h]
+0x9C5785: xor     ecx, eax
+0x9C5787: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C578C: mov     eax, offset stru_AEDF0C
+0x9C5791: jmp     ___CxxFrameHandler3

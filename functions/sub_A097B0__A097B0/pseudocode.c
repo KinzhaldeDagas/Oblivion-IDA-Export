@@ -1,4 +1,4 @@
-BSStringT *sub_A097B0()
+NiRTTI *sub_A097B0()
 {
-  return sub_70E220((BSStringT *)dword_B3F484, "BSXFlags", (int)dword_B3FFA0);
+  return NiRTTI_Constructor(&stru_B3F484, "BSXFlags", &stru_B3FFA0); /*0xa097c4*/
 }

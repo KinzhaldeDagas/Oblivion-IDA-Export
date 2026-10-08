@@ -3,9 +3,9 @@
 0x4BDE56: mov     eax, [eax]
 0x4BDE58: push    esi
 0x4BDE59: mov     esi, [ecx+18h]
-0x4BDE5C: push    edx
-0x4BDE5D: push    eax
-0x4BDE5E: call    sub_4EF1D0
+0x4BDE5C: push    edx; group_y
+0x4BDE5D: push    eax; group_x
+0x4BDE5E: call    TESObjectCELL_PackExteriorGroupLabel; Verified exact key encoding used by the DistantLOD cell model map: packed label = (signed cellX << 16) | unsigned cellY.
 0x4BDE63: mov     edx, [esi]
 0x4BDE65: add     esp, 8
 0x4BDE68: push    eax

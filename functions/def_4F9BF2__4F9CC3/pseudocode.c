@@ -3,5 +3,5 @@ char __stdcall def_4F9BF2(int a1)
 {
   char v2; // [esp-1h] [ebp-1h]
 
-  return v2;
+  return v2; /*0x4f9cca*/
 }

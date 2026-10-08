@@ -1,82 +1,135 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "get_thread_info_reply",
+  "definition": "struct get_thread_info_reply\n{\nreply_header __header;\nprocess_id_t pid;\nthread_id_t tid;\nclient_ptr_t teb;\nclient_ptr_t entry_point;\naffinity_t affinity;\nint exit_code;\nint priority;\nint last;\nint suspend_count;\nint dbg_hidden;\ndata_size_t desc_len;\n}\n",
   "id": 18374686479671858365,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "__header",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "reply_header"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pid",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "process_id_t"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "tid",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "thread_id_t"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "teb",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 8
+      "size": 8,
+      "type": "client_ptr_t"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "entry_point",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 8
+      "size": 8,
+      "type": "client_ptr_t"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "affinity",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 8
+      "size": 8,
+      "type": "affinity_t"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "exit_code",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "priority",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "last",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "suspend_count",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dbg_hidden",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "desc_len",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "data_size_t"
     }
   ],
   "name": "get_thread_info_reply",
+  "ordinal": 6715,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 64
 }

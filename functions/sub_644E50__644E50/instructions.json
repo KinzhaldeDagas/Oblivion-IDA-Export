@@ -733,7 +733,7 @@
   },
   {
     "ea": "0x644FD4",
-    "line": "mov     [esp+20h+var_8], edx",
+    "line": "mov     [esp+20h+destinationPosition.y], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -745,13 +745,13 @@
   },
   {
     "ea": "0x644FDA",
-    "line": "mov     [esp+20h+var_C], ecx",
+    "line": "mov     [esp+20h+destinationPosition.x], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x644FDE",
-    "line": "mov     [esp+20h+var_4], eax",
+    "line": "mov     [esp+20h+destinationPosition.z], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x644FEC",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -787,7 +787,7 @@
   },
   {
     "ea": "0x644FF0",
-    "line": "call    Actor_IsSwimming",
+    "line": "call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).",
     "mnemonic": "call",
     "size": 5
   },
@@ -853,13 +853,13 @@
   },
   {
     "ea": "0x64500D",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x64500F",
-    "line": "call    Actor_IsSwimming",
+    "line": "call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).",
     "mnemonic": "call",
     "size": 5
   },
@@ -877,7 +877,7 @@
   },
   {
     "ea": "0x645018",
-    "line": "fld     [esp+20h+var_4]",
+    "line": "fld     [esp+20h+destinationPosition.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -895,7 +895,7 @@
   },
   {
     "ea": "0x645022",
-    "line": "call    sub_5E0660",
+    "line": "call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.",
     "mnemonic": "call",
     "size": 5
   },
@@ -907,7 +907,7 @@
   },
   {
     "ea": "0x64502B",
-    "line": "fstp    [esp+20h+var_4]",
+    "line": "fstp    [esp+20h+destinationPosition.z]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -937,13 +937,13 @@
   },
   {
     "ea": "0x645043",
-    "line": "mov     ecx, [esp+20h+var_C]",
+    "line": "mov     ecx, [esp+20h+destinationPosition.x]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x645047",
-    "line": "mov     edx, [esp+20h+var_8]",
+    "line": "mov     edx, [esp+20h+destinationPosition.y]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -973,7 +973,7 @@
   },
   {
     "ea": "0x645053",
-    "line": "mov     ecx, [esp+30h+var_4]",
+    "line": "mov     ecx, [esp+30h+destinationPosition.z]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -985,7 +985,7 @@
   },
   {
     "ea": "0x64505A",
-    "line": "mov     edx, [esp+30h+arg_C]",
+    "line": "mov     edx, [esp+30h+destinationWorldspace]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -997,7 +997,7 @@
   },
   {
     "ea": "0x645061",
-    "line": "mov     eax, [esp+30h+arg_8]",
+    "line": "mov     eax, [esp+30h+destinationCell]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1027,7 +1027,7 @@
   },
   {
     "ea": "0x64506E",
-    "line": "call    sub_6836E0",
+    "line": "call    sub_6836E0; Verified: path request/cache builder resolves a containing TESSubSpace candidate by interior cell list or WorldSpace +0x60 coordinate lookup, compares candidate identity with the current choice, and rebuilds the path request when it changes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1153,55 +1153,55 @@
   },
   {
     "ea": "0x6450AE",
-    "line": "mov     edx, [esp+20h+arg_C]",
+    "line": "mov     edx, [esp+20h+destinationWorldspace]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6450B2",
-    "line": "mov     eax, [esp+20h+arg_8]",
+    "line": "mov     eax, [esp+20h+destinationCell]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6450B6",
-    "line": "push    edx",
+    "line": "push    edx; destinationWorldspace",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6450B7",
-    "line": "push    eax",
+    "line": "push    eax; destinationCell",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6450B8",
-    "line": "lea     ecx, [esp+28h+var_C]",
+    "line": "lea     ecx, [esp+28h+destinationPosition]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6450BC",
-    "line": "push    ecx",
+    "line": "push    ecx; destinationPosition",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6450BD",
-    "line": "mov     ecx, [edi+34h]",
+    "line": "mov     ecx, [edi+34h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x6450C0",
-    "line": "push    esi",
+    "line": "push    esi; sourceRef",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6450C1",
-    "line": "call    sub_68B030",
+    "line": "call    TravelPath_BuildToDestination; Verified top-level TravelPath build sequence: select the destination's smallest containing interior/exterior SubSpace (fallback to supplied cell/worldspace), call TravelPath_BuildRoute with the source reference and positions, then, on success, augment the route with TESRoad surface samples.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1381,7 +1381,7 @@
   },
   {
     "ea": "0x645114",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1627,7 +1627,7 @@
   },
   {
     "ea": "0x645187",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1825,7 +1825,7 @@
   },
   {
     "ea": "0x6451D8",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2047,7 +2047,7 @@
   },
   {
     "ea": "0x645240",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
     "mnemonic": "call",
     "size": 5
   },

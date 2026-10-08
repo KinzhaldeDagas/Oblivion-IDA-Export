@@ -1,5 +1,6 @@
+// Final Oblivion aggregation: adds fSneakBaseValue and the accumulated distance/sound/light/skill/context contributions, converts to an integer detection score, and preserves a minimum positive result of 1 where required.
 // positive sp value has been detected, the output may be wrong!
-int __usercall Calc_DetectionLevel_::CalcDetectionLevel@<eax>(
+int __usercall Calc_DetectionLevel_Finalize@<eax>(
         double result@<st0>,
         int a2,
         float a3,
@@ -20,7 +21,7 @@ int __usercall Calc_DetectionLevel_::CalcDetectionLevel@<eax>(
 {
   __asm
   {
-    fld     dword ptr ds:0B36700h
+    fld     dword ptr ds:0B36700h; Final Oblivion aggregation: adds fSneakBaseValue and the accumulated distance/sound/light/skill/context contributions, converts to an integer detection score, and preserves a minimum positive result of 1 where required.
     fadd    [esp+arg_1C]
     fadd    [esp+arg_4C]
     fadd    [esp+arg_4]
@@ -31,22 +32,22 @@ int __usercall Calc_DetectionLevel_::CalcDetectionLevel@<eax>(
     fnstsw  ax
     fstp    st(2)
   }
-  if ( __SETP__(HIBYTE(_AX) & 5, 0) )
+  if ( __SETP__(HIBYTE(_AX) & 5, 0) ) /*0x5465dc*/
   {
-    __asm { fstp    st }
+    __asm { fstp    st } /*0x5465f2*/
   }
   else
   {
-    __asm
+    __asm /*0x5465de*/
     {
       fcomp   st(1)
       fnstsw  ax
     }
-    if ( !__SETP__(HIBYTE(_AX) & 5, 0) )
+    if ( !__SETP__(HIBYTE(_AX) & 5, 0) ) /*0x5465e5*/
     {
-      __asm { fstp    st }
-      return 1;
+      __asm { fstp    st } /*0x5465e7*/
+      return 1; /*0x5465f1*/
     }
   }
-  return Double_To_SInt32(result);
+  return Double_To_SInt32(result); /*0x5465f1*/
 }

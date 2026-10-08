@@ -1,4 +1,4 @@
-0x7877E0: push    esi
+0x7877E0: push    esi; Oblivion CTreeFileAccess::ParseBool: consumes one byte at cursorOffset, bounds-checks against the owned buffer, advances the cursor, and returns byte != 0. RT4.1 FileAccess.h corroborates the method name.
 0x7877E1: mov     esi, ecx
 0x7877E3: push    edi
 0x7877E4: mov     edi, [esi]

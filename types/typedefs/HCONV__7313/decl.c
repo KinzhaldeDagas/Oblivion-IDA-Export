@@ -1,1 +1,1 @@
-HCONV
+typedef HCONV__ *HCONV;

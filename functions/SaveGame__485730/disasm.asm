@@ -3,45 +3,45 @@
 0x485734: push    esi
 0x485735: mov     esi, ecx
 0x485737: mov     ecx, ds:0B33B00h
-0x48573D: mov     [esp+1Ch+var_8], 0
+0x48573D: mov     [esp+1Ch+source], 0
 0x485745: mov     ebp, [ecx+14h]
 0x485748: push    edi
 0x485749: mov     [esp+20h+var_10], 0
-0x485751: call    sub_45A170
+0x485751: call    TESSaveLoadGame_UseSaveGameBlocks
 0x485756: test    al, al
 0x485758: jz      short loc_48578D
-0x48575A: mov     ecx, ds:0B33B00h
-0x485760: push    4; Size
+0x48575A: mov     ecx, ds:0B33B00h; self
+0x485760: push    4; byteCount
 0x485762: lea     eax, [esp+24h+Src]
-0x485766: push    eax; Src
+0x485766: push    eax; source
 0x485767: mov     [esp+28h+Src], 4B4F4C42h
 0x48576F: call    SaveLoad_SaveData
-0x485774: mov     ecx, ds:0B33B00h
+0x485774: mov     ecx, ds:0B33B00h; self
 0x48577A: mov     edx, [ecx+14h]
-0x48577D: push    2; Size
-0x48577F: lea     eax, [esp+24h+var_8]
-0x485783: push    eax; Src
+0x48577D: push    2; byteCount
+0x48577F: lea     eax, [esp+24h+source]
+0x485783: push    eax; source
 0x485784: mov     [esp+28h+var_10], edx
 0x485788: call    SaveLoad_SaveData
 0x48578D: mov     ecx, [esi+8]
 0x485790: mov     edx, [ecx+0Ch]
-0x485793: mov     ecx, ds:0B33B00h
-0x485799: push    4
+0x485793: mov     ecx, ds:0B33B00h; self
+0x485799: push    4; byteCount
 0x48579B: lea     eax, [esp+24h+var_4]
-0x48579F: push    eax
+0x48579F: push    eax; source
 0x4857A0: mov     [esp+28h+var_4], edx
-0x4857A4: call    SaveLoad_SaveFormID
-0x4857A9: push    4; Size
+0x4857A4: call    SaveLoad_SaveFormID; Writes an array of FormIDs to the save buffer. When IRef encoding is enabled, each full FormID is first converted to a compact IRef via SaveLoad_FormIDToIRef.
+0x4857A9: push    4; byteCount
 0x4857AB: lea     ecx, [esi+4]
-0x4857AE: push    ecx; Src
-0x4857AF: mov     ecx, ds:0B33B00h
+0x4857AE: push    ecx; source
+0x4857AF: mov     ecx, ds:0B33B00h; self
 0x4857B5: call    SaveLoad_SaveData
-0x4857BA: mov     ecx, ds:0B33B00h
-0x4857C0: push    4; Size
+0x4857BA: mov     ecx, ds:0B33B00h; self
+0x4857C0: push    4; byteCount
 0x4857C2: lea     edx, [esp+24h+var_14]
 0x4857C6: mov     [esp+24h+var_14], 0
 0x4857CE: mov     edi, [ecx+14h]
-0x4857D1: push    edx; Src
+0x4857D1: push    edx; source
 0x4857D2: call    SaveLoad_SaveData
 0x4857D7: mov     esi, [esi]
 0x4857D9: test    esi, esi
@@ -54,7 +54,7 @@
 0x4857EB: mov     ecx, [esi]
 0x4857ED: push    0
 0x4857EF: push    20h ; ' '
-0x4857F1: call    ExtraDataList_SaveGame
+0x4857F1: call    ExtraDataList_SaveGame; Verified save-game block writer handles dynamic ExtraData records but has no ExtraDistantData/XLOD case. This is distinct from plugin-record serialization, whose ExtraDataList_Save case writes XLOD (12 bytes). Whether omitting it from save-game blocks is intentional static-data policy is Probable, not directly stated.
 0x4857F6: add     [esp+20h+var_14], 1
 0x4857FB: mov     esi, [esi+4]
 0x4857FE: test    esi, esi
@@ -70,7 +70,7 @@
 0x485821: jz      short loc_48585E
 0x485823: mov     ecx, [edi]
 0x485825: push    ecx; a1
-0x485826: call    TESForm_LookupByFormID
+0x485826: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x48582B: mov     edx, [edi+5]
 0x48582E: add     esp, 4
 0x485831: push    offset a__TesSharedInv; "..\\TES Shared\\InventoryChanges.cpp"
@@ -97,7 +97,7 @@
 0x485870: call    sub_40FEC0
 0x485875: add     esp, 10h
 0x485878: mov     ecx, ds:0B33B00h
-0x48587E: call    sub_45A170
+0x48587E: call    TESSaveLoadGame_UseSaveGameBlocks
 0x485883: test    al, al
 0x485885: jz      short loc_4858BA
 0x485887: mov     edx, ds:0B33B00h

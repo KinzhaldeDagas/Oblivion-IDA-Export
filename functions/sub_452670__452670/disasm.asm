@@ -1,7 +1,7 @@
-0x452670: mov     eax, [esp+arg_0]
+0x452670: mov     eax, [esp+capacity]
 0x452674: push    esi
 0x452675: mov     esi, ecx
-0x452677: mov     ecx, [esp+4+arg_4]
+0x452677: mov     ecx, [esp+4+growBy]
 0x45267B: mov     [esi+14h], ecx
 0x45267E: xor     ecx, ecx
 0x452680: cmp     eax, ecx

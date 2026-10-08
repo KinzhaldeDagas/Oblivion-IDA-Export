@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x786C60",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Oblivion stBezierSpline cache lookup/insert helper. lower_bound searches the 28-byte source-string key; an absent key is copied into a {string,spline*} pair and inserted with a hint. Returns the node's stBezierSpline** value slot at +0x28.",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,19 +91,19 @@
   },
   {
     "ea": "0x786C89",
-    "line": "mov     ebp, [esp+48h+arg_0]",
+    "line": "mov     ebp, [esp+48h+stringObject]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x786C8D",
-    "line": "push    ebp",
+    "line": "push    ebp; key",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x786C8E",
-    "line": "call    sub_784930",
+    "line": "call    OB_stBezierSplineCacheMap_LowerBound_010201A0; Oblivion-authoritative lower_bound for the spline cache's 28-byte small-string key. Walks the red-black tree from head->parent/root and returns the first node whose key is not less than the requested key, or head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,97 +247,97 @@
   },
   {
     "ea": "0x786CCA",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; count",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x786CCC",
-    "line": "push    ebx",
+    "line": "push    ebx; offset",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x786CCD",
-    "line": "push    ebp",
+    "line": "push    ebp; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x786CCE",
-    "line": "lea     ecx, [esp+54h+var_2C]",
+    "line": "lea     ecx, [esp+54h+value]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x786CD2",
-    "line": "mov     [esp+54h+var_14], 0Fh",
+    "line": "mov     [esp+54h+value.key.capacity], 0Fh",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x786CDA",
-    "line": "mov     [esp+54h+var_18], ebx",
+    "line": "mov     [esp+54h+value.key.size], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x786CDE",
-    "line": "mov     byte ptr [esp+54h+var_28], bl",
+    "line": "mov     byte ptr [esp+54h+value.key.storage], bl",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x786CE2",
-    "line": "call    sub_414420",
+    "line": "call    OB_stString28_AssignSubstring_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,offset,count). Bounds-checks offset, clamps count to source.size-offset, handles self-assignment by in-place erasure, grows when required, copies the selected bytes, updates size, and writes the terminator.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x786CE7",
-    "line": "mov     [esp+48h+var_10], ebx",
+    "line": "mov     [esp+48h+value.value], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x786CEB",
-    "line": "lea     ecx, [esp+48h+var_2C]",
+    "line": "lea     ecx, [esp+48h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x786CEF",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x786CF0",
-    "line": "push    esi",
+    "line": "push    esi; hintNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x786CF1",
-    "line": "push    edi",
+    "line": "push    edi; hintOwner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x786CF2",
-    "line": "lea     edx, [esp+54h+var_34]",
+    "line": "lea     edx, [esp+54h+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x786CF6",
-    "line": "push    edx",
+    "line": "push    edx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x786CF7",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -349,13 +349,13 @@
   },
   {
     "ea": "0x786CFD",
-    "line": "call    sub_7868F0",
+    "line": "call    OB_stBezierSplineCacheMap_InsertHint_010201A0; Hinted unique insertion for the spline-cache map. Validates the {owner,node} hint and adjacent key ordering; inserts directly when legal, otherwise falls back to the ordinary unique-insert search.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x786D02",
-    "line": "cmp     [esp+48h+var_14], 10h",
+    "line": "cmp     [esp+48h+value.key.capacity], 10h",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x786D0E",
-    "line": "mov     eax, [esp+48h+var_28]",
+    "line": "mov     eax, dword ptr [esp+48h+value.key.storage]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x786D13",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,19 +403,19 @@
   },
   {
     "ea": "0x786D1B",
-    "line": "mov     [esp+48h+var_14], 0Fh",
+    "line": "mov     [esp+48h+value.key.capacity], 0Fh",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x786D23",
-    "line": "mov     [esp+48h+var_18], ebx",
+    "line": "mov     [esp+48h+value.key.size], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x786D27",
-    "line": "mov     byte ptr [esp+48h+var_28], bl",
+    "line": "mov     byte ptr [esp+48h+value.key.storage], bl",
     "mnemonic": "mov",
     "size": 4
   },
@@ -514,5 +514,59 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CB1C0",
+    "line": "lea     ecx, [ebp-2Ch]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB1C3",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB1C8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CB1CC",
+    "line": "lea     eax, [edx-38h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB1CF",
+    "line": "mov     ecx, [edx-3Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB1D2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CB1D4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB1D9",
+    "line": "mov     eax, offset stru_AF3870",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB1DE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

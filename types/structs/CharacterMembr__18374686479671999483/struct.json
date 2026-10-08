@@ -1,28 +1,54 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "CharacterMembr",
+  "definition": "struct CharacterMembr\n{\nActorMembr super;\nActorSkinInfo *skinInfo; ///< Ordinary/third-person ActorSkinInfo at Character object +0x104. Player first-person skin info is separately at +0x5C8.\nUInt32 unk108;\n}\n",
   "id": 18374686479671999483,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "super",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 256
+      "size": 256,
+      "type": "ActorMembr"
     },
     {
-      "name": "ActorSkinInfo",
+      "annotation_confidence": "Unknown",
+      "comment": "Ordinary/third-person ActorSkinInfo at Character object +0x104. Player first-person skin info is separately at +0x5C8.",
+      "name": "skinInfo",
       "offset": 256,
       "offset_hex": "0x100",
-      "size": 4
+      "size": 4,
+      "type": "ActorSkinInfo *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk108",
       "offset": 260,
       "offset_hex": "0x104",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     }
   ],
   "name": "CharacterMembr",
+  "ordinal": 9645,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 264
 }

@@ -1,4 +1,4 @@
-0x9828C0: cmp     dword ptr ds:0BAABE0h, 0
+0x9828C0: cmp     dword ptr ds:0BAABE0h, 0; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x9828C7: jz      short __ftol2
 0x9828C9: push    ebp
 0x9828CA: mov     ebp, esp

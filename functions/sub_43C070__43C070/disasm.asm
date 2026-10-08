@@ -32,7 +32,6 @@
 0x43C0C7: cmp     eax, ecx
 0x43C0C9: jnz     short loc_43C090
 0x43C0CB: jmp     short loc_43C0D0
-0x43C0CD: align 10h
 0x43C0D0: mov     edx, [esi+14h]
 0x43C0D3: test    edx, 0FFFFFFFEh
 0x43C0D9: jz      loc_43C1FD

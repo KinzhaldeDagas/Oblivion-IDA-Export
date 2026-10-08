@@ -1,4 +1,4 @@
-0x4A62D0: mov     al, [esp+arg_0]
+0x4A62D0: mov     al, [esp+arg_0]; Verified: mode byte at +0xC controls ownership and shared region-data cache lifetime. Owning lists reset cache on first owner and increment the manager/list refcount.
 0x4A62D4: push    ebx
 0x4A62D5: xor     ebx, ebx
 0x4A62D7: cmp     al, bl
@@ -14,19 +14,18 @@
 0x4A62F5: push    esi
 0x4A62F6: xor     esi, esi
 0x4A62F8: jmp     short loc_4A6300
-0x4A62FA: align 10h
-0x4A6300: mov     ecx, ds:dword_B35420[esi]
+0x4A6300: mov     ecx, dword ptr ds:g_OblivionRegionDataCache.selectedData[esi]; Verified selected TESRegionData pointer used as cache value for a region-data ID.
 0x4A6306: cmp     ecx, ebx
 0x4A6308: jz      short loc_4A6318
-0x4A630A: mov     ds:dword_B35420[esi], ebx
+0x4A630A: mov     dword ptr ds:g_OblivionRegionDataCache.selectedData[esi], ebx; Verified selected TESRegionData pointer used as cache value for a region-data ID.
 0x4A6310: mov     eax, [ecx]
 0x4A6312: mov     edx, [eax]
 0x4A6314: push    1
 0x4A6316: call    edx
-0x4A6318: mov     ecx, ds:dword_B35424[esi]
+0x4A6318: mov     ecx, ds:g_OblivionRegionDataCache.activeRegionList[esi]; Verified active TESRegionList used to decide cache reuse and compare current input list.
 0x4A631E: cmp     ecx, ebx
 0x4A6320: jz      short loc_4A6330
-0x4A6322: mov     ds:dword_B35424[esi], ebx
+0x4A6322: mov     ds:g_OblivionRegionDataCache.activeRegionList[esi], ebx; Verified active TESRegionList used to decide cache reuse and compare current input list.
 0x4A6328: mov     eax, [ecx]
 0x4A632A: mov     edx, [eax]
 0x4A632C: push    1

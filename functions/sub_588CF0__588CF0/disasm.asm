@@ -1,4 +1,4 @@
-0x588CF0: sub     esp, 8
+0x588CF0: sub     esp, 8; AchievementsNative evidence: stock tile Y helper starts with tile y and adds ancestor y only when ancestor locus is nonzero; inventory hover passes this row Y to popup path.
 0x588CF3: push    esi
 0x588CF4: push    0FACh
 0x588CF9: mov     esi, ecx

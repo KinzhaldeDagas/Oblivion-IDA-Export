@@ -1,4 +1,4 @@
-0x959BC0: push    ebx
+0x959BC0: push    ebx; Verified NiPick context initializer: initializes the record array, pick flags/root pointers, and default query settings used by TESTerrainLODQuad_PickSurfacePoint.
 0x959BC1: xor     ebx, ebx
 0x959BC3: push    esi
 0x959BC4: mov     esi, ecx

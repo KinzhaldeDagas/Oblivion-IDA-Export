@@ -11,7 +11,7 @@
 0x778EB6: jnz     short loc_778F2D
 0x778EB8: call    sub_77EA10
 0x778EBD: jmp     short loc_778ECB
-0x778EBF: call    sub_77DE00
+0x778EBF: call    sub_77DE00; Pass225: NiUnsharedGeometryGroup creation path used for renderer+0x8A4 screen-texture group.
 0x778EC4: jmp     short loc_778ECB
 0x778EC6: call    sub_77DD20
 0x778ECB: mov     edi, eax

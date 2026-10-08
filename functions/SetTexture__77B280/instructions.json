@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x77B280",
-    "line": "mov     eax, [esp+sampler]",
+    "line": "mov     eax, [esp+sampler]; DX10OBSE verified decode: NiDX9RenderState::SetTexture caches per-stage IDirect3DBaseTexture9 pointer and calls IDirect3DDevice9::SetTexture only when changed. DX10 hook must sync from device before draw because redundant native calls are suppressed.",
     "mnemonic": "mov",
     "size": 4
   },

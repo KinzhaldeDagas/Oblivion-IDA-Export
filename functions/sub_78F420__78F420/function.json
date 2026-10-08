@@ -1,19 +1,32 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x78F420",
+      "0x78F5F8"
+    ]
+  ],
+  "chunks_sha256": "c58ead028172281a4d04666b55a6d4ea205fef89e11f2187c1e85324b44c34f7",
+  "comment_regular": "CBranch::ComputeLod. Uses m_usCrossSectionSegments at +0x20, m_nStartingOffset at +0x24, and m_nNumVertices at +0x1C to rebuild LOD strip indices.",
+  "comment_repeatable": "Rebuilds branch LOD strip indices from compact CBranch vertex count, cross-section segment count, and start vertex offset.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_78F420",
+  "display_name": "OB_CBranch_ComputeLod_010201A0",
   "end_ea": "0x78F5F8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_78F420",
+  "name": "OB_CBranch_ComputeLod_010201A0",
   "segment": ".text",
   "sha256": "c58ead028172281a4d04666b55a6d4ea205fef89e11f2187c1e85324b44c34f7",
   "size": 472,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78F420",
-  "type": "_DWORD *__thiscall(int this, unsigned __int16, _DWORD *)",
+  "total_chunk_size": 472,
+  "type": "OB_CIndexedGeometry_010201A0 *__thiscall(OB_CBranch_010201A0 *this, unsigned __int16 lodIndex, OB_CIndexedGeometry_010201A0 *geometry)",
   "xrefs_from_count": 149,
   "xrefs_to_count": 1
 }

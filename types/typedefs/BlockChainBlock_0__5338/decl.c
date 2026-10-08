@@ -1,1 +1,1 @@
-BlockChainBlock_0
+typedef BlockChainBlock BlockChainBlock_0;

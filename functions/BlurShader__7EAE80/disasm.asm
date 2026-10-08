@@ -23,11 +23,11 @@
 0x7EAEBE: call    ShaderDefinition__Init
 0x7EAEC3: mov     edi, eax
 0x7EAEC5: mov     eax, ds:0B43104h
-0x7EAECA: push    1; StreamCount
-0x7EAECC: push    2; a2
-0x7EAECE: push    eax; a1
+0x7EAECA: push    1; streamCount
+0x7EAECC: push    2; elementCount
+0x7EAECE: push    eax; renderer
 0x7EAECF: mov     [esp+2Ch+var_4], 0FFFFFFFFh
-0x7EAED7: call    CreateDX9ShaderDeclaration
+0x7EAED7: call    CreateDX9ShaderDeclaration; Oblivion NiDX9 declaration factory. Allocates a 0x38-byte NiDX9ShaderDeclaration and initializes elementCount internal element records for each streamCount stream.
 0x7EAEDC: mov     esi, [edi]
 0x7EAEDE: mov     ebx, eax
 0x7EAEE0: add     esp, 0Ch
@@ -80,7 +80,7 @@
 0x7EAF4A: test    eax, eax
 0x7EAF4C: jz      short loc_7EAF5E
 0x7EAF4E: mov     edi, edi
-0x7EAF50: cmp     eax, offset dword_B3F684
+0x7EAF50: cmp     eax, offset stru_B3F684
 0x7EAF55: jz      short loc_7EAF5E
 0x7EAF57: mov     eax, [eax+4]
 0x7EAF5A: test    eax, eax
@@ -93,7 +93,7 @@
 0x7EAF71: mov     [esp+20h+var_4], 1
 0x7EAF79: jz      short loc_7EAF86
 0x7EAF7B: mov     ecx, eax; this
-0x7EAF7D: call    ??0BlurShader_P20@@QAE@XZ; BlurShader_P20::BlurShader_P20(void)
+0x7EAF7D: call    ??0BlurShader_P20@@QAE@XZ; MoonSugarEffect decode: BlurShader_P20 ctor owns 5 vertex/pixel program slots and blur pass state; inherits image-space source texture handling from BSImageSpaceShader.
 0x7EAF82: mov     esi, eax
 0x7EAF84: jmp     short loc_7EAF88
 0x7EAF86: xor     esi, esi
@@ -146,3 +146,20 @@
 0x7EB005: pop     ebx
 0x7EB006: add     esp, 10h
 0x7EB009: retn
+0x9D0CA0: mov     eax, [ebp-10h]
+0x9D0CA3: push    eax
+0x9D0CA4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D0CA9: pop     ecx
+0x9D0CAA: retn
+0x9D0CAB: mov     eax, [ebp-10h]
+0x9D0CAE: push    eax
+0x9D0CAF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D0CB4: pop     ecx
+0x9D0CB5: retn
+0x9D0CB6: mov     edx, [esp+arg_4]
+0x9D0CBA: lea     eax, [edx-10h]
+0x9D0CBD: mov     ecx, [edx-14h]
+0x9D0CC0: xor     ecx, eax
+0x9D0CC2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D0CC7: mov     eax, offset stru_AF94E0
+0x9D0CCC: jmp     ___CxxFrameHandler3

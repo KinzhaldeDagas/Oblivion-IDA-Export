@@ -1,4 +1,4 @@
-0x608120: push    ecx
+0x608120: push    ecx; Finds the oldest lifecycle-state-2 projectile across the active process lists. destroyImmediately invokes destruction; otherwise it marks lifecycle state 3 for deferred retirement. maximumReferenceCount is passed by the constructor but not read in this build.
 0x608121: fldz
 0x608123: push    ebx
 0x608124: push    ebp
@@ -6,17 +6,16 @@
 0x608129: push    esi
 0x60812A: push    edi
 0x60812B: push    1; a2
-0x60812D: mov     ecx, offset ActorProcessManager_ptr; this
+0x60812D: mov     ecx, (offset qword_B3BB2C+1D4h); this
 0x608132: xor     ebx, ebx
-0x608134: call    sub_673A50
+0x608134: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x608139: mov     ecx, eax; this
-0x60813B: call    sub_7616D0
+0x60813B: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x608140: mov     esi, eax
 0x608142: test    esi, esi
 0x608144: mov     ebp, 2
 0x608149: jz      short loc_6081B3
 0x60814B: jmp     short loc_608150
-0x60814D: align 10h
 0x608150: cmp     dword ptr [esi+4], 0
 0x608154: jnz     short loc_60815B
 0x608156: cmp     dword ptr [esi], 0
@@ -47,7 +46,7 @@
 0x608199: test    ah, 5
 0x60819C: jp      short loc_6081AC
 0x60819E: cmp     [ecx+60h], ebp
-0x6081A1: jnz     short loc_6081AC
+0x6081A1: jnz     short loc_6081AC; Pruning candidate must be lifecycle state 2; choose the candidate with the greatest elapsedTime (+0x68), i.e. oldest eligible settled projectile.
 0x6081A3: fld     dword ptr [ecx+68h]
 0x6081A6: mov     ebx, ecx
 0x6081A8: fstp    [esp+14h+var_4]
@@ -55,10 +54,10 @@
 0x6081AF: test    esi, esi
 0x6081B1: jnz     short loc_608150
 0x6081B3: push    0; a2
-0x6081B5: mov     ecx, offset ActorProcessManager_ptr; this
-0x6081BA: call    sub_673A50
+0x6081B5: mov     ecx, (offset qword_B3BB2C+1D4h); this
+0x6081BA: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x6081BF: mov     ecx, eax; this
-0x6081C1: call    sub_7616D0
+0x6081C1: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x6081C6: test    ebx, ebx
 0x6081C8: mov     edi, eax
 0x6081CA: jnz     short loc_60823B
@@ -103,7 +102,7 @@
 0x608235: jnz     short loc_6081D4
 0x608237: test    ebx, ebx
 0x608239: jz      short loc_608265
-0x60823B: cmp     [esp+14h+arg_4], 0
+0x60823B: cmp     [esp+14h+destroyImmediately], 0
 0x608240: jz      short loc_60825E
 0x608242: mov     eax, [ebx]
 0x608244: mov     edx, [eax+8Ch]
@@ -118,7 +117,7 @@
 0x60825B: pop     ebx
 0x60825C: pop     ecx
 0x60825D: retn
-0x60825E: mov     dword ptr [ebx+60h], 3
+0x60825E: mov     dword ptr [ebx+60h], 3; Constructor's over-limit call uses deferred mode: mark the selected oldest eligible projectile lifecycle state 3 rather than destroying it synchronously.
 0x608265: mov     eax, ds:0B3B7D0h
 0x60826A: pop     edi
 0x60826B: pop     esi

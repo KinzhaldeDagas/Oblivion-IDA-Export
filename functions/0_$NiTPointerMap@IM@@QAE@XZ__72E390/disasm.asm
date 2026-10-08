@@ -64,7 +64,6 @@
 0x72E471: mov     [esp+84h+var_30], ebx
 0x72E475: jbe     loc_72E827
 0x72E47B: jmp     short loc_72E480
-0x72E47D: align 10h
 0x72E480: mov     edx, [edi]
 0x72E482: mov     edx, [edx+60h]
 0x72E485: lea     eax, [esp+84h+var_14]
@@ -80,7 +79,7 @@
 0x72E49E: mov     ax, word ptr [esp+84h+var_18+2]
 0x72E4A3: cmp     cx, ax
 0x72E4A6: jz      loc_72E818
-0x72E4AC: mov     dx, word ptr [esp+84h+var_14]
+0x72E4AC: mov     dx, [esp+84h+var_14]
 0x72E4B1: cmp     ax, dx
 0x72E4B4: jz      loc_72E818
 0x72E4BA: cmp     dx, cx
@@ -388,13 +387,13 @@
 0x72E86C: jnz     short loc_72E840
 0x72E86E: mov     edx, [esp+84h+var_44]
 0x72E872: push    edx
-0x72E873: call    FormHeapFree
+0x72E873: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x72E878: mov     eax, [esp+88h+var_40]
 0x72E87C: push    eax
-0x72E87D: call    FormHeapFree
+0x72E87D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x72E882: mov     ecx, [esp+8Ch+var_70]
 0x72E886: push    ecx
-0x72E887: call    FormHeapFree
+0x72E887: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x72E88C: add     esp, 0Ch
 0x72E88F: mov     [esp+84h+var_5C], offset ??_7?$NiTPointerMap@IM@@6B@; const NiTPointerMap<uint,float>::`vftable'
 0x72E897: lea     ecx, [esp+84h+var_5C]
@@ -406,7 +405,7 @@
 0x72E8C2: call    NiTMap_Clear
 0x72E8C7: mov     edx, [esp+84h+var_54]
 0x72E8CB: push    edx
-0x72E8CC: call    FormHeapFree
+0x72E8CC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x72E8D1: add     esp, 4
 0x72E8D4: mov     al, 1
 0x72E8D6: mov     ecx, dword ptr [esp+84h+var_C]
@@ -423,12 +422,12 @@
 0x72E8F4: retn    10h
 0x72E8F7: mov     ecx, [esp+84h+var_44]
 0x72E8FB: push    ecx
-0x72E8FC: call    FormHeapFree
+0x72E8FC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x72E901: mov     edx, [esp+88h+var_40]
 0x72E905: push    edx
-0x72E906: call    FormHeapFree
+0x72E906: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x72E90B: push    ebx
-0x72E90C: call    FormHeapFree
+0x72E90C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x72E911: add     esp, 0Ch
 0x72E914: mov     [esp+84h+var_5C], offset ??_7?$NiTPointerMap@IM@@6B@; const NiTPointerMap<uint,float>::`vftable'
 0x72E91C: lea     ecx, [esp+84h+var_5C]
@@ -440,7 +439,36 @@
 0x72E943: call    NiTMap_Clear
 0x72E948: mov     eax, [esp+84h+var_54]
 0x72E94C: push    eax
-0x72E94D: call    FormHeapFree
+0x72E94D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x72E952: add     esp, 4
 0x72E955: xor     al, al
 0x72E957: jmp     loc_72E8D6
+0x72D260: push    esi
+0x72D261: mov     esi, ecx
+0x72D263: mov     dword ptr [esi], offset ??_7?$NiTMapBase@V?$NiTPointerAllocator@I@@IM@@6B@; const NiTMapBase<NiTPointerAllocator<uint>,uint,float>::`vftable'
+0x72D269: call    NiTMap_Clear
+0x72D26E: mov     eax, [esi+8]
+0x72D271: push    eax
+0x72D272: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x72D277: add     esp, 4
+0x72D27A: pop     esi
+0x72D27B: retn
+0x9CA670: lea     ecx, [ebp-5Ch]
+0x9CA673: jmp     ??1?$NiTPointerMap@IM@@UAE@XZ; NiTPointerMap<uint,float>::~NiTPointerMap<uint,float>(void)
+0x9CA678: lea     ecx, [ebp-70h]; void *
+0x9CA67B: jmp     sub_6C4090
+0x9CA680: lea     ecx, [ebp-5Ch]
+0x9CA683: jmp     loc_72D260
+0x9CA688: lea     ecx, [ebp-5Ch]
+0x9CA68B: jmp     loc_72D260
+0x9CA690: mov     edx, [esp+arg_4]
+0x9CA694: lea     eax, [edx-74h]
+0x9CA697: mov     ecx, [edx-78h]
+0x9CA69A: xor     ecx, eax
+0x9CA69C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA6A1: add     eax, 10h
+0x9CA6A4: mov     ecx, [edx-4]
+0x9CA6A7: xor     ecx, eax
+0x9CA6A9: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA6AE: mov     eax, offset stru_AF2D6C
+0x9CA6B3: jmp     ___CxxFrameHandler3

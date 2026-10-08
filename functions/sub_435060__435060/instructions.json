@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x435060",
-    "line": "sub     esp, 6Ch",
+    "line": "sub     esp, 6Ch; Verified queued distant-model transform: writes position at NiAVObject+0x54, abs(scale) at +0x60, and builds rotation from rotationAnglesXYZ using X, then Y, then Z axis matrices. NiMatrix33_Multiply is row-major left*right; composition is BaseRotation * RxTransposed(angleX) * Ry(angleY) * Rz(angleZ). The resulting 3x3 matrix is stored at NiAVObject+0x30.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x435068",
-    "line": "mov     ecx, [esp+78h+arg_0]",
+    "line": "mov     ecx, [esp+78h+loadedModelRoot]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,13 +49,13 @@
   },
   {
     "ea": "0x435072",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x435074",
-    "line": "call    sub_700900",
+    "line": "call    NiObject_CloneWithPointerMap; Clones a loaded NiObject with a temporary pointer map and runs clone post-processing; the returned scene object is distinct from its source.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x4350BC",
-    "line": "mov     ebx, [esp+7Ch+arg_4]",
+    "line": "mov     ebx, [esp+7Ch+instanceData]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -253,19 +253,19 @@
   },
   {
     "ea": "0x4350D0",
-    "line": "fstp    [esp+7Ch+arg_4]",
+    "line": "fstp    [esp+7Ch+instanceData]; Verified: takes absolute value of normalized per-instance scale and stores it at NiAVObject transform scale offset +0x60.",
     "mnemonic": "fstp",
     "size": 7
   },
   {
     "ea": "0x4350D7",
-    "line": "lea     edi, [esp+7Ch+var_6C]",
+    "line": "lea     edi, [esp+7Ch+baseRotation]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4350DB",
-    "line": "fld     [esp+7Ch+arg_4]",
+    "line": "fld     [esp+7Ch+instanceData]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x4350E7",
-    "line": "mov     [eax+54h], ecx",
+    "line": "mov     [eax+54h], ecx; Verified: copies the three position floats from DistantLODQueuedInstanceData.position to the cloned NiAVObject transform translation at +0x54..+0x5C.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x4350F6",
-    "line": "fld     dword ptr [ebx+0Ch]",
+    "line": "fld     dword ptr [ebx+0Ch]; Verified takes rotationAnglesXYZ.x directly into the X-axis matrix helper; source record values are radians because the helper uses sin/cos without conversion.",
     "mnemonic": "fld",
     "size": 3
   },
@@ -337,61 +337,61 @@
   },
   {
     "ea": "0x435101",
-    "line": "lea     ecx, [esp+80h+var_48]",
+    "line": "lea     ecx, [esp+80h+axisRotation]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x435105",
-    "line": "fstp    [esp+80h+var_80]; float",
+    "line": "fstp    [esp+80h+angleX]; angleX",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x435108",
-    "line": "call    NiMatrix33_InitRotationTransposedTransform???",
+    "line": "call    NiMatrix33_InitRotationXTransposed; Verified first rotationAnglesXYZ component initializes the X-axis rotation matrix; coefficient placement is confined to the Y/Z submatrix.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x43510D",
-    "line": "lea     edx, [esp+7Ch+var_48]",
+    "line": "lea     edx, [esp+7Ch+axisRotation]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x435111",
-    "line": "push    edx",
+    "line": "push    edx; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x435112",
-    "line": "lea     eax, [esp+80h+var_24]",
+    "line": "lea     eax, [esp+80h+rotationProduct]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x435116",
-    "line": "push    eax",
+    "line": "push    eax; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x435117",
-    "line": "lea     ecx, [esp+84h+var_6C]",
+    "line": "lea     ecx, [esp+84h+baseRotation]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x43511B",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified NiMatrix33_Multiply computes left * right; this first multiply appends the X-axis rotation to the base matrix.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x435120",
-    "line": "fld     dword ptr [ebx+10h]",
+    "line": "fld     dword ptr [ebx+10h]; Verified takes rotationAnglesXYZ.y directly into the Y-axis matrix helper; values are radians.",
     "mnemonic": "fld",
     "size": 3
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x43512A",
-    "line": "lea     edi, [esp+7Ch+var_6C]",
+    "line": "lea     edi, [esp+7Ch+baseRotation]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -427,61 +427,61 @@
   },
   {
     "ea": "0x435131",
-    "line": "lea     ecx, [esp+80h+var_48]",
+    "line": "lea     ecx, [esp+80h+axisRotation]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x435135",
-    "line": "fstp    [esp+80h+var_80]; float",
+    "line": "fstp    [esp+80h+angleX]; angleY",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x435138",
-    "line": "call    sub_70FD80",
+    "line": "call    NiMatrix33_InitRotationY; Verified second rotationAnglesXYZ component initializes the Y-axis rotation matrix; coefficient placement is confined to the X/Z submatrix.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x43513D",
-    "line": "lea     ecx, [esp+7Ch+var_48]",
+    "line": "lea     ecx, [esp+7Ch+axisRotation]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x435141",
-    "line": "push    ecx",
+    "line": "push    ecx; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x435142",
-    "line": "lea     edx, [esp+80h+var_24]",
+    "line": "lea     edx, [esp+80h+rotationProduct]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x435146",
-    "line": "push    edx",
+    "line": "push    edx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x435147",
-    "line": "lea     ecx, [esp+84h+var_6C]",
+    "line": "lea     ecx, [esp+84h+baseRotation]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x43514B",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified second matrix multiply appends the Y-axis rotation after the base and X-axis matrices.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x435150",
-    "line": "fld     dword ptr [ebx+14h]",
+    "line": "fld     dword ptr [ebx+14h]; Verified takes rotationAnglesXYZ.z directly into the Z-axis matrix helper; values are radians.",
     "mnemonic": "fld",
     "size": 3
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x43515A",
-    "line": "lea     edi, [esp+7Ch+var_6C]",
+    "line": "lea     edi, [esp+7Ch+baseRotation]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -517,55 +517,55 @@
   },
   {
     "ea": "0x435161",
-    "line": "lea     ecx, [esp+80h+var_48]",
+    "line": "lea     ecx, [esp+80h+axisRotation]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x435165",
-    "line": "fstp    [esp+80h+var_80]; float",
+    "line": "fstp    [esp+80h+angleX]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x435168",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified third rotationAnglesXYZ component initializes the Z-axis rotation matrix; coefficient placement is confined to the X/Y submatrix.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x43516D",
-    "line": "lea     eax, [esp+7Ch+var_48]",
+    "line": "lea     eax, [esp+7Ch+axisRotation]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x435171",
-    "line": "push    eax",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x435172",
-    "line": "lea     ecx, [esp+80h+var_24]",
+    "line": "lea     ecx, [esp+80h+rotationProduct]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x435176",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x435177",
-    "line": "lea     ecx, [esp+84h+var_6C]",
+    "line": "lea     ecx, [esp+84h+baseRotation]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x43517B",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,13 +583,13 @@
   },
   {
     "ea": "0x435187",
-    "line": "lea     edi, [esp+7Ch+var_6C]",
+    "line": "lea     edi, [esp+7Ch+baseRotation]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x43518B",
-    "line": "rep movsd",
+    "line": "rep movsd; Verified final matrix multiply appends the Z-axis rotation after X and Y, producing BaseRotation * RxTransposed * Ry * Rz.",
     "mnemonic": "movsd",
     "size": 2
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x435190",
-    "line": "push    0",
+    "line": "push    0; arg3",
     "mnemonic": "push",
     "size": 2
   },
@@ -619,19 +619,19 @@
   },
   {
     "ea": "0x43519A",
-    "line": "lea     esi, [esp+80h+var_6C]",
+    "line": "lea     esi, [esp+80h+baseRotation]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x43519E",
-    "line": "push    1",
+    "line": "push    1; normalMapBypass",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4351A0",
-    "line": "rep movsd",
+    "line": "rep movsd; Verified stores the composed 3x3 rotation matrix at the cloned NiAVObject transform's rotation field, offset +0x30.",
     "mnemonic": "movsd",
     "size": 2
   },
@@ -643,19 +643,19 @@
   },
   {
     "ea": "0x4351A5",
-    "line": "push    1",
+    "line": "push    1; shaderId",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4351A7",
-    "line": "push    edx",
+    "line": "push    edx; root",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4351A8",
-    "line": "call    sub_7B8940",
+    "line": "call    BSShaderManager_AssignShadersRecursive; Generic recursive shader assignment wrapper around 0x7B7FC0. In decoded TES4 tree code it is used for branch shader id 4 and simple/default id 1; no stock call with frond shader id 5 was found in this pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x4351BD",
-    "line": "mov     ecx, [esp+98h+arg_0]",
+    "line": "mov     ecx, [esp+98h+loadedModelRoot]",
     "mnemonic": "mov",
     "size": 7
   },

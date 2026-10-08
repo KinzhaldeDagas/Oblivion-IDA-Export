@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x4C9880",
+      "0x4C9890"
+    ]
+  ],
+  "chunks_sha256": "ba313b68473a560366160397d8e4b106c1c470b05c5ee234f9a7745c7be214a5",
+  "comment_regular": "Verified: returns true when flags0 bit 0x20 or 0x40 is set. IsOffLimitToThePlayer uses this combined check for interior-cell access. Probable interpretation is Public or TempPublic state; Fallout GetPublicState uses the same OR of SetPublic 0x20 and SetTempPublic 0x40.",
+  "comment_repeatable": "Verified: returns true when flags0 bit 0x20 or 0x40 is set. IsOffLimitToThePlayer uses this combined check for interior-cell access. Probable interpretation is Public or TempPublic state; Fallout GetPublicState uses the same OR of SetPublic 0x20 and SetTempPublic 0x40.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4C9880",
+  "display_name": "TESObjectCELL_HasPublicOrTempPublicState",
   "end_ea": "0x4C9890",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4C9880",
+  "name": "TESObjectCELL_HasPublicOrTempPublicState",
   "segment": ".text",
   "sha256": "ba313b68473a560366160397d8e4b106c1c470b05c5ee234f9a7745c7be214a5",
   "size": 16,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4C9880",
-  "type": "bool __thiscall(int this)",
+  "total_chunk_size": 16,
+  "type": "bool __thiscall(TESObjectCELL *this)",
   "xrefs_from_count": 7,
   "xrefs_to_count": 2
 }

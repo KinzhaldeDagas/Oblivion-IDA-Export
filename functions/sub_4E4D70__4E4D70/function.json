@@ -1,19 +1,32 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4E4D70",
+      "0x4E4DF1"
+    ]
+  ],
+  "chunks_sha256": "3ae264196c7ad21a176eb37bd2318eee62a36b8fb303f091b43563336df0d902",
+  "comment_regular": "Runtime folded virtual used by both TESObjectLAND and TESPathGrid. TESCS-authoritative equivalents are TESObjectLAND_MatchesSerializedGroup (0x521FC0) and TESPathGrid_MatchesSerializedGroup (0x54CA20): direct records match CELL temporary-children type 9; ancestor traversal also accepts the owning CELL children type 6; types 8 and 10 are rejected; labels compare against the parent CELL FormID low 24 bits.",
+  "comment_repeatable": "Runtime folded virtual used by both TESObjectLAND and TESPathGrid. TESCS-authoritative equivalents are TESObjectLAND_MatchesSerializedGroup (0x521FC0) and TESPathGrid_MatchesSerializedGroup (0x54CA20): direct records match CELL temporary-children type 9; ancestor traversal also accepts the owning CELL children type 6; types 8 and 10 are rejected; labels compare against the parent CELL FormID low 24 bits.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4E4D70",
+  "display_name": "TESObjectLAND_TESPathGrid_MatchesSerializedGroup",
   "end_ea": "0x4E4DF1",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4E4D70",
+  "name": "TESObjectLAND_TESPathGrid_MatchesSerializedGroup",
   "segment": ".text",
   "sha256": "3ae264196c7ad21a176eb37bd2318eee62a36b8fb303f091b43563336df0d902",
   "size": 129,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E4D70",
-  "type": "char __thiscall(_DWORD *this, _DWORD *, int, int)",
+  "total_chunk_size": 129,
+  "type": "char __thiscall(void *this, const unsigned int *group_header, int include_parent, int match_flags)",
   "xrefs_from_count": 63,
   "xrefs_to_count": 2
 }

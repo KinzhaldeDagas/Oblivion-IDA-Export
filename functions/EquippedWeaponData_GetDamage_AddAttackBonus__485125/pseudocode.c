@@ -3,5 +3,5 @@ double __userpurge EquippedWeaponData_GetDamage_::AddAttackBonus@<st0>(int a1@<e
 {
   float v4; // [esp-18h] [ebp-18h]
 
-  return (float)((double)(*(int (__thiscall **)(int, int))(*(_DWORD *)a1 + 0x284))(a1, 0x2A) + v4);
+  return (float)((double)(*(int (__thiscall **)(int, int))(*(_DWORD *)a1 + 0x284))(a1, 0x2A) + v4); /*0x48514c*/
 }

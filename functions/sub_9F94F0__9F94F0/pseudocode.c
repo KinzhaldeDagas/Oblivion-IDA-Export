@@ -1,5 +1,6 @@
-int sub_9F94F0()
+// Verified static initializer for g_BSTreeManager_TreeCriticalSection; initializes the lock and registers its atexit destructor.
+int __cdecl BSTreeManager_TreeCriticalSection_ctor()
 {
-  NiInitalizeCriticalSection(&stru_B39E80);
-  return atexit(sub_A23550);
+  NiInitalizeCriticalSection(&g_BSTreeManager_TreeCriticalSection); /*0x9f94f5*/
+  return atexit(BSTreeManager_TreeCriticalSection_atexit); /*0x9f9505*/
 }

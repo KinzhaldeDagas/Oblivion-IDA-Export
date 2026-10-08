@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x9E8540",
-    "line": "push    14h",
+    "line": "push    14h; MEF LARGE PERF 2026-09-08: PERF-7 actual setting proof: GameSetting_ConstrAndReg at9E854C registers iAINumberActorsComplexScene with default20 forB36CD0. Its BSS bytes are not initialized in this IDB (is_loaded=false); get_dword FFFFFFFF is not a default value. Existing shadow-candidate alias reflects consumer use, not the setting's registered name.",
     "mnemonic": "push",
     "size": 2
   },
@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x9E8547",
-    "line": "mov     ecx, offset dword_B36CD0",
+    "line": "mov     ecx, offset g_uMaxShadowActorCandidates; self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x9E854C",
-    "line": "call    GameSetting_ConstrAndReg",
+    "line": "call    GameSetting_ConstrAndReg; Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.",
     "mnemonic": "call",
     "size": 5
   },

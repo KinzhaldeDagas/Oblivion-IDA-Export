@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x7ABEF4",
-    "line": "push    offset sub_7A9AE0; a5",
+    "line": "push    offset BSTPersistentRenderPassList_Destructor; a5",
     "mnemonic": "push",
     "size": 5
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x7ABEFF",
-    "line": "push    offset sub_7A9AC0; a4",
+    "line": "push    offset BSTPersistentRenderPassList_Constructor; a4",
     "mnemonic": "push",
     "size": 5
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x7ABF6B",
-    "line": "call    ArrayConstructor",
+    "line": "call    ArrayConstructor; Construct 0x1A3 persistent RenderPass-list buckets at this+0x104, stride 0x14, selectors 0x000..0x1A2.",
     "mnemonic": "call",
     "size": 5
   },
@@ -685,13 +685,13 @@
   },
   {
     "ea": "0x7AC087",
-    "line": "add     ecx, 0FFFFFFFCh",
+    "line": "add     ecx, 0FFFFFFFCh; this",
     "mnemonic": "add",
     "size": 3
   },
   {
     "ea": "0x7AC08A",
-    "line": "call    sub_7A9C30",
+    "line": "call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -943,13 +943,13 @@
   },
   {
     "ea": "0x7AC119",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7AC11B",
-    "line": "call    sub_7A9C30",
+    "line": "call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -991,13 +991,13 @@
   },
   {
     "ea": "0x7AC135",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7AC137",
-    "line": "call    sub_7A9C30",
+    "line": "call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1039,13 +1039,13 @@
   },
   {
     "ea": "0x7AC151",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7AC153",
-    "line": "call    sub_7A9C30",
+    "line": "call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1183,7 +1183,7 @@
   },
   {
     "ea": "0x7AC192",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1195,7 +1195,7 @@
   },
   {
     "ea": "0x7AC197",
-    "line": "call    sub_7A9C30",
+    "line": "call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1237,13 +1237,13 @@
   },
   {
     "ea": "0x7AC1AE",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7AC1B0",
-    "line": "call    sub_7A9C30",
+    "line": "call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1744,5 +1744,419 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x7A9B00",
+    "line": "mov     dword ptr [ecx], offset ??_7?$BSTPersistentList@V?$NiTPointerAllocator@I@@PAVNiGeometry@@@@6B@; const BSTPersistentList<NiTPointerAllocator<uint>,NiGeometry *>::`vftable'",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x7A9B06",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CD260",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD263",
+    "line": "jmp     sub_71A910",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD268",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD26B",
+    "line": "add     ecx, 3Ch ; '<'",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD26E",
+    "line": "jmp     j_??1?$NiTPointerList@PAUGeometryGroup@BSShaderAccumulator@@@@UAE@XZ; NiTPointerList<BSShaderAccumulator::GeometryGroup *>::~NiTPointerList<BSShaderAccumulator::GeometryGroup *>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD273",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD276",
+    "line": "add     ecx, 4Ch ; 'L'",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD279",
+    "line": "jmp     j_??1?$NiTPointerList@PAUGeometryGroup@BSShaderAccumulator@@@@UAE@XZ; NiTPointerList<BSShaderAccumulator::GeometryGroup *>::~NiTPointerList<BSShaderAccumulator::GeometryGroup *>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD27E",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD281",
+    "line": "add     ecx, 64h ; 'd'",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD284",
+    "line": "jmp     j_??1?$NiTPointerList@PAUImmediateGeometryGroup@BSShaderAccumulator@@@@UAE@XZ; NiTPointerList<BSShaderAccumulator::ImmediateGeometryGroup *>::~NiTPointerList<BSShaderAccumulator::ImmediateGeometryGroup *>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD289",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD28C",
+    "line": "add     ecx, 7Ch ; '|'; void *",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD28F",
+    "line": "jmp     BSTPersistentRenderPassList_Destructor; ArrayConstructor element destructor callback for BSShaderAccumulator selector buckets. Restores the BSTPersistentList<...,BSShaderProperty::RenderPass *> vtable; accumulator cleanup owns node recycling and never destroys borrowed property RenderPass payloads here.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD294",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD297",
+    "line": "add     ecx, 90h; void *",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CD29D",
+    "line": "jmp     BSTPersistentRenderPassList_Destructor; ArrayConstructor element destructor callback for BSShaderAccumulator selector buckets. Restores the BSTPersistentList<...,BSShaderProperty::RenderPass *> vtable; accumulator cleanup owns node recycling and never destroys borrowed property RenderPass payloads here.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD2A2",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD2A5",
+    "line": "add     ecx, 0A4h ; '¤'; void *",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CD2AB",
+    "line": "jmp     BSTPersistentRenderPassList_Destructor; ArrayConstructor element destructor callback for BSShaderAccumulator selector buckets. Restores the BSTPersistentList<...,BSShaderProperty::RenderPass *> vtable; accumulator cleanup owns node recycling and never destroys borrowed property RenderPass payloads here.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD2B0",
+    "line": "push    offset BSTPersistentRenderPassList_Destructor; void (__thiscall *)(void *)",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD2B5",
+    "line": "push    1A3h; int",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD2BA",
+    "line": "push    14h; unsigned int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9CD2BC",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD2BF",
+    "line": "add     eax, 104h",
+    "mnemonic": "add",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD2C4",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CD2C5",
+    "line": "call    $LN21",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD2CA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CD2CB",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD2CE",
+    "line": "add     ecx, 21C0h",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CD2D4",
+    "line": "jmp     j_??1?$NiTPointerList@PAVRenderPass@BSShaderProperty@@@@UAE@XZ; NiTPointerList<BSShaderProperty::RenderPass *>::~NiTPointerList<BSShaderProperty::RenderPass *>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD2D9",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD2DC",
+    "line": "add     ecx, 21D0h",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CD2E2",
+    "line": "jmp     j_??1?$NiTPointerList@PAVShadowVolumeRPList@BSShaderAccumulator@@@@UAE@XZ; NiTPointerList<BSShaderAccumulator::ShadowVolumeRPList *>::~NiTPointerList<BSShaderAccumulator::ShadowVolumeRPList *>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD2E7",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD2EA",
+    "line": "add     ecx, 21ECh",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CD2F0",
+    "line": "jmp     loc_7A9B00",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD2F5",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD2F8",
+    "line": "add     ecx, 2200h",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CD2FE",
+    "line": "jmp     loc_7A9B00",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD303",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD306",
+    "line": "add     ecx, 2214h",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CD30C",
+    "line": "jmp     loc_7A9B00",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD311",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD314",
+    "line": "add     ecx, 2228h; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CD31A",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD31F",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD322",
+    "line": "add     ecx, 222Ch",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CD328",
+    "line": "jmp     j_??1?$NiTPointerList@PAUReferenceVolume@@@@UAE@XZ; NiTPointerList<ReferenceVolume *>::~NiTPointerList<ReferenceVolume *>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD32D",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD330",
+    "line": "add     ecx, 2244h",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CD336",
+    "line": "jmp     j_??1?$NiTPointerList@PAVNiGeometry@@@@UAE@XZ; NiTPointerList<NiGeometry *>::~NiTPointerList<NiGeometry *>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD33B",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD33E",
+    "line": "add     ecx, 2254h",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CD344",
+    "line": "jmp     j_??1?$NiTPointerList@PAVNiGeometry@@@@UAE@XZ; NiTPointerList<NiGeometry *>::~NiTPointerList<NiGeometry *>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD349",
+    "line": "mov     eax, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD34C",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CD34D",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD352",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CD353",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CD354",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CD358",
+    "line": "lea     eax, [edx-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD35B",
+    "line": "mov     ecx, [edx-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD35E",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CD360",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD365",
+    "line": "mov     eax, offset stru_AF660C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD36A",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

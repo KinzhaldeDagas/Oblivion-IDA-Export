@@ -1,4 +1,4 @@
-0x6CBC10: push    ecx
+0x6CBC10: push    ecx; Oblivion 0x20-byte transform invalid test: true only when translation.x, quaternion marker component at +0x10, and scale at +0x1C all equal the invalid float sentinel.
 0x6CBC11: fld     dword ptr ds:0A7DEB4h
 0x6CBC17: fchs
 0x6CBC19: fstp    [esp+4+var_4]

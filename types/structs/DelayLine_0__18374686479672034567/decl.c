@@ -1,1 +1,1 @@
-DelayLine_0
+typedef DelayLine DelayLine_0;

@@ -1,4 +1,4 @@
-0x76C910: push    ebx
+0x76C910: push    ebx; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
 0x76C911: push    esi
 0x76C912: mov     ebx, ecx
 0x76C914: mov     esi, [ebx+4]

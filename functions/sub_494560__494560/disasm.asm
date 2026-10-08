@@ -1,17 +1,14 @@
 0x494560: xor     eax, eax
 0x494562: jmp     short loc_494570
-0x494564: db 8Dh, 0A4h, 24h, 4 dup(0)
 0x49456B: jmp     short loc_494570
-0x49456D: align 10h
-0x494570: mov     cl, byte ptr ds:word_B3F280[eax]
-0x494576: mov     ds:byte_B34C80[eax], cl
+0x494570: mov     cl, byte ptr ds:unk_B3F280[eax]
+0x494576: mov     [eax+0B34C80h], cl
 0x49457C: add     eax, 1
 0x49457F: test    cl, cl
 0x494581: jnz     short loc_494570
-0x494583: mov     eax, offset byte_B34C80
+0x494583: mov     eax, 0B34C80h
 0x494588: add     eax, 0FFFFFFFFh
 0x49458B: jmp     short loc_494590
-0x49458D: align 10h
 0x494590: mov     cl, [eax+1]
 0x494593: add     eax, 1
 0x494596: test    cl, cl
@@ -28,5 +25,5 @@
 0x4945C3: mov     dl, ds:0A3D9F0h
 0x4945C9: mov     [eax+10h], ecx
 0x4945CC: mov     [eax+14h], dl
-0x4945CF: mov     eax, offset byte_B34C80
+0x4945CF: mov     eax, 0B34C80h
 0x4945D4: retn

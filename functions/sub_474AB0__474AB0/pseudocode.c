@@ -1,78 +1,68 @@
-char __userpurge sub_474AB0@<al>(
-        int this@<ecx>,
-        double st5_0@<st2>,
-        double st6_0@<st1>,
-        double st7_0@<st0>,
-        int a5,
-        int a6,
-        int a7,
-        float a8,
-        int a9)
+// Restores one saved active slot by resolving the encoded key in +0x9C, selecting its sequence entry, replaying it, and restoring the saved slot clock/state.
+char __thiscall ActorAnimData_RestorePlaySavedSlot(
+        int this,
+        int slotSelector,
+        unsigned int encodedKey,
+        int a4,
+        float a5,
+        int a6)
 {
   int v10; // ebx
   int v11; // eax
-  int v12; // ebp
-  int v13; // edi
-  _DWORD *v14; // eax
-  int v15; // eax
+  unsigned int v12; // ebp
+  unsigned int v13; // edi
+  NiControllerSequence *v14; // eax
+  BSAnimGroupSequence *v15; // eax
   double v16; // st4
 
-  v10 = a5;
-  if ( a5 == 5 )
+  v10 = slotSelector; /*0x474abf*/
+  if ( slotSelector == 5 ) /*0x474ac1*/
   {
-    v10 = 0;
+    v10 = 0; /*0x474acf*/
   }
-  else if ( a5 == 6 )
+  else if ( slotSelector == 6 ) /*0x474ac6*/
   {
-    v10 = 3;
+    v10 = 3; /*0x474ac8*/
   }
-  if ( a7 == 0xFFFFFFFF )
+  if ( a4 == 0xFFFFFFFF ) /*0x474ad6*/
   {
-    LOBYTE(v11) = sub_470FC0((_DWORD *)this, v10, 0.0);
-    LOWORD(v12) = a6;
-    if ( (_WORD)a6 != 0xFF )
+    LOBYTE(v11) = ActorAnimData_ClearSlot((ActorAnimData *)this, v10, 0.0); /*0x474ae3*/
+    LOWORD(v12) = encodedKey; /*0x474ae8*/
+    if ( (_WORD)encodedKey != 0xFF ) /*0x474af1*/
     {
-      LOBYTE(v11) = sub_470960(*(_DWORD **)(this + 0x9C), a6, &a6);
-      if ( (_BYTE)v11 )
+      LOBYTE(v11) = ActorAnimData_FindAnimMapEntry(*(_DWORD **)(this + 0x9C), encodedKey, &encodedKey); /*0x474b03*/
+      if ( (_BYTE)v11 ) /*0x474b0a*/
       {
-        v13 = a6;
-        v11 = (*(int (__thiscall **)(int, int))(*(_DWORD *)a6 + 0x10))(a6, a9);
-        if ( v11 )
+        v13 = encodedKey; /*0x474b10*/
+        v11 = (*(int (__thiscall **)(unsigned int, int))(*(_DWORD *)encodedKey + 0x10))(encodedKey, a6);// Restore resolves the encoded key to an AnimSequenceBase and calls vtable +0x10 with the saved selector. Multiple selector 0xFF/out-of-range (including sign-extended 0x80..0xFE) chooses randomly; single ignores it. /*0x474b20*/
+        if ( v11 ) /*0x474b24*/
         {
-          v14 = (_DWORD *)(*(int (__usercall **)@<eax>(int@<ecx>, int, double@<st0>, double@<st1>, double@<st2>))(*(_DWORD *)v13 + 0x10))(
-                            v13,
-                            a9,
-                            st7_0,
-                            st6_0,
-                            st5_0);
-          *(_DWORD *)(this + 4 * v10 + 0xA0) = v14;
-          LOBYTE(v11) = sub_6C9BA0(v14, 0, 0, 1.0, 0.0, 0, 0);
+          v14 = (NiControllerSequence *)(*(int (__thiscall **)(unsigned int, int))(*(_DWORD *)v13 + 0x10))(v13, a6); /*0x474b36*/
+          *(_DWORD *)(this + 4 * v10 + 0xA0) = v14; /*0x474b49*/
+          LOBYTE(v11) = NiControllerSequence_Activate(v14, 0, 0, 1.0, 0.0, 0, 0); /*0x474b57*/
         }
       }
     }
   }
   else
   {
-    v12 = a6;
-    LOBYTE(v11) = sub_470960(*(_DWORD **)(this + 0x9C), a6, &a6);
-    if ( (_BYTE)v11 )
+    v12 = encodedKey; /*0x474b5e*/
+    LOBYTE(v11) = ActorAnimData_FindAnimMapEntry(*(_DWORD **)(this + 0x9C), encodedKey, &encodedKey); /*0x474b6e*/
+    if ( (_BYTE)v11 ) /*0x474b75*/
     {
-      if ( sub_470960(*(_DWORD **)(this + 0x9C), v12, &a6) )
+      if ( ActorAnimData_FindAnimMapEntry(*(_DWORD **)(this + 0x9C), v12, &encodedKey) ) /*0x474b83*/
       {
-        v15 = (*(int (__usercall **)@<eax>(int@<ecx>, int, double@<st0>, double@<st1>, double@<st2>))(*(_DWORD *)a6 + 0x10))(
-                a6,
-                a9,
-                st7_0,
-                st6_0,
-                st5_0);
-        sub_474530((_DWORD *)this, v15, *(float *)&v12, a5);
+        v15 = (BSAnimGroupSequence *)(*(int (__thiscall **)(unsigned int, int))(*(_DWORD *)encodedKey + 0x10))( /*0x474b9a*/
+                                       encodedKey,
+                                       a6);
+        ActorAnimData_PlaySequence((ActorAnimData *)this, v15, v12, slotSelector); /*0x474ba1*/
       }
-      LOBYTE(v11) = a7;
-      *(_DWORD *)(this + 4 * v10 + 0x48) = a7;
+      LOBYTE(v11) = a4; /*0x474ba6*/
+      *(_DWORD *)(this + 4 * v10 + 0x48) = a4; /*0x474baa*/
     }
   }
-  v16 = a8;
-  *(_WORD *)(this + 2 * v10 + 0x3C) = v12;
-  *(float *)(this + 0x94) = v16;
-  return v11;
+  v16 = a5; /*0x474bae*/
+  *(_WORD *)(this + 2 * v10 + 0x3C) = v12;      // ModernWindowsCompatible/TragicEngineFix merge decode: RestorePlaySavedSlot writes the saved ActorAnimData+0x94 clock; pre-sample rebase handles large restored clocks before sampling. /*0x474bb2*/
+  *(float *)(this + 0x94) = v16;                // TragicEngineFix decode: ActorAnimData_RestorePlaySavedSlot restores saved actor animation clock into [ESI+0x94]. Pre-sample hook at 0x476E86 handles already-large restored clocks before first active-slot sample. /*0x474bb8*/
+  return v11; /*0x474bbe*/
 }

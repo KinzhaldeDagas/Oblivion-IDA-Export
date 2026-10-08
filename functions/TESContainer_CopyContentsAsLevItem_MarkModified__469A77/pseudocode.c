@@ -1,4 +1,4 @@
-int __userpurge TESContainer_CopyContentsAsLevItem_::MarkModified@<eax>(
+void __userpurge TESContainer_CopyContentsAsLevItem_::MarkModified(
         int a1,
         int a2,
         int a3,
@@ -13,11 +13,11 @@ int __userpurge TESContainer_CopyContentsAsLevItem_::MarkModified@<eax>(
 {
   int v11; // ecx
 
-  if ( HIBYTE(a4) )
+  if ( HIBYTE(a4) ) /*0x469a7c*/
   {
-    v11 = *(_DWORD *)(a11 + 4);
-    if ( v11 )
-      (*(void (__cdecl **)(int))(*(_DWORD *)v11 + 0x48))(0x8000000);
+    v11 = *(_DWORD *)(a11 + 4); /*0x469a82*/
+    if ( v11 ) /*0x469a87*/
+      (*(void (__cdecl **)(int))(*(_DWORD *)v11 + 0x48))(0x8000000); /*0x469a93*/
   }
-  return TESContainer_CopyContentsAsLevItem_::Done(a1, a2);
+  TESContainer_CopyContentsAsLevItem_::Done(a1, a2); /*0x469a94*/
 }

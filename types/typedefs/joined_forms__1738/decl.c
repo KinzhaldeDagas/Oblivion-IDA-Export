@@ -1,1 +1,10 @@
-joined_forms
+enum joined_forms : __int32
+{
+Xn = 0x0,
+Xr = 0x1,
+Xl = 0x2,
+Xm = 0x3,
+Afj = 0x4,
+Afn = 0x5,
+Afx = 0x6,
+};

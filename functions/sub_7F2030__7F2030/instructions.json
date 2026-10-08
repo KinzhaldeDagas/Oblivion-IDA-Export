@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7F2030",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+stspData]; Branch shader-property ctor. Fronds.log lines with propertyVtable=00A92A94/propertyTypeId=7 map to this class: PPLighting base plus STSPData ref, then branch vtable.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x7F2038",
-    "line": "call    ??0SpeedTreeShaderPPLightingProperty@@QAE@XZ; SpeedTreeShaderPPLightingProperty::SpeedTreeShaderPPLightingProperty(void)",
+    "line": "call    OB_SpeedTreeShaderPPLightingProperty_ctor_010201A0; SpeedTreeShaderPPLightingProperty ctor used by BranchShaderProperty: constructs BSShaderPPLightingProperty base, zeroes +0xF0, then AddRefs incoming STSPData at +0xF0.",
     "mnemonic": "call",
     "size": 5
   },

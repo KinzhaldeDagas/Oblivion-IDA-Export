@@ -1,4 +1,5 @@
-BSStringT *sub_A0A650()
+// Initializes Oblivion NiRTTI_NiShadeProperty with native name 'NiShadeProperty' and its native NiProperty parent.
+NiRTTI *__cdecl InitializeRTTI_NiShadeProperty()
 {
-  return sub_70E220((BSStringT *)dword_B401B0, "NiShadeProperty", (int)dword_B3F68C);
+  return NiRTTI_Constructor(&NiRTTI_NiShadeProperty, "NiShadeProperty", &stru_B3F68C); /*0xa0a664*/
 }

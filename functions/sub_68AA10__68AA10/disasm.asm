@@ -1,2 +1,2 @@
-0x68AA10: mov     dword ptr [ecx], offset ??_7PathLow@@6B@; const PathLow::`vftable'
-0x68AA16: jmp     sub_689A00
+0x68AA10: mov     dword ptr [ecx], offset ??_7PathLow@@6B@; Verified PathLow destructor: restores the PathLow vtable and frees/clears owned TravelPathNode records through TravelPath_ClearNodes. This routine does not free the containing object.
+0x68AA16: jmp     TravelPath_ClearNodes; Verified clears TravelPath.nodes at +4: frees owned kind-1 position payloads, frees every TravelPathNode record and BSSimpleList link, but leaves kind-0 TESObjectREFR payloads unowned/unreleased.

@@ -1,7 +1,7 @@
 0x636D72: test    cl, 1
 0x636D75: jz      short loc_636D90
 0x636D77: mov     ecx, ebx
-0x636D79: call    sub_565DF0
+0x636D79: call    sub_565DF0; RadiantAI: package flag helper used by chooser skip logic; tests TESPackage flag 0x0400.
 0x636D7E: test    al, al
 0x636D80: jnz     short loc_636D90
 0x636D82: cmp     dword ptr [ebx+28h], 0
@@ -9,7 +9,7 @@
 0x636D88: fldz
 0x636D8A: fstp    dword ptr [esi+1ACh]
 0x636D90: mov     ecx, ebx
-0x636D92: call    sub_565DF0
+0x636D92: call    sub_565DF0; RadiantAI: package flag helper used by chooser skip logic; tests TESPackage flag 0x0400.
 0x636D97: test    al, al
 0x636D99: jz      short loc_636DC2
 0x636D9B: lea     edx, [ebx+2Ch]
@@ -19,12 +19,12 @@
 0x636DA6: jnz     short loc_636DC2
 0x636DA8: cmp     byte ptr [ebx+20h], 6
 0x636DAC: jnz     short loc_636DC2
-0x636DAE: mov     ecx, offset TimeGlobals
+0x636DAE: mov     ecx, 0B332E0h
 0x636DB3: call    TimeGlobals_GetGameDay
 0x636DB8: lea     ecx, [edi+44h]
 0x636DBB: push    eax
 0x636DBC: push    ebx
-0x636DBD: call    sub_41FFC0
+0x636DBD: call    ExtraDataList_SetRunOnceExtraPackage; Ensures ExtraRunOncePacks exists, then adds or updates a package record with the supplied package and state byte.
 0x636DC2: cmp     byte ptr [esi+84h], 0
 0x636DC9: jnz     short loc_636E24
 0x636DCB: mov     ecx, ebx
@@ -35,7 +35,7 @@
 0x636DD8: fld     dword ptr ds:0A5B6C0h
 0x636DDE: mov     edx, [eax+174h]
 0x636DE4: push    edi; a7
-0x636DE5: push    offset sub_645A30; a6
+0x636DE5: push    offset TESObjectREFR_SetOwnedDoorLockedForActor; a6
 0x636DEA: push    ecx
 0x636DEB: mov     ecx, edi
 0x636DED: fstp    [esp+0Ch+a5]; a5
@@ -50,7 +50,7 @@
 0x636E07: call    edx
 0x636E09: push    eax; a2
 0x636E0A: mov     ecx, edi; this
-0x636E0C: call    TESObjectREFR_GetParentCell
+0x636E0C: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x636E11: mov     ecx, ds:0B33A98h
 0x636E17: push    eax; a1
 0x636E18: call    sub_446B90
@@ -63,7 +63,7 @@
 0x636E31: fld     dword ptr ds:0A5B6C0h
 0x636E37: mov     edx, [eax+174h]
 0x636E3D: push    edi; a7
-0x636E3E: push    offset sub_645AF0; a6
+0x636E3E: push    offset TESObjectREFR_ClearOwnedDoorLockForActor; a6
 0x636E43: push    ecx
 0x636E44: mov     ecx, edi
 0x636E46: fstp    [esp+0Ch+a5]; a5
@@ -78,7 +78,7 @@
 0x636E60: call    edx
 0x636E62: push    eax; a2
 0x636E63: mov     ecx, edi; this
-0x636E65: call    TESObjectREFR_GetParentCell
+0x636E65: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x636E6A: mov     ecx, ds:0B33A98h
 0x636E70: push    eax; a1
 0x636E71: call    sub_446B90
@@ -200,8 +200,8 @@
 0x636FA9: push    0
 0x636FAB: push    0
 0x636FAD: push    ecx
-0x636FAE: mov     ecx, eax
-0x636FB0: call    TESHealthForm_GetHealth
+0x636FAE: mov     ecx, eax; this
+0x636FB0: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x636FB5: push    eax
 0x636FB6: push    esi
 0x636FB7: mov     ecx, edi

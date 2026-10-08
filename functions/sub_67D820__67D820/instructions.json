@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x67D820",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified actor-aware PathGrid point selection. For a placed reference, builds a temporary graph node at the requested position, attaches below-water and SubSpace flags, and asks that cell's PathGrid for the best reachable candidate. For exterior coordinates, searches the loaded cell grid; when the position is in the active world's loaded neighborhood, compares actor-aware candidates from the containing and adjacent cell PathGrids. It may reduce cost for candidates with the extra reachability result; exact meaning of that mode remains Candidate.",
     "mnemonic": "push",
     "size": 2
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x67D89D",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x67D8AC",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,31 +283,31 @@
   },
   {
     "ea": "0x67D8C2",
-    "line": "lea     ecx, [esp+0B0h+var_38]",
+    "line": "lea     ecx, [esp+0B0h+var_38]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x67D8C6",
-    "line": "call    sub_4E7DF0",
+    "line": "call    TESPathGridPoint_ctor; Verified TESPathGridPoint constructor initializes the graph-search prefix, adjacency list and position, sets +0x28 to null, and lazily creates two shared NiAVObject templates. The template references are refcounted and selected by integerized point-Z parity in TESPathGridPoint_RebuildRenderGeometry. Material field correction: the formerly `unknown28` member at +0x28 is a per-point NiNode* renderNode; the render builder writes it and the clear helper removes/releases it.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x67D8CB",
-    "line": "mov     edi, [esp+0B0h+arg_0]",
+    "line": "mov     edi, [esp+0B0h+worldXY]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x67D8D2",
-    "line": "push    edi",
+    "line": "push    edi; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67D8D3",
-    "line": "lea     ecx, [esp+0B4h+var_38]",
+    "line": "lea     ecx, [esp+0B4h+var_38]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x67D8DE",
-    "line": "call    sub_4BEF50",
+    "line": "call    PathGraphNode_SetPosition; Verified shared graph-node position setter: writes XYZ into this+0x14; called by both TESRoad and TESPathGrid record loaders.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x67D8EC",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,25 +385,25 @@
   },
   {
     "ea": "0x67D903",
-    "line": "push    1",
+    "line": "push    1; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x67D905",
-    "line": "lea     ecx, [esp+0B4h+var_38]",
+    "line": "lea     ecx, [esp+0B4h+var_38]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x67D909",
-    "line": "call    sub_67ED00",
+    "line": "call    PathGraphNode_SetBelowWaterFlag; Verified sets/clears stateFlags bit 0x08. TESPathGrid_LoadSerializedGraphChunks sets it when point Z is below the cell water height; actor-aware edge scoring treats it as a boundary trait.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x67D90E",
-    "line": "push    edi",
+    "line": "push    edi; worldPosition",
     "mnemonic": "push",
     "size": 1
   },
@@ -415,19 +415,19 @@
   },
   {
     "ea": "0x67D911",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x67D916",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67D918",
-    "line": "call    sub_4CBBB0",
+    "line": "call    TESObjectCELL_FindSmallestSubSpaceContainingPosition; Verified: locks a cell's object list and returns the smallest-radius TESSubSpace reference containing the query position; this is the interior-cell counterpart to the WorldSpace coordinate-bucket lookup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -445,61 +445,61 @@
   },
   {
     "ea": "0x67D921",
-    "line": "push    1",
+    "line": "push    1; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x67D923",
-    "line": "lea     ecx, [esp+0B4h+var_38]",
+    "line": "lea     ecx, [esp+0B4h+var_38]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x67D927",
-    "line": "call    sub_67ED50",
+    "line": "call    PathGraphNode_SetSubSpaceMembershipFlag; Verified sets/clears stateFlags bit 0x40. PathGrid graph loading sets it when WorldSpace/Cell SubSpace lookup finds a containing TESSubSpace; actor-aware edge cost adds a penalty when endpoints differ on this bit.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x67D92C",
-    "line": "mov     ecx, [esp+0B0h+arg_C]",
+    "line": "mov     ecx, [esp+0B0h+excludedPoints]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x67D933",
-    "line": "mov     edx, [esp+0B0h+arg_8]",
+    "line": "mov     edx, dword ptr [esp+0B0h+pathMode]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x67D93A",
-    "line": "lea     eax, [esp+0B0h+var_85]",
+    "line": "lea     eax, [esp+0B0h+outFallbackUsed]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x67D93E",
-    "line": "push    eax",
+    "line": "push    eax; outFallbackUsed",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67D93F",
-    "line": "push    ecx",
+    "line": "push    ecx; excludedPoints",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67D940",
-    "line": "push    edx",
+    "line": "push    edx; extraFilter",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67D941",
-    "line": "push    esi",
+    "line": "push    esi; actor",
     "mnemonic": "push",
     "size": 1
   },
@@ -511,25 +511,25 @@
   },
   {
     "ea": "0x67D949",
-    "line": "push    eax",
+    "line": "push    eax; origin",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67D94A",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67D94C",
-    "line": "mov     [esp+0C4h+var_85], 0",
+    "line": "mov     [esp+0C4h+outFallbackUsed], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x67D951",
-    "line": "call    sub_4E5730",
+    "line": "call    TESPathGrid_FindReachablePointForActor; Verified PathGrid candidate search: scans point lists in nearby packed cell buckets, skips null/disabled points and exclusions, scores candidates using actor-aware connected-point cost, and optionally tests a short segment/line-of-sight before returning the best point. The exact semantics of the extraFilter and outFallbackUsed parameters remain Candidate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -547,13 +547,13 @@
   },
   {
     "ea": "0x67D965",
-    "line": "lea     ecx, [esp+0B0h+var_38]",
+    "line": "lea     ecx, [esp+0B0h+var_38]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x67D969",
-    "line": "call    sub_4E8200",
+    "line": "call    TESPathGridPoint_Cleanup; Verified point cleanup called before freeing persistent or temporary TESPathGridPoint nodes: frees adjacency-list chain at +0x24, clears the per-point renderNode at +0x28, decrements g_PathGridPointLiveCount, and on the last node releases both shared marker-template references. It does not free the point allocation itself.",
     "mnemonic": "call",
     "size": 5
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x67D99B",
-    "line": "mov     edi, [esp+0B0h+arg_0]",
+    "line": "mov     edi, [esp+0B0h+worldXY]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x67D9C3",
-    "line": "push    edi; float *",
+    "line": "push    edi; worldXY",
     "mnemonic": "push",
     "size": 1
   },
@@ -715,13 +715,13 @@
   },
   {
     "ea": "0x67D9CA",
-    "line": "call    TESWorldSpace__GetCellAtPos",
+    "line": "call    TESWorldSpace_GetCellAtWorldPosition",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x67D9CF",
-    "line": "lea     ecx, [esp+0B0h+var_64]",
+    "line": "lea     ecx, [esp+0B0h+from]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -733,19 +733,19 @@
   },
   {
     "ea": "0x67D9D5",
-    "line": "call    sub_4E7DF0",
+    "line": "call    TESPathGridPoint_ctor; Verified TESPathGridPoint constructor initializes the graph-search prefix, adjacency list and position, sets +0x28 to null, and lazily creates two shared NiAVObject templates. The template references are refcounted and selected by integerized point-Z parity in TESPathGridPoint_RebuildRenderGeometry. Material field correction: the formerly `unknown28` member at +0x28 is a per-point NiNode* renderNode; the render builder writes it and the clear helper removes/releases it.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x67D9DA",
-    "line": "push    edi",
+    "line": "push    edi; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67D9DB",
-    "line": "lea     ecx, [esp+0B4h+var_64]",
+    "line": "lea     ecx, [esp+0B4h+from]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -757,7 +757,7 @@
   },
   {
     "ea": "0x67D9EA",
-    "line": "call    sub_4BEF50",
+    "line": "call    PathGraphNode_SetPosition; Verified shared graph-node position setter: writes XYZ into this+0x14; called by both TESRoad and TESPathGrid record loaders.",
     "mnemonic": "call",
     "size": 5
   },
@@ -823,37 +823,37 @@
   },
   {
     "ea": "0x67DA0C",
-    "line": "push    1",
+    "line": "push    1; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x67DA0E",
-    "line": "lea     ecx, [esp+0B4h+var_64]",
+    "line": "lea     ecx, [esp+0B4h+from]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x67DA12",
-    "line": "call    sub_67ED00",
+    "line": "call    PathGraphNode_SetBelowWaterFlag; Verified sets/clears stateFlags bit 0x08. TESPathGrid_LoadSerializedGraphChunks sets it when point Z is below the cell water height; actor-aware edge scoring treats it as a boundary trait.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x67DA17",
-    "line": "push    edi",
+    "line": "push    edi; worldPosition",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67DA18",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67DA1A",
-    "line": "call    sub_4F0600",
+    "line": "call    TESWorldSpace_FindSmallestSubSpaceContainingPosition; Verified: queries the SubSpace candidate list for the position-derived cell key, then returns the smallest-radius TESSubSpace whose exact scaled local bounds contain the point.",
     "mnemonic": "call",
     "size": 5
   },
@@ -871,19 +871,19 @@
   },
   {
     "ea": "0x67DA23",
-    "line": "push    1",
+    "line": "push    1; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x67DA25",
-    "line": "lea     ecx, [esp+0B4h+var_64]",
+    "line": "lea     ecx, [esp+0B4h+from]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x67DA29",
-    "line": "call    sub_67ED50",
+    "line": "call    PathGraphNode_SetSubSpaceMembershipFlag; Verified sets/clears stateFlags bit 0x40. PathGrid graph loading sets it when WorldSpace/Cell SubSpace lookup finds a containing TESSubSpace; actor-aware edge cost adds a penalty when endpoints differ on this bit.",
     "mnemonic": "call",
     "size": 5
   },
@@ -907,7 +907,7 @@
   },
   {
     "ea": "0x67DA36",
-    "line": "fstp    [esp+0B0h+var_90]",
+    "line": "fstp    dword ptr [esp+0B0h+preferred]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -937,7 +937,7 @@
   },
   {
     "ea": "0x67DA4A",
-    "line": "fld     [esp+0B0h+var_90]",
+    "line": "fld     dword ptr [esp+0B0h+preferred]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -961,7 +961,7 @@
   },
   {
     "ea": "0x67DA59",
-    "line": "fstp    [esp+0B0h+var_90]",
+    "line": "fstp    dword ptr [esp+0B0h+preferred]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -973,7 +973,7 @@
   },
   {
     "ea": "0x67DA60",
-    "line": "fld     [esp+0B0h+var_90]",
+    "line": "fld     dword ptr [esp+0B0h+preferred]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1003,13 +1003,13 @@
   },
   {
     "ea": "0x67DA71",
-    "line": "mov     [esp+0B0h+var_90], ecx",
+    "line": "mov     dword ptr [esp+0B0h+preferred], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x67DA75",
-    "line": "fild    [esp+0B0h+var_90]",
+    "line": "fild    dword ptr [esp+0B0h+preferred]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -1027,7 +1027,7 @@
   },
   {
     "ea": "0x67DA7E",
-    "line": "fstp    [esp+0B0h+var_90]",
+    "line": "fstp    dword ptr [esp+0B0h+preferred]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1039,13 +1039,13 @@
   },
   {
     "ea": "0x67DA85",
-    "line": "fld     [esp+0B0h+var_90]",
+    "line": "fld     dword ptr [esp+0B0h+preferred]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x67DA89",
-    "line": "mov     [esp+0B0h+var_90], edx",
+    "line": "mov     dword ptr [esp+0B0h+preferred], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1063,7 +1063,7 @@
   },
   {
     "ea": "0x67DA93",
-    "line": "fild    [esp+0B0h+var_90]",
+    "line": "fild    dword ptr [esp+0B0h+preferred]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -1075,13 +1075,13 @@
   },
   {
     "ea": "0x67DA9B",
-    "line": "fstp    [esp+0B0h+var_90]",
+    "line": "fstp    dword ptr [esp+0B0h+preferred]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x67DA9F",
-    "line": "fld     [esp+0B0h+var_90]",
+    "line": "fld     dword ptr [esp+0B0h+preferred]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1111,7 +1111,7 @@
   },
   {
     "ea": "0x67DAB1",
-    "line": "fstp    [esp+0B0h+var_90]",
+    "line": "fstp    dword ptr [esp+0B0h+preferred]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1207,7 +1207,7 @@
   },
   {
     "ea": "0x67DADD",
-    "line": "fld     [esp+0B0h+var_90]",
+    "line": "fld     dword ptr [esp+0B0h+preferred]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1369,7 +1369,7 @@
   },
   {
     "ea": "0x67DB32",
-    "line": "push    ebp; signed int",
+    "line": "push    ebp; cellY",
     "mnemonic": "push",
     "size": 1
   },
@@ -1381,7 +1381,7 @@
   },
   {
     "ea": "0x67DB36",
-    "line": "push    eax; signed int",
+    "line": "push    eax; cellX",
     "mnemonic": "push",
     "size": 1
   },
@@ -1435,13 +1435,13 @@
   },
   {
     "ea": "0x67DB53",
-    "line": "push    eax; signed int",
+    "line": "push    eax; cellY",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67DB54",
-    "line": "push    esi; signed int",
+    "line": "push    esi; cellX",
     "mnemonic": "push",
     "size": 1
   },
@@ -1507,7 +1507,7 @@
   },
   {
     "ea": "0x67DB73",
-    "line": "push    eax; signed int",
+    "line": "push    eax; cellY",
     "mnemonic": "push",
     "size": 1
   },
@@ -1519,7 +1519,7 @@
   },
   {
     "ea": "0x67DB76",
-    "line": "push    ebx; signed int",
+    "line": "push    ebx; cellX",
     "mnemonic": "push",
     "size": 1
   },
@@ -1543,13 +1543,13 @@
   },
   {
     "ea": "0x67DB86",
-    "line": "mov     ebx, [esp+0B0h+arg_C]",
+    "line": "mov     ebx, [esp+0B0h+excludedPoints]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x67DB8D",
-    "line": "mov     ebp, [esp+0B0h+arg_8]",
+    "line": "mov     ebp, dword ptr [esp+0B0h+pathMode]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1627,49 +1627,49 @@
   },
   {
     "ea": "0x67DBC1",
-    "line": "push    ecx",
+    "line": "push    ecx; outFallbackUsed",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67DBC2",
-    "line": "push    ebx",
+    "line": "push    ebx; excludedPoints",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67DBC3",
-    "line": "push    ebp",
+    "line": "push    ebp; extraFilter",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67DBC4",
-    "line": "push    edx",
+    "line": "push    edx; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67DBC5",
-    "line": "lea     ecx, [esp+0C0h+var_64]",
+    "line": "lea     ecx, [esp+0C0h+from]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x67DBC9",
-    "line": "push    ecx",
+    "line": "push    ecx; origin",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67DBCA",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67DBCC",
-    "line": "call    sub_4E5730",
+    "line": "call    TESPathGrid_FindReachablePointForActor; Verified PathGrid candidate search: scans point lists in nearby packed cell buckets, skips null/disabled points and exclusions, scores candidates using actor-aware connected-point cost, and optionally tests a short segment/line-of-sight before returning the best point. The exact semantics of the extraFilter and outFallbackUsed parameters remain Candidate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1693,37 +1693,37 @@
   },
   {
     "ea": "0x67DBD7",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67DBD9",
-    "line": "call    sub_4E8040",
+    "line": "call    PathGraphNode_IsPreferred; Verified preferred-node predicate: reads the least-significant bit of the Z float at graph-node+0x1C. The registered fPathPreferredPointBonus setting applies a bonus to this marked point for non-creature actors.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x67DBDE",
-    "line": "push    0",
+    "line": "push    0; preferred",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x67DBE0",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67DBE2",
-    "line": "mov     byte ptr [esp+0B4h+var_90], al",
+    "line": "mov     [esp+0B4h+preferred], al",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x67DBE6",
-    "line": "call    sub_4E8060",
+    "line": "call    PathGraphNode_SetPreferred; Verified preferred-node setter: sets/clears the least-significant bit of the Z float at graph-node+0x1C while preserving the remaining position bits. PathGrid candidate search temporarily clears/restores it around actor-aware cost evaluation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1735,31 +1735,31 @@
   },
   {
     "ea": "0x67DBF2",
-    "line": "push    edx",
+    "line": "push    edx; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67DBF3",
-    "line": "lea     eax, [esp+0B4h+var_64]",
+    "line": "lea     eax, [esp+0B4h+from]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x67DBF7",
-    "line": "push    esi",
+    "line": "push    esi; to",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67DBF8",
-    "line": "push    eax",
+    "line": "push    eax; from",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67DBF9",
-    "line": "call    sub_67EDE0",
+    "line": "call    TESConnectedPoint_ComputeActorAwareEdgeCost; Verified actor-aware edge cost: TESObjectREFR_GetPathGraphMovementCost(from, actor) + Euclidean distance + fPathWaterExitPenalty when below-water bit 0x08 differs + fPathSpaceExitPenalty when SubSpace bit 0x40 differs. Current defaults: 20,000 for each boundary penalty; exact tuning rationale Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1771,7 +1771,7 @@
   },
   {
     "ea": "0x67DC02",
-    "line": "mov     ecx, [esp+0BCh+var_90]",
+    "line": "mov     ecx, dword ptr [esp+0BCh+preferred]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1783,19 +1783,19 @@
   },
   {
     "ea": "0x67DC09",
-    "line": "push    ecx",
+    "line": "push    ecx; preferred",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67DC0A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67DC0C",
-    "line": "call    sub_4E8060",
+    "line": "call    PathGraphNode_SetPreferred; Verified preferred-node setter: sets/clears the least-significant bit of the Z float at graph-node+0x1C while preserving the remaining position bits. PathGrid candidate search temporarily clears/restores it around actor-aware cost evaluation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1915,7 +1915,7 @@
   },
   {
     "ea": "0x67DC5A",
-    "line": "lea     ecx, [esp+0B0h+var_64]",
+    "line": "lea     ecx, [esp+0B0h+from]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2125,19 +2125,19 @@
   },
   {
     "ea": "0x67DCD5",
-    "line": "push    edi",
+    "line": "push    edi; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67DCD6",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67DCD8",
-    "line": "call    sub_4E55E0",
+    "line": "call    TESPathGrid_FindClosestPointByPosition; Verified PGRI index use: the record's first u16 selects the TESPathGridPoint in pointArray, while its indexedPosition at +4 is used to select the nearest eligible point in the owning cell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2161,13 +2161,13 @@
   },
   {
     "ea": "0x67DCE3",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67DCE5",
-    "line": "call    sub_4BEF40",
+    "line": "call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2293,13 +2293,13 @@
   },
   {
     "ea": "0x67DD22",
-    "line": "fstp    [esp+0B0h+var_90]",
+    "line": "fstp    dword ptr [esp+0B0h+preferred]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x67DD26",
-    "line": "fld     [esp+0B0h+var_90]",
+    "line": "fld     dword ptr [esp+0B0h+preferred]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2396,6 +2396,72 @@
   {
     "ea": "0x67DD5E",
     "line": "jmp     loc_67DC72",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4A20",
+    "line": "lea     ecx, [ebp-38h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C4A23",
+    "line": "jmp     TESPathGridPoint_Cleanup; Verified point cleanup called before freeing persistent or temporary TESPathGridPoint nodes: frees adjacency-list chain at +0x24, clears the per-point renderNode at +0x28, decrements g_PathGridPointLiveCount, and on the last node releases both shared marker-template references. It does not free the point allocation itself.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4A28",
+    "line": "lea     ecx, [ebp-64h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C4A2B",
+    "line": "jmp     TESPathGridPoint_Cleanup; Verified point cleanup called before freeing persistent or temporary TESPathGridPoint nodes: frees adjacency-list chain at +0x24, clears the per-point renderNode at +0x28, decrements g_PathGridPointLiveCount, and on the last node releases both shared marker-template references. It does not free the point allocation itself.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4A30",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C4A34",
+    "line": "lea     eax, [edx-0A0h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C4A3A",
+    "line": "mov     ecx, [edx-0A4h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C4A40",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C4A42",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4A47",
+    "line": "mov     eax, offset stru_AED358",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4A4C",
+    "line": "jmp     ___CxxFrameHandler3",
     "mnemonic": "jmp",
     "size": 5
   }

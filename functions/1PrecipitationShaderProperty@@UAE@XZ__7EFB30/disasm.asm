@@ -60,3 +60,15 @@
 0x7EFBE5: pop     ebp
 0x7EFBE6: add     esp, 10h
 0x7EFBE9: retn
+0x9CFCB0: mov     ecx, [ebp-10h]; this
+0x9CFCB3: jmp     ??1BSShaderProperty@@UAE@XZ; BSShaderProperty::~BSShaderProperty(void)
+0x9CFCB8: mov     ecx, [ebp-10h]
+0x9CFCBB: add     ecx, 9Ch ; 'œ'; slot
+0x9CFCC1: jmp     NiPointerSlot_Release
+0x9CFCC6: mov     edx, [esp+arg_4]
+0x9CFCCA: lea     eax, [edx-10h]
+0x9CFCCD: mov     ecx, [edx-14h]
+0x9CFCD0: xor     ecx, eax
+0x9CFCD2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CFCD7: mov     eax, offset stru_AF87FC
+0x9CFCDC: jmp     ___CxxFrameHandler3

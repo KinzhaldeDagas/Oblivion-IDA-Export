@@ -1,4 +1,4 @@
-0x6648D0: push    esi
+0x6648D0: push    esi; Increment the current eight-byte governing-attribute bonus bucket for AttributeActorValue 0..7. Both major and non-major skill increases invoke this before any major-only rollover logic.
 0x6648D1: mov     esi, ecx
 0x6648D3: cmp     dword ptr [esi+5B4h], 0
 0x6648DA: jnz     short loc_664901
@@ -34,12 +34,12 @@
 0x66493D: mov     esi, [eax]
 0x66493F: test    esi, esi
 0x664941: jz      short loc_66495E
-0x664943: mov     eax, [esp+4+arg_0]
+0x664943: mov     eax, [esp+4+governingAttribute]
 0x664947: cmp     eax, 7
 0x66494A: ja      short loc_66495E
 0x66494C: push    eax
 0x66494D: push    0
-0x66494F: call    ActorValue_GetGroupOffsetFromAV
+0x66494F: call    ActorValue_GetGroupOffsetFromAV; RealArenaTraining fidelity pass: ActorValue_GetGroupOffsetFromAV(group, actorValue). Player skill-progress code calls this with group 2 before indexing player skillExp/requiredSkillExp.
 0x664954: movsx   eax, al
 0x664957: add     esp, 8
 0x66495A: add     byte ptr [eax+esi], 1

@@ -1,31 +1,32 @@
-void __thiscall sub_423DF0(ExtraDataList *this, int a2)
+// OR action flag mask into existing byte (default byte 1 when absent), creating state as needed. ONAM calls this with 0x08.
+void __thiscall ExtraDataList_SetActionFlagBits(ExtraDataList *this, unsigned int mask)
 {
   BSExtraData *ExtraData; // eax
   int vtbl_low; // ebx
-  int v5; // ebx
-  BSExtraData *v6; // eax
+  unsigned int v5; // ebx
+  BSExtraData *Action; // eax
 
-  ExtraData = BaseExtraList_GetExtraData(this, kExtraData_Action);
-  if ( ExtraData )
-    vtbl_low = LOBYTE(ExtraData[1].vtbl);
+  ExtraData = BaseExtraList_GetExtraData(this, kExtraData_Action); /*0x423df6*/
+  if ( ExtraData ) /*0x423dfd*/
+    vtbl_low = LOBYTE(ExtraData[1].vtbl); /*0x423dff*/
   else
-    vtbl_low = 1;
-  v5 = a2 | vtbl_low;
-  v6 = BaseExtraList_GetExtraData(this, kExtraData_Action);
-  if ( v6 )
+    vtbl_low = 1; /*0x423e05*/
+  v5 = mask | vtbl_low; /*0x423e0a*/
+  Action = BaseExtraList_GetExtraData(this, kExtraData_Action); /*0x423e12*/
+  if ( Action ) /*0x423e19*/
   {
-    if ( v5 == 1 && !*(_DWORD *)&v6[1].members.type )
+    if ( v5 == 1 && !*(_DWORD *)&Action[1].members.type ) /*0x423e38*/
     {
-      BaseExtraList_RemoveExtraByPtr(this, (int)v6, 1);
-      return;
+      BaseExtraList_RemoveExtraByPtr(this, (int)Action, 1); /*0x423e42*/
+      return; /*0x423e42*/
     }
   }
   else
   {
-    if ( v5 == 1 )
-      return;
-    v6 = sub_41EB90(this);
+    if ( v5 == 1 ) /*0x423e1e*/
+      return; /*0x423e1e*/
+    Action = ExtraDataList_GetOrCreateAction(this); /*0x423e22*/
   }
-  if ( v6 )
-    LOBYTE(v6[1].vtbl) = v5;
+  if ( Action ) /*0x423e29*/
+    LOBYTE(Action[1].vtbl) = v5; /*0x423e2b*/
 }

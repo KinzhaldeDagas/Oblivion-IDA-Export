@@ -1,1 +1,1 @@
-BLOB
+typedef tagBLOB BLOB;

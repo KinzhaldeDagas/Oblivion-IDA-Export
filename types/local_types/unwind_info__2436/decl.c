@@ -1,1 +1,5 @@
-unwind_info
+struct unwind_info
+{
+int prev;
+UINT handler;
+};

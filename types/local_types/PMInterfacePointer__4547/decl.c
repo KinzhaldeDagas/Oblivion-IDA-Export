@@ -1,1 +1,1 @@
-PMInterfacePointer
+typedef MInterfacePointer *PMInterfacePointer;

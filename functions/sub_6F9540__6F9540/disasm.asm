@@ -11,7 +11,7 @@
 0x6F9555: test    eax, eax
 0x6F9557: jz      short loc_6F956E
 0x6F9559: lea     esp, [esp+0]
-0x6F9560: cmp     eax, offset dword_B3F95C
+0x6F9560: cmp     eax, offset stru_B3F95C
 0x6F9565: jz      short loc_6F957E
 0x6F9567: mov     eax, [eax+4]
 0x6F956A: test    eax, eax

@@ -10,4 +10,4 @@
 0x7837C2: mov     dword ptr [esi+40h], 0
 0x7837C9: mov     ecx, esi
 0x7837CB: pop     esi
-0x7837CC: jmp     sub_783070
+0x7837CC: jmp     sub_783070; MoonSugarEffect decode: NiD3DVertexShader vtable +0x58 release-live-handle path. If wrapper+0x30 is non-null, calls sub_763090 to clear render-state vertex shader, Release the IDirect3DVertexShader9, and store null through vtable +0x44.

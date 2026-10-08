@@ -1,1 +1,1 @@
-QueuedChildren
+struct QueuedChildren;

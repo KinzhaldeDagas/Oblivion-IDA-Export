@@ -5,7 +5,7 @@
 0x4F5EDC: mov     dl, 4
 0x4F5EDE: jz      short loc_4F5F16
 0x4F5EE0: test    [eax+53h], dl
-0x4F5EE3: jz      short loc_4F5F16
+0x4F5EE3: jz      short loc_4F5F16; Rain helper tests TESWeather+0x53 bit 2 on firstWeather and compares Sky+0xD8 against the first-weather transition threshold at TESWeather+0x4E.
 0x4F5EE5: movzx   eax, byte ptr [eax+4Eh]
 0x4F5EE9: fld     dword ptr [ecx+0D8h]
 0x4F5EEF: mov     [esp+4+var_4], eax
@@ -27,7 +27,7 @@
 0x4F5F19: test    eax, eax
 0x4F5F1B: jz      short loc_4F5F61
 0x4F5F1D: test    [eax+53h], dl
-0x4F5F20: jz      short loc_4F5F61
+0x4F5F20: jz      short loc_4F5F61; Rain helper also tests secondWeather bit 2 and second-weather transition threshold at TESWeather+0x4F.
 0x4F5F22: fld     dword ptr [ecx+0D8h]
 0x4F5F28: movzx   ecx, byte ptr [eax+4Fh]
 0x4F5F2C: mov     [esp+4+var_4], ecx

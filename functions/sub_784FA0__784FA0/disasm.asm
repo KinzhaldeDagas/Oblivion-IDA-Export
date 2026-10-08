@@ -1,4 +1,4 @@
-0x784FA0: mov     eax, [esp+arg_0]
+0x784FA0: mov     eax, [esp+capacity]; Oblivion 1.2.0.416: initializes an empty 24-byte-record vector and allocates capacity*0x18 bytes when capacity is nonzero.
 0x784FA4: push    esi
 0x784FA5: mov     esi, ecx
 0x784FA7: xor     ecx, ecx
@@ -12,7 +12,7 @@
 0x784FB9: retn    4
 0x784FBC: cmp     eax, 0FFFFFFFFh
 0x784FBF: jbe     short loc_784FC6
-0x784FC1: call    sub_790B90
+0x784FC1: call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error("vector<T> too long") and throws; used by multiple element specializations after max_size checks.
 0x784FC6: push    edi
 0x784FC7: lea     edi, [eax+eax*2]
 0x784FCA: add     edi, edi

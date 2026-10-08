@@ -1,25 +1,25 @@
 [
   {
     "ea": "0x79C490",
-    "line": "sub     esp, 38h",
+    "line": "sub     esp, 38h; Oblivion-authoritative CFrondEngine::AddGuideVertex. Builds a 0x38-byte vertex from position, 3x3 rotation transform, primary cross-section/wind weight, and primary wind group, then pushes it into the final compact guide. Unlike local RT 4.1 source, Oblivion has no secondary frond wind fields here.",
     "mnemonic": "sub",
     "size": 3
   },
   {
     "ea": "0x79C493",
-    "line": "mov     eax, [esp+38h+arg_0]",
+    "line": "mov     eax, [esp+38h+position.x]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79C497",
-    "line": "fld     [esp+38h+arg_30]",
+    "line": "fld     [esp+38h+primaryCrossSectionOrWindWeight]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x79C49B",
-    "line": "mov     edx, [esp+38h+arg_8]",
+    "line": "mov     edx, [esp+38h+position.z]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x79C4A2",
-    "line": "mov     ecx, [esp+3Ch+arg_4]",
+    "line": "mov     ecx, [esp+3Ch+position.y]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,19 +55,19 @@
   },
   {
     "ea": "0x79C4A8",
-    "line": "mov     [esp+44h+var_38], eax",
+    "line": "mov     [esp+44h+value.position], eax; Guide vertex xyz position.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79C4AC",
-    "line": "mov     eax, [esp+44h+arg_34]",
+    "line": "mov     eax, [esp+44h+primaryWindGroup]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79C4B0",
-    "line": "mov     [esp+44h+var_34], ecx",
+    "line": "mov     [esp+44h+value.position+4], ecx; Guide vertex xyz position.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -79,19 +79,19 @@
   },
   {
     "ea": "0x79C4B9",
-    "line": "lea     esi, [esp+44h+arg_C]",
+    "line": "lea     esi, [esp+44h+transform]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x79C4BD",
-    "line": "lea     edi, [esp+44h+var_2C]",
+    "line": "lea     edi, [esp+44h+value.rotationTransform3x3]; Nine-float orientation transform.",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x79C4C1",
-    "line": "mov     [esp+44h+var_30], edx",
+    "line": "mov     [esp+44h+value.position+8], edx; Guide vertex xyz position.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -103,13 +103,13 @@
   },
   {
     "ea": "0x79C4C7",
-    "line": "fstp    [esp+44h+var_8]",
+    "line": "fstp    [esp+44h+value.primaryCrossSectionOrWindWeight]; Primary cross-section/wind weight. Oblivion has no stock RT 4.1 secondary slot in this 0x38 record.",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x79C4CB",
-    "line": "mov     [esp+44h+var_4], eax",
+    "line": "mov     [esp+44h+value.primaryWindGroup], eax; Primary wind group. Oblivion has no stock RT 4.1 secondary group in this 0x38 record.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -271,13 +271,13 @@
   },
   {
     "ea": "0x79C515",
-    "line": "lea     ecx, [esp+44h+var_38]",
+    "line": "lea     ecx, [esp+44h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x79C519",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -295,13 +295,13 @@
   },
   {
     "ea": "0x79C520",
-    "line": "add     ecx, [ebx+0Ch]",
+    "line": "add     ecx, [ebx+0Ch]; this",
     "mnemonic": "add",
     "size": 3
   },
   {
     "ea": "0x79C523",
-    "line": "call    sub_79BD20",
+    "line": "call    OB_stVector_SFrondVertex_PushBack_010201A0; Oblivion st_vector<SFrondVertex>::push_back. Constructs in place when end<capacityEnd; otherwise delegates to checked insert-one at end.",
     "mnemonic": "call",
     "size": 5
   },

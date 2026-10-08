@@ -103,25 +103,25 @@
   },
   {
     "ea": "0x6EFA5B",
-    "line": "mov     ebp, [esp+0C0h+arg_0]",
+    "line": "mov     ebp, [esp+0C0h+source]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x6EFA62",
-    "line": "mov     edi, [esp+0C0h+arg_4]",
+    "line": "mov     edi, [esp+0C0h+coordinateMetadata]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x6EFA69",
-    "line": "mov     esi, [esp+0C0h+arg_8]",
+    "line": "mov     esi, [esp+0C0h+bank0]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x6EFA70",
-    "line": "mov     ebx, [esp+0C0h+arg_C]",
+    "line": "mov     ebx, [esp+0C0h+bank1]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x6EFA7A",
-    "line": "mov     ecx, esp",
+    "line": "mov     ecx, esp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x6EFA80",
-    "line": "push    8; MaxCount",
+    "line": "push    8; count",
     "mnemonic": "push",
     "size": 2
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x6EFA99",
-    "line": "call    sub_414500",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Open and validate the FREGT003 FaceGen texture-morph format.",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x6EFAB0",
-    "line": "mov     ecx, esp",
+    "line": "mov     ecx, esp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -223,13 +223,13 @@
   },
   {
     "ea": "0x6EFAB6",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; count",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6EFAB8",
-    "line": "push    eax",
+    "line": "push    eax; offset",
     "mnemonic": "push",
     "size": 1
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x6EFAC3",
-    "line": "push    ebp",
+    "line": "push    ebp; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x6EFACE",
-    "line": "call    sub_414420",
+    "line": "call    OB_stString28_AssignSubstring_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,offset,count). Bounds-checks offset, clamps count to source.size-offset, handles self-assignment by in-place erasure, grows when required, copies the selected bytes, updates size, and writes the terminator.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x6EFB07",
-    "line": "call    sub_6F5E50",
+    "line": "call    sub_6F5E50; Read the 56-byte FREGT003 descriptor after the magic. Its first fields are width, height, and basis counts for two texture banks. Every one of the 20 vanilla EGT entries in Oblivion - Meshes.bsa declares 50/0 bases.",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x6EFB43",
-    "line": "mov     edi, [esp+0C0h+var_84]",
+    "line": "mov     edi, [esp+0C0h+var_84]; Load every record in EGT basis bank 0; each basis record is 64 bytes and owns three signed image-channel planes.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -511,13 +511,13 @@
   },
   {
     "ea": "0x6EFB69",
-    "line": "push    offset sub_794EB0; a5",
+    "line": "push    offset OB_stVector4_DestroyThiscall_010201A0; a5",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x6EFB6E",
-    "line": "push    offset sub_6EF4A0; a4",
+    "line": "push    offset FaceGenEgtBasisBank_Construct; a4",
     "mnemonic": "push",
     "size": 5
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x6EFB7B",
-    "line": "mov     [esp+114h+var_94], ecx",
+    "line": "mov     [esp+114h+newSize], ecx",
     "mnemonic": "mov",
     "size": 7
   },
@@ -622,12 +622,6 @@
     "line": "jmp     short loc_6EFBB0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x6EFBA9",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
   },
   {
     "ea": "0x6EFBB0",
@@ -949,7 +943,7 @@
   },
   {
     "ea": "0x6EFC49",
-    "line": "mov     ebp, [esp+0C0h+var_94]",
+    "line": "mov     ebp, [esp+0C0h+newSize]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -999,12 +993,6 @@
     "ea": "0x6EFC6C",
     "line": "jmp     short loc_6EFC78",
     "mnemonic": "jmp",
-    "size": 2
-  },
-  {
-    "ea": "0x6EFC6E",
-    "line": "align 10h",
-    "mnemonic": null,
     "size": 2
   },
   {
@@ -1087,31 +1075,31 @@
   },
   {
     "ea": "0x6EFC99",
-    "line": "lea     ecx, [eax+edx+10h]; int",
+    "line": "lea     ecx, [eax+edx+10h]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6EFC9D",
-    "line": "mov     edx, [esp+0C0h+var_94]",
+    "line": "mov     edx, [esp+0C0h+newSize]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6EFCA1",
-    "line": "push    0; int",
+    "line": "push    0; fillValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6EFCA3",
-    "line": "push    edx; int",
+    "line": "push    edx; newSize",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6EFCA4",
-    "line": "call    sub_6EF4B0",
+    "line": "call    OB_stVectorByte_ResizeFill_010201A0; Oblivion body: resizes a byte vector; erases a checked suffix when shrinking and delegates to byte insert-fill with the supplied byte when growing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1447,7 +1435,7 @@
   },
   {
     "ea": "0x6EFD5E",
-    "line": "mov     esi, [esp+0C0h+var_80]",
+    "line": "mov     esi, [esp+0C0h+var_80]; Load EGT basis bank 1 using the second descriptor count. Every shipped Oblivion EGT asset declares 50 bases in bank 0 and zero in bank 1.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1471,13 +1459,13 @@
   },
   {
     "ea": "0x6EFD6B",
-    "line": "push    offset sub_794EB0; a5",
+    "line": "push    offset OB_stVector4_DestroyThiscall_010201A0; a5",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x6EFD70",
-    "line": "push    offset sub_6EF4A0; a4",
+    "line": "push    offset FaceGenEgtBasisBank_Construct; a4",
     "mnemonic": "push",
     "size": 5
   },
@@ -1660,12 +1648,6 @@
     "line": "jmp     loc_6EFFCE",
     "mnemonic": "jmp",
     "size": 5
-  },
-  {
-    "ea": "0x6EFDEE",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 2
   },
   {
     "ea": "0x6EFDF0",
@@ -2011,7 +1993,7 @@
   },
   {
     "ea": "0x6EFE98",
-    "line": "mov     edi, [esp+0C0h+var_94]",
+    "line": "mov     edi, [esp+0C0h+newSize]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2044,12 +2026,6 @@
     "line": "jmp     short loc_6EFEB8",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x6EFEAC",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 4
   },
   {
     "ea": "0x6EFEB0",
@@ -2131,31 +2107,31 @@
   },
   {
     "ea": "0x6EFED7",
-    "line": "mov     eax, [esp+0C0h+var_94]",
+    "line": "mov     eax, [esp+0C0h+newSize]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6EFEDB",
-    "line": "push    0; int",
+    "line": "push    0; fillValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6EFEDD",
-    "line": "lea     ecx, [ecx+edx+10h]; int",
+    "line": "lea     ecx, [ecx+edx+10h]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6EFEE1",
-    "line": "push    eax; int",
+    "line": "push    eax; newSize",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6EFEE2",
-    "line": "call    sub_6EF4B0",
+    "line": "call    OB_stVectorByte_ResizeFill_010201A0; Oblivion body: resizes a byte vector; erases a checked suffix when shrinking and delegates to byte insert-fill with the supplied byte when growing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2630,6 +2606,120 @@
   {
     "ea": "0x6F0009",
     "line": "jmp     loc_6EFDB5",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8620",
+    "line": "lea     ecx, [ebp-54h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C8623",
+    "line": "jmp     ??1BSFaceGenBinaryFile@@UAE@XZ; BSFaceGenBinaryFile::~BSFaceGenBinaryFile(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8628",
+    "line": "lea     ecx, [ebp-54h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C862B",
+    "line": "jmp     ??1FutBinaryFileC@@UAE@XZ; FutBinaryFileC::~FutBinaryFileC(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8630",
+    "line": "lea     ecx, [ebp-54h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C8633",
+    "line": "jmp     ??1FutBinaryFileC@@UAE@XZ; FutBinaryFileC::~FutBinaryFileC(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8638",
+    "line": "lea     ecx, [ebp-54h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C863B",
+    "line": "jmp     ??1FutBinaryFileC@@UAE@XZ; FutBinaryFileC::~FutBinaryFileC(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8640",
+    "line": "mov     edx, [esp+coordinateMetadata]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C8644",
+    "line": "lea     eax, [edx-0B0h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C864A",
+    "line": "mov     ecx, [edx-0B4h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C8650",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C8652",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8657",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C865A",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C865D",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C865F",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8664",
+    "line": "mov     eax, offset stru_AF0A28",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8669",
+    "line": "jmp     ___CxxFrameHandler3",
     "mnemonic": "jmp",
     "size": 5
   }

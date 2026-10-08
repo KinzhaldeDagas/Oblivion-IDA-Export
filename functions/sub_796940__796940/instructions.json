@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x796940",
-    "line": "push    ebx",
+    "line": "push    ebx; OBLIVION AUTHORITY (2026-08-30): Backward move-assignment of vector<unsigned short> owners, implemented by swapping pointer triplets from the range end toward destinationEnd.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x796941",
-    "line": "mov     ebx, [esp+4+arg_8]",
+    "line": "mov     ebx, [esp+4+destinationEnd]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x796947",
-    "line": "mov     esi, [esp+0Ch+arg_4]",
+    "line": "mov     esi, [esp+0Ch+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x79694C",
-    "line": "mov     edi, [esp+10h+arg_0]",
+    "line": "mov     edi, [esp+10h+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -103,19 +103,19 @@
   },
   {
     "ea": "0x796967",
-    "line": "push    esi",
+    "line": "push    esi; other",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x796968",
-    "line": "lea     ecx, [ebx+esi]",
+    "line": "lea     ecx, [ebx+esi]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x79696B",
-    "line": "call    sub_795630",
+    "line": "call    OB_stVectorUShort_Swap_010201A0; OBLIVION AUTHORITY (2026-08-30): Swaps two vector<unsigned short> owners via a temporary deep copy and copy assignments; exception cleanup frees the temporary buffer.",
     "mnemonic": "call",
     "size": 5
   },

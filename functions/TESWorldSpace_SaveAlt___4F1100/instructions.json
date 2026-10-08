@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4F1100",
-    "line": "push    ecx",
+    "line": "push    ecx; Verified: WRLD writer serializes fields/chunks and bounds but does not serialize TESWorldSpace.road (+0x54), consistent with ROAD being a separate record grouped beneath its owning WRLD. Neighboring +0x4C/+0x50 remain Unknown.",
     "mnemonic": "push",
     "size": 1
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x4F1133",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x4F115A",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x4F11B5",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x4F11D8",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x4F11FC",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Oblivion WRLD writer emits NAM0 as exactly 8 bytes from unk9C[0:2] at 0x4F11FC; NAM9 emits exactly 8 bytes from unk9C[2:4] at 0x4F120F. These are current accumulated object bounds, not a replay of the serialized chunks.",
     "mnemonic": "call",
     "size": 5
   },
@@ -511,13 +511,13 @@
   },
   {
     "ea": "0x4F120F",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Oblivion WRLD writer emits NAM9 as exactly 8 bytes from unk9C[2:4]. Paired NAM0 minimum-axis serialization is at 0x4F11FC.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4F1214",
-    "line": "mov     eax, [esi+94h]",
+    "line": "mov     eax, [esi+94h]; WRLD/SNAM writer condition: TESWorldSpace_WriteRecord reads music U32 unk084[4] and tests it at0x4F1214; zero skips TESForm_PutCurrentChunkData4(SNAM) and nonzero emits four bytes at0x4F1227. Therefore absent/default-zero and explicit zero on a resolved full object both save without SNAM. Partial merge deltas still serialize zero to clear inherited nonzero state.",
     "mnemonic": "mov",
     "size": 6
   },

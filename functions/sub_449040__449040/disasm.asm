@@ -1,4 +1,4 @@
-0x449040: add     ecx, 0B4h ; '´'
+0x449040: add     ecx, 0B4h ; '´'; CustomAnimSupport evidence: queued idle loader resource resolution helper used before Meshes\<idle-model-path> KF load.
 0x449046: push    esi
 0x449047: jz      short loc_44906A
 0x449049: mov     esi, [esp+4+arg_0]

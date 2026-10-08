@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E7FB0",
-    "line": "push    ebx",
+    "line": "push    ebx; Verified removes reciprocal PathGrid adjacency at a neighbor position: searches this point's connection list by each neighbor's NiPoint3 within fConstant_2 tolerance, removes this point from that neighbor's list, then removes/frees the local connection entry.",
     "mnemonic": "push",
     "size": 1
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x4E7FD3",
-    "line": "mov     eax, [esp+10h+arg_0]",
+    "line": "mov     eax, [esp+10h+position]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x4E8018",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

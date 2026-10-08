@@ -1,19 +1,36 @@
 {
-  "callees_count": 15,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 11,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7F2210",
+  "chunks": [
+    [
+      "0x7F2210",
+      "0x7F2352"
+    ],
+    [
+      "0x9C6200",
+      "0x9C6226"
+    ]
+  ],
+  "chunks_sha256": "546289a30a789751b8fe5c6bf0ff2d570fdb687f5da27a8d3f568fe4d4010a8d",
+  "comment_regular": "Branch shader-property stream builder. Emits position, normal, and 0x10-stride STSP streams; rejects shapes whose vertex count exceeds STSP count.\n\nBranch shader-property stream builder. Emits position, normal, and 0x10-stride STSP streams from the +0xF0 STSPData ref; rejects shapes whose geometry vertex count exceeds STSP count.\nSpeedTreeOBSE v163 VERIFIED: branch property vtable+68 atA92AFC. Input argument is NiGeometry*, then+B4 yields NiGeometryData. Streams0/1 read TangentSpaceData at property+D4 fields+C/+10; stream2 reads STSP through virtual+A4. Earlier generic position/normal labels for streams0/1 are misleading: branch declaration consumes them as tangent/binormal. New owned four-stream buffer copies these three streams byte-for-byte and appends paired wind.",
+  "comment_repeatable": "Branch shader-property stream builder. Emits position, normal, and 0x10-stride STSP streams from the +0xF0 STSPData ref; rejects shapes whose geometry vertex count exceeds STSP count.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_SpeedTreeBranchShaderProperty_BuildInputStreams_010201A0",
   "end_ea": "0x7F2352",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7F2210",
+  "name": "OB_SpeedTreeBranchShaderProperty_BuildInputStreams_010201A0",
   "segment": ".text",
   "sha256": "a116c6e17254515e7206d71ff1d69c062ec93cc31f45eadd0c6233acd7acc14c",
   "size": 322,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7F2210",
-  "type": "unsigned __int16 *__thiscall(_DWORD *this, int)",
-  "xrefs_from_count": 127,
+  "total_chunk_size": 360,
+  "type": "unsigned __int16 *__thiscall(OB_SpeedTreeBranchShaderProperty_010201A0 *this, int geometryData)",
+  "xrefs_from_count": 141,
   "xrefs_to_count": 1
 }

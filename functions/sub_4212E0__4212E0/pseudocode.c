@@ -1,4 +1,5 @@
-int __thiscall sub_4212E0(_DWORD *this)
+// Removes the combined Oblivion ExtraSavedMovementData record (type 0x4B).
+int __thiscall ExtraDataList_RemoveSavedMovementData(_DWORD *this)
 {
-  return BaseExtraList_RemoveExtraByType(this, 0x4Bu);
+  return BaseExtraList_RemoveExtraByType(this, 0x4Bu); /*0x4212e7*/
 }

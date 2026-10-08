@@ -18,11 +18,11 @@
 0x99D5F8: mov     [ebp+var_28], edi
 0x99D5FB: cmp     edi, 40h ; '@'
 0x99D5FE: jge     loc_99D745
-0x99D604: mov     esi, dword_BAAAC0[edi*4]
+0x99D604: mov     esi, dword ptr unk_BAAAC0[edi*4]
 0x99D60B: test    esi, esi
 0x99D60D: jz      loc_99D6D2
 0x99D613: mov     [ebp+var_20], esi
-0x99D616: mov     eax, dword_BAAAC0[edi*4]
+0x99D616: mov     eax, dword ptr unk_BAAAC0[edi*4]
 0x99D61D: add     eax, 500h
 0x99D622: cmp     esi, eax
 0x99D624: jnb     loc_99D6C6
@@ -51,3 +51,56 @@
 0x99D663: inc     dword ptr [esi+8]
 0x99D666: and     [ebp+ms_exc.registration.TryLevel], 0
 0x99D66A: call    __alloc_osfhnd___$LN35
+0x99D691: mov     edi, [ebp+var_28]
+0x99D694: mov     esi, [ebp+var_20]
+0x99D697: push    0Ah
+0x99D699: call    __unlock
+0x99D69E: pop     ecx
+0x99D69F: retn
+0x99D6C6: cmp     [ebp+var_1C], 0FFFFFFFFh
+0x99D6CA: jnz     short loc_99D745
+0x99D6CC: inc     edi
+0x99D6CD: jmp     loc_99D5F8
+0x99D6D2: push    28h ; '('
+0x99D6D4: push    20h ; ' '
+0x99D6D6: call    unknown_libname_74
+0x99D6DB: pop     ecx
+0x99D6DC: pop     ecx
+0x99D6DD: mov     [ebp+var_20], eax
+0x99D6E0: test    eax, eax
+0x99D6E2: jz      short loc_99D745
+0x99D6E4: lea     ecx, ds:0BAAAC0h[edi*4]
+0x99D6EB: mov     [ecx], eax
+0x99D6ED: add     dword ptr ds:0BAAAA0h, 20h ; ' '
+0x99D6F4: mov     edx, [ecx]
+0x99D6F6: add     edx, 500h
+0x99D6FC: cmp     eax, edx
+0x99D6FE: jnb     short loc_99D717
+0x99D700: mov     byte ptr [eax+4], 0
+0x99D704: or      dword ptr [eax], 0FFFFFFFFh
+0x99D707: mov     byte ptr [eax+5], 0Ah
+0x99D70B: and     dword ptr [eax+8], 0
+0x99D70F: add     eax, 28h ; '('
+0x99D712: mov     [ebp+var_20], eax
+0x99D715: jmp     short loc_99D6F4
+0x99D717: shl     edi, 5
+0x99D71A: mov     [ebp+var_1C], edi
+0x99D71D: mov     eax, edi
+0x99D71F: sar     eax, 5
+0x99D722: mov     ecx, edi
+0x99D724: and     ecx, 1Fh
+0x99D727: imul    ecx, 28h ; '('
+0x99D72A: mov     eax, dword ptr unk_BAAAC0[eax*4]
+0x99D731: mov     byte ptr [eax+ecx+4], 1
+0x99D736: push    edi
+0x99D737: call    ___lock_fhandle
+0x99D73C: pop     ecx
+0x99D73D: test    eax, eax
+0x99D73F: jnz     short loc_99D745
+0x99D741: or      [ebp+var_1C], 0FFFFFFFFh
+0x99D745: mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
+0x99D74C: call    __alloc_osfhnd___$LN31_1
+0x99D75A: push    0Bh
+0x99D75C: call    __unlock
+0x99D761: pop     ecx
+0x99D762: retn

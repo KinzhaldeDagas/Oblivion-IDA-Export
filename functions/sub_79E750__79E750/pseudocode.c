@@ -1,5 +1,9 @@
-_DWORD *__cdecl sub_79E750(char *a1, char *a2, _DWORD *a3)
+// OBLIVION AUTHORITY (2026-08-30): Adapter for backward ownership-moving of inner vector<float> elements.
+OB_stVectorFloat_010201A0 *__cdecl OB_stVector_stVectorFloat_MoveAssignRangeBackwardThunk_010201A0(
+        OB_stVectorFloat_010201A0 *first,
+        OB_stVectorFloat_010201A0 *last,
+        OB_stVectorFloat_010201A0 *destinationEnd)
 {
-  sub_79C080(a1, a2, a3);
-  return &a3[0xFFFFFFFC * ((a2 - a1) >> 4)];
+  OB_stVector_stVectorFloat_MoveAssignRangeBackward_010201A0(first, last, destinationEnd); /*0x79e777*/
+  return &destinationEnd[-(last - first)]; /*0x79e78f*/
 }

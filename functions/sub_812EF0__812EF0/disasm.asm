@@ -1,4 +1,4 @@
-0x812EF0: mov     eax, [esp+arg_0]
+0x812EF0: mov     eax, [esp+faceIndex]; Orient the BSCubeMapCamera for one of six cube faces using the native axis vectors at 0x00B258D0..0x00B258F0.
 0x812EF4: sub     esp, 84h
 0x812EFA: cmp     eax, 5; switch 6 cases
 0x812EFD: ja      def_812F03
@@ -54,7 +54,7 @@
 0x812FD9: add     esp, 84h
 0x812FDF: retn    4
 0x812FE2: fld     dword ptr [ecx+88h]; jumptable 00812F03 case 2
-0x812FE8: push    offset dword_B258E8
+0x812FE8: push    offset rhs
 0x812FED: fsub    dword ptr ds:0B258DCh
 0x812FF3: lea     eax, [esp+88h+var_48]
 0x812FF7: push    eax

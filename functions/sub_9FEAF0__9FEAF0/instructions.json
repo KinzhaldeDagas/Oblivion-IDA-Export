@@ -1,19 +1,19 @@
 [
   {
     "ea": "0x9FEAF0",
-    "line": "push    offset CommandCreatureEffect_Make",
+    "line": "push    offset CommandCreatureEffect_Make; Verified (Oblivion): ActiveEffect_Register_COCR_Factory passes FourCC COCR (0x52434F43) and CommandCreatureEffect_Make to ActiveEffect_Base_AddCreationFunc, adding this code-to-factory mapping to NiTMap_AECreatorFuncs.",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x9FEAF5",
-    "line": "push    52434F43h",
+    "line": "push    52434F43h; effectCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x9FEAFA",
-    "line": "call    ActiveEffect_Base_AddCreationFunc",
+    "line": "call    ActiveEffect_Base_AddCreationFunc; Verified (Oblivion): inserts an effectCode/factory pair into NiTMap_AECreatorFuncs. The 23 ActiveEffect_Register_* wrappers call this function, but their runtime invocation path is not established by current xrefs/initializer table evidence.",
     "mnemonic": "call",
     "size": 5
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x9FEB02",
-    "line": "mov     byte_B3C0A7, al",
+    "line": "mov     byte ptr unk_B3C0A7, al",
     "mnemonic": "mov",
     "size": 5
   },

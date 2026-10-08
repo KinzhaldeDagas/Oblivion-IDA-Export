@@ -47,7 +47,7 @@
 0x593D60: mov     eax, [ebp+4]
 0x593D63: mov     esi, [eax+4]
 0x593D66: push    eax
-0x593D67: call    FormHeapFree
+0x593D67: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x593D6C: add     esp, 4
 0x593D6F: test    esi, esi
 0x593D71: mov     [ebp+4], esi
@@ -172,12 +172,12 @@
 0x593ED9: call    Actor_GetBaseCalcAVi
 0x593EDE: push    eax
 0x593EDF: call    Magic_GetWortcraftMaxEffects
-0x593EE4: mov     ecx, ds:0B333C4h
+0x593EE4: mov     ecx, ds:0B333C4h; this
 0x593EEA: add     esp, 4
-0x593EED: push    13h
+0x593EED: push    13h; actorValue
 0x593EEF: mov     [esp+0A0h+var_84], eax
 0x593EF3: mov     [esp+0A0h+var_80], 0
-0x593EFB: call    Actor_GetSkillMasteryLevel
+0x593EFB: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x593F00: cmp     eax, 4
 0x593F03: jl      loc_593F94
 0x593F09: cmp     [esp+9Ch+var_58], 1
@@ -924,10 +924,10 @@
 0x59490B: add     esp, 4
 0x59490E: fild    [esp+9Ch+var_88]
 0x594912: fstp    [esp+9Ch+var_84]
-0x594916: mov     ecx, ds:0B333C4h
-0x59491C: push    13h
+0x594916: mov     ecx, ds:0B333C4h; this
+0x59491C: push    13h; actorValue
 0x59491E: xor     esi, esi
-0x594920: call    Actor_GetLuckModifiedBaseAV
+0x594920: call    Actor_GetLuckModifiedBaseAV; AVU decode: AlchemyMenu_CalcPotion effective Alchemy entry. ECX is player actor, pushed arg is AV 0x13 Alchemy. Vanilla calls Actor_GetLuckModifiedBaseAV, stores ST0 on menu state, then calls Calc_MortarPestleModifiedSkill.
 0x594925: fstp    [esp+9Ch+var_88]
 0x594929: fld     [esp+9Ch+var_88]
 0x59492D: sub     esp, 8
@@ -935,7 +935,7 @@
 0x594936: fstp    [esp+0A4h+a3]; float
 0x59493A: fld     dword ptr [esp+0A4h+var_74]
 0x59493E: fstp    [esp+0A4h+var_A4]; float
-0x594941: call    Calc_MortarPestleModifiedSkill
+0x594941: call    Calc_MortarPestleModifiedSkill; AVU decode: Calc_MortarPestleModifiedSkill(mortarQuality, effectiveAlchemy) returns fPotionMortPestleMult * mortarQuality + effectiveAlchemy.
 0x594946: add     esp, 8
 0x594949: fstp    [esp+9Ch+var_78]
 0x59494D: xor     ebx, ebx
@@ -1064,7 +1064,7 @@
 0x594ACE: add     esp, 24h
 0x594AD1: fld     [esp+9Ch+var_70]
 0x594AD5: fld     st
-0x594AD7: call    Double_To_SInt32
+0x594AD7: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x594ADC: mov     ecx, eax
 0x594ADE: mov     [esp+9Ch+var_88], ecx
 0x594AE2: fisub   [esp+9Ch+var_88]
@@ -1083,7 +1083,7 @@
 0x594B0A: fstp    [esp+9Ch+var_70]
 0x594B0E: fld     [esp+9Ch+var_6C]
 0x594B12: fld     st
-0x594B14: call    Double_To_SInt32
+0x594B14: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x594B19: mov     ecx, eax
 0x594B1B: mov     [esp+9Ch+var_88], ecx
 0x594B1F: fisub   [esp+9Ch+var_88]
@@ -1099,7 +1099,7 @@
 0x594B3B: fild    [esp+9Ch+var_88]
 0x594B3F: fstp    [esp+9Ch+var_6C]
 0x594B43: fld     [esp+9Ch+var_70]
-0x594B47: call    Double_To_SInt32
+0x594B47: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x594B4C: cmp     eax, 1
 0x594B4F: jge     short loc_594B56
 0x594B51: mov     eax, 1
@@ -1107,7 +1107,7 @@
 0x594B57: mov     ecx, edi
 0x594B59: call    EffectItem_SetDuration
 0x594B5E: fld     [esp+9Ch+var_6C]
-0x594B62: call    Double_To_SInt32
+0x594B62: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x594B67: cmp     eax, 1
 0x594B6A: jge     short loc_594B71
 0x594B6C: mov     eax, 1
@@ -1151,15 +1151,15 @@
 0x594BE7: fld     dword ptr ds:0A379B4h
 0x594BED: push    ecx
 0x594BEE: mov     ecx, [ebp+58h]; this
-0x594BF1: fstp    [esp+0A0h+a3]; a3
-0x594BF4: push    0FAFh; a2
-0x594BF9: call    Tile_SetFloat
+0x594BF1: fstp    [esp+0A0h+a3]; value
+0x594BF4: push    0FAFh; propertyCode
+0x594BF9: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x594BFE: jmp     short loc_594C04
 0x594C00: test    ebx, ebx
 0x594C02: jz      short loc_594C34
 0x594C04: fld     [esp+9Ch+var_78]
 0x594C08: fmul    dword ptr ds:0B37A48h
-0x594C0E: call    Double_To_SInt32
+0x594C0E: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x594C13: mov     edx, [ebp+94h]
 0x594C19: mov     [edx+78h], eax
 0x594C1C: mov     eax, [ebp+94h]
@@ -1180,9 +1180,9 @@
 0x594C5C: fld1
 0x594C5E: push    ecx
 0x594C5F: mov     ecx, [ebp+58h]; this
-0x594C62: fstp    [esp+0A0h+a3]; a3
-0x594C65: push    0FAFh; a2
-0x594C6A: call    Tile_SetFloat
+0x594C62: fstp    [esp+0A0h+a3]; value
+0x594C65: push    0FAFh; propertyCode
+0x594C6A: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x594C6F: mov     ecx, dword ptr [esp+9Ch+var_C]
 0x594C76: mov     large fs:0, ecx
 0x594C7D: pop     ecx
@@ -1195,3 +1195,69 @@
 0x594C88: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x594C8D: add     esp, 88h
 0x594C93: retn
+0x9BFD90: mov     eax, [ebp-88h]
+0x9BFD96: push    eax
+0x9BFD97: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BFD9C: pop     ecx
+0x9BFD9D: retn
+0x9BFD9E: mov     eax, [ebp-74h]
+0x9BFDA1: push    eax
+0x9BFDA2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BFDA7: pop     ecx
+0x9BFDA8: retn
+0x9BFDA9: mov     eax, [ebp-74h]
+0x9BFDAC: push    eax
+0x9BFDAD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BFDB2: pop     ecx
+0x9BFDB3: retn
+0x9BFDB4: mov     eax, [ebp-74h]
+0x9BFDB7: push    eax
+0x9BFDB8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BFDBD: pop     ecx
+0x9BFDBE: retn
+0x9BFDBF: mov     eax, [ebp-74h]
+0x9BFDC2: push    eax
+0x9BFDC3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BFDC8: pop     ecx
+0x9BFDC9: retn
+0x9BFDCA: mov     eax, [ebp-74h]
+0x9BFDCD: push    eax
+0x9BFDCE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BFDD3: pop     ecx
+0x9BFDD4: retn
+0x9BFDD5: mov     eax, [ebp-74h]
+0x9BFDD8: push    eax
+0x9BFDD9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BFDDE: pop     ecx
+0x9BFDDF: retn
+0x9BFDE0: mov     eax, [ebp-74h]
+0x9BFDE3: push    eax
+0x9BFDE4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BFDE9: pop     ecx
+0x9BFDEA: retn
+0x9BFDEB: mov     eax, [ebp-88h]
+0x9BFDF1: push    eax
+0x9BFDF2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BFDF7: pop     ecx
+0x9BFDF8: retn
+0x9BFDF9: mov     eax, [ebp-78h]
+0x9BFDFC: push    eax
+0x9BFDFD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BFE02: pop     ecx
+0x9BFE03: retn
+0x9BFE04: mov     eax, [ebp-74h]
+0x9BFE07: push    eax
+0x9BFE08: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BFE0D: pop     ecx
+0x9BFE0E: retn
+0x9BFE0F: mov     edx, [esp+arg_4]
+0x9BFE13: lea     eax, [edx-8Ch]
+0x9BFE19: mov     ecx, [edx-90h]
+0x9BFE1F: xor     ecx, eax
+0x9BFE21: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BFE26: add     eax, 10h
+0x9BFE29: mov     ecx, [edx-4]
+0x9BFE2C: xor     ecx, eax
+0x9BFE2E: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BFE33: mov     eax, offset stru_AE9194
+0x9BFE38: jmp     ___CxxFrameHandler3

@@ -46,20 +46,20 @@
 0x6C948D: push    eax; void *
 0x6C948E: call    $LN21
 0x6C9493: push    esi
-0x6C9494: call    FormHeapFree
+0x6C9494: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6C9499: add     esp, 4
 0x6C949C: mov     eax, [ebx+18h]
 0x6C949F: test    eax, eax
 0x6C94A1: jz      short loc_6C94C0
 0x6C94A3: mov     edx, [eax-4]
 0x6C94A6: lea     esi, [eax-4]
-0x6C94A9: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x6C94A9: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x6C94AE: push    edx; int
 0x6C94AF: push    10h; unsigned int
 0x6C94B1: push    eax; void *
 0x6C94B2: call    $LN21
 0x6C94B7: push    esi
-0x6C94B8: call    FormHeapFree
+0x6C94B8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6C94BD: add     esp, 4
 0x6C94C0: mov     eax, [esp+10h+arg_4]
 0x6C94C4: mov     ecx, [esp+10h+var_4]

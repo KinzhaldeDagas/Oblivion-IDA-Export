@@ -33,20 +33,19 @@
 0x45D1DC: push    ecx
 0x45D1DD: fstp    [esp+14h+a2]; a2
 0x45D1E0: mov     ecx, eax; this
-0x45D1E2: call    NiAVObject_UpdateNiAVObject
-0x45D1E7: mov     ecx, esi
-0x45D1E9: call    sub_60BE90
+0x45D1E2: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
+0x45D1E7: mov     ecx, esi; this
+0x45D1E9: call    ArrowProjectile_ResolveCollisionState; Validates projectile collision data and dispatches persisted collision state 0..4 to the corresponding reconstruction helper. Missing node collision data is reported and the stale state record is freed.
 0x45D1EE: mov     ebx, [ebx+4]
 0x45D1F1: test    ebx, ebx
 0x45D1F3: jnz     short loc_45D1A0
 0x45D1F5: cmp     dword ptr [edi+4], 0
 0x45D1F9: jz      short loc_45D216
 0x45D1FB: jmp     short loc_45D200
-0x45D1FD: align 10h
 0x45D200: mov     eax, [edi+4]
 0x45D203: mov     esi, [eax+4]
 0x45D206: push    eax
-0x45D207: call    FormHeapFree
+0x45D207: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x45D20C: add     esp, 4
 0x45D20F: test    esi, esi
 0x45D211: mov     [edi+4], esi

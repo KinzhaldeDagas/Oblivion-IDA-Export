@@ -1,197 +1,195 @@
-unsigned int __stdcall sub_4535A0(_DWORD *a1, unsigned int a2)
+// Verified: starts with created-form flag adjustment, then normalizes flags by runtime type/state. For TESObjectREFR it checks inventory/process/package/death/persistence and location; bit31 is set when reference location differs from its starting location. For TESObjectCELL it validates light/terrain-related flags and classifies exterior grid coordinates. Callers include UnloadForm, ResetFormForLoad, save/load consistency passes. Do not assign names to remaining individual bits without further use tracing.
+unsigned int __stdcall SaveLoad_NormalizeFormChangeFlags(TESForm *form, unsigned int changeFlags)
 {
-  unsigned int v3; // ebx
-  PlayerCharacter *v4; // esi
-  TESObjectCELL *v5; // eax
-  TESObjectCELL *v6; // edi
-  unsigned int v7; // ebx
+  unsigned int v2; // ebx
+  PlayerCharacter *v3; // esi
+  ExtraDataList *v4; // eax
+  TESObjectCELL *v5; // edi
+  unsigned int v6; // ebx
   int XCoordinate; // esi
   int YCoordinate; // eax
-  unsigned int v11; // ebx
-  Actor *v12; // eax
-  Actor *v13; // edi
+  unsigned int v10; // ebx
+  Actor *v11; // eax
+  Actor *v12; // edi
   LowProcess *process; // ecx
-  LowProcess *v15; // eax
+  LowProcess *v14; // eax
   int editorPackage; // eax
-  TESPackage *v17; // eax
-  NiDX9TextureData *v18; // eax
-  int v19; // ebx
-  PlayerCharacter *v20; // edi
-  TESObjectCELL *v21; // ebp
-  TESWorldSpace *v22; // edi
-  TESObjectCELL *ParentCell; // eax
+  TESPackage *CurrentPackage; // eax
+  DialoguePackageRuntimeView *v17; // eax
+  int v18; // ebx
+  PlayerCharacter *v19; // edi
+  int v20; // ebp
+  TESWorldSpace *v21; // edi
+  TESObjectCELL *DwordAtOffset40; // eax
   TESWorldSpace *WorldSpace; // ecx
   TESObjectCELL *CellAtCellCoord; // eax
-  float *v26; // eax
-  float v27; // ecx
-  float v28; // edx
-  int v29; // eax
-  bool v30; // zf
-  float v31; // [esp+Ch] [ebp-18h] BYREF
-  float v32; // [esp+10h] [ebp-14h]
-  int v33; // [esp+14h] [ebp-10h]
-  char v34[12]; // [esp+18h] [ebp-Ch] BYREF
-  int v35; // [esp+28h] [ebp+4h]
-  int v36; // [esp+2Ch] [ebp+8h]
+  float *v25; // eax
+  float v26; // ecx
+  float v27; // edx
+  int v28; // eax
+  bool v29; // zf
+  float v30; // [esp+Ch] [ebp-18h] BYREF
+  float v31; // [esp+10h] [ebp-14h]
+  int v32; // [esp+14h] [ebp-10h]
+  char v33[12]; // [esp+18h] [ebp-Ch] BYREF
+  int forma; // [esp+28h] [ebp+4h]
+  signed int flags; // [esp+2Ch] [ebp+8h]
 
-  v3 = sub_453530(a1, a2);
-  v4 = (PlayerCharacter *)OblivionDynamicCast(
-                            a1,
+  v2 = SaveLoad_AdjustCreatedFormChangeFlags(form, changeFlags); /*0x4535c4*/
+  v3 = (PlayerCharacter *)OblivionDynamicCast( /*0x4535da*/
+                            form,
                             0,
                             (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                             (struct TypeDescriptor *)&TESObjectREFR `RTTI Type Descriptor',
                             0);
-  v5 = (TESObjectCELL *)OblivionDynamicCast(
-                          a1,
+  v4 = (ExtraDataList *)OblivionDynamicCast( /*0x4535dc*/
+                          form,
                           0,
                           (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                           &TESObjectCELL `RTTI Type Descriptor',
                           0);
-  v6 = v5;
-  if ( !v5 )
+  v5 = (TESObjectCELL *)v4; /*0x4535e1*/
+  if ( !v4 ) /*0x4535e8*/
   {
-    if ( !v4 )
-      return v3;
-    v11 = v3 & 0xFFFFF7FF;
-    if ( (v11 & 0x8000000) != 0
-      && (v4 == (PlayerCharacter *)0xFFFFFFBC
-       || !ExtraDataList_GetContainerChanges(&v4->super.super.super.super.baseExtraList)) )
+    if ( !v3 ) /*0x453683*/
+      return v2; /*0x4538fd*/
+    v10 = v2 & 0xFFFFF7FF; /*0x453689*/
+    if ( (v10 & 0x8000000) != 0 /*0x45369e*/
+      && (v3 == (PlayerCharacter *)0xFFFFFFBC
+       || !ExtraDataList_GetContainerChanges(&v3->super.super.super.super.baseExtraList)) )
     {
-      v11 &= ~0x8000000u;
+      v10 &= ~0x8000000u; /*0x4536a7*/
     }
-    v12 = (Actor *)OblivionDynamicCast(
-                     v4,
+    v11 = (Actor *)OblivionDynamicCast( /*0x4536bc*/
+                     v3,
                      0,
                      (struct _s_RTTICompleteObjectLocator *)&TESObjectREFR `RTTI Type Descriptor',
                      &Actor `RTTI Type Descriptor',
                      0);
-    v13 = v12;
-    if ( v12 )
+    v12 = v11; /*0x4536c1*/
+    if ( v11 ) /*0x4536c8*/
     {
-      process = v12->members.super.process;
-      if ( (v11 & 0x80000) != 0 )
+      process = v11->members.super.process; /*0x4536d4*/
+      if ( (v10 & 0x80000) != 0 ) /*0x4536d7*/
       {
-        if ( !process || !((int (__thiscall *)(LowProcess *))process->Unk_5C)(process) )
-          v11 &= ~0x80000u;
+        if ( !process || !((int (__thiscall *)(LowProcess *))process->Unk_5C)(process) ) /*0x4536e5*/
+          v10 &= ~0x80000u; /*0x4536eb*/
       }
-      else if ( process )
+      else if ( process ) /*0x4536f5*/
       {
-        if ( ((int (__thiscall *)(LowProcess *))process->Unk_5C)(process) )
-          v11 |= 0x80000u;
+        if ( ((int (__thiscall *)(LowProcess *))process->Unk_5C)(process) ) /*0x4536ff*/
+          v10 |= 0x80000u; /*0x453705*/
       }
-      v15 = v13->members.super.process;
-      v11 &= 0xFFFCFFFF;
-      if ( v15 )
+      v14 = v12->members.super.process; /*0x45370b*/
+      v10 &= 0xFFFCFFFF; /*0x45370e*/
+      if ( v14 ) /*0x453716*/
       {
-        editorPackage = (int)v15->editorPackage;
-        if ( editorPackage )
-          v11 |= sub_5E8D90(editorPackage);
+        editorPackage = (int)v14->editorPackage; /*0x453718*/
+        if ( editorPackage ) /*0x45371d*/
+          v10 |= sub_5E8D90(editorPackage); /*0x453727*/
       }
-      if ( (v11 & 0x20000) != 0 )
+      if ( (v10 & 0x20000) != 0 ) /*0x45372f*/
       {
-        v17 = sub_5E0380(v13);
-        v18 = (NiDX9TextureData *)OblivionDynamicCast(
-                                    v17,
-                                    0,
-                                    (struct _s_RTTICompleteObjectLocator *)&TESPackage `RTTI Type Descriptor',
-                                    &DialoguePackage `RTTI Type Descriptor',
-                                    0);
-        if ( v18 )
+        CurrentPackage = Actor::GetCurrentPackage(v12); /*0x453741*/
+        v17 = (DialoguePackageRuntimeView *)OblivionDynamicCast( /*0x453747*/
+                                              CurrentPackage,
+                                              0,
+                                              (struct _s_RTTICompleteObjectLocator *)&TESPackage `RTTI Type Descriptor',
+                                              &DialoguePackage `RTTI Type Descriptor',
+                                              0);
+        if ( v17 ) /*0x453751*/
         {
-          if ( (Actor *)NiDX9TextureData::GetLevels(v18) == v13 )
-            v11 &= ~0x10000u;
+          if ( DialoguePackage::GetSpeaker(v17) == v12 ) /*0x45375c*/
+            v10 &= ~0x10000u; /*0x453766*/
           else
-            v11 |= 0x10000u;
+            v10 |= 0x10000u; /*0x45375e*/
         }
       }
-      if ( sub_5F0310(v13, v11) )
+      if ( sub_5F0310(v12, v10) ) /*0x45376f*/
       {
-        v11 |= 8u;
+        v10 |= 8u; /*0x453778*/
       }
-      else if ( !v13->vtbl->super.super.IsDead((TESObjectREFR *)v13, 0) )
+      else if ( !v12->vtbl->super.super.IsDead((TESObjectREFR *)v12, 0) ) /*0x453789*/
       {
-        v11 &= ~8u;
+        v10 &= ~8u; /*0x45378f*/
       }
     }
-    v19 = v11 & 0x7FFFFFFF;
-    if ( (v19 & 2) != 0
-      || (v19 & 0xC) == 0
-      || TESObjectREFR_IsPersistent_((TESObjectREFR *)v4)
-      || v4 == TESDataHandler_g_PlayerRef )
+    v18 = v10 & 0x7FFFFFFF; /*0x453792*/
+    if ( (v18 & 2) != 0 || (v18 & 0xC) == 0 || TESObjectREFR_IsPersistent((TESObjectREFR *)v3) || v3 == reference ) /*0x4537bf*/
     {
 LABEL_59:
-      v3 = v19 & 0xFF7FFFFF;
-      if ( sub_4D7F40(v4) )
+      v2 = v18 & 0xFF7FFFFF; /*0x4538dc*/
+      if ( sub_4D7F40((int *)v3) ) /*0x4538e4*/
       {
-        if ( v4 != TESDataHandler_g_PlayerRef )
-          v3 |= (unsigned int)&loc_800000;
+        if ( v3 != reference ) /*0x4538f3*/
+          v2 |= (unsigned int)&loc_800000; /*0x4538f5*/
       }
-      return v3;
+      return v2; /*0x4538f5*/
     }
-    v20 = 0;
-    if ( v4->vtbl->super.super.super.IsActor((TESObjectREFR *)v4) )
+    v19 = 0; /*0x4537d0*/
+    if ( v3->vtbl->super.super.super.IsActor((TESObjectREFR *)v3) ) /*0x4537d2*/
     {
-      v21 = (TESObjectCELL *)sub_5E1F60(v4);
-      v22 = (TESWorldSpace *)sub_5E1F40((Actor *)v4);
-      if ( v22 || v21 )
+      v20 = sub_5E1F60(v3); /*0x4537e1*/
+      v21 = (TESWorldSpace *)sub_5E1F40((Actor *)v3); /*0x4537e8*/
+      if ( v21 || v20 ) /*0x4537f0*/
       {
-        v26 = (float *)((int (__thiscall *)(PlayerCharacter *, char *))v4->vtbl->super.super.super.GetStartingPos)(
-                         v4,
-                         v34);
-        v27 = *v26;
-        v28 = v26[1];
-        v29 = *((_DWORD *)v26 + 2);
-        v31 = v27;
-        v32 = v28;
-        v33 = v29;
-        if ( v21 )
+        v25 = (float *)((int (__thiscall *)(PlayerCharacter *, char *))v3->vtbl->super.super.super.GetStartingPos)( /*0x45386d*/
+                         v3,
+                         v33);
+        v26 = *v25; /*0x453871*/
+        v27 = v25[1]; /*0x453873*/
+        v28 = *((_DWORD *)v25 + 2); /*0x453876*/
+        v30 = v26; /*0x453879*/
+        v31 = v27; /*0x45387d*/
+        v32 = v28; /*0x453881*/
+        if ( v20 ) /*0x453885*/
         {
-          v30 = v21 == TESObjectREFR_GetParentCell((TESObjectREFR *)v4);
-          goto LABEL_57;
+          v29 = v20 == Shared_GetDwordAtOffset40(v3); /*0x45388e*/
+          goto LABEL_57; /*0x453890*/
         }
-        if ( !v22 )
-          goto LABEL_59;
-        if ( v22 != (TESWorldSpace *)TESObjectREFR_GetWorldSpace((TESObjectREFR *)v4) )
+        if ( !v21 ) /*0x453894*/
+          goto LABEL_59; /*0x453894*/
+        if ( v21 != TESObjectREFR_GetWorldSpace((TESObjectREFR *)v3) ) /*0x45389f*/
         {
 LABEL_58:
-          v19 |= 0x80000000;
-          goto LABEL_59;
+          v18 |= 0x80000000; /*0x4538d5*/
+          goto LABEL_59; /*0x4538d5*/
         }
-        CellAtCellCoord = (TESObjectCELL *)TESWorldSpace::GetCellAtCellCoord(v22, (int)v31 >> 0xC, (int)v32 >> 0xC);
+        CellAtCellCoord = TESWorldSpace::GetCellAtCellCoord(v21, (int)v30 >> 0xC, (int)v31 >> 0xC); /*0x4538c3*/
 LABEL_56:
-        v30 = CellAtCellCoord == TESObjectREFR_GetParentCell((TESObjectREFR *)v4);
+        v29 = CellAtCellCoord == (TESObjectCELL *)Shared_GetDwordAtOffset40(v3); /*0x4538c8*/
 LABEL_57:
-        if ( v30 )
-          goto LABEL_59;
-        goto LABEL_58;
+        if ( v29 ) /*0x4538d3*/
+          goto LABEL_59; /*0x4538d3*/
+        goto LABEL_58; /*0x4538d3*/
       }
-      v20 = v4;
+      v19 = v3; /*0x4537f2*/
     }
-    if ( !TESObjectREFR_GetParentCell((TESObjectREFR *)v4) )
-      goto LABEL_59;
-    ParentCell = TESObjectREFR_GetParentCell((TESObjectREFR *)v4);
-    if ( TESObjectCELL_IsInterior(ParentCell) )
-      goto LABEL_59;
-    if ( v20 )
-      PrintError("Actor does not have an editor location.  This should never happen.");
-    v4->vtbl->super.super.super.GetStartingPos((TESObjectREFR *)v4, &v31);
-    v35 = (int)v31;
-    v36 = (int)v32;
-    WorldSpace = (TESWorldSpace *)TESObjectREFR_GetWorldSpace((TESObjectREFR *)v4);
-    CellAtCellCoord = (TESObjectCELL *)TESWorldSpace::GetCellAtCellCoord(WorldSpace, v35 >> 0xC, v36 >> 0xC);
-    goto LABEL_56;
+    if ( !Shared_GetDwordAtOffset40(v3) ) /*0x4537f6*/
+      goto LABEL_59; /*0x4537f6*/
+    DwordAtOffset40 = (TESObjectCELL *)Shared_GetDwordAtOffset40(v3); /*0x453805*/
+    if ( TESObjectCELL_IsInterior(DwordAtOffset40) ) /*0x45380c*/
+      goto LABEL_59; /*0x453813*/
+    if ( v19 ) /*0x45381b*/
+      PrintError("Actor does not have an editor location.  This should never happen."); /*0x453822*/
+    v3->vtbl->super.super.super.GetStartingPos((TESObjectREFR *)v3, &v30); /*0x453839*/
+    forma = (int)v30; /*0x45383f*/
+    flags = (int)v31; /*0x453847*/
+    WorldSpace = TESObjectREFR_GetWorldSpace((TESObjectREFR *)v3); /*0x45385a*/
+    CellAtCellCoord = TESWorldSpace::GetCellAtCellCoord(WorldSpace, forma >> 0xC, flags >> 0xC); /*0x45385c*/
+    goto LABEL_56; /*0x45385c*/
   }
-  if ( (v3 & 0x10000000) != 0 && !sub_4CCED0(v5) )
-    v3 &= ~0x10000000u;
-  if ( (v3 & 0x1000000) != 0 && !sub_4AF170(v6) )
-    v3 &= ~0x1000000u;
-  if ( TESObjectCELL_IsInterior(v6) )
-    return v3;
-  v7 = v3 & 0xF9FFFFFF;
-  XCoordinate = TESObjectCELL_GetXCoordinate(v6);
-  YCoordinate = TESObjectCELL_GetYCoordinate(v6);
-  if ( (unsigned int)(XCoordinate + 0x80) > 0xFF || (unsigned int)(YCoordinate + 0x80) > 0xFF )
-    return v7 | 0x2000000;
+  if ( (v2 & 0x10000000) != 0 && !sub_4CCED0(v4) ) /*0x4535f8*/
+    v2 &= ~0x10000000u; /*0x453601*/
+  if ( (v2 & 0x1000000) != 0 && !sub_4AF170(v5) ) /*0x453611*/
+    v2 &= ~0x1000000u; /*0x45361a*/
+  if ( TESObjectCELL_IsInterior(v5) ) /*0x453622*/
+    return v2; /*0x453629*/
+  v6 = v2 & 0xF9FFFFFF; /*0x453631*/
+  XCoordinate = TESObjectCELL_GetXCoordinate(v5); /*0x45363e*/
+  YCoordinate = TESObjectCELL_GetYCoordinate(v5); /*0x453640*/
+  if ( (unsigned int)(XCoordinate + 0x80) > 0xFF || (unsigned int)(YCoordinate + 0x80) > 0xFF ) /*0x45365d*/
+    return v6 | 0x2000000; /*0x453678*/
   else
-    return v7 | 0x4000000;
+    return v6 | 0x4000000; /*0x453667*/
 }

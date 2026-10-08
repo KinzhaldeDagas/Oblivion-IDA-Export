@@ -1,9 +1,9 @@
-0x722292: lea     ecx, [esp+arg_44]; jumptable 00721BEB default case
-0x722296: push    ecx
-0x722297: lea     edx, [esp+4+arg_108]
-0x72229E: push    edx
-0x72229F: mov     ecx, ebp
-0x7222A1: call    NiMAtrix33_Multiply
+0x722292: lea     ecx, [esp+right]; jumptable 00721BEB default case
+0x722296: push    ecx; right
+0x722297: lea     edx, [esp+4+out]
+0x72229E: push    edx; out
+0x72229F: mov     ecx, ebp; this
+0x7222A1: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x7222A6: mov     edi, ebp
 0x7222A8: mov     ecx, 9
 0x7222AD: mov     esi, eax

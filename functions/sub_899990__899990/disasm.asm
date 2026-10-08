@@ -11,7 +11,6 @@
 0x8999A7: jle     short loc_8999BD
 0x8999A9: mov     edx, [esi]
 0x8999AB: jmp     short loc_8999B0
-0x8999AD: align 10h
 0x8999B0: cmp     dword ptr [edx], 0
 0x8999B3: jz      short loc_899A12
 0x8999B5: inc     eax

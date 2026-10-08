@@ -1,186 +1,193 @@
-int __usercall sub_52F830@<eax>(
-        double a1@<st1>,
-        double a2@<st0>,
-        Actor *a3,
-        TESObjectREFR *a4,
-        BSSimpleList_VoidPtr *a5,
-        TESTopic *a6)
+// OFE ambient routes: constructor call 6B743D -> CreateConversation. Automatic null startingTopic means HELLO/D2; explicit nonnull start bypasses routing. A preselected replacement can be consumed once at native selector call 52F7D3, preserving native subsequent construction/result execution without reevaluating random conditions. CreateDialogueItem calls 52F902/52F91B/52F946 can route ambient D7; previous-topic identity must follow actual last DialogueItem.topic at +0x10 when using custom source topics.
+int __cdecl TESTopic::CreateConversation(
+        Actor *speaker,
+        TESObjectREFR *target,
+        ConversationView *conversation,
+        TESTopic *startingTopic)
 {
-  BSSimpleList_VoidPtr *v10; // ebp
+  ConversationView *v4; // ebp
   int result; // eax
-  unsigned int *data; // esi
-  BSSimpleList_VoidPtr::NodeVoid *next; // eax
-  Actor *v14; // esi
-  TESTopic *v15; // ebx
-  Unk1C *DialogueInfo; // edi
-  TESForm *form; // ecx
-  TESFormVtbl *vtbl; // esi
-  void (__thiscall **p_CopyFromBase)(BaseFormComponent *, BaseFormComponent *); // esi
-  int v20; // ebp
-  void (__thiscall **i)(BaseFormComponent *, BaseFormComponent *); // eax
-  int v22; // edx
+  DialogueItemView *firstItem; // esi
+  DialogueItemNode *nextItemNode; // eax
+  Actor *currentSpeakerForItem; // esi
+  TESTopic *currentTopic; // ebx
+  DialogueItemView *DialogueItem; // edi
+  OblivionTopicInfo *info; // ecx
+  TESTopicLinksDecoded *links; // esi
+  tListTopic *p_linkedTo; // esi
+  int v14; // ebp
+  tListTopic *i; // eax
+  int v16; // edx
   int j; // ecx
-  TESForm *v24; // ecx
-  bool v25; // zf
-  signed int v26; // eax
-  TESObjectREFR *v27; // eax
-  BSSimpleList_VoidPtr *v28; // eax
-  int v29; // ebx
-  Unk1C *v30; // esi
-  UInt32 unk018; // edi
-  _DWORD *v32; // eax
-  const char *v33; // eax
-  const char *v34; // eax
-  const char *v35; // [esp-14h] [ebp-24h]
-  TESObjectREFR *v36; // [esp+4h] [ebp-Ch]
-  int v37; // [esp+8h] [ebp-8h]
-  int v38; // [esp+Ch] [ebp-4h]
-  BSSimpleList_VoidPtr *v39; // [esp+1Ch] [ebp+Ch]
+  OblivionTopicInfo *v18; // ecx
+  bool v19; // zf
+  signed int v20; // eax
+  TESObjectREFR *v21; // eax
+  void *v22; // eax
+  int v23; // ebx
+  DialogueListCursorView *v24; // esi
+  void *v25; // edi
+  _DWORD *Current; // eax
+  const char *v27; // eax
+  const char *v28; // eax
+  const char *v29; // [esp-14h] [ebp-24h]
+  TESObjectREFR *routedTarget; // [esp+4h] [ebp-Ch]
+  TESTopic *previousTopic; // [esp+8h] [ebp-8h]
+  Actor *routedSpeaker; // [esp+Ch] [ebp-4h]
+  #9840 *conversationa; // [esp+1Ch] [ebp+Ch]
 
-  v10 = a5;
-  if ( !a5 )
-    return 0;
-  while ( !BSSimpleList_IsEmpty(a5) )
+  v4 = conversation; /*0x52f834*/
+  if ( !conversation ) /*0x52f83a*/
+    return 0; /*0x52f83c*/
+  while ( !BSSimpleList_IsEmpty((BSSimpleList_VoidPtr *)conversation) ) /*0x52f84d*/
   {
-    data = (unsigned int *)a5->firstNode.data;
-    if ( a5->firstNode.data )
+    firstItem = conversation->firstItem; /*0x52f84f*/
+    if ( conversation->firstItem ) /*0x52f84f*/
     {
-      sub_6B81D0((unsigned int *)a5->firstNode.data);
-      FormHeapFree((unsigned int)data);
+      DialogueItem::Destroy(conversation->firstItem); /*0x52f858*/
+      FormHeapFree((unsigned int)firstItem); /*0x52f85e*/
     }
-    next = a5->firstNode.next;
-    if ( next )
+    nextItemNode = conversation->nextItemNode; /*0x52f866*/
+    if ( nextItemNode ) /*0x52f86b*/
     {
-      a5->firstNode.next = next->next;
-      a5->firstNode.data = next->data;
-      FormHeapFree((unsigned int)next);
+      conversation->nextItemNode = nextItemNode->next; /*0x52f870*/
+      conversation->firstItem = nextItemNode->item; /*0x52f876*/
+      FormHeapFree((unsigned int)nextItemNode); /*0x52f879*/
     }
     else
     {
-      a5->firstNode.data = 0;
+      conversation->firstItem = 0; /*0x52f883*/
     }
   }
-  v14 = a3;
-  if ( !a3 || !a4 )
-    return 0;
-  v15 = a6;
-  v38 = (int)a3;
-  v36 = a4;
-  v37 = 0;
-  if ( a6 || (v15 = (TESTopic *)sub_447440((void *)0xD2)) != 0 )
+  currentSpeakerForItem = speaker; /*0x52f88c*/
+  if ( !speaker || !target ) /*0x52f89e*/
+    return 0; /*0x52fad7*/
+  currentTopic = startingTopic; /*0x52f8a5*/
+  routedSpeaker = speaker; /*0x52f8ac*/
+  routedTarget = target; /*0x52f8b0*/
+  previousTopic = 0; /*0x52f8b4*/
+  if ( startingTopic || (currentTopic = LookupTopicByFormID(0xD2u)) != 0 ) /*0x52f8d2*/
   {
-    while ( (unsigned int)BSSimpleList_Count(v10) < 0x64 )
+    while ( (unsigned int)BSSimpleList_Count(v4) < 0x64 ) /*0x52f8e6*/
     {
-      DialogueInfo = TESTopic::CreateDialogueInfo(v15, v14, v36, v37, v10);
-      if ( !DialogueInfo )
+      DialogueItem = TESTopic::CreateDialogueItem(currentTopic, currentSpeakerForItem, routedTarget, previousTopic, v4); /*0x52f907*/
+      if ( !DialogueItem ) /*0x52f90b*/
       {
-        DialogueInfo = TESTopic::CreateDialogueInfo(v15, v14, v36, v37, v10);
-        if ( !DialogueInfo )
+        DialogueItem = TESTopic::CreateDialogueItem( /*0x52f920*/
+                         currentTopic,
+                         currentSpeakerForItem,
+                         routedTarget,
+                         previousTopic,
+                         v4);                   // The repeated CreateDialogueItem attempt reevaluates its current topic's conditions. If they include GetRandomPercent (index 77), the retry consumes another RNG value; if they include GetNoRumors, the handler reads Actor::IsNoRumor on the routed condition subject.
+        if ( !DialogueItem ) /*0x52f924*/
         {
-          v15 = (TESTopic *)sub_447440((void *)0xD4);
-          DialogueInfo = TESTopic::CreateDialogueInfo(v15, v14, v36, v37, v10);
-          if ( !DialogueInfo )
-            break;
+          currentTopic = LookupTopicByFormID(0xD4u); /*0x52f940*/
+          DialogueItem = TESTopic::CreateDialogueItem( /*0x52f94b*/
+                           currentTopic,
+                           currentSpeakerForItem,
+                           routedTarget,
+                           previousTopic,
+                           v4);
+          if ( !DialogueItem ) /*0x52f94f*/
+            break; /*0x52f94f*/
         }
       }
-      form = DialogueInfo->form;
-      if ( form )
+      info = DialogueItem->info; /*0x52f955*/
+      if ( info ) /*0x52f95a*/
       {
-        if ( (form[1].member.refID & 0x800) != 0 )
+        if ( (info->flags & 8) != 0 ) /*0x52f965*/
         {
-          sub_531470(form, a1, a2, (int)a3);
-          sub_5308D0((int)DialogueInfo->form);
+          TESTopicInfo::RunResult(info, (TESObjectREFR *)speaker); /*0x52f96c*/
+          TESTopicInfo::AddTopicList(DialogueItem->info); /*0x52f974*/
         }
       }
-      BSSimpleList_PushBack(v10, (int)DialogueInfo);
-      vtbl = DialogueInfo->form[2].vtbl;
-      v37 = (int)v15;
-      v15 = 0;
-      if ( !vtbl )
-        break;
-      p_CopyFromBase = &vtbl->super.CopyFromBase;
-      v20 = 0;
-      for ( i = p_CopyFromBase; i; i = (void (__thiscall **)(BaseFormComponent *, BaseFormComponent *))i[1] )
+      BSSimpleList_PushBack(v4, (int)DialogueItem); /*0x52f97c*/
+      links = DialogueItem->info->links; /*0x52f984*/
+      previousTopic = currentTopic; /*0x52f987*/
+      currentTopic = 0; /*0x52f98b*/
+      if ( !links ) /*0x52f98f*/
+        break; /*0x52f98f*/
+      p_linkedTo = &links->linkedTo; /*0x52f995*/
+      v14 = 0; /*0x52f998*/
+      for ( i = p_linkedTo; i; i = (tListTopic *)i->node.next ) /*0x52f99e*/
       {
-        if ( *i )
-          ++v20;
+        if ( i->node.data ) /*0x52f9a0*/
+          ++v14; /*0x52f9a5*/
       }
-      v22 = v20;
-      if ( v20 )
-        v22 = rand() % v20 + 1;
-      for ( j = 0;
-            j < v22;
-            p_CopyFromBase = (void (__thiscall **)(BaseFormComponent *, BaseFormComponent *))p_CopyFromBase[1] )
+      v16 = v14; /*0x52f9b1*/
+      if ( v14 ) /*0x52f9b3*/
+        v16 = rand() % v14 + 1; /*0x52f9bd*/
+      for ( j = 0; j < v16; p_linkedTo = (tListTopic *)p_linkedTo->node.next ) /*0x52f9c4*/
       {
-        if ( !p_CopyFromBase )
-          break;
-        if ( !p_CopyFromBase[1] && !*p_CopyFromBase )
-          break;
-        v15 = (TESTopic *)*p_CopyFromBase;
-        ++j;
+        if ( !p_linkedTo ) /*0x52f9c8*/
+          break; /*0x52f9c8*/
+        if ( !p_linkedTo->node.next && !p_linkedTo->node.data ) /*0x52f9d1*/
+          break; /*0x52f9d3*/
+        currentTopic = p_linkedTo->node.data; /*0x52f9d5*/
+        ++j; /*0x52f9d7*/
       }
-      v24 = DialogueInfo->form;
-      if ( !LOBYTE(v24[1].member.refID) )
-        goto LABEL_39;
-      if ( LOBYTE(v24[1].member.refID) == 2 )
+      v18 = DialogueItem->info; /*0x52f9e0*/
+      if ( v18->nextSpeaker == TopicInfoNextSpeaker_Target ) /*0x52f9e3*/
+        goto LABEL_39; /*0x52f9e3*/
+      if ( v18->nextSpeaker == TopicInfoNextSpeaker_Random ) /*0x52f9ef*/
       {
-        v26 = rand() & 0x80000001;
-        v25 = v26 == 0;
-        if ( v26 < 0 )
-          v25 = (((_BYTE)v26 - 1) | 0xFFFFFFFE) == 0xFFFFFFFF;
-        if ( v25 )
+        v20 = rand() & 0x80000001; /*0x52f9f6*/
+        v19 = v20 == 0; /*0x52f9f6*/
+        if ( v20 < 0 ) /*0x52f9fb*/
+          v19 = (((_BYTE)v20 - 1) | 0xFFFFFFFE) == 0xFFFFFFFF; /*0x52fa01*/
+        if ( v19 ) /*0x52fa02*/
         {
 LABEL_39:
-          v27 = (TESObjectREFR *)v38;
-          v38 = (int)v36;
-          v36 = v27;
+          v21 = (TESObjectREFR *)routedSpeaker; /*0x52fa04*/
+          routedSpeaker = (Actor *)routedTarget; /*0x52fa0c*/
+          routedTarget = v21; /*0x52fa10*/
         }
       }
-      v10 = a5;
-      if ( !v15 )
-        break;
-      v14 = (Actor *)v38;
+      v4 = conversation; /*0x52fa16*/
+      if ( !currentTopic ) /*0x52fa1a*/
+        break; /*0x52fa1a*/
+      currentSpeakerForItem = routedSpeaker; /*0x52f8e0*/
     }
   }
-  if ( byte_B36508 )
+  if ( unk_B36508 )
   {
-    Interface_ConsolePrint("------NEW CONVERSATION CREATED---------------------");
-    v28 = v10;
-    v29 = 1;
+    Interface_ConsolePrint("------NEW CONVERSATION CREATED---------------------"); /*0x52fa32*/
+    v22 = v4; /*0x52fa3a*/
+    v23 = 1; /*0x52fa3c*/
     while ( 1 )
     {
-      v30 = (Unk1C *)v28->firstNode.data;
-      if ( !v28->firstNode.data )
-        break;
-      v39 = (BSSimpleList_VoidPtr *)v28->firstNode.next;
-      if ( sub_6B7BA0(v30) )
+      v24 = *(DialogueListCursorView **)v22; /*0x52fa47*/
+      if ( !*(_DWORD *)v22 ) /*0x52fa47*/
+        break; /*0x52fa47*/
+      conversationa = *((#9840 **)v22 + 1); /*0x52fa52*/
+      if ( DialogueItem::FirstResponse((DialogueItemView *)v24) )
       {
-        unk018 = v30->unk018;
-        v32 = (_DWORD *)sub_6B7C20(v30);
-        v33 = (const char *)(*(int (__thiscall **)(UInt32, _DWORD, _DWORD))(*(_DWORD *)unk018 + 0xD4))(
-                              unk018,
-                              *v32,
-                              v32[1]);
-        Interface_ConsolePrint("Item %d: %s says '%s'", v29, v33, v35);
+        v25 = v24[2].firstItem; /*0x52fa5f*/
+        Current = DialogueListCursor::GetCurrent(v24); /*0x52fa64*/
+        v27 = (const char *)(*(int (__thiscall **)(void *, _DWORD, _DWORD))(*(_DWORD *)v25 + 0xD4))( /*0x52fa7a*/
+                              v25,
+                              *Current,
+                              Current[1]);
+        Interface_ConsolePrint("Item %d: %s says '%s'", v23, v27, v29);
       }
       else
       {
-        v34 = (const char *)(*(int (__thiscall **)(UInt32))(*(_DWORD *)v30->unk018 + 0xD4))(v30->unk018);
-        Interface_ConsolePrint("Item %d: %s has no response!", v29, v34);
+        v28 = (const char *)(*(int (__thiscall **)(void *))(*(_DWORD *)v24[2].firstItem + 0xD4))(v24[2].firstItem); /*0x52fa9a*/
+        Interface_ConsolePrint("Item %d: %s has no response!", v23, v28);
       }
-      ++v29;
-      if ( !v39 )
-        break;
-      v28 = v39;
+      ++v23; /*0x52faab*/
+      if ( !conversationa ) /*0x52fab3*/
+        break; /*0x52fab3*/
+      v22 = conversationa; /*0x52fa43*/
     }
   }
-  result = 0;
-  do
+  result = 0; /*0x52fab6*/
+  do /*0x52face*/
   {
-    if ( v10->firstNode.data )
-      ++result;
-    v10 = (BSSimpleList_VoidPtr *)v10->firstNode.next;
+    if ( v4->firstItem ) /*0x52fac0*/
+      ++result; /*0x52fac6*/
+    v4 = (ConversationView *)v4->nextItemNode; /*0x52fac9*/
   }
-  while ( v10 );
-  return result;
+  while ( v4 ); /*0x52face*/
+  return result; /*0x52f83e*/
 }

@@ -42,8 +42,8 @@
 0x57B178: add     esp, 14h
 0x57B17B: test    eax, eax
 0x57B17D: jz      short locret_57B18B
-0x57B17F: mov     ecx, [esp+arg_0]
-0x57B183: push    ecx
-0x57B184: mov     ecx, eax
-0x57B186: call    sub_60E0D0
+0x57B17F: mov     ecx, [esp+specialization]
+0x57B183: push    ecx; value
+0x57B184: mov     ecx, eax; this
+0x57B186: call    Shared_SetDwordAtOffset40; In this UI call context, Shared_SetDwordAtOffset40 writes the target object's +0x40 field; the shared setter must not impose a TESClass type here.
 0x57B18B: retn

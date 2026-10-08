@@ -1,23 +1,28 @@
-int __thiscall sub_675BF0(_DWORD *this, int a2, int a3, unsigned int a4)
+// Verified: finds first record matching criminal pointer0C and target pointer08. Guard admits category6; broader caller guarantees Unknown.
+Crime *__thiscall ActorProcessManager_FindCrime(
+        ActorProcessManager *self,
+        Actor *criminal,
+        TESObjectREFR *target,
+        OblivionCrimeType category)
 {
-  int *v4; // ecx
-  int result; // eax
-  int v6; // edx
+  CrimeListNode *v4; // ecx
+  Crime *result; // eax
+  Crime *crime; // edx
 
-  if ( a4 > 6 )
-    return 0;
-  v4 = (int *)*(this + a4 + 0xA);
-  result = 0;
-  while ( v4 )
+  if ( (unsigned int)category > (kCrime_Murder|kCrime_Trespass) ) /*0x675bf7*/
+    return 0; /*0x675c32*/
+  v4 = self->crimeLists[category]; /*0x675bf9*/
+  result = 0; /*0x675bfd*/
+  while ( v4 ) /*0x675c01*/
   {
-    v6 = *v4;
-    if ( !*v4 )
-      break;
-    if ( result )
-      break;
-    v4 = (int *)v4[1];
-    if ( *(_DWORD *)(v6 + 0xC) == a2 && *(_DWORD *)(v6 + 8) == a3 )
-      result = v6;
+    crime = v4->crime; /*0x675c10*/
+    if ( !v4->crime ) /*0x675c10*/
+      break; /*0x675c14*/
+    if ( result ) /*0x675c18*/
+      break; /*0x675c18*/
+    v4 = v4->next; /*0x675c1d*/
+    if ( crime->criminal == criminal && crime->target == target ) /*0x675c25*/
+      result = crime; /*0x675c27*/
   }
-  return result;
+  return result; /*0x675c2f*/
 }

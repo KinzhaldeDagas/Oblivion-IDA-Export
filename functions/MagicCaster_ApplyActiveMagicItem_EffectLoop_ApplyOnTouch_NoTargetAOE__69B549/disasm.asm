@@ -6,7 +6,7 @@
 0x69B55C: test    byte ptr [ecx+40h], 80h
 0x69B560: jz      short MagicCaster_ApplyActiveMagicItem___EffectLoop_DestroyActvEff
 0x69B562: mov     ecx, ebp
-0x69B564: call    EffectItem_GetArea
+0x69B564: call    EffectItem_GetArea; Effective area: returns 0 for EffectSetting NoArea (0x200) or Self range (0); otherwise raw EffectItem+0x8 area.
 0x69B569: test    eax, eax
 0x69B56B: jle     short MagicCaster_ApplyActiveMagicItem___EffectLoop_DestroyActvEff
 0x69B56D: mov     ebp, [esp+arg_14]

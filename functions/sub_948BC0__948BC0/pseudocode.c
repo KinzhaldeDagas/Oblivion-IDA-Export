@@ -1,32 +1,20 @@
-int __cdecl sub_948BC0(int a1)
+void __cdecl sub_948BC0(int a1)
 {
-  int result; // eax
-
-  switch ( *(_DWORD *)(a1 + 0x54) )
+  switch ( *(_DWORD *)(a1 + 0x54) ) /*0x948bd2*/
   {
-    case 1:
-    case 5:
-      result = 0x35;
-      break;
-    case 2:
-    case 7:
-      result = def_948BD2();
-      break;
-    case 3:
-      result = 0x19;
-      break;
-    case 4:
-      result = 0x25;
-      break;
-    case 6:
-      result = 0xC * (*(_DWORD *)(*(_DWORD *)(a1 + 0x50) + 4) + *(_DWORD *)(*(_DWORD *)(a1 + 0x50) + 0x10)) + 0x25;
-      break;
-    case 8:
-    case 9:
-      result = 0x41;
-      break;
+    case 1: /*0x948bd2*/
+    case 3: /*0x948bd2*/
+    case 4: /*0x948bd2*/
+    case 5: /*0x948bd2*/
+    case 6: /*0x948bd2*/
+    case 8: /*0x948bd2*/
+    case 9: /*0x948bd2*/
+      return;
+    case 2: /*0x948bd2*/
+    case 7: /*0x948bd2*/
+      def_948BD2(); /*0x948c06*/
+      break; /*0x948c06*/
     default:
-      JUMPOUT(0x948C0A);
+      JUMPOUT(0x948C0A); /*0x948c0a*/
   }
-  return result;
 }

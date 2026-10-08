@@ -1,6 +1,6 @@
 BOOL __thiscall sub_72FD80(float *this, int a2)
 {
-  return *(float *)(a2 + 8) != *(this + 2)
+  return *(float *)(a2 + 8) != *(this + 2) /*0x72fddb*/
       || *(float *)a2 != *this
       || *(float *)(a2 + 4) != *(this + 1)
       || sub_4B9D10(this + 3, (float *)(a2 + 0xC))

@@ -1,1 +1,1 @@
-ClassMoniker_0
+typedef ClassMoniker ClassMoniker_0;

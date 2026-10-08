@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x49F4A0",
-    "line": "mov     eax, [ecx+44h]",
+    "line": "mov     eax, [ecx+44h]; Samples a BSAnimGroupSequence only while native controller state +0x44 is 1, 2, or 3. Passes sequence +0x48 plus ActorAnimData scheduler time +0x94 to NiControllerSequence_AdvanceTime with commit enabled.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x49F4C0",
-    "line": "call    sub_6C5FC0",
+    "line": "call    NiControllerSequence_AdvanceTime; NiControllerSequence time advance. Computes scaled time from input, last input +0x34, accumulated/scaled time +0x38, and frequency +0x28; wraps cycle type 0 or clamps other cycle types to start/end +0x2C/+0x30. When commit is true, stores +0x34, +0x38, and resulting local time +0x3C; otherwise returns the computed local time without mutation.",
     "mnemonic": "call",
     "size": 5
   },

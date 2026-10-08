@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x51B490",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Authoritative Oblivion KF-to-TESAnimGroup parser. Consumes a NiControllerSequence and model path, resolves the fixed 43-group table, encodes filename movement/weapon prefixes, parses required action notes plus m:/Blend:/Sound:/Enum:, builds the +0x24/+0x28 event array, validates required-note ordering, and returns the constructed TESAnimGroup. Native scheduling uses each KF's authored note times; it does not impose fixed Hit timestamps. External StarShooting contrast after this native decode: deployed AttackLeft/AttackRight files instantiate class 4 as Start, Hit, a:R/a:L, End; TES3 Shoot Follow Attach is motion-only and not an Oblivion scheduler phase. The current CAS manifest applies groups 17/18/20/21 by broad weapon-name substrings Star/Throwing/Dart (12 rules over 8 files), so unrelated names can match. Its lightweight package validator checks only first/last Start/End and would not catch missing class-4 Hit/a: notes; the older six-file import log is stale.",
     "mnemonic": "push",
     "size": 2
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x51B4D8",
-    "line": "mov     edi, [esp+1C0h+arg_0]",
+    "line": "mov     edi, [esp+1C0h+sequence]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -217,13 +217,13 @@
   },
   {
     "ea": "0x51B51D",
-    "line": "lea     edx, [esp+1CCh+var_154]",
+    "line": "lea     edx, [esp+1CCh+left]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x51B521",
-    "line": "push    offset aSNonaccum; \"%s NonAccum\"",
+    "line": "push    offset aSNonaccum; Interior of TESAnimGroup_ParseKFModel (actual function start 0x51B490), not a standalone parser entry. This instruction begins construction of the '<name> NonAccum' sequence-name candidate.",
     "mnemonic": "push",
     "size": 5
   },
@@ -319,19 +319,19 @@
   },
   {
     "ea": "0x51B559",
-    "line": "push    edx; Str2",
+    "line": "push    edx; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x51B55A",
-    "line": "push    edi; Str1",
+    "line": "push    edi; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x51B55B",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,25 +373,25 @@
   },
   {
     "ea": "0x51B56F",
-    "line": "push    eax; Str2",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x51B570",
-    "line": "lea     ecx, [esp+1C4h+var_154]",
+    "line": "lea     ecx, [esp+1C4h+left]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x51B574",
-    "line": "push    ecx; Str1",
+    "line": "push    ecx; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x51B575",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x51B588",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -610,12 +610,6 @@
     "line": "jmp     short loc_51B5F0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x51B5E9",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
   },
   {
     "ea": "0x51B5F0",
@@ -808,12 +802,6 @@
     "line": "jmp     short loc_51B650",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x51B64A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
   },
   {
     "ea": "0x51B650",
@@ -1140,12 +1128,6 @@
     "size": 5
   },
   {
-    "ea": "0x51B6F9",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x51B700",
     "line": "mov     eax, ebp",
     "mnemonic": "mov",
@@ -1246,12 +1228,6 @@
     "line": "jmp     short loc_51B730",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x51B72D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x51B730",
@@ -1753,19 +1729,19 @@
   },
   {
     "ea": "0x51B831",
-    "line": "push    edx; Str2",
+    "line": "push    edx; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x51B832",
-    "line": "push    eax; Str1",
+    "line": "push    eax; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x51B833",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -1903,7 +1879,7 @@
   },
   {
     "ea": "0x51B88D",
-    "line": "mov     ecx, ds:0B10900h[eax*4]",
+    "line": "mov     ecx, ds:0B10900h[eax*4]; TESAnimGroup_ParseKFModel validates required KF text keys through flattened templates: descriptor.requiredNoteBase + 8*phaseIndex. AttackBow base 7 resolves Start, Attach, Hold, Release, End.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2083,7 +2059,7 @@
   },
   {
     "ea": "0x51B8EB",
-    "line": "call    ??0TESAnimGroup@@QAE@XZ; TESAnimGroup::TESAnimGroup(void)",
+    "line": "call    TESAnimGroup_ctor; Constructs ref-counted TESAnimGroup state: encoded key/required-note array, zero morph and blend bytes, zero movement vector, and empty parsed-event count/pointer at +0x24/+0x28.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2155,7 +2131,7 @@
   },
   {
     "ea": "0x51B914",
-    "line": "call    ??0TESAnimGroup@@QAE@XZ; TESAnimGroup::TESAnimGroup(void)",
+    "line": "call    TESAnimGroup_ctor; Constructs ref-counted TESAnimGroup state: encoded key/required-note array, zero morph and blend bytes, zero movement vector, and empty parsed-event count/pointer at +0x24/+0x28.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2941,7 +2917,7 @@
   },
   {
     "ea": "0x51BACA",
-    "line": "lea     edx, [esp+1C0h+var_114]",
+    "line": "lea     edx, [esp+1C0h+right]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -2983,7 +2959,7 @@
   },
   {
     "ea": "0x51BADF",
-    "line": "lea     edx, [esp+1C0h+var_114]",
+    "line": "lea     edx, [esp+1C0h+right]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -3037,7 +3013,7 @@
   },
   {
     "ea": "0x51BAFB",
-    "line": "lea     eax, [esp+1C0h+var_114]",
+    "line": "lea     eax, [esp+1C0h+right]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -3295,25 +3271,25 @@
   },
   {
     "ea": "0x51BB77",
-    "line": "lea     eax, [esp+1C0h+var_114]",
+    "line": "lea     eax, [esp+1C0h+right]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x51BB7E",
-    "line": "push    eax; Str2",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x51BB7F",
-    "line": "push    ecx; Str1",
+    "line": "push    ecx; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x51BB80",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -3649,7 +3625,7 @@
   },
   {
     "ea": "0x51BC43",
-    "line": "call    sub_51ACF0",
+    "line": "call    TESAnimGroup_ResizeTextKeyEvents; Resizes TESAnimGroup's parsed text-key event array at +0x24/+0x28. Each record is 0x10 bytes; preserved records are copied, new records initialize time=0, byte/enum=0xFA, float scale=1.0, and sound pointer=null; a zero count frees the array.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3775,7 +3751,7 @@
   },
   {
     "ea": "0x51BC8D",
-    "line": "lea     eax, [esp+1C0h+var_114]",
+    "line": "lea     eax, [esp+1C0h+right]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -3787,7 +3763,7 @@
   },
   {
     "ea": "0x51BC95",
-    "line": "call    sub_447490",
+    "line": "call    SoundMap_ResolveAnimSoundNote; Animation Sound: note resolver. Looks up the note token in global sound map off_B06164 and accepts only entries whose form/type byte is 0x0A; returns the sound entry or 0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3835,7 +3811,7 @@
   },
   {
     "ea": "0x51BCAD",
-    "line": "call    sub_51ACF0",
+    "line": "call    TESAnimGroup_ResizeTextKeyEvents; Resizes TESAnimGroup's parsed text-key event array at +0x24/+0x28. Each record is 0x10 bytes; preserved records are copied, new records initialize time=0, byte/enum=0xFA, float scale=1.0, and sound pointer=null; a zero count frees the array.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4249,13 +4225,13 @@
   },
   {
     "ea": "0x51BD96",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x51BD98",
-    "line": "call    sub_51AE20",
+    "line": "call    TESAnimGroup_GetRequiredNoteTime; Returns a 32-bit required-note time from TESAnimGroup +0x10 by zero-based note index after validating count, storage, and QNaN. Invalid entries report an error and return 0.0f.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4267,19 +4243,19 @@
   },
   {
     "ea": "0x51BDA1",
-    "line": "push    0; ArgList",
+    "line": "push    0; noteIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x51BDA3",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x51BDA5",
-    "line": "call    sub_51AE20",
+    "line": "call    TESAnimGroup_GetRequiredNoteTime; Returns a 32-bit required-note time from TESAnimGroup +0x10 by zero-based note index after validating count, storage, and QNaN. Invalid entries report an error and return 0.0f.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4498,5 +4474,131 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9B76C0",
+    "line": "mov     eax, [ebp-17Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B76C6",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B76C7",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B76CC",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B76CD",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B76CE",
+    "line": "mov     eax, [ebp-17Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B76D4",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B76D5",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B76DA",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B76DB",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B76DC",
+    "line": "mov     edx, [esp+Str]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B76E0",
+    "line": "lea     eax, [edx-1B0h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B76E6",
+    "line": "mov     ecx, [edx-1B4h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B76EC",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B76EE",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B76F3",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B76F6",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B76F9",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B76FB",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7700",
+    "line": "mov     eax, offset stru_AE21DC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7705",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

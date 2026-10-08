@@ -18,7 +18,7 @@
 0x7F4464: test    ecx, ecx
 0x7F4466: jz      short loc_7F4477
 0x7F4468: push    4
-0x7F446A: call    NiNode_GetNiPropertyByID
+0x7F446A: call    NiNode_GetNiPropertyByID;
 0x7F446F: mov     esi, eax
 0x7F4471: test    esi, esi
 0x7F4473: jnz     short loc_7F447D

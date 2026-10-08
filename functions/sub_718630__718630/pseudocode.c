@@ -1,36 +1,37 @@
+// Pass223: Default NiAlphaProperty producer for global 0x00B3FCE4, consumed by NiPropertyState slot 0.
 LONG sub_718630()
 {
   NiObjectNET *v0; // eax
-  int v1; // esi
+  float v1; // esi
   LONG result; // eax
-  int (__thiscall ***v3)(_DWORD, int); // edi
+  float v3; // edi
 
-  v0 = (NiObjectNET *)FormHeapAlloc(0x1Cu);
-  v1 = (int)v0;
-  if ( v0 )
+  v0 = (NiObjectNET *)FormHeapAlloc(0x1Cu); /*0x718655*/
+  v1 = *(float *)&v0; /*0x71865a*/
+  if ( v0 ) /*0x71866d*/
   {
-    NiObjectNET::NiObjectNET(v0);
-    *(_DWORD *)v1 = &NiAlphaProperty::`vftable';
-    *(_WORD *)(v1 + 0x18) = 0xEC;
-    *(_BYTE *)(v1 + 0x1A) = 0;
+    NiObjectNET::NiObjectNET(v0); /*0x718671*/
+    *(_DWORD *)LODWORD(v1) = &NiAlphaProperty::`vftable'; /*0x718676*/
+    *(_WORD *)(LODWORD(v1) + 0x18) = 0xEC; /*0x71867c*/
+    *(_BYTE *)(LODWORD(v1) + 0x1A) = 0; /*0x718682*/
   }
   else
   {
-    v1 = 0;
+    v1 = 0.0; /*0x718688*/
   }
-  result = dword_B3FCE4;
-  if ( dword_B3FCE4 != v1 )
+  result = LODWORD(MEMORY[0xB3F9B0][0xCD]); /*0x71868a*/
+  if ( LODWORD(MEMORY[0xB3F9B0][0xCD]) != LODWORD(v1) ) /*0x718699*/
   {
-    if ( result )
+    if ( result ) /*0x71869d*/
     {
-      v3 = (int (__thiscall ***)(_DWORD, int))dword_B3FCE4;
-      result = InterlockedDecrement((volatile LONG *)(result + 4));
-      if ( !result )
-        result = (**v3)(v3, 1);
+      v3 = MEMORY[0xB3F9B0][0xCD]; /*0x71869f*/
+      result = InterlockedDecrement((volatile LONG *)(result + 4)); /*0x7186a5*/
+      if ( !result ) /*0x7186ad*/
+        result = (**(int (__thiscall ***)(float, int))LODWORD(v3))(COERCE_FLOAT(LODWORD(v3)), 1); /*0x7186bb*/
     }
-    dword_B3FCE4 = v1;
-    if ( v1 )
-      return InterlockedIncrement((volatile LONG *)(v1 + 4));
+    MEMORY[0xB3F9B0][0xCD] = v1; /*0x7186bf*/
+    if ( v1 != 0.0 ) /*0x7186c5*/
+      return InterlockedIncrement((volatile LONG *)(LODWORD(v1) + 4)); /*0x7186cb*/
   }
-  return result;
+  return result; /*0x7186d1*/
 }

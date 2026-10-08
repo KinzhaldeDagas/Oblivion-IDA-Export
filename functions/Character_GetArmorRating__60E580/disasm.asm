@@ -1,4 +1,4 @@
-0x60E580: sub     esp, 50h
+0x60E580: sub     esp, 50h; Character_GetArmorRating authority and cached-rating boundary (Character +0x108). Native Light Master behavior is retained for true Light sets; Medium mastery must be layered only after blocking Medium at the native Light purity call and must invalidate this cache when runtime classification changes.
 0x60E583: fldz
 0x60E585: push    ebx
 0x60E586: push    ebp
@@ -22,7 +22,6 @@
 0x60E5C5: push    edi
 0x60E5C6: mov     [esp+60h+var_48], edx
 0x60E5CA: jmp     short loc_60E5D4
-0x60E5CC: align 10h
 0x60E5D0: mov     eax, [esp+64h+var_48]
 0x60E5D4: cmp     edx, 0Dh
 0x60E5D7: jnz     short loc_60E64E
@@ -52,11 +51,11 @@
 0x60E625: push    ebp
 0x60E626: mov     ecx, esi
 0x60E628: jnz     short loc_60E63C
-0x60E62A: call    sub_488CB0
+0x60E62A: call    ContainerEntryExtraData_CalcRoundedArmorRating
 0x60E62F: fadd    [esp+64h+var_50]
 0x60E633: fstp    [esp+64h+var_50]
 0x60E637: jmp     loc_60E6E7
-0x60E63C: call    sub_488CB0
+0x60E63C: call    ContainerEntryExtraData_CalcRoundedArmorRating
 0x60E641: fadd    [esp+64h+var_54]
 0x60E645: fstp    [esp+64h+var_54]
 0x60E649: jmp     loc_60E6E7
@@ -100,11 +99,11 @@
 0x60E6AF: push    ebp
 0x60E6B0: mov     ecx, edi
 0x60E6B2: jnz     short loc_60E6C3
-0x60E6B4: call    sub_488CB0
+0x60E6B4: call    ContainerEntryExtraData_CalcRoundedArmorRating
 0x60E6B9: fadd    [esp+60h+var_4C]
 0x60E6BD: fstp    [esp+60h+var_4C]
 0x60E6C1: jmp     short loc_60E6D0
-0x60E6C3: call    sub_488CB0
+0x60E6C3: call    ContainerEntryExtraData_CalcRoundedArmorRating
 0x60E6C8: fadd    [esp+60h+var_50]
 0x60E6CC: fstp    [esp+60h+var_50]; float
 0x60E6D0: mov     [esp+ebx*4+60h+var_40], esi
@@ -112,7 +111,7 @@
 0x60E6D7: mov     ecx, edi
 0x60E6D9: call    ContainerEntryExtraData_DestroyDataTable
 0x60E6DE: push    edi
-0x60E6DF: call    FormHeapFree
+0x60E6DF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x60E6E4: add     esp, 4
 0x60E6E7: mov     edx, [esp+64h+var_4C]
 0x60E6EB: add     edx, 1

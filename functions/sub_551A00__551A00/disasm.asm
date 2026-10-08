@@ -1,26 +1,26 @@
-0x551A00: sub     esp, 108h
+0x551A00: sub     esp, 108h; Build age overlay through engine FindFile (loose/archive lookup): exact requested age first, then floor decade descending to zero. Does not search upwards; null can mean only higher-age overlays exist. Prettier Faces 1.19.9 fixes prior midpoint-only fallback: probe ascending higher decades while closer than current lower result, preserve exact match and lower ties, reconstruct winner because each call mutates outPath. Native unbounded source copy into 260-byte stack buffer remains guarded by plugin path length check in randomizer scope.
 0x551A06: mov     eax, ds:0B30AACh
 0x551A0B: xor     eax, esp
 0x551A0D: mov     [esp+108h+var_4], eax
-0x551A14: mov     eax, [esp+108h+arg_C]
+0x551A14: mov     eax, [esp+108h+baseTexturePath]
 0x551A1B: test    eax, eax
 0x551A1D: push    ebx
 0x551A1E: push    ebp
 0x551A1F: push    esi
-0x551A20: mov     esi, [esp+114h+arg_0]
+0x551A20: mov     esi, [esp+114h+outPath]
 0x551A27: push    edi
-0x551A28: movzx   edi, [esp+118h+arg_8]
+0x551A28: movzx   edi, [esp+118h+age]
 0x551A30: mov     bl, 4Dh ; 'M'
 0x551A32: jz      loc_551B1A
 0x551A38: cmp     edi, 64h ; 'd'
-0x551A3B: jg      loc_551B1A
-0x551A41: mov     ebp, [esp+118h+arg_4]
+0x551A3B: jg      loc_551B1A; Reject ages above 100.
+0x551A41: mov     ebp, [esp+118h+sex]
 0x551A48: cmp     ebp, 2
-0x551A4B: jge     loc_551B1A
+0x551A4B: jge     loc_551B1A; Sex 0 selects suffix M; sex 1 selects suffix F.
 0x551A51: lea     edx, [esp+118h+Str]
 0x551A55: sub     edx, eax
-0x551A57: mov     cl, [eax]
-0x551A59: mov     [edx+eax], cl
+0x551A57: mov     cl, [eax]; Begin an unbounded byte copy of baseTexturePath, including its NUL, into a 260-byte stack buffer. A source length >= 260 writes beyond the frame before any extension validation.
+0x551A59: mov     [edx+eax], cl; Vanilla/native robustness finding: NUL-inclusive unbounded copy into 260-byte stack array, >=260-byte source length exceeds array. 0x551A00..+0x135 IDA bytes match deployed EXE SHA256 range 0011d4f5799710e459b39e375a8c11e514988f4c4f9e8d6b55057089ad3b5aab. Trigger asset-path reachability and observed crash not tested; unrelated to OCO load defect absent further evidence.
 0x551A5C: add     eax, 1
 0x551A5F: test    cl, cl
 0x551A61: jnz     short loc_551A57
@@ -42,7 +42,7 @@
 0x551A8D: push    ecx; ArgList
 0x551A8E: push    offset aTexturesSCD_dd; "Textures\\%s%c%d.dds"
 0x551A93: push    esi; int
-0x551A94: call    BSStringT_Static_Format
+0x551A94: call    BSStringT_Static_Format; Try an exact <base><M|F><age>.dds asset first, allowing mods to supply per-year textures.
 0x551A99: mov     ecx, ds:0B33A04h
 0x551A9F: mov     eax, [esi]
 0x551AA1: add     esp, 14h
@@ -66,14 +66,14 @@
 0x551ACA: shr     eax, 1Fh
 0x551ACD: add     eax, edx
 0x551ACF: lea     edi, [eax+eax*4]
-0x551AD2: add     edi, edi
+0x551AD2: add     edi, edi; If exact age is absent, round downward to the previous decade. All vanilla age textures are decade-only M/F10 through M/F60, so stock random ages can use a texture up to almost ten years younger than geometry.
 0x551AD4: push    edi
 0x551AD5: push    ebx
 0x551AD6: lea     ecx, [esp+120h+Str]
 0x551ADA: push    ecx; ArgList
 0x551ADB: push    offset aTexturesSCD_dd; "Textures\\%s%c%d.dds"
 0x551AE0: push    esi; int
-0x551AE1: call    BSStringT_Static_Format
+0x551AE1: call    BSStringT_Static_Format; Search only downward in ten-year steps; the resolver never considers a closer upper-decade texture.
 0x551AE6: mov     ecx, ds:0B33A04h
 0x551AEC: mov     eax, [esi]
 0x551AEE: add     esp, 14h
@@ -93,7 +93,7 @@
 0x551B0C: push    0; a3
 0x551B0E: push    offset EmptyString; a2
 0x551B13: mov     ecx, esi; this
-0x551B15: call    BSStringT_Set
+0x551B15: call    BSStringT_Set; No suitable age texture exists; clear the output path.
 0x551B1A: xor     eax, eax
 0x551B1C: mov     ecx, [esp+118h+var_4]
 0x551B23: pop     edi

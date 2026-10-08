@@ -7,6 +7,6 @@
 0x6A729E: push    eax
 0x6A729F: mov     eax, [esp+4+arg_0]
 0x6A72A3: push    eax
-0x6A72A4: call    sub_43F3E0
+0x6A72A4: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x6A72A9: add     esp, 8
 0x6A72AC: retn    4

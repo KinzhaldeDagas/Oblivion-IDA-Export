@@ -1,1 +1,1 @@
-LCSCSTYPE
+typedef LONG LCSCSTYPE;

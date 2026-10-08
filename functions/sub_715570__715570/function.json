@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x715570",
+      "0x715595"
+    ]
+  ],
+  "chunks_sha256": "6e59f167f567c7cc5bb76f70696c496033373b1a38e2c14f0d358ab7f7540f03",
+  "comment_regular": "Clears active flag bit 3, invalidates last application time +0x20, and for APP_INIT timing (bit 0) also invalidates start time +0x1C.",
+  "comment_repeatable": "Clears active flag bit 3, invalidates last application time +0x20, and for APP_INIT timing (bit 0) also invalidates start time +0x1C.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_715570",
+  "display_name": "NiTimeController_Deactivate",
   "end_ea": "0x715595",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_715570",
+  "name": "NiTimeController_Deactivate",
   "segment": ".text",
   "sha256": "6e59f167f567c7cc5bb76f70696c496033373b1a38e2c14f0d358ab7f7540f03",
   "size": 37,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x715570",
-  "type": "int __thiscall(NiTimeController *this)",
+  "total_chunk_size": 37,
+  "type": "void __thiscall(NiTimeController *this)",
   "xrefs_from_count": 11,
   "xrefs_to_count": 58
 }

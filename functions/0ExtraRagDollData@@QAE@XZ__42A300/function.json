@@ -1,18 +1,31 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x42A300",
+      "0x42A315"
+    ]
+  ],
+  "chunks_sha256": "d75745bc75a7be706912d256be8da0fa489a5bd194cadd6f15d91cbbfdab3ea2",
+  "comment_regular": "MEF v35 cleanup proof: ExtraRagDollData constructor only sets type/vtable and zeroes fields +8/+C. Before payload attachment, direct FormHeapFree is complete cleanup.",
+  "comment_repeatable": "MEF v35 cleanup proof: ExtraRagDollData constructor only sets type/vtable and zeroes fields +8/+C. Before payload attachment, direct FormHeapFree is complete cleanup.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
   "display_name": "ExtraRagDollData::ExtraRagDollData(void)",
   "end_ea": "0x42A315",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??0ExtraRagDollData@@QAE@XZ",
   "segment": ".text",
   "sha256": "d75745bc75a7be706912d256be8da0fa489a5bd194cadd6f15d91cbbfdab3ea2",
   "size": 21,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x42A300",
+  "total_chunk_size": 21,
   "type": "ExtraRagDollData *__thiscall(ExtraRagDollData *__hidden this)",
   "xrefs_from_count": 7,
   "xrefs_to_count": 3

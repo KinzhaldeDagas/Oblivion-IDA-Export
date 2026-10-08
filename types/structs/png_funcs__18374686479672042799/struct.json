@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "png_funcs",
+  "definition": "struct png_funcs\n{\nBOOL (*get_png_info)(const void *, DWORD, int *, int *, int *);\nBITMAPINFO *(*load_png)(const char *, DWORD *);\n}\n",
   "id": 18374686479672042799,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_png_info",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(const void *, DWORD, int *, int *, int *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "load_png",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "BITMAPINFO *(*)(const char *, DWORD *)"
     }
   ],
   "name": "png_funcs",
+  "ordinal": 7294,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 8
 }

@@ -82,7 +82,7 @@
 0x45D307: test    bp, bp
 0x45D30A: jz      short loc_45D37C
 0x45D30C: push    offset aTessaveloadg_0; "TESSaveLoadGame::SaveQueuedHavokData"
-0x45D311: mov     ecx, offset stru_B33B80
+0x45D311: mov     ecx, offset unk_B33B80
 0x45D316: call    NiEnterCriticalSection
 0x45D31B: test    edi, edi
 0x45D31D: jz      short loc_45D32A
@@ -108,13 +108,13 @@
 0x45D354: push    edi
 0x45D355: lea     ecx, [esi+44h]
 0x45D358: mov     dword ptr [ebx+14h], 0
-0x45D35F: call    sub_4211E0
+0x45D35F: call    ExtraDataList_SetSavedHavokData; Gets/creates Oblivion ExtraSavedMovementData and stores its saved-Havok-data pointer; runtime diagnostic confirms the field purpose.
 0x45D364: mov     edx, [esi]
 0x45D366: mov     eax, [edx+40h]
 0x45D369: push    1000000h; lpCriticalSection
 0x45D36E: mov     ecx, esi
 0x45D370: call    eax
-0x45D372: mov     ecx, offset stru_B33B80; lpCriticalSection
+0x45D372: mov     ecx, offset unk_B33B80; lpCriticalSection
 0x45D377: call    NiLeaveCriticalSection_0
 0x45D37C: pop     edi
 0x45D37D: pop     ebp

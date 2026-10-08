@@ -1,10 +1,18 @@
 {
   "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x404DD0",
+      "0x404DEC"
+    ]
+  ],
   "chunks_sha256": "d7560e4e4f93c0389ec2bdd18ef63c423b5986dddbaa72db9ebf74c791ed1b20",
   "comment_regular": "3DTheft decode 2026-05-16: returns g_NiParallelUpdateTaskManager != 0 && manager->byte+0x1B0 != 0. Used by morph update to decide whether to submit a NiGeomMorpherUpdateTask.",
   "comment_repeatable": "3DTheft decode 2026-05-16: returns g_NiParallelUpdateTaskManager != 0 && manager->byte+0x1B0 != 0. Used by morph update to decide whether to submit a NiGeomMorpherUpdateTask.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
   "display_name": "NiParallelUpdateTaskManager_HasPendingSignal",
   "end_ea": "0x404DEC",
@@ -15,6 +23,7 @@
   "segment": ".text",
   "sha256": "d7560e4e4f93c0389ec2bdd18ef63c423b5986dddbaa72db9ebf74c791ed1b20",
   "size": 28,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x404DD0",
   "total_chunk_size": 28,
   "type": "BOOL()",

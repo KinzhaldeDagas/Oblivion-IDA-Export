@@ -1,4 +1,4 @@
-0x784740: mov     edx, [esp+arg_0]
+0x784740: mov     edx, [esp+pivot]; Oblivion-authoritative red-black-tree left rotation around pivot. Reparents pivot->right, updates the sentinel head's root link when pivot was root, and preserves child parent links.
 0x784744: mov     eax, [edx+8]
 0x784747: push    esi
 0x784748: mov     esi, [eax]

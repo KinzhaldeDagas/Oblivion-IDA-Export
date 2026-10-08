@@ -1,16 +1,16 @@
-int __thiscall Player_Actor_ModAViMax(PlayerCharacter *this, int a2, signed int a3, Actor *a4)
+void __thiscall Player_Actor_ModAViMax(PlayerCharacter *this, int a2, signed int a3, Actor *a4)
 {
-  int v7; // eax
-  int v8; // ebx
-  float v10; // [esp+24h] [ebp+8h]
+  int v5; // eax
+  int v6; // ebx
+  float v7; // [esp+24h] [ebp+8h]
 
-  sub_5E2510(a2, a3, (int)a4);
-  v8 = v7;
-  v10 = (float)v7;
-  if ( a2 != 0xFFFFFFFF )
-    this->maxAVModifiers[a2] = Player_ModAVNode(this->maxAVModifiers[a2], v10, 1);
-  sub_57A6F0(a2);
-  if ( a2 == 8 && v8 < 0 )
-    this->vtbl->super.OnHealthDamage((Actor *)this, a4, COERCE_FLOAT(LODWORD(v10)));
-  return sub_5E2670(this, a2, 0);
+  sub_5E2510(a2, a3, (int)a4); /*0x65e1d5*/
+  v6 = v5; /*0x65e1dd*/
+  v7 = (float)v5; /*0x65e1e7*/
+  if ( a2 != 0xFFFFFFFF ) /*0x65e1f3*/
+    this->maxAVModifiers[a2] = Player_ModAVNode(this->maxAVModifiers[a2], v7, 1); /*0x65e211*/
+  UI_UpdateActorValueDisplays(a2); /*0x65e21c*/
+  if ( a2 == 8 && v6 < 0 ) /*0x65e22b*/
+    ((void (__thiscall *)(PlayerCharacter *, Actor *, _DWORD))this->vtbl->super.OnHealthDamage)(this, a4, LODWORD(v7)); /*0x65e240*/
+  Player_OnActorValueBaseChanged(this, a2, 0); /*0x65e247*/
 }

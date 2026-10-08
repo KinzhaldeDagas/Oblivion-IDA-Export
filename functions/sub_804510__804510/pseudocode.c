@@ -1,3 +1,4 @@
+// MoonSugarEffect decode: CopyShader D3D pass setup; configures a single texture stage and disables blend/z/write states similarly to other TES4 image-space passes.
 char __thiscall sub_804510(NiD3DPass **this)
 {
   NiD3DPass **v2; // edi
@@ -15,65 +16,65 @@ char __thiscall sub_804510(NiD3DPass **this)
   NiD3DPass *v15; // [esp+10h] [ebp-10h] BYREF
   int v16; // [esp+1Ch] [ebp-4h]
 
-  v2 = sub_7606A0(&v15);
-  v3 = *(this + 0x1C);
-  v4 = v3 == *v2;
-  v16 = 0;
-  if ( !v4 )
+  v2 = NiD3DPassPool_Acquire(&v15); /*0x804544*/
+  v3 = *(this + 0x1C); /*0x804546*/
+  v4 = v3 == *v2; /*0x804549*/
+  v16 = 0; /*0x80454b*/
+  if ( !v4 ) /*0x804553*/
   {
-    if ( v3 )
+    if ( v3 ) /*0x804557*/
     {
-      v4 = v3->RefCount-- == 1;
-      if ( v4 )
-        sub_7604D0(v3);
+      v4 = v3->RefCount-- == 1; /*0x804559*/
+      if ( v4 ) /*0x80455d*/
+        NiD3DPass_ReleaseToPool(v3); /*0x80455f*/
     }
-    v5 = *v2;
-    v4 = *v2 == 0;
-    *(this + 0x1C) = *v2;
-    if ( !v4 )
-      ++v5->RefCount;
+    v5 = *v2; /*0x804564*/
+    v4 = *v2 == 0; /*0x804566*/
+    *(this + 0x1C) = *v2; /*0x804568*/
+    if ( !v4 ) /*0x80456b*/
+      ++v5->RefCount; /*0x80456d*/
   }
-  v6 = v15;
-  v16 = 0xFFFFFFFF;
-  if ( v15 )
+  v6 = v15; /*0x804571*/
+  v16 = 0xFFFFFFFF; /*0x804577*/
+  if ( v15 ) /*0x80457f*/
   {
-    --v15->RefCount;
-    if ( !v6->RefCount )
-      sub_7604D0(v6);
+    --v15->RefCount; /*0x804581*/
+    if ( !v6->RefCount ) /*0x80458a*/
+      NiD3DPass_ReleaseToPool(v6); /*0x80458f*/
   }
-  sub_772630(&a3);
-  v16 = 1;
-  sub_801110((int)a3, 0, 3, 2);
-  sub_771640((_DWORD **)a3, 0);
-  sub_760010(*(this + 0x1C), (*(this + 0x1C))->CurrentStage, a3);
-  v7 = (int)*(this + 0x1C);
-  if ( !*(_DWORD *)(v7 + 0x30) )
-    *(_DWORD *)(v7 + 0x30) = sub_772DF0();
-  sub_772CD0(*(_DWORD **)(v7 + 0x30), 7, 0, 0);
-  v8 = (int)*(this + 0x1C);
-  if ( !*(_DWORD *)(v8 + 0x30) )
-    *(_DWORD *)(v8 + 0x30) = sub_772DF0();
-  sub_772CD0(*(_DWORD **)(v8 + 0x30), 0xE, 0, 0);
-  v9 = (int)*(this + 0x1C);
-  if ( !*(_DWORD *)(v9 + 0x30) )
-    *(_DWORD *)(v9 + 0x30) = sub_772DF0();
-  sub_772CD0(*(_DWORD **)(v9 + 0x30), 0x1B, 0, 0);
-  v10 = (int)*(this + 0x1C);
-  if ( !*(_DWORD *)(v10 + 0x30) )
-    *(_DWORD *)(v10 + 0x30) = sub_772DF0();
-  sub_772CD0(*(_DWORD **)(v10 + 0x30), 0xF, 0, 0);
-  v11 = (int)*(this + 0x1C);
-  if ( !*(_DWORD *)(v11 + 0x30) )
-    *(_DWORD *)(v11 + 0x30) = sub_772DF0();
-  sub_772CD0(*(_DWORD **)(v11 + 0x30), 0xA8, 0xF, 0);
-  ((void (__thiscall *)(NiD3DPass **))(*this)[1].VertexShaderTarget)(this);
-  v12 = (NiD3DTextureStage *)a3;
-  v16 = 0xFFFFFFFF;
-  if ( a3 )
+  NiD3DTextureStagePool_Acquire(&a3); /*0x804599*/
+  v16 = 1; /*0x8045a9*/
+  BSShader_ConfigureTextureStageSampler(a3, 0, 3, 2); /*0x8045b1*/
+  NiD3DTextureStage_ApplyFilterPreset((NiD3DTextureStage *)a3, 0); /*0x8045bf*/
+  NiD3DPass_SetTextureStage(*(this + 0x1C), (*(this + 0x1C))->CurrentStage, a3); /*0x8045d0*/
+  v7 = (int)*(this + 0x1C); /*0x8045d5*/
+  if ( !*(_DWORD *)(v7 + 0x30) ) /*0x8045d8*/
+    *(_DWORD *)(v7 + 0x30) = NiD3DRenderStateGroupPool_Acquire(); /*0x8045e3*/
+  NiD3DRenderStateGroup_SetRenderState(*(OblivionRenderStateGroupPrefix **)(v7 + 0x30), 7u, 0, 0); /*0x8045ef*/
+  v8 = (int)*(this + 0x1C); /*0x8045f4*/
+  if ( !*(_DWORD *)(v8 + 0x30) ) /*0x8045f7*/
+    *(_DWORD *)(v8 + 0x30) = NiD3DRenderStateGroupPool_Acquire(); /*0x804602*/
+  NiD3DRenderStateGroup_SetRenderState(*(OblivionRenderStateGroupPrefix **)(v8 + 0x30), 0xEu, 0, 0); /*0x80460e*/
+  v9 = (int)*(this + 0x1C); /*0x804613*/
+  if ( !*(_DWORD *)(v9 + 0x30) ) /*0x804616*/
+    *(_DWORD *)(v9 + 0x30) = NiD3DRenderStateGroupPool_Acquire(); /*0x804621*/
+  NiD3DRenderStateGroup_SetRenderState(*(OblivionRenderStateGroupPrefix **)(v9 + 0x30), 0x1Bu, 0, 0); /*0x80462d*/
+  v10 = (int)*(this + 0x1C); /*0x804632*/
+  if ( !*(_DWORD *)(v10 + 0x30) ) /*0x804635*/
+    *(_DWORD *)(v10 + 0x30) = NiD3DRenderStateGroupPool_Acquire(); /*0x804640*/
+  NiD3DRenderStateGroup_SetRenderState(*(OblivionRenderStateGroupPrefix **)(v10 + 0x30), 0xFu, 0, 0); /*0x80464c*/
+  v11 = (int)*(this + 0x1C); /*0x804651*/
+  if ( !*(_DWORD *)(v11 + 0x30) ) /*0x804654*/
+    *(_DWORD *)(v11 + 0x30) = NiD3DRenderStateGroupPool_Acquire(); /*0x80465f*/
+  NiD3DRenderStateGroup_SetRenderState(*(OblivionRenderStateGroupPrefix **)(v11 + 0x30), 0xA8u, 0xFu, 0); /*0x80466e*/
+  ((void (__thiscall *)(NiD3DPass **))(*this)[1].VertexShaderTarget)(this); /*0x80467d*/
+  v12 = (NiD3DTextureStage *)a3; /*0x80467f*/
+  v16 = 0xFFFFFFFF; /*0x804685*/
+  if ( a3 ) /*0x80468d*/
   {
-    --a3[0x17];
-    if ( !v12[7].Unk08 )
-      sub_772560(v12);
+    --a3[0x17]; /*0x80468f*/
+    if ( !v12[7].Unk08 ) /*0x804698*/
+      sub_772560(v12); /*0x80469d*/
   }
-  return 1;
+  return 1; /*0x8046a4*/
 }

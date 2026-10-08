@@ -1,22 +1,23 @@
-void __cdecl sub_55F750(char a1)
+// Verified singleton Create(recreate): optionally destroys/frees an existing BSTreeManager, allocates 0x28 bytes, runs BSTreeManager_ctor, and stores the instance.
+void __cdecl BSTreeManager_Create(bool recreate)
 {
-  unsigned int v1; // esi
-  float *v2; // eax
-  float *v3; // eax
+  BSTreeManager_OblivionVerifiedLayout *v1; // esi
+  BSTreeManager_OblivionVerifiedLayout *v2; // eax
+  BSTreeManager_OblivionVerifiedLayout *v3; // eax
 
-  if ( dword_B39E04 )
+  if ( g_BSTreeManager_Instance ) /*0x55f772*/
   {
-    if ( !a1 )
-      return;
-    v1 = dword_B39E04;
-    sub_55F550((unsigned int *)dword_B39E04);
-    FormHeapFree(v1);
-    dword_B39E04 = 0;
+    if ( !recreate ) /*0x55f781*/
+      return; /*0x55f781*/
+    v1 = g_BSTreeManager_Instance; /*0x55f783*/
+    BSTreeManager_dtor(g_BSTreeManager_Instance); /*0x55f785*/
+    FormHeapFree((unsigned int)v1); /*0x55f78b*/
+    g_BSTreeManager_Instance = 0; /*0x55f793*/
   }
-  v2 = (float *)FormHeapAlloc(0x28u);
-  if ( v2 )
-    v3 = sub_55E850(v2);
+  v2 = (BSTreeManager_OblivionVerifiedLayout *)FormHeapAlloc(0x28u); /*0x55f79f*/
+  if ( v2 ) /*0x55f7b5*/
+    v3 = BSTreeManager_ctor(v2); /*0x55f7b9*/
   else
-    v3 = 0;
-  dword_B39E04 = (int)v3;
+    v3 = 0; /*0x55f7c0*/
+  g_BSTreeManager_Instance = v3; /*0x55f7c2*/
 }

@@ -1,4 +1,4 @@
-0x9A2450: cmp     byte_B4295C, 0
+0x9A2450: cmp     byte ptr unk_B4295C, 0
 0x9A2457: push    esi
 0x9A2458: movzx   esi, [esp+4+arg_1]
 0x9A245D: jnz     short loc_9A2464

@@ -1,4 +1,4 @@
-0x403380: push    esi
+0x403380: push    esi; [Controller decode 2026-07-09] Synthetic logical-control press for controls <14. Chooses first available binding in keyboard, mouse, first-joystick order. Joystick bindings <0x20 set currentState.rgbButtons; bindings >=0x20 write POV0 angles in 4500-unit steps and preserve adjacent diagonals.
 0x403381: mov     esi, ecx
 0x403383: mov     ecx, [esp+4+controlId]
 0x403387: cmp     ecx, 0Eh
@@ -50,7 +50,7 @@
 0x403422: jnz     short loc_40343D
 0x403424: fild    [esp+8+controlId]
 0x403428: fmul    ds:dbl_A2FAA0
-0x40342E: call    Double_To_SInt32
+0x40342E: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x403433: add     edi, eax
 0x403435: mov     [esi+50h], edi
 0x403438: pop     edi

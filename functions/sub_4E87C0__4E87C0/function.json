@@ -1,19 +1,32 @@
 {
-  "callees_count": 37,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 15,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4E87C0",
+      "0x4E89E7"
+    ]
+  ],
+  "chunks_sha256": "ae01005d7609e6e8d3a8bf4074394103265e3bc384408abcbfff390deaf58290",
+  "comment_regular": "Verified TESRoad RGRP format is 12-byte target XYZ positions flattened across each source point's edge count. This differs from TESPathGrid PGRR, which stores u16 target point indices; PGRP row size is shared but the connection encoding is not.",
+  "comment_repeatable": "Verified TESRoad RGRP format is 12-byte target XYZ positions flattened across each source point's edge count. This differs from TESPathGrid PGRR, which stores u16 target point indices; PGRP row size is shared but the connection encoding is not.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4E87C0",
+  "display_name": "TESRoad_SaveFormRecord",
   "end_ea": "0x4E89E7",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4E87C0",
+  "name": "TESRoad_SaveFormRecord",
   "segment": ".text",
   "sha256": "ae01005d7609e6e8d3a8bf4074394103265e3bc384408abcbfff390deaf58290",
   "size": 551,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E87C0",
-  "type": "UInt32 __usercall@<eax>(TESForm *this@<ecx>, char@<bpl>, int@<edi>)",
+  "total_chunk_size": 551,
+  "type": "unsigned int __thiscall(TESRoad *this, bool modifiedOnly, int recordFlags)",
   "xrefs_from_count": 217,
   "xrefs_to_count": 1
 }

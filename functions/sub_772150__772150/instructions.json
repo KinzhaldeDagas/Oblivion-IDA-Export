@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x772150",
-    "line": "push    esi",
+    "line": "push    esi; Commit texture transform. Stock leaf stage has transform disabled, so this writes D3DTTFF_DISABLE and no matrix.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x772153",
-    "line": "cmp     byte ptr [esi+5Ah], 0",
+    "line": "cmp     byte ptr [esi+5Ah], 0; When the stage transform flag is false (the stock leaf configuration), commit D3DTTFF_DISABLE and do not upload a texture matrix.",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x77219D",
-    "line": "call    sub_771830",
+    "line": "call    sub_771830;",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x7721A6",
-    "line": "push    offset flt_B42760",
+    "line": "push    offset unk_B42760",
     "mnemonic": "push",
     "size": 5
   },

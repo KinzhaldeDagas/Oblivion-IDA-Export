@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x605F6C",
-    "line": "ja      def_605F72",
+    "line": "ja      def_605F72; jumptable 00605F72 default case",
     "mnemonic": "ja",
     "size": 6
   },
@@ -73,13 +73,13 @@
   },
   {
     "ea": "0x605F85",
-    "line": "push    eax",
+    "line": "push    eax; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x605F86",
-    "line": "call    sub_470520",
+    "line": "call    TESForm_GetValue",
     "mnemonic": "call",
     "size": 5
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x605F9C",
-    "line": "cmp     [esp+4+arg_4], 0",
+    "line": "cmp     [esp+4+useBase], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x605FB2",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x605FBB",
-    "line": "mov     ecx, [esp+4+arg_0]",
+    "line": "mov     ecx, [esp+4+observer]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x605FD1",
-    "line": "fild    [esp+8+var_8]",
+    "line": "fild    [esp+4+var_4]",
     "mnemonic": "fild",
     "size": 3
   },
@@ -223,19 +223,19 @@
   },
   {
     "ea": "0x605FDC",
-    "line": "fstp    [esp+8+var_8]",
+    "line": "fstp    [esp+4+var_4]",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x605FDF",
-    "line": "fld     [esp+8+var_8]",
+    "line": "fld     [esp+4+var_4]",
     "mnemonic": "fld",
     "size": 3
   },
   {
     "ea": "0x605FE2",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x605FEB",
-    "line": "cmp     [esp+4+arg_4], 0; jumptable 00605F72 case 5",
+    "line": "cmp     [esp+4+useBase], 0; jumptable 00605F72 case 5",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x605FFA",
-    "line": "mov     ecx, [esp+4+arg_0]",
+    "line": "mov     ecx, [esp+4+observer]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x60600C",
-    "line": "cmp     [esp+4+arg_4], 0; jumptable 00605F72 case 3",
+    "line": "cmp     [esp+4+useBase], 0; jumptable 00605F72 case 3",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x60601F",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x606028",
-    "line": "mov     ecx, [esp+4+arg_0]",
+    "line": "mov     ecx, [esp+4+observer]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -403,19 +403,19 @@
   },
   {
     "ea": "0x606044",
-    "line": "fstp    [esp+8+var_8]",
+    "line": "fstp    [esp+4+var_4]",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x606047",
-    "line": "fld     [esp+8+var_8]",
+    "line": "fld     [esp+4+var_4]",
     "mnemonic": "fld",
     "size": 3
   },
   {
     "ea": "0x60604A",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x606053",
-    "line": "cmp     [esp+4+arg_4], 0; jumptable 00605F72 case 4",
+    "line": "cmp     [esp+4+useBase], 0; jumptable 00605F72 case 4",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x606066",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x60606F",
-    "line": "mov     ecx, [esp+4+arg_0]",
+    "line": "mov     ecx, [esp+4+observer]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -523,19 +523,19 @@
   },
   {
     "ea": "0x60608B",
-    "line": "fstp    [esp+8+var_8]",
+    "line": "fstp    [esp+4+var_4]",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x60608E",
-    "line": "fld     [esp+8+var_8]",
+    "line": "fld     [esp+4+var_4]",
     "mnemonic": "fld",
     "size": 3
   },
   {
     "ea": "0x606091",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x60609A",
-    "line": "cmp     [esp+4+arg_4], 0; jumptable 00605F72 case 1",
+    "line": "cmp     [esp+4+useBase], 0; jumptable 00605F72 case 1",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x6060AD",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x6060B6",
-    "line": "mov     ecx, [esp+4+arg_0]",
+    "line": "mov     ecx, [esp+4+observer]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -643,19 +643,19 @@
   },
   {
     "ea": "0x6060D2",
-    "line": "fstp    [esp+8+var_8]",
+    "line": "fstp    [esp+4+var_4]",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6060D5",
-    "line": "fld     [esp+8+var_8]",
+    "line": "fld     [esp+4+var_4]",
     "mnemonic": "fld",
     "size": 3
   },
   {
     "ea": "0x6060D8",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x6060E1",
-    "line": "cmp     [esp+4+arg_4], 0; jumptable 00605F72 case 2",
+    "line": "cmp     [esp+4+useBase], 0; jumptable 00605F72 case 2",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -703,7 +703,7 @@
   },
   {
     "ea": "0x6060F4",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x6060FD",
-    "line": "mov     ecx, [esp+4+arg_0]",
+    "line": "mov     ecx, [esp+4+observer]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -763,8 +763,32 @@
   },
   {
     "ea": "0x606119",
-    "line": "fstp    [esp+8+var_8]",
+    "line": "fstp    [esp+4+var_4]",
     "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x60611C",
+    "line": "fld     [esp+4+var_4]; jumptable 00605F72 default case",
+    "mnemonic": "fld",
+    "size": 3
+  },
+  {
+    "ea": "0x60611F",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x606124",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x606125",
+    "line": "retn    8",
+    "mnemonic": "retn",
     "size": 3
   }
 ]

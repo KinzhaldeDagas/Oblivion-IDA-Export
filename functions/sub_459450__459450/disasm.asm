@@ -1,4 +1,4 @@
-0x459450: sub     esp, 154h
+0x459450: sub     esp, 154h; ContinueFromLastSave fidelity decode: SaveGameFile sorted-list comparator. Caches ftLastWriteTime at SaveGameFile+0x158/+0x15C and returns newest file first; vanilla Continue therefore means newest write time, not highest Save number.
 0x459456: mov     eax, ds:0B30AACh
 0x45945B: xor     eax, esp
 0x45945D: mov     [esp+154h+var_4], eax

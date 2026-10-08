@@ -31,13 +31,13 @@
 0x544124: jz      short loc_54412F
 0x544126: mov     ecx, [esi+28h]; this
 0x544129: push    eax; a2
-0x54412A: call    sub_405680
+0x54412A: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x54412F: cmp     byte ptr [esi+34h], 0
 0x544133: jz      short loc_54413E
 0x544135: mov     eax, [esi+28h]
 0x544138: and     word ptr [eax+18h], 0FFFEh
 0x54413E: mov     ecx, [esi+28h]; this
-0x544141: call    NiAVObject_InitializePropertyState
+0x544141: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x544146: mov     eax, [esi+30h]
 0x544149: test    eax, eax
 0x54414B: jz      short loc_544156

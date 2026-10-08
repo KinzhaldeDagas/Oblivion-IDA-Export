@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x4980E0",
-    "line": "call    sub_763DE0",
+    "line": "call    NiDX9AdapterDescArray_GetSingleton; Oblivion-authoritative: lazily creates IDirect3D9, constructs the global NiTArray<NiDX9AdapterDesc*> wrapper, populates one descriptor per adapter, then releases the temporary IDirect3D9 reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x4980FD",
-    "line": "call    sub_763DE0",
+    "line": "call    NiDX9AdapterDescArray_GetSingleton; Oblivion-authoritative: lazily creates IDirect3D9, constructs the global NiTArray<NiDX9AdapterDesc*> wrapper, populates one descriptor per adapter, then releases the temporary IDirect3D9 reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -949,37 +949,37 @@
   },
   {
     "ea": "0x4982AD",
-    "line": "push    ecx; int",
+    "line": "push    ecx; maxPS20Instructions",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4982AE",
-    "line": "push    ecx; Str1",
+    "line": "push    ecx; adapterVendorPrefix",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4982AF",
-    "line": "push    ecx; int",
+    "line": "push    ecx; adapterCaps",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4982B0",
-    "line": "push    edx; char",
+    "line": "push    edx; bForce1XShaders",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4982B1",
-    "line": "push    ecx; int",
+    "line": "push    ecx; shaderCapsB",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4982B2",
-    "line": "push    ecx; int",
+    "line": "push    ecx; shaderCapsA",
     "mnemonic": "push",
     "size": 1
   },
@@ -997,7 +997,7 @@
   },
   {
     "ea": "0x4982BF",
-    "line": "call    SetShaderPackage",
+    "line": "call    SetShaderPackage; [Verified] Selects and publishes the renderer shader-package version at RendererGlobalState+0xAF from adapter/version inputs and vendor prefix. The third argument is bForce1XShaders; when true and a shader version is available, the function forces package version 1. Argument maxPS20Instructions is the same value logged as maxPS20inst; ATI/NVIDIA paths choose versions 3–6 and set +0xC when it exceeds 0xFF. Fallback branches choose version 0/1 and clear HDR mode at +0x1D7. [Verified] +0xC gates Lighting30 definition 0x1A; [Probable] it represents shader-feature capability. This native selector emits versions 0–6 only; [Unknown] the writer/source of version 7, which the package-index switch handles, has not yet been identified.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1080,12 +1080,6 @@
     "size": 2
   },
   {
-    "ea": "0x4982E7",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x4982F0",
     "line": "mov     cl, ds:byte_A3DE48[eax]",
     "mnemonic": "mov",
@@ -1093,7 +1087,7 @@
   },
   {
     "ea": "0x4982F6",
-    "line": "mov     ds:byte_B34FC8[eax], cl",
+    "line": "mov     [eax+0B34FC8h], cl",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1170,12 +1164,6 @@
     "size": 2
   },
   {
-    "ea": "0x498315",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x498320",
     "line": "mov     cl, ds:byte_A3DE24[eax]",
     "mnemonic": "mov",
@@ -1183,7 +1171,7 @@
   },
   {
     "ea": "0x498326",
-    "line": "mov     ds:byte_B34FC8[eax], cl",
+    "line": "mov     [eax+0B34FC8h], cl",
     "mnemonic": "mov",
     "size": 6
   },

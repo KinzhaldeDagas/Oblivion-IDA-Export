@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x404940",
-    "line": "sub     esp, 20Ch",
+    "line": "sub     esp, 20Ch; Enumerates CD-ROM drives and selects the first whose root contains OblivionLauncher.exe; stores its drive letter in byte_B33394.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x40496E",
-    "line": "mov     byte_B33394, bl",
+    "line": "mov     byte ptr unk_B33394, bl",
     "mnemonic": "mov",
     "size": 6
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x404980",
-    "line": "cmp     byte_B33394, 0",
+    "line": "cmp     byte ptr unk_B33394, 0",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x4049C0",
-    "line": "mov     byte_B33394, al",
+    "line": "mov     byte ptr unk_B33394, al",
     "mnemonic": "mov",
     "size": 5
   },

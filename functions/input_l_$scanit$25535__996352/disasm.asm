@@ -75,3 +75,31 @@
 0x996441: inc     esi
 0x996442: inc     esi
 0x996443: jmp     loc_996616
+0x996613: mov     [esi], al
+0x996615: inc     esi
+0x996616: mov     [ebp-38h], esi
+0x996619: jmp     loc_99636A
+0x99661E: inc     edi
+0x99661F: jmp     loc_99636A
+0x996624: dec     dword ptr [ebp+4]
+0x996627: cmp     eax, 0FFFFFFFFh
+0x99662A: jz      short loc_996637
+0x99662C: push    dword ptr [ebp-14h]; File
+0x99662F: push    eax; Ch
+0x996630: call    __ungetc_nolock
+0x996635: pop     ecx
+0x996636: pop     ecx
+0x996637: cmp     edi, esi
+0x996639: jz      __input_l___$error_return$25524
+0x99663F: cmp     byte ptr [ebp-0Dh], 0
+0x996643: jnz     loc_99688D
+0x996649: inc     dword ptr [ebp-3Ch]
+0x99664C: cmp     ebx, 63h ; 'c'
+0x99664F: jz      loc_99688D
+0x996655: cmp     byte ptr [ebp-16h], 0
+0x996659: mov     eax, [ebp-38h]
+0x99665C: jz      short loc_996667
+0x99665E: and     word ptr [eax], 0
+0x996662: jmp     loc_99688D
+0x996667: mov     byte ptr [eax], 0
+0x99666A: jmp     loc_99688D

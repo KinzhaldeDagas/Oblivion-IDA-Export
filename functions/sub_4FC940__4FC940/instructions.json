@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4FC940",
-    "line": "push    esi",
+    "line": "push    esi; Script full-load clear: frees current data/text, clears appended variable/reference lists, and clears component references. Called before Script_InitializeDataAndComponents only for existing non-partial replacement records.",
     "mnemonic": "push",
     "size": 1
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x4FC961",
-    "line": "call    sub_4FC6C0",
+    "line": "call    Script_ClearVariableList; Hot Reload OBSE decode: script variable-list cleanup. Frees each VariableInfo name buffer and payload, removes extra list nodes, leaves script->varList empty.",
     "mnemonic": "call",
     "size": 5
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x4FC968",
-    "line": "call    sub_4FC730",
+    "line": "call    Script_ClearReferenceList; Hot Reload OBSE decode: script ref-list cleanup. Clears executing-script cache if needed, frees each RefVariable name buffer and payload, removes extra list nodes.",
     "mnemonic": "call",
     "size": 5
   },

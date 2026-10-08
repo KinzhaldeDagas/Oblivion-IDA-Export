@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7C76D0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Inverse caster-root removal: match exact light+0x130 in the active list and remove through native list/refcount ownership.",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x7C7703",
-    "line": "mov     edx, [esp+1Ch+arg_0]",
+    "line": "mov     edx, [esp+1Ch+payload]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x7C7732",
-    "line": "mov     [esp+1Ch+arg_0], eax",
+    "line": "mov     [esp+1Ch+payload], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -223,31 +223,31 @@
   },
   {
     "ea": "0x7C7740",
-    "line": "lea     eax, [esp+1Ch+arg_0]",
+    "line": "lea     eax, [esp+1Ch+payload]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7C7744",
-    "line": "push    eax",
+    "line": "push    eax; payload",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C7745",
-    "line": "lea     ecx, [esp+20h+var_10]",
+    "line": "lea     ecx, [esp+20h+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7C7749",
-    "line": "push    ecx",
+    "line": "push    ecx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C774A",
-    "line": "lea     ecx, [esi+0F4h]",
+    "line": "lea     ecx, [esi+0F4h]; self",
     "mnemonic": "lea",
     "size": 6
   },
@@ -259,13 +259,13 @@
   },
   {
     "ea": "0x7C7758",
-    "line": "call    sub_7D5F80",
+    "line": "call    NiTRefPointerList__RemoveFirstByValue; Searches a refcounted pointer list by payload identity, removes the first matching node through RemovePosition, and returns a strong reference. Used for active/full shadow lights and receiver geometry removal.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7C775D",
-    "line": "mov     eax, [esp+1Ch+var_10]",
+    "line": "mov     eax, [esp+1Ch+result]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x7C7785",
-    "line": "mov     esi, [esp+1Ch+arg_0]",
+    "line": "mov     esi, [esp+1Ch+payload]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -490,5 +490,59 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9A9F20",
+    "line": "lea     ecx, [ebp+4]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9A9F23",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9A9F28",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9A9F2C",
+    "line": "lea     eax, [edx-0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9A9F2F",
+    "line": "mov     ecx, [edx-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9A9F32",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9A9F34",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9A9F39",
+    "line": "mov     eax, offset stru_AD6FAC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9A9F3E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x790A70",
-    "line": "push    ecx",
+    "line": "push    ecx; Oblivion 1.2.0.416: stdcall checked-template thunk to the shared 24-byte uninitialized-fill primitive; returns destination plus count*0x18.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790A71",
-    "line": "mov     edx, [esp+4+arg_8]",
+    "line": "mov     edx, [esp+4+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x790A76",
-    "line": "mov     esi, [esp+8+arg_4]",
+    "line": "mov     esi, [esp+8+count]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x790A7B",
-    "line": "mov     edi, [esp+0Ch+arg_0]",
+    "line": "mov     edi, [esp+0Ch+destination]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x790A89",
-    "line": "mov     eax, [esp+10h+arg_8]",
+    "line": "mov     eax, [esp+10h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -73,25 +73,25 @@
   },
   {
     "ea": "0x790A8F",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790A90",
-    "line": "push    esi",
+    "line": "push    esi; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790A91",
-    "line": "push    edi",
+    "line": "push    edi; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790A92",
-    "line": "call    sub_7848E0",
+    "line": "call    OB_stVector24_UninitializedFillN_010201A0; Oblivion 1.2.0.416: placement/uninitialized fill of count six-dword records; returns the advanced destination.",
     "mnemonic": "call",
     "size": 5
   },

@@ -10,7 +10,7 @@
 0x6991FD: mov     ecx, esi
 0x6991FF: call    edx
 0x699201: mov     ecx, ebx
-0x699203: call    EffectItemList_HasOnTarget
+0x699203: call    EffectItemList_HasOnTarget; True iff list has an EffectItem with range==2 (Target) and EffectSetting flag 0x400000 clear. Does not require hostile/detrimental.
 0x699208: test    al, al
 0x69920A: jz      short loc_699221
 0x69920C: test    edi, edi

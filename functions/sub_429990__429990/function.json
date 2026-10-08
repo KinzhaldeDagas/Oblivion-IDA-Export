@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
-  "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_429990",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 7,
+  "chunks": [
+    [
+      "0x429990",
+      "0x4299D1"
+    ]
+  ],
+  "chunks_sha256": "1148e9058644262cf34ab12939946ec91dfa60197b0d76e6b2d5c77f51c441b5",
+  "comment_regular": "Verified player-scaled lock level calculation. This reads ExtraLockData.level as a signed byte; when flags bit 0x04 is set it adds PlayerCharacter::GetLevel() multiplied by GameSettingFloat fLeveledLockMult and clamps to 99. Fallout's REFR_LOCK::GetLevel accepts an owner reference and uses that reference's calculated level when non-null; Oblivion always uses global PlayerCharacter reference. This is a direct implementation divergence.",
+  "comment_repeatable": "Verified player-scaled lock level calculation. This reads ExtraLockData.level as a signed byte; when flags bit 0x04 is set it adds PlayerCharacter::GetLevel() multiplied by GameSettingFloat fLeveledLockMult and clamps to 99. Fallout's REFR_LOCK::GetLevel accepts an owner reference and uses that reference's calculated level when non-null; Oblivion always uses global PlayerCharacter reference. This is a direct implementation divergence.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "ExtraLockData_GetPlayerScaledLockLevel",
   "end_ea": "0x4299D1",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_429990",
+  "name": "ExtraLockData_GetPlayerScaledLockLevel",
   "segment": ".text",
   "sha256": "1148e9058644262cf34ab12939946ec91dfa60197b0d76e6b2d5c77f51c441b5",
   "size": 65,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x429990",
-  "type": "void __thiscall(char *this)",
-  "xrefs_from_count": 23,
+  "total_chunk_size": 65,
+  "type": "int __thiscall(ExtraLockData *this)",
+  "xrefs_from_count": 24,
   "xrefs_to_count": 7
 }

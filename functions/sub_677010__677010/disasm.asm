@@ -14,8 +14,8 @@
 0x677034: jnz     short loc_67703B
 0x677036: cmp     dword ptr [esi], 0
 0x677039: jz      short loc_67704E
-0x67703B: mov     ecx, [esi]
-0x67703D: call    sub_6061F0
+0x67703B: mov     ecx, [esi]; self
+0x67703D: call    Crime_GetSaveSize
 0x677042: mov     esi, [esi+4]
 0x677045: add     word ptr [esp+10h+var_4], ax
 0x67704A: test    esi, esi

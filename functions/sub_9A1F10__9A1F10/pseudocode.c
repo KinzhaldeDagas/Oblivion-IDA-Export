@@ -1,4 +1,4 @@
-char *sub_9A1F10()
+NiRTTI *sub_9A1F10()
 {
-  return dword_BAA888;
+  return &stru_BAA888; /*0x9a1f15*/
 }

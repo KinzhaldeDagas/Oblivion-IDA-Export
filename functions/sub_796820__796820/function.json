@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x796820",
+      "0x796849"
+    ]
+  ],
+  "chunks_sha256": "6cdd9f4521ff0335960a653b7f0b9641ac6038e33d921420fba906e133c74ee7",
+  "comment_regular": "OBLIVION AUTHORITY (2026-08-30): Stdcall adapter for uninitialized copying of vector<unsigned short*> owners. Boundary repaired through ret 0x0C at 0x796846 and noreturn cleared.",
+  "comment_repeatable": "OBLIVION AUTHORITY (2026-08-30): Stdcall adapter for uninitialized copying of vector<unsigned short*> owners. Boundary repaired through ret 0x0C at 0x796846 and noreturn cleared.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_796820",
-  "end_ea": "0x796843",
-  "flags": 21505,
+  "display_name": "OB_stVector_stVectorUShortPtr_UninitializedCopyRangeThunk_010201A0",
+  "end_ea": "0x796849",
+  "evidence_confidence": "Unknown",
+  "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_796820",
+  "name": "OB_stVector_stVectorUShortPtr_UninitializedCopyRangeThunk_010201A0",
   "segment": ".text",
-  "sha256": "42f78e35575337b26eadb5b27ea86900a1760f40bfc6a772f3a6cd0b30c36286",
-  "size": 35,
+  "sha256": "6cdd9f4521ff0335960a653b7f0b9641ac6038e33d921420fba906e133c74ee7",
+  "size": 41,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x796820",
-  "type": "void __stdcall __noreturn(int, int, char *)",
-  "xrefs_from_count": 14,
+  "total_chunk_size": 41,
+  "type": "OB_stVectorUShortPtr_010201A0 *__stdcall(const OB_stVectorUShortPtr_010201A0 *first, const OB_stVectorUShortPtr_010201A0 *last, OB_stVectorUShortPtr_010201A0 *destination)",
+  "xrefs_from_count": 16,
   "xrefs_to_count": 2
 }

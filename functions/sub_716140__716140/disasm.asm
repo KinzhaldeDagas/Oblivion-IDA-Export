@@ -1,4 +1,4 @@
-0x716140: push    ecx
+0x716140: push    ecx; Viewer output confirms flags: bit 0 anim type APP_TIME/APP_INIT, bits 1..2 cycle LOOP/REVERSE/CLAMP, bit 3 Active, bit 4 Play Backwards; also reports frequency, phase, key range, runtime start/last time, and target.
 0x716141: mov     eax, ds:0B3FC98h
 0x716146: push    ebx
 0x716147: push    esi
@@ -6,7 +6,7 @@
 0x716149: push    eax; ArgList
 0x71614A: mov     edi, ecx
 0x71614C: call    TESOutput_PrintString
-0x716151: mov     esi, dword ptr [esp+14h+arg_0]
+0x716151: mov     esi, [esp+14h+arg_0]
 0x716155: movzx   ebx, word ptr [esi+0Ah]
 0x716159: movzx   ecx, word ptr [esi+8]
 0x71615D: add     esp, 4
@@ -32,7 +32,7 @@
 0x716198: movzx   ecx, word ptr [esi+8]
 0x71619C: add     esp, 8
 0x71619F: cmp     ebx, ecx
-0x7161A1: mov     dword ptr [esp+10h+arg_0], eax
+0x7161A1: mov     [esp+10h+arg_0], eax
 0x7161A5: jb      short loc_7161B5
 0x7161A7: movzx   edx, word ptr [esi+0Eh]
 0x7161AB: add     edx, ebx
@@ -53,7 +53,7 @@
 0x7161D7: movzx   ecx, word ptr [esi+8]
 0x7161DB: add     esp, 8
 0x7161DE: cmp     ebx, ecx
-0x7161E0: mov     dword ptr [esp+10h+arg_0], eax
+0x7161E0: mov     [esp+10h+arg_0], eax
 0x7161E4: jb      short loc_7161F4
 0x7161E6: movzx   edx, word ptr [esi+0Eh]
 0x7161EA: add     edx, ebx
@@ -74,7 +74,7 @@
 0x716216: movzx   ecx, word ptr [esi+8]
 0x71621A: add     esp, 8
 0x71621D: cmp     ebx, ecx
-0x71621F: mov     dword ptr [esp+10h+arg_0], eax
+0x71621F: mov     [esp+10h+arg_0], eax
 0x716223: jb      short loc_716233
 0x716225: movzx   edx, word ptr [esi+0Eh]
 0x716229: add     edx, ebx
@@ -95,7 +95,7 @@
 0x716255: movzx   ecx, word ptr [esi+8]
 0x716259: add     esp, 8
 0x71625C: cmp     ebx, ecx
-0x71625E: mov     dword ptr [esp+10h+arg_0], eax
+0x71625E: mov     [esp+10h+arg_0], eax
 0x716262: jb      short loc_716272
 0x716264: movzx   edx, word ptr [esi+0Eh]
 0x716268: add     edx, ebx
@@ -116,7 +116,7 @@
 0x716294: movzx   ecx, word ptr [esi+8]
 0x716298: add     esp, 8
 0x71629B: cmp     ebx, ecx
-0x71629D: mov     dword ptr [esp+10h+arg_0], eax
+0x71629D: mov     [esp+10h+arg_0], eax
 0x7162A1: jb      short loc_7162B1
 0x7162A3: movzx   edx, word ptr [esi+0Eh]
 0x7162A7: add     edx, ebx
@@ -137,7 +137,7 @@
 0x7162D3: movzx   ecx, word ptr [esi+8]
 0x7162D7: add     esp, 8
 0x7162DA: cmp     ebx, ecx
-0x7162DC: mov     dword ptr [esp+10h+arg_0], eax
+0x7162DC: mov     [esp+10h+arg_0], eax
 0x7162E0: jb      short loc_7162F0
 0x7162E2: movzx   edx, word ptr [esi+0Eh]
 0x7162E6: add     edx, ebx
@@ -157,7 +157,7 @@
 0x71630F: movzx   edx, word ptr [esi+8]
 0x716313: add     esp, 8
 0x716316: cmp     ebx, edx
-0x716318: mov     dword ptr [esp+10h+arg_0], eax
+0x716318: mov     [esp+10h+arg_0], eax
 0x71631C: jb      short loc_71632C
 0x71631E: movzx   eax, word ptr [esi+0Eh]
 0x716322: add     eax, ebx
@@ -173,12 +173,12 @@
 0x71633D: and     eax, 1
 0x716340: push    eax; int
 0x716341: push    offset aAnimType; "anim type"
-0x716346: call    sub_7158A0
+0x716346: call    NiTimeController_FormatAnimType; Formats NiTimeController animation time source: 0 APP_TIME, 1 APP_INIT.
 0x71634B: movzx   ebx, word ptr [esi+0Ah]
 0x71634F: movzx   edx, word ptr [esi+8]
 0x716353: add     esp, 8
 0x716356: cmp     ebx, edx
-0x716358: mov     dword ptr [esp+10h+arg_0], eax
+0x716358: mov     [esp+10h+arg_0], eax
 0x71635C: jb      short loc_71636C
 0x71635E: movzx   eax, word ptr [esi+0Eh]
 0x716362: add     eax, ebx
@@ -195,12 +195,12 @@
 0x71637F: and     eax, 3
 0x716382: push    eax; int
 0x716383: push    offset aCycleType; "cycle type"
-0x716388: call    sub_715910
+0x716388: call    NiTimeController_FormatCycleType; Formats NiTimeController cycle type: 0 LOOP, 1 REVERSE, 2 CLAMP.
 0x71638D: movzx   ebx, word ptr [esi+0Ah]
 0x716391: movzx   edx, word ptr [esi+8]
 0x716395: add     esp, 8
 0x716398: cmp     ebx, edx
-0x71639A: mov     dword ptr [esp+10h+arg_0], eax
+0x71639A: mov     [esp+10h+arg_0], eax
 0x71639E: jb      short loc_7163AE
 0x7163A0: movzx   eax, word ptr [esi+0Eh]
 0x7163A4: add     eax, ebx
@@ -215,8 +215,8 @@
 0x7163BB: mov     dl, [edi+8]
 0x7163BE: shr     dl, 3
 0x7163C1: and     dl, 1
-0x7163C4: mov     [esp+10h+arg_0], dl
-0x7163C8: mov     eax, dword ptr [esp+10h+arg_0]
+0x7163C4: mov     byte ptr [esp+10h+arg_0], dl
+0x7163C8: mov     eax, [esp+10h+arg_0]
 0x7163CC: push    eax; char
 0x7163CD: push    offset aActive; "Active"
 0x7163D2: call    TESOutput_PrintLabeledBool
@@ -224,7 +224,7 @@
 0x7163DB: movzx   ecx, word ptr [esi+8]
 0x7163DF: add     esp, 8
 0x7163E2: cmp     ebx, ecx
-0x7163E4: mov     dword ptr [esp+10h+arg_0], eax
+0x7163E4: mov     [esp+10h+arg_0], eax
 0x7163E8: jb      short loc_7163F8
 0x7163EA: movzx   edx, word ptr [esi+0Eh]
 0x7163EE: add     edx, ebx
@@ -239,13 +239,13 @@
 0x716405: mov     cl, [edi+8]
 0x716408: shr     cl, 4
 0x71640B: and     cl, 1
-0x71640E: mov     [esp+10h+arg_0], cl
-0x716412: mov     edx, dword ptr [esp+10h+arg_0]
+0x71640E: mov     byte ptr [esp+10h+arg_0], cl
+0x716412: mov     edx, [esp+10h+arg_0]
 0x716416: push    edx; char
 0x716417: push    offset aPlayBackwards; "Play Backwards"
 0x71641C: call    TESOutput_PrintLabeledBool
 0x716421: movzx   edi, word ptr [esi+0Ah]
-0x716425: mov     dword ptr [esp+18h+arg_0], eax
+0x716425: mov     [esp+18h+arg_0], eax
 0x716429: movzx   eax, word ptr [esi+8]
 0x71642D: add     esp, 8
 0x716430: cmp     edi, eax

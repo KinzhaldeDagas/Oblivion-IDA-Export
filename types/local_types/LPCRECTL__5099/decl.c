@@ -1,1 +1,1 @@
-LPCRECTL
+typedef const RECTL *LPCRECTL;

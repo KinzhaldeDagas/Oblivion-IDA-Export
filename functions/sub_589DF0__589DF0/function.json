@@ -1,19 +1,36 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x589DF0",
+      "0x589EA8"
+    ],
+    [
+      "0x9BF770",
+      "0x9BF796"
+    ]
+  ],
+  "chunks_sha256": "4955c44a724806834e342f3add03f628f437c3f7d4728557406927898eb8046d",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_589DF0",
+  "comment_repeatable": "\nVerified 2026-10-07: initializes 0x1C-byte Value; allocates two 0x18-byte sentinel nodes. Sentinel +8 stores owning Value*, opcode+0xC=101; pointers at+0/+4 and+0x10/+0x14 start NULL. Value +0x10/+0x14 point to action/reaction sentinels. These are not Fallout virtual Action objects.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "Tile::Value::Initialize",
   "end_ea": "0x589EA8",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
-  "name": "sub_589DF0",
+  "name": "Tile::Value::Initialize",
   "segment": ".text",
   "sha256": "55847c66617cd775560a133a09c79b0ae30f62be5c8b6dd7638504ce825fde0a",
   "size": 184,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x589DF0",
-  "type": "_DWORD *__thiscall(_DWORD *this, __int16)",
-  "xrefs_from_count": 65,
+  "total_chunk_size": 222,
+  "type": "OblivionTileValueView *__thiscall(OblivionTileValueView *this, unsigned __int16 trait)",
+  "xrefs_from_count": 77,
   "xrefs_to_count": 1
 }

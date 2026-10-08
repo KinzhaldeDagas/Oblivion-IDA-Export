@@ -72,7 +72,7 @@
 0x43DCCB: mov     edx, [esi+14h]
 0x43DCCE: mov     cl, 10h
 0x43DCD0: call    __allshr
-0x43DCD5: mov     ecx, ModelLoaderPtr
+0x43DCD5: mov     ecx, ds:0B33A1Ch
 0x43DCDB: movzx   eax, al
 0x43DCDE: push    esi
 0x43DCDF: push    eax
@@ -115,7 +115,7 @@
 0x43DD46: push    esi
 0x43DD47: mov     cl, 10h
 0x43DD49: call    __allshr
-0x43DD4E: mov     ecx, ModelLoaderPtr
+0x43DD4E: mov     ecx, ds:0B33A1Ch
 0x43DD54: movzx   edx, al
 0x43DD57: push    edx
 0x43DD58: push    edi
@@ -132,3 +132,14 @@
 0x43DD7B: pop     ebx
 0x43DD7C: add     esp, 14h
 0x43DD7F: retn
+0x9ACD40: lea     ecx, [ebp-14h]; void *
+0x9ACD43: jmp     sub_4BDDC0
+0x9ACD48: lea     ecx, [ebp-10h]; void *
+0x9ACD4B: jmp     sub_4BDDC0
+0x9ACD50: mov     edx, [esp+arg_4]
+0x9ACD54: lea     eax, [edx-14h]
+0x9ACD57: mov     ecx, [edx-18h]
+0x9ACD5A: xor     ecx, eax
+0x9ACD5C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9ACD61: mov     eax, offset stru_AD99A8
+0x9ACD66: jmp     ___CxxFrameHandler3

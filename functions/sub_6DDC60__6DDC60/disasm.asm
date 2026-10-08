@@ -6,7 +6,7 @@
 0x6DDC6B: push    ebx
 0x6DDC6C: push    esi
 0x6DDC6D: mov     edi, ecx
-0x6DDC6F: call    sub_715D80
+0x6DDC6F: call    NiTimeController_CopyMembers; Copies flags and timing values through +0x24. Remaps target +0x30 through the clone map only when runtime types match, and clones the refcounted next-controller chain at +0x34. Runtime cache +0x28 and update/force bytes are not copied here.
 0x6DDC74: mov     ax, [edi+3Ch]
 0x6DDC78: mov     [esi+3Ch], ax
 0x6DDC7C: mov     ecx, [edi+48h]
@@ -106,10 +106,10 @@
 0x6DDD96: lea     ecx, ds:0[ebp*4]
 0x6DDD9D: mov     [esi+50h], eax
 0x6DDDA0: mov     edx, [edi+50h]
-0x6DDDA3: push    ecx; Size
-0x6DDDA4: push    edx; Src
-0x6DDDA5: push    eax; Dst
-0x6DDDA6: call    _memcpy
+0x6DDDA3: push    ecx; byteCount
+0x6DDDA4: push    edx; source
+0x6DDDA5: push    eax; destination
+0x6DDDA6: call    _memcpy;
 0x6DDDAB: add     esp, 10h
 0x6DDDAE: pop     ebp
 0x6DDDAF: fld     dword ptr [edi+54h]

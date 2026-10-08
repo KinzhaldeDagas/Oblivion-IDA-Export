@@ -1,16 +1,16 @@
-0x656C90: mov     eax, [esp+arg_4]
+0x656C90: mov     eax, [esp+currentFlags]
 0x656C94: sub     esp, 88h
 0x656C9A: push    ebx
-0x656C9B: mov     ebx, [esp+8Ch+arg_8]
+0x656C9B: mov     ebx, [esp+8Ch+owner]
 0x656CA2: push    esi
 0x656CA3: push    edi
-0x656CA4: push    ebx
+0x656CA4: push    ebx; owner
 0x656CA5: mov     esi, ecx
-0x656CA7: mov     ecx, [esp+98h+arg_0]
-0x656CAE: push    eax
-0x656CAF: push    ecx
-0x656CB0: mov     ecx, esi
-0x656CB2: call    sub_60CF80
+0x656CA7: mov     ecx, [esp+98h+changeMask]
+0x656CAE: push    eax; currentFlags
+0x656CAF: push    ecx; changeMask
+0x656CB0: mov     ecx, esi; self
+0x656CB2: call    BaseProcess_FinishInitLoadGame
 0x656CB7: push    0; int
 0x656CB9: push    offset ??_R0?AVActor@@@8; struct TypeDescriptor *
 0x656CBE: push    offset ??_R0?AVMobileObject@@@8; struct _s_RTTICompleteObjectLocator *
@@ -48,12 +48,12 @@
 0x656D19: mov     ebp, [esi]
 0x656D1B: jnz     short loc_656D66
 0x656D1D: push    ecx
-0x656D1E: push    1; a2
-0x656D20: call    Player_GetAnimData
-0x656D25: mov     ecx, ds:0B333C4h
+0x656D1E: push    1; firstPerson
+0x656D20: call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.
+0x656D25: mov     ecx, ds:0B333C4h; this
 0x656D2B: push    eax
-0x656D2C: push    1
-0x656D2E: call    sub_6600D0
+0x656D2C: push    1; firstPerson
+0x656D2E: call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.
 0x656D33: movzx   ecx, byte ptr [esi+115h]
 0x656D3A: mov     edx, [ebp+150h]
 0x656D40: push    eax
@@ -63,12 +63,12 @@
 0x656D46: mov     ecx, ds:0B333C4h; this
 0x656D4C: mov     ebp, [esi]
 0x656D4E: push    ecx
-0x656D4F: push    0; a2
-0x656D51: call    Player_GetAnimData
-0x656D56: mov     ecx, ds:0B333C4h
+0x656D4F: push    0; firstPerson
+0x656D51: call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.
+0x656D56: mov     ecx, ds:0B333C4h; this
 0x656D5C: push    eax
-0x656D5D: push    0
-0x656D5F: call    sub_6600D0
+0x656D5D: push    0; firstPerson
+0x656D5F: call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.
 0x656D64: jmp     short loc_656DBA
 0x656D66: mov     eax, [edi]
 0x656D68: mov     edx, [eax+168h]
@@ -108,11 +108,11 @@
 0x656DC8: push    eax
 0x656DC9: mov     ecx, esi
 0x656DCB: call    edx
-0x656DCD: mov     ecx, ds:0B333C4h
+0x656DCD: mov     ecx, ds:0B333C4h; this
 0x656DD3: cmp     ebx, ecx
 0x656DD5: jnz     short loc_656DE0
-0x656DD7: push    0
-0x656DD9: call    PlayerCharacter_GetPlayerNode
+0x656DD7: push    0; firstPerson
+0x656DD9: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x656DDE: jmp     short loc_656DE3
 0x656DE0: mov     eax, [ebx+3Ch]
 0x656DE3: test    edi, edi
@@ -130,10 +130,10 @@
 0x656E14: test    al, al
 0x656E16: jnz     loc_657225
 0x656E1C: mov     ecx, [esi+120h]; this
-0x656E22: call    TESObjectREFR_GetParentCell
+0x656E22: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x656E27: mov     ecx, edi; this
 0x656E29: mov     ebp, eax
-0x656E2B: call    TESObjectREFR_GetParentCell
+0x656E2B: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x656E30: cmp     eax, ebp
 0x656E32: jnz     loc_6572EE
 0x656E38: mov     edx, [esi]
@@ -303,7 +303,7 @@
 0x65709E: fadd    dword ptr [eax+28h]
 0x6570A1: fstp    [esp+9Ch+var_88]
 0x6570A5: fld     [esp+9Ch+var_88]
-0x6570A9: fstp    [esp+9Ch+var_9C]; float
+0x6570A9: fstp    [esp+9Ch+angleZ]; float
 0x6570AC: call    sub_6FAEE0
 0x6570B1: mov     edx, [edi]
 0x6570B3: mov     eax, [edx+0ECh]
@@ -312,7 +312,7 @@
 0x6570C2: call    eax
 0x6570C4: push    ecx
 0x6570C5: lea     ecx, [esp+9Ch+var_70]
-0x6570C9: fstp    [esp+9Ch+var_9C]; float
+0x6570C9: fstp    [esp+9Ch+angleZ]; float
 0x6570CC: push    ebp; int
 0x6570CD: push    ecx; int
 0x6570CE: mov     ecx, [esp+0A4h+var_84]
@@ -320,13 +320,13 @@
 0x6570D7: movzx   edx, word ptr [esi+134h]
 0x6570DE: mov     [esp+98h+var_88], edx
 0x6570E2: push    ecx
-0x6570E3: lea     ecx, [esp+9Ch+var_48]
+0x6570E3: lea     ecx, [esp+9Ch+var_48]; this
 0x6570E7: fild    [esp+9Ch+var_88]
 0x6570EB: fdiv    qword ptr ds:0A2FC70h
 0x6570F1: fstp    [esp+9Ch+var_88]
 0x6570F5: fld     [esp+9Ch+var_88]
-0x6570F9: fstp    [esp+9Ch+var_9C]; float
-0x6570FC: call    NiMatrix33_InitRotationTransform
+0x6570F9: fstp    [esp+9Ch+angleZ]; angleZ
+0x6570FC: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x657101: lea     eax, [esp+98h+var_70]
 0x657105: push    eax
 0x657106: lea     ecx, [esp+9Ch+var_7C]
@@ -369,7 +369,7 @@
 0x657192: fdiv    qword ptr ds:0A2FC70h
 0x657198: fstp    [esp+9Ch+var_88]
 0x65719C: fld     [esp+9Ch+var_88]
-0x6571A0: fstp    [esp+9Ch+var_9C]
+0x6571A0: fstp    [esp+9Ch+angleZ]
 0x6571A3: call    edx
 0x6571A5: movzx   eax, byte ptr [esi+136h]
 0x6571AC: mov     ecx, [esp+98h+var_84]
@@ -377,18 +377,18 @@
 0x6571B1: call    sub_4AEBE0
 0x6571B6: push    ecx
 0x6571B7: mov     ecx, edi
-0x6571B9: fstp    [esp+9Ch+var_9C]; float
+0x6571B9: fstp    [esp+9Ch+angleZ]; float
 0x6571BC: call    sub_659B90
 0x6571C1: mov     ecx, edi; this
 0x6571C3: mov     [esi+11Dh], bl
-0x6571C9: call    MobileObject_GetCharProxy
+0x6571C9: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x6571CE: test    eax, eax
 0x6571D0: jz      short loc_6571E1
 0x6571D2: push    ebp; a2
 0x6571D3: mov     ecx, edi; this
-0x6571D5: call    MobileObject_GetCharProxy
+0x6571D5: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x6571DA: mov     ecx, eax; this
-0x6571DC: call    sub_452A10
+0x6571DC: call    sub_452A10; TES4 authoritative: converts TES/world NiPoint3 into Havok units with hkFactor, then writes proxy position through 0x891560.
 0x6571E1: mov     eax, [esi]
 0x6571E3: mov     edx, [eax+8]
 0x6571E6: mov     ecx, esi
@@ -413,7 +413,7 @@
 0x657215: push    eax
 0x657216: call    sub_88CE30
 0x65721B: add     esp, 10h
-0x65721E: mov     ebx, [esp+98h+arg_8]
+0x65721E: mov     ebx, [esp+98h+owner]
 0x657225: cmp     byte ptr [esi+11Dh], 0
 0x65722C: jz      short loc_65725D
 0x65722E: mov     edx, [edi]
@@ -441,18 +441,18 @@
 0x657279: push    1; a3
 0x65727B: push    1; a2
 0x65727D: push    ebp; a1
-0x65727E: call    sub_88D070
+0x65727E: call    sub_88D070; ODismemberment: bhkBlendCollisionObject traversal entry. Requires bhkBlendCollisionObject or forced flag; queues callback off off_B2E314 with state payload including a2 and a3.
 0x657283: fldz
 0x657285: add     esp, 10h
 0x657288: push    0; a3
 0x65728A: push    ecx
 0x65728B: mov     ecx, ebp; this
 0x65728D: fstp    [esp+0A0h+a2]; a2
-0x657290: call    NiAVObject_UpdateNiAVObject
+0x657290: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x657295: mov     ecx, [esi+174h]
-0x65729B: push    edi
-0x65729C: push    ecx
-0x65729D: call    ActiveEffect_Base_PostLinkAEList
+0x65729B: push    edi; linkContext
+0x65729C: push    ecx; activeEffectList
+0x65729D: call    ActiveEffect_Base_PostLinkAEList; Verified post-link entry iterates the target ActiveEffect EffectNode list and dispatches each ActiveEffect virtual +0x1C with the target/reference linkContext. TESObjectREFR_PostLinkModifiedExtraList calls this for a linked NonActorMagicTarget list (null context); actor/player post-link paths pass their reference context.
 0x6572A2: add     esp, 8
 0x6572A5: test    edi, edi
 0x6572A7: mov     byte ptr [esi+161h], 1
@@ -470,9 +470,9 @@
 0x6572CB: jz      short loc_6572E2
 0x6572CD: cmp     dword ptr [esi+13Ch], 0
 0x6572D4: jnz     short loc_6572E2
-0x6572D6: mov     ecx, ds:0B33B00h
-0x6572DC: push    ebx
-0x6572DD: call    sub_453910
+0x6572D6: mov     ecx, ds:0B33B00h; self
+0x6572DC: push    ebx; form
+0x6572DD: call    TESSaveLoadGame_QueueDeferredDeletion
 0x6572E2: pop     edi
 0x6572E3: pop     esi
 0x6572E4: pop     ebx

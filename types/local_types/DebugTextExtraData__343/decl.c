@@ -1,1 +1,1 @@
-DebugTextExtraData
+struct DebugTextExtraData;

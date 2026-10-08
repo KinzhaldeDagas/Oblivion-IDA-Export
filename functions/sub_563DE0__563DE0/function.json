@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x563DE0",
+      "0x563E29"
+    ]
+  ],
+  "chunks_sha256": "0814e2d5607f32b723c1196ba742fa916a682966e902f2e0605157fab02f2a1d",
+  "comment_regular": "\n\n[2026-10-03 frond completion] Verified scene application: alpha255 sets NiAVObject WORD flags+18 bit0; visible alpha clears bit0 and writes NiAlphaProperty byte+1A via GetProperty(type0) 0x707530. Fallout 0x8246DDF8 corroborates semantics but has different object flag offsets. Each plugin frond alpha property is separately allocated by 0x561030; runtime fade updates are per shape.\n\nLeaf alpha threshold 0..254 writes ALPHAREF; 255 hides the leaf shape. Terminal mip max-alpha 83 fails the stock GREATER 84 test everywhere: complete cutout disappearance, distinct from lighting/fog RGB blackening.",
+  "comment_repeatable": "Leaf alpha threshold 0..254 writes ALPHAREF; 255 hides the leaf shape. Terminal mip max-alpha 83 fails the stock GREATER 84 test everywhere: complete cutout disappearance, distinct from lighting/fog RGB blackening.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_563DE0",
+  "display_name": "OB_BSTreeNode_SetLeafLodAlphaThreshold_010201A0",
   "end_ea": "0x563E29",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_563DE0",
+  "name": "OB_BSTreeNode_SetLeafLodAlphaThreshold_010201A0",
   "segment": ".text",
   "sha256": "0814e2d5607f32b723c1196ba742fa916a682966e902f2e0605157fab02f2a1d",
   "size": 73,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x563DE0",
-  "type": "char __thiscall(void *this, int, char)",
+  "total_chunk_size": 73,
+  "type": "char __thiscall(void *treeNode, int leafLodIndex, unsigned __int8 alphaTestReference)",
   "xrefs_from_count": 28,
   "xrefs_to_count": 1
 }

@@ -4,7 +4,7 @@
 0x6AE865: xor     ebp, ebp
 0x6AE867: mov     esi, ecx
 0x6AE869: cmp     [esi+8], ebp
-0x6AE86C: mov     [esp+40h+var_38], ebp
+0x6AE86C: mov     [esp+40h+valueOut], ebp
 0x6AE870: jz      loc_6AF64E
 0x6AE876: cmp     byte ptr ds:0B16178h, 0
 0x6AE87D: jz      loc_6AF64E
@@ -24,7 +24,7 @@
 0x6AE8A8: jnz     short loc_6AE8AE
 0x6AE8AA: mov     bl, 1
 0x6AE8AC: jmp     short loc_6AE8B2
-0x6AE8AE: mov     bl, byte ptr [esp+44h+arg_0]
+0x6AE8AE: mov     bl, byte ptr [esp+44h+position]
 0x6AE8B2: mov     al, [esi+0A6h]
 0x6AE8B8: test    al, al
 0x6AE8BA: jnz     short loc_6AE8CD
@@ -55,20 +55,20 @@
 0x6AE8FE: cmp     byte ptr [esp+48h+arg_4], 0
 0x6AE903: jnz     loc_6AEA5E
 0x6AE909: mov     ecx, [esi+300h]
-0x6AE90F: call    sub_6A9030
+0x6AE90F: call    NiTMapBase_GetFirstNode
 0x6AE914: cmp     eax, ebp
-0x6AE916: mov     [esp+48h+arg_0], eax
+0x6AE916: mov     [esp+48h+position], eax
 0x6AE91A: jz      short loc_6AE972
 0x6AE91C: lea     esp, [esp+0]
-0x6AE920: lea     eax, [esp+48h+var_38]
-0x6AE924: push    eax
-0x6AE925: lea     ecx, [esp+4Ch+var_30]
-0x6AE929: push    ecx
-0x6AE92A: mov     ecx, [esi+300h]
-0x6AE930: lea     edx, [esp+50h+arg_0]
-0x6AE934: push    edx
-0x6AE935: call    sub_452600
-0x6AE93A: mov     ecx, [esp+48h+var_38]
+0x6AE920: lea     eax, [esp+48h+valueOut]
+0x6AE924: push    eax; valueOut
+0x6AE925: lea     ecx, [esp+4Ch+keyOut]
+0x6AE929: push    ecx; keyOut
+0x6AE92A: mov     ecx, [esi+300h]; self
+0x6AE930: lea     edx, [esp+50h+position]
+0x6AE934: push    edx; position
+0x6AE935: call    NiTMap_U32Pointer_GetNextEntry
+0x6AE93A: mov     ecx, [esp+48h+valueOut]
 0x6AE93E: mov     eax, [ecx]
 0x6AE940: test    eax, 100h
 0x6AE945: jz      short loc_6AE96C
@@ -77,13 +77,13 @@
 0x6AE94B: call    sub_6B6AF0
 0x6AE950: test    al, al
 0x6AE952: jnz     short loc_6AE96C
-0x6AE954: mov     eax, [esp+48h+var_30]
+0x6AE954: mov     eax, [esp+48h+keyOut]
 0x6AE958: lea     ecx, [esp+48h+arg_4]
 0x6AE95C: push    ecx
 0x6AE95D: mov     ecx, [esi+320h]
 0x6AE963: mov     [esp+4Ch+arg_4], eax
-0x6AE967: call    sub_6AA320
-0x6AE96C: cmp     [esp+48h+arg_0], ebp
+0x6AE967: call    NiTList_AddHead; NiTList AddHead helper. Allocates a node, stores payload at +0x08, installs it as the list head, repairs the previous head/backlink or empty-list tail, and increments count. Repeated per-light calls reverse the source iterator order.
+0x6AE96C: cmp     [esp+48h+position], ebp
 0x6AE970: jnz     short loc_6AE920
 0x6AE972: mov     edx, [esi+320h]
 0x6AE978: cmp     [edx+0Ch], ebp
@@ -91,7 +91,6 @@
 0x6AE981: or      ebx, 0FFFFFFFFh
 0x6AE984: jmp     short loc_6AE992
 0x6AE986: jmp     short loc_6AE990
-0x6AE988: align 10h
 0x6AE990: xor     ebp, ebp
 0x6AE992: mov     edi, [esi+320h]
 0x6AE998: mov     eax, [edi+4]
@@ -138,7 +137,7 @@
 0x6AEA11: jge     short loc_6AEA19
 0x6AEA13: fadd    dword ptr ds:0A2FC78h
 0x6AEA19: fsubp   st(1), st
-0x6AEA1B: call    Double_To_SInt32
+0x6AEA1B: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x6AEA20: add     eax, 0FFFFFFFFh
 0x6AEA23: cmp     eax, 1Ch
 0x6AEA26: ja      short loc_6AEA36
@@ -153,8 +152,8 @@
 0x6AEA36: fnstcw  word ptr [esp+48h+arg_4]
 0x6AEA3A: movzx   eax, word ptr [esp+48h+arg_4]
 0x6AEA3F: or      eax, 0C00h
-0x6AEA44: mov     [esp+48h+arg_0], eax
-0x6AEA48: fldcw   word ptr [esp+48h+arg_0]
+0x6AEA44: mov     [esp+48h+position], eax
+0x6AEA48: fldcw   word ptr [esp+48h+position]
 0x6AEA4C: fistp   [esp+48h+var_24+4]
 0x6AEA50: mov     ecx, dword ptr [esp+48h+var_24+4]
 0x6AEA54: mov     [esi+0CCh], ecx
@@ -213,7 +212,7 @@
 0x6AEB15: jz      loc_6AEEC4
 0x6AEB1B: mov     ebx, [eax+4]
 0x6AEB1E: test    ebx, ebx
-0x6AEB20: mov     [esp+44h+var_30], ebx
+0x6AEB20: mov     [esp+44h+keyOut], ebx
 0x6AEB24: jz      loc_6AEEC4
 0x6AEB2A: lea     ebx, [ebx+0]
 0x6AEB30: mov     eax, [ebx+4]
@@ -282,7 +281,7 @@
 0x6AEC0B: fstp    [esp+44h+arg_8]
 0x6AEC0F: fld     [esp+44h+arg_8]
 0x6AEC13: fmul    qword ptr ds:0A77230h
-0x6AEC19: call    Double_To_SInt32
+0x6AEC19: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x6AEC1E: cmp     eax, 2710h
 0x6AEC23: jl      short loc_6AEC2A
 0x6AEC25: mov     eax, 2710h
@@ -296,11 +295,11 @@
 0x6AEC41: mov     ecx, edi
 0x6AEC43: fstp    [esp+48h+var_48]; float
 0x6AEC46: call    sub_6B6F20
-0x6AEC4B: lea     eax, [esp+44h+var_30]
+0x6AEC4B: lea     eax, [esp+44h+keyOut]
 0x6AEC4F: mov     byte ptr [edi+4Bh], 0
-0x6AEC53: mov     ecx, [esi+308h]
-0x6AEC59: push    eax
-0x6AEC5A: call    sub_7AA860
+0x6AEC53: mov     ecx, [esi+308h]; list
+0x6AEC59: push    eax; node
+0x6AEC5A: call    NiTPointerList_RemoveNode; [Verified] Generic NiTPointerList node-removal helper. Unlinks the supplied node, updates head/tail and neighboring links, invokes the list's FreeNode vfunc, decrements item count, and returns the removed node's data pointer.
 0x6AEC5F: push    1
 0x6AEC61: mov     ecx, ebp
 0x6AEC63: call    sub_6AA6F0
@@ -345,7 +344,7 @@
 0x6AECF5: fstp    [esp+44h+arg_8]
 0x6AECF9: fld     [esp+44h+arg_8]
 0x6AECFD: fmul    qword ptr ds:0A77230h
-0x6AED03: call    Double_To_SInt32
+0x6AED03: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x6AED08: cmp     eax, 2710h
 0x6AED0D: jl      short loc_6AED14
 0x6AED0F: mov     eax, 2710h
@@ -390,7 +389,7 @@
 0x6AED9D: call    sub_40FEC0
 0x6AEDA2: add     esp, 8
 0x6AEDA5: mov     ecx, edi
-0x6AEDA7: call    NiDX9TextureData__GetTexture
+0x6AEDA7: call    NiDX9TextureData__GetTexture; DX10OBSE resource decode: NiDX9TextureData::GetTexture returns stored IDirect3DBaseTexture9*; this is the object later bound at the D3D9 stage/sampler index.
 0x6AEDAC: mov     ebx, eax
 0x6AEDAE: test    ebx, ebx
 0x6AEDB0: jz      short loc_6AEE03
@@ -457,10 +456,10 @@
 0x6AEE70: jz      short loc_6AEE79
 0x6AEE72: or      eax, 100h
 0x6AEE77: mov     [edi], eax
-0x6AEE79: mov     ecx, [esi+308h]
-0x6AEE7F: lea     edx, [esp+44h+var_30]
-0x6AEE83: push    edx
-0x6AEE84: call    sub_7AA860
+0x6AEE79: mov     ecx, [esi+308h]; list
+0x6AEE7F: lea     edx, [esp+44h+keyOut]
+0x6AEE83: push    edx; node
+0x6AEE84: call    NiTPointerList_RemoveNode; [Verified] Generic NiTPointerList node-removal helper. Unlinks the supplied node, updates head/tail and neighboring links, invokes the list's FreeNode vfunc, decrements item count, and returns the removed node's data pointer.
 0x6AEE89: push    1
 0x6AEE8B: mov     ecx, ebp
 0x6AEE8D: call    sub_6AA6F0
@@ -476,19 +475,19 @@
 0x6AEEB4: jz      short loc_6AEEC4
 0x6AEEB6: mov     ebx, [ebx]
 0x6AEEB8: test    ebx, ebx
-0x6AEEBA: mov     [esp+44h+var_30], ebx
+0x6AEEBA: mov     [esp+44h+keyOut], ebx
 0x6AEEBE: jnz     loc_6AEB30
 0x6AEEC4: mov     ecx, ds:0B333C4h; this
 0x6AEECA: lea     ebx, [ecx+6ECh]
 0x6AEED0: mov     byte ptr [esp+44h+arg_8], 0
 0x6AEED5: mov     [esp+44h+arg_4], ebx
-0x6AEED9: call    TESObjectREFR_GetParentCell
+0x6AEED9: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6AEEDE: test    eax, eax
 0x6AEEE0: jz      short loc_6AEEFC
 0x6AEEE2: mov     ecx, ds:0B333C4h; this
-0x6AEEE8: call    TESObjectREFR_GetParentCell
+0x6AEEE8: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6AEEED: mov     ecx, eax; this
-0x6AEEEF: call    TESObjectCELL_IsInterior
+0x6AEEEF: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x6AEEF4: test    al, al
 0x6AEEF6: jnz     loc_6AF317
 0x6AEEFC: mov     eax, ds:0B33EA0h
@@ -508,12 +507,12 @@
 0x6AEF3A: mov     edx, [edx+5Ch]
 0x6AEF3D: fld     dword ptr [edx+0D0h]
 0x6AEF43: mov     byte ptr [esp+44h+arg_8], 1
-0x6AEF48: fstp    [esp+44h+var_30]
+0x6AEF48: fstp    [esp+44h+keyOut]
 0x6AEF4C: mov     dword ptr [esp+44h+ArgList], 0
 0x6AEF54: mov     dword ptr [esp+44h+var_24+8], edx
 0x6AEF58: jz      loc_6AF317
 0x6AEF5E: fld     qword ptr ds:0A771C8h
-0x6AEF64: fld     [esp+44h+var_30]
+0x6AEF64: fld     [esp+44h+keyOut]
 0x6AEF68: mov     ebp, [ebx]
 0x6AEF6A: test    ebp, ebp
 0x6AEF6C: jz      loc_6AF313
@@ -676,7 +675,7 @@
 0x6AF14E: push    0; Seed
 0x6AF150: fmul    qword ptr ds:0A2FAA0h
 0x6AF156: fstp    [esp+48h+var_28]
-0x6AF15A: call    GetRandomLargeInteger?
+0x6AF15A: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x6AF15F: mov     dword ptr [esp+48h+var_24], eax
 0x6AF163: fild    dword ptr [esp+48h+var_24]
 0x6AF167: add     esp, 4
@@ -722,7 +721,7 @@
 0x6AF1EC: mov     [esp+48h+var_14], ecx
 0x6AF1F0: mov     [esp+48h+var_10], edx
 0x6AF1F4: mov     [esp+48h+var_C], eax
-0x6AF1F8: call    GetRandomLargeInteger?
+0x6AF1F8: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x6AF1FD: mov     edi, eax
 0x6AF1FF: and     edi, 80000001h
 0x6AF205: jns     short loc_6AF20C
@@ -730,7 +729,7 @@
 0x6AF208: or      edi, 0FFFFFFFEh
 0x6AF20B: inc     edi
 0x6AF20C: push    0; Seed
-0x6AF20E: call    GetRandomLargeInteger?
+0x6AF20E: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x6AF213: mov     dword ptr [esp+4Ch+var_24], eax
 0x6AF217: fild    dword ptr [esp+4Ch+var_24]
 0x6AF21B: add     esp, 8
@@ -747,7 +746,7 @@
 0x6AF246: fadd    [esp+50h+var_24]
 0x6AF24A: fadd    [esp+50h+var_14]
 0x6AF24E: fstp    [esp+50h+var_14]
-0x6AF252: call    GetRandomLargeInteger?
+0x6AF252: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x6AF257: add     esp, 0Ch
 0x6AF25A: and     eax, 80000001h
 0x6AF25F: jns     short loc_6AF266
@@ -761,7 +760,7 @@
 0x6AF271: call    sub_507010
 0x6AF276: push    0; Seed
 0x6AF278: fstp    [esp+50h+var_28]
-0x6AF27C: call    GetRandomLargeInteger?
+0x6AF27C: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x6AF281: mov     dword ptr [esp+50h+var_24], eax
 0x6AF285: fild    dword ptr [esp+50h+var_24]
 0x6AF289: mov     ecx, ebp
@@ -788,12 +787,12 @@
 0x6AF2DE: mov     ecx, ebp; this
 0x6AF2E0: call    sub_6B73E0
 0x6AF2E5: push    ebp
-0x6AF2E6: call    FormHeapFree
+0x6AF2E6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6AF2EB: add     esp, 4
 0x6AF2EE: mov     ecx, [esp+44h+arg_4]
 0x6AF2F2: fld     qword ptr ds:0A771C8h
 0x6AF2F8: mov     edx, [ecx+4]
-0x6AF2FB: fld     [esp+44h+var_30]
+0x6AF2FB: fld     [esp+44h+keyOut]
 0x6AF2FF: mov     [esp+44h+arg_4], edx
 0x6AF303: mov     edx, dword ptr [esp+44h+var_24+8]
 0x6AF307: mov     ebx, [esp+44h+arg_4]
@@ -804,18 +803,18 @@
 0x6AF317: mov     ecx, esi
 0x6AF319: call    sub_6AD030
 0x6AF31E: mov     ecx, [esi+300h]
-0x6AF324: call    sub_6A9030
+0x6AF324: call    NiTMapBase_GetFirstNode
 0x6AF329: test    eax, eax
 0x6AF32B: mov     [esp+44h+arg_4], eax
 0x6AF32F: jz      loc_6AF5B6
 0x6AF335: lea     eax, [esp+44h+var_34]
-0x6AF339: push    eax
+0x6AF339: push    eax; valueOut
 0x6AF33A: lea     ecx, [esp+48h+ArgList]
-0x6AF33E: push    ecx
-0x6AF33F: mov     ecx, [esi+300h]
+0x6AF33E: push    ecx; keyOut
+0x6AF33F: mov     ecx, [esi+300h]; self
 0x6AF345: lea     edx, [esp+4Ch+arg_4]
-0x6AF349: push    edx
-0x6AF34A: call    sub_452600
+0x6AF349: push    edx; position
+0x6AF34A: call    NiTMap_U32Pointer_GetNextEntry
 0x6AF34F: mov     edi, [esp+44h+var_34]
 0x6AF353: mov     eax, [edi]
 0x6AF355: test    eax, 1000h
@@ -899,15 +898,15 @@
 0x6AF456: jge     short loc_6AF45E
 0x6AF458: fadd    dword ptr ds:0A2FC78h
 0x6AF45E: cmp     byte ptr ds:0B333B8h, 0
-0x6AF465: fstp    [esp+44h+var_30]
+0x6AF465: fstp    [esp+44h+keyOut]
 0x6AF469: jz      short loc_6AF47E
 0x6AF46B: test    bl, 4
 0x6AF46E: jnz     short loc_6AF47E
-0x6AF470: fld     [esp+44h+var_30]
+0x6AF470: fld     [esp+44h+keyOut]
 0x6AF474: fmul    qword ptr ds:0A3C770h
-0x6AF47A: fstp    [esp+44h+var_30]
+0x6AF47A: fstp    [esp+44h+keyOut]
 0x6AF47E: fld     dword ptr [esp+44h+var_24+8]
-0x6AF482: fld     [esp+44h+var_30]
+0x6AF482: fld     [esp+44h+keyOut]
 0x6AF486: fcompp
 0x6AF488: fnstsw  ax
 0x6AF48A: test    ah, 5
@@ -1003,7 +1002,7 @@
 0x6AF59B: push    ecx
 0x6AF59C: mov     ecx, [esi+320h]
 0x6AF5A2: mov     dword ptr [esp+48h+var_24+8], eax
-0x6AF5A6: call    sub_6AA320
+0x6AF5A6: call    NiTList_AddHead; NiTList AddHead helper. Allocates a node, stores payload at +0x08, installs it as the list head, repairs the previous head/backlink or empty-list tail, and increments count. Repeated per-light calls reverse the source iterator order.
 0x6AF5AB: cmp     [esp+44h+arg_4], 0
 0x6AF5B0: jnz     loc_6AF335
 0x6AF5B6: mov     eax, [esi+78h]
@@ -1032,17 +1031,17 @@
 0x6AF5F5: mov     ecx, edi
 0x6AF5F7: call    eax
 0x6AF5F9: add     [edi+0Ch], ebx
-0x6AF5FC: lea     ecx, [esp+48h+arg_0]
+0x6AF5FC: lea     ecx, [esp+48h+position]
 0x6AF600: push    ecx
 0x6AF601: mov     ecx, [esi+300h]
 0x6AF607: push    ebp
-0x6AF608: mov     [esp+50h+arg_0], 0
+0x6AF608: mov     [esp+50h+position], 0
 0x6AF610: call    NiTMap_GetAt
-0x6AF615: mov     eax, [esp+48h+arg_0]
+0x6AF615: mov     eax, [esp+48h+position]
 0x6AF619: test    eax, eax
-0x6AF61B: mov     [esp+48h+arg_0], eax
+0x6AF61B: mov     [esp+48h+position], eax
 0x6AF61F: jz      short loc_6AF62D
-0x6AF621: lea     edx, [esp+48h+arg_0]
+0x6AF621: lea     edx, [esp+48h+position]
 0x6AF625: push    edx
 0x6AF626: mov     ecx, esi
 0x6AF628: call    sub_6AA9C0

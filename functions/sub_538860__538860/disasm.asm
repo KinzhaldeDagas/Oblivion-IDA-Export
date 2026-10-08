@@ -15,7 +15,7 @@
 0x53887E: call    edx
 0x538880: test    eax, eax
 0x538882: jz      short loc_538892
-0x538884: cmp     eax, offset dword_BA7D84
+0x538884: cmp     eax, offset stru_BA7D84
 0x538889: jz      short loc_5388C2
 0x53888B: mov     eax, [eax+4]
 0x53888E: test    eax, eax

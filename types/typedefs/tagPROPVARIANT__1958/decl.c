@@ -1,1 +1,8 @@
-tagPROPVARIANT
+struct tagPROPVARIANT
+{
+VARTYPE vt;
+WORD wReserved1;
+WORD wReserved2;
+WORD wReserved3;
+$30060EE037AF8FC1E98724083C3A486D _anon_0;
+};

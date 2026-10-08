@@ -3,7 +3,7 @@
 0x8AA8A2: mov     ebp, [esp+8+arg_0]
 0x8AA8A6: push    ebp
 0x8AA8A7: mov     ebx, ecx
-0x8AA8A9: call    sub_715820
+0x8AA8A9: call    NiTimeController_IsEqual; NiTimeController equality compares NiObject state, flags +0x08, frequency/phase/low/high key times +0x0C..+0x18, and only target nullness at +0x30. It excludes target identity, next-controller chain, and runtime time/update caches.
 0x8AA8AE: test    al, al
 0x8AA8B0: jz      short loc_8AA913
 0x8AA8B2: mov     eax, [ebx+50h]

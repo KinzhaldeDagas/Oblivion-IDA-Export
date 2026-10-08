@@ -1,19 +1,36 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_4EC650",
+  "chunks": [
+    [
+      "0x4EC650",
+      "0x4EC73A"
+    ],
+    [
+      "0x9B6460",
+      "0x9B6491"
+    ]
+  ],
+  "chunks_sha256": "2f2a24b36d609c65b2375e6989aa942bf24223d20c85fdd85fafca5f55fbd22c",
+  "comment_regular": "Verified quad-data layout at 0x60 bytes: root pointer +0, state +8, world origin +0x18/+0x1C, terrain mesh node +0x2C, and four child-quad pointers +0x30..+0x3C. The remaining bytes are Unknown.",
+  "comment_repeatable": "Verified quad-data layout at 0x60 bytes: root pointer +0, state +8, world origin +0x18/+0x1C, terrain mesh node +0x2C, and four child-quad pointers +0x30..+0x3C. The remaining bytes are Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "TESTerrainLODQuad_ctor",
   "end_ea": "0x4EC73A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4EC650",
+  "name": "TESTerrainLODQuad_ctor",
   "segment": ".text",
   "sha256": "19d1657ee8ca42f5668de4a4bf2e8870aa6b33aa08522a0f9109df5b0ddee0ad",
   "size": 234,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4EC650",
-  "type": "float *__thiscall(float *this, int)",
-  "xrefs_from_count": 95,
+  "total_chunk_size": 283,
+  "type": "TESTerrainLODQuad_OblivionComplete_060 *__thiscall(TESTerrainLODQuad_OblivionComplete_060 *this, TESTerrainLODQuadRoot_OblivionLayout_010Verified *root)",
+  "xrefs_from_count": 110,
   "xrefs_to_count": 2
 }

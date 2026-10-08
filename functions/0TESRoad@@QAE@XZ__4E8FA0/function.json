@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 5,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "TESRoad::TESRoad(void)",
+  "chunks": [
+    [
+      "0x4E8FA0",
+      "0x4E9048"
+    ],
+    [
+      "0x9B5F90",
+      "0x9B5FBE"
+    ]
+  ],
+  "chunks_sha256": "bc62baf80de1ef3f02ebde39eb63702a4a9a1c58968f28ac046aca0a66ca16f5",
+  "comment_regular": "Verified TESRoad constructor sets TESForm type byte to 0x38 and initializes a 37-bucket NiTPointerMap<unsigned int, BSSimpleList<TESConnectedPoint*>*> at +0x1C. Owner WorldSpace pointer is at +0x2C, confirmed by ROAD group helpers and WorldSpace clone repair. The TESConnectedPoint object layout is still Unknown.",
+  "comment_repeatable": "Verified TESRoad constructor sets TESForm type byte to 0x38 and initializes a 37-bucket NiTPointerMap<unsigned int, BSSimpleList<TESConnectedPoint*>*> at +0x1C. Owner WorldSpace pointer is at +0x2C, confirmed by ROAD group helpers and WorldSpace clone repair. The TESConnectedPoint object layout is still Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
+  "display_name": "TESRoad_ctor",
   "end_ea": "0x4E9048",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "??0TESRoad@@QAE@XZ",
+  "name": "TESRoad_ctor",
   "segment": ".text",
   "sha256": "96a3c73306d4f1d628634fdb05677e1bff079f960f38f36d29a41f11cdf3fa2a",
   "size": 168,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E8FA0",
+  "total_chunk_size": 214,
   "type": "TESRoad *__thiscall(TESRoad *__hidden this)",
-  "xrefs_from_count": 61,
+  "xrefs_from_count": 75,
   "xrefs_to_count": 2
 }

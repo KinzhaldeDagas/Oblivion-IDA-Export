@@ -2,7 +2,7 @@
 0x675221: push    esi
 0x675222: add     ecx, 68h ; 'h'; this
 0x675225: xor     ebx, ebx
-0x675227: call    sub_7616D0
+0x675227: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x67522C: mov     esi, eax
 0x67522E: test    esi, esi
 0x675230: jz      short loc_675287

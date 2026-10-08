@@ -1,9 +1,7 @@
-bhkLimitedHingeConstraint *__thiscall bhkLimitedHingeConstraint::`scalar deleting destructor'(
-        bhkLimitedHingeConstraint *this,
-        char a2)
+bhkSerializable *__thiscall bhkLimitedHingeConstraint::`scalar deleting destructor'(bhkSerializable *this, char a2)
 {
-  bhkLimitedHingeConstraint::~bhkLimitedHingeConstraint(this);
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  bhkLimitedHingeConstraint::~bhkLimitedHingeConstraint(this); /*0x539a43*/
+  if ( (a2 & 1) != 0 ) /*0x539a4d*/
+    FormHeapFree((unsigned int)this); /*0x539a50*/
+  return this; /*0x539a5a*/
 }

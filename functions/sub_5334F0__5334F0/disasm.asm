@@ -44,7 +44,6 @@
 0x53359E: fld     dword ptr ds:0A5611Ch
 0x5335A4: jmp     short loc_5335BE
 0x5335A6: jmp     short loc_5335B0
-0x5335A8: align 10h
 0x5335B0: fld     dword ptr ds:0A5611Ch
 0x5335B6: mov     esi, [esp+174h+var_148]
 0x5335BA: fldz
@@ -90,7 +89,7 @@
 0x53364E: mov     [esp+174h+var_158], ebx
 0x533652: mov     esi, ebx
 0x533654: cmp     esi, ebx
-0x533656: mov     [esp+174h+var_144], esi
+0x533656: mov     [esp+174h+slot], esi
 0x53365A: jz      short loc_533666
 0x53365C: lea     edx, [esi+4]
 0x53365F: push    edx; lpAddend
@@ -128,9 +127,9 @@
 0x5336D3: jb      short loc_5336E3
 0x5336D5: movzx   ecx, word ptr [esi+0Eh]
 0x5336D9: add     ecx, ebx
-0x5336DB: push    ecx
-0x5336DC: mov     ecx, esi
-0x5336DE: call    sub_523B10
+0x5336DB: push    ecx; capacity
+0x5336DC: mov     ecx, esi; self
+0x5336DE: call    NiTObjectArray_Resize16
 0x5336E3: lea     edx, [esp+174h+var_154]
 0x5336E7: push    edx
 0x5336E8: push    ebx
@@ -205,3 +204,30 @@
 0x5337CB: mov     esp, ebp
 0x5337CD: pop     ebp
 0x5337CE: retn    8
+0x9B8FA0: lea     ecx, [ebp+var_100]
+0x9B8FA6: jmp     sub_8A5090
+0x9B8FAB: mov     eax, [ebp+var_154]
+0x9B8FB1: push    eax
+0x9B8FB2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B8FB7: pop     ecx
+0x9B8FB8: retn
+0x9B8FB9: lea     ecx, [ebp+slot]; slot
+0x9B8FBF: jmp     NiPointerSlot_Release
+0x9B8FC4: mov     eax, [ebp+var_154]
+0x9B8FCA: push    eax
+0x9B8FCB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B8FD0: pop     ecx
+0x9B8FD1: retn
+0x9B8FD2: lea     ecx, [ebp+var_154]; slot
+0x9B8FD8: jmp     NiPointerSlot_Release
+0x9B8FDD: mov     edx, [esp-4+arg_4]
+0x9B8FE1: lea     eax, [edx-164h]
+0x9B8FE7: mov     ecx, [edx-168h]
+0x9B8FED: xor     ecx, eax
+0x9B8FEF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B8FF4: add     eax, 0Ch
+0x9B8FF7: mov     ecx, [edx-8]
+0x9B8FFA: xor     ecx, eax
+0x9B8FFC: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B9001: mov     eax, offset stru_AE33BC
+0x9B9006: jmp     ___CxxFrameHandler3

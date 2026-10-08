@@ -1,1 +1,1 @@
-_INITTERM_E_FN
+typedef int (*_INITTERM_E_FN)(void);

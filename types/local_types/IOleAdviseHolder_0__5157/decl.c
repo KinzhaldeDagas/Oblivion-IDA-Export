@@ -1,1 +1,1 @@
-IOleAdviseHolder_0
+typedef IOleAdviseHolder IOleAdviseHolder_0;

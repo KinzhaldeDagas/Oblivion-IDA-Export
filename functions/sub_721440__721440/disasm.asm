@@ -5,7 +5,7 @@
 0x721448: push    edi
 0x721449: jz      short loc_72145B
 0x72144B: push    eax
-0x72144C: call    FormHeapFree
+0x72144C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x721451: add     esp, 4
 0x721454: mov     dword ptr [ebx+8], 0
 0x72145B: mov     edi, [esp+8+Src]

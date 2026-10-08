@@ -1,19 +1,36 @@
 {
-  "callees_count": 23,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7F1410",
+  "chunks": [
+    [
+      "0x7F1410",
+      "0x7F15D1"
+    ],
+    [
+      "0x9D0CA0",
+      "0x9D0CD1"
+    ]
+  ],
+  "chunks_sha256": "3c553c924e549bfa829920e5db4abb4cd2bb3b06c0cddf205286319313c0e063",
+  "comment_regular": "\n[RT4.1 parity v147 2026-10-08] Native leaf definition6 has four declaration entries: position, normal, UV, STSP. No COLOR stream; setup7F0BC0 selects four VS variants (fog/point bits) and two PS variants. Stock VS uses only packed green fraction for dimming. Full RGB corner rendering still needs vertex/declaration/program integration with default fallback, clones and device-reset contracts proven; generated CPU colors alone do not establish rendering.\n[Leaf RGB v148 2026-10-08] Isolated leaf shader composition uses ctor7F1200,init8025F0,pass7F09D0,constants7F07D0,declaration setter77A400. Declaration5 entries preserve position,normal,UV,STSP and add COLOR0 atv4 using native semantic/source/type tuple5,4,3. Stock programs/definition6 unchanged. Native ctor writes shared B45E14+251*4..260*4 camera/wind defaults, so v148 restores that16-dword snapshot on unwind. Interface device+10 and renderer+14 verified. Native factory wrappers adopt created D3D handles without extra COM AddRef.\n\nCreates ShaderDefinition for SpeedTree leaf shader (GetShaderDefinition id 6): declaration id 4, SpeedTreeLeafShader object, programs/pass/constant maps.",
+  "comment_repeatable": "Creates ShaderDefinition for SpeedTree leaf shader (GetShaderDefinition id 6): declaration id 4, SpeedTreeLeafShader object, programs/pass/constant maps.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "OB_CreateSpeedTreeLeafShaderDefinition_010201A0",
   "end_ea": "0x7F15D1",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7F1410",
+  "name": "OB_CreateSpeedTreeLeafShaderDefinition_010201A0",
   "segment": ".text",
   "sha256": "f49092464c7da04654f37916be16ec7e45b44eda4044fb402390fea1bd0d8f98",
   "size": 449,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7F1410",
+  "total_chunk_size": 498,
   "type": "NiD3DShaderDeclaration **()",
-  "xrefs_from_count": 193,
+  "xrefs_from_count": 212,
   "xrefs_to_count": 1
 }

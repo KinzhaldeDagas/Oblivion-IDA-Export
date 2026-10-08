@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x46EC89",
-    "line": "mov     [esp+1Ch+var_10], 0",
+    "line": "mov     [esp+1Ch+destination], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x46EC93",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },
@@ -79,13 +79,13 @@
   },
   {
     "ea": "0x46ECA0",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x46ECA6",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,13 +97,13 @@
   },
   {
     "ea": "0x46ECAC",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46ECAD",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x46ECCE",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x46ED24",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -325,25 +325,25 @@
   },
   {
     "ea": "0x46ED2D",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x46ED2F",
-    "line": "lea     eax, [esp+20h+var_10]",
+    "line": "lea     eax, [esp+20h+destination]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x46ED33",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46ED34",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x46ED40",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -373,25 +373,25 @@
   },
   {
     "ea": "0x46ED46",
-    "line": "push    ecx; Dst",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46ED47",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x46ED4D",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; EngineIssues review: TESReactionForm load reads UInt16 reaction count into stack slot; verify alias with per-entry FormID destination below.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x46ED52",
-    "line": "xor     esi, esi",
+    "line": "xor     esi, esi; EnginePatch v3: TESReactionForm reaction count is clamped before the loop. Follow-up verification showed the earlier stack-alias concern was likely a Hex-Rays labeling artifact.",
     "mnemonic": "xor",
     "size": 2
   },
@@ -414,20 +414,14 @@
     "size": 2
   },
   {
-    "ea": "0x46ED5D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x46ED60",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x46ED66",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -439,49 +433,49 @@
   },
   {
     "ea": "0x46ED6C",
-    "line": "push    edx; Dst",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46ED6D",
-    "line": "call    SaveLoad_LoadFormID",
+    "line": "call    SaveLoad_LoadFormID; EngineIssues review: TESReactionForm per-entry FormID appears to be read into same effective stack slot as count; loop bound later uses low 16 bits.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x46ED72",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x46ED78",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x46ED7A",
-    "line": "lea     eax, [esp+28h+var_10]",
+    "line": "lea     eax, [esp+28h+destination]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x46ED7E",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46ED7F",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x46ED84",
-    "line": "mov     ecx, [esp+24h+var_10]",
+    "line": "mov     ecx, [esp+24h+destination]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -517,7 +511,7 @@
   },
   {
     "ea": "0x46ED95",
-    "line": "movzx   eax, [esp+24h+var_4]",
+    "line": "movzx   eax, word ptr [esp+24h+var_4]; EngineIssues review: TESReactionForm loop bound appears to come from low 16 bits of last loaded FormID rather than preserved original count; verify stack slot map.",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -547,7 +541,7 @@
   },
   {
     "ea": "0x46EDA7",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },
@@ -607,7 +601,7 @@
   },
   {
     "ea": "0x46EDCE",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },

@@ -12,7 +12,7 @@
 0x5053EF: test    esi, esi
 0x5053F1: jz      short loc_505457
 0x5053F3: push    esi
-0x5053F4: mov     ecx, offset ActorProcessManager_ptr
+0x5053F4: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x5053F9: call    sub_6760D0
 0x5053FE: mov     edx, [esp+8+arg_18]
 0x505402: movzx   ecx, al
@@ -41,3 +41,8 @@
 0x505443: push    offset aSIsNotDetected; " %s is not detected"
 0x505448: call    Interface_ConsolePrint
 0x50544D: add     esp, 8
+0x505455: fstp    st
+0x505457: mov     al, 1
+0x505459: pop     esi
+0x50545A: pop     ecx
+0x50545B: retn

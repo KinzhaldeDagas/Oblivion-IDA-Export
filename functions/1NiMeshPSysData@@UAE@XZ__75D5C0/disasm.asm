@@ -29,7 +29,7 @@
 0x75D615: mov     ecx, [esi+78h]
 0x75D618: push    ecx
 0x75D619: mov     dword ptr [esi+74h], offset ??_7?$NiTArray@PAV?$NiTArray@V?$NiPointer@VNiAVObject@@@@@@@@6B@; const NiTArray<NiTArray<NiPointer<NiAVObject>> *>::`vftable'
-0x75D620: call    FormHeapFree
+0x75D620: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x75D625: mov     edi, [esi+68h]
 0x75D628: add     esp, 4
 0x75D62B: test    edi, edi
@@ -50,3 +50,16 @@
 0x75D64C: mov     ecx, esi
 0x75D64E: pop     esi
 0x75D64F: jmp     loc_759830
+0x759830: push    esi
+0x759831: mov     esi, ecx
+0x759833: mov     eax, [esi+5Ch]
+0x759836: push    eax
+0x759837: mov     dword ptr [esi], offset ??_7NiPSysData@@6B@; const NiPSysData::`vftable'
+0x75983D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x759842: mov     ecx, [esi+60h]
+0x759845: push    ecx
+0x759846: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x75984B: add     esp, 8
+0x75984E: mov     ecx, esi; this
+0x759850: pop     esi
+0x759851: jmp     sub_73EEC0

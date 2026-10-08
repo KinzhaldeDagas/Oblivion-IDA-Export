@@ -1,1 +1,1 @@
-BLOB_0
+typedef _BLOB BLOB_0;

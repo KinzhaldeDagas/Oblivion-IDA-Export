@@ -1,4 +1,4 @@
-0x42B3F0: mov     eax, ecx
+0x42B3F0: mov     eax, ecx; MapMarkerData constructor zeros TESFullName storage, FNAM flags byte, and TNAM u16 type. unused0D is not explicitly initialized.
 0x42B3F2: xor     ecx, ecx
 0x42B3F4: mov     dword ptr [eax], offset ??_7TESFullName@@6B@; const TESFullName::`vftable'
 0x42B3FA: mov     [eax+4], ecx

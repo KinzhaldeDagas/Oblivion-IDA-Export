@@ -58,7 +58,6 @@
 0x8DA39F: jz      short loc_8DA3D8
 0x8DA3A1: xor     eax, eax
 0x8DA3A3: jmp     short loc_8DA3B0
-0x8DA3A5: align 10h
 0x8DA3B0: mov     ecx, 20h ; ' '
 0x8DA3B5: mov     edx, [esi+1C18h]
 0x8DA3BB: mov     byte ptr [eax+edx+2], 64h ; 'd'

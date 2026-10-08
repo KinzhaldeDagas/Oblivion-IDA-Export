@@ -1,19 +1,36 @@
 {
-  "callees_count": 24,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 12,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x411B70",
+      "0x411EBF"
+    ],
+    [
+      "0x9AAF50",
+      "0x9AAF8A"
+    ]
+  ],
+  "chunks_sha256": "68c3ef7fa4f4ac1b35bd08720a8c05130915cb5abd202464f786db6965b0c24b",
+  "comment_regular": "DX11 readback contract verified 2026-09-24: source texture level 0 is copied via GetRenderTargetData into a separate SYSTEMMEM surface, then immediately locked with NOSYSLOCK and converted from four-byte input pixels to RGB24 without consulting Pitch. Readback/Lock/Unlock HRESULTs are ignored by this caller. Device/resource validation and synchronous native-format CPU commit remain necessary in a DX11 implementation. Numeric runtime format and pitch require runtime evidence.",
   "comment_repeatable": "",
-  "data_refs_count": 15,
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 18,
   "display_name": "Screenshot_RenderTexture",
   "end_ea": "0x411EBF",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "Screenshot_RenderTexture",
   "segment": ".text",
   "sha256": "fa058d63e49f44dfb02d96115adbbbb85c01d353be4bc88791f3d99cac4aa295",
   "size": 847,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x411B70",
+  "total_chunk_size": 905,
   "type": "NiPixelData *__usercall@<eax>(double st5_0@<st2>, double st7_0@<st0>, double@<st1>, unsigned int *, unsigned int *)",
-  "xrefs_from_count": 306,
+  "xrefs_from_count": 322,
   "xrefs_to_count": 1
 }

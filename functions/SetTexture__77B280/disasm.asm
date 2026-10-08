@@ -1,4 +1,4 @@
-0x77B280: mov     eax, [esp+sampler]
+0x77B280: mov     eax, [esp+sampler]; DX10OBSE verified decode: NiDX9RenderState::SetTexture caches per-stage IDirect3DBaseTexture9 pointer and calls IDirect3DDevice9::SetTexture only when changed. DX10 hook must sync from device before draw because redundant native calls are suppressed.
 0x77B284: mov     edx, [esp+arg_4]
 0x77B288: cmp     [ecx+eax*4+0FA0h], edx
 0x77B28F: jz      short locret_77B2AD

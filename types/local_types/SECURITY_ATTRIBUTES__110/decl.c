@@ -1,1 +1,6 @@
-_SECURITY_ATTRIBUTES
+struct _SECURITY_ATTRIBUTES
+{
+DWORD nLength;
+LPVOID lpSecurityDescriptor;
+BOOL bInheritHandle;
+};

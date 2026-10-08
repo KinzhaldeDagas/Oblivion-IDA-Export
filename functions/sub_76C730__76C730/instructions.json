@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x76C730",
-    "line": "push    esi",
+    "line": "push    esi; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "push",
     "size": 1
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x76C739",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -37,19 +37,19 @@
   },
   {
     "ea": "0x76C741",
-    "line": "mov     eax, [esp+4+arg_8]",
+    "line": "mov     eax, dword ptr [esp+4+restore]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x76C745",
-    "line": "mov     ecx, [esp+4+arg_4]",
+    "line": "mov     ecx, [esp+4+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x76C749",
-    "line": "mov     edx, [esp+4+arg_0]",
+    "line": "mov     edx, [esp+4+state]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x76C753",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },

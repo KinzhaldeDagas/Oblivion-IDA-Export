@@ -1,10 +1,10 @@
-0x4E0CF0: mov     eax, [esp+arg_0]
+0x4E0CF0: mov     eax, [esp+owner]; Classify owner/base form into retail shadow category 0..6: unresolved, architecture, furniture, actors, items, misc, other.
 0x4E0CF4: push    esi
 0x4E0CF5: xor     esi, esi
 0x4E0CF7: test    eax, eax
 0x4E0CF9: jz      short loc_4E0D58
 0x4E0CFB: push    eax
-0x4E0CFC: call    sub_4DC270
+0x4E0CFC: call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.
 0x4E0D01: add     esp, 4
 0x4E0D04: test    eax, eax
 0x4E0D06: jz      short loc_4E0D58

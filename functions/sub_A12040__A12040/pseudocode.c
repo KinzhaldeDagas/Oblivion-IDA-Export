@@ -1,4 +1,4 @@
-BSStringT *sub_A12040()
+NiRTTI *sub_A12040()
 {
-  return sub_70E220((BSStringT *)dword_BA7938, "bhkWorld", (int)dword_BA7BA4);
+  return NiRTTI_Constructor(&stru_BA7938, "bhkWorld", &stru_BA7BA4); /*0xa12054*/
 }

@@ -50,7 +50,6 @@
 0x45A234: lea     eax, [esp+110h+var_108]
 0x45A238: lea     edx, [eax+1]
 0x45A23B: jmp     short loc_45A240
-0x45A23D: align 10h
 0x45A240: mov     cl, [eax]
 0x45A242: add     eax, 1
 0x45A245: test    cl, cl

@@ -2,8 +2,8 @@ unsigned int *__thiscall NiTPointerMap<TESObjectREFR *,BSSimpleList<TESPathGridP
         unsigned int *this,
         char a2)
 {
-  NiTPointerMap<TESObjectREFR *,BSSimpleList<TESPathGridPoint *> *>::~NiTPointerMap<TESObjectREFR *,BSSimpleList<TESPathGridPoint *> *>(this);
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  NiTPointerMap<TESObjectREFR *,BSSimpleList<TESPathGridPoint *> *>::~NiTPointerMap<TESObjectREFR *,BSSimpleList<TESPathGridPoint *> *>(this); /*0x4e6033*/
+  if ( (a2 & 1) != 0 ) /*0x4e603d*/
+    FormHeapFree((unsigned int)this); /*0x4e6040*/
+  return this; /*0x4e604a*/
 }

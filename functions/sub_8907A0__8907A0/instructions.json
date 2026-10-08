@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8907A0",
-    "line": "push    ebp",
+    "line": "push    ebp; TES4 authoritative: set transient push/knockback channel. Converts caller world vector by hkFactor, divides by duration, and if stronger than current +0x2F0 stores +0x300=duration and +0x2F0=push vector/duration. Not a generic ledge-climb impulse API.",
     "mnemonic": "push",
     "size": 1
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x8907BC",
-    "line": "fld     qword ptr ds:0A39088h",
+    "line": "fld     qword ptr ds:0A39088h; Uses hkFactor, so sub_8907A0 expects caller vector in TES/world units and stores Havok-unit push data.",
     "mnemonic": "fld",
     "size": 6
   },
@@ -319,13 +319,13 @@
   },
   {
     "ea": "0x890856",
-    "line": "fstp    dword ptr [ecx+300h]",
+    "line": "fstp    dword ptr [ecx+300h]; Stores transient push timer at proxy+0x300 only when new push vector magnitude exceeds existing +0x2F0 magnitude.",
     "mnemonic": "fstp",
     "size": 6
   },
   {
     "ea": "0x89085C",
-    "line": "movaps  xmmword ptr [ecx+2F0h], xmm1",
+    "line": "movaps  xmmword ptr [ecx+2F0h], xmm1; Stores transient push vector at proxy+0x2F0; later consumed by 0x890970 as remainingTime * vector.",
     "mnemonic": "movaps",
     "size": 7
   },

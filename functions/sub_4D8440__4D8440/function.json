@@ -1,19 +1,32 @@
 {
-  "callees_count": 31,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 10,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4D8440",
+      "0x4D86C8"
+    ]
+  ],
+  "chunks_sha256": "73125186cb1f011ac439545aefa856c26b64585d78f6b78e7747774c915a9558",
+  "comment_regular": "Verified REFR parser reads XLOD as a 12-byte distant-data normal vector, DATA as six floats (first three base position, last three rotationAnglesXYZ radians), and XSCL as scale. XLOD components are remapped/capped and added to the rounded DATA position. Output scalePercentWithFloorBias is floor(XSCL*100)+0.97; downstream floors/divides by100. Rotation components are applied in X, Y, Z order.",
+  "comment_repeatable": "Verified REFR parser reads XLOD as a 12-byte distant-data normal vector, DATA as six floats (first three base position, last three rotationAnglesXYZ radians), and XSCL as scale. XLOD components are remapped/capped and added to the rounded DATA position. Output scalePercentWithFloorBias is floor(XSCL*100)+0.97; downstream floors/divides by100. Rotation components are applied in X, Y, Z order.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4D8440",
+  "display_name": "TESWorldSpace_ParseDistantLODReferenceRecord",
   "end_ea": "0x4D86C8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4D8440",
+  "name": "TESWorldSpace_ParseDistantLODReferenceRecord",
   "segment": ".text",
   "sha256": "73125186cb1f011ac439545aefa856c26b64585d78f6b78e7747774c915a9558",
   "size": 648,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4D8440",
-  "type": "char __cdecl(Data *arg0, float)",
+  "total_chunk_size": 648,
+  "type": "char __cdecl(Data *file, DistantLODReferenceRecord *outRecord)",
   "xrefs_from_count": 226,
   "xrefs_to_count": 1
 }

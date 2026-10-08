@@ -1,19 +1,32 @@
 {
-  "callees_count": 13,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4E50E0",
+      "0x4E5167"
+    ]
+  ],
+  "chunks_sha256": "b0c7c60b25fed0138c4fc3f4a78cc51c7b37002ba6e716c721337778737000ab",
+  "comment_regular": "Verified — PGRL loading populates pointsByReference (+0x34): key is a TESObjectREFR* and value is a BSSimpleList of TESPathGridPoint*. Duplicate point pointers are suppressed. Cross-reference from TESPathGrid_LoadSerializedGraphChunks at 0x4E678A.",
+  "comment_repeatable": "Verified — PGRL loading populates pointsByReference (+0x34): key is a TESObjectREFR* and value is a BSSimpleList of TESPathGridPoint*. Duplicate point pointers are suppressed. Cross-reference from TESPathGrid_LoadSerializedGraphChunks at 0x4E678A.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4E50E0",
+  "display_name": "TESPathGrid_AddPointForLinkedReference",
   "end_ea": "0x4E5167",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4E50E0",
+  "name": "TESPathGrid_AddPointForLinkedReference",
   "segment": ".text",
   "sha256": "b0c7c60b25fed0138c4fc3f4a78cc51c7b37002ba6e716c721337778737000ab",
   "size": 135,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E50E0",
-  "type": "void __thiscall(_DWORD *this, _DWORD *, int)",
+  "total_chunk_size": 135,
+  "type": "void __thiscall(TESPathGrid *this, TESObjectREFR *reference, TESPathGridPoint *point)",
   "xrefs_from_count": 62,
   "xrefs_to_count": 1
 }

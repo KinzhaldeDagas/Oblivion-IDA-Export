@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7D6060",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; ShadowSceneLight constructor. Initializes projection/transition/status fields, object/receiver list ownership, map/camera state, and source pointers.",
     "mnemonic": "push",
     "size": 2
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x7D608D",
-    "line": "push    offset NiRefObject_objcount; lpAddend",
+    "line": "push    0B3FD64h; lpAddend",
     "mnemonic": "push",
     "size": 5
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x7D60C7",
-    "line": "mov     [esi+0F8h], ebx",
+    "line": "mov     [esi+0F8h], ebx; Initialize the auxiliary strong-owned pointer at ShadowSceneLight+0xF8 to null. The bounded native shadow-range scan found lifecycle init/release but no direct producer.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x7D614D",
-    "line": "mov     byte ptr [esi+0F5h], 1",
+    "line": "mov     byte ptr [esi+0F5h], 1; Constructor transiently sets specialCubeDispatch (+0xF5) while initializing, but this value does not survive construction.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -331,13 +331,13 @@
   },
   {
     "ea": "0x7D6160",
-    "line": "mov     [esi+0FCh], bl",
+    "line": "mov     [esi+0FCh], bl; OBLIVION AUTHORITY (2026-08-24): ShadowSceneLight constructor initializes byte +0xFC to 0. SetBackingLight 0x7D3400 later sets it iff the backing light RTTI-walk reaches NiPointLight; UpdateLightColorConstant uses it to choose directional versus point semantics.",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x7D6166",
-    "line": "mov     [esi+104h], bl",
+    "line": "mov     [esi+104h], bl; Initialize trackBackingPosition +0x104 to false. Full-list creation later stores the caller-selected tracking mode before binding the backing light.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -925,31 +925,31 @@
   },
   {
     "ea": "0x7D627E",
-    "line": "mov     [esi+0F5h], bl",
+    "line": "mov     [esi+0F5h], bl; Constructor final state clears specialCubeDispatch (+0xF5). New native ShadowSceneLight instances return in normal-dispatch state.",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x7D6284",
-    "line": "fstp    dword ptr [esi+124h]",
+    "line": "fstp    dword ptr [esi+124h]; Initialize ShadowSceneLight projector FOV +0x124 to the retail default 90.0 degrees.",
     "mnemonic": "fstp",
     "size": 6
   },
   {
     "ea": "0x7D628A",
-    "line": "mov     [esi+120h], bl",
+    "line": "mov     [esi+120h], bl; Clear +0x120 render-gate override. Attached-reference light registration also clears it at 0x004D8129; no retail true producer is proved.",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x7D6290",
-    "line": "mov     [esi+12Ch], bl",
+    "line": "mov     [esi+12Ch], bl; Clear +0x12C. Its sole decoded ShadowSceneLight consumer binds the generated map's inner texture to shader definition 9; no direct native shadow-range setter was found.",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x7D6296",
-    "line": "fst     dword ptr [esi+128h]",
+    "line": "fst     dword ptr [esi+128h]; Initialize ShadowSceneLight falloffExponent_128 to 1.0. Attached-reference registration later copies TESObjectLIGH DATA falloff exponent +0x80; no ShadowSceneLight renderer-side consumer is proved.",
     "mnemonic": "fst",
     "size": 6
   },
@@ -1339,7 +1339,7 @@
   },
   {
     "ea": "0x7D633C",
-    "line": "lea     ecx, [esi+1B4h]",
+    "line": "lea     ecx, [esi+1B4h]; Zero the 0x60-byte reserved tail block at ShadowSceneLight+0x1B4..+0x213; no direct core shadow consumer was found.",
     "mnemonic": "lea",
     "size": 6
   },
@@ -1363,7 +1363,7 @@
   },
   {
     "ea": "0x7D634A",
-    "line": "mov     [esi+214h], bl",
+    "line": "mov     [esi+214h], bl; Initialize ShadowSceneLight+0x214 to zero; the per-source renderer also clears it after map rendering.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1438,5 +1438,221 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CEC50",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CEC53",
+    "line": "jmp     NiRefObject_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEC58",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CEC5B",
+    "line": "add     ecx, 0E4h ; 'ä'",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CEC61",
+    "line": "jmp     j_??1?$NiTPointerList@V?$NiPointer@VNiTriBasedGeom@@@@@@UAE@XZ; NiTPointerList<NiPointer<NiTriBasedGeom>>::~NiTPointerList<NiPointer<NiTriBasedGeom>>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEC66",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CEC69",
+    "line": "add     ecx, 0F8h ; 'ø'; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CEC6F",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEC74",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CEC77",
+    "line": "add     ecx, 100h; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CEC7D",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEC82",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CEC85",
+    "line": "add     ecx, 114h; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CEC8B",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEC90",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CEC93",
+    "line": "add     ecx, 11Ch; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CEC99",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEC9E",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CECA1",
+    "line": "add     ecx, 130h; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CECA7",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CECAC",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CECAF",
+    "line": "add     ecx, 134h",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CECB5",
+    "line": "jmp     j_??1?$NiTPointerList@V?$NiPointer@VNiAVObject@@@@@@UAE@XZ; NiTPointerList<NiPointer<NiAVObject>>::~NiTPointerList<NiPointer<NiAVObject>>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CECBA",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CECBD",
+    "line": "add     ecx, 148h; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CECC3",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CECC8",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CECCB",
+    "line": "add     ecx, 14Ch; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CECD1",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CECD6",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CECDA",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CECDD",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CECE0",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CECE2",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CECE7",
+    "line": "mov     eax, offset stru_AF7AC8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CECEC",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

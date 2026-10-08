@@ -58,7 +58,7 @@
 0x692F9B: pop     ebx
 0x692F9C: retn    4
 0x692F9F: mov     ecx, esi; this
-0x692FA1: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x692FA1: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x692FA6: cmp     eax, 4
 0x692FA9: jz      short loc_692F97
 0x692FAB: pop     edi

@@ -1,1 +1,1 @@
-NiAlphaAccumulator
+struct NiAlphaAccumulator;

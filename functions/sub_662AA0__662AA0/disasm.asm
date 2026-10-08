@@ -33,7 +33,6 @@
 0x662AF4: mov     ebp, eax
 0x662AF6: xor     esi, esi
 0x662AF8: jmp     short loc_662B00
-0x662AFA: align 10h
 0x662B00: mov     ecx, ds:dword_B14E60[esi]
 0x662B06: push    0
 0x662B08: push    ecx
@@ -75,8 +74,8 @@
 0x662B61: mov     ecx, esi
 0x662B63: call    eax
 0x662B65: fstp    st
-0x662B67: mov     ecx, ebx
-0x662B69: call    sub_4849C0
+0x662B67: mov     ecx, ebx; this
+0x662B69: call    EquippedEntryData_GetCharge; Return per-instance ExtraCharge when present; otherwise return the TESEnchantableForm base charge. Returns the sentinel/default when the EntryData form is not enchantable.
 0x662B6E: fstp    [esp+1Ch+var_4]
 0x662B72: movzx   ecx, word ptr [edi+8]
 0x662B76: mov     edx, [esi]

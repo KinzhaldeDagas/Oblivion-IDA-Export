@@ -1,1 +1,1 @@
-IAudioClock_0
+typedef IAudioClock IAudioClock_0;

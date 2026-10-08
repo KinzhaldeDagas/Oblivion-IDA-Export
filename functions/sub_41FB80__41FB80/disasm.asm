@@ -1,4 +1,4 @@
-0x41FB80: push    1Fh; a2
+0x41FB80: push    1Fh; Returns ExtraPackage's completion byte, or false.
 0x41FB82: call    BaseExtraList_GetExtraData
 0x41FB87: test    eax, eax
 0x41FB89: jz      short loc_41FB8F

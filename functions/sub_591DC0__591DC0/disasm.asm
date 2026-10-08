@@ -128,11 +128,11 @@
 0x591F92: cmp     ebx, eax
 0x591F94: mov     [esp+50h+var_4], eax
 0x591F98: jz      short loc_591FCB
-0x591F9A: call    sub_57D7F0
-0x591F9F: call    Double_To_SInt32
+0x591F9A: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
+0x591F9F: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x591FA4: push    eax
-0x591FA5: call    sub_57D7A0
-0x591FAA: call    Double_To_SInt32
+0x591FA5: call    UI_GetVirtualScreenWidth; Returns virtual UI width: 1280 for portrait/square, otherwise aspect*960. Layout coordinates are independent of output pixel resolution.
+0x591FAA: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x591FAF: push    eax
 0x591FB0: push    0
 0x591FB2: push    0
@@ -157,17 +157,17 @@
 0x591FE7: test    eax, eax
 0x591FE9: mov     [esp+50h+var_4], 1
 0x591FF1: jz      short loc_59200B
-0x591FF3: push    ebp
-0x591FF4: push    ebx
-0x591FF5: push    0
-0x591FF7: push    0
-0x591FF9: push    0
-0x591FFB: push    0
-0x591FFD: push    0
-0x591FFF: push    edi
-0x592000: push    4
-0x592002: mov     ecx, eax
-0x592004: call    sub_7174B0
+0x591FF3: push    ebp; triangleIndices
+0x591FF4: push    ebx; triangleCount
+0x591FF5: push    0; dataFlags
+0x591FF7: push    0; hasVertexColors
+0x591FF9: push    0; textureCoordinates
+0x591FFB: push    0; colors
+0x591FFD: push    0; normals
+0x591FFF: push    edi; vertices
+0x592000: push    4; vertexCount
+0x592002: mov     ecx, eax; this
+0x592004: call    NiTriShape_ctorWithGeometryData; Verified NiTriShape constructor wrapper: allocate/init NiTriShapeData from caller-supplied vertices, colors and triangle-index buffer; initialize NiTriBasedGeom and install NiTriShape vtable.
 0x592009: jmp     short loc_59200D
 0x59200B: xor     eax, eax
 0x59200D: mov     byte ptr [esi+40h], 0
@@ -215,7 +215,7 @@
 0x5920A3: mov     ecx, edi; this
 0x5920A5: mov     [esp+54h+var_4], 0FFFFFFFFh
 0x5920AD: mov     [eax+3Ch], edx
-0x5920B0: call    sub_405680
+0x5920B0: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x5920B5: push    0FABh
 0x5920BA: mov     ecx, esi
 0x5920BC: call    Tile_GetFloat
@@ -292,7 +292,7 @@
 0x5921A0: mov     ecx, [esi+24h]
 0x5921A3: call    NiNode_UpdateDynamicEffectState
 0x5921A8: mov     ecx, [esi+24h]; this
-0x5921AB: call    NiAVObject_InitializePropertyState
+0x5921AB: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x5921B0: push    1; arg1
 0x5921B2: push    0; canCreate
 0x5921B4: call    InterfaceManager_GetSingleton
@@ -314,25 +314,25 @@
 0x5921E7: mov     ecx, [esi+24h]
 0x5921EA: push    eax
 0x5921EB: mov     [esp+54h+var_4], ebx
-0x5921EF: call    NiNode_AddNiExtraData
-0x5921F4: push    0; int
+0x5921EF: call    NiObjectNET_AddExtraData; Pass269 ABI and ownership proof: NiObjectNET::AddExtraData consumes one stack argument with RET 4 and also expects owning object in ECX/EBX at this build's callsites. The plugin wrapper must not execute caller-side ADD ESP,4.
+0x5921F4: push    0; text
 0x5921F6: push    0FADh
 0x5921FB: mov     ecx, esi
 0x5921FD: call    Tile_GetFloat
 0x592202: push    ecx
-0x592203: fstp    [esp+58h+var_58]; float
-0x592206: push    0FADh; int
-0x59220B: mov     ecx, esi
-0x59220D: call    sub_58B2F0
-0x592212: push    0; int
+0x592203: fstp    [esp+58h+value]; value
+0x592206: push    0FADh; trait
+0x59220B: mov     ecx, esi; this
+0x59220D: call    Tile__FinalPostParse; Verified shared fallback called by CalculateValue when owner virtual PostParse returns NULL. Marks trait-specific dirty flags; ID trait 0xFA8 calls owning Menu vtable +4 AttachTileByID with numeric ID and Tile*. Visibility traits mark dirty bit4. Fallout named analogue 0x82232168.
+0x592212: push    0; text
 0x592214: push    0FACh
 0x592219: mov     ecx, esi
 0x59221B: call    Tile_GetFloat
 0x592220: push    ecx
-0x592221: fstp    [esp+58h+var_58]; float
-0x592224: push    0FACh; int
-0x592229: mov     ecx, esi
-0x59222B: call    sub_58B2F0
+0x592221: fstp    [esp+58h+value]; value
+0x592224: push    0FACh; trait
+0x592229: mov     ecx, esi; this
+0x59222B: call    Tile__FinalPostParse; Verified shared fallback called by CalculateValue when owner virtual PostParse returns NULL. Marks trait-specific dirty flags; ID trait 0xFA8 calls owning Menu vtable +4 AttachTileByID with numeric ID and Tile*. Visibility traits mark dirty bit4. Fallout named analogue 0x82232168.
 0x592230: mov     eax, [esi+24h]
 0x592233: mov     ecx, dword ptr [esp+50h+var_C]
 0x592237: mov     large fs:0, ecx
@@ -343,3 +343,35 @@
 0x592242: pop     ebx
 0x592243: add     esp, 3Ch
 0x592246: retn
+0x9BFC20: mov     eax, [ebp-34h]
+0x9BFC23: push    eax
+0x9BFC24: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BFC29: pop     ecx
+0x9BFC2A: retn
+0x9BFC2B: mov     eax, [ebp-34h]
+0x9BFC2E: push    eax
+0x9BFC2F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BFC34: pop     ecx
+0x9BFC35: retn
+0x9BFC36: mov     eax, [ebp-34h]
+0x9BFC39: push    eax
+0x9BFC3A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BFC3F: pop     ecx
+0x9BFC40: retn
+0x9BFC41: mov     eax, [ebp-1Ch]
+0x9BFC44: push    eax
+0x9BFC45: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BFC4A: pop     ecx
+0x9BFC4B: retn
+0x9BFC4C: mov     eax, [ebp-1Ch]
+0x9BFC4F: push    eax
+0x9BFC50: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BFC55: pop     ecx
+0x9BFC56: retn
+0x9BFC57: mov     edx, [esp+arg_4]
+0x9BFC5B: lea     eax, [edx-40h]
+0x9BFC5E: mov     ecx, [edx-44h]
+0x9BFC61: xor     ecx, eax
+0x9BFC63: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BFC68: mov     eax, offset stru_AE907C
+0x9BFC6D: jmp     ___CxxFrameHandler3

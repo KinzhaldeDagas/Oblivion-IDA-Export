@@ -1,19 +1,36 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 6,
+  "chunks": [
+    [
+      "0x7D79C0",
+      "0x7D7A68"
+    ],
+    [
+      "0x9CA7B0",
+      "0x9CA7DE"
+    ]
+  ],
+  "chunks_sha256": "3c62b28d2458115ce9660ec668636f85d07bc1cff1c088f5ba31d53b9aa7b717",
+  "comment_regular": "Verified (Oblivion): destructor releases the reference-counted object at TextureEffectData+0x08, then restores the NiRefObject vtable. This confirms sourceTexture_08's ownership and the base-object prefix in OblivionTextureEffectData.",
+  "comment_repeatable": "Verified (Oblivion): destructor releases the reference-counted object at TextureEffectData+0x08, then restores the NiRefObject vtable. This confirms sourceTexture_08's ownership and the base-object prefix in OblivionTextureEffectData.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 7,
   "display_name": "BSShaderPPLightingProperty::TextureEffectData::~TextureEffectData(void)",
   "end_ea": "0x7D7A68",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
   "name": "??1TextureEffectData@BSShaderPPLightingProperty@@UAE@XZ",
   "segment": ".text",
   "sha256": "f348d976bf446c326452de6295347042aba5f5cbc6375df6c6cd3f726cae86ce",
   "size": 168,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7D79C0",
+  "total_chunk_size": 214,
   "type": "void __thiscall(BSShaderPPLightingProperty::TextureEffectData *__hidden this)",
-  "xrefs_from_count": 73,
+  "xrefs_from_count": 87,
   "xrefs_to_count": 1
 }

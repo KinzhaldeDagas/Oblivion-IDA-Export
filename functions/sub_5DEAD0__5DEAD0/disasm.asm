@@ -43,7 +43,7 @@
 0x5DEB54: push    0FB2h
 0x5DEB59: call    Tile_SetString
 0x5DEB5E: push    esi
-0x5DEB5F: call    FormHeapFree
+0x5DEB5F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5DEB64: add     esp, 4
 0x5DEB67: mov     ecx, [esp+20h+var_C]
 0x5DEB6B: mov     large fs:0, ecx
@@ -52,3 +52,12 @@
 0x5DEB74: pop     esi
 0x5DEB75: add     esp, 14h
 0x5DEB78: retn
+0x9C08D0: lea     ecx, [ebp-14h]; void *
+0x9C08D3: jmp     BSStringT_Clear
+0x9C08D8: mov     edx, [esp+arg_4]
+0x9C08DC: lea     eax, [edx-10h]
+0x9C08DF: mov     ecx, [edx-14h]
+0x9C08E2: xor     ecx, eax
+0x9C08E4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C08E9: mov     eax, offset stru_AE9B18
+0x9C08EE: jmp     ___CxxFrameHandler3

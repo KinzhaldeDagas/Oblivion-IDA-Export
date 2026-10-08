@@ -35,7 +35,7 @@
 0x68CCD8: fstp    [esp+50h+var_2C]
 0x68CCDC: fldz
 0x68CCDE: fstp    [esp+50h+var_28]
-0x68CCE2: call    sub_404C90
+0x68CCE2: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x68CCE7: fstp    [esp+50h+var_44]
 0x68CCEB: fld     dword ptr [esi+8]
 0x68CCEE: fsub    [esp+50h+var_34]
@@ -65,7 +65,7 @@
 0x68CD46: lea     esi, [esp+50h+var_24]
 0x68CD4A: rep movsd
 0x68CD4C: mov     ebx, [ebx+48h]
-0x68CD4F: mov     ecx, offset fAbsorbMoveSpeed
+0x68CD4F: mov     ecx, (offset flt_B37ED0+390h)
 0x68CD54: call    GameSetting_GetSafeFloatPointer
 0x68CD59: push    0; int
 0x68CD5B: fld     dword ptr [eax]

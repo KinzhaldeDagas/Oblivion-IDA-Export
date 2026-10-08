@@ -15,6 +15,6 @@
 0x413783: add     ecx, 8; this
 0x413786: mov     [esp+8+arg_20], ebx
 0x41378A: call    BSStringT_Set
-0x41378F: mov     ecx, [esp+arg_10]
+0x41378F: mov     ecx, dword ptr [esp+arg_10]
 0x413793: push    ecx
-0x413794: call    FormHeapFree
+0x413794: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.

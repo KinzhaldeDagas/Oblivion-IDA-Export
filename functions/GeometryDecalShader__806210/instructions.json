@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x806210",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; BloodOnDeath decode 2026-05-30: registers/builds GeometryDecalShader. Static/skinned declarations and render passes only; no blood emission or trail count is decided here.",
     "mnemonic": "push",
     "size": 2
   },
@@ -163,19 +163,19 @@
   },
   {
     "ea": "0x806261",
-    "line": "push    1; StreamCount",
+    "line": "push    1; streamCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x806263",
-    "line": "push    2; a2",
+    "line": "push    2; elementCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x806265",
-    "line": "push    eax; a1",
+    "line": "push    eax; renderer",
     "mnemonic": "push",
     "size": 1
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x80626E",
-    "line": "call    CreateDX9ShaderDeclaration",
+    "line": "call    CreateDX9ShaderDeclaration; Oblivion NiDX9 declaration factory. Allocates a 0x38-byte NiDX9ShaderDeclaration and initializes elementCount internal element records for each streamCount stream.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,25 +517,25 @@
   },
   {
     "ea": "0x8062F9",
-    "line": "push    1; StreamCount",
+    "line": "push    1; streamCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x8062FB",
-    "line": "push    4; a2",
+    "line": "push    4; elementCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x8062FD",
-    "line": "push    ecx; a1",
+    "line": "push    ecx; renderer",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8062FE",
-    "line": "call    CreateDX9ShaderDeclaration",
+    "line": "call    CreateDX9ShaderDeclaration; Oblivion NiDX9 declaration factory. Allocates a 0x38-byte NiDX9ShaderDeclaration and initializes elementCount internal element records for each streamCount stream.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1069,7 +1069,7 @@
   },
   {
     "ea": "0x8063D6",
-    "line": "cmp     eax, offset dword_B3F684",
+    "line": "cmp     eax, offset stru_B3F684",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1207,7 +1207,7 @@
   },
   {
     "ea": "0x806424",
-    "line": "call    sub_805320",
+    "line": "call    sub_805320; BloodOnDeath decode: compiles/binds geometry-decal shader programs; MAXDECALS lives inside shader setup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1219,7 +1219,7 @@
   },
   {
     "ea": "0x80642B",
-    "line": "call    sub_805670",
+    "line": "call    sub_805670; BloodOnDeath decode: allocates/configures render passes. Draw plumbing, not decal spawn throttling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1468,5 +1468,107 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C57A0",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C57A3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C57A4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C57A9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C57AA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C57AB",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C57AE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C57AF",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C57B4",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C57B5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C57B6",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C57BA",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C57BD",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C57C0",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C57C2",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C57C7",
+    "line": "mov     eax, offset stru_AEDF40",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C57CC",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

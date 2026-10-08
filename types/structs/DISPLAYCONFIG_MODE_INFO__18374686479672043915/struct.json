@@ -1,34 +1,63 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "DISPLAYCONFIG_MODE_INFO",
+  "definition": "struct DISPLAYCONFIG_MODE_INFO\n{\nDISPLAYCONFIG_MODE_INFO_TYPE infoType;\nUINT32 id;\nLUID adapterId;\n$101A75CE13920E5CEC35B44A34BC5523 u;\n}\n",
   "id": 18374686479672043915,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "infoType",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DISPLAYCONFIG_MODE_INFO_TYPE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "id",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "UINT32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "adapterId",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 8
+      "size": 8,
+      "type": "LUID"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "u",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 48
+      "size": 48,
+      "type": "$101A75CE13920E5CEC35B44A34BC5523"
     }
   ],
   "name": "DISPLAYCONFIG_MODE_INFO",
+  "ordinal": 7643,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 64
 }

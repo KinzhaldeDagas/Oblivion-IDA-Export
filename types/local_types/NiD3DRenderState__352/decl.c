@@ -1,1 +1,1 @@
-NiD3DRenderState
+struct NiD3DRenderState;

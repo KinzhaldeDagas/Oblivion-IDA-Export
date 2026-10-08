@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x502C12",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x502C21",
-    "line": "mov     ecx, [esp+8+arg_18]",
+    "line": "mov     ecx, [esp+8+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -169,31 +169,31 @@
   },
   {
     "ea": "0x502C29",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x502C2A",
-    "line": "push    0",
+    "line": "push    0; param2",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x502C2C",
-    "line": "push    edx",
+    "line": "push    edx; quest",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x502C2D",
-    "line": "push    esi",
+    "line": "push    esi; subject",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x502C2E",
-    "line": "call    sub_4F4B70",
+    "line": "call    GetStage_Eval; GetStage_Eval (index 58 / opcode 0x103A): returns TESQuest::GetCurrentStage for the Quest parameter; it does not query the stage-done list.",
     "mnemonic": "call",
     "size": 5
   },

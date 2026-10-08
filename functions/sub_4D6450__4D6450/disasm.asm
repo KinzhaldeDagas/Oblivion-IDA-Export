@@ -11,10 +11,10 @@
 0x4D6470: push    esi
 0x4D6471: call    sub_43DE30
 0x4D6476: mov     eax, ds:0B333A0h
-0x4D647B: push    0
-0x4D647D: mov     ecx, esi
+0x4D647B: push    0; registerLights
+0x4D647D: mov     ecx, esi; self
 0x4D647F: mov     byte ptr [eax+69h], 1
-0x4D6483: call    sub_4CB670
+0x4D6483: call    TESObjectCELL_RegisterOrUnregisterAttachedLights; As a process-level-5/6 cell begins unload, unregister ordinary attached reference lights before removing the cell scene node.
 0x4D6488: test    byte ptr [esi+24h], 1
 0x4D648C: mov     ecx, ds:0B333A0h; this
 0x4D6492: push    esi; a2
@@ -45,7 +45,7 @@
 0x4D64E0: lea     eax, [esp+10h+var_4]
 0x4D64E4: push    eax
 0x4D64E5: call    edx
-0x4D64E7: mov     edi, dword ptr [esp+0Ch+var_4]
+0x4D64E7: mov     edi, [esp+0Ch+var_4]
 0x4D64EB: test    edi, edi
 0x4D64ED: jz      short loc_4D650B
 0x4D64EF: lea     eax, [edi+4]
@@ -61,16 +61,16 @@
 0x4D6507: mov     ecx, edi
 0x4D6509: call    eax
 0x4D650B: push    esi; a2
-0x4D650C: mov     ecx, offset stru_B35C80; this
+0x4D650C: mov     ecx, offset unk_B35C80; this
 0x4D6511: mov     byte ptr [esi+26h], 3
 0x4D6515: call    sub_496EA0
 0x4D651A: push    1
 0x4D651C: lea     ecx, [esi+48h]
 0x4D651F: push    ecx
-0x4D6520: mov     ecx, offset ActorProcessManager_ptr
+0x4D6520: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x4D6525: call    sub_6786A0
 0x4D652A: push    esi; a2
-0x4D652B: mov     ecx, offset stru_B35C80; this
+0x4D652B: mov     ecx, offset unk_B35C80; this
 0x4D6530: call    sub_496F50
 0x4D6535: mov     ecx, esi
 0x4D6537: call    sub_4CAA30

@@ -22,7 +22,6 @@
 0x8B2127: mov     ecx, esi
 0x8B2129: jz      short loc_8B2139
 0x8B212B: jmp     short loc_8B2130
-0x8B212D: align 10h
 0x8B2130: mov     ecx, edx
 0x8B2132: mov     edx, [ecx+0Ch]
 0x8B2135: test    edx, edx

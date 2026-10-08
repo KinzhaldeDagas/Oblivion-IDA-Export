@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8B9CA0",
-    "line": "push    ebp",
+    "line": "push    ebp; Initializes ahkCharacterProxy side data and default up vector to (0,0,1,0) at this+0x40. Controller states later fetch runtime up/gravity basis via vtable+0x58 and context+0x20.",
     "mnemonic": "push",
     "size": 1
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x8B9CBB",
-    "line": "call    sub_8ACB10",
+    "line": "call    hkpCharacterProxy_InitFromCinfo; ahkCharacterProxy constructor path initializes default up vector to (0,0,1,0) at this+0x40.",
     "mnemonic": "call",
     "size": 5
   },

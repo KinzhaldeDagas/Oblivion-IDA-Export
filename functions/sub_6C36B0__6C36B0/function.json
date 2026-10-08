@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 21,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6C36B0",
+      "0x6C3727"
+    ]
+  ],
+  "chunks_sha256": "379b7396e2723158e041bb153507cf97a2cf4672483b1390c43e8211706e438a",
+  "comment_regular": "Return true only when an active NiTimeController can reuse its previous interpolation result. Active bit is NiTimeController.flags +0x08 bit 3. On an application-time change, computeScaledTimeOnUpdate +0x2C normally calls virtual ComputeScaledTime and refreshes cachedScaledTime +0x28; forceUpdate +0x38 forces one changed result and is cleared. If +0x2C is zero, report changed without recomputing +0x28.",
+  "comment_repeatable": "Return true only when an active NiTimeController can reuse its previous interpolation result. Active bit is NiTimeController.flags +0x08 bit 3. On an application-time change, computeScaledTimeOnUpdate +0x2C normally calls virtual ComputeScaledTime and refreshes cachedScaledTime +0x28; forceUpdate +0x38 forces one changed result and is cleared. If +0x2C is zero, report changed without recomputing +0x28.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6C36B0",
+  "display_name": "NiTimeController_IsUpdateUnchanged",
   "end_ea": "0x6C3727",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6C36B0",
+  "name": "NiTimeController_IsUpdateUnchanged",
   "segment": ".text",
   "sha256": "379b7396e2723158e041bb153507cf97a2cf4672483b1390c43e8211706e438a",
   "size": 119,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6C36B0",
-  "type": "char __thiscall(float *this, float)",
+  "total_chunk_size": 119,
+  "type": "bool __thiscall(NiTimeController *this, float applicationTime)",
   "xrefs_from_count": 51,
   "xrefs_to_count": 21
 }

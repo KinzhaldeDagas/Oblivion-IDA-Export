@@ -1,4 +1,4 @@
-0x524280: sub     esp, 10h
+0x524280: sub     esp, 10h; TESNPC::InitWorn (confirmed by native diagnostic strings). Enumerates equipped biped objects: index 9 configures WEAP slot at ActorAnimData+0xDC; index 12 configures AMMO/quiver slot at +0x10C; index 14 configures light/torch.
 0x524283: push    esi
 0x524284: push    edi
 0x524285: mov     eax, ecx
@@ -27,11 +27,11 @@
 0x5242C6: mov     [esp+18h+var_C], eax
 0x5242CA: jz      loc_5244CF
 0x5242D0: push    ebp
-0x5242D1: mov     ebp, [esp+1Ch+arg_4]
+0x5242D1: mov     ebp, [esp+1Ch+animData]
 0x5242D5: cmp     ebp, edi
 0x5242D7: jz      loc_5244CE
 0x5242DD: xor     esi, esi
-0x5242DF: mov     [esp+1Ch+arg_4], esi
+0x5242DF: mov     [esp+1Ch+animData], esi
 0x5242E3: push    ebx
 0x5242E4: mov     ecx, [esp+20h+var_4]
 0x5242E8: push    0
@@ -46,15 +46,15 @@
 0x524301: mov     ecx, ebx
 0x524303: call    ContainerEntryExtraData_DestroyDataTable
 0x524308: push    ebx
-0x524309: call    FormHeapFree
+0x524309: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x52430E: jmp     loc_5244BA
 0x524313: cmp     esi, 0Fh; switch 16 cases
 0x524316: ja      def_524323; jumptable 00524323 default case, cases 10,11
 0x52431C: movzx   eax, ds:byte_5244F4[esi]
 0x524323: jmp     ds:jpt_524323[eax*4]; switch jump
 0x52432A: push    edi; jumptable 00524323 case 9
-0x52432B: mov     ecx, ebp
-0x52432D: call    sub_478CA0
+0x52432B: mov     ecx, ebp; this
+0x52432D: call    ActorSkinInfo_SetWeaponSlotForm; Installs only form type 0x21 (WEAP) into ActorSkinInfo WeaponForm at +0xDC after clearing prior state; WeaponModel at +0xE0 points to the form's embedded TESModel at form+0x30.
 0x524332: jmp     loc_5244A9
 0x524337: mov     esi, [esp+20h+var_C]; jumptable 00524323 case 14
 0x52433B: test    esi, esi
@@ -80,13 +80,13 @@
 0x52436F: call    ContainerEntryExtraData_HasWorn
 0x524374: test    al, al
 0x524376: jz      loc_5244A9
-0x52437C: push    edi
-0x52437D: mov     ecx, ebp
-0x52437F: call    sub_478DF0
+0x52437C: push    edi; form
+0x52437D: mov     ecx, ebp; this
+0x52437F: call    ActorSkinInfo_SetLightSlotForm; Set ActorSkinInfo light slot form at +0x12C after validating Oblivion form type 0x1A (LIGH).
 0x524384: jmp     loc_5244A9
 0x524389: push    edi; jumptable 00524323 case 12
-0x52438A: mov     ecx, ebp
-0x52438C: call    sub_478D70
+0x52438A: mov     ecx, ebp; this
+0x52438C: call    ActorSkinInfo_SetAmmoSlotForm; Installs only form type 0x22 (AMMO) into ActorSkinInfo AmmoForm at +0x10C after clearing prior state; AmmoModel at +0x110 points to the form's embedded TESModel at form+0x30.
 0x524391: jmp     loc_5244A9
 0x524396: push    0; jumptable 00524323 cases 0,1
 0x524398: push    offset ??_R0?AVTESBipedModelForm@@@8; struct TypeDescriptor *
@@ -159,7 +159,7 @@
 0x524457: call    sub_4691D0
 0x52445C: jmp     short loc_5244A9
 0x52445E: push    edi; a1
-0x52445F: call    TESFullName_GetNameForForm
+0x52445F: call    TESFullName_GetNameForForm; 3DTheft decode: TESFullName_GetNameForForm only dynamic-casts the passed form to TESFullName and returns its raw name/EmptyString; it does not apply worldspace fallback.
 0x524464: push    eax
 0x524465: push    offset aBadPartSInTesn; "Bad part '%s' in TESNPC::InitWorn."
 0x52446A: jmp     short loc_5244A1
@@ -185,12 +185,12 @@
 0x5244A9: mov     ecx, ebx
 0x5244AB: call    ContainerEntryExtraData_DestroyDataTable
 0x5244B0: push    ebx
-0x5244B1: call    FormHeapFree
-0x5244B6: mov     esi, [esp+24h+arg_4]
+0x5244B1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x5244B6: mov     esi, [esp+24h+animData]
 0x5244BA: add     esp, 4
 0x5244BD: add     esi, 1
 0x5244C0: cmp     esi, 10h
-0x5244C3: mov     [esp+20h+arg_4], esi
+0x5244C3: mov     [esp+20h+animData], esi
 0x5244C7: jl      loc_5242E4
 0x5244CD: pop     ebx
 0x5244CE: pop     ebp

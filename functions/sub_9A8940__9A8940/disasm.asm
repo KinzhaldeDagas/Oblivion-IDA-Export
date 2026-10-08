@@ -40,15 +40,15 @@
 0x9A89B6: mov     eax, [esi+30h]
 0x9A89B9: push    eax
 0x9A89BA: mov     byte ptr [esi+34h], 1
-0x9A89BE: call    FormHeapFree
+0x9A89BE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x9A89C3: push    ebx; Size
 0x9A89C4: call    FormHeapAlloc
 0x9A89C9: mov     ecx, [esp+18h+Src]
-0x9A89CD: push    ebx; Size
-0x9A89CE: push    ecx; Src
-0x9A89CF: push    eax; Dst
+0x9A89CD: push    ebx; byteCount
+0x9A89CE: push    ecx; source
+0x9A89CF: push    eax; destination
 0x9A89D0: mov     [esi+30h], eax
-0x9A89D3: call    _memcpy
+0x9A89D3: call    _memcpy;
 0x9A89D8: add     esp, 14h
 0x9A89DB: jmp     short loc_9A89E8
 0x9A89DD: mov     edx, [esp+10h+Src]
@@ -73,14 +73,14 @@
 0x9A8A09: pop     ebp
 0x9A8A0A: pop     ebx
 0x9A8A0B: retn    28h ; '('
-0x9A8A0E: cmp     byte_B4295B, 0
+0x9A8A0E: cmp     g_D3DXParameterDispatchInitialized, 0
 0x9A8A15: jnz     short loc_9A8A1C
-0x9A8A17: call    sub_783C70
+0x9A8A17: call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.
 0x9A8A1C: mov     eax, [esp+10h+Src]
 0x9A8A20: mov     edx, [esp+10h+arg_0]
 0x9A8A24: push    eax
 0x9A8A25: and     edi, 0FFh
-0x9A8A2B: mov     ecx, dword_B428D8[edi*4]
+0x9A8A2B: mov     ecx, g_D3DXParameterClassDispatch[edi*4]
 0x9A8A32: push    ebx
 0x9A8A33: push    ecx
 0x9A8A34: push    edx

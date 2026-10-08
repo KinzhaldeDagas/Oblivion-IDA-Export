@@ -13,38 +13,38 @@ int __thiscall sub_533830(int this, float *a2, float *a3, float a4)
   float v16; // [esp+28h] [ebp-20h]
   float v17; // [esp+2Ch] [ebp-1Ch]
 
-  v5 = hkFactor;
+  v5 = hkFactor; /*0x533857*/
   if ( a4 != 0.0
     && (v6 = *(_DWORD *)(this + 0x1A0)) != 0
     && ((v7 = *(_DWORD *)(v6 + 8)) == 0 || (v8 = (int *)(v7 + 0x14)) == 0 ? (v9 = 0) : (v9 = *v8), v9) )
   {
-    v10 = v5;
-    *(float *)(v9 + 0xC) = a4 * v5;
+    v10 = v5; /*0x533881*/
+    *(float *)(v9 + 0xC) = a4 * v5; /*0x533883*/
   }
   else
   {
-    v10 = v5;
+    v10 = v5; /*0x533888*/
   }
-  v11 = *(_DWORD **)(this + 0x1A0);
-  *(float *)(this + 4) = flt_A5613C;
-  *(_DWORD *)(this + 0x14) = 0;
-  if ( v11 )
+  v11 = *(_DWORD **)(this + 0x1A0); /*0x53388a*/
+  *(float *)(this + 4) = flt_A5613C; /*0x533898*/
+  *(_DWORD *)(this + 0x14) = 0; /*0x53389b*/
+  if ( v11 ) /*0x5338a2*/
   {
-    v16 = flt_A56138;
-    v17 = v16;
-    v14[0] = *a2 * v10;
-    v14[1] = a2[1] * v10;
-    v14[2] = a2[2] * v10;
-    v15[0] = *a3 * v10;
-    v15[1] = a3[1] * v10;
-    v15[2] = v10 * a3[2];
-    v12 = v11[2];
-    if ( v12 )
+    v16 = flt_A56138; /*0x5338ad*/
+    v17 = v16; /*0x5338b1*/
+    v14[0] = *a2 * v10; /*0x5338b9*/
+    v14[1] = a2[1] * v10; /*0x5338c2*/
+    v14[2] = a2[2] * v10; /*0x5338ce*/
+    v15[0] = *a3 * v10; /*0x5338d6*/
+    v15[1] = a3[1] * v10; /*0x5338df*/
+    v15[2] = v10 * a3[2]; /*0x5338e6*/
+    v12 = v11[2]; /*0x5338ea*/
+    if ( v12 ) /*0x5338ef*/
     {
-      sub_89F570(v11);
-      (*(void (__thiscall **)(int, float *, float *, int, _DWORD))(*(_DWORD *)v12 + 0x30))(v12, v14, v15, this, 0);
-      sub_89F570(v11);
+      bhkRefObject_UpdateHavokObject(v11); /*0x5338f3*/
+      (*(void (__thiscall **)(int, float *, float *, int, _DWORD))(*(_DWORD *)v12 + 0x30))(v12, v14, v15, this, 0); /*0x53390c*/
+      bhkRefObject_UpdateHavokObject(v11); /*0x533910*/
     }
   }
-  return *(_DWORD *)(this + 0x14);
+  return *(_DWORD *)(this + 0x14); /*0x533922*/
 }

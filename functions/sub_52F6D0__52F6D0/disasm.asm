@@ -1,4 +1,4 @@
-0x52F6D0: mov     eax, [esp+arg_0]
+0x52F6D0: mov     eax, [esp+topics]; Case-insensitive bubble sort of a TESTopic list by TESFullName display text. A null argument sorts DataHandler's master topic list; player additions pass the known-topic list explicitly.
 0x52F6D4: test    eax, eax
 0x52F6D6: push    ebp
 0x52F6D7: mov     ebp, eax
@@ -21,7 +21,7 @@
 0x52F704: jle     short loc_52F769
 0x52F706: push    ebx
 0x52F707: push    esi
-0x52F708: mov     [esp+0Ch+arg_0], eax
+0x52F708: mov     [esp+0Ch+topics], eax
 0x52F70C: push    edi
 0x52F70D: lea     ecx, [ecx+0]
 0x52F710: test    ebp, ebp
@@ -57,7 +57,7 @@
 0x52F758: mov     esi, [esi+4]
 0x52F75B: test    esi, esi
 0x52F75D: jnz     short loc_52F716
-0x52F75F: sub     [esp+10h+arg_0], 1
+0x52F75F: sub     [esp+10h+topics], 1
 0x52F764: jnz     short loc_52F710
 0x52F766: pop     edi
 0x52F767: pop     esi

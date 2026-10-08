@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x79AC10",
+      "0x79AC3A"
+    ]
+  ],
+  "chunks_sha256": "c6843dcac5c9639af12d98579b0dead83b4da7289c2fe57dd0a2e69338df68e9",
+  "comment_regular": "Oblivion SFrondTexture destructor: releases the 28-byte small-string filename when heap-backed (capacity >= 0x10), then resets string length/capacity; scalar fields need no destruction.",
+  "comment_repeatable": "Oblivion SFrondTexture destructor: releases the 28-byte small-string filename when heap-backed (capacity >= 0x10), then resets string length/capacity; scalar fields need no destruction.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_79AC10",
+  "display_name": "OB_SFrondTexture_Destroy_010201A0",
   "end_ea": "0x79AC3A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_79AC10",
+  "name": "OB_SFrondTexture_Destroy_010201A0",
   "segment": ".text",
   "sha256": "c6843dcac5c9639af12d98579b0dead83b4da7289c2fe57dd0a2e69338df68e9",
   "size": 42,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x79AC10",
-  "type": "int __stdcall(_DWORD *)",
+  "total_chunk_size": 42,
+  "type": "void __stdcall(OB_SFrondTexture_010201A0 *this)",
   "xrefs_from_count": 15,
   "xrefs_to_count": 2
 }

@@ -51,7 +51,7 @@
 0x6B19A3: mov     ecx, edi
 0x6B19A5: call    eax
 0x6B19A7: push    eax
-0x6B19A8: call    sub_6B1210
+0x6B19A8: call    SoundManager_PlayFootstepAnimEvent; Footstep/creature animation event dispatcher. Handles creature anim sounds, terrain/water/armor/sneak footstep selection, positions played sound at the actor, and applies sound-system range gating.
 0x6B19AD: mov     edx, [edi]
 0x6B19AF: mov     eax, [edx+380h]
 0x6B19B5: add     esp, 8
@@ -59,7 +59,7 @@
 0x6B19BA: mov     ecx, edi
 0x6B19BC: call    eax
 0x6B19BE: push    eax
-0x6B19BF: call    sub_6B1210
+0x6B19BF: call    SoundManager_PlayFootstepAnimEvent; Footstep/creature animation event dispatcher. Handles creature anim sounds, terrain/water/armor/sneak footstep selection, positions played sound at the actor, and applies sound-system range gating.
 0x6B19C4: add     esp, 8
 0x6B19C7: pop     edi
 0x6B19C8: pop     esi
@@ -73,10 +73,10 @@
 0x6B19D8: jz      short loc_6B19F5
 0x6B19DA: push    0
 0x6B19DC: push    edi
-0x6B19DD: call    sub_6B1210
+0x6B19DD: call    SoundManager_PlayFootstepAnimEvent; Footstep/creature animation event dispatcher. Handles creature anim sounds, terrain/water/armor/sneak footstep selection, positions played sound at the actor, and applies sound-system range gating.
 0x6B19E2: push    1
 0x6B19E4: push    edi
-0x6B19E5: call    sub_6B1210
+0x6B19E5: call    SoundManager_PlayFootstepAnimEvent; Footstep/creature animation event dispatcher. Handles creature anim sounds, terrain/water/armor/sneak footstep selection, positions played sound at the actor, and applies sound-system range gating.
 0x6B19EA: add     esp, 10h
 0x6B19ED: pop     edi
 0x6B19EE: pop     esi
@@ -107,7 +107,7 @@
 0x6B1A39: test    esi, esi
 0x6B1A3B: jz      loc_6B1B3C
 0x6B1A41: mov     ecx, esi; this
-0x6B1A43: call    TESObjectCELL_IsInterior
+0x6B1A43: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x6B1A48: test    al, al
 0x6B1A4A: jz      short loc_6B1A57
 0x6B1A4C: movzx   ecx, byte ptr [esi+24h]
@@ -115,11 +115,11 @@
 0x6B1A52: test    cl, 1
 0x6B1A55: jnz     short loc_6B1A66
 0x6B1A57: mov     ecx, esi; this
-0x6B1A59: call    TESObjectCELL_IsInterior
+0x6B1A59: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x6B1A5E: test    al, al
 0x6B1A60: jnz     loc_6B1B3C
-0x6B1A66: mov     ecx, edi
-0x6B1A68: call    Actor_IsSwimming
+0x6B1A66: mov     ecx, edi; this
+0x6B1A68: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x6B1A6D: test    al, al
 0x6B1A6F: jnz     loc_6B1B3C
 0x6B1A75: fld     dword ptr ds:0A77830h
@@ -174,7 +174,7 @@
 0x6B1B24: mov     ecx, esi; this
 0x6B1B26: call    sub_6B73E0
 0x6B1B2B: push    esi
-0x6B1B2C: call    FormHeapFree
+0x6B1B2C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6B1B31: add     esp, 4
 0x6B1B34: pop     edi
 0x6B1B35: pop     esi
@@ -259,7 +259,7 @@
 0x6B1C3E: mov     ecx, esi; this
 0x6B1C40: call    sub_6B73E0
 0x6B1C45: push    esi
-0x6B1C46: call    FormHeapFree
+0x6B1C46: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6B1C4B: add     esp, 4
 0x6B1C4E: test    ebp, ebp
 0x6B1C50: jz      loc_6B1CE2
@@ -302,14 +302,14 @@
 0x6B1CD2: mov     ecx, esi; this
 0x6B1CD4: call    sub_6B73E0
 0x6B1CD9: push    esi
-0x6B1CDA: call    FormHeapFree
+0x6B1CDA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6B1CDF: add     esp, 4
 0x6B1CE2: test    ebx, ebx
 0x6B1CE4: jz      short loc_6B1CF6
 0x6B1CE6: mov     ecx, ebx
 0x6B1CE8: call    ContainerEntryExtraData_DestroyDataTable
 0x6B1CED: push    ebx
-0x6B1CEE: call    FormHeapFree
+0x6B1CEE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6B1CF3: add     esp, 4
 0x6B1CF6: pop     edi
 0x6B1CF7: pop     esi

@@ -1,1 +1,1 @@
-0x748660: jmp     __strcmp
+0x748660: jmp     CRT_StricmpLocaleDispatch

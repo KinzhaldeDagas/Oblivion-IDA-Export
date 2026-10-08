@@ -1,8 +1,8 @@
 void __usercall sub_5B2B70(double a1@<st2>, double st6_0@<st1>)
 {
-  _DWORD *OpenMenuTile; // eax
-  _DWORD *ParentMenu; // eax
-  _DWORD *v4; // esi
+  Tile *OpenMenuTile; // eax
+  Menu *ParentMenu; // eax
+  Menu *v4; // esi
   int v5; // eax
   int v6; // ecx
   unsigned int **v7; // esi
@@ -19,647 +19,672 @@ void __usercall sub_5B2B70(double a1@<st2>, double st6_0@<st1>)
   TESForm *v18; // edx
   EntryData **v19; // eax
   TESForm *v20; // edx
-  _DWORD *v21; // esi
-  _DWORD *v22; // ecx
-  void (__thiscall **v23)(_DWORD *, int, int); // ebx
+  Menu *v21; // esi
+  _DWORD *id; // ecx
+  void (__thiscall **p_HandleMouseout)(Menu *, unsigned int, Tile *); // ebx
   double Float; // st7
   int v25; // eax
   _DWORD *v26; // ebx
   Tile *v27; // eax
-  double v28; // st7
-  int *v29; // ecx
-  Tile *v30; // esi
-  int v31; // ecx
-  Tile *v32; // eax
-  _DWORD *v33; // eax
+  int *v28; // ecx
+  Tile *v29; // esi
+  int v30; // ecx
+  Tile *v31; // eax
+  Menu *v32; // eax
+  int v33; // ecx
   int v34; // ecx
-  int v35; // ecx
-  Tile *v36; // eax
-  int v37; // edi
-  _DWORD *v38; // ebx
-  _DWORD *v39; // esi
-  bool v40; // al
-  int v41; // ecx
-  BOOL v42; // edi
+  Tile *v35; // eax
+  int v36; // edi
+  _DWORD *v37; // ebx
+  _DWORD *v38; // esi
+  bool v39; // al
+  int v40; // ecx
+  BOOL v41; // edi
+  char v42; // al
   int v43; // eax
   int v44; // edi
-  int v45; // eax
-  int v46; // edi
-  int (__thiscall *v47)(_DWORD *); // eax
-  BOOL v48; // edi
-  int v49; // edi
+  char v45; // al
+  int v46; // eax
+  int v47; // edi
+  int (__thiscall *v48)(_DWORD *); // eax
+  BOOL v49; // edi
   int v50; // edi
-  const char *v51; // eax
+  int v51; // edi
   const char *v52; // eax
-  int v53; // eax
-  PlayerCharacter *v54; // ecx
-  bool v55; // zf
-  int v56; // ebx
-  Tile *v57; // esi
-  char *v58; // edi
-  char *v59; // eax
-  _DWORD *v60; // edi
-  BSStringT *v61; // esi
-  double v62; // st7
-  ExtraDataList ****v63; // edi
-  ExtraDataList ***v64; // esi
-  ExtraDataList **v65; // eax
-  int v66; // eax
-  _DWORD *v67; // ebx
+  const char *v53; // eax
+  double v54; // st7
+  int v55; // eax
+  PlayerCharacter *v56; // ecx
+  bool v57; // zf
+  int v58; // ebx
+  Tile *v59; // esi
+  char *v60; // edi
+  CHAR *v61; // eax
+  Menu *v62; // edi
+  BSStringT *v63; // esi
+  double v64; // st7
+  int *v65; // edi
+  ExtraDataList ***v66; // esi
+  void *v67; // eax
   int v68; // eax
-  int v69; // eax
-  CHAR *v70; // eax
-  CHAR *v71; // eax
-  double (__thiscall **v72)(_DWORD *, _DWORD); // eax
+  _DWORD *v69; // ebx
+  char v70; // al
+  int v71; // eax
+  char v72; // al
   int v73; // eax
-  PlayerCharacter *v74; // ecx
-  int v75; // eax
-  int *v76; // eax
-  int v77; // ebx
-  _DWORD *v78; // edi
-  int *v79; // esi
-  const char *v80; // eax
-  _DWORD *v81; // edi
-  double v82; // st7
-  InterfaceManager *v83; // eax
-  BSTextureManager *v84; // ecx
-  _DWORD *v85; // eax
-  _DWORD *v86; // edi
-  int v87; // edi
-  int (__thiscall *v88)(_DWORD *); // edx
-  _DWORD *v89; // edi
+  CHAR *v74; // eax
+  CHAR *v75; // eax
+  double (__thiscall **v76)(_DWORD *, _DWORD); // eax
+  double v77; // st7
+  int v78; // eax
+  PlayerCharacter *v79; // ecx
+  int v80; // eax
+  MenuVtbl *vftable; // eax
+  void (__thiscall *Destructor)(Menu *, bool); // ebx
+  Menu *v83; // edi
+  int *v84; // esi
+  const char *v85; // eax
+  Menu *v86; // edi
+  double v87; // st7
+  InterfaceManager *v88; // eax
+  void *v89; // ecx
   _DWORD *v90; // eax
-  int v91; // ecx
-  _DWORD *v92; // ebx
-  Tile *v93; // ecx
-  double v94; // st7
-  _DWORD *v95; // esi
-  _DWORD *v96; // ebx
-  float (__thiscall *GetSpellEffectiveness)(MagicCaster *, bool, float); // eax
-  const char *v98; // esi
+  _DWORD *v91; // edi
+  int v92; // edi
+  int (__thiscall *v93)(_DWORD *); // edx
+  _DWORD *v94; // edi
+  _DWORD *v95; // eax
+  int v96; // ecx
+  Menu *v97; // ebx
+  Tile *v98; // ecx
   double v99; // st7
-  char *v100; // esi
+  _DWORD *v100; // esi
+  _DWORD *v101; // ebx
+  float (__thiscall *GetSpellEffectiveness)(MagicCaster *, bool, float); // eax
+  const char *value; // esi
+  double v104; // st7
+  char *v105; // esi
   Tile **Singleton; // eax
-  EntryData *v102; // [esp+1Ch] [ebp-208h]
-  int v103; // [esp+1Ch] [ebp-208h]
-  char *v104; // [esp+1Ch] [ebp-208h]
-  TESObjectREFR *v105; // [esp+1Ch] [ebp-208h]
-  float v106; // [esp+1Ch] [ebp-208h]
-  float v107; // [esp+1Ch] [ebp-208h]
-  float v108; // [esp+1Ch] [ebp-208h]
-  float v109; // [esp+1Ch] [ebp-208h]
-  float v110; // [esp+1Ch] [ebp-208h]
+  EntryData *v107; // [esp+1Ch] [ebp-208h]
+  unsigned int v108; // [esp+1Ch] [ebp-208h]
+  char *v109; // [esp+1Ch] [ebp-208h]
+  TESObjectREFR *v110; // [esp+1Ch] [ebp-208h]
   float v111; // [esp+1Ch] [ebp-208h]
-  _DWORD *v112; // [esp+1Ch] [ebp-208h]
+  float v112; // [esp+1Ch] [ebp-208h]
   float v113; // [esp+1Ch] [ebp-208h]
   float v114; // [esp+1Ch] [ebp-208h]
   float v115; // [esp+1Ch] [ebp-208h]
   float v116; // [esp+1Ch] [ebp-208h]
-  float v117; // [esp+1Ch] [ebp-208h]
+  Tile *v117; // [esp+1Ch] [ebp-208h]
   float v118; // [esp+1Ch] [ebp-208h]
   float v119; // [esp+1Ch] [ebp-208h]
   float v120; // [esp+1Ch] [ebp-208h]
-  bool v121; // [esp+57h] [ebp-1CDh]
+  float v121; // [esp+1Ch] [ebp-208h]
+  float v122; // [esp+1Ch] [ebp-208h]
+  float v123; // [esp+1Ch] [ebp-208h]
+  float v124; // [esp+1Ch] [ebp-208h]
+  float v125; // [esp+1Ch] [ebp-208h]
+  _DWORD *v126; // [esp+20h] [ebp-204h]
+  _DWORD *v127; // [esp+24h] [ebp-200h]
+  _DWORD *v128; // [esp+28h] [ebp-1FCh]
+  _DWORD *v129; // [esp+2Ch] [ebp-1F8h]
+  char v130; // [esp+30h] [ebp-1F4h]
+  bool v131; // [esp+57h] [ebp-1CDh]
   char *Str1; // [esp+58h] [ebp-1CCh] BYREF
-  BSStringT v123; // [esp+5Ch] [ebp-1C8h] BYREF
+  BSStringT v133; // [esp+5Ch] [ebp-1C8h] BYREF
   TESForm *i; // [esp+64h] [ebp-1C0h]
-  int p_modlist; // [esp+68h] [ebp-1BCh] BYREF
-  int v126; // [esp+6Ch] [ebp-1B8h]
-  Tile *v127; // [esp+70h] [ebp-1B4h] BYREF
-  int v128; // [esp+74h] [ebp-1B0h]
-  _DWORD *v129; // [esp+78h] [ebp-1ACh]
+  int maxFocus; // [esp+68h] [ebp-1BCh] BYREF
+  TileMenu *v136; // [esp+6Ch] [ebp-1B8h]
+  Tile *v137; // [esp+70h] [ebp-1B4h] BYREF
+  int v138; // [esp+74h] [ebp-1B0h]
+  Menu *v139; // [esp+78h] [ebp-1ACh]
   int TotalEntryCountForITem; // [esp+7Ch] [ebp-1A8h]
-  int *v131; // [esp+80h] [ebp-1A4h]
-  _DWORD *v132; // [esp+84h] [ebp-1A0h]
-  int v133; // [esp+88h] [ebp-19Ch]
-  int v134; // [esp+8Ch] [ebp-198h]
-  _DWORD *v135; // [esp+90h] [ebp-194h]
+  int *v141; // [esp+80h] [ebp-1A4h]
+  Menu *v142; // [esp+84h] [ebp-1A0h]
+  void (__thiscall *AttachTileByID)(Menu *, UInt32, Tile *); // [esp+88h] [ebp-19Ch]
+  TileMenu *tile; // [esp+8Ch] [ebp-198h]
+  Tile *root; // [esp+90h] [ebp-194h]
   char a2[8]; // [esp+94h] [ebp-190h] BYREF
-  char v137[268]; // [esp+D4h] [ebp-150h] BYREF
-  int v138; // [esp+220h] [ebp-4h]
+  char v147[268]; // [esp+D4h] [ebp-150h] BYREF
+  int v148; // [esp+220h] [ebp-4h]
 
-  OpenMenuTile = (_DWORD *)Menu_GetOpenMenuTile(0x3FE);
-  v135 = OpenMenuTile;
+  OpenMenuTile = (Tile *)Menu_GetOpenMenuTile(0x3FE); /*0x5b2bb5*/
+  root = OpenMenuTile; /*0x5b2bc1*/
   if ( OpenMenuTile )
   {
-    ParentMenu = (_DWORD *)Tile_GetParentMenu(OpenMenuTile);
-    v55 = dword_B14368 == 0;
-    v4 = ParentMenu;
-    v129 = ParentMenu;
-    if ( !v55 )
+    ParentMenu = (Menu *)Tile_GetParentMenu(OpenMenuTile); /*0x5b2bcd*/
+    v57 = dword_B14368 == 0; /*0x5b2bd2*/
+    v4 = ParentMenu; /*0x5b2bd8*/
+    v139 = ParentMenu; /*0x5b2bda*/
+    if ( !v57 ) /*0x5b2bde*/
     {
-      do
+      do /*0x5b2c39*/
       {
-        v5 = dword_B14360;
-        v6 = *(_DWORD *)dword_B14360;
-        dword_B14360 = v6;
-        if ( v6 )
-          *(_DWORD *)(v6 + 4) = 0;
+        v5 = dword_B14360; /*0x5b2be0*/
+        v6 = *(_DWORD *)dword_B14360; /*0x5b2be5*/
+        dword_B14360 = v6; /*0x5b2be9*/
+        if ( v6 ) /*0x5b2bef*/
+          *(_DWORD *)(v6 + 4) = 0; /*0x5b2bf1*/
         else
-          dword_B14364 = 0;
-        v7 = *(unsigned int ***)(v5 + 8);
-        ((void (__thiscall *)(void ***, int))g_MagicMenuMagicItemList[2])(&g_MagicMenuMagicItemList, v5);
-        --dword_B14368;
-        if ( v7 )
+          dword_B14364 = 0; /*0x5b2bf6*/
+        v7 = *(unsigned int ***)(v5 + 8); /*0x5b2bfc*/
+        ((void (__thiscall *)(void ***, int))g_MagicMenuMagicItemList[2])(&g_MagicMenuMagicItemList, v5); /*0x5b2c0d*/
+        --dword_B14368; /*0x5b2c0f*/
+        if ( v7 ) /*0x5b2c18*/
         {
-          v9 = *v7;
-          if ( *v7 )
+          v9 = *v7; /*0x5b2c1a*/
+          if ( *v7 ) /*0x5b2c1a*/
           {
-            ContainerEntryExtraData_DestroyDataTable(*v7, v8);
-            FormHeapFree((unsigned int)v9);
+            ContainerEntryExtraData_DestroyDataTable(*v7, v8); /*0x5b2c22*/
+            FormHeapFree((unsigned int)v9); /*0x5b2c28*/
           }
-          FormHeapFree((unsigned int)v7);
+          FormHeapFree((unsigned int)v7); /*0x5b2c31*/
         }
       }
-      while ( dword_B14368 );
-      v4 = v129;
+      while ( dword_B14368 ); /*0x5b2c39*/
+      v4 = v139; /*0x5b2c41*/
     }
-    v10 = (Actor *)TESDataHandler_g_PlayerRef;
-    if ( TESDataHandler_g_PlayerRef )
+    v10 = (Actor *)reference; /*0x5b2c45*/
+    if ( reference )
     {
-      v134 = v4[0xB];
-      ActorBaseForm = Actor_GetActorBaseForm(v10, 0);
-      p_modlist = (int)&ActorBaseForm[3].member.modlist;
-      v4[0x13] = 0;
-      sub_5B27A0((EntryData *)&ActorBaseForm[3].member.modlist, (int (__cdecl *)(tListVoid *, tListVoid *))sub_5B2430);
-      TotalEntryCountForITem = TESObjectREF_GetTotalEntryCountForITem((TESObjectREFR *)TESDataHandler_g_PlayerRef, 0);
-      for ( i = 0; (int)i < TotalEntryCountForITem; i = (TESForm *)((char *)i + 1) )
+      tile = v4[1].members.tile; /*0x5b2c57*/
+      ActorBaseForm = Actor_GetActorBaseForm(v10, 0); /*0x5b2c5b*/
+      maxFocus = (int)&ActorBaseForm[3].member.modlist; /*0x5b2c6a*/
+      v4[1].members.fadeState = 0; /*0x5b2c6e*/
+      BSSimpleList_SortViaArrayAndRebuild( /*0x5b2c71*/
+        (EntryData *)&ActorBaseForm[3].member.modlist,
+        (int (__cdecl *)(tListVoid *, tListVoid *))sub_5B2430);
+      TotalEntryCountForITem = TESObjectREF_GetTotalEntryCountForITem((TESObjectREFR *)reference, 0); /*0x5b2c84*/
+      for ( i = 0; (int)i < TotalEntryCountForITem; i = (TESForm *)((char *)i + 1) ) /*0x5b2c8c*/
       {
-        InventoryEntryOfItem = GetInventoryEntryOfItem((TESObjectREFR *)TESDataHandler_g_PlayerRef, i, 0);
-        v13 = InventoryEntryOfItem;
-        if ( InventoryEntryOfItem )
+        InventoryEntryOfItem = GetInventoryEntryOfItem((TESObjectREFR *)reference, i, 0); /*0x5b2c9e*/
+        v13 = InventoryEntryOfItem; /*0x5b2ca3*/
+        if ( InventoryEntryOfItem ) /*0x5b2ca7*/
         {
-          v14 = OblivionDynamicCast(
+          v14 = OblivionDynamicCast( /*0x5b2cbd*/
                   InventoryEntryOfItem->type,
                   0,
                   (struct _s_RTTICompleteObjectLocator *)&TESBoundObject `RTTI Type Descriptor',
                   &TESObjectBOOK `RTTI Type Descriptor',
                   0);
-          if ( v14 && (v14[0x88] & 1) != 0 && *((_DWORD *)v14 + 0x19) )
+          if ( v14 && (v14[0x88] & 1) != 0 && *((_DWORD *)v14 + 0x19) ) /*0x5b2cda*/
           {
-            v16 = (int *)dword_B14360;
-            if ( dword_B14360 )
+            v16 = (int *)dword_B14360; /*0x5b2ce3*/
+            if ( dword_B14360 ) /*0x5b2ce3*/
             {
-              while ( 1 )
+              while ( 1 ) /*0x5b2cf7*/
               {
-                v102 = *(EntryData **)v16[2];
-                v131 = v16;
-                v16 = (int *)*v16;
-                if ( sub_584500(&byte_B3B404, v13, v102) <= 0 )
-                  break;
-                if ( !v16 )
-                  goto LABEL_21;
+                v107 = *(EntryData **)v16[2]; /*0x5b2cf7*/
+                v141 = v16; /*0x5b2cf8*/
+                v16 = (int *)*v16; /*0x5b2cfc*/
+                if ( sub_584500((char *)&dword_B3B0B4[0xD4], (int)v13, v13, v107) <= 0 ) /*0x5b2d0b*/
+                  break; /*0x5b2d0b*/
+                if ( !v16 ) /*0x5b2d0f*/
+                  goto LABEL_21; /*0x5b2d0f*/
               }
-              v19 = (EntryData **)FormHeapAlloc(8u);
-              if ( v19 )
+              v19 = (EntryData **)FormHeapAlloc(8u); /*0x5b2d2c*/
+              if ( v19 ) /*0x5b2d36*/
               {
-                v20 = i;
-                *v19 = v13;
-                v19[1] = (EntryData *)v20;
+                v20 = i; /*0x5b2d38*/
+                *v19 = v13; /*0x5b2d3c*/
+                v19[1] = (EntryData *)v20; /*0x5b2d3e*/
               }
               else
               {
-                v19 = 0;
+                v19 = 0; /*0x5b2d43*/
               }
-              v127 = (Tile *)v19;
-              sub_589640(&g_MagicMenuMagicItemList, (int)v131, &v127);
+              v137 = (Tile *)v19; /*0x5b2d49*/
+              NiTPointerList__InsertBeforePosition(&g_MagicMenuMagicItemList, (int)v141, &v137); /*0x5b2d58*/
             }
             else
             {
 LABEL_21:
-              v17 = (EntryData **)FormHeapAlloc(8u);
-              if ( v17 )
+              v17 = (EntryData **)FormHeapAlloc(8u); /*0x5b2d11*/
+              if ( v17 ) /*0x5b2d1d*/
               {
-                v18 = i;
-                *v17 = v13;
-                v17[1] = (EntryData *)v18;
+                v18 = i; /*0x5b2d1f*/
+                *v17 = v13; /*0x5b2d23*/
+                v17[1] = (EntryData *)v18; /*0x5b2d25*/
               }
               else
               {
-                v17 = 0;
+                v17 = 0; /*0x5b2d5f*/
               }
-              v127 = (Tile *)v17;
-              sub_5B1E20((BSTextureManager *)&g_MagicMenuMagicItemList, (void **)&v127);
+              v137 = (Tile *)v17; /*0x5b2d61*/
+              NiTPointerList__AddTail((BSTextureManager *)&g_MagicMenuMagicItemList, (void **)&v137); /*0x5b2d6f*/
             }
           }
           else
           {
-            ContainerEntryExtraData_DestroyDataTable((unsigned int *)v13, v15);
-            FormHeapFree((unsigned int)v13);
+            ContainerEntryExtraData_DestroyDataTable((unsigned int *)v13, v15); /*0x5b2d78*/
+            FormHeapFree((unsigned int)v13); /*0x5b2d7e*/
           }
         }
       }
-      v21 = v129;
-      v22 = (_DWORD *)v129[0x12];
-      if ( v22 )
+      v21 = v139; /*0x5b2d9b*/
+      id = (_DWORD *)v139[1].members.id; /*0x5b2d9f*/
+      if ( id ) /*0x5b2da4*/
       {
-        v103 = v129[0x12];
-        v23 = (void (__thiscall **)(_DWORD *, int, int))(*v129 + 0x14);
-        Float = Tile_GetFloat(v22, 0xFA8);
-        v25 = Double_To_SInt32(Float);
-        (*v23)(v21, v25, v103);
+        v108 = v139[1].members.id; /*0x5b2da8*/
+        p_HandleMouseout = &v139->__vftable->HandleMouseout; /*0x5b2dae*/
+        Float = Tile_GetFloat(id, 0xFA8); /*0x5b2db1*/
+        v25 = Double_To_SInt32(Float); /*0x5b2db6*/
+        (*p_HandleMouseout)(v21, v25, (Tile *)v108); /*0x5b2dc0*/
       }
-      v26 = *(_DWORD **)(v134 + 0x34);
-      while ( v26 )
+      v26 = *((_DWORD **)tile + 0xD); /*0x5b2dc6*/
+      while ( v26 ) /*0x5b2dcb*/
       {
-        v27 = (Tile *)v26[2];
-        v26 = (_DWORD *)*v26;
-        v127 = v27;
-        if ( Tile_GetFloat(v27, 0xFA8) >= dbl_A6C1E0 )
-          Tile_SetFloat(v127, (_DWORD *)0xFAA, flt_A690E0);
+        v27 = (Tile *)v26[2]; /*0x5b2dd3*/
+        v26 = (_DWORD *)*v26; /*0x5b2dd5*/
+        v137 = v27; /*0x5b2dde*/
+        if ( Tile_GetFloat(v27, 0xFA8) >= dbl_A6C1E0 ) /*0x5b2df2*/
+          Tile_SetFloat(v137, 0xFAAu, flt_A690E0); /*0x5b2e07*/
       }
-      Tile_SetFloat((Tile *)v21[1], (_DWORD *)0xFAF, flt_A53954);
-      Tile_SetFloat((Tile *)v21[1], (_DWORD *)0xFB0, flt_A53954);
-      Tile_SetFloat((Tile *)v21[1], (_DWORD *)0xFB1, flt_A53954);
-      v28 = flt_A53954;
-      Tile_SetFloat((Tile *)v21[1], (_DWORD *)0xFB2, flt_A53954);
-      i = 0;
-      TotalEntryCountForITem = 1;
-      v128 = 0;
-      v126 = 0;
-      BSSimpleList_Clear(v21 + 0xE);
-      sub_5B2B30((void **)v21);
-      v29 = (int *)dword_B14360;
-      v132 = v21 + 0x10;
-      v131 = v29;
-      v127 = (Tile *)p_modlist;
+      Tile_SetFloat(v21->members.tile, 0xFAFu, flt_A53954); /*0x5b2e22*/
+      Tile_SetFloat(v21->members.tile, 0xFB0u, flt_A53954); /*0x5b2e39*/
+      Tile_SetFloat(v21->members.tile, 0xFB1u, flt_A53954); /*0x5b2e50*/
+      Tile_SetFloat(v21->members.tile, 0xFB2u, flt_A53954); /*0x5b2e67*/
+      i = 0; /*0x5b2e6f*/
+      TotalEntryCountForITem = 1; /*0x5b2e73*/
+      v138 = 0; /*0x5b2e7b*/
+      v136 = 0; /*0x5b2e7f*/
+      BSSimpleList_Clear(&v21[1].members.templateContextTile); /*0x5b2e83*/
+      sub_5B2B30((void **)&v21->__vftable); /*0x5b2e8a*/
+      v28 = (int *)dword_B14360; /*0x5b2e8f*/
+      v142 = (Menu *)((char *)v21 + 0x40); /*0x5b2e9c*/
+      v141 = v28; /*0x5b2ea0*/
+      v137 = (Tile *)maxFocus; /*0x5b2ea4*/
       while ( 1 )
       {
-        v30 = v127;
-        if ( !v127 )
-          goto LABEL_50;
-        v31 = 0;
-        v32 = v127;
-        do
+        v29 = v137; /*0x5b2ea8*/
+        if ( !v137 ) /*0x5b2eae*/
+          goto LABEL_50; /*0x5b2eae*/
+        v30 = 0; /*0x5b2eb0*/
+        v31 = v137; /*0x5b2eb2*/
+        do /*0x5b2ec0*/
         {
-          if ( *(_DWORD *)v32 )
-            ++v31;
-          v32 = *((Tile **)v32 + 1);
+          if ( *(_DWORD *)v31 ) /*0x5b2eb4*/
+            ++v30; /*0x5b2eb8*/
+          v31 = *((Tile **)v31 + 1); /*0x5b2ebb*/
         }
-        while ( v32 );
-        if ( !v31 )
+        while ( v31 ); /*0x5b2ec0*/
+        if ( !v30 )
         {
 LABEL_50:
-          if ( !v131 )
+          if ( !v141 )
           {
-            v33 = v132;
-            if ( !v132 )
-              goto LABEL_129;
-            v34 = 0;
-            do
+            v32 = v142; /*0x5b2ecc*/
+            if ( !v142 ) /*0x5b2ed2*/
+              goto LABEL_129; /*0x5b2ed2*/
+            v33 = 0; /*0x5b2ed8*/
+            do /*0x5b2eec*/
             {
-              if ( *v33 )
-                ++v34;
-              v33 = (_DWORD *)v33[1];
+              if ( v32->__vftable ) /*0x5b2ee0*/
+                ++v33; /*0x5b2ee4*/
+              v32 = (Menu *)v32->members.tile; /*0x5b2ee7*/
             }
-            while ( v33 );
-            if ( !v34 )
+            while ( v32 ); /*0x5b2eec*/
+            if ( !v33 )
             {
 LABEL_129:
-              v92 = v129;
-              v93 = (Tile *)v129[0xB];
-              *(_DWORD *)&v123.m_dataLen = (char *)i + 0xFFFFFFFF;
-              v94 = (double)((int)&i[0xFFFFFFFF].member.modlist.next + 3);
-              v120 = v94;
-              Tile_SetFloat(v93, (_DWORD *)0xFAE, v120);
-              v95 = *(_DWORD **)(v134 + 0x34);
-              if ( v95 )
+              v97 = v139; /*0x5b363d*/
+              v98 = v139[1].members.tile; /*0x5b3641*/
+              *(_DWORD *)&v133.m_dataLen = (char *)i + 0xFFFFFFFF; /*0x5b3647*/
+              v99 = (double)((int)&i[0xFFFFFFFF].member.modlist.next + 3); /*0x5b364b*/
+              v125 = v99; /*0x5b3650*/
+              Tile_SetFloat(v98, 0xFAEu, v125); /*0x5b3658*/
+              v100 = *((_DWORD **)tile + 0xD); /*0x5b3661*/
+              if ( v100 ) /*0x5b3666*/
               {
-                do
+                do /*0x5b3699*/
                 {
-                  v96 = (_DWORD *)v95[2];
-                  v95 = (_DWORD *)*v95;
-                  v94 = Tile_GetFloat(v96, 0xFAA);
-                  if ( v94 == flt_A690E0 )
+                  v101 = (_DWORD *)v100[2]; /*0x5b3668*/
+                  v100 = (_DWORD *)*v100; /*0x5b366e*/
+                  v99 = Tile_GetFloat(v101, 0xFAA); /*0x5b3677*/
+                  if ( v99 == flt_A690E0 ) /*0x5b3687*/
                   {
-                    if ( v96 )
-                      (*(void (__thiscall **)(_DWORD *, int))*v96)(v96, 1);
+                    if ( v101 ) /*0x5b368b*/
+                      (*(void (__thiscall **)(_DWORD *, int))*v101)(v101, 1); /*0x5b3695*/
                   }
                 }
-                while ( v95 );
-                v92 = v129;
+                while ( v100 ); /*0x5b3699*/
+                v97 = v139; /*0x5b369b*/
               }
-              sub_5B1A40((int)v92, a1, st6_0, v94, v92[0x14]);
-              Str1 = 0;
-              v123.m_data = 0;
-              GetSpellEffectiveness = TESDataHandler_g_PlayerRef->super.super.magicCaster.vtbl->GetSpellEffectiveness;
-              v98 = *(const char **)dword_B39518;
-              v138 = 1;
-              v99 = ((double (__stdcall *)(_DWORD, _DWORD))GetSpellEffectiveness)(0, 0.0);
-              BSStringT_Static_Format((BSStringT *)&Str1, "%s: %0.0f%%", v98, v99 * fCostant_100);
-              v100 = Str1;
-              Tile_SetString(v135, (_DWORD *)0xFB4, Str1);
-              Singleton = (Tile **)InterfaceManager_GetSingleton(0, 1);
-              sub_57D730(Singleton, 0);
-              FormHeapFree((unsigned int)v100);
-              return;
+              sub_5B1A40((int)v97, a1, st6_0, v99, (int)v97[2].__vftable); /*0x5b36a5*/
+              Str1 = 0; /*0x5b36aa*/
+              v133.m_data = 0; /*0x5b36ae*/
+              GetSpellEffectiveness = reference->super.super.magicCaster.vtbl->GetSpellEffectiveness; /*0x5b36c3*/
+              value = stru_B39518.value; /*0x5b36c6*/
+              v148 = 1; /*0x5b36d4*/
+              v104 = ((double (__stdcall *)(_DWORD, _DWORD))GetSpellEffectiveness)(0, 0.0); /*0x5b36df*/
+              BSStringT_Static_Format((BSStringT *)&Str1, "%s: %0.0f%%", value, v104 * fCostant_100);
+              v105 = Str1; /*0x5b36fd*/
+              Tile_SetString(root, (_DWORD *)0xFB4, Str1); /*0x5b3711*/
+              Singleton = (Tile **)InterfaceManager_GetSingleton(0, 1); /*0x5b371a*/
+              sub_57D730(Singleton, 0); /*0x5b3724*/
+              FormHeapFree((unsigned int)v105); /*0x5b372a*/
+              return; /*0x5b372a*/
             }
           }
         }
-        Str1 = 0;
-        v123.m_data = 0;
-        BSStringT_Set((BSStringT *)&Str1, EmptyString, 0);
-        v138 = 0;
-        v133 = 0;
-        v121 = 0;
-        p_modlist = 0xFFFFFFFF;
-        if ( !v30 )
-          goto LABEL_88;
-        v35 = 0;
-        v36 = v30;
-        do
+        Str1 = 0; /*0x5b2f00*/
+        v133.m_data = 0; /*0x5b2f04*/
+        BSStringT_Set((BSStringT *)&Str1, EmptyString, 0); /*0x5b2f0e*/
+        v148 = 0; /*0x5b2f15*/
+        AttachTileByID = 0; /*0x5b2f1c*/
+        v131 = 0; /*0x5b2f20*/
+        maxFocus = 0xFFFFFFFF; /*0x5b2f25*/
+        if ( !v29 ) /*0x5b2f2d*/
+          goto LABEL_88; /*0x5b2f2d*/
+        v34 = 0; /*0x5b2f33*/
+        v35 = v29; /*0x5b2f35*/
+        do /*0x5b2f43*/
         {
-          if ( *(_DWORD *)v36 )
-            ++v35;
-          v36 = *((Tile **)v36 + 1);
+          if ( *(_DWORD *)v35 ) /*0x5b2f37*/
+            ++v34; /*0x5b2f3b*/
+          v35 = *((Tile **)v35 + 1); /*0x5b2f3e*/
         }
-        while ( v36 );
-        if ( v35 )
+        while ( v35 ); /*0x5b2f43*/
+        if ( v34 )
         {
-          v37 = *(_DWORD *)v127;
-          v55 = *(_DWORD *)v127 == 0;
-          v127 = *((Tile **)v127 + 1);
-          if ( v55 || (v38 = (_DWORD *)(v37 + 0x24), !EffectItemList_GetStrongestItem(3, 0)) )
+          v36 = *(_DWORD *)v137; /*0x5b2f51*/
+          v57 = *(_DWORD *)v137 == 0; /*0x5b2f58*/
+          v137 = *((Tile **)v137 + 1); /*0x5b2f5a*/
+          if ( v57
+            || (v37 = (_DWORD *)(v36 + 0x24),
+                !EffectItemList_GetStrongestItem(
+                   (_DWORD *)(v36 + 0x24),
+                   3,
+                   0,
+                   (int)v126,
+                   (int)v127,
+                   (int)v128,
+                   (int)v129,
+                   v130)) )
           {
-            v138 = 0xFFFFFFFF;
-            FormHeapFree((unsigned int)Str1);
-            Str1 = 0;
-            v123.m_data = 0;
+            v148 = 0xFFFFFFFF; /*0x5b31b1*/
+            FormHeapFree((unsigned int)Str1); /*0x5b31bc*/
+            Str1 = 0; /*0x5b31c4*/
+            v133.m_data = 0; /*0x5b31cd*/
           }
           else
           {
-            v39 = (_DWORD *)(v37 + 0x18);
-            if ( (*(int (__thiscall **)(int))(*(_DWORD *)(v37 + 0x18) + 0x18))(v37 + 0x18) != 1
-              && (*(int (__thiscall **)(int))(*v39 + 0x18))(v37 + 0x18) != 4 )
+            v38 = (_DWORD *)(v36 + 0x18); /*0x5b2f7f*/
+            if ( (*(int (__thiscall **)(int))(*(_DWORD *)(v36 + 0x18) + 0x18))(v36 + 0x18) != 1
+              && (*(int (__thiscall **)(int))(*v38 + 0x18))(v36 + 0x18) != 4 )
             {
-              BSSimpleList_PushBack(v129 + 0xE, v37);
-              ++v126;
-              v40 = EffectItemList_HasOnTarget(v37 + 0x24);
-              v41 = v37 + 0x24;
-              v42 = v40;
-              if ( EffectItemList_HasOnTarget(v41) || !EffectItemList_HasTouchEffect(v38) )
-                v43 = 0;
+              BSSimpleList_PushBack(&v139[1].members.templateContextTile, v36); /*0x5b2fa9*/
+              v136 = (TileMenu *)((char *)v136 + 1); /*0x5b2fae*/
+              v39 = EffectItemList_HasOnTarget(v36 + 0x24); /*0x5b2fb5*/
+              v40 = v36 + 0x24; /*0x5b2fbc*/
+              v41 = v39; /*0x5b2fc2*/
+              if ( EffectItemList_HasOnTarget(v40) || (EffectItemList_HasTouchEffect(v37), !v42) ) /*0x5b2fd6*/
+                v43 = 0; /*0x5b2fdf*/
               else
-                v43 = 2;
-              v44 = v43 + v42;
-              if ( EffectItemList_HasOnTarget((int)v38) || EffectItemList_HasTouchEffect(v38) )
-                v45 = 0;
+                v43 = 2; /*0x5b2fd8*/
+              v44 = v43 + v41; /*0x5b2fe3*/
+              if ( EffectItemList_HasOnTarget((int)v37) || (EffectItemList_HasTouchEffect(v37), v45) ) /*0x5b2ff7*/
+                v46 = 0; /*0x5b3000*/
               else
-                v45 = 4;
-              v46 = v45 + v44;
-              v47 = *(int (__thiscall **)(_DWORD *))(*v39 + 0x18);
-              v128 = v46;
-              v48 = v47(v39) == 2;
-              v49 = ((*(int (__thiscall **)(_DWORD *))(*v39 + 0x18))(v39) != 3 ? 0 : 2) + v48;
-              v50 = ((*(int (__thiscall **)(_DWORD *))(*v39 + 0x18))(v39) != 0 ? 0 : 4) + v49;
-              TotalEntryCountForITem = ((*(int (__thiscall **)(_DWORD *))(*v39 + 0x18))(v39) != 5 ? 0 : 4) + v50;
-              v51 = *(const char **)(*(_DWORD *)(EffectItemList_GetStrongestItem(3, 0) + 0x1C) + 0x48);
-              if ( !v51 )
-                v51 = EmptyString;
-              _sprintf(v137, "%s\\%s", "Icons", v51);
-              v52 = (const char *)v39[1];
-              if ( !v52 )
-                v52 = EmptyString;
-              BSStringT_Set((BSStringT *)&Str1, v52, 0);
-              v28 = ((double (__thiscall *)(_DWORD *, PlayerCharacter *))*(_DWORD *)*v38)(
-                      v38,
-                      TESDataHandler_g_PlayerRef);
-              v53 = Double_To_SInt32(v28);
-              v54 = TESDataHandler_g_PlayerRef;
-              v133 = v53;
-              v55 = v39 == (_DWORD *)Player_GetCurrentMagicItem(v54);
+                v46 = 4; /*0x5b2ff9*/
+              v47 = v46 + v44; /*0x5b3004*/
+              v48 = *(int (__thiscall **)(_DWORD *))(*v38 + 0x18); /*0x5b3006*/
+              v138 = v47; /*0x5b300b*/
+              v49 = v48(v38) == 2; /*0x5b301e*/
+              v50 = ((*(int (__thiscall **)(_DWORD *))(*v38 + 0x18))(v38) != 3 ? 0 : 2) + v49;
+              v51 = ((*(int (__thiscall **)(_DWORD *))(*v38 + 0x18))(v38) != 0 ? 0 : 4) + v50;
+              TotalEntryCountForITem = ((*(int (__thiscall **)(_DWORD *))(*v38 + 0x18))(v38) != 5 ? 0 : 4) + v51;
+              v52 = *(const char **)(*(_DWORD *)(EffectItemList_GetStrongestItem( /*0x5b3072*/
+                                                   v37,
+                                                   3,
+                                                   0,
+                                                   (int)v126,
+                                                   (int)v127,
+                                                   (int)v128,
+                                                   (int)v129,
+                                                   v130)
+                                               + 0x1C)
+                                   + 0x48);
+              if ( !v52 ) /*0x5b3077*/
+                v52 = EmptyString; /*0x5b3079*/
+              _sprintf(v147, "%s\\%s", "Icons", v52); /*0x5b3091*/
+              v53 = (const char *)v38[1]; /*0x5b3096*/
+              if ( !v53 ) /*0x5b309e*/
+                v53 = EmptyString; /*0x5b30a0*/
+              BSStringT_Set((BSStringT *)&Str1, v53, 0); /*0x5b30ac*/
+              v54 = ((double (__thiscall *)(_DWORD *, PlayerCharacter *))*(_DWORD *)*v37)(v37, reference); /*0x5b30bd*/
+              v55 = Double_To_SInt32(v54); /*0x5b30bf*/
+              v56 = reference; /*0x5b30c4*/
+              AttachTileByID = (void (__thiscall *)(Menu *, UInt32, Tile *))v55; /*0x5b30ca*/
+              v57 = v38 == (_DWORD *)Player_GetCurrentMagicItem(v56); /*0x5b30d3*/
 LABEL_74:
-              v121 = v55;
-              goto LABEL_75;
+              v131 = v57; /*0x5b30d5*/
+              goto LABEL_75; /*0x5b30d5*/
             }
-            v104 = Str1;
+            v109 = Str1; /*0x5b31a6*/
 LABEL_109:
-            v138 = 0xFFFFFFFF;
-            FormHeapFree((unsigned int)v104);
-            Str1 = 0;
-            v123.m_data = 0;
+            v148 = 0xFFFFFFFF; /*0x5b33a1*/
+            FormHeapFree((unsigned int)v109); /*0x5b33ac*/
+            Str1 = 0; /*0x5b33b6*/
+            v133.m_data = 0; /*0x5b33bf*/
           }
         }
         else
         {
 LABEL_88:
-          if ( v131 )
+          if ( v141 ) /*0x5b31dd*/
           {
-            v63 = (ExtraDataList ****)v131[2];
-            v64 = *v63;
-            v65 = (*v63)[2];
-            v131 = (int *)*v131;
-            *(_DWORD *)&v123.m_dataLen = OblivionDynamicCast(
-                                           v65,
+            v65 = (int *)v141[2]; /*0x5b31e7*/
+            v66 = (ExtraDataList ***)*v65; /*0x5b31ea*/
+            v67 = *(void **)(*v65 + 8); /*0x5b31f3*/
+            v141 = (int *)*v141; /*0x5b3203*/
+            *(_DWORD *)&v133.m_dataLen = OblivionDynamicCast( /*0x5b320c*/
+                                           v67,
                                            0,
                                            (struct _s_RTTICompleteObjectLocator *)&TESBoundObject `RTTI Type Descriptor',
                                            &TESObjectBOOK `RTTI Type Descriptor',
                                            0);
-            v66 = *(_DWORD *)(*(_DWORD *)&v123.m_dataLen + 0x64);
-            if ( v66 )
+            v68 = *(_DWORD *)(*(_DWORD *)&v133.m_dataLen + 0x64); /*0x5b3210*/
+            if ( v68 ) /*0x5b3218*/
             {
-              v67 = (_DWORD *)(v66 + 0x24);
-              v128 = EffectItemList_HasOnTarget(v66 + 0x24);
-              if ( EffectItemList_HasOnTarget((int)v67) || !EffectItemList_HasTouchEffect(v67) )
-                v68 = 0;
+              v69 = (_DWORD *)(v68 + 0x24); /*0x5b321e*/
+              v138 = EffectItemList_HasOnTarget(v68 + 0x24); /*0x5b3230*/
+              if ( EffectItemList_HasOnTarget((int)v69) || (EffectItemList_HasTouchEffect(v69), !v70) ) /*0x5b3246*/
+                v71 = 0; /*0x5b324f*/
               else
-                v68 = 2;
-              v128 += v68;
-              if ( EffectItemList_HasOnTarget((int)v67) || EffectItemList_HasTouchEffect(v67) )
-                v69 = 0;
+                v71 = 2; /*0x5b3248*/
+              v138 += v71; /*0x5b3251*/
+              if ( EffectItemList_HasOnTarget((int)v69) || (EffectItemList_HasTouchEffect(v69), v72) ) /*0x5b3269*/
+                v73 = 0; /*0x5b3272*/
               else
-                v69 = 4;
-              v128 += v69;
-              v105 = (TESObjectREFR *)TESDataHandler_g_PlayerRef;
-              TotalEntryCountForITem = 8;
-              v70 = sub_4851B0(v64, v105);
-              _sprintf(v137, "%s\\%s", "Icons", v70);
-              v71 = sub_488DF0((EntryData *)v64);
-              BSStringT_Set((BSStringT *)&Str1, v71, 0);
-              v72 = (double (__thiscall **)(_DWORD *, _DWORD))*v67;
-              p_modlist = (int)v63[1];
-              v28 = (*v72)(v67, 0);
-              v73 = Double_To_SInt32(v28);
-              v74 = TESDataHandler_g_PlayerRef;
-              v133 = v73;
-              v75 = sub_65D4C0(v74);
-              v55 = *(_DWORD *)&v123.m_dataLen == v75;
-              goto LABEL_74;
+                v73 = 4; /*0x5b326b*/
+              v138 += v73; /*0x5b3274*/
+              v110 = (TESObjectREFR *)reference; /*0x5b327d*/
+              TotalEntryCountForITem = 8; /*0x5b3280*/
+              v74 = sub_4851B0(v66, v110); /*0x5b3288*/
+              _sprintf(v147, "%s\\%s", "Icons", v74); /*0x5b32a0*/
+              v75 = sub_488DF0((EntryData *)v66); /*0x5b32aa*/
+              BSStringT_Set((BSStringT *)&Str1, v75, 0); /*0x5b32b6*/
+              v76 = (double (__thiscall **)(_DWORD *, _DWORD))*v69; /*0x5b32be*/
+              maxFocus = v65[1]; /*0x5b32c0*/
+              v77 = (*v76)(v69, 0); /*0x5b32ca*/
+              v78 = Double_To_SInt32(v77); /*0x5b32cc*/
+              v79 = reference; /*0x5b32d1*/
+              AttachTileByID = (void (__thiscall *)(Menu *, UInt32, Tile *))v78; /*0x5b32d7*/
+              v80 = sub_65D4C0(v79); /*0x5b32db*/
+              v57 = *(_DWORD *)&v133.m_dataLen == v80; /*0x5b32e0*/
+              goto LABEL_74; /*0x5b32e4*/
             }
           }
-          else if ( v132 )
+          else if ( v142 ) /*0x5b32ed*/
           {
-            v76 = (int *)*v132;
-            if ( *v132 )
+            vftable = v142->__vftable; /*0x5b32f7*/
+            if ( v142->__vftable ) /*0x5b32f7*/
             {
-              v77 = *v76;
-              v78 = v132;
-              if ( *v76 )
+              Destructor = vftable->Destructor; /*0x5b3301*/
+              v83 = v142; /*0x5b3305*/
+              if ( vftable->Destructor ) /*0x5b3301*/
               {
-                ++v126;
-                if ( v132 == v129 + 0x10 )
-                  v129[0x15] = v126;
-                v79 = *(int **)(v77 + 0xC);
-                v80 = *(const char **)(v79[7] + 0x48);
-                v128 = 8;
-                TotalEntryCountForITem = 0x10;
-                if ( !v80 )
-                  v80 = EmptyString;
-                _sprintf(v137, "%s\\%s", "Icons", v80);
-                EffectItem_GetQualifiedName_SkillAttr(v79, (int)a2);
-                BSStringT_Set((BSStringT *)&Str1, a2, 0);
-                v133 = *(_DWORD *)(*v78 + 4);
-                v121 = 0;
+                v136 = (TileMenu *)((char *)v136 + 1); /*0x5b3313*/
+                if ( v142 == (Menu *)&v139[1].members.unk18 ) /*0x5b331d*/
+                  v139[2].members.tile = v136; /*0x5b3323*/
+                v84 = *((int **)Destructor + 3); /*0x5b3326*/
+                v85 = *(const char **)(v84[7] + 0x48); /*0x5b332c*/
+                v138 = 8; /*0x5b3331*/
+                TotalEntryCountForITem = 0x10; /*0x5b3339*/
+                if ( !v85 ) /*0x5b3341*/
+                  v85 = EmptyString; /*0x5b3343*/
+                _sprintf(v147, "%s\\%s", "Icons", v85); /*0x5b335b*/
+                EffectItem_GetQualifiedName_SkillAttr(v84, (int)a2); /*0x5b336a*/
+                BSStringT_Set((BSStringT *)&Str1, a2, 0); /*0x5b337a*/
+                AttachTileByID = v83->__vftable->AttachTileByID; /*0x5b3384*/
+                v131 = 0; /*0x5b3388*/
               }
-              v132 = (_DWORD *)v78[1];
-              if ( !v77 )
+              v142 = (Menu *)v83->members.tile; /*0x5b3392*/
+              if ( !Destructor ) /*0x5b3396*/
               {
-                v104 = Str1;
-                goto LABEL_109;
+                v109 = Str1; /*0x5b33a0*/
+                goto LABEL_109; /*0x5b33a0*/
               }
             }
           }
 LABEL_75:
-          v56 = *(_DWORD *)(v134 + 0x38);
-          if ( v56 )
+          v58 = *((_DWORD *)tile + 0xE); /*0x5b30da*/
+          if ( v58 ) /*0x5b30e3*/
           {
-            while ( 1 )
+            while ( 1 ) /*0x5b30e5*/
             {
-              v57 = *(Tile **)(v56 + 8);
-              v56 = *(_DWORD *)(v56 + 4);
-              v28 = Tile_GetFloat(v57, 0xFAA);
-              if ( v28 == flt_A690E0 )
+              v59 = *(Tile **)(v58 + 8); /*0x5b30e5*/
+              v58 = *(_DWORD *)(v58 + 4); /*0x5b30eb*/
+              if ( Tile_GetFloat(v59, 0xFAA) == flt_A690E0 ) /*0x5b3105*/
               {
-                if ( sub_588C10(v57, 0xFAF) )
+                if ( sub_588C10(v59, 0xFAF) ) /*0x5b310e*/
                 {
-                  v58 = Str1;
-                  if ( Str1 )
+                  v60 = Str1; /*0x5b3117*/
+                  if ( Str1 ) /*0x5b311d*/
                   {
-                    v59 = sub_588C10(v57, 0xFAF);
-                    if ( v59 )
+                    v61 = sub_588C10(v59, 0xFAF); /*0x5b3126*/
+                    if ( v61 ) /*0x5b312d*/
                     {
-                      if ( !_strcmp(v58, v59) )
-                        break;
+                      if ( !CRT_StricmpLocaleDispatch(v60, v61) ) /*0x5b3131*/
+                        break; /*0x5b3131*/
                     }
                   }
                 }
               }
-              if ( !v56 )
-                goto LABEL_82;
+              if ( !v58 ) /*0x5b3143*/
+                goto LABEL_82; /*0x5b3143*/
             }
-            v81 = v129;
-            sub_5B1430(v57, 0xFFFFFFFF, 0xFFFFFFFF, v133);
-            if ( p_modlist == 0xFFFFFFFF )
-              v82 = (double)v126;
+            v86 = v139; /*0x5b33cd*/
+            sub_5B1430(v59, 0xFFFFFFFF, 0xFFFFFFFF, (int)AttachTileByID); /*0x5b33d9*/
+            if ( maxFocus == 0xFFFFFFFF ) /*0x5b33e6*/
+              v87 = (double)(int)v136; /*0x5b33ee*/
             else
-              v82 = (double)p_modlist;
-            v106 = v82;
-            Tile_SetFloat(v57, (_DWORD *)0xFBB, v106);
-            Tile_SetString(v57, (_DWORD *)0xFB4, v137);
-            v107 = (float)TotalEntryCountForITem;
-            Tile_SetFloat(v57, (_DWORD *)0xFB5, v107);
-            v108 = (float)v128;
-            Tile_SetFloat(v57, (_DWORD *)0xFB7, v108);
-            *(_DWORD *)&v123.m_dataLen = v121 + 1;
-            v109 = (float)*(int *)&v123.m_dataLen;
-            Tile_SetFloat(v57, (_DWORD *)0xFB8, v109);
-            *(_DWORD *)&v123.m_dataLen = v126 - 1;
-            v110 = (float)(v126 - 1);
-            Tile_SetFloat(v57, (_DWORD *)0xFB9, v110);
-            v28 = (double)(int)i;
-            v111 = v28;
-            Tile_SetFloat(v57, (_DWORD *)0xFAA, v111);
-            if ( v121 )
+              v87 = (double)maxFocus; /*0x5b33e8*/
+            v111 = v87; /*0x5b33f2*/
+            Tile_SetFloat(v59, 0xFBBu, v111); /*0x5b33fa*/
+            Tile_SetString(v59, (_DWORD *)0xFB4, v147); /*0x5b340e*/
+            v112 = (float)TotalEntryCountForITem; /*0x5b341a*/
+            Tile_SetFloat(v59, 0xFB5u, v112); /*0x5b3422*/
+            v113 = (float)v138; /*0x5b342e*/
+            Tile_SetFloat(v59, 0xFB7u, v113); /*0x5b3436*/
+            *(_DWORD *)&v133.m_dataLen = v131 + 1; /*0x5b344c*/
+            v114 = (float)*(int *)&v133.m_dataLen; /*0x5b3454*/
+            Tile_SetFloat(v59, 0xFB8u, v114); /*0x5b345c*/
+            *(_DWORD *)&v133.m_dataLen = (char *)v136 + 0xFFFFFFFF; /*0x5b3468*/
+            v115 = (float)(int)((int)v136 + 0xFFFFFFFF); /*0x5b3473*/
+            Tile_SetFloat(v59, 0xFB9u, v115); /*0x5b347b*/
+            v116 = (float)(int)i; /*0x5b3487*/
+            Tile_SetFloat(v59, 0xFAAu, v116); /*0x5b348f*/
+            if ( v131 ) /*0x5b3496*/
             {
-              v112 = v135;
-              p_modlist = 0x80000000;
-              v83 = InterfaceManager_GetSingleton(0, 1);
-              sub_57DA90(v83, a1, st6_0, v28, &p_modlist, v112);
-              *(_DWORD *)&v123.m_dataLen = p_modlist + 1;
-              v28 = (double)(p_modlist + 1);
-              v113 = v28;
-              Tile_SetFloat(v57, (_DWORD *)0xFF0, v113);
-              v81[0x13] = v57;
+              v117 = root; /*0x5b349c*/
+              maxFocus = 0x80000000; /*0x5b34a6*/
+              v88 = InterfaceManager_GetSingleton(0, 1); /*0x5b34ae*/
+              InterfaceManager::ScanForMaxFocus(v88, &maxFocus, v117); /*0x5b34b8*/
+              *(_DWORD *)&v133.m_dataLen = maxFocus + 1; /*0x5b34c4*/
+              v118 = (float)(maxFocus + 1); /*0x5b34cf*/
+              Tile_SetFloat(v59, 0xFF0u, v118); /*0x5b34d7*/
+              v86[1].members.fadeState = (OblivionMenuFadeState)v59; /*0x5b34dc*/
             }
-            v84 = (BSTextureManager *)(*((_DWORD *)v57 + 4) + 0x30);
-            v85 = *(_DWORD **)(*((_DWORD *)v57 + 4) + 0x34);
-            if ( v85 )
+            v89 = (void *)(*((_DWORD *)v59 + 4) + 0x30); /*0x5b34e2*/
+            v90 = *(_DWORD **)(*((_DWORD *)v59 + 4) + 0x34); /*0x5b34e5*/
+            if ( v90 ) /*0x5b34ea*/
             {
-              while ( 1 )
+              while ( 1 ) /*0x5b34f0*/
               {
-                v55 = v57 == (Tile *)v85[2];
-                v86 = v85;
-                v85 = (_DWORD *)*v85;
-                if ( v55 )
-                  break;
-                if ( !v85 )
-                  goto LABEL_118;
+                v57 = v59 == (Tile *)v90[2]; /*0x5b34f0*/
+                v91 = v90; /*0x5b34f6*/
+                v90 = (_DWORD *)*v90; /*0x5b34f8*/
+                if ( v57 ) /*0x5b34fa*/
+                  break; /*0x5b34fa*/
+                if ( !v90 ) /*0x5b34fe*/
+                  goto LABEL_118; /*0x5b34fe*/
               }
             }
             else
             {
 LABEL_118:
-              v86 = 0;
+              v91 = 0; /*0x5b3500*/
             }
-            *(_DWORD *)&v123.m_dataLen = v86;
-            if ( v86 )
-              sub_7AA860(v84, (NiTPointerList_Node_void **)&v123.m_dataLen);
-            v87 = *((_DWORD *)v57 + 4);
-            v88 = *(int (__thiscall **)(_DWORD *))(*(_DWORD *)(v87 + 0x30) + 4);
-            v89 = (_DWORD *)(v87 + 0x30);
-            v90 = (_DWORD *)v88(v89);
-            v90[2] = v57;
-            v90[1] = 0;
-            *v90 = v89[1];
-            v91 = v89[1];
-            if ( v91 )
+            *(_DWORD *)&v133.m_dataLen = v91; /*0x5b3504*/
+            if ( v91 ) /*0x5b3508*/
+              NiTPointerList_RemoveNode(v89, (void **)&v133.m_dataLen); /*0x5b350f*/
+            v92 = *((_DWORD *)v59 + 4); /*0x5b3514*/
+            v93 = *(int (__thiscall **)(_DWORD *))(*(_DWORD *)(v92 + 0x30) + 4); /*0x5b351a*/
+            v94 = (_DWORD *)(v92 + 0x30); /*0x5b351d*/
+            v95 = (_DWORD *)v93(v94); /*0x5b3522*/
+            v95[2] = v59; /*0x5b3524*/
+            v95[1] = 0; /*0x5b3527*/
+            *v95 = v94[1]; /*0x5b3531*/
+            v96 = v94[1]; /*0x5b3533*/
+            if ( v96 ) /*0x5b3538*/
             {
-              *(_DWORD *)(v91 + 4) = v90;
-              ++v89[3];
+              *(_DWORD *)(v96 + 4) = v95; /*0x5b353a*/
+              ++v94[3]; /*0x5b353d*/
             }
             else
             {
-              ++v89[3];
-              v89[2] = v90;
+              ++v94[3]; /*0x5b3549*/
+              v94[2] = v95; /*0x5b354d*/
             }
-            v89[1] = v90;
+            v94[1] = v95; /*0x5b3541*/
           }
           else
           {
 LABEL_82:
-            if ( !Str1 )
-              BSStringT_Set((BSStringT *)&Str1, (const char *)sMissingName, 0);
-            v60 = v129;
-            v61 = sub_5B2A10(v129, a1, st6_0, v28, Str1, (signed int)&i[0x29].member.modlist.data + 1);
-            sub_5B1430(v61, 0xFFFFFFFF, 0xFFFFFFFF, v133);
-            if ( p_modlist == 0xFFFFFFFF )
-              v62 = (double)v126;
+            if ( !Str1 ) /*0x5b314a*/
+              BSStringT_Set((BSStringT *)&Str1, MEMORY[0xB38D30].value, 0); /*0x5b3159*/
+            v62 = v139; /*0x5b3166*/
+            v63 = sub_5B2A10(v139, Str1, (signed int)&i[0x29].member.modlist.data + 1); /*0x5b317f*/
+            sub_5B1430(v63, 0xFFFFFFFF, 0xFFFFFFFF, (int)AttachTileByID); /*0x5b3186*/
+            if ( maxFocus == 0xFFFFFFFF ) /*0x5b3193*/
+              v64 = (double)(int)v136; /*0x5b3558*/
             else
-              v62 = (double)p_modlist;
-            v114 = v62;
-            Tile_SetFloat((Tile *)v61, (_DWORD *)0xFBB, v114);
-            Tile_SetString(v61, (_DWORD *)0xFB4, v137);
-            v115 = (float)TotalEntryCountForITem;
-            Tile_SetFloat((Tile *)v61, (_DWORD *)0xFB5, v115);
-            v116 = (float)v128;
-            Tile_SetFloat((Tile *)v61, (_DWORD *)0xFB7, v116);
-            *(_DWORD *)&v123.m_dataLen = v121 + 1;
-            v117 = (float)*(int *)&v123.m_dataLen;
-            Tile_SetFloat((Tile *)v61, (_DWORD *)0xFB8, v117);
-            *(_DWORD *)&v123.m_dataLen = v126 - 1;
-            v118 = (float)(v126 - 1);
-            Tile_SetFloat((Tile *)v61, (_DWORD *)0xFB9, v118);
-            v28 = (double)(int)i;
-            v119 = v28;
-            Tile_SetFloat((Tile *)v61, (_DWORD *)0xFAA, v119);
-            if ( v121 )
-              v60[0x13] = v61;
+              v64 = (double)maxFocus; /*0x5b3199*/
+            v119 = v64; /*0x5b355c*/
+            Tile_SetFloat((Tile *)v63, 0xFBBu, v119); /*0x5b3564*/
+            Tile_SetString(v63, (_DWORD *)0xFB4, v147); /*0x5b3578*/
+            v120 = (float)TotalEntryCountForITem; /*0x5b3584*/
+            Tile_SetFloat((Tile *)v63, 0xFB5u, v120); /*0x5b358c*/
+            v121 = (float)v138; /*0x5b3598*/
+            Tile_SetFloat((Tile *)v63, 0xFB7u, v121); /*0x5b35a0*/
+            *(_DWORD *)&v133.m_dataLen = v131 + 1; /*0x5b35b3*/
+            v122 = (float)*(int *)&v133.m_dataLen; /*0x5b35be*/
+            Tile_SetFloat((Tile *)v63, 0xFB8u, v122); /*0x5b35c6*/
+            *(_DWORD *)&v133.m_dataLen = (char *)v136 + 0xFFFFFFFF; /*0x5b35d2*/
+            v123 = (float)(int)((int)v136 + 0xFFFFFFFF); /*0x5b35dd*/
+            Tile_SetFloat((Tile *)v63, 0xFB9u, v123); /*0x5b35e5*/
+            v124 = (float)(int)i; /*0x5b35f1*/
+            Tile_SetFloat((Tile *)v63, 0xFAAu, v124); /*0x5b35f9*/
+            if ( v131 ) /*0x5b3600*/
+              v62[1].members.fadeState = (OblivionMenuFadeState)v63; /*0x5b3602*/
           }
-          i = (TESForm *)((char *)i + 1);
-          v138 = 0xFFFFFFFF;
-          FormHeapFree((unsigned int)Str1);
-          Str1 = 0;
-          v123.m_data = 0;
+          i = (TESForm *)((char *)i + 1); /*0x5b3609*/
+          v148 = 0xFFFFFFFF; /*0x5b360f*/
+          FormHeapFree((unsigned int)Str1); /*0x5b361a*/
+          Str1 = 0; /*0x5b3624*/
+          v133.m_data = 0; /*0x5b362d*/
         }
       }
     }

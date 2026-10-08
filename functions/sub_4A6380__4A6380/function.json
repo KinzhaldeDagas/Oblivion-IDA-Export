@@ -1,19 +1,32 @@
 {
-  "callees_count": 8,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4A6380",
+      "0x4A63D3"
+    ]
+  ],
+  "chunks_sha256": "52f799ef8862f44274c92d6c3796bd141f0250607f537fc0bdb76521464996bd",
+  "comment_regular": "Verified: frees all BSSimpleList nodes and, only when ownsRegionMemory is set, destroys each TESRegion object.",
+  "comment_repeatable": "Verified: frees all BSSimpleList nodes and, only when ownsRegionMemory is set, destroys each TESRegion object.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4A6380",
+  "display_name": "TESRegionList_Clear",
   "end_ea": "0x4A63D3",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4A6380",
+  "name": "TESRegionList_Clear",
   "segment": ".text",
   "sha256": "52f799ef8862f44274c92d6c3796bd141f0250607f537fc0bdb76521464996bd",
   "size": 83,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4A6380",
-  "type": "void __thiscall(_DWORD *this)",
+  "total_chunk_size": 83,
+  "type": "void __thiscall(TESRegionList *self)",
   "xrefs_from_count": 39,
   "xrefs_to_count": 3
 }

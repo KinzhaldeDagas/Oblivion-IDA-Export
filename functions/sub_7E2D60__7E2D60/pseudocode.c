@@ -1,12 +1,13 @@
-signed int sub_7E2D60()
+// Verified (Oblivion): returns the cached slot capacity, initialized to 40 or 120 according to renderer capability, and used to size particleInstanceBuffer_6C and update iteration.
+unsigned int __cdecl ParticleShaderProperty_GetSlotCapacity()
 {
-  signed int result; // eax
+  unsigned int result; // eax
 
-  result = dword_B4600C;
-  if ( !dword_B4600C )
+  result = unk_B4600C; /*0x7e2d60*/
+  if ( !unk_B4600C )
   {
-    result = ShaderPackage < 2 ? 0x28 : 0x78;
-    dword_B4600C = result;
+    result = *(_DWORD *)&OB_RendererGlobalState_010201A0[0xAF] < 2 ? 0x28 : 0x78;
+    unk_B4600C = result; /*0x7e2d7c*/
   }
-  return result;
+  return result; /*0x7e2d81*/
 }

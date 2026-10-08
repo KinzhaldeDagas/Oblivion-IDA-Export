@@ -1,17 +1,18 @@
-void __thiscall sub_499310(_DWORD *this, int a2)
+// Strong-own the supplied frame-local shadow map at ShadowSceneLight+0x114, releasing any previous map reference.
+void __thiscall ShadowSceneLight_SetShadowMap(ShadowSceneLight_DecodedLayout *self, void *shadowMap)
 {
-  int v3; // esi
+  volatile LONG *shadowMap_114; // esi
 
-  v3 = *(this + 0x45);
-  if ( v3 != a2 )
+  shadowMap_114 = (volatile LONG *)self->shadowMap_114; /*0x499314*/
+  if ( shadowMap_114 != shadowMap ) /*0x499321*/
   {
-    if ( v3 )
+    if ( shadowMap_114 ) /*0x499325*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)(v3 + 4)) )
-        (**(void (__thiscall ***)(int, int))v3)(v3, 1);
+      if ( !InterlockedDecrement(shadowMap_114 + 1) ) /*0x49932b*/
+        (**(void (__thiscall ***)(void *, int))shadowMap_114)((void *)shadowMap_114, 1); /*0x499341*/
     }
-    *(this + 0x45) = a2;
-    if ( a2 )
-      InterlockedIncrement((volatile LONG *)(a2 + 4));
+    self->shadowMap_114 = shadowMap; /*0x499345*/
+    if ( shadowMap ) /*0x49934b*/
+      InterlockedIncrement((volatile LONG *)shadowMap + 1); /*0x499351*/
   }
 }

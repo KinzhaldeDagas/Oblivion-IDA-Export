@@ -1,4 +1,4 @@
-0x715E70: push    ebx
+0x715E70: push    ebx; Resolves streamed next-controller and target links. Next +0x34 is refcounted; target +0x30 is non-owning. For streams older than 0x0A000110, propagates the controller manager-controlled state to the linked target property flags.
 0x715E71: push    ebp
 0x715E72: mov     ebp, [esp+8+arg_0]
 0x715E76: push    esi

@@ -105,9 +105,9 @@
 0x7E125D: mov     ecx, [esi+0DCh]; this
 0x7E1263: add     esp, 8
 0x7E1266: call    BSRenderedTexture__GetInnerTexture
-0x7E126B: push    eax; a2
+0x7E126B: push    eax; texture
 0x7E126C: mov     ecx, ebx; this
-0x7E126E: call    sub_76C910
+0x7E126E: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
 0x7E1273: mov     eax, [edi]
 0x7E1275: mov     edx, [eax+24h]
 0x7E1278: mov     eax, [edx+4]
@@ -134,9 +134,9 @@
 0x7E12BF: mov     ecx, [esi+0E0h]; this
 0x7E12C5: add     esp, 8
 0x7E12C8: call    BSRenderedTexture__GetInnerTexture
-0x7E12CD: push    eax; a2
+0x7E12CD: push    eax; texture
 0x7E12CE: mov     ecx, ebx; this
-0x7E12D0: call    sub_76C910
+0x7E12D0: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
 0x7E12D5: mov     eax, [edi]
 0x7E12D7: mov     ecx, [eax+24h]
 0x7E12DA: mov     eax, [ecx+4]
@@ -150,9 +150,9 @@
 0x7E12F3: mov     ecx, [esi+0E4h]; this
 0x7E12F9: add     esp, 8
 0x7E12FC: call    BSRenderedTexture__GetInnerTexture
-0x7E1301: push    eax; a2
+0x7E1301: push    eax; texture
 0x7E1302: mov     ecx, ebx; this
-0x7E1304: call    sub_76C910
+0x7E1304: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
 0x7E1309: mov     eax, [edi]
 0x7E130B: mov     edx, [eax+24h]
 0x7E130E: mov     eax, [edx+8]
@@ -184,9 +184,9 @@
 0x7E1361: mov     ecx, [esi+0ECh]; this
 0x7E1367: add     esp, 8
 0x7E136A: call    BSRenderedTexture__GetInnerTexture
-0x7E136F: push    eax; a2
+0x7E136F: push    eax; texture
 0x7E1370: mov     ecx, ebx; this
-0x7E1372: call    sub_76C910
+0x7E1372: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
 0x7E1377: or      eax, 0FFFFFFFFh
 0x7E137A: test    ebx, ebx
 0x7E137C: mov     [esp+30h+var_10], eax
@@ -194,4 +194,26 @@
 0x7E1382: add     [ebx+5Ch], eax
 0x7E1385: jnz     short def_7E1233
 0x7E1387: mov     ecx, ebx
-0x7E1389: call    sub_772560
+0x7E1389: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
+0x75FA70: mov     ecx, [ecx]
+0x75FA72: test    ecx, ecx
+0x75FA74: jz      short locret_75FA81
+0x75FA76: add     dword ptr [ecx+5Ch], 0FFFFFFFFh
+0x75FA7A: jnz     short locret_75FA81
+0x75FA7C: jmp     sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
+0x75FA81: retn
+0x9CF500: lea     ecx, [ebp-10h]
+0x9CF503: jmp     loc_75FA70
+0x9CF508: lea     ecx, [ebp-10h]
+0x9CF50B: jmp     loc_75FA70
+0x9CF510: lea     ecx, [ebp-10h]
+0x9CF513: jmp     loc_75FA70
+0x9CF518: lea     ecx, [ebp-10h]
+0x9CF51B: jmp     loc_75FA70
+0x9CF520: mov     edx, [esp+arg_4]
+0x9CF524: lea     eax, [edx-14h]
+0x9CF527: mov     ecx, [edx-18h]
+0x9CF52A: xor     ecx, eax
+0x9CF52C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CF531: mov     eax, offset stru_AF8160
+0x9CF536: jmp     ___CxxFrameHandler3

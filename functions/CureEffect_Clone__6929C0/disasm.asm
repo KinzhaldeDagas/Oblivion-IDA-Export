@@ -32,7 +32,7 @@
 0x692A18: push    ecx
 0x692A19: push    edx
 0x692A1A: mov     ecx, edi; this
-0x692A1C: call    ??0ActiveEffect@@QAE@XZ; ActiveEffect::ActiveEffect(void)
+0x692A1C: call    ActiveEffect_Ctor; Verified Oblivion ActiveEffect is 0x38 bytes and stores HitEffectNode* at +0x34 after TESBoundObject* at +0x30. Fallout ActiveEffect is 0x48 bytes and stores BSSimpleList<MagicHitEffect*> at +0x40 after a 12-byte PersistentSound handle and pSource at +0x3C; Fallout also has pDisplacementSpell at +0x44. Do not copy Fallout offsets into Oblivion.
 0x692A21: mov     dword ptr [edi], offset ??_7CureEffect@@6B@; const CureEffect::`vftable'
 0x692A27: mov     [edi+3Ch], ebp
 0x692A2A: mov     [edi+38h], ebx
@@ -52,7 +52,7 @@
 0x692A56: push    ecx
 0x692A57: push    edx
 0x692A58: mov     ecx, edi; this
-0x692A5A: call    ??0ActiveEffect@@QAE@XZ; ActiveEffect::ActiveEffect(void)
+0x692A5A: call    ActiveEffect_Ctor; Verified Oblivion ActiveEffect is 0x38 bytes and stores HitEffectNode* at +0x34 after TESBoundObject* at +0x30. Fallout ActiveEffect is 0x48 bytes and stores BSSimpleList<MagicHitEffect*> at +0x40 after a 12-byte PersistentSound handle and pSource at +0x3C; Fallout also has pDisplacementSpell at +0x44. Do not copy Fallout offsets into Oblivion.
 0x692A5F: mov     dword ptr [edi], offset ??_7CureEffect@@6B@; const CureEffect::`vftable'
 0x692A65: mov     [edi+3Ch], ebx
 0x692A68: mov     dword ptr [edi+38h], 0
@@ -74,3 +74,20 @@
 0x692A92: pop     ebx
 0x692A93: add     esp, 10h
 0x692A96: retn
+0x9C57A0: mov     eax, [ebp-10h]
+0x9C57A3: push    eax
+0x9C57A4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C57A9: pop     ecx
+0x9C57AA: retn
+0x9C57AB: mov     eax, [ebp-10h]
+0x9C57AE: push    eax
+0x9C57AF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C57B4: pop     ecx
+0x9C57B5: retn
+0x9C57B6: mov     edx, [esp+arg_4]
+0x9C57BA: lea     eax, [edx-14h]
+0x9C57BD: mov     ecx, [edx-18h]
+0x9C57C0: xor     ecx, eax
+0x9C57C2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C57C7: mov     eax, offset stru_AEDF40
+0x9C57CC: jmp     ___CxxFrameHandler3

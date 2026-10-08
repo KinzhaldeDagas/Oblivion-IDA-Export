@@ -1,49 +1,49 @@
 [
   {
     "ea": "0x56A950",
-    "line": "mov     edx, [esp+arg_4]",
+    "line": "mov     edx, [esp+target]; RadiantAI: TESPackage condition-list wrapper used by central package chooser at 0x569020. Delegates to condition evaluator at 0x56A510 with actor and resolved target form; package selection fails if conditions fail.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x56A954",
-    "line": "push    0",
+    "line": "push    0; continuation",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x56A956",
-    "line": "lea     eax, [esp+4+arg_4]",
+    "line": "lea     eax, [esp+4+target]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x56A95A",
-    "line": "push    eax",
+    "line": "push    eax; lowDispositionFailure",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x56A95B",
-    "line": "mov     eax, [esp+8+arg_0]",
+    "line": "mov     eax, [esp+8+subject]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x56A95F",
-    "line": "push    edx",
+    "line": "push    edx; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x56A960",
-    "line": "push    eax",
+    "line": "push    eax; subject",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x56A961",
-    "line": "call    sub_56A510",
+    "line": "call    ConditionList_EvaluateCombined; Oblivion condition-stream evaluator. operatorAndFlags bit 0 connects the current predicate to the next predicate by OR; an unflagged item closes that OR group, and groups are combined with AND. TESTopicInfo::EvaluateConditions supplies quest conditions as this list and INFO conditions as continuation, so evaluator state can cross their boundary.",
     "mnemonic": "call",
     "size": 5
   },

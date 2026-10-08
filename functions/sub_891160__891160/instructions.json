@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x891187",
-    "line": "call    sub_89F6B0",
+    "line": "call    sub_89F6B0; Looks up NiObject in proxy/collision metadata map, default key dword_B3FA80 when caller key is null, then NiRTTI_Cast to NiObject. Used by 0x8AFCE0 for root-collidable type 2 hits.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x8911B8",
-    "line": "push    offset dword_B3FAB0",
+    "line": "push    offset parent",
     "mnemonic": "push",
     "size": 5
   },
@@ -226,12 +226,6 @@
     "line": "jmp     short loc_8911E0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x8911D8",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
   },
   {
     "ea": "0x8911E0",
@@ -307,13 +301,13 @@
   },
   {
     "ea": "0x891207",
-    "line": "push    eax; Str1",
+    "line": "push    eax; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x891208",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },

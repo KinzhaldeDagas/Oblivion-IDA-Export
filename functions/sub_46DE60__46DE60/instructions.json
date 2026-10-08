@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x46DE94",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x46DEDA",
-    "line": "mov     [ebp+var_C], 0",
+    "line": "mov     [ebp+modelPath], 0",
     "mnemonic": "mov",
     "size": 7
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x46DEE5",
-    "line": "mov     [ebp+var_C], ecx",
+    "line": "mov     [ebp+modelPath], ecx",
     "mnemonic": "mov",
     "size": 3
   },
@@ -385,13 +385,13 @@
   },
   {
     "ea": "0x46DF1C",
-    "line": "mov     eax, [ebp+var_C]",
+    "line": "mov     eax, [ebp+modelPath]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x46DF1F",
-    "line": "push    eax",
+    "line": "push    eax; modelPath",
     "mnemonic": "push",
     "size": 1
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x46DF40",
-    "line": "push    eax",
+    "line": "push    eax; form",
     "mnemonic": "push",
     "size": 1
   },
@@ -475,25 +475,25 @@
   },
   {
     "ea": "0x46DF47",
-    "line": "mov     ecx, [ecx+edx*4]",
+    "line": "mov     ecx, [ecx+edx*4]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x46DF4A",
-    "line": "push    ebx",
+    "line": "push    ebx; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46DF4B",
-    "line": "push    eax",
+    "line": "push    eax; entries",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46DF4C",
-    "line": "call    sub_46D610",
+    "line": "call    TESModel_ReplaceTextureHashEntries; Verified: replaces runtime TESTextureList entry count and pointer array; for each 24-byte record invokes ArchiveManager_LazyFileLookup using decoded 8-byte identifiers. Diagnostic strings confirm missing archive texture entries. Record field semantics beyond lookup identifiers remain Unknown.",
     "mnemonic": "call",
     "size": 5
   },

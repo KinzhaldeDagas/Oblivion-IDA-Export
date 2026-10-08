@@ -29,9 +29,9 @@
 0x530EE7: test    esi, esi
 0x530EE9: mov     [esp+31Ch+var_108], 0
 0x530EF1: jz      short loc_530F25
-0x530EF3: push    edi
-0x530EF4: mov     ecx, esi
-0x530EF6: call    sub_52F570
+0x530EF3: push    edi; info
+0x530EF4: mov     ecx, esi; this
+0x530EF6: call    TESTopic__GetOwnerQuest
 0x530EFB: test    eax, eax
 0x530EFD: jz      short loc_530F25
 0x530EFF: mov     ecx, [eax+0Ch]
@@ -46,13 +46,13 @@
 0x530F1C: push    ecx
 0x530F1D: call    __sprintf
 0x530F22: add     esp, 10h
-0x530F25: mov     ecx, edi
+0x530F25: mov     ecx, edi; this
 0x530F27: mov     [esp+31Ch+var_20C], 0
-0x530F2F: call    sub_530C40
-0x530F34: mov     ecx, [eax]
+0x530F2F: call    TESTopicInfo__GetResponseList; Oblivion lazy INFO response-stream reader. Rebuilds a shared list from the last override TESFile plus TESTopicInfo+0x34 record offset. Recognizes only TRDT and NAM1; NAM2 actor notes are runtime-inert.
+0x530F34: mov     ecx, [eax]; this
 0x530F36: test    ecx, ecx
 0x530F38: jz      short loc_530F55
-0x530F3A: call    sub_52E100; ?what@runtime_error@@UBEPBDXZ
+0x530F3A: call    TESResponse__GetText; ?what@runtime_error@@UBEPBDXZ
 0x530F3F: push    eax
 0x530F40: lea     edx, [esp+320h+var_20C]
 0x530F47: push    offset aTextS; ", Text: \"%s\""

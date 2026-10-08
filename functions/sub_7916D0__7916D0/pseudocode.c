@@ -1,30 +1,36 @@
-unsigned int **__thiscall sub_7916D0(unsigned int *this, int *a2)
+// Pushes one 0x18-byte OB_CBranchFlareEntry. Constructs directly at end when capacity remains; otherwise routes through the checked insertion/reallocation helper. CBranch::ComputeFlareEntries is the authoritative caller.
+void __thiscall OB_stVectorBranchFlareEntry_PushBack_010201A0(
+        OB_stVectorBranchFlareEntry_010201A0 *this,
+        const OB_CBranchFlareEntry_010201A0 *value)
 {
-  unsigned int v3; // edi
+  OB_CBranchFlareEntry_010201A0 *begin; // edi
   unsigned int v4; // ecx
-  _DWORD *v5; // edi
-  unsigned int **result; // eax
-  char *v7; // ebx
-  unsigned int *v8; // [esp+8h] [ebp-8h] BYREF
+  OB_CBranchFlareEntry_010201A0 *end; // edi
+  OB_CBranchFlareEntry_010201A0 *v6; // ebx
+  unsigned int *resultIterator; // [esp+8h] [ebp-8h] BYREF
 
-  v3 = *(this + 1);
-  if ( v3 )
-    v4 = (int)(*(this + 2) - v3) / 0x18;
+  begin = this->begin; /*0x7916d7*/
+  if ( begin ) /*0x7916dc*/
+    v4 = this->end - begin; /*0x7916f6*/
   else
-    v4 = 0;
-  if ( v3 && v4 < (int)(*(this + 3) - v3) / 0x18 )
+    v4 = 0; /*0x7916de*/
+  if ( begin && v4 < this->capacityEnd - begin ) /*0x791714*/
   {
-    v5 = (_DWORD *)*(this + 2);
-    LOBYTE(v8) = 0;
-    result = (unsigned int **)sub_7848E0(v8, v5, 1, a2);
-    *(this + 2) = (unsigned int)(v5 + 6);
+    end = this->end; /*0x79171e*/
+    LOBYTE(resultIterator) = 0; /*0x791721*/
+    OB_stVector24_UninitializedFillN_010201A0((unsigned __int8 *)end, 1u, (const unsigned __int8 *)value); /*0x791731*/
+    this->end = end + 1; /*0x79173c*/
   }
   else
   {
-    v7 = (char *)*(this + 2);
-    if ( v3 > (unsigned int)v7 )
-      _invalid_parameter_noinfo();
-    return sub_791510(this, &v8, this, v7, a2);
+    v6 = this->end; /*0x791748*/
+    if ( begin > v6 ) /*0x79174d*/
+      _invalid_parameter_noinfo((int)v6, (int)begin, (int)this); /*0x79174f*/
+    OB_CBranch_flareVectorInsertRealloc_010201A0( /*0x791762*/
+      (OB_stVector16_010201A0 *)this,
+      &resultIterator,
+      (OB_stVector16_010201A0 *)this,
+      v6,
+      value);
   }
-  return result;
 }

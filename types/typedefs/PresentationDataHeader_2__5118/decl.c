@@ -1,1 +1,1 @@
-PresentationDataHeader_2
+typedef PresentationDataHeader_1 PresentationDataHeader_2;

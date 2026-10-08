@@ -6,7 +6,7 @@
 0x6EC91B: push    edi
 0x6EC91C: push    ebx
 0x6EC91D: mov     esi, ecx
-0x6EC91F: call    sub_715D80
+0x6EC91F: call    NiTimeController_CopyMembers; Copies flags and timing values through +0x24. Remaps target +0x30 through the clone map only when runtime types match, and clones the refcounted next-controller chain at +0x34. Runtime cache +0x28 and update/force bytes are not copied here.
 0x6EC924: mov     ecx, [esi+40h]
 0x6EC927: test    ecx, ecx
 0x6EC929: jz      short loc_6EC93B

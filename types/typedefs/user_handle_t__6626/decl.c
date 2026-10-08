@@ -1,1 +1,1 @@
-user_handle_t
+typedef unsigned int user_handle_t;

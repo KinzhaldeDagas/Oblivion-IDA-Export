@@ -1,4 +1,4 @@
-0x77EB10: cmp     dword ptr ds:0B428A8h, 0
+0x77EB10: cmp     dword ptr ds:0B428A8h, 0; Ensures a vertex-shader device object exists. A live handle succeeds immediately; otherwise the retained program creator is asked to rebuild/restore it.
 0x77EB17: push    esi
 0x77EB18: jz      short loc_77EB4C
 0x77EB1A: mov     esi, [esp+4+arg_0]

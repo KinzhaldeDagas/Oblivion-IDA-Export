@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x625D70",
+      "0x625D7D"
+    ]
+  ],
+  "chunks_sha256": "98f50af685b878a50b922349fa3dfd85ad2ab98b4d81d6e68591682f524cbd75",
+  "comment_regular": "Stops dialogue playback on activeSpeaker when a DialoguePackage is being torn down or replaced.",
+  "comment_repeatable": "Stops dialogue playback on activeSpeaker when a DialoguePackage is being torn down or replaced.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_625D70",
+  "display_name": "DialoguePackage::StopActiveSpeakerDialogue",
   "end_ea": "0x625D7D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_625D70",
+  "name": "DialoguePackage::StopActiveSpeakerDialogue",
   "segment": ".text",
   "sha256": "98f50af685b878a50b922349fa3dfd85ad2ab98b4d81d6e68591682f524cbd75",
   "size": 13,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x625D70",
-  "type": "void __thiscall(Actor **this)",
+  "total_chunk_size": 13,
+  "type": "void __thiscall(DialoguePackageRuntimeView *this)",
   "xrefs_from_count": 5,
   "xrefs_to_count": 1
 }

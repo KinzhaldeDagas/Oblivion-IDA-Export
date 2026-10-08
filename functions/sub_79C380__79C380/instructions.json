@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x79C380",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Pop-heap primitive for SFrondGuide. Moves the first heap element to the output slot, then rebuilds the shortened heap by calling the typed adjust-heap path with the saved guide value.",
     "mnemonic": "push",
     "size": 2
   },
@@ -67,25 +67,25 @@
   },
   {
     "ea": "0x79C3A2",
-    "line": "mov     esi, [esp+18h+arg_0]",
+    "line": "mov     esi, [esp+18h+first]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79C3A6",
-    "line": "mov     edi, [esp+18h+arg_8]",
+    "line": "mov     edi, [esp+18h+result]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79C3AA",
-    "line": "push    esi",
+    "line": "push    esi; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79C3AB",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x79C3B5",
-    "line": "call    sub_79B160",
+    "line": "call    OB_stVector_SFrondVertex_CopyAssign_010201A0; Oblivion-authoritative copy assignment for the SFrondGuide vertex vector at +0x00. Reuses existing 0x38-byte-element capacity when possible, otherwise frees/reserves and deep-copies the source range.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x79C3CF",
-    "line": "mov     eax, [esp+18h+arg_3C]",
+    "line": "mov     eax, dword ptr [esp+18h+sorterState]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x79C3D9",
-    "line": "push    eax; int",
+    "line": "push    eax; sorterState",
     "mnemonic": "push",
     "size": 1
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x79C3E3",
-    "line": "mov     [esp+4Ch+arg_0], esp",
+    "line": "mov     [esp+4Ch+first], esp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -229,37 +229,37 @@
   },
   {
     "ea": "0x79C3F8",
-    "line": "lea     ecx, [esp+4Ch+arg_C]",
+    "line": "lea     ecx, [esp+4Ch+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x79C3FC",
-    "line": "push    ecx",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79C3FD",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79C3FF",
-    "line": "call    sub_79AD70",
+    "line": "call    OB_stVector_SFrondVertex_CopyCtor_010201A0; Oblivion-authoritative copy construction for the 16-byte vector wrapper embedded at SFrondGuide+0x00. Allocates capacity for the exact source count and deep-copies 0x38-byte SFrondVertex records; scalar guide fields are copied separately by callers.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x79C404",
-    "line": "fld     [esp+4Ch+arg_1C]",
+    "line": "fld     [esp+4Ch+value.guideLength]; Computed centerline length.",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x79C408",
-    "line": "mov     ecx, [esp+4Ch+arg_38]",
+    "line": "mov     ecx, [esp+4Ch+value.verticesPerGuideVertex]; Generated geometry vertices associated with each guide vertex.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -271,19 +271,19 @@
   },
   {
     "ea": "0x79C412",
-    "line": "mov     eax, [esp+4Ch+arg_34]",
+    "line": "mov     eax, [esp+4Ch+value.sharedVertexStartIndex]; Start index in shared indexed geometry.",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x79C419",
-    "line": "fld     [esp+4Ch+arg_20]",
+    "line": "fld     [esp+4Ch+value.radius]; Frond radius.",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x79C41D",
-    "line": "mov     dl, [esp+4Ch+arg_24]",
+    "line": "mov     dl, [esp+4Ch+value.frondMapIndex]; Selected frond texture/map index.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x79C424",
-    "line": "fld     [esp+4Ch+arg_28]",
+    "line": "fld     [esp+4Ch+value.offsetAngle]; Rotation offset around the guide centerline.",
     "mnemonic": "fld",
     "size": 4
   },
@@ -319,13 +319,13 @@
   },
   {
     "ea": "0x79C431",
-    "line": "mov     ecx, [esp+4Ch+arg_4]",
+    "line": "mov     ecx, [esp+4Ch+last]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79C435",
-    "line": "fld     [esp+4Ch+arg_2C]",
+    "line": "fld     [esp+4Ch+value.surfaceArea]; Computed surface area used for LOD.",
     "mnemonic": "fld",
     "size": 4
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x79C43F",
-    "line": "fld     [esp+4Ch+arg_30]",
+    "line": "fld     [esp+4Ch+value.fuzzySurfaceArea]; Randomized surface-area key used for guide LOD ordering.",
     "mnemonic": "fld",
     "size": 7
   },
@@ -397,31 +397,31 @@
   },
   {
     "ea": "0x79C45C",
-    "line": "push    eax; int",
+    "line": "push    eax; length",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79C45D",
-    "line": "push    0; int",
+    "line": "push    0; holeIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x79C45F",
-    "line": "push    esi; int",
+    "line": "push    esi; base",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79C460",
-    "line": "call    sub_79C130",
+    "line": "call    OB_SFrondGuide_AdjustHeap_010201A0; Adjusts/sifts one hole down the SFrondGuide heap, selecting children by fuzzySurfaceArea and moving whole non-trivial guide records. Finishes by pushing the saved by-value guide upward into its final heap slot.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x79C465",
-    "line": "mov     eax, [esp+58h+arg_10]",
+    "line": "mov     eax, [esp+58h+value.vertexVector.begin]; Oblivion compact guide storage: direct 16-byte vector of 0x38-byte SFrondVertex records. Local RT 4.1 stock stack-vertex fields are absent.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x79C471",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -502,5 +502,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CC380",
+    "line": "lea     ecx, [ebp+10h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC383",
+    "line": "jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC388",
+    "line": "mov     edx, [esp+last]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CC38C",
+    "line": "lea     eax, [edx-8]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC38F",
+    "line": "mov     ecx, [edx-0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC392",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CC394",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC399",
+    "line": "mov     eax, offset stru_AF553C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC39E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

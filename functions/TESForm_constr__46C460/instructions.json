@@ -120,12 +120,6 @@
     "size": 2
   },
   {
-    "ea": "0x46C4A9",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x46C4B0",
     "line": "mov     eax, [ebp+0]",
     "mnemonic": "mov",
@@ -451,7 +445,7 @@
   },
   {
     "ea": "0x46C557",
-    "line": "mov     byte ptr [esi+4], 0",
+    "line": "mov     byte ptr [esi+4], 0; TESForm layout evidence: +0x04 formType byte, +0x08 flags, +0x0C refID/FormID.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -565,7 +559,7 @@
   },
   {
     "ea": "0x46C5AA",
-    "line": "call    sub_46B6C0",
+    "line": "call    TESForm_SetFile; Updates TESForm source-file provenance. Thread-safe clones normalize to their root parent; master files replace prior source entries, non-masters append once, and null removes the last source entry.",
     "mnemonic": "call",
     "size": 5
   },

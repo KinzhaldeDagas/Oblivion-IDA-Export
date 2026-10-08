@@ -1,1 +1,4 @@
-IDirectInputA
+struct IDirectInputA
+{
+IDirectInputAVtbl *lpVtbl;
+};

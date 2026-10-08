@@ -1,1 +1,1 @@
-HIDP_CAPS
+typedef _HIDP_CAPS HIDP_CAPS;

@@ -1,11 +1,11 @@
-0x6478E0: mov     eax, [esp+arg_4]
+0x6478E0: mov     eax, [esp+owner]
 0x6478E4: push    esi
 0x6478E5: mov     esi, ecx
-0x6478E7: mov     ecx, [esp+4+arg_0]
-0x6478EB: push    eax
-0x6478EC: push    ecx
-0x6478ED: mov     ecx, esi
-0x6478EF: call    sub_60D810
+0x6478E7: mov     ecx, [esp+4+changeMask]
+0x6478EB: push    eax; owner
+0x6478EC: push    ecx; changeMask
+0x6478ED: mov     ecx, esi; self
+0x6478EF: call    BaseProcess_Revert
 0x6478F4: mov     edx, ds:0B33B00h
 0x6478FA: mov     eax, [edx+44h]
 0x6478FD: cmp     eax, 1FFFF000h
@@ -38,11 +38,11 @@
 0x647943: cmp     ebp, ebx
 0x647945: jz      short loc_647930
 0x647947: push    ebp
-0x647948: call    FormHeapFree
+0x647948: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x64794D: add     esp, 4
 0x647950: jmp     short loc_647930
 0x647952: lea     ecx, [esi+4Ch]
-0x647955: call    BSSimpleList_Clear
+0x647955: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x64795A: fld     dword ptr ds:0A30634h
 0x647960: fstp    dword ptr [esi+14h]
 0x647963: pop     edi
@@ -64,9 +64,9 @@
 0x647997: mov     [esi+24h], ebx
 0x64799A: mov     [esi+1Eh], bl
 0x64799D: pop     ebx
-0x64799E: test    [esp+4+arg_0], 400000h
+0x64799E: test    [esp+4+changeMask], 400000h
 0x6479A6: jz      short loc_6479B0
-0x6479A8: lea     ecx, [esi+70h]
+0x6479A8: lea     ecx, [esi+70h]; self
 0x6479AB: call    AVCollection_Clear
 0x6479B0: pop     esi
 0x6479B1: retn    8

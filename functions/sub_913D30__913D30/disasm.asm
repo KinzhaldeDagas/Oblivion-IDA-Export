@@ -7,7 +7,7 @@
 0x913D3B: push    esi
 0x913D3C: push    edi
 0x913D3D: mov     edi, [ebp+arg_4]
-0x913D40: push    offset stru_BA8380; lpCriticalSection
+0x913D40: push    offset unk_BA8380; lpCriticalSection
 0x913D45: mov     esi, ecx
 0x913D47: call    dword ptr ds:0A2806Ch
 0x913D4D: call    dword ptr ds:0A2808Ch

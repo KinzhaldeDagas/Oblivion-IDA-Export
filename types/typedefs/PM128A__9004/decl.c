@@ -1,1 +1,1 @@
-PM128A
+typedef _M128A *PM128A;

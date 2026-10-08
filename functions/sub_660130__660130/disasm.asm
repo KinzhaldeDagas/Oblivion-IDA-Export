@@ -5,33 +5,33 @@
 0x66013E: fstp    [esp+0E8h+var_DC]
 0x660142: push    edi
 0x660143: mov     ebx, ecx
-0x660145: call    TESObjectREFR_GetAnimData
+0x660145: call    TESObjectREFR_GetAnimData; Return active ActorAnimData for an actor reference. For actor/creature refs with process level 0 or 1, return process+0x17C; otherwise tail-call the ExtraAnim lookup on the reference extra list. Exact return type is ActorAnimData*.
 0x66014A: mov     esi, eax
-0x66014C: push    3
-0x66014E: mov     ecx, esi
-0x660150: call    ActorAnimData_GetAnimGroupFromField8Value
+0x66014C: push    3; slot
+0x66014E: mov     ecx, esi; this
+0x660150: call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.
 0x660155: movzx   eax, ax
 0x660158: push    eax
-0x660159: call    sub_51AA00
+0x660159: call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.
 0x66015E: add     esp, 4
-0x660161: push    1
-0x660163: mov     ecx, esi
+0x660161: push    1; slot
+0x660163: mov     ecx, esi; this
 0x660165: mov     edi, eax
-0x660167: call    ActorAnimData_GetAnimGroupFromField8Value
+0x660167: call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.
 0x66016C: movzx   eax, ax
 0x66016F: push    eax
-0x660170: call    sub_51AA00
+0x660170: call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.
 0x660175: add     esp, 4
 0x660178: mov     ecx, ebx
 0x66017A: mov     esi, eax
-0x66017C: call    Actor_GetCurrentAction
+0x66017C: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x660181: cmp     eax, 3
 0x660184: jz      short loc_66018E
 0x660186: add     edi, 0FFFFFFEFh
 0x660189: cmp     edi, 9
 0x66018C: jbe     short loc_6601A2
 0x66018E: mov     ecx, ebx
-0x660190: call    Actor_GetCurrentAction
+0x660190: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x660195: cmp     eax, 3
 0x660198: jz      short loc_6601A8
 0x66019A: add     esi, 0FFFFFFDEh
@@ -128,21 +128,21 @@
 0x6602B0: fstp    [esp+0ECh+var_E0]
 0x6602B4: fld     [esp+0ECh+var_E0]
 0x6602B8: push    ecx
-0x6602B9: lea     ecx, [esp+0F0h+var_C0]
-0x6602BD: fstp    [esp+0F0h+var_F0]; float
-0x6602C0: call    NiMatrix33_InitRotationTransform
-0x6602C5: mov     ecx, ebx
-0x6602C7: call    sub_4A9720
+0x6602B9: lea     ecx, [esp+0F0h+var_C0]; this
+0x6602BD: fstp    [esp+0F0h+angleZ]; angleZ
+0x6602C0: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
+0x6602C5: mov     ecx, ebx; this
+0x6602C7: call    Actor_GetAimPitch; Returns Actor rotation X as the native aim-pitch value used by projectile launch, impact, input, dialogue-camera, and magic-projectile paths.
 0x6602CC: push    ecx
-0x6602CD: lea     ecx, [esp+0F0h+var_48]
-0x6602D4: fstp    [esp+0F0h+var_F0]; float
-0x6602D7: call    NiMatrix33_InitRotationTransposedTransform???
-0x6602DC: lea     eax, [esp+0ECh+var_48]
-0x6602E3: push    eax
-0x6602E4: lea     ecx, [esp+0F0h+var_24]
-0x6602EB: push    ecx
-0x6602EC: lea     ecx, [esp+0F4h+var_C0]
-0x6602F0: call    NiMAtrix33_Multiply
+0x6602CD: lea     ecx, [esp+0F0h+right]; this
+0x6602D4: fstp    [esp+0F0h+angleZ]; angleX
+0x6602D7: call    NiMatrix33_InitRotationXTransposed; Verified matrix coefficients make this an X-axis rotation in the engine's transposed convention: X stays fixed; only the Y/Z submatrix contains sin/cos.
+0x6602DC: lea     eax, [esp+0ECh+right]
+0x6602E3: push    eax; right
+0x6602E4: lea     ecx, [esp+0F0h+out]
+0x6602EB: push    ecx; out
+0x6602EC: lea     ecx, [esp+0F4h+var_C0]; this
+0x6602F0: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x6602F5: fldz
 0x6602F7: mov     esi, eax
 0x6602F9: mov     ecx, 9
@@ -217,19 +217,19 @@
 0x6603D7: fstp    [esp+0ECh+var_E0]
 0x6603DB: fld     [esp+0ECh+var_E0]
 0x6603DF: push    ecx
-0x6603E0: lea     ecx, [esp+0F0h+var_6C]
-0x6603E7: fstp    [esp+0F0h+var_F0]; float
-0x6603EA: call    NiMatrix33_InitRotationTransposedTransform???
+0x6603E0: lea     ecx, [esp+0F0h+var_6C]; this
+0x6603E7: fstp    [esp+0F0h+angleZ]; angleX
+0x6603EA: call    NiMatrix33_InitRotationXTransposed; Verified matrix coefficients make this an X-axis rotation in the engine's transposed convention: X stays fixed; only the Y/Z submatrix contains sin/cos.
 0x6603EF: mov     ecx, 9
 0x6603F4: lea     esi, [esp+0ECh+var_C0]
 0x6603F8: lea     edi, [esp+0ECh+var_9C]
 0x6603FC: rep movsd
 0x6603FE: lea     eax, [esp+0ECh+var_6C]
-0x660405: push    eax
-0x660406: lea     ecx, [esp+0F0h+var_24]
-0x66040D: push    ecx
-0x66040E: lea     ecx, [esp+0F4h+var_9C]
-0x660412: call    NiMAtrix33_Multiply
+0x660405: push    eax; right
+0x660406: lea     ecx, [esp+0F0h+out]
+0x66040D: push    ecx; out
+0x66040E: lea     ecx, [esp+0F4h+var_9C]; this
+0x660412: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x660417: mov     ecx, 9
 0x66041C: mov     esi, eax
 0x66041E: lea     edi, [esp+0ECh+var_9C]

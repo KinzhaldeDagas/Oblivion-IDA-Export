@@ -14,7 +14,6 @@
 0x932114: jmp     short loc_932120
 0x932116: xor     eax, eax
 0x932118: jmp     short loc_932120
-0x93211A: align 10h
 0x932120: mov     ebp, [esp+24h+var_14]
 0x932124: mov     [esi+4], eax
 0x932127: mov     eax, [esi+8]

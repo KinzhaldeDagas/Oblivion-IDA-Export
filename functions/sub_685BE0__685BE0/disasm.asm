@@ -11,7 +11,7 @@
 0x685BFC: mov     ebp, [esp+18h+arg_8]
 0x685C00: fstp    [esp+18h+var_8]
 0x685C04: mov     [esp+18h+var_4], 0
-0x685C0C: mov     esi, offset dword_B3C08C
+0x685C0C: mov     esi, offset unk_B3C08C
 0x685C11: xor     ebx, ebx
 0x685C13: mov     edi, [esi]
 0x685C15: test    edi, edi
@@ -76,7 +76,7 @@
 0x685CC8: add     esp, 4
 0x685CCB: mov     [eax+20h], cl
 0x685CCE: push    eax
-0x685CCF: mov     ecx, offset dword_B3C08C
+0x685CCF: mov     ecx, offset unk_B3C08C
 0x685CD4: mov     [eax+18h], edx
 0x685CD7: call    BSSimpleList_PushFront
 0x685CDC: pop     edi
@@ -91,7 +91,7 @@
 0x685CE9: mov     ecx, ebx
 0x685CEB: call    BSSimpleList_Remove
 0x685CF0: push    edi
-0x685CF1: call    FormHeapFree
+0x685CF1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x685CF6: mov     esi, [ebx+4]
 0x685CF9: add     esp, 4
 0x685CFC: jmp     loc_685C7C
@@ -103,15 +103,15 @@
 0x685D0E: mov     ecx, [eax]
 0x685D10: push    eax
 0x685D11: mov     [esi], ecx
-0x685D13: call    FormHeapFree
+0x685D13: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x685D18: add     esp, 4
 0x685D1B: push    edi
-0x685D1C: call    FormHeapFree
+0x685D1C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x685D21: add     esp, 4
 0x685D24: jmp     loc_685C7C
 0x685D29: push    edi
 0x685D2A: mov     dword ptr [esi], 0
-0x685D30: call    FormHeapFree
+0x685D30: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x685D35: add     esp, 4
 0x685D38: jmp     loc_685C7C
 0x685D3D: fld     [esp+18h+var_8]

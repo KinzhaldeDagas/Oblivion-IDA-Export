@@ -1,8 +1,8 @@
-0x42EC70: sub     esp, 11Ch
+0x42EC70: sub     esp, 11Ch; MEF PERF 2026-09-07: PERF-1 outer path: called by wildcard model/KF discovery431B06; computes a fixed exclusion hash set from initial result entries, walks registered archives and calls42DB50 at42ED9A. Performance changes must not rebuild exclusions from newly prepended archive results or change archive precedence.
 0x42EC76: mov     eax, ___security_cookie
 0x42EC7B: xor     eax, esp
 0x42EC7D: mov     [esp+11Ch+var_4], eax
-0x42EC84: cmp     ArchiveList, 0
+0x42EC84: cmp     dword ptr ds:0B338E0h, 0
 0x42EC8B: mov     eax, [esp+11Ch+arg_0]
 0x42EC92: push    esi
 0x42EC93: mov     esi, [esp+120h+Str1]
@@ -81,7 +81,7 @@
 0x42ED67: mov     eax, [eax+4]
 0x42ED6A: test    eax, eax
 0x42ED6C: jnz     short loc_42ED60
-0x42ED6E: mov     esi, ArchiveList
+0x42ED6E: mov     esi, ds:0B338E0h
 0x42ED74: test    esi, esi
 0x42ED76: jz      short loc_42EDD3
 0x42ED78: mov     eax, [esi]
@@ -112,13 +112,13 @@
 0x42EDB5: jbe     short loc_42EDCA
 0x42EDB7: mov     eax, [edi+esi*4]
 0x42EDBA: push    eax
-0x42EDBB: call    FormHeapFree
+0x42EDBB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x42EDC0: add     esi, 1
 0x42EDC3: add     esp, 4
 0x42EDC6: cmp     esi, ebx
 0x42EDC8: jb      short loc_42EDB7
 0x42EDCA: push    edi
-0x42EDCB: call    FormHeapFree
+0x42EDCB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x42EDD0: add     esp, 4
 0x42EDD3: pop     edi
 0x42EDD4: pop     ebx

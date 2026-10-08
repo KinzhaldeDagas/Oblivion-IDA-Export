@@ -1,1 +1,24 @@
-Component
+enum Component
+{
+kComp_RED = 0x0,
+kComp_GREEN = 0x1,
+kComp_BLUE = 0x2,
+kComp_ALPHA = 0x3,
+kComp_COMPRESSED = 0x4,
+kComp_OFFSET_U = 0x5,
+kComp_OFFSET_V = 0x6,
+kComp_OFFSET_W = 0x7,
+kComp_OFFSET_Q = 0x8,
+kComp_LUMA = 0x9,
+kComp_HEIGHT = 0xA,
+kComp_VECTOR_X = 0xB,
+kComp_VECTOR_Y = 0xC,
+kComp_VECTOR_Z = 0xD,
+kComp_PADDING = 0xE,
+kComp_INTENSITY = 0xF,
+kComp_INDEX = 0x10,
+kComp_DEPTH = 0x11,
+kComp_STENCIL = 0x12,
+kComp_EMPTY = 0x13,
+kComp_MAX = 0x14,
+};

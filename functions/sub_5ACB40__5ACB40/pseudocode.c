@@ -1,14 +1,11 @@
-int sub_5ACB40()
+void __cdecl sub_5ACB40()
 {
-  int result; // eax
-  int (__thiscall ***v1)(_DWORD, int); // ecx
+  void (__thiscall ***v0)(_DWORD, int); // ecx
 
-  if ( (unsigned __int16)word_B1397A > 0x1Au )
+  if ( (unsigned __int16)word_B1397A > 0x1Au ) /*0x5acb48*/
   {
-    result = dword_B13974;
-    v1 = *(int (__thiscall ****)(_DWORD, int))(dword_B13974 + 0x68);
-    if ( v1 )
-      return (**v1)(v1, 1);
+    v0 = *(void (__thiscall ****)(_DWORD, int))(dword_B13974 + 0x68); /*0x5acb4f*/
+    if ( v0 ) /*0x5acb54*/
+      (**v0)(v0, 1); /*0x5acb5c*/
   }
-  return result;
 }

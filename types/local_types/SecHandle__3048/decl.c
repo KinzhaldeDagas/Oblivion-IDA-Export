@@ -1,1 +1,5 @@
-_SecHandle
+struct _SecHandle
+{
+ULONG_PTR dwLower;
+ULONG_PTR dwUpper;
+};

@@ -1,4 +1,4 @@
-0x580BA0: sub     esp, 18h
+0x580BA0: sub     esp, 18h; Focused verification: inspected directional candidate loop requires visible !=1 and target==2, rejects disabled xdefault sentinel, and tracks visited tiles to avoid loops. Supports excluding hidden Travel topic when both visible/target=1. Does not establish all NorthernUI/custom controller behavior.
 0x580BA3: mov     eax, ds:0B33398h
 0x580BA8: push    ebx
 0x580BA9: push    esi
@@ -19,7 +19,7 @@
 0x580BD2: jmp     short loc_580BD6
 0x580BD4: xor     esi, esi
 0x580BD6: test    ebx, ebx
-0x580BD8: mov     [esp+24h+var_10], esi
+0x580BD8: mov     [esp+24h+resolvedTrait], esi
 0x580BDC: jz      loc_581379
 0x580BE2: fld1
 0x580BE4: mov     edx, [ebx]
@@ -60,8 +60,8 @@
 0x580C54: mov     edi, eax
 0x580C56: test    edi, edi
 0x580C58: jz      short loc_580C8F
-0x580C5A: mov     ecx, esi
-0x580C5C: call    sub_5893B0
+0x580C5A: mov     ecx, esi; this
+0x580C5C: call    Tile__IsVisible; AchievementsNative evidence: target eligibility helper returns true when the tile and ancestors are not suppressed by the observed flag path; inventory hover uses it before accepting header/item targets.
 0x580C61: test    al, al
 0x580C63: jz      short loc_580C8F
 0x580C65: mov     esi, [edi]
@@ -118,7 +118,7 @@
 0x580D0C: jmp     loc_580D9B
 0x580D11: mov     ecx, [esp+28h+var_18]
 0x580D15: push    ebp
-0x580D16: call    nullsub_returnvVoid_1arg
+0x580D16: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x580D1B: pop     ebp
 0x580D1C: pop     edi
 0x580D1D: pop     esi
@@ -151,7 +151,7 @@
 0x580D7D: jmp     short loc_580D9B
 0x580D7F: cmp     ebp, 0Fh
 0x580D82: jnz     short loc_580D8E
-0x580D84: mov     [esp+28h+a3], 0FFDh
+0x580D84: mov     [esp+28h+a3], 0FFDh; Verified LB routing: internal button code15 maps to trait0xFFD (xbuttonlb). This is LB shoulder button, distinct from LT code13/trait0xFFB.
 0x580D8C: jmp     short loc_580D9B
 0x580D8E: cmp     ebp, 5
 0x580D91: jnz     short loc_580D9B
@@ -162,9 +162,9 @@
 0x580DA5: mov     esi, [edi+98h]
 0x580DAB: test    esi, esi
 0x580DAD: jnz     short loc_580DB3
-0x580DAF: mov     esi, [esp+28h+var_10]
-0x580DB3: mov     ecx, esi
-0x580DB5: call    sub_5893B0
+0x580DAF: mov     esi, [esp+28h+resolvedTrait]
+0x580DB3: mov     ecx, esi; this
+0x580DB5: call    Tile__IsVisible; AchievementsNative evidence: target eligibility helper returns true when the tile and ancestors are not suppressed by the observed flag path; inventory hover uses it before accepting header/item targets.
 0x580DBA: test    al, al
 0x580DBC: jnz     short loc_580DCF
 0x580DBE: mov     esi, [esi+10h]
@@ -179,11 +179,11 @@
 0x580DCF: test    esi, esi
 0x580DD1: jz      loc_581378
 0x580DD7: mov     ecx, [esp+28h+a3]
-0x580DDB: lea     eax, [esp+28h+var_10]
-0x580DDF: push    eax
-0x580DE0: push    ecx
-0x580DE1: mov     ecx, esi
-0x580DE3: call    sub_58E3B0
+0x580DDB: lea     eax, [esp+28h+resolvedTrait]
+0x580DDF: push    eax; resolvedTrait
+0x580DE0: push    ecx; trait
+0x580DE1: mov     ecx, esi; this
+0x580DE3: call    Tile__ResolveNavigationTrait; Verified root-binding reachability: starts at visible focus candidate, ResolveNavigationTrait climbs ancestors when trait absent. A root xbuttonlb reference can route LB while a descendant topic is focused, unless a nearer binding overrides it.
 0x580DE8: mov     edi, eax
 0x580DEA: test    edi, edi
 0x580DEC: mov     ebx, esi
@@ -194,11 +194,11 @@
 0x580DF7: test    ebx, ebx
 0x580DF9: jz      short loc_580E0E
 0x580DFB: mov     eax, [esp+28h+a3]
-0x580DFF: lea     edx, [esp+28h+var_10]
-0x580E03: push    edx
-0x580E04: push    eax
-0x580E05: mov     ecx, ebx
-0x580E07: call    sub_58E3B0
+0x580DFF: lea     edx, [esp+28h+resolvedTrait]
+0x580E03: push    edx; resolvedTrait
+0x580E04: push    eax; trait
+0x580E05: mov     ecx, ebx; this
+0x580E07: call    Tile__ResolveNavigationTrait; AchievementsNative evidence: navigation trait resolver handles prev/next/xlist cases by listindex and target eligibility; use for inventory-style row navigation semantics, not as proof of mouse wheel dispatch.
 0x580E0C: mov     edi, eax
 0x580E0E: test    edi, edi
 0x580E10: jz      short loc_580DF0
@@ -208,18 +208,18 @@
 0x580E19: mov     ebp, 9
 0x580E1E: test    edi, edi
 0x580E20: jz      loc_580F41
-0x580E26: mov     ecx, edi
-0x580E28: call    sub_5893B0
+0x580E26: mov     ecx, edi; this
+0x580E28: call    Tile__IsVisible; AchievementsNative evidence: target eligibility helper returns true when the tile and ancestors are not suppressed by the observed flag path; inventory hover uses it before accepting header/item targets.
 0x580E2D: test    al, al
 0x580E2F: jz      loc_580F41
-0x580E35: push    0FC9h
+0x580E35: push    0FC9h; Verified activation gate: resolved control must have target trait 0xFC9 ==2 before click/mousedown dispatch. Thus hidden travel with target=1 is blocked in this path regardless of delayed render cull state.
 0x580E3A: mov     ecx, edi
 0x580E3C: call    Tile_GetFloat
 0x580E41: fcomp   dword ptr ds:0A379B4h
 0x580E47: fnstsw  ax
 0x580E49: test    ah, 44h
 0x580E4C: jp      loc_580F41
-0x580E52: mov     eax, [esp+28h+var_10]
+0x580E52: mov     eax, [esp+28h+resolvedTrait]
 0x580E56: cmp     eax, 0FE1h
 0x580E5B: jz      short loc_580E73
 0x580E5D: cmp     eax, 0FDFh
@@ -229,7 +229,7 @@
 0x580E73: push    0FE5h
 0x580E78: mov     ecx, edi
 0x580E7A: call    Tile_GetFloat
-0x580E7F: call    Double_To_SInt32
+0x580E7F: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x580E84: test    eax, eax
 0x580E86: jz      short loc_580E91
 0x580E88: push    eax; int
@@ -243,46 +243,46 @@
 0x580EA4: mov     ecx, edi; this
 0x580EA6: fstp    [esp+2Ch+a3]
 0x580EAA: fld     [esp+2Ch+a3]
-0x580EAE: fstp    [esp+2Ch+var_2C]; a3
-0x580EB1: push    0FE3h; a2
-0x580EB6: call    Tile_SetFloat
+0x580EAE: fstp    [esp+2Ch+var_2C]; value
+0x580EB1: push    0FE3h; propertyCode
+0x580EB6: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x580EBB: fld1
 0x580EBD: push    ecx
-0x580EBE: fstp    [esp+2Ch+var_2C]; a3
-0x580EC1: push    0FE1h; a2
+0x580EBE: fstp    [esp+2Ch+var_2C]; value
+0x580EC1: push    0FE1h; propertyCode
 0x580EC6: mov     ecx, edi; this
-0x580EC8: call    Tile_SetFloat
+0x580EC8: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x580ECD: fldz
 0x580ECF: push    ecx
-0x580ED0: fstp    [esp+2Ch+var_2C]; a3
-0x580ED3: push    0FE1h; a2
+0x580ED0: fstp    [esp+2Ch+var_2C]; value
+0x580ED3: push    0FE1h; propertyCode
 0x580ED8: mov     ecx, edi; this
-0x580EDA: call    Tile_SetFloat
+0x580EDA: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x580EDF: mov     ecx, edi
 0x580EE1: call    Tile_GetParentMenu
 0x580EE6: mov     ebx, [eax]
-0x580EE8: push    esi
+0x580EE8: push    esi; Verified click argument divergence: EDI=resolved binding target, ESI=original focus candidate. Push ESI here supplies Tile* argument; ID is read from EDI at 0x580EF7; call at 0x580F08 uses resolved target owning Menu. Do not assume clickedTile matches ID for this path.
 0x580EE9: push    0FA8h
 0x580EEE: mov     ecx, edi
 0x580EF0: mov     [esp+30h+a3], eax
 0x580EF4: add     ebx, 0Ch
 0x580EF7: call    Tile_GetFloat
-0x580EFC: call    Double_To_SInt32
+0x580EFC: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x580F01: mov     ecx, [esp+2Ch+a3]
 0x580F05: mov     edx, [ebx]
 0x580F07: push    eax
-0x580F08: call    edx
-0x580F0A: cmp     [esp+28h+var_10], 0FDFh
+0x580F08: call    edx; Silt Strider LB: root ref can yield ID48 with another topic as Tile* parameter. Plugin ID48 branch correctly ignores passed Tile* and resolves g_routedTravelTopicId itself before calling original DoClick. This verifies native path only; NorthernUI interception/runtime input remains untested.
+0x580F0A: cmp     [esp+28h+resolvedTrait], 0FDFh
 0x580F12: jnz     short loc_580F22
 0x580F14: mov     eax, [esp+28h+var_14]
 0x580F18: and     dword ptr [eax+118h], 0FFFBh
 0x580F22: mov     esi, [esp+28h+var_18]
 0x580F26: push    ebp
 0x580F27: mov     ecx, esi
-0x580F29: call    nullsub_returnvVoid_1arg
+0x580F29: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x580F2E: push    6
 0x580F30: mov     ecx, esi
-0x580F32: call    nullsub_returnvVoid_1arg
+0x580F32: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x580F37: pop     ebp
 0x580F38: pop     edi
 0x580F39: pop     esi
@@ -291,7 +291,7 @@
 0x580F3E: retn    4
 0x580F41: cmp     ebp, 9
 0x580F44: jnz     loc_581378
-0x580F4A: push    0FC9h
+0x580F4A: push    0FC9h; Verified code-9 fallback activation gate: requires current candidate target==2. Setting target=1 blocks this fallback even if stale focus still refers to the hidden topic.
 0x580F4F: mov     ecx, esi
 0x580F51: call    Tile_GetFloat
 0x580F56: fcomp   dword ptr ds:0A379B4h
@@ -301,7 +301,7 @@
 0x580F67: push    0FE5h
 0x580F6C: mov     ecx, esi
 0x580F6E: call    Tile_GetFloat
-0x580F73: call    Double_To_SInt32
+0x580F73: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x580F78: test    eax, eax
 0x580F7A: jz      short loc_580F85
 0x580F7C: push    eax; int
@@ -315,21 +315,21 @@
 0x580F98: mov     ecx, esi; this
 0x580F9A: fstp    [esp+2Ch+a3]
 0x580F9E: fld     [esp+2Ch+a3]
-0x580FA2: fstp    [esp+2Ch+var_2C]; a3
-0x580FA5: push    0FE3h; a2
-0x580FAA: call    Tile_SetFloat
+0x580FA2: fstp    [esp+2Ch+var_2C]; value
+0x580FA5: push    0FE3h; propertyCode
+0x580FAA: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x580FAF: fld1
 0x580FB1: push    ecx
-0x580FB2: fstp    [esp+2Ch+var_2C]; a3
-0x580FB5: push    0FE1h; a2
+0x580FB2: fstp    [esp+2Ch+var_2C]; value
+0x580FB5: push    0FE1h; propertyCode
 0x580FBA: mov     ecx, esi; this
-0x580FBC: call    Tile_SetFloat
+0x580FBC: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x580FC1: fldz
 0x580FC3: push    ecx
-0x580FC4: fstp    [esp+2Ch+var_2C]; a3
-0x580FC7: push    0FE1h; a2
+0x580FC4: fstp    [esp+2Ch+var_2C]; value
+0x580FC7: push    0FE1h; propertyCode
 0x580FCC: mov     ecx, esi; this
-0x580FCE: call    Tile_SetFloat
+0x580FCE: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x580FD3: mov     ecx, esi
 0x580FD5: call    Tile_GetParentMenu
 0x580FDA: mov     ebx, eax
@@ -339,14 +339,14 @@
 0x580FE4: mov     ecx, esi
 0x580FE6: add     edi, 0Ch
 0x580FE9: call    Tile_GetFloat
-0x580FEE: call    Double_To_SInt32
+0x580FEE: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x580FF3: push    eax
 0x580FF4: mov     eax, [edi]
 0x580FF6: mov     ecx, ebx
 0x580FF8: call    eax
 0x580FFA: mov     ecx, [esp+28h+var_18]
 0x580FFE: push    9
-0x581000: call    nullsub_returnvVoid_1arg
+0x581000: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x581005: pop     ebp
 0x581006: pop     edi
 0x581007: pop     esi
@@ -373,35 +373,35 @@
 0x581058: mov     [esp+28h+a3], 0FF4h
 0x581060: mov     esi, [edi+88h]
 0x581066: test    esi, esi
-0x581068: mov     [esp+28h+var_C], esi
+0x581068: mov     [esp+28h+maxFocus], esi
 0x58106C: jnz     loc_581151
-0x581072: push    esi
-0x581073: lea     ecx, [esp+2Ch+var_C]
-0x581077: push    ecx
-0x581078: mov     ecx, edi
-0x58107A: mov     [esp+30h+var_C], 80000000h
-0x581082: call    sub_57DA90
+0x581072: push    esi; root
+0x581073: lea     ecx, [esp+2Ch+maxFocus]
+0x581077: push    ecx; maxFocus
+0x581078: mov     ecx, edi; this
+0x58107A: mov     [esp+30h+maxFocus], 80000000h
+0x581082: call    InterfaceManager__ScanForMaxFocus; AchievementsNative evidence: default UI hit-test recursively scans visible/non-hidden target tiles, chooses highest depth, and tie-breaks list items by lower listindex; use active/mouseover tile evidence before cursor-sprite coordinate fallbacks.
 0x581087: push    0
 0x581089: mov     esi, eax
 0x58108B: push    0FDDh
 0x581090: push    esi
 0x581091: mov     ecx, edi
-0x581093: call    sub_57F9F0
+0x581093: call    InterfaceManager__SetCurrentFocusTarget; AchievementsNative evidence: focused tile with xlist=&xitem drives parent xscroll by pulsing the xscroll target's user5 through -999999, tile xscroll, then 0; do not leave scroll target user5 at the desired scroll value.
 0x581098: test    esi, esi
 0x58109A: jnz     loc_581378
 0x5810A0: mov     eax, [esp+28h+a3]
-0x5810A4: mov     ecx, [esp+28h+var_10]
+0x5810A4: mov     ecx, [esp+28h+resolvedTrait]; this
 0x5810A8: lea     edx, [esp+28h+var_18]
-0x5810AC: push    edx
-0x5810AD: push    eax
-0x5810AE: call    sub_58E3B0
+0x5810AC: push    edx; resolvedTrait
+0x5810AD: push    eax; trait
+0x5810AE: call    Tile__ResolveNavigationTrait; AchievementsNative evidence: navigation trait resolver handles prev/next/xlist cases by listindex and target eligibility; use for inventory-style row navigation semantics, not as proof of mouse wheel dispatch.
 0x5810B3: mov     esi, eax
 0x5810B5: test    esi, esi
 0x5810B7: jz      loc_581378
 0x5810BD: push    0FE5h
 0x5810C2: mov     ecx, esi
 0x5810C4: call    Tile_GetFloat
-0x5810C9: call    Double_To_SInt32
+0x5810C9: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5810CE: test    eax, eax
 0x5810D0: jz      short loc_5810DB
 0x5810D2: push    eax; int
@@ -415,28 +415,28 @@
 0x5810EE: mov     ecx, esi; this
 0x5810F0: fstp    [esp+2Ch+a3]
 0x5810F4: fld     [esp+2Ch+a3]
-0x5810F8: fstp    [esp+2Ch+var_2C]; a3
-0x5810FB: push    0FE3h; a2
-0x581100: call    Tile_SetFloat
+0x5810F8: fstp    [esp+2Ch+var_2C]; value
+0x5810FB: push    0FE3h; propertyCode
+0x581100: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x581105: fld1
 0x581107: push    ecx
-0x581108: fstp    [esp+2Ch+var_2C]; a3
-0x58110B: push    0FE1h; a2
+0x581108: fstp    [esp+2Ch+var_2C]; value
+0x58110B: push    0FE1h; propertyCode
 0x581110: mov     ecx, esi; this
-0x581112: call    Tile_SetFloat
+0x581112: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x581117: fldz
 0x581119: push    ecx
-0x58111A: fstp    [esp+2Ch+var_2C]; a3
-0x58111D: push    0FE1h; a2
+0x58111A: fstp    [esp+2Ch+var_2C]; value
+0x58111D: push    0FE1h; propertyCode
 0x581122: mov     ecx, esi; this
-0x581124: call    Tile_SetFloat
+0x581124: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x581129: mov     edi, [ebx]
 0x58112B: push    esi
 0x58112C: push    0FA8h
 0x581131: mov     ecx, esi
 0x581133: add     edi, 0Ch
 0x581136: call    Tile_GetFloat
-0x58113B: call    Double_To_SInt32
+0x58113B: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x581140: mov     edx, [edi]
 0x581142: push    eax
 0x581143: mov     ecx, ebx
@@ -449,16 +449,16 @@
 0x58114E: retn    4
 0x581151: mov     ecx, [esp+28h+a3]
 0x581155: lea     eax, [esp+28h+var_18]
-0x581159: push    eax
-0x58115A: push    ecx
-0x58115B: mov     ecx, esi
-0x58115D: call    sub_58E3B0
+0x581159: push    eax; resolvedTrait
+0x58115A: push    ecx; trait
+0x58115B: mov     ecx, esi; this
+0x58115D: call    Tile__ResolveNavigationTrait; AchievementsNative evidence: navigation trait resolver handles prev/next/xlist cases by listindex and target eligibility; use for inventory-style row navigation semantics, not as proof of mouse wheel dispatch.
 0x581162: xor     ebx, ebx
 0x581164: push    esi
 0x581165: lea     ecx, [esp+2Ch+var_8]
 0x581169: mov     edi, eax
-0x58116B: mov     [esp+2Ch+var_8], ebx
-0x58116F: mov     [esp+2Ch+var_4], ebx
+0x58116B: mov     [esp+2Ch+var_8.firstNode.data], ebx
+0x58116F: mov     [esp+2Ch+var_8.firstNode.next], ebx
 0x581173: call    BSSimpleList_PushFront
 0x581178: cmp     edi, ebx
 0x58117A: jz      loc_5812E9
@@ -502,13 +502,13 @@
 0x581205: mov     ebp, [edi+38h]
 0x581208: xor     ebx, ebx
 0x58120A: cmp     ebp, ebx
-0x58120C: mov     [esp+28h+var_10], ebx
+0x58120C: mov     [esp+28h+resolvedTrait], ebx
 0x581210: jz      short loc_581261
 0x581212: mov     esi, [ebp+8]
 0x581215: lea     eax, [ebp+8]
 0x581218: mov     ebp, [ebp+4]
-0x58121B: mov     ecx, esi
-0x58121D: call    sub_5893B0
+0x58121B: mov     ecx, esi; this
+0x58121D: call    Tile__IsVisible; AchievementsNative evidence: target eligibility helper returns true when the tile and ancestors are not suppressed by the observed flag path; inventory hover uses it before accepting header/item targets.
 0x581222: test    al, al
 0x581224: jz      short loc_581251
 0x581226: push    0FF0h
@@ -519,16 +519,16 @@
 0x581236: push    0FF0h
 0x58123B: mov     ecx, esi
 0x58123D: call    Tile_GetFloat
-0x581242: call    Double_To_SInt32
+0x581242: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x581247: cmp     eax, ebx
 0x581249: jle     short loc_581251
 0x58124B: mov     ebx, eax
-0x58124D: mov     [esp+28h+var_10], esi
+0x58124D: mov     [esp+28h+resolvedTrait], esi
 0x581251: test    ebp, ebp
 0x581253: jnz     short loc_581212
-0x581255: cmp     [esp+28h+var_10], ebp
+0x581255: cmp     [esp+28h+resolvedTrait], ebp
 0x581259: jz      short loc_581261
-0x58125B: mov     edi, [esp+28h+var_10]
+0x58125B: mov     edi, [esp+28h+resolvedTrait]
 0x58125F: jmp     short loc_581280
 0x581261: mov     eax, [esp+28h+a3]
 0x581265: lea     edx, [esp+28h+var_18]
@@ -537,19 +537,19 @@
 0x58126B: jmp     short loc_581277
 0x58126D: mov     edx, [esp+28h+a3]
 0x581271: lea     ecx, [esp+28h+var_18]
-0x581275: push    ecx
-0x581276: push    edx
-0x581277: mov     ecx, edi
-0x581279: call    sub_58E3B0
+0x581275: push    ecx; resolvedTrait
+0x581276: push    edx; trait
+0x581277: mov     ecx, edi; this
+0x581279: call    Tile__ResolveNavigationTrait; AchievementsNative evidence: navigation trait resolver handles prev/next/xlist cases by listindex and target eligibility; use for inventory-style row navigation semantics, not as proof of mouse wheel dispatch.
 0x58127E: mov     edi, eax
 0x581280: test    edi, edi
 0x581282: jnz     loc_581180
 0x581288: jmp     short loc_5812E9
 0x58128A: test    edi, edi
 0x58128C: jz      short loc_5812E9
-0x58128E: push    edi
-0x58128F: lea     ecx, [esp+2Ch+var_8]
-0x581293: call    sub_446C30
+0x58128E: push    edi; item
+0x58128F: lea     ecx, [esp+2Ch+var_8]; this
+0x581293: call    BSSimpleList__Contains; Generic BSSimpleList membership test. Dialogue menu code uses it to avoid duplicate MenuTopics; social AI uses it for the recent-conversation target cooldown list.
 0x581298: test    al, al
 0x58129A: jz      short loc_5812E9
 0x58129C: push    0FA1h
@@ -575,10 +575,10 @@
 0x5812E5: jp      short loc_5812E9
 0x5812E7: xor     edi, edi
 0x5812E9: lea     ecx, [esp+28h+var_8]
-0x5812ED: call    BSSimpleList_Clear
+0x5812ED: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x5812F2: test    edi, edi
 0x5812F4: jz      short loc_581360
-0x5812F6: cmp     edi, [esp+28h+var_C]
+0x5812F6: cmp     edi, [esp+28h+maxFocus]
 0x5812FA: jz      short loc_581342
 0x5812FC: cmp     [esp+28h+var_18], 0FDDh
 0x581304: jnz     short loc_581342
@@ -599,7 +599,7 @@
 0x581332: mov     ecx, esi; this
 0x581334: call    sub_6B73E0
 0x581339: push    esi
-0x58133A: call    FormHeapFree
+0x58133A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x58133F: add     esp, 4
 0x581342: mov     ecx, [esp+28h+a3]
 0x581346: mov     edx, [esp+28h+var_18]
@@ -607,7 +607,7 @@
 0x58134B: mov     ecx, [esp+2Ch+var_14]
 0x58134F: push    edx
 0x581350: push    edi
-0x581351: call    sub_57F9F0
+0x581351: call    InterfaceManager__SetCurrentFocusTarget; AchievementsNative evidence: focused tile with xlist=&xitem drives parent xscroll by pulsing the xscroll target's user5 through -999999, tile xscroll, then 0; do not leave scroll target user5 at the desired scroll value.
 0x581356: pop     ebp
 0x581357: pop     edi
 0x581358: pop     esi
@@ -616,12 +616,12 @@
 0x58135D: retn    4
 0x581360: mov     eax, [esp+28h+a3]
 0x581364: mov     ecx, [esp+28h+var_18]
-0x581368: mov     edx, [esp+28h+var_C]
+0x581368: mov     edx, [esp+28h+maxFocus]
 0x58136C: push    eax
 0x58136D: push    ecx
 0x58136E: mov     ecx, [esp+30h+var_14]
 0x581372: push    edx
-0x581373: call    sub_57F9F0
+0x581373: call    InterfaceManager__SetCurrentFocusTarget; AchievementsNative evidence: focused tile with xlist=&xitem drives parent xscroll by pulsing the xscroll target's user5 through -999999, tile xscroll, then 0; do not leave scroll target user5 at the desired scroll value.
 0x581378: pop     ebp
 0x581379: pop     edi
 0x58137A: pop     esi

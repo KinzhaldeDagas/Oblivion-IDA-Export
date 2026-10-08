@@ -1,4 +1,4 @@
-0x79ACC0: push    esi
+0x79ACC0: push    esi; Initializes an empty 16-byte SFrondVertex vector wrapper and, when count is nonzero, buys exact count capacity. Maximum count is 0x04924924 (0xFFFFFFFF/0x38).
 0x79ACC1: xor     eax, eax
 0x79ACC3: push    edi
 0x79ACC4: mov     edi, [esp+8+arg_0]
@@ -14,10 +14,10 @@
 0x79ACDB: retn    4
 0x79ACDE: cmp     edi, 4924924h
 0x79ACE4: jbe     short loc_79ACEB
-0x79ACE6: call    sub_790B90
+0x79ACE6: call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error("vector<T> too long") and throws; used by multiple element specializations after max_size checks.
 0x79ACEB: push    eax
-0x79ACEC: push    edi; char *
-0x79ACED: call    sub_799F30
+0x79ACEC: push    edi; count
+0x79ACED: call    OB_stVector_SFrondVertex_Allocate_010201A0; Oblivion-authoritative allocator for count SFrondVertex elements. Allocates count*0x38 bytes from FormHeap and throws std::bad_alloc on multiplication overflow.
 0x79ACF2: lea     ecx, ds:0[edi*8]
 0x79ACF9: sub     ecx, edi
 0x79ACFB: add     esp, 8

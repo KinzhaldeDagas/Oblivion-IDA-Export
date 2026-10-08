@@ -1,31 +1,30 @@
 int __usercall Actor_AttackHandling_::CalcArmorRating_@<eax>(
         int esi0@<esi>,
-        double st7_0@<st0>,
         int ebp0@<ebp>,
         int edi0@<edi>,
-        double st6_0@<st1>,
+        double a4@<st2>,
+        int a5,
         int a6,
         int a7,
         int a8,
         int a9,
-        int a10,
+        float a10,
         int a11,
         int a12,
         int a13,
         int a14,
         int a15,
         int a16,
-        int a17,
-        int a18,
-        float a19,
-        float a20)
+        float a17,
+        float a18,
+        float a19)
 {
   return Actor_AttackHandling_::CalcArmorRating(
            esi0,
-           st7_0,
            ebp0,
            edi0,
-           st6_0,
+           a4,
+           a5,
            a6,
            a7,
            a8,
@@ -39,6 +38,5 @@ int __usercall Actor_AttackHandling_::CalcArmorRating_@<eax>(
            a16,
            a17,
            a18,
-           a19,
-           a20);
+           a19);
 }

@@ -41,10 +41,10 @@
 0x614225: test    esi, esi
 0x614227: jz      short loc_61426A
 0x614229: mov     ecx, esi
-0x61422B: call    sub_6135F0
+0x61422B: call    CombatController_GetCurrentTarget
 0x614230: mov     ecx, ebx
 0x614232: mov     ebp, eax
-0x614234: call    sub_6135F0
+0x614234: call    CombatController_GetCurrentTarget
 0x614239: cmp     ebp, eax
 0x61423B: jnz     short loc_61426A
 0x61423D: mov     eax, [esi+70h]

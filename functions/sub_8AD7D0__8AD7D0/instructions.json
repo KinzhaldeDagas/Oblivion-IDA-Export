@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8AD7D0",
-    "line": "push    ebp",
+    "line": "push    ebp; TES4 authoritative: low-level character proxy move loop uses the same active-surface solver for sliding/corrected motion after manifold constraints are built.",
     "mnemonic": "push",
     "size": 1
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x8AD82C",
-    "line": "mov     eax, [ebp+arg_0]",
+    "line": "mov     eax, [ebp+moveInput]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x8AD846",
-    "line": "movaps  [esp+140h+var_110], xmm0",
+    "line": "movaps  [esp+140h+currentPos], xmm0",
     "mnemonic": "movaps",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x8AD872",
-    "line": "movaps  xmm0, [esp+140h+var_110]",
+    "line": "movaps  xmm0, [esp+140h+currentPos]",
     "mnemonic": "movaps",
     "size": 5
   },
@@ -262,12 +262,6 @@
     "line": "jmp     short loc_8AD880",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x8AD879",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
   },
   {
     "ea": "0x8AD880",
@@ -367,7 +361,7 @@
   },
   {
     "ea": "0x8AD8CF",
-    "line": "movaps  xmm0, [esp+140h+var_110]",
+    "line": "movaps  xmm0, [esp+140h+currentPos]",
     "mnemonic": "movaps",
     "size": 5
   },
@@ -385,7 +379,7 @@
   },
   {
     "ea": "0x8AD8DD",
-    "line": "mov     ebx, [ebp+arg_C]",
+    "line": "mov     ebx, [ebp+collectorState]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -397,7 +391,7 @@
   },
   {
     "ea": "0x8AD8E4",
-    "line": "mov     edi, [ebp+arg_8]",
+    "line": "mov     edi, [ebp+collector]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -439,7 +433,7 @@
   },
   {
     "ea": "0x8AD8F6",
-    "line": "lea     edx, [esp+148h+var_F0]",
+    "line": "lea     edx, [esp+148h+targetPos]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -475,13 +469,13 @@
   },
   {
     "ea": "0x8AD907",
-    "line": "lea     edx, [esp+14Ch+var_110]",
+    "line": "lea     edx, [esp+14Ch+currentPos]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x8AD90B",
-    "line": "movaps  [esp+14Ch+var_F0], xmm0",
+    "line": "movaps  [esp+14Ch+targetPos], xmm0",
     "mnemonic": "movaps",
     "size": 5
   },
@@ -529,7 +523,7 @@
   },
   {
     "ea": "0x8AD91F",
-    "line": "call    sub_8AF890",
+    "line": "call    hkpCdPointCollector_SortHitsByDistance; Initial cast returned hits: sort by entry+0x1C, then rewrite hit keys relative to movement direction.",
     "mnemonic": "call",
     "size": 5
   },
@@ -547,7 +541,7 @@
   },
   {
     "ea": "0x8AD92A",
-    "line": "push    eax",
+    "line": "push    eax; moveDir",
     "mnemonic": "push",
     "size": 1
   },
@@ -559,13 +553,13 @@
   },
   {
     "ea": "0x8AD92E",
-    "line": "push    eax",
+    "line": "push    eax; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8AD92F",
-    "line": "push    ecx",
+    "line": "push    ecx; entries",
     "mnemonic": "push",
     "size": 1
   },
@@ -577,7 +571,7 @@
   },
   {
     "ea": "0x8AD932",
-    "line": "call    sub_8ABD40",
+    "line": "call    hkpCdPointHits_RewriteSortKeyFromMoveNormal; TES4 authoritative: for each 0x30-byte hit, copies original entry+0x1C cast fraction into entry+0x0C, then rewrites entry+0x1C as -dot(moveDir, normal) * originalFraction.",
     "mnemonic": "call",
     "size": 5
   },
@@ -715,7 +709,7 @@
   },
   {
     "ea": "0x8AD98D",
-    "line": "call    dword ptr [edx+8]",
+    "line": "call    dword ptr [edx+8]; Virtual manifold update consumes the sorted/rekeyed collector hits.",
     "mnemonic": "call",
     "size": 3
   },
@@ -972,14 +966,8 @@
     "size": 2
   },
   {
-    "ea": "0x8ADA1D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x8ADA20",
-    "line": "mov     ecx, [ebp+arg_0]",
+    "line": "mov     ecx, [ebp+moveInput]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1111,7 +1099,7 @@
   },
   {
     "ea": "0x8ADA5B",
-    "line": "call    sub_8AC3C0",
+    "line": "call    hkpCharacterProxy_ProjectManifoldContactToSurfaceConstraint; TES4 authoritative: converts a 0x40-byte manifold/contact surface into a support surface constraint when its dot against the up/support basis is between 0.01 and the proxy slope limit.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2071,7 +2059,7 @@
   },
   {
     "ea": "0x8ADD1E",
-    "line": "lea     edx, [esp+140h+var_A0]",
+    "line": "lea     edx, [esp+140h+moveDir]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -2101,7 +2089,7 @@
   },
   {
     "ea": "0x8ADD35",
-    "line": "call    sub_8EC790",
+    "line": "call    hkSurfaceConstraintUtil_CalcSupportMotion; Corrected movement path: active-surface solver computes sliding motion from manifold surface constraints.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2215,37 +2203,37 @@
   },
   {
     "ea": "0x8ADD8D",
-    "line": "mov     eax, [ebp+arg_4]",
+    "line": "mov     eax, [ebp+contextVec]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x8ADD90",
-    "line": "mov     ecx, [ebp+arg_0]",
+    "line": "mov     ecx, [ebp+moveInput]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x8ADD93",
-    "line": "push    eax",
+    "line": "push    eax; surfaceMotion",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8ADD94",
-    "line": "push    ecx",
+    "line": "push    ecx; moveInput",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8ADD95",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8ADD97",
-    "line": "call    sub_8AC6A0",
+    "line": "call    hkpCharacterProxy_ApplyContactEntityInteractions; Applies entity/contact interactions after surface constraint motion is computed and before corrected cast move.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2335,7 +2323,7 @@
   },
   {
     "ea": "0x8ADDE0",
-    "line": "movaps  xmm1, [esp+140h+var_A0]",
+    "line": "movaps  xmm1, [esp+140h+moveDir]; After surface solve, compares requested movement against solved movement; only then performs a corrected cast if the vector changed enough.",
     "mnemonic": "movaps",
     "size": 8
   },
@@ -2425,13 +2413,13 @@
   },
   {
     "ea": "0x8ADE1E",
-    "line": "mov     edi, [ebp+arg_8]",
+    "line": "mov     edi, [ebp+collector]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x8ADE21",
-    "line": "movaps  xmm0, [esp+140h+var_110]",
+    "line": "movaps  xmm0, [esp+140h+currentPos]",
     "mnemonic": "movaps",
     "size": 5
   },
@@ -2449,7 +2437,7 @@
   },
   {
     "ea": "0x8ADE29",
-    "line": "lea     eax, [esp+148h+var_F0]",
+    "line": "lea     eax, [esp+148h+targetPos]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2485,13 +2473,13 @@
   },
   {
     "ea": "0x8ADE42",
-    "line": "lea     eax, [esp+14Ch+var_110]",
+    "line": "lea     eax, [esp+14Ch+currentPos]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x8ADE46",
-    "line": "movaps  [esp+14Ch+var_F0], xmm0",
+    "line": "movaps  [esp+14Ch+targetPos], xmm0",
     "mnemonic": "movaps",
     "size": 5
   },
@@ -2539,7 +2527,7 @@
   },
   {
     "ea": "0x8ADE5E",
-    "line": "call    sub_8AF890",
+    "line": "call    hkpCdPointCollector_SortHitsByDistance; TES4 authoritative: sorts collector contact hits by entry+0x1C when more than one hit is present.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2557,25 +2545,25 @@
   },
   {
     "ea": "0x8ADE69",
-    "line": "lea     ecx, [esp+140h+var_A0]",
+    "line": "lea     ecx, [esp+140h+moveDir]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x8ADE70",
-    "line": "push    ecx",
+    "line": "push    ecx; moveDir",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8ADE71",
-    "line": "push    edx",
+    "line": "push    edx; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8ADE72",
-    "line": "push    eax",
+    "line": "push    eax; entries",
     "mnemonic": "push",
     "size": 1
   },
@@ -2587,7 +2575,7 @@
   },
   {
     "ea": "0x8ADE75",
-    "line": "call    sub_8ABD40",
+    "line": "call    hkpCdPointHits_RewriteSortKeyFromMoveNormal; TES4 authoritative: for each 0x30-byte hit, copies original entry+0x1C cast fraction into entry+0x0C, then rewrites entry+0x1C as -dot(moveDir, normal) * originalFraction.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2599,19 +2587,19 @@
   },
   {
     "ea": "0x8ADE7D",
-    "line": "push    ebx",
+    "line": "push    ebx; candidate",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8ADE7E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8ADE80",
-    "line": "call    sub_8AC640",
+    "line": "call    hkpCharacterProxy_FindMatchingManifoldContact; TES4 authoritative: searches existing manifold entries for a candidate 0x30-byte contact with match error < 0.1; returns index or 0xFFFFFFFF.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2623,7 +2611,7 @@
   },
   {
     "ea": "0x8ADE88",
-    "line": "jnz     loc_8ADF0F",
+    "line": "jnz     loc_8ADF0F; If the corrected cast hit does not match an existing manifold entry, vanilla appends the first 0x30-byte hit to the manifold.",
     "mnemonic": "jnz",
     "size": 6
   },
@@ -2656,12 +2644,6 @@
     "line": "jmp     short loc_8ADEA0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x8ADE9D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x8ADEA0",
@@ -2833,7 +2815,7 @@
   },
   {
     "ea": "0x8ADEF3",
-    "line": "movaps  xmmword ptr [eax+10h], xmm0",
+    "line": "movaps  xmmword ptr [eax+10h], xmm0; Copies full 0x30-byte contact entry into manifold, including normal, collidable refs, and shape/filter keys.",
     "mnemonic": "movaps",
     "size": 4
   },
@@ -2893,19 +2875,19 @@
   },
   {
     "ea": "0x8ADF12",
-    "line": "push    edx",
+    "line": "push    edx; candidate",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8ADF13",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8ADF15",
-    "line": "call    sub_8AC640",
+    "line": "call    hkpCharacterProxy_FindMatchingManifoldContact; TES4 authoritative: searches existing manifold entries for a candidate 0x30-byte contact with match error < 0.1; returns index or 0xFFFFFFFF.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3115,19 +3097,19 @@
   },
   {
     "ea": "0x8ADF77",
-    "line": "push    ecx",
+    "line": "push    ecx; candidate",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8ADF78",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8ADF7A",
-    "line": "call    sub_8AC640",
+    "line": "call    hkpCharacterProxy_FindMatchingManifoldContact; TES4 authoritative: searches existing manifold entries for a candidate 0x30-byte contact with match error < 0.1; returns index or 0xFFFFFFFF.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3145,55 +3127,55 @@
   },
   {
     "ea": "0x8ADF84",
-    "line": "lea     edx, [esp+140h+var_110]",
+    "line": "lea     edx, [esp+140h+currentPos]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x8ADF88",
-    "line": "push    edx",
+    "line": "push    edx; currentPos",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8ADF89",
-    "line": "lea     eax, [esp+144h+var_F0]",
+    "line": "lea     eax, [esp+144h+targetPos]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x8ADF8D",
-    "line": "push    eax",
+    "line": "push    eax; targetPos",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8ADF8E",
-    "line": "push    edi",
+    "line": "push    edi; collector",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8ADF8F",
-    "line": "lea     ecx, [esp+14Ch+var_A0]",
+    "line": "lea     ecx, [esp+14Ch+moveDir]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x8ADF96",
-    "line": "push    ecx",
+    "line": "push    ecx; moveVec",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8ADF97",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8ADF99",
-    "line": "call    sub_8AC530",
+    "line": "call    hkpCharacterProxy_ComputeCastMoveFraction; TES4 authoritative: after a new cast hit, computes remaining time/move fraction from the first collector hit and blends the cast endpoint toward the hit point.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3205,7 +3187,7 @@
   },
   {
     "ea": "0x8ADFA2",
-    "line": "movaps  xmm1, [esp+140h+var_A0]",
+    "line": "movaps  xmm1, [esp+140h+moveDir]",
     "mnemonic": "movaps",
     "size": 8
   },
@@ -3595,7 +3577,7 @@
   },
   {
     "ea": "0x8AE081",
-    "line": "lea     edx, [esp+144h+var_110]",
+    "line": "lea     edx, [esp+144h+currentPos]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3613,7 +3595,7 @@
   },
   {
     "ea": "0x8AE08A",
-    "line": "call    sub_8ABAC0",
+    "line": "call    sub_8ABAC0; Low-level position writer: stores target at object+0xA0 and updates Havok transform when shape data exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3745,13 +3727,13 @@
   },
   {
     "ea": "0x8AE0DA",
-    "line": "movaps  xmm1, [esp+140h+var_A0]",
+    "line": "movaps  xmm1, [esp+140h+moveDir]",
     "mnemonic": "movaps",
     "size": 8
   },
   {
     "ea": "0x8AE0E2",
-    "line": "movaps  xmm0, [esp+140h+var_110]",
+    "line": "movaps  xmm0, [esp+140h+currentPos]",
     "mnemonic": "movaps",
     "size": 5
   },
@@ -3775,7 +3757,7 @@
   },
   {
     "ea": "0x8AE0F5",
-    "line": "movaps  [esp+140h+var_110], xmm0",
+    "line": "movaps  [esp+140h+currentPos], xmm0; Final low-level position advances by the solved constrained motion vector; no separate ledge step-up/mantle helper is invoked here.",
     "mnemonic": "movaps",
     "size": 5
   },

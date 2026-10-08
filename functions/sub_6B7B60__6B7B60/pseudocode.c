@@ -1,13 +1,12 @@
-int __thiscall sub_6B7B60(_DWORD *this)
+// Modern post-load fixup walks loaded DialogueItems and resolves only each saved speaker FormID.
+void __thiscall Conversation::InitLoadGame(ConversationView *this)
 {
-  _DWORD *i; // esi
-  int result; // eax
+  ConversationView *i; // esi
 
-  for ( i = this; i; i = (_DWORD *)i[1] )
+  for ( i = this; i; i = (ConversationView *)i->nextItemNode ) /*0x6b7b65*/
   {
-    if ( !i[1] && !*i )
-      break;
-    result = sub_6B7BB0((_DWORD *)*i);
+    if ( !i->nextItemNode && !i->firstItem ) /*0x6b7b6d*/
+      break; /*0x6b7b70*/
+    DialogueItem::InitLoadGame(i->firstItem); /*0x6b7b74*/
   }
-  return result;
 }

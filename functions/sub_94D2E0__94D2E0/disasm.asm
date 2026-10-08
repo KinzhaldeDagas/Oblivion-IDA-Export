@@ -29,7 +29,7 @@
 0x94D33F: push    eax
 0x94D340: lea     ecx, [esp+78h+var_50]
 0x94D344: movaps  [esp+78h+var_50], xmm2
-0x94D349: call    sub_88FE00
+0x94D349: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x94D34E: mov     ecx, [esp+70h+var_54]
 0x94D352: movaps  xmm1, [esp+70h+var_50]
 0x94D357: movaps  xmm0, xmmword ptr [esi+80h]
@@ -74,7 +74,7 @@
 0x94D3D1: subps   xmm0, xmm1
 0x94D3D4: lea     ecx, [esp+78h+var_40]
 0x94D3D8: movaps  [esp+78h+var_40], xmm0
-0x94D3DD: call    sub_88FE00
+0x94D3DD: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x94D3E2: movaps  xmm0, [esp+70h+var_40]
 0x94D3E7: movaps  xmm1, xmmword ptr [esi+80h]
 0x94D3EE: mov     eax, [esp+70h+var_58]

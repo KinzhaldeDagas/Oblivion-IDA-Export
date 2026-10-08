@@ -1,23 +1,23 @@
 char __thiscall sub_7571B0(int *this, int a2)
 {
   int v2; // edi
-  int v4; // eax
+  NiRTTI *v4; // eax
 
-  v2 = a2;
-  if ( !sub_75E600(this, a2) )
-    return 0;
-  if ( !NiTMap_GetAt((_DWORD *)(v2 + 0xD4), *(this + 0x10), &a2) )
-    return 0;
-  if ( !a2 )
-    return 0;
-  v4 = (*(int (__thiscall **)(int))(*(_DWORD *)a2 + 4))(a2);
-  if ( !v4 )
-    return 0;
-  while ( (char *)v4 != dword_B40C3C )
+  v2 = a2; /*0x7571b2*/
+  if ( !sub_75E600(this, a2) ) /*0x7571b9*/
+    return 0; /*0x7571b9*/
+  if ( !NiTMap_GetAt((_DWORD *)(v2 + 0xD4), *(this + 0x10), &a2) ) /*0x7571d1*/
+    return 0; /*0x7571d1*/
+  if ( !a2 ) /*0x7571e0*/
+    return 0; /*0x7571e0*/
+  v4 = (NiRTTI *)(*(int (__thiscall **)(int))(*(_DWORD *)a2 + 4))(a2); /*0x7571e7*/
+  if ( !v4 ) /*0x7571eb*/
+    return 0; /*0x7571fe*/
+  while ( v4 != &stru_B40C3C ) /*0x7571f5*/
   {
-    v4 = *(_DWORD *)(v4 + 4);
-    if ( !v4 )
-      return 0;
+    v4 = v4->parent; /*0x7571f7*/
+    if ( !v4 ) /*0x7571fc*/
+      return 0; /*0x7571fc*/
   }
-  return 1;
+  return 1; /*0x7571fe*/
 }

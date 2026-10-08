@@ -24,7 +24,7 @@
 0x51023A: push    edx; a3
 0x51023B: push    ecx; a2
 0x51023C: push    eax; a1
-0x51023D: call    Script_ExtractArgs
+0x51023D: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x510242: add     esp, 20h
 0x510245: test    al, al
 0x510247: jz      loc_51045A
@@ -35,7 +35,7 @@
 0x51025A: jnz     short loc_5102A3
 0x51025C: push    0
 0x51025E: mov     ebx, 1
-0x510263: call    sub_7B4890
+0x510263: call    BSShader_SetRenderMode; Update the global renderer mode used by mode-5 shadow-map production and restore.
 0x510268: lea     eax, [esp+21Ch+Str2]
 0x51026C: add     esp, 4
 0x51026F: lea     edx, [eax+1]
@@ -58,19 +58,19 @@
 0x5102A5: jnz     short loc_5102B7
 0x5102A7: mov     ebx, 1
 0x5102AC: push    ebx
-0x5102AD: call    sub_7B4890
+0x5102AD: call    BSShader_SetRenderMode; Update the global renderer mode used by mode-5 shadow-map production and restore.
 0x5102B2: jmp     loc_51041D
 0x5102B7: cmp     al, 33h ; '3'
 0x5102B9: jnz     short loc_5102CB
 0x5102BB: push    esi
 0x5102BC: mov     ebx, 1
-0x5102C1: call    sub_7B4890
+0x5102C1: call    BSShader_SetRenderMode; Update the global renderer mode used by mode-5 shadow-map production and restore.
 0x5102C6: jmp     loc_51041D
 0x5102CB: cmp     al, 34h ; '4'
 0x5102CD: jnz     short loc_510315
 0x5102CF: push    3
 0x5102D1: mov     ebx, 1
-0x5102D6: call    sub_7B4890
+0x5102D6: call    BSShader_SetRenderMode; Update the global renderer mode used by mode-5 shadow-map production and restore.
 0x5102DB: lea     eax, [esp+21Ch+Str2]
 0x5102DF: add     esp, 4
 0x5102E2: lea     edx, [eax+1]
@@ -93,7 +93,7 @@
 0x510317: jnz     short loc_51032A
 0x510319: push    4
 0x51031B: mov     ebx, 1
-0x510320: call    sub_7B4890
+0x510320: call    BSShader_SetRenderMode; Update the global renderer mode used by mode-5 shadow-map production and restore.
 0x510325: jmp     loc_51041D
 0x51032A: push    esi; MaxCount
 0x51032B: lea     edx, [esp+21Ch+Str2]
@@ -103,7 +103,7 @@
 0x51033A: add     esp, 0Ch
 0x51033D: test    eax, eax
 0x51033F: jnz     short loc_510374
-0x510341: call    sub_405A80
+0x510341: call    BSShaderManager_IsShadowMappingReady; [Verified] Returns true only when BSShaderPackageVersion (RendererGlobalState+0xAF) >= 3 and BSShaderFeatureMask (RendererGlobalState+0xA7) contains native shadow-map bit 0x10. The version comparison independently corroborates the selector field read by GetShaderProgramPackageIndex.
 0x510346: test    al, al
 0x510348: mov     eax, ds:0B42F40h
 0x51034D: jnz     short loc_510354
@@ -143,13 +143,13 @@
 0x5103C3: mov     eax, ds:0B333A0h
 0x5103C8: mov     byte ptr ds:0B06CBCh, 1
 0x5103CF: mov     ecx, [eax+8]
-0x5103D2: call    ShadowCanopyPass
+0x5103D2: call    ShadowCanopyPass; Retail canopy shadow-map pass; separate from per-source ShadowSceneLight mode-5 maps.
 0x5103D7: movzx   ecx, word ptr ds:0B42F40h
 0x5103DE: or      ecx, 20h
 0x5103E1: jmp     short loc_510452
 0x5103E3: push    0
 0x5103E5: mov     ds:0B06CBCh, bl
-0x5103EB: call    SetTextureCanopyShadowMap
+0x5103EB: call    SetTextureCanopyShadowMap; Install/own the current canopy shadow-map texture at global 0x00B4310C.
 0x5103F0: mov     edx, ds:0B42F40h
 0x5103F6: add     esp, 4
 0x5103F9: and     edx, 0FFDFh

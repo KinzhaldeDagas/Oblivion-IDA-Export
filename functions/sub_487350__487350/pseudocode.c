@@ -1,27 +1,31 @@
-_DWORD *__thiscall sub_487350(_DWORD *this, int a2, int a3)
+// Walks ExtraContainerChanges_Data.objList (+0x00), finds the EntryData whose type/form is at +0x08, and adds countDelta to EntryData.countDelta (+0x04). Return-register contents are incidental; both native callers ignore them.
+void __thiscall ExtraContainerChanges_AdjustCountForForm(
+        ExtraContainerChanges_Data *this,
+        TESForm *form,
+        int countDelta)
 {
-  _DWORD *result; // eax
+  tListEntryData *objList; // eax
   char v4; // dl
+  EntryData *data; // eax
 
-  result = (_DWORD *)*this;
-  v4 = 1;
-  if ( *this )
+  objList = this->objList; /*0x487350*/
+  v4 = 1; /*0x487354*/
+  if ( this->objList ) /*0x487350*/
   {
-    while ( v4 )
+    while ( v4 ) /*0x487362*/
     {
-      if ( *result && *(_DWORD *)(*result + 8) == a2 )
-        v4 = 0;
+      if ( objList->node.data && objList->node.data->type == form ) /*0x48736d*/
+        v4 = 0; /*0x48736f*/
       else
-        result = (_DWORD *)result[1];
-      if ( !result )
-        return result;
+        objList = (tListEntryData *)objList->node.next; /*0x487373*/
+      if ( !objList ) /*0x487378*/
+        return; /*0x487378*/
     }
-    if ( result )
+    if ( objList ) /*0x487380*/
     {
-      result = (_DWORD *)*result;
-      if ( result )
-        result[1] += a3;
+      data = objList->node.data; /*0x487382*/
+      if ( data ) /*0x487386*/
+        data->countDelta += countDelta; /*0x48738c*/
     }
   }
-  return result;
 }

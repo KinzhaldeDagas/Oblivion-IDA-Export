@@ -13,21 +13,21 @@
 0x6156E1: mov     ecx, ebx
 0x6156E3: call    edx
 0x6156E5: mov     ecx, eax
-0x6156E7: call    sub_6135F0
+0x6156E7: call    CombatController_GetCurrentTarget
 0x6156EC: mov     esi, eax
 0x6156EE: test    esi, esi
 0x6156F0: jz      short loc_61572B
-0x6156F2: push    0
-0x6156F4: push    esi
-0x6156F5: push    ebx
-0x6156F6: call    sub_6131D0
+0x6156F2: push    0; outAngleDegrees
+0x6156F4: push    esi; target
+0x6156F5: push    ebx; actor
+0x6156F6: call    Actor_IsFacingReferenceWithinCombatAngle; Computes the absolute XY heading difference from actor to target, normalizes across the 360-degree boundary, optionally returns degrees, and tests it against the combat-facing threshold game setting.
 0x6156FB: add     esp, 0Ch
 0x6156FE: test    al, al
 0x615700: jz      short loc_615723
-0x615702: push    1; a4
-0x615704: push    esi; a3
-0x615705: push    ebx; a2
-0x615706: call    TESObjectREFR_GetDistanceBetween?
+0x615702: push    1; useActorProjection
+0x615704: push    esi; to
+0x615705: push    ebx; from
+0x615706: call    TESObjectREFR_GetSurfaceDistance; Three-argument cdecl routine: returns float surface distance from 'from' to 'to'. All 24 callers push exactly from, to, and useActorProjection then reclaim 0x0C. The prior EDI register argument, fourth stack byte, and double return were analysis pollution.
 0x61570B: fld     [esp+20h+arg_4]
 0x61570F: fcompp
 0x615711: add     esp, 0Ch
@@ -48,11 +48,11 @@
 0x615731: push    ebp
 0x615732: push    0; a2
 0x615734: fstp    [esp+1Ch+var_C]
-0x615738: mov     ecx, offset ActorProcessManager_ptr; this
+0x615738: mov     ecx, (offset qword_B3BB2C+1D4h); this
 0x61573D: mov     [esp+1Ch+a2], 0
-0x615745: call    sub_673A50
+0x615745: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x61574A: mov     ecx, eax; this
-0x61574C: call    sub_7616D0
+0x61574C: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x615751: mov     ebp, eax
 0x615753: test    ebp, ebp
 0x615755: jz      loc_6158DC
@@ -89,10 +89,10 @@
 0x6157B7: call    edx
 0x6157B9: test    eax, eax
 0x6157BB: jz      short loc_615810
-0x6157BD: push    0; a4
-0x6157BF: push    esi; a3
-0x6157C0: push    ebx; a2
-0x6157C1: call    TESObjectREFR_GetDistanceBetween?
+0x6157BD: push    0; useActorProjection
+0x6157BF: push    esi; to
+0x6157C0: push    ebx; from
+0x6157C1: call    TESObjectREFR_GetSurfaceDistance; Three-argument cdecl routine: returns float surface distance from 'from' to 'to'. All 24 callers push exactly from, to, and useActorProjection then reclaim 0x0C. The prior EDI register argument, fourth stack byte, and double return were analysis pollution.
 0x6157C6: fld     [esp+28h+arg_4]
 0x6157CA: fcompp
 0x6157CC: add     esp, 0Ch
@@ -100,16 +100,16 @@
 0x6157D1: test    ah, 1
 0x6157D4: jnz     short loc_615810
 0x6157D6: fld     dword ptr ds:0A32048h
-0x6157DC: lea     eax, [esp+1Ch+var_8]
-0x6157E0: push    eax
-0x6157E1: fstp    [esp+20h+var_8]
-0x6157E5: push    esi
-0x6157E6: push    ebx
-0x6157E7: call    sub_6131D0
+0x6157DC: lea     eax, [esp+1Ch+outAngleDegrees]
+0x6157E0: push    eax; outAngleDegrees
+0x6157E1: fstp    [esp+20h+outAngleDegrees]
+0x6157E5: push    esi; target
+0x6157E6: push    ebx; actor
+0x6157E7: call    Actor_IsFacingReferenceWithinCombatAngle; Computes the absolute XY heading difference from actor to target, normalizes across the 360-degree boundary, optionally returns degrees, and tests it against the combat-facing threshold game setting.
 0x6157EC: add     esp, 0Ch
 0x6157EF: test    al, al
 0x6157F1: jz      short loc_615810
-0x6157F3: fld     [esp+1Ch+var_8]
+0x6157F3: fld     [esp+1Ch+outAngleDegrees]
 0x6157F7: fld     [esp+1Ch+var_C]
 0x6157FB: fcomp   st(1)
 0x6157FD: fnstsw  ax
@@ -120,14 +120,13 @@
 0x61580C: jmp     short loc_615810
 0x61580E: fstp    st
 0x615810: lea     ecx, [esi+44h]
-0x615813: call    GetExtraDataFollower
+0x615813: call    ExtraDataList_GetFollowerExtra; Returns ExtraFollower (type 0x23) itself, or null.
 0x615818: test    eax, eax
 0x61581A: jz      loc_6158D3
 0x615820: mov     edi, [eax+0Ch]; a1
 0x615823: test    edi, edi
 0x615825: jz      loc_6158D3
 0x61582B: jmp     short loc_615830
-0x61582D: align 10h
 0x615830: mov     esi, [edi]
 0x615832: test    esi, esi
 0x615834: jz      loc_6158D3
@@ -154,10 +153,10 @@
 0x61586F: call    eax
 0x615871: test    eax, eax
 0x615873: jz      short loc_6158C8
-0x615875: push    0; a4
-0x615877: push    esi; a3
-0x615878: push    ebx; a2
-0x615879: call    TESObjectREFR_GetDistanceBetween?
+0x615875: push    0; useActorProjection
+0x615877: push    esi; to
+0x615878: push    ebx; from
+0x615879: call    TESObjectREFR_GetSurfaceDistance; Three-argument cdecl routine: returns float surface distance from 'from' to 'to'. All 24 callers push exactly from, to, and useActorProjection then reclaim 0x0C. The prior EDI register argument, fourth stack byte, and double return were analysis pollution.
 0x61587E: fld     [esp+28h+arg_4]
 0x615882: fcompp
 0x615884: add     esp, 0Ch
@@ -165,16 +164,16 @@
 0x615889: test    ah, 1
 0x61588C: jnz     short loc_6158C8
 0x61588E: fld     dword ptr ds:0A32048h
-0x615894: lea     ecx, [esp+1Ch+var_8]
-0x615898: push    ecx
-0x615899: fstp    [esp+20h+var_8]
-0x61589D: push    esi
-0x61589E: push    ebx
-0x61589F: call    sub_6131D0
+0x615894: lea     ecx, [esp+1Ch+outAngleDegrees]
+0x615898: push    ecx; outAngleDegrees
+0x615899: fstp    [esp+20h+outAngleDegrees]
+0x61589D: push    esi; target
+0x61589E: push    ebx; actor
+0x61589F: call    Actor_IsFacingReferenceWithinCombatAngle; Computes the absolute XY heading difference from actor to target, normalizes across the 360-degree boundary, optionally returns degrees, and tests it against the combat-facing threshold game setting.
 0x6158A4: add     esp, 0Ch
 0x6158A7: test    al, al
 0x6158A9: jz      short loc_6158C8
-0x6158AB: fld     [esp+1Ch+var_8]
+0x6158AB: fld     [esp+1Ch+outAngleDegrees]
 0x6158AF: fld     [esp+1Ch+var_C]
 0x6158B3: fcomp   st(1)
 0x6158B5: fnstsw  ax
@@ -194,19 +193,19 @@
 0x6158E1: cmp     ebx, eax
 0x6158E3: pop     ebp
 0x6158E4: jz      short loc_615943
-0x6158E6: push    0; a4
-0x6158E8: push    eax; a3
-0x6158E9: push    ebx; a2
-0x6158EA: call    TESObjectREFR_GetDistanceBetween?
+0x6158E6: push    0; useActorProjection
+0x6158E8: push    eax; to
+0x6158E9: push    ebx; from
+0x6158EA: call    TESObjectREFR_GetSurfaceDistance; Three-argument cdecl routine: returns float surface distance from 'from' to 'to'. All 24 callers push exactly from, to, and useActorProjection then reclaim 0x0C. The prior EDI register argument, fourth stack byte, and double return were analysis pollution.
 0x6158EF: fstp    [esp+20h+var_4]
 0x6158F3: mov     eax, ds:0B333C4h
 0x6158F8: fld     dword ptr ds:0A32048h
-0x6158FE: lea     edx, [esp+20h+var_8]
-0x615902: fstp    [esp+20h+var_8]
-0x615906: push    edx
-0x615907: push    eax
-0x615908: push    ebx
-0x615909: call    sub_6131D0
+0x6158FE: lea     edx, [esp+20h+outAngleDegrees]
+0x615902: fstp    [esp+20h+outAngleDegrees]
+0x615906: push    edx; outAngleDegrees
+0x615907: push    eax; target
+0x615908: push    ebx; actor
+0x615909: call    Actor_IsFacingReferenceWithinCombatAngle; Computes the absolute XY heading difference from actor to target, normalizes across the 360-degree boundary, optionally returns degrees, and tests it against the combat-facing threshold game setting.
 0x61590E: fld     [esp+2Ch+var_4]
 0x615912: fld     [esp+2Ch+arg_4]
 0x615916: mov     cl, al
@@ -217,7 +216,7 @@
 0x615922: jnz     short loc_615943
 0x615924: test    cl, cl
 0x615926: jz      short loc_615943
-0x615928: fld     [esp+14h+var_8]
+0x615928: fld     [esp+14h+outAngleDegrees]
 0x61592C: fld     [esp+14h+var_C]
 0x615930: fcompp
 0x615932: fnstsw  ax
@@ -238,7 +237,7 @@
 0x615960: push    1; char
 0x615962: push    esi; int
 0x615963: push    1; int
-0x615965: call    sub_5F2820
+0x615965: call    Actor_LineOfSight; Oblivion actor line-of-sight query used by detection, combat reach, tactical refresh, and ray-cast script paths. Performs cell/world-space and Havok visibility tests and can report the viewed actor segment through the output parameter. Fallout corroborates the Actor::LineOfSight family name only.
 0x61596A: test    al, al
 0x61596C: jnz     short loc_615976
 0x61596E: mov     [esp+14h+a2], 0

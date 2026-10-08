@@ -2,10 +2,10 @@ int __thiscall TESObjectREF_GetTotalEntryCountForITem(TESObjectREFR *this, char 
 {
   int ***ContainerExtraDataForRef; // eax
 
-  if ( !TESObjectREFR_GetContainer(this) )
-    return 0xFFFFFFFF;
-  if ( a2 )
-    return ContainerExtraData_GetCount(*(int ****)(TESDataHandler + 0xCDC));
-  ContainerExtraDataForRef = (int ***)ContainerExtraData_GetContainerExtraDataForRef(this);
-  return ContainerExtraData_GetCount(ContainerExtraDataForRef);
+  if ( !TESObjectREFR_GetContainer(this) ) /*0x4d8953*/
+    return 0xFFFFFFFF; /*0x4d8991*/
+  if ( a2 ) /*0x4d8964*/
+    return ContainerExtraData_GetCount((int ***)g_TESDataHandler->containerExtraData); /*0x4d8973*/
+  ContainerExtraDataForRef = (int ***)ContainerExtraData_GetContainerExtraDataForRef(this); /*0x4d897e*/
+  return ContainerExtraData_GetCount(ContainerExtraDataForRef); /*0x4d8978*/
 }

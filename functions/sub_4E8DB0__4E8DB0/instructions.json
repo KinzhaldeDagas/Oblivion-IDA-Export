@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E8DB0",
-    "line": "sub     esp, 10h",
+    "line": "sub     esp, 10h; Verified: scans one TESConnectedPoint list, computes Euclidean distance from each node's NiPoint3 at +0x14, returns the nearest node, and writes the distance. TESRoad_FindNearestConnectedPointInNearbyCells performs the separate cross-cell search/cutoff.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x4E8DBF",
-    "line": "mov     esi, [esp+18h+arg_4]",
+    "line": "mov     esi, [esp+18h+points]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x4E8DCE",
-    "line": "mov     ebx, [esp+1Ch+arg_0]",
+    "line": "mov     ebx, [esp+1Ch+position]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -103,13 +103,13 @@
   },
   {
     "ea": "0x4E8DE4",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E8DE6",
-    "line": "call    sub_4BEF40",
+    "line": "call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,13 +235,13 @@
   },
   {
     "ea": "0x4E8E23",
-    "line": "fstp    [esp+20h+arg_4]",
+    "line": "fstp    [esp+20h+points]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4E8E27",
-    "line": "fld     [esp+20h+arg_4]",
+    "line": "fld     [esp+20h+points]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -253,25 +253,25 @@
   },
   {
     "ea": "0x4E8E30",
-    "line": "fstp    [esp+20h+arg_4]",
+    "line": "fstp    [esp+20h+points]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4E8E34",
-    "line": "fld     [esp+20h+arg_4]",
+    "line": "fld     [esp+20h+points]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x4E8E38",
-    "line": "fstp    [esp+20h+arg_4]",
+    "line": "fstp    [esp+20h+points]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4E8E3C",
-    "line": "fld     [esp+20h+arg_4]",
+    "line": "fld     [esp+20h+points]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x4E8E64",
-    "line": "mov     eax, [esp+18h+arg_8]",
+    "line": "mov     eax, [esp+18h+outDistance]",
     "mnemonic": "mov",
     "size": 4
   },

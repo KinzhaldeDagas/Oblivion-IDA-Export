@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 2,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "TESAnimGroup::TESAnimGroup(void)",
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x51AB30",
+      "0x51ABC4"
+    ],
+    [
+      "0x9CA4B0",
+      "0x9CA4D3"
+    ]
+  ],
+  "chunks_sha256": "6a8c23aa1c430e077f4fcb765285dbd9733f75ebc8281123639a7e4565822314",
+  "comment_regular": "Constructs ref-counted TESAnimGroup state: encoded key/required-note array, zero morph and blend bytes, zero movement vector, and empty parsed-event count/pointer at +0x24/+0x28.",
+  "comment_repeatable": "Constructs ref-counted TESAnimGroup state: encoded key/required-note array, zero morph and blend bytes, zero movement vector, and empty parsed-event count/pointer at +0x24/+0x28.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
+  "display_name": "TESAnimGroup_ctor",
   "end_ea": "0x51ABC4",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
-  "name": "??0TESAnimGroup@@QAE@XZ",
+  "name": "TESAnimGroup_ctor",
   "segment": ".text",
   "sha256": "e527e0d3c6f3150612c02319dc3b612b16f535aabb0b1e3ed9570decfe2bca16",
   "size": 148,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x51AB30",
-  "type": "TESAnimGroup *__thiscall(TESAnimGroup *this, __int16)",
-  "xrefs_from_count": 48,
+  "total_chunk_size": 183,
+  "type": "CAS_TESAnimGroup_Decoded *__thiscall(CAS_TESAnimGroup_Decoded *this, unsigned __int16 groupKey)",
+  "xrefs_from_count": 59,
   "xrefs_to_count": 2
 }

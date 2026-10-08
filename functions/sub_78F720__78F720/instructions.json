@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x78F720",
-    "line": "cmp     dword ptr [ecx+18h], 0",
+    "line": "cmp     dword ptr [ecx+18h], 0; CBranch::FillBranch. Finds parent vertex segment whose running-length interval contains child growth distance and returns segment index plus interpolation percent.",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x78F72C",
-    "line": "fld     [esp+arg_4]",
+    "line": "fld     [esp+childDistanceAlongBranch]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x78F731",
-    "line": "mov     ebx, [esp+4+arg_0]",
+    "line": "mov     ebx, [esp+4+outPlacement]",
     "mnemonic": "mov",
     "size": 4
   },

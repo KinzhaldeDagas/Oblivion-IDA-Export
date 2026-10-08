@@ -16,8 +16,8 @@
 0x98EEE7: pop     ecx
 0x98EEE8: cmp     eax, edi
 0x98EEEA: jz      loc_98F0F0
-0x98EEF0: mov     dword_BAAAC0, eax
-0x98EEF5: mov     uNumber, esi
+0x98EEF0: mov     dword ptr unk_BAAAC0, eax
+0x98EEF5: mov     ds:0BAAAA0h, esi
 0x98EEFB: lea     ecx, [eax+500h]
 0x98EF01: jmp     short loc_98EF2C
 0x98EF03: mov     byte ptr [eax+4], 0
@@ -28,7 +28,7 @@
 0x98EF15: mov     byte ptr [eax+25h], 0Ah
 0x98EF19: mov     byte ptr [eax+26h], 0Ah
 0x98EF1D: add     eax, 28h ; '('
-0x98EF20: mov     ecx, dword_BAAAC0
+0x98EF20: mov     ecx, dword ptr unk_BAAAC0
 0x98EF26: add     ecx, 500h
 0x98EF2C: cmp     eax, ecx
 0x98EF2E: jb      short loc_98EF03
@@ -57,7 +57,7 @@
 0x98EF6D: jz      short loc_98EFBC
 0x98EF6F: lea     ecx, ds:0BAAAC0h[esi*4]
 0x98EF76: mov     [ecx], eax
-0x98EF78: add     uNumber, 20h ; ' '
+0x98EF78: add     dword ptr ds:0BAAAA0h, 20h ; ' '
 0x98EF7F: lea     edx, [eax+500h]
 0x98EF85: jmp     short loc_98EFAD
 0x98EF87: mov     byte ptr [eax+4], 0
@@ -73,10 +73,10 @@
 0x98EFAD: cmp     eax, edx
 0x98EFAF: jb      short loc_98EF87
 0x98EFB1: inc     esi
-0x98EFB2: cmp     uNumber, edi
+0x98EFB2: cmp     ds:0BAAAA0h, edi
 0x98EFB8: jl      short loc_98EF60
 0x98EFBA: jmp     short loc_98EFC2
-0x98EFBC: mov     edi, uNumber
+0x98EFBC: mov     edi, ds:0BAAAA0h
 0x98EFC2: and     [ebp+var_20], 0
 0x98EFC6: test    edi, edi
 0x98EFC8: jle     short loc_98F037
@@ -100,7 +100,7 @@
 0x98EFF3: sar     eax, 5
 0x98EFF6: and     esi, 1Fh
 0x98EFF9: imul    esi, 28h ; '('
-0x98EFFC: add     esi, dword_BAAAC0[eax*4]
+0x98EFFC: add     esi, dword ptr unk_BAAAC0[eax*4]
 0x98F003: mov     eax, [ebp+var_1C]
 0x98F006: mov     eax, [eax]
 0x98F008: mov     [esi], eax
@@ -123,7 +123,7 @@
 0x98F037: xor     ebx, ebx
 0x98F039: mov     esi, ebx
 0x98F03B: imul    esi, 28h ; '('
-0x98F03E: add     esi, dword_BAAAC0
+0x98F03E: add     esi, dword ptr unk_BAAAC0
 0x98F044: mov     eax, [esi]
 0x98F046: cmp     eax, 0FFFFFFFFh
 0x98F049: jz      short loc_98F056
@@ -177,7 +177,7 @@
 0x98F0C8: inc     ebx
 0x98F0C9: cmp     ebx, 3
 0x98F0CC: jl      loc_98F039
-0x98F0D2: push    uNumber; uNumber
+0x98F0D2: push    dword ptr ds:0BAAAA0h; uNumber
 0x98F0D8: call    ds:SetHandleCount
 0x98F0DE: xor     eax, eax
 0x98F0E0: jmp     short loc_98F0F3

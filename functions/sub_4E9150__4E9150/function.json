@@ -1,19 +1,32 @@
 {
-  "callees_count": 50,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 12,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x4E9150",
+      "0x4E94B8"
+    ]
+  ],
+  "chunks_sha256": "acf4243928fed30ed1d926f36199eb265214f680fe62222b41a9aa5985094d29",
+  "comment_regular": "Verified: this is a TESRoad method; the TravelPath caller obtains it from TESWorldSpace+0x54. Searches the road's per-cell connected-point map starting at the endpoint's cell, expands through neighboring cell buckets, and returns a nearest point from the first populated ring (bounded by 20 expansion steps). dbl_A3A5B0 is only an FLT_MAX sentinel. The separate fRoadPointReachDistance setting (default 500) is not used as this search's threshold.",
+  "comment_repeatable": "Verified: this is a TESRoad method; the TravelPath caller obtains it from TESWorldSpace+0x54. Searches the road's per-cell connected-point map starting at the endpoint's cell, expands through neighboring cell buckets, and returns a nearest point from the first populated ring (bounded by 20 expansion steps). dbl_A3A5B0 is only an FLT_MAX sentinel. The separate fRoadPointReachDistance setting (default 500) is not used as this search's threshold.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4E9150",
+  "display_name": "TESRoad_FindNearestConnectedPointInNearbyCells",
   "end_ea": "0x4E94B8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4E9150",
+  "name": "TESRoad_FindNearestConnectedPointInNearbyCells",
   "segment": ".text",
   "sha256": "acf4243928fed30ed1d926f36199eb265214f680fe62222b41a9aa5985094d29",
   "size": 872,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E9150",
-  "type": "int __thiscall(int *this, int **)",
+  "total_chunk_size": 872,
+  "type": "TESConnectedPoint *__thiscall(TESRoad *this, const NiPoint3 *position)",
   "xrefs_from_count": 336,
   "xrefs_to_count": 2
 }

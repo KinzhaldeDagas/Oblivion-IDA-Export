@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5AE980",
-    "line": "sub     esp, 130h",
+    "line": "sub     esp, 130h; Destroys and rebuilds LoadgameMenu rows. CharacterSpecificSaves v4 uses it for deferred character opening and Back, with focus cleared first; each enumeration recomputes exact-name counts and ordering.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x5AE9C2",
-    "line": "call    NiTPointerList__FreeAllNodes",
+    "line": "call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x5AE9D8",
-    "line": "call    sub_45D450",
+    "line": "call    TESSaveLoadGame_EnumerateSaveFiles; CharacterSpecificSaves v4 hook: after native enumeration, overview reorders only saveFile payloads A-Z by exact character name (newest first within name); detail filters exact name and deterministically sorts newest-first.",
     "mnemonic": "call",
     "size": 5
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x5AEA12",
-    "line": "call    sub_5AE6D0",
+    "line": "call    LoadgameMenu_AddSaveRow; CharacterSpecificSaves v9 wraps native row creation after overview compaction. It changes user3 to Name (N) and centers only the overview label while preserving user0 listindex, user2 save name, installed fonts, focus boxes, scrolling, and preview behavior.",
     "mnemonic": "call",
     "size": 5
   },
@@ -328,12 +328,6 @@
     "line": "jmp     short loc_5AEA3F",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x5AEA19",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
   },
   {
     "ea": "0x5AEA20",
@@ -391,7 +385,7 @@
   },
   {
     "ea": "0x5AEA30",
-    "line": "call    sub_5AE6D0",
+    "line": "call    LoadgameMenu_AddSaveRow; CharacterSpecificSaves v4 AddSaveRow hook emits one overview row per exact character name and labels it Name (total save count); duplicate name saves are suppressed as rows but retained for the detail view.",
     "mnemonic": "call",
     "size": 5
   },

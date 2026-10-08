@@ -30,21 +30,21 @@ int __usercall EffectItem_Initialize_::AllocateSCIT@<eax>(
   int v27; // ecx
   BSStringT v29; // [esp-8h] [ebp-8h] BYREF
 
-  __asm { fstp    st }
-  v26 = FormHeapAlloc(0x18u);
-  if ( v26 == a1 )
+  __asm { fstp    st } /*0x4147fe*/
+  v26 = FormHeapAlloc(0x18u); /*0x414800*/
+  if ( v26 == a1 ) /*0x41480a*/
   {
-    v26 = 0;
+    v26 = 0; /*0x414819*/
   }
   else
   {
-    *(_DWORD *)(v26 + 8) = a1;
-    *(_WORD *)(v26 + 0xC) = a1;
-    *(_WORD *)(v26 + 0xE) = a1;
+    *(_DWORD *)(v26 + 8) = a1; /*0x41480c*/
+    *(_WORD *)(v26 + 0xC) = a1; /*0x41480f*/
+    *(_WORD *)(v26 + 0xE) = a1; /*0x414813*/
   }
-  v27 = a2[7];
-  a2[6] = v26;
-  EffectSetting_GetName(v27, &v29);
-  EffectItem_SetSCITName(a2, v29.m_data, *(int *)&v29.m_dataLen);
+  v27 = a2[7]; /*0x41481b*/
+  a2[6] = v26; /*0x414828*/
+  EffectSetting_GetName(v27, &v29); /*0x41482b*/
+  EffectItem_SetSCITName(a2, v29.m_data, *(int *)&v29.m_dataLen); /*0x414832*/
   return EffectItem_Initialize_::InitSCIT_School(a1, (int)a2, a3);
 }

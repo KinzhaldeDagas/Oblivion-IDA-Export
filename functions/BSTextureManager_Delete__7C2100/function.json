@@ -1,19 +1,36 @@
 {
-  "callees_count": 51,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 4,
+  "chunks": [
+    [
+      "0x7C2100",
+      "0x7C23B2"
+    ],
+    [
+      "0x9CE270",
+      "0x9CE2CA"
+    ]
+  ],
+  "chunks_sha256": "aef561ab7e06b98a410a121b6c4b5343d55864679a2832c720f06b0a3a826496",
+  "comment_regular": "MoonSugarEffect decode: BSTextureManager destructor/delete path. Releases available/in-use rendered textures, shadow maps, cached buffers, and manager lists.",
+  "comment_repeatable": "MoonSugarEffect decode: BSTextureManager destructor/delete path. Releases available/in-use rendered textures, shadow maps, cached buffers, and manager lists.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
   "display_name": "BSTextureManager_Delete",
   "end_ea": "0x7C23B2",
+  "evidence_confidence": "Unknown",
   "flags": 21572,
   "has_pseudocode": true,
   "name": "BSTextureManager_Delete",
   "segment": ".text",
   "sha256": "ca5d77072bc7d0c50470a56b1574377dd95e8ea54235c859ad09e38e43b83146",
   "size": 690,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7C2100",
+  "total_chunk_size": 780,
   "type": "void __thiscall(BSTextureManager *this)",
-  "xrefs_from_count": 318,
+  "xrefs_from_count": 344,
   "xrefs_to_count": 2
 }

@@ -1,89 +1,87 @@
-void __usercall sub_5C16E0(char bp0@<bpl>, TESForm *a1, char a3, char a4)
+void __usercall sub_5C16E0(double st6_0@<st1>, TESForm *a1, char a3, char a4)
 {
-  double v5; // st6
   CHAR *NameForForm; // eax
-  int v7; // edi
-  void *v8; // eax
-  CHAR *v9; // eax
+  const char *v6; // edi
+  void *v7; // eax
+  CHAR *v8; // eax
   _DWORD *OpenMenuTile; // eax
   int ParentMenu; // edi
+  CHAR *v11; // [esp+4h] [ebp-11Ch]
   CHAR *v12; // [esp+4h] [ebp-11Ch]
-  CHAR *v13; // [esp+4h] [ebp-11Ch]
-  int v14; // [esp+8h] [ebp-118h]
+  const char *value; // [esp+8h] [ebp-118h]
+  const char *v14; // [esp+8h] [ebp-118h]
   int v15; // [esp+8h] [ebp-118h]
-  int v16; // [esp+8h] [ebp-118h]
-  char v17[260]; // [esp+18h] [ebp-108h] BYREF
+  char v16[260]; // [esp+18h] [ebp-108h] BYREF
 
-  v17[0] = 0;
-  v5 = _memset(&v17[1], 0, 0x103);
-  if ( a3 && a1 )
+  memset(v16, 0, sizeof(v16)); /*0x5c1709*/
+  if ( a3 && a1 ) /*0x5c1726*/
   {
-    switch ( a1->member.type )
+    switch ( a1->member.type ) /*0x5c173f*/
     {
-      case kFormType_Book:
-      case kFormType_Misc:
-      case kFormType_SoulGem:
-      case kFormType_Key:
-      case kFormType_SigilStone:
+      case kFormType_Book: /*0x5c173f*/
+      case kFormType_Misc: /*0x5c173f*/
+      case kFormType_SoulGem: /*0x5c173f*/
+      case kFormType_Key: /*0x5c173f*/
+      case kFormType_SigilStone: /*0x5c173f*/
         break;
-      case kFormType_Ingredient:
-        v14 = dword_B38BA0;
-        NameForForm = TESFullName_GetNameForForm(a1);
-        _sprintf(v17, "%s %s", NameForForm, v14);
-        break;
-      case kFormType_Weapon:
-        if ( !TESDataHandler_g_PlayerRef->vtbl->super.GetMountedHorse(TESDataHandler_g_PlayerRef)
-          || TESDataHandler_g_PlayerRef->vtbl->super.super.super.GetSleepState((TESObjectREFR *)TESDataHandler_g_PlayerRef) == kSitSleep_None )
+      case kFormType_Ingredient: /*0x5c173f*/
+        value = stru_B38BA0.value; /*0x5c174c*/
+        NameForForm = TESFullName_GetNameForForm(a1); /*0x5c174e*/
+        _sprintf(v16, "%s %s", NameForForm, value); /*0x5c1756*/
+        break; /*0x5c1756*/
+      case kFormType_Weapon: /*0x5c173f*/
+        if ( !reference->vtbl->super.GetMountedHorse(reference) /*0x5c17aa*/
+          || reference->vtbl->super.super.super.GetSleepState((TESObjectREFR *)reference) == kSitSleep_None )
         {
-          goto LABEL_9;
+          goto LABEL_9; /*0x5c17ae*/
         }
-        break;
-      case kFormType_AlchemyItem:
-        if ( !(unsigned __int8)EffectItemList_AllEffectsHostile(&a1[2].vtbl) )
+        break; /*0x5c17ae*/
+      case kFormType_AlchemyItem: /*0x5c173f*/
+        if ( !EffectItemList_AllEffectsHostile(&a1[2].vtbl) ) /*0x5c175e*/
         {
-          v15 = dword_B38BA0;
-          v12 = TESFullName_GetNameForForm(a1);
-          _sprintf(v17, "%s %s", v12, v15);
+          v14 = stru_B38BA0.value; /*0x5c1771*/
+          v11 = TESFullName_GetNameForForm(a1); /*0x5c177b*/
+          _sprintf(v16, "%s %s", v11, v14); /*0x5c1786*/
         }
-        break;
+        break; /*0x5c1786*/
       default:
 LABEL_9:
-        v7 = dword_B38B90;
-        if ( a4 != 1 )
-          v7 = dword_B38B98;
-        v8 = OblivionDynamicCast(
+        v6 = stru_B38B90.value; /*0x5c17b0*/
+        if ( a4 != 1 ) /*0x5c17be*/
+          v6 = stru_B38B98.value; /*0x5c17c0*/
+        v7 = OblivionDynamicCast( /*0x5c17d5*/
                a1,
                0,
                (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                &TESFullName `RTTI Type Descriptor',
                0);
-        if ( !v8 || (v9 = *((CHAR **)v8 + 1)) == 0 )
-          v9 = EmptyString;
-        _sprintf(v17, "%s %s", v9, v7);
-        break;
+        if ( !v7 || (v8 = *((CHAR **)v7 + 1)) == 0 ) /*0x5c17e6*/
+          v8 = EmptyString; /*0x5c17e8*/
+        _sprintf(v16, "%s %s", v8, v6); /*0x5c17f9*/
+        break; /*0x5c17f9*/
     }
-    if ( strlen(v17) )
-      QueueUIMessage(bp0, fConstant_2, v5, v17, fConstant_2, 0, 0);
+    if ( strlen(v16) ) /*0x5c1808*/
+      QueueUIMessage(fConstant_2, st6_0, v16, fConstant_2, 0, 0); /*0x5c182c*/
   }
   else
   {
-    OpenMenuTile = (_DWORD *)Menu_GetOpenMenuTile(0x416);
-    if ( OpenMenuTile )
+    OpenMenuTile = (_DWORD *)Menu_GetOpenMenuTile(0x416); /*0x5c1850*/
+    if ( OpenMenuTile ) /*0x5c185a*/
     {
-      ParentMenu = Tile_GetParentMenu(OpenMenuTile);
-      if ( ParentMenu )
+      ParentMenu = Tile_GetParentMenu(OpenMenuTile); /*0x5c1863*/
+      if ( ParentMenu ) /*0x5c1867*/
       {
-        if ( a1 )
+        if ( a1 ) /*0x5c186b*/
         {
-          v13 = TESFullName_GetNameForForm(a1);
-          _sprintf(v17, "%s", v13);
+          v12 = TESFullName_GetNameForForm(a1); /*0x5c1873*/
+          _sprintf(v16, "%s", v12); /*0x5c187e*/
         }
         else
         {
-          v16 = sub_5C1100() + 1;
-          _sprintf(v17, "%s %d", dword_B38B88, v16);
+          v15 = sub_5C1100() + 1; /*0x5c1888*/
+          _sprintf(v16, "%s %d", stru_B38B88.value, v15); /*0x5c1899*/
         }
-        Tile_SetString(*(_DWORD **)(ParentMenu + 0x28), (_DWORD *)0xFDE, v17);
+        Tile_SetString(*(_DWORD **)(ParentMenu + 0x28), (_DWORD *)0xFDE, v16); /*0x5c18ae*/
       }
     }
   }

@@ -33,7 +33,7 @@
 0x723833: push    ecx
 0x723834: mov     [esp+20h+var_4], 0FFFFFFFFh
 0x72383C: mov     dword ptr [edi+0ECh], offset ??_7?$NiTArray@I@@6B@; const NiTArray<uint>::`vftable'
-0x723846: call    FormHeapFree
+0x723846: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x72384B: add     esp, 4
 0x72384E: mov     ecx, edi; this
 0x723850: call    ??1NiBSPNode@@UAE@XZ; NiBSPNode::~NiBSPNode(void)
@@ -44,3 +44,22 @@
 0x723862: pop     esi
 0x723863: add     esp, 10h
 0x723866: retn
+0x7237A0: push    esi
+0x7237A1: mov     esi, ecx
+0x7237A3: mov     eax, [esi+0F0h]
+0x7237A9: push    eax
+0x7237AA: mov     dword ptr [esi+0ECh], offset ??_7?$NiTArray@I@@6B@; const NiTArray<uint>::`vftable'
+0x7237B4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x7237B9: add     esp, 4
+0x7237BC: mov     ecx, esi; this
+0x7237BE: pop     esi
+0x7237BF: jmp     ??1NiBSPNode@@UAE@XZ; NiBSPNode::~NiBSPNode(void)
+0x9CA450: mov     ecx, [ebp-10h]
+0x9CA453: jmp     loc_7237A0
+0x9CA458: mov     edx, [esp+arg_4]
+0x9CA45C: lea     eax, [edx-0Ch]
+0x9CA45F: mov     ecx, [edx-10h]
+0x9CA462: xor     ecx, eax
+0x9CA464: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA469: mov     eax, offset stru_AF2B50
+0x9CA46E: jmp     ___CxxFrameHandler3

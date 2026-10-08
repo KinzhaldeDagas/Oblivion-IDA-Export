@@ -36,3 +36,12 @@
 0x7120E2: pop     ebx
 0x7120E3: add     esp, 2Ch
 0x7120E6: retn    8
+0x9C9B70: lea     ecx, [ebp-2Ch]
+0x9C9B73: jmp     sub_7488B0
+0x9C9B78: mov     edx, [esp+arg_4]
+0x9C9B7C: lea     eax, [edx-28h]
+0x9C9B7F: mov     ecx, [edx-2Ch]
+0x9C9B82: xor     ecx, eax
+0x9C9B84: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C9B89: mov     eax, offset stru_AF2390
+0x9C9B8E: jmp     ___CxxFrameHandler3

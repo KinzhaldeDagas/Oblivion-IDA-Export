@@ -1,1 +1,1 @@
-BSDoorHavokController
+struct BSDoorHavokController;

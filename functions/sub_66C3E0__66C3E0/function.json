@@ -1,19 +1,32 @@
 {
-  "callees_count": 35,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 22,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x66C3E0",
+      "0x66C576"
+    ]
+  ],
+  "chunks_sha256": "50be51fd69ac4cb36a3aa284f72aed4fc0912192e1123cd1cbaac5625498745a",
+  "comment_regular": "Commit one Oblivion character level: apply three attributes, raise player level, consume the oldest all-skill attribute-bonus bucket, age specialization counters, subtract exactly g_iLevelUpSkillCount from majorSkillAdvances, clear all 21 per-skill advance counters, reset training use, and preserve any excess major progress/readiness.",
+  "comment_repeatable": "Commit one Oblivion character level: apply three attributes, raise player level, consume the oldest all-skill attribute-bonus bucket, age specialization counters, subtract exactly g_iLevelUpSkillCount from majorSkillAdvances, clear all 21 per-skill advance counters, reset training use, and preserve any excess major progress/readiness.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_66C3E0",
+  "display_name": "Player_CommitLevelUp",
   "end_ea": "0x66C576",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_66C3E0",
+  "name": "Player_CommitLevelUp",
   "segment": ".text",
   "sha256": "50be51fd69ac4cb36a3aa284f72aed4fc0912192e1123cd1cbaac5625498745a",
   "size": 406,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x66C3E0",
-  "type": "void __userpurge(int *@<ecx>, int@<edi>, unsigned int, unsigned int, unsigned int)",
+  "total_chunk_size": 406,
+  "type": "void __thiscall(PlayerCharacter *this, UInt32 attribute1, UInt32 attribute2, UInt32 attribute3)",
   "xrefs_from_count": 156,
   "xrefs_to_count": 1
 }

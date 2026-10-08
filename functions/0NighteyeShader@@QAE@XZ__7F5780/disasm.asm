@@ -1,4 +1,4 @@
-0x7F5780: push    0FFFFFFFFh
+0x7F5780: push    0FFFFFFFFh; MoonSugarEffect decode: NighteyeShader ctor owns one vertex program, one pixel program, one pass, and uses base source texture +0x7C.
 0x7F5782: push    offset ??0NighteyeShader@@QAE@XZ_SEH
 0x7F5787: mov     eax, large fs:0
 0x7F578D: push    eax
@@ -14,8 +14,8 @@
 0x7F579F: mov     large fs:0, eax
 0x7F57A5: mov     esi, ecx
 0x7F57A7: mov     [esp+24h+var_10], esi
-0x7F57AB: call    ??0BSImageSpaceShader@@QAE@XZ; BSImageSpaceShader::BSImageSpaceShader(void)
-0x7F57B0: push    offset sub_7016A0; a5
+0x7F57AB: call    ??0BSImageSpaceShader@@QAE@XZ; MoonSugarEffect decode: BSImageSpaceShader base ctor calls BSShader ctor, sets vtable, clears source texture +0x7C and scalar fields +0x80..+0x8C.
+0x7F57B0: push    offset NiPointerSlot_Release; a5
 0x7F57B5: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x7F57BA: push    1; size
 0x7F57BC: push    4; a2
@@ -25,7 +25,7 @@
 0x7F57C7: mov     [esp+38h+var_4], ebp
 0x7F57CB: mov     dword ptr [esi], offset ??_7NighteyeShader@@6B@; const NighteyeShader::`vftable'
 0x7F57D1: call    ArrayConstructor
-0x7F57D6: push    offset sub_7016A0; a5
+0x7F57D6: push    offset NiPointerSlot_Release; a5
 0x7F57DB: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x7F57E0: push    1; size
 0x7F57E2: push    4; a2
@@ -80,7 +80,7 @@
 0x7F5878: jz      short loc_7F588F
 0x7F587A: add     dword ptr [ecx+60h], 0FFFFFFFFh
 0x7F587E: jnz     short loc_7F5885
-0x7F5880: call    sub_7604D0
+0x7F5880: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x7F5885: mov     dword ptr [esi+9Ch], 0
 0x7F588F: mov     eax, esi
 0x7F5891: mov     byte ptr [esi+20h], 1
@@ -93,3 +93,36 @@
 0x7F58A4: pop     ebx
 0x7F58A5: add     esp, 10h
 0x7F58A8: retn
+0x9D0040: mov     ecx, [ebp-10h]; this
+0x9D0043: jmp     ??1BSImageSpaceShader@@UAE@XZ; MoonSugarEffect decode: BSImageSpaceShader dtor releases source BSRenderedTexture at +0x7C, clears +0x80..+0x8C, then calls BSShader dtor.
+0x9D0048: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9D004D: push    1; int
+0x9D004F: push    4; unsigned int
+0x9D0051: mov     eax, [ebp-10h]
+0x9D0054: add     eax, 90h
+0x9D0059: push    eax; void *
+0x9D005A: call    $LN21
+0x9D005F: retn
+0x9D0060: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9D0065: push    1; int
+0x9D0067: push    4; unsigned int
+0x9D0069: mov     eax, [ebp-10h]
+0x9D006C: add     eax, 94h ; '”'
+0x9D0071: push    eax; void *
+0x9D0072: call    $LN21
+0x9D0077: retn
+0x9D0078: push    offset sub_4027D0; void (__thiscall *)(void *)
+0x9D007D: push    1; int
+0x9D007F: push    4; unsigned int
+0x9D0081: mov     eax, [ebp-10h]
+0x9D0084: add     eax, 9Ch ; 'œ'
+0x9D0089: push    eax; void *
+0x9D008A: call    $LN21
+0x9D008F: retn
+0x9D0090: mov     edx, [esp+arg_4]
+0x9D0094: lea     eax, [edx-14h]
+0x9D0097: mov     ecx, [edx-18h]
+0x9D009A: xor     ecx, eax
+0x9D009C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D00A1: mov     eax, offset stru_AF8B0C
+0x9D00A6: jmp     ___CxxFrameHandler3

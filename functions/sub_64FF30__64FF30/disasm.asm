@@ -1,4 +1,4 @@
-0x64FF30: push    ecx
+0x64FF30: push    ecx; MiddleHighProcess dialogue-procedure update. It counts down the same DialoguePackage timer but has no audible/lip playback; until procedure completion it advances the conversation through DialoguePackage::Speak(false), then cleans both participants sharing the package.
 0x64FF31: push    ebx
 0x64FF32: push    ebp
 0x64FF33: push    esi
@@ -8,12 +8,12 @@
 0x64FF39: mov     edx, [eax+184h]
 0x64FF3F: call    edx
 0x64FF41: mov     esi, eax
-0x64FF43: mov     ecx, esi
-0x64FF45: call    sub_779480
-0x64FF4A: mov     ecx, esi
+0x64FF43: mov     ecx, esi; this
+0x64FF45: call    DialoguePackage__GetTarget; DialoguePackage participant accessor: returns the target at +0x60.
+0x64FF4A: mov     ecx, esi; this
 0x64FF4C: mov     [esp+14h+var_4], eax
-0x64FF50: call    NiDX9TextureData__GetLevels
-0x64FF55: mov     ebp, [esp+14h+arg_0]
+0x64FF50: call    DialoguePackage__GetSpeaker; DialoguePackage participant accessor: returns the original initiating speaker at +0x5C.
+0x64FF55: mov     ebp, [esp+14h+owner]
 0x64FF59: mov     ebx, eax
 0x64FF5B: cmp     ebp, ebx
 0x64FF5D: jnz     short loc_64FF63
@@ -42,11 +42,11 @@
 0x64FF96: mov     edx, [eax+30Ch]
 0x64FF9C: mov     ecx, ebp
 0x64FF9E: call    edx
-0x64FFA0: mov     ecx, ebx
-0x64FFA2: call    sub_5E0380
-0x64FFA7: mov     ecx, ebp
+0x64FFA0: mov     ecx, ebx; this
+0x64FFA2: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
+0x64FFA7: mov     ecx, ebp; this
 0x64FFA9: mov     esi, eax
-0x64FFAB: call    sub_5E0380
+0x64FFAB: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x64FFB0: cmp     esi, eax
 0x64FFB2: jnz     short loc_64FFC0
 0x64FFB4: mov     eax, [ebx]
@@ -64,9 +64,9 @@
 0x64FFD1: pop     ebx
 0x64FFD2: pop     ecx
 0x64FFD3: retn    4
-0x64FFD6: push    0; AnimSequenceSingle *
-0x64FFD8: mov     ecx, esi
-0x64FFDA: call    sub_6267A0
+0x64FFD6: push    0; startSpeech
+0x64FFD8: mov     ecx, esi; this
+0x64FFDA: call    DialoguePackage__Speak; MiddleHigh offscreen advance calls Speak(false). Starting from timer zero, successive updates select then consume responses without audio or text-duration delays and commit deferred item results rapidly. Exception: a package demoted with waitingForLip=true makes no cursor progress until it returns to HighProcess or is destroyed.
 0x64FFDF: pop     edi
 0x64FFE0: pop     esi
 0x64FFE1: pop     ebp

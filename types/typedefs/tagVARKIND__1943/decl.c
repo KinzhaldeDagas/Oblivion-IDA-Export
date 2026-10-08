@@ -1,1 +1,7 @@
-tagVARKIND
+enum tagVARKIND : __int32
+{
+VAR_PERINSTANCE = 0x0,
+VAR_STATIC = 0x1,
+VAR_CONST = 0x2,
+VAR_DISPATCH = 0x3,
+};

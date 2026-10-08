@@ -1,69 +1,70 @@
-void __stdcall sub_7D1C90(NiGeometry *a1, int a2)
+// Verified (Oblivion): shared by all four 1x/2x texture-effect pass handlers used from ShadowLight, Skin, and Hair shader setup. Reads TextureEffectData from shaderProperty+0xE0, copies current fill/edge RGBA into ShadowLight shader-map backing, copies U/V offsets and edge exponent, writes the second fVars component as 1.0, then updates separate per-geometry property-state constants.
+void __stdcall BSShaderProperty_SetupTextureEffectConstants(NiGeometry *geometry, BSShaderProperty *shaderProperty)
 {
-  int v2; // eax
-  volatile LONG *v3; // edi
-  float v4; // esi
+  OblivionTextureEffectData *textureEffectData; // eax
+  NiPropertyState *v3; // edi
+  BSShaderProperty *v4; // esi
   int v5; // ecx
-  int v6; // [esp+4h] [ebp-20h]
-  int v7; // [esp+8h] [ebp-1Ch]
-  int v8; // [esp+Ch] [ebp-18h]
-  int v9; // [esp+18h] [ebp-Ch]
-  float v10; // [esp+28h] [ebp+4h]
+  float v6; // [esp+4h] [ebp-20h]
+  float v7; // [esp+8h] [ebp-1Ch]
+  float v8; // [esp+Ch] [ebp-18h]
+  float v9; // [esp+18h] [ebp-Ch]
+  float geometrya; // [esp+28h] [ebp+4h]
 
-  if ( *(float *)&a2 != 0.0 )
+  if ( *(float *)&shaderProperty != 0.0 ) /*0x7d1c99*/
   {
-    v2 = *(_DWORD *)(a2 + 0xE0);
-    if ( v2 )
+    textureEffectData = (OblivionTextureEffectData *)shaderProperty[2].member.super.super.m_pcName; /*0x7d1c9f*/
+    if ( textureEffectData ) /*0x7d1ca7*/
     {
-      dword_B44F38 = *(_DWORD *)(v2 + 0xC);
-      dword_B44F3C = *(_DWORD *)(v2 + 0x10);
-      dword_B44F40 = *(_DWORD *)(v2 + 0x14);
-      dword_B44F44 = *(_DWORD *)(v2 + 0x18);
-      dword_B44F48 = *(_DWORD *)(v2 + 0x1C);
-      dword_B44F4C = *(_DWORD *)(v2 + 0x20);
-      dword_B44F50 = *(_DWORD *)(v2 + 0x24);
-      dword_B44F54 = *(_DWORD *)(v2 + 0x28);
-      flt_B44ED0 = *(float *)(v2 + 0x4C);
-      flt_B44ED4 = *(float *)(v2 + 0x50);
-      flt_B44F58 = *(float *)(v2 + 0x54);
-      flt_B44F5C = 1.0;
+      g_ShadowLight_CurrentFillColor.r = textureEffectData->currentFillColor_0C.r; /*0x7d1cac*/
+      g_ShadowLight_CurrentFillColor.g = textureEffectData->currentFillColor_0C.g; /*0x7d1cb5*/
+      g_ShadowLight_CurrentFillColor.b = textureEffectData->currentFillColor_0C.b; /*0x7d1cbe*/
+      g_ShadowLight_CurrentFillColor.a = textureEffectData->currentFillColor_0C.a; /*0x7d1cc7*/
+      g_ShadowLight_CurrentEdgeColor.r = textureEffectData->currentEdgeColor_1C.r; /*0x7d1cd0*/
+      g_ShadowLight_CurrentEdgeColor.g = textureEffectData->currentEdgeColor_1C.g; /*0x7d1cd9*/
+      g_ShadowLight_CurrentEdgeColor.b = textureEffectData->currentEdgeColor_1C.b; /*0x7d1ce2*/
+      g_ShadowLight_CurrentEdgeColor.a = textureEffectData->currentEdgeColor_1C.a; /*0x7d1ceb*/
+      g_ShadowLight_TextureEffectUOffset = textureEffectData->textureOffsetU_4C; /*0x7d1cf4*/
+      g_ShadowLight_TextureEffectVOffset = textureEffectData->textureOffsetV_50; /*0x7d1cfd*/
+      g_ShadowLight_TextureEffectEdgeFalloff = textureEffectData->edgeExponent_54; /*0x7d1d06*/
+      g_ShadowLight_TextureEffectFVarsOne = 1.0; /*0x7d1d0e*/
     }
-    *(float *)&dword_B44F6C = 0.0;
-    *(float *)&dword_B44F68 = 0.0;
-    *(float *)&dword_B44F78 = 0.0;
-    *(float *)&dword_B44F84 = 0.0;
-    *(float *)&dword_B44F70 = 0.0;
-    *(float *)&dword_B44F74 = 0.0;
-    *(float *)&dword_B44F7C = 0.0;
-    *(float *)&dword_B44F80 = 0.0;
-    if ( a1 )
+    flt_B44F68[1] = 0.0; /*0x7d1d33*/
+    flt_B44F68[0] = 0.0; /*0x7d1d40*/
+    flt_B44F78[0] = 0.0; /*0x7d1d51*/
+    flt_B44F78[3] = 0.0; /*0x7d1d5b*/
+    flt_B44F68[2] = 0.0; /*0x7d1d67*/
+    flt_B44F68[3] = 0.0; /*0x7d1d71*/
+    flt_B44F78[1] = 0.0; /*0x7d1d7a*/
+    flt_B44F78[2] = 0.0; /*0x7d1d80*/
+    if ( geometry ) /*0x7d1d85*/
     {
-      v3 = *sub_405760(a1, (volatile LONG **)&a2);
-      if ( *(float *)&a2 != 0.0 )
+      v3 = *NiGeometry_GetPropertyState(geometry, (NiPropertyState **)&shaderProperty); /*0x7d1d96*/
+      if ( *(float *)&shaderProperty != 0.0 ) /*0x7d1d9e*/
       {
-        v4 = *(float *)&a2;
-        if ( !InterlockedDecrement((volatile LONG *)(a2 + 4)) )
-          (**(void (__thiscall ***)(float, int))LODWORD(v4))(COERCE_FLOAT(LODWORD(v4)), 1);
+        v4 = shaderProperty; /*0x7d1da1*/
+        if ( !InterlockedDecrement((volatile LONG *)&shaderProperty->member) ) /*0x7d1da7*/
+          (*(void (__thiscall **)(BSShaderProperty *, int))v4->vtbl)(v4, 1); /*0x7d1dbd*/
       }
-      v5 = *((_DWORD *)v3 + 3);
-      if ( v5 )
+      v5 = *((_DWORD *)v3 + 3); /*0x7d1dc0*/
+      if ( v5 ) /*0x7d1dc6*/
       {
-        v10 = *(float *)(v5 + 0x2C);
-        a2 = *(int *)(v5 + 0x30);
-        if ( *(float *)&a2 != 0.0 || 0.0 != v10 )
+        geometrya = *(float *)(v5 + 0x2C); /*0x7d1dcf*/
+        shaderProperty = *(BSShaderProperty **)(v5 + 0x30); /*0x7d1dd6*/
+        if ( *(float *)&shaderProperty != 0.0 || 0.0 != geometrya ) /*0x7d1dfa*/
         {
-          v6 = *(_DWORD *)(v5 + 0x20);
-          *(float *)&v9 = *(float *)&a2 - v10;
-          v7 = *(_DWORD *)(v5 + 0x24);
-          v8 = *(_DWORD *)(v5 + 0x28);
-          dword_B44F78 = a2;
-          dword_B44F7C = v9;
-          *(float *)&dword_B44F80 = 1.0;
-          *(float *)&dword_B44F84 = 0.0;
-          dword_B44F68 = v6;
-          dword_B44F6C = v7;
-          dword_B44F70 = v8;
-          *(float *)&dword_B44F74 = 0.0;
+          v6 = *(float *)(v5 + 0x20); /*0x7d1e0e*/
+          v9 = *(float *)&shaderProperty - geometrya; /*0x7d1e18*/
+          v7 = *(float *)(v5 + 0x24); /*0x7d1e1c*/
+          v8 = *(float *)(v5 + 0x28); /*0x7d1e2a*/
+          flt_B44F78[0] = *(float *)&shaderProperty; /*0x7d1e32*/
+          flt_B44F78[1] = v9; /*0x7d1e43*/
+          flt_B44F78[2] = 1.0; /*0x7d1e55*/
+          flt_B44F78[3] = 0.0; /*0x7d1e66*/
+          flt_B44F68[0] = v6; /*0x7d1e74*/
+          flt_B44F68[1] = v7; /*0x7d1e82*/
+          flt_B44F68[2] = v8; /*0x7d1e87*/
+          flt_B44F68[3] = 0.0; /*0x7d1e8d*/
         }
       }
     }

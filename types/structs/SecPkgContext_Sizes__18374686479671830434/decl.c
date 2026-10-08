@@ -1,1 +1,1 @@
-SecPkgContext_Sizes
+typedef _SecPkgContext_Sizes SecPkgContext_Sizes;

@@ -1,52 +1,57 @@
-char *__cdecl sub_551A00(BSStringT *a1, signed int a2, unsigned __int8 a3, char *a4)
+// Build age overlay through engine FindFile (loose/archive lookup): exact requested age first, then floor decade descending to zero. Does not search upwards; null can mean only higher-age overlays exist. Prettier Faces 1.19.9 fixes prior midpoint-only fallback: probe ascending higher decades while closer than current lower result, preserve exact match and lower ties, reconstruct winner because each call mutates outPath. Native unbounded source copy into 260-byte stack buffer remains guarded by plugin path length check in randomizer scope.
+char *__cdecl FaceGen_BuildAgeTexturePath(
+        BSStringT *outPath,
+        int sex,
+        unsigned __int8 age,
+        const char *baseTexturePath)
 {
-  char *v4; // eax
-  char v5; // bl
+  const char *sourceCursor; // eax
+  char sexSuffix; // bl
   char v6; // cl
-  char *v7; // eax
-  int v9; // edi
-  char Str[260]; // [esp+10h] [ebp-108h] BYREF
+  char *extension; // eax
+  int fallbackAge; // edi
+  char basePathWithoutExtension[260]; // [esp+10h] [ebp-108h] BYREF
 
-  v4 = a4;
-  v5 = 0x4D;
-  if ( !a4 )
-    return 0;
-  if ( a3 > 0x64u )
-    return 0;
-  if ( a2 >= 2 )
-    return 0;
-  do
+  sourceCursor = baseTexturePath; /*0x551a14*/
+  sexSuffix = 0x4D; /*0x551a30*/
+  if ( !baseTexturePath ) /*0x551a32*/
+    return 0; /*0x551a32*/
+  if ( age > 0x64u ) /*0x551a3b*/
+    return 0; /*0x551a3b*/
+  if ( sex >= 2 ) /*0x551a4b*/
+    return 0; /*0x551a4b*/
+  do /*0x551a61*/
   {
-    v6 = *v4;
-    v4[Str - a4] = *v4;
-    ++v4;
+    v6 = *sourceCursor;                         // Begin an unbounded byte copy of baseTexturePath, including its NUL, into a 260-byte stack buffer. A source length >= 260 writes beyond the frame before any extension validation. /*0x551a57*/
+    sourceCursor[basePathWithoutExtension - baseTexturePath] = *sourceCursor;// Vanilla/native robustness finding: NUL-inclusive unbounded copy into 260-byte stack array, >=260-byte source length exceeds array. 0x551A00..+0x135 IDA bytes match deployed EXE SHA256 range 0011d4f5799710e459b39e375a8c11e514988f4c4f9e8d6b55057089ad3b5aab. Trigger asset-path reachability and observed crash not tested; unrelated to OCO load defect absent further evidence. /*0x551a59*/
+    ++sourceCursor; /*0x551a5c*/
   }
-  while ( v6 );
-  v7 = strrchr(Str, 0x2E);
-  if ( !v7 )
-    return 0;
-  *v7 = 0;
-  if ( a2 == 1 )
-    v5 = 0x46;
-  BSStringT_Static_Format(a1, "Textures\\%s%c%d.dds", Str, v5, a3);
-  if ( !OBSE_g_FileFinder || !OBSE_g_FileFinder->vtbl->FindFile(OBSE_g_FileFinder, a1->m_data, 0, 0, 0xFFFFFFFF) )
+  while ( v6 ); /*0x551a61*/
+  extension = strrchr(basePathWithoutExtension, 0x2E); /*0x551a6a*/
+  if ( !extension ) /*0x551a74*/
+    return 0; /*0x551b1a*/
+  *extension = 0; /*0x551a7d*/
+  if ( sex == 1 ) /*0x551a80*/
+    sexSuffix = 0x46; /*0x551a82*/
+  BSStringT_Static_Format(outPath, "Textures\\%s%c%d.dds", basePathWithoutExtension, sexSuffix, age); /*0x551a94*/
+  if ( !MEMORY[0xB33A04] || !MEMORY[0xB33A04]->vtbl->FindFile(MEMORY[0xB33A04], outPath->m_data, 0, 0, 0xFFFFFFFF) ) /*0x551ab4*/
   {
-    v9 = 0xA * (a3 / 0xA);
-    while ( 1 )
+    fallbackAge = 0xA * (age / 0xA); /*0x551ad2*/
+    while ( 1 ) /*0x551ae1*/
     {
-      BSStringT_Static_Format(a1, "Textures\\%s%c%d.dds", Str, v5, v9);
-      if ( OBSE_g_FileFinder )
+      BSStringT_Static_Format(outPath, "Textures\\%s%c%d.dds", basePathWithoutExtension, sexSuffix, fallbackAge); /*0x551ae1*/
+      if ( MEMORY[0xB33A04] ) /*0x551ae6*/
       {
-        if ( OBSE_g_FileFinder->vtbl->FindFile(OBSE_g_FileFinder, a1->m_data, 0, 0, 0xFFFFFFFF) )
-          break;
+        if ( MEMORY[0xB33A04]->vtbl->FindFile(MEMORY[0xB33A04], outPath->m_data, 0, 0, 0xFFFFFFFF) ) /*0x551b01*/
+          break; /*0x551b01*/
       }
-      v9 -= 0xA;
-      if ( v9 < 0 )
+      fallbackAge -= 0xA; /*0x551b07*/
+      if ( fallbackAge < 0 ) /*0x551b0a*/
       {
-        BSStringT_Set(a1, EmptyString, 0);
-        return 0;
+        BSStringT_Set(outPath, EmptyString, 0); /*0x551b15*/
+        return 0; /*0x551b15*/
       }
     }
   }
-  return a1->m_data;
+  return outPath->m_data; /*0x551b1c*/
 }

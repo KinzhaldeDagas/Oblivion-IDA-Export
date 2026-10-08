@@ -1,88 +1,144 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "MENUITEM",
+  "definition": "struct __declspec(align(8)) MENUITEM\n{\nUINT fType;\nUINT fState;\nUINT_PTR_0 wID;\nHMENU hSubMenu;\nHBITMAP hCheckBit;\nHBITMAP hUnCheckBit;\nLPWSTR text;\nULONG_PTR dwItemData;\nLPWSTR dwTypeData;\nHBITMAP hbmpItem;\nRECT rect;\nUINT xTab;\nSIZE bmpsize;\n}\n",
   "id": 18374686479672043431,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fType",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fState",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "wID",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 8
+      "size": 8,
+      "type": "UINT_PTR_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hSubMenu",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "HMENU"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hCheckBit",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "HBITMAP"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hUnCheckBit",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "HBITMAP"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "text",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "LPWSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwItemData",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 8
+      "size": 8,
+      "type": "ULONG_PTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwTypeData",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "LPWSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hbmpItem",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "HBITMAP"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "rect",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 16
+      "size": 16,
+      "type": "RECT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "xTab",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bmpsize",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 8
+      "size": 8,
+      "type": "SIZE"
     }
   ],
   "name": "MENUITEM",
+  "ordinal": 7468,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 80
 }

@@ -19,10 +19,10 @@
 0x58BF1D: xor     edi, edi
 0x58BF1F: cmp     byte ptr ds:0B3B0A1h, 0
 0x58BF26: mov     [esp+16Ch+var_11C], esi
-0x58BF2A: jz      short loc_58BF38
+0x58BF2A: jz      short loc_58BF38; Verified wrong-receiver consequence: [ECX] must be owner Tile*. Passing Tile* instead reads its vtable as owner; following [owner+5] check examines vtable bytes. May return accidentally or continue with invalid layout; not a valid tile-wide refresh.
 0x58BF2C: cmp     word ptr [esi+18h], 0FA2h
 0x58BF32: jnz     loc_58C96E
-0x58BF38: mov     eax, [esi]
+0x58BF38: mov     eax, [esi]; Verified wrong-receiver consequence: [ECX] must be owner Tile*. Passing Tile* instead reads its vtable as owner; following [owner+5] check examines vtable bytes. May return accidentally or continue with invalid layout; not a valid tile-wide refresh.
 0x58BF3A: cmp     eax, edi
 0x58BF3C: jz      loc_58C96E
 0x58BF42: cmp     byte ptr [eax+5], 0
@@ -30,9 +30,9 @@
 0x58BF4C: mov     [esp+16Ch+var_118], edi
 0x58BF50: mov     [esp+16Ch+var_114], di
 0x58BF55: mov     [esp+16Ch+var_112], di
-0x58BF5A: push    esi
+0x58BF5A: push    esi; value
 0x58BF5B: mov     [esp+170h+var_4], edi
-0x58BF62: call    sub_58BAD0
+0x58BF62: call    Tile__Value__CheckEvaluationCycle; Verified: detects Value already in global evaluation stack, logs Loop Detected and nullifies reference actions; otherwise pushes Value. Stack globals 0xB3AF10 and depth 0xB3B0AC. This guard concerns property evaluation, not plugin global menu scratch state.
 0x58BF67: add     esp, 4
 0x58BF6A: test    al, al
 0x58BF6C: jz      short loc_58BF74
@@ -260,7 +260,7 @@
 0x58C213: and     ecx, esi
 0x58C215: mov     byte ptr [ecx+edi], 0
 0x58C219: fld     dword ptr [ebx]
-0x58C21B: call    Double_To_SInt32
+0x58C21B: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x58C220: push    eax
 0x58C221: push    edi; ArgList
 0x58C222: lea     edx, [esp+174h+var_140]
@@ -270,9 +270,9 @@
 0x58C231: fldz
 0x58C233: mov     edi, [esp+17Ch+var_140.m_data]
 0x58C237: fstp    dword ptr [ebx]
-0x58C239: push    0FFFFFFFFh; int
-0x58C23B: push    edi; unsigned __int8 *
-0x58C23C: call    sub_58B040
+0x58C239: push    0FFFFFFFFh; requestedID
+0x58C23B: push    edi; name
+0x58C23C: call    Tile__AddUserTrait
 0x58C241: mov     ebp, [esp+184h+var_154]
 0x58C245: mov     esi, eax
 0x58C247: mov     eax, [ebp+18h]
@@ -288,21 +288,20 @@
 0x58C261: jg      short loc_58C267
 0x58C263: test    eax, eax
 0x58C265: jnz     short loc_58C251
-0x58C267: push    esi
-0x58C268: mov     ecx, ebp
-0x58C26A: call    Tile_GetPropertyByCode?
+0x58C267: push    esi; trait
+0x58C268: mov     ecx, ebp; this
+0x58C26A: call    Tile__GetOrCreateValue; Verified: sorted trait lookup; if absent allocates 0x1C bytes, constructs Value at 0x589DF0, stores owner Tile at +0 and inserts into Tile value list. Corrects misleading existing-property-only interpretation.
 0x58C26F: test    eax, eax
 0x58C271: jz      short loc_58C280
 0x58C273: fldz
 0x58C275: push    ecx
-0x58C276: mov     ecx, eax
-0x58C278: fstp    [esp+170h+var_170]; float
-0x58C27B: call    Tile_Property_SetFloatValue?
+0x58C276: mov     ecx, eax; this
+0x58C278: fstp    [esp+170h+value]; value
+0x58C27B: call    Tile__Value__SetFloat; Verified: marks numeric; if changed or string trait 0xFDE, clears string, stores number, clears own expression actions via 0x588930, then CalculateValue(this,true). Same-value ordinary traits bypass clear/evaluation. Unlike Fallout SetFloat, no abClearActions parameter.
 0x58C280: mov     eax, [ebp+18h]
 0x58C283: test    eax, eax
 0x58C285: jz      loc_58C30F
 0x58C28B: jmp     short loc_58C290
-0x58C28D: align 10h
 0x58C290: mov     edx, [eax+8]
 0x58C293: lea     ecx, [eax+8]
 0x58C296: movzx   ecx, word ptr [edx+18h]
@@ -353,7 +352,7 @@
 0x58C30B: fstp    [esp+16Ch+var_150]
 0x58C30F: push    edi
 0x58C310: mov     byte ptr [esp+170h+var_4], 2
-0x58C318: call    FormHeapFree
+0x58C318: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x58C31D: fld     dword ptr ds:0A379B4h
 0x58C323: fldz
 0x58C325: mov     esi, [esp+170h+var_14C.m_data]
@@ -462,14 +461,14 @@
 0x58C478: fstp    st(1); jumptable 0058C420 case 2006
 0x58C47A: push    0; Seed
 0x58C47C: fstp    st
-0x58C47E: call    GetRandomLargeInteger?
+0x58C47E: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x58C483: mov     [esp+170h+var_154], eax
 0x58C487: fild    [esp+170h+var_154]
 0x58C48B: fdiv    qword ptr ds:0A3D5A8h
 0x58C491: fmul    [esp+170h+var_150]
 0x58C495: fstp    [esp+170h+var_154]
 0x58C499: fld     [esp+170h+var_154]
-0x58C49D: fstp    [esp+170h+var_170]; float
+0x58C49D: fstp    [esp+170h+value]; float
 0x58C4A0: call    FloatFloor
 0x58C4A5: fadd    qword ptr ds:0A2F928h
 0x58C4AB: add     esp, 4
@@ -645,7 +644,7 @@
 0x58C6E4: fld     st
 0x58C6E6: fld     [esp+16Ch+var_154]
 0x58C6EA: fdiv    st, st(1)
-0x58C6EC: call    Double_To_SInt32
+0x58C6EC: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x58C6F1: add     eax, 1
 0x58C6F4: mov     [esp+16Ch+var_154], eax
 0x58C6F8: fimul   [esp+16Ch+var_154]
@@ -667,7 +666,7 @@
 0x58C729: fadd    dword ptr [ebx]
 0x58C72B: fstp    [esp+170h+var_154]
 0x58C72F: fld     [esp+170h+var_154]
-0x58C733: fstp    [esp+170h+var_170]; float
+0x58C733: fstp    [esp+170h+value]; float
 0x58C736: call    FloatFloor
 0x58C73B: fstp    dword ptr [ebx]
 0x58C73D: add     esp, 4
@@ -679,7 +678,7 @@
 0x58C74E: fadd    dword ptr [ebx]
 0x58C750: fstp    [esp+170h+var_154]
 0x58C754: fld     [esp+170h+var_154]
-0x58C758: fstp    [esp+170h+var_170]; float
+0x58C758: fstp    [esp+170h+value]; float
 0x58C75B: call    sub_484370
 0x58C760: fstp    dword ptr [ebx]
 0x58C762: add     esp, 4
@@ -754,7 +753,7 @@
 0x58C832: push    esi
 0x58C833: mov     [esp+170h+var_144], edi
 0x58C837: mov     byte ptr [esp+170h+var_4], 1
-0x58C83F: call    FormHeapFree
+0x58C83F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x58C844: xor     esi, esi
 0x58C846: add     esp, 4
 0x58C849: cmp     edi, esi
@@ -795,7 +794,7 @@
 0x58C8B7: test    ah, 44h
 0x58C8BA: jnp     short loc_58C8D5
 0x58C8BC: fld     dword ptr [ebx]
-0x58C8BE: call    Double_To_SInt32
+0x58C8BE: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x58C8C3: push    eax; ArgList
 0x58C8C4: lea     ecx, [esi+8]
 0x58C8C7: push    offset aI; "%i"
@@ -812,10 +811,10 @@
 0x58C8E6: call    sub_589770
 0x58C8EB: test    al, al
 0x58C8ED: jnz     short loc_58C8F8
-0x58C8EF: cmp     [esp+16Ch+arg_0], al
+0x58C8EF: cmp     [esp+16Ch+forceUpdate], al
 0x58C8F6: jz      short loc_58C93B
-0x58C8F8: mov     ecx, esi
-0x58C8FA: call    sub_58BDD0
+0x58C8F8: mov     ecx, esi; this
+0x58C8FA: call    Tile__Value__PropagateReactions; Verified: traverses dependent action links via Value +0x14 sentinel, transfers source numeric/string values, and calls CalculateValue(dependentValue,false). Synchronous recursive property evaluation is established; this does not alone prove DialogMenu topic-build reentrancy.
 0x58C8FF: mov     ecx, [esi]
 0x58C901: test    ecx, ecx
 0x58C903: jz      short loc_58C93B
@@ -835,13 +834,13 @@
 0x58C923: jnz     short loc_58C93B
 0x58C925: mov     eax, [esi+8]
 0x58C928: fld     dword ptr [ebx]
-0x58C92A: push    eax; int
+0x58C92A: push    eax; text
 0x58C92B: movzx   eax, word ptr [esi+18h]
 0x58C92F: push    ecx
-0x58C930: mov     ecx, [esi]
-0x58C932: fstp    [esp+174h+var_174]; float
-0x58C935: push    eax; int
-0x58C936: call    sub_58B2F0
+0x58C930: mov     ecx, [esi]; this
+0x58C932: fstp    [esp+174h+var_174]; value
+0x58C935: push    eax; trait
+0x58C936: call    Tile__FinalPostParse; Verified shared fallback called by CalculateValue when owner virtual PostParse returns NULL. Marks trait-specific dirty flags; ID trait 0xFA8 calls owning Menu vtable +4 AttachTileByID with numeric ID and Tile*. Visibility traits mark dirty bit4. Fallout named analogue 0x82232168.
 0x58C93B: mov     eax, ds:0B3B0ACh
 0x58C940: sub     eax, 1
 0x58C943: lea     ecx, [esp+16Ch+var_138]
@@ -850,7 +849,7 @@
 0x58C957: mov     byte ptr [esp+16Ch+var_4], 0
 0x58C95F: call    ??1?$NiTList@M@@UAE@XZ; NiTList<float>::~NiTList<float>(void)
 0x58C964: push    0
-0x58C966: call    FormHeapFree
+0x58C966: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x58C96B: add     esp, 4
 0x58C96E: mov     ecx, dword ptr [esp+16Ch+var_C]
 0x58C975: mov     large fs:0, ecx
@@ -864,3 +863,22 @@
 0x58C98A: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x58C98F: add     esp, 158h
 0x58C995: retn    4
+0x9BF8A0: lea     ecx, [ebp-118h]; void *
+0x9BF8A6: jmp     BSStringT_Clear
+0x9BF8AB: lea     ecx, [ebp-138h]
+0x9BF8B1: jmp     j_??1?$NiTList@M@@UAE@XZ; NiTList<float>::~NiTList<float>(void)
+0x9BF8B6: lea     ecx, [ebp-14Ch]; void *
+0x9BF8BC: jmp     BSStringT_Clear
+0x9BF8C1: lea     ecx, [ebp-140h]; void *
+0x9BF8C7: jmp     BSStringT_Clear
+0x9BF8CC: mov     edx, [esp+arg_4]
+0x9BF8D0: lea     eax, [edx-15Ch]
+0x9BF8D6: mov     ecx, [edx-160h]
+0x9BF8DC: xor     ecx, eax
+0x9BF8DE: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BF8E3: add     eax, 10h
+0x9BF8E6: mov     ecx, [edx-4]
+0x9BF8E9: xor     ecx, eax
+0x9BF8EB: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BF8F0: mov     eax, offset stru_AE8DB0
+0x9BF8F5: jmp     ___CxxFrameHandler3

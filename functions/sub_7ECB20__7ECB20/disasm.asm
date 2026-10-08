@@ -1,4 +1,4 @@
-0x7ECB20: test    byte ptr ds:0B466D8h, 1
+0x7ECB20: test    byte ptr ds:0B466D8h, 1; OBLIVION AUTHORITY (2026-08-24): Per-pass light reset clears eight shared diffuse slots to (0,0,0,1) and eight source-vector slots to (0.001,0,0,0). It does NOT clear shared ambient c5. Leaf c11 is later rebuilt/normalized from source slot 0 during normal per-draw transform setup, so zero-light c11 is fallback-derived rather than stale on that path.
 0x7ECB27: jnz     short loc_7ECB50
 0x7ECB29: fld     dword ptr ds:0A37080h
 0x7ECB2F: or      dword ptr ds:0B466D8h, 1
@@ -26,12 +26,11 @@
 0x7ECB8E: mov     ds:0B46150h, eax
 0x7ECB93: mov     ds:0B46154h, eax
 0x7ECB98: jmp     short loc_7ECBA0
-0x7ECB9A: align 10h
 0x7ECBA0: movzx   ecx, dx
 0x7ECBA3: lea     eax, [ecx+11h]
 0x7ECBA6: movzx   eax, ax
 0x7ECBA9: shl     eax, 4
-0x7ECBAC: add     eax, offset dword_B46498
+0x7ECBAC: add     eax, offset flt_B46498; Reset source light-vector slots 0..7. Slot 0 becomes (0.001,0,0,0), so this source bank is not stale after reset.
 0x7ECBB1: mov     [eax], ebp
 0x7ECBB3: mov     [eax+4], ebx
 0x7ECBB6: add     ecx, 1
@@ -40,7 +39,7 @@
 0x7ECBBF: movzx   eax, cx
 0x7ECBC2: mov     ecx, ds:0B25AD0h
 0x7ECBC8: shl     eax, 4
-0x7ECBCB: add     eax, offset dword_B46498
+0x7ECBCB: add     eax, offset flt_B46498; Reset shared diffuse slots 0..7 from dword_B25AD0..ADC = (0,0,0,1). Leaf c6/c7 are therefore black until present lights rebuild them.
 0x7ECBD0: mov     [eax], ecx
 0x7ECBD2: mov     ecx, ds:0B25AD4h
 0x7ECBD8: mov     [eax+4], ecx

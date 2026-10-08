@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x7201B4",
-    "line": "mov     ebx, [esp+0Ch+arg_0]",
+    "line": "mov     ebx, [esp+0Ch+stream]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x7201F2",
-    "line": "mov     byte ptr [esp+34h+arg_0], al",
+    "line": "mov     byte ptr [esp+34h+stream], al",
     "mnemonic": "mov",
     "size": 4
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x7201FE",
-    "line": "lea     edx, [esp+38h+arg_0]",
+    "line": "lea     edx, [esp+38h+stream]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x720214",
-    "line": "cmp     byte ptr [esp+18h+arg_0], 0",
+    "line": "cmp     byte ptr [esp+18h+stream], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x720261",
-    "line": "call    edx",
+    "line": "call    edx; Write the 16-bit shared-normal entry-array length.",
     "mnemonic": "call",
     "size": 2
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x72028D",
-    "line": "mov     [esp+20h+var_8], ecx",
+    "line": "mov     [esp+20h+var_8], ecx; Write each entry's UInt16 count followed by its pooled vertex-index list.",
     "mnemonic": "mov",
     "size": 4
   },

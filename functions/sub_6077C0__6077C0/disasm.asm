@@ -9,7 +9,7 @@
 0x6077D4: lea     eax, [esi+24h]
 0x6077D7: push    edi
 0x6077D8: push    eax
-0x6077D9: call    sub_43F3E0
+0x6077D9: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x6077DE: add     esp, 10h
 0x6077E1: pop     edi
 0x6077E2: mov     eax, esi

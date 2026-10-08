@@ -1,4 +1,4 @@
-void *sub_70BC60()
+NiRTTI *sub_70BC60()
 {
-  return &unk_B3FAC0;
+  return &stru_B3FAC0; /*0x70bc65*/
 }

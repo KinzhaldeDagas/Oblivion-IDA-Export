@@ -1,4 +1,4 @@
 char sub_625AD0()
 {
-  return byte_B35630;
+  return (char)stru_B35630.value; /*0x625ad5*/
 }

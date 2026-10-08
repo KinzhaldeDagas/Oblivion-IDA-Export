@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x65E490",
-    "line": "cmp     byte ptr ds:0B3BB06h, 0",
+    "line": "cmp     byte ptr ds:0B3BB06h, 0; Player integer damage-modifier path. Update the damage/current-value channel, refresh UI, and notify with rebuild=false. Skill progression state is not advanced.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -211,13 +211,13 @@
   },
   {
     "ea": "0x65E4F0",
-    "line": "push    esi; a2",
+    "line": "push    esi; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x65E4F1",
-    "line": "call    sub_57A6F0",
+    "line": "call    UI_UpdateActorValueDisplays; UI_UpdateActorValueDisplays(actorValue), called by player base-AV setters/modifiers after changing base form values.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,25 +301,25 @@
   },
   {
     "ea": "0x65E517",
-    "line": "push    0",
+    "line": "push    0; updatePlayerUI",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x65E519",
-    "line": "push    esi",
+    "line": "push    esi; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x65E51A",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x65E51C",
-    "line": "call    sub_5E2670",
+    "line": "call    Player_OnActorValueBaseChanged; Handles player base actor-value changes. For native skill AVs, optional UI refresh also recalculates required experience for all 21 skills; major/non-major membership affects the recomputed requirement through TESClass_IsMajorSkillAV.",
     "mnemonic": "call",
     "size": 5
   },

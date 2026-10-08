@@ -1,4 +1,4 @@
-0x4BD750: push    ecx
+0x4BD750: push    ecx; Verified submission callback (+0x08 vtable): retains the DistantLODLoaderTask and inserts it into IOManager.taskQueue via sub_43A5F0.
 0x4BD751: test    ecx, ecx
 0x4BD753: push    esi
 0x4BD754: mov     esi, ds:0B33A10h

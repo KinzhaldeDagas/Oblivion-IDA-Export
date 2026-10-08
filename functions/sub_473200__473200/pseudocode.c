@@ -1,86 +1,87 @@
-void __thiscall sub_473200(_DWORD *this, char a2)
+// Controller-sequence reset/rebind phase. Clears active slots 4/0/1/2, deactivates the queued/current blend sequence, restores key/state sentinels, removes a controller object from the actor root, then rebinds or repairs every non-__TempBlendSequence__ manager sequence according to the flag. This is whole-object reset logic, not a per-key cleanup API.
+void __thiscall ActorAnimData_ResetControllerSequences(ActorAnimData *this, char a2)
 {
   unsigned int v3; // ebp
-  int v4; // eax
-  int v5; // eax
-  int v6; // ecx
+  BSAnimGroupSequence *v4; // eax
+  BSAnimGroupSequence *v5; // eax
+  NiControllerManager *manager; // ecx
   NiObject *v7; // eax
   Ni2DBuffer *v8; // edi
-  int v9; // eax
+  NiControllerManager *v9; // eax
   int v10; // edi
-  NiObject *v11; // eax
-  NiObject *v12; // edi
+  unsigned int *v11; // eax
+  unsigned int *v12; // edi
 
-  v3 = 0;
-  if ( *(this + 0x26) )
+  v3 = 0; /*0x473204*/
+  if ( this->manager ) /*0x473206*/
   {
-    sub_470FC0(this, 4, 0.0);
-    sub_470FC0(this, 0, 0.0);
-    sub_470FC0(this, 1, 0.0);
-    sub_470FC0(this, 2, 0.0);
-    if ( *(this + 0x26) )
+    ActorAnimData_ClearSlot(this, 4, 0.0); /*0x47321a*/
+    ActorAnimData_ClearSlot(this, 0, 0.0); /*0x473228*/
+    ActorAnimData_ClearSlot(this, 1, 0.0); /*0x473237*/
+    ActorAnimData_ClearSlot(this, 2, 0.0); /*0x473246*/
+    if ( this->manager ) /*0x47324b*/
     {
-      v4 = *(this + 0x2B);
-      if ( v4 )
+      v4 = this->animSequences[3]; /*0x473255*/
+      if ( v4 ) /*0x47325d*/
       {
-        if ( *(_DWORD *)(v4 + 0x44) )
+        if ( *((_DWORD *)v4 + 0x11) ) /*0x47325f*/
         {
-          v5 = *(_DWORD *)(v4 + 0x58);
-          if ( v5 )
-            sub_470B50(v5, 0.0);
-          if ( *(_DWORD *)(*(this + 0x2B) + 0x44) == 5 )
-            sub_6C4480((_DWORD *)*(this + 0x26), 0.0);
-          sub_6C9CB0(*(this + 0x2B), 0.0, 0);
+          v5 = *((BSAnimGroupSequence **)v4 + 0x16); /*0x473264*/
+          if ( v5 ) /*0x473269*/
+            BSAnimGroupSequence_Deactivate(v5, 0.0); /*0x473272*/
+          if ( *((_DWORD *)this->animSequences[3] + 0x11) == 5 ) /*0x473281*/
+            NiControllerManager_DeactivateTransitionSources((_DWORD *)this->manager, 0.0); /*0x47328f*/
+          NiControllerSequence_Deactivate(this->animSequences[3], 0.0, 0); /*0x4732a1*/
         }
       }
     }
-    *(this + 0x2B) = 0;
-    *((_WORD *)this + 0x21) = 0xFF;
-    *((_WORD *)this + 0x3B) = 0xFF;
-    *(this + 0x15) = 0xFFFFFFFF;
-    v6 = *(this + 0x26);
-    if ( *(_DWORD *)(v6 + 0x7C) )
+    this->animSequences[3] = 0; /*0x4732a6*/
+    this->animsMapKey[3] = 0xFF; /*0x4732b1*/
+    HIWORD(this->unk74) = 0xFF; /*0x4732b5*/
+    this->unk48State[3] = 0xFFFFFFFF; /*0x4732b9*/
+    manager = this->manager; /*0x4732c0*/
+    if ( *((_DWORD *)manager + 0x1F) ) /*0x4732c6*/
     {
-      v7 = NiRTTI_Cast((BSStringT *)&stru_B3FCA0.SpinCount, *(NiObject **)(v6 + 0x7C));
-      if ( v7 )
-        sub_716690(v7);
+      v7 = NiRTTI_Cast((BSStringT *)&stru_B3FCB8, *((NiObject **)manager + 0x1F)); /*0x4732d3*/
+      if ( v7 ) /*0x4732dd*/
+        sub_716690(v7); /*0x4732e1*/
     }
-    v8 = (Ni2DBuffer *)sub_700010((_DWORD *)*(this + 1), (int)dword_B3CD7C);
-    if ( v8 )
+    v8 = (Ni2DBuffer *)sub_700010(&this->RootNode->vtbl, (int)&stru_B3CD7C); /*0x4732f4*/
+    if ( v8 ) /*0x4732f8*/
     {
-      sub_4715C0((_DWORD *)*(this + 0x26), 0.0);
-      sub_6FFE90((Ni2DBuffer **)*(this + 1), v8);
+      NiControllerManager_DeactivateAllSequences(this->manager, 0.0); /*0x473306*/
+      NiObjectNET_RemoveController((Ni2DBuffer **)this->RootNode, v8); /*0x47330f*/
     }
-    v9 = *(this + 0x26);
-    if ( *(_WORD *)(v9 + 0x46) )
+    v9 = this->manager; /*0x473314*/
+    if ( *((_WORD *)v9 + 0x23) ) /*0x47331a*/
     {
-      do
+      do /*0x47338a*/
       {
-        v10 = *(_DWORD *)(*(_DWORD *)(v9 + 0x40) + 4 * v3);
-        if ( v10 )
+        v10 = *(_DWORD *)(*((_DWORD *)v9 + 0x10) + 4 * v3); /*0x473328*/
+        if ( v10 ) /*0x47332d*/
         {
-          if ( _strcmp("__TempBlendSequence__", *(char **)(v10 + 8)) )
+          if ( CRT_StricmpLocaleDispatch("__TempBlendSequence__", *(const char **)(v10 + 8)) ) /*0x473338*/
           {
-            if ( a2 )
+            if ( a2 ) /*0x473346*/
             {
-              sub_6C9590((_DWORD *)v10, (_DWORD *)*(this + 1));
+              sub_6C9590((_DWORD *)v10, v3, (Ni2DBuffer **)this->RootNode); /*0x47334e*/
             }
             else
             {
-              v11 = NiRTTI_Cast((BSStringT *)dword_B35270, (NiObject *)v10);
-              v12 = v11;
-              if ( v11 )
+              v11 = (unsigned int *)NiRTTI_Cast((BSStringT *)&MEMORY[0xB33E90][0x13E0], (NiObject *)v10); /*0x47335b*/
+              v12 = v11; /*0x473360*/
+              if ( v11 ) /*0x473367*/
               {
-                sub_49F880(v11);
-                sub_49F860(v12, (_DWORD *)*(this + 1));
+                sub_49F880(v11); /*0x47336b*/
+                sub_49F860(v12, &this->RootNode->vtbl); /*0x473376*/
               }
             }
           }
         }
-        v9 = *(this + 0x26);
-        ++v3;
+        v9 = this->manager; /*0x47337b*/
+        ++v3; /*0x473385*/
       }
-      while ( v3 < *(unsigned __int16 *)(v9 + 0x46) );
+      while ( v3 < *((unsigned __int16 *)v9 + 0x23) ); /*0x47338a*/
     }
   }
 }

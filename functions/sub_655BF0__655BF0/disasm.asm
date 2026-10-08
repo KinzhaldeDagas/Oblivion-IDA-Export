@@ -84,26 +84,26 @@
 0x655CD5: pop     ebp
 0x655CD6: add     esp, 14h
 0x655CD9: retn    4
-0x655CDC: mov     ecx, [esp+24h+arg_0]
-0x655CE0: call    sub_4711F0
+0x655CDC: mov     ecx, [esp+24h+arg_0]; this
+0x655CE0: call    ActorAnimData_IsCurrentIdleReady; Returns true when ActorAnimData current idle (+0xCC) exists and its phase field is 1. Furniture/action callers use this as the loaded/ready gate immediately before StartQueuedIdleAction.
 0x655CE5: test    al, al
 0x655CE7: mov     ebx, [esp+24h+var_14]
 0x655CEB: jz      short loc_655D38
-0x655CED: push    0
-0x655CEF: mov     ecx, ebx
-0x655CF1: call    sub_4706E0
+0x655CED: push    0; slotSelector
+0x655CEF: mov     ecx, ebx; this
+0x655CF1: call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].
 0x655CF6: test    eax, eax
 0x655CF8: jz      short loc_655D09
-0x655CFA: push    0
-0x655CFC: mov     ecx, ebx
-0x655CFE: call    sub_4706E0
+0x655CFA: push    0; slotSelector
+0x655CFC: mov     ecx, ebx; this
+0x655CFE: call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].
 0x655D03: cmp     dword ptr [eax+44h], 1
 0x655D07: jnz     short loc_655D38
 0x655D09: mov     ebx, [esp+24h+arg_0]
 0x655D0D: push    esi
 0x655D0E: mov     ecx, ebx
 0x655D10: mov     byte ptr [ebx+0C4h], 1
-0x655D17: call    sub_477E50
+0x655D17: call    ActorAnimData_StartQueuedIdleAction; Starts a ready queued idle as an actor action. Processes/promotes/plays through ActorAnimData_ProcessQueuedIdleKF; on success stores the actor ref at AnimIdle +0x28 and invokes high-process action 0x0B with the sequence at +0x10.
 0x655D1C: push    0
 0x655D1E: mov     ecx, edi
 0x655D20: mov     byte ptr [ebx+0C4h], 1
@@ -116,7 +116,7 @@
 0x655D32: add     esp, 14h
 0x655D35: retn    4
 0x655D38: mov     ecx, [esp+24h+arg_0]
-0x655D3C: call    sub_472EA0
+0x655D3C: call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.
 0x655D41: test    al, al
 0x655D43: jz      loc_655FA9
 0x655D49: mov     eax, [ebp+0]
@@ -168,7 +168,7 @@
 0x655DD3: push    ecx
 0x655DD4: mov     ecx, eax
 0x655DD6: fstp    [esp+2Ch+var_2C]; float
-0x655DD9: call    sub_471230
+0x655DD9: call    ActorAnimData_SampleAndExtractRootMotion; Samples the actor scene graph while extracting accumulation/root motion. Seeds AccumNode +0x54 from ActorAnimData +0x18, updates RootNode at the requested time, optionally copies the resulting AccumNode translation to the caller, then zeroes AccumNode +0x54. Used after forced play, animation-state restore, and explicit play-group paths.
 0x655DDE: mov     eax, [ebp+0]
 0x655DE1: mov     edx, [eax+188h]
 0x655DE7: push    1
@@ -192,7 +192,7 @@
 0x655E19: call    edx
 0x655E1B: mov     ecx, edi; this
 0x655E1D: mov     ebx, eax
-0x655E1F: call    MobileObject_GetCharProxy
+0x655E1F: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x655E24: mov     ebp, eax
 0x655E26: call    sub_531D80
 0x655E2B: mov     edi, eax
@@ -220,13 +220,13 @@
 0x655E64: call    edx
 0x655E66: push    eax; int
 0x655E67: mov     ecx, esi; this
-0x655E69: call    TESObjectREFR_GetParentCell
+0x655E69: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x655E6E: push    eax; int
 0x655E6F: mov     ecx, esi; this
 0x655E71: call    TESObjectREFR_GetWorldSpace
 0x655E76: push    eax; int
 0x655E77: mov     ecx, esi
-0x655E79: call    sub_4D7A20
+0x655E79: call    TESObjectREFR_SetStartLocation; TESObjectREFR wrapper records package start location from worldspace/cell, position XYZ, and rotZ into ExtraPackageStartLocation.
 0x655E7E: pop     ebx
 0x655E7F: pop     edi
 0x655E80: pop     esi
@@ -236,7 +236,7 @@
 0x655E87: retn    4
 0x655E8A: push    3Fh ; '?'
 0x655E8C: mov     ecx, esi
-0x655E8E: call    sub_5E05F0
+0x655E8E: call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.
 0x655E93: mov     eax, [ebx]
 0x655E95: mov     edx, [eax+370h]
 0x655E9B: push    7Fh
@@ -257,7 +257,7 @@
 0x655EC0: mov     ecx, ds:0B362C0h
 0x655EC6: push    eax
 0x655EC7: push    esi
-0x655EC8: call    sub_521450
+0x655EC8: call    TESIdleForm_FindIdleForActor; Idle root lookup for actor model path; rejects final candidate when ANAM high bit is set but model path is not .kf.
 0x655ECD: mov     edx, [ebx]
 0x655ECF: push    7Fh
 0x655ED1: push    0
@@ -307,7 +307,7 @@
 0x655F56: call    edx
 0x655F58: mov     ecx, edi; this
 0x655F5A: mov     ebx, eax
-0x655F5C: call    MobileObject_GetCharProxy
+0x655F5C: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x655F61: mov     ebp, eax
 0x655F63: call    sub_531D80
 0x655F68: mov     esi, eax
@@ -330,12 +330,12 @@
 0x655F8E: pop     ebp
 0x655F8F: add     esp, 14h
 0x655F92: retn    4
-0x655F95: call    sub_520200
+0x655F95: call    TESIdleForm_GetQueuedAnimType; Returns TESIdleForm ANAM byte at +0x38 masked with 0x7F. This low-seven-bit value is passed as the queued idle slot/type; the high bit is handled separately by native idle selection.
 0x655F9A: mov     ecx, [esp+24h+arg_0]
 0x655F9E: push    eax
 0x655F9F: mov     eax, [esp+28h+var_14]
 0x655FA3: push    eax
-0x655FA4: call    sub_475300
+0x655FA4: call    ActorAnimData_ReplaceCurrentIdleLoader; Replaces ActorAnimData current idle at +0xCC, not the queued +0xD0 slot. Stops its still-active normalized physical slot, retires the old AnimIdle into cleanup slots +0xD4/+0xD8 or destroys it, then allocates/initializes a new AnimIdle at +0xCC with completion mode 1 and no actor ref. Furniture/package callers later wait for ready phase and explicitly start it.
 0x655FA9: pop     ebx
 0x655FAA: pop     edi
 0x655FAB: pop     esi

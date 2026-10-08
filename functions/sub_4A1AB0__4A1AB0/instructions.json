@@ -84,12 +84,6 @@
     "size": 2
   },
   {
-    "ea": "0x4A1ACD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x4A1AD0",
     "line": "mov     eax, [edi+4]",
     "mnemonic": "mov",
@@ -193,7 +187,7 @@
   },
   {
     "ea": "0x4A1AF0",
-    "line": "mov     ecx, [esp+0Ch+arg_4]",
+    "line": "mov     ecx, [esp+0Ch+arg_4]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -205,13 +199,13 @@
   },
   {
     "ea": "0x4A1AF7",
-    "line": "push    edi",
+    "line": "push    edi; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4A1AF8",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },

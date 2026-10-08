@@ -19,7 +19,7 @@
 0x7A9A26: push    edx
 0x7A9A27: push    eax
 0x7A9A28: mov     eax, [ecx+1Ch]
-0x7A9A2B: call    eax
+0x7A9A2B: call    eax; DX11 migration audit: IDirect3DQuery9::GetData(&DWORD,4,D3DGETDATA_FLUSH=1), vtable +0x1C. Consumes actual visibility sample count on S_OK.
 0x7A9A2D: test    eax, eax
 0x7A9A2F: jnz     short loc_7A9A6C
 0x7A9A31: mov     eax, [esp+8+arg_0]

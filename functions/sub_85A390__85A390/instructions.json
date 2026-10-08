@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x85A3BD",
-    "line": "mov     ebx, [esp+48h+arg_0]",
+    "line": "mov     ebx, [esp+48h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x85A3CD",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x85A3DD",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -415,13 +415,13 @@
   },
   {
     "ea": "0x85A460",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x85A462",
-    "line": "call    sub_7ED2A0",
+    "line": "call    BSShaderLightingProperty__GetFirstActiveLight; Seeds the embedded light-list cursor from property +0x70 and returns the first usable ShadowSceneLight. Oblivion rejects frustumCull == 0xFF, backing-light AppCulled, and light byte +0xF4 == 1. Fallout was consulted afterward only for the conventional GetFirstActiveLight label; its later implementation lacks Oblivion's +0xF4 rejection.",
     "mnemonic": "call",
     "size": 5
   },
@@ -445,13 +445,13 @@
   },
   {
     "ea": "0x85A473",
-    "line": "mov     ecx, [esp+48h+var_30]",
+    "line": "mov     ecx, [esp+48h+var_30]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x85A477",
-    "line": "call    sub_7ED4B0",
+    "line": "call    BSShaderLightingProperty__GetNextActiveLight; Advances the embedded cursor at property +0x7C and returns the next usable ShadowSceneLight under Oblivion's three gates: frustumCull != 0xFF, backing NiLight not AppCulled, and byte +0xF4 != 1. Fallout corroborates the method label but not the extra Oblivion gate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x85A48F",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -751,13 +751,13 @@
   },
   {
     "ea": "0x85A50C",
-    "line": "mov     ecx, [esp+48h+var_30]",
+    "line": "mov     ecx, [esp+48h+var_30]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x85A510",
-    "line": "call    sub_7ED4B0",
+    "line": "call    BSShaderLightingProperty__GetNextActiveLight; Advances the embedded cursor at property +0x7C and returns the next usable ShadowSceneLight under Oblivion's three gates: frustumCull != 0xFF, backing NiLight not AppCulled, and byte +0xF4 != 1. Fallout corroborates the method label but not the extra Oblivion gate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -811,7 +811,7 @@
   },
   {
     "ea": "0x85A52A",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -1075,13 +1075,13 @@
   },
   {
     "ea": "0x85A5B2",
-    "line": "mov     ecx, [esp+48h+var_30]",
+    "line": "mov     ecx, [esp+48h+var_30]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x85A5B6",
-    "line": "call    sub_7ED4B0",
+    "line": "call    BSShaderLightingProperty__GetNextActiveLight; Advances the embedded cursor at property +0x7C and returns the next usable ShadowSceneLight under Oblivion's three gates: frustumCull != 0xFF, backing NiLight not AppCulled, and byte +0xF4 != 1. Fallout corroborates the method label but not the extra Oblivion gate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1123,7 +1123,7 @@
   },
   {
     "ea": "0x85A5D0",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -1477,43 +1477,43 @@
   },
   {
     "ea": "0x85A68F",
-    "line": "mov     edx, [esp+54h+arg_0]",
+    "line": "mov     edx, [esp+54h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x85A693",
-    "line": "push    3",
+    "line": "push    3; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x85A695",
-    "line": "push    ecx",
+    "line": "push    ecx; byte6",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x85A696",
-    "line": "push    169h",
+    "line": "push    169h; selector",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x85A69B",
-    "line": "push    edx",
+    "line": "push    edx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x85A69C",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x85A69D",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1687,13 +1687,13 @@
   },
   {
     "ea": "0x85A6F9",
-    "line": "mov     ecx, [esp+48h+var_30]",
+    "line": "mov     ecx, [esp+48h+var_30]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x85A6FD",
-    "line": "call    sub_7ED4B0",
+    "line": "call    BSShaderLightingProperty__GetNextActiveLight; Advances the embedded cursor at property +0x7C and returns the next usable ShadowSceneLight under Oblivion's three gates: frustumCull != 0xFF, backing NiLight not AppCulled, and byte +0xF4 != 1. Fallout corroborates the method label but not the extra Oblivion gate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1735,7 +1735,7 @@
   },
   {
     "ea": "0x85A721",
-    "line": "mov     ecx, [esp+48h+arg_0]",
+    "line": "mov     ecx, [esp+48h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1747,7 +1747,7 @@
   },
   {
     "ea": "0x85A727",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1813,13 +1813,13 @@
   },
   {
     "ea": "0x85A74C",
-    "line": "mov     ecx, [esp+48h+var_30]",
+    "line": "mov     ecx, [esp+48h+var_30]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x85A750",
-    "line": "call    sub_7ED2A0",
+    "line": "call    BSShaderLightingProperty__GetFirstActiveLight; Seeds the embedded light-list cursor from property +0x70 and returns the first usable ShadowSceneLight. Oblivion rejects frustumCull == 0xFF, backing-light AppCulled, and light byte +0xF4 == 1. Fallout was consulted afterward only for the conventional GetFirstActiveLight label; its later implementation lacks Oblivion's +0xF4 rejection.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1843,13 +1843,13 @@
   },
   {
     "ea": "0x85A761",
-    "line": "mov     ecx, [esp+48h+var_30]",
+    "line": "mov     ecx, [esp+48h+var_30]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x85A765",
-    "line": "call    sub_7ED4B0",
+    "line": "call    BSShaderLightingProperty__GetNextActiveLight; Advances the embedded cursor at property +0x7C and returns the next usable ShadowSceneLight under Oblivion's three gates: frustumCull != 0xFF, backing NiLight not AppCulled, and byte +0xF4 != 1. Fallout corroborates the method label but not the extra Oblivion gate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1891,7 +1891,7 @@
   },
   {
     "ea": "0x85A779",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -2161,13 +2161,13 @@
   },
   {
     "ea": "0x85A806",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x85A808",
-    "line": "call    sub_7ED4B0",
+    "line": "call    BSShaderLightingProperty__GetNextActiveLight; Advances the embedded cursor at property +0x7C and returns the next usable ShadowSceneLight under Oblivion's three gates: frustumCull != 0xFF, backing NiLight not AppCulled, and byte +0xF4 != 1. Fallout corroborates the method label but not the extra Oblivion gate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2209,7 +2209,7 @@
   },
   {
     "ea": "0x85A81A",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -2503,7 +2503,7 @@
   },
   {
     "ea": "0x85A8B6",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -2869,43 +2869,43 @@
   },
   {
     "ea": "0x85A97A",
-    "line": "mov     ecx, [esp+54h+arg_0]",
+    "line": "mov     ecx, [esp+54h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x85A97E",
-    "line": "push    3",
+    "line": "push    3; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x85A980",
-    "line": "push    edx",
+    "line": "push    edx; byte6",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x85A981",
-    "line": "push    172h",
+    "line": "push    172h; selector",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x85A986",
-    "line": "push    ecx",
+    "line": "push    ecx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x85A987",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x85A988",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3091,13 +3091,13 @@
   },
   {
     "ea": "0x85A9E7",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x85A9E9",
-    "line": "call    sub_7ED4B0",
+    "line": "call    BSShaderLightingProperty__GetNextActiveLight; Advances the embedded cursor at property +0x7C and returns the next usable ShadowSceneLight under Oblivion's three gates: frustumCull != 0xFF, backing NiLight not AppCulled, and byte +0xF4 != 1. Fallout corroborates the method label but not the extra Oblivion gate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3223,43 +3223,43 @@
   },
   {
     "ea": "0x85AA3D",
-    "line": "mov     ecx, [esp+4Ch+arg_0]",
+    "line": "mov     ecx, [esp+4Ch+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x85AA41",
-    "line": "push    1",
+    "line": "push    1; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x85AA43",
-    "line": "push    edx",
+    "line": "push    edx; byte6",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x85AA44",
-    "line": "push    176h",
+    "line": "push    176h; selector",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x85AA49",
-    "line": "push    ecx",
+    "line": "push    ecx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x85AA4A",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x85AA4B",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3490,5 +3490,137 @@
     "line": "retn    1Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D44C0",
+    "line": "mov     eax, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D44C3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D44C4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D44C9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D44CA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D44CB",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D44CE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D44CF",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D44D4",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D44D5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D44D6",
+    "line": "mov     eax, [ebp+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D44D9",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D44DA",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D44DF",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D44E0",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D44E1",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D44E5",
+    "line": "lea     eax, [edx-38h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D44E8",
+    "line": "mov     ecx, [edx-3Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D44EB",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D44ED",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D44F2",
+    "line": "mov     eax, offset stru_AFC570",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D44F7",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x778CF0",
+      "0x778D42"
+    ]
+  ],
+  "chunks_sha256": "31a99b5e0b27c7b286bb2b89db621376f93027d297ca3832a438ceed3ea20d76",
+  "comment_regular": "Pass225: NiD3DGeometryGroupManager constructor; stores D3D device and vertex-buffer manager used for screen-texture +0x1C admission.",
+  "comment_repeatable": "Pass225: NiD3DGeometryGroupManager constructor; stores D3D device and vertex-buffer manager used for screen-texture +0x1C admission.\nDX11 authority audit 2026-10-01: Verified factory, not a thiscall constructor: allocates 1C bytes, calls base ctor, installs A8A778, zeroes fields, retains device through COM +4 at 778D34 and stores it at +10; vertex-buffer-manager argument stored at +14. Caller NiRenderer_Create 76A81D. Verified Fallout family 827C2938 Create has same allocation/initialization/ownership, with Xenon-specific device ABI.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "NiD3DGeometryGroupManager::NiD3DGeometryGroupManager(void)",
+  "display_name": "NiD3DGeometryGroupManager_Create",
   "end_ea": "0x778D42",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "??0NiD3DGeometryGroupManager@@QAE@XZ",
+  "name": "NiD3DGeometryGroupManager_Create",
   "segment": ".text",
   "sha256": "31a99b5e0b27c7b286bb2b89db621376f93027d297ca3832a438ceed3ea20d76",
   "size": 82,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x778CF0",
-  "type": "NiD3DGeometryGroupManager *__cdecl(int, int)",
+  "total_chunk_size": 82,
+  "type": "NiD3DGeometryGroupManager *__cdecl(IDirect3DDevice9 *device, void *vertexBufferManager)",
   "xrefs_from_count": 35,
   "xrefs_to_count": 1
 }

@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 6,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x783BF0",
+      "0x783C2C"
+    ]
+  ],
+  "chunks_sha256": "81aebca96405ce1b3ab83aff0b180bc9f112bf54a93d410ade3862447f94ae3f",
+  "comment_regular": "Calls IDirect3DDevice9::CreateVertexShader for compiled DWORD bytecode and reports a failed HRESULT.",
+  "comment_repeatable": "Calls IDirect3DDevice9::CreateVertexShader for compiled DWORD bytecode and reports a failed HRESULT.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_783BF0",
+  "display_name": "NiDX9Renderer__CreateVertexShader",
   "end_ea": "0x783C2C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_783BF0",
+  "name": "NiDX9Renderer__CreateVertexShader",
   "segment": ".text",
   "sha256": "81aebca96405ce1b3ab83aff0b180bc9f112bf54a93d410ade3862447f94ae3f",
   "size": 60,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x783BF0",
-  "type": "int __stdcall(int, int, int, int, int, int)",
+  "total_chunk_size": 60,
+  "type": "IDirect3DVertexShader9 *__stdcall(const unsigned int *bytecode, int unused2, int unused3, int unused4, int unused5, int unused6)",
   "xrefs_from_count": 22,
   "xrefs_to_count": 6
 }

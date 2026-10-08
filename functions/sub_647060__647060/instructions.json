@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x647060",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, [esp+owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x647065",
-    "line": "mov     ebx, [esp+4+arg_0]",
+    "line": "mov     ebx, [esp+4+changeMask]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,13 +37,13 @@
   },
   {
     "ea": "0x64706C",
-    "line": "push    eax",
+    "line": "push    eax; owner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x64706D",
-    "line": "push    ebx",
+    "line": "push    ebx; changeMask",
     "mnemonic": "push",
     "size": 1
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x647070",
-    "line": "call    sub_60D0E0",
+    "line": "call    BaseProcess_GetSaveSize",
     "mnemonic": "call",
     "size": 5
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x64707E",
-    "line": "mov     [esp+10h+arg_4], esi",
+    "line": "mov     [esp+10h+owner], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x647085",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x6470C9",
-    "line": "mov     [esp+10h+arg_4], esi",
+    "line": "mov     [esp+10h+owner], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x6470CF",
-    "line": "lea     ecx, [edi+70h]",
+    "line": "lea     ecx, [edi+70h]; self",
     "mnemonic": "lea",
     "size": 3
   },
@@ -271,13 +271,13 @@
   },
   {
     "ea": "0x6470E3",
-    "line": "mov     word ptr [esp+10h+arg_4], di",
+    "line": "mov     word ptr [esp+10h+owner], di",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x6470E8",
-    "line": "mov     esi, [esp+10h+arg_4]",
+    "line": "mov     esi, [esp+10h+owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x6470EE",
-    "line": "mov     di, word ptr [esp+10h+arg_4]",
+    "line": "mov     di, word ptr [esp+10h+owner]",
     "mnemonic": "mov",
     "size": 5
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x6470FD",
-    "line": "mov     [esp+10h+arg_4], esi",
+    "line": "mov     [esp+10h+owner], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x64710B",
-    "line": "mov     [esp+10h+arg_4], esi",
+    "line": "mov     [esp+10h+owner], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x647128",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,6 +1,6 @@
 0x719500: push    ebx
 0x719501: push    esi
-0x719502: mov     esi, dword ptr [esp+8+arg_0]
+0x719502: mov     esi, [esp+8+arg_0]
 0x719506: push    edi
 0x719507: push    esi
 0x719508: mov     edi, ecx
@@ -12,7 +12,7 @@
 0x71951E: movzx   ecx, word ptr [esi+8]
 0x719522: add     esp, 4
 0x719525: cmp     ebx, ecx
-0x719527: mov     dword ptr [esp+0Ch+arg_0], eax
+0x719527: mov     [esp+0Ch+arg_0], eax
 0x71952B: jb      short loc_71953B
 0x71952D: movzx   edx, word ptr [esi+0Eh]
 0x719531: add     edx, ebx
@@ -26,13 +26,13 @@
 0x719543: call    NiTArray_SetAt; Actually first arg is a generic NiTArray
 0x719548: mov     cl, [edi+18h]
 0x71954B: and     cl, 1
-0x71954E: mov     [esp+0Ch+arg_0], cl
-0x719552: mov     edx, dword ptr [esp+0Ch+arg_0]
+0x71954E: mov     byte ptr [esp+0Ch+arg_0], cl
+0x719552: mov     edx, [esp+0Ch+arg_0]
 0x719556: push    edx; char
 0x719557: push    offset aM_benable; "m_bEnable"
 0x71955C: call    TESOutput_PrintLabeledBool
 0x719561: movzx   ebx, word ptr [esi+0Ah]
-0x719565: mov     dword ptr [esp+14h+arg_0], eax
+0x719565: mov     [esp+14h+arg_0], eax
 0x719569: movzx   eax, word ptr [esi+8]
 0x71956D: add     esp, 8
 0x719570: cmp     ebx, eax
@@ -52,7 +52,7 @@
 0x719593: push    offset aM_uiref; "m_uiRef"
 0x719598: call    TESOutput_PrintLabeledUnsignedInt
 0x71959D: movzx   ebx, word ptr [esi+0Ah]
-0x7195A1: mov     dword ptr [esp+14h+arg_0], eax
+0x7195A1: mov     [esp+14h+arg_0], eax
 0x7195A5: movzx   eax, word ptr [esi+8]
 0x7195A9: add     esp, 8
 0x7195AC: cmp     ebx, eax
@@ -72,7 +72,7 @@
 0x7195CF: push    offset aM_uimask; "m_uiMask"
 0x7195D4: call    TESOutput_PrintLabeledUnsignedInt
 0x7195D9: movzx   ebx, word ptr [esi+0Ah]
-0x7195DD: mov     dword ptr [esp+14h+arg_0], eax
+0x7195DD: mov     [esp+14h+arg_0], eax
 0x7195E1: movzx   eax, word ptr [esi+8]
 0x7195E5: add     esp, 8
 0x7195E8: cmp     ebx, eax
@@ -93,7 +93,7 @@
 0x71960F: push    offset aM_etest; "m_eTest"
 0x719614: call    sub_718C30
 0x719619: movzx   ebx, word ptr [esi+0Ah]
-0x71961D: mov     dword ptr [esp+14h+arg_0], eax
+0x71961D: mov     [esp+14h+arg_0], eax
 0x719621: movzx   eax, word ptr [esi+8]
 0x719625: add     esp, 8
 0x719628: cmp     ebx, eax
@@ -115,7 +115,7 @@
 0x719651: push    offset aM_efailact; "m_eFailAct"
 0x719656: call    sub_718D40
 0x71965B: movzx   ebx, word ptr [esi+0Ah]
-0x71965F: mov     dword ptr [esp+14h+arg_0], eax
+0x71965F: mov     [esp+14h+arg_0], eax
 0x719663: movzx   eax, word ptr [esi+8]
 0x719667: add     esp, 8
 0x71966A: cmp     ebx, eax
@@ -137,7 +137,7 @@
 0x719694: push    offset aM_ezfailact; "m_eZFailAct"
 0x719699: call    sub_718D40
 0x71969E: movzx   ebx, word ptr [esi+0Ah]
-0x7196A2: mov     dword ptr [esp+14h+arg_0], eax
+0x7196A2: mov     [esp+14h+arg_0], eax
 0x7196A6: movzx   eax, word ptr [esi+8]
 0x7196AA: add     esp, 8
 0x7196AD: cmp     ebx, eax
@@ -159,7 +159,7 @@
 0x7196D7: push    offset aM_epassact; "m_ePassAct"
 0x7196DC: call    sub_718D40
 0x7196E1: movzx   ebx, word ptr [esi+0Ah]
-0x7196E5: mov     dword ptr [esp+14h+arg_0], eax
+0x7196E5: mov     [esp+14h+arg_0], eax
 0x7196E9: movzx   eax, word ptr [esi+8]
 0x7196ED: add     esp, 8
 0x7196F0: cmp     ebx, eax
@@ -181,7 +181,7 @@
 0x71971A: push    offset aM_edrawmode; "m_eDrawMode"
 0x71971F: call    sub_718E20
 0x719724: movzx   edi, word ptr [esi+0Ah]
-0x719728: mov     dword ptr [esp+14h+arg_0], eax
+0x719728: mov     [esp+14h+arg_0], eax
 0x71972C: movzx   eax, word ptr [esi+8]
 0x719730: add     esp, 8
 0x719733: cmp     edi, eax

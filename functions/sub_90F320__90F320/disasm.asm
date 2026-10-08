@@ -19,7 +19,6 @@
 0x90F352: push    ebp
 0x90F353: lea     ebx, [edi+14h]
 0x90F356: jmp     short loc_90F360
-0x90F358: align 10h
 0x90F360: mov     eax, [edi+120h]
 0x90F366: mov     ebp, [esp+20h+arg_0]
 0x90F36A: mov     ecx, [eax+esi*8]

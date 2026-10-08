@@ -11,44 +11,44 @@
 0x622BEF: push    edi; a5
 0x622BF0: fstp    st
 0x622BF2: mov     edi, [esi+3Ch]; a1
-0x622BF5: push    0; a4
-0x622BF7: call    sub_6135F0
-0x622BFC: push    eax; a3
-0x622BFD: push    edi; a2
-0x622BFE: call    TESObjectREFR_GetDistanceBetween?
+0x622BF5: push    0; useActorProjection
+0x622BF7: call    CombatController_GetCurrentTarget
+0x622BFC: push    eax; to
+0x622BFD: push    edi; from
+0x622BFE: call    TESObjectREFR_GetSurfaceDistance; Three-argument cdecl routine: returns float surface distance from 'from' to 'to'. All 24 callers push exactly from, to, and useActorProjection then reclaim 0x0C. The prior EDI register argument, fourth stack byte, and double return were analysis pollution.
 0x622C03: fstp    dword ptr [esi+184h]
 0x622C09: fldz
 0x622C0B: add     esp, 0Ch
 0x622C0E: pop     edi
 0x622C0F: fld     dword ptr [esi+184h]
-0x622C15: lea     eax, [esp+10h+var_8]
+0x622C15: lea     eax, [esp+10h+outMaximumDistance]
 0x622C19: fstp    [esp+10h+var_4]
-0x622C1D: push    eax
-0x622C1E: lea     ecx, [esp+14h+var_C]
-0x622C22: push    ecx
-0x622C23: fst     [esp+18h+var_C]
-0x622C27: mov     ecx, esi
-0x622C29: fstp    [esp+18h+var_8]
-0x622C2D: call    sub_6142D0
+0x622C1D: push    eax; outMaximumDistance
+0x622C1E: lea     ecx, [esp+14h+outOptimalDistance]
+0x622C22: push    ecx; outOptimalDistance
+0x622C23: fst     [esp+18h+outOptimalDistance]
+0x622C27: mov     ecx, esi; this
+0x622C29: fstp    [esp+18h+outMaximumDistance]
+0x622C2D: call    CombatController_GetRangedDistanceBounds; Combines projectile/spell bounds with TESCombatStyle optimal/max range multipliers (SDK +0x6C/+0x70).
 0x622C32: cmp     byte ptr [esi+49h], 0
 0x622C36: jnz     loc_622D35
 0x622C3C: cmp     dword ptr [esi+74h], 1
 0x622C40: jz      loc_622D35
 0x622C46: fld     [esp+10h+var_4]
-0x622C4A: fld     [esp+10h+var_C]
+0x622C4A: fld     [esp+10h+outOptimalDistance]
 0x622C4E: fcom    st(1)
 0x622C50: fnstsw  ax
 0x622C52: test    ah, 5
 0x622C55: jp      short loc_622C71
-0x622C57: fld     [esp+10h+var_8]
+0x622C57: fld     [esp+10h+outMaximumDistance]
 0x622C5B: fcomp   st(2)
 0x622C5D: fnstsw  ax
 0x622C5F: test    ah, 1
 0x622C62: jnz     short loc_622C71
 0x622C64: fstp    st(1)
-0x622C66: mov     ecx, esi
+0x622C66: mov     ecx, esi; this
 0x622C68: fstp    st
-0x622C6A: call    sub_6213D0
+0x622C6A: call    CombatController_UpdateCombatModeState
 0x622C6F: jmp     short loc_622C97
 0x622C71: fcompp
 0x622C73: fnstsw  ax
@@ -80,7 +80,7 @@
 0x622CC5: test    al, al
 0x622CC7: jnz     short loc_622D30
 0x622CC9: mov     ecx, esi
-0x622CCB: call    sub_614290
+0x622CCB: call    CombatController_CanReachCurrentTarget; Returns current-target reachability at +0x174, additionally forcing false when a non-water-capable actor cannot fight a swimming target.
 0x622CD0: test    al, al
 0x622CD2: jnz     short loc_622D04
 0x622CD4: push    0
@@ -105,7 +105,7 @@
 0x622D1E: lea     eax, [esp+18h+var_4]
 0x622D22: push    eax
 0x622D23: mov     ecx, esi
-0x622D25: call    sub_616980
+0x622D25: call    CombatController_SelectAttackSpellByMode
 0x622D2A: mov     [esi+80h], eax
 0x622D30: pop     esi
 0x622D31: add     esp, 0Ch

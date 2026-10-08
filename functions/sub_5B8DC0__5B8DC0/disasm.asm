@@ -1,5 +1,5 @@
-0x5B8DC0: sub     esp, 10h
-0x5B8DC3: call    sub_578D70
+0x5B8DC0: sub     esp, 10h; Confirmation callback for accepted world-map fast travel. It re-identifies the selected marker/ref from stored tile data and then calls PlayerCharacter_FastTravelCore with that ref.
+0x5B8DC3: call    InterfaceManager_ConsumeMessageButton
 0x5B8DC8: cmp     al, 1
 0x5B8DCA: jnz     loc_5B8FB9
 0x5B8DD0: push    ebp
@@ -14,7 +14,7 @@
 0x5B8DEA: mov     ecx, ebp
 0x5B8DEC: call    Tile_GetParentMenu
 0x5B8DF1: mov     esi, eax
-0x5B8DF3: mov     ebx, [esi+0C4h]
+0x5B8DF3: mov     ebx, [esi+0C4h]; ParentMenu+0xC4 is the map marker/reference list scanned to match selected map tile coordinates/model path.
 0x5B8DF9: test    ebx, ebx
 0x5B8DFB: jz      loc_5B8FB6
 0x5B8E01: push    edi
@@ -72,9 +72,9 @@
 0x5B8EBF: mov     ecx, [esi+0B0h]
 0x5B8EC5: test    ecx, ecx
 0x5B8EC7: jz      short loc_5B8ED5
-0x5B8EC9: push    eax; Str2
-0x5B8ECA: push    ecx; Str1
-0x5B8ECB: call    __strcmp
+0x5B8EC9: push    eax; right
+0x5B8ECA: push    ecx; left
+0x5B8ECB: call    CRT_StricmpLocaleDispatch
 0x5B8ED0: add     esp, 8
 0x5B8ED3: jmp     short loc_5B8EE2
 0x5B8ED5: xor     ecx, ecx
@@ -112,17 +112,17 @@
 0x5B8F2E: push    0FA8h
 0x5B8F33: add     ebx, 14h
 0x5B8F36: call    Tile_GetFloat
-0x5B8F3B: call    Double_To_SInt32
+0x5B8F3B: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B8F40: mov     edx, [ebx]
 0x5B8F42: push    eax; a3
 0x5B8F43: mov     ecx, esi
 0x5B8F45: call    edx
 0x5B8F47: fld1
 0x5B8F49: push    ecx
-0x5B8F4A: fstp    [esp+24h+a3]; a3
+0x5B8F4A: fstp    [esp+24h+a3]; value
 0x5B8F4D: mov     ecx, ebp; this
-0x5B8F4F: push    0FA1h; a2
-0x5B8F54: call    Tile_SetFloat
+0x5B8F4F: push    0FA1h; propertyCode
+0x5B8F54: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B8F59: push    0
 0x5B8F5B: push    1
 0x5B8F5D: push    1; arg1
@@ -142,16 +142,16 @@
 0x5B8F87: call    InterfaceManager_GetSingleton
 0x5B8F8C: add     esp, 8
 0x5B8F8F: mov     ecx, eax
-0x5B8F91: call    sub_5821F0
+0x5B8F91: call    InterfaceManager_ProcessGlobalHotkeys
 0x5B8F96: push    1; arg1
 0x5B8F98: push    0; canCreate
 0x5B8F9A: call    InterfaceManager_GetSingleton
 0x5B8F9F: add     esp, 8
 0x5B8FA2: mov     ecx, eax
-0x5B8FA4: call    sub_583F40
+0x5B8FA4: call    InterfaceManager__UpdateMenuFades; Verified: reads GetTimerPercent and Menu fade state +0x24. State 2 completion sets state 4; if root trait 0x1772==2, destroys MenuTopicManager for DialogMenu at 0x584230 then invokes root tile deleting destructor at 0x584255. Otherwise hides root. State 8 completion sets state 1. This is the normal deferred destruction path, separate from StartFadeOut.
 0x5B8FA9: mov     ecx, ds:0B333C4h; int
 0x5B8FAF: push    edi; int
-0x5B8FB0: call    sub_66F420
+0x5B8FB0: call    PlayerCharacter_FastTravelCore; 3DTheft decode: accepted world-map fast-travel confirmation calls PlayerCharacter_FastTravelCore with the selected marker/reference.
 0x5B8FB5: pop     edi
 0x5B8FB6: pop     esi
 0x5B8FB7: pop     ebx

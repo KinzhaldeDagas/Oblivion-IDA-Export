@@ -1,1 +1,5 @@
-GPOS_MarkRecord
+struct GPOS_MarkRecord
+{
+WORD Class;
+WORD MarkAnchor;
+};

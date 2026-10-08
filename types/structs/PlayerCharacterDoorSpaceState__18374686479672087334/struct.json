@@ -1,0 +1,54 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "PlayerCharacterDoorSpaceState",
+  "definition": "struct PlayerCharacterDoorSpaceState\n{\nUInt8 beforeDoorSpaceMap[40];\nNiTMap_void lastSpaceForDoorByRefID; ///< Verified embedded NiTMap_void keyed by TESObjectDOOR.refID (+0x0C). PlayerCharacter_GetLastSpaceForDoor returns the low byte with 0xFF default; PlayerCharacter_SetLastSpaceForDoor stores the selected space index via NiTMap_SetAt. Full value-width/upper-byte semantics and maximum list length remain Unknown.\nUInt8 afterDoorSpaceMap[12];\n}\n",
+  "id": 18374686479672087334,
+  "is_union": false,
+  "kind": "struct",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "beforeDoorSpaceMap",
+      "offset": 0,
+      "offset_hex": "0x0",
+      "size": 40,
+      "type": "UInt8[40]"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified embedded NiTMap_void keyed by TESObjectDOOR.refID (+0x0C). PlayerCharacter_GetLastSpaceForDoor returns the low byte with 0xFF default; PlayerCharacter_SetLastSpaceForDoor stores the selected space index via NiTMap_SetAt. Full value-width/upper-byte semantics and maximum list length remain Unknown.",
+      "name": "lastSpaceForDoorByRefID",
+      "offset": 40,
+      "offset_hex": "0x28",
+      "size": 16,
+      "type": "NiTMap_void"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "afterDoorSpaceMap",
+      "offset": 56,
+      "offset_hex": "0x38",
+      "size": 12,
+      "type": "UInt8[12]"
+    }
+  ],
+  "name": "PlayerCharacterDoorSpaceState",
+  "ordinal": 10142,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 68
+}

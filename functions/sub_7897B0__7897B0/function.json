@@ -1,19 +1,36 @@
 {
-  "callees_count": 14,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 11,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 4,
-  "display_name": "sub_7897B0",
+  "chunks": [
+    [
+      "0x7897B0",
+      "0x7898CC"
+    ],
+    [
+      "0x9CB3E0",
+      "0x9CB414"
+    ]
+  ],
+  "chunks_sha256": "a3adbbcf9f4193fe17c213a47b371d9208a007f3ab85aca7544a8a379430d78d",
+  "comment_regular": "2026-05-24 SpeedTreeOBSE stock post-load pass: stock CSpeedTreeRT::ParseWindInfo candidate for top-level 11000. Accepts nested 11002 only and writes CTreeEngine+0xF0; later 21000/21001 SpeedWind scalars are separate top-level float cases.",
+  "comment_repeatable": "2026-05-24 SpeedTreeOBSE stock post-load pass: stock CSpeedTreeRT::ParseWindInfo candidate for top-level 11000. Accepts nested 11002 only and writes CTreeEngine+0xF0; later 21000/21001 SpeedWind scalars are separate top-level float cases.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 13,
+  "display_name": "CSpeedTreeRT__ParseWindInfo",
   "end_ea": "0x7898CC",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7897B0",
+  "name": "CSpeedTreeRT__ParseWindInfo",
   "segment": ".text",
   "sha256": "348a7d45841098c597e1fb8aff2433c8aabf68231b482021e083e7d386231920",
   "size": 284,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7897B0",
-  "type": "int __thiscall(void *this, unsigned int *)",
-  "xrefs_from_count": 91,
+  "total_chunk_size": 336,
+  "type": "void __thiscall(OB_CSpeedTreeRT_010201A0 *this, OB_CTreeFileAccess_010201A0 *file)",
+  "xrefs_from_count": 112,
   "xrefs_to_count": 1
 }

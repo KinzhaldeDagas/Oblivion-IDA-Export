@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x76A1F4",
-    "line": "mov     [ebp+0A58h], eax",
+    "line": "mov     [ebp+0A58h], eax; DeferredRendering: NiRenderer_Create stores requested width at NiDX9Renderer +0xA58 and height at +0xA5C; D3D device is later available at +0x280.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x76A294",
-    "line": "call    sub_763DE0",
+    "line": "call    NiDX9AdapterDescArray_GetSingleton; Oblivion-authoritative: lazily creates IDirect3D9, constructs the global NiTArray<NiDX9AdapterDesc*> wrapper, populates one descriptor per adapter, then releases the temporary IDirect3D9 reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x76A2DC",
-    "line": "push    offset byte_B3F828; Dst",
+    "line": "push    offset unk_B3F828; Dst",
     "mnemonic": "push",
     "size": 5
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x76A2EB",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x76A344",
-    "line": "push    offset byte_B3F828; Dst",
+    "line": "push    offset unk_B3F828; Dst",
     "mnemonic": "push",
     "size": 5
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x76A353",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x76A38C",
-    "line": "lea     edx, [esp+4D4h+var_488]",
+    "line": "lea     edx, [esp+4D4h+parameters]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -648,12 +648,6 @@
     "size": 2
   },
   {
-    "ea": "0x76A39D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x76A3A0",
     "line": "push    offset aNidx9rendere_5; \"NiDX9Renderer::Initialize> Attempting t\"...",
     "mnemonic": "push",
@@ -661,7 +655,7 @@
   },
   {
     "ea": "0x76A3A5",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -799,7 +793,7 @@
   },
   {
     "ea": "0x76A3F7",
-    "line": "push    offset byte_B3F828; Dst",
+    "line": "push    offset unk_B3F828; Dst",
     "mnemonic": "push",
     "size": 5
   },
@@ -817,7 +811,7 @@
   },
   {
     "ea": "0x76A406",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -847,7 +841,7 @@
   },
   {
     "ea": "0x76A421",
-    "line": "lea     edx, [esp+4D0h+var_488]",
+    "line": "lea     edx, [esp+4D0h+parameters]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -985,7 +979,7 @@
   },
   {
     "ea": "0x76A471",
-    "line": "call    sub_761E60",
+    "line": "call    NiDX9Renderer_BuildPresentParameters; Oblivion-authoritative: builds the 0x38-byte D3DPRESENT_PARAMETERS block. Chooses framebuffer/depth formats, multisample type/quality, swap effect/backbuffer count, windowed/fullscreen mode, refresh rate, and presentation interval; degrades unsupported requests.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1009,7 +1003,7 @@
   },
   {
     "ea": "0x76A483",
-    "line": "mov     edx, [esp+4D0h+var_47C]",
+    "line": "mov     edx, [esp+4D0h+parameters.BackBufferCount]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1072,12 +1066,6 @@
     "line": "jmp     short loc_76A4B0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x76A4A5",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
   },
   {
     "ea": "0x76A4B0",
@@ -1267,7 +1255,7 @@
   },
   {
     "ea": "0x76A51A",
-    "line": "lea     edx, [esp+4D4h+var_488]",
+    "line": "lea     edx, [esp+4D4h+parameters]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1285,7 +1273,7 @@
   },
   {
     "ea": "0x76A525",
-    "line": "push    edx",
+    "line": "push    edx; DX11 backend audit 2026-09-24, OblivionNew: this push passes IDirect3D9::CreateDevice BehaviorFlags from renderer+0x5C4. Adjacent pushes supply hFocusWindow (+0x3B8), DeviceType (+0x5C0), Adapter (+0x5BC); output device is renderer+0x280. Installed V180 runtime log reports behavior=0x54 (MULTITHREADED|FPU_PRESERVE|HARDWARE_VERTEXPROCESSING); this is run evidence, not a claim that the field is statically constant.",
     "mnemonic": "push",
     "size": 1
   },
@@ -1339,7 +1327,7 @@
   },
   {
     "ea": "0x76A542",
-    "line": "mov     eax, [ecx+40h]",
+    "line": "mov     eax, [ecx+40h]; DX10OBSE deployed 2026-05-24: guarded hook config is armed locally (InstallHooks=1, validation/target-byte logging on, draw mirroring off). Log stream reopen bug is fixed; next OBSE launch should log Load/config/target validation/D3D9 CreateDevice/DX10 sidecar diagnostics from this callsite.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1351,13 +1339,13 @@
   },
   {
     "ea": "0x76A547",
-    "line": "mov     edi, [esp+4D0h+var_488]",
+    "line": "mov     edi, [esp+4D0h+parameters.BackBufferWidth]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x76A54B",
-    "line": "mov     ecx, eax; void *",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1369,7 +1357,7 @@
   },
   {
     "ea": "0x76A550",
-    "line": "mov     eax, [esp+4D0h+var_484]",
+    "line": "mov     eax, [esp+4D0h+parameters.BackBufferHeight]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1429,7 +1417,7 @@
   },
   {
     "ea": "0x76A576",
-    "line": "cmp     eax, [esp+4D0h+var_47C]",
+    "line": "cmp     eax, [esp+4D0h+parameters.BackBufferCount]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -1447,7 +1435,7 @@
   },
   {
     "ea": "0x76A581",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1477,7 +1465,7 @@
   },
   {
     "ea": "0x76A591",
-    "line": "lea     edx, [esp+4D4h+var_488]",
+    "line": "lea     edx, [esp+4D4h+parameters]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1615,7 +1603,7 @@
   },
   {
     "ea": "0x76A5E0",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1687,7 +1675,7 @@
   },
   {
     "ea": "0x76A60D",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1789,7 +1777,7 @@
   },
   {
     "ea": "0x76A64A",
-    "line": "push    offset byte_B3F828; Dst",
+    "line": "push    offset unk_B3F828; Dst",
     "mnemonic": "push",
     "size": 5
   },
@@ -1807,7 +1795,7 @@
   },
   {
     "ea": "0x76A659",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1825,7 +1813,7 @@
   },
   {
     "ea": "0x76A663",
-    "line": "lea     ecx, [esp+4D0h+var_488]",
+    "line": "lea     ecx, [esp+4D0h+parameters]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1843,7 +1831,7 @@
   },
   {
     "ea": "0x76A66A",
-    "line": "call    sub_762110",
+    "line": "call    NiDX9Renderer_InitializeDeviceStateAndSamplerPresets; Oblivion NiDX9 renderer/device setup. Among other device and capability work, runtime-initialize g_NiD3DFilterPresets_MinMagMip at 0xB420E8 and g_NiD3DAddressPresets_UV at 0xB42130. Filter rows [MIN,MAG,MIP]: 0=(POINT,POINT,NONE), 1=(LINEAR,LINEAR,NONE), 2=(LINEAR,LINEAR,LINEAR), 3=(POINT,POINT,POINT), 4=(POINT,POINT,LINEAR), 5=(LINEAR,LINEAR,POINT). Address rows [U,V]: 0=(CLAMP,CLAMP), 1=(CLAMP,WRAP), 2=(WRAP,CLAMP), 3=(WRAP,WRAP). The image defaults are -1; these values are runtime writes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1915,13 +1903,13 @@
   },
   {
     "ea": "0x76A68E",
-    "line": "push    eax; a3",
+    "line": "push    eax; parentBuffer",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76A68F",
-    "line": "lea     ecx, [esp+4D4h+var_488]; this",
+    "line": "lea     ecx, [esp+4D4h+parameters]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1939,13 +1927,13 @@
   },
   {
     "ea": "0x76A69F",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; parameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76A6A0",
-    "line": "push    edx; a1",
+    "line": "push    edx; device",
     "mnemonic": "push",
     "size": 1
   },
@@ -1957,13 +1945,13 @@
   },
   {
     "ea": "0x76A6A9",
-    "line": "mov     [esp+4DCh+var_4C0], 0",
+    "line": "mov     [esp+4DCh+parentBuffer], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x76A6B1",
-    "line": "call    ??0NiDX9ImplicitBufferData@@QAE@XZ; NiDX9ImplicitBufferData::NiDX9ImplicitBufferData(void)",
+    "line": "call    NiDX9ImplicitBufferData_Create",
     "mnemonic": "call",
     "size": 5
   },
@@ -1981,43 +1969,43 @@
   },
   {
     "ea": "0x76A6BE",
-    "line": "lea     eax, [esp+4DCh+var_4C0]",
+    "line": "lea     eax, [esp+4DCh+parentBuffer]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x76A6C2",
-    "line": "push    eax",
+    "line": "push    eax; parentBuffer",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76A6C3",
-    "line": "push    ecx",
+    "line": "push    ecx; device",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76A6C4",
-    "line": "call    NiDX9DepthStencilBufferData_Create",
+    "line": "call    NiDX9ImplicitDepthStencilBufferData__Create; Creates NiDX9ImplicitDepthStencilBufferData around IDirect3DDevice9::GetDepthStencilSurface. Reads the surface description, creates or attaches the parent Ni2DBuffer, and records the surface in the renderer's depth/stencil binding cache.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x76A6C9",
-    "line": "push    ebp; a2",
+    "line": "push    ebp; renderer",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76A6CA",
-    "line": "push    1; maxTargets",
+    "line": "push    1; targetCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x76A6CC",
-    "line": "call    CreateNewRenderTargetGroup",
+    "line": "call    NiRenderTargetGroup__Create; Creates an empty NiRenderTargetGroup with a requested color-target count. Rejects null renderer, counts above renderer capability, and counts above Oblivion's hard MRT limit of four.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2215,7 +2203,7 @@
   },
   {
     "ea": "0x76A739",
-    "line": "call    sub_768C10",
+    "line": "call    NiDX9Renderer_InitializeTextureDefaults; Rebuilds NiDX9 renderer texture defaults after device creation/reset, including four default format resources and the small clipper/default source texture. Called during both initial creation and RecreateDevice.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2239,7 +2227,7 @@
   },
   {
     "ea": "0x76A747",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2635,19 +2623,19 @@
   },
   {
     "ea": "0x76A81B",
-    "line": "push    eax",
+    "line": "push    eax; vertexBufferManager",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76A81C",
-    "line": "push    ecx",
+    "line": "push    ecx; device",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76A81D",
-    "line": "call    ??0NiD3DGeometryGroupManager@@QAE@XZ; NiD3DGeometryGroupManager::NiD3DGeometryGroupManager(void)",
+    "line": "call    NiD3DGeometryGroupManager_Create; Pass225: NiD3DGeometryGroupManager constructor; stores D3D device and vertex-buffer manager used for screen-texture +0x1C admission.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3019,19 +3007,19 @@
   },
   {
     "ea": "0x76A8F7",
-    "line": "push    offset dword_B258E8",
+    "line": "push    offset rhs",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x76A8FC",
-    "line": "push    offset dword_B258DC",
+    "line": "push    offset stru_B258DC",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x76A901",
-    "line": "push    offset dword_B258D0",
+    "line": "push    offset stru_B258D0",
     "mnemonic": "push",
     "size": 5
   },
@@ -3043,7 +3031,7 @@
   },
   {
     "ea": "0x76A90A",
-    "line": "push    offset Vector3_InitValue?",
+    "line": "push    offset g_zeroNiPoint3",
     "mnemonic": "push",
     "size": 5
   },
@@ -3121,7 +3109,7 @@
   },
   {
     "ea": "0x76A93B",
-    "line": "push    offset byte_B3F828; Dst",
+    "line": "push    offset unk_B3F828; Dst",
     "mnemonic": "push",
     "size": 5
   },
@@ -3139,7 +3127,7 @@
   },
   {
     "ea": "0x76A94A",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3163,7 +3151,7 @@
   },
   {
     "ea": "0x76A95C",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },

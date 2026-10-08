@@ -1,7 +1,7 @@
 0x8BB6A0: sub     esp, 274h
 0x8BB6A6: mov     eax, ds:0B30AACh
 0x8BB6AB: mov     [esp+274h+var_4], eax
-0x8BB6B2: mov     eax, dword ptr [esp+274h+ArgList]
+0x8BB6B2: mov     eax, [esp+274h+ArgList]
 0x8BB6B9: cmp     eax, 0FFFFFFFFh
 0x8BB6BC: push    esi
 0x8BB6BD: push    edi
@@ -30,11 +30,11 @@
 0x8BB707: mov     edx, [esp+27Ch+arg_0]
 0x8BB70E: push    offset asc_A98304; "'\n"
 0x8BB713: push    ecx
-0x8BB714: mov     ecx, dword ptr [esp+284h+Args]
+0x8BB714: mov     ecx, [esp+284h+Args]
 0x8BB71B: push    offset asc_A982FC; " : '"
 0x8BB720: push    edx
 0x8BB721: mov     edx, [esp+28Ch+arg_C]
-0x8BB728: push    offset unk_A71E50
+0x8BB728: push    offset asc_A71E50; "] "
 0x8BB72D: lea     eax, [esp+290h+DstBuf]
 0x8BB734: push    eax
 0x8BB735: push    offset asc_A982F4; "): ["

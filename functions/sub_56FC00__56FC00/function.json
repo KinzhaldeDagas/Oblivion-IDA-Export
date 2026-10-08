@@ -1,10 +1,22 @@
 {
   "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 64,
   "callers_count": 0,
+  "chunks": [
+    [
+      "0x56FC00",
+      "0x570495"
+    ],
+    [
+      "0x9BDBF0",
+      "0x9BDC45"
+    ]
+  ],
   "chunks_sha256": "66f1ab9d46bf10a1995625249a28c8404e162c880cb639cd50a34ad92846aa41",
   "comment_regular": "Verified restore path rebuilds the saved generated NiTriShape via BSTempEffectGeometryDecal_BuildGeneratedGeometry; it does not dispatch Initialize (+0x4C) or set base.initializeCallbackDone. A successfully restored effect can therefore own generated geometry while the callback guard remains false. This refines the field's meaning: it records Initialize callback completion, not general output existence.",
   "comment_repeatable": "Verified restore path rebuilds the saved generated NiTriShape via BSTempEffectGeometryDecal_BuildGeneratedGeometry; it does not dispatch Initialize (+0x4C) or set base.initializeCallbackDone. A successfully restored effect can therefore own generated geometry while the callback guard remains false. This refines the field's meaning: it records Initialize callback completion, not general output existence.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 19,
   "display_name": "BSTempEffectGeometryDecal_LoadGame",
   "end_ea": "0x570495",
@@ -15,6 +27,7 @@
   "segment": ".text",
   "sha256": "562a317dc0497707276881aa736efd3de7029e7afd18db9cc044aafd434580d3",
   "size": 2197,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x56FC00",
   "total_chunk_size": 2282,
   "type": "bool __thiscall(BSTempEffectGeometryDecalLayout_t *this)",

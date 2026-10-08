@@ -1,1 +1,1 @@
-OAEVENT
+typedef int OAEVENT;

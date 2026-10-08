@@ -1,7 +1,8 @@
-void __thiscall sub_51BED0(_BYTE *this, char a2)
+// Sets or clears the TESClass playable flag; ClassMenu custom-class commit forces the chosen custom class playable.
+void __thiscall TESClass_SetPlayable(TESClass *this, bool playable)
 {
-  if ( a2 )
-    *(this + 0x60) |= 1u;
+  if ( playable ) /*0x51bed5*/
+    LOBYTE(this->members.classFlags) |= 1u; /*0x51bed7*/
   else
-    *(this + 0x60) &= ~1u;
+    LOBYTE(this->members.classFlags) &= ~1u; /*0x51bede*/
 }

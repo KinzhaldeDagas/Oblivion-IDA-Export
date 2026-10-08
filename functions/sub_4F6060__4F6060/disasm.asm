@@ -1,4 +1,4 @@
-0x4F6060: push    esi
+0x4F6060: push    esi; GetActorValue condition handler (index 14 / opcode 0x100E), used 34 times in core dialogue. Requires an actor subject; Actor flag 0x800 selects the base-form AV getter, otherwise the live actor value getter. The numeric result is then compared with the CTDA threshold; subject/target selection follows Oblivion's operatorAndFlags run-on handling.
 0x4F6061: mov     esi, [esp+4+arg_0]
 0x4F6065: test    esi, esi
 0x4F6067: jz      short loc_4F60D9

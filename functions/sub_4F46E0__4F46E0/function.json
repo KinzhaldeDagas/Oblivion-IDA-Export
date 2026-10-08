@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4F46E0",
+      "0x4F4714"
+    ]
+  ],
+  "chunks_sha256": "001fb9379ac972b5eb98495f8d1a98e2598c2f3f75315fe1de8cd2f6126aa13d",
+  "comment_regular": "GetCurrentTime_Eval reads TimeGlobals::GameHour and returns the numeric hour for the enclosing CTDA comparison; it has no parameters or subject requirement. Vanilla core dialogue uses it 23 times. Fallout's later counterpart x4y6:0x823B4BC8 reads Calendar::GetHour, so the owning time subsystem differs.",
+  "comment_repeatable": "GetCurrentTime_Eval reads TimeGlobals::GameHour and returns the numeric hour for the enclosing CTDA comparison; it has no parameters or subject requirement. Vanilla core dialogue uses it 23 times. Fallout's later counterpart x4y6:0x823B4BC8 reads Calendar::GetHour, so the owning time subsystem differs.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_4F46E0",
+  "display_name": "GetCurrentTime_Eval",
   "end_ea": "0x4F4714",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4F46E0",
+  "name": "GetCurrentTime_Eval",
   "segment": ".text",
   "sha256": "001fb9379ac972b5eb98495f8d1a98e2598c2f3f75315fe1de8cd2f6126aa13d",
   "size": 52,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4F46E0",
-  "type": "char __cdecl(int, int, int, double *)",
+  "total_chunk_size": 52,
+  "type": "char __cdecl(TESObjectREFR *subject, TESForm *param1, TESForm *param2, double *value)",
   "xrefs_from_count": 19,
-  "xrefs_to_count": 2
+  "xrefs_to_count": 1
 }

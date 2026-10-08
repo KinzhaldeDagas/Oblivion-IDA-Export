@@ -1,10 +1,10 @@
-0x4E5A40: push    ebx
+0x4E5A40: push    ebx; Verified modified-form size: 2-byte disabled-point count, plus 2 bytes for each non-null point with linkedPointsDisabled set; adds 6 bytes when save-game block framing is enabled.
 0x4E5A41: push    esi
 0x4E5A42: mov     ebx, ecx
 0x4E5A44: mov     ecx, ds:0B33B00h
 0x4E5A4A: push    edi
 0x4E5A4B: xor     edi, edi
-0x4E5A4D: call    sub_45A170
+0x4E5A4D: call    TESSaveLoadGame_UseSaveGameBlocks
 0x4E5A52: test    al, al
 0x4E5A54: jz      short loc_4E5A5B
 0x4E5A56: mov     edi, 6
@@ -17,10 +17,10 @@
 0x4E5A6B: jbe     short loc_4E5A94
 0x4E5A6D: lea     ecx, [ecx+0]
 0x4E5A70: mov     eax, [eax+4]
-0x4E5A73: mov     ecx, [eax+esi*4]
+0x4E5A73: mov     ecx, [eax+esi*4]; this
 0x4E5A76: test    ecx, ecx
 0x4E5A78: jz      short loc_4E5A86
-0x4E5A7A: call    sub_67ED70
+0x4E5A7A: call    PathGraphNode_IsLinkedPointsDisabled; Verified returns PathGrid point flag 0x20, which is the linked-points-disabled state: SetLinkedPointsEnabled stores the inverse of its enabled argument, save/load persists flagged indices, searches skip flagged nodes, and renderer marks them wireframe.
 0x4E5A7F: test    al, al
 0x4E5A81: jz      short loc_4E5A86
 0x4E5A83: add     edi, 2
@@ -37,7 +37,7 @@
 0x4E5AAB: jz      short loc_4E5AEE
 0x4E5AAD: mov     eax, [esi]
 0x4E5AAF: push    eax; a1
-0x4E5AB0: call    TESForm_LookupByFormID
+0x4E5AB0: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4E5AB5: mov     ecx, [esi+5]
 0x4E5AB8: mov     edx, [eax]
 0x4E5ABA: add     esp, 4

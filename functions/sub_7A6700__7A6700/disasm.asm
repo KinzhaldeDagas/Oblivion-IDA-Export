@@ -1,8 +1,8 @@
-0x7A6700: push    ebp
+0x7A6700: push    ebp; Oblivion legacy unit-billboard builder: derives azimuth from cameraDirection XY, rotates four canonical corners, and writes 12 static floats.
 0x7A6701: mov     ebp, esp
 0x7A6703: and     esp, 0FFFFFFF8h
 0x7A6706: sub     esp, 68h
-0x7A6709: mov     eax, [ebp+arg_0]
+0x7A6709: mov     eax, [ebp+cameraDirection]
 0x7A670C: fld     dword ptr [eax]
 0x7A670E: fstp    [esp+68h+var_30]
 0x7A6712: fld     dword ptr [eax+4]
@@ -71,7 +71,7 @@
 0x7A67F4: fld     dword ptr ds:0B42A74h
 0x7A67FA: push    ecx
 0x7A67FB: fstp    dword ptr ds:0B42A20h
-0x7A6801: lea     ecx, [esp+6Ch+var_24]
+0x7A6801: lea     ecx, [esp+6Ch+var_24]; this
 0x7A6805: fld     dword ptr ds:0B42A78h
 0x7A680B: fstp    dword ptr ds:0B42A24h
 0x7A6811: fld     dword ptr ds:0B42A7Ch
@@ -94,25 +94,25 @@
 0x7A6877: fstp    dword ptr ds:0B42A48h
 0x7A687D: fld     dword ptr ds:0B42A58h
 0x7A6883: fstp    dword ptr ds:0B42A4Ch
-0x7A6889: fst     [esp+6Ch+var_24]
-0x7A688D: fst     [esp+6Ch+var_14]
-0x7A6891: fstp    [esp+6Ch+var_4]
-0x7A6895: fst     [esp+6Ch+var_20]
-0x7A6899: fst     [esp+6Ch+var_1C]
-0x7A689D: fst     [esp+6Ch+var_18]
-0x7A68A1: fst     [esp+6Ch+var_10]
-0x7A68A5: fst     [esp+6Ch+var_C]
-0x7A68A9: fstp    [esp+6Ch+var_8]
+0x7A6889: fst     [esp+6Ch+var_24.m]
+0x7A688D: fst     [esp+6Ch+var_24.m+10h]
+0x7A6891: fstp    [esp+6Ch+var_24.m+20h]
+0x7A6895: fst     [esp+6Ch+var_24.m+4]
+0x7A6899: fst     [esp+6Ch+var_24.m+8]
+0x7A689D: fst     [esp+6Ch+var_24.m+0Ch]
+0x7A68A1: fst     [esp+6Ch+var_24.m+14h]
+0x7A68A5: fst     [esp+6Ch+var_24.m+18h]
+0x7A68A9: fstp    [esp+6Ch+var_24.m+1Ch]
 0x7A68AD: fld     dword ptr [esp+6Ch+var_68]
-0x7A68B1: fstp    [esp+6Ch+var_6C]; float
-0x7A68B4: call    sub_793AA0
-0x7A68B9: fld     [esp+68h+var_18]
+0x7A68B1: fstp    [esp+6Ch+angleDegrees]; angleDegrees
+0x7A68B4: call    OB_stRotTransform_RotateZDegrees_010201A0; Oblivion stRotTransform::RotateZ. Converts degrees to radians, builds the Z-axis 3x3 rotation, post-multiplies the current transform, and stores the result in place; used by the legacy billboard camera-direction path.
+0x7A68B9: fld     [esp+68h+var_24.m+0Ch]
 0x7A68BD: fld     dword ptr ds:0B42A78h
 0x7A68C3: fst     [esp+68h+var_40]
 0x7A68C7: fld     dword ptr ds:0B42A74h
 0x7A68CD: fst     [esp+68h+var_38]
-0x7A68D1: fld     [esp+68h+var_24]
-0x7A68D5: fld     [esp+68h+var_C]
+0x7A68D1: fld     [esp+68h+var_24.m]
+0x7A68D5: fld     [esp+68h+var_24.m+18h]
 0x7A68D9: fld     dword ptr ds:0B42A7Ch
 0x7A68DF: fst     [esp+68h+var_58]
 0x7A68E3: fld     st(2)
@@ -124,9 +124,9 @@
 0x7A68EF: fmulp   st(2), st
 0x7A68F1: faddp   st(1), st
 0x7A68F3: fstp    [esp+68h+var_30]
-0x7A68F7: fld     [esp+68h+var_14]
-0x7A68FB: fld     [esp+68h+var_20]
-0x7A68FF: fld     [esp+68h+var_8]
+0x7A68F7: fld     [esp+68h+var_24.m+10h]
+0x7A68FB: fld     [esp+68h+var_24.m+4]
+0x7A68FF: fld     [esp+68h+var_24.m+1Ch]
 0x7A6903: fstp    [esp+68h+var_68]
 0x7A6906: fld     st
 0x7A6908: fmulp   st(5), st
@@ -139,11 +139,11 @@
 0x7A6919: faddp   st(5), st
 0x7A691B: fxch    st(4)
 0x7A691D: fstp    [esp+68h+var_2C]
-0x7A6921: fld     [esp+68h+var_10]
+0x7A6921: fld     [esp+68h+var_24.m+14h]
 0x7A6925: fst     [esp+68h+var_48]
-0x7A6929: fld     [esp+68h+var_1C]
+0x7A6929: fld     [esp+68h+var_24.m+8]
 0x7A692D: fst     [esp+68h+var_50]
-0x7A6931: fld     [esp+68h+var_4]
+0x7A6931: fld     [esp+68h+var_24.m+20h]
 0x7A6935: fstp    [esp+68h+var_60]
 0x7A6939: fmul    [esp+68h+var_38]
 0x7A693D: fxch    st(1)

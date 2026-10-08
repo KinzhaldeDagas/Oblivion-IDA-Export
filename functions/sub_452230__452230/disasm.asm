@@ -1,4 +1,4 @@
-0x452230: mov     eax, [esp+arg_0]
+0x452230: mov     eax, [esp+arg_0]; EnginePatch v1: save-buffer free hook used to remove tracked record ranges and avoid stale bounds during savegame loading.
 0x452234: push    esi
 0x452235: mov     esi, ecx
 0x452237: push    eax; void *

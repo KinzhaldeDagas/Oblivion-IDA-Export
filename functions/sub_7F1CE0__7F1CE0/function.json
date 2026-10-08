@@ -1,19 +1,36 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 0,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x7F1CE0",
+      "0x7F1D81"
+    ],
+    [
+      "0x9CA7E0",
+      "0x9CA806"
+    ]
+  ],
+  "chunks_sha256": "a3e4dd753148a48f1cb0a6110e5af1f8457b1060e7d37571dc57956d454533b7",
+  "comment_regular": "Leaf-property clone helper. Allocates 0xB0, copies leaf LOD/STSP/STLSP references through virtual accessors, then preserves texture/ref +0x9C.\n\n[2026-10-03 copy audit] Verified virtual+0x90 is no-argument CreateCopy (ret0), distinct from CreateClone+18. Constructs a new 0xB0 native leaf retaining STSP/STLSP and Level, then SetTexture(+7C) retains source texture+9C. It does not call CopyMembers or register a NiCloningProcess mapping. Fallout named CreateCopy828CDF20 confirms these roles. Plugin overrides +90 to preserve the type8 adapter and adds a null allocation guard before texture transfer.",
   "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7F1CE0",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_SpeedTreeLeafShaderProperty_CreateCopy_010201A0",
   "end_ea": "0x7F1D81",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7F1CE0",
+  "name": "OB_SpeedTreeLeafShaderProperty_CreateCopy_010201A0",
   "segment": ".text",
   "sha256": "1944f962231868895c7955c15211890e17b1fb79218227926717a826ce36e766",
   "size": 161,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7F1CE0",
-  "type": "SpeedTreeLeafShaderProperty *__thiscall(_DWORD *this)",
-  "xrefs_from_count": 59,
+  "total_chunk_size": 199,
+  "type": "OB_SpeedTreeLeafShaderProperty_010201A0 *__thiscall(OB_SpeedTreeLeafShaderProperty_010201A0 *this)",
+  "xrefs_from_count": 73,
   "xrefs_to_count": 1
 }

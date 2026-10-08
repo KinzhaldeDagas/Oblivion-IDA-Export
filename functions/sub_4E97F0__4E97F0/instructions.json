@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E97F0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified called from TravelPath_AddRoadSegmentsForPath. It tests the candidate segment against nearby TESRoad connected points and surface geometry; when surface samples are available, inserts their xyz values as owned kind-1 TravelPathNode nodes. The direct caller and TravelPath_ComputeDistance establish that these samples contribute to fast-travel distance.",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x4E9819",
-    "line": "mov     ebp, [esp+2Ch+arg_0]",
+    "line": "mov     ebp, [esp+2Ch+pathNodes]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x4E982B",
-    "line": "mov     ebx, [esp+2Ch+arg_8]",
+    "line": "mov     ebx, [esp+2Ch+start]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x4E9846",
-    "line": "mov     edi, [esp+2Ch+arg_C]",
+    "line": "mov     edi, [esp+2Ch+end]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x4E9859",
-    "line": "lea     ecx, [esp+2Ch+var_14]",
+    "line": "lea     ecx, [esp+2Ch+geometryContext]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -217,31 +217,31 @@
   },
   {
     "ea": "0x4E9862",
-    "line": "lea     eax, [esp+2Ch+var_14]",
+    "line": "lea     eax, [esp+2Ch+geometryContext]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4E9866",
-    "line": "push    eax",
+    "line": "push    eax; geometryContext",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E9867",
-    "line": "push    edi",
+    "line": "push    edi; end",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E9868",
-    "line": "push    ebx",
+    "line": "push    ebx; start",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E9869",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x4E9873",
-    "line": "call    sub_4E94C0",
+    "line": "call    TESRoad_TestTravelSurfaceSegment; Verified this is called with TESRoad* by TESRoad_AddTravelSurfaceSegment. It resolves both endpoint positions to nearest road graph points, checks endpoint/process conditions and geometry, and resets transient node data after the surface test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x4E987C",
-    "line": "lea     ecx, [esp+2Ch+var_14]",
+    "line": "lea     ecx, [esp+2Ch+geometryContext]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -283,13 +283,13 @@
   },
   {
     "ea": "0x4E9885",
-    "line": "lea     ecx, [esp+2Ch+var_14]",
+    "line": "lea     ecx, [esp+2Ch+geometryContext]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4E9889",
-    "line": "call    sub_42B410",
+    "line": "call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x4E9898",
-    "line": "mov     edx, [esp+2Ch+arg_4]",
+    "line": "mov     edx, [esp+2Ch+currentNodeKey]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x4E98C7",
-    "line": "mov     [esp+2Ch+arg_0], eax",
+    "line": "mov     [esp+2Ch+pathNodes], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -457,13 +457,13 @@
   },
   {
     "ea": "0x4E98D4",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E98D6",
-    "line": "call    sub_68B0C0",
+    "line": "call    TravelPathNode_Init; Verified TravelPathNode_Init sets payload +0 to null and kind +4 to 0xFF (uninitialized sentinel); the three bytes at +5..+7 are not written.",
     "mnemonic": "call",
     "size": 5
   },
@@ -487,13 +487,13 @@
   },
   {
     "ea": "0x4E98E1",
-    "line": "push    1",
+    "line": "push    1; kind",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4E98E3",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x4E98EA",
-    "line": "call    sub_68B1D0",
+    "line": "call    TravelPathNode_SetKind; Verified kind setter writes the low byte at +4; when switching away from kind 1 it frees the owned NiPoint3* payload, then clears payload and stores the new kind. Observed kinds are 0=reference, 1=owned position, initial sentinel 0xFF.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,25 +517,25 @@
   },
   {
     "ea": "0x4E98F1",
-    "line": "call    sub_6899C0",
+    "line": "call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E98F6",
-    "line": "push    eax",
+    "line": "push    eax; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E98F7",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E98F9",
-    "line": "call    sub_68B200",
+    "line": "call    TravelPathNode_SetOwnedPosition; Verified for kind 1 allocates a 12-byte NiPoint3 when payload is null and copies xyz from the supplied position; this record owns that copy until cleared.",
     "mnemonic": "call",
     "size": 5
   },
@@ -625,7 +625,7 @@
   },
   {
     "ea": "0x4E9928",
-    "line": "mov     [esp+2Ch+arg_0], eax",
+    "line": "mov     [esp+2Ch+pathNodes], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -649,13 +649,13 @@
   },
   {
     "ea": "0x4E9935",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E9937",
-    "line": "call    sub_68B0C0",
+    "line": "call    TravelPathNode_Init; Verified TravelPathNode_Init sets payload +0 to null and kind +4 to 0xFF (uninitialized sentinel); the three bytes at +5..+7 are not written.",
     "mnemonic": "call",
     "size": 5
   },
@@ -679,13 +679,13 @@
   },
   {
     "ea": "0x4E9942",
-    "line": "push    1",
+    "line": "push    1; kind",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4E9944",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x4E994B",
-    "line": "call    sub_68B1D0",
+    "line": "call    TravelPathNode_SetKind; Verified kind setter writes the low byte at +4; when switching away from kind 1 it frees the owned NiPoint3* payload, then clears payload and stores the new kind. Observed kinds are 0=reference, 1=owned position, initial sentinel 0xFF.",
     "mnemonic": "call",
     "size": 5
   },
@@ -709,25 +709,25 @@
   },
   {
     "ea": "0x4E9952",
-    "line": "call    sub_6899C0",
+    "line": "call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E9957",
-    "line": "push    eax",
+    "line": "push    eax; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E9958",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E995A",
-    "line": "call    sub_68B200",
+    "line": "call    TravelPathNode_SetOwnedPosition; Verified for kind 1 allocates a 12-byte NiPoint3 when payload is null and copies xyz from the supplied position; this record owns that copy until cleared.",
     "mnemonic": "call",
     "size": 5
   },
@@ -871,7 +871,7 @@
   },
   {
     "ea": "0x4E99A2",
-    "line": "lea     ecx, [esp+2Ch+var_14]",
+    "line": "lea     ecx, [esp+2Ch+geometryContext]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -964,5 +964,119 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B5FF0",
+    "line": "lea     ecx, [ebp-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5FF3",
+    "line": "jmp     sub_68C9B0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5FF8",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5FFB",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5FFC",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B6001",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B6002",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B6003",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B6006",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B6007",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B600C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B600D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B600E",
+    "line": "mov     edx, [esp+currentNodeKey]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B6012",
+    "line": "lea     eax, [edx-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B6015",
+    "line": "mov     ecx, [edx-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B6018",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B601A",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B601F",
+    "line": "mov     eax, offset stru_AE0F54",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B6024",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

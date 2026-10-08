@@ -17,3 +17,12 @@
 0x6F7369: jle     short loc_6F739C
 0x6F736B: cmp     ebp, eax
 0x6F736D: mov     esi, eax
+0x6F7373: push    esi
+0x6F7374: push    ebx
+0x6F7375: push    eax
+0x6F73C9: pop     edi
+0x6F73CA: mov     eax, esi
+0x6F73CC: pop     esi
+0x6F73CD: pop     ebp
+0x6F73CE: pop     ecx
+0x6F73CF: retn    8

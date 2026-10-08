@@ -1,19 +1,36 @@
 {
-  "callees_count": 47,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 12,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 4,
-  "display_name": "sub_78A890",
+  "chunks": [
+    [
+      "0x78A890",
+      "0x78AB51"
+    ],
+    [
+      "0x9CB480",
+      "0x9CB4AB"
+    ]
+  ],
+  "chunks_sha256": "5ccdfe01c237482e2e0485d965f914ef5c251256f317b209ed23d1230818b536",
+  "comment_regular": "\n\n[2026-10-03 texture ownership/discovery] Verified summary+0C is full frond filename count and +10 points to the temporary pointer array; index j is material identity, not geometry LOD. Fallout 0x8281D610 corroborates count/array roles with different STL offsets. Plugin removes its 128-candidate truncation, copies ordered case-insensitive unique paths per material, and stores loaded references by shared family/material without live eviction.\n\n[2026-10-03 composite discovery] Verified summary[5] (+14) is the legacy embedded composite filename, distinct from per-map frond names summary[4]. Plugin now copies this candidate before temporary-summary cleanup unless a later60005/70002 composite record overrides or clears it. Composite is stored under a distinct family cache key and selected with atlas coordinates. Authored composite path is tried before its DDS conversion; it is not guessed from a leaf texture pointer.\n\nSpeedTreeOBSE 2026-05-31 leaf/frond level pass: compact texture summary exporter returns frond count at summary[3] and frond filename pointer array at summary[4]; reference layer caches these paths by array index/selector before sidecar map-bank candidates.",
+  "comment_repeatable": "SpeedTreeOBSE 2026-05-31 leaf/frond level pass: compact texture summary exporter returns frond count at summary[3] and frond filename pointer array at summary[4]; reference layer caches these paths by array index/selector before sidecar map-bank candidates.\n\n[2026-10-04 atlas evidence] Current v108 Ponytail capture has896blade vertices/3LODs but attachment rejects map0: embedded=1/local=1/individual=0/composite=0. Both geometry and atlas UV metadata exist; diffuse resource resolution is the observed failing boundary. Archive contains a2048x4096 Mojave_Desert/CompositeLeafMap.tga matching the authored source directory. No asset installation made during this plan.\n[v109 atlas resolution] Legacy atlas identity captured after successful LoadTree from original caller bytes, before postbuild resolution. Shared RT+30 key stores copied model/authored paths through final-owner retirement. Later60005 composite valid/clear still takes precedence. Separate SpeedTreeOBSE.atlases.ini maps canonical model+full source to an installed relative DDS; missing identity is not guessed from native stripped basename.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "CSpeedTreeRT__GetTextures",
   "end_ea": "0x78AB51",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_78A890",
+  "name": "CSpeedTreeRT__GetTextures",
   "segment": ".text",
   "sha256": "31e40c76c62a611f010e0fbd288e16cc68ce5bb1069fc7f972dfa504a922f427",
   "size": 705,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78A890",
-  "type": "int __thiscall(_DWORD *this, int *)",
-  "xrefs_from_count": 279,
+  "total_chunk_size": 748,
+  "type": "void __thiscall(const OB_CSpeedTreeRT_010201A0 *this, OB_CSpeedTreeRT_STextures *texturesOut)",
+  "xrefs_from_count": 292,
   "xrefs_to_count": 3
 }

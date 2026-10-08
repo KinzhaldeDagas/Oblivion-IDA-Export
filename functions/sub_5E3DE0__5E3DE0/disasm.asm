@@ -48,7 +48,6 @@
 0x5E3E63: jz      loc_5E3FB1
 0x5E3E69: push    ebp
 0x5E3E6A: jmp     short loc_5E3E78
-0x5E3E6C: align 10h
 0x5E3E70: mov     esi, [esp+14h+arg_0]
 0x5E3E74: mov     edi, [esp+14h+var_4]
 0x5E3E78: cmp     dword ptr [esi+8], 0

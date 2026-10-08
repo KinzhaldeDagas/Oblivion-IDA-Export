@@ -1,4 +1,4 @@
-0x4706B0: mov     eax, [ecx+4]
+0x4706B0: mov     eax, [ecx+4]; AnimSequenceSingle remove-if-matching sequence pointer; clears held pointer and returns true when the single entry becomes empty.
 0x4706B3: cmp     eax, [esp+arg_0]
 0x4706B7: jnz     short loc_4706C7
 0x4706B9: mov     edx, [ecx]

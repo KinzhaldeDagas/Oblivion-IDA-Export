@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x43E119",
-    "line": "mov     ecx, ioManager",
+    "line": "mov     ecx, ds:0B33A10h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x43E144",
-    "line": "mov     [esp+58h+var_44], ebx",
+    "line": "mov     [esp+58h+task], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x43E14A",
-    "line": "lea     eax, [esp+5Ch+var_44]",
+    "line": "lea     eax, [esp+5Ch+task]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x43E168",
-    "line": "mov     esi, [esp+58h+var_44]",
+    "line": "mov     esi, [esp+58h+task]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -229,19 +229,19 @@
   },
   {
     "ea": "0x43E16E",
-    "line": "mov     ecx, ioManager",
+    "line": "mov     ecx, ds:0B33A10h",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x43E174",
-    "line": "push    esi",
+    "line": "push    esi; task",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x43E175",
-    "line": "call    sub_432130",
+    "line": "call    IOTask_Cancel; Verified generic IOTask cancellation state machine: previous states 0/1/2 atomically transition to 6 and invoke vtable +0x0C with status 0; state 5 transitions to 6 and invokes it with status 1; states 3/4 wait for the worker's state change. Verified local role: state 6 is the cancellation/terminal marker written by IOTask_Cancel. Its canonical enum label remains Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x43E1B1",
-    "line": "mov     [esp+58h+var_44], ebx",
+    "line": "mov     [esp+58h+task], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x43E1B7",
-    "line": "lea     ecx, [esp+5Ch+var_44]",
+    "line": "lea     ecx, [esp+5Ch+task]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x43E1D5",
-    "line": "mov     esi, [esp+58h+var_44]",
+    "line": "mov     esi, [esp+58h+task]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -445,19 +445,19 @@
   },
   {
     "ea": "0x43E1DB",
-    "line": "mov     ecx, ioManager",
+    "line": "mov     ecx, ds:0B33A10h",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x43E1E1",
-    "line": "push    esi",
+    "line": "push    esi; task",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x43E1E2",
-    "line": "call    sub_432130",
+    "line": "call    IOTask_Cancel; Verified generic IOTask cancellation state machine: previous states 0/1/2 atomically transition to 6 and invoke vtable +0x0C with status 0; state 5 transitions to 6 and invokes it with status 1; states 3/4 wait for the worker's state change. Verified local role: state 6 is the cancellation/terminal marker written by IOTask_Cancel. Its canonical enum label remains Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x43E220",
-    "line": "mov     [esp+58h+var_44], ebx",
+    "line": "mov     [esp+58h+task], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x43E226",
-    "line": "lea     ecx, [esp+5Ch+var_44]",
+    "line": "lea     ecx, [esp+5Ch+task]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x43E244",
-    "line": "mov     esi, [esp+58h+var_44]",
+    "line": "mov     esi, [esp+58h+task]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -667,19 +667,19 @@
   },
   {
     "ea": "0x43E24A",
-    "line": "mov     ecx, ioManager",
+    "line": "mov     ecx, ds:0B33A10h",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x43E250",
-    "line": "push    esi",
+    "line": "push    esi; task",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x43E251",
-    "line": "call    sub_432130",
+    "line": "call    IOTask_Cancel; Verified generic IOTask cancellation state machine: previous states 0/1/2 atomically transition to 6 and invoke vtable +0x0C with status 0; state 5 transitions to 6 and invokes it with status 1; states 3/4 wait for the worker's state change. Verified local role: state 6 is the cancellation/terminal marker written by IOTask_Cancel. Its canonical enum label remains Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x43E27A",
-    "line": "mov     ecx, ioManager",
+    "line": "mov     ecx, ds:0B33A10h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -799,7 +799,7 @@
   },
   {
     "ea": "0x43E287",
-    "line": "mov     ecx, ioManager",
+    "line": "mov     ecx, ds:0B33A10h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -862,5 +862,155 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x435A60",
+    "line": "mov     dword ptr [ecx], offset ??_7LockFreeMapIterator@?$LockFreeMap@PAVTESObjectREFR@@V?$NiPointer@VQueuedReference@@@@@@6B@; const LockFreeMap<TESObjectREFR *,NiPointer<QueuedReference>>::LockFreeMapIterator::`vftable'",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x435A66",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x435A70",
+    "line": "mov     dword ptr [ecx], offset ??_7LockFreeMapIterator@?$LockFreeMap@PAVAnimIdle@@V?$NiPointer@VQueuedAnimIdle@@@@@@6B@; const LockFreeMap<AnimIdle *,NiPointer<QueuedAnimIdle>>::LockFreeMapIterator::`vftable'",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x435A76",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x435A80",
+    "line": "mov     dword ptr [ecx], offset ??_7LockFreeMapIterator@?$LockFreeMap@PAVTESObjectREFR@@V?$NiPointer@VQueuedHelmet@@@@@@6B@; const LockFreeMap<TESObjectREFR *,NiPointer<QueuedHelmet>>::LockFreeMapIterator::`vftable'",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x435A86",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9ACE00",
+    "line": "lea     ecx, [ebp-3Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9ACE03",
+    "line": "jmp     loc_435A60",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9ACE08",
+    "line": "lea     ecx, [ebp-44h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9ACE0B",
+    "line": "jmp     sub_4BDDC0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9ACE10",
+    "line": "lea     ecx, [ebp-2Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9ACE13",
+    "line": "jmp     loc_435A70",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9ACE18",
+    "line": "lea     ecx, [ebp-44h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9ACE1B",
+    "line": "jmp     sub_4BDDC0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9ACE20",
+    "line": "lea     ecx, [ebp-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9ACE23",
+    "line": "jmp     loc_435A80",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9ACE28",
+    "line": "lea     ecx, [ebp-44h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9ACE2B",
+    "line": "jmp     sub_4BDDC0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9ACE30",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9ACE34",
+    "line": "lea     eax, [edx-48h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9ACE37",
+    "line": "mov     ecx, [edx-4Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9ACE3A",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9ACE3C",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9ACE41",
+    "line": "mov     eax, offset stru_AD9A68",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9ACE46",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

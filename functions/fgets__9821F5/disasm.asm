@@ -132,3 +132,6 @@
 0x982355: jnz     short loc_98231B
 0x982357: mov     eax, [ebp+var_1C]
 0x98235A: mov     [eax], bl
+0x98236B: call    __SEH_epilog4
+0x982370: retn
+0x982371: mov     edi, [ebp+var_24]

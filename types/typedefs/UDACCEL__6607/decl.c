@@ -1,1 +1,5 @@
-_UDACCEL
+struct _UDACCEL
+{
+UINT nSec;
+UINT nInc;
+};

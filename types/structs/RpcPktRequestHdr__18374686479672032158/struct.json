@@ -1,34 +1,63 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "RpcPktRequestHdr",
+  "definition": "struct RpcPktRequestHdr\n{\nRpcPktCommonHdr common;\nunsigned int alloc_hint;\nunsigned __int16 context_id;\nunsigned __int16 opnum;\n}\n",
   "id": 18374686479672032158,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "common",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "RpcPktCommonHdr"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "alloc_hint",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "unsigned int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "context_id",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 2
+      "size": 2,
+      "type": "unsigned __int16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "opnum",
       "offset": 22,
       "offset_hex": "0x16",
-      "size": 2
+      "size": 2,
+      "type": "unsigned __int16"
     }
   ],
   "name": "RpcPktRequestHdr",
+  "ordinal": 3056,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 24
 }

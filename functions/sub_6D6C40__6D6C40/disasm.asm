@@ -3,7 +3,7 @@
 0x6D6C42: mov     edi, [esp+8+arg_0]
 0x6D6C46: push    edi
 0x6D6C47: mov     esi, ecx
-0x6D6C49: call    sub_6EC5C0
+0x6D6C49: call    j_NiSingleInterpController_IsEqual
 0x6D6C4E: test    al, al
 0x6D6C50: jz      short loc_6D6C79
 0x6D6C52: mov     eax, [edi+40h]

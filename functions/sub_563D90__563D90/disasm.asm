@@ -1,4 +1,4 @@
-0x563D90: mov     eax, [ecx]
+0x563D90: mov     eax, [ecx]; BSTreeNode per-branch LOD alpha/visibility setter. 0xFF hides selected branch shape; otherwise shows it and writes alpha-property byte.
 0x563D92: mov     edx, [esp+arg_0]
 0x563D96: mov     eax, [eax+0ACh]
 0x563D9C: push    edx
@@ -18,7 +18,7 @@
 0x563DBD: and     word ptr [eax+18h], 0FFFEh
 0x563DC3: push    0
 0x563DC5: mov     ecx, eax
-0x563DC7: call    NiNode_GetNiPropertyByID
+0x563DC7: call    NiNode_GetNiPropertyByID;
 0x563DCC: test    eax, eax
 0x563DCE: jz      short loc_563DD3
 0x563DD0: mov     [eax+1Ah], bl

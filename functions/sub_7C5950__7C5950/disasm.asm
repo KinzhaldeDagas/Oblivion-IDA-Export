@@ -1,4 +1,4 @@
-0x7C5950: mov     eax, [esp+arg_0]
+0x7C5950: mov     eax, [esp+arg_0]; Pure doubly-linked-list move-after operation; no allocation, free, refcount, or count change.
 0x7C5954: mov     edx, [esp+arg_4]
 0x7C5958: cmp     eax, edx
 0x7C595A: jz      short locret_7C59A2

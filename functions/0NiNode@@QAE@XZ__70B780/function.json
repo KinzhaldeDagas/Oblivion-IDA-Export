@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 3,
-  "callers_count": 85,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
+  "callers_count": 118,
+  "chunks": [
+    [
+      "0x70B780",
+      "0x70B7FE"
+    ],
+    [
+      "0x9C9A00",
+      "0x9C9A23"
+    ]
+  ],
+  "chunks_sha256": "d140fe028c921f19d2a332a71e3cd770103664d50d9b0c8a6591db028eb70df4",
+  "comment_regular": "\n\n[2026-10-03 frond material partitions] Verified NiNode allocation size 0xDC; thiscall constructor takes initial child capacity as WORD in a four-byte stack slot. Capacity 0 is used by plugin material-group construction; AddObject owns each child. Fallout NiNode ctor 0x821F1FC8 corroborates child-array role but uses its platform uint capacity/layout. Plugin now creates one hidden NiNode per frond LOD and one NiTriShape per material/capacity partition; native reference ownership handles partial construction cleanup.",
+  "comment_repeatable": "[constructor audit] Plugin passes child capacity0. Full NiAVObject/ObjectNET/Object and identity-transform base chain is field initialization without allocation; child-array ctor4B2D30 skips allocation at capacity0. All later child-array growth belongs to scene insertion, whose ownership/failure policy is separate.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
   "display_name": "NiNode::NiNode(void)",
   "end_ea": "0x70B7FE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??0NiNode@@QAE@XZ",
   "segment": ".text",
   "sha256": "cffcf411ae4b7d2411f2a1b4b41128683657fcf600b2e0a605c5a92029394350",
   "size": 126,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x70B780",
+  "total_chunk_size": 161,
   "type": "NiNode *__thiscall(NiNode *this, unsigned __int16)",
-  "xrefs_from_count": 39,
+  "xrefs_from_count": 50,
   "xrefs_to_count": 118
 }

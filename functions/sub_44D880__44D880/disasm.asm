@@ -1,5 +1,5 @@
 0x44D880: push    esi
-0x44D881: push    offset stru_B33F00; lpCriticalSection
+0x44D881: push    0B33F00h; lpCriticalSection
 0x44D886: call    dword ptr ds:0A2806Ch
 0x44D88C: call    dword ptr ds:0A2808Ch
 0x44D892: mov     ds:0B33F78h, eax
@@ -15,5 +15,5 @@
 0x44D8BE: pop     esi
 0x44D8BF: jnz     short loc_44D8C7
 0x44D8C1: mov     ds:0B33F78h, ecx
-0x44D8C7: mov     [esp+arg_0], offset stru_B33F00
+0x44D8C7: mov     [esp+arg_0], 0B33F00h
 0x44D8CF: jmp     dword ptr ds:0A28074h

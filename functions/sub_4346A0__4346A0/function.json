@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 2,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_4346A0",
+  "chunks": [
+    [
+      "0x4346A0",
+      "0x4346C8"
+    ]
+  ],
+  "chunks_sha256": "aca879d8fb3290200fecd083278f6ea45d08069e8e3c672706d2e676577735b0",
+  "comment_regular": "Verified worker create stage: builds/gets a BSTreeNode through BSTreeManager_CreateTreeForReference and publishes it to the pending reference-node map through BSTreeManager_RegisterBackgroundLoadedTree, keyed by the same TESObjectREFR.",
+  "comment_repeatable": "Verified worker create stage: builds/gets a BSTreeNode through BSTreeManager_CreateTreeForReference and publishes it to the pending reference-node map through BSTreeManager_RegisterBackgroundLoadedTree, keyed by the same TESObjectREFR.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "QueuedTreeModel_RunCreateStage",
   "end_ea": "0x4346C8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4346A0",
+  "name": "QueuedTreeModel_RunCreateStage",
   "segment": ".text",
   "sha256": "aca879d8fb3290200fecd083278f6ea45d08069e8e3c672706d2e676577735b0",
   "size": 40,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4346A0",
-  "type": "int __thiscall(int *this)",
+  "total_chunk_size": 40,
+  "type": "bool __thiscall(QueuedTreeModel_OblivionLayout *this)",
   "xrefs_from_count": 18,
   "xrefs_to_count": 1
 }

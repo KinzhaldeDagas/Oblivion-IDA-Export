@@ -1,19 +1,36 @@
 {
-  "callees_count": 26,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 16,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 6,
-  "display_name": "sub_626600",
+  "chunks": [
+    [
+      "0x626600",
+      "0x62677B"
+    ],
+    [
+      "0x9CAD70",
+      "0x9CAD96"
+    ]
+  ],
+  "chunks_sha256": "d3d4e40f8d573a9478665c8eba6006ee40ce8ca19bd6e0a00fe5de4a803cab78",
+  "comment_regular": "Post-load identity/cursor fixup. Modern path resolves saved actor FormIDs in package and DialogueItems only; it runs no result script and performs no topic selection.",
+  "comment_repeatable": "Post-load identity/cursor fixup. Modern path resolves saved actor FormIDs in package and DialogueItems only; it runs no result script and performs no topic selection.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 7,
+  "display_name": "DialoguePackage::InitLoadGame",
   "end_ea": "0x62677B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_626600",
+  "name": "DialoguePackage::InitLoadGame",
   "segment": ".text",
   "sha256": "3c671e7c66762ecb9b843f81fed088986d0624a8767624507a72b1158b4a903f",
   "size": 379,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x626600",
-  "type": "unsigned __int8 __thiscall(_DWORD *this)",
-  "xrefs_from_count": 151,
+  "total_chunk_size": 417,
+  "type": "void __thiscall(DialoguePackageRuntimeView *this)",
+  "xrefs_from_count": 165,
   "xrefs_to_count": 1
 }

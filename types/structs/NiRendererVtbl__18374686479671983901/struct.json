@@ -1,472 +1,720 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "NiRendererVtbl",
+  "definition": "struct __declspec(align(4)) NiRendererVtbl\n{\n_BYTE gap0[76];\nbool (__thiscall *Unk_13)(NiRenderer *this, UInt32 arg);\nconst char *(__thiscall *GetRendererDesc)(NiRenderer *this);\nUInt32 (__thiscall *GetFlags)(NiRenderer *this);\nvoid (__thiscall *SetClearDepth)(NiRenderer *this, float arg);\nfloat (__thiscall *GetClearDepth)(NiRenderer *this);\nvoid (__thiscall *SetClearColor4)(NiRenderer *this, NiRenderer *this, float *src);\nvoid (__thiscall *SetClearColor3)(NiRenderer *this, NiRenderer *this, float *src);\nvoid (__thiscall *GetClearColor)(NiRenderer *this, NiRenderer *this, float *dst);\nvoid (__thiscall *SetClearStencil)(NiRenderer *this, UInt32 src);\nUInt32 (__thiscall *GetClearStencil)(NiRenderer *this);\nbool (__thiscall *ValidateRenderTargetGroup)(NiRenderer *this, NiRenderTargetGroup *renderTarget);\nvoid (__thiscall *IsDepthBufferCompatible)(NiRenderer *this, Ni2DBuffer *buffer, NiDepthStencilBuffer *dsBuffer);\nNiRenderTargetGroup *(__thiscall *GetDefaultRTGroup)(NiRenderer *this);\nNiRenderTargetGroup *(__thiscall *GetCurrentRTGroup)(NiRenderer *this);\nUInt8 (__thiscall *Unk_21)(NiRenderer *this);\nvoid (__thiscall *Unk_22)(NiRenderer *this);\nvoid (__thiscall *Unk_23)(NiRenderer *this);\nvoid (__thiscall *Unk_24)(NiRenderer *this, UInt32 arg);\nvoid *(__thiscall *Unk_25)(NiRenderer *this, void *arg0, UInt32 arg1, UInt32 arg2);\nvoid *(__thiscall *Unk_26)(NiRenderer *this, void *arg);\nUInt32 (__thiscall *Unk_27)(NiRenderer *this);\nUInt32 (__thiscall *Unk_28)(NiRenderer *this);\nvoid (__thiscall *Unk_29)(NiRenderer *this);\nbool (__thiscall *SetMipmapSkipLevel)(NiRenderer *this, UInt32 arg);\nUInt32 (__thiscall *GetMipmapSkipLevel)(NiRenderer *this);\nbool (__thiscall *NiRenderer::PrecacheGeometryData)(NiRenderer *this, UInt32 arg0, UInt32 arg1, UInt32 arg2, UInt32 arg3);\nvoid (__thiscall *PurgeGeometryData)(NiRenderer *this, NiGeometryData *geo);\nvoid (__thiscall *PurgeMaterial)(NiRenderer *this, NiMaterialProperty *material);\nvoid (__thiscall *PurgeEffect)(NiRenderer *this, NiDynamicEffect *effect);\nvoid (__thiscall *PurgeScreenTexture)(NiRenderer *this);\nvoid (__thiscall *PurgeSkinPartition)(NiRenderer *this, NiSkinPartition *skinPartition);\nvoid (__thiscall *PurgeSkinInstance)(NiRenderer *this, NiSkinInstance *skinInstance);\nvoid (__thiscall *Unk_33)(NiRenderer *this, void *unk);\nbool (__thiscall *Unk_34)(NiRenderer *this);\nvoid (__thiscall *Unk_35)(NiRenderer *this);\nbool (__thiscall *FastCopy)(NiRenderer *this, void *src, void *dst, RECT *srcRect, SInt32 xOffset, SInt32 yOffset);\nbool (__thiscall *Copy)(NiRenderer *this, void *src, void *dst, RECT *srcRect, RECT *dstRect, UInt32 filterMode);\nvoid (__thiscall *Unk_38)(NiRenderer *this);\nbool (__thiscall *Unk_39)(NiRenderer *this, void *arg);\nvoid (__thiscall *Unk_3A)(NiRenderer *this);\nvoid (__thiscall *Unk_3B)(NiRenderer *this, float arg);\nvoid *(__thiscall *Unk_3C)(NiRenderer *this, UInt32 size);\nvoid (__thiscall *Unk_3D)(NiRenderer *this, UInt32 arg0, UInt32 arg1);\nvoid (__thiscall *Unk_3E)(NiRenderer *this, UInt32 arg0, UInt32 arg1);\nvoid (__thiscall *Unk_3F)(NiRenderer *this, void *buf);\nbool (__thiscall *Unk_40)(NiRenderer *this, UInt32 arg0);\nvoid (__thiscall *CreateSourceTexture)(NiRenderer *this, NiSourceTexture *texture);\nbool (__thiscall *CreateRenderedTexture)(NiRenderer *this, NiRenderedTexture *arg);\nbool (__thiscall *CreateSourceCubeMap)(NiRenderer *this, NiSourceCubeMap *arg);\nbool (__thiscall *CreateRenderedCubeMap)(NiRenderer *this, NiRenderedCubeMap *arg);\nbool (__thiscall *CreateDynamicTexture)(NiRenderer *this, void *arg);\nvoid (__thiscall *CreatePalette)(NiRenderer *this, void *arg);\nbool (__thiscall *CreateDepthStencil)(NiRenderer *this, NiDepthStencilBuffer *arg, void *textureFormat);\nvoid (__thiscall *LockDynamicTexture)(NiRenderer *this, void *arg0, void *arg1);\nvoid (__thiscall *UnLockDynamicTexture)(NiRenderer *this, void *arg);\nvoid (__thiscall *LockRenderer)(NiRenderer *this);\nvoid (__thiscall *UnlockRenderer)(NiRenderer *this);\nbool (__thiscall *BeginScene)(NiRenderer *this);\nbool (__thiscall *EndScene)(NiRenderer *this);\nvoid (__thiscall *DisplayScene)(NiRenderer *this);\nvoid (__thiscall *Clear)(NiRenderer *this, float *rect, UInt32 flags);\nvoid (__thiscall *SetupCamera)(NiRenderer *this, NiPoint3 *pos, NiPoint3 *at, NiPoint3 *up, NiPoint3 *right, NiFrustum *frustum, float *viewport);\nvoid (__thiscall *SetupScreenSpaceCamera)(NiRenderer *this, NiViewport *viewport);\nbool (__thiscall *BeginUsingRenderTargetGroup)(NiRenderer *this, NiRenderTargetGroup *renderTarget, ClearFlags clearFlags);\nbool (__thiscall *EndUsingRenderTargetGroup)(NiRenderer *this);\nvoid (__thiscall *BeginBatch)(NiRenderer *this, UInt32 arg0, UInt32 arg1);\nvoid (__thiscall *EndBatch)(NiRenderer *this);\nvoid (__thiscall *BatchRenderShape)(NiRenderer *this, void *arg);\nvoid (__thiscall *BatchRenderStrips)(NiRenderer *this, void *arg);\nvoid (__thiscall *RenderTriShape)(NiRenderer *this, NiTriShape *obj);\nvoid (__thiscall *RenderTriStrips)(NiRenderer *this, NiTriStrips *obj);\nvoid (__thiscall *RenderTriShape2)(NiRenderer *this, NiTriShape *obj);\nvoid (__thiscall *RenderTriStrips2)(NiRenderer *this, NiTriStrips *obj);\nvoid (__thiscall *RenderParticles)(NiRenderer *this, NiParticles *obj);\nvoid (__thiscall *RenderLines)(NiRenderer *this, NiLines *obj);\nvoid (__thiscall *RenderScreenTexture)(NiRenderer *this);\n}\n",
   "id": 18374686479671983901,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00053.",
       "name": "gap0",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 76
+      "size": 76,
+      "type": "_BYTE[76]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00054.",
       "name": "Unk_13",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 4
+      "offset_hex": "0x4C",
+      "size": 4,
+      "type": "bool (__thiscall *)(NiRenderer *this, UInt32 arg)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00055.",
       "name": "GetRendererDesc",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 4
+      "size": 4,
+      "type": "const char *(__thiscall *)(NiRenderer *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00056.",
       "name": "GetFlags",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 4
+      "size": 4,
+      "type": "UInt32 (__thiscall *)(NiRenderer *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00057.",
       "name": "SetClearDepth",
       "offset": 88,
       "offset_hex": "0x58",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this, float arg)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00058.",
       "name": "GetClearDepth",
       "offset": 92,
-      "offset_hex": "0x5c",
-      "size": 4
+      "offset_hex": "0x5C",
+      "size": 4,
+      "type": "float (__thiscall *)(NiRenderer *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00059.",
       "name": "SetClearColor4",
       "offset": 96,
       "offset_hex": "0x60",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this, NiRenderer *this, float *src)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000510.",
       "name": "SetClearColor3",
       "offset": 100,
       "offset_hex": "0x64",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this, NiRenderer *this, float *src)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000511.",
       "name": "GetClearColor",
       "offset": 104,
       "offset_hex": "0x68",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this, NiRenderer *this, float *dst)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000512.",
       "name": "SetClearStencil",
       "offset": 108,
-      "offset_hex": "0x6c",
-      "size": 4
+      "offset_hex": "0x6C",
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this, UInt32 src)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000513.",
       "name": "GetClearStencil",
       "offset": 112,
       "offset_hex": "0x70",
-      "size": 4
+      "size": 4,
+      "type": "UInt32 (__thiscall *)(NiRenderer *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000514.",
       "name": "ValidateRenderTargetGroup",
       "offset": 116,
       "offset_hex": "0x74",
-      "size": 4
+      "size": 4,
+      "type": "bool (__thiscall *)(NiRenderer *this, NiRenderTargetGroup *renderTarget)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000515.",
       "name": "IsDepthBufferCompatible",
       "offset": 120,
       "offset_hex": "0x78",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this, Ni2DBuffer *buffer, NiDepthStencilBuffer *dsBuffer)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000516.",
       "name": "GetDefaultRTGroup",
       "offset": 124,
-      "offset_hex": "0x7c",
-      "size": 4
+      "offset_hex": "0x7C",
+      "size": 4,
+      "type": "NiRenderTargetGroup *(__thiscall *)(NiRenderer *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000517.",
       "name": "GetCurrentRTGroup",
       "offset": 128,
       "offset_hex": "0x80",
-      "size": 4
+      "size": 4,
+      "type": "NiRenderTargetGroup *(__thiscall *)(NiRenderer *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000518.",
       "name": "Unk_21",
       "offset": 132,
       "offset_hex": "0x84",
-      "size": 4
+      "size": 4,
+      "type": "UInt8 (__thiscall *)(NiRenderer *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000519.",
       "name": "Unk_22",
       "offset": 136,
       "offset_hex": "0x88",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000520.",
       "name": "Unk_23",
       "offset": 140,
-      "offset_hex": "0x8c",
-      "size": 4
+      "offset_hex": "0x8C",
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000521.",
       "name": "Unk_24",
       "offset": 144,
       "offset_hex": "0x90",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this, UInt32 arg)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000522.",
       "name": "Unk_25",
       "offset": 148,
       "offset_hex": "0x94",
-      "size": 4
+      "size": 4,
+      "type": "void *(__thiscall *)(NiRenderer *this, void *arg0, UInt32 arg1, UInt32 arg2)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000523.",
       "name": "Unk_26",
       "offset": 152,
       "offset_hex": "0x98",
-      "size": 4
+      "size": 4,
+      "type": "void *(__thiscall *)(NiRenderer *this, void *arg)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000524.",
       "name": "Unk_27",
       "offset": 156,
-      "offset_hex": "0x9c",
-      "size": 4
+      "offset_hex": "0x9C",
+      "size": 4,
+      "type": "UInt32 (__thiscall *)(NiRenderer *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000525.",
       "name": "Unk_28",
       "offset": 160,
-      "offset_hex": "0xa0",
-      "size": 4
+      "offset_hex": "0xA0",
+      "size": 4,
+      "type": "UInt32 (__thiscall *)(NiRenderer *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000526.",
       "name": "Unk_29",
       "offset": 164,
-      "offset_hex": "0xa4",
-      "size": 4
+      "offset_hex": "0xA4",
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000527.",
       "name": "SetMipmapSkipLevel",
       "offset": 168,
-      "offset_hex": "0xa8",
-      "size": 4
+      "offset_hex": "0xA8",
+      "size": 4,
+      "type": "bool (__thiscall *)(NiRenderer *this, UInt32 arg)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000528.",
       "name": "GetMipmapSkipLevel",
       "offset": 172,
-      "offset_hex": "0xac",
-      "size": 4
+      "offset_hex": "0xAC",
+      "size": 4,
+      "type": "UInt32 (__thiscall *)(NiRenderer *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000529.",
       "name": "NiRenderer::PrecacheGeometryData",
       "offset": 176,
-      "offset_hex": "0xb0",
-      "size": 4
+      "offset_hex": "0xB0",
+      "size": 4,
+      "type": "bool (__thiscall *)(NiRenderer *this, UInt32 arg0, UInt32 arg1, UInt32 arg2, UInt32 arg3)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000530.",
       "name": "PurgeGeometryData",
       "offset": 180,
-      "offset_hex": "0xb4",
-      "size": 4
+      "offset_hex": "0xB4",
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this, NiGeometryData *geo)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000531.",
       "name": "PurgeMaterial",
       "offset": 184,
-      "offset_hex": "0xb8",
-      "size": 4
+      "offset_hex": "0xB8",
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this, NiMaterialProperty *material)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000532.",
       "name": "PurgeEffect",
       "offset": 188,
-      "offset_hex": "0xbc",
-      "size": 4
+      "offset_hex": "0xBC",
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this, NiDynamicEffect *effect)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000533.",
       "name": "PurgeScreenTexture",
       "offset": 192,
-      "offset_hex": "0xc0",
-      "size": 4
+      "offset_hex": "0xC0",
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000534.",
       "name": "PurgeSkinPartition",
       "offset": 196,
-      "offset_hex": "0xc4",
-      "size": 4
+      "offset_hex": "0xC4",
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this, NiSkinPartition *skinPartition)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000535.",
       "name": "PurgeSkinInstance",
       "offset": 200,
-      "offset_hex": "0xc8",
-      "size": 4
+      "offset_hex": "0xC8",
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this, NiSkinInstance *skinInstance)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000536.",
       "name": "Unk_33",
       "offset": 204,
-      "offset_hex": "0xcc",
-      "size": 4
+      "offset_hex": "0xCC",
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this, void *unk)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000537.",
       "name": "Unk_34",
       "offset": 208,
-      "offset_hex": "0xd0",
-      "size": 4
+      "offset_hex": "0xD0",
+      "size": 4,
+      "type": "bool (__thiscall *)(NiRenderer *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000538.",
       "name": "Unk_35",
       "offset": 212,
-      "offset_hex": "0xd4",
-      "size": 4
+      "offset_hex": "0xD4",
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000539.",
       "name": "FastCopy",
       "offset": 216,
-      "offset_hex": "0xd8",
-      "size": 4
+      "offset_hex": "0xD8",
+      "size": 4,
+      "type": "bool (__thiscall *)(NiRenderer *this, void *src, void *dst, RECT *srcRect, SInt32 xOffset, SInt32 yOffset)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000540.",
       "name": "Copy",
       "offset": 220,
-      "offset_hex": "0xdc",
-      "size": 4
+      "offset_hex": "0xDC",
+      "size": 4,
+      "type": "bool (__thiscall *)(NiRenderer *this, void *src, void *dst, RECT *srcRect, RECT *dstRect, UInt32 filterMode)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000541.",
       "name": "Unk_38",
       "offset": 224,
-      "offset_hex": "0xe0",
-      "size": 4
+      "offset_hex": "0xE0",
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000542.",
       "name": "Unk_39",
       "offset": 228,
-      "offset_hex": "0xe4",
-      "size": 4
+      "offset_hex": "0xE4",
+      "size": 4,
+      "type": "bool (__thiscall *)(NiRenderer *this, void *arg)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000543.",
       "name": "Unk_3A",
       "offset": 232,
-      "offset_hex": "0xe8",
-      "size": 4
+      "offset_hex": "0xE8",
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000544.",
       "name": "Unk_3B",
       "offset": 236,
-      "offset_hex": "0xec",
-      "size": 4
+      "offset_hex": "0xEC",
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this, float arg)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000545.",
       "name": "Unk_3C",
       "offset": 240,
-      "offset_hex": "0xf0",
-      "size": 4
+      "offset_hex": "0xF0",
+      "size": 4,
+      "type": "void *(__thiscall *)(NiRenderer *this, UInt32 size)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000546.",
       "name": "Unk_3D",
       "offset": 244,
-      "offset_hex": "0xf4",
-      "size": 4
+      "offset_hex": "0xF4",
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this, UInt32 arg0, UInt32 arg1)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000547.",
       "name": "Unk_3E",
       "offset": 248,
-      "offset_hex": "0xf8",
-      "size": 4
+      "offset_hex": "0xF8",
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this, UInt32 arg0, UInt32 arg1)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000548.",
       "name": "Unk_3F",
       "offset": 252,
-      "offset_hex": "0xfc",
-      "size": 4
+      "offset_hex": "0xFC",
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this, void *buf)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000549.",
       "name": "Unk_40",
       "offset": 256,
       "offset_hex": "0x100",
-      "size": 4
+      "size": 4,
+      "type": "bool (__thiscall *)(NiRenderer *this, UInt32 arg0)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000550.",
       "name": "CreateSourceTexture",
       "offset": 260,
       "offset_hex": "0x104",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this, NiSourceTexture *texture)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000551.",
       "name": "CreateRenderedTexture",
       "offset": 264,
       "offset_hex": "0x108",
-      "size": 4
+      "size": 4,
+      "type": "bool (__thiscall *)(NiRenderer *this, NiRenderedTexture *arg)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000552.",
       "name": "CreateSourceCubeMap",
       "offset": 268,
-      "offset_hex": "0x10c",
-      "size": 4
+      "offset_hex": "0x10C",
+      "size": 4,
+      "type": "bool (__thiscall *)(NiRenderer *this, NiSourceCubeMap *arg)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000553.",
       "name": "CreateRenderedCubeMap",
       "offset": 272,
       "offset_hex": "0x110",
-      "size": 4
+      "size": 4,
+      "type": "bool (__thiscall *)(NiRenderer *this, NiRenderedCubeMap *arg)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000554.",
       "name": "CreateDynamicTexture",
       "offset": 276,
       "offset_hex": "0x114",
-      "size": 4
+      "size": 4,
+      "type": "bool (__thiscall *)(NiRenderer *this, void *arg)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000555.",
       "name": "CreatePalette",
       "offset": 280,
       "offset_hex": "0x118",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this, void *arg)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000556.",
       "name": "CreateDepthStencil",
       "offset": 284,
-      "offset_hex": "0x11c",
-      "size": 4
+      "offset_hex": "0x11C",
+      "size": 4,
+      "type": "bool (__thiscall *)(NiRenderer *this, NiDepthStencilBuffer *arg, void *textureFormat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000557.",
       "name": "LockDynamicTexture",
       "offset": 288,
       "offset_hex": "0x120",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this, void *arg0, void *arg1)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000558.",
       "name": "UnLockDynamicTexture",
       "offset": 292,
       "offset_hex": "0x124",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this, void *arg)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000559.",
       "name": "LockRenderer",
       "offset": 296,
       "offset_hex": "0x128",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000560.",
       "name": "UnlockRenderer",
       "offset": 300,
-      "offset_hex": "0x12c",
-      "size": 4
+      "offset_hex": "0x12C",
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000561.",
       "name": "BeginScene",
       "offset": 304,
       "offset_hex": "0x130",
-      "size": 4
+      "size": 4,
+      "type": "bool (__thiscall *)(NiRenderer *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000562.",
       "name": "EndScene",
       "offset": 308,
       "offset_hex": "0x134",
-      "size": 4
+      "size": 4,
+      "type": "bool (__thiscall *)(NiRenderer *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000563.",
       "name": "DisplayScene",
       "offset": 312,
       "offset_hex": "0x138",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000564.",
       "name": "Clear",
       "offset": 316,
-      "offset_hex": "0x13c",
-      "size": 4
+      "offset_hex": "0x13C",
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this, float *rect, UInt32 flags)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000565.",
       "name": "SetupCamera",
       "offset": 320,
       "offset_hex": "0x140",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this, NiPoint3 *pos, NiPoint3 *at, NiPoint3 *up, NiPoint3 *right, NiFrustum *frustum, float *viewport)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000566.",
       "name": "SetupScreenSpaceCamera",
       "offset": 324,
       "offset_hex": "0x144",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this, NiViewport *viewport)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000567.",
       "name": "BeginUsingRenderTargetGroup",
       "offset": 328,
       "offset_hex": "0x148",
-      "size": 4
+      "size": 4,
+      "type": "bool (__thiscall *)(NiRenderer *this, NiRenderTargetGroup *renderTarget, ClearFlags clearFlags)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000568.",
       "name": "EndUsingRenderTargetGroup",
       "offset": 332,
-      "offset_hex": "0x14c",
-      "size": 4
+      "offset_hex": "0x14C",
+      "size": 4,
+      "type": "bool (__thiscall *)(NiRenderer *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000569.",
       "name": "BeginBatch",
       "offset": 336,
       "offset_hex": "0x150",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this, UInt32 arg0, UInt32 arg1)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000570.",
       "name": "EndBatch",
       "offset": 340,
       "offset_hex": "0x154",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000571.",
       "name": "BatchRenderShape",
       "offset": 344,
       "offset_hex": "0x158",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this, void *arg)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000572.",
       "name": "BatchRenderStrips",
       "offset": 348,
-      "offset_hex": "0x15c",
-      "size": 4
+      "offset_hex": "0x15C",
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this, void *arg)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000573.",
       "name": "RenderTriShape",
       "offset": 352,
       "offset_hex": "0x160",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this, NiTriShape *obj)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000574.",
       "name": "RenderTriStrips",
       "offset": 356,
       "offset_hex": "0x164",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this, NiTriStrips *obj)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000575.",
       "name": "RenderTriShape2",
       "offset": 360,
       "offset_hex": "0x168",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this, NiTriShape *obj)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000576.",
       "name": "RenderTriStrips2",
       "offset": 364,
-      "offset_hex": "0x16c",
-      "size": 4
+      "offset_hex": "0x16C",
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this, NiTriStrips *obj)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000577.",
       "name": "RenderParticles",
       "offset": 368,
       "offset_hex": "0x170",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this, NiParticles *obj)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000578.",
       "name": "RenderLines",
       "offset": 372,
       "offset_hex": "0x174",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this, NiLines *obj)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000579.",
       "name": "RenderScreenTexture",
       "offset": 376,
       "offset_hex": "0x178",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiRenderer *this)"
     }
   ],
   "name": "NiRendererVtbl",
+  "ordinal": 9303,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 380
 }

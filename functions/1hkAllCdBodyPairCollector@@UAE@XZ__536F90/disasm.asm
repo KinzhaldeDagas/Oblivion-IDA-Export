@@ -37,3 +37,14 @@
 0x537013: pop     esi
 0x537014: add     esp, 10h
 0x537017: retn
+0x88D540: mov     dword ptr [ecx], offset ??_7hkCdBodyPairCollector@@6B@; const hkCdBodyPairCollector::`vftable'
+0x88D546: retn
+0x9B92D0: mov     ecx, [ebp-10h]
+0x9B92D3: jmp     loc_88D540
+0x9B92D8: mov     edx, [esp+arg_4]
+0x9B92DC: lea     eax, [edx-8]
+0x9B92DF: mov     ecx, [edx-0Ch]
+0x9B92E2: xor     ecx, eax
+0x9B92E4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B92E9: mov     eax, offset stru_AE3684
+0x9B92EE: jmp     ___CxxFrameHandler3

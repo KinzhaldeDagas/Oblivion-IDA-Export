@@ -1,4 +1,4 @@
-0x57E270: push    ecx
+0x57E270: push    ecx; Reads collision filter info from proxy metadata: proxy+0x364 -> +8 -> +0x14 -> +0x1C. Used to preserve actor identity in raycast filter high 16 bits.
 0x57E271: mov     eax, [ecx+364h]
 0x57E277: test    eax, eax
 0x57E279: jz      short loc_57E2B0

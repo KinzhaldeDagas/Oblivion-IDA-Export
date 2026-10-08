@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x810F90",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Fog decode: DistantLOD constant-map builder maps DISTLOD fog constants to shared world fog vectors, not a separate DistantLOD fog producer.",
     "mnemonic": "push",
     "size": 2
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x811073",
-    "line": "call    eax",
+    "line": "call    eax; Pass238: DistantLOD diffuse/light color maps to vs c5, instance storage this+0x34.",
     "mnemonic": "call",
     "size": 2
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x81109E",
-    "line": "call    edx",
+    "line": "call    edx; Pass238: DistantLOD ambient color maps to vs c13, instance storage this+0x2C.",
     "mnemonic": "call",
     "size": 2
   },
@@ -847,7 +847,7 @@
   },
   {
     "ea": "0x811128",
-    "line": "push    offset dword_B46638",
+    "line": "push    offset flt_B46638",
     "mnemonic": "push",
     "size": 5
   },
@@ -901,7 +901,7 @@
   },
   {
     "ea": "0x811146",
-    "line": "call    edx",
+    "line": "call    edx; Fog constant-map decode: DistantLOD declares fogparam at vs c11 from shared world B45E14[0x209] / B46638; not a separate DistantLOD fog producer.",
     "mnemonic": "call",
     "size": 2
   },
@@ -931,7 +931,7 @@
   },
   {
     "ea": "0x811151",
-    "line": "push    offset dword_B46648",
+    "line": "push    (offset flt_B46638+10h)",
     "mnemonic": "push",
     "size": 5
   },
@@ -985,7 +985,7 @@
   },
   {
     "ea": "0x81116F",
-    "line": "call    edx",
+    "line": "call    edx; Fog constant-map decode: DistantLOD declares fogcolor at vs c10 from shared world B45E14[0x20D] / B46648; not a separate DistantLOD fog producer.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1414,5 +1414,107 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D0CA0",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0CA3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D0CA4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0CA9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D0CAA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D0CAB",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0CAE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D0CAF",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0CB4",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D0CB5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D0CB6",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D0CBA",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0CBD",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0CC0",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D0CC2",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0CC7",
+    "line": "mov     eax, offset stru_AF94E0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0CCC",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

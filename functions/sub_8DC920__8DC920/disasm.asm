@@ -8,7 +8,6 @@
 0x8DC938: dec     edi
 0x8DC939: js      short loc_8DC956
 0x8DC93B: jmp     short loc_8DC940
-0x8DC93D: align 10h
 0x8DC940: mov     eax, [esi+148h]
 0x8DC946: mov     ecx, [eax+edi*4]
 0x8DC949: test    ecx, ecx

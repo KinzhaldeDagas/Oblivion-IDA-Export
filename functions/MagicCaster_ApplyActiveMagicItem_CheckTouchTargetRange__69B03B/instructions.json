@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x69B06E",
-    "line": "mov     ecx, offset fMagicDefaultTouchDistance",
+    "line": "mov     ecx, 0B37E68h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x69B102",
-    "line": "push    0; a4",
+    "line": "push    0; useActorProjection",
     "mnemonic": "push",
     "size": 2
   },
@@ -421,19 +421,19 @@
   },
   {
     "ea": "0x69B10C",
-    "line": "push    eax; a3",
+    "line": "push    eax; to",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x69B10D",
-    "line": "push    edi; a2",
+    "line": "push    edi; from",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x69B10E",
-    "line": "call    TESObjectREFR_GetDistanceBetween?",
+    "line": "call    TESObjectREFR_GetSurfaceDistance; Three-argument cdecl routine: returns float surface distance from 'from' to 'to'. All 24 callers push exactly from, to, and useActorProjection then reclaim 0x0C. The prior EDI register argument, fourth stack byte, and double return were analysis pollution.",
     "mnemonic": "call",
     "size": 5
   },

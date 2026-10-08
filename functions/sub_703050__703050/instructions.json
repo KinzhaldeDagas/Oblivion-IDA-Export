@@ -37,25 +37,25 @@
   },
   {
     "ea": "0x703063",
-    "line": "push    edx",
+    "line": "push    edx; vertices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x703064",
-    "line": "push    eax",
+    "line": "push    eax; vertexCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x703065",
-    "line": "add     ecx, 0Ch",
+    "line": "add     ecx, 0Ch; self",
     "mnemonic": "add",
     "size": 3
   },
   {
     "ea": "0x703068",
-    "line": "call    sub_72A0F0",
+    "line": "call    NiSphere_ComputeFromVertices; Local bounding sphere for contiguous NiPoint3 array: midpoint of component minima/maxima; radius=max vertex distance to midpoint; zero-count case clears sphere. Writes sphere only, not NiAVObject world bounds or renderer dirty flags. Prettier Faces invokes after morph on direct CPU vertex data; propagation of world bounds remains a separate runtime verification requirement.",
     "mnemonic": "call",
     "size": 5
   },

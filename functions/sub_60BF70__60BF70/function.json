@@ -1,19 +1,32 @@
 {
-  "callees_count": 33,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x60BF70",
+      "0x60C16A"
+    ]
+  ],
+  "chunks_sha256": "699041606ce88ad2a09cc4e3543e628cf7d480d28c1340a1e28c8f60e43c19bf",
+  "comment_regular": "Post-load resolver for an embedded arrow projectile. Stores a pending load context when collision attachment cannot yet be resolved, otherwise reconstructs the saved collision-object association.",
+  "comment_repeatable": "Post-load resolver for an embedded arrow projectile. Stores a pending load context when collision attachment cannot yet be resolved, otherwise reconstructs the saved collision-object association.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_60BF70",
+  "display_name": "ArrowProjectile_PostLoadResolveEmbeddedCollision",
   "end_ea": "0x60C16A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_60BF70",
+  "name": "ArrowProjectile_PostLoadResolveEmbeddedCollision",
   "segment": ".text",
   "sha256": "699041606ce88ad2a09cc4e3543e628cf7d480d28c1340a1e28c8f60e43c19bf",
   "size": 506,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x60BF70",
-  "type": "void __userpurge(ArrowProjectile *a1@<ecx>, char a2@<bpl>, double a3@<st1>, double a4@<st0>, AVEntry **a5, int a6)",
+  "total_chunk_size": 506,
+  "type": "void __thiscall(ArrowProjectile *this, void *postLoadContext, int arg1)",
   "xrefs_from_count": 210,
   "xrefs_to_count": 1
 }

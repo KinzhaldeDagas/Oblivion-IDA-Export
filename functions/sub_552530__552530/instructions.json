@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x552530",
-    "line": "push    ecx",
+    "line": "push    ecx; Dimension-checked element-wise FaceGen matrix addition: outSum = this + right.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x552532",
-    "line": "mov     ebx, [esp+8+arg_4]",
+    "line": "mov     ebx, [esp+8+right]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x552551",
-    "line": "push    167h; int",
+    "line": "push    167h; sourceLine",
     "mnemonic": "push",
     "size": 5
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x55255B",
-    "line": "call    sub_6ED6D0",
+    "line": "call    FaceGen_ReportAssertionViolation; FaceGen assertion reporter: PrintError(\"FR2 ASSERT violation in %s line %i. Code may crash.\", sourceFile, sourceLine); returns normally. NOT noreturn and NOT a validation barrier.",
     "mnemonic": "call",
     "size": 5
   },
@@ -121,31 +121,31 @@
   },
   {
     "ea": "0x552568",
-    "line": "mov     edi, [esp+14h+arg_0]",
+    "line": "mov     edi, [esp+14h+outSum]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x55256C",
-    "line": "push    edx",
+    "line": "push    edx; columns",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x55256D",
-    "line": "push    eax",
+    "line": "push    eax; rows",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x55256E",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x552570",
-    "line": "call    sub_552240",
+    "line": "call    FaceGenMatrix_InitializeDimensions; Initialize FaceGenMatrix dimensions and resize to rows*columns floats. The product is computed in 32 bits without overflow validation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x552595",
-    "line": "mov     ecx, [esp+14h+arg_4]",
+    "line": "mov     ecx, [esp+14h+right]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x5525CD",
-    "line": "mov     edx, [esp+14h+arg_4]",
+    "line": "mov     edx, [esp+14h+right]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x5525DB",
-    "line": "mov     eax, [esp+14h+arg_0]",
+    "line": "mov     eax, [esp+14h+outSum]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x5525FA",
-    "line": "mov     ecx, [esp+14h+arg_4]",
+    "line": "mov     ecx, [esp+14h+right]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x55260B",
-    "line": "mov     edx, [esp+14h+arg_0]",
+    "line": "mov     edx, [esp+14h+outSum]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x552621",
-    "line": "mov     eax, [esp+14h+arg_0]",
+    "line": "mov     eax, [esp+14h+outSum]",
     "mnemonic": "mov",
     "size": 4
   },

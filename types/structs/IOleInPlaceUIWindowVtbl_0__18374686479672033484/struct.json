@@ -1,64 +1,108 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "IOleInPlaceUIWindowVtbl_0",
+  "definition": "typedef IOleInPlaceUIWindowVtbl IOleInPlaceUIWindowVtbl_0\n",
   "id": 18374686479672033484,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QueryInterface",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IOleInPlaceUIWindow_0 *, const IID *const, void **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddRef",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(IOleInPlaceUIWindow_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Release",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(IOleInPlaceUIWindow_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetWindow",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IOleInPlaceUIWindow_0 *, HWND *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ContextSensitiveHelp",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IOleInPlaceUIWindow_0 *, BOOL)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetBorder",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IOleInPlaceUIWindow_0 *, LPRECT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RequestBorderSpace",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IOleInPlaceUIWindow_0 *, LPCBORDERWIDTHS)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetBorderSpace",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IOleInPlaceUIWindow_0 *, LPCBORDERWIDTHS)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetActiveObject",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IOleInPlaceUIWindow_0 *, IOleInPlaceActiveObject_0 *, LPCOLESTR)"
     }
   ],
   "name": "IOleInPlaceUIWindowVtbl_0",
+  "ordinal": 3545,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 36
 }

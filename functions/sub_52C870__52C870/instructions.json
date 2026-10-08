@@ -1567,7 +1567,7 @@
   },
   {
     "ea": "0x52CB92",
-    "line": "push    eax",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
@@ -1579,13 +1579,13 @@
   },
   {
     "ea": "0x52CB99",
-    "line": "push    ecx",
+    "line": "push    ecx; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52CB9A",
-    "line": "call    sub_551990",
+    "line": "call    FaceGenHeadParameters_Differ; Exact four-matrix difference test for non-null inputs. BUG: null handling is inverted: (null,null) returns true/different, while exactly one null returns false/equal. All three known Oblivion callers supply inline/concrete FaceGen matrices, so this is a latent defect and Prettier Faces does not patch unrelated comparison behavior.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1615,7 +1615,7 @@
   },
   {
     "ea": "0x52CBA8",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },

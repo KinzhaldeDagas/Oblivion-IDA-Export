@@ -1,76 +1,126 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "OLECONVERT_OLESTREAM_DATA",
+  "definition": "struct OLECONVERT_OLESTREAM_DATA\n{\nDWORD dwOleID;\nDWORD dwTypeID;\nDWORD dwOleTypeNameLength;\nCHAR strOleTypeName[255];\nCHAR *pstrOleObjFileName __offset(OFF64|AUTO);\nDWORD dwOleObjFileNameLength;\nDWORD dwMetaFileWidth;\nDWORD dwMetaFileHeight;\nCHAR strUnknown[8];\nDWORD dwDataLength;\nBYTE *pData __offset(OFF64|AUTO);\n}\n",
   "id": 18374686479671841815,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwOleID",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwTypeID",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwOleTypeNameLength",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "strOleTypeName",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 255
+      "offset_hex": "0xC",
+      "size": 255,
+      "type": "CHAR[255]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pstrOleObjFileName",
       "offset": 268,
-      "offset_hex": "0x10c",
-      "size": 4
+      "offset_hex": "0x10C",
+      "size": 4,
+      "type": "CHAR *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwOleObjFileNameLength",
       "offset": 272,
       "offset_hex": "0x110",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwMetaFileWidth",
       "offset": 276,
       "offset_hex": "0x114",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwMetaFileHeight",
       "offset": 280,
       "offset_hex": "0x118",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "strUnknown",
       "offset": 284,
-      "offset_hex": "0x11c",
-      "size": 8
+      "offset_hex": "0x11C",
+      "size": 8,
+      "type": "CHAR[8]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwDataLength",
       "offset": 292,
       "offset_hex": "0x124",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pData",
       "offset": 296,
       "offset_hex": "0x128",
-      "size": 4
+      "size": 4,
+      "type": "BYTE *"
     }
   ],
   "name": "OLECONVERT_OLESTREAM_DATA",
+  "ordinal": 5355,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 300
 }

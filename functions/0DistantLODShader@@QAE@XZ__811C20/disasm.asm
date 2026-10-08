@@ -24,7 +24,7 @@
 0x811C64: mov     [esp+3Ch+var_4], 0
 0x811C6C: mov     dword ptr [esi], offset ??_7DistantLODShader@@6B@; const DistantLODShader::`vftable'
 0x811C72: call    ArrayConstructor
-0x811C77: push    offset sub_7016A0; a5
+0x811C77: push    offset NiPointerSlot_Release; a5
 0x811C7C: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x811C81: push    4; size
 0x811C83: push    4; a2
@@ -32,7 +32,7 @@
 0x811C8B: push    edi; a1
 0x811C8C: mov     byte ptr [esp+3Ch+var_4], 1
 0x811C91: call    ArrayConstructor
-0x811C96: push    offset sub_7016A0; a5
+0x811C96: push    offset NiPointerSlot_Release; a5
 0x811C9B: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x811CA0: push    2; size
 0x811CA2: push    4; a2
@@ -176,3 +176,36 @@
 0x811EA2: pop     ebx
 0x811EA3: add     esp, 14h
 0x811EA6: retn    4
+0x9D1060: mov     ecx, [ebp-10h]; this
+0x9D1063: jmp     ??1BSShader@@UAE@XZ;
+0x9D1068: push    offset sub_4027D0; void (__thiscall *)(void *)
+0x9D106D: push    1; int
+0x9D106F: push    4; unsigned int
+0x9D1071: mov     eax, [ebp-10h]
+0x9D1074: add     eax, 7Ch ; '|'
+0x9D1077: push    eax; void *
+0x9D1078: call    $LN21
+0x9D107D: retn
+0x9D107E: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9D1083: push    4; int
+0x9D1085: push    4; unsigned int
+0x9D1087: mov     eax, [ebp-10h]
+0x9D108A: add     eax, 8Ch ; 'Œ'
+0x9D108F: push    eax; void *
+0x9D1090: call    $LN21
+0x9D1095: retn
+0x9D1096: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9D109B: push    2; int
+0x9D109D: push    4; unsigned int
+0x9D109F: mov     eax, [ebp-10h]
+0x9D10A2: add     eax, 9Ch ; 'œ'
+0x9D10A7: push    eax; void *
+0x9D10A8: call    $LN21
+0x9D10AD: retn
+0x9D10AE: mov     edx, [esp+arg_4]
+0x9D10B2: lea     eax, [edx-18h]
+0x9D10B5: mov     ecx, [edx-1Ch]
+0x9D10B8: xor     ecx, eax
+0x9D10BA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D10BF: mov     eax, offset stru_AF97C8
+0x9D10C4: jmp     ___CxxFrameHandler3

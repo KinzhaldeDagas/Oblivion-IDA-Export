@@ -55,7 +55,7 @@
 0x7B12A9: jz      short loc_7B12BD
 0x7B12AB: add     dword ptr [ecx+60h], 0FFFFFFFFh
 0x7B12AF: jnz     short loc_7B12B6
-0x7B12B1: call    sub_7604D0
+0x7B12B1: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x7B12B6: mov     dword ptr [ebp+0], 0
 0x7B12BD: mov     byte ptr [esi+78h], 0
 0x7B12C1: mov     dword ptr [esi+90h], 0
@@ -92,13 +92,13 @@
 0x7B1327: push    1
 0x7B1329: mov     ecx, edi
 0x7B132B: call    eax
-0x7B132D: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x7B132D: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x7B1332: push    1; int
 0x7B1334: push    4; unsigned int
 0x7B1336: push    ebx; void *
 0x7B1337: mov     byte ptr [esp+34h+var_4], 2
 0x7B133C: call    $LN21
-0x7B1341: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x7B1341: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x7B1346: push    1; int
 0x7B1348: push    4; unsigned int
 0x7B134A: lea     eax, [esi+98h]
@@ -113,7 +113,7 @@
 0x7B136A: call    $LN21
 0x7B136F: mov     ecx, esi; this
 0x7B1371: mov     [esp+24h+var_4], 0FFFFFFFFh
-0x7B1379: call    ??1BSImageSpaceShader@@UAE@XZ; BSImageSpaceShader::~BSImageSpaceShader(void)
+0x7B1379: call    ??1BSImageSpaceShader@@UAE@XZ; MoonSugarEffect decode: BSImageSpaceShader dtor releases source BSRenderedTexture at +0x7C, clears +0x80..+0x8C, then calls BSShader dtor.
 0x7B137E: mov     ecx, dword ptr [esp+24h+var_C]
 0x7B1382: mov     large fs:0, ecx
 0x7B1389: pop     ecx
@@ -123,3 +123,39 @@
 0x7B138D: pop     ebx
 0x7B138E: add     esp, 10h
 0x7B1391: retn
+0x9CD7D0: mov     ecx, [ebp-10h]; this
+0x9CD7D3: jmp     ??1BSImageSpaceShader@@UAE@XZ; MoonSugarEffect decode: BSImageSpaceShader dtor releases source BSRenderedTexture at +0x7C, clears +0x80..+0x8C, then calls BSShader dtor.
+0x9CD7D8: push    offset sub_4027D0; void (__thiscall *)(void *)
+0x9CD7DD: push    1; int
+0x9CD7DF: push    4; unsigned int
+0x9CD7E1: mov     eax, [ebp-10h]
+0x9CD7E4: add     eax, 94h ; '”'
+0x9CD7E9: push    eax; void *
+0x9CD7EA: call    $LN21
+0x9CD7EF: retn
+0x9CD7F0: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9CD7F5: push    1; int
+0x9CD7F7: push    4; unsigned int
+0x9CD7F9: mov     eax, [ebp-10h]
+0x9CD7FC: add     eax, 98h ; '˜'
+0x9CD801: push    eax; void *
+0x9CD802: call    $LN21
+0x9CD807: retn
+0x9CD808: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9CD80D: push    1; int
+0x9CD80F: push    4; unsigned int
+0x9CD811: mov     eax, [ebp-10h]
+0x9CD814: add     eax, 9Ch ; 'œ'
+0x9CD819: push    eax; void *
+0x9CD81A: call    $LN21
+0x9CD81F: retn
+0x9CD820: mov     ecx, [ebp-10h]
+0x9CD823: add     ecx, 0B4h ; '´'; slot
+0x9CD829: jmp     NiPointerSlot_Release
+0x9CD82E: mov     edx, [esp+arg_4]
+0x9CD832: lea     eax, [edx-14h]
+0x9CD835: mov     ecx, [edx-18h]
+0x9CD838: xor     ecx, eax
+0x9CD83A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CD83F: mov     eax, offset stru_AF6A38
+0x9CD844: jmp     ___CxxFrameHandler3

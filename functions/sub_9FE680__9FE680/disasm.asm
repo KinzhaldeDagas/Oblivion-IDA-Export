@@ -1,7 +1,7 @@
-0x9FE680: mov     eax, dword ptr Vector3_InitValue?
-0x9FE685: mov     ecx, dword ptr Vector3_InitValue?+4
-0x9FE68B: mov     edx, dword_B3F9B0
-0x9FE691: mov     dword ptr qword_B3BE2C, eax
-0x9FE696: mov     dword ptr qword_B3BE2C+4, ecx
-0x9FE69C: mov     dword_B3BE34, edx
+0x9FE680: mov     eax, g_zeroNiPoint3.x
+0x9FE685: mov     ecx, g_zeroNiPoint3.y
+0x9FE68B: mov     edx, g_zeroNiPoint3.z
+0x9FE691: mov     ds:0B3BE2Ch, eax
+0x9FE696: mov     ds:0B3BE30h, ecx
+0x9FE69C: mov     ds:0B3BE34h, edx
 0x9FE6A2: retn

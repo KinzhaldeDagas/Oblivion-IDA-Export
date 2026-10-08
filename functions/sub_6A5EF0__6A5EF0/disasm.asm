@@ -35,7 +35,7 @@
 0x6A5F5C: push    edi; void *
 0x6A5F5D: call    OblivionDynamicCast
 0x6A5F62: push    eax
-0x6A5F63: call    sub_46D5C0
+0x6A5F63: call    sub_46D5C0; Collision/model radius-ish helper used by PlaceAtMe after a ray hit. It dynamic-casts a form to TESModel and reads +0x0C, otherwise resolves from TESObjectREFR via 0x4694A0; result scales the normalized hit vector before final placement point.
 0x6A5F68: fstp    [esp+4DCh+var_4A8]
 0x6A5F6C: fld     dword ptr ds:0A56670h
 0x6A5F72: add     esp, 18h
@@ -61,52 +61,52 @@
 0x6A5FB0: fstp    [esp+4CCh+var_4AC]
 0x6A5FB4: fld     [esp+4CCh+var_4AC]
 0x6A5FB8: fstp    [esp+4CCh+var_4CC]; float
-0x6A5FBB: call    sub_532090
+0x6A5FBB: call    bhkSphereShape_CtorRadius; TES4 authoritative: constructs a bhkSphereShape; if the third byte arg is true, radius is converted from TES/world units to Havok units with hkFactor.
 0x6A5FC0: mov     edi, eax
 0x6A5FC2: jmp     short loc_6A5FC6
 0x6A5FC4: xor     edi, edi
-0x6A5FC6: lea     ecx, [esp+4C4h+var_470]
-0x6A5FCA: call    sub_532250
+0x6A5FC6: lea     ecx, [esp+4C4h+info]
+0x6A5FCA: call    OB_bhkShapePhantomCinfo_InitIdentity_010201A0; 2026-05-18 73000 consumer decode: initializes bhkSimpleShapePhantom cinfo, including identity transform at +0x20 and shape pointer slot at +0x04. Stock 0x565510 installs one shape pointer and attaches the phantom to the target NiAVObject.
 0x6A5FCF: cmp     edi, ebx
 0x6A5FD1: mov     [esp+4C4h+var_4], 1
-0x6A5FDC: mov     [esp+4C4h+var_470], 1Bh
+0x6A5FDC: mov     [esp+4C4h+info.collisionFilter], 1Bh
 0x6A5FE4: jz      short loc_6A5FEF
 0x6A5FE6: mov     eax, [edi+8]
-0x6A5FE9: mov     [esp+4C4h+var_46C], eax
+0x6A5FE9: mov     [esp+4C4h+info.shape], eax
 0x6A5FED: jmp     short loc_6A5FF3
-0x6A5FEF: mov     [esp+4C4h+var_46C], ebx
+0x6A5FEF: mov     [esp+4C4h+info.shape], ebx
 0x6A5FF3: fldz
-0x6A5FF5: lea     ecx, [esp+4C4h+var_470]
-0x6A5FF9: fst     [esp+4C4h+var_44C]
-0x6A5FFD: push    ecx
-0x6A5FFE: fst     [esp+4C8h+var_448]
-0x6A6005: lea     ecx, [esp+4C8h+var_490]
-0x6A6009: fst     [esp+4C8h+var_444]
-0x6A6010: fst     [esp+4C8h+var_440]
-0x6A6017: fst     [esp+4C8h+var_438]
-0x6A601E: fst     [esp+4C8h+var_434]
-0x6A6025: fst     [esp+4C8h+var_430]
-0x6A602C: fst     [esp+4C8h+var_42C]
-0x6A6033: fst     [esp+4C8h+var_424]
+0x6A5FF5: lea     ecx, [esp+4C4h+info]
+0x6A5FF9: fst     [esp+4C4h+info.transform+4]
+0x6A5FFD: push    ecx; info
+0x6A5FFE: fst     [esp+4C8h+info.transform+8]
+0x6A6005: lea     ecx, [esp+4C8h+self]; self
+0x6A6009: fst     [esp+4C8h+info.transform+0Ch]
+0x6A6010: fst     [esp+4C8h+info.transform+10h]
+0x6A6017: fst     [esp+4C8h+info.transform+18h]
+0x6A601E: fst     [esp+4C8h+info.transform+1Ch]
+0x6A6025: fst     [esp+4C8h+info.transform+20h]
+0x6A602C: fst     [esp+4C8h+info.transform+24h]
+0x6A6033: fst     [esp+4C8h+info.transform+2Ch]
 0x6A603A: fld1
-0x6A603C: fst     [esp+4C8h+var_450]
-0x6A6040: fst     [esp+4C8h+var_43C]
-0x6A6047: fstp    [esp+4C8h+var_428]
-0x6A604E: fst     [esp+4C8h+var_420]
-0x6A6055: fst     [esp+4C8h+var_41C]
-0x6A605C: fst     [esp+4C8h+var_418]
-0x6A6063: fstp    [esp+4C8h+var_414]
-0x6A606A: call    sub_531FC0
+0x6A603C: fst     [esp+4C8h+info.transform]
+0x6A6040: fst     [esp+4C8h+info.transform+14h]
+0x6A6047: fstp    [esp+4C8h+info.transform+28h]
+0x6A604E: fst     [esp+4C8h+info.transform+30h]
+0x6A6055: fst     [esp+4C8h+info.transform+34h]
+0x6A605C: fst     [esp+4C8h+info.transform+38h]
+0x6A6063: fstp    [esp+4C8h+info.transform+3Ch]
+0x6A606A: call    OB_bhkSimpleShapePhantom_CtorFromCinfo_010201A0; Constructs bhkSimpleShapePhantom wrapper and calls 0x8AF1A0 to create/attach the low-level Havok phantom object from cinfo.
 0x6A606F: mov     ecx, [esp+4C4h+var_4A0]; this
 0x6A6073: mov     byte ptr [esp+4C4h+var_4], 2
-0x6A607B: call    TESObjectREFR_GetParentCell
+0x6A607B: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6A6080: test    eax, eax
 0x6A6082: jz      short loc_6A60B5
 0x6A6084: mov     ecx, [esp+4C4h+var_4A0]; this
-0x6A6088: call    TESObjectREFR_GetParentCell
+0x6A6088: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6A608D: mov     ebx, eax
 0x6A608F: mov     ecx, ebx; this
-0x6A6091: call    TESObjectCELL_IsInterior
+0x6A6091: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x6A6096: test    al, al
 0x6A6098: jz      short loc_6A60A4
 0x6A609A: lea     ecx, [ebx+28h]
@@ -114,7 +114,7 @@
 0x6A60A2: jmp     short loc_6A60A9
 0x6A60A4: mov     eax, ds:0B35C24h
 0x6A60A9: push    eax
-0x6A60AA: lea     ecx, [esp+4C8h+var_490]
+0x6A60AA: lea     ecx, [esp+4C8h+self]
 0x6A60AE: call    sub_89F470
 0x6A60B3: xor     ebx, ebx
 0x6A60B5: fld     dword ptr ds:0A76BA0h
@@ -134,7 +134,7 @@
 0x6A6112: mov     [esp+4C4h+var_1AC], ebx
 0x6A6119: fld     dword ptr ds:0A76B9Ch
 0x6A611F: fst     [esp+4C4h+var_3F0]
-0x6A6126: mov     eax, [esp+4C4h+var_488]
+0x6A6126: mov     eax, [esp+4C4h+self.hkObject]
 0x6A612A: test    eax, eax
 0x6A612C: fstp    [esp+4C4h+var_3EC]
 0x6A6133: fld     [esp+4C4h+var_4A8]
@@ -189,8 +189,8 @@
 0x6A61EF: fmul    [esp+4C4h+var_4A8]
 0x6A61F3: fstp    [esp+4C4h+var_3F8]
 0x6A61FA: jz      short loc_6A6237
-0x6A61FC: lea     ecx, [esp+4C4h+var_490]
-0x6A6200: call    sub_89F570
+0x6A61FC: lea     ecx, [esp+4C4h+self]
+0x6A6200: call    bhkRefObject_UpdateHavokObject
 0x6A6205: mov     edx, [ebx]
 0x6A6207: mov     edx, [edx+30h]
 0x6A620A: lea     eax, [esp+4C4h+var_360]
@@ -203,10 +203,10 @@
 0x6A6229: push    ecx
 0x6A622A: mov     ecx, ebx
 0x6A622C: call    edx
-0x6A622E: lea     ecx, [esp+4C4h+var_490]
-0x6A6232: call    sub_89F570
+0x6A622E: lea     ecx, [esp+4C4h+self]
+0x6A6232: call    bhkRefObject_UpdateHavokObject
 0x6A6237: cmp     [esp+4C4h+var_34C], 0
-0x6A623F: lea     ecx, [esp+4C4h+var_490]
+0x6A623F: lea     ecx, [esp+4C4h+self]
 0x6A6243: setnle  al
 0x6A6246: test    al, al
 0x6A6248: jz      loc_6A62EC
@@ -224,10 +224,10 @@
 0x6A6275: lea     ecx, [esp+4C4h+var_360]; this
 0x6A627C: mov     byte ptr [esp+4C4h+var_4], 2
 0x6A6284: call    ??1hkAllCdPointCollector@@UAE@XZ; hkAllCdPointCollector::~hkAllCdPointCollector(void)
-0x6A6289: lea     ecx, [esp+4C4h+var_490]; this
+0x6A6289: lea     ecx, [esp+4C4h+self]; this
 0x6A628D: mov     byte ptr [esp+4C4h+var_4], 1
 0x6A6295: call    ??1bhkSimpleShapePhantom@@UAE@XZ; bhkSimpleShapePhantom::~bhkSimpleShapePhantom(void)
-0x6A629A: mov     eax, [esp+4C4h+var_45C]
+0x6A629A: mov     eax, [esp+4C4h+info.propertyCapacityFlags]
 0x6A629E: test    eax, eax
 0x6A62A0: mov     [esp+4C4h+var_4], 0FFFFFFFFh
 0x6A62AB: js      short loc_6A62E5
@@ -238,7 +238,7 @@
 0x6A62C3: test    ecx, ecx
 0x6A62C5: jnz     short loc_6A62CD
 0x6A62C7: mov     ecx, ds:0BA7D9Ch
-0x6A62CD: mov     edx, [esp+4C4h+var_464]
+0x6A62CD: mov     edx, [esp+4C4h+info.propertyData]
 0x6A62D1: and     eax, 3FFFFFFFh
 0x6A62D6: add     eax, eax
 0x6A62D8: add     eax, eax
@@ -263,7 +263,7 @@
 0x6A6307: push    ecx
 0x6A6308: fstp    [esp+4C8h+var_4C8]; float
 0x6A630B: mov     ecx, edi; this
-0x6A630D: call    TESObjectREFR_GetParentCell
+0x6A630D: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6A6312: push    eax; int
 0x6A6313: push    esi; int
 0x6A6314: mov     ecx, edi
@@ -276,10 +276,10 @@
 0x6A6333: lea     ecx, [esp+4C4h+var_360]; this
 0x6A633A: mov     byte ptr [esp+4C4h+var_4], 2
 0x6A6342: call    ??1hkAllCdPointCollector@@UAE@XZ; hkAllCdPointCollector::~hkAllCdPointCollector(void)
-0x6A6347: lea     ecx, [esp+4C4h+var_490]; this
+0x6A6347: lea     ecx, [esp+4C4h+self]; this
 0x6A634B: mov     byte ptr [esp+4C4h+var_4], 1
 0x6A6353: call    ??1bhkSimpleShapePhantom@@UAE@XZ; bhkSimpleShapePhantom::~bhkSimpleShapePhantom(void)
-0x6A6358: lea     ecx, [esp+4C4h+var_470]
+0x6A6358: lea     ecx, [esp+4C4h+info]
 0x6A635C: mov     [esp+4C4h+var_4], 0FFFFFFFFh
 0x6A6367: call    sub_8A5090
 0x6A636C: xor     al, al
@@ -320,15 +320,15 @@
 0x6A6404: lea     ecx, [esp+4C8h+var_3E0]
 0x6A640B: fstp    [esp+4C8h+a2.z]
 0x6A640F: mov     [esp+4C8h+a2.y], edx
-0x6A6413: call    bhkWorldRayCastData__SetCastInputFrom
+0x6A6413: call    bhkWorldRayCastData__SetCastInputFrom; TES4 authoritative: bhkWorldRayCastData::SetCastInputFrom; scales world-space NiPoint3 into Havok units using hkFactor and writes ray From.
 0x6A6418: lea     edx, [esp+4C4h+a2]
 0x6A641C: push    edx; a2
 0x6A641D: lea     ecx, [esp+4C8h+var_3E0]; this
-0x6A6424: call    bhkWorldRayCastData__SetCastInputTo
+0x6A6424: call    bhkWorldRayCastData__SetCastInputTo; TES4 authoritative: bhkWorldRayCastData::SetCastInputTo; scales world-space NiPoint3 into Havok units, writes ray To, resets sentinel vector at +0x60.
 0x6A6429: mov     ecx, ds:0B333A0h; this
 0x6A642F: lea     eax, [esp+4C4h+var_3E0]
 0x6A6436: push    eax; a2
-0x6A6437: call    TES__CastRay
+0x6A6437: call    TES__CastRay; TES4 authoritative: TES::CastRay. Uses current interior cell's bhkWorld or exterior bhkWorldM; calls bhkWorld raycast vfunc +0x88 with bhkWorldRayCastData. Reusable for climbing wall/ledge probes.
 0x6A643C: cmp     [esp+4C4h+var_3E0.WorldRayCastOutput.RootCollidable], ebx
 0x6A6443: mov     byte ptr [esp+4C4h+var_4], 3
 0x6A644B: setnz   al
@@ -339,10 +339,10 @@
 0x6A6462: lea     ecx, [esp+4C4h+var_360]; this
 0x6A6469: mov     byte ptr [esp+4C4h+var_4], 2
 0x6A6471: call    ??1hkAllCdPointCollector@@UAE@XZ; hkAllCdPointCollector::~hkAllCdPointCollector(void)
-0x6A6476: lea     ecx, [esp+4C4h+var_490]; this
+0x6A6476: lea     ecx, [esp+4C4h+self]; this
 0x6A647A: mov     byte ptr [esp+4C4h+var_4], 1
 0x6A6482: call    ??1bhkSimpleShapePhantom@@UAE@XZ; bhkSimpleShapePhantom::~bhkSimpleShapePhantom(void)
-0x6A6487: lea     ecx, [esp+4C4h+var_470]
+0x6A6487: lea     ecx, [esp+4C4h+info]
 0x6A648B: mov     [esp+4C4h+var_4], 0FFFFFFFFh
 0x6A6496: call    sub_8A5090
 0x6A649B: mov     al, 1
@@ -358,3 +358,27 @@
 0x6A64BD: mov     esp, ebp
 0x6A64BF: pop     ebp
 0x6A64C0: retn    8
+0x9C6190: mov     eax, [ebp+var_4A4]
+0x9C6196: push    eax
+0x9C6197: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C619C: pop     ecx
+0x9C619D: retn
+0x9C619E: lea     ecx, [ebp+info]
+0x9C61A4: jmp     sub_8A5090
+0x9C61A9: lea     ecx, [ebp+self]; this
+0x9C61AF: jmp     ??1bhkSimpleShapePhantom@@UAE@XZ; bhkSimpleShapePhantom::~bhkSimpleShapePhantom(void)
+0x9C61B4: lea     ecx, [ebp+var_360]; this
+0x9C61BA: jmp     ??1hkAllCdPointCollector@@UAE@XZ; hkAllCdPointCollector::~hkAllCdPointCollector(void)
+0x9C61BF: lea     ecx, [ebp+var_1C0]; this
+0x9C61C5: jmp     ??1hkAllCdPointCollector@@UAE@XZ; hkAllCdPointCollector::~hkAllCdPointCollector(void)
+0x9C61CA: mov     edx, [esp-4+arg_4]
+0x9C61CE: lea     eax, [edx-4B4h]
+0x9C61D4: mov     ecx, [edx-4B8h]
+0x9C61DA: xor     ecx, eax
+0x9C61DC: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C61E1: add     eax, 0Ch
+0x9C61E4: mov     ecx, [edx-8]
+0x9C61E7: xor     ecx, eax
+0x9C61E9: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C61EE: mov     eax, offset stru_AEE794
+0x9C61F3: jmp     ___CxxFrameHandler3

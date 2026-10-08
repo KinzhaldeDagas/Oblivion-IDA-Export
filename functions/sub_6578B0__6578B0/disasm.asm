@@ -2,8 +2,8 @@
 0x6578B1: mov     ebp, [esp+4+arg_0]
 0x6578B5: push    esi
 0x6578B6: mov     esi, ecx
-0x6578B8: mov     ecx, ebp
-0x6578BA: call    sub_5E32D0
+0x6578B8: mov     ecx, ebp; this
+0x6578BA: call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.
 0x6578BF: test    al, al
 0x6578C1: jz      short loc_6578F4
 0x6578C3: mov     eax, [esi]
@@ -21,15 +21,15 @@
 0x6578EB: push    eax; float
 0x6578EC: push    ebp; int
 0x6578ED: mov     ecx, esi
-0x6578EF: call    sub_6553E0
+0x6578EF: call    sub_6553E0; BunkFix: sleep/eat furniture-reference scanner used by sub_62D750 and sub_62DA10. Scans around package location/actor and populates process candidate list at +0xB0/+0x2C family using sub_6505D0 predicate.
 0x6578F4: mov     eax, [esi]
 0x6578F6: mov     edx, [eax+36Ch]
 0x6578FC: mov     ecx, esi
 0x6578FE: call    edx
 0x657900: cmp     eax, 9
 0x657903: jz      loc_657A13
-0x657909: mov     ecx, ebp
-0x65790B: call    sub_5E32D0
+0x657909: mov     ecx, ebp; this
+0x65790B: call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.
 0x657910: test    al, al
 0x657912: jz      loc_657A13
 0x657918: cmp     dword ptr [esi+120h], 0
@@ -48,9 +48,9 @@
 0x65793D: jnz     short loc_657930
 0x65793F: test    ecx, ecx
 0x657941: jz      short loc_657998
-0x657943: mov     ecx, [edi]; this
+0x657943: mov     ecx, [edi]; reference
 0x657945: mov     [esi+120h], ecx
-0x65794B: call    TESObjectREFR_GetOwner
+0x65794B: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x657950: test    eax, eax
 0x657952: mov     ecx, edi
 0x657954: jz      short loc_657964
@@ -61,7 +61,7 @@
 0x657964: call    BSSimpleList_Count
 0x657969: push    0; Seed
 0x65796B: mov     ebp, eax
-0x65796D: call    GetRandomLargeInteger?
+0x65796D: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x657972: cdq
 0x657973: idiv    ebp
 0x657975: add     esp, 4
@@ -114,8 +114,8 @@
 0x657A09: mov     edx, ds:0B3F9B0h
 0x657A0F: mov     [edi+8], edx
 0x657A12: pop     edi
-0x657A13: mov     ecx, ebp
-0x657A15: call    sub_5E32D0
+0x657A13: mov     ecx, ebp; this
+0x657A15: call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.
 0x657A1A: test    al, al
 0x657A1C: jz      short loc_657A2F
 0x657A1E: mov     eax, [esi]
@@ -136,7 +136,7 @@
 0x657A54: mov     ecx, esi
 0x657A56: call    edx
 0x657A58: lea     ecx, [esi+0B0h]
-0x657A5E: call    BSSimpleList_Clear
+0x657A5E: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x657A63: mov     eax, [esi]
 0x657A65: mov     edx, [eax+48h]
 0x657A68: push    ebp

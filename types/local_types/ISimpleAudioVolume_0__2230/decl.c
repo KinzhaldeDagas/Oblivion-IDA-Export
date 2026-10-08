@@ -1,1 +1,1 @@
-ISimpleAudioVolume_0
+typedef ISimpleAudioVolume ISimpleAudioVolume_0;

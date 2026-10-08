@@ -1,19 +1,36 @@
 {
-  "callees_count": 73,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 23,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 9,
-  "display_name": "sub_7D1920",
+  "chunks": [
+    [
+      "0x7D1920",
+      "0x7D1C55"
+    ],
+    [
+      "0x9CE9D0",
+      "0x9CEA0C"
+    ]
+  ],
+  "chunks_sha256": "c60286ba0cba5f5495cc5fc916497a6e4386c24d365e7d36a984e6f4a3ab7d6d",
+  "comment_regular": "Runtime corroboration 2026-10-02 (DX11 V228, Anvil Dock Gate): B42EA5 read as1 while protected static census counted123 Lighting30 shader-vtable occurrences,2773 other shader occurrences and2 unreadable shader pointers across2898 geometry occurrences. Thus capability enabled does not establish ordinary static geometry uses Lighting30, consistent with this function returning default shader ID1 unless its specific predicates select1A. The current CPU discovery sampler captured non-Lighting30 property inventories; that is a frontend sampling limitation, not evidence to change Oblivion shader selection or relax A9576C property validation. Actual GPU bucket suppression was zero in this run.\n\nGeneric material shader id inference helper. Checks material/property names including Block and STBB, but the STBB check falls through to default shader id 1; it does not select SpeedTree billboard/frond ids.",
+  "comment_repeatable": "Generic material shader id inference helper. Checks material/property names including Block and STBB, but the STBB check falls through to default shader id 1; it does not select SpeedTree billboard/frond ids.\nRestricted GPU bucket audit2026-10-02: enabling the global Lighting30 flag does NOT make every ordinary opaque geometry use definition1A. This body returns1 by default after texture/material checks. Verified1A routes include hair under capability checks, alpha blending/dynalpha when B42EA5 is nonzero, and the controller RTTI branch againstB3CE30. Keep shader-family discovery distinct from device shader-model capability and do not force opaque meshes into1A to obtain a replacement hit.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 12,
+  "display_name": "BSShaderManager_InferGeometryShaderID",
   "end_ea": "0x7D1C55",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7D1920",
+  "name": "BSShaderManager_InferGeometryShaderID",
   "segment": ".text",
   "sha256": "f5841128fbe392b32958a8acf7e45090c239d305695252e90d19082d9f41f2cc",
   "size": 821,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7D1920",
-  "type": "signed int __cdecl(NiAVObject *, char)",
-  "xrefs_from_count": 342,
+  "total_chunk_size": 881,
+  "type": "int __cdecl(NiAVObject *geometry, char normalMapBypass)",
+  "xrefs_from_count": 361,
   "xrefs_to_count": 1
 }

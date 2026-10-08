@@ -15,8 +15,8 @@
 0x41177D: push    eax; ArgList
 0x41177E: lea     eax, [esp+2F8h+var_C]
 0x411785: mov     large fs:0, eax
-0x41178B: mov     esi, dword_B350D8
-0x411791: lea     ecx, [esp+2F8h+var_27C]
+0x41178B: mov     esi, ds:0B350D8h
+0x411791: lea     ecx, [esp+2F8h+pixelFormat]
 0x411795: call    InitSurfacEData
 0x41179A: mov     eax, [esi]
 0x41179C: mov     edx, [eax+8Ch]
@@ -32,12 +32,12 @@
 0x4117BA: jmp     short loc_4117BE
 0x4117BC: xor     eax, eax
 0x4117BE: mov     esi, eax
-0x4117C0: lea     eax, [esp+2F8h+var_27C]
+0x4117C0: lea     eax, [esp+2F8h+pixelFormat]
 0x4117C4: mov     ecx, 11h
-0x4117C9: lea     edi, [esp+2F8h+var_27C]
-0x4117CD: push    eax
+0x4117C9: lea     edi, [esp+2F8h+pixelFormat]
+0x4117CD: push    eax; pixelFormat
 0x4117CE: rep movsd
-0x4117D0: call    sub_76BEF0
+0x4117D0: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x4117D5: mov     ecx, [ebx]
 0x4117D7: mov     eax, [ecx+48h]
 0x4117DA: add     esp, 4
@@ -83,7 +83,7 @@
 0x41184D: call    eax
 0x41184F: test    eax, eax
 0x411851: jz      short loc_41186A
-0x411853: cmp     iMultisample, 2
+0x411853: cmp     dword ptr ds:0B34FC0h, 2
 0x41185A: jl      short loc_411863
 0x41185C: push    offset aScreenshotNotE; "ScreenShot: Not enabled. Can't lock the"...
 0x411861: jmp     short loc_41181E
@@ -99,7 +99,7 @@
 0x411887: mov     edx, nHeight
 0x41188D: push    1
 0x41188F: push    1
-0x411891: lea     ecx, [esp+300h+var_27C]
+0x411891: lea     ecx, [esp+300h+pixelFormat]
 0x411898: push    ecx
 0x411899: mov     ecx, nWidth
 0x41189F: push    edx
@@ -122,10 +122,10 @@
 0x4118D2: mov     [esp+2F8h+var_4], 0FFFFFFFFh
 0x4118DD: mov     [esp+2F8h+var_2E0], 0
 0x4118E5: jle     short loc_41190B
-0x4118E7: push    ebx; Size
-0x4118E8: push    ebp; Src
-0x4118E9: push    esi; Dst
-0x4118EA: call    _memcpy
+0x4118E7: push    ebx; byteCount
+0x4118E8: push    ebp; source
+0x4118E9: push    esi; destination
+0x4118EA: call    _memcpy;
 0x4118EF: mov     eax, [esp+304h+var_2E0]
 0x4118F3: add     ebp, [esp+48h]
 0x4118F7: add     eax, 1
@@ -311,3 +311,19 @@
 0x411B64: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x411B69: add     esp, 2E4h
 0x411B6F: retn
+0x9AAF10: mov     eax, [ebp-2D4h]
+0x9AAF16: push    eax
+0x9AAF17: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AAF1C: pop     ecx
+0x9AAF1D: retn
+0x9AAF1E: mov     edx, [esp+arg_4]
+0x9AAF22: lea     eax, [edx-2E8h]
+0x9AAF28: mov     ecx, [edx-2ECh]
+0x9AAF2E: xor     ecx, eax
+0x9AAF30: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AAF35: add     eax, 10h
+0x9AAF38: mov     ecx, [edx-4]
+0x9AAF3B: xor     ecx, eax
+0x9AAF3D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AAF42: mov     eax, offset stru_AD7E00
+0x9AAF47: jmp     ___CxxFrameHandler3

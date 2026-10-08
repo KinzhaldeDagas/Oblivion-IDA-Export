@@ -1,4 +1,4 @@
-0x760010: push    ebx
+0x760010: push    ebx; Attach or replace a NiD3DTextureStage at a pass stage index while maintaining stage count, current-stage bookkeeping, and references.
 0x760011: mov     ebx, [esp+4+a2]
 0x760015: cmp     ebx, ds:0B28CB0h
 0x76001B: push    esi
@@ -27,7 +27,7 @@
 0x760056: add     dword ptr [edi+5Ch], 0FFFFFFFFh
 0x76005A: jnz     short loc_760063
 0x76005C: mov     ecx, edi
-0x76005E: call    sub_772560
+0x76005E: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x760063: mov     ecx, [esi+24h]
 0x760066: mov     eax, [ecx+ebx*4]
 0x760069: test    eax, eax
@@ -72,7 +72,7 @@
 0x7600D4: add     dword ptr [edi+5Ch], 0FFFFFFFFh
 0x7600D8: jnz     short loc_7600E1
 0x7600DA: mov     ecx, edi
-0x7600DC: call    sub_772560
+0x7600DC: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x7600E1: mov     [edi], ebx
 0x7600E3: mov     eax, [esi+14h]
 0x7600E6: cmp     eax, ebx

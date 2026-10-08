@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6943E0",
-    "line": "push    edi",
+    "line": "push    edi; LightEffect update is a native self-heal: if its transient point light exists but no full-list ShadowSceneLight matches that backing-light identity, recreate the entry with trackBackingPosition=true.",
     "mnemonic": "push",
     "size": 1
   },
@@ -73,19 +73,19 @@
   },
   {
     "ea": "0x6943FD",
-    "line": "push    eax",
+    "line": "push    eax; backingLight",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6943FE",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x694400",
-    "line": "call    sub_7C6230",
+    "line": "call    ShadowSceneNode_FindFullLightBySource; LightEffect update first tests the native full-light list by backing NiLight identity.",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,25 +109,25 @@
   },
   {
     "ea": "0x69440C",
-    "line": "push    1",
+    "line": "push    1; trackBackingPosition",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x69440E",
-    "line": "push    eax",
+    "line": "push    eax; backingLight",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x69440F",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x694411",
-    "line": "call    sub_7C6AE0",
+    "line": "call    ShadowSceneNode_FindOrCreateFullLightForSource; Dynamically created LightEffect NiPointLights register with trackBackingPosition=true.",
     "mnemonic": "call",
     "size": 5
   },

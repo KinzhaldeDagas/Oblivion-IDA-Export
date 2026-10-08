@@ -60,3 +60,17 @@
 0x6F33AE: mov     esp, ebp
 0x6F33B0: pop     ebp
 0x6F33B1: retn
+0x9C88D0: mov     eax, [ebp+arg_0]
+0x9C88D3: push    eax
+0x9C88D4: mov     ecx, [ebp+var_18]; this
+0x9C88D7: push    ecx
+0x9C88D8: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x9C88DD: add     esp, 8
+0x9C88E0: retn
+0x9C88E1: mov     edx, [esp-4+arg_4]
+0x9C88E5: lea     eax, [edx+0Ch]
+0x9C88E8: mov     ecx, [edx-1Ch]
+0x9C88EB: xor     ecx, eax
+0x9C88ED: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C88F2: mov     eax, offset stru_AF1024
+0x9C88F7: jmp     ___CxxFrameHandler3

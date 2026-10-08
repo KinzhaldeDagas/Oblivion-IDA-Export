@@ -1,1 +1,34 @@
-fontdir
+struct __unaligned __declspec(align(1)) fontdir
+{
+WORD num_of_resources;
+WORD res_id;
+WORD dfVersion;
+DWORD dfSize;
+CHAR dfCopyright[60];
+WORD dfType;
+WORD dfPoints;
+WORD dfVertRes;
+WORD dfHorizRes;
+WORD dfAscent;
+WORD dfInternalLeading;
+WORD dfExternalLeading;
+BYTE dfItalic;
+BYTE dfUnderline;
+BYTE dfStrikeOut;
+WORD dfWeight;
+BYTE dfCharSet;
+WORD dfPixWidth;
+WORD dfPixHeight;
+BYTE dfPitchAndFamily;
+WORD dfAvgWidth;
+WORD dfMaxWidth;
+BYTE dfFirstChar;
+BYTE dfLastChar;
+BYTE dfDefaultChar;
+BYTE dfBreakChar;
+WORD dfWidthBytes;
+DWORD dfDevice;
+DWORD dfFace;
+DWORD dfReserved;
+CHAR szFaceName[32];
+};

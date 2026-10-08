@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x51A530",
-    "line": "mov     [esp+18h+var_4], edi",
+    "line": "mov     [esp+18h+source], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x51A53B",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },
@@ -79,13 +79,13 @@
   },
   {
     "ea": "0x51A544",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x51A54A",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x51A550",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x51A55E",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -127,19 +127,19 @@
   },
   {
     "ea": "0x51A567",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x51A569",
-    "line": "lea     eax, [esp+1Ch+var_4]",
+    "line": "lea     eax, [esp+1Ch+source]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x51A56D",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -205,13 +205,13 @@
   },
   {
     "ea": "0x51A590",
-    "line": "push    ebx",
+    "line": "push    ebx; changeMask",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x51A591",
-    "line": "lea     ecx, [esi+88h]",
+    "line": "lea     ecx, [esi+88h]; self",
     "mnemonic": "lea",
     "size": 6
   },
@@ -223,13 +223,13 @@
   },
   {
     "ea": "0x51A59C",
-    "line": "push    ebx",
+    "line": "push    ebx; changeMask",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x51A59D",
-    "line": "lea     ecx, [esi+24h]",
+    "line": "lea     ecx, [esi+24h]; self",
     "mnemonic": "lea",
     "size": 3
   },
@@ -241,13 +241,13 @@
   },
   {
     "ea": "0x51A5A5",
-    "line": "push    ebx",
+    "line": "push    ebx; changeMask",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x51A5A6",
-    "line": "lea     ecx, [esi+54h]",
+    "line": "lea     ecx, [esi+54h]; self",
     "mnemonic": "lea",
     "size": 3
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x51A5C2",
-    "line": "push    4; a2",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -307,13 +307,13 @@
   },
   {
     "ea": "0x51A5C8",
-    "line": "push    eax; a1",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x51A5C9",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x51A5DC",
-    "line": "lea     ecx, [esi+0D0h]",
+    "line": "lea     ecx, [esi+0D0h]; self",
     "mnemonic": "lea",
     "size": 6
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x51A60B",
-    "line": "push    1; a2",
+    "line": "push    1; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -457,13 +457,13 @@
   },
   {
     "ea": "0x51A613",
-    "line": "push    ecx; a1",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x51A614",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -505,19 +505,19 @@
   },
   {
     "ea": "0x51A62A",
-    "line": "push    edx; a2",
+    "line": "push    edx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x51A62B",
-    "line": "push    edi; a1",
+    "line": "push    edi; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x51A62C",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x51A651",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x51A6A9",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },

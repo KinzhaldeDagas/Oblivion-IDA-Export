@@ -23,7 +23,7 @@
 0x782623: cmp     ebx, edi
 0x782625: ja      short loc_782643
 0x782627: push    eax
-0x782628: call    FormHeapFree
+0x782628: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x78262D: add     esp, 4
 0x782630: mov     dword ptr [esi], 0
 0x782636: push    edi; Size
@@ -46,7 +46,7 @@
 0x782657: mov     esi, [esp+8+arg_0]
 0x78265B: mov     ecx, [esi]
 0x78265D: push    ecx
-0x78265E: call    FormHeapFree
+0x78265E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x782663: add     esp, 4
 0x782666: mov     dword ptr [esi], 0
 0x78266C: pop     esi

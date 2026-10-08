@@ -1,4 +1,4 @@
-0x5E05B0: cmp     dword ptr [ecx+58h], 0
+0x5E05B0: cmp     dword ptr [ecx+58h], 0; Checks process movement flags low nibble via vfunc +0x2C0. Player input uses this alongside swimming/sneaking skill progression; useful as a broad movement-mode guard.
 0x5E05B4: jz      short loc_5E05CA
 0x5E05B6: mov     ecx, [ecx+58h]
 0x5E05B9: mov     eax, [ecx]

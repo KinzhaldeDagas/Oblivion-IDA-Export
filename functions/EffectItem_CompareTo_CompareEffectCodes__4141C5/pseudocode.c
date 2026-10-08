@@ -14,8 +14,8 @@ int __userpurge EffectItem_CompareTo_::CompareEffectCodes@<eax>(
         int a13,
         int a14)
 {
-  if ( *a1 == *a2 )
-    return EffectItem_CompareTo_::CompareMagnitudes(a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14);
+  if ( *a1 == *a2 ) /*0x4141cc*/
+    return EffectItem_CompareTo_::CompareMagnitudes(a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14); /*0x4141cd*/
   else
-    return EffectItem_CompareTo_::Return_1(a3);
+    return EffectItem_CompareTo_::Return_1(a3); /*0x4141cc*/
 }

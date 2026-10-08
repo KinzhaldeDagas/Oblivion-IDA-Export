@@ -1,4 +1,4 @@
-BSStringT *sub_A12780()
+NiRTTI *sub_A12780()
 {
-  return sub_70E220((BSStringT *)dword_BA8074, "bhkDashpotAction", (int)dword_BA7D44);
+  return NiRTTI_Constructor(&stru_BA8074, "bhkDashpotAction", &stru_BA7D44); /*0xa12794*/
 }

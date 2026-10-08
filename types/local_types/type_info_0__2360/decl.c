@@ -1,1 +1,1 @@
-type_info_0
+typedef __type_info type_info_0;

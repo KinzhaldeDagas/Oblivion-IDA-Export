@@ -1,18 +1,31 @@
 {
-  "callees_count": 21,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x778350",
+      "0x7784F7"
+    ]
+  ],
+  "chunks_sha256": "561786e96bcba9eee85bf1dc8868199aa2a0f709f00eec4ae68506b6a0de41df",
+  "comment_regular": "Buffer factory audit 2026-10-02: independent cached quad-index path, not a caller of PackBuffer7781F0. Requests 12 bytes per quad, INDEX16 (101), uses manager+0C cached IB/+10 capacity and fills each four vertices as 0,1,2,0,2,3. Calls D3D CreateIndexBuffer virtual+6C directly at778421, then Lock/Unlock. Current decompile has incorrect COM Lock arity/stack tracking and phantom ESI input; do not use its displayed prototype as authority.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 3,
   "display_name": "sub_778350",
   "end_ea": "0x7784F7",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_778350",
   "segment": ".text",
   "sha256": "561786e96bcba9eee85bf1dc8868199aa2a0f709f00eec4ae68506b6a0de41df",
   "size": 423,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x778350",
+  "total_chunk_size": 423,
   "type": "int __userpurge@<eax>(_DWORD *@<ecx>, int@<esi>, int, int, int, int, _WORD *)",
   "xrefs_from_count": 182,
   "xrefs_to_count": 1

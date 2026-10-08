@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
   "callers_count": 7,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7E2490",
+      "0x7E24BB"
+    ]
+  ],
+  "chunks_sha256": "7748e311e3d81bd3b97ae5ec3020814be02a676bd114666b30aa8876f3097a7f",
+  "comment_regular": "[Verified] Shared BSShaderProperty clone-field copier: delegates to the common property copier, copies source +0x1C and +0x20 into the clone, and clears clone +0x24. Directly used by BSShaderProperty_CreateClone and the inherited path used by GeometryDecalShaderProperty. It does not touch BSShaderLightingProperty's +0x80 DECAL_DATA* list.",
+  "comment_repeatable": "[Verified] Shared BSShaderProperty clone-field copier: delegates to the common property copier, copies source +0x1C and +0x20 into the clone, and clears clone +0x24. Directly used by BSShaderProperty_CreateClone and the inherited path used by GeometryDecalShaderProperty. It does not touch BSShaderLightingProperty's +0x80 DECAL_DATA* list.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7E2490",
+  "display_name": "BSShaderProperty_CopyCloneMembers",
   "end_ea": "0x7E24BB",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7E2490",
+  "name": "BSShaderProperty_CopyCloneMembers",
   "segment": ".text",
   "sha256": "7748e311e3d81bd3b97ae5ec3020814be02a676bd114666b30aa8876f3097a7f",
   "size": 43,
+  "source_annotation_confidence": "Verified",
   "start_ea": "0x7E2490",
-  "type": "void __thiscall(char **this, int, int)",
+  "total_chunk_size": 43,
+  "type": "void __thiscall(BSShaderProperty *this, BSShaderProperty *clone, void *cloneProcess)",
   "xrefs_from_count": 16,
   "xrefs_to_count": 7
 }

@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x503930",
+      "0x503989"
+    ]
+  ],
+  "chunks_sha256": "921eb7d61b48a543994f4fc8205a1680671095278fde85c388f67d9e40463c90",
+  "comment_regular": "CommandInfo.execute wrapper for GetGlobalValue (index 74). Extracts the Global parameter and delegates to GetGlobalValue_Eval, which is also the CTDA callback.",
+  "comment_repeatable": "CommandInfo.execute wrapper for GetGlobalValue (index 74). Extracts the Global parameter and delegates to GetGlobalValue_Eval, which is also the CTDA callback.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_503930",
+  "display_name": "Cmd_GetGlobalValue_Execute",
   "end_ea": "0x503989",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_503930",
+  "name": "Cmd_GetGlobalValue_Execute",
   "segment": ".text",
   "sha256": "921eb7d61b48a543994f4fc8205a1680671095278fde85c388f67d9e40463c90",
   "size": 89,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x503930",
+  "total_chunk_size": 89,
   "type": "char __cdecl(ParamInfo *, UInt8 *, TESObjectREFR *, TESObjectREFR *argC, Script *, ScriptEventList *l, double *, UInt32 *)",
   "xrefs_from_count": 38,
-  "xrefs_to_count": 1
+  "xrefs_to_count": 0
 }

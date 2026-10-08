@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x801C90",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.",
     "mnemonic": "push",
     "size": 2
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x801D15",
-    "line": "call    sub_801210",
+    "line": "call    sub_801210; MoonSugarEffect decode: builds shader cache filename from CacheOrNullString/FullPath, appends 'HDR.' when UseHDR is active, then appends requested .vso/.pso cache name.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x801D2A",
-    "line": "jz      short loc_801D34",
+    "line": "jz      short loc_801D34; Pixel loader likewise skips embedded lookup hook801D2D when package map B430B8 is null.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x801D2D",
-    "line": "call    NiTMap_GetAtIndex",
+    "line": "call    NiTMap_GetAtIndex; [Verified] Pixel-program loader queries the selected ShaderProgramPackageRecordMap with its requested program key when the map is non-null. A returned entry supplies embedded program payload; otherwise the normal shader cache/source path proceeds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x801D34",
-    "line": "cmp     byte ptr ds:0B2DD4Ch, 0",
+    "line": "cmp     byte ptr ds:0B2DD4Ch, 0; [Verified] If the embedded package lookup did not return an entry and this path is enabled, pixel shader loading continues through the ordinary cache/source-loading path. Package lookup failure is not treated as proof that the shader is unavailable.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x801D90",
-    "line": "cmp     edx, offset CacheOrNullString",
+    "line": "cmp     edx, 0B42D80h",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x801DBA",
-    "line": "call    sub_801210",
+    "line": "call    sub_801210; MoonSugarEffect decode: builds shader cache filename from CacheOrNullString/FullPath, appends 'HDR.' when UseHDR is active, then appends requested .vso/.pso cache name.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x801E08",
-    "line": "call    eax ; dword_B42E8C",
+    "line": "call    eax ; unk_B42E8C",
     "mnemonic": "call",
     "size": 2
   },
@@ -931,7 +931,7 @@
   },
   {
     "ea": "0x801EA7",
-    "line": "call    sub_7B4780",
+    "line": "call    BSShaderManager_GetPixelShaderTargetName",
     "mnemonic": "call",
     "size": 5
   },
@@ -1093,19 +1093,19 @@
   },
   {
     "ea": "0x801EFC",
-    "line": "push    esi",
+    "line": "push    esi; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x801EFD",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x801EFE",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1117,7 +1117,7 @@
   },
   {
     "ea": "0x801F04",
-    "line": "call    ReadFile??",
+    "line": "call    Archive_ReadBytes",
     "mnemonic": "call",
     "size": 5
   },
@@ -1705,7 +1705,7 @@
   },
   {
     "ea": "0x80204E",
-    "line": "call    eax ; dword_B42E8C",
+    "line": "call    eax ; unk_B42E8C",
     "mnemonic": "call",
     "size": 2
   },
@@ -1867,7 +1867,7 @@
   },
   {
     "ea": "0x802093",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2146,12 +2146,6 @@
     "line": "jmp     short loc_802130",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x80212D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x802130",
@@ -2473,7 +2467,7 @@
   },
   {
     "ea": "0x8021DB",
-    "line": "call    eax ; dword_B42E8C",
+    "line": "call    eax ; unk_B42E8C",
     "mnemonic": "call",
     "size": 2
   },
@@ -3025,19 +3019,19 @@
   },
   {
     "ea": "0x802303",
-    "line": "push    edi",
+    "line": "push    edi; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x802304",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x802305",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -3055,7 +3049,7 @@
   },
   {
     "ea": "0x802310",
-    "line": "call    ReadFile??",
+    "line": "call    Archive_ReadBytes",
     "mnemonic": "call",
     "size": 5
   },
@@ -3211,7 +3205,7 @@
   },
   {
     "ea": "0x80235E",
-    "line": "mov     eax, [ecx+1A8h]",
+    "line": "mov     eax, [ecx+1A8h]; DX10 bridge note: CreatePixelShader vtable call is the authoritative D3D9 bytecode capture boundary for SM1/SM2/SM3 to SM4 companion translation.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -3463,7 +3457,7 @@
   },
   {
     "ea": "0x8023F4",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3565,7 +3559,7 @@
   },
   {
     "ea": "0x80242F",
-    "line": "call    eax ; dword_B42E8C",
+    "line": "call    eax ; unk_B42E8C",
     "mnemonic": "call",
     "size": 2
   },
@@ -3652,5 +3646,101 @@
     "line": "retn    18h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D0730",
+    "line": "mov     eax, [ebp-0D88h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9D0736",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D0737",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D073C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D073D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D073E",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D0742",
+    "line": "lea     eax, [edx-0D9Ch]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9D0748",
+    "line": "mov     ecx, [edx-0DA0h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9D074E",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D0750",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0755",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0758",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D075B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D075D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0762",
+    "line": "mov     eax, offset stru_AF9060",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0767",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

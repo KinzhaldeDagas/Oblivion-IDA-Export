@@ -1,18 +1,31 @@
 {
-  "callees_count": 2,
-  "callers_count": 8,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 10,
+  "chunks": [
+    [
+      "0x70E040",
+      "0x70E079"
+    ]
+  ],
+  "chunks_sha256": "fd96459870588732520c7a4a86b4c72a1f347df05709cb7fa6c16b2cc72d09c2",
+  "comment_regular": "CULLING audit 2026-09-27 (observed Oblivion behavior): With nonnull process.Camera(+0x0C), copies 0x1C-byte NiFrustum to +0x10, rebuilds planes at +0x2C using camera world transform(+0x64), then sets ActivePlanes(+0x8C)=0x3F. Reading planes at Process-hook entry is premature. A caller's zero mask before Process is overwritten by this setup.\n\nOblivion NiCullingProcess::SetFrustum copies the camera frustum, rebuilds six culling planes, and sets the active-plane mask to 0x3F.",
+  "comment_repeatable": "Oblivion NiCullingProcess::SetFrustum copies the camera frustum, rebuilds six culling planes, and sets the active-plane mask to 0x3F.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "NiCullingProcess::SetFrustum",
   "end_ea": "0x70E079",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "NiCullingProcess::SetFrustum",
   "segment": ".text",
   "sha256": "fd96459870588732520c7a4a86b4c72a1f347df05709cb7fa6c16b2cc72d09c2",
   "size": 57,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x70E040",
+  "total_chunk_size": 57,
   "type": "void __thiscall(NiCullingProcess *this, NiFrustum *a2)",
   "xrefs_from_count": 23,
   "xrefs_to_count": 10

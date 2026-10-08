@@ -1,4 +1,4 @@
-0x42BDE0: mov     ecx, OBSE_g_FileFinder
+0x42BDE0: mov     ecx, ds:0B33A04h
 0x42BDE6: test    ecx, ecx
 0x42BDE8: jz      short loc_42BE06
 0x42BDEA: mov     edx, [esp+arg_C]

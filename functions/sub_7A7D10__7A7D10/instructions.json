@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A7D10",
-    "line": "push    esi",
+    "line": "push    esi; SpeedTreeRT 4.1 source match: CBillboardLeaf constructor. Initializes position, wind fields, texture index/color defaults, and orientation state.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x7A7D13",
-    "line": "call    sub_78ECF0",
+    "line": "call    OB_CIdvCamera_ctor_010201A0; Constructs the exact 0x10-byte Oblivion CIdvCamera base: installs its vftable and zeros the three-float position at +0x04. Called as the base constructor of both CTreeEngine and CBillboardLeaf. RT4.1 exposes the same layout/behavior under the later name stCamera.",
     "mnemonic": "call",
     "size": 5
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x7A7D1A",
-    "line": "mov     al, [esp+4+arg_8]",
+    "line": "mov     al, byte ptr [esp+4+arg_8]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x7A7D22",
-    "line": "mov     edx, [esp+4+arg_10]",
+    "line": "mov     edx, [esp+4+primaryWindGroup]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x7A7D29",
-    "line": "mov     eax, [esp+4+arg_0]",
+    "line": "mov     eax, [esp+4+position]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x7A7D5C",
-    "line": "fld     [esp+4+arg_C]",
+    "line": "fld     [esp+4+primaryWindWeight]",
     "mnemonic": "fld",
     "size": 4
   },

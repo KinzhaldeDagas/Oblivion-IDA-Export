@@ -17,45 +17,45 @@
 0x4D7B1A: jnz     short loc_4D7B74
 0x4D7B1C: fld     dword ptr [ebp+20h]
 0x4D7B1F: push    ecx
-0x4D7B20: lea     ecx, [esp+80h+var_6C]
-0x4D7B24: fstp    [esp+80h+var_80]; float
-0x4D7B27: call    NiMatrix33_InitRotationTransposedTransform???
-0x4D7B2C: lea     eax, [esp+7Ch+var_6C]
-0x4D7B30: push    eax
-0x4D7B31: lea     ecx, [esp+80h+var_48]
-0x4D7B35: push    ecx
-0x4D7B36: mov     ecx, ebx
-0x4D7B38: call    NiMAtrix33_Multiply
+0x4D7B20: lea     ecx, [esp+80h+right]; this
+0x4D7B24: fstp    [esp+80h+angleX]; angleX
+0x4D7B27: call    NiMatrix33_InitRotationXTransposed; Verified matrix coefficients make this an X-axis rotation in the engine's transposed convention: X stays fixed; only the Y/Z submatrix contains sin/cos.
+0x4D7B2C: lea     eax, [esp+7Ch+right]
+0x4D7B30: push    eax; right
+0x4D7B31: lea     ecx, [esp+80h+out]
+0x4D7B35: push    ecx; out
+0x4D7B36: mov     ecx, ebx; this
+0x4D7B38: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x4D7B3D: mov     esi, eax
 0x4D7B3F: mov     ecx, 9
 0x4D7B44: mov     edi, ebx
 0x4D7B46: rep movsd
 0x4D7B48: fld     dword ptr [ebp+24h]
 0x4D7B4B: push    ecx
-0x4D7B4C: lea     ecx, [esp+80h+var_6C]
-0x4D7B50: fstp    [esp+80h+var_80]; float
-0x4D7B53: call    sub_70FD80
-0x4D7B58: lea     edx, [esp+7Ch+var_6C]
-0x4D7B5C: push    edx
-0x4D7B5D: lea     eax, [esp+80h+var_48]
-0x4D7B61: push    eax
-0x4D7B62: mov     ecx, ebx
-0x4D7B64: call    NiMAtrix33_Multiply
+0x4D7B4C: lea     ecx, [esp+80h+right]; this
+0x4D7B50: fstp    [esp+80h+angleX]; angleY
+0x4D7B53: call    NiMatrix33_InitRotationY; Verified matrix coefficients make this a Y-axis rotation: Y stays fixed; only the X/Z submatrix contains sin/cos.
+0x4D7B58: lea     edx, [esp+7Ch+right]
+0x4D7B5C: push    edx; right
+0x4D7B5D: lea     eax, [esp+80h+out]
+0x4D7B61: push    eax; out
+0x4D7B62: mov     ecx, ebx; this
+0x4D7B64: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x4D7B69: mov     ecx, 9
 0x4D7B6E: mov     esi, eax
 0x4D7B70: mov     edi, ebx
 0x4D7B72: rep movsd
 0x4D7B74: fld     dword ptr [ebp+28h]
 0x4D7B77: push    ecx
-0x4D7B78: lea     ecx, [esp+80h+var_6C]
-0x4D7B7C: fstp    [esp+80h+var_80]; float
-0x4D7B7F: call    NiMatrix33_InitRotationTransform
-0x4D7B84: lea     ecx, [esp+7Ch+var_6C]
-0x4D7B88: push    ecx
-0x4D7B89: lea     edx, [esp+80h+var_48]
-0x4D7B8D: push    edx
-0x4D7B8E: mov     ecx, ebx
-0x4D7B90: call    NiMAtrix33_Multiply
+0x4D7B78: lea     ecx, [esp+80h+right]; this
+0x4D7B7C: fstp    [esp+80h+angleX]; angleZ
+0x4D7B7F: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
+0x4D7B84: lea     ecx, [esp+7Ch+right]
+0x4D7B88: push    ecx; right
+0x4D7B89: lea     edx, [esp+80h+out]
+0x4D7B8D: push    edx; out
+0x4D7B8E: mov     ecx, ebx; this
+0x4D7B90: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x4D7B95: mov     esi, eax
 0x4D7B97: mov     ecx, 9
 0x4D7B9C: mov     edi, ebx
@@ -70,7 +70,7 @@
 0x4D7BBD: jz      short loc_4D7C39
 0x4D7BBF: mov     ecx, 9
 0x4D7BC4: mov     esi, offset unk_B3FADC
-0x4D7BC9: lea     edi, [esp+7Ch+var_48]
+0x4D7BC9: lea     edi, [esp+7Ch+out]
 0x4D7BCD: rep movsd
 0x4D7BCF: mov     ecx, eax
 0x4D7BD1: call    TESActorBase_IsFemale
@@ -83,20 +83,20 @@
 0x4D7BEA: fst     [esp+7Ch+arg_0]
 0x4D7BF1: cmp     eax, 1
 0x4D7BF4: fld     [esp+7Ch+arg_0]
-0x4D7BFB: fst     [esp+7Ch+var_48]
-0x4D7BFF: fstp    [esp+7Ch+var_38]
+0x4D7BFB: fst     [esp+7Ch+out.data]
+0x4D7BFF: fstp    [esp+7Ch+out.data+10h]
 0x4D7C03: ja      short loc_4D7C0B
 0x4D7C05: fstp    st
 0x4D7C07: fld     dword ptr [ebp+eax*4+60h]
-0x4D7C0B: lea     eax, [esp+7Ch+var_48]
+0x4D7C0B: lea     eax, [esp+7Ch+out]
 0x4D7C0F: fstp    [esp+7Ch+arg_0]
 0x4D7C16: fld     [esp+7Ch+arg_0]
-0x4D7C1D: push    eax
+0x4D7C1D: push    eax; right
 0x4D7C1E: lea     ecx, [esp+80h+var_24]
-0x4D7C22: fstp    [esp+80h+var_28]
-0x4D7C26: push    ecx
-0x4D7C27: mov     ecx, ebx
-0x4D7C29: call    NiMAtrix33_Multiply
+0x4D7C22: fstp    [esp+80h+out.data+20h]
+0x4D7C26: push    ecx; out
+0x4D7C27: mov     ecx, ebx; this
+0x4D7C29: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x4D7C2E: mov     ecx, 9
 0x4D7C33: mov     esi, eax
 0x4D7C35: mov     edi, ebx

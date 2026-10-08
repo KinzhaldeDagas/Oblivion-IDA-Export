@@ -1,4 +1,4 @@
-0x5BFB90: push    0FFFFFFFFh
+0x5BFB90: push    0FFFFFFFFh; Persuasion minigame action/round resolver. Completing the four-action round can award Speechcraft useValue0 after the native disposition-state checks.
 0x5BFB92: push    offset SEH_5BFB90
 0x5BFB97: mov     eax, large fs:0
 0x5BFB9D: push    eax
@@ -21,18 +21,18 @@
 0x5BFBC9: push    ebx; canCreate
 0x5BFBCA: call    InterfaceManager_GetSingleton
 0x5BFBCF: mov     edi, eax
-0x5BFBD1: call    sub_57D7A0
+0x5BFBD1: call    UI_GetVirtualScreenWidth; Returns virtual UI width: 1280 for portrait/square, otherwise aspect*960. Layout coordinates are independent of output pixel resolution.
 0x5BFBD6: fmul    qword ptr ds:0A2FAA0h
 0x5BFBDC: fadd    dword ptr [edi+20h]
-0x5BFBDF: call    Double_To_SInt32
+0x5BFBDF: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5BFBE4: mov     [esp+48h+var_2C], eax
-0x5BFBE8: call    sub_57D7F0
+0x5BFBE8: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x5BFBED: fstp    [esp+48h+var_24]
-0x5BFBF1: call    sub_57D7F0
+0x5BFBF1: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x5BFBF6: fmul    qword ptr ds:0A2FAA0h
 0x5BFBFC: fadd    dword ptr [edi+28h]
 0x5BFBFF: fsubr   [esp+48h+var_24]
-0x5BFC03: call    Double_To_SInt32
+0x5BFC03: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5BFC08: fild    [esp+48h+var_2C]
 0x5BFC0C: mov     [esp+48h+var_28], eax
 0x5BFC10: push    ecx; hinstDLL
@@ -118,7 +118,7 @@
 0x5BFD31: fidivr  dword ptr [esi+eax*4+34h]
 0x5BFD35: fmul    dword ptr [esi+7Ch]
 0x5BFD38: fmulp   st(1), st
-0x5BFD3A: call    Double_To_SInt32
+0x5BFD3A: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5BFD3F: mov     ecx, [esi+0D8h]
 0x5BFD45: mov     edx, [ecx]
 0x5BFD47: mov     edx, [edx+374h]
@@ -188,24 +188,24 @@
 0x5BFE24: push    24h ; '$'; jumptable 005BFE0D case 5
 0x5BFE26: jmp     short loc_5BFE2A
 0x5BFE28: push    25h ; '%'; jumptable 005BFE0D case 6
-0x5BFE2A: push    3
-0x5BFE2C: call    TESTopic__GEtTopic
+0x5BFE2A: push    3; topicType
+0x5BFE2C: call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.
 0x5BFE31: add     esp, 8
 0x5BFE34: mov     edx, ds:0B333C4h; jumptable 005BFE0D default case, case 4
 0x5BFE3A: mov     ecx, [esi+0D8h]
-0x5BFE40: push    ebx
-0x5BFE41: push    ebx
-0x5BFE42: push    edx
-0x5BFE43: push    ecx
-0x5BFE44: mov     ecx, eax
-0x5BFE46: call    TESTopic__CreateDialogueInfo
+0x5BFE40: push    ebx; conversation
+0x5BFE41: push    ebx; previousTopic
+0x5BFE42: push    edx; target
+0x5BFE43: push    ecx; speaker
+0x5BFE44: mov     ecx, eax; this
+0x5BFE46: call    TESTopic__CreateDialogueItem; Selects a matching TESTopicInfo and wraps it as a 0x1C DialogueItem containing response list/cursor, INFO, topic, owner quest, and speaker.
 0x5BFE4B: mov     ebp, eax
 0x5BFE4D: cmp     ebp, ebx
 0x5BFE4F: jz      loc_5BFFC2
-0x5BFE55: mov     ecx, ebp
-0x5BFE57: call    sub_6B7BA0
-0x5BFE5C: mov     ecx, ebp
-0x5BFE5E: call    sub_6B7C20
+0x5BFE55: mov     ecx, ebp; this
+0x5BFE57: call    DialogueItem__FirstResponse
+0x5BFE5C: mov     ecx, ebp; this
+0x5BFE5E: call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.
 0x5BFE63: mov     edi, eax
 0x5BFE65: cmp     edi, ebx
 0x5BFE67: jz      loc_5BFFB2
@@ -256,24 +256,24 @@
 0x5BFF01: push    1Eh; jumptable 005BFEEE case 3
 0x5BFF03: jmp     short loc_5BFF07
 0x5BFF05: push    25h ; '%'; jumptable 005BFECC case 6
-0x5BFF07: push    3
-0x5BFF09: call    TESTopic__GEtTopic
+0x5BFF07: push    3; topicType
+0x5BFF09: call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.
 0x5BFF0E: add     esp, 8
 0x5BFF11: mov     ecx, ds:0B333C4h; jumptable 005BFECC default case, case 4
 0x5BFF17: mov     edx, [esi+0D8h]
-0x5BFF1D: push    ebx
-0x5BFF1E: push    ebx
-0x5BFF1F: push    ecx
-0x5BFF20: push    edx
-0x5BFF21: mov     ecx, eax
-0x5BFF23: call    TESTopic__CreateDialogueInfo
+0x5BFF1D: push    ebx; conversation
+0x5BFF1E: push    ebx; previousTopic
+0x5BFF1F: push    ecx; target
+0x5BFF20: push    edx; speaker
+0x5BFF21: mov     ecx, eax; this
+0x5BFF23: call    TESTopic__CreateDialogueItem; Selects a matching TESTopicInfo and wraps it as a 0x1C DialogueItem containing response list/cursor, INFO, topic, owner quest, and speaker.
 0x5BFF28: mov     ebp, eax
 0x5BFF2A: cmp     ebp, ebx
 0x5BFF2C: jz      loc_5BFFC2
-0x5BFF32: mov     ecx, ebp
-0x5BFF34: call    sub_6B7BA0
-0x5BFF39: mov     ecx, ebp
-0x5BFF3B: call    sub_6B7C20
+0x5BFF32: mov     ecx, ebp; this
+0x5BFF34: call    DialogueItem__FirstResponse
+0x5BFF39: mov     ecx, ebp; this
+0x5BFF3B: call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.
 0x5BFF40: mov     edi, eax
 0x5BFF42: cmp     edi, ebx
 0x5BFF44: jz      short loc_5BFFB2
@@ -307,10 +307,10 @@
 0x5BFFA9: push    edi; string
 0x5BFFAA: call    GameUI_QueueMessage
 0x5BFFAF: add     esp, 10h
-0x5BFFB2: mov     ecx, ebp
-0x5BFFB4: call    sub_6B81D0
+0x5BFFB2: mov     ecx, ebp; this
+0x5BFFB4: call    DialogueItem__Destroy
 0x5BFFB9: push    ebp
-0x5BFFBA: call    FormHeapFree
+0x5BFFBA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5BFFBF: add     esp, 4
 0x5BFFC2: mov     eax, [esi+84h]
 0x5BFFC8: lea     ecx, [eax+eax*4]
@@ -323,3 +323,125 @@
 0x5BFFE3: lea     eax, [esi+38h]
 0x5BFFE6: mov     ecx, 4
 0x5BFFEB: jmp     short loc_5BFFF0
+0x5BFFF0: cmp     [eax], bl
+0x5BFFF2: jnz     short loc_5BFFF6
+0x5BFFF4: xor     dl, dl
+0x5BFFF6: add     eax, 14h
+0x5BFFF9: sub     ecx, edi
+0x5BFFFB: jnz     short loc_5BFFF0
+0x5BFFFD: cmp     dl, 1
+0x5C0000: jnz     loc_5C013A
+0x5C0006: cmp     [esi+0F0h], ebx
+0x5C000C: jnz     short loc_5C002C
+0x5C000E: mov     ecx, [esi+0D8h]
+0x5C0014: mov     edx, [ecx]
+0x5C0016: mov     eax, ds:0B333C4h
+0x5C001B: mov     edx, [edx+224h]
+0x5C0021: push    eax
+0x5C0022: call    edx
+0x5C0024: cmp     [esi+0ECh], eax
+0x5C002A: jz      short loc_5C0045
+0x5C002C: mov     ecx, ds:0B333C4h
+0x5C0032: fldz
+0x5C0034: mov     eax, [ecx]
+0x5C0036: mov     edx, [eax+39Ch]
+0x5C003C: push    ecx
+0x5C003D: fstp    [esp+44h+var_44]; a3
+0x5C0040: push    ebx; a3
+0x5C0041: push    20h ; ' '; a3
+0x5C0043: call    edx; Completed persuasion round: Speechcraft (0x20), useValue0, identity scale (0.0).
+0x5C0045: fld     dword ptr ds:0A379B4h
+0x5C004B: push    ecx
+0x5C004C: mov     ecx, [esi+0BCh]; this
+0x5C0052: fstp    [esp+44h+var_44]; value
+0x5C0055: push    0FAFh; propertyCode
+0x5C005A: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
+0x5C005F: fld     dword ptr ds:0A379B4h
+0x5C0065: push    ecx
+0x5C0066: mov     ecx, [esi+0C4h]; this
+0x5C006C: fstp    [esp+44h+var_44]; value
+0x5C006F: push    0FA1h; propertyCode
+0x5C0074: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
+0x5C0079: fld1
+0x5C007B: push    ecx
+0x5C007C: fstp    [esp+44h+var_44]; value
+0x5C007F: mov     ecx, [esi+0C0h]; this
+0x5C0085: push    0FAFh; propertyCode
+0x5C008A: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
+0x5C008F: call    sub_5BF7D0
+0x5C0094: push    1
+0x5C0096: call    sub_5BF170
+0x5C009B: add     esp, 4
+0x5C009E: mov     ecx, [esp+40h+var_C]
+0x5C00A2: mov     large fs:0, ecx
+0x5C00A9: pop     ecx
+0x5C00AA: pop     edi
+0x5C00AB: pop     esi
+0x5C00AC: pop     ebp
+0x5C00AD: pop     ebx
+0x5C00AE: add     esp, 2Ch
+0x5C00B1: retn
+0x5C00B2: cmp     eax, ebx
+0x5C00B4: jnz     loc_5C013A
+0x5C00BA: fld1
+0x5C00BC: push    ecx
+0x5C00BD: mov     ecx, [esi+0C4h]; this
+0x5C00C3: fstp    [esp+44h+var_44]; value
+0x5C00C6: push    0FA1h; propertyCode
+0x5C00CB: mov     byte ptr [esi+8Ch], 1
+0x5C00D2: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
+0x5C00D7: push    1
+0x5C00D9: call    sub_5BEA90
+0x5C00DE: fld1
+0x5C00E0: mov     ecx, [esi+0BCh]; this
+0x5C00E6: fstp    [esp+44h+var_44]; value
+0x5C00E9: push    0FAFh; propertyCode
+0x5C00EE: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
+0x5C00F3: mov     eax, ds:0B33EA0h
+0x5C00F8: mov     [esi+80h], eax
+0x5C00FE: mov     [esi+0F8h], ebx
+0x5C0104: mov     ecx, ds:0B333C4h; this
+0x5C010A: push    20h ; ' '; actorValue
+0x5C010C: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
+0x5C0111: test    eax, eax
+0x5C0113: push    ecx
+0x5C0114: mov     ecx, [esi+0C0h]; this
+0x5C011A: jnz     short loc_5C0120
+0x5C011C: fld1
+0x5C011E: jmp     short loc_5C0126
+0x5C0120: fld     dword ptr ds:0A379B4h
+0x5C0126: fstp    [esp+44h+var_44]; value
+0x5C0129: push    0FAFh; propertyCode
+0x5C012E: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
+0x5C0133: mov     dword ptr [esi+28h], 2
+0x5C013A: push    1
+0x5C013C: call    sub_5BF170
+0x5C0141: add     esp, 4
+0x5C0144: mov     ecx, [esp+40h+var_C]
+0x5C0148: mov     large fs:0, ecx
+0x5C014F: pop     ecx
+0x5C0150: pop     edi
+0x5C0151: pop     esi
+0x5C0152: pop     ebp
+0x5C0153: pop     ebx
+0x5C0154: add     esp, 2Ch
+0x5C0157: retn
+0x5C0158: fstp    st
+0x5C015A: mov     ecx, [esp+40h+var_C]
+0x5C015E: mov     large fs:0, ecx
+0x5C0165: pop     ecx
+0x5C0166: pop     edi
+0x5C0167: pop     esi
+0x5C0168: pop     ebp
+0x5C0169: pop     ebx
+0x5C016A: add     esp, 2Ch
+0x5C016D: retn
+0x9C0EC0: lea     ecx, [ebp-24h]; void *
+0x9C0EC3: jmp     BSStringT_Clear
+0x9C0EC8: mov     edx, [esp+arg_4]
+0x9C0ECC: lea     eax, [edx-30h]
+0x9C0ECF: mov     ecx, [edx-34h]
+0x9C0ED2: xor     ecx, eax
+0x9C0ED4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C0ED9: mov     eax, offset stru_AE9FF8
+0x9C0EDE: jmp     ___CxxFrameHandler3

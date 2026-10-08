@@ -1,1 +1,1 @@
-IPersistFile_0
+typedef IPersistFile IPersistFile_0;

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7647E0",
-    "line": "push    ebx",
+    "line": "push    ebx; Bind a NiRenderTargetGroup: unset MRT slots 1-3, bind each group color surface and its depth/stencil surface, atomically rebind the prior group on failure, record the new current group, then execute the requested clear.",
     "mnemonic": "push",
     "size": 1
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x7647FC",
-    "line": "call    UnsetRenderTarget",
+    "line": "call    UnsetRenderTarget; Explicitly unbind MRT color slots 1, 2, and 3 before binding the new group.",
     "mnemonic": "call",
     "size": 5
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x76480A",
-    "line": "call    UnsetRenderTarget",
+    "line": "call    UnsetRenderTarget; Unbinds nonzero MRT slots only when the renderer cache says a surface is active, then clears the corresponding cache entry. Slot 0 is deliberately retained.",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,13 +109,13 @@
   },
   {
     "ea": "0x764818",
-    "line": "call    UnsetRenderTarget",
+    "line": "call    UnsetRenderTarget; Unbinds nonzero MRT slots only when the renderer cache says a surface is active, then clears the corresponding cache entry. Slot 0 is deliberately retained.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x76481D",
-    "line": "mov     edi, [esp+28h+arg_0]",
+    "line": "mov     edi, [esp+28h+group]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x764853",
-    "line": "cmp     eax, offset unk_B42654",
+    "line": "cmp     eax, offset stru_B42654",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x76487E",
-    "line": "call    edx",
+    "line": "call    edx; Bind this group color buffer directly as its D3D render-target surface.",
     "mnemonic": "call",
     "size": 2
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x76489A",
-    "line": "mov     eax, [edx+84h]",
+    "line": "mov     eax, [edx+84h];",
     "mnemonic": "mov",
     "size": 6
   },
@@ -492,14 +492,8 @@
     "size": 2
   },
   {
-    "ea": "0x7648BD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x7648C0",
-    "line": "cmp     eax, offset unk_B4263C",
+    "line": "cmp     eax, offset stru_B4263C",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -589,7 +583,7 @@
   },
   {
     "ea": "0x7648EE",
-    "line": "call    edx",
+    "line": "call    edx; Bind the group's shared compatible D3D depth/stencil surface.",
     "mnemonic": "call",
     "size": 2
   },
@@ -607,7 +601,7 @@
   },
   {
     "ea": "0x7648F8",
-    "line": "mov     ecx, [esp+10h+arg_4]",
+    "line": "mov     ecx, [esp+10h+clearFlags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -667,7 +661,7 @@
   },
   {
     "ea": "0x76491B",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -727,7 +721,7 @@
   },
   {
     "ea": "0x764933",
-    "line": "mov     ecx, [esp+10h+arg_4]",
+    "line": "mov     ecx, [esp+10h+clearFlags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -787,7 +781,7 @@
   },
   {
     "ea": "0x764956",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -853,13 +847,13 @@
   },
   {
     "ea": "0x764974",
-    "line": "push    ecx",
+    "line": "push    ecx; device",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x764975",
-    "line": "call    sub_76D4C0",
+    "line": "call    NiDX92DBufferData__UnsetDepthStencilSurface; Unbinds the cached implicit depth/stencil surface with IDirect3DDevice9::SetDepthStencilSurface(NULL), then clears g_D3D9BoundDepthStencilSurface.",
     "mnemonic": "call",
     "size": 5
   },
@@ -883,7 +877,7 @@
   },
   {
     "ea": "0x764981",
-    "line": "mov     eax, [esp+10h+arg_4]",
+    "line": "mov     eax, [esp+10h+clearFlags]; Binding failure rollback: rebind the previously recorded current group.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -943,7 +937,7 @@
   },
   {
     "ea": "0x7649A4",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -991,7 +985,7 @@
   },
   {
     "ea": "0x7649B5",
-    "line": "mov     [ebp+87Ch], edi",
+    "line": "mov     [ebp+87Ch], edi; Record the successfully bound group as current; EndUsingRenderTargetGroup does not clear this pointer.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1087,7 +1081,7 @@
   },
   {
     "ea": "0x7649E0",
-    "line": "cmp     eax, offset unk_B4265C",
+    "line": "cmp     eax, offset stru_B4265C",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1153,7 +1147,7 @@
   },
   {
     "ea": "0x7649FE",
-    "line": "mov     ecx, [esp+10h+arg_4]",
+    "line": "mov     ecx, [esp+10h+clearFlags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1189,7 +1183,7 @@
   },
   {
     "ea": "0x764A10",
-    "line": "call    edx",
+    "line": "call    edx; Clear the newly bound group using the requested engine clear flags.",
     "mnemonic": "call",
     "size": 2
   },

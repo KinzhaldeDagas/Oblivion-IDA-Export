@@ -1,1 +1,1 @@
-GLdouble
+typedef double GLdouble;

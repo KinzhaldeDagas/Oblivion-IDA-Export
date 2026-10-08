@@ -1,1 +1,1 @@
-CStdStubBuffer
+typedef tagCStdStubBuffer CStdStubBuffer;

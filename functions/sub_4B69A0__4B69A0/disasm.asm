@@ -48,7 +48,7 @@
 0x4B6A40: mov     ecx, ebx; this
 0x4B6A42: call    sub_6B73E0
 0x4B6A47: push    ebx
-0x4B6A48: call    FormHeapFree
+0x4B6A48: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4B6A4D: add     esp, 4
 0x4B6A50: cmp     esi, ds:0B333C4h
 0x4B6A56: jnz     short loc_4B6A73
@@ -83,18 +83,18 @@
 0x4B6A97: push    ebx
 0x4B6A98: mov     ecx, edi
 0x4B6A9A: call    eax
-0x4B6A9C: mov     ecx, esi
-0x4B6A9E: call    sub_5E32D0
+0x4B6A9C: mov     ecx, esi; this
+0x4B6A9E: call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.
 0x4B6AA3: test    al, al
 0x4B6AA5: jz      loc_4B67CE
-0x4B6AAB: push    1
-0x4B6AAD: push    esi
-0x4B6AAE: mov     ecx, edi
-0x4B6AB0: call    TESOBjectREFR_IsOwnedBy
+0x4B6AAB: push    1; useFactionOwnership
+0x4B6AAD: push    esi; actorReference
+0x4B6AAE: mov     ecx, edi; reference
+0x4B6AB0: call    TESObjectREFR_IsOwnedBy; Verified ownership predicate and flag meaning: resolve the effective owner; accept exact equality with the actor's template/base form. When the owner differs, a nonzero ownership-global value can permit the access. With useFactionOwnership=true, a Faction owner is instead checked against the actor base's faction rank and the reference's effective required rank; callers passing false skip that faction-rank path. Direct callers include many `true` paths and ContainerExtraData_RemoveForm's item-sweep call with false. Fallout's TESObjectREFR::IsAnOwner/DoorLock::IsAnOwner also expose a `useFaction` boolean, but its implementation uses actor faction membership and has different rank/global handling.
 0x4B6AB5: test    al, al
 0x4B6AB7: jnz     loc_4B67CE
-0x4B6ABD: mov     ecx, edi; this
-0x4B6ABF: call    TESObjectREFR_GetOwner
+0x4B6ABD: mov     ecx, edi; reference
+0x4B6ABF: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x4B6AC4: test    eax, eax
 0x4B6AC6: jz      loc_4B67CE
 0x4B6ACC: mov     edx, [esi]
@@ -113,3 +113,10 @@
 0x4B6AE4: pop     esi
 0x4B6AE5: add     esp, 10h
 0x4B6AE8: retn    14h
+0x4B67CE: pop     edi
+0x4B67CF: pop     ebp
+0x4B67D0: pop     ebx
+0x4B67D1: mov     al, 1
+0x4B67D3: pop     esi
+0x4B67D4: add     esp, 10h
+0x4B67D7: retn    14h

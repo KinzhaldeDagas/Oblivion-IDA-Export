@@ -1,1 +1,3 @@
-NiLines
+struct NiLines
+{
+};

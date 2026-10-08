@@ -1,1 +1,1 @@
-0x4A44C0: jmp     sub_4A4400
+0x4A44C0: jmp     sub_4A4400; Verified: clears TESRegionDataList nodes and destroys each payload only when ownsData at +8 is nonzero.

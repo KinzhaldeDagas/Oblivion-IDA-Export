@@ -72,9 +72,9 @@
 0x707FF2: movzx   eax, word ptr [ebp+0]
 0x707FF6: fldz
 0x707FF8: movzx   ecx, al
-0x707FFB: fst     [esp+3Ch+var_1C]
-0x707FFF: fst     [esp+3Ch+var_18]
-0x708003: fstp    [esp+3Ch+var_14]
+0x707FFB: fst     [esp+3Ch+var_1C.x]
+0x707FFF: fst     [esp+3Ch+var_1C.y]
+0x708003: fstp    [esp+3Ch+var_1C.z]
 0x708007: shr     cl, 1
 0x708009: movzx   edx, al
 0x70800C: shr     dl, 3
@@ -129,9 +129,9 @@
 0x7080AA: mov     [esp+3Ch+var_28], 4
 0x7080B2: cmp     byte ptr [esp+3Ch+arg_0], 0
 0x7080B7: jnz     short loc_7080D3
-0x7080B9: push    offset Vector3_InitValue?
-0x7080BE: lea     ecx, [esp+40h+var_1C]
-0x7080C2: call    sub_8AA390
+0x7080B9: push    offset g_zeroNiPoint3; other
+0x7080BE: lea     ecx, [esp+40h+var_1C]; this
+0x7080C2: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x7080C7: test    al, al
 0x7080C9: jnz     short loc_7080D3
 0x7080CB: cmp     word ptr [esp+3Ch+var_28], 2

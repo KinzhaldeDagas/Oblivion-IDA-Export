@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x4DD34E",
-    "line": "call    TESFullName_GetNameForForm",
+    "line": "call    TESFullName_GetNameForForm; 3DTheft decode: TESFullName_GetNameForForm only dynamic-casts the passed form to TESFullName and returns its raw name/EmptyString; it does not apply worldspace fallback.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x4DD365",
-    "line": "call    TESFullName_GetNameForForm",
+    "line": "call    TESFullName_GetNameForForm; 3DTheft decode: TESFullName_GetNameForForm only dynamic-casts the passed form to TESFullName and returns its raw name/EmptyString; it does not apply worldspace fallback.",
     "mnemonic": "call",
     "size": 5
   },
@@ -619,19 +619,19 @@
   },
   {
     "ea": "0x4DD39F",
-    "line": "push    1",
+    "line": "push    1; mask",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4DD3A1",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DD3A3",
-    "line": "call    sub_41F830",
+    "line": "call    ExtraDataList_TestActionFlagBits; Test ExtraAction flag mask. Missing ExtraAction behaves as default flags byte 1. REFR save calls with 0x08 to decide whether to emit ONAM.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,19 +649,19 @@
   },
   {
     "ea": "0x4DD3AC",
-    "line": "push    2",
+    "line": "push    2; mask",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4DD3AE",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DD3B0",
-    "line": "call    sub_423DF0",
+    "line": "call    ExtraDataList_SetActionFlagBits; OR action flag mask into existing byte (default byte 1 when absent), creating state as needed. ONAM calls this with 0x08.",
     "mnemonic": "call",
     "size": 5
   },
@@ -955,7 +955,7 @@
   },
   {
     "ea": "0x4DD44C",
-    "line": "call    sub_42B460",
+    "line": "call    sub_42B460; ExtraTeleport_GetTargetCell-style helper: returns parent cell of ExtraTeleport+0 target ref if present.",
     "mnemonic": "call",
     "size": 5
   },
@@ -985,7 +985,7 @@
   },
   {
     "ea": "0x4DD459",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1087,7 +1087,7 @@
   },
   {
     "ea": "0x4DD48B",
-    "line": "jz      loc_4DD404",
+    "line": "jz      loc_4DD404; Generic reference activation dispatches through the projectile reference's base form. For arrows that base form is AMMO, so normal inventory pickup semantics apply.",
     "mnemonic": "jz",
     "size": 6
   },

@@ -1,28 +1,27 @@
-char __thiscall sub_6195B0(float *this)
+char __thiscall sub_6195B0(TESObjectREFR **this)
 {
-  int *v2; // edi
-  TESObjectREFR *v3; // eax
+  TESObjectREFR *v2; // edi
+  TESObjectREFR *CurrentTarget; // eax
   _DWORD *v4; // ebx
   void (__thiscall **v5)(_DWORD *, int); // edi
   int v6; // eax
-  char v8; // [esp+0h] [ebp-10h]
-  float v9; // [esp+8h] [ebp-8h] BYREF
-  float v10; // [esp+Ch] [ebp-4h] BYREF
+  float outMaximumDistance; // [esp+8h] [ebp-8h] BYREF
+  float outOptimalDistance; // [esp+Ch] [ebp-4h] BYREF
 
-  v10 = 0.0;
-  v9 = 0.0;
-  sub_6142D0(this, COERCE_FLOAT(&v10), COERCE_FLOAT(&v9));
-  if ( *(this + 0x61) < 0.0 )
+  outOptimalDistance = 0.0; /*0x6195b7*/
+  outMaximumDistance = 0.0; /*0x6195bd*/
+  CombatController_GetRangedDistanceBounds(this, &outOptimalDistance, &outMaximumDistance); /*0x6195cd*/
+  if ( *((float *)this + 0x61) < 0.0 ) /*0x6195df*/
   {
-    v2 = *((int **)this + 0xF);
-    v3 = (TESObjectREFR *)sub_6135F0((int)this);
-    *(this + 0x61) = TESObjectREFR_GetDistanceBetween_(v2, (TESObjectREFR *)v2, v3, 0, v8);
+    v2 = *(this + 0xF); /*0x6195e1*/
+    CurrentTarget = (TESObjectREFR *)CombatController_GetCurrentTarget((int)this); /*0x6195e8*/
+    *((float *)this + 0x61) = TESObjectREFR_GetSurfaceDistance(v2, CurrentTarget, 0); /*0x6195f4*/
   }
-  if ( v9 >= (double)*(this + 0x61) )
-    return 0;
-  v4 = *((_DWORD **)this + 0xF);
-  v5 = (void (__thiscall **)(_DWORD *, int))(*v4 + 0x340);
-  v6 = sub_6135F0((int)this);
-  (*v5)(v4, v6);
-  return 1;
+  if ( outMaximumDistance >= (double)*((float *)this + 0x61) ) /*0x61960e*/
+    return 0; /*0x619634*/
+  v4 = *(this + 0xF); /*0x619611*/
+  v5 = (void (__thiscall **)(_DWORD *, int))(*v4 + 0x340); /*0x619618*/
+  v6 = CombatController_GetCurrentTarget((int)this); /*0x61961e*/
+  (*v5)(v4, v6); /*0x619628*/
+  return 1; /*0x61962b*/
 }

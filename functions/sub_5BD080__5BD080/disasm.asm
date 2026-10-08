@@ -25,9 +25,9 @@
 0x5BD0CD: mov     esi, eax
 0x5BD0CF: call    InterfaceManager_GetDepth
 0x5BD0D4: fstp    [esp+148h+var_138]; a3
-0x5BD0D8: mov     ecx, [esi+68h]; TileWindow *
+0x5BD0D8: mov     ecx, [esi+68h]; this
 0x5BD0DB: push    offset aDataMenusNegot; "Data\\Menus\\negotiate_menu.xml"
-0x5BD0E0: call    Menu_LoadXML
+0x5BD0E0: call    Tile__ReadFile; Verified: SDK ReadXML entry. Builds named tree under receiver via 0x590330, connects/evaluates traits via 0x58CF40, registers subtemplates with owning Menu, frees build storage, refreshes returned subtree via 0x58FBA0. Returns first created tile. Fallout analogue 0x827E2588; cache/cleanup differs.
 0x5BD0E5: mov     ebp, eax
 0x5BD0E7: mov     ecx, ebp
 0x5BD0E9: call    Tile_GetParentMenu
@@ -91,10 +91,10 @@
 0x5BD1AE: jp      short loc_5BD1C4
 0x5BD1B0: fld     [esp+148h+var_138]
 0x5BD1B4: push    ecx
-0x5BD1B5: fstp    [esp+14Ch+var_14C]; a3
-0x5BD1B8: push    0FABh; a2
+0x5BD1B5: fstp    [esp+14Ch+var_14C]; value
+0x5BD1B8: push    0FABh; propertyCode
 0x5BD1BD: mov     ecx, ebp; this
-0x5BD1BF: call    Tile_SetFloat
+0x5BD1BF: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5BD1C4: mov     ecx, [ebx]
 0x5BD1C6: mov     dl, [esp+148h+arg_8]
 0x5BD1CD: mov     [esi+54h], ecx
@@ -102,62 +102,62 @@
 0x5BD1D3: fld     dword ptr ds:0B375C8h
 0x5BD1D9: mov     eax, [ebx]
 0x5BD1DB: mov     ds:0B3B410h, eax
-0x5BD1E0: call    Double_To_SInt32
+0x5BD1E0: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5BD1E5: fld     dword ptr ds:0A6B1F0h
 0x5BD1EB: push    ecx
 0x5BD1EC: mov     ecx, [esi+34h]; this
-0x5BD1EF: fstp    [esp+14Ch+var_14C]; a3
-0x5BD1F2: push    0FB7h; a2
+0x5BD1EF: fstp    [esp+14Ch+var_14C]; value
+0x5BD1F2: push    0FB7h; propertyCode
 0x5BD1F7: mov     [esp+150h+var_138], eax; a3
 0x5BD1FB: mov     [esi+50h], edi
-0x5BD1FE: call    Tile_SetFloat
+0x5BD1FE: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5BD203: fldz
 0x5BD205: push    ecx
-0x5BD206: fstp    [esp+14Ch+var_14C]; a3
+0x5BD206: fstp    [esp+14Ch+var_14C]; value
 0x5BD209: mov     ecx, [esi+34h]; this
-0x5BD20C: push    0FB7h; a2
-0x5BD211: call    Tile_SetFloat
+0x5BD20C: push    0FB7h; propertyCode
+0x5BD211: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5BD216: fldz
 0x5BD218: push    ecx
-0x5BD219: fstp    [esp+14Ch+var_14C]; a3
+0x5BD219: fstp    [esp+14Ch+var_14C]; value
 0x5BD21C: mov     ecx, [esi+30h]; this
-0x5BD21F: push    0FAFh; a2
-0x5BD224: call    Tile_SetFloat
+0x5BD21F: push    0FAFh; propertyCode
+0x5BD224: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5BD229: fild    [esp+148h+var_138]
 0x5BD22D: push    ecx
 0x5BD22E: mov     ecx, [esi+30h]; this
-0x5BD231: fstp    [esp+14Ch+var_14C]; a3
-0x5BD234: push    0FB0h; a2
-0x5BD239: call    Tile_SetFloat
+0x5BD231: fstp    [esp+14Ch+var_14C]; value
+0x5BD234: push    0FB0h; propertyCode
+0x5BD239: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5BD23E: fld     dword ptr ds:0A379CCh
 0x5BD244: push    ecx
 0x5BD245: mov     ecx, [esi+30h]; this
-0x5BD248: fstp    [esp+14Ch+var_14C]; a3
-0x5BD24B: push    0FB2h; a2
-0x5BD250: call    Tile_SetFloat
+0x5BD248: fstp    [esp+14Ch+var_14C]; value
+0x5BD24B: push    0FB2h; propertyCode
+0x5BD250: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5BD255: fild    dword ptr [ebx]
 0x5BD257: push    ecx
 0x5BD258: mov     ecx, [esi+30h]; this
-0x5BD25B: fstp    [esp+14Ch+var_14C]; a3
-0x5BD25E: push    0FB3h; a2
-0x5BD263: call    Tile_SetFloat
+0x5BD25B: fstp    [esp+14Ch+var_14C]; value
+0x5BD25E: push    0FB3h; propertyCode
+0x5BD263: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5BD268: fldz
 0x5BD26A: push    ecx
-0x5BD26B: fstp    [esp+14Ch+var_14C]; a3
+0x5BD26B: fstp    [esp+14Ch+var_14C]; value
 0x5BD26E: mov     ecx, [esi+30h]; this
-0x5BD271: push    0FB3h; a2
-0x5BD276: call    Tile_SetFloat
+0x5BD271: push    0FB3h; propertyCode
+0x5BD276: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5BD27B: mov     ecx, ds:0B333C4h
 0x5BD281: push    edi
 0x5BD282: call    Player_GetActorBarterFactor?
 0x5BD287: fmul    qword ptr ds:0A309F0h
-0x5BD28D: call    Double_To_SInt32
+0x5BD28D: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5BD292: mov     ecx, ds:0B333C4h; this
 0x5BD298: push    edi; targetNpc
 0x5BD299: mov     ebx, eax
 0x5BD29B: call    calculateItemMultiplicationFromDisposition
 0x5BD2A0: fmul    qword ptr ds:0A309F0h
-0x5BD2A6: call    Double_To_SInt32
+0x5BD2A6: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5BD2AB: mov     ecx, ds:0B333C4h
 0x5BD2B1: mov     ebp, eax
 0x5BD2B3: mov     eax, [ecx+11Ch]
@@ -212,10 +212,10 @@
 0x5BD35B: push    1Dh
 0x5BD35D: mov     ecx, edi
 0x5BD35F: call    edx
-0x5BD361: push    eax
-0x5BD362: call    Calc_MasteryFromSkill
-0x5BD367: push    eax
-0x5BD368: call    ActorValue_GetMasteryName
+0x5BD361: push    eax; skillValue
+0x5BD362: call    Calc_MasteryFromSkill; Map a base skill value to Oblivion's five mastery tiers using iSkillApprenticeMin=25, iSkillJourneymanMin=50, iSkillExpertMin=75, and iSkillMasterMin=100.
+0x5BD367: push    eax; mastery
+0x5BD368: call    ActorValue_GetMasteryName; Return the localized mastery-tier name for SkillMasteryLevel 0..4.
 0x5BD36D: mov     ecx, [esi+48h]
 0x5BD370: add     esp, 8
 0x5BD373: push    eax

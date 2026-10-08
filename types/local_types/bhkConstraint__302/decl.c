@@ -1,1 +1,1 @@
-bhkConstraint
+struct bhkConstraint;

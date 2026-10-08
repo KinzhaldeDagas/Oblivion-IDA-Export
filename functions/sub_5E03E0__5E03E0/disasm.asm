@@ -13,8 +13,8 @@
 0x5E0400: add     esp, 8
 0x5E0403: test    eax, eax
 0x5E0405: jz      short loc_5E041E
-0x5E0407: mov     ecx, eax
-0x5E0409: call    sub_4BEF40
+0x5E0407: mov     ecx, eax; this
+0x5E0409: call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.
 0x5E040E: mov     ecx, [eax]
 0x5E0410: mov     edx, [eax+4]
 0x5E0413: mov     eax, [eax+8]

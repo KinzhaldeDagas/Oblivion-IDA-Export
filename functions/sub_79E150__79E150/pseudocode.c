@@ -1,13 +1,14 @@
-void __cdecl sub_79E150(_DWORD *a1, _DWORD *a2)
+// Destroys every compact SFrondGuide in [first,last), freeing each embedded SFrondVertex vector.
+void __cdecl OB_SFrondGuide_DestroyRange_010201A0(OB_SFrondGuide_010201A0 *first, OB_SFrondGuide_010201A0 *last)
 {
-  _DWORD *i; // esi
+  OB_SFrondGuide_010201A0 *i; // esi
 
-  for ( i = a1; i != a2; i += 0xC )
+  for ( i = first; i != last; ++i ) /*0x79e15c*/
   {
-    if ( i[1] )
-      FormHeapFree(i[1]);
-    i[1] = 0;
-    i[2] = 0;
-    i[3] = 0;
+    if ( i->vertexVector.begin ) /*0x79e161*/
+      FormHeapFree((unsigned int)i->vertexVector.begin); /*0x79e169*/
+    i->vertexVector.begin = 0; /*0x79e171*/
+    i->vertexVector.end = 0; /*0x79e174*/
+    i->vertexVector.capacityEnd = 0; /*0x79e177*/
   }
 }

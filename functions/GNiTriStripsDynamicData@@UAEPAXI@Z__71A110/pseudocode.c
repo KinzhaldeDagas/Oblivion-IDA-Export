@@ -2,8 +2,8 @@ NiTriStripsDynamicData *__thiscall NiTriStripsDynamicData::`scalar deleting dest
         NiTriStripsDynamicData *this,
         char a2)
 {
-  NiTriStripsDynamicData::~NiTriStripsDynamicData(this);
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  NiTriStripsDynamicData::~NiTriStripsDynamicData(this); /*0x71a113*/
+  if ( (a2 & 1) != 0 ) /*0x71a11d*/
+    FormHeapFree((unsigned int)this); /*0x71a120*/
+  return this; /*0x71a12a*/
 }

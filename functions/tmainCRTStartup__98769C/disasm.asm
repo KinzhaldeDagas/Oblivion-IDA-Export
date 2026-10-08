@@ -98,8 +98,8 @@
 0x9877D8: push    9
 0x9877DA: call    __amsg_exit
 0x9877DF: pop     ecx
-0x9877E0: push    ebx
-0x9877E1: call    __InitializeGlobals?
+0x9877E0: push    ebx; initializeCRTGlobals
+0x9877E1: call    CRT_InitializeGlobals; Verified startup call: __tmainCRTStartup calls CRT_InitializeGlobals(1) before WinMain, which executes the C++ global-initializer pointer range.
 0x9877E6: pop     ecx
 0x9877E7: test    eax, eax
 0x9877E9: jz      short loc_9877F2
@@ -117,9 +117,38 @@
 0x987806: push    eax; lpCmdLine
 0x987807: push    0; hPrevInstance
 0x987809: push    400000h; hInstance
-0x98780E: call    _WinMain@16
+0x98780E: call    _WinMain@16; Pass230: +0x1C reads here are on player NiNode/property-state derived objects during exit-to-main-menu handling; not proof of TES+0x1C shader fog upload.
 0x987813: mov     [ebp+var_1C], eax
 0x987816: cmp     [ebp+var_20], 0
 0x98781A: jnz     short ___tmainCRTStartup___$LN44
 0x98781C: push    eax
 0x98781D: call    $LN26
+0x987829: mov     eax, [ebp+ms_exc.exc_ptr]
+0x98782C: mov     ecx, [eax]
+0x98782E: mov     ecx, [ecx]
+0x987830: mov     [ebp+Code], ecx
+0x987833: push    eax; ExceptionInfo
+0x987834: push    ecx; int
+0x987835: call    __XcptFilter
+0x98783A: pop     ecx
+0x98783B: pop     ecx
+0x98783C: retn
+0x98783D: mov     esp, [ebp+ms_exc.old_esp]
+0x987840: mov     eax, [ebp+Code]
+0x987843: mov     [ebp+var_1C], eax
+0x987846: cmp     [ebp+var_20], 0
+0x98784A: jnz     short ___tmainCRTStartup___$LN45
+0x98784C: push    eax; Code
+0x98784D: call    __exit
+0x987852: call    __c_exit
+0x987857: mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
+0x98785E: mov     eax, [ebp+var_1C]
+0x987861: jmp     short loc_987876
+0x987863: xor     eax, eax
+0x987865: inc     eax
+0x987866: retn
+0x987867: mov     esp, [ebp+ms_exc.old_esp]
+0x98786A: mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
+0x987871: mov     eax, 0FFh
+0x987876: call    __SEH_epilog4
+0x98787B: retn

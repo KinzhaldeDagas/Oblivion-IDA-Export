@@ -1,4 +1,4 @@
-0x4B34E0: push    ebx
+0x4B34E0: push    ebx; MEF PERF 2026-10-08: PERF-16 native SetAt contract: lazily initializes null sentinelB35AD4, adjusts usedEnd+A and occupiedCount+C for null/non-null transitions, releases old slot and retains new payload, writes slot. Reuse this native path; direct pointer write bypasses ownership/metadata. EAX is incidental, not a success flag.
 0x4B34E1: push    ebp
 0x4B34E2: push    esi
 0x4B34E3: mov     ebx, 1
@@ -12,9 +12,9 @@
 0x4B3508: call    _atexit
 0x4B350D: add     esp, 4
 0x4B3510: movzx   ecx, word ptr [esi+0Ah]
-0x4B3514: mov     eax, [esp+10h+arg_0]
+0x4B3514: mov     eax, [esp+10h+index]
 0x4B3518: cmp     eax, ecx
-0x4B351A: mov     ebp, [esp+10h+arg_4]
+0x4B351A: mov     ebp, [esp+10h+element]
 0x4B351E: jb      short loc_4B3538
 0x4B3520: lea     edx, [eax+1]
 0x4B3523: mov     [esi+0Ah], dx

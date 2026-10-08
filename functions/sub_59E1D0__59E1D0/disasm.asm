@@ -5,28 +5,28 @@
 0x59E1D9: jnz     short loc_59E1DF
 0x59E1DB: push    0Ah
 0x59E1DD: jmp     short loc_59E1E1
-0x59E1DF: push    0Ch
-0x59E1E1: push    5
-0x59E1E3: call    TESTopic__GEtTopic
+0x59E1DF: push    0Ch; index
+0x59E1E1: push    5; topicType
+0x59E1E3: call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.
 0x59E1E8: mov     ecx, ds:0B333C4h
 0x59E1EE: mov     edx, [esi+60h]
 0x59E1F1: add     esp, 8
-0x59E1F4: push    0
-0x59E1F6: push    0
-0x59E1F8: push    ecx
-0x59E1F9: push    edx
-0x59E1FA: mov     ecx, eax
-0x59E1FC: call    TESTopic__CreateDialogueInfo
+0x59E1F4: push    0; conversation
+0x59E1F6: push    0; previousTopic
+0x59E1F8: push    ecx; target
+0x59E1F9: push    edx; speaker
+0x59E1FA: mov     ecx, eax; this
+0x59E1FC: call    TESTopic__CreateDialogueItem; Selects a matching TESTopicInfo and wraps it as a 0x1C DialogueItem containing response list/cursor, INFO, topic, owner quest, and speaker.
 0x59E201: mov     ebx, eax
 0x59E203: test    ebx, ebx
 0x59E205: jz      loc_59E2A5
-0x59E20B: mov     ecx, ebx
-0x59E20D: call    sub_6B7BA0
+0x59E20B: mov     ecx, ebx; this
+0x59E20D: call    DialogueItem__FirstResponse
 0x59E212: test    al, al
 0x59E214: jz      short loc_59E295
 0x59E216: push    edi
-0x59E217: mov     ecx, ebx
-0x59E219: call    sub_6B7C20
+0x59E217: mov     ecx, ebx; this
+0x59E219: call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.
 0x59E21E: fldz
 0x59E220: mov     ecx, [esi+60h]
 0x59E223: mov     edi, eax
@@ -47,9 +47,9 @@
 0x59E259: add     eax, 1
 0x59E25C: mov     [esp+10h+arg_0], eax
 0x59E260: fild    [esp+10h+arg_0]
-0x59E264: fstp    [esp+10h+var_10]; a3
-0x59E267: push    0FA1h; a2
-0x59E26C: call    Tile_SetFloat
+0x59E264: fstp    [esp+10h+value]; value
+0x59E267: push    0FA1h; propertyCode
+0x59E26C: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59E271: mov     ecx, [edi]
 0x59E273: push    ecx
 0x59E274: mov     ecx, [esi+2Ch]
@@ -57,15 +57,15 @@
 0x59E27C: call    Tile_SetString
 0x59E281: fld1
 0x59E283: push    ecx
-0x59E284: fstp    [esp+10h+var_10]; a3
+0x59E284: fstp    [esp+10h+value]; value
 0x59E287: mov     ecx, [esi+3Ch]; this
-0x59E28A: push    0FA1h; a2
-0x59E28F: call    Tile_SetFloat
+0x59E28A: push    0FA1h; propertyCode
+0x59E28F: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59E294: pop     edi
-0x59E295: mov     ecx, ebx
-0x59E297: call    sub_6B81D0
+0x59E295: mov     ecx, ebx; this
+0x59E297: call    DialogueItem__Destroy
 0x59E29C: push    ebx
-0x59E29D: call    FormHeapFree
+0x59E29D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x59E2A2: add     esp, 4
 0x59E2A5: pop     esi
 0x59E2A6: pop     ebx

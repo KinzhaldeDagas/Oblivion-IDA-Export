@@ -1,1 +1,1 @@
-DirectSoundCaptureDevice_0
+typedef DirectSoundCaptureDevice DirectSoundCaptureDevice_0;

@@ -32,7 +32,7 @@
 0x5E7159: test    ah, 41h
 0x5E715C: jnz     short loc_5E7191
 0x5E715E: fld     dword ptr [edi+240h]
-0x5E7164: mov     ecx, offset fPainDelay
+0x5E7164: mov     ecx, 0B37BF0h
 0x5E7169: fstp    dword ptr [esp+14h+var_C]
 0x5E716D: fld     dword ptr [esi+0BCh]
 0x5E7173: fstp    [esp+14h+var_C+4]
@@ -43,7 +43,7 @@
 0x5E7186: fnstsw  ax
 0x5E7188: test    ah, 5
 0x5E718B: jnp     loc_5E721E
-0x5E7191: mov     ecx, offset fPainDelay
+0x5E7191: mov     ecx, 0B37BF0h
 0x5E7196: call    GameSetting_GetSafeFloatPointer
 0x5E719B: fld     dword ptr [eax]
 0x5E719D: fadd    dword ptr [esi+0BCh]
@@ -56,7 +56,7 @@
 0x5E71BA: fld     dword ptr ds:0A35AA4h
 0x5E71C0: push    ecx
 0x5E71C1: fstp    [esp+18h+var_18]; float
-0x5E71C4: call    sub_7EB080
+0x5E71C4: call    sub_7EB080; CustomAnimSupport evidence: HitShader Enum event ultimately triggers shader/effect strength here.
 0x5E71C9: mov     ecx, ds:0B333C4h
 0x5E71CF: add     esp, 4
 0x5E71D2: cmp     byte ptr [esp+14h+arg_0], 0

@@ -68,7 +68,7 @@
 0x5469EA: fadd    [esp+18h+var_8]
 0x5469EE: push    0; Seed
 0x5469F0: fstp    dword ptr [esp+1Ch+var_8]
-0x5469F4: call    GetRandomLargeInteger?
+0x5469F4: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x5469F9: cdq
 0x5469FA: mov     ecx, 64h ; 'd'
 0x5469FF: idiv    ecx

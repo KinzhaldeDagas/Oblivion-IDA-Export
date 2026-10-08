@@ -13,13 +13,13 @@
 0x77BB1F: push    ebp
 0x77BB20: mov     ecx, esi; this
 0x77BB22: call    ??0NiD3DRenderState@@QAE@XZ; NiD3DRenderState::NiD3DRenderState(void)
-0x77BB27: push    130h; Size
+0x77BB27: push    130h; byteCount
 0x77BB2C: lea     eax, [esi+1018h]
-0x77BB32: push    edi; Src
-0x77BB33: push    eax; Dst
+0x77BB32: push    edi; source
+0x77BB33: push    eax; destination
 0x77BB34: mov     dword ptr [esi], offset ??_7NiDX9RenderState@@6B@; const NiDX9RenderState::`vftable'
 0x77BB3A: mov     byte ptr [esi+1014h], 0
-0x77BB41: call    _memcpy
+0x77BB41: call    _memcpy;
 0x77BB46: add     esp, 0Ch
 0x77BB49: jmp     short loc_77BB4D
 0x77BB4B: xor     esi, esi

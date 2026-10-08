@@ -4,7 +4,7 @@
 0x500C6A: call    sub_442630
 0x500C6F: mov     ecx, ds:0B333A0h; this
 0x500C75: push    0; a2
-0x500C77: call    sub_43FC20
+0x500C77: call    sub_43FC20; TES cleanup/streaming critical-section path; calls SpeedTree cache prune 0x55E390(1) before and after heap/cell cleanup.
 0x500C7C: mov     ecx, ds:0B33398h
 0x500C82: push    1
 0x500C84: call    OSGlobals_PurgeModels

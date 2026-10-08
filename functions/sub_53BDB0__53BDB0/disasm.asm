@@ -18,14 +18,14 @@
 0x53BDEB: mov     eax, [esp+4E4h+arg_0]
 0x53BDF2: push    eax
 0x53BDF3: mov     ebp, ecx
-0x53BDF5: call    sub_543D30
+0x53BDF5: call    SkyObject__CreateRootNodeAndAttach; Allocates a NiNode, stores it as the sky-object root with refcount ownership, sets flags 0x2 and 0x20, and attaches it to the supplied parent through virtual slot +0x84.
 0x53BDFA: mov     ecx, [ebp+4]
 0x53BDFD: push    offset aCloudRoot; "Cloud Root"
 0x53BE02: call    NiObjectNET_SetName
 0x53BE07: lea     ecx, [esp+4E4h+var_4A0]; this
 0x53BE0B: call    ??0NiStream@@QAE@XZ; NiStream::NiStream(void)
 0x53BE10: xor     ebx, ebx
-0x53BE12: mov     [esp+4E4h+var_4A0], offset ??_7BSStream@@6B@; const BSStream::`vftable'
+0x53BE12: mov     dword ptr [esp+4E4h+var_4A0], offset ??_7BSStream@@6B@; const BSStream::`vftable'
 0x53BE1A: mov     [esp+4E4h+var_14], ebx
 0x53BE21: mov     [esp+4E4h+var_18], ebx
 0x53BE28: mov     [esp+4E4h+var_4], ebx
@@ -57,7 +57,7 @@
 0x53BE88: cmp     eax, ebx
 0x53BE8A: jz      short loc_53BE9E
 0x53BE8C: lea     esp, [esp+0]
-0x53BE90: cmp     eax, offset dword_B3FAB0
+0x53BE90: cmp     eax, offset parent
 0x53BE95: jz      short loc_53BEEF
 0x53BE97: mov     eax, [eax+4]
 0x53BE9A: cmp     eax, ebx
@@ -65,7 +65,7 @@
 0x53BE9E: push    offset aCannotLoadTheC; "Cannot load the clouds."
 0x53BEA3: call    PrintError
 0x53BEA8: push    esi
-0x53BEA9: call    FormHeapFree
+0x53BEA9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x53BEAE: add     esp, 8
 0x53BEB1: lea     ecx, [esp+4E4h+var_4A0]; this
 0x53BEB5: mov     [esp+4E4h+var_4], 0FFFFFFFFh
@@ -92,7 +92,6 @@
 0x53BF07: xor     edi, edi
 0x53BF09: jmp     short loc_53BF14
 0x53BF0B: jmp     short loc_53BF10
-0x53BF0D: align 10h
 0x53BF10: mov     eax, [esp+4E4h+var_4BC]
 0x53BF14: movzx   edx, word ptr [eax+0B6h]
 0x53BF1B: cmp     edx, edi
@@ -161,7 +160,7 @@
 0x53BFE5: call    sub_541790
 0x53BFEA: mov     edx, [esp+4F0h+Src]
 0x53BFEE: push    edx
-0x53BFEF: call    FormHeapFree
+0x53BFEF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x53BFF4: add     esp, 10h
 0x53BFF7: jmp     loc_53BEB1
 0x53BFFC: push    offset aMissingExpecte; "Missing expected geometry layer in Clou"...
@@ -169,3 +168,18 @@
 0x53C006: mov     edx, [esp+4E8h+Src]
 0x53C00A: push    edx
 0x53C00B: jmp     loc_53BEA9
+0x9BA2F0: lea     ecx, [ebp-4A0h]; this
+0x9BA2F6: jmp     ??1BSStream@@UAE@XZ; BSStream::~BSStream(void)
+0x9BA2FB: lea     ecx, [ebp-4C4h]; void *
+0x9BA301: jmp     BSStringT_Clear
+0x9BA306: mov     edx, [esp+arg_4]
+0x9BA30A: lea     eax, [edx-4D4h]
+0x9BA310: mov     ecx, [edx-4D8h]
+0x9BA316: xor     ecx, eax
+0x9BA318: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BA31D: add     eax, 10h
+0x9BA320: mov     ecx, [edx-4]
+0x9BA323: xor     ecx, eax
+0x9BA325: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BA32A: mov     eax, offset stru_AE44E4
+0x9BA32F: jmp     ___CxxFrameHandler3

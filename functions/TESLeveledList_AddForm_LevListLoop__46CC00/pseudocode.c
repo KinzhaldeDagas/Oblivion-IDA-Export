@@ -1,13 +1,15 @@
 int __userpurge TESLeveledList_AddForm_::LevListLoop@<eax>(
         _DWORD *a1@<esi>,
-        int a2,
-        int a3,
+        _DWORD *a2@<ebx>,
+        _DWORD *a3@<ebp>,
         int a4,
         int a5,
-        unsigned __int16 a6)
+        int a6,
+        int a7,
+        unsigned __int16 a8)
 {
-  if ( *a1 && *(_WORD *)*a1 > a6 )
-    return TESLeveledList_AddForm_::InsertEntry(a2, a3, a4);
+  if ( *a1 && *(_WORD *)*a1 > a8 ) /*0x46cc0e*/
+    return TESLeveledList_AddForm_::InsertEntry(a2, a3, a1, a4, a5, a6); /*0x46cc0e*/
   else
-    return TESLeveledList_AddForm_::LevListLoop_next((int)a1, a2, a3, a4);
+    return TESLeveledList_AddForm_::LevListLoop_next((int)a1, a4, a5, a6, a7, a8); /*0x46cc11*/
 }

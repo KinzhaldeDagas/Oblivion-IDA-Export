@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x7B84E0",
-    "line": "push    esi",
+    "line": "push    esi; MoonSugarEffect decode: walks ShaderDefinition cache B42EC0..B42F30; for shaders with type != -1 calls vtable +0x90 to detach pass texture-stage refs before texture-manager rebuild. Does not walk arbitrary plugin-owned shader wrappers or call vertex wrapper +0x5C.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7B84E1",
-    "line": "mov     esi, offset dword_B42EC0",
+    "line": "mov     esi, (offset OB_RendererGlobalState_010201A0.pad_00D+1Ah)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x7B8519",
-    "line": "cmp     esi, offset byte_B42F30",
+    "line": "cmp     esi, (offset OB_RendererGlobalState_010201A0.pad_00D+8Ah)",
     "mnemonic": "cmp",
     "size": 6
   },

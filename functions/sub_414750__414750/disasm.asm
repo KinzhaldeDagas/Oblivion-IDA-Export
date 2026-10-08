@@ -13,10 +13,10 @@
 0x414775: test    cl, cl
 0x414777: jnz     short loc_414770
 0x414779: sub     eax, edi
-0x41477B: push    eax; MaxCount
-0x41477C: push    edx; Src
-0x41477D: mov     ecx, esi
-0x41477F: call    sub_414500
+0x41477B: push    eax; count
+0x41477C: push    edx; source
+0x41477D: mov     ecx, esi; this
+0x41477F: call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.
 0x414784: pop     edi
 0x414785: mov     eax, esi
 0x414787: pop     esi

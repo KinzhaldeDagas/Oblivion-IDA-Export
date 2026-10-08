@@ -1,4 +1,4 @@
-0x547BB4: fld     qword ptr ds:0A309F0h
+0x547BB4: fld     qword ptr ds:0A309F0h; Native Oblivion clamp tail for Luck-modified effective skill: preserve fractional precision while bounding the result to 0..100.
 0x547BBA: fcom    st(1)
 0x547BBC: fnstsw  ax
 0x547BBE: test    ah, 41h

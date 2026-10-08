@@ -10,7 +10,6 @@
 0x466E93: add     esp, 0Ch
 0x466E96: xor     ebx, ebx
 0x466E98: jmp     short loc_466EA0
-0x466E9A: align 10h
 0x466EA0: cmp     ebx, 19h; switch 26 cases
 0x466EA3: ja      FormComponentList_Build___def_466EA9
 0x466EA9: jmp     ds:jpt_466EA9[ebx*4]; switch jump

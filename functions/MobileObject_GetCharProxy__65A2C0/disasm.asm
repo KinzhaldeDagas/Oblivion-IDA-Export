@@ -1,4 +1,4 @@
-0x65A2C0: push    ecx
+0x65A2C0: push    ecx; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x65A2C1: cmp     dword ptr [ecx+58h], 0
 0x65A2C5: jz      short loc_65A309
 0x65A2C7: mov     ecx, [ecx+58h]

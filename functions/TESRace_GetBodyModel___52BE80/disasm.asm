@@ -17,8 +17,8 @@
 0x52BEAD: lea     eax, [eax+eax*2]
 0x52BEB0: push    ebx
 0x52BEB1: lea     ebx, ds:0B36380h[eax*8]
-0x52BEB8: mov     ecx, ebx
-0x52BEBA: call    sub_449190
+0x52BEB8: mov     ecx, ebx; compactString
+0x52BEBA: call    OB_CompactString_Length_010201A0; Bethesda compact string length helper. If inline length marker is 0xFFFF, strlen(heap string); otherwise returns the 16-bit stored length. Used here to gate optional TESObjectTREE leaf texture.
 0x52BEBF: test    eax, eax
 0x52BEC1: jz      short loc_52BECB
 0x52BEC3: mov     eax, ebx
@@ -35,8 +35,8 @@
 0x52BEDF: jmp     short loc_52BEEB
 0x52BEE1: lea     eax, [esi+esi*2]
 0x52BEE4: lea     esi, ds:0B363F8h[eax*8]
-0x52BEEB: mov     ecx, esi
-0x52BEED: call    sub_449190
+0x52BEEB: mov     ecx, esi; compactString
+0x52BEED: call    OB_CompactString_Length_010201A0; Bethesda compact string length helper. If inline length marker is 0xFFFF, strlen(heap string); otherwise returns the 16-bit stored length. Used here to gate optional TESObjectTREE leaf texture.
 0x52BEF2: test    eax, eax
 0x52BEF4: jz      short loc_52BEFE
 0x52BEF6: pop     ebx

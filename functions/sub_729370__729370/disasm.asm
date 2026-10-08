@@ -9,7 +9,6 @@
 0x729385: mov     esi, [esp+0Ch+arg_0]
 0x729389: push    edi
 0x72938A: jmp     short loc_729398
-0x72938C: align 10h
 0x729390: mov     ecx, [esp+10h+arg_C]
 0x729394: mov     eax, [esp+10h+arg_8]
 0x729398: push    ecx

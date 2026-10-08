@@ -1,6 +1,6 @@
 0x467320: mov     eax, ecx
 0x467322: xor     ecx, ecx
-0x467324: mov     dword ptr [eax], offset ??_7TESActorBaseData@@6B@; const TESActorBaseData::`vftable'
+0x467324: mov     dword ptr [eax], offset ??_7TESActorBaseData@@6B@; Verified typed prefix through +0x50 only; complete table extends further. Blood slots +0x28/+0x30 are independent disable flags; +0x38/+0x40 are texture/particle getters. TESCreature ctor 0x51EB80 installs its component vtable at complete-object +0x24. Unknown slots intentionally remain untyped.
 0x46732A: mov     [eax+18h], ecx
 0x46732D: mov     [eax+1Ch], ecx
 0x467330: mov     edx, 32h ; '2'

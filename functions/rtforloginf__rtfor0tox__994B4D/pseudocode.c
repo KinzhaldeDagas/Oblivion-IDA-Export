@@ -1,10 +1,10 @@
-int rtforloginf_::_rtfor0tox()
+void __usercall rtforloginf_::_rtfor0tox(int a1@<ebp>, double a2@<st0>)
 {
-  char v0; // cl
+  char v2; // cl
 
-  isintTOS();
-  if ( v0 )
-    return rtforloginf_::_rtfor0toneg();
+  isintTOS(a2); /*0x994b4d*/
+  if ( v2 ) /*0x994b58*/
+    rtforloginf_::_rtfor0toneg(a1); /*0x994b58*/
   else
-    return rtforloginf_::zerotoxdone();
+    rtforloginf_::zerotoxdone(); /*0x994b5f*/
 }

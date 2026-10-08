@@ -1,19 +1,36 @@
 {
-  "callees_count": 13,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_6B80D0",
+  "chunks": [
+    [
+      "0x6B80D0",
+      "0x6B81CC"
+    ],
+    [
+      "0x9C6EA0",
+      "0x9C6ECE"
+    ]
+  ],
+  "chunks_sha256": "dc06e2db7c19af5b5b4951ae20d4d159ec6ff3fcedba2d0d7d9b12ac678479d7",
+  "comment_regular": "Ambient DialogueItem constructor. Unlike player MenuTopic::FillResponseList, this path appends every collected TESResponse without filtering empty display text and without INFOGENERAL/D7's first-nonempty-response limit. An ambient RUMOR item can therefore retain all authored responses.",
+  "comment_repeatable": "Ambient DialogueItem constructor. Unlike player MenuTopic::FillResponseList, this path appends every collected TESResponse without filtering empty display text and without INFOGENERAL/D7's first-nonempty-response limit. An ambient RUMOR item can therefore retain all authored responses.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "DialogueItem::DialogueItem",
   "end_ea": "0x6B81CC",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6B80D0",
+  "name": "DialogueItem::DialogueItem",
   "segment": ".text",
   "sha256": "9a459cbcc8d84907cf519a5d9533327f1a0e2f7e0260cf5dabb5d046463b9d63",
   "size": 252,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6B80D0",
-  "type": "Unk1C *__thiscall(Unk1C *this, TESQuest *, TESTopic *, TESForm *, TESObjectREFR *)",
-  "xrefs_from_count": 95,
+  "total_chunk_size": 298,
+  "type": "DialogueItemView *__thiscall(DialogueItemView *this, TESQuest *ownerQuest, TESTopic *topic, OblivionTopicInfo *info, TESObjectREFR *speaker)",
+  "xrefs_from_count": 111,
   "xrefs_to_count": 1
 }

@@ -1,19 +1,36 @@
 {
-  "callees_count": 8,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_796F20",
+  "chunks": [
+    [
+      "0x796F20",
+      "0x796FD6"
+    ],
+    [
+      "0x9CBF90",
+      "0x9CBFAB"
+    ]
+  ],
+  "chunks_sha256": "89a1369c1f8c70a1c5b2635b138bf23c7f005af6a52af9f9c0dc5797e13c6786",
+  "comment_regular": "OBLIVION AUTHORITY (2026-08-30): Fill constructor for vector<vector<unsigned short*>>. Its inner owner is structurally identical to vector<float>, explaining reuse of the already-decoded shared 4-byte-element fill helper.",
+  "comment_repeatable": "OBLIVION AUTHORITY (2026-08-30): Fill constructor for vector<vector<unsigned short*>>. Its inner owner is structurally identical to vector<float>, explaining reuse of the already-decoded shared 4-byte-element fill helper.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_stVector_stVectorUShortPtr_FillCtor_010201A0",
   "end_ea": "0x796FD6",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_796F20",
+  "name": "OB_stVector_stVectorUShortPtr_FillCtor_010201A0",
   "segment": ".text",
   "sha256": "3208095aeff2212f16e4ce7136f5ac888b69adbce8dae32aab67020fdad4f4f3",
   "size": 182,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x796F20",
-  "type": "int __userpurge@<eax>(_DWORD *this@<ecx>, int@<edi>, char *, int)",
-  "xrefs_from_count": 71,
+  "total_chunk_size": 209,
+  "type": "void __thiscall(OB_stVector_stVectorUShortPtr_010201A0 *this, unsigned int count, const OB_stVectorUShortPtr_010201A0 *value)",
+  "xrefs_from_count": 81,
   "xrefs_to_count": 1
 }

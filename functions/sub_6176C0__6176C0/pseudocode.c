@@ -1,8 +1,8 @@
-unsigned __int16 __usercall sub_6176C0@<ax>(_DWORD *this@<ecx>, double a2@<st0>)
+unsigned __int16 __thiscall sub_6176C0(TESPackage *this)
 {
-  unsigned __int16 v3; // si
+  unsigned __int16 SaveSize; // si
   unsigned __int16 v4; // bx
-  unsigned __int8 next; // dl
+  unsigned __int8 currentVersion; // dl
   _DWORD *v6; // eax
   __int16 j; // cx
   __int16 v8; // si
@@ -32,7 +32,7 @@ unsigned __int16 __usercall sub_6176C0@<ax>(_DWORD *this@<ecx>, double a2@<st0>)
   int *v32; // eax
   __int16 v33; // cx
   unsigned __int16 v34; // di
-  UInt32 *v35; // esi
+  UInt32 *currentlySavingFormHeader; // esi
   TESForm *v36; // eax
   const char *v37; // eax
   int v39; // [esp-Ch] [ebp-1Ch]
@@ -40,122 +40,122 @@ unsigned __int16 __usercall sub_6176C0@<ax>(_DWORD *this@<ecx>, double a2@<st0>)
   const char *v41; // [esp-4h] [ebp-14h]
   unsigned __int16 v42; // [esp+Ch] [ebp-4h]
 
-  v3 = sub_567D20(this);
-  v4 = v3;
-  if ( sub_45A170() )
-    v3 += 6;
-  next = (unsigned __int8)SaveLoad_CurrentSavegame[1].createdObjectList.next;
-  if ( next < 0x29u )
+  SaveSize = TESPackage_GetSaveSize(this); /*0x6176d1*/
+  v4 = SaveSize; /*0x6176d8*/
+  if ( TESSaveLoadGame_UseSaveGameBlocks() ) /*0x6176db*/
+    SaveSize += 6; /*0x6176e4*/
+  currentVersion = g_TESSaveLoadGame->currentVersion; /*0x6176ec*/
+  if ( currentVersion < 0x29u ) /*0x6176f2*/
   {
-    v9 = (_DWORD *)*(this + 0x10);
-    for ( i = 0; v9; v9 = (_DWORD *)v9[1] )
+    v9 = *((_DWORD **)this + 0x10); /*0x61771f*/
+    for ( i = 0; v9; v9 = (_DWORD *)v9[1] ) /*0x617726*/
     {
-      if ( *v9 )
-        ++i;
+      if ( *v9 ) /*0x617728*/
+        ++i; /*0x61772d*/
     }
-    v8 = i + v3 + 8 * i + 2;
+    v8 = i + SaveSize + 8 * i + 2; /*0x61773a*/
   }
   else
   {
-    v6 = (_DWORD *)*(this + 0x10);
-    for ( j = 0; v6; v6 = (_DWORD *)v6[1] )
+    v6 = *((_DWORD **)this + 0x10); /*0x6176f4*/
+    for ( j = 0; v6; v6 = (_DWORD *)v6[1] ) /*0x6176fb*/
     {
-      if ( *v6 )
-        ++j;
+      if ( *v6 ) /*0x617700*/
+        ++j; /*0x617705*/
     }
-    v8 = v3 + 0x10 * j + j + 2;
+    v8 = SaveSize + 0x10 * j + j + 2; /*0x617719*/
   }
-  v11 = v8 + 0x7F;
-  v42 = v11;
-  if ( next >= 0x3Au )
+  v11 = v8 + 0x7F; /*0x61773e*/
+  v42 = v11; /*0x617744*/
+  if ( currentVersion >= 0x3Au ) /*0x617748*/
   {
-    v11 += 4;
-    v42 = v11;
+    v11 += 4; /*0x61774a*/
+    v42 = v11; /*0x61774d*/
   }
-  if ( next >= 0x3Du )
-    v42 = v11 + 1;
-  if ( next >= 0x5Fu )
+  if ( currentVersion >= 0x3Du ) /*0x617754*/
+    v42 = v11 + 1; /*0x617759*/
+  if ( currentVersion >= 0x5Fu ) /*0x617760*/
   {
-    v12 = sub_614BE0(a2, (int *)*(this + 0x17)) + v42;
-    v13 = sub_614BE0(a2, (int *)*(this + 0x18)) + v12;
-    v14 = sub_614BE0(a2, (int *)*(this + 0x19)) + 0x15 + v13;
-    v15 = *(this + 0x24);
-    if ( v15 )
+    v12 = sub_614BE0(*((int **)this + 0x17)) + v42; /*0x61777c*/
+    v13 = sub_614BE0(*((int **)this + 0x18)) + v12; /*0x617784*/
+    v14 = sub_614BE0(*((int **)this + 0x19)) + 0x15 + v13; /*0x617796*/
+    v15 = *((_DWORD *)this + 0x24); /*0x617799*/
+    if ( v15 ) /*0x6177a6*/
     {
-      v16 = *(int **)(v15 + 4);
-      v17 = 1;
-      if ( v16 )
-        v17 = sub_485660(v16, a2) + 1;
-      v14 += v17 + 4;
+      v16 = *(int **)(v15 + 4); /*0x6177a8*/
+      v17 = 1; /*0x6177ad*/
+      if ( v16 ) /*0x6177b2*/
+        v17 = sub_485660(v16) + 1; /*0x6177bd*/
+      v14 += v17 + 4; /*0x6177c4*/
     }
-    v18 = *(this + 0x25);
-    v19 = v14 + 1;
-    if ( v18 )
+    v18 = *((_DWORD *)this + 0x25); /*0x6177ce*/
+    v19 = v14 + 1; /*0x6177d4*/
+    if ( v18 ) /*0x6177d9*/
     {
-      v20 = *(int **)(v18 + 4);
-      v21 = 1;
-      if ( v20 )
-        v21 = sub_485660(v20, a2) + 1;
-      v19 += v21 + 4;
+      v20 = *(int **)(v18 + 4); /*0x6177db*/
+      v21 = 1; /*0x6177e0*/
+      if ( v20 ) /*0x6177e5*/
+        v21 = sub_485660(v20) + 1; /*0x6177f2*/
+      v19 += v21 + 4; /*0x6177f5*/
     }
-    v22 = *(this + 0x26);
-    v23 = v19 + 1;
-    if ( v22 )
+    v22 = *((_DWORD *)this + 0x26); /*0x6177f9*/
+    v23 = v19 + 1; /*0x6177ff*/
+    if ( v22 ) /*0x617804*/
     {
-      v24 = *(int **)(v22 + 4);
-      v25 = 1;
-      if ( v24 )
-        v25 = sub_485660(v24, a2) + 1;
-      v23 += v25 + 4;
+      v24 = *(int **)(v22 + 4); /*0x617806*/
+      v25 = 1; /*0x61780b*/
+      if ( v24 ) /*0x617810*/
+        v25 = sub_485660(v24) + 1; /*0x61781d*/
+      v23 += v25 + 4; /*0x617820*/
     }
-    v26 = *(this + 0x27);
-    v27 = v23 + 1;
-    if ( v26 )
+    v26 = *((_DWORD *)this + 0x27); /*0x617824*/
+    v27 = v23 + 1; /*0x61782a*/
+    if ( v26 ) /*0x61782f*/
     {
-      v28 = *(int **)(v26 + 4);
-      v29 = 1;
-      if ( v28 )
-        v29 = sub_485660(v28, a2) + 1;
-      v27 += v29 + 4;
+      v28 = *(int **)(v26 + 4); /*0x617831*/
+      v29 = 1; /*0x617836*/
+      if ( v28 ) /*0x61783b*/
+        v29 = sub_485660(v28) + 1; /*0x617848*/
+      v27 += v29 + 4; /*0x61784b*/
     }
-    v30 = *(this + 0x28);
-    v31 = v27 + 1;
-    v42 = v31;
-    if ( v30 )
+    v30 = *((_DWORD *)this + 0x28); /*0x61784f*/
+    v31 = v27 + 1; /*0x617855*/
+    v42 = v31; /*0x61785a*/
+    if ( v30 ) /*0x61785e*/
     {
-      v32 = *(int **)(v30 + 4);
-      v33 = 1;
-      if ( v32 )
-        v33 = sub_485660(v32, a2) + 1;
-      v42 = v31 + v33 + 4;
+      v32 = *(int **)(v30 + 4); /*0x617860*/
+      v33 = 1; /*0x617865*/
+      if ( v32 ) /*0x61786a*/
+        v33 = sub_485660(v32) + 1; /*0x617877*/
+      v42 = v31 + v33 + 4; /*0x61787e*/
     }
   }
-  if ( LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) < 0x66u )
-    v34 = v42;
+  if ( g_TESSaveLoadGame->currentVersion < 0x66u ) /*0x61788b*/
+    v34 = v42; /*0x6178a2*/
   else
-    v34 = sub_614BE0(a2, (int *)*(this + 0x1A)) + v42;
+    v34 = sub_614BE0(*((int **)this + 0x1A)) + v42; /*0x61789d*/
   if ( Global_DebugSaveBuffer )
   {
-    v35 = (UInt32 *)SaveLoad_CurrentSavegame[1].unk030[1];
-    if ( v35 )
+    currentlySavingFormHeader = (UInt32 *)g_TESSaveLoadGame->currentlySavingFormHeader; /*0x6178b6*/
+    if ( currentlySavingFormHeader )
     {
-      v36 = TESForm_LookupByFormID(*v35);
-      v37 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, int, const char *))v36->vtbl->GetEditorName)(
+      v36 = TESForm_LookupByFormID(*currentlySavingFormHeader); /*0x6178c3*/
+      v37 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, int, const char *))v36->vtbl->GetEditorName)( /*0x6178e3*/
                             v36,
-                            *(UInt32 *)((char *)v35 + 5),
+                            *(UInt32 *)((char *)currentlySavingFormHeader + 5),
                             0x2844,
                             ".\\AI\\CombatController.cpp");
       sub_40FEC0(
         "GetSaveSize(): %-5i for form %08X %s with flags %08X ending at line %i in file %s",
         v34 - v4,
-        *v35,
+        *currentlySavingFormHeader,
         v37,
         v39,
         v40,
         v41);
-      return v34;
+      return v34; /*0x617906*/
     }
     sub_40FEC0("GetSaveSize(): %-5i ending at line %i in file %s", v34 - v4, 0x2844, ".\\AI\\CombatController.cpp");
   }
-  return v34;
+  return v34; /*0x617902*/
 }

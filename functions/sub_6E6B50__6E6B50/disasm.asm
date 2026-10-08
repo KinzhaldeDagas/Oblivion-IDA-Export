@@ -26,7 +26,7 @@
 0x6E6B92: jp      short loc_6E6BA4
 0x6E6B94: fild    [esp+2Ch+var_24]
 0x6E6B98: fmul    st, st(1)
-0x6E6B9A: call    Double_To_SInt32
+0x6E6B9A: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x6E6B9F: add     eax, 3
 0x6E6BA2: jmp     short loc_6E6BA7
 0x6E6BA4: lea     eax, [ecx-1]

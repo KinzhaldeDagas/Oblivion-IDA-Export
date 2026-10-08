@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x560110",
-    "line": "cmp     dword ptr ds:0B39E04h, 0",
+    "line": "cmp     dword ptr ds:0B39E04h, 0; Verified canopy-shadow cleanup plus version difference: Oblivion releases manager.canopyShadowTexture and an adjacent cached resource, then calls sub_440420 to unload the DDS. Fallout releases the manager pointer and BSShaderManager::pProjectedShadowTexture, then calls TES::RemoveTextureImage.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x560119",
-    "line": "push    0",
+    "line": "push    0; recreate",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x56011B",
-    "line": "call    sub_55F750",
+    "line": "call    BSTreeManager_Create; Verified singleton Create(recreate): optionally destroys/frees an existing BSTreeManager, allocates 0x28 bytes, runs BSTreeManager_ctor, and stores the instance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x560134",
-    "line": "call    nullsub_returnTrue_0arg",
+    "line": "call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -79,13 +79,13 @@
   },
   {
     "ea": "0x560145",
-    "line": "push    0",
+    "line": "push    0; recreate",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x560147",
-    "line": "call    sub_55F750",
+    "line": "call    BSTreeManager_Create; Verified singleton Create(recreate): optionally destroys/frees an existing BSTreeManager, allocates 0x28 bytes, runs BSTreeManager_ctor, and stores the instance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x5601C6",
-    "line": "call    nullsub_returnTrue_0arg",
+    "line": "call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.",
     "mnemonic": "call",
     "size": 5
   },

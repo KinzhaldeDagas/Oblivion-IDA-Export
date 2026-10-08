@@ -1,1 +1,1 @@
-NiScreenSpaceCamera
+struct NiScreenSpaceCamera;

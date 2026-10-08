@@ -1,9 +1,9 @@
-int __cdecl sub_4D89F0(float a1)
+// TES4 authoritative: write reference rotation Y at TESObjectREFR+0x24, then notify the reference through virtual slot +0x40 with change mask 4.
+int __thiscall TESObjectREFR_SetRotationY(TESObjectREFR *this, float radians)
 {
-  float *v1; // ecx
-  int (__cdecl *v2)(int); // edx
+  void (__thiscall *MarkAsModified)(TESForm *, UInt32); // edx
 
-  v2 = *(int (__cdecl **)(int))(*(_DWORD *)v1 + 0x40);
-  v1[9] = a1;
-  return v2(4);
+  MarkAsModified = this->vtbl->super.MarkAsModified; /*0x4d89f6*/
+  this->member.rot.y = radians; /*0x4d89f9*/
+  return ((int (__cdecl *)(int))MarkAsModified)(4);
 }

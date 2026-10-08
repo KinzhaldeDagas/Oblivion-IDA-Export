@@ -1,19 +1,36 @@
 {
-  "callees_count": 17,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 13,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
+  "chunks": [
+    [
+      "0x4F0FB0",
+      "0x4F10FC"
+    ],
+    [
+      "0x9B67A0",
+      "0x9B6843"
+    ]
+  ],
+  "chunks_sha256": "adf25d93e6318c6ced342b1d695acdeb94e73291d6bf2f3de01b9a3eae804d7d",
+  "comment_regular": "Verified destruction order: clears persistent-reference index (+0x64), TESForm component references, SubSpace spatial index (+0x60), exterior cell map, cellMap, persistent cell, auxiliary resources, LOD-cell map, terrain LOD map, then base components.",
+  "comment_repeatable": "Verified destruction order: clears persistent-reference index (+0x64), TESForm component references, SubSpace spatial index (+0x60), exterior cell map, cellMap, persistent cell, auxiliary resources, LOD-cell map, terrain LOD map, then base components.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
   "display_name": "TESWorldSpace::~TESWorldSpace(void)",
   "end_ea": "0x4F10FC",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??1TESWorldSpace@@UAE@XZ",
   "segment": ".text",
   "sha256": "f5f200d76d1b9f5a334088b636693bdc6f2c55de73f887cac43c6fc90193cba3",
   "size": 332,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4F0FB0",
+  "total_chunk_size": 495,
   "type": "void __thiscall(TESWorldSpace *__hidden this)",
-  "xrefs_from_count": 115,
+  "xrefs_from_count": 158,
   "xrefs_to_count": 1
 }

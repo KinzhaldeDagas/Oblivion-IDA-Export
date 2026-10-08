@@ -1,1 +1,1 @@
-CInterfaceStubVtbl
+typedef tagCInterfaceStubVtbl CInterfaceStubVtbl;

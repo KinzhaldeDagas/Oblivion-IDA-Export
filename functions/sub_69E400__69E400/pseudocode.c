@@ -1,4 +1,5 @@
-void *sub_69E400()
+// Verified (Oblivion): MagicModelHitEffect GetType returns NiRTTI_MagicModelHitEffect; its RTTI parent is MagicHitEffect.
+NiRTTI *__thiscall MagicModelHitEffect_GetRTTI(MagicModelHitEffect *this)
 {
-  return &unk_B3C0C4;
+  return (NiRTTI *)&NiRTTI_MagicModelHitEffect; /*0x69e405*/
 }

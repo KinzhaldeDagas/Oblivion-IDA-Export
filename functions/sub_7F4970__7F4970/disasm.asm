@@ -147,7 +147,7 @@
 0x7F4B3E: push    ebx
 0x7F4B3F: push    edi
 0x7F4B40: mov     ecx, eax
-0x7F4B42: call    sub_71FB40
+0x7F4B42: call    NiTriShapeData_ConstructWithData; Construct NiTriShapeData around supplied geometry and triangle data; shared-normal storage starts empty.
 0x7F4B47: mov     ebx, eax
 0x7F4B49: jmp     short loc_7F4B4D
 0x7F4B4B: xor     ebx, ebx
@@ -168,24 +168,24 @@
 0x7F4B7A: push    1
 0x7F4B7C: mov     ecx, esi
 0x7F4B7E: mov     [esp+68h+var_4], ebp
-0x7F4B82: call    sub_7263B0
+0x7F4B82: call    OB_NiAdditionalGeometryData_SetDataBlockCount_010201A0
 0x7F4B87: lea     edx, ds:0[edi*4]
-0x7F4B8E: push    1; char
-0x7F4B90: push    edx; Src
+0x7F4B8E: push    1; copyData
+0x7F4B90: push    edx; byteCount
 0x7F4B91: call    sub_7F3790
-0x7F4B96: push    eax; char
-0x7F4B97: push    0; int
-0x7F4B99: mov     ecx, esi
-0x7F4B9B: call    sub_7260B0
-0x7F4BA0: push    4
-0x7F4BA2: push    4
-0x7F4BA4: push    edi
-0x7F4BA5: push    1
-0x7F4BA7: push    0
-0x7F4BA9: push    0
-0x7F4BAB: push    0
-0x7F4BAD: mov     ecx, esi
-0x7F4BAF: call    sub_7262A0
+0x7F4B96: push    eax; data
+0x7F4B97: push    0; blockIndex
+0x7F4B99: mov     ecx, esi; this
+0x7F4B9B: call    OB_NiAdditionalGeometryData_SetDataBlock_010201A0
+0x7F4BA0: push    4; stride
+0x7F4BA2: push    4; elementSize
+0x7F4BA4: push    edi; vertexCount
+0x7F4BA5: push    1; type
+0x7F4BA7: push    0; blockOffset
+0x7F4BA9: push    0; blockIndex
+0x7F4BAB: push    0; streamIndex
+0x7F4BAD: mov     ecx, esi; this
+0x7F4BAF: call    OB_NiAdditionalGeometryData_SetDataStream_010201A0
 0x7F4BB4: push    esi
 0x7F4BB5: mov     ecx, ebx
 0x7F4BB7: call    sub_6C61E0
@@ -196,9 +196,9 @@
 0x7F4BCD: test    eax, eax
 0x7F4BCF: mov     [esp+64h+var_4], 2
 0x7F4BD7: jz      short loc_7F4BE5
-0x7F4BD9: push    ebx; a2
+0x7F4BD9: push    ebx; data
 0x7F4BDA: mov     ecx, eax; this
-0x7F4BDC: call    NiTriShape_NiTriShape
+0x7F4BDC: call    OB_NiTriShape_ctorWithData_010201A0
 0x7F4BE1: mov     esi, eax
 0x7F4BE3: jmp     short loc_7F4BE7
 0x7F4BE5: xor     esi, esi
@@ -248,3 +248,25 @@
 0x7F4C6A: pop     ebx
 0x7F4C6B: add     esp, 50h
 0x7F4C6E: retn
+0x9D0000: mov     eax, [ebp-48h]
+0x9D0003: push    eax
+0x9D0004: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D0009: pop     ecx
+0x9D000A: retn
+0x9D000B: mov     eax, [ebp-44h]
+0x9D000E: push    eax
+0x9D000F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D0014: pop     ecx
+0x9D0015: retn
+0x9D0016: mov     eax, [ebp-44h]
+0x9D0019: push    eax
+0x9D001A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D001F: pop     ecx
+0x9D0020: retn
+0x9D0021: mov     edx, [esp+arg_4]
+0x9D0025: lea     eax, [edx-54h]
+0x9D0028: mov     ecx, [edx-58h]
+0x9D002B: xor     ecx, eax
+0x9D002D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D0032: mov     eax, offset stru_AF8AC8
+0x9D0037: jmp     ___CxxFrameHandler3

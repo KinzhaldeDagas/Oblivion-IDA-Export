@@ -1,17 +1,16 @@
-char __fastcall sub_65C220(int a1, float Src)
+// Verified: NULL entry returns false; nonnull entry writes actorValue byte at +0 and float at +4 as 5 bytes and returns true. ECX collection is unused. Corrects prior float-typed pointer argument. Called for each of 18 indexed entries by AVCollection_Save.
+bool __thiscall AVCollection_SaveEntryIfPresent(AVCollection *self, const AVCollectionEntry *entry)
 {
-  char v4; // cl
-  size_t v5; // [esp-4h] [ebp-8h] BYREF
+  unsigned __int8 actorValue; // cl
+  float source; // [esp+0h] [ebp-4h] BYREF
 
-  HIDWORD(v5) = a1;
-  if ( Src == 0.0 )
-    return 0;
-  v4 = *(_BYTE *)LODWORD(Src);
-  LODWORD(v5) = 1;
-  *((float *)&v5 + 1) = *(float *)(LODWORD(Src) + 4);
-  LOBYTE(Src) = v4;
-  SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, &Src, v5);
-  LODWORD(v5) = 4;
-  SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, (char *)&v5 + 4, v5);
-  return 1;
+  source = *(float *)&self; /*0x65c220*/
+  if ( !entry ) /*0x65c227*/
+    return 0; /*0x65c229*/
+  actorValue = entry->actorValue; /*0x65c22f*/
+  source = entry->value; /*0x65c236*/
+  LOBYTE(entry) = actorValue; /*0x65c23e*/
+  SaveLoad_SaveData(g_TESSaveLoadGame, &entry, 1u); /*0x65c249*/
+  SaveLoad_SaveData(g_TESSaveLoadGame, &source, 4u); /*0x65c25b*/
+  return 1; /*0x65c22c*/
 }

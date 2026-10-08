@@ -35,7 +35,7 @@
 0x4716B2: add     esp, 20h
 0x4716B5: retn
 0x4716B6: lea     esi, [ebp+30h]
-0x4716B9: push    offset Vector3_InitValue?
+0x4716B9: push    offset g_zeroNiPoint3
 0x4716BE: mov     ecx, esi
 0x4716C0: call    sub_471390
 0x4716C5: push    offset dword_B27110

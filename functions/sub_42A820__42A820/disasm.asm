@@ -1,4 +1,4 @@
-0x42A820: mov     eax, ecx
+0x42A820: mov     eax, ecx; Constructs Oblivion ExtraXTarget (type 0x4D) with a null target.
 0x42A822: xor     ecx, ecx
 0x42A824: mov     byte ptr [eax+4], 4Dh ; 'M'
 0x42A828: mov     [eax+8], ecx

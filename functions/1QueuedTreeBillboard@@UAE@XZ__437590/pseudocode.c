@@ -1,13 +1,14 @@
+// QueuedTreeBillboard destructor: frees copied billboard context arrays at +0x30 through 0x4B9CF0, then releases QueuedTexture base resources.
 void __thiscall QueuedTreeBillboard::~QueuedTreeBillboard(QueuedTreeBillboard *this)
 {
-  _DWORD *v2; // edi
+  unsigned int *v2; // edi
 
-  *(_DWORD *)this = &QueuedTreeBillboard::`vftable';
-  v2 = *((_DWORD **)this + 0xC);
-  if ( v2 )
+  *(_DWORD *)this = &QueuedTreeBillboard::`vftable';// Verified destructor ownership chain: frees both context arrays through DistantTreeBillboardContext_FreeArrays, frees the context, then runs QueuedTexture destructor to release resolved resource/path and queued base. /*0x4375b9*/
+  v2 = *((unsigned int **)this + 0xC); /*0x4375bf*/
+  if ( v2 ) /*0x4375cc*/
   {
-    sub_4B9CF0(v2);
-    FormHeapFree((unsigned int)v2);
+    DistantTreeBillboardContext_FreeArrays(v2); /*0x4375d0*/
+    FormHeapFree((unsigned int)v2); /*0x4375d6*/
   }
-  QueuedTexture::~QueuedTexture(this);
+  QueuedTexture_dtor(this); /*0x4375e8*/
 }

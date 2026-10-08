@@ -1,4 +1,4 @@
-0x6EC720: push    esi
+0x6EC720: push    esi; Loads one NiTextKey: reads float time at +0x00 and allocates/loads the string at +0x04.
 0x6EC721: push    edi
 0x6EC722: mov     edi, [esp+8+arg_0]
 0x6EC726: mov     eax, [edi+21Ch]

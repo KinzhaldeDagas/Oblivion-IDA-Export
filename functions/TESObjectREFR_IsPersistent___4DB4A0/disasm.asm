@@ -2,7 +2,7 @@
 0x4DB4A1: push    edi
 0x4DB4A2: push    0FFFFFFFFh; a2
 0x4DB4A4: mov     esi, ecx
-0x4DB4A6: call    TESForm_GetOverrideFile
+0x4DB4A6: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x4DB4AB: mov     edi, eax
 0x4DB4AD: test    edi, edi
 0x4DB4AF: jz      short loc_4DB507

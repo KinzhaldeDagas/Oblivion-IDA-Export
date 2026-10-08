@@ -1,4 +1,4 @@
-0xA19320: push    offset dword_B06DAC
+0xA19320: push    offset dword_B06DAC;
 0xA19325: mov     ecx, offset dword_B07CFC
 0xA1932A: call    BSSimpleList_Remove
 0xA1932F: mov     eax, off_B06DB0; "bAllow30Shaders:Display"
@@ -7,6 +7,6 @@
 0xA19338: cmp     byte ptr [eax], 53h ; 'S'
 0xA1933B: jnz     short locret_A19344
 0xA1933D: push    eax
-0xA1933E: call    FormHeapFree
+0xA1933E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0xA19343: pop     ecx
 0xA19344: retn

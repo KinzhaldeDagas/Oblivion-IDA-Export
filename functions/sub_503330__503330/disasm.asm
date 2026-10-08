@@ -17,7 +17,7 @@
 0x503358: push    edx; a2
 0x503359: push    eax; a1
 0x50335A: mov     dword ptr [esp+28h+var_4], 0
-0x503362: call    Script_ExtractArgs
+0x503362: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x503367: add     esp, 20h
 0x50336A: test    al, al
 0x50336C: jnz     short loc_503371
@@ -30,7 +30,7 @@
 0x50337A: push    0
 0x50337C: push    edx
 0x50337D: push    esi
-0x50337E: call    GetIsRace
+0x50337E: call    GetIsRace_Eval; GetIsRace_Eval (index 69 / opcode 0x1045): requires TESNPC BaseForm (type 0x23), then pointer-compares its actual race field at +0xE8 with the Race parameter (typeID 0x0F). Result is numeric 1 or 0.
 0x503383: add     esp, 10h
 0x503386: pop     esi
 0x503387: pop     ecx

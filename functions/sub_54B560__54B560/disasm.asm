@@ -5,8 +5,8 @@
 0x54B569: lea     esp, [esp+0]
 0x54B570: mov     eax, [esi+8]
 0x54B573: push    offset aBip01Nonaccum; "Bip01 NonAccum"
-0x54B578: push    eax; Str1
-0x54B579: call    __strcmp
+0x54B578: push    eax; left
+0x54B579: call    CRT_StricmpLocaleDispatch
 0x54B57E: add     esp, 8
 0x54B581: test    eax, eax
 0x54B583: jz      short loc_54B58C

@@ -26,7 +26,7 @@
 0x89EB2C: jnz     loc_89EC9D
 0x89EB32: mov     esi, [ebx+8]
 0x89EB35: mov     ecx, edi
-0x89EB37: call    sub_452A60
+0x89EB37: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x89EB3C: test    esi, esi
 0x89EB3E: jz      loc_89EC9D
 0x89EB44: test    eax, eax
@@ -59,8 +59,8 @@
 0x89EBA1: fstp    [esp+90h+var_28]
 0x89EBA5: fld     [esp+90h+var_78]
 0x89EBA9: fstp    [esp+90h+var_24]
-0x89EBAD: call    sub_4D6830
-0x89EBB2: mov     ecx, offset stru_BA7B00; lpCriticalSection
+0x89EBAD: call    hkQuaternion_Normalize; Normalizes a quaternion/vector with reciprocal sqrt refinement. Used before converting movement input orientation to basis vectors.
+0x89EBB2: mov     ecx, offset unk_BA7B00; lpCriticalSection
 0x89EBB7: call    sub_43F2E0
 0x89EBBC: mov     edx, [ebx]
 0x89EBBE: mov     edx, [edx+0A0h]
@@ -123,8 +123,8 @@
 0x89EC62: fstp    [esp+90h+var_28]
 0x89EC66: fld     [esp+90h+var_78]
 0x89EC6A: fstp    [esp+90h+var_24]
-0x89EC6E: call    sub_4D6830
-0x89EC73: mov     ecx, offset stru_BA7B00; lpCriticalSection
+0x89EC6E: call    hkQuaternion_Normalize; Normalizes a quaternion/vector with reciprocal sqrt refinement. Used before converting movement input orientation to basis vectors.
+0x89EC73: mov     ecx, offset unk_BA7B00; lpCriticalSection
 0x89EC78: call    sub_43F2E0
 0x89EC7D: mov     eax, [ebx]
 0x89EC7F: mov     eax, [eax+0A0h]
@@ -134,7 +134,7 @@
 0x89EC8E: push    edx
 0x89EC8F: mov     ecx, ebx
 0x89EC91: call    eax
-0x89EC93: mov     ecx, offset stru_BA7B00; lpCriticalSection
+0x89EC93: mov     ecx, offset unk_BA7B00; lpCriticalSection
 0x89EC98: call    sub_43F300
 0x89EC9D: mov     ecx, [esp+90h+var_4]
 0x89ECA4: pop     edi

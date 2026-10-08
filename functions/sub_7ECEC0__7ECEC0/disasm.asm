@@ -1,4 +1,4 @@
-0x7ECEC0: sub     esp, 44h
+0x7ECEC0: sub     esp, 44h; Reorder existing property-side ShadowSceneLight nodes after the receiver bound changes.
 0x7ECEC3: push    edi
 0x7ECEC4: mov     edi, [ecx+70h]
 0x7ECEC7: test    edi, edi
@@ -9,19 +9,18 @@
 0x7ECED9: push    ebp
 0x7ECEDA: push    esi
 0x7ECEDB: jmp     short loc_7ECEE8
-0x7ECEDD: align 10h
 0x7ECEE0: mov     edi, [esp+54h+var_3C]
 0x7ECEE4: mov     ecx, [esp+54h+var_40]
 0x7ECEE8: mov     ebp, [edi+8]
 0x7ECEEB: mov     edx, [edi]
-0x7ECEED: mov     esi, [ecx+70h]
+0x7ECEED: mov     esi, [ecx+70h]; MEF PERF 2026-10-07 PASS3: PERF-14 repeated-prefix origin: ESI reloads property+70 list head for every outer EDI node. Inner loop stops on ESI==EDI or first strictly greater predecessor. Already ordered/equal finite keys traverse the entire prefix; there is no ordered-prefix fast path.
 0x7ECEF0: lea     eax, [edi+8]
 0x7ECEF3: lea     eax, [esp+54h+var_38]
 0x7ECEF7: push    eax
 0x7ECEF8: mov     ecx, ebp
 0x7ECEFA: mov     [esp+58h+var_3C], edx
-0x7ECEFE: call    sub_405AD0
-0x7ECF03: mov     ecx, [eax]
+0x7ECEFE: call    ShadowSceneLight_GetLightRef
+0x7ECF03: mov     ecx, [eax]; MEF PERF 2026-10-07 PASS3: PERF-14 optimization gate: each score separately gets/releases source once for denominator and again for position. Caching prefix scores assumes source fields and bound remain stable over invocation. No complete writer/thread exclusion proof in this pass; refcount removal and source snapshots are not automatically safe.
 0x7ECF05: mov     eax, [esp+54h+var_38]
 0x7ECF09: fld     dword ptr [ecx+0F8h]
 0x7ECF0F: test    eax, eax
@@ -43,9 +42,9 @@
 0x7ECF35: lea     ecx, [esp+54h+var_2C]
 0x7ECF39: push    ecx
 0x7ECF3A: mov     ecx, ebp
-0x7ECF3C: call    sub_405AD0
+0x7ECF3C: call    ShadowSceneLight_GetLightRef
 0x7ECF41: mov     eax, [eax]
-0x7ECF43: mov     ebx, [esp+54h+arg_0]
+0x7ECF43: mov     ebx, [esp+54h+bound]
 0x7ECF47: fld     dword ptr [eax+88h]
 0x7ECF4D: fsub    dword ptr [ebx]
 0x7ECF4F: add     eax, 88h ; 'ˆ'
@@ -69,7 +68,7 @@
 0x7ECF86: faddp   st(1), st
 0x7ECF88: fstp    [esp+54h+var_34]
 0x7ECF8C: fld     [esp+54h+var_34]
-0x7ECF90: call    __CIsqrt
+0x7ECF90: call    __CIsqrt; MEF PERF 2026-10-07 PASS3: PERF-14 score arithmetic: outer score reads source+F8 as normalization denominator and source world position+88/+8C/+90, computes distance to bound center, subtracts bound radius+0C then divides. Preserve x87 operation order and float stores at7ECF88,7ECF95,7ECFAA; do not replace with squared distance, SSE/fast-math or unrounded double keys without equivalence proof.
 0x7ECF95: fstp    [esp+54h+var_34]
 0x7ECF99: fld     [esp+54h+var_34]
 0x7ECF9D: mov     eax, [esp+54h+var_2C]
@@ -77,24 +76,24 @@
 0x7ECFA3: fsub    dword ptr [ebx+0Ch]
 0x7ECFA6: fdiv    [esp+54h+var_30]
 0x7ECFAA: fstp    [esp+54h+var_20]
-0x7ECFAE: jz      short loc_7ECFCF
+0x7ECFAE: jz      short loc_7ECFCF; MEF v57 IMPLEMENTED 2026-10-08: PERF-14 post-score bridge reads original rounded float at native ESP+34 and current nodeEDI; supports positive-owned stable native sources. Fast branch7ED134 skips only predecessor scan; native branch replays CMP/JZ then7ECFD7. Mutation/pressure observers drive one-way fallback. Exact native-x87 fixture passed.
 0x7ECFB0: mov     ebp, eax
 0x7ECFB2: add     eax, 4
 0x7ECFB5: push    eax; lpAddend
 0x7ECFB6: call    dword ptr ds:0A2807Ch
 0x7ECFBC: test    eax, eax
-0x7ECFBE: jnz     short loc_7ECFCF
+0x7ECFBE: jnz     short loc_7ECFCF; MEF v57 IMPLEMENTED 2026-10-08: PERF-14 post-score bridge reads original rounded float at native ESP+34 and current nodeEDI; supports positive-owned stable native sources. Fast branch7ED134 skips only predecessor scan; native branch replays CMP/JZ then7ECFD7. Mutation/pressure observers drive one-way fallback. Exact native-x87 fixture passed.
 0x7ECFC0: test    ebp, ebp
-0x7ECFC2: jz      short loc_7ECFCF
+0x7ECFC2: jz      short loc_7ECFCF; MEF v57 IMPLEMENTED 2026-10-08: PERF-14 post-score bridge reads original rounded float at native ESP+34 and current nodeEDI; supports positive-owned stable native sources. Fast branch7ED134 skips only predecessor scan; native branch replays CMP/JZ then7ECFD7. Mutation/pressure observers drive one-way fallback. Exact native-x87 fixture passed.
 0x7ECFC4: mov     edx, [ebp+0]
 0x7ECFC7: mov     eax, [edx]
 0x7ECFC9: push    1
 0x7ECFCB: mov     ecx, ebp
 0x7ECFCD: call    eax
-0x7ECFCF: cmp     esi, edi
-0x7ECFD1: jz      loc_7ED134
+0x7ECFCF: cmp     esi, edi; MEF v57 IMPLEMENTED 2026-10-08: PERF-14 post-score bridge reads original rounded float at native ESP+34 and current nodeEDI; supports positive-owned stable native sources. Fast branch7ED134 skips only predecessor scan; native branch replays CMP/JZ then7ECFD7. Mutation/pressure observers drive one-way fallback. Exact native-x87 fixture passed.
+0x7ECFD1: jz      loc_7ED134; MEF PERF 2026-10-07 PASS3: PERF-14 progression: outer loop resumes saved ORIGINAL successor from7ECEFA after any splice; preserve traversal and callback/destructor timing in native fallback. Do not restart entire sort after partial mutations or recompute changed prefix with a different comparator policy.
 0x7ECFD7: test    esi, esi
-0x7ECFD9: jz      loc_7ED134
+0x7ECFD9: jz      loc_7ED134; MEF PERF 2026-10-07 PASS3: PERF-14 progression: outer loop resumes saved ORIGINAL successor from7ECEFA after any splice; preserve traversal and callback/destructor timing in native fallback. Do not restart entire sort after partial mutations or recompute changed prefix with a different comparator policy.
 0x7ECFDF: mov     ebp, [esi+8]
 0x7ECFE2: lea     eax, [esi+8]
 0x7ECFE5: lea     ecx, [esp+54h+var_28]
@@ -102,7 +101,7 @@
 0x7ECFEA: mov     [esp+58h+var_1C], esi
 0x7ECFEE: mov     esi, [esi]
 0x7ECFF0: mov     ecx, ebp
-0x7ECFF2: call    sub_405AD0
+0x7ECFF2: call    ShadowSceneLight_GetLightRef
 0x7ECFF7: mov     edx, [eax]
 0x7ECFF9: mov     eax, [esp+54h+var_28]
 0x7ECFFD: fld     dword ptr [edx+0F8h]
@@ -122,11 +121,11 @@
 0x7ED023: push    1
 0x7ED025: mov     ecx, ebx
 0x7ED027: call    edx
-0x7ED029: mov     ebx, [esp+54h+arg_0]
+0x7ED029: mov     ebx, [esp+54h+bound]
 0x7ED02D: lea     eax, [esp+54h+var_24]
 0x7ED031: push    eax
 0x7ED032: mov     ecx, ebp
-0x7ED034: call    sub_405AD0
+0x7ED034: call    ShadowSceneLight_GetLightRef
 0x7ED039: mov     eax, [eax]
 0x7ED03B: fld     dword ptr [eax+88h]
 0x7ED041: add     eax, 88h ; 'ˆ'
@@ -151,7 +150,7 @@
 0x7ED07A: faddp   st(1), st
 0x7ED07C: fstp    [esp+54h+var_30]
 0x7ED080: fld     [esp+54h+var_30]
-0x7ED084: call    __CIsqrt
+0x7ED084: call    __CIsqrt; MEF PERF 2026-10-07 PASS3: PERF-14 avoidable recomputation: same sqrt/normalize sequence repeats for each predecessor in the prefix (after two new source smart-reference acquisitions). For finite stable sorted N-node list, total sqrt calls including outer nodes=N*(N+1)/2; four temporary atomic calls per score. Source null/nonfinite/mutation cases are outside this cost model.
 0x7ED089: fstp    [esp+54h+var_30]
 0x7ED08D: fld     [esp+54h+var_30]
 0x7ED091: mov     eax, [esp+54h+var_24]
@@ -175,14 +174,14 @@
 0x7ED0C1: call    eax
 0x7ED0C3: fld     [esp+54h+var_20]
 0x7ED0C7: fld     [esp+54h+var_30]
-0x7ED0CB: fcompp
+0x7ED0CB: fcompp; MEF PERF 2026-10-07 PASS3: PERF-14 comparator: FCOMPP/FNSTSW then TEST AH,41h; predecessor greater takes splice, equal/less/unordered takes no-splice continuation7ED12C. Finite ties preserve order. NaNs cannot be passed blindly to a generic strict-weak-order sort; retain stock fallback.
 0x7ED0CD: fnstsw  ax
 0x7ED0CF: test    ah, 41h
 0x7ED0D2: jnz     short loc_7ED12C
 0x7ED0D4: mov     ecx, [esp+54h+var_1C]
 0x7ED0D8: cmp     edi, ecx
 0x7ED0DA: jz      short loc_7ED125
-0x7ED0DC: mov     eax, [esp+54h+var_40]
+0x7ED0DC: mov     eax, [esp+54h+var_40]; MEF PERF 2026-10-07 PASS3: PERF-14 genuine reorder (unlike earlier PERF-6 splice caveat): EDI is CURRENT node; ECX is compared predecessor. Code unlinks EDI and inserts EDI before ECX, updating property head+70/tail+74 as needed. Count/node identities/ref ownership unchanged. Do not import the order-neutral conclusion from7C71B0.
 0x7ED0E0: cmp     [eax+70h], edi
 0x7ED0E3: jnz     short loc_7ED0EA
 0x7ED0E5: mov     edx, [edi]
@@ -215,7 +214,7 @@
 0x7ED127: mov     [esp+54h+var_41], 1
 0x7ED12C: cmp     esi, edi
 0x7ED12E: jnz     loc_7ECFD7
-0x7ED134: cmp     [esp+54h+var_3C], 0
+0x7ED134: cmp     [esp+54h+var_3C], 0; MEF PERF 2026-10-07 PASS3: PERF-14 progression: outer loop resumes saved ORIGINAL successor from7ECEFA after any splice; preserve traversal and callback/destructor timing in native fallback. Do not restart entire sort after partial mutations or recompute changed prefix with a different comparator policy.
 0x7ED139: jnz     loc_7ECEE0
 0x7ED13F: cmp     [esp+54h+var_41], 0
 0x7ED144: pop     esi
@@ -223,7 +222,7 @@
 0x7ED146: pop     ebx
 0x7ED147: jz      short loc_7ED154
 0x7ED149: mov     ecx, [esp+48h+var_40]
-0x7ED14D: mov     dword ptr [ecx+24h], 0
+0x7ED14D: mov     dword ptr [ecx+24h], 0; MEF PERF 2026-10-07 PASS3: PERF-14 invalidation contract: property+24 set to0 only if reorder's moved flag was set. Already-ordered path leaves it unchanged. An ordered fast path must retain this difference; unconditional invalidation is not equivalent.
 0x7ED154: pop     edi
 0x7ED155: add     esp, 44h
 0x7ED158: retn    4

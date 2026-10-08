@@ -1,1 +1,1 @@
-IShellBrowser_0
+typedef IShellBrowser IShellBrowser_0;

@@ -1,1 +1,1 @@
-IDirectSound3DListenerVtbl_0
+typedef IDirectSound3DListenerVtbl IDirectSound3DListenerVtbl_0;

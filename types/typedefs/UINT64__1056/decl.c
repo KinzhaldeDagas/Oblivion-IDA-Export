@@ -1,1 +1,1 @@
-UINT64
+typedef unsigned __int64 UINT64;

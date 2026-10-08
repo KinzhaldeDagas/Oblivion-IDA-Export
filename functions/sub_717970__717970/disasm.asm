@@ -24,12 +24,12 @@
 0x7179BB: mov     dword ptr [esi], offset ??_7NiLines@@6B@; const NiLines::`vftable'
 0x7179C1: jmp     short loc_7179C5
 0x7179C3: xor     esi, esi
-0x7179C5: mov     eax, [esp+1Ch+arg_0]
-0x7179C9: push    eax
-0x7179CA: push    esi
-0x7179CB: mov     ecx, edi
+0x7179C5: mov     eax, [esp+1Ch+cloningProcess]
+0x7179C9: push    eax; cloningProcess
+0x7179CA: push    esi; dest
+0x7179CB: mov     ecx, edi; this
 0x7179CD: mov     [esp+24h+var_4], 0FFFFFFFFh
-0x7179D5: call    sub_723020
+0x7179D5: call    NiGeometry_CopyMembersForClone; Copies NiGeometry-specific members into a clone, including geometry data, then delegates the NiAVObject/base-member copy.
 0x7179DA: mov     eax, esi
 0x7179DC: mov     ecx, [esp+1Ch+var_C]
 0x7179E0: mov     large fs:0, ecx
@@ -38,3 +38,15 @@
 0x7179E9: pop     esi
 0x7179EA: add     esp, 10h
 0x7179ED: retn    4
+0x9CA7E0: mov     eax, [ebp-10h]
+0x9CA7E3: push    eax
+0x9CA7E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA7E9: pop     ecx
+0x9CA7EA: retn
+0x9CA7EB: mov     edx, [esp+arg_4]
+0x9CA7EF: lea     eax, [edx-0Ch]
+0x9CA7F2: mov     ecx, [edx-10h]
+0x9CA7F5: xor     ecx, eax
+0x9CA7F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA7FC: mov     eax, offset stru_AF2E8C
+0x9CA801: jmp     ___CxxFrameHandler3

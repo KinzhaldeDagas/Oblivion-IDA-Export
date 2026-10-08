@@ -21,7 +21,7 @@
 0x720B90: mov     ebx, [esp+168h+arg_4]
 0x720B97: mov     ebp, [esp+168h+arg_8]
 0x720B9E: mov     esi, [esp+168h+arg_18]
-0x720BA5: push    offset sub_7016A0; a5
+0x720BA5: push    offset NiPointerSlot_Release; a5
 0x720BAA: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x720BAF: push    6; size
 0x720BB1: mov     [esp+174h+var_154], eax
@@ -64,7 +64,7 @@
 0x720C39: push    ebx; Dst
 0x720C3A: call    _strcpy_s
 0x720C3F: push    ebx
-0x720C40: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x720C40: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x720C45: push    ebx; Src
 0x720C46: call    sub_71B090
 0x720C4B: add     esp, 18h
@@ -138,9 +138,9 @@
 0x720CFC: call    dword ptr ds:0A28078h
 0x720D02: mov     ecx, [esp+168h+var_150]
 0x720D06: push    ecx
-0x720D07: call    FormHeapFree
+0x720D07: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x720D0C: push    ebx
-0x720D0D: call    FormHeapFree
+0x720D0D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x720D12: add     esp, 8
 0x720D15: mov     eax, [esp+168h+var_154]
 0x720D19: cmp     [esp+eax+168h+a1], 0
@@ -163,7 +163,7 @@
 0x720D4D: mov     ecx, [esp+17Ch+var_148]
 0x720D51: push    edx
 0x720D52: call    sub_7205A0
-0x720D57: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x720D57: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x720D5C: push    6; int
 0x720D5E: push    4; unsigned int
 0x720D60: lea     eax, [esp+174h+a1]
@@ -182,9 +182,27 @@
 0x720D91: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x720D96: add     esp, 154h
 0x720D9C: retn    1Ch
-0x720D9F: push    offset sub_7016A0
+0x720D9F: push    offset NiPointerSlot_Release
 0x720DA4: push    6
 0x720DA6: push    4
 0x720DA8: lea     edx, [esp+174h+a1]
 0x720DAC: push    edx
 0x720DAD: jmp     short loc_720D65
+0x9CA290: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9CA295: push    6; int
+0x9CA297: push    4; unsigned int
+0x9CA299: lea     eax, [ebp-144h]
+0x9CA29F: push    eax; void *
+0x9CA2A0: call    $LN21
+0x9CA2A5: retn
+0x9CA2A6: mov     edx, [esp+arg_4]
+0x9CA2AA: lea     eax, [edx-158h]
+0x9CA2B0: mov     ecx, [edx-15Ch]
+0x9CA2B6: xor     ecx, eax
+0x9CA2B8: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA2BD: add     eax, 10h
+0x9CA2C0: mov     ecx, [edx-4]
+0x9CA2C3: xor     ecx, eax
+0x9CA2C5: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA2CA: mov     eax, offset stru_AF2A00
+0x9CA2CF: jmp     ___CxxFrameHandler3

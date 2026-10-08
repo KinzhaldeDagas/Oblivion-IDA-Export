@@ -11,7 +11,7 @@
 0x8A46D5: test    eax, eax
 0x8A46D7: jz      short loc_8A46EE
 0x8A46D9: lea     esp, [esp+0]
-0x8A46E0: cmp     eax, offset stru_BA7D50
+0x8A46E0: cmp     eax, 0BA7D50h
 0x8A46E5: jz      short loc_8A4713
 0x8A46E7: mov     eax, [eax+4]
 0x8A46EA: test    eax, eax
@@ -23,8 +23,7 @@
 0x8A46F7: test    eax, eax
 0x8A46F9: jz      short loc_8A472E
 0x8A46FB: jmp     short loc_8A4700
-0x8A46FD: align 10h
-0x8A4700: cmp     eax, offset dword_BA7D04
+0x8A4700: cmp     eax, offset stru_BA7D04
 0x8A4705: jz      short loc_8A4713
 0x8A4707: mov     eax, [eax+4]
 0x8A470A: test    eax, eax

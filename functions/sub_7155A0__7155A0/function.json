@@ -1,19 +1,32 @@
 {
-  "callees_count": 27,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7155A0",
+  "chunks": [
+    [
+      "0x7155A0",
+      "0x715817"
+    ]
+  ],
+  "chunks_sha256": "6474d5706a9c161c87f64625494d0c0b8f7c541496feb5c219044391b9b78630",
+  "comment_regular": "Compute controller time from application-time delta, frequency, phase, cycle mode, and backwards flag. Updates scaledTimeAccumulator +0x24 and last application time +0x20; returns the clamped/looped/reversed time later cached at +0x28 by NiTimeController_IsUpdateUnchanged.",
+  "comment_repeatable": "Compute controller time from application-time delta, frequency, phase, cycle mode, and backwards flag. Updates scaledTimeAccumulator +0x24 and last application time +0x20; returns the clamped/looped/reversed time later cached at +0x28 by NiTimeController_IsUpdateUnchanged.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "NiTimeController_ComputeScaledTime",
   "end_ea": "0x715817",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7155A0",
+  "name": "NiTimeController_ComputeScaledTime",
   "segment": ".text",
   "sha256": "6474d5706a9c161c87f64625494d0c0b8f7c541496feb5c219044391b9b78630",
   "size": 631,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7155A0",
-  "type": "double __thiscall(int this, float)",
+  "total_chunk_size": 631,
+  "type": "float __thiscall(NiTimeController *this, float applicationTime)",
   "xrefs_from_count": 225,
   "xrefs_to_count": 59
 }

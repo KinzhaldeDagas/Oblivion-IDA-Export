@@ -36,15 +36,15 @@
 0x532921: mov     ecx, [esi+8]
 0x532924: test    ecx, ecx
 0x532926: jz      short loc_53292F
-0x532928: call    sub_8AC070
+0x532928: call    bhkCollisionWrapper_GetPositionPtr; Returns low-level Havok object position pointer: *(wrapper+0x30 + 0x1C) + 0x30.
 0x53292D: jmp     short loc_532934
-0x53292F: mov     eax, offset stru_BA7A40
+0x53292F: mov     eax, offset unk_BA7A40
 0x532934: movaps  xmm0, xmmword ptr [eax]
 0x532937: mov     ecx, ds:0B333C4h; this
 0x53293D: movaps  [esp+224h+var_1D0], xmm0
-0x532942: call    MobileObject_GetCharProxy
+0x532942: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x532947: cmp     esi, eax
-0x532949: jnz     short loc_532997
+0x532949: jnz     short loc_532997; TES4 authoritative camera collision: chooses the first camera phantom when testing the player's own proxy; otherwise uses the second phantom.
 0x53294B: movaps  xmm0, [esp+224h+var_1E0]
 0x532950: mov     ebx, [edi]
 0x532952: shufps  xmm0, xmm0, 0AAh ; 'ª'
@@ -91,7 +91,7 @@
 0x5329EE: mov     ecx, [esi+8]
 0x5329F1: cmp     ecx, edi
 0x5329F3: jz      short loc_5329FC
-0x5329F5: call    sub_8AC0C0
+0x5329F5: call    bhkCollisionWrapper_GetHavokObject; bhk collision wrapper accessor: returns stored low-level Havok object pointer at wrapper+0x30.
 0x5329FA: jmp     short loc_5329FE
 0x5329FC: xor     eax, eax
 0x5329FE: add     eax, 14h
@@ -101,7 +101,7 @@
 0x532A09: mov     ecx, [esi+8]
 0x532A0C: cmp     ecx, edi
 0x532A0E: jz      short loc_532A17
-0x532A10: call    sub_8AC0C0
+0x532A10: call    bhkCollisionWrapper_GetHavokObject; bhk collision wrapper accessor: returns stored low-level Havok object pointer at wrapper+0x30.
 0x532A15: jmp     short loc_532A19
 0x532A17: xor     eax, eax
 0x532A19: mov     eax, [eax+8]
@@ -153,16 +153,16 @@
 0x532A96: test    esi, esi
 0x532A98: jz      short loc_532ABA
 0x532A9A: mov     ecx, ebx
-0x532A9C: call    sub_89F570
+0x532A9C: call    bhkRefObject_UpdateHavokObject
 0x532AA1: fldz
 0x532AA3: push    ecx
 0x532AA4: fstp    [esp+228h+var_228]; float
 0x532AA7: lea     ecx, [esp+228h+var_1E0]
 0x532AAB: push    ecx; int
 0x532AAC: mov     ecx, esi
-0x532AAE: call    sub_8ABAC0
+0x532AAE: call    sub_8ABAC0; TES4 authoritative camera collision overlap: temporarily moves the chosen camera sphere phantom to the candidate Havok position before testing against the actor proxy shape.
 0x532AB3: mov     ecx, ebx
-0x532AB5: call    sub_89F570
+0x532AB5: call    bhkRefObject_UpdateHavokObject
 0x532ABA: mov     eax, [ebx+8]
 0x532ABD: test    eax, eax
 0x532ABF: jz      short loc_532ACE
@@ -199,12 +199,12 @@
 0x532B1F: mov     ecx, [esp+228h+var_208]
 0x532B23: fld     [ebp+camera_size]
 0x532B26: lea     edx, [esp+228h+var_200]
-0x532B2A: fstp    dword ptr [esi+0Ch]
+0x532B2A: fstp    dword ptr [esi+0Ch]; TES4 authoritative camera collision overlap: temporarily overwrites the camera sphere shape radius/extent field with camera_size before dispatching the collision agent, then restores it at 0x532B42.
 0x532B2D: push    edx
 0x532B2E: mov     edx, [esp+22Ch+var_204]
 0x532B32: push    ecx
 0x532B33: push    edx
-0x532B34: call    eax
+0x532B34: call    eax; TES4 authoritative: calls a Havok collision-agent function pointer for camera sphere phantom vs actor proxy shape and stores contacts in hkAllCdPointCollector. This is an overlap/intersection test, not the 0x5326B0 segment cast.
 0x532B36: fld     [esp+234h+var_20C]
 0x532B3A: add     esp, 10h
 0x532B3D: cmp     [esp+224h+var_1AC], 0
@@ -228,3 +228,16 @@
 0x532B87: mov     esp, ebp
 0x532B89: pop     ebp
 0x532B8A: retn    10h
+0x9B8E40: lea     ecx, [ebp+var_1C0]; this
+0x9B8E46: jmp     ??1hkAllCdPointCollector@@UAE@XZ; hkAllCdPointCollector::~hkAllCdPointCollector(void)
+0x9B8E4B: mov     edx, [esp-4+arg_4]
+0x9B8E4F: lea     eax, [edx-214h]
+0x9B8E55: mov     ecx, [edx-218h]
+0x9B8E5B: xor     ecx, eax
+0x9B8E5D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B8E62: add     eax, 0Ch
+0x9B8E65: mov     ecx, [edx-8]
+0x9B8E68: xor     ecx, eax
+0x9B8E6A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B8E6F: mov     eax, offset stru_AE3268
+0x9B8E74: jmp     ___CxxFrameHandler3

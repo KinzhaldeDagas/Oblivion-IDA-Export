@@ -7,7 +7,7 @@
 0x42A890: mov     eax, [esi+10h]
 0x42A893: mov     edi, [eax+4]
 0x42A896: push    eax
-0x42A897: call    FormHeapFree
+0x42A897: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x42A89C: add     esp, 4
 0x42A89F: test    edi, edi
 0x42A8A1: mov     [esi+10h], edi

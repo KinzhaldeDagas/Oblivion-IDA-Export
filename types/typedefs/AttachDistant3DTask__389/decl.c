@@ -1,1 +1,1 @@
-AttachDistant3DTask
+struct AttachDistant3DTask;

@@ -2,7 +2,7 @@
 0x9ED876: push    ecx
 0x9ED877: fstp    [esp+4+var_4]; float
 0x9ED87A: push    offset aFclothingarmor; "fClothingArmorScale"
-0x9ED87F: mov     ecx, offset flt_B37BB0
+0x9ED87F: mov     ecx, 0B37BB0h
 0x9ED884: call    GameSetting_ConstrAndReg_float
 0x9ED889: push    offset sub_A1FE80; void (__cdecl *)()
 0x9ED88E: call    _atexit

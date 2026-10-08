@@ -1,1 +1,6 @@
-pow_log::$A733AD27B46277FBF95BEC658FBAD784
+struct pow_log::$A733AD27B46277FBF95BEC658FBAD784
+{
+double invc;
+double logc;
+double logctail;
+};

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x46DCA0",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+arg_0]; MEF v57 IMPLEMENTED 2026-10-08: Verified read-only component comparison: dynamic-casts to TESModelList, compares path-node sequences with native98262D and returns true for difference/type mismatch, false when equal. No model-list mutation. Named DiffersFromComponent to preserve boolean sense.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -175,19 +175,19 @@
   },
   {
     "ea": "0x46DCE5",
-    "line": "push    ecx; Str2",
+    "line": "push    ecx; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46DCE6",
-    "line": "push    eax; Str1",
+    "line": "push    eax; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46DCE7",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },

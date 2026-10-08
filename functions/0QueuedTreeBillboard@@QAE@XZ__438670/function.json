@@ -1,19 +1,36 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 6,
+  "chunks": [
+    [
+      "0x438670",
+      "0x438723"
+    ],
+    [
+      "0x9AC6A0",
+      "0x9AC6CE"
+    ]
+  ],
+  "chunks_sha256": "bcb2a780fabebef07f6d8aa03a2ec9f3a0188bfb314f6e25f22597482d4ae568",
+  "comment_regular": "Verified Oblivion RTTI-backed QueuedTreeBillboard construction; Fallout has the same class RTTI and ModelLoader::QueueTreeBillboard. Layout divergence is directly established: Oblivion task allocation 0x38 with context at +0x30 and queued-texture task kind 4; Fallout allocation 0x40 with TREE_BILLBOARD_DATA pointer at +0x38 and IO_TASK_PRIORITY_LOW.",
+  "comment_repeatable": "Verified Oblivion RTTI-backed QueuedTreeBillboard construction; Fallout has the same class RTTI and ModelLoader::QueueTreeBillboard. Layout divergence is directly established: Oblivion task allocation 0x38 with context at +0x30 and queued-texture task kind 4; Fallout allocation 0x40 with TREE_BILLBOARD_DATA pointer at +0x38 and IO_TASK_PRIORITY_LOW.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 7,
   "display_name": "QueuedTreeBillboard::QueuedTreeBillboard(void)",
   "end_ea": "0x438723",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??0QueuedTreeBillboard@@QAE@XZ",
   "segment": ".text",
   "sha256": "34d1366e1928c702c8b8f23f8320ba460bebb402bbed0de852ab6c9692664123",
   "size": 179,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x438670",
+  "total_chunk_size": 225,
   "type": "QueuedTreeBillboard *__stdcall(const char *, void *)",
-  "xrefs_from_count": 68,
+  "xrefs_from_count": 84,
   "xrefs_to_count": 1
 }

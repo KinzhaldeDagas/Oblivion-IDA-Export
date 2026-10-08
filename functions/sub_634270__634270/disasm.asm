@@ -83,9 +83,9 @@
 0x634366: mov     esi, [esp+1Ch+var_8]
 0x63436A: jnz     short loc_6342F7
 0x63436C: mov     ecx, esi
-0x63436E: call    BSSimpleList_Clear
+0x63436E: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x634373: push    esi
-0x634374: call    FormHeapFree
+0x634374: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x634379: mov     ebp, [esp+20h+var_C]
 0x63437D: add     esp, 4
 0x634380: mov     eax, [ebp+4]

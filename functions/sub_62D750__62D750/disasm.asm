@@ -1,4 +1,4 @@
-0x62D750: push    ebx
+0x62D750: push    ebx; BunkFix: hooked HighProcess Sleep action. After vanilla returns, plugin may assist only for Sleep packages when actor remains not sleeping, target is multi-marker sleep furniture, and engine free-marker/marker-transform helpers validate.
 0x62D751: push    esi
 0x62D752: mov     esi, ecx
 0x62D754: mov     eax, [esi]
@@ -21,8 +21,8 @@
 0x62D78A: push    eax
 0x62D78B: mov     ecx, ebx
 0x62D78D: call    Actor_UnequipItem
-0x62D792: mov     ecx, ebx
-0x62D794: call    sub_5E32D0
+0x62D792: mov     ecx, ebx; this
+0x62D794: call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.
 0x62D799: test    al, al
 0x62D79B: jz      short loc_62D7CE
 0x62D79D: mov     edx, [esi]
@@ -40,15 +40,15 @@
 0x62D7C5: push    eax; float
 0x62D7C6: push    ebx; int
 0x62D7C7: mov     ecx, esi
-0x62D7C9: call    sub_6553E0
+0x62D7C9: call    sub_6553E0; BunkFix: sleep/eat furniture-reference scanner used by sub_62D750 and sub_62DA10. Scans around package location/actor and populates process candidate list at +0xB0/+0x2C family using sub_6505D0 predicate.
 0x62D7CE: mov     edx, [esi]
 0x62D7D0: mov     eax, [edx+36Ch]
 0x62D7D6: mov     ecx, esi
 0x62D7D8: call    eax
 0x62D7DA: cmp     eax, 9
 0x62D7DD: jz      loc_62D8C4
-0x62D7E3: mov     ecx, ebx
-0x62D7E5: call    sub_5E32D0
+0x62D7E3: mov     ecx, ebx; this
+0x62D7E5: call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.
 0x62D7EA: test    al, al
 0x62D7EC: jz      loc_62D8C4
 0x62D7F2: cmp     dword ptr [esi+120h], 0
@@ -81,10 +81,10 @@
 0x62D849: test    ecx, ecx
 0x62D84B: mov     [esi+120h], ecx
 0x62D851: jnz     short loc_62D830
-0x62D853: mov     ecx, [esi+120h]; this
+0x62D853: mov     ecx, [esi+120h]; reference
 0x62D859: test    ecx, ecx
 0x62D85B: jz      short loc_62D898
-0x62D85D: call    TESObjectREFR_GetOwner
+0x62D85D: call    TESObjectREFR_GetOwner; RadiantAI: selected-target owner check. If target has no owner, code randomizes among candidate list; if owned, current selected target is preserved. This does not prove theft permission or crime consequences.
 0x62D862: test    eax, eax
 0x62D864: jnz     short loc_62D898
 0x62D866: push    ebp
@@ -92,7 +92,7 @@
 0x62D869: call    BSSimpleList_Count
 0x62D86E: push    0; Seed
 0x62D870: mov     ebp, eax
-0x62D872: call    GetRandomLargeInteger?
+0x62D872: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x62D877: cdq
 0x62D878: idiv    ebp
 0x62D87A: add     esp, 4
@@ -135,7 +135,7 @@
 0x62D8E3: mov     ecx, esi
 0x62D8E5: call    eax
 0x62D8E7: lea     ecx, [esi+0B0h]
-0x62D8ED: call    BSSimpleList_Clear
+0x62D8ED: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x62D8F2: mov     ecx, esi
 0x62D8F4: call    sub_64ADA0
 0x62D8F9: test    al, al
@@ -175,8 +175,8 @@
 0x62D970: jnz     short loc_62D8F2
 0x62D972: cmp     dword ptr [esi+0B0h], 0
 0x62D979: jnz     loc_62D8F2
-0x62D97F: mov     ecx, ebx
-0x62D981: call    sub_5E32D0
+0x62D97F: mov     ecx, ebx; this
+0x62D981: call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.
 0x62D986: test    al, al
 0x62D988: jz      loc_62D8F2
 0x62D98E: mov     edx, [esi]

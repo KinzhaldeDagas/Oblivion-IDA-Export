@@ -8,7 +8,7 @@
 0x73E6AF: jnz     short loc_73E6C8
 0x73E6B1: mov     eax, [esi+2Ch]
 0x73E6B4: push    eax
-0x73E6B5: call    FormHeapFree
+0x73E6B5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x73E6BA: add     esp, 4
 0x73E6BD: mov     [esi+2Ch], edi
 0x73E6C0: mov     [esi+28h], edi
@@ -36,14 +36,14 @@
 0x73E6F4: mov     ecx, edi
 0x73E6F6: add     ecx, ecx
 0x73E6F8: add     ecx, ecx
-0x73E6FA: push    ecx; Size
-0x73E6FB: push    eax; Src
-0x73E6FC: push    ebx; Dst
-0x73E6FD: call    _memcpy
+0x73E6FA: push    ecx; byteCount
+0x73E6FB: push    eax; source
+0x73E6FC: push    ebx; destination
+0x73E6FD: call    _memcpy;
 0x73E702: add     esp, 0Ch
 0x73E705: mov     edx, [esi+2Ch]
 0x73E708: push    edx
-0x73E709: call    FormHeapFree
+0x73E709: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x73E70E: add     esp, 4
 0x73E711: mov     [esi+2Ch], ebx
 0x73E714: mov     [esi+28h], edi

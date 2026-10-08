@@ -1,19 +1,36 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7A59A0",
+  "chunks": [
+    [
+      "0x7A59A0",
+      "0x7A5A42"
+    ],
+    [
+      "0x9CCBE0",
+      "0x9CCC0C"
+    ]
+  ],
+  "chunks_sha256": "20927d9c486003ec994db18b9a6afad8219813d42f7c5ee2fa2c799fa6518bed",
+  "comment_regular": "Exception-safe uninitialized fill of count compact leaf textures. The normal path returns; the SEH landing path destroys the constructed prefix and rethrows.",
+  "comment_repeatable": "Exception-safe uninitialized fill of count compact leaf textures. The normal path returns; the SEH landing path destroys the constructed prefix and rethrows.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_SIdvLeafTexture_UninitializedFillN_010201A0",
   "end_ea": "0x7A5A42",
-  "flags": 21521,
+  "evidence_confidence": "Unknown",
+  "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_7A59A0",
+  "name": "OB_SIdvLeafTexture_UninitializedFillN_010201A0",
   "segment": ".text",
   "sha256": "d4fd4cf6ef1f8d0345f8660b0ac4624b9d4d3c2c866cecdf460fe802a0ebe644",
   "size": 162,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A59A0",
-  "type": "void __cdecl __noreturn(char *, unsigned int, int)",
-  "xrefs_from_count": 69,
+  "total_chunk_size": 206,
+  "type": "void __cdecl(OB_SIdvLeafTexture_010201A0 *destination, unsigned int count, const OB_SIdvLeafTexture_010201A0 *value)",
+  "xrefs_from_count": 85,
   "xrefs_to_count": 1
 }

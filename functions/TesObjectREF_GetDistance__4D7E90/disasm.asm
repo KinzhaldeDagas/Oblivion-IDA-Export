@@ -1,4 +1,4 @@
-0x4D7E90: push    ecx
+0x4D7E90: push    ecx; MEF LARGE PERF 2026-09-08: PERF comparator constraint: GetDistance filters targetflags/interior/worldspace compatibility, calls target GetPos virtual and then distance-to-point sqrt. It can return a sentinel instead. Replacing comparator with raw position squared distance is not proven equivalent.
 0x4D7E91: fld     dword ptr ds:0A32048h
 0x4D7E97: push    esi
 0x4D7E98: mov     esi, [esp+8+arg_0]
@@ -7,7 +7,7 @@
 0x4D7EA2: push    edi
 0x4D7EA3: mov     edi, ecx
 0x4D7EA5: jz      loc_4D7F36
-0x4D7EAB: mov     eax, [esi+8]
+0x4D7EAB: mov     eax, [esi+8]; 3DTheft pass 166 crash boundary: first target-reference flags read in GetDistance. 2026-07-13 dump had ESI=0x031BA25F, exactly the logged pending decision tick, due to the former Actor_GetDisposition caller stack imbalance.
 0x4D7EAE: mov     ecx, eax
 0x4D7EB0: shr     ecx, 0Bh
 0x4D7EB3: test    cl, 1
@@ -22,11 +22,11 @@
 0x4D7ECB: jz      short loc_4D7EF2
 0x4D7ECD: cmp     dword ptr [edi+40h], 0
 0x4D7ED1: jz      short loc_4D7EF2
-0x4D7ED3: call    TESObjectCELL_IsInterior
+0x4D7ED3: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x4D7ED8: test    al, al
 0x4D7EDA: jnz     short loc_4D7EE8
 0x4D7EDC: mov     ecx, [edi+40h]; this
-0x4D7EDF: call    TESObjectCELL_IsInterior
+0x4D7EDF: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x4D7EE4: test    al, al
 0x4D7EE6: jz      short loc_4D7EF2
 0x4D7EE8: mov     edx, [edi+40h]
@@ -54,9 +54,9 @@
 0x4D7F20: mov     edx, [eax+174h]
 0x4D7F26: mov     ecx, esi
 0x4D7F28: call    edx
-0x4D7F2A: push    eax
-0x4D7F2B: mov     ecx, edi
-0x4D7F2D: call    sub_4D7E30
+0x4D7F2A: push    eax; pointXYZ
+0x4D7F2B: mov     ecx, edi; this
+0x4D7F2D: call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.
 0x4D7F32: fstp    [esp+0Ch+var_4]
 0x4D7F36: fld     [esp+0Ch+var_4]
 0x4D7F3A: pop     edi

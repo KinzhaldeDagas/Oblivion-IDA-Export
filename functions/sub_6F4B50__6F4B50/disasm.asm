@@ -15,7 +15,7 @@
 0x6F4B7D: push    eax
 0x6F4B7E: lea     eax, [esp+118h+var_C]
 0x6F4B85: mov     large fs:0, eax
-0x6F4B8B: mov     esi, [esp+118h+arg_0]
+0x6F4B8B: mov     esi, [esp+118h+source]
 0x6F4B92: mov     edi, [esp+118h+arg_4]
 0x6F4B99: push    38h ; '8'; int
 0x6F4B9B: xor     ebx, ebx
@@ -25,30 +25,30 @@
 0x6F4BA6: mov     [esp+124h+var_A8], esi
 0x6F4BAA: call    __memset
 0x6F4BAF: sub     esp, 10h
-0x6F4BB2: mov     ecx, esp
+0x6F4BB2: mov     ecx, esp; this
 0x6F4BB4: mov     [esp+134h+var_F4], esp
-0x6F4BB8: push    8; MaxCount
+0x6F4BB8: push    8; count
 0x6F4BBA: mov     ebp, 0Fh
 0x6F4BBF: mov     [ecx+18h], ebp
 0x6F4BC2: mov     [ecx+14h], ebx
 0x6F4BC5: push    offset aFrtri003; "FRTRI003"
 0x6F4BCA: mov     [ecx+4], bl
-0x6F4BCD: call    sub_414500
+0x6F4BCD: call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.
 0x6F4BD2: lea     ecx, [esp+134h+var_94]; this
 0x6F4BD9: call    sub_6F6110
 0x6F4BDE: push    ebx
 0x6F4BDF: sub     esp, 1Ch
-0x6F4BE2: mov     ecx, esp
+0x6F4BE2: mov     ecx, esp; this
 0x6F4BE4: mov     [ecx+18h], ebp
 0x6F4BE7: mov     [esp+138h+var_F4], esp
 0x6F4BEB: or      ebp, 0FFFFFFFFh
-0x6F4BEE: push    ebp
-0x6F4BEF: push    ebx
+0x6F4BEE: push    ebp; count
+0x6F4BEF: push    ebx; offset
 0x6F4BF0: mov     [ecx+14h], ebx
-0x6F4BF3: push    esi
+0x6F4BF3: push    esi; source
 0x6F4BF4: mov     [esp+144h+var_4], ebx
 0x6F4BFB: mov     [ecx+4], bl
-0x6F4BFE: call    sub_414420
+0x6F4BFE: call    OB_stString28_AssignSubstring_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,offset,count). Bounds-checks offset, clamps count to source.size-offset, handles self-assignment by in-place erasure, grows when required, copies the selected bytes, updates size, and writes the terminator.
 0x6F4C03: lea     ecx, [esp+138h+var_94]
 0x6F4C0A: call    sub_6F66E0
 0x6F4C0F: cmp     al, bl
@@ -264,17 +264,17 @@
 0x6F4EEB: mov     byte ptr [esp+11Ch+var_4], 2
 0x6F4EF3: call    sub_6F1110
 0x6F4EF8: mov     ecx, [esp+118h+var_D8]
-0x6F4EFC: push    0FFFFFFFFh
-0x6F4EFE: push    0
+0x6F4EFC: push    0FFFFFFFFh; count
+0x6F4EFE: push    0; offset
 0x6F4F00: add     eax, 4
-0x6F4F03: push    ecx
-0x6F4F04: mov     ecx, eax
-0x6F4F06: call    sub_414420
-0x6F4F0B: lea     ecx, [esp+118h+var_C4]
-0x6F4F0F: call    sub_79AB00
-0x6F4F14: lea     ecx, [esp+118h+var_D4]; void *
+0x6F4F03: push    ecx; source
+0x6F4F04: mov     ecx, eax; this
+0x6F4F06: call    OB_stString28_AssignSubstring_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,offset,count). Bounds-checks offset, clamps count to source.size-offset, handles self-assignment by in-place erasure, grows when required, copies the selected bytes, updates size, and writes the terminator.
+0x6F4F0B: lea     ecx, [esp+118h+var_C4]; this
+0x6F4F0F: call    OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
+0x6F4F14: lea     ecx, [esp+118h+var_D4]; this
 0x6F4F18: mov     byte ptr [esp+118h+var_4], 0
-0x6F4F20: call    sub_794EB0
+0x6F4F20: call    OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.
 0x6F4F25: add     [esp+118h+var_104], 20h ; ' '
 0x6F4F2A: add     ebp, 1
 0x6F4F2D: cmp     ebp, [esp+118h+var_44]
@@ -408,8 +408,8 @@
 0x6F50D5: call    ??1BSFaceGenBinaryFile@@UAE@XZ; BSFaceGenBinaryFile::~BSFaceGenBinaryFile(void)
 0x6F50DA: xor     al, al
 0x6F50DC: jmp     loc_6F5C7B
-0x6F50E1: lea     ecx, [esp+118h+var_D4]; void *
-0x6F50E5: call    sub_794EB0
+0x6F50E1: lea     ecx, [esp+118h+var_D4]; this
+0x6F50E5: call    OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.
 0x6F50EA: lea     ecx, [esp+118h+var_94]; this
 0x6F50F1: mov     [esp+118h+var_4], 0FFFFFFFFh
 0x6F50FC: call    ??1BSFaceGenBinaryFile@@UAE@XZ; BSFaceGenBinaryFile::~BSFaceGenBinaryFile(void)
@@ -428,21 +428,21 @@
 0x6F5128: mov     ecx, ebx
 0x6F512A: mov     byte ptr [esp+11Ch+var_4], 4
 0x6F5132: call    sub_6F1160
-0x6F5137: push    0FFFFFFFFh
+0x6F5137: push    0FFFFFFFFh; count
 0x6F5139: add     eax, 10h
-0x6F513C: push    0
-0x6F513E: push    esi
-0x6F513F: mov     ecx, eax
-0x6F5141: call    sub_414420
-0x6F5146: lea     ecx, [esp+118h+var_C4]
-0x6F514A: call    sub_79AB00
+0x6F513C: push    0; offset
+0x6F513E: push    esi; source
+0x6F513F: mov     ecx, eax; this
+0x6F5141: call    OB_stString28_AssignSubstring_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,offset,count). Bounds-checks offset, clamps count to source.size-offset, handles self-assignment by in-place erasure, grows when required, copies the selected bytes, updates size, and writes the terminator.
+0x6F5146: lea     ecx, [esp+118h+var_C4]; this
+0x6F514A: call    OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
 0x6F514F: xor     eax, eax
 0x6F5151: cmp     [esp+118h+var_E4], eax
 0x6F5155: mov     byte ptr [esp+118h+var_4], 0
 0x6F515D: jz      short loc_6F516E
 0x6F515F: mov     ecx, [esp+118h+var_E4]
 0x6F5163: push    ecx
-0x6F5164: call    FormHeapFree
+0x6F5164: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F5169: add     esp, 4
 0x6F516C: xor     eax, eax
 0x6F516E: mov     ebp, [esp+118h+var_104]
@@ -648,11 +648,11 @@
 0x6F5409: lea     ecx, [esp+120h+var_D4]
 0x6F540D: mov     [esp+120h+var_FD], 0
 0x6F5412: call    sub_6F2CD0
-0x6F5417: mov     ebx, [esp+118h+var_D0]
+0x6F5417: mov     ebx, [esp+118h+var_D4.begin]
 0x6F541B: test    ebx, ebx
 0x6F541D: mov     byte ptr [esp+118h+var_4], 5
 0x6F5425: jz      short loc_6F542F
-0x6F5427: mov     edx, [esp+118h+var_CC]
+0x6F5427: mov     edx, [esp+118h+var_D4.end]
 0x6F542B: sub     edx, ebx
 0x6F542D: jnz     short loc_6F5434
 0x6F542F: call    __invalid_parameter_noinfo
@@ -701,7 +701,7 @@
 0x6F54B2: jz      loc_6F55A6
 0x6F54B8: test    ebx, ebx
 0x6F54BA: jz      short loc_6F54C6
-0x6F54BC: mov     eax, [esp+118h+var_CC]
+0x6F54BC: mov     eax, [esp+118h+var_D4.end]
 0x6F54C0: sub     eax, ebx
 0x6F54C2: cmp     edi, eax
 0x6F54C4: jb      short loc_6F54CB
@@ -739,13 +739,13 @@
 0x6F5524: jb      short loc_6F54B8
 0x6F5526: mov     esi, [esp+118h+var_104]
 0x6F552A: jmp     short loc_6F55A6
-0x6F552C: push    0; MaxCount
-0x6F552E: push    offset EmptyString; Src
-0x6F5533: lea     ecx, [esp+120h+var_C4]
-0x6F5537: mov     [esp+120h+var_AC], 0Fh
-0x6F553F: mov     [esp+120h+var_B0], 0
-0x6F5547: mov     byte ptr [esp+120h+var_C0], 0
-0x6F554C: call    sub_414500
+0x6F552C: push    0; count
+0x6F552E: push    offset EmptyString; source
+0x6F5533: lea     ecx, [esp+120h+var_C4]; this
+0x6F5537: mov     [esp+120h+var_C4.capacity], 0Fh
+0x6F553F: mov     [esp+120h+var_C4.size], 0
+0x6F5547: mov     byte ptr [esp+120h+var_C4.storage], 0
+0x6F554C: call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.
 0x6F5551: mov     eax, [ebp+4]
 0x6F5554: test    eax, eax
 0x6F5556: mov     byte ptr [esp+118h+var_4], 6
@@ -762,28 +762,28 @@
 0x6F5578: jb      short loc_6F557F
 0x6F557A: call    __invalid_parameter_noinfo
 0x6F557F: mov     ecx, [ebp+4]
-0x6F5582: push    0FFFFFFFFh
-0x6F5584: push    0
+0x6F5582: push    0FFFFFFFFh; count
+0x6F5584: push    0; offset
 0x6F5586: lea     edx, [esp+120h+var_C4]
-0x6F558A: add     ecx, edi
-0x6F558C: push    edx
-0x6F558D: call    sub_414420
-0x6F5592: cmp     [esp+118h+var_AC], 10h
+0x6F558A: add     ecx, edi; this
+0x6F558C: push    edx; source
+0x6F558D: call    OB_stString28_AssignSubstring_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,offset,count). Bounds-checks offset, clamps count to source.size-offset, handles self-assignment by in-place erasure, grows when required, copies the selected bytes, updates size, and writes the terminator.
+0x6F5592: cmp     [esp+118h+var_C4.capacity], 10h
 0x6F5597: jb      short loc_6F55A6
-0x6F5599: mov     eax, [esp+118h+var_C0]
+0x6F5599: mov     eax, dword ptr [esp+118h+var_C4.storage]
 0x6F559D: push    eax
-0x6F559E: call    FormHeapFree
+0x6F559E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F55A3: add     esp, 4
 0x6F55A6: test    ebx, ebx
 0x6F55A8: mov     byte ptr [esp+118h+var_4], 0
 0x6F55B0: jz      short loc_6F55BB
 0x6F55B2: push    ebx
-0x6F55B3: call    FormHeapFree
+0x6F55B3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F55B8: add     esp, 4
 0x6F55BB: xor     eax, eax
-0x6F55BD: mov     [esp+118h+var_D0], eax
-0x6F55C1: mov     [esp+118h+var_CC], eax
-0x6F55C5: mov     [esp+118h+var_C8], eax
+0x6F55BD: mov     [esp+118h+var_D4.begin], eax
+0x6F55C1: mov     [esp+118h+var_D4.end], eax
+0x6F55C5: mov     [esp+118h+var_D4.capacity], eax
 0x6F55C9: push    1
 0x6F55CB: push    4
 0x6F55CD: lea     ecx, [esp+120h+var_D8]
@@ -978,7 +978,7 @@
 0x6F5868: test    ebx, ebx
 0x6F586A: jz      loc_6F50EA
 0x6F5870: push    ebx
-0x6F5871: call    FormHeapFree
+0x6F5871: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F5876: add     esp, 4
 0x6F5879: jmp     loc_6F50EA
 0x6F587E: mov     [esp+118h+var_94], offset ??_7BSFaceGenBinaryFile@@6B@; const BSFaceGenBinaryFile::`vftable'
@@ -1046,13 +1046,13 @@
 0x6F595A: mov     esi, eax
 0x6F595C: xor     edi, edi
 0x6F595E: jmp     short loc_6F59D6
-0x6F5960: push    edi; MaxCount
-0x6F5961: push    offset EmptyString; Src
-0x6F5966: lea     ecx, [esp+120h+var_C4]
-0x6F596A: mov     [esp+120h+var_AC], 0Fh
-0x6F5972: mov     [esp+120h+var_B0], edi
-0x6F5976: mov     byte ptr [esp+120h+var_C0], 0
-0x6F597B: call    sub_414500
+0x6F5960: push    edi; count
+0x6F5961: push    offset EmptyString; source
+0x6F5966: lea     ecx, [esp+120h+var_C4]; this
+0x6F596A: mov     [esp+120h+var_C4.capacity], 0Fh
+0x6F5972: mov     [esp+120h+var_C4.size], edi
+0x6F5976: mov     byte ptr [esp+120h+var_C4.storage], 0
+0x6F597B: call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.
 0x6F5980: mov     eax, [ebp+4]
 0x6F5983: cmp     eax, edi
 0x6F5985: mov     byte ptr [esp+118h+var_4], 0Bh
@@ -1069,23 +1069,23 @@
 0x6F59A7: jb      short loc_6F59AE
 0x6F59A9: call    __invalid_parameter_noinfo
 0x6F59AE: mov     ecx, [ebp+4]
-0x6F59B1: add     ecx, dword ptr [esp+118h+var_FD+1]
-0x6F59B5: push    0FFFFFFFFh
-0x6F59B7: push    edi
+0x6F59B1: add     ecx, dword ptr [esp+118h+var_FD+1]; this
+0x6F59B5: push    0FFFFFFFFh; count
+0x6F59B7: push    edi; offset
 0x6F59B8: lea     eax, [esp+120h+var_C4]
-0x6F59BC: push    eax
-0x6F59BD: call    sub_414420
-0x6F59C2: cmp     [esp+118h+var_AC], 10h
+0x6F59BC: push    eax; source
+0x6F59BD: call    OB_stString28_AssignSubstring_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,offset,count). Bounds-checks offset, clamps count to source.size-offset, handles self-assignment by in-place erasure, grows when required, copies the selected bytes, updates size, and writes the terminator.
+0x6F59C2: cmp     [esp+118h+var_C4.capacity], 10h
 0x6F59C7: jb      short loc_6F59D6
-0x6F59C9: mov     ecx, [esp+118h+var_C0]
+0x6F59C9: mov     ecx, dword ptr [esp+118h+var_C4.storage]
 0x6F59CD: push    ecx
-0x6F59CE: call    FormHeapFree
+0x6F59CE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F59D3: add     esp, 4
 0x6F59D6: cmp     esi, edi
 0x6F59D8: mov     byte ptr [esp+118h+var_4], 0
 0x6F59E0: jz      short loc_6F59EB
 0x6F59E2: push    esi
-0x6F59E3: call    FormHeapFree
+0x6F59E3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F59E8: add     esp, 4
 0x6F59EB: mov     [esp+118h+var_E4], edi
 0x6F59EF: mov     [esp+118h+var_E0], edi
@@ -1184,16 +1184,16 @@
 0x6F5B1A: jz      loc_6F5C2E
 0x6F5B20: mov     eax, [esp+118h+var_A8]
 0x6F5B24: sub     esp, 1Ch
-0x6F5B27: mov     ecx, esp
+0x6F5B27: mov     ecx, esp; this
 0x6F5B29: mov     [esp+134h+var_F4], esp
-0x6F5B2D: push    0FFFFFFFFh
+0x6F5B2D: push    0FFFFFFFFh; count
 0x6F5B2F: xor     esi, esi
-0x6F5B31: push    esi
+0x6F5B31: push    esi; offset
 0x6F5B32: mov     dword ptr [ecx+18h], 0Fh
 0x6F5B39: mov     [ecx+14h], esi
-0x6F5B3C: push    eax
+0x6F5B3C: push    eax; source
 0x6F5B3D: mov     byte ptr [ecx+4], 0
-0x6F5B41: call    sub_414420
+0x6F5B41: call    OB_stString28_AssignSubstring_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,offset,count). Bounds-checks offset, clamps count to source.size-offset, handles self-assignment by in-place erasure, grows when required, copies the selected bytes, updates size, and writes the terminator.
 0x6F5B46: push    1; int
 0x6F5B48: call    sub_6F6BF0
 0x6F5B4D: add     esp, 20h
@@ -1221,7 +1221,7 @@
 0x6F5BB7: cmp     esi, edi
 0x6F5BB9: jz      short loc_6F5BC4
 0x6F5BBB: push    esi
-0x6F5BBC: call    FormHeapFree
+0x6F5BBC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F5BC1: add     esp, 4
 0x6F5BC4: mov     [esp+118h+var_94], offset ??_7BSFaceGenBinaryFile@@6B@; const BSFaceGenBinaryFile::`vftable'
 0x6F5BCF: mov     ecx, [esp+118h+var_54]
@@ -1271,3 +1271,44 @@
 0x6F5C97: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x6F5C9C: add     esp, 104h
 0x6F5CA2: retn
+0x9C8B40: lea     ecx, [ebp-94h]; this
+0x9C8B46: jmp     ??1BSFaceGenBinaryFile@@UAE@XZ; BSFaceGenBinaryFile::~BSFaceGenBinaryFile(void)
+0x9C8B4B: lea     ecx, [ebp-0D4h]; this
+0x9C8B51: jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.
+0x9C8B56: lea     ecx, [ebp-0C4h]; this
+0x9C8B5C: jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
+0x9C8B61: lea     ecx, [ebp-0E8h]; this
+0x9C8B67: jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.
+0x9C8B6C: lea     ecx, [ebp-0C4h]; this
+0x9C8B72: jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
+0x9C8B77: lea     ecx, [ebp-0D4h]; this
+0x9C8B7D: jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.
+0x9C8B82: lea     ecx, [ebp-0C4h]; this
+0x9C8B88: jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
+0x9C8B8D: lea     ecx, [ebp-0E8h]; this
+0x9C8B93: jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.
+0x9C8B98: lea     ecx, [ebp-94h]; this
+0x9C8B9E: jmp     ??1FutBinaryFileC@@UAE@XZ; FutBinaryFileC::~FutBinaryFileC(void)
+0x9C8BA3: lea     ecx, [ebp-0C4h]; this
+0x9C8BA9: jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
+0x9C8BAE: lea     ecx, [ebp-94h]; this
+0x9C8BB4: jmp     ??1FutBinaryFileC@@UAE@XZ; FutBinaryFileC::~FutBinaryFileC(void)
+0x9C8BB9: lea     ecx, [ebp-94h]; this
+0x9C8BBF: jmp     ??1FutBinaryFileC@@UAE@XZ; FutBinaryFileC::~FutBinaryFileC(void)
+0x9C8BC4: lea     ecx, [ebp-94h]; this
+0x9C8BCA: jmp     ??1FutBinaryFileC@@UAE@XZ; FutBinaryFileC::~FutBinaryFileC(void)
+0x9C8BCF: lea     ecx, [ebp-94h]; this
+0x9C8BD5: jmp     ??1FutBinaryFileC@@UAE@XZ; FutBinaryFileC::~FutBinaryFileC(void)
+0x9C8BDA: lea     ecx, [ebp-94h]; this
+0x9C8BE0: jmp     ??1FutBinaryFileC@@UAE@XZ; FutBinaryFileC::~FutBinaryFileC(void)
+0x9C8BE5: mov     edx, [esp+arg_4]
+0x9C8BE9: lea     eax, [edx-108h]
+0x9C8BEF: mov     ecx, [edx-10Ch]
+0x9C8BF5: xor     ecx, eax
+0x9C8BF7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C8BFC: add     eax, 10h
+0x9C8BFF: mov     ecx, [edx-4]
+0x9C8C02: xor     ecx, eax
+0x9C8C04: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C8C09: mov     eax, offset stru_AF1494
+0x9C8C0E: jmp     ___CxxFrameHandler3

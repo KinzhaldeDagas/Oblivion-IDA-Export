@@ -50,3 +50,12 @@
 0x98AFD2: jmp     short loc_98AF6A
 0x98AFD4: mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
 0x98AFDB: call    ___FrameUnwindToState___$LN18_1
+0x98AFF3: mov     ebx, [ebp+arg_0]
+0x98AFF6: mov     esi, [ebp+var_1C]
+0x98AFF9: call    __getptd
+0x98AFFE: cmp     dword ptr [eax+90h], 0
+0x98B005: jle     short ___FrameUnwindToState___$LN17_1
+0x98B007: call    __getptd
+0x98B00C: add     eax, 90h
+0x98B011: dec     dword ptr [eax]
+0x98B013: retn

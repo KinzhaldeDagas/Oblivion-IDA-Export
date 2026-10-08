@@ -1,43 +1,43 @@
-void __thiscall sub_583C30(_DWORD *this)
+// Verified: advances elapsed time and unlinks/frees expired 0x14-byte timer nodes; does not destroy their owner objects. Fallout named analogue 0x824EA970; Fallout additionally adjusts delta during VATS playback.
+void __thiscall InterfaceManager::UpdateAllTimers(OblivionInterfaceTimersView *this)
 {
-  unsigned int v1; // ecx
+  OblivionInterfaceTimer *next; // ecx
   double v2; // st7
-  unsigned int v3; // esi
+  OblivionInterfaceTimer *v3; // esi
   float v4; // [esp+0h] [ebp-4h]
 
-  v1 = *(_DWORD *)(*(this + 0x4C) + 0x10);
-  if ( v1 )
+  next = this->timers->next; /*0x583c37*/
+  if ( next ) /*0x583c3c*/
   {
-    v2 = 1.0;
-    do
+    v2 = 1.0; /*0x583c3e*/
+    do /*0x583c78*/
     {
-      v4 = *(float *)(v1 + 4) + flt_B33E9C;
-      *(float *)(v1 + 4) = v4;
-      if ( v4 / *(float *)(v1 + 8) <= v2 && v4 / *(float *)(v1 + 8) < dbl_A2FC68
-        || *(float *)(v1 + 4) / *(float *)(v1 + 8) < v2 )
+      v4 = next->elapsed + *(float *)&MEMORY[0xB33E90][0xC]; /*0x583c4a*/
+      next->elapsed = v4; /*0x583c52*/
+      if ( v4 / next->duration <= v2 && v4 / next->duration < dbl_A2FC68 || next->elapsed / next->duration < v2 ) /*0x583c8e*/
       {
-        v1 = *(_DWORD *)(v1 + 0x10);
+        next = next->next; /*0x583c73*/
       }
       else
       {
-        v3 = *(_DWORD *)(v1 + 0x10);
-        *(_DWORD *)(*(_DWORD *)(v1 + 0xC) + 0x10) = v3;
-        if ( v3 )
+        v3 = next->next; /*0x583c9f*/
+        next->previous->next = v3; /*0x583ca9*/
+        if ( v3 ) /*0x583cac*/
         {
-          *(_DWORD *)(v3 + 0xC) = *(_DWORD *)(v1 + 0xC);
-          FormHeapFree(v1);
-          v2 = 1.0;
-          v1 = v3;
+          v3->previous = next->previous; /*0x583cb2*/
+          FormHeapFree((unsigned int)next); /*0x583cb5*/
+          v2 = 1.0; /*0x583cba*/
+          next = v3; /*0x583cbf*/
         }
         else
         {
-          *(_DWORD *)(InterfaceManagerPtr->unk0C0[0x1C] + 0xC) = *(_DWORD *)(v1 + 0xC);
-          FormHeapFree(v1);
-          v2 = 1.0;
-          v1 = 0;
+          *(_DWORD *)(MEMORY[0xB3A6E0]->unk0C0[0x1C] + 0xC) = next->previous; /*0x583cd3*/
+          FormHeapFree((unsigned int)next); /*0x583cd6*/
+          v2 = 1.0; /*0x583cdb*/
+          next = 0; /*0x583ce0*/
         }
       }
     }
-    while ( v1 );
+    while ( next ); /*0x583c78*/
   }
 }

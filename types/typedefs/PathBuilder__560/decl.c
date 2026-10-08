@@ -1,1 +1,1 @@
-PathBuilder
+struct PathBuilder;

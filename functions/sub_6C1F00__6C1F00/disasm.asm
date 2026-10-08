@@ -14,7 +14,7 @@
 0x6C1F53: mov     byte ptr ds:0B3D40Bh, 8
 0x6C1F5A: mov     dword ptr ds:0B3D084h, offset sub_6C1C60
 0x6C1F64: mov     dword ptr ds:0B3D52Ch, offset sub_6C1C50
-0x6C1F6E: mov     dword ptr ds:0B3D49Ch, offset ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x6C1F6E: mov     dword ptr ds:0B3D49Ch, offset Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x6C1F78: mov     dword ptr ds:0B3D234h, offset sub_6C1CA0
 0x6C1F82: mov     eax, 1
 0x6C1F87: retn

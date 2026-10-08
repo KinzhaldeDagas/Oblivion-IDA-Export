@@ -1,19 +1,32 @@
 {
-  "callees_count": 121,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 47,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x51DD00",
+      "0x51E1B6"
+    ]
+  ],
+  "chunks_sha256": "e1f661c5b06acf29e867ce808bb0fc077d9fc8ca2454a6d0627075bd112dc1d6",
+  "comment_regular": "\nVerified blood serialization: NAM0 (0x304D414E) loads a nonzero-length chunk into bloodSpray at +0x11C through TESModel.SetModelPath(+0x18). NAM1 (0x314D414E) loads into bloodDecal.path at +0x138 through BSStringT_Set. These are per-record strings, distinct from the runtime default settings used by empty-path getters.\nVerified divergence: Fallout TESCreature::Load 0x8240BA18 reads legacy NAM0/NAM1 into a temporary without corresponding component assignment in that branch. Oblivion assignments above are authoritative.\n\nCustomAnimSupport decode: CREA loader dispatches KFFZ to TESAnimation_LoadAnimationChunk at 0x51E14A.",
+  "comment_repeatable": "CustomAnimSupport decode: CREA loader dispatches KFFZ to TESAnimation_LoadAnimationChunk at 0x51E14A.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
   "display_name": "TESCreature_LoadForm",
   "end_ea": "0x51E1B6",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
   "name": "TESCreature_LoadForm",
   "segment": ".text",
   "sha256": "e1f661c5b06acf29e867ce808bb0fc077d9fc8ca2454a6d0627075bd112dc1d6",
   "size": 1206,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x51DD00",
-  "type": "char __thiscall(Creature *this, Data *)",
+  "total_chunk_size": 1206,
+  "type": "bool __thiscall(TESCreature *self, Data *file)",
   "xrefs_from_count": 459,
   "xrefs_to_count": 1
 }

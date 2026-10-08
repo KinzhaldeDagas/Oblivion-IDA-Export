@@ -1,4 +1,4 @@
-0x799780: sub     esp, 8
+0x799780: sub     esp, 8; vector<float>::push_back(const float&). Appends directly when end!=capacity; otherwise builds the checked end iterator and delegates to single-element insert.
 0x799783: push    esi
 0x799784: mov     esi, ecx
 0x799786: mov     edx, [esi+4]
@@ -17,7 +17,7 @@
 0x7997A5: cmp     ecx, eax
 0x7997A7: jnb     short loc_7997C2
 0x7997A9: mov     eax, [esi+8]
-0x7997AC: mov     ecx, [esp+0Ch+arg_0]
+0x7997AC: mov     ecx, [esp+0Ch+value]
 0x7997B0: fld     dword ptr [ecx]
 0x7997B2: add     eax, 4
 0x7997B5: fstp    dword ptr [eax-4]
@@ -30,14 +30,14 @@
 0x7997C6: cmp     edx, edi
 0x7997C8: jbe     short loc_7997CF
 0x7997CA: call    __invalid_parameter_noinfo
-0x7997CF: mov     edx, [esp+10h+arg_0]
-0x7997D3: push    edx; int
+0x7997CF: mov     edx, [esp+10h+value]
+0x7997D3: push    edx; value
 0x7997D4: push    edi; Src
-0x7997D5: push    esi; int
-0x7997D6: lea     eax, [esp+1Ch+var_8]
-0x7997DA: push    eax; int
-0x7997DB: mov     ecx, esi
-0x7997DD: call    sub_7996F0
+0x7997D5: push    esi; position
+0x7997D6: lea     eax, [esp+1Ch+result]
+0x7997DA: push    eax; result
+0x7997DB: mov     ecx, esi; this
+0x7997DD: call    OB_stVectorFloat_InsertOne_010201A0; Checked-iterator vector<float>::insert(position,value) wrapper. Converts the owner/current iterator to an index, delegates to insert-fill with count=1, then returns an iterator relocated against the possibly new begin pointer.
 0x7997E2: pop     edi
 0x7997E3: pop     esi
 0x7997E4: add     esp, 8

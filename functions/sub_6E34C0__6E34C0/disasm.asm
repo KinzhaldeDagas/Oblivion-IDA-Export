@@ -33,7 +33,7 @@
 0x6E350F: add     edx, eax
 0x6E3511: push    ecx
 0x6E3512: push    edx
-0x6E3513: call    ebp ; dword_B3D4A0
+0x6E3513: call    ebp ; unk_B3D4A0
 0x6E3515: add     esp, 8
 0x6E3518: test    al, al
 0x6E351A: jz      short loc_6E352D

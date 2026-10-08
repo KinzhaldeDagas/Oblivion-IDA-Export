@@ -1,1 +1,1 @@
-TIMERPROC
+typedef void (*TIMERPROC)(HWND, UINT, UINT_PTR_0, DWORD);

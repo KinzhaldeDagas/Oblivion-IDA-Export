@@ -1,13 +1,13 @@
-0x4B80A0: push    ebx
+0x4B80A0: push    ebx; Verified mechanics: rejects null/unsupported candidate spaces, then returns true only when the TESForm* is present in TESObjectDOOR.randomTeleport. Probable domain meaning: this list records spaces in which the door can be selected as a random teleport destination; ExtraRandomTeleportMarker.teleportRef is a separate per-reference marker pointer.
 0x4B80A1: push    esi
 0x4B80A2: push    edi
-0x4B80A3: mov     edi, [esp+0Ch+arg_0]
+0x4B80A3: mov     edi, [esp+0Ch+space]
 0x4B80A7: xor     bl, bl
 0x4B80A9: test    edi, edi
 0x4B80AB: mov     esi, ecx
 0x4B80AD: jz      short loc_4B80CE
-0x4B80AF: push    edi
-0x4B80B0: call    sub_4B7930
+0x4B80AF: push    edi; space
+0x4B80B0: call    TESForm_IsInteriorCellOrWorldSpace; Verified spatial-form predicate: false for null; true for form type 0x35 (TESWorldSpace); for form type 0x30 it RTTI-casts to TESObjectCELL and returns true only for interior cells; false otherwise. Probable domain role: accept only spaces allowed as random teleport destinations.
 0x4B80B5: add     esp, 4
 0x4B80B8: test    al, al
 0x4B80BA: jz      short loc_4B80CE

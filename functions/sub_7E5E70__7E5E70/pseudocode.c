@@ -1,4 +1,4 @@
-void *sub_7E5E70()
+float *sub_7E5E70()
 {
-  return &unk_B46100;
+  return &OB_ShaderConstantStorage_010201A0[0xBB]; /*0x7e5e75*/
 }

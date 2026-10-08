@@ -21,14 +21,14 @@
 0x84912B: mov     ecx, ds:0B45290h
 0x849131: push    ecx; a2
 0x849132: mov     ecx, esi; this
-0x849134: call    sub_7AECB0
+0x849134: call    NiD3DPass_SetVertexShader; Reference-counted NiD3DPass vertex-shader setter. Replaces pass+0x58 and AddRefs the new NiD3DVertexShader.
 0x849139: mov     edx, [esp+20h+arg_8]
 0x84913D: mov     eax, [edx+10h]
 0x849140: push    eax
 0x849141: mov     ecx, ebx
 0x849143: call    sub_848C40
 0x849148: mov     eax, [esi+24h]
-0x84914B: mov     ecx, [esp+20h+arg_C]
+0x84914B: mov     ecx, [esp+20h+value]
 0x84914F: mov     edi, [eax]
 0x849151: mov     edx, [ecx]
 0x849153: mov     eax, [edx+88h]
@@ -66,29 +66,29 @@
 0x8491A7: jz      short loc_8491C5
 0x8491A9: cmp     byte ptr ds:0B42CDDh, 0
 0x8491B0: jz      short loc_8491C5
-0x8491B2: mov     ecx, [esp+20h+arg_C]
+0x8491B2: mov     ecx, [esp+20h+value]
 0x8491B6: mov     edx, [ecx]
 0x8491B8: mov     eax, [edx+78h]
 0x8491BB: call    eax
-0x8491BD: push    eax
-0x8491BE: mov     ecx, edi
-0x8491C0: call    sub_7715E0
+0x8491BD: push    eax; preset
+0x8491BE: mov     ecx, edi; this
+0x8491C0: call    NiD3DTextureStage_ApplyAddressModePreset; Apply one native address-preset row to a NiD3DTextureStage: D3DSAMP_ADDRESSU (1) and D3DSAMP_ADDRESSV (2). Lighting30 SimpleShadow uses preset 0 = CLAMP/CLAMP.
 0x8491C5: mov     edi, 1
 0x8491CA: add     [esi+60h], edi
-0x8491CD: mov     [esp+20h+arg_C], esi
+0x8491CD: mov     [esp+20h+value], esi
 0x8491D1: mov     edx, [ebx+38h]
-0x8491D4: lea     ecx, [esp+20h+arg_C]
-0x8491D8: push    ecx
-0x8491D9: push    edx
-0x8491DA: lea     ecx, [ebx+40h]
+0x8491D4: lea     ecx, [esp+20h+value]
+0x8491D8: push    ecx; value
+0x8491D9: push    edx; index
+0x8491DA: lea     ecx, [ebx+40h]; this
 0x8491DD: mov     [esp+28h+var_4], 0
-0x8491E5: call    sub_76CE40
+0x8491E5: call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.
 0x8491EA: or      eax, 0FFFFFFFFh
 0x8491ED: add     [esi+60h], eax
 0x8491F0: mov     [esp+20h+var_4], eax
 0x8491F4: jnz     short loc_8491FD
 0x8491F6: mov     ecx, esi
-0x8491F8: call    sub_7604D0
+0x8491F8: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x8491FD: add     [ebx+38h], edi
 0x849200: mov     ecx, dword ptr [esp+20h+var_C]
 0x849204: mov     large fs:0, ecx
@@ -99,3 +99,12 @@
 0x84920F: pop     ebx
 0x849210: add     esp, 0Ch
 0x849213: retn    10h
+0x9D3390: lea     ecx, [ebp+10h]; void *
+0x9D3393: jmp     sub_4027D0
+0x9D3398: mov     edx, [esp+arg_4]
+0x9D339C: lea     eax, [edx-10h]
+0x9D339F: mov     ecx, [edx-14h]
+0x9D33A2: xor     ecx, eax
+0x9D33A4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D33A9: mov     eax, offset stru_AFB7C0
+0x9D33AE: jmp     ___CxxFrameHandler3

@@ -1,18 +1,31 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x468950",
+      "0x46899D"
+    ]
+  ],
+  "chunks_sha256": "5dbbd57d9784e65790268d076c06d1c4cc682f76704409e30f300929ad57b643",
+  "comment_regular": "CustomAnimSupport decode: TESAnimation copy; clears destination and re-adds source strings through normal deduping append.",
+  "comment_repeatable": "TESAnimation copy: clears destination, then appends each source string through TESAnimation_AddAnimation, preserving order after dedupe.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
   "display_name": "TESAnimation_CopyFrom",
   "end_ea": "0x46899D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "TESAnimation_CopyFrom",
   "segment": ".text",
   "sha256": "5dbbd57d9784e65790268d076c06d1c4cc682f76704409e30f300929ad57b643",
   "size": 77,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x468950",
+  "total_chunk_size": 77,
   "type": "void __thiscall(char **this, void *)",
   "xrefs_from_count": 39,
   "xrefs_to_count": 4

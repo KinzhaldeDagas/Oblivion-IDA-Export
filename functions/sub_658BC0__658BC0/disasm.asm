@@ -1,30 +1,30 @@
-0x658BC0: mov     eax, [esp+arg_4]
+0x658BC0: mov     eax, [esp+owner]
 0x658BC4: push    ebx
-0x658BC5: mov     ebx, [esp+4+arg_0]
+0x658BC5: mov     ebx, [esp+4+changeMask]
 0x658BC9: push    ebp
 0x658BCA: push    esi
 0x658BCB: push    edi
-0x658BCC: push    eax
-0x658BCD: push    ebx
+0x658BCC: push    eax; owner
+0x658BCD: push    ebx; changeMask
 0x658BCE: mov     esi, ecx
-0x658BD0: call    sub_647060
+0x658BD0: call    LowProcess_GetSaveSize
 0x658BD5: mov     ecx, ds:0B33B00h
 0x658BDB: movzx   edi, ax
-0x658BDE: mov     [esp+10h+arg_4], edi
+0x658BDE: mov     [esp+10h+owner], edi
 0x658BE2: movzx   ebp, di
-0x658BE5: call    sub_45A170
+0x658BE5: call    TESSaveLoadGame_UseSaveGameBlocks
 0x658BEA: test    al, al
 0x658BEC: jz      short loc_658BF1
 0x658BEE: add     edi, 6
 0x658BF1: add     edi, 4
 0x658BF4: test    ebx, 100000h
-0x658BFA: mov     [esp+10h+arg_4], edi
+0x658BFA: mov     [esp+10h+owner], edi
 0x658BFE: jz      short loc_658C10
-0x658C00: lea     ecx, [esi+94h]
+0x658C00: lea     ecx, [esi+94h]; self
 0x658C06: call    AVCollection_GetSaveSize
 0x658C0B: add     di, ax
 0x658C0E: jmp     short loc_658C15
-0x658C10: mov     di, word ptr [esp+10h+arg_4]
+0x658C10: mov     di, word ptr [esp+10h+owner]
 0x658C15: cmp     byte ptr ds:0B05BACh, 0
 0x658C1C: jz      short loc_658C97
 0x658C1E: mov     ecx, ds:0B33B00h
@@ -33,7 +33,7 @@
 0x658C2C: jz      short loc_658C77
 0x658C2E: mov     edx, [esi]
 0x658C30: push    edx; a1
-0x658C31: call    TESForm_LookupByFormID
+0x658C31: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x658C36: mov     ecx, [esi+5]
 0x658C39: mov     edx, [eax]
 0x658C3B: add     esp, 4

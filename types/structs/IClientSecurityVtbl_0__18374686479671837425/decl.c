@@ -1,1 +1,1 @@
-IClientSecurityVtbl_0
+typedef IClientSecurityVtbl IClientSecurityVtbl_0;

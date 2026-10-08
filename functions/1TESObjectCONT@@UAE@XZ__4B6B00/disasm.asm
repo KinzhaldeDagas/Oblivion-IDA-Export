@@ -33,7 +33,7 @@
 0x4B6B7D: call    ??1TESModel@@UAE@XZ; TESModel::~TESModel(void)
 0x4B6B82: mov     eax, [esi+38h]
 0x4B6B85: push    eax
-0x4B6B86: call    FormHeapFree
+0x4B6B86: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4B6B8B: xor     eax, eax
 0x4B6B8D: add     esp, 4
 0x4B6B90: mov     ecx, edi
@@ -54,3 +54,48 @@
 0x4B6BC4: pop     ebx
 0x4B6BC5: add     esp, 20h
 0x4B6BC8: retn
+0x9B3A80: mov     ecx, [ebp-10h]
+0x9B3A83: jmp     TESObject_destr
+0x9B3A88: cmp     dword ptr [ebp-10h], 0
+0x9B3A8C: jz      loc_9B3AA0
+0x9B3A92: mov     eax, [ebp-10h]
+0x9B3A95: add     eax, 24h ; '$'
+0x9B3A98: mov     [ebp-14h], eax
+0x9B3A9B: jmp     loc_9B3AA7
+0x9B3AA0: mov     dword ptr [ebp-14h], 0
+0x9B3AA7: mov     ecx, [ebp-14h]
+0x9B3AAA: jmp     TESContainer_destr
+0x9B3AAF: cmp     dword ptr [ebp-10h], 0
+0x9B3AB3: jz      loc_9B3AC7
+0x9B3AB9: mov     eax, [ebp-10h]
+0x9B3ABC: add     eax, 34h ; '4'
+0x9B3ABF: mov     [ebp-18h], eax
+0x9B3AC2: jmp     loc_9B3ACE
+0x9B3AC7: mov     dword ptr [ebp-18h], 0
+0x9B3ACE: mov     ecx, [ebp-18h]
+0x9B3AD1: jmp     TESFullName_Initialize
+0x9B3AD6: cmp     dword ptr [ebp-10h], 0
+0x9B3ADA: jz      loc_9B3AEE
+0x9B3AE0: mov     eax, [ebp-10h]
+0x9B3AE3: add     eax, 40h ; '@'
+0x9B3AE6: mov     [ebp-1Ch], eax
+0x9B3AE9: jmp     loc_9B3AF5
+0x9B3AEE: mov     dword ptr [ebp-1Ch], 0
+0x9B3AF5: mov     ecx, [ebp-1Ch]; this
+0x9B3AF8: jmp     ??1TESModel@@UAE@XZ; TESModel::~TESModel(void)
+0x9B3AFD: cmp     dword ptr [ebp-10h], 0
+0x9B3B01: jz      loc_9B3B15
+0x9B3B07: mov     eax, [ebp-10h]
+0x9B3B0A: add     eax, 64h ; 'd'
+0x9B3B0D: mov     [ebp-20h], eax
+0x9B3B10: jmp     loc_9B3B1C
+0x9B3B15: mov     dword ptr [ebp-20h], 0
+0x9B3B1C: mov     ecx, [ebp-20h]
+0x9B3B1F: jmp     TESWeightForm_destr
+0x9B3B24: mov     edx, [esp+arg_4]
+0x9B3B28: lea     eax, [edx-24h]
+0x9B3B2B: mov     ecx, [edx-28h]
+0x9B3B2E: xor     ecx, eax
+0x9B3B30: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B3B35: mov     eax, offset stru_ADF478
+0x9B3B3A: jmp     ___CxxFrameHandler3

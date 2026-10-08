@@ -1,1 +1,1 @@
-0x67E600: jmp     ??1AStarNodeList@@UAE@XZ
+0x67E600: jmp     AStarNodeList_dtor

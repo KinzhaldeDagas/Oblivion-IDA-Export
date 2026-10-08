@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x68EA10",
-    "line": "cmp     [esp+arg_0], 0",
+    "line": "cmp     [esp+arg_0], 0; Verified termination API: sets bTerminated=1. When its flush flag is true, immediately invokes ActiveEffect_Base_ProcessEffect to run termination cleanup.",
     "mnemonic": "cmp",
     "size": 5
   },
   {
     "ea": "0x68EA15",
-    "line": "mov     byte ptr [ecx+11h], 1",
+    "line": "mov     byte ptr [ecx+11h], 1; Verified: ActiveEffect_Base_Remove sets bTerminated=true; optional immediate processing controls whether termination cleanup is flushed now.",
     "mnemonic": "mov",
     "size": 4
   },

@@ -1,4 +1,7 @@
 BSStringT *sub_A12020()
 {
-  return sub_70E220((BSStringT *)&unk_B478B0, "SpeedTreeFrondShaderProperty", (int)&stru_B468D4);
+  return NiRTTI_Constructor( /*0xa12034*/
+           (BSStringT *)&OB_ShaderConstantStorage_010201A0[0x6A7],
+           "SpeedTreeFrondShaderProperty",
+           (int)&OB_ShaderConstantStorage_010201A0[0x2B0]);
 }

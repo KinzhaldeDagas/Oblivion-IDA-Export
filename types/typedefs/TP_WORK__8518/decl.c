@@ -1,1 +1,1 @@
-_TP_WORK
+struct _TP_WORK;

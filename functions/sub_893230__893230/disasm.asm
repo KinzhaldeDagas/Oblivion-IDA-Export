@@ -76,15 +76,15 @@
 0x89333C: movaps  xmm0, [esp+64h+var_40]
 0x893341: mov     eax, [esp+64h+var_50]
 0x893345: fmul    st, st(1)
-0x893347: movaps  [esp+64h+var_30], xmm0
+0x893347: movaps  xmmword ptr [esp+64h+var_30], xmm0
 0x89334C: and     eax, 3FFFFFFFh
 0x893351: cmp     [esp+64h+var_54], eax
-0x893355: fadd    dword ptr [esp+64h+var_30]
-0x893359: fstp    dword ptr [esp+64h+var_30]
+0x893355: fadd    [esp+64h+var_30]
+0x893359: fstp    [esp+64h+var_30]
 0x89335D: fld     dword ptr [esi+0B2E7A8h]
 0x893363: fmul    st, st(1)
-0x893365: fadd    dword ptr [esp+64h+var_30+4]
-0x893369: fstp    dword ptr [esp+64h+var_30+4]
+0x893365: fadd    [esp+64h+var_30+4]
+0x893369: fstp    [esp+64h+var_30+4]
 0x89336D: jnz     short loc_89338C
 0x89336F: lea     ecx, [esp+64h+var_58]
 0x893373: fstp    st(1)
@@ -96,7 +96,7 @@
 0x893385: fld     [esp+6Ch+var_4C]
 0x893389: add     esp, 8
 0x89338C: mov     ecx, [esp+64h+var_54]
-0x893390: movaps  xmm0, [esp+64h+var_30]
+0x893390: movaps  xmm0, xmmword ptr [esp+64h+var_30]
 0x893395: mov     eax, ecx
 0x893397: shl     eax, 4
 0x89339A: add     eax, [esp+64h+var_58]
@@ -127,13 +127,13 @@
 0x8933EB: movaps  xmm0, [esp+64h+var_40]
 0x8933F0: mov     edx, [esp+64h+var_50]
 0x8933F4: fmul    st, st(1)
-0x8933F6: movaps  [esp+64h+var_30], xmm0
+0x8933F6: movaps  xmmword ptr [esp+64h+var_30], xmm0
 0x8933FB: and     edx, 3FFFFFFFh
 0x893401: cmp     [esp+64h+var_54], edx
-0x893405: fstp    dword ptr [esp+64h+var_30]
+0x893405: fstp    [esp+64h+var_30]
 0x893409: fld     dword ptr [esi+0B2E7A8h]
 0x89340F: fmul    st, st(1)
-0x893411: fstp    dword ptr [esp+64h+var_30+4]
+0x893411: fstp    [esp+64h+var_30+4]
 0x893415: jnz     short loc_89342C
 0x893417: lea     eax, [esp+64h+var_58]
 0x89341B: fstp    st
@@ -143,7 +143,7 @@
 0x893425: fld     [esp+6Ch+var_4C]
 0x893429: add     esp, 8
 0x89342C: mov     ecx, [esp+64h+var_54]
-0x893430: movaps  xmm0, [esp+64h+var_30]
+0x893430: movaps  xmm0, xmmword ptr [esp+64h+var_30]
 0x893435: mov     eax, ecx
 0x893437: shl     eax, 4
 0x89343A: add     eax, [esp+64h+var_58]
@@ -208,3 +208,37 @@
 0x893507: mov     esp, ebp
 0x893509: pop     ebp
 0x89350A: retn
+0x564B30: mov     edx, ecx
+0x564B32: mov     eax, [edx+8]
+0x564B35: test    eax, eax
+0x564B37: js      short locret_564B6E
+0x564B39: mov     ecx, ds:0BA9DE4h
+0x564B3F: push    esi
+0x564B40: mov     esi, large fs:2Ch
+0x564B47: mov     ecx, [esi+ecx*4]
+0x564B4A: mov     ecx, [ecx+19Ch]
+0x564B50: test    ecx, ecx
+0x564B52: pop     esi
+0x564B53: jnz     short loc_564B5B
+0x564B55: mov     ecx, ds:0BA7D9Ch
+0x564B5B: mov     edx, [edx]
+0x564B5D: and     eax, 3FFFFFFFh
+0x564B62: push    14h
+0x564B64: shl     eax, 4
+0x564B67: push    eax
+0x564B68: push    edx
+0x564B69: call    sub_8A75D0
+0x564B6E: retn
+0x9D6410: lea     ecx, [ebp+var_58]
+0x9D6413: jmp     loc_564B30
+0x9D6418: mov     edx, [esp-4+arg_4]
+0x9D641C: lea     eax, [edx-54h]
+0x9D641F: mov     ecx, [edx-58h]
+0x9D6422: xor     ecx, eax
+0x9D6424: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D6429: add     eax, 4
+0x9D642C: mov     ecx, [edx-8]
+0x9D642F: xor     ecx, eax
+0x9D6431: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D6436: mov     eax, offset stru_AFE2D0
+0x9D643B: jmp     ___CxxFrameHandler3

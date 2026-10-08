@@ -193,31 +193,31 @@
   },
   {
     "ea": "0x6F7B18",
-    "line": "mov     byte ptr [esp+48h+Str], 0",
+    "line": "mov     byte ptr [esp+48h+var_2C.storage], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x6F7B1D",
-    "line": "mov     [esp+48h+var_14], ecx",
+    "line": "mov     [esp+48h+var_2C.capacity], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6F7B21",
-    "line": "mov     [esp+48h+Str], eax",
+    "line": "mov     dword ptr [esp+48h+var_2C.storage], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6F7B25",
-    "line": "mov     [esp+48h+var_24], eax",
+    "line": "mov     dword ptr [esp+48h+var_2C.storage+4], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6F7B29",
-    "line": "mov     [esp+48h+var_18], 8",
+    "line": "mov     [esp+48h+var_2C.size], 8",
     "mnemonic": "mov",
     "size": 8
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x6F7B33",
-    "line": "lea     eax, [esp+48h+Str]",
+    "line": "lea     eax, [esp+48h+var_2C.storage]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -247,13 +247,13 @@
   },
   {
     "ea": "0x6F7B43",
-    "line": "mov     eax, [esp+48h+Str]",
+    "line": "mov     eax, dword ptr [esp+48h+var_2C.storage]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6F7B47",
-    "line": "mov     edx, [esp+48h+var_14]",
+    "line": "mov     edx, [esp+48h+var_2C.capacity]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -262,12 +262,6 @@
     "line": "jmp     short loc_6F7B50",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x6F7B4D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x6F7B50",
@@ -319,7 +313,7 @@
   },
   {
     "ea": "0x6F7B66",
-    "line": "lea     ecx, [esp+48h+Str]",
+    "line": "lea     ecx, [esp+48h+var_2C.storage]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -355,13 +349,13 @@
   },
   {
     "ea": "0x6F7B75",
-    "line": "lea     ecx, [esp+48h+Str]",
+    "line": "lea     ecx, [esp+48h+var_2C.storage]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6F7B79",
-    "line": "mov     esi, [esp+48h+var_18]",
+    "line": "mov     esi, [esp+48h+var_2C.size]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -391,13 +385,13 @@
   },
   {
     "ea": "0x6F7B88",
-    "line": "mov     edx, [esp+48h+var_14]",
+    "line": "mov     edx, [esp+48h+var_2C.capacity]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6F7B8C",
-    "line": "mov     eax, [esp+48h+Str]",
+    "line": "mov     eax, dword ptr [esp+48h+var_2C.storage]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -439,13 +433,13 @@
   },
   {
     "ea": "0x6F7BA0",
-    "line": "lea     ecx, [esp+48h+Str]",
+    "line": "lea     ecx, [esp+48h+var_2C.storage]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6F7BA4",
-    "line": "mov     esi, [esp+48h+var_18]",
+    "line": "mov     esi, [esp+48h+var_2C.size]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -475,13 +469,13 @@
   },
   {
     "ea": "0x6F7BB3",
-    "line": "mov     edx, [esp+48h+var_14]",
+    "line": "mov     edx, [esp+48h+var_2C.capacity]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6F7BB7",
-    "line": "mov     eax, [esp+48h+Str]",
+    "line": "mov     eax, dword ptr [esp+48h+var_2C.storage]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -493,7 +487,7 @@
   },
   {
     "ea": "0x6F7BBE",
-    "line": "mov     edi, [esp+48h+var_18]",
+    "line": "mov     edi, [esp+48h+var_2C.size]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -541,7 +535,7 @@
   },
   {
     "ea": "0x6F7BD5",
-    "line": "lea     ecx, [esp+48h+Str]",
+    "line": "lea     ecx, [esp+48h+var_2C.storage]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -577,13 +571,13 @@
   },
   {
     "ea": "0x6F7BE4",
-    "line": "lea     ecx, [esp+48h+Str]",
+    "line": "lea     ecx, [esp+48h+var_2C.storage]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6F7BE8",
-    "line": "mov     ebx, [esp+48h+var_18]",
+    "line": "mov     ebx, [esp+48h+var_2C.size]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -619,13 +613,13 @@
   },
   {
     "ea": "0x6F7BFB",
-    "line": "mov     edx, [esp+48h+var_14]",
+    "line": "mov     edx, [esp+48h+var_2C.capacity]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6F7BFF",
-    "line": "mov     eax, [esp+48h+Str]",
+    "line": "mov     eax, dword ptr [esp+48h+var_2C.storage]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -661,13 +655,13 @@
   },
   {
     "ea": "0x6F7C11",
-    "line": "lea     eax, [esp+48h+Str]",
+    "line": "lea     eax, [esp+48h+var_2C.storage]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6F7C15",
-    "line": "mov     edx, [esp+48h+var_18]",
+    "line": "mov     edx, [esp+48h+var_2C.size]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -811,7 +805,7 @@
   },
   {
     "ea": "0x6F7C57",
-    "line": "lea     ebp, [esp+48h+Str]",
+    "line": "lea     ebp, [esp+48h+var_2C.storage]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -823,7 +817,7 @@
   },
   {
     "ea": "0x6F7C60",
-    "line": "lea     esi, [esp+48h+Str]",
+    "line": "lea     esi, [esp+48h+var_2C.storage]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -841,7 +835,7 @@
   },
   {
     "ea": "0x6F7C6D",
-    "line": "mov     edx, [esp+48h+var_14]",
+    "line": "mov     edx, [esp+48h+var_2C.capacity]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -853,7 +847,7 @@
   },
   {
     "ea": "0x6F7C74",
-    "line": "mov     eax, [esp+48h+Str]",
+    "line": "mov     eax, dword ptr [esp+48h+var_2C.storage]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -901,7 +895,7 @@
   },
   {
     "ea": "0x6F7C8B",
-    "line": "lea     ecx, [esp+48h+Str]",
+    "line": "lea     ecx, [esp+48h+var_2C.storage]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -937,13 +931,13 @@
   },
   {
     "ea": "0x6F7C9A",
-    "line": "lea     ecx, [esp+48h+Str]",
+    "line": "lea     ecx, [esp+48h+var_2C.storage]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6F7C9E",
-    "line": "mov     edi, [esp+48h+var_18]",
+    "line": "mov     edi, [esp+48h+var_2C.size]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -973,13 +967,13 @@
   },
   {
     "ea": "0x6F7CAD",
-    "line": "mov     edx, [esp+48h+var_14]",
+    "line": "mov     edx, [esp+48h+var_2C.capacity]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6F7CB1",
-    "line": "mov     eax, [esp+48h+Str]",
+    "line": "mov     eax, dword ptr [esp+48h+var_2C.storage]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1021,13 +1015,13 @@
   },
   {
     "ea": "0x6F7CC5",
-    "line": "lea     ecx, [esp+48h+Str]",
+    "line": "lea     ecx, [esp+48h+var_2C.storage]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6F7CC9",
-    "line": "mov     edi, [esp+48h+var_18]",
+    "line": "mov     edi, [esp+48h+var_2C.size]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1057,13 +1051,13 @@
   },
   {
     "ea": "0x6F7CD8",
-    "line": "mov     edx, [esp+48h+var_14]",
+    "line": "mov     edx, [esp+48h+var_2C.capacity]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6F7CDC",
-    "line": "mov     eax, [esp+48h+Str]",
+    "line": "mov     eax, dword ptr [esp+48h+var_2C.storage]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1135,7 +1129,7 @@
   },
   {
     "ea": "0x6F7CFE",
-    "line": "lea     ecx, [esp+48h+Str]",
+    "line": "lea     ecx, [esp+48h+var_2C.storage]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1171,13 +1165,13 @@
   },
   {
     "ea": "0x6F7D0D",
-    "line": "lea     ecx, [esp+48h+Str]",
+    "line": "lea     ecx, [esp+48h+var_2C.storage]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6F7D11",
-    "line": "mov     ebp, [esp+48h+var_18]",
+    "line": "mov     ebp, [esp+48h+var_2C.size]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1207,13 +1201,13 @@
   },
   {
     "ea": "0x6F7D20",
-    "line": "mov     edx, [esp+48h+var_14]",
+    "line": "mov     edx, [esp+48h+var_2C.capacity]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6F7D24",
-    "line": "mov     eax, [esp+48h+Str]",
+    "line": "mov     eax, dword ptr [esp+48h+var_2C.storage]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1249,13 +1243,13 @@
   },
   {
     "ea": "0x6F7D36",
-    "line": "lea     eax, [esp+48h+Str]",
+    "line": "lea     eax, [esp+48h+var_2C.storage]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6F7D3A",
-    "line": "mov     edx, [esp+48h+var_18]",
+    "line": "mov     edx, [esp+48h+var_2C.size]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1339,13 +1333,13 @@
   },
   {
     "ea": "0x6F7D5D",
-    "line": "mov     edx, [esp+48h+var_14]",
+    "line": "mov     edx, [esp+48h+var_2C.capacity]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6F7D61",
-    "line": "mov     eax, [esp+48h+Str]",
+    "line": "mov     eax, dword ptr [esp+48h+var_2C.storage]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1405,7 +1399,7 @@
   },
   {
     "ea": "0x6F7D84",
-    "line": "lea     esi, [esp+48h+Str]",
+    "line": "lea     esi, [esp+48h+var_2C.storage]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1417,7 +1411,7 @@
   },
   {
     "ea": "0x6F7D8D",
-    "line": "lea     esi, [esp+48h+Str]",
+    "line": "lea     esi, [esp+48h+var_2C.storage]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1429,13 +1423,13 @@
   },
   {
     "ea": "0x6F7D96",
-    "line": "lea     ecx, [esp+48h+var_2C]",
+    "line": "lea     ecx, [esp+48h+var_2C]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6F7D9A",
-    "line": "call    sub_79AB00",
+    "line": "call    OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1453,13 +1447,13 @@
   },
   {
     "ea": "0x6F7DA3",
-    "line": "lea     ecx, [esp+48h+var_2C]",
+    "line": "lea     ecx, [esp+48h+var_2C]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6F7DA7",
-    "line": "call    sub_79AB00",
+    "line": "call    OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1540,5 +1534,83 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C8E20",
+    "line": "lea     ecx, [ebp-2Ch]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C8E23",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8E28",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C8E2C",
+    "line": "lea     eax, [edx-38h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C8E2F",
+    "line": "mov     ecx, [edx-3Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C8E32",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C8E34",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8E39",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C8E3C",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C8E3F",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C8E41",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8E46",
+    "line": "mov     eax, offset stru_AF1714",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8E4B",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

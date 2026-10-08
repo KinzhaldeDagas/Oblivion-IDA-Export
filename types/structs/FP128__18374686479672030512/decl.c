@@ -1,1 +1,4 @@
-_FP128
+struct _FP128
+{
+__msvcrt_ulong W[4];
+};

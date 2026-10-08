@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x785400",
-    "line": "push    ebx",
+    "line": "push    ebx; Oblivion 1.2.0.416: vector<stVec> copy assignment with self, empty, reuse, capacity-reuse, and reallocation cases.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x785401",
-    "line": "mov     ebx, [esp+4+arg_0]",
+    "line": "mov     ebx, [esp+4+other]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -115,13 +115,13 @@
   },
   {
     "ea": "0x785430",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x785432",
-    "line": "call    sub_784BF0",
+    "line": "call    OB_stVector24_Clear_010201A0; Oblivion 1.2.0.416: vector clear implemented as checked erase(begin,end).",
     "mnemonic": "call",
     "size": 5
   },
@@ -259,25 +259,25 @@
   },
   {
     "ea": "0x785468",
-    "line": "push    edi",
+    "line": "push    edi; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x785469",
-    "line": "push    eax",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78546A",
-    "line": "push    ebp",
+    "line": "push    ebp; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78546B",
-    "line": "call    sub_784880",
+    "line": "call    OB_stVector24_CopyRangeAdapter_010201A0; Oblivion 1.2.0.416: copy-range adapter for 0x18-byte records; returns destination advanced by the source count.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,13 +295,13 @@
   },
   {
     "ea": "0x785476",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x785477",
-    "line": "push    eax",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x78547A",
-    "line": "call    sub_7849F0",
+    "line": "call    OB_stVector24_DestroyRange_010201A0; Oblivion 1.2.0.416: destroys [first,last) in 0x18-byte steps through the folded trivial record destructor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -589,13 +589,13 @@
   },
   {
     "ea": "0x7854E8",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7854EA",
-    "line": "call    sub_783FE0",
+    "line": "call    OB_stVector24_Size_010201A0; Oblivion 1.2.0.416: returns (end-begin)/0x18 for a compiler-folded 24-byte vector specialization; xrefs show both stVec and branch-flare records.",
     "mnemonic": "call",
     "size": 5
   },
@@ -613,31 +613,31 @@
   },
   {
     "ea": "0x7854F6",
-    "line": "push    edi",
+    "line": "push    edi; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7854F7",
-    "line": "push    eax",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7854F8",
-    "line": "push    ebp",
+    "line": "push    ebp; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7854F9",
-    "line": "mov     [esp+1Ch+arg_0], eax",
+    "line": "mov     [esp+1Ch+other], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7854FD",
-    "line": "call    sub_784880",
+    "line": "call    OB_stVector24_CopyRangeAdapter_010201A0; Oblivion 1.2.0.416: copy-range adapter for 0x18-byte records; returns destination advanced by the source count.",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x785508",
-    "line": "mov     edx, [esp+1Ch+arg_0]",
+    "line": "mov     edx, [esp+1Ch+other]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -667,19 +667,19 @@
   },
   {
     "ea": "0x78550F",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x785510",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x785511",
-    "line": "push    edx",
+    "line": "push    edx; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x785514",
-    "line": "call    sub_7849C0",
+    "line": "call    OB_stVector24_UninitializedCopyRangeThunk_010201A0; Oblivion 1.2.0.416: stdcall adapter to the shared 0x18-byte uninitialized-copy primitive.",
     "mnemonic": "call",
     "size": 5
   },
@@ -757,13 +757,13 @@
   },
   {
     "ea": "0x78552C",
-    "line": "push    eax",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78552D",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x785530",
-    "line": "call    sub_7849F0",
+    "line": "call    OB_stVector24_DestroyRange_010201A0; Oblivion 1.2.0.416: destroys [first,last) in 0x18-byte steps through the folded trivial record destructor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x785539",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -805,31 +805,31 @@
   },
   {
     "ea": "0x785541",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x785543",
-    "line": "call    sub_783FE0",
+    "line": "call    OB_stVector24_Size_010201A0; Oblivion 1.2.0.416: returns (end-begin)/0x18 for a compiler-folded 24-byte vector specialization; xrefs show both stVec and branch-flare records.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x785548",
-    "line": "push    eax",
+    "line": "push    eax; capacity",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x785549",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x78554B",
-    "line": "call    sub_784FA0",
+    "line": "call    OB_stVector24_Buy_010201A0; Oblivion 1.2.0.416: initializes an empty 24-byte-record vector and allocates capacity*0x18 bytes when capacity is nonzero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -865,19 +865,19 @@
   },
   {
     "ea": "0x78555D",
-    "line": "push    edx",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78555E",
-    "line": "push    eax",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78555F",
-    "line": "push    ecx",
+    "line": "push    ecx; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -889,7 +889,7 @@
   },
   {
     "ea": "0x785562",
-    "line": "call    sub_7849C0",
+    "line": "call    OB_stVector24_UninitializedCopyRangeThunk_010201A0; Oblivion 1.2.0.416: stdcall adapter to the shared 0x18-byte uninitialized-copy primitive.",
     "mnemonic": "call",
     "size": 5
   },

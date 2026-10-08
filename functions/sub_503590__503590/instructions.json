@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x5035C0",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x5035CE",
-    "line": "mov     edx, [esp+4+arg_18]",
+    "line": "mov     edx, [esp+4+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -163,31 +163,31 @@
   },
   {
     "ea": "0x5035DB",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5035DC",
-    "line": "push    0",
+    "line": "push    0; param2",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5035DE",
-    "line": "push    eax",
+    "line": "push    eax; param1",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5035DF",
-    "line": "push    ecx",
+    "line": "push    ecx; subject",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5035E0",
-    "line": "call    sub_4F70C0",
+    "line": "call    GetInFaction_Eval; GetInFaction_Eval (index 71 / opcode 0x1047): the Faction parameter (typeID 0x11) is present when TESActorBaseData_GetFactionRank != -1. This returns a membership predicate, not the numeric rank.",
     "mnemonic": "call",
     "size": 5
   },

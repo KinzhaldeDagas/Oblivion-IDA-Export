@@ -1,4 +1,4 @@
-0x9A8800: push    esi
+0x9A8800: push    esi; DeferredRendering: NiD3DShaderConstantMap::SetConstantValue allocates a 0x38 entry, copies key/constant names, stores shader register at +0x1C, and adds it to the map.
 0x9A8801: push    edi; Src
 0x9A8802: push    38h ; '8'; Size
 0x9A8804: mov     edi, ecx

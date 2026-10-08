@@ -14,7 +14,7 @@
 0x57DC8F: mov     ecx, [eax+20h]; this
 0x57DC92: push    0; a3
 0x57DC94: push    0CBh ; 'Ë'; a2
-0x57DC99: call    InputGlobals__QueryKeyboardState
+0x57DC99: call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.
 0x57DC9E: test    eax, eax
 0x57DCA0: jz      short loc_57DD10
 0x57DCA2: cmp     dword ptr [esi+11Ch], 80000002h
@@ -23,7 +23,7 @@
 0x57DCB4: mov     ecx, [ecx+20h]; this
 0x57DCB7: push    0; a3
 0x57DCB9: push    0CDh ; 'Í'; a2
-0x57DCBE: call    InputGlobals__QueryKeyboardState
+0x57DCBE: call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.
 0x57DCC3: test    eax, eax
 0x57DCC5: jz      short loc_57DD10
 0x57DCC7: cmp     dword ptr [esi+11Ch], 80000003h
@@ -32,7 +32,7 @@
 0x57DCD9: mov     ecx, [edx+20h]; this
 0x57DCDC: push    0; a3
 0x57DCDE: push    0C8h ; 'È'; a2
-0x57DCE3: call    InputGlobals__QueryKeyboardState
+0x57DCE3: call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.
 0x57DCE8: test    eax, eax
 0x57DCEA: jz      short loc_57DD10
 0x57DCEC: cmp     dword ptr [esi+11Ch], 80000004h
@@ -41,7 +41,7 @@
 0x57DCFD: mov     ecx, [eax+20h]; this
 0x57DD00: push    0; a3
 0x57DD02: push    0D0h ; 'Ð'; a2
-0x57DD07: call    InputGlobals__QueryKeyboardState
+0x57DD07: call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.
 0x57DD0C: test    eax, eax
 0x57DD0E: jnz     short loc_57DD22
 0x57DD10: mov     dword ptr [esi+11Ch], 0

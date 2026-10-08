@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x784C30",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Erases one spline-cache map node. Validates the iterator, computes its successor, unlinks/transplants the node, performs red-black deletion fixup with the two rotations, destroys any heap-backed key storage, frees the 0x30-byte node, and decrements map size.",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x784C5D",
-    "line": "mov     eax, [esp+68h+arg_8]",
+    "line": "mov     eax, [esp+68h+iteratorNode]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x784C67",
-    "line": "push    1Bh; MaxCount",
+    "line": "push    1Bh; count",
     "mnemonic": "push",
     "size": 2
   },
@@ -133,31 +133,31 @@
   },
   {
     "ea": "0x784C70",
-    "line": "lea     ecx, [esp+70h+var_50]",
+    "line": "lea     ecx, [esp+70h+var_50]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x784C74",
-    "line": "mov     [esp+70h+var_38], 0Fh",
+    "line": "mov     [esp+70h+var_50.capacity], 0Fh",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x784C7C",
-    "line": "mov     [esp+70h+var_3C], esi",
+    "line": "mov     [esp+70h+var_50.size], esi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x784C80",
-    "line": "mov     [esp+70h+var_4C], 0",
+    "line": "mov     byte ptr [esp+70h+var_50.storage], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x784C85",
-    "line": "call    sub_414500",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x784CB3",
-    "line": "lea     ecx, [esp+68h+arg_4]",
+    "line": "lea     ecx, [esp+68h+iteratorOwner]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x784CB9",
-    "line": "call    sub_7846D0",
+    "line": "call    OB_stBezierSplineCacheIterator_Increment_010201A0; Oblivion-authoritative cache-map iterator preincrement. Descends to the leftmost node of a non-nil right subtree; otherwise climbs parents until leaving a right-child chain. Mutates the {owner,node} iterator in place.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x784CD9",
-    "line": "mov     ecx, [esp+68h+arg_8]",
+    "line": "mov     ecx, [esp+68h+iteratorNode]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -451,13 +451,13 @@
   },
   {
     "ea": "0x784D19",
-    "line": "push    edi",
+    "line": "push    edi; node",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x784D1A",
-    "line": "call    sub_784070",
+    "line": "call    OB_stBezierSplineCacheNode_Leftmost_010201A0; Oblivion 1.2.0.416: follows cache-tree left links to the leftmost non-nil node.",
     "mnemonic": "call",
     "size": 5
   },
@@ -529,13 +529,13 @@
   },
   {
     "ea": "0x784D3D",
-    "line": "push    edi",
+    "line": "push    edi; node",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x784D3E",
-    "line": "call    sub_784090",
+    "line": "call    OB_stBezierSplineCacheNode_Rightmost_010201A0; Oblivion 1.2.0.416: follows cache-tree right links to the rightmost non-nil node.",
     "mnemonic": "call",
     "size": 5
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x784DAE",
-    "line": "mov     ecx, [esp+68h+var_54]",
+    "line": "mov     ecx, [esp+68h+var_54]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -859,7 +859,7 @@
   },
   {
     "ea": "0x784DDB",
-    "line": "push    esi",
+    "line": "push    esi; pivot",
     "mnemonic": "push",
     "size": 1
   },
@@ -871,7 +871,7 @@
   },
   {
     "ea": "0x784DE0",
-    "line": "call    sub_784740",
+    "line": "call    OB_stBezierSplineCacheMap_RotateLeft_010201A0; Oblivion-authoritative red-black-tree left rotation around pivot. Reparents pivot->right, updates the sentinel head's root link when pivot was root, and preserves child parent links.",
     "mnemonic": "call",
     "size": 5
   },
@@ -883,7 +883,7 @@
   },
   {
     "ea": "0x784DE8",
-    "line": "mov     ecx, [esp+68h+var_54]",
+    "line": "mov     ecx, [esp+68h+var_54]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -967,7 +967,7 @@
   },
   {
     "ea": "0x784E0E",
-    "line": "push    eax",
+    "line": "push    eax; pivot",
     "mnemonic": "push",
     "size": 1
   },
@@ -979,7 +979,7 @@
   },
   {
     "ea": "0x784E13",
-    "line": "call    sub_784790",
+    "line": "call    OB_stBezierSplineCacheMap_RotateRight_010201A0; Oblivion-authoritative red-black-tree right rotation around pivot. Mirror of 0x784740; updates the sentinel head root and all affected parent/child links.",
     "mnemonic": "call",
     "size": 5
   },
@@ -991,7 +991,7 @@
   },
   {
     "ea": "0x784E1B",
-    "line": "mov     ecx, [esp+68h+var_54]",
+    "line": "mov     ecx, [esp+68h+var_54]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1021,7 +1021,7 @@
   },
   {
     "ea": "0x784E2B",
-    "line": "push    esi",
+    "line": "push    esi; pivot",
     "mnemonic": "push",
     "size": 1
   },
@@ -1033,7 +1033,7 @@
   },
   {
     "ea": "0x784E2F",
-    "line": "call    sub_784740",
+    "line": "call    OB_stBezierSplineCacheMap_RotateLeft_010201A0; Oblivion-authoritative red-black-tree left rotation around pivot. Reparents pivot->right, updates the sentinel head's root link when pivot was root, and preserves child parent links.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1063,7 +1063,7 @@
   },
   {
     "ea": "0x784E3F",
-    "line": "push    esi",
+    "line": "push    esi; pivot",
     "mnemonic": "push",
     "size": 1
   },
@@ -1075,7 +1075,7 @@
   },
   {
     "ea": "0x784E44",
-    "line": "call    sub_784790",
+    "line": "call    OB_stBezierSplineCacheMap_RotateRight_010201A0; Oblivion-authoritative red-black-tree right rotation around pivot. Mirror of 0x784740; updates the sentinel head root and all affected parent/child links.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1087,7 +1087,7 @@
   },
   {
     "ea": "0x784E4B",
-    "line": "mov     ecx, [esp+68h+var_54]",
+    "line": "mov     ecx, [esp+68h+var_54]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1213,7 +1213,7 @@
   },
   {
     "ea": "0x784E88",
-    "line": "push    eax",
+    "line": "push    eax; pivot",
     "mnemonic": "push",
     "size": 1
   },
@@ -1225,7 +1225,7 @@
   },
   {
     "ea": "0x784E8D",
-    "line": "call    sub_784740",
+    "line": "call    OB_stBezierSplineCacheMap_RotateLeft_010201A0; Oblivion-authoritative red-black-tree left rotation around pivot. Reparents pivot->right, updates the sentinel head's root link when pivot was root, and preserves child parent links.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1237,7 +1237,7 @@
   },
   {
     "ea": "0x784E94",
-    "line": "mov     ecx, [esp+68h+var_54]",
+    "line": "mov     ecx, [esp+68h+var_54]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1267,7 +1267,7 @@
   },
   {
     "ea": "0x784EA3",
-    "line": "push    esi",
+    "line": "push    esi; pivot",
     "mnemonic": "push",
     "size": 1
   },
@@ -1279,7 +1279,7 @@
   },
   {
     "ea": "0x784EA7",
-    "line": "call    sub_784790",
+    "line": "call    OB_stBezierSplineCacheMap_RotateRight_010201A0; Oblivion-authoritative red-black-tree right rotation around pivot. Mirror of 0x784740; updates the sentinel head root and all affected parent/child links.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1315,7 +1315,7 @@
   },
   {
     "ea": "0x784EB9",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1351,7 +1351,7 @@
   },
   {
     "ea": "0x784ED4",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1399,19 +1399,19 @@
   },
   {
     "ea": "0x784EED",
-    "line": "mov     eax, [esp+68h+arg_0]",
+    "line": "mov     eax, [esp+68h+result]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x784EF1",
-    "line": "mov     edx, [esp+68h+arg_4]",
+    "line": "mov     edx, [esp+68h+iteratorOwner]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x784EF5",
-    "line": "mov     ecx, [esp+68h+arg_8]",
+    "line": "mov     ecx, [esp+68h+iteratorNode]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1480,5 +1480,59 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CAFA0",
+    "line": "lea     ecx, [ebp-50h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAFA3",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CAFA8",
+    "line": "mov     edx, [esp+iteratorOwner]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CAFAC",
+    "line": "lea     eax, [edx-58h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAFAF",
+    "line": "mov     ecx, [edx-5Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAFB2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CAFB4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CAFB9",
+    "line": "mov     eax, offset stru_AF35BC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CAFBE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

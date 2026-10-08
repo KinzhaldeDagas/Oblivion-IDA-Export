@@ -1,14 +1,18 @@
-char *__cdecl sub_788630(char *a1, char *a2, char *a3)
+// Oblivion collision-vector uninitialized copy: copies [first,last) as 28-byte records into destination and returns the advanced destination.
+OB_CollisionObject_010201A0 *__cdecl OB_stVector_CollisionObject_UninitializedCopyRange_010201A0(
+        const OB_CollisionObject_010201A0 *first,
+        const OB_CollisionObject_010201A0 *last,
+        OB_CollisionObject_010201A0 *destination)
 {
-  char *v3; // edx
-  char *result; // eax
+  const OB_CollisionObject_010201A0 *v3; // edx
+  OB_CollisionObject_010201A0 *result; // eax
 
-  v3 = a1;
-  for ( result = a3; v3 != a2; result += 0x1C )
+  v3 = first; /*0x788630*/
+  for ( result = destination; v3 != last; ++result ) /*0x78863f*/
   {
-    if ( result )
-      qmemcpy(result, v3, 0x1Cu);
-    v3 += 0x1C;
+    if ( result ) /*0x788645*/
+      qmemcpy(result, v3, sizeof(OB_CollisionObject_010201A0)); /*0x788650*/
+    ++v3; /*0x788652*/
   }
-  return result;
+  return result; /*0x78865e*/
 }

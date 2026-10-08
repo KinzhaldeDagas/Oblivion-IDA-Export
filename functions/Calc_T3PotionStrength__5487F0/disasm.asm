@@ -27,7 +27,7 @@
 0x548855: cmp     [esp+0Ch+arg_20], 0
 0x54885A: fstp    st
 0x54885C: jnz     loc_548945
-0x548862: mov     ecx, offset fPotionT3RetMagMult
+0x548862: mov     ecx, 0B37A30h
 0x548867: call    GameSetting_GetSafeFloatPointer
 0x54886C: fld     dword ptr [esi]
 0x54886E: fmul    [esp+0Ch+arg_14]
@@ -61,12 +61,12 @@
 0x5488C2: jz      short loc_5488A8; jumptable 00548847 case 3
 0x5488C4: cmp     [esp+0Ch+arg_20], 0
 0x5488C9: jnz     short loc_5488A8; jumptable 00548847 case 3
-0x5488CB: mov     ecx, offset fPotionT3AleMagMult
+0x5488CB: mov     ecx, 0B37A40h
 0x5488D0: fstp    st
 0x5488D2: call    GameSetting_GetSafeFloatPointer
 0x5488D7: fld     dword ptr [esi]
 0x5488D9: fmul    [esp+0Ch+arg_18]
-0x5488DD: mov     ecx, offset fPotionT3CalMagMult
+0x5488DD: mov     ecx, 0B37A38h
 0x5488E2: fmul    dword ptr [eax]
 0x5488E4: fmul    [esp+0Ch+arg_1C]
 0x5488E8: fstp    [esp+0Ch+var_8]
@@ -82,12 +82,12 @@
 0x548905: jnz     short loc_5488A8; jumptable 00548847 case 3
 0x548907: cmp     [esp+0Ch+arg_20], 0
 0x54890C: jnz     short loc_5488A8; jumptable 00548847 case 3
-0x54890E: mov     ecx, offset fPotionT3RetMagMult
+0x54890E: mov     ecx, 0B37A30h
 0x548913: fstp    st
 0x548915: call    GameSetting_GetSafeFloatPointer
 0x54891A: fld     dword ptr [esi]
 0x54891C: fmul    [esp+0Ch+arg_14]
-0x548920: mov     ecx, offset fPotionT3CalMagMult
+0x548920: mov     ecx, 0B37A38h
 0x548925: fmul    dword ptr [eax]
 0x548927: fmul    [esp+0Ch+arg_1C]
 0x54892B: fstp    [esp+0Ch+var_8]

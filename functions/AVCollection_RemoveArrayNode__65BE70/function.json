@@ -1,19 +1,32 @@
 {
-  "callees_count": 41,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 2,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x65BE70",
+      "0x65BF88"
+    ]
+  ],
+  "chunks_sha256": "8043ed057b4191e7d8631502e2be397856f12420738acbc9306ecbaa6a41a9c7",
+  "comment_regular": "Verified 2026-10-04: reunited falsely separated internal blocks with original function. All entry xrefs to merged blocks are same-body branches/fallthroughs, with shared saved registers/stack and RET cleanup. Existing labels/comments preserved; analysis-only change. Prior fragmentation warning superseded for this body.\nVerified fast-slot ID order: [08,0B,28,30,24,31,06,38,2E,2F,29,21,1A,05,07,00,04,0D] (hex). Matching lookup/insert/remove switches and Oblivion naming tables establish named AVCollectionIndex fields. IDs09/0A are permanent magicka/fatigue outside this array.\nVerified: frees/nulls selected slot, scans all 18 for emptiness, destroys/frees the array and nulls owner+0x10 only when every slot is empty. Unsupported IDs do nothing.",
   "comment_repeatable": "",
-  "data_refs_count": 1,
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
   "display_name": "AVCollection_RemoveArrayNode",
-  "end_ea": "0x65BF83",
+  "end_ea": "0x65BF88",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "AVCollection_RemoveArrayNode",
   "segment": ".text",
-  "sha256": "7eabeec1579fc7bedf5ecb2e41b0a99527706327cef36da72e1caaa113fdee62",
-  "size": 275,
+  "sha256": "8043ed057b4191e7d8631502e2be397856f12420738acbc9306ecbaa6a41a9c7",
+  "size": 280,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x65BE70",
-  "type": "unsigned int *__thiscall(unsigned int **this, int)",
-  "xrefs_from_count": 136,
+  "total_chunk_size": 280,
+  "type": "void __thiscall(AVCollection *self, int actorValue)",
+  "xrefs_from_count": 138,
   "xrefs_to_count": 2
 }

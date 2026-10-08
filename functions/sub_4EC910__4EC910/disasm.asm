@@ -1,9 +1,9 @@
-0x4EC910: push    ebx
+0x4EC910: push    ebx; NiGeometry shader smart-pointer setter: releases the old BSShader, stores the new shader, and AddRefs it when the pointer changes.
 0x4EC911: push    esi
 0x4EC912: mov     ebx, ecx
 0x4EC914: mov     esi, [ebx+0BCh]
 0x4EC91A: push    edi
-0x4EC91B: mov     edi, [esp+0Ch+arg_0]
+0x4EC91B: mov     edi, [esp+0Ch+shader]
 0x4EC91F: cmp     esi, edi
 0x4EC921: jz      short loc_4EC957
 0x4EC923: test    esi, esi

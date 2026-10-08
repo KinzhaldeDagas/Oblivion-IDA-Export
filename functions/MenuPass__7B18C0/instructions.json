@@ -1111,7 +1111,7 @@
   },
   {
     "ea": "0x7B1AD6",
-    "line": "cmp     byte ptr [esp+40h+arg_C], 0",
+    "line": "cmp     byte ptr [esp+40h+outTexture], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1273,7 +1273,7 @@
   },
   {
     "ea": "0x7B1B3B",
-    "line": "call    sub_802890",
+    "line": "call    sub_802890; MoonSugarEffect decode: stores source BSRenderedTexture in BSImageSpaceShader +0x7C with refcounting; render pass then samples this as primary scene texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1303,19 +1303,19 @@
   },
   {
     "ea": "0x7B1B54",
-    "line": "push    0; char",
+    "line": "push    0; requireMipmaps",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7B1B56",
-    "line": "push    ebx; char",
+    "line": "push    ebx; loadFromCache",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7B1B57",
-    "line": "lea     ecx, [esp+48h+arg_C]",
+    "line": "lea     ecx, [esp+48h+outTexture]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1327,13 +1327,13 @@
   },
   {
     "ea": "0x7B1B60",
-    "line": "push    ecx; int",
+    "line": "push    ecx; outTexture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7B1B61",
-    "line": "call    sub_7B8200",
+    "line": "call    NiSourceTexture_LoadChecked; Loads/caches a NiSourceTexture by filename and optionally rejects a loaded texture that lacks mipmaps. The first argument is the returned smart-pointer storage.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1351,13 +1351,13 @@
   },
   {
     "ea": "0x7B1B6D",
-    "line": "push    eax",
+    "line": "push    eax; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7B1B6E",
-    "line": "lea     ecx, [edi+0B4h]",
+    "line": "lea     ecx, [edi+0B4h]; this",
     "mnemonic": "lea",
     "size": 6
   },
@@ -1369,13 +1369,13 @@
   },
   {
     "ea": "0x7B1B7C",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7B1B81",
-    "line": "mov     eax, [esp+40h+arg_C]",
+    "line": "mov     eax, [esp+40h+outTexture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1543,7 +1543,7 @@
   },
   {
     "ea": "0x7B1BD2",
-    "line": "call    BSRenderedTexture__UseTextureToRender",
+    "line": "call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1561,7 +1561,7 @@
   },
   {
     "ea": "0x7B1BD9",
-    "line": "call    NiRenderer_BeginScene",
+    "line": "call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1585,7 +1585,7 @@
   },
   {
     "ea": "0x7B1BE3",
-    "line": "call    NiRenderer_BeginScene1",
+    "line": "call    NiRenderer_BeginScene1; Oblivion BeginScene internal path: establishes SceneState1 when required and starts the supplied or default render-target group.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1687,7 +1687,7 @@
   },
   {
     "ea": "0x7B1C23",
-    "line": "call    sub_709C60",
+    "line": "call    sub_709C60; MoonSugarEffect decode: NiScreenElements render thunk. Callers push NiDX9Renderer on the stack, then this thunk jumps to object vtable +0x84.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1840,5 +1840,59 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CD7A0",
+    "line": "lea     ecx, [ebp+10h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD7A3",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD7A8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CD7AC",
+    "line": "lea     eax, [edx-30h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD7AF",
+    "line": "mov     ecx, [edx-34h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD7B2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CD7B4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD7B9",
+    "line": "mov     eax, offset stru_AF6A14",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD7BE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

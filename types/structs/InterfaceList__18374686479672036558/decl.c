@@ -1,1 +1,1 @@
-InterfaceList
+typedef tagInterfaceList InterfaceList;

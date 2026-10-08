@@ -1,1 +1,1 @@
-NiD3DSCM_Vertex
+struct NiD3DSCM_Vertex;

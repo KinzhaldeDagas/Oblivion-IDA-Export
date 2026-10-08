@@ -1,5 +1,5 @@
 0x70F950: push    ebx
-0x70F951: mov     ebx, dword ptr [esp+4+ArgList]
+0x70F951: mov     ebx, [esp+4+ArgList]
 0x70F955: push    esi
 0x70F956: mov     eax, ebx
 0x70F958: push    edi

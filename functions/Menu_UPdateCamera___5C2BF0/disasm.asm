@@ -50,13 +50,13 @@
 0x5C2CA8: fld     [esp+78h+arg_4]
 0x5C2CAF: fadd    qword ptr ds:0A2FC68h
 0x5C2CB5: push    ecx
-0x5C2CB6: lea     ecx, [esp+7Ch+var_30]
+0x5C2CB6: lea     ecx, [esp+7Ch+var_30]; this
 0x5C2CBA: fmul    qword ptr ds:0A31C78h
 0x5C2CC0: faddp   st(1), st
 0x5C2CC2: fstp    [esp+7Ch+arg_4]
 0x5C2CC9: fld     [esp+7Ch+arg_4]
-0x5C2CD0: fstp    [esp+7Ch+var_7C]; float
-0x5C2CD3: call    NiMatrix33_InitRotationTransform
+0x5C2CD0: fstp    [esp+7Ch+angleZ]; angleZ
+0x5C2CD3: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x5C2CD8: push    esi
 0x5C2CD9: lea     ecx, [esp+7Ch+var_48]
 0x5C2CDD: push    ecx
@@ -121,7 +121,7 @@
 0x5C2DC0: test    byte ptr ds:0B3B704h, 1
 0x5C2DC7: jnz     short loc_5C2DF7
 0x5C2DC9: or      dword ptr ds:0B3B704h, 1
-0x5C2DD0: mov     ecx, offset stru_B3B5E0
+0x5C2DD0: mov     ecx, offset unk_B3B5E0
 0x5C2DD5: mov     [esp+78h+var_4], 0
 0x5C2DDD: call    sub_70D590
 0x5C2DE2: push    offset sub_A24E60; void (__cdecl *)()
@@ -138,31 +138,31 @@
 0x5C2E0E: push    ecx
 0x5C2E0F: mov     ds:0B3B63Ch, ecx
 0x5C2E15: fstp    [esp+80h+a2]; a2
-0x5C2E18: mov     ecx, offset stru_B3B5E0; this
-0x5C2E1D: call    NiAVObject_UpdateNiAVObject
-0x5C2E22: push    offset dword_B258E8
+0x5C2E18: mov     ecx, offset unk_B3B5E0; this
+0x5C2E1D: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
+0x5C2E22: push    offset rhs
 0x5C2E27: lea     edx, [esp+7Ch+PlayerPosition]
 0x5C2E2B: push    edx
-0x5C2E2C: mov     ecx, offset stru_B3B5E0
+0x5C2E2C: mov     ecx, offset unk_B3B5E0
 0x5C2E31: call    sub_70C340
 0x5C2E36: fld     dword ptr ds:0B3B618h
-0x5C2E3C: fstp    [esp+78h+var_30]
+0x5C2E3C: fstp    [esp+78h+var_30.data]
 0x5C2E40: fld     dword ptr ds:0B3B610h
-0x5C2E46: fstp    [esp+78h+var_2C]
+0x5C2E46: fstp    [esp+78h+var_30.data+4]
 0x5C2E4A: fld     dword ptr ds:0B3B614h
-0x5C2E50: fstp    [esp+78h+var_28]
+0x5C2E50: fstp    [esp+78h+var_30.data+8]
 0x5C2E54: fld     dword ptr ds:0B3B624h
-0x5C2E5A: fstp    [esp+78h+var_24]
+0x5C2E5A: fstp    [esp+78h+var_30.data+0Ch]
 0x5C2E5E: fld     dword ptr ds:0B3B61Ch
-0x5C2E64: fstp    [esp+78h+var_20]
+0x5C2E64: fstp    [esp+78h+var_30.data+10h]
 0x5C2E68: fld     dword ptr ds:0B3B620h
-0x5C2E6E: fstp    [esp+78h+var_1C]
+0x5C2E6E: fstp    [esp+78h+var_30.data+14h]
 0x5C2E72: fld     dword ptr ds:0B3B630h
-0x5C2E78: fstp    [esp+78h+var_18]
+0x5C2E78: fstp    [esp+78h+var_30.data+18h]
 0x5C2E7C: fld     dword ptr ds:0B3B628h
-0x5C2E82: fstp    [esp+78h+var_14]
+0x5C2E82: fstp    [esp+78h+var_30.data+1Ch]
 0x5C2E86: fld     dword ptr ds:0B3B62Ch
-0x5C2E8C: fstp    [esp+78h+var_10]
+0x5C2E8C: fstp    [esp+78h+var_30.data+20h]
 0x5C2E90: cmp     word ptr [ebx+0B6h], 0
 0x5C2E98: ja      short loc_5C2E9E
 0x5C2E9A: xor     eax, eax
@@ -195,7 +195,7 @@
 0x5C2EF3: push    0; a3
 0x5C2EF5: push    ecx
 0x5C2EF6: fstp    [esp+80h+a2]; a2
-0x5C2EF9: call    NiAVObject_UpdateNiAVObject
+0x5C2EF9: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x5C2EFE: mov     ecx, dword ptr [esp+78h+var_C]
 0x5C2F02: mov     large fs:0, ecx
 0x5C2F09: pop     ecx
@@ -204,3 +204,14 @@
 0x5C2F0C: pop     ebx
 0x5C2F0D: add     esp, 68h
 0x5C2F10: retn    8
+0x9C0F20: mov     eax, dword_B3B704
+0x9C0F25: and     eax, 0FFFFFFFEh
+0x9C0F28: mov     dword_B3B704, eax
+0x9C0F2D: retn
+0x9C0F2E: mov     edx, [esp+arg_4]
+0x9C0F32: lea     eax, [edx-68h]
+0x9C0F35: mov     ecx, [edx-6Ch]
+0x9C0F38: xor     ecx, eax
+0x9C0F3A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C0F3F: mov     eax, offset stru_AEA050
+0x9C0F44: jmp     ___CxxFrameHandler3

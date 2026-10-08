@@ -1,4 +1,4 @@
-0x6BB270: mov     ecx, [esp+arg_C]
+0x6BB270: mov     ecx, [esp+arg_C]; Oblivion scalar key-track evaluator. Returns the sole/first value for one key or sentinel time; otherwise resumes from the caller cursor, rewinds to key 0 when sample time precedes it, finds the bracketing timestamps using the supplied key stride, computes normalized segment time, dispatches by interpolation type, and stores the lower-key cursor.
 0x6BB274: sub     esp, 10h
 0x6BB277: cmp     ecx, 1
 0x6BB27A: jz      loc_6BB47E
@@ -141,7 +141,7 @@
 0x6BB421: mov     ecx, [esp+30h+arg_8]
 0x6BB425: mov     edx, ds:0B3CFF8h[ecx*4]
 0x6BB42C: fstp    [esp+30h+var_30]
-0x6BB42F: call    edx ; dword_B3CFF8
+0x6BB42F: call    edx ; unk_B3CFF8
 0x6BB431: mov     eax, [esp+30h+arg_10]
 0x6BB435: fld     [esp+30h+arg_C]
 0x6BB439: add     esp, 10h

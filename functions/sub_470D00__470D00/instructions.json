@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x470D00",
-    "line": "mov     edx, [esp+arg_0]",
+    "line": "mov     edx, [esp+encodedKey]; Returns whether ActorAnimData +0x9C contains an entry for the encoded animation key. Presence test only; it does not select or play a sequence.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x470D0A",
-    "line": "lea     eax, [esp+arg_0]",
+    "line": "lea     eax, [esp+encodedKey]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x470D10",
-    "line": "call    sub_470960",
+    "line": "call    ActorAnimData_FindAnimMapEntry; CustomAnimSupport decode: anim-map lookup helper used by playback, validators, and save/load restore to test an encoded group key.",
     "mnemonic": "call",
     "size": 5
   },

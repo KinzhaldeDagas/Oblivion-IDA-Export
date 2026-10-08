@@ -1,4 +1,4 @@
-0x7FF080: push    0FFFFFFFFh
+0x7FF080: push    0FFFFFFFFh; Build the native one-stage Lighting30 mode-5 caster pass for 0x154/0x155. The resolver binds property texture 0/BaseMap; this producer path does not bind receiver ShadowMap.
 0x7FF082: push    offset SEH_7FF080
 0x7FF087: mov     eax, large fs:0
 0x7FF08D: push    eax
@@ -13,13 +13,13 @@
 0x7FF09D: lea     eax, [esp+40h+var_C]
 0x7FF0A1: mov     large fs:0, eax
 0x7FF0A7: mov     esi, ecx
-0x7FF0A9: mov     ebp, [esp+40h+arg_0]
-0x7FF0AD: mov     eax, [esp+40h+arg_4]
+0x7FF0A9: mov     ebp, [esp+40h+value]
+0x7FF0AD: mov     eax, [esp+40h+selector]
 0x7FF0B1: xor     ebx, ebx
-0x7FF0B3: push    ebx
-0x7FF0B4: push    ebp
-0x7FF0B5: push    eax
-0x7FF0B6: call    sub_862B40
+0x7FF0B3: push    ebx; variant
+0x7FF0B4: push    ebp; property
+0x7FF0B5: push    eax; selector
+0x7FF0B6: call    Lighting30Shader_ResolveSelectorStages; Lighting30 selector resolver upper bound is 0x15F. This is a consumer-domain fact, not producer reachability: exact Lighting30's native +0x5C builder stays within it, including refraction 0x156..0x158.
 0x7FF0BB: test    byte ptr [ebp+1Ch], 2
 0x7FF0BF: mov     edi, eax
 0x7FF0C1: lea     ecx, [esi+24h]; this
@@ -49,20 +49,20 @@
 0x7FF126: jl      short loc_7FF113
 0x7FF128: mov     edx, [esp+40h+arg_8]
 0x7FF12C: mov     byte ptr ds:0B4693Ah, 1
-0x7FF133: mov     ecx, [edx+0Ch]
+0x7FF133: mov     ecx, [edx+0Ch]; Fog render consumer decode: Lighting30 mode-5 loads active fog property from render/property state +0x0C.
 0x7FF136: cmp     ecx, ebx
 0x7FF138: jz      loc_7FF23C
 0x7FF13E: fld     dword ptr [ecx+2Ch]
-0x7FF141: fstp    [esp+40h+arg_4]
+0x7FF141: fstp    [esp+40h+selector]
 0x7FF145: fld     dword ptr [ecx+30h]
-0x7FF148: fstp    [esp+40h+arg_0]
+0x7FF148: fstp    [esp+40h+value]
 0x7FF14C: fld     st
-0x7FF14E: fld     [esp+40h+arg_0]
+0x7FF14E: fld     [esp+40h+value]
 0x7FF152: fucom   st(1)
 0x7FF154: fnstsw  ax
 0x7FF156: fstp    st(1)
 0x7FF158: test    ah, 44h
-0x7FF15B: fld     [esp+40h+arg_4]
+0x7FF15B: fld     [esp+40h+selector]
 0x7FF15F: jp      short loc_7FF1AA
 0x7FF161: fld     st(2)
 0x7FF163: fucomp  st(1)
@@ -74,7 +74,7 @@
 0x7FF170: fld     dword ptr ds:0A93350h
 0x7FF176: fstp    [esp+40h+var_2C]
 0x7FF17A: mov     eax, [esp+40h+var_2C]
-0x7FF17E: mov     ds:0B46DB8h, eax
+0x7FF17E: mov     ds:0B46DB8h, eax; Fog render consumer decode: Lighting30 mode-5 zero/invalid fog range fallback writes default grouped FogParam.
 0x7FF183: fst     [esp+40h+var_28]
 0x7FF187: mov     ecx, [esp+40h+var_28]
 0x7FF18B: fld1
@@ -90,16 +90,16 @@
 0x7FF1AF: mov     [esp+40h+var_2C], eax
 0x7FF1B3: mov     eax, [ecx+24h]
 0x7FF1B6: mov     ecx, [ecx+28h]
-0x7FF1B9: fstp    [esp+40h+arg_0]
+0x7FF1B9: fstp    [esp+40h+value]
 0x7FF1BD: mov     [esp+40h+var_28], eax
 0x7FF1C1: fstp    [esp+40h+var_1C]
 0x7FF1C5: mov     eax, [esp+40h+var_1C]
-0x7FF1C9: fld     [esp+40h+arg_0]
+0x7FF1C9: fld     [esp+40h+value]
 0x7FF1CD: mov     [esp+40h+var_24], ecx
 0x7FF1D1: fstp    [esp+40h+var_18]
 0x7FF1D5: mov     ecx, [esp+40h+var_18]
 0x7FF1D9: fld1
-0x7FF1DB: mov     ds:0B46DB8h, eax
+0x7FF1DB: mov     ds:0B46DB8h, eax; Fog render consumer decode: Lighting30 mode-5 grouped FogParam B45E14[0x3E9..0x3EC] / B46DB8 = (fogEnd, fogEnd - fogStart, 1, 0).
 0x7FF1E0: fst     [esp+40h+var_14]
 0x7FF1E4: mov     ds:0B46DBCh, ecx
 0x7FF1EA: mov     eax, [esp+40h+var_14]
@@ -113,7 +113,7 @@
 0x7FF20B: fld     [esp+40h+var_28]
 0x7FF20F: mov     eax, [esp+40h+var_1C]
 0x7FF213: fstp    [esp+40h+var_18]
-0x7FF217: mov     ds:0B46DC8h, eax
+0x7FF217: mov     ds:0B46DC8h, eax; Fog render consumer decode: Lighting30 mode-5 grouped FogColor B45E14[0x3ED..0x3F0] / B46DC8 = (fog.r, fog.g, fog.b, 1).
 0x7FF21C: fld     [esp+40h+var_24]
 0x7FF220: mov     ecx, [esp+40h+var_18]
 0x7FF224: fstp    [esp+40h+var_14]
@@ -125,7 +125,7 @@
 0x7FF23C: fld     dword ptr ds:0A93350h
 0x7FF242: fstp    [esp+40h+var_1C]
 0x7FF246: mov     eax, [esp+40h+var_1C]
-0x7FF24A: mov     ds:0B46DB8h, eax
+0x7FF24A: mov     ds:0B46DB8h, eax; Fog render consumer decode: Lighting30 mode-5 null-property fallback writes default grouped FogParam/FogColor.
 0x7FF24F: fst     [esp+40h+var_18]
 0x7FF253: mov     ecx, [esp+40h+var_18]
 0x7FF257: fld1
@@ -149,8 +149,8 @@
 0x7FF2AB: cmp     ecx, ebx
 0x7FF2AD: jz      short loc_7FF2C6
 0x7FF2AF: fld     dword ptr [ecx+50h]
-0x7FF2B2: fstp    [esp+40h+arg_0]
-0x7FF2B6: fcom    [esp+40h+arg_0]
+0x7FF2B2: fstp    [esp+40h+value]
+0x7FF2B6: fcom    [esp+40h+value]
 0x7FF2BA: fnstsw  ax
 0x7FF2BC: test    ah, 41h
 0x7FF2BF: jnz     short loc_7FF2C6
@@ -167,29 +167,29 @@
 0x7FF2DE: call    eax
 0x7FF2E0: cmp     [edi+30h], ebx
 0x7FF2E3: jnz     short loc_7FF2ED
-0x7FF2E5: call    sub_772DF0
+0x7FF2E5: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x7FF2EA: mov     [edi+30h], eax
 0x7FF2ED: mov     ecx, [edi+30h]
 0x7FF2F0: push    ebx
 0x7FF2F1: push    ebx
 0x7FF2F2: push    1Bh
-0x7FF2F4: call    sub_772CD0
+0x7FF2F4: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x7FF2F9: mov     ebp, 1
 0x7FF2FE: add     [edi+60h], ebp
-0x7FF301: mov     [esp+40h+arg_0], edi
+0x7FF301: mov     [esp+40h+value], edi
 0x7FF305: mov     edx, [esi+38h]
-0x7FF308: lea     ecx, [esp+40h+arg_0]
-0x7FF30C: push    ecx
-0x7FF30D: push    edx
-0x7FF30E: lea     ecx, [esi+40h]
+0x7FF308: lea     ecx, [esp+40h+value]
+0x7FF30C: push    ecx; value
+0x7FF30D: push    edx; index
+0x7FF30E: lea     ecx, [esi+40h]; this
 0x7FF311: mov     [esp+48h+var_4], ebx
-0x7FF315: call    sub_76CE40
+0x7FF315: call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.
 0x7FF31A: or      eax, 0FFFFFFFFh
 0x7FF31D: add     [edi+60h], eax
 0x7FF320: mov     [esp+40h+var_4], eax
 0x7FF324: jnz     short loc_7FF32D
 0x7FF326: mov     ecx, edi
-0x7FF328: call    sub_7604D0
+0x7FF328: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x7FF32D: add     [esi+38h], ebp
 0x7FF330: xor     eax, eax
 0x7FF332: mov     ecx, [esp+40h+var_C]
@@ -201,3 +201,12 @@
 0x7FF341: pop     ebx
 0x7FF342: add     esp, 2Ch
 0x7FF345: retn    0Ch
+0x9D0610: lea     ecx, [ebp+4]; void *
+0x9D0613: jmp     sub_4027D0
+0x9D0618: mov     edx, [esp+selector]
+0x9D061C: lea     eax, [edx-30h]
+0x9D061F: mov     ecx, [edx-34h]
+0x9D0622: xor     ecx, eax
+0x9D0624: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D0629: mov     eax, offset stru_AF8F90
+0x9D062E: jmp     ___CxxFrameHandler3

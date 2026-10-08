@@ -15,7 +15,7 @@
 0x670CC8: push    0
 0x670CCA: mov     ecx, esi
 0x670CCC: call    edx
-0x670CCE: call    Double_To_SInt32
+0x670CCE: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x670CD3: push    eax
 0x670CD4: push    esi
 0x670CD5: mov     ecx, ebx
@@ -42,7 +42,7 @@
 0x670D19: call    edx
 0x670D1B: push    0
 0x670D1D: push    esi
-0x670D1E: mov     ecx, offset ActorProcessManager_ptr
+0x670D1E: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x670D23: call    sub_675D50
 0x670D28: mov     ecx, esi
 0x670D2A: mov     byte ptr [esi+12Ch], 1
@@ -58,9 +58,9 @@
 0x670D4A: push    0
 0x670D4C: call    sub_57A3B0
 0x670D51: add     esp, 4
-0x670D54: push    esi
-0x670D55: mov     ecx, offset ActorProcessManager_ptr
-0x670D5A: call    sub_675E90
+0x670D54: push    esi; criminal
+0x670D55: mov     ecx, (offset qword_B3BB2C+1D4h); self
+0x670D5A: call    ActorProcessManager_RemoveCrimesForCriminal
 0x670D5F: pop     edi
 0x670D60: pop     esi
 0x670D61: pop     ebp
@@ -82,7 +82,7 @@
 0x670D9C: mov     ecx, ds:0B3BAD0h; this
 0x670DA2: mov     [esp+1Ch+var_C], ebp
 0x670DA6: xor     edi, edi
-0x670DA8: call    TESObjectREFR_GetParentCell
+0x670DA8: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x670DAD: mov     ebx, eax
 0x670DAF: test    ebx, ebx
 0x670DB1: jnz     short loc_670E2A
@@ -115,7 +115,7 @@
 0x670E17: push    ebp; int
 0x670E18: push    edi; ArgList
 0x670E19: mov     ecx, ebx
-0x670E1B: call    sub_4F1630
+0x670E1B: call    TESWorldSpace_LoadExteriorCellAtCoord; Verified: exterior-cell loader checks cellMap first, searches master files using cellOffsetsArray fast path or GRUP/CELL fallback, creates a missing TESObjectCELL, post-fixes it, then attaches worldspace-indexed references.
 0x670E20: mov     ebx, eax
 0x670E22: test    ebx, ebx
 0x670E24: jz      loc_670F40
@@ -136,20 +136,20 @@
 0x670E51: mov     ecx, esi
 0x670E53: call    sub_5E4140
 0x670E58: mov     ecx, ds:0B3BAD0h; this
-0x670E5E: call    GetTeleportExtraData
-0x670E63: mov     ecx, eax
-0x670E65: call    sub_42B410
+0x670E5E: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
+0x670E63: mov     ecx, eax; this
+0x670E65: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x670E6A: mov     ecx, eax; this
-0x670E6C: call    GetTeleportExtraData
+0x670E6C: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x670E71: mov     esi, eax
 0x670E73: test    esi, esi
 0x670E75: jz      loc_670F40
 0x670E7B: mov     ecx, esi
-0x670E7D: call    sub_42B460
+0x670E7D: call    sub_42B460; ExtraTeleport_GetTargetCell-style helper: returns parent cell of ExtraTeleport+0 target ref if present.
 0x670E82: test    eax, eax
 0x670E84: mov     ecx, esi
 0x670E86: jnz     short loc_670EDC
-0x670E88: call    sub_6899C0
+0x670E88: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x670E8D: fld     dword ptr [eax]
 0x670E8F: fstp    [esp+1Ch+var_8]
 0x670E93: fld     [esp+1Ch+var_8]
@@ -158,7 +158,7 @@
 0x670E9F: sar     eax, 0Ch
 0x670EA2: mov     ecx, esi
 0x670EA4: mov     dword ptr [esp+1Ch+ArgList], eax
-0x670EA8: call    sub_6899C0
+0x670EA8: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x670EAD: fld     dword ptr [eax+4]
 0x670EB0: fstp    [esp+1Ch+var_8]
 0x670EB4: fld     [esp+1Ch+var_8]
@@ -173,15 +173,15 @@
 0x670ECF: push    eax; int
 0x670ED0: push    ecx; ArgList
 0x670ED1: mov     ecx, [esp+24h+var_C]
-0x670ED5: call    sub_4F1630
+0x670ED5: call    TESWorldSpace_LoadExteriorCellAtCoord; Verified: exterior-cell loader checks cellMap first, searches master files using cellOffsetsArray fast path or GRUP/CELL fallback, creates a missing TESObjectCELL, post-fixes it, then attaches worldspace-indexed references.
 0x670EDA: jmp     short loc_670EE1
-0x670EDC: call    sub_42B460
+0x670EDC: call    sub_42B460; ExtraTeleport_GetTargetCell-style helper: returns parent cell of ExtraTeleport+0 target ref if present.
 0x670EE1: mov     ebx, eax
 0x670EE3: mov     ecx, esi
 0x670EE5: call    sub_42B430
 0x670EEA: mov     ecx, esi
 0x670EEC: mov     edi, eax
-0x670EEE: call    sub_6899C0
+0x670EEE: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x670EF3: mov     edx, [edi]
 0x670EF5: push    1; char
 0x670EF7: push    ebx; int
@@ -201,12 +201,12 @@
 0x670F1A: mov     [ecx+4], edx
 0x670F1D: mov     [ecx+8], eax
 0x670F20: mov     ecx, ds:0B333C4h; int
-0x670F26: call    sub_66EAF0
+0x670F26: call    PlayerCharacter_ChangeCellAndPosition; World/cell transition path used by fast travel relocation after cell resolution. Leaves normal exterior refresh/SpeedTree/weather side effects intact.
 0x670F2B: mov     ecx, ds:0B3BAD0h
 0x670F31: push    0
 0x670F33: push    0
 0x670F35: push    ecx
-0x670F36: mov     ecx, offset ActorProcessManager_ptr
+0x670F36: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x670F3B: call    sub_6765F0
 0x670F40: pop     edi
 0x670F41: pop     esi

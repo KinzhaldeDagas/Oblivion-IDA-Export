@@ -1,5 +1,5 @@
 0xA1C190: push    esi
-0xA1C191: mov     esi, dword_B362F4
+0xA1C191: mov     esi, dword ptr unk_B362F4
 0xA1C197: test    esi, esi
 0xA1C199: jz      short loc_A1C1B7
 0xA1C19B: lea     eax, [esi+4]

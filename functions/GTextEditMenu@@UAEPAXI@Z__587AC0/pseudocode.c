@@ -5,8 +5,8 @@ Menu *__userpurge TextEditMenu::`scalar deleting destructor'@<eax>(
         double a4@<st0>,
         char a5)
 {
-  TextEditMenu::~TextEditMenu(this, a2, a3, a4);
-  if ( (a5 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  TextEditMenu::~TextEditMenu(this, a2, a3, a4); /*0x587ac3*/
+  if ( (a5 & 1) != 0 ) /*0x587acd*/
+    FormHeapFree((unsigned int)this); /*0x587ad0*/
+  return this; /*0x587ada*/
 }

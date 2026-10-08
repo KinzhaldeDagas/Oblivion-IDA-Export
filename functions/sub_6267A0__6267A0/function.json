@@ -1,19 +1,36 @@
 {
-  "callees_count": 78,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 36,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_6267A0",
+  "chunks": [
+    [
+      "0x6267A0",
+      "0x626C05"
+    ],
+    [
+      "0x9C3630",
+      "0x9C3653"
+    ]
+  ],
+  "chunks_sha256": "1e7ee138a8f54aaec76061f6d39117cd94bb472e47d9fa352044f86fb3f9ad02",
+  "comment_regular": "DialoguePackage cursor/playback state machine. Speak(true) performs audible HighProcess playback; Speak(false) advances silently with no new timer. With waitingForLip clear, each false call advances one response cursor and can commit an exhausted item while selecting the next. With waitingForLip set, false calls cannot clear the flag or advance, so MiddleHigh execution stalls until HighProcess playback resumes or the package is destroyed.",
+  "comment_repeatable": "DialoguePackage cursor/playback state machine. Speak(true) performs audible HighProcess playback; Speak(false) advances silently with no new timer. With waitingForLip clear, each false call advances one response cursor and can commit an exhausted item while selecting the next. With waitingForLip set, false calls cannot clear the flag or advance, so MiddleHigh execution stalls until HighProcess playback resumes or the package is destroyed.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 10,
+  "display_name": "DialoguePackage::Speak",
   "end_ea": "0x626C05",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6267A0",
+  "name": "DialoguePackage::Speak",
   "segment": ".text",
   "sha256": "8a625ebfd151c216a13c4dd10838e659dcb1f580d12996ecac2a4717746405e5",
   "size": 1125,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6267A0",
-  "type": "void __userpurge(int@<ecx>, double@<st2>, double@<st1>, double@<st0>, AnimSequenceSingle *)",
-  "xrefs_from_count": 450,
+  "total_chunk_size": 1160,
+  "type": "void __thiscall(DialoguePackageRuntimeView *this, bool startSpeech)",
+  "xrefs_from_count": 461,
   "xrefs_to_count": 2
 }

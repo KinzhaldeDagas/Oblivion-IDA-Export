@@ -1,19 +1,40 @@
 {
-  "callees_count": 135,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 45,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 16,
-  "display_name": "CommandInfo_Execute?",
+  "chunks": [
+    [
+      "0x5169A0",
+      "0x51722D"
+    ],
+    [
+      "0x517230",
+      "0x5172FF"
+    ],
+    [
+      "0x9B72F0",
+      "0x9B734A"
+    ]
+  ],
+  "chunks_sha256": "380abeef67ea5bdb095f65404ba2678b4b4684f683d44e652fce0b36ed5777f2",
+  "comment_regular": "TES4 authoritative script instruction executor. Handles expression/control opcodes directly and dispatches ordinary CommandInfo execute callbacks for vanilla script commands.",
+  "comment_repeatable": "TES4 authoritative script instruction executor. Handles expression/control opcodes directly and dispatches ordinary CommandInfo execute callbacks for vanilla script commands.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 21,
+  "display_name": "ScriptRunner_ExecuteCompiledInstruction",
   "end_ea": "0x51722D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "CommandInfo_Execute?",
+  "name": "ScriptRunner_ExecuteCompiledInstruction",
   "segment": ".text",
   "sha256": "0f9d2b08f69bfaf02f243f43c71f3d496f2622ecdd66e2979eb810520e370b50",
   "size": 2189,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5169A0",
+  "total_chunk_size": 2486,
   "type": "bool __thiscall(ScriptRunner *a1, Script *a5, int ArgList, BSStringT *a4, int a8, int a9, _DWORD *a10, int a11, int a12, char a13)",
-  "xrefs_from_count": 761,
+  "xrefs_from_count": 867,
   "xrefs_to_count": 2
 }

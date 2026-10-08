@@ -1,1 +1,32 @@
-_LDR_DATA_TABLE_ENTRY_0
+struct _LDR_DATA_TABLE_ENTRY_0
+{
+LIST_ENTRY InLoadOrderLinks;
+LIST_ENTRY InMemoryOrderLinks;
+LIST_ENTRY InInitializationOrderLinks;
+void *DllBase;
+void *EntryPoint;
+ULONG SizeOfImage;
+UNICODE_STRING FullDllName;
+UNICODE_STRING BaseDllName;
+ULONG Flags;
+SHORT LoadCount;
+SHORT TlsIndex;
+ULONG CheckSum;
+LIST_ENTRY HashLinks;
+ULONG TimeDateStamp;
+HANDLE ActivationContext;
+void *Lock;
+LDR_DDAG_NODE *DdagNode;
+LIST_ENTRY NodeModuleLink;
+_LDRP_LOAD_CONTEXT *LoadContext;
+void *ParentDllBase;
+void *SwitchBackContext;
+RTL_BALANCED_NODE_0 BaseAddressIndexNode;
+RTL_BALANCED_NODE_0 MappingInfoIndexNode;
+ULONG_PTR OriginalBase;
+LARGE_INTEGER_1 LoadTime;
+ULONG BaseNameHashValue;
+LDR_DLL_LOAD_REASON LoadReason;
+ULONG ImplicitPathOptions;
+ULONG ReferenceCount;
+};

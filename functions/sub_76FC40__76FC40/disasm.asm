@@ -1,29 +1,29 @@
-0x76FC40: push    esi
+0x76FC40: push    esi; MoonSugarEffect decode: raw declaration element setter. Element record is 0x1C bytes; stream and slot are checked, semantic/type/usage/method fields are stored, declaration dirty byte +0x28 is set, cached D3D declaration +0x30 is released.
 0x76FC41: mov     esi, ecx
-0x76FC43: mov     ecx, [esp+4+arg_4]
+0x76FC43: mov     ecx, [esp+4+elementIndex]
 0x76FC47: cmp     ecx, [esi+1Ch]
 0x76FC4A: jb      short loc_76FC52
 0x76FC4C: xor     al, al
 0x76FC4E: pop     esi
 0x76FC4F: retn    20h ; ' '
-0x76FC52: mov     eax, [esp+4+arg_0]
+0x76FC52: mov     eax, [esp+4+streamIndex]
 0x76FC56: cmp     eax, [esi+20h]
 0x76FC59: jnb     short loc_76FC4C
 0x76FC5B: mov     edx, [esi+24h]
 0x76FC5E: push    ebx
-0x76FC5F: mov     ebx, [esp+8+arg_18]
+0x76FC5F: mov     ebx, [esp+8+usageIndex]
 0x76FC63: push    ebp
-0x76FC64: mov     ebp, [esp+0Ch+arg_14]
+0x76FC64: mov     ebp, [esp+0Ch+usage]
 0x76FC68: push    edi
 0x76FC69: shl     eax, 4
 0x76FC6C: mov     eax, [eax+edx+8]
-0x76FC70: mov     edx, [esp+10h+arg_10]
+0x76FC70: mov     edx, [esp+10h+declarationType]
 0x76FC74: lea     edi, ds:0[ecx*8]
 0x76FC7B: sub     edi, ecx
-0x76FC7D: mov     ecx, [esp+10h+arg_C]
+0x76FC7D: mov     ecx, [esp+10h+sourceDescriptor]
 0x76FC81: cmp     [eax+edi*4+8], ecx
 0x76FC85: lea     eax, [eax+edi*4]
-0x76FC88: mov     edi, [esp+10h+arg_1C]
+0x76FC88: mov     edi, [esp+10h+method]
 0x76FC8C: jnz     short loc_76FCA2
 0x76FC8E: cmp     [eax+0Ch], edx
 0x76FC91: jnz     short loc_76FCA2

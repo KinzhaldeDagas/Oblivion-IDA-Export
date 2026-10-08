@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x48FC2C",
-    "line": "mov     esi, [esp+54h+arg_4]",
+    "line": "mov     esi, [esp+54h+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x48FCAE",
-    "line": "mov     ecx, [esp+54h+arg_4]",
+    "line": "mov     ecx, [esp+54h+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1069,7 +1069,7 @@
   },
   {
     "ea": "0x48FDB2",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1087,7 +1087,7 @@
   },
   {
     "ea": "0x48FDBA",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1105,7 +1105,7 @@
   },
   {
     "ea": "0x48FDC6",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1375,13 +1375,13 @@
   },
   {
     "ea": "0x48FE62",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48FE64",
-    "line": "call    ExtraDataList_GetOwner",
+    "line": "call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1501,7 +1501,7 @@
   },
   {
     "ea": "0x48FEAB",
-    "line": "call    sub_41E850",
+    "line": "call    ExtraDataList_GetLeveledItem; Returns the ExtraLeveledItem object itself, allowing callers to inspect its selected leveled-list state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1693,7 +1693,7 @@
   },
   {
     "ea": "0x48FF05",
-    "line": "call    sub_41E850",
+    "line": "call    ExtraDataList_GetLeveledItem; Returns the ExtraLeveledItem object itself, allowing callers to inspect its selected leveled-list state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1711,7 +1711,7 @@
   },
   {
     "ea": "0x48FF10",
-    "line": "call    sub_41E850",
+    "line": "call    ExtraDataList_GetLeveledItem; Returns the ExtraLeveledItem object itself, allowing callers to inspect its selected leveled-list state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1861,7 +1861,7 @@
   },
   {
     "ea": "0x48FF5D",
-    "line": "call    sub_41E850",
+    "line": "call    ExtraDataList_GetLeveledItem; Returns the ExtraLeveledItem object itself, allowing callers to inspect its selected leveled-list state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2599,13 +2599,13 @@
   },
   {
     "ea": "0x4900D1",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4900D3",
-    "line": "call    ExtraDataList_GetReferencePointer",
+    "line": "call    ExtraDataList_GetReferencePointer; Return the TESObjectREFR payload from ExtraReferencePointer type 0x22, or null. Provenance only: callers still select EntryData by exact TESForm first.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2623,13 +2623,13 @@
   },
   {
     "ea": "0x4900E0",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4900E2",
-    "line": "call    ExtraDataList_GetReferencePointer",
+    "line": "call    ExtraDataList_GetReferencePointer; Return the TESObjectREFR payload from ExtraReferencePointer type 0x22, or null. Provenance only: callers still select EntryData by exact TESForm first.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3007,7 +3007,7 @@
   },
   {
     "ea": "0x490196",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3025,7 +3025,7 @@
   },
   {
     "ea": "0x49019E",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3043,7 +3043,7 @@
   },
   {
     "ea": "0x4901AA",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3097,7 +3097,7 @@
   },
   {
     "ea": "0x4901C6",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3145,13 +3145,13 @@
   },
   {
     "ea": "0x4901DC",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; cell",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4901DE",
-    "line": "call    TESObjectCELL_GetOwner",
+    "line": "call    TESObjectCELL_GetOwner; Verified Oblivion getter: returns only the direct XOWN/ExtraOwnership form stored in the cell extra list at cell+8. Unlike Fallout TESObjectCELL::GetOwner, it does not fall back to an encounter-zone owner.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3169,19 +3169,19 @@
   },
   {
     "ea": "0x4901E7",
-    "line": "push    ebp",
+    "line": "push    ebp; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4901E8",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; cell",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4901EA",
-    "line": "call    sub_4CAAC0",
+    "line": "call    TESObjectCELL_IsOwnedByActor; Verified Oblivion owner predicate: reads the cell's XOWN and XRNK extra data; returns true for an NPC owner matching the actor's base form, or for a faction owner when the actor is an NPC whose faction rank meets the cell's required rank. Player identity is passed into faction-rank evaluation for its special handling. Called by door access/trespass policy and other ownership paths. Fallout has the analogous TESObjectCELL::IsActorBaseCellOwner; it takes TESActorBase* and uses a differently exposed faction-rank path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3721,7 +3721,7 @@
   },
   {
     "ea": "0x490303",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3769,13 +3769,13 @@
   },
   {
     "ea": "0x490319",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; cell",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x49031B",
-    "line": "call    TESObjectCELL_GetOwner",
+    "line": "call    TESObjectCELL_GetOwner; Verified Oblivion getter: returns only the direct XOWN/ExtraOwnership form stored in the cell extra list at cell+8. Unlike Fallout TESObjectCELL::GetOwner, it does not fall back to an encounter-zone owner.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3793,19 +3793,19 @@
   },
   {
     "ea": "0x490324",
-    "line": "push    ebp",
+    "line": "push    ebp; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x490325",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; cell",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x490327",
-    "line": "call    sub_4CAAC0",
+    "line": "call    TESObjectCELL_IsOwnedByActor; Verified Oblivion owner predicate: reads the cell's XOWN and XRNK extra data; returns true for an NPC owner matching the actor's base form, or for a faction owner when the actor is an NPC whose faction rank meets the cell's required rank. Player identity is passed into faction-rank evaluation for its special handling. Called by door access/trespass policy and other ownership paths. Fallout has the analogous TESObjectCELL::IsActorBaseCellOwner; it takes TESActorBase* and uses a differently exposed faction-rank path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3835,13 +3835,13 @@
   },
   {
     "ea": "0x490336",
-    "line": "mov     ecx, edi; this",
+    "line": "mov     ecx, edi; reference",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x490338",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4069,7 +4069,7 @@
   },
   {
     "ea": "0x4903A7",
-    "line": "mov     [esp+58h+var_20], eax",
+    "line": "mov     [esp+58h+owner], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4081,7 +4081,7 @@
   },
   {
     "ea": "0x4903B0",
-    "line": "mov     ecx, [esp+54h+var_20]",
+    "line": "mov     ecx, [esp+54h+owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4189,7 +4189,7 @@
   },
   {
     "ea": "0x4903DF",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4207,7 +4207,7 @@
   },
   {
     "ea": "0x4903E7",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4225,7 +4225,7 @@
   },
   {
     "ea": "0x4903F3",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4357,13 +4357,13 @@
   },
   {
     "ea": "0x490441",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x490443",
-    "line": "call    ExtraDataList_GetOwner",
+    "line": "call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4417,7 +4417,7 @@
   },
   {
     "ea": "0x49045E",
-    "line": "mov     ecx, ebx; this",
+    "line": "mov     ecx, ebx; reference",
     "mnemonic": "mov",
     "size": 2
   },
@@ -4453,7 +4453,7 @@
   },
   {
     "ea": "0x49046E",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4465,7 +4465,7 @@
   },
   {
     "ea": "0x490478",
-    "line": "mov     [esp+54h+var_20], eax",
+    "line": "mov     [esp+54h+owner], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4519,7 +4519,7 @@
   },
   {
     "ea": "0x490492",
-    "line": "mov     edx, [esp+54h+var_20]",
+    "line": "mov     edx, [esp+54h+owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4579,25 +4579,25 @@
   },
   {
     "ea": "0x4904AF",
-    "line": "mov     ecx, [esp+54h+var_20]",
+    "line": "mov     ecx, [esp+54h+owner]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4904B3",
-    "line": "push    ecx",
+    "line": "push    ecx; owner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4904B4",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4904B6",
-    "line": "call    ExtraDataList__SetOrRemoveExtraOwnership",
+    "line": "call    ExtraDataList__SetOrRemoveExtraOwnership; Verified XOWN mutator: update ExtraOwnership.ownerForm when owner is nonnull; remove the XOWN extra when null; otherwise allocate a 16-byte ExtraOwnership payload and add it to the list. During plugin load the initial dword is a FormID temporarily held in the same union slot; ExtraDataList_ResolveLoadedFormIDs converts it to TESForm*. TESObjectCELL_LinkForm removes direct XOWN, XRNK, and XGLB from an exterior cell when an owner exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4651,7 +4651,7 @@
   },
   {
     "ea": "0x4904D1",
-    "line": "call    eax",
+    "line": "call    eax; ContainerExtraData_RemoveForm transfer path: when destRef is non-null, calls destRef virtual AddItem slot with item form, extra data, and count after removing from source.",
     "mnemonic": "call",
     "size": 2
   },
@@ -4699,7 +4699,7 @@
   },
   {
     "ea": "0x4904E8",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4723,7 +4723,7 @@
   },
   {
     "ea": "0x4904F4",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4741,7 +4741,7 @@
   },
   {
     "ea": "0x490500",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4795,7 +4795,7 @@
   },
   {
     "ea": "0x490521",
-    "line": "mov     ecx, ebx; this",
+    "line": "mov     ecx, ebx; reference",
     "mnemonic": "mov",
     "size": 2
   },
@@ -4831,7 +4831,7 @@
   },
   {
     "ea": "0x490531",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4849,7 +4849,7 @@
   },
   {
     "ea": "0x49053F",
-    "line": "mov     [esp+54h+var_20], eax",
+    "line": "mov     [esp+54h+owner], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4897,7 +4897,7 @@
   },
   {
     "ea": "0x490555",
-    "line": "mov     ecx, [esp+54h+var_20]",
+    "line": "mov     ecx, [esp+54h+owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5023,19 +5023,19 @@
   },
   {
     "ea": "0x490595",
-    "line": "mov     edx, [esp+54h+var_20]",
+    "line": "mov     edx, [esp+54h+owner]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x490599",
-    "line": "push    edx",
+    "line": "push    edx; owner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x49059A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -5047,7 +5047,7 @@
   },
   {
     "ea": "0x4905A4",
-    "line": "call    ExtraDataList__SetOrRemoveExtraOwnership",
+    "line": "call    ExtraDataList__SetOrRemoveExtraOwnership; Verified XOWN mutator: update ExtraOwnership.ownerForm when owner is nonnull; remove the XOWN extra when null; otherwise allocate a 16-byte ExtraOwnership payload and add it to the list. During plugin load the initial dword is a FormID temporarily held in the same union slot; ExtraDataList_ResolveLoadedFormIDs converts it to TESForm*. TESObjectCELL_LinkForm removes direct XOWN, XRNK, and XGLB from an exterior cell when an owner exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5119,7 +5119,7 @@
   },
   {
     "ea": "0x4905C7",
-    "line": "call    eax",
+    "line": "call    eax; ContainerExtraData_RemoveForm transfer path without existing extra list: builds/sets ExtraOwnership/ExtraCount as needed, then calls destRef virtual AddItem.",
     "mnemonic": "call",
     "size": 2
   },
@@ -5143,7 +5143,7 @@
   },
   {
     "ea": "0x4905CF",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5161,7 +5161,7 @@
   },
   {
     "ea": "0x4905D7",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5179,7 +5179,7 @@
   },
   {
     "ea": "0x4905E3",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5323,7 +5323,7 @@
   },
   {
     "ea": "0x49062C",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5341,7 +5341,7 @@
   },
   {
     "ea": "0x490634",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5359,7 +5359,7 @@
   },
   {
     "ea": "0x490640",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5719,7 +5719,7 @@
   },
   {
     "ea": "0x490706",
-    "line": "mov     edx, [esp+54h+arg_4]",
+    "line": "mov     edx, [esp+54h+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5845,7 +5845,7 @@
   },
   {
     "ea": "0x490749",
-    "line": "mov     eax, [esp+54h+arg_4]",
+    "line": "mov     eax, [esp+54h+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5923,7 +5923,7 @@
   },
   {
     "ea": "0x490769",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5971,13 +5971,13 @@
   },
   {
     "ea": "0x49077F",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; cell",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x490781",
-    "line": "call    TESObjectCELL_GetOwner",
+    "line": "call    TESObjectCELL_GetOwner; Verified Oblivion getter: returns only the direct XOWN/ExtraOwnership form stored in the cell extra list at cell+8. Unlike Fallout TESObjectCELL::GetOwner, it does not fall back to an encounter-zone owner.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5995,19 +5995,19 @@
   },
   {
     "ea": "0x49078A",
-    "line": "push    ebp",
+    "line": "push    ebp; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x49078B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; cell",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x49078D",
-    "line": "call    sub_4CAAC0",
+    "line": "call    TESObjectCELL_IsOwnedByActor; Verified Oblivion owner predicate: reads the cell's XOWN and XRNK extra data; returns true for an NPC owner matching the actor's base form, or for a faction owner when the actor is an NPC whose faction rank meets the cell's required rank. Player identity is passed into faction-rank evaluation for its special handling. Called by door access/trespass policy and other ownership paths. Fallout has the analogous TESObjectCELL::IsActorBaseCellOwner; it takes TESActorBase* and uses a differently exposed faction-rank path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6223,7 +6223,7 @@
   },
   {
     "ea": "0x4907F8",
-    "line": "mov     [esp+58h+var_20], eax",
+    "line": "mov     [esp+58h+owner], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6235,7 +6235,7 @@
   },
   {
     "ea": "0x490801",
-    "line": "mov     ecx, [esp+54h+var_20]",
+    "line": "mov     ecx, [esp+54h+owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6313,7 +6313,7 @@
   },
   {
     "ea": "0x490824",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6331,7 +6331,7 @@
   },
   {
     "ea": "0x49082C",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6349,7 +6349,7 @@
   },
   {
     "ea": "0x490838",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6415,7 +6415,7 @@
   },
   {
     "ea": "0x490868",
-    "line": "mov     ecx, ebp; this",
+    "line": "mov     ecx, ebp; reference",
     "mnemonic": "mov",
     "size": 2
   },
@@ -6451,7 +6451,7 @@
   },
   {
     "ea": "0x490879",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6475,7 +6475,7 @@
   },
   {
     "ea": "0x490887",
-    "line": "mov     ecx, [esp+54h+arg_4]",
+    "line": "mov     ecx, [esp+54h+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6541,7 +6541,7 @@
   },
   {
     "ea": "0x4908A4",
-    "line": "mov     edx, [esp+54h+arg_4]",
+    "line": "mov     edx, [esp+54h+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6661,19 +6661,19 @@
   },
   {
     "ea": "0x4908E9",
-    "line": "push    edi",
+    "line": "push    edi; owner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4908EA",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4908EC",
-    "line": "call    ExtraDataList__SetOrRemoveExtraOwnership",
+    "line": "call    ExtraDataList__SetOrRemoveExtraOwnership; Verified XOWN mutator: update ExtraOwnership.ownerForm when owner is nonnull; remove the XOWN extra when null; otherwise allocate a 16-byte ExtraOwnership payload and add it to the list. During plugin load the initial dword is a FormID temporarily held in the same union slot; ExtraDataList_ResolveLoadedFormIDs converts it to TESForm*. TESObjectCELL_LinkForm removes direct XOWN, XRNK, and XGLB from an exterior cell when an owner exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6721,7 +6721,7 @@
   },
   {
     "ea": "0x490905",
-    "line": "mov     edx, [esp+54h+arg_4]",
+    "line": "mov     edx, [esp+54h+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6775,7 +6775,7 @@
   },
   {
     "ea": "0x49091A",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6793,7 +6793,7 @@
   },
   {
     "ea": "0x490922",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6811,7 +6811,7 @@
   },
   {
     "ea": "0x49092E",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6955,7 +6955,7 @@
   },
   {
     "ea": "0x49098D",
-    "line": "mov     [esp+54h+var_20], ebx",
+    "line": "mov     [esp+54h+owner], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6985,7 +6985,7 @@
   },
   {
     "ea": "0x490999",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7003,7 +7003,7 @@
   },
   {
     "ea": "0x4909A1",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7021,7 +7021,7 @@
   },
   {
     "ea": "0x4909A9",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7177,7 +7177,7 @@
   },
   {
     "ea": "0x4909F8",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7195,7 +7195,7 @@
   },
   {
     "ea": "0x490A00",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7213,7 +7213,7 @@
   },
   {
     "ea": "0x490A08",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7321,7 +7321,7 @@
   },
   {
     "ea": "0x490A43",
-    "line": "mov     esi, [esp+54h+arg_4]",
+    "line": "mov     esi, [esp+54h+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -7447,7 +7447,7 @@
   },
   {
     "ea": "0x490A8F",
-    "line": "call    sub_41E850",
+    "line": "call    ExtraDataList_GetLeveledItem; Returns the ExtraLeveledItem object itself, allowing callers to inspect its selected leveled-list state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7525,7 +7525,7 @@
   },
   {
     "ea": "0x490ABC",
-    "line": "mov     [esp+54h+var_20], 0",
+    "line": "mov     [esp+54h+owner], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -7711,7 +7711,7 @@
   },
   {
     "ea": "0x490B1D",
-    "line": "call    sub_41E850",
+    "line": "call    ExtraDataList_GetLeveledItem; Returns the ExtraLeveledItem object itself, allowing callers to inspect its selected leveled-list state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7897,7 +7897,7 @@
   },
   {
     "ea": "0x490B74",
-    "line": "mov     edx, [esp+54h+var_20]",
+    "line": "mov     edx, [esp+54h+owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -8071,13 +8071,13 @@
   },
   {
     "ea": "0x490BD3",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x490BD5",
-    "line": "call    ExtraDataList_GetReferencePointer",
+    "line": "call    ExtraDataList_GetReferencePointer; Return the TESObjectREFR payload from ExtraReferencePointer type 0x22, or null. Provenance only: callers still select EntryData by exact TESForm first.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8095,13 +8095,13 @@
   },
   {
     "ea": "0x490BE2",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x490BE4",
-    "line": "call    ExtraDataList_GetReferencePointer",
+    "line": "call    ExtraDataList_GetReferencePointer; Return the TESObjectREFR payload from ExtraReferencePointer type 0x22, or null. Provenance only: callers still select EntryData by exact TESForm first.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8167,7 +8167,7 @@
   },
   {
     "ea": "0x490C0A",
-    "line": "cmp     [esp+54h+var_20], 0",
+    "line": "cmp     [esp+54h+owner], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -8485,7 +8485,7 @@
   },
   {
     "ea": "0x490CA5",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8503,7 +8503,7 @@
   },
   {
     "ea": "0x490CAD",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8521,7 +8521,7 @@
   },
   {
     "ea": "0x490CB9",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8575,7 +8575,7 @@
   },
   {
     "ea": "0x490CD5",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8623,13 +8623,13 @@
   },
   {
     "ea": "0x490CEB",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; cell",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x490CED",
-    "line": "call    TESObjectCELL_GetOwner",
+    "line": "call    TESObjectCELL_GetOwner; Verified Oblivion getter: returns only the direct XOWN/ExtraOwnership form stored in the cell extra list at cell+8. Unlike Fallout TESObjectCELL::GetOwner, it does not fall back to an encounter-zone owner.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8647,19 +8647,19 @@
   },
   {
     "ea": "0x490CF6",
-    "line": "push    edi",
+    "line": "push    edi; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x490CF7",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; cell",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x490CF9",
-    "line": "call    sub_4CAAC0",
+    "line": "call    TESObjectCELL_IsOwnedByActor; Verified Oblivion owner predicate: reads the cell's XOWN and XRNK extra data; returns true for an NPC owner matching the actor's base form, or for a faction owner when the actor is an NPC whose faction rank meets the cell's required rank. Player identity is passed into faction-rank evaluation for its special handling. Called by door access/trespass policy and other ownership paths. Fallout has the analogous TESObjectCELL::IsActorBaseCellOwner; it takes TESActorBase* and uses a differently exposed faction-rank path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9031,7 +9031,7 @@
   },
   {
     "ea": "0x490DBC",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9079,13 +9079,13 @@
   },
   {
     "ea": "0x490DD4",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; cell",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x490DD6",
-    "line": "call    TESObjectCELL_GetOwner",
+    "line": "call    TESObjectCELL_GetOwner; Verified Oblivion getter: returns only the direct XOWN/ExtraOwnership form stored in the cell extra list at cell+8. Unlike Fallout TESObjectCELL::GetOwner, it does not fall back to an encounter-zone owner.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9103,19 +9103,19 @@
   },
   {
     "ea": "0x490DDF",
-    "line": "push    ebp",
+    "line": "push    ebp; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x490DE0",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; cell",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x490DE2",
-    "line": "call    sub_4CAAC0",
+    "line": "call    TESObjectCELL_IsOwnedByActor; Verified Oblivion owner predicate: reads the cell's XOWN and XRNK extra data; returns true for an NPC owner matching the actor's base form, or for a faction owner when the actor is an NPC whose faction rank meets the cell's required rank. Player identity is passed into faction-rank evaluation for its special handling. Called by door access/trespass policy and other ownership paths. Fallout has the analogous TESObjectCELL::IsActorBaseCellOwner; it takes TESActorBase* and uses a differently exposed faction-rank path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9421,7 +9421,7 @@
   },
   {
     "ea": "0x490E7D",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9439,7 +9439,7 @@
   },
   {
     "ea": "0x490E85",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9457,7 +9457,7 @@
   },
   {
     "ea": "0x490E91",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9751,7 +9751,7 @@
   },
   {
     "ea": "0x490F31",
-    "line": "mov     ecx, [esp+54h+arg_0]; this",
+    "line": "mov     ecx, [esp+54h+arg_0]; reference",
     "mnemonic": "mov",
     "size": 4
   },
@@ -9787,7 +9787,7 @@
   },
   {
     "ea": "0x490F43",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9895,19 +9895,19 @@
   },
   {
     "ea": "0x490F78",
-    "line": "push    ebx",
+    "line": "push    ebx; owner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x490F79",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x490F7B",
-    "line": "call    ExtraDataList__SetOrRemoveExtraOwnership",
+    "line": "call    ExtraDataList__SetOrRemoveExtraOwnership; Verified XOWN mutator: update ExtraOwnership.ownerForm when owner is nonnull; remove the XOWN extra when null; otherwise allocate a 16-byte ExtraOwnership payload and add it to the list. During plugin load the initial dword is a FormID temporarily held in the same union slot; ExtraDataList_ResolveLoadedFormIDs converts it to TESForm*. TESObjectCELL_LinkForm removes direct XOWN, XRNK, and XGLB from an exterior cell when an owner exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9991,7 +9991,7 @@
   },
   {
     "ea": "0x490FA3",
-    "line": "call    eax",
+    "line": "call    eax; ContainerExtraData_RemoveForm stack/entry transfer path: calls destRef virtual AddItem with entry form, extra data, and count. Confirms stolen items land in destination inventory.",
     "mnemonic": "call",
     "size": 2
   },
@@ -10045,7 +10045,7 @@
   },
   {
     "ea": "0x490FBB",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10063,7 +10063,7 @@
   },
   {
     "ea": "0x490FC3",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10081,7 +10081,7 @@
   },
   {
     "ea": "0x490FCF",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10093,7 +10093,7 @@
   },
   {
     "ea": "0x490FD7",
-    "line": "cmp     [esp+54h+var_20], 0",
+    "line": "cmp     [esp+54h+owner], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -10279,7 +10279,7 @@
   },
   {
     "ea": "0x491053",
-    "line": "mov     edx, [esp+6Ch+arg_4]",
+    "line": "mov     edx, [esp+6Ch+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -10849,7 +10849,7 @@
   },
   {
     "ea": "0x49116C",
-    "line": "mov     esi, [esp+54h+arg_4]",
+    "line": "mov     esi, [esp+54h+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -10861,31 +10861,31 @@
   },
   {
     "ea": "0x491174",
-    "line": "push    0",
+    "line": "push    0; referenceFormIDOrZero",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x491176",
-    "line": "push    1",
+    "line": "push    1; unusedAlwaysOne",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x491178",
-    "line": "push    esi",
+    "line": "push    esi; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x491179",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x49117B",
-    "line": "call    ContainerExtraData_GetEntryForForm",
+    "line": "call    ContainerExtraData_GetEntryForForm; Find EntryData for an exact TESForm in ExtraContainerChanges. Native ABI is three stack arguments and retn 0x0C. The middle Boolean is not read; callers conventionally pass true. If referenceFormIDOrZero is nonzero, require an extend-data list whose ExtraReferencePointer target has that form ID; otherwise return the form entry directly.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11101,7 +11101,7 @@
   },
   {
     "ea": "0x4911D3",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11119,7 +11119,7 @@
   },
   {
     "ea": "0x4911DB",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11137,7 +11137,7 @@
   },
   {
     "ea": "0x4911E7",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11245,7 +11245,7 @@
   },
   {
     "ea": "0x491219",
-    "line": "mov     eax, [esp+74h+arg_4]",
+    "line": "mov     eax, [esp+74h+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -11539,7 +11539,7 @@
   },
   {
     "ea": "0x4912AC",
-    "line": "mov     edx, [esp+70h+arg_4]",
+    "line": "mov     edx, [esp+70h+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -11671,7 +11671,7 @@
   },
   {
     "ea": "0x4912E7",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11689,7 +11689,7 @@
   },
   {
     "ea": "0x4912EF",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11707,7 +11707,7 @@
   },
   {
     "ea": "0x4912FB",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11851,7 +11851,7 @@
   },
   {
     "ea": "0x491352",
-    "line": "mov     eax, [esp+54h+arg_4]",
+    "line": "mov     eax, [esp+54h+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -11923,7 +11923,7 @@
   },
   {
     "ea": "0x491370",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11971,13 +11971,13 @@
   },
   {
     "ea": "0x491388",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; cell",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x49138A",
-    "line": "call    TESObjectCELL_GetOwner",
+    "line": "call    TESObjectCELL_GetOwner; Verified Oblivion getter: returns only the direct XOWN/ExtraOwnership form stored in the cell extra list at cell+8. Unlike Fallout TESObjectCELL::GetOwner, it does not fall back to an encounter-zone owner.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11995,19 +11995,19 @@
   },
   {
     "ea": "0x491393",
-    "line": "push    esi",
+    "line": "push    esi; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x491394",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; cell",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x491396",
-    "line": "call    sub_4CAAC0",
+    "line": "call    TESObjectCELL_IsOwnedByActor; Verified Oblivion owner predicate: reads the cell's XOWN and XRNK extra data; returns true for an NPC owner matching the actor's base form, or for a faction owner when the actor is an NPC whose faction rank meets the cell's required rank. Player identity is passed into faction-rank evaluation for its special handling. Called by door access/trespass policy and other ownership paths. Fallout has the analogous TESObjectCELL::IsActorBaseCellOwner; it takes TESActorBase* and uses a differently exposed faction-rank path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -12355,7 +12355,7 @@
   },
   {
     "ea": "0x491465",
-    "line": "mov     ecx, esi; this",
+    "line": "mov     ecx, esi; reference",
     "mnemonic": "mov",
     "size": 2
   },
@@ -12391,7 +12391,7 @@
   },
   {
     "ea": "0x491475",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -12415,7 +12415,7 @@
   },
   {
     "ea": "0x491483",
-    "line": "mov     ecx, [esp+54h+arg_4]",
+    "line": "mov     ecx, [esp+54h+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -12481,7 +12481,7 @@
   },
   {
     "ea": "0x4914A0",
-    "line": "mov     edx, [esp+54h+arg_4]",
+    "line": "mov     edx, [esp+54h+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -12595,19 +12595,19 @@
   },
   {
     "ea": "0x4914E4",
-    "line": "push    edi",
+    "line": "push    edi; owner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4914E5",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4914E7",
-    "line": "call    ExtraDataList__SetOrRemoveExtraOwnership",
+    "line": "call    ExtraDataList__SetOrRemoveExtraOwnership; Verified XOWN mutator: update ExtraOwnership.ownerForm when owner is nonnull; remove the XOWN extra when null; otherwise allocate a 16-byte ExtraOwnership payload and add it to the list. During plugin load the initial dword is a FormID temporarily held in the same union slot; ExtraDataList_ResolveLoadedFormIDs converts it to TESForm*. TESObjectCELL_LinkForm removes direct XOWN, XRNK, and XGLB from an exterior cell when an owner exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -12679,7 +12679,7 @@
   },
   {
     "ea": "0x491509",
-    "line": "mov     ecx, [esp+54h+arg_4]",
+    "line": "mov     ecx, [esp+54h+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -12769,7 +12769,7 @@
   },
   {
     "ea": "0x49152E",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -12787,7 +12787,7 @@
   },
   {
     "ea": "0x491536",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -12805,7 +12805,7 @@
   },
   {
     "ea": "0x491542",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -12871,7 +12871,7 @@
   },
   {
     "ea": "0x49156B",
-    "line": "mov     ecx, [esp+54h+arg_4]",
+    "line": "mov     ecx, [esp+54h+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -12961,37 +12961,37 @@
   },
   {
     "ea": "0x491597",
-    "line": "mov     eax, [esp+54h+arg_4]",
+    "line": "mov     eax, [esp+54h+form]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x49159B",
-    "line": "mov     ecx, [esp+54h+var_30]",
+    "line": "mov     ecx, [esp+54h+var_30]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x49159F",
-    "line": "push    0",
+    "line": "push    0; referenceFormIDOrZero",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4915A1",
-    "line": "push    1",
+    "line": "push    1; unusedAlwaysOne",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4915A3",
-    "line": "push    eax",
+    "line": "push    eax; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4915A4",
-    "line": "call    ContainerExtraData_GetEntryForForm",
+    "line": "call    ContainerExtraData_GetEntryForForm; Find EntryData for an exact TESForm in ExtraContainerChanges. Native ABI is three stack arguments and retn 0x0C. The middle Boolean is not read; callers conventionally pass true. If referenceFormIDOrZero is nonzero, require an extend-data list whose ExtraReferencePointer target has that form ID; otherwise return the form entry directly.",
     "mnemonic": "call",
     "size": 5
   },
@@ -13237,7 +13237,7 @@
   },
   {
     "ea": "0x491620",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -13255,7 +13255,7 @@
   },
   {
     "ea": "0x491628",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -13273,7 +13273,7 @@
   },
   {
     "ea": "0x491634",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -13375,7 +13375,7 @@
   },
   {
     "ea": "0x491663",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -13438,5 +13438,287 @@
     "line": "retn    2Ch ; ','",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AFF00",
+    "line": "mov     eax, [ebp+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFF03",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFF04",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFF09",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFF0A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFF0B",
+    "line": "mov     eax, [ebp+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFF0E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFF0F",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFF14",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFF15",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFF16",
+    "line": "mov     eax, [ebp-28h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFF19",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFF1A",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFF1F",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFF20",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFF21",
+    "line": "mov     eax, [ebp+14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFF24",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFF25",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFF2A",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFF2B",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFF2C",
+    "line": "mov     eax, [ebp-28h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFF2F",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFF30",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFF35",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFF36",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFF37",
+    "line": "mov     eax, [ebp-3Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFF3A",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFF3B",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFF40",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFF41",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFF42",
+    "line": "mov     eax, [ebp+2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFF45",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFF46",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFF4B",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFF4C",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFF4D",
+    "line": "mov     eax, [ebp+2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFF50",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFF51",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFF56",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFF57",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFF58",
+    "line": "mov     edx, [esp+form]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AFF5C",
+    "line": "lea     eax, [edx-44h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFF5F",
+    "line": "mov     ecx, [edx-48h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFF62",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AFF64",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFF69",
+    "line": "mov     eax, offset stru_ADC34C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFF6E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

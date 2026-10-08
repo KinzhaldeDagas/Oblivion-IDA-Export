@@ -21,7 +21,7 @@
 0x8090B7: push    ebx
 0x8090B8: push    ebp
 0x8090B9: call    ??0ShadowLightShader@@QAE@XZ; ShadowLightShader::ShadowLightShader(void)
-0x8090BE: push    offset sub_7016A0; a5
+0x8090BE: push    offset NiPointerSlot_Release; a5
 0x8090C3: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x8090C8: push    24h ; '$'; size
 0x8090CA: push    4; a2
@@ -30,7 +30,7 @@
 0x8090D3: mov     [esp+38h+var_4], 0
 0x8090DB: mov     dword ptr [esi], offset ??_7ParallaxShader@@6B@; const ParallaxShader::`vftable'
 0x8090E1: call    ArrayConstructor
-0x8090E6: push    offset sub_7016A0; a5
+0x8090E6: push    offset NiPointerSlot_Release; a5
 0x8090EB: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x8090F0: push    1Eh; size
 0x8090F2: push    4; a2
@@ -97,3 +97,28 @@
 0x80919C: pop     ebx
 0x80919D: add     esp, 10h
 0x8091A0: retn    8
+0x9D0C10: mov     ecx, [ebp-10h]; this
+0x9D0C13: jmp     ??1ShadowLightShader@@UAE@XZ; ShadowLightShader::~ShadowLightShader(void)
+0x9D0C18: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9D0C1D: push    24h ; '$'; int
+0x9D0C1F: push    4; unsigned int
+0x9D0C21: mov     eax, [ebp-10h]
+0x9D0C24: add     eax, 9Ch ; 'œ'
+0x9D0C29: push    eax; void *
+0x9D0C2A: call    $LN21
+0x9D0C2F: retn
+0x9D0C30: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9D0C35: push    1Eh; int
+0x9D0C37: push    4; unsigned int
+0x9D0C39: mov     eax, [ebp-10h]
+0x9D0C3C: add     eax, 12Ch
+0x9D0C41: push    eax; void *
+0x9D0C42: call    $LN21
+0x9D0C47: retn
+0x9D0C48: mov     edx, [esp+arg_4]
+0x9D0C4C: lea     eax, [edx-14h]
+0x9D0C4F: mov     ecx, [edx-18h]
+0x9D0C52: xor     ecx, eax
+0x9D0C54: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D0C59: mov     eax, offset stru_AF9480
+0x9D0C5E: jmp     ___CxxFrameHandler3

@@ -1,110 +1,116 @@
-_DWORD *__thiscall sub_7A8A40(unsigned int *this, int a2, char *a3, unsigned int a4, int *a5)
+// OBLIVION AUTHORITY (2026-08-30): Core fill-insert for the 0x10-byte vector<CLeafLodEngine::SLodEntry>; handles capacity growth, relocation, and repeated 8-byte pair insertion.
+void __thiscall OB_stVectorLeafLodEntry_InsertFill_010201A0(
+        OB_stVectorLeafLodEntry_010201A0 *this,
+        OB_stVectorLeafLodEntry_010201A0 *positionOwner,
+        OB_CLeafLodEngine_SLodEntry_010201A0 *position,
+        unsigned int count,
+        const OB_CLeafLodEngine_SLodEntry_010201A0 *value)
 {
-  int v6; // edx
-  _DWORD *result; // eax
-  unsigned int v8; // edi
+  const OB_CBillboardLeaf_010201A0 *m_pLeafMatch; // edx
+  OB_CLeafLodEngine_SLodEntry_010201A0 *begin; // eax
+  unsigned int capacityCount; // edi
   int v9; // ecx
   int v10; // ecx
-  unsigned int v11; // edi
+  unsigned int newCapacity; // edi
   int v12; // ecx
   int v13; // ecx
-  _DWORD *v14; // ebx
-  _DWORD *v15; // eax
-  _DWORD *v16; // eax
-  unsigned int v17; // ecx
-  int v18; // eax
-  char *v19; // ebx
-  _DWORD *v20; // [esp-20h] [ebp-4Ch]
-  _DWORD *v21; // [esp-Ch] [ebp-38h]
-  int v22; // [esp-8h] [ebp-34h]
+  OB_CLeafLodEngine_SLodEntry_010201A0 *newBegin; // ebx
+  OB_CLeafLodEngine_SLodEntry_010201A0 *afterPrefix; // eax
+  OB_CLeafLodEngine_SLodEntry_010201A0 *afterInserted; // eax
+  OB_CLeafLodEngine_SLodEntry_010201A0 *oldBegin; // ecx
+  int oldSize; // eax
+  OB_CLeafLodEngine_SLodEntry_010201A0 *end; // ebx
+  OB_CLeafLodEngine_SLodEntry_010201A0 *v20; // [esp-20h] [ebp-4Ch]
+  OB_CLeafLodEngine_SLodEntry_010201A0 *v21; // [esp-Ch] [ebp-38h]
+  unsigned int v22; // [esp-8h] [ebp-34h]
   int v23; // [esp+0h] [ebp-2Ch] BYREF
-  _DWORD v24[4]; // [esp+10h] [ebp-1Ch] BYREF
-  int v25; // [esp+28h] [ebp-4h]
-  int v26; // [esp+3Ch] [ebp+10h]
-  char *v27; // [esp+3Ch] [ebp+10h]
-  unsigned int v28; // [esp+40h] [ebp+14h]
+  OB_CLeafLodEngine_SLodEntry_010201A0 valueCopy; // [esp+10h] [ebp-1Ch] BYREF
+  OB_CLeafLodEngine_SLodEntry_010201A0 *v25; // [esp+18h] [ebp-14h]
+  int *v26; // [esp+1Ch] [ebp-10h]
+  int v27; // [esp+28h] [ebp-4h]
+  unsigned int counta; // [esp+3Ch] [ebp+10h]
+  OB_CLeafLodEngine_SLodEntry_010201A0 *countb; // [esp+3Ch] [ebp+10h]
+  unsigned int valuea; // [esp+40h] [ebp+14h]
 
-  v24[3] = &v23;
-  v6 = a5[1];
-  result = (_DWORD *)*(this + 1);
-  v24[0] = *a5;
-  v24[1] = v6;
-  if ( result )
-    v8 = (int)(*(this + 3) - (_DWORD)result) >> 3;
+  v26 = &v23; /*0x7a8a68*/
+  m_pLeafMatch = value->m_pLeafMatch; /*0x7a8a72*/
+  begin = this->begin; /*0x7a8a75*/
+  valueCopy.m_pLeaf = value->m_pLeaf; /*0x7a8a7a*/
+  valueCopy.m_pLeafMatch = m_pLeafMatch; /*0x7a8a7d*/
+  if ( begin ) /*0x7a8a80*/
+    capacityCount = this->capacity - begin; /*0x7a8a8b*/
   else
-    v8 = 0;
-  if ( a4 )
+    capacityCount = 0; /*0x7a8a82*/
+  if ( count ) /*0x7a8a93*/
   {
-    if ( result )
-      v9 = (int)(*(this + 2) - (_DWORD)result) >> 3;
+    if ( begin ) /*0x7a8a9b*/
+      v9 = this->end - begin; /*0x7a8aa6*/
     else
-      v9 = 0;
-    if ( 0x1FFFFFFF - v9 < a4 )
-      sub_790B90(v8);
-    if ( result )
-      v10 = (int)(*(this + 2) - (_DWORD)result) >> 3;
+      v9 = 0; /*0x7a8a9d*/
+    if ( 0x1FFFFFFF - v9 < count ) /*0x7a8ab2*/
+      OB_stVector_ThrowLengthError_010201A0(capacityCount); /*0x7a8ab4*/
+    if ( begin ) /*0x7a8abb*/
+      v10 = this->end - begin; /*0x7a8ac6*/
     else
-      v10 = 0;
-    if ( v8 >= a4 + v10 )
+      v10 = 0; /*0x7a8abd*/
+    if ( capacityCount >= count + v10 ) /*0x7a8acd*/
     {
-      v19 = (char *)*(this + 2);
-      if ( (v19 - a3) >> 3 >= a4 )
+      end = this->end; /*0x7a8bcf*/
+      if ( end - position >= count ) /*0x7a8bde*/
       {
-        v28 = 8 * a4;
-        v27 = &v19[0xFFFFFFF8 * a4];
-        *(this + 2) = (unsigned int)sub_7A88D0(v27, v19, (_DWORD *)*(this + 2));
-        sub_7A8750((int)a3, (int)v27, (int)v19);
-        return sub_7A86F0(a3, &a3[v28], v24);
+        valuea = count; /*0x7a8c53*/
+        countb = &end[-count]; /*0x7a8c59*/
+        this->end = OB_LeafLodEntry_UninitializedCopyRange_Checked_010201A0(countb, end, this->end); /*0x7a8c67*/
+        OB_LeafLodEntry_CopyBackwardRange_010201A0(position, countb, end); /*0x7a8c6a*/
+        OB_LeafLodEntry_CopyFillRange_010201A0(position, &position[valuea], &valueCopy); /*0x7a8c7a*/
       }
       else
       {
-        sub_7A88D0(a3, v19, &a3[8 * a4]);
-        v22 = a4 - ((int)(*(this + 2) - (_DWORD)a3) >> 3);
-        v21 = (_DWORD *)*(this + 2);
-        v25 = 2;
-        sub_7A8790(v21, v22, v24);
-        *(this + 2) += 8 * a4;
-        return sub_7A86F0(a3, (_DWORD *)(*(this + 2) - 8 * a4), v24);
+        OB_LeafLodEntry_UninitializedCopyRange_Checked_010201A0(position, end, &position[count]); /*0x7a8bf1*/
+        v22 = count - (this->end - position); /*0x7a8c09*/
+        v21 = this->end; /*0x7a8c0a*/
+        v27 = 2; /*0x7a8c0d*/
+        OB_LeafLodEntry_UninitializedFillN_ReturnEnd_010201A0(v21, v22, &valueCopy); /*0x7a8c14*/
+        this->end += count; /*0x7a8c1c*/
+        OB_LeafLodEntry_CopyFillRange_010201A0(position, &this->end[-count], &valueCopy); /*0x7a8c2a*/
       }
     }
     else
     {
-      if ( 0x1FFFFFFF - (v8 >> 1) >= v8 )
-        v11 = (v8 >> 1) + v8;
+      if ( 0x1FFFFFFF - (capacityCount >> 1) >= capacityCount ) /*0x7a8ae0*/
+        newCapacity = (capacityCount >> 1) + capacityCount; /*0x7a8ae6*/
       else
-        v11 = 0;
-      if ( result )
-        v12 = (int)(*(this + 2) - (_DWORD)result) >> 3;
+        newCapacity = 0; /*0x7a8ae2*/
+      if ( begin ) /*0x7a8aea*/
+        v12 = this->end - begin; /*0x7a8af5*/
       else
-        v12 = 0;
-      if ( v11 < a4 + v12 )
+        v12 = 0; /*0x7a8aec*/
+      if ( newCapacity < count + v12 ) /*0x7a8afc*/
       {
-        if ( result )
-          v13 = (int)(*(this + 2) - (_DWORD)result) >> 3;
+        if ( begin ) /*0x7a8b00*/
+          v13 = this->end - begin; /*0x7a8b0b*/
         else
-          v13 = 0;
-        v11 = v13 + a4;
+          v13 = 0; /*0x7a8b02*/
+        newCapacity = v13 + count; /*0x7a8b0e*/
       }
-      v14 = (_DWORD *)sub_7A8660((char *)v11);
-      v20 = (_DWORD *)*(this + 1);
-      v24[2] = v14;
-      v25 = 0;
-      v15 = sub_7A86C0(v20, a3, v14);
-      v16 = sub_7A8790(v15, a4, v24);
-      sub_7A86C0(a3, (_DWORD *)*(this + 2), v16);
-      v17 = *(this + 1);
-      if ( v17 )
-        v18 = (int)(*(this + 2) - v17) >> 3;
+      newBegin = OB_stVectorLeafLodEntry_Allocate_010201A0(newCapacity); /*0x7a8b28*/
+      v20 = this->begin; /*0x7a8b30*/
+      v25 = newBegin; /*0x7a8b31*/
+      v27 = 0; /*0x7a8b34*/
+      afterPrefix = OB_LeafLodEntry_UninitializedCopyRange_010201A0(v20, position, newBegin); /*0x7a8b3b*/
+      afterInserted = OB_LeafLodEntry_UninitializedFillN_ReturnEnd_010201A0(afterPrefix, count, &valueCopy); /*0x7a8b4e*/
+      OB_LeafLodEntry_UninitializedCopyRange_010201A0(position, this->end, afterInserted); /*0x7a8b69*/
+      oldBegin = this->begin; /*0x7a8b6e*/
+      if ( oldBegin ) /*0x7a8b76*/
+        oldSize = this->end - oldBegin; /*0x7a8b81*/
       else
-        v18 = 0;
-      v26 = v18 + a4;
-      if ( v17 )
-        FormHeapFree(v17);
-      result = &v14[2 * v26];
-      *(this + 3) = (unsigned int)&v14[2 * v11];
-      *(this + 2) = (unsigned int)result;
-      *(this + 1) = (unsigned int)v14;
+        oldSize = 0; /*0x7a8b78*/
+      counta = oldSize + count; /*0x7a8b84*/
+      if ( oldBegin ) /*0x7a8b89*/
+        FormHeapFree((unsigned int)oldBegin); /*0x7a8b8c*/
+      this->capacity = &newBegin[newCapacity]; /*0x7a8b9d*/
+      this->end = &newBegin[counta]; /*0x7a8ba0*/
+      this->begin = newBegin; /*0x7a8ba3*/
     }
   }
-  return result;
 }

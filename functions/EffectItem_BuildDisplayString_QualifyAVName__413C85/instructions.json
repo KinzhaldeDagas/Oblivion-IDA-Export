@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x413C94",
-    "line": "mov     [esp+arg_90], ebp",
+    "line": "mov     [esp-24h+arg_B4], ebp",
     "mnemonic": "mov",
     "size": 7
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x413C9E",
-    "line": "call    ActorValue_GetName",
+    "line": "call    ActorValue_GetName; Return the localized actor-value display name through g_actorValueNameSettings. Native skills occupy the contiguous SkillActorValue range 0x0C..0x20.",
     "mnemonic": "call",
     "size": 5
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x413CA5",
-    "line": "lea     ecx, [esp+0Ch+a2]",
+    "line": "lea     ecx, [esp-18h+arg_44]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x413CB4",
-    "line": "mov     edx, dword ptr [esp+14h+arg_10]",
+    "line": "mov     edx, [esp-10h+arg_34]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -103,13 +103,13 @@
   },
   {
     "ea": "0x413CB9",
-    "line": "mov     byte ptr [esp+18h+arg_90], bl",
+    "line": "mov     byte ptr [esp-0Ch+arg_B4], bl",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x413CC0",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x413CC9",
-    "line": "lea     ecx, [esp+4+a2]",
+    "line": "lea     ecx, [esp-20h+arg_44]",
     "mnemonic": "lea",
     "size": 4
   },

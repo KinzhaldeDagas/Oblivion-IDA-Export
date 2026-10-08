@@ -10,9 +10,9 @@ int __usercall ValueModifierEffect_ModifyAV_::GetCasterActor@<eax>(
   MagicCaster *v7; // ecx
   Actor *ParentActor; // ebx
 
-  v7 = *(MagicCaster **)(a2 + 0x24);
-  if ( !v7 )
-    return ValueModifierEffect_ModifyAV_::CheckHostility(0, a1, a2, a3, a4, a5, a6, a7);
-  ParentActor = MagicCaster_GetParentActor(v7);
+  v7 = *(MagicCaster **)(a2 + 0x24); /*0x6a851e*/
+  if ( !v7 ) /*0x6a8524*/
+    return ValueModifierEffect_ModifyAV_::CheckHostility(0, a1, a2, a3, a4, a5, a6, a7); /*0x6a8530*/
+  ParentActor = MagicCaster_GetParentActor(v7); /*0x6a852b*/
   return ValueModifierEffect_ModifyAV_::CheckHostility((int)ParentActor, a1, a2, a3, a4, a5, a6, a7);
 }

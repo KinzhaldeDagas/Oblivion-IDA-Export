@@ -8,11 +8,11 @@
 0x45C480: mov     eax, [esi]
 0x45C482: test    eax, eax
 0x45C484: jz      short loc_45C492
-0x45C486: push    0
-0x45C488: push    1
-0x45C48A: push    eax
-0x45C48B: mov     ecx, edi
-0x45C48D: call    TESSaveLoadGame_ResetObject
+0x45C486: push    0; mode
+0x45C488: push    1; changeFlags
+0x45C48A: push    eax; form
+0x45C48B: mov     ecx, edi; self
+0x45C48D: call    TESSaveLoadGame_ResetObject; Verified: ResetObject reloads a form’s active override record. Counts override files, casts references/actors, calls UnloadForm-style buffer cleanup where needed, checks parent-cell and process constraints, finds the winning override file, and invokes TESDataHandler_LoadFormRecord under save/load guard. Callers include ResetFormForLoad 45F20E and LoadGame 4665B9.
 0x45C492: mov     esi, [esi+4]
 0x45C495: test    esi, esi
 0x45C497: jnz     short loc_45C480

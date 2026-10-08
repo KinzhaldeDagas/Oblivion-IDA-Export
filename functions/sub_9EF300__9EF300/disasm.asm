@@ -2,7 +2,7 @@
 0x9EF306: push    ecx
 0x9EF307: fstp    [esp+4+var_4]; float
 0x9EF30A: push    offset aFmagictelek_10; "fMagicTelekinesisComplexObjectDamping"
-0x9EF30F: mov     ecx, offset fMagicTelekinesisComplexObjectDamping
+0x9EF30F: mov     ecx, (offset flt_B37ED0+1B0h)
 0x9EF314: call    GameSetting_ConstrAndReg_float
 0x9EF319: push    offset sub_A20820; void (__cdecl *)()
 0x9EF31E: call    _atexit

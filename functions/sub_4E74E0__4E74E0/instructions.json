@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E74E0",
-    "line": "push    ebp",
+    "line": "push    ebp; Verified TESPathGrid form-type 0x34 loader. It reads DATA pointCount, and on the active file or alternate graph-loading mode delegates remaining PGRI/PGRL/PGRP/PGRR chunks to TESPathGrid_LoadSerializedGraphChunks. The PathGrid is a separate form record associated with its parent cell.",
     "mnemonic": "push",
     "size": 1
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x4E7510",
-    "line": "call    TESFile_InitializeFormFromRecord",
+    "line": "call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x4E7534",
-    "line": "mov     [ebp+var_6], 0",
+    "line": "mov     [ebp+var_6], 0; Runtime graph chunks load only for the active file or the alternate runtime-loading mode.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x4E7560",
-    "line": "jz      short loc_4E75C7",
+    "line": "jz      short loc_4E75C7; Recognized runtime graph chunks are PGRI/PGRL/PGRP/PGRR. Serialized PGAG is not dispatched by this Oblivion loader.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x4E758E",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x4E75AA",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Each DATA encountered before graph-helper delegation overwrites the u16 point count. Once the helper is entered it consumes the remaining stream and ignores later DATA.",
     "mnemonic": "call",
     "size": 5
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x4E75C5",
-    "line": "jnz     short loc_4E75D8",
+    "line": "jnz     short loc_4E75D8; PGRP or PGRR dispatch (PGRI/PGRL share the earlier switch target): the helper consumes the remaining graph-chunk stream.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -487,19 +487,19 @@
   },
   {
     "ea": "0x4E75CD",
-    "line": "push    esi",
+    "line": "push    esi; file",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E75CE",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E75D0",
-    "line": "call    sub_4E65B0",
+    "line": "call    TESPathGrid_LoadSerializedGraphChunks; Verified serialized PGRL chunk processing calls TESPathGrid_AddPointForLinkedReference, populating the reference-to-point index used by runtime enable/disable callbacks. This is separate from modified-form save data, which stores disabled point indices.",
     "mnemonic": "call",
     "size": 5
   },

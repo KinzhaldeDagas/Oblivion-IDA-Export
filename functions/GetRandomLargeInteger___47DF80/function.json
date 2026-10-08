@@ -1,18 +1,31 @@
 {
-  "callees_count": 7,
-  "callers_count": 84,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
+  "callers_count": 132,
+  "chunks": [
+    [
+      "0x47DF80",
+      "0x47DFC2"
+    ]
+  ],
+  "chunks_sha256": "4e343c7c396b12724646910cefb8c67bc71e3092407e2a976cd5df140884c205",
+  "comment_regular": "Engine RNG: optional explicit seed, otherwise lazy seed with time64 once, then returns rand().",
+  "comment_repeatable": "Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "GetRandomLargeInteger?",
+  "display_name": "Game_RandomLargeInteger",
   "end_ea": "0x47DFC2",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "GetRandomLargeInteger?",
+  "name": "Game_RandomLargeInteger",
   "segment": ".text",
   "sha256": "4e343c7c396b12724646910cefb8c67bc71e3092407e2a976cd5df140884c205",
   "size": 66,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x47DF80",
+  "total_chunk_size": 66,
   "type": "int __cdecl(unsigned int Seed)",
   "xrefs_from_count": 22,
   "xrefs_to_count": 132

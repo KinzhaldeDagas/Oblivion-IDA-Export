@@ -1,19 +1,36 @@
 {
-  "callees_count": 8,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
+  "chunks": [
+    [
+      "0x41ED50",
+      "0x41EDE6"
+    ],
+    [
+      "0x9D62E0",
+      "0x9D6306"
+    ]
+  ],
+  "chunks_sha256": "fe5982f2f7c5248fa8116c4cc2b3482bce7978ffa86d7395ba7b6b9d2bd372a2",
+  "comment_regular": "ExtraUses singleton setter always creates/updates and narrows to u8; no removal sentinel. Repeated XUSE retains node position and replaces the byte.",
+  "comment_repeatable": "ExtraUses singleton setter always creates/updates and narrows to u8; no removal sentinel. Repeated XUSE retains node position and replaces the byte.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
   "display_name": "ExtraDataList_SetUses",
   "end_ea": "0x41EDE6",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "ExtraDataList_SetUses",
   "segment": ".text",
   "sha256": "7233f958c907ce51d32f1a83a11a118656fba3ce38d021ac82d2e5cab3f402f6",
   "size": 150,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x41ED50",
+  "total_chunk_size": 188,
   "type": "BSExtraData *__thiscall(ExtraDataList *this, char)",
-  "xrefs_from_count": 53,
+  "xrefs_from_count": 67,
   "xrefs_to_count": 3
 }

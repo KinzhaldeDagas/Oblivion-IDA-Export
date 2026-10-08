@@ -1,76 +1,77 @@
-void __thiscall sub_7A7800(unsigned int *this)
+// Oblivion binary evidence: destructor for compact 0x74 SIdvBranchInfo. Destroys and frees each of nine optional heap-owned 0x5C stBezierSpline pointers, then nulls all nine fields. CTreeEngine::FreeTransientData is the sole caller and frees the enclosing record afterward.
+void __thiscall OB_SIdvBranchInfo_Dtor_010201A0(OB_SIdvBranchInfo_010201A0 *this)
 {
-  unsigned int v2; // edi
-  unsigned int v3; // edi
-  unsigned int v4; // edi
-  unsigned int v5; // edi
-  unsigned int v6; // edi
-  unsigned int v7; // edi
-  unsigned int v8; // edi
-  unsigned int v9; // edi
-  unsigned int v10; // edi
+  OB_stBezierSpline_010201A0 *flexibilityProfile; // edi
+  OB_stBezierSpline_010201A0 *flexibilityScaleProfile; // edi
+  OB_stBezierSpline_010201A0 *gravityProfile; // edi
+  OB_stBezierSpline_010201A0 *disturbanceProfile; // edi
+  OB_stBezierSpline_010201A0 *startAngleProfile; // edi
+  OB_stBezierSpline_010201A0 *radiusProfile; // edi
+  OB_stBezierSpline_010201A0 *radiusScaleProfile; // edi
+  OB_stBezierSpline_010201A0 *lengthProfile; // edi
+  OB_stBezierSpline_010201A0 *angleProfile; // edi
 
-  v2 = *(this + 0x16);
-  if ( v2 )
+  flexibilityProfile = this->flexibilityProfile; /*0x7a7805*/
+  if ( flexibilityProfile ) /*0x7a780c*/
   {
-    sub_784B60((unsigned int *)*(this + 0x16));
-    FormHeapFree(v2);
+    OB_StBezierSpline_Dtor_010201A0(this->flexibilityProfile); /*0x7a7810*/
+    FormHeapFree((unsigned int)flexibilityProfile); /*0x7a7816*/
   }
-  v3 = *(this + 0x17);
-  if ( v3 )
+  flexibilityScaleProfile = this->flexibilityScaleProfile; /*0x7a781e*/
+  if ( flexibilityScaleProfile ) /*0x7a7823*/
   {
-    sub_784B60((unsigned int *)*(this + 0x17));
-    FormHeapFree(v3);
+    OB_StBezierSpline_Dtor_010201A0(this->flexibilityScaleProfile); /*0x7a7827*/
+    FormHeapFree((unsigned int)flexibilityScaleProfile); /*0x7a782d*/
   }
-  v4 = *(this + 0x15);
-  if ( v4 )
+  gravityProfile = this->gravityProfile; /*0x7a7835*/
+  if ( gravityProfile ) /*0x7a783a*/
   {
-    sub_784B60((unsigned int *)*(this + 0x15));
-    FormHeapFree(v4);
+    OB_StBezierSpline_Dtor_010201A0(this->gravityProfile); /*0x7a783e*/
+    FormHeapFree((unsigned int)gravityProfile); /*0x7a7844*/
   }
-  v5 = *(this + 0x14);
-  if ( v5 )
+  disturbanceProfile = this->disturbanceProfile; /*0x7a784c*/
+  if ( disturbanceProfile ) /*0x7a7851*/
   {
-    sub_784B60((unsigned int *)*(this + 0x14));
-    FormHeapFree(v5);
+    OB_StBezierSpline_Dtor_010201A0(this->disturbanceProfile); /*0x7a7855*/
+    FormHeapFree((unsigned int)disturbanceProfile); /*0x7a785b*/
   }
-  v6 = *(this + 0x1B);
-  if ( v6 )
+  startAngleProfile = this->startAngleProfile; /*0x7a7863*/
+  if ( startAngleProfile ) /*0x7a7868*/
   {
-    sub_784B60((unsigned int *)*(this + 0x1B));
-    FormHeapFree(v6);
+    OB_StBezierSpline_Dtor_010201A0(this->startAngleProfile); /*0x7a786c*/
+    FormHeapFree((unsigned int)startAngleProfile); /*0x7a7872*/
   }
-  v7 = *(this + 0x19);
-  if ( v7 )
+  radiusProfile = this->radiusProfile; /*0x7a787a*/
+  if ( radiusProfile ) /*0x7a787f*/
   {
-    sub_784B60((unsigned int *)*(this + 0x19));
-    FormHeapFree(v7);
+    OB_StBezierSpline_Dtor_010201A0(this->radiusProfile); /*0x7a7883*/
+    FormHeapFree((unsigned int)radiusProfile); /*0x7a7889*/
   }
-  v8 = *(this + 0x1A);
-  if ( v8 )
+  radiusScaleProfile = this->radiusScaleProfile; /*0x7a7891*/
+  if ( radiusScaleProfile ) /*0x7a7896*/
   {
-    sub_784B60((unsigned int *)*(this + 0x1A));
-    FormHeapFree(v8);
+    OB_StBezierSpline_Dtor_010201A0(this->radiusScaleProfile); /*0x7a789a*/
+    FormHeapFree((unsigned int)radiusScaleProfile); /*0x7a78a0*/
   }
-  v9 = *(this + 0x18);
-  if ( v9 )
+  lengthProfile = this->lengthProfile; /*0x7a78a8*/
+  if ( lengthProfile ) /*0x7a78ad*/
   {
-    sub_784B60((unsigned int *)*(this + 0x18));
-    FormHeapFree(v9);
+    OB_StBezierSpline_Dtor_010201A0(this->lengthProfile); /*0x7a78b1*/
+    FormHeapFree((unsigned int)lengthProfile); /*0x7a78b7*/
   }
-  v10 = *(this + 0x1C);
-  if ( v10 )
+  angleProfile = this->angleProfile; /*0x7a78bf*/
+  if ( angleProfile ) /*0x7a78c4*/
   {
-    sub_784B60((unsigned int *)*(this + 0x1C));
-    FormHeapFree(v10);
+    OB_StBezierSpline_Dtor_010201A0(this->angleProfile); /*0x7a78c8*/
+    FormHeapFree((unsigned int)angleProfile); /*0x7a78ce*/
   }
-  *(this + 0x16) = 0;
-  *(this + 0x17) = 0;
-  *(this + 0x15) = 0;
-  *(this + 0x14) = 0;
-  *(this + 0x1B) = 0;
-  *(this + 0x19) = 0;
-  *(this + 0x1A) = 0;
-  *(this + 0x18) = 0;
-  *(this + 0x1C) = 0;
+  this->flexibilityProfile = 0; /*0x7a78d7*/
+  this->flexibilityScaleProfile = 0; /*0x7a78da*/
+  this->gravityProfile = 0; /*0x7a78dd*/
+  this->disturbanceProfile = 0; /*0x7a78e0*/
+  this->startAngleProfile = 0; /*0x7a78e3*/
+  this->radiusProfile = 0; /*0x7a78e6*/
+  this->radiusScaleProfile = 0; /*0x7a78e9*/
+  this->lengthProfile = 0; /*0x7a78ec*/
+  this->angleProfile = 0; /*0x7a78ef*/
 }

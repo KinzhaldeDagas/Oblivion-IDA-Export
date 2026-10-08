@@ -8,7 +8,7 @@
 0x69BED3: push    edi
 0x69BED4: mov     eax, ds:0B30AACh
 0x69BED9: xor     eax, esp
-0x69BEDB: push    eax
+0x69BEDB: push    eax; effectIndex
 0x69BEDC: lea     eax, [esp+2Ch+var_C]
 0x69BEE0: mov     large fs:0, eax
 0x69BEE6: mov     esi, ecx
@@ -67,8 +67,8 @@
 0x69BF75: push    0
 0x69BF77: mov     ecx, esi
 0x69BF79: call    eax
-0x69BF7B: mov     ecx, eax
-0x69BF7D: call    MagicItem_GetFXEffect
+0x69BF7B: mov     ecx, eax; magicItem
+0x69BF7D: call    MagicItem_GetFXEffect; Verified (Oblivion): MagicItem_GetFXEffect returns the effect's EffectSetting pointer; MagicShaderHitEffect constructors/PostLink dereference its +0x78 EffectSetting::effectShader field.
 0x69BF82: test    edi, edi
 0x69BF84: jz      short loc_69BFBB
 0x69BF86: test    eax, eax
@@ -91,10 +91,10 @@
 0x69BFB3: push    eax
 0x69BFB4: mov     ecx, edi
 0x69BFB6: call    sub_65A8B0
-0x69BFBB: mov     ecx, [esp+2Ch+var_1C]
+0x69BFBB: mov     ecx, [esp+28h+var_18]
 0x69BFBF: mov     eax, [esi]
 0x69BFC1: push    ecx
-0x69BFC2: lea     edx, [esp+30h+string]
+0x69BFC2: lea     edx, [esp+2Ch+string+4]
 0x69BFC6: push    edx
 0x69BFC7: mov     edx, [eax+30h]
 0x69BFCA: mov     ecx, esi
@@ -102,7 +102,7 @@
 0x69BFCE: mov     ecx, eax
 0x69BFD0: call    Magic_CastFailureMsg
 0x69BFD5: test    edi, edi
-0x69BFD7: mov     [esp+2Ch+var_4], 0
+0x69BFD7: mov     dword ptr [esp+28h], 0
 0x69BFDF: jz      short loc_69C011
 0x69BFE1: mov     ecx, edi
 0x69BFE3: call    Actor_IsPlayer
@@ -113,9 +113,9 @@
 0x69BFF0: test    byte ptr [ebp+7Ch], 2
 0x69BFF4: jz      short loc_69C011
 0x69BFF6: fld     dword ptr ds:0A30634h
-0x69BFFC: mov     eax, [esp+2Ch+string]
+0x69BFFC: mov     eax, dword ptr [esp+28h+string+4]
 0x69C000: push    ecx
-0x69C001: fstp    [esp+30h+duration]; duration
+0x69C001: fstp    dword ptr [esp+0]; duration
 0x69C004: push    1; unk2
 0x69C006: push    0; unk1
 0x69C008: push    eax; string
@@ -141,11 +141,11 @@
 0x69C03B: push    0
 0x69C03D: mov     ecx, esi
 0x69C03F: call    eax
-0x69C041: mov     ecx, [esp+2Ch+string]
+0x69C041: mov     ecx, dword ptr [esp+28h+string+4]
 0x69C045: push    ecx
-0x69C046: call    FormHeapFree
+0x69C046: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x69C04B: add     esp, 4
-0x69C04E: mov     ecx, dword ptr [esp+2Ch+var_C]
+0x69C04E: mov     ecx, [esp+20h]
 0x69C052: mov     large fs:0, ecx
 0x69C059: pop     ecx
 0x69C05A: pop     edi
@@ -153,3 +153,12 @@
 0x69C05C: pop     ebp
 0x69C05D: add     esp, 1Ch
 0x69C060: retn    4
+0x9C2A40: lea     ecx, [ebp-14h]; void *
+0x9C2A43: jmp     BSStringT_Clear
+0x9C2A48: mov     edx, [esp+arg_4]
+0x9C2A4C: lea     eax, [edx-1Ch]
+0x9C2A4F: mov     ecx, [edx-20h]
+0x9C2A52: xor     ecx, eax
+0x9C2A54: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C2A59: mov     eax, offset stru_AEB7F4
+0x9C2A5E: jmp     ___CxxFrameHandler3

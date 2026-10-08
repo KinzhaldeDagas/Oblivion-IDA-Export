@@ -1,29 +1,25 @@
-TESSaveLoad *__usercall sub_6632A0@<eax>(_DWORD *this@<ecx>, char a2@<bpl>)
+TESSaveLoadGame_SerializationView *__usercall sub_6632A0@<eax>(TESForm *this@<ecx>, char a2@<bpl>)
 {
-  TESSaveLoad *result; // eax
+  TESSaveLoadGame_SerializationView *result; // eax
   int v4; // eax
-  int v5; // edx
+  TESFormVtbl *vtbl; // edx
   unsigned __int16 v6; // ax
-  FreeEntry *v7; // eax
-  size_t v8; // [esp-4h] [ebp-Ch]
-  int v9; // [esp+4h] [ebp-4h] BYREF
+  UInt32 source; // [esp+4h] [ebp-4h] BYREF
 
-  if ( *(this + 0x1C3) )
-    return (TESSaveLoad *)PrintError(
-                            " PlayerCharacter::SaveInitialState(): Attempting to save player's initial state when the ini"
-                            "tial state buffer already exists.");
-  v4 = sub_4533F0(SaveLoad_CurrentSavegame, (int)this, 0);
-  v5 = *this;
-  v9 = v4;
-  v6 = (*(int (__thiscall **)(_DWORD *, int))(v5 + 0x4C))(this, v4);
-  v7 = sub_453500(SaveLoad_CurrentSavegame, a2, v6 + 4);
-  LODWORD(v8) = 4;
-  *(this + 0x1C3) = v7;
-  TESForm_SaveDataToCurrentSaveGame((TESForm *)&v9, v8);
-  BYTE1(SaveLoad_CurrentSavegame[1].createdObjectList.next) = 0;
-  (*(void (__thiscall **)(_DWORD *, int))(*this + 0x50))(this, v9);
-  result = SaveLoad_CurrentSavegame;
-  BYTE1(SaveLoad_CurrentSavegame[1].createdObjectList.next) = 1;
-  SaveLoad_CurrentSavegame->unk000[5] = 0;
-  return result;
+  if ( *((_DWORD *)this + 0x1C3) )
+    return (TESSaveLoadGame_SerializationView *)PrintError(
+                                                  " PlayerCharacter::SaveInitialState(): Attempting to save player's init"
+                                                  "ial state when the initial state buffer already exists.");
+  v4 = sub_4533F0(g_TESSaveLoadGame, (int)this, 0); /*0x6632c6*/
+  vtbl = this->vtbl; /*0x6632cb*/
+  source = v4; /*0x6632cd*/
+  v6 = vtbl->GetSaveSize(this, v4); /*0x6632d7*/
+  *((_DWORD *)this + 0x1C3) = sub_453500(g_TESSaveLoadGame, a2, v6 + 4); /*0x6632f7*/
+  TESForm_SaveDataToCurrentSaveGame(this, &source, 4u); /*0x6632fd*/
+  g_TESSaveLoadGame->useIrefEncoding = 0; /*0x663307*/
+  this->vtbl->SaveGame(this, source); /*0x663317*/
+  result = g_TESSaveLoadGame; /*0x663319*/
+  g_TESSaveLoadGame->useIrefEncoding = 1; /*0x66331e*/
+  g_TESSaveLoadGame->bufferCursor = 0; /*0x663328*/
+  return result; /*0x6632ba*/
 }

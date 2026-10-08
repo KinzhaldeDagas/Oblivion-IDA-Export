@@ -13,7 +13,7 @@
 0x6E41E9: test    eax, eax
 0x6E41EB: jz      short loc_6E41FE
 0x6E41ED: lea     ecx, [ecx+0]
-0x6E41F0: cmp     eax, offset dword_B3E2D0
+0x6E41F0: cmp     eax, offset stru_B3E2D0
 0x6E41F5: jz      short loc_6E4234
 0x6E41F7: mov     eax, [eax+4]
 0x6E41FA: test    eax, eax

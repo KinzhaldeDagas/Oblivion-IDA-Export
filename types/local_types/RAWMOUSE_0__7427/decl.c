@@ -1,1 +1,1 @@
-RAWMOUSE_0
+typedef tagRAWMOUSE_0 RAWMOUSE_0;

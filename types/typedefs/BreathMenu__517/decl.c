@@ -1,1 +1,1 @@
-BreathMenu
+struct BreathMenu;

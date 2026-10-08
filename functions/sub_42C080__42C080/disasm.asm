@@ -6,13 +6,13 @@
 0x42C092: test    eax, eax
 0x42C094: jz      short loc_42C09F
 0x42C096: push    eax
-0x42C097: call    FormHeapFree
+0x42C097: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x42C09C: add     esp, 4
 0x42C09F: mov     eax, [esi+19Ch]
 0x42C0A5: test    eax, eax
 0x42C0A7: jz      short loc_42C0B2
 0x42C0A9: push    eax
-0x42C0AA: call    FormHeapFree
+0x42C0AA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x42C0AF: add     esp, 4
 0x42C0B2: mov     dword ptr [esi+198h], 0
 0x42C0BC: mov     dword ptr [esi+19Ch], 0

@@ -1,6 +1,7 @@
-char __thiscall sub_76C730(_DWORD *this, int a2, int a3, char a4)
+// Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.
+char __thiscall NiD3DPass_SetRenderState(NiD3DPass *this, int state, unsigned int value, char restore)
 {
-  if ( !*(this + 0xC) )
-    *(this + 0xC) = sub_772DF0();
-  return sub_772CD0((_DWORD *)*(this + 0xC), a2, a3, a4);
+  if ( !this->RenderStateGroup ) /*0x76c733*/
+    this->RenderStateGroup = (NiD3DRenderStateGroup *)NiD3DRenderStateGroupPool_Acquire(); /*0x76c73e*/
+  return NiD3DRenderStateGroup_SetRenderState((_DWORD *)this->RenderStateGroup, state, value, restore); /*0x76c758*/
 }

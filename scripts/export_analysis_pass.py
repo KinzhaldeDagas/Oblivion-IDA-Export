@@ -14,7 +14,7 @@ import re
 import subprocess
 from pathlib import Path
 
-from ida_repo_exporter import IdaMcp, json_write, now, safe_name
+from ida_repo_exporter import IdaMcp, json_write, text_write, now, safe_name
 
 
 def hx(ea):
@@ -50,8 +50,8 @@ def select_functions(ida, patterns):
     return sorted(found)
 
 
-def function_detail(ida, ea):
-    # One function per call bounds work on IDA's UI thread. Tail chunks are
+def function_details(ida, addresses, include_instruction_comments=True):
+    # Bounded batches keep work on IDA's UI thread short. Tail chunks are
     # traversed by FuncItems; tail hashes cover actual bytes in chunk order.
     return ida.py_eval(
         "[(f.start_ea, f.end_ea, f.flags, idc.get_func_name(f.start_ea), "
@@ -60,8 +60,7 @@ def function_detail(ida, ea):
         "idc.get_cmt(f.start_ea,1) or '', idc.get_segm_name(f.start_ea), "
         "[(h, idc.get_item_size(h), idc.print_insn_mnem(h), "
         "ida_lines.tag_remove(idc.generate_disasm_line(h,0) or ''), "
-        "(ida_bytes.get_bytes(h,idc.get_item_size(h)) or b'').hex(), "
-        "idc.get_cmt(h,0) or '', idc.get_cmt(h,1) or '', "
+        "'', " + ("idc.get_cmt(h,0) or '', idc.get_cmt(h,1) or '', " if include_instruction_comments else "'', '', ") +
         "[(x.frm,x.to,x.type,idc.get_name(x.to) or '', "
         "ida_funcs.get_func(x.to).start_ea if ida_funcs.get_func(x.to) else None) "
         "for x in idautils.XrefsFrom(h,0)]) for h in idautils.FuncItems(f.start_ea)], "
@@ -69,24 +68,30 @@ def function_detail(ida, ea):
         "ida_funcs.get_func(x.frm).start_ea if ida_funcs.get_func(x.frm) else None, "
         "idc.get_func_name(x.frm) or '') for x in idautils.XrefsTo(f.start_ea,0)], "
         "[(a,b,(ida_bytes.get_bytes(a,b-a) or b'').hex()) for a,b in idautils.Chunks(f.start_ea)]) "
-        "for f in [ida_funcs.get_func(" + str(ea) + ")] if f]"
-    )[0]
+        "for ea in " + repr(addresses) + " for f in [ida_funcs.get_func(ea)] if f]"
+    )
 
 
-def export_function(ida, ea, repo, pass_root, index_row, reuse_pseudocode=False):
-    detail = function_detail(ida, ea)
+def function_detail(ida,ea):
+    return function_details(ida,[ea])[0]
+
+
+def export_function(ida, ea, repo, pass_root, index_row, reuse_pseudocode=False, write_evidence=True, detail=None, exported=None):
+    if detail is None:
+        detail = function_detail(ida, ea)
     (start, end, flags, name, prototype, func_cmt, func_rep, cmt, rep,
      segment, instructions, incoming, chunks) = detail
     folder = index_row.get("folder") if index_row else f"{safe_name(name)}__{ea:X}"
     directory = repo / "functions" / folder
     previous = json.loads((directory / "function.json").read_text(encoding="utf-8")) if (directory / "function.json").exists() else {}
-    if reuse_pseudocode and (directory / "pseudocode.c").exists():
-        exported = {"code": (directory / "pseudocode.c").read_text(encoding="utf-8")}
-    else:
-        result = ida.call("export_funcs", {"addrs": [hx(ea)], "format": "json"})
-        exported = result["functions"][0]
-        if "error" in exported:
-            raise RuntimeError(f"Could not export {hx(ea)}: {exported['error']}")
+    if exported is None:
+        if reuse_pseudocode and (directory / "pseudocode.c").exists():
+            exported = {"code": (directory / "pseudocode.c").read_text(encoding="utf-8")}
+        else:
+            result = ida.call("export_funcs", {"addrs": [hx(ea)], "format": "json"})
+            exported = result["functions"][0]
+    if "error" in exported:
+        raise RuntimeError(f"Could not export {hx(ea)}: {exported['error']}")
     outgoing = []
     callees, callers, data_refs = [], [], []
     instruction_records, instruction_comments = [], []
@@ -116,6 +121,8 @@ def export_function(ida, ea, repo, pass_root, index_row, reuse_pseudocode=False)
         "sha256": hashlib.sha256(next(bytes.fromhex(raw) for a,b,raw in chunks if a==start)).hexdigest(),
         "total_chunk_size": sum(b-a for a,b,raw in chunks),
         "chunks_sha256": hashlib.sha256(byte_stream).hexdigest(),
+        "chunks": [[hx(a),hx(b)] for a,b,raw in chunks],
+        "bytes_read_complete": all(len(raw)==2*(b-a) for a,b,raw in chunks),
         "comment_regular": "\n\n".join(dict.fromkeys(x for x in [func_cmt,cmt] if x)),
         "comment_repeatable": "\n\n".join(dict.fromkeys(x for x in [func_rep,rep] if x)),
         "has_pseudocode": bool(exported.get("code")), "callees_count": len(callees),
@@ -128,17 +135,18 @@ def export_function(ida, ea, repo, pass_root, index_row, reuse_pseudocode=False)
                             ("callers.json", callers), ("data_refs.json", data_refs),
                             ("xrefs_from.json", outgoing), ("xrefs_to.json", incoming_records)]:
         json_write(directory / filename, value)
-    (directory / "disasm.asm").write_text("\n".join(f"{r['ea']}: {r['line']}" for r in instruction_records) + "\n", encoding="utf-8")
+    text_write(directory / "disasm.asm",source_text("\n".join(f"{r['ea']}: {r['line']}" for r in instruction_records)))
     if exported.get("code"):
-        (directory / "pseudocode.c").write_text(source_text(exported["code"]), encoding="utf-8")
+        text_write(directory / "pseudocode.c",source_text(exported["code"]))
     else:
         # A prior decompilation must never masquerade as current output.
-        (directory / "pseudocode.c").write_text("/* Current IDA decompilation unavailable. See function.json. */\n", encoding="utf-8")
+        text_write(directory / "pseudocode.c","/* Current IDA decompilation unavailable. See function.json. */\n")
     evidence = {"function": metadata, "folder": folder, "chunks": [[hx(a), hx(b)] for a,b,raw in chunks],
                 "function_comment_regular": func_cmt, "function_comment_repeatable": func_rep,
                 "address_comment_regular": cmt, "address_comment_repeatable": rep,
                 "instruction_comments": instruction_comments}
-    json_write(pass_root / "functions" / f"{start:X}.json", evidence)
+    if write_evidence:
+        json_write(pass_root / "functions" / f"{start:X}.json", evidence)
     changes = {"ea": hx(start), "folder": folder, "before": previous, "after": metadata}
     index = {k: metadata[k] for k in ["start_ea", "end_ea", "name", "display_name", "size", "sha256", "has_pseudocode"]}
     index["folder"] = folder
@@ -164,15 +172,19 @@ def export_type(ida, name):
             "annotation_confidence": "Unknown", "confidence_scope": "Field interpretations are assessed individually in README.md; this record is a live IDA type snapshot."}
 
 
-def export_data(ida, spec):
+def data_details(ida,addresses):
+    return ida.py_eval(
+        "[(a,idc.get_name(a) or '',idc.get_item_size(a),idc.get_segm_name(a),idc.get_type(a) or '', "
+        "idc.get_cmt(a,0) or '',idc.get_cmt(a,1) or '', "
+        "[(x.frm,x.to,x.type,idc.get_func_name(x.frm) or '') for x in idautils.XrefsTo(a,0)]) for a in " + repr(addresses) + "]"
+    )
+
+
+def export_data(ida, spec, detail=None):
     ea = int(spec["ea"], 0) if "ea" in spec else ida.py_eval("idc.get_name_ea_simple(" + repr(spec["name"]) + ")")
     if ea in (None, -1, 0xFFFFFFFFFFFFFFFF):
         raise RuntimeError(f"Missing selected data: {spec}")
-    data = ida.py_eval(
-        "[(a,idc.get_name(a) or '',idc.get_item_size(a),idc.get_segm_name(a),idc.get_type(a) or '', "
-        "idc.get_cmt(a,0) or '',idc.get_cmt(a,1) or '', "
-        "[(x.frm,x.to,x.type,idc.get_func_name(x.frm) or '') for x in idautils.XrefsTo(a,0)]) for a in [" + str(ea) + "]]"
-    )[0]
+    data = detail if detail is not None else data_details(ida,[ea])[0]
     _, name, size, segment, typ, cmt, rep, refs = data
     record = {"ea": hx(ea), "name": name, "display_name": name, "kind": "data", "size": size,
               "segment": segment, "type": typ, "comments": {"regular": cmt, "repeatable": rep},

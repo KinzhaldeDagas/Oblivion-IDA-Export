@@ -1,4 +1,4 @@
-0x419F10: push    0FFFFFFFFh
+0x419F10: push    0FFFFFFFFh; MagicItem VFX model unload path. Walks spell art and effect-item VFX model references (weapons, armor, NPC/creature models, etc.) and removes them from the queued model loader/cache.
 0x419F12: push    offset SEH_41A610
 0x419F17: mov     eax, large fs:0
 0x419F1D: push    eax
@@ -19,9 +19,9 @@
 0x419F4D: call    sub_419D90
 0x419F52: test    al, al
 0x419F54: jz      loc_41A47F
-0x419F5A: push    0
-0x419F5C: mov     ecx, edi
-0x419F5E: call    MagicItem_GetFXEffect
+0x419F5A: push    0; effectIndex
+0x419F5C: mov     ecx, edi; magicItem
+0x419F5E: call    MagicItem_GetFXEffect; Verified (Oblivion): MagicItem_GetFXEffect returns the effect's EffectSetting pointer; MagicShaderHitEffect constructors/PostLink dereference its +0x78 EffectSetting::effectShader field.
 0x419F63: mov     ecx, edi
 0x419F65: mov     esi, eax
 0x419F67: mov     [esp+14Ch+var_135], 0
@@ -55,7 +55,7 @@
 0x419FBA: push    eax
 0x419FBB: mov     eax, [edx+14h]
 0x419FBE: call    eax
-0x419FC0: mov     ecx, ModelLoaderPtr
+0x419FC0: mov     ecx, ds:0B33A1Ch
 0x419FC6: push    eax
 0x419FC7: call    QueuedModelLoader_RemoveModel
 0x419FCC: mov     ecx, esi
@@ -73,7 +73,6 @@
 0x419FF2: test    edi, edi
 0x419FF4: jz      loc_41A47F
 0x419FFA: jmp     short loc_41A004
-0x419FFC: align 10h
 0x41A000: mov     edi, [esp+14Ch+var_130]
 0x41A004: mov     eax, [edi+4]
 0x41A007: mov     eax, [eax+1Ch]
@@ -85,7 +84,7 @@
 0x41A026: mov     ecx, eax
 0x41A028: mov     eax, [ecx+60h]
 0x41A02B: push    eax; a1
-0x41A02C: call    TESForm_LookupByFormID
+0x41A02C: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x41A031: mov     edi, eax
 0x41A033: add     esp, 4
 0x41A036: test    edi, edi
@@ -106,8 +105,8 @@
 0x41A066: test    eax, eax
 0x41A068: jz      loc_41A435
 0x41A06E: lea     esi, [eax+30h]
-0x41A071: mov     ecx, esi
-0x41A073: call    sub_449190
+0x41A071: mov     ecx, esi; compactString
+0x41A073: call    OB_CompactString_Length_010201A0; Bethesda compact string length helper. If inline length marker is 0xFFFF, strlen(heap string); otherwise returns the 16-bit stored length. Used here to gate optional TESObjectTREE leaf texture.
 0x41A078: test    eax, eax
 0x41A07A: jbe     loc_41A435
 0x41A080: mov     edx, [esp+14Ch+arg_0]
@@ -117,7 +116,7 @@
 0x41A08C: mov     edx, [eax+14h]
 0x41A08F: mov     ecx, esi
 0x41A091: call    edx
-0x41A093: mov     ecx, ModelLoaderPtr
+0x41A093: mov     ecx, ds:0B33A1Ch
 0x41A099: push    eax
 0x41A09A: call    QueuedModelLoader_RemoveModel
 0x41A09F: jmp     loc_41A435
@@ -141,7 +140,7 @@
 0x41A0DA: push    0
 0x41A0DC: mov     ecx, esi
 0x41A0DE: call    TESBipedModelForm_GetModelPath
-0x41A0E3: mov     ecx, ModelLoaderPtr
+0x41A0E3: mov     ecx, ds:0B33A1Ch
 0x41A0E9: push    eax
 0x41A0EA: call    QueuedModelLoader_RemoveModel
 0x41A0EF: push    1
@@ -149,7 +148,7 @@
 0x41A0F2: push    1
 0x41A0F4: mov     ecx, esi
 0x41A0F6: call    TESBipedModelForm_GetModelPath
-0x41A0FB: mov     ecx, ModelLoaderPtr
+0x41A0FB: mov     ecx, ds:0B33A1Ch
 0x41A101: push    eax
 0x41A102: call    QueuedModelLoader_RemoveModel
 0x41A107: jmp     loc_41A435
@@ -160,21 +159,21 @@
 0x41A11B: jnz     short loc_41A16D
 0x41A11D: lea     ecx, [esp+14Ch+var_124]
 0x41A121: call    TESContainer_constr
-0x41A126: mov     ecx, TESDataHandler_g_PlayerRef
+0x41A126: mov     ecx, dword ptr reference
 0x41A12C: lea     edx, [esp+14Ch+var_124]
 0x41A130: push    edx; int
-0x41A131: push    1
+0x41A131: push    1; int
 0x41A133: mov     [esp+154h+var_4], 0
 0x41A13E: call    Actor_GetLevel
 0x41A143: lea     ecx, [edi+24h]; this
 0x41A146: push    eax; int
-0x41A147: call    TESLeveledList_CalcLeveledForm
+0x41A147: call    TESLeveledList_CalcLeveledForm; CustomAnimSupport decode: leveled-list resolver evidence with chance/level/random/container logic; not used as deterministic animation target list.
 0x41A14C: push    0
-0x41A14E: lea     ecx, [esp+150h+var_124]
+0x41A14E: lea     ecx, [esp+154h+var_128]
 0x41A152: call    TESContainer_GetNthForm
-0x41A157: lea     ecx, [esp+14Ch+var_124]
+0x41A157: lea     ecx, [esp+150h+var_128]
 0x41A15B: mov     edi, eax
-0x41A15D: mov     [esp+14Ch+var_4], 0FFFFFFFFh
+0x41A15D: mov     [esp+150h+var_8], 0FFFFFFFFh
 0x41A168: call    TESContainer_destr
 0x41A16D: push    0; int
 0x41A16F: push    offset ??_R0?AVTESNPC@@@8; struct TypeDescriptor *
@@ -193,13 +192,13 @@
 0x41A195: test    ebp, ebp
 0x41A197: mov     esi, ebp
 0x41A199: jz      short loc_41A1C5
-0x41A19B: mov     ebx, [esp+14Ch+arg_0]
+0x41A19B: mov     ebx, [esp+150h]
 0x41A1A2: cmp     dword ptr [esi+4], 0
 0x41A1A6: jnz     short loc_41A1AD
 0x41A1A8: cmp     dword ptr [esi], 0
 0x41A1AB: jz      short loc_41A1C5
 0x41A1AD: mov     eax, [esi]
-0x41A1AF: mov     ecx, ModelLoaderPtr
+0x41A1AF: mov     ecx, ds:0B33A1Ch
 0x41A1B5: push    1
 0x41A1B7: push    ebx
 0x41A1B8: push    eax
@@ -208,9 +207,9 @@
 0x41A1C1: test    esi, esi
 0x41A1C3: jnz     short loc_41A1A2
 0x41A1C5: mov     ecx, ebp
-0x41A1C7: call    BSSimpleList_Clear
+0x41A1C7: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x41A1CC: push    ebp
-0x41A1CD: call    FormHeapFree
+0x41A1CD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x41A1D2: add     esp, 4
 0x41A1D5: push    0; int
 0x41A1D7: push    offset ??_R0?AVTESCreature@@@8; struct TypeDescriptor *
@@ -220,9 +219,9 @@
 0x41A1E4: call    OblivionDynamicCast
 0x41A1E9: add     esp, 14h
 0x41A1EC: test    eax, eax
-0x41A1EE: mov     [esp+14Ch+var_128], eax
+0x41A1EE: mov     [esp+150h+var_12C], eax
 0x41A1F2: jz      loc_41A435
-0x41A1F8: mov     ecx, [esp+14Ch+arg_0]
+0x41A1F8: mov     ecx, [esp+150h]
 0x41A1FF: mov     edi, eax
 0x41A201: mov     edx, [edi+0ACh]
 0x41A207: mov     eax, [edx+14h]
@@ -231,7 +230,7 @@
 0x41A212: push    ecx
 0x41A213: mov     ecx, esi
 0x41A215: call    eax
-0x41A217: mov     ecx, ModelLoaderPtr
+0x41A217: mov     ecx, ds:0B33A1Ch
 0x41A21D: push    eax
 0x41A21E: call    QueuedModelLoader_RemoveModel
 0x41A223: mov     edx, [esi]
@@ -240,8 +239,8 @@
 0x41A22A: call    eax
 0x41A22C: lea     ecx, [edi+0ECh]
 0x41A232: mov     ebx, eax
-0x41A234: call    sub_6899C0
-0x41A239: lea     edx, [esp+14Ch+Str]
+0x41A234: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
+0x41A239: lea     edx, [esp+150h+var_124+0Ch]
 0x41A23D: mov     esi, eax
 0x41A23F: mov     eax, ebx
 0x41A241: sub     edx, ebx
@@ -250,14 +249,14 @@
 0x41A248: add     eax, 1
 0x41A24B: test    cl, cl
 0x41A24D: jnz     short loc_41A243
-0x41A24F: lea     ecx, [esp+14Ch+Str]
+0x41A24F: lea     ecx, [esp+150h+var_124+0Ch]
 0x41A253: push    5Ch ; '\'; Ch
 0x41A255: push    ecx; Str
 0x41A256: call    _strrchr
 0x41A25B: mov     ecx, eax
 0x41A25D: add     esp, 8
 0x41A260: test    ecx, ecx
-0x41A262: mov     [esp+14Ch+var_134], ecx
+0x41A262: mov     [esp+18h], ecx
 0x41A266: mov     ebp, esi
 0x41A268: jz      short loc_41A2D0
 0x41A26A: lea     ebx, [ebx+0]
@@ -272,7 +271,7 @@
 0x41A283: add     eax, 1
 0x41A286: test    cl, cl
 0x41A288: jnz     short loc_41A281
-0x41A28A: lea     edi, [esp+14Ch+Str]
+0x41A28A: lea     edi, [esp+150h+var_124+0Ch]
 0x41A28E: sub     eax, edx
 0x41A290: add     edi, 0FFFFFFFFh
 0x41A293: mov     cl, [edi+1]
@@ -282,18 +281,18 @@
 0x41A29D: mov     ecx, eax
 0x41A29F: shr     ecx, 2
 0x41A2A2: mov     esi, edx
-0x41A2A4: mov     edx, [esp+14Ch+arg_0]
+0x41A2A4: mov     edx, [esp+150h]
 0x41A2AB: rep movsd
 0x41A2AD: mov     ecx, eax
 0x41A2AF: push    1
 0x41A2B1: and     ecx, 3
 0x41A2B4: push    edx
-0x41A2B5: lea     eax, [esp+154h+Str]
+0x41A2B5: lea     eax, [esp+158h+var_124+0Ch]
 0x41A2B9: rep movsb
-0x41A2BB: mov     ecx, ModelLoaderPtr
+0x41A2BB: mov     ecx, ds:0B33A1Ch
 0x41A2C1: push    eax
 0x41A2C2: call    QueuedModelLoader_RemoveModel
-0x41A2C7: mov     ecx, [esp+14Ch+var_134]
+0x41A2C7: mov     ecx, [esp+18h]
 0x41A2CB: mov     ebp, [ebp+4]
 0x41A2CE: jmp     short loc_41A270
 0x41A2D0: push    5Ch ; '\'; Ch
@@ -310,41 +309,41 @@
 0x41A2EF: add     esp, 0Ch
 0x41A2F2: test    eax, eax
 0x41A2F4: jnz     short loc_41A345
-0x41A2F6: mov     ecx, ModelLoaderPtr
+0x41A2F6: mov     ecx, ds:0B33A1Ch
 0x41A2FC: push    eax; int
 0x41A2FD: push    ebx; char *
-0x41A2FE: call    sub_435830
+0x41A2FE: call    BuildKFListForModelDirectory; Builds a KF path list for a model directory. Feeds ModelLoader KF discovery used by actor animation setup and generated attack/idle lists.
 0x41A303: mov     ebp, eax
 0x41A305: test    ebp, ebp
 0x41A307: mov     esi, ebp
 0x41A309: jz      short loc_41A335
-0x41A30B: mov     ebx, [esp+14Ch+arg_0]
+0x41A30B: mov     ebx, [esp+150h]
 0x41A312: mov     edi, [esi]
 0x41A314: test    edi, edi
 0x41A316: jz      short loc_41A325
-0x41A318: mov     ecx, ModelLoaderPtr
+0x41A318: mov     ecx, ds:0B33A1Ch
 0x41A31E: push    ebx
 0x41A31F: push    edi
-0x41A320: call    sub_438540
+0x41A320: call    ModelLoader_ReleaseModelPath; Releases a model-loader path reference. Used by AnimIdle/queued-loader cleanup when a KF/model reference is no longer needed.
 0x41A325: push    edi
-0x41A326: call    FormHeapFree
+0x41A326: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x41A32B: mov     esi, [esi+4]
 0x41A32E: add     esp, 4
 0x41A331: test    esi, esi
 0x41A333: jnz     short loc_41A312
 0x41A335: mov     ecx, ebp
-0x41A337: call    BSSimpleList_Clear
+0x41A337: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x41A33C: push    ebp
-0x41A33D: call    FormHeapFree
+0x41A33D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x41A342: add     esp, 4
-0x41A345: mov     esi, [esp+14Ch+var_128]
+0x41A345: mov     esi, [esp+150h+var_12C]
 0x41A349: add     esi, 94h ; '”'
 0x41A34F: mov     ecx, esi
-0x41A351: call    TESAnimation_HasAnimations
+0x41A351: call    TESAnimation_HasAnimations; TESAnimation has any entries: returns embedded list first data pointer nonzero.
 0x41A356: test    al, al
 0x41A358: jz      loc_41A435
-0x41A35E: mov     ecx, [esp+14Ch+var_134]
-0x41A362: lea     eax, [esp+14Ch+Str]
+0x41A35E: mov     ecx, [esp+18h]
+0x41A362: lea     eax, [esp+150h+var_124+0Ch]
 0x41A366: mov     byte ptr [ecx+1], 0
 0x41A36A: add     eax, 0FFFFFFFFh
 0x41A36D: lea     ecx, [ecx+0]
@@ -352,13 +351,13 @@
 0x41A373: add     eax, 1
 0x41A376: test    cl, cl
 0x41A378: jnz     short loc_41A370
-0x41A37A: mov     edx, ds:dword_A3407C
+0x41A37A: mov     edx, ds:dword_A3407C; CustomAnimSupport decode: SpecialAnims string use in magic/effect VFX path; not an actor ActorAnimData/KFFZ install path.
 0x41A380: mov     ecx, ds:dword_A34080
 0x41A386: mov     [eax], edx
 0x41A388: mov     edx, ds:dword_A34084
 0x41A38E: mov     [eax+4], ecx
 0x41A391: mov     cl, ds:byte_A34088
-0x41A397: lea     edi, [esp+14Ch+Str]
+0x41A397: lea     edi, [esp+150h+var_124+0Ch]
 0x41A39B: mov     [eax+8], edx
 0x41A39E: mov     [eax+0Ch], cl
 0x41A3A1: add     edi, 0FFFFFFFFh
@@ -367,21 +366,21 @@
 0x41A3AA: test    al, al
 0x41A3AC: jnz     short loc_41A3A4
 0x41A3AE: mov     dx, ds:SubStr
-0x41A3B5: lea     eax, [esp+14Ch+Str]
+0x41A3B5: lea     eax, [esp+150h+var_124+0Ch]
 0x41A3B9: push    5Ch ; '\'; Ch
 0x41A3BB: push    eax; Str
 0x41A3BC: mov     [edi], dx
 0x41A3BF: call    _strrchr
 0x41A3C4: add     esp, 8
 0x41A3C7: mov     ecx, esi
-0x41A3C9: mov     [esp+14Ch+var_134], eax
-0x41A3CD: call    sub_6899C0
+0x41A3C9: mov     [esp+18h], eax
+0x41A3CD: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x41A3D2: mov     ebp, eax
 0x41A3D4: test    ebp, ebp
 0x41A3D6: jz      short loc_41A435
-0x41A3D8: mov     ebx, [esp+14Ch+arg_0]
+0x41A3D8: mov     ebx, [esp+150h]
 0x41A3DF: nop
-0x41A3E0: mov     ecx, [esp+14Ch+var_134]
+0x41A3E0: mov     ecx, [esp+18h]
 0x41A3E4: mov     byte ptr [ecx+1], 0
 0x41A3E8: mov     eax, [ebp+0]
 0x41A3EB: test    eax, eax
@@ -391,7 +390,7 @@
 0x41A3F3: add     eax, 1
 0x41A3F6: test    cl, cl
 0x41A3F8: jnz     short loc_41A3F1
-0x41A3FA: lea     edi, [esp+14Ch+Str]
+0x41A3FA: lea     edi, [esp+150h+var_124+0Ch]
 0x41A3FE: sub     eax, edx
 0x41A400: add     edi, 0FFFFFFFFh
 0x41A403: mov     cl, [edi+1]
@@ -405,11 +404,11 @@
 0x41A416: mov     ecx, eax
 0x41A418: and     ecx, 3
 0x41A41B: push    ebx
-0x41A41C: lea     edx, [esp+150h+Str]
+0x41A41C: lea     edx, [esp+154h+var_124+0Ch]
 0x41A420: rep movsb
-0x41A422: mov     ecx, ModelLoaderPtr
+0x41A422: mov     ecx, ds:0B33A1Ch
 0x41A428: push    edx
-0x41A429: call    sub_438540
+0x41A429: call    ModelLoader_ReleaseModelPath; Releases a model-loader path reference. Used by AnimIdle/queued-loader cleanup when a KF/model reference is no longer needed.
 0x41A42E: mov     ebp, [ebp+4]
 0x41A431: test    ebp, ebp
 0x41A433: jnz     short loc_41A3E0
@@ -428,7 +427,7 @@
 0x41A459: shr     eax, 12h
 0x41A45C: test    al, 1
 0x41A45E: jz      short loc_41A467
-0x41A460: sub     dword_B33518, 1
+0x41A460: sub     dword ptr unk_B33518, 1
 0x41A467: mov     ecx, [esp+14Ch+var_130]
 0x41A46B: mov     eax, [ecx+8]
 0x41A46E: test    eax, eax
@@ -448,3 +447,16 @@
 0x41A49B: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x41A4A0: add     esp, 138h
 0x41A4A6: retn    4
+0x9AB5D0: lea     ecx, [ebp-124h]
+0x9AB5D6: jmp     TESContainer_destr
+0x9AB5DB: mov     edx, [esp+arg_4]
+0x9AB5DF: lea     eax, [edx-13Ch]
+0x9AB5E5: mov     ecx, [edx-140h]
+0x9AB5EB: xor     ecx, eax
+0x9AB5ED: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AB5F2: add     eax, 10h
+0x9AB5F5: mov     ecx, [edx-4]
+0x9AB5F8: xor     ecx, eax
+0x9AB5FA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AB5FF: mov     eax, offset stru_AD849C
+0x9AB604: jmp     ___CxxFrameHandler3

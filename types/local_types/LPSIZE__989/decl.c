@@ -1,1 +1,1 @@
-LPSIZE
+typedef tagSIZE *LPSIZE;

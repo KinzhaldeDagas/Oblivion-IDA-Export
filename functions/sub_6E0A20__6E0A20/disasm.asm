@@ -3,7 +3,7 @@
 0x6E0A22: mov     edi, [esp+8+arg_0]
 0x6E0A26: push    edi
 0x6E0A27: mov     esi, ecx
-0x6E0A29: call    sub_6EC5C0
+0x6E0A29: call    j_NiSingleInterpController_IsEqual
 0x6E0A2E: test    al, al
 0x6E0A30: jnz     short loc_6E0A37
 0x6E0A32: pop     edi

@@ -16,7 +16,7 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::CheckIsPoison@<eax>(
         int a15,
         int a16,
         int a17,
-        int a18,
+        __int64 a18,
         int a19,
         int a20,
         int a21,
@@ -31,18 +31,18 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::CheckIsPoison@<eax>(
         int a30,
         int a31,
         int a32,
-        int a33)
+        char a33)
 {
   int v33; // eax
   int v34; // eax
 
-  v33 = (*(int (__thiscall **)(int))(*(_DWORD *)a2 + 0x30))(a2);
-  if ( (*(int (__thiscall **)(int))(*(_DWORD *)v33 + 0x18))(v33) == 7 )
+  v33 = (*(int (__thiscall **)(int))(*(_DWORD *)a2 + 0x30))(a2); /*0x69afaf*/
+  if ( (*(int (__thiscall **)(int))(*(_DWORD *)v33 + 0x18))(v33) == 7 ) /*0x69afbd*/
   {
-    v34 = (*(int (__thiscall **)(int))(*(_DWORD *)a2 + 0x30))(a2);
-    BYTE1(a7) = 1;
-    if ( (unsigned __int8)EffectItemList_AllEffectsHostile((_DWORD *)(v34 + 0xC)) )
-      return MagicCaster_ApplyActiveMagicItem_::CheckIsOnTouch(
+    v34 = (*(int (__thiscall **)(int))(*(_DWORD *)a2 + 0x30))(a2); /*0x69afc6*/
+    BYTE1(a7) = 1; /*0x69afd4*/
+    if ( EffectItemList_AllEffectsHostile((_DWORD *)(v34 + 0xC)) ) /*0x69afcd*/
+      return MagicCaster_ApplyActiveMagicItem_::CheckIsOnTouch( /*0x69afd9*/
                a1,
                a2,
                0,
@@ -78,7 +78,7 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::CheckIsPoison@<eax>(
                a32,
                a33);
   }
-  BYTE1(a7) = 0;
+  BYTE1(a7) = 0; /*0x69afdb*/
   return MagicCaster_ApplyActiveMagicItem_::CheckIsOnTouch(
            a1,
            a2,

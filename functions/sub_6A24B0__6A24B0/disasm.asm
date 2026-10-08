@@ -1,4 +1,4 @@
-0x6A24B0: push    ecx
+0x6A24B0: push    ecx; Removes every nonterminated active effect whose effectCode matches. If casterFilterOrNull is nonnull, only effects from that caster are removed; null matches all casters. Native ABI is thiscall with two stack args and void return; prior ESI/ST0/userpurge inputs were decompiler artifacts.
 0x6A24B1: push    ebx
 0x6A24B2: mov     ebx, ecx
 0x6A24B4: mov     eax, [ebx]
@@ -16,7 +16,7 @@
 0x6A24CB: jnz     short loc_6A24D1
 0x6A24CD: cmp     [edi], ecx
 0x6A24CF: jz      short loc_6A2540
-0x6A24D1: mov     eax, [esp+14h+arg_4]
+0x6A24D1: mov     eax, [esp+14h+casterFilterOrNull]
 0x6A24D5: test    eax, eax
 0x6A24D7: mov     esi, [edi]
 0x6A24D9: jz      short loc_6A24E3
@@ -29,14 +29,14 @@
 0x6A24E9: cmp     byte ptr [esi+11h], 0
 0x6A24ED: jnz     short loc_6A2538
 0x6A24EF: mov     ecx, [esi+0Ch]
-0x6A24F2: mov     edx, [esp+14h+arg_0]
+0x6A24F2: mov     edx, [esp+14h+effectCode]
 0x6A24F6: cmp     [ecx], edx
 0x6A24F8: jnz     short loc_6A2535
 0x6A24FA: test    al, al
 0x6A24FC: jz      short loc_6A2535
 0x6A24FE: push    1
 0x6A2500: mov     ecx, esi
-0x6A2502: call    ActiveEffect_Base_Remove
+0x6A2502: call    ActiveEffect_Base_Remove; Verified immediate removal path for matching effect codes: mark/flush termination, unlink from EffectNode via BSSimpleList_Remove, call target PostRemoveEffect, then destroy the ActiveEffect. The caster filter is optional; null matches all casters.
 0x6A2507: mov     eax, [ebx]
 0x6A2509: mov     edx, [eax+8]
 0x6A250C: push    esi

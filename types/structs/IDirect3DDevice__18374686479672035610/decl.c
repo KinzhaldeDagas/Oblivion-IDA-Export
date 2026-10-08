@@ -1,1 +1,4 @@
-IDirect3DDevice
+struct IDirect3DDevice
+{
+IDirect3DDeviceVtbl *lpVtbl;
+};

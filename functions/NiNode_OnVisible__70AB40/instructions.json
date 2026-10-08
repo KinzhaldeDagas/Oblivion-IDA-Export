@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x70AB40",
-    "line": "fldz",
+    "line": "fldz; Retail NiNode OnVisible entry; visible nonempty child arrays recurse through ordinary child traversal.",
     "mnemonic": "fldz",
     "size": 2
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x70AB52",
-    "line": "cmp     [edi+0B6h], si",
+    "line": "cmp     [edi+0B6h], si; Begin ordinary NiNode child loop using child count +0xB6 and child array +0xB0.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x70AB6E",
-    "line": "call    NiAVObject_Render",
+    "line": "call    NiAVObject_Render; NiNode recursively submits each eligible child through NiAVObject visibility/render dispatch; each child retains its own AppCulled test.",
     "mnemonic": "call",
     "size": 5
   },

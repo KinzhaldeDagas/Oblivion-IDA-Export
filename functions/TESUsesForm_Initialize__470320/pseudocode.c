@@ -1,4 +1,4 @@
 void __thiscall TESUsesForm_Initialize(_BYTE *this)
 {
-  *(this + 4) = 0;
+  *(this + 4) = 0; /*0x470320*/
 }

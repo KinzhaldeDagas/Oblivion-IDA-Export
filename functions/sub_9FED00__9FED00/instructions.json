@@ -1,19 +1,19 @@
 [
   {
     "ea": "0x9FED00",
-    "line": "push    offset OpenEffect_Make",
+    "line": "push    offset OpenEffect_Make; Verified (Oblivion): registers FourCC OPEN (0x4E45504F) to OpenEffect_Make in NiTMap_AECreatorFuncs. Fallout's OpenEffect::Instantiate is registered under EffectArchetypes enum MELEE_DAMAGE by a dynamic initializer and allocates 0x48 bytes; Oblivion's factory allocates 0x38 bytes. Registry key and object layout diverge.",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x9FED05",
-    "line": "push    4E45504Fh",
+    "line": "push    4E45504Fh; effectCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x9FED0A",
-    "line": "call    ActiveEffect_Base_AddCreationFunc",
+    "line": "call    ActiveEffect_Base_AddCreationFunc; Verified (Oblivion): inserts an effectCode/factory pair into NiTMap_AECreatorFuncs. The 23 ActiveEffect_Register_* wrappers call this function, but their runtime invocation path is not established by current xrefs/initializer table evidence.",
     "mnemonic": "call",
     "size": 5
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x9FED12",
-    "line": "mov     byte_B3C0DD, al",
+    "line": "mov     byte ptr unk_B3C0DD, al",
     "mnemonic": "mov",
     "size": 5
   },

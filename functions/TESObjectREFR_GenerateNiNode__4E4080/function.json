@@ -1,19 +1,36 @@
 {
-  "callees_count": 101,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 59,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
+  "chunks": [
+    [
+      "0x4E4080",
+      "0x4E4690"
+    ],
+    [
+      "0x9B5C90",
+      "0x9B5CC6"
+    ]
+  ],
+  "chunks_sha256": "90ddd7cedd1a3c1884b60fa7e9846390f353b623a531ff56749edc9782b36378",
+  "comment_regular": "TESObjectREFR vtable GenerateNiNode base implementation. Native ABI has no stack/x87 inputs and returns the generated NiNode*. Prior ST0/ST1/ST2 parameters were decompiler artifacts.",
+  "comment_repeatable": "TESObjectREFR vtable GenerateNiNode base implementation. Native ABI has no stack/x87 inputs and returns the generated NiNode*. Prior ST0/ST1/ST2 parameters were decompiler artifacts.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
   "display_name": "TESObjectREFR_GenerateNiNode",
   "end_ea": "0x4E4690",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "TESObjectREFR_GenerateNiNode",
   "segment": ".text",
   "sha256": "6041e224ff1814cc547940670f78dbe938e6bdf02099ad0d5c036e653485eb15",
   "size": 1552,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E4080",
-  "type": "volatile LONG *__usercall@<eax>(TESObjectREFR *this@<ecx>, double a2@<st2>, double a3@<st1>, double a4@<st0>)",
-  "xrefs_from_count": 623,
+  "total_chunk_size": 1606,
+  "type": "NiNode *__thiscall(TESObjectREFR *this)",
+  "xrefs_from_count": 641,
   "xrefs_to_count": 2
 }

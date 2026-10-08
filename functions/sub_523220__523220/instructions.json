@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x523295",
-    "line": "mov     ecx, [esi+0E8h]",
+    "line": "mov     ecx, [esi+0E8h]; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -265,49 +265,49 @@
   },
   {
     "ea": "0x52329F",
-    "line": "mov     edx, [esp+0Ch+arg_4]",
+    "line": "mov     edx, [esp+0Ch+outSkinnedNode]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5232A3",
-    "line": "mov     eax, [esp+0Ch+arg_0]",
+    "line": "mov     eax, [esp+0Ch+outBipedNode]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5232A7",
-    "line": "push    0",
+    "line": "push    0; preferBipedGeometry",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5232A9",
-    "line": "push    1",
+    "line": "push    1; applyAppearance",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5232AB",
-    "line": "push    esi",
+    "line": "push    esi; npc",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5232AC",
-    "line": "push    edx",
+    "line": "push    edx; outSkinnedNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5232AD",
-    "line": "push    eax",
+    "line": "push    eax; outBipedNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5232AE",
-    "line": "call    sub_52DED0",
+    "line": "call    TESRace_CreateFaceGenNodes; Create the paired BSFaceGenNiNodeBiped and BSFaceGenNiNodeSkinned nodes with shared animation data, build a FaceGenRenderState, populate head geometry, and optionally apply the resulting appearance to both nodes.",
     "mnemonic": "call",
     "size": 5
   },

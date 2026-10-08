@@ -1,1 +1,1 @@
-DistantLODShader
+struct DistantLODShader;

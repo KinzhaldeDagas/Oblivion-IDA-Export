@@ -1,1 +1,1 @@
-PHKEY
+typedef HKEY *PHKEY;

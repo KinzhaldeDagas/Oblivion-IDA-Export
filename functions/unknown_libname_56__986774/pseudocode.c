@@ -1,65 +1,79 @@
-int __usercall unknown_libname_56@<eax>(int a1@<edi>, int a2@<esi>, char *Str1, char *Str2, size_t MaxCount)
+unsigned int __usercall unknown_libname_56@<eax>(int a1@<edi>, int a2@<esi>, char *Str1, char *Str2, size_t MaxCount)
 {
   int v5; // edi
-  unsigned __int8 v6; // cl
-  char *v7; // eax
-  size_t v9; // [esp-8h] [ebp-1Ch]
-  _BYTE v10[4]; // [esp+4h] [ebp-10h] BYREF
-  int v11; // [esp+8h] [ebp-Ch]
-  int v12; // [esp+Ch] [ebp-8h]
-  char v13; // [esp+10h] [ebp-4h]
-  char *Str1a; // [esp+1Ch] [ebp+8h]
+  unsigned __int16 v6; // cx
+  int v7; // eax
+  unsigned __int16 v9; // dx
+  char *v10; // esi
+  unsigned __int16 v11; // bx
+  size_t v12; // [esp-8h] [ebp-1Ch]
+  _BYTE v13[4]; // [esp+4h] [ebp-10h] BYREF
+  int v14; // [esp+8h] [ebp-Ch]
+  int v15; // [esp+Ch] [ebp-8h]
+  char v16; // [esp+10h] [ebp-4h]
+  int savedregs; // [esp+14h] [ebp+0h] BYREF
   int MaxCounta; // [esp+24h] [ebp+10h]
 
-  if ( !(_DWORD)MaxCount )
-    JUMPOUT(0x9868C6);
-  HIDWORD(v9) = a1;
-  _LocaleUpdate::_LocaleUpdate((_LocaleUpdate *)v10, (struct localeinfo_struct *)HIDWORD(MaxCount));
-  v5 = v11;
-  if ( !*(_DWORD *)(v11 + 8) )
+  if ( !(_DWORD)MaxCount ) /*0x986780*/
+    JUMPOUT(0x9868C6); /*0x9868c6*/
+  HIDWORD(v12) = a1; /*0x986789*/
+  _LocaleUpdate::_LocaleUpdate((_LocaleUpdate *)v13, (struct localeinfo_struct *)HIDWORD(MaxCount)); /*0x986790*/
+  v5 = v14; /*0x986795*/
+  if ( !*(_DWORD *)(v14 + 8) ) /*0x986798*/
   {
-    LODWORD(v9) = MaxCount;
-    strncmp(Str1, Str2, v9);
-    if ( v13 )
-      *(_DWORD *)(v12 + 0x70) &= ~2u;
-    goto LABEL_24;
+    LODWORD(v12) = MaxCount; /*0x98679d*/
+    strncmp(Str1, Str2, v12); /*0x9867a6*/
+    if ( v16 ) /*0x9867b1*/
+      *(_DWORD *)(v15 + 0x70) &= ~2u; /*0x9867ba*/
+    goto LABEL_26; /*0x9867be*/
   }
-  if ( !Str1 )
+  if ( !Str1 ) /*0x9867c6*/
   {
-    *_errno() = 0x16;
-    _invalid_parameter(0, v5, a2);
-    if ( v13 )
-      *(_DWORD *)(v12 + 0x70) &= ~2u;
-LABEL_24:
-    JUMPOUT(0x9868C5);
+    *_errno() = 0x16; /*0x9867d2*/
+    _invalid_parameter(0, v5, a2); /*0x9867d8*/
+    if ( v16 ) /*0x9867e3*/
+      *(_DWORD *)(v15 + 0x70) &= ~2u; /*0x9867e8*/
+LABEL_26:
+    JUMPOUT(0x9868C5); /*0x9868c5*/
   }
-  if ( !Str2 )
+  if ( !Str2 ) /*0x9867fc*/
   {
-    *_errno() = 0x16;
-    _invalid_parameter(0, v5, 0);
-    if ( v13 )
-      *(_DWORD *)(v12 + 0x70) &= ~2u;
-    JUMPOUT(0x9868C4);
+    *_errno() = 0x16; /*0x986808*/
+    _invalid_parameter(0, v5, 0); /*0x98680e*/
+    if ( v16 ) /*0x986819*/
+      *(_DWORD *)(v15 + 0x70) &= ~2u; /*0x98681e*/
+    JUMPOUT(0x9868C4); /*0x9868c4*/
   }
-  MaxCounta = MaxCount - 1;
-  v6 = *Str1;
-  v7 = Str1 + 1;
-  Str1a = Str1 + 1;
-  if ( (*(_BYTE *)(v6 + v11 + 0x1D) & 4) != 0 )
+  MaxCounta = MaxCount - 1; /*0x986833*/
+  v6 = (unsigned __int8)*Str1; /*0x986836*/
+  if ( (*(_BYTE *)((unsigned __int8)v6 + v14 + 0x1D) & 4) != 0 ) /*0x986845*/
   {
-    if ( !MaxCounta )
+    if ( !MaxCounta ) /*0x98684a*/
     {
-      if ( (*(_BYTE *)((unsigned __int8)*Str2 + v11 + 0x1D) & 4) != 0 )
-        JUMPOUT(0x9868B6);
-      return unknown_libname_56_::unknown_libname_57(Str1a, Str2, MaxCounta);
+      v7 = (unsigned __int8)*Str2; /*0x98684c*/
+      v6 = 0; /*0x98684f*/
+      if ( (*(_BYTE *)(v7 + v14 + 0x1D) & 4) != 0 ) /*0x986856*/
+        JUMPOUT(0x9868B6); /*0x9868b6*/
+      return unknown_libname_56_::unknown_libname_57(v7, v6, 0, (int)&savedregs); /*0x986856*/
     }
-    if ( *v7 )
-      ++Str1a;
+    if ( Str1[1] ) /*0x98685d*/
+    {
+      HIBYTE(v9) = *Str1; /*0x98686c*/
+      LOBYTE(v9) = Str1[1]; /*0x98686e*/
+      v6 = v9; /*0x986870*/
+    }
+    else
+    {
+      v6 = 0; /*0x986863*/
+    }
   }
-  if ( (*(_BYTE *)((unsigned __int8)*Str2 + v11 + 0x1D) & 4) != 0 )
-  {
-    if ( MaxCounta )
-      --MaxCounta;
-  }
-  return unknown_libname_56_::unknown_libname_57(Str1a, Str2, MaxCounta);
+  LOWORD(v7) = (unsigned __int8)*Str2; /*0x986877*/
+  v10 = Str2 + 1; /*0x98687d*/
+  if ( (*(_BYTE *)((unsigned __int8)v7 + v14 + 0x1D) & 4) == 0 ) /*0x986883*/
+    return unknown_libname_56_::unknown_libname_57(v7, v6, 0, (int)&savedregs); /*0x98685b*/
+  if ( !MaxCounta || !*v10 ) /*0x98688e*/
+    return unknown_libname_56_::unknown_libname_57(0, v6, 0, (int)&savedregs); /*0x98688c*/
+  HIBYTE(v11) = *Str2; /*0x986899*/
+  LOBYTE(v11) = *v10; /*0x98689c*/
+  return unknown_libname_56_::unknown_libname_57(v11, v6, 0, (int)&savedregs);
 }

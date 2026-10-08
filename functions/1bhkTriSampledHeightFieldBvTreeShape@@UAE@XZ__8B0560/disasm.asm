@@ -24,3 +24,12 @@
 0x8B05BD: pop     esi
 0x8B05BE: add     esp, 10h
 0x8B05C1: retn
+0x9B8EB0: mov     ecx, [ebp-10h]; this
+0x9B8EB3: jmp     ??1bhkBvTreeShape@@UAE@XZ; bhkBvTreeShape::~bhkBvTreeShape(void)
+0x9B8EB8: mov     edx, [esp+arg_4]
+0x9B8EBC: lea     eax, [edx-8]
+0x9B8EBF: mov     ecx, [edx-0Ch]
+0x9B8EC2: xor     ecx, eax
+0x9B8EC4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B8EC9: mov     eax, offset stru_AE32C8
+0x9B8ECE: jmp     ___CxxFrameHandler3

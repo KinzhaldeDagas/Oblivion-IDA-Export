@@ -1,1 +1,1 @@
-RpcContextHandle
+typedef _RpcContextHandle RpcContextHandle;

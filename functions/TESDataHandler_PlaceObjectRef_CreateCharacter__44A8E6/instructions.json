@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x44A8E6",
-    "line": "push    10Ch; Size",
+    "line": "push    10Ch; PlaceObjectRef Character allocation branch: base form type 0x23 allocates 0x10C bytes and calls Character_constr.",
     "mnemonic": "push",
     "size": 5
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x44A910",
-    "line": "push    esi; a2",
+    "line": "push    esi; PlaceObjectRef new-ref common initialization begins here: set base form, tree/light special cases, dynamic form handling, then write requested pos/rot and insert into resolved target cell.",
     "mnemonic": "push",
     "size": 1
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x44A99D",
-    "line": "call    TESObjectREFR_SetPosition",
+    "line": "call    TESObjectREFR_SetPosition; PlaceObjectRef writes requested position with TESObjectREFR_SetPosition before resolving/inserting into the target cell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x44A9BD",
-    "line": "call    sub_4D89A0",
+    "line": "call    sub_4D89A0; PlaceObjectRef writes requested rotation via sub_4D89A0 after position is set.",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x44A9DF",
-    "line": "sar     eax, 0Ch",
+    "line": "sar     eax, 0Ch; PlaceObjectRef uses the same exterior cell conversion as fast-travel relocation: int(pos.x) >> 12 and int(pos.y) >> 12 against the target worldspace.",
     "mnemonic": "sar",
     "size": 3
   },
@@ -505,13 +505,13 @@
   },
   {
     "ea": "0x44A9F1",
-    "line": "push    ecx; signed int",
+    "line": "push    ecx; cellY",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x44A9F2",
-    "line": "push    eax; signed int",
+    "line": "push    eax; cellX",
     "mnemonic": "push",
     "size": 1
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x44A9F5",
-    "line": "call    TESWorldSpace__GetCellAtCellCoord",
+    "line": "call    TESWorldSpace__GetCellAtCellCoord; Exterior target path resolves target cell from requested pos through worldspace GetCellAtCellCoord using x/y >> 12 cell coords.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1081,19 +1081,19 @@
   },
   {
     "ea": "0x44AB28",
-    "line": "push    ebp; Concurrency::details::SchedulerBase *",
+    "line": "push    ebp; Resolved target cell insertion: sub_4D35D0(cell, ref) links the placed ref into the cell before actor/post-place initialization.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x44AB29",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x44AB2B",
-    "line": "call    sub_4D35D0",
+    "line": "call    TESObjectCELL_AddReference; Verified: persistent-cell AddReference updates the WorldSpace coordinate/fallback persistent-reference index (+0x64) through TESWorldSpace_IndexReference. Ordinary cell additions do not index there. This routine does not populate the separate SubSpace spatial index at +0x60.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1339,7 +1339,7 @@
   },
   {
     "ea": "0x44ABA4",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1387,7 +1387,7 @@
   },
   {
     "ea": "0x44ABBA",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1423,7 +1423,7 @@
   },
   {
     "ea": "0x44ABCE",
-    "line": "call    OblivionDynamicCast",
+    "line": "call    OblivionDynamicCast; After insertion, placed refs are dynamic-cast to Actor; actor refs get additional post-place initialization before returning EAX=ref.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1585,7 +1585,7 @@
   },
   {
     "ea": "0x44AC1A",
-    "line": "retn    18h",
+    "line": "retn    18h; 3DTheft decode 2026-05-16: PlaceObjectRef returns the placed ref in EAX and uses retn 0x18. The OBSE call boundary is thiscall DataHandler + six stack args: baseForm, pos, rot, cell, worldspace, existingRef.",
     "mnemonic": "retn",
     "size": 3
   }

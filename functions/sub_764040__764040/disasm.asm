@@ -1,4 +1,4 @@
-0x764040: push    esi
+0x764040: push    esi; DX11 concurrency audit 2026-09-24: paired release for 763FE0. Decrements/clears precache owner metadata and leaves this+0x100 first; on final renderer nesting calls vtable+0x12C, clears renderer owner metadata and leaves this+0x80. Do not invert this order in plugin work.
 0x764041: mov     esi, ecx
 0x764043: add     dword ptr [esi+17Ch], 0FFFFFFFFh
 0x76404A: lea     eax, [esi+100h]

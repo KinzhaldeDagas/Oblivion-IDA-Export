@@ -1,4 +1,4 @@
-0x791630: sub     esp, 8
+0x791630: sub     esp, 8; Push helper for CBranch::m_vChildren. Vector wrapper starts at branch+0x08; usable begin/end/cap are +0x0C/+0x10/+0x14; element size is 0x0C SIdvBranch.
 0x791633: push    esi
 0x791634: mov     esi, ecx
 0x791636: push    edi
@@ -27,11 +27,11 @@
 0x79166E: add     eax, edx
 0x791670: cmp     ecx, eax
 0x791672: jnb     short loc_7916A5
-0x791674: mov     ecx, [esp+10h+arg_0]
-0x791678: mov     edx, [esp+10h+arg_0]
+0x791674: mov     ecx, [esp+10h+value]
+0x791678: mov     edx, [esp+10h+value]
 0x79167C: mov     edi, [esi+8]
-0x79167F: mov     byte ptr [esp+10h+var_8], 0
-0x791684: mov     eax, [esp+10h+var_8]
+0x79167F: mov     byte ptr [esp+10h+result.owner], 0
+0x791684: mov     eax, [esp+10h+result.owner]
 0x791688: push    eax
 0x791689: push    ecx
 0x79168A: push    esi
@@ -51,14 +51,14 @@
 0x7916A9: cmp     edi, ebx
 0x7916AB: jbe     short loc_7916B2
 0x7916AD: call    __invalid_parameter_noinfo
-0x7916B2: mov     eax, [esp+14h+arg_0]
-0x7916B6: push    eax
-0x7916B7: push    ebx
-0x7916B8: push    esi
-0x7916B9: lea     ecx, [esp+20h+var_8]
-0x7916BD: push    ecx
-0x7916BE: mov     ecx, esi
-0x7916C0: call    sub_791460
+0x7916B2: mov     eax, [esp+14h+value]
+0x7916B6: push    eax; value
+0x7916B7: push    ebx; position
+0x7916B8: push    esi; owner
+0x7916B9: lea     ecx, [esp+20h+result]
+0x7916BD: push    ecx; result
+0x7916BE: mov     ecx, esi; this
+0x7916C0: call    OB_stVectorBranchChildRef_InsertOneChecked_010201A0; Checked one-element insertion wrapper for the 0x0C-byte branch-child vector. Captures the logical index, calls InsertFill(count=1), then rebuilds the checked owner/current iterator against the possibly relocated buffer.
 0x7916C5: pop     ebx
 0x7916C6: pop     edi
 0x7916C7: pop     esi

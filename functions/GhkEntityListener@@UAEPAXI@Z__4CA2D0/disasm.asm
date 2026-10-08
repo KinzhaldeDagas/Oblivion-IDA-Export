@@ -4,7 +4,7 @@
 0x4CA2D8: mov     dword ptr [esi], offset ??_7hkEntityListener@@6B@; const hkEntityListener::`vftable'
 0x4CA2DE: jz      short loc_4CA2E9
 0x4CA2E0: push    esi
-0x4CA2E1: call    FormHeapFree
+0x4CA2E1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4CA2E6: add     esp, 4
 0x4CA2E9: mov     eax, esi
 0x4CA2EB: pop     esi

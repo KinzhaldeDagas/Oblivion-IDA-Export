@@ -1,4 +1,4 @@
 void Calc_SneakAttackMultiplier_::SetMelee()
 {
-  JUMPOUT(0x547813);
+  JUMPOUT(0x547813); /*0x547813*/
 }

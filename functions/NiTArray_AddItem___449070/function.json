@@ -1,19 +1,32 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x449070",
+      "0x449131"
+    ]
+  ],
+  "chunks_sha256": "1219a936653ddb4e43902ca2a24f9dffcf00f93305d36cfccd0e98e6a4ec0a7b",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "MEF PERF 2026-10-08: PERF-16 related RAW 32-bit AddFirstEmpty:24-byte array has DWORD cap8,usedEndC,occupied10,grow14. It also scans dense prefix from0, then grows/appends. No smart-pointer refs here. Do not reuse16-bit offsets/ownership. Sole direct caller observed46C68A.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "NiTArray_AddItem?",
+  "display_name": "NiTLargeArray_RawPointer_AddFirstEmpty",
   "end_ea": "0x449131",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "NiTArray_AddItem?",
+  "name": "NiTLargeArray_RawPointer_AddFirstEmpty",
   "segment": ".text",
   "sha256": "1219a936653ddb4e43902ca2a24f9dffcf00f93305d36cfccd0e98e6a4ec0a7b",
   "size": 193,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x449070",
-  "type": "unsigned int __thiscall(unsigned int *this, _DWORD *)",
+  "total_chunk_size": 193,
+  "type": "unsigned int __thiscall(MEF_RawPointerArray32 *self, void **element)",
   "xrefs_from_count": 90,
   "xrefs_to_count": 1
 }

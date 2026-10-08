@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7DACA0",
-    "line": "sub     esp, 11Ch",
+    "line": "sub     esp, 11Ch; [Verified] Loads the supplied shader package from Data\\Shaders\\<filename>, validates its header (observed values 0x0C and 0x64), reads the record payload, and inserts entries into the ShaderBufferEntry string map. [Unknown] Internal meaning of package header fields and variant-specific payloads is not established. [Candidate cross-build note] Fallout's observed HLSL creator compiles resolved source files directly; no same-name .sdp load path was located in its IDB, which remains an incomplete search rather than a proven absence.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x7DACB8",
-    "line": "mov     ecx, [esp+124h+arg_0]",
+    "line": "mov     ecx, [esp+124h+filename]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -295,19 +295,19 @@
   },
   {
     "ea": "0x7DAD36",
-    "line": "push    ecx",
+    "line": "push    ecx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7DAD37",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7DAD38",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x7DAD3D",
-    "line": "call    ReadFile??",
+    "line": "call    Archive_ReadBytes",
     "mnemonic": "call",
     "size": 5
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x7DAD85",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

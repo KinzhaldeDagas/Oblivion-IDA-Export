@@ -1,4 +1,4 @@
-0x5640E0: push    0FFFFFFFFh
+0x5640E0: push    0FFFFFFFFh; Verified 0xF0-byte BSTreeNode layout: NiNode base +0x00..+0xDB; model +0xDC; branch/leaf LOD arrays +0xE0/+0xE4; billboardGeometry +0xE8; +0xEC float Unknown. Constructor creates child slot 2 as a separate NiBillboardNode named Billboard; the +0xE8 field stores the NiTriBasedGeom added under that parent.
 0x5640E2: push    offset ??0BSTreeNode@@QAE@XZ_SEH
 0x5640E7: mov     eax, large fs:0
 0x5640ED: push    eax
@@ -19,10 +19,10 @@
 0x56410E: call    ??0NiNode@@QAE@XZ; NiNode::NiNode(void)
 0x564113: mov     dword ptr [esi], offset ??_7BSTreeNode@@6B@; const BSTreeNode::`vftable'
 0x564119: mov     [esp+24h+var_4], ebp
-0x56411D: mov     [esi+0DCh], ebp
+0x56411D: mov     [esi+0DCh], ebp; Verified BSTreeNode.treeModel at +0xDC: stored with an intrusive reference count; branch/leaf LOD array sizing is read from this model.
 0x564123: mov     [esi+0E8h], ebp
 0x564129: mov     edi, [esi+0DCh]
-0x56412F: mov     ebx, [esp+24h+arg_0]
+0x56412F: mov     ebx, [esp+24h+model]
 0x564133: cmp     edi, ebx
 0x564135: mov     byte ptr [esp+24h+var_4], 2
 0x56413A: jz      short loc_564170
@@ -50,7 +50,7 @@
 0x564175: push    0DCh ; 'Ü'; Size
 0x56417A: call    FormHeapAlloc
 0x56417F: add     esp, 4
-0x564182: mov     [esp+24h+arg_0], eax
+0x564182: mov     [esp+24h+model], eax
 0x564186: cmp     eax, ebp
 0x564188: mov     byte ptr [esp+24h+var_4], 3
 0x56418D: jz      short loc_56419B
@@ -66,11 +66,11 @@
 0x5641A9: call    NiObjectNET_SetName
 0x5641AE: push    edi
 0x5641AF: push    ebp
-0x5641B0: lea     ecx, [esp+2Ch+arg_0]
+0x5641B0: lea     ecx, [esp+2Ch+model]
 0x5641B4: push    ecx
 0x5641B5: mov     ecx, esi
 0x5641B7: call    NiNode__SetObjectAt
-0x5641BC: mov     eax, [esp+24h+arg_0]
+0x5641BC: mov     eax, [esp+24h+model]
 0x5641C0: cmp     eax, ebp
 0x5641C2: mov     ebx, ds:0A2807Ch
 0x5641C8: jz      short loc_5641E4
@@ -90,7 +90,7 @@
 0x5641E4: push    0DCh ; 'Ü'; Size
 0x5641E9: call    FormHeapAlloc
 0x5641EE: add     esp, 4
-0x5641F1: mov     [esp+24h+arg_0], eax
+0x5641F1: mov     [esp+24h+model], eax
 0x5641F5: cmp     eax, ebp
 0x5641F7: mov     byte ptr [esp+24h+var_4], 4
 0x5641FC: jz      short loc_56420A
@@ -104,27 +104,27 @@
 0x564211: mov     ecx, edi
 0x564213: mov     byte ptr [esp+28h+var_4], 2
 0x564218: call    NiObjectNET_SetName
-0x56421D: push    1
-0x56421F: call    sub_55F7E0
+0x56421D: push    1; createIfMissing
+0x56421F: call    BSTreeManager_GetInstance; Returns SpeedTree singleton dword_B39E04, creating it on demand when caller passes true.
 0x564224: add     eax, 8
 0x564227: add     esp, 4
 0x56422A: cmp     [eax], ebp
 0x56422C: jz      short loc_564245
-0x56422E: push    1
-0x564230: call    sub_55F7E0
+0x56422E: push    1; createIfMissing
+0x564230: call    BSTreeManager_GetInstance; Returns SpeedTree singleton dword_B39E04, creating it on demand when caller passes true.
 0x564235: add     eax, 8
 0x564238: mov     eax, [eax]
 0x56423A: add     esp, 4
 0x56423D: push    eax; a2
 0x56423E: mov     ecx, edi; this
-0x564240: call    sub_405680
+0x564240: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x564245: push    edi
 0x564246: push    1
-0x564248: lea     ecx, [esp+2Ch+arg_0]
+0x564248: lea     ecx, [esp+2Ch+model]
 0x56424C: push    ecx
 0x56424D: mov     ecx, esi
 0x56424F: call    NiNode__SetObjectAt
-0x564254: mov     eax, [esp+24h+arg_0]
+0x564254: mov     eax, [esp+24h+model]
 0x564258: cmp     eax, ebp
 0x56425A: jz      short loc_564276
 0x56425C: mov     edi, eax
@@ -144,7 +144,7 @@
 0x56427B: call    FormHeapAlloc
 0x564280: mov     edi, eax
 0x564282: add     esp, 4
-0x564285: mov     [esp+24h+arg_0], edi
+0x564285: mov     [esp+24h+model], edi
 0x564289: cmp     edi, ebp
 0x56428B: mov     byte ptr [esp+24h+var_4], 5
 0x564290: jz      short loc_5642B3
@@ -177,11 +177,11 @@
 0x5642FC: call    sub_70FE20
 0x564301: push    edi
 0x564302: push    2
-0x564304: lea     edx, [esp+2Ch+arg_0]
+0x564304: lea     edx, [esp+2Ch+model]
 0x564308: push    edx
 0x564309: mov     ecx, esi
 0x56430B: call    NiNode__SetObjectAt
-0x564310: mov     eax, [esp+24h+arg_0]
+0x564310: mov     eax, [esp+24h+model]
 0x564314: cmp     eax, ebp
 0x564316: jz      short loc_564332
 0x564318: mov     edi, eax
@@ -197,8 +197,8 @@
 0x56432C: push    1
 0x56432E: mov     ecx, edi
 0x564330: call    edx
-0x564332: mov     ecx, [esi+0DCh]
-0x564338: call    sub_5601E0
+0x564332: mov     ecx, [esi+0DCh]; this
+0x564338: call    BSTreeModel_GetNumBranchLODLevels
 0x56433D: movzx   ebx, ax
 0x564340: cmp     bx, bp
 0x564343: jz      loc_56445C
@@ -218,11 +218,11 @@
 0x56436A: push    eax; Size
 0x56436B: call    FormHeapAlloc
 0x564370: add     esp, 4
-0x564373: mov     [esp+24h+arg_0], eax
+0x564373: mov     [esp+24h+model], eax
 0x564377: test    eax, eax
 0x564379: mov     byte ptr [esp+24h+var_4], 6
 0x56437E: jz      short loc_56439A
-0x564380: push    offset sub_7016A0; a5
+0x564380: push    offset NiPointerSlot_Release; a5
 0x564385: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x56438A: push    edi; size
 0x56438B: lea     ebp, [eax+4]
@@ -234,10 +234,10 @@
 0x56439A: xor     ebp, ebp
 0x56439C: test    bx, bx
 0x56439F: mov     byte ptr [esp+24h+var_4], 2
-0x5643A4: mov     [esi+0E0h], ebp
+0x5643A4: mov     [esi+0E0h], ebp; Verified BSTreeNode.branchNodesByLOD at +0xE0: array count equals BSTreeModel::GetNumBranchLODLevels; elements are pointer-sized smart references, initially cleared.
 0x5643AA: jbe     short loc_5643EE
 0x5643AC: xor     ebx, ebx
-0x5643AE: mov     [esp+24h+arg_0], edi
+0x5643AE: mov     [esp+24h+model], edi
 0x5643B2: mov     edi, [esi+0E0h]
 0x5643B8: mov     ebp, [edi+ebx]
 0x5643BB: add     edi, ebx
@@ -257,11 +257,11 @@
 0x5643DC: call    eax
 0x5643DE: mov     dword ptr [edi], 0
 0x5643E4: add     ebx, 4
-0x5643E7: sub     [esp+24h+arg_0], 1
+0x5643E7: sub     [esp+24h+model], 1
 0x5643EC: jnz     short loc_5643B2
 0x5643EE: xor     ebp, ebp
-0x5643F0: mov     ecx, [esi+0DCh]
-0x5643F6: call    sub_560200
+0x5643F0: mov     ecx, [esi+0DCh]; this
+0x5643F6: call    BSTreeModel_GetNumLeafLODLevels
 0x5643FB: movzx   ebx, ax
 0x5643FE: cmp     bx, bp
 0x564401: jz      loc_5644C0
@@ -281,11 +281,11 @@
 0x564428: push    eax; Size
 0x564429: call    FormHeapAlloc
 0x56442E: add     esp, 4
-0x564431: mov     [esp+24h+arg_0], eax
+0x564431: mov     [esp+24h+model], eax
 0x564435: cmp     eax, ebp
 0x564437: mov     byte ptr [esp+24h+var_4], 7
 0x56443C: jz      short loc_564464
-0x56443E: push    offset sub_7016A0; a5
+0x56443E: push    offset NiPointerSlot_Release; a5
 0x564443: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x564448: push    edi; size
 0x564449: lea     ebp, [eax+4]
@@ -301,10 +301,10 @@
 0x564464: xor     eax, eax
 0x564466: cmp     bx, bp
 0x564469: mov     byte ptr [esp+24h+var_4], 2
-0x56446E: mov     [esi+0E4h], eax
+0x56446E: mov     [esi+0E4h], eax; Verified BSTreeNode.leafNodesByLOD at +0xE4: array count equals BSTreeModel::GetNumLeafLODLevels; elements are pointer-sized smart references, initially cleared.
 0x564474: jbe     short loc_5644C6
 0x564476: xor     ebx, ebx
-0x564478: mov     [esp+24h+arg_0], edi
+0x564478: mov     [esp+24h+model], edi
 0x56447C: lea     esp, [esp+0]
 0x564480: mov     edi, [esi+0E4h]
 0x564486: mov     ebp, [edi+ebx]
@@ -325,7 +325,7 @@
 0x5644AA: call    eax
 0x5644AC: mov     dword ptr [edi], 0
 0x5644B2: add     ebx, 4
-0x5644B5: sub     [esp+24h+arg_0], 1
+0x5644B5: sub     [esp+24h+model], 1
 0x5644BA: jnz     short loc_564480
 0x5644BC: xor     ebp, ebp
 0x5644BE: jmp     short loc_5644C6
@@ -345,16 +345,16 @@
 0x5644E6: push    1
 0x5644E8: mov     ecx, edi
 0x5644EA: call    eax
-0x5644EC: mov     [esi+0E8h], ebp
-0x5644F2: push    1
-0x5644F4: call    sub_55F7E0
+0x5644EC: mov     [esi+0E8h], ebp; Verified BSTreeNode.billboardNode at +0xE8: initially cleared, getter returns it, setter attaches/replaces the billboard under child slot 2.
+0x5644F2: push    1; createIfMissing
+0x5644F4: call    BSTreeManager_GetInstance; Returns SpeedTree singleton dword_B39E04, creating it on demand when caller passes true.
 0x5644F9: add     eax, 18h
 0x5644FC: mov     eax, [eax]
 0x5644FE: add     esp, 4
 0x564501: push    eax
 0x564502: mov     ecx, esi
-0x564504: call    NiNode_AddNiExtraData
-0x564509: mov     ebx, [esp+24h+arg_4]
+0x564504: call    NiObjectNET_AddExtraData; Pass269 ABI and ownership proof: NiObjectNET::AddExtraData consumes one stack argument with RET 4 and also expects owning object in ECX/EBX at this build's callsites. The plugin wrapper must not execute caller-side ADD ESP,4.
+0x564509: mov     ebx, [esp+24h+collisionObject]
 0x56450D: cmp     ebx, ebp
 0x56450F: jz      short loc_564515
 0x564511: mov     eax, ebx
@@ -367,7 +367,7 @@
 0x564524: call    FormHeapAlloc
 0x564529: mov     edi, eax
 0x56452B: add     esp, 4
-0x56452E: mov     [esp+24h+arg_0], edi
+0x56452E: mov     [esp+24h+model], edi
 0x564532: cmp     edi, ebp
 0x564534: mov     byte ptr [esp+24h+var_4], 8
 0x564539: jz      short loc_56454A
@@ -393,7 +393,7 @@
 0x564572: call    eax
 0x564574: fldz
 0x564576: mov     eax, esi
-0x564578: fstp    dword ptr [esi+0ECh]
+0x564578: fstp    dword ptr [esi+0ECh]; Unknown BSTreeNode trailing float at +0xEC: constructor sets zero; no semantic name established yet.
 0x56457E: mov     ecx, [esp+24h+var_C]
 0x564582: mov     large fs:0, ecx
 0x564589: pop     ecx
@@ -403,3 +403,48 @@
 0x56458D: pop     ebx
 0x56458E: add     esp, 10h
 0x564591: retn    8
+0x9BD480: mov     ecx, [ebp-10h]; this
+0x9BD483: jmp     ??1NiBSPNode@@UAE@XZ; NiBSPNode::~NiBSPNode(void)
+0x9BD488: mov     ecx, [ebp-10h]
+0x9BD48B: add     ecx, 0DCh ; 'Ü'; slot
+0x9BD491: jmp     NiPointerSlot_Release
+0x9BD496: mov     ecx, [ebp-10h]
+0x9BD499: add     ecx, 0E8h ; 'è'; slot
+0x9BD49F: jmp     NiPointerSlot_Release
+0x9BD4A4: mov     eax, [ebp+4]
+0x9BD4A7: push    eax
+0x9BD4A8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BD4AD: pop     ecx
+0x9BD4AE: retn
+0x9BD4AF: mov     eax, [ebp+4]
+0x9BD4B2: push    eax
+0x9BD4B3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BD4B8: pop     ecx
+0x9BD4B9: retn
+0x9BD4BA: mov     eax, [ebp+4]
+0x9BD4BD: push    eax
+0x9BD4BE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BD4C3: pop     ecx
+0x9BD4C4: retn
+0x9BD4C5: mov     eax, [ebp+4]
+0x9BD4C8: push    eax
+0x9BD4C9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BD4CE: pop     ecx
+0x9BD4CF: retn
+0x9BD4D0: mov     eax, [ebp+4]
+0x9BD4D3: push    eax
+0x9BD4D4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BD4D9: pop     ecx
+0x9BD4DA: retn
+0x9BD4DB: mov     eax, [ebp+4]
+0x9BD4DE: push    eax
+0x9BD4DF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BD4E4: pop     ecx
+0x9BD4E5: retn
+0x9BD4E6: mov     edx, [esp+collisionObject]
+0x9BD4EA: lea     eax, [edx-14h]
+0x9BD4ED: mov     ecx, [edx-18h]
+0x9BD4F0: xor     ecx, eax
+0x9BD4F2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BD4F7: mov     eax, offset stru_AE6E48
+0x9BD4FC: jmp     ___CxxFrameHandler3

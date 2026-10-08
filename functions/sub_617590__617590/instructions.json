@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x6175B7",
-    "line": "mov     esi, [esp+50h+arg_0]",
+    "line": "mov     esi, [esp+50h+actor]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x617613",
-    "line": "lea     ecx, [esp+50h+var_38]",
+    "line": "lea     ecx, [esp+50h+segmentQuery]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -265,31 +265,31 @@
   },
   {
     "ea": "0x61761C",
-    "line": "push    0; float",
+    "line": "push    0; extraCost",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x61761E",
-    "line": "push    esi; int",
+    "line": "push    esi; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x61761F",
-    "line": "push    edi; int",
+    "line": "push    edi; end",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x617620",
-    "line": "push    ebp; int",
+    "line": "push    ebp; start",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x617621",
-    "line": "lea     ecx, [esp+60h+var_38]",
+    "line": "lea     ecx, [esp+60h+segmentQuery]; segmentQuery",
     "mnemonic": "lea",
     "size": 4
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x61762D",
-    "line": "call    sub_67EB60",
+    "line": "call    ConnectedPointGraph_CanTraverseSegment; Verified shared graph route test used from actor package, combat, PathGrid selection, and fast-travel surface construction. It accepts a valid direct segment; if straight-segment validation fails, it invokes actor-aware connected-point A*.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x617637",
-    "line": "lea     ecx, [esp+54h+var_38]; int",
+    "line": "lea     ecx, [esp+54h+segmentQuery]; int",
     "mnemonic": "lea",
     "size": 4
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x617649",
-    "line": "lea     ecx, [esp+50h+var_38]; void *",
+    "line": "lea     ecx, [esp+50h+segmentQuery]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x617655",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -574,5 +574,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C3310",
+    "line": "lea     ecx, [ebp-38h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3313",
+    "line": "jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3318",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C331C",
+    "line": "lea     eax, [edx-40h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C331F",
+    "line": "mov     ecx, [edx-44h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3322",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C3324",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3329",
+    "line": "mov     eax, offset stru_AEBF40",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C332E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

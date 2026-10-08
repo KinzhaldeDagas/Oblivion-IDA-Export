@@ -7,37 +7,37 @@
 0x75361E: push    edi
 0x75361F: add     esi, 64h ; 'd'
 0x753622: mov     ecx, 0Dh
-0x753627: lea     edi, [esp+114h+var_68]
+0x753627: lea     edi, [esp+114h+local]
 0x75362E: rep movsd
 0x753630: mov     esi, [ebx+10h]
 0x753633: add     esi, 64h ; 'd'
 0x753636: mov     ecx, 0Dh
 0x75363B: lea     edi, [esp+114h+var_9C]
-0x75363F: lea     eax, [esp+114h+var_34]
+0x75363F: lea     eax, [esp+114h+parent]
 0x753646: rep movsd
 0x753648: push    eax
 0x753649: lea     ecx, [esp+118h+var_9C]
-0x75364D: call    sub_718A80
-0x753652: lea     ecx, [esp+114h+var_68]
-0x753659: push    ecx
-0x75365A: lea     edx, [esp+118h+var_D0]
-0x75365E: push    edx
-0x75365F: lea     ecx, [esp+11Ch+var_34]
-0x753666: call    sub_53D7A0
-0x75366B: mov     eax, [esp+114h+var_AC]
-0x75366F: mov     ecx, [esp+114h+var_A8]
-0x753673: mov     edx, [esp+114h+var_A4]
+0x75364D: call    sub_718A80;
+0x753652: lea     ecx, [esp+114h+local]
+0x753659: push    ecx; local
+0x75365A: lea     edx, [esp+118h+out]
+0x75365E: push    edx; out
+0x75365F: lea     ecx, [esp+11Ch+parent]; parent
+0x753666: call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.
+0x75366B: mov     eax, [esp+114h+out.pos.x]
+0x75366F: mov     ecx, [esp+114h+out.pos.y]
+0x753673: mov     edx, [esp+114h+out.pos.z]
 0x753677: mov     [esp+114h+var_E8], eax
 0x75367B: mov     [esp+114h+var_E4], ecx
 0x75367F: lea     eax, [ebx+30h]
 0x753682: push    eax
 0x753683: lea     ecx, [esp+118h+var_DC]
 0x753687: push    ecx
-0x753688: lea     ecx, [esp+11Ch+var_D0]
+0x753688: lea     ecx, [esp+11Ch+out]
 0x75368C: mov     [esp+11Ch+var_E0], edx
 0x753690: call    sub_7101F0
 0x753695: lea     ecx, [esp+114h+var_DC]
-0x753699: call    sub_43F350
+0x753699: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x75369E: fstp    st
 0x7536A0: mov     edi, [esp+114h+arg_4]
 0x7536A7: xor     ebp, ebp

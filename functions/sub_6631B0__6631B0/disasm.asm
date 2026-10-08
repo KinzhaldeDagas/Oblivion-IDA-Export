@@ -38,26 +38,26 @@
 0x66320E: fxch    st(1)
 0x663210: mov     eax, [esi+5D0h]
 0x663216: push    ecx
-0x663217: fstp    [esp+14h+a5]; a5
-0x66321A: push    0; a4
+0x663217: fstp    [esp+14h+a5]; period
+0x66321A: push    0; useRefractF
 0x66321C: push    ecx
-0x66321D: fstp    [esp+1Ch+a3]; a3
-0x663220: push    edi; a2
-0x663221: push    eax; a1
-0x663222: call    sub_7D92C0
+0x66321D: fstp    [esp+1Ch+a3]; power
+0x663220: push    edi; enabled
+0x663221: push    eax; root
+0x663222: call    NiAVObject_SetShaderRefractionStateRecursive; Recursively set/clear native refraction state on shader-property subtypes 5..10. useRefractF selects passInfo 0x10000 instead of 0x8000; stores power and optional period and invalidates pass caches.
 0x663227: add     esp, 14h
 0x66322A: mov     ecx, esi; this
-0x66322C: call    TESObjectREFR__GetNiNode
+0x66322C: call    TESObjectREFR__GetNiNode; ODismemberment: TESObjectREFR::GetNiNode; runtime primitive starts from actor 3D and toggles prepared ODISMEMBER_* nodes.
 0x663231: fldz
 0x663233: push    ecx
-0x663234: fstp    [esp+14h+a5]; a5
+0x663234: fstp    [esp+14h+a5]; period
 0x663237: fld     [esp+14h+var_4]
-0x66323B: push    0; a4
+0x66323B: push    0; useRefractF
 0x66323D: push    ecx
-0x66323E: fstp    [esp+1Ch+a3]; a3
-0x663241: push    edi; a2
-0x663242: push    eax; a1
-0x663243: call    sub_7D92C0
+0x66323E: fstp    [esp+1Ch+a3]; power
+0x663241: push    edi; enabled
+0x663242: push    eax; root
+0x663243: call    NiAVObject_SetShaderRefractionStateRecursive; Recursively set/clear native refraction state on shader-property subtypes 5..10. useRefractF selects passInfo 0x10000 instead of 0x8000; stores power and optional period and invalidates pass caches.
 0x663248: lea     ecx, [esi+44h]; this
 0x66324B: add     esp, 14h
 0x66324E: test    ecx, ecx

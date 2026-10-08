@@ -1,18 +1,31 @@
 {
-  "callees_count": 62,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 29,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_65AF30",
+  "chunks": [
+    [
+      "0x65AF30",
+      "0x65B5B5"
+    ]
+  ],
+  "chunks_sha256": "aaa25e4c114b23f1e9b033567f7a7147d29cf7c92c3efb712b59ec31f6c89496",
+  "comment_regular": "TES4 authoritative: MobileObject movement step. Builds local movement/update packet and calls CharProxy vtable +0x80; for bhkCharacterController that dispatches to 0x896000. Entry point for per-actor movement discipline injection before controller integration.",
+  "comment_repeatable": "TES4 authoritative: MobileObject movement step. Builds local movement/update packet and calls CharProxy vtable +0x80; for bhkCharacterController that dispatches to 0x896000. Entry point for per-actor movement discipline injection before controller integration.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "MobileObject_Move",
   "end_ea": "0x65B5B5",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "sub_65AF30",
+  "name": "MobileObject_Move",
   "segment": ".text",
   "sha256": "aaa25e4c114b23f1e9b033567f7a7147d29cf7c92c3efb712b59ec31f6c89496",
   "size": 1669,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x65AF30",
+  "total_chunk_size": 1669,
   "type": "__m128 *__thiscall(MobileObject *this, float arg0, NiPoint3 *, int arg8)",
   "xrefs_from_count": 562,
   "xrefs_to_count": 9

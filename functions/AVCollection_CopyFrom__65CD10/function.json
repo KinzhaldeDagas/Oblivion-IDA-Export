@@ -1,19 +1,32 @@
 {
-  "callees_count": 105,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 41,
   "callers_count": 2,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x65CD10",
+      "0x65D13F"
+    ]
+  ],
+  "chunks_sha256": "9fb7884f11c95e99f85dfa7473144ae18861157f56e02e38e9672c1cf2f89732",
+  "comment_regular": "Verified: deep copy clears destination list/indexed storage first; for nonnull source copies ID10/ID9 values then allocates/clones indexed entries and list entries through Add. NULL source leaves dedicated values unchanged after clearing other storage. No self-copy guard. Source/destination alias therefore does not preserve list/indexed entries. Probable homolog Fallout SetAllModifiers 0x826B7730; Fallout lacks dedicated-node phase and uses different fast storage.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "AVCollection_CopyFrom",
   "end_ea": "0x65D13F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "AVCollection_CopyFrom",
   "segment": ".text",
   "sha256": "9fb7884f11c95e99f85dfa7473144ae18861157f56e02e38e9672c1cf2f89732",
   "size": 1071,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x65CD10",
-  "type": "void __thiscall(unsigned int **this, int *)",
+  "total_chunk_size": 1071,
+  "type": "void __thiscall(AVCollection *self, const AVCollection *source)",
   "xrefs_from_count": 485,
   "xrefs_to_count": 2
 }

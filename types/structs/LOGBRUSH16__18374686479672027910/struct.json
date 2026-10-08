@@ -1,28 +1,54 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "LOGBRUSH16",
+  "definition": "struct LOGBRUSH16\n{\nUINT16 lbStyle;\n__unaligned __declspec(align(1)) COLORREF lbColor;\nINT16 lbHatch;\n}\n",
   "id": 18374686479672027910,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lbStyle",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 2
+      "size": 2,
+      "type": "UINT16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lbColor",
       "offset": 2,
       "offset_hex": "0x2",
-      "size": 4
+      "size": 4,
+      "type": "COLORREF"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lbHatch",
       "offset": 6,
       "offset_hex": "0x6",
-      "size": 2
+      "size": 2,
+      "type": "INT16"
     }
   ],
   "name": "LOGBRUSH16",
+  "ordinal": 1576,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 8
 }

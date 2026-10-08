@@ -118,9 +118,9 @@
 0x544DB0: cmp     edi, ebx
 0x544DB2: jz      short loc_544DC4
 0x544DB4: mov     ecx, edi
-0x544DB6: call    sub_959EC0
+0x544DB6: call    NiPickContext_dtor; Verified NiPick context destructor: clears/releases hit records, frees the record-pointer array, and releases its retained root object.
 0x544DBB: push    edi
-0x544DBC: call    FormHeapFree
+0x544DBC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x544DC1: add     esp, 4
 0x544DC4: mov     edi, [esi+1Ch]
 0x544DC7: cmp     edi, ebx
@@ -214,3 +214,27 @@
 0x544E95: pop     ebx
 0x544E96: add     esp, 10h
 0x544E99: retn
+0x9BA850: mov     ecx, [ebp-10h]; this
+0x9BA853: jmp     ??1SkyObject@@UAE@XZ; SkyObject::~SkyObject(void)
+0x9BA858: mov     ecx, [ebp-10h]
+0x9BA85B: add     ecx, 8; slot
+0x9BA85E: jmp     NiPointerSlot_Release
+0x9BA863: mov     ecx, [ebp-10h]
+0x9BA866: add     ecx, 0Ch; slot
+0x9BA869: jmp     NiPointerSlot_Release
+0x9BA86E: mov     ecx, [ebp-10h]
+0x9BA871: add     ecx, 10h; slot
+0x9BA874: jmp     NiPointerSlot_Release
+0x9BA879: mov     ecx, [ebp-10h]
+0x9BA87C: add     ecx, 14h; slot
+0x9BA87F: jmp     NiPointerSlot_Release
+0x9BA884: mov     ecx, [ebp-10h]
+0x9BA887: add     ecx, 1Ch; slot
+0x9BA88A: jmp     NiPointerSlot_Release
+0x9BA88F: mov     edx, [esp+arg_4]
+0x9BA893: lea     eax, [edx-14h]
+0x9BA896: mov     ecx, [edx-18h]
+0x9BA899: xor     ecx, eax
+0x9BA89B: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BA8A0: mov     eax, offset stru_AE4944
+0x9BA8A5: jmp     ___CxxFrameHandler3

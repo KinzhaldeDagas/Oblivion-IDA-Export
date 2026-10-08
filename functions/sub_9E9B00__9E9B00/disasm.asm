@@ -2,7 +2,7 @@
 0x9E9B06: push    ecx
 0x9E9B07: fstp    [esp+4+var_4]; float
 0x9E9B0A: push    offset aFarrowweakspee; "fArrowWeakSpeed"
-0x9E9B0F: mov     ecx, offset flt_B37090
+0x9E9B0F: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+3B8h)
 0x9E9B14: call    GameSetting_ConstrAndReg_float
 0x9E9B19: push    offset sub_A1E840; void (__cdecl *)()
 0x9E9B1E: call    _atexit

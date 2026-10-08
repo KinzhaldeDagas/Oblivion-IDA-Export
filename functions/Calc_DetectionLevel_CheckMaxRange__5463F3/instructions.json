@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5463F3",
-    "line": "cmp     [esp+arg_4C], 0",
+    "line": "cmp     [esp+arg_4C], 0; Rejects targets beyond fSneakMaxDistance; exterior targets scale that limit by fSneakExteriorDistanceMult. The attack/forced-detection path bypasses the range rejection.",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x546421",
-    "line": "jnz     short Calc_DetectionLevel___CalcDistFactor",
+    "line": "jnz     short Calc_DetectionLevel_ApplyDistanceFactor; Builds the normalized distance contribution from current distance and maximum detection range, then passes it through the remaining factors.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x546425",
-    "line": "jnz     short Calc_DetectionLevel___CalcDistFactor",
+    "line": "jnz     short Calc_DetectionLevel_ApplyDistanceFactor; Builds the normalized distance contribution from current distance and maximum detection range, then passes it through the remaining factors.",
     "mnemonic": "jnz",
     "size": 2
   },

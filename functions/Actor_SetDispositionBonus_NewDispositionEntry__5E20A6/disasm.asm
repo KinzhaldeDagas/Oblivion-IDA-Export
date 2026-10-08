@@ -3,7 +3,7 @@
 0x5E20AD: fld     [esp+4+arg_14]
 0x5E20B1: add     esp, 4
 0x5E20B4: mov     esi, eax
-0x5E20B6: call    Double_To_SInt32
+0x5E20B6: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5E20BB: mov     ecx, [esp+arg_10]
 0x5E20BF: mov     [esi+4], ecx
 0x5E20C2: push    esi

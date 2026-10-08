@@ -19,6 +19,6 @@
 0x41131D: fld     dword ptr [ecx+0ECh]
 0x411323: push    ecx
 0x411324: fstp    [esp+18h+a2]; a2
-0x411327: call    SetCameraFOV_0
+0x411327: call    SetCameraFOV_0; MoonSugarEffect decode: SetCameraFOV_0 rebuilds SceneGraph camera frustum, max far/near ratio, camera LODAdjust, and leaves persistent camera state. Avoid for per-frame Moon Sugar wobble.
 0x41132C: add     esp, 10h
 0x41132F: retn

@@ -1,4 +1,4 @@
-0x7C76D0: push    0FFFFFFFFh
+0x7C76D0: push    0FFFFFFFFh; Inverse caster-root removal: match exact light+0x130 in the active list and remove through native list/refcount ownership.
 0x7C76D2: push    offset SEH_7C77C0
 0x7C76D7: mov     eax, large fs:0
 0x7C76DD: push    eax
@@ -14,7 +14,7 @@
 0x7C76F5: mov     ecx, [esi+0F8h]
 0x7C76FB: test    ecx, ecx
 0x7C76FD: jz      loc_7C77A9
-0x7C7703: mov     edx, [esp+1Ch+arg_0]
+0x7C7703: mov     edx, [esp+1Ch+payload]
 0x7C7707: lea     eax, [ecx+8]
 0x7C770A: mov     eax, [eax]
 0x7C770C: test    eax, eax
@@ -31,18 +31,18 @@
 0x7C772B: pop     esi
 0x7C772C: add     esp, 10h
 0x7C772F: retn    4
-0x7C7732: mov     [esp+1Ch+arg_0], eax
+0x7C7732: mov     [esp+1Ch+payload], eax
 0x7C7736: add     eax, 4
 0x7C7739: push    eax; lpAddend
 0x7C773A: call    dword ptr ds:0A28078h
-0x7C7740: lea     eax, [esp+1Ch+arg_0]
-0x7C7744: push    eax
-0x7C7745: lea     ecx, [esp+20h+var_10]
-0x7C7749: push    ecx
-0x7C774A: lea     ecx, [esi+0F4h]
+0x7C7740: lea     eax, [esp+1Ch+payload]
+0x7C7744: push    eax; payload
+0x7C7745: lea     ecx, [esp+20h+result]
+0x7C7749: push    ecx; result
+0x7C774A: lea     ecx, [esi+0F4h]; self
 0x7C7750: mov     [esp+24h+var_4], 0
-0x7C7758: call    sub_7D5F80
-0x7C775D: mov     eax, [esp+1Ch+var_10]
+0x7C7758: call    NiTRefPointerList__RemoveFirstByValue; Searches a refcounted pointer list by payload identity, removes the first matching node through RemovePosition, and returns a strong reference. Used for active/full shadow lights and receiver geometry removal.
+0x7C775D: mov     eax, [esp+1Ch+result]
 0x7C7761: test    eax, eax
 0x7C7763: mov     edi, ds:0A2807Ch
 0x7C7769: jz      short loc_7C7785
@@ -59,7 +59,7 @@
 0x7C777F: push    1
 0x7C7781: mov     ecx, esi
 0x7C7783: call    eax
-0x7C7785: mov     esi, [esp+1Ch+arg_0]
+0x7C7785: mov     esi, [esp+1Ch+payload]
 0x7C7789: test    esi, esi
 0x7C778B: mov     [esp+1Ch+var_4], 0FFFFFFFFh
 0x7C7793: jz      short loc_7C77A9
@@ -80,3 +80,12 @@
 0x7C77B6: pop     esi
 0x7C77B7: add     esp, 10h
 0x7C77BA: retn    4
+0x9A9F20: lea     ecx, [ebp+4]; slot
+0x9A9F23: jmp     NiPointerSlot_Release
+0x9A9F28: mov     edx, [esp+arg_4]
+0x9A9F2C: lea     eax, [edx-0Ch]
+0x9A9F2F: mov     ecx, [edx-10h]
+0x9A9F32: xor     ecx, eax
+0x9A9F34: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9A9F39: mov     eax, offset stru_AD6FAC
+0x9A9F3E: jmp     ___CxxFrameHandler3

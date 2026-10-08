@@ -1,4 +1,4 @@
-0x440F70: lea     eax, [ecx+8Ch]
+0x440F70: lea     eax, [ecx+8Ch]; Lookup in the global dead-count list: compare each entry's form pointer with the supplied Actor Base and return its 16-bit count; missing entries return 0.
 0x440F76: test    eax, eax
 0x440F78: jz      short loc_440F91
 0x440F7A: mov     edx, [esp+arg_0]

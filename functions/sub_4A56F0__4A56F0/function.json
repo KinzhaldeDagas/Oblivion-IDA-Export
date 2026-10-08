@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 2,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4A56F0",
+      "0x4A5707"
+    ]
+  ],
+  "chunks_sha256": "cdb68df4abcce2c9417bf33536baa2e28da0c7276c828449d87b82db054057bf",
+  "comment_regular": "Verified: writes region-data RDAT header and serializes weatherList as RDWT; Climate instead serializes the same EntryData abstraction as WLS(T).",
+  "comment_repeatable": "Verified: writes region-data RDAT header and serializes weatherList as RDWT; Climate instead serializes the same EntryData abstraction as WLS(T).",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4A56F0",
+  "display_name": "TESRegionDataWeather_Save",
   "end_ea": "0x4A5707",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4A56F0",
+  "name": "TESRegionDataWeather_Save",
   "segment": ".text",
   "sha256": "cdb68df4abcce2c9417bf33536baa2e28da0c7276c828449d87b82db054057bf",
   "size": 23,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4A56F0",
-  "type": "void __thiscall(_BYTE *this)",
+  "total_chunk_size": 23,
+  "type": "void __thiscall(TESRegionDataWeather *this)",
   "xrefs_from_count": 9,
   "xrefs_to_count": 1
 }

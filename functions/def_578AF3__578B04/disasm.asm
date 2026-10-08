@@ -80,7 +80,7 @@
 0x578BD6: mov     [esi+30h], eax
 0x578BD9: mov     ecx, [esp+arg_3C]
 0x578BDD: push    ecx
-0x578BDE: call    FormHeapFree
+0x578BDE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x578BE3: add     esp, 4
 0x578BE6: mov     eax, ebp
 0x578BE8: mov     ecx, [esp+arg_58]

@@ -1,1 +1,1 @@
-PVOID
+typedef void *PVOID;

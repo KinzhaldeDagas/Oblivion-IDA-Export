@@ -19,11 +19,11 @@
 0x559EC8: mov     ecx, edi
 0x559ECA: call    sub_559A70
 0x559ECF: push    edi
-0x559ED0: call    FormHeapFree
+0x559ED0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x559ED5: add     esp, 4
 0x559ED8: mov     eax, [esi]
 0x559EDA: push    eax
-0x559EDB: call    FormHeapFree
+0x559EDB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x559EE0: add     esp, 4
 0x559EE3: mov     dword ptr [esi], 0
 0x559EE9: mov     word ptr [esi+6], 0
@@ -35,3 +35,12 @@
 0x559F02: pop     esi
 0x559F03: add     esp, 10h
 0x559F06: retn
+0x9BE320: mov     ecx, [ebp-10h]; void *
+0x9BE323: jmp     BSStringT_Clear
+0x9BE328: mov     edx, [esp+arg_4]
+0x9BE32C: lea     eax, [edx-0Ch]
+0x9BE32F: mov     ecx, [edx-10h]
+0x9BE332: xor     ecx, eax
+0x9BE334: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BE339: mov     eax, offset stru_AE7AA4
+0x9BE33E: jmp     ___CxxFrameHandler3

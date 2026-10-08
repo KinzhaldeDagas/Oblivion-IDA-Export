@@ -1,1 +1,1 @@
-PCRYPTKEY
+typedef tagCRYPTKEY *PCRYPTKEY;

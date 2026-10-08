@@ -1,29 +1,20 @@
-unsigned __int8 __thiscall sub_56A290(char *Src)
+void __thiscall sub_56A290(char *Src)
 {
-  unsigned __int8 result; // al
-  int v3; // esi
-  size_t v4; // [esp-4h] [ebp-Ch]
-  size_t v5; // [esp-4h] [ebp-Ch]
-  size_t v6; // [esp-4h] [ebp-Ch]
-  int v7; // [esp+4h] [ebp-4h] BYREF
+  int v2; // esi
+  unsigned int source; // [esp+4h] [ebp-4h] BYREF
 
-  LODWORD(v4) = 1;
-  SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, Src, v4);
-  LODWORD(v5) = 4;
-  SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, Src + 8, v5);
-  result = *Src;
-  if ( (unsigned __int8)*Src <= 1u )
+  SaveLoad_SaveData(g_TESSaveLoadGame, Src, 1u); /*0x56a29d*/
+  SaveLoad_SaveData(g_TESSaveLoadGame, Src + 8, 4u); /*0x56a2ae*/
+  if ( (unsigned __int8)*Src <= 1u ) /*0x56a2b7*/
   {
-    v3 = *((_DWORD *)Src + 1);
-    v7 = 0;
-    if ( v3 )
-      v7 = *(_DWORD *)(v3 + 0xC);
-    return SaveLoad_SaveFormID(SaveLoad_CurrentSavegame, (int)&v7, 4u);
+    v2 = *((_DWORD *)Src + 1); /*0x56a2d1*/
+    source = 0; /*0x56a2d6*/
+    if ( v2 ) /*0x56a2de*/
+      source = *(_DWORD *)(v2 + 0xC); /*0x56a2e3*/
+    SaveLoad_SaveFormID(g_TESSaveLoadGame, &source, 4u); /*0x56a2f4*/
   }
-  else if ( result == 2 )
+  else if ( *Src == 2 ) /*0x56a2bb*/
   {
-    LODWORD(v6) = 4;
-    return (unsigned __int8)SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, Src + 4, v6);
+    SaveLoad_SaveData(g_TESSaveLoadGame, Src + 4, 4u); /*0x56a2c9*/
   }
-  return result;
 }

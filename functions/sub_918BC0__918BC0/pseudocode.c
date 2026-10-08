@@ -8,29 +8,29 @@ int __cdecl sub_918BC0(int a1)
   _DWORD *v7[4]; // [esp+1Ch] [ebp-20h] BYREF
   _DWORD *v8[4]; // [esp+2Ch] [ebp-10h] BYREF
 
-  v4 = 0;
-  v5 = 0;
-  v6 = 0x80000000;
-  sub_948750(v7, (int)&v4);
-  sub_9181B0(v7, 0x90);
-  sub_918440(v7, dword_B3005C);
-  sub_918440(v7, dword_B30058);
-  v1 = sub_8B1860("PC");
-  if ( v1 > 0xFFFF )
-    LOBYTE(v1) = 0xFF;
-  sub_918420(v7, v1);
-  sub_918390(v7);
-  sub_948770(v8, a1);
-  sub_918440(v8, v5);
-  sub_918390(v8);
-  sub_918180(v8);
-  sub_918180(v7);
-  if ( v6 >= 0 )
+  v4 = 0; /*0x918bcd*/
+  v5 = 0; /*0x918bd5*/
+  v6 = 0x80000000; /*0x918bdd*/
+  sub_948750(v7, (int)&v4); /*0x918be5*/
+  sub_9181B0(v7, 0x90); /*0x918bf3*/
+  sub_918440(v7, dword_B3005C); /*0x918c03*/
+  sub_918440(v7, dword_B30058); /*0x918c13*/
+  v1 = sub_8B1860("PC"); /*0x918c22*/
+  if ( v1 > 0xFFFF ) /*0x918c2d*/
+    LOBYTE(v1) = 0xFF; /*0x918c2f*/
+  sub_918420(v7, v1); /*0x918c39*/
+  sub_918390(v7); /*0x918c48*/
+  sub_948770(v8, a1); /*0x918c56*/
+  sub_918440(v8, v5); /*0x918c64*/
+  sub_918390(v8); /*0x918c77*/
+  sub_918180(v8); /*0x918c80*/
+  sub_918180(v7); /*0x918c89*/
+  if ( v6 >= 0 ) /*0x918c95*/
   {
-    v2 = *(_DWORD *)(*((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + TlsIndex) + 0x19C);
-    if ( !v2 )
-      v2 = dword_BA7D9C;
-    sub_8A75D0(v2, v4, v6 & 0x3FFFFFFF, 0x14);
+    v2 = *(_DWORD *)(*((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + MEMORY[0xBA9DE4]) + 0x19C); /*0x918ca7*/
+    if ( !v2 ) /*0x918caf*/
+      v2 = unk_BA7D9C; /*0x918cb1*/
+    sub_8A75D0(v2, v4, v6 & 0x3FFFFFFF, 0x14); /*0x918cc3*/
   }
-  return 0;
+  return 0; /*0x918c94*/
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6C9CB0",
-    "line": "xor     edx, edx",
+    "line": "xor     edx, edx; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.",
     "mnemonic": "xor",
     "size": 2
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x6C9CBE",
-    "line": "fld     [esp+arg_0]",
+    "line": "fld     [esp+easeOutTime]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x6C9CCF",
-    "line": "cmp     [esp+arg_4], dl",
+    "line": "cmp     [esp+transition], dl",
     "mnemonic": "cmp",
     "size": 4
   },

@@ -3,7 +3,7 @@
 0x6DB852: mov     edi, [esp+8+arg0]
 0x6DB856: push    edi; arg0
 0x6DB857: mov     esi, ecx
-0x6DB859: call    sub_700750
+0x6DB859: call    sub_700750; Pass227: NiScreenTexture vtable +0x38 map insertion helper; inserts object into map context, not a draw call.
 0x6DB85E: mov     ecx, [esi+18h]
 0x6DB861: test    ecx, ecx
 0x6DB863: jz      short loc_6DB86D

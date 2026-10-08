@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4A4A80",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified: Map region data constructor initializes base and assigns Map vtable; mapName defaults to 'Default Region Name'.",
     "mnemonic": "push",
     "size": 2
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x4A4AA8",
-    "line": "call    sub_4A34C0",
+    "line": "call    TESRegionData_InitializeBase",
     "mnemonic": "call",
     "size": 5
   },
@@ -190,5 +190,77 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9B27B0",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B27B3",
+    "line": "jmp     TESRegionData_SetBaseVTable",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B27B8",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B27BB",
+    "line": "add     ecx, 8; void *",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B27BE",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B27C3",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B27C7",
+    "line": "lea     eax, [edx-8]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B27CA",
+    "line": "mov     ecx, [edx-0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B27CD",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B27CF",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B27D4",
+    "line": "mov     eax, offset stru_ADE748",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B27D9",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

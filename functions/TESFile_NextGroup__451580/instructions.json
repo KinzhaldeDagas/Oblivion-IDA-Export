@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x451580",
-    "line": "mov     edx, [ecx+23Ch]",
+    "line": "mov     edx, [ecx+23Ch]; MEF v20 fix: TESFile::NextGroup short-GRUP guard. Reject lengths below 0x14 before subtracting the group header and tail-calling TESFile_NextRecord.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x451590",
-    "line": "mov     [ecx+23Ch], eax",
+    "line": "mov     [ecx+23Ch], eax; EngineIssues review: TESFile::NextGroup subtracts 0x14 from group length without checking length >= 0x14 before handing off to TESFile_NextRecord.",
     "mnemonic": "mov",
     "size": 6
   },

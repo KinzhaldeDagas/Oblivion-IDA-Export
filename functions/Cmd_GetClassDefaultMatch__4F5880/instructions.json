@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4F5880",
-    "line": "fldz",
+    "line": "fldz; Script command GetClassDefaultMatch / GetIsClassDefault: return 2.0 when current class exactly equals the recommended/default class, 1.0 when only TESClass specialization matches, otherwise 0.0.",
     "mnemonic": "fldz",
     "size": 2
   },
@@ -31,13 +31,13 @@
   },
   {
     "ea": "0x4F588A",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4F5890",
-    "line": "call    Actor_GetDefaultClass",
+    "line": "call    Player_GetDefaultClassRecommendation; Resolve Oblivion's default/recommended class. If the actor already has a non-sentinel class, return it. Otherwise classify all 21 deferred chargen skill-use totals by TESSkill specialization, normalize the three shares to seven implied major slots, and select/cache a preset class.",
     "mnemonic": "call",
     "size": 5
   },
@@ -49,13 +49,13 @@
   },
   {
     "ea": "0x4F589B",
-    "line": "mov     esi, eax",
+    "line": "mov     esi, eax; Exact current-class versus recommended-class match yields 2.0.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4F589D",
-    "line": "call    Actor_GetBaseClass",
+    "line": "call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x4F58B9",
-    "line": "call    Actor_GetBaseClass",
+    "line": "call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.",
     "mnemonic": "call",
     "size": 5
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x4F58C0",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -133,13 +133,13 @@
   },
   {
     "ea": "0x4F58C7",
-    "line": "mov     ebx, eax",
+    "line": "mov     ebx, eax; If classes differ, compare their +0x40 specialization values through the neutral shared accessor; equal specialization yields 1.0.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4F58C9",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },

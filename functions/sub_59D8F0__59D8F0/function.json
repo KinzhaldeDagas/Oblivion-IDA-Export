@@ -1,19 +1,32 @@
 {
-  "callees_count": 14,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
+  "chunks": [
+    [
+      "0x59D8F0",
+      "0x59D9C6"
+    ]
+  ],
+  "chunks_sha256": "8fa855b86b84550b50429d257fe297d1a8eb5aacdbbb13813a8b96144203fc14",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "Verified: AttachTileByID vtable slot +4, binds IDs 1..9,12..16 to fields 0x28..0x5C, ignoring unknown IDs (including custom 48). Constructor 0x59E4E0 zeroes those fields. Fallout 0x8252FCF8 named analogue binds only IDs <4 to pTiles; layouts differ. OblivionDialogMenuTileBindingsView is a partial verified view, not a complete class layout.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_59D8F0",
+  "display_name": "DialogMenu::AttachTileByID",
   "end_ea": "0x59D9C6",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_59D8F0",
+  "name": "DialogMenu::AttachTileByID",
   "segment": ".text",
   "sha256": "8fa855b86b84550b50429d257fe297d1a8eb5aacdbbb13813a8b96144203fc14",
   "size": 214,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x59D8F0",
-  "type": "int __thiscall(_DWORD *this, int, int)",
+  "total_chunk_size": 214,
+  "type": "void __thiscall(OblivionDialogMenuTileBindingsView *this, unsigned int tileID, Tile *tile)",
   "xrefs_from_count": 71,
   "xrefs_to_count": 1
 }

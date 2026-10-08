@@ -1,4 +1,4 @@
-0x7C5AB0: sub     esp, 8
+0x7C5AB0: sub     esp, 8; Seed ShadowSceneNode+0x104 saved-next cursor and return the first active-light payload.
 0x7C5AB3: push    ebx
 0x7C5AB4: xor     ebx, ebx
 0x7C5AB6: push    edi
@@ -24,7 +24,7 @@
 0x7C5AE8: lea     edx, [esp+18h+var_4]
 0x7C5AEC: push    edx
 0x7C5AED: mov     ecx, ebp
-0x7C5AEF: call    sub_405AD0
+0x7C5AEF: call    ShadowSceneLight_GetLightRef
 0x7C5AF4: or      ebx, 1
 0x7C5AF7: cmp     dword ptr [eax], 0
 0x7C5AFA: jnz     short loc_7C5B03

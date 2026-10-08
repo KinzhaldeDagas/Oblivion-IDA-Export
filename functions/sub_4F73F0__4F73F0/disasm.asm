@@ -13,7 +13,7 @@
 0x4F740E: test    al, al
 0x4F7410: jz      short loc_4F7463
 0x4F7412: mov     ecx, esi; this
-0x4F7414: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x4F7414: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x4F7419: cmp     eax, 5
 0x4F741C: jnz     short loc_4F7422
 0x4F741E: fld1

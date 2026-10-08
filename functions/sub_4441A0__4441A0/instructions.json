@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x4441D5",
-    "line": "call    sub_4F1630",
+    "line": "call    TESWorldSpace_LoadExteriorCellAtCoord; Verified: exterior-cell loader checks cellMap first, searches master files using cellOffsetsArray fast path or GRUP/CELL fallback, creates a missing TESObjectCELL, post-fixes it, then attaches worldspace-indexed references.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x444224",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -745,13 +745,13 @@
   },
   {
     "ea": "0x44431A",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x44431C",
-    "line": "call    sub_4E7610",
+    "line": "call    TESPathGrid_LoadOrResolveGraph; Verified exterior cell-loading path: after obtaining the cell's TESPathGrid, invokes TESPathGrid_LoadOrResolveGraph to load serialized chunks if absent, resolve deferred cross-cell links, and conditionally rebuild graph rendering.",
     "mnemonic": "call",
     "size": 5
   },

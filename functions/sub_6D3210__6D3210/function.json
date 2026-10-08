@@ -1,19 +1,36 @@
 {
-  "callees_count": 37,
-  "callers_count": 7,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_6D3210",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
+  "callers_count": 9,
+  "chunks": [
+    [
+      "0x6D3210",
+      "0x6D353F"
+    ],
+    [
+      "0x9C7A20",
+      "0x9C7A46"
+    ]
+  ],
+  "chunks_sha256": "b443ac1296cec2ebd2c703f3ed1b4115ef114b545c7e38469d83280fe7eed29f",
+  "comment_regular": "Oblivion generic authored-key range copier. For non-type-4 tracks, counts existing timestamps inclusively in [start,end], allocates through content/type dispatch, type-copies each selected record, and rebases its timestamp to time-start. Does not synthesize boundary samples. For rotation type 4, recursively slices three scalar axes, allocates one 0x4C outer Euler record, and installs the axis results.",
+  "comment_repeatable": "Oblivion generic authored-key range copier. For non-type-4 tracks, counts existing timestamps inclusively in [start,end], allocates through content/type dispatch, type-copies each selected record, and rebases its timestamp to time-start. Does not synthesize boundary samples. For rotation type 4, recursively slices three scalar axes, allocates one 0x4C outer Euler record, and installs the axis results.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "NiAnimationKey_CopyRangeRebased",
   "end_ea": "0x6D353F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6D3210",
+  "name": "NiAnimationKey_CopyRangeRebased",
   "segment": ".text",
   "sha256": "080f163742ca5ec820191b21c71ae212ce8014bcbaf0103d3c44ac6cdb607477",
   "size": 815,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6D3210",
+  "total_chunk_size": 853,
   "type": "void __cdecl(int, int, float *, unsigned int, float, float, int **, _DWORD *)",
-  "xrefs_from_count": 306,
+  "xrefs_from_count": 320,
   "xrefs_to_count": 9
 }

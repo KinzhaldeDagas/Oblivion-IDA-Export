@@ -1,13 +1,14 @@
-_DWORD *__thiscall sub_7ED160(_DWORD *this)
+ShadowSceneLight_DecodedLayout *__thiscall BSShaderLightingProperty_GetFirstLightUnfiltered(
+        MEF_LightingPropertyIterationView32 *self)
 {
-  _DWORD *result; // eax
+  ShadowSceneLight_DecodedLayout *result; // eax
 
-  result = (_DWORD *)*(this + 0x1C);
-  *(this + 0x1F) = result;
-  if ( result )
+  result = (ShadowSceneLight_DecodedLayout *)self->lights.lightListHead_70; /*0x7ed160*/
+  self->cursor_7C = (MEF_RefListNode32 *)result; /*0x7ed165*/
+  if ( result ) /*0x7ed168*/
   {
-    *(this + 0x1F) = *result;
-    return (_DWORD *)result[2];
+    self->cursor_7C = *(MEF_RefListNode32 **)result->base_000; /*0x7ed16d*/
+    return *(ShadowSceneLight_DecodedLayout **)&result->base_000[8]; /*0x7ed170*/
   }
-  return result;
+  return result; /*0x7ed16a*/
 }

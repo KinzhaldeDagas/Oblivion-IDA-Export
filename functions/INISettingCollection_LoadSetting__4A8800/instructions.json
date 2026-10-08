@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x4A88A7",
-    "line": "call    dword ptr ds:0A280B4h",
+    "line": "call    dword ptr ds:0A280B4h; Performance audit resolution: Oblivion loads string INI settings, including sArchiveList:Archive, through GetPrivateProfileStringA with nSize=0x100. The later 0x8000 archive-list initial copy is therefore bounded by this authoritative producer; no extra copy hook required.",
     "mnemonic": "call",
     "size": 6
   },

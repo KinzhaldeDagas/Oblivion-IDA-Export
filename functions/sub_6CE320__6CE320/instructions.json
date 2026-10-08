@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6CE320",
-    "line": "push    esi",
+    "line": "push    esi; Loads NiTimeController state. For stream versions >= 0x0A010068, reads and smart-assigns the serialized interpolator reference at +0x3C; older formats leave concrete controllers to migrate legacy data.",
     "mnemonic": "push",
     "size": 1
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x6CE329",
-    "line": "call    sub_6D0550",
+    "line": "call    NiInterpController_LoadBinary; Loads NiTimeController, then for stream versions 0x0A010068 through 0x0A01006C reads a transitional Boolean and maps it to controller flag 0x20. Other versions rely on the base flag representation/migration.",
     "mnemonic": "call",
     "size": 5
   },

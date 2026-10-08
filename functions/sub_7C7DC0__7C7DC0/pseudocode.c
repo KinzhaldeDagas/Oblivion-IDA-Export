@@ -1,38 +1,39 @@
-void __thiscall sub_7C7DC0(_DWORD *this, int a2)
+// Find a native full-list ShadowSceneLight whose backing NiLight identity equals the supplied source, then remove that entry.
+void __thiscall ShadowSceneNode_RemoveFullLightBySource(ShadowSceneNode_DecodedLayout *self, void *backingLight)
 {
-  _DWORD *v2; // ebp
+  _DWORD *fullListHead_E8; // ebp
   _DWORD *v3; // esi
   bool v4; // bl
   void (__thiscall ***v5)(_DWORD, int); // edi
   int v6; // [esp+0h] [ebp-8h] BYREF
-  _DWORD *v7; // [esp+4h] [ebp-4h]
+  int **v7; // [esp+4h] [ebp-4h]
 
-  v7 = this;
-  if ( a2 )
+  v7 = (int **)self; /*0x7c7dc8*/
+  if ( backingLight ) /*0x7c7dcc*/
   {
-    v2 = (_DWORD *)*(this + 0x3A);
-    if ( v2 )
+    fullListHead_E8 = self->fullListHead_E8; /*0x7c7dcf*/
+    if ( fullListHead_E8 ) /*0x7c7dd7*/
     {
-      while ( 1 )
+      while ( 1 ) /*0x7c7de0*/
       {
-        v3 = (_DWORD *)v2[2];
-        v2 = (_DWORD *)*v2;
-        if ( v3 )
+        v3 = (_DWORD *)fullListHead_E8[2]; /*0x7c7de0*/
+        fullListHead_E8 = (_DWORD *)*fullListHead_E8; /*0x7c7de8*/
+        if ( v3 ) /*0x7c7deb*/
         {
-          v4 = *sub_405AD0(v3, &v6) == a2;
-          if ( v6 )
+          v4 = *ShadowSceneLight_GetLightRef(v3, &v6) == (_DWORD)backingLight; /*0x7c7e03*/
+          if ( v6 ) /*0x7c7e08*/
           {
-            v5 = (void (__thiscall ***)(_DWORD, int))v6;
-            if ( !InterlockedDecrement((volatile LONG *)(v6 + 4)) )
-              (**v5)(v5, 1);
+            v5 = (void (__thiscall ***)(_DWORD, int))v6; /*0x7c7e0a*/
+            if ( !InterlockedDecrement((volatile LONG *)(v6 + 4)) ) /*0x7c7e10*/
+              (**v5)(v5, 1); /*0x7c7e26*/
           }
-          if ( v4 )
-            break;
+          if ( v4 ) /*0x7c7e2a*/
+            break; /*0x7c7e2a*/
         }
-        if ( !v2 )
-          return;
+        if ( !fullListHead_E8 ) /*0x7c7e2e*/
+          return; /*0x7c7e2e*/
       }
-      sub_7C77C0(v7, (LONG)v3);
+      ShadowSceneNode_RemoveFullLight(v7, (LONG)v3);// Remove the matching full-list ShadowSceneLight after backing-source identity comparison. /*0x7c7e3f*/
     }
   }
 }

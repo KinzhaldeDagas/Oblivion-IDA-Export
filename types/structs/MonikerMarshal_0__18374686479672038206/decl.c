@@ -1,1 +1,1 @@
-MonikerMarshal_0
+typedef MonikerMarshal MonikerMarshal_0;

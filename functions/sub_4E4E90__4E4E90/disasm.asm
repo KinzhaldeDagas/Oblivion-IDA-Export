@@ -1,10 +1,10 @@
-0x4E4E90: push    edi
+0x4E4E90: push    edi; Verified scans the TESPathGrid point array for pointer identity and returns its u16 array index; returns 0xFFFFFFFF if no point array or no matching point.
 0x4E4E91: mov     edi, [ecx+24h]
 0x4E4E94: or      eax, 0FFFFFFFFh
 0x4E4E97: test    edi, edi
 0x4E4E99: jz      short loc_4E4ECA
 0x4E4E9B: push    ebx
-0x4E4E9C: mov     ebx, [esp+8+arg_0]
+0x4E4E9C: mov     ebx, [esp+8+point]
 0x4E4EA0: test    ebx, ebx
 0x4E4EA2: jz      short loc_4E4EC9
 0x4E4EA4: push    esi

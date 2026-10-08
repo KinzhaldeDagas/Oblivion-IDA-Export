@@ -1,4 +1,4 @@
-BSStringT *sub_A02E80()
+NiRTTI *sub_A02E80()
 {
-  return sub_70E220((BSStringT *)dword_B3CD7C, "NiMultiTargetTransformController", (int)dword_B3CDF8);
+  return NiRTTI_Constructor(&stru_B3CD7C, "NiMultiTargetTransformController", &stru_B3CDF8); /*0xa02e94*/
 }

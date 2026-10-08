@@ -1,1 +1,1 @@
-GUID
+typedef _GUID GUID;

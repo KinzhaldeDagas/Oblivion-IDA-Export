@@ -1,3 +1,4 @@
+// Verified function body: Cmd_GetGameSetting parses a key and looks up g_GameSettingsByName, formatting string settings for output. Candidate availability only: no direct reference to this function or its "GetGameSetting" string was found in the inspected command table, so do not claim it is registered/reachable as a console command.
 void __cdecl Cmd_GetGameSetting(
         ParamInfo *a1,
         UInt8 *a2,
@@ -8,53 +9,53 @@ void __cdecl Cmd_GetGameSetting(
         double *a7,
         UInt32 *a8)
 {
-  float *v10; // esi
-  int v11; // eax
-  int v12; // eax
-  const char *v13; // eax
-  int v14; // edx
+  float *v8; // esi
+  int v9; // eax
+  int v10; // eax
+  const char *v11; // eax
+  int v12; // edx
   void *l; // [esp+18h] [ebp-20Ch] BYREF
   UInt32 *a3; // [esp+1Ch] [ebp-208h]
-  UInt16 v17; // [esp+20h] [ebp-204h] BYREF
+  UInt16 v15; // [esp+20h] [ebp-204h] BYREF
 
-  a3 = a8;
-  l = a6;
-  *a7 = 0.0;
-  if ( Script_ExtractArgs(a1, a2, a3, a4, argC, a5, a6, &v17) )
+  a3 = a8; /*0x51400b*/
+  l = a6; /*0x514014*/
+  *a7 = 0.0; /*0x514024*/
+  if ( Script_ExtractArgs(a1, a2, a3, a4, argC, a5, a6, &v15) ) /*0x514030*/
   {
-    l = 0;
-    NiTMap_GetAt(&dword_B35574, (int)&v17, &l);
-    v10 = (float *)l;
-    if ( l )
+    l = 0; /*0x51404f*/
+    NiTMap_GetAt(&g_GameSettingsByName, (int)&v15, &l); /*0x514057*/
+    v8 = (float *)l; /*0x51405c*/
+    if ( l )                                    // MorrowindDialogueText: Cmd_GetGameSetting reads dword_B35574 setting map; string settings are printed via setting value pointer. /*0x514062*/
     {
-      v11 = Setting_GetTypeFromName(*((char **)l + 1)) - 3;
-      if ( v11 )
+      v9 = Setting_GetTypeFromName(*((char **)l + 1)) - 3; /*0x514070*/
+      if ( v9 ) /*0x514073*/
       {
-        v12 = v11 - 2;
-        if ( v12 )
+        v10 = v9 - 2; /*0x514075*/
+        if ( v10 ) /*0x514078*/
         {
-          if ( v12 == 1 )
-            Interface_ConsolePrint("GameSetting %s >> '%s'", *((_DWORD *)v10 + 1), *(_DWORD *)v10);
+          if ( v10 == 1 ) /*0x51407d*/
+            Interface_ConsolePrint("GameSetting %s >> '%s'", *((_DWORD *)v8 + 1), *(_DWORD *)v8); /*0x51409e*/
           else
-            Interface_ConsolePrint("GameSetting %s >> UNKNOWN TYPE", *((const char **)v10 + 1));
+            Interface_ConsolePrint("GameSetting %s >> UNKNOWN TYPE", *((const char **)v8 + 1)); /*0x514088*/
         }
         else
         {
-          v13 = *((const char **)v10 + 1);
-          *a7 = *v10;
-          Interface_ConsolePrint("GameSetting %s >> %.2f", v13, *v10);
+          v11 = *((const char **)v8 + 1); /*0x5140a2*/
+          *a7 = *v8; /*0x5140a5*/
+          Interface_ConsolePrint("GameSetting %s >> %.2f", v11, *v8); /*0x5140b5*/
         }
       }
       else
       {
-        v14 = *((_DWORD *)v10 + 1);
-        *a7 = (double)*(int *)v10;
-        Interface_ConsolePrint("GameSetting %s >> %i", v14, *(_DWORD *)v10);
+        v12 = *((_DWORD *)v8 + 1); /*0x5140c1*/
+        *a7 = (double)*(int *)v8; /*0x5140c4*/
+        Interface_ConsolePrint("GameSetting %s >> %i", v12, *(_DWORD *)v8); /*0x5140cf*/
       }
     }
     else
     {
-      Interface_ConsolePrint("GameSetting %s >> NOT FOUND", &v17);
+      Interface_ConsolePrint("GameSetting %s >> NOT FOUND", &v15); /*0x5140dd*/
     }
   }
 }

@@ -52,21 +52,21 @@
 0x631E67: call    TESPackage_LocationData_SetRadius
 0x631E6C: push    esi
 0x631E6D: mov     ecx, edi
-0x631E6F: call    TESPackage_SetLocation
+0x631E6F: call    TESPackage_SetLocation; 3DTheft decode: TESPackage_SetLocation allocates package->location when needed and copies a 0x0C LocationData record; null source clears location data.
 0x631E74: test    esi, esi
 0x631E76: jz      short loc_631E88
 0x631E78: mov     ecx, esi
 0x631E7A: call    TESPackage_LocationData_destr
 0x631E7F: push    esi
-0x631E80: call    FormHeapFree
+0x631E80: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x631E85: add     esp, 4
 0x631E88: mov     ecx, edi
-0x631E8A: call    sub_5672A0
+0x631E8A: call    sub_5672A0; 3DTheft decode: TESPackage procedure-array resolver is a mutator. It writes TESPackage+0x18/procedureArrayIndex directly; callers should not use EAX as the row result.
 0x631E8F: mov     ecx, [esp+1Ch+arg_0]; this
 0x631E93: push    1; a4
 0x631E95: push    1; a3
 0x631E97: push    edi; a2
-0x631E98: call    Actor_AddPackage?
+0x631E98: call    Actor_AddPackage?; 3DTheft: xrefs ignore this function's return value; use current package/process state after call, not AL/EAX, as the package assignment result.
 0x631E9D: mov     ecx, [esp+1Ch+var_C]
 0x631EA1: mov     large fs:0, ecx
 0x631EA8: pop     ecx
@@ -74,3 +74,20 @@
 0x631EAA: pop     esi
 0x631EAB: add     esp, 10h
 0x631EAE: retn    8
+0x9D00B0: mov     eax, [ebp-10h]
+0x9D00B3: push    eax
+0x9D00B4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D00B9: pop     ecx
+0x9D00BA: retn
+0x9D00BB: mov     eax, [ebp-10h]
+0x9D00BE: push    eax
+0x9D00BF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D00C4: pop     ecx
+0x9D00C5: retn
+0x9D00C6: mov     edx, [esp+arg_4]
+0x9D00CA: lea     eax, [edx-0Ch]
+0x9D00CD: mov     ecx, [edx-10h]
+0x9D00D0: xor     ecx, eax
+0x9D00D2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D00D7: mov     eax, offset stru_AF8B40
+0x9D00DC: jmp     ___CxxFrameHandler3

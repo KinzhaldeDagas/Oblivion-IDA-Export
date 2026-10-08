@@ -1,1 +1,1 @@
-PCInterfaceStubVtblList
+typedef tagCInterfaceStubVtbl *PCInterfaceStubVtblList;

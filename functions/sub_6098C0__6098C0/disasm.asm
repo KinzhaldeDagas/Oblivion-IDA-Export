@@ -1,4 +1,4 @@
-0x6098C0: push    esi
+0x6098C0: push    esi; Collision state 4: reconstruct fallback settling against an optional Actor target, inherit its proxy collision group when possible, otherwise use the shared settled group, then apply saved direction/placement to the collision object.
 0x6098C1: push    edi
 0x6098C2: mov     edi, ecx
 0x6098C4: mov     eax, [edi]
@@ -12,7 +12,7 @@
 0x6098DC: mov     ecx, edi
 0x6098DE: call    edx
 0x6098E0: push    eax; a1
-0x6098E1: call    sub_88D070
+0x6098E1: call    sub_88D070; ODismemberment: bhkBlendCollisionObject traversal entry. Requires bhkBlendCollisionObject or forced flag; queues callback off off_B2E314 with state payload including a2 and a3.
 0x6098E6: mov     eax, [edi+5Ch]
 0x6098E9: mov     ecx, [eax+28h]
 0x6098EC: push    0; int
@@ -26,11 +26,11 @@
 0x609905: test    esi, esi
 0x609907: jz      short loc_609944
 0x609909: mov     ecx, esi; this
-0x60990B: call    MobileObject_GetCharProxy
+0x60990B: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x609910: test    eax, eax
 0x609912: jz      short loc_609944
 0x609914: mov     ecx, esi; this
-0x609916: call    MobileObject_GetCharProxy
+0x609916: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x60991B: mov     eax, [eax+364h]
 0x609921: test    eax, eax
 0x609923: jz      short loc_609940
@@ -58,7 +58,7 @@
 0x609961: mov     eax, 0Ah
 0x609966: mov     ds:0B2EB3Ch, eax
 0x60996B: mov     ds:0B3B7D4h, eax
-0x609970: mov     esi, [esp+8+arg_0]
+0x609970: mov     esi, [esp+8+collisionObject]
 0x609974: shl     eax, 10h
 0x609977: or      eax, 4
 0x60997A: test    esi, esi

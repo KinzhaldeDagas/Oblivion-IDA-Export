@@ -1,1 +1,1 @@
-DTTOPTS
+typedef _DTTOPTS DTTOPTS;

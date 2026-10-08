@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x790460",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+first]; Copies one 0x0C-byte OB_CBranchChildRef value into every record in [first,last) and returns last. Used by both in-place child-vector insert/fill bodies.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x790464",
-    "line": "mov     edx, [esp+arg_4]",
+    "line": "mov     edx, [esp+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x79046C",
-    "line": "mov     ecx, [esp+arg_8]",
+    "line": "mov     ecx, [esp+value]",
     "mnemonic": "mov",
     "size": 4
   },

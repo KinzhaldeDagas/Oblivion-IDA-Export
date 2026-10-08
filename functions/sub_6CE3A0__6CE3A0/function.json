@@ -1,19 +1,32 @@
 {
-  "callees_count": 8,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6CE3A0",
+      "0x6CE3EA"
+    ]
+  ],
+  "chunks_sha256": "4d85f451df6391c65a07dd6b3b40479245ad9d783009dd450911735f5cd789bb",
+  "comment_regular": "Equality requires equal NiTimeController base state and null-symmetric interpolator state; two non-null interpolators compare through their virtual IsEqual slot (+0x2C).",
+  "comment_repeatable": "Equality requires equal NiTimeController base state and null-symmetric interpolator state; two non-null interpolators compare through their virtual IsEqual slot (+0x2C).",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6CE3A0",
+  "display_name": "NiSingleInterpController_IsEqual",
   "end_ea": "0x6CE3EA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6CE3A0",
+  "name": "NiSingleInterpController_IsEqual",
   "segment": ".text",
   "sha256": "4d85f451df6391c65a07dd6b3b40479245ad9d783009dd450911735f5cd789bb",
   "size": 74,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6CE3A0",
-  "type": "bool __thiscall(_DWORD *this, int)",
+  "total_chunk_size": 74,
+  "type": "bool __thiscall(NiTriBasedGeomData *this, int)",
   "xrefs_from_count": 40,
   "xrefs_to_count": 5
 }

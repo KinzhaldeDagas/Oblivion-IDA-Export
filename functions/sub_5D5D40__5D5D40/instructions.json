@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5D5D40",
-    "line": "push    ebp",
+    "line": "push    ebp; Preselects SkillsMenu rows for its current mode. Mode 0 reads exactly seven ClassMenu skill AVs at +0x68..+0x80; mode 1 reads two attributes; mode 2 reads specialization. Selected rows use tile trait 0xFB1==2.",
     "mnemonic": "push",
     "size": 1
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x5D5E08",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,13 +439,13 @@
   },
   {
     "ea": "0x5D5E22",
-    "line": "fstp    [esp+1Ch+a2]; a3",
+    "line": "fstp    [esp+1Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5D5E25",
-    "line": "push    0FB1h; a2",
+    "line": "push    0FB1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x5D5E2C",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },

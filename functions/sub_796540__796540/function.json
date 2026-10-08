@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 2,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x796540",
+      "0x796587"
+    ]
+  ],
+  "chunks_sha256": "d1d54e0c51f472029fc795613cd329b750cf62f7833cab4df1ad05fe6bbe962f",
+  "comment_regular": "Oblivion legacy CIndexedGeometry::AddVertexWind. Stores 1-weight and maps the input index into the CWindEngine local matrix window. Only one weight/index stream exists here; 4.1 later split this into Wind1/Wind2.\nSpeedTreeOBSE v162 VERIFIED native one-influence append; contrasts with RT4.1 CIndexedGeometry::AddVertexWind1/2. Reference inverts/clamps weights, truncates group to unsigned char before modulo local matrix span, adds start then truncates again. New paired canonical branch stream uses reference packing, independent of unchanged native primary stream.",
+  "comment_repeatable": "Oblivion legacy CIndexedGeometry::AddVertexWind. Stores 1-weight and maps the input index into the CWindEngine local matrix window. Only one weight/index stream exists here; 4.1 later split this into Wind1/Wind2.\n\nVerified export boundary: weight inversion (1-weight) and local matrix modulo already occur here. Consumers must not invert or remap again. Oblivion and Fallout 0x82828B20 have one wind channel; RT4.1 AddVertexWind1/2 additionally clamps each result. Native game InitFromBase sets local window [0,4) at 0x5607DF, matching four matrices at shader c18..c33.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_796540",
+  "display_name": "OB_CIndexedGeometry_AddVertexWind_010201A0",
   "end_ea": "0x796587",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_796540",
+  "name": "OB_CIndexedGeometry_AddVertexWind_010201A0",
   "segment": ".text",
   "sha256": "d1d54e0c51f472029fc795613cd329b750cf62f7833cab4df1ad05fe6bbe962f",
   "size": 71,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x796540",
-  "type": "unsigned int **__thiscall(unsigned int *this, int, unsigned __int8)",
+  "total_chunk_size": 71,
+  "type": "void __thiscall(OB_CIndexedGeometry_010201A0 *this, float windWeight, unsigned __int8 windMatrixIndex)",
   "xrefs_from_count": 23,
   "xrefs_to_count": 4
 }

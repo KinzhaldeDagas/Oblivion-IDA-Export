@@ -73,7 +73,7 @@
 0x42D622: push    eax; Count
 0x42D623: push    ecx; DstBuf
 0x42D624: mov     ecx, esi
-0x42D626: call    sub_42C3E0
+0x42D626: call    sub_42C3E0; EnginePatch v5 CTD hotfix: bug remains verified here (raw-read clamp can underflow), but the full archive raw-read replacement is disabled by default because this asset-stream primitive is load-critical.
 0x42D62B: mov     [esi+10h], eax
 0x42D62E: mov     eax, esi
 0x42D630: mov     ecx, [esp+24h+var_C]
@@ -85,3 +85,12 @@
 0x42D63F: pop     ebx
 0x42D640: add     esp, 10h
 0x42D643: retn    14h
+0x9ABAB0: mov     ecx, [ebp-10h]; this
+0x9ABAB3: jmp     ??1BSFile@@UAE@XZ; BSFile::~BSFile(void)
+0x9ABAB8: mov     edx, [esp+arg_4]
+0x9ABABC: lea     eax, [edx-14h]
+0x9ABABF: mov     ecx, [edx-18h]
+0x9ABAC2: xor     ecx, eax
+0x9ABAC4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9ABAC9: mov     eax, offset stru_AD88A0
+0x9ABACE: jmp     ___CxxFrameHandler3

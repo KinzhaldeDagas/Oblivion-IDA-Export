@@ -31,7 +31,7 @@
 0x95D70F: mov     edx, [esp+0Ch+arg_4]
 0x95D713: push    edx
 0x95D714: push    eax
-0x95D715: call    sub_95D540
+0x95D715: call    NiPick_ProcessSceneObject; Verified scene-object pick dispatcher: rejects invalid/filtered candidates, delegates NiGeometryData to NiPick_ProcessGeometryIntersection, and has a separate bounds/RTTI fallback that writes hit point and distance but does not explicitly populate the normal field.
 0x95D71A: add     esp, 10h
 0x95D71D: test    al, al
 0x95D71F: jz      short loc_95D723

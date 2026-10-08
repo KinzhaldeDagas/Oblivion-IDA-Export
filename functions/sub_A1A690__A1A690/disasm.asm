@@ -1,5 +1,5 @@
 0xA1A690: push    esi
-0xA1A691: mov     esi, dword_B35290
+0xA1A691: mov     esi, ds:0B35290h
 0xA1A697: test    esi, esi
 0xA1A699: jz      short loc_A1A6B7
 0xA1A69B: lea     eax, [esi+4]

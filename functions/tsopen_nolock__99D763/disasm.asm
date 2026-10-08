@@ -141,7 +141,7 @@
 0x99D8F8: test    eax, ecx
 0x99D8FA: mov     edi, 80h ; '€'
 0x99D8FF: jz      short loc_99D913
-0x99D901: mov     edx, dword_BA9D90
+0x99D901: mov     edx, dword ptr byte_BA9BB4+1DCh
 0x99D907: not     edx
 0x99D909: and     edx, [ebp+arg_10]
 0x99D90C: test    dl, dl
@@ -196,7 +196,7 @@
 0x99D9A8: and     esi, 1Fh
 0x99D9AB: imul    esi, 28h ; '('
 0x99D9AE: sar     eax, 5
-0x99D9B1: mov     eax, dword_BAAAC0[eax*4]
+0x99D9B1: mov     eax, dword ptr unk_BAAAC0[eax*4]
 0x99D9B8: lea     eax, [eax+esi+4]
 0x99D9BC: and     byte ptr [eax], 0FEh
 0x99D9BF: call    ds:GetLastError
@@ -215,7 +215,7 @@
 0x99D9E7: and     esi, 1Fh
 0x99D9EA: imul    esi, 28h ; '('
 0x99D9ED: sar     eax, 5
-0x99D9F0: mov     eax, dword_BAAAC0[eax*4]
+0x99D9F0: mov     eax, dword ptr unk_BAAAC0[eax*4]
 0x99D9F7: lea     eax, [eax+esi+4]
 0x99D9FB: and     byte ptr [eax], 0FEh
 0x99D9FE: push    edi; hObject
@@ -236,7 +236,7 @@
 0x99DA27: and     eax, 1Fh
 0x99DA2A: imul    eax, 28h ; '('
 0x99DA2D: sar     edx, 5
-0x99DA30: mov     edx, dword_BAAAC0[edx*4]
+0x99DA30: mov     edx, dword ptr unk_BAAAC0[edx*4]
 0x99DA37: pop     ecx
 0x99DA38: pop     ecx
 0x99DA39: mov     cl, [ebp+var_1]
@@ -247,7 +247,7 @@
 0x99DA47: and     eax, 1Fh
 0x99DA4A: imul    eax, 28h ; '('
 0x99DA4D: sar     edx, 5
-0x99DA50: mov     edx, dword_BAAAC0[edx*4]
+0x99DA50: mov     edx, dword ptr unk_BAAAC0[edx*4]
 0x99DA57: lea     eax, [edx+eax+24h]
 0x99DA5B: and     byte ptr [eax], 80h
 0x99DA5E: mov     byte ptr [ebp+WideCharStr+1], cl
@@ -478,7 +478,7 @@
 0x99DD2C: and     eax, 1Fh
 0x99DD2F: imul    eax, 28h ; '('
 0x99DD32: sar     ecx, 5
-0x99DD35: mov     ecx, dword_BAAAC0[ecx*4]
+0x99DD35: mov     ecx, dword ptr unk_BAAAC0[ecx*4]
 0x99DD3C: lea     eax, [ecx+eax+24h]
 0x99DD40: mov     cl, [eax]
 0x99DD42: xor     cl, [ebp+var_2]
@@ -489,7 +489,7 @@
 0x99DD4E: and     eax, 1Fh
 0x99DD51: imul    eax, 28h ; '('
 0x99DD54: sar     ecx, 5
-0x99DD57: mov     ecx, dword_BAAAC0[ecx*4]
+0x99DD57: mov     ecx, dword ptr unk_BAAAC0[ecx*4]
 0x99DD5E: lea     eax, [ecx+eax+24h]
 0x99DD62: mov     ecx, [ebp+arg_8]
 0x99DD65: mov     dl, [eax]
@@ -507,7 +507,7 @@
 0x99DD83: and     esi, 1Fh
 0x99DD86: imul    esi, 28h ; '('
 0x99DD89: sar     eax, 5
-0x99DD8C: mov     eax, dword_BAAAC0[eax*4]
+0x99DD8C: mov     eax, dword ptr unk_BAAAC0[eax*4]
 0x99DD93: lea     eax, [eax+esi+4]
 0x99DD97: or      byte ptr [eax], 20h
 0x99DD9A: mov     eax, ebx

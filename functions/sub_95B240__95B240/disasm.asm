@@ -24,7 +24,7 @@
 0x95B298: fld1
 0x95B29A: fdivrp  st(1), st
 0x95B29C: fstp    [esp+2F4h+var_2D4]
-0x95B2A0: call    sub_710250
+0x95B2A0: call    NiPoint3_MultiplyMatrix3
 0x95B2A5: fld     dword ptr [eax+4]
 0x95B2A8: fld     [esp+2F4h+var_2D4]
 0x95B2AC: mov     edx, [esp+2F4h+arg_4]
@@ -36,16 +36,16 @@
 0x95B2BB: fstp    [esp+2FCh+var_2C0]
 0x95B2BF: fld     dword ptr [eax+8]
 0x95B2C2: fmul    st, st(1)
-0x95B2C4: fstp    [esp+2FCh+var_2CC]
+0x95B2C4: fstp    [esp+2FCh+self]
 0x95B2C8: fmul    dword ptr [eax]
 0x95B2CA: lea     eax, [esp+2FCh+var_168]
 0x95B2D1: push    eax
 0x95B2D2: fstp    [esp+300h+var_30]
 0x95B2D9: fld     [esp+300h+var_2C0]
 0x95B2DD: fstp    [esp+300h+var_2C]
-0x95B2E4: fld     [esp+300h+var_2CC]
+0x95B2E4: fld     [esp+300h+self]
 0x95B2E8: fstp    [esp+300h+var_28]
-0x95B2EF: call    sub_710250
+0x95B2EF: call    NiPoint3_MultiplyMatrix3
 0x95B2F4: fld     dword ptr [eax+4]
 0x95B2F7: mov     ecx, [esi+0B4h]
 0x95B2FD: fld     [esp+300h+var_2D4]
@@ -71,13 +71,13 @@
 0x95B348: xor     ecx, ecx
 0x95B34A: xor     edx, edx
 0x95B34C: movzx   ebp, ax
-0x95B34F: mov     [esp+2E8h+var_1BC], ecx
-0x95B356: mov     [esp+2E8h+var_1B8], edx
-0x95B35D: mov     [esp+2E8h+var_1B4], cl
+0x95B34F: mov     [esp+2E8h+outVertices.data], ecx
+0x95B356: mov     [esp+2E8h+outVertices.stride], edx
+0x95B35D: mov     [esp+2E8h+outVertices.unknown08], cl
 0x95B364: mov     ebx, [edi+1Ch]
 0x95B367: mov     [esp+2E8h+var_DC], ebp
 0x95B36E: mov     [esp+2E8h+var_2D6], 0
-0x95B373: mov     [esp+2E8h+var_2CC], edi
+0x95B373: mov     [esp+2E8h+self], edi
 0x95B377: mov     [esp+2E8h+var_2C0], ebx
 0x95B37B: test    ebx, ebx
 0x95B37D: jnz     short loc_95B3BD
@@ -90,16 +90,16 @@
 0x95B38D: call    eax
 0x95B38F: test    al, al
 0x95B391: jz      short loc_95B3AF
-0x95B393: push    1
-0x95B395: mov     ecx, edi
-0x95B397: call    sub_728AB0
-0x95B39C: lea     ecx, [esp+2E8h+var_1BC]
-0x95B3A3: push    ecx
-0x95B3A4: mov     ecx, edi
+0x95B393: push    1; writeAccess
+0x95B395: mov     ecx, edi; self
+0x95B397: call    NiGeometryData_LockVertexStream; Returns false immediately for an already-locked stream. Otherwise records bool argument at +0x3D and sets locked byte +0x3C. Additional-data branch: true argument invokes sub_7261D0 at acquisition; false invokes sub_726190 and later sub_7261D0 on unlock. Do not infer operation semantics from old writeAccess label alone.
+0x95B39C: lea     ecx, [esp+2E8h+outVertices]
+0x95B3A3: push    ecx; outVertices
+0x95B3A4: mov     ecx, edi; self
 0x95B3A6: mov     [esp+2ECh+var_2D6], al
-0x95B3AA: call    sub_728B60
-0x95B3AF: mov     ecx, [esp+2E8h+var_1BC]
-0x95B3B6: mov     edx, [esp+2E8h+var_1B8]
+0x95B3AA: call    NiGeometryData_GetLockedVertexStream; Return the locked vertex pointer and stride. Additional geometry may provide an alternate writable stream that does not alias m_pkVertex; otherwise the function returns m_pkVertex with 12-byte stride.
+0x95B3AF: mov     ecx, [esp+2E8h+outVertices.data]
+0x95B3B6: mov     edx, [esp+2E8h+outVertices.stride]
 0x95B3BD: test    bp, bp
 0x95B3C0: mov     esi, [edi+48h]
 0x95B3C3: mov     [esp+2E8h+var_EC], esi
@@ -107,8 +107,8 @@
 0x95B3D2: ja      short loc_95B40A
 0x95B3D4: cmp     [esp+2E8h+var_2D6], 0
 0x95B3D9: jz      short loc_95B3E2
-0x95B3DB: mov     ecx, edi
-0x95B3DD: call    sub_728B20
+0x95B3DB: mov     ecx, edi; self
+0x95B3DD: call    NiGeometryData_UnlockVertexStream; Corrected audit: if locked, checks additional-data virtual predicate +0x4C; calls sub_7261D0(additional,0) only when saved lock-mode byte +0x3D is ZERO, then clears locked byte +0x3C. Earlier description as committing a write lock was unsupported/opposite to this branch. Exact additional-data operation remains unresolved.
 0x95B3E2: mov     al, [esp+2E8h+var_2D5]
 0x95B3E6: pop     edi
 0x95B3E7: pop     esi
@@ -116,8 +116,8 @@
 0x95B3E9: pop     ebx
 0x95B3EA: add     esp, 2D8h
 0x95B3F0: retn
-0x95B3F1: mov     edx, [esp+2E8h+var_1B8]
-0x95B3F8: mov     ecx, [esp+2E8h+var_1BC]
+0x95B3F1: mov     edx, [esp+2E8h+outVertices.stride]
+0x95B3F8: mov     ecx, [esp+2E8h+outVertices.data]
 0x95B3FF: mov     esi, [esp+2E8h+var_EC]
 0x95B406: mov     ebx, [esp+2E8h+var_2C0]
 0x95B40A: cmp     [esp+2E8h+var_2D6], 0
@@ -220,9 +220,9 @@
 0x95B59D: test    eax, eax
 0x95B59F: jz      short loc_95B5B4
 0x95B5A1: mov     ecx, [esp+2E8h+arg_C]
-0x95B5A8: push    ecx
-0x95B5A9: mov     ecx, eax
-0x95B5AB: call    sub_95A2D0
+0x95B5A8: push    ecx; pickedObject
+0x95B5A9: mov     ecx, eax; this
+0x95B5AB: call    NiPickRecord_Initialize; Verified NiPickRecord initialization for the 0x44-byte record: retains the picked object at +0, clears/releases the secondary reference at +4, and zeros tail fields +0x34..+0x40. It does not initialize the intersection point, distance, or +0x28 normal fields; pick paths populate those selectively, so bounds-only records may leave the normal unavailable.
 0x95B5B0: mov     esi, eax
 0x95B5B2: jmp     short loc_95B5B6
 0x95B5B4: xor     esi, esi
@@ -291,7 +291,7 @@
 0x95B6EF: xor     eax, eax
 0x95B6F1: lea     ecx, [esp+2E8h+var_12C]
 0x95B6F8: push    ecx
-0x95B6F9: mov     ecx, [esp+2ECh+var_2CC]
+0x95B6F9: mov     ecx, [esp+2ECh+self]
 0x95B6FD: push    eax
 0x95B6FE: mov     [esp+2F0h+var_12C], eax
 0x95B705: mov     [esp+2F0h+var_128], eax
@@ -449,7 +449,7 @@
 0x95B9B8: mov     ecx, [esp+2E8h+arg_8]
 0x95B9BF: cmp     byte ptr [ecx+2Dh], 0
 0x95B9C3: jz      loc_95BE6C
-0x95B9C9: mov     ecx, [esp+2E8h+var_2CC]
+0x95B9C9: mov     ecx, [esp+2E8h+self]
 0x95B9CD: xor     eax, eax
 0x95B9CF: lea     edx, [esp+2E8h+var_174]
 0x95B9D6: push    edx
@@ -672,7 +672,7 @@
 0x95BE08: mov     [esp+2E8h+var_2B4], ecx
 0x95BE0C: mov     [esp+2E8h+var_2B8], eax
 0x95BE10: lea     ecx, [esp+2E8h+var_2B8]
-0x95BE14: call    sub_43F350
+0x95BE14: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x95BE19: fstp    st
 0x95BE1B: mov     eax, [esp+2E8h+arg_8]
 0x95BE22: cmp     dword ptr [eax+0Ch], 1
@@ -705,7 +705,7 @@
 0x95BE8A: mov     [esi+30h], eax
 0x95BE8D: cmp     byte ptr [ecx+2Fh], 0
 0x95BE91: jz      loc_95C499
-0x95BE97: mov     ecx, [esp+2E8h+var_2CC]
+0x95BE97: mov     ecx, [esp+2E8h+self]
 0x95BE9B: xor     eax, eax
 0x95BE9D: lea     edx, [esp+2E8h+var_18C]
 0x95BEA4: push    edx
@@ -1019,12 +1019,12 @@
 0x95C4F2: cmp     ax, word ptr [esp+2E8h+var_DC]
 0x95C4FA: mov     [esp+2E8h+var_2D4], eax
 0x95C4FE: jb      loc_95B3F1
-0x95C504: mov     edi, [esp+2E8h+var_2CC]
+0x95C504: mov     edi, [esp+2E8h+self]
 0x95C508: jmp     loc_95B3D4
 0x95C50D: cmp     [esp+2E8h+var_2D6], 0
 0x95C512: jz      short loc_95C51D
-0x95C514: mov     ecx, [esp+2E8h+var_2CC]
-0x95C518: call    sub_728B20
+0x95C514: mov     ecx, [esp+2E8h+self]; self
+0x95C518: call    NiGeometryData_UnlockVertexStream; Corrected audit: if locked, checks additional-data virtual predicate +0x4C; calls sub_7261D0(additional,0) only when saved lock-mode byte +0x3D is ZERO, then clears locked byte +0x3C. Earlier description as committing a write lock was unsupported/opposite to this branch. Exact additional-data operation remains unresolved.
 0x95C51D: pop     edi
 0x95C51E: pop     esi
 0x95C51F: pop     ebp

@@ -1,88 +1,89 @@
-float *__thiscall sub_7A7610(float *this)
+// Compact stock SIdvBranchInfo constructor. Initializes core branch fields, diffuse texcoord controls, flare defaults at +0x24..+0x4C, and default spline pointers.
+OB_SIdvBranchInfo_010201A0 *__thiscall OB_SIdvBranchInfo_ctor_010201A0(OB_SIdvBranchInfo_010201A0 *this)
 {
   double v2; // st7
   double v3; // st5
   double v4; // st5
-  float *v5; // eax
-  float *v6; // eax
-  float *v7; // eax
-  float *v8; // eax
-  float *v9; // eax
-  float *v10; // eax
-  float *v11; // eax
-  float *v12; // eax
-  float *v13; // eax
-  float *v14; // eax
-  float *v15; // eax
+  OB_stBezierSpline_010201A0 *v5; // eax
+  OB_stBezierSpline_010201A0 *v6; // eax
+  OB_stBezierSpline_010201A0 *v7; // eax
+  OB_stBezierSpline_010201A0 *v8; // eax
+  OB_stBezierSpline_010201A0 *v9; // eax
+  OB_stBezierSpline_010201A0 *v10; // eax
+  OB_stBezierSpline_010201A0 *v11; // eax
+  OB_stBezierSpline_010201A0 *v12; // eax
+  OB_stBezierSpline_010201A0 *v13; // eax
+  OB_stBezierSpline_010201A0 *v14; // eax
+  OB_stBezierSpline_010201A0 *v15; // eax
 
-  v2 = flt_A3744C;
-  *(this + 2) = flt_A3744C;
-  *(_DWORD *)this = 6;
-  *(this + 3) = 1.0;
-  *((_DWORD *)this + 1) = 3;
-  *(this + 5) = 1.0;
-  *((_BYTE *)this + 0x1C) = 1;
-  *(this + 6) = 1.0;
-  *((_BYTE *)this + 0x1D) = 0;
-  *((_BYTE *)this + 0x1E) = 0;
-  *(this + 4) = v2;
-  *(this + 0xA) = 0.0;
-  *(this + 0x14) = 0.0;
-  *(this + 8) = 0.0;
-  *(this + 0x15) = 0.0;
-  *(this + 0x16) = 0.0;
-  *(this + 9) = 1.0;
-  *(this + 0x17) = 0.0;
-  *(this + 0xB) = 1.0;
-  *(this + 0x18) = 0.0;
-  v3 = flt_A37CC8;
-  *(this + 0x19) = 0.0;
-  *(this + 0xC) = v3;
-  *(this + 0x1A) = 0.0;
-  v4 = flt_A31C80;
-  *(this + 0x1B) = 0.0;
-  *(this + 0xD) = v4;
-  *(this + 0x1C) = 0.0;
-  *(this + 0xE) = 1.0;
-  *(this + 0xF) = flt_A3D65C;
-  *(this + 0x10) = flt_A41304;
-  *(this + 0x11) = v2;
-  *(this + 0x12) = flt_A2FAAC;
-  *(this + 0x13) = 1.0;
-  v5 = (float *)FormHeapAlloc(0x5Cu);
-  if ( v5 )
-    v6 = sub_785BE0(v5);
+  v2 = flt_A3744C; /*0x7a7636*/
+  this->firstBranch = flt_A3744C; /*0x7a763e*/
+  this->crossSectionSegments = 6; /*0x7a7645*/
+  this->lastBranch = 1.0; /*0x7a764b*/
+  this->segments = 3; /*0x7a764e*/
+  this->diffuseSTile = 1.0; /*0x7a7655*/
+  this->diffuseSTileAbsolute = 1; /*0x7a7658*/
+  this->diffuseTTile = 1.0; /*0x7a765c*/
+  this->diffuseTTileAbsolute = 0; /*0x7a765f*/
+  this->oldDiffuseRandomTFlag = 0; /*0x7a7664*/
+  this->frequency = v2; /*0x7a7667*/
+  this->numFlares = 0; /*0x7a766a*/
+  this->disturbanceProfile = 0; /*0x7a766f*/
+  this->oldDiffuseTwist = 0.0; /*0x7a7672*/
+  this->gravityProfile = 0; /*0x7a7675*/
+  this->flexibilityProfile = 0; /*0x7a767a*/
+  this->segmentPackingExponent = 1.0; /*0x7a767d*/
+  this->flexibilityScaleProfile = 0; /*0x7a7680*/
+  this->flareBalance = 1.0; /*0x7a7683*/
+  this->lengthProfile = 0; /*0x7a7686*/
+  v3 = flt_A37CC8; /*0x7a7689*/
+  this->radiusProfile = 0; /*0x7a768f*/
+  this->radialInfluence = v3; /*0x7a7692*/
+  this->radiusScaleProfile = 0; /*0x7a7695*/
+  v4 = flt_A31C80; /*0x7a7698*/
+  this->startAngleProfile = 0; /*0x7a769e*/
+  this->radialInfluenceVariance = v4; /*0x7a76a1*/
+  this->angleProfile = 0; /*0x7a76a4*/
+  this->radialExponent = 1.0; /*0x7a76a7*/
+  this->radialDistance = kHeadBodyNormalMatchRadius; /*0x7a76b0*/
+  this->radialVariance = flt_A41304; /*0x7a76b9*/
+  this->lengthDistance = v2; /*0x7a76be*/
+  this->lengthVariance = kFaceEarNormalMatchRadius; /*0x7a76c7*/
+  this->lengthExponent = 1.0; /*0x7a76ca*/
+  v5 = (OB_stBezierSpline_010201A0 *)FormHeapAlloc(0x5Cu); /*0x7a76cd*/
+  if ( v5 ) /*0x7a76df*/
+    v6 = OB_StBezierSpline_DefaultCtor_010201A0(v5); /*0x7a76e3*/
   else
-    v6 = 0;
-  *((_DWORD *)this + 0x16) = v6;
-  v7 = (float *)FormHeapAlloc(0x5Cu);
-  if ( v7 )
-    v8 = sub_785BE0(v7);
+    v6 = 0; /*0x7a76ea*/
+  this->flexibilityProfile = v6; /*0x7a76f5*/
+  v7 = (OB_stBezierSpline_010201A0 *)FormHeapAlloc(0x5Cu); /*0x7a76f8*/
+  if ( v7 ) /*0x7a770e*/
+    v8 = OB_StBezierSpline_DefaultCtor_010201A0(v7); /*0x7a7712*/
   else
-    v8 = 0;
-  *((_DWORD *)this + 0x15) = v8;
-  v9 = (float *)FormHeapAlloc(0x5Cu);
-  if ( v9 )
-    v10 = sub_785BE0(v9);
+    v8 = 0; /*0x7a7719*/
+  this->gravityProfile = v8; /*0x7a7721*/
+  v9 = (OB_stBezierSpline_010201A0 *)FormHeapAlloc(0x5Cu); /*0x7a7724*/
+  if ( v9 ) /*0x7a773a*/
+    v10 = OB_StBezierSpline_DefaultCtor_010201A0(v9); /*0x7a773e*/
   else
-    v10 = 0;
-  *((_DWORD *)this + 0x19) = v10;
-  v11 = (float *)FormHeapAlloc(0x5Cu);
-  if ( v11 )
-    v12 = sub_785BE0(v11);
+    v10 = 0; /*0x7a7745*/
+  this->radiusProfile = v10; /*0x7a774d*/
+  v11 = (OB_stBezierSpline_010201A0 *)FormHeapAlloc(0x5Cu); /*0x7a7750*/
+  if ( v11 ) /*0x7a7766*/
+    v12 = OB_StBezierSpline_DefaultCtor_010201A0(v11); /*0x7a776a*/
   else
-    v12 = 0;
-  *((_DWORD *)this + 0x1B) = v12;
-  v13 = (float *)FormHeapAlloc(0x5Cu);
-  if ( v13 )
-    v14 = sub_785BE0(v13);
+    v12 = 0; /*0x7a7771*/
+  this->startAngleProfile = v12; /*0x7a7779*/
+  v13 = (OB_stBezierSpline_010201A0 *)FormHeapAlloc(0x5Cu); /*0x7a777c*/
+  if ( v13 ) /*0x7a7792*/
+    v14 = OB_StBezierSpline_DefaultCtor_010201A0(v13); /*0x7a7796*/
   else
-    v14 = 0;
-  *((_DWORD *)this + 0x1A) = v14;
-  v15 = (float *)FormHeapAlloc(0x5Cu);
-  if ( v15 )
-    *((_DWORD *)this + 0x18) = sub_785BE0(v15);
+    v14 = 0; /*0x7a779d*/
+  this->radiusScaleProfile = v14; /*0x7a77a5*/
+  v15 = (OB_stBezierSpline_010201A0 *)FormHeapAlloc(0x5Cu); /*0x7a77a8*/
+  if ( v15 ) /*0x7a77be*/
+    this->lengthProfile = OB_StBezierSpline_DefaultCtor_010201A0(v15); /*0x7a77c7*/
   else
-    *(this + 0x18) = 0.0;
-  return this;
+    this->lengthProfile = 0; /*0x7a77df*/
+  return this; /*0x7a77cc*/
 }

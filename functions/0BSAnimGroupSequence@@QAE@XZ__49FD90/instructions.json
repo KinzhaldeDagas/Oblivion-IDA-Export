@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x49FD90",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; CustomAnimSupport decode: BSAnimGroupSequence constructor; stores parsed TESAnimGroup at +0x68 and clones controller sequence state.",
     "mnemonic": "push",
     "size": 2
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x49FE63",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -526,12 +526,6 @@
     "line": "jmp     short loc_49FE80",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x49FE7D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x49FE80",
@@ -619,13 +613,13 @@
   },
   {
     "ea": "0x49FEA2",
-    "line": "lea     ecx, [esp+34h+var_1C]",
+    "line": "lea     ecx, [esp+34h+var_1C]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x49FEA6",
-    "line": "call    sub_478B90",
+    "line": "call    OB_NiCloningProcess_ctor",
     "mnemonic": "call",
     "size": 5
   },
@@ -814,5 +808,89 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B2150",
+    "line": "mov     ecx, [ebp-20h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B2153",
+    "line": "jmp     ??1NiControllerSequence@@UAE@XZ; NiControllerSequence::~NiControllerSequence(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B2158",
+    "line": "mov     ecx, [ebp-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B215B",
+    "line": "add     ecx, 68h ; 'h'; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B215E",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B2163",
+    "line": "lea     ecx, [ebp-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B2166",
+    "line": "jmp     sub_4781A0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B216B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B216F",
+    "line": "lea     eax, [edx-24h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B2172",
+    "line": "mov     ecx, [edx-28h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B2175",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B2177",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B217C",
+    "line": "mov     eax, offset stru_ADE1A8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B2181",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -3,7 +3,7 @@
 0x7E48E6: test    eax, eax
 0x7E48E8: jnz     short loc_7E4958
 0x7E48EA: push    esi
-0x7E48EB: call    sub_7E2D60
+0x7E48EB: call    ParticleShaderProperty_GetSlotCapacity; Verified (Oblivion): returns the cached slot capacity, initialized to 40 or 120 according to renderer capability, and used to size particleInstanceBuffer_6C and update iteration.
 0x7E48F0: mov     esi, eax
 0x7E48F2: xor     ecx, ecx
 0x7E48F4: lea     eax, ds:0[esi*4]

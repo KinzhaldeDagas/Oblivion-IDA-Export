@@ -49,7 +49,7 @@
 0x6500BB: call    edx
 0x6500BD: mov     ecx, edi
 0x6500BF: mov     ebp, eax
-0x6500C1: call    Actor_GetCurrentAction
+0x6500C1: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x6500C6: cmp     eax, 9
 0x6500C9: ja      short loc_6500D6
 0x6500CB: pop     ebp
@@ -197,7 +197,7 @@
 0x650264: push    ecx
 0x650265: mov     ecx, ds:0B362C0h
 0x65026B: push    edi
-0x65026C: call    sub_521450
+0x65026C: call    TESIdleForm_FindIdleForActor; Idle root lookup for actor model path; rejects final candidate when ANAM high bit is set but model path is not .kf.
 0x650271: mov     ebx, eax
 0x650273: test    ebx, ebx
 0x650275: jnz     short loc_650289
@@ -210,11 +210,11 @@
 0x650283: add     esp, 8
 0x650286: retn    4
 0x650289: mov     ecx, ebx
-0x65028B: call    sub_520200
+0x65028B: call    TESIdleForm_GetQueuedAnimType; Returns TESIdleForm ANAM byte at +0x38 masked with 0x7F. This low-seven-bit value is passed as the queued idle slot/type; the high bit is handled separately by native idle selection.
 0x650290: push    eax
 0x650291: push    ebx
 0x650292: mov     ecx, ebp
-0x650294: call    sub_475300
+0x650294: call    ActorAnimData_ReplaceCurrentIdleLoader; Replaces ActorAnimData current idle at +0xCC, not the queued +0xD0 slot. Stops its still-active normalized physical slot, retires the old AnimIdle into cleanup slots +0xD4/+0xD8 or destroys it, then allocates/initializes a new AnimIdle at +0xCC with completion mode 1 and no actor ref. Furniture/package callers later wait for ready phase and explicitly start it.
 0x650299: mov     edx, [edi]
 0x65029B: mov     edx, [edx+1CCh]
 0x6502A1: lea     eax, [esi+128h]
@@ -253,7 +253,7 @@
 0x650328: fldz
 0x65032A: fstp    [esp+20h+var_8]
 0x65032E: fld     [esp+20h+arg_0]
-0x650332: fstp    [esp+20h+var_20]; float
+0x650332: fstp    [esp+20h+arg0]; float
 0x650335: push    edi; int
 0x650336: call    sub_683D80
 0x65033B: fstp    [esp+24h+var_4]
@@ -273,7 +273,7 @@
 0x65036D: fld     [esp+18h+arg_0]
 0x650371: push    1; char
 0x650373: push    ecx
-0x650374: fstp    [esp+20h+var_20]; float
+0x650374: fstp    [esp+20h+arg0]; float
 0x650377: push    edi; Concurrency::details::SchedulerBase *
 0x650378: call    sub_685530
 0x65037D: add     esp, 0Ch
@@ -286,13 +286,13 @@
 0x650389: retn    4
 0x65038C: push    30h ; '0'
 0x65038E: mov     ecx, edi
-0x650390: call    sub_5E05F0
+0x650390: call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.
 0x650395: fld     [esp+18h+arg_0]
 0x650399: mov     edx, [edi]
 0x65039B: mov     eax, [edx+1E8h]
 0x6503A1: push    ecx
 0x6503A2: mov     ecx, edi
-0x6503A4: fstp    [esp+1Ch+var_1C]
+0x6503A4: fstp    [esp+1Ch+arg1]
 0x6503A7: call    eax
 0x6503A9: mov     edx, [edi]
 0x6503AB: mov     edx, [edx+1CCh]
@@ -343,7 +343,7 @@
 0x650428: add     esp, 8
 0x65042B: retn    4
 0x65042E: mov     ecx, ebp; jumptable 00650302 cases 3,8
-0x650430: call    sub_4711F0
+0x650430: call    ActorAnimData_IsCurrentIdleReady; Returns true when ActorAnimData current idle (+0xCC) exists and its phase field is 1. Furniture/action callers use this as the loaded/ready gate immediately before StartQueuedIdleAction.
 0x650435: test    al, al
 0x650437: jz      loc_6504CC
 0x65043D: mov     eax, [esi]
@@ -352,14 +352,14 @@
 0x650447: call    edx
 0x650449: cmp     eax, 0FFFFFFFFh
 0x65044C: jnz     short loc_6504CC
-0x65044E: push    0
-0x650450: mov     ecx, ebp
-0x650452: call    sub_4706E0
+0x65044E: push    0; slotSelector
+0x650450: mov     ecx, ebp; this
+0x650452: call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].
 0x650457: test    eax, eax
 0x650459: jz      short loc_65046A
-0x65045B: push    0
-0x65045D: mov     ecx, ebp
-0x65045F: call    sub_4706E0
+0x65045B: push    0; slotSelector
+0x65045D: mov     ecx, ebp; this
+0x65045F: call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].
 0x650464: cmp     dword ptr [eax+44h], 1
 0x650468: jnz     short loc_6504CC
 0x65046A: mov     byte ptr [ebp+0C4h], 1
@@ -377,13 +377,13 @@
 0x65049C: call    edx
 0x65049E: push    edi
 0x65049F: mov     ecx, ebp
-0x6504A1: call    sub_477E50
+0x6504A1: call    ActorAnimData_StartQueuedIdleAction; Starts a ready queued idle as an actor action. Processes/promotes/plays through ActorAnimData_ProcessQueuedIdleKF; on success stores the actor ref at AnimIdle +0x28 and invokes high-process action 0x0B with the sequence at +0x10.
 0x6504A6: fld1
 0x6504A8: sub     esp, 8
-0x6504AB: fst     [esp+20h+var_1C]; int
-0x6504AF: mov     ecx, edi
-0x6504B1: fstp    [esp+20h+var_20]; float
-0x6504B4: call    Actor_ProcessAction
+0x6504AB: fst     [esp+20h+arg1]; arg1
+0x6504AF: mov     ecx, edi; this
+0x6504B1: fstp    [esp+20h+arg0]; arg0
+0x6504B4: call    Actor_ProcessAction; Per-actor native action state machine. Advances required-note phases, handles AttackBow nock/hold/release lifecycle, constructs ArrowProjectile on release, and dispatches post-shot AMMO consumption.
 0x6504B9: pop     ebx
 0x6504BA: mov     byte ptr [ebp+0C4h], 1
 0x6504C1: pop     ebp
@@ -393,7 +393,7 @@
 0x6504C6: add     esp, 8
 0x6504C9: retn    4
 0x6504CC: mov     ecx, ebp
-0x6504CE: call    sub_472EA0
+0x6504CE: call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.
 0x6504D3: test    al, al
 0x6504D5: jz      def_650302; jumptable 00650302 default case, cases 4-6
 0x6504DB: mov     eax, [edi]

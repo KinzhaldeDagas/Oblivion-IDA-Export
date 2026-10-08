@@ -1,1 +1,1 @@
-ptrdiff_t
+typedef __int64 ptrdiff_t;

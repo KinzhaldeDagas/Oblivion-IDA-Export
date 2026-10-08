@@ -1,4 +1,4 @@
-0x627490: push    0FFFFFFFFh
+0x627490: push    0FFFFFFFFh; 3DTheft: dynamic FleePackage constructor. With (sourceRef,0,0), builds a flee package targeted against sourceRef, marks dynamic, sets procedureArrayIndex=0x13, and initializes extended fields through offset 0x65.
 0x627492: push    offset ??0FleePackage@@QAE@XZ_SEH
 0x627497: mov     eax, large fs:0
 0x62749D: push    eax
@@ -73,13 +73,13 @@
 0x62756A: mov     [esi+3Ch], bl
 0x62756D: push    edi
 0x62756E: mov     ecx, esi
-0x627570: call    TESPackage_SetLocation
+0x627570: call    TESPackage_SetLocation; 3DTheft decode: TESPackage_SetLocation allocates package->location when needed and copies a 0x0C LocationData record; null source clears location data.
 0x627575: cmp     edi, ebx
 0x627577: jz      short loc_627589
 0x627579: mov     ecx, edi
 0x62757B: call    TESPackage_LocationData_destr
 0x627580: push    edi
-0x627581: call    FormHeapFree
+0x627581: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x627586: add     esp, 4
 0x627589: push    0Ch; Size
 0x62758B: call    FormHeapAlloc
@@ -89,28 +89,28 @@
 0x627599: mov     byte ptr [esp+28h+var_4], 2
 0x62759E: jz      short loc_6275AB
 0x6275A0: mov     ecx, eax
-0x6275A2: call    TESPackage_TargetData_constr
+0x6275A2: call    TESPackage_TargetData_constr; 3DTheft decode: TESPackage_TargetData constructor initializes targetType=2, target/object=0, count=0.
 0x6275A7: mov     edi, eax
 0x6275A9: jmp     short loc_6275AD
 0x6275AB: xor     edi, edi
 0x6275AD: push    edi
 0x6275AE: mov     ecx, esi
 0x6275B0: mov     byte ptr [esp+2Ch+var_4], bl
-0x6275B4: call    TESPackage_SetTarget
+0x6275B4: call    TESPackage_SetTarget; 3DTheft decode: TESPackage_SetTarget allocates package->target when needed, copies a 0x0C TargetData record, and leaves later callers to set target type/ref/count fields.
 0x6275B9: cmp     edi, ebx
 0x6275BB: jz      short loc_6275CD
-0x6275BD: mov     ecx, edi; void *
-0x6275BF: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x6275BD: mov     ecx, edi; this
+0x6275BF: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x6275C4: push    edi
-0x6275C5: call    FormHeapFree
+0x6275C5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6275CA: add     esp, 4
 0x6275CD: mov     ecx, [esi+28h]
 0x6275D0: push    ebx
 0x6275D1: mov     dword ptr [esi+18h], 13h
-0x6275D8: call    TESPackage_TargetData_SetType
+0x6275D8: call    TESPackage_TargetData_SetType; 3DTheft decode: TargetData_SetType writes targetType and clears the target/object field for refr/base/type target modes.
 0x6275DD: mov     ecx, [esi+28h]
 0x6275E0: push    ebp
-0x6275E1: call    TeSPackage_TargetData_SetTargetREFR
+0x6275E1: call    TeSPackage_TargetData_SetTargetREFR; 3DTheft decode: TargetData_SetTargetREFR only writes the reference field when targetType is 0 (reference target). It does not set count.
 0x6275E6: lea     eax, [esi+54h]
 0x6275E9: cmp     eax, ebx
 0x6275EB: jz      short loc_6275FB
@@ -125,7 +125,7 @@
 0x6275FF: call    BSSimpleList_PushFront
 0x627604: push    1
 0x627606: mov     ecx, esi
-0x627608: call    sub_566830
+0x627608: call    sub_566830; 3DTheft decode: dynamic package marker only sets packageFlags bit 0x800 when TESDataHandler_IsFormIDCreated_(formID) returns true. Do not force 0x800 on arbitrary heap packages before Actor_AddPackage_.
 0x62760D: fld     dword ptr ds:0A30634h
 0x627613: mov     ecx, ds:0B3F9A8h
 0x627619: mov     [esi+40h], ecx
@@ -149,3 +149,22 @@
 0x627650: pop     ebx
 0x627651: add     esp, 14h
 0x627654: retn    0Ch
+0x9C3660: mov     ecx, [ebp-14h]; this
+0x9C3663: jmp     ??1TESPackage@@UAE@XZ; TESPackage::~TESPackage(void)
+0x9C3668: mov     eax, [ebp-10h]
+0x9C366B: push    eax
+0x9C366C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C3671: pop     ecx
+0x9C3672: retn
+0x9C3673: mov     eax, [ebp+4]
+0x9C3676: push    eax
+0x9C3677: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C367C: pop     ecx
+0x9C367D: retn
+0x9C367E: mov     edx, [esp+arg_4]
+0x9C3682: lea     eax, [edx-18h]
+0x9C3685: mov     ecx, [edx-1Ch]
+0x9C3688: xor     ecx, eax
+0x9C368A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C368F: mov     eax, offset stru_AEC24C
+0x9C3694: jmp     ___CxxFrameHandler3

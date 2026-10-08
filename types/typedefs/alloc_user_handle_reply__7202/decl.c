@@ -1,1 +1,6 @@
-alloc_user_handle_reply
+struct alloc_user_handle_reply
+{
+reply_header __header;
+user_handle_t handle;
+char __pad_12[4];
+};

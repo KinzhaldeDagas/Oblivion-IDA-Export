@@ -2,7 +2,7 @@
 0x9E9B66: push    ecx
 0x9E9B67: fstp    [esp+4+var_4]; float
 0x9E9B6A: push    offset aFarrowfovzoom; "fArrowFOVZoom"
-0x9E9B6F: mov     ecx, offset flt_B370A0
+0x9E9B6F: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+3C8h)
 0x9E9B74: call    GameSetting_ConstrAndReg_float
 0x9E9B79: push    offset sub_A1E860; void (__cdecl *)()
 0x9E9B7E: call    _atexit

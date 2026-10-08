@@ -1,19 +1,40 @@
 {
-  "callees_count": 60,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 26,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_80E9A0",
+  "chunks": [
+    [
+      "0x80E9A0",
+      "0x80EE0D"
+    ],
+    [
+      "0x75FA70",
+      "0x75FA82"
+    ],
+    [
+      "0x9D1100",
+      "0x9D1123"
+    ]
+  ],
+  "chunks_sha256": "b8c9fcd4abcf1f2918670780feee458f690b6c19cdcd15fd30b5fe8f39c24abd",
+  "comment_regular": "SpeedTreeFrondShader render/setup. Requires shader property virtual +0x54 to return id 8, pulls texture from virtual +0x78, selects frond VS/PS variants, writes render state, and appends pass +0x94.\n\n[2026-10-03 fog restoration] a5+0C (a5[3]) is the fog-property input: near/far and color fields drive c14/c15 and fog variant selection. Plugin formerly nulled it whenever misnamed shaderPackage(B42EAC)==0, which is ordinary render mode. That mutation and later restoration are removed; native fog input is preserved. RGB bypass workarounds still require separate shader-bytecode/runtime acceptance.\n\n[2026-10-03 implemented correction] Frond-only CALL 0x80EC73 originally counts marker-qualified property lights (including disabled). Plugin replaces that call with current RenderPass B42EB8 validation: matching geometry property, lightCount>=2, nonnull slot1 light and positive finite radius. This selects PT according to actual dispatched sources. Native fog-property handling remains active. Corrected embedded shaders connect light RGB via COLOR0 for ps1_3 and TEXCOORD1 for ps2_0; fog RGB/amount use TEXCOORD2 and legacy scalar uses COLOR1 alpha.\n[2026-10-03 implementation] Plugin wraps vtable+2C with same7-stack-argument ABI, calls original setup then binds pooled stages1/2 through76C910 using textures owned by its private STSP-derived allocation. Native diffuse/fog/point/pass selection retained. Shader5 modern PS2 set now shades normal map in exported tangent basis and multiplies direct light by independent shadow sample; ambient remains unshadowed. Legacy PS1.3 retains diffuse lighting and logs its capability limit.\n\n[v149 static mesh integration] Verified property virtual54 must return8; VS slots7C/80/84/88 selected by point/fog and PS8C/90 by fog; appends pass94. Isolated static mesh shader uses same type8 property/native pass with fixed bakedRGB in all point variants. Existing SetupFrondLayerPass wrapper still requires valid owned stages1/2 and recognized STSP marker. Native execution of new path remains UNVERIFIED.\n\n[v150 paired leaf normal materials] Plugin mesh-leaf path now supplies the authored normal layer paired with the committed diffuse composite/atlas to the existing type8 frond layer STSP owner. Additional tangent.w masks disable the normal sample per missing map. Native textures are retained by existing STSP ownership. New mesh material integration remains UNVERIFIED in game; card shader integration remains incomplete.\n\nSpeedTreeFrondShader render/setup. Requires candidate property vtable +0x54 to return id 8; accepted object must then provide vtable +0x78 texture getter and BSShaderProperty-style pass list at object +0x70 for the 0x7ED5D0 counter.",
+  "comment_repeatable": "SpeedTreeFrondShader render/setup. Requires candidate property vtable +0x54 to return id 8; accepted object must then provide vtable +0x78 texture getter and BSShaderProperty-style pass list at object +0x70 for the 0x7ED5D0 counter.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "OB_SpeedTreeFrondShader_RenderSetup_010201A0",
   "end_ea": "0x80EE0D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_80E9A0",
+  "name": "OB_SpeedTreeFrondShader_RenderSetup_010201A0",
   "segment": ".text",
   "sha256": "9cdb8dccc4e0221f2e728470ee1aee8a350fee7592b620e983657772cc29c959",
   "size": 1133,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x80E9A0",
-  "type": "int __thiscall(char *this, float *, int, int, _DWORD *, int, int, int)",
-  "xrefs_from_count": 407,
+  "total_chunk_size": 1186,
+  "type": "int __thiscall(char *this, float *, int, int, NiD3DTextureStage *, int, int, int)",
+  "xrefs_from_count": 426,
   "xrefs_to_count": 1
 }

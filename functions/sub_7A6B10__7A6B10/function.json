@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 7,
+  "chunks": [
+    [
+      "0x7A6B10",
+      "0x7A6BAE"
+    ]
+  ],
+  "chunks_sha256": "2b246c42797a1985440f9a42c6a184e3e26081e0d104ce1ccf99cd37646bad9a",
+  "comment_regular": "Oblivion stRegion point-union operator (source spelling operator^). Copies the 0x30-byte region, then clamps min.xyz downward and max.xyz upward to include one stVec3 point; unused stVec slots and size fields are preserved.",
+  "comment_repeatable": "Oblivion stRegion point-union operator (source spelling operator^). Copies the 0x30-byte region, then clamps min.xyz downward and max.xyz upward to include one stVec3 point; unused stVec slots and size fields are preserved.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7A6B10",
+  "display_name": "OB_stRegion_IncludePointCopy_010201A0",
   "end_ea": "0x7A6BAE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7A6B10",
+  "name": "OB_stRegion_IncludePointCopy_010201A0",
   "segment": ".text",
   "sha256": "2b246c42797a1985440f9a42c6a184e3e26081e0d104ce1ccf99cd37646bad9a",
   "size": 158,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A6B10",
-  "type": "float *__thiscall(const void *this, float *, float *)",
+  "total_chunk_size": 158,
+  "type": "OB_stRegion_010201A0 *__thiscall(const OB_stRegion_010201A0 *this, OB_stRegion_010201A0 *outRegion, const OB_stVec3_010201A0 *point)",
   "xrefs_from_count": 68,
   "xrefs_to_count": 7
 }

@@ -13,7 +13,7 @@
 0x60E1E1: mov     eax, [edi+30h]
 0x60E1E4: push    esi
 0x60E1E5: push    eax
-0x60E1E6: push    offset dword_B3FA80
+0x60E1E6: push    offset stru_B3FA80
 0x60E1EB: call    NiRTTI_Cast
 0x60E1F0: mov     esi, eax
 0x60E1F2: add     esp, 8
@@ -33,7 +33,7 @@
 0x60E226: fld     dword ptr [eax+8]
 0x60E229: fsub    dword ptr [esi+90h]
 0x60E22F: fstp    [esp+14h+var_4]
-0x60E233: call    sub_404C90
+0x60E233: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x60E238: fld     dword ptr [edi+3Ch]
 0x60E23B: fcompp
 0x60E23D: fnstsw  ax

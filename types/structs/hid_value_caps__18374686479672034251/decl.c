@@ -1,1 +1,29 @@
-hid_value_caps
+struct hid_value_caps
+{
+USAGE usage_page;
+USAGE usage_min;
+USAGE usage_max;
+USHORT data_index_min;
+USHORT data_index_max;
+USHORT string_min;
+USHORT string_max;
+USHORT designator_min;
+USHORT designator_max;
+BOOLEAN is_range;
+BOOLEAN is_string_range;
+BOOLEAN is_designator_range;
+UCHAR report_id;
+USHORT link_collection;
+USAGE link_usage_page;
+USAGE link_usage;
+USHORT bit_field;
+USHORT bit_size;
+USHORT report_count;
+ULONG start_bit;
+LONG logical_min;
+LONG logical_max;
+LONG physical_min;
+LONG physical_max;
+ULONG units;
+ULONG units_exp;
+};

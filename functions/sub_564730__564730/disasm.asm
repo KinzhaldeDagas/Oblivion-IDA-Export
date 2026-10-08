@@ -1,4 +1,4 @@
-0x564730: push    0FFFFFFFFh
+0x564730: push    0FFFFFFFFh; BSTreeNode branch LOD child setter: replaces child under Branches and updates branch array. No frond-equivalent setter was found in this node surface.
 0x564732: push    offset SEH_5ACE20
 0x564737: mov     eax, large fs:0
 0x56473D: push    eax
@@ -17,7 +17,7 @@
 0x56475B: mov     [esp+28h+var_14], ebx
 0x56475F: mov     [esp+28h+var_10], bx
 0x564764: mov     [esp+28h+var_E], bx
-0x564769: mov     ecx, [edi+0DCh]
+0x564769: mov     ecx, [edi+0DCh]; this
 0x56476F: cmp     ecx, ebx
 0x564771: mov     [esp+28h+var_4], ebx
 0x564775: jz      loc_564831
@@ -26,8 +26,8 @@
 0x564787: mov     ebp, [esp+28h+a2]
 0x56478B: cmp     ebp, ebx
 0x56478D: jz      loc_564831
-0x564793: call    sub_5601E0
-0x564798: mov     si, [esp+28h+arg_0]
+0x564793: call    BSTreeModel_GetNumBranchLODLevels
+0x564798: mov     si, word ptr [esp+28h+slot]
 0x56479D: movzx   eax, ax
 0x5647A0: cmp     si, ax
 0x5647A3: jnb     loc_564831
@@ -53,12 +53,12 @@
 0x5647E4: mov     edx, [ebx]
 0x5647E6: mov     edx, [edx+88h]
 0x5647EC: push    eax
-0x5647ED: lea     eax, [esp+2Ch+arg_0]
+0x5647ED: lea     eax, [esp+2Ch+slot]
 0x5647F1: push    eax
 0x5647F2: mov     ecx, ebx
 0x5647F4: call    edx
-0x5647F6: lea     ecx, [esp+28h+arg_0]; this
-0x5647FA: call    sub_7016A0
+0x5647F6: lea     ecx, [esp+28h+slot]; slot
+0x5647FA: call    NiPointerSlot_Release
 0x5647FF: mov     eax, [ebx]
 0x564801: mov     edx, [eax+84h]
 0x564807: push    1
@@ -75,7 +75,7 @@
 0x56482D: mov     al, 1
 0x56482F: jmp     short loc_56483C
 0x564831: push    ebx
-0x564832: call    FormHeapFree
+0x564832: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x564837: add     esp, 4
 0x56483A: xor     al, al
 0x56483C: mov     ecx, [esp+28h+var_C]
@@ -87,3 +87,12 @@
 0x56484B: pop     ebx
 0x56484C: add     esp, 14h
 0x56484F: retn    8
+0x9B5BD0: lea     ecx, [ebp-14h]; void *
+0x9B5BD3: jmp     BSStringT_Clear
+0x9B5BD8: mov     edx, [esp+arg_4]
+0x9B5BDC: lea     eax, [edx-18h]
+0x9B5BDF: mov     ecx, [edx-1Ch]
+0x9B5BE2: xor     ecx, eax
+0x9B5BE4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B5BE9: mov     eax, offset stru_AE0BB4
+0x9B5BEE: jmp     ___CxxFrameHandler3

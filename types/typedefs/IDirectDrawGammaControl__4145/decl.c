@@ -1,1 +1,4 @@
-IDirectDrawGammaControl
+struct IDirectDrawGammaControl
+{
+IDirectDrawGammaControlVtbl *lpVtbl;
+};

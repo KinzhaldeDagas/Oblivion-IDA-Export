@@ -1,4 +1,4 @@
-0x41A563: mov     eax, sMagicCastOKText; jumptable 0041A4C8 default case
+0x41A563: mov     eax, ds:0B3351Ch; jumptable 0041A4C8 default case
 0x41A568: mov     esi, [esp+arg_8]
 0x41A56C: push    ecx; a3
 0x41A56D: mov     [esi], ecx

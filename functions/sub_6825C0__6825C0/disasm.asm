@@ -3,7 +3,7 @@
 0x6825C2: push    esi
 0x6825C3: mov     esi, ecx
 0x6825C5: push    edi
-0x6825C6: mov     ecx, offset stru_B3C000
+0x6825C6: mov     ecx, offset unk_B3C000
 0x6825CB: xor     ebx, ebx
 0x6825CD: call    sub_49F470
 0x6825D2: mov     edi, [esp+10h+arg_0]
@@ -36,7 +36,7 @@
 0x68261C: cmp     [esp+10h+var_4], ebx
 0x682620: jz      short loc_682624
 0x682622: mov     bl, 1
-0x682624: mov     ecx, offset stru_B3C000
+0x682624: mov     ecx, offset unk_B3C000
 0x682629: call    j_NiLeaveCriticalSection_0
 0x68262E: pop     edi
 0x68262F: pop     esi

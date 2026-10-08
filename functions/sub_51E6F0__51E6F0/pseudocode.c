@@ -1,4 +1,7 @@
-unsigned __int16 __thiscall sub_51E6F0(char *this, int a2)
+// Verified: component vtable serialization thunk subtracts 0x24 from ECX and tail-jumps to TESActorBase_GetModifiedSize. Full-object dispatch; not the nonvirtual TESActorBaseData component serializer.
+unsigned __int16 __thiscall TESActorBase_GetModifiedSize_ActorBaseDataThunk(
+        TESActorBaseData *__shifted(TESActorBase,0x24) self,
+        ActorBaseSaveChangeMask changeMask)
 {
-  return TESActorBase_GetModifiedSize(this + 0xFFFFFFDC, a2);
+  return TESActorBase_GetModifiedSize(ADJ(self), changeMask);
 }

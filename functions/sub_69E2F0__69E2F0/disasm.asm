@@ -1,1 +1,1 @@
-0x69E2F0: jmp     sub_69D960
+0x69E2F0: jmp     MagicHitEffect_SetParentCellFromTarget; Verified MagicHitEffect vtable +0x80 callback takes a TESChildCELL* targetReference, reads its parent-cell pointer at +0x40, and stores it in BSTempEffect.parentCell at +0x0C. The explicit TESObjectREFR* linkContext parameter is unused in this implementation.

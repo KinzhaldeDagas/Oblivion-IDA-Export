@@ -1,1 +1,1 @@
-PCANSI_STRING
+typedef const STRING *PCANSI_STRING;

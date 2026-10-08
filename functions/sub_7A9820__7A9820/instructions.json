@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x7A9820",
-    "line": "push    ebx",
+    "line": "push    ebx; Submit one accumulated Oblivion RenderPass. Publishes the selector/current entry, dispatches its current-light constants, then invokes geometry render virtual +0x84, reaching the rigid or hardware-skinned DX9 pass loop.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A9821",
-    "line": "mov     bx, word ptr [esp+4+arg_4]",
+    "line": "mov     bx, [esp+4+selector]",
     "mnemonic": "mov",
     "size": 5
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x7A982E",
-    "line": "mov     esi, [esp+0Ch+arg_0]",
+    "line": "mov     esi, [esp+0Ch+entry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,13 +49,13 @@
   },
   {
     "ea": "0x7A9836",
-    "line": "mov     ds:0B42E90h, eax",
+    "line": "mov     ds:0B42E90h, eax; Publish active RenderPass selector to B42E90 for Lighting30 setup/constant dispatch.",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x7A983B",
-    "line": "mov     ds:0B42EB8h, esi",
+    "line": "mov     ds:0B42EB8h, esi; Publish current accumulated render entry to B42EB8.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x7A9845",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x7A9876",
-    "line": "fstp    [esp+10h+arg_4]",
+    "line": "fstp    dword ptr [esp+10h+selector]; Lighting30 color input: propertyDimmer is float at LOCAL property ID4 +0x94.707530 walks geometry+0x9C property list and returns the first virtual GetType(+0x4C)==4. Effective/inherited property state alone is not equivalent.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x7A9890",
-    "line": "call    sub_7ECB20",
+    "line": "call    OB_BSShader_ResetLightConstantSlots_010201A0; Reset GENERIC eight-slot banks B46138/B464A8/B465A8 before dispatch; does not reset Lighting30 ConstantGroup. Selector exceptions handled above.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x7A9897",
-    "line": "cmp     [esi+8], bl",
+    "line": "cmp     [esi+8], bl; Dispatch all RenderPass lights before the single geometry draw. SimpleShadow compatibility records set lightCount=1.",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x7A98A0",
-    "line": "fld     [esp+10h+arg_4]",
+    "line": "fld     dword ptr [esp+10h+selector]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x7A98A8",
-    "line": "fstp    [esp+14h+var_14]; float",
+    "line": "fstp    [esp+14h+propertyDimmer]; propertyDimmer",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -295,19 +295,19 @@
   },
   {
     "ea": "0x7A98B1",
-    "line": "push    edx; int",
+    "line": "push    edx; shadowSceneLight",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A98B2",
-    "line": "push    eax; int",
+    "line": "push    eax; lightSlot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A98B3",
-    "line": "call    sub_7EE390",
+    "line": "call    OB_BSShader_DispatchLightConstantUpdate_010201A0; Write render-entry light slot through the Oblivion Lighting30 constant dispatcher.",
     "mnemonic": "call",
     "size": 5
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x7A98D0",
-    "line": "pop     edi",
+    "line": "pop     edi; One geometry draw per RenderPass record; per-light SimpleShadow records are never coalesced.",
     "mnemonic": "pop",
     "size": 1
   },

@@ -1,4 +1,4 @@
-BSStringT *sub_A0C630()
+NiRTTI *sub_A0C630()
 {
-  return sub_70E220((BSStringT *)dword_B40ED0, "NiPSysSphericalCollider", (int)dword_B41ECC);
+  return NiRTTI_Constructor(&stru_B40ED0, "NiPSysSphericalCollider", &stru_B41ECC); /*0xa0c644*/
 }

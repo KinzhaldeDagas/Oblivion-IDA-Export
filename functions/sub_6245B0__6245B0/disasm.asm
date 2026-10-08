@@ -23,7 +23,7 @@
 0x624604: cmp     dword ptr [eax+58h], 0
 0x624608: jz      loc_6246C6
 0x62460E: mov     ecx, esi
-0x624610: call    sub_6135F0
+0x624610: call    CombatController_GetCurrentTarget
 0x624615: test    eax, eax
 0x624617: mov     ecx, [esi+3Ch]
 0x62461A: jz      loc_6246BA
@@ -48,7 +48,7 @@
 0x62465F: push    0
 0x624661: mov     ecx, esi
 0x624663: fstp    [esp+14h+var_4]
-0x624667: call    sub_6135F0
+0x624667: call    CombatController_GetCurrentTarget
 0x62466C: mov     ecx, [esi+3Ch]
 0x62466F: push    eax
 0x624670: call    TesObjectREF_GetDistance
@@ -65,12 +65,12 @@
 0x624698: test    ah, 5
 0x62469B: jp      short loc_6246DC
 0x62469D: mov     ecx, esi
-0x62469F: call    sub_6135F0
+0x62469F: call    CombatController_GetCurrentTarget
 0x6246A4: push    eax
 0x6246A5: mov     ecx, esi
-0x6246A7: call    sub_6162D0
+0x6246A7: call    CombatController_RemoveTarget
 0x6246AC: mov     ecx, esi
-0x6246AE: call    sub_6135F0
+0x6246AE: call    CombatController_GetCurrentTarget
 0x6246B3: test    eax, eax
 0x6246B5: jnz     short loc_6246D2
 0x6246B7: mov     ecx, [esi+3Ch]
@@ -91,12 +91,12 @@
 0x6246E1: mov     edi, 0Bh
 0x6246E6: jnz     short loc_6246FF
 0x6246E8: mov     ecx, esi
-0x6246EA: call    sub_624480
+0x6246EA: call    CombatController_InitializeCombatState
 0x6246EF: cmp     [esi+6Ch], edi
 0x6246F2: mov     byte ptr [esi+59h], 1
 0x6246F6: jnz     short loc_6246FF
-0x6246F8: mov     ecx, esi
-0x6246FA: call    sub_61C6E0
+0x6246F8: mov     ecx, esi; this
+0x6246FA: call    ActorMovement_BuildPathGridWaypointList; Verified actor movement path helper called by CombatController_UpdateMovementAndReachability and other movement callers. Finds a reachable PathGrid node near the actor, checks distance and line of sight, collects enabled linked-point positions into the actor's waypoint list, then updates the movement path. Owner class layout remains Unknown.
 0x6246FF: mov     ecx, [esi+3Ch]
 0x624702: mov     edx, [ecx]
 0x624704: mov     eax, [edx+198h]
@@ -119,7 +119,7 @@
 0x624733: fadd    dword ptr [esi+44h]
 0x624736: mov     ecx, esi
 0x624738: fstp    dword ptr [esi+44h]
-0x62473B: call    sub_6135F0
+0x62473B: call    CombatController_GetCurrentTarget
 0x624740: mov     edx, [eax]
 0x624742: mov     ecx, eax
 0x624744: mov     eax, [edx+198h]
@@ -128,7 +128,7 @@
 0x62474E: test    al, al
 0x624750: jnz     loc_624C24
 0x624756: mov     ecx, esi
-0x624758: call    sub_6135F0
+0x624758: call    CombatController_GetCurrentTarget
 0x62475D: mov     ecx, [eax+8]
 0x624760: shr     ecx, 0Bh
 0x624763: test    cl, 1
@@ -150,12 +150,12 @@
 0x62478D: mov     ecx, [esi+3Ch]
 0x624790: mov     edx, [ecx]
 0x624792: mov     eax, [edx+164h]
-0x624798: push    3
+0x624798: push    3; slot
 0x62479A: call    eax
-0x62479C: mov     ecx, eax
-0x62479E: call    ActorAnimData_GetAnimGroupFromField8Value
+0x62479C: mov     ecx, eax; this
+0x62479E: call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.
 0x6247A3: push    eax
-0x6247A4: call    sub_51ACC0
+0x6247A4: call    AnimGroup_UsesPowerOrCastNoteTemplate; Returns true when the encoded key is not group 0xFF and its fixed group record uses note-template class 5. In Oblivion's 43 records that is AttackPower..AttackRightPower plus CastSelf/Touch/Target and their Alt variants.
 0x6247A9: add     esp, 4
 0x6247AC: test    al, al
 0x6247AE: jz      short loc_6247C3
@@ -174,11 +174,11 @@
 0x6247D0: test    eax, eax
 0x6247D2: jz      short loc_6247F6
 0x6247D4: mov     ecx, [esi+3Ch]
-0x6247D7: call    Actor_GetCurrentAction
+0x6247D7: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x6247DC: cmp     eax, 7
 0x6247DF: jz      def_624B11; jumptable 00624B11 default case, cases 5,8,9,13
 0x6247E5: mov     ecx, [esi+3Ch]
-0x6247E8: call    Actor_GetCurrentAction
+0x6247E8: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x6247ED: cmp     eax, 8
 0x6247F0: jz      def_624B11; jumptable 00624B11 default case, cases 5,8,9,13
 0x6247F6: mov     ecx, [esi+3Ch]
@@ -202,11 +202,11 @@
 0x624839: jz      loc_624BFC
 0x62483F: push    0
 0x624841: mov     ecx, esi
-0x624843: call    sub_624030
+0x624843: call    CombatController_RefreshTacticalState; Refreshes detection/allies tactical state; allied controllers in active modes 2 (ranged weapon) and 4 (ranged spell) are counted as ranged roles.
 0x624848: cmp     byte ptr [esi+1BDh], 0
 0x62484F: jnz     def_624B11; jumptable 00624B11 default case, cases 5,8,9,13
 0x624855: mov     ecx, esi
-0x624857: call    sub_612D30
+0x624857: call    CombatController_UpdateBlockingAllyTimer; Clears blocking-ally flag +0x15A when elapsed controller time exceeds duration +0x168.
 0x62485C: mov     ecx, [esi+3Ch]
 0x62485F: mov     edx, [ecx]
 0x624861: mov     eax, [edx+19Ch]
@@ -308,16 +308,16 @@
 0x624975: mov     edi, eax
 0x624977: push    edi
 0x624978: mov     ecx, esi
-0x62497A: call    sub_612DE0
+0x62497A: call    CombatController_SetCombatMode; Sets CombatController+0x70 active mode (0 H2H, 1 melee weapon, 2 ranged weapon, 3 touch spell, 4 ranged spell, 5 yield, 7 flee, 0xA switch weapon, 0xC leave water) and invalidates desired-distance cache +0x188.
 0x62497F: mov     ecx, esi
-0x624981: call    sub_622180
+0x624981: call    CombatController_UpdateActiveMode; Executes the live combat mode. Mode 3 validates selected touch/melee spell at +0x7C; mode 4 validates selected ranged spell at +0x80; invalid choices transition to mode 0xD.
 0x624986: mov     ecx, esi
 0x624988: mov     bl, 1
-0x62498A: call    sub_614290
+0x62498A: call    CombatController_CanReachCurrentTarget; Returns current-target reachability at +0x174, additionally forcing false when a non-water-capable actor cannot fight a swimming target.
 0x62498F: test    al, al
 0x624991: jnz     short loc_6249E3
-0x624993: push    edi
-0x624994: call    sub_612690
+0x624993: push    edi; mode
+0x624994: call    CombatMode_IsRangedWeaponMode; Returns true only for native combat modes 2 and 4, the two ranged-weapon modes used by the distance and attack-option logic.
 0x624999: add     esp, 4
 0x62499C: test    al, al
 0x62499E: jz      short loc_6249B3
@@ -330,7 +330,7 @@
 0x6249AD: add     esp, 0Ch
 0x6249B0: retn    4
 0x6249B3: mov     ecx, [esi+3Ch]
-0x6249B6: call    sub_5E0F50
+0x6249B6: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x6249BB: mov     edx, [eax]
 0x6249BD: mov     ecx, eax
 0x6249BF: mov     eax, [edx+16Ch]
@@ -347,7 +347,7 @@
 0x6249DD: add     esp, 0Ch
 0x6249E0: retn    4
 0x6249E3: mov     ecx, esi
-0x6249E5: call    sub_6135F0
+0x6249E5: call    CombatController_GetCurrentTarget
 0x6249EA: mov     ecx, ds:0B333C4h
 0x6249F0: cmp     eax, ecx
 0x6249F2: jnz     short loc_624A4D
@@ -405,7 +405,7 @@
 0x624A82: test    bl, bl
 0x624A84: jnz     short loc_624A8D
 0x624A86: mov     ecx, esi
-0x624A88: call    sub_622180
+0x624A88: call    CombatController_UpdateActiveMode; Executes the live combat mode. Mode 3 validates selected touch/melee spell at +0x7C; mode 4 validates selected ranged spell at +0x80; invalid choices transition to mode 0xD.
 0x624A8D: mov     eax, [esi+1A8h]
 0x624A93: cmp     eax, ds:0B372F0h
 0x624A99: jge     short loc_624B05
@@ -423,9 +423,9 @@
 0x624AB6: call    sub_6150E0
 0x624ABB: test    al, al
 0x624ABD: jnz     short loc_624B05
-0x624ABF: push    2
-0x624AC1: push    4
-0x624AC3: call    TESTopic__GEtTopic
+0x624ABF: push    2; index
+0x624AC1: push    4; topicType
+0x624AC3: call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.
 0x624AC8: mov     ecx, [esi+3Ch]
 0x624ACB: mov     edx, ds:0B333C4h
 0x624AD1: add     esp, 8
@@ -453,7 +453,7 @@
 0x624B0B: ja      def_624B11; jumptable 00624B11 default case, cases 5,8,9,13
 0x624B11: jmp     ds:jpt_624B11[eax*4]; switch jump
 0x624B18: mov     ecx, esi; jumptable 00624B11 case 0
-0x624B1A: call    sub_623C00
+0x624B1A: call    CombatController_UpdateMovementAndReachability
 0x624B1F: mov     eax, [esi+70h]
 0x624B22: pop     ebx
 0x624B23: pop     edi
@@ -568,7 +568,7 @@
 0x624C27: mov     edi, [ebx]
 0x624C29: mov     ecx, esi
 0x624C2B: add     edi, 340h
-0x624C31: call    sub_6135F0
+0x624C31: call    CombatController_GetCurrentTarget
 0x624C36: mov     edx, [edi]
 0x624C38: push    eax
 0x624C39: mov     ecx, ebx

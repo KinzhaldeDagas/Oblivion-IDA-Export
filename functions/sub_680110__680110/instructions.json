@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x680110",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified state layout now typed: TravelPathSpaceDoorLink is 0x14 bytes (16-bit table index, two ref/space endpoint pairs); TravelPathSearchState is 0x10 bytes (fitness, predecessor link, current space, flags). The 0x01 discovered interpretation remains Probable; 0x02 expanded is Verified.",
     "mnemonic": "push",
     "size": 2
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x68012D",
-    "line": "lea     eax, [esp+34h+var_C]",
+    "line": "lea     eax, [esp+34h+openNodes.unknown10]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x680143",
-    "line": "mov     ecx, [esp+34h+var_C]",
+    "line": "mov     ecx, dword ptr [esp+34h+openNodes.unknown10]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x680157",
-    "line": "mov     ebp, [esp+34h+arg_0]",
+    "line": "mov     ebp, [esp+34h+sourceSpace]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x680167",
-    "line": "mov     esi, [esp+34h+arg_8]",
+    "line": "mov     esi, [esp+34h+destinationSpace]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x680173",
-    "line": "mov     ecx, [esp+34h+arg_10]",
+    "line": "mov     ecx, [esp+34h+outRouteNodes]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x68017F",
-    "line": "mov     edi, [esp+34h+arg_14]",
+    "line": "mov     edi, [esp+34h+sourceRef]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x68018B",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x680196",
-    "line": "mov     ecx, [esp+34h+var_C]",
+    "line": "mov     ecx, dword ptr [esp+34h+openNodes.unknown10]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x6801AF",
-    "line": "mov     ecx, offset g_pathingMutex",
+    "line": "mov     ecx, 0B3BE80h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -337,31 +337,31 @@
   },
   {
     "ea": "0x6801B9",
-    "line": "call    sub_6805C0",
+    "line": "call    TravelPath_ResetSearchNodeTable; Verified: Clears the transient TravelPath A* search-node table as 0x10 bytes per configured node. The other per-record fields and exact table capacity semantics remain Unknown.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6801BE",
-    "line": "mov     [esp+34h+var_10], ebx",
+    "line": "mov     [esp+34h+openNodes.count], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6801C2",
-    "line": "mov     [esp+34h+var_18], ebx",
+    "line": "mov     [esp+34h+openNodes.start], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6801C6",
-    "line": "mov     [esp+34h+var_14], ebx",
+    "line": "mov     [esp+34h+openNodes.end], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6801CA",
-    "line": "mov     [esp+34h+var_1C], offset ??_7AStarWorldNodeList@@6B@; const AStarWorldNodeList::`vftable'",
+    "line": "mov     [esp+34h+openNodes.vtable], offset ??_7AStarWorldNodeList@@6B@; const AStarWorldNodeList::`vftable' ...",
     "mnemonic": "mov",
     "size": 8
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x6801D8",
-    "line": "mov     eax, [esp+34h+arg_4]",
+    "line": "mov     eax, [esp+34h+sourcePosition]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x680213",
-    "line": "mov     eax, [esp+34h+arg_C]",
+    "line": "mov     eax, [esp+34h+destinationPosition]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -481,19 +481,19 @@
   },
   {
     "ea": "0x68022B",
-    "line": "lea     ecx, [esp+34h+var_1C]",
+    "line": "lea     ecx, [esp+34h+openNodes]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x68022F",
-    "line": "push    ecx",
+    "line": "push    ecx; openNodes",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x680230",
-    "line": "mov     [esp+38h+var_4], ebx",
+    "line": "mov     [esp+38h+openNodes.unknown18], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x680239",
-    "line": "call    sub_67F690",
+    "line": "call    TravelPath_SeedSpaceDoorCandidates; Verified low-level route search seeding: enumerate the per-space reference map for the origin TESForm, filter eligible linked references, compute initial costs from source position and sourceRef, initialize per-node search state/parent, insert candidates into AStarWorldNodeList, and retain the best candidate already in the destination space.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,19 +517,19 @@
   },
   {
     "ea": "0x680244",
-    "line": "lea     ecx, [esp+38h+var_1C]",
+    "line": "lea     ecx, [esp+38h+openNodes]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x680248",
-    "line": "fstp    [esp+38h+var_38]; float",
+    "line": "fstp    [esp+38h+fitnessBound]; fitnessBound",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x68024B",
-    "line": "call    sub_680B40",
+    "line": "call    AStarWorldNodeList_PopMinUnderBound; Verified: Returns/removes the head (minimum-fitness) AStarWorldNodeList item only when its fitness is below the caller's current bound; empty or fitness >= bound returns null. Fallout's homologous TeleportDoorSearch queue instead scans the first non-empty of 20 fitness buckets.",
     "mnemonic": "call",
     "size": 5
   },
@@ -553,31 +553,31 @@
   },
   {
     "ea": "0x680256",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; node",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x680258",
-    "line": "call    sub_680760",
+    "line": "call    TravelPath_SearchState_GetArrivalSpace; Verified: returns the spatial TESForm stored at state +8 for this link's searchNodeIndex. The route expansion uses it to select the opposite endpoint.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x68025D",
-    "line": "push    eax",
+    "line": "push    eax; space",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x68025E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x680260",
-    "line": "call    sub_6803F0",
+    "line": "call    TravelPathSpaceDoorLink_GetOtherSpace; Verified: if the supplied spatial form matches spaceA or spaceB, returns the opposite spatial TESForm; otherwise returns null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -595,31 +595,31 @@
   },
   {
     "ea": "0x68026D",
-    "line": "lea     edx, [esp+34h+var_1C]",
+    "line": "lea     edx, [esp+34h+openNodes]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x680271",
-    "line": "push    edx",
+    "line": "push    edx; openNodes",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x680272",
-    "line": "push    esi",
+    "line": "push    esi; currentNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x680273",
-    "line": "push    eax",
+    "line": "push    eax; currentSpace",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x680274",
-    "line": "call    sub_67F830",
+    "line": "call    TravelPath_ExpandSpaceDoorNeighbors; Verified A* neighbor expansion: resolve the current node's spatial form, enumerate its linked-reference bucket, validate candidate reference/space relationship and traversal cost, update candidate fitness and parent when improved, then reinsert or reopen it as appropriate. Reaching destination space updates the best-route bound.",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,19 +631,19 @@
   },
   {
     "ea": "0x68027C",
-    "line": "push    1",
+    "line": "push    1; expanded",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x68027E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; node",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x680280",
-    "line": "call    sub_680500",
+    "line": "call    TravelPath_SetSearchNodeExpandedFlag; Verified: Sets or clears bit 0x02 at byte +0x0C of the 0x10-byte state record selected by the node's 16-bit index. The route loop sets it after expanding a popped node, so its expanded/closed-set role is Probable; the full record layout remains Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -661,19 +661,19 @@
   },
   {
     "ea": "0x68028C",
-    "line": "lea     ecx, [esp+38h+var_1C]",
+    "line": "lea     ecx, [esp+38h+openNodes]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x680290",
-    "line": "fstp    [esp+38h+var_38]; float",
+    "line": "fstp    [esp+38h+fitnessBound]; fitnessBound",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x680293",
-    "line": "call    sub_680B40",
+    "line": "call    AStarWorldNodeList_PopMinUnderBound; Verified: Returns/removes the head (minimum-fitness) AStarWorldNodeList item only when its fitness is below the caller's current bound; empty or fitness >= bound returns null. Fallout's homologous TeleportDoorSearch queue instead scans the first non-empty of 20 fitness buckets.",
     "mnemonic": "call",
     "size": 5
   },
@@ -727,13 +727,13 @@
   },
   {
     "ea": "0x6802B0",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; node",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6802B2",
-    "line": "call    sub_680760",
+    "line": "call    TravelPath_SearchState_GetArrivalSpace; Verified: returns the spatial TESForm stored at state +8 for this link's searchNodeIndex. The route expansion uses it to select the opposite endpoint.",
     "mnemonic": "call",
     "size": 5
   },
@@ -757,25 +757,25 @@
   },
   {
     "ea": "0x6802BD",
-    "line": "push    eax",
+    "line": "push    eax; space",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6802BE",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6802C0",
-    "line": "call    sub_680380",
+    "line": "call    TravelPathSpaceDoorLink_GetReferenceForSpace; Verified: if the supplied spatial form matches spaceA or spaceB, returns its paired referenceA or referenceB, respectively; otherwise returns null.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6802C5",
-    "line": "mov     ecx, [esp+34h+arg_10]",
+    "line": "mov     ecx, [esp+34h+outRouteNodes]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -793,13 +793,13 @@
   },
   {
     "ea": "0x6802CF",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; node",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6802D1",
-    "line": "call    sub_680430",
+    "line": "call    TravelPath_SearchState_GetParentNode; Verified: returns the predecessor TravelPathSpaceDoorLink pointer stored at state +4 for this link's searchNodeIndex.",
     "mnemonic": "call",
     "size": 5
   },
@@ -823,13 +823,13 @@
   },
   {
     "ea": "0x6802DC",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; node",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6802DE",
-    "line": "call    sub_680430",
+    "line": "call    TravelPath_SearchState_GetParentNode; Verified: returns the predecessor TravelPathSpaceDoorLink pointer stored at state +4 for this link's searchNodeIndex.",
     "mnemonic": "call",
     "size": 5
   },
@@ -859,7 +859,7 @@
   },
   {
     "ea": "0x6802F1",
-    "line": "mov     ecx, [esp+38h+arg_10]",
+    "line": "mov     ecx, [esp+38h+outRouteNodes]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -871,7 +871,7 @@
   },
   {
     "ea": "0x6802F8",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -883,7 +883,7 @@
   },
   {
     "ea": "0x680301",
-    "line": "mov     ecx, offset g_pathingMutex; lpCriticalSection",
+    "line": "mov     ecx, 0B3BE80h; lpCriticalSection",
     "mnemonic": "mov",
     "size": 5
   },
@@ -895,19 +895,19 @@
   },
   {
     "ea": "0x68030B",
-    "line": "lea     ecx, [esp+34h+var_1C]; this",
+    "line": "lea     ecx, [esp+34h+openNodes]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x68030F",
-    "line": "mov     [esp+34h+var_4], 0FFFFFFFFh",
+    "line": "mov     [esp+34h+openNodes.unknown18], 0FFFFFFFFh",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x680317",
-    "line": "call    ??1AStarWorldNodeList@@UAE@XZ; AStarWorldNodeList::~AStarWorldNodeList(void)",
+    "line": "call    ??1AStarWorldNodeList@@UAE@XZ; Verified AStarWorldNodeList destructor resets the NiTPointerListBase vtable, frees all list-link nodes through NiTPointerList::FreeAllNodes, then resets the base list vtable; AStarWorldNode records themselves are stored in the separate transient state table.",
     "mnemonic": "call",
     "size": 5
   },
@@ -919,7 +919,7 @@
   },
   {
     "ea": "0x680320",
-    "line": "mov     ecx, [esp+34h+var_C]",
+    "line": "mov     ecx, dword ptr [esp+34h+openNodes.unknown10]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -970,5 +970,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C4BA0",
+    "line": "lea     ecx, [ebp-1Ch]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C4BA3",
+    "line": "jmp     j_??1AStarWorldNodeList@@UAE@XZ; AStarWorldNodeList::~AStarWorldNodeList(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4BA8",
+    "line": "mov     edx, [esp+sourcePosition]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C4BAC",
+    "line": "lea     eax, [edx-24h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C4BAF",
+    "line": "mov     ecx, [edx-28h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C4BB2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C4BB4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4BB9",
+    "line": "mov     eax, offset stru_AED4A4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4BBE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

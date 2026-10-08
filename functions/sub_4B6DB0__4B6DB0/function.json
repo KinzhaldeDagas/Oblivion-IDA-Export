@@ -1,19 +1,32 @@
 {
-  "callees_count": 19,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4B6DB0",
+      "0x4B6E93"
+    ]
+  ],
+  "chunks_sha256": "a7db248de933b3dec7392f30d72561a37f3495f29f096b2ab6c1c7563d2de056",
+  "comment_regular": "Verified TESObjectDOOR DoPostFixup vtable override (TESFormVtbl::DoPostFixup slot +0x6C at 0xA44AC0). If not already linked, links script data, walks raw randomTeleport FormIDs, rebases each through TESForm_GetOverrideFile/TESForm_ResolveFormID, replaces valid IDs with TESForm pointers, and removes invalid entries after logging 'Could not find RandomTeleport ... for Door ...'; then marks the form linked.",
+  "comment_repeatable": "Verified TESObjectDOOR DoPostFixup vtable override (TESFormVtbl::DoPostFixup slot +0x6C at 0xA44AC0). If not already linked, links script data, walks raw randomTeleport FormIDs, rebases each through TESForm_GetOverrideFile/TESForm_ResolveFormID, replaces valid IDs with TESForm pointers, and removes invalid entries after logging 'Could not find RandomTeleport ... for Door ...'; then marks the form linked.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_4B6DB0",
+  "display_name": "TESObjectDOOR_DoPostFixup",
   "end_ea": "0x4B6E93",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4B6DB0",
+  "name": "TESObjectDOOR_DoPostFixup",
   "segment": ".text",
   "sha256": "a7db248de933b3dec7392f30d72561a37f3495f29f096b2ab6c1c7563d2de056",
   "size": 227,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4B6DB0",
-  "type": "void __thiscall(TESForm *this)",
+  "total_chunk_size": 227,
+  "type": "void __thiscall(TESObjectDOOR *this)",
   "xrefs_from_count": 98,
   "xrefs_to_count": 1
 }

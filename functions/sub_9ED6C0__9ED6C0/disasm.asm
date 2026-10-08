@@ -2,7 +2,7 @@
 0x9ED6C6: push    ecx
 0x9ED6C7: fstp    [esp+4+var_4]; float
 0x9ED6CA: push    offset aFhostileactore; "fHostileActorExteriorDistance"
-0x9ED6CF: mov     ecx, offset fHostileActorExteriorDistance
+0x9ED6CF: mov     ecx, 0B37B68h
 0x9ED6D4: call    GameSetting_ConstrAndReg_float
 0x9ED6D9: push    offset sub_A1FDF0; void (__cdecl *)()
 0x9ED6DE: call    _atexit

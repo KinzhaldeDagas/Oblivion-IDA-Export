@@ -1,4 +1,4 @@
-0x588EF0: push    ebx
+0x588EF0: push    ebx; Verified: forward lookup is case-insensitive; underscore names scan dynamic table while other names use character buckets. Successful lookup increments entry+4. Custom IDs are runtime registry state; resolve by name rather than assuming deterministic assignment across mod/load order.
 0x588EF1: mov     ebx, [esp+4+arg_0]
 0x588EF5: test    ebx, ebx
 0x588EF7: jz      loc_588FBA

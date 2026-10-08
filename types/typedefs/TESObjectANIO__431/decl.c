@@ -1,1 +1,1 @@
-TESObjectANIO
+struct TESObjectANIO;

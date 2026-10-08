@@ -1,6 +1,14 @@
-void __thiscall sub_6970A0(float *this, int a2, int a3, const char *a4, int a5, float a6, char a7)
+// Magic projectile hit/area-effect path. Handles target hit effects, spawns SpecialIdle_AreaEffect for area spells, plays impact sound, and binds effect visuals to actor/player perspective state.
+void __thiscall MagicProjectile_ApplyHitAndAreaEffect(
+        float *this,
+        int a2,
+        int a3,
+        const char *a4,
+        NiNode *parentNode,
+        float unknownChildTag,
+        char a7)
 {
-  int v8; // ebp
+  TESObjectREFR *v8; // ebp
   bhkCharacterProxy *CharProxy; // eax
   int v10; // edi
   _DWORD *v11; // ecx
@@ -19,173 +27,183 @@ void __thiscall sub_6970A0(float *this, int a2, int a3, const char *a4, int a5, 
   double v24; // st6
   char *v25; // edi
   char *v26; // ebx
-  int *v27; // eax
-  TESObjectCELL *ParentCell; // eax
-  int v29; // ecx
-  TESObjectCELL *v30; // eax
-  int v31; // eax
-  NiTransform *v32; // eax
-  float v33; // ebp
-  float v34; // ebx
-  void *v35; // edi
-  TESObjectCELL *v36; // eax
-  float *v37; // edi
+  int v27; // eax
+  int v28; // ecx
+  TESObjectCELL *DwordAtOffset40; // eax
+  int v30; // eax
+  NiTransform *v31; // eax
+  float v32; // ebp
+  float v33; // ebx
+  BSTempEffectParticle *v34; // edi
+  TESObjectCELL *v35; // eax
+  BSTempEffectParticle *v36; // edi
+  int *sound; // ecx
   int v38; // eax
-  int *v39; // eax
-  int *v40; // edi
-  float *v41; // eax
-  float v42; // [esp+20h] [ebp-68h]
+  int *v39; // edi
+  float *v40; // eax
+  float durationSeconds; // [esp+20h] [ebp-68h]
+  __int64 v42; // [esp+28h] [ebp-60h]
   const char *v43; // [esp+28h] [ebp-60h]
-  int v44; // [esp+2Ch] [ebp-5Ch]
-  int v45; // [esp+30h] [ebp-58h]
-  int v46; // [esp+34h] [ebp-54h]
-  int v47; // [esp+34h] [ebp-54h]
-  signed int v48; // [esp+44h] [ebp-44h]
-  float v49; // [esp+60h] [ebp-28h]
-  float v50[2]; // [esp+64h] [ebp-24h] BYREF
-  float v51; // [esp+6Ch] [ebp-1Ch]
-  float v52[3]; // [esp+70h] [ebp-18h] BYREF
-  unsigned int v53; // [esp+84h] [ebp-4h]
-  float v54; // [esp+98h] [ebp+10h]
-  int v55; // [esp+98h] [ebp+10h]
+  __int64 v44; // [esp+30h] [ebp-58h]
+  float v45; // [esp+34h] [ebp-54h]
+  signed int scale; // [esp+44h] [ebp-44h]
+  float v47; // [esp+60h] [ebp-28h]
+  float v48[2]; // [esp+64h] [ebp-24h] BYREF
+  float v49; // [esp+6Ch] [ebp-1Ch]
+  float v50[3]; // [esp+70h] [ebp-18h] BYREF
+  unsigned int v51; // [esp+84h] [ebp-4h]
+  float parentNodeb; // [esp+98h] [ebp+10h]
+  NiNode *parentNodea; // [esp+98h] [ebp+10h]
 
-  v8 = LODWORD(a6);
-  if ( a6 == 0.0
-    || !(*(unsigned __int8 (__thiscall **)(_DWORD))(*(_DWORD *)LODWORD(a6) + 0x190))(LODWORD(a6))
+  v8 = (TESObjectREFR *)LODWORD(unknownChildTag); /*0x6970c9*/
+  if ( unknownChildTag == 0.0 /*0x6970e4*/
+    || !(*(unsigned __int8 (__thiscall **)(_DWORD))(*(_DWORD *)LODWORD(unknownChildTag) + 0x190))(LODWORD(unknownChildTag))
     || !Actor_IsGhost((Actor *)v8) )
   {
-    a6 = *(this + 0x1E);
-    *(this + 0x28) = a6;
-    if ( MobileObject_GetCharProxy((MobileObject *)this) )
+    unknownChildTag = *(this + 0x1E); /*0x6970f6*/
+    *(this + 0x28) = unknownChildTag; /*0x6970fe*/
+    if ( MobileObject_GetCharProxy((MobileObject *)this) ) /*0x697104*/
     {
-      if ( (*((_DWORD *)MobileObject_GetCharProxy((MobileObject *)this) + 0x7D) & 0x8000) != 0 )
-        (*(void (__thiscall **)(float *))(*(_DWORD *)this + 0x214))(this);
-      CharProxy = MobileObject_GetCharProxy((MobileObject *)this);
-      sub_57E270(CharProxy, &a6);
-      v10 = LODWORD(a6) | 0x4000;
-      v11 = *((_DWORD **)MobileObject_GetCharProxy((MobileObject *)this) + 0xD9);
-      if ( v11 )
+      if ( (*((_DWORD *)MobileObject_GetCharProxy((MobileObject *)this) + 0x7D) & 0x8000) != 0 ) /*0x697120*/
+        (*(void (__thiscall **)(float *))(*(_DWORD *)this + 0x214))(this); /*0x69712c*/
+      CharProxy = MobileObject_GetCharProxy((MobileObject *)this); /*0x697135*/
+      bhkCharacterProxy_GetCollisionFilterInfo(CharProxy, &unknownChildTag); /*0x69713c*/
+      v10 = LODWORD(unknownChildTag) | 0x4000; /*0x697147*/
+      v11 = *((_DWORD **)MobileObject_GetCharProxy((MobileObject *)this) + 0xD9); /*0x697152*/
+      if ( v11 ) /*0x69715a*/
       {
-        v12 = v11[2];
-        if ( v12 )
+        v12 = v11[2]; /*0x69715c*/
+        if ( v12 ) /*0x697161*/
         {
-          v13 = v12 + 0x14;
-          if ( v13 )
-            *(_DWORD *)(v13 + 0x1C) = v10;
+          v13 = v12 + 0x14; /*0x697163*/
+          if ( v13 ) /*0x697166*/
+            *(_DWORD *)(v13 + 0x1C) = v10; /*0x697168*/
         }
-        (*(void (__thiscall **)(_DWORD *))(*v11 + 0x80))(v11);
+        (*(void (__thiscall **)(_DWORD *))(*v11 + 0x80))(v11); /*0x697173*/
       }
     }
-    v14 = *(int (__thiscall **)(float *))(*(_DWORD *)this + 0x154);
-    *((_DWORD *)this + 0x20) = 1;
-    v15 = v14(this);
-    if ( v15 )
+    v14 = *(int (__thiscall **)(float *))(*(_DWORD *)this + 0x154); /*0x697177*/
+    *((_DWORD *)this + 0x20) = 1; /*0x69717f*/
+    v15 = v14(this); /*0x697189*/
+    if ( v15 ) /*0x69718d*/
     {
-      v16 = sub_7101F0((NiTransform *)(v15 + 0x64), (NiTransform *)v50, (NiPoint3 *)&dword_B258DC);
-      sub_69F880(
+      v16 = sub_7101F0((NiTransform *)(v15 + 0x64), (NiTransform *)v48, &stru_B258DC); /*0x69719c*/
+      sub_69F880( /*0x6971d6*/
         *(float *)&a2,
         *(float *)&a3,
         *(float *)&a4,
         v16->rot.data[0][0],
         v16->rot.data[0][1],
         v16->rot.data[0][2],
-        a5);
+        parentNode);
     }
-    if ( v8 )
+    if ( v8 ) /*0x6971dd*/
     {
-      if ( (PlayerCharacter *)v8 != TESDataHandler_g_PlayerRef || TESDataHandler_g_PlayerRef->isThirdPerson )
+      if ( v8 != (TESObjectREFR *)reference || reference->isThirdPerson ) /*0x6971e8*/
       {
-        *((_DWORD *)this + 0x26) = v8;
-        v17 = (*(int (__thiscall **)(int))(*(_DWORD *)v8 + 0x154))(v8);
-        if ( v17 )
+        *((_DWORD *)this + 0x26) = v8; /*0x6971f1*/
+        v17 = (int)v8->vtbl->GetNiNode(v8); /*0x697202*/
+        if ( v17 ) /*0x697206*/
         {
-          v18 = (Ni2DBuffer *)(*(int (__thiscall **)(int, const char *))(*(_DWORD *)v17 + 0x58))(v17, "Bip01 Spine2");
-          NiSmartPointer_Set__((Ni2DBuffer **)this + 0x24, v18);
+          v18 = (Ni2DBuffer *)(*(int (__thiscall **)(int, const char *))(*(_DWORD *)v17 + 0x58))(v17, "Bip01 Spine2"); /*0x697214*/
+          NiSmartPointer_Set__((Ni2DBuffer **)this + 0x24, v18); /*0x69721d*/
         }
       }
     }
-    v19 = (float *)(*(int (__thiscall **)(float *))(*(_DWORD *)this + 0x154))(this);
-    v20 = v19[0x15];
-    v21 = v19[0x16];
-    v22 = v19[0x17];
-    v50[0] = v20;
-    v50[1] = v21;
-    v51 = v22;
-    v54 = v20 - *(float *)&a2;
-    a6 = v21 - *(float *)&a3;
-    v49 = v22 - *(float *)&a4;
-    v23 = v54 * v54;
-    v24 = v49 * v49;
-    a6 = a6 * a6 + v23 + v24;
-    a6 = sqrt(a6);
-    sub_7F3530(*((_DWORD *)this + 0x1F), flt_A34BA0, a6, *(this + 0x17), 0.0);
-    if ( !a7 )
+    v19 = (float *)(*(int (__thiscall **)(float *))(*(_DWORD *)this + 0x154))(this); /*0x69722c*/
+    v20 = v19[0x15]; /*0x69722e*/
+    v21 = v19[0x16]; /*0x697231*/
+    v22 = v19[0x17]; /*0x697234*/
+    v48[0] = v20; /*0x697237*/
+    v48[1] = v21; /*0x697243*/
+    v49 = v22; /*0x697247*/
+    parentNodeb = v20 - *(float *)&a2; /*0x69724b*/
+    unknownChildTag = v21 - *(float *)&a3; /*0x697257*/
+    v47 = v22 - *(float *)&a4; /*0x697263*/
+    v23 = parentNodeb * parentNodeb; /*0x69727b*/
+    v24 = v47 * v47; /*0x69727f*/
+    unknownChildTag = unknownChildTag * unknownChildTag + v23 + v24; /*0x697283*/
+    unknownChildTag = sqrt(unknownChildTag); /*0x697290*/
+    sub_7F3530(*((_DWORD *)this + 0x1F), flt_A34BA0, unknownChildTag, *(this + 0x17), 0.0); /*0x6972bc*/
+    if ( !a7 ) /*0x6972c6*/
     {
-      v25 = *((char **)this + 0x1B);
-      v26 = *((char **)this + 0x1A);
-      v27 = (int *)(*(int (__thiscall **)(float *))(*(_DWORD *)this + 0x174))(this);
-      v44 = *v27;
-      v45 = v27[1];
-      v46 = v27[2];
-      ParentCell = TESObjectREFR_GetParentCell((TESObjectREFR *)this);
-      MagicCaster_TargetEffectHit__(v26, v23, 1.0, v24, v25, (int)ParentCell, v44, v45, v46, (int)this, v8, 0, 1.0, 1.0);
+      v25 = *((char **)this + 0x1B); /*0x6972d0*/
+      v26 = *((char **)this + 0x1A); /*0x6972d3*/
+      v27 = (*(int (__thiscall **)(float *))(*(_DWORD *)this + 0x174))(this); /*0x6972d8*/
+      HIDWORD(v42) = *(_DWORD *)v27; /*0x6972f1*/
+      v44 = *(_QWORD *)(v27 + 4); /*0x6972f9*/
+      LODWORD(v42) = Shared_GetDwordAtOffset40(this); /*0x697306*/
+      MagicCaster_TargetEffectHit__(v26, v23, 1.0, v24, v25, v42, v44, (int)this, v8, 0, 1.0, 1.0); /*0x69730a*/
     }
-    v29 = *((_DWORD *)this + 0x1D) + 0x18;
-    *(this + 0x26) = 0.0;
-    if ( (*(int (__thiscall **)(int))(*(_DWORD *)v29 + 0x14))(v29) )
+    v28 = *((_DWORD *)this + 0x1D) + 0x18; /*0x697312*/
+    *(this + 0x26) = 0.0; /*0x697315*/
+    if ( (*(int (__thiscall **)(int))(*(_DWORD *)v28 + 0x14))(v28) ) /*0x697324*/
     {
-      EffectItem_GetArea(*((_DWORD **)this + 0x1C));
-      a6 = COERCE_FLOAT((*(int (__thiscall **)(int))(*(_DWORD *)(*((_DWORD *)this + 0x1D) + 0x18) + 0x14))(*((_DWORD *)this + 0x1D) + 0x18));
-      TESObjectREFR_GetParentCell((TESObjectREFR *)this);
-      v48 = sub_4C9BE0((TESObjectREFR *)this);
-      v30 = TESObjectREFR_GetParentCell((TESObjectREFR *)this);
-      v55 = sub_441800(v30, v48, 3u);
-      if ( (*(int (__thiscall **)(float *))(*(_DWORD *)this + 0x154))(this) )
+      EffectItem_GetArea(*((_DWORD **)this + 0x1C)); /*0x697331*/
+      unknownChildTag = COERCE_FLOAT((*(int (__thiscall **)(int))(*(_DWORD *)(*((_DWORD *)this + 0x1D) + 0x18) + 0x14))(*((_DWORD *)this + 0x1D) + 0x18)); /*0x697346*/
+      Shared_GetDwordAtOffset40(this); /*0x69734a*/
+      scale = sub_4C9BE0((TESObjectREFR *)this); /*0x69735a*/
+      DwordAtOffset40 = (TESObjectCELL *)Shared_GetDwordAtOffset40(this); /*0x69735d*/
+      parentNodea = (NiNode *)sub_441800(DwordAtOffset40, scale, 3u); /*0x69736b*/
+      if ( (*(int (__thiscall **)(float *))(*(_DWORD *)this + 0x154))(this) ) /*0x697377*/
       {
-        v31 = (*(int (__thiscall **)(float *))(*(_DWORD *)this + 0x154))(this);
-        v32 = sub_7101F0((NiTransform *)(v31 + 0x30), (NiTransform *)v52, (NiPoint3 *)&dword_B258DC);
+        v30 = (*(int (__thiscall **)(float *))(*(_DWORD *)this + 0x154))(this); /*0x697387*/
+        v31 = sub_7101F0((NiTransform *)(v30 + 0x30), (NiTransform *)v50, &stru_B258DC); /*0x697396*/
       }
       else
       {
-        v32 = (NiTransform *)&dword_B258DC;
+        v31 = (NiTransform *)&stru_B258DC; /*0x69739d*/
       }
-      v33 = v32->rot.data[0][0];
-      v34 = v32->rot.data[0][1];
-      v51 = v32->rot.data[0][2];
-      v35 = (void *)FormHeapAlloc(0x20u);
-      v53 = 0;
-      if ( v35 )
+      v32 = v31->rot.data[0][0]; /*0x6973a5*/
+      v33 = v31->rot.data[0][1]; /*0x6973a7*/
+      v49 = v31->rot.data[0][2]; /*0x6973ac*/
+      v34 = (BSTempEffectParticle *)FormHeapAlloc(0x20u); /*0x6973b5*/
+      v51 = 0; /*0x6973c0*/
+      if ( v34 ) /*0x6973c8*/
       {
-        v47 = LODWORD(v51);
-        v43 = (const char *)LODWORD(a6);
-        v42 = flt_A31E2C;
-        v36 = TESObjectREFR_GetParentCell((TESObjectREFR *)this);
-        v37 = sub_5713F0(v35, (int)v36, v42, v55, v43, v33, v34, v47, *(float *)&a2, a3, a4, 1.0, 0);
+        v45 = v49; /*0x697403*/
+        v43 = (const char *)LODWORD(unknownChildTag); /*0x69740a*/
+        durationSeconds = flt_A31E2C; /*0x69740f*/
+        v35 = (TESObjectCELL *)Shared_GetDwordAtOffset40(this); /*0x697412*/
+        v36 = BSTempEffectParticle_Constructor( /*0x69741f*/
+                v34,
+                v35,
+                durationSeconds,
+                parentNodea,
+                v43,
+                v32,
+                v33,
+                v45,
+                *(float *)&a2,
+                *(float *)&a3,
+                *(float *)&a4,
+                1.0,
+                0);
       }
       else
       {
-        v37 = 0;
+        v36 = 0; /*0x697423*/
       }
-      v53 = 0xFFFFFFFF;
-      sub_678D30((int *)&ActorProcessManager_ptr, (volatile LONG *)v37);
-      sub_570C00(v37, "SpecialIdle_AreaEffect");
+      v51 = 0xFFFFFFFF; /*0x69742b*/
+      ActorProcessManager_RegisterTempEffect((int *)&qword_B3BB2C[0x75], (volatile LONG *)v36); /*0x697433*/
+      PlaySpecialIdleOnControllerManager(v36, "SpecialIdle_AreaEffect");// Area effect path starts SpecialIdle_AreaEffect on spawned effect object's controller manager via sub_570C00; no actor KFFZ lookup. /*0x69743f*/
     }
-    if ( OSGlobals->sound )
+    sound = (int *)MEMORY[0xB33398]->sound; /*0x69744a*/
+    if ( sound ) /*0x69744f*/
     {
-      v38 = *(_DWORD *)(*((_DWORD *)this + 0x1D) + 0x8C);
-      if ( v38 )
+      v38 = *(_DWORD *)(*((_DWORD *)this + 0x1D) + 0x8C); /*0x697458*/
+      if ( v38 ) /*0x697460*/
       {
-        if ( !a7 )
+        if ( !a7 ) /*0x697467*/
         {
-          OSGLobals_PlaySound(*(_DWORD *)(v38 + 0xC), 0x102, 1);
-          v40 = v39;
-          if ( v39 )
+          v39 = OSGLobals_PlaySound(sound, *(void **)(v38 + 0xC), 0x102, 1); /*0x697479*/
+          if ( v39 ) /*0x69747d*/
           {
-            v41 = (float *)(*(int (__thiscall **)(float *))(*(_DWORD *)this + 0x174))(this);
-            sub_6B7360(v40, *v41, v41[1], v41[2]);
-            sub_6B71C0(v40, 0);
-            sub_6B73E0(v40);
-            FormHeapFree((unsigned int)v40);
+            v40 = (float *)(*(int (__thiscall **)(float *))(*(_DWORD *)this + 0x174))(this); /*0x697489*/
+            sub_6B7360(v39, *v40, v40[1], v40[2]); /*0x6974bb*/
+            sub_6B71C0(v39, 0); /*0x6974c4*/
+            sub_6B73E0(v39); /*0x6974cb*/
+            FormHeapFree((unsigned int)v39); /*0x6974d1*/
           }
         }
       }

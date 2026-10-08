@@ -1,1 +1,6 @@
-_D3DGAMMARAMP
+struct _D3DGAMMARAMP
+{
+WORD red[256];
+WORD green[256];
+WORD blue[256];
+};

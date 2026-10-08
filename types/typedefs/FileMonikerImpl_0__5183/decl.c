@@ -1,1 +1,1 @@
-FileMonikerImpl_0
+typedef FileMonikerImpl FileMonikerImpl_0;

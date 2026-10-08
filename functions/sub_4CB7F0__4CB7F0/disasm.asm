@@ -11,7 +11,7 @@
 0x4CB80C: mov     edx, ds:0B3F9B0h
 0x4CB812: push    edi
 0x4CB813: push    ebp; a2
-0x4CB814: mov     ecx, offset stru_B35C80; this
+0x4CB814: mov     ecx, offset unk_B35C80; this
 0x4CB819: mov     [esi+8], edx
 0x4CB81C: call    sub_496EA0
 0x4CB821: lea     edi, [ebp+48h]
@@ -63,7 +63,7 @@
 0x4CB8A4: fmul    dword ptr [esi+8]
 0x4CB8A7: fstp    dword ptr [esi+8]
 0x4CB8AA: push    ebp; a2
-0x4CB8AB: mov     ecx, offset stru_B35C80; this
+0x4CB8AB: mov     ecx, offset unk_B35C80; this
 0x4CB8B0: call    sub_496F50
 0x4CB8B5: pop     edi
 0x4CB8B6: pop     esi

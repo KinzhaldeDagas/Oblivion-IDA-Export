@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x553140",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Constructs the 0xDBC-byte FaceGen manager, loads FaceGen\\\\si.ctl, initializes the four parameter basis lists and FanControls at +0xC8, then creates fallback face textures.",
     "mnemonic": "push",
     "size": 2
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x553177",
-    "line": "push    offset sub_6EF4A0; a4",
+    "line": "push    offset FaceGenEgtBasisBank_Construct; a4",
     "mnemonic": "push",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x5531B6",
-    "line": "push    0Eh; MaxCount",
+    "line": "push    0Eh; count",
     "mnemonic": "push",
     "size": 2
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x5531BD",
-    "line": "lea     ecx, [esp+54h+var_28]",
+    "line": "lea     ecx, [esp+54h+path]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -223,37 +223,37 @@
   },
   {
     "ea": "0x5531C6",
-    "line": "mov     [esp+54h+var_10], 0Fh",
+    "line": "mov     [esp+54h+path.capacity], 0Fh",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x5531CE",
-    "line": "mov     [esp+54h+var_14], ebx",
+    "line": "mov     [esp+54h+path.size], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5531D2",
-    "line": "mov     byte ptr [esp+54h+var_24], bl",
+    "line": "mov     byte ptr [esp+54h+path.storage], bl",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5531D6",
-    "line": "call    sub_414500",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5531DB",
-    "line": "push    edi",
+    "line": "push    edi; fanControls",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5531DC",
-    "line": "push    esi",
+    "line": "push    esi; namedControlBanks",
     "mnemonic": "push",
     "size": 1
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x5531E3",
-    "line": "push    ebx",
+    "line": "push    ebx; outBasisDimensions",
     "mnemonic": "push",
     "size": 1
   },
@@ -277,25 +277,25 @@
   },
   {
     "ea": "0x5531E7",
-    "line": "push    eax",
+    "line": "push    eax; outHeader1",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5531E8",
-    "line": "lea     eax, [esp+5Ch+var_28]",
+    "line": "lea     eax, [esp+5Ch+path]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5531EC",
-    "line": "push    ebp",
+    "line": "push    ebp; outHeader0",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5531ED",
-    "line": "push    eax",
+    "line": "push    eax; path",
     "mnemonic": "push",
     "size": 1
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x5531F3",
-    "line": "call    sub_6ED850",
+    "line": "call    FaceGen_LoadCtlFile; First CTL load attempt: outputs header scalars at manager+0/+4, four basis dimensions at +0xD9C, named control banks at +0x88, FanControls at +0xC8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x553202",
-    "line": "cmp     [esp+4Ch+var_10], 10h",
+    "line": "cmp     [esp+4Ch+path.capacity], 10h",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x55320E",
-    "line": "mov     ecx, [esp+4Ch+var_24]",
+    "line": "mov     ecx, dword ptr [esp+4Ch+path.storage]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x553213",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x553222",
-    "line": "push    0Eh; MaxCount",
+    "line": "push    0Eh; count",
     "mnemonic": "push",
     "size": 2
   },
@@ -397,49 +397,49 @@
   },
   {
     "ea": "0x553229",
-    "line": "lea     ecx, [esp+54h+var_28]",
+    "line": "lea     ecx, [esp+54h+path]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x55322D",
-    "line": "mov     [esp+54h+var_10], 0Fh",
+    "line": "mov     [esp+54h+path.capacity], 0Fh",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x553235",
-    "line": "mov     [esp+54h+var_14], 0",
+    "line": "mov     [esp+54h+path.size], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x55323D",
-    "line": "mov     byte ptr [esp+54h+var_24], 0",
+    "line": "mov     byte ptr [esp+54h+path.storage], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x553242",
-    "line": "call    sub_414500",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x553247",
-    "line": "push    edi",
+    "line": "push    edi; fanControls",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x553248",
-    "line": "push    esi",
+    "line": "push    esi; namedControlBanks",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x553249",
-    "line": "push    ebx",
+    "line": "push    ebx; outBasisDimensions",
     "mnemonic": "push",
     "size": 1
   },
@@ -451,25 +451,25 @@
   },
   {
     "ea": "0x55324D",
-    "line": "push    eax",
+    "line": "push    eax; outHeader1",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x55324E",
-    "line": "lea     edx, [esp+5Ch+var_28]",
+    "line": "lea     edx, [esp+5Ch+path]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x553252",
-    "line": "push    ebp",
+    "line": "push    ebp; outHeader0",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x553253",
-    "line": "push    edx",
+    "line": "push    edx; path",
     "mnemonic": "push",
     "size": 1
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x553259",
-    "line": "call    sub_6ED850",
+    "line": "call    FaceGen_LoadCtlFile; Retries the same FaceGen\\\\si.ctl load after first failure; constructor prints Unable to load CTL file if the second attempt fails.",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x553266",
-    "line": "cmp     [esp+4Ch+var_10], 10h",
+    "line": "cmp     [esp+4Ch+path.capacity], 10h",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x553272",
-    "line": "mov     eax, [esp+4Ch+var_24]",
+    "line": "mov     eax, dword ptr [esp+4Ch+path.storage]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x553277",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x5532FE",
-    "line": "call    sub_527160",
+    "line": "call    FaceGenFloatVector_ResizeFill; Vector resize: retain existing prefix, erase surplus elements when shrinking, fill only newly inserted elements when growing. Equal size does not overwrite coefficients. Matrix dimension products must already be valid; no recovery from rows*columns overflow.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1363,7 +1363,7 @@
   },
   {
     "ea": "0x55342E",
-    "line": "push    offset dword_B256D0; a2",
+    "line": "push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0; a2",
     "mnemonic": "push",
     "size": 5
   },
@@ -1729,7 +1729,7 @@
   },
   {
     "ea": "0x5534E0",
-    "line": "push    offset dword_B256D0; a2",
+    "line": "push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0; a2",
     "mnemonic": "push",
     "size": 5
   },
@@ -1954,5 +1954,299 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x552FF0",
+    "line": "push    offset sub_552E50; void (__thiscall *)(void *)",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x552FF5",
+    "line": "push    4; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x552FF7",
+    "line": "push    10h; unsigned int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x552FF9",
+    "line": "push    ecx; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x552FFA",
+    "line": "call    $LN21",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x552FFF",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BBF20",
+    "line": "mov     ecx, [ebp-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BBF23",
+    "line": "jmp     sub_552F40",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BBF28",
+    "line": "mov     ecx, [ebp-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BBF2B",
+    "line": "add     ecx, 88h ; 'ˆ'",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9BBF31",
+    "line": "jmp     loc_552FF0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BBF36",
+    "line": "mov     ecx, [ebp-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BBF39",
+    "line": "add     ecx, 0C8h ; 'È'",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9BBF3F",
+    "line": "jmp     sub_551FE0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BBF44",
+    "line": "mov     ecx, [ebp-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BBF47",
+    "line": "add     ecx, 0DB0h; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9BBF4D",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BBF52",
+    "line": "mov     ecx, [ebp-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BBF55",
+    "line": "add     ecx, 0DB4h; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9BBF5B",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BBF60",
+    "line": "mov     ecx, [ebp-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BBF63",
+    "line": "add     ecx, 0DB8h; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9BBF69",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BBF6E",
+    "line": "lea     ecx, [ebp-28h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BBF71",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BBF76",
+    "line": "lea     ecx, [ebp-28h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BBF79",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BBF7E",
+    "line": "mov     eax, [ebp-30h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BBF81",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BBF82",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BBF87",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BBF88",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BBF89",
+    "line": "mov     eax, [ebp-30h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BBF8C",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BBF8D",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BBF92",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BBF93",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BBF94",
+    "line": "mov     eax, [ebp-30h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BBF97",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BBF98",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BBF9D",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BBF9E",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BBF9F",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BBFA3",
+    "line": "lea     eax, [edx-3Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BBFA6",
+    "line": "mov     ecx, [edx-40h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BBFA9",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BBFAB",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BBFB0",
+    "line": "mov     eax, offset stru_AE5BA8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BBFB5",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

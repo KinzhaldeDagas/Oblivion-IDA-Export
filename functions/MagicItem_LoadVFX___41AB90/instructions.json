@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x41AB90",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; MagicItem VFX resolve/apply path. Ensures referenced spell art and effect-item models are loaded, reports missing spell art, and applies cached model handles to effect settings.",
     "mnemonic": "push",
     "size": 2
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x41ABCB",
-    "line": "push    0",
+    "line": "push    0; effectIndex",
     "mnemonic": "push",
     "size": 2
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x41ABCF",
-    "line": "call    MagicItem_GetFXEffect",
+    "line": "call    MagicItem_GetFXEffect; Verified (Oblivion): MagicItem_GetFXEffect returns the effect's EffectSetting pointer; MagicShaderHitEffect constructors/PostLink dereference its +0x78 EffectSetting::effectShader field.",
     "mnemonic": "call",
     "size": 5
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x41ABE5",
-    "line": "call    sub_41A610",
+    "line": "call    MagicItem_LoadVFXModels; MagicItem VFX model preload path. Walks spell art and effect-item VFX model references and asks the model loader to load/cache required art resources.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x41ABEE",
-    "line": "call    sub_419F10",
+    "line": "call    MagicItem_UnloadVFXModels; MagicItem VFX model unload path. Walks spell art and effect-item VFX model references (weapons, armor, NPC/creature models, etc.) and removes them from the queued model loader/cache.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x41AC45",
-    "line": "mov     ecx, ModelLoaderPtr",
+    "line": "mov     ecx, ds:0B33A1Ch",
     "mnemonic": "mov",
     "size": 6
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x41AC9F",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x41ACDE",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -793,13 +793,13 @@
   },
   {
     "ea": "0x41AD41",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; compactString",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x41AD43",
-    "line": "call    sub_449190",
+    "line": "call    OB_CompactString_Length_010201A0; Bethesda compact string length helper. If inline length marker is 0xFFFF, strlen(heap string); otherwise returns the 16-bit stored length. Used here to gate optional TESObjectTREE leaf texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -841,7 +841,7 @@
   },
   {
     "ea": "0x41AD59",
-    "line": "mov     ecx, ModelLoaderPtr",
+    "line": "mov     ecx, ds:0B33A1Ch",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1003,7 +1003,7 @@
   },
   {
     "ea": "0x41ADB3",
-    "line": "mov     ecx, ModelLoaderPtr",
+    "line": "mov     ecx, ds:0B33A1Ch",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1075,7 +1075,7 @@
   },
   {
     "ea": "0x41ADD8",
-    "line": "mov     ecx, ModelLoaderPtr",
+    "line": "mov     ecx, ds:0B33A1Ch",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1195,13 +1195,13 @@
   },
   {
     "ea": "0x41AE1E",
-    "line": "mov     ecx, TESDataHandler_g_PlayerRef",
+    "line": "mov     ecx, dword ptr reference",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x41AE24",
-    "line": "push    1",
+    "line": "push    1; int",
     "mnemonic": "push",
     "size": 2
   },
@@ -1231,7 +1231,7 @@
   },
   {
     "ea": "0x41AE3A",
-    "line": "call    TESLeveledList_CalcLeveledForm",
+    "line": "call    TESLeveledList_CalcLeveledForm; CustomAnimSupport decode: leveled-list resolver evidence with chance/level/random/container logic; not used as deterministic animation target list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1243,7 +1243,7 @@
   },
   {
     "ea": "0x41AE41",
-    "line": "lea     ecx, [esp+154h+var_124]",
+    "line": "lea     ecx, [esp+158h+var_12C+4]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1255,7 +1255,7 @@
   },
   {
     "ea": "0x41AE4A",
-    "line": "lea     ecx, [esp+150h+var_124]",
+    "line": "lea     ecx, [esp+154h+var_12C+4]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1267,7 +1267,7 @@
   },
   {
     "ea": "0x41AE50",
-    "line": "mov     [esp+150h+var_4], 0FFFFFFFFh",
+    "line": "mov     [esp+154h+var_8], 0FFFFFFFFh",
     "mnemonic": "mov",
     "size": 11
   },
@@ -1381,7 +1381,7 @@
   },
   {
     "ea": "0x41AE8E",
-    "line": "mov     ebx, [esp+150h+var_13C]",
+    "line": "mov     ebx, [esp+154h+var_140]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1417,7 +1417,7 @@
   },
   {
     "ea": "0x41AE9F",
-    "line": "mov     ecx, ModelLoaderPtr",
+    "line": "mov     ecx, ds:0B33A1Ch",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1489,7 +1489,7 @@
   },
   {
     "ea": "0x41AEC0",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1501,7 +1501,7 @@
   },
   {
     "ea": "0x41AEC6",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1561,7 +1561,7 @@
   },
   {
     "ea": "0x41AEE7",
-    "line": "mov     [esp+150h+var_130], eax",
+    "line": "mov     [esp+154h+var_134], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1603,7 +1603,7 @@
   },
   {
     "ea": "0x41AF04",
-    "line": "mov     ecx, ModelLoaderPtr",
+    "line": "mov     ecx, ds:0B33A1Ch",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1639,7 +1639,7 @@
   },
   {
     "ea": "0x41AF1A",
-    "line": "mov     edi, [esp+150h+var_13C]",
+    "line": "mov     edi, [esp+154h+var_140]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1674,12 +1674,6 @@
     "size": 2
   },
   {
-    "ea": "0x41AF2D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x41AF30",
     "line": "push    ebp; lpAddend",
     "mnemonic": "push",
@@ -1711,7 +1705,7 @@
   },
   {
     "ea": "0x41AF3A",
-    "line": "mov     ecx, [esp+150h+var_130]",
+    "line": "mov     ecx, [esp+154h+var_134]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1723,19 +1717,19 @@
   },
   {
     "ea": "0x41AF44",
-    "line": "mov     dword ptr [esp+150h+var_12C], edi",
+    "line": "mov     [esp+154h+var_130], edi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x41AF48",
-    "line": "call    sub_6899C0",
+    "line": "call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x41AF4D",
-    "line": "lea     edx, [esp+150h+Str]",
+    "line": "lea     edx, [esp+154h+var_124+0Ch]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1789,7 +1783,7 @@
   },
   {
     "ea": "0x41AF63",
-    "line": "lea     ecx, [esp+150h+Str]",
+    "line": "lea     ecx, [esp+154h+var_124+0Ch]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1831,7 +1825,7 @@
   },
   {
     "ea": "0x41AF76",
-    "line": "mov     [esp+150h+var_134], ebx",
+    "line": "mov     [esp+154h+var_138], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1921,7 +1915,7 @@
   },
   {
     "ea": "0x41AF9A",
-    "line": "lea     edi, [esp+150h+Str]",
+    "line": "lea     edi, [esp+154h+var_124+0Ch]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1999,7 +1993,7 @@
   },
   {
     "ea": "0x41AFBB",
-    "line": "lea     edx, [esp+150h+Str]",
+    "line": "lea     edx, [esp+154h+var_124+0Ch]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2011,7 +2005,7 @@
   },
   {
     "ea": "0x41AFC1",
-    "line": "mov     ecx, ModelLoaderPtr",
+    "line": "mov     ecx, ds:0B33A1Ch",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2041,7 +2035,7 @@
   },
   {
     "ea": "0x41AFD1",
-    "line": "mov     ecx, [esp+150h+var_13C]",
+    "line": "mov     ecx, [esp+154h+var_140]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2077,7 +2071,7 @@
   },
   {
     "ea": "0x41AFE2",
-    "line": "mov     edx, dword ptr [esp+150h+var_12C]",
+    "line": "mov     edx, [esp+154h+var_130]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2167,7 +2161,7 @@
   },
   {
     "ea": "0x41B010",
-    "line": "mov     ecx, ModelLoaderPtr",
+    "line": "mov     ecx, ds:0B33A1Ch",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2179,7 +2173,7 @@
   },
   {
     "ea": "0x41B017",
-    "line": "mov     eax, dword ptr [esp+154h+var_12C]",
+    "line": "mov     eax, [esp+158h+var_130]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2191,7 +2185,7 @@
   },
   {
     "ea": "0x41B01C",
-    "line": "call    sub_435830",
+    "line": "call    BuildKFListForModelDirectory; Builds a KF path list for a model directory. Feeds ModelLoader KF discovery used by actor animation setup and generated attack/idle lists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2245,7 +2239,7 @@
   },
   {
     "ea": "0x41B036",
-    "line": "cmp     [esp+150h+var_13C], 0",
+    "line": "cmp     [esp+154h+var_140], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -2257,13 +2251,13 @@
   },
   {
     "ea": "0x41B03D",
-    "line": "mov     ebp, [esp+150h+var_13C]",
+    "line": "mov     ebp, [esp+154h+var_140]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x41B041",
-    "line": "mov     ecx, ModelLoaderPtr",
+    "line": "mov     ecx, ds:0B33A1Ch",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2275,7 +2269,7 @@
   },
   {
     "ea": "0x41B048",
-    "line": "call    sub_439FF0",
+    "line": "call    ModelLoader_LoadKFModelNow; Synchronous KF model load path. Queued idle loader and menu/power-attack setup use this when an immediate KFModel is required.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2299,7 +2293,7 @@
   },
   {
     "ea": "0x41B053",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2335,7 +2329,7 @@
   },
   {
     "ea": "0x41B064",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2347,13 +2341,13 @@
   },
   {
     "ea": "0x41B06A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x41B06F",
-    "line": "mov     ebx, [esp+154h+var_134]",
+    "line": "mov     ebx, [esp+158h+var_138]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2365,7 +2359,7 @@
   },
   {
     "ea": "0x41B076",
-    "line": "mov     esi, [esp+150h+var_130]",
+    "line": "mov     esi, [esp+154h+var_134]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2383,7 +2377,7 @@
   },
   {
     "ea": "0x41B082",
-    "line": "call    TESAnimation_HasAnimations",
+    "line": "call    TESAnimation_HasAnimations; TESAnimation has any entries: returns embedded list first data pointer nonzero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2401,7 +2395,7 @@
   },
   {
     "ea": "0x41B08F",
-    "line": "lea     eax, [esp+150h+Str]",
+    "line": "lea     eax, [esp+154h+var_124+0Ch]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2449,7 +2443,7 @@
   },
   {
     "ea": "0x41B0AA",
-    "line": "mov     ecx, ds:dword_A3407C",
+    "line": "mov     ecx, ds:dword_A3407C; CustomAnimSupport decode: SpecialAnims string use in magic/effect VFX path; effect/model resource handling, not ActorAnimData install.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2485,7 +2479,7 @@
   },
   {
     "ea": "0x41B0C7",
-    "line": "lea     edi, [esp+150h+Str]",
+    "line": "lea     edi, [esp+154h+var_124+0Ch]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2539,7 +2533,7 @@
   },
   {
     "ea": "0x41B0E4",
-    "line": "lea     ecx, [esp+150h+Str]",
+    "line": "lea     ecx, [esp+154h+var_124+0Ch]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2581,13 +2575,13 @@
   },
   {
     "ea": "0x41B0F8",
-    "line": "mov     [esp+150h+var_134], eax",
+    "line": "mov     [esp+154h+var_138], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x41B0FC",
-    "line": "call    sub_6899C0",
+    "line": "call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2611,7 +2605,7 @@
   },
   {
     "ea": "0x41B107",
-    "line": "mov     ebx, [esp+150h+var_13C]",
+    "line": "mov     ebx, [esp+154h+var_140]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2622,14 +2616,8 @@
     "size": 2
   },
   {
-    "ea": "0x41B10D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x41B110",
-    "line": "mov     edx, [esp+150h+var_134]",
+    "line": "mov     edx, [esp+154h+var_138]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2689,7 +2677,7 @@
   },
   {
     "ea": "0x41B12A",
-    "line": "lea     edi, [esp+150h+Str]",
+    "line": "lea     edi, [esp+154h+var_124+0Ch]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2791,13 +2779,13 @@
   },
   {
     "ea": "0x41B153",
-    "line": "mov     ecx, ModelLoaderPtr",
+    "line": "mov     ecx, ds:0B33A1Ch",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x41B159",
-    "line": "lea     eax, [esp+150h+Str]",
+    "line": "lea     eax, [esp+154h+var_124+0Ch]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2809,7 +2797,7 @@
   },
   {
     "ea": "0x41B15E",
-    "line": "call    sub_439FF0",
+    "line": "call    ModelLoader_LoadKFModelNow; Synchronous KF model load path. Queued idle loader and menu/power-attack setup use this when an immediate KFModel is required.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2884,5 +2872,95 @@
     "line": "jnz     loc_41ACD0",
     "mnemonic": "jnz",
     "size": 6
+  },
+  {
+    "ea": "0x9AB610",
+    "line": "lea     ecx, [ebp-12Ch]; void *",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9AB616",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AB61B",
+    "line": "lea     ecx, [ebp-124h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9AB621",
+    "line": "jmp     TESContainer_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AB626",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AB62A",
+    "line": "lea     eax, [edx-140h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9AB630",
+    "line": "mov     ecx, [edx-144h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9AB636",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AB638",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AB63D",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9AB640",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AB643",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AB645",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AB64A",
+    "line": "mov     eax, offset stru_AD84D0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AB64F",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

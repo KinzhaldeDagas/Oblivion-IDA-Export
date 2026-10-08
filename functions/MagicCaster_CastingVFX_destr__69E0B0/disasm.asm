@@ -15,7 +15,7 @@
 0x69E0D8: mov     [esp+24h+var_10], esi
 0x69E0DC: push    3
 0x69E0DE: mov     [esp+28h+var_4], 1
-0x69E0E6: call    nullsub_returnTrue_0arg
+0x69E0E6: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x69E0EB: mov     ecx, [esi]
 0x69E0ED: mov     ebp, ds:0A2807Ch
 0x69E0F3: add     esp, 4
@@ -66,9 +66,9 @@
 0x69E15D: test    eax, eax
 0x69E15F: jz      short loc_69E16C
 0x69E161: mov     ecx, [esi+8]
-0x69E164: push    ecx
-0x69E165: mov     ecx, eax
-0x69E167: call    sub_7C7DC0
+0x69E164: push    ecx; backingLight
+0x69E165: mov     ecx, eax; self
+0x69E167: call    ShadowSceneNode_RemoveFullLightBySource; Find a native full-list ShadowSceneLight whose backing NiLight identity equals the supplied source, then remove that entry.
 0x69E16C: mov     edi, [esi+8]
 0x69E16F: test    edi, edi
 0x69E171: jz      short loc_69E192
@@ -87,7 +87,7 @@
 0x69E18B: mov     dword ptr [esi+8], 0
 0x69E192: push    2
 0x69E194: mov     dword ptr [esi+4], 0
-0x69E19B: call    nullsub_returnTrue_0arg
+0x69E19B: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x69E1A0: mov     edi, [esi+8]
 0x69E1A3: add     esp, 4
 0x69E1A6: test    edi, edi
@@ -129,3 +129,15 @@
 0x69E1FB: pop     ebp
 0x69E1FC: add     esp, 14h
 0x69E1FF: retn
+0x9C5CA0: mov     ecx, [ebp-10h]; slot
+0x9C5CA3: jmp     NiPointerSlot_Release
+0x9C5CA8: mov     ecx, [ebp-10h]
+0x9C5CAB: add     ecx, 8; slot
+0x9C5CAE: jmp     NiPointerSlot_Release
+0x9C5CB3: mov     edx, [esp+arg_4]
+0x9C5CB7: lea     eax, [edx-14h]
+0x9C5CBA: mov     ecx, [edx-18h]
+0x9C5CBD: xor     ecx, eax
+0x9C5CBF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5CC4: mov     eax, offset stru_AEE36C
+0x9C5CC9: jmp     ___CxxFrameHandler3

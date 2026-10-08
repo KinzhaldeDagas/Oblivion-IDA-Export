@@ -28,7 +28,7 @@
 0x5E7285: push    0
 0x5E7287: call    eax
 0x5E7289: lea     ecx, [esi+44h]; this
-0x5E728C: mov     dword ptr [esp+24h+var_4], eax
+0x5E728C: mov     [esp+24h+var_4], eax
 0x5E7290: call    ExtraDataList_GetContainerChanges
 0x5E7295: mov     edx, [esi]
 0x5E7297: mov     edi, eax
@@ -71,7 +71,7 @@
 0x5E730D: jnz     short loc_5E7324
 0x5E730F: cmp     [esp+24h+var_14], 0
 0x5E7314: jnz     short loc_5E7324
-0x5E7316: call    InterfaceManager_IsMenuMode
+0x5E7316: call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.
 0x5E731B: test    al, al
 0x5E731D: jz      short loc_5E7324
 0x5E731F: mov     [esp+24h+var_14], 1
@@ -82,7 +82,7 @@
 0x5E7331: cmp     [esp+24h+arg_4], 0
 0x5E7336: jz      short loc_5E733D
 0x5E7338: mov     byte ptr [esp+24h+var_C], 0
-0x5E733D: mov     edi, dword ptr [esp+24h+var_4]
+0x5E733D: mov     edi, [esp+24h+var_4]
 0x5E7341: test    edi, edi
 0x5E7343: jz      short loc_5E736A
 0x5E7345: mov     edx, [edi+8]
@@ -674,7 +674,7 @@
 0x5E7A0A: mov     ecx, edi
 0x5E7A0C: call    ContainerEntryExtraData_DestroyDataTable
 0x5E7A11: push    edi
-0x5E7A12: call    FormHeapFree
+0x5E7A12: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5E7A17: add     esp, 4
 0x5E7A1A: cmp     [esp+24h+var_10], 0
 0x5E7A1F: jz      short loc_5E7A35
@@ -682,7 +682,7 @@
 0x5E7A25: mov     ecx, edi
 0x5E7A27: call    ContainerEntryExtraData_DestroyDataTable
 0x5E7A2C: push    edi
-0x5E7A2D: call    FormHeapFree
+0x5E7A2D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5E7A32: add     esp, 4
 0x5E7A35: cmp     [esp+24h+var_13], 0
 0x5E7A3A: pop     edi

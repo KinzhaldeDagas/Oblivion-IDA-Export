@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x7A3B80",
-    "line": "push    ebx",
+    "line": "push    ebx; Forward deep-copy assignment over existing 0x54-byte SIdvLeafTexture records; returns the destination end.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A3B81",
-    "line": "mov     ebx, [esp+4+arg_4]",
+    "line": "mov     ebx, [esp+4+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x7A3B87",
-    "line": "mov     esi, [esp+0Ch+arg_0]",
+    "line": "mov     esi, [esp+0Ch+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x7A3B96",
-    "line": "mov     ebp, [esp+0Ch+arg_8]",
+    "line": "mov     ebp, [esp+0Ch+destinationFirst]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -127,19 +127,19 @@
   },
   {
     "ea": "0x7A3BB2",
-    "line": "push    esi",
+    "line": "push    esi; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A3BB3",
-    "line": "lea     ecx, [esi+ebp]",
+    "line": "lea     ecx, [esi+ebp]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7A3BB6",
-    "line": "call    sub_7A3470",
+    "line": "call    OB_SIdvLeafTexture_CopyAssign_010201A0; Deep copy-assigns a compact 0x54 SIdvLeafTexture: byte blossom flag, color/variance, owned filename, origin, size, and sizeUsed.",
     "mnemonic": "call",
     "size": 5
   },

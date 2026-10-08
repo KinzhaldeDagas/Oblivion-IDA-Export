@@ -5,7 +5,7 @@
 0x4DD4BA: push    esi
 0x4DD4BB: jz      short loc_4DD4CA
 0x4DD4BD: mov     ecx, ebp; this
-0x4DD4BF: call    TESObjectCELL_IsInterior
+0x4DD4BF: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x4DD4C4: test    al, al
 0x4DD4C6: jnz     short loc_4DD4CA
 0x4DD4C8: xor     ebp, ebp
@@ -71,7 +71,7 @@
 0x4DD574: test    al, al
 0x4DD576: jz      short loc_4DD58E
 0x4DD578: lea     ecx, [esi+44h]
-0x4DD57B: call    sub_4212E0
+0x4DD57B: call    ExtraDataList_RemoveSavedMovementData; Removes the combined Oblivion ExtraSavedMovementData record (type 0x4B).
 0x4DD580: mov     edx, [esi]
 0x4DD582: mov     eax, [edx+9Ch]
 0x4DD588: push    0
@@ -85,15 +85,15 @@
 0x4DD59E: mov     byte ptr [esp+20h+a1], 1
 0x4DD5A3: jz      short loc_4DD5B8
 0x4DD5A5: mov     ecx, esi; this
-0x4DD5A7: call    TESObjectREFR_IsPersistent?
+0x4DD5A7: call    TESObjectREFR_IsPersistent
 0x4DD5AC: test    al, al
 0x4DD5AE: jz      short loc_4DD5B8
-0x4DD5B0: push    esi
-0x4DD5B1: mov     ecx, edi
-0x4DD5B3: call    sub_4F03D0
-0x4DD5B8: push    esi; Concurrency::details::SchedulerBase *
-0x4DD5B9: mov     ecx, ebp
-0x4DD5BB: call    sub_4D35D0
+0x4DD5B0: push    esi; reference
+0x4DD5B1: mov     ecx, edi; this
+0x4DD5B3: call    TESWorldSpace_RemovePersistentCellReference; Verified: WorldSpace wrapper that removes a reference from its persistentCell via TESObjectCELL_RemoveReference; this removes it from the +0x64 persistent-reference index when applicable. It does not touch the separate SubSpace spatial index at +0x60.
+0x4DD5B8: push    esi; reference
+0x4DD5B9: mov     ecx, ebp; this
+0x4DD5BB: call    TESObjectCELL_AddReference; Verified: persistent-cell AddReference updates the WorldSpace coordinate/fallback persistent-reference index (+0x64) through TESWorldSpace_IndexReference. Ordinary cell additions do not index there. This routine does not populate the separate SubSpace spatial index at +0x60.
 0x4DD5C0: jmp     short loc_4DD601
 0x4DD5C2: mov     edx, [esi]
 0x4DD5C4: mov     eax, [edx+178h]
@@ -107,7 +107,7 @@
 0x4DD5DC: test    al, al
 0x4DD5DE: jz      short loc_4DD601
 0x4DD5E0: mov     ecx, esi; this
-0x4DD5E2: call    MobileObject_GetCharProxy
+0x4DD5E2: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x4DD5E7: mov     edi, eax
 0x4DD5E9: test    edi, edi
 0x4DD5EB: jz      short loc_4DD601
@@ -117,7 +117,7 @@
 0x4DD5F7: call    eax
 0x4DD5F9: push    eax; a2
 0x4DD5FA: mov     ecx, edi; this
-0x4DD5FC: call    sub_452A10
+0x4DD5FC: call    sub_452A10; TES4 authoritative: converts TES/world NiPoint3 into Havok units with hkFactor, then writes proxy position through 0x891560.
 0x4DD601: mov     ecx, ds:0B333A0h
 0x4DD607: push    1; a2
 0x4DD609: push    ebp; a1
@@ -129,21 +129,21 @@
 0x4DD621: mov     ecx, [esp+20h+var_10]; this
 0x4DD625: test    ecx, ecx
 0x4DD627: jz      short loc_4DD637
-0x4DD629: call    TESObjectCELL_IsInterior
+0x4DD629: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x4DD62E: test    al, al
 0x4DD630: jz      short loc_4DD637
 0x4DD632: mov     byte ptr [esp+20h+a1], 1
 0x4DD637: mov     ecx, esi; this
-0x4DD639: call    TESObjectREFR_IsPersistent?
+0x4DD639: call    TESObjectREFR_IsPersistent
 0x4DD63E: test    al, al
 0x4DD640: jz      short loc_4DD65A
 0x4DD642: cmp     edi, ebx
 0x4DD644: jz      short loc_4DD65A
 0x4DD646: test    edi, edi
 0x4DD648: jz      short loc_4DD652
-0x4DD64A: push    esi
-0x4DD64B: mov     ecx, edi
-0x4DD64D: call    sub_4F03D0
+0x4DD64A: push    esi; reference
+0x4DD64B: mov     ecx, edi; this
+0x4DD64D: call    TESWorldSpace_RemovePersistentCellReference; Verified: WorldSpace wrapper that removes a reference from its persistentCell via TESObjectCELL_RemoveReference; this removes it from the +0x64 persistent-reference index when applicable. It does not touch the separate SubSpace spatial index at +0x60.
 0x4DD652: push    esi; Concurrency::details::SchedulerBase *
 0x4DD653: mov     ecx, ebx
 0x4DD655: call    TESWorldspace_Boh?
@@ -166,17 +166,17 @@
 0x4DD68F: mov     ecx, dword ptr [esp+20h+var_C]
 0x4DD693: mov     edx, [esp+20h+var_8]
 0x4DD697: sar     ecx, 0Ch
-0x4DD69A: push    ecx; signed int
+0x4DD69A: push    ecx; cellY
 0x4DD69B: sar     edx, 0Ch
-0x4DD69E: push    edx; signed int
+0x4DD69E: push    edx; cellX
 0x4DD69F: mov     ecx, ebx; this
 0x4DD6A1: call    TESWorldSpace__GetCellAtCellCoord
 0x4DD6A6: mov     ebp, eax
 0x4DD6A8: test    ebp, ebp
 0x4DD6AA: jz      loc_4DD765
-0x4DD6B0: push    esi; Concurrency::details::SchedulerBase *
-0x4DD6B1: mov     ecx, ebp
-0x4DD6B3: call    sub_4D35D0
+0x4DD6B0: push    esi; reference
+0x4DD6B1: mov     ecx, ebp; this
+0x4DD6B3: call    TESObjectCELL_AddReference; Verified: persistent-cell AddReference updates the WorldSpace coordinate/fallback persistent-reference index (+0x64) through TESWorldSpace_IndexReference. Ordinary cell additions do not index there. This routine does not populate the separate SubSpace spatial index at +0x60.
 0x4DD6B8: mov     ecx, ds:0B333A0h
 0x4DD6BE: push    1; a2
 0x4DD6C0: push    ebp; a1
@@ -233,11 +233,11 @@
 0x4DD75C: jz      short loc_4DD7B0
 0x4DD75E: mov     byte ptr [esp+20h+arg_0], 1
 0x4DD763: jmp     short loc_4DD7B0
-0x4DD765: mov     ecx, [esp+20h+var_10]
+0x4DD765: mov     ecx, [esp+20h+var_10]; this
 0x4DD769: test    ecx, ecx
 0x4DD76B: jz      short loc_4DD773
-0x4DD76D: push    esi
-0x4DD76E: call    sub_4CECD0
+0x4DD76D: push    esi; reference
+0x4DD76E: call    TESObjectCELL_RemoveReference; Verified: removes a reference from the cell object list under the cell lock. For persistent cells, clears the reference's ExtraDataList cell pointer and removes it from the owning WorldSpace persistent-reference index (+0x64); for normal cells, clears its parent cell and updates changed state. No write to the separate SubSpace index (+0x60) is present.
 0x4DD773: mov     eax, [esi]
 0x4DD775: mov     edx, [eax+190h]
 0x4DD77B: mov     ecx, esi
@@ -268,7 +268,7 @@
 0x4DD7C1: cmp     byte ptr [esp+1Ch+arg_0], 0
 0x4DD7C6: jnz     short loc_4DD818
 0x4DD7C8: push    esi
-0x4DD7C9: mov     ecx, offset ActorProcessManager_ptr
+0x4DD7C9: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x4DD7CE: call    sub_6748B0
 0x4DD7D3: test    ebp, ebp
 0x4DD7D5: jnz     short loc_4DD818
@@ -277,7 +277,7 @@
 0x4DD7DE: cmp     eax, 3
 0x4DD7E1: jnz     short loc_4DD818
 0x4DD7E3: mov     ecx, esi; this
-0x4DD7E5: call    TESObjectREFR_IsPersistent?
+0x4DD7E5: call    TESObjectREFR_IsPersistent
 0x4DD7EA: test    al, al
 0x4DD7EC: jnz     short loc_4DD818
 0x4DD7EE: mov     edx, [esi]
@@ -286,9 +286,9 @@
 0x4DD7FA: push    eax
 0x4DD7FB: mov     ecx, esi
 0x4DD7FD: call    edx
-0x4DD7FF: mov     ecx, ds:0B33B00h
-0x4DD805: push    esi
-0x4DD806: call    sub_463A90
+0x4DD7FF: mov     ecx, ds:0B33B00h; self
+0x4DD805: push    esi; form
+0x4DD806: call    TESSaveLoadGame_UnloadForm;
 0x4DD80B: mov     eax, [esi]
 0x4DD80D: mov     edx, [eax+194h]
 0x4DD813: push    ebp

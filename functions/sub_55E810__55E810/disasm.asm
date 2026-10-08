@@ -1,4 +1,4 @@
-0x55E810: push    ebx
+0x55E810: push    ebx; LockFreeMap scan helper: iterates buckets and invokes vtable +0x14 predicate until match.
 0x55E811: push    esi
 0x55E812: push    edi
 0x55E813: mov     esi, ecx

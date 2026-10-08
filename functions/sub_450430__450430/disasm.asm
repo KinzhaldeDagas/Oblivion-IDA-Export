@@ -1,4 +1,4 @@
-0x450430: push    esi
+0x450430: push    esi; Closes and frees every currently open group record, repeatedly popping the TESFile group stack until current group is null.
 0x450431: mov     esi, ecx
 0x450433: push    edi
 0x450434: mov     edi, [esi+284h]
@@ -24,12 +24,12 @@
 0x450479: mov     ecx, [eax]
 0x45047B: push    eax
 0x45047C: mov     [esi+284h], ecx
-0x450482: call    FormHeapFree
+0x450482: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x450487: add     esp, 4
 0x45048A: jmp     short loc_450496
 0x45048C: mov     dword ptr [esi+284h], 0
 0x450496: push    edi
-0x450497: call    FormHeapFree
+0x450497: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x45049C: add     esp, 4
 0x45049F: mov     edi, [esi+284h]
 0x4504A5: test    edi, edi

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x765120",
-    "line": "sub     esp, 24h",
+    "line": "sub     esp, 24h; Oblivion-authoritative NiDX9Renderer::Copy. Builds full-surface rectangles when either rectangle is null and maps Gamebryo CopyFilterPreference 1/2 to D3DTEXF_POINT/LINEAR (otherwise NONE), then performs IDirect3DDevice9::StretchRect.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x76513B",
-    "line": "mov     ecx, [esp+28h+arg_4]; void *",
+    "line": "mov     ecx, [esp+28h+destination]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x765143",
-    "line": "mov     ebp, [esp+2Ch+arg_0]",
+    "line": "mov     ebp, [esp+2Ch+source]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x765172",
-    "line": "mov     eax, [esp+34h+arg_8]",
+    "line": "mov     eax, [esp+34h+sourceRect]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x7651A9",
-    "line": "mov     eax, [esp+34h+arg_C]",
+    "line": "mov     eax, [esp+34h+destinationRect]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x7651E4",
-    "line": "mov     eax, [esp+34h+arg_10]",
+    "line": "mov     eax, [esp+34h+filterPreference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x765222",
-    "line": "call    eax",
+    "line": "call    eax; General Copy StretchRect commit; the final argument is the translated D3DTEXTUREFILTERTYPE.",
     "mnemonic": "call",
     "size": 2
   },
@@ -523,13 +523,13 @@
   },
   {
     "ea": "0x765228",
-    "line": "push    eax",
+    "line": "push    eax; hresult",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x765229",
-    "line": "call    sub_7736F0",
+    "line": "call    D3D9_HResultToString; Maps common COM/D3D9 HRESULT values to diagnostic names, including DEVICELOST, DEVICENOTRESET, INVALIDCALL, OUTOFVIDEOMEMORY, and format/state failures.",
     "mnemonic": "call",
     "size": 5
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x765234",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x76525E",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x76527C",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },

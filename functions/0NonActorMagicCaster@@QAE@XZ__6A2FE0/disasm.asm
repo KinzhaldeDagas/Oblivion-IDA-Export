@@ -36,3 +36,12 @@
 0x6A3050: pop     ebx
 0x6A3051: add     esp, 10h
 0x6A3054: retn    4
+0x9C60D0: mov     ecx, [ebp-10h]; this
+0x9C60D3: jmp     ??1BSExtraData@@UAE@XZ; BSExtraData::~BSExtraData(void)
+0x9C60D8: mov     edx, [esp+arg_4]
+0x9C60DC: lea     eax, [edx-10h]
+0x9C60DF: mov     ecx, [edx-14h]
+0x9C60E2: xor     ecx, eax
+0x9C60E4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C60E9: mov     eax, offset stru_AEE6DC
+0x9C60EE: jmp     ___CxxFrameHandler3

@@ -1,19 +1,32 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 2,
+  "chunks": [
+    [
+      "0x588930",
+      "0x5889A6"
+    ]
+  ],
+  "chunks_sha256": "f403659ad38210a5ef960cddc6377b76898442605290c782a2a5faa8dcdf1c5e",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "Verified: unlinks and frees action nodes reachable through Value +0x10 sentinel; also removes crosslinks at action +0x10/+0x14. Called before CalculateValue by numeric setter.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_588930",
+  "display_name": "Tile::Value::ClearActions",
   "end_ea": "0x5889A6",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_588930",
+  "name": "Tile::Value::ClearActions",
   "segment": ".text",
   "sha256": "f403659ad38210a5ef960cddc6377b76898442605290c782a2a5faa8dcdf1c5e",
   "size": 118,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x588930",
-  "type": "int __thiscall(_DWORD *this)",
+  "total_chunk_size": 118,
+  "type": "void __thiscall(OblivionTileValueView *this)",
   "xrefs_from_count": 62,
   "xrefs_to_count": 2
 }

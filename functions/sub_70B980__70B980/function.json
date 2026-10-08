@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 5,
   "callers_count": 0,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x70B980",
+      "0x70B9FC"
+    ],
+    [
+      "0x9CA7E0",
+      "0x9CA806"
+    ]
+  ],
+  "chunks_sha256": "08a008446cce1251f835e424d3cbbe9ba1db97397fadcc5b9454315b719718ed",
+  "comment_regular": "\nVerified thiscall one NiCloningProcess stack arg, ret4. Allocates DC and constructs70B780 with ushort source+B6 child-array extent, then CopyMembers70AC60. CopyMembers registers parent before recursively calling each nonnull child's virtual+18. Plugin frond group currently inherits this factory and loses private destructor/metadata behavior in clones.\n[2026-10-03 implemented frond clone correction] Plugin private group vtable overrides+18: allocateDC, native constructor70B780(source ushort+B6), private vtable installed before native70AC60 CopyMembers. Child clone overrides participate during recursion. Group+38 wrapper only calls70BA00 when destination mapping exists. Child/group allocation failure can still produce a partial clone via native copying; deep allocation failures/exceptions require runtime acceptance.",
   "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_70B980",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_NiNode_CreateClone",
   "end_ea": "0x70B9FC",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_70B980",
+  "name": "OB_NiNode_CreateClone",
   "segment": ".text",
   "sha256": "264dfbfc1f9a1faf9b6c60a1f9855118a7dce8cfbefac6974dd5fb98ce08b3c0",
   "size": 124,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x70B980",
-  "type": "NiNode *__thiscall(char **this, _DWORD **)",
-  "xrefs_from_count": 44,
+  "total_chunk_size": 162,
+  "type": "void *__thiscall(void *this, void *cloningProcess)",
+  "xrefs_from_count": 58,
   "xrefs_to_count": 6
 }

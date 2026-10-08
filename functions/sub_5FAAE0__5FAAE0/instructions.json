@@ -403,19 +403,19 @@
   },
   {
     "ea": "0x5FABAE",
-    "line": "push    esi",
+    "line": "push    esi; actorContext",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FABAF",
-    "line": "lea     ecx, [esi+44h]",
+    "line": "lea     ecx, [esi+44h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x5FABB2",
-    "line": "call    sub_420E90",
+    "line": "call    ExtraDataList_UpdateFriendHitTimers; Advances every Oblivion friend-hit entry timer by the frame-time delta and removes/frees entries older than the configured friend-hit timer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -679,13 +679,13 @@
   },
   {
     "ea": "0x5FAC48",
-    "line": "push    eax",
+    "line": "push    eax; skillValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FAC49",
-    "line": "call    Calc_MasteryFromSkill",
+    "line": "call    Calc_MasteryFromSkill; Map a base skill value to Oblivion's five mastery tiers using iSkillApprenticeMin=25, iSkillJourneymanMin=50, iSkillExpertMin=75, and iSkillMasterMin=100.",
     "mnemonic": "call",
     "size": 5
   },
@@ -769,7 +769,7 @@
   },
   {
     "ea": "0x5FAC7C",
-    "line": "mov     ecx, offset fPerkAthleticsExpertFatigueMult; jumptable 005FAC59 case 3",
+    "line": "mov     ecx, 0B37608h; jumptable 005FAC59 case 3",
     "mnemonic": "mov",
     "size": 5
   },

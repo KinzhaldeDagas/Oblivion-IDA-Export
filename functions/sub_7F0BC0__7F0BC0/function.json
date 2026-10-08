@@ -1,19 +1,40 @@
 {
-  "callees_count": 60,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7F0BC0",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 26,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x7F0BC0",
+      "0x7F1149"
+    ],
+    [
+      "0x75FA70",
+      "0x75FA82"
+    ],
+    [
+      "0x9CFD60",
+      "0x9CFD83"
+    ]
+  ],
+  "chunks_sha256": "e8cc2d63143ba1e88fae7a0993bb530638b24ef42a93fdf2d105d16cca985ed0",
+  "comment_regular": "\n\n[2026-10-02 Fallout comparative pass]\nVerified comparison with Fallout SetupGeometryConstants 0x822147E8: property table -> shader+0x7C, 0x300 bytes. Payload +0x18 * storage[0x246] -> [0x25A]; +0x1C * [0x247] -> [0x25E]; +0x14 -> [0x25B]; +0x10 -> [0x25F]; +0x0C -> [0x264]. Fallout splits work among SetupGeometryConstants and SetupGeometryTextures; Oblivion retains these within SetupPass. No whole-function identity or Fallout property offsets are assumed.\n\nOBLIVION AUTHORITY (2026-08-24): SpeedTree leaf SetupPass. Full-bright forces VS0; otherwise marker count selects base versus point-light VS and active fog selects the fog variant. Selector inputs do not encode leaf layer/card/LOD. The routine uploads transform/light constants, binds the property texture, and uploads fog constants only for an active fog property.\n[2026-10-04 DX11 white-card investigation] Rechecked Oblivion decompilation: property table a5[6] must identify type 9; vtable +0x78 provides NiTexture stored in the sole leaf stage. Installed SpeedTreeOBSE reference log reports generated RGBA leaf atlases assigned through native property setters, but that is not proof of a resident D3D sampler binding. Runtime frame-618-modern.bmp shows opaque white leaf cards; user confirmed texture files exist. Root cause remains unverified (binding, sampling/alpha, or material state). No shader/property bypass is authorized by this observation. V250 DX11-only bounded binding diagnostics record sampler/hash/alpha/",
+  "comment_repeatable": "OBLIVION AUTHORITY (2026-08-24): SpeedTree leaf SetupPass. Full-bright forces VS0; otherwise marker count selects base versus point-light VS and active fog selects the fog variant. Selector inputs do not encode leaf layer/card/LOD. The routine uploads transform/light constants, binds the property texture, and uploads fog constants only for an active fog property.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_SpeedTreeLeafShader_SetupPass_010201A0",
   "end_ea": "0x7F1149",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7F0BC0",
+  "name": "OB_SpeedTreeLeafShader_SetupPass_010201A0",
   "segment": ".text",
   "sha256": "ab02a599b325e56602cf9568cd94c3e9181b01610a3f7cb7773507fa100bb786",
   "size": 1417,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7F0BC0",
+  "total_chunk_size": 1470,
   "type": "void __thiscall(_DWORD **this, float, int, int, _DWORD *, int, int, int)",
-  "xrefs_from_count": 462,
+  "xrefs_from_count": 481,
   "xrefs_to_count": 3
 }

@@ -1,4 +1,4 @@
-0x591600: push    0FFFFFFFFh
+0x591600: push    0FFFFFFFFh; TileImage virtual slot 2: builds textured quad geometry directly in the InterfaceManager scene; no low-resolution intermediate UI target observed.
 0x591602: push    offset SEH_591600
 0x591607: mov     eax, large fs:0
 0x59160D: push    eax
@@ -119,11 +119,11 @@
 0x591799: test    eax, eax
 0x59179B: mov     byte ptr [esp+34h+var_4], 1
 0x5917A0: jz      short loc_5917D6
-0x5917A2: call    sub_57D7F0
-0x5917A7: call    Double_To_SInt32
+0x5917A2: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
+0x5917A7: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5917AC: push    eax
-0x5917AD: call    sub_57D7A0
-0x5917B2: call    Double_To_SInt32
+0x5917AD: call    UI_GetVirtualScreenWidth; Returns virtual UI width: 1280 for portrait/square, otherwise aspect*960. Layout coordinates are independent of output pixel resolution.
+0x5917B2: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5917B7: push    eax
 0x5917B8: mov     ecx, [esp+3Ch+var_18]
 0x5917BC: push    0
@@ -160,17 +160,17 @@
 0x591812: test    eax, eax
 0x591814: mov     byte ptr [esp+34h+var_4], 2
 0x591819: jz      short loc_591833
-0x59181B: push    ebx
-0x59181C: push    2
-0x59181E: push    0
-0x591820: push    1
-0x591822: push    edi
-0x591823: push    0
-0x591825: push    0
-0x591827: push    esi
-0x591828: push    4
-0x59182A: mov     ecx, eax
-0x59182C: call    sub_7174B0
+0x59181B: push    ebx; triangleIndices
+0x59181C: push    2; triangleCount
+0x59181E: push    0; dataFlags
+0x591820: push    1; hasVertexColors
+0x591822: push    edi; textureCoordinates
+0x591823: push    0; colors
+0x591825: push    0; normals
+0x591827: push    esi; vertices
+0x591828: push    4; vertexCount
+0x59182A: mov     ecx, eax; this
+0x59182C: call    NiTriShape_ctorWithGeometryData; Verified NiTriShape constructor wrapper: allocate/init NiTriShapeData from caller-supplied vertices, colors and triangle-index buffer; initialize NiTriBasedGeom and install NiTriShape vtable.
 0x591831: jmp     short loc_591835
 0x591833: xor     eax, eax
 0x591835: test    eax, eax
@@ -194,29 +194,29 @@
 0x591872: mov     esi, eax
 0x591874: jmp     short loc_591878
 0x591876: xor     esi, esi
-0x591878: push    0
-0x59187A: mov     ecx, esi
+0x591878: push    0; texture
+0x59187A: mov     ecx, esi; this
 0x59187C: mov     byte ptr [esp+38h+var_4], 0
-0x591881: call    NiTexturingProperty__SetUnk08
+0x591881: call    OB_NiTexturingProperty_SetBaseTexture_010201A0
 0x591886: push    0FCFh
 0x59188B: mov     ecx, ebp
 0x59188D: call    Tile_GetFloat
 0x591892: fcomp   dword ptr ds:0A379B4h
-0x591898: mov     ecx, esi
+0x591898: mov     ecx, esi; this
 0x59189A: fnstsw  ax
 0x59189C: test    ah, 44h
 0x59189F: jp      short loc_5918A5
 0x5918A1: push    3
 0x5918A3: jmp     short loc_5918A7
-0x5918A5: push    0
-0x5918A7: call    sub_405870
+0x5918A5: push    0; value
+0x5918A7: call    OB_NiTexturingProperty_SetClampMode_010201A0; NiTexturingProperty map flag helper: ensures map slot 0 exists and writes arg-derived bits into map Unk04 bits 0xC000. 0x560AC0 calls it with 0 for billboard texture property state.
 0x5918AC: mov     dx, [esi+18h]
 0x5918B0: and     dx, 0FFF5h
 0x5918B5: or      dx, 4
 0x5918B9: push    esi; a2
 0x5918BA: mov     ecx, edi; this
 0x5918BC: mov     [esi+18h], dx
-0x5918C0: call    sub_405680
+0x5918C0: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x5918C5: push    5Ch ; '\'; Size
 0x5918C7: call    FormHeapAlloc
 0x5918CC: add     esp, 4
@@ -244,7 +244,7 @@
 0x591913: mov     [eax+44h], edx
 0x591916: mov     [eax+48h], ecx
 0x591919: mov     ecx, edi; this
-0x59191B: call    sub_405680
+0x59191B: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x591920: push    0DCh ; 'Ü'; Size
 0x591925: call    FormHeapAlloc
 0x59192A: add     esp, 4
@@ -291,11 +291,11 @@
 0x5919A0: mov     ecx, [ebp+24h]; this
 0x5919A3: add     esp, 8
 0x5919A6: push    eax; a2
-0x5919A7: call    sub_405680
+0x5919A7: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x5919AC: mov     ecx, [ebp+24h]
 0x5919AF: call    NiNode_UpdateDynamicEffectState
 0x5919B4: mov     ecx, [ebp+24h]; this
-0x5919B7: call    NiAVObject_InitializePropertyState
+0x5919B7: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x5919BC: push    1; arg1
 0x5919BE: push    0; canCreate
 0x5919C0: call    InterfaceManager_GetSingleton
@@ -317,16 +317,16 @@
 0x5919F0: mov     ecx, [ebp+24h]
 0x5919F3: push    eax
 0x5919F4: mov     byte ptr [esp+38h+var_4], 0
-0x5919F9: call    NiNode_AddNiExtraData
-0x5919FE: push    0; int
+0x5919F9: call    NiObjectNET_AddExtraData; Pass269 ABI and ownership proof: NiObjectNET::AddExtraData consumes one stack argument with RET 4 and also expects owning object in ECX/EBX at this build's callsites. The plugin wrapper must not execute caller-side ADD ESP,4.
+0x5919FE: push    0; text
 0x591A00: push    0FABh
 0x591A05: mov     ecx, ebp
 0x591A07: call    Tile_GetFloat
 0x591A0C: push    ecx
-0x591A0D: fstp    [esp+3Ch+var_3C]; float
-0x591A10: push    0FABh; int
-0x591A15: mov     ecx, ebp
-0x591A17: call    sub_58B2F0
+0x591A0D: fstp    [esp+3Ch+value]; value
+0x591A10: push    0FABh; trait
+0x591A15: mov     ecx, ebp; this
+0x591A17: call    Tile__FinalPostParse; Verified shared fallback called by CalculateValue when owner virtual PostParse returns NULL. Marks trait-specific dirty flags; ID trait 0xFA8 calls owning Menu vtable +4 AttachTileByID with numeric ID and Tile*. Visibility traits mark dirty bit4. Fallout named analogue 0x82232168.
 0x591A1C: push    0FC8h
 0x591A21: mov     ecx, ebp
 0x591A23: call    Tile_GetFloat
@@ -360,3 +360,42 @@
 0x591A78: pop     ebx
 0x591A79: add     esp, 20h
 0x591A7C: retn
+0x9BFB80: lea     ecx, [ebp-20h]; slot
+0x9BFB83: jmp     NiPointerSlot_Release
+0x9BFB88: mov     eax, [ebp-18h]
+0x9BFB8B: push    eax
+0x9BFB8C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BFB91: pop     ecx
+0x9BFB92: retn
+0x9BFB93: mov     eax, [ebp-18h]
+0x9BFB96: push    eax
+0x9BFB97: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BFB9C: pop     ecx
+0x9BFB9D: retn
+0x9BFB9E: mov     eax, [ebp-18h]
+0x9BFBA1: push    eax
+0x9BFBA2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BFBA7: pop     ecx
+0x9BFBA8: retn
+0x9BFBA9: mov     eax, [ebp-18h]
+0x9BFBAC: push    eax
+0x9BFBAD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BFBB2: pop     ecx
+0x9BFBB3: retn
+0x9BFBB4: mov     eax, [ebp-18h]
+0x9BFBB7: push    eax
+0x9BFBB8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BFBBD: pop     ecx
+0x9BFBBE: retn
+0x9BFBBF: mov     eax, [ebp-18h]
+0x9BFBC2: push    eax
+0x9BFBC3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BFBC8: pop     ecx
+0x9BFBC9: retn
+0x9BFBCA: mov     edx, [esp+arg_4]
+0x9BFBCE: lea     eax, [edx-24h]
+0x9BFBD1: mov     ecx, [edx-28h]
+0x9BFBD4: xor     ecx, eax
+0x9BFBD6: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BFBDB: mov     eax, offset stru_AE8FF4
+0x9BFBE0: jmp     ___CxxFrameHandler3

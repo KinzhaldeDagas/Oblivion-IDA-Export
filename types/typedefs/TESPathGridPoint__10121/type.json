@@ -1,0 +1,105 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "TESPathGridPoint",
+  "definition": "struct TESPathGridPoint\n{\nfloat totalEstimateCost; ///< Verified A* F/G/H/predecessor prefix shared with TESConnectedPoint.\nfloat pathCost;\nfloat heuristicCost;\nTESPathGridPoint *predecessor;\nchar stateFlags; ///< Verified PathGraphNodeFlags shared with TESConnectedPoint: below-water 0x08, underwater cache 0x10, linked-points-disabled 0x20, SubSpace membership 0x40; 0x01/0x02 are transient A* states.\nunsigned __int8 unknown11[3];\nNiPoint3 position; ///< Verified NiPoint3 position.\nBSSimpleList_VoidPtr connections; ///< Verified outgoing adjacency list of TESPathGridPoint pointers.\nint renderNode; ///< Verified: this four-byte member is a NiNode* per-point renderNode. TESPathGridPoint_RebuildRenderGeometry allocates a NiNode at +0x28; TESPathGridPoint_ClearRenderNode treats it as NiNode, releases child objects, detaches it from its parent, then nulls it. The UDT now stores the correct four-byte width as DWORD; pointer qualification is documented here.\n}\n",
+  "kind": "struct",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified A* F/G/H/predecessor prefix shared with TESConnectedPoint.",
+      "name": "totalEstimateCost",
+      "offset_bits": 0,
+      "offset_bytes": 0,
+      "size_bits": 32,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "pathCost",
+      "offset_bits": 32,
+      "offset_bytes": 4,
+      "size_bits": 32,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "heuristicCost",
+      "offset_bits": 64,
+      "offset_bytes": 8,
+      "size_bits": 32,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "predecessor",
+      "offset_bits": 96,
+      "offset_bytes": 12,
+      "size_bits": 32,
+      "type": "TESPathGridPoint *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified PathGraphNodeFlags shared with TESConnectedPoint: below-water 0x08, underwater cache 0x10, linked-points-disabled 0x20, SubSpace membership 0x40; 0x01/0x02 are transient A* states.",
+      "name": "stateFlags",
+      "offset_bits": 128,
+      "offset_bytes": 16,
+      "size_bits": 8,
+      "type": "char"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "unknown11",
+      "offset_bits": 136,
+      "offset_bytes": 17,
+      "size_bits": 24,
+      "type": "unsigned __int8[3]"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified NiPoint3 position.",
+      "name": "position",
+      "offset_bits": 160,
+      "offset_bytes": 20,
+      "size_bits": 96,
+      "type": "NiPoint3"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified outgoing adjacency list of TESPathGridPoint pointers.",
+      "name": "connections",
+      "offset_bits": 256,
+      "offset_bytes": 32,
+      "size_bits": 64,
+      "type": "BSSimpleList_VoidPtr"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified: this four-byte member is a NiNode* per-point renderNode. TESPathGridPoint_RebuildRenderGeometry allocates a NiNode at +0x28; TESPathGridPoint_ClearRenderNode treats it as NiNode, releases child objects, detaches it from its parent, then nulls it. The UDT now stores the correct four-byte width as DWORD; pointer qualification is documented here.",
+      "name": "renderNode",
+      "offset_bits": 320,
+      "offset_bytes": 40,
+      "size_bits": 32,
+      "type": "int"
+    }
+  ],
+  "name": "TESPathGridPoint",
+  "ordinal": 10121,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 44
+}

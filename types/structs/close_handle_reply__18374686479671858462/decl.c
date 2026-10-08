@@ -1,1 +1,4 @@
-close_handle_reply
+struct close_handle_reply
+{
+reply_header __header;
+};

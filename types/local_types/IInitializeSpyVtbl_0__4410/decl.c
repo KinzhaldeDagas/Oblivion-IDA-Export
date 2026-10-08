@@ -1,1 +1,1 @@
-IInitializeSpyVtbl_0
+typedef IInitializeSpyVtbl IInitializeSpyVtbl_0;

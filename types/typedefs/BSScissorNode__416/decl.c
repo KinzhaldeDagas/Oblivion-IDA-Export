@@ -1,1 +1,1 @@
-BSScissorNode
+struct BSScissorNode;

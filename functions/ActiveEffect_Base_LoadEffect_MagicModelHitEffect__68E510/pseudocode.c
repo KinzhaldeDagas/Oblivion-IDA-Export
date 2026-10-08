@@ -1,4 +1,4 @@
-int __usercall ActiveEffect_Base_LoadEffect_::MagicModelHitEffect@<eax>(
+int __userpurge ActiveEffect_Base_LoadEffect_::MagicModelHitEffect@<eax>(
         float *a1@<ebx>,
         int ebp0@<ebp>,
         int a3,
@@ -18,14 +18,31 @@ int __usercall ActiveEffect_Base_LoadEffect_::MagicModelHitEffect@<eax>(
         int a17)
 {
   float *v17; // eax
-  float *v18; // eax
+  NiObject *v18; // eax
   int v20; // [esp+28h] [ebp+28h]
 
-  v17 = (float *)FormHeapAlloc(0x38u);
-  v20 = (int)v17;
-  if ( v17 == a1 )
-    return ActiveEffect_Base_LoadEffect_::FailedAlloc(a3, a4, a5, a6, a7, a8, a9, a10, a11, v17, a13, a14, a1);
-  v18 = MagicModelHitEffect_constr(v17);
+  v17 = (float *)FormHeapAlloc(0x38u); /*0x68e512*/
+  v20 = (int)v17; /*0x68e51a*/
+  if ( v17 == a1 ) /*0x68e524*/
+    return ActiveEffect_Base_LoadEffect_::FailedAlloc( /*0x68e524*/
+             a1,
+             ebp0,
+             a3,
+             a4,
+             a5,
+             a6,
+             a7,
+             a8,
+             a9,
+             a10,
+             a11,
+             (int)v17,
+             a13,
+             a14,
+             (int)a1,
+             a16,
+             a17);
+  v18 = MagicModelHitEffect_constr((NiObject *)v17); /*0x68e528*/
   return ActiveEffect_Base_LoadEffect_::LoadHitEffect_(
            (int)v18,
            a1,

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4B3750",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Generic bound-object 3D implementation used by many form classes. Obtains/caches the model, clones its NiNode tree for the reference, applies scale, and resets the clone's local transform.",
     "mnemonic": "push",
     "size": 2
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x4B379C",
-    "line": "mov     [esp+154h+var_13C], esi",
+    "line": "mov     [esp+154h+reference], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x4B37AA",
-    "line": "mov     [esp+154h+var_13C], ebp",
+    "line": "mov     [esp+154h+reference], ebp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x4B37DC",
-    "line": "cmp     byte ptr [esp+154h+arg_4], 0",
+    "line": "cmp     byte ptr [esp+154h+arg1], 0",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x4B3817",
-    "line": "mov     byte ptr [esp+154h+arg_4], 1",
+    "line": "mov     byte ptr [esp+154h+arg1], 1",
     "mnemonic": "mov",
     "size": 8
   },
@@ -403,13 +403,13 @@
   },
   {
     "ea": "0x4B3837",
-    "line": "fstp    [esp+154h+var_140]",
+    "line": "fstp    [esp+154h+element]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4B383B",
-    "line": "fld     [esp+154h+var_140]",
+    "line": "fld     [esp+154h+element]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -511,19 +511,19 @@
   },
   {
     "ea": "0x4B386E",
-    "line": "push    0",
+    "line": "push    0; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4B3870",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B3872",
-    "line": "call    sub_405790",
+    "line": "call    NiNode_GetChildAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,19 +541,19 @@
   },
   {
     "ea": "0x4B387B",
-    "line": "push    0",
+    "line": "push    0; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4B387D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B387F",
-    "line": "call    sub_405790",
+    "line": "call    NiNode_GetChildAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -571,19 +571,19 @@
   },
   {
     "ea": "0x4B3889",
-    "line": "push    0",
+    "line": "push    0; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4B388B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B388D",
-    "line": "call    sub_405790",
+    "line": "call    NiNode_GetChildAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -637,13 +637,13 @@
   },
   {
     "ea": "0x4B38AC",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B38AE",
-    "line": "call    sub_4715A0",
+    "line": "call    NiControllerManager_FindSequenceByName; Looks up a NiControllerSequence by name in the controller manager name map at +0x58; returns null on miss.",
     "mnemonic": "call",
     "size": 5
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x4B38B7",
-    "line": "mov     esi, [esp+154h+var_13C]",
+    "line": "mov     esi, [esp+154h+reference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -769,7 +769,7 @@
   },
   {
     "ea": "0x4B38F1",
-    "line": "mov     esi, [esp+154h+var_13C]",
+    "line": "mov     esi, [esp+154h+reference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -787,7 +787,7 @@
   },
   {
     "ea": "0x4B38FC",
-    "line": "call    NiObjectNET_GetExtraData",
+    "line": "call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.",
     "mnemonic": "call",
     "size": 5
   },
@@ -859,7 +859,7 @@
   },
   {
     "ea": "0x4B3923",
-    "line": "fstp    [esp+154h+var_140]",
+    "line": "fstp    [esp+154h+element]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -877,7 +877,7 @@
   },
   {
     "ea": "0x4B392B",
-    "line": "fld     [esp+154h+var_140]",
+    "line": "fld     [esp+154h+element]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -997,13 +997,13 @@
   },
   {
     "ea": "0x4B3969",
-    "line": "lea     ecx, [esp+154h+var_130]",
+    "line": "lea     ecx, [esp+154h+var_130]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4B396D",
-    "line": "call    sub_478B90",
+    "line": "call    OB_NiCloningProcess_ctor",
     "mnemonic": "call",
     "size": 5
   },
@@ -1033,7 +1033,7 @@
   },
   {
     "ea": "0x4B3982",
-    "line": "cmp     byte ptr [esp+154h+arg_4], 0",
+    "line": "cmp     byte ptr [esp+154h+arg1], 0",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -1183,7 +1183,7 @@
   },
   {
     "ea": "0x4B39DA",
-    "line": "lea     ecx, [esp+158h+var_140]",
+    "line": "lea     ecx, [esp+158h+element]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1201,19 +1201,19 @@
   },
   {
     "ea": "0x4B39E5",
-    "line": "lea     eax, [esp+154h+var_140]",
+    "line": "lea     eax, [esp+154h+element]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4B39E9",
-    "line": "push    eax",
+    "line": "push    eax; element",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B39EA",
-    "line": "mov     ecx, offset off_B082F0",
+    "line": "mov     ecx, offset stru_B082F0; self",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1225,13 +1225,13 @@
   },
   {
     "ea": "0x4B39F7",
-    "line": "call    NiTArray_AddItem",
+    "line": "call    NiTObjectArray_AddFirstEmpty",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4B39FC",
-    "line": "lea     ecx, [esp+154h+var_140]; this",
+    "line": "lea     ecx, [esp+154h+element]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1243,7 +1243,7 @@
   },
   {
     "ea": "0x4B3A08",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -1273,7 +1273,7 @@
   },
   {
     "ea": "0x4B3A1C",
-    "line": "mov     [esp+154h+var_140], eax",
+    "line": "mov     [esp+154h+element], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1453,7 +1453,7 @@
   },
   {
     "ea": "0x4B3A77",
-    "line": "mov     esi, [esp+154h+var_13C]",
+    "line": "mov     esi, [esp+154h+reference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1513,7 +1513,7 @@
   },
   {
     "ea": "0x4B3A95",
-    "line": "fstp    [esp+154h+var_140]",
+    "line": "fstp    [esp+154h+element]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1525,7 +1525,7 @@
   },
   {
     "ea": "0x4B3A9B",
-    "line": "fcomp   [esp+154h+var_140]",
+    "line": "fcomp   [esp+154h+element]",
     "mnemonic": "fcomp",
     "size": 4
   },
@@ -1555,37 +1555,37 @@
   },
   {
     "ea": "0x4B3AAC",
-    "line": "lea     edx, [esp+154h+var_114]",
+    "line": "lea     edx, [esp+154h+outPath]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4B3AB0",
-    "line": "fstp    [esp+154h+var_140]",
+    "line": "fstp    [esp+154h+element]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4B3AB4",
-    "line": "push    edx",
+    "line": "push    edx; outPath",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B3AB5",
-    "line": "fld     [esp+158h+var_140]",
+    "line": "fld     [esp+158h+element]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x4B3AB9",
-    "line": "push    esi",
+    "line": "push    esi; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B3ABA",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1597,7 +1597,7 @@
   },
   {
     "ea": "0x4B3ABF",
-    "line": "call    sub_4B2B00",
+    "line": "call    TESBoundObject_BuildReferenceModelPath; Verified: chooses reference-specific model path if available, otherwise the form model path, then appends scale percent (GetScale()*100) to create the per-reference model-loader key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1609,7 +1609,7 @@
   },
   {
     "ea": "0x4B3ACA",
-    "line": "lea     eax, [esp+154h+var_114]",
+    "line": "lea     eax, [esp+154h+outPath]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1687,7 +1687,7 @@
   },
   {
     "ea": "0x4B3AF3",
-    "line": "lea     ecx, [esp+158h+var_114]",
+    "line": "lea     ecx, [esp+158h+outPath]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1765,7 +1765,7 @@
   },
   {
     "ea": "0x4B3B1A",
-    "line": "lea     edx, [esp+158h+var_114]",
+    "line": "lea     edx, [esp+158h+outPath]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1831,7 +1831,7 @@
   },
   {
     "ea": "0x4B3B3C",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1855,13 +1855,13 @@
   },
   {
     "ea": "0x4B3B4D",
-    "line": "mov     esi, [esp+154h+var_13C]",
+    "line": "mov     esi, [esp+154h+reference]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4B3B51",
-    "line": "mov     ecx, [esp+154h+arg_4]",
+    "line": "mov     ecx, [esp+154h+arg1]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1927,7 +1927,7 @@
   },
   {
     "ea": "0x4B3B6D",
-    "line": "lea     ecx, [esp+158h+var_140]",
+    "line": "lea     ecx, [esp+158h+element]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1939,7 +1939,7 @@
   },
   {
     "ea": "0x4B3B76",
-    "line": "lea     eax, [esp+154h+var_140]",
+    "line": "lea     eax, [esp+154h+element]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1951,7 +1951,7 @@
   },
   {
     "ea": "0x4B3B7B",
-    "line": "mov     ecx, offset off_B082F0",
+    "line": "mov     ecx, offset stru_B082F0; MEF PERF 2026-10-08: Verified strong-pointer16 array used by TESBoundObject_Create3DImpl4B39F7; clear4B26D5 and remove4D9849 are also observed. Its entire lifetime/population not sealed. Generic AddFirstEmpty patch must not assume every caller is a NiNode child array.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1969,7 +1969,7 @@
   },
   {
     "ea": "0x4B3B8D",
-    "line": "lea     ecx, [esp+154h+var_140]; this",
+    "line": "lea     ecx, [esp+154h+element]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1981,7 +1981,7 @@
   },
   {
     "ea": "0x4B3B99",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -2155,7 +2155,7 @@
   },
   {
     "ea": "0x4B3BFA",
-    "line": "fstp    [esp+154h+var_140]",
+    "line": "fstp    [esp+154h+element]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2167,7 +2167,7 @@
   },
   {
     "ea": "0x4B3C01",
-    "line": "fld     [esp+154h+var_140]",
+    "line": "fld     [esp+154h+element]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2320,5 +2320,179 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B3370",
+    "line": "lea     ecx, [ebp-130h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B3376",
+    "line": "jmp     sub_4781A0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B337B",
+    "line": "lea     ecx, [ebp-134h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B3381",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3386",
+    "line": "lea     ecx, [ebp-140h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B338C",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3391",
+    "line": "mov     eax, [ebp-140h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B3397",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B3398",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B339D",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B339E",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B339F",
+    "line": "mov     eax, [ebp-134h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B33A5",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B33A6",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B33AB",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B33AC",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B33AD",
+    "line": "lea     ecx, [ebp-140h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B33B3",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B33B8",
+    "line": "mov     edx, [esp+arg1]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B33BC",
+    "line": "lea     eax, [edx-144h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B33C2",
+    "line": "mov     ecx, [edx-148h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B33C8",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B33CA",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B33CF",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B33D2",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B33D5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B33D7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B33DC",
+    "line": "mov     eax, offset stru_ADF0A4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B33E1",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

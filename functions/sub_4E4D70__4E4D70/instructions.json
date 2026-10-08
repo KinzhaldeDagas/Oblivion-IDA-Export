@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E4D70",
-    "line": "push    ebx",
+    "line": "push    ebx; Runtime folded virtual used by both TESObjectLAND and TESPathGrid. TESCS-authoritative equivalents are TESObjectLAND_MatchesSerializedGroup (0x521FC0) and TESPathGrid_MatchesSerializedGroup (0x54CA20): direct records match CELL temporary-children type 9; ancestor traversal also accepts the owning CELL children type 6; types 8 and 10 are rejected; labels compare against the parent CELL FormID low 24 bits.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x4E4D72",
-    "line": "mov     esi, [esp+8+arg_0]",
+    "line": "mov     esi, [esp+8+group_header]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -67,13 +67,13 @@
   },
   {
     "ea": "0x4E4D8C",
-    "line": "mov     ecx, [ecx+20h]",
+    "line": "mov     ecx, [ecx+20h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x4E4D8F",
-    "line": "jz      short loc_4E4DBB",
+    "line": "jz      short loc_4E4DBB; Group type 6 is accepted only while include_parent is true: it is the outer owning-CELL children wrapper, not the direct LAND/PGRD record group.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x4E4D9B",
-    "line": "mov     eax, [esp+8+arg_4]",
+    "line": "mov     eax, [esp+8+include_parent]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x4E4DA6",
-    "line": "mov     edi, [esp+0Ch+arg_8]",
+    "line": "mov     edi, [esp+0Ch+match_flags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x4E4DBB",
-    "line": "cmp     byte ptr [esp+8+arg_4], 0",
+    "line": "cmp     byte ptr [esp+8+include_parent], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x4E4DC6",
-    "line": "retn    0Ch",
+    "line": "retn    0Ch; After the parent CELL FormID24 label match, accept temporary children type 9; explicitly reject persistent type 8 and distant type 10.",
     "mnemonic": "retn",
     "size": 3
   },
@@ -235,13 +235,13 @@
   },
   {
     "ea": "0x4E4DCC",
-    "line": "push    edx",
+    "line": "push    edx; candidate_form_id",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E4DCD",
-    "line": "call    sub_46AF50",
+    "line": "call    TESForm_FormIDMatchesObjectID24; Compares only the low 24-bit object-ID portions of this form's FormID and a serialized group label; load-order/master byte is intentionally ignored.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,19 +1,36 @@
 {
-  "callees_count": 39,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_531290",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 25,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x531290",
+      "0x531464"
+    ],
+    [
+      "0x9B8BF0",
+      "0x9B8C1D"
+    ]
+  ],
+  "chunks_sha256": "69426f5fc23ee28edcff1c00c90055f3071150fb0d676963ae122f7f55e7f576",
+  "comment_regular": "Oblivion lazy INFO result-script loader. For a newly requested INFO, initializes a fresh shared temporary Script, opens the winning override record saved by the main INFO loader, and replays its entire chunk stream. Recognized result-script tags are SCHR, SCDA, and SCRO only. SCHD, SCTX, SLSD, SCVR, and SCRV are ignored. Repeated SCHR prefix-overlays ScriptInfo, repeated SCDA replaces compiled storage/size, and every SCRO appends in stream order. No inherited base-script state is reconstructed for a partial override.",
+  "comment_repeatable": "Oblivion lazy INFO result-script loader. For a newly requested INFO, initializes a fresh shared temporary Script, opens the winning override record saved by the main INFO loader, and replays its entire chunk stream. Recognized result-script tags are SCHR, SCDA, and SCRO only. SCHD, SCTX, SLSD, SCVR, and SCRV are ignored. Repeated SCHR prefix-overlays ScriptInfo, repeated SCDA replaces compiled storage/size, and every SCRO appends in stream order. No inherited base-script state is reconstructed for a partial override.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 10,
+  "display_name": "TESTopicInfo::GetResultScript",
   "end_ea": "0x531464",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_531290",
+  "name": "TESTopicInfo::GetResultScript",
   "segment": ".text",
   "sha256": "d2bb583d42bbe778ad9ef310eb99fd43ace332be242ba48116e39d0b1736641a",
   "size": 468,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x531290",
-  "type": "TESForm *__thiscall(TESForm *this)",
-  "xrefs_from_count": 187,
+  "total_chunk_size": 513,
+  "type": "TESForm *__thiscall(OblivionTopicInfo *this)",
+  "xrefs_from_count": 202,
   "xrefs_to_count": 3
 }

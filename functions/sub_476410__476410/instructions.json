@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x476410",
-    "line": "sub     esp, 154h",
+    "line": "sub     esp, 154h; Native Oblivion power-attack rebuild: clears groups 0x16..0x1A, generates movement/weapon/mastery filename candidates, probes the model loader, and installs parsed native power groups. No dynamic weapon type or override registry is consulted.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x476425",
-    "line": "push    ebp",
+    "line": "push    ebp; float",
     "mnemonic": "push",
     "size": 1
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x47642D",
-    "line": "push    esi",
+    "line": "push    esi; float",
     "mnemonic": "push",
     "size": 1
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x476475",
-    "line": "push    edi",
+    "line": "push    edi; float",
     "mnemonic": "push",
     "size": 1
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x47647B",
-    "line": "push    1",
+    "line": "push    1; float",
     "mnemonic": "push",
     "size": 2
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x4764A7",
-    "line": "mov     [esp+168h+var_14C], ecx",
+    "line": "mov     [esp+168h+var_14C], ecx; float",
     "mnemonic": "mov",
     "size": 4
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x4764C4",
-    "line": "mov     [esp+168h+var_148], edi",
+    "line": "mov     [esp+168h+var_148], edi; float",
     "mnemonic": "mov",
     "size": 4
   },
@@ -307,13 +307,13 @@
   },
   {
     "ea": "0x4764D2",
-    "line": "push    1; a2",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4764D4",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,19 +403,19 @@
   },
   {
     "ea": "0x476505",
-    "line": "push    edi",
+    "line": "push    edi; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x476506",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x476508",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x47650F",
-    "line": "mov     [esp+16Ch+var_124], eax",
+    "line": "mov     [esp+16Ch+var_124], eax; int",
     "mnemonic": "mov",
     "size": 4
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x47652A",
-    "line": "mov     [esp+168h+var_144], ebx",
+    "line": "mov     [esp+168h+var_144], ebx; float",
     "mnemonic": "mov",
     "size": 4
   },
@@ -589,37 +589,37 @@
   },
   {
     "ea": "0x476560",
-    "line": "mov     [esp+168h+var_158], 31h ; '1'",
+    "line": "mov     byte ptr [esp+168h+var_158], 31h ; '1'",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x476565",
-    "line": "mov     [esp+168h+var_158+1], bl",
+    "line": "mov     byte ptr [esp+168h+var_158+1], bl",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x476569",
-    "line": "mov     [esp+168h+var_120], 1",
+    "line": "mov     [esp+168h+var_120], 1; int",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x476571",
-    "line": "mov     [esp+168h+var_11C], eax",
+    "line": "mov     [esp+168h+var_11C], eax; int",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x476575",
-    "line": "mov     [esp+168h+var_118], eax",
+    "line": "mov     [esp+168h+var_118], eax; int",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x476579",
-    "line": "mov     [esp+168h+var_114], 3",
+    "line": "mov     [esp+168h+var_114], 3; int",
     "mnemonic": "mov",
     "size": 8
   },
@@ -631,31 +631,31 @@
   },
   {
     "ea": "0x476589",
-    "line": "mov     [esp+168h+var_13C], 16h",
+    "line": "mov     [esp+168h+var_13C], 16h; float",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x476591",
-    "line": "mov     [esp+168h+var_138], 19h",
+    "line": "mov     [esp+168h+var_138], 19h; float",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x476599",
-    "line": "mov     [esp+168h+var_134], 1Ah",
+    "line": "mov     [esp+168h+var_134], 1Ah; float",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x4765A1",
-    "line": "mov     [esp+168h+var_130], 18h",
+    "line": "mov     [esp+168h+var_130], 18h; float",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x4765A9",
-    "line": "mov     [esp+168h+var_12C], 17h",
+    "line": "mov     [esp+168h+var_12C], 17h; float",
     "mnemonic": "mov",
     "size": 8
   },
@@ -1027,7 +1027,7 @@
   },
   {
     "ea": "0x47667F",
-    "line": "mov     [esp+168h+var_158], cl",
+    "line": "mov     byte ptr [esp+168h+var_158], cl",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1639,7 +1639,7 @@
   },
   {
     "ea": "0x47679E",
-    "line": "mov     [esp+168h+var_158], cl",
+    "line": "mov     byte ptr [esp+168h+var_158], cl",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1981,7 +1981,7 @@
   },
   {
     "ea": "0x476835",
-    "line": "call    sub_434870",
+    "line": "call    ModelLoader_FindModelRecordByPath; Model-loader map lookup by path/key. Returns the model record from the loader's internal map or 0; used to gate generated KF candidates before they are added to animation lists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2020,12 +2020,6 @@
     "line": "jmp     short loc_476850",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x47684D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x476850",
@@ -2086,12 +2080,6 @@
     "line": "jmp     short loc_476870",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x47686D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x476870",
@@ -2287,7 +2275,7 @@
   },
   {
     "ea": "0x4768C7",
-    "line": "mov     [esp+168h+var_158], al",
+    "line": "mov     byte ptr [esp+168h+var_158], al; float",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2629,7 +2617,7 @@
   },
   {
     "ea": "0x47695C",
-    "line": "call    sub_434870",
+    "line": "call    ModelLoader_FindModelRecordByPath; Model-loader map lookup by path/key. Returns the model record from the loader's internal map or 0; used to gate generated KF candidates before they are added to animation lists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2764,12 +2752,6 @@
     "line": "jmp     short loc_4769B0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x4769AD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x4769B0",
@@ -3216,12 +3198,6 @@
     "size": 2
   },
   {
-    "ea": "0x476A7D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x476A80",
     "line": "mov     dl, [eax]",
     "mnemonic": "mov",
@@ -3619,7 +3595,7 @@
   },
   {
     "ea": "0x476B34",
-    "line": "call    sub_434870",
+    "line": "call    ModelLoader_FindModelRecordByPath; Model-loader map lookup by path/key. Returns the model record from the loader's internal map or 0; used to gate generated KF candidates before they are added to animation lists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3718,12 +3694,6 @@
     "line": "jmp     short loc_476B70",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x476B6D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x476B70",
@@ -4051,7 +4021,7 @@
   },
   {
     "ea": "0x476BFD",
-    "line": "call    sub_434870",
+    "line": "call    ModelLoader_FindModelRecordByPath; Model-loader map lookup by path/key. Returns the model record from the loader's internal map or 0; used to gate generated KF candidates before they are added to animation lists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4231,7 +4201,7 @@
   },
   {
     "ea": "0x476C51",
-    "line": "mov     [esp+168h+var_154], eax",
+    "line": "mov     [esp+168h+var_154], eax; float",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4261,7 +4231,7 @@
   },
   {
     "ea": "0x476C67",
-    "line": "mov     [esp+168h+var_150], eax",
+    "line": "mov     [esp+168h+var_150], eax; float",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4297,7 +4267,7 @@
   },
   {
     "ea": "0x476C7C",
-    "line": "call    sub_4761C0",
+    "line": "call    ActorAnimData_LoadGeneratedPowerAttackList; Generated power-attack list loader. Loads each candidate KF from the temporary file list and only adds TESAnimGroup power-attack sequences; non-power KFs are released.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4309,7 +4279,7 @@
   },
   {
     "ea": "0x476C88",
-    "line": "mov     esi, [esp+168h+var_140]",
+    "line": "mov     esi, [esp+168h+ownerActor]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4333,7 +4303,7 @@
   },
   {
     "ea": "0x476C97",
-    "line": "fstp    [esp+170h+var_16C]; float",
+    "line": "fstp    [esp+170h+explicitTimeOrMinusOne]; explicitTimeOrMinusOne",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -4351,19 +4321,19 @@
   },
   {
     "ea": "0x476C9F",
-    "line": "fstp    [esp+170h+var_170]; float",
+    "line": "fstp    [esp+170h+deltaTime]; deltaTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x476CA2",
-    "line": "push    esi; int",
+    "line": "push    esi; ownerActor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x476CA3",
-    "line": "call    sub_476D10",
+    "line": "call    ActorAnimData_Update; Oblivion ActorAnimData scheduler with exact native ABI: this in ECX plus three 4-byte stack arguments, retn 0x0C. ownerActor is at [EBP+8]; all surveyed callers pass the owning Actor/Player, but the native body never dereferences it, so an interior hook's use of that value is a caller-derived contract. deltaTime at [EBP+0x0C] advances ActorAnimData time +0x94 and sequence offsets. explicitTimeOrMinusOne at [EBP+0x10] uses -1.0 for normal ticking; any other value drives an explicit-time scene update/early return. The function drains deferred KF models, maintains power/idle state, samples five slots, and advances required-note templates (class 4 terminal index 3; class 7 terminal index 4).",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x64B1F0",
-    "line": "push    esi",
+    "line": "push    esi; High/MiddleHigh process vtable +0x12C. Compares supplied ActorSkinInfo against the player's first-person skin info (+0x5C8): first-person returns global ArrowBone cache 0xB3BA98; otherwise returns process +0x110. Native action 4 may still advance to action 5 when null.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,25 +13,25 @@
   },
   {
     "ea": "0x64B1F3",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x64B1F9",
-    "line": "push    1",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x64B1FB",
-    "line": "call    sub_6600D0",
+    "line": "call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x64B200",
-    "line": "cmp     [esp+4+arg_0], eax",
+    "line": "cmp     [esp+4+animData], eax",
     "mnemonic": "cmp",
     "size": 4
   },

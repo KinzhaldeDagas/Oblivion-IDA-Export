@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x46D94A",
-    "line": "mov     edi, [esp+8+arg_4]",
+    "line": "mov     edi, [esp+8+file]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x46D95B",
-    "line": "push    eax",
+    "line": "push    eax; modelPath",
     "mnemonic": "push",
     "size": 1
   },
@@ -121,25 +121,25 @@
   },
   {
     "ea": "0x46D973",
-    "line": "push    eax",
+    "line": "push    eax; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46D974",
-    "line": "push    edi",
+    "line": "push    edi; file",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46D975",
-    "line": "lea     ecx, [esi+10h]",
+    "line": "lea     ecx, [esi+10h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x46D978",
-    "line": "call    sub_46D750",
+    "line": "call    TESModel_ReadAndReplaceTextureHashEntries; Verified: MODT chunks are accepted only when byte length is a nonzero multiple of 24. Each valid chunk is decoded into runtime texture-hash entries and replaces the TESTextureList state; zero/invalid-width chunks leave the old state unchanged. The 24-byte field meanings remain Unknown.",
     "mnemonic": "call",
     "size": 5
   },

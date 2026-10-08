@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x664C40",
-    "line": "push    esi",
+    "line": "push    esi; Actor animation update path. Ensures idle/equip groups are playing when needed, ticks ActorAnimData, updates first-person animation data, and updates the first-person scene node/controller tree.",
     "mnemonic": "push",
     "size": 1
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x664C5B",
-    "line": "call    sub_472EA0",
+    "line": "call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -73,43 +73,43 @@
   },
   {
     "ea": "0x664C69",
-    "line": "push    0",
+    "line": "push    0; forceWeaponPrefix",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x664C6B",
-    "line": "push    0",
+    "line": "push    0; weaponEntryDataArg",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x664C6D",
-    "line": "push    0",
+    "line": "push    0; groupID",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x664C6F",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x664C71",
-    "line": "call    Actor_LoadAnimGroup?",
+    "line": "call    Actor_LoadAnimGroup_; Builds an initial encoded key from live actor movement/weapon state and requested fixed group ID, then returns ActorAnimData_ResolveAnimKeyFallback's concrete playable key or sentinel 0x00FF when no ActorAnimData exists.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x664C76",
-    "line": "mov     ecx, [esi+5DCh]",
+    "line": "mov     ecx, [esi+5DCh]; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x664C7C",
-    "line": "push    5",
+    "line": "push    5; slot",
     "mnemonic": "push",
     "size": 2
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x664C81",
-    "line": "call    ActorAnimData_GetAnimGroupFromField8Value",
+    "line": "call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,31 +157,31 @@
   },
   {
     "ea": "0x664C94",
-    "line": "mov     ecx, [esi+5DCh]",
+    "line": "mov     ecx, [esi+5DCh]; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x664C9A",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; repeatOrAction",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x664C9C",
-    "line": "push    1",
+    "line": "push    1; playImmediately",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x664C9E",
-    "line": "push    edi",
+    "line": "push    edi; encodedKey",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x664C9F",
-    "line": "call    ActorAnimData_PlayAnimGroup",
+    "line": "call    ActorAnimData_PlayAnimGroup; Native group dispatcher. Reads fixed group-table slot (+0x08) and note-template class (+0x0C), normalizing slot aliases 5->0 and 6->3. For note classes 0/1, playImmediately=0 stores only the encoded key at ActorAnimData +0x70[slot] and repeat/action value at +0x7C[slot]; playImmediately=1 clears that queue and plays now. Classes 2..7 play immediately. No queued sequence pointer or path is stored.",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,31 +229,31 @@
   },
   {
     "ea": "0x664CB7",
-    "line": "push    0",
+    "line": "push    0; forceWeaponPrefix",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x664CB9",
-    "line": "push    0",
+    "line": "push    0; weaponEntryDataArg",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x664CBB",
-    "line": "push    21h ; '!'",
+    "line": "push    21h ; '!'; groupID",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x664CBD",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x664CBF",
-    "line": "call    Actor_LoadAnimGroup?",
+    "line": "call    Actor_LoadAnimGroup_; Builds an initial encoded key from live actor movement/weapon state and requested fixed group ID, then returns ActorAnimData_ResolveAnimKeyFallback's concrete playable key or sentinel 0x00FF when no ActorAnimData exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x664CC8",
-    "line": "call    sub_51AA00",
+    "line": "call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,19 +295,19 @@
   },
   {
     "ea": "0x664CD5",
-    "line": "mov     ecx, [esi+5DCh]",
+    "line": "mov     ecx, [esi+5DCh]; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x664CDB",
-    "line": "push    2",
+    "line": "push    2; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x664CDD",
-    "line": "call    ActorAnimData_GetAnimGroupFromField8Value",
+    "line": "call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,37 +343,37 @@
   },
   {
     "ea": "0x664CF0",
-    "line": "mov     ecx, [esi+5DCh]",
+    "line": "mov     ecx, [esi+5DCh]; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x664CF6",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; repeatOrAction",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x664CF8",
-    "line": "push    1",
+    "line": "push    1; playImmediately",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x664CFA",
-    "line": "push    edi",
+    "line": "push    edi; encodedKey",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x664CFB",
-    "line": "call    ActorAnimData_PlayAnimGroup",
+    "line": "call    ActorAnimData_PlayAnimGroup; Native group dispatcher. Reads fixed group-table slot (+0x08) and note-template class (+0x0C), normalizing slot aliases 5->0 and 6->3. For note classes 0/1, playImmediately=0 stores only the encoded key at ActorAnimData +0x70[slot] and repeat/action value at +0x7C[slot]; playImmediately=1 clears that queue and plays now. Classes 2..7 play immediately. No queued sequence pointer or path is stored.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x664D00",
-    "line": "pop     edi",
+    "line": "pop     edi; edi0",
     "mnemonic": "pop",
     "size": 1
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x664D10",
-    "line": "fstp    [esp+0Ch+var_8]; float",
+    "line": "fstp    [esp+0Ch+explicitTimeOrMinusOne]; explicitTimeOrMinusOne",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -409,19 +409,19 @@
   },
   {
     "ea": "0x664D1A",
-    "line": "fstp    [esp+0Ch+a2]; float",
+    "line": "fstp    [esp+0Ch+a2]; deltaTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x664D1D",
-    "line": "push    esi; int",
+    "line": "push    esi; ownerActor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x664D1E",
-    "line": "call    sub_476D10",
+    "line": "call    ActorAnimData_Update; CustomAnimSupport evidence: observed ActorAnimData update caller; supports broad scheduler classification.",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x664D2A",
-    "line": "call    sub_474510",
+    "line": "call    ActorAnimData_ApplyToActor; Applies actor-dependent scene/node state through 0x471C00 and then calls ActorAnimData::ApplyActorAnimData. Called during NiNode generation, animation updates, body toggles, resurrection/fast travel, and first-person transitions.",
     "mnemonic": "call",
     "size": 5
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x664D4A",
-    "line": "fstp    [esp+8+var_8]",
+    "line": "fstp    [esp+8+explicitTimeOrMinusOne]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x664D68",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },

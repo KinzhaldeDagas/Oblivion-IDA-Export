@@ -30,7 +30,7 @@
 0x4DA7AD: jnz     short loc_4DA7A6
 0x4DA7AF: sub     eax, esi
 0x4DA7B1: mov     esi, eax
-0x4DA7B3: call    sub_49F550
+0x4DA7B3: call    BSAnimGroupSequence_GetSaveStateSize; Returns native serialized BSAnimGroupSequence state size: 20 bytes for save versions >= 0x71, otherwise 24 bytes.
 0x4DA7B8: add     ax, si
 0x4DA7BB: add     ax, 1
 0x4DA7BF: add     bp, ax

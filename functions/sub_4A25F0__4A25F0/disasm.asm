@@ -20,9 +20,9 @@
 0x4A2630: mov     edi, ecx
 0x4A2632: push    3
 0x4A2634: mov     [esp+250h+var_23C], edi
-0x4A2638: call    nullsub_returnTrue_0arg
+0x4A2638: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x4A263D: add     esp, 4
-0x4A2640: push    offset CriticalSection; lpCriticalSection
+0x4A2640: push    0B35380h; lpCriticalSection
 0x4A2645: call    dword ptr ds:0A2806Ch
 0x4A264B: call    dword ptr ds:0A2808Ch
 0x4A2651: add     dword ptr ds:0B353FCh, 1
@@ -54,8 +54,8 @@
 0x4A26A1: jmp     short loc_4A2690
 0x4A26A3: mov     edi, [esp+24Ch+var_23C]
 0x4A26A7: mov     [esp+24Ch+Str], ebx
-0x4A26AB: mov     [esp+24Ch+var_234], ebx
-0x4A26AF: lea     eax, [esp+24Ch+var_234]
+0x4A26AB: mov     [esp+24Ch+slot], ebx
+0x4A26AF: lea     eax, [esp+24Ch+slot]
 0x4A26B3: push    eax
 0x4A26B4: lea     ecx, [esp+250h+Str]
 0x4A26B8: push    ecx
@@ -64,7 +64,7 @@
 0x4A26C0: push    edx
 0x4A26C1: mov     [esp+258h+var_4], ebx
 0x4A26C8: call    sub_7B2600
-0x4A26CD: mov     eax, [esp+24Ch+var_234]
+0x4A26CD: mov     eax, [esp+24Ch+slot]
 0x4A26D1: add     eax, 4
 0x4A26D4: cmp     dword ptr [eax], 2
 0x4A26D7: jnz     loc_4A27CF
@@ -74,8 +74,8 @@
 0x4A26E7: push    5Fh ; '_'; Ch
 0x4A26E9: push    ebx; Str
 0x4A26EA: mov     byte ptr [esp+254h+var_4], 1
-0x4A26F2: call    _strrchr
-0x4A26F7: mov     esi, eax
+0x4A26F2: call    _strrchr; ModernWindowsCompatible decode: _strrchr(Str, '_') for BSTexturePalette path entry processing.
+0x4A26F7: mov     esi, eax; ModernWindowsCompatible patch site: vanilla subtracts Str from _strrchr return before checking for NULL; guarded by plugin after byte validation.
 0x4A26F9: sub     esi, ebx
 0x4A26FB: add     esp, 8
 0x4A26FE: test    esi, esi
@@ -133,7 +133,7 @@
 0x4A2799: jz      short loc_4A27A1
 0x4A279B: cmp     dword ptr [edi+4], 2
 0x4A279F: jnz     short loc_4A27AB
-0x4A27A1: mov     ecx, [esp+24Ch+var_23C]
+0x4A27A1: mov     ecx, [esp+24Ch+var_23C]; ModernWindowsCompatible null-result target: existing vanilla fallback/removal path used when underscore position is not positive.
 0x4A27A5: push    ebx; Str1
 0x4A27A6: call    sub_4A1A10
 0x4A27AB: test    edi, edi
@@ -149,7 +149,7 @@
 0x4A27C9: push    1
 0x4A27CB: mov     ecx, edi
 0x4A27CD: call    eax
-0x4A27CF: mov     esi, [esp+24Ch+var_234]
+0x4A27CF: mov     esi, [esp+24Ch+slot]
 0x4A27D3: lea     eax, [esi+4]
 0x4A27D6: push    eax; lpAddend
 0x4A27D7: mov     [esp+250h+var_4], 0FFFFFFFFh
@@ -167,10 +167,10 @@
 0x4A2802: sub     dword ptr ds:0B353FCh, 1
 0x4A2809: jnz     short loc_4A2811
 0x4A280B: mov     ds:0B353F8h, ebx
-0x4A2811: push    offset CriticalSection; lpCriticalSection
+0x4A2811: push    0B35380h; lpCriticalSection
 0x4A2816: call    dword ptr ds:0A28074h
 0x4A281C: push    2
-0x4A281E: call    nullsub_returnTrue_0arg
+0x4A281E: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x4A2823: add     esp, 4
 0x4A2826: mov     ecx, dword ptr [esp+24Ch+var_C]
 0x4A282D: mov     large fs:0, ecx
@@ -184,3 +184,18 @@
 0x4A2846: mov     esp, ebp
 0x4A2848: pop     ebp
 0x4A2849: retn
+0x9B2390: lea     ecx, [ebp+slot]; slot
+0x9B2396: jmp     NiPointerSlot_Release
+0x9B239B: lea     ecx, [ebp+var_238]; slot
+0x9B23A1: jmp     NiPointerSlot_Release
+0x9B23A6: mov     edx, [esp-4+arg_4]
+0x9B23AA: lea     eax, [edx-23Ch]
+0x9B23B0: mov     ecx, [edx-240h]
+0x9B23B6: xor     ecx, eax
+0x9B23B8: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B23BD: add     eax, 0Ch
+0x9B23C0: mov     ecx, [edx-8]
+0x9B23C3: xor     ecx, eax
+0x9B23C5: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B23CA: mov     eax, offset stru_ADE390
+0x9B23CF: jmp     ___CxxFrameHandler3

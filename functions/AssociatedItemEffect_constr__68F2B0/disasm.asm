@@ -19,13 +19,13 @@
 0x68F2E6: push    eax
 0x68F2E7: push    ecx
 0x68F2E8: mov     ecx, esi; this
-0x68F2EA: call    ??0ActiveEffect@@QAE@XZ; ActiveEffect::ActiveEffect(void)
+0x68F2EA: call    ActiveEffect_Ctor; Verified Oblivion ActiveEffect is 0x38 bytes and stores HitEffectNode* at +0x34 after TESBoundObject* at +0x30. Fallout ActiveEffect is 0x48 bytes and stores BSSimpleList<MagicHitEffect*> at +0x40 after a 12-byte PersistentSound handle and pSource at +0x3C; Fallout also has pDisplacementSpell at +0x44. Do not copy Fallout offsets into Oblivion.
 0x68F2EF: mov     dword ptr [esi], offset ??_7AssociatedItemEffect@@6B@; const AssociatedItemEffect::`vftable'
 0x68F2F5: mov     edx, [edi+1Ch]
 0x68F2F8: mov     eax, [edx+60h]
 0x68F2FB: push    eax; a1
 0x68F2FC: mov     [esp+20h+var_4], 0
-0x68F304: call    TESForm_LookupByFormID
+0x68F304: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x68F309: mov     [esi+38h], eax
 0x68F30C: add     esp, 4
 0x68F30F: mov     eax, esi
@@ -36,3 +36,12 @@
 0x68F31E: pop     esi
 0x68F31F: add     esp, 10h
 0x68F322: retn    0Ch
+0x9C57E0: mov     ecx, [ebp-10h]; this
+0x9C57E3: jmp     ??1ActiveEffect@@UAE@XZ; Verified ActiveEffect destructor detaches each associated MagicHitEffect by setting bFinished and ownerActiveEffect=null, clears/frees only the HitEffectNode list, and relies on the ActorProcessManager reference added during PostLink to own the BSTempEffect object's later update/removal.
+0x9C57E8: mov     edx, [esp+arg_4]
+0x9C57EC: lea     eax, [edx-0Ch]
+0x9C57EF: mov     ecx, [edx-10h]
+0x9C57F2: xor     ecx, eax
+0x9C57F4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C57F9: mov     eax, offset stru_AEDF6C
+0x9C57FE: jmp     ___CxxFrameHandler3

@@ -1,4 +1,4 @@
-0x8112A0: sub     esp, 0ACh
+0x8112A0: sub     esp, 0ACh; MoonSugarEffect decode: DistantLODShader transform slot (+0x34). Calls sub_765480 with passed NiTransform, sets shadow/lighting constants, then falls through to base transform handling.
 0x8112A6: push    ebx
 0x8112A7: push    esi
 0x8112A8: mov     esi, [esp+0B4h+a8]
@@ -7,7 +7,7 @@
 0x8112B2: mov     ecx, [edi+14h]
 0x8112B5: push    0
 0x8112B7: push    esi
-0x8112B8: call    sub_765480
+0x8112B8: call    NiDX9Renderer_SetModelTransform; MoonSugar build 39: common non-skinned transform upload has many shader-family xrefs (generic, water, grass, precipitation, SpeedTree, LOD, GeometryDecal, Lighting30). Do not globally detour for Moon Sugar; use scoped caller/hook windows.
 0x8112BD: fld     dword ptr [esi+30h]
 0x8112C0: fmul    dword ptr [esi]
 0x8112C2: lea     eax, [esp+0B8h+var_80]
@@ -80,7 +80,7 @@
 0x811399: lea     ecx, [esp+0B8h+var_84]
 0x81139D: push    ecx
 0x81139E: mov     ecx, [eax+118h]
-0x8113A4: call    sub_405AD0
+0x8113A4: call    ShadowSceneLight_GetLightRef
 0x8113A9: mov     ebx, [eax]
 0x8113AB: mov     eax, [esp+0B8h+var_84]
 0x8113AF: test    eax, eax
@@ -109,7 +109,7 @@
 0x8113F2: lea     ecx, [esp+0B8h+var_90]
 0x8113F6: mov     [esp+0B8h+var_8C], edx
 0x8113FA: mov     [esp+0B8h+var_88], eax
-0x8113FE: call    sub_43F350
+0x8113FE: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x811403: fstp    st
 0x811405: mov     ecx, [ebx+0E0h]
 0x81140B: mov     edx, [ebx+0E4h]
@@ -204,7 +204,7 @@
 0x8115AA: push    edx; a3
 0x8115AB: push    eax; a2
 0x8115AC: mov     ecx, edi; this
-0x8115AE: call    sub_779710
+0x8115AE: call    sub_779710; MoonSugar build 39: base shader +0x34 transform slot branches skinned partition to CalculateBoneMatrixes/sub_765560, otherwise pass-0 non-skinned to sub_765480. Confirms hardware skin needs separate post-flush hook.
 0x8115B3: pop     edi
 0x8115B4: pop     esi
 0x8115B5: pop     ebx

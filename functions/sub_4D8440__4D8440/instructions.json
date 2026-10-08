@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4D8440",
-    "line": "sub     esp, 44h",
+    "line": "sub     esp, 44h; Verified REFR parser reads XLOD as a 12-byte distant-data normal vector, DATA as six floats (first three base position, last three rotationAnglesXYZ radians), and XSCL as scale. XLOD components are remapped/capped and added to the rounded DATA position. Output scalePercentWithFloorBias is floor(XSCL*100)+0.97; downstream floors/divides by100. Rotation components are applied in X, Y, Z order.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x4D8445",
-    "line": "mov     esi, [esp+4Ch+arg_4]",
+    "line": "mov     esi, [esp+4Ch+outRecord]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x4D8454",
-    "line": "mov     edi, [esp+50h+arg_0]",
+    "line": "mov     edi, [esp+50h+file]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x4D8476",
-    "line": "fstp    [esp+50h+arg_4]",
+    "line": "fstp    [esp+50h+outRecord]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x4D8482",
-    "line": "fst     dword ptr [esp+50h+Dst]",
+    "line": "fst     dword ptr [esp+50h+xLODNormalX]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x4D8489",
-    "line": "fstp    [esp+50h+var_2C]",
+    "line": "fstp    [esp+50h+xLODNormalY]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x4D8499",
-    "line": "fstp    [esp+50h+var_28]",
+    "line": "fstp    [esp+50h+xLODNormalZ]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -187,37 +187,37 @@
   },
   {
     "ea": "0x4D84A2",
-    "line": "mov     dword ptr [esp+50h+var_18], eax",
+    "line": "mov     dword ptr [esp+50h+dataPositionX], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4D84A6",
-    "line": "mov     [esp+50h+var_14], eax",
+    "line": "mov     [esp+50h+dataPositionY], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4D84AA",
-    "line": "mov     [esp+50h+var_10], eax",
+    "line": "mov     [esp+50h+dataPositionZ], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4D84AE",
-    "line": "mov     [esp+50h+var_C], eax",
+    "line": "mov     [esp+50h+dataRotationX], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4D84B2",
-    "line": "mov     [esp+50h+var_8], eax",
+    "line": "mov     [esp+50h+dataRotationY], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4D84B6",
-    "line": "mov     [esp+50h+var_4], eax",
+    "line": "mov     [esp+50h+dataRotationZ], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x4D84E5",
-    "line": "jnz     short loc_4D852D",
+    "line": "jnz     short loc_4D852D; Verified REFR XLOD chunk is a 12-byte three-float distant-data normal vector. ExtraDataList_Load independently handles XLOD as a normal and defaults it to (0,0,0.97).",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x4D84E9",
-    "line": "lea     eax, [esp+54h+Dst]",
+    "line": "lea     eax, [esp+54h+xLODNormalX]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x4D84F0",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,13 +349,13 @@
   },
   {
     "ea": "0x4D84FE",
-    "line": "mov     [esp+54h+a1], ebx",
+    "line": "mov     [esp+54h+a1], ebx; Verified NAME chunk: reads a four-byte FormID and resolves it through TESForm_LookupByFormID into DistantLODReferenceRecord.baseForm.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4D8502",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x4D850C",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,13 +403,13 @@
   },
   {
     "ea": "0x4D851D",
-    "line": "jnz     short loc_4D852D",
+    "line": "jnz     short loc_4D852D; Verified XSCL chunk branch: reads one scale float; after parsing it is encoded into scalePercentWithFloorBias as floor(XSCL * 100) + 0.97.",
     "mnemonic": "jnz",
     "size": 2
   },
   {
     "ea": "0x4D851F",
-    "line": "lea     eax, [esp+50h+arg_4]",
+    "line": "lea     eax, [esp+50h+outRecord]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x4D8526",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x4D854E",
-    "line": "lea     ecx, [esp+54h+var_18]",
+    "line": "lea     ecx, [esp+54h+dataPositionX]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x4D8555",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Verified DATA chunk is 24 bytes: first three floats supply base position, last three rotationAnglesXYZ; the local transform applies those as X, then Y, then Z rotations. Exact matrix convention is documented at the queued-model transform helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x4D8562",
-    "line": "fld     dword ptr [esp+50h+Dst]",
+    "line": "fld     dword ptr [esp+50h+xLODNormalX]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -577,13 +577,13 @@
   },
   {
     "ea": "0x4D8572",
-    "line": "fstp    dword ptr [esp+50h+Dst]",
+    "line": "fstp    dword ptr [esp+50h+xLODNormalX]; Verified XLOD component remapping begins with 0.5*x+0.5; components are subsequently capped at 0.97.",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4D8576",
-    "line": "fld     dword ptr [esp+50h+Dst]",
+    "line": "fld     dword ptr [esp+50h+xLODNormalX]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -625,19 +625,19 @@
   },
   {
     "ea": "0x4D858F",
-    "line": "jp      short loc_4D8595",
+    "line": "jp      short loc_4D8595; Verified cap condition: when the remapped XLOD component reaches 0.97, it is set to kDistantLODNormalLimit_097 (0.97).",
     "mnemonic": "jp",
     "size": 2
   },
   {
     "ea": "0x4D8591",
-    "line": "fst     dword ptr [esp+50h+Dst]",
+    "line": "fst     dword ptr [esp+50h+xLODNormalX]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x4D8595",
-    "line": "fld     [esp+50h+var_2C]",
+    "line": "fld     [esp+50h+xLODNormalY]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -655,13 +655,13 @@
   },
   {
     "ea": "0x4D859D",
-    "line": "fstp    [esp+50h+var_2C]",
+    "line": "fstp    [esp+50h+xLODNormalY]; Verified second XLOD component is remapped by 0.5*x+0.5 and then capped at 0.97.",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4D85A1",
-    "line": "fld     [esp+50h+var_2C]",
+    "line": "fld     [esp+50h+xLODNormalY]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -691,13 +691,13 @@
   },
   {
     "ea": "0x4D85AE",
-    "line": "fst     [esp+50h+var_2C]",
+    "line": "fst     [esp+50h+xLODNormalY]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x4D85B2",
-    "line": "fld     [esp+50h+var_28]",
+    "line": "fld     [esp+50h+xLODNormalZ]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -715,19 +715,19 @@
   },
   {
     "ea": "0x4D85BA",
-    "line": "fxch    st(2)",
+    "line": "fxch    st(2); Verified third XLOD component is remapped by 0.5*x+0.5 and then capped at 0.97.",
     "mnemonic": "fxch",
     "size": 2
   },
   {
     "ea": "0x4D85BC",
-    "line": "fstp    [esp+50h+var_28]",
+    "line": "fstp    [esp+50h+xLODNormalZ]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4D85C0",
-    "line": "fld     [esp+50h+var_28]",
+    "line": "fld     [esp+50h+xLODNormalZ]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -751,13 +751,13 @@
   },
   {
     "ea": "0x4D85CB",
-    "line": "jnz     short loc_4D85D3",
+    "line": "jnz     short loc_4D85D3; Verified third XLOD component uses the same 0.5*x+0.5 remap and 0.97 cap.",
     "mnemonic": "jnz",
     "size": 2
   },
   {
     "ea": "0x4D85CD",
-    "line": "fstp    [esp+50h+var_28]",
+    "line": "fstp    [esp+50h+xLODNormalZ]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x4D85D5",
-    "line": "fld     [esp+50h+var_10]",
+    "line": "fld     [esp+50h+dataPositionZ]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -799,7 +799,7 @@
   },
   {
     "ea": "0x4D85E5",
-    "line": "fld     [esp+50h+var_14]",
+    "line": "fld     [esp+50h+dataPositionY]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -823,7 +823,7 @@
   },
   {
     "ea": "0x4D85F5",
-    "line": "fld     dword ptr [esp+50h+var_18]",
+    "line": "fld     dword ptr [esp+50h+dataPositionX]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x4D8610",
-    "line": "mov     [esi+4], ecx",
+    "line": "mov     [esi+4], ecx; Verified stores rounded DATA position X into the intermediate reference record; the remapped XLOD component is added later.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -889,7 +889,7 @@
   },
   {
     "ea": "0x4D861F",
-    "line": "mov     [esi+8], edx",
+    "line": "mov     [esi+8], edx; Verified stores rounded DATA position Y into the intermediate reference record; the remapped XLOD component is added later.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -907,13 +907,13 @@
   },
   {
     "ea": "0x4D862A",
-    "line": "fld     dword ptr [esp+58h+Dst]",
+    "line": "fld     dword ptr [esp+58h+xLODNormalX]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x4D862E",
-    "line": "mov     [esi+0Ch], eax",
+    "line": "mov     [esi+0Ch], eax; Verified stores rounded DATA position Z into the intermediate reference record; the remapped XLOD component is added later.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -925,7 +925,7 @@
   },
   {
     "ea": "0x4D8634",
-    "line": "fstp    [esp+58h+var_24]",
+    "line": "fstp    [esp+58h+var_24]; Verified the rounded DATA position receives the XLOD normal's first remapped/capped component.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -943,13 +943,13 @@
   },
   {
     "ea": "0x4D863F",
-    "line": "fadd    [esp+58h+var_2C]",
+    "line": "fadd    [esp+58h+xLODNormalY]",
     "mnemonic": "fadd",
     "size": 4
   },
   {
     "ea": "0x4D8643",
-    "line": "fstp    [esp+58h+var_20]",
+    "line": "fstp    [esp+58h+var_20]; Verified the rounded DATA position receives the XLOD normal's second remapped/capped component.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -973,7 +973,7 @@
   },
   {
     "ea": "0x4D8651",
-    "line": "fadd    [esp+58h+var_28]",
+    "line": "fadd    [esp+58h+xLODNormalZ]; Verified the rounded DATA position receives the XLOD normal's third remapped/capped component.",
     "mnemonic": "fadd",
     "size": 4
   },
@@ -997,7 +997,7 @@
   },
   {
     "ea": "0x4D8660",
-    "line": "fld     [esp+58h+arg_4]",
+    "line": "fld     [esp+58h+outRecord]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1015,13 +1015,13 @@
   },
   {
     "ea": "0x4D866D",
-    "line": "fstp    [esp+58h+arg_4]",
+    "line": "fstp    [esp+58h+outRecord]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4D8671",
-    "line": "fld     [esp+58h+arg_4]",
+    "line": "fld     [esp+58h+outRecord]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1039,43 +1039,43 @@
   },
   {
     "ea": "0x4D867D",
-    "line": "mov     ecx, [esp+58h+var_C]",
+    "line": "mov     ecx, [esp+58h+dataRotationX]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4D8681",
-    "line": "fstp    [esp+58h+arg_4]",
+    "line": "fstp    [esp+58h+outRecord]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4D8685",
-    "line": "fld     [esp+58h+arg_4]",
+    "line": "fld     [esp+58h+outRecord]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x4D8689",
-    "line": "mov     edx, [esp+58h+var_8]",
+    "line": "mov     edx, [esp+58h+dataRotationY]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4D868D",
-    "line": "mov     eax, [esp+58h+var_4]",
+    "line": "mov     eax, [esp+58h+dataRotationZ]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4D8691",
-    "line": "fstp    [esp+58h+arg_4]",
+    "line": "fstp    [esp+58h+outRecord]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4D8695",
-    "line": "fld     [esp+58h+arg_4]",
+    "line": "fld     [esp+58h+outRecord]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1117,7 +1117,7 @@
   },
   {
     "ea": "0x4D86AC",
-    "line": "fstp    dword ptr [esi+10h]",
+    "line": "fstp    dword ptr [esi+10h]; Verified scale encoding: stores floor(XSCL * 100) + 0.97 in scalePercentWithFloorBias. The downstream base-object callback floors this value and divides by 100, so the fractional bias is discarded and the scale is quantized to hundredths. The specific choice of 0.97 remains Unknown.",
     "mnemonic": "fstp",
     "size": 3
   },

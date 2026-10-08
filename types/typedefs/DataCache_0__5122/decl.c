@@ -1,1 +1,1 @@
-DataCache_0
+typedef DataCache DataCache_0;

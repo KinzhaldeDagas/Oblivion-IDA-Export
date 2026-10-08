@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E4940",
-    "line": "mov     eax, [esp+cloneMap]",
+    "line": "mov     eax, [esp+cloneMap]; Verified PathGrid clone override: delegates to TESForm_Clone then RTTI-casts the duplicate to TESPathGrid. No graph-copy/rebuild is performed in this tiny override; subsequent graph population is handled by normal form loading.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x4E4955",
-    "line": "call    TESForm_Clone",
+    "line": "call    TESForm_Clone; Verified ordinary form-clone path: allocates via TESForm_CreateDynamic, invokes the destination CopyFrom virtual, restores EditorID and records the cloneMap entry. This does not dispatch CreateDuplicateForm; WorldSpace's deep cell/persistent-cell clone is a separate +0x38 virtual path.",
     "mnemonic": "call",
     "size": 5
   },

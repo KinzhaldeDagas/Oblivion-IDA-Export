@@ -1,19 +1,36 @@
 {
-  "callees_count": 11,
-  "callers_count": 5,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_423720",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
+  "callers_count": 6,
+  "chunks": [
+    [
+      "0x423720",
+      "0x4237DE"
+    ],
+    [
+      "0x9C3090",
+      "0x9C30B6"
+    ]
+  ],
+  "chunks_sha256": "5326389d09abe54f45eed095801555692d84156fc56eec4ae94d374fef94cce7",
+  "comment_regular": "Verified XGLB mutator: update the stored TESGlobal* when nonnull; remove the extra when null; otherwise allocate a 16-byte ExtraGlobal payload. During plugin load the stored dword is a FormID temporarily; ExtraDataList_ResolveLoadedFormIDs rebases, looks it up, RTTI-checks TESGlobal, and removes missing/wrong-type entries.",
+  "comment_repeatable": "Verified XGLB mutator: update the stored TESGlobal* when nonnull; remove the extra when null; otherwise allocate a 16-byte ExtraGlobal payload. During plugin load the stored dword is a FormID temporarily; ExtraDataList_ResolveLoadedFormIDs rebases, looks it up, RTTI-checks TESGlobal, and removes missing/wrong-type entries.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "ExtraDataList_SetGlobal",
   "end_ea": "0x4237DE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_423720",
+  "name": "ExtraDataList_SetGlobal",
   "segment": ".text",
   "sha256": "80f7b4c4b648bf3ef3ca4e616d34a7e7fdbf8d20ea491a7f3b145cf385dc9746",
   "size": 190,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x423720",
-  "type": "void __thiscall(ExtraDataList *this, BSExtraDataVtbl *)",
-  "xrefs_from_count": 72,
+  "total_chunk_size": 228,
+  "type": "void __thiscall(ExtraDataList *this, TESGlobal *global)",
+  "xrefs_from_count": 86,
   "xrefs_to_count": 6
 }

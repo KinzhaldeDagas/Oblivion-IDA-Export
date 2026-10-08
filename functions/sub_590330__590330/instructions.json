@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x590330",
-    "line": "push    ecx",
+    "line": "push    ecx; Verified injection consequence: no ID/name deduplication in this builder. Plugin retry must query expected child and parent before another ReadFile; return value identifies first created node, not the entire fragment.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x590331",
-    "line": "mov     eax, [esp+4+arg_0]",
+    "line": "mov     eax, [esp+4+tileTemplate]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x590362",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },

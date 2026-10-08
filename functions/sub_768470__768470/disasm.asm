@@ -4,8 +4,8 @@
 0x768476: push    edi
 0x768477: mov     edi, [esi+38h]
 0x76847A: mov     ebx, ecx
-0x76847C: mov     ecx, edi
-0x76847E: call    sub_777F10
+0x76847C: mov     ecx, edi; this
+0x76847E: call    NiGeometryBufferData_HasLiveStreams; Pass225/226: Tests whether NiGeometryBufferData is live: stream count nonzero and every VBChip has a D3D vertex buffer.
 0x768483: test    al, al
 0x768485: jz      short loc_76848F
 0x768487: pop     edi

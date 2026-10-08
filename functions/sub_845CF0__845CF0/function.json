@@ -1,19 +1,36 @@
 {
-  "callees_count": 27,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x845CF0",
+      "0x845EBC"
+    ],
+    [
+      "0x9D3360",
+      "0x9D3383"
+    ]
+  ],
+  "chunks_sha256": "a36a4ba23a6d77cc56ae8732c10f9f985023275027cdcc2c7056827898f7df34",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_845CF0",
+  "comment_repeatable": "ShadowLight selector 0x177 consumer. Selects the 0x177 pooled pass, binds the material/base texture, binds the current ShadowSceneLight +0x114 rendered shadow texture into stage 2, appends the pass, and increments PassCount. Sole caller is ShadowLightShader_SetupRenderPass case 0x177.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "ShadowLightShader_AppendSelector177LightPass",
   "end_ea": "0x845EBC",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
-  "name": "sub_845CF0",
+  "name": "ShadowLightShader_AppendSelector177LightPass",
   "segment": ".text",
   "sha256": "183d541b5333345fcf87768b2785823fa38d31415fd1578e217a6f4d53010a75",
   "size": 460,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x845CF0",
+  "total_chunk_size": 495,
   "type": "void __thiscall(NiTArray_NiD3DPass *this, int, int, int, NiRenderedTexture *)",
-  "xrefs_from_count": 184,
+  "xrefs_from_count": 195,
   "xrefs_to_count": 1
 }

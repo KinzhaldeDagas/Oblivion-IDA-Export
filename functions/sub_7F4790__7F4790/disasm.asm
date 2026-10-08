@@ -43,9 +43,9 @@
 0x7F47F8: mov     ecx, ebx
 0x7F47FA: call    eax
 0x7F47FC: mov     dword ptr [ebp+4], 0
-0x7F4803: push    3
-0x7F4805: mov     ecx, ebp
-0x7F4807: call    sub_7715E0
+0x7F4803: push    3; preset
+0x7F4805: mov     ecx, ebp; this
+0x7F4807: call    NiD3DTextureStage_ApplyAddressModePreset; Apply one native address-preset row to a NiD3DTextureStage: D3DSAMP_ADDRESSU (1) and D3DSAMP_ADDRESSV (2). Lighting30 SimpleShadow uses preset 0 = CLAMP/CLAMP.
 0x7F480C: fld     dword ptr [edi+7Ch]
 0x7F480F: fstp    dword ptr [esi+138h]
 0x7F4815: pop     ebp
@@ -105,18 +105,18 @@
 0x7F4933: mov     ds:0B468FCh, eax
 0x7F4938: mov     ecx, [esi+80h]
 0x7F493E: shl     eax, 4
-0x7F4941: push    eax; Size
+0x7F4941: push    eax; byteCount
 0x7F4942: mov     eax, [edi+6Ch]
-0x7F4945: push    eax; Src
-0x7F4946: push    ecx; Dst
-0x7F4947: call    _memcpy
+0x7F4945: push    eax; source
+0x7F4946: push    ecx; destination
+0x7F4947: call    _memcpy;
 0x7F494C: mov     edx, [esi+38h]
 0x7F494F: add     esp, 0Ch
 0x7F4952: lea     eax, [esi+178h]
-0x7F4958: push    eax; a3
-0x7F4959: push    edx; a2
+0x7F4958: push    eax; value
+0x7F4959: push    edx; index
 0x7F495A: lea     ecx, [esi+40h]; this
-0x7F495D: call    sub_76CE40
+0x7F495D: call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.
 0x7F4962: add     dword ptr [esi+38h], 1
 0x7F4966: pop     edi
 0x7F4967: pop     esi

@@ -1,1 +1,1 @@
-RemUnknown
+typedef rem_unknown RemUnknown;

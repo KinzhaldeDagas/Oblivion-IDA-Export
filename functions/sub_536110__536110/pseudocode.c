@@ -1,9 +1,11 @@
-PlayerCharacter *__cdecl sub_536110(int a1)
+void __cdecl sub_536110(int collidable)
 {
   NiAVObject *v1; // eax
 
-  if ( a1 && (v1 = sub_8AFCE0(a1)) != 0 )
-    return sub_4DC270((int)v1);
-  else
-    return 0;
+  if ( collidable ) /*0x536119*/
+  {
+    v1 = bhkCollidable_ResolveNiAVObject(collidable); /*0x53611c*/
+    if ( v1 ) /*0x536126*/
+      sub_4DC270((int)v1); /*0x53612d*/
+  }
 }

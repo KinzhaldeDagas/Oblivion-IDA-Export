@@ -1,1 +1,1 @@
-_onexit_t
+typedef int (*_onexit_t)(void);

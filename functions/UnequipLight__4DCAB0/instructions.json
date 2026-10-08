@@ -145,19 +145,19 @@
   },
   {
     "ea": "0x4DCAFF",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DCB01",
-    "line": "call    sub_478E30",
+    "line": "call    ActorSkinInfo_ClearLightSlot; Clear ActorSkinInfo light equipment slot at +0x12C; called by native UnequipLight handling.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4DCB06",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -169,25 +169,25 @@
   },
   {
     "ea": "0x4DCB12",
-    "line": "mov     byte ptr [esp+14h+var_4], al",
+    "line": "mov     [esp+14h+firstPerson], al",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4DCB16",
-    "line": "mov     edx, [esp+14h+var_4]",
+    "line": "mov     edx, dword ptr [esp+14h+firstPerson]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4DCB1A",
-    "line": "push    edx",
+    "line": "push    edx; firstPerson",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4DCB1B",
-    "line": "call    sub_6600D0",
+    "line": "call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,13 +223,13 @@
   },
   {
     "ea": "0x4DCB28",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DCB2A",
-    "line": "call    sub_478E30",
+    "line": "call    ActorSkinInfo_ClearLightSlot; Clear ActorSkinInfo light equipment slot at +0x12C; called by native UnequipLight handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x4DCB54",
-    "line": "mov     [esp+1Ch+var_4], edi",
+    "line": "mov     dword ptr [esp+1Ch+firstPerson], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x4DCBCD",
-    "line": "mov     edi, [esp+1Ch+var_4]",
+    "line": "mov     edi, dword ptr [esp+1Ch+firstPerson]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x4DCC38",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -799,13 +799,13 @@
   },
   {
     "ea": "0x4DCC4B",
-    "line": "lea     ecx, [ebx+0ACh]",
+    "line": "lea     ecx, [ebx+0ACh]; this",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x4DCC51",
-    "line": "call    sub_477EF0",
+    "line": "call    NiTObjectArray_ClearAndRelease; Clears a ref-counted NiT object-pointer array: releases every non-null element, nulls entries, and resets end/count words to zero. At bow release it is invoked on ArrowBone+0xAC, thereby releasing all ArrowBone children including the held Arrow:0 clone.",
     "mnemonic": "call",
     "size": 5
   },
@@ -835,7 +835,7 @@
   },
   {
     "ea": "0x4DCC60",
-    "line": "push    edi",
+    "line": "push    edi; object",
     "mnemonic": "push",
     "size": 1
   },
@@ -859,13 +859,13 @@
   },
   {
     "ea": "0x4DCC6B",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DCC6D",
-    "line": "call    sub_7C5E70",
+    "line": "call    ShadowSceneNode_RemoveObjectReceivers; Removes an object's geometry from shadow-light receiver lists under the shadow-scene critical section. It obtains the object's node/container through virtual +0x08 and recurses; it does not detach the object from its parent or clear NiNode children.",
     "mnemonic": "call",
     "size": 5
   },
@@ -883,7 +883,7 @@
   },
   {
     "ea": "0x4DCC77",
-    "line": "call    sub_41E650",
+    "line": "call    ExtraDataList_GetLight; Returns the REFR_LIGHT payload from ExtraLight type 0x30; heavily used by TESObjectREF lighting and equipped-light paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -925,7 +925,7 @@
   },
   {
     "ea": "0x4DCC88",
-    "line": "push    eax",
+    "line": "push    eax; backingLight",
     "mnemonic": "push",
     "size": 1
   },
@@ -949,13 +949,13 @@
   },
   {
     "ea": "0x4DCC93",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DCC95",
-    "line": "call    sub_7C7DC0",
+    "line": "call    ShadowSceneNode_RemoveFullLightBySource; Find a native full-list ShadowSceneLight whose backing NiLight identity equals the supplied source, then remove that entry.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1057,13 +1057,13 @@
   },
   {
     "ea": "0x4DCCC2",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DCCC4",
-    "line": "call    sub_41F5B0",
+    "line": "call    ExtraDataList_RemoveExtraLight; Remove ordinary attached-light extra-data type 0x30 from this reference extra-data list.",
     "mnemonic": "call",
     "size": 5
   },

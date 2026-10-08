@@ -12,17 +12,17 @@ bool __cdecl sub_50CA10(
   SInt32 v9; // eax
   UInt16 v10[2]; // [esp+0h] [ebp-4h] BYREF
 
-  *(_DWORD *)v10 = 0;
-  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v10);
-  if ( result )
+  *(_DWORD *)v10 = 0; /*0x50ca38*/
+  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v10); /*0x50ca40*/
+  if ( result ) /*0x50ca4a*/
   {
-    TESDataHandler_g_PlayerRef->unk6F4 = *(_DWORD *)v10;
-    if ( IsConsoleMode )
+    reference->unk6F4 = *(_DWORD *)v10; /*0x50ca56*/
+    if ( MEMORY[0xB361AC] ) /*0x50ca5c*/
     {
-      v9 = TESDataHandler_g_PlayerRef->vtbl->super.GetFame((Actor *)TESDataHandler_g_PlayerRef);
-      Interface_ConsolePrint("Player Fame is %d ", v9);
+      v9 = reference->vtbl->super.GetFame((Actor *)reference); /*0x50ca73*/
+      Interface_ConsolePrint("Player Fame is %d ", v9); /*0x50ca7b*/
     }
-    return 1;
+    return 1; /*0x50ca83*/
   }
-  return result;
+  return result; /*0x50ca4d*/
 }

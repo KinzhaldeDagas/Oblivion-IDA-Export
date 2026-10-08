@@ -1,4 +1,4 @@
-0x761270: sub     esp, 14h
+0x761270: sub     esp, 14h; DX10OBSE resource decode: creates/loads NiDX9SourceTextureData for NiSourceTexture, creating a managed IDirect3DTexture9 and uploading source mip texels when rendererData is absent.
 0x761273: push    esi
 0x761274: push    edi
 0x761275: mov     edi, [esp+1Ch+arg_0]
@@ -12,7 +12,7 @@
 0x761288: cmp     eax, esi
 0x76128A: jz      short loc_76129E
 0x76128C: lea     esp, [esp+0]
-0x761290: cmp     eax, offset dword_B3FD34
+0x761290: cmp     eax, offset stru_B3FD34
 0x761295: jz      short loc_7612DE
 0x761297: mov     eax, [eax+4]
 0x76129A: cmp     eax, esi
@@ -83,7 +83,7 @@
 0x76133A: push    eax; a5
 0x76133B: push    ebp; Src
 0x76133C: mov     ecx, ebx; this
-0x76133E: call    NiDX9SourceTextureData_LoadTextureFile
+0x76133E: call    NiDX9SourceTextureData_LoadTextureFile; D3DX file-memory fast path requires the global gate, NiSourceTexture::persistRenderData, and a renderer. Textures created by TES helper 0x442890 set persistRenderData=true, and WinMain sets the global gate true at 0x40E876.
 0x761343: test    al, al
 0x761345: jz      short loc_761357
 0x761347: mov     ecx, [ebx+4]
@@ -121,11 +121,11 @@
 0x76139A: mov     ebp, eax
 0x76139C: mov     eax, [edx+874h]
 0x7613A2: mov     edx, [edi+38h]
-0x7613A5: mov     ecx, [esi+eax*4]; void *
+0x7613A5: mov     ecx, [esi+eax*4]; this
 0x7613A8: push    edx
 0x7613A9: push    offset aFailedToFindTe; "Failed to find texture %s\n"
 0x7613AE: mov     [esp+38h+arg_0], ecx
-0x7613B2: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x7613B2: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x7613B7: add     esp, 14h
 0x7613BA: jmp     loc_7614D8
 0x7613BF: mov     eax, [ebp+54h]
@@ -239,12 +239,12 @@
 0x761502: mov     [ebx+58h], ecx
 0x761505: jnz     short loc_761524
 0x761507: mov     edx, [esp+24h+var_14]
-0x76150B: mov     ecx, [edx+8]
+0x76150B: mov     ecx, [edx+8]; Fallback NiPixelData path uses FormatPrefs mipmap mode. TES default is mode 2 (Default); when global default generation is enabled, a one-level supported POT source is expanded by 0x71E790/0x71B8D0.
 0x76150E: cmp     ecx, 1
 0x761511: jz      short loc_761520
 0x761513: cmp     ecx, 2
 0x761516: jnz     short loc_761524
-0x761518: cmp     ds:0B3F708h, al
+0x761518: cmp     ds:0B3F708h, al; When true, generateMipmaps is passed to NiDevImageConverter at 0x76154B. It is not proof that file-authored mip count will be preserved.
 0x76151E: jz      short loc_761524
 0x761520: mov     cl, 1
 0x761522: jmp     short loc_761526
@@ -265,17 +265,17 @@
 0x761546: push    ebp
 0x761547: mov     ecx, eax
 0x761549: call    edx
-0x76154B: mov     esi, eax
+0x76154B: mov     esi, eax; NiDevImageConverter::ConvertPixelData. With generateMipmaps=true and a one-level supported POT input, 0x71E790 calls 0x71B8D0 to allocate/fill a complete chain before D3D creation/upload.
 0x76154D: cmp     dword ptr [ebx+50h], 0
 0x761551: jnz     short loc_761561
 0x761553: push    esi
 0x761554: mov     ecx, ebx
-0x761556: call    sub_760700
+0x761556: call    OB_NiDX9SourceTextureData_CreateD3DTexture_010201A0; DX10OBSE resource decode: NiDX9SourceTextureData creates D3DPOOL_MANAGED IDirect3DTexture9 using converted D3DFORMAT, mip-skip policy, width/height, and level count.
 0x76155B: cmp     dword ptr [ebx+50h], 0
 0x76155F: jz      short loc_761569
 0x761561: push    esi
 0x761562: mov     ecx, ebx
-0x761564: call    sub_760CC0
+0x761564: call    OB_NiDX9SourceTextureData_UploadMipLevels_010201A0; DX10OBSE resource decode: fills the D3D9 texture levels from converted NiPixelData by locking each texture level/surface and copying rows/blocks.
 0x761569: mov     ebp, [ebp+4Ch]
 0x76156C: test    ebp, ebp
 0x76156E: jz      short loc_761584

@@ -9,10 +9,10 @@
 0x8115D6: mov     eax, [ebx+0A4h]
 0x8115DC: mov     ecx, edi
 0x8115DE: shl     ecx, 4
-0x8115E1: push    ecx; Size
-0x8115E2: push    edx; Src
-0x8115E3: push    eax; Dst
-0x8115E4: call    _memcpy
+0x8115E1: push    ecx; byteCount
+0x8115E2: push    edx; source
+0x8115E3: push    eax; destination
+0x8115E4: call    _memcpy;
 0x8115E9: movzx   eax, word ptr [esi+0Eh]
 0x8115ED: mov     ecx, [esi]
 0x8115EF: mov     ecx, [ecx+0B4h]

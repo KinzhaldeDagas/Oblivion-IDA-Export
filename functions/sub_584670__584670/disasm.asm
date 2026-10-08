@@ -10,7 +10,6 @@
 0x584687: cmp     eax, ebx
 0x584689: jz      short loc_5846A7
 0x58468B: jmp     short loc_584690
-0x58468D: align 10h
 0x584690: add     eax, 1
 0x584693: push    offset SubStr; SubStr
 0x584698: push    eax; Str
@@ -32,11 +31,11 @@
 0x5846C6: cmp     eax, ebx
 0x5846C8: jz      short loc_5846D3
 0x5846CA: push    eax
-0x5846CB: call    FormHeapFree
+0x5846CB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5846D0: add     esp, 4
 0x5846D3: push    edi
 0x5846D4: mov     [edi+4], ebx
-0x5846D7: call    FormHeapFree
+0x5846D7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5846DC: add     esp, 4
 0x5846DF: push    esi
 0x5846E0: mov     ecx, offset off_B13948
@@ -57,10 +56,10 @@
 0x584711: jz      short loc_58471A
 0x584713: mov     [edi+10h], bl
 0x584716: mov     byte ptr [eax+1Ch], 1
-0x58471A: mov     ecx, edi
-0x58471C: call    sub_58CDB0
+0x58471A: mov     ecx, edi; this
+0x58471C: call    Tile__BuildStorage__Destroy; Verified: destroys main template unconditionally; subtemplate objects only when ownsSubTemplates is true; always frees subtemplate list links. ReadFile transfers subtemplate ownership to Menu before destroying storage. No savegame serialization in this teardown path.
 0x584721: push    edi
-0x584722: call    FormHeapFree
+0x584722: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x584727: add     esp, 4
 0x58472A: push    esi
 0x58472B: mov     ecx, offset off_B1395C

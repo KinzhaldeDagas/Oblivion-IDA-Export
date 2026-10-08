@@ -1,5 +1,5 @@
 0xA26800: push    esi
-0xA26801: mov     esi, dword_B3CAFC
+0xA26801: mov     esi, dword ptr unk_B3CAFC
 0xA26807: test    esi, esi
 0xA26809: jz      short loc_A26827
 0xA2680B: lea     eax, [esi+4]

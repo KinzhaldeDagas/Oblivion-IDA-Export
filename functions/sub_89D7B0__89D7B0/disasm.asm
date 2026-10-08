@@ -13,7 +13,7 @@
 0x89D7C8: push    ebx
 0x89D7C9: mov     ecx, esi
 0x89D7CB: mov     edi, eax
-0x89D7CD: call    nullsub_returnvVoid_1arg
+0x89D7CD: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x89D7D2: test    edi, edi
 0x89D7D4: jz      short loc_89D80D
 0x89D7D6: mov     eax, [esi]
@@ -31,7 +31,7 @@
 0x89D7F2: mov     [esp+24h+arg_0], 1
 0x89D7FA: call    eax
 0x89D7FC: mov     edx, [esi]
-0x89D7FE: mov     eax, dword ptr [esp+24h+var_4]
+0x89D7FE: mov     eax, [esp+24h+var_4]
 0x89D802: mov     edx, [edx+64h]
 0x89D805: add     esp, 14h
 0x89D808: push    eax

@@ -30,3 +30,21 @@
 0x4B41DF: pop     esi
 0x4B41E0: add     esp, 14h
 0x4B41E3: retn
+0x9B34B0: mov     ecx, [ebp-10h]; this
+0x9B34B3: jmp     TESForm_destr
+0x9B34B8: cmp     dword ptr [ebp-10h], 0
+0x9B34BC: jz      loc_9B34D0
+0x9B34C2: mov     eax, [ebp-10h]
+0x9B34C5: add     eax, 18h
+0x9B34C8: mov     [ebp-14h], eax
+0x9B34CB: jmp     loc_9B34D7
+0x9B34D0: mov     dword ptr [ebp-14h], 0
+0x9B34D7: mov     ecx, [ebp-14h]; this
+0x9B34DA: jmp     ??1TESModel@@UAE@XZ; TESModel::~TESModel(void)
+0x9B34DF: mov     edx, [esp+arg_4]
+0x9B34E3: lea     eax, [edx-10h]
+0x9B34E6: mov     ecx, [edx-14h]
+0x9B34E9: xor     ecx, eax
+0x9B34EB: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B34F0: mov     eax, offset stru_ADF180
+0x9B34F5: jmp     ___CxxFrameHandler3

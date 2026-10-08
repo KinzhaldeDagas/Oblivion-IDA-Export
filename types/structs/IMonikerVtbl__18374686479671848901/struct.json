@@ -1,148 +1,234 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "IMonikerVtbl",
+  "definition": "struct IMonikerVtbl\n{\nHRESULT_0 (*QueryInterface)(IMoniker_0 *, const IID *const, void **) __offset(OFF64|AUTO);\nULONG (*AddRef)(IMoniker_0 *) __offset(OFF64|AUTO);\nULONG (*Release)(IMoniker_0 *) __offset(OFF64|AUTO);\nHRESULT_0 (*GetClassID)(IMoniker_0 *, CLSID *) __offset(OFF64|AUTO);\nHRESULT_0 (*IsDirty)(IMoniker_0 *) __offset(OFF64|AUTO);\nHRESULT_0 (*Load)(IMoniker_0 *, IStream_0 *) __offset(OFF64|AUTO);\nHRESULT_0 (*Save)(IMoniker_0 *, IStream_0 *, BOOL) __offset(OFF64|AUTO);\nHRESULT_0 (*GetSizeMax)(IMoniker_0 *, ULARGE_INTEGER *) __offset(OFF64|AUTO);\nHRESULT_0 (*BindToObject)(IMoniker_0 *, IBindCtx_0 *, IMoniker_0 *, const IID *const, void **) __offset(OFF64|AUTO);\nHRESULT_0 (*BindToStorage)(IMoniker_0 *, IBindCtx_0 *, IMoniker_0 *, const IID *const, void **) __offset(OFF64|AUTO);\nHRESULT_0 (*Reduce)(IMoniker_0 *, IBindCtx_0 *, DWORD, IMoniker_0 **, IMoniker_0 **) __offset(OFF64|AUTO);\nHRESULT_0 (*ComposeWith)(IMoniker_0 *, IMoniker_0 *, BOOL, IMoniker_0 **) __offset(OFF64|AUTO);\nHRESULT_0 (*Enum)(IMoniker_0 *, BOOL, IEnumMoniker_0 **) __offset(OFF64|AUTO);\nHRESULT_0 (*IsEqual)(IMoniker_0 *, IMoniker_0 *) __offset(OFF64|AUTO);\nHRESULT_0 (*Hash)(IMoniker_0 *, DWORD *) __offset(OFF64|AUTO);\nHRESULT_0 (*IsRunning)(IMoniker_0 *, IBindCtx_0 *, IMoniker_0 *, IMoniker_0 *) __offset(OFF64|AUTO);\nHRESULT_0 (*GetTimeOfLastChange)(IMoniker_0 *, IBindCtx_0 *, IMoniker_0 *, FILETIME *) __offset(OFF64|AUTO);\nHRESULT_0 (*Inverse)(IMoniker_0 *, IMoniker_0 **) __offset(OFF64|AUTO);\nHRESULT_0 (*CommonPrefixWith)(IMoniker_0 *, IMoniker_0 *, IMoniker_0 **) __offset(OFF64|AUTO);\nHRESULT_0 (*RelativePathTo)(IMoniker_0 *, IMoniker_0 *, IMoniker_0 **) __offset(OFF64|AUTO);\nHRESULT_0 (*GetDisplayName)(IMoniker_0 *, IBindCtx_0 *, IMoniker_0 *, LPOLESTR *) __offset(OFF64|AUTO);\nHRESULT_0 (*ParseDisplayName)(IMoniker_0 *, IBindCtx_0 *, IMoniker_0 *, LPOLESTR, ULONG *, IMoniker_0 **) __offset(OFF64|AUTO);\nHRESULT_0 (*IsSystemMoniker)(IMoniker_0 *, DWORD *) __offset(OFF64|AUTO);\n}\n",
   "id": 18374686479671848901,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QueryInterface",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMoniker_0 *, const IID *const, void **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddRef",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(IMoniker_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Release",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(IMoniker_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetClassID",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMoniker_0 *, CLSID *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IsDirty",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMoniker_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Load",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMoniker_0 *, IStream_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Save",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMoniker_0 *, IStream_0 *, BOOL)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetSizeMax",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMoniker_0 *, ULARGE_INTEGER *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "BindToObject",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMoniker_0 *, IBindCtx_0 *, IMoniker_0 *, const IID *const, void **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "BindToStorage",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMoniker_0 *, IBindCtx_0 *, IMoniker_0 *, const IID *const, void **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Reduce",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMoniker_0 *, IBindCtx_0 *, DWORD, IMoniker_0 **, IMoniker_0 **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ComposeWith",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMoniker_0 *, IMoniker_0 *, BOOL, IMoniker_0 **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Enum",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMoniker_0 *, BOOL, IEnumMoniker_0 **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IsEqual",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMoniker_0 *, IMoniker_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Hash",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMoniker_0 *, DWORD *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IsRunning",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMoniker_0 *, IBindCtx_0 *, IMoniker_0 *, IMoniker_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetTimeOfLastChange",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMoniker_0 *, IBindCtx_0 *, IMoniker_0 *, FILETIME *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Inverse",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMoniker_0 *, IMoniker_0 **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CommonPrefixWith",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMoniker_0 *, IMoniker_0 *, IMoniker_0 **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RelativePathTo",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 4
+      "offset_hex": "0x4C",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMoniker_0 *, IMoniker_0 *, IMoniker_0 **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetDisplayName",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMoniker_0 *, IBindCtx_0 *, IMoniker_0 *, LPOLESTR *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ParseDisplayName",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMoniker_0 *, IBindCtx_0 *, IMoniker_0 *, LPOLESTR, ULONG *, IMoniker_0 **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IsSystemMoniker",
       "offset": 88,
       "offset_hex": "0x58",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMoniker_0 *, DWORD *)"
     }
   ],
   "name": "IMonikerVtbl",
+  "ordinal": 3501,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 92
 }

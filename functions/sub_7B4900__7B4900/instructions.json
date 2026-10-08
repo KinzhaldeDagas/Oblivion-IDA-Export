@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7B4900",
-    "line": "mov     eax, dword ptr [esp+a5]",
+    "line": "mov     eax, dword ptr [esp+a5]; MoonSugarEffect decode: thin wrapper around sub_803570; applies one BSShader through global imageSpaceShaderList fullscreen quad, used by menu/water/canopy/misc paths.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x7B491A",
-    "line": "call    sub_803570",
+    "line": "call    sub_803570; MoonSugarEffect decode: single image-space shader helper; ensures fullscreen quad, binds shader temporarily, renders it, then releases quad shader binding.",
     "mnemonic": "call",
     "size": 5
   },

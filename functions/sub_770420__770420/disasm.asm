@@ -55,7 +55,6 @@
 0x7704B2: mov     [esp+20h+var_8], ebp
 0x7704B6: jbe     short loc_770530
 0x7704B8: jmp     short loc_7704C0
-0x7704BA: align 10h
 0x7704C0: mov     ecx, [esp+20h+arg_0]
 0x7704C4: test    cx, cx
 0x7704C7: mov     eax, edx

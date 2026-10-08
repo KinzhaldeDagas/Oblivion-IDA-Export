@@ -143,3 +143,35 @@
 0x4CA961: pop     ebx
 0x4CA962: add     esp, 14h
 0x4CA965: retn
+0x9B5130: mov     eax, [ebp-10h]; Microsoft VisualC 2-14/net runtime
+0x9B5133: push    eax
+0x9B5134: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B5139: pop     ecx
+0x9B513A: retn
+0x9B513B: mov     eax, [ebp-10h]
+0x9B513E: push    eax
+0x9B513F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B5144: pop     ecx
+0x9B5145: retn
+0x9B5146: mov     eax, [ebp-10h]
+0x9B5149: push    eax
+0x9B514A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B514F: pop     ecx
+0x9B5150: retn
+0x9B5151: mov     eax, [ebp-10h]
+0x9B5154: push    eax
+0x9B5155: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B515A: pop     ecx
+0x9B515B: retn
+0x9B515C: mov     eax, [ebp-10h]
+0x9B515F: push    eax
+0x9B5160: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B5165: pop     ecx
+0x9B5166: retn
+0x9B5167: mov     edx, [esp+arg_4]
+0x9B516B: lea     eax, [edx-18h]
+0x9B516E: mov     ecx, [edx-1Ch]
+0x9B5171: xor     ecx, eax
+0x9B5173: call    @__security_check_cookie@4
+0x9B5178: mov     eax, offset stru_AE0304
+0x9B517D: jmp     ___CxxFrameHandler3

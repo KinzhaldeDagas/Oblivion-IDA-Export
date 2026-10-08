@@ -33,14 +33,20 @@
 0x98ADE8: mov     edi, [ebx]
 0x98ADEA: mov     eax, offset off_B31998
 0x98ADEF: call    __updatetlocinfoEx_nolock
-0x98ADF4: push    18h; Size
+0x98ADF4: push    18h; byteCount
 0x98ADF6: mov     eax, off_B31998
 0x98ADFB: add     eax, 0Ch
-0x98ADFE: push    eax; Src
-0x98ADFF: push    offset unk_BAA620; Dst
-0x98AE04: call    _memcpy
+0x98ADFE: push    eax; source
+0x98ADFF: push    (offset dword_BA9E10+810h); destination
+0x98AE04: call    _memcpy;
 0x98AE09: add     esp, 0Ch
 0x98AE0C: call    _sync_legacy_variables_lk
 0x98AE11: and     dword ptr [ebp-4], 0
 0x98AE15: call    _setlocale___$LN25_0
 0x98AE1A: jmp     short _setlocale___$LN26_0
+0x98AE3B: push    edi; lpAddend
+0x98AE3C: call    ___removelocaleref
+0x98AE41: push    edi; Memory
+0x98AE42: call    ___freetlocinfo
+0x98AE47: pop     ecx
+0x98AE48: pop     ecx

@@ -10,7 +10,6 @@
 0x75A002: cmp     [esi+8], bx
 0x75A006: jbe     short loc_75A031
 0x75A008: jmp     short loc_75A010
-0x75A00A: align 10h
 0x75A010: mov     edx, [esi+5Ch]
 0x75A013: movzx   eax, bx
 0x75A016: lea     ecx, ds:0[eax*8]

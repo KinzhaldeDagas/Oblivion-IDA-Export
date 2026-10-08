@@ -58,10 +58,10 @@
 0x685F2E: mov     eax, [edx+84h]
 0x685F34: call    eax
 0x685F36: mov     edi, [esi+28h]
-0x685F39: call    sub_4E70B0
+0x685F39: call    DebugRender_GetOrCreateVertexColorProperty; Verified shared debug property getter/creator, used by PathGrid debug rendering and the registered TestSeenData/TestLocalMap visualization commands, plus other debug-geometry callers. Lazily constructs NiVertexColorProperty, sets its observed render flags, stores the refcounted global g_DebugRenderVertexColorProperty and returns it.
 0x685F3E: push    eax; a2
 0x685F3F: mov     ecx, edi; this
-0x685F41: call    sub_405680
+0x685F41: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x685F46: mov     ecx, ds:0B333A0h
 0x685F4C: mov     ecx, [ecx+0Ch]
 0x685F4F: mov     edx, [ecx]
@@ -71,7 +71,7 @@
 0x685F5C: push    eax
 0x685F5D: call    edx
 0x685F5F: mov     ecx, [esi+28h]; this
-0x685F62: call    NiAVObject_InitializePropertyState
+0x685F62: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x685F67: mov     ecx, [esi+28h]
 0x685F6A: call    NiNode_UpdateDynamicEffectState
 0x685F6F: fldz
@@ -79,13 +79,13 @@
 0x685F73: push    ecx
 0x685F74: mov     ecx, [esi+28h]; this
 0x685F77: fstp    [esp+14h+a2]; a2
-0x685F7A: call    NiAVObject_UpdateNiAVObject
+0x685F7A: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x685F7F: test    ebp, ebp
 0x685F81: jz      short loc_685F97
 0x685F83: lea     edi, [esi+14h]
 0x685F86: push    0
-0x685F88: mov     ecx, edi
-0x685F8A: call    sub_42B410
+0x685F88: mov     ecx, edi; this
+0x685F8A: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x685F8F: push    eax
 0x685F90: mov     ecx, edi
 0x685F92: call    sub_68BE80

@@ -1,5 +1,5 @@
-0x76FB30: push    esi
-0x76FB31: mov     esi, [esp+4+arg_8]
+0x76FB30: push    esi; MoonSugarEffect decode: NiDX9ShaderDeclaration semantic helper. Converts Oblivion semantic ids to D3D usage/usageIndex and forwards to raw element setter (+0x4C).
+0x76FB31: mov     esi, [esp+4+semanticId]
 0x76FB35: xor     edx, edx
 0x76FB37: cmp     esi, 0Eh; switch 15 cases
 0x76FB3A: ja      def_76FB40
@@ -44,14 +44,14 @@
 0x76FBCF: mov     edi, [ecx]
 0x76FBD1: push    0
 0x76FBD3: push    edx
-0x76FBD4: mov     edx, [esp+10h+arg_4]
+0x76FBD4: mov     edx, [esp+10h+sourceIndex]
 0x76FBD8: push    eax
-0x76FBD9: mov     eax, [esp+14h+arg_C]
+0x76FBD9: mov     eax, [esp+14h+declarationType]
 0x76FBDD: push    eax
-0x76FBDE: mov     eax, [esp+18h+arg_0]
+0x76FBDE: mov     eax, [esp+18h+elementIndex]
 0x76FBE2: push    esi
 0x76FBE3: push    edx
-0x76FBE4: mov     edx, [esp+20h+arg_10]
+0x76FBE4: mov     edx, [esp+20h+streamIndex]
 0x76FBE8: push    eax
 0x76FBE9: mov     eax, [edi+4Ch]
 0x76FBEC: push    edx

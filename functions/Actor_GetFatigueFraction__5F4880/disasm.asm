@@ -1,4 +1,4 @@
-0x5F4880: push    ecx
+0x5F4880: push    ecx; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.
 0x5F4881: push    esi
 0x5F4882: push    0Ah
 0x5F4884: mov     esi, ecx

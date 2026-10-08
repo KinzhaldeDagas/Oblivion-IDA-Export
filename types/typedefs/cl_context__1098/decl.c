@@ -1,1 +1,1 @@
-_cl_context
+struct _cl_context;

@@ -13,7 +13,7 @@
 0x9A20C3: mov     esi, ecx
 0x9A20C5: mov     [esp+1Ch+var_10], esi
 0x9A20C9: call    NiObject_constr
-0x9A20CE: push    offset sub_7016A0; a5
+0x9A20CE: push    offset NiPointerSlot_Release; a5
 0x9A20D3: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x9A20D8: push    4; size
 0x9A20DA: push    4; a2
@@ -34,3 +34,12 @@
 0x9A2109: pop     esi
 0x9A210A: add     esp, 10h
 0x9A210D: retn
+0x9CA4B0: mov     ecx, [ebp-10h]
+0x9CA4B3: jmp     NiRefObject_destr
+0x9CA4B8: mov     edx, [esp+arg_4]
+0x9CA4BC: lea     eax, [edx-0Ch]
+0x9CA4BF: mov     ecx, [edx-10h]
+0x9CA4C2: xor     ecx, eax
+0x9CA4C4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA4C9: mov     eax, offset stru_AF2BA8
+0x9CA4CE: jmp     ___CxxFrameHandler3

@@ -1,1 +1,1 @@
-PCredHandle
+typedef PSecHandle PCredHandle;

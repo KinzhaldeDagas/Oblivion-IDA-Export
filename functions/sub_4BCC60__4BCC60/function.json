@@ -1,18 +1,31 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4BCC60",
+      "0x4BCCA8"
+    ]
+  ],
+  "chunks_sha256": "860e1b43ba7d57f99ccc36eb4d104e8400b6b4bcb3b0f9e75a9567a078d1d9d1",
+  "comment_regular": "Verified worker callback (+0x04 vtable): obtains an existing task BSFile or opens the task path, calls TESWorldSpace_LoadCellDistantLODData with task cellX/cellY, embedded object map and lodMode, then sets parseComplete at taskData +0x28.",
+  "comment_repeatable": "Verified worker callback (+0x04 vtable): obtains an existing task BSFile or opens the task path, calls TESWorldSpace_LoadCellDistantLODData with task cellX/cellY, embedded object map and lodMode, then sets parseComplete at taskData +0x28.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4BCC60",
+  "display_name": "DistantLODLoaderTask_LoadCellData",
   "end_ea": "0x4BCCA8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4BCC60",
+  "name": "DistantLODLoaderTask_LoadCellData",
   "segment": ".text",
   "sha256": "860e1b43ba7d57f99ccc36eb4d104e8400b6b4bcb3b0f9e75a9567a078d1d9d1",
   "size": 72,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4BCC60",
+  "total_chunk_size": 72,
   "type": "void __thiscall(_DWORD *this)",
   "xrefs_from_count": 34,
   "xrefs_to_count": 1

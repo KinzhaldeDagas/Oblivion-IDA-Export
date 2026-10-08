@@ -1,3 +1,4 @@
+// ODismemberment: bhkBlendCollisionObject traversal entry. Requires bhkBlendCollisionObject or forced flag; queues callback off off_B2E314 with state payload including a2 and a3.
 char __cdecl sub_88D070(NiNode *a1, int a2, char a3, char a4)
 {
   char v4; // bl
@@ -9,21 +10,21 @@ char __cdecl sub_88D070(NiNode *a1, int a2, char a3, char a4)
   int v11; // [esp+10h] [ebp-14h]
   int v12; // [esp+14h] [ebp-10h]
 
-  v4 = 0;
-  if ( a1 )
+  v4 = 0; /*0x88d079*/
+  if ( a1 ) /*0x88d07d*/
   {
-    if ( a4 || (v5 = sub_6FA970((NiObjectNET *)a1)) != 0 && (v5[1].members.m_uiRefCount & 2) != 0 )
+    if ( a4 || (v5 = sub_6FA970((NiObjectNET *)a1)) != 0 && (v5[1].members.m_uiRefCount & 2) != 0 ) /*0x88d098*/
     {
-      v10 = a3;
-      v6 = (void (__cdecl *)(int, int))off_B2E314[0];
-      v7 = off_B2E314[0] == 0;
-      v4 = 1;
-      v9 = 0;
-      v11 = 5;
-      v12 = a2;
-      if ( !v7 )
-        sub_88A7D0(a1, (int)&v9, v6);
+      v10 = a3; /*0x88d0a2*/
+      v6 = (void (__cdecl *)(int, int))off_B2E314[0]; /*0x88d0a6*/
+      v7 = off_B2E314[0] == 0; /*0x88d0ab*/
+      v4 = 1; /*0x88d0ad*/
+      v9 = 0; /*0x88d0af*/
+      v11 = 5; /*0x88d0b7*/
+      v12 = a2; /*0x88d0bf*/
+      if ( !v7 ) /*0x88d0c3*/
+        sub_88A7D0(a1, (int)&v9, v6); /*0x88d0cc*/
     }
   }
-  return v4;
+  return v4; /*0x88d0d4*/
 }

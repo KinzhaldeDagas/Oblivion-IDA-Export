@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6A3680",
-    "line": "push    esi",
+    "line": "push    esi; Verified scalar deleting destructor invokes ActiveEffect::~ActiveEffect and FormHeapFree(this) only when freeMemory bit 0 is set.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x6A3683",
-    "line": "call    ??1ActiveEffect@@UAE@XZ; ActiveEffect::~ActiveEffect(void)",
+    "line": "call    ??1ActiveEffect@@UAE@XZ; Verified ActiveEffect destructor detaches each associated MagicHitEffect by setting bFinished and ownerActiveEffect=null, clears/frees only the HitEffectNode list, and relies on the ActorProcessManager reference added during PostLink to own the BSTempEffect object's later update/removal.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6A3688",
-    "line": "test    byte ptr [esp+4+arg_0], 1",
+    "line": "test    [esp+4+freeMemory], 1",
     "mnemonic": "test",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x6A3690",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

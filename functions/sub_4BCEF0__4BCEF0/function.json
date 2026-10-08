@@ -1,19 +1,32 @@
 {
-  "callees_count": 22,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 11,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4BCEF0",
+      "0x4BD04B"
+    ]
+  ],
+  "chunks_sha256": "d3ed971c2999256952002978b07fe15b6385b864a70314c8c6c5c95428135437",
+  "comment_regular": "Verified: consumes DistantLODLoaderTaskData, walks its form-pointer -> DistantLODCellObjectData map, dispatches each key through virtual slot +0x11C, then frees the three arrays and clears the map. The external .lod parser RTTI-casts keys to TESBoundObject; the embedded REFR parser stores a NAME-resolved TESForm* without a local cast, so that path's bound-object invariant is Probable, not Verified.",
+  "comment_repeatable": "Verified: consumes DistantLODLoaderTaskData, walks its form-pointer -> DistantLODCellObjectData map, dispatches each key through virtual slot +0x11C, then frees the three arrays and clears the map. The external .lod parser RTTI-casts keys to TESBoundObject; the embedded REFR parser stores a NAME-resolved TESForm* without a local cast, so that path's bound-object invariant is Probable, not Verified.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 3,
-  "display_name": "sub_4BCEF0",
+  "display_name": "DistantLODLoaderTaskData_CleanupCellObjects",
   "end_ea": "0x4BD04B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4BCEF0",
+  "name": "DistantLODLoaderTaskData_CleanupCellObjects",
   "segment": ".text",
   "sha256": "d3ed971c2999256952002978b07fe15b6385b864a70314c8c6c5c95428135437",
   "size": 347,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4BCEF0",
-  "type": "void __stdcall(int)",
+  "total_chunk_size": 347,
+  "type": "void __stdcall(DistantLODLoaderTaskData *taskData)",
   "xrefs_from_count": 142,
   "xrefs_to_count": 1
 }

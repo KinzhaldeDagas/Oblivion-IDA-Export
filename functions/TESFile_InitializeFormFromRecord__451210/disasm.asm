@@ -1,4 +1,4 @@
-0x451210: push    esi
+0x451210: push    esi; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.
 0x451211: push    edi
 0x451212: mov     esi, ecx
 0x451214: xor     edi, edi
@@ -17,7 +17,7 @@
 0x451244: push    eax
 0x451245: call    TESForm_GetFormTypeFromChunkType
 0x45124A: add     esp, 4
-0x45124D: mov     edi, [esp+8+arg_0]
+0x45124D: mov     edi, [esp+8+arg_0]; Existing 0x4000 partial marker is sticky: if already set on the in-memory form, OR it into the incoming record flags; otherwise replace flags with the incoming value.
 0x451251: mov     ecx, [edi+8]
 0x451254: shr     ecx, 0Eh
 0x451257: test    cl, 1
@@ -36,7 +36,7 @@
 0x451284: call    TESForm_SetFormID
 0x451289: push    esi
 0x45128A: mov     ecx, edi
-0x45128C: call    sub_46B6C0
+0x45128C: call    TESForm_SetFile; Updates TESForm source-file provenance. Thread-safe clones normalize to their root parent; master files replace prior source entries, non-masters append once, and null removes the last source entry.
 0x451291: pop     edi
 0x451292: pop     esi
 0x451293: retn    4

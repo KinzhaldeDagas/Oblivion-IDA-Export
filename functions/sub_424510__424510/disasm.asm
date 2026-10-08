@@ -32,3 +32,15 @@
 0x424576: pop     esi
 0x424577: add     esp, 10h
 0x42457A: retn    4
+0x9AB890: mov     ecx, [ebp-10h]; this
+0x9AB893: jmp     ??1BSExtraData@@UAE@XZ; BSExtraData::~BSExtraData(void)
+0x9AB898: mov     ecx, [ebp-10h]
+0x9AB89B: add     ecx, 0Ch; void *
+0x9AB89E: jmp     BSStringT_Clear
+0x9AB8A3: mov     edx, [esp+arg_4]
+0x9AB8A7: lea     eax, [edx-8]
+0x9AB8AA: mov     ecx, [edx-0Ch]
+0x9AB8AD: xor     ecx, eax
+0x9AB8AF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AB8B4: mov     eax, offset stru_AD86E4
+0x9AB8B9: jmp     ___CxxFrameHandler3

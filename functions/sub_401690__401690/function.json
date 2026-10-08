@@ -1,18 +1,31 @@
 {
-  "callees_count": 6,
-  "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 6,
+  "chunks": [
+    [
+      "0x401690",
+      "0x40171A"
+    ]
+  ],
+  "chunks_sha256": "650f123a0e9d78c0a07206f996bb8e64ab0a4583a03dc359abeb0aa2c91422b8",
+  "comment_regular": "Unlinks a free block from its doubly linked size bin, clears the free flag and links, and updates bin/global free-entry counts.",
+  "comment_repeatable": "Unlinks a free block from its doubly linked size bin, clears the free flag and links, and updates bin/global free-entry counts.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_401690",
+  "display_name": "MemoryHeap_RemoveFreeEntry",
   "end_ea": "0x40171A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_401690",
+  "name": "MemoryHeap_RemoveFreeEntry",
   "segment": ".text",
   "sha256": "650f123a0e9d78c0a07206f996bb8e64ab0a4583a03dc359abeb0aa2c91422b8",
   "size": 138,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x401690",
+  "total_chunk_size": 138,
   "type": "unsigned int __thiscall(_DWORD *this, _DWORD *, _DWORD *)",
   "xrefs_from_count": 53,
   "xrefs_to_count": 6

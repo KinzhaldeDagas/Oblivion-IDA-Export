@@ -1,1 +1,8 @@
-DOWNSTATES
+enum DOWNSTATES : __int32
+{
+DOWNStateFiller0 = 0x0,
+DNS_NORMAL = 0x1,
+DNS_HOT = 0x2,
+DNS_PRESSED = 0x3,
+DNS_DISABLED = 0x4,
+};

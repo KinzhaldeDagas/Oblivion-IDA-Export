@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x5A411D",
-    "line": "call    sub_5790E0",
+    "line": "call    InterfaceManager_IsMenuVisibleByID; CustomAnimSupport evidence: player node/control-state check used by install/defer and playback paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -679,19 +679,19 @@
   },
   {
     "ea": "0x5A41D4",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5A41D6",
-    "line": "fstp    [esp+88h+var_88]; float",
+    "line": "fstp    [esp+88h+var_88]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5A41D9",
-    "line": "call    Tile_Property_SetFloatValue?",
+    "line": "call    Tile__Value__SetFloat; Verified: marks numeric; if changed or string trait 0xFDE, clears string, stores number, clears own expression actions via 0x588930, then CalculateValue(this,true). Same-value ordinary traits bypass clear/evaluation. Unlike Fallout SetFloat, no abClearActions parameter.",
     "mnemonic": "call",
     "size": 5
   },
@@ -739,19 +739,19 @@
   },
   {
     "ea": "0x5A41EE",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5A41F0",
-    "line": "fstp    [esp+88h+var_88]; float",
+    "line": "fstp    [esp+88h+var_88]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5A41F3",
-    "line": "call    Tile_Property_SetFloatValue?",
+    "line": "call    Tile__Value__SetFloat; Verified: marks numeric; if changed or string trait 0xFDE, clears string, stores number, clears own expression actions via 0x588930, then CalculateValue(this,true). Same-value ordinary traits bypass clear/evaluation. Unlike Fallout SetFloat, no abClearActions parameter.",
     "mnemonic": "call",
     "size": 5
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x5A4227",
-    "line": "mov     ecx, offset dword_B3B334",
+    "line": "mov     ecx, (offset dword_B3B0B4+280h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1081,7 +1081,7 @@
   },
   {
     "ea": "0x5A4297",
-    "line": "mov     ecx, [esi+68h]; TileWindow *",
+    "line": "mov     ecx, [esi+68h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1099,13 +1099,13 @@
   },
   {
     "ea": "0x5A42A1",
-    "line": "push    esi; Str",
+    "line": "push    esi; path",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5A42A2",
-    "line": "call    Menu_LoadXML",
+    "line": "call    Tile__ReadFile; Verified: SDK ReadXML entry. Builds named tree under receiver via 0x590330, connects/evaluates traits via 0x58CF40, registers subtemplates with owning Menu, frees build storage, refreshes returned subtree via 0x58FBA0. Returns first created tile. Fallout analogue 0x827E2588; cache/cleanup differs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1393,13 +1393,13 @@
   },
   {
     "ea": "0x5A4342",
-    "line": "fstp    [esp+88h+var_88]; a3",
+    "line": "fstp    [esp+88h+var_88]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5A4345",
-    "line": "push    0FABh; a2",
+    "line": "push    0FABh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -1411,7 +1411,7 @@
   },
   {
     "ea": "0x5A434C",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1549,13 +1549,13 @@
   },
   {
     "ea": "0x5A43A8",
-    "line": "fstp    [esp+88h+var_88]; a3",
+    "line": "fstp    [esp+88h+var_88]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5A43AB",
-    "line": "push    ecx; a2",
+    "line": "push    ecx; propertyCode",
     "mnemonic": "push",
     "size": 1
   },
@@ -1567,7 +1567,7 @@
   },
   {
     "ea": "0x5A43AE",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1621,13 +1621,13 @@
   },
   {
     "ea": "0x5A43C5",
-    "line": "fstp    [esp+88h+var_88]; a3",
+    "line": "fstp    [esp+88h+var_88]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5A43C8",
-    "line": "push    ecx; a2",
+    "line": "push    ecx; propertyCode",
     "mnemonic": "push",
     "size": 1
   },
@@ -1639,7 +1639,7 @@
   },
   {
     "ea": "0x5A43CB",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1897,19 +1897,19 @@
   },
   {
     "ea": "0x5A4440",
-    "line": "fstp    [esp+88h+var_88]; a3",
+    "line": "fstp    [esp+88h+var_88]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5A4443",
-    "line": "push    eax; a2",
+    "line": "push    eax; propertyCode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5A4444",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1987,13 +1987,13 @@
   },
   {
     "ea": "0x5A446C",
-    "line": "fstp    [esp+88h+var_88]; a3",
+    "line": "fstp    [esp+88h+var_88]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5A446F",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -2005,7 +2005,7 @@
   },
   {
     "ea": "0x5A4476",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2041,7 +2041,7 @@
   },
   {
     "ea": "0x5A4489",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2161,7 +2161,7 @@
   },
   {
     "ea": "0x5A44B8",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2230,5 +2230,89 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C02D0",
+    "line": "mov     eax, [ebp-6Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C02D3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C02D4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C02D9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C02DA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C02DB",
+    "line": "lea     ecx, [ebp-68h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C02DE",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C02E3",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C02E7",
+    "line": "lea     eax, [edx-74h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C02EA",
+    "line": "mov     ecx, [edx-78h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C02ED",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C02EF",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C02F4",
+    "line": "mov     eax, offset stru_AE95C4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C02F9",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

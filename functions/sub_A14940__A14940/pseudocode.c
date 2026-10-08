@@ -1,9 +1,9 @@
 _DWORD *sub_A14940()
 {
-  return sub_90D190(
-           dword_BA8D4C,
+  return sub_90D190( /*0xa1496d*/
+           unk_BA8D4C,
            (int)"hkPointToPathConstraintData",
-           (int)dword_BA8620,
+           (int)unk_BA8620,
            0xA0,
            0,
            0,

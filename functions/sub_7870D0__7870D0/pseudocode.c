@@ -1,8 +1,5 @@
-int __thiscall sub_7870D0(_DWORD *this, char a2)
+// CSpeedTreeRT::SetLeafRockingState thin wrapper: writes the bool to CWindEngine+0x14.
+void __thiscall CSpeedTreeRT__SetLeafRockingState(OB_CSpeedTreeRT_010201A0 *this, bool enabled)
 {
-  int result; // eax
-
-  result = *(this + 4);
-  *(_BYTE *)(result + 0x14) = a2;
-  return result;
+  this->windEngine->rockingLeaves = enabled; /*0x7870d7*/
 }

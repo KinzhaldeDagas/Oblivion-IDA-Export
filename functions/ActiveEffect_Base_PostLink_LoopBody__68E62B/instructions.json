@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x68E62B",
-    "line": "mov     edi, [esi]",
+    "line": "mov     edi, [esi]; Verified BSTempEffect ownership handoff after load: each +0x84 postLink callback receives owner ActiveEffect, linkContext, and null fallback; ActorProcessManager_RegisterTempEffect increments its refcount and inserts it. ActiveEffect::~ActiveEffect later clears ownerActiveEffect/sets bFinished and frees only its association nodes; the manager releases its own object reference after Update returns false or its parent cell unloads.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -49,19 +49,19 @@
   },
   {
     "ea": "0x68E63D",
-    "line": "push    edi",
+    "line": "push    edi; effect",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x68E63E",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x68E643",
-    "line": "call    sub_678D30",
+    "line": "call    ActorProcessManager_RegisterTempEffect; [Verified] ActorProcessManager_RegisterTempEffect increments the effect reference and routes GetTypeID 4-6 into extendedTempEffects (+0x48), all other IDs into activeTempEffects (+0x40). Vtable evidence confirms decals 0/1 and particles 2 use the active list. Fallout divergence: its BGSDecalManager updates distinct simple-decal and emitter collections instead of using this per-actor temp-effect routing; one-to-one equivalence is Unknown.",
     "mnemonic": "call",
     "size": 5
   },

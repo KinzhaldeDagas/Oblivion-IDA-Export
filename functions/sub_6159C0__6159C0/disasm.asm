@@ -48,7 +48,7 @@
 0x615A4C: mov     ecx, edi
 0x615A4E: call    eax
 0x615A50: mov     ecx, eax; this
-0x615A52: call    MobileObject_GetCharProxy
+0x615A52: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x615A57: test    eax, eax
 0x615A59: jz      short loc_615A7A
 0x615A5B: mov     edx, [edi]
@@ -58,26 +58,26 @@
 0x615A68: mov     ecx, edi
 0x615A6A: call    eax
 0x615A6C: mov     ecx, eax; this
-0x615A6E: call    MobileObject_GetCharProxy
+0x615A6E: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x615A73: mov     ecx, eax
 0x615A75: call    sub_5639D0
 0x615A7A: mov     ecx, edi; this
-0x615A7C: call    MobileObject_GetCharProxy
+0x615A7C: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x615A81: test    eax, eax
 0x615A83: jz      short loc_615AAC
 0x615A85: mov     ecx, edi; this
-0x615A87: call    MobileObject_GetCharProxy
+0x615A87: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x615A8C: test    eax, eax
 0x615A8E: jz      short loc_615AAC
 0x615A90: mov     eax, [eax+8]
 0x615A93: test    eax, eax
 0x615A95: jz      short loc_615AAC
 0x615A97: mov     ecx, eax
-0x615A99: call    sub_8AC0A0
+0x615A99: call    bhkWorldObject_GetLinearVelocityPtr; Predictive combat aim reads the target character proxy's Havok linear velocity; the following conversion maps it to TES world units.
 0x615A9E: push    eax
 0x615A9F: lea     ecx, [esp+94h+var_3C]
 0x615AA3: push    ecx
-0x615AA4: call    sub_43F3E0
+0x615AA4: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x615AA9: add     esp, 8
 0x615AAC: test    edi, edi
 0x615AAE: fldz
@@ -85,24 +85,24 @@
 0x615AB3: fstp    [esp+90h+var_84]; float
 0x615AB7: mov     eax, [esi+30h]
 0x615ABA: mov     ecx, [esi+34h]
-0x615ABD: mov     ebx, ds:0B370C0h
+0x615ABD: mov     ebx, ds:0B370C0h; Loads live iAimingNumIterations (default 10) for repeated target-position/flight-time convergence.
 0x615AC3: mov     [esp+90h+var_54], edx; int
 0x615AC7: mov     [esp+90h+var_50], eax; int
 0x615ACB: mov     [esp+90h+var_4C], ecx; int
 0x615ACF: jz      short loc_615B0B
 0x615AD1: mov     eax, [ebp+arg_1C]
 0x615AD4: cmp     eax, 3; switch 4 cases
-0x615AD7: ja      def_615ADD
+0x615AD7: ja      Combat_PredictAimPoint_IterateAndSolve
 0x615ADD: jmp     ds:jpt_615ADD[eax*4]; switch jump
 0x615AE4: mov     ecx, edi; jumptable 00615ADD case 2
-0x615AE6: call    sub_5E0660
+0x615AE6: call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.
 0x615AEB: fmul    qword ptr ds:0A31C70h
 0x615AF1: jmp     short loc_615B58
 0x615AF3: mov     ecx, edi; jumptable 00615ADD cases 1,3
-0x615AF5: call    sub_5E0660
+0x615AF5: call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.
 0x615AFA: jmp     short loc_615B52
 0x615AFC: mov     ecx, edi; jumptable 00615ADD case 0
-0x615AFE: call    sub_5E0660
+0x615AFE: call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.
 0x615B03: fmul    qword ptr ds:0A3C770h
 0x615B09: jmp     short loc_615B58
 0x615B0B: mov     edx, [esi]

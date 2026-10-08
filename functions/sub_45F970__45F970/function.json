@@ -1,19 +1,32 @@
 {
-  "callees_count": 27,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 12,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x45F970",
+      "0x45FB4A"
+    ]
+  ],
+  "chunks_sha256": "a6ac3bd7e32664127a616a9a63dbcfe6f47b3365a103d663a10f6e30269c3f51",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "Verified: reads a 16-bit count then fixed 8-byte (FormID,float) records. SaveLoad_LoadFormID remaps each ID; finite checks sanitize non-finite values to zero; RTTI confirms TESGlobal; value goes to TESGlobal.data at +0x24. Saved globals are removed from TESDataHandler.listGlobals; omitted globals are reset from active override records. Caller is SaveLoad_LoadGame_Subroutine at 46311E. Probable behavioral homolog Fallout BGSSaveLoadGlobalData::LoadGlobals 825F3FF8, which uses a variable-sized count and reconstruction map for missing globals. Fallout also has legacy TESSaveLoadGame::SaveGlobals 82602828 with a 16-bit count and NumericID/value tuples, but a matching legacy load counterpart is not yet established. Verified cross-path: this runtime Global Variables snapshot loader writes TESGlobal.data (+0x24). TESGlobal native plugin/form persistence is handled separately by TESGlobal_SaveFormRecord (FNAM/FLTV chunks). Unknown: exact save writer for the runtime global snapshot block has not yet been located. Veri",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 6,
-  "display_name": "sub_45F970",
+  "display_name": "TESSaveLoadGame_LoadGlobalValues",
   "end_ea": "0x45FB4A",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "sub_45F970",
+  "name": "TESSaveLoadGame_LoadGlobalValues",
   "segment": ".text",
   "sha256": "a6ac3bd7e32664127a616a9a63dbcfe6f47b3365a103d663a10f6e30269c3f51",
   "size": 474,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x45F970",
-  "type": "char __userpurge@<al>(int ecx0@<ecx>, double@<st2>, double@<st1>, double st7_0@<st0>, int)",
+  "total_chunk_size": 474,
+  "type": "char __userpurge@<al>(TESSaveLoadGame_SerializationView *self@<ecx>, double arg2@<st2>, double arg3@<st1>, double arg4@<st0>, void *stream)",
   "xrefs_from_count": 191,
   "xrefs_to_count": 1
 }

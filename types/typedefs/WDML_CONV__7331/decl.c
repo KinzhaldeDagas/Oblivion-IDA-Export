@@ -1,1 +1,1 @@
-WDML_CONV
+typedef tagWDML_CONV WDML_CONV;

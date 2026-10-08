@@ -1,4 +1,4 @@
 void __cdecl sub_A1FAB0()
 {
-  GameSetting_destr((int *)&fRepairBreakApprenticeMult);
+  GameSetting_destr((int *)&MEMORY[0xB37998][0xC]); /*0xa1fab5*/
 }

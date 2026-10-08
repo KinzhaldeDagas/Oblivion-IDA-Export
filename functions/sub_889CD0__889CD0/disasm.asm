@@ -1,4 +1,4 @@
-0x889CD0: mov     ecx, [ecx+50h]
+0x889CD0: mov     ecx, [ecx+50h]; Raycast data -> low-level hit info helper from root collidable + internal offset; used to inspect collision layer in TES::CastRay.
 0x889CD3: test    ecx, ecx
 0x889CD5: jz      short loc_889CE3
 0x889CD7: cmp     byte ptr [ecx+18h], 1

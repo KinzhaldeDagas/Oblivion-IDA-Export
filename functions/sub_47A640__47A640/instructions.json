@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x47A685",
-    "line": "push    0",
+    "line": "push    0; newModelData",
     "mnemonic": "push",
     "size": 2
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x47A68A",
-    "line": "push    1",
+    "line": "push    1; replaceMetadata",
     "mnemonic": "push",
     "size": 2
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x47A69A",
-    "line": "push    eax",
+    "line": "push    eax; slot",
     "mnemonic": "push",
     "size": 1
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x47A69F",
-    "line": "call    sub_478780",
+    "line": "call    ActorSkinInfo_ClearOrReplaceEquipmentSlot; ActorSkinInfo equipment-slot teardown/replacement. Slot is exactly {TESForm*, TESModel*, NiAVObject*}; native code removes loaded 3D from shadow/parent ownership, releases loader/scene state, clears object3D, and optionally replaces form/model metadata. Known slots include rings, amulet, WEAP, AMMO, shield, and light. External Crossbow contrast after this native ownership behavior: retained raw controller/target pointers are invalidated when the owning WeaponObject graph is torn down; pointer equality alone is not a lifetime or generation check. Current removal/reset erases tracking without restoring original controller timing state, and target mismatch leaves null-controller tombstones instead of generation-validating/rescanning.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,19 +373,19 @@
   },
   {
     "ea": "0x47A706",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x47A70C",
-    "line": "push    eax",
+    "line": "push    eax; firstPerson",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x47A70D",
-    "line": "call    PlayerCharacter_GetPlayerNode",
+    "line": "call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x47A718",
-    "line": "push    eax",
+    "line": "push    eax; skeletonRoot",
     "mnemonic": "push",
     "size": 1
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x47A71C",
-    "line": "push    edx",
+    "line": "push    edx; actorRef",
     "mnemonic": "push",
     "size": 1
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x47A720",
-    "line": "push    ebx",
+    "line": "push    ebx; slot",
     "mnemonic": "push",
     "size": 1
   },
@@ -439,13 +439,13 @@
   },
   {
     "ea": "0x47A725",
-    "line": "push    eax",
+    "line": "push    eax; modelPath",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x47A726",
-    "line": "call    sub_479450",
+    "line": "call    Actor_LoadCloneAndAttachModel3D; Loads and clones a model for an actor equipment/add-on slot, binds actor-specific resources, applies the stock attachment transform, attaches through Prn metadata, and initializes render property/dynamic-effect state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x47A771",
-    "line": "call    sub_439EB0",
+    "line": "call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.",
     "mnemonic": "call",
     "size": 5
   },
@@ -595,19 +595,19 @@
   },
   {
     "ea": "0x47A778",
-    "line": "lea     ecx, [esp+4Ch+var_28]",
+    "line": "lea     ecx, [esp+4Ch+var_28]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x47A77C",
-    "line": "mov     [esp+4Ch+var_34], esi",
+    "line": "mov     [esp+4Ch+sourceModelRoot], esi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x47A780",
-    "line": "call    sub_478B90",
+    "line": "call    OB_NiCloningProcess_ctor",
     "mnemonic": "call",
     "size": 5
   },
@@ -847,7 +847,7 @@
   },
   {
     "ea": "0x47A7FC",
-    "line": "push    offset dword_B35288",
+    "line": "push    0B35288h",
     "mnemonic": "push",
     "size": 5
   },
@@ -1021,7 +1021,7 @@
   },
   {
     "ea": "0x47A862",
-    "line": "mov     eax, [esp+4Ch+var_34]",
+    "line": "mov     eax, [esp+4Ch+sourceModelRoot]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1033,43 +1033,43 @@
   },
   {
     "ea": "0x47A86A",
-    "line": "push    0",
+    "line": "push    0; unusedTrailing",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x47A86C",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; modelType",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x47A86E",
-    "line": "push    0",
+    "line": "push    0; unusedContext",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x47A870",
-    "line": "push    eax",
+    "line": "push    eax; sourceModelRoot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x47A871",
-    "line": "push    ebp",
+    "line": "push    ebp; modelRoot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x47A872",
-    "line": "push    ecx",
+    "line": "push    ecx; skeletonRoot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x47A873",
-    "line": "call    sub_479140",
+    "line": "call    AttachModelUsingPrnExtraData; Six-argument cdecl helper (all ten native callers push 6 arguments; unusedContext and unusedTrailing are not read). Reads NiStringExtraData 'Prn' from sourceModelRoot, falling back to modelRoot; resolves that exact parent in skeletonRoot and attaches modelRoot. For modelType==7 it forces Prn string byte 6 to 'L' for lookup, then writes it back to 'R'. It then finds exact-name 'Scb' inside modelRoot and attaches that object separately to the same parent, reparenting Scb as modelRoot's sibling before refreshing property/effect state. Missing creature parents invoke the narrow FadeNode-chain Scb removal. Every exit returns the bool result of sub_88D000(modelRoot,1,1), which is not proven to be general attachment success.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1441,7 +1441,7 @@
   },
   {
     "ea": "0x47A91E",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1807,7 +1807,7 @@
   },
   {
     "ea": "0x47A9D3",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1870,5 +1870,83 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AF1B0",
+    "line": "lea     ecx, [ebp-28h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF1B3",
+    "line": "jmp     sub_4781A0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF1B8",
+    "line": "lea     ecx, [ebp-38h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF1BB",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF1C0",
+    "line": "lea     ecx, [ebp-30h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF1C3",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF1C8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AF1CC",
+    "line": "lea     eax, [edx-3Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF1CF",
+    "line": "mov     ecx, [edx-40h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF1D2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AF1D4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF1D9",
+    "line": "mov     eax, offset stru_ADB82C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF1DE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,4 +1,4 @@
-0x6EF020: sub     esp, 20h
+0x6EF020: sub     esp, 20h; Reads four control-basis banks (2x2 traversal), each with an entry count. Each 0x34-byte entry contains a 1 x basisDimensions[bank] float matrix followed by a length-prefixed string. Reads coefficient floats, string length, then string bytes; any failed read returns false. Do not assume these banks are texture-only.
 0x6EF023: push    ebx
 0x6EF024: push    ebp
 0x6EF025: push    esi
@@ -7,7 +7,7 @@
 0x6EF029: mov     [esp+30h+var_8], ecx
 0x6EF02D: mov     [esp+30h+var_14], ebx
 0x6EF031: mov     [esp+30h+var_18], ebx
-0x6EF035: mov     ecx, [esp+30h+arg_0]
+0x6EF035: mov     ecx, [esp+30h+file]
 0x6EF039: mov     eax, [ecx]
 0x6EF03B: mov     eax, [eax+10h]
 0x6EF03E: push    1
@@ -72,7 +72,6 @@
 0x6EF0EE: jbe     loc_6EF28D
 0x6EF0F4: mov     [esp+30h+var_20], ebx
 0x6EF0F8: jmp     short loc_6EF104
-0x6EF0FA: align 10h
 0x6EF100: mov     edi, [esp+30h+var_10]
 0x6EF104: mov     eax, [esi+4]
 0x6EF107: cmp     eax, ebx
@@ -88,7 +87,7 @@
 0x6EF121: cmp     ebp, eax
 0x6EF123: jb      short loc_6EF12A
 0x6EF125: call    __invalid_parameter_noinfo
-0x6EF12A: mov     ebx, [esp+30h+arg_4]
+0x6EF12A: mov     ebx, [esp+30h+basisDimensions]
 0x6EF12E: fldz
 0x6EF130: mov     ecx, [ebx+edi*4]
 0x6EF133: mov     eax, [esi+4]
@@ -100,7 +99,7 @@
 0x6EF143: push    ecx; int
 0x6EF144: lea     ecx, [eax+8]; int
 0x6EF147: mov     dword ptr [eax], 1
-0x6EF14D: call    sub_527160
+0x6EF14D: call    FaceGenFloatVector_ResizeFill; Vector resize: retain existing prefix, erase surplus elements when shrinking, fill only newly inserted elements when growing. Equal size does not overwrite coefficients. Matrix dimension products must already be valid; no recovery from rows*columns overflow.
 0x6EF152: mov     eax, [esi+4]
 0x6EF155: test    eax, eax
 0x6EF157: jz      short loc_6EF173
@@ -127,7 +126,7 @@
 0x6EF191: call    __invalid_parameter_noinfo
 0x6EF196: mov     edx, [esp+30h+var_10]
 0x6EF19A: mov     edx, [ebx+edx*4]
-0x6EF19D: mov     ecx, [esp+30h+arg_0]
+0x6EF19D: mov     ecx, [esp+30h+file]
 0x6EF1A1: mov     edi, [edi+4]
 0x6EF1A4: mov     eax, [ecx]
 0x6EF1A6: mov     eax, [eax+10h]
@@ -137,7 +136,7 @@
 0x6EF1AD: call    eax
 0x6EF1AF: test    al, al
 0x6EF1B1: jz      loc_6EF2C1
-0x6EF1B7: mov     ebx, [esp+30h+arg_0]
+0x6EF1B7: mov     ebx, [esp+30h+file]
 0x6EF1BB: mov     edx, [ebx]
 0x6EF1BD: mov     edx, [edx+10h]
 0x6EF1C0: push    1

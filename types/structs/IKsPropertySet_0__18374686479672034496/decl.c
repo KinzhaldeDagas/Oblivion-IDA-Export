@@ -1,1 +1,1 @@
-IKsPropertySet_0
+typedef IKsPropertySet IKsPropertySet_0;

@@ -1,8 +1,14 @@
-int __cdecl sub_795CA0(int a1, int a2, int a3)
+// OBLIVION AUTHORITY (2026-08-30): Copy-assigns a range of vector<unsigned short> owners into initialized destination owners and returns the advanced destination.
+OB_stVectorUShort_010201A0 *__cdecl OB_stVector_stVectorUShort_CopyAssignRange_010201A0(
+        const OB_stVectorUShort_010201A0 *first,
+        const OB_stVectorUShort_010201A0 *last,
+        OB_stVectorUShort_010201A0 *destination)
 {
-  int i; // esi
+  const OB_stVectorUShort_010201A0 *i; // esi
 
-  for ( i = a1; i != a2; i += 0x10 )
-    sub_795510((_DWORD *)(i + a3 - a1), a3 - a1, i);
-  return a3 + 0x10 * ((a2 - a1) >> 4);
+  for ( i = first; i != last; ++i ) /*0x795cbe*/
+    OB_stVectorUShort_CopyAssign_010201A0( /*0x795cc6*/
+      (OB_stVectorUShort_010201A0 *)((char *)i + (char *)destination - (char *)first),
+      i);
+  return &destination[last - first]; /*0x795cd4*/
 }

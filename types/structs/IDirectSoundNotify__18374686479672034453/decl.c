@@ -1,1 +1,4 @@
-IDirectSoundNotify
+struct IDirectSoundNotify
+{
+const IDirectSoundNotifyVtbl *lpVtbl;
+};

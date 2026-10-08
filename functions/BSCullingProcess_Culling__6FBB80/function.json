@@ -1,18 +1,31 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6FBB80",
+      "0x6FBB9F"
+    ]
+  ],
+  "chunks_sha256": "1d5fc28b965ecf9c0ba99640d31acdd59aaf51d63bf77deec375a6901c1becbe",
+  "comment_regular": "CULLING audit 2026-09-27 (observed Oblivion behavior): Reads BYTE process+0x90: nonzero tail-jumps to base culler 0x70DFB0; zero tail-jumps object OnVisible(+0x7C). Only native constructor reference to its vtable observed in this focused pass is MiscPass 0x57F1BF, which creates a temporary process and zeroes this flag. Do not infer a main-world bypass from this override alone.\n\nMoonSugarEffect decode: BSCullingProcess ProcessCull override. If +0x90/unk90 is nonzero, uses normal frustum culling; if zero, bypasses cull tests and calls object OnVisible directly.",
+  "comment_repeatable": "MoonSugarEffect decode: BSCullingProcess ProcessCull override. If +0x90/unk90 is nonzero, uses normal frustum culling; if zero, bypasses cull tests and calls object OnVisible directly.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "BSCullingProcess_Culling",
   "end_ea": "0x6FBB9F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "BSCullingProcess_Culling",
   "segment": ".text",
   "sha256": "1d5fc28b965ecf9c0ba99640d31acdd59aaf51d63bf77deec375a6901c1becbe",
   "size": 31,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6FBB80",
+  "total_chunk_size": 31,
   "type": "void __thiscall(BSCullingProcess *this, NiAVObject *)",
   "xrefs_from_count": 9,
   "xrefs_to_count": 1

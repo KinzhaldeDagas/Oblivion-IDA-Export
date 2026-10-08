@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x523310",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+arg_0]; TESNPC_SetAViBase: skills 0x0C..0x20 are stored as single bytes at TESNPC +0xEC + ActorValue_GetGroupOffsetFromAV(2,av). This confirms both >255 overflow and <0 underflow can wrap base skills.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x523322",
-    "line": "call    ActorValue_GetGroupOffsetFromAV",
+    "line": "call    ActorValue_GetGroupOffsetFromAV; RealArenaTraining fidelity pass: ActorValue_GetGroupOffsetFromAV(group, actorValue). Player skill-progress code calls this with group 2 before indexing player skillExp/requiredSkillExp.",
     "mnemonic": "call",
     "size": 5
   },

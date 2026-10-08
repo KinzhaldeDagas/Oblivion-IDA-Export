@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4B2B00",
-    "line": "push    ecx",
+    "line": "push    ecx; Verified: chooses reference-specific model path if available, otherwise the form model path, then appends scale percent (GetScale()*100) to create the per-reference model-loader key.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x4B2B02",
-    "line": "mov     ebx, [esp+8+arg_0]",
+    "line": "mov     ebx, [esp+8+reference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -145,19 +145,19 @@
   },
   {
     "ea": "0x4B2B3F",
-    "line": "fistp   [esp+10h+arg_0]",
+    "line": "fistp   [esp+10h+reference]",
     "mnemonic": "fistp",
     "size": 4
   },
   {
     "ea": "0x4B2B43",
-    "line": "mov     eax, [esp+10h+arg_0]",
+    "line": "mov     eax, [esp+10h+reference]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4B2B47",
-    "line": "mov     ecx, [esp+10h+arg_4]",
+    "line": "mov     ecx, [esp+10h+outPath]",
     "mnemonic": "mov",
     "size": 4
   },

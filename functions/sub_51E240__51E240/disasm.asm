@@ -90,7 +90,7 @@
 0x51E341: push    0Dh
 0x51E343: push    eax
 0x51E344: mov     ecx, ebp
-0x51E346: call    sub_48C870
+0x51E346: call    ContainerChanges_SelectBestArmorForSlot
 0x51E34B: mov     dword ptr [esp+24h+arg_C], eax
 0x51E34F: cmp     [esp+24h+arg_8], bl
 0x51E353: fldz
@@ -103,7 +103,7 @@
 0x51E367: push    ecx
 0x51E368: push    ebx
 0x51E369: mov     ecx, ebp
-0x51E36B: call    sub_48BDA0
+0x51E36B: call    sub_48BDA0; Sidecar NPC decode: deeper equippable-item selector carries actor/base interface context used by weapon rating paths. Wrapper must forward four stack args unchanged while pushing/popping owner context.
 0x51E370: test    eax, eax
 0x51E372: mov     [esp+24h+a1], eax
 0x51E376: jz      short loc_51E3B3
@@ -191,12 +191,12 @@
 0x51E45F: test    ecx, ecx
 0x51E461: jz      short loc_51E465
 0x51E463: mov     eax, [ecx]
-0x51E465: mov     ecx, [esp+24h+var_10]
+0x51E465: mov     ecx, [esp+24h+var_10]; this
 0x51E469: mov     ebp, [ebp+8]
 0x51E46C: mov     ebx, [esi]
 0x51E46E: push    0
 0x51E470: push    eax
-0x51E471: call    TESHealthForm_GetHealth
+0x51E471: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x51E476: push    eax
 0x51E477: mov     eax, [ebx+108h]
 0x51E47D: push    ebp
@@ -244,14 +244,14 @@
 0x51E4EA: call    ContainerEntryExtraData_DestroyDataTable
 0x51E4EF: mov     ecx, dword ptr [esp+20h+arg_C]
 0x51E4F3: push    ecx
-0x51E4F4: call    FormHeapFree
+0x51E4F4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x51E4F9: add     esp, 4
 0x51E4FC: test    ebx, ebx
 0x51E4FE: jz      short loc_51E510
 0x51E500: mov     ecx, ebx
 0x51E502: call    ContainerEntryExtraData_DestroyDataTable
 0x51E507: push    ebx
-0x51E508: call    FormHeapFree
+0x51E508: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x51E50D: add     esp, 4
 0x51E510: mov     ecx, [esp+20h+var_10]
 0x51E514: test    ecx, ecx
@@ -261,7 +261,7 @@
 0x51E51A: call    ContainerEntryExtraData_DestroyDataTable
 0x51E51F: mov     edx, [esp+18h+var_10]
 0x51E523: push    edx
-0x51E524: call    FormHeapFree
+0x51E524: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x51E529: add     esp, 4
 0x51E52C: test    edi, edi
 0x51E52E: mov     al, [esp+18h+var_11]

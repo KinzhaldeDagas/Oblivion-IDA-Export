@@ -1,11 +1,11 @@
-0x476410: sub     esp, 154h
+0x476410: sub     esp, 154h; Native Oblivion power-attack rebuild: clears groups 0x16..0x1A, generates movement/weapon/mastery filename candidates, probes the model loader, and installs parsed native power groups. No dynamic weapon type or override registry is consulted.
 0x476416: mov     eax, ds:0B30AACh
 0x47641B: xor     eax, esp
 0x47641D: mov     [esp+154h+var_4], eax
 0x476424: push    ebx
-0x476425: push    ebp
+0x476425: push    ebp; float
 0x476426: mov     ebp, [esp+15Ch+arg_0]
-0x47642D: push    esi
+0x47642D: push    esi; float
 0x47642E: xor     ebx, ebx
 0x476430: cmp     ebp, ebx
 0x476432: mov     esi, ecx
@@ -25,9 +25,9 @@
 0x47646A: mov     ecx, [ebp+58h]
 0x47646D: mov     eax, [ecx]
 0x47646F: mov     edx, [eax+0ECh]
-0x476475: push    edi
+0x476475: push    edi; float
 0x476476: mov     edi, 11h
-0x47647B: push    1
+0x47647B: push    1; float
 0x47647D: mov     [esp+168h+var_144], edi
 0x476481: mov     [esp+168h+var_148], 1
 0x476489: call    edx
@@ -39,18 +39,18 @@
 0x476496: movsx   eax, byte ptr [eax+90h]
 0x47649D: cmp     eax, 3; switch 4 cases
 0x4764A0: mov     ecx, ds:0B086B8h[eax*4]
-0x4764A7: mov     [esp+168h+var_14C], ecx
+0x4764A7: mov     [esp+168h+var_14C], ecx; float
 0x4764AB: ja      def_4764B1
 0x4764B1: jmp     ds:jpt_4764B1[eax*4]; switch jump
 0x4764B8: mov     edi, 0Eh; jumptable 004764B1 cases 0,1
 0x4764BD: jmp     short loc_4764C4
 0x4764BF: mov     edi, 10h; jumptable 004764B1 cases 2,3
-0x4764C4: mov     [esp+168h+var_148], edi
+0x4764C4: mov     [esp+168h+var_148], edi; float
 0x4764C8: mov     ecx, ds:0B333C4h; this
 0x4764CE: cmp     ebp, ecx
 0x4764D0: jnz     short loc_4764E5
-0x4764D2: push    1; a2
-0x4764D4: call    Player_GetAnimData
+0x4764D2: push    1; firstPerson
+0x4764D4: call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.
 0x4764D9: cmp     esi, eax
 0x4764DB: jnz     short loc_4764E5
 0x4764DD: mov     esi, ds:0B36BB8h
@@ -65,11 +65,11 @@
 0x4764FB: mov     esi, eax
 0x4764FD: cmp     esi, ebx
 0x4764FF: jz      def_4764B1
-0x476505: push    edi
-0x476506: mov     ecx, ebp
-0x476508: call    Actor_GetSkillMasteryLevel
+0x476505: push    edi; actorValue
+0x476506: mov     ecx, ebp; this
+0x476508: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x47650D: push    8; Size
-0x47650F: mov     [esp+16Ch+var_124], eax
+0x47650F: mov     [esp+16Ch+var_124], eax; int
 0x476513: call    FormHeapAlloc
 0x476518: add     esp, 4
 0x47651B: cmp     eax, ebx
@@ -78,7 +78,7 @@
 0x476521: mov     [eax+4], ebx
 0x476524: mov     [esp+168h+var_144], eax
 0x476528: jmp     short loc_47652E
-0x47652A: mov     [esp+168h+var_144], ebx
+0x47652A: mov     [esp+168h+var_144], ebx; float
 0x47652E: lea     edx, [esp+168h+Str]
 0x476532: mov     eax, esi
 0x476534: sub     edx, esi
@@ -96,18 +96,18 @@
 0x476553: cmp     ebp, ebx
 0x476555: jz      def_4764B1
 0x47655B: mov     eax, 2
-0x476560: mov     [esp+168h+var_158], 31h ; '1'
-0x476565: mov     [esp+168h+var_157], bl
-0x476569: mov     [esp+168h+var_120], 1
-0x476571: mov     [esp+168h+var_11C], eax
-0x476575: mov     [esp+168h+var_118], eax
-0x476579: mov     [esp+168h+var_114], 3
+0x476560: mov     byte ptr [esp+168h+var_158], 31h ; '1'
+0x476565: mov     byte ptr [esp+168h+var_158+1], bl
+0x476569: mov     [esp+168h+var_120], 1; int
+0x476571: mov     [esp+168h+var_11C], eax; int
+0x476575: mov     [esp+168h+var_118], eax; int
+0x476579: mov     [esp+168h+var_114], 3; int
 0x476581: mov     [esp+168h+var_110], 4
-0x476589: mov     [esp+168h+var_13C], 16h
-0x476591: mov     [esp+168h+var_138], 19h
-0x476599: mov     [esp+168h+var_134], 1Ah
-0x4765A1: mov     [esp+168h+var_130], 18h
-0x4765A9: mov     [esp+168h+var_12C], 17h
+0x476589: mov     [esp+168h+var_13C], 16h; float
+0x476591: mov     [esp+168h+var_138], 19h; float
+0x476599: mov     [esp+168h+var_134], 1Ah; float
+0x4765A1: mov     [esp+168h+var_130], 18h; float
+0x4765A9: mov     [esp+168h+var_12C], 17h; float
 0x4765B1: mov     [esp+168h+var_150], offset off_B102B8
 0x4765B9: lea     esp, [esp+0]
 0x4765C0: mov     [esp+168h+var_154], ebx
@@ -169,7 +169,7 @@
 0x476674: mov     cl, byte ptr [esp+eax+168h+var_110]
 0x476678: add     cl, 30h ; '0'
 0x47667B: lea     eax, [esp+168h+var_158]
-0x47667F: mov     [esp+168h+var_158], cl
+0x47667F: mov     byte ptr [esp+168h+var_158], cl
 0x476683: mov     ecx, eax
 0x476685: mov     dl, [eax]
 0x476687: add     eax, 1
@@ -271,7 +271,7 @@
 0x476793: mov     cl, byte ptr [esp+eax+168h+var_110]
 0x476797: add     cl, 30h ; '0'
 0x47679A: lea     eax, [esp+168h+var_158]
-0x47679E: mov     [esp+168h+var_158], cl
+0x47679E: mov     byte ptr [esp+168h+var_158], cl
 0x4767A2: mov     ecx, eax
 0x4767A4: mov     dl, [eax]
 0x4767A6: add     eax, 1
@@ -328,14 +328,13 @@
 0x47682A: mov     ecx, ds:0B33A1Ch
 0x476830: lea     edx, [esp+168h+Str]
 0x476834: push    edx
-0x476835: call    sub_434870
+0x476835: call    ModelLoader_FindModelRecordByPath; Model-loader map lookup by path/key. Returns the model record from the loader's internal map or 0; used to gate generated KF candidates before they are added to animation lists.
 0x47683A: test    eax, eax
 0x47683C: jnz     loc_476C06
 0x476842: mov     eax, [esp+168h+var_150]
 0x476846: mov     ecx, [eax]
 0x476848: lea     edx, [ebp+1]
 0x47684B: jmp     short loc_476850
-0x47684D: align 10h
 0x476850: mov     al, [ecx]
 0x476852: mov     [edx], al
 0x476854: add     ecx, 1
@@ -346,7 +345,6 @@
 0x476862: mov     eax, ds:0B102C8h[ecx*4]
 0x476869: mov     ecx, eax
 0x47686B: jmp     short loc_476870
-0x47686D: align 10h
 0x476870: mov     dl, [eax]
 0x476872: add     eax, 1
 0x476875: cmp     dl, bl
@@ -379,7 +377,7 @@
 0x4768BD: mov     [eax+4], cx
 0x4768C1: mov     al, byte ptr [esp+edx+168h+var_110]
 0x4768C5: add     al, 30h ; '0'
-0x4768C7: mov     [esp+168h+var_158], al
+0x4768C7: mov     byte ptr [esp+168h+var_158], al; float
 0x4768CB: lea     eax, [esp+168h+var_158]
 0x4768CF: mov     ecx, eax
 0x4768D1: mov     dl, [eax]
@@ -436,7 +434,7 @@
 0x476953: mov     [edi], eax
 0x476955: push    ecx
 0x476956: mov     ecx, ds:0B33A1Ch
-0x47695C: call    sub_434870
+0x47695C: call    ModelLoader_FindModelRecordByPath; Model-loader map lookup by path/key. Returns the model record from the loader's internal map or 0; used to gate generated KF candidates before they are added to animation lists.
 0x476961: test    eax, eax
 0x476963: jnz     loc_476C06
 0x476969: mov     ecx, [esp+168h+var_148]
@@ -459,7 +457,6 @@
 0x4769A2: mov     eax, ds:0B102C8h[eax*4]
 0x4769A9: mov     ecx, eax
 0x4769AB: jmp     short loc_4769B0
-0x4769AD: align 10h
 0x4769B0: mov     dl, [eax]
 0x4769B2: add     eax, 1
 0x4769B5: cmp     dl, bl
@@ -534,7 +531,6 @@
 0x476A72: mov     eax, ds:0B102C8h[ecx*4]
 0x476A79: mov     ecx, eax
 0x476A7B: jmp     short loc_476A80
-0x476A7D: align 10h
 0x476A80: mov     dl, [eax]
 0x476A82: add     eax, 1
 0x476A85: cmp     dl, bl
@@ -601,7 +597,7 @@
 0x476B29: mov     ecx, ds:0B33A1Ch
 0x476B2F: lea     edx, [esp+168h+Str]
 0x476B33: push    edx
-0x476B34: call    sub_434870
+0x476B34: call    ModelLoader_FindModelRecordByPath; Model-loader map lookup by path/key. Returns the model record from the loader's internal map or 0; used to gate generated KF candidates before they are added to animation lists.
 0x476B39: test    eax, eax
 0x476B3B: jnz     loc_476C06
 0x476B41: mov     eax, [esp+168h+var_150]
@@ -618,7 +614,6 @@
 0x476B62: mov     eax, ds:0B102C8h[ecx*4]
 0x476B69: mov     ecx, eax
 0x476B6B: jmp     short loc_476B70
-0x476B6D: align 10h
 0x476B70: mov     dl, [eax]
 0x476B72: add     eax, 1
 0x476B75: cmp     dl, bl
@@ -673,7 +668,7 @@
 0x476BF4: mov     [edi], ecx
 0x476BF6: mov     ecx, ds:0B33A1Ch
 0x476BFC: push    edx
-0x476BFD: call    sub_434870
+0x476BFD: call    ModelLoader_FindModelRecordByPath; Model-loader map lookup by path/key. Returns the model record from the loader's internal map or 0; used to gate generated KF candidates before they are added to animation lists.
 0x476C02: test    eax, eax
 0x476C04: jz      short loc_476C47
 0x476C06: lea     eax, [esp+168h+Str]
@@ -703,29 +698,29 @@
 0x476C47: mov     eax, [esp+168h+var_154]
 0x476C4B: sub     eax, 4
 0x476C4E: cmp     eax, 0FFFFFFF0h
-0x476C51: mov     [esp+168h+var_154], eax
+0x476C51: mov     [esp+168h+var_154], eax; float
 0x476C55: jge     loc_4765C4
 0x476C5B: mov     eax, [esp+168h+var_150]
 0x476C5F: add     eax, 4
 0x476C62: cmp     eax, offset off_B102C8
-0x476C67: mov     [esp+168h+var_150], eax
+0x476C67: mov     [esp+168h+var_150], eax; float
 0x476C6B: jl      loc_4765C0
 0x476C71: mov     eax, [esp+168h+var_144]
 0x476C75: mov     edi, [esp+168h+var_128]
 0x476C79: push    eax; int
 0x476C7A: mov     ecx, edi; this
-0x476C7C: call    sub_4761C0
+0x476C7C: call    ActorAnimData_LoadGeneratedPowerAttackList; Generated power-attack list loader. Loads each candidate KF from the temporary file list and only adds TESAnimGroup power-attack sequences; non-power KFs are released.
 0x476C81: cmp     byte ptr [esp+168h+arg_0], bl
-0x476C88: mov     esi, [esp+168h+var_140]
+0x476C88: mov     esi, [esp+168h+ownerActor]
 0x476C8C: jnz     short loc_476CA8
 0x476C8E: fld     dword ptr ds:0A30634h
 0x476C94: sub     esp, 8
-0x476C97: fstp    [esp+170h+var_16C]; float
+0x476C97: fstp    [esp+170h+explicitTimeOrMinusOne]; explicitTimeOrMinusOne
 0x476C9B: mov     ecx, edi; this
 0x476C9D: fldz
-0x476C9F: fstp    [esp+170h+var_170]; float
-0x476CA2: push    esi; int
-0x476CA3: call    sub_476D10
+0x476C9F: fstp    [esp+170h+deltaTime]; deltaTime
+0x476CA2: push    esi; ownerActor
+0x476CA3: call    ActorAnimData_Update; Oblivion ActorAnimData scheduler with exact native ABI: this in ECX plus three 4-byte stack arguments, retn 0x0C. ownerActor is at [EBP+8]; all surveyed callers pass the owning Actor/Player, but the native body never dereferences it, so an interior hook's use of that value is a caller-derived contract. deltaTime at [EBP+0x0C] advances ActorAnimData time +0x94 and sequence offsets. explicitTimeOrMinusOne at [EBP+0x10] uses -1.0 for normal ticking; any other value drives an explicit-time scene update/early return. The function drains deferred KF models, maintains power/idle state, samples five slots, and advances required-note templates (class 4 terminal index 3; class 7 terminal index 4).
 0x476CA8: mov     ecx, ds:0B33B00h
 0x476CAE: call    sub_45A500
 0x476CB3: test    al, al

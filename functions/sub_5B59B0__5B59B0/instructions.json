@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5B59B0",
-    "line": "push    ebx",
+    "line": "push    ebx; Verified aPortable: consumes native message result; only result 1 sets OSGlobals.quitGame. Path includes OBSE hook site 5B5A0D and normal main-menu render cleanup. Reuse this native quit route after own modal has closed rather than TerminateProcess.",
     "mnemonic": "push",
     "size": 1
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x5B59C1",
-    "line": "call    sub_578D70",
+    "line": "call    InterfaceManager_ConsumeMessageButton",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x5B5A08",
-    "line": "call    MiscPass",
+    "line": "call    MiscPass; MoonSugarEffect decode: MiscPass constructs a temporary BSCullingProcess with the source scenegraph cullingProcess->VisibleGeo. This confirms visible arrays are opt-in/inherited state, not guaranteed for the normal world path.",
     "mnemonic": "call",
     "size": 5
   },

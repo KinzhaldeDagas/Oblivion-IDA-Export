@@ -18,7 +18,7 @@
 0x413594: call    _memcpy_s
 0x413599: add     esp, 10h
 0x41359C: push    ebx
-0x41359D: call    FormHeapFree
+0x41359D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4135A2: add     esp, 4
 0x4135A5: pop     ebx
 0x4135A6: mov     [esi+14h], edi

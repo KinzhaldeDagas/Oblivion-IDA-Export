@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
   "callers_count": 7,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x68D8A0",
+      "0x68D8FF"
+    ]
+  ],
+  "chunks_sha256": "1853fc344e97029efaf3020cee9704063a578349271b282d8375b2f7ca25b769",
+  "comment_regular": "Verified ActiveEffect_Base_CopyTo copies fields through object +0x30 (boundObjectOrParentForm) and stops there; it does not copy hitEffectList at +0x34. ActiveEffect_Ctor zeroes +0x34. The registered-effect vtables' copy slots either call this routine directly or call derived copy helpers that chain to it; inspected helpers copy their own fields but do not write +0x34. Therefore standard ActiveEffect clones start with an independent empty hit-effect list.",
+  "comment_repeatable": "Verified ActiveEffect_Base_CopyTo copies fields through object +0x30 (boundObjectOrParentForm) and stops there; it does not copy hitEffectList at +0x34. ActiveEffect_Ctor zeroes +0x34. The registered-effect vtables' copy slots either call this routine directly or call derived copy helpers that chain to it; inspected helpers copy their own fields but do not write +0x34. Therefore standard ActiveEffect clones start with an independent empty hit-effect list.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "ActiveEffect_Base_CopyTo",
   "end_ea": "0x68D8FF",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "ActiveEffect_Base_CopyTo",
   "segment": ".text",
   "sha256": "1853fc344e97029efaf3020cee9704063a578349271b282d8375b2f7ca25b769",
   "size": 95,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x68D8A0",
+  "total_chunk_size": 95,
   "type": "int __thiscall(int this, int)",
   "xrefs_from_count": 29,
-  "xrefs_to_count": 19
+  "xrefs_to_count": 17
 }

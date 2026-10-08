@@ -1,1 +1,1 @@
-_PSP
+struct _PSP;

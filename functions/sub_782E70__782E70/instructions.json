@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x782E70",
-    "line": "push    ebx",
+    "line": "push    ebx; DirectX10OBSE authority: Oblivion NiD3DPixelShader constant setter. Dispatches typed constant entries to D3D SetPixelShaderConstantB/I/F via vtable +0x1C4/+0x1BC/+0x1B4; bridge hooks setters and now seeds active native PS constants after create/reset.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x782E71",
-    "line": "mov     ebx, [esp+4+arg_4]",
+    "line": "mov     ebx, [esp+4+sourceOverride]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x782E7A",
-    "line": "mov     edi, [esp+10h+arg_0]",
+    "line": "mov     edi, [esp+10h+entry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x782E85",
-    "line": "mov     esi, [esp+10h+arg_8]",
+    "line": "mov     esi, [esp+10h+countOverride]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x782EA3",
-    "line": "mov     [esp+10h+arg_4], eax",
+    "line": "mov     [esp+10h+sourceOverride], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -127,13 +127,13 @@
   },
   {
     "ea": "0x782EA9",
-    "line": "call    sub_783C70",
+    "line": "call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x782EAE",
-    "line": "mov     eax, [esp+10h+arg_4]",
+    "line": "mov     eax, [esp+10h+sourceOverride]",
     "mnemonic": "mov",
     "size": 4
   },

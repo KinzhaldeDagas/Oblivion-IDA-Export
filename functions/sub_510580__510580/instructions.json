@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x5105A9",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x510613",
-    "line": "call    ??0?$NiTPointerListBase@V?$NiTPointerAllocator@I@@PAVNiAVObject@@@@QAE@XZ; NiTPointerListBase<NiTPointerAllocator<uint>,NiAVObject *>::NiTPointerListBase<NiTPointerAllocator<uint>,NiAVObject *>(void)",
+    "line": "call    Decal_ProjectToSceneGeometry; [Verified] This Oblivion scene-projection path creates/registers BSTempEffect decal effects after its geometry/raycast work; it is a transient decal path and does not establish population of BSShaderLightingProperty+0x80's DECAL_DATA* list. Fallout contrast: Fallout's AddDecalRef path stores reference/intersection/normal metadata in ExtraDecalRefs (ExtraData type 0x57). Equivalence between these paths: Unknown.",
     "mnemonic": "call",
     "size": 5
   },

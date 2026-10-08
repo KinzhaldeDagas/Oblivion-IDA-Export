@@ -1,12 +1,10 @@
-int __thiscall sub_5E0270(_DWORD **this, int a2)
+// Writes LowProcess.procedureCompleted through the process vtable, then requests process reevaluation. DialoguePackage construction passes false; exhaustion passes true for both participants.
+void __thiscall Actor::SetProcedureCompleted(Actor *this, bool completed)
 {
-  int result; // eax
-
-  if ( *(this + 0x16) )
+  if ( this->members.super.process ) /*0x5e0273*/
   {
-    (*(void (__thiscall **)(_DWORD, int))(**(this + 0x16) + 0xBC))(*(this + 0x16), a2);
-    (*(void (__thiscall **)(_DWORD, int))(**(this + 0x16) + 0x68))(*(this + 0x16), 1);
-    return (*(int (__thiscall **)(_DWORD))(**(this + 0x16) + 0x350))(*(this + 0x16));
+    this->members.super.process->Unk_2E(this->members.super.process, completed); /*0x5e0289*/
+    this->members.super.process->Unk_1A(this->members.super.process, 1); /*0x5e0295*/
+    this->members.super.process->SetUnk278To0(this->members.super.process); /*0x5e02a2*/
   }
-  return result;
 }

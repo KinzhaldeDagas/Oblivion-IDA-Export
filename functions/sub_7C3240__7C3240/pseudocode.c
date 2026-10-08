@@ -1,104 +1,114 @@
-NiTList_NiProperty *__thiscall sub_7C3240(BSShaderProperty *this, int a2, int a3, int a4, int a5)
+// TallGrass shader-property render-pass producer. Selector 0x197 belongs to TallGrass and uses its special submission path, not Lighting30 0x14E..0x151.
+NiTList_NiProperty *__thiscall TallGrassShaderProperty_GetRenderPasses(
+        BSShaderProperty *this,
+        RenderPass_DecodedLayout *vtable,
+        int a3,
+        int a4,
+        int a5)
 {
   __int16 v6; // ax
-  _DWORD *v7; // esi
-  int v8; // eax
-  int v9; // ebx
-  int v10; // eax
-  int v11; // eax
-  _DWORD *v12; // esi
-  int v13; // eax
-  int v14; // eax
-  _DWORD *i; // edi
-  int v16; // eax
-  int v17; // edi
+  ShadowSceneLight *v7; // esi
+  RenderPass_DecodedLayout *v8; // eax
+  RenderPass_DecodedLayout *v9; // ebx
+  RenderPass_DecodedLayout *v10; // eax
+  RenderPass_DecodedLayout *v11; // eax
+  ShadowSceneLight *FirstActiveLight; // esi
+  RenderPass_DecodedLayout *v13; // eax
+  RenderPass_DecodedLayout *v14; // eax
+  ShadowSceneLight_DecodedLayout *i; // edi
+  RenderPass_DecodedLayout *v16; // eax
+  RenderPass_DecodedLayout *v17; // edi
   NiTList_Entry_NiProperty *v18; // eax
   NiTList_Entry_NiProperty *start; // ecx
 
-  if ( this->member.lastRenderPassState != a3 )
+  if ( this->member.lastRenderPassState != a3 ) /*0x7c326e*/
   {
-    sub_7E24C0(this);
-    if ( byte_B43344 )
-      v6 = sub_7ED600(this);
+    BSShaderProperty_ClearRenderPassLists(this); /*0x7c3274*/
+    if ( unk_B43344 ) /*0x7c3279*/
+      v6 = BSShaderLightingProperty__CountFrustumVisibleEnabledLights((BSShaderLightingProperty *)this); /*0x7c3284*/
     else
-      v6 = 0;
-    if ( ShaderPackage < 2 || UseHDR )
+      v6 = 0; /*0x7c328e*/
+    if ( *(int *)OB_RendererGlobalState_010201A0.shaderPackageVersion_le < 2 /*0x7c32a1*/
+      || OB_RendererGlobalState_010201A0.bHighDynamicRangeMode )
     {
-      if ( v6 )
+      if ( v6 ) /*0x7c333d*/
       {
-        v12 = sub_7ED2A0(this);
-        v13 = FormHeapAlloc(0x10u);
-        v9 = a2;
-        if ( v13 )
-          a2 = sub_7E2370(v13, a2, 0x196, 1, 1u, (int)v12);
+        FirstActiveLight = BSShaderLightingProperty__GetFirstActiveLight((BSShaderLightingProperty *)this); /*0x7c3348*/
+        v13 = (RenderPass_DecodedLayout *)FormHeapAlloc(0x10u); /*0x7c334a*/
+        v9 = vtable; /*0x7c3358*/
+        if ( v13 ) /*0x7c3360*/
+          vtable = RenderPass_Construct(v13, vtable, 0x196u, 1u, 1u, FirstActiveLight); /*0x7c3373*/
         else
-          a2 = 0;
-        goto LABEL_21;
+          vtable = 0; /*0x7c3383*/
+        goto LABEL_21; /*0x7c337f*/
       }
-      v14 = FormHeapAlloc(0x10u);
-      v9 = a2;
-      if ( v14 )
+      v14 = (RenderPass_DecodedLayout *)FormHeapAlloc(0x10u); /*0x7c3390*/
+      v9 = vtable; /*0x7c339e*/
+      if ( v14 ) /*0x7c33aa*/
       {
-        v10 = sub_7E2370(v14, a2, 0x195, 1, 0, 0);
-        goto LABEL_20;
+        v10 = RenderPass_Construct(v14, vtable, 0x195u, 1u, 0, 0); /*0x7c33b9*/
+        goto LABEL_20; /*0x7c33c1*/
       }
     }
     else
     {
-      if ( !v6 )
+      if ( !v6 ) /*0x7c32b1*/
       {
-        v11 = FormHeapAlloc(0x10u);
-        v9 = a2;
-        if ( v11 )
-          v10 = sub_7E2370(v11, a2, 0xC, 1, 0, 0);
+        v11 = (RenderPass_DecodedLayout *)FormHeapAlloc(0x10u); /*0x7c32f6*/
+        v9 = vtable; /*0x7c3304*/
+        if ( v11 ) /*0x7c3310*/
+          v10 = RenderPass_Construct(v11, vtable, 0xCu, 1u, 0, 0); /*0x7c331c*/
         else
-          v10 = 0;
-        goto LABEL_20;
+          v10 = 0; /*0x7c3332*/
+        goto LABEL_20; /*0x7c3329*/
       }
-      v7 = sub_7ED2A0(this);
-      v8 = FormHeapAlloc(0x10u);
-      v9 = a2;
-      if ( v8 )
+      v7 = BSShaderLightingProperty__GetFirstActiveLight((BSShaderLightingProperty *)this); /*0x7c32bc*/
+      v8 = (RenderPass_DecodedLayout *)FormHeapAlloc(0x10u); /*0x7c32be*/
+      v9 = vtable; /*0x7c32cc*/
+      if ( v8 ) /*0x7c32d8*/
       {
-        v10 = sub_7E2370(v8, a2, 0xD, 1, 1u, (int)v7);
+        v10 = RenderPass_Construct(v8, vtable, 0xDu, 1u, 1u, v7); /*0x7c32e7*/
 LABEL_20:
-        a2 = v10;
+        vtable = v10; /*0x7c33ca*/
 LABEL_21:
-        sub_6AA320(&this->member.passes.vtlb, &a2);
-        if ( ShaderPackage >= 3 && (dword_B42F40 & 0x10) != 0 )
+        NiTList_AddHead(&this->member.passes.vtlb, &vtable); /*0x7c33ce*/
+        if ( *(int *)OB_RendererGlobalState_010201A0.shaderPackageVersion_le >= 3 /*0x7c33fe*/
+          && (OB_RendererGlobalState_010201A0.pad_00D[0x9A] & 0x10) != 0 )
         {
-          for ( i = sub_7ED1A0(this); i; i = (_DWORD *)sub_7ED3B0(this) )
+          for ( i = BSShaderLightingProperty__GetFirstActiveNonShadowLight((MEF_LightingPropertyIterationView32 *)this); /*0x7c340f*/
+                i;
+                i = BSShaderLightingProperty__GetNextActiveNonShadowLight((MEF_LightingPropertyIterationView32 *)this) )
           {
-            if ( *((_BYTE *)i + 0xF4) )
+            if ( i->perSourceProjectorMode_F4 ) /*0x7c3415*/
             {
-              v16 = FormHeapAlloc(0x10u);
-              a2 = v16;
-              if ( v16 )
-                v17 = sub_7E2370(v16, v9, 0, 0, 1u, (int)i);
+              v16 = (RenderPass_DecodedLayout *)FormHeapAlloc(0x10u); /*0x7c3420*/
+              vtable = v16; /*0x7c3428*/
+              if ( v16 ) /*0x7c3436*/
+                v17 = RenderPass_Construct(v16, v9, 0, 0, 1u, i); /*0x7c3449*/
               else
-                v17 = 0;
-              *(_WORD *)(v17 + 4) = 0x197;
-              v18 = (NiTList_Entry_NiProperty *)(*((int (__thiscall **)(NiTList_NiProperty *))this->member.passes.vtlb
+                v17 = 0; /*0x7c344d*/
+              v17->selector_04 = 0x197; /*0x7c344f*/
+              v18 = (NiTList_Entry_NiProperty *)(*((int (__thiscall **)(NiTList_NiProperty *))this->member.passes.vtlb /*0x7c3464*/
                                                  + 1))(&this->member.passes);
-              v18->data = (NiProperty *)v17;
-              v18->prev = 0;
-              v18->next = this->member.passes.start;
-              start = this->member.passes.start;
-              if ( start )
-                start->prev = v18;
+              v18->data = (NiProperty *)v17; /*0x7c3466*/
+              v18->prev = 0; /*0x7c3469*/
+              v18->next = this->member.passes.start; /*0x7c3473*/
+              start = this->member.passes.start; /*0x7c3475*/
+              if ( start ) /*0x7c347a*/
+                start->prev = v18; /*0x7c347c*/
               else
-                this->member.passes.end = v18;
-              ++this->member.passes.numItems;
-              this->member.passes.start = v18;
+                this->member.passes.end = v18; /*0x7c3481*/
+              ++this->member.passes.numItems; /*0x7c3484*/
+              this->member.passes.start = v18; /*0x7c3488*/
             }
           }
         }
-        this->member.lastRenderPassState = a3 | (LOWORD(dword_B42EAC) << 8);
-        return &this->member.passes;
+        this->member.lastRenderPassState = a3 | (*(unsigned __int16 *)&OB_RendererGlobalState_010201A0.pad_00D[6] << 8); /*0x7c34aa*/
+        return &this->member.passes; /*0x7c34aa*/
       }
     }
-    v10 = 0;
-    goto LABEL_20;
+    v10 = 0; /*0x7c33c3*/
+    goto LABEL_20; /*0x7c33c3*/
   }
-  return &this->member.passes;
+  return &this->member.passes; /*0x7c34b0*/
 }

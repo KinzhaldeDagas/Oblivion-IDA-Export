@@ -5,7 +5,6 @@
 0x46F2E7: test    esi, esi
 0x46F2E9: jz      short loc_46F319
 0x46F2EB: jmp     short loc_46F2F0
-0x46F2ED: align 10h
 0x46F2F0: cmp     dword ptr [esi], 0
 0x46F2F3: jz      short loc_46F319
 0x46F2F5: mov     eax, [esi+4]
@@ -16,7 +15,7 @@
 0x46F302: mov     edx, [eax]
 0x46F304: push    eax
 0x46F305: mov     [esi], edx
-0x46F307: call    FormHeapFree
+0x46F307: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x46F30C: add     esp, 4
 0x46F30F: jmp     short loc_46F2F0
 0x46F311: mov     dword ptr [esi], 0
@@ -34,7 +33,7 @@
 0x46F332: mov     edx, [eax]
 0x46F334: push    eax
 0x46F335: mov     [esi], edx
-0x46F337: call    FormHeapFree
+0x46F337: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x46F33C: add     esp, 4
 0x46F33F: jmp     short loc_46F320
 0x46F341: mov     dword ptr [esi], 0

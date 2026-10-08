@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5FCAB0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Per-actor native action state machine. Advances required-note phases, handles AttackBow nock/hold/release lifecycle, constructs ArrowProjectile on release, and dispatches post-shot AMMO consumption.",
     "mnemonic": "push",
     "size": 2
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x5FCB17",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x5FCB1E",
-    "line": "mov     dword ptr [esp+74h+var_28], eax",
+    "line": "mov     [esp+74h+originX], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x5FCB69",
-    "line": "fstp    [esp+74h+arg_0]",
+    "line": "fstp    [esp+74h+arg0]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x5FCB73",
-    "line": "fstp    [esp+74h+arg_4]",
+    "line": "fstp    [esp+74h+arg1]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x5FCB79",
-    "line": "push    ebx",
+    "line": "push    ebx; slotSelector",
     "mnemonic": "push",
     "size": 1
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x5FCB7E",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -415,13 +415,13 @@
   },
   {
     "ea": "0x5FCB92",
-    "line": "mov     [esp+78h+var_58], 0FFFFFFFFh",
+    "line": "mov     [esp+78h+action], 0FFFFFFFFh",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x5FCB9A",
-    "line": "call    sub_4706E0",
+    "line": "call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x5FCBB5",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x5FCBD2",
-    "line": "jz      loc_5FD8B3",
+    "line": "jz      Actor_ProcessAction_PostSequenceGuardTail",
     "mnemonic": "jz",
     "size": 6
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x5FCBE8",
-    "line": "jz      loc_5FD8B3",
+    "line": "jz      Actor_ProcessAction_PostSequenceGuardTail",
     "mnemonic": "jz",
     "size": 6
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x5FCBF0",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -625,7 +625,7 @@
   },
   {
     "ea": "0x5FCC15",
-    "line": "call    TESAnimGroup_GetAnimationGroup",
+    "line": "call    TESAnimGroup_GetAnimationGroup; TESAnimGroup native group id accessor: byte at TESAnimGroup +0x08.",
     "mnemonic": "call",
     "size": 5
   },
@@ -667,19 +667,19 @@
   },
   {
     "ea": "0x5FCC36",
-    "line": "mov     ecx, [esp+74h+var_60]",
+    "line": "mov     ecx, [esp+74h+var_60]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5FCC3A",
-    "line": "push    3",
+    "line": "push    3; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FCC3C",
-    "line": "call    ActorAnimData_GetSomethingFromField8Value",
+    "line": "call    ActorAnimData_GetSlotActionState; Native action-2 slot-3 hit gate: normalized slot state must equal 1. For Starshooting's AttackLeft/AttackRight (note-template class 4), state 1 specifically means the Hit threshold has been crossed; class 5 uses Hit and class 6 uses Attack at the analogous phase.",
     "mnemonic": "call",
     "size": 5
   },
@@ -697,19 +697,19 @@
   },
   {
     "ea": "0x5FCC4A",
-    "line": "mov     ecx, [esp+74h+var_60]",
+    "line": "mov     ecx, [esp+74h+var_60]; Slot-3 attack-hit dispatch begins here by reading the active animation key. The descriptor's noteTemplateClass at +0x0C then selects class 4 regular attack (0x5FCDDE), class 5 power attack (0x5FCD49), or class 6 BlockAttack (0x5FCC83). Starshooting AttackLeft/AttackRight are class 4. The throwing bridge intercepts here and suppresses the native class-4 resolver only after its projectile transaction succeeds.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5FCC4E",
-    "line": "push    3",
+    "line": "push    3; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FCC50",
-    "line": "call    ActorAnimData_GetAnimGroupFromField8Value",
+    "line": "call    ActorAnimData_GetAnimGroupFromField8Value; Uses the slot-3 active group to distinguish the native attack path before nock/release processing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x5FCC56",
-    "line": "call    sub_51AA00",
+    "line": "call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -733,7 +733,7 @@
   },
   {
     "ea": "0x5FCC5E",
-    "line": "mov     eax, ds:0B102ECh[ecx*4]",
+    "line": "mov     eax, ds:0B102ECh[ecx*4]; Loads AnimGroupInfo.noteTemplateClass (+0x0C) for the active slot-3 group: 4 => regular AttackLeft/AttackRight hit resolver, 5 => power-attack resolver, 6 => BlockAttack resolver.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -751,7 +751,7 @@
   },
   {
     "ea": "0x5FCC6B",
-    "line": "jz      Actor_ProcessAction___Attack_CastEnchantment?",
+    "line": "jz      Actor_ProcessAction_Class4RegularAttackHit",
     "mnemonic": "jz",
     "size": 6
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x5FCC74",
-    "line": "jz      loc_5FCD49",
+    "line": "jz      Actor_ProcessAction_Class5PowerAttackHit",
     "mnemonic": "jz",
     "size": 6
   },
@@ -781,7 +781,7 @@
   },
   {
     "ea": "0x5FCC83",
-    "line": "mov     edx, [esi]",
+    "line": "mov     edx, [esi]; Native note-template class 6 BlockAttack hit resolver. This is the branch that computes close reach, calls CombatController_FindActorWithinReach, and applies block/disarm/knockdown-related effects; it is distinct from class-4 AttackLeft/AttackRight.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -805,13 +805,13 @@
   },
   {
     "ea": "0x5FCC8F",
-    "line": "fstp    [esp+74h+var_28+4]",
+    "line": "fstp    qword ptr [esp+74h+originX+4]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x5FCC93",
-    "line": "mov     ecx, offset fCombatDistance",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+248h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -829,7 +829,7 @@
   },
   {
     "ea": "0x5FCC9F",
-    "line": "fmul    [esp+74h+var_28+4]",
+    "line": "fmul    qword ptr [esp+74h+originX+4]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x5FCCB0",
-    "line": "call    GetActorWithinReach??",
+    "line": "call    CombatController_FindActorWithinReach",
     "mnemonic": "call",
     "size": 5
   },
@@ -907,7 +907,7 @@
   },
   {
     "ea": "0x5FCCC1",
-    "line": "call    sub_5FC2B0",
+    "line": "call    Actor_AttemptBlockDisarmPerkOnHit; ODismemberment combat decode: block-side disarm perk attempt. Uses block/weapon skill mastery and iPerkBlockDisarmChance to make the blocker disarm the attacker.",
     "mnemonic": "call",
     "size": 5
   },
@@ -919,7 +919,7 @@
   },
   {
     "ea": "0x5FCCC8",
-    "line": "call    sub_5F4FD0",
+    "line": "call    Actor_PlayKnockdownAnimGroup",
     "mnemonic": "call",
     "size": 5
   },
@@ -1111,7 +1111,7 @@
   },
   {
     "ea": "0x5FCD27",
-    "line": "call    sub_5E5640",
+    "line": "call    Actor_IsCurrentActionInRange2To5; Process vfunc +0x2D0 in range 2..5 guard used by Player_OnInput jump gate with Acrobatics mastery. Treat as an action/movement lock signal when deciding climb eligibility.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1171,7 +1171,7 @@
   },
   {
     "ea": "0x5FCD49",
-    "line": "cmp     esi, ds:0B333C4h",
+    "line": "cmp     esi, ds:0B333C4h; Native note-template class 5 power-attack hit resolver for AttackPower and directional power attacks. Performs player/AI-specific virtual dispatch, post-hit handling, then advances action state.",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -1297,7 +1297,7 @@
   },
   {
     "ea": "0x5FCD83",
-    "line": "call    sub_5F9620",
+    "line": "call    Actor_ProcessAttackReachProbe; Verified call context: Actor_ProcessAction invokes Actor_ProcessAttackReachProbe with actor in ECX in this non-player attack branch; surrounding action/weapon-state checks gate the call.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1417,7 +1417,7 @@
   },
   {
     "ea": "0x5FCDBC",
-    "line": "call    sub_5E5640",
+    "line": "call    Actor_IsCurrentActionInRange2To5; Process vfunc +0x2D0 in range 2..5 guard used by Player_OnInput jump gate with Acrobatics mastery. Treat as an action/movement lock signal when deciding climb eligibility.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1477,7 +1477,7 @@
   },
   {
     "ea": "0x5FCDDE",
-    "line": "mov     ecx, [esi+58h]",
+    "line": "mov     ecx, [esi+58h]; Native note-template class 4 regular-attack hit resolver used by AttackLeft and AttackRight. It selects process/active-MagicCaster/actor-virtual attack handling, then joins common post-hit processing. Starshooting reuses these groups for throwing, so a successful projectile bridge must bypass this native regular-weapon transaction; this branch is not the class-6 close-reach BlockAttack path.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1759,7 +1759,7 @@
   },
   {
     "ea": "0x5FCE5E",
-    "line": "call    sub_5F9620",
+    "line": "call    Actor_ProcessAttackReachProbe; Verified call context: second Actor_ProcessAction branch invokes Actor_ProcessAttackReachProbe with actor in ECX after corresponding action-state checks.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1885,19 +1885,19 @@
   },
   {
     "ea": "0x5FCE9C",
-    "line": "mov     ecx, [esp+74h+var_60]",
+    "line": "mov     ecx, [esp+74h+var_60]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5FCEA0",
-    "line": "push    1",
+    "line": "push    1; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FCEA2",
-    "line": "call    ActorAnimData_GetSomethingFromField8Value",
+    "line": "call    ActorAnimData_GetSlotActionState; Reads the per-slot action/state dword at ActorAnimData +0x48 + 4*normalizedSlot. Native aliases slot 5 to slot 0 and slot 6 to slot 3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1915,19 +1915,19 @@
   },
   {
     "ea": "0x5FCEB0",
-    "line": "mov     ecx, [esp+74h+var_60]",
+    "line": "mov     ecx, [esp+74h+var_60]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5FCEB4",
-    "line": "push    eax",
+    "line": "push    eax; slot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FCEB5",
-    "line": "call    ActorAnimData_GetAnimGroupFromField8Value",
+    "line": "call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1939,7 +1939,7 @@
   },
   {
     "ea": "0x5FCEBB",
-    "line": "call    sub_51AA00",
+    "line": "call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2047,7 +2047,7 @@
   },
   {
     "ea": "0x5FCEFA",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2101,7 +2101,7 @@
   },
   {
     "ea": "0x5FCF14",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -2113,7 +2113,7 @@
   },
   {
     "ea": "0x5FCF18",
-    "line": "call    Actor_IsSwimming",
+    "line": "call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).",
     "mnemonic": "call",
     "size": 5
   },
@@ -2299,13 +2299,13 @@
   },
   {
     "ea": "0x5FCF7C",
-    "line": "push    3",
+    "line": "push    3; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FCF7E",
-    "line": "call    ActorAnimData_GetSomethingFromField8Value",
+    "line": "call    ActorAnimData_GetSlotActionState; Current action 4 (AttackBow) performs native nock/Attach work only at exact slot-3 state 1, after the Attach note. Hold/state 2 has no separate Actor_ProcessAction branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2353,7 +2353,7 @@
   },
   {
     "ea": "0x5FCF9E",
-    "line": "mov     dword ptr [esp+74h+var_48], 2",
+    "line": "mov     dword ptr [esp+74h+var_48], 2; For PlayerCharacter, run the nock/attach presentation loop twice: the existing animation-data context plus explicit first-person ActorAnimData. Non-player actors run one context.",
     "mnemonic": "mov",
     "size": 8
   },
@@ -2370,14 +2370,8 @@
     "size": 2
   },
   {
-    "ea": "0x5FCFAA",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x5FCFB0",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2407,13 +2401,13 @@
   },
   {
     "ea": "0x5FCFC1",
-    "line": "push    1",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FCFC3",
-    "line": "call    sub_6600D0",
+    "line": "call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2443,7 +2437,7 @@
   },
   {
     "ea": "0x5FCFD4",
-    "line": "mov     ecx, [esi+58h]",
+    "line": "mov     ecx, [esi+58h]; Bow current-action 4, gated by action-slot state 1: obtain quiver node and held-arrow target node through process virtuals for each applicable perspective.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -2455,7 +2449,7 @@
   },
   {
     "ea": "0x5FCFD9",
-    "line": "mov     eax, [edx+128h]",
+    "line": "mov     eax, [edx+128h]; Indirect call through process vtable +0x128 = GetArrowCloneSourceNode. Resolves Quiver; Actor_ProcessAction finds Arrow:0 beneath it.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2491,7 +2485,7 @@
   },
   {
     "ea": "0x5FCFE9",
-    "line": "mov     eax, [edx+12Ch]",
+    "line": "mov     eax, [edx+12Ch]; Indirect call through process vtable +0x12C = GetArrowAttachTargetNode. Resolves perspective-correct ArrowBone; the Arrow:0 clone is attached here.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2551,7 +2545,7 @@
   },
   {
     "ea": "0x5FD009",
-    "line": "push    offset aArrow0; \"Arrow:0\"",
+    "line": "push    offset aArrow0; Native bow nock handoff: find 'Arrow:0' on Quiver, clone it, and attach the clone to the held-arrow target node. Player inventory count then hides the corresponding ArrowN quiver mesh.",
     "mnemonic": "push",
     "size": 5
   },
@@ -2611,13 +2605,13 @@
   },
   {
     "ea": "0x5FD02A",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; Clone Quiver child 'Arrow:0' as a distinct transient NiObject. This clone, not an equipped WEAP node, becomes the held projectile presentation.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FD02C",
-    "line": "call    sub_700900",
+    "line": "call    NiObject_CloneWithPointerMap; Native bow nock: clone Arrow:0 from the Quiver source. The equipped WEAP slot is not transferred into this held visual.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2641,7 +2635,7 @@
   },
   {
     "ea": "0x5FD037",
-    "line": "mov     eax, [edx+84h]",
+    "line": "mov     eax, [edx+84h]; Directly attach the transient Quiver Arrow:0 clone to the perspective-correct ArrowBone via NiNode vslot +0x84 = NiNode::AddObject(child, firstAvailableSlot=1). Prn is not involved; ArrowBone's child array becomes the persistent owner and no separate clone pointer is stored.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2671,7 +2665,7 @@
   },
   {
     "ea": "0x5FD04D",
-    "line": "call    GetGodMode",
+    "line": "call    GetGodMode; Returns g_godModeEnabled (0x00B3BB06).",
     "mnemonic": "call",
     "size": 5
   },
@@ -2725,25 +2719,25 @@
   },
   {
     "ea": "0x5FD06C",
-    "line": "push    eax",
+    "line": "push    eax; item",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FD06D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FD06F",
-    "line": "call    TESObjectREF_GetItemCount",
+    "line": "call    TESObjectREFR_GetItemCount; TESObjectREFR inventory count accessor: returns 0 when the reference has no container or no ContainerChanges; otherwise asks ContainerExtraData_GetItemCount(this, item), which combines base TESContainer count with EntryData.countDelta. Exact ABI is thiscall (TESObjectREFR *this, TESForm *item).",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5FD074",
-    "line": "cmp     eax, 1",
+    "line": "cmp     eax, 1; Player-only nongod-mode quiver visualization: inspect AMMO inventory count after attaching the held clone. Count 1 selects source Arrow:0 for hiding.",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -2773,7 +2767,7 @@
   },
   {
     "ea": "0x5FD07F",
-    "line": "cmp     eax, ds:0B35588h",
+    "line": "cmp     eax, ds:0B35588h; If inventory count is <= iMaxArrowsInQuiver, select Quiver child name Arrow(count-1); counts above the display cap do not hide an individual mesh here.",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -2791,7 +2785,7 @@
   },
   {
     "ea": "0x5FD089",
-    "line": "mov     dword ptr [esp+74h+var_28+4], ebx",
+    "line": "mov     [esp+74h+originX+4], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2821,7 +2815,7 @@
   },
   {
     "ea": "0x5FD09B",
-    "line": "lea     ecx, [esp+78h+var_28+4]",
+    "line": "lea     ecx, [esp+78h+originX+4]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2857,7 +2851,7 @@
   },
   {
     "ea": "0x5FD0B0",
-    "line": "mov     eax, dword ptr [esp+80h+var_28+4]",
+    "line": "mov     eax, [esp+80h+originX+4]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2893,7 +2887,7 @@
   },
   {
     "ea": "0x5FD0BF",
-    "line": "lea     ecx, [esp+74h+var_28+4]; void *",
+    "line": "lea     ecx, [esp+74h+originX+4]; void *",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2929,7 +2923,7 @@
   },
   {
     "ea": "0x5FD0D6",
-    "line": "or      word ptr [edi+18h], 1",
+    "line": "or      word ptr [edi+18h], 1; Set bit 0 at selected quiver child's flags +0x18, visually hiding one quiver arrow to reflect the nocked item. This does not decrement inventory.",
     "mnemonic": "or",
     "size": 5
   },
@@ -2971,25 +2965,25 @@
   },
   {
     "ea": "0x5FD0F3",
-    "line": "push    eax",
+    "line": "push    eax; sequence",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FD0F4",
-    "line": "push    5",
+    "line": "push    5; action",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FD0F6",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FD0F8",
-    "line": "call    HighPRocess_DoAction?????",
+    "line": "call    Actor_SetCurrentActionWithBowVisualCleanup; After cloning Quiver Arrow:0 into ArrowBone, request action 4 -> 5 (AttackBowArrowAttached). This Attach boundary establishes the native held/cocked visual state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3013,13 +3007,13 @@
   },
   {
     "ea": "0x5FD10A",
-    "line": "push    3",
+    "line": "push    3; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FD10C",
-    "line": "call    ActorAnimData_GetSomethingFromField8Value",
+    "line": "call    ActorAnimData_GetSlotActionState; Current action 5 (AttackBowArrowAttached) executes native Release only at exact slot-3 state 3, after the Release note. Hold/state 2 and End/state 4 have no release branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3037,7 +3031,7 @@
   },
   {
     "ea": "0x5FD11A",
-    "line": "mov     ecx, ds:0B3F9ACh",
+    "line": "mov     ecx, ds:0B3F9ACh; Initialize the native AttackBow Release projectile origin from g_zeroNiPoint3. This BSS NiPoint3 has no write xrefs and supplies (0,0,0); a later successful ArrowBone child-0 lookup must replace it with the held clone's world translation.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -3126,14 +3120,8 @@
     "size": 2
   },
   {
-    "ea": "0x5FD15D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x5FD160",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -3163,13 +3151,13 @@
   },
   {
     "ea": "0x5FD171",
-    "line": "push    1",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FD173",
-    "line": "call    sub_6600D0",
+    "line": "call    Actor_GetSkinInfoByPerspective; On the second player perspective pass, replace the default ActorSkinInfo with PlayerCharacter+0x5C8 first-person skin info. The following process vtable +0x12C call uses this skin context to select the corresponding ArrowBone cache; this is not ActorAnimData.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3265,19 +3253,19 @@
   },
   {
     "ea": "0x5FD1A4",
-    "line": "push    0",
+    "line": "push    0; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FD1A6",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FD1A8",
-    "line": "call    sub_405790",
+    "line": "call    NiNode_GetChildAtIndex; Get ArrowBone child 0 before cleanup. The child is the held Arrow:0 clone attached at the Attach note.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3307,7 +3295,7 @@
   },
   {
     "ea": "0x5FD1B9",
-    "line": "mov     edx, [eax+74h]",
+    "line": "mov     edx, [eax+74h]; Held Arrow:0 child virtual +0x74 resolves to NiAVObject_UpdateWorldTransform. This is the actual local-to-world conversion performed immediately before sampling release origin.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -3325,7 +3313,7 @@
   },
   {
     "ea": "0x5FD1C0",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; Invoke held clone virtual +0x74 before reading its world transform; ensures the sampled transform is current.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -3343,7 +3331,7 @@
   },
   {
     "ea": "0x5FD1CA",
-    "line": "push    1",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
@@ -3355,7 +3343,7 @@
   },
   {
     "ea": "0x5FD1CE",
-    "line": "call    PlayerCharacter_GetPlayerNode",
+    "line": "call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3373,19 +3361,19 @@
   },
   {
     "ea": "0x5FD1D7",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x5FD1DD",
-    "line": "push    1",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FD1DF",
-    "line": "call    PlayerCharacter_GetPlayerNode",
+    "line": "call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3469,13 +3457,13 @@
   },
   {
     "ea": "0x5FD204",
-    "line": "mov     eax, [edi+88h]",
+    "line": "mov     eax, [edi+88h]; Read held child world translation X/Y/Z at +0x88/+0x8C/+0x90 after virtual +0x74 updated its world transform. Only these three position floats become projectile origin; child rotation and scale are not passed. External Crossbow contrast: a custom attachment topology without ArrowBone child 0 cannot supply this native origin.",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x5FD20A",
-    "line": "mov     ecx, [edi+8Ch]",
+    "line": "mov     ecx, [edi+8Ch]; Select release origin from the visible player perspective: if the first-person player root is app-culled, sample third-person; otherwise sample first-person. Non-player actors sample their sole active context.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -3523,31 +3511,31 @@
   },
   {
     "ea": "0x5FD22C",
-    "line": "push    ebp",
+    "line": "push    ebp; object",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FD22D",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FD22F",
-    "line": "call    sub_7C5E70",
+    "line": "call    ShadowSceneNode_RemoveObjectReceivers; Remove ArrowBone subtree geometry from shadow receiver lists only; this call does not detach the held clone.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5FD234",
-    "line": "lea     ecx, [ebp+0ACh]",
+    "line": "lea     ecx, [ebp+0ACh]; this",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x5FD23A",
-    "line": "call    sub_477EF0",
+    "line": "call    NiTObjectArray_ClearAndRelease; Normal AttackBow Release visual boundary: after optionally sampling ArrowBone child-0 world translation, clear/release every child in ArrowBone's NiTArray at +0xAC. Both available player perspective targets are cleared; visibility controls only which perspective supplies origin. A missing target or child 0 skips this pass. 0x5F0182 is defensive transition cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3589,7 +3577,7 @@
   },
   {
     "ea": "0x5FD258",
-    "line": "call    edx",
+    "line": "call    edx; Actor vtable +0x1E0 returns float launch yawZ: base Actor/MobileObject uses rotation.z; Player override adds PlayerCharacter+0x61C and single-wraps by 2*pi. Stored directly as one dword.",
     "mnemonic": "call",
     "size": 2
   },
@@ -3601,13 +3589,13 @@
   },
   {
     "ea": "0x5FD25E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FD260",
-    "line": "call    sub_4A9720",
+    "line": "call    Actor_GetAimPitch; Returns Actor rotation X as the native aim-pitch value used by projectile launch, impact, input, dialogue-camera, and magic-projectile paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3649,13 +3637,13 @@
   },
   {
     "ea": "0x5FD278",
-    "line": "fld     dword ptr [eax+640h]",
+    "line": "fld     dword ptr [eax+640h]; Player draw strength input: PlayerCharacter+0x640 * fArrowBowTimerMult (setting storage 0xB37088) + fArrowBowTimerBase (0xB37080). NPC attackStrength remains 1.0.",
     "mnemonic": "fld",
     "size": 6
   },
   {
     "ea": "0x5FD27E",
-    "line": "mov     ecx, offset fArrowBowTimerMult",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+3B0h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -3679,7 +3667,7 @@
   },
   {
     "ea": "0x5FD290",
-    "line": "mov     ecx, offset fArrowBowTimerBase",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+3A8h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -3691,7 +3679,7 @@
   },
   {
     "ea": "0x5FD297",
-    "line": "fstp    [esp+74h+var_28+4]",
+    "line": "fstp    qword ptr [esp+74h+originX+4]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -3715,7 +3703,7 @@
   },
   {
     "ea": "0x5FD2A5",
-    "line": "fadd    [esp+7Ch+var_28+4]",
+    "line": "fadd    qword ptr [esp+7Ch+originX+4]",
     "mnemonic": "fadd",
     "size": 4
   },
@@ -3733,7 +3721,7 @@
   },
   {
     "ea": "0x5FD2B1",
-    "line": "fstp    [esp+7Ch+duration]",
+    "line": "fstp    [esp+7Ch+duration]; b",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -3745,13 +3733,13 @@
   },
   {
     "ea": "0x5FD2B7",
-    "line": "fstp    [esp+7Ch+var_7C]",
+    "line": "fstp    [esp+7Ch+a]; a",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5FD2BA",
-    "line": "call    sub_4AC760",
+    "line": "call    Float_Min; Clamp native player attackStrength to min(1.0, timer*multiplier+base) using Float_Min; NPC remains 1.0. The value is passed to ArrowProjectile_ConstructFromShot. External bridge contrast: supplying a hardcoded 1.0 forces full native strength and bypasses player draw-time scaling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3859,7 +3847,7 @@
   },
   {
     "ea": "0x5FD2F0",
-    "line": "jz      loc_5FD53E",
+    "line": "jz      loc_5FD53E; Missing equipped AMMO EntryData: skip projectile construction/insertion and the entire native post-shot side-effect tail, then still proceed to the requested action 5->3 boundary.",
     "mnemonic": "jz",
     "size": 6
   },
@@ -3871,13 +3859,13 @@
   },
   {
     "ea": "0x5FD2F8",
-    "line": "jz      loc_5FD53E",
+    "line": "jz      loc_5FD53E; Missing equipped WEAP EntryData: skip projectile construction/insertion and the entire native post-shot side-effect tail, then still request action 5->3.",
     "mnemonic": "jz",
     "size": 6
   },
   {
     "ea": "0x5FD2FE",
-    "line": "mov     ecx, [ebp+8]",
+    "line": "mov     ecx, [ebp+8]; Begin quest-item check on equipped AMMO instance data. Quest-item ammo is not fired by this path.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -3907,7 +3895,7 @@
   },
   {
     "ea": "0x5FD30A",
-    "line": "jnz     loc_5FD53E",
+    "line": "jnz     loc_5FD53E; Quest-item AMMO gate: skip constructor, manager insertion, ammo virtual, fatigue, INVI purge, and condition damage; still fall through to the action 5->3 request.",
     "mnemonic": "jnz",
     "size": 6
   },
@@ -4057,7 +4045,7 @@
   },
   {
     "ea": "0x5FD35A",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -4117,7 +4105,7 @@
   },
   {
     "ea": "0x5FD374",
-    "line": "mov     ecx, offset flt_B37040",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+368h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -4153,13 +4141,13 @@
   },
   {
     "ea": "0x5FD389",
-    "line": "fstp    dword ptr [esp+78h+var_28+4]",
+    "line": "fstp    [esp+78h+originX+4]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x5FD38D",
-    "line": "call    sub_608280",
+    "line": "call    Actor_CalculateArrowGravity; NPC bow path calculates gravity compensation and may predict an aim point from combat target motion before projectile construction.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4225,19 +4213,19 @@
   },
   {
     "ea": "0x5FD3B3",
-    "line": "fstp    [esp+80h+var_7C]",
+    "line": "fstp    [esp+80h+a]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x5FD3B7",
-    "line": "fld     dword ptr [esp+80h+var_28+4]",
+    "line": "fld     [esp+80h+originX+4]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x5FD3BB",
-    "line": "fstp    [esp+80h+var_80]",
+    "line": "fstp    [esp+80h+attackStrength]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -4279,13 +4267,13 @@
   },
   {
     "ea": "0x5FD3D0",
-    "line": "lea     edx, [esp+90h+var_28+4]",
+    "line": "lea     edx, [esp+90h+originX+4]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5FD3D4",
-    "line": "push    edx",
+    "line": "push    edx; originX",
     "mnemonic": "push",
     "size": 1
   },
@@ -4297,13 +4285,13 @@
   },
   {
     "ea": "0x5FD3D8",
-    "line": "call    sub_6159C0",
+    "line": "call    Combat_PredictAimPoint_Setup",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5FD3DD",
-    "line": "fld     dword ptr [esp+94h+var_28+4]",
+    "line": "fld     [esp+94h+originX+4]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -4339,13 +4327,13 @@
   },
   {
     "ea": "0x5FD3F4",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FD3F6",
-    "line": "call    Actor_IsSwimming",
+    "line": "call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).",
     "mnemonic": "call",
     "size": 5
   },
@@ -4381,7 +4369,7 @@
   },
   {
     "ea": "0x5FD40D",
-    "line": "mov     eax, ds:0B333C4h",
+    "line": "mov     eax, ds:0B333C4h; Player-only byte +0x5C0 gates the native shot transaction. Its behavior is proven here but its semantic identity remains unnamed.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -4405,7 +4393,7 @@
   },
   {
     "ea": "0x5FD41D",
-    "line": "jnz     loc_5FD53E",
+    "line": "jnz     loc_5FD53E; When PlayerCharacter+0x5C0 is nonzero, skip constructor/insertion and all post-shot side effects, but still request action 5->3.",
     "mnemonic": "jnz",
     "size": 6
   },
@@ -4429,7 +4417,7 @@
   },
   {
     "ea": "0x5FD430",
-    "line": "mov     dword ptr [esp+74h+var_28+4], eax",
+    "line": "mov     [esp+74h+originX+4], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4447,7 +4435,7 @@
   },
   {
     "ea": "0x5FD43E",
-    "line": "jz      short loc_5FD483",
+    "line": "jz      short loc_5FD483; Outer 0x9C ArrowProjectile allocation failed. No constructor or manager insertion occurs, but control still joins the native post-shot tail, so ammo/fatigue/INVI/condition/action side effects can still run.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -4465,13 +4453,13 @@
   },
   {
     "ea": "0x5FD448",
-    "line": "push    edi",
+    "line": "push    edi; weaponEntry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FD449",
-    "line": "push    ebp",
+    "line": "push    ebp; ammoEntry",
     "mnemonic": "push",
     "size": 1
   },
@@ -4483,7 +4471,7 @@
   },
   {
     "ea": "0x5FD44D",
-    "line": "fstp    [esp+94h+var_80]",
+    "line": "fstp    [esp+94h+attackStrength]; attackStrength",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -4501,7 +4489,7 @@
   },
   {
     "ea": "0x5FD457",
-    "line": "fstp    [esp+94h+var_84]",
+    "line": "fstp    [esp+94h+pitchX]; pitchX",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -4513,7 +4501,7 @@
   },
   {
     "ea": "0x5FD45F",
-    "line": "fstp    [esp+94h+var_88]",
+    "line": "fstp    [esp+94h+yawZ]; yawZ",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -4549,19 +4537,19 @@
   },
   {
     "ea": "0x5FD479",
-    "line": "push    esi",
+    "line": "push    esi; shooter",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FD47A",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FD47C",
-    "line": "call    sub_60C940",
+    "line": "call    ArrowProjectile_ConstructFromShot; Construct an independent ArrowProjectile from equipped AMMO and WEAP data after held-arrow visual removal. Native ArrowProjectile_ConstructFromShot returns placement this on normal completion and has no recoverable null-return branch; the caller's null path meaningfully covers outer allocation failure or a replacement hook.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4579,7 +4567,7 @@
   },
   {
     "ea": "0x5FD485",
-    "line": "test    eax, eax",
+    "line": "test    eax, eax; Native projectile construction result gate. Non-null proceeds to generic level-0 ActorProcessManager insertion; null skips insertion but still reaches the post-shot virtual at 0x5FD4AE.",
     "mnemonic": "test",
     "size": 2
   },
@@ -4597,49 +4585,49 @@
   },
   {
     "ea": "0x5FD491",
-    "line": "push    0",
+    "line": "push    0; relativeTo",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FD493",
-    "line": "push    0",
+    "line": "push    0; insertRelative",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FD495",
-    "line": "push    0",
+    "line": "push    0; append",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FD497",
-    "line": "push    0",
+    "line": "push    0; processLevel",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FD499",
-    "line": "push    eax",
+    "line": "push    eax; object",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FD49A",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x5FD49F",
-    "line": "call    sub_673A90",
+    "line": "call    ActorProcessManager_AddMobileObject; Attempts generic level-0 insertion of the non-null projectile into the inline ActorProcessManager at 0x00B3BD00. The callee returns void and can silently reject a process-level mismatch, so this call establishes no success predicate.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5FD4A4",
-    "line": "mov     edx, [esi]",
+    "line": "mov     edx, [esi]; Post-shot join is reached after either a nonnull projectile insertion attempt or a null constructor/allocation result. Everything through the final action 5->3 transition below is therefore not a projectile-success predicate.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -4657,25 +4645,25 @@
   },
   {
     "ea": "0x5FD4AE",
-    "line": "call    eax",
+    "line": "call    eax; Always-invoked native post-shot virtual after the construction/insertion branch. Base Actor target is no-op 0x0060D0A0; PlayerCharacter override 0x00662590 consumes one equipped AMMO item. Native ordering is construct -> optional insertion attempt -> post-shot virtual, not 'consume only after confirmed insertion'.",
     "mnemonic": "call",
     "size": 2
   },
   {
     "ea": "0x5FD4B0",
-    "line": "push    1Ch",
+    "line": "push    1Ch; actorValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FD4B2",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FD4B4",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4693,7 +4681,7 @@
   },
   {
     "ea": "0x5FD4BD",
-    "line": "mov     ecx, offset unk_B37020",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+348h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -4723,19 +4711,19 @@
   },
   {
     "ea": "0x5FD4CC",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FD4CE",
-    "line": "fstp    [esp+78h+duration]",
+    "line": "fstp    [esp+78h+duration]; delta",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5FD4D1",
-    "line": "call    Actor_ModFatigue?",
+    "line": "call    Actor_ApplyNegativeFatigueDeltaClamped; Only Marksman mastery 0 (novice) pays fMarksmanFatigueBurnPerShot here; the setting is negated and clamped by Actor_ApplyNegativeFatigueDeltaClamped.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4783,25 +4771,25 @@
   },
   {
     "ea": "0x5FD4E8",
-    "line": "push    0",
+    "line": "push    0; casterFilterOrNull",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FD4EA",
-    "line": "push    49564E49h",
+    "line": "push    49564E49h; effectCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5FD4EF",
-    "line": "lea     ecx, [esi+68h]",
+    "line": "lea     ecx, [esi+68h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x5FD4F2",
-    "line": "call    sub_6A24B0",
+    "line": "call    MagicTarget_RemoveActiveEffectsByCode; If Invisibility AV 0x2F is positive, remove all nonterminated 'INVI' active effects from any caster. Ordinary attack startup already performs the same purge at 0x5F49FA; release repeats the check.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4843,7 +4831,7 @@
   },
   {
     "ea": "0x5FD50F",
-    "line": "mov     dword ptr [esp+74h+var_28+4], ecx",
+    "line": "mov     [esp+74h+originX+4], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4855,19 +4843,19 @@
   },
   {
     "ea": "0x5FD514",
-    "line": "fild    dword ptr [esp+78h+var_28+4]",
+    "line": "fild    [esp+78h+originX+4]",
     "mnemonic": "fild",
     "size": 4
   },
   {
     "ea": "0x5FD518",
-    "line": "fstp    [esp+78h+duration]",
+    "line": "fstp    [esp+78h+duration]; baseAttackDamage",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5FD51B",
-    "line": "call    Calc_DamageToWeapon",
+    "line": "call    Calc_WeaponConditionDamagePerShot; Convert WEAP UInt16 attack damage to per-shot condition damage using fDamageToWeaponPercentage.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4879,13 +4867,13 @@
   },
   {
     "ea": "0x5FD522",
-    "line": "fstp    dword ptr [esp+78h+var_28+4]",
+    "line": "fstp    [esp+78h+originX+4]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x5FD526",
-    "line": "fld     dword ptr [esp+78h+var_28+4]",
+    "line": "fld     [esp+78h+originX+4]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -4915,7 +4903,7 @@
   },
   {
     "ea": "0x5FD536",
-    "line": "fstp    [esp+7Ch+var_7C]",
+    "line": "fstp    [esp+7Ch+a]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -4933,13 +4921,13 @@
   },
   {
     "ea": "0x5FD53C",
-    "line": "call    eax",
+    "line": "call    eax; Actor vtable +0x2C4 applies condition damage to the weapon EntryData. Base target 0x5F3870 may break/unequip at zero; Player override 0x65FF10 suppresses mutation in god mode.",
     "mnemonic": "call",
     "size": 2
   },
   {
     "ea": "0x5FD53E",
-    "line": "mov     ecx, [esi+58h]",
+    "line": "mov     ecx, [esi+58h]; Action-only join. Preconditions that reject the shot arrive here without construction, insertion, ammo consumption, fatigue, INVI purge, or weapon-condition damage; native code still requests action 5->3 if a process exists.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -4963,25 +4951,25 @@
   },
   {
     "ea": "0x5FD54B",
-    "line": "push    eax",
+    "line": "push    eax; sequence",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FD54C",
-    "line": "push    3",
+    "line": "push    3; action",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FD54E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FD550",
-    "line": "call    HighPRocess_DoAction?????",
+    "line": "call    Actor_SetCurrentActionWithBowVisualCleanup; After the complete native Release tail, retain slot-3 sequence and request action 5 -> 3 (AttackFollowThrough). This runs even when projectile allocation was null or manager insertion silently rejected, so observing 5->3 proves an action boundary, not projectile success.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4993,7 +4981,7 @@
   },
   {
     "ea": "0x5FD559",
-    "line": "jmp     Actor_ProcessAction___Actor_UpdateAnim?_DefaultAction; jumptable 005FCBFE default case, cases 3,6-8",
+    "line": "jmp     Actor_ProcessAction___Actor_UpdateAnim?_DefaultAction; Action 3 is handled by Actor_ProcessAction's default update path; there is no dedicated follow-through case that starts another bow group or clears the process action.",
     "mnemonic": "jmp",
     "size": 5
   },
@@ -5035,7 +5023,7 @@
   },
   {
     "ea": "0x5FD570",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5071,19 +5059,19 @@
   },
   {
     "ea": "0x5FD584",
-    "line": "mov     ecx, [esp+74h+var_60]",
+    "line": "mov     ecx, [esp+74h+var_60]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5FD588",
-    "line": "push    3",
+    "line": "push    3; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FD58A",
-    "line": "call    ActorAnimData_GetSomethingFromField8Value",
+    "line": "call    ActorAnimData_GetSlotActionState; Reads the per-slot action/state dword at ActorAnimData +0x48 + 4*normalizedSlot. Native aliases slot 5 to slot 0 and slot 6 to slot 3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5161,7 +5149,7 @@
   },
   {
     "ea": "0x5FD5BF",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5245,25 +5233,25 @@
   },
   {
     "ea": "0x5FD5E4",
-    "line": "push    ebp; a2",
+    "line": "push    ebp; firstPerson",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FD5E5",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5FD5EA",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x5FD5F0",
-    "line": "push    ebp",
+    "line": "push    ebp; firstPerson",
     "mnemonic": "push",
     "size": 1
   },
@@ -5275,7 +5263,7 @@
   },
   {
     "ea": "0x5FD5F3",
-    "line": "call    sub_6600D0",
+    "line": "call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5335,7 +5323,7 @@
   },
   {
     "ea": "0x5FD610",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5533,25 +5521,25 @@
   },
   {
     "ea": "0x5FD672",
-    "line": "push    eax",
+    "line": "push    eax; effectShader",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FD673",
-    "line": "push    esi",
+    "line": "push    esi; targetReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FD674",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x5FD679",
-    "line": "call    sub_679240",
+    "line": "call    ActorProcessManager_FindWeaponEnchantmentShader; Verified (Oblivion): walks the temp-effect RTTI chain to NiRTTI_MagicShaderHitEffect, then filters by targetReference, bWeaponEnchantment_28, bFinished and TESEffectShader pointer. It keeps one match and marks duplicate/different-shader entries finished. Fallout's analogous ProcessLists routine uses a distinct NiShader collection; Oblivion uses ActorProcessManager::extendedTempEffects.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5827,13 +5815,13 @@
   },
   {
     "ea": "0x5FD701",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FD703",
-    "line": "call    sub_484DF0",
+    "line": "call    EquippedEntryData_GetPoison; Return the AlchemyItem poison attached to this EntryData's first ExtraDataList stack, or NULL. EntryData layout is extendData@+0, countDelta@+4, type@+8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6007,7 +5995,7 @@
   },
   {
     "ea": "0x5FD764",
-    "line": "call    sub_65A970",
+    "line": "call    TESObjectREFR_PlayResolvedAnimSoundNote; Reference animation sound-note playback. Resolves a Sound: note token through SoundMap_ResolveAnimSoundNote, plays it, positions it on the reference when requested, and applies volume/loop flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6049,7 +6037,7 @@
   },
   {
     "ea": "0x5FD777",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6133,7 +6121,7 @@
   },
   {
     "ea": "0x5FD7A0",
-    "line": "mov     ecx, dword ptr [esp+74h+var_28]",
+    "line": "mov     ecx, [esp+74h+originX]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6145,7 +6133,7 @@
   },
   {
     "ea": "0x5FD7AA",
-    "line": "call    sub_88D370",
+    "line": "call    hkCharacterContext_GetStateId; hkCharacterContext state id accessor used by controller update; proxy+0x1E0 context stores current state id at +0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6205,7 +6193,7 @@
   },
   {
     "ea": "0x5FD7C9",
-    "line": "call    TESAnimGroup_GetAnimationGroup",
+    "line": "call    TESAnimGroup_GetAnimationGroup; TESAnimGroup native group id accessor: byte at TESAnimGroup +0x08.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6223,25 +6211,25 @@
   },
   {
     "ea": "0x5FD7D3",
-    "line": "push    0",
+    "line": "push    0; sequence",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FD7D5",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; action",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FD7D7",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FD7D9",
-    "line": "call    HighPRocess_DoAction?????",
+    "line": "call    Actor_SetCurrentActionWithBowVisualCleanup; Void Actor action-transition wrapper. Performs transition-specific bow/held-arrow visual cleanup, then commits action and sequence through process vtable +0x2D8. It has no success/result contract; callers/plugins must not consume EAX, so Crossbow's UInt32 HighProcessDoActionFn typedef is incorrect. Meaningful current-action state is HighProcess-only: HighProcess +0x2D0/+0x2D8 read/store +0x1F4/+0x1F8, while MiddleHigh returns None (-1) and its setter is a no-op; Crossbow's process-level-0 action filter therefore matches Oblivion. External Crossbow state-machine contrast: Equip-as-Cocked/first-shot-loaded is plugin policy, repeated action 4 while Reloading can flip state to Cocked and rebuild controller tracking, and interruption/cancellation actions are not modeled, leaving stale Reloading/Cocked phases.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6271,7 +6259,7 @@
   },
   {
     "ea": "0x5FD7EA",
-    "line": "mov     edi, [esp+74h+var_58]",
+    "line": "mov     edi, [esp+74h+action]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6313,7 +6301,7 @@
   },
   {
     "ea": "0x5FD803",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6445,13 +6433,13 @@
   },
   {
     "ea": "0x5FD844",
-    "line": "call    eax",
+    "line": "call    eax; Repeated action award: AV resolved by Actor vfunc +0x21C, useValue0, identity scale (0.0); 0x48 sentinel is rejected.",
     "mnemonic": "call",
     "size": 2
   },
   {
     "ea": "0x5FD846",
-    "line": "mov     edi, [esp+74h+var_58]",
+    "line": "mov     edi, [esp+74h+action]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6595,7 +6583,7 @@
   },
   {
     "ea": "0x5FD896",
-    "line": "call    TESAnimGroup_GetAnimationGroup",
+    "line": "call    TESAnimGroup_GetAnimationGroup; TESAnimGroup native group id accessor: byte at TESAnimGroup +0x08.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6619,7 +6607,7 @@
   },
   {
     "ea": "0x5FD8A5",
-    "line": "call    sub_5E3590",
+    "line": "call    sub_5E3590; Walk-speed branch used by sub_5E65B0 when run/swim/fly flags are absent. Calls Calc_WalkSpeed, then may clamp to package target actor's walk speed minus close-distance margin.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6637,13 +6625,13 @@
   },
   {
     "ea": "0x5FD8B3",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; Post-sequence guard tail shared by missing/finished-sequence checks. The external throwing bridge resumes here after its handled class-4 projectile transaction, bypassing native melee handling—but it also bypasses the native bow post-shot tail at 0x5FD4AE..0x5FD550. Unless recreated, that custom path has no post-shot AMMO virtual, novice Marksman fatigue burn, Release-time INVI recheck, weapon condition damage, or native action 5->3 transition.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FD8B5",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6667,19 +6655,19 @@
   },
   {
     "ea": "0x5FD8C7",
-    "line": "push    1",
+    "line": "push    1; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FD8C9",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FD8CB",
-    "line": "call    ActorAnimData_GetAnimGroupFromField8Value",
+    "line": "call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6691,7 +6679,7 @@
   },
   {
     "ea": "0x5FD8D1",
-    "line": "call    sub_51AA00",
+    "line": "call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6715,25 +6703,25 @@
   },
   {
     "ea": "0x5FD8E2",
-    "line": "push    1",
+    "line": "push    1; slotSelector",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FD8E4",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FD8E6",
-    "line": "mov     [esp+78h+var_58], 6",
+    "line": "mov     [esp+78h+action], 6",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x5FD8EE",
-    "line": "call    sub_4706E0",
+    "line": "call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].",
     "mnemonic": "call",
     "size": 5
   },
@@ -6811,7 +6799,7 @@
   },
   {
     "ea": "0x5FD91A",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6847,7 +6835,7 @@
   },
   {
     "ea": "0x5FD930",
-    "line": "mov     ebx, dword ptr [esp+74h+var_28]",
+    "line": "mov     ebx, [esp+74h+originX]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6859,7 +6847,7 @@
   },
   {
     "ea": "0x5FD93A",
-    "line": "call    sub_88D370",
+    "line": "call    hkCharacterContext_GetStateId; hkCharacterContext state id accessor used by controller update; proxy+0x1E0 context stores current state id at +0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6913,7 +6901,7 @@
   },
   {
     "ea": "0x5FD95D",
-    "line": "fstp    dword ptr [esp+74h+var_28+4]",
+    "line": "fstp    [esp+74h+originX+4]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -6925,7 +6913,7 @@
   },
   {
     "ea": "0x5FD966",
-    "line": "fld     dword ptr [esp+74h+var_28+4]",
+    "line": "fld     [esp+74h+originX+4]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -7015,7 +7003,7 @@
   },
   {
     "ea": "0x5FD990",
-    "line": "call    TESAnimGroup_GetAnimationGroup",
+    "line": "call    TESAnimGroup_GetAnimationGroup; TESAnimGroup native group id accessor: byte at TESAnimGroup +0x08.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7063,7 +7051,7 @@
   },
   {
     "ea": "0x5FD9AF",
-    "line": "call    TESAnimGroup_GetAnimationGroup",
+    "line": "call    TESAnimGroup_GetAnimationGroup; TESAnimGroup native group id accessor: byte at TESAnimGroup +0x08.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7087,7 +7075,7 @@
   },
   {
     "ea": "0x5FD9BC",
-    "line": "call    TESAnimGroup_GetAnimationGroup",
+    "line": "call    TESAnimGroup_GetAnimationGroup; TESAnimGroup native group id accessor: byte at TESAnimGroup +0x08.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7183,7 +7171,7 @@
   },
   {
     "ea": "0x5FD9E9",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7207,7 +7195,7 @@
   },
   {
     "ea": "0x5FD9F8",
-    "line": "mov     [esp+74h+var_58], edi",
+    "line": "mov     [esp+74h+action], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -7339,7 +7327,7 @@
   },
   {
     "ea": "0x5FDA43",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7393,7 +7381,7 @@
   },
   {
     "ea": "0x5FDA5E",
-    "line": "call    sub_472EA0",
+    "line": "call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7429,7 +7417,7 @@
   },
   {
     "ea": "0x5FDA6D",
-    "line": "call    sub_475440",
+    "line": "call    ActorAnimData_CleanupOrPromoteQueuedIdles; Owns current/queued idle retirement and promotion across ActorAnimData +0xCC/+0xD0/+0xD4/+0xD8. Depending on caller flags, stops a still-active sequence, moves stale holders into the two cleanup slots, destroys them when no slot is available or forced, or promotes queued +0xD0 into current +0xCC.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7471,7 +7459,7 @@
   },
   {
     "ea": "0x5FDA89",
-    "line": "mov     [esp+78h+var_58], edi",
+    "line": "mov     [esp+78h+action], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -7621,7 +7609,7 @@
   },
   {
     "ea": "0x5FDACF",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7795,7 +7783,7 @@
   },
   {
     "ea": "0x5FDB28",
-    "line": "mov     [esp+74h+var_58], edi",
+    "line": "mov     [esp+74h+action], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -8437,7 +8425,7 @@
   },
   {
     "ea": "0x5FDC8C",
-    "line": "call    sub_471210",
+    "line": "call    ActorAnimData_IsCurrentIdleActive; Returns true when ActorAnimData current idle (+0xCC) exists and its phase field is 2. Mounted/action callers treat this as the active idle phase.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8461,7 +8449,7 @@
   },
   {
     "ea": "0x5FDC99",
-    "line": "call    sub_472EA0",
+    "line": "call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8575,7 +8563,7 @@
   },
   {
     "ea": "0x5FDCDB",
-    "line": "fld     [esp+74h+arg_0]",
+    "line": "fld     [esp+74h+arg0]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -8743,7 +8731,7 @@
   },
   {
     "ea": "0x5FDD35",
-    "line": "call    sub_5E3590",
+    "line": "call    sub_5E3590; Walk-speed branch used by sub_5E65B0 when run/swim/fly flags are absent. Calls Calc_WalkSpeed, then may clamp to package target actor's walk speed minus close-distance margin.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8761,7 +8749,7 @@
   },
   {
     "ea": "0x5FDD43",
-    "line": "call    sub_5E3750",
+    "line": "call    Actor_CalcFastTravelSpeed; Run-speed branch used by sub_5E65B0 when process flag 0x200 is set and swim/fly are absent. Calls Calc_RunSpeed, then may clamp to package target actor's run speed minus close-distance margin.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8821,7 +8809,7 @@
   },
   {
     "ea": "0x5FDD6D",
-    "line": "call    sub_5E3590",
+    "line": "call    sub_5E3590; Walk-speed branch used by sub_5E65B0 when run/swim/fly flags are absent. Calls Calc_WalkSpeed, then may clamp to package target actor's walk speed minus close-distance margin.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8869,7 +8857,7 @@
   },
   {
     "ea": "0x5FDD88",
-    "line": "call    sub_5E3590",
+    "line": "call    sub_5E3590; Walk-speed branch used by sub_5E65B0 when run/swim/fly flags are absent. Calls Calc_WalkSpeed, then may clamp to package target actor's walk speed minus close-distance margin.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8917,7 +8905,7 @@
   },
   {
     "ea": "0x5FDDA3",
-    "line": "call    sub_5E3590",
+    "line": "call    sub_5E3590; Walk-speed branch used by sub_5E65B0 when run/swim/fly flags are absent. Calls Calc_WalkSpeed, then may clamp to package target actor's walk speed minus close-distance margin.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8965,7 +8953,7 @@
   },
   {
     "ea": "0x5FDDBE",
-    "line": "call    sub_5E3590",
+    "line": "call    sub_5E3590; Walk-speed branch used by sub_5E65B0 when run/swim/fly flags are absent. Calls Calc_WalkSpeed, then may clamp to package target actor's walk speed minus close-distance margin.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9049,7 +9037,7 @@
   },
   {
     "ea": "0x5FDDEA",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9199,7 +9187,7 @@
   },
   {
     "ea": "0x5FDE3F",
-    "line": "push    0",
+    "line": "push    0; fallbackPass",
     "mnemonic": "push",
     "size": 2
   },
@@ -9223,7 +9211,7 @@
   },
   {
     "ea": "0x5FDE44",
-    "line": "call    sub_51A9B0",
+    "line": "call    AnimKey_Make; CustomAnimSupport decode: encoded anim key = group_id | (weapon_modifier << 8) | (movement_prefix << 12).",
     "mnemonic": "call",
     "size": 5
   },
@@ -9241,19 +9229,19 @@
   },
   {
     "ea": "0x5FDE50",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FDE52",
-    "line": "push    eax",
+    "line": "push    eax; requestedKey",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FDE53",
-    "line": "call    sub_470D20",
+    "line": "call    ActorAnimData_ResolveAnimKeyFallback; Native encoded animation-key resolver. A candidate is valid only when its map entry's selector virtual returns a sequence. Order: exact key; weapon-prefix compatibility; fast-move group to normal-move group; on the outer pass only, strip movement prefix; finally replace nonzero group with Idle (0). Returns 0 on failure.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9271,7 +9259,7 @@
   },
   {
     "ea": "0x5FDE5C",
-    "line": "call    sub_51AA00",
+    "line": "call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9283,7 +9271,7 @@
   },
   {
     "ea": "0x5FDE64",
-    "line": "cmp     [esp+74h+var_58], 0FFFFFFFFh",
+    "line": "cmp     [esp+74h+action], 0FFFFFFFFh",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -9313,7 +9301,7 @@
   },
   {
     "ea": "0x5FDE73",
-    "line": "mov     [esp+74h+var_58], 0FFFFFFFFh",
+    "line": "mov     [esp+74h+action], 0FFFFFFFFh",
     "mnemonic": "mov",
     "size": 8
   },
@@ -9325,7 +9313,7 @@
   },
   {
     "ea": "0x5FDE7D",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9391,19 +9379,19 @@
   },
   {
     "ea": "0x5FDEAA",
-    "line": "push    edx",
+    "line": "push    edx; slotSelector",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FDEAB",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FDEAD",
-    "line": "call    sub_4706E0",
+    "line": "call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].",
     "mnemonic": "call",
     "size": 5
   },
@@ -9415,7 +9403,7 @@
   },
   {
     "ea": "0x5FDEB5",
-    "line": "mov     [esp+74h+arg_0], eax",
+    "line": "mov     [esp+74h+arg0], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -9439,7 +9427,7 @@
   },
   {
     "ea": "0x5FDEC3",
-    "line": "cmp     [esp+74h+arg_0], eax",
+    "line": "cmp     [esp+74h+arg0], eax",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -9457,7 +9445,7 @@
   },
   {
     "ea": "0x5FDECF",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9481,19 +9469,19 @@
   },
   {
     "ea": "0x5FDEDF",
-    "line": "push    0",
+    "line": "push    0; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FDEE1",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FDEE3",
-    "line": "call    ActorAnimData_GetAnimGroupFromField8Value",
+    "line": "call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9547,7 +9535,7 @@
   },
   {
     "ea": "0x5FDEFC",
-    "line": "call    sub_51AA00",
+    "line": "call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9625,7 +9613,7 @@
   },
   {
     "ea": "0x5FDF2F",
-    "line": "call    sub_51AA00",
+    "line": "call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9673,7 +9661,7 @@
   },
   {
     "ea": "0x5FDF4F",
-    "line": "call    sub_5E3750",
+    "line": "call    Actor_CalcFastTravelSpeed; Run-speed branch used by sub_5E65B0 when process flag 0x200 is set and swim/fly are absent. Calls Calc_RunSpeed, then may clamp to package target actor's run speed minus close-distance margin.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9733,7 +9721,7 @@
   },
   {
     "ea": "0x5FDF6C",
-    "line": "fstp    [esp+78h+var_28+4]",
+    "line": "fstp    qword ptr [esp+78h+originX+4]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -9751,19 +9739,19 @@
   },
   {
     "ea": "0x5FDF78",
-    "line": "mov     [esp+74h+arg_4], edx",
+    "line": "mov     [esp+74h+arg1], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5FDF7C",
-    "line": "fild    [esp+74h+arg_4]",
+    "line": "fild    [esp+74h+arg1]",
     "mnemonic": "fild",
     "size": 4
   },
   {
     "ea": "0x5FDF80",
-    "line": "fdivr   [esp+74h+var_28+4]",
+    "line": "fdivr   qword ptr [esp+74h+originX+4]",
     "mnemonic": "fdivr",
     "size": 4
   },
@@ -9805,7 +9793,7 @@
   },
   {
     "ea": "0x5FDF9D",
-    "line": "call    sub_5E3590",
+    "line": "call    sub_5E3590; Walk-speed branch used by sub_5E65B0 when run/swim/fly flags are absent. Calls Calc_WalkSpeed, then may clamp to package target actor's walk speed minus close-distance margin.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9817,7 +9805,7 @@
   },
   {
     "ea": "0x5FDFA4",
-    "line": "fld     [esp+74h+arg_4]; jumptable 005FDF46 cases 15,16",
+    "line": "fld     [esp+74h+arg1]; jumptable 005FDF46 cases 15,16",
     "mnemonic": "fld",
     "size": 4
   },
@@ -9943,7 +9931,7 @@
   },
   {
     "ea": "0x5FDFF6",
-    "line": "call    sub_51AA00",
+    "line": "call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10075,7 +10063,7 @@
   },
   {
     "ea": "0x5FE044",
-    "line": "fstp    [esp+78h+var_28+4]",
+    "line": "fstp    qword ptr [esp+78h+originX+4]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -10093,19 +10081,19 @@
   },
   {
     "ea": "0x5FE050",
-    "line": "mov     [esp+74h+arg_4], ecx",
+    "line": "mov     [esp+74h+arg1], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5FE054",
-    "line": "fild    [esp+74h+arg_4]",
+    "line": "fild    [esp+74h+arg1]",
     "mnemonic": "fild",
     "size": 4
   },
   {
     "ea": "0x5FE058",
-    "line": "fdivr   [esp+74h+var_28+4]",
+    "line": "fdivr   qword ptr [esp+74h+originX+4]",
     "mnemonic": "fdivr",
     "size": 4
   },
@@ -10261,7 +10249,7 @@
   },
   {
     "ea": "0x5FE0AE",
-    "line": "fld     [esp+74h+arg_4]",
+    "line": "fld     [esp+74h+arg1]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -10285,19 +10273,19 @@
   },
   {
     "ea": "0x5FE0C2",
-    "line": "push    ecx",
+    "line": "push    ecx; slot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FE0C3",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FE0C5",
-    "line": "call    ActorAnimData_GetAnimGroupFromField8Value",
+    "line": "call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10315,19 +10303,19 @@
   },
   {
     "ea": "0x5FE0D3",
-    "line": "push    ebp",
+    "line": "push    ebp; encodedKey",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FE0D4",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FE0D6",
-    "line": "call    sub_470D00",
+    "line": "call    ActorAnimData_HasAnimKey; Returns whether ActorAnimData +0x9C contains an entry for the encoded animation key. Presence test only; it does not select or play a sequence.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10345,37 +10333,37 @@
   },
   {
     "ea": "0x5FE0E3",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; repeatOrAction",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FE0E5",
-    "line": "push    1",
+    "line": "push    1; playImmediately",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FE0E7",
-    "line": "push    ebp",
+    "line": "push    ebp; encodedKey",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FE0E8",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FE0EA",
-    "line": "call    ActorAnimData_PlayAnimGroup",
+    "line": "call    ActorAnimData_PlayAnimGroup; Native group dispatcher. Reads fixed group-table slot (+0x08) and note-template class (+0x0C), normalizing slot aliases 5->0 and 6->3. For note classes 0/1, playImmediately=0 stores only the encoded key at ActorAnimData +0x70[slot] and repeat/action value at +0x7C[slot]; playImmediately=1 clears that queue and plays now. Classes 2..7 play immediately. No queued sequence pointer or path is stored.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5FE0EF",
-    "line": "cmp     [esp+74h+var_58], 0FFFFFFFFh",
+    "line": "cmp     [esp+74h+action], 0FFFFFFFFh",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -10393,7 +10381,7 @@
   },
   {
     "ea": "0x5FE0F7",
-    "line": "call    TESAnimGroup_IsAnimGroupIdle",
+    "line": "call    TESAnimGroup_IsAnimGroupIdle; Static native idle-group classifier over a raw group byte: true only for Idle (0), DynamicIdle (1), BlockIdle (27), and TorchIdle (33).",
     "mnemonic": "call",
     "size": 5
   },
@@ -10429,49 +10417,49 @@
   },
   {
     "ea": "0x5FE10D",
-    "line": "push    edx",
+    "line": "push    edx; slotSelector",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FE10E",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FE110",
-    "line": "call    sub_4706E0",
+    "line": "call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5FE115",
-    "line": "push    eax",
+    "line": "push    eax; sequence",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FE116",
-    "line": "mov     eax, [esp+78h+var_58]",
+    "line": "mov     eax, [esp+78h+action]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5FE11A",
-    "line": "push    eax",
+    "line": "push    eax; action",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FE11B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FE11D",
-    "line": "call    HighPRocess_DoAction?????",
+    "line": "call    Actor_SetCurrentActionWithBowVisualCleanup; Void Actor action-transition wrapper. Performs transition-specific bow/held-arrow visual cleanup, then commits action and sequence through process vtable +0x2D8. It has no success/result contract; callers/plugins must not consume EAX, so Crossbow's UInt32 HighProcessDoActionFn typedef is incorrect. Meaningful current-action state is HighProcess-only: HighProcess +0x2D0/+0x2D8 read/store +0x1F4/+0x1F8, while MiddleHigh returns None (-1) and its setter is a no-op; Crossbow's process-level-0 action filter therefore matches Oblivion. External Crossbow state-machine contrast: Equip-as-Cocked/first-shot-loaded is plugin policy, repeated action 4 while Reloading can flip state to Cocked and rebuild controller tracking, and interruption/cancellation actions are not modeled, leaving stale Reloading/Cocked phases.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10537,7 +10525,7 @@
   },
   {
     "ea": "0x5FE13E",
-    "line": "push    0",
+    "line": "push    0; fallbackPass",
     "mnemonic": "push",
     "size": 2
   },
@@ -10561,7 +10549,7 @@
   },
   {
     "ea": "0x5FE144",
-    "line": "call    sub_51A9B0",
+    "line": "call    AnimKey_Make; CustomAnimSupport decode: encoded anim key = group_id | (weapon_modifier << 8) | (movement_prefix << 12).",
     "mnemonic": "call",
     "size": 5
   },
@@ -10579,25 +10567,25 @@
   },
   {
     "ea": "0x5FE150",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FE152",
-    "line": "push    eax",
+    "line": "push    eax; requestedKey",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FE153",
-    "line": "call    sub_470D20",
+    "line": "call    ActorAnimData_ResolveAnimKeyFallback; Native encoded animation-key resolver. A candidate is valid only when its map entry's selector virtual returns a sequence. Order: exact key; weapon-prefix compatibility; fast-move group to normal-move group; on the outer pass only, strip movement prefix; finally replace nonzero group with Idle (0). Returns 0 on failure.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5FE158",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; repeatOrAction",
     "mnemonic": "push",
     "size": 2
   },
@@ -10609,25 +10597,25 @@
   },
   {
     "ea": "0x5FE15D",
-    "line": "push    0",
+    "line": "push    0; playImmediately",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FE15F",
-    "line": "push    edi",
+    "line": "push    edi; encodedKey",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FE160",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FE162",
-    "line": "call    ActorAnimData_PlayAnimGroup",
+    "line": "call    ActorAnimData_PlayAnimGroup; Native group dispatcher. Reads fixed group-table slot (+0x08) and note-template class (+0x0C), normalizing slot aliases 5->0 and 6->3. For note classes 0/1, playImmediately=0 stores only the encoded key at ActorAnimData +0x70[slot] and repeat/action value at +0x7C[slot]; playImmediately=1 clears that queue and plays now. Classes 2..7 play immediately. No queued sequence pointer or path is stored.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10675,19 +10663,19 @@
   },
   {
     "ea": "0x5FE178",
-    "line": "push    2",
+    "line": "push    2; slotSelector",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FE17A",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FE17C",
-    "line": "call    sub_4706E0",
+    "line": "call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].",
     "mnemonic": "call",
     "size": 5
   },
@@ -10789,7 +10777,7 @@
   },
   {
     "ea": "0x5FE1B5",
-    "line": "push    0",
+    "line": "push    0; fallbackPass",
     "mnemonic": "push",
     "size": 2
   },
@@ -10813,7 +10801,7 @@
   },
   {
     "ea": "0x5FE1BB",
-    "line": "call    sub_51A9B0",
+    "line": "call    AnimKey_Make; CustomAnimSupport decode: encoded anim key = group_id | (weapon_modifier << 8) | (movement_prefix << 12).",
     "mnemonic": "call",
     "size": 5
   },
@@ -10831,19 +10819,19 @@
   },
   {
     "ea": "0x5FE1C7",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FE1C9",
-    "line": "push    eax",
+    "line": "push    eax; requestedKey",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FE1CA",
-    "line": "call    sub_470D20",
+    "line": "call    ActorAnimData_ResolveAnimKeyFallback; Native encoded animation-key resolver. A candidate is valid only when its map entry's selector virtual returns a sequence. Order: exact key; weapon-prefix compatibility; fast-move group to normal-move group; on the outer pass only, strip movement prefix; finally replace nonzero group with Idle (0). Returns 0 on failure.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10861,7 +10849,7 @@
   },
   {
     "ea": "0x5FE1D3",
-    "line": "call    sub_51AA00",
+    "line": "call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10885,19 +10873,19 @@
   },
   {
     "ea": "0x5FE1E5",
-    "line": "push    eax",
+    "line": "push    eax; slot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FE1E6",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FE1E8",
-    "line": "call    ActorAnimData_GetAnimGroupFromField8Value",
+    "line": "call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10915,19 +10903,19 @@
   },
   {
     "ea": "0x5FE1F6",
-    "line": "push    edi",
+    "line": "push    edi; encodedKey",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FE1F7",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FE1F9",
-    "line": "call    sub_470D00",
+    "line": "call    ActorAnimData_HasAnimKey; Returns whether ActorAnimData +0x9C contains an entry for the encoded animation key. Presence test only; it does not select or play a sequence.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10945,31 +10933,31 @@
   },
   {
     "ea": "0x5FE202",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; repeatOrAction",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FE204",
-    "line": "push    1",
+    "line": "push    1; playImmediately",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FE206",
-    "line": "push    edi",
+    "line": "push    edi; encodedKey",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FE207",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FE209",
-    "line": "call    ActorAnimData_PlayAnimGroup",
+    "line": "call    ActorAnimData_PlayAnimGroup; Native group dispatcher. Reads fixed group-table slot (+0x08) and note-template class (+0x0C), normalizing slot aliases 5->0 and 6->3. For note classes 0/1, playImmediately=0 stores only the encoded key at ActorAnimData +0x70[slot] and repeat/action value at +0x7C[slot]; playImmediately=1 clears that queue and plays now. Classes 2..7 play immediately. No queued sequence pointer or path is stored.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11077,7 +11065,7 @@
   },
   {
     "ea": "0x5FE239",
-    "line": "call    TESAnimGroup_GetAnimationGroup",
+    "line": "call    TESAnimGroup_GetAnimationGroup; TESAnimGroup native group id accessor: byte at TESAnimGroup +0x08.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11107,25 +11095,25 @@
   },
   {
     "ea": "0x5FE246",
-    "line": "fstp    [esp+78h+duration]; float",
+    "line": "fstp    [esp+78h+duration]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5FE249",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FE24B",
-    "line": "push    2; int",
+    "line": "push    2; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FE24D",
-    "line": "call    sub_470FC0",
+    "line": "call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11161,37 +11149,37 @@
   },
   {
     "ea": "0x5FE25F",
-    "line": "fstp    [esp+78h+duration]; float",
+    "line": "fstp    [esp+78h+duration]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5FE262",
-    "line": "push    2; int",
+    "line": "push    2; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FE264",
-    "line": "push    1; a2",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FE266",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5FE26B",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FE26D",
-    "line": "call    sub_470FC0",
+    "line": "call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11203,19 +11191,19 @@
   },
   {
     "ea": "0x5FE276",
-    "line": "push    3",
+    "line": "push    3; slotSelector",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FE278",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FE27A",
-    "line": "call    sub_4706E0",
+    "line": "call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].",
     "mnemonic": "call",
     "size": 5
   },
@@ -11233,19 +11221,19 @@
   },
   {
     "ea": "0x5FE283",
-    "line": "push    3",
+    "line": "push    3; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FE285",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FE287",
-    "line": "call    ActorAnimData_GetAnimGroupFromField8Value",
+    "line": "call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11257,7 +11245,7 @@
   },
   {
     "ea": "0x5FE28D",
-    "line": "call    sub_51AC80",
+    "line": "call    AnimGroup_UsesAttackOrCastNoteTemplate; Returns true when the encoded key is not group 0xFF and the fixed Oblivion group record's note-template class is 4, 5, 6, or 7. Those classes cover AttackLeft/Right, power attacks, BlockAttack, AttackBow, and cast groups. This is a fixed-table classifier, not dynamic group registration.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11317,7 +11305,7 @@
   },
   {
     "ea": "0x5FE2AB",
-    "line": "call    sub_5E6A40",
+    "line": "call    Actor_GetWeaponTipLocalPointForHit; ODismemberment combat decode: returns a local-space weapon/reach point for hit visuals. Uses actor GetNiNode, equipped weapon combat distance, named weapon node lookup, and native transform helpers. Attack tail passes this as one of Actor_HandleHitVisualEffects' vector inputs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11440,5 +11428,89 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C2B50",
+    "line": "lea     ecx, [ebp-24h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2B53",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2B58",
+    "line": "mov     eax, [ebp-24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2B5B",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C2B5C",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2B61",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C2B62",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C2B63",
+    "line": "mov     edx, [esp+arg1]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C2B67",
+    "line": "lea     eax, [edx-64h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2B6A",
+    "line": "mov     ecx, [edx-68h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2B6D",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C2B6F",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2B74",
+    "line": "mov     eax, offset stru_AEB8E8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2B79",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

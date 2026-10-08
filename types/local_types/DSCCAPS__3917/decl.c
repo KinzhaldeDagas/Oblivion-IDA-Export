@@ -1,1 +1,1 @@
-DSCCAPS
+typedef _DSCCAPS DSCCAPS;

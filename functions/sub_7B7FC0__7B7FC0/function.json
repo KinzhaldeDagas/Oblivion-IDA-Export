@@ -1,19 +1,32 @@
 {
-  "callees_count": 27,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7B7FC0",
+      "0x7B8143"
+    ]
+  ],
+  "chunks_sha256": "4ab3f339d91de4b49999d817b94807f8c7a2e38362128e16e1faf1d66f817321",
+  "comment_regular": "Recursively assigns/infers a BSShader for an NiAVObject tree. Geometry nodes resolve a shader definition, install it through NiGeometry_SetShader, and initialize shader variables; NiNode children are traversed recursively.",
+  "comment_repeatable": "Recursively assigns/infers a BSShader for an NiAVObject tree. Geometry nodes resolve a shader definition, install it through NiGeometry_SetShader, and initialize shader variables; NiNode children are traversed recursively.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_7B7FC0",
+  "display_name": "BSShaderManager_AssignShaderToObjectRecursive",
   "end_ea": "0x7B8143",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7B7FC0",
+  "name": "BSShaderManager_AssignShaderToObjectRecursive",
   "segment": ".text",
   "sha256": "4ab3f339d91de4b49999d817b94807f8c7a2e38362128e16e1faf1d66f817321",
   "size": 387,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7B7FC0",
-  "type": "char __cdecl(NiNode *arg0, unsigned int, int, int, const char *)",
+  "total_chunk_size": 387,
+  "type": "char __cdecl(NiAVObject *object, unsigned int shaderId, char normalMapBypass, char arg3, const char *materialName)",
   "xrefs_from_count": 184,
   "xrefs_to_count": 2
 }

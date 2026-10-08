@@ -1,1 +1,4 @@
-HMIXER__
+struct HMIXER__
+{
+int unused;
+};

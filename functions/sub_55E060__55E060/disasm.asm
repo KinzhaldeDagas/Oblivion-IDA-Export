@@ -1,4 +1,4 @@
-0x55E060: sub     esp, 14h
+0x55E060: sub     esp, 14h; Verified wind loop: uses four phase accumulators and four sine/cosine coefficient pairs to generate four wind matrices; previous wind speed normalizes phase when current wind changes. Fallout's named UpdateWindMatrices has the same four-matrix pattern but uses different manager offsets and its own wind/time globals.
 0x55E063: test    byte ptr ds:0B39F14h, 1
 0x55E06A: push    esi
 0x55E06B: push    edi
@@ -14,7 +14,6 @@
 0x55E08F: fldz
 0x55E091: fstp    [esp+1Ch+var_14]
 0x55E095: jmp     short loc_55E0A0
-0x55E097: align 10h
 0x55E0A0: fld     dword ptr ds:0B39F00h[esi*4]
 0x55E0A7: fadd    dword ptr ds:0B33E9Ch
 0x55E0AD: fstp    [esp+1Ch+var_10]
@@ -80,7 +79,7 @@
 0x55E193: fld     [esp+24h+var_8]
 0x55E197: fstp    [esp+24h+var_24]; float
 0x55E19A: push    esi; int
-0x55E19B: call    sub_7F1760
+0x55E19B: call    OB_SpeedTreeLeafShader_SetWindMatrix_010201A0; Updates one global SpeedTree wind matrix. Builds yaw/pitch rotation, transposes it, writes WindMatrixes + 0x40*index; valid indices are 0..3.
 0x55E1A0: add     esi, 1
 0x55E1A3: add     esp, 0Ch
 0x55E1A6: cmp     esi, 4
@@ -106,7 +105,7 @@
 0x55E1E8: fmulp   st(2), st
 0x55E1EA: fxch    st(1)
 0x55E1EC: fmul    [esp+2Ch+var_4]
-0x55E1F0: fstp    [esp+2Ch+var_4]
+0x55E1F0: fstp    [esp+2Ch+var_4]; Verified: fLeafRustleTimeScale.value is multiplied by frame delta and the leaf wind modulation term, then passed to OB_SpeedTreeLeafShader_UpdateWindScalars.
 0x55E1F4: fld     [esp+2Ch+var_4]
 0x55E1F8: fstp    [esp+2Ch+var_20]; float
 0x55E1FC: fld     dword ptr ds:0B39E38h
@@ -120,7 +119,7 @@
 0x55E212: fld     dword ptr ds:0B39E28h
 0x55E218: fmulp   st(1), st
 0x55E21A: fmul    [esp+2Ch+var_4]
-0x55E21E: fstp    [esp+2Ch+var_4]
+0x55E21E: fstp    [esp+2Ch+var_4]; Verified: fLeafRockTimeScale.value is multiplied by frame delta and the leaf wind modulation term, then passed to OB_SpeedTreeLeafShader_UpdateWindScalars.
 0x55E222: fld     [esp+2Ch+var_4]
 0x55E226: fstp    [esp+2Ch+var_24]; float
 0x55E22A: fld     dword ptr ds:0B39E50h
@@ -149,7 +148,7 @@
 0x55E270: fstp    [esp+2Ch+var_4]
 0x55E274: fld     [esp+2Ch+var_4]
 0x55E278: fstp    [esp+2Ch+var_2C]; float
-0x55E27B: call    sub_7F0210
+0x55E27B: call    OB_SpeedTreeLeafShader_UpdateWindScalars_010201A0; Updates global SpeedTree leaf wind scalar constants: RockPArams, RsutleParams, and accumulative phase/scalar globals flt_B4672C/flt_B46730.
 0x55E280: fld     dword ptr [edi+1Ch]
 0x55E283: add     esp, 10h
 0x55E286: pop     edi

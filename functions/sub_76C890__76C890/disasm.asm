@@ -9,7 +9,7 @@
 0x76C8A0: jz      short loc_76C8AD
 0x76C8A2: add     dword ptr [ecx+60h], 0FFFFFFFFh
 0x76C8A6: jnz     short loc_76C8AD
-0x76C8A8: call    sub_7604D0
+0x76C8A8: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x76C8AD: mov     eax, [edi]
 0x76C8AF: test    eax, eax
 0x76C8B1: mov     [esi], eax

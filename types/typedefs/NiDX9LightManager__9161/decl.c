@@ -1,1 +1,1 @@
-NiDX9LightManager
+struct NiDX9LightManager;

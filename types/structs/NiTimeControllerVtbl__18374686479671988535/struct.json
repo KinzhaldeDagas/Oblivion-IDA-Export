@@ -1,76 +1,126 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "NiTimeControllerVtbl",
+  "definition": "struct NiTimeControllerVtbl\n{\nNiObjectVtbl super;\nvoid (__thiscall *Activate)(NiTimeController *this, float applicationTime); ///< Set Active bit 3 and initialize application/start time state from the supplied float time.\nvoid (__thiscall *Deactivate)(NiTimeController *this); ///< Clear Active bit 3 and invalidate application/start time state.\nvoid (__thiscall *Update)(NiTimeController *, float time);\nvoid (__thiscall *SetTarget)(NiTimeController *, NiObjectNET *node);\nbool (__thiscall *Unk_17)(NiTimeController *);\nbool (__thiscall *Unk_18)(NiTimeController *);\nfloat (__thiscall *ComputeScaledTime)(NiTimeController *this, float applicationTime); ///< Compute and return controller-local time from the supplied application time; NiTimeController_IsUpdateUnchanged caches this float at +0x28.\nbool (__thiscall *Unk_1A)(NiTimeController *);\nbool (__thiscall *Unk_1B)(NiTimeController *);\nbool (__thiscall *Unk_1C)(NiTimeController *);\n}\n",
   "id": 18374686479671988535,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00053.",
       "name": "super",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 76
+      "size": 76,
+      "type": "NiObjectVtbl"
     },
     {
-      "name": "Start",
+      "annotation_confidence": "Unknown",
+      "comment": "Set Active bit 3 and initialize application/start time state from the supplied float time.",
+      "name": "Activate",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 4
+      "offset_hex": "0x4C",
+      "size": 4,
+      "type": "void (__thiscall *)(NiTimeController *this, float applicationTime)"
     },
     {
-      "name": "Stop",
+      "annotation_confidence": "Unknown",
+      "comment": "Clear Active bit 3 and invalidate application/start time state.",
+      "name": "Deactivate",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiTimeController *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00056.",
       "name": "Update",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiTimeController *, float time)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00057.",
       "name": "SetTarget",
       "offset": 88,
       "offset_hex": "0x58",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiTimeController *, NiObjectNET *node)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00058.",
       "name": "Unk_17",
       "offset": 92,
-      "offset_hex": "0x5c",
-      "size": 4
+      "offset_hex": "0x5C",
+      "size": 4,
+      "type": "bool (__thiscall *)(NiTimeController *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00059.",
       "name": "Unk_18",
       "offset": 96,
       "offset_hex": "0x60",
-      "size": 4
+      "size": 4,
+      "type": "bool (__thiscall *)(NiTimeController *)"
     },
     {
-      "name": "Unk_19",
+      "annotation_confidence": "Unknown",
+      "comment": "Compute and return controller-local time from the supplied application time; NiTimeController_IsUpdateUnchanged caches this float at +0x28.",
+      "name": "ComputeScaledTime",
       "offset": 100,
       "offset_hex": "0x64",
-      "size": 4
+      "size": 4,
+      "type": "float (__thiscall *)(NiTimeController *this, float applicationTime)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000511.",
       "name": "Unk_1A",
       "offset": 104,
       "offset_hex": "0x68",
-      "size": 4
+      "size": 4,
+      "type": "bool (__thiscall *)(NiTimeController *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000512.",
       "name": "Unk_1B",
       "offset": 108,
-      "offset_hex": "0x6c",
-      "size": 4
+      "offset_hex": "0x6C",
+      "size": 4,
+      "type": "bool (__thiscall *)(NiTimeController *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000513.",
       "name": "Unk_1C",
       "offset": 112,
       "offset_hex": "0x70",
-      "size": 4
+      "size": 4,
+      "type": "bool (__thiscall *)(NiTimeController *)"
     }
   ],
   "name": "NiTimeControllerVtbl",
+  "ordinal": 9442,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 116
 }

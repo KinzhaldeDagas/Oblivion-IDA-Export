@@ -1,25 +1,25 @@
 [
   {
     "ea": "0x531270",
-    "line": "call    sub_530C40",
+    "line": "call    TESTopicInfo__GetResponseList; Snapshot the current TESTopicInfo response stream by deep-cloning the shared lazy response cache into the caller's list. MenuTopic and DialogueItem then own independent TESResponse objects and strings; rebuilding the global cache for another INFO cannot invalidate existing runtime responses.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x531275",
-    "line": "mov     ecx, [esp+arg_0]",
+    "line": "mov     ecx, [esp+responseList]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x531279",
-    "line": "push    eax",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x53127A",
-    "line": "call    sub_530930",
+    "line": "call    TESResponseList__CloneFrom; Deep-clone every shared TESResponse into a caller-owned response list. TESResponse::CopyFrom copies all 16 TRDT bytes and duplicates responseText; callers clear their temporary list after constructing their own DialogueResponse objects.",
     "mnemonic": "call",
     "size": 5
   },

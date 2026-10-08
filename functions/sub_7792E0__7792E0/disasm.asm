@@ -60,7 +60,7 @@
 0x77936E: mov     ecx, esi
 0x779370: call    eax
 0x779372: push    eax; toUnkD3D
-0x779373: call    ??0NiDX9TextureBufferData@@QAE@XZ; NiDX9TextureBufferData::NiDX9TextureBufferData(void)
+0x779373: call    ??0NiDX9TextureBufferData@@QAE@XZ; DX10OBSE resource decode: wraps a D3D texture/cube face level as NiDX9TextureBufferData, retaining the level surface used later as render target or 2D buffer surface.
 0x779378: add     esp, 14h
 0x77937B: test    eax, eax
 0x77937D: jz      short loc_7793EB
@@ -107,7 +107,7 @@
 0x7793EA: retn
 0x7793EB: push    offset EmptyString
 0x7793F0: push    offset aNidx9render_27; "NiDX9RenderedCubeMapData::Create> NiDX9"...
-0x7793F5: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x7793F5: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x7793FA: mov     edx, [esi]
 0x7793FC: mov     eax, [edx]
 0x7793FE: add     esp, 8

@@ -1,4 +1,4 @@
-0x51BF10: mov     eax, [esp+arg_0]
+0x51BF10: mov     eax, [esp+other]; Compare TESForm components, then compare exactly the fixed 0x34-byte TESClass DATA payload at +0x38. No additional major/minor storage participates.
 0x51BF14: push    esi
 0x51BF15: push    edi
 0x51BF16: push    0; int

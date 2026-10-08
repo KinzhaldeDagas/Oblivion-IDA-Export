@@ -1,88 +1,144 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "IDirectSoundCaptureBufferImpl",
+  "definition": "struct IDirectSoundCaptureBufferImpl\n{\nIDirectSoundCaptureBuffer8_0 IDirectSoundCaptureBuffer8_iface;\nIDirectSoundNotify_0 IDirectSoundNotify_iface;\nLONG numIfaces;\nLONG ref;\nLONG refn;\nLONG has_dsc8;\nDirectSoundCaptureDevice_0 *device;\nDSCBUFFERDESC *pdscbd;\nDWORD flags;\nDSBPOSITIONNOTIFY *notifies;\nint nrofnotifies;\nHANDLE thread;\nHANDLE sleepev;\n}\n",
   "id": 18374686479672034772,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IDirectSoundCaptureBuffer8_iface",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "IDirectSoundCaptureBuffer8_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IDirectSoundNotify_iface",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "IDirectSoundNotify_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "numIfaces",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ref",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "refn",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "has_dsc8",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "device",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "DirectSoundCaptureDevice_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pdscbd",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "DSCBUFFERDESC *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "flags",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "notifies",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "DSBPOSITIONNOTIFY *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nrofnotifies",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "thread",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "HANDLE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "sleepev",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "HANDLE"
     }
   ],
   "name": "IDirectSoundCaptureBufferImpl",
+  "ordinal": 3924,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 52
 }

@@ -1,75 +1,56 @@
-void __usercall sub_662590(TESObjectREFR *a1@<ecx>, int a2@<edi>)
+// PlayerCharacter post-shot AMMO-consumption override. Takes only PlayerCharacter *this and independently queries GetEquippedAmmoData(1); it does not receive WEAP EntryData in EDI. God mode (g_godModeEnabled at 0x00B3BB06) skips the transaction. Otherwise it decrements/removes exactly one equipped AMMO item. Base Actor slot +0x2E8 is the shared no-op at 0x0060D0A0.
+void __thiscall PlayerCharacter_ConsumeEquippedAmmoAfterShot(PlayerCharacter *this)
 {
-  ExtraDataList ***v3; // eax
+  ExtraDataList ***v2; // eax
   signed __int16 ExtraCount; // ax
-  TESObjectREFRVtbl *vtbl; // ecx
-  int v6; // edi
-  BaseExtraList *v7; // edi
-  int v8; // eax
-  ExtraDataList ***v9; // eax
-  _DWORD *v10; // eax
+  LowProcess *process; // ecx
+  int v5; // edi
+  BaseExtraList *data; // edi
+  EntryData *v7; // eax
+  ExtraDataList ***v8; // eax
+  EntryData *v9; // eax
   ExtraContainerChanges_Data *ContainerExtraDataForRef; // ebp
-  int v12; // eax
+  EntryData *v11; // eax
   UInt32 ItemCount; // ebx
-  int v14; // eax
-  int v15; // eax
+  EntryData *v13; // eax
+  EntryData *v14; // eax
 
-  if ( !g_GodMode )
+  if ( !g_godModeEnabled ) /*0x662590*/
   {
-    v3 = (ExtraDataList ***)(*((int (__thiscall **)(TESObjectREFRVtbl *, int, int))a1[1].vtbl->super.super.InitializeComponent
-                             + 0x3D))(
-                              a1[1].vtbl,
-                              1,
-                              a2);
-    ExtraCount = ExtraDataList_GetExtraCount(**v3);
-    vtbl = a1[1].vtbl;
-    v6 = ExtraCount - 1;
-    if ( v6 >= 1 )
+    v2 = (ExtraDataList ***)this->super.super.super.process->GetEquippedAmmoData(this->super.super.super.process, 1); /*0x6625ae*/
+    ExtraCount = ExtraDataList_GetExtraCount(**v2);// Read ExtraCount from the active equipped AMMO EntryData's selected ExtraDataList, then compute remaining stack count as ExtraCount-1. /*0x6625b4*/
+    process = this->super.super.super.process; /*0x6625b9*/
+    v5 = ExtraCount - 1; /*0x6625bf*/
+    if ( v5 >= 1 ) /*0x6625c7*/
     {
-      v9 = (ExtraDataList ***)(*((int (__thiscall **)(TESObjectREFRVtbl *, int))vtbl->super.super.InitializeComponent
-                               + 0x3D))(
-                                vtbl,
-                                1);
-      ExtraDataList_SetExtraCount(**v9, v6);
-      v10 = (_DWORD *)(*((int (__thiscall **)(TESObjectREFRVtbl *))a1[1].vtbl->super.super.InitializeComponent + 0x3D))(a1[1].vtbl);
-      sub_60D020(v10, 1);
-      if ( TESObjectREFR_GetContainer(a1) )
+      v8 = (ExtraDataList ***)process->GetEquippedAmmoData(process, 1); /*0x662626*/
+      ExtraDataList_SetExtraCount(**v8, v5);    // When at least one item remains in this extra-data stack, write the decremented ExtraCount back before inventory reconciliation. /*0x66262d*/
+      v9 = (EntryData *)((int (__thiscall *)(LowProcess *))this->super.super.super.process->GetEquippedAmmoData)(this->super.super.super.process); /*0x662640*/
+      Shared_SetDwordAtOffset04(v9, 1);         // On the copied equipped-AMMO EntryData returned by GetEquippedAmmoData, Shared_SetDwordAtOffset04 writes countDelta=1 before container-count reconciliation. /*0x662644*/
+      if ( TESObjectREFR_GetContainer((TESObjectREFR *)this) ) /*0x66264b*/
       {
-        ContainerExtraDataForRef = ContainerExtraData_GetContainerExtraDataForRef(a1);
-        if ( ContainerExtraDataForRef )
+        ContainerExtraDataForRef = ContainerExtraData_GetContainerExtraDataForRef((TESObjectREFR *)this); /*0x66265c*/
+        if ( ContainerExtraDataForRef ) /*0x662663*/
         {
-          v12 = (*((int (__thiscall **)(TESObjectREFRVtbl *, int))a1[1].vtbl->super.super.InitializeComponent + 0x3D))(
-                  a1[1].vtbl,
-                  1);
-          ItemCount = ContainerExtraData_GetItemCount(ContainerExtraDataForRef, *(TESForm **)(v12 + 8));
-          if ( ItemCount != v6 + 1 )
+          v11 = this->super.super.super.process->GetEquippedAmmoData(this->super.super.super.process, 1); /*0x662673*/
+          ItemCount = ContainerExtraData_GetItemCount(ContainerExtraDataForRef, v11->type);// Read total count for the equipped AMMO form from container changes and reconcile a mismatch before final removal. /*0x662680*/
+          if ( ItemCount != v5 + 1 ) /*0x662687*/
           {
-            v14 = (*((int (__thiscall **)(TESObjectREFRVtbl *, int))a1[1].vtbl->super.super.InitializeComponent + 0x3D))(
-                    a1[1].vtbl,
-                    1);
-            sub_487350(ContainerExtraDataForRef, *(_DWORD *)(v14 + 8), v6 - ItemCount + 1);
+            v13 = this->super.super.super.process->GetEquippedAmmoData(this->super.super.super.process, 1); /*0x662696*/
+            ExtraContainerChanges_AdjustCountForForm(ContainerExtraDataForRef, v13->type, v5 - ItemCount + 1); /*0x6626a4*/
           }
         }
       }
-      v15 = (*((int (__thiscall **)(TESObjectREFRVtbl *, int))a1[1].vtbl->super.super.InitializeComponent + 0x3D))(
-              a1[1].vtbl,
-              1);
-      a1->vtbl->RemoveItem(a1, *(TESForm **)(v15 + 8), 0, 1, 0, 0, 0, 0, 0, 1, 0);
+      v14 = this->super.super.super.process->GetEquippedAmmoData(this->super.super.super.process, 1); /*0x6626b8*/
+      this->vtbl->super.super.super.RemoveItem((TESObjectREFR *)this, v14->type, 0, 1, 0, 0, 0, 0, 0, 1, 0);// Player post-shot transaction removes exactly one equipped AMMO form through virtual TESObjectREFR::RemoveItem. /*0x6626da*/
     }
     else
     {
-      v7 = **(BaseExtraList ***)(*((int (__thiscall **)(TESObjectREFRVtbl *, int))vtbl->super.super.InitializeComponent
-                                 + 0x3D))(
-                                  vtbl,
-                                  1);
-      v8 = (*((int (__thiscall **)(TESObjectREFRVtbl *, int))a1[1].vtbl->super.super.InitializeComponent + 0x3D))(
-             a1[1].vtbl,
-             1);
-      a1->vtbl->RemoveItem(a1, *(TESForm **)(v8 + 8), v7, 1, 0, 0, 0, 0, 0, 1, 0);
-      sub_5C1900();
-      (*((void (__thiscall **)(TESObjectREFRVtbl *, _DWORD))a1[1].vtbl->super.super.InitializeComponent + 0x43))(
-        a1[1].vtbl,
-        0);
+      data = (BaseExtraList *)process->GetEquippedAmmoData(process, 1)->extendData->node.data; /*0x6625d5*/
+      v7 = this->super.super.super.process->GetEquippedAmmoData(this->super.super.super.process, 1); /*0x6625e4*/
+      this->vtbl->super.super.super.RemoveItem((TESObjectREFR *)this, v7->type, data, 1, 0, 0, 0, 0, 0, 1, 0);// Final-item branch: remove exactly one AMMO form using the selected equipped ammo ExtraDataList; this branch runs when ExtraCount-1 is below one. /*0x662605*/
+      PlayerCharacter_ReconcileHotkeysAfterInventoryRemoval();// After selected-list removal of the final AMMO item, reconcile the player's eight hotkey/quickslot bindings so stale inventory bindings are cleared. /*0x662607*/
+      this->super.super.super.process->setEquippedAmmoData(this->super.super.super.process, 0);// Calls MiddleHighProcess_SetEquippedAmmoData(NULL): destroys/frees the process's copied equipped-AMMO EntryData and stores NULL. This call does not itself clear hand/quiver 3D. /*0x662619*/
     }
   }
 }

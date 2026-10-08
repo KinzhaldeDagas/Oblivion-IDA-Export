@@ -1,4 +1,4 @@
-0x43B0D0: push    0FFFFFFFFh
+0x43B0D0: push    0FFFFFFFFh; Verified shared texture dependency helper used by tree, landscape, and generated landscape-LOD paths. It queries the texture/resource cache; on a miss it creates and queues a QueuedTexture, while a hit with a parent creates an attached wrapper task so the dependency participates in parent completion. Caller priority and parent task are forwarded.
 0x43B0D2: push    offset SEH_43B0D0
 0x43B0D7: mov     eax, large fs:0
 0x43B0DD: push    eax
@@ -12,9 +12,9 @@
 0x43B0EA: push    eax
 0x43B0EB: lea     eax, [esp+24h+var_C]
 0x43B0EF: mov     large fs:0, eax
-0x43B0F5: mov     ecx, dword_B35300
+0x43B0F5: mov     ecx, dword ptr unk_B35300
 0x43B0FB: mov     eax, [ecx]
-0x43B0FD: mov     esi, [esp+24h+arg_0]
+0x43B0FD: mov     esi, [esp+24h+path]
 0x43B101: mov     edx, [eax+4]
 0x43B104: xor     ebx, ebx
 0x43B106: push    ebx
@@ -22,7 +22,7 @@
 0x43B108: call    edx
 0x43B10A: mov     edi, eax
 0x43B10C: cmp     edi, ebx
-0x43B10E: mov     [esp+24h+arg_0], edi
+0x43B10E: mov     [esp+24h+path], edi
 0x43B112: jz      short loc_43B11E
 0x43B114: lea     eax, [edi+4]
 0x43B117: push    eax; lpAddend
@@ -30,17 +30,17 @@
 0x43B11E: cmp     edi, ebx
 0x43B120: mov     [esp+24h+var_4], ebx
 0x43B124: jz      loc_43B1E9
-0x43B12A: mov     ebp, [esp+24h+arg_8]
+0x43B12A: mov     ebp, [esp+24h+parent]
 0x43B12E: cmp     ebp, ebx
 0x43B130: jz      loc_43B1C5
 0x43B136: push    30h ; '0'; Size
 0x43B138: call    FormHeapAlloc
 0x43B13D: add     esp, 4
-0x43B140: mov     [esp+24h+arg_8], eax
+0x43B140: mov     [esp+24h+parent], eax
 0x43B144: cmp     eax, ebx
 0x43B146: mov     byte ptr [esp+24h+var_4], 1
 0x43B14B: jz      short loc_43B15E
-0x43B14D: mov     ecx, [esp+24h+arg_4]
+0x43B14D: mov     ecx, dword ptr [esp+24h+taskType]
 0x43B151: push    ecx
 0x43B152: push    edi
 0x43B153: mov     ecx, eax
@@ -49,7 +49,7 @@
 0x43B15C: jmp     short loc_43B160
 0x43B15E: xor     esi, esi
 0x43B160: cmp     esi, ebx
-0x43B162: mov     [esp+24h+arg_4], esi
+0x43B162: mov     dword ptr [esp+24h+taskType], esi
 0x43B166: jz      short loc_43B172
 0x43B168: lea     edx, [esi+8]
 0x43B16B: push    edx; lpAddend
@@ -103,21 +103,21 @@
 0x43B1F7: cmp     eax, ebx
 0x43B1F9: mov     byte ptr [esp+24h+var_4], 3
 0x43B1FE: jz      short loc_43B211
-0x43B200: mov     ecx, [esp+24h+arg_4]
-0x43B204: push    ecx
-0x43B205: push    esi
-0x43B206: mov     ecx, eax
-0x43B208: call    sub_437050
+0x43B200: mov     ecx, dword ptr [esp+24h+taskType]
+0x43B204: push    ecx; taskType
+0x43B205: push    esi; path
+0x43B206: mov     ecx, eax; this
+0x43B208: call    QueuedTexture_ctor; Verified base initializer for QueuedTexture: initializes IOTask fields, stores normalized path and resolves archive/file entry via HashFilePath + ArchiveManager_LazyFileLookup.
 0x43B20D: mov     esi, eax
 0x43B20F: jmp     short loc_43B213
 0x43B211: xor     esi, esi
 0x43B213: cmp     esi, ebx
-0x43B215: mov     [esp+24h+arg_4], esi
+0x43B215: mov     dword ptr [esp+24h+taskType], esi
 0x43B219: jz      short loc_43B225
 0x43B21B: lea     edx, [esi+8]
 0x43B21E: push    edx; lpAddend
 0x43B21F: call    ds:InterlockedIncrement
-0x43B225: mov     eax, [esp+24h+arg_8]
+0x43B225: mov     eax, [esp+24h+parent]
 0x43B229: push    eax
 0x43B22A: mov     ecx, esi
 0x43B22C: mov     byte ptr [esp+28h+var_4], 4
@@ -147,3 +147,26 @@
 0x43B26C: pop     ebx
 0x43B26D: add     esp, 10h
 0x43B270: retn    0Ch
+0x9ACA00: lea     ecx, [ebp+4]; slot
+0x9ACA03: jmp     NiPointerSlot_Release
+0x9ACA08: mov     eax, [ebp+0Ch]
+0x9ACA0B: push    eax
+0x9ACA0C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ACA11: pop     ecx
+0x9ACA12: retn
+0x9ACA13: lea     ecx, [ebp+8]; void *
+0x9ACA16: jmp     sub_4BDDC0
+0x9ACA1B: mov     eax, [ebp-10h]
+0x9ACA1E: push    eax
+0x9ACA1F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ACA24: pop     ecx
+0x9ACA25: retn
+0x9ACA26: lea     ecx, [ebp+8]; void *
+0x9ACA29: jmp     sub_4BDDC0
+0x9ACA2E: mov     edx, dword ptr [esp+taskType]
+0x9ACA32: lea     eax, [edx-14h]
+0x9ACA35: mov     ecx, [edx-18h]
+0x9ACA38: xor     ecx, eax
+0x9ACA3A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9ACA3F: mov     eax, offset stru_AD9674
+0x9ACA44: jmp     ___CxxFrameHandler3

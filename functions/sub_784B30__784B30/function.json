@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x784B30",
+      "0x784B5C"
+    ]
+  ],
+  "chunks_sha256": "7ab8268da6523b5fd92134b4c3df94b45291a3fbe7d778d1602600f9406f64b9",
+  "comment_regular": "vector<float> uninitialized-fill primitive: constructs count four-byte float elements at destination from *value and returns destination+count. Identified from Oblivion call shape and four-byte stride.",
+  "comment_repeatable": "vector<float> uninitialized-fill primitive: constructs count four-byte float elements at destination from *value and returns destination+count. Identified from Oblivion call shape and four-byte stride.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_784B30",
+  "display_name": "OB_stVectorFloat_UninitializedFillN_010201A0",
   "end_ea": "0x784B5C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_784B30",
+  "name": "OB_stVectorFloat_UninitializedFillN_010201A0",
   "segment": ".text",
   "sha256": "7ab8268da6523b5fd92134b4c3df94b45291a3fbe7d778d1602600f9406f64b9",
   "size": 44,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x784B30",
-  "type": "float *__stdcall(float *, int, float *)",
+  "total_chunk_size": 44,
+  "type": "float *__stdcall(float *destination, unsigned int count, const float *value)",
   "xrefs_from_count": 20,
   "xrefs_to_count": 4
 }

@@ -29,7 +29,7 @@
 0x435D27: mov     ecx, [esi+0A8h]
 0x435D2D: test    ecx, ecx
 0x435D2F: jz      short loc_435D48
-0x435D31: call    sub_452A60
+0x435D31: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x435D36: cmp     eax, esi
 0x435D38: jz      short loc_435D48
 0x435D3A: mov     ecx, [esi+0A8h]

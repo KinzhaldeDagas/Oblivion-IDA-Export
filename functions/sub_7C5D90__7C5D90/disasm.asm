@@ -1,7 +1,7 @@
-0x7C5D90: push    ecx
+0x7C5D90: push    ecx; Recursively walks a NiNode subtree. For receiver geometry with property ID 4/type 1..10, removes it from every ShadowSceneLight receiver list. For child nodes, recurses.
 0x7C5D91: push    ebx
 0x7C5D92: push    ebp
-0x7C5D93: mov     ebp, [esp+0Ch+arg_0]
+0x7C5D93: mov     ebp, [esp+0Ch+node]
 0x7C5D97: movzx   eax, word ptr [ebp+0B6h]
 0x7C5D9E: xor     ebx, ebx
 0x7C5DA0: test    eax, eax
@@ -23,7 +23,7 @@
 0x7C5DD2: mov     ecx, edi
 0x7C5DD4: jz      short loc_7C5E38
 0x7C5DD6: push    4
-0x7C5DD8: call    NiNode_GetNiPropertyByID
+0x7C5DD8: call    NiNode_GetNiPropertyByID;
 0x7C5DDD: mov     esi, eax
 0x7C5DDF: test    esi, esi
 0x7C5DE1: jz      short loc_7C5E06
@@ -57,7 +57,7 @@
 0x7C5E28: mov     esi, [esi]
 0x7C5E2A: jz      short loc_7C5E32
 0x7C5E2C: push    edi
-0x7C5E2D: call    sub_7D6940
+0x7C5E2D: call    ShadowSceneLight_RemoveReceiverGeometry; Remove one receiver geometry from both the property-side shadow-light association and the light-local object list.
 0x7C5E32: test    esi, esi
 0x7C5E34: jnz     short loc_7C5E20
 0x7C5E36: jmp     short loc_7C5E4D
@@ -66,9 +66,9 @@
 0x7C5E3D: call    eax
 0x7C5E3F: test    eax, eax
 0x7C5E41: jz      short loc_7C5E4D
-0x7C5E43: mov     ecx, [esp+14h+var_4]
-0x7C5E47: push    eax
-0x7C5E48: call    sub_7C5D90
+0x7C5E43: mov     ecx, [esp+14h+var_4]; this
+0x7C5E47: push    eax; node
+0x7C5E48: call    ShadowSceneNode_RemoveReceiverGeometryRecursive; Recursively walks a NiNode subtree. For receiver geometry with property ID 4/type 1..10, removes it from every ShadowSceneLight receiver list. For child nodes, recurses.
 0x7C5E4D: movzx   eax, word ptr [ebp+0B6h]
 0x7C5E54: add     ebx, 1
 0x7C5E57: cmp     eax, ebx

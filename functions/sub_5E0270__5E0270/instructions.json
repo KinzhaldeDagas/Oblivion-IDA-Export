@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5E0270",
-    "line": "push    esi",
+    "line": "push    esi; Writes LowProcess.procedureCompleted through the process vtable, then requests process reevaluation. DialoguePackage construction passes false; exhaustion passes true for both participants.",
     "mnemonic": "push",
     "size": 1
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x5E027E",
-    "line": "mov     edx, [esp+4+arg_0]",
+    "line": "mov     edx, dword ptr [esp+4+completed]",
     "mnemonic": "mov",
     "size": 4
   },

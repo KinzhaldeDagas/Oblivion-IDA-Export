@@ -182,3 +182,43 @@
 0x71FA80: pop     ebx
 0x71FA81: add     esp, 14h
 0x71FA84: retn
+0x9CA130: mov     ecx, [ebp-14h]; this
+0x9CA133: jmp     ??1NiImageConverter@@UAE@XZ; NiImageConverter::~NiImageConverter(void)
+0x9CA138: mov     ecx, [ebp-14h]
+0x9CA13B: add     ecx, 680h; this
+0x9CA141: jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x9CA146: mov     ecx, [ebp-14h]
+0x9CA149: add     ecx, 890h
+0x9CA14F: jmp     j_??1?$NiTPointerList@PAVNiImageReader@@@@UAE@XZ; NiTPointerList<NiImageReader *>::~NiTPointerList<NiImageReader *>(void)
+0x9CA154: mov     eax, [ebp-10h]
+0x9CA157: push    eax
+0x9CA158: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA15D: pop     ecx
+0x9CA15E: retn
+0x9CA15F: mov     eax, [ebp-10h]
+0x9CA162: push    eax
+0x9CA163: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA168: pop     ecx
+0x9CA169: retn
+0x9CA16A: mov     eax, [ebp-10h]
+0x9CA16D: push    eax
+0x9CA16E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA173: pop     ecx
+0x9CA174: retn
+0x9CA175: mov     eax, [ebp-10h]
+0x9CA178: push    eax
+0x9CA179: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA17E: pop     ecx
+0x9CA17F: retn
+0x9CA180: mov     eax, [ebp-10h]
+0x9CA183: push    eax
+0x9CA184: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA189: pop     ecx
+0x9CA18A: retn
+0x9CA18B: mov     edx, [esp+arg_4]
+0x9CA18F: lea     eax, [edx-18h]
+0x9CA192: mov     ecx, [edx-1Ch]
+0x9CA195: xor     ecx, eax
+0x9CA197: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA19C: mov     eax, offset stru_AF28CC
+0x9CA1A1: jmp     ___CxxFrameHandler3

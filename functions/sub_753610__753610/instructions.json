@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x753627",
-    "line": "lea     edi, [esp+114h+var_68]",
+    "line": "lea     edi, [esp+114h+local]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x75363F",
-    "line": "lea     eax, [esp+114h+var_34]",
+    "line": "lea     eax, [esp+114h+parent]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -115,61 +115,61 @@
   },
   {
     "ea": "0x75364D",
-    "line": "call    sub_718A80",
+    "line": "call    sub_718A80;",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x753652",
-    "line": "lea     ecx, [esp+114h+var_68]",
+    "line": "lea     ecx, [esp+114h+local]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x753659",
-    "line": "push    ecx",
+    "line": "push    ecx; local",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x75365A",
-    "line": "lea     edx, [esp+118h+var_D0]",
+    "line": "lea     edx, [esp+118h+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x75365E",
-    "line": "push    edx",
+    "line": "push    edx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x75365F",
-    "line": "lea     ecx, [esp+11Ch+var_34]",
+    "line": "lea     ecx, [esp+11Ch+parent]; parent",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x753666",
-    "line": "call    sub_53D7A0",
+    "line": "call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x75366B",
-    "line": "mov     eax, [esp+114h+var_AC]",
+    "line": "mov     eax, [esp+114h+out.pos.x]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x75366F",
-    "line": "mov     ecx, [esp+114h+var_A8]",
+    "line": "mov     ecx, [esp+114h+out.pos.y]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x753673",
-    "line": "mov     edx, [esp+114h+var_A4]",
+    "line": "mov     edx, [esp+114h+out.pos.z]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x753688",
-    "line": "lea     ecx, [esp+11Ch+var_D0]",
+    "line": "lea     ecx, [esp+11Ch+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x753699",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },

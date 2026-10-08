@@ -1,19 +1,36 @@
 {
-  "callees_count": 32,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 17,
   "callers_count": 2,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x854190",
+      "0x854373"
+    ],
+    [
+      "0x9D3980",
+      "0x9D39D2"
+    ]
+  ],
+  "chunks_sha256": "604177169f7f352de886015f0deeafbaa270d369663f4c8c82782fdc3f8e3c01",
+  "comment_regular": "\n\nSpeedTreeOBSE v159 evidence: branch subtype a7 emits fog selector194, zero lights. Used after native texture-only branch production to preserve separate fog. Constructor stores byte6 first marker and byte7=0. Native fog pass uses STB1009 vertex/pixel, SRCALPHA/INVSRCALPHA, ZFUNC EQUAL, ZWRITE0, no alpha test; texture pass depth masks cutout holes.",
   "comment_repeatable": "",
-  "data_refs_count": 0,
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
   "display_name": "sub_854190",
   "end_ea": "0x854373",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_854190",
   "segment": ".text",
   "sha256": "fbad170902ae3d3b41f94ae1444e1239f2efcd259cd67cdb3d6e0e24b2910861",
   "size": 483,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x854190",
-  "type": "NiTPointerList_Node_void *__thiscall(_DWORD *this, int, NiTPointerList_Node_void *, int, char *, char, char, char)",
-  "xrefs_from_count": 164,
+  "total_chunk_size": 565,
+  "type": "NiTPointerList_Node_void *__thiscall(_DWORD *this, void *vtable, NiTPointerList_Node_void *, RenderPass_DecodedLayout *, char *, char, char, char)",
+  "xrefs_from_count": 198,
   "xrefs_to_count": 2
 }

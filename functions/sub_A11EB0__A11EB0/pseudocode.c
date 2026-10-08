@@ -1,4 +1,4 @@
-BSStringT *sub_A11EB0()
+NiRTTI *sub_A11EB0()
 {
-  return sub_70E220((BSStringT *)&unk_B47780, "SpeedTreeFrondShader", (int)&ImageSpaceShaderRTTI___);
+  return NiRTTI_Constructor(&stru_B47780, "SpeedTreeFrondShader", &MEMORY[0xB4257C]); /*0xa11ec4*/
 }

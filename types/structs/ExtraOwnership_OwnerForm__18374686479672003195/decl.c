@@ -1,1 +1,5 @@
-ExtraOwnership::OwnerForm
+union ExtraOwnership::OwnerForm
+{
+TESForm *ownerForm;
+void *ownerFaction;
+};

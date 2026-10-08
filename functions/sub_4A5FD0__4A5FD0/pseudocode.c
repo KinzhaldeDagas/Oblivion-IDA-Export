@@ -1,9 +1,11 @@
-_DWORD *__thiscall sub_4A5FD0(_DWORD *this, char a2)
+TESRegionGrassObjectList *__thiscall TESRegionGrassObjectList_ctor(
+        TESRegionGrassObjectList *self,
+        unsigned __int8 ownsObjectMemory)
 {
-  *(this + 1) = 0;
-  *(this + 2) = 0;
-  *this = &TESRegionGrassObjectList::`vftable';
-  *((_BYTE *)this + 0xC) = a2;
-  *(this + 4) = 0;
-  return this;
+  self->head = 0; /*0x4a5fd8*/
+  self->tail = 0; /*0x4a5fdb*/
+  self->vtable = TESRegionGrassObjectList::`vftable'; /*0x4a5fde*/
+  self->ownsObjects = ownsObjectMemory; /*0x4a5fe4*/
+  self->count = 0; /*0x4a5fe7*/
+  return self; /*0x4a5fea*/
 }

@@ -1,18 +1,31 @@
 {
-  "callees_count": 21,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 16,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x882FC0",
+      "0x88312E"
+    ]
+  ],
+  "chunks_sha256": "96ea4e5f05920751264277fb4cc018e2770f29e692059c738a335c6c5aadece5",
+  "comment_regular": "Hair viewer strings call the base PP-lighting exporter, so native Refract/RefractF power/period state is visible on Hair before Hair-specific fields are appended.",
+  "comment_repeatable": "Hair viewer strings call the base PP-lighting exporter, so native Refract/RefractF power/period state is visible on Hair before Hair-specific fields are appended.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 4,
-  "display_name": "sub_882FC0",
+  "display_name": "HairShaderProperty_GetViewerStrings",
   "end_ea": "0x88312E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_882FC0",
+  "name": "HairShaderProperty_GetViewerStrings",
   "segment": ".text",
   "sha256": "96ea4e5f05920751264277fb4cc018e2770f29e692059c738a335c6c5aadece5",
   "size": 366,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x882FC0",
+  "total_chunk_size": 366,
   "type": "unsigned int __thiscall(float *this, NiTArray_NiTexturingPropertyMap *)",
   "xrefs_from_count": 143,
   "xrefs_to_count": 1

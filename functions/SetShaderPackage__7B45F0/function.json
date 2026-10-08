@@ -1,19 +1,32 @@
 {
-  "callees_count": 27,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
+  "chunks": [
+    [
+      "0x7B45F0",
+      "0x7B4779"
+    ]
+  ],
+  "chunks_sha256": "a06121504b11e108f59a871508d279e1bffda190b438d8de3ded940362f1604a",
+  "comment_regular": "[Verified] Selects and publishes the renderer shader-package version at RendererGlobalState+0xAF from adapter/version inputs and vendor prefix. The third argument is bForce1XShaders; when true and a shader version is available, the function forces package version 1. Argument maxPS20Instructions is the same value logged as maxPS20inst; ATI/NVIDIA paths choose versions 3–6 and set +0xC when it exceeds 0xFF. Fallback branches choose version 0/1 and clear HDR mode at +0x1D7. [Verified] +0xC gates Lighting30 definition 0x1A; [Probable] it represents shader-feature capability. This native selector emits versions 0–6 only; [Unknown] the writer/source of version 7, which the package-index switch handles, has not yet been identified.",
+  "comment_repeatable": "[Verified] Selects and publishes the renderer shader-package version at RendererGlobalState+0xAF from adapter/version inputs and vendor prefix. The third argument is bForce1XShaders; when true and a shader version is available, the function forces package version 1. Argument maxPS20Instructions is the same value logged as maxPS20inst; ATI/NVIDIA paths choose versions 3–6 and set +0xC when it exceeds 0xFF. Fallback branches choose version 0/1 and clear HDR mode at +0x1D7. [Verified] +0xC gates Lighting30 definition 0x1A; [Probable] it represents shader-feature capability. This native selector emits versions 0–6 only; [Unknown] the writer/source of version 7, which the package-index switch handles, has not yet been identified.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
   "display_name": "SetShaderPackage",
   "end_ea": "0x7B4779",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "SetShaderPackage",
   "segment": ".text",
   "sha256": "a06121504b11e108f59a871508d279e1bffda190b438d8de3ded940362f1604a",
   "size": 393,
+  "source_annotation_confidence": "Verified",
   "start_ea": "0x7B45F0",
-  "type": "int __cdecl(__int16, __int16, char, int, char *Str1, int)",
+  "total_chunk_size": 393,
+  "type": "int __cdecl(__int16 shaderCapsA, __int16 shaderCapsB, char bForce1XShaders, int adapterCaps, const char *adapterVendorPrefix, int maxPS20Instructions)",
   "xrefs_from_count": 115,
   "xrefs_to_count": 2
 }

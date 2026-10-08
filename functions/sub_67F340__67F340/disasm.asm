@@ -1,34 +1,34 @@
-0x67F340: sub     esp, 14h
+0x67F340: sub     esp, 14h; Verified unlink path for a door reference whose ExtraTeleport is being removed: locate its AStarWorldNode by reciprocal space pair and endpoint refs, remove it from both inner lists, remove/free empty inner maps and outer entries, unlink it from LowPathSearchGlobals.allAStarWorldNodes, release its state slot, and free the node. Called from RemoveExtraTeleportFromDoorRef and ExtraData cleanup.
 0x67F343: push    edi
 0x67F344: xor     edi, edi
 0x67F346: cmp     ds:0B3BE00h, edi
 0x67F34C: jz      loc_67F5C6
 0x67F352: push    ebp
 0x67F353: push    offset unk_A2F830
-0x67F358: mov     ecx, offset g_pathingMutex
+0x67F358: mov     ecx, 0B3BE80h
 0x67F35D: call    NiEnterCriticalSection
-0x67F362: mov     ebp, [esp+1Ch+arg_0]
+0x67F362: mov     ebp, [esp+1Ch+doorReference]
 0x67F366: cmp     ebp, edi
 0x67F368: jz      loc_67F5B7
 0x67F36E: push    esi
 0x67F36F: mov     ecx, ebp; this
-0x67F371: call    GetTeleportExtraData
+0x67F371: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x67F376: mov     esi, eax
 0x67F378: cmp     esi, edi
 0x67F37A: jz      loc_67F5B6
-0x67F380: mov     ecx, esi
-0x67F382: call    sub_42B410
+0x67F380: mov     ecx, esi; this
+0x67F382: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x67F387: test    eax, eax
 0x67F389: jz      loc_67F5B6
 0x67F38F: push    ebx
-0x67F390: mov     ecx, ebp
-0x67F392: call    sub_4D8AF0
+0x67F390: mov     ecx, ebp; this
+0x67F392: call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.
 0x67F397: mov     ebx, eax
-0x67F399: mov     ecx, esi
+0x67F399: mov     ecx, esi; this
 0x67F39B: mov     [esp+24h+var_C], ebx
-0x67F39F: call    sub_42B410
-0x67F3A4: mov     ecx, eax
-0x67F3A6: call    sub_4D8AF0
+0x67F39F: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
+0x67F3A4: mov     ecx, eax; this
+0x67F3A6: call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.
 0x67F3AB: cmp     ebx, edi
 0x67F3AD: mov     esi, eax
 0x67F3AF: mov     [esp+24h+var_8], esi
@@ -62,9 +62,9 @@
 0x67F412: call    BSSimpleList_IsEmpty
 0x67F417: test    al, al
 0x67F419: jnz     loc_67F5B5
-0x67F41F: mov     ecx, [esi]
-0x67F421: push    ebp
-0x67F422: call    sub_680410
+0x67F41F: mov     ecx, [esi]; this
+0x67F421: push    ebp; reference
+0x67F422: call    AStarWorldNode_ContainsReference; Verified endpoint predicate: returns true when the supplied TESObjectREFR equals either referenceA or referenceB in the AStarWorldNode.
 0x67F427: test    al, al
 0x67F429: jnz     short loc_67F445
 0x67F42B: mov     edi, esi
@@ -74,7 +74,7 @@
 0x67F434: pop     ebx
 0x67F435: pop     esi
 0x67F436: pop     ebp
-0x67F437: mov     ecx, offset g_pathingMutex; lpCriticalSection
+0x67F437: mov     ecx, 0B3BE80h; lpCriticalSection
 0x67F43C: pop     edi
 0x67F43D: add     esp, 14h
 0x67F440: jmp     NiLeaveCriticalSection_0
@@ -87,14 +87,14 @@
 0x67F452: call    BSSimpleList_Remove
 0x67F457: jmp     short loc_67F460
 0x67F459: mov     ecx, esi
-0x67F45B: call    sub_67F100
+0x67F45B: call    BSSimpleList_PopHeadWithoutPayloadFree; Verified generic BSSimpleList head removal helper: advances the inline first-node header to its successor and frees the detached list node; if there is no successor, clears the head data pointer.
 0x67F460: mov     esi, [esp+24h+var_10]
 0x67F464: mov     ecx, esi
 0x67F466: call    BSSimpleList_IsEmpty
 0x67F46B: test    al, al
 0x67F46D: jz      short loc_67F4AC
 0x67F46F: push    esi
-0x67F470: call    FormHeapFree
+0x67F470: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x67F475: mov     edx, [esp+28h+var_8]
 0x67F479: add     esp, 4
 0x67F47C: push    edx
@@ -154,7 +154,7 @@
 0x67F530: pop     ebx
 0x67F531: pop     esi
 0x67F532: pop     ebp
-0x67F533: mov     ecx, offset g_pathingMutex; lpCriticalSection
+0x67F533: mov     ecx, 0B3BE80h; lpCriticalSection
 0x67F538: pop     edi
 0x67F539: add     esp, 14h
 0x67F53C: jmp     NiLeaveCriticalSection_0
@@ -165,13 +165,13 @@
 0x67F548: call    BSSimpleList_Remove
 0x67F54D: jmp     short loc_67F556
 0x67F54F: mov     ecx, esi
-0x67F551: call    sub_67F100
+0x67F551: call    BSSimpleList_PopHeadWithoutPayloadFree; Verified generic BSSimpleList head removal helper: advances the inline first-node header to its successor and frees the detached list node; if there is no successor, clears the head data pointer.
 0x67F556: mov     ecx, ebp
 0x67F558: call    BSSimpleList_IsEmpty
 0x67F55D: test    al, al
 0x67F55F: jz      short loc_67F596
 0x67F561: push    ebp
-0x67F562: call    FormHeapFree
+0x67F562: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x67F567: mov     edx, [esp+28h+var_C]
 0x67F56B: add     esp, 4
 0x67F56E: push    edx
@@ -190,17 +190,17 @@
 0x67F591: call    NiTMap_RemoveAt
 0x67F596: mov     esi, [esp+24h+var_4]
 0x67F59A: push    esi
-0x67F59B: mov     ecx, offset dword_B3BE18
+0x67F59B: mov     ecx, 0B3BE18h
 0x67F5A0: call    BSSimpleList_Remove
-0x67F5A5: mov     ecx, esi
-0x67F5A7: call    sub_680340
+0x67F5A5: mov     ecx, esi; this
+0x67F5A7: call    AStarWorldNode_ReleaseSearchStateSlot; Verified: clears allocation flag 0x04 for this AStarWorldNode's table slot and rewinds LowPathSearchGlobals.nextFreeStateIndex when the released slot is lower.
 0x67F5AC: push    esi
-0x67F5AD: call    FormHeapFree
+0x67F5AD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x67F5B2: add     esp, 4
 0x67F5B5: pop     ebx
 0x67F5B6: pop     esi
 0x67F5B7: pop     ebp
-0x67F5B8: mov     ecx, offset g_pathingMutex; lpCriticalSection
+0x67F5B8: mov     ecx, 0B3BE80h; lpCriticalSection
 0x67F5BD: pop     edi
 0x67F5BE: add     esp, 14h
 0x67F5C1: jmp     NiLeaveCriticalSection_0

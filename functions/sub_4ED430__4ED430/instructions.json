@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4ED430",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Verified per-frame terrain-quad state machine: outside maximumLODQuadDistance advances detach/unload; in range, Unloaded/Loading quads without geometry request a NIF, LoadedDetached/UnloadPending quads attach under LandLOD and become Attached, while Attached quads are stable. State meanings for 1..5 are written in TerrainLODQuadState_Oblivion; values 0 and 6 are Unknown.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x4ED435",
-    "line": "mov     edi, [esp+10h+arg_0]",
+    "line": "mov     edi, [esp+10h+landLODParent]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,25 +61,25 @@
   },
   {
     "ea": "0x4ED448",
-    "line": "mov     [esp+10h+arg_0], ecx",
+    "line": "mov     [esp+10h+landLODParent], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4ED44C",
-    "line": "mov     ecx, [esp+10h+arg_8]",
+    "line": "mov     ecx, [esp+10h+viewX]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4ED450",
-    "line": "fild    [esp+10h+arg_0]",
+    "line": "fild    [esp+10h+landLODParent]",
     "mnemonic": "fild",
     "size": 4
   },
   {
     "ea": "0x4ED454",
-    "line": "fstp    dword ptr [esi+18h]",
+    "line": "fstp    dword ptr [esi+18h]; Verified world origin: quadOriginX = signed quadX << 17, matching kTerrainLODQuadWorldSize = 131072 world units.",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x4ED45B",
-    "line": "mov     eax, [esp+10h+arg_C]",
+    "line": "mov     eax, [esp+10h+viewY]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -103,25 +103,25 @@
   },
   {
     "ea": "0x4ED462",
-    "line": "mov     [esp+10h+arg_0], edx",
+    "line": "mov     [esp+10h+landLODParent], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4ED466",
-    "line": "push    eax; float",
+    "line": "push    eax; pointY",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4ED467",
-    "line": "push    ecx; float",
+    "line": "push    ecx; pointX",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4ED468",
-    "line": "fild    [esp+18h+arg_0]",
+    "line": "fild    [esp+18h+landLODParent]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -139,13 +139,13 @@
   },
   {
     "ea": "0x4ED46F",
-    "line": "fstp    [esp+1Ch+arg_0]",
+    "line": "fstp    [esp+1Ch+landLODParent]; Verified world origin: quadOriginY = signed quadY << 17, matching kTerrainLODQuadWorldSize = 131072 world units.",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4ED473",
-    "line": "fld     [esp+1Ch+arg_0]",
+    "line": "fld     [esp+1Ch+landLODParent]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -163,25 +163,25 @@
   },
   {
     "ea": "0x4ED47D",
-    "line": "fstp    [esp+1Ch+var_8]",
+    "line": "fstp    [esp+1Ch+quadOriginX]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4ED481",
-    "line": "mov     eax, [esp+1Ch+var_8]",
+    "line": "mov     eax, [esp+1Ch+quadOriginX]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4ED485",
-    "line": "fstp    [esp+1Ch+var_4]",
+    "line": "fstp    [esp+1Ch+quadOriginY]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4ED489",
-    "line": "mov     edx, [esp+1Ch+var_4]",
+    "line": "mov     edx, [esp+1Ch+quadOriginY]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -193,31 +193,31 @@
   },
   {
     "ea": "0x4ED493",
-    "line": "fstp    [esp+1Ch+var_1C]; float",
+    "line": "fstp    [esp+1Ch+quadWidth]; quadWidth",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4ED496",
-    "line": "push    edx; float",
+    "line": "push    edx; quadOriginY",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4ED497",
-    "line": "push    eax; float",
+    "line": "push    eax; quadOriginX",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4ED498",
-    "line": "call    sub_4EC870",
+    "line": "call    TESTerrainLODQuad_DistanceToXYBounds; Verified geometric distance helper computes 2D Euclidean distance from a point to the axis-aligned square [quadOriginX,quadOriginX+quadWidth] x [quadOriginY,quadOriginY+quadWidth].",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4ED49D",
-    "line": "fld     [esp+10h+arg_4]",
+    "line": "fld     [esp+10h+maximumLODQuadDistance]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -247,19 +247,19 @@
   },
   {
     "ea": "0x4ED4AA",
-    "line": "push    edi",
+    "line": "push    edi; landLODParent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4ED4AB",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4ED4AD",
-    "line": "call    sub_4ECAE0",
+    "line": "call    TESTerrainLODQuad_AdvanceUnloadState; Verified recursive unload state machine: Attached(3)->LoadedDetached(2) removes the terrain node; LoadedDetached(2)->UnloadPending(4); the next unload pass releases the mesh and reaches Unloaded(5). The same transition recurses over four child pointers at +0x30..+0x3C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,13 +349,13 @@
   },
   {
     "ea": "0x4ED4D4",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4ED4D6",
-    "line": "call    sub_4ED320",
+    "line": "call    TESTerrainLODQuad_BuildMesh; Verified BuildMesh scheduling: allocates a TerrainLODQuadLoadTask with priority 3 and the current quad-data context; passes the worldspace filename key and quad tile coordinates, then queues the task.",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x4ED512",
-    "line": "fstp    [esp+1Ch+var_1C]; float",
+    "line": "fstp    [esp+1Ch+quadWidth]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x4ED539",
-    "line": "mov     dword ptr [esi+8], 3",
+    "line": "mov     dword ptr [esi+8], 3; Verified attach transition: attaches terrainLODNode to the LandLOD parent and changes quad state to Attached (3).",
     "mnemonic": "mov",
     "size": 7
   },

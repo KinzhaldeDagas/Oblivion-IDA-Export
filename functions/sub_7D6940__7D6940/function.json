@@ -1,19 +1,36 @@
 {
-  "callees_count": 15,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_7D6940",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x7D6940",
+      "0x7D6A3E"
+    ],
+    [
+      "0x9CF800",
+      "0x9CF823"
+    ]
+  ],
+  "chunks_sha256": "ea523bd69024d12dc2604bb489a82a32f5f339b20ac2dcb40d0965f9166f69cb",
+  "comment_regular": "Remove one receiver geometry from both the property-side shadow-light association and the light-local object list.",
+  "comment_repeatable": "Remove one receiver geometry from both the property-side shadow-light association and the light-local object list.\n\nMEF PERF 2026-10-07 PASS2: PERF-13 paired ownership: property kind4/subtype1..10 causes property-side removal7D69A9, then geometry temporary ref, full-list removal, returned ref release and temporary release. Preserve SEH/refcount/node-pool behavior including fence removal; direct suffix detach skips required property side effects.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "ShadowSceneLight_RemoveReceiverGeometry",
   "end_ea": "0x7D6A3E",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
-  "name": "sub_7D6940",
+  "name": "ShadowSceneLight_RemoveReceiverGeometry",
   "segment": ".text",
   "sha256": "be7750b2d4592a0211cb72f874fcf4eb1bc85ac9b8e111f4190b7e907f259c4f",
   "size": 254,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7D6940",
+  "total_chunk_size": 289,
   "type": "LONG __thiscall(int **this, NiNode *)",
-  "xrefs_from_count": 110,
+  "xrefs_from_count": 121,
   "xrefs_to_count": 4
 }

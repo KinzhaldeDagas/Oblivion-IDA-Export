@@ -22,7 +22,7 @@
 0x470112: push    0; a4
 0x470114: push    esi; Dst
 0x470115: mov     ecx, ebx; a1
-0x470117: call    TESFile_GetChunkData
+0x470117: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x47011C: push    0; a3
 0x47011E: push    esi; a2
 0x47011F: lea     ecx, [edi+4]; this
@@ -39,7 +39,7 @@
 0x47013A: retn
 0x47013B: mov     eax, [edi+4]
 0x47013E: push    eax
-0x47013F: call    FormHeapFree
+0x47013F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x470144: add     esp, 4
 0x470147: mov     [edi+4], esi
 0x47014A: mov     [edi+0Ah], si

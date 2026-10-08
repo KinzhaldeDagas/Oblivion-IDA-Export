@@ -1,4 +1,4 @@
-void *sub_43F4F0()
+NiRTTI *sub_43F4F0()
 {
-  return &unk_B33E80;
+  return &stru_B33E80; /*0x43f4f5*/
 }

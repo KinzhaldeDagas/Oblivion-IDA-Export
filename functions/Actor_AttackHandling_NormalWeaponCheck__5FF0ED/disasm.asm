@@ -35,9 +35,9 @@
 0x5FF157: jnz     short loc_5FF16C
 0x5FF159: test    ebp, ebp
 0x5FF15B: jnz     short loc_5FF16C
-0x5FF15D: push    11h
-0x5FF15F: mov     ecx, edi
-0x5FF161: call    Actor_GetSkillMasteryLevel
+0x5FF15D: push    11h; actorValue
+0x5FF15F: mov     ecx, edi; this
+0x5FF161: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x5FF166: cmp     eax, 2
 0x5FF169: setl    bl
 0x5FF16C: mov     eax, [esi]

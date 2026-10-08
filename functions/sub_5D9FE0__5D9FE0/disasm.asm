@@ -10,9 +10,9 @@
 0x5D9FF6: fld1
 0x5D9FF8: push    ecx
 0x5D9FF9: mov     ecx, [esi+54h]; this
-0x5D9FFC: fstp    [esp+8+a2]; a3
-0x5D9FFF: push    0FA1h; a2
-0x5DA004: call    Tile_SetFloat
+0x5D9FFC: fstp    [esp+8+a2]; value
+0x5D9FFF: push    0FA1h; propertyCode
+0x5DA004: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5DA009: mov     ecx, [esi+58h]
 0x5DA00C: push    0FAFh
 0x5DA011: call    Tile_GetFloat

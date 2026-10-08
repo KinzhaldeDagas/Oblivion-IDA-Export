@@ -23,7 +23,7 @@
 0x7571E9: test    eax, eax
 0x7571EB: jz      short loc_7571FE
 0x7571ED: lea     ecx, [ecx+0]
-0x7571F0: cmp     eax, offset dword_B40C3C
+0x7571F0: cmp     eax, offset stru_B40C3C
 0x7571F5: jz      short loc_757205
 0x7571F7: mov     eax, [eax+4]
 0x7571FA: test    eax, eax

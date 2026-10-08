@@ -8,7 +8,7 @@
 0x711FD4: push    esi; Dst
 0x711FD5: call    _strcpy_s
 0x711FDA: push    esi
-0x711FDB: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x711FDB: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x711FE0: mov     ecx, [edi+1E8h]
 0x711FE6: add     esp, 10h
 0x711FE9: push    esi; FullPath

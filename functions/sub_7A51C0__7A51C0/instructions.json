@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A51C0",
-    "line": "push    ebp",
+    "line": "push    ebp; Oblivion projected-shadow UV generator. Projects each indexed vertex along parsed right/up axes, optionally applies the six-float remap, and appends the resulting pair to CIndexedGeometry::shadowTexcoords.",
     "mnemonic": "push",
     "size": 1
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x7A51D0",
-    "line": "fld     [ebp+arg_10]",
+    "line": "fld     [ebp+radius]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x7A51E1",
-    "line": "fst     [esp+88h+var_48]",
+    "line": "fst     [esp+88h+var_48.x]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x7A51F2",
-    "line": "fst     [esp+88h+var_44]",
+    "line": "fst     [esp+88h+var_48.y]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -151,13 +151,13 @@
   },
   {
     "ea": "0x7A5203",
-    "line": "fstp    [esp+88h+var_40]",
+    "line": "fstp    [esp+88h+var_48.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A5207",
-    "line": "fld     [ebp+arg_4]",
+    "line": "fld     [ebp+centerX]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -169,19 +169,19 @@
   },
   {
     "ea": "0x7A520C",
-    "line": "fsub    [esp+88h+var_48]",
+    "line": "fsub    [esp+88h+var_48.x]",
     "mnemonic": "fsub",
     "size": 4
   },
   {
     "ea": "0x7A5210",
-    "line": "fstp    [esp+88h+var_54]",
+    "line": "fstp    [esp+88h+start.x]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A5214",
-    "line": "fld     [ebp+arg_8]",
+    "line": "fld     [ebp+centerY]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -193,19 +193,19 @@
   },
   {
     "ea": "0x7A5219",
-    "line": "fsub    [esp+88h+var_44]",
+    "line": "fsub    [esp+88h+var_48.y]",
     "mnemonic": "fsub",
     "size": 4
   },
   {
     "ea": "0x7A521D",
-    "line": "fstp    [esp+88h+var_50]",
+    "line": "fstp    [esp+88h+start.y]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A5221",
-    "line": "fld     [ebp+arg_C]",
+    "line": "fld     [ebp+centerZ]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -217,13 +217,13 @@
   },
   {
     "ea": "0x7A5226",
-    "line": "fsub    [esp+88h+var_40]",
+    "line": "fsub    [esp+88h+var_48.z]",
     "mnemonic": "fsub",
     "size": 4
   },
   {
     "ea": "0x7A522A",
-    "line": "fstp    [esp+88h+var_4C]",
+    "line": "fstp    [esp+88h+start.z]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x7A5230",
-    "line": "fstp    [esp+88h+var_48]",
+    "line": "fstp    [esp+88h+var_48.x]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x7A5236",
-    "line": "fstp    [esp+88h+var_44]",
+    "line": "fstp    [esp+88h+var_48.y]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -259,13 +259,13 @@
   },
   {
     "ea": "0x7A523E",
-    "line": "fstp    [esp+88h+var_40]",
+    "line": "fstp    [esp+88h+var_48.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A5242",
-    "line": "fld     [esp+88h+var_48]",
+    "line": "fld     [esp+88h+var_48.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -277,13 +277,13 @@
   },
   {
     "ea": "0x7A5248",
-    "line": "fstp    [esp+88h+var_30]",
+    "line": "fstp    [esp+88h+end.x]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A524C",
-    "line": "fld     [esp+88h+var_44]",
+    "line": "fld     [esp+88h+var_48.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -295,13 +295,13 @@
   },
   {
     "ea": "0x7A5252",
-    "line": "fstp    [esp+88h+var_2C]",
+    "line": "fstp    [esp+88h+end.y]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A5256",
-    "line": "fld     [esp+88h+var_40]",
+    "line": "fld     [esp+88h+var_48.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x7A525C",
-    "line": "fstp    [esp+88h+var_28]",
+    "line": "fstp    [esp+88h+end.z]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x7A5281",
-    "line": "fstp    [esp+88h+var_48]",
+    "line": "fstp    [esp+88h+var_48.x]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x7A528B",
-    "line": "fstp    [esp+88h+var_44]",
+    "line": "fstp    [esp+88h+var_48.y]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x7A5295",
-    "line": "fstp    [esp+88h+var_40]",
+    "line": "fstp    [esp+88h+var_48.z]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x7A529E",
-    "line": "fstp    [esp+88h+var_74]",
+    "line": "fstp    [esp+88h+shadowST]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x7A52B8",
-    "line": "fld     [esp+88h+var_74]",
+    "line": "fld     [esp+88h+shadowST]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x7A52C0",
-    "line": "fstp    [esp+88h+var_18]",
+    "line": "fstp    [esp+88h+var_18.x]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x7A52C8",
-    "line": "mov     ebx, [ebp+arg_0]",
+    "line": "mov     ebx, [ebp+geometry]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x7A52D1",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x7A52D7",
-    "line": "fstp    [esp+88h+var_14]",
+    "line": "fstp    [esp+88h+var_18.y]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -571,13 +571,13 @@
   },
   {
     "ea": "0x7A52E3",
-    "line": "fstp    [esp+88h+var_10]",
+    "line": "fstp    [esp+88h+var_18.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A52E7",
-    "line": "call    sub_7877B0",
+    "line": "call    OB_CIndexedGeometry_GetVertexCount_010201A0; Returns the number of indexed vertices as vertexCoords.floatCount / 3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x7A52F9",
-    "line": "mov     edi, [ebp+arg_14]",
+    "line": "mov     edi, [ebp+shadowCoordRemap]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -625,25 +625,25 @@
   },
   {
     "ea": "0x7A5307",
-    "line": "push    eax",
+    "line": "push    eax; vertexIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5308",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A530A",
-    "line": "call    sub_794730",
+    "line": "call    OB_CIndexedGeometry_GetVertexCoord_010201A0; CIndexedGeometry::GetVertexCoord: returns &coords[index*3] from the coord float vector.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A530F",
-    "line": "lea     ecx, [esp+88h+var_3C]",
+    "line": "lea     ecx, [esp+88h+vertex]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -655,19 +655,19 @@
   },
   {
     "ea": "0x7A5315",
-    "line": "push    ecx",
+    "line": "push    ecx; vertex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5316",
-    "line": "fstp    [esp+8Ch+var_3C]",
+    "line": "fstp    [esp+8Ch+vertex.x]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A531A",
-    "line": "lea     edx, [esp+8Ch+var_30]",
+    "line": "lea     edx, [esp+8Ch+end]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -679,19 +679,19 @@
   },
   {
     "ea": "0x7A5321",
-    "line": "push    edx",
+    "line": "push    edx; end",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5322",
-    "line": "fstp    [esp+90h+var_38]",
+    "line": "fstp    [esp+90h+vertex.y]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A5326",
-    "line": "lea     ecx, [esp+90h+var_24]",
+    "line": "lea     ecx, [esp+90h+outPoint]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -703,25 +703,25 @@
   },
   {
     "ea": "0x7A532D",
-    "line": "lea     eax, [esp+90h+var_54]",
+    "line": "lea     eax, [esp+90h+start]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A5331",
-    "line": "push    eax",
+    "line": "push    eax; start",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5332",
-    "line": "fstp    [esp+94h+var_34]",
+    "line": "fstp    [esp+94h+vertex.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A5336",
-    "line": "push    ecx",
+    "line": "push    ecx; outPoint",
     "mnemonic": "push",
     "size": 1
   },
@@ -733,43 +733,43 @@
   },
   {
     "ea": "0x7A5339",
-    "line": "call    sub_7A50B0",
+    "line": "call    OB_CProjectedShadow_ClosestPoint_010201A0; Projects a vertex onto the infinite line through start/end; the optimized Oblivion ABI omits the unused CProjectedShadow this pointer.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A533E",
-    "line": "fld     [esp+88h+var_20]",
+    "line": "fld     [esp+88h+outPoint.y]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7A5342",
-    "line": "fsub    [esp+88h+var_50]",
+    "line": "fsub    [esp+88h+start.y]",
     "mnemonic": "fsub",
     "size": 4
   },
   {
     "ea": "0x7A5346",
-    "line": "fld     [esp+88h+var_24]",
+    "line": "fld     [esp+88h+outPoint.x]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7A534A",
-    "line": "fsub    [esp+88h+var_54]",
+    "line": "fsub    [esp+88h+start.x]",
     "mnemonic": "fsub",
     "size": 4
   },
   {
     "ea": "0x7A534E",
-    "line": "fld     [esp+88h+var_1C]",
+    "line": "fld     [esp+88h+outPoint.z]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7A5352",
-    "line": "fsub    [esp+88h+var_4C]",
+    "line": "fsub    [esp+88h+start.z]",
     "mnemonic": "fsub",
     "size": 4
   },
@@ -871,7 +871,7 @@
   },
   {
     "ea": "0x7A5384",
-    "line": "fstp    [esp+88h+var_74]",
+    "line": "fstp    [esp+88h+shadowST]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -919,7 +919,7 @@
   },
   {
     "ea": "0x7A539B",
-    "line": "fld     [esp+88h+var_74]",
+    "line": "fld     [esp+88h+shadowST]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -937,19 +937,19 @@
   },
   {
     "ea": "0x7A53A3",
-    "line": "fstp    [esp+88h+var_74]",
+    "line": "fstp    [esp+88h+shadowST]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A53A7",
-    "line": "lea     eax, [esp+88h+var_3C]",
+    "line": "lea     eax, [esp+88h+vertex]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A53AB",
-    "line": "push    eax",
+    "line": "push    eax; vertex",
     "mnemonic": "push",
     "size": 1
   },
@@ -961,7 +961,7 @@
   },
   {
     "ea": "0x7A53B0",
-    "line": "push    ecx",
+    "line": "push    ecx; end",
     "mnemonic": "push",
     "size": 1
   },
@@ -973,7 +973,7 @@
   },
   {
     "ea": "0x7A53B5",
-    "line": "push    edx",
+    "line": "push    edx; start",
     "mnemonic": "push",
     "size": 1
   },
@@ -985,7 +985,7 @@
   },
   {
     "ea": "0x7A53BD",
-    "line": "push    eax",
+    "line": "push    eax; outPoint",
     "mnemonic": "push",
     "size": 1
   },
@@ -997,43 +997,43 @@
   },
   {
     "ea": "0x7A53C0",
-    "line": "call    sub_7A50B0",
+    "line": "call    OB_CProjectedShadow_ClosestPoint_010201A0; Projects a vertex onto the infinite line through start/end; the optimized Oblivion ABI omits the unused CProjectedShadow this pointer.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A53C5",
-    "line": "fld     [esp+88h+var_8]",
+    "line": "fld     [esp+88h+var_C.y]",
     "mnemonic": "fld",
     "size": 7
   },
   {
     "ea": "0x7A53CC",
-    "line": "fsub    [esp+88h+var_44]",
+    "line": "fsub    [esp+88h+var_48.y]",
     "mnemonic": "fsub",
     "size": 4
   },
   {
     "ea": "0x7A53D0",
-    "line": "fld     [esp+88h+var_C]",
+    "line": "fld     [esp+88h+var_C.x]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7A53D4",
-    "line": "fsub    [esp+88h+var_48]",
+    "line": "fsub    [esp+88h+var_48.x]",
     "mnemonic": "fsub",
     "size": 4
   },
   {
     "ea": "0x7A53D8",
-    "line": "fld     [esp+88h+var_4]",
+    "line": "fld     [esp+88h+var_C.z]",
     "mnemonic": "fld",
     "size": 7
   },
   {
     "ea": "0x7A53DF",
-    "line": "fsub    [esp+88h+var_40]",
+    "line": "fsub    [esp+88h+var_48.z]",
     "mnemonic": "fsub",
     "size": 4
   },
@@ -1207,25 +1207,25 @@
   },
   {
     "ea": "0x7A5435",
-    "line": "lea     edx, [esp+88h+var_74]",
+    "line": "lea     edx, [esp+88h+shadowST]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A5439",
-    "line": "push    edx",
+    "line": "push    edx; shadowST",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A543A",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A543C",
-    "line": "call    sub_7964F0",
+    "line": "call    OB_CIndexedGeometry_AddVertexTexCoord1_010201A0; Legacy TexCoord1 writer: appends projected-shadow S/T to the dedicated shadowTexcoords vector and applies the same global T-flip policy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1237,13 +1237,13 @@
   },
   {
     "ea": "0x7A5446",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A5448",
-    "line": "call    sub_7877B0",
+    "line": "call    OB_CIndexedGeometry_GetVertexCount_010201A0; Returns the number of indexed vertices as vertexCoords.floatCount / 3.",
     "mnemonic": "call",
     "size": 5
   },

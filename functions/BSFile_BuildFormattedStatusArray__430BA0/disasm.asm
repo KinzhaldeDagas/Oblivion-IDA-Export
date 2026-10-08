@@ -5,7 +5,7 @@
 0x430BA4: push    offset aBsfile; "BSFile"
 0x430BA9: mov     edi, ecx
 0x430BAB: call    TESOutput_PrintString
-0x430BB0: mov     esi, dword ptr [esp+14h+arg_0]
+0x430BB0: mov     esi, [esp+14h+arg_0]
 0x430BB4: movzx   ebx, word ptr [esi+0Ah]
 0x430BB8: mov     [esp+14h+var_4], eax
 0x430BBC: movzx   eax, word ptr [esi+8]
@@ -30,7 +30,7 @@
 0x430BF4: movzx   ecx, word ptr [esi+8]
 0x430BF8: add     esp, 8
 0x430BFB: cmp     ebx, ecx
-0x430BFD: mov     dword ptr [esp+10h+arg_0], eax
+0x430BFD: mov     [esp+10h+arg_0], eax
 0x430C01: jb      short loc_430C11
 0x430C03: movzx   edx, word ptr [esi+0Eh]
 0x430C07: add     edx, ebx
@@ -43,13 +43,13 @@
 0x430C17: mov     ecx, esi
 0x430C19: call    NiTArray_SetAt; Actually first arg is a generic NiTArray
 0x430C1E: mov     cl, [edi+24h]
-0x430C21: mov     [esp+10h+arg_0], cl
-0x430C25: mov     edx, dword ptr [esp+10h+arg_0]
+0x430C21: mov     byte ptr [esp+10h+arg_0], cl
+0x430C25: mov     edx, [esp+10h+arg_0]
 0x430C29: push    edx; char
 0x430C2A: push    offset aGood; "Good"
 0x430C2F: call    TESOutput_PrintLabeledBool
 0x430C34: movzx   ebx, word ptr [esi+0Ah]
-0x430C38: mov     dword ptr [esp+18h+arg_0], eax
+0x430C38: mov     [esp+18h+arg_0], eax
 0x430C3C: movzx   eax, word ptr [esi+8]
 0x430C40: add     esp, 8
 0x430C43: cmp     ebx, eax
@@ -72,7 +72,7 @@
 0x430C71: push    offset aPosition; "Position"
 0x430C76: call    TESOutput_PrintLabeledUnsignedInt
 0x430C7B: movzx   ebx, word ptr [esi+0Ah]
-0x430C7F: mov     dword ptr [esp+18h+arg_0], eax
+0x430C7F: mov     [esp+18h+arg_0], eax
 0x430C83: movzx   eax, word ptr [esi+8]
 0x430C87: add     esp, 8
 0x430C8A: cmp     ebx, eax
@@ -95,7 +95,7 @@
 0x430CB3: push    offset aSize; "Size"
 0x430CB8: call    TESOutput_PrintLabeledUnsignedInt
 0x430CBD: movzx   ebx, word ptr [esi+0Ah]
-0x430CC1: mov     dword ptr [esp+18h+arg_0], eax
+0x430CC1: mov     [esp+18h+arg_0], eax
 0x430CC5: movzx   eax, word ptr [esi+8]
 0x430CC9: add     esp, 8
 0x430CCC: cmp     ebx, eax
@@ -118,7 +118,7 @@
 0x430CFD: movzx   ecx, word ptr [esi+8]
 0x430D01: add     esp, 8
 0x430D04: cmp     edi, ecx
-0x430D06: mov     dword ptr [esp+10h+arg_0], eax
+0x430D06: mov     [esp+10h+arg_0], eax
 0x430D0A: jb      short loc_430D1A
 0x430D0C: movzx   edx, word ptr [esi+0Eh]
 0x430D10: add     edx, edi

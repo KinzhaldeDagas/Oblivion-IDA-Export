@@ -11,7 +11,6 @@
 0x77BF87: test    eax, eax
 0x77BF89: jz      short loc_77BFA7
 0x77BF8B: jmp     short loc_77BF90
-0x77BF8D: align 10h
 0x77BF90: mov     edx, [eax]
 0x77BF92: mov     ecx, eax
 0x77BF94: mov     eax, [edx+10h]

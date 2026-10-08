@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6BF820",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+arg_0]; Position type 1 registers NiPosKey_InsertType1Linear for GuaranteeTimeRange boundary insertion.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,43 +37,43 @@
   },
   {
     "ea": "0x6BF832",
-    "line": "mov     ds:dword_B3D118[eax], offset nullsub_returnFloat0_0arg",
+    "line": "mov     dword ptr ds:unk_B3D118[eax], offset nullsub_returnFloat0_0arg",
     "mnemonic": "mov",
     "size": 10
   },
   {
     "ea": "0x6BF83C",
-    "line": "mov     ds:dword_B3CFF8[eax], offset sub_6BF3E0",
+    "line": "mov     dword ptr ds:unk_B3CFF8[eax], offset NiPosKey_EvaluateType1Linear; Oblivion position evaluator for numeric type 1: componentwise lower*(1-t)+upper*t using key value components at +4,+8,+0xC.",
     "mnemonic": "mov",
     "size": 10
   },
   {
     "ea": "0x6BF846",
-    "line": "mov     ds:dword_B3D238[eax], offset sub_6BF480",
+    "line": "mov     dword ptr ds:unk_B3D238[eax], offset sub_6BF480",
     "mnemonic": "mov",
     "size": 10
   },
   {
     "ea": "0x6BF850",
-    "line": "mov     ds:dword_B3D650[eax], offset sub_6BBB80",
+    "line": "mov     dword ptr ds:unk_B3D650[eax], offset NiPosKey_EvaluateType0; Oblivion position evaluator for numeric type 0: ignores segment time and both keys and writes the engine's zero position constant.",
     "mnemonic": "mov",
     "size": 10
   },
   {
     "ea": "0x6BF85A",
-    "line": "mov     ds:dword_B3D4A0[eax], offset sub_6BF3C0",
+    "line": "mov     dword ptr ds:unk_B3D4A0[eax], offset sub_6BF3C0",
     "mnemonic": "mov",
     "size": 10
   },
   {
     "ea": "0x6BF864",
-    "line": "mov     ds:dword_B3D410[eax], offset ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "mov     dword ptr ds:unk_B3D410[eax], offset Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "mov",
     "size": 10
   },
   {
     "ea": "0x6BF86E",
-    "line": "mov     ds:dword_B3D1A8[eax], offset sub_6BF5A0",
+    "line": "mov     dword ptr ds:unk_B3D1A8[eax], offset NiPosKey_InsertType1Linear; Type-1 linear position boundary insertion: reject duplicate time, allocate count+1 0x10-byte records, copy around insertion index, evaluate/clamp the new position, increment count, destroy/free old array, and replace pointer.",
     "mnemonic": "mov",
     "size": 10
   },

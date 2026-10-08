@@ -14,10 +14,10 @@ char __cdecl sub_95FDC0(
 {
   int v12; // esi
 
-  v12 = 0;
-  if ( !*(_WORD *)(a2 + 0xE) )
-    return 0;
-  while ( !(unsigned __int8)sub_95DAB0(
+  v12 = 0; /*0x95fdc8*/
+  if ( !*(_WORD *)(a2 + 0xE) ) /*0x95fdca*/
+    return 0; /*0x95fe30*/
+  while ( !(unsigned __int8)sub_95DAB0( /*0x95fe23*/
                               a1,
                               *(_DWORD *)(*(_DWORD *)(a2 + 8) + 4 * v12),
                               a3,
@@ -31,9 +31,9 @@ char __cdecl sub_95FDC0(
                               a11,
                               a12) )
   {
-    if ( ++v12 >= (unsigned int)*(unsigned __int16 *)(a2 + 0xE) )
-      return 0;
+    if ( ++v12 >= (unsigned int)*(unsigned __int16 *)(a2 + 0xE) ) /*0x95fe2e*/
+      return 0; /*0x95fe2e*/
   }
-  *(_DWORD *)(a2 + 0x14) = v12;
-  return 1;
+  *(_DWORD *)(a2 + 0x14) = v12; /*0x95fe37*/
+  return 1; /*0x95fe30*/
 }

@@ -11,7 +11,6 @@
 0x4FD0B4: mov     ebp, 1
 0x4FD0B9: jz      short loc_4FD0F5
 0x4FD0BB: jmp     short loc_4FD0C0
-0x4FD0BD: align 10h
 0x4FD0C0: mov     eax, [esi]
 0x4FD0C2: cmp     eax, ebx
 0x4FD0C4: jz      short loc_4FD0F5
@@ -20,9 +19,9 @@
 0x4FD0CA: mov     eax, [eax]
 0x4FD0CC: cmp     eax, ebx
 0x4FD0CE: jz      short loc_4FD0DC
-0x4FD0D0: push    edi; Str2
-0x4FD0D1: push    eax; Str1
-0x4FD0D2: call    __strcmp
+0x4FD0D0: push    edi; right
+0x4FD0D1: push    eax; left
+0x4FD0D2: call    CRT_StricmpLocaleDispatch
 0x4FD0D7: add     esp, 8
 0x4FD0DA: jmp     short loc_4FD0E7
 0x4FD0DC: xor     eax, eax
@@ -77,8 +76,8 @@
 0x4FD15A: cmp     [esp+14h+arg_4], bl
 0x4FD15E: jnz     loc_4FD24E
 0x4FD164: push    offset aPlayer; "Player"
-0x4FD169: push    edi; Str1
-0x4FD16A: call    __strcmp
+0x4FD169: push    edi; left
+0x4FD16A: call    CRT_StricmpLocaleDispatch
 0x4FD16F: add     esp, 8
 0x4FD172: test    eax, eax
 0x4FD174: jnz     short loc_4FD180
@@ -131,7 +130,7 @@
 0x4FD1FF: cmp     eax, ebx
 0x4FD201: jz      short loc_4FD252
 0x4FD203: mov     ecx, eax; this
-0x4FD205: call    TESObjectREFR_IsPersistent?
+0x4FD205: call    TESObjectREFR_IsPersistent
 0x4FD20A: test    al, al
 0x4FD20C: jnz     short loc_4FD252
 0x4FD20E: push    edi; ArgList
@@ -145,12 +144,12 @@
 0x4FD227: jnz     short loc_4FD252
 0x4FD229: mov     eax, [esi]
 0x4FD22B: push    eax
-0x4FD22C: call    FormHeapFree
+0x4FD22C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4FD231: push    esi
 0x4FD232: mov     [esi], ebx
 0x4FD234: mov     [esi+6], bx
 0x4FD238: mov     [esi+4], bx
-0x4FD23C: call    FormHeapFree
+0x4FD23C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4FD241: add     esp, 8
 0x4FD244: pop     edi
 0x4FD245: pop     esi

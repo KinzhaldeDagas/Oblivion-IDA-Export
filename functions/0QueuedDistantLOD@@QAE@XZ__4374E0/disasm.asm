@@ -1,4 +1,4 @@
-0x4374E0: push    0FFFFFFFFh
+0x4374E0: push    0FFFFFFFFh; Verified QueuedDistantLOD constructor: stores its per-instance context pointer at task +0x38; context is a 0x20-byte DistantLODQueuedInstanceData record. Priority is supplied by the factory as 5.
 0x4374E2: push    offset SEH_437250
 0x4374E7: mov     eax, large fs:0
 0x4374ED: push    eax
@@ -14,7 +14,7 @@
 0x437505: mov     [esp+1Ch+var_10], esi
 0x437509: mov     eax, dword ptr [esp+1Ch+a2]
 0x43750D: push    eax; a2
-0x43750E: call    sub_436500
+0x43750E: call    sub_436500; Verified QueuedDistantLOD owns a per-instance record pointer at +0x38; each record is 0x20 bytes and includes a retained Ni2DBuffer at +0x1C. Its destructor releases that buffer and frees the record.
 0x437513: xor     ebx, ebx
 0x437515: mov     [esi+18h], ebx
 0x437518: mov     [esi+1Ch], ebx
@@ -23,20 +23,20 @@
 0x437521: mov     dword ptr [esi], offset ??_7QueuedModel@@6B@; const QueuedModel::`vftable'
 0x437527: mov     [esp+1Ch+var_4], ebx
 0x43752B: mov     [esi+28h], ebx
-0x43752E: mov     ecx, [esp+1Ch+arg_0]
+0x43752E: mov     ecx, [esp+1Ch+modelPath]
 0x437532: push    ecx
 0x437533: mov     ecx, esi
 0x437535: mov     byte ptr [esp+20h+var_4], 1
 0x43753A: mov     [esi+2Ch], ebx
 0x43753D: mov     [esi+30h], ebx
 0x437540: mov     [esi+34h], bl
-0x437543: call    sub_434600
+0x437543: call    sub_434600; QueuedFileEntry path copy helper. Allocates and copies source path string into entry +0x20.
 0x437548: push    1
 0x43754A: push    ebx
 0x43754B: mov     ecx, esi
-0x43754D: call    sub_434CB0
+0x43754D: call    sub_434CB0; QueuedFileEntry archive lookup helper. Hashes copied path at +0x20 and stores resolved archive/file entry pointer at +0x24.
 0x437552: mov     dl, [esi+34h]
-0x437555: mov     eax, [esp+1Ch+arg_8]
+0x437555: mov     eax, [esp+1Ch+instanceData]
 0x437559: and     dl, 0F9h
 0x43755C: or      dl, 1
 0x43755F: mov     [esi+38h], eax
@@ -51,3 +51,15 @@
 0x43757D: pop     ebx
 0x43757E: add     esp, 10h
 0x437581: retn    0Ch
+0x9AC460: mov     ecx, [ebp-10h]; this
+0x9AC463: jmp     ??1LipTask@@UAE@XZ; LipTask::~LipTask(void)
+0x9AC468: mov     ecx, [ebp-10h]
+0x9AC46B: add     ecx, 28h ; '('
+0x9AC46E: jmp     loc_435A90
+0x9AC473: mov     edx, dword ptr [esp+a2]
+0x9AC477: lea     eax, [edx-0Ch]
+0x9AC47A: mov     ecx, [edx-10h]
+0x9AC47D: xor     ecx, eax
+0x9AC47F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AC484: mov     eax, offset stru_AD9130
+0x9AC489: jmp     ___CxxFrameHandler3

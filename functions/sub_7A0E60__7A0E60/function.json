@@ -1,19 +1,36 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7A0E60",
+  "chunks": [
+    [
+      "0x7A0E60",
+      "0x7A0ED2"
+    ],
+    [
+      "0x9CC600",
+      "0x9CC61B"
+    ]
+  ],
+  "chunks_sha256": "fdba1978f6bc6bc6e1cd39a2ff1da4cd876e1dc7be0ec1ce4e553aa88e42106a",
+  "comment_regular": "Backward ownership move/assignment for overlapping ranges of 16-byte st_vector<SFrondGuide> elements. Swaps the three owned pointer fields while walking from the end.",
+  "comment_repeatable": "Backward ownership move/assignment for overlapping ranges of 16-byte st_vector<SFrondGuide> elements. Swaps the three owned pointer fields while walking from the end.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_stVector_stVector_SFrondGuide_MoveAssignRangeBackward_010201A0",
   "end_ea": "0x7A0ED2",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7A0E60",
+  "name": "OB_stVector_stVector_SFrondGuide_MoveAssignRangeBackward_010201A0",
   "segment": ".text",
   "sha256": "98b65c26fccb62622947aeed3407a435182c4c883368ccc54e923963713201f3",
   "size": 114,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A0E60",
-  "type": "_DWORD *__cdecl(_DWORD *, _DWORD *, _DWORD *)",
-  "xrefs_from_count": 41,
+  "total_chunk_size": 141,
+  "type": "OB_stVector_SFrondGuide_010201A0 *__cdecl(OB_stVector_SFrondGuide_010201A0 *first, OB_stVector_SFrondGuide_010201A0 *last, OB_stVector_SFrondGuide_010201A0 *destinationEnd)",
+  "xrefs_from_count": 50,
   "xrefs_to_count": 1
 }

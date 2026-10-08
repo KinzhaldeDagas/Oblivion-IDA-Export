@@ -1,4 +1,4 @@
-0x662590: cmp     byte ptr ds:0B3BB06h, 0
+0x662590: cmp     byte ptr ds:0B3BB06h, 0; PlayerCharacter post-shot AMMO-consumption override. Takes only PlayerCharacter *this and independently queries GetEquippedAmmoData(1); it does not receive WEAP EntryData in EDI. God mode (g_godModeEnabled at 0x00B3BB06) skips the transaction. Otherwise it decrements/removes exactly one equipped AMMO item. Base Actor slot +0x2E8 is the shared no-op at 0x0060D0A0.
 0x662597: push    esi
 0x662598: mov     esi, ecx
 0x66259A: jnz     loc_6626DD
@@ -10,7 +10,7 @@
 0x6625AE: call    edx
 0x6625B0: mov     eax, [eax]
 0x6625B2: mov     ecx, [eax]
-0x6625B4: call    ExtraDataList_GetExtraCount
+0x6625B4: call    ExtraDataList_GetExtraCount; Read ExtraCount from the active equipped AMMO EntryData's selected ExtraDataList, then compute remaining stack count as ExtraCount-1.
 0x6625B9: mov     ecx, [esi+58h]
 0x6625BC: movsx   edi, ax
 0x6625BF: sub     edi, 1
@@ -41,13 +41,13 @@
 0x662601: push    edi
 0x662602: push    eax
 0x662603: mov     ecx, esi
-0x662605: call    edx
-0x662607: call    sub_5C1900
+0x662605: call    edx; Final-item branch: remove exactly one AMMO form using the selected equipped ammo ExtraDataList; this branch runs when ExtraCount-1 is below one.
+0x662607: call    PlayerCharacter_ReconcileHotkeysAfterInventoryRemoval; After selected-list removal of the final AMMO item, reconcile the player's eight hotkey/quickslot bindings so stale inventory bindings are cleared.
 0x66260C: mov     ecx, [esi+58h]
 0x66260F: mov     eax, [ecx]
 0x662611: mov     edx, [eax+10Ch]
 0x662617: push    0
-0x662619: call    edx
+0x662619: call    edx; Calls MiddleHighProcess_SetEquippedAmmoData(NULL): destroys/frees the process's copied equipped-AMMO EntryData and stores NULL. This call does not itself clear hand/quiver 3D.
 0x66261B: pop     edi
 0x66261C: pop     esi
 0x66261D: retn
@@ -57,15 +57,15 @@
 0x662628: mov     eax, [eax]
 0x66262A: mov     ecx, [eax]
 0x66262C: push    edi
-0x66262D: call    ExtraDataList_SetExtraCount
+0x66262D: call    ExtraDataList_SetExtraCount; When at least one item remains in this extra-data stack, write the decremented ExtraCount back before inventory reconciliation.
 0x662632: mov     ecx, [esi+58h]
 0x662635: mov     edx, [ecx]
 0x662637: mov     eax, [edx+0F4h]
 0x66263D: push    edi
-0x66263E: push    1
+0x66263E: push    1; value
 0x662640: call    eax
-0x662642: mov     ecx, eax
-0x662644: call    sub_60D020
+0x662642: mov     ecx, eax; this
+0x662644: call    Shared_SetDwordAtOffset04; On the copied equipped-AMMO EntryData returned by GetEquippedAmmoData, Shared_SetDwordAtOffset04 writes countDelta=1 before container-count reconciliation.
 0x662649: mov     ecx, esi; this
 0x66264B: call    TESObjectREFR_GetContainer
 0x662650: test    eax, eax
@@ -87,8 +87,8 @@
 0x662675: mov     eax, [eax+8]
 0x662678: push    eax; a2
 0x662679: mov     ecx, ebp; this
-0x66267B: call    ContainerExtraData_GetItemCount
-0x662680: mov     ebx, eax
+0x66267B: call    ContainerExtraData_GetItemCount; ContainerChanges item-count logic: start with the base TESContainer count (made absolute), find matching EntryData, then combine countDelta. If the base count and delta are both 0 but an EntryData exists, return 1; the GetItemCount evaluator takes the final absolute value.
+0x662680: mov     ebx, eax; Read total count for the equipped AMMO form from container changes and reconcile a mismatch before final removal.
 0x662682: lea     ecx, [edi+1]
 0x662685: cmp     ebx, ecx
 0x662687: jz      short loc_6626A9
@@ -100,10 +100,10 @@
 0x662698: mov     ecx, [eax+8]
 0x66269B: sub     edi, ebx
 0x66269D: add     edi, 1
-0x6626A0: push    edi
-0x6626A1: push    ecx
-0x6626A2: mov     ecx, ebp
-0x6626A4: call    sub_487350
+0x6626A0: push    edi; countDelta
+0x6626A1: push    ecx; form
+0x6626A2: mov     ecx, ebp; this
+0x6626A4: call    ExtraContainerChanges_AdjustCountForForm; Walks ExtraContainerChanges_Data.objList (+0x00), finds the EntryData whose type/form is at +0x08, and adds countDelta to EntryData.countDelta (+0x04). Return-register contents are incidental; both native callers ignore them.
 0x6626A9: pop     ebx
 0x6626AA: pop     ebp
 0x6626AB: mov     ecx, [esi+58h]
@@ -125,7 +125,7 @@
 0x6626D5: push    0
 0x6626D7: push    eax
 0x6626D8: mov     ecx, esi
-0x6626DA: call    edx
+0x6626DA: call    edx; Player post-shot transaction removes exactly one equipped AMMO form through virtual TESObjectREFR::RemoveItem.
 0x6626DC: pop     edi
 0x6626DD: pop     esi
 0x6626DE: retn

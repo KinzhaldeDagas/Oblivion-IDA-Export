@@ -5,11 +5,11 @@ double __cdecl sub_547E70(float a1, float a2)
   float v4; // [esp+4h] [ebp+4h]
   float v5; // [esp+4h] [ebp+4h]
 
-  v3 = a1 * fConstant_Inv100;
-  v4 = (flt_B37458 - fMoveMinFlySpeed) * v3 + fMoveMinFlySpeed;
-  v5 = v4 * (1.0 - fMoveEncumEffect * a2);
-  result = 0.0;
-  if ( v5 >= 0.0 )
-    return v5;
-  return result;
+  v3 = a1 * fConstant_Inv100; /*0x547e8a*/
+  v4 = (unk_B37458 - MEMORY[0xB37450]) * v3 + MEMORY[0xB37450]; /*0x547e96*/
+  v5 = v4 * (1.0 - MEMORY[0xB373D0] * a2); /*0x547eae*/
+  result = 0.0; /*0x547eb2*/
+  if ( v5 >= 0.0 ) /*0x547ebf*/
+    return v5; /*0x547ec4*/
+  return result; /*0x547ec3*/
 }

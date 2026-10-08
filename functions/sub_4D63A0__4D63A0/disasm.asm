@@ -1,4 +1,4 @@
-0x4D63A0: push    ebp
+0x4D63A0: push    ebp;
 0x4D63A1: push    esi
 0x4D63A2: push    edi
 0x4D63A3: mov     esi, ecx
@@ -38,20 +38,20 @@
 0x4D6412: test    ecx, ecx
 0x4D6414: jz      short loc_4D641B
 0x4D6416: call    sub_4E5550
-0x4D641B: push    1
-0x4D641D: mov     ecx, esi
-0x4D641F: call    sub_4CB670
+0x4D641B: push    1; registerLights
+0x4D641D: mov     ecx, esi; self
+0x4D641F: call    TESObjectCELL_RegisterOrUnregisterAttachedLights; As the cell enters process level 5 and its scene node is attached, register ordinary attached light sources for every cell reference.
 0x4D6424: push    1
 0x4D6426: mov     ecx, esi
 0x4D6428: call    sub_4CB590
 0x4D642D: mov     ecx, edi; this
-0x4D642F: call    NiAVObject_InitializePropertyState
+0x4D642F: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x4D6434: fldz
 0x4D6436: push    0; a3
 0x4D6438: push    ecx
 0x4D6439: mov     ecx, edi; this
 0x4D643B: fstp    [esp+14h+a2]; a2
-0x4D643E: call    NiAVObject_UpdateNiAVObject
+0x4D643E: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x4D6443: pop     edi
 0x4D6444: pop     esi
 0x4D6445: pop     ebp

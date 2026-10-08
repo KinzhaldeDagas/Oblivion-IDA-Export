@@ -1,18 +1,31 @@
 {
-  "callees_count": 3,
-  "callers_count": 20,
-  "comment_regular": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 80,
+  "chunks": [
+    [
+      "0x98ED40",
+      "0x98ED6D"
+    ]
+  ],
+  "chunks_sha256": "f39c73e15ef2df2821ac389ec37f2d55acde264989ce5da6a3b2301238938e44",
+  "comment_regular": "MEF v56 stream-bound proof uses this native CRT fileno ABI (cdecl FILE*, field+10h), not the DLL CRT's FILE layout. Prefix observers require a nonnull open native FILE and successful4-byte callback before querying its descriptor.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "__fileno",
   "end_ea": "0x98ED6D",
+  "evidence_confidence": "Unknown",
   "flags": 21572,
   "has_pseudocode": true,
   "name": "__fileno",
   "segment": ".text",
   "sha256": "f39c73e15ef2df2821ac389ec37f2d55acde264989ce5da6a3b2301238938e44",
   "size": 45,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x98ED40",
+  "total_chunk_size": 45,
   "type": "int __cdecl(FILE *File)",
   "xrefs_from_count": 21,
   "xrefs_to_count": 80

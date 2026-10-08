@@ -1,1 +1,1 @@
-bhkLimitedHingeConstraint
+struct bhkLimitedHingeConstraint;

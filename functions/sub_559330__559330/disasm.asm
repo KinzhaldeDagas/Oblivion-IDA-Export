@@ -17,10 +17,10 @@
 0x559365: mov     large fs:0, eax
 0x55936B: mov     eax, [esp+4E4h+arg_8]
 0x559372: mov     ebx, [esp+4E4h+a2]
-0x559379: mov     ebp, dword ptr [esp+4E4h+ArgList]
+0x559379: mov     ebp, [esp+4E4h+ArgList]
 0x559380: xor     edi, edi
 0x559382: mov     esi, ecx
-0x559384: mov     [esp+4E4h+var_4D0], edi
+0x559384: mov     [esp+4E4h+slot], edi
 0x559388: cmp     [esi+8], edi
 0x55938B: mov     [esp+4E4h+Src], eax
 0x55938F: jnz     loc_559839
@@ -29,7 +29,7 @@
 0x55939D: push    24h ; '$'; Size
 0x55939F: call    FormHeapAlloc
 0x5593A4: add     esp, 4
-0x5593A7: mov     [esp+4E4h+var_4D0], eax
+0x5593A7: mov     [esp+4E4h+slot], eax
 0x5593AB: cmp     eax, edi
 0x5593AD: mov     [esp+4E4h+var_4], edi
 0x5593B4: jz      short loc_5593BF
@@ -43,7 +43,7 @@
 0x5593D1: call    FormHeapAlloc
 0x5593D6: mov     edi, eax
 0x5593D8: add     esp, 4
-0x5593DB: mov     [esp+4E4h+var_4D0], edi
+0x5593DB: mov     [esp+4E4h+slot], edi
 0x5593DF: test    edi, edi
 0x5593E1: mov     [esp+4E4h+var_4], 1
 0x5593EC: jz      short loc_559400
@@ -125,11 +125,11 @@
 0x559506: jz      short loc_55955A
 0x559508: mov     ecx, [eax+10h]
 0x55950B: push    6
-0x55950D: lea     edx, [esp+4E8h+var_4D0]
+0x55950D: lea     edx, [esp+4E8h+slot]
 0x559511: push    edx
 0x559512: call    sub_708560
-0x559517: lea     ecx, [esp+4E4h+var_4D0]; this
-0x55951B: call    sub_7016A0
+0x559517: lea     ecx, [esp+4E4h+slot]; slot
+0x55951B: call    NiPointerSlot_Release
 0x559520: mov     eax, [esi+8]
 0x559523: mov     ecx, [eax+10h]
 0x559526: call    sub_6FFFD0
@@ -152,7 +152,7 @@
 0x55956A: xor     edi, edi
 0x55956C: push    edi
 0x55956D: mov     [esp+4E8h+var_4], 0FFFFFFFFh
-0x559578: call    FormHeapFree
+0x559578: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x55957D: add     esp, 4
 0x559580: mov     ebx, [esp+4E4h+Src]
 0x559584: cmp     ebx, edi
@@ -175,7 +175,7 @@
 0x5595CE: push    edi
 0x5595CF: push    eax
 0x5595D0: mov     [esp+4ECh+var_4], 5
-0x5595DB: mov     [esp+4ECh+var_4D0], 1
+0x5595DB: mov     [esp+4ECh+slot], 1
 0x5595E3: call    sub_6F4B50
 0x5595E8: add     esp, 8
 0x5595EB: test    al, al
@@ -211,15 +211,15 @@
 0x559660: mov     byte ptr [esp+4E4h+var_4], bl
 0x559667: call    ??1BSStream@@UAE@XZ; BSStream::~BSStream(void)
 0x55966C: push    edi
-0x55966D: call    FormHeapFree
+0x55966D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x559672: add     esp, 4
 0x559675: xor     al, al
 0x559677: jmp     loc_55983B
 0x55967C: xor     bl, bl
 0x55967E: or      ebp, 0FFFFFFFFh
-0x559681: lea     ecx, [esp+4E4h+var_4BC]
+0x559681: lea     ecx, [esp+4E4h+var_4BC]; this
 0x559685: mov     [esp+4E4h+var_4], ebp
-0x55968C: call    sub_79AB00
+0x55968C: call    OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
 0x559691: test    bl, bl
 0x559693: jz      loc_5597F1
 0x559699: cmp     [esp+4E4h+arg_C], 0
@@ -333,7 +333,7 @@
 0x5597F5: mov     ecx, edi
 0x5597F7: call    sub_557CF0
 0x5597FC: push    edi
-0x5597FD: call    FormHeapFree
+0x5597FD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x559802: add     esp, 4
 0x559805: mov     esi, [esi+8]
 0x559808: test    esi, esi
@@ -363,3 +363,50 @@
 0x559857: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x55985C: add     esp, 4D0h
 0x559862: retn    10h
+0x9BC810: mov     eax, [ebp-4D0h]
+0x9BC816: push    eax
+0x9BC817: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BC81C: pop     ecx
+0x9BC81D: retn
+0x9BC81E: mov     eax, [ebp-4D0h]
+0x9BC824: push    eax
+0x9BC825: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BC82A: pop     ecx
+0x9BC82B: retn
+0x9BC82C: lea     ecx, [ebp-4C8h]; void *
+0x9BC832: jmp     BSStringT_Clear
+0x9BC837: lea     ecx, [ebp-4A0h]; this
+0x9BC83D: jmp     ??1BSStream@@UAE@XZ; BSStream::~BSStream(void)
+0x9BC842: mov     eax, [ebp-4CCh]
+0x9BC848: push    eax
+0x9BC849: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BC84E: pop     ecx
+0x9BC84F: retn
+0x9BC850: mov     eax, [ebp-4D0h]
+0x9BC856: and     eax, 1
+0x9BC859: jz      locret_9BC871
+0x9BC85F: and     dword ptr [ebp-4D0h], 0FFFFFFFEh
+0x9BC866: lea     ecx, [ebp-4BCh]; this
+0x9BC86C: jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
+0x9BC871: retn
+0x9BC872: mov     eax, [ebp-4CCh]
+0x9BC878: push    eax
+0x9BC879: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BC87E: pop     ecx
+0x9BC87F: retn
+0x9BC880: mov     eax, [ebp-4CCh]
+0x9BC886: push    eax
+0x9BC887: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BC88C: pop     ecx
+0x9BC88D: retn
+0x9BC88E: mov     edx, [esp+ArgList]
+0x9BC892: lea     eax, [edx-4D4h]
+0x9BC898: mov     ecx, [edx-4D8h]
+0x9BC89E: xor     ecx, eax
+0x9BC8A0: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BC8A5: add     eax, 10h
+0x9BC8A8: mov     ecx, [edx-4]
+0x9BC8AB: xor     ecx, eax
+0x9BC8AD: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BC8B2: mov     eax, offset stru_AE6434
+0x9BC8B7: jmp     ___CxxFrameHandler3

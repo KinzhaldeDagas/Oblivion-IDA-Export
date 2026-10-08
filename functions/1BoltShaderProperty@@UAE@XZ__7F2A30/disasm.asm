@@ -15,7 +15,7 @@
 0x7F2A5E: mov     eax, [esi+6Ch]
 0x7F2A61: push    eax
 0x7F2A62: mov     [esp+1Ch+var_4], 0
-0x7F2A6A: call    FormHeapFree
+0x7F2A6A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7F2A6F: add     esp, 4
 0x7F2A72: sub     dword ptr ds:0B468E8h, 1
 0x7F2A79: jnz     short loc_7F2A80
@@ -29,3 +29,12 @@
 0x7F2A9B: pop     esi
 0x7F2A9C: add     esp, 10h
 0x7F2A9F: retn
+0x9CFF30: mov     ecx, [ebp-10h]; this
+0x9CFF33: jmp     ??1BSShaderProperty@@UAE@XZ; BSShaderProperty::~BSShaderProperty(void)
+0x9CFF38: mov     edx, [esp+arg_4]
+0x9CFF3C: lea     eax, [edx-8]
+0x9CFF3F: mov     ecx, [edx-0Ch]
+0x9CFF42: xor     ecx, eax
+0x9CFF44: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CFF49: mov     eax, offset stru_AF8A04
+0x9CFF4E: jmp     ___CxxFrameHandler3

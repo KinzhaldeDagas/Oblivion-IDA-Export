@@ -1,1 +1,1 @@
-DirectSoundDevice_0
+typedef DirectSoundDevice DirectSoundDevice_0;

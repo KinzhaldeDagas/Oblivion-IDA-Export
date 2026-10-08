@@ -1,4 +1,4 @@
 int sub_9E3CE0()
 {
-  return atexit(sub_A1C230);
+  return atexit(sub_A1C230); /*0x9e3ceb*/
 }

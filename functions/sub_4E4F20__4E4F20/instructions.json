@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E4F20",
-    "line": "push    edi",
+    "line": "push    edi; Verified PGRI teardown: for each record, read its local point index, get the local TESPathGridPoint, then remove the connection to the remote point position stored at record+4; finally the PGRI list records are freed by TESPathGrid_ClearPGRIRecords.",
     "mnemonic": "push",
     "size": 1
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x4E4F50",
-    "line": "mov     ecx, [ecx+eax*4]",
+    "line": "mov     ecx, [ecx+eax*4]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -139,13 +139,13 @@
   },
   {
     "ea": "0x4E4F5A",
-    "line": "push    edx",
+    "line": "push    edx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E4F5B",
-    "line": "call    sub_4E7FB0",
+    "line": "call    TESPathGridPoint_RemoveNeighborAtPosition; Verified removes reciprocal PathGrid adjacency at a neighbor position: searches this point's connection list by each neighbor's NiPoint3 within fConstant_2 tolerance, removes this point from that neighbor's list, then removes/frees the local connection entry.",
     "mnemonic": "call",
     "size": 5
   },

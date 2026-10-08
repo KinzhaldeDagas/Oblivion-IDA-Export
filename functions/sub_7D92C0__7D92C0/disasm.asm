@@ -1,4 +1,4 @@
-0x7D92C0: push    esi
+0x7D92C0: push    esi; Recursively set/clear native refraction state on shader-property subtypes 5..10. useRefractF selects passInfo 0x10000 instead of 0x8000; stores power and optional period and invalidates pass caches.
 0x7D92C1: mov     esi, [esp+4+a1]
 0x7D92C5: test    esi, esi
 0x7D92C7: jz      loc_7D93D1
@@ -10,7 +10,7 @@
 0x7D92D8: mov     ecx, esi
 0x7D92DA: jz      loc_7D9367
 0x7D92E0: push    4
-0x7D92E2: call    NiNode_GetNiPropertyByID
+0x7D92E2: call    NiNode_GetNiPropertyByID;
 0x7D92E7: mov     esi, eax
 0x7D92E9: test    esi, esi
 0x7D92EB: jz      loc_7D93D1
@@ -45,7 +45,7 @@
 0x7D934D: mov     dword ptr [esi+24h], 0
 0x7D9354: jz      short loc_7D93D1
 0x7D9356: fld     [esp+4+a5]
-0x7D935A: call    Double_To_SInt32
+0x7D935A: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x7D935F: mov     [esi+0ECh], eax
 0x7D9365: pop     esi
 0x7D9366: retn
@@ -64,7 +64,6 @@
 0x7D9383: push    ebx
 0x7D9384: mov     ebx, [esp+10h+a4]
 0x7D9388: jmp     short loc_7D9390
-0x7D938A: align 10h
 0x7D9390: movzx   ecx, word ptr [edi+0B6h]
 0x7D9397: cmp     ecx, esi
 0x7D9399: jbe     short loc_7D93C7
@@ -74,15 +73,15 @@
 0x7D93A6: jz      short loc_7D93C7
 0x7D93A8: fld     [esp+10h+a5]
 0x7D93AC: push    ecx
-0x7D93AD: fstp    [esp+14h+var_14]; a5
-0x7D93B0: push    ebx; a4
+0x7D93AD: fstp    [esp+14h+period]; period
+0x7D93B0: push    ebx; useRefractF
 0x7D93B1: fld     [esp+18h+a3]
 0x7D93B5: push    ecx
 0x7D93B6: mov     ecx, [esp+1Ch+a2]
-0x7D93BA: fstp    [esp+1Ch+var_1C]; a3
-0x7D93BD: push    ecx; a2
-0x7D93BE: push    eax; a1
-0x7D93BF: call    sub_7D92C0
+0x7D93BA: fstp    [esp+1Ch+power]; power
+0x7D93BD: push    ecx; enabled
+0x7D93BE: push    eax; root
+0x7D93BF: call    NiAVObject_SetShaderRefractionStateRecursive; Recursively set/clear native refraction state on shader-property subtypes 5..10. useRefractF selects passInfo 0x10000 instead of 0x8000; stores power and optional period and invalidates pass caches.
 0x7D93C4: add     esp, 14h
 0x7D93C7: add     esi, 1
 0x7D93CA: cmp     esi, ebp

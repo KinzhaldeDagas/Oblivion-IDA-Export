@@ -1,1 +1,1 @@
-PVOID64
+typedef void *PVOID64;

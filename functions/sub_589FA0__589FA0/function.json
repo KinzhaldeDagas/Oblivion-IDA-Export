@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 2,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x589FA0",
+      "0x58A016"
+    ],
+    [
+      "0x9BF7A0",
+      "0x9BF7C6"
+    ]
+  ],
+  "chunks_sha256": "700fe9b265588616720209708729e5289bc0cdb80a6eb53cbbd9b9bbfc09302d",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_589FA0",
+  "comment_repeatable": "Verified: 0x18-byte parsed item fields command+0,number+4,BSStringT text+8,contextual argument+0x10,line+0x14. BuildAndNameTree writes createdTile into argument for tile-begin; ConnectTraits reads trait there for property/action commands. sourceLine comes from ParseFile newline counter. Remaining command-dependent interpretations Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "Tile::TileTemplateItem::Initialize",
   "end_ea": "0x58A016",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
-  "name": "sub_589FA0",
+  "name": "Tile::TileTemplateItem::Initialize",
   "segment": ".text",
   "sha256": "e3b0eeac04340892d7a9b0ef36630e7329acbe519d8265cfbdd2fd54d9a31e81",
   "size": 118,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x589FA0",
-  "type": "BSStringT *__thiscall(BSStringT *this, char *arg0, float, char *, int, int)",
-  "xrefs_from_count": 39,
+  "total_chunk_size": 156,
+  "type": "OblivionTileTemplateItem *__thiscall(OblivionTileTemplateItem *this, unsigned int command, float number, const char *text, unsigned int argument, unsigned int sourceLine)",
+  "xrefs_from_count": 51,
   "xrefs_to_count": 1
 }

@@ -1,19 +1,32 @@
 {
-  "callees_count": 17,
-  "callers_count": 6,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
+  "callers_count": 11,
+  "chunks": [
+    [
+      "0x7D92C0",
+      "0x7D93D3"
+    ]
+  ],
+  "chunks_sha256": "9de02f47ba8430ffad0f1dbc536d87f3ddeb7a55a778a77062a58e30ad3b52aa",
+  "comment_regular": "Recursively set/clear native refraction state on shader-property subtypes 5..10. useRefractF selects passInfo 0x10000 instead of 0x8000; stores power and optional period and invalidates pass caches.",
+  "comment_repeatable": "Recursively set/clear native refraction state on shader-property subtypes 5..10. useRefractF selects passInfo 0x10000 instead of 0x8000; stores power and optional period and invalidates pass caches.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7D92C0",
+  "display_name": "NiAVObject_SetShaderRefractionStateRecursive",
   "end_ea": "0x7D93D3",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7D92C0",
+  "name": "NiAVObject_SetShaderRefractionStateRecursive",
   "segment": ".text",
   "sha256": "9de02f47ba8430ffad0f1dbc536d87f3ddeb7a55a778a77062a58e30ad3b52aa",
   "size": 275,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7D92C0",
-  "type": "void __cdecl(NiNode *a1, int a2, float a3, int a4, float a5)",
+  "total_chunk_size": 275,
+  "type": "void __cdecl(NiNode *root, int enabled, float power, int useRefractF, float period)",
   "xrefs_from_count": 106,
   "xrefs_to_count": 11
 }

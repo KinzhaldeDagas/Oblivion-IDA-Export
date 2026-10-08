@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6478E0",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, [esp+owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,31 +19,31 @@
   },
   {
     "ea": "0x6478E7",
-    "line": "mov     ecx, [esp+4+arg_0]",
+    "line": "mov     ecx, [esp+4+changeMask]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6478EB",
-    "line": "push    eax",
+    "line": "push    eax; owner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6478EC",
-    "line": "push    ecx",
+    "line": "push    ecx; changeMask",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6478ED",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6478EF",
-    "line": "call    sub_60D810",
+    "line": "call    BaseProcess_Revert",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x647948",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x647955",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x64799E",
-    "line": "test    [esp+4+arg_0], 400000h",
+    "line": "test    [esp+4+changeMask], 400000h",
     "mnemonic": "test",
     "size": 8
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x6479A8",
-    "line": "lea     ecx, [esi+70h]",
+    "line": "lea     ecx, [esi+70h]; self",
     "mnemonic": "lea",
     "size": 3
   },

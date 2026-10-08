@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x79B470",
-    "line": "push    ebp",
+    "line": "push    ebp; Exception-safe uninitialized_copy for SFrondTexture. Normal path placement-copy-constructs [first,last) and returns destination end; the SEH cleanup landing path destroys the constructed prefix and rethrows.",
     "mnemonic": "push",
     "size": 1
   },
@@ -97,19 +97,19 @@
   },
   {
     "ea": "0x79B49B",
-    "line": "mov     edi, [ebp+arg_8]",
+    "line": "mov     edi, [ebp+destinationFirst]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x79B49E",
-    "line": "mov     ebx, [ebp+arg_4]",
+    "line": "mov     ebx, [ebp+last]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x79B4A1",
-    "line": "mov     esi, [ebp+arg_0]",
+    "line": "mov     esi, [ebp+source]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -145,19 +145,19 @@
   },
   {
     "ea": "0x79B4B4",
-    "line": "push    esi",
+    "line": "push    esi; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B4B5",
-    "line": "push    edi",
+    "line": "push    edi; this",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B4B6",
-    "line": "call    sub_79AC40",
+    "line": "call    OB_SFrondTexture_CopyCtor_010201A0; Oblivion SFrondTexture copy constructor: deep-copies the 28-byte filename string and copies aspectRatio, sizeScale, minAngleOffset, and maxAngleOffset. The 0x2C layout is established by executable accesses; RT 4.1 FrondEngine.h corroborates the member names.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x79B4C1",
-    "line": "mov     [ebp+arg_8], edi",
+    "line": "mov     [ebp+destinationFirst], edi",
     "mnemonic": "mov",
     "size": 3
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x79B4CC",
-    "line": "mov     edi, [ebp+arg_8]",
+    "line": "mov     edi, [ebp+destinationFirst]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x79B4D6",
-    "line": "push    esi",
+    "line": "push    esi; this",
     "mnemonic": "push",
     "size": 1
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x79B4D9",
-    "line": "call    sub_79AC10",
+    "line": "call    OB_SFrondTexture_Destroy_010201A0; Oblivion SFrondTexture destructor: releases the 28-byte small-string filename when heap-backed (capacity >= 0x10), then resets string length/capacity; scalar fields need no destruction.",
     "mnemonic": "call",
     "size": 5
   },
@@ -334,5 +334,47 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CC230",
+    "line": "mov     edx, [esp-4+last]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CC234",
+    "line": "lea     eax, [edx+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC237",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC23A",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CC23C",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC241",
+    "line": "mov     eax, offset stru_AF5350",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC246",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

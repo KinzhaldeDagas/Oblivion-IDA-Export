@@ -1,28 +1,54 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_COMPATIBILITY_CONTEXT_ELEMENT",
+  "definition": "struct _COMPATIBILITY_CONTEXT_ELEMENT\n{\nGUID Id;\nACTCTX_COMPATIBILITY_ELEMENT_TYPE Type;\n__declspec(align(8)) ULONGLONG MaxVersionTested;\n}\n",
   "id": 18374686479672046655,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Id",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "GUID"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Type",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "ACTCTX_COMPATIBILITY_ELEMENT_TYPE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "MaxVersionTested",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 8
+      "size": 8,
+      "type": "ULONGLONG"
     }
   ],
   "name": "_COMPATIBILITY_CONTEXT_ELEMENT",
+  "ordinal": 8560,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 32
 }

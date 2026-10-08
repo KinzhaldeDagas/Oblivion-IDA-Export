@@ -17,7 +17,7 @@
 0x72AE90: mov     eax, [esi+14h]
 0x72AE93: push    eax
 0x72AE94: mov     [esp+24h+var_4], 2
-0x72AE9C: call    FormHeapFree
+0x72AE9C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x72AEA1: push    esi
 0x72AEA2: call    sub_701520
 0x72AEA7: mov     edi, [esi+0Ch]
@@ -65,3 +65,18 @@
 0x72AF15: pop     ebx
 0x72AF16: add     esp, 10h
 0x72AF19: retn
+0x9CA5D0: mov     ecx, [ebp-10h]
+0x9CA5D3: jmp     NiRefObject_destr
+0x9CA5D8: mov     ecx, [ebp-10h]
+0x9CA5DB: add     ecx, 8; slot
+0x9CA5DE: jmp     NiPointerSlot_Release
+0x9CA5E3: mov     ecx, [ebp-10h]
+0x9CA5E6: add     ecx, 0Ch; slot
+0x9CA5E9: jmp     NiPointerSlot_Release
+0x9CA5EE: mov     edx, [esp+arg_4]
+0x9CA5F2: lea     eax, [edx-10h]
+0x9CA5F5: mov     ecx, [edx-14h]
+0x9CA5F8: xor     ecx, eax
+0x9CA5FA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA5FF: mov     eax, offset stru_AF2CD0
+0x9CA604: jmp     ___CxxFrameHandler3

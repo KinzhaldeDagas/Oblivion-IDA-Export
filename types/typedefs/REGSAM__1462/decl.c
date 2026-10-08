@@ -1,1 +1,1 @@
-REGSAM
+typedef ACCESS_MASK REGSAM;

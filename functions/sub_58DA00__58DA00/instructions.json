@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x58DA2A",
-    "line": "mov     eax, [esp+0Ch+arg_0]",
+    "line": "mov     eax, [esp+0Ch+parent]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -115,31 +115,31 @@
   },
   {
     "ea": "0x58DA35",
-    "line": "mov     ecx, [esp+0Ch+arg_8]",
+    "line": "mov     ecx, [esp+0Ch+sibling]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x58DA39",
-    "line": "push    ecx",
+    "line": "push    ecx; sibling",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58DA3A",
-    "line": "push    eax",
+    "line": "push    eax; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58DA3B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x58DA3D",
-    "line": "call    sub_58D1C0",
+    "line": "call    Tile__SetParent; Verified: detaches from old parent list and decrements child-count trait 0xFD0, assigns parent +0x10, increments new parent count, inserts in new parent child list. Optional sibling argument controls placement; null uses AddHead. This is attachment, not a float-value setter.",
     "mnemonic": "call",
     "size": 5
   },

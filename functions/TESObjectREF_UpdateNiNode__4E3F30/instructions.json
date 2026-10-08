@@ -7,7 +7,7 @@
   },
   {
     "ea": "0x4E3F31",
-    "line": "push    ebx",
+    "line": "push    ebx; float",
     "mnemonic": "push",
     "size": 1
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x4E3FC2",
-    "line": "mov     [esp+10h+var_4], ebp",
+    "line": "mov     [esp+10h+var_4], ebp; float",
     "mnemonic": "mov",
     "size": 4
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x4E4008",
-    "line": "push    0; char",
+    "line": "push    0; transition",
     "mnemonic": "push",
     "size": 2
   },
@@ -445,19 +445,19 @@
   },
   {
     "ea": "0x4E400B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E400D",
-    "line": "fstp    [esp+1Ch+var_1C]; float",
+    "line": "fstp    [esp+1Ch+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4E4010",
-    "line": "call    sub_6C9CB0",
+    "line": "call    NiControllerSequence_Deactivate; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x4E4068",
-    "line": "fstp    [esp+10h+var_C]; float",
+    "line": "fstp    [esp+10h+explicitTimeOrMinusOne]; explicitTimeOrMinusOne",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -655,19 +655,19 @@
   },
   {
     "ea": "0x4E4074",
-    "line": "fstp    [esp+10h+var_10]; float",
+    "line": "fstp    [esp+10h+deltaTime]; deltaTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4E4077",
-    "line": "push    ebx; int",
+    "line": "push    ebx; ownerActor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E4078",
-    "line": "call    sub_476D10",
+    "line": "call    ActorAnimData_Update; Oblivion ActorAnimData scheduler with exact native ABI: this in ECX plus three 4-byte stack arguments, retn 0x0C. ownerActor is at [EBP+8]; all surveyed callers pass the owning Actor/Player, but the native body never dereferences it, so an interior hook's use of that value is a caller-derived contract. deltaTime at [EBP+0x0C] advances ActorAnimData time +0x94 and sequence offsets. explicitTimeOrMinusOne at [EBP+0x10] uses -1.0 for normal ticking; any other value drives an explicit-time scene update/early return. The function drains deferred KF models, maintains power/idle state, samples five slots, and advances required-note templates (class 4 terminal index 3; class 7 terminal index 4).",
     "mnemonic": "call",
     "size": 5
   },

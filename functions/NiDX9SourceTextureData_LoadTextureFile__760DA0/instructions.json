@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x760DA0",
-    "line": "sub     esp, 594h",
+    "line": "sub     esp, 594h; DDS/BMP/TGA direct-to-render texture loader. Uses d3dx9_27 D3DXGetImageInfoFromFileInMemory and D3DXCreateTextureFromFileInMemory. DDS mip-skip fast path only understands FourCC DXT1-DXT5; DX10/BC7 cannot be accepted here without replacing/hooking the loader and decoding/transcoding before D3D9 texture creation.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x760E04",
-    "line": "lea     ecx, [esp+5A0h+Dst]; void *",
+    "line": "lea     ecx, [esp+5A0h+Dst]; this",
     "mnemonic": "lea",
     "size": 7
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x760E0C",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,13 +205,13 @@
   },
   {
     "ea": "0x760E34",
-    "line": "push    eax; Str1",
+    "line": "push    eax; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x760E35",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,13 +247,13 @@
   },
   {
     "ea": "0x760E4D",
-    "line": "push    ecx; Str1",
+    "line": "push    ecx; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x760E4E",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -289,13 +289,13 @@
   },
   {
     "ea": "0x760E66",
-    "line": "push    edx; Str1",
+    "line": "push    edx; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x760E67",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,25 +541,25 @@
   },
   {
     "ea": "0x760EDB",
-    "line": "push    edi",
+    "line": "push    edi; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x760EDC",
-    "line": "push    ebp",
+    "line": "push    ebp; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x760EDD",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x760EDF",
-    "line": "call    ReadFile??",
+    "line": "call    Archive_ReadBytes",
     "mnemonic": "call",
     "size": 5
   },
@@ -769,7 +769,7 @@
   },
   {
     "ea": "0x760F3B",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -859,7 +859,7 @@
   },
   {
     "ea": "0x760F72",
-    "line": "jnz     loc_7610C7",
+    "line": "jnz     loc_7610C7; Oblivion's persistent source-texture fast path recognizes DDS and inspects its embedded D3DXIMAGE_INFO. RGBA32 DDS reaches the native D3DX loader without the DXT-only mip-skip rewrite below.",
     "mnemonic": "jnz",
     "size": 6
   },
@@ -889,7 +889,7 @@
   },
   {
     "ea": "0x760F8D",
-    "line": "mov     eax, [ebp+54h]",
+    "line": "mov     eax, [ebp+54h]; This FourCC branch only implements renderer mip skipping for DXT1-DXT5. It is not the general DDS mip loader and does not rewrite RGBA32 atlas data.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -985,7 +985,7 @@
   },
   {
     "ea": "0x760FD2",
-    "line": "mov     [esp+5A4h+var_584], ecx",
+    "line": "mov     [esp+5A4h+source], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1195,7 +1195,7 @@
   },
   {
     "ea": "0x761035",
-    "line": "add     [esp+5A4h+var_584], eax",
+    "line": "add     [esp+5A4h+source], eax",
     "mnemonic": "add",
     "size": 4
   },
@@ -1333,7 +1333,7 @@
   },
   {
     "ea": "0x761074",
-    "line": "push    80h ; '€'; Size",
+    "line": "push    80h ; '€'; byteCount",
     "mnemonic": "push",
     "size": 5
   },
@@ -1345,19 +1345,19 @@
   },
   {
     "ea": "0x76107B",
-    "line": "push    ebp; Src",
+    "line": "push    ebp; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76107C",
-    "line": "push    esi; Dst",
+    "line": "push    esi; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76107D",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1393,7 +1393,7 @@
   },
   {
     "ea": "0x761094",
-    "line": "mov     eax, [esp+5B4h+var_584]",
+    "line": "mov     eax, [esp+5B4h+source]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1423,13 +1423,13 @@
   },
   {
     "ea": "0x7610A7",
-    "line": "push    edi; Size",
+    "line": "push    edi; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7610A8",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -1441,7 +1441,7 @@
   },
   {
     "ea": "0x7610AF",
-    "line": "push    ecx; Dst",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -1453,7 +1453,7 @@
   },
   {
     "ea": "0x7610B3",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1465,7 +1465,7 @@
   },
   {
     "ea": "0x7610B9",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1489,7 +1489,7 @@
   },
   {
     "ea": "0x7610C7",
-    "line": "mov     eax, [esp+5A4h+var_588]",
+    "line": "mov     eax, [esp+5A4h+var_588]; Persistent 2D texture fast path calls d3dx9_27!D3DXCreateTextureFromFileInMemory. The exact d3dx9_27 wrapper passes Width/Height/MipLevels=D3DX_DEFAULT and Filter/MipFilter=D3DX_DEFAULT. Therefore a one-level POT DDS is expanded to a complete D3D mip chain (default image filter TRIANGLE; generated mip filter BOX); stored one-level DDS metadata does not force GetLevelCount()==1.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1525,7 +1525,7 @@
   },
   {
     "ea": "0x7610D3",
-    "line": "call    D3DXCreateTextureFromFileInMemory_0",
+    "line": "call    D3DXCreateTextureFromFileInMemory_0; Native file texture creation call: D3DXCreateTextureFromFileInMemory(device, fileBytes, fileSize, &texture). This binds support to d3dx9_27 and D3D9-capable formats.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1717,7 +1717,7 @@
   },
   {
     "ea": "0x761131",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2125,7 +2125,7 @@
   },
   {
     "ea": "0x76120B",
-    "line": "call    D3DFMTToTextureFormat",
+    "line": "call    D3DFMTToTextureFormat; DX10OBSE runtime log pass 2026-05-24: D3D9 texture formats 0x17 R5G6B5 and 0x1A A4R4G4B4 appeared as high-volume mirror failures on the active D3D10 runtime. Plugin now treats legacy packed color texture/surface mirrors as RGBA8 upload targets and expands D3D9 shadow data during UpdateSubresource instead of relying on B5/B4 DXGI formats.",
     "mnemonic": "call",
     "size": 5
   },

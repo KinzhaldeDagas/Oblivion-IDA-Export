@@ -5,7 +5,6 @@
 0x7283F7: mov     esi, eax
 0x7283F9: sub     esi, ecx
 0x7283FB: jmp     short loc_728400
-0x7283FD: align 10h
 0x728400: fld     dword ptr [esi+ecx]
 0x728403: fld     dword ptr [ecx]
 0x728405: fcompp

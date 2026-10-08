@@ -1,19 +1,36 @@
 {
-  "callees_count": 60,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 34,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_67FD70",
+  "chunks": [
+    [
+      "0x67FD70",
+      "0x680013"
+    ],
+    [
+      "0x9C4B50",
+      "0x9C4B97"
+    ]
+  ],
+  "chunks_sha256": "e66f4ef2293658a518d626dce5bbcb439601bb5c71384065d5f30a64bb06c416",
+  "comment_regular": "Verified add path for a newly allocated AStarWorldNode: under LowPathSearchGlobals.lowPathCriticalSection, insert the same node into the nested space map in both directions. The outer map is keyed by spaceA/spaceB; each inner map keys the opposite space and stores BSSimpleList<AStarWorldNode*>. Existing entries/lists are reused; missing maps/lists are allocated. WorldSpace endpoints create 0xBF-bucket inner maps, other endpoint forms create 0x25-bucket maps; why these bucket counts differ is Unknown. Fallout's TeleportDoorSearch::GetNodeConnections enumerates cell/worldspace door lists during search instead of using this Oblivion cached reciprocal map.",
+  "comment_repeatable": "Verified add path for a newly allocated AStarWorldNode: under LowPathSearchGlobals.lowPathCriticalSection, insert the same node into the nested space map in both directions. The outer map is keyed by spaceA/spaceB; each inner map keys the opposite space and stores BSSimpleList<AStarWorldNode*>. Existing entries/lists are reused; missing maps/lists are allocated. WorldSpace endpoints create 0xBF-bucket inner maps, other endpoint forms create 0x25-bucket maps; why these bucket counts differ is Unknown. Fallout's TeleportDoorSearch::GetNodeConnections enumerates cell/worldspace door lists during search instead of using this Oblivion cached reciprocal map.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 6,
+  "display_name": "TravelPath_AddAStarWorldNodeToSpaceMaps",
   "end_ea": "0x680013",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_67FD70",
+  "name": "TravelPath_AddAStarWorldNodeToSpaceMaps",
   "segment": ".text",
   "sha256": "dac0d9b922ec063effdf8a7dff7b71263a8723bbfcec7ec6336ff5d2df7c2f09",
   "size": 675,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x67FD70",
-  "type": "int __cdecl(Atmosphere *)",
-  "xrefs_from_count": 272,
+  "total_chunk_size": 746,
+  "type": "void __cdecl(AStarWorldNode *node)",
+  "xrefs_from_count": 303,
   "xrefs_to_count": 1
 }

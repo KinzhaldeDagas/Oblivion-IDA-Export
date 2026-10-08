@@ -1,19 +1,40 @@
 {
-  "callees_count": 44,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 22,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "NiTPointerListBase<NiTPointerAllocator<uint>,NiAVObject *>::NiTPointerListBase<NiTPointerAllocator<uint>,NiAVObject *>(void)",
+  "chunks": [
+    [
+      "0x4D3B10",
+      "0x4D419D"
+    ],
+    [
+      "0x4CA150",
+      "0x4CA157"
+    ],
+    [
+      "0x9B5690",
+      "0x9B56C6"
+    ]
+  ],
+  "chunks_sha256": "5ece1ac5d125a9010f340652f03c5d66710b253e82f0e79734291b21c3716ee3",
+  "comment_regular": "[Verified] This Oblivion scene-projection path creates/registers BSTempEffect decal effects after its geometry/raycast work; it is a transient decal path and does not establish population of BSShaderLightingProperty+0x80's DECAL_DATA* list. Fallout contrast: Fallout's AddDecalRef path stores reference/intersection/normal metadata in ExtraDecalRefs (ExtraData type 0x57). Equivalence between these paths: Unknown.",
+  "comment_repeatable": "[Verified] This Oblivion scene-projection path creates/registers BSTempEffect decal effects after its geometry/raycast work; it is a transient decal path and does not establish population of BSShaderLightingProperty+0x80's DECAL_DATA* list. Fallout contrast: Fallout's AddDecalRef path stores reference/intersection/normal metadata in ExtraDecalRefs (ExtraData type 0x57). Equivalence between these paths: Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "Decal_ProjectToSceneGeometry",
   "end_ea": "0x4D419D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "??0?$NiTPointerListBase@V?$NiTPointerAllocator@I@@PAVNiAVObject@@@@QAE@XZ",
+  "name": "Decal_ProjectToSceneGeometry",
   "segment": ".text",
   "sha256": "f815632c627369f4a4eb2ecde29e25a66cc4c2958115f78b6d46e765029bfa77",
   "size": 1677,
+  "source_annotation_confidence": "Verified",
   "start_ea": "0x4D3B10",
-  "type": "void __userpurge(NiTPointerListBase<NiTPointerAllocator<unsigned int>,NiAVObject *> *this@<ecx>, char@<bpl>, int, int, int, int, float, float, float, float, float, int)",
-  "xrefs_from_count": 501,
+  "total_chunk_size": 1738,
+  "type": "void __userpurge(ExtraDataList *this@<ecx>, char@<bpl>, int, int, int, int, int, int, float, float, float, int)",
+  "xrefs_from_count": 521,
   "xrefs_to_count": 3
 }

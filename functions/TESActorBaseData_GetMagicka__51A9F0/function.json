@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
-  "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 5,
+  "chunks": [
+    [
+      "0x51A9F0",
+      "0x51A9F5"
+    ]
+  ],
+  "chunks_sha256": "480fdda7447326030780cf69b657ed848a080ed27143aea1e5ba5e845881d039",
+  "comment_regular": "TESAnimGroup encoded key accessor: returns 16-bit group key at TESAnimGroup +0x08.",
+  "comment_repeatable": "TESAnimGroup encoded key accessor: returns 16-bit group key at TESAnimGroup +0x08.\nShared getter naming correction 2026-10-01: exact body mov ax,[ecx+8];ret is reused by multiple unrelated types (including TESActorBaseData/TESAnimGroup contexts and NiGeometryData vtable+50). Neutral Shared_GetWordAtOffset08 name avoids assigning a universal actor-specific meaning. NiTriShapeData A7F5A4 and NiTriStripsData A7F32C both use it for authored vertex count.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "TESActorBaseData_GetMagicka",
+  "display_name": "Shared_GetWordAtOffset08",
   "end_ea": "0x51A9F5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "TESActorBaseData_GetMagicka",
+  "name": "Shared_GetWordAtOffset08",
   "segment": ".text",
   "sha256": "480fdda7447326030780cf69b657ed848a080ed27143aea1e5ba5e845881d039",
   "size": 5,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x51A9F0",
-  "type": "__int16 __thiscall(_WORD *this)",
+  "total_chunk_size": 5,
+  "type": "unsigned __int16 __thiscall(void *object)",
   "xrefs_from_count": 1,
   "xrefs_to_count": 15
 }

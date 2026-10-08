@@ -1,1 +1,4 @@
-unmap_view_reply
+struct unmap_view_reply
+{
+reply_header __header;
+};

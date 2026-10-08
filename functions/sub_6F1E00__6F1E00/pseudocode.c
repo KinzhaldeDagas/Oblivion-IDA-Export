@@ -27,90 +27,90 @@ void __thiscall sub_6F1E00(unsigned int *this, int a2, char *a3, unsigned int a4
   int v31; // [esp+44h] [ebp+10h]
   unsigned int v32; // [esp+48h] [ebp+14h]
 
-  v28[5] = &v27;
-  v6 = a5[1];
-  v28[0] = *a5;
-  v28[2] = a5[2];
-  v7 = *(this + 1);
-  v28[1] = v6;
-  v28[3] = a5[3];
-  if ( v7 )
-    v8 = (int)(*(this + 3) - v7) >> 4;
+  v28[5] = &v27; /*0x6f1e28*/
+  v6 = a5[1]; /*0x6f1e32*/
+  v28[0] = *a5; /*0x6f1e35*/
+  v28[2] = a5[2]; /*0x6f1e3b*/
+  v7 = *(this + 1); /*0x6f1e3e*/
+  v28[1] = v6; /*0x6f1e43*/
+  v28[3] = a5[3]; /*0x6f1e49*/
+  if ( v7 ) /*0x6f1e4c*/
+    v8 = (int)(*(this + 3) - v7) >> 4; /*0x6f1e57*/
   else
-    v8 = 0;
-  if ( a4 )
+    v8 = 0; /*0x6f1e4e*/
+  if ( a4 ) /*0x6f1e5f*/
   {
-    if ( v7 )
-      v10 = (int)(*(this + 2) - v7) >> 4;
+    if ( v7 ) /*0x6f1e67*/
+      v10 = (int)(*(this + 2) - v7) >> 4; /*0x6f1e72*/
     else
-      v10 = 0;
-    if ( 0xFFFFFFFF - v10 < a4 )
-      sub_790B90();
-    if ( v7 )
-      v11 = (int)(*(this + 2) - v7) >> 4;
+      v10 = 0; /*0x6f1e69*/
+    if ( 0xFFFFFFFF - v10 < a4 ) /*0x6f1e7c*/
+      OB_stVector_ThrowLengthError_010201A0(a4); /*0x6f1e7e*/
+    if ( v7 ) /*0x6f1e85*/
+      v11 = (int)(*(this + 2) - v7) >> 4; /*0x6f1e90*/
     else
-      v11 = 0;
-    if ( v8 >= a4 + v11 )
+      v11 = 0; /*0x6f1e87*/
+    if ( v8 >= a4 + v11 ) /*0x6f1e97*/
     {
-      v21 = (char *)*(this + 2);
-      v31 = (int)v21;
-      if ( (v21 - a3) >> 4 >= a4 )
+      v21 = (char *)*(this + 2); /*0x6f1f97*/
+      v31 = (int)v21; /*0x6f1fa6*/
+      if ( (v21 - a3) >> 4 >= a4 ) /*0x6f1fa9*/
       {
-        v22 = 0x10 * a4;
-        v23 = &v21[0xFFFFFFF0 * a4];
-        v32 = v22;
-        *(this + 2) = (unsigned int)sub_6F15D0(v23, v21, v21);
-        sub_6F1440(a3, v23, v31);
-        sub_54D9A0(a3, &a3[v32], v28);
+        v22 = 0x10 * a4; /*0x6f200f*/
+        v23 = &v21[0xFFFFFFF0 * a4]; /*0x6f2014*/
+        v32 = v22; /*0x6f2017*/
+        *(this + 2) = (unsigned int)sub_6F15D0(v23, v21, v21); /*0x6f2022*/
+        sub_6F1440(a3, v23, v31); /*0x6f202b*/
+        sub_54D9A0(a3, &a3[v32], v28); /*0x6f203b*/
       }
       else
       {
-        sub_6F15D0(a3, v21, &a3[0x10 * a4]);
-        v26 = a4 - ((int)(*(this + 2) - (_DWORD)a3) >> 4);
-        v25 = (_DWORD *)*(this + 2);
-        v29 = 2;
-        sub_6F13C0(v25, v26, v28);
-        *(this + 2) += 0x10 * a4;
-        sub_54D9A0(a3, (_DWORD *)(*(this + 2) - 0x10 * a4), v28);
+        sub_6F15D0(a3, v21, &a3[0x10 * a4]); /*0x6f1fba*/
+        v26 = a4 - ((int)(*(this + 2) - (_DWORD)a3) >> 4); /*0x6f1fcf*/
+        v25 = (_DWORD *)*(this + 2); /*0x6f1fd0*/
+        v29 = 2; /*0x6f1fd3*/
+        sub_6F13C0(v25, v26, v28); /*0x6f1fda*/
+        *(this + 2) += 0x10 * a4; /*0x6f1fe2*/
+        sub_54D9A0(a3, (_DWORD *)(*(this + 2) - 0x10 * a4), v28); /*0x6f1ff0*/
       }
     }
     else
     {
-      if ( 0xFFFFFFFF - (v8 >> 1) >= v8 )
-        v12 = (v8 >> 1) + v8;
+      if ( 0xFFFFFFFF - (v8 >> 1) >= v8 ) /*0x6f1ea8*/
+        v12 = (v8 >> 1) + v8; /*0x6f1eae*/
       else
-        v12 = 0;
-      if ( v7 )
-        v13 = (int)(*(this + 2) - v7) >> 4;
+        v12 = 0; /*0x6f1eaa*/
+      if ( v7 ) /*0x6f1eb2*/
+        v13 = (int)(*(this + 2) - v7) >> 4; /*0x6f1ebd*/
       else
-        v13 = 0;
-      if ( v12 < a4 + v13 )
+        v13 = 0; /*0x6f1eb4*/
+      if ( v12 < a4 + v13 ) /*0x6f1ec4*/
       {
-        if ( v7 )
-          v14 = (int)(*(this + 2) - v7) >> 4;
+        if ( v7 ) /*0x6f1ec8*/
+          v14 = (int)(*(this + 2) - v7) >> 4; /*0x6f1ed3*/
         else
-          v14 = 0;
-        v12 = a4 + v14;
+          v14 = 0; /*0x6f1eca*/
+        v12 = a4 + v14; /*0x6f1ed6*/
       }
-      v30 = 4 * v12;
-      v15 = (_DWORD *)FormHeapAlloc(0x10 * v12);
-      v24 = (_DWORD *)*(this + 1);
-      v28[4] = v15;
-      v29 = 0;
-      v16 = sub_54D910(v24, a3, v15);
-      v17 = sub_6F13C0(v16, a4, v28);
-      sub_54D910(a3, (_DWORD *)*(this + 2), v17);
-      v18 = *(this + 1);
-      if ( v18 )
-        v19 = (int)(*(this + 2) - v18) >> 4;
+      v30 = 4 * v12; /*0x6f1edc*/
+      v15 = (_DWORD *)FormHeapAlloc(0x10 * v12); /*0x6f1ef3*/
+      v24 = (_DWORD *)*(this + 1); /*0x6f1efb*/
+      v28[4] = v15; /*0x6f1efc*/
+      v29 = 0; /*0x6f1eff*/
+      v16 = sub_54D910(v24, a3, v15); /*0x6f1f06*/
+      v17 = sub_6F13C0(v16, a4, v28); /*0x6f1f16*/
+      sub_54D910(a3, (_DWORD *)*(this + 2), v17); /*0x6f1f31*/
+      v18 = *(this + 1); /*0x6f1f36*/
+      if ( v18 ) /*0x6f1f3e*/
+        v19 = (int)(*(this + 2) - v18) >> 4; /*0x6f1f49*/
       else
-        v19 = 0;
-      v20 = v19 + a4;
-      if ( v18 )
-        FormHeapFree(*(this + 1));
-      *(this + 3) = (unsigned int)&v15[v30];
-      *(this + 2) = (unsigned int)&v15[4 * v20];
-      *(this + 1) = (unsigned int)v15;
+        v19 = 0; /*0x6f1f40*/
+      v20 = v19 + a4; /*0x6f1f4c*/
+      if ( v18 ) /*0x6f1f50*/
+        FormHeapFree(*(this + 1)); /*0x6f1f53*/
+      *(this + 3) = (unsigned int)&v15[v30]; /*0x6f1f65*/
+      *(this + 2) = (unsigned int)&v15[4 * v20]; /*0x6f1f68*/
+      *(this + 1) = (unsigned int)v15; /*0x6f1f6b*/
     }
   }
 }

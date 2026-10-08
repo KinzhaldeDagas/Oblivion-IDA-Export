@@ -1,1 +1,1 @@
-std::bad_exception
+struct std::bad_exception;

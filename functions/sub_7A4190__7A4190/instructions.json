@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A4190",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Oblivion core branch-info parser. Allocates/parses compact branch-level records from core 1014/1016 data only; later 23000 light-seam reduction and 26000 supplemental branch data are absent from this parser/storage path.",
     "mnemonic": "push",
     "size": 2
   },
@@ -139,49 +139,49 @@
   },
   {
     "ea": "0x7A41D4",
-    "line": "push    edi; Src",
+    "line": "push    edi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A41D5",
-    "line": "push    esi; int",
+    "line": "push    esi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A41D6",
-    "line": "push    ebx; Dst",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A41D7",
-    "line": "push    esi; int",
+    "line": "push    esi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A41D8",
-    "line": "lea     eax, [esp+84h+var_60]",
+    "line": "lea     eax, [esp+84h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A41DC",
-    "line": "push    eax; int",
+    "line": "push    eax; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A41DD",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A41DF",
-    "line": "call    sub_439050",
+    "line": "call    OB_stVector4_EraseRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Checked erase-range core for vectors of trivial 4-byte elements. Validates iterator owners, shifts the suffix with memmove_s, updates end, and returns the resulting iterator; directly clears CIndexedGeometry triangle totals.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,13 +193,13 @@
   },
   {
     "ea": "0x7A41E8",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A41EA",
-    "line": "call    sub_78EB40",
+    "line": "call    OB_CTreeFileAccess_ReadDword_010201A0; Stock core branch-info count read. Oblivion does not apply the local SpeedTreeOBSE former 256-count ceiling here; it loops the file count, allocating/appending compact SIdvBranchInfo records, then requires 1015.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x7A4201",
-    "line": "call    sub_7A7900",
+    "line": "call    OB_SIdvBranchInfo_Parse_010201A0; Compact stock SIdvBranchInfo parser. Allocates 0x74 bytes, accepts only core branch-level tokens 6000..6017, and stores spline/profile pointers at +0x50..+0x70.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x7A420E",
-    "line": "mov     [esp+74h+var_60], eax",
+    "line": "mov     [esp+74h+value], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -403,13 +403,13 @@
   },
   {
     "ea": "0x7A4249",
-    "line": "lea     ecx, [esp+74h+var_60]",
+    "line": "lea     ecx, [esp+74h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A424D",
-    "line": "push    ecx; int",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -421,31 +421,31 @@
   },
   {
     "ea": "0x7A424F",
-    "line": "push    esi; int",
+    "line": "push    esi; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A4250",
-    "line": "lea     edx, [esp+80h+var_58]",
+    "line": "lea     edx, [esp+80h+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A4254",
-    "line": "push    edx; int",
+    "line": "push    edx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A4255",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A4257",
-    "line": "call    sub_7A3620",
+    "line": "call    OB_stVector4_InsertOne_010201A0; Oblivion binary evidence: inserts one four-byte value at a checked owner/current iterator by calling OB_stVector4_InsertFill, then returns a relocated iterator to the inserted slot. Widely folded across SpeedTree pointer and scalar vectors.",
     "mnemonic": "call",
     "size": 5
   },
@@ -463,13 +463,13 @@
   },
   {
     "ea": "0x7A4263",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A4265",
-    "line": "call    sub_78EB40",
+    "line": "call    OB_CTreeFileAccess_ReadDword_010201A0; CTreeFileAccess::ParseToken/ParseInt-style 4-byte read. Bounds-checks cursor against owned buffer, advances cursor by 4, returns little-endian dword.",
     "mnemonic": "call",
     "size": 5
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x7A4271",
-    "line": "push    15h; MaxCount",
+    "line": "push    15h; 2026-05-21 SpeedTreeOBSE core malformed pass: ParseBranchInfo requires 1015 after the counted compact branch levels; missing or displaced 1015 is a core malformed failure before stock load.",
     "mnemonic": "push",
     "size": 2
   },
@@ -499,55 +499,55 @@
   },
   {
     "ea": "0x7A4278",
-    "line": "lea     ecx, [esp+7Ch+var_50]",
+    "line": "lea     ecx, [esp+7Ch+details]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A427C",
-    "line": "mov     [esp+7Ch+var_38], 0Fh",
+    "line": "mov     [esp+7Ch+details.capacity], 0Fh",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x7A4284",
-    "line": "mov     [esp+7Ch+var_3C], ebx",
+    "line": "mov     [esp+7Ch+details.size], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A4288",
-    "line": "mov     [esp+7Ch+var_4C], bl",
+    "line": "mov     byte ptr [esp+7Ch+details.storage], bl",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A428C",
-    "line": "call    sub_414500",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A4291",
-    "line": "push    ebx",
+    "line": "push    ebx; appendSystemError",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A4292",
-    "line": "lea     eax, [esp+78h+var_50]",
+    "line": "lea     eax, [esp+78h+details]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A4296",
-    "line": "push    eax",
+    "line": "push    eax; details",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A4297",
-    "line": "lea     ecx, [esp+7Ch+var_34]",
+    "line": "lea     ecx, [esp+7Ch+var_34]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x7A429F",
-    "line": "call    sub_789190",
+    "line": "call    OB_IdvFileError_Ctor_010201A0; Oblivion IdvFileError constructor: builds details + ' [' + optional strerror(errno) + ']', constructs the binary runtime_error base, then installs IdvFileError vftable. RT4.1 corroborates the message expression but its st_string inheritance is not used for this older binary layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -640,5 +640,59 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CCA10",
+    "line": "lea     ecx, [ebp-50h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCA13",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCA18",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CCA1C",
+    "line": "lea     eax, [edx-64h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCA1F",
+    "line": "mov     ecx, [edx-68h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCA22",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CCA24",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCA29",
+    "line": "mov     eax, offset stru_AF5DC8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCA2E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

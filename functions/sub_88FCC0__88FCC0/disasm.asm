@@ -1,4 +1,4 @@
-0x88FCC0: push    ebp
+0x88FCC0: push    ebp; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x88FCC1: mov     ebp, esp
 0x88FCC3: mov     eax, [ebp+arg_4]
 0x88FCC6: movaps  xmm0, xmmword ptr [eax]

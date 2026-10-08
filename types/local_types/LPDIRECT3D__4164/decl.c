@@ -1,1 +1,1 @@
-LPDIRECT3D
+typedef IDirect3D *LPDIRECT3D;

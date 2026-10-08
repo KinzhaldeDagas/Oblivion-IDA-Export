@@ -1,4 +1,4 @@
-BSStringT *sub_9FAD20()
+NiRTTI *sub_9FAD20()
 {
-  return sub_70E220(&stru_B3A6A8, "DebugTextExtraData", (int)dword_B3FD44);
+  return NiRTTI_Constructor(&stru_B3A6A8, "DebugTextExtraData", &stru_B3FD44); /*0x9fad34*/
 }

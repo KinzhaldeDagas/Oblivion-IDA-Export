@@ -1,1 +1,1 @@
-NiBSplineBasisData
+struct NiBSplineBasisData;

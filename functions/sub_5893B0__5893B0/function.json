@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
-  "callers_count": 8,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 11,
+  "chunks": [
+    [
+      "0x5893B0",
+      "0x5893E4"
+    ]
+  ],
+  "chunks_sha256": "5def102cba006430793a59aac7bdd08f8fff7a73e06c3301cda4276944bd8700",
+  "comment_regular": "AchievementsNative evidence: target eligibility helper returns true when the tile and ancestors are not suppressed by the observed flag path; inventory hover uses it before accepting header/item targets.",
+  "comment_repeatable": "AchievementsNative evidence: target eligibility helper returns true when the tile and ancestors are not suppressed by the observed flag path; inventory hover uses it before accepting header/item targets.\n\nVerified: checks cull bit 0 on this Tile model (+0x24) and models of Tile ancestors (+0x10). Does not directly read visible trait. Fallout IsVisible 0x827DB7D8 instead traverses NiNode parent chain. Distinguish render visibility from immediate trait value.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_5893B0",
+  "display_name": "Tile::IsVisible",
   "end_ea": "0x5893E4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_5893B0",
+  "name": "Tile::IsVisible",
   "segment": ".text",
   "sha256": "5def102cba006430793a59aac7bdd08f8fff7a73e06c3301cda4276944bd8700",
   "size": 52,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5893B0",
-  "type": "BOOL __thiscall(_DWORD *this)",
+  "total_chunk_size": 52,
+  "type": "bool __thiscall(Tile *this)",
   "xrefs_from_count": 25,
   "xrefs_to_count": 11
 }

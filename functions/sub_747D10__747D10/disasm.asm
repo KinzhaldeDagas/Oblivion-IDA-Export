@@ -1,4 +1,4 @@
-0x747D10: mov     eax, [ecx+1Ch]
+0x747D10: mov     eax, [ecx+1Ch]; EngineIssues review: raw fread sink reached by archive refill helper; verify callers clamp Count before reaching this function.
 0x747D13: mov     ecx, [esp+Count]
 0x747D17: mov     edx, [esp+DstBuf]
 0x747D1B: push    eax; Count

@@ -1,7 +1,7 @@
-int __stdcall sub_725FA0(size_t Size)
+void *__thiscall OB_NiAGDDataBlock_Allocate(OB_NiAGDDataBlock *this, unsigned int byteCount)
 {
-  if ( (_DWORD)Size )
-    return FormHeapAlloc(Size);
+  if ( byteCount ) /*0x725fa6*/
+    return (void *)FormHeapAlloc(byteCount); /*0x725fa9*/
   else
-    return 0;
+    return 0; /*0x725fb4*/
 }

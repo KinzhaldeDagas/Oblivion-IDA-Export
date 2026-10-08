@@ -65,9 +65,9 @@
 0x5C3002: mov     eax, [edx+28h]
 0x5C3005: lea     ecx, [esp+94h+var_3C]
 0x5C3009: call    eax
-0x5C300B: mov     ecx, ds:0B333C4h
-0x5C3011: push    0
-0x5C3013: call    sub_6600D0
+0x5C300B: mov     ecx, ds:0B333C4h; this
+0x5C3011: push    0; firstPerson
+0x5C3013: call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.
 0x5C3018: mov     ecx, ds:0B333C4h
 0x5C301E: push    eax
 0x5C301F: push    ecx
@@ -76,10 +76,10 @@
 0x5C3029: lea     ecx, [esp+94h+var_3C]; this
 0x5C302D: mov     [esp+94h+var_4], 0FFFFFFFFh
 0x5C3038: call    ??1QueuedHead@@UAE@XZ; QueuedHead::~QueuedHead(void)
-0x5C303D: mov     ecx, ds:0B333C4h
-0x5C3043: push    1
+0x5C303D: mov     ecx, ds:0B333C4h; this
+0x5C3043: push    1; firstPerson
 0x5C3045: mov     byte ptr ds:0B33D80h, 0
-0x5C304C: call    PlayerCharacter_GetPlayerNode
+0x5C304C: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x5C3051: cmp     word ptr [eax+0B6h], 0
 0x5C3059: ja      short loc_5C305F
 0x5C305B: xor     ebp, ebp
@@ -112,3 +112,12 @@
 0x5C30B8: pop     ebp
 0x5C30B9: add     esp, 84h
 0x5C30BF: retn
+0x9C0F50: lea     ecx, [ebp-3Ch]; this
+0x9C0F53: jmp     ??1QueuedHead@@UAE@XZ; QueuedHead::~QueuedHead(void)
+0x9C0F58: mov     edx, [esp+arg_4]
+0x9C0F5C: lea     eax, [edx-84h]
+0x9C0F62: mov     ecx, [edx-88h]
+0x9C0F68: xor     ecx, eax
+0x9C0F6A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C0F6F: mov     eax, offset stru_AEA07C
+0x9C0F74: jmp     ___CxxFrameHandler3

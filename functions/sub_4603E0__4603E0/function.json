@@ -1,19 +1,36 @@
 {
-  "callees_count": 62,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 34,
   "callers_count": 2,
+  "chunks": [
+    [
+      "0x4603E0",
+      "0x4606C1"
+    ],
+    [
+      "0x9AE560",
+      "0x9AE5C8"
+    ]
+  ],
+  "chunks_sha256": "4b27dfc48a23bd8fb49f2fe8d74959694fe909322c24fb41f7e4860a73f317aa",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 10,
-  "display_name": "sub_4603E0",
+  "comment_repeatable": " Verified created-reference branch behavior from Oblivion RTTI/allocation evidence: kind=1 allocates ArrowProjectile; kind=2 selects MagicBall/Bolt/Fog class; kinds=0/3 use TESBoundObject lookup and standard TESObjectREFR construction or compatible existing REFR reuse. Fallout CreatedReferenceInitialData is 31 bytes and uses a compact 3-byte BoundIDIndex; Oblivion payload is 36 bytes with dword IDs.\n\nVerified: consumes the 36-byte created-reference data: kind at +0, second field at +4, location FormID at +8. Kind 1 allocates ArrowProjectile; kind 2 selects MagicBall/Bolt/Fog implementation; kinds 0/3 use the bound-object path and may reuse a matching existing TESObjectREFR. Bound object is RTTI-checked as TESBoundObject. Candidate: meaning of +4 is conditional across kinds; retained neutral member name.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 11,
+  "display_name": "TESSaveLoadGame_CreateReferenceFromInitialData",
   "end_ea": "0x4606C1",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4603E0",
+  "name": "TESSaveLoadGame_CreateReferenceFromInitialData",
   "segment": ".text",
   "sha256": "930d86d71f114db52d010f3de6fc8ae5bea9aefe75ba21e7da577f4c9f93cb60",
   "size": 737,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4603E0",
-  "type": "TESForm *__userpurge@<eax>(char *ecx0@<ecx>, double@<st2>, double@<st1>, int, int *)",
-  "xrefs_from_count": 291,
+  "total_chunk_size": 841,
+  "type": "TESForm *__userpurge@<eax>(TESSaveLoadGame_SerializationView *self@<ecx>, double arg2@<st2>, double arg3@<st1>, unsigned int referenceID, OblivionCreatedReferenceInitialData *data)",
+  "xrefs_from_count": 335,
   "xrefs_to_count": 2
 }

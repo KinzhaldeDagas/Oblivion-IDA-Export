@@ -66,13 +66,13 @@
 0x5E3166: mov     ecx, ds:0B333C4h; this
 0x5E316C: mov     [esp+40h+var_20], edx
 0x5E3170: mov     [esp+40h+var_1C], eax
-0x5E3174: call    TESObjectREFR_GetParentCell
+0x5E3174: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5E3179: test    eax, eax
 0x5E317B: jz      short loc_5E31D5
 0x5E317D: mov     ecx, ds:0B333C4h; this
-0x5E3183: call    TESObjectREFR_GetParentCell
+0x5E3183: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5E3188: mov     ecx, eax; this
-0x5E318A: call    TESObjectCELL_IsInterior
+0x5E318A: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x5E318F: test    al, al
 0x5E3191: jz      short loc_5E31D5
 0x5E3193: push    esi
@@ -84,7 +84,7 @@
 0x5E31A0: mov     ecx, edi
 0x5E31A2: call    sub_566A40
 0x5E31A7: mov     ecx, eax; this
-0x5E31A9: call    TESObjectCELL_IsInterior
+0x5E31A9: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x5E31AE: test    al, al
 0x5E31B0: jz      short loc_5E31D5
 0x5E31B2: push    esi
@@ -92,7 +92,7 @@
 0x5E31B5: call    sub_566A40
 0x5E31BA: mov     ecx, ds:0B333C4h; this
 0x5E31C0: mov     esi, eax
-0x5E31C2: call    TESObjectREFR_GetParentCell
+0x5E31C2: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5E31C7: cmp     esi, eax
 0x5E31C9: jz      short loc_5E31D5
 0x5E31CB: pop     edi
@@ -103,10 +103,10 @@
 0x5E31D1: add     esp, 30h
 0x5E31D4: retn
 0x5E31D5: lea     ecx, [esp+40h+var_30]
-0x5E31D9: call    sub_404C90
+0x5E31D9: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x5E31DE: fstp    [esp+40h+var_30]
 0x5E31E2: lea     ecx, [esp+40h+var_24]
-0x5E31E6: call    sub_404C90
+0x5E31E6: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x5E31EB: fcomp   [esp+40h+var_30]
 0x5E31EF: fnstsw  ax
 0x5E31F1: test    ah, 5

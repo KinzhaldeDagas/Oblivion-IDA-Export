@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x9A84B6",
-    "line": "push    offset NiRefObject_objcount; lpAddend",
+    "line": "push    0B3FD64h; lpAddend",
     "mnemonic": "push",
     "size": 5
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x9A84F2",
-    "line": "cmp     byte_B4295B, bl",
+    "line": "cmp     g_D3DXParameterDispatchInitialized, bl",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -133,13 +133,13 @@
   },
   {
     "ea": "0x9A84FA",
-    "line": "call    sub_783C70",
+    "line": "call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x9A84FF",
-    "line": "cmp     byte_B4295C, bl",
+    "line": "cmp     byte ptr unk_B4295C, bl",
     "mnemonic": "cmp",
     "size": 6
   },

@@ -1,1 +1,1 @@
-hkConstraintListener
+struct hkConstraintListener;

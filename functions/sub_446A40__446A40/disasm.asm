@@ -4,12 +4,12 @@
 0x446A47: jz      loc_446AEA
 0x446A4D: push    esi
 0x446A4E: mov     ecx, edi; this
-0x446A50: call    TESObjectREFR_GetParentCell
+0x446A50: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x446A55: mov     esi, eax
 0x446A57: test    esi, esi
 0x446A59: jz      short loc_446A68
 0x446A5B: mov     ecx, esi; this
-0x446A5D: call    TESObjectCELL_IsInterior
+0x446A5D: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x446A62: test    al, al
 0x446A64: jnz     short loc_446A68
 0x446A66: xor     esi, esi

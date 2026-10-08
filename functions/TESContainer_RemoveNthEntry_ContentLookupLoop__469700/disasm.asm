@@ -17,12 +17,12 @@
 0x469725: mov     edx, [ecx]
 0x469727: push    ecx
 0x469728: mov     [eax], edx
-0x46972A: call    FormHeapFree
+0x46972A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x46972F: add     esp, 4
 0x469732: jmp     short loc_46973A
 0x469734: mov     dword ptr [eax], 0
 0x46973A: test    esi, esi
 0x46973C: jz      short TESContainer_RemoveNthEntry___Done_
 0x46973E: push    esi
-0x46973F: call    FormHeapFree
+0x46973F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x469744: add     esp, 4

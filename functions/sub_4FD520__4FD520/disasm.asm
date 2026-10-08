@@ -15,12 +15,12 @@
 0x4FD53F: jz      short loc_4FD55C
 0x4FD541: mov     eax, [esi]
 0x4FD543: push    eax
-0x4FD544: call    FormHeapFree
+0x4FD544: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4FD549: push    esi
 0x4FD54A: mov     [esi], ebx
 0x4FD54C: mov     [esi+6], bx
 0x4FD550: mov     [esi+4], bx
-0x4FD554: call    FormHeapFree
+0x4FD554: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4FD559: add     esp, 8
 0x4FD55C: mov     eax, [edi+4]
 0x4FD55F: cmp     eax, ebx
@@ -30,7 +30,7 @@
 0x4FD569: mov     edx, [eax]
 0x4FD56B: push    eax
 0x4FD56C: mov     [edi], edx
-0x4FD56E: call    FormHeapFree
+0x4FD56E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4FD573: add     esp, 4
 0x4FD576: jmp     short loc_4FD530
 0x4FD578: mov     [edi], ebx

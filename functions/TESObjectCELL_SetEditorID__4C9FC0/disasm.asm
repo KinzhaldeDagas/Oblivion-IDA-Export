@@ -4,7 +4,6 @@
 0x4C9FC6: mov     eax, edi
 0x4C9FC8: lea     esi, [eax+1]
 0x4C9FCB: jmp     short loc_4C9FD0
-0x4C9FCD: align 10h
 0x4C9FD0: mov     dl, [eax]
 0x4C9FD2: add     eax, 1
 0x4C9FD5: test    dl, dl

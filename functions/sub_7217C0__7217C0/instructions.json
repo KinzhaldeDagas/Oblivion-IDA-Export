@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x7217D4",
-    "line": "fstp    [esp+4Ch+var_48]",
+    "line": "fstp    [esp+4Ch+var_48.x]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x7217E1",
-    "line": "fstp    [esp+4Ch+var_44]",
+    "line": "fstp    [esp+4Ch+var_48.y]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -73,25 +73,25 @@
   },
   {
     "ea": "0x7217EE",
-    "line": "fstp    [esp+4Ch+var_40]",
+    "line": "fstp    [esp+4Ch+var_48.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7217F2",
-    "line": "fld     [esp+4Ch+var_48]",
+    "line": "fld     [esp+4Ch+var_48.x]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7217F6",
-    "line": "fld     [esp+4Ch+var_44]",
+    "line": "fld     [esp+4Ch+var_48.y]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7217FA",
-    "line": "fld     [esp+4Ch+var_40]",
+    "line": "fld     [esp+4Ch+var_48.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x721832",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x72183C",
-    "line": "mov     esi, [esp+54h+arg_8]",
+    "line": "mov     esi, [esp+54h+rhs]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -295,13 +295,13 @@
   },
   {
     "ea": "0x72185C",
-    "line": "fstp    [esp+54h+var_30]",
+    "line": "fstp    [esp+54h+out.x]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x721860",
-    "line": "mov     eax, [esp+54h+var_30]",
+    "line": "mov     eax, [esp+54h+out.x]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -325,13 +325,13 @@
   },
   {
     "ea": "0x72186C",
-    "line": "fstp    [esp+54h+var_2C]",
+    "line": "fstp    [esp+54h+out.y]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x721870",
-    "line": "mov     ecx, [esp+54h+var_2C]",
+    "line": "mov     ecx, [esp+54h+out.y]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -355,13 +355,13 @@
   },
   {
     "ea": "0x72187D",
-    "line": "fstp    [esp+54h+var_28]",
+    "line": "fstp    [esp+54h+out.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x721881",
-    "line": "mov     edx, [esp+54h+var_28]",
+    "line": "mov     edx, [esp+54h+out.z]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -379,13 +379,13 @@
   },
   {
     "ea": "0x72188B",
-    "line": "fstp    [esp+54h+var_30]",
+    "line": "fstp    [esp+54h+out.x]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x72188F",
-    "line": "mov     eax, [esp+54h+var_30]",
+    "line": "mov     eax, [esp+54h+out.x]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -397,13 +397,13 @@
   },
   {
     "ea": "0x721896",
-    "line": "fstp    [esp+54h+var_2C]",
+    "line": "fstp    [esp+54h+out.y]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x72189A",
-    "line": "mov     ecx, [esp+54h+var_2C]",
+    "line": "mov     ecx, [esp+54h+out.y]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -421,13 +421,13 @@
   },
   {
     "ea": "0x7218A6",
-    "line": "fstp    [esp+54h+var_28]",
+    "line": "fstp    [esp+54h+out.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7218AA",
-    "line": "mov     edx, [esp+54h+var_28]",
+    "line": "mov     edx, [esp+54h+out.z]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -451,13 +451,13 @@
   },
   {
     "ea": "0x7218B7",
-    "line": "fstp    [esp+54h+var_30]",
+    "line": "fstp    [esp+54h+out.x]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7218BB",
-    "line": "mov     eax, [esp+54h+var_30]",
+    "line": "mov     eax, [esp+54h+out.x]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -469,13 +469,13 @@
   },
   {
     "ea": "0x7218C2",
-    "line": "fstp    [esp+54h+var_2C]",
+    "line": "fstp    [esp+54h+out.y]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7218C6",
-    "line": "mov     ecx, [esp+54h+var_2C]",
+    "line": "mov     ecx, [esp+54h+out.y]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -493,13 +493,13 @@
   },
   {
     "ea": "0x7218D4",
-    "line": "fstp    [esp+54h+var_28]",
+    "line": "fstp    [esp+54h+out.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7218D8",
-    "line": "mov     edx, [esp+54h+var_28]",
+    "line": "mov     edx, [esp+54h+out.z]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x7218E7",
-    "line": "fmul    [esp+54h+var_44]",
+    "line": "fmul    [esp+54h+var_48.y]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x7218ED",
-    "line": "fmul    [esp+54h+var_48]",
+    "line": "fmul    [esp+54h+var_48.x]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x7218F6",
-    "line": "fmul    [esp+54h+var_40]",
+    "line": "fmul    [esp+54h+var_48.z]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -607,37 +607,37 @@
   },
   {
     "ea": "0x721915",
-    "line": "push    esi",
+    "line": "push    esi; rhs",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x721916",
-    "line": "lea     eax, [esp+58h+var_30]",
+    "line": "lea     eax, [esp+58h+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x72191A",
-    "line": "push    eax",
+    "line": "push    eax; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x72191B",
-    "line": "lea     ecx, [esp+5Ch+var_48]",
+    "line": "lea     ecx, [esp+5Ch+var_48]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x72191F",
-    "line": "call    sub_4BF9E0",
+    "line": "call    NiPoint3__NormalizedCrossProduct; Computes and normalizes the cross product of two NiPoint3 vectors, returning zero for near-degenerate input. ShadowSceneLight uses it to construct an orthonormal shadow-camera basis.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x721924",
-    "line": "fld     [esp+54h+var_28]",
+    "line": "fld     [esp+54h+out.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x72192F",
-    "line": "fld     [esp+64h+var_2C]",
+    "line": "fld     [esp+64h+out.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x721937",
-    "line": "fld     [esp+64h+var_30]",
+    "line": "fld     [esp+64h+out.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -715,19 +715,19 @@
   },
   {
     "ea": "0x721957",
-    "line": "mov     ecx, [esp+54h+var_48]",
+    "line": "mov     ecx, [esp+54h+var_48.x]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x72195B",
-    "line": "mov     edx, [esp+54h+var_44]",
+    "line": "mov     edx, [esp+54h+var_48.y]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x72195F",
-    "line": "mov     eax, [esp+54h+var_40]",
+    "line": "mov     eax, [esp+54h+var_48.z]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x721966",
-    "line": "lea     ecx, [esp+58h+var_30]",
+    "line": "lea     ecx, [esp+58h+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x721988",
-    "line": "lea     eax, [esp+58h+var_30]",
+    "line": "lea     eax, [esp+58h+out]",
     "mnemonic": "lea",
     "size": 4
   },

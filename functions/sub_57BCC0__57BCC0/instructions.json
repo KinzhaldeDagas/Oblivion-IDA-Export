@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x57BCC0",
-    "line": "push    esi; a3",
+    "line": "push    esi; AchievementsNative evidence: armor/soul/sigil popup wrapper. Args observed from InventoryMenu hover: inventory entry, exposed popup X, source row Y, bottom margin, popup depth; opens/validates MagicPopupMenu then forwards to 0x5B4E10.",
     "mnemonic": "push",
     "size": 1
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x57BD39",
-    "line": "fstp    [esp+8+a2]; a3",
+    "line": "fstp    [esp+8+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -253,13 +253,13 @@
   },
   {
     "ea": "0x57BD3E",
-    "line": "push    0FABh; a2",
+    "line": "push    0FABh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x57BD43",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x57BD6F",
-    "line": "call    sub_5B4E10",
+    "line": "call    sub_5B4E10; AchievementsNative evidence: MagicPopupMenu builder for armor/soul/sigil/simple item popups. Same position semantics as 0x5B4230 where observed: root user0/source Y, user1/bottom margin, user3/depth, exposed-X-driven background slide.",
     "mnemonic": "call",
     "size": 5
   },

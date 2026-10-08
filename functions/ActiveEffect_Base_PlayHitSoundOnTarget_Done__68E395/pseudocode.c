@@ -1,5 +1,5 @@
 // positive sp value has been detected, the output may be wrong!
-int ActiveEffect_Base_PlayHitSoundOnTarget_::Done()
+void ActiveEffect_Base_PlayHitSoundOnTarget_::Done()
 {
-  return ActiveEffect_Base_PlayHitSoundOnTarget_::Done_();
+  ActiveEffect_Base_PlayHitSoundOnTarget_::Done_(); /*0x68e396*/
 }

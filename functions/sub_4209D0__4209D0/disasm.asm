@@ -1,4 +1,4 @@
-0x4209D0: push    0FFFFFFFFh
+0x4209D0: push    0FFFFFFFFh; Oblivion marker toggle: false removes ExtraLeveledCreature (type 0x35); true creates the marker only if absent. No Fallout field layout is assumed.
 0x4209D2: push    offset SEH_6F8920
 0x4209D7: mov     eax, large fs:0
 0x4209DD: push    eax
@@ -22,7 +22,7 @@
 0x420A12: mov     [esp+14h+var_4], 0
 0x420A1A: jz      short loc_420A25
 0x420A1C: mov     ecx, eax
-0x420A1E: call    sub_429BF0
+0x420A1E: call    ExtraLeveledCreature_ctor; Constructs the Oblivion ExtraLeveledCreature marker (type 0x35).
 0x420A23: jmp     short loc_420A27
 0x420A25: xor     eax, eax
 0x420A27: push    eax; BSExtraData *
@@ -43,3 +43,15 @@
 0x420A5D: pop     esi
 0x420A5E: add     esp, 0Ch
 0x420A61: retn    4
+0x9AFAD0: mov     eax, [ebp+4]
+0x9AFAD3: push    eax
+0x9AFAD4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFAD9: pop     ecx
+0x9AFADA: retn
+0x9AFADB: mov     edx, [esp+arg_4]
+0x9AFADF: lea     eax, [edx-4]
+0x9AFAE2: mov     ecx, [edx-8]
+0x9AFAE5: xor     ecx, eax
+0x9AFAE7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AFAEC: mov     eax, offset stru_ADBFDC
+0x9AFAF1: jmp     ___CxxFrameHandler3

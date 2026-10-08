@@ -3,7 +3,7 @@
 0x47233A: lea     eax, [esp+arg_0]
 0x47233E: push    eax
 0x47233F: push    edx
-0x472340: call    sub_470960
+0x472340: call    ActorAnimData_FindAnimMapEntry; CustomAnimSupport decode: anim-map lookup helper used by playback, validators, and save/load restore to test an encoded group key.
 0x472345: test    al, al
 0x472347: jnz     short loc_47234F
 0x472349: xor     ax, ax
@@ -29,8 +29,8 @@
 0x472377: mov     ecx, esi
 0x472379: call    edx
 0x47237B: mov     ecx, [eax+68h]
-0x47237E: call    sub_51AED0
-0x472383: call    Double_To_SInt32
+0x47237E: call    TESAnimGroup_GetMovementMagnitude; TESAnimGroup movement magnitude. Computes sqrt(x*x + y*y + z*z) from movement vector floats; used by Animate In Place warning path.
+0x472383: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x472388: pop     esi
 0x472389: retn    4
 0x47238C: xor     ax, ax

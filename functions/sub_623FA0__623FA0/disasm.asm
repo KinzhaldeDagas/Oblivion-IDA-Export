@@ -10,7 +10,7 @@
 0x623FB9: cmp     eax, esi
 0x623FBB: jnz     short loc_624002
 0x623FBD: mov     ecx, esi
-0x623FBF: call    sub_612D60
+0x623FBF: call    CombatController_GetEquippedWeaponForm
 0x623FC4: test    eax, eax
 0x623FC6: jnz     short loc_624004
 0x623FC8: cmp     ds:0B3B908h, al
@@ -27,7 +27,7 @@
 0x623FEC: call    sub_6239D0
 0x623FF1: push    eax
 0x623FF2: mov     ecx, esi
-0x623FF4: call    sub_612DE0
+0x623FF4: call    CombatController_SetCombatMode; Sets CombatController+0x70 active mode (0 H2H, 1 melee weapon, 2 ranged weapon, 3 touch spell, 4 ranged spell, 5 yield, 7 flee, 0xA switch weapon, 0xC leave water) and invalidates desired-distance cache +0x188.
 0x623FF9: push    0
 0x623FFB: mov     ecx, esi
 0x623FFD: call    sub_619920

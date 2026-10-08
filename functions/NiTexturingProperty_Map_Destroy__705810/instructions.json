@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x705810",
-    "line": "push    esi",
+    "line": "push    esi; Verified Map deleting destructor frees transform+0C, decrements texture+8 and invokes its virtual deletion only at zero, then frees the map when flags are nonzero. Frond v107 fixture exercises these actual bytes with shared and final texture references.",
     "mnemonic": "push",
     "size": 1
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x70581E",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x705851",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

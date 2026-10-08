@@ -33,7 +33,7 @@
 0x7C38A6: mov     dword ptr [edi+30h], 0
 0x7C38AD: lea     ebx, [edi+34h]
 0x7C38B0: mov     ecx, ebx
-0x7C38B2: call    NiTPointerList__FreeAllNodes
+0x7C38B2: call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.
 0x7C38B7: mov     esi, [edi+24h]
 0x7C38BA: test    esi, esi
 0x7C38BC: jz      short loc_7C38E0
@@ -46,13 +46,13 @@
 0x7C38CC: mov     ecx, ebp
 0x7C38CE: call    sub_812D60
 0x7C38D3: push    ebp
-0x7C38D4: call    FormHeapFree
+0x7C38D4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7C38D9: add     esp, 4
 0x7C38DC: test    esi, esi
 0x7C38DE: jnz     short loc_7C38C0
 0x7C38E0: lea     ebp, [edi+20h]
 0x7C38E3: mov     ecx, ebp
-0x7C38E5: call    NiTPointerList__FreeAllNodes
+0x7C38E5: call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.
 0x7C38EA: mov     esi, [edi+30h]
 0x7C38ED: test    esi, esi
 0x7C38EF: jz      short loc_7C3914
@@ -70,7 +70,7 @@
 0x7C390B: call    eax
 0x7C390D: mov     dword ptr [edi+30h], 0
 0x7C3914: mov     ecx, ebx
-0x7C3916: call    NiTPointerList__FreeAllNodes
+0x7C3916: call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.
 0x7C391B: mov     ecx, ebx
 0x7C391D: mov     byte ptr [esp+24h+var_4], 1
 0x7C3922: call    ??1?$NiTList@J@@UAE@XZ; NiTList<long>::~NiTList<long>(void)
@@ -102,3 +102,19 @@
 0x7C396D: pop     ebx
 0x7C396E: add     esp, 10h
 0x7C3971: retn
+0x9CE520: mov     ecx, [ebp-10h]
+0x9CE523: add     ecx, 20h ; ' '
+0x9CE526: jmp     j_??1?$NiTPointerList@PAVTallGrassGroup@@@@UAE@XZ; NiTPointerList<TallGrassGroup *>::~NiTPointerList<TallGrassGroup *>(void)
+0x9CE52B: mov     ecx, [ebp-10h]
+0x9CE52E: add     ecx, 30h ; '0'; slot
+0x9CE531: jmp     NiPointerSlot_Release
+0x9CE536: mov     ecx, [ebp-10h]
+0x9CE539: add     ecx, 34h ; '4'
+0x9CE53C: jmp     j_??1?$NiTList@J@@UAE@XZ; NiTList<long>::~NiTList<long>(void)
+0x9CE541: mov     edx, [esp+arg_4]
+0x9CE545: lea     eax, [edx-14h]
+0x9CE548: mov     ecx, [edx-18h]
+0x9CE54B: xor     ecx, eax
+0x9CE54D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CE552: mov     eax, offset stru_AF7524
+0x9CE557: jmp     ___CxxFrameHandler3

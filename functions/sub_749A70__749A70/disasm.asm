@@ -7,14 +7,13 @@
 0x749A7C: push    ebp
 0x749A7D: push    edi
 0x749A7E: mov     ebx, ecx
-0x749A80: call    sub_722700
+0x749A80: call    j_NiGeometry_CopyMembersForClone
 0x749A85: mov     al, [ebx+0C0h]
 0x749A8B: mov     [edi+0C0h], al
 0x749A91: mov     esi, [ebx+0C8h]
 0x749A97: test    esi, esi
 0x749A99: jz      short loc_749AFC
 0x749A9B: jmp     short loc_749AA0
-0x749A9D: align 10h
 0x749AA0: mov     ecx, [esi+8]
 0x749AA3: mov     edx, [ecx]
 0x749AA5: lea     eax, [esi+8]
@@ -33,7 +32,7 @@
 0x749AC8: lea     edx, [esp+10h+arg_4]
 0x749ACC: push    edx
 0x749ACD: add     ecx, 0C4h ; 'Ä'
-0x749AD3: call    sub_7C16B0
+0x749AD3: call    NiTRefPointerList__AddTail; Generic refcounted NiT pointer-list AddTail helper. Allocates a node, assigns/increments its object pointer, links it after the old tail, and updates head/tail/count.
 0x749AD8: test    edi, edi
 0x749ADA: jz      short loc_749AF4
 0x749ADC: lea     eax, [edi+4]

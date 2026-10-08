@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
-  "callers_count": 77,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 2774,
+  "chunks": [
+    [
+      "0x772DF0",
+      "0x772E30"
+    ]
+  ],
+  "chunks_sha256": "364ba231b53fdad136d6d4d4fb5dadfe98807c5eea41b025d7efd332fb92e4ad",
+  "comment_regular": "Acquire a pooled NiD3DRenderStateGroup for a pass.",
+  "comment_repeatable": "Acquire a pooled NiD3DRenderStateGroup for a pass.\nDX11 pool audit 2026-10-01: nonempty group pool B427A8 returns FreeObjects[0], decrements FreeCount+8, then replaces slot0 with the old last active pointer. It leaves the now-inactive last slot untouched. Low group byte0 is RendererOwned: set to1 only if0, preserve nonzero values and padding. Empty pool grows through7729E0 and doubles NextBlockCount+C.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_772DF0",
+  "display_name": "NiD3DRenderStateGroupPool_Acquire",
   "end_ea": "0x772E30",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_772DF0",
+  "name": "NiD3DRenderStateGroupPool_Acquire",
   "segment": ".text",
   "sha256": "364ba231b53fdad136d6d4d4fb5dadfe98807c5eea41b025d7efd332fb92e4ad",
   "size": 64,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x772DF0",
-  "type": "_BYTE *()",
+  "total_chunk_size": 64,
+  "type": "OblivionPooledRenderStateGroupPrefix *__cdecl()",
   "xrefs_from_count": 30,
   "xrefs_to_count": 2774
 }

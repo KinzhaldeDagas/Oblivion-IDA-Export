@@ -46,38 +46,29 @@ _DWORD *__userpurge def_737562@<eax>(
   unsigned int v44; // [esp-90h] [ebp-90h]
   int v45; // [esp-8Ch] [ebp-8Ch]
   int v46; // [esp-88h] [ebp-88h]
-  int v47; // [esp-84h] [ebp-84h]
-  int v48; // [esp-80h] [ebp-80h]
-  int v49; // [esp-7Ch] [ebp-7Ch]
-  int v50; // [esp-78h] [ebp-78h]
-  int v51; // [esp-74h] [ebp-74h]
-  int v52; // [esp-70h] [ebp-70h]
-  unsigned int v53; // [esp-6Ch] [ebp-6Ch]
-  int v54; // [esp-68h] [ebp-68h]
-  _RTL_CRITICAL_SECTION_0 *v55; // [esp-64h] [ebp-64h]
-  int v56; // [esp-60h] [ebp-60h]
-  int v57; // [esp-5Ch] [ebp-5Ch]
-  int v58; // [esp-58h] [ebp-58h]
-  int *v59; // [esp-54h] [ebp-54h]
-  int v60[20]; // [esp-50h] [ebp-50h] BYREF
+  unsigned int v47; // [esp-6Ch] [ebp-6Ch]
+  int v48; // [esp-68h] [ebp-68h]
+  _RTL_CRITICAL_SECTION_0 *v49; // [esp-64h] [ebp-64h]
+  int *v50; // [esp-54h] [ebp-54h]
+  _BYTE v51[80]; // [esp-50h] [ebp-50h] BYREF
 
-  v5 = 0;
-  if ( a5 )
+  v5 = 0; /*0x73758e*/
+  if ( a5 ) /*0x737597*/
   {
-    do
+    do /*0x7376ac*/
     {
-      v6 = a2[0x111];
-      switch ( v6 )
+      v6 = a2[0x111]; /*0x7375a0*/
+      switch ( v6 ) /*0x7375a8*/
       {
-        case 0x10u:
-          v46 = a2[0x10C];
-          v45 = 0;
-          v44 = v5;
-          v59 = &v27;
-          sub_70F010(&v27, v60);
-          v59 = &v10;
-          sub_70F010(&v10, a2 + 0x110);
-          sub_736EB0(
+        case 0x10u: /*0x7375a8*/
+          v46 = a2[0x10C]; /*0x73765a*/
+          v45 = 0; /*0x73765b*/
+          v44 = v5; /*0x73765c*/
+          v50 = &v27; /*0x737669*/
+          sub_70F010(&v27, v51); /*0x737671*/
+          v50 = &v10; /*0x737681*/
+          sub_70F010(&v10, a2 + 0x110); /*0x737689*/
+          sub_736EB0( /*0x737697*/
             a4,
             a3,
             v10,
@@ -117,15 +108,15 @@ _DWORD *__userpurge def_737562@<eax>(
             v44,
             v45);
           break;
-        case 0x18u:
-          v46 = a2[0x10C];
-          v45 = 0;
-          v44 = v5;
-          v59 = &v27;
-          sub_70F010(&v27, v60);
-          v59 = &v10;
-          sub_70F010(&v10, a2 + 0x110);
-          sub_736950(
+        case 0x18u: /*0x7375a8*/
+          v46 = a2[0x10C]; /*0x73760f*/
+          v45 = 0; /*0x737610*/
+          v44 = v5; /*0x737611*/
+          v50 = &v27; /*0x73761e*/
+          sub_70F010(&v27, v51); /*0x737626*/
+          v50 = &v10; /*0x737636*/
+          sub_70F010(&v10, a2 + 0x110); /*0x73763e*/
+          sub_736950( /*0x73764c*/
             a4,
             (int)a3,
             v10,
@@ -165,15 +156,15 @@ _DWORD *__userpurge def_737562@<eax>(
             v44,
             v45);
           break;
-        case 0x20u:
-          v46 = a2[0x10C];
-          v45 = 0;
-          v44 = v5;
-          v59 = &v27;
-          sub_70F010(&v27, v60);
-          v59 = &v10;
-          sub_70F010(&v10, a2 + 0x110);
-          sub_736A20(
+        case 0x20u: /*0x7375a8*/
+          v46 = a2[0x10C]; /*0x7375c1*/
+          v45 = 0; /*0x7375c2*/
+          v44 = v5; /*0x7375c3*/
+          v50 = &v27; /*0x7375d0*/
+          sub_70F010(&v27, v51); /*0x7375d8*/
+          v50 = &v10; /*0x7375e8*/
+          sub_70F010(&v10, a2 + 0x110); /*0x7375f0*/
+          sub_736A20( /*0x7375fe*/
             a4,
             (signed int)a3,
             v10,
@@ -211,41 +202,20 @@ _DWORD *__userpurge def_737562@<eax>(
             v42,
             v43,
             v44,
-            v45,
-            v46,
-            v47,
-            v48,
-            v49,
-            v50,
-            v51,
-            v52,
-            v53,
-            v54,
-            (int)v55,
-            v56,
-            v57,
-            v58,
-            (int)v59,
-            v60[0],
-            v60[1],
-            v60[2],
-            v60[3],
-            v60[4],
-            v60[5],
-            v60[6]);
+            v45);
           break;
       }
-      ++v5;
+      ++v5; /*0x7376a2*/
     }
-    while ( v5 < a5 );
-    a1 = v54;
+    while ( v5 < a5 ); /*0x7376ac*/
+    a1 = v48; /*0x7376b2*/
   }
-  v54 = a1 + 1;
-  if ( a1 + 2 < v53 )
-    JUMPOUT(0x73755D);
-  v7 = v55;
-  if ( HIDWORD(v55[3].SpinCount)-- == 1 )
-    LODWORD(v7[3].SpinCount) = 0;
-  LeaveCriticalSection(v7);
-  return a3;
+  v48 = a1 + 1; /*0x7376c0*/
+  if ( a1 + 2 < v47 ) /*0x7376c4*/
+    JUMPOUT(0x73755D); /*0x73755d*/
+  v7 = v49; /*0x7376ca*/
+  if ( HIDWORD(v49[3].SpinCount)-- == 1 ) /*0x7376ce*/
+    LODWORD(v7[3].SpinCount) = 0; /*0x7376d4*/
+  LeaveCriticalSection(v7); /*0x7376dc*/
+  return a3; /*0x7376f7*/
 }

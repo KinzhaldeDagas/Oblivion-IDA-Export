@@ -1,1 +1,1 @@
-PLONG
+typedef int *PLONG;

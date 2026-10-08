@@ -119,7 +119,6 @@
 0x736BC0: mov     [esp+58h+var_20], ecx
 0x736BC4: mov     [esp+58h+var_2C], edi
 0x736BC8: jmp     short loc_736BD7
-0x736BCA: align 10h
 0x736BD0: mov     dl, byte ptr [esp+58h+arg_94]
 0x736BD7: mov     ecx, [esp+58h+var_44]
 0x736BDB: mov     edi, [ecx]
@@ -169,3 +168,115 @@
 0x736C5B: jnb     short loc_736C50
 0x736C5D: mov     ecx, [esp+58h+var_3C]
 0x736C61: sub     ecx, edx
+0x736D70: mov     bl, byte ptr [esp+58h+arg_94]
+0x736D77: mov     ecx, [esp+58h+var_44]
+0x736D7B: mov     edi, [ecx]
+0x736D7D: movzx   ecx, [esp+58h+var_8]
+0x736D82: mov     eax, edi
+0x736D84: and     eax, [esp+58h+var_18]
+0x736D88: xor     ebp, ebp
+0x736D8A: shr     eax, cl
+0x736D8C: cmp     bl, dl
+0x736D8E: ja      short loc_736D9D
+0x736D90: movzx   ecx, bl
+0x736D93: or      ebp, eax
+0x736D95: sub     dl, bl
+0x736D97: shl     ebp, cl
+0x736D99: cmp     dl, bl
+0x736D9B: jnb     short loc_736D90
+0x736D9D: mov     ecx, 8
+0x736DA2: sub     ecx, edx
+0x736DA4: sub     ecx, [esp+58h+var_40]
+0x736DA8: mov     edx, eax
+0x736DAA: shr     edx, cl
+0x736DAC: mov     ecx, ebp
+0x736DAE: mov     [esp+58h+arg_90], ecx
+0x736DB5: mov     cl, bl
+0x736DB7: mov     ebx, ebp
+0x736DB9: shr     ebx, cl
+0x736DBB: mov     ecx, [esp+58h+var_40]
+0x736DBF: shl     al, cl
+0x736DC1: movzx   ecx, [esp+58h+var_7]
+0x736DC6: or      dl, bl
+0x736DC8: mov     bl, byte ptr [esp+58h+arg_0]
+0x736DCC: or      dl, al
+0x736DCE: mov     eax, edi
+0x736DD0: and     eax, [esp+58h+var_14]
+0x736DD4: xor     ebp, ebp
+0x736DD6: shr     eax, cl
+0x736DD8: mov     cl, [esp+58h+var_3]
+0x736DDC: cmp     bl, cl
+0x736DDE: mov     [esp+58h+var_45], dl
+0x736DE2: mov     dl, cl
+0x736DE4: ja      short loc_736DF3
+0x736DE6: movzx   ecx, bl
+0x736DE9: or      ebp, eax
+0x736DEB: sub     dl, bl
+0x736DED: shl     ebp, cl
+0x736DEF: cmp     dl, bl
+0x736DF1: jnb     short loc_736DE6
+0x736DF3: mov     ecx, [esp+58h+var_3C]
+0x736DF7: and     edi, [esp+58h+var_10]
+0x736DFB: sub     ecx, edx
+0x736DFD: mov     edx, eax
+0x736DFF: shr     edx, cl
+0x736E01: mov     ecx, ebp
+0x736E03: mov     [esp+58h+arg_90], ecx
+0x736E0A: mov     cl, bl
+0x736E0C: mov     ebx, ebp
+0x736E0E: shr     ebx, cl
+0x736E10: mov     ecx, [esp+58h+var_38]
+0x736E14: shl     al, cl
+0x736E16: movzx   ecx, [esp+58h+var_6]
+0x736E1B: shr     edi, cl
+0x736E1D: mov     cl, [esp+58h+var_2]
+0x736E21: or      dl, bl
+0x736E23: mov     bl, byte ptr [esp+58h+arg_4]
+0x736E27: or      dl, al
+0x736E29: mov     eax, edi
+0x736E2B: xor     edi, edi
+0x736E2D: cmp     bl, cl
+0x736E2F: ja      short loc_736E48
+0x736E31: movzx   ebp, bl
+0x736E34: mov     bl, cl
+0x736E36: sub     bl, byte ptr [esp+58h+arg_4]
+0x736E3A: or      edi, eax
+0x736E3C: mov     ecx, ebp
+0x736E3E: shl     edi, cl
+0x736E40: cmp     bl, byte ptr [esp+58h+arg_4]
+0x736E44: jnb     short loc_736E36
+0x736E46: jmp     short loc_736E4B
+0x736E48: movzx   ebx, cl
+0x736E4B: movzx   ecx, [esp+58h+var_45]
+0x736E50: mov     [esi], cl
+0x736E52: mov     ecx, [esp+58h+var_34]
+0x736E56: add     [esp+58h+var_44], 4
+0x736E5B: mov     [esi+1], dl
+0x736E5E: add     esi, 1
+0x736E61: sub     ecx, ebx
+0x736E63: mov     edx, eax
+0x736E65: shr     edx, cl
+0x736E67: movzx   ecx, byte ptr [esp+58h+arg_4]
+0x736E6C: mov     ebx, edi
+0x736E6E: shr     ebx, cl
+0x736E70: mov     ecx, [esp+58h+var_30]
+0x736E74: shl     al, cl
+0x736E76: add     esi, 1
+0x736E79: or      dl, bl
+0x736E7B: add     esi, 1
+0x736E7E: or      dl, al
+0x736E80: mov     [esi-1], dl
+0x736E83: mov     dl, [esp+58h+var_4]
+0x736E87: mov     byte ptr [esi], 0FFh
+0x736E8A: add     esi, 1
+0x736E8D: sub     [esp+58h+var_28], 1
+0x736E92: jnz     loc_736D70
+0x736E98: mov     edi, [esp+58h+var_24]
+0x736E9C: sub     [esp+58h+var_2C], 1
+0x736EA1: jnz     loc_736AD0
+0x736EA7: pop     edi
+0x736EA8: pop     esi
+0x736EA9: pop     ebp
+0x736EAA: pop     ebx
+0x736EAB: add     esp, 48h
+0x736EAE: retn

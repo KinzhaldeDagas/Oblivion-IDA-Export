@@ -2,7 +2,7 @@ int __userpurge EffectItem_BuildDisplayString_::CheckArea@<eax>(
         int a1@<ebx>,
         int a2@<ebp>,
         _DWORD *a3@<esi>,
-        int a4,
+        int a4@<edi>,
         int a5,
         int a6,
         int a7,
@@ -11,7 +11,7 @@ int __userpurge EffectItem_BuildDisplayString_::CheckArea@<eax>(
         int a10,
         int a11,
         int a12,
-        int a13,
+        char a13,
         int a14,
         int a15,
         int a16,
@@ -43,15 +43,18 @@ int __userpurge EffectItem_BuildDisplayString_::CheckArea@<eax>(
         int a42,
         int a43,
         int a44,
-        char a45,
-        char a46,
-        char a47)
+        int a45,
+        int a46,
+        char a47,
+        char a48)
 {
-  if ( a2 == 1 )
-    return EffectItem_BuildDisplayString_::Done(a4, a5, a6, a7, a8, a9);
-  if ( (*(_DWORD *)(a3[7] + 0x58) & 0x200) != 0 || a3[4] == a1 || a3[2] <= a1 )
-    return EffectItem_BuildDisplayString_::CheckDuration(
-             a4,
+  if ( a2 == 1 ) /*0x413e6b*/
+    return EffectItem_BuildDisplayString_::Done(a4, a5, a6, a7, a8, a9, a10); /*0x413e6b*/
+  if ( (*(_DWORD *)(a3[7] + 0x58) & 0x200) != 0 || a3[4] == a1 || a3[2] <= a1 ) /*0x413e92*/
+    return EffectItem_BuildDisplayString_::CheckDuration( /*0x413e7d*/
+             a1,
+             a3,
+             (BSStringT *)a4,
              a5,
              a6,
              a7,
@@ -92,9 +95,14 @@ int __userpurge EffectItem_BuildDisplayString_::CheckArea@<eax>(
              a42,
              a43,
              a44,
-             a45);
+             a45,
+             a46,
+             a47,
+             a48);
   return EffectItem_BuildDisplayString_::AppendArea(
-           a4,
+           (BSStringT *)a4,
+           a3,
+           a1,
            a5,
            a6,
            a7,
@@ -137,5 +145,6 @@ int __userpurge EffectItem_BuildDisplayString_::CheckArea@<eax>(
            a44,
            a45,
            a46,
-           a47);
+           a47,
+           a48);
 }

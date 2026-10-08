@@ -1,11 +1,9 @@
-void __userpurge PlayerCharacter_DamageEquippedItem_(
-        PlayerCharacter *a1@<ecx>,
-        int a2@<ebx>,
-        int a3@<ebp>,
-        void **a4,
-        int a5,
-        int a6)
+// PlayerCharacter vtable +0x2C4 override. In god mode returns false without changing the equipped item; otherwise forwards EntryData, float damage, and suppression flag to Actor_DamageEquippedItem.
+bool __thiscall PlayerCharacter_DamageEquippedItem(
+        PlayerCharacter *this,
+        EntryData *entry,
+        float damage,
+        bool suppressArmorSkillModifiers)
 {
-  if ( !g_GodMode )
-    Actor_DamageEquippedItem_(a1, a2, a3, a4, a5, a6);
+  return !g_godModeEnabled && Actor_DamageEquippedItem((Actor *)this, entry, damage, suppressArmorSkillModifiers); /*0x65ff1b*/
 }

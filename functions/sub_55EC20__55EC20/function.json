@@ -1,19 +1,36 @@
 {
-  "callees_count": 15,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_55EC20",
+  "chunks": [
+    [
+      "0x55EC20",
+      "0x55ED25"
+    ],
+    [
+      "0x9A9EE0",
+      "0x9A9F11"
+    ]
+  ],
+  "chunks_sha256": "396da7384bc65b8512ea3c54e8bed5e0952d48ea85a0d243e3a7bb029fd78ee4",
+  "comment_regular": "Verified BSTreeManager.modelCacheByTree at +0: lazily creates a 37-bucket NiTPointerMap<TESObjectTREE*, NiPointer<BSTreeModel>*> and gives each tree form a one-element smart-pointer array.",
+  "comment_repeatable": "Verified BSTreeManager.modelCacheByTree at +0: lazily creates a 37-bucket NiTPointerMap<TESObjectTREE*, NiPointer<BSTreeModel>*> and gives each tree form a one-element smart-pointer array.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "BSTreeManager_GetModelArray",
   "end_ea": "0x55ED25",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_55EC20",
+  "name": "BSTreeManager_GetModelArray",
   "segment": ".text",
   "sha256": "7ecf2311420667646545215844582d2bbd1a3ab56ef15441bb0268ebdeb665d8",
   "size": 261,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x55EC20",
-  "type": "int __thiscall(NiTPointerMap<TESObjectTREE *,NiPointer<BSTreeModel> *> **this, int)",
-  "xrefs_from_count": 100,
+  "total_chunk_size": 310,
+  "type": "BSTreeModel_OblivionLayout_058 **__thiscall(BSTreeManager_OblivionVerifiedLayout *this, TESObjectTREE_OblivionLayout_080_NiTArrayVerified *tree)",
+  "xrefs_from_count": 119,
   "xrefs_to_count": 1
 }

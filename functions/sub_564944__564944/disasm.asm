@@ -7,7 +7,7 @@
 0x56495D: mov     al, 1
 0x56495F: jmp     short loc_56496C
 0x564961: push    ebx
-0x564962: call    FormHeapFree
+0x564962: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x564967: add     esp, 4
 0x56496A: xor     al, al
 0x56496C: mov     ecx, [esp+arg_18]

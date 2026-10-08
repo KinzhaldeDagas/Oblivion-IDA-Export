@@ -1,28 +1,54 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "$BFB2EB47150D3B1257AE7D071061C238",
+  "definition": "union $BFB2EB47150D3B1257AE7D071061C238\n{\nhandle_t *pAutoHandle __offset(OFF64|AUTO);\nhandle_t *pPrimitiveHandle __offset(OFF64|AUTO);\nPGENERIC_BINDING_INFO pGenericBindingInfo __offset(OFF64|AUTO);\n}\n",
   "id": 18374686479671831316,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pAutoHandle",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "handle_t *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pPrimitiveHandle",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "handle_t *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pGenericBindingInfo",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "PGENERIC_BINDING_INFO"
     }
   ],
   "name": "$BFB2EB47150D3B1257AE7D071061C238",
+  "ordinal": 2922,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 4
 }

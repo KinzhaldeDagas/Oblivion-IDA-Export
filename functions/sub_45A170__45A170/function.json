@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
-  "callers_count": 124,
-  "comment_regular": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 205,
+  "chunks": [
+    [
+      "0x45A170",
+      "0x45A186"
+    ]
+  ],
+  "chunks_sha256": "5370c9347bb68727979cd158c3dacb5a4674457324e6bec2655b7360bf8506f7",
+  "comment_regular": "Verified: reads singleton 0xB33B00, version byte +0x7C, returns true iff 0x1F <= version < 0x5A. Actor-base save/load paths use this for BLOK magic and UInt16 length envelope. Fallout symbol 0x825FE428 and identical predicate corroborate naming; no incoming ECX dependency in Oblivion.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_45A170",
+  "display_name": "TESSaveLoadGame_UseSaveGameBlocks",
   "end_ea": "0x45A186",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_45A170",
+  "name": "TESSaveLoadGame_UseSaveGameBlocks",
   "segment": ".text",
   "sha256": "5370c9347bb68727979cd158c3dacb5a4674457324e6bec2655b7360bf8506f7",
   "size": 22,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x45A170",
-  "type": "bool()",
+  "total_chunk_size": 22,
+  "type": "bool __cdecl()",
   "xrefs_from_count": 10,
   "xrefs_to_count": 205
 }

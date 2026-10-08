@@ -15,7 +15,7 @@
 0x6E4508: push    edx; int
 0x6E4509: push    eax; int
 0x6E450A: push    3; int
-0x6E450C: call    sub_6D3540
+0x6E450C: call    NiAnimationKey_GuaranteeTimeRange; Guarantees authored keys at both requested boundaries using the registered content/type insertion function. For Euler rotation type 4, recursively updates all three scalar axes and refreshes axis stride/cursor metadata. Unlike range cloning, this operation may synthesize evaluated boundary keys.
 0x6E4511: mov     ecx, [esp+20h+var_4]
 0x6E4515: add     esp, 18h
 0x6E4518: mov     [esi+0Ch], ecx

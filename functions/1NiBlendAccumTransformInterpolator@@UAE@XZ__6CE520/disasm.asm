@@ -3,7 +3,7 @@
 0x6CE523: mov     eax, [esi+50h]
 0x6CE526: push    eax
 0x6CE527: mov     dword ptr [esi], offset ??_7NiBlendAccumTransformInterpolator@@6B@; const NiBlendAccumTransformInterpolator::`vftable'
-0x6CE52D: call    FormHeapFree
+0x6CE52D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6CE532: add     esp, 4
 0x6CE535: mov     ecx, esi; this
 0x6CE537: pop     esi

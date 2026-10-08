@@ -1,5 +1,5 @@
-0x795480: push    ebx
-0x795481: mov     ebx, [esp+4+arg_0]
+0x795480: push    ebx; OBLIVION AUTHORITY (2026-08-30): Deep copy constructor for vector<unsigned short>; allocates exact source size and copies its 2-byte elements.
+0x795481: mov     ebx, [esp+4+source]
 0x795485: push    edi
 0x795486: mov     edi, ecx
 0x795488: mov     ecx, [ebx+4]
@@ -18,7 +18,7 @@
 0x7954A7: jz      short loc_795506
 0x7954A9: cmp     eax, 0FFFFFFFFh
 0x7954AC: jbe     short loc_7954B3
-0x7954AE: call    sub_790B90
+0x7954AE: call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error("vector<T> too long") and throws; used by multiple element specializations after max_size checks.
 0x7954B3: push    ebp
 0x7954B4: push    esi; MaxCount
 0x7954B5: lea     esi, [eax+eax]

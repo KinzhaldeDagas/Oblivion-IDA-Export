@@ -24,3 +24,12 @@
 0x89FCED: pop     esi
 0x89FCEE: add     esp, 10h
 0x89FCF1: retn
+0x9D68B0: mov     ecx, [ebp-10h]; this
+0x9D68B3: jmp     ??1bhkAction@@UAE@XZ; bhkAction::~bhkAction(void)
+0x9D68B8: mov     edx, [esp+arg_4]
+0x9D68BC: lea     eax, [edx-8]
+0x9D68BF: mov     ecx, [edx-0Ch]
+0x9D68C2: xor     ecx, eax
+0x9D68C4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D68C9: mov     eax, offset stru_AFE670
+0x9D68CE: jmp     ___CxxFrameHandler3

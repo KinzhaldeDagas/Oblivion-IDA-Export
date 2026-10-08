@@ -1,1 +1,1 @@
-FUNCDESC
+typedef tagFUNCDESC FUNCDESC;

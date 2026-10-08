@@ -1,4 +1,4 @@
-0x805320: sub     esp, 2F0h
+0x805320: sub     esp, 2F0h; BloodOnDeath decode 2026-05-30: GeometryDecalShader program creation. MAXDECALS="1" is a shader-pass define for geometry decal variants, not the gameplay blood spawn/trail count.
 0x805326: mov     eax, ds:0B30AACh
 0x80532B: xor     eax, esp
 0x80532D: mov     [esp+2F0h+var_4], eax
@@ -17,7 +17,7 @@
 0x805361: mov     [esp+30Ch+var_250], ebp
 0x805368: mov     [esp+30Ch+var_24C], offset aGeomdecal; "GEOMDECAL"
 0x805373: mov     [esp+30Ch+var_248], ebp
-0x80537A: mov     [esp+30Ch+var_244], offset aMaxdecals; "MAXDECALS"
+0x80537A: mov     [esp+30Ch+var_244], offset aMaxdecals; BloodOnDeath decode: non-skinned geometry-decal VS uses MAXDECALS=1; single-decal shader pass, not a global blood decal cap.
 0x805385: mov     [esp+30Ch+var_240], offset a1; "1"
 0x805390: mov     [esp+30Ch+var_23C], 0
 0x80539B: call    __memset
@@ -41,7 +41,7 @@
 0x8053E3: lea     eax, [esp+314h+FileName]
 0x8053EA: push    eax; lpFileName
 0x8053EB: mov     ecx, esi
-0x8053ED: call    CreateVertexShader
+0x8053ED: call    CreateVertexShader; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.
 0x8053F2: mov     edi, [esi+84h]
 0x8053F8: mov     ebx, eax
 0x8053FA: cmp     edi, ebx
@@ -76,7 +76,7 @@
 0x80544E: mov     [esp+308h+var_2E8], ebp
 0x805452: mov     [esp+308h+var_2E4], offset aGeomdecal; "GEOMDECAL"
 0x80545A: mov     [esp+308h+var_2E0], ebp
-0x80545E: mov     [esp+308h+var_2DC], offset aMaxdecals; "MAXDECALS"
+0x80545E: mov     [esp+308h+var_2DC], offset aMaxdecals; BloodOnDeath decode: skinned geometry-decal VS also uses MAXDECALS=1; more trails require more decal instances/projection calls upstream.
 0x805466: mov     [esp+308h+var_2D8], offset a1; "1"
 0x80546E: mov     [esp+308h+var_2D4], offset aSkin_1; "SKIN"
 0x805476: mov     [esp+308h+var_2D0], ebp
@@ -106,7 +106,7 @@
 0x8054D2: lea     eax, [esp+314h+FileName]
 0x8054D9: push    eax; lpFileName
 0x8054DA: mov     ecx, esi
-0x8054DC: call    CreateVertexShader
+0x8054DC: call    CreateVertexShader; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.
 0x8054E1: mov     edi, [esi+88h]
 0x8054E7: mov     ebx, eax
 0x8054E9: cmp     edi, ebx
@@ -144,7 +144,7 @@
 0x805550: mov     [esp+30Ch+var_29C], ebp
 0x805554: mov     [esp+30Ch+var_298], offset aGeomdecal; "GEOMDECAL"
 0x80555C: mov     [esp+30Ch+var_294], ebp
-0x805560: mov     [esp+30Ch+var_290], offset aMaxdecals; "MAXDECALS"
+0x805560: mov     [esp+30Ch+var_290], offset aMaxdecals; BloodOnDeath decode: geometry-decal PS uses MAXDECALS=1; renderer consumes existing geometry decals rather than emitting blood.
 0x805568: mov     [esp+30Ch+var_28C], offset a1; "1"
 0x805573: mov     [esp+30Ch+var_288], 0
 0x80557E: call    __memset
@@ -168,7 +168,7 @@
 0x8055BC: lea     ecx, [esp+314h+FileName]
 0x8055C3: push    ecx; lpFileName
 0x8055C4: mov     ecx, esi
-0x8055C6: call    CreatePixelShader
+0x8055C6: call    CreatePixelShader; Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.
 0x8055CB: mov     edi, [esi+8Ch]
 0x8055D1: mov     ebx, eax
 0x8055D3: cmp     edi, ebx

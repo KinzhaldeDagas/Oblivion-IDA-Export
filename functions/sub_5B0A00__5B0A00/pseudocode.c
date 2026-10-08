@@ -1,3 +1,4 @@
+// LockPickMenu input/state handler. Auto-attempt and successful manual tumbler placement both award Security useValue0.
 void __userpurge sub_5B0A00(
         int a1@<ecx>,
         int ebx0@<ebx>,
@@ -9,150 +10,137 @@ void __userpurge sub_5B0A00(
 {
   _DWORD *OpenMenuTile; // eax
   void *ParentMenu; // eax
-  int v12; // eax
-  int v13; // eax
+  int v10; // eax
+  int v11; // eax
   PlayerCharacterVtbl *vtbl; // edi
   BSExtraDataVtbl *Owner; // eax
-  _BYTE *v16; // eax
-  int v17; // ecx
-  PlayerCharacterVtbl *v18; // edi
-  BSExtraDataVtbl *v19; // eax
-  int v20; // edx
-  int v21; // ecx
-  int v22; // ecx
-  int *v23; // ecx
+  _BYTE *v14; // eax
+  int v15; // ecx
+  PlayerCharacterVtbl *v16; // edi
+  BSExtraDataVtbl *v17; // eax
+  int v18; // edx
+  int v19; // ecx
+  int v20; // ecx
+  int *v21; // ecx
   float a2; // [esp+20h] [ebp-10h]
-  int v25; // [esp+2Ch] [ebp-4h]
-  int v26; // [esp+34h] [ebp+4h]
+  int v23; // [esp+2Ch] [ebp-4h]
+  int v24; // [esp+34h] [ebp+4h]
 
-  OpenMenuTile = (_DWORD *)Menu_GetOpenMenuTile(0x3F6);
-  if ( OpenMenuTile )
+  OpenMenuTile = (_DWORD *)Menu_GetOpenMenuTile(0x3F6); /*0x5b0a08*/
+  if ( OpenMenuTile ) /*0x5b0a12*/
   {
-    ParentMenu = (void *)Tile_GetParentMenu(OpenMenuTile);
-    if ( ParentMenu )
+    ParentMenu = (void *)Tile_GetParentMenu(OpenMenuTile); /*0x5b0a1a*/
+    if ( ParentMenu ) /*0x5b0a21*/
     {
-      if ( OblivionDynamicCast(
+      if ( OblivionDynamicCast( /*0x5b0a36*/
              ParentMenu,
              0,
              (struct _s_RTTICompleteObjectLocator *)&Menu `RTTI Type Descriptor',
              &LockPickMenu `RTTI Type Descriptor',
              0) )
       {
-        if ( a6 == 2 || sub_6DA150(0xA) == 2 )
+        if ( a6 == 2 || sub_6DA150(0xA) == 2 ) /*0x5b0a66*/
         {
-          sub_5B07E0(a4, a5);
-          return;
+          sub_5B07E0(a4, a5); /*0x5b0d0b*/
+          return; /*0x5b0d0b*/
         }
-        if ( *(_DWORD *)(a1 + 0x150) == 4 )
-          sub_5B0620(a1);
-        v12 = *(_DWORD *)(a1 + 0x178);
-        if ( v12 && !*(_DWORD *)(v12 + 0x44)
-          || (TESObjectREF_GetItemCount(
-                (TESObjectREFR *)TESDataHandler_g_PlayerRef,
-                TESDataHandler_g_SkeletonKey,
-                ebx0,
-                a3,
-                v25),
-              v13) )
+        if ( *(_DWORD *)(a1 + 0x150) == 4 ) /*0x5b0a73*/
+          sub_5B0620(a1); /*0x5b0a77*/
+        v10 = *(_DWORD *)(a1 + 0x178); /*0x5b0a7c*/
+        if ( v10 && !*(_DWORD *)(v10 + 0x44) /*0x5b0aa1*/
+          || (TESObjectREFR_GetItemCount((TESObjectREFR *)reference, (TESForm *)MEMORY[0xB35ECC], ebx0, a3, v23), v11) )
         {
-          if ( a6 == 5 )
+          if ( a6 == 5 ) /*0x5b0aaa*/
           {
-            Tile_SetFloat(*(Tile **)(a1 + 0x178), (_DWORD *)0xFAE, 1.0);
-            sub_58FBA0(*(_DWORD *)(a1 + 0x178), a4, a5, 1.0, 0);
-            if ( *(_DWORD *)(a1 + 0x150) == 1 )
-              return;
-            if ( TESObjectREFR_GetOwner(*(TESObjectREFR **)(a1 + 0x38)) )
+            Tile_SetFloat(*(Tile **)(a1 + 0x178), (_DWORD *)0xFAE, 1.0); /*0x5b0ac1*/
+            sub_58FBA0(*(_DWORD *)(a1 + 0x178), a4, a5, 1.0, 0); /*0x5b0ace*/
+            if ( *(_DWORD *)(a1 + 0x150) == 1 ) /*0x5b0ade*/
+              return; /*0x5b0ade*/
+            if ( TESObjectREFR_GetOwner(*(TESObjectREFR **)(a1 + 0x38)) ) /*0x5b0ae7*/
             {
-              if ( !*(_BYTE *)(a1 + 0x17C) )
+              if ( !*(_BYTE *)(a1 + 0x17C) ) /*0x5b0af0*/
               {
-                vtbl = TESDataHandler_g_PlayerRef->vtbl;
-                Owner = TESObjectREFR_GetOwner(*(TESObjectREFR **)(a1 + 0x38));
-                if ( ((int (__thiscall *)(PlayerCharacter *, _DWORD, BSExtraDataVtbl *, unsigned int))vtbl->super.Unk_92)(
-                       TESDataHandler_g_PlayerRef,
+                vtbl = reference->vtbl; /*0x5b0b02*/
+                Owner = TESObjectREFR_GetOwner(*(TESObjectREFR **)(a1 + 0x38)); /*0x5b0b06*/
+                if ( ((int (__thiscall *)(PlayerCharacter *, _DWORD, BSExtraDataVtbl *, unsigned int))vtbl->super.Unk_92)( /*0x5b0b21*/
+                       reference,
                        *(_DWORD *)(a1 + 0x38),
                        Owner,
                        0xFFFFFFFF) != 0xFFFFFFFF )
-                  *(_BYTE *)(a1 + 0x17C) = 1;
+                  *(_BYTE *)(a1 + 0x17C) = 1; /*0x5b0b23*/
               }
             }
-            byte_B3B3F5 = 1;
-            *(_BYTE *)(a1 + 0x17C) = 1;
-            if ( sub_5B0260((char *)a1) )
+            BYTE1(dword_B3B0B4[0xD0]) = 1; /*0x5b0b29*/
+            *(_BYTE *)(a1 + 0x17C) = 1; /*0x5b0b31*/
+            if ( LockPickMenu_TryAutoAttempt((char *)a1) ) /*0x5b0b37*/
             {
-              v16 = (_BYTE *)(a1 + 0x94);
-              v17 = 5;
-              do
+              v14 = (_BYTE *)(a1 + 0x94); /*0x5b0b44*/
+              v15 = 5; /*0x5b0b4a*/
+              do /*0x5b0b5a*/
               {
-                v16[1] = 1;
-                *v16 = 1;
-                v16 += 0x28;
-                --v17;
+                v14[1] = 1; /*0x5b0b50*/
+                *v14 = 1; /*0x5b0b53*/
+                v14 += 0x28; /*0x5b0b55*/
+                --v15; /*0x5b0b58*/
               }
-              while ( v17 );
-              sub_5B03B0(a1);
-              return;
+              while ( v15 ); /*0x5b0b5a*/
+              sub_5B03B0(a1); /*0x5b0b5e*/
+              return; /*0x5b0b66*/
             }
 LABEL_41:
-            sub_5AF200(a1);
-            return;
+            sub_5AF200(a1); /*0x5b0cea*/
+            return; /*0x5b0cf4*/
           }
         }
-        if ( *(int *)(a1 + 0x160) < 0 )
-          return;
-        if ( TESObjectREFR_GetOwner(*(TESObjectREFR **)(a1 + 0x38)) )
+        if ( *(int *)(a1 + 0x160) < 0 ) /*0x5b0b70*/
+          return; /*0x5b0b70*/
+        if ( TESObjectREFR_GetOwner(*(TESObjectREFR **)(a1 + 0x38)) ) /*0x5b0b79*/
         {
-          if ( !*(_BYTE *)(a1 + 0x17C) )
+          if ( !*(_BYTE *)(a1 + 0x17C) ) /*0x5b0b87*/
           {
-            v18 = TESDataHandler_g_PlayerRef->vtbl;
-            v19 = TESObjectREFR_GetOwner(*(TESObjectREFR **)(a1 + 0x38));
-            if ( ((int (__thiscall *)(PlayerCharacter *, _DWORD, BSExtraDataVtbl *, unsigned int))v18->super.Unk_92)(
-                   TESDataHandler_g_PlayerRef,
+            v16 = reference->vtbl; /*0x5b0b98*/
+            v17 = TESObjectREFR_GetOwner(*(TESObjectREFR **)(a1 + 0x38)); /*0x5b0b9c*/
+            if ( ((int (__thiscall *)(PlayerCharacter *, _DWORD, BSExtraDataVtbl *, unsigned int))v16->super.Unk_92)( /*0x5b0bb7*/
+                   reference,
                    *(_DWORD *)(a1 + 0x38),
-                   v19,
+                   v17,
                    0xFFFFFFFF) != 0xFFFFFFFF )
-              *(_BYTE *)(a1 + 0x17C) = 1;
+              *(_BYTE *)(a1 + 0x17C) = 1; /*0x5b0bb9*/
           }
         }
-        v20 = *(_DWORD *)(a1 + 0x28 * *(_DWORD *)(a1 + 0x160) + 0x80);
-        v21 = a1 + 0x28 * *(_DWORD *)(a1 + 0x160);
-        if ( v20 != 0xFFFFFFFF )
+        v18 = *(_DWORD *)(a1 + 0x28 * *(_DWORD *)(a1 + 0x160) + 0x80); /*0x5b0bc8*/
+        v19 = a1 + 0x28 * *(_DWORD *)(a1 + 0x160); /*0x5b0bd2*/
+        if ( v18 != 0xFFFFFFFF ) /*0x5b0bd5*/
         {
-          if ( *(_BYTE *)(v21 + 0x95) )
-            goto LABEL_42;
-          if ( 0.0 != *(float *)(v21 + 0x7C) && *(_BYTE *)(v21 + 0x94) == 1 )
+          if ( *(_BYTE *)(v19 + 0x95) ) /*0x5b0bdb*/
+            goto LABEL_42; /*0x5b0be2*/
+          if ( 0.0 != *(float *)(v19 + 0x7C) && *(_BYTE *)(v19 + 0x94) == 1 ) /*0x5b0bfe*/
           {
-            ((void (__stdcall *)(int, _DWORD, _DWORD))TESDataHandler_g_PlayerRef->vtbl->super.ModExperience)(
-              0x1E,
-              0,
-              0.0);
-            if ( TESDataHandler_g_PlayerRef->vtbl->super.GetActorValue(
-                   (Actor *)TESDataHandler_g_PlayerRef,
-                   kActorVal_Security) <= 0x64 )
-              v26 = TESDataHandler_g_PlayerRef->vtbl->super.GetActorValue(
-                      (Actor *)TESDataHandler_g_PlayerRef,
-                      kActorVal_Security);
+            ((void (__stdcall *)(int, _DWORD, _DWORD))reference->vtbl->super.ModExperience)(0x1E, 0, 0.0);// Successful manual tumbler set: Security (0x1E), useValue0, identity scale (0.0). /*0x5b0c1a*/
+            if ( reference->vtbl->super.GetActorValue((Actor *)reference, kActorVal_Security) <= 0x64 ) /*0x5b0c31*/
+              v24 = reference->vtbl->super.GetActorValue((Actor *)reference, kActorVal_Security); /*0x5b0c4f*/
             else
-              v26 = 0x64;
-            a2 = (float)v26;
-            Tile_SetFloat(*(Tile **)(a1 + 0x28), (_DWORD *)0xFB2, a2);
-            v22 = 5 * *(_DWORD *)(a1 + 0x160);
-            *(_DWORD *)(a1 + 0x150) = 1;
-            *(_BYTE *)(a1 + 8 * v22 + 0x95) = 1;
-            *(_BYTE *)(a1 + 0x28 * *(_DWORD *)(a1 + 0x160) + 0x94) = 0;
-            v23 = *(int **)(a1 + 0x28 * (*(_DWORD *)(a1 + 0x160) + 4));
-            if ( v23 )
+              v24 = 0x64; /*0x5b0c33*/
+            a2 = (float)v24; /*0x5b0c5b*/
+            Tile_SetFloat(*(Tile **)(a1 + 0x28), (_DWORD *)0xFB2, a2); /*0x5b0c63*/
+            v20 = 5 * *(_DWORD *)(a1 + 0x160); /*0x5b0c6e*/
+            *(_DWORD *)(a1 + 0x150) = 1; /*0x5b0c71*/
+            *(_BYTE *)(a1 + 8 * v20 + 0x95) = 1; /*0x5b0c77*/
+            *(_BYTE *)(a1 + 0x28 * *(_DWORD *)(a1 + 0x160) + 0x94) = 0; /*0x5b0c87*/
+            v21 = *(int **)(a1 + 0x28 * (*(_DWORD *)(a1 + 0x160) + 4)); /*0x5b0c9b*/
+            if ( v21 ) /*0x5b0ca0*/
             {
-              if ( sub_6B7260(v23) )
-                sub_6B7240(*(int **)(a1 + 0x28 * (*(_DWORD *)(a1 + 0x160) + 4)));
+              if ( SoundHandle::IsPlaying(v21) ) /*0x5b0ca2*/
+                sub_6B7240(*(int **)(a1 + 0x28 * (*(_DWORD *)(a1 + 0x160) + 4))); /*0x5b0cba*/
             }
-            sub_5AFD50("UILockTumblerLock");
-            return;
+            sub_5AFD50("UILockTumblerLock"); /*0x5b0cc6*/
+            return; /*0x5b0cc6*/
           }
         }
-        if ( !*(_BYTE *)(v21 + 0x95) && v20 == 0xFFFFFFFF && *(_BYTE *)(v21 + 0x94) )
-          goto LABEL_41;
+        if ( !*(_BYTE *)(v19 + 0x95) && v18 == 0xFFFFFFFF && *(_BYTE *)(v19 + 0x94) ) /*0x5b0ce1*/
+          goto LABEL_41; /*0x5b0ce8*/
 LABEL_42:
-        sub_5AFD50("UILockPickAttempt");
+        sub_5AFD50("UILockPickAttempt"); /*0x5b0cf7*/
       }
     }
   }

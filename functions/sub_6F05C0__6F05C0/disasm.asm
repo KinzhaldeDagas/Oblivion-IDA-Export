@@ -55,7 +55,7 @@
 0x6F0652: sub     edx, eax
 0x6F0654: cmp     edx, ebx
 0x6F0656: jnb     short loc_6F065D
-0x6F0658: call    sub_790B90
+0x6F0658: call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error("vector<T> too long") and throws; used by multiple element specializations after max_size checks.
 0x6F065D: test    edi, edi
 0x6F065F: jnz     short loc_6F0665
 0x6F0661: xor     eax, eax
@@ -166,7 +166,7 @@
 0x6F075E: call    sub_557430
 0x6F0763: mov     edx, [esi+4]
 0x6F0766: push    edx
-0x6F0767: call    FormHeapFree
+0x6F0767: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F076C: add     esp, 14h
 0x6F076F: mov     eax, [ebp+arg_C]
 0x6F0772: mov     ecx, [ebp+var_1C]
@@ -184,7 +184,7 @@
 0x6F0795: push    esi
 0x6F0796: call    sub_557950
 0x6F079B: push    esi
-0x6F079C: call    FormHeapFree
+0x6F079C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F07A1: add     esp, 4
 0x6F07A4: push    0
 0x6F07A6: push    0
@@ -297,7 +297,7 @@
 0x6F08BE: test    eax, eax
 0x6F08C0: jz      short loc_6F08CB
 0x6F08C2: push    eax
-0x6F08C3: call    FormHeapFree
+0x6F08C3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F08C8: add     esp, 4
 0x6F08CB: mov     ecx, [ebp+var_C]
 0x6F08CE: mov     large fs:0, ecx
@@ -308,3 +308,25 @@
 0x6F08D9: mov     esp, ebp
 0x6F08DB: pop     ebp
 0x6F08DC: retn    10h
+0x788FA0: push    esi
+0x788FA1: mov     esi, ecx
+0x788FA3: mov     eax, [esi+8]
+0x788FA6: test    eax, eax
+0x788FA8: jz      short loc_788FB3
+0x788FAA: push    eax
+0x788FAB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x788FB0: add     esp, 4
+0x788FB3: mov     dword ptr [esi+8], 0
+0x788FBA: mov     dword ptr [esi+0Ch], 0
+0x788FC1: mov     dword ptr [esi+10h], 0
+0x788FC8: pop     esi
+0x788FC9: retn
+0x9C86C0: lea     ecx, [ebp+var_30]
+0x9C86C3: jmp     loc_788FA0
+0x9C86C8: mov     edx, [esp-4+arg_4]
+0x9C86CC: lea     eax, [edx+0Ch]
+0x9C86CF: mov     ecx, [edx-34h]
+0x9C86D2: xor     ecx, eax
+0x9C86D4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C86D9: mov     eax, offset stru_AF0B58
+0x9C86DE: jmp     ___CxxFrameHandler3

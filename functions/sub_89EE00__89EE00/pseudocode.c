@@ -7,42 +7,42 @@ void __thiscall sub_89EE00(_DWORD *this)
   int v5; // edi
   __m128 *v6; // eax
 
-  v1 = (_DWORD *)*(this + 4);
-  if ( v1 )
+  v1 = (_DWORD *)*(this + 4); /*0x89ee0a*/
+  if ( v1 ) /*0x89ee10*/
   {
-    v2 = v1[2];
-    if ( v2 )
-      v3 = (__m128 *)(*(_DWORD *)(v2 + 0x50) + 0xD0);
+    v2 = v1[2]; /*0x89ee16*/
+    if ( v2 ) /*0x89ee1b*/
+      v3 = (__m128 *)(*(_DWORD *)(v2 + 0x50) + 0xD0); /*0x89ee20*/
     else
-      v3 = (__m128 *)&stru_BA7A40;
-    v4 = _mm_shuffle_ps((__m128)LODWORD(flt_A37080), (__m128)LODWORD(flt_A37080), 0);
-    if ( (_mm_movemask_ps(_mm_cmplt_ps(v4, _mm_and_ps(_mm_sub_ps(*v3, *(__m128 *)0xBA7A40), *(__m128 *)0xA372D0))) & 7) != 0 )
+      v3 = (__m128 *)&unk_BA7A40; /*0x89ee27*/
+    v4 = _mm_shuffle_ps((__m128)LODWORD(flt_A37080), (__m128)LODWORD(flt_A37080), 0); /*0x89ee45*/
+    if ( (_mm_movemask_ps(_mm_cmplt_ps(v4, _mm_and_ps(_mm_sub_ps(*v3, *(__m128 *)0xBA7A40), *(__m128 *)0xA372D0))) & 7) != 0 ) /*0x89ee5a*/
     {
-      if ( v2 )
+      if ( v2 ) /*0x89ee5e*/
       {
-        sub_89F570(v1);
-        sub_8A6410(v2);
-        (*(void (__thiscall **)(_DWORD, hkVector4 *))(**(_DWORD **)(v2 + 0x50) + 0x54))(
+        bhkRefObject_UpdateHavokObject(v1); /*0x89ee62*/
+        sub_8A6410(v2); /*0x89ee69*/
+        (*(void (__thiscall **)(_DWORD, hkVector4 *))(**(_DWORD **)(v2 + 0x50) + 0x54))( /*0x89ee7b*/
           *(_DWORD *)(v2 + 0x50),
-          &stru_BA7A40);
-        sub_89F570(v1);
+          &unk_BA7A40);
+        bhkRefObject_UpdateHavokObject(v1); /*0x89ee7f*/
       }
     }
-    v5 = v1[2];
-    if ( v5 )
-      v6 = (__m128 *)(*(_DWORD *)(v5 + 0x50) + 0xE0);
+    v5 = v1[2]; /*0x89ee89*/
+    if ( v5 ) /*0x89ee8e*/
+      v6 = (__m128 *)(*(_DWORD *)(v5 + 0x50) + 0xE0); /*0x89ee93*/
     else
-      v6 = (__m128 *)&stru_BA7A40;
-    if ( (_mm_movemask_ps(_mm_cmplt_ps(v4, _mm_and_ps(_mm_sub_ps(*v6, *(__m128 *)0xBA7A40), *(__m128 *)0xA372D0))) & 7) != 0 )
+      v6 = (__m128 *)&unk_BA7A40; /*0x89ee9a*/
+    if ( (_mm_movemask_ps(_mm_cmplt_ps(v4, _mm_and_ps(_mm_sub_ps(*v6, *(__m128 *)0xBA7A40), *(__m128 *)0xA372D0))) & 7) != 0 ) /*0x89eeba*/
     {
-      if ( v5 )
+      if ( v5 ) /*0x89eebe*/
       {
-        sub_89F570(v1);
-        sub_8A6410(v5);
-        (*(void (__thiscall **)(_DWORD, hkVector4 *))(**(_DWORD **)(v5 + 0x50) + 0x58))(
+        bhkRefObject_UpdateHavokObject(v1); /*0x89eec2*/
+        sub_8A6410(v5); /*0x89eec9*/
+        (*(void (__thiscall **)(_DWORD, hkVector4 *))(**(_DWORD **)(v5 + 0x50) + 0x58))( /*0x89eedb*/
           *(_DWORD *)(v5 + 0x50),
-          &stru_BA7A40);
-        sub_89F570(v1);
+          &unk_BA7A40);
+        bhkRefObject_UpdateHavokObject(v1); /*0x89eedf*/
       }
     }
   }

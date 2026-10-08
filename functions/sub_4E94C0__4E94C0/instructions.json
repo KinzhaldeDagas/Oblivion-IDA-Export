@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E94C0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified this is called with TESRoad* by TESRoad_AddTravelSurfaceSegment. It resolves both endpoint positions to nearest road graph points, checks endpoint/process conditions and geometry, and resets transient node data after the surface test.",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x4E94ED",
-    "line": "cmp     [esp+78h+arg_8], 0",
+    "line": "cmp     [esp+78h+geometryContext], 0",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x4E9527",
-    "line": "mov     esi, [esp+78h+arg_4]",
+    "line": "mov     esi, [esp+78h+position]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x4E9534",
-    "line": "fstp    [esp+78h+arg_4]",
+    "line": "fstp    [esp+78h+position]",
     "mnemonic": "fstp",
     "size": 7
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x4E953E",
-    "line": "fld     [esp+78h+arg_4]",
+    "line": "fld     [esp+78h+position]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x4E9550",
-    "line": "fstp    [esp+78h+arg_4]",
+    "line": "fstp    [esp+78h+position]",
     "mnemonic": "fstp",
     "size": 7
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x4E955A",
-    "line": "fld     [esp+78h+arg_4]",
+    "line": "fld     [esp+78h+position]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -271,13 +271,13 @@
   },
   {
     "ea": "0x4E956C",
-    "line": "push    edx; signed int",
+    "line": "push    edx; cellY",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E956D",
-    "line": "push    eax; signed int",
+    "line": "push    eax; cellX",
     "mnemonic": "push",
     "size": 1
   },
@@ -313,13 +313,13 @@
   },
   {
     "ea": "0x4E9581",
-    "line": "push    ebx; signed int",
+    "line": "push    ebx; cellY",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E9582",
-    "line": "push    ebp; signed int",
+    "line": "push    ebp; cellX",
     "mnemonic": "push",
     "size": 1
   },
@@ -421,31 +421,31 @@
   },
   {
     "ea": "0x4E95BA",
-    "line": "push    edi",
+    "line": "push    edi; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E95BB",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E95BD",
-    "line": "call    sub_4E9150",
+    "line": "call    TESRoad_FindNearestConnectedPointInNearbyCells; Verified: this is a TESRoad method; the TravelPath caller obtains it from TESWorldSpace+0x54. Searches the road's per-cell connected-point map starting at the endpoint's cell, expands through neighboring cell buckets, and returns a nearest point from the first populated ring (bounded by 20 expansion steps). dbl_A3A5B0 is only an FLT_MAX sentinel. The separate fRoadPointReachDistance setting (default 500) is not used as this search's threshold.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E95C2",
-    "line": "push    esi",
+    "line": "push    esi; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E95C3",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x4E95C7",
-    "line": "call    sub_4E9150",
+    "line": "call    TESRoad_FindNearestConnectedPointInNearbyCells; Verified: this is a TESRoad method; the TravelPath caller obtains it from TESWorldSpace+0x54. Searches the road's per-cell connected-point map starting at the endpoint's cell, expands through neighboring cell buckets, and returns a nearest point from the first populated ring (bounded by 20 expansion steps). dbl_A3A5B0 is only an FLT_MAX sentinel. The separate fRoadPointReachDistance setting (default 500) is not used as this search's threshold.",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,13 +505,13 @@
   },
   {
     "ea": "0x4E95E6",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E95E8",
-    "line": "call    sub_4BEF40",
+    "line": "call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.",
     "mnemonic": "call",
     "size": 5
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x4E95FF",
-    "line": "fstp    [esp+78h+arg_4]",
+    "line": "fstp    [esp+78h+position]",
     "mnemonic": "fstp",
     "size": 7
   },
@@ -589,7 +589,7 @@
   },
   {
     "ea": "0x4E9618",
-    "line": "fld     [esp+78h+arg_4]",
+    "line": "fld     [esp+78h+position]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -613,13 +613,13 @@
   },
   {
     "ea": "0x4E962B",
-    "line": "call    sub_404C90",
+    "line": "call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E9630",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x4E9636",
-    "line": "call    sub_4BEF40",
+    "line": "call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.",
     "mnemonic": "call",
     "size": 5
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x4E964D",
-    "line": "fstp    [esp+78h+arg_4]",
+    "line": "fstp    [esp+78h+position]",
     "mnemonic": "fstp",
     "size": 7
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x4E9666",
-    "line": "fld     [esp+78h+arg_4]",
+    "line": "fld     [esp+78h+position]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -733,7 +733,7 @@
   },
   {
     "ea": "0x4E9679",
-    "line": "call    sub_404C90",
+    "line": "call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -781,7 +781,7 @@
   },
   {
     "ea": "0x4E9694",
-    "line": "fstp    [esp+78h+arg_4]",
+    "line": "fstp    [esp+78h+position]",
     "mnemonic": "fstp",
     "size": 7
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x4E96AD",
-    "line": "fld     [esp+78h+arg_4]",
+    "line": "fld     [esp+78h+position]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -841,7 +841,7 @@
   },
   {
     "ea": "0x4E96C0",
-    "line": "call    sub_404C90",
+    "line": "call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -997,25 +997,25 @@
   },
   {
     "ea": "0x4E9710",
-    "line": "mov     esi, [esp+78h+arg_8]",
+    "line": "mov     esi, [esp+78h+geometryContext]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x4E9717",
-    "line": "push    esi",
+    "line": "push    esi; outRouteNodes",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E9718",
-    "line": "push    ebp",
+    "line": "push    ebp; goal",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E9719",
-    "line": "push    ebx",
+    "line": "push    ebx; start",
     "mnemonic": "push",
     "size": 1
   },
@@ -1033,7 +1033,7 @@
   },
   {
     "ea": "0x4E9729",
-    "line": "call    sub_67E610",
+    "line": "call    ConnectedPointGraph_BuildAStarRoute; Verified A* route builder: F=G+H, Euclidean edge G, Euclidean H, predecessor at +0x0C. It emits a TeleportData chain from v14: the goal if found, otherwise the best candidate seen; return value v13 separately reports whether the goal was reached. Fallout's inspected Pathing uses typed AStarQueue/NavMeshSearchNode and TeleportDoorSearch instead.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1051,13 +1051,13 @@
   },
   {
     "ea": "0x4E9736",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E9738",
-    "line": "call    sub_42B410",
+    "line": "call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1117,7 +1117,7 @@
   },
   {
     "ea": "0x4E9752",
-    "line": "call    sub_6899C0",
+    "line": "call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1159,13 +1159,13 @@
   },
   {
     "ea": "0x4E9766",
-    "line": "call    sub_404C90",
+    "line": "call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E976B",
-    "line": "fstp    [esp+78h+arg_8]",
+    "line": "fstp    [esp+78h+geometryContext]",
     "mnemonic": "fstp",
     "size": 7
   },
@@ -1177,7 +1177,7 @@
   },
   {
     "ea": "0x4E9774",
-    "line": "call    sub_6899C0",
+    "line": "call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1207,7 +1207,7 @@
   },
   {
     "ea": "0x4E9781",
-    "line": "call    sub_6899C0",
+    "line": "call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1231,7 +1231,7 @@
   },
   {
     "ea": "0x4E978F",
-    "line": "call    sub_404C90",
+    "line": "call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1243,7 +1243,7 @@
   },
   {
     "ea": "0x4E9798",
-    "line": "fld     [esp+78h+arg_8]",
+    "line": "fld     [esp+78h+geometryContext]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -1279,13 +1279,13 @@
   },
   {
     "ea": "0x4E97AC",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E97AE",
-    "line": "call    sub_42B410",
+    "line": "call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1333,13 +1333,13 @@
   },
   {
     "ea": "0x4E97C7",
-    "line": "call    sub_4E8E80",
+    "line": "call    sub_4E8E80; Verified: iterates every connected-point list bucket and calls sub_67EDA0 on each node. That helper clears coordinate/temporary fields and masks the flag byte at +0x10; exact field meanings remain Unknown.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E97CC",
-    "line": "lea     ecx, [esp+78h+var_38]; void *",
+    "line": "lea     ecx, [esp+78h+var_38]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1351,7 +1351,7 @@
   },
   {
     "ea": "0x4E97D8",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1364,6 +1364,60 @@
   {
     "ea": "0x4E97DF",
     "line": "jmp     loc_4E96EF",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5FC0",
+    "line": "lea     ecx, [ebp-38h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5FC3",
+    "line": "jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5FC8",
+    "line": "mov     edx, [esp+position]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B5FCC",
+    "line": "lea     eax, [edx-68h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5FCF",
+    "line": "mov     ecx, [edx-6Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5FD2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B5FD4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5FD9",
+    "line": "mov     eax, offset stru_AE0F18",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5FDE",
+    "line": "jmp     ___CxxFrameHandler3",
     "mnemonic": "jmp",
     "size": 5
   }

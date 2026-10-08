@@ -1,58 +1,99 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "IDirectInputWVtbl",
+  "definition": "struct IDirectInputWVtbl\n{\nHRESULT (__stdcall *QueryInterface)(IDirectInputW *This, const IID *const riid, LPVOID *ppvObj) __offset(OFF64|AUTO);\nULONG (__stdcall *AddRef)(IDirectInputW *This) __offset(OFF64|AUTO);\nULONG (__stdcall *Release)(IDirectInputW *This) __offset(OFF64|AUTO);\nHRESULT (__stdcall *CreateDevice)(IDirectInputW *This, const GUID *const, LPDIRECTINPUTDEVICEW *, LPUNKNOWN) __offset(OFF64|AUTO);\nHRESULT (__stdcall *EnumDevices)(IDirectInputW *This, DWORD, LPDIENUMDEVICESCALLBACKW, LPVOID, DWORD) __offset(OFF64|AUTO);\nHRESULT (__stdcall *GetDeviceStatus)(IDirectInputW *This, const GUID *const) __offset(OFF64|AUTO);\nHRESULT (__stdcall *RunControlPanel)(IDirectInputW *This, HWND, DWORD) __offset(OFF64|AUTO);\nHRESULT (__stdcall *Initialize)(IDirectInputW *This, HINSTANCE, DWORD) __offset(OFF64|AUTO);\n}\n",
   "id": 18374686479671835606,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QueryInterface",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectInputW *This, const IID *const riid, LPVOID *ppvObj)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddRef",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (__stdcall *)(IDirectInputW *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Release",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (__stdcall *)(IDirectInputW *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CreateDevice",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectInputW *This, const GUID *const, LPDIRECTINPUTDEVICEW *, LPUNKNOWN)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "EnumDevices",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectInputW *This, DWORD, LPDIENUMDEVICESCALLBACKW, LPVOID, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetDeviceStatus",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectInputW *This, const GUID *const)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RunControlPanel",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectInputW *This, HWND, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Initialize",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectInputW *This, HINSTANCE, DWORD)"
     }
   ],
   "name": "IDirectInputWVtbl",
+  "ordinal": 4291,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 32
 }

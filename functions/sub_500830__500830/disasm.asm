@@ -1,6 +1,6 @@
-0x500830: cmp     byte ptr ds:0B42CDAh, 0
+0x500830: cmp     byte ptr ds:0B42CDAh, 0; Read the current debug replay state before toggling it; registered console command is the only producer.
 0x500837: setz    al
-0x50083A: mov     ds:0B42CDAh, al
+0x50083A: mov     ds:0B42CDAh, al; Sole write to g_bRendererAccumulationFrozen: AL is the logical inverse of the previous value.
 0x50083F: test    al, al
 0x500841: mov     eax, offset aFrozen; "frozen"
 0x500846: jnz     short loc_50084D

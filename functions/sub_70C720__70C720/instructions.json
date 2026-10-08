@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x70C757",
-    "line": "fstp    [esp+40h+var_24]",
+    "line": "fstp    [esp+40h+var_24.x]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x70C76E",
-    "line": "fstp    [esp+44h+var_20]",
+    "line": "fstp    [esp+44h+var_24.y]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x70C77C",
-    "line": "fstp    [esp+44h+var_1C]",
+    "line": "fstp    [esp+44h+var_24.z]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x70C797",
-    "line": "fstp    [esp+44h+var_18]",
+    "line": "fstp    [esp+44h+out.x]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x70C79E",
-    "line": "fstp    [esp+44h+var_14]",
+    "line": "fstp    [esp+44h+out.y]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -217,31 +217,31 @@
   },
   {
     "ea": "0x70C7A5",
-    "line": "fstp    [esp+44h+var_10]",
+    "line": "fstp    [esp+44h+out.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x70C7A9",
-    "line": "fld     [esp+44h+var_14]",
+    "line": "fld     [esp+44h+out.y]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x70C7AD",
-    "line": "fmul    [esp+44h+var_20]",
+    "line": "fmul    [esp+44h+var_24.y]",
     "mnemonic": "fmul",
     "size": 4
   },
   {
     "ea": "0x70C7B1",
-    "line": "fld     [esp+44h+var_18]",
+    "line": "fld     [esp+44h+out.x]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x70C7B5",
-    "line": "fmul    [esp+44h+var_24]",
+    "line": "fmul    [esp+44h+var_24.x]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -253,13 +253,13 @@
   },
   {
     "ea": "0x70C7BB",
-    "line": "fld     [esp+44h+var_10]",
+    "line": "fld     [esp+44h+out.z]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x70C7BF",
-    "line": "fmul    [esp+44h+var_1C]",
+    "line": "fmul    [esp+44h+var_24.z]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x70C816",
-    "line": "lea     edx, [esp+44h+var_C]",
+    "line": "lea     edx, [esp+44h+rhs]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -445,19 +445,19 @@
   },
   {
     "ea": "0x70C81D",
-    "line": "push    edx",
+    "line": "push    edx; rhs",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x70C81E",
-    "line": "fstp    [esp+48h+var_C]",
+    "line": "fstp    [esp+48h+rhs.x]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x70C822",
-    "line": "lea     eax, [esp+48h+var_18]",
+    "line": "lea     eax, [esp+48h+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -469,19 +469,19 @@
   },
   {
     "ea": "0x70C829",
-    "line": "push    eax",
+    "line": "push    eax; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x70C82A",
-    "line": "fstp    [esp+4Ch+var_8]",
+    "line": "fstp    [esp+4Ch+rhs.y]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x70C82E",
-    "line": "lea     ecx, [esp+4Ch+var_24]",
+    "line": "lea     ecx, [esp+4Ch+var_24]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -493,13 +493,13 @@
   },
   {
     "ea": "0x70C838",
-    "line": "fstp    [esp+4Ch+var_4]",
+    "line": "fstp    [esp+4Ch+rhs.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x70C83C",
-    "line": "call    sub_4BF9E0",
+    "line": "call    NiPoint3__NormalizedCrossProduct; Computes and normalizes the cross product of two NiPoint3 vectors, returning zero for near-degenerate input. ShadowSceneLight uses it to construct an orthonormal shadow-camera basis.",
     "mnemonic": "call",
     "size": 5
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x70C84D",
-    "line": "fstp    [esp+44h+var_C]",
+    "line": "fstp    [esp+44h+rhs.x]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x70C856",
-    "line": "fstp    [esp+44h+var_8]",
+    "line": "fstp    [esp+44h+rhs.y]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x70C85D",
-    "line": "fstp    [esp+44h+var_4]",
+    "line": "fstp    [esp+44h+rhs.z]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x70C865",
-    "line": "fld     [esp+44h+var_C]",
+    "line": "fld     [esp+44h+rhs.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x70C86F",
-    "line": "fstp    [esp+44h+var_18]",
+    "line": "fstp    [esp+44h+out.x]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x70C877",
-    "line": "fld     [esp+44h+var_8]",
+    "line": "fld     [esp+44h+rhs.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x70C881",
-    "line": "fstp    [esp+44h+var_14]",
+    "line": "fstp    [esp+44h+out.y]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x70C889",
-    "line": "fld     [esp+44h+var_4]",
+    "line": "fld     [esp+44h+rhs.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x70C893",
-    "line": "fstp    [esp+44h+var_10]",
+    "line": "fstp    [esp+44h+out.z]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -685,7 +685,7 @@
   },
   {
     "ea": "0x70C89D",
-    "line": "fld     [esp+44h+var_14]",
+    "line": "fld     [esp+44h+out.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x70C8AB",
-    "line": "fld     [esp+44h+var_18]",
+    "line": "fld     [esp+44h+out.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -739,7 +739,7 @@
   },
   {
     "ea": "0x70C8B7",
-    "line": "fld     [esp+44h+var_10]",
+    "line": "fld     [esp+44h+out.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -847,7 +847,7 @@
   },
   {
     "ea": "0x70C8FC",
-    "line": "fmul    [esp+44h+var_10]",
+    "line": "fmul    [esp+44h+out.z]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -895,7 +895,7 @@
   },
   {
     "ea": "0x70C914",
-    "line": "fstp    [esp+44h+var_C]",
+    "line": "fstp    [esp+44h+rhs.x]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -907,7 +907,7 @@
   },
   {
     "ea": "0x70C91C",
-    "line": "fstp    [esp+44h+var_8]",
+    "line": "fstp    [esp+44h+rhs.y]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -919,13 +919,13 @@
   },
   {
     "ea": "0x70C924",
-    "line": "fstp    [esp+44h+var_4]",
+    "line": "fstp    [esp+44h+rhs.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x70C928",
-    "line": "fld     [esp+44h+var_C]",
+    "line": "fld     [esp+44h+rhs.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -949,7 +949,7 @@
   },
   {
     "ea": "0x70C93A",
-    "line": "fld     [esp+44h+var_8]",
+    "line": "fld     [esp+44h+rhs.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -979,7 +979,7 @@
   },
   {
     "ea": "0x70C946",
-    "line": "fld     [esp+44h+var_4]",
+    "line": "fld     [esp+44h+rhs.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1081,7 +1081,7 @@
   },
   {
     "ea": "0x70C983",
-    "line": "push    ecx",
+    "line": "push    ecx; rhs",
     "mnemonic": "push",
     "size": 1
   },
@@ -1093,7 +1093,7 @@
   },
   {
     "ea": "0x70C98A",
-    "line": "lea     edx, [esp+48h+var_18]",
+    "line": "lea     edx, [esp+48h+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1105,7 +1105,7 @@
   },
   {
     "ea": "0x70C990",
-    "line": "push    edx",
+    "line": "push    edx; out",
     "mnemonic": "push",
     "size": 1
   },
@@ -1117,7 +1117,7 @@
   },
   {
     "ea": "0x70C993",
-    "line": "lea     ecx, [esp+4Ch+var_C]",
+    "line": "lea     ecx, [esp+4Ch+rhs]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1165,7 +1165,7 @@
   },
   {
     "ea": "0x70C9AE",
-    "line": "fstp    [esp+4Ch+var_C]",
+    "line": "fstp    [esp+4Ch+rhs.x]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1177,7 +1177,7 @@
   },
   {
     "ea": "0x70C9B5",
-    "line": "fstp    [esp+4Ch+var_8]",
+    "line": "fstp    [esp+4Ch+rhs.y]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1189,13 +1189,13 @@
   },
   {
     "ea": "0x70C9BF",
-    "line": "fstp    [esp+4Ch+var_4]",
+    "line": "fstp    [esp+4Ch+rhs.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x70C9C3",
-    "line": "call    sub_4BF9E0",
+    "line": "call    NiPoint3__NormalizedCrossProduct; Computes and normalizes the cross product of two NiPoint3 vectors, returning zero for near-degenerate input. ShadowSceneLight uses it to construct an orthonormal shadow-camera basis.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1231,7 +1231,7 @@
   },
   {
     "ea": "0x70C9D4",
-    "line": "fstp    [esp+44h+var_C]",
+    "line": "fstp    [esp+44h+rhs.x]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1249,7 +1249,7 @@
   },
   {
     "ea": "0x70C9DD",
-    "line": "fstp    [esp+44h+var_8]",
+    "line": "fstp    [esp+44h+rhs.y]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1261,7 +1261,7 @@
   },
   {
     "ea": "0x70C9E4",
-    "line": "fstp    [esp+44h+var_4]",
+    "line": "fstp    [esp+44h+rhs.z]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1273,7 +1273,7 @@
   },
   {
     "ea": "0x70C9EC",
-    "line": "fld     [esp+44h+var_C]",
+    "line": "fld     [esp+44h+rhs.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1297,7 +1297,7 @@
   },
   {
     "ea": "0x70C9F6",
-    "line": "fstp    [esp+44h+var_18]",
+    "line": "fstp    [esp+44h+out.x]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1309,7 +1309,7 @@
   },
   {
     "ea": "0x70C9FE",
-    "line": "fld     [esp+44h+var_8]",
+    "line": "fld     [esp+44h+rhs.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1333,7 +1333,7 @@
   },
   {
     "ea": "0x70CA08",
-    "line": "fstp    [esp+44h+var_14]",
+    "line": "fstp    [esp+44h+out.y]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1345,7 +1345,7 @@
   },
   {
     "ea": "0x70CA10",
-    "line": "fld     [esp+44h+var_4]",
+    "line": "fld     [esp+44h+rhs.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1369,13 +1369,13 @@
   },
   {
     "ea": "0x70CA1A",
-    "line": "fstp    [esp+44h+var_10]",
+    "line": "fstp    [esp+44h+out.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x70CA1E",
-    "line": "fld     [esp+44h+var_18]",
+    "line": "fld     [esp+44h+out.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1399,7 +1399,7 @@
   },
   {
     "ea": "0x70CA30",
-    "line": "fld     [esp+44h+var_14]",
+    "line": "fld     [esp+44h+out.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1429,7 +1429,7 @@
   },
   {
     "ea": "0x70CA3C",
-    "line": "fld     [esp+44h+var_10]",
+    "line": "fld     [esp+44h+out.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1537,7 +1537,7 @@
   },
   {
     "ea": "0x70CA81",
-    "line": "fmul    [esp+44h+var_10]",
+    "line": "fmul    [esp+44h+out.z]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -1585,7 +1585,7 @@
   },
   {
     "ea": "0x70CA9A",
-    "line": "fstp    [esp+44h+var_C]",
+    "line": "fstp    [esp+44h+rhs.x]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1597,7 +1597,7 @@
   },
   {
     "ea": "0x70CAA2",
-    "line": "fstp    [esp+44h+var_8]",
+    "line": "fstp    [esp+44h+rhs.y]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1609,13 +1609,13 @@
   },
   {
     "ea": "0x70CAAA",
-    "line": "fstp    [esp+44h+var_4]",
+    "line": "fstp    [esp+44h+rhs.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x70CAAE",
-    "line": "fld     [esp+44h+var_C]",
+    "line": "fld     [esp+44h+rhs.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1639,7 +1639,7 @@
   },
   {
     "ea": "0x70CAC0",
-    "line": "fld     [esp+44h+var_8]",
+    "line": "fld     [esp+44h+rhs.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1669,7 +1669,7 @@
   },
   {
     "ea": "0x70CACC",
-    "line": "fld     [esp+44h+var_4]",
+    "line": "fld     [esp+44h+rhs.z]",
     "mnemonic": "fld",
     "size": 4
   },

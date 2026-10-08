@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7C7880",
-    "line": "push    esi",
+    "line": "push    esi; Remove active-list payloads, free list nodes, and clear partition anchors/counters.",
     "mnemonic": "push",
     "size": 1
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x7C789E",
-    "line": "call    sub_7C77C0",
+    "line": "call    ShadowSceneNode_RemoveFullLight; Remove one ShadowSceneLight from the full-list owner with native refcount/list cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x7C78AD",
-    "line": "call    NiTPointerList__FreeAllNodes",
+    "line": "call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.",
     "mnemonic": "call",
     "size": 5
   },

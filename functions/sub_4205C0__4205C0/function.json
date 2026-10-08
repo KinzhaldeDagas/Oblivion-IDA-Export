@@ -1,19 +1,36 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_4205C0",
+  "chunks": [
+    [
+      "0x4205C0",
+      "0x420673"
+    ],
+    [
+      "0x9C3090",
+      "0x9C30B6"
+    ]
+  ],
+  "chunks_sha256": "5dc954a7f2e68f4c2000f6e1f120131c35e585c4bd87e75d08f0bdaf6a1f2f6e",
+  "comment_regular": "Verified ExtraDataList random-marker setter: null removes ExtraData type 0x43; non-null updates or allocates an ExtraRandomTeleportMarker and stores the TESObjectREFR* marker at +0x0C.",
+  "comment_repeatable": "Verified ExtraDataList random-marker setter: null removes ExtraData type 0x43; non-null updates or allocates an ExtraRandomTeleportMarker and stores the TESObjectREFR* marker at +0x0C.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "ExtraDataList_SetRandomTeleportMarker",
   "end_ea": "0x420673",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4205C0",
+  "name": "ExtraDataList_SetRandomTeleportMarker",
   "segment": ".text",
   "sha256": "0bffd8774534d340044fcdd1d4ef190e209dd1756d02a35bc13eb5167b6ca26b",
   "size": 179,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4205C0",
-  "type": "BSExtraData *__thiscall(ExtraDataList *this, BSExtraDataVtbl *)",
-  "xrefs_from_count": 65,
+  "total_chunk_size": 217,
+  "type": "ExtraRandomTeleportMarker *__thiscall(ExtraDataList *this, TESObjectREFR *markerReference)",
+  "xrefs_from_count": 79,
   "xrefs_to_count": 3
 }

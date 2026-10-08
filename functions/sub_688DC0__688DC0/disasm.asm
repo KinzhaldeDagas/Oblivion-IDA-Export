@@ -154,7 +154,7 @@
 0x688FB5: mov     ecx, esi
 0x688FB7: mov     [esp+84h+var_34], edx
 0x688FBB: mov     [esp+84h+var_30], eax
-0x688FBF: call    sub_5E0660
+0x688FBF: call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.
 0x688FC4: fadd    [esp+84h+var_30]
 0x688FC8: mov     ecx, [ebp+0]
 0x688FCB: mov     eax, [ebp+8]
@@ -190,15 +190,15 @@
 0x689023: pop     ebx
 0x689024: add     esp, 70h
 0x689027: retn
-0x689028: mov     ecx, esi
-0x68902A: call    Actor_IsSwimming
+0x689028: mov     ecx, esi; this
+0x68902A: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x68902F: test    al, al
 0x689031: jz      short loc_689073
 0x689033: fld     dword ptr ds:0A6E688h
 0x689039: push    ecx
 0x68903A: mov     ecx, esi; this
 0x68903C: fstp    [esp+88h+var_88]; float
-0x68903F: call    TESObjectREFR_GetParentCell
+0x68903F: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x689044: push    eax; int
 0x689045: push    edi; int
 0x689046: mov     ecx, esi
@@ -209,7 +209,7 @@
 0x689057: push    ecx
 0x689058: mov     ecx, esi; this
 0x68905A: fstp    [esp+88h+var_88]; float
-0x68905D: call    TESObjectREFR_GetParentCell
+0x68905D: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x689062: push    eax; int
 0x689063: push    ebp; int
 0x689064: mov     ecx, esi
@@ -235,7 +235,7 @@
 0x6890AD: call    sub_686450
 0x6890B2: add     esp, 14h
 0x6890B5: lea     ecx, [esp+84h+var_20]
-0x6890B9: call    sub_6899C0
+0x6890B9: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x6890BE: mov     ecx, [eax]
 0x6890C0: mov     edx, [eax+4]
 0x6890C3: mov     eax, [eax+8]
@@ -271,7 +271,7 @@
 0x689132: fstp    [esp+84h+var_28]
 0x689136: fld     [esp+84h+var_60]
 0x68913A: fstp    [esp+84h+var_24]
-0x68913E: call    sub_404C90
+0x68913E: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x689143: fcomp   dword ptr ds:0A56670h
 0x689149: fnstsw  ax
 0x68914B: test    ah, 5
@@ -313,9 +313,9 @@
 0x6891B9: push    esi
 0x6891BA: call    sub_685BE0
 0x6891BF: add     esp, 10h
-0x6891C2: lea     ecx, [esp+84h+var_20]; void *
+0x6891C2: lea     ecx, [esp+84h+var_20]; this
 0x6891C6: mov     [esp+84h+var_4], 0FFFFFFFFh
-0x6891D1: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x6891D1: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x6891D6: xor     al, al
 0x6891D8: mov     ecx, [esp+84h+var_C]
 0x6891DC: mov     large fs:0, ecx
@@ -326,9 +326,9 @@
 0x6891E7: pop     ebx
 0x6891E8: add     esp, 70h
 0x6891EB: retn
-0x6891EC: lea     ecx, [esp+84h+var_20]; void *
+0x6891EC: lea     ecx, [esp+84h+var_20]; this
 0x6891F0: mov     [esp+84h+var_4], 0FFFFFFFFh
-0x6891FB: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x6891FB: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x689200: push    1
 0x689202: push    ebp
 0x689203: push    edi
@@ -345,3 +345,12 @@
 0x68921E: pop     ebx
 0x68921F: add     esp, 70h
 0x689222: retn
+0x9C50F0: lea     ecx, [ebp-20h]; this
+0x9C50F3: jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x9C50F8: mov     edx, [esp+arg_4]
+0x9C50FC: lea     eax, [edx-74h]
+0x9C50FF: mov     ecx, [edx-78h]
+0x9C5102: xor     ecx, eax
+0x9C5104: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5109: mov     eax, offset stru_AED928
+0x9C510E: jmp     ___CxxFrameHandler3

@@ -1,1 +1,1 @@
-std::_Ref_count_base
+struct std::_Ref_count_base;

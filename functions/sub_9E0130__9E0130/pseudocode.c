@@ -1,4 +1,4 @@
-BSStringT *sub_9E0130()
+NiRTTI *sub_9E0130()
 {
-  return sub_70E220((BSStringT *)dword_B35294, "FadeNodeMaxAlphaExtraData", (int)dword_B3FD3C);
+  return NiRTTI_Constructor((NiRTTI *)&MEMORY[0xB33E90][0x1404], "FadeNodeMaxAlphaExtraData", &stru_B3FD3C); /*0x9e0144*/
 }

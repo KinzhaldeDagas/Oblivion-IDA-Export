@@ -19,9 +19,9 @@
 0x5ADD1F: mov     esi, eax
 0x5ADD21: call    InterfaceManager_GetDepth
 0x5ADD26: fstp    [esp+0Ch+var_4]
-0x5ADD2A: mov     ecx, [esi+68h]; TileWindow *
+0x5ADD2A: mov     ecx, [esi+68h]; this
 0x5ADD2D: push    offset aDataMenusLoadi; "Data\\Menus\\loading_menu.xml"
-0x5ADD32: call    Menu_LoadXML
+0x5ADD32: call    Tile__ReadFile; Verified: SDK ReadXML entry. Builds named tree under receiver via 0x590330, connects/evaluates traits via 0x58CF40, registers subtemplates with owning Menu, frees build storage, refreshes returned subtree via 0x58FBA0. Returns first created tile. Fallout analogue 0x827E2588; cache/cleanup differs.
 0x5ADD37: mov     esi, eax
 0x5ADD39: mov     ecx, esi
 0x5ADD3B: call    Tile_GetParentMenu
@@ -70,10 +70,10 @@
 0x5ADDCD: jp      short loc_5ADDE3
 0x5ADDCF: fld     [esp+0Ch+var_4]
 0x5ADDD3: push    ecx
-0x5ADDD4: fstp    [esp+10h+a3]; a3
-0x5ADDD7: push    0FABh; a2
+0x5ADDD4: fstp    [esp+10h+a3]; value
+0x5ADDD7: push    0FABh; propertyCode
 0x5ADDDC: mov     ecx, esi; this
-0x5ADDDE: call    Tile_SetFloat
+0x5ADDDE: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5ADDE3: push    1; arg1
 0x5ADDE5: push    0; canCreate
 0x5ADDE7: call    InterfaceManager_GetSingleton
@@ -130,7 +130,7 @@
 0x5ADE8C: call    sub_579260
 0x5ADE91: call    sub_5792B0
 0x5ADE96: push    0
-0x5ADE98: call    nullsub_returnTrue_0arg
+0x5ADE98: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x5ADE9D: add     esp, 0Ch
 0x5ADEA0: pop     edi
 0x5ADEA1: mov     eax, esi

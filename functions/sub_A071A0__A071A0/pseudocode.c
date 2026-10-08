@@ -1,4 +1,4 @@
-BSStringT *sub_A071A0()
+NiRTTI *sub_A071A0()
 {
-  return sub_70E220((BSStringT *)dword_B3E548, "NiBSplineCompPoint3Interpolator", (int)dword_B3E428);
+  return NiRTTI_Constructor(&stru_B3E548, "NiBSplineCompPoint3Interpolator", &stru_B3E428); /*0xa071b4*/
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8939B0",
-    "line": "push    ebp",
+    "line": "push    ebp; TES4 authoritative: updates smoothed support slope/tilt at proxy+0x32C by sampling the two cached capsule endpoints and dividing height delta by capsule height +0x3A4.",
     "mnemonic": "push",
     "size": 1
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x893A03",
-    "line": "call    sub_6848D0",
+    "line": "call    bhkRefObject_CopyHavokObjectTransform; Copies low-level Havok object transform rows/columns from wrapper hkObject+0x70 into caller transform output.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x893A36",
-    "line": "call    sub_8915F0",
+    "line": "call    bhkCharacterProxy_RaycastCapsuleEndpointDown; If endpoint 0 height cache is sentinel, raycast downward from cached capsule endpoint 0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x893A6C",
-    "line": "call    sub_8915F0",
+    "line": "call    bhkCharacterProxy_RaycastCapsuleEndpointDown; If endpoint 1 height cache is sentinel, raycast downward from cached capsule endpoint 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x893AAF",
-    "line": "fstp    [esp+80h+var_78]",
+    "line": "fstp    [esp+80h+var_78]; Support slope ratio = endpoint height delta / capsule height +0x3A4.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x893ABC",
-    "line": "fstp    [esp+80h+var_78]",
+    "line": "fstp    [esp+80h+var_78]; Convert support slope ratio to angle via atan before clamping.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x893B67",
-    "line": "fstp    dword ptr [esi+32Ch]",
+    "line": "fstp    dword ptr [esi+32Ch]; Smooth proxy+0x32C toward clamped support slope angle using response factor +0x330.",
     "mnemonic": "fstp",
     "size": 6
   },

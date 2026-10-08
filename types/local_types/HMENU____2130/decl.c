@@ -1,1 +1,4 @@
-HMENU__
+struct HMENU__
+{
+int unused;
+};

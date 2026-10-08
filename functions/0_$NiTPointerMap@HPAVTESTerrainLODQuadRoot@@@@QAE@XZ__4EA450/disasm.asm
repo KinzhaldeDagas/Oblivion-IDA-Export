@@ -1,4 +1,4 @@
-0x4EA450: push    0FFFFFFFFh
+0x4EA450: push    0FFFFFFFFh; Verified map base layout is the NiTPointerMap<int, TESTerrainLODQuadRoot*> embedded at TESWorldSpace+0x38: vtable +0, bucketCount +4, buckets +8, itemCount +0xC. Constructor uses 37 buckets; the adjacent TESWorldSpace fields are outside this 0x10-byte map.
 0x4EA452: push    offset ??0?$NiTPointerMap@HPAVTESTerrainLODQuadRoot@@@@QAE@XZ_SEH
 0x4EA457: mov     eax, large fs:0
 0x4EA45D: push    eax
@@ -86,3 +86,12 @@
 0x4EA561: pop     ebp
 0x4EA562: add     esp, 10h
 0x4EA565: retn
+0x9B6120: mov     ecx, [ebp-10h]
+0x9B6123: jmp     ??1?$NiTPointerMap@HPAVTESTerrainLODQuadRoot@@@@UAE@XZ; NiTPointerMap<int,TESTerrainLODQuadRoot *>::~NiTPointerMap<int,TESTerrainLODQuadRoot *>(void)
+0x9B6128: mov     edx, [esp+arg_4]
+0x9B612C: lea     eax, [edx-10h]
+0x9B612F: mov     ecx, [edx-14h]
+0x9B6132: xor     ecx, eax
+0x9B6134: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B6139: mov     eax, offset stru_AE1064
+0x9B613E: jmp     ___CxxFrameHandler3

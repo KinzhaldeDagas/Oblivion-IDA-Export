@@ -1,1 +1,1 @@
-LPNMHDR
+typedef tagNMHDR *LPNMHDR;

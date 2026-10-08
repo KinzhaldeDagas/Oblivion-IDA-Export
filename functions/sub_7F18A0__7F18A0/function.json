@@ -1,19 +1,32 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7F18A0",
+      "0x7F1905"
+    ]
+  ],
+  "chunks_sha256": "dfd1cccf3a4c5ddcbad60d560fa1183eb7bcc493d904219829deab99a2051a58",
+  "comment_regular": "Copies up to 0xC0 floats into the STLSPData 0x300-byte leaf constant table and zero-fills the remainder.\n\n[2026-10-02 Fallout comparative pass]\nVerified homolog of Fallout STLSPData::SetLeafMaps (0x828CDC88): ECX=this, two 32-bit stack arguments, RET 8. If source is null, table is null, or count is zero: no writes, existing table remains unchanged. Otherwise copy min(count,192) floats and zero remaining floats only for count<192. EDI is saved scratch, not an input argument. Caller 0x5605AB copies GetLeafBillboardTable output; property virtual wrapper 0x7F1B50 tail-jumps here. Refreshed stale Hex-Rays output removes a false EDI/64-bit memcpy-size artifact; no global size_t change made.\n\nCopy at most 0xC0 floats (192 floats / 0x300 bytes) into the leaf constant table, then zero-fill the remainder.",
+  "comment_repeatable": "Copy at most 0xC0 floats (192 floats / 0x300 bytes) into the leaf constant table, then zero-fill the remainder.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7F18A0",
+  "display_name": "OB_STLSPData_CopyLeafConstants_010201A0",
   "end_ea": "0x7F1905",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7F18A0",
+  "name": "OB_STLSPData_CopyLeafConstants_010201A0",
   "segment": ".text",
   "sha256": "dfd1cccf3a4c5ddcbad60d560fa1183eb7bcc493d904219829deab99a2051a58",
   "size": 101,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7F18A0",
-  "type": "void __userpurge(_DWORD *this@<ecx>, int@<edi>, void *Src, unsigned int)",
+  "total_chunk_size": 101,
+  "type": "void __thiscall(OB_STLSPData_010201A0 *this, const float *leafMaps, unsigned int floatCount)",
   "xrefs_from_count": 45,
   "xrefs_to_count": 2
 }

@@ -1,1 +1,1 @@
-NiScreenElements
+struct NiScreenElements;

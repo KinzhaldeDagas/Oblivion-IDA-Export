@@ -44,17 +44,17 @@
 0x681542: mov     ecx, [eax]
 0x681544: mov     edx, [eax+4]
 0x681547: mov     eax, [eax+8]
-0x68154A: mov     [esp+164h+var_F4+4], ecx
-0x68154E: fld     [esp+164h+var_F4+4]
+0x68154A: mov     dword ptr [esp+164h+var_114+24h], ecx
+0x68154E: fld     dword ptr [esp+164h+var_114+24h]
 0x681552: fsub    dword ptr [ebx+2Ch]
-0x681555: mov     [esp+164h+var_F4+8], edx
-0x681559: mov     [esp+164h+var_F4+0Ch], eax
+0x681555: mov     dword ptr [esp+164h+var_114+28h], edx
+0x681559: mov     dword ptr [esp+164h+var_114+2Ch], eax
 0x68155D: mov     ecx, esi
 0x68155F: fstp    [esp+164h+var_13C]
-0x681563: fld     [esp+164h+var_F4+8]
+0x681563: fld     dword ptr [esp+164h+var_114+28h]
 0x681567: fsub    dword ptr [ebx+30h]
 0x68156A: fstp    [esp+164h+var_140]
-0x68156E: fld     [esp+164h+var_F4+0Ch]
+0x68156E: fld     dword ptr [esp+164h+var_114+2Ch]
 0x681572: fsub    dword ptr [ebx+34h]
 0x681575: fstp    [esp+164h+var_148]
 0x681579: fld     [esp+164h+var_13C]
@@ -69,7 +69,7 @@
 0x6815A0: test    al, al
 0x6815A2: jz      short loc_6815B7
 0x6815A4: lea     ecx, [esp+164h+var_120]
-0x6815A8: call    sub_404C90
+0x6815A8: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x6815AD: fmul    qword ptr ds:0A39088h
 0x6815B3: fstp    [esp+164h+var_13C]
 0x6815B7: mov     edx, [ebx]
@@ -109,7 +109,7 @@
 0x681623: fstp    [esp+164h+var_140]
 0x681627: lea     ecx, [esp+164h+var_120]
 0x68162B: push    ecx
-0x68162C: call    sub_683CB0
+0x68162C: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x681631: fsub    [esp+168h+var_148]
 0x681635: add     esp, 4
 0x681638: fstp    [esp+164h+var_148]
@@ -129,7 +129,7 @@
 0x681676: fstp    [esp+164h+var_DC]
 0x68167D: lea     ecx, [esp+164h+var_A4+4]
 0x681684: mov     [esp+164h+var_4], edi
-0x68168B: call    bhkWorldRayCastData__Init
+0x68168B: call    bhkWorldRayCastData__Init; TES4 authoritative: bhkWorldRayCastData::Init. Raycast input From at +0x00, To at +0x10, enable/filter at +0x20/+0x24, output hit fraction at +0x44, root collidable at +0x50, extra collector pointers at +0x70/+0x74/+0x78.
 0x681690: push    ebx
 0x681691: call    sub_680F30
 0x681696: fldz
@@ -155,12 +155,12 @@
 0x6816EA: mov     ecx, ebx
 0x6816EC: call    eax
 0x6816EE: push    ecx
-0x6816EF: lea     ecx, [esp+168h+var_114]
-0x6816F3: fstp    [esp+168h+var_168]; float
-0x6816F6: call    NiMatrix33_InitRotationTransform
+0x6816EF: lea     ecx, [esp+168h+var_114]; this
+0x6816F3: fstp    [esp+168h+angleZ]; angleZ
+0x6816F6: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x6816FB: lea     ecx, [esp+164h+var_138]
 0x6816FF: push    ecx
-0x681700: lea     edx, [esp+168h+var_F4+4]
+0x681700: lea     edx, [esp+168h+var_114+24h]
 0x681704: push    edx
 0x681705: lea     ecx, [esp+16Ch+var_114]
 0x681709: call    sub_7101F0
@@ -176,14 +176,14 @@
 0x681731: shufps  xmm0, xmm0, 55h ; 'U'
 0x681735: shufps  xmm1, xmm1, 55h ; 'U'
 0x681739: subss   xmm1, xmm0
-0x68173D: movss   [esp+164h+var_F4+4], xmm1
-0x681743: fld     [esp+164h+var_F4+4]
+0x68173D: movss   dword ptr [esp+164h+var_114+24h], xmm1
+0x681743: fld     dword ptr [esp+164h+var_114+24h]
 0x681747: mov     ecx, ebx; this
 0x681749: fstp    [esp+164h+var_148]
 0x68174D: call    sub_4D8B90
 0x681752: test    al, al
 0x681754: jnz     short loc_681764
-0x681756: fld     [esp+164h+var_F4+4]
+0x681756: fld     dword ptr [esp+164h+var_114+24h]
 0x68175A: fadd    qword ptr ds:0A74B18h
 0x681760: fstp    [esp+164h+var_148]
 0x681764: fld     [esp+164h+var_148]
@@ -198,10 +198,10 @@
 0x68177D: fstp    st
 0x68177F: lea     ecx, [esp+164h+var_138]
 0x681783: push    ecx
-0x681784: lea     edx, [esp+168h+var_F4+4]
+0x681784: lea     edx, [esp+168h+var_114+24h]
 0x681788: push    edx
 0x681789: call    sub_4529E0
-0x68178E: movaps  xmm2, xmmword ptr [esp+16Ch+var_F4+4]
+0x68178E: movaps  xmm2, xmmword ptr [esp+16Ch+var_114+24h]
 0x681793: movss   xmm4, dword ptr ds:0A46C30h
 0x68179B: mov     ecx, [ebx+30h]
 0x68179E: mov     eax, [ebx+2Ch]
@@ -239,16 +239,16 @@
 0x681815: movaps  xmmword ptr [esp+164h+var_44+4], xmm2
 0x68181D: mov     [esp+164h+var_12C], eax
 0x681821: mov     [esp+164h+var_124], edx
-0x681825: call    sub_5E0660
+0x681825: call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.
 0x68182A: fmul    [ebp+arg_8]
 0x68182D: lea     eax, [esp+164h+var_12C]
 0x681831: push    eax
 0x681832: fadd    [esp+168h+var_124]
-0x681836: lea     ecx, [esp+168h+var_F4+4]
+0x681836: lea     ecx, [esp+168h+var_114+24h]
 0x68183A: push    ecx
 0x68183B: fstp    [esp+16Ch+var_124]
 0x68183F: call    sub_4529E0
-0x681844: movaps  xmm0, xmmword ptr [esp+16Ch+var_F4+4]
+0x681844: movaps  xmm0, xmmword ptr [esp+16Ch+var_114+24h]
 0x681849: movaps  xmmword ptr [esp+16Ch+var_A4+4], xmm0
 0x681851: mov     edx, [esi+8]
 0x681854: push    edx
@@ -268,7 +268,7 @@
 0x681880: push    eax
 0x681881: call    sub_4806E0
 0x681886: push    eax
-0x681887: call    sub_4DC270
+0x681887: call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.
 0x68188C: add     esp, 8
 0x68188F: cmp     eax, [ebp+arg_4]
 0x681892: jnz     short loc_681899
@@ -286,3 +286,16 @@
 0x6818BD: mov     esp, ebp
 0x6818BF: pop     ebp
 0x6818C0: retn
+0x9C4C00: lea     ecx, [ebp+var_E0]; void *
+0x9C4C06: jmp     sub_4F5E90
+0x9C4C0B: mov     edx, [esp-4+arg_4]
+0x9C4C0F: lea     eax, [edx-154h]
+0x9C4C15: mov     ecx, [edx-158h]
+0x9C4C1B: xor     ecx, eax
+0x9C4C1D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C4C22: add     eax, 0Ch
+0x9C4C25: mov     ecx, [edx-8]
+0x9C4C28: xor     ecx, eax
+0x9C4C2A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C4C2F: mov     eax, offset stru_AED4FC
+0x9C4C34: jmp     ___CxxFrameHandler3

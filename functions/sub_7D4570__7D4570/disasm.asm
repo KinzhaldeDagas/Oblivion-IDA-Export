@@ -1,4 +1,4 @@
-0x7D4570: sub     esp, 1Ch
+0x7D4570: sub     esp, 1Ch; Special ShadowSceneLight renderer selected only when +0xF5 is nonzero. Uses a BSCubeMapCamera and the light-local category/object list; it is separate from the normal exact-caster-root map renderer.
 0x7D4573: push    ebx
 0x7D4574: mov     ebx, [esp+20h+arg_0]
 0x7D4578: test    ebx, ebx
@@ -9,7 +9,7 @@
 0x7D4585: fcomp   dword ptr [ebp+0D8h]
 0x7D458B: fnstsw  ax
 0x7D458D: test    ah, 5
-0x7D4590: jp      loc_7D46AD
+0x7D4590: jp      loc_7D46AD; Special render requires a non-null cube camera and positive committed visibility/fade at ShadowSceneLight+0xD8.
 0x7D4596: cmp     dword ptr [ebp+114h], 0
 0x7D459D: push    esi
 0x7D459E: push    edi
@@ -18,26 +18,26 @@
 0x7D45A6: mov     ecx, ds:0B42F50h; this
 0x7D45AC: push    16h; a3
 0x7D45AE: push    eax; a2
-0x7D45AF: call    BSTextureManager_GetDefaultRenderTarget
+0x7D45AF: call    BSTextureManager_GetDefaultRenderTarget; Lazily obtain default render target type 0x16 for the special cube/object-list path.
 0x7D45B4: mov     edi, eax
 0x7D45B6: mov     ecx, edi
-0x7D45B8: call    BSRenderedTexture__UseTextureToRender
+0x7D45B8: call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.
 0x7D45BD: mov     esi, [eax]
-0x7D45BF: mov     ecx, ds:0B42F50h
+0x7D45BF: mov     ecx, ds:0B42F50h; this
 0x7D45C5: mov     [esp+2Ch+arg_0], eax
 0x7D45C9: add     esi, 6Ch ; 'l'
-0x7D45CC: call    sub_7C1360
+0x7D45CC: call    BSTextureManager__GetOrCreateShadowDepthStencil; Oblivion shadow depth-stencil allocator. Ensures a square depth-stencil at least ShadowSurfaceRes, deriving compatible renderer surface data from the shadow target format before creation.
 0x7D45D1: mov     ecx, [esp+2Ch+arg_0]
 0x7D45D5: mov     edx, [esi]
 0x7D45D7: push    eax
 0x7D45D8: call    edx
-0x7D45DA: push    edi
-0x7D45DB: mov     ecx, ebp
-0x7D45DD: call    sub_499310
+0x7D45DA: push    edi; shadowMap
+0x7D45DB: mov     ecx, ebp; self
+0x7D45DD: call    ShadowSceneLight_SetShadowMap; Strong-own the special path render target at ShadowSceneLight+0x114.
 0x7D45E2: mov     eax, [ebp+114h]
 0x7D45E8: push    eax
 0x7D45E9: mov     ecx, ebx
-0x7D45EB: call    sub_7C5A60
+0x7D45EB: call    sub_7C5A60; Attach/configure ShadowSceneLight+0x114 on the supplied BSCubeMapCamera.
 0x7D45F0: lea     esi, [ebx+0ECh]
 0x7D45F6: mov     ecx, 7
 0x7D45FB: lea     edi, [esp+2Ch+a2]
@@ -45,11 +45,11 @@
 0x7D4601: lea     ecx, [esp+2Ch+arg_0]
 0x7D4605: push    ecx
 0x7D4606: mov     ecx, ebp
-0x7D4608: call    sub_405AD0
+0x7D4608: call    ShadowSceneLight_GetLightRef
 0x7D460D: mov     edx, [eax]
 0x7D460F: mov     eax, [esp+2Ch+arg_0]
 0x7D4613: test    eax, eax
-0x7D4615: fld     dword ptr [edx+0F8h]
+0x7D4615: fld     dword ptr [edx+0F8h]; Copy backing NiPointLight range +0xF8 into the cube camera frustum Far value.
 0x7D461B: mov     edi, ds:0A2807Ch
 0x7D4621: fstp    [esp+2Ch+var_8]
 0x7D4625: jz      short loc_7D4641
@@ -69,12 +69,12 @@
 0x7D4641: lea     eax, [esp+2Ch+a2]
 0x7D4645: push    eax; a2
 0x7D4646: mov     ecx, ebx; this
-0x7D4648: call    Camera_SetFrustum
+0x7D4648: call    Camera_SetFrustum; Commit the cube camera frustum after replacing Far with the backing light range.
 0x7D464D: lea     ecx, [esp+2Ch+arg_0]
 0x7D4651: push    ecx
 0x7D4652: mov     ecx, ebp
-0x7D4654: call    sub_405AD0
-0x7D4659: mov     eax, [eax]
+0x7D4654: call    ShadowSceneLight_GetLightRef
+0x7D4659: mov     eax, [eax]; Read backing light world position +0x88..+0x90 and place the cube camera there.
 0x7D465B: mov     edx, [eax+88h]
 0x7D4661: add     eax, 88h ; 'ˆ'
 0x7D4666: mov     [ebx+54h], edx
@@ -102,8 +102,8 @@
 0x7D4699: mov     edx, [eax+84h]
 0x7D469F: push    0FFFFFFFFh
 0x7D46A1: mov     ecx, ebx
-0x7D46A3: mov     [ebx+144h], ebp
-0x7D46A9: call    edx
+0x7D46A3: mov     [ebx+144h], ebp; Set BSCubeMapCamera+0x144 to the current ShadowSceneLight before virtual render dispatch.
+0x7D46A9: call    edx; Invoke BSCubeMapCamera virtual slot +0x84 with -1; the concrete dispatcher is 0x00814340.
 0x7D46AB: pop     edi
 0x7D46AC: pop     esi
 0x7D46AD: pop     ebp

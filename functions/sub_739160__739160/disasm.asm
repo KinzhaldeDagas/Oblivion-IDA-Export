@@ -6,7 +6,7 @@
 0x739168: mov     esi, ecx
 0x73916A: push    ebx
 0x73916B: mov     [esp+14h+var_4], esi
-0x73916F: call    nullsub_returnvVoid_1arg
+0x73916F: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x739174: mov     ecx, ebx
 0x739176: call    sub_7124D0
 0x73917B: mov     ebp, eax

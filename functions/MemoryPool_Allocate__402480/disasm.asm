@@ -45,7 +45,7 @@
 0x4024F3: cmp     [esp+30h+Buffer.dwAvailPhys], 4000h
 0x4024FB: jnb     short loc_402532
 0x4024FD: push    offset aMemoryheapMemo; lpCriticalSection
-0x402502: mov     ecx, offset stru_B32C00
+0x402502: mov     ecx, offset unk_B32C00
 0x402507: call    NiEnterCriticalSection
 0x40250C: mov     eax, dword_B02184
 0x402511: test    eax, eax
@@ -56,7 +56,7 @@
 0x402521: push    0
 0x402523: call    eax ; dword_B02184
 0x402525: add     esp, 0Ch
-0x402528: mov     ecx, offset stru_B32C00; lpCriticalSection
+0x402528: mov     ecx, offset unk_B32C00; lpCriticalSection
 0x40252D: call    NiLeaveCriticalSection_0
 0x402532: push    4; flAllocationType
 0x402534: push    1000h; flAllocationType

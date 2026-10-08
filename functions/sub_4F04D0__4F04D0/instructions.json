@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4F04D0",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; Verified: WorldSpace destructor clears the derived SubSpace index (+0x60), frees all per-coordinate linked-list nodes and destroys the 16-byte map. The separate persistent-reference index (+0x64) is cleared earlier by TESWorldSpace_ClearReferenceIndex.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x4F0507",
-    "line": "mov     [esp+14h+var_8], eax",
+    "line": "mov     [esp+14h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -151,61 +151,61 @@
   },
   {
     "ea": "0x4F0510",
-    "line": "lea     eax, [esp+18h+var_C]",
+    "line": "lea     eax, [esp+18h+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4F0514",
-    "line": "push    eax",
+    "line": "push    eax; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F0515",
-    "line": "lea     ecx, [esp+1Ch+var_4]",
+    "line": "lea     ecx, [esp+1Ch+keyOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4F0519",
-    "line": "push    ecx",
+    "line": "push    ecx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F051A",
-    "line": "mov     ecx, [ebp+60h]",
+    "line": "mov     ecx, [ebp+60h]; self",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x4F051D",
-    "line": "lea     edx, [esp+20h+var_8]",
+    "line": "lea     edx, [esp+20h+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4F0521",
-    "line": "push    edx",
+    "line": "push    edx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F0522",
-    "line": "mov     [esp+24h+var_C], 0",
+    "line": "mov     [esp+24h+valueOut], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x4F052A",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4F052F",
-    "line": "mov     esi, [esp+18h+var_C]",
+    "line": "mov     esi, [esp+18h+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x4F0547",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x4F055D",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x4F0565",
-    "line": "cmp     [esp+18h+var_8], 0",
+    "line": "cmp     [esp+18h+position], 0",
     "mnemonic": "cmp",
     "size": 5
   },

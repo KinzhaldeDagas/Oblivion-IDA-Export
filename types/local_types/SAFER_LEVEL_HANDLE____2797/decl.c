@@ -1,1 +1,4 @@
-SAFER_LEVEL_HANDLE__
+struct SAFER_LEVEL_HANDLE__
+{
+int unused;
+};

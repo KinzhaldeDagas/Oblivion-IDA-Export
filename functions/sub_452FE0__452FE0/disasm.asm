@@ -32,10 +32,10 @@
 0x45302F: mov     esi, [esp+0Ch+a2]
 0x453033: push    0Ch; Size
 0x453035: call    FormHeapAlloc
-0x45303A: mov     ecx, [esp+10h+arg_4]
-0x45303E: mov     edx, [esp+10h+arg_8]
+0x45303A: mov     ecx, [esp+10h+cellFormID]
+0x45303E: mov     edx, [esp+10h+cellX]
 0x453042: mov     edi, eax
-0x453044: mov     eax, [esp+10h+arg_C]
+0x453044: mov     eax, [esp+10h+cellY]
 0x453048: add     esp, 4
 0x45304B: mov     [edi], ecx
 0x45304D: mov     [edi+4], edx

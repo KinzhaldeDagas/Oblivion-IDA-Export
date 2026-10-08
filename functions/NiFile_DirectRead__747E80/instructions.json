@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x747E80",
-    "line": "push    ecx",
+    "line": "push    ecx; MEF PLAN 2026-09-07: Assembly confirms thiscall(self,destination,count), RET8; EBP and EDI are saved registers assigned local values. fread uses elementSize1; returned EAX counts copied bytes. Short reads return fewer bytes, closed stream returns0; destination may remain partly/uninitialized. Cached builder must require exact count. Prior type retained in ledger.",
     "mnemonic": "push",
     "size": 1
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x747EB4",
-    "line": "push    edi; Size",
+    "line": "push    edi; byteCount",
     "mnemonic": "push",
     "size": 1
   },
@@ -127,19 +127,19 @@
   },
   {
     "ea": "0x747EB7",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x747EB8",
-    "line": "push    ebp; Dst",
+    "line": "push    ebp; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x747EB9",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,25 +355,25 @@
   },
   {
     "ea": "0x747F11",
-    "line": "push    ebx; Size",
+    "line": "push    ebx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x747F12",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x747F13",
-    "line": "push    ebp; Dst",
+    "line": "push    ebp; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x747F14",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },

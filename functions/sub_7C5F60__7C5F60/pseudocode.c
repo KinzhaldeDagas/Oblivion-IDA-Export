@@ -1,43 +1,46 @@
-void __thiscall sub_7C5F60(_DWORD *this, int a2)
+// Reconcile one ordinary source light against current scene receivers. Projector-mode lights are skipped; culled sources clear associations, visible sources begin/add/remove receiver reconciliation.
+void __thiscall ShadowSceneNode_ReconcileSourceLightReceivers(
+        ShadowSceneNode_DecodedLayout *self,
+        ShadowSceneLight_DecodedLayout *light)
 {
-  _DWORD *v2; // ebp
+  ShadowSceneLight_DecodedLayout *v2; // ebp
   char v4; // bl
-  void (__thiscall ***v5)(_DWORD, int); // esi
+  ShadowSceneLight_DecodedLayout *v5; // esi
   unsigned int i; // esi
   int v7; // ecx
   _BYTE *v8; // eax
 
-  v2 = (_DWORD *)a2;
-  if ( !*(_BYTE *)(a2 + 0xF4) )
+  v2 = light; /*0x7c5f61*/
+  if ( !light->perSourceProjectorMode_F4 ) /*0x7c5f65*/
   {
-    v4 = *(_BYTE *)(*sub_405AD0((_DWORD *)a2, &a2) + 0x18) & 1;
-    if ( a2 )
+    v4 = *(_BYTE *)(*ShadowSceneLight_GetLightRef(light, &light) + 0x18) & 1; /*0x7c5f8c*/
+    if ( light ) /*0x7c5f91*/
     {
-      v5 = (void (__thiscall ***)(_DWORD, int))a2;
-      if ( !InterlockedDecrement((volatile LONG *)(a2 + 4)) )
-        (**v5)(v5, 1);
+      v5 = light; /*0x7c5f93*/
+      if ( !InterlockedDecrement((volatile LONG *)&light->base_000[4]) ) /*0x7c5f99*/
+        (**(void (__thiscall ***)(ShadowSceneLight_DecodedLayout *, int))v5->base_000)(v5, 1); /*0x7c5faf*/
     }
-    if ( v4 )
+    if ( v4 ) /*0x7c5fb5*/
     {
-      sub_7D21F0(v2);
+      ShadowSceneLight_ClearReceiverAssociations(v2); /*0x7c5fb7*/
     }
     else
     {
-      sub_7D5ED0(v2);
-      for ( i = 0; i < *((unsigned __int16 *)this + 0x5C); ++i )
+      ShadowSceneLight_BeginReceiverReconciliation((Ni2DBuffer **)v2); /*0x7c5fc3*/
+      for ( i = 0; i < *(unsigned __int16 *)&self->base_000[0xB8]; ++i ) /*0x7c5fca*/
       {
-        if ( *((unsigned __int16 *)this + 0x5B) > i )
+        if ( *(unsigned __int16 *)&self->base_000[0xB6] > i ) /*0x7c5fdc*/
         {
-          v7 = *(_DWORD *)(*(this + 0x2C) + 4 * i);
-          if ( v7 )
+          v7 = *(_DWORD *)(*(_DWORD *)&self->base_000[0xB0] + 4 * i); /*0x7c5fe4*/
+          if ( v7 ) /*0x7c5fe9*/
           {
-            v8 = (_BYTE *)(*(int (__thiscall **)(int))(*(_DWORD *)v7 + 8))(v7);
-            if ( v8 )
-              ShadowSceneLight_AddToScene____(v2, v8);
+            v8 = (_BYTE *)(*(int (__thiscall **)(int))(*(_DWORD *)v7 + 8))(v7); /*0x7c5ff0*/
+            if ( v8 ) /*0x7c5ff4*/
+              ShadowSceneLight_AddToScene(v2, v8); /*0x7c5ff9*/
           }
         }
       }
-      sub_7D6A40(v2);
+      ShadowSceneLight_RemoveStaleReceivers((int **)v2); /*0x7c600e*/
     }
   }
 }

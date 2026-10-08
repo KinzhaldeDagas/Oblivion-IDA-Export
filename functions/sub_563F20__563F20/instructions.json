@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x563F20",
-    "line": "cmp     byte ptr ds:0B125E8h, 0",
+    "line": "cmp     byte ptr ds:0B125E8h, 0; BSTreeNode runtime update override: if SpeedTree enabled/visible, calls vtbl+0xE0 contact update then base update path.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -25,13 +25,13 @@
   },
   {
     "ea": "0x563F2C",
-    "line": "push    1",
+    "line": "push    1; createIfMissing",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x563F2E",
-    "line": "call    sub_55F7E0",
+    "line": "call    BSTreeManager_GetInstance; Returns SpeedTree singleton dword_B39E04, creating it on demand when caller passes true.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x563F7A",
-    "line": "call    sub_70A190",
+    "line": "call    sub_70A190; NiNode selected downward: flags+18 choose controllers/world update; child flags bit1 and bit4 choose synchronous vfunc+64/+68 at 70A215/70A210. Child bounds merge before RET 4. No queue/dispatch in this body. Full-call observer may fence same-thread descendants, not asynchronous work.",
     "mnemonic": "call",
     "size": 5
   },

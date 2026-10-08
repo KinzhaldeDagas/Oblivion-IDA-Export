@@ -47,7 +47,7 @@
 0x7F33A2: jnz     short loc_7F33D1
 0x7F33A4: fchs
 0x7F33A6: fdiv    dword ptr [esi+150h]
-0x7F33AC: call    Double_To_SInt32
+0x7F33AC: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x7F33B1: push    eax
 0x7F33B2: mov     ecx, esi
 0x7F33B4: call    sub_7F2BA0
@@ -65,7 +65,7 @@
 0x7F33E0: jp      short loc_7F3415
 0x7F33E2: fsub    dword ptr [esi+90h]
 0x7F33E8: fdiv    dword ptr [esi+150h]
-0x7F33EE: call    Double_To_SInt32
+0x7F33EE: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x7F33F3: push    eax
 0x7F33F4: mov     ecx, esi
 0x7F33F6: call    sub_7F3130
@@ -84,7 +84,7 @@
 0x7F3428: jnz     short loc_7F345D
 0x7F342A: fsubr   dword ptr [esi+90h]
 0x7F3430: fdiv    dword ptr [esi+150h]
-0x7F3436: call    Double_To_SInt32
+0x7F3436: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x7F343B: push    eax
 0x7F343C: mov     ecx, esi
 0x7F343E: call    sub_7F2B30

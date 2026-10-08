@@ -1,1 +1,1 @@
-Concurrency::details::SchedulerProxy
+struct Concurrency::details::SchedulerProxy;

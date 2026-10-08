@@ -1,18 +1,31 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x771790",
+      "0x771830"
+    ]
+  ],
+  "chunks_sha256": "e8c56d2bf65c509449dfa12283274c470720da5ab35ee70da2b70863f3424a61",
+  "comment_regular": "Disable and clear every texture stage after the active pass range.",
+  "comment_repeatable": "Disable and clear every texture stage after the active pass range.\nDX11 verified 2026-09-30: caller 75FD90 invokes only when visited stage count < B28CB8. First loop from visited count to B28CB0 clears texture then TSS1=1, TSS4=1, TSS24=0. Second loop resumes at resulting index and clears textures only until B28CB8. No sampler reset. Do not clamp first loop to B28CB8: if B28CB0 is larger, native first loop reaches B28CB0. When caller gate false, no cleanup occurs even if fixed-function limit is larger.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_771790",
+  "display_name": "NiD3DTextureStage_DisableUnusedStages",
   "end_ea": "0x771830",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_771790",
+  "name": "NiD3DTextureStage_DisableUnusedStages",
   "segment": ".text",
   "sha256": "e8c56d2bf65c509449dfa12283274c470720da5ab35ee70da2b70863f3424a61",
   "size": 160,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x771790",
+  "total_chunk_size": 160,
   "type": "int __cdecl(unsigned int)",
   "xrefs_from_count": 55,
   "xrefs_to_count": 2

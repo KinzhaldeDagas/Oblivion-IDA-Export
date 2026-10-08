@@ -32,10 +32,10 @@
 0x4818D9: call    eax
 0x4818DB: mov     dword ptr [edi+14h], 0
 0x4818E2: push    0
-0x4818E4: push    offset Vector3_InitValue?
-0x4818E9: push    offset Vector3_InitValue?
+0x4818E4: push    offset g_zeroNiPoint3
+0x4818E9: push    offset g_zeroNiPoint3
 0x4818EE: mov     ecx, edi
-0x4818F0: call    sub_959D60
+0x4818F0: call    NiPick_ExecuteAndSort; Verified NiPick query runner: invokes NiPick_ProcessSceneObject over the configured pick root, gathers hit records, sorts by the record distance field, and leaves the nearest record first in the result list.
 0x4818F5: pop     esi
 0x4818F6: fld     [esp+8+arg_C]
 0x4818FA: mov     edx, [esp+8+arg_4]

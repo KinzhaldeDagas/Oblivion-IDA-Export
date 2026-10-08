@@ -1,58 +1,99 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_D3DMATERIAL",
+  "definition": "struct _D3DMATERIAL\n{\nDWORD dwSize;\nunion\n{\nD3DCOLORVALUE diffuse;\nD3DCOLORVALUE dcvDiffuse;\n};\nunion\n{\nD3DCOLORVALUE ambient;\nD3DCOLORVALUE dcvAmbient;\n};\nunion\n{\nD3DCOLORVALUE specular;\nD3DCOLORVALUE dcvSpecular;\n};\nunion\n{\nD3DCOLORVALUE emissive;\nD3DCOLORVALUE dcvEmissive;\n};\nunion\n{\nD3DVALUE power;\nD3DVALUE dvPower;\n};\nD3DTEXTUREHANDLE hTexture;\nDWORD dwRampSize;\n}\n",
   "id": 18374686479672035584,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwSize",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 16
+      "size": 16,
+      "type": "_D3DMATERIAL::$F37024B6A2A7DA8F8161E452127F778F"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 16
+      "size": 16,
+      "type": "_D3DMATERIAL::$B545799AB1B094EA7448ADA6B118C0D5"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 16
+      "size": 16,
+      "type": "_D3DMATERIAL::$48A7D73869B8DD97079A7DB0052C867A"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 16
+      "size": 16,
+      "type": "_D3DMATERIAL::$4E89CE7B3871A99DAB3B73BC63770FCE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 4
+      "size": 4,
+      "type": "_D3DMATERIAL::$0E29CCD1ABCFA56B0343B217BB93547E"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hTexture",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 4
+      "size": 4,
+      "type": "D3DTEXTUREHANDLE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwRampSize",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 4
+      "offset_hex": "0x4C",
+      "size": 4,
+      "type": "DWORD"
     }
   ],
   "name": "_D3DMATERIAL",
+  "ordinal": 4179,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 80
 }

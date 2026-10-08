@@ -1,19 +1,36 @@
 {
-  "callees_count": 14,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 10,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 22,
+  "chunks": [
+    [
+      "0x810F90",
+      "0x811248"
+    ],
+    [
+      "0x9D0CA0",
+      "0x9D0CD1"
+    ]
+  ],
+  "chunks_sha256": "261daa5c62a44d28f5f5b8b53c391c979e14cdef18b5222099407c59050da2d5",
+  "comment_regular": "\nVerified 2026-10-07: DistantLOD PS alpha-test-ref c3 reads shader+E0, while VS EyeDir c14 reads shader+F0. 811ED0 supplies fixed sampled-alpha threshold when any NiAlphaProperty is present. Directional per-view thresholds need to reach E0, not just the NiAlphaProperty output-alpha byte.\n\nFog decode: DistantLOD constant-map builder maps DISTLOD fog constants to shared world fog vectors, not a separate DistantLOD fog producer.",
+  "comment_repeatable": "Fog decode: DistantLOD constant-map builder maps DISTLOD fog constants to shared world fog vectors, not a separate DistantLOD fog producer.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 26,
   "display_name": "sub_810F90",
   "end_ea": "0x811248",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_810F90",
   "segment": ".text",
   "sha256": "299471ebe103b21f0f73c8102c1ad846ac41e38fc376b46ded5f52c5cabc75f3",
   "size": 696,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x810F90",
+  "total_chunk_size": 745,
   "type": "char __thiscall(_DWORD *this, NiObjectNET *)",
-  "xrefs_from_count": 272,
+  "xrefs_from_count": 291,
   "xrefs_to_count": 1
 }

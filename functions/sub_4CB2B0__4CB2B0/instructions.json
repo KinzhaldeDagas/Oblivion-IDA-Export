@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4CB2B0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified barter-container sweep: iterates this cell's objectList, skips deleted/disabled refs, and calls TESObjectREFR_IsOwnedBy(reference, ownerActor, useFactionOwnership=false). It excludes the merchant container, copies supported owned item extra lists into new container entries, records the original reference, removes ownership from the copied inventory instance, and delegates owned container refs to ContainerExtraData handling. Fallout's TESObjectCELL::FillBarterContainer performs the analogous cell scan and also calls IsAnOwner(..., false); Fallout wraps the scan in its cell-reference lock, while Oblivion's caller manages its own container-change flow.",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x4CB2DD",
-    "line": "cmp     [esp+30h+arg_4], 0",
+    "line": "cmp     [esp+30h+containerChanges], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x4CB2E8",
-    "line": "mov     ebp, [esp+30h+arg_0]",
+    "line": "mov     ebp, [esp+30h+actorReference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x4CB2F7",
-    "line": "call    sub_420680",
+    "line": "call    ExtraDataList_GetMerchantContainer; Returns the reference stored in ExtraMerchantContainer type 0x44.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x4CB2FD",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -190,12 +190,6 @@
     "line": "jmp     short loc_4CB324",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x4CB31C",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 4
   },
   {
     "ea": "0x4CB320",
@@ -271,25 +265,25 @@
   },
   {
     "ea": "0x4CB34A",
-    "line": "push    0",
+    "line": "push    0; useFactionOwnership",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4CB34C",
-    "line": "push    ebp",
+    "line": "push    ebp; actorReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4CB34D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; reference",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4CB34F",
-    "line": "call    TESOBjectREFR_IsOwnedBy",
+    "line": "call    TESObjectREFR_IsOwnedBy; Verified ownership predicate and flag meaning: resolve the effective owner; accept exact equality with the actor's template/base form. When the owner differs, a nonzero ownership-global value can permit the access. With useFactionOwnership=true, a Faction owner is instead checked against the actor base's faction rank and the reference's effective required rank; callers passing false skip that faction-rank path. Direct callers include many `true` paths and ContainerExtraData_RemoveForm's item-sweep call with false. Fallout's TESObjectREFR::IsAnOwner/DoorLock::IsAnOwner also expose a `useFaction` boolean, but its implementation uses actor faction membership and has different rank/global handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -673,19 +667,19 @@
   },
   {
     "ea": "0x4CB41D",
-    "line": "push    esi",
+    "line": "push    esi; originalReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4CB41E",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4CB420",
-    "line": "call    sub_41E710",
+    "line": "call    ExtraDataList_SetOriginalReferenceExtra; Set ExtraOriginalReference (type 0x26) to a live TESObjectREFR. This provenance is used for synthetic/reference projections, is excluded by relevant copy paths, and is never interpreted by pickup as a base-form override.",
     "mnemonic": "call",
     "size": 5
   },
@@ -739,43 +733,43 @@
   },
   {
     "ea": "0x4CB43F",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4CB440",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4CB442",
-    "line": "call    sub_60D020",
+    "line": "call    Shared_SetDwordAtOffset04; Identical-code-folded setter shared by unrelated engine classes: writes value to *(int *)(this+4) and returns value. In EntryData call sites, +0x04 is the canonical signed countDelta; shader/process vtable users give the same bytes unrelated meanings. Do not assign a globally EntryData-specific prototype.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4CB447",
-    "line": "mov     ecx, [esp+30h+arg_4]",
+    "line": "mov     ecx, [esp+30h+containerChanges]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4CB44B",
-    "line": "push    1",
+    "line": "push    1; destroyEntryIfMerged",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4CB44D",
-    "line": "push    ebp",
+    "line": "push    ebp; entry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4CB44E",
-    "line": "call    ContainerExtraData_AddEntry",
+    "line": "call    ContainerExtraData_AddEntry; Merge or append a complete EntryData into ExtraContainerChanges. Native ABI is two stack arguments (entry, destroyEntryIfMerged) and retn 0x08; all 14 callers pass exactly two. If a matching form entry exists, it merges counts/extra-data chains and conditionally destroys the supplied entry; otherwise it appends that entry directly. Return register has no contract.",
     "mnemonic": "call",
     "size": 5
   },
@@ -787,7 +781,7 @@
   },
   {
     "ea": "0x4CB457",
-    "line": "mov     ebp, [esp+30h+arg_0]",
+    "line": "mov     ebp, [esp+30h+actorReference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -817,7 +811,7 @@
   },
   {
     "ea": "0x4CB469",
-    "line": "mov     edx, [esp+30h+arg_4]",
+    "line": "mov     edx, [esp+30h+containerChanges]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -883,7 +877,7 @@
   },
   {
     "ea": "0x4CB488",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -946,5 +940,107 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B5190",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5193",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5194",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5199",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B519A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B519B",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B519E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B519F",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B51A4",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B51A5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B51A6",
+    "line": "mov     edx, [esp+containerChanges]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B51AA",
+    "line": "lea     eax, [edx-20h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B51AD",
+    "line": "mov     ecx, [edx-24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B51B0",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B51B2",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B51B7",
+    "line": "mov     eax, offset stru_AE0360",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B51BC",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

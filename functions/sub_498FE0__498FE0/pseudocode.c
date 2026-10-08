@@ -1,7 +1,7 @@
-float *__thiscall sub_498FE0(float *this, float *a2, float *a3)
+NiPoint3 *__thiscall NiPoint3_CrossProduct(NiPoint3 *this, NiPoint3 *out, NiPoint3 *other)
 {
-  *a2 = a3[2] * *(this + 1) - a3[1] * *(this + 2);
-  a2[1] = *(this + 2) * *a3 - *this * a3[2];
-  a2[2] = a3[1] * *this - *a3 * *(this + 1);
-  return a2;
+  out->x = other->z * this->y - other->y * this->z; /*0x498ff6*/
+  out->y = this->z * other->x - this->x * other->z; /*0x499004*/
+  out->z = other->y * this->x - other->x * this->y; /*0x499013*/
+  return out; /*0x499016*/
 }

@@ -4,7 +4,7 @@
 0x453A9D: mov     [esp+154h+var_4], eax
 0x453AA4: push    ebx
 0x453AA5: push    ebp
-0x453AA6: mov     ebp, [esp+15Ch+arg_4]
+0x453AA6: mov     ebp, [esp+15Ch+form]
 0x453AAD: test    ebp, ebp
 0x453AAF: push    esi
 0x453AB0: push    edi
@@ -14,11 +14,11 @@
 0x453ABE: mov     [esp+164h+var_14C], ebp
 0x453AC2: mov     byte ptr [edi], 0
 0x453AC5: jz      short loc_453ADC
-0x453AC7: mov     eax, [esp+164h+arg_8]
-0x453ACE: push    eax
-0x453ACF: push    ebp
-0x453AD0: call    sub_4535A0
-0x453AD5: mov     [esp+164h+arg_8], eax
+0x453AC7: mov     eax, [esp+164h+changeFlags]
+0x453ACE: push    eax; changeFlags
+0x453ACF: push    ebp; form
+0x453AD0: call    SaveLoad_NormalizeFormChangeFlags; Verified: starts with created-form flag adjustment, then normalizes flags by runtime type/state. For TESObjectREFR it checks inventory/process/package/death/persistence and location; bit31 is set when reference location differs from its starting location. For TESObjectCELL it validates light/terrain-related flags and classifies exterior grid coordinates. Callers include UnloadForm, ResetFormForLoad, save/load consistency passes. Do not assign names to remaining individual bits without further use tracing.
+0x453AD5: mov     [esp+164h+changeFlags], eax
 0x453ADC: cmp     [esp+164h+arg_10], 0
 0x453AE4: mov     [esp+164h+var_150], 0
 0x453AEC: jnz     short loc_453B05
@@ -66,7 +66,7 @@
 0x453B6A: cmp     eax, 4
 0x453B6D: ja      short def_453B6F
 0x453B6F: jmp     ds:jpt_453B6F[eax*4]; switch jump
-0x453B76: cmp     [esp+168h+arg_C], 0; jumptable 00453B6F case -1
+0x453B76: cmp     byte ptr [esp+168h+arg_C], 0; jumptable 00453B6F case -1
 0x453B7E: jz      loc_453C33
 0x453B84: push    offset aProcessLevelNo; "Process Level: None\r\n"
 0x453B89: lea     ecx, [esp+16Ch+var_140]

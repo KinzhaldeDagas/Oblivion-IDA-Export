@@ -11,10 +11,10 @@
 0x76F7FE: lea     eax, [esp+10h+arg_4C]
 0x76F802: push    eax
 0x76F803: lea     eax, [esp+14h+arg_50]
-0x76F807: and     edx, 7FFFFFFFh
+0x76F807: and     edx, 7FFFFFFFh; Verified: high-bit descriptor selects NiAdditionalGeometryData; low31 bits index a data stream. Plugin layer declarations use1..3; stream0 remains wind/fade.
 0x76F80D: push    eax
 0x76F80E: push    edx
-0x76F80F: call    sub_726320
+0x76F80F: call    sub_726320;
 0x76F814: test    al, al
 0x76F816: jz      short loc_76F822
 0x76F818: mov     ecx, [esp+arg_50]

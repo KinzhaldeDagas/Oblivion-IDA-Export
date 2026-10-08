@@ -90,8 +90,8 @@
 0x72F553: jz      short loc_72F5C1
 0x72F555: lea     edi, [esi+0E0h]
 0x72F55B: push    offset aMeshesCreature; "Meshes\\Creatures\\Rat\\mange.NIF"
-0x72F560: push    edi; Str1
-0x72F561: call    __strcmp
+0x72F560: push    edi; left
+0x72F561: call    CRT_StricmpLocaleDispatch
 0x72F566: add     esp, 8
 0x72F569: test    eax, eax
 0x72F56B: jz      short loc_72F5C1
@@ -168,7 +168,6 @@
 0x72F643: mov     ecx, eax
 0x72F645: jl      short loc_72F661
 0x72F647: jmp     short loc_72F650
-0x72F649: align 10h
 0x72F650: mov     word ptr [ecx], 0
 0x72F655: add     ecx, 8
 0x72F658: sub     edx, 1
@@ -243,3 +242,19 @@
 0x72F736: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x72F73B: add     esp, 228h
 0x72F741: retn    4
+0x9CA770: mov     eax, [ebp-220h]
+0x9CA776: push    eax
+0x9CA777: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA77C: pop     ecx
+0x9CA77D: retn
+0x9CA77E: mov     edx, [esp+arg_4]
+0x9CA782: lea     eax, [edx-22Ch]
+0x9CA788: mov     ecx, [edx-230h]
+0x9CA78E: xor     ecx, eax
+0x9CA790: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA795: add     eax, 10h
+0x9CA798: mov     ecx, [edx-4]
+0x9CA79B: xor     ecx, eax
+0x9CA79D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA7A2: mov     eax, offset stru_AF2E2C
+0x9CA7A7: jmp     ___CxxFrameHandler3

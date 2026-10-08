@@ -1,98 +1,96 @@
 void *__cdecl realloc(void *Memory, size_t NewSize)
 {
-  unsigned int v3; // esi
-  int block; // eax
-  unsigned int v5; // edx
+  int v2; // ebp
+  void *result; // eax
+  unsigned int v4; // esi
+  char *block; // eax
   unsigned int v6; // eax
-  unsigned int v7; // esi
-  unsigned int v8; // eax
-  size_t v9; // [esp-4h] [ebp-34h]
-  int v10; // [esp+10h] [ebp-20h]
+  unsigned int v7; // eax
+  size_t v8; // [esp-4h] [ebp-34h]
+  char *v9; // [esp+10h] [ebp-20h]
   void *Dst; // [esp+14h] [ebp-1Ch]
   LPVOID Dsta; // [esp+14h] [ebp-1Ch]
 
-  if ( !Memory )
+  if ( !Memory ) /*0x98185b*/
   {
-    LODWORD(v9) = NewSize;
-    return malloc(v9);
+    LODWORD(v8) = NewSize; /*0x98185d*/
+    return malloc(v8); /*0x981866*/
   }
-  v3 = NewSize;
-  if ( !(_DWORD)NewSize )
+  v4 = NewSize; /*0x98186b*/
+  if ( !(_DWORD)NewSize ) /*0x981870*/
   {
-    free(Memory);
-    return 0;
+    free(Memory); /*0x981873*/
+    return 0; /*0x981a3c*/
   }
-  if ( dword_BAABC0 != 3 )
+  if ( unk_BAABC0 != 3 ) /*0x981885*/
   {
-    while ( v3 <= 0xFFFFFFE0 )
+    while ( v4 <= 0xFFFFFFE0 ) /*0x981a21*/
     {
-      if ( !v3 )
-        v3 = 1;
-      if ( HeapReAlloc(hHeap, 0, Memory, v3) )
-        JUMPOUT(0x981A61);
-      if ( !dword_BAA5C8 )
+      if ( !v4 ) /*0x9819f2*/
+        v4 = 1; /*0x9819f4*/
+      if ( HeapReAlloc((HANDLE)dword_BA9E10[0x127], 0, Memory, v4) ) /*0x9819ff*/
+        JUMPOUT(0x981A61); /*0x981a61*/
+      if ( !dword_BA9E10[0x1EE] ) /*0x981a11*/
       {
-        _errno();
-        JUMPOUT(0x981A50);
+        _errno(); /*0x981a4b*/
+        JUMPOUT(0x981A50); /*0x981a50*/
       }
-      if ( !_callnewh(v3) )
+      if ( !_callnewh(v4) ) /*0x981a1c*/
       {
-        _errno();
-        JUMPOUT(0x9819C3);
+        _errno(); /*0x981a3d*/
+        JUMPOUT(0x9819C3); /*0x9819c3*/
       }
     }
-    goto LABEL_27;
+    goto LABEL_27; /*0x981a21*/
   }
-  Dst = 0;
-  if ( (unsigned int)NewSize > 0xFFFFFFE0 )
+  Dst = 0; /*0x98188d*/
+  if ( (unsigned int)NewSize > 0xFFFFFFE0 ) /*0x981893*/
   {
 LABEL_27:
-    _callnewh(v3);
-    *_errno() = 0xC;
-    return 0;
+    _callnewh(v4); /*0x981a23*/
+    *_errno() = 0xC; /*0x981a2f*/
+    return 0; /*0x981a2f*/
   }
-  _lock(4);
-  block = __sbh_find_block(Memory);
-  v10 = block;
-  if ( block )
+  _lock(4); /*0x98189b*/
+  block = __sbh_find_block((int)Memory); /*0x9818a5*/
+  v9 = block; /*0x9818ab*/
+  if ( block ) /*0x9818b0*/
   {
-    if ( (unsigned int)NewSize <= dword_BAABCC )
+    if ( (unsigned int)NewSize <= unk_BAABCC ) /*0x9818bc*/
     {
-      if ( __sbh_resize_block(block, Memory, NewSize) )
+      if ( __sbh_resize_block(block, (int)Memory, NewSize) ) /*0x9818c1*/
       {
-        Dst = Memory;
+        Dst = Memory; /*0x9818cd*/
       }
       else
       {
-        Dst = (void *)__sbh_alloc_block(v5, NewSize);
-        if ( Dst )
+        Dst = __sbh_alloc_block(NewSize); /*0x9818d9*/
+        if ( Dst ) /*0x9818de*/
         {
-          v6 = *((_DWORD *)Memory + 0xFFFFFFFF) - 1;
-          if ( v6 >= (unsigned int)NewSize )
-            v6 = NewSize;
-          LODWORD(v9) = v6;
-          memcpy(Dst, Memory, v9);
-          v10 = __sbh_find_block(Memory);
-          __sbh_free_block(v10, Memory);
+          v6 = *((_DWORD *)Memory + 0xFFFFFFFF) - 1; /*0x9818e3*/
+          if ( v6 >= (unsigned int)NewSize ) /*0x9818e6*/
+            v6 = NewSize; /*0x9818e8*/
+          memcpy(Dst, Memory, v6); /*0x9818ef*/
+          v9 = __sbh_find_block((int)Memory); /*0x9818fa*/
+          __sbh_free_block((DWORD)Memory, v9, (int)Memory); /*0x9818ff*/
         }
       }
     }
-    if ( !Dst )
+    if ( !Dst ) /*0x98190a*/
     {
-      v7 = (NewSize + 0xF) & 0xFFFFFFF0;
-      LODWORD(NewSize) = v7;
-      Dsta = HeapAlloc(hHeap, 0, v7);
-      if ( Dsta )
+      v4 = (NewSize + 0xF) & 0xFFFFFFF0; /*0x981919*/
+      Dsta = HeapAlloc((HANDLE)dword_BA9E10[0x127], 0, v4); /*0x98192d*/
+      if ( Dsta ) /*0x981932*/
       {
-        v8 = *((_DWORD *)Memory + 0xFFFFFFFF) - 1;
-        if ( v8 >= v7 )
-          v8 = v7;
-        LODWORD(v9) = v8;
-        memcpy(Dsta, Memory, v9);
-        __sbh_free_block(v10, Memory);
+        v7 = *((_DWORD *)Memory + 0xFFFFFFFF) - 1; /*0x981937*/
+        if ( v7 >= v4 ) /*0x98193a*/
+          v7 = (NewSize + 0xF) & 0xFFFFFFF0; /*0x98193c*/
+        memcpy(Dsta, Memory, v7); /*0x981943*/
+        __sbh_free_block((DWORD)Memory, v9, (int)Memory); /*0x98194c*/
       }
     }
   }
-  _unlock(4);
-  return realloc_::_LN49(Memory, NewSize);
+  _unlock(4); /*0x981990*/
+  realloc_::_LN49(Memory, v2, v4); /*0x981996*/
+  return result; /*0x981a37*/
 }

@@ -23,7 +23,7 @@
 0x6F76B4: jb      short loc_6F76C2
 0x6F76B6: mov     eax, [esi+5Ch]
 0x6F76B9: push    eax
-0x6F76BA: call    FormHeapFree
+0x6F76BA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F76BF: add     esp, 4
 0x6F76C2: xor     ebx, ebx
 0x6F76C4: mov     edi, 0Fh
@@ -34,7 +34,7 @@
 0x6F76D5: jb      short loc_6F76E3
 0x6F76D7: mov     eax, [esi+40h]
 0x6F76DA: push    eax
-0x6F76DB: call    FormHeapFree
+0x6F76DB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F76E0: add     esp, 4
 0x6F76E3: mov     [esi+54h], edi
 0x6F76E6: mov     [esi+50h], ebx
@@ -43,7 +43,7 @@
 0x6F76EF: jb      short loc_6F76FD
 0x6F76F1: mov     eax, [esi+24h]
 0x6F76F4: push    eax
-0x6F76F5: call    FormHeapFree
+0x6F76F5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F76FA: add     esp, 4
 0x6F76FD: mov     [esi+38h], edi
 0x6F7700: mov     [esi+34h], ebx
@@ -52,7 +52,7 @@
 0x6F7709: jb      short loc_6F7717
 0x6F770B: mov     eax, [esi+8]
 0x6F770E: push    eax
-0x6F770F: call    FormHeapFree
+0x6F770F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F7714: add     esp, 4
 0x6F7717: mov     [esi+1Ch], edi
 0x6F771A: mov     [esi+18h], ebx
@@ -69,3 +69,24 @@
 0x6F773E: pop     ebx
 0x6F773F: add     esp, 10h
 0x6F7742: retn
+0x9C8DA0: mov     ecx, [ebp-10h]; this
+0x9C8DA3: jmp     ??1_Lockit@std@@QAE@XZ; std::_Lockit::~_Lockit(void)
+0x9C8DA8: mov     ecx, [ebp-10h]
+0x9C8DAB: add     ecx, 4; this
+0x9C8DAE: jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
+0x9C8DB3: mov     ecx, [ebp-10h]
+0x9C8DB6: add     ecx, 20h ; ' '; this
+0x9C8DB9: jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
+0x9C8DBE: mov     ecx, [ebp-10h]
+0x9C8DC1: add     ecx, 3Ch ; '<'; this
+0x9C8DC4: jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
+0x9C8DC9: mov     ecx, [ebp-10h]
+0x9C8DCC: add     ecx, 58h ; 'X'; this
+0x9C8DCF: jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
+0x9C8DD4: mov     edx, [esp+arg_4]
+0x9C8DD8: lea     eax, [edx-14h]
+0x9C8DDB: mov     ecx, [edx-18h]
+0x9C8DDE: xor     ecx, eax
+0x9C8DE0: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C8DE5: mov     eax, offset stru_AF1694
+0x9C8DEA: jmp     ___CxxFrameHandler3

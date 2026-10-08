@@ -5,7 +5,7 @@
 0x442748: mov     edi, ecx
 0x44274A: jz      short loc_442769
 0x44274C: mov     ecx, esi; this
-0x44274E: call    TESObjectCELL_IsInterior
+0x44274E: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x442753: test    al, al
 0x442755: push    esi; a2
 0x442756: mov     ecx, edi; this

@@ -1,40 +1,72 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "WaterShader",
+  "definition": "struct WaterShader\n{\nBSShader super;\nUInt32 Unk07C[16];\nNiD3DVertexShader *Vertex[2];\nNiD3DPixelShader *Pixel[16];\nUInt32 Unk104[5];\n}\n",
   "id": 18374686479671990286,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00052.",
       "name": "super",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 124
+      "size": 124,
+      "type": "BSShader"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00053.",
       "name": "Unk07C",
       "offset": 124,
-      "offset_hex": "0x7c",
-      "size": 64
+      "offset_hex": "0x7C",
+      "size": 64,
+      "type": "UInt32[16]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00054.",
       "name": "Vertex",
       "offset": 188,
-      "offset_hex": "0xbc",
-      "size": 8
+      "offset_hex": "0xBC",
+      "size": 8,
+      "type": "NiD3DVertexShader *[2]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00055.",
       "name": "Pixel",
       "offset": 196,
-      "offset_hex": "0xc4",
-      "size": 64
+      "offset_hex": "0xC4",
+      "size": 64,
+      "type": "NiD3DPixelShader *[16]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00056.",
       "name": "Unk104",
       "offset": 260,
       "offset_hex": "0x104",
-      "size": 20
+      "size": 20,
+      "type": "UInt32[5]"
     }
   ],
   "name": "WaterShader",
+  "ordinal": 653,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 280
 }

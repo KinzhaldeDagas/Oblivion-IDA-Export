@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x58BF2A",
-    "line": "jz      short loc_58BF38",
+    "line": "jz      short loc_58BF38; Verified wrong-receiver consequence: [ECX] must be owner Tile*. Passing Tile* instead reads its vtable as owner; following [owner+5] check examines vtable bytes. May return accidentally or continue with invalid layout; not a valid tile-wide refresh.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x58BF38",
-    "line": "mov     eax, [esi]",
+    "line": "mov     eax, [esi]; Verified wrong-receiver consequence: [ECX] must be owner Tile*. Passing Tile* instead reads its vtable as owner; following [owner+5] check examines vtable bytes. May return accidentally or continue with invalid layout; not a valid tile-wide refresh.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x58BF5A",
-    "line": "push    esi",
+    "line": "push    esi; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x58BF62",
-    "line": "call    sub_58BAD0",
+    "line": "call    Tile__Value__CheckEvaluationCycle; Verified: detects Value already in global evaluation stack, logs Loop Detected and nullifies reference actions; otherwise pushes Value. Stack globals 0xB3AF10 and depth 0xB3B0AC. This guard concerns property evaluation, not plugin global menu scratch state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1573,7 +1573,7 @@
   },
   {
     "ea": "0x58C21B",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1633,19 +1633,19 @@
   },
   {
     "ea": "0x58C239",
-    "line": "push    0FFFFFFFFh; int",
+    "line": "push    0FFFFFFFFh; requestedID",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x58C23B",
-    "line": "push    edi; unsigned __int8 *",
+    "line": "push    edi; name",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58C23C",
-    "line": "call    sub_58B040",
+    "line": "call    Tile__AddUserTrait",
     "mnemonic": "call",
     "size": 5
   },
@@ -1741,19 +1741,19 @@
   },
   {
     "ea": "0x58C267",
-    "line": "push    esi",
+    "line": "push    esi; trait",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58C268",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x58C26A",
-    "line": "call    Tile_GetPropertyByCode?",
+    "line": "call    Tile__GetOrCreateValue; Verified: sorted trait lookup; if absent allocates 0x1C bytes, constructs Value at 0x589DF0, stores owner Tile at +0 and inserts into Tile value list. Corrects misleading existing-property-only interpretation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1783,19 +1783,19 @@
   },
   {
     "ea": "0x58C276",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x58C278",
-    "line": "fstp    [esp+170h+var_170]; float",
+    "line": "fstp    [esp+170h+value]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x58C27B",
-    "line": "call    Tile_Property_SetFloatValue?",
+    "line": "call    Tile__Value__SetFloat; Verified: marks numeric; if changed or string trait 0xFDE, clears string, stores number, clears own expression actions via 0x588930, then CalculateValue(this,true). Same-value ordinary traits bypass clear/evaluation. Unlike Fallout SetFloat, no abClearActions parameter.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1822,12 +1822,6 @@
     "line": "jmp     short loc_58C290",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x58C28D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x58C290",
@@ -2131,7 +2125,7 @@
   },
   {
     "ea": "0x58C318",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2785,7 +2779,7 @@
   },
   {
     "ea": "0x58C47E",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2827,7 +2821,7 @@
   },
   {
     "ea": "0x58C49D",
-    "line": "fstp    [esp+170h+var_170]; float",
+    "line": "fstp    [esp+170h+value]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -3883,7 +3877,7 @@
   },
   {
     "ea": "0x58C6EC",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4015,7 +4009,7 @@
   },
   {
     "ea": "0x58C733",
-    "line": "fstp    [esp+170h+var_170]; float",
+    "line": "fstp    [esp+170h+value]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -4087,7 +4081,7 @@
   },
   {
     "ea": "0x58C758",
-    "line": "fstp    [esp+170h+var_170]; float",
+    "line": "fstp    [esp+170h+value]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -4537,7 +4531,7 @@
   },
   {
     "ea": "0x58C83F",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4783,7 +4777,7 @@
   },
   {
     "ea": "0x58C8BE",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4885,7 +4879,7 @@
   },
   {
     "ea": "0x58C8EF",
-    "line": "cmp     [esp+16Ch+arg_0], al",
+    "line": "cmp     [esp+16Ch+forceUpdate], al",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -4897,13 +4891,13 @@
   },
   {
     "ea": "0x58C8F8",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x58C8FA",
-    "line": "call    sub_58BDD0",
+    "line": "call    Tile__Value__PropagateReactions; Verified: traverses dependent action links via Value +0x14 sentinel, transfers source numeric/string values, and calls CalculateValue(dependentValue,false). Synchronous recursive property evaluation is established; this does not alone prove DialogMenu topic-build reentrancy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5023,7 +5017,7 @@
   },
   {
     "ea": "0x58C92A",
-    "line": "push    eax; int",
+    "line": "push    eax; text",
     "mnemonic": "push",
     "size": 1
   },
@@ -5041,25 +5035,25 @@
   },
   {
     "ea": "0x58C930",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x58C932",
-    "line": "fstp    [esp+174h+var_174]; float",
+    "line": "fstp    [esp+174h+var_174]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x58C935",
-    "line": "push    eax; int",
+    "line": "push    eax; trait",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58C936",
-    "line": "call    sub_58B2F0",
+    "line": "call    Tile__FinalPostParse; Verified shared fallback called by CalculateValue when owner virtual PostParse returns NULL. Marks trait-specific dirty flags; ID trait 0xFA8 calls owning Menu vtable +4 AttachTileByID with numeric ID and Tile*. Visibility traits mark dirty bit4. Fallout named analogue 0x82232168.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5113,7 +5107,7 @@
   },
   {
     "ea": "0x58C966",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5194,5 +5188,119 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9BF8A0",
+    "line": "lea     ecx, [ebp-118h]; void *",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BF8A6",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BF8AB",
+    "line": "lea     ecx, [ebp-138h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BF8B1",
+    "line": "jmp     j_??1?$NiTList@M@@UAE@XZ; NiTList<float>::~NiTList<float>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BF8B6",
+    "line": "lea     ecx, [ebp-14Ch]; void *",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BF8BC",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BF8C1",
+    "line": "lea     ecx, [ebp-140h]; void *",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BF8C7",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BF8CC",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BF8D0",
+    "line": "lea     eax, [edx-15Ch]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BF8D6",
+    "line": "mov     ecx, [edx-160h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9BF8DC",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BF8DE",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BF8E3",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BF8E6",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BF8E9",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BF8EB",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BF8F0",
+    "line": "mov     eax, offset stru_AE8DB0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BF8F5",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

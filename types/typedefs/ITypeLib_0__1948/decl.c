@@ -1,1 +1,1 @@
-ITypeLib_0
+typedef ITypeLib ITypeLib_0;

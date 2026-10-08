@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x9F8FE0",
-    "line": "fld     ds:flt_A3D65C",
+    "line": "fld     ds:kHeadBodyNormalMatchRadius; Verified GameSettingFloat dynamic initializer: registers fLeafRustleTimeScale with default 0.5 and registers its destructor via atexit. BSTreeManager_UpdateWindMatrices multiplies the frame delta by this setting before leaf wind scalar dispatch.",
     "mnemonic": "fld",
     "size": 6
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x9F8FEF",
-    "line": "mov     ecx, offset flt_B39E30",
+    "line": "mov     ecx, offset fLeafRustleTimeScale",
     "mnemonic": "mov",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x9F8FF9",
-    "line": "push    offset sub_A235B0; void (__cdecl *)()",
+    "line": "push    offset GameSetting_fLeafRustleTimeScale_atexit; void (__cdecl *)()",
     "mnemonic": "push",
     "size": 5
   },

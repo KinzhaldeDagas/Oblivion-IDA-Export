@@ -1,1 +1,1 @@
-bhkMouseSpringAction
+struct bhkMouseSpringAction;

@@ -13,25 +13,25 @@
 0x67710D: lea     eax, [esp+30h+var_C]
 0x677111: mov     large fs:0, eax
 0x677117: mov     esi, ecx
-0x677119: mov     ecx, ds:0B33B00h
-0x67711F: push    4; Size
-0x677121: push    offset flt_B3BCF0; Dst
-0x677126: call    SaveLoad_LoadData
+0x677119: mov     ecx, ds:0B33B00h; self
+0x67711F: push    4; byteCount
+0x677121: push    (offset qword_B3BB2C+1C4h); destination
+0x677126: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x67712B: fldz
 0x67712D: push    ecx
-0x67712E: fstp    [esp+34h+var_34]; float
+0x67712E: fstp    dword ptr [esp+34h+var_34]; float
 0x677131: mov     ecx, esi
-0x677133: call    sub_673B10
+0x677133: call    sub_673B10; ActorProcessManager accumulates a fractional fast-travel/update remainder in flt_B3BCF0; NaN/large values are reset to 0.
 0x677138: add     esi, 28h ; '('
 0x67713B: mov     [esp+30h+var_18], esi
 0x67713F: mov     [esp+30h+var_14], 6
 0x677147: xor     ebx, ebx
 0x677149: lea     esp, [esp+0]
-0x677150: mov     ecx, ds:0B33B00h
-0x677156: push    2; Size
+0x677150: mov     ecx, ds:0B33B00h; self
+0x677156: push    2; byteCount
 0x677158: lea     eax, [esp+34h+Dst]
-0x67715C: push    eax; Dst
-0x67715D: call    SaveLoad_LoadData
+0x67715C: push    eax; destination
+0x67715D: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x677162: cmp     [esp+30h+Dst], bx
 0x677167: jz      loc_67720D
 0x67716D: cmp     [esi], ebx
@@ -56,14 +56,14 @@
 0x6771A1: cmp     eax, ebx
 0x6771A3: mov     [esp+30h+var_4], ebx
 0x6771A7: jz      short loc_6771B4
-0x6771A9: mov     ecx, eax
-0x6771AB: call    sub_605E50
+0x6771A9: mov     ecx, eax; self
+0x6771AB: call    Crime_Constructor
 0x6771B0: mov     edi, eax
 0x6771B2: jmp     short loc_6771B6
 0x6771B4: xor     edi, edi
-0x6771B6: mov     ecx, edi
+0x6771B6: mov     ecx, edi; self
 0x6771B8: mov     [esp+30h+var_4], 0FFFFFFFFh
-0x6771C0: call    sub_606520
+0x6771C0: call    Crime_LoadGame
 0x6771C5: cmp     edi, ebx
 0x6771C7: jz      short loc_6771FD
 0x6771C9: mov     esi, [esi]
@@ -105,3 +105,15 @@
 0x67722E: pop     ebx
 0x67722F: add     esp, 1Ch
 0x677232: retn
+0x9C33E0: mov     eax, [ebp-10h]
+0x9C33E3: push    eax
+0x9C33E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C33E9: pop     ecx
+0x9C33EA: retn
+0x9C33EB: mov     edx, [esp+arg_4]
+0x9C33EF: lea     eax, [edx-20h]
+0x9C33F2: mov     ecx, [edx-24h]
+0x9C33F5: xor     ecx, eax
+0x9C33F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C33FC: mov     eax, offset stru_AEC000
+0x9C3401: jmp     ___CxxFrameHandler3

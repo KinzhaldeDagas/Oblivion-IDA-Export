@@ -1,45 +1,50 @@
-void __thiscall NiCullingProcess::Process(NiCullingProcess *this, NiCamera *a2, NiAVObject *a3, void *a4)
+// CULLING audit 2026-09-27 (observed Oblivion behavior): ABI: __thiscall(self, camera, NiAVObject root, optional visible array), RET 0x0C. Installs camera(+0x0C) and rebuilds its frustum before traversal. Explicit array temporarily replaces +0x08; null configured array uses accumulator begin(+0x4C), traversal, flush(+0x50), release. Restores explicit-array replacement but CLEARS Camera on normal completion; it does not restore an outer camera/frustum for same-process nesting. Native +0x57F3F3 caller is a direct call, not Process-vtable dispatch.
+void __thiscall NiCullingProcess::Process(
+        NiCullingProcess *self,
+        NiCamera *camera,
+        NiAVObject *root,
+        CullingVisibleGeometryArray *visibleArray)
 {
   NiCamera *v5; // ebx
   NiCamera *v6; // edi
-  void *v7; // ebp
+  CullingVisibleGeometryArray *v7; // ebp
   NiFrustum *p_Frustum; // [esp-4h] [ebp-28h]
-  void *VisibleGeo; // [esp+14h] [ebp-10h]
+  CullingVisibleGeometryArray *VisibleGeo; // [esp+14h] [ebp-10h]
 
-  v5 = a2;
-  v6 = 0;
-  if ( a2 )
+  v5 = camera; /*0x70e0c7*/
+  v6 = 0; /*0x70e0cb*/
+  if ( camera ) /*0x70e0cf*/
   {
-    if ( a3 )
+    if ( root ) /*0x70e0d9*/
     {
-      p_Frustum = &a2->members.Frustum;
-      this->Camera = a2;
-      NiCullingProcess::SetFrustum(this, p_Frustum);
-      v7 = a4;
-      VisibleGeo = 0;
-      if ( a4 )
+      p_Frustum = &camera->members.Frustum; /*0x70e0e5*/
+      self->Camera = camera; /*0x70e0e6*/
+      NiCullingProcess::SetFrustum(self, p_Frustum); /*0x70e0e9*/
+      v7 = visibleArray; /*0x70e0ee*/
+      VisibleGeo = 0; /*0x70e0f4*/
+      if ( visibleArray ) /*0x70e0f8*/
       {
-        VisibleGeo = this->VisibleGeo;
-        this->VisibleGeo = a4;
+        VisibleGeo = self->VisibleGeo; /*0x70e0fd*/
+        self->VisibleGeo = visibleArray; /*0x70e101*/
       }
-      a2 = 0;
-      if ( !this->VisibleGeo )
+      camera = 0; /*0x70e104*/
+      if ( !self->VisibleGeo ) /*0x70e108*/
       {
-        NiSmartPointer_Set__((Ni2DBuffer **)&a2, (Ni2DBuffer *)g_Renderer->member.super.accumulator);
-        v6 = a2;
-        if ( a2 )
-          ((void (__thiscall *)(NiCamera *, NiCamera *))a2->vtbl->UpdateControllers)(a2, v5);
+        NiSmartPointer_Set__((Ni2DBuffer **)&camera, (Ni2DBuffer *)renderer->member.super.accumulator); /*0x70e124*/
+        v6 = camera; /*0x70e129*/
+        if ( camera ) /*0x70e12f*/
+          ((void (__thiscall *)(NiCamera *, NiCamera *))camera->vtbl->UpdateControllers)(camera, v5); /*0x70e139*/
       }
-      NiAVObject_Render(a3, this);
-      if ( v6 )
-        v6->vtbl->Unk_14((NiAVObject *)v6);
-      if ( v7 )
-        this->VisibleGeo = VisibleGeo;
-      this->Camera = 0;
-      if ( v6 )
+      NiAVObject_Render(root, self); /*0x70e140*/
+      if ( v6 ) /*0x70e147*/
+        v6->vtbl->Unk_14((NiAVObject *)v6); /*0x70e150*/
+      if ( v7 ) /*0x70e154*/
+        self->VisibleGeo = VisibleGeo; /*0x70e15a*/
+      self->Camera = 0; /*0x70e15f*/
+      if ( v6 ) /*0x70e16e*/
       {
-        if ( !InterlockedDecrement((volatile LONG *)&v6->members) )
-          v6->vtbl->super.super.Destructor((NiRefObject *)v6, 1);
+        if ( !InterlockedDecrement((volatile LONG *)&v6->members) ) /*0x70e174*/
+          v6->vtbl->super.super.Destructor((NiRefObject *)v6, 1); /*0x70e186*/
       }
     }
   }

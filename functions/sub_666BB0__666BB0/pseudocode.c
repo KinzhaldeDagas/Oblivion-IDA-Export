@@ -1,211 +1,187 @@
-signed int *__usercall sub_666BB0@<eax>(
-        char a1@<bpl>,
-        double a2@<st1>,
-        double a3@<st0>,
-        int a4,
-        int *a5,
-        signed int *a6)
+// Oblivion player-progression debug panel: enumerates all 21 native skills, labels only strict TESClass matches as 'Major', and prints each value, per-skill advance count, usage/required usage, aggregate major advances, readiness, attribute-bonus buckets, and specialization counters. Non-majors receive no separate 'Minor' label.
+signed int *__cdecl DebugOverlay_DrawPlayerSkillProgression(int a1, int *a2, signed int *a3)
 {
-  int v7; // esi
-  double v8; // st5
-  double v9; // st5
-  int i; // esi
-  TESForm::ModReferenceList *BaseClass; // eax
-  PlayerCharacter *v12; // ecx
-  PlayerCharacter *v13; // ebp
-  char v14; // al
-  PlayerCharacter *v15; // ebp
-  char v16; // al
-  double v17; // st6
+  int v6; // esi
+  SkillActorValue i; // esi
+  TESClass *BaseClass; // eax
+  PlayerCharacter *v9; // ecx
+  PlayerCharacter *v10; // ebp
+  char v11; // al
+  PlayerCharacter *v12; // ebp
+  char v13; // al
   const char *Name; // eax
-  double v19; // st5
-  double v20; // st5
-  double v21; // st5
   UInt8 **attributeBonuses; // ebp
-  int v23; // ecx
+  int v16; // ecx
   UInt8 **j; // eax
-  UInt8 *v25; // ebx
-  bool v26; // zf
+  UInt8 *v18; // ebx
+  bool v19; // zf
   int k; // esi
-  int v28; // eax
-  const char *v29; // eax
-  double v30; // st5
-  double v31; // st5
-  double v32; // st5
-  double v33; // st5
-  int v35; // [esp-4h] [ebp-11Ch]
-  UInt32 v36; // [esp+0h] [ebp-118h]
-  float v37; // [esp+4h] [ebp-114h]
-  float v38; // [esp+4h] [ebp-114h]
-  float v39; // [esp+4h] [ebp-114h]
-  float v40; // [esp+4h] [ebp-114h]
-  float v41; // [esp+4h] [ebp-114h]
-  float v42; // [esp+4h] [ebp-114h]
-  float v43; // [esp+4h] [ebp-114h]
-  float v44; // [esp+4h] [ebp-114h]
-  float v45; // [esp+4h] [ebp-114h]
+  int v21; // eax
+  const char *v22; // eax
+  int v24; // [esp-4h] [ebp-11Ch]
+  UInt32 v25; // [esp+0h] [ebp-118h]
+  float v26; // [esp+4h] [ebp-114h]
+  float v27; // [esp+4h] [ebp-114h]
+  float v28; // [esp+4h] [ebp-114h]
+  float v29; // [esp+4h] [ebp-114h]
+  float v30; // [esp+4h] [ebp-114h]
+  float v31; // [esp+4h] [ebp-114h]
+  float v32; // [esp+4h] [ebp-114h]
+  float v33; // [esp+4h] [ebp-114h]
+  float v34; // [esp+4h] [ebp-114h]
+  float v35; // [esp+8h] [ebp-110h]
+  float v36; // [esp+8h] [ebp-110h]
+  float v37; // [esp+8h] [ebp-110h]
+  float v38; // [esp+8h] [ebp-110h]
+  float v39; // [esp+8h] [ebp-110h]
+  float v40; // [esp+8h] [ebp-110h]
+  float v41; // [esp+8h] [ebp-110h]
+  float v42; // [esp+8h] [ebp-110h]
+  float v43; // [esp+8h] [ebp-110h]
+  float v44; // [esp+8h] [ebp-110h]
+  float v45; // [esp+8h] [ebp-110h]
   float v46; // [esp+8h] [ebp-110h]
-  float v47; // [esp+8h] [ebp-110h]
-  float v48; // [esp+8h] [ebp-110h]
-  float v49; // [esp+8h] [ebp-110h]
-  float v50; // [esp+8h] [ebp-110h]
-  float v51; // [esp+8h] [ebp-110h]
-  float v52; // [esp+8h] [ebp-110h]
-  float v53; // [esp+8h] [ebp-110h]
-  float v54; // [esp+8h] [ebp-110h]
-  float v55; // [esp+8h] [ebp-110h]
-  float v56; // [esp+8h] [ebp-110h]
-  float v57; // [esp+8h] [ebp-110h]
-  int v58; // [esp+10h] [ebp-108h]
-  int v59; // [esp+24h] [ebp-F4h]
-  int v60; // [esp+24h] [ebp-F4h]
-  int v61; // [esp+28h] [ebp-F0h]
-  int v62; // [esp+2Ch] [ebp-ECh]
-  int v63; // [esp+2Ch] [ebp-ECh]
-  int v64; // [esp+30h] [ebp-E8h]
-  int v65; // [esp+30h] [ebp-E8h]
-  int v66; // [esp+30h] [ebp-E8h]
-  float v67; // [esp+34h] [ebp-E4h]
-  float v68; // [esp+34h] [ebp-E4h]
-  int v69; // [esp+34h] [ebp-E4h]
-  const char *v70; // [esp+38h] [ebp-E0h]
-  float v71; // [esp+38h] [ebp-E0h]
-  float v72; // [esp+3Ch] [ebp-DCh]
-  int v73; // [esp+3Ch] [ebp-DCh]
+  int v47; // [esp+10h] [ebp-108h]
+  int v48; // [esp+24h] [ebp-F4h]
+  int v49; // [esp+24h] [ebp-F4h]
+  int v50; // [esp+28h] [ebp-F0h]
+  int v51; // [esp+2Ch] [ebp-ECh]
+  int v52; // [esp+2Ch] [ebp-ECh]
+  int v53; // [esp+30h] [ebp-E8h]
+  int v54; // [esp+30h] [ebp-E8h]
+  int v55; // [esp+30h] [ebp-E8h]
+  float v56; // [esp+34h] [ebp-E4h]
+  float v57; // [esp+34h] [ebp-E4h]
+  int v58; // [esp+34h] [ebp-E4h]
+  const char *v59; // [esp+38h] [ebp-E0h]
+  float v60; // [esp+38h] [ebp-E0h]
+  float v61; // [esp+3Ch] [ebp-DCh]
+  int v62; // [esp+3Ch] [ebp-DCh]
   int GroupOffsetFromAV; // [esp+40h] [ebp-D8h]
-  char v75[200]; // [esp+4Ch] [ebp-CCh] BYREF
+  char v64[200]; // [esp+4Ch] [ebp-CCh] BYREF
 
-  v7 = *a5;
-  v46 = (float)*a5;
-  v8 = (double)iDebugTextLeftRightOffset;
-  v64 = *a6;
-  v37 = v8;
-  InterfaceMgr_DebugTextLine(a1, v8, a2, a3, "PLAYER CHARACTER", v37, v46, 1, 0xFFFFFFFF);
-  v62 = a4 + v7;
-  v47 = (float)(a4 + v7);
-  v9 = (double)iDebugTextLeftRightOffset;
-  v38 = v9;
-  InterfaceMgr_DebugTextLine(a1, v9, a2, a3, "Skill Usage", v38, v47, 1, 0xFFFFFFFF);
-  v61 = a4 + a4 + v7;
-  v59 = v61;
-  for ( i = 0xC; i < 0x21; ++i )
+  v6 = *a2; /*0x666bd5*/
+  v35 = (float)*a2; /*0x666bed*/
+  v53 = *a3; /*0x666bfb*/
+  v26 = (float)iDebugTextLeftRightOffset; /*0x666bff*/
+  InterfaceMgr_DebugTextLine("PLAYER CHARACTER", v26, v35, 1, 0xFFFFFFFF); /*0x666c07*/
+  v51 = a1 + v6; /*0x666c27*/
+  v36 = (float)(a1 + v6); /*0x666c2b*/
+  v27 = (float)iDebugTextLeftRightOffset; /*0x666c35*/
+  InterfaceMgr_DebugTextLine("Skill Usage", v27, v36, 1, 0xFFFFFFFF); /*0x666c3d*/
+  v50 = a1 + a1 + v6; /*0x666c47*/
+  v48 = v50; /*0x666c4b*/
+  for ( i = kSkillAV_Armorer; i < 0x21; ++i )
   {
-    GroupOffsetFromAV = ActorValue_GetGroupOffsetFromAV(2, i);
-    if ( !Actor_GetBaseClass((Actor *)TESDataHandler_g_PlayerRef)
-      || (BaseClass = Actor_GetBaseClass((Actor *)TESDataHandler_g_PlayerRef), v70 = "Major, ",
-                                                                               !sub_51C090(BaseClass, i)) )
+    GroupOffsetFromAV = ActorValue_GetGroupOffsetFromAV(2, i);// Oblivion group 2 converts the native SkillActorValue to its 0..20 array index. /*0x666c5f*/
+    if ( !Actor_GetBaseClass((Actor *)reference) /*0x666c83*/
+      || (BaseClass = (TESClass *)Actor_GetBaseClass((Actor *)reference),
+          v59 = "Major, ",
+          !TESClass_IsMajorSkillAV(BaseClass, i)) )// Use the strict seven-slot TESClass predicate solely to choose the literal 'Major, ' prefix. False or absent class leaves the skill unlabeled/non-major.
     {
-      v70 = EmptyString;
+      v59 = EmptyString; /*0x666c94*/
     }
-    v12 = TESDataHandler_g_PlayerRef;
-    v72 = 1.0;
-    v13 = TESDataHandler_g_PlayerRef;
-    if ( (unsigned int)(i - 0xC) <= 0x14 )
+    v9 = reference; /*0x666c9e*/
+    v61 = 1.0; /*0x666ca7*/
+    v10 = reference; /*0x666cae*/
+    if ( (unsigned int)(i - 0xC) <= 0x14 ) /*0x666cb0*/
     {
-      v14 = ActorValue_GetGroupOffsetFromAV(2, i);
-      v12 = TESDataHandler_g_PlayerRef;
-      v72 = v13->requiredSkillExp[v14];
+      v11 = ActorValue_GetGroupOffsetFromAV(2, i);// Map this native skill to its group-2 index and read PlayerCharacter::requiredSkillExp[index]. /*0x666cb5*/
+      v9 = reference; /*0x666cba*/
+      v61 = v10->requiredSkillExp[v11]; /*0x666ccd*/
     }
-    v67 = 0.0;
-    v15 = v12;
-    if ( (unsigned int)(i - 0xC) <= 0x14 )
+    v56 = 0.0; /*0x666cd6*/
+    v12 = v9; /*0x666cda*/
+    if ( (unsigned int)(i - 0xC) <= 0x14 ) /*0x666cdc*/
     {
-      v16 = ActorValue_GetGroupOffsetFromAV(2, i);
-      v12 = TESDataHandler_g_PlayerRef;
-      v67 = v15->skillExp[v16];
+      v13 = ActorValue_GetGroupOffsetFromAV(2, i);// Map this native skill to its group-2 index and read PlayerCharacter::skillExp[index]. /*0x666ce1*/
+      v9 = reference; /*0x666ce6*/
+      v56 = v12->skillExp[v13]; /*0x666cf9*/
     }
-    v17 = v67;
-    v36 = v12->skillAdv[GroupOffsetFromAV];
-    v35 = v12->vtbl->super.GetActorValue((Actor *)v12, (AVCode)i);
-    Name = (const char *)ActorValue_GetName(i);
-    _sprintf(v75, "%s (%s%d): advances: %d, usage %.2f/%.2f", Name, v70, v35, v36, v67, v72);
-    v48 = (float)v59;
-    v19 = (double)iDebugTextLeftRightOffset;
-    v39 = v19;
-    InterfaceMgr_DebugTextLine((char)v15, v19, v67, a3, v75, v39, v48, 1, 0xFFFFFFFF);
-    v59 += a4;
+    v25 = v9->skillAdv[GroupOffsetFromAV];      // Read PlayerCharacter::skillAdv[group2Index], the per-skill advance count shown independently of major membership. /*0x666d1c*/
+    v24 = v9->vtbl->super.GetActorValue((Actor *)v9, (AVCode)i); /*0x666d2a*/
+    Name = (const char *)ActorValue_GetName(i); /*0x666d2d*/
+    _sprintf(v64, "%s (%s%d): advances: %d, usage %.2f/%.2f", Name, v59, v24, v25, v56, v61);// Format each native skill as name, optional 'Major, ' prefix, current value, advance count, and current/required usage.
+    v37 = (float)v48; /*0x666d53*/
+    v28 = (float)iDebugTextLeftRightOffset; /*0x666d61*/
+    InterfaceMgr_DebugTextLine(v64, v28, v37, 1, 0xFFFFFFFF); /*0x666d65*/
+    v48 += a1; /*0x666d6a*/
   }
-  _sprintf(v75, "Major Skills Advanced: %d/%d", TESDataHandler_g_PlayerRef->majorSkillAdvances, iLevelUpSkillCount);
-  v49 = (float)v59;
-  v20 = (double)iDebugTextLeftRightOffset;
-  v40 = v20;
-  InterfaceMgr_DebugTextLine((char)v15, v20, v17, a3, v75, v40, v49, 1, 0xFFFFFFFF);
-  v60 = a4 + v59;
-  if ( TESDataHandler_g_PlayerRef->bCanLevelUp )
+  _sprintf(v64, "Major Skills Advanced: %d/%d", reference->majorSkillAdvances, g_iLevelUpSkillCount.value);// Report PlayerCharacter::majorSkillAdvances against g_iLevelUpSkillCount.value after the 21 per-skill rows.
+  v38 = (float)v48; /*0x666db2*/
+  v29 = (float)iDebugTextLeftRightOffset; /*0x666dc0*/
+  InterfaceMgr_DebugTextLine(v64, v29, v38, 1, 0xFFFFFFFF); /*0x666dc4*/
+  v49 = a1 + v48; /*0x666dce*/
+  if ( reference->bCanLevelUp )                 // PlayerCharacter::bCanLevelUp independently controls the 'Ready to Level Up' diagnostic line. /*0x666dd5*/
   {
-    v50 = (float)v60;
-    v21 = (double)iDebugTextLeftRightOffset;
-    v41 = v21;
-    InterfaceMgr_DebugTextLine((char)v15, v21, v17, a3, "Ready to Level Up", v41, v50, 1, 0xFFFFFFFF);
-    v60 += a4;
+    v39 = (float)v49; /*0x666de8*/
+    v30 = (float)iDebugTextLeftRightOffset; /*0x666df2*/
+    InterfaceMgr_DebugTextLine("Ready to Level Up", v30, v39, 1, 0xFFFFFFFF); /*0x666dfa*/
+    v49 += a1; /*0x666e02*/
   }
-  v68 = (float)iDebugTextLeftRightOffset;
-  v71 = v68 + ((double)(0x500 - iDebugTextLeftRightOffset) - v68) * dbl_A2FAA0;
-  v51 = (float)v62;
-  InterfaceMgr_DebugTextLine((char)v15, v71, v17, a3, "Attribute Skill Counts", v71, v51, 2, 0xFFFFFFFF);
-  attributeBonuses = TESDataHandler_g_PlayerRef->attributeBonuses;
-  v23 = 0;
-  v63 = v61;
-  for ( j = attributeBonuses; j; j = (UInt8 **)j[1] )
+  v57 = (float)iDebugTextLeftRightOffset; /*0x666e19*/
+  v60 = v57 + ((double)(0x500 - iDebugTextLeftRightOffset) - v57) * dbl_A2FAA0; /*0x666e3c*/
+  v40 = (float)v51; /*0x666e44*/
+  InterfaceMgr_DebugTextLine("Attribute Skill Counts", v60, v40, 2, 0xFFFFFFFF);// Dump every retained attribute-bonus bucket; these counts include all skill increases, while only major increases roll the bucket boundary. /*0x666e54*/
+  attributeBonuses = reference->attributeBonuses; /*0x666e5e*/
+  v16 = 0; /*0x666e6b*/
+  v52 = v50; /*0x666e6f*/
+  for ( j = attributeBonuses; j; j = (UInt8 **)j[1] ) /*0x666e75*/
   {
-    if ( *j )
-      ++v23;
+    if ( *j ) /*0x666e77*/
+      ++v16; /*0x666e7c*/
   }
-  if ( v23 > 0 )
+  if ( v16 > 0 )
   {
-    v73 = v23;
-    v69 = v23;
+    v62 = v16; /*0x666e8d*/
+    v58 = v16; /*0x666e91*/
     do
     {
-      v25 = *attributeBonuses;
-      v26 = *attributeBonuses == 0;
-      attributeBonuses = (UInt8 **)attributeBonuses[1];
-      if ( !v26 )
+      v18 = *attributeBonuses; /*0x666e95*/
+      v19 = *attributeBonuses == 0; /*0x666e98*/
+      attributeBonuses = (UInt8 **)attributeBonuses[1]; /*0x666e9a*/
+      if ( !v19 )
       {
-        _sprintf(v75, "Advancement #%d", v73);
-        v52 = (float)v63;
-        InterfaceMgr_DebugTextLine((char)attributeBonuses, v71, v17, a3, v75, v71, v52, 2, 0xFFFFFFFF);
-        v63 += a4;
+        _sprintf(v64, "Advancement #%d", v62); /*0x666eb2*/
+        v41 = (float)v52; /*0x666ec5*/
+        InterfaceMgr_DebugTextLine(v64, v60, v41, 2, 0xFFFFFFFF); /*0x666ed5*/
+        v52 += a1; /*0x666eda*/
         for ( k = 0; k < 8; ++k )
         {
-          v28 = 0;
-          if ( (unsigned int)k <= 7 )
-            v28 = (char)v25[ActorValue_GetGroupOffsetFromAV(0, k)];
-          v58 = v28;
-          v29 = (const char *)ActorValue_GetName(k);
-          _sprintf(v75, "%s: %d", v29, v58);
-          v53 = (float)v63;
-          InterfaceMgr_DebugTextLine((char)attributeBonuses, v71, v17, a3, v75, v71, v53, 2, 0xFFFFFFFF);
-          v63 += a4;
+          v21 = 0; /*0x666ee3*/
+          if ( (unsigned int)k <= 7 ) /*0x666ee8*/
+            v21 = (char)v18[ActorValue_GetGroupOffsetFromAV(0, k)]; /*0x666ef4*/
+          v47 = v21; /*0x666efb*/
+          v22 = (const char *)ActorValue_GetName(k); /*0x666efd*/
+          _sprintf(v64, "%s: %d", v22, v47);
+          v42 = (float)v52; /*0x666f23*/
+          InterfaceMgr_DebugTextLine(v64, v60, v42, 2, 0xFFFFFFFF); /*0x666f33*/
+          v52 += a1; /*0x666f38*/
         }
       }
-      --v73;
-      --v69;
+      --v62; /*0x666f4c*/
+      --v58; /*0x666f50*/
     }
-    while ( v69 );
+    while ( v58 );
   }
-  v54 = (float)v64;
-  v30 = (double)(0x500 - iDebugTextLeftRightOffset);
-  v42 = v30;
-  InterfaceMgr_DebugTextLine((char)attributeBonuses, v30, v17, a3, "Specialization Counts", v42, v54, 3, 0xFFFFFFFF);
-  _sprintf(v75, "Combat: %d", SLOBYTE(TESDataHandler_g_PlayerRef->unk5B8));
-  v55 = (float)(a4 + v64);
-  v31 = (double)(0x500 - iDebugTextLeftRightOffset);
-  v43 = v31;
-  InterfaceMgr_DebugTextLine((char)attributeBonuses, v31, v17, a3, v75, v43, v55, 3, 0xFFFFFFFF);
-  v65 = a4 + a4 + v64;
-  _sprintf(v75, "Magic: %d", SHIBYTE(TESDataHandler_g_PlayerRef->unk5B8));
-  v56 = (float)v65;
-  v32 = (double)(0x500 - iDebugTextLeftRightOffset);
-  v44 = v32;
-  InterfaceMgr_DebugTextLine((char)attributeBonuses, v32, v17, a3, v75, v44, v56, 3, 0xFFFFFFFF);
-  v66 = a4 + v65;
-  _sprintf(v75, "Stealth: %d", (char)TESDataHandler_g_PlayerRef->unk5BA);
-  v57 = (float)v66;
-  v33 = (double)(0x500 - iDebugTextLeftRightOffset);
-  v45 = v33;
-  InterfaceMgr_DebugTextLine((char)attributeBonuses, v33, v17, a3, v75, v45, v57, 3, 0xFFFFFFFF);
-  *a5 = v60;
-  *a6 = a4 + v66;
-  return a6;
+  v43 = (float)v53; /*0x666f70*/
+  v31 = (float)(0x500 - iDebugTextLeftRightOffset); /*0x666f7c*/
+  InterfaceMgr_DebugTextLine("Specialization Counts", v31, v43, 3, 0xFFFFFFFF);// Dump Combat/Magic/Stealth advancement counters accumulated from every skill increase according to that skill's specialization. /*0x666f84*/
+  _sprintf(v64, "Combat: %d", SLOBYTE(reference->combatAndMagicAdvanceCounts));
+  v44 = (float)(a1 + v53); /*0x666fcd*/
+  v32 = (float)(0x500 - iDebugTextLeftRightOffset); /*0x666fd9*/
+  InterfaceMgr_DebugTextLine(v64, v32, v44, 3, 0xFFFFFFFF); /*0x666fdd*/
+  v54 = a1 + a1 + v53; /*0x666ffb*/
+  _sprintf(v64, "Magic: %d", SHIBYTE(reference->combatAndMagicAdvanceCounts));
+  v45 = (float)v54; /*0x667021*/
+  v33 = (float)(0x500 - iDebugTextLeftRightOffset); /*0x66702d*/
+  InterfaceMgr_DebugTextLine(v64, v33, v45, 3, 0xFFFFFFFF); /*0x667031*/
+  v55 = a1 + v54; /*0x667050*/
+  _sprintf(v64, "Stealth: %d", (char)reference->stealthAdvanceCount);
+  v46 = (float)v55; /*0x667072*/
+  v34 = (float)(0x500 - iDebugTextLeftRightOffset); /*0x667082*/
+  InterfaceMgr_DebugTextLine(v64, v34, v46, 3, 0xFFFFFFFF); /*0x667086*/
+  *a2 = v49; /*0x66709c*/
+  *a3 = a1 + v55; /*0x6670a6*/
+  return a3; /*0x66709e*/
 }

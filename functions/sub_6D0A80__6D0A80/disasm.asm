@@ -22,9 +22,9 @@
 0x6D0AB1: lea     ecx, [esi+esi*2]
 0x6D0AB4: lea     ecx, [edx+ecx*4]
 0x6D0AB7: jmp     short loc_6D0ABB
-0x6D0AB9: xor     ecx, ecx
+0x6D0AB9: xor     ecx, ecx; this
 0x6D0ABB: push    ebp
-0x6D0ABC: call    TESHealthForm_GetHealth
+0x6D0ABC: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x6D0AC1: push    eax
 0x6D0AC2: call    j_CRT_strcmp
 0x6D0AC7: add     esp, 8

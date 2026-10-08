@@ -38,7 +38,7 @@
 0x6F2320: jz      short loc_6F238C
 0x6F2322: cmp     eax, 0FFFFFFFFh
 0x6F2325: jbe     short loc_6F232C
-0x6F2327: call    sub_790B90
+0x6F2327: call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error("vector<T> too long") and throws; used by multiple element specializations after max_size checks.
 0x6F232C: lea     edi, [eax+eax*2]
 0x6F232F: add     edi, edi
 0x6F2331: add     edi, edi
@@ -83,8 +83,15 @@
 0x6F239C: mov     esp, ebp
 0x6F239E: pop     ebp
 0x6F239F: retn    4
-0x6F23A2: mov     ecx, [ebp+var_14]; void *
-0x6F23A5: call    sub_794EB0
+0x6F23A2: mov     ecx, [ebp+var_14]; this
+0x6F23A5: call    OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.
 0x6F23AA: push    0
 0x6F23AC: push    0
 0x6F23AE: call    ThrowException??
+0x9C8840: mov     edx, [esp-4+arg_4]
+0x9C8844: lea     eax, [edx+0Ch]
+0x9C8847: mov     ecx, [edx-18h]
+0x9C884A: xor     ecx, eax
+0x9C884C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C8851: mov     eax, offset stru_AF0EE8
+0x9C8856: jmp     ___CxxFrameHandler3

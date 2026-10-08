@@ -1,7 +1,7 @@
-int __stdcall sub_4A47D0(int a1)
+TESRegionDataMap *__stdcall TESRegionDataManager_GetDataID4(TESRegionData *data)
 {
-  if ( a1 && (*(int (__thiscall **)(int))(*(_DWORD *)a1 + 0xC))(a1) == 4 )
-    return a1;
+  if ( data && ((int (__thiscall *)(TESRegionData *))data->vtable->unknown0C)(data) == 4 ) /*0x4a47e5*/
+    return (TESRegionDataMap *)data; /*0x4a47e7*/
   else
-    return 0;
+    return 0; /*0x4a47ed*/
 }

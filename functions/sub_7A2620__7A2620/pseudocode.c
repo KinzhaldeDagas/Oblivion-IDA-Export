@@ -1,29 +1,32 @@
-void __usercall sub_7A2620(int this@<ecx>, unsigned int a2@<ebp>, unsigned int a3@<esi>)
+// CTreeEngine::FreeTransientData. Releases compact trunk branch, leaf LOD vectors, branch-info arrays, and related transient generator state, then clears CTreeEngine+0x21.
+void __thiscall OB_CTreeEngine_FreeTransientData_010201A0(OB_CTreeEngine_010201A0 *this)
 {
-  unsigned int v4; // esi
+  unsigned int v1; // ebp
+  unsigned int v2; // esi
+  OB_CBranch_010201A0 *trunkBranch; // esi
   int v5; // ebx
   bool v6; // cc
   unsigned int i; // ebp
-  int v8; // eax
+  OB_stVectorBillboardLeafPtr_010201A0 *leafLodVectors; // eax
   int v9; // ecx
-  int v10; // esi
+  char *v10; // esi
   void (__thiscall ***v11)(_DWORD, int); // ecx
-  int v12; // esi
+  OB_stVectorBillboardLeafPtr_010201A0 *v12; // esi
   int v13; // ecx
   int v14; // esi
-  int v15; // esi
+  OB_stVectorBillboardLeafPtr_010201A0 *v15; // esi
   char *v16; // ebp
   int v17; // esi
   char *v18; // ebx
   int v19; // eax
-  int *v20; // eax
+  char *v20; // eax
   unsigned int v21; // esi
   unsigned int j; // esi
-  unsigned int v23; // ecx
-  int v24; // edx
+  char *begin; // ecx
+  _DWORD *v24; // edx
   unsigned int v25; // ebx
-  int v26; // ecx
-  char *v27; // ebx
+  void *v26; // ecx
+  char *end; // ebx
   char *v28; // esi
   int v29; // eax
   char *v30; // ebp
@@ -34,114 +37,118 @@ void __usercall sub_7A2620(int this@<ecx>, unsigned int a2@<ebp>, unsigned int a
   int v35; // [esp+8h] [ebp-8h]
   char *v36; // [esp+Ch] [ebp-4h]
 
-  if ( *(_BYTE *)(this + 0x21) )
+  if ( this->transientDataIntact ) /*0x7a2626*/
   {
-    v33 = __PAIR64__(a2, a3);
-    v4 = *(_DWORD *)(this + 0x58);
-    v5 = 0;
-    if ( v4 )
+    v33 = __PAIR64__(v1, v2); /*0x7a2632*/
+    trunkBranch = this->trunkBranch; /*0x7a2633*/
+    v5 = 0; /*0x7a2636*/
+    if ( trunkBranch ) /*0x7a263a*/
     {
-      sub_790D00(*(unsigned int **)(this + 0x58));
-      FormHeapFree(v4);
+      OB_CBranch_cleanup_010201A0((unsigned int *)this->trunkBranch); /*0x7a263e*/
+      FormHeapFree((unsigned int)trunkBranch); /*0x7a2644*/
     }
-    v6 = *(_DWORD *)(this + 0xC0) <= 0;
-    *(_DWORD *)(this + 0x58) = 0;
-    v35 = 0;
-    if ( !v6 )
+    v6 = this->leafInfo.leafLodLevelCount <= 0; /*0x7a264c*/
+    this->trunkBranch = 0; /*0x7a2652*/
+    v35 = 0; /*0x7a2655*/
+    if ( !v6 ) /*0x7a2659*/
     {
-      v34 = 0;
-      do
+      v34 = 0; /*0x7a265f*/
+      do /*0x7a2756*/
       {
-        if ( *(_DWORD *)(this + 0xD4) )
+        if ( this->leafLodVectors ) /*0x7a2663*/
         {
-          for ( i = 0; ; ++i )
+          for ( i = 0; ; ++i ) /*0x7a2670*/
           {
-            v8 = *(_DWORD *)(this + 0xD4);
-            v9 = *(_DWORD *)(v5 + v8 + 4);
-            v10 = v5 + v8;
-            if ( !v9 || i >= (*(_DWORD *)(v10 + 8) - v9) >> 2 )
-              break;
-            v11 = *(void (__thiscall ****)(_DWORD, int))(*(_DWORD *)(v10 + 4) + 4 * i);
-            if ( v11 )
-              (**v11)(v11, 1);
-            v12 = *(_DWORD *)(this + 0xD4);
-            v13 = *(_DWORD *)(v12 + v5 + 4);
-            v14 = v5 + v12;
-            if ( !v13 || i >= (*(_DWORD *)(v14 + 8) - v13) >> 2 )
-              _invalid_parameter_noinfo();
-            *(_DWORD *)(*(_DWORD *)(v14 + 4) + 4 * i) = 0;
+            leafLodVectors = this->leafLodVectors; /*0x7a2672*/
+            v9 = *(int *)((char *)&leafLodVectors->begin + v5); /*0x7a2678*/
+            v10 = (char *)leafLodVectors + v5; /*0x7a267e*/
+            if ( !v9 || i >= (*((_DWORD *)v10 + 2) - v9) >> 2 ) /*0x7a268d*/
+              break; /*0x7a268d*/
+            v11 = *(void (__thiscall ****)(_DWORD, int))(*((_DWORD *)v10 + 1) + 4 * i); /*0x7a26a7*/
+            if ( v11 ) /*0x7a26ac*/
+              (**v11)(v11, 1); /*0x7a26b4*/
+            v12 = this->leafLodVectors; /*0x7a26b6*/
+            v13 = *(int *)((char *)&v12->begin + v5); /*0x7a26bc*/
+            v14 = (int)v12 + v5; /*0x7a26c0*/
+            if ( !v13 || i >= (*(_DWORD *)(v14 + 8) - v13) >> 2 ) /*0x7a26d0*/
+              _invalid_parameter_noinfo(v5, (int)this, v14); /*0x7a26d2*/
+            *(_DWORD *)(*(_DWORD *)(v14 + 4) + 4 * i) = 0; /*0x7a26da*/
           }
-          v15 = *(_DWORD *)(this + 0xD4);
-          v16 = *(char **)(v15 + v5 + 8);
-          v17 = v5 + v15;
-          if ( *(_DWORD *)(v17 + 4) > (unsigned int)v16 )
-            _invalid_parameter_noinfo();
-          v18 = *(char **)(v17 + 4);
-          if ( (unsigned int)v18 > *(_DWORD *)(v17 + 8) )
-            _invalid_parameter_noinfo();
-          if ( v18 != v16 )
+          v15 = this->leafLodVectors; /*0x7a26e6*/
+          v16 = *(char **)((char *)&v15->end + v5); /*0x7a26ec*/
+          v17 = (int)v15 + v5; /*0x7a26f0*/
+          if ( *(_DWORD *)(v17 + 4) > (unsigned int)v16 ) /*0x7a26f5*/
+            _invalid_parameter_noinfo(v5, (int)this, v17); /*0x7a26f7*/
+          v18 = *(char **)(v17 + 4); /*0x7a26fc*/
+          if ( (unsigned int)v18 > *(_DWORD *)(v17 + 8) ) /*0x7a2702*/
+            _invalid_parameter_noinfo((int)v18, (int)this, v17); /*0x7a2704*/
+          if ( v18 != v16 ) /*0x7a270b*/
           {
-            v19 = (*(_DWORD *)(v17 + 8) - (int)v16) >> 2;
-            v36 = &v18[4 * v19];
-            if ( v19 > 0 )
+            v19 = (*(_DWORD *)(v17 + 8) - (int)v16) >> 2; /*0x7a2712*/
+            v36 = &v18[4 * v19]; /*0x7a2721*/
+            if ( v19 > 0 ) /*0x7a2725*/
             {
-              HIDWORD(v31) = v16;
-              LODWORD(v31) = 4 * v19;
-              memmove_s(v18, v31, (const void *)(4 * v19), v33);
+              HIDWORD(v31) = v16; /*0x7a2728*/
+              LODWORD(v31) = 4 * v19; /*0x7a2729*/
+              memmove_s(v18, v31, (const void *)(4 * v19), v33); /*0x7a272b*/
             }
-            *(_DWORD *)(v17 + 8) = v36;
+            *(_DWORD *)(v17 + 8) = v36; /*0x7a2737*/
           }
-          v5 = v34;
+          v5 = v34; /*0x7a273a*/
         }
-        v5 += 0x10;
-        v6 = ++v35 < *(_DWORD *)(this + 0xC0);
-        v34 = v5;
+        v5 += 0x10; /*0x7a2745*/
+        v6 = ++v35 < this->leafInfo.leafLodLevelCount; /*0x7a2748*/
+        v34 = v5; /*0x7a2752*/
       }
-      while ( v6 );
+      while ( v6 ); /*0x7a2756*/
     }
-    v20 = *(int **)(this + 0xD4);
-    if ( v20 )
+    v20 = (char *)this->leafLodVectors; /*0x7a275c*/
+    if ( v20 ) /*0x7a2764*/
     {
-      v21 = (unsigned int)(v20 + 0xFFFFFFFF);
-      _LN21(v20, 0x10u, v20[0xFFFFFFFF], (void (__thiscall *)(void *))sub_794EB0);
-      FormHeapFree(v21);
+      v21 = (unsigned int)(v20 + 0xFFFFFFFC); /*0x7a2769*/
+      _LN21( /*0x7a2775*/
+        v20,
+        0x10u,
+        *((_DWORD *)v20 + 0xFFFFFFFF),
+        (void (__thiscall *)(void *))OB_stVector4_DestroyThiscall_010201A0);
+      FormHeapFree(v21); /*0x7a277b*/
     }
-    *(_DWORD *)(this + 0xD4) = 0;
-    for ( j = 0; ; ++j )
+    this->leafLodVectors = 0; /*0x7a2783*/
+    for ( j = 0; ; ++j ) /*0x7a278d*/
     {
-      v23 = *(_DWORD *)(this + 0x64);
-      if ( !v23 || j >= (int)(*(_DWORD *)(this + 0x68) - v23) >> 2 )
-        break;
-      v24 = *(_DWORD *)(this + 0x64);
-      v25 = *(_DWORD *)(v24 + 4 * j);
-      if ( v25 )
+      begin = (char *)this->branchInfoVector.begin; /*0x7a2790*/
+      if ( !begin || j >= ((char *)this->branchInfoVector.end - (char *)begin) >> 2 ) /*0x7a27a1*/
+        break; /*0x7a27a1*/
+      v24 = this->branchInfoVector.begin; /*0x7a27b8*/
+      v25 = v24[j]; /*0x7a27bb*/
+      if ( v25 ) /*0x7a27c0*/
       {
-        sub_7A7800(*(_DWORD **)(v24 + 4 * j));
-        FormHeapFree(v25);
+        OB_SIdvBranchInfo_Dtor_010201A0((OB_SIdvBranchInfo_010201A0 *)v24[j]);// Each branch-info pointer is destructed through OB_SIdvBranchInfo_Dtor before the enclosing 0x74 record is freed, proving per-record ownership of the nine optional spline pointers. /*0x7a27c4*/
+        FormHeapFree(v25); /*0x7a27ca*/
       }
-      v26 = *(_DWORD *)(this + 0x64);
-      if ( !v26 || j >= (*(_DWORD *)(this + 0x68) - v26) >> 2 )
-        _invalid_parameter_noinfo();
-      *(_DWORD *)(*(_DWORD *)(this + 0x64) + 4 * j) = 0;
+      v26 = this->branchInfoVector.begin; /*0x7a27d2*/
+      if ( !v26 || j >= ((char *)this->branchInfoVector.end - (char *)v26) >> 2 ) /*0x7a27e3*/
+        _invalid_parameter_noinfo(v25, (int)this, j); /*0x7a27e5*/
+      *((_DWORD *)this->branchInfoVector.begin + j) = 0; /*0x7a27ed*/
     }
-    v27 = *(char **)(this + 0x68);
-    if ( v23 > (unsigned int)v27 )
-      _invalid_parameter_noinfo();
-    v28 = *(char **)(this + 0x64);
-    if ( (unsigned int)v28 > *(_DWORD *)(this + 0x68) )
-      _invalid_parameter_noinfo();
-    if ( v28 != v27 )
+    end = (char *)this->branchInfoVector.end; /*0x7a27f9*/
+    if ( begin > end ) /*0x7a27fe*/
+      _invalid_parameter_noinfo((int)end, (int)this, j); /*0x7a2800*/
+    v28 = (char *)this->branchInfoVector.begin; /*0x7a2805*/
+    if ( v28 > this->branchInfoVector.end ) /*0x7a280b*/
+      _invalid_parameter_noinfo((int)end, (int)this, (int)v28); /*0x7a280d*/
+    if ( v28 != end ) /*0x7a2814*/
     {
-      v29 = (*(_DWORD *)(this + 0x68) - (int)v27) >> 2;
-      v30 = &v28[4 * v29];
-      if ( v29 > 0 )
+      v29 = ((char *)this->branchInfoVector.end - (char *)end) >> 2; /*0x7a281b*/
+      v30 = &v28[4 * v29]; /*0x7a2827*/
+      if ( v29 > 0 ) /*0x7a282a*/
       {
-        HIDWORD(v32) = v27;
-        LODWORD(v32) = 4 * v29;
-        memmove_s(v28, v32, (const void *)(4 * v29), v33);
+        HIDWORD(v32) = end; /*0x7a282d*/
+        LODWORD(v32) = 4 * v29; /*0x7a282e*/
+        memmove_s(v28, v32, (const void *)(4 * v29), v33); /*0x7a2830*/
       }
-      *(_DWORD *)(this + 0x68) = v30;
+      this->branchInfoVector.end = v30; /*0x7a2838*/
     }
-    *(_BYTE *)(this + 0x21) = 0;
+    this->transientDataIntact = 0; /*0x7a283d*/
   }
 }

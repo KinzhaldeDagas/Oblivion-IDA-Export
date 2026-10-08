@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x4D3A00",
-    "line": "sub     esp, 10h",
+    "line": "sub     esp, 10h; Verified Oblivion clone helper: scans the persistent cell's reference list, maps each reference position to a destination exterior cell, and adds the reference there. Probable structural analogue in Fallout is TESObjectCELL::AssignPersistentRefsToCellsInWorld, called from Fallout TESWorldSpace::CreateDuplicateForm; it does not correspond to Oblivion's SubSpace spatial index.",
     "mnemonic": "sub",
     "size": 3
   },
   {
     "ea": "0x4D3A03",
-    "line": "cmp     [esp+10h+arg_0], 0",
+    "line": "cmp     [esp+10h+destinationWorldSpace], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x4D3A1F",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -106,12 +106,6 @@
     "line": "jmp     short loc_4D3A40",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x4D3A3D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x4D3A40",
@@ -253,7 +247,7 @@
   },
   {
     "ea": "0x4D3A8E",
-    "line": "mov     ecx, [esp+20h+arg_0]; this",
+    "line": "mov     ecx, [esp+20h+destinationWorldSpace]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -265,13 +259,13 @@
   },
   {
     "ea": "0x4D3A95",
-    "line": "push    ebx; signed int",
+    "line": "push    ebx; cellY",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D3A96",
-    "line": "push    edi; signed int",
+    "line": "push    edi; cellX",
     "mnemonic": "push",
     "size": 1
   },
@@ -295,19 +289,19 @@
   },
   {
     "ea": "0x4D3AA0",
-    "line": "push    esi; Concurrency::details::SchedulerBase *",
+    "line": "push    esi; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D3AA1",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D3AA3",
-    "line": "call    sub_4D35D0",
+    "line": "call    TESObjectCELL_AddReference; Verified: persistent-cell AddReference updates the WorldSpace coordinate/fallback persistent-reference index (+0x64) through TESWorldSpace_IndexReference. Ordinary cell additions do not index there. This routine does not populate the separate SubSpace spatial index at +0x60.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,7 +493,7 @@
   },
   {
     "ea": "0x4D3AFB",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },

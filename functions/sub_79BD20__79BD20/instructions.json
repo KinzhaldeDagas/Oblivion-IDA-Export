@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x79BD20",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Oblivion st_vector<SFrondVertex>::push_back. Constructs in place when end<capacityEnd; otherwise delegates to checked insert-one at end.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -193,13 +193,13 @@
   },
   {
     "ea": "0x79BD6B",
-    "line": "mov     ecx, [esp+14h+arg_0]",
+    "line": "mov     ecx, [esp+14h+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79BD6F",
-    "line": "mov     edx, [esp+14h+arg_0]",
+    "line": "mov     edx, [esp+14h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -211,55 +211,55 @@
   },
   {
     "ea": "0x79BD76",
-    "line": "mov     byte ptr [esp+14h+var_8], 0",
+    "line": "mov     byte ptr [esp+14h+debugCookie], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x79BD7B",
-    "line": "mov     eax, [esp+14h+var_8]",
+    "line": "mov     eax, dword ptr [esp+14h+debugCookie]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79BD7F",
-    "line": "push    eax",
+    "line": "push    eax; debugCookie",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79BD80",
-    "line": "push    ecx",
+    "line": "push    ecx; debugValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79BD81",
-    "line": "push    esi",
+    "line": "push    esi; debugOwner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79BD82",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79BD83",
-    "line": "push    1",
+    "line": "push    1; count",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x79BD85",
-    "line": "push    edi",
+    "line": "push    edi; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79BD86",
-    "line": "call    sub_79AA10",
+    "line": "call    OB_SFrondVertex_UninitializedFillN_010201A0; Low-level uninitialized_fill_n for trivial 0x38-byte SFrondVertex records. Oblivion call sites pass three effective operands plus three checked-iterator/debug operands that this body does not consume.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,49 +337,49 @@
   },
   {
     "ea": "0x79BDA9",
-    "line": "mov     eax, [esp+14h+arg_0]",
+    "line": "mov     eax, [esp+14h+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79BDAD",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79BDAE",
-    "line": "push    edi",
+    "line": "push    edi; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79BDAF",
-    "line": "push    esi",
+    "line": "push    esi; expectedOwner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79BDB0",
-    "line": "lea     ecx, [esp+20h+var_8]",
+    "line": "lea     ecx, [esp+20h+debugCookie]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x79BDB4",
-    "line": "push    ecx",
+    "line": "push    ecx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79BDB5",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79BDB7",
-    "line": "call    sub_79B560",
+    "line": "call    OB_stVector_SFrondVertex_InsertOne_010201A0; Checked insert-one wrapper for st_vector<SFrondVertex>. Preserves the pre-growth iterator index, delegates to InsertFill(count=1), then returns an 8-byte {owner,current} iterator.",
     "mnemonic": "call",
     "size": 5
   },

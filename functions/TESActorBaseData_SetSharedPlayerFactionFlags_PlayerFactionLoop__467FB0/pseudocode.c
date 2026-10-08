@@ -7,9 +7,9 @@ int __userpurge TESActorBaseData_SetSharedPlayerFactionFlags_::PlayerFactionLoop
 {
   int v5; // ecx
 
-  v5 = *(_DWORD *)eax0;
-  if ( *(_DWORD *)eax0 && (*(_BYTE *)(*(_DWORD *)v5 + 0x34) & 8) == 0 && *(_BYTE **)v5 == a3 )
-    return TESActorBaseData_SetSharedPlayerFactionFlags_::SetFactionFlags(v5, a4, a1, a3, a5);
+  v5 = *(_DWORD *)eax0; /*0x467fb0*/
+  if ( *(_DWORD *)eax0 && (*(_BYTE *)(*(_DWORD *)v5 + 0x34) & 8) == 0 && *(_BYTE **)v5 == a3 ) /*0x467fc6*/
+    return TESActorBaseData_SetSharedPlayerFactionFlags_::SetFactionFlags(v5, a4, a1, a3, a5); /*0x467fc6*/
   else
-    return TESActorBaseData_SetSharedPlayerFactionFlags_::PlayerFactionLoop_next(a1, eax0, a5);
+    return TESActorBaseData_SetSharedPlayerFactionFlags_::PlayerFactionLoop_next(a1, eax0, a4, a3, a5); /*0x467fc7*/
 }

@@ -1,1 +1,4 @@
-HMONITOR__
+struct HMONITOR__
+{
+int unused;
+};

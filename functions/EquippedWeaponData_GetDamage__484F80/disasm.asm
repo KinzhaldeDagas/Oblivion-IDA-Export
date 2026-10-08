@@ -1,9 +1,9 @@
-0x484F80: sub     esp, 18h
+0x484F80: sub     esp, 18h; TES4 authoritative call ABI: EntryData in ECX, Actor* owner as first stack argument, float damageOffset as second; returns damage through ST0 and ends with retn 8. This type is required to keep ArrowProjectile constructor stack analysis correct.
 0x484F83: fld     dword ptr ds:0A30634h
 0x484F89: push    ebx
 0x484F8A: push    esi
 0x484F8B: fstp    [esp+20h+var_18]
-0x484F8F: mov     esi, [esp+20h+arg_0]
+0x484F8F: mov     esi, [esp+20h+owner]
 0x484F93: mov     ebx, ecx
 0x484F95: push    edi
 0x484F96: mov     edi, [ebx+8]

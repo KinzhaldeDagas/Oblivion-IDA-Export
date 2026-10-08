@@ -1,7 +1,7 @@
 0x9EF810: fld1
 0x9EF812: push    ecx
 0x9EF813: fstp    [esp+4+var_4]; float
-0x9EF816: mov     ecx, offset fShockCoreColorB
+0x9EF816: mov     ecx, (offset flt_B37ED0+298h)
 0x9EF81B: push    offset aFshockcoreco_1; "fShockCoreColorB"
 0x9EF820: call    GameSetting_ConstrAndReg_float
 0x9EF825: push    offset sub_A209F0; void (__cdecl *)()

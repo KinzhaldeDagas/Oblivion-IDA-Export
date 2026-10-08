@@ -1,5 +1,5 @@
-int sub_9F9920()
+int InitSetting_sSkillNameDestruction()
 {
-  GameSetting_ConstrAndReg((int *)&unk_B3A0E4, (int)"sSkillNameDestruction", (int)"Destruction");
-  return atexit(sub_A23A00);
+  GameSetting_ConstrAndReg(&g_sSkillNameDestruction, "sSkillNameDestruction", "Destruction"); /*0x9f992f*/
+  return atexit(sub_A23A00); /*0x9f993f*/
 }

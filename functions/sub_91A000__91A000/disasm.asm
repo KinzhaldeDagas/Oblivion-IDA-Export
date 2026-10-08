@@ -166,7 +166,6 @@
 0x91A1FF: jle     loc_91A3D3
 0x91A205: xor     ebx, ebx
 0x91A207: jmp     short loc_91A210
-0x91A209: align 10h
 0x91A210: mov     ecx, [esp+0D0h+var_B4]
 0x91A214: mov     edx, [ecx+4]
 0x91A217: mov     eax, [edx+edi*4]
@@ -259,7 +258,7 @@
 0x91A372: push    ecx
 0x91A373: lea     ecx, [esp+0D8h+var_98+8]
 0x91A377: movaps  [esp+0D8h+var_58+8], xmm0
-0x91A37F: call    sub_88FE00
+0x91A37F: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x91A384: mov     ecx, [esi]
 0x91A386: mov     eax, [esp+0D0h+var_BC]
 0x91A38A: movaps  xmm1, [esp+0D0h+anonymous_2]

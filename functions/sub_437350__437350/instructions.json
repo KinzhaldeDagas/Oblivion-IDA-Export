@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x4373BE",
-    "line": "call    sub_434600",
+    "line": "call    sub_434600; QueuedFileEntry path copy helper. Allocates and copies source path string into entry +0x20.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x4373C8",
-    "line": "call    sub_434CB0",
+    "line": "call    sub_434CB0; QueuedFileEntry archive lookup helper. Hashes copied path at +0x20 and stores resolved archive/file entry pointer at +0x24.",
     "mnemonic": "call",
     "size": 5
   },
@@ -418,5 +418,77 @@
     "line": "retn    18h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AC460",
+    "line": "mov     ecx, [ebp-10h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AC463",
+    "line": "jmp     ??1LipTask@@UAE@XZ; LipTask::~LipTask(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AC468",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AC46B",
+    "line": "add     ecx, 28h ; '('",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9AC46E",
+    "line": "jmp     loc_435A90",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AC473",
+    "line": "mov     edx, dword ptr [esp+a2]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AC477",
+    "line": "lea     eax, [edx-0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AC47A",
+    "line": "mov     ecx, [edx-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AC47D",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AC47F",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AC484",
+    "line": "mov     eax, offset stru_AD9130",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AC489",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

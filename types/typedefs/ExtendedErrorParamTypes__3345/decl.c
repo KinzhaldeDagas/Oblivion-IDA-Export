@@ -1,1 +1,1 @@
-ExtendedErrorParamTypes
+typedef tagExtendedErrorParamTypes ExtendedErrorParamTypes;

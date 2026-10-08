@@ -1,9 +1,9 @@
-0x547070: sub     esp, 8
-0x547073: mov     eax, [esp+8+arg_4]
-0x547077: mov     ecx, [esp+8+arg_0]
-0x54707B: push    eax
-0x54707C: push    ecx
-0x54707D: call    Calc_LuckModifiedSkill
+0x547070: sub     esp, 8; Sidecar decode: Calc_WeaponDamage is actor/weapon agnostic after entry; BladeSkillsRestored substitutes only the skill-level argument after consuming the most recent exact source-return/formula-return token from its bounded per-thread stack. Unmatched or overflowed contexts retain native formula inputs.
+0x547073: mov     eax, [esp+8+luckValue]
+0x547077: mov     ecx, [esp+8+skillValue]
+0x54707B: push    eax; luckValue
+0x54707C: push    ecx; skillValue
+0x54707D: call    Calc_LuckModifiedSkill; Compute Luck-adjusted effective skill as skill + iActorLuckSkillBase + Luck*fActorLuckSkillMult, then clamp to 0..100. Defaults simplify to skill + (Luck-50)*0.4.
 0x547082: fstp    [esp+10h+var_8]
 0x547086: fild    [esp+10h+arg_10]
 0x54708A: mov     eax, [esp+10h+arg_8]

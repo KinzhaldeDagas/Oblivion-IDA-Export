@@ -1,11 +1,11 @@
-int __usercall unknown_libname_98@<eax>(double a1@<st1>, double a2@<st0>, int a3, __int16 a4, int a5, __int16 a6)
+int __usercall unknown_libname_98@<eax>(double a1@<st1>, double a2@<st0>, __int64 a3, __int64 a4)
 {
-  int v6; // edx
-  __int16 v7; // fps
+  int v4; // edx
+  __int16 v5; // fps
   int savedregs; // [esp+2D4h] [ebp+0h] BYREF
 
-  unknown_libname_111(a3, a4);
-  unknown_libname_111(a5, a6);
-  unknown_libname_115(v6, (int)&savedregs, v7, a1, a2);
-  return unknown_libname_99();
+  unknown_libname_111(a3); /*0x99094b*/
+  unknown_libname_111(a4); /*0x990959*/
+  unknown_libname_115(v4, (int)&savedregs, v5, a1, a2); /*0x990976*/
+  return unknown_libname_99((int)&savedregs, a2); /*0x990980*/
 }

@@ -1,1 +1,1 @@
-Stars
+struct Stars;

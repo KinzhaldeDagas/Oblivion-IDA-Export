@@ -1,4 +1,4 @@
-0x4492E0: sub     esp, 10h
+0x4492E0: sub     esp, 10h; Verified reader of activeFileState.retainActiveFile (+0xCD1): when zero, cleanup destroys and clears the stored active TESFile; when set, that file is retained. The only direct writer located so far is constructor initialization to zero; runtime setter remains Unknown.
 0x4492E3: push    ebx
 0x4492E4: push    ebp
 0x4492E5: push    esi
@@ -26,8 +26,8 @@
 0x449337: xor     edi, edi
 0x449339: lea     ebp, [esi+104h]
 0x44933F: nop
-0x449340: lea     ecx, [ebp-2Ch]
-0x449343: call    TESSkill_ClearTESSkill
+0x449340: lea     ecx, [ebp-2Ch]; this
+0x449343: call    TESSkill_ClearDataAndComponents; Reset TESSkill native data: actorValue=0xFFFFFFFF, governingAttribute=0, specialization=0, and both useValues=1.0; then clear descriptions/components.
 0x449348: lea     eax, [edi+0Ch]
 0x44934B: mov     [ebp+0], eax
 0x44934E: add     edi, 1
@@ -45,7 +45,7 @@
 0x44936D: mov     edx, [eax]
 0x44936F: push    eax
 0x449370: mov     [esi+64h], edx
-0x449373: call    FormHeapFree
+0x449373: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x449378: add     esp, 4
 0x44937B: jmp     short loc_449380
 0x44937D: mov     [esi+64h], ebx
@@ -71,7 +71,7 @@
 0x4493AD: mov     edx, [eax]
 0x4493AF: push    eax
 0x4493B0: mov     [esi+34h], edx
-0x4493B3: call    FormHeapFree
+0x4493B3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4493B8: add     esp, 4
 0x4493BB: jmp     short loc_4493C0
 0x4493BD: mov     [esi+34h], ebx
@@ -97,7 +97,7 @@
 0x4493ED: mov     edx, [eax]
 0x4493EF: push    eax
 0x4493F0: mov     [esi+3Ch], edx
-0x4493F3: call    FormHeapFree
+0x4493F3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4493F8: add     esp, 4
 0x4493FB: jmp     short loc_449400
 0x4493FD: mov     [esi+3Ch], ebx
@@ -122,7 +122,7 @@
 0x449433: mov     edx, [eax]
 0x449435: push    eax
 0x449436: mov     [esi+8Ch], edx
-0x44943C: call    FormHeapFree
+0x44943C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x449441: add     esp, 4
 0x449444: jmp     short loc_44944C
 0x449446: mov     [esi+8Ch], ebx
@@ -148,7 +148,7 @@
 0x44947D: mov     edx, [eax]
 0x44947F: push    eax
 0x449480: mov     [esi+14h], edx
-0x449483: call    FormHeapFree
+0x449483: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x449488: add     esp, 4
 0x44948B: jmp     short loc_449490
 0x44948D: mov     [esi+14h], ebx
@@ -174,7 +174,7 @@
 0x4494BD: mov     edx, [eax]
 0x4494BF: push    eax
 0x4494C0: mov     [esi+1Ch], edx
-0x4494C3: call    FormHeapFree
+0x4494C3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4494C8: add     esp, 4
 0x4494CB: jmp     short loc_4494D0
 0x4494CD: mov     [esi+1Ch], ebx
@@ -200,7 +200,7 @@
 0x4494FD: mov     edx, [eax]
 0x4494FF: push    eax
 0x449500: mov     [esi+54h], edx
-0x449503: call    FormHeapFree
+0x449503: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x449508: add     esp, 4
 0x44950B: jmp     short loc_449510
 0x44950D: mov     [esi+54h], ebx
@@ -226,7 +226,7 @@
 0x44953D: mov     edx, [eax]
 0x44953F: push    eax
 0x449540: mov     [esi+5Ch], edx
-0x449543: call    FormHeapFree
+0x449543: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x449548: add     esp, 4
 0x44954B: jmp     short loc_449550
 0x44954D: mov     [esi+5Ch], ebx
@@ -242,7 +242,7 @@
 0x449564: jnz     short loc_449530
 0x449566: mov     edi, [esi+74h]
 0x449569: cmp     edi, ebx
-0x44956B: jz      short loc_4495A6
+0x44956B: jz      short loc_4495A6; Verified: DataHandler_Clear drains/frees the listGlobals nodes at object +0x74 (word +0x1D). TESGlobal pointer values themselves are not destroyed here.
 0x44956D: lea     ecx, [ecx+0]
 0x449570: mov     eax, [esi+78h]
 0x449573: cmp     eax, ebx
@@ -252,7 +252,7 @@
 0x44957D: mov     edx, [eax]
 0x44957F: push    eax
 0x449580: mov     [esi+74h], edx
-0x449583: call    FormHeapFree
+0x449583: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x449588: add     esp, 4
 0x44958B: jmp     short loc_449590
 0x44958D: mov     [esi+74h], ebx
@@ -277,7 +277,7 @@
 0x4495C3: mov     edx, [eax]
 0x4495C5: push    eax
 0x4495C6: mov     [esi+84h], edx
-0x4495CC: call    FormHeapFree
+0x4495CC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4495D1: add     esp, 4
 0x4495D4: jmp     short loc_4495DC
 0x4495D6: mov     [esi+84h], ebx
@@ -303,7 +303,7 @@
 0x449613: mov     edx, [eax]
 0x449615: push    eax
 0x449616: mov     [esi+7Ch], edx
-0x449619: call    FormHeapFree
+0x449619: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x44961E: add     esp, 4
 0x449621: jmp     short loc_449626
 0x449623: mov     [esi+7Ch], ebx
@@ -317,7 +317,7 @@
 0x449635: mov     edi, [esi+7Ch]
 0x449638: cmp     edi, ebx
 0x44963A: jnz     short loc_449600
-0x44963C: call    sub_52ED10
+0x44963C: call    ClearStockDialogueTopicPointers; TESDataHandler clear invalidates every stock registry runtime TESTopic pointer without changing the fixed FormID/name table.
 0x449641: mov     eax, ds:0B333A0h
 0x449646: mov     [eax+30h], ebx
 0x449649: mov     ebp, [esi+0CCh]
@@ -342,7 +342,6 @@
 0x449683: jbe     short loc_4496B7
 0x449685: xor     ecx, ecx
 0x449687: jmp     short loc_449690
-0x449689: align 10h
 0x449690: mov     eax, [esi+0C4h]
 0x449696: cmp     [eax+ecx*4], ebx
 0x449699: lea     eax, [eax+ecx*4]
@@ -357,7 +356,7 @@
 0x4496BD: push    eax
 0x4496BE: mov     [esi+0C8h], ebx
 0x4496C4: mov     [esi+0C4h], ebx
-0x4496CA: call    FormHeapFree
+0x4496CA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4496CF: add     esp, 4
 0x4496D2: mov     edi, [esi+0Ch]
 0x4496D5: cmp     edi, ebx
@@ -371,7 +370,7 @@
 0x4496ED: mov     edx, [eax]
 0x4496EF: push    eax
 0x4496F0: mov     [esi+0Ch], edx
-0x4496F3: call    FormHeapFree
+0x4496F3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4496F8: add     esp, 4
 0x4496FB: jmp     short loc_449700
 0x4496FD: mov     [esi+0Ch], ebx
@@ -397,7 +396,7 @@
 0x44972D: mov     edx, [eax]
 0x44972F: push    eax
 0x449730: mov     [esi+6Ch], edx
-0x449733: call    FormHeapFree
+0x449733: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x449738: add     esp, 4
 0x44973B: jmp     short loc_449740
 0x44973D: mov     [esi+6Ch], ebx
@@ -423,7 +422,7 @@
 0x44976D: mov     edx, [eax]
 0x44976F: push    eax
 0x449770: mov     [esi+4Ch], edx
-0x449773: call    FormHeapFree
+0x449773: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x449778: add     esp, 4
 0x44977B: jmp     short loc_449780
 0x44977D: mov     [esi+4Ch], ebx
@@ -456,7 +455,7 @@
 0x4497C3: mov     edx, [eax]
 0x4497C5: push    eax
 0x4497C6: mov     [esi+44h], edx
-0x4497C9: call    FormHeapFree
+0x4497C9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4497CE: add     esp, 4
 0x4497D1: jmp     short loc_4497D6
 0x4497D3: mov     [esi+44h], ebx
@@ -484,7 +483,7 @@
 0x44980D: mov     edx, [eax]
 0x44980F: push    eax
 0x449810: mov     [esi+2Ch], edx
-0x449813: call    FormHeapFree
+0x449813: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x449818: add     esp, 4
 0x44981B: jmp     short loc_449820
 0x44981D: mov     [esi+2Ch], ebx
@@ -510,7 +509,7 @@
 0x44984D: mov     edx, [eax]
 0x44984F: push    eax
 0x449850: mov     [esi+24h], edx
-0x449853: call    FormHeapFree
+0x449853: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x449858: add     esp, 4
 0x44985B: jmp     short loc_449860
 0x44985D: mov     [esi+24h], ebx
@@ -536,7 +535,7 @@
 0x44988D: mov     edx, [eax]
 0x44988F: push    eax
 0x449890: mov     [esi+4], edx
-0x449893: call    FormHeapFree
+0x449893: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x449898: add     esp, 4
 0x44989B: jmp     short loc_4498A0
 0x44989D: mov     [esi+4], ebx
@@ -561,7 +560,7 @@
 0x4498D3: mov     edx, [eax]
 0x4498D5: push    eax
 0x4498D6: mov     [esi+94h], edx
-0x4498DC: call    FormHeapFree
+0x4498DC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4498E1: add     esp, 4
 0x4498E4: jmp     short loc_4498EC
 0x4498E6: mov     [esi+94h], ebx
@@ -587,7 +586,7 @@
 0x449923: mov     edx, [eax]
 0x449925: push    eax
 0x449926: mov     [esi+9Ch], edx
-0x44992C: call    FormHeapFree
+0x44992C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x449931: add     esp, 4
 0x449934: jmp     short loc_44993C
 0x449936: mov     [esi+9Ch], ebx
@@ -613,7 +612,7 @@
 0x449973: mov     edx, [eax]
 0x449975: push    eax
 0x449976: mov     [esi+0A4h], edx
-0x44997C: call    FormHeapFree
+0x44997C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x449981: add     esp, 4
 0x449984: jmp     short loc_44998C
 0x449986: mov     [esi+0A4h], ebx
@@ -639,7 +638,7 @@
 0x4499C8: mov     edx, [eax]
 0x4499CA: push    eax
 0x4499CB: mov     [esi+0B4h], edx
-0x4499D1: call    FormHeapFree
+0x4499D1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4499D6: add     esp, 4
 0x4499D9: jmp     short loc_4499E1
 0x4499DB: mov     [esi+0B4h], ebx
@@ -664,7 +663,7 @@
 0x449A17: mov     edx, [eax]
 0x449A19: push    eax
 0x449A1A: mov     [esi+0ACh], edx
-0x449A20: call    FormHeapFree
+0x449A20: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x449A25: add     esp, 4
 0x449A28: jmp     short loc_449A30
 0x449A2A: mov     [esi+0ACh], ebx
@@ -678,8 +677,8 @@
 0x449A3F: mov     edi, [esi+0ACh]
 0x449A45: cmp     edi, ebx
 0x449A47: jnz     short loc_449A04
-0x449A49: mov     ecx, [esi+0BCh]
-0x449A4F: call    sub_4A6380
+0x449A49: mov     ecx, [esi+0BCh]; self
+0x449A4F: call    TESRegionList_Clear; Verified: frees all BSSimpleList nodes and, only when ownsRegionMemory is set, destroys each TESRegion object.
 0x449A54: mov     ecx, ds:0B34428h
 0x449A5A: cmp     ecx, ebx
 0x449A5C: jz      short loc_449A67
@@ -754,12 +753,12 @@
 0x449B45: jle     loc_449C0E
 0x449B4B: push    0FFFFFFFFh; a2
 0x449B4D: mov     ecx, edi; this
-0x449B4F: call    TESForm_GetOverrideFile
+0x449B4F: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x449B54: test    eax, eax
 0x449B56: jz      short loc_449B78
 0x449B58: push    0FFFFFFFFh; a2
 0x449B5A: mov     ecx, edi; this
-0x449B5C: call    TESForm_GetOverrideFile
+0x449B5C: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x449B61: mov     ebp, eax
 0x449B63: add     ebp, 1Ch
 0x449B66: jmp     short loc_449B7D
@@ -803,7 +802,7 @@
 0x449BE0: mov     eax, [ebp+4]
 0x449BE3: mov     ebx, [eax+4]
 0x449BE6: push    eax
-0x449BE7: call    FormHeapFree
+0x449BE7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x449BEC: add     esp, 4
 0x449BEF: test    ebx, ebx
 0x449BF1: mov     [ebp+4], ebx
@@ -849,7 +848,7 @@
 0x449C85: mov     ecx, edi
 0x449C87: call    TESFile_destr
 0x449C8C: push    edi
-0x449C8D: call    FormHeapFree
+0x449C8D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x449C92: add     esp, 4
 0x449C95: mov     [esi+8C4h], ebp
 0x449C9B: mov     dword ptr [esi+8C0h], 800h

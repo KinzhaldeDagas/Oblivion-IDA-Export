@@ -16,7 +16,7 @@
 0x4A21E4: mov     ecx, [eax+4]
 0x4A21E7: mov     esi, [esi]
 0x4A21E9: push    ecx
-0x4A21EA: call    FormHeapFree
+0x4A21EA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4A21EF: add     esp, 4
 0x4A21F2: test    esi, esi
 0x4A21F4: jnz     short loc_4A21E2

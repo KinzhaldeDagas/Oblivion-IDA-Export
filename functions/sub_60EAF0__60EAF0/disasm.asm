@@ -61,18 +61,18 @@
 0x60EBAC: mov     eax, [ecx]
 0x60EBAE: mov     edx, [eax+49Ch]
 0x60EBB4: call    edx
-0x60EBB6: mov     ecx, esi
-0x60EBB8: call    sub_5E0380
+0x60EBB6: mov     ecx, esi; this
+0x60EBB8: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x60EBBD: test    eax, eax
 0x60EBBF: jz      short loc_60EBDA
-0x60EBC1: mov     ecx, esi
-0x60EBC3: call    sub_5E0380
-0x60EBC8: mov     ecx, eax
-0x60EBCA: call    sub_567770
+0x60EBC1: mov     ecx, esi; this
+0x60EBC3: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
+0x60EBC8: mov     ecx, eax; this
+0x60EBCA: call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.
 0x60EBCF: test    al, al
 0x60EBD1: jz      short loc_60EBDA
 0x60EBD3: mov     ecx, esi; int
-0x60EBD5: call    sub_5EAE70
+0x60EBD5: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x60EBDA: mov     ecx, [esi+58h]
 0x60EBDD: mov     eax, [ecx]
 0x60EBDF: mov     edx, [eax+20h]
@@ -113,7 +113,7 @@
 0x60EC34: push    0; a3
 0x60EC36: push    edi; a2
 0x60EC37: mov     ecx, esi; this
-0x60EC39: call    Actor_AddPackage?
+0x60EC39: call    Actor_AddPackage?; 3DTheft: xrefs ignore this function's return value; use current package/process state after call, not AL/EAX, as the package assignment result.
 0x60EC3E: add     dword ptr [edi+54h], 1
 0x60EC42: mov     ecx, [esi+58h]
 0x60EC45: mov     eax, [ecx]

@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 7,
+  "chunks": [
+    [
+      "0x4D31D0",
+      "0x4D3202"
+    ]
+  ],
+  "chunks_sha256": "6cf2cfc4658296c687dbf132e24f74ea155df48ba349130f1759c9489d3c9385",
+  "comment_regular": "Verified NiTArray<float> append helper used for the three DistantLODCellObjectData arrays: grows on capacity exhaustion, appends one float and returns the previous element count/index.",
+  "comment_repeatable": "Verified NiTArray<float> append helper used for the three DistantLODCellObjectData arrays: grows on capacity exhaustion, appends one float and returns the previous element count/index.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4D31D0",
+  "display_name": "NiTArray_float_Append",
   "end_ea": "0x4D3202",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4D31D0",
+  "name": "NiTArray_float_Append",
   "segment": ".text",
   "sha256": "6cf2cfc4658296c687dbf132e24f74ea155df48ba349130f1759c9489d3c9385",
   "size": 50,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4D31D0",
-  "type": "unsigned int __thiscall(unsigned __int16 *this, float *)",
+  "total_chunk_size": 50,
+  "type": "unsigned int __thiscall(NiTArray_float *this, float *value)",
   "xrefs_from_count": 23,
   "xrefs_to_count": 7
 }

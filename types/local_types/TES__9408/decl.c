@@ -1,1 +1,47 @@
-TES
+struct __cppobj TES
+{
+TES_vtbl *__vftable /*VFT*/;
+GridDistantArray *gridDistantArray;
+GridCellArray *gridCellArray;
+NiNode *ObjectLODRoot;
+NiNode *LandLOD;
+BSTempNodeManager *tempNodeManager;
+NiDirectionalLight *niDirectionalLight;
+BSFogProperty *fogProperty;
+int extXCoord;
+int extYCoord;
+int unk28;
+int unk2C;
+TESObjectCELL *currentExteriorCell;
+TESObjectCELL *currentInteriorCell;
+TESObjectCELL **interiorCellBufferArray;
+TESObjectCELL **exteriorCellBufferArray;
+UInt32 unk40;
+UInt32 unk44;
+UInt32 unk48;
+UInt32 unk4C;
+UInt8 unk50;
+UInt8 unk51;
+UInt8 unk52;
+UInt8 CellBorders;
+WaterManager *waterManager;
+WaterPlaneData *waterNodeData;
+Sky *sky;
+UInt32 unk60;
+UInt32 unk64;
+UInt32 unk68;
+float unk6C;
+float unk70;
+TESWorldSpace *currentWorldSpace;
+UInt32 unk78;
+UInt32 unk7C;
+UInt32 unk80;
+UInt32 unk84;
+UInt32 unk88;
+tListUnk8C list8C;
+NiSourceTexture *bloodDecals[3];
+tListVoid listA0;
+UInt8 unkA8;
+UInt8 unkA9;
+UInt8 padA8[2];
+};

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x9FA6E0",
-    "line": "fld     ds:flt_A3F4E0",
+    "line": "fld     ds:flt_A3F4E0; Verified setting registration: registers GameSettingFloat fPathMustLockpickPenalty with default 40960.0 and pairs it with atexit cleanup GameSettings_Unregister_fPathMustLockpickPenalty.",
     "mnemonic": "fld",
     "size": 6
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x9FA6EF",
-    "line": "mov     ecx, offset flt_B3A438",
+    "line": "mov     ecx, offset fPathMustLockpickPenalty",
     "mnemonic": "mov",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x9FA6F9",
-    "line": "push    offset sub_A240A0; void (__cdecl *)()",
+    "line": "push    offset GameSettings_Unregister_fPathMustLockpickPenalty; void (__cdecl *)()",
     "mnemonic": "push",
     "size": 5
   },

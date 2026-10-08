@@ -1,4 +1,4 @@
-0x8002F0: push    0FFFFFFFFh
+0x8002F0: push    0FFFFFFFFh; MoonSugarEffect decode: Refraction constant maps expose texRatio0/texRatio1 and Ambient Color; two-input pass uses source plus dword_B474AC texture.
 0x8002F2: push    offset SEH_803C90
 0x8002F7: mov     eax, large fs:0
 0x8002FD: push    eax
@@ -85,7 +85,7 @@
 0x8003F5: mov     edx, [ecx]
 0x8003F7: mov     eax, [edx+18h]
 0x8003FA: push    0
-0x8003FC: push    offset dword_B46498
+0x8003FC: push    offset flt_B46498
 0x800401: push    4
 0x800403: push    10h
 0x800405: push    offset EmptyString
@@ -106,3 +106,20 @@
 0x800435: pop     esi
 0x800436: add     esp, 10h
 0x800439: retn    4
+0x9D00B0: mov     eax, [ebp-10h]
+0x9D00B3: push    eax
+0x9D00B4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D00B9: pop     ecx
+0x9D00BA: retn
+0x9D00BB: mov     eax, [ebp-10h]
+0x9D00BE: push    eax
+0x9D00BF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D00C4: pop     ecx
+0x9D00C5: retn
+0x9D00C6: mov     edx, [esp+arg_4]
+0x9D00CA: lea     eax, [edx-0Ch]
+0x9D00CD: mov     ecx, [edx-10h]
+0x9D00D0: xor     ecx, eax
+0x9D00D2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D00D7: mov     eax, offset stru_AF8B40
+0x9D00DC: jmp     ___CxxFrameHandler3

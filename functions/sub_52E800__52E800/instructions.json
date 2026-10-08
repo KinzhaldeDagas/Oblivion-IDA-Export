@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x52E800",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+actorValue]; Oblivion-native checked skill-name lookup. Accepts only the 21 skill actor values (0x0C..0x20) before indexing the skill-name table.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,13 +25,13 @@
   },
   {
     "ea": "0x52E80C",
-    "line": "mov     [esp+arg_0], eax",
+    "line": "mov     [esp+actorValue], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x52E810",
-    "line": "jmp     ActorValue_GetName",
+    "line": "jmp     ActorValue_GetName; Return the localized actor-value display name through g_actorValueNameSettings. Native skills occupy the contiguous SkillActorValue range 0x0C..0x20.",
     "mnemonic": "jmp",
     "size": 5
   },

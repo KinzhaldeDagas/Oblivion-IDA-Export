@@ -6,7 +6,7 @@
 0xA149AD: push    0
 0xA149AF: push    0
 0xA149B1: push    18h
-0xA149B3: push    offset dword_BA8620
+0xA149B3: push    offset unk_BA8620
 0xA149B8: push    offset aHkmalleablec_0; "hkMalleableConstraintData"
 0xA149BD: mov     ecx, offset unk_BA8D94
 0xA149C2: call    sub_90D190

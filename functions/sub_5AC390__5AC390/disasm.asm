@@ -46,7 +46,7 @@
 0x5AC41B: retn    8
 0x5AC41E: cmp     eax, 0Ch
 0x5AC421: jnz     short loc_5AC42D
-0x5AC423: call    sub_5C1F70
+0x5AC423: call    Input_ProcessQuickSlotHotkeys
 0x5AC428: mov     al, 1
 0x5AC42A: retn    8
 0x5AC42D: xor     al, al

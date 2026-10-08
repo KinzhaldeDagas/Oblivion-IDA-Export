@@ -1,118 +1,189 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "TESNPCMembr",
+  "definition": "struct TESNPCMembr\n{\nTESActorBaseMembr super;\nTESRaceForm form;\nUInt8 skillLevels[21];\nUInt8 pad101[3];\nTESClass *npcClass;\nNPC_Unk unk1[4];\nNPC_Unk unk2[4];\nTESHair *hair;\nfloat hairLength; ///< FaceGen hair morph weight. Native Randomize Face and the Race/Sex Length slider use [0,1].\nTESEyes *eyes;\nBSFaceGenNiNode *face0;\nBSFaceGenNiNode *face1;\nUInt32 unk6;\nUInt32 unk7;\nTESCombatStyle *combatStyle;\nUInt8 hairColorRGB[4];\nUInt32 unk8;\nNiTArray_void facegenUndo;\n}\n",
   "id": 18374686479672001846,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00053.",
       "name": "super",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 224
+      "size": 224,
+      "type": "TESActorBaseMembr"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00054.",
       "name": "form",
       "offset": 224,
-      "offset_hex": "0xe0",
-      "size": 8
+      "offset_hex": "0xE0",
+      "size": 8,
+      "type": "TESRaceForm"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00055.",
       "name": "skillLevels",
       "offset": 232,
-      "offset_hex": "0xe8",
-      "size": 21
+      "offset_hex": "0xE8",
+      "size": 21,
+      "type": "UInt8[21]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00056.",
       "name": "pad101",
       "offset": 253,
-      "offset_hex": "0xfd",
-      "size": 3
+      "offset_hex": "0xFD",
+      "size": 3,
+      "type": "UInt8[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00057.",
       "name": "npcClass",
       "offset": 256,
       "offset_hex": "0x100",
-      "size": 4
+      "size": 4,
+      "type": "TESClass *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00058.",
       "name": "unk1",
       "offset": 260,
       "offset_hex": "0x104",
-      "size": 96
+      "size": 96,
+      "type": "NPC_Unk[4]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00059.",
       "name": "unk2",
       "offset": 356,
       "offset_hex": "0x164",
-      "size": 96
+      "size": 96,
+      "type": "NPC_Unk[4]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000510.",
       "name": "hair",
       "offset": 452,
-      "offset_hex": "0x1c4",
-      "size": 4
+      "offset_hex": "0x1C4",
+      "size": 4,
+      "type": "TESHair *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "FaceGen hair morph weight. Native Randomize Face and the Race/Sex Length slider use [0,1].",
       "name": "hairLength",
       "offset": 456,
-      "offset_hex": "0x1c8",
-      "size": 4
+      "offset_hex": "0x1C8",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000512.",
       "name": "eyes",
       "offset": 460,
-      "offset_hex": "0x1cc",
-      "size": 4
+      "offset_hex": "0x1CC",
+      "size": 4,
+      "type": "TESEyes *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000513.",
       "name": "face0",
       "offset": 464,
-      "offset_hex": "0x1d0",
-      "size": 4
+      "offset_hex": "0x1D0",
+      "size": 4,
+      "type": "BSFaceGenNiNode *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000514.",
       "name": "face1",
       "offset": 468,
-      "offset_hex": "0x1d4",
-      "size": 4
+      "offset_hex": "0x1D4",
+      "size": 4,
+      "type": "BSFaceGenNiNode *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000515.",
       "name": "unk6",
       "offset": 472,
-      "offset_hex": "0x1d8",
-      "size": 4
+      "offset_hex": "0x1D8",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000516.",
       "name": "unk7",
       "offset": 476,
-      "offset_hex": "0x1dc",
-      "size": 4
+      "offset_hex": "0x1DC",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000517.",
       "name": "combatStyle",
       "offset": 480,
-      "offset_hex": "0x1e0",
-      "size": 4
+      "offset_hex": "0x1E0",
+      "size": 4,
+      "type": "TESCombatStyle *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000518.",
       "name": "hairColorRGB",
       "offset": 484,
-      "offset_hex": "0x1e4",
-      "size": 4
+      "offset_hex": "0x1E4",
+      "size": 4,
+      "type": "UInt8[4]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000519.",
       "name": "unk8",
       "offset": 488,
-      "offset_hex": "0x1e8",
-      "size": 4
+      "offset_hex": "0x1E8",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000520.",
       "name": "facegenUndo",
       "offset": 492,
-      "offset_hex": "0x1ec",
-      "size": 16
+      "offset_hex": "0x1EC",
+      "size": 16,
+      "type": "NiTArray_void"
     }
   ],
   "name": "TESNPCMembr",
+  "ordinal": 9578,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 508
 }

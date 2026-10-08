@@ -1,5 +1,5 @@
 // attributes: thunk
-LONG __thiscall sub_717900(unsigned __int16 *this, _DWORD *a2)
+void __thiscall j_NiGeometry_LinkObject(NiGeometry *this, void *a2)
 {
-  return sub_723350(this, a2);
+  NiGeometry_LinkObject(this, a2); /*0x717900*/
 }

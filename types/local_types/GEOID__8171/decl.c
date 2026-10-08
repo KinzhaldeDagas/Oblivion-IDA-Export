@@ -1,1 +1,1 @@
-GEOID
+typedef LONG GEOID;

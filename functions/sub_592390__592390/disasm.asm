@@ -1,4 +1,4 @@
-0x592390: push    0FFFFFFFFh
+0x592390: push    0FFFFFFFFh; TileText virtual slot 2: builds glyph geometry from FontManager FontInfo data directly in the InterfaceManager scene.
 0x592392: push    offset SEH_592390
 0x592397: mov     eax, large fs:0
 0x59239D: push    eax
@@ -27,22 +27,22 @@
 0x5923EB: fstp    [esp+0BCh+var_70]
 0x5923EF: mov     ecx, esi
 0x5923F1: call    Tile_GetFloat
-0x5923F6: call    Double_To_SInt32
+0x5923F6: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5923FB: push    0FD5h
 0x592400: mov     ecx, esi
 0x592402: mov     [esp+0BCh+var_9C], eax
 0x592406: call    Tile_GetFloat
-0x59240B: call    Double_To_SInt32
+0x59240B: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x592410: push    0FD6h
 0x592415: mov     ecx, esi
 0x592417: mov     [esp+0BCh+var_8C], eax
 0x59241B: call    Tile_GetFloat
-0x592420: call    Double_To_SInt32
+0x592420: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x592425: push    0FD1h
 0x59242A: mov     ecx, esi
 0x59242C: mov     [esp+0BCh+var_90], eax
 0x592430: call    Tile_GetFloat
-0x592435: call    Double_To_SInt32
+0x592435: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x59243A: push    0FD3h
 0x59243F: mov     ecx, esi
 0x592441: mov     [esp+0BCh+var_84], eax
@@ -60,14 +60,14 @@
 0x592465: fstp    [esp+0B8h+var_A0]
 0x592469: fld     [esp+0B8h+var_A0]
 0x59246D: fsub    qword ptr ds:0A2F928h
-0x592473: call    Double_To_SInt32
+0x592473: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x592478: mov     edi, eax
 0x59247A: call    FontManager_GetSingleton
 0x59247F: mov     ebp, [eax+edi*4]
 0x592482: push    0FD7h
 0x592487: mov     ecx, esi
 0x592489: call    Tile_GetFloat
-0x59248E: call    Double_To_SInt32
+0x59248E: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x592493: push    0FD8h
 0x592498: mov     ecx, esi
 0x59249A: mov     [esp+0BCh+var_88], eax
@@ -230,8 +230,8 @@
 0x59267D: add     esp, 10h
 0x592680: cmp     [esp+0B8h+var_9C], 1
 0x592685: jge     short loc_592695
-0x592687: call    sub_57D7A0
-0x59268C: call    Double_To_SInt32
+0x592687: call    UI_GetVirtualScreenWidth; Returns virtual UI width: 1280 for portrait/square, otherwise aspect*960. Layout coordinates are independent of output pixel resolution.
+0x59268C: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x592691: mov     [esp+0B8h+var_9C], eax
 0x592695: cmp     [esp+0B8h+var_90], 1
 0x59269A: jge     short loc_5926A4
@@ -372,13 +372,13 @@
 0x5928AB: jnz     short loc_5928E5
 0x5928AD: mov     eax, [esp+0B8h+var_14]
 0x5928B4: push    eax
-0x5928B5: call    FormHeapFree
+0x5928B5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5928BA: mov     ecx, [esp+0BCh+var_98.m_data]
 0x5928BE: push    ecx
 0x5928BF: mov     [esp+0C0h+var_14], ebx
 0x5928C6: mov     [esp+0C0h+var_E], bx
 0x5928CE: mov     [esp+0C0h+var_10], bx
-0x5928D6: call    FormHeapFree
+0x5928D6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5928DB: add     esp, 8
 0x5928DE: xor     eax, eax
 0x5928E0: jmp     loc_592A46
@@ -386,31 +386,31 @@
 0x5928EC: mov     edx, [esp+0B8h+var_30]
 0x5928F3: mov     eax, [esp+0B8h+var_2C]
 0x5928FA: push    ecx
-0x5928FB: fstp    dword ptr [esp+0BCh+ArgList+4]; a3
-0x5928FE: push    0FEFh; a2
+0x5928FB: fstp    [esp+0BCh+ArgList+4]; value
+0x5928FE: push    0FEFh; propertyCode
 0x592903: mov     ecx, esi; this
 0x592905: mov     [esp+0C0h+var_9C], edx
 0x592909: mov     [esp+0C0h+var_8C], eax
-0x59290D: call    Tile_SetFloat
+0x59290D: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x592912: mov     edx, [esp+0B8h+var_14]
 0x592919: mov     cl, [esp+0B8h+var_18]
 0x592920: push    edx
 0x592921: mov     [esi+50h], cl
 0x592924: mov     byte ptr [esp+0BCh+var_4], bl
-0x59292B: call    FormHeapFree
+0x59292B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x592930: add     esp, 4
 0x592933: fild    [esp+0B8h+var_9C]
 0x592937: push    ecx
 0x592938: mov     ecx, esi; this
-0x59293A: fstp    dword ptr [esp+0BCh+ArgList+4]; a3
-0x59293D: push    0FCBh; a2
-0x592942: call    Tile_SetFloat
+0x59293A: fstp    [esp+0BCh+ArgList+4]; value
+0x59293D: push    0FCBh; propertyCode
+0x592942: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x592947: fild    [esp+0B8h+var_8C]
 0x59294B: push    ecx
 0x59294C: mov     ecx, esi; this
-0x59294E: fstp    dword ptr [esp+0BCh+ArgList+4]; a3
-0x592951: push    0FCAh; a2
-0x592956: call    Tile_SetFloat
+0x59294E: fstp    [esp+0BCh+ArgList+4]; value
+0x592951: push    0FCAh; propertyCode
+0x592956: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59295B: mov     edi, 1
 0x592960: or      [esi+2Ch], edi
 0x592963: push    0FC8h
@@ -456,7 +456,7 @@
 0x5929DF: mov     ecx, [esi+24h]
 0x5929E2: call    NiNode_UpdateDynamicEffectState
 0x5929E7: mov     ecx, [esi+24h]; this
-0x5929EA: call    NiAVObject_InitializePropertyState
+0x5929EA: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x5929EF: push    edi; arg1
 0x5929F0: push    ebx; canCreate
 0x5929F1: call    InterfaceManager_GetSingleton
@@ -478,11 +478,11 @@
 0x592A24: mov     ecx, [esi+24h]
 0x592A27: push    eax
 0x592A28: mov     byte ptr [esp+0BCh+var_4], bl
-0x592A2F: call    NiNode_AddNiExtraData
+0x592A2F: call    NiObjectNET_AddExtraData; Pass269 ABI and ownership proof: NiObjectNET::AddExtraData consumes one stack argument with RET 4 and also expects owning object in ECX/EBX at this build's callsites. The plugin wrapper must not execute caller-side ADD ESP,4.
 0x592A34: mov     edx, [esp+0B8h+var_98.m_data]
 0x592A38: mov     esi, [esi+24h]
 0x592A3B: push    edx
-0x592A3C: call    FormHeapFree
+0x592A3C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x592A41: add     esp, 4
 0x592A44: mov     eax, esi
 0x592A46: mov     ecx, dword ptr [esp+0B8h+var_C]
@@ -494,3 +494,43 @@
 0x592A58: pop     ebx
 0x592A59: add     esp, 0A4h
 0x592A5F: retn
+0x592370: push    esi
+0x592371: mov     esi, ecx
+0x592373: mov     eax, [esi+38h]
+0x592376: push    eax
+0x592377: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x59237C: xor     eax, eax
+0x59237E: add     esp, 4
+0x592381: mov     [esi+38h], eax
+0x592384: mov     [esi+3Eh], ax
+0x592388: mov     [esi+3Ch], ax
+0x59238C: pop     esi
+0x59238D: retn
+0x9BFC80: lea     ecx, [ebp-98h]; void *
+0x9BFC86: jmp     BSStringT_Clear
+0x9BFC8B: mov     eax, [ebp-88h]
+0x9BFC91: push    eax
+0x9BFC92: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BFC97: pop     ecx
+0x9BFC98: retn
+0x9BFC99: mov     eax, [ebp-70h]
+0x9BFC9C: push    eax
+0x9BFC9D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BFCA2: pop     ecx
+0x9BFCA3: retn
+0x9BFCA4: lea     ecx, [ebp-4Ch]
+0x9BFCA7: jmp     loc_592370
+0x9BFCAC: mov     ecx, [ebp-88h]; void *
+0x9BFCB2: jmp     BSStringT_Clear
+0x9BFCB7: mov     eax, [ebp-88h]
+0x9BFCBD: push    eax
+0x9BFCBE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BFCC3: pop     ecx
+0x9BFCC4: retn
+0x9BFCC5: mov     edx, [esp+arg_4]
+0x9BFCC9: lea     eax, [edx-0A8h]
+0x9BFCCF: mov     ecx, [edx-0ACh]
+0x9BFCD5: xor     ecx, eax
+0x9BFCD7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BFCDC: mov     eax, offset stru_AE90C8
+0x9BFCE1: jmp     ___CxxFrameHandler3

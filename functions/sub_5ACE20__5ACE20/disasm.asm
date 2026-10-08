@@ -29,9 +29,9 @@
 0x5ACE6E: mov     ebp, eax
 0x5ACE70: call    InterfaceManager_GetDepth
 0x5ACE75: fstp    [esp+28h+var_14]
-0x5ACE79: mov     ecx, [ebp+68h]; TileWindow *
+0x5ACE79: mov     ecx, [ebp+68h]; this
 0x5ACE7C: push    offset aDataMenusLevel; "Data\\Menus\\levelup_menu.xml"
-0x5ACE81: call    Menu_LoadXML
+0x5ACE81: call    Tile__ReadFile; Verified: SDK ReadXML entry. Builds named tree under receiver via 0x590330, connects/evaluates traits via 0x58CF40, registers subtemplates with owning Menu, frees build storage, refreshes returned subtree via 0x58FBA0. Returns first created tile. Fallout analogue 0x827E2588; cache/cleanup differs.
 0x5ACE86: mov     esi, eax
 0x5ACE88: mov     ecx, esi
 0x5ACE8A: call    Tile_GetParentMenu
@@ -84,10 +84,10 @@
 0x5ACF2D: jp      short loc_5ACF43
 0x5ACF2F: fld     [esp+28h+var_14]
 0x5ACF33: push    ecx
-0x5ACF34: fstp    [esp+2Ch+a2]; a3
-0x5ACF37: push    0FABh; a2
+0x5ACF34: fstp    [esp+2Ch+a2]; value
+0x5ACF37: push    0FABh; propertyCode
 0x5ACF3C: mov     ecx, esi; this
-0x5ACF3E: call    Tile_SetFloat
+0x5ACF3E: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5ACF43: xor     ecx, ecx
 0x5ACF45: cmp     byte ptr [ebp+8], 1
 0x5ACF49: setnz   cl
@@ -95,9 +95,9 @@
 0x5ACF50: fild    [esp+28h+var_14]
 0x5ACF54: push    ecx
 0x5ACF55: mov     ecx, esi; this
-0x5ACF57: fstp    [esp+2Ch+a2]; a3
-0x5ACF5A: push    0FAEh; a2
-0x5ACF5F: call    Tile_SetFloat
+0x5ACF57: fstp    [esp+2Ch+a2]; value
+0x5ACF5A: push    0FAEh; propertyCode
+0x5ACF5F: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5ACF64: xor     ebp, ebp
 0x5ACF66: push    ebp
 0x5ACF67: call    ActorValue_GetIcon
@@ -138,7 +138,7 @@
 0x5ACFE2: call    Tile_SetString
 0x5ACFE7: mov     ecx, edi
 0x5ACFE9: mov     dword ptr [edi+2Ch], 3
-0x5ACFF0: call    sub_5ACB60
+0x5ACFF0: call    LevelUpMenu_CreateAttributeRows; Creates the eight Oblivion attribute rows for LevelUpMenu, displays the bonus derived from the oldest queued bucket, and disables attributes whose base value is already 100.
 0x5ACFF5: mov     edx, ds:0B33398h
 0x5ACFFB: mov     ebp, [edx+24h]
 0x5ACFFE: test    ebp, ebp
@@ -158,10 +158,10 @@
 0x5AD027: call    EnableMenu
 0x5AD02C: fld     dword ptr ds:0A379B4h
 0x5AD032: push    ecx
-0x5AD033: fstp    [esp+2Ch+a2]; a3
-0x5AD036: push    0FA1h; a2
+0x5AD033: fstp    [esp+2Ch+a2]; value
+0x5AD036: push    0FA1h; propertyCode
 0x5AD03B: mov     ecx, esi; this
-0x5AD03D: call    Tile_SetFloat
+0x5AD03D: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5AD042: cmp     dword ptr [edi+2Ch], 0
 0x5AD046: jnz     short loc_5AD07E
 0x5AD048: mov     eax, ds:0B38CF0h
@@ -174,14 +174,14 @@
 0x5AD05E: call    ShowUIMessageBox
 0x5AD063: fld1
 0x5AD065: add     esp, 10h
-0x5AD068: fstp    [esp+2Ch+a2]; a3
-0x5AD06B: push    0FA1h; a2
+0x5AD068: fstp    [esp+2Ch+a2]; value
+0x5AD06B: push    0FA1h; propertyCode
 0x5AD070: mov     ecx, esi; this
 0x5AD072: mov     dword ptr [ebx+24h], 4
-0x5AD079: call    Tile_SetFloat
+0x5AD079: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5AD07E: mov     edx, [esp+28h+var_14]
 0x5AD082: push    edx
-0x5AD083: call    FormHeapFree
+0x5AD083: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5AD088: add     esp, 4
 0x5AD08B: mov     al, 1
 0x5AD08D: mov     ecx, dword ptr [esp+28h+var_C]
@@ -210,3 +210,12 @@
 0x5AD0C2: pop     ebx
 0x5AD0C3: add     esp, 14h
 0x5AD0C6: retn
+0x9B5BD0: lea     ecx, [ebp-14h]; void *
+0x9B5BD3: jmp     BSStringT_Clear
+0x9B5BD8: mov     edx, [esp+arg_4]
+0x9B5BDC: lea     eax, [edx-18h]
+0x9B5BDF: mov     ecx, [edx-1Ch]
+0x9B5BE2: xor     ecx, eax
+0x9B5BE4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B5BE9: mov     eax, offset stru_AE0BB4
+0x9B5BEE: jmp     ___CxxFrameHandler3

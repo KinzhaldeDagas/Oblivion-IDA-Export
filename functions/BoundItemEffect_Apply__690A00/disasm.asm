@@ -10,15 +10,15 @@
 0x690A17: jz      loc_690ADA
 0x690A1D: test    eax, eax
 0x690A1F: jz      loc_690ADA
-0x690A25: mov     ecx, [esi+8]
+0x690A25: mov     ecx, [esi+8]; magicItem
 0x690A28: test    ecx, ecx
 0x690A2A: jz      loc_690AD8
 0x690A30: cmp     dword ptr [esi+0Ch], 0
 0x690A34: jz      loc_690AD8
 0x690A3A: push    ebp
 0x690A3B: push    edi
-0x690A3C: push    0
-0x690A3E: call    MagicItem_GetFXEffect
+0x690A3C: push    0; effectIndex
+0x690A3E: call    MagicItem_GetFXEffect; Verified (Oblivion): MagicItem_GetFXEffect returns the effect's EffectSetting pointer; MagicShaderHitEffect constructors/PostLink dereference its +0x78 EffectSetting::effectShader field.
 0x690A43: mov     ecx, [esi+8]
 0x690A46: mov     edi, eax
 0x690A48: mov     eax, [esi+0Ch]
@@ -26,11 +26,11 @@
 0x690A4E: push    0
 0x690A50: push    eax
 0x690A51: add     ecx, 0Ch
-0x690A54: call    EffectItemList_GetStrongestItem
+0x690A54: call    EffectItemList_GetStrongestItem; this=EffectItemList; args are rangeFilter (0 self,1 touch,2 target,3 any) and requireArea. Returns effective (flag 0x400000 clear) qualifying item with greatest truncated MagickaCostForCaster(item,null).
 0x690A59: add     edi, 18h
-0x690A5C: mov     ecx, edi
+0x690A5C: mov     ecx, edi; compactString
 0x690A5E: mov     ebp, eax
-0x690A60: call    sub_449190
+0x690A60: call    OB_CompactString_Length_010201A0; Bethesda compact string length helper. If inline length marker is 0xFFFF, strlen(heap string); otherwise returns the 16-bit stored length. Used here to gate optional TESObjectTREE leaf texture.
 0x690A65: test    eax, eax
 0x690A67: jbe     short loc_690AD6
 0x690A69: mov     edx, [edi]
@@ -43,7 +43,7 @@
 0x690A77: call    eax
 0x690A79: mov     ecx, ds:0B33A1Ch
 0x690A7F: push    eax
-0x690A80: call    sub_439EB0
+0x690A80: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
 0x690A85: mov     ecx, [esi+8]
 0x690A88: mov     edx, [ecx]
 0x690A8A: mov     ebx, eax
@@ -79,6 +79,6 @@
 0x690AD9: retn
 0x690ADA: push    0
 0x690ADC: mov     ecx, esi
-0x690ADE: call    ActiveEffect_Base_Remove
+0x690ADE: call    ActiveEffect_Base_Remove; Verified termination API: sets bTerminated=1. When its flush flag is true, immediately invokes ActiveEffect_Base_ProcessEffect to run termination cleanup.
 0x690AE3: pop     esi
 0x690AE4: retn

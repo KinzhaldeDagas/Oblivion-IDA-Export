@@ -1,7 +1,7 @@
-int __cdecl _mbstok_l(char *Str, char *Delim, struct localeinfo_struct *a3)
+char *__usercall _mbstok_l@<eax>(int a1@<esi>, char *Str, char *Delim, struct localeinfo_struct *a4)
 {
-  int v3; // eax
+  DWORD *v4; // eax
 
-  v3 = _getptd();
-  return _mbstok_s_l(Str, Delim, (char **)(v3 + 0x20), a3);
+  v4 = _getptd(); /*0x98347e*/
+  return _mbstok_s_l(a1, Str, Delim, (char **)v4 + 8, a4); /*0x98349b*/
 }

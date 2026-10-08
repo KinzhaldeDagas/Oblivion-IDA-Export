@@ -20,7 +20,7 @@
 0x7763D3: jnz     short loc_7763C0
 0x7763D5: cmp     byte ptr [ebx+31h], 0
 0x7763D9: jz      loc_776515
-0x7763DF: mov     eax, [esp+28h+arg_0]
+0x7763DF: mov     eax, [esp+28h+node]
 0x7763E3: push    ebp
 0x7763E4: xor     ebp, ebp
 0x7763E6: test    eax, eax
@@ -30,11 +30,10 @@
 0x7763F1: mov     [esp+2Ch+var_1C], eax
 0x7763F5: mov     ebp, eax
 0x7763F7: test    ebp, ebp
-0x7763F9: mov     [esp+2Ch+arg_0], 0
+0x7763F9: mov     [esp+2Ch+node], 0
 0x776401: jz      loc_776514
 0x776407: jmp     short loc_776410
-0x776409: align 10h
-0x776410: cmp     [esp+2Ch+arg_0], 8
+0x776410: cmp     [esp+2Ch+node], 8
 0x776415: jnb     loc_776514
 0x77641B: test    ebp, ebp
 0x77641D: jnz     short loc_776423
@@ -45,7 +44,7 @@
 0x776429: mov     [esp+2Ch+var_1C], ecx
 0x77642D: mov     ebp, ecx
 0x77642F: cmp     byte ptr [edi+0ACh], 0
-0x776436: mov     [esp+2Ch+var_18], edi
+0x776436: mov     dword ptr [esp+2Ch+var_18], edi
 0x77643A: jz      loc_77650C
 0x776440: fld     dword ptr ds:0A34BA0h
 0x776446: fcomp   dword ptr [edi+0DCh]
@@ -53,15 +52,15 @@
 0x77644E: test    ah, 41h
 0x776451: jz      loc_77650C
 0x776457: mov     edx, [edi]
-0x776459: mov     eax, [edx+84h]
+0x776459: mov     eax, [edx+84h];
 0x77645F: mov     ecx, edi
 0x776461: call    eax
 0x776463: test    eax, eax
 0x776465: jnz     short loc_7764AB
 0x776467: fld     dword ptr [edi+0DCh]
-0x77646D: fstp    [esp+2Ch+var_18]
+0x77646D: fstp    dword ptr [esp+2Ch+var_18]
 0x776471: fld     dword ptr [edi+0E0h]
-0x776477: fld     [esp+2Ch+var_18]
+0x776477: fld     dword ptr [esp+2Ch+var_18]
 0x77647B: fld     st
 0x77647D: fmulp   st(2), st
 0x77647F: fld     [esp+2Ch+var_10]
@@ -106,8 +105,8 @@
 0x7764F6: push    ecx
 0x7764F7: lea     ecx, [ebx+10h]
 0x7764FA: mov     byte ptr [esi+71h], 1
-0x7764FE: call    sub_6AA320
-0x776503: add     [esp+2Ch+arg_0], 1
+0x7764FE: call    NiTList_AddHead; NiTList AddHead helper. Allocates a node, stores payload at +0x08, installs it as the list head, repairs the previous head/backlink or empty-list tail, and increments count. Repeated per-light calls reverse the source iterator order.
+0x776503: add     [esp+2Ch+node], 1
 0x776508: mov     byte ptr [esi+70h], 0
 0x77650C: test    ebp, ebp
 0x77650E: jnz     loc_776410
@@ -120,7 +119,7 @@
 0x776523: mov     edi, [edx+104h]
 0x776529: cmp     byte ptr [edi+70h], 0
 0x77652D: lea     eax, [esi+8]
-0x776530: mov     [esp+28h+arg_0], esi
+0x776530: mov     [esp+28h+node], esi
 0x776534: mov     esi, [esi]
 0x776536: jz      short loc_77655D
 0x776538: mov     eax, [ebx+20h]
@@ -131,52 +130,52 @@
 0x776543: push    eax
 0x776544: mov     eax, [ecx+0D4h]
 0x77654A: call    eax
-0x77654C: lea     ecx, [esp+28h+arg_0]
-0x776550: push    ecx
-0x776551: lea     ecx, [ebx+10h]
+0x77654C: lea     ecx, [esp+28h+node]
+0x776550: push    ecx; node
+0x776551: lea     ecx, [ebx+10h]; list
 0x776554: mov     byte ptr [edi+71h], 0
-0x776558: call    sub_7AA860
+0x776558: call    NiTPointerList_RemoveNode; [Verified] Generic NiTPointerList node-removal helper. Unlinks the supplied node, updates head/tail and neighboring links, invokes the list's FreeNode vfunc, decrements item count, and returns the removed node's data pointer.
 0x77655D: test    esi, esi
 0x77655F: jnz     short loc_776520
 0x776561: fld     [esp+28h+var_10]
 0x776565: fld     qword ptr ds:0A3DDD8h
-0x77656B: fnstcw  word ptr [esp+28h+arg_0]
-0x77656F: movzx   eax, word ptr [esp+28h+arg_0]
+0x77656B: fnstcw  word ptr [esp+28h+node]
+0x77656F: movzx   eax, word ptr [esp+28h+node]
 0x776574: or      eax, 0C00h
 0x776579: fmul    st(1), st
-0x77657B: mov     [esp+28h+var_18], eax
+0x77657B: mov     dword ptr [esp+28h+var_18], eax
 0x77657F: fxch    st(1)
 0x776581: fldcw   word ptr [esp+28h+var_18]
-0x776585: fistp   qword ptr [esp+28h+var_18]
-0x776589: mov     eax, [esp+28h+var_18]
+0x776585: fistp   [esp+28h+var_18]
+0x776589: mov     eax, dword ptr [esp+28h+var_18]
 0x77658D: cmp     eax, 0FFh
 0x776592: mov     [esp+28h+var_1C], eax
-0x776596: fldcw   word ptr [esp+28h+arg_0]
+0x776596: fldcw   word ptr [esp+28h+node]
 0x77659A: jbe     short loc_7765A4
 0x77659C: mov     [esp+28h+var_1C], 0FFh
 0x7765A4: fld     [esp+28h+var_C]
-0x7765A8: fnstcw  word ptr [esp+28h+arg_0]
-0x7765AC: movzx   eax, word ptr [esp+28h+arg_0]
+0x7765A8: fnstcw  word ptr [esp+28h+node]
+0x7765AC: movzx   eax, word ptr [esp+28h+node]
 0x7765B1: or      eax, 0C00h
 0x7765B6: fmul    st, st(1)
-0x7765B8: mov     [esp+28h+var_18], eax
+0x7765B8: mov     dword ptr [esp+28h+var_18], eax
 0x7765BC: fldcw   word ptr [esp+28h+var_18]
-0x7765C0: fistp   qword ptr [esp+28h+var_18]
-0x7765C4: mov     edx, [esp+28h+var_18]
+0x7765C0: fistp   [esp+28h+var_18]
+0x7765C4: mov     edx, dword ptr [esp+28h+var_18]
 0x7765C8: cmp     edx, 0FFh
-0x7765CE: fldcw   word ptr [esp+28h+arg_0]
+0x7765CE: fldcw   word ptr [esp+28h+node]
 0x7765D2: jbe     short loc_7765D9
 0x7765D4: mov     edx, 0FFh
 0x7765D9: fmul    [esp+28h+var_8]
-0x7765DD: fnstcw  word ptr [esp+28h+arg_0]
-0x7765E1: movzx   eax, word ptr [esp+28h+arg_0]
+0x7765DD: fnstcw  word ptr [esp+28h+node]
+0x7765E1: movzx   eax, word ptr [esp+28h+node]
 0x7765E6: or      eax, 0C00h
-0x7765EB: mov     [esp+28h+var_18], eax
+0x7765EB: mov     dword ptr [esp+28h+var_18], eax
 0x7765EF: fldcw   word ptr [esp+28h+var_18]
-0x7765F3: fistp   qword ptr [esp+28h+var_18]
-0x7765F7: mov     eax, [esp+28h+var_18]
+0x7765F3: fistp   [esp+28h+var_18]
+0x7765F7: mov     eax, dword ptr [esp+28h+var_18]
 0x7765FB: cmp     eax, 0FFh
-0x776600: fldcw   word ptr [esp+28h+arg_0]
+0x776600: fldcw   word ptr [esp+28h+node]
 0x776604: jbe     short loc_77660B
 0x776606: mov     eax, 0FFh
 0x77660B: movzx   edi, byte ptr [esp+28h+var_1C]

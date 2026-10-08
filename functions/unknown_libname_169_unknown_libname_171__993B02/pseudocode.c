@@ -1,8 +1,12 @@
-int __fastcall unknown_libname_169_::unknown_libname_171(char a1)
+int __usercall unknown_libname_169_::unknown_libname_171@<eax>(
+        char a1@<cl>,
+        long double a2@<st1>,
+        long double a3@<st0>)
 {
-  __int16 v1; // cx
-
-  HIBYTE(v1) = a1;
-  LOBYTE(v1) = 0;
-  return unknown_libname_169_::unknown_libname_173(v1);
+  __asm /*0x993b02*/
+  {
+    fabs
+    fld1
+  }
+  return unknown_libname_169_::unknown_libname_173(0, a2, a3);
 }

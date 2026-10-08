@@ -1,9 +1,9 @@
-0x7F1AE0: push    ebx
+0x7F1AE0: push    ebx; SpeedTreeOBSE 2026-07-14: leaf property texture setter at +0x9C has the same release/store/AddRef semantics; retain old property textures before transactional replacement.
 0x7F1AE1: push    esi
 0x7F1AE2: mov     ebx, ecx
 0x7F1AE4: mov     esi, [ebx+9Ch]
 0x7F1AEA: push    edi
-0x7F1AEB: mov     edi, [esp+0Ch+arg_0]
+0x7F1AEB: mov     edi, [esp+0Ch+textureRef]
 0x7F1AEF: cmp     esi, edi
 0x7F1AF1: jz      short loc_7F1B27
 0x7F1AF3: test    esi, esi

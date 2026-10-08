@@ -1,12 +1,7 @@
-CombatController *__userpurge CombatController::`scalar deleting destructor'@<eax>(
-        CombatController *this@<ecx>,
-        double a2@<st2>,
-        double a3@<st1>,
-        double a4@<st0>,
-        char a5)
+CombatController *__thiscall CombatController::`scalar deleting destructor'(CombatController *this, char a2)
 {
-  CombatController::~CombatController(this, a2, a3, a4);
-  if ( (a5 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  CombatController::~CombatController(this); /*0x61f8d3*/
+  if ( (a2 & 1) != 0 ) /*0x61f8dd*/
+    FormHeapFree((unsigned int)this); /*0x61f8e0*/
+  return this; /*0x61f8ea*/
 }

@@ -1,20 +1,23 @@
-int __usercall sub_78B220@<eax>(int *this@<ecx>, int a2@<edi>)
+// CSpeedTreeRT::GetSeed. While transient data is intact, returns CTreeEngine+0x48; otherwise reports the same misleading SetTreeSize/DeleteTransientData error present in local 4.1 source.
+unsigned int __thiscall CSpeedTreeRT__GetSeed(const OB_CSpeedTreeRT_010201A0 *this)
 {
-  int v2; // eax
-  bool v3; // zf
-  rsize_t v5; // [esp-4h] [ebp-64h] BYREF
-  int v6; // [esp+4Ch] [ebp-14h]
-  char *v7; // [esp+50h] [ebp-10h]
-  int v8; // [esp+5Ch] [ebp-4h]
+  OB_CTreeEngine_010201A0 *treeEngine; // eax
+  bool v2; // zf
+  int v4; // [esp+0h] [ebp-60h] BYREF
+  unsigned int v5; // [esp+4Ch] [ebp-14h]
+  int *v6; // [esp+50h] [ebp-10h]
+  int v7; // [esp+5Ch] [ebp-4h]
 
-  v7 = (char *)&v5 + 4;
-  v2 = *this;
-  v3 = *(_BYTE *)(*this + 0x21) == 0;
-  v6 = 0;
-  v8 = 0;
-  if ( !v3 )
-    return *(_DWORD *)(v2 + 0x48);
-  LODWORD(v5) = 0x47;
-  sub_414500(&dword_B2B614, a2, "SetTreeSize() has no effect after DeleteTransientData() has been called", v5);
-  return v6;
+  v6 = &v4; /*0x78b248*/
+  treeEngine = this->treeEngine; /*0x78b24b*/
+  v2 = this->treeEngine->transientDataIntact == 0; /*0x78b24f*/
+  v5 = 0; /*0x78b252*/
+  v7 = 0; /*0x78b255*/
+  if ( !v2 ) /*0x78b258*/
+    return treeEngine->treeRandomSeed; /*0x78b25d*/
+  OB_stString28_AssignBytes_010201A0( /*0x78b281*/
+    &OB_g_strError_010201A0,
+    "SetTreeSize() has no effect after DeleteTransientData() has been called",
+    0x47u);
+  return v5; /*0x78b263*/
 }

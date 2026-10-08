@@ -1,4 +1,4 @@
-0x8915F0: push    ebp
+0x8915F0: push    ebp; TES4 authoritative: casts a 25-Havok-unit downward ray from one cached capsule endpoint and returns adjusted endpoint z on hit.
 0x8915F1: mov     ebp, esp
 0x8915F3: and     esp, 0FFFFFFF0h
 0x8915F6: push    0FFFFFFFFh
@@ -36,7 +36,7 @@
 0x891679: movaps  xmm0, xmmword ptr [ecx+esi]
 0x89167D: movaps  xmmword ptr [edi], xmm0
 0x891680: fld     dword ptr [edi+8]
-0x891683: fsub    qword ptr ds:0A492B0h
+0x891683: fsub    qword ptr ds:0A492B0h; Downward ray target starts 25 Havok units below cached capsule endpoint z.
 0x891689: movaps  [esp+104h+var_A0], xmm0
 0x89168E: lea     edx, [esp+104h+var_E4]
 0x891692: lea     eax, [esp+104h+var_E0]
@@ -50,7 +50,7 @@
 0x8916B5: mov     [esp+108h+var_2C], eax
 0x8916BC: mov     [esp+108h+var_28], ebx
 0x8916C3: movaps  [esp+108h+var_90], xmm0
-0x8916C8: call    sub_57E270
+0x8916C8: call    bhkCharacterProxy_GetCollisionFilterInfo; TES4 authoritative capsule endpoint ray: uses proxy metadata collision filter info so the ray preserves actor identity/filtering.
 0x8916CD: cmp     esi, ebx
 0x8916CF: mov     eax, [esp+104h+var_E4]
 0x8916D3: mov     [esp+104h+var_7C], eax
@@ -58,7 +58,7 @@
 0x8916DC: mov     ecx, [esi+8]
 0x8916DF: cmp     ecx, ebx
 0x8916E1: jz      short loc_8916EA
-0x8916E3: call    sub_8AC0C0
+0x8916E3: call    bhkCollisionWrapper_GetHavokObject; bhk collision wrapper accessor: returns stored low-level Havok object pointer at wrapper+0x30.
 0x8916E8: jmp     short loc_8916EC
 0x8916EA: xor     eax, eax
 0x8916EC: mov     eax, [eax+8]
@@ -79,7 +79,7 @@
 0x891716: push    eax
 0x891717: mov     ecx, esi
 0x891719: call    edx
-0x89171B: mov     byte ptr [esp+104h+var_E8+3], al
+0x89171B: mov     byte ptr [esp+104h+var_E8+3], al; TES4 authoritative capsule endpoint ray: raw Havok-world vfunc +0x88 raycast from cached capsule endpoint downward 25 Havok units. Used for support slope sampling only.
 0x89171F: mov     eax, [esi]
 0x891721: mov     edx, [eax+58h]
 0x891724: mov     ecx, esi
@@ -107,3 +107,16 @@
 0x89176C: mov     esp, ebp
 0x89176E: pop     ebp
 0x89176F: retn    8
+0x9D6310: lea     ecx, [ebp+var_E0]; void *
+0x9D6316: jmp     sub_4F5E90
+0x9D631B: mov     edx, [esp-4+arg_4]
+0x9D631F: lea     eax, [edx-0F4h]
+0x9D6325: mov     ecx, [edx-0F8h]
+0x9D632B: xor     ecx, eax
+0x9D632D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D6332: add     eax, 0Ch
+0x9D6335: mov     ecx, [edx-8]
+0x9D6338: xor     ecx, eax
+0x9D633A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D633F: mov     eax, offset stru_AFE248
+0x9D6344: jmp     ___CxxFrameHandler3

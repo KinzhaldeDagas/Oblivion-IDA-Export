@@ -1,12 +1,12 @@
-int sub_553600()
+void *__cdecl FaceGenManager_GetSingleton()
 {
-  int result; // eax
+  void *result; // eax
 
-  result = dword_B39B80;
-  if ( !dword_B39B80 )
+  result = g_faceGenManager; /*0x553600*/
+  if ( !g_faceGenManager ) /*0x553600*/
   {
-    sub_553550();
-    return dword_B39B80;
+    FaceGenManager_EnsureInitialized(); /*0x553609*/
+    return g_faceGenManager; /*0x55360e*/
   }
-  return result;
+  return result; /*0x553613*/
 }

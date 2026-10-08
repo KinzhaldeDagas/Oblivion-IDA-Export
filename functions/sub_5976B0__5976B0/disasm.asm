@@ -68,7 +68,7 @@
 0x597780: mov     eax, [esi+50h]; jumptable 00597779 case 1
 0x597783: push    2
 0x597785: push    eax
-0x597786: call    sub_5D6390
+0x597786: call    SkillsMenu_Create; Creates the shared SkillsMenu. In class-skill mode (mode 0), associates the open ClassMenu, sets selectionCap=7 at SkillsMenu+0x44, populates all 21 native skills, and preselects the seven staged ClassMenu major AVs.
 0x59778B: add     esp, 8
 0x59778E: mov     ecx, [esp+28h+var_C]
 0x597792: mov     large fs:0, ecx
@@ -82,7 +82,7 @@
 0x5977A2: mov     ecx, [esi+4Ch]; jumptable 00597779 case 2
 0x5977A5: push    1
 0x5977A7: push    ecx
-0x5977A8: call    sub_5D6390
+0x5977A8: call    SkillsMenu_Create; Creates the shared SkillsMenu. In class-skill mode (mode 0), associates the open ClassMenu, sets selectionCap=7 at SkillsMenu+0x44, populates all 21 native skills, and preselects the seven staged ClassMenu major AVs.
 0x5977AD: add     esp, 8
 0x5977B0: mov     ecx, [esp+28h+var_C]
 0x5977B4: mov     large fs:0, ecx
@@ -96,7 +96,7 @@
 0x5977C4: mov     edx, [esi+48h]; jumptable 00597779 case 3
 0x5977C7: push    ebx
 0x5977C8: push    edx
-0x5977C9: call    sub_5D6390
+0x5977C9: call    SkillsMenu_Create; Creates the shared SkillsMenu. In class-skill mode (mode 0), associates the open ClassMenu, sets selectionCap=7 at SkillsMenu+0x44, populates all 21 native skills, and preselects the seven staged ClassMenu major AVs.
 0x5977CE: add     esp, 8
 0x5977D1: mov     ecx, [esp+28h+var_C]
 0x5977D5: mov     large fs:0, ecx
@@ -167,3 +167,12 @@
 0x597897: lea     ecx, [esp+28h+var_14]; void *
 0x59789B: mov     [esp+28h+var_4], edi
 0x59789F: call    BSStringT_Clear
+0x9B5BD0: lea     ecx, [ebp-14h]; void *
+0x9B5BD3: jmp     BSStringT_Clear
+0x9B5BD8: mov     edx, [esp+arg_4]
+0x9B5BDC: lea     eax, [edx-18h]
+0x9B5BDF: mov     ecx, [edx-1Ch]
+0x9B5BE2: xor     ecx, eax
+0x9B5BE4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B5BE9: mov     eax, offset stru_AE0BB4
+0x9B5BEE: jmp     ___CxxFrameHandler3

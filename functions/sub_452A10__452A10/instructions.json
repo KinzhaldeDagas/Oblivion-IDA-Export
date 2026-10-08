@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x452A10",
-    "line": "push    ebp",
+    "line": "push    ebp; TES4 authoritative: converts TES/world NiPoint3 into Havok units with hkFactor, then writes proxy position through 0x891560.",
     "mnemonic": "push",
     "size": 1
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x452A4A",
-    "line": "call    sub_891560",
+    "line": "call    bhkCharacterController_WriteRelativePosition; TES4 authoritative: writes proxy position. Adds metadata/world transform basis offset, then writes to collision object through 0x8AC080.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
-  "callers_count": 13,
-  "comment_regular": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 55,
+  "chunks": [
+    [
+      "0x46AC90",
+      "0x46AC9B"
+    ]
+  ],
+  "chunks_sha256": "ccbbed8cb0bdbb1b97542027eb3633da3c119ad9170c808e2d9c8cf956f88ab3",
+  "comment_regular": "Verified 2026-10-03: x86 ECX receiver and two 4-byte stack arguments; callee RET 8 (or tail jump to that callee). byteCount is 32-bit; previous 8-byte size_t and inferred extra register/stack arguments distorted callers. Buffer cursor is owner +0x14. Wrapper ECX receiver is replaced by global 0x00B33B00 before tail jump.\n\nself",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "TESForm_SaveFormIDToCurrentSaveGame",
   "end_ea": "0x46AC9B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "TESForm_SaveFormIDToCurrentSaveGame",
   "segment": ".text",
   "sha256": "ccbbed8cb0bdbb1b97542027eb3633da3c119ad9170c808e2d9c8cf956f88ab3",
   "size": 11,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x46AC90",
-  "type": "char __stdcall(int, unsigned int)",
+  "total_chunk_size": 11,
+  "type": "void __thiscall(TESForm *self, const unsigned int *source, unsigned int byteCount)",
   "xrefs_from_count": 2,
   "xrefs_to_count": 55
 }

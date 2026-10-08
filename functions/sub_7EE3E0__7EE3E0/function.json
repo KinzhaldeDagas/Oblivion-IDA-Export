@@ -1,10 +1,18 @@
 {
   "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
   "callers_count": 3,
+  "chunks": [
+    [
+      "0x7EE3E0",
+      "0x7EE43C"
+    ]
+  ],
   "chunks_sha256": "a5a8877a212ead9bb7273b9a6f918a38174d73fbcbd60168fe743d54988023ef",
   "comment_regular": "[Verified] Appends DECAL_DATA* to this BSShaderLightingProperty's list at +0x80: allocates a node through the list allocator vfunc, stores data at node+8, links at tail, and increments numItems at +0x8C. Resets the base BSShaderProperty cached render-pass state at +0x24. Called by BSTempEffectDecal_Ctor, BSTempEffectDecal_LoadGame, and BSTempEffectGeometryDecal_BuildGeneratedGeometry.",
   "comment_repeatable": "[Verified] Appends DECAL_DATA* to this BSShaderLightingProperty's list at +0x80: allocates a node through the list allocator vfunc, stores data at node+8, links at tail, and increments numItems at +0x8C. Resets the base BSShaderProperty cached render-pass state at +0x24. Called by BSTempEffectDecal_Ctor, BSTempEffectDecal_LoadGame, and BSTempEffectGeometryDecal_BuildGeneratedGeometry.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "BSShaderLightingProperty_AddDecalData",
   "end_ea": "0x7EE43C",
@@ -15,6 +23,7 @@
   "segment": ".text",
   "sha256": "a5a8877a212ead9bb7273b9a6f918a38174d73fbcbd60168fe743d54988023ef",
   "size": 92,
+  "source_annotation_confidence": "Verified",
   "start_ea": "0x7EE3E0",
   "total_chunk_size": 92,
   "type": "NiTPointerListNode_DECAL_DATA_t *__thiscall(BSShaderLightingPropertyLayout_t *this, DECAL_DATA *data)",

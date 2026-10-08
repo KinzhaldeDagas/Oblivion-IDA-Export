@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7FAAD0",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+lightSlot]; Lighting30 LightData writer. Slot 0 maps to pixel c10; mode-5 SM3026 consumes c10.w as its view-space caster-depth divisor.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,13 +19,13 @@
   },
   {
     "ea": "0x7FAAD9",
-    "line": "mov     ecx, [esp+arg_4]",
+    "line": "mov     ecx, [esp+x]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7FAADD",
-    "line": "mov     edx, [esp+arg_8]",
+    "line": "mov     edx, [esp+y]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x7FAAE4",
-    "line": "add     eax, offset unk_B47018",
+    "line": "add     eax, offset unk_B47018; LightData bank slot 0 is pixel c10. SM3026 consumes c10.w as its caster depth divisor.",
     "mnemonic": "add",
     "size": 5
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x7FAAEB",
-    "line": "mov     ecx, [esp+arg_C]",
+    "line": "mov     ecx, [esp+z]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x7FAAF2",
-    "line": "mov     edx, [esp+arg_10]",
+    "line": "mov     edx, [esp+w]",
     "mnemonic": "mov",
     "size": 4
   },

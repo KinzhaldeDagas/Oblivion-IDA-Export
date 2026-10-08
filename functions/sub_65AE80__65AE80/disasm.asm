@@ -1,4 +1,4 @@
-0x65AE80: push    esi
+0x65AE80: push    esi; TESObjectREFR/Actor vtable slot 0x57. Fills output with bound center + extents (bound max); surface distance consumes scaled Y.
 0x65AE81: mov     esi, ecx
 0x65AE83: cmp     dword ptr [esi+58h], 0
 0x65AE87: jz      loc_65AF15
@@ -13,7 +13,7 @@
 0x65AEA3: mov     edx, [eax+46Ch]
 0x65AEA9: call    edx
 0x65AEAB: fld     dword ptr [eax+18h]
-0x65AEAE: fstp    dword ptr ds:0B3BAB8h
+0x65AEAE: fstp    dword ptr ds:0B3BAB8h; High-process bound maximum = collision bound center plus extents; values are local to reference position.
 0x65AEB4: pop     esi
 0x65AEB5: fld     dword ptr [eax+1Ch]
 0x65AEB8: fstp    dword ptr ds:0B3BABCh

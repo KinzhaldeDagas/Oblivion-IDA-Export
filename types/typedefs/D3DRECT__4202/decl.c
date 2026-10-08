@@ -1,1 +1,1 @@
-D3DRECT
+typedef _D3DRECT D3DRECT;

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4B6DB0",
-    "line": "push    ecx",
+    "line": "push    ecx; Verified TESObjectDOOR DoPostFixup vtable override (TESFormVtbl::DoPostFixup slot +0x6C at 0xA44AC0). If not already linked, links script data, walks raw randomTeleport FormIDs, rebases each through TESForm_GetOverrideFile/TESForm_ResolveFormID, replaces valid IDs with TESForm pointers, and removes invalid entries after logging 'Could not find RandomTeleport ... for Door ...'; then marks the form linked.",
     "mnemonic": "push",
     "size": 1
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x4B6DF9",
-    "line": "call    TESForm_GetOverrideFile",
+    "line": "call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x4B6E04",
-    "line": "call    TESForm_ResolveFormID",
+    "line": "call    TESForm_ResolveFormID; Verified post-load TNAM fixup: resolves the stored 32-bit form ID in the door's override-file context, looks up the TESForm, and writes the resolved pointer into the randomTeleport node. The failure branch removes that list node.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x4B6E0E",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x4B6E6D",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

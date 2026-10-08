@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x499570",
-    "line": "sub     esp, 10h",
+    "line": "sub     esp, 10h; Fog water decode: water shader/global refresh also consumes 0x4994C0 source records, corroborating packed color and fog field layout.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x499591",
-    "line": "call    sub_4994C0",
+    "line": "call    sub_4994C0; Fog water decode: selects current water fog source record from base/day/night/override water records.",
     "mnemonic": "call",
     "size": 5
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x49959D",
-    "line": "mov     edi, eax",
+    "line": "mov     edi, eax; Fog water decode: refresh path obtains same selected water source record used by Sky water fog branch.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x49960E",
-    "line": "call    GetShaderDefinition",
+    "line": "call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.",
     "mnemonic": "call",
     "size": 5
   },

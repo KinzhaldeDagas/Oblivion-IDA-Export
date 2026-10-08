@@ -1,4 +1,4 @@
-0x7877B0: mov     eax, [ecx+6Ch]
+0x7877B0: mov     eax, [ecx+6Ch]; Returns the number of indexed vertices as vertexCoords.floatCount / 3.
 0x7877B3: test    eax, eax
 0x7877B5: jnz     short loc_7877C5
 0x7877B7: xor     ecx, ecx

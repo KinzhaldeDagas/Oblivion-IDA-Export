@@ -1,0 +1,81 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "OblivionMovedReferenceInitialData",
+  "definition": "struct OblivionMovedReferenceInitialData\n{\nunsigned int primaryLocationFormID; ///< Verified: 44-byte payload copied from savedFormBuffer+4; consumed by location reconstruction.\nfloat worldX; ///< Verified: source world X; used when source locator is a TESWorldSpace.\nfloat worldY; ///< Verified: source world Y; used when source locator is a TESWorldSpace.\nfloat unknown0C; ///< Unknown: copied payload word not read in the reconstruction path examined.\nunsigned int fallbackLocationFormID; ///< Verified: fallback source cell/worldspace FormID; used only when primary source locator at +0 is zero.\nunsigned __int8 unknown14[24]; ///< Unknown: trailing payload bytes are copied but not consumed by the reconstruction code examined.\n}\n",
+  "id": 18374686479672086401,
+  "is_union": false,
+  "kind": "struct",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified: 44-byte payload copied from savedFormBuffer+4; consumed by location reconstruction.",
+      "name": "primaryLocationFormID",
+      "offset": 0,
+      "offset_hex": "0x0",
+      "size": 4,
+      "type": "unsigned int"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified: source world X; used when source locator is a TESWorldSpace.",
+      "name": "worldX",
+      "offset": 4,
+      "offset_hex": "0x4",
+      "size": 4,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified: source world Y; used when source locator is a TESWorldSpace.",
+      "name": "worldY",
+      "offset": 8,
+      "offset_hex": "0x8",
+      "size": 4,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Unknown: copied payload word not read in the reconstruction path examined.",
+      "name": "unknown0C",
+      "offset": 12,
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified: fallback source cell/worldspace FormID; used only when primary source locator at +0 is zero.",
+      "name": "fallbackLocationFormID",
+      "offset": 16,
+      "offset_hex": "0x10",
+      "size": 4,
+      "type": "unsigned int"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Unknown: trailing payload bytes are copied but not consumed by the reconstruction code examined.",
+      "name": "unknown14",
+      "offset": 20,
+      "offset_hex": "0x14",
+      "size": 24,
+      "type": "unsigned __int8[24]"
+    }
+  ],
+  "name": "OblivionMovedReferenceInitialData",
+  "ordinal": 10003,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 44
+}

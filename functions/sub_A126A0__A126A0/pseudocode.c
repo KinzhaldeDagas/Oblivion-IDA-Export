@@ -1,4 +1,4 @@
-BSStringT *sub_A126A0()
+NiRTTI *sub_A126A0()
 {
-  return sub_70E220((BSStringT *)dword_BA8024, "bhkCharacterProxy", (int)dword_BA7C00);
+  return NiRTTI_Constructor(&stru_BA8024, "bhkCharacterProxy", &stru_BA7C00); /*0xa126b4*/
 }

@@ -54,10 +54,10 @@
 0x7443C7: jz      short loc_7443FE
 0x7443C9: mov     edx, [eax+10h]
 0x7443CC: mov     eax, [edi+0Ch]
-0x7443CF: push    ebx; Size
-0x7443D0: push    edx; Src
-0x7443D1: push    eax; Dst
-0x7443D2: call    _memcpy
+0x7443CF: push    ebx; byteCount
+0x7443D0: push    edx; source
+0x7443D1: push    eax; destination
+0x7443D2: call    _memcpy;
 0x7443D7: mov     eax, [edi+1Ch]
 0x7443DA: add     [edi+0Ch], ebx
 0x7443DD: add     [eax+10h], ebx
@@ -106,10 +106,10 @@
 0x744455: jz      short loc_74448C
 0x744457: mov     edx, [eax+10h]
 0x74445A: mov     eax, [edi+0Ch]
-0x74445D: push    ebx; Size
-0x74445E: push    edx; Src
-0x74445F: push    eax; Dst
-0x744460: call    _memcpy
+0x74445D: push    ebx; byteCount
+0x74445E: push    edx; source
+0x74445F: push    eax; destination
+0x744460: call    _memcpy;
 0x744465: mov     eax, [edi+1Ch]
 0x744468: add     [edi+0Ch], ebx
 0x74446B: add     [eax+10h], ebx

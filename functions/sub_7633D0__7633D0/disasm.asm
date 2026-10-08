@@ -47,18 +47,18 @@
 0x76344F: push    eax
 0x763450: push    ebx
 0x763451: mov     [esp+54h+a3], 1
-0x763459: call    sub_776DD0
+0x763459: call    sub_776DD0; MoonSugarEffect decode: fallback non-declaration vertex layout calculator. Builds FVF-like flags, stride, and offsets: position is 12 bytes; optional skin weights/indices, normals, color, and UV sets are appended, with UV count clamped by dword_B28CB0.
 0x76345E: mov     edx, [esp+30h+a3]
 0x763462: mov     esi, [esp+30h+arg_0]
 0x763466: push    edx; streamCount
 0x763467: mov     ecx, esi; this
-0x763469: call    sub_777F70
+0x763469: call    sub_777F70; Pass225/226: Forces NiGeometryBufferData stream count; screen-texture render path forces exactly one stream.
 0x76346E: mov     eax, [esp+30h+var_1C]
 0x763472: cmp     eax, edi
 0x763474: mov     ecx, esi
 0x763476: jz      short loc_76348E
 0x763478: push    eax
-0x763479: call    sub_7780A0
+0x763479: call    sub_7780A0; MoonSugarEffect decode: NiGeometryBufferData SetFVF-style input ownership. Stores FVF and releases any cached IDirect3DVertexDeclaration9, so callers switch the buffer to fixed-function input mode.
 0x76347E: cmp     [esi+1Ch], edi
 0x763481: jbe     short loc_7634C1
 0x763483: mov     eax, [esi+20h]
@@ -67,7 +67,7 @@
 0x76348C: jmp     short loc_7634C1
 0x76348E: mov     edx, [esp+30h+var_14]
 0x763492: push    edx
-0x763493: call    sub_7780D0
+0x763493: call    sub_7780D0; MoonSugarEffect decode: NiGeometryBufferData SetVertexDeclaration-style input ownership. Releases the previous declaration, AddRefs the new one, stores it, and clears FVF. World mask shaders must not mutate this unless they own/repacked the BuffData layout.
 0x763498: cmp     [esp+30h+a3], edi
 0x76349C: jbe     short loc_7634BF
 0x76349E: mov     edi, edi
@@ -114,7 +114,7 @@
 0x763514: mov     ecx, [eax+8B0h]
 0x76351A: push    edi
 0x76351B: push    esi
-0x76351C: call    NiGeometryBufferData__RefreshVBChips
+0x76351C: call    NiGeometryBufferData__RefreshVBChips; MoonSugarEffect decode: NiGeometryBufferData::RefreshVBChips. Releases the existing geometry-group chip for this stream, creates a replacement chip through NiGeometryGroup, and stores it in VBChip[stream] if stream is in range. This is allocation/lifetime ownership, not a safe mask-pass getter.
 0x763521: test    al, al
 0x763523: jz      short loc_76353A
 0x763525: add     edi, 1

@@ -2,12 +2,12 @@
 0x4CAA33: push    esi
 0x4CAA34: push    edi
 0x4CAA35: mov     edi, ecx
-0x4CAA37: mov     ecx, offset TimeGlobals
+0x4CAA37: mov     ecx, 0B332E0h
 0x4CAA3C: call    TimeGlobals_GetGameDaysPassed
 0x4CAA41: lea     esi, [eax+eax*2]
 0x4CAA44: add     esi, esi
 0x4CAA46: add     esi, esi
-0x4CAA48: mov     ecx, offset TimeGlobals
+0x4CAA48: mov     ecx, 0B332E0h
 0x4CAA4D: add     esi, esi
 0x4CAA4F: call    TimeGlobals_GetGameHour
 0x4CAA54: fnstcw  [esp+14h+var_A]
@@ -25,9 +25,9 @@
 0x4CAA85: jz      short loc_4CAA8B
 0x4CAA87: test    esi, esi
 0x4CAA89: jnz     short loc_4CAA98
-0x4CAA8B: push    esi
-0x4CAA8C: lea     ecx, [edi+28h]
-0x4CAA8F: call    ExtraDataList?_SetDetachTime
+0x4CAA8B: push    esi; detachTime
+0x4CAA8C: lea     ecx, [edi+28h]; this
+0x4CAA8F: call    ExtraDataList_SetDetachTime; Sets ExtraDetachTime; a zero value removes type 0x10, otherwise updates or creates it.
 0x4CAA94: test    esi, esi
 0x4CAA96: jz      short loc_4CAAAC
 0x4CAA98: mov     edx, [edi]

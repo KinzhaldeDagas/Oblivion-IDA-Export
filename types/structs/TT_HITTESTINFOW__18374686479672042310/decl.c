@@ -1,1 +1,6 @@
-_TT_HITTESTINFOW
+struct _TT_HITTESTINFOW
+{
+HWND hwnd;
+POINT pt;
+TTTOOLINFOW ti;
+};

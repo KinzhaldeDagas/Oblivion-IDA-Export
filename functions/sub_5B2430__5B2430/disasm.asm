@@ -303,7 +303,7 @@
 0x5B273F: lea     ecx, [edi+24h]
 0x5B2742: push    eax
 0x5B2743: call    edx
-0x5B2745: call    Double_To_SInt32
+0x5B2745: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B274A: mov     ecx, [esp+94h+var_80]
 0x5B274E: mov     edx, ds:0B333C4h
 0x5B2754: mov     esi, eax
@@ -312,7 +312,7 @@
 0x5B275B: add     ecx, 24h ; '$'
 0x5B275E: push    edx
 0x5B275F: call    eax
-0x5B2761: call    Double_To_SInt32
+0x5B2761: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B2766: cmp     esi, eax
 0x5B2768: jge     short loc_5B276F
 0x5B276A: or      ebp, 0FFFFFFFFh

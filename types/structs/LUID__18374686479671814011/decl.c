@@ -1,1 +1,1 @@
-LUID
+typedef _LUID LUID;

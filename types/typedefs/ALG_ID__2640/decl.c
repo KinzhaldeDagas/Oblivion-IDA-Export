@@ -1,1 +1,1 @@
-ALG_ID
+typedef unsigned int ALG_ID;

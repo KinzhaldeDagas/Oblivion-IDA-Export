@@ -6,7 +6,7 @@
 0x9936C4: sqrtsd  xmm3, xmm3
 0x9936C8: pmovmskb eax, xmm7
 0x9936CC: psllq   xmm0, 1
-0x9936D1: andpd   xmm7, xmmword ptr ds:unk_AA7FA0
+0x9936D1: andpd   xmm7, xmmword ptr ds:qword_AA7FA0
 0x9936D9: psrlq   xmm0, 1
 0x9936DE: movsd   xmm1, xmm0
 0x9936E2: movlpd  xmm4, ds:qword_AA8010

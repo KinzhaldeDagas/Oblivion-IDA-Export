@@ -1,6 +1,6 @@
 0x997AAE: push    ecx
 0x997AAF: push    ecx
-0x997AB0: mov     eax, dword_BAA758
+0x997AB0: mov     eax, dword_BA9E10+948h
 0x997AB5: push    ebx
 0x997AB6: push    ebp
 0x997AB7: push    esi
@@ -16,15 +16,15 @@
 0x997ACC: mov     esi, eax
 0x997ACE: cmp     esi, ebx
 0x997AD0: jz      short loc_997ADE
-0x997AD2: mov     dword_BAA758, 1
+0x997AD2: mov     dword_BA9E10+948h, 1
 0x997ADC: jmp     short loc_997B00
 0x997ADE: call    ds:GetLastError
 0x997AE4: cmp     eax, 78h ; 'x'
 0x997AE7: jnz     short loc_997AF2
 0x997AE9: mov     eax, ebp
-0x997AEB: mov     dword_BAA758, eax
+0x997AEB: mov     dword_BA9E10+948h, eax
 0x997AF0: jmp     short loc_997AF7
-0x997AF2: mov     eax, dword_BAA758
+0x997AF2: mov     eax, dword_BA9E10+948h
 0x997AF7: cmp     eax, 1
 0x997AFA: jnz     loc_997B84
 0x997B00: cmp     esi, ebx
@@ -115,10 +115,10 @@
 0x997BBC: push    esi; LPCH
 0x997BBD: call    ds:FreeEnvironmentStringsA
 0x997BC3: jmp     loc_997B0C
-0x997BC8: push    ebp; Size
-0x997BC9: push    esi; Src
-0x997BCA: push    edi; Dst
-0x997BCB: call    _memcpy
+0x997BC8: push    ebp; byteCount
+0x997BC9: push    esi; source
+0x997BCA: push    edi; destination
+0x997BCB: call    _memcpy;
 0x997BD0: add     esp, 0Ch
 0x997BD3: push    esi; LPCH
 0x997BD4: call    ds:FreeEnvironmentStringsA

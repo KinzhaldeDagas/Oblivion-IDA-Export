@@ -29,15 +29,15 @@
 0x554855: mov     [esp+80h+var_38], ebx
 0x554859: mov     word ptr [esp+80h+var_34], bx
 0x55485E: mov     word ptr [esp+80h+var_34+2], bx
-0x554863: mov     [esp+80h+var_68], ebx
+0x554863: mov     [esp+80h+texture], ebx
 0x554867: mov     [esp+80h+var_6C], ebx
 0x55486B: fld     dword ptr ds:0A3721Ch
 0x554871: push    ecx
-0x554872: lea     ecx, [esp+84h+var_30]
-0x554876: fstp    [esp+84h+var_84]; float
+0x554872: lea     ecx, [esp+84h+var_30]; this
+0x554876: fstp    [esp+84h+angleY]; angleY
 0x554879: mov     byte ptr [esp+84h+var_4], 6
-0x554881: call    sub_70FD80
-0x554886: mov     eax, [esp+80h+arg_8]
+0x554881: call    NiMatrix33_InitRotationY; Verified matrix coefficients make this a Y-axis rotation: Y stays fixed; only the X/Z submatrix contains sin/cos.
+0x554886: mov     eax, [esp+80h+parameters]
 0x55488D: cmp     [eax+0B8h], ebx
 0x554893: jz      loc_554CD4
 0x554899: mov     ecx, [eax+0B8h]
@@ -57,7 +57,7 @@
 0x5548C5: lea     edx, [esp+94h+var_48]
 0x5548C9: push    ebp
 0x5548CA: push    edx
-0x5548CB: mov     [esp+9Ch+var_60], eax
+0x5548CB: mov     [esp+9Ch+slot], eax
 0x5548CF: call    sub_54FEB0
 0x5548D4: add     esp, 1Ch
 0x5548D7: mov     edi, eax
@@ -69,7 +69,7 @@
 0x5548EB: jmp     loc_554ABC
 0x5548F0: cmp     ds:0B39B80h, ebx
 0x5548F6: jnz     short loc_5548FD
-0x5548F8: call    sub_553550
+0x5548F8: call    FaceGenManager_EnsureInitialized; Lazily allocates and constructs the process FaceGen manager singleton (0xDBC bytes). Callers use g_faceGenManager; the authoritative control/basis data comes from FaceGen\\si.ctl.
 0x5548FD: mov     eax, ds:0B39B80h
 0x554902: cmp     [eax+0DACh], ebx
 0x554908: jnz     loc_554992
@@ -88,7 +88,7 @@
 0x554932: cmp     ds:0B39B80h, ebx
 0x554938: mov     byte ptr [esp+80h+var_4], 7
 0x55493D: jnz     short loc_554944
-0x55493F: call    sub_553550
+0x55493F: call    FaceGenManager_EnsureInitialized; Lazily allocates and constructs the process FaceGen manager singleton (0xDBC bytes). Callers use g_faceGenManager; the authoritative control/basis data comes from FaceGen\\si.ctl.
 0x554944: mov     ecx, ds:0B39B80h
 0x55494A: mov     [ecx+0DACh], esi
 0x554950: mov     edx, ds:0B39B80h
@@ -100,7 +100,7 @@
 0x55496A: cmp     ds:0B39B80h, ebx
 0x554970: mov     esi, ds:0B120F4h
 0x554976: jnz     short loc_55497D
-0x554978: call    sub_553550
+0x554978: call    FaceGenManager_EnsureInitialized; Lazily allocates and constructs the process FaceGen manager singleton (0xDBC bytes). Callers use g_faceGenManager; the authoritative control/basis data comes from FaceGen\\si.ctl.
 0x55497D: mov     ecx, ds:0B39B80h
 0x554983: mov     ecx, [ecx+0DACh]
 0x554989: push    ebx
@@ -108,7 +108,7 @@
 0x55498D: call    sub_5506B0
 0x554992: cmp     ds:0B39B80h, ebx
 0x554998: jnz     short loc_55499F
-0x55499A: call    sub_553550
+0x55499A: call    FaceGenManager_EnsureInitialized; Lazily allocates and constructs the process FaceGen manager singleton (0xDBC bytes). Callers use g_faceGenManager; the authoritative control/basis data comes from FaceGen\\si.ctl.
 0x55499F: mov     eax, ds:0B39B80h
 0x5549A4: mov     ecx, [eax+0DACh]
 0x5549AA: lea     edx, [esp+80h+var_64]
@@ -120,7 +120,7 @@
 0x5549B9: mov     esi, [esp+80h+var_64]
 0x5549BD: cmp     [esi+8], ebx
 0x5549C0: jnz     short loc_5549D2
-0x5549C2: mov     ecx, [esp+80h+var_60]
+0x5549C2: mov     ecx, [esp+80h+slot]
 0x5549C6: push    ebx; char
 0x5549C7: push    ebx; int
 0x5549C8: push    ecx; int
@@ -155,7 +155,7 @@
 0x554A1E: lea     ecx, [esp+84h+var_64]; this
 0x554A22: mov     byte ptr [esp+84h+var_4], 7
 0x554A2A: call    NiSmartPointer_Set??
-0x554A2F: mov     eax, [esp+80h+var_60]
+0x554A2F: mov     eax, [esp+80h+slot]
 0x554A33: mov     esi, [esp+80h+var_64]
 0x554A37: push    ebx; char
 0x554A38: push    ebx; int
@@ -168,7 +168,7 @@
 0x554A45: jz      short loc_554A69
 0x554A47: cmp     ds:0B39B80h, ebx
 0x554A4D: jnz     short loc_554A54
-0x554A4F: call    sub_553550
+0x554A4F: call    FaceGenManager_EnsureInitialized; Lazily allocates and constructs the process FaceGen manager singleton (0xDBC bytes). Callers use g_faceGenManager; the authoritative control/basis data comes from FaceGen\\si.ctl.
 0x554A54: mov     ecx, ds:0B39B80h
 0x554A5A: mov     ecx, [ecx+0DACh]
 0x554A60: push    esi
@@ -201,18 +201,18 @@
 0x554AA2: push    1
 0x554AA4: mov     ecx, esi
 0x554AA6: call    eax
-0x554AA8: mov     edx, [esp+80h+arg_8]
+0x554AA8: mov     edx, [esp+80h+parameters]
 0x554AAF: lea     ecx, [esp+80h+var_6C]
-0x554AB3: push    ecx
-0x554AB4: push    edx
-0x554AB5: mov     ecx, esi
-0x554AB7: call    sub_559870
+0x554AB3: push    ecx; outGeometry
+0x554AB4: push    edx; parameters
+0x554AB5: mov     ecx, esi; this
+0x554AB7: call    BSFaceGenModel_CreateMorphedGeometry; Clone model geometry and apply both EGM position banks at scale 1.0. The wrapper returns the deformed geometry without regenerating normals.
 0x554ABC: mov     ecx, [esp+80h+var_6C]
 0x554AC0: cmp     ecx, ebx
 0x554AC2: jz      loc_554CD8
 0x554AC8: push    offset aFacegeneyeleft; "FaceGenEyeLeft"
 0x554ACD: call    NiObjectNET_SetName
-0x554AD2: mov     eax, [esp+80h+arg_8]
+0x554AD2: mov     eax, [esp+80h+parameters]
 0x554AD9: mov     eax, [eax+6Ch]
 0x554ADC: cmp     eax, ebx
 0x554ADE: jz      short loc_554B1D
@@ -228,26 +228,26 @@
 0x554AFC: mov     edx, dword ptr [esp+8Ch+ArgList]
 0x554B00: mov     ecx, ds:0B333A0h
 0x554B06: add     esp, 0Ch
-0x554B09: push    ebx; char
-0x554B0A: push    ebx; char
-0x554B0B: push    edx; ArgList
-0x554B0C: lea     eax, [esp+8Ch+var_60]
-0x554B10: push    eax; int
-0x554B11: call    sub_442890
+0x554B09: push    ebx; searchArchives
+0x554B0A: push    ebx; allowMissing
+0x554B0B: push    edx; path
+0x554B0C: lea     eax, [esp+8Ch+slot]
+0x554B10: push    eax; outTexture
+0x554B11: call    OB_TES_LoadOrFindSourceTexture_010201A0; TES texture cache/load helper: checks the global texture map, optionally verifies file existence via FileFinder, loads NiSourceTexture by filename, caches it, and returns a refcounted texture pointer.
 0x554B16: mov     byte ptr [esp+80h+var_4], 0Ah
 0x554B1B: jmp     short loc_554B39
-0x554B1D: push    ebx; char
-0x554B1E: push    ebx; char
+0x554B1D: push    ebx; searchArchives
+0x554B1E: push    ebx; allowMissing
 0x554B1F: push    offset aTexturesCharac; "Textures\\Characters\\Eyes\\EyeDefault."...
-0x554B24: lea     ecx, [esp+8Ch+var_60]
-0x554B28: push    ecx; int
+0x554B24: lea     ecx, [esp+8Ch+slot]
+0x554B28: push    ecx; outTexture
 0x554B29: mov     ecx, ds:0B333A0h
-0x554B2F: call    sub_442890
+0x554B2F: call    OB_TES_LoadOrFindSourceTexture_010201A0; TES texture cache/load helper: checks the global texture map, optionally verifies file existence via FileFinder, loads NiSourceTexture by filename, caches it, and returns a refcounted texture pointer.
 0x554B34: mov     byte ptr [esp+80h+var_4], 0Bh
-0x554B39: push    eax
-0x554B3A: lea     ecx, [esp+84h+var_68]
-0x554B3E: call    sub_55E2A0
-0x554B43: mov     eax, [esp+80h+var_60]
+0x554B39: push    eax; incoming
+0x554B3A: lea     ecx, [esp+84h+texture]; this
+0x554B3E: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
+0x554B43: mov     eax, [esp+80h+slot]
 0x554B47: cmp     eax, ebx
 0x554B49: mov     byte ptr [esp+80h+var_4], 6
 0x554B4E: jz      short loc_554B6E
@@ -264,7 +264,7 @@
 0x554B68: push    1
 0x554B6A: mov     ecx, esi
 0x554B6C: call    eax
-0x554B6E: mov     ebp, [esp+80h+var_68]
+0x554B6E: mov     ebp, [esp+80h+texture]
 0x554B72: cmp     ebp, ebx
 0x554B74: jz      short loc_554BEE
 0x554B76: push    30h ; '0'; Size
@@ -279,31 +279,31 @@
 0x554B94: mov     esi, eax
 0x554B96: jmp     short loc_554B9A
 0x554B98: xor     esi, esi
-0x554B9A: push    ebp
-0x554B9B: mov     ecx, esi
+0x554B9A: push    ebp; texture
+0x554B9B: mov     ecx, esi; this
 0x554B9D: mov     byte ptr [esp+84h+var_4], 6
-0x554BA5: call    NiTexturingProperty__SetUnk08
-0x554BAA: push    3
-0x554BAC: mov     ecx, esi
-0x554BAE: call    sub_405870
+0x554BA5: call    OB_NiTexturingProperty_SetBaseTexture_010201A0
+0x554BAA: push    3; value
+0x554BAC: mov     ecx, esi; this
+0x554BAE: call    OB_NiTexturingProperty_SetClampMode_010201A0; NiTexturingProperty map flag helper: ensures map slot 0 exists and writes arg-derived bits into map Unk04 bits 0xC000. 0x560AC0 calls it with 0 for billboard texture property state.
 0x554BB3: push    2; a2
 0x554BB5: mov     ecx, esi; this
-0x554BB7: call    sub_405900
+0x554BB7: call    NiTexturingProperty_SetBaseMapFilterMode
 0x554BBC: mov     ecx, [esp+80h+var_6C]
 0x554BC0: push    6
-0x554BC2: call    NiNode_GetNiPropertyByID
+0x554BC2: call    NiNode_GetNiPropertyByID;
 0x554BC7: test    eax, eax
 0x554BC9: jz      short loc_554BE4
 0x554BCB: push    6
-0x554BCD: lea     ecx, [esp+84h+var_60]
+0x554BCD: lea     ecx, [esp+84h+slot]
 0x554BD1: push    ecx
 0x554BD2: mov     ecx, [esp+88h+var_6C]
 0x554BD6: call    sub_708560
-0x554BDB: lea     ecx, [esp+80h+var_60]; this
-0x554BDF: call    sub_7016A0
+0x554BDB: lea     ecx, [esp+80h+slot]; slot
+0x554BDF: call    NiPointerSlot_Release
 0x554BE4: mov     ecx, [esp+80h+var_6C]; this
 0x554BE8: push    esi; a2
-0x554BE9: call    sub_405680
+0x554BE9: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x554BEE: mov     eax, [esp+80h+var_6C]
 0x554BF2: cmp     [eax+0B8h], ebx
 0x554BF8: push    ebx
@@ -377,9 +377,9 @@
 0x554CCA: push    1
 0x554CCC: mov     ecx, ebp
 0x554CCE: call    eax
-0x554CD0: mov     [esp+80h+var_68], ebx
+0x554CD0: mov     [esp+80h+texture], ebx
 0x554CD4: mov     ecx, [esp+80h+var_6C]
-0x554CD8: mov     edx, [esp+80h+arg_8]
+0x554CD8: mov     edx, [esp+80h+parameters]
 0x554CDF: cmp     [edx+0BCh], ebx
 0x554CE5: jz      loc_555129
 0x554CEB: mov     eax, edx
@@ -412,7 +412,7 @@
 0x554D3D: jmp     loc_554EF0
 0x554D42: cmp     ds:0B39B80h, ebx
 0x554D48: jnz     short loc_554D4F
-0x554D4A: call    sub_553550
+0x554D4A: call    FaceGenManager_EnsureInitialized; Lazily allocates and constructs the process FaceGen manager singleton (0xDBC bytes). Callers use g_faceGenManager; the authoritative control/basis data comes from FaceGen\\si.ctl.
 0x554D4F: mov     ecx, ds:0B39B80h
 0x554D55: cmp     [ecx+0DACh], ebx
 0x554D5B: jnz     loc_554DE4
@@ -431,7 +431,7 @@
 0x554D85: cmp     ds:0B39B80h, ebx
 0x554D8B: mov     byte ptr [esp+80h+var_4], 0Dh
 0x554D90: jnz     short loc_554D97
-0x554D92: call    sub_553550
+0x554D92: call    FaceGenManager_EnsureInitialized; Lazily allocates and constructs the process FaceGen manager singleton (0xDBC bytes). Callers use g_faceGenManager; the authoritative control/basis data comes from FaceGen\\si.ctl.
 0x554D97: mov     edx, ds:0B39B80h
 0x554D9D: mov     [edx+0DACh], esi
 0x554DA3: mov     eax, ds:0B39B80h
@@ -443,7 +443,7 @@
 0x554DBD: cmp     ds:0B39B80h, ebx
 0x554DC3: mov     esi, ds:0B120F4h
 0x554DC9: jnz     short loc_554DD0
-0x554DCB: call    sub_553550
+0x554DCB: call    FaceGenManager_EnsureInitialized; Lazily allocates and constructs the process FaceGen manager singleton (0xDBC bytes). Callers use g_faceGenManager; the authoritative control/basis data comes from FaceGen\\si.ctl.
 0x554DD0: mov     eax, ds:0B39B80h
 0x554DD5: mov     ecx, [eax+0DACh]
 0x554DDB: push    ebx
@@ -451,7 +451,7 @@
 0x554DDF: call    sub_5506B0
 0x554DE4: cmp     ds:0B39B80h, ebx
 0x554DEA: jnz     short loc_554DF1
-0x554DEC: call    sub_553550
+0x554DEC: call    FaceGenManager_EnsureInitialized; Lazily allocates and constructs the process FaceGen manager singleton (0xDBC bytes). Callers use g_faceGenManager; the authoritative control/basis data comes from FaceGen\\si.ctl.
 0x554DF1: mov     edx, ds:0B39B80h
 0x554DF7: lea     ecx, [esp+80h+var_64]
 0x554DFB: push    ecx
@@ -501,7 +501,7 @@
 0x554E79: jz      short loc_554E9D
 0x554E7B: cmp     ds:0B39B80h, ebx
 0x554E81: jnz     short loc_554E88
-0x554E83: call    sub_553550
+0x554E83: call    FaceGenManager_EnsureInitialized; Lazily allocates and constructs the process FaceGen manager singleton (0xDBC bytes). Callers use g_faceGenManager; the authoritative control/basis data comes from FaceGen\\si.ctl.
 0x554E88: mov     edx, ds:0B39B80h
 0x554E8E: mov     ecx, [edx+0DACh]
 0x554E94: push    esi
@@ -534,18 +534,18 @@
 0x554ED6: push    1
 0x554ED8: mov     ecx, esi
 0x554EDA: call    eax
-0x554EDC: mov     edx, [esp+80h+arg_8]
+0x554EDC: mov     edx, [esp+80h+parameters]
 0x554EE3: lea     ecx, [esp+80h+var_6C]
-0x554EE7: push    ecx
-0x554EE8: push    edx
-0x554EE9: mov     ecx, esi
-0x554EEB: call    sub_559870
+0x554EE7: push    ecx; outGeometry
+0x554EE8: push    edx; parameters
+0x554EE9: mov     ecx, esi; this
+0x554EEB: call    BSFaceGenModel_CreateMorphedGeometry; Clone model geometry and apply both EGM position banks at scale 1.0. The wrapper returns the deformed geometry without regenerating normals.
 0x554EF0: mov     ecx, [esp+80h+var_6C]
 0x554EF4: cmp     ecx, ebx
 0x554EF6: jz      loc_5550FD
 0x554EFC: push    offset aFacegeneyerigh; "FaceGenEyeRight"
 0x554F01: call    NiObjectNET_SetName
-0x554F06: mov     eax, [esp+80h+arg_8]
+0x554F06: mov     eax, [esp+80h+parameters]
 0x554F0D: mov     eax, [eax+6Ch]
 0x554F10: cmp     eax, ebx
 0x554F12: jz      short loc_554F54
@@ -561,26 +561,26 @@
 0x554F30: mov     edx, dword ptr [esp+8Ch+ArgList]
 0x554F34: mov     ecx, ds:0B333A0h
 0x554F3A: add     esp, 0Ch
-0x554F3D: push    ebx; char
-0x554F3E: push    ebx; char
-0x554F3F: push    edx; ArgList
-0x554F40: lea     eax, [esp+8Ch+arg_8]
-0x554F47: push    eax; int
-0x554F48: call    sub_442890
+0x554F3D: push    ebx; searchArchives
+0x554F3E: push    ebx; allowMissing
+0x554F3F: push    edx; path
+0x554F40: lea     eax, [esp+8Ch+parameters]
+0x554F47: push    eax; outTexture
+0x554F48: call    OB_TES_LoadOrFindSourceTexture_010201A0; TES texture cache/load helper: checks the global texture map, optionally verifies file existence via FileFinder, loads NiSourceTexture by filename, caches it, and returns a refcounted texture pointer.
 0x554F4D: mov     byte ptr [esp+80h+var_4], 10h
 0x554F52: jmp     short loc_554F73
-0x554F54: push    ebx; char
-0x554F55: push    ebx; char
+0x554F54: push    ebx; searchArchives
+0x554F55: push    ebx; allowMissing
 0x554F56: push    offset aTexturesCharac; "Textures\\Characters\\Eyes\\EyeDefault."...
-0x554F5B: lea     ecx, [esp+8Ch+arg_8]
-0x554F62: push    ecx; int
+0x554F5B: lea     ecx, [esp+8Ch+parameters]
+0x554F62: push    ecx; outTexture
 0x554F63: mov     ecx, ds:0B333A0h
-0x554F69: call    sub_442890
+0x554F69: call    OB_TES_LoadOrFindSourceTexture_010201A0; TES texture cache/load helper: checks the global texture map, optionally verifies file existence via FileFinder, loads NiSourceTexture by filename, caches it, and returns a refcounted texture pointer.
 0x554F6E: mov     byte ptr [esp+80h+var_4], 11h
-0x554F73: push    eax
-0x554F74: lea     ecx, [esp+84h+var_68]
-0x554F78: call    sub_55E2A0
-0x554F7D: mov     eax, [esp+80h+arg_8]
+0x554F73: push    eax; incoming
+0x554F74: lea     ecx, [esp+84h+texture]; this
+0x554F78: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
+0x554F7D: mov     eax, [esp+80h+parameters]
 0x554F84: cmp     eax, ebx
 0x554F86: mov     byte ptr [esp+80h+var_4], 6
 0x554F8B: jz      short loc_554FAB
@@ -597,13 +597,13 @@
 0x554FA5: push    1
 0x554FA7: mov     ecx, esi
 0x554FA9: call    eax
-0x554FAB: mov     edi, [esp+80h+var_68]
+0x554FAB: mov     edi, [esp+80h+texture]
 0x554FAF: cmp     edi, ebx
 0x554FB1: jz      loc_555038
 0x554FB7: push    30h ; '0'; Size
 0x554FB9: call    FormHeapAlloc
 0x554FBE: add     esp, 4
-0x554FC1: mov     [esp+80h+arg_8], eax
+0x554FC1: mov     [esp+80h+parameters], eax
 0x554FC8: cmp     eax, ebx
 0x554FCA: mov     byte ptr [esp+80h+var_4], 12h
 0x554FCF: jz      short loc_554FDC
@@ -612,31 +612,31 @@
 0x554FD8: mov     esi, eax
 0x554FDA: jmp     short loc_554FDE
 0x554FDC: xor     esi, esi
-0x554FDE: push    edi
-0x554FDF: mov     ecx, esi
+0x554FDE: push    edi; texture
+0x554FDF: mov     ecx, esi; this
 0x554FE1: mov     byte ptr [esp+84h+var_4], 6
-0x554FE9: call    NiTexturingProperty__SetUnk08
-0x554FEE: push    3
-0x554FF0: mov     ecx, esi
-0x554FF2: call    sub_405870
+0x554FE9: call    OB_NiTexturingProperty_SetBaseTexture_010201A0
+0x554FEE: push    3; value
+0x554FF0: mov     ecx, esi; this
+0x554FF2: call    OB_NiTexturingProperty_SetClampMode_010201A0; NiTexturingProperty map flag helper: ensures map slot 0 exists and writes arg-derived bits into map Unk04 bits 0xC000. 0x560AC0 calls it with 0 for billboard texture property state.
 0x554FF7: push    2; a2
 0x554FF9: mov     ecx, esi; this
-0x554FFB: call    sub_405900
+0x554FFB: call    NiTexturingProperty_SetBaseMapFilterMode
 0x555000: mov     ecx, [esp+80h+var_6C]
 0x555004: push    6
-0x555006: call    NiNode_GetNiPropertyByID
+0x555006: call    NiNode_GetNiPropertyByID;
 0x55500B: test    eax, eax
 0x55500D: jz      short loc_55502E
 0x55500F: push    6
-0x555011: lea     ecx, [esp+84h+arg_8]
+0x555011: lea     ecx, [esp+84h+parameters]
 0x555018: push    ecx
 0x555019: mov     ecx, [esp+88h+var_6C]
 0x55501D: call    sub_708560
-0x555022: lea     ecx, [esp+80h+arg_8]; this
-0x555029: call    sub_7016A0
+0x555022: lea     ecx, [esp+80h+parameters]; slot
+0x555029: call    NiPointerSlot_Release
 0x55502E: mov     ecx, [esp+80h+var_6C]; this
 0x555032: push    esi; a2
-0x555033: call    sub_405680
+0x555033: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x555038: mov     eax, [esp+80h+var_6C]
 0x55503C: cmp     [eax+0B8h], ebx
 0x555042: push    ebx
@@ -698,7 +698,7 @@
 0x5550F5: call    edx
 0x5550F7: xor     ecx, ecx
 0x5550F9: mov     [esp+80h+var_6C], ecx
-0x5550FD: mov     edi, [esp+80h+var_68]
+0x5550FD: mov     edi, [esp+80h+texture]
 0x555101: cmp     edi, ebx
 0x555103: jz      short loc_55512D
 0x555105: lea     eax, [edi+4]
@@ -713,9 +713,9 @@
 0x55511B: call    eax
 0x55511D: mov     ecx, [esp+80h+var_6C]
 0x555121: xor     edi, edi
-0x555123: mov     [esp+80h+var_68], edi
+0x555123: mov     [esp+80h+texture], edi
 0x555127: jmp     short loc_55512D
-0x555129: mov     edi, [esp+80h+var_68]
+0x555129: mov     edi, [esp+80h+texture]
 0x55512D: cmp     ecx, ebx
 0x55512F: mov     byte ptr [esp+80h+var_4], 5
 0x555134: jz      short loc_555154
@@ -746,18 +746,18 @@
 0x555171: mov     ecx, edi
 0x555173: call    eax
 0x555175: push    ebx
-0x555176: call    FormHeapFree
+0x555176: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x55517B: push    ebx
-0x55517C: call    FormHeapFree
+0x55517C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x555181: mov     ecx, [esp+88h+var_50]
 0x555185: push    ecx
-0x555186: call    FormHeapFree
+0x555186: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x55518B: mov     edx, [esp+8Ch+var_48]
 0x55518F: push    edx
-0x555190: call    FormHeapFree
+0x555190: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x555195: mov     eax, dword ptr [esp+90h+ArgList]
 0x555199: push    eax
-0x55519A: call    FormHeapFree
+0x55519A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x55519F: add     esp, 14h
 0x5551A2: mov     ecx, [esp+80h+var_C]
 0x5551A6: mov     large fs:0, ecx
@@ -768,3 +768,66 @@
 0x5551B1: pop     ebx
 0x5551B2: add     esp, 6Ch
 0x5551B5: retn
+0x9BC160: lea     ecx, [ebp-58h]; void *
+0x9BC163: jmp     BSStringT_Clear
+0x9BC168: lea     ecx, [ebp-48h]; void *
+0x9BC16B: jmp     BSStringT_Clear
+0x9BC170: lea     ecx, [ebp-50h]; void *
+0x9BC173: jmp     BSStringT_Clear
+0x9BC178: lea     ecx, [ebp-40h]; void *
+0x9BC17B: jmp     BSStringT_Clear
+0x9BC180: lea     ecx, [ebp-38h]; void *
+0x9BC183: jmp     BSStringT_Clear
+0x9BC188: lea     ecx, [ebp-68h]; slot
+0x9BC18B: jmp     NiPointerSlot_Release
+0x9BC190: lea     ecx, [ebp-6Ch]; slot
+0x9BC193: jmp     NiPointerSlot_Release
+0x9BC198: lea     ecx, [ebp-64h]; slot
+0x9BC19B: jmp     NiPointerSlot_Release
+0x9BC1A0: mov     eax, [ebp-5Ch]
+0x9BC1A3: push    eax
+0x9BC1A4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BC1A9: pop     ecx
+0x9BC1AA: retn
+0x9BC1AB: mov     eax, [ebp-5Ch]
+0x9BC1AE: push    eax
+0x9BC1AF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BC1B4: pop     ecx
+0x9BC1B5: retn
+0x9BC1B6: lea     ecx, [ebp-60h]; slot
+0x9BC1B9: jmp     NiPointerSlot_Release
+0x9BC1BE: lea     ecx, [ebp-60h]; slot
+0x9BC1C1: jmp     NiPointerSlot_Release
+0x9BC1C6: mov     eax, [ebp-5Ch]
+0x9BC1C9: push    eax
+0x9BC1CA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BC1CF: pop     ecx
+0x9BC1D0: retn
+0x9BC1D1: lea     ecx, [ebp-64h]; slot
+0x9BC1D4: jmp     NiPointerSlot_Release
+0x9BC1D9: mov     eax, [ebp-5Ch]
+0x9BC1DC: push    eax
+0x9BC1DD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BC1E2: pop     ecx
+0x9BC1E3: retn
+0x9BC1E4: mov     eax, [ebp-5Ch]
+0x9BC1E7: push    eax
+0x9BC1E8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BC1ED: pop     ecx
+0x9BC1EE: retn
+0x9BC1EF: lea     ecx, [ebp+0Ch]; slot
+0x9BC1F2: jmp     NiPointerSlot_Release
+0x9BC1F7: lea     ecx, [ebp+0Ch]; slot
+0x9BC1FA: jmp     NiPointerSlot_Release
+0x9BC1FF: mov     eax, [ebp+0Ch]
+0x9BC202: push    eax
+0x9BC203: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BC208: pop     ecx
+0x9BC209: retn
+0x9BC20A: mov     edx, [esp+arg_4]
+0x9BC20E: lea     eax, [edx-70h]
+0x9BC211: mov     ecx, [edx-74h]
+0x9BC214: xor     ecx, eax
+0x9BC216: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BC21B: mov     eax, offset stru_AE5D8C
+0x9BC220: jmp     ___CxxFrameHandler3

@@ -1,1 +1,1 @@
-IPropertyBag_0
+typedef IPropertyBag IPropertyBag_0;

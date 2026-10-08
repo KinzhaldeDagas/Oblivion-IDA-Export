@@ -9,7 +9,7 @@
 0x589AB1: cmp     dword ptr [esi+1Ch], 0
 0x589AB5: jz      short loc_589B04
 0x589AB7: push    3
-0x589AB9: call    nullsub_returnTrue_0arg
+0x589AB9: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x589ABE: mov     ecx, [esi+1Ch]
 0x589AC1: mov     eax, [ecx]
 0x589AC3: mov     eax, [eax+88h]
@@ -18,7 +18,7 @@
 0x589ACD: lea     edx, [esp+10h+var_4]
 0x589AD1: push    edx
 0x589AD2: call    eax
-0x589AD4: mov     eax, dword ptr [esp+0Ch+var_4]
+0x589AD4: mov     eax, [esp+0Ch+var_4]
 0x589AD8: test    eax, eax
 0x589ADA: jz      short loc_589AFA
 0x589ADC: mov     esi, eax
@@ -35,7 +35,7 @@
 0x589AF6: mov     ecx, esi
 0x589AF8: call    eax
 0x589AFA: push    2
-0x589AFC: call    nullsub_returnTrue_0arg
+0x589AFC: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x589B01: add     esp, 4
 0x589B04: mov     dword ptr [edi+24h], 0
 0x589B0B: pop     edi

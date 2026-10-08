@@ -1,2 +1,2 @@
-0x4CA970: add     ecx, 28h ; '('
-0x4CA973: jmp     ExtraDataList_GetOwner
+0x4CA970: add     ecx, 28h ; '('; Verified Oblivion getter: returns only the direct XOWN/ExtraOwnership form stored in the cell extra list at cell+8. Unlike Fallout TESObjectCELL::GetOwner, it does not fall back to an encounter-zone owner.
+0x4CA973: jmp     ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.

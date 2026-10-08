@@ -10,8 +10,8 @@
 0x6D1979: jmp     short loc_6D19A9
 0x6D197B: fld     [esp+10h+arg_0]
 0x6D197F: push    ecx
-0x6D1980: fstp    [esp+14h+var_14]; float
-0x6D1983: call    sub_6C36B0
+0x6D1980: fstp    [esp+14h+applicationTime]; applicationTime
+0x6D1983: call    NiTimeController_IsUpdateUnchanged; Return true only when an active NiTimeController can reuse its previous interpolation result. Active bit is NiTimeController.flags +0x08 bit 3. On an application-time change, computeScaledTimeOnUpdate +0x2C normally calls virtual ComputeScaledTime and refreshes cachedScaledTime +0x28; forceUpdate +0x38 forces one changed result and is cleared. If +0x2C is zero, report changed without recomputing +0x28.
 0x6D1988: test    al, al
 0x6D198A: jz      short loc_6D19A9
 0x6D198C: mov     ecx, [esi+3Ch]
@@ -70,7 +70,7 @@
 0x6D1A35: mov     eax, [edx+eax*4]
 0x6D1A38: mov     ecx, [ecx]; this
 0x6D1A3A: push    eax; a2
-0x6D1A3B: call    NiDX9Renderer__SetShaderAccumulator
+0x6D1A3B: call    NiDX9Renderer__SetShaderAccumulator;
 0x6D1A40: pop     edi
 0x6D1A41: pop     esi
 0x6D1A42: add     esp, 0Ch
@@ -96,7 +96,7 @@
 0x6D1A75: mov     ecx, edi
 0x6D1A77: call    sub_6D1920
 0x6D1A7C: mov     ecx, eax; this
-0x6D1A7E: call    NiDX9Renderer__SetShaderAccumulator
+0x6D1A7E: call    NiDX9Renderer__SetShaderAccumulator;
 0x6D1A83: pop     ebx
 0x6D1A84: pop     edi
 0x6D1A85: pop     esi

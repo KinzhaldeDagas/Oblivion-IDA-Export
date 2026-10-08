@@ -4,14 +4,14 @@
 0x7C0B08: jz      short loc_7C0B14
 0x7C0B0A: add     [ecx+5Ch], esi
 0x7C0B0D: jnz     short loc_7C0B14
-0x7C0B0F: call    sub_772560
+0x7C0B0F: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x7C0B14: cmp     ebx, edi
 0x7C0B16: mov     [esp+arg_28], esi
 0x7C0B1A: jz      short loc_7C0B28
 0x7C0B1C: add     [ebx+60h], esi
 0x7C0B1F: jnz     short loc_7C0B28
 0x7C0B21: mov     ecx, ebx
-0x7C0B23: call    sub_7604D0
+0x7C0B23: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x7C0B28: xor     eax, eax
 0x7C0B2A: mov     ecx, [esp+arg_20]
 0x7C0B2E: mov     large fs:0, ecx

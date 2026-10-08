@@ -1,10 +1,10 @@
-0x57DA90: sub     esp, 10h
+0x57DA90: sub     esp, 10h; AchievementsNative evidence: default UI hit-test recursively scans visible/non-hidden target tiles, chooses highest depth, and tie-breaks list items by lower listindex; use active/mouseover tile evidence before cursor-sprite coordinate fallbacks.
 0x57DA93: push    ebx
-0x57DA94: mov     ebx, [esp+14h+arg_4]
+0x57DA94: mov     ebx, [esp+14h+root]
 0x57DA98: test    ebx, ebx
 0x57DA9A: push    ebp
 0x57DA9B: push    esi
-0x57DA9C: mov     esi, [esp+1Ch+arg_0]
+0x57DA9C: mov     esi, [esp+1Ch+maxFocus]
 0x57DAA0: mov     ebp, [esi]
 0x57DAA2: mov     [esp+1Ch+var_4], ecx
 0x57DAA6: mov     [esp+1Ch+var_10], 0
@@ -51,15 +51,15 @@
 0x57DB2D: mov     edi, [ebx+34h]
 0x57DB30: test    edi, edi
 0x57DB32: jz      short loc_57DB94
-0x57DB34: mov     ecx, [esp+20h+var_4]
+0x57DB34: mov     ecx, [esp+20h+var_4]; this
 0x57DB38: lea     eax, [edi+8]
 0x57DB3B: mov     eax, [eax]
 0x57DB3D: mov     edi, [edi]
-0x57DB3F: push    eax
+0x57DB3F: push    eax; root
 0x57DB40: lea     eax, [esp+24h+var_C]
-0x57DB44: push    eax
+0x57DB44: push    eax; maxFocus
 0x57DB45: mov     [esp+28h+var_C], 80000000h
-0x57DB4D: call    sub_57DA90
+0x57DB4D: call    InterfaceManager__ScanForMaxFocus; AchievementsNative evidence: default UI hit-test recursively scans visible/non-hidden target tiles, chooses highest depth, and tie-breaks list items by lower listindex; use active/mouseover tile evidence before cursor-sprite coordinate fallbacks.
 0x57DB52: mov     esi, eax
 0x57DB54: test    esi, esi
 0x57DB56: jz      short loc_57DB8C
@@ -75,14 +75,14 @@
 0x57DB72: test    eax, eax
 0x57DB74: jz      short loc_57DB8C
 0x57DB76: fld     dword ptr [eax+4]
-0x57DB79: call    Double_To_SInt32
+0x57DB79: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x57DB7E: cmp     eax, [esp+20h+var_8]
 0x57DB82: jge     short loc_57DB8C
 0x57DB84: mov     [esp+20h+var_8], eax
 0x57DB88: mov     [esp+20h+var_10], esi
 0x57DB8C: test    edi, edi
 0x57DB8E: jnz     short loc_57DB34
-0x57DB90: mov     esi, [esp+20h+arg_0]
+0x57DB90: mov     esi, [esp+20h+maxFocus]
 0x57DB94: push    0FC9h
 0x57DB99: mov     ecx, ebx
 0x57DB9B: call    Tile_GetFloat
@@ -104,7 +104,7 @@
 0x57DBD3: test    eax, eax
 0x57DBD5: jz      short loc_57DC1E
 0x57DBD7: fld     dword ptr [eax+4]
-0x57DBDA: call    Double_To_SInt32
+0x57DBDA: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x57DBDF: cmp     eax, ebp
 0x57DBE1: mov     [esp+1Ch+var_C], eax
 0x57DBE5: jle     short loc_57DBFA
@@ -124,7 +124,7 @@
 0x57DC08: test    eax, eax
 0x57DC0A: jz      short loc_57DC1E
 0x57DC0C: fld     dword ptr [eax+4]
-0x57DC0F: call    Double_To_SInt32
+0x57DC0F: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x57DC14: cmp     eax, [esp+1Ch+var_8]
 0x57DC18: jge     short loc_57DC1E
 0x57DC1A: mov     [esp+1Ch+var_10], ebx

@@ -1,4 +1,4 @@
-0x403070: mov     eax, [esp+arg_0]
+0x403070: mov     eax, [esp+arg_0]; [Controller decode 2026-07-09] Converts DirectInput POV angle into Oblivion virtual joystick button. Neutral 0xFFFF/0xFFFFFFFF returns -1; non-neutral maps povValue/4500 + 0x20.
 0x403074: mov     edx, [esp+arg_4]
 0x403078: lea     eax, [eax+eax*4]
 0x40307B: lea     eax, [edx+eax*8]

@@ -1,4 +1,4 @@
-0x631B50: mov     ax, [esp+arg_0]
+0x631B50: mov     ax, [esp+arg_0]; TES4 authoritative: process vtable +0x2C8 movement flag setter. Replaces process+0x1FC with assembled movement/action flags.
 0x631B55: test    al, 30h
 0x631B57: jz      short loc_631B83
 0x631B59: mov     edx, ds:0B333C4h

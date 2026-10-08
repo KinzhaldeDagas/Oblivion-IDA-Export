@@ -30,7 +30,7 @@
 0x537F7C: fxch    st(1)
 0x537F7E: fstp    [esp+190h+var_158]
 0x537F82: fmul    dword ptr ds:0B37AE8h
-0x537F88: fstp    dword ptr [esp+190h+var_140+0Ch]
+0x537F88: fstp    [esp+190h+outData+0Ch]
 0x537F8C: call    edx
 0x537F8E: fld     dword ptr [eax]
 0x537F90: add     esi, 0Ch
@@ -48,10 +48,10 @@
 0x537FC0: mov     edi, [esp+190h+var_168]
 0x537FC4: test    edi, edi
 0x537FC6: jz      short loc_537FE2
-0x537FC8: lea     eax, [esp+190h+var_140+8]
-0x537FCC: push    eax
-0x537FCD: mov     ecx, edi
-0x537FCF: call    sub_677C70
+0x537FC8: lea     eax, [esp+190h+outData+8]
+0x537FCC: push    eax; outData
+0x537FCD: mov     ecx, edi; this
+0x537FCF: call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.
 0x537FD4: or      [esp+190h+var_160], 1
 0x537FD9: cmp     dword ptr [eax], 0
 0x537FDC: jz      short loc_537FE2
@@ -60,7 +60,7 @@
 0x537FE2: xor     bl, bl
 0x537FE4: test    byte ptr [esp+190h+var_160], 1
 0x537FE9: jz      short loc_538014
-0x537FEB: mov     esi, dword ptr [esp+190h+var_140+8]
+0x537FEB: mov     esi, [esp+190h+outData+8]
 0x537FEF: and     [esp+190h+var_160], 0FFFFFFFEh
 0x537FF4: test    esi, esi
 0x537FF6: jz      short loc_538014
@@ -79,9 +79,9 @@
 0x538014: test    bl, bl
 0x538016: jz      loc_53883D
 0x53801C: lea     ecx, [esp+190h+var_130]
-0x538020: push    ecx
-0x538021: mov     ecx, edi
-0x538023: call    sub_677C70
+0x538020: push    ecx; outData
+0x538021: mov     ecx, edi; this
+0x538023: call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.
 0x538028: mov     edi, [eax]
 0x53802A: mov     eax, [esp+190h+var_130]
 0x53802E: test    eax, eax
@@ -148,7 +148,7 @@
 0x5380FA: push    eax
 0x5380FB: lea     ecx, [esp+194h+var_12C]
 0x5380FF: push    ecx
-0x538100: call    sub_43F3E0
+0x538100: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x538105: add     esp, 8
 0x538108: fld     [esp+190h+var_12C]
 0x53810C: fistp   [esp+190h+var_150]
@@ -182,7 +182,7 @@
 0x53816C: shufps  xmm0, xmm0, 0AAh ; 'ª'
 0x538170: fld     [esp+190h+var_164]
 0x538174: movss   [esp+190h+var_148], xmm0
-0x53817A: fadd    dword ptr [esp+190h+var_140+0Ch]
+0x53817A: fadd    [esp+190h+outData+0Ch]
 0x53817E: fld     [esp+190h+var_148]
 0x538182: fcompp
 0x538184: fnstsw  ax

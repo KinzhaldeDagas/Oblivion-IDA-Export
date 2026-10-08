@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x57BEA4",
-    "line": "mov     [esp+14h+var_7], al",
+    "line": "mov     [esp+14h+source], al",
     "mnemonic": "mov",
     "size": 4
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x57BF49",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x57BF61",
-    "line": "cmp     [esp+0Ch+var_7], bl",
+    "line": "cmp     [esp+0Ch+source], bl",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x57BF67",
-    "line": "mov     [esp+0Ch+var_7], bl",
+    "line": "mov     [esp+0Ch+source], bl",
     "mnemonic": "mov",
     "size": 4
   },
@@ -709,13 +709,13 @@
   },
   {
     "ea": "0x57BF7F",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x57BF85",
-    "line": "push    ebx; Size",
+    "line": "push    ebx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
@@ -727,7 +727,7 @@
   },
   {
     "ea": "0x57BF8A",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -739,25 +739,25 @@
   },
   {
     "ea": "0x57BF90",
-    "line": "push    ebx; Size",
+    "line": "push    ebx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x57BF91",
-    "line": "lea     ecx, [esp+10h+var_7]",
+    "line": "lea     ecx, [esp+10h+source]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x57BF95",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x57BF96",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -769,13 +769,13 @@
   },
   {
     "ea": "0x57BFA1",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x57BFA7",
-    "line": "push    ebx; Size",
+    "line": "push    ebx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
@@ -787,7 +787,7 @@
   },
   {
     "ea": "0x57BFAC",
-    "line": "push    edx; Src",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -799,13 +799,13 @@
   },
   {
     "ea": "0x57BFB2",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x57BFB8",
-    "line": "push    ebx; Size",
+    "line": "push    ebx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x57BFBD",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -829,7 +829,7 @@
   },
   {
     "ea": "0x57BFC3",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -841,13 +841,13 @@
   },
   {
     "ea": "0x57BFC9",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x57BFCA",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -859,7 +859,7 @@
   },
   {
     "ea": "0x57BFD5",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -877,13 +877,13 @@
   },
   {
     "ea": "0x57BFE1",
-    "line": "push    ebx; Size",
+    "line": "push    ebx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x57BFE2",
-    "line": "push    offset byte_B14500; Src",
+    "line": "push    offset byte_B14500; source",
     "mnemonic": "push",
     "size": 5
   },

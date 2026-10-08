@@ -52,7 +52,7 @@
 0x7E3B83: call    sub_401080
 0x7E3B88: jmp     short loc_7E3B8C
 0x7E3B8A: xor     edi, edi
-0x7E3B8C: mov     [esi+14h], edi
+0x7E3B8C: mov     [esi+14h], edi;
 0x7E3B8F: xor     eax, eax
 0x7E3B91: cmp     [esi+26h], bp
 0x7E3B95: jbe     short loc_7E3BA9
@@ -75,3 +75,20 @@
 0x7E3BC5: pop     ebx
 0x7E3BC6: add     esp, 10h
 0x7E3BC9: retn    8
+0x9CF6B0: mov     ecx, [ebp-10h]
+0x9CF6B3: jmp     NiRefObject_destr
+0x9CF6B8: mov     ecx, [ebp-10h]
+0x9CF6BB: add     ecx, 1Ch
+0x9CF6BE: jmp     loc_4BFCA0
+0x9CF6C3: mov     eax, [ebp+4]
+0x9CF6C6: push    eax
+0x9CF6C7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CF6CC: pop     ecx
+0x9CF6CD: retn
+0x9CF6CE: mov     edx, [esp+arg_4]
+0x9CF6D2: lea     eax, [edx-14h]
+0x9CF6D5: mov     ecx, [edx-18h]
+0x9CF6D8: xor     ecx, eax
+0x9CF6DA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CF6DF: mov     eax, offset stru_AF82F0
+0x9CF6E4: jmp     ___CxxFrameHandler3

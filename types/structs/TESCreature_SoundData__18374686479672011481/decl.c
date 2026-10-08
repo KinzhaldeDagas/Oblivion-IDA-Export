@@ -1,1 +1,5 @@
-TESCreature::SoundData
+union TESCreature::SoundData
+{
+TESCreature::CreatureSoundEntry **sounds;
+TESCreature *parentSounds;
+};

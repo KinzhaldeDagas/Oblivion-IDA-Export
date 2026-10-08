@@ -1,22 +1,21 @@
 PlayerCharacter *__userpurge sub_69CFB0@<eax>(
         MobileObject *a1@<ecx>,
-        char a2@<bpl>,
-        double a3@<st2>,
-        double a4@<st1>,
-        double a5@<st0>,
-        int a6,
-        TESObjectREFR a7)
+        double a2@<st2>,
+        double a3@<st1>,
+        double a4@<st0>,
+        int a5,
+        TESObjectREFR a6)
 {
   bhkCharacterProxy *CharProxy; // ebx
   UInt32 refID; // ecx
   void *v10; // esi
   MobileObject *v11; // eax
   signed int vtbl_high; // esi
-  int v13; // eax
-  int v14; // eax
+  NiAVObject *v13; // eax
+  _DWORD *BhkCollisionObjectRecursive; // eax
   _DWORD *v15; // ecx
-  int v16; // eax
-  int v17; // eax
+  NiAVObject *v16; // eax
+  _DWORD *v17; // eax
   int v18; // eax
   int v19; // eax
   int v20; // eax
@@ -27,78 +26,78 @@ PlayerCharacter *__userpurge sub_69CFB0@<eax>(
   UInt32 v25; // ecx
   PlayerCharacter *result; // eax
 
-  MobilObject_PostLinkModifiedForm((int)a1, a2, a3, a4, a5, a6, (int)a7.vtbl);
-  CharProxy = MobileObject_GetCharProxy(a1);
-  if ( CharProxy )
+  MobilObject_PostLinkModifiedForm((int)a1, a2, a3, a4, a5, (int)a6.vtbl); /*0x69cfc0*/
+  CharProxy = MobileObject_GetCharProxy(a1); /*0x69cfcc*/
+  if ( CharProxy ) /*0x69cfd0*/
   {
-    refID = a1[1].super.super.refID;
-    if ( refID && (*(int (__thiscall **)(UInt32))(*(_DWORD *)refID + 0x20))(refID) )
+    refID = a1[1].super.super.refID; /*0x69cfd6*/
+    if ( refID && (*(int (__thiscall **)(UInt32))(*(_DWORD *)refID + 0x20))(refID) ) /*0x69cfe7*/
     {
-      v10 = (void *)(*(int (__thiscall **)(UInt32))(*(_DWORD *)a1[1].super.super.refID + 0x20))(a1[1].super.super.refID);
-      v11 = (MobileObject *)OblivionDynamicCast(
+      v10 = (void *)(*(int (__thiscall **)(UInt32))(*(_DWORD *)a1[1].super.super.refID + 0x20))(a1[1].super.super.refID); /*0x69d003*/
+      v11 = (MobileObject *)OblivionDynamicCast( /*0x69d008*/
                               v10,
                               0,
                               (struct _s_RTTICompleteObjectLocator *)&TESObjectREFR `RTTI Type Descriptor',
                               &Actor `RTTI Type Descriptor',
                               0);
-      if ( v11 )
+      if ( v11 ) /*0x69d012*/
       {
-        vtbl_high = HIWORD(sub_65ABE0(v11, &a7)->vtbl);
+        vtbl_high = HIWORD(MobileObject_GetCollisionFilterInfo(v11, &a6)->vtbl); /*0x69d020*/
       }
       else
       {
-        v13 = (*(int (__thiscall **)(void *))(*(_DWORD *)v10 + 0x154))(v10);
-        v14 = sub_480340(v13);
-        if ( v14 && (v15 = *(_DWORD **)(v14 + 0x10)) != 0 )
-          vtbl_high = *((unsigned __int16 *)sub_497340(v15, &a7) + 1);
+        v13 = (NiAVObject *)(*(int (__thiscall **)(void *))(*(_DWORD *)v10 + 0x154))(v10); /*0x69d033*/
+        BhkCollisionObjectRecursive = NiAVObject_FindBhkCollisionObjectRecursive(v13); /*0x69d036*/
+        if ( BhkCollisionObjectRecursive && (v15 = (_DWORD *)BhkCollisionObjectRecursive[4]) != 0 ) /*0x69d047*/
+          vtbl_high = *((unsigned __int16 *)sub_497340(v15, &a6) + 1); /*0x69d053*/
         else
-          vtbl_high = sub_531D80();
+          vtbl_high = sub_531D80(); /*0x69d05e*/
       }
     }
     else
     {
-      v16 = (int)a1->vtbl->super.GetNiNode((TESObjectREFR *)a1);
-      v17 = sub_480340(v16);
-      if ( v17 && (v18 = *(_DWORD *)(v17 + 0x10)) != 0 )
+      v16 = (NiAVObject *)a1->vtbl->super.GetNiNode(a1); /*0x69d06c*/
+      v17 = NiAVObject_FindBhkCollisionObjectRecursive(v16); /*0x69d06f*/
+      if ( v17 && (v18 = v17[4]) != 0 ) /*0x69d080*/
       {
-        v19 = *(_DWORD *)(v18 + 8);
-        if ( v19 && (v20 = v19 + 0x14) != 0 )
-          vtbl_high = HIWORD(*(_DWORD *)(v20 + 0x1C));
+        v19 = *(_DWORD *)(v18 + 8); /*0x69d082*/
+        if ( v19 && (v20 = v19 + 0x14) != 0 ) /*0x69d08c*/
+          vtbl_high = HIWORD(*(_DWORD *)(v20 + 0x1C)); /*0x69d091*/
         else
-          vtbl_high = 0;
+          vtbl_high = 0; /*0x69d098*/
       }
       else
       {
-        vtbl_high = (unsigned __int16)(dword_B2EB3C + 1);
-        dword_B2EB3C = vtbl_high;
-        if ( !vtbl_high )
+        vtbl_high = (unsigned __int16)(dword_B2EB3C + 1); /*0x69d0a6*/
+        dword_B2EB3C = vtbl_high; /*0x69d0ac*/
+        if ( !vtbl_high ) /*0x69d0b2*/
         {
-          vtbl_high = 0xA;
-          dword_B2EB3C = 0xA;
+          vtbl_high = 0xA; /*0x69d0b4*/
+          dword_B2EB3C = 0xA; /*0x69d0b9*/
         }
       }
     }
-    sub_57E270(CharProxy, &a7);
-    v21 = *((_DWORD **)CharProxy + 0xD9);
-    v22 = (int)a7.vtbl & 0xFFC0 | 7 | (vtbl_high << 0x10);
-    if ( v21 )
+    bhkCharacterProxy_GetCollisionFilterInfo(CharProxy, &a6); /*0x69d0c6*/
+    v21 = *((_DWORD **)CharProxy + 0xD9); /*0x69d0cf*/
+    v22 = (int)a6.vtbl & 0xFFC0 | 7 | (vtbl_high << 0x10); /*0x69d0e0*/
+    if ( v21 ) /*0x69d0e4*/
     {
-      v23 = v21[2];
-      if ( v23 )
+      v23 = v21[2]; /*0x69d0e6*/
+      if ( v23 ) /*0x69d0eb*/
       {
-        v24 = v23 + 0x14;
-        if ( v24 )
-          *(_DWORD *)(v24 + 0x1C) = v22;
+        v24 = v23 + 0x14; /*0x69d0ed*/
+        if ( v24 ) /*0x69d0f0*/
+          *(_DWORD *)(v24 + 0x1C) = v22; /*0x69d0f2*/
       }
-      (*(void (__thiscall **)(_DWORD *))(*v21 + 0x80))(v21);
+      (*(void (__thiscall **)(_DWORD *))(*v21 + 0x80))(v21); /*0x69d0fd*/
     }
   }
-  v25 = a1[1].super.super.refID;
-  if ( v25 )
-    result = (PlayerCharacter *)(*(int (__thiscall **)(UInt32))(*(_DWORD *)v25 + 0x20))(v25);
+  v25 = a1[1].super.super.refID; /*0x69d100*/
+  if ( v25 ) /*0x69d107*/
+    result = (PlayerCharacter *)(*(int (__thiscall **)(UInt32))(*(_DWORD *)v25 + 0x20))(v25); /*0x69d10e*/
   else
-    result = 0;
-  if ( result != TESDataHandler_g_PlayerRef )
-    fNumberOfWeightedProjectileExisting = fMagicTrackingMultFog + fNumberOfWeightedProjectileExisting;
-  return result;
+    result = 0; /*0x69d112*/
+  if ( result != reference ) /*0x69d11a*/
+    MEMORY[0xB3C0D0] = flt_B37ED0[0x92] + MEMORY[0xB3C0D0]; /*0x69d128*/
+  return result; /*0x69d12e*/
 }

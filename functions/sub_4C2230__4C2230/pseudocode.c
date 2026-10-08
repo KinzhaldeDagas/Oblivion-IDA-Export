@@ -1,56 +1,53 @@
-char __userpurge sub_4C2230@<al>(int a1@<ebx>, _DWORD *a2, unsigned int a3, _DWORD *a4)
+char __stdcall sub_4C2230(_DWORD *a1, unsigned int a2, _DWORD *a3)
 {
   char result; // al
   _WORD *v5; // eax
   _WORD *v6; // eax
-  int v7; // esi
+  signed int v7; // esi
   const void **v8; // edi
   int v9; // eax
   int v10; // eax
-  size_t v11; // [esp-10h] [ebp-14h]
 
-  result = 0;
-  if ( a2 )
+  result = 0; /*0x4c2235*/
+  if ( a1 ) /*0x4c2239*/
   {
-    if ( a3 )
+    if ( a2 ) /*0x4c2246*/
     {
-      if ( a4 )
+      if ( a3 ) /*0x4c2253*/
       {
-        HIDWORD(v11) = a1;
-        v5 = (_WORD *)(*(int (__thiscall **)(int, int, int))(*(_DWORD *)dword_BA7D98 + 0x10))(dword_BA7D98, 0x30, 0x25);
-        v5[2] = 0x30;
-        v6 = sub_4C1750(v5);
-        *a4 = v6;
-        if ( a3 <= 0x10 )
+        v5 = (_WORD *)(*(int (__thiscall **)(int, int, int))(*(_DWORD *)unk_BA7D98 + 0x10))(unk_BA7D98, 0x30, 0x25); /*0x4c2269*/
+        v5[2] = 0x30; /*0x4c226d*/
+        v6 = sub_4C1750(v5); /*0x4c2273*/
+        *a3 = v6; /*0x4c227b*/
+        if ( a2 <= 0x10 ) /*0x4c227e*/
         {
-          if ( v6 )
-            (**(void (__thiscall ***)(_WORD *, int))v6)(v6, 1);
-          *a4 = 0;
-          return 0;
+          if ( v6 ) /*0x4c22dd*/
+            (**(void (__thiscall ***)(_WORD *, int))v6)(v6, 1); /*0x4c22e7*/
+          *a3 = 0; /*0x4c22e9*/
+          return 0; /*0x4c22f0*/
         }
         else
         {
-          v7 = a3 - 0x10;
-          *((_DWORD *)v6 + 4) = *a2;
-          *((_DWORD *)v6 + 5) = a2[1];
-          *((_DWORD *)v6 + 6) = a2[2];
-          *((_DWORD *)v6 + 7) = a2[3];
-          v8 = (const void **)(v6 + 0x10);
-          v9 = *((_DWORD *)v6 + 0xA) & 0x3FFFFFFF;
-          if ( v9 < v7 )
+          v7 = a2 - 0x10; /*0x4c2280*/
+          *((_DWORD *)v6 + 4) = *a1; /*0x4c2285*/
+          *((_DWORD *)v6 + 5) = a1[1]; /*0x4c228b*/
+          *((_DWORD *)v6 + 6) = a1[2]; /*0x4c2291*/
+          *((_DWORD *)v6 + 7) = a1[3]; /*0x4c2297*/
+          v8 = (const void **)(v6 + 0x10); /*0x4c229f*/
+          v9 = *((_DWORD *)v6 + 0xA) & 0x3FFFFFFF; /*0x4c22a5*/
+          if ( v9 < v7 ) /*0x4c22ac*/
           {
-            v10 = 2 * v9;
-            if ( v7 >= v10 )
-              v10 = a3 - 0x10;
-            sub_8A6E40(v8, v10, 1);
+            v10 = 2 * v9; /*0x4c22ae*/
+            if ( v7 >= v10 ) /*0x4c22b2*/
+              v10 = a2 - 0x10; /*0x4c22b4*/
+            sub_8A6E40(v8, v10, 1); /*0x4c22ba*/
           }
-          LODWORD(v11) = a3 - 0x10;
-          v8[1] = (const void *)v7;
-          memcpy((void *)*v8, a2 + 4, v11);
-          return 1;
+          v8[1] = (const void *)v7; /*0x4c22c3*/
+          memcpy((void *)*v8, a1 + 4, v7); /*0x4c22ca*/
+          return 1; /*0x4c22d5*/
         }
       }
     }
   }
-  return result;
+  return result; /*0x4c22d7*/
 }

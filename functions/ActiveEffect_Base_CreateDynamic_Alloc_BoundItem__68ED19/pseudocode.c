@@ -1,5 +1,5 @@
-int __usercall ActiveEffect_Base_CreateDynamic_::Alloc_BoundItem@<eax>(
-        int a1@<esi>,
+void __usercall ActiveEffect_Base_CreateDynamic_::Alloc_BoundItem(
+        EffectItem *a1@<esi>,
         int a2,
         int a3,
         int a4,
@@ -22,71 +22,77 @@ int __usercall ActiveEffect_Base_CreateDynamic_::Alloc_BoundItem@<eax>(
         int a21,
         int a22,
         int a23,
-        int a24,
-        int a25,
+        MagicCaster *a24,
+        MagicItem *a25,
         int a26,
         int a27)
 {
   BoundItemEffect *v27; // eax
   BoundItemEffect *v28; // eax
-  int v30; // [esp+64h] [ebp+64h]
+  int v29; // [esp+64h] [ebp+64h]
 
-  v27 = (BoundItemEffect *)FormHeapAlloc(0x8Cu);
-  v30 = (int)v27;
-  if ( !v27 )
-    return ActiveEffect_Base_CreateDynamic_::Return_0(
-             a2,
-             a3,
-             a4,
-             a5,
-             a6,
-             a7,
-             a8,
-             a9,
-             a10,
-             a11,
-             a12,
-             a13,
-             a14,
-             a15,
-             a16,
-             a17,
-             a18,
-             a19,
-             a20,
-             a21,
-             7,
-             a23,
-             a24,
-             a25,
-             0);
-  v28 = BoundItemEffect::BoundItemEffect(v27, a24, a25, a1);
-  return ActiveEffect_Base_CreateDynamic_::Wrapup(
-           (int)v28,
-           a2,
-           a3,
-           a4,
-           a5,
-           a6,
-           a7,
-           a8,
-           a9,
-           a10,
-           a11,
-           a12,
-           a13,
-           a14,
-           a15,
-           a16,
-           a17,
-           a18,
-           a19,
-           a20,
-           a21,
-           7,
-           a23,
-           a24,
-           a25,
-           v30,
-           a27);
+  v27 = (BoundItemEffect *)FormHeapAlloc(0x8Cu); /*0x68ed1e*/
+  v29 = (int)v27; /*0x68ed26*/
+  if ( v27 ) /*0x68ed34*/
+  {
+    v28 = BoundItemEffect::BoundItemEffect(v27, a24, a25, a1); /*0x68ed43*/
+    ActiveEffect_Base_CreateDynamic_::Wrapup( /*0x68ed48*/
+      (int)v28,
+      a2,
+      a3,
+      a4,
+      a5,
+      a6,
+      a7,
+      a8,
+      a9,
+      a10,
+      a11,
+      a12,
+      a13,
+      a14,
+      a15,
+      a16,
+      a17,
+      a18,
+      a19,
+      a20,
+      a21,
+      7,
+      a23,
+      (int)a24,
+      (int)a25,
+      v29,
+      a27);
+  }
+  else
+  {
+    ActiveEffect_Base_CreateDynamic_::Return_0( /*0x68ed34*/
+      a2,
+      a3,
+      a4,
+      a5,
+      a6,
+      a7,
+      a8,
+      a9,
+      a10,
+      a11,
+      a12,
+      a13,
+      a14,
+      a15,
+      a16,
+      a17,
+      a18,
+      a19,
+      a20,
+      a21,
+      7,
+      a23,
+      (int)a24,
+      (int)a25,
+      0,
+      a27);
+  }
 }

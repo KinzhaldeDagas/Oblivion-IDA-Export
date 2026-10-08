@@ -1,8 +1,10 @@
+// UCWUS pipeline note: effect-loop enchantment filter calls EnchantmentItem_EffectAllowedFromEnch. Keep this intact; UCWUS 0x00010009 moves selected item/spell/token charge state into a native session via bridge commands instead of bypassing the filter.
 int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_CheckEnchantment@<eax>(
         int a1@<ebp>,
-        int a2@<esi>,
+        int *a2@<esi>,
         TESObjectREFR *ebx0@<ebx>,
-        int a4@<edi>,
+        int edi0@<edi>,
+        int a4,
         int a5,
         int a6,
         int a7,
@@ -13,12 +15,12 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_CheckEnchantment@<e
         int a12,
         int a13,
         int a14,
-        int a15,
-        float a16,
+        float a15,
+        int a16,
         int a17,
         int a18,
-        int a19,
-        __int64 a20,
+        __int64 a19,
+        int a20,
         int a21,
         int a22,
         int a23,
@@ -30,22 +32,22 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_CheckEnchantment@<e
         int a29,
         int a30,
         int a31,
-        int a32,
+        float a32,
         int a33,
-        int a34,
-        int a35)
+        int a34)
 {
   int v35; // eax
 
-  v35 = (*(int (__thiscall **)(int))(*(_DWORD *)a2 + 0x30))(a2);
-  if ( (*(int (__thiscall **)(int))(*(_DWORD *)v35 + 0x18))(v35) == 6
-    && a34
-    && !EnchantmentItem_EffectAllowedFromEnch__((unsigned __int8 *)a34, 0, *(_DWORD *)(a1 + 0x1C), 0) )
+  v35 = (*(int (__thiscall **)(int *))(*a2 + 0x30))(a2); /*0x69b272*/
+  if ( (*(int (__thiscall **)(int))(*(_DWORD *)v35 + 0x18))(v35) == 6 /*0x69b29d*/
+    && a33
+    && !EnchantmentItem_EffectAllowedFromEnch__((unsigned __int8 *)a33, 0, *(_DWORD *)(a1 + 0x1C), 0) )
   {
-    return MagicCaster_ApplyActiveMagicItem_::EffectLoop_Next(
-             a4,
-             a2,
+    return MagicCaster_ApplyActiveMagicItem_::EffectLoop_Next( /*0x69b29d*/
+             edi0,
+             (int)a2,
              ebx0,
+             a4,
              a5,
              a6,
              a7,
@@ -56,8 +58,8 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_CheckEnchantment@<e
              a12,
              a13,
              a14,
-             a15,
-             SLODWORD(a16),
+             SLODWORD(a15),
+             a16,
              a17,
              a18,
              a19,
@@ -73,17 +75,17 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_CheckEnchantment@<e
              a29,
              a30,
              a31,
-             a32,
+             SLODWORD(a32),
              a33,
-             a34,
-             a35);
+             a34);
   }
   else
   {
-    return MagicCaster_ApplyActiveMagicItem_::EffectLoop_CreateActiveEffect(
+    return MagicCaster_ApplyActiveMagicItem_::EffectLoop_CreateActiveEffect( /*0x69b29e*/
              a1,
              a2,
              ebx0,
+             a4,
              a5,
              a6,
              a7,
@@ -113,7 +115,6 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_CheckEnchantment@<e
              a31,
              a32,
              a33,
-             a34,
-             a35);
+             a34);
   }
 }

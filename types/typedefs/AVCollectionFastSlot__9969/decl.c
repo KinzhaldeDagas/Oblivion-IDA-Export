@@ -1,0 +1,21 @@
+enum AVCollectionFastSlot
+{
+kAVFast_Health = 0x0,
+kAVFast_Encumbrance = 0x1,
+kAVFast_MagickaMultiplier = 0x2,
+kAVFast_Paralysis = 0x3,
+kAVFast_Responsibility = 0x4,
+kAVFast_Silence = 0x5,
+kAVFast_Personality = 0x6,
+kAVFast_WaterWalking = 0x7,
+kAVFast_Chameleon = 0x8,
+kAVFast_Invisibility = 0x9,
+kAVFast_NightEyeBonus = 0xA,
+kAVFast_Aggression = 0xB,
+kAVFast_Acrobatics = 0xC,
+kAVFast_Endurance = 0xD,
+kAVFast_Luck = 0xE,
+kAVFast_Strength = 0xF,
+kAVFast_Speed = 0x10,
+kAVFast_Athletics = 0x11,
+};

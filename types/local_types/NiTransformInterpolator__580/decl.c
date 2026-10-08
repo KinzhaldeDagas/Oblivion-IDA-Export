@@ -1,1 +1,1 @@
-NiTransformInterpolator
+struct NiTransformInterpolator;

@@ -14,7 +14,7 @@
 0x733626: jle     short loc_733678
 0x733628: mov     edx, [esi+28h]
 0x73362B: push    edx
-0x73362C: call    FormHeapFree
+0x73362C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x733631: mov     eax, [esi+20h]
 0x733634: xor     ecx, ecx
 0x733636: mov     [esi+24h], eax
@@ -28,7 +28,7 @@
 0x73364D: mov     [esi+28h], eax
 0x733650: mov     eax, [esi+2Ch]
 0x733653: push    eax
-0x733654: call    FormHeapFree
+0x733654: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x733659: mov     eax, [esi+24h]
 0x73365C: xor     ecx, ecx
 0x73365E: mov     edx, 4

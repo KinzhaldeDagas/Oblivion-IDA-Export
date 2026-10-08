@@ -1,19 +1,32 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x474BE0",
+      "0x474C46"
+    ]
+  ],
+  "chunks_sha256": "bb0b8262f338c0134acba1ced8cac987894b0f87404771f2cf724a260f2273df",
+  "comment_regular": "Native first-person source-sync helper. Resolves encodedKey in this ActorAnimData, rejects single map entries through vtable +0x0C, finds the first case-sensitive last-backslash suffix match in an AnimSequenceMultiple, and calls ActorAnimData_PlaySequence. Returns zero on any miss.",
+  "comment_repeatable": "Native first-person source-sync helper. Resolves encodedKey in this ActorAnimData, rejects single map entries through vtable +0x0C, finds the first case-sensitive last-backslash suffix match in an AnimSequenceMultiple, and calls ActorAnimData_PlaySequence. Returns zero on any miss.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_474BE0",
+  "display_name": "ActorAnimData_PlayFirstPersonBySource",
   "end_ea": "0x474C46",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_474BE0",
+  "name": "ActorAnimData_PlayFirstPersonBySource",
   "segment": ".text",
   "sha256": "bb0b8262f338c0134acba1ced8cac987894b0f87404771f2cf724a260f2273df",
   "size": 102,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x474BE0",
-  "type": "int __thiscall(_DWORD **this, int, _DWORD *)",
+  "total_chunk_size": 102,
+  "type": "unsigned int __thiscall(ActorAnimData *this, BSAnimGroupSequence *sourceSequence, unsigned int encodedKey)",
   "xrefs_from_count": 49,
   "xrefs_to_count": 1
 }

@@ -1,4 +1,4 @@
-BSStringT *sub_A08520()
+NiRTTI *sub_A08520()
 {
-  return sub_70E220((BSStringT *)dword_B3EA50, "NiBlendBoolInterpolator", (int)dword_B3CC5C);
+  return NiRTTI_Constructor(&stru_B3EA50, "NiBlendBoolInterpolator", &stru_B3CC5C); /*0xa08534*/
 }

@@ -2,7 +2,7 @@
 0x9E92A6: push    ecx
 0x9E92A7: fstp    [esp+4+var_4]; float
 0x9E92AA: push    offset aFcombathitcone; "fCombatHitConeAngle"
-0x9E92AF: mov     ecx, offset fCombatHitConeAngle
+0x9E92AF: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+250h)
 0x9E92B4: call    GameSetting_ConstrAndReg_float
 0x9E92B9: push    offset sub_A1E570; void (__cdecl *)()
 0x9E92BE: call    _atexit

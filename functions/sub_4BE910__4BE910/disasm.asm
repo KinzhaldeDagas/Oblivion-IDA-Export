@@ -5,7 +5,7 @@
 0x4BE91B: mov     esi, ecx
 0x4BE91D: call    sub_4BE820
 0x4BE922: push    esi
-0x4BE923: call    FormHeapFree
+0x4BE923: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4BE928: add     esp, 4
 0x4BE92B: mov     dword ptr ds:0B35B90h, 0
 0x4BE935: pop     esi

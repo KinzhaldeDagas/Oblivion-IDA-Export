@@ -1,4 +1,4 @@
-0x77A310: mov     edx, [esp+arg_0]
+0x77A310: mov     edx, [esp+geometry]; DirectX10OBSE authority: Oblivion NiD3DShader geometry binder. Packs geometry, calls SetStreamSource for each BuffData stream, then SetIndices(BuffData->IB); DX10 bridge captures/restores streams and index bindings from this observed path.
 0x77A314: test    edx, edx
 0x77A316: push    ebx
 0x77A317: push    esi
@@ -28,7 +28,7 @@
 0x77A35C: push    edx; a4
 0x77A35D: push    eax; a3
 0x77A35E: push    edi; a2
-0x77A35F: call    NiDX9Renderer__PackSkinnedGeometryBuffer
+0x77A35F: call    NiDX9Renderer__PackSkinnedGeometryBuffer; Pack hardware-skinned geometry with the active Lighting30 ShaderDeclaration.
 0x77A364: jmp     short loc_77A37E
 0x77A366: mov     ecx, [ebx+24h]
 0x77A369: mov     edi, [eax+38h]
@@ -37,9 +37,9 @@
 0x77A370: push    edx
 0x77A371: push    eax
 0x77A372: push    edi
-0x77A373: call    NiDX9Renderer__PackGeometryBuffers
+0x77A373: call    NiDX9Renderer__PackGeometryBuffers; Pack non-skinned geometry with the active Lighting30 ShaderDeclaration.
 0x77A378: jmp     short loc_77A37E
-0x77A37A: mov     edi, [esp+0Ch+arg_8]
+0x77A37A: mov     edi, [esp+0Ch+existingBuffer]
 0x77A37E: test    edi, edi
 0x77A380: jz      short loc_77A3DB
 0x77A382: mov     eax, [edi+1Ch]

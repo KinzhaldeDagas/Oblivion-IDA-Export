@@ -1,6 +1,6 @@
-0x76D4C0: cmp     dword ptr ds:0B42610h, 0
+0x76D4C0: cmp     dword ptr ds:0B42610h, 0; Unbinds the cached implicit depth/stencil surface with IDirect3DDevice9::SetDepthStencilSurface(NULL), then clears g_D3D9BoundDepthStencilSurface.
 0x76D4C7: jz      short loc_76D4EB
-0x76D4C9: mov     eax, [esp+arg_0]
+0x76D4C9: mov     eax, [esp+device]
 0x76D4CD: mov     ecx, [eax]
 0x76D4CF: mov     edx, [ecx+9Ch]
 0x76D4D5: push    0

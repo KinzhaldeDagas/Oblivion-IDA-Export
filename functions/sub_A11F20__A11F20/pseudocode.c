@@ -1,4 +1,4 @@
-BSStringT *sub_A11F20()
+NiRTTI *sub_A11F20()
 {
-  return sub_70E220((BSStringT *)&unk_B4780C, "DistantLODShader", (int)&ImageSpaceShaderRTTI___);
+  return NiRTTI_Constructor(&stru_B4780C, "DistantLODShader", &MEMORY[0xB4257C]); /*0xa11f34*/
 }

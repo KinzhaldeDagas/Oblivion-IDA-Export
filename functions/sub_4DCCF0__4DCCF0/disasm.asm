@@ -1,4 +1,4 @@
-0x4DCCF0: sub     esp, 8
+0x4DCCF0: sub     esp, 8; Clears this reference's equipped-ammunition 3D and related actor-animation ammo slot state. No explicit stack arguments.
 0x4DCCF3: push    edi
 0x4DCCF4: mov     edi, ecx
 0x4DCCF6: cmp     dword ptr [edi+3Ch], 0
@@ -11,18 +11,18 @@
 0x4DCD12: jnz     short loc_4DCD39
 0x4DCD14: test    eax, eax
 0x4DCD16: jz      short loc_4DCD25
-0x4DCD18: mov     ecx, eax
-0x4DCD1A: call    sub_478DB0
-0x4DCD1F: mov     ecx, ds:0B333C4h
+0x4DCD18: mov     ecx, eax; this
+0x4DCD1A: call    ActorSkinInfo_ClearAmmoSlot; Clears ActorSkinInfo ammo form/model/3D state at +0x10C/+0x110/+0x114.
+0x4DCD1F: mov     ecx, ds:0B333C4h; this
 0x4DCD25: mov     al, [ecx+588h]
-0x4DCD2B: mov     byte ptr [esp+0Ch+var_4], al
-0x4DCD2F: mov     edx, [esp+0Ch+var_4]
-0x4DCD33: push    edx
-0x4DCD34: call    sub_6600D0
+0x4DCD2B: mov     [esp+0Ch+firstPerson], al
+0x4DCD2F: mov     edx, dword ptr [esp+0Ch+firstPerson]
+0x4DCD33: push    edx; firstPerson
+0x4DCD34: call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.
 0x4DCD39: test    eax, eax
 0x4DCD3B: jz      short loc_4DCD49
-0x4DCD3D: mov     ecx, eax
-0x4DCD3F: call    sub_478DB0
+0x4DCD3D: mov     ecx, eax; this
+0x4DCD3F: call    ActorSkinInfo_ClearAmmoSlot; Clears ActorSkinInfo ammo form/model/3D state at +0x10C/+0x110/+0x114.
 0x4DCD44: jmp     loc_4DCE2B
 0x4DCD49: mov     eax, ds:0B06568h
 0x4DCD4E: mov     edx, [edi]
@@ -85,21 +85,21 @@
 0x4DCDF0: mov     ecx, esi
 0x4DCDF2: call    ContainerEntryExtraData_DestroyDataTable
 0x4DCDF7: push    esi
-0x4DCDF8: call    FormHeapFree
+0x4DCDF8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4DCDFD: add     esp, 4
 0x4DCE00: pop     esi
-0x4DCE01: push    ebp
+0x4DCE01: push    ebp; object
 0x4DCE02: push    0
 0x4DCE04: call    GetShadowSceneNode
 0x4DCE09: add     esp, 4
-0x4DCE0C: mov     ecx, eax
-0x4DCE0E: call    sub_7C5E70
+0x4DCE0C: mov     ecx, eax; this
+0x4DCE0E: call    ShadowSceneNode_RemoveObjectReceivers; Removes an object's geometry from shadow-light receiver lists under the shadow-scene critical section. It obtains the object's node/container through virtual +0x08 and recurses; it does not detach the object from its parent or clear NiNode children.
 0x4DCE13: test    ebx, ebx
 0x4DCE15: jz      short loc_4DCE29
 0x4DCE17: cmp     [esp+14h+var_5], 0
 0x4DCE1C: jz      short loc_4DCE29
-0x4DCE1E: lea     ecx, [ebx+0ACh]
-0x4DCE24: call    sub_477EF0
+0x4DCE1E: lea     ecx, [ebx+0ACh]; this
+0x4DCE24: call    NiTObjectArray_ClearAndRelease; Clears a ref-counted NiT object-pointer array: releases every non-null element, nulls entries, and resets end/count words to zero. At bow release it is invoked on ArrowBone+0xAC, thereby releasing all ArrowBone children including the held Arrow:0 clone.
 0x4DCE29: pop     ebp
 0x4DCE2A: pop     ebx
 0x4DCE2B: mov     edx, [edi]

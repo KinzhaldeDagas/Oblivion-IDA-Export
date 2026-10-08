@@ -1,5 +1,5 @@
 int sub_9D90D0()
 {
-  SettingCollectionList_AddSetting(&INISettingCollection, (int)&flt_B02DC0);
-  return atexit(sub_A16E20);
+  SettingCollectionList_AddSetting(&INISettingCollection, (int)&flt_B02DC0); /*0x9d9102*/
+  return atexit(sub_A16E20); /*0x9d9114*/
 }

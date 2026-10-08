@@ -17,22 +17,22 @@
 0x4EE17F: lea     eax, [edi+68h]
 0x4EE182: push    eax; Src
 0x4EE183: push    304D414Eh; int
-0x4EE188: call    TESForm_PutFormRecordChunkData
+0x4EE188: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4EE18D: push    10h; Size
 0x4EE18F: lea     ecx, [edi+58h]
 0x4EE192: push    ecx; Src
 0x4EE193: push    4D414E46h; int
-0x4EE198: call    TESForm_PutFormRecordChunkData
+0x4EE198: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4EE19D: push    38h ; '8'; Size
 0x4EE19F: lea     edx, [edi+110h]
 0x4EE1A5: push    edx; Src
 0x4EE1A6: push    4D414E48h; int
-0x4EE1AB: call    TESForm_PutFormRecordChunkData
+0x4EE1AB: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4EE1B0: push    0Fh; Size
 0x4EE1B2: lea     eax, [edi+48h]
 0x4EE1B5: push    eax; Src
 0x4EE1B6: push    41544144h; int
-0x4EE1BB: call    TESForm_PutFormRecordChunkData
+0x4EE1BB: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4EE1C0: lea     esi, [edi+108h]
 0x4EE1C6: add     esp, 30h
 0x4EE1C9: test    esi, esi
@@ -44,7 +44,7 @@
 0x4EE1D6: push    8; Size
 0x4EE1D8: push    eax; Src
 0x4EE1D9: push    4D414E53h; int
-0x4EE1DE: call    TESForm_PutFormRecordChunkData
+0x4EE1DE: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4EE1E3: mov     esi, [esi+4]
 0x4EE1E6: add     esp, 0Ch
 0x4EE1E9: test    esi, esi

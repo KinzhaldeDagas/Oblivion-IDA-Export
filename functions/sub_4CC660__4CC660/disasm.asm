@@ -4,7 +4,7 @@
 0x4CC663: push    esi
 0x4CC664: mov     esi, ecx
 0x4CC666: push    esi; a2
-0x4CC667: mov     ecx, offset stru_B35C80; this
+0x4CC667: mov     ecx, offset unk_B35C80; this
 0x4CC66C: mov     [esp+14h+var_4], esi
 0x4CC670: call    sub_496EA0
 0x4CC675: lea     ebx, [esi+48h]
@@ -47,7 +47,7 @@
 0x4CC6D5: jnz     short loc_4CC680
 0x4CC6D7: pop     edi
 0x4CC6D8: push    esi; a2
-0x4CC6D9: mov     ecx, offset stru_B35C80; this
+0x4CC6D9: mov     ecx, offset unk_B35C80; this
 0x4CC6DE: call    sub_496F50
 0x4CC6E3: pop     esi
 0x4CC6E4: pop     ebp
@@ -81,7 +81,7 @@
 0x4CC728: mov     edx, [eax]
 0x4CC72A: push    eax
 0x4CC72B: mov     [ebx], edx
-0x4CC72D: call    FormHeapFree
+0x4CC72D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4CC732: add     esp, 4
 0x4CC735: jmp     short loc_4CC73D
 0x4CC737: mov     dword ptr [ebx], 0
@@ -91,7 +91,7 @@
 0x4CC747: mov     ecx, edi
 0x4CC749: call    edx
 0x4CC74B: lea     ecx, [edi+44h]
-0x4CC74E: call    sub_420480
+0x4CC74E: call    ExtraDataList_GetDroppedItemList; Returns the embedded reference list in ExtraDroppedItemList type 0x42.
 0x4CC753: mov     esi, eax
 0x4CC755: test    esi, esi
 0x4CC757: jz      short loc_4CC7A2
@@ -103,7 +103,7 @@
 0x4CC76B: mov     ecx, [esi]
 0x4CC76D: push    0
 0x4CC76F: add     ecx, 44h ; 'D'
-0x4CC772: call    sub_4203E0
+0x4CC772: call    ExtraDataList_SetItemDropper; Creates/updates ExtraItemDropper; a null dropper removes extra type 0x41.
 0x4CC777: mov     ecx, [esi]
 0x4CC779: call    sub_4D6640
 0x4CC77E: mov     eax, [esi+4]
@@ -114,7 +114,7 @@
 0x4CC78B: mov     edx, [eax]
 0x4CC78D: push    eax
 0x4CC78E: mov     [esi], edx
-0x4CC790: call    FormHeapFree
+0x4CC790: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4CC795: add     esp, 4
 0x4CC798: jmp     short loc_4CC760
 0x4CC79A: mov     dword ptr [esi], 0

@@ -10,14 +10,14 @@
 0x68C05F: fst     [esp+18h+var_10]
 0x68C063: lea     eax, [esp+18h+var_10]
 0x68C067: fld1
-0x68C069: push    eax; int
+0x68C069: push    eax; vertexColor
 0x68C06A: fst     [esp+1Ch+var_C]
 0x68C06E: push    ecx
 0x68C06F: fstp    [esp+20h+var_4]
 0x68C073: fstp    [esp+20h+var_8]
 0x68C077: fld     dword ptr ds:0A31C80h
-0x68C07D: fstp    [esp+20h+var_20]; float
-0x68C080: call    sub_47FD30
+0x68C07D: fstp    [esp+20h+scale]; scale
+0x68C080: call    NiTriShape_CreateOctahedronGeometry; Verified generic NiTriShape geometry factory, used by PathGrid rendering and multiple other callers. It builds six octahedron vertices (four ±scale X/Y equatorial points and two ±scale*sqrt(2) Z poles), repeats a supplied NiColorAlpha for all six, writes 24 u16 indices for eight triangular faces, and returns a NiTriShape. This constructs a filled octahedron surface; wireframe is a separate scene property.
 0x68C085: mov     ebx, eax
 0x68C087: mov     eax, ds:0B3C0A0h
 0x68C08C: add     esp, 8

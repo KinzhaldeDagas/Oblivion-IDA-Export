@@ -1,4 +1,4 @@
-0x406360: push    0FFFFFFFFh
+0x406360: push    0FFFFFFFFh; Pass231/241: Scene/sky setup passes global B333E4 into Sky initialization path.
 0x406362: push    offset OSGlobals_Initialize???_SEH
 0x406367: mov     eax, large fs:0
 0x40636D: push    eax
@@ -17,16 +17,16 @@
 0x406390: call    PrintToLog???
 0x406395: add     esp, 4
 0x406398: call    Sky_CreateOrGetGlobalObject
-0x40639D: mov     ecx, dword_B333E4
-0x4063A3: mov     edx, dword_B333D8
+0x40639D: mov     ecx, dword ptr unk_B333E4
+0x4063A3: mov     edx, dword ptr root
 0x4063A9: push    ecx
 0x4063AA: push    edx
 0x4063AB: mov     ecx, eax
-0x4063AD: mov     dword_B333B0, eax
-0x4063B2: call    sub_5411D0
-0x4063B7: mov     eax, dword_B333B0
+0x4063AD: mov     dword ptr unk_B333B0, eax
+0x4063B2: call    sub_5411D0; Fog decode: passes global B333E4 into Sky/Atmosphere setup: sub_5411D0(B333B0, B333D8, B333E4).
+0x4063B7: mov     eax, dword ptr unk_B333B0
 0x4063BC: mov     eax, [eax+28h]
-0x4063BF: mov     ecx, dword_B333DC
+0x4063BF: mov     ecx, dword ptr unk_B333DC
 0x4063C5: mov     eax, [eax+0Ch]
 0x4063C8: mov     edx, [ecx]
 0x4063CA: xor     edi, edi
@@ -34,119 +34,119 @@
 0x4063CD: push    eax
 0x4063CE: mov     eax, [edx+84h]
 0x4063D4: call    eax
-0x4063D6: mov     ebp, ObjectLODRoot
-0x4063DC: mov     ecx, dword_B333B0
+0x4063D6: mov     ebp, ds:0B333ACh
+0x4063DC: mov     ecx, dword ptr unk_B333B0
 0x4063E2: push    ebp
 0x4063E3: call    Sky__GetSunDirectionalLight
 0x4063E8: mov     ecx, eax
 0x4063EA: call    sub_708E40
-0x4063EF: mov     ecx, dword_B333B0
+0x4063EF: mov     ecx, dword ptr unk_B333B0; Oblivion world initialization obtains the Sky sun directional light before creating the ShadowSceneNode light-level reference wrapper.
 0x4063F5: call    Sky__GetSunDirectionalLight
-0x4063FA: push    eax
+0x4063FA: push    eax; backingLight
 0x4063FB: push    edi
 0x4063FC: call    GetShadowSceneNode
 0x406401: add     esp, 4
-0x406404: mov     ecx, eax
-0x406406: call    sub_7C5850
-0x40640B: mov     ecx, dword_B333D8; this
-0x406411: call    NiAVObject_InitializePropertyState
-0x406416: mov     ecx, dword_B333D8
+0x406404: mov     ecx, eax; self
+0x406406: call    ShadowSceneNode_RecreateLightLevelReference; Create/replace the world ShadowSceneNode+0x118 reference wrapper using Oblivion's sun directional light.
+0x40640B: mov     ecx, dword ptr root; this
+0x406411: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
+0x406416: mov     ecx, dword ptr root
 0x40641C: call    NiNode_UpdateDynamicEffectState
 0x406421: fldz
 0x406423: push    1; a3
 0x406425: push    ecx
-0x406426: mov     ecx, dword_B333D8; this
+0x406426: mov     ecx, dword ptr root; this
 0x40642C: fstp    [esp+64h+a2+4]; a2
-0x40642F: call    NiAVObject_UpdateNiAVObject
-0x406434: mov     ecx, dword_B333DC; this
-0x40643A: call    NiAVObject_InitializePropertyState
-0x40643F: mov     ecx, dword_B333DC
+0x40642F: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
+0x406434: mov     ecx, dword ptr unk_B333DC; this
+0x40643A: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
+0x40643F: mov     ecx, dword ptr unk_B333DC
 0x406445: call    NiNode_UpdateDynamicEffectState
 0x40644A: fldz
 0x40644C: push    1; a3
 0x40644E: push    ecx
-0x40644F: mov     ecx, dword_B333DC; this
+0x40644F: mov     ecx, dword ptr unk_B333DC; this
 0x406455: fstp    [esp+64h+a2+4]; a2
-0x406458: call    NiAVObject_UpdateNiAVObject
-0x40645D: mov     ecx, dword_B333D8
-0x406463: push    1
-0x406465: push    edi
-0x406466: push    0Ah
-0x406468: push    ecx
-0x406469: call    sub_7B8940
-0x40646E: mov     edx, dword_B333DC
-0x406474: push    1
-0x406476: push    edi
-0x406477: push    0Ah
-0x406479: push    edx
-0x40647A: call    sub_7B8940
-0x40647F: mov     eax, dword_B333B0
+0x406458: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
+0x40645D: mov     ecx, dword ptr root
+0x406463: push    1; arg3
+0x406465: push    edi; normalMapBypass
+0x406466: push    0Ah; shaderId
+0x406468: push    ecx; root
+0x406469: call    BSShaderManager_AssignShadersRecursive; Generic recursive shader assignment wrapper around 0x7B7FC0. In decoded TES4 tree code it is used for branch shader id 4 and simple/default id 1; no stock call with frond shader id 5 was found in this pass.
+0x40646E: mov     edx, dword ptr unk_B333DC
+0x406474: push    1; arg3
+0x406476: push    edi; normalMapBypass
+0x406477: push    0Ah; shaderId
+0x406479: push    edx; root
+0x40647A: call    BSShaderManager_AssignShadersRecursive; Generic recursive shader assignment wrapper around 0x7B7FC0. In decoded TES4 tree code it is used for branch shader id 4 and simple/default id 1; no stock call with frond shader id 5 was found in this pass.
+0x40647F: mov     eax, dword ptr unk_B333B0
 0x406484: mov     ecx, [eax+20h]
 0x406487: add     esp, 20h
-0x40648A: call    sub_452A60
+0x40648A: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x40648F: cmp     eax, edi
 0x406491: jz      short loc_4064B8
 0x406493: push    4
 0x406495: mov     ecx, eax
-0x406497: call    NiNode_GetNiPropertyByID
+0x406497: call    NiNode_GetNiPropertyByID;
 0x40649C: push    eax
-0x40649D: push    offset dword_B4335C
+0x40649D: push    offset stru_B4335C
 0x4064A2: call    NiRTTI_Cast
 0x4064A7: add     esp, 8
 0x4064AA: cmp     eax, edi
 0x4064AC: jz      short loc_4064B8
 0x4064AE: mov     dword ptr [eax+88h], 2
-0x4064B8: mov     ecx, dword_B333B0
+0x4064B8: mov     ecx, dword ptr unk_B333B0
 0x4064BE: mov     ecx, [ecx+20h]
 0x4064C1: call    sub_95F870
 0x4064C6: cmp     eax, edi
 0x4064C8: jz      short loc_4064EF
 0x4064CA: push    4
 0x4064CC: mov     ecx, eax
-0x4064CE: call    NiNode_GetNiPropertyByID
+0x4064CE: call    NiNode_GetNiPropertyByID;
 0x4064D3: push    eax
-0x4064D4: push    offset dword_B4335C
+0x4064D4: push    offset stru_B4335C
 0x4064D9: call    NiRTTI_Cast
 0x4064DE: add     esp, 8
 0x4064E1: cmp     eax, edi
 0x4064E3: jz      short loc_4064EF
 0x4064E5: mov     dword ptr [eax+88h], 4
-0x4064EF: mov     edx, dword_B333B0
+0x4064EF: mov     edx, dword ptr unk_B333B0
 0x4064F5: mov     eax, [edx+28h]
 0x4064F8: mov     ecx, [eax+10h]
 0x4064FB: cmp     ecx, edi
 0x4064FD: jz      short loc_40651E
 0x4064FF: push    4
-0x406501: call    NiNode_GetNiPropertyByID
+0x406501: call    NiNode_GetNiPropertyByID;
 0x406506: push    eax
-0x406507: push    offset dword_B4335C
+0x406507: push    offset stru_B4335C
 0x40650C: call    NiRTTI_Cast
 0x406511: add     esp, 8
 0x406514: cmp     eax, edi
 0x406516: jz      short loc_40651E
 0x406518: mov     [eax+88h], edi
-0x40651E: mov     eax, dword_B333B0
+0x40651E: mov     eax, dword ptr unk_B333B0
 0x406523: mov     eax, [eax+28h]
 0x406526: mov     ecx, [eax+14h]
 0x406529: cmp     ecx, edi
 0x40652B: jz      short loc_406550
 0x40652D: push    4
-0x40652F: call    NiNode_GetNiPropertyByID
+0x40652F: call    NiNode_GetNiPropertyByID;
 0x406534: push    eax
-0x406535: push    offset dword_B4335C
+0x406535: push    offset stru_B4335C
 0x40653A: call    NiRTTI_Cast
 0x40653F: add     esp, 8
 0x406542: cmp     eax, edi
 0x406544: jz      short loc_406550
 0x406546: mov     dword ptr [eax+88h], 1
 0x406550: mov     ebx, 3
-0x406555: mov     ecx, dword_B333B0
+0x406555: mov     ecx, dword ptr unk_B333B0
 0x40655B: mov     eax, [ecx+2Ch]
 0x40655E: mov     ecx, [eax+edi*4+8]
 0x406562: test    ecx, ecx
 0x406564: jz      short loc_4065A5
 0x406566: push    4
-0x406568: call    NiNode_GetNiPropertyByID
+0x406568: call    NiNode_GetNiPropertyByID;
 0x40656D: mov     esi, eax
 0x40656F: test    esi, esi
 0x406571: jz      short loc_4065A5
@@ -156,7 +156,7 @@
 0x40657A: call    eax
 0x40657C: test    eax, eax
 0x40657E: jz      short loc_40658E
-0x406580: cmp     eax, offset dword_B4335C
+0x406580: cmp     eax, offset stru_B4335C
 0x406585: jz      short loc_4065F4
 0x406587: mov     eax, [eax+4]
 0x40658A: test    eax, eax
@@ -175,11 +175,11 @@
 0x4065AE: mov     edi, edx
 0x4065B0: cmp     edi, 2
 0x4065B3: jl      short loc_406555
-0x4065B5: mov     esi, LODRoot
+0x4065B5: mov     esi, ds:0B333A8h
 0x4065BB: xor     edi, edi
 0x4065BD: cmp     esi, edi
 0x4065BF: jz      short loc_4065FA
-0x4065C1: mov     ecx, dword_B333B0
+0x4065C1: mov     ecx, dword ptr unk_B333B0
 0x4065C7: push    esi
 0x4065C8: call    Sky__GetSunDirectionalLight
 0x4065CD: mov     ecx, eax
@@ -207,7 +207,7 @@
 0x406615: cmp     eax, edi
 0x406617: mov     [esp+5Ch+var_4], edi
 0x40661B: jz      short loc_406634
-0x40661D: mov     ecx, dword_B333B0
+0x40661D: mov     ecx, dword ptr unk_B333B0
 0x406623: push    ecx
 0x406624: push    esi
 0x406625: push    ebp
@@ -219,18 +219,18 @@
 0x406636: or      ebp, 0FFFFFFFFh
 0x406639: mov     ecx, eax
 0x40663B: mov     [esp+5Ch+var_4], ebp
-0x40663F: mov     TES, eax
+0x40663F: mov     ds:0B333A0h, eax
 0x406644: call    sub_43F560
 0x406649: push    offset aInitializingTr; "Initializing TreeManager..."
 0x40664E: call    PrintToLog???
-0x406653: push    edi; ArgList
-0x406654: call    sub_55F750
+0x406653: push    edi; recreate
+0x406654: call    BSTreeManager_Create; Verified singleton Create(recreate): optionally destroys/frees an existing BSTreeManager, allocates 0x28 bytes, runs BSTreeManager_ctor, and stores the instance.
 0x406659: push    offset aInitializingMe; "Initializing Menus..."
 0x40665E: call    PrintToLog???
 0x406663: mov     esi, [esp+68h+arg_0]
 0x406667: add     esp, 0Ch
 0x40666A: mov     ecx, esi; this
-0x40666C: call    NiAVObject_InitializePropertyState
+0x40666C: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x406671: mov     ecx, esi
 0x406673: call    NiNode_UpdateDynamicEffectState
 0x406678: fldz
@@ -238,7 +238,7 @@
 0x40667C: push    ecx
 0x40667D: mov     ecx, esi; this
 0x40667F: fstp    [esp+64h+a2+4]; a2
-0x406682: call    NiAVObject_UpdateNiAVObject
+0x406682: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x406687: xor     bl, bl
 0x406689: mov     [esp+5Ch+var_34], offset off_B02C90
 0x406691: mov     [esp+5Ch+var_30], offset off_B02C98
@@ -274,7 +274,7 @@
 0x406711: mov     edx, [edx]
 0x406713: jmp     short loc_406717
 0x406715: xor     edx, edx
-0x406717: mov     ecx, TESDataHandler
+0x406717: mov     ecx, g_TESDataHandler; Verified singleton pointer: allocated as TESDataHandler (0xCE0 bytes) and published at TES_constr 441B8A; passed to LoadFiles and form APIs; TES_destr 446915 destroys and clears it. Field +0x74 is the Global list head used by TESSaveLoadGame_LoadGlobalValues; surrounding layout remains Unknown.
 0x40671D: push    edx
 0x40671E: call    sub_447C50
 0x406723: test    eax, eax
@@ -289,13 +289,13 @@
 0x40673A: mov     edx, PluginsTXT
 0x406740: mov     ecx, [esp+5Ch+var_48]
 0x406744: push    edx
-0x406745: push    offset AppDataPath
-0x40674A: call    sub_404B00
+0x406745: push    (offset destination+10Ch)
+0x40674A: call    TESDataHandler_LoadPluginsFromFile; Reads a text plugin list at basePath + listFile; skips # comments, obtains each TESFile by line, and marks it loaded. Caller falls back to Oblivion.esm when no file is loaded.
 0x40674F: test    al, al
 0x406751: jnz     short loc_406774
 0x406753: test    bl, bl
 0x406755: jnz     short loc_406774
-0x406757: mov     ecx, TESDataHandler
+0x406757: mov     ecx, g_TESDataHandler; Verified singleton pointer: allocated as TESDataHandler (0xCE0 bytes) and published at TES_constr 441B8A; passed to LoadFiles and form APIs; TES_destr 446915 destroys and clears it. Field +0x74 is the Global list head used by TESSaveLoadGame_LoadGlobalValues; surrounding layout remains Unknown.
 0x40675D: push    offset aOblivion_esm; "Oblivion.esm"
 0x406762: call    sub_447C50
 0x406767: test    eax, eax
@@ -318,16 +318,16 @@
 0x40679E: push    14h; a2
 0x4067A0: mov     ecx, eax; this
 0x4067A2: mov     [esp+64h+var_4], ebp
-0x4067A6: mov     TESDataHandler_g_PlayerRef, eax
+0x4067A6: mov     dword ptr reference, eax
 0x4067AB: call    TESForm_SetFormID
 0x4067B0: push    offset aLoadingFiles__; "Loading Files..."
 0x4067B5: call    PrintToLog???
-0x4067BA: mov     ecx, TESDataHandler
+0x4067BA: mov     ecx, g_TESDataHandler; Verified singleton pointer: allocated as TESDataHandler (0xCE0 bytes) and published at TES_constr 441B8A; passed to LoadFiles and form APIs; TES_destr 446915 destroys and clears it. Field +0x74 is the Global list head used by TESSaveLoadGame_LoadGlobalValues; surrounding layout remains Unknown.
 0x4067C0: add     esp, 4
 0x4067C3: push    0
 0x4067C5: push    0
-0x4067C7: call    TESDataHandler_LoadFiles?
-0x4067CC: mov     ecx, TES
+0x4067C7: call    TESDataHandler_LoadFiles?; Verified TESDataHandler_LoadFiles behavior: when activeFileState.retainActiveFile is nonzero, reopens the retained TESFile and rebuilds its loaded-master array before completing the file load. The flag's writer remains Unknown.
+0x4067CC: mov     ecx, ds:0B333A0h
 0x4067D2: call    sub_443550
 0x4067D7: push    offset aInitializingPl; "Initializing Player..."
 0x4067DC: call    PrintToLog???
@@ -337,17 +337,17 @@
 0x4067EB: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x4067F0: push    0; int
 0x4067F2: push    7; a1
-0x4067F4: call    TESForm_LookupByFormID
+0x4067F4: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4067F9: add     esp, 4
 0x4067FC: push    eax; void *
 0x4067FD: call    OblivionDynamicCast
-0x406802: mov     ecx, TESDataHandler_g_PlayerRef; this
+0x406802: mov     ecx, dword ptr reference; this
 0x406808: add     esp, 14h
 0x40680B: mov     esi, eax
-0x40680D: push    esi; a2
+0x40680D: push    esi; baseForm
 0x40680E: call    TESObjectREFR_SetBaseForm
 0x406813: fld     ds:flt_A2FF44
-0x406819: mov     ecx, TESDataHandler_g_PlayerRef
+0x406819: mov     ecx, dword ptr reference
 0x40681F: fst     [esp+5Ch+var_40]
 0x406823: fstp    [esp+5Ch+var_3C]
 0x406827: lea     edx, [esp+5Ch+var_40]
@@ -357,21 +357,21 @@
 0x406832: mov     eax, [ecx]
 0x406834: mov     eax, [eax+1CCh]
 0x40683A: call    eax
-0x40683C: mov     ecx, dword ptr Vector3_InitValue?
-0x406842: mov     edx, dword ptr Vector3_InitValue?+4
+0x40683C: mov     ecx, g_zeroNiPoint3.x
+0x406842: mov     edx, g_zeroNiPoint3.y
 0x406848: sub     esp, 0Ch
 0x40684B: mov     eax, esp
 0x40684D: mov     [eax], ecx
-0x40684F: mov     ecx, dword_B3F9B0
+0x40684F: mov     ecx, g_zeroNiPoint3.z
 0x406855: mov     [eax+4], edx
 0x406858: mov     [eax+8], ecx
-0x40685B: mov     ecx, TESDataHandler_g_PlayerRef
+0x40685B: mov     ecx, dword ptr reference
 0x406861: call    sub_4D89A0
-0x406866: mov     ecx, TESDataHandler_g_PlayerRef
+0x406866: mov     ecx, dword ptr reference
 0x40686C: mov     edx, [ecx]
 0x40686E: mov     eax, [edx+6Ch]
 0x406871: call    eax
-0x406873: mov     ecx, TESDataHandler_g_PlayerRef
+0x406873: mov     ecx, dword ptr reference
 0x406879: mov     edx, [ecx]
 0x40687B: mov     eax, [edx+284h]
 0x406881: push    0Ah
@@ -380,13 +380,13 @@
 0x406887: jnz     short loc_4068A2
 0x406889: push    eax; a2
 0x40688A: mov     ecx, esi; this
-0x40688C: call    TESForm_GetOverrideFile
+0x40688C: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x406891: add     eax, 1Ch
 0x406894: push    eax; ArgList
 0x406895: push    offset aErrorFatigueVa; "ERROR: Fatigue value is 0 on the Player"...
 0x40689A: call    sub_404EC0
 0x40689F: add     esp, 8
-0x4068A2: mov     ecx, TESDataHandler_g_PlayerRef
+0x4068A2: mov     ecx, dword ptr reference
 0x4068A8: mov     edx, [ecx]
 0x4068AA: mov     eax, [edx+284h]
 0x4068B0: push    8
@@ -395,7 +395,7 @@
 0x4068B6: jnz     short loc_4068D1
 0x4068B8: push    eax; a2
 0x4068B9: mov     ecx, esi; this
-0x4068BB: call    TESForm_GetOverrideFile
+0x4068BB: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x4068C0: add     eax, 1Ch
 0x4068C3: push    eax; ArgList
 0x4068C4: push    offset aErrorHealthVal; "ERROR: Health value is 0 on the Player."...
@@ -403,7 +403,7 @@
 0x4068CE: add     esp, 8
 0x4068D1: push    offset aInitializingSc; "Initializing Scripts..."
 0x4068D6: call    PrintToLog???
-0x4068DB: mov     ecx, TESDataHandler
+0x4068DB: mov     ecx, g_TESDataHandler; Verified singleton pointer: allocated as TESDataHandler (0xCE0 bytes) and published at TES_constr 441B8A; passed to LoadFiles and form APIs; TES_destr 446915 destroys and clears it. Field +0x74 is the Global list head used by TESSaveLoadGame_LoadGlobalValues; surrounding layout remains Unknown.
 0x4068E1: add     esp, 4
 0x4068E4: call    sub_447D80
 0x4068E9: push    offset aInitializingSo; "Initializing Sound System..."
@@ -424,7 +424,7 @@
 0x406921: fdivr   ds:dbl_A2FC70
 0x406927: jmp     short loc_40692B
 0x406929: fldz
-0x40692B: fstp    g_FPSGlobal
+0x40692B: fstp    dword ptr ds:0B33E94h
 0x406931: mov     ecx, [esp+5Ch+var_C]
 0x406935: mov     large fs:0, ecx
 0x40693C: pop     ecx
@@ -434,3 +434,20 @@
 0x406940: pop     ebx
 0x406941: add     esp, 48h
 0x406944: retn    4
+0x9A9F50: mov     eax, [ebp-44h]
+0x9A9F53: push    eax
+0x9A9F54: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9A9F59: pop     ecx
+0x9A9F5A: retn
+0x9A9F5B: mov     eax, [ebp+4]
+0x9A9F5E: push    eax
+0x9A9F5F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9A9F64: pop     ecx
+0x9A9F65: retn
+0x9A9F66: mov     edx, [esp+arg_4]
+0x9A9F6A: lea     eax, [edx-4Ch]
+0x9A9F6D: mov     ecx, [edx-50h]
+0x9A9F70: xor     ecx, eax
+0x9A9F72: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9A9F77: mov     eax, offset stru_AD6FE0
+0x9A9F7C: jmp     ___CxxFrameHandler3

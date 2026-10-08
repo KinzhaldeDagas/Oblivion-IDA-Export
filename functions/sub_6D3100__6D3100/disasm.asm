@@ -1,8 +1,8 @@
-0x6D3100: push    ebx
+0x6D3100: push    ebx; Oblivion Euler/type-4 rotation axis ownership installer. Destroys any previous three axes, installs each axis pointer/count/numeric type, clears cached axis cursor/state words, and derives each nonempty axis stride from the scalar key type table.
 0x6D3101: push    esi
 0x6D3102: push    edi
 0x6D3103: mov     esi, ecx
-0x6D3105: call    sub_6BE490
+0x6D3105: call    NiEulerRotKey_DestroyAxisTracks; Oblivion rotation type-4 nested cleanup. Iterates exactly three scalar-axis subtracks in the outer rotation record, destroys each nonnull axis key array through its numeric-type destructor, then clears that axis pointer, count, and type fields.
 0x6D310A: mov     eax, [esp+0Ch+arg_4]
 0x6D310E: mov     edx, [esp+0Ch+arg_8]
 0x6D3112: mov     ecx, [esp+0Ch+arg_0]

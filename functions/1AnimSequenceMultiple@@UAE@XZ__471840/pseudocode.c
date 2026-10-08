@@ -11,42 +11,42 @@ void __thiscall AnimSequenceMultiple::~AnimSequenceMultiple(AnimSequenceMultiple
   BSStringT v10; // [esp+18h] [ebp-14h] BYREF
   int v11; // [esp+28h] [ebp-4h]
 
-  v1 = this;
-  *(_DWORD *)this = &AnimSequenceMultiple::`vftable';
-  v2 = *((_DWORD *)this + 1);
-  v11 = 0;
-  if ( v2 )
+  v1 = this; /*0x471867*/
+  *(_DWORD *)this = &AnimSequenceMultiple::`vftable'; /*0x47186d*/
+  v2 = *((_DWORD *)this + 1); /*0x471873*/
+  v11 = 0; /*0x47187a*/
+  if ( v2 ) /*0x47187e*/
   {
-    v3 = *(_DWORD **)(v2 + 4);
-    if ( v3 )
+    v3 = *(_DWORD **)(v2 + 4); /*0x471884*/
+    if ( v3 ) /*0x471889*/
     {
-      v4 = InterlockedDecrement;
-      do
+      v4 = InterlockedDecrement; /*0x47188b*/
+      do /*0x4718fa*/
       {
-        v5 = v3[2];
-        v10.m_data = 0;
-        v10.m_dataLen = 0;
-        v10.m_bufLen = 0;
-        v8 = *(const char **)(v5 + 8);
-        LOBYTE(v11) = 1;
-        BSStringT_Set(&v10, v8, 0);
-        if ( !v4((volatile LONG *)(v5 + 4)) )
-          (**(void (__thiscall ***)(int, int))v5)(v5, 1);
-        m_data = v10.m_data;
-        sub_438540(ModelLoaderPtr, (int)v10.m_data, 1);
-        v3 = (_DWORD *)*v3;
-        LOBYTE(v11) = 0;
-        FormHeapFree((unsigned int)m_data);
-        v10.m_data = 0;
-        v10.m_bufLen = 0;
-        v10.m_dataLen = 0;
+        v5 = v3[2]; /*0x471891*/
+        v10.m_data = 0; /*0x471894*/
+        v10.m_dataLen = 0; /*0x471898*/
+        v10.m_bufLen = 0; /*0x47189d*/
+        v8 = *(const char **)(v5 + 8); /*0x4718a6*/
+        LOBYTE(v11) = 1; /*0x4718ab*/
+        BSStringT_Set(&v10, v8, 0); /*0x4718b0*/
+        if ( !v4((volatile LONG *)(v5 + 4)) ) /*0x4718b9*/
+          (**(void (__thiscall ***)(int, int))v5)(v5, 1); /*0x4718c7*/
+        m_data = v10.m_data; /*0x4718c9*/
+        ModelLoader_ReleaseModelPath(MEMORY[0xB33A1C], (int)v10.m_data, 1); /*0x4718d6*/
+        v3 = (_DWORD *)*v3; /*0x4718db*/
+        LOBYTE(v11) = 0; /*0x4718de*/
+        FormHeapFree((unsigned int)m_data); /*0x4718e2*/
+        v10.m_data = 0; /*0x4718ec*/
+        v10.m_bufLen = 0; /*0x4718f0*/
+        v10.m_dataLen = 0; /*0x4718f5*/
       }
-      while ( v3 );
-      v1 = this;
+      while ( v3 ); /*0x4718fa*/
+      v1 = this; /*0x4718fc*/
     }
-    v7 = *((void (__thiscall ****)(_DWORD, int))v1 + 1);
-    if ( v7 )
-      (**v7)(v7, 1);
+    v7 = *((void (__thiscall ****)(_DWORD, int))v1 + 1); /*0x471900*/
+    if ( v7 ) /*0x471905*/
+      (**v7)(v7, 1); /*0x47190d*/
   }
-  *(_DWORD *)v1 = &AnimSequenceBase::`vftable';
+  *(_DWORD *)v1 = &AnimSequenceBase::`vftable'; /*0x47190f*/
 }

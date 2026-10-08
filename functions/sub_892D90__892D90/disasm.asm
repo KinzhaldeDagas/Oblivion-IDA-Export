@@ -19,7 +19,7 @@
 0x892DCA: fld     dword ptr [esi+33Ch]
 0x892DD0: fmul    qword ptr ds:0A3C770h
 0x892DD6: fstp    [esp+0F0h+var_D4]
-0x892DDA: call    sub_8913C0
+0x892DDA: call    bhkCharacterController_GetRadius; Controller radius helper. Returns shape radius from proxy+0x374 object when available, else proxy+0x3A0/E8 default. MobileObject::Move converts this from Havok to world with 0xA372E0.
 0x892DDF: fadd    qword ptr ds:0A967E8h
 0x892DE5: lea     ecx, [esp+0F0h+var_50]
 0x892DEC: push    ecx
@@ -31,17 +31,17 @@
 0x892DFD: fstp    dword ptr [esp+0F4h+var_D0+4]
 0x892E01: fst     dword ptr [esp+0F4h+var_D0+8]
 0x892E05: fstp    dword ptr [esp+0F4h+var_D0+0Ch]
-0x892E09: call    sub_6848D0
+0x892E09: call    bhkRefObject_CopyHavokObjectTransform; Copies low-level Havok object transform rows/columns from wrapper hkObject+0x70 into caller transform output.
 0x892E0E: lea     edx, [esp+0F0h+var_D0]
 0x892E12: push    edx
 0x892E13: lea     eax, [esp+0F4h+var_50]
 0x892E1A: push    eax
 0x892E1B: mov     ecx, edx
-0x892E1D: call    sub_88FE00
+0x892E1D: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x892E22: lea     ecx, [esp+0F0h+var_90]
 0x892E26: push    ecx
 0x892E27: mov     ecx, esi
-0x892E29: call    sub_891440
+0x892E29: call    bhkCharacterController_ReadRelativePosition; TES4 authoritative: reads current proxy position. Gets collision object transform at 0x8AC070, subtracts metadata/world transform basis offset, returns Havok-unit position.
 0x892E2E: movaps  xmm0, [esp+0F0h+var_90]
 0x892E33: movaps  xmm1, [esp+0F0h+var_D0]
 0x892E38: mov     ecx, [esp+0F0h+var_DC]

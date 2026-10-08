@@ -1,5 +1,5 @@
 int sub_9F2760()
 {
-  GameSetting_ConstrAndReg((int *)dword_B38C60, (int)"sTravelQuestion", (int)"Do you want to travel to");
-  return atexit(sub_A21FE0);
+  GameSetting_ConstrAndReg(&stru_B38C60, "sTravelQuestion", "Do you want to travel to"); /*0x9f276f*/
+  return atexit(sub_A21FE0); /*0x9f277f*/
 }

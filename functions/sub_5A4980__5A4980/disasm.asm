@@ -38,7 +38,6 @@
 0x5A49F6: mov     eax, esi
 0x5A49F8: lea     edx, [eax+1]
 0x5A49FB: jmp     short loc_5A4A00
-0x5A49FD: align 10h
 0x5A4A00: mov     cl, [eax]
 0x5A4A02: add     eax, 1
 0x5A4A05: test    cl, cl
@@ -92,7 +91,7 @@
 0x5A4A9E: jz      short loc_5A4AA5
 0x5A4AA0: cmp     eax, 1
 0x5A4AA3: jnz     short loc_5A4AAA
-0x5A4AA5: call    sub_584740
+0x5A4AA5: call    Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.
 0x5A4AAA: lea     ecx, [esp+58h+ArgList]; void *
 0x5A4AAE: mov     dword ptr [esp+58h+var_8+4], 0FFFFFFFFh
 0x5A4AB6: call    BSStringT_Clear
@@ -142,7 +141,7 @@
 0x5A4B3E: jnz     short loc_5A4B43
 0x5A4B40: mov     [esi+54h], edi
 0x5A4B43: mov     ecx, edi
-0x5A4B45: call    sub_4D74D0
+0x5A4B45: call    TESObjectREFR_HasHorseCreatureBase; 0x4D74D0: Travel-horse target predicate decoded 2026-09-05: reference base pointer+0x1C must be nonnull; GetBaseForm virtual slot+0x170 yields typebyte0x24 CREA; creature byte+0x104 must equal4 (horse). XHRS resolver invokes this at0x426681 after target REFR cast. TESCS peer0x53F310 uses ref+0x28, vslot+0x19C, creature+0x138.
 0x5A4B4A: test    al, al
 0x5A4B4C: jz      short loc_5A4B93
 0x5A4B4E: mov     edx, [edi]
@@ -187,7 +186,7 @@
 0x5A4BBE: movzx   ecx, ds:byte_5A5520[eax]
 0x5A4BC5: jmp     ds:jpt_5A4BC5[ecx*4]; switch jump
 0x5A4BCC: mov     ecx, esi; jumptable 005A4BC5 cases 28,30
-0x5A4BCE: call    sub_584740
+0x5A4BCE: call    Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.
 0x5A4BD3: lea     ecx, [esp+58h+ArgList]; void *
 0x5A4BD7: mov     dword ptr [esp+58h+var_8+4], 0FFFFFFFFh
 0x5A4BDF: call    BSStringT_Clear
@@ -216,9 +215,9 @@
 0x5A4C18: mov     [esp+58h+var_38.m_data], ebp; a3
 0x5A4C1C: mov     [esp+58h+var_38.m_dataLen], bp; a3
 0x5A4C21: mov     [esp+58h+var_38.m_bufLen], bp
-0x5A4C26: mov     ecx, edi
+0x5A4C26: mov     ecx, edi; this
 0x5A4C28: mov     byte ptr [esp+58h+var_8+4], 1
-0x5A4C2D: call    sub_4D7740
+0x5A4C2D: call    TESObjectREFR_GetEffectiveDoorLock; Verified: returns this reference's ExtraLockData* payload when present; otherwise, if its ExtraTeleport has a linked door, returns that linked reference's ExtraLockData* payload; null when neither exists. Directly supported by ExtraDataList_GetLock, ExtraDataList_GetTeleport, and TeleportData_GetLinkedDoor.
 0x5A4C32: cmp     esi, ebp
 0x5A4C34: mov     [esp+58h+var_44], eax; a3
 0x5A4C38: jz      loc_5A4E45
@@ -233,11 +232,11 @@
 0x5A4C57: fld     dword ptr ds:0A379B4h
 0x5A4C5D: jmp     short loc_5A4C61
 0x5A4C5F: fld1
-0x5A4C61: fstp    [esp+5Ch+var_5C]; a3
-0x5A4C64: push    0FB2h; a2
-0x5A4C69: call    Tile_SetFloat
+0x5A4C61: fstp    [esp+5Ch+var_5C]; value
+0x5A4C64: push    0FB2h; propertyCode
+0x5A4C69: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A4C6E: mov     ecx, edi; this
-0x5A4C70: call    GetTeleportExtraData
+0x5A4C70: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x5A4C75: mov     ebp, eax
 0x5A4C77: xor     ebx, ebx
 0x5A4C79: cmp     ebp, ebx
@@ -259,9 +258,9 @@
 0x5A4CB1: fld     dword ptr ds:0A379B4h
 0x5A4CB7: mov     ecx, [esi+28h]; this
 0x5A4CBA: push    ecx
-0x5A4CBB: fstp    [esp+5Ch+var_5C]; a3
-0x5A4CBE: push    0FA1h; a2
-0x5A4CC3: call    Tile_SetFloat
+0x5A4CBB: fstp    [esp+5Ch+var_5C]; value
+0x5A4CBE: push    0FA1h; propertyCode
+0x5A4CC3: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A4CC8: lea     eax, [esp+58h+var_38]
 0x5A4CCC: push    eax
 0x5A4CCD: mov     ecx, ebp
@@ -274,9 +273,9 @@
 0x5A4CE6: fld     dword ptr ds:0A379B4h
 0x5A4CEC: mov     ecx, [esi+48h]; this
 0x5A4CEF: push    ecx
-0x5A4CF0: fstp    [esp+5Ch+var_5C]; a3
-0x5A4CF3: push    0FA1h; a2
-0x5A4CF8: call    Tile_SetFloat
+0x5A4CF0: fstp    [esp+5Ch+var_5C]; value
+0x5A4CF3: push    0FA1h; propertyCode
+0x5A4CF8: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A4CFD: jmp     loc_5A4E91
 0x5A4D02: lea     ebp, [edi+44h]
 0x5A4D05: mov     ecx, ebp
@@ -360,9 +359,9 @@
 0x5A4E07: mov     ecx, [esi+28h]; this
 0x5A4E0A: fld     dword ptr ds:0A379B4h
 0x5A4E10: push    ecx
-0x5A4E11: fstp    [esp+5Ch+var_5C]; a3
-0x5A4E14: push    0FA1h; a2
-0x5A4E19: call    Tile_SetFloat
+0x5A4E11: fstp    [esp+5Ch+var_5C]; value
+0x5A4E14: push    0FA1h; propertyCode
+0x5A4E19: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A4E1E: mov     ecx, [esi+48h]
 0x5A4E21: push    offset word_A36430
 0x5A4E26: push    0FDEh
@@ -370,9 +369,9 @@
 0x5A4E30: fld1
 0x5A4E32: mov     ecx, [esi+48h]; this
 0x5A4E35: push    ecx
-0x5A4E36: fstp    [esp+5Ch+var_5C]; a3
-0x5A4E39: push    0FA1h; a2
-0x5A4E3E: call    Tile_SetFloat
+0x5A4E36: fstp    [esp+5Ch+var_5C]; value
+0x5A4E39: push    0FA1h; propertyCode
+0x5A4E3E: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A4E43: jmp     short loc_5A4E91
 0x5A4E45: mov     ecx, [esi+28h]
 0x5A4E48: push    offset word_A36430
@@ -381,9 +380,9 @@
 0x5A4E57: fld1
 0x5A4E59: mov     ecx, [esi+28h]; this
 0x5A4E5C: push    ecx
-0x5A4E5D: fstp    [esp+5Ch+var_5C]; a3
-0x5A4E60: push    0FA1h; a2
-0x5A4E65: call    Tile_SetFloat
+0x5A4E5D: fstp    [esp+5Ch+var_5C]; value
+0x5A4E60: push    0FA1h; propertyCode
+0x5A4E65: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A4E6A: mov     ecx, [esi+48h]
 0x5A4E6D: push    offset word_A36430
 0x5A4E72: push    0FDEh
@@ -391,9 +390,9 @@
 0x5A4E7C: fld1
 0x5A4E7E: mov     ecx, [esi+48h]; this
 0x5A4E81: push    ecx
-0x5A4E82: fstp    [esp+5Ch+var_5C]; a3
-0x5A4E85: push    0FA1h; a2
-0x5A4E8A: call    Tile_SetFloat
+0x5A4E82: fstp    [esp+5Ch+var_5C]; value
+0x5A4E85: push    0FA1h; propertyCode
+0x5A4E8A: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A4E8F: xor     ebx, ebx
 0x5A4E91: mov     ebp, [esi+4Ch]
 0x5A4E94: cmp     ebp, ebx
@@ -412,32 +411,32 @@
 0x5A4EBF: cmp     [esp+58h+var_44], 0
 0x5A4EC4: mov     ebx, eax
 0x5A4EC6: jz      loc_5A4F96
-0x5A4ECC: mov     ecx, [esp+58h+var_44]
-0x5A4ED0: call    sub_428E70
+0x5A4ECC: mov     ecx, [esp+58h+var_44]; this
+0x5A4ED0: call    ExtraLockData_IsLocked; Verified runtime lock predicate: returns (ExtraLockData.flags & 0x01) != 0. ExtraDataList_Load sets this bit on accepted 12-byte and legacy 16-byte XLOC payloads; serialized flag bits are then preserved. This is a runtime normalization step.
 0x5A4ED5: test    al, al
 0x5A4ED7: jz      loc_5A4F96
 0x5A4EDD: mov     ecx, ds:0B333C4h
-0x5A4EE3: push    1
-0x5A4EE5: push    ecx
-0x5A4EE6: mov     ecx, edi
-0x5A4EE8: call    TESOBjectREFR_IsOwnedBy
+0x5A4EE3: push    1; useFactionOwnership
+0x5A4EE5: push    ecx; actorReference
+0x5A4EE6: mov     ecx, edi; reference
+0x5A4EE8: call    TESObjectREFR_IsOwnedBy; Verified ownership predicate and flag meaning: resolve the effective owner; accept exact equality with the actor's template/base form. When the owner differs, a nonzero ownership-global value can permit the access. With useFactionOwnership=true, a Faction owner is instead checked against the actor base's faction rank and the reference's effective required rank; callers passing false skip that faction-rank path. Direct callers include many `true` paths and ContainerExtraData_RemoveForm's item-sweep call with false. Fallout's TESObjectREFR::IsAnOwner/DoorLock::IsAnOwner also expose a `useFaction` boolean, but its implementation uses actor faction membership and has different rank/global handling.
 0x5A4EED: test    al, al
 0x5A4EEF: jnz     loc_5A4F96
 0x5A4EF5: test    ebx, ebx
 0x5A4EF7: jz      short loc_5A4F15
 0x5A4EF9: mov     edx, ds:0B333C4h
-0x5A4EFF: push    1
-0x5A4F01: push    0
-0x5A4F03: push    edx
-0x5A4F04: push    edi
-0x5A4F05: call    sub_4B72C0
+0x5A4EFF: push    1; bypassPolicyWhenNoEffectiveLock
+0x5A4F01: push    0; unknownPolicyFlag0
+0x5A4F03: push    edx; actor
+0x5A4F04: push    edi; doorReference
+0x5A4F05: call    TESObjectDOOR_CheckActorAccessPolicy; Verified policy byte 1 behavior: when GetEffectiveDoorLock returns null, bypassPolicyWhenNoEffectiveLock=true returns accessible immediately; false continues through ownership, guard, trespass, and linked-cell checks. Current Oblivion callers: TravelPath_ComputeDoorTransitionPenalty passes (unknownPolicyFlag0=0, bypassPolicyWhenNoEffectiveLock=1), while IsOffLimitToThePlayer passes (0,0). unknownPolicyFlag0 is zero at all identified callers and remains Unknown. Fallout has analogous DoorLock policy methods, but the parameter meaning here is established from Oblivion control flow.
 0x5A4F0A: add     esp, 10h
 0x5A4F0D: test    al, al
 0x5A4F0F: jnz     loc_5A4F96
-0x5A4F15: mov     ecx, edi
-0x5A4F17: call    sub_4D7780
-0x5A4F1C: push    eax
-0x5A4F1D: call    GetLockLevel
+0x5A4F15: mov     ecx, edi; this
+0x5A4F17: call    TESObjectREFR_GetEffectiveDoorLockLevel; Verified effective lock-level helper: returns 0 when neither this reference nor its linked-door reference has ExtraLockData; otherwise tail-calls ExtraLockData_GetPlayerScaledLockLevel and returns its integer result. Callers feed the result to GetLockLevel or compare lock difficulty for lockpick/open behavior.
+0x5A4F1C: push    eax; numericLockMagnitude
+0x5A4F1D: call    GetLockLevel; Verified numeric lock magnitude to LOCK_LEVEL mapper. Thresholds are iLockLevelMaxVeryEasy, iLockLevelMaxEasy, iLockLevelMaxAverage, iLockLevelMaxHard, and iLockLevelMaxVeryHard; outputs 0..5 map through LockLevelNames to VeryEasy, Easy, Average, Hard, VeryHard, Impossible. Fallout independently uses the matching LOCK_LEVEL names, but this mapping is directly established by Oblivion code and data.
 0x5A4F22: mov     eax, ds:0B03E1Ch[eax*4]
 0x5A4F29: add     esp, 4
 0x5A4F2C: test    eax, eax
@@ -456,29 +455,29 @@
 0x5A4F4E: push    0FDEh
 0x5A4F53: mov     ecx, ebp
 0x5A4F55: call    Tile_SetString
-0x5A4F5A: mov     ecx, edi
-0x5A4F5C: call    sub_4D7780
+0x5A4F5A: mov     ecx, edi; this
+0x5A4F5C: call    TESObjectREFR_GetEffectiveDoorLockLevel; Verified effective lock-level helper: returns 0 when neither this reference nor its linked-door reference has ExtraLockData; otherwise tail-calls ExtraLockData_GetPlayerScaledLockLevel and returns its integer result. Callers feed the result to GetLockLevel or compare lock difficulty for lockpick/open behavior.
 0x5A4F61: test    eax, eax
 0x5A4F63: jnz     short loc_5A4F6F
 0x5A4F65: mov     [esp+58h+var_44], 0FFFFFFFFh
 0x5A4F6D: jmp     short loc_5A4F7A
-0x5A4F6F: mov     ecx, edi
-0x5A4F71: call    sub_4D7780
+0x5A4F6F: mov     ecx, edi; this
+0x5A4F71: call    TESObjectREFR_GetEffectiveDoorLockLevel; Verified effective lock-level helper: returns 0 when neither this reference nor its linked-door reference has ExtraLockData; otherwise tail-calls ExtraLockData_GetPlayerScaledLockLevel and returns its integer result. Callers feed the result to GetLockLevel or compare lock difficulty for lockpick/open behavior.
 0x5A4F76: mov     [esp+58h+var_44], eax
 0x5A4F7A: fild    [esp+58h+var_44]
 0x5A4F7E: push    ecx
 0x5A4F7F: mov     ecx, ebp; this
-0x5A4F81: fstp    [esp+5Ch+var_5C]; a3
-0x5A4F84: push    0FAFh; a2
-0x5A4F89: call    Tile_SetFloat
+0x5A4F81: fstp    [esp+5Ch+var_5C]; value
+0x5A4F84: push    0FAFh; propertyCode
+0x5A4F89: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A4F8E: fld     dword ptr ds:0A379B4h
 0x5A4F94: jmp     short loc_5A4F98
 0x5A4F96: fld1
 0x5A4F98: push    ecx
-0x5A4F99: fstp    [esp+5Ch+var_5C]; a3
-0x5A4F9C: push    0FA1h; a2
+0x5A4F99: fstp    [esp+5Ch+var_5C]; value
+0x5A4F9C: push    0FA1h; propertyCode
 0x5A4FA1: mov     ecx, ebp; this
-0x5A4FA3: call    Tile_SetFloat
+0x5A4FA3: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A4FA8: mov     edx, [edi]
 0x5A4FAA: mov     eax, [edx+170h]
 0x5A4FB0: push    0
@@ -487,7 +486,7 @@
 0x5A4FB6: push    eax
 0x5A4FB7: lea     ecx, [esp+60h+var_18]
 0x5A4FBB: call    ContainerEntryExtraData_constr
-0x5A4FC0: mov     ecx, [esp+58h+var_18]
+0x5A4FC0: mov     ecx, dword ptr [esp+58h+var_18]
 0x5A4FC4: test    ecx, ecx
 0x5A4FC6: mov     byte ptr [esp+58h+var_8+4], 4
 0x5A4FCB: jnz     short loc_5A4FF2
@@ -501,7 +500,7 @@
 0x5A4FE8: jmp     short loc_5A4FEC
 0x5A4FEA: xor     eax, eax
 0x5A4FEC: mov     ecx, eax
-0x5A4FEE: mov     [esp+58h+var_18], ecx
+0x5A4FEE: mov     dword ptr [esp+58h+var_18], ecx
 0x5A4FF2: lea     edx, [edi+44h]
 0x5A4FF5: push    edx
 0x5A4FF6: call    BSSimpleList_PushFront
@@ -529,10 +528,10 @@
 0x5A5039: lea     ecx, [esp+64h+var_18]
 0x5A503D: call    sub_488E50
 0x5A5042: push    ecx
-0x5A5043: fstp    [esp+5Ch+var_5C]; a3
-0x5A5046: push    0FAFh; a2
+0x5A5043: fstp    [esp+5Ch+var_5C]; value
+0x5A5046: push    0FAFh; propertyCode
 0x5A504B: mov     ecx, ebp; this
-0x5A504D: call    Tile_SetFloat
+0x5A504D: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A5052: mov     ebx, [esp+58h+var_40]
 0x5A5056: cmp     ebx, 21h ; '!'
 0x5A5059: mov     ebp, [esi+34h]
@@ -542,12 +541,12 @@
 0x5A5066: push    edx
 0x5A5067: push    0
 0x5A5069: lea     ecx, [esp+64h+var_18]
-0x5A506D: call    sub_4891C0
+0x5A506D: call    Player_CalcInventoryEntryRating
 0x5A5072: jmp     short loc_5A507A
 0x5A5074: fld     dword ptr ds:0A30634h
 0x5A507A: fstp    [esp+58h+var_44]
 0x5A507E: fld     [esp+58h+var_44]
-0x5A5082: call    Double_To_SInt32
+0x5A5082: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5A5087: push    eax; ArgList
 0x5A5088: mov     [esp+5Ch+var_44], eax; a3
 0x5A508C: lea     eax, [esp+5Ch+var_38]
@@ -563,9 +562,9 @@
 0x5A50AF: fild    [esp+58h+var_44]
 0x5A50B3: push    ecx
 0x5A50B4: mov     ecx, ebp; this
-0x5A50B6: fstp    [esp+5Ch+var_5C]; a3
-0x5A50B9: push    0FAFh; a2
-0x5A50BE: call    Tile_SetFloat
+0x5A50B6: fstp    [esp+5Ch+var_5C]; value
+0x5A50B9: push    0FAFh; propertyCode
+0x5A50BE: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A50C3: cmp     ebx, 14h
 0x5A50C6: mov     ebp, [esi+38h]
 0x5A50C9: jnz     short loc_5A50E1
@@ -574,12 +573,12 @@
 0x5A50D3: push    edx
 0x5A50D4: push    0
 0x5A50D6: lea     ecx, [esp+64h+var_18]
-0x5A50DA: call    sub_4891C0
+0x5A50DA: call    Player_CalcInventoryEntryRating
 0x5A50DF: jmp     short loc_5A50E7
 0x5A50E1: fld     dword ptr ds:0A30634h
 0x5A50E7: fstp    [esp+58h+var_44]
 0x5A50EB: fld     [esp+58h+var_44]
-0x5A50EF: call    Double_To_SInt32
+0x5A50EF: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5A50F4: mov     ecx, eax
 0x5A50F6: cmp     ecx, 3E8h
 0x5A50FC: mov     [esp+58h+var_44], ecx; a3
@@ -624,16 +623,16 @@
 0x5A5172: fild    [esp+58h+var_44]
 0x5A5176: push    ecx
 0x5A5177: mov     ecx, ebp; this
-0x5A5179: fstp    [esp+5Ch+var_5C]; a3
-0x5A517C: push    0FAFh; a2
-0x5A5181: call    Tile_SetFloat
+0x5A5179: fstp    [esp+5Ch+var_5C]; value
+0x5A517C: push    0FAFh; propertyCode
+0x5A5181: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A5186: mov     ebp, [esi+30h]
 0x5A5189: push    0
 0x5A518B: push    0
 0x5A518D: push    0
 0x5A518F: lea     ecx, [esp+64h+var_18]
 0x5A5193: call    sub_485260
-0x5A5198: call    Double_To_SInt32
+0x5A5198: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5A519D: mov     [esp+58h+var_44], eax
 0x5A51A1: mov     eax, [edi]
 0x5A51A3: mov     edx, [eax+170h]
@@ -668,9 +667,9 @@
 0x5A5201: fild    [esp+58h+var_44]
 0x5A5205: push    ecx
 0x5A5206: mov     ecx, ebp; this
-0x5A5208: fstp    [esp+5Ch+var_5C]; a3
-0x5A520B: push    0FAFh; a2
-0x5A5210: call    Tile_SetFloat
+0x5A5208: fstp    [esp+5Ch+var_5C]; value
+0x5A520B: push    0FAFh; propertyCode
+0x5A5210: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A5215: mov     ecx, edi; this
 0x5A5217: call    TESObjectREFR_GetHealth
 0x5A521C: fstp    qword ptr [esp+58h+var_2C.m_dataLen]
@@ -688,7 +687,7 @@
 0x5A5241: fadd    dword ptr ds:0A2FC78h
 0x5A5247: fdivr   qword ptr [esp+58h+var_2C.m_dataLen]
 0x5A524B: fmul    qword ptr ds:0A309F0h
-0x5A5251: call    Double_To_SInt32
+0x5A5251: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5A5256: mov     [esp+58h+var_40], eax
 0x5A525A: fild    [esp+58h+var_40]
 0x5A525E: mov     ecx, edi; this
@@ -714,7 +713,7 @@
 0x5A529D: fstp    st(1)
 0x5A529F: test    ah, 1
 0x5A52A2: jnz     short loc_5A530F
-0x5A52A4: call    Double_To_SInt32
+0x5A52A4: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5A52A9: mov     ecx, eax
 0x5A52AB: cmp     ecx, 3E8h
 0x5A52B1: jge     short loc_5A52BB
@@ -756,10 +755,10 @@
 0x5A531D: call    Tile_SetString
 0x5A5322: fld     [esp+58h+var_44]
 0x5A5326: push    ecx
-0x5A5327: fstp    [esp+5Ch+var_5C]; a3
-0x5A532A: push    0FAFh; a2
+0x5A5327: fstp    [esp+5Ch+var_5C]; value
+0x5A532A: push    0FAFh; propertyCode
 0x5A532F: mov     ecx, ebp; this
-0x5A5331: call    Tile_SetFloat
+0x5A5331: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A5336: cmp     ebx, 13h
 0x5A5339: mov     ebp, [esi+3Ch]
 0x5A533C: jnz     short loc_5A5353
@@ -768,12 +767,12 @@
 0x5A5345: push    eax
 0x5A5346: push    0
 0x5A5348: lea     ecx, [esp+64h+var_18]
-0x5A534C: call    sub_4891C0
+0x5A534C: call    Player_CalcInventoryEntryRating
 0x5A5351: jmp     short loc_5A5359
 0x5A5353: fld     dword ptr ds:0A30634h
 0x5A5359: fstp    [esp+58h+var_44]
 0x5A535D: fld     [esp+58h+var_44]
-0x5A5361: call    Double_To_SInt32
+0x5A5361: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5A5366: mov     ecx, eax
 0x5A5368: cmp     ecx, 3E8h
 0x5A536E: jge     short loc_5A5378
@@ -816,9 +815,9 @@
 0x5A53E1: fild    [esp+58h+var_40]
 0x5A53E5: push    ecx
 0x5A53E6: mov     ecx, ebp; this
-0x5A53E8: fstp    [esp+5Ch+var_5C]; a3
-0x5A53EB: push    0FAFh; a2
-0x5A53F0: call    Tile_SetFloat
+0x5A53E8: fstp    [esp+5Ch+var_5C]; value
+0x5A53EB: push    0FAFh; propertyCode
+0x5A53F0: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A53F5: mov     ebp, [esi+44h]
 0x5A53F8: mov     ecx, edi
 0x5A53FA: call    sub_4D7510
@@ -869,23 +868,23 @@
 0x5A5488: push    ecx
 0x5A5489: mov     ecx, ebp; this
 0x5A548B: fild    [esp+5Ch+var_40]
-0x5A548F: fstp    [esp+5Ch+var_5C]; a3
-0x5A5492: push    0FAFh; a2
-0x5A5497: call    Tile_SetFloat
+0x5A548F: fstp    [esp+5Ch+var_5C]; value
+0x5A5492: push    0FAFh; propertyCode
+0x5A5497: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A549C: fld     dword ptr ds:0A379B4h
 0x5A54A2: mov     edi, [esp+58h+var_3C]
 0x5A54A6: push    ecx
-0x5A54A7: fstp    [esp+5Ch+var_5C]; a3
-0x5A54AA: push    0FA1h; a2
+0x5A54A7: fstp    [esp+5Ch+var_5C]; value
+0x5A54AA: push    0FA1h; propertyCode
 0x5A54AF: mov     ecx, edi; this
-0x5A54B1: call    Tile_SetFloat
+0x5A54B1: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A54B6: push    0; float
 0x5A54B8: mov     ecx, edi
 0x5A54BA: call    sub_58FBA0
 0x5A54BF: cmp     [esp+58h+arg_8], 0
 0x5A54C4: jnz     short loc_5A54CD
 0x5A54C6: mov     ecx, esi; int
-0x5A54C8: call    sub_584390
+0x5A54C8: call    Menu__StartFadeIn; Oblivion ClassMenu step refresh: derives the active step value from tile traits 0xFDB/0xFDC, updates menu state, sets state 8, and refreshes the interface manager.
 0x5A54CD: lea     ecx, [esp+58h+var_18]
 0x5A54D1: mov     byte ptr [esp+58h+var_8+4], 1
 0x5A54D6: call    ContainerEntryExtraData_DestroyDataTable
@@ -894,7 +893,7 @@
 0x5A54E4: call    BSStringT_Clear
 0x5A54E9: jmp     loc_5A4BD3
 0x5A54EE: push    esi
-0x5A54EF: call    FormHeapFree
+0x5A54EF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5A54F4: add     esp, 4
 0x5A54F7: xor     al, al
 0x5A54F9: mov     ecx, [esp+58h+var_C]
@@ -906,3 +905,20 @@
 0x5A5508: pop     ebx
 0x5A5509: add     esp, 44h
 0x5A550C: retn
+0x9C0300: lea     ecx, [ebp-30h]; void *
+0x9C0303: jmp     BSStringT_Clear
+0x9C0308: lea     ecx, [ebp-38h]; void *
+0x9C030B: jmp     BSStringT_Clear
+0x9C0310: lea     ecx, [ebp-28h]; void *
+0x9C0313: jmp     BSStringT_Clear
+0x9C0318: lea     ecx, [ebp-28h]; void *
+0x9C031B: jmp     BSStringT_Clear
+0x9C0320: lea     ecx, [ebp-18h]
+0x9C0323: jmp     ContainerEntryExtraData_DestroyDataTable
+0x9C0328: mov     edx, [esp+arg_4]
+0x9C032C: lea     eax, [edx-48h]
+0x9C032F: mov     ecx, [edx-4Ch]
+0x9C0332: xor     ecx, eax
+0x9C0334: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C0339: mov     eax, offset stru_AE95E8
+0x9C033E: jmp     ___CxxFrameHandler3

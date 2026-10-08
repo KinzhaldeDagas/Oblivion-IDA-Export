@@ -1,19 +1,32 @@
 {
-  "callees_count": 17,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x814340",
+      "0x814418"
+    ]
+  ],
+  "chunks_sha256": "64d74a22743dfeaa2c4f0265749b2a08f7305638f0f6d01450983151979ece38",
+  "comment_regular": "BSCubeMapCamera virtual render dispatcher. Mode 0 calls the six-face shadow object-list renderer; mode 3 calls the alternate face renderer; afterward it releases +0x140 and all six +0x128 face references.",
+  "comment_repeatable": "BSCubeMapCamera virtual render dispatcher. Mode 0 calls the six-face shadow object-list renderer; mode 3 calls the alternate face renderer; afterward it releases +0x140 and all six +0x128 face references.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 4,
-  "display_name": "sub_814340",
+  "display_name": "BSCubeMapCamera_RenderAndReleaseFaceTargets",
   "end_ea": "0x814418",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_814340",
+  "name": "BSCubeMapCamera_RenderAndReleaseFaceTargets",
   "segment": ".text",
   "sha256": "64d74a22743dfeaa2c4f0265749b2a08f7305638f0f6d01450983151979ece38",
   "size": 216,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x814340",
-  "type": "int __thiscall(int this, int)",
+  "total_chunk_size": 216,
+  "type": "int __thiscall(BSCubeMapCamera_ShadowLayout *self, int renderArg)",
   "xrefs_from_count": 103,
   "xrefs_to_count": 1
 }

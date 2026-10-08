@@ -1,19 +1,32 @@
 {
-  "callees_count": 31,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 20,
   "callers_count": 10,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_479140",
+  "chunks": [
+    [
+      "0x479140",
+      "0x4792EC"
+    ]
+  ],
+  "chunks_sha256": "0ad21f9f88229ff081136e61349b56b9837f9fd34b237a790db2689e7827aab6",
+  "comment_regular": "Six-argument cdecl helper (all ten native callers push 6 arguments; unusedContext and unusedTrailing are not read). Reads NiStringExtraData 'Prn' from sourceModelRoot, falling back to modelRoot; resolves that exact parent in skeletonRoot and attaches modelRoot. For modelType==7 it forces Prn string byte 6 to 'L' for lookup, then writes it back to 'R'. It then finds exact-name 'Scb' inside modelRoot and attaches that object separately to the same parent, reparenting Scb as modelRoot's sibling before refreshing property/effect state. Missing creature parents invoke the narrow FadeNode-chain Scb removal. Every exit returns the bool result of sub_88D000(modelRoot,1,1), which is not proven to be general attachment success.",
+  "comment_repeatable": "Six-argument cdecl helper (all ten native callers push 6 arguments; unusedContext and unusedTrailing are not read). Reads NiStringExtraData 'Prn' from sourceModelRoot, falling back to modelRoot; resolves that exact parent in skeletonRoot and attaches modelRoot. For modelType==7 it forces Prn string byte 6 to 'L' for lookup, then writes it back to 'R'. It then finds exact-name 'Scb' inside modelRoot and attaches that object separately to the same parent, reparenting Scb as modelRoot's sibling before refreshing property/effect state. Missing creature parents invoke the narrow FadeNode-chain Scb removal. Every exit returns the bool result of sub_88D000(modelRoot,1,1), which is not proven to be general attachment success.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 7,
+  "display_name": "AttachModelUsingPrnExtraData",
   "end_ea": "0x4792EC",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_479140",
+  "name": "AttachModelUsingPrnExtraData",
   "segment": ".text",
   "sha256": "0ad21f9f88229ff081136e61349b56b9837f9fd34b237a790db2689e7827aab6",
   "size": 428,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x479140",
-  "type": "char __cdecl(_DWORD *, _DWORD *, NiObjectNET *, int, int)",
+  "total_chunk_size": 428,
+  "type": "bool __cdecl(NiNode *skeletonRoot, NiAVObject *modelRoot, NiObjectNET *sourceModelRoot, unsigned int unusedContext, int modelType, unsigned int unusedTrailing)",
   "xrefs_from_count": 192,
   "xrefs_to_count": 10
 }

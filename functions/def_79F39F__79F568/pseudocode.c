@@ -1,6 +1,7 @@
+// Malformed nested frond-texture token edge. Hex-Rays renders this shared exception path as JUMPOUT; it is not an unresolved vector-control-flow edge and does not alter the normal token 14001 termination path.
 void __usercall __noreturn def_79F39F(
         int a1@<eax>,
-        char a2@<bl>,
+        bool a2@<bl>,
         int a3,
         int a4,
         int a5,
@@ -22,7 +23,7 @@ void __usercall __noreturn def_79F39F(
         int a21,
         int a22,
         int a23,
-        char a24,
+        OB_IdvFileError_010201A0 a24,
         int a25,
         int a26,
         int a27,
@@ -33,7 +34,7 @@ void __usercall __noreturn def_79F39F(
         int a32,
         int a33,
         int a34,
-        int a35,
+        OB_stString28_010201A0 result,
         int a36,
         int a37,
         int a38,
@@ -42,31 +43,15 @@ void __usercall __noreturn def_79F39F(
         int a41,
         int a42,
         int a43,
-        char a44,
+        int a44,
         int a45,
         int a46,
-        int a47,
-        int a48,
-        int a49,
-        int a50,
-        int a51,
-        int a52,
-        int a53,
-        int a54,
-        int a55,
-        int a56,
-        int a57,
-        int a58,
-        int a59,
-        int a60,
-        int a61,
-        int a62,
-        int a63)
+        int a47)
 {
-  _DWORD *v63; // eax
+  OB_stString28_010201A0 *v48; // eax
 
-  v63 = (_DWORD *)sub_7A54A0((int)&a44, "malformed frond texture information (token %d)", a1);
-  LOBYTE(STACK[0x118]) = 3;
-  sub_789190((std::exception *)&a24, v63, a2);
-  ThrowException__((int)&a24, &_TI3_AVIdvFileError__);
+  v48 = OB_IdvFormatString_010201A0(&result, "malformed frond texture information (token %d)", a1); /*0x79f575*/
+  LOBYTE(STACK[0x118]) = 3; /*0x79f583*/
+  OB_IdvFileError_Ctor_010201A0(&a24, v48, a2); /*0x79f58b*/
+  ThrowException__((DWORD)&a24, &_TI3_AVIdvFileError__); /*0x79f59a*/
 }

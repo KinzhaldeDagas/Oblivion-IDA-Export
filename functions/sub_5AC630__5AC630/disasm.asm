@@ -7,10 +7,10 @@
 0x5AC63F: push    esi
 0x5AC640: push    0FAAh
 0x5AC645: call    Tile_GetFloat
-0x5AC64A: call    Double_To_SInt32
+0x5AC64A: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5AC64F: push    eax
 0x5AC650: push    0
-0x5AC652: call    ActorValue_GetAVFromGroupOffset
+0x5AC652: call    ActorValue_GetAVFromGroupOffset; mwMediumArmor: Oblivion group 2 maps skill offset to actor value by adding 0x0C. OpenMW/Morrowind skill index 2 is MediumArmor, but Oblivion offset 2 becomes actor value 0x0E (Blade). Do not pass Morrowind skill indexes directly through this helper.
 0x5AC657: mov     ebx, [edi+4]
 0x5AC65A: mov     esi, eax
 0x5AC65C: push    esi

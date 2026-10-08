@@ -1,9 +1,9 @@
-0x80F1C0: push    ebx
+0x80F1C0: push    ebx; SpeedTreeBranchShader vtable slot +0x84. Calls the base shader cache initializer/clearer at 0x8025F0, releases 28 refs at this+0x9C and 10 refs at this+0x10C, then releases and zeros the 28-entry global branch pass table [0xB47790,0xB47800); returns true.
 0x80F1C1: push    ebp
 0x80F1C2: push    esi
 0x80F1C3: push    edi
 0x80F1C4: mov     ebp, ecx
-0x80F1C6: call    sub_8025F0
+0x80F1C6: call    sub_8025F0; Generic BSShader initialization used by SpeedTreeFrondShader vtable +0x84: sets renderer, invokes setup/check virtuals, and allocates one pass slot through sub_76CCA0.
 0x80F1CB: lea     edi, [ebp+9Ch]
 0x80F1D1: mov     ebx, 1Ch
 0x80F1D6: mov     esi, [edi]
@@ -46,7 +46,7 @@
 0x80F239: add     edi, 4
 0x80F23C: sub     ebx, 1
 0x80F23F: jnz     short loc_80F211
-0x80F241: mov     esi, offset dword_B47790
+0x80F241: mov     esi, offset unk_B47790
 0x80F246: or      edi, 0FFFFFFFFh
 0x80F249: lea     esp, [esp+0]
 0x80F250: mov     ecx, [esi]
@@ -54,10 +54,10 @@
 0x80F254: jz      short loc_80F266
 0x80F256: add     [ecx+60h], edi
 0x80F259: jnz     short loc_80F260
-0x80F25B: call    sub_7604D0
+0x80F25B: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x80F260: mov     dword ptr [esi], 0
 0x80F266: add     esi, 4
-0x80F269: cmp     esi, offset unk_B47800
+0x80F269: cmp     esi, offset stru_B47800
 0x80F26F: jl      short loc_80F250
 0x80F271: pop     edi
 0x80F272: pop     esi

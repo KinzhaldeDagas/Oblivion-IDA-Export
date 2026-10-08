@@ -1,4 +1,4 @@
-0x9FA9B0: fld     ds:flt_A2FAAC
+0x9FA9B0: fld     ds:kFaceEarNormalMatchRadius
 0x9FA9B6: push    ecx
 0x9FA9B7: fstp    [esp+4+var_4]; float
 0x9FA9BA: push    offset aFpathavoidan_1; "fPathAvoidanceObstacleCheckTimeLimit"

@@ -1,15 +1,17 @@
-int __thiscall sub_605F30(_DWORD *this)
+// Verified 2026-10-04 crime-record family: manager6770F0 allocates30 bytes, calls605E50 then606520; manager677010 calls6061F0;677240 calls6071A0. Embedded witness list at1C, not AlarmPackage crimes pointer at3C. Probable Fallout Crime family; Oblivion allocation, field reads/writes, calls and RTTI fixups establish local identity.
+// Verified: counts nonnull witness nodes, not unknown00. Probable Fallout GetRefCount8274AC88 counterpart; descriptive name avoids conflating list count with scalar field0.
+unsigned int __thiscall Crime_GetWitnessCount(Crime *self)
 {
-  _DWORD *v1; // ecx
-  int result; // eax
+  CrimeWitnessNode *p_witnesses; // ecx
+  unsigned int result; // eax
 
-  v1 = this + 7;
-  if ( !v1[1] && !*v1 )
-    return 0;
-  for ( result = 0; v1; v1 = (_DWORD *)v1[1] )
+  p_witnesses = &self->witnesses; /*0x605f30*/
+  if ( !p_witnesses->next && !p_witnesses->actor ) /*0x605f39*/
+    return 0; /*0x605f3e*/
+  for ( result = 0; p_witnesses; p_witnesses = p_witnesses->next ) /*0x605f45*/
   {
-    if ( *v1 )
-      ++result;
+    if ( p_witnesses->actor ) /*0x605f47*/
+      ++result; /*0x605f4c*/
   }
-  return result;
+  return result; /*0x605f40*/
 }

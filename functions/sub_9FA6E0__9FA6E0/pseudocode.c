@@ -1,5 +1,6 @@
-int sub_9FA6E0()
+// Verified setting registration: registers GameSettingFloat fPathMustLockpickPenalty with default 40960.0 and pairs it with atexit cleanup GameSettings_Unregister_fPathMustLockpickPenalty.
+int GameSettings_Register_fPathMustLockpickPenalty()
 {
-  GameSetting_ConstrAndReg_float(flt_B3A438, (int)"fPathMustLockpickPenalty", 40960.0);
-  return atexit(sub_A240A0);
+  GameSetting_ConstrAndReg_float(fPathMustLockpickPenalty, (int)"fPathMustLockpickPenalty", 40960.0); /*0x9fa6f4*/
+  return atexit(GameSettings_Unregister_fPathMustLockpickPenalty); /*0x9fa704*/
 }

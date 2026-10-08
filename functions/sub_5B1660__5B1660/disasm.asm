@@ -23,7 +23,7 @@
 0x5B16AD: push    0FE0h
 0x5B16B2: mov     ecx, edi
 0x5B16B4: call    Tile_GetFloat
-0x5B16B9: call    Double_To_SInt32
+0x5B16B9: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B16BE: mov     ebx, eax
 0x5B16C0: push    0FD1h
 0x5B16C5: mov     ecx, edi
@@ -41,15 +41,15 @@
 0x5B16F1: fldz
 0x5B16F3: mov     ecx, edi
 0x5B16F5: fstp    [esp+20h+var_8]
-0x5B16F9: call    sub_588D90
+0x5B16F9: call    sub_588D90; AchievementsNative evidence: stock tile depth helper starts with tile depth and adds parent depth for locus ancestors / top menu child; InventoryMenu hover sets focus box depth to this value minus 0.5.
 0x5B16FE: fsub    qword ptr ds:0A2FAA0h
 0x5B1704: push    ecx
 0x5B1705: mov     ecx, [esi+28h]; this
 0x5B1708: fstp    [esp+24h+arg_0]
 0x5B170C: fld     [esp+24h+arg_0]
-0x5B1710: fstp    [esp+24h+a2]; a3
-0x5B1713: push    0FABh; a2
-0x5B1718: call    Tile_SetFloat
+0x5B1710: fstp    [esp+24h+a2]; value
+0x5B1713: push    0FABh; propertyCode
+0x5B1718: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B171D: lea     ecx, [ebx+ebx]
 0x5B1720: mov     [esp+20h+arg_0], ecx
 0x5B1724: fild    [esp+20h+arg_0]
@@ -62,9 +62,9 @@
 0x5B173D: mov     ecx, [esi+28h]; this
 0x5B1740: fstp    [esp+24h+arg_0]
 0x5B1744: fld     [esp+24h+arg_0]
-0x5B1748: fstp    [esp+24h+a2]; a3
-0x5B174B: push    0FCBh; a2
-0x5B1750: call    Tile_SetFloat
+0x5B1748: fstp    [esp+24h+a2]; value
+0x5B174B: push    0FCBh; propertyCode
+0x5B1750: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B1755: push    0FCAh
 0x5B175A: mov     ecx, edi
 0x5B175C: call    Tile_GetFloat
@@ -73,48 +73,48 @@
 0x5B1766: mov     ecx, [esi+28h]; this
 0x5B1769: fstp    [esp+24h+arg_0]
 0x5B176D: fld     [esp+24h+arg_0]
-0x5B1771: fstp    [esp+24h+a2]; a3
-0x5B1774: push    0FCAh; a2
-0x5B1779: call    Tile_SetFloat
+0x5B1771: fstp    [esp+24h+a2]; value
+0x5B1774: push    0FCAh; propertyCode
+0x5B1779: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B177E: fild    [esp+20h+arg_4]
 0x5B1782: mov     ecx, edi
 0x5B1784: fstp    qword ptr [esp+20h+var_10]
-0x5B1788: call    sub_588C50
+0x5B1788: call    sub_588C50; AchievementsNative evidence: stock tile X helper starts with tile x and adds ancestor x only when ancestor locus is nonzero; use for inventory focus/popup coordinate mimic.
 0x5B178D: fadd    qword ptr [esp+20h+var_10]
 0x5B1791: fld     [esp+20h+var_8]
-0x5B1795: call    Double_To_SInt32
+0x5B1795: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B179A: mov     [esp+20h+arg_0], eax
 0x5B179E: fisub   [esp+20h+arg_0]
 0x5B17A2: push    ecx
 0x5B17A3: mov     ecx, [esi+28h]; this
 0x5B17A6: fstp    [esp+24h+arg_0]
 0x5B17AA: fld     [esp+24h+arg_0]
-0x5B17AE: fstp    [esp+24h+a2]; a3
-0x5B17B1: push    0FADh; a2
-0x5B17B6: call    Tile_SetFloat
+0x5B17AE: fstp    [esp+24h+a2]; value
+0x5B17B1: push    0FADh; propertyCode
+0x5B17B6: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B17BB: mov     ecx, edi
-0x5B17BD: call    sub_588CF0
+0x5B17BD: call    sub_588CF0; AchievementsNative evidence: stock tile Y helper starts with tile y and adds ancestor y only when ancestor locus is nonzero; inventory hover passes this row Y to popup path.
 0x5B17C2: fadd    qword ptr [esp+20h+var_10]
 0x5B17C6: push    ecx
 0x5B17C7: mov     ecx, [esi+28h]; this
 0x5B17CA: fstp    [esp+24h+arg_0]
 0x5B17CE: fld     [esp+24h+arg_0]
-0x5B17D2: fstp    [esp+24h+a2]; a3
-0x5B17D5: push    0FACh; a2
-0x5B17DA: call    Tile_SetFloat
+0x5B17D2: fstp    [esp+24h+a2]; value
+0x5B17D5: push    0FACh; propertyCode
+0x5B17DA: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B17DF: fld     dword ptr ds:0A379B4h
 0x5B17E5: push    ecx
 0x5B17E6: mov     ecx, [esi+28h]; this
-0x5B17E9: fstp    [esp+24h+a2]; a3
-0x5B17EC: push    0FA1h; a2
-0x5B17F1: call    Tile_SetFloat
+0x5B17E9: fstp    [esp+24h+a2]; value
+0x5B17EC: push    0FA1h; propertyCode
+0x5B17F1: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B17F6: cmp     ebp, 3E9h
 0x5B17FC: mov     [esi+48h], edi
 0x5B17FF: jl      loc_5B19FA
 0x5B1805: push    0FB5h
 0x5B180A: mov     ecx, edi
 0x5B180C: call    Tile_GetFloat
-0x5B1811: call    Double_To_SInt32
+0x5B1811: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B1816: mov     ecx, [esi+4]
 0x5B1819: push    0FB5h
 0x5B181E: mov     ebx, eax
@@ -125,7 +125,7 @@
 0x5B182D: call    InterfaceManager_GetSingleton
 0x5B1832: mov     ebp, [esi+4]
 0x5B1835: add     esp, 8
-0x5B1838: call    sub_57D7F0
+0x5B1838: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x5B183D: fstp    [esp+20h+var_8]
 0x5B1841: push    0FBAh
 0x5B1846: mov     ecx, ebp
@@ -135,7 +135,7 @@
 0x5B1856: mov     ecx, edi
 0x5B1858: fstp    [esp+24h+arg_0]
 0x5B185C: call    Tile_GetFloat
-0x5B1861: call    Double_To_SInt32
+0x5B1861: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B1866: cmp     ebx, 8
 0x5B1869: jnz     loc_5B190B
 0x5B186F: mov     ecx, ds:0B14360h
@@ -156,7 +156,7 @@
 0x5B1895: add     esp, 10h
 0x5B1898: retn    8
 0x5B189B: mov     ecx, [esi+4]
-0x5B189E: call    sub_588D90
+0x5B189E: call    sub_588D90; AchievementsNative evidence: stock tile depth helper starts with tile depth and adds parent depth for locus ancestors / top menu child; InventoryMenu hover sets focus box depth to this value minus 0.5.
 0x5B18A3: fstp    [esp+20h+var_10]
 0x5B18A7: mov     edx, [ebx]
 0x5B18A9: mov     eax, [edx+8]
@@ -181,7 +181,7 @@
 0x5B18DF: push    ecx
 0x5B18E0: mov     ecx, edi
 0x5B18E2: fstp    [esp+2Ch+var_2C]; float
-0x5B18E5: call    sub_588CF0
+0x5B18E5: call    sub_588CF0; AchievementsNative evidence: stock tile Y helper starts with tile y and adds ancestor y only when ancestor locus is nonzero; inventory hover passes this row Y to popup path.
 0x5B18EA: sub     esp, 8
 0x5B18ED: fstp    [esp+34h+var_30]; float
 0x5B18F1: fld     [esp+34h+arg_4]
@@ -213,7 +213,7 @@
 0x5B1932: test    ebx, ebx
 0x5B1934: jz      short loc_5B19A4
 0x5B1936: mov     ecx, [esi+4]
-0x5B1939: call    sub_588D90
+0x5B1939: call    sub_588D90; AchievementsNative evidence: stock tile depth helper starts with tile depth and adds parent depth for locus ancestors / top menu child; InventoryMenu hover sets focus box depth to this value minus 0.5.
 0x5B193E: fstp    [esp+20h+var_10]
 0x5B1942: fld     [esp+20h+var_10]
 0x5B1946: mov     eax, [ebx]
@@ -223,7 +223,7 @@
 0x5B1952: mov     ecx, edi
 0x5B1954: fld     [esp+28h+arg_0]
 0x5B1958: fstp    [esp+28h+var_28]; float
-0x5B195B: call    sub_588CF0
+0x5B195B: call    sub_588CF0; AchievementsNative evidence: stock tile Y helper starts with tile y and adds ancestor y only when ancestor locus is nonzero; inventory hover passes this row Y to popup path.
 0x5B1960: sub     esp, 8
 0x5B1963: fstp    [esp+30h+var_2C]; float
 0x5B1967: fld     [esp+30h+arg_4]
@@ -261,7 +261,7 @@
 0x5B19B5: add     esp, 10h
 0x5B19B8: retn    8
 0x5B19BB: mov     ecx, [esi+4]
-0x5B19BE: call    sub_588D90
+0x5B19BE: call    sub_588D90; AchievementsNative evidence: stock tile depth helper starts with tile depth and adds parent depth for locus ancestors / top menu child; InventoryMenu hover sets focus box depth to this value minus 0.5.
 0x5B19C3: fstp    [esp+20h+var_10]
 0x5B19C7: fld     [esp+20h+var_10]
 0x5B19CB: push    ecx
@@ -271,7 +271,7 @@
 0x5B19D5: push    ecx
 0x5B19D6: mov     ecx, edi
 0x5B19D8: fstp    [esp+2Ch+var_2C]; float
-0x5B19DB: call    sub_588CF0
+0x5B19DB: call    sub_588CF0; AchievementsNative evidence: stock tile Y helper starts with tile y and adds ancestor y only when ancestor locus is nonzero; inventory hover passes this row Y to popup path.
 0x5B19E0: sub     esp, 8
 0x5B19E3: fstp    [esp+34h+var_30]; float
 0x5B19E7: add     ebx, 18h

@@ -1,10 +1,10 @@
-0x648E40: push    ebx
+0x648E40: push    ebx; RadiantAI: per-process package refresh wrapper; calls actor base package chooser chain and stores selected package at process+0x8.
 0x648E41: mov     ebx, [esp+4+arg_0]
 0x648E45: push    esi
 0x648E46: push    edi
 0x648E47: mov     edi, ecx
 0x648E49: mov     ecx, ebx
-0x648E4B: call    sub_5E0330
+0x648E4B: call    sub_5E0330; RadiantAI: thin actor current package chooser wrapper; delegates to base AI package list chooser sub_468670.
 0x648E50: mov     esi, eax
 0x648E52: mov     eax, [edi+8]
 0x648E55: test    eax, eax
@@ -42,13 +42,13 @@
 0x648EAB: call    edx
 0x648EAD: push    eax; int
 0x648EAE: mov     ecx, ebx; this
-0x648EB0: call    TESObjectREFR_GetParentCell
+0x648EB0: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x648EB5: push    eax; int
 0x648EB6: mov     ecx, ebx; this
 0x648EB8: call    TESObjectREFR_GetWorldSpace
 0x648EBD: push    eax; int
 0x648EBE: mov     ecx, ebx
-0x648EC0: call    sub_4D7A20
+0x648EC0: call    TESObjectREFR_SetStartLocation; TESObjectREFR wrapper records package start location from worldspace/cell, position XYZ, and rotZ into ExtraPackageStartLocation.
 0x648EC5: pop     edi
 0x648EC6: pop     esi
 0x648EC7: pop     ebx

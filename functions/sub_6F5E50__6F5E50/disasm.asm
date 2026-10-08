@@ -15,16 +15,16 @@
 0x6F5E73: test    al, al
 0x6F5E75: jnz     short loc_6F5EC4
 0x6F5E77: sub     esp, 1Ch
-0x6F5E7A: mov     ecx, esp
+0x6F5E7A: mov     ecx, esp; this
 0x6F5E7C: mov     [esp+20h+arg_4], esp
-0x6F5E80: push    0FFFFFFFFh
-0x6F5E82: push    0
+0x6F5E80: push    0FFFFFFFFh; count
+0x6F5E82: push    0; offset
 0x6F5E84: lea     edx, [esi+4]
 0x6F5E87: mov     dword ptr [ecx+18h], 0Fh
 0x6F5E8E: mov     dword ptr [ecx+14h], 0
-0x6F5E95: push    edx
+0x6F5E95: push    edx; source
 0x6F5E96: mov     [ecx+4], al
-0x6F5E99: call    sub_414420
+0x6F5E99: call    OB_stString28_AssignSubstring_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,offset,count). Bounds-checks offset, clamps count to source.size-offset, handles self-assignment by in-place erasure, grows when required, copies the selected bytes, updates size, and writes the terminator.
 0x6F5E9E: push    1; int
 0x6F5EA0: call    sub_6F6BF0
 0x6F5EA5: mov     ecx, [esi+40h]

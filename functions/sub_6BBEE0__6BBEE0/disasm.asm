@@ -219,7 +219,7 @@
 0x6BC153: fstp    dword ptr [edi+4]
 0x6BC156: fstp    dword ptr [edi+8]
 0x6BC159: mov     ecx, edi
-0x6BC15B: call    sub_43F350
+0x6BC15B: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x6BC160: fstp    st
 0x6BC162: fld     dword ptr [edi+8]
 0x6BC165: mov     eax, [esp+34h+arg_18]

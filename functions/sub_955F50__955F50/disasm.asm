@@ -38,7 +38,6 @@
 0x955FB3: jmp     short loc_955FC0
 0x955FB5: mov     esi, [ebp+arg_8]
 0x955FB8: jmp     short loc_955FC0
-0x955FBA: align 10h
 0x955FC0: mov     edx, [ebx+10h]
 0x955FC3: mov     eax, [edx+0Ch]
 0x955FC6: mov     edx, [ebp+arg_4]
@@ -120,7 +119,7 @@
 0x95608D: pop     ebp
 0x95608E: retn    0Ch
 0x956091: cmp     byte ptr [edi+3Ch], 1
-0x956095: mov     [esp+90h+var_5C], 0
+0x956095: mov     byte ptr [esp+90h+var_5C], 0
 0x95609A: jnz     short loc_9560AD
 0x95609C: mov     edx, [ebp+arg_4]
 0x95609F: lea     ecx, [esp+90h+var_5C]
@@ -252,7 +251,7 @@
 0x956203: push    edi
 0x956204: mov     ecx, ebx
 0x956206: call    sub_9549C0
-0x95620B: mov     al, [esp+90h+var_5C]
+0x95620B: mov     al, byte ptr [esp+90h+var_5C]
 0x95620F: test    al, al
 0x956211: jz      short loc_95621F
 0x956213: lea     ecx, [esp+90h+var_5C]

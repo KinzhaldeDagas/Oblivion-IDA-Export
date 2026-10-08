@@ -1,1 +1,1 @@
-DLLVERSIONINFO
+typedef _DllVersionInfo DLLVERSIONINFO;

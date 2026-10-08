@@ -7,7 +7,7 @@
   },
   {
     "ea": "0x4EA083",
-    "line": "cmp     byte ptr [esp+8+arg_0], 0",
+    "line": "cmp     byte ptr [esp+8+valueOut], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x4EA095",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x4EA0B9",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x4EA0E7",
-    "line": "mov     [esp+10h+var_8], eax",
+    "line": "mov     [esp+10h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -235,61 +235,61 @@
   },
   {
     "ea": "0x4EA0F0",
-    "line": "lea     eax, [esp+10h+arg_0]",
+    "line": "lea     eax, [esp+10h+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4EA0F4",
-    "line": "push    eax",
+    "line": "push    eax; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4EA0F5",
-    "line": "lea     ecx, [esp+14h+var_4]",
+    "line": "lea     ecx, [esp+14h+keyOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4EA0F9",
-    "line": "push    ecx",
+    "line": "push    ecx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4EA0FA",
-    "line": "lea     edx, [esp+18h+var_8]",
+    "line": "lea     edx, [esp+18h+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4EA0FE",
-    "line": "push    edx",
+    "line": "push    edx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4EA0FF",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4EA101",
-    "line": "mov     [esp+1Ch+arg_0], 0",
+    "line": "mov     [esp+1Ch+valueOut], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x4EA109",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4EA10E",
-    "line": "mov     esi, [esp+10h+arg_0]",
+    "line": "mov     esi, [esp+10h+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -319,19 +319,19 @@
   },
   {
     "ea": "0x4EA11E",
-    "line": "push    ecx",
+    "line": "push    ecx; landLODParent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4EA11F",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4EA121",
-    "line": "call    sub_4ECAE0",
+    "line": "call    TESTerrainLODQuad_AdvanceUnloadState; Verified recursive unload state machine: Attached(3)->LoadedDetached(2) removes the terrain node; LoadedDetached(2)->UnloadPending(4); the next unload pass releases the mesh and reaches Unloaded(5). The same transition recurses over four child pointers at +0x30..+0x3C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,19 +349,19 @@
   },
   {
     "ea": "0x4EA12F",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4EA131",
-    "line": "push    eax",
+    "line": "push    eax; landLODParent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4EA132",
-    "line": "call    sub_4ECAE0",
+    "line": "call    TESTerrainLODQuad_AdvanceUnloadState; Verified recursive unload state machine: Attached(3)->LoadedDetached(2) removes the terrain node; LoadedDetached(2)->UnloadPending(4); the next unload pass releases the mesh and reaches Unloaded(5). The same transition recurses over four child pointers at +0x30..+0x3C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,25 +379,25 @@
   },
   {
     "ea": "0x4EA140",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4EA142",
-    "line": "push    edx",
+    "line": "push    edx; landLODParent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4EA143",
-    "line": "call    sub_4ECAE0",
+    "line": "call    TESTerrainLODQuad_AdvanceUnloadState; Verified recursive unload state machine: Attached(3)->LoadedDetached(2) removes the terrain node; LoadedDetached(2)->UnloadPending(4); the next unload pass releases the mesh and reaches Unloaded(5). The same transition recurses over four child pointers at +0x30..+0x3C.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4EA148",
-    "line": "cmp     [esp+10h+var_8], 0",
+    "line": "cmp     [esp+10h+position], 0",
     "mnemonic": "cmp",
     "size": 5
   },

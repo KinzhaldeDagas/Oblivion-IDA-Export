@@ -1,21 +1,21 @@
-BSShaderLightingProperty *__thiscall sub_7B2940(_DWORD *this, int a2)
+BSShaderLightingPropertyLayout_t *__thiscall sub_7B2940(char **this, int a2)
 {
-  BSShaderLightingProperty *v3; // eax
-  BSShaderLightingProperty *v4; // esi
+  BSShaderLightingPropertyLayout_t *v3; // eax
+  BSShaderLightingPropertyLayout_t *v4; // esi
 
-  v3 = (BSShaderLightingProperty *)FormHeapAlloc(0xACu);
-  v4 = v3;
-  if ( v3 )
+  v3 = (BSShaderLightingPropertyLayout_t *)FormHeapAlloc(0xACu); /*0x7b296a*/
+  v4 = v3; /*0x7b296f*/
+  if ( v3 ) /*0x7b2982*/
   {
-    BSShaderLightingProperty::BSShaderLightingProperty(v3);
-    *(_DWORD *)v4 = &DistantLODShaderProperty::`vftable';
-    *((_DWORD *)v4 + 0x28) = 0;
-    *((_DWORD *)v4 + 0x27) = 0;
+    BSShaderLightingProperty::BSShaderLightingProperty(v3); /*0x7b2986*/
+    v4->base.vtbl = &DistantLODShaderProperty::`vftable'; /*0x7b298b*/
+    v4[1].base.member.super.super.super.m_uiRefCount = 0; /*0x7b2991*/
+    v4[1].base.vtbl = 0; /*0x7b299b*/
   }
   else
   {
-    v4 = 0;
+    v4 = 0; /*0x7b29a7*/
   }
-  sub_7B23C0(this, v4, a2);
-  return v4;
+  sub_7B23C0(this, v4, a2); /*0x7b29b9*/
+  return v4; /*0x7b29c0*/
 }

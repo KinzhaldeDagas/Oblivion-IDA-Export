@@ -51,7 +51,7 @@
 0x700849: mov     edx, [esp+4B8h+var_4A8]
 0x70084D: push    edx
 0x70084E: mov     [esp+4BCh+var_4A0], 1
-0x700856: call    FormHeapFree
+0x700856: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x70085B: add     esp, 4
 0x70085E: lea     ecx, [esp+4B8h+var_498]; this
 0x700862: mov     byte ptr [esp+4B8h+var_4], bl
@@ -68,3 +68,23 @@
 0x70088B: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x700890: add     esp, 4A8h
 0x700896: retn    4
+0x9C9380: lea     ecx, [ebp-498h]; this
+0x9C9386: jmp     ??1NiStream@@UAE@XZ; NiStream::~NiStream(void)
+0x9C938B: mov     eax, [ebp-4A0h]
+0x9C9391: and     eax, 1
+0x9C9394: jz      locret_9C93AC
+0x9C939A: and     dword ptr [ebp-4A0h], 0FFFFFFFEh
+0x9C93A1: mov     ecx, [ebp-49Ch]; slot
+0x9C93A7: jmp     NiPointerSlot_Release
+0x9C93AC: retn
+0x9C93AD: mov     edx, [esp+arg_4]
+0x9C93B1: lea     eax, [edx-4A8h]
+0x9C93B7: mov     ecx, [edx-4ACh]
+0x9C93BD: xor     ecx, eax
+0x9C93BF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C93C4: add     eax, 0Ch
+0x9C93C7: mov     ecx, [edx-4]
+0x9C93CA: xor     ecx, eax
+0x9C93CC: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C93D1: mov     eax, offset stru_AF1C90
+0x9C93D6: jmp     ___CxxFrameHandler3

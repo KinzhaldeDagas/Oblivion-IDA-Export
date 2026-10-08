@@ -1,1 +1,1 @@
-AudioSessionDisconnectReason_0
+typedef AudioSessionDisconnectReason AudioSessionDisconnectReason_0;

@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x537F88",
-    "line": "fstp    dword ptr [esp+190h+var_140+0Ch]",
+    "line": "fstp    [esp+190h+outData+0Ch]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -301,25 +301,25 @@
   },
   {
     "ea": "0x537FC8",
-    "line": "lea     eax, [esp+190h+var_140+8]",
+    "line": "lea     eax, [esp+190h+outData+8]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x537FCC",
-    "line": "push    eax",
+    "line": "push    eax; outData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x537FCD",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x537FCF",
-    "line": "call    sub_677C70",
+    "line": "call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x537FEB",
-    "line": "mov     esi, dword ptr [esp+190h+var_140+8]",
+    "line": "mov     esi, [esp+190h+outData+8]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -487,19 +487,19 @@
   },
   {
     "ea": "0x538020",
-    "line": "push    ecx",
+    "line": "push    ecx; outData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x538021",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x538023",
-    "line": "call    sub_677C70",
+    "line": "call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -901,7 +901,7 @@
   },
   {
     "ea": "0x538100",
-    "line": "call    sub_43F3E0",
+    "line": "call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1105,7 +1105,7 @@
   },
   {
     "ea": "0x53817A",
-    "line": "fadd    dword ptr [esp+190h+var_140+0Ch]",
+    "line": "fadd    [esp+190h+outData+0Ch]",
     "mnemonic": "fadd",
     "size": 4
   },

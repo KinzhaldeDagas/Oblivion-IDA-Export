@@ -2,7 +2,7 @@
 0x435A11: mov     esi, [esp+4+arg_0]
 0x435A15: cmp     word ptr [esi+4], 0
 0x435A1A: jnz     short loc_435A57
-0x435A1C: mov     eax, SaveLoad_CurrentSavegame
+0x435A1C: mov     eax, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.
 0x435A21: test    eax, eax
 0x435A23: jz      short loc_435A39
 0x435A25: mov     eax, [eax+18h]
@@ -22,7 +22,7 @@
 0x435A47: mov     ecx, esi
 0x435A49: call    sub_4349B0
 0x435A4E: push    esi
-0x435A4F: call    FormHeapFree
+0x435A4F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x435A54: add     esp, 4
 0x435A57: pop     esi
 0x435A58: retn    8

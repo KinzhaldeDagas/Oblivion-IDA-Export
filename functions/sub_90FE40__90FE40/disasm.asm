@@ -90,18 +90,18 @@
 0x90FF76: mulps   xmm4, xmm3
 0x90FF79: mulps   xmm1, xmm2
 0x90FF7C: addps   xmm1, xmm4
-0x90FF7F: movaps  [esp+50h+var_34+4], xmm1
+0x90FF7F: movaps  xmmword ptr [esp+50h+var_34+4], xmm1
 0x90FF84: call    sub_8A6410
 0x90FF89: mov     ecx, [ebx+50h]
 0x90FF8C: mov     edx, [ecx]
 0x90FF8E: lea     eax, [esp+50h+var_34+4]
 0x90FF92: push    eax
 0x90FF93: call    dword ptr [edx+64h]
-0x90FF96: movaps  xmm1, [esp+50h+var_34+4]
+0x90FF96: movaps  xmm1, xmmword ptr [esp+50h+var_34+4]
 0x90FF9B: movaps  xmm0, xmmword ptr ds:0A965C0h
 0x90FFA2: xorps   xmm1, xmm0
 0x90FFA5: mov     ecx, edi
-0x90FFA7: movaps  [esp+50h+var_34+4], xmm1
+0x90FFA7: movaps  xmmword ptr [esp+50h+var_34+4], xmm1
 0x90FFAC: call    sub_8A6410
 0x90FFB1: mov     ecx, [edi+50h]
 0x90FFB4: mov     edx, [ecx]

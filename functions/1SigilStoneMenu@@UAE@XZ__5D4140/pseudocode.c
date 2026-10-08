@@ -5,28 +5,28 @@ void __usercall SigilStoneMenu::~SigilStoneMenu(
         double a4@<st1>,
         double a5@<st0>)
 {
-  unsigned int *v7; // edi
-  _DWORD *v8; // ecx
-  unsigned int v9; // edi
+  unsigned int *v6; // edi
+  _DWORD *v7; // ecx
+  unsigned int v8; // edi
 
-  this->__vftable = (MenuVtbl *)&SigilStoneMenu::`vftable';
-  v7 = *((unsigned int **)this + 0xB);
-  if ( v7 )
+  this->__vftable = (MenuVtbl *)&SigilStoneMenu::`vftable'; /*0x5d4169*/
+  v6 = *((unsigned int **)this + 0xB); /*0x5d416f*/
+  if ( v6 ) /*0x5d417c*/
   {
-    ContainerEntryExtraData_DestroyDataTable(v7, a2);
-    FormHeapFree((unsigned int)v7);
+    ContainerEntryExtraData_DestroyDataTable(v6, a2); /*0x5d4180*/
+    FormHeapFree((unsigned int)v6); /*0x5d4186*/
   }
-  v8 = *((_DWORD **)this + 0x1B);
-  if ( v8 )
+  v7 = *((_DWORD **)this + 0x1B); /*0x5d418e*/
+  if ( v7 ) /*0x5d4193*/
   {
-    BSSimpleList_Clear(v8);
-    FormHeapFree(*((_DWORD *)this + 0x1B));
+    BSSimpleList_Clear(v7); /*0x5d4195*/
+    FormHeapFree(*((_DWORD *)this + 0x1B)); /*0x5d419e*/
   }
-  v9 = *((_DWORD *)this + 0x1D);
-  if ( v9 )
+  v8 = *((_DWORD *)this + 0x1D); /*0x5d41a6*/
+  if ( v8 ) /*0x5d41ab*/
   {
-    sub_57FEB0(*((_DWORD **)this + 0x1D));
-    FormHeapFree(v9);
+    sub_57FEB0(*((_DWORD **)this + 0x1D)); /*0x5d41af*/
+    FormHeapFree(v8); /*0x5d41b5*/
   }
-  Menu::~Menu(this, a3, a4, a5);
+  Menu::~Menu(this, a3, a4, a5); /*0x5d41c7*/
 }

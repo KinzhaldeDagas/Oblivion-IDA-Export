@@ -1,36 +1,37 @@
-NiGeometryData *__thiscall sub_732A30(
+// Verified NiLinesData constructor: initializes vertex/color buffers through NiGeometryData, assigns NiLinesData vtable, and either stores supplied line-flag bytes or allocates default alternating endpoint flags.
+NiGeometryData *__thiscall NiLinesData_ctor(
         NiGeometryData *this,
-        unsigned __int16 a2,
-        NiPoint3 *a3,
-        NiColorAlpha *a4,
-        void *a5,
-        char a6,
-        __int16 a7,
-        int a8)
+        UInt16 vertexCount,
+        NiPoint3 *vertices,
+        NiColorAlpha *colors,
+        void *arg5,
+        char arg6,
+        __int16 arg7,
+        int lineFlags)
 {
   int v9; // eax
   int v10; // ecx
 
-  NiGeometryData::NiGeometryData(this, a2, a3, 0, a4, a5, a6, a7);
-  this->__vftable = (NiGeometryDataVtbl *)&NiLinesData::`vftable';
-  if ( a8 )
+  NiGeometryData::NiGeometryData(this, vertexCount, vertices, 0, colors, arg5, arg6, arg7); /*0x732a7c*/
+  this->__vftable = (NiGeometryDataVtbl *)&NiLinesData::`vftable'; /*0x732a8f*/
+  if ( lineFlags ) /*0x732a95*/
   {
-    *((_DWORD *)this + 0x10) = a8;
+    *((_DWORD *)this + 0x10) = lineFlags; /*0x732a97*/
   }
   else
   {
-    *((_DWORD *)this + 0x10) = FormHeapAlloc(a2);
-    v9 = 0;
-    if ( a2 )
+    *((_DWORD *)this + 0x10) = FormHeapAlloc(vertexCount); /*0x732aa5*/
+    v9 = 0; /*0x732aab*/
+    if ( vertexCount ) /*0x732ab0*/
     {
-      v10 = 0;
-      do
+      v10 = 0; /*0x732ab2*/
+      do /*0x732aca*/
       {
-        *(_BYTE *)(v10 + *((_DWORD *)this + 0x10)) = (v9++ & 1) == 0;
-        ++v10;
+        *(_BYTE *)(v10 + *((_DWORD *)this + 0x10)) = (v9++ & 1) == 0; /*0x732abe*/
+        ++v10; /*0x732ac4*/
       }
-      while ( (unsigned __int16)v9 < a2 );
+      while ( (unsigned __int16)v9 < vertexCount ); /*0x732aca*/
     }
   }
-  return this;
+  return this; /*0x732ace*/
 }

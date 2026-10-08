@@ -1,10 +1,18 @@
 {
   "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 2,
   "callers_count": 0,
+  "chunks": [
+    [
+      "0x56FB40",
+      "0x56FBF3"
+    ]
+  ],
   "chunks_sha256": "126d54cbddd3cd35d84919ffc54e7a31b52d63900ff50b9bb82d0b94e94ce411",
   "comment_regular": "Verified BSTempEffectGeometryDecal_Initialize override at vtable +0x4C. It guards repeated live initialization with initializeCallbackDone, checks source/parent refs, obtains sourceGeometry->geomData->m_spAdditionalGeomData, branches on that object's +0x4C bool slot to one of two builders, then marks callback-done and releases transient source refs. LoadGame builds restored geometry through BuildGeneratedGeometry instead of dispatching this Initialize virtual, so this byte is not a general generated-geometry-ready flag.",
   "comment_repeatable": "Verified BSTempEffectGeometryDecal_Initialize override at vtable +0x4C. It guards repeated live initialization with initializeCallbackDone, checks source/parent refs, obtains sourceGeometry->geomData->m_spAdditionalGeomData, branches on that object's +0x4C bool slot to one of two builders, then marks callback-done and releases transient source refs. LoadGame builds restored geometry through BuildGeneratedGeometry instead of dispatching this Initialize virtual, so this byte is not a general generated-geometry-ready flag.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
   "display_name": "BSTempEffectGeometryDecal_Initialize",
   "end_ea": "0x56FBF3",
@@ -15,6 +23,7 @@
   "segment": ".text",
   "sha256": "126d54cbddd3cd35d84919ffc54e7a31b52d63900ff50b9bb82d0b94e94ce411",
   "size": 179,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x56FB40",
   "total_chunk_size": 179,
   "type": "void __thiscall(BSTempEffectGeometryDecalLayout_t *this)",

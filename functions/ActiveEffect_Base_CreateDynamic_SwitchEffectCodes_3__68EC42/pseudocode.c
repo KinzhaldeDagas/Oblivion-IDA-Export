@@ -1,7 +1,8 @@
+// Verified nested FourCC mappings ABSP -> Alloc_Absorb and ABAT -> the downstream AbsorbEffect selector; other codes continue to CheckUseCreature/CheckUseWeapon fallback.
 int __usercall ActiveEffect_Base_CreateDynamic_::SwitchEffectCodes_3@<eax>(
         int a1@<eax>,
-        int a2,
-        int a3,
+        int a2@<ecx>,
+        int a3@<esi>,
         int a4,
         int a5,
         int a6,
@@ -24,12 +25,13 @@ int __usercall ActiveEffect_Base_CreateDynamic_::SwitchEffectCodes_3@<eax>(
         int a23,
         int a24,
         int a25,
-        int a26)
+        int a26,
+        int a27,
+        int a28,
+        int a29)
 {
-  if ( a1 == 0x50534241 )
-    return ActiveEffect_Base_CreateDynamic_::Alloc_Absorb(
-             a2,
-             a3,
+  if ( a1 == 0x50534241 ) /*0x68ec47*/
+    return ActiveEffect_Base_CreateDynamic_::Alloc_Absorb( /*0x68ec47*/
              a4,
              a5,
              a6,
@@ -52,7 +54,38 @@ int __usercall ActiveEffect_Base_CreateDynamic_::SwitchEffectCodes_3@<eax>(
              a23,
              a24,
              a25,
-             a26);
+             a26,
+             a27,
+             a28);                              // Verified (Oblivion fallback code): ABSP selects AbsorbEffect.
   else
-    return ActiveEffect_Base_CreateDynamic_::SwitchEffectCodes_4();
+    return ActiveEffect_Base_CreateDynamic_::SwitchEffectCodes_4( /*0x68ec4e*/
+             a3,
+             a2,
+             a1 == 0x54414241,
+             a4,
+             a5,
+             a6,
+             a7,
+             a8,
+             a9,
+             a10,
+             a11,
+             a12,
+             a13,
+             a14,
+             a15,
+             a16,
+             a17,
+             a18,
+             a19,
+             a20,
+             a21,
+             a22,
+             a23,
+             a24,
+             a25,
+             a26,
+             a27,
+             a28,
+             a29);                              // Verified (Oblivion fallback code): ABAT selects AbsorbEffect through the downstream boolean selector.
 }

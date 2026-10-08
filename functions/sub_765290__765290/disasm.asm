@@ -21,7 +21,7 @@
 0x7652BB: test    eax, eax
 0x7652BD: jz      short loc_7652CE
 0x7652BF: nop
-0x7652C0: cmp     eax, offset unk_BAA880
+0x7652C0: cmp     eax, offset stru_BAA880
 0x7652C5: jz      short loc_765321
 0x7652C7: mov     eax, [eax+4]
 0x7652CA: test    eax, eax

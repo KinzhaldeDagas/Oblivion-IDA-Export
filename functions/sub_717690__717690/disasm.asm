@@ -1,9 +1,9 @@
-0x717690: push    esi
+0x717690: push    esi; NiGeometry render virtual used by accumulated casters: publish this geometry property/dynamic state, then call NiDX9Renderer_RenderTriGeometries.
 0x717691: mov     esi, [esp+4+arg_0]
 0x717695: push    edi
 0x717696: push    esi
 0x717697: mov     edi, ecx
-0x717699: call    NiGeometry__Render
+0x717699: call    NiGeometry__Render; Pass221/222: NiGeometry::Render copies NiGeometry +0xAC NiPropertyState to NiRenderer::propertyState.
 0x71769E: mov     eax, 1
 0x7176A3: cmp     [esi+200h], eax
 0x7176A9: jz      short loc_7176B3

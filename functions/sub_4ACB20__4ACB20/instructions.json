@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4ACB20",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified (Oblivion): sole caller is MagicShaderHitEffect_InitializeVisual. Allocates and constructs the 0x6C-byte TextureEffectData object, converts packed fill/edge RGB and alpha into the two color groups at +0x2C/+0x3C, copies edge exponent and four texture blend/Z-test parameters, and retains the source texture. Probable: boundDiameter_58 is twice the supplied NiAVObject bound radius; Oblivion directly stores 2*(visualObject+0x2C), and Fallout explicitly doubles worldBound.radius. Data.cFlags bit 0x10 shifts the edge RGB group into [-1,0]. Fallout's 0x74-byte object adds a block-out texture and alpha-test state.",
     "mnemonic": "push",
     "size": 2
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x4ACB63",
-    "line": "call    ??0TextureEffectData@BSShaderPPLightingProperty@@QAE@XZ; BSShaderPPLightingProperty::TextureEffectData::TextureEffectData(void)",
+    "line": "call    ??0TextureEffectData@BSShaderPPLightingProperty@@QAE@XZ; Verified (Oblivion): constructor zeroes the four OblivionColorA groups from +0x0C through +0x48 and the U/V offsets, edge exponent and bound diameter; it initializes blend/Z-test parameters to 2,1,1,3. The 0x6C allocation and this field sequence define OblivionTextureEffectData.",
     "mnemonic": "call",
     "size": 5
   },
@@ -817,13 +817,13 @@
   },
   {
     "ea": "0x4ACCE9",
-    "line": "mov     edx, [esp+44h+arg_0]",
+    "line": "mov     edx, [esp+44h+visualObject]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4ACCED",
-    "line": "mov     ebp, [esp+44h+arg_4]",
+    "line": "mov     ebp, [esp+44h+sourceTexture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1069,7 +1069,7 @@
   },
   {
     "ea": "0x4ACD5B",
-    "line": "jz      short loc_4ACD77",
+    "line": "jz      short loc_4ACD77; Verified (Oblivion): TESEffectShader::Data.cFlags bit 0x10 subtracts 1.0 from all three normalized edge-color channels stored at TextureEffectData+0x3C/+0x40/+0x44 after CreateTextureEffectData initializes them from packed bytes divided by 255. This shifts them from [0,1] into [-1,0]. Fallout's CreateTextureShaderData performs the same three subtractions.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -1186,5 +1186,77 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C95E0",
+    "line": "mov     eax, [ebp-30h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C95E3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C95E4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C95E9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C95EA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C95EB",
+    "line": "mov     edx, [esp+sourceTexture]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C95EF",
+    "line": "lea     eax, [edx-34h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C95F2",
+    "line": "mov     ecx, [edx-38h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C95F5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C95F7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C95FC",
+    "line": "mov     eax, offset stru_AF1EA4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C9601",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

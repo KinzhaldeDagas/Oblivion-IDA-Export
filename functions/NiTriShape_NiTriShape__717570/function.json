@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
-  "callers_count": 12,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 15,
+  "chunks": [
+    [
+      "0x717570",
+      "0x717589"
+    ]
+  ],
+  "chunks_sha256": "43aeff950935be678e62f386c9f26aaaae500ead9ee3bd3358061d66c6515499",
+  "comment_regular": "\n[Mesh leaves v129 2026-10-06] CONFIRMED layout: NiGeometry.member begins +4; member.geomData is +B0, so absolute shape geometry-data slot is +B4. This matches repository NiObjects.h and established frond kNiGeometryDataOffset. v124-v128 mesh runtime mistakenly used absolute +A8 for read and commit/rollback; v128 logs native fixed-card expansion mismatch after valid CPU capture. v129 uses kNiGeometryDataOffset consistently and guards exact NiTriShapeData vtableA7F5A4 before count checks. Live attachment remains UNVERIFIED.",
+  "comment_repeatable": "[constructor audit] Data-taking shape ctor ->722690->7227B0->708450->6FFD30->7005D0. No heap allocation in this path. 7227D3 stores geometry data at+B4, 7227DF retains once; subsequent derived constructors only write vtables. Distinct from no-argument clone constructor7226C0.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "NiTriShape:NiTriShape",
+  "display_name": "OB_NiTriShape_ctorWithData_010201A0",
   "end_ea": "0x717589",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "NiTriShape:NiTriShape",
+  "name": "OB_NiTriShape_ctorWithData_010201A0",
   "segment": ".text",
   "sha256": "43aeff950935be678e62f386c9f26aaaae500ead9ee3bd3358061d66c6515499",
   "size": 25,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x717570",
-  "type": "NiAVObject *__thiscall(NiGeometry *this, NiScreenElementsData *a2)",
+  "total_chunk_size": 25,
+  "type": "NiTriShape *__thiscall(NiTriShape *this, NiTriShapeData *data)",
   "xrefs_from_count": 10,
   "xrefs_to_count": 15
 }

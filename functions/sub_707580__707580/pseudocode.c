@@ -1,7 +1,7 @@
-int __thiscall sub_707580(_DWORD *this, float a2, char a3)
+int __thiscall sub_707580(NiAVObject *this, float applicationTime, char a3)
 {
-  if ( a3 )
-    sub_47C930(this, a2, 1);
-  (*(void (__thiscall **)(_DWORD *))(*this + 0x74))(this);
-  return (*(int (__thiscall **)(_DWORD *))(*this + 0x78))(this);
+  if ( a3 ) /*0x707588*/
+    NiAVObject_UpdatePropertiesAndControllers(this, applicationTime, 1); /*0x707594*/
+  this->vtbl->UpdateWorldData(this); /*0x7075a0*/
+  return ((int (__thiscall *)(NiAVObject *))this->vtbl->UpdateWorldBound)(this); /*0x7075ab*/
 }

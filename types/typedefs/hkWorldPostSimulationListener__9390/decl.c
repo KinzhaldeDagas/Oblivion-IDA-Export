@@ -1,1 +1,1 @@
-hkWorldPostSimulationListener
+struct hkWorldPostSimulationListener;

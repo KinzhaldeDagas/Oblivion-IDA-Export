@@ -1,1 +1,1 @@
-HDWP
+typedef HANDLE HDWP;

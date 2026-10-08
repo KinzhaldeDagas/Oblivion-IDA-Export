@@ -1,9 +1,9 @@
 _DWORD *sub_A150F0()
 {
-  return sub_90D190(
-           dword_BA9310,
+  return sub_90D190( /*0xa15117*/
+           unk_BA9310,
            (int)"hkConvexPieceMeshShape",
-           (int)&unk_BA9450,
+           (int)unk_BA9450,
            0x1C,
            0,
            0,

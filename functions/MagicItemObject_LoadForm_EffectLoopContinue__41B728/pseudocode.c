@@ -7,17 +7,17 @@ void __userpurge MagicItemObject_LoadForm_::EffectLoopContinue(
 {
   _DWORD *v5; // eax
 
-  v5 = *(_DWORD **)(eax0 + 4);
-  if ( v5 )
+  v5 = *(_DWORD **)(eax0 + 4); /*0x41b728*/
+  if ( v5 ) /*0x41b72d*/
   {
-    MagicItemObject_LoadForm_::EffectLoopBody(v5, a4, a1, a2, a5);
+    MagicItemObject_LoadForm_::EffectLoopBody(v5, a4, a1, a2, a5); /*0x41b72d*/
   }
-  else if ( a4 )
+  else if ( a4 ) /*0x41b731*/
   {
-    MagicItemObject_LoadForm_::Return_1(a1, a5);
+    MagicItemObject_LoadForm_::Return_1(a5); /*0x41b731*/
   }
   else
   {
-    MagicItemObject_LoadForm_::GetItemName(a1, a2, a5);
+    MagicItemObject_LoadForm_::GetItemName(a1, a2, a5); /*0x41b732*/
   }
 }

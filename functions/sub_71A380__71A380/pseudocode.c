@@ -13,33 +13,33 @@ unsigned int __thiscall sub_71A380(_WORD *this, unsigned __int16 *a2)
   unsigned int v13; // edi
   unsigned int v14; // ecx
 
-  v2 = (NiTArray_NiTexturingPropertyMap *)a2;
-  sub_732EF0((NiTriBasedGeomData *)this, a2);
-  v4 = (unsigned __int16 *)TESOutput_PrintString(*(char **)dword_B3FD0C);
-  end = v2->end;
-  capacity = v2->capacity;
-  a2 = v4;
-  if ( end >= capacity )
-    NiTArray_SetSize((unsigned __int16 *)v2, end + v2->growSize);
-  NiTArray_SetAt(v2, end, &a2);
-  v7 = (unsigned __int16 *)TESOutput_PrintLabeledUnsignedShort("m_usStrips", *(this + 0x22));
-  v8 = v2->end;
-  v9 = v2->capacity;
-  a2 = v7;
-  if ( v8 >= v9 )
-    NiTArray_SetSize((unsigned __int16 *)v2, v8 + v2->growSize);
-  NiTArray_SetAt(v2, v8, &a2);
-  v10 = (unsigned __int16 *)TESOutput_PrintLabeledPointer("m_pusStripLengths", *((_DWORD *)this + 0x12));
-  v11 = v2->end;
-  a2 = v10;
-  if ( v11 >= v2->capacity )
-    NiTArray_SetSize((unsigned __int16 *)v2, v11 + v2->growSize);
-  NiTArray_SetAt(v2, v11, &a2);
-  v12 = (unsigned __int16 *)TESOutput_PrintLabeledPointer("m_pusStripLists", *((_DWORD *)this + 0x13));
-  v13 = v2->end;
-  v14 = v2->capacity;
-  a2 = v12;
-  if ( v13 >= v14 )
-    NiTArray_SetSize((unsigned __int16 *)v2, v13 + v2->growSize);
-  return NiTArray_SetAt(v2, v13, &a2);
+  v2 = (NiTArray_NiTexturingPropertyMap *)a2; /*0x71a382*/
+  sub_732EF0((NiTriBasedGeomData *)this, a2); /*0x71a38a*/
+  v4 = (unsigned __int16 *)TESOutput_PrintString((char *)stru_B3FD0C.name); /*0x71a395*/
+  end = v2->end; /*0x71a39a*/
+  capacity = v2->capacity; /*0x71a39e*/
+  a2 = v4; /*0x71a3a7*/
+  if ( end >= capacity ) /*0x71a3ab*/
+    NiTArray_SetSize((unsigned __int16 *)v2, end + v2->growSize); /*0x71a3b6*/
+  NiTArray_SetAt(v2, end, &a2); /*0x71a3c3*/
+  v7 = (unsigned __int16 *)TESOutput_PrintLabeledUnsignedShort("m_usStrips", *(this + 0x22)); /*0x71a3d2*/
+  v8 = v2->end; /*0x71a3d7*/
+  v9 = v2->capacity; /*0x71a3db*/
+  a2 = v7; /*0x71a3e4*/
+  if ( v8 >= v9 ) /*0x71a3e8*/
+    NiTArray_SetSize((unsigned __int16 *)v2, v8 + v2->growSize); /*0x71a3f3*/
+  NiTArray_SetAt(v2, v8, &a2); /*0x71a400*/
+  v10 = (unsigned __int16 *)TESOutput_PrintLabeledPointer("m_pusStripLengths", *((_DWORD *)this + 0x12)); /*0x71a40e*/
+  v11 = v2->end; /*0x71a413*/
+  a2 = v10; /*0x71a417*/
+  if ( v11 >= v2->capacity ) /*0x71a424*/
+    NiTArray_SetSize((unsigned __int16 *)v2, v11 + v2->growSize); /*0x71a42f*/
+  NiTArray_SetAt(v2, v11, &a2); /*0x71a43c*/
+  v12 = (unsigned __int16 *)TESOutput_PrintLabeledPointer("m_pusStripLists", *((_DWORD *)this + 0x13)); /*0x71a44a*/
+  v13 = v2->end; /*0x71a44f*/
+  v14 = v2->capacity; /*0x71a453*/
+  a2 = v12; /*0x71a45c*/
+  if ( v13 >= v14 ) /*0x71a460*/
+    NiTArray_SetSize((unsigned __int16 *)v2, v13 + v2->growSize); /*0x71a46b*/
+  return NiTArray_SetAt(v2, v13, &a2); /*0x71a47d*/
 }

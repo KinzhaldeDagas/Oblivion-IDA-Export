@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x437E20",
-    "line": "mov     eax, dword ptr [esp+a2]",
+    "line": "mov     eax, dword ptr [esp+a2]; Verified 0x30-byte QueuedTree task constructor: stores its TESObjectREFR at +0x20 and clears fields +0x18/+0x1C/+0x24/+0x28/+0x2C before installing QueuedTree vtable. The remaining zeroed pointer roles are Unknown. Fallout's constructor initializes a larger QueuedTree with queued-model, base-model, cloned-3D, and distant-attach task pointers.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x437E2D",
-    "line": "mov     ecx, [esp+4+arg_0]",
+    "line": "mov     ecx, [esp+4+reference]",
     "mnemonic": "mov",
     "size": 4
   },

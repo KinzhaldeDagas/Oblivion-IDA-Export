@@ -1,1 +1,1 @@
-SC_LOCK
+typedef LPVOID SC_LOCK;

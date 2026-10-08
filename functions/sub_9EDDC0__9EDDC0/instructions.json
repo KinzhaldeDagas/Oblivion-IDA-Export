@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x9EDDC0",
-    "line": "push    2378Fh",
+    "line": "push    2378Fh; 3DTheft: registers iClassThief default FormID 0002378F; plugin uses this exact Oblivion class ID as authoritative thief-class test.",
     "mnemonic": "push",
     "size": 5
   },
@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x9EDDCA",
-    "line": "mov     ecx, offset iClassThief",
+    "line": "mov     ecx, 0B37CC8h; self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x9EDDCF",
-    "line": "call    GameSetting_ConstrAndReg",
+    "line": "call    GameSetting_ConstrAndReg; Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.",
     "mnemonic": "call",
     "size": 5
   },

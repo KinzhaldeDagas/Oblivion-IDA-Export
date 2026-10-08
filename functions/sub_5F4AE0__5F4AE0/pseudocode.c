@@ -1,145 +1,138 @@
-char __userpurge sub_5F4AE0@<al>(Actor *this@<ecx>, double st5_0@<st2>, double a3@<st1>, double a4@<st0>, char a5)
+// Starts or stops the actor blocking animation/current-action state and mirrors the result to CombatController byte +0x49. Native ABI is Actor in ECX plus one shouldBlock byte.
+char __thiscall Actor_UpdateBlockingState(Actor *this, char shouldBlock)
 {
-  char v5; // bl
+  char v2; // bl
   bool IsBlocking; // bl
-  ActorAnimData *v9; // eax
-  ActorAnimData *v10; // ebp
+  ActorAnimData *v6; // eax
+  ActorAnimData *v7; // ebp
+  bool v8; // bl
+  BSAnimGroupSequence *NormalizedSequenceSlot; // eax
+  BSAnimGroupSequence *v10; // edi
   bool v11; // bl
-  PowerListEntry *v12; // eax
-  PowerListEntry *v13; // edi
-  bool v14; // bl
-  int v15; // eax
-  __int16 AnimGroupFromField8Value; // ax
-  __int16 v17; // ax
-  __int16 v18; // ax
-  int v19; // eax
-  unsigned __int8 v20; // al
-  _DWORD *AnimData; // eax
-  _DWORD *AnimGroup; // edi
-  PowerListEntry *v23; // eax
-  PowerListEntry *v24; // eax
-  float v25; // [esp+18h] [ebp+4h]
+  int v12; // eax
+  unsigned __int16 AnimGroupFromField8Value; // ax
+  unsigned __int16 v14; // ax
+  unsigned __int16 v15; // ax
+  int v16; // eax
+  unsigned __int8 v17; // al
+  ActorAnimData *AnimDataByPerspective; // eax
+  unsigned int AnimGroup; // edi
+  BSAnimGroupSequence *v20; // eax
+  BSAnimGroupSequence *v21; // eax
+  float shouldBlocka; // [esp+18h] [ebp+4h]
 
-  v5 = a5;
-  if ( a5
+  v2 = shouldBlock; /*0x5f4ae1*/
+  if ( shouldBlock /*0x5f4b0a*/
     && !this->members.super.process->GetEquippedShieldData(this->members.super.process, 1)
     && !this->members.super.process->GetWeaponOut(this->members.super.process) )
   {
-    if ( ((int (__usercall *)@<eax>(Actor *@<ecx>, double@<st0>, double@<st1>, double@<st2>))this->vtbl->GetCombatController)(
-           this,
-           a4,
-           a3,
-           st5_0) )
+    if ( this->vtbl->GetCombatController(this) ) /*0x5f4b1a*/
     {
-      IsBlocking = Actor_IsBlocking(this);
-      *((_BYTE *)this->vtbl->GetCombatController(this) + 0x49) = IsBlocking;
+      IsBlocking = Actor_IsBlocking(this); /*0x5f4b27*/
+      *((_BYTE *)this->vtbl->GetCombatController(this) + 0x49) = IsBlocking; /*0x5f4b35*/
     }
-    return 0;
+    return 0; /*0x5f4b3c*/
   }
-  v9 = (ActorAnimData *)((int (__usercall *)@<eax>(Actor *@<ecx>, double@<st0>, double@<st1>, double@<st2>))this->vtbl->super.super.GetAnimData)(
-                          this,
-                          a4,
-                          a3,
-                          st5_0);
-  v10 = v9;
-  if ( !v9 )
+  v6 = this->vtbl->super.super.GetAnimData(this); /*0x5f4b4a*/
+  v7 = v6; /*0x5f4b4c*/
+  if ( !v6 ) /*0x5f4b50*/
   {
-    if ( this->vtbl->GetCombatController(this) )
+    if ( this->vtbl->GetCombatController(this) ) /*0x5f4b5c*/
     {
-      v11 = this->members.super.process
-         && ((int (__thiscall *)(LowProcess *))this->members.super.process->GetCurrentAction)(this->members.super.process) == 6;
-      *((_BYTE *)this->vtbl->GetCombatController(this) + 0x49) = v11;
+      v8 = this->members.super.process /*0x5f4b7d*/
+        && ((int (__thiscall *)(LowProcess *))this->members.super.process->GetCurrentAction)(this->members.super.process) == 6;
+      *((_BYTE *)this->vtbl->GetCombatController(this) + 0x49) = v8; /*0x5f4b8b*/
     }
-    return 0;
+    return 0; /*0x5f4b93*/
   }
-  v12 = sub_4706E0(v9, 1);
-  v13 = v12;
-  if ( v12 && v12[8].next != (PowerListEntry *)1 )
+  NormalizedSequenceSlot = ActorAnimData_GetNormalizedSequenceSlot(v6, 1u); /*0x5f4b9b*/
+  v10 = NormalizedSequenceSlot; /*0x5f4ba0*/
+  if ( NormalizedSequenceSlot && *((_DWORD *)NormalizedSequenceSlot + 0x11) != 1 ) /*0x5f4baa*/
   {
-    if ( this->vtbl->GetCombatController(this) )
+    if ( this->vtbl->GetCombatController(this) ) /*0x5f4bb6*/
     {
-      v14 = Actor_IsBlocking(this);
-      *((_BYTE *)this->vtbl->GetCombatController(this) + 0x49) = v14;
+      v11 = Actor_IsBlocking(this); /*0x5f4bc3*/
+      *((_BYTE *)this->vtbl->GetCombatController(this) + 0x49) = v11; /*0x5f4bd1*/
     }
-    return 0;
+    return 0; /*0x5f4bda*/
   }
-  if ( !this->members.super.process
-    || (v15 = ((int (__thiscall *)(LowProcess *))this->members.super.process->GetCurrentAction)(this->members.super.process),
-        v15 == 0xFFFFFFFF) )
+  if ( !this->members.super.process /*0x5f4bf3*/
+    || (v12 = ((int (__thiscall *)(LowProcess *))this->members.super.process->GetCurrentAction)(this->members.super.process),
+        v12 == 0xFFFFFFFF) )
   {
-    v5 = 1;
+    v2 = 1; /*0x5f4c53*/
   }
-  else if ( v15 == 3 )
+  else if ( v12 == 3 ) /*0x5f4bf8*/
   {
-    AnimGroupFromField8Value = ActorAnimData_GetAnimGroupFromField8Value(v10, 3);
-    if ( sub_51AC80(AnimGroupFromField8Value) )
+    AnimGroupFromField8Value = ActorAnimData_GetAnimGroupFromField8Value(v7, 3); /*0x5f4bfd*/
+    if ( AnimGroup_UsesAttackOrCastNoteTemplate(AnimGroupFromField8Value) ) /*0x5f4c03*/
     {
-      v17 = ActorAnimData_GetAnimGroupFromField8Value(v10, 3);
-      if ( sub_51ACC0(v17) )
+      v14 = ActorAnimData_GetAnimGroupFromField8Value(v7, 3); /*0x5f4c13*/
+      if ( AnimGroup_UsesPowerOrCastNoteTemplate(v14) ) /*0x5f4c19*/
       {
-        v5 = 0;
+        v2 = 0; /*0x5f4c25*/
       }
-      else if ( ActorAnimData_GetSomethingFromField8Value(v10, 3) < 2 )
+      else if ( ActorAnimData_GetSlotActionState(v7, 3) < 2 ) /*0x5f4c35*/
       {
-        v5 = 0;
+        v2 = 0; /*0x5f4c37*/
       }
     }
     else
     {
-      v18 = ActorAnimData_GetAnimGroupFromField8Value(v10, 1);
-      if ( sub_51ACC0(v18) )
-        v5 = 0;
+      v15 = ActorAnimData_GetAnimGroupFromField8Value(v7, 1); /*0x5f4c3d*/
+      if ( AnimGroup_UsesPowerOrCastNoteTemplate(v15) ) /*0x5f4c43*/
+        v2 = 0; /*0x5f4c4f*/
     }
   }
-  if ( !this->members.super.process
-    || (v19 = ((int (__thiscall *)(LowProcess *))this->members.super.process->GetCurrentAction)(this->members.super.process),
-        v19 == 0xFFFFFFFF)
-    || v19 == 3 )
+  if ( !this->members.super.process /*0x5f4c78*/
+    || (v16 = ((int (__thiscall *)(LowProcess *))this->members.super.process->GetCurrentAction)(this->members.super.process),
+        v16 == 0xFFFFFFFF)
+    || v16 == 3 )
   {
-    if ( !a5 || !v5 )
-      return 0;
-    AnimGroup = (_DWORD *)(unsigned __int16)Actor_LoadAnimGroup_((TESObjectREFR *)this, 0x1B, 0, 0);
-    if ( ActorAnimData_GetAnimGroupFromField8Value(v10, 1) == (_WORD)AnimGroup )
+    if ( !shouldBlock || !v2 ) /*0x5f4d4b*/
+      return 0; /*0x5f4d4b*/
+    AnimGroup = Actor_LoadAnimGroup_(this, 0x1Bu, 0, 0); /*0x5f4d62*/
+    if ( ActorAnimData_GetAnimGroupFromField8Value(v7, 1) == (_WORD)AnimGroup ) /*0x5f4d6f*/
     {
-      v23 = sub_4706E0(v10, 1);
-      HighPRocess_DoAction_____((PlayerCharacter *)this, 6, (int)v23);
-      if ( this->vtbl->GetCombatController(this) )
+      v20 = ActorAnimData_GetNormalizedSequenceSlot(v7, 1u); /*0x5f4d73*/
+      Actor_SetCurrentActionWithBowVisualCleanup(this, kActorCurrentAction_Block, v20); /*0x5f4d7d*/
+      if ( this->vtbl->GetCombatController(this) ) /*0x5f4d8c*/
       {
-        *((_BYTE *)this->vtbl->GetCombatController(this) + 0x49) = a5;
-        return 1;
+        *((_BYTE *)this->vtbl->GetCombatController(this) + 0x49) = shouldBlock; /*0x5f4da5*/
+        return 1; /*0x5f4dab*/
       }
     }
     else
     {
-      ActorAnimData_PlayAnimGroup((int)v10, AnimGroup, 1, 0xFFFFFFFF);
-      v24 = sub_4706E0(v10, 1);
-      HighPRocess_DoAction_____((PlayerCharacter *)this, 6, (int)v24);
-      ((void (__thiscall *)(Actor *, _DWORD *, int))this->vtbl->Unk_E9)(this, AnimGroup, 1);
-      if ( this->vtbl->GetCombatController(this) )
-        *((_BYTE *)this->vtbl->GetCombatController(this) + 0x49) = a5;
+      ActorAnimData_PlayAnimGroup(v7, AnimGroup, 1u, 0xFFFFFFFF); /*0x5f4db3*/
+      v21 = ActorAnimData_GetNormalizedSequenceSlot(v7, 1u); /*0x5f4dbc*/
+      Actor_SetCurrentActionWithBowVisualCleanup(this, kActorCurrentAction_Block, v21); /*0x5f4dc6*/
+      ((void (__thiscall *)(Actor *, unsigned int, int))this->vtbl->Unk_E9)(this, AnimGroup, 1); /*0x5f4dd8*/
+      if ( this->vtbl->GetCombatController(this) ) /*0x5f4de4*/
+        *((_BYTE *)this->vtbl->GetCombatController(this) + 0x49) = shouldBlock; /*0x5f4dfa*/
     }
-    return 1;
+    return 1; /*0x5f4e00*/
   }
   else
   {
-    if ( v19 != 6 || a5 || !ActorAnimData_GetAnimGroupFromField8Value(v10, 1) )
-      return 0;
-    v25 = *(float *)GameSetting_GetSafeFloatPointer((int *)&flt_B06538);
-    if ( v13 )
+    if ( v16 != 6 || shouldBlock || !ActorAnimData_GetAnimGroupFromField8Value(v7, 1) ) /*0x5f4c96*/
+      return 0; /*0x5f4c9e*/
+    shouldBlocka = *(float *)GameSetting_GetSafeFloatPointer((int *)&flt_B06538); /*0x5f4cb2*/
+    if ( v10 ) /*0x5f4cb6*/
     {
-      v20 = BYTE1(v13[0xD].data[4].power);
-      if ( v20 )
-        v25 = (double)v20 / dbl_A3AA50;
+      v17 = *(_BYTE *)(*((_DWORD *)v10 + 0x1A) + 0x21); /*0x5f4cbb*/
+      if ( v17 ) /*0x5f4cc0*/
+        shouldBlocka = (double)v17 / dbl_A3AA50; /*0x5f4cd3*/
     }
-    sub_470FC0(v10, 1, v25);
-    if ( this == (Actor *)TESDataHandler_g_PlayerRef )
+    ActorAnimData_ClearSlot(v7, 1, shouldBlocka); /*0x5f4ce3*/
+    if ( this == (Actor *)reference ) /*0x5f4cf0*/
     {
-      AnimData = Player_GetAnimData((Actor *)TESDataHandler_g_PlayerRef, 1);
-      sub_470FC0(AnimData, 1, v25);
+      AnimDataByPerspective = PlayerCharacter_GetAnimDataByPerspective(reference, 1); /*0x5f4cfe*/
+      ActorAnimData_ClearSlot(AnimDataByPerspective, 1, shouldBlocka); /*0x5f4d05*/
     }
-    HighPRocess_DoAction_____((PlayerCharacter *)this, 0xFFFFFFFF, 0);
-    if ( this->vtbl->GetCombatController(this) )
-      *((_BYTE *)this->vtbl->GetCombatController(this) + 0x49) = 0;
-    return 1;
+    Actor_SetCurrentActionWithBowVisualCleanup(this, kActorCurrentAction_None, 0); /*0x5f4d10*/
+    if ( this->vtbl->GetCombatController(this) ) /*0x5f4d1f*/
+      *((_BYTE *)this->vtbl->GetCombatController(this) + 0x49) = 0; /*0x5f4d31*/
+    return 1; /*0x5f4d38*/
   }
 }

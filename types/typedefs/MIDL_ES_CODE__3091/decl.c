@@ -1,1 +1,6 @@
-MIDL_ES_CODE
+enum MIDL_ES_CODE : __int32
+{
+MES_ENCODE = 0x0,
+MES_DECODE = 0x1,
+MES_ENCODE_NDR64 = 0x2,
+};

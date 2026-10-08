@@ -102,7 +102,7 @@
 0x977691: mov     ecx, [esp+0A0h+var_88]
 0x977695: mov     [edi+8], ecx
 0x977698: mov     ecx, edi
-0x97769A: call    sub_43F350
+0x97769A: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x97769F: fstp    st
 0x9776A1: mov     edx, [esp+0A0h+arg_8]
 0x9776A8: fld     dword ptr [esi+edx]
@@ -156,7 +156,7 @@
 0x977732: fld     dword ptr [esi+8]
 0x977735: fsub    [esp+0A0h+var_88]
 0x977739: fstp    dword ptr [esi+8]
-0x97773C: call    sub_43F350
+0x97773C: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x977741: fstp    st
 0x977743: fld     dword ptr [esi+8]
 0x977746: fld     dword ptr [edi+4]

@@ -1,19 +1,32 @@
 {
-  "callees_count": 12,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 2,
+  "chunks": [
+    [
+      "0x452FE0",
+      "0x453095"
+    ]
+  ],
+  "chunks_sha256": "4ba56a2f0156e2383e8fe4e49042f6e5e865ccf5e5af3bc1e2ecf677aee39a23",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "\nVerified: keyed by worldspace FormID; allocates 12-byte record {cellFormID,cellX,cellY}, pushes newest at head and chains prior records. UnloadForm supplies cell and worldspace IDs plus cell coordinates 463CDA; LoadGame 465E99. Probable Fallout homolog BGSCellNumericIDArrayMap::AddReference 825FA0F8 by worldspace/cell ID relationship; Fallout stores cellID array instead of coordinate records.\nVerified return: caller ignores it; record insertion is a side effect.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_452FE0",
+  "display_name": "ExteriorCellNewReferencesMap_AddCell",
   "end_ea": "0x453095",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_452FE0",
+  "name": "ExteriorCellNewReferencesMap_AddCell",
   "segment": ".text",
   "sha256": "4ba56a2f0156e2383e8fe4e49042f6e5e865ccf5e5af3bc1e2ecf677aee39a23",
   "size": 181,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x452FE0",
-  "type": "_DWORD *__thiscall(_DWORD *this, _DWORD *, int, int, _DWORD *)",
+  "total_chunk_size": 181,
+  "type": "void __thiscall(ExteriorCellNewReferencesMap *self, unsigned int worldspaceFormID, unsigned int cellFormID, int cellX, int cellY)",
   "xrefs_from_count": 77,
   "xrefs_to_count": 2
 }

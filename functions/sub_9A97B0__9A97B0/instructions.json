@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x9A97C4",
-    "line": "mov     [esp+18h+var_4], esi",
+    "line": "mov     [esp+18h+value], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x9A9811",
-    "line": "mov     [esp+1Ch+var_4], esi",
+    "line": "mov     [esp+1Ch+value], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x9A9849",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -313,49 +313,49 @@
   },
   {
     "ea": "0x9A984D",
-    "line": "push    eax",
+    "line": "push    eax; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x9A984E",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x9A9850",
-    "line": "call    sub_9A9670",
+    "line": "call    NiTArray_ConstantMapEntry_SetAt; Verified companion to SortByEnabled: array this is map+0C, base pointer this+4, end this+0A and live count this+0C. SetAt updates occupancy/end as needed and assigns the pointer with NiPointer decrement/destructor/increment behavior. The caller retains its current entry while exchanging two positions; model array order without executing native refcounts under metadata gates.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x9A9855",
-    "line": "lea     eax, [esp+1Ch+var_4]",
+    "line": "lea     eax, [esp+1Ch+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x9A9859",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x9A985A",
-    "line": "push    edi",
+    "line": "push    edi; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x9A985B",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x9A985D",
-    "line": "call    sub_9A9670",
+    "line": "call    NiTArray_ConstantMapEntry_SetAt; Verified companion to SortByEnabled: array this is map+0C, base pointer this+4, end this+0A and live count this+0C. SetAt updates occupancy/end as needed and assigns the pointer with NiPointer decrement/destructor/increment behavior. The caller retains its current entry while exchanging two positions; model array order without executing native refcounts under metadata gates.",
     "mnemonic": "call",
     "size": 5
   },
@@ -382,12 +382,6 @@
     "line": "jmp     short loc_9A9870",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x9A986D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x9A9870",
@@ -487,7 +481,7 @@
   },
   {
     "ea": "0x9A9898",
-    "line": "mov     [esp+1Ch+var_4], esi",
+    "line": "mov     [esp+1Ch+value], esi",
     "mnemonic": "mov",
     "size": 4
   },

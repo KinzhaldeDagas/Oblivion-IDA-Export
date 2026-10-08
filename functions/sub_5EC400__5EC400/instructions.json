@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5EC400",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified trap-hit blood visuals use both actor-base channels. Early gate calls Actor_ShouldEmitBloodEffects; each repeated pass projects the receiver actor's blood decal path and, when its virtual +0x40 spray path is non-null/nonempty, allocates a 0x20 BSTempEffectParticle, resolves the receiver's cell NiNode, passes its particle path/direction/contact position/scale to the constructor with cached-clone enabled, then registers the result. This path comes from the struck actor's own base form, not an unrelated trap-source particle setting.",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x5EC42F",
-    "line": "call    sub_5E1B30",
+    "line": "call    Actor_ShouldEmitBloodEffects; ODismemberment authority: actor blood effects are allowed only when actor-base blood particle/texture disable predicates permit them.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x5EC4C4",
-    "line": "fxch    st(1)",
+    "line": "fxch    st(1); BloodOnDeath decode 2026-05-30: trap blood emitter doubles the source-to-target vector, adds [-0.8,0.8] jitter, normalizes, then projects scene decals. Same outward math as actor hit blood.",
     "mnemonic": "fxch",
     "size": 2
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x5EC4E8",
-    "line": "fstp    dword ptr [esp+0D0h+var_D0+4]; float",
+    "line": "fstp    [esp+0D0h+scale+4]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x5EC4F2",
-    "line": "fstp    dword ptr [esp+0D0h+var_D0]; float",
+    "line": "fstp    [esp+0D0h+scale]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x5EC504",
-    "line": "fstp    dword ptr [esp+0D0h+var_D0+4]; float",
+    "line": "fstp    [esp+0D0h+scale+4]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x5EC50E",
-    "line": "fstp    dword ptr [esp+0D0h+var_D0]; float",
+    "line": "fstp    [esp+0D0h+scale]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x5EC520",
-    "line": "fstp    dword ptr [esp+0D0h+var_D0+4]; float",
+    "line": "fstp    [esp+0D0h+scale+4]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x5EC52A",
-    "line": "fstp    dword ptr [esp+0D0h+var_D0]; float",
+    "line": "fstp    [esp+0D0h+scale]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x5EC5C1",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1051,13 +1051,13 @@
   },
   {
     "ea": "0x5EC678",
-    "line": "push    0; float",
+    "line": "push    0; localPosZ",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5EC67A",
-    "line": "push    eax; int",
+    "line": "push    eax; localPosY",
     "mnemonic": "push",
     "size": 1
   },
@@ -1153,7 +1153,7 @@
   },
   {
     "ea": "0x5EC6B0",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1165,7 +1165,7 @@
   },
   {
     "ea": "0x5EC6B7",
-    "line": "call    ??0?$NiTPointerListBase@V?$NiTPointerAllocator@I@@PAVNiAVObject@@@@QAE@XZ; NiTPointerListBase<NiTPointerAllocator<uint>,NiAVObject *>::NiTPointerListBase<NiTPointerAllocator<uint>,NiAVObject *>(void)",
+    "line": "call    Decal_ProjectToSceneGeometry; BloodOnDeath decode 2026-05-30: trap blood uses Decal_ProjectToSceneGeometry with explicitTarget=null for persistent scene marks; repeated calls form native trail-like blood paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1279,7 +1279,7 @@
   },
   {
     "ea": "0x5EC6EB",
-    "line": "call    edx",
+    "line": "call    edx; Verified trap particle admission: obtains receiver actor-base virtual +0x40 blood-particle path and enters the particle branch only when non-null.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1411,7 +1411,7 @@
   },
   {
     "ea": "0x5EC726",
-    "line": "cmp     byte ptr [eax], 0",
+    "line": "cmp     byte ptr [eax], 0; Verified trap particle path: repeats receiver actor-base +0x40 lookup and requires the returned string to be nonempty before allocation/construction.",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -1429,7 +1429,7 @@
   },
   {
     "ea": "0x5EC731",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1465,13 +1465,13 @@
   },
   {
     "ea": "0x5EC743",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5EC748",
-    "line": "mov     ecx, eax; this",
+    "line": "mov     ecx, eax; object",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1483,7 +1483,7 @@
   },
   {
     "ea": "0x5EC74D",
-    "line": "call    TESObjectCELL_GetNiNode?",
+    "line": "call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1651,7 +1651,7 @@
   },
   {
     "ea": "0x5EC7B0",
-    "line": "xor     edi, edi",
+    "line": "xor     edi, edi; Verified trap particle source is this struck TESObjectREFR's TESActorBaseData when it is an actor. The virtual +0x40 call at 0x5EC7D9 selects its blood particle NIF; comments and local names retain this path source.",
     "mnemonic": "xor",
     "size": 2
   },
@@ -1741,7 +1741,7 @@
   },
   {
     "ea": "0x5EC7D9",
-    "line": "call    eax",
+    "line": "call    eax; Verified: indirect actor-base virtual +0x40 returns the trap-hit blood particle path; stored as bloodParticlePath and passed to BSTempEffectParticle_Constructor at 0x5EC82E.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1759,7 +1759,7 @@
   },
   {
     "ea": "0x5EC7E4",
-    "line": "push    1; float",
+    "line": "push    1; useCachedClone",
     "mnemonic": "push",
     "size": 2
   },
@@ -1771,7 +1771,7 @@
   },
   {
     "ea": "0x5EC7E9",
-    "line": "fst     dword ptr [esp+0DCh+var_D0]; float",
+    "line": "fst     [esp+0DCh+scale]; scale",
     "mnemonic": "fst",
     "size": 4
   },
@@ -1855,13 +1855,13 @@
   },
   {
     "ea": "0x5EC81B",
-    "line": "push    eax; float",
+    "line": "push    eax; modelPath",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5EC81C",
-    "line": "push    ebx; int",
+    "line": "push    ebx; parentNode",
     "mnemonic": "push",
     "size": 1
   },
@@ -1885,43 +1885,43 @@
   },
   {
     "ea": "0x5EC823",
-    "line": "fstp    [esp+0F4h+var_F4]; float",
+    "line": "fstp    [esp+0F4h+durationSeconds]; durationSeconds",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5EC826",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5EC82B",
-    "line": "push    eax; int",
+    "line": "push    eax; parentCell",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5EC82C",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5EC82E",
-    "line": "call    sub_5713F0",
+    "line": "call    BSTempEffectParticle_Constructor; Verified trap blood constructor call: uses receiver actor's resolved particle NIF, cell, cell NiNode, computed direction vector, local hit position XYZ, scale 1.0 and cached-clone true; then registers the effect. Argument type recovery for the enclosing __userpurge function is imperfect for packed vector coordinates, so do not interpret its current a7/a8/a9 display types literally.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5EC833",
-    "line": "push    eax",
+    "line": "push    eax; effect",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5EC834",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); self",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1933,7 +1933,7 @@
   },
   {
     "ea": "0x5EC844",
-    "line": "call    sub_678D30",
+    "line": "call    ActorProcessManager_RegisterTempEffect; [Verified] ActorProcessManager_RegisterTempEffect increments the effect reference and routes GetTypeID 4-6 into extendedTempEffects (+0x48), all other IDs into activeTempEffects (+0x40). Vtable evidence confirms decals 0/1 and particles 2 use the active list. Fallout divergence: its BGSDecalManager updates distinct simple-decal and emitter collections instead of using this per-actor temp-effect routing; one-to-one equivalence is Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1951,7 +1951,7 @@
   },
   {
     "ea": "0x5EC853",
-    "line": "fstp    [esp+0C8h+var_A8]",
+    "line": "fstp    [esp+0C8h+var_A8]; BloodOnDeath decode 2026-05-30: trap scene-blood loop decays damage by 0.25 per decal pass, matching actor hit blood. More trails require more calls/pulses or higher effective damage before this decay.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2305,7 +2305,7 @@
   },
   {
     "ea": "0x5EC941",
-    "line": "fstp    dword ptr [esp+0D0h+var_D0+4]; float",
+    "line": "fstp    [esp+0D0h+scale+4]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2317,7 +2317,7 @@
   },
   {
     "ea": "0x5EC94B",
-    "line": "fstp    dword ptr [esp+0D0h+var_D0]; float",
+    "line": "fstp    [esp+0D0h+scale]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -2347,7 +2347,7 @@
   },
   {
     "ea": "0x5EC960",
-    "line": "fstp    dword ptr [esp+0CCh+var_D0+4]; float",
+    "line": "fstp    [esp+0CCh+scale+4]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -2371,7 +2371,7 @@
   },
   {
     "ea": "0x5EC972",
-    "line": "fstp    dword ptr [esp+0CCh+var_D0+4]; float",
+    "line": "fstp    [esp+0CCh+scale+4]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -2389,7 +2389,7 @@
   },
   {
     "ea": "0x5EC97C",
-    "line": "fstp    dword ptr [esp+0D0h+var_D0]; float",
+    "line": "fstp    [esp+0D0h+scale]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -2647,7 +2647,7 @@
   },
   {
     "ea": "0x5ECA45",
-    "line": "fstp    dword ptr [esp+0CCh+var_D0+4]; float",
+    "line": "fstp    [esp+0CCh+scale+4]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -2665,7 +2665,7 @@
   },
   {
     "ea": "0x5ECA4E",
-    "line": "fstp    [esp+0D0h+var_D0]; double",
+    "line": "fstp    qword ptr [esp+0D0h+scale]; double",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -2797,7 +2797,7 @@
   },
   {
     "ea": "0x5ECAB0",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2965,7 +2965,7 @@
   },
   {
     "ea": "0x5ECB36",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3103,7 +3103,7 @@
   },
   {
     "ea": "0x5ECBA7",
-    "line": "fstp    dword ptr [esp+0CCh+var_D0+4]; float",
+    "line": "fstp    [esp+0CCh+scale+4]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -3403,7 +3403,7 @@
   },
   {
     "ea": "0x5ECC2F",
-    "line": "fstp    dword ptr [esp+0D0h+var_D0]",
+    "line": "fstp    [esp+0D0h+scale]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -3433,13 +3433,13 @@
   },
   {
     "ea": "0x5ECC3A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5ECC3C",
-    "line": "call    sub_5E1BB0",
+    "line": "call    Actor_GetBloodDecalTexturePath; ODismemberment authority: resolves actor blood decal texture path through actor-base virtual +0x38, falling back below to default sBloodTextureDefault path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3553,7 +3553,7 @@
   },
   {
     "ea": "0x5ECC7F",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3565,7 +3565,7 @@
   },
   {
     "ea": "0x5ECC86",
-    "line": "call    sub_4CF1A0",
+    "line": "call    Decal_AttachToGeometryRecursive; BloodOnDeath decode 2026-05-30: trap path separately attaches blood decals to the hit actor geometry after scene projection; floor/world trails should use the earlier scene projection call, not this actor-root attachment.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3694,5 +3694,77 @@
     "line": "retn    2Ch ; ','",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C2700",
+    "line": "mov     eax, [ebp-9Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C2706",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C2707",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C270C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C270D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C270E",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C2712",
+    "line": "lea     eax, [edx-0B8h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C2718",
+    "line": "mov     ecx, [edx-0BCh]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C271E",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C2720",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2725",
+    "line": "mov     eax, offset stru_AEB57C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C272A",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

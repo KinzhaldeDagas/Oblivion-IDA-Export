@@ -1,6 +1,6 @@
 0x50B4A0: push    ecx
 0x50B4A1: push    edi
-0x50B4A2: mov     edi, dword ptr [esp+8+arg_8]
+0x50B4A2: mov     edi, [esp+8+arg_8]
 0x50B4A6: test    edi, edi
 0x50B4A8: jnz     short loc_50B4AF
 0x50B4AA: xor     al, al
@@ -33,8 +33,8 @@
 0x50B4F2: push    ecx; a3
 0x50B4F3: push    edx; a2
 0x50B4F4: push    eax; a1
-0x50B4F5: mov     dword ptr [esp+2Ch+arg_8], 0
-0x50B4FD: call    Script_ExtractArgs
+0x50B4F5: mov     [esp+2Ch+arg_8], 0
+0x50B4FD: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x50B502: add     esp, 20h
 0x50B505: test    al, al
 0x50B507: jnz     short loc_50B50D
@@ -47,7 +47,7 @@
 0x50B515: mov     ecx, esi
 0x50B517: call    eax
 0x50B519: fstp    [esp+0Ch+var_4]
-0x50B51D: fild    dword ptr [esp+0Ch+arg_8]
+0x50B51D: fild    [esp+0Ch+arg_8]
 0x50B521: mov     eax, ds:0B333C4h
 0x50B526: cmp     esi, eax
 0x50B528: fsub    [esp+0Ch+var_4]

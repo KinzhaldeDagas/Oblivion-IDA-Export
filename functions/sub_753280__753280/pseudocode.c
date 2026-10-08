@@ -1,37 +1,35 @@
-float *__stdcall sub_753280(float *a1, float *a2, float *a3, float *a4)
+NiPoint3 *__stdcall sub_753280(NiPoint3 *out, float *a2, NiPoint3 *a3, float *a4)
 {
-  float v5; // edx
-  float v6; // ecx
-  float v7; // [esp+0h] [ebp-18h] BYREF
-  float v8; // [esp+4h] [ebp-14h]
-  float v9; // [esp+8h] [ebp-10h]
-  float v10; // [esp+Ch] [ebp-Ch]
-  float v11; // [esp+10h] [ebp-8h]
-  float v12; // [esp+14h] [ebp-4h]
-  float v13; // [esp+28h] [ebp+10h]
+  float y; // edx
+  float z; // ecx
+  NiPoint3 rhs; // [esp+0h] [ebp-18h] BYREF
+  float v8; // [esp+Ch] [ebp-Ch]
+  float v9; // [esp+10h] [ebp-8h]
+  float v10; // [esp+14h] [ebp-4h]
+  float v11; // [esp+28h] [ebp+10h]
 
-  v7 = *a4 - *a2;
-  v8 = a4[1] - a2[1];
-  v9 = a4[2] - a2[2];
-  v13 = *a3 * v7 + v8 * a3[1] + v9 * a3[2];
-  v10 = *a3 * v13;
-  v11 = v13 * a3[1];
-  v12 = v13 * a3[2];
-  v7 = v7 - v10;
-  v8 = v8 - v11;
-  v9 = v9 - v12;
-  if ( Vector3_InitValue_ == v7 && *(&Vector3_InitValue_ + 1) == v8 && dword_B3F9B0 == v9 )
+  rhs.x = *a4 - *a2; /*0x75328f*/
+  rhs.y = a4[1] - a2[1]; /*0x753298*/
+  rhs.z = a4[2] - a2[2]; /*0x7532a6*/
+  v11 = a3->x * rhs.x + rhs.y * a3->y + rhs.z * a3->z; /*0x7532cb*/
+  v8 = a3->x * v11; /*0x7532db*/
+  v9 = v11 * a3->y; /*0x7532e4*/
+  v10 = v11 * a3->z; /*0x7532eb*/
+  rhs.x = rhs.x - v8; /*0x7532f7*/
+  rhs.y = rhs.y - v9; /*0x7532fe*/
+  rhs.z = rhs.z - v10; /*0x753306*/
+  if ( g_zeroNiPoint3.x == rhs.x && g_zeroNiPoint3.y == rhs.y && g_zeroNiPoint3.z == rhs.z ) /*0x753340*/
   {
-    v5 = v8;
-    *a1 = v7;
-    v6 = v9;
-    a1[1] = v5;
-    a1[2] = v6;
-    return a1;
+    y = rhs.y; /*0x753349*/
+    out->x = rhs.x; /*0x75334d*/
+    z = rhs.z; /*0x75334f*/
+    out->y = y; /*0x753353*/
+    out->z = z; /*0x753356*/
+    return out; /*0x753342*/
   }
   else
   {
-    sub_4BF9E0(a3, a1, &v7);
-    return a1;
+    NiPoint3__NormalizedCrossProduct(a3, out, &rhs); /*0x75336a*/
+    return out; /*0x75336f*/
   }
 }

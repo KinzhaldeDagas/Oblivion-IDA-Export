@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x5FF638",
-    "line": "test    ebp, ebp",
+    "line": "test    ebp, ebp; Physical-hit reflect damage branch. Vanilla tests EBP first and skips reflect damage when EBP is nonzero, matching projectile hits.",
     "mnemonic": "test",
     "size": 2
   },
   {
     "ea": "0x5FF63A",
-    "line": "jnz     Actor_AttackHandling___CalcArmorRating",
+    "line": "jnz     Actor_AttackHandling___CalcArmorRating; AVU hook site: replaces vanilla projectile-skip branch. AVU preserves vanilla by default through favuReflectDamageProjectileMult=0, while allowing configured projectile reflection.",
     "mnemonic": "jnz",
     "size": 6
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x5FF648",
-    "line": "push    3Bh ; ';'",
+    "line": "push    3Bh ; ';'; Vanilla reads target current integer AV 0x3B ReflectDamage and skips the branch when the integer value is <= 0.",
     "mnemonic": "push",
     "size": 2
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x5FF65E",
-    "line": "push    3Bh ; ';'",
+    "line": "push    3Bh ; ';'; Vanilla rereads target current float AV 0x3B ReflectDamage, divides by 100, and multiplies incoming health damage by that factor.",
     "mnemonic": "push",
     "size": 2
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x5FF68D",
-    "line": "mov     edx, [edi]",
+    "line": "mov     edx, [edi]; Vanilla calls attacker vtbl+0x220 OnPhysicalHit(reflectedDamage, 0, target) before subtracting reflectedDamage from target incoming damage.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x5FF6A6",
-    "line": "cmp     byte ptr ds:0B3B908h, 0",
+    "line": "cmp     byte ptr ds:0B3B908h, 0; ReflectDamage continuation: subtract reflected/blocked damage from incoming target damage, then optionally prints the console message.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x5FF6C5",
-    "line": "call    ActorValue_GetName",
+    "line": "call    ActorValue_GetName; Return the localized actor-value display name through g_actorValueNameSettings. Native skills occupy the contiguous SkillActorValue range 0x0C..0x20.",
     "mnemonic": "call",
     "size": 5
   },

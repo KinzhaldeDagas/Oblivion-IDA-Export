@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x666BB0",
-    "line": "sub     esp, 0F4h",
+    "line": "sub     esp, 0F4h; Oblivion player-progression debug panel: enumerates all 21 native skills, labels only strict TESClass matches as 'Major', and prints each value, per-skill advance count, usage/required usage, aggregate major advances, readiness, attribute-bonus buckets, and specialization counters. Non-majors receive no separate 'Minor' label.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x666C54",
-    "line": "push    esi",
+    "line": "push    esi; Enumerate exactly SkillActorValue 0x0C..0x20 (21 native skills).",
     "mnemonic": "push",
     "size": 1
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x666C57",
-    "line": "call    ActorValue_GetGroupOffsetFromAV",
+    "line": "call    ActorValue_GetGroupOffsetFromAV; Oblivion group 2 converts the native SkillActorValue to its 0..20 array index.",
     "mnemonic": "call",
     "size": 5
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x666C6C",
-    "line": "call    Actor_GetBaseClass",
+    "line": "call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.",
     "mnemonic": "call",
     "size": 5
   },
@@ -331,25 +331,25 @@
   },
   {
     "ea": "0x666C7B",
-    "line": "push    esi",
+    "line": "push    esi; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x666C7C",
-    "line": "call    Actor_GetBaseClass",
+    "line": "call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x666C81",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x666C83",
-    "line": "call    sub_51C090",
+    "line": "call    TESClass_IsMajorSkillAV; Use the strict seven-slot TESClass predicate solely to choose the literal 'Major, ' prefix. False or absent class leaves the skill unlabeled/non-major.",
     "mnemonic": "call",
     "size": 5
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x666CB5",
-    "line": "call    ActorValue_GetGroupOffsetFromAV",
+    "line": "call    ActorValue_GetGroupOffsetFromAV; Map this native skill to its group-2 index and read PlayerCharacter::requiredSkillExp[index].",
     "mnemonic": "call",
     "size": 5
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x666CE1",
-    "line": "call    ActorValue_GetGroupOffsetFromAV",
+    "line": "call    ActorValue_GetGroupOffsetFromAV; Map this native skill to its group-2 index and read PlayerCharacter::skillExp[index].",
     "mnemonic": "call",
     "size": 5
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x666D05",
-    "line": "mov     eax, [ecx+edx*4+188h]",
+    "line": "mov     eax, [ecx+edx*4+188h]; Read PlayerCharacter::skillAdv[group2Index], the per-skill advance count shown independently of major membership.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x666D2D",
-    "line": "call    ActorValue_GetName",
+    "line": "call    ActorValue_GetName; Return the localized actor-value display name through g_actorValueNameSettings. Native skills occupy the contiguous SkillActorValue range 0x0C..0x20.",
     "mnemonic": "call",
     "size": 5
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x666D3A",
-    "line": "push    offset aSSDAdvancesDUs; \"%s (%s%d): advances: %d, usage %.2f/%.2\"...",
+    "line": "push    offset aSSDAdvancesDUs; Format each native skill as name, optional 'Major, ' prefix, current value, advance count, and current/required usage.",
     "mnemonic": "push",
     "size": 5
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x666D95",
-    "line": "push    offset aMajorSkillsAdv; \"Major Skills Advanced: %d/%d\"",
+    "line": "push    offset aMajorSkillsAdv; Report PlayerCharacter::majorSkillAdvances against g_iLevelUpSkillCount.value after the 21 per-skill rows.",
     "mnemonic": "push",
     "size": 5
   },
@@ -925,7 +925,7 @@
   },
   {
     "ea": "0x666DD5",
-    "line": "cmp     byte ptr [eax+1DCh], 0",
+    "line": "cmp     byte ptr [eax+1DCh], 0; PlayerCharacter::bCanLevelUp independently controls the 'Ready to Level Up' diagnostic line.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -1129,7 +1129,7 @@
   },
   {
     "ea": "0x666E54",
-    "line": "call    InterfaceMgr_DebugTextLine",
+    "line": "call    InterfaceMgr_DebugTextLine; Dump every retained attribute-bonus bucket; these counts include all skill increases, while only major increases roll the bucket boundary.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1423,7 +1423,7 @@
   },
   {
     "ea": "0x666EEC",
-    "line": "call    ActorValue_GetGroupOffsetFromAV",
+    "line": "call    ActorValue_GetGroupOffsetFromAV; RealArenaTraining fidelity pass: ActorValue_GetGroupOffsetFromAV(group, actorValue). Player skill-progress code calls this with group 2 before indexing player skillExp/requiredSkillExp.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1459,7 +1459,7 @@
   },
   {
     "ea": "0x666EFD",
-    "line": "call    ActorValue_GetName",
+    "line": "call    ActorValue_GetName; Return the localized actor-value display name through g_actorValueNameSettings. Native skills occupy the contiguous SkillActorValue range 0x0C..0x20.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1687,7 +1687,7 @@
   },
   {
     "ea": "0x666F84",
-    "line": "call    InterfaceMgr_DebugTextLine",
+    "line": "call    InterfaceMgr_DebugTextLine; Dump Combat/Magic/Stealth advancement counters accumulated from every skill increase according to that skill's specialization.",
     "mnemonic": "call",
     "size": 5
   },

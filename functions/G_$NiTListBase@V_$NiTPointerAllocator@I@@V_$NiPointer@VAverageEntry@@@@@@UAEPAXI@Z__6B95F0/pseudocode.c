@@ -2,8 +2,8 @@ _DWORD *__thiscall NiTListBase<NiTPointerAllocator<unsigned int>,NiPointer<Avera
         _DWORD *this,
         char a2)
 {
-  *this = &NiTListBase<NiTPointerAllocator<unsigned int>,NiPointer<AverageEntry>>::`vftable';
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  *this = &NiTListBase<NiTPointerAllocator<unsigned int>,NiPointer<AverageEntry>>::`vftable'; /*0x6b95f8*/
+  if ( (a2 & 1) != 0 ) /*0x6b95fe*/
+    FormHeapFree((unsigned int)this); /*0x6b9601*/
+  return this; /*0x6b960b*/
 }

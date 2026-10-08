@@ -1,14 +1,14 @@
-0x4B8A60: sub     esp, 134h
+0x4B8A60: sub     esp, 134h; Probable semantic identity: TESObjectDOOR::Activate. Direct Oblivion evidence: this function is the TESObjectDOOR vtable slot +0xCC target (TESFormVtbl member Unk_33), its typed parameters are TESObjectREFR* doorReference, TESObjectREFR* activatorReference, and UInt32 unk2; the body validates/links the door, checks actor access/locks, plays open/close behavior, and may select a random destination. Fallout independently labels the analogous method Activate and routes FindRandomTeleportTarget/HandlePlayerTeleport through it. Confidence remains Probable because the Oblivion shared slot itself is still named Unk_33.
 0x4B8A66: mov     eax, ds:0B30AACh
 0x4B8A6B: xor     eax, esp
 0x4B8A6D: mov     [esp+134h+var_4], eax
 0x4B8A74: push    ebx
 0x4B8A75: push    ebp
 0x4B8A76: push    esi
-0x4B8A77: mov     esi, [esp+140h+arg_0]
+0x4B8A77: mov     esi, [esp+140h+refr0]
 0x4B8A7E: test    esi, esi
 0x4B8A80: push    edi
-0x4B8A81: mov     edi, [esp+144h+arg_4]
+0x4B8A81: mov     edi, [esp+144h+refr1]
 0x4B8A88: mov     ebx, ecx
 0x4B8A8A: mov     [esp+144h+var_120], ebx
 0x4B8A8E: mov     [esp+144h+var_10C], edi
@@ -18,13 +18,13 @@
 0x4B8A9E: test    al, 1
 0x4B8AA0: jnz     short loc_4B8B1E
 0x4B8AA2: mov     ecx, esi; this
-0x4B8AA4: call    GetTeleportExtraData
+0x4B8AA4: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x4B8AA9: mov     ebp, eax
-0x4B8AAB: mov     ecx, esi
+0x4B8AAB: mov     ecx, esi; this
 0x4B8AAD: mov     [esp+144h+var_128], ebp
-0x4B8AB1: call    sub_4D7740
+0x4B8AB1: call    TESObjectREFR_GetEffectiveDoorLock; Verified: returns this reference's ExtraLockData* payload when present; otherwise, if its ExtraTeleport has a linked door, returns that linked reference's ExtraLockData* payload; null when neither exists. Directly supported by ExtraDataList_GetLock, ExtraDataList_GetTeleport, and TeleportData_GetLinkedDoor.
 0x4B8AB6: test    ebp, ebp
-0x4B8AB8: mov     [esp+144h+var_12C], eax
+0x4B8AB8: mov     [esp+144h+linkedDoor], eax
 0x4B8ABC: jnz     short loc_4B8AC2
 0x4B8ABE: test    eax, eax
 0x4B8AC0: jz      short loc_4B8AEA
@@ -51,7 +51,7 @@
 0x4B8AF6: push    edi
 0x4B8AF7: push    esi
 0x4B8AF8: mov     ecx, ebx
-0x4B8AFA: call    sub_4B86C0
+0x4B8AFA: call    DoorTeleport_SelectRandomDestinationDoor; Verified Fallout corroboration for this Oblivion helper pair: Fallout's FindRandomTeleportTarget calls PlayerCharacter::GetLastSpaceForDoor before selecting among the door's RandomTeleports, avoids the previous index when possible, and calls SetLastSpaceForDoor with the selected index. Oblivion independently proves its helper pair operates on the same per-door remembered-space behavior; only this behavior is treated as shared.
 0x4B8AFF: test    eax, eax
 0x4B8B01: jnz     short loc_4B8B3B
 0x4B8B03: fld     dword ptr ds:0A30634h
@@ -75,10 +75,10 @@
 0x4B8B38: retn    14h
 0x4B8B3B: push    eax
 0x4B8B3C: push    esi
-0x4B8B3D: call    LinkDoors
+0x4B8B3D: call    LinkDoors; Verified lifecycle connection: after creating reciprocal ExtraTeleport records and marker transforms, LinkDoors calls TESObjectREFR::AddToLowPathWorld for a1. That creates one bidirectional AStarWorldNode for the paired doors; the nested maps index it under both endpoint spaces.
 0x4B8B42: add     esp, 8
 0x4B8B45: mov     ecx, esi; this
-0x4B8B47: call    GetTeleportExtraData
+0x4B8B47: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x4B8B4C: test    eax, eax
 0x4B8B4E: mov     [esp+144h+var_128], eax
 0x4B8B52: jz      short loc_4B8B1E
@@ -122,11 +122,11 @@
 0x4B8BC3: mov     [eax+110h], ebx
 0x4B8BC9: mov     ecx, esi; this
 0x4B8BCB: mov     byte ptr [esp+144h+anonymous_0+3], bl
-0x4B8BCF: call    GetTeleportExtraData
-0x4B8BD4: mov     ecx, esi
+0x4B8BCF: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
+0x4B8BD4: mov     ecx, esi; this
 0x4B8BD6: mov     [esp+144h+var_124], eax
 0x4B8BDA: xor     ebx, ebx
-0x4B8BDC: call    sub_4D7740
+0x4B8BDC: call    TESObjectREFR_GetEffectiveDoorLock; Verified: returns this reference's ExtraLockData* payload when present; otherwise, if its ExtraTeleport has a linked door, returns that linked reference's ExtraLockData* payload; null when neither exists. Directly supported by ExtraDataList_GetLock, ExtraDataList_GetTeleport, and TeleportData_GetLinkedDoor.
 0x4B8BE1: mov     ebp, eax
 0x4B8BE3: test    ebp, ebp
 0x4B8BE5: jnz     short loc_4B8BEE
@@ -135,44 +135,44 @@
 0x4B8BEE: cmp     [esp+144h+var_124], ebx
 0x4B8BF2: jz      short loc_4B8C60
 0x4B8BF4: mov     ecx, [esp+144h+var_124]
-0x4B8BF8: call    sub_42B460
+0x4B8BF8: call    sub_42B460; ExtraTeleport_GetTargetCell-style helper: returns parent cell of ExtraTeleport+0 target ref if present.
 0x4B8BFD: cmp     edi, ds:0B333C4h
 0x4B8C03: mov     ebx, eax
 0x4B8C05: jz      short loc_4B8C60
 0x4B8C07: mov     ecx, edi; this
-0x4B8C09: call    TESObjectREFR_GetParentCell
+0x4B8C09: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x4B8C0E: test    eax, eax
 0x4B8C10: jz      short loc_4B8C60
 0x4B8C12: mov     ecx, edi; this
-0x4B8C14: call    TESObjectREFR_GetParentCell
-0x4B8C19: mov     ecx, eax
-0x4B8C1B: call    TESObjectCELL_GetOwner
+0x4B8C14: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x4B8C19: mov     ecx, eax; cell
+0x4B8C1B: call    TESObjectCELL_GetOwner; Verified Oblivion getter: returns only the direct XOWN/ExtraOwnership form stored in the cell extra list at cell+8. Unlike Fallout TESObjectCELL::GetOwner, it does not fall back to an encounter-zone owner.
 0x4B8C20: test    eax, eax
 0x4B8C22: jz      short loc_4B8C60
-0x4B8C24: push    edi
+0x4B8C24: push    edi; actor
 0x4B8C25: mov     ecx, edi; this
-0x4B8C27: call    TESObjectREFR_GetParentCell
-0x4B8C2C: mov     ecx, eax
-0x4B8C2E: call    sub_4CAAC0
+0x4B8C27: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x4B8C2C: mov     ecx, eax; cell
+0x4B8C2E: call    TESObjectCELL_IsOwnedByActor; Verified Oblivion owner predicate: reads the cell's XOWN and XRNK extra data; returns true for an NPC owner matching the actor's base form, or for a faction owner when the actor is an NPC whose faction rank meets the cell's required rank. Player identity is passed into faction-rank evaluation for its special handling. Called by door access/trespass policy and other ownership paths. Fallout has the analogous TESObjectCELL::IsActorBaseCellOwner; it takes TESActorBase* and uses a differently exposed faction-rank path.
 0x4B8C33: test    al, al
 0x4B8C35: jz      short loc_4B8C60
 0x4B8C37: test    ebx, ebx
 0x4B8C39: jz      short loc_4B8C56
-0x4B8C3B: mov     ecx, ebx
-0x4B8C3D: call    TESObjectCELL_GetOwner
+0x4B8C3B: mov     ecx, ebx; cell
+0x4B8C3D: call    TESObjectCELL_GetOwner; Verified Oblivion getter: returns only the direct XOWN/ExtraOwnership form stored in the cell extra list at cell+8. Unlike Fallout TESObjectCELL::GetOwner, it does not fall back to an encounter-zone owner.
 0x4B8C42: test    eax, eax
 0x4B8C44: jz      short loc_4B8C56
-0x4B8C46: push    edi
-0x4B8C47: mov     ecx, ebx
-0x4B8C49: call    sub_4CAAC0
+0x4B8C46: push    edi; actor
+0x4B8C47: mov     ecx, ebx; cell
+0x4B8C49: call    TESObjectCELL_IsOwnedByActor; Verified Oblivion owner predicate: reads the cell's XOWN and XRNK extra data; returns true for an NPC owner matching the actor's base form, or for a faction owner when the actor is an NPC whose faction rank meets the cell's required rank. Player identity is passed into faction-rank evaluation for its special handling. Called by door access/trespass policy and other ownership paths. Fallout has the analogous TESObjectCELL::IsActorBaseCellOwner; it takes TESActorBase* and uses a differently exposed faction-rank path.
 0x4B8C4E: test    al, al
 0x4B8C50: jz      loc_4B8D3E
 0x4B8C56: mov     byte ptr [esp+144h+anonymous_0+3], 1
 0x4B8C5B: jmp     loc_4B8D3E
-0x4B8C60: push    1
-0x4B8C62: push    edi
-0x4B8C63: mov     ecx, esi
-0x4B8C65: call    TESOBjectREFR_IsOwnedBy
+0x4B8C60: push    1; useFactionOwnership
+0x4B8C62: push    edi; actorReference
+0x4B8C63: mov     ecx, esi; reference
+0x4B8C65: call    TESObjectREFR_IsOwnedBy; Verified ownership predicate and flag meaning: resolve the effective owner; accept exact equality with the actor's template/base form. When the owner differs, a nonzero ownership-global value can permit the access. With useFactionOwnership=true, a Faction owner is instead checked against the actor base's faction rank and the reference's effective required rank; callers passing false skip that faction-rank path. Direct callers include many `true` paths and ContainerExtraData_RemoveForm's item-sweep call with false. Fallout's TESObjectREFR::IsAnOwner/DoorLock::IsAnOwner also expose a `useFaction` boolean, but its implementation uses actor faction membership and has different rank/global handling.
 0x4B8C6A: test    al, al
 0x4B8C6C: jz      short loc_4B8C9E
 0x4B8C6E: mov     ecx, ds:0B333C4h
@@ -193,7 +193,7 @@
 0x4B8C94: mov     byte ptr [esp+144h+anonymous_0+3], 0
 0x4B8C99: jmp     loc_4B8D3E
 0x4B8C9E: mov     ecx, edi; this
-0x4B8CA0: call    sub_5E6C60
+0x4B8CA0: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x4B8CA5: test    al, al
 0x4B8CA7: jz      short loc_4B8CBE
 0x4B8CA9: mov     ecx, edi
@@ -217,11 +217,11 @@
 0x4B8CE3: test    ebx, ebx
 0x4B8CE5: jz      loc_4B8C56
 0x4B8CEB: mov     ecx, ebx; this
-0x4B8CED: call    TESObjectCELL_IsInterior
+0x4B8CED: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x4B8CF2: test    al, al
 0x4B8CF4: jz      loc_4B8C56
-0x4B8CFA: mov     ecx, ebx
-0x4B8CFC: call    sub_4C9830
+0x4B8CFA: mov     ecx, ebx; this
+0x4B8CFC: call    TESObjectCELL_HasPublicFlag20; Verified getter: returns whether TESObjectCELL flags0 bit 0x20 is set. Its uses include door access/trespass checks and IsOffLimitToThePlayer. Probable semantic identity: Public; Fallout independently names the corresponding bit SetPublic.
 0x4B8D01: test    al, al
 0x4B8D03: jz      short loc_4B8D3E
 0x4B8D05: mov     byte ptr [esp+144h+anonymous_0+3], 1
@@ -244,11 +244,11 @@
 0x4B8D3A: mov     bl, 1
 0x4B8D3C: jnz     short loc_4B8D42
 0x4B8D3E: mov     bl, byte ptr [esp+144h+anonymous_0+3]
-0x4B8D42: mov     ebp, [esp+144h+var_12C]
+0x4B8D42: mov     ebp, [esp+144h+linkedDoor]
 0x4B8D46: test    ebp, ebp
 0x4B8D48: jz      loc_4B909E
-0x4B8D4E: mov     ecx, ebp
-0x4B8D50: call    sub_428E70
+0x4B8D4E: mov     ecx, ebp; this
+0x4B8D50: call    ExtraLockData_IsLocked; Verified runtime lock predicate: returns (ExtraLockData.flags & 0x01) != 0. ExtraDataList_Load sets this bit on accepted 12-byte and legacy 16-byte XLOC payloads; serialized flag bits are then preserved. This is a runtime normalization step.
 0x4B8D55: test    al, al
 0x4B8D57: jz      loc_4B909E
 0x4B8D5D: test    bl, bl
@@ -294,8 +294,8 @@
 0x4B8DD3: jnz     short loc_4B8E12
 0x4B8DD5: cmp     edi, ds:0B333C4h
 0x4B8DDB: jnz     loc_4B8B1E
-0x4B8DE1: mov     ecx, ebp
-0x4B8DE3: call    sub_429990
+0x4B8DE1: mov     ecx, ebp; this
+0x4B8DE3: call    ExtraLockData_GetPlayerScaledLockLevel; Verified player-scaled lock level calculation. This reads ExtraLockData.level as a signed byte; when flags bit 0x04 is set it adds PlayerCharacter::GetLevel() multiplied by GameSettingFloat fLeveledLockMult and clamps to 99. Fallout's REFR_LOCK::GetLevel accepts an owner reference and uses that reference's calculated level when non-null; Oblivion always uses global PlayerCharacter reference. This is a direct implementation divergence.
 0x4B8DE8: fld     dword ptr ds:0A379B4h
 0x4B8DEE: cmp     eax, 64h ; 'd'
 0x4B8DF1: push    ecx
@@ -311,12 +311,12 @@
 0x4B8E0D: jmp     loc_4B8B16
 0x4B8E12: cmp     edi, ds:0B333C4h
 0x4B8E18: jnz     loc_4B9029
-0x4B8E1E: mov     ecx, esi
-0x4B8E20: call    sub_4D77D0
+0x4B8E1E: mov     ecx, esi; doorReference
+0x4B8E20: call    TESObjectREFR_FindLockExtraOnLinkedDoorChain; Verified wrapper lookup: follows linked-door references until it finds an ExtraLock wrapper, returning that wrapper or null when the chain ends without lock data.
 0x4B8E25: test    eax, eax
 0x4B8E27: jz      short loc_4B8E4F
-0x4B8E29: mov     ecx, [eax+0Ch]
-0x4B8E2C: call    sub_429990
+0x4B8E29: mov     ecx, [eax+0Ch]; this
+0x4B8E2C: call    ExtraLockData_GetPlayerScaledLockLevel; Verified player-scaled lock level calculation. This reads ExtraLockData.level as a signed byte; when flags bit 0x04 is set it adds PlayerCharacter::GetLevel() multiplied by GameSettingFloat fLeveledLockMult and clamps to 99. Fallout's REFR_LOCK::GetLevel accepts an owner reference and uses that reference's calculated level when non-null; Oblivion always uses global PlayerCharacter reference. This is a direct implementation divergence.
 0x4B8E31: cmp     eax, 64h ; 'd'
 0x4B8E34: jl      short loc_4B8E4F
 0x4B8E36: fld     dword ptr ds:0A379B4h
@@ -334,15 +334,15 @@
 0x4B8E63: jnz     loc_4B90E6
 0x4B8E69: cmp     dword ptr ds:0B35B20h, 0
 0x4B8E70: jnz     loc_4B909E
-0x4B8E76: mov     ecx, esi
+0x4B8E76: mov     ecx, esi; doorReference
 0x4B8E78: mov     ds:0B35B20h, esi
-0x4B8E7E: call    sub_4D77D0
+0x4B8E7E: call    TESObjectREFR_FindLockExtraOnLinkedDoorChain; Verified wrapper lookup: follows linked-door references until it finds an ExtraLock wrapper, returning that wrapper or null when the chain ends without lock data.
 0x4B8E83: test    eax, eax
 0x4B8E85: jz      short loc_4B8E95
-0x4B8E87: mov     ecx, eax
-0x4B8E89: call    sub_428E90
-0x4B8E8E: mov     ecx, esi
-0x4B8E90: call    sub_4D9070
+0x4B8E87: mov     ecx, eax; this
+0x4B8E89: call    ExtraLock_ClearLockedFlag; Verified: clears only ExtraLockData.flags bit 0x01 (Locked), preserving bit 0x02. OpenEffect uses this after its lock-category test; this preserves LockEffect's bit-0x02 ownership marker.
+0x4B8E8E: mov     ecx, esi; this
+0x4B8E90: call    TESObjectREFR_MarkLockDataAsModified; Verified modified-state propagation: if this reference has lock data, calls TESFormVtbl::MarkAsModified with mask 0x40; otherwise, if its linked-door chain has lock data, marks that linked-door reference with the same mask.
 0x4B8E95: mov     ecx, ebp
 0x4B8E97: mov     eax, [ecx+4]
 0x4B8E9A: add     eax, 24h ; '$'
@@ -371,14 +371,14 @@
 0x4B8EE4: jnz     loc_4B8FD8
 0x4B8EEA: cmp     edi, ds:0B333C4h
 0x4B8EF0: jnz     short loc_4B8F23
-0x4B8EF2: mov     ecx, ebp
-0x4B8EF4: call    sub_429990
+0x4B8EF2: mov     ecx, ebp; this
+0x4B8EF4: call    ExtraLockData_GetPlayerScaledLockLevel; Verified player-scaled lock level calculation. This reads ExtraLockData.level as a signed byte; when flags bit 0x04 is set it adds PlayerCharacter::GetLevel() multiplied by GameSettingFloat fLeveledLockMult and clamps to 99. Fallout's REFR_LOCK::GetLevel accepts an owner reference and uses that reference's calculated level when non-null; Oblivion always uses global PlayerCharacter reference. This is a direct implementation divergence.
 0x4B8EF9: fld     dword ptr ds:0A30634h
 0x4B8EFF: cmp     eax, 64h ; 'd'
 0x4B8F02: push    0; int
 0x4B8F04: push    0; int
 0x4B8F06: push    ecx
-0x4B8F07: fstp    [esp+150h+var_150]; float
+0x4B8F07: fstp    [esp+150h+easeInTime]; float
 0x4B8F0A: jl      short loc_4B8F14
 0x4B8F0C: mov     eax, ds:0B38690h
 0x4B8F11: push    eax
@@ -397,7 +397,7 @@
 0x4B8F3E: push    121h
 0x4B8F43: jmp     short loc_4B8F5B
 0x4B8F45: mov     ecx, edi; this
-0x4B8F47: call    Actor__GetProcessLevel
+0x4B8F47: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x4B8F4C: test    eax, eax
 0x4B8F4E: jnz     loc_4B8B1E
 0x4B8F54: push    1
@@ -427,7 +427,7 @@
 0x4B8FA8: fstp    [esp+150h+var_14C]; float
 0x4B8FAC: mov     ecx, ebp
 0x4B8FAE: fld     [esp+150h+var_11C]
-0x4B8FB2: fstp    [esp+150h+var_150]; float
+0x4B8FB2: fstp    [esp+150h+easeInTime]; float
 0x4B8FB5: call    sub_6B7360
 0x4B8FBA: push    0
 0x4B8FBC: mov     ecx, ebp
@@ -435,17 +435,17 @@
 0x4B8FC3: mov     ecx, ebp; this
 0x4B8FC5: call    sub_6B73E0
 0x4B8FCA: push    ebp
-0x4B8FCB: call    FormHeapFree
+0x4B8FCB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4B8FD0: add     esp, 4
 0x4B8FD3: jmp     loc_4B8B1E
 0x4B8FD8: cmp     edi, ds:0B333C4h
 0x4B8FDE: jnz     short loc_4B9029
-0x4B8FE0: mov     ecx, esi
-0x4B8FE2: call    sub_4D77D0
+0x4B8FE0: mov     ecx, esi; doorReference
+0x4B8FE2: call    TESObjectREFR_FindLockExtraOnLinkedDoorChain; Verified wrapper lookup: follows linked-door references until it finds an ExtraLock wrapper, returning that wrapper or null when the chain ends without lock data.
 0x4B8FE7: test    eax, eax
 0x4B8FE9: jz      loc_4B8E4F
-0x4B8FEF: mov     ecx, [eax+0Ch]
-0x4B8FF2: call    sub_429990
+0x4B8FEF: mov     ecx, [eax+0Ch]; this
+0x4B8FF2: call    ExtraLockData_GetPlayerScaledLockLevel; Verified player-scaled lock level calculation. This reads ExtraLockData.level as a signed byte; when flags bit 0x04 is set it adds PlayerCharacter::GetLevel() multiplied by GameSettingFloat fLeveledLockMult and clamps to 99. Fallout's REFR_LOCK::GetLevel accepts an owner reference and uses that reference's calculated level when non-null; Oblivion always uses global PlayerCharacter reference. This is a direct implementation divergence.
 0x4B8FF7: cmp     eax, 64h ; 'd'
 0x4B8FFA: jl      loc_4B8E4F
 0x4B9000: fld     dword ptr ds:0A379B4h
@@ -469,7 +469,7 @@
 0x4B9039: push    0
 0x4B903B: push    1
 0x4B903D: mov     ecx, eax
-0x4B903F: call    sub_475440
+0x4B903F: call    ActorAnimData_CleanupOrPromoteQueuedIdles; Owns current/queued idle retirement and promotion across ActorAnimData +0xCC/+0xD0/+0xD4/+0xD8. Depending on caller flags, stops a still-active sequence, moves stale holders into the two cleanup slots, destroys them when no slot is available or forced, or promotes queued +0xD0 into current +0xCC.
 0x4B9044: mov     ecx, ds:0B35EC8h
 0x4B904A: push    ecx
 0x4B904B: call    sub_520F00
@@ -490,21 +490,21 @@
 0x4B907B: push    0FFFFFFFFh; a3
 0x4B907D: call    sub_520F20
 0x4B9082: add     esp, 0Ch
-0x4B9085: mov     ecx, esi
-0x4B9087: call    sub_4D77D0
+0x4B9085: mov     ecx, esi; doorReference
+0x4B9087: call    TESObjectREFR_FindLockExtraOnLinkedDoorChain; Verified wrapper lookup: follows linked-door references until it finds an ExtraLock wrapper, returning that wrapper or null when the chain ends without lock data.
 0x4B908C: test    eax, eax
 0x4B908E: jz      short loc_4B909E
-0x4B9090: mov     ecx, eax
-0x4B9092: call    sub_428E90
-0x4B9097: mov     ecx, esi
-0x4B9099: call    sub_4D9070
+0x4B9090: mov     ecx, eax; this
+0x4B9092: call    ExtraLock_ClearLockedFlag; Verified: clears only ExtraLockData.flags bit 0x01 (Locked), preserving bit 0x02. OpenEffect uses this after its lock-category test; this preserves LockEffect's bit-0x02 ownership marker.
+0x4B9097: mov     ecx, esi; this
+0x4B9099: call    TESObjectREFR_MarkLockDataAsModified; Verified modified-state propagation: if this reference has lock data, calls TESFormVtbl::MarkAsModified with mask 0x40; otherwise, if its linked-door chain has lock data, marks that linked-door reference with the same mask.
 0x4B909E: mov     ecx, ds:0B333C4h; this
 0x4B90A4: cmp     ecx, edi
 0x4B90A6: jnz     short loc_4B90E6
 0x4B90A8: call    PlayerCharacter__IsJailed; Check the meaning of JailedState
 0x4B90AD: test    al, al
 0x4B90AF: jz      short loc_4B90E6
-0x4B90B1: cmp     [esp+148h+var_12C], 0
+0x4B90B1: cmp     [esp+148h+linkedDoor], 0
 0x4B90B6: mov     ecx, ds:0B333C4h
 0x4B90BC: jz      loc_4B9189
 0x4B90C2: mov     dword ptr [ecx+608h], 0
@@ -513,7 +513,7 @@
 0x4B90D4: call    sub_65D670
 0x4B90D9: mov     edx, ds:0B333C4h
 0x4B90DF: mov     byte ptr [edx+200h], 0
-0x4B90E6: mov     ebx, [esp+148h+var_12C]
+0x4B90E6: mov     ebx, [esp+148h+linkedDoor]
 0x4B90EA: test    ebx, ebx
 0x4B90EC: jz      loc_4B91B3
 0x4B90F2: test    edi, edi
@@ -566,14 +566,14 @@
 0x4B91AD: push    ecx
 0x4B91AE: fstp    [esp+14Ch+var_14C]
 0x4B91B1: call    edx
-0x4B91B3: mov     ecx, esi
-0x4B91B5: call    sub_4D77D0
+0x4B91B3: mov     ecx, esi; doorReference
+0x4B91B5: call    TESObjectREFR_FindLockExtraOnLinkedDoorChain; Verified wrapper lookup: follows linked-door references until it finds an ExtraLock wrapper, returning that wrapper or null when the chain ends without lock data.
 0x4B91BA: test    eax, eax
 0x4B91BC: jz      short loc_4B91CC
-0x4B91BE: mov     ecx, eax
-0x4B91C0: call    sub_428E90
-0x4B91C5: mov     ecx, esi
-0x4B91C7: call    sub_4D9070
+0x4B91BE: mov     ecx, eax; this
+0x4B91C0: call    ExtraLock_ClearLockedFlag; Verified: clears only ExtraLockData.flags bit 0x01 (Locked), preserving bit 0x02. OpenEffect uses this after its lock-category test; this preserves LockEffect's bit-0x02 ownership marker.
+0x4B91C5: mov     ecx, esi; this
+0x4B91C7: call    TESObjectREFR_MarkLockDataAsModified; Verified modified-state propagation: if this reference has lock data, calls TESFormVtbl::MarkAsModified with mask 0x40; otherwise, if its linked-door chain has lock data, marks that linked-door reference with the same mask.
 0x4B91CC: mov     edx, [esi]
 0x4B91CE: mov     eax, [edx+154h]
 0x4B91D4: mov     ecx, esi
@@ -582,29 +582,29 @@
 0x4B91DA: jz      loc_4B94BE
 0x4B91E0: mov     edx, [esi]
 0x4B91E2: mov     eax, [edx+154h]
-0x4B91E8: push    0
+0x4B91E8: push    0; index
 0x4B91EA: mov     ecx, esi
 0x4B91EC: call    eax
-0x4B91EE: mov     ecx, eax
-0x4B91F0: call    sub_405790
+0x4B91EE: mov     ecx, eax; this
+0x4B91F0: call    NiNode_GetChildAtIndex
 0x4B91F5: test    eax, eax
 0x4B91F7: jz      loc_4B94BE
 0x4B91FD: mov     edx, [esi]
 0x4B91FF: mov     eax, [edx+154h]
-0x4B9205: push    0
+0x4B9205: push    0; index
 0x4B9207: mov     ecx, esi
 0x4B9209: call    eax
-0x4B920B: mov     ecx, eax
-0x4B920D: call    sub_405790
+0x4B920B: mov     ecx, eax; this
+0x4B920D: call    NiNode_GetChildAtIndex
 0x4B9212: cmp     dword ptr [eax+0Ch], 0
 0x4B9216: jz      loc_4B94BE
 0x4B921C: mov     edx, [esi]
 0x4B921E: mov     eax, [edx+154h]
-0x4B9224: push    0
+0x4B9224: push    0; index
 0x4B9226: mov     ecx, esi
 0x4B9228: call    eax
-0x4B922A: mov     ecx, eax
-0x4B922C: call    sub_405790
+0x4B922A: mov     ecx, eax; this
+0x4B922C: call    NiNode_GetChildAtIndex
 0x4B9231: mov     eax, [eax+0Ch]
 0x4B9234: push    eax
 0x4B9235: push    offset stru_B3CAC0
@@ -614,12 +614,12 @@
 0x4B9244: test    edi, edi
 0x4B9246: jz      loc_4B94E2
 0x4B924C: push    offset aOpen; "Open"
-0x4B9251: mov     ecx, edi
-0x4B9253: call    sub_4715A0
+0x4B9251: mov     ecx, edi; this
+0x4B9253: call    NiControllerManager_FindSequenceByName; Looks up a NiControllerSequence by name in the controller manager name map at +0x58; returns null on miss.
 0x4B9258: push    offset aClose; "Close"
-0x4B925D: mov     ecx, edi
+0x4B925D: mov     ecx, edi; this
 0x4B925F: mov     ebx, eax
-0x4B9261: call    sub_4715A0
+0x4B9261: call    NiControllerManager_FindSequenceByName; Looks up a NiControllerSequence by name in the controller manager name map at +0x58; returns null on miss.
 0x4B9266: test    ebx, ebx
 0x4B9268: mov     ebp, eax
 0x4B926A: jz      loc_4B94E2
@@ -634,11 +634,11 @@
 0x4B9291: mov     ecx, esi
 0x4B9293: call    sub_4D8260
 0x4B9298: test    al, al
-0x4B929A: push    4
-0x4B929C: mov     ecx, esi
+0x4B929A: push    4; mask
+0x4B929C: mov     ecx, esi; this
 0x4B929E: jnz     loc_4B9486
 0x4B92A4: mov     ebp, ebx
-0x4B92A6: call    sub_4D8270
+0x4B92A6: call    TESObjectREFR_SetActionFlagBits; Set reference action-state bits and synchronize special bit 0x04 with loaded/runtime open-state handling. ONAM itself represents action flag 0x08; PostLinkModifiedForm tests that bit before selecting set/clear paths.
 0x4B92AB: jmp     loc_4B948B
 0x4B92B0: mov     eax, [ebx+58h]
 0x4B92B3: mov     eax, [eax+0Ch]
@@ -664,10 +664,10 @@
 0x4B92F2: mov     [esp+154h+var_11C], edx
 0x4B92F6: fld     [esp+154h+var_11C]
 0x4B92FA: mov     [esp+154h+var_120], ecx
-0x4B92FE: fstp    [esp+154h+var_150]; float
+0x4B92FE: fstp    [esp+154h+easeInTime]; float
 0x4B9302: mov     ecx, ebp
 0x4B9304: fld     [esp+154h+var_120]
-0x4B9308: fstp    [esp+154h+var_154]; float
+0x4B9308: fstp    [esp+154h+weight]; float
 0x4B930B: call    sub_6B7360
 0x4B9310: push    0
 0x4B9312: mov     ecx, ebp
@@ -675,7 +675,7 @@
 0x4B9319: mov     ecx, ebp; this
 0x4B931B: call    sub_6B73E0
 0x4B9320: push    ebp
-0x4B9321: call    FormHeapFree
+0x4B9321: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4B9326: add     esp, 4
 0x4B9329: mov     ecx, [esp+148h+anonymous_0]
 0x4B932D: push    1
@@ -692,10 +692,10 @@
 0x4B934A: fldz
 0x4B934C: fstp    dword ptr [ebp+0BCh]
 0x4B9352: mov     ecx, ebx
-0x4B9354: call    sub_42B460
-0x4B9359: mov     ecx, ebx
+0x4B9354: call    sub_42B460; ExtraTeleport_GetTargetCell-style helper: returns parent cell of ExtraTeleport+0 target ref if present.
+0x4B9359: mov     ecx, ebx; linkedDoor
 0x4B935B: mov     ebp, eax
-0x4B935D: call    sub_42B470
+0x4B935D: call    TeleportData_GetLinkedDoorWorldspace; Verified: given the linked-door reference slot from TeleportData, resolves its loaded parent cell or child cell and returns that cell's worldspace; returns null when the linked reference or its cell is unavailable.
 0x4B9362: mov     ecx, [esp+148h+var_124]
 0x4B9366: test    byte ptr [ecx+64h], 1
 0x4B936A: mov     [esp+148h+var_130], eax
@@ -728,13 +728,13 @@
 0x4B93C2: call    sub_663F00
 0x4B93C7: mov     ecx, [esp+14Ch+var_128]
 0x4B93CB: push    esi
-0x4B93CC: call    sub_4B7B40
+0x4B93CC: call    TESObjectDOOR_TransitionPlayerThroughLinkedDoor; Verified: player transition helper for a reference using a linked door. Confirms the supplied TESObjectDOOR matches the reference's base form, obtains its TeleportData target, resolves/loads the destination cell when needed, then calls PlayerCharacter_ChangeCellAndPosition with linked destination position/rotation and handles arrival sound/cell cleanup. Called from TESObjectDOOR_Activate and a route-following script-command wrapper; that wrapper's exact command identity remains Unknown.
 0x4B93D1: mov     edx, ds:0B333C4h
 0x4B93D7: mov     byte ptr [edx+12Ch], 0
 0x4B93DE: mov     al, 1
 0x4B93E0: jmp     loc_4B8B20
 0x4B93E5: mov     ecx, ebx
-0x4B93E7: call    sub_6899C0
+0x4B93E7: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x4B93EC: mov     edx, [eax]
 0x4B93EE: mov     esi, [esp+14Ch+var_114]
 0x4B93F2: sub     esp, 0Ch
@@ -758,16 +758,16 @@
 0x4B9424: call    sub_42B430
 0x4B9429: fld     dword ptr [eax+8]
 0x4B942C: push    ecx
-0x4B942D: mov     ecx, esi
-0x4B942F: fstp    [esp+150h+var_150]; float
-0x4B9432: call    sub_4D8A10
+0x4B942D: mov     ecx, esi; this
+0x4B942F: fstp    [esp+150h+easeInTime]; radians
+0x4B9432: call    TESObjectREFR_SetRotationZ; TES4 authoritative: write reference rotation Z at TESObjectREFR+0x28, then notify the reference through virtual slot +0x40 with change mask 4.
 0x4B9437: fldz
 0x4B9439: jmp     short loc_4B9441
 0x4B943B: fld     dword ptr ds:0A32048h
 0x4B9441: push    ecx
-0x4B9442: mov     ecx, esi
-0x4B9444: fstp    [esp+154h+var_154]; float
-0x4B9447: call    sub_4D89D0
+0x4B9442: mov     ecx, esi; this
+0x4B9444: fstp    [esp+154h+weight]; radians
+0x4B9447: call    TESObjectREFR_SetRotationX; TES4 authoritative: write reference rotation X at TESObjectREFR+0x20, then notify the reference through virtual slot +0x40 with change mask 4.
 0x4B944C: push    0; int
 0x4B944E: push    offset ??_R0?AVActor@@@8; struct TypeDescriptor *
 0x4B9453: push    offset ??_R0?AVTESObjectREFR@@@8; struct _s_RTTICompleteObjectLocator *
@@ -788,19 +788,19 @@
 0x4B947C: add     esp, 0Ch
 0x4B947F: mov     al, 1
 0x4B9481: jmp     loc_4B8B20
-0x4B9486: call    sub_4D82E0
+0x4B9486: call    TESObjectREFR_ClearActionFlagBits
 0x4B948B: fldz
 0x4B948D: or      word ptr [edi+8], 8
-0x4B9492: push    0; int
+0x4B9492: push    0; timeSyncSequence
 0x4B9494: sub     esp, 8
-0x4B9497: fstp    [esp+154h+var_150]; float
+0x4B9497: fstp    [esp+154h+easeInTime]; easeInTime
 0x4B949B: mov     ecx, edi
 0x4B949D: fld1
-0x4B949F: fstp    [esp+154h+var_154]; float
-0x4B94A2: push    0; int
-0x4B94A4: push    0; int
-0x4B94A6: push    ebp; int
-0x4B94A7: call    sub_470B20
+0x4B949F: fstp    [esp+154h+weight]; weight
+0x4B94A2: push    0; startOver
+0x4B94A4: push    0; priority
+0x4B94A6: push    ebp; sequence
+0x4B94A7: call    BSAnimGroupSequence_Activate; BSAnimGroupSequence activation wrapper. Delegates to NiControllerSequence_Activate with the final transition flag forced to zero.
 0x4B94AC: fld     dword ptr ds:0A7DEB4h
 0x4B94B2: fchs
 0x4B94B4: mov     al, 1
@@ -810,12 +810,12 @@
 0x4B94C0: call    sub_4DE660
 0x4B94C5: add     eax, 0FFFFFFFFh
 0x4B94C8: cmp     eax, 1
-0x4B94CB: push    4
-0x4B94CD: mov     ecx, esi
+0x4B94CB: push    4; mask
+0x4B94CD: mov     ecx, esi; this
 0x4B94CF: ja      short loc_4B94DD
-0x4B94D1: call    sub_4D82E0
+0x4B94D1: call    TESObjectREFR_ClearActionFlagBits
 0x4B94D6: mov     al, 1
 0x4B94D8: jmp     loc_4B8B20
-0x4B94DD: call    sub_4D8270
+0x4B94DD: call    TESObjectREFR_SetActionFlagBits; Set reference action-state bits and synchronize special bit 0x04 with loaded/runtime open-state handling. ONAM itself represents action flag 0x08; PostLinkModifiedForm tests that bit before selecting set/clear paths.
 0x4B94E2: mov     al, 1
 0x4B94E4: jmp     loc_4B8B20

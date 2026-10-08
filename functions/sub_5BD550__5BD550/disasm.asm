@@ -3,7 +3,7 @@
 0x5BD553: mov     ecx, [esi+30h]
 0x5BD556: push    0FB5h
 0x5BD55B: call    Tile_GetFloat
-0x5BD560: call    Double_To_SInt32
+0x5BD560: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5BD565: cmp     ds:0B3B410h, eax
 0x5BD56B: jz      short loc_5BD57A
 0x5BD56D: mov     ecx, esi

@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4A6350",
+      "0x4A637A"
+    ]
+  ],
+  "chunks_sha256": "07b3e0a71ab91709cd2144351c225728a65b27dc2278749f82c2da8670a809c9",
+  "comment_regular": "Verified: inserts region only when not already present, preserving unique TESRegion membership.",
+  "comment_repeatable": "Verified: inserts region only when not already present, preserving unique TESRegion membership.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4A6350",
+  "display_name": "TESRegionList_AddUniqueRegion",
   "end_ea": "0x4A637A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4A6350",
+  "name": "TESRegionList_AddUniqueRegion",
   "segment": ".text",
   "sha256": "07b3e0a71ab91709cd2144351c225728a65b27dc2278749f82c2da8670a809c9",
   "size": 42,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4A6350",
-  "type": "char __thiscall(_DWORD *this, int)",
+  "total_chunk_size": 42,
+  "type": "bool __thiscall(TESRegionList *self, TESForm *region)",
   "xrefs_from_count": 20,
   "xrefs_to_count": 2
 }

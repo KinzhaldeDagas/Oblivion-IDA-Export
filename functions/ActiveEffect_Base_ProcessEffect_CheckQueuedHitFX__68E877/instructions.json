@@ -25,13 +25,13 @@
   },
   {
     "ea": "0x68E884",
-    "line": "jnz     short ActiveEffect_Base_ProcessEffect___UpdateEffect",
+    "line": "jnz     short ActiveEffect_Base_ProcessEffect___UpdateEffect; Verified periodic update dispatch: when this effect's update condition is met, ActiveEffect_Base_ProcessEffect calls vtable +0x08 with elapsed-time data. LockEffect/OpenEffect use the shared null implementation at this slot, so their lock changes occur through Apply (+0x38), not the periodic update override.",
     "mnemonic": "jnz",
     "size": 2
   },
   {
     "ea": "0x68E886",
-    "line": "call    InterfaceManager_IsMenuMode",
+    "line": "call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.",
     "mnemonic": "call",
     "size": 5
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x68E88D",
-    "line": "jnz     short ActiveEffect_Base_ProcessEffect___UpdateEffect",
+    "line": "jnz     short ActiveEffect_Base_ProcessEffect___UpdateEffect; Verified periodic update dispatch: when this effect's update condition is met, ActiveEffect_Base_ProcessEffect calls vtable +0x08 with elapsed-time data. LockEffect/OpenEffect use the shared null implementation at this slot, so their lock changes occur through Apply (+0x38), not the periodic update override.",
     "mnemonic": "jnz",
     "size": 2
   },

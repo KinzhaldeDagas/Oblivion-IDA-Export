@@ -62,22 +62,22 @@
 0x77AB0E: push    ebp
 0x77AB0F: call    sub_76B320
 0x77AB14: mov     eax, [ebp+28h]
-0x77AB17: push    eax
+0x77AB17: push    eax; group
 0x77AB18: mov     [ebp+1Ch], bl
-0x77AB1B: call    sub_772E30
+0x77AB1B: call    NiD3DRenderStateGroup_ReleaseToPool;
 0x77AB20: add     esp, 4
 0x77AB23: xor     esi, esi
 0x77AB25: cmp     [ebp+4Ah], bx
 0x77AB29: mov     [ebp+34h], ebx
 0x77AB2C: mov     [ebp+38h], ebx
 0x77AB2F: jbe     short loc_77AB50
-0x77AB31: mov     [esp+34h+var_24], ebx
+0x77AB31: mov     [esp+34h+value], ebx
 0x77AB35: lea     edi, [ebp+40h]
-0x77AB38: lea     ecx, [esp+34h+var_24]
-0x77AB3C: push    ecx
-0x77AB3D: push    esi
-0x77AB3E: mov     ecx, edi
-0x77AB40: call    sub_76CE40
+0x77AB38: lea     ecx, [esp+34h+value]
+0x77AB3C: push    ecx; value
+0x77AB3D: push    esi; index
+0x77AB3E: mov     ecx, edi; this
+0x77AB40: call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.
 0x77AB45: movzx   edx, word ptr [ebp+4Ah]
 0x77AB49: add     esi, 1
 0x77AB4C: cmp     esi, edx
@@ -86,13 +86,13 @@
 0x77AB53: mov     ecx, esi
 0x77AB55: call    sub_76C8C0
 0x77AB5A: mov     ecx, esi
-0x77AB5C: call    ??1?$NiTArray@V?$NiPointer@VNiD3DPass@@@@@@UAE@XZ; NiTArray<NiPointer<NiD3DPass>>::~NiTArray<NiPointer<NiD3DPass>>(void)
+0x77AB5C: call    ??1?$NiTArray@V?$NiPointer@VNiD3DPass@@@@@@UAE@XZ;
 0x77AB61: mov     ecx, [ebp+3Ch]
 0x77AB64: cmp     ecx, ebx
 0x77AB66: jz      short loc_77AB73
 0x77AB68: add     dword ptr [ecx+60h], 0FFFFFFFFh
 0x77AB6C: jnz     short loc_77AB73
-0x77AB6E: call    sub_7604D0
+0x77AB6E: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x77AB73: mov     esi, [ebp+30h]
 0x77AB76: cmp     esi, ebx
 0x77AB78: mov     edi, ds:0A2807Ch
@@ -146,3 +146,19 @@
 0x77ABDB: pop     ebx
 0x77ABDC: add     esp, 4
 0x77ABDF: jmp     loc_779160
+0x779160: push    esi
+0x779161: mov     esi, ecx
+0x779163: mov     eax, [esi+10h]
+0x779166: test    eax, eax
+0x779168: mov     dword ptr [esi], offset ??_7NiD3DShaderInterface@@6B@; const NiD3DShaderInterface::`vftable'
+0x77916E: mov     dword ptr [esi+14h], 0
+0x779175: mov     dword ptr [esi+18h], 0
+0x77917C: jz      short loc_779186
+0x77917E: mov     ecx, [eax]
+0x779180: mov     edx, [ecx+8]
+0x779183: push    eax
+0x779184: call    edx
+0x779186: mov     dword ptr [esi+10h], 0
+0x77918D: mov     ecx, esi
+0x77918F: pop     esi
+0x779190: jmp     sub_738600

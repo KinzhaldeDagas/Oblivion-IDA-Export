@@ -1,4 +1,4 @@
-0x570C00: push    esi
+0x570C00: push    esi; CustomAnimSupport decode: plays named SpecialIdle sequence directly on a controller manager; projectile/effect special idles do not query actor KFFZ/animsMap.
 0x570C01: push    edi
 0x570C02: mov     edi, ecx
 0x570C04: mov     eax, [edi+18h]
@@ -34,16 +34,16 @@
 0x570C52: test    esi, esi
 0x570C54: jz      short loc_570C98
 0x570C56: fldz
-0x570C58: push    0; int
-0x570C5A: push    0; int
+0x570C58: push    0; transition
+0x570C5A: push    0; timeSyncSequence
 0x570C5C: sub     esp, 8
-0x570C5F: fstp    [esp+18h+var_14]; float
-0x570C63: mov     ecx, esi
+0x570C5F: fstp    [esp+18h+easeInTime]; easeInTime
+0x570C63: mov     ecx, esi; this
 0x570C65: fld1
-0x570C67: fstp    [esp+18h+var_18]; float
-0x570C6A: push    0; char
-0x570C6C: push    0; int
-0x570C6E: call    sub_6C9BA0
+0x570C67: fstp    [esp+18h+weight]; weight
+0x570C6A: push    0; startOver
+0x570C6C: push    0; priority
+0x570C6E: call    NiControllerSequence_Activate; Native controller-sequence activation state machine. Rejects an already-active sequence, validates optional time-sync compatibility, records activation parameters, and queues the active sequence with its manager.
 0x570C73: fld     dword ptr [esi+30h]
 0x570C76: fstp    [esp+8+arg_0]
 0x570C7A: fld     [esp+8+arg_0]

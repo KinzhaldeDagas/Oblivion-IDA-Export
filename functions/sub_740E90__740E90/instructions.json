@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x740E90",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Fog decode: NIF factory for plain NiFogProperty; default color comes from B3FA90/94/98.",
     "mnemonic": "push",
     "size": 2
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x740EB4",
-    "line": "call    FormHeapAlloc",
+    "line": "call    FormHeapAlloc; Fog fixed/default decode: NIF factory allocates 0x2C plain NiFogProperty.",
     "mnemonic": "call",
     "size": 5
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x740ED7",
-    "line": "mov     dword ptr [esi], offset ??_7NiFogProperty@@6B@; const NiFogProperty::`vftable'",
+    "line": "mov     dword ptr [esi], offset ??_7NiFogProperty@@6B@; Fog fixed/default decode: NIF factory object uses NiFogProperty vtable, separate from active B333E4 BSFogProperty.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -163,13 +163,13 @@
   },
   {
     "ea": "0x740EE8",
-    "line": "mov     word ptr [esi+18h], 0",
+    "line": "mov     word ptr [esi+18h], 0; Fog fixed/default decode: factory initializes plain NiFogProperty flags +0x18 to 0.",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x740EEE",
-    "line": "fstp    dword ptr [esi+1Ch]",
+    "line": "fstp    dword ptr [esi+1Ch]; Fog fixed/default decode: factory initializes plain NiFogProperty depth +0x1C to 1.0.",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x740EF6",
-    "line": "mov     [esi+20h], eax",
+    "line": "mov     [esi+20h], eax; Fog decode: NiFogProperty factory default color.r from B3FA90.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x740EFF",
-    "line": "mov     [esi+24h], ecx",
+    "line": "mov     [esi+24h], ecx; Fog decode: NiFogProperty factory default color.g from B3FA94.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x740F08",
-    "line": "mov     [esi+28h], edx",
+    "line": "mov     [esi+28h], edx; Fog decode: NiFogProperty factory default color.b from B3FA98.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -292,5 +292,77 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9D62E0",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D62E3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D62E4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D62E9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D62EA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D62EB",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D62EF",
+    "line": "lea     eax, [edx-8]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D62F2",
+    "line": "mov     ecx, [edx-0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D62F5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D62F7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D62FC",
+    "line": "mov     eax, offset stru_AFE21C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6301",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

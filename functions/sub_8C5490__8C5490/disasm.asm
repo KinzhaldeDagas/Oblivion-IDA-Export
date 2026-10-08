@@ -56,7 +56,6 @@
 0x8C5535: cmp     ax, [esi+8]
 0x8C5539: jnb     short loc_8C556B
 0x8C553B: jmp     short loc_8C5540
-0x8C553D: align 10h
 0x8C5540: mov     edx, [esi+4]
 0x8C5543: movzx   ecx, ax
 0x8C5546: add     eax, 1
@@ -64,7 +63,7 @@
 0x8C554F: cmp     ax, [esi+8]
 0x8C5553: jb      short loc_8C5540
 0x8C5555: push    edi
-0x8C5556: call    FormHeapFree
+0x8C5556: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x8C555B: add     esp, 4
 0x8C555E: pop     edi
 0x8C555F: pop     ebx
@@ -72,7 +71,7 @@
 0x8C5561: retn    4
 0x8C5564: mov     dword ptr [esi+4], 0
 0x8C556B: push    edi
-0x8C556C: call    FormHeapFree
+0x8C556C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x8C5571: add     esp, 4
 0x8C5574: pop     edi
 0x8C5575: pop     ebx

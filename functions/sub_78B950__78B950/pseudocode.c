@@ -1,30 +1,30 @@
-_DWORD *__userpurge sub_78B950@<eax>(int this@<ecx>, int a2@<edi>, int a3)
+// CSpeedTreeRT::SetBranchWindMethod. Before Compute, mirrors the wind method to CWindEngine and branch geometry; disables vertex weighting for WIND_NONE and invalidates prior CPU-wind geometry when switching off.
+void __thiscall CSpeedTreeRT__SetBranchWindMethod(OB_CSpeedTreeRT_010201A0 *this, int method)
 {
-  bool v4; // zf
-  _DWORD *result; // eax
-  rsize_t v6; // [esp-4h] [ebp-60h] BYREF
-  char *v7; // [esp+4Ch] [ebp-10h]
-  int v8; // [esp+58h] [ebp-4h]
+  bool v3; // zf
+  int v4; // [esp+0h] [ebp-5Ch] BYREF
+  int *v5; // [esp+4Ch] [ebp-10h]
+  int v6; // [esp+58h] [ebp-4h]
 
-  v7 = (char *)&v6 + 4;
-  v4 = *(_BYTE *)(this + 0x45) == 0;
-  v8 = 0;
-  if ( v4 )
+  v5 = &v4; /*0x78b978*/
+  v3 = this->treeComputedFlag == 0; /*0x78b97f*/
+  v6 = 0; /*0x78b982*/
+  if ( v3 ) /*0x78b985*/
   {
-    if ( a3 == 2 && *(_DWORD *)(*(_DWORD *)(this + 0x10) + 8) == 1 )
+    if ( method == 2 && this->windEngine->branchWindMethod == 1 ) /*0x78b996*/
     {
-      *(_BYTE *)(*(_DWORD *)(this + 4) + 0x12) = 0;
-      sub_794AE0(*(_DWORD *)(this + 4), 0);
+      this->branchGeometry->valid = 0; /*0x78b99b*/
+      OB_CIndexedGeometry_ComputeWindEffect_010201A0(this->branchGeometry, 0); /*0x78b9a2*/
     }
-    *(_DWORD *)(*(_DWORD *)(this + 0x10) + 8) = a3;
-    result = *(_DWORD **)(this + 4);
-    *((_BYTE *)result + 8) = a3 != 2;
-    *(_DWORD *)(*(_DWORD *)(this + 4) + 0x14) = a3;
+    this->windEngine->branchWindMethod = method; /*0x78b9aa*/
+    this->branchGeometry->vertexWeighting = method != 2; /*0x78b9b6*/
+    this->branchGeometry->windMethod = method; /*0x78b9bc*/
   }
   else
   {
-    LODWORD(v6) = 0x43;
-    return sub_414500(&dword_B2B614, a2, "SetBranchWindMethod() has no effect after Compute() has been called", v6);
+    OB_stString28_AssignBytes_010201A0( /*0x78b9df*/
+      &OB_g_strError_010201A0,
+      "SetBranchWindMethod() has no effect after Compute() has been called",
+      0x43u);
   }
-  return result;
 }

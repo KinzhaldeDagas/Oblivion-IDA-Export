@@ -1,9 +1,9 @@
 0x547280: push    ecx
-0x547281: mov     eax, [esp+4+arg_4]
-0x547285: mov     ecx, [esp+4+arg_0]
-0x547289: push    eax
-0x54728A: push    ecx
-0x54728B: call    Calc_LuckModifiedSkill
+0x547281: mov     eax, [esp+4+luckValue]
+0x547285: mov     ecx, [esp+4+skillValue]
+0x547289: push    eax; luckValue
+0x54728A: push    ecx; skillValue
+0x54728B: call    Calc_LuckModifiedSkill; Compute Luck-adjusted effective skill as skill + iActorLuckSkillBase + Luck*fActorLuckSkillMult, then clamp to 0..100. Defaults simplify to skill + (Luck-50)*0.4.
 0x547290: fstp    [esp+0Ch+var_4]
 0x547294: fld     [esp+0Ch+var_4]
 0x547298: mov     eax, [esp+0Ch+arg_8]

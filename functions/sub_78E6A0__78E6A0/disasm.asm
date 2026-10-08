@@ -1,7 +1,7 @@
-0x78E6A0: push    ecx
+0x78E6A0: push    ecx; Oblivion stVec::Normalize: computes Magnitude and, when nonzero, divides every active component by it. Exact behavior corroborated by RT4.1 Vec.cpp.
 0x78E6A1: push    esi
 0x78E6A2: mov     esi, ecx
-0x78E6A4: call    sub_78E600
+0x78E6A4: call    OB_stVec_Magnitude_010201A0; Oblivion stVec::Magnitude: sums squares over the vector's logical size and returns sqrt(sum). Exact behavior corroborated by RT4.1 Vec.cpp.
 0x78E6A9: fstp    [esp+8+var_4]
 0x78E6AD: fldz
 0x78E6AF: fld     [esp+8+var_4]

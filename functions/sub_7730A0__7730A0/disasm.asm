@@ -1,4 +1,4 @@
-0x7730A0: mov     eax, [esp+arg_0]
+0x7730A0: mov     eax, [esp+arg_0]; DX10OBSE mesh-texturing decode: D3D texture-stage state lookup. Uses B427E0 state-to-slot table; returns override/current value plus source flag when state is tracked by the stage state group.
 0x7730A4: movzx   eax, word ptr ds:0B427E0h[eax*2]
 0x7730AC: cmp     ax, 8
 0x7730B0: jnb     short loc_7730EF

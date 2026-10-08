@@ -1,4 +1,4 @@
-0x4CB070: sub     esp, 14h
+0x4CB070: sub     esp, 14h; Verified Oblivion behavior: scans the supplied cell/worldspace, filters deleted (0x20), disabled (0x800), and 0x2000 references, requires a door whose randomTeleport list contains destinationSpace, records an existing ExtraTeleport reference when eligible, and randomly chooses a matching door without ExtraTeleport. 0x2000 meaning and the ultimate high-level caller purpose remain Unknown. Fallout divergence (Verified on each binary independently): Fallout LinkRandomTeleportDoors creates paired DoorTeleportData/ExtraTeleport state; Fallout GetNodeConnections enumerates cell/worldspace door lists during search. Oblivion uses this base-form space list plus a runtime destination-door scan; do not infer function equivalence from naming.
 0x4CB073: push    esi
 0x4CB074: mov     esi, [esp+18h+a2]
 0x4CB078: push    edi
@@ -6,10 +6,10 @@
 0x4CB07B: cmp     esi, edi
 0x4CB07D: mov     [esp+1Ch+var_14], edi
 0x4CB081: jz      loc_4CB2A4
-0x4CB087: mov     eax, [esp+1Ch+arg_4]
+0x4CB087: mov     eax, [esp+1Ch+space]
 0x4CB08B: cmp     eax, edi
 0x4CB08D: jz      loc_4CB2A4
-0x4CB093: cmp     [esp+1Ch+arg_8], edi
+0x4CB093: cmp     [esp+1Ch+existingTeleportDoorOut], edi
 0x4CB097: jz      loc_4CB2A4
 0x4CB09D: cmp     esi, eax
 0x4CB09F: jz      loc_4CB2A4
@@ -56,7 +56,7 @@
 0x4CB118: mov     [esp+24h+a2], eax
 0x4CB11C: mov     eax, [esp+24h+a2]
 0x4CB120: push    eax; a2
-0x4CB121: mov     ecx, offset stru_B35C80; this
+0x4CB121: mov     ecx, offset unk_B35C80; this
 0x4CB126: call    sub_496EA0
 0x4CB12B: test    ebp, ebp
 0x4CB12D: jz      loc_4CB224
@@ -97,18 +97,18 @@
 0x4CB1A8: add     esp, 14h
 0x4CB1AB: test    edi, edi
 0x4CB1AD: jz      short loc_4CB215
-0x4CB1AF: mov     ecx, edi
-0x4CB1B1: call    sub_4B78E0
+0x4CB1AF: mov     ecx, edi; this
+0x4CB1B1: call    TESObjectDOOR_HasRandomTeleportSpaces; Verified mechanics: returns true iff either pointer in the 8-byte TESObjectDOOR.randomTeleport BSSimpleList head is nonzero. Probable domain meaning: the door has at least one random-teleport destination space, supported by the membership and destination-selection callers.
 0x4CB1B6: test    al, al
 0x4CB1B8: jz      short loc_4CB215
-0x4CB1BA: mov     eax, [esp+24h+arg_4]
-0x4CB1BE: push    eax
-0x4CB1BF: mov     ecx, edi
-0x4CB1C1: call    sub_4B80A0
+0x4CB1BA: mov     eax, [esp+24h+space]
+0x4CB1BE: push    eax; space
+0x4CB1BF: mov     ecx, edi; this
+0x4CB1C1: call    TESObjectDOOR_ContainsRandomTeleportSpace; Verified mechanics: rejects null/unsupported candidate spaces, then returns true only when the TESForm* is present in TESObjectDOOR.randomTeleport. Probable domain meaning: this list records spaces in which the door can be selected as a random teleport destination; ExtraRandomTeleportMarker.teleportRef is a separate per-reference marker pointer.
 0x4CB1C6: test    al, al
 0x4CB1C8: jz      short loc_4CB215
 0x4CB1CA: mov     ecx, esi; this
-0x4CB1CC: call    GetTeleportExtraData
+0x4CB1CC: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x4CB1D1: test    eax, eax
 0x4CB1D3: jnz     short loc_4CB1E6
 0x4CB1D5: push    esi
@@ -116,7 +116,7 @@
 0x4CB1DA: call    BSSimpleList_PushFront
 0x4CB1DF: add     [esp+24h+var_10], 1
 0x4CB1E4: jmp     short loc_4CB215
-0x4CB1E6: mov     ecx, [esp+24h+arg_8]
+0x4CB1E6: mov     ecx, [esp+24h+existingTeleportDoorOut]
 0x4CB1EA: cmp     dword ptr [ecx], 0
 0x4CB1ED: jnz     short loc_4CB215
 0x4CB1EF: mov     ecx, [esp+24h+var_C]
@@ -131,7 +131,7 @@
 0x4CB206: call    sub_4EF150
 0x4CB20B: test    al, al
 0x4CB20D: jz      short loc_4CB215
-0x4CB20F: mov     edx, [esp+24h+arg_8]
+0x4CB20F: mov     edx, [esp+24h+existingTeleportDoorOut]
 0x4CB213: mov     [edx], esi
 0x4CB215: mov     ebp, [ebp+4]
 0x4CB218: test    ebp, ebp
@@ -139,7 +139,7 @@
 0x4CB21E: jnz     loc_4CB133
 0x4CB224: mov     eax, [esp+24h+a2]
 0x4CB228: push    eax; a2
-0x4CB229: mov     ecx, offset stru_B35C80; this
+0x4CB229: mov     ecx, offset unk_B35C80; this
 0x4CB22E: call    sub_496F50
 0x4CB233: mov     esi, [esp+24h+var_10]
 0x4CB237: test    esi, esi
@@ -151,7 +151,7 @@
 0x4CB246: test    al, al
 0x4CB248: jnz     short loc_4CB2A4
 0x4CB24A: push    esi
-0x4CB24B: call    Rand3
+0x4CB24B: call    Game_RandomIntBelow; Engine RNG upper-bound helper: returns max*rand()/0x7FFF after lazy time seed.
 0x4CB250: add     esp, 4
 0x4CB253: xor     esi, esi
 0x4CB255: lea     ecx, [esp+1Ch+var_8]
@@ -168,7 +168,7 @@
 0x4CB274: test    ecx, ecx
 0x4CB276: jnz     short loc_4CB260
 0x4CB278: lea     ecx, [esp+1Ch+var_8]
-0x4CB27C: call    BSSimpleList_Clear
+0x4CB27C: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x4CB281: mov     eax, [esp+1Ch+var_14]
 0x4CB285: pop     edi
 0x4CB286: pop     esi
@@ -177,7 +177,7 @@
 0x4CB28B: mov     ecx, [ecx]
 0x4CB28D: mov     [esp+1Ch+var_14], ecx
 0x4CB291: lea     ecx, [esp+1Ch+var_8]
-0x4CB295: call    BSSimpleList_Clear
+0x4CB295: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x4CB29A: mov     eax, [esp+1Ch+var_14]
 0x4CB29E: pop     edi
 0x4CB29F: pop     esi

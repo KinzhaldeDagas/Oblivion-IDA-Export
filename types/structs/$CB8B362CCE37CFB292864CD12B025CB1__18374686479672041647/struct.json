@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "$CB8B362CCE37CFB292864CD12B025CB1",
+  "definition": "union $CB8B362CCE37CFB292864CD12B025CB1\n{\nHBITMAP hbmHeader;\nLPCSTR pszbmHeader;\n}\n",
   "id": 18374686479672041647,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hbmHeader",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HBITMAP"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pszbmHeader",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "LPCSTR"
     }
   ],
   "name": "$CB8B362CCE37CFB292864CD12B025CB1",
+  "ordinal": 6407,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 4
 }

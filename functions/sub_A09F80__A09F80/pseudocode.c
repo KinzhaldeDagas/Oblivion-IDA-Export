@@ -1,4 +1,4 @@
-BSStringT *sub_A09F80()
+NiRTTI *sub_A09F80()
 {
-  return sub_70E220((BSStringT *)dword_B3FD34, "NiSourceCubeMap", (int)dword_B3F95C);
+  return NiRTTI_Constructor(&stru_B3FD34, "NiSourceCubeMap", &stru_B3F95C); /*0xa09f94*/
 }

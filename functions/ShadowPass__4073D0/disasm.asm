@@ -1,6 +1,6 @@
-0x4073D0: sub     esp, 4Ch
-0x4073D3: cmp     ShaderPackage, 3
-0x4073DA: mov     cl, byte_B333B8
+0x4073D0: sub     esp, 4Ch; Strict retail shadow lifecycle: builds the engine active list, admits player/process actors within the native map budget, partitions lights, renders maps/receivers, and performs native cleanup. No TESObjectSTAT cell enumeration occurs here.
+0x4073D3: cmp     dword ptr OB_RendererGlobalState_010201A0.shaderPackageVersion_le, 3; First ShadowPass readiness condition: BSSM shader package version must be >= 3.
+0x4073DA: mov     cl, byte ptr unk_B333B8
 0x4073E0: push    ebx
 0x4073E1: push    ebp
 0x4073E2: push    esi
@@ -8,113 +8,113 @@
 0x4073E4: mov     [esp+5Ch+var_48], 0
 0x4073EC: mov     ebx, 10h
 0x4073F1: jl      short loc_407430
-0x4073F3: test    byte ptr dword_B42F40, bl
+0x4073F3: test    OB_RendererGlobalState_010201A0.pad_00D+9Ah, bl; Second ShadowPass readiness condition: BSShaderFeatureMask bit 0x10 must be set.
 0x4073F9: mov     eax, 0
 0x4073FE: setnle  al
 0x407401: test    al, al
 0x407403: jz      short loc_407430
 0x407405: test    cl, cl
 0x407407: jz      short loc_407430
-0x407409: and     dword_B42F40, 0FFFFFFEFh
+0x407409: and     dword ptr OB_RendererGlobalState_010201A0.pad_00D+9Ah, 0FFFFFFEFh
 0x407410: push    0
-0x407412: mov     byte_B333F6, al
+0x407412: mov     g_bShadowMapDisableLatched, al
 0x407417: call    GetShadowSceneNode
 0x40741C: add     esp, 4
 0x40741F: mov     ecx, eax
-0x407421: call    sub_7C5EF0
-0x407426: mov     eax, g_Renderer
+0x407421: call    ShadowSceneNode_DiscardAllActiveShadowMaps; Discard/release every active light map +0x114 and clear the texture manager's current shadow-map slot.
+0x407426: mov     eax, dword ptr renderer
 0x40742B: push    0
 0x40742D: push    eax
 0x40742E: jmp     short loc_407467
-0x407430: cmp     byte_B333F6, 0
+0x407430: cmp     g_bShadowMapDisableLatched, 0
 0x407437: jz      short loc_407472
 0x407439: test    cl, cl
 0x40743B: jnz     short loc_407472
-0x40743D: or      dword_B42F40, ebx
-0x407443: mov     eax, dword_B06F04
-0x407448: mov     byte_B333F6, cl
-0x40744E: mov     ecx, TES
+0x40743D: or      dword ptr OB_RendererGlobalState_010201A0.pad_00D+9Ah, ebx
+0x407443: mov     eax, g_iActorShadowCountInteriorSetting
+0x407448: mov     g_bShadowMapDisableLatched, cl
+0x40744E: mov     ecx, ds:0B333A0h
 0x407454: cmp     dword ptr [ecx+34h], 0
 0x407458: jnz     short loc_40745F
-0x40745A: mov     eax, dword_B06EFC
-0x40745F: mov     edx, g_Renderer
-0x407465: push    eax
-0x407466: push    edx
-0x407467: mov     ecx, g_textureManager
-0x40746D: call    BSTextureManager_ReserveShadowMaps
-0x407472: call    InitBSShaderAccumulator
-0x407477: cmp     byte_B42CDB, 0
+0x40745A: mov     eax, g_iActorShadowCountExteriorSetting
+0x40745F: mov     edx, dword ptr renderer
+0x407465: push    eax; desiredCount
+0x407466: push    edx; renderer
+0x407467: mov     ecx, dword ptr OB_RendererGlobalState_010201A0.pad_0B3+4; this
+0x40746D: call    BSTextureManager__ReserveFrustumShadowTextures; Oblivion frustum-shadow pool reservation. Creates default render target type 0x17, attaches the shared shadow depth-stencil, and adds each texture to the unused shadowMaps list.
+0x407472: call    BSShaderAccumulator_GetOrCreateGlobal
+0x407477: cmp     byte ptr unk_B42CDB, 0; Shared accumulator suppression gate: nonzero B42CDB exits the complete native ShadowPass before map budget selection or caster admission.
 0x40747E: jnz     loc_407A72
-0x407484: cmp     ShaderPackage, 3
+0x407484: cmp     dword ptr OB_RendererGlobalState_010201A0.shaderPackageVersion_le, 3; Complete-pass shader-package gate: values below 3 exit before any native shadow admission/presentation.
 0x40748B: jl      loc_407A72
-0x407491: test    byte ptr dword_B42F40, bl
+0x407491: test    OB_RendererGlobalState_010201A0.pad_00D+9Ah, bl; Complete-pass feature gate: a clear shadow-map bit 0x10 exits before any native shadow admission/presentation.
 0x407497: mov     eax, 0
 0x40749C: setnle  al
 0x40749F: test    al, al
 0x4074A1: jz      loc_407A72
-0x4074A7: mov     ecx, offset ActorProcessManager_ptr
-0x4074AC: call    sub_6747C0
+0x4074A7: mov     ecx, (offset qword_B3BB2C+1D4h)
+0x4074AC: call    ProcessLists__TrimShadowCandidateListToLimit; MEF v56 ShadowPass trim CALL returns exact embedded head. Dense unique shape is verified using temporary process-heap pointer set; current chain is re-traversed after allocation. Prefix retained and suffix detached before freeing nodes; borrowed actors not destroyed. Unsupported/aux OOM delegates unchanged6747C0.
 0x4074B1: xor     edi, edi
 0x4074B3: push    edi
-0x4074B4: mov     ebp, eax
+0x4074B4: mov     ebp, eax; Trim the ProcessLists shadow candidate list to the native candidate cap; the returned BSSimpleList is then consumed in order until the interior/exterior map budget is exhausted.
 0x4074B6: call    GetShadowSceneNode
 0x4074BB: mov     ebx, eax
 0x4074BD: add     esp, 4
 0x4074C0: mov     ecx, ebx
 0x4074C2: mov     [esp+5Ch+var_3C], ebx
-0x4074C6: call    sub_7C5BE0
-0x4074CB: mov     eax, TES
-0x4074D0: cmp     [eax+34h], edi
-0x4074D3: mov     esi, dword_B06F04
+0x4074C6: call    ShadowSceneNode_DiscardActiveMapsAndMarkSourcesCulled; ShadowPass frame cleanup: releases stale active-light shadow-map/receiver presentation state before admission.
+0x4074CB: mov     eax, ds:0B333A0h
+0x4074D0: cmp     [eax+34h], edi; Read current cell/world mode once from [0x00B333A0]+0x34 to select the exterior or interior actor-shadow count setting.
+0x4074D3: mov     esi, g_iActorShadowCountInteriorSetting; Native ShadowPass selects iActorShadowCountInt (B06F04) for interior cells; exact map budget.
 0x4074D9: jnz     short loc_4074E1
-0x4074DB: mov     esi, dword_B06EFC
-0x4074E1: mov     ecx, g_Renderer
-0x4074E7: push    esi
-0x4074E8: push    ecx
-0x4074E9: mov     ecx, g_textureManager
-0x4074EF: mov     [esp+64h+var_44], esi
-0x4074F3: call    BSTextureManager_ReserveShadowMaps
-0x4074F8: cmp     esi, edi
+0x4074DB: mov     esi, g_iActorShadowCountExteriorSetting; Native ShadowPass selects iActorShadowCountExt (B06EFC) for exterior cells; exact map budget.
+0x4074E1: mov     ecx, dword ptr renderer
+0x4074E7: push    esi; desiredCount
+0x4074E8: push    ecx; renderer
+0x4074E9: mov     ecx, dword ptr OB_RendererGlobalState_010201A0.pad_0B3+4; this
+0x4074EF: mov     [esp+64h+var_44], esi; Latch the selected exterior/interior shadow-map count in pass-local state.
+0x4074F3: call    BSTextureManager__ReserveFrustumShadowTextures; Reserve exactly the setting-derived shadow-map count through BSTextureManager_ReserveShadowMaps.
+0x4074F8: cmp     esi, edi; The selected interior/exterior actor-shadow count is the exact map/admission budget; zero takes the active-list reset path.
 0x4074FA: jnz     short loc_407508
 0x4074FC: mov     ecx, ebx
-0x4074FE: call    sub_7C7880
+0x4074FE: call    ShadowSceneNode_ResetActiveLightList; Count-zero terminal path: reset the active ShadowSceneLight list and exit before player, actor, receiver, or map rendering work.
 0x407503: jmp     loc_407A72
-0x407508: mov     ecx, TESDataHandler_g_PlayerRef
+0x407508: mov     ecx, dword ptr reference
 0x40750E: cmp     byte ptr [ecx+588h], 0
 0x407515: mov     [esp+5Ch+var_38], edi
 0x407519: jnz     short loc_40752E
 0x40751B: call    sub_65D650
 0x407520: test    al, al
 0x407522: jz      loc_4075CE
-0x407528: mov     ecx, TESDataHandler_g_PlayerRef
+0x407528: mov     ecx, dword ptr reference
 0x40752E: mov     edx, [ecx]
 0x407530: mov     eax, [edx+380h]
 0x407536: call    eax
 0x407538: test    eax, eax
 0x40753A: jz      short loc_40757B
-0x40753C: mov     ecx, TESDataHandler_g_PlayerRef
+0x40753C: mov     ecx, dword ptr reference
 0x407542: mov     edx, [ecx]
 0x407544: mov     eax, [edx+18Ch]
 0x40754A: call    eax
 0x40754C: cmp     eax, 4
 0x40754F: jz      short loc_4075CE
-0x407551: mov     ecx, TESDataHandler_g_PlayerRef
+0x407551: mov     ecx, dword ptr reference
 0x407557: mov     edx, [ecx]
 0x407559: mov     eax, [edx+18Ch]
 0x40755F: call    eax
 0x407561: cmp     eax, 3
 0x407564: jz      short loc_4075CE
-0x407566: mov     ecx, TESDataHandler_g_PlayerRef
+0x407566: mov     ecx, dword ptr reference
 0x40756C: mov     edx, [ecx]
 0x40756E: mov     eax, [edx+18Ch]
 0x407574: call    eax
 0x407576: cmp     eax, 5
 0x407579: jz      short loc_4075CE
-0x40757B: mov     ecx, TESDataHandler_g_PlayerRef; this
+0x40757B: mov     ecx, dword ptr reference; this
 0x407581: call    Actor_GetRefractionAmount
 0x407586: test    al, al
 0x407588: jnz     short loc_4075CE
-0x40758A: mov     ecx, TESDataHandler_g_PlayerRef
+0x40758A: mov     ecx, dword ptr reference
 0x407590: mov     edx, [ecx]
 0x407592: mov     eax, [edx+284h]
 0x407598: push    2Fh ; '/'
@@ -125,19 +125,19 @@
 0x4075AA: fnstsw  ax
 0x4075AC: test    ah, 44h
 0x4075AF: jp      short loc_4075CE
-0x4075B1: mov     ecx, TESDataHandler_g_PlayerRef
-0x4075B7: push    edi
-0x4075B8: call    PlayerCharacter_GetPlayerNode
+0x4075B1: mov     ecx, dword ptr reference; this
+0x4075B7: push    edi; firstPerson
+0x4075B8: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x4075BD: push    eax
 0x4075BE: mov     ecx, ebx
-0x4075C0: call    ShadowSceneNodeAddShadowCaster
+0x4075C0: call    ShadowSceneNodeAddShadowCaster; Retail AddShadowCaster call for the player NiNode, subject to native pass state and remaining budget.
 0x4075C5: mov     [esp+5Ch+var_38], eax
 0x4075C9: mov     edi, 1
 0x4075CE: mov     esi, [ebp+0]
 0x4075D1: test    esi, esi
 0x4075D3: jz      loc_40767D
 0x4075D9: lea     esp, [esp+0]
-0x4075E0: cmp     edi, [esp+5Ch+var_44]
+0x4075E0: cmp     edi, [esp+5Ch+var_44]; Native actor/player caster admission stops when admitted count reaches the selected shadow-map budget.
 0x4075E4: jge     loc_40767D
 0x4075EA: mov     edx, [esi]
 0x4075EC: mov     eax, [edx+154h]
@@ -145,8 +145,8 @@
 0x4075F4: call    eax
 0x4075F6: test    eax, eax
 0x4075F8: jz      short loc_40766B
-0x4075FA: mov     ecx, esi
-0x4075FC: call    sub_5EA5E0
+0x4075FA: mov     ecx, esi; this
+0x4075FC: call    Actor__PassesBaseShadowEligibility; Apply Oblivion's base actor shadow eligibility gate (process-derived state plus ExtraGhost rejection) before the separate sitting, refraction, invisibility, and budget gates.
 0x407601: test    al, al
 0x407603: jz      short loc_40766B
 0x407605: mov     edx, [esi]
@@ -182,7 +182,7 @@
 0x40765E: call    eax
 0x407660: push    eax
 0x407661: mov     ecx, ebx
-0x407663: call    ShadowSceneNodeAddShadowCaster
+0x407663: call    ShadowSceneNodeAddShadowCaster; Retail AddShadowCaster call for process-list Actor NiNodes, subject to remaining native budget.
 0x407668: add     edi, 1
 0x40766B: mov     ebp, [ebp+4]
 0x40766E: test    ebp, ebp
@@ -193,37 +193,37 @@
 0x40767D: mov     ecx, [esp+5Ch+var_38]
 0x407681: push    ecx
 0x407682: mov     ecx, ebx
-0x407684: call    sub_7C6DE0
-0x407689: mov     ecx, TESDataHandler_g_PlayerRef
-0x40768F: push    1
-0x407691: call    PlayerCharacter_GetPlayerNode
+0x407684: call    ShadowSceneNode_SeedAndPartitionActiveLights; Seed/partition active lights after native player/process-actor admission. No retail per-reference interior/static enumerator occurs in this interval.
+0x407689: mov     ecx, dword ptr reference; this
+0x40768F: push    1; firstPerson
+0x407691: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x407696: test    eax, eax
 0x407698: mov     [esp+5Ch+var_38], eax
 0x40769C: jz      loc_407A72
-0x4076A2: mov     eax, g_worldScenegraph
+0x4076A2: mov     eax, g_WorldSceneReceiverRoot; Verified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.
 0x4076A7: mov     ecx, [eax+0E4h]
 0x4076AD: mov     edx, [eax+0DCh]
 0x4076B3: mov     [ecx+0Ch], edx
-0x4076B6: mov     al, byte ptr dword_B35C00
+0x4076B6: mov     al, byte ptr unk_B35C00
 0x4076BB: mov     esi, 1
-0x4076C0: push    esi
-0x4076C1: push    0
+0x4076C0: push    esi; activeExteriorCellsOnly
+0x4076C1: push    0; show
 0x4076C3: mov     [esp+64h+var_2C], ecx
-0x4076C7: mov     ecx, TES
+0x4076C7: mov     ecx, ds:0B333A0h; this
 0x4076CD: and     al, 1
-0x4076CF: push    0
+0x4076CF: push    0; nodeCategory
 0x4076D1: mov     [esp+68h+var_4C], al
-0x4076D5: call    sub_442A30
-0x4076DA: mov     eax, dword_B35C00
-0x4076DF: mov     ecx, TES
-0x4076E5: push    esi
+0x4076D5: call    TES__ShowCellNode; Temporarily hide loaded Actor cell nodes during shadow-light culling/receiver preparation; prior mask state is restored at 0x4079E2.
+0x4076DA: mov     eax, dword ptr unk_B35C00
+0x4076DF: mov     ecx, ds:0B333A0h; this
+0x4076E5: push    esi; activeExteriorCellsOnly
 0x4076E6: shr     eax, 3
-0x4076E9: push    0
+0x4076E9: push    0; show
 0x4076EB: and     al, 1
-0x4076ED: push    3
+0x4076ED: push    3; nodeCategory
 0x4076EF: mov     [esp+68h+var_4B], al
-0x4076F3: call    sub_442A30
-0x4076F8: mov     eax, TES
+0x4076F3: call    TES__ShowCellNode; Temporarily hide loaded Water Quad cell nodes during shadow-light culling/receiver preparation; prior mask state is restored at 0x4079FA.
+0x4076F8: mov     eax, ds:0B333A0h
 0x4076FD: mov     ecx, [eax+5Ch]
 0x407700: mov     eax, [ecx+4]
 0x407703: mov     cl, [eax+18h]
@@ -235,7 +235,7 @@
 0x407718: or      [ecx+18h], si
 0x40771C: and     al, 1
 0x40771E: mov     [esp+5Ch+var_49], al
-0x407722: mov     eax, dword_B36094
+0x407722: mov     eax, dword ptr unk_B36094
 0x407727: test    eax, eax
 0x407729: mov     [esp+5Ch+var_14], eax
 0x40772D: mov     byte_B0727C, 0
@@ -248,7 +248,7 @@
 0x40774C: jnz     short loc_407752
 0x40774E: or      [eax+18h], si
 0x407752: mov     ecx, [esp+5Ch+var_3C]
-0x407756: call    sub_7C5AB0
+0x407756: call    ShadowSceneNode_BeginActiveLightIteration; Begin native saved-next iteration over the prepared active ShadowSceneLight list.
 0x40775B: mov     esi, eax
 0x40775D: test    esi, esi
 0x40775F: mov     [esp+5Ch+var_40], 0
@@ -257,7 +257,7 @@
 0x407770: lea     eax, [esp+5Ch+var_28]
 0x407774: push    eax
 0x407775: mov     ecx, esi
-0x407777: call    sub_405AD0
+0x407777: call    ShadowSceneLight_GetLightRef
 0x40777C: mov     ebp, [eax]
 0x40777E: mov     eax, [esp+5Ch+var_28]
 0x407782: test    eax, eax
@@ -291,7 +291,7 @@
 0x4077D4: lea     ecx, [esp+5Ch+var_24]
 0x4077D8: push    ecx
 0x4077D9: mov     ecx, esi
-0x4077DB: call    sub_405AD0
+0x4077DB: call    ShadowSceneLight_GetLightRef
 0x4077E0: mov     edx, [eax]
 0x4077E2: or      [esp+5Ch+var_48], 1
 0x4077E7: test    byte ptr [edx+18h], 1
@@ -322,32 +322,32 @@
 0x407827: mov     ecx, [esi+130h]
 0x40782D: test    byte ptr [ecx+18h], 1
 0x407831: jz      short loc_407837
-0x407833: push    1
+0x407833: push    1; Transition branch passes mode 1 when the direct source is also culled.
 0x407835: jmp     short loc_407860
 0x407837: mov     edx, [esp+5Ch+var_40]
 0x40783B: cmp     edx, [esp+5Ch+var_44]
 0x40783F: jge     short loc_40785E
-0x407841: lea     eax, [esp+5Ch+var_20]
+0x407841: lea     eax, [esp+5Ch+slot]
 0x407845: push    eax
 0x407846: mov     ecx, esi
-0x407848: call    sub_405AD0
+0x407848: call    ShadowSceneLight_GetLightRef
 0x40784D: mov     eax, [eax]
 0x40784F: and     word ptr [eax+18h], 0FFFEh
-0x407855: lea     ecx, [esp+5Ch+var_20]; this
-0x407859: call    sub_7016A0
-0x40785E: push    0; float
+0x407855: lea     ecx, [esp+5Ch+slot]; slot
+0x407859: call    NiPointerSlot_Release
+0x40785E: push    0; Transition branch passes mode 0 after the resolved source clears the native budget/state gate.
 0x407860: fldz
 0x407862: push    ecx
 0x407863: mov     ecx, esi
 0x407865: fstp    [esp+64h+var_64]; float
-0x407868: call    sub_7D1ED0
+0x407868: call    ShadowSceneLight_UpdateTransitionState; ShadowPass updates this light's native transition target/timer through ShadowSceneLight_UpdateTransitionState.
 0x40786D: mov     ecx, [esp+5Ch+var_44]
 0x407871: cmp     [esp+5Ch+var_40], ecx
-0x407875: jge     short loc_4078A0
+0x407875: jge     short loc_4078A0; Before projector setup, ShadowPass requires both backing NiLight and exact caster-root AppCulled bits to be clear.
 0x407877: lea     edx, [esp+5Ch+var_34]
 0x40787B: push    edx
 0x40787C: mov     ecx, esi
-0x40787E: call    sub_405AD0
+0x40787E: call    ShadowSceneLight_GetLightRef
 0x407883: mov     eax, [eax]
 0x407885: or      [esp+5Ch+var_48], 2
 0x40788A: test    byte ptr [eax+18h], 1
@@ -376,7 +376,7 @@
 0x4078CC: push    1
 0x4078CE: mov     ecx, edi
 0x4078D0: call    edx
-0x4078D2: test    bl, bl
+0x4078D2: test    bl, bl; Pre-render predicate gate before projection, CullProcess, and receiver association.
 0x4078D4: jz      loc_407983
 0x4078DA: mov     eax, [esi+130h]
 0x4078E0: mov     ecx, [eax+20h]
@@ -391,48 +391,48 @@
 0x4078FA: push    0
 0x4078FC: mov     ecx, esi
 0x4078FE: mov     [eax+8], edi
-0x407901: call    ShadowLight_LightProjection?
+0x407901: call    ShadowSceneLight_UpdatePerSourceProjection; Sole direct ShadowPass call to ShadowSceneLight_UpdatePerSourceProjection; projection commits before culling and receiver reconciliation.
 0x407906: mov     ecx, [esp+5Ch+var_2C]
 0x40790A: push    ecx
 0x40790B: mov     ecx, esi
-0x40790D: call    ShadowSceneLight_CullProcess
-0x407912: cmp     word ptr [esi+118h], 0FFh
+0x40790D: call    ShadowSceneLight_CullProcess; Run ShadowSceneLight_CullProcess at its true entry 0x007D6390.
+0x407912: cmp     word ptr [esi+118h], 0FFh; Reject this light when committed cull status light+0x118 equals 0x00FF.
 0x40791B: jz      short loc_40796A
-0x40791D: fld     dword ptr [esi+0D8h]
+0x40791D: fld     dword ptr [esi+0D8h]; Reject this light when committed visibility/fade light+0xD8 is below 0.05.
 0x407923: fcomp   ds:dbl_A30068
 0x407929: fnstsw  ax
 0x40792B: test    ah, 1
 0x40792E: jnz     short loc_40796A
-0x407930: add     [esp+5Ch+var_40], 1
-0x407935: mov     ecx, esi
-0x407937: call    sub_7D5ED0
-0x40793C: mov     edx, g_worldScenegraph
+0x407930: add     [esp+5Ch+var_40], 1; Increment the native accepted-light count before receiver reconciliation.
+0x407935: mov     ecx, esi; self
+0x407937: call    ShadowSceneLight_BeginReceiverReconciliation; Begin receiver reconciliation by seeding/reusing the fence at +0x148 and cursor at +0x144.
+0x40793C: mov     edx, g_WorldSceneReceiverRoot; Verified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.
 0x407942: push    edx
 0x407943: mov     ecx, esi
-0x407945: call    ShadowSceneLight_AddToScene????
-0x40794A: cmp     byte_B06F0C, 0
-0x407951: jz      short loc_407961
+0x407945: call    ShadowSceneLight_AddToScene; Associate the native world scene receiver root through ShadowSceneLight_AddToScene.
+0x40794A: cmp     g_bShadowSourceAsReceiverSetting, 0
+0x407951: jz      short loc_407961; Test the native self-shadow/source-as-receiver setting.
 0x407953: mov     eax, [esi+130h]
 0x407959: push    eax
 0x40795A: mov     ecx, esi
-0x40795C: call    ShadowSceneLight_AddToScene????
-0x407961: mov     ecx, esi
-0x407963: call    sub_7D6A40
+0x40795C: call    ShadowSceneLight_AddToScene; When enabled, submit the exact caster root light+0x130 as an additional receiver root.
+0x407961: mov     ecx, esi; self
+0x407963: call    ShadowSceneLight_RemoveStaleReceivers; Finalize receiver reconciliation by removing the stale cursor tail.
 0x407968: jmp     short loc_4079BC
 0x40796A: lea     ecx, [esp+5Ch+var_1C]
 0x40796E: push    ecx
 0x40796F: mov     ecx, esi
-0x407971: call    sub_405AD0
+0x407971: call    ShadowSceneLight_GetLightRef
 0x407976: mov     eax, [eax]
-0x407978: or      word ptr [eax+18h], 1
+0x407978: or      word ptr [eax+18h], 1; Set source NiAVObject flags+0x18 bit0 on this consumed/culled path.
 0x40797D: mov     eax, [esp+5Ch+var_1C]
 0x407981: jmp     short loc_40799A
 0x407983: lea     ecx, [esp+5Ch+var_18]
 0x407987: push    ecx
 0x407988: mov     ecx, esi
-0x40798A: call    sub_405AD0
+0x40798A: call    ShadowSceneLight_GetLightRef
 0x40798F: mov     eax, [eax]
-0x407991: or      word ptr [eax+18h], 1
+0x407991: or      word ptr [eax+18h], 1; Set source NiAVObject flags+0x18 bit0 on this consumed/culled path.
 0x407996: mov     eax, [esp+5Ch+var_18]
 0x40799A: test    eax, eax
 0x40799C: jz      short loc_4079BC
@@ -450,26 +450,26 @@
 0x4079B8: mov     ecx, esi
 0x4079BA: call    eax
 0x4079BC: mov     ecx, [esp+5Ch+var_3C]
-0x4079C0: call    sub_7C5B50
+0x4079C0: call    ShadowSceneNode_NextActiveLight; Advance the native saved-next active-light iterator.
 0x4079C5: mov     esi, eax
 0x4079C7: test    esi, esi
 0x4079C9: jnz     loc_407770
 0x4079CF: cmp     [esp+5Ch+var_4C], 0
 0x4079D4: jnz     short loc_4079E7
-0x4079D6: mov     ecx, TES
-0x4079DC: push    1
-0x4079DE: push    1
-0x4079E0: push    0
-0x4079E2: call    sub_442A30
+0x4079D6: mov     ecx, ds:0B333A0h; this
+0x4079DC: push    1; activeExteriorCellsOnly
+0x4079DE: push    1; show
+0x4079E0: push    0; nodeCategory
+0x4079E2: call    TES__ShowCellNode; Oblivion TES cell-node visibility controller. Updates the six-bit node mask and applies AppCulled to loaded interior/exterior cell categories. Categories are identified by Oblivion's own console command as Actor, Marker, Land Quad, Water Quad, Static Quad, and Active Quad. ShadowPass temporarily hides Actor (0) and Water Quad (3), then restores their prior mask states. Fallout was consulted only afterward and corroborates the conventional TES::ShowCellNode name.
 0x4079E7: cmp     [esp+5Ch+var_4B], 0
 0x4079EC: jnz     short loc_4079FF
-0x4079EE: mov     ecx, TES
-0x4079F4: push    1
-0x4079F6: push    1
-0x4079F8: push    3
-0x4079FA: call    sub_442A30
+0x4079EE: mov     ecx, ds:0B333A0h; this
+0x4079F4: push    1; activeExteriorCellsOnly
+0x4079F6: push    1; show
+0x4079F8: push    3; nodeCategory
+0x4079FA: call    TES__ShowCellNode; Oblivion TES cell-node visibility controller. Updates the six-bit node mask and applies AppCulled to loaded interior/exterior cell categories. Categories are identified by Oblivion's own console command as Actor, Marker, Land Quad, Water Quad, Static Quad, and Active Quad. ShadowPass temporarily hides Actor (0) and Water Quad (3), then restores their prior mask states. Fallout was consulted only afterward and corroborates the conventional TES::ShowCellNode name.
 0x4079FF: cmp     [esp+5Ch+var_4A], 0
-0x407A04: mov     ecx, TES
+0x407A04: mov     ecx, ds:0B333A0h
 0x407A0A: mov     edx, [ecx+5Ch]
 0x407A0D: mov     eax, [edx+4]
 0x407A10: jz      short loc_407A19
@@ -483,15 +483,15 @@
 0x407A2B: push    eax
 0x407A2C: call    sub_404CD0
 0x407A31: push    3
-0x407A33: mov     byte_B0727C, 1
-0x407A3A: call    nullsub_returnTrue_0arg
+0x407A33: mov     byte_B0727C, 1; Restore native culling-process state byte 0x00B0727C to 1 immediately before active shadow-map rendering.
+0x407A3A: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x407A3F: mov     ecx, [esp+60h+var_2C]
 0x407A43: add     esp, 4
 0x407A46: push    ecx
 0x407A47: mov     ecx, [esp+60h+var_3C]
-0x407A4B: call    sub_7C6770
+0x407A4B: call    ShadowSceneNode_RenderActiveShadowLights_Mode5; Render the prepared active-light list only after projection, culling, and receiver reconciliation finish.
 0x407A50: push    2
-0x407A52: call    nullsub_returnTrue_0arg
+0x407A52: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x407A57: mov     eax, [esp+60h+var_38]
 0x407A5B: add     esp, 4
 0x407A5E: cmp     [esp+5Ch+var_49], 0
@@ -499,15 +499,15 @@
 0x407A65: or      word ptr [eax+18h], 1
 0x407A6A: jmp     short loc_407A72
 0x407A6C: and     word ptr [eax+18h], 0FFFEh
-0x407A72: cmp     bDynWinRelfections?, 0
+0x407A72: cmp     OB_RendererGlobalState_010201A0.pad_1DB+39h, 0
 0x407A79: jz      short loc_407AD0
-0x407A7B: call    InterfaceManager_IsMenuMode
+0x407A7B: call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.
 0x407A80: test    al, al
 0x407A82: jz      short loc_407AAC
 0x407A84: call    InterfaceManager__IsOpenedMenuDialogue
 0x407A89: test    al, al
 0x407A8B: jnz     short loc_407AAC
-0x407A8D: mov     ecx, dword_B3A6B0
+0x407A8D: mov     ecx, dword ptr unk_B3A6B0
 0x407A93: push    2
 0x407A95: call    sub_572E30
 0x407A9A: test    al, al
@@ -517,13 +517,13 @@
 0x407AAA: jz      short loc_407AD0
 0x407AAC: fld     flt_B06530
 0x407AB2: push    ecx
-0x407AB3: fmul    flt_B33E9C
+0x407AB3: fmul    dword ptr ds:0B33E9Ch
 0x407AB9: fstp    [esp+60h+var_14]
 0x407ABD: fld     [esp+60h+var_14]
-0x407AC1: fstp    [esp+60h+var_60]; float
+0x407AC1: fstp    [esp+60h+deltaTime]; deltaTime
 0x407AC4: call    Sky_CreateOrGetGlobalObject
-0x407AC9: mov     ecx, eax
-0x407ACB: call    sub_543A00
+0x407AC9: mov     ecx, eax; this
+0x407ACB: call    Sky__RenderReflectionCubeMapIfNeeded; Throttled Oblivion sky reflection-cube refresh, called only from ShadowPass. For interiors it temporarily forces sky mode 2, refreshes colors/fog, updates atmosphere/clouds, hides moons, substitutes the sky vector, renders the sky root through ShadowSceneNode mode 3, then restores every altered state.
 0x407AD0: pop     edi
 0x407AD1: pop     esi
 0x407AD2: pop     ebp

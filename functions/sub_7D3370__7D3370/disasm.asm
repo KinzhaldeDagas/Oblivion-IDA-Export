@@ -1,4 +1,4 @@
-0x7D3370: push    ebx
+0x7D3370: push    ebx; Set per-source projected-light mode at +0xF4. A mode change may discard/release shadow map +0x114; this selector is not actor-only.
 0x7D3371: mov     bl, [esp+4+arg_0]
 0x7D3375: push    esi
 0x7D3376: mov     esi, ecx
@@ -18,8 +18,8 @@
 0x7D33A9: jz      short loc_7D33F4
 0x7D33AB: mov     ecx, ds:0B42F50h; this
 0x7D33B1: push    edi
-0x7D33B2: push    eax; a2
-0x7D33B3: call    BSTextureManager_DiscardShadowMap
+0x7D33B2: push    eax; texture
+0x7D33B3: call    BSTextureManager__ReturnFrustumShadowTexture; Oblivion frustum-shadow pool return. Finds the texture in the used pool, appends it to the unused shadowMaps list, removes the used-list node, and balances strong references.
 0x7D33B8: mov     edi, [esi+114h]
 0x7D33BE: test    edi, edi
 0x7D33C0: jz      short loc_7D33E8

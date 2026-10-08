@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4B3210",
-    "line": "sub     esp, 108h",
+    "line": "sub     esp, 108h; Verified: releases model-loader usage for a bound object/reference. For scaled refs, removes the scale-specific key and may also remove the base key depending on load state.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x4B3225",
-    "line": "mov     ebx, [esp+10Ch+arg_0]",
+    "line": "mov     ebx, [esp+10Ch+reference]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -199,31 +199,31 @@
   },
   {
     "ea": "0x4B3275",
-    "line": "lea     eax, [esp+114h+var_108]",
+    "line": "lea     eax, [esp+114h+outPath]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4B3279",
-    "line": "push    eax",
+    "line": "push    eax; outPath",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B327A",
-    "line": "push    ebx",
+    "line": "push    ebx; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B327B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B327D",
-    "line": "call    sub_4B2B00",
+    "line": "call    TESBoundObject_BuildReferenceModelPath; Verified: chooses reference-specific model path if available, otherwise the form model path, then appends scale percent (GetScale()*100) to create the per-reference model-loader key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x4B3286",
-    "line": "lea     ecx, [esp+11Ch+var_108]",
+    "line": "lea     ecx, [esp+11Ch+outPath]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x4B329C",
-    "line": "lea     edx, [esp+114h+var_108]",
+    "line": "lea     edx, [esp+114h+outPath]",
     "mnemonic": "lea",
     "size": 4
   },

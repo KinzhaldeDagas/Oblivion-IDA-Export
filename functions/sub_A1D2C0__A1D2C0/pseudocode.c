@@ -1,4 +1,4 @@
 void __cdecl sub_A1D2C0()
 {
-  GameSetting_destr((int *)&fSecundaAngleFadeStart);
+  GameSetting_destr((int *)MEMORY[0xB365F8]); /*0xa1d2c5*/
 }

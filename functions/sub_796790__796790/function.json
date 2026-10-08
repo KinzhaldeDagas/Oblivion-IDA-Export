@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x796790",
+      "0x7967E8"
+    ]
+  ],
+  "chunks_sha256": "46db526016f36a853e136f7452a9800d4ccea2a481fa17dba3030b7fdc8c9b12",
+  "comment_regular": "OBLIVION AUTHORITY (2026-08-30): Checked erase-range for vector<vector<unsigned short*>>. Uses the 4-byte inner-vector assignment family, destroys vacated owners, and updates end.",
+  "comment_repeatable": "OBLIVION AUTHORITY (2026-08-30): Checked erase-range for vector<vector<unsigned short*>>. Uses the 4-byte inner-vector assignment family, destroys vacated owners, and updates end.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_796790",
+  "display_name": "OB_stVector_stVectorUShortPtr_EraseRange_010201A0",
   "end_ea": "0x7967E8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_796790",
+  "name": "OB_stVector_stVectorUShortPtr_EraseRange_010201A0",
   "segment": ".text",
   "sha256": "46db526016f36a853e136f7452a9800d4ccea2a481fa17dba3030b7fdc8c9b12",
   "size": 88,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x796790",
-  "type": "_DWORD *__thiscall(int *this, _DWORD *, int, int, int, int)",
+  "total_chunk_size": 88,
+  "type": "OB_stVector_stVectorUShortPtrIterator_010201A0 *__thiscall(OB_stVector_stVectorUShortPtr_010201A0 *this, OB_stVector_stVectorUShortPtrIterator_010201A0 *result, OB_stVector_stVectorUShortPtrIterator_010201A0 first, OB_stVector_stVectorUShortPtrIterator_010201A0 last)",
   "xrefs_from_count": 43,
   "xrefs_to_count": 3
 }

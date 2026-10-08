@@ -1,9 +1,9 @@
-0x6F1C40: mov     eax, [esp+arg_C]
+0x6F1C40: mov     eax, [esp+value]
 0x6F1C44: push    ebx
 0x6F1C45: push    esi
 0x6F1C46: mov     esi, ecx
 0x6F1C48: mov     ecx, [eax]
-0x6F1C4A: mov     [esp+8+arg_C], ecx
+0x6F1C4A: mov     [esp+8+value], ecx
 0x6F1C4E: mov     ecx, [esi+4]
 0x6F1C51: test    ecx, ecx
 0x6F1C53: push    edi
@@ -13,7 +13,7 @@
 0x6F1C5A: mov     edi, [esi+0Ch]
 0x6F1C5D: sub     edi, ecx
 0x6F1C5F: sar     edi, 2
-0x6F1C62: mov     ebx, [esp+0Ch+arg_8]
+0x6F1C62: mov     ebx, [esp+0Ch+count]
 0x6F1C66: test    ebx, ebx
 0x6F1C68: jz      loc_6F1DEF
 0x6F1C6E: test    ecx, ecx
@@ -67,30 +67,30 @@
 0x6F1CE1: sar     edi, 2
 0x6F1CE4: add     edi, ebx
 0x6F1CE6: push    0
-0x6F1CE8: push    edi; char *
-0x6F1CE9: call    sub_78FB60
+0x6F1CE8: push    edi; count
+0x6F1CE9: call    OB_stVector4_Allocate_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded allocator for vectors with 4-byte elements. Validates count*4 overflow, throws bad_alloc on overflow, and allocates through FormHeapAlloc; FindPairs uses it for vector<bool>'s uint32 backing words.
 0x6F1CEE: mov     ecx, [esi+4]
 0x6F1CF1: add     esp, 8
 0x6F1CF4: mov     ebp, eax
 0x6F1CF6: mov     eax, [esp+10h+Src]
-0x6F1CFA: push    ebp; Dst
-0x6F1CFB: push    eax; int
-0x6F1CFC: push    ecx; Src
+0x6F1CFA: push    ebp; destination
+0x6F1CFB: push    eax; last
+0x6F1CFC: push    ecx; first
 0x6F1CFD: mov     ecx, esi
-0x6F1CFF: call    sub_7A25C0
-0x6F1D04: lea     edx, [esp+10h+arg_C]
-0x6F1D08: push    edx
-0x6F1D09: push    ebx
-0x6F1D0A: push    eax
+0x6F1CFF: call    OB_stVector4_UninitializedCopyRange_010201A0
+0x6F1D04: lea     edx, [esp+10h+value]
+0x6F1D08: push    edx; value
+0x6F1D09: push    ebx; count
+0x6F1D0A: push    eax; destination
 0x6F1D0B: mov     ecx, esi
-0x6F1D0D: call    sub_790B60
+0x6F1D0D: call    OB_stVector4_UninitializedFillN_010201A0; Oblivion binary evidence: uninitialized fill_n for count four-byte slots, returning destination + count. Used by the folded vector insertion implementation.
 0x6F1D12: mov     ecx, [esp+10h+Src]
-0x6F1D16: push    eax; Dst
+0x6F1D16: push    eax; destination
 0x6F1D17: mov     eax, [esi+8]
-0x6F1D1A: push    eax; int
-0x6F1D1B: push    ecx; Src
+0x6F1D1A: push    eax; last
+0x6F1D1B: push    ecx; first
 0x6F1D1C: mov     ecx, esi
-0x6F1D1E: call    sub_7A25C0
+0x6F1D1E: call    OB_stVector4_UninitializedCopyRange_010201A0
 0x6F1D23: mov     eax, [esi+4]
 0x6F1D26: test    eax, eax
 0x6F1D28: jnz     short loc_6F1D2E
@@ -103,7 +103,7 @@
 0x6F1D38: test    eax, eax
 0x6F1D3A: jz      short loc_6F1D45
 0x6F1D3C: push    eax
-0x6F1D3D: call    FormHeapFree
+0x6F1D3D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F1D42: add     esp, 4
 0x6F1D45: lea     edx, [ebp+edi*4+0]
 0x6F1D49: lea     eax, [ebp+ebx*4+0]
@@ -122,58 +122,58 @@
 0x6F1D68: sar     ecx, 2
 0x6F1D6B: lea     eax, ds:0[ebx*4]
 0x6F1D72: cmp     ecx, ebx
-0x6F1D74: mov     [esp+10h+arg_8], eax
+0x6F1D74: mov     [esp+10h+count], eax
 0x6F1D78: mov     ecx, esi
 0x6F1D7A: jnb     short loc_6F1DC2
 0x6F1D7C: add     eax, edi
-0x6F1D7E: push    eax; Dst
-0x6F1D7F: push    ebp; int
-0x6F1D80: push    edi; Src
-0x6F1D81: call    sub_7A25C0
+0x6F1D7E: push    eax; destination
+0x6F1D7F: push    ebp; last
+0x6F1D80: push    edi; first
+0x6F1D81: call    OB_stVector4_UninitializedCopyRange_010201A0
 0x6F1D86: mov     eax, [esi+8]
 0x6F1D89: mov     ecx, eax
 0x6F1D8B: sub     ecx, edi
 0x6F1D8D: sar     ecx, 2
-0x6F1D90: lea     edx, [esp+10h+arg_C]
-0x6F1D94: push    edx
+0x6F1D90: lea     edx, [esp+10h+value]
+0x6F1D94: push    edx; value
 0x6F1D95: sub     ebx, ecx
-0x6F1D97: push    ebx
-0x6F1D98: push    eax
+0x6F1D97: push    ebx; count
+0x6F1D98: push    eax; destination
 0x6F1D99: mov     ecx, esi
-0x6F1D9B: call    sub_790B60
-0x6F1DA0: mov     eax, [esp+10h+arg_8]
+0x6F1D9B: call    OB_stVector4_UninitializedFillN_010201A0; Oblivion binary evidence: uninitialized fill_n for count four-byte slots, returning destination + count. Used by the folded vector insertion implementation.
+0x6F1DA0: mov     eax, [esp+10h+count]
 0x6F1DA4: add     [esi+8], eax
 0x6F1DA7: mov     esi, [esi+8]
-0x6F1DAA: lea     edx, [esp+10h+arg_C]
-0x6F1DAE: push    edx
+0x6F1DAA: lea     edx, [esp+10h+value]
+0x6F1DAE: push    edx; value
 0x6F1DAF: sub     esi, eax
-0x6F1DB1: push    esi
-0x6F1DB2: push    edi
-0x6F1DB3: call    sub_790490
+0x6F1DB1: push    esi; last
+0x6F1DB2: push    edi; first
+0x6F1DB3: call    OB_stVector4_CopyFillRange_010201A0; Oblivion binary evidence: initialized fill over [first,last), assigning the same four-byte value to each existing slot and returning last.
 0x6F1DB8: add     esp, 0Ch
 0x6F1DBB: pop     ebp
 0x6F1DBC: pop     edi
 0x6F1DBD: pop     esi
 0x6F1DBE: pop     ebx
 0x6F1DBF: retn    10h
-0x6F1DC2: push    ebp; Dst
+0x6F1DC2: push    ebp; destination
 0x6F1DC3: mov     ebx, ebp
 0x6F1DC5: sub     ebx, eax
-0x6F1DC7: push    ebp; int
-0x6F1DC8: push    ebx; Src
-0x6F1DC9: call    sub_7A25C0
-0x6F1DCE: push    ebp; int
-0x6F1DCF: push    ebx; int
-0x6F1DD0: push    edi; Src
+0x6F1DC7: push    ebp; last
+0x6F1DC8: push    ebx; first
+0x6F1DC9: call    OB_stVector4_UninitializedCopyRange_010201A0
+0x6F1DCE: push    ebp; destinationEnd
+0x6F1DCF: push    ebx; last
+0x6F1DD0: push    edi; first
 0x6F1DD1: mov     [esi+8], eax
-0x6F1DD4: call    sub_5254A0
-0x6F1DD9: mov     ecx, [esp+1Ch+arg_8]
-0x6F1DDD: lea     eax, [esp+1Ch+arg_C]
-0x6F1DE1: push    eax
+0x6F1DD4: call    OB_stVector4_CopyBackwardRange_010201A0
+0x6F1DD9: mov     ecx, [esp+1Ch+count]
+0x6F1DDD: lea     eax, [esp+1Ch+value]
+0x6F1DE1: push    eax; value
 0x6F1DE2: add     ecx, edi
-0x6F1DE4: push    ecx
-0x6F1DE5: push    edi
-0x6F1DE6: call    sub_790490
+0x6F1DE4: push    ecx; last
+0x6F1DE5: push    edi; first
+0x6F1DE6: call    OB_stVector4_CopyFillRange_010201A0; Oblivion binary evidence: initialized fill over [first,last), assigning the same four-byte value to each existing slot and returning last.
 0x6F1DEB: add     esp, 18h
 0x6F1DEE: pop     ebp
 0x6F1DEF: pop     edi

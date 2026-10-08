@@ -1,7 +1,7 @@
 0x9E3D20: push    offset aCharacters_m_3; "Characters\\_Male\\LowerBody.NIF"
 0x9E3D25: push    offset aSracemalelower; "sRaceMaleLowerBodyModel"
-0x9E3D2A: mov     ecx, offset dword_B36318
-0x9E3D2F: call    GameSetting_ConstrAndReg
+0x9E3D2A: mov     ecx, offset stru_B36318; self
+0x9E3D2F: call    GameSetting_ConstrAndReg; Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.
 0x9E3D34: push    offset sub_A1C2E0; void (__cdecl *)()
 0x9E3D39: call    _atexit
 0x9E3D3E: pop     ecx

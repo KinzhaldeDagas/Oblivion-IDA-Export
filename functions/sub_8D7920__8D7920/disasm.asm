@@ -56,7 +56,6 @@
 0x8D79E0: mov     [esi+88h], ecx
 0x8D79E6: jle     short loc_8D7A20
 0x8D79E8: jmp     short loc_8D79F0
-0x8D79EA: align 10h
 0x8D79F0: mov     eax, [esi+38h]
 0x8D79F3: mov     eax, [eax+ebx*4]
 0x8D79F6: mov     ecx, [eax+38h]

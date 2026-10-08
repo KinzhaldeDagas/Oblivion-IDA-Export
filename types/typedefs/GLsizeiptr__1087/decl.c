@@ -1,1 +1,1 @@
-GLsizeiptr
+typedef INT_PTR GLsizeiptr;

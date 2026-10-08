@@ -1,19 +1,32 @@
 {
-  "callees_count": 12,
-  "callers_count": 8,
-  "comment_regular": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
+  "callers_count": 12,
+  "chunks": [
+    [
+      "0x7260B0",
+      "0x72618F"
+    ]
+  ],
+  "chunks_sha256": "031f5fc19fd7de56e643643fa3d9bd5e738d3d5670c476b65f605521d694531e",
+  "comment_regular": "\n\n[2026-10-03 ABI correction] Verified thiscall ECX, four stack arguments (index, data, byte size, copy flag), AL boolean result, ret 0x10. Previous decompiler prototype incorrectly promoted EDI to an input argument. Leaf caller 0x7F1DB0 and Fallout SetDataBlock 0x82BF9350 corroborate roles.\n\n\n\n[2026-10-03 VERIFIED owned stream lifetime] copyData=false borrows raw bytes with no reference to the originating STSP/property. Geometry/additional-data can outlive a replaced shader property, so plugin now uses independent owned copies of all4 float4 streams. It first registers (data=NULL,size=N,copy=false), then fills same block with copy=true. Native allocator can returnNULL and memcpy would fault; registering the block first leaves it reachable for wrapper failure cleanup. Fixture executes actual native SetDataBlock and Free instructions with heap/array call adapters:30 checks pass,16 and65535vertices, source destruction, block/raw allocation failure, retry and native owned release.\nSpeedTreeOBSE v165 owned paired-frond stream fixture executes this native copy path at80 bytes/vertex for16 and65535 vertices, including injected allocator failure and source destruction. Native small-buffer flag remains vertexCount<64 (72611D), independent of payload byte count. Native live scene allocations remain UNVERIF",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7260B0",
+  "display_name": "OB_NiAdditionalGeometryData_SetDataBlock_010201A0",
   "end_ea": "0x72618F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7260B0",
+  "name": "OB_NiAdditionalGeometryData_SetDataBlock_010201A0",
   "segment": ".text",
   "sha256": "031f5fc19fd7de56e643643fa3d9bd5e738d3d5670c476b65f605521d694531e",
   "size": 223,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7260B0",
-  "type": "char __userpurge@<al>(int@<ecx>, int@<edi>, unsigned int, void *, _DWORD *Src, char)",
+  "total_chunk_size": 223,
+  "type": "bool __thiscall(void *this, unsigned int blockIndex, void *data, unsigned int byteCount, bool copyData)",
   "xrefs_from_count": 99,
   "xrefs_to_count": 12
 }

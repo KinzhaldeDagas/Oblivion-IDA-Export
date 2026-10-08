@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x52D309",
-    "line": "mov     [esp+1B0h+var_174], ecx",
+    "line": "mov     [esp+1B0h+outTexture], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -247,19 +247,19 @@
   },
   {
     "ea": "0x52D35E",
-    "line": "mov     [esp+1B0h+var_18C], ebx",
+    "line": "mov     [esp+1B0h+slot], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x52D362",
-    "line": "push    offset sub_43ACE0; a5",
+    "line": "push    offset FaceGenMatrix_Destruct; a5",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x52D367",
-    "line": "push    offset sub_43EB30; a4",
+    "line": "push    offset FaceGenMatrix_Construct; a4",
     "mnemonic": "push",
     "size": 5
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x52D437",
-    "line": "mov     edi, [esp+1B0h+var_174]",
+    "line": "mov     edi, [esp+1B0h+outTexture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -799,7 +799,7 @@
   },
   {
     "ea": "0x52D479",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -829,7 +829,7 @@
   },
   {
     "ea": "0x52D48D",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -841,7 +841,7 @@
   },
   {
     "ea": "0x52D495",
-    "line": "push    offset sub_43ACE0",
+    "line": "push    offset FaceGenMatrix_Destruct; Destroys a FaceGenMatrix by freeing the coefficient allocation at +0x0C, then clears begin/end/capacity-end.",
     "mnemonic": "push",
     "size": 5
   },
@@ -955,31 +955,31 @@
   },
   {
     "ea": "0x52D4D5",
-    "line": "push    ebx; char",
+    "line": "push    ebx; searchArchives",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52D4D6",
-    "line": "push    ebx; char",
+    "line": "push    ebx; allowMissing",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52D4D7",
-    "line": "push    esi; ArgList",
+    "line": "push    esi; path",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52D4D8",
-    "line": "lea     ecx, [esp+1BCh+var_174]",
+    "line": "lea     ecx, [esp+1BCh+outTexture]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x52D4DC",
-    "line": "push    ecx; int",
+    "line": "push    ecx; outTexture",
     "mnemonic": "push",
     "size": 1
   },
@@ -991,7 +991,7 @@
   },
   {
     "ea": "0x52D4E3",
-    "line": "call    sub_442890",
+    "line": "call    OB_TES_LoadOrFindSourceTexture_010201A0; TES texture cache/load helper: checks the global texture map, optionally verifies file existence via FileFinder, loads NiSourceTexture by filename, caches it, and returns a refcounted texture pointer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1027,7 +1027,7 @@
   },
   {
     "ea": "0x52D4FA",
-    "line": "mov     eax, [esp+1B0h+var_174]",
+    "line": "mov     eax, [esp+1B0h+outTexture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1153,7 +1153,7 @@
   },
   {
     "ea": "0x52D532",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1183,7 +1183,7 @@
   },
   {
     "ea": "0x52D546",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1195,7 +1195,7 @@
   },
   {
     "ea": "0x52D54E",
-    "line": "push    offset sub_43ACE0; void (__thiscall *)(void *)",
+    "line": "push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)",
     "mnemonic": "push",
     "size": 5
   },
@@ -1237,7 +1237,7 @@
   },
   {
     "ea": "0x52D569",
-    "line": "lea     ecx, [esp+1B0h+var_18C]; this",
+    "line": "lea     ecx, [esp+1B0h+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1249,13 +1249,13 @@
   },
   {
     "ea": "0x52D575",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x52D57A",
-    "line": "lea     ecx, [esp+1B0h+var_194]; this",
+    "line": "lea     ecx, [esp+1B0h+var_194]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1267,13 +1267,13 @@
   },
   {
     "ea": "0x52D585",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x52D58A",
-    "line": "lea     ecx, [esp+1B0h+var_190]; this",
+    "line": "lea     ecx, [esp+1B0h+var_190]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1285,7 +1285,7 @@
   },
   {
     "ea": "0x52D599",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -1531,7 +1531,7 @@
   },
   {
     "ea": "0x52D63B",
-    "line": "push    offset sub_43ACE0",
+    "line": "push    offset FaceGenMatrix_Destruct; Destroys a FaceGenMatrix by freeing the coefficient allocation at +0x0C, then clears begin/end/capacity-end.",
     "mnemonic": "push",
     "size": 5
   },
@@ -1807,7 +1807,7 @@
   },
   {
     "ea": "0x52D6BF",
-    "line": "mov     ecx, [esp+1B0h+var_17C]",
+    "line": "mov     ecx, [esp+1B0h+var_17C]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1819,13 +1819,13 @@
   },
   {
     "ea": "0x52D6C7",
-    "line": "push    edx",
+    "line": "push    edx; outAbsolute",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52D6C8",
-    "line": "call    sub_5221C0",
+    "line": "call    TESNPC_BuildAbsoluteFaceGenParameters; Builds absolute FaceGen parameters by combining race base with active NPC delta. CORRECTION: bank selection uses base actor value 0x45 (vampirism), zero -> +0x108, nonzero -> +0x168; earlier sex-selected description was incorrect. Null race copies manager default parameters.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1891,7 +1891,7 @@
   },
   {
     "ea": "0x52D6EA",
-    "line": "push    esi",
+    "line": "push    esi; maxBasisShapes",
     "mnemonic": "push",
     "size": 1
   },
@@ -1903,7 +1903,7 @@
   },
   {
     "ea": "0x52D6EF",
-    "line": "push    esi",
+    "line": "push    esi; outTexture",
     "mnemonic": "push",
     "size": 1
   },
@@ -1915,19 +1915,19 @@
   },
   {
     "ea": "0x52D6F4",
-    "line": "push    eax",
+    "line": "push    eax; parameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52D6F5",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x52D6F7",
-    "line": "call    sub_557E60",
+    "line": "call    BSFaceGenModel_GenerateMorphTexture; Generate a body-part EGT morph texture. Character creation deliberately requests only 5 or 10 bases here; other body paths use the 30-basis zero default.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2029,7 +2029,7 @@
   },
   {
     "ea": "0x52D73E",
-    "line": "push    offset sub_43ACE0; void (__thiscall *)(void *)",
+    "line": "push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)",
     "mnemonic": "push",
     "size": 5
   },
@@ -2071,7 +2071,7 @@
   },
   {
     "ea": "0x52D759",
-    "line": "lea     ecx, [esp+1B0h+var_18C]; this",
+    "line": "lea     ecx, [esp+1B0h+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2083,13 +2083,13 @@
   },
   {
     "ea": "0x52D765",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x52D76A",
-    "line": "lea     ecx, [esp+1B0h+var_194]; this",
+    "line": "lea     ecx, [esp+1B0h+var_194]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2101,13 +2101,13 @@
   },
   {
     "ea": "0x52D775",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x52D77A",
-    "line": "lea     ecx, [esp+1B0h+var_190]; this",
+    "line": "lea     ecx, [esp+1B0h+var_190]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2119,7 +2119,7 @@
   },
   {
     "ea": "0x52D789",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -2149,7 +2149,7 @@
   },
   {
     "ea": "0x52D797",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2179,7 +2179,7 @@
   },
   {
     "ea": "0x52D7AB",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2191,7 +2191,7 @@
   },
   {
     "ea": "0x52D7B3",
-    "line": "push    offset sub_43ACE0; void (__thiscall *)(void *)",
+    "line": "push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)",
     "mnemonic": "push",
     "size": 5
   },
@@ -2308,5 +2308,185 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B8810",
+    "line": "lea     ecx, [ebp-190h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B8816",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B881B",
+    "line": "lea     ecx, [ebp-194h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B8821",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8826",
+    "line": "lea     ecx, [ebp-18Ch]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B882C",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8831",
+    "line": "push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8836",
+    "line": "push    4; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9B8838",
+    "line": "push    18h; unsigned int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9B883A",
+    "line": "lea     eax, [ebp-170h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B8840",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B8841",
+    "line": "call    $LN21",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8846",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B8847",
+    "line": "lea     ecx, [ebp-184h]; void *",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B884D",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8852",
+    "line": "lea     ecx, [ebp-19Ch]; void *",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B8858",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B885D",
+    "line": "lea     ecx, [ebp-174h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B8863",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8868",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B886C",
+    "line": "lea     eax, [edx-1A0h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B8872",
+    "line": "mov     ecx, [edx-1A4h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B8878",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B887A",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B887F",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B8882",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B8885",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B8887",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B888C",
+    "line": "mov     eax, offset stru_AE2D40",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8891",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

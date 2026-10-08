@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 5,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x47DA70",
+      "0x47DACC"
+    ]
+  ],
+  "chunks_sha256": "1017d3e7321f7521319d9fa8f8580acd60d700ed1ad66d751d564ab2cd839a49",
+  "comment_regular": "CULLING audit 2026-09-27 (observed Oblivion behavior): Reads one 16-byte NiPlane, not a NiFrustumPlanes aggregate. Signed distance is dot(normal, bound.center) - constant, with float stores at 0x47DA88 and 0x47DA93. For finite valid bounds: 2=outside when distance <= -radius; 1=inside when distance >= radius; otherwise 0=crossing. Exact outside tangency rejects. ABI: bound in ECX, plane pointer on stack, RET 4. Keep the native x87 rounding/comparisons.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_47DA70",
+  "display_name": "NiBound_ClassifyAgainstPlane",
   "end_ea": "0x47DACC",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_47DA70",
+  "name": "NiBound_ClassifyAgainstPlane",
   "segment": ".text",
   "sha256": "1017d3e7321f7521319d9fa8f8580acd60d700ed1ad66d751d564ab2cd839a49",
   "size": 92,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x47DA70",
-  "type": "signed int __thiscall(NiBound *this, NiFrustumPlanes *a2)",
+  "total_chunk_size": 92,
+  "type": "int __thiscall(const NiBound *self, const NiPlane *plane)",
   "xrefs_from_count": 31,
   "xrefs_to_count": 5
 }

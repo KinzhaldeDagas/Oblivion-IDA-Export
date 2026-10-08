@@ -1,19 +1,32 @@
 {
-  "callees_count": 66,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 37,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x660910",
+      "0x660CB4"
+    ]
+  ],
+  "chunks_sha256": "cef20955bbade9c71bddda12f9590df665c83d9d2947f74a07e68901d17d8127",
+  "comment_regular": "PlayerCharacter vtable +0x2CC pickup transaction for a world reference. Handles activation/ownership, optional direct merge into currently equipped AMMO, world-reference cleanup, and quiver refresh.",
+  "comment_repeatable": "PlayerCharacter vtable +0x2CC pickup transaction for a world reference. Handles activation/ownership, optional direct merge into currently equipped AMMO, world-reference cleanup, and quiver refresh.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 4,
-  "display_name": "sub_660910",
+  "display_name": "PlayerCharacter_PickUpReference",
   "end_ea": "0x660CB4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_660910",
+  "name": "PlayerCharacter_PickUpReference",
   "segment": ".text",
   "sha256": "cef20955bbade9c71bddda12f9590df665c83d9d2947f74a07e68901d17d8127",
   "size": 932,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x660910",
-  "type": "void __userpurge(int@<ecx>, double@<st2>, double@<st1>, TESObjectREFR *, signed int, int)",
+  "total_chunk_size": 932,
+  "type": "void __thiscall(PlayerCharacter *this, TESObjectREFR *reference, int arg1, int arg2)",
   "xrefs_from_count": 383,
   "xrefs_to_count": 1
 }

@@ -1,21 +1,22 @@
-char __thiscall sub_529B30(_DWORD *this, char a2)
+// TESQuest::IsStageDone scans the quest's stage entries and matches the stored stage byte; on a match it returns that entry's completed byte, otherwise false.
+bool __thiscall TESQuest::IsStageDone(TESQuest *this, UInt8 stage)
 {
-  _DWORD *v2; // eax
-  int v3; // ecx
+  BSSimpleList_VoidPtr *p_stages; // eax
+  BSSimpleList_VoidPtr::NodeVoid *next; // ecx
 
-  v2 = this + 0x10;
-  if ( this != (_DWORD *)0xFFFFFFC0 )
+  p_stages = &this->stages; /*0x529b30*/
+  if ( this != (TESQuest *)0xFFFFFFC0 ) /*0x529b36*/
   {
-    do
+    do /*0x529b40*/
     {
-      v3 = v2[1];
-      if ( !v3 && !*v2 )
-        break;
-      if ( *(_BYTE *)*v2 == a2 )
-        return *(_BYTE *)(*v2 + 1);
-      v2 = (_DWORD *)v2[1];
+      next = p_stages->firstNode.next; /*0x529b40*/
+      if ( !next && !p_stages->firstNode.data ) /*0x529b47*/
+        break; /*0x529b47*/
+      if ( *(_BYTE *)p_stages->firstNode.data == stage ) /*0x529b4f*/
+        return *((_BYTE *)p_stages->firstNode.data + 1); /*0x529b5f*/
+      p_stages = (BSSimpleList_VoidPtr *)p_stages->firstNode.next; /*0x529b51*/
     }
-    while ( v3 );
+    while ( next ); /*0x529b40*/
   }
-  return 0;
+  return 0; /*0x529b59*/
 }

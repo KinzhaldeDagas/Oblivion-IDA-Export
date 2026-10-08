@@ -1,4 +1,4 @@
-0x7846D0: push    esi
+0x7846D0: push    esi; Oblivion-authoritative cache-map iterator preincrement. Descends to the leftmost node of a non-nil right subtree; otherwise climbs parents until leaving a right-child chain. Mutates the {owner,node} iterator in place.
 0x7846D1: mov     esi, ecx
 0x7846D3: cmp     dword ptr [esi], 0
 0x7846D6: jnz     short loc_7846DD

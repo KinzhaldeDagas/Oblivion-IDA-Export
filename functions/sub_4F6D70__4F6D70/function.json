@@ -1,19 +1,32 @@
 {
-  "callees_count": 17,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4F6D70",
+      "0x4F6E49"
+    ]
+  ],
+  "chunks_sha256": "30a945a9f7bbff42fe79a106067af26414657f20ace4b0790ab5926dd4acf141",
+  "comment_regular": "Shared GetInCell/GetInCellParam evaluator (553 and 4 vanilla core-root CTDAs, respectively). Param1 must be a Cell form. If param2 is a reference in Oblivion form-type range 0x31..0x33, test that reference; otherwise use the condition subject. Resolve its cell and compare editor-name strings case-insensitively over the requested Cell name length (a prefix comparison), not FormID pointer identity. GetInCellParam can run without a subject because it has an explicit ObjectReferenceID param2. Fallout analogue x4y6:0x823B6270 uses the same name comparison but recognizes reference type range 0x3A..0x40 or 0x69.",
+  "comment_repeatable": "Shared GetInCell/GetInCellParam evaluator (553 and 4 vanilla core-root CTDAs, respectively). Param1 must be a Cell form. If param2 is a reference in Oblivion form-type range 0x31..0x33, test that reference; otherwise use the condition subject. Resolve its cell and compare editor-name strings case-insensitively over the requested Cell name length (a prefix comparison), not FormID pointer identity. GetInCellParam can run without a subject because it has an explicit ObjectReferenceID param2. Fallout analogue x4y6:0x823B6270 uses the same name comparison but recognizes reference type range 0x3A..0x40 or 0x69.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_4F6D70",
+  "display_name": "GetInCell_Eval",
   "end_ea": "0x4F6E49",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4F6D70",
+  "name": "GetInCell_Eval",
   "segment": ".text",
   "sha256": "30a945a9f7bbff42fe79a106067af26414657f20ace4b0790ab5926dd4acf141",
   "size": 217,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4F6D70",
-  "type": "char __usercall@<al>(int@<ebx>, TESObjectREFR *, TESForm *, TESChildCELL *, double *)",
+  "total_chunk_size": 217,
+  "type": "char __usercall@<al>(int@<ebx>, TESObjectREFR *, TESForm *, TESObjectREFR *, double *)",
   "xrefs_from_count": 93,
-  "xrefs_to_count": 3
+  "xrefs_to_count": 2
 }

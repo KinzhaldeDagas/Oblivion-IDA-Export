@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6D0B10",
-    "line": "movzx   eax, [esp+arg_4]",
+    "line": "movzx   eax, [esp+index]; Refcount-aware replacement of interpolators[index]: releases the old NiInterpolator, stores the new pointer, and acquires it. Semantically void; prior EAX/LONG output was refcount/index residue.",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x6D0B19",
-    "line": "mov     ebx, [esp+4+arg_0]",
+    "line": "mov     ebx, [esp+4+interpolator]",
     "mnemonic": "mov",
     "size": 4
   },

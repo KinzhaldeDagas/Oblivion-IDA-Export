@@ -1,7 +1,7 @@
 0x9FA1E0: push    offset aMenusStatsS_10; "Menus\\Stats\\stat_pop_icon_encumbrance"...
 0x9FA1E5: push    offset aSderivedatt_10; "sDerivedAttributeIconEncumbrance"
-0x9FA1EA: mov     ecx, offset sDerivedAttributeIconEncumbrance
-0x9FA1EF: call    GameSetting_ConstrAndReg
+0x9FA1EA: mov     ecx, 0B3A314h; self
+0x9FA1EF: call    GameSetting_ConstrAndReg; Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.
 0x9FA1F4: push    offset sub_A23E60; void (__cdecl *)()
 0x9FA1F9: call    _atexit
 0x9FA1FE: pop     ecx

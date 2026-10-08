@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7F2210",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Branch shader-property stream builder. Emits position, normal, and 0x10-stride STSP streams from the +0xF0 STSPData ref; rejects shapes whose geometry vertex count exceeds STSP count.",
     "mnemonic": "push",
     "size": 2
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x7F2236",
-    "line": "mov     esi, [esp+20h+arg_0]",
+    "line": "mov     esi, [esp+20h+geometryData]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x7F2277",
-    "line": "mov     [esp+20h+arg_0], eax",
+    "line": "mov     [esp+20h+geometryData], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x7F22A3",
-    "line": "call    sub_7263B0",
+    "line": "call    OB_NiAdditionalGeometryData_SetDataBlockCount_010201A0",
     "mnemonic": "call",
     "size": 5
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x7F22B4",
-    "line": "push    0; char",
+    "line": "push    0; copyData",
     "mnemonic": "push",
     "size": 2
   },
@@ -307,85 +307,85 @@
   },
   {
     "ea": "0x7F22BA",
-    "line": "push    ebx; Src",
+    "line": "push    ebx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7F22BB",
-    "line": "push    ecx; char",
+    "line": "push    ecx; data",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7F22BC",
-    "line": "push    0; int",
+    "line": "push    0; blockIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F22BE",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7F22C0",
-    "line": "call    sub_7260B0",
+    "line": "call    OB_NiAdditionalGeometryData_SetDataBlock_010201A0; 2026-05-30 SpeedTreeOBSE: branch shader input stream 0 uses tangent-space owner +0xD4 field +0x0C as positions.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7F22C5",
-    "line": "push    0Ch",
+    "line": "push    0Ch; stride",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F22C7",
-    "line": "push    0Ch",
+    "line": "push    0Ch; elementSize",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F22C9",
-    "line": "push    edi",
+    "line": "push    edi; vertexCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7F22CA",
-    "line": "push    3",
+    "line": "push    3; type",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F22CC",
-    "line": "push    0",
+    "line": "push    0; blockOffset",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F22CE",
-    "line": "push    0",
+    "line": "push    0; blockIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F22D0",
-    "line": "push    0",
+    "line": "push    0; streamIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F22D2",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7F22D4",
-    "line": "call    sub_7262A0",
+    "line": "call    OB_NiAdditionalGeometryData_SetDataStream_010201A0",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,91 +403,91 @@
   },
   {
     "ea": "0x7F22E2",
-    "line": "push    0; char",
+    "line": "push    0; copyData",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F22E4",
-    "line": "push    ebx; Src",
+    "line": "push    ebx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7F22E5",
-    "line": "push    eax; char",
+    "line": "push    eax; data",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7F22E6",
-    "line": "push    1; int",
+    "line": "push    1; blockIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F22E8",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7F22EA",
-    "line": "call    sub_7260B0",
+    "line": "call    OB_NiAdditionalGeometryData_SetDataBlock_010201A0; 2026-05-30 SpeedTreeOBSE: branch shader input stream 1 uses tangent-space owner +0xD4 field +0x10 as normals; texture arrays are separate PPLighting state.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7F22EF",
-    "line": "push    0Ch",
+    "line": "push    0Ch; stride",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F22F1",
-    "line": "push    0Ch",
+    "line": "push    0Ch; elementSize",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F22F3",
-    "line": "push    edi",
+    "line": "push    edi; vertexCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7F22F4",
-    "line": "push    3",
+    "line": "push    3; type",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F22F6",
-    "line": "push    0",
+    "line": "push    0; blockOffset",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F22F8",
-    "line": "push    1",
+    "line": "push    1; blockIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F22FA",
-    "line": "push    1",
+    "line": "push    1; streamIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F22FC",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7F22FE",
-    "line": "call    sub_7262A0",
+    "line": "call    OB_NiAdditionalGeometryData_SetDataStream_010201A0",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,13 +517,13 @@
   },
   {
     "ea": "0x7F2311",
-    "line": "push    0; char",
+    "line": "push    0; copyData",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F2313",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
@@ -541,79 +541,79 @@
   },
   {
     "ea": "0x7F2318",
-    "line": "push    eax; char",
+    "line": "push    eax; data",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7F2319",
-    "line": "push    2; int",
+    "line": "push    2; blockIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F231B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7F231D",
-    "line": "call    sub_7260B0",
+    "line": "call    OB_NiAdditionalGeometryData_SetDataBlock_010201A0",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7F2322",
-    "line": "push    10h",
+    "line": "push    10h; stride",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F2324",
-    "line": "push    10h",
+    "line": "push    10h; elementSize",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F2326",
-    "line": "push    edi",
+    "line": "push    edi; vertexCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7F2327",
-    "line": "push    4",
+    "line": "push    4; type",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F2329",
-    "line": "push    0",
+    "line": "push    0; blockOffset",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F232B",
-    "line": "push    2",
+    "line": "push    2; blockIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F232D",
-    "line": "push    2",
+    "line": "push    2; streamIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F232F",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7F2331",
-    "line": "call    sub_7262A0",
+    "line": "call    OB_NiAdditionalGeometryData_SetDataStream_010201A0",
     "mnemonic": "call",
     "size": 5
   },
@@ -688,5 +688,77 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C6200",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C6203",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C6204",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C6209",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C620A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C620B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C620F",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C6212",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C6215",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C6217",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C621C",
+    "line": "mov     eax, offset stru_AEE7E8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C6221",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

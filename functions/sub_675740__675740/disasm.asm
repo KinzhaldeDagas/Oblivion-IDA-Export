@@ -22,9 +22,9 @@
 0x67576A: jmp     short loc_67576E
 0x67576C: push    3; a2
 0x67576E: mov     ecx, esi; this
-0x675770: call    sub_673A50
+0x675770: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x675775: mov     ecx, eax; this
-0x675777: call    sub_7616D0
+0x675777: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x67577C: mov     ebx, eax
 0x67577E: test    ebx, ebx
 0x675780: jz      loc_675842
@@ -39,8 +39,8 @@
 0x6757A2: mov     ebp, [ebx]
 0x6757A4: test    ebp, ebp
 0x6757A6: jz      loc_67582F
-0x6757AC: mov     ecx, ebp
-0x6757AE: call    sub_5E0380
+0x6757AC: mov     ecx, ebp; this
+0x6757AE: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x6757B3: mov     esi, eax
 0x6757B5: test    esi, esi
 0x6757B7: jz      short loc_67582F
@@ -100,7 +100,7 @@
 0x675852: cmp     [esp+18h+arg_4], 0
 0x675857: jz      short loc_67586E
 0x675859: push    edi
-0x67585A: call    FormHeapFree
+0x67585A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x67585F: add     esp, 4
 0x675862: pop     edi
 0x675863: pop     esi

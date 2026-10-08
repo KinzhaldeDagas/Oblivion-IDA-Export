@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x680550",
+      "0x680570"
+    ]
+  ],
+  "chunks_sha256": "4f32099c8c2e8de3301f3aa00ae9332ff9b77894748bc872221fad2f53c5df4d",
+  "comment_regular": "Verified: tests state flag bit 0x01. Probable interpretation: link has been discovered/entered into the search; the flag remains set after expansion.",
+  "comment_repeatable": "Verified: tests state flag bit 0x01. Probable interpretation: link has been discovered/entered into the search; the flag remains set after expansion.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_680550",
+  "display_name": "TravelPath_SearchState_IsDiscovered",
   "end_ea": "0x680570",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_680550",
+  "name": "TravelPath_SearchState_IsDiscovered",
   "segment": ".text",
   "sha256": "4f32099c8c2e8de3301f3aa00ae9332ff9b77894748bc872221fad2f53c5df4d",
   "size": 32,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x680550",
-  "type": "char __thiscall(unsigned __int16 *this)",
+  "total_chunk_size": 32,
+  "type": "bool __thiscall(TravelPathSpaceDoorLink *node)",
   "xrefs_from_count": 10,
   "xrefs_to_count": 2
 }

@@ -34,7 +34,7 @@
 0x500A6E: push    edx; a3
 0x500A6F: push    ecx; a2
 0x500A70: push    eax; a1
-0x500A71: call    Script_ExtractArgs
+0x500A71: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x500A76: add     esp, 20h
 0x500A79: test    al, al
 0x500A7B: pop     edi

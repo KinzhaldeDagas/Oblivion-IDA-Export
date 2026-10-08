@@ -1,1 +1,1 @@
-IThumbnailExtractor_0
+typedef IThumbnailExtractor IThumbnailExtractor_0;

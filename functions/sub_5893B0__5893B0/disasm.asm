@@ -1,4 +1,4 @@
-0x5893B0: mov     eax, [ecx+24h]
+0x5893B0: mov     eax, [ecx+24h]; AchievementsNative evidence: target eligibility helper returns true when the tile and ancestors are not suppressed by the observed flag path; inventory hover uses it before accepting header/item targets.
 0x5893B3: xor     dl, dl
 0x5893B5: test    eax, eax
 0x5893B7: jz      short loc_5893BF

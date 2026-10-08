@@ -1,49 +1,45 @@
-double __userpurge sub_57D940@<st0>(
-        int a1@<ecx>,
-        char a2@<bpl>,
-        double st5_0@<st2>,
-        double a4@<st1>,
-        double result@<st0>,
-        double a6@<st3>,
-        int a7)
+void __userpurge sub_57D940(int a1@<ecx>, double Float@<st4>, int a3)
 {
-  Tile *v8; // ecx
-  bool v9; // bl
-  _DWORD *v10; // eax
-  void (__thiscall ***v11)(_DWORD, int); // ecx
-  unsigned int *XML; // eax
+  Tile *v9; // ecx
+  bool v10; // bl
+  _DWORD *v11; // eax
+  void (__thiscall ***v12)(_DWORD, int); // ecx
+  Tile *File; // eax
 
-  if ( TESDataHandler_g_PlayerRef )
+  if ( reference ) /*0x57d940*/
   {
-    v8 = *(Tile **)(a1 + 0x80);
-    v9 = 0;
-    if ( v8 )
+    v9 = *(Tile **)(a1 + 0x80); /*0x57d950*/
+    v10 = 0; /*0x57d957*/
+    if ( v9 ) /*0x57d95c*/
     {
-      Tile_SetFloat(v8, (_DWORD *)0xFA1, fConstant_2);
-      v10 = (_DWORD *)sub_5A8260();
-      if ( v10 )
-        v9 = Tile_GetFloat(v10, 0xFA1) != fConstant_1;
-    }
-    v11 = *(void (__thiscall ****)(_DWORD, int))(a1 + 0x80);
-    if ( !v11 || a7 != 2 )
-      v9 = a7 > 0;
-    if ( v11 )
-    {
-      if ( a7 == 3 )
+      Float = fConstant_2; /*0x57d95e*/
+      Tile_SetFloat(v9, 0xFA1u, fConstant_2); /*0x57d96d*/
+      v11 = (_DWORD *)sub_5A8260(); /*0x57d972*/
+      if ( v11 ) /*0x57d979*/
       {
-        (**v11)(v11, 1);
-        *(_DWORD *)(a1 + 0x80) = 0;
+        Float = Tile_GetFloat(v11, 0xFA1); /*0x57d982*/
+        v10 = Float != fConstant_1; /*0x57d992*/
       }
     }
-    if ( !*(_DWORD *)(a1 + 0x80) && v9 )
+    v12 = *(void (__thiscall ****)(_DWORD, int))(a1 + 0x80); /*0x57d99a*/
+    if ( !v12 || a3 != 2 ) /*0x57d9ab*/
+      v10 = a3 > 0; /*0x57d9af*/
+    if ( v12 ) /*0x57d9b4*/
     {
-      byte_B3B0A2 = 1;
-      XML = Menu_LoadXML(*(TileWindow **)(a1 + 0x68), st5_0, a4, result, "Data\\Menus\\Main\\hud_reticle.xml");
-      *(_DWORD *)(a1 + 0x80) = XML;
-      result = sub_5A8000(XML);
-      byte_B3B0A2 = 0;
+      if ( a3 == 3 ) /*0x57d9b9*/
+      {
+        (**v12)(v12, 1); /*0x57d9c1*/
+        *(_DWORD *)(a1 + 0x80) = 0; /*0x57d9c3*/
+      }
     }
-    sub_5A8710(a2, st5_0, a4, result, a6, a7);
+    if ( !*(_DWORD *)(a1 + 0x80) && v10 ) /*0x57d9d8*/
+    {
+      unk_B3B0A2 = 1; /*0x57d9da*/
+      File = Tile::ReadFile(*(Tile **)(a1 + 0x68), "Data\\Menus\\Main\\hud_reticle.xml"); /*0x57d9e9*/
+      *(_DWORD *)(a1 + 0x80) = File; /*0x57d9ef*/
+      sub_5A8000(File); /*0x57d9f5*/
+      unk_B3B0A2 = 0; /*0x57d9fd*/
+    }
+    sub_5A8710(Float, a3); /*0x57da05*/
   }
-  return result;
 }

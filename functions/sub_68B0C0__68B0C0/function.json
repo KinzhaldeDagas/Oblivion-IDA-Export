@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
-  "callers_count": 5,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 6,
+  "chunks": [
+    [
+      "0x68B0C0",
+      "0x68B0CD"
+    ]
+  ],
+  "chunks_sha256": "6e8dece7fbf1093cfddc8f7f2848dee2f720464d107ebf8768dd160369d1440e",
+  "comment_regular": "Verified TravelPathNode_Init sets payload +0 to null and kind +4 to 0xFF (uninitialized sentinel); the three bytes at +5..+7 are not written.",
+  "comment_repeatable": "Verified TravelPathNode_Init sets payload +0 to null and kind +4 to 0xFF (uninitialized sentinel); the three bytes at +5..+7 are not written.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_68B0C0",
+  "display_name": "TravelPathNode_Init",
   "end_ea": "0x68B0CD",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_68B0C0",
+  "name": "TravelPathNode_Init",
   "segment": ".text",
   "sha256": "6e8dece7fbf1093cfddc8f7f2848dee2f720464d107ebf8768dd160369d1440e",
   "size": 13,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x68B0C0",
-  "type": "_BYTE *__thiscall(_BYTE *this)",
+  "total_chunk_size": 13,
+  "type": "TravelPathNode *__thiscall(TravelPathNode *this)",
   "xrefs_from_count": 3,
   "xrefs_to_count": 6
 }

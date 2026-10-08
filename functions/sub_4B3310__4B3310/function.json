@@ -1,19 +1,32 @@
 {
-  "callees_count": 14,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4B3310",
+      "0x4B33F9"
+    ]
+  ],
+  "chunks_sha256": "817819f144a90826b18f951f7e8a83f79c17ee61e9528fd1453ee78c99b8bd7f",
+  "comment_regular": "Probable: obtains or loads reference-specific model data for a TESBoundObject/TESObjectREFR pair. Direct code checks model path, scale, loaded-state reference count and loader data before falling back to ModelLoader_LoadModelData.",
+  "comment_repeatable": "Probable: obtains or loads reference-specific model data for a TESBoundObject/TESObjectREFR pair. Direct code checks model path, scale, loaded-state reference count and loader data before falling back to ModelLoader_LoadModelData.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4B3310",
+  "display_name": "TESBoundObject_GetReferenceModelData",
   "end_ea": "0x4B33F9",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4B3310",
+  "name": "TESBoundObject_GetReferenceModelData",
   "segment": ".text",
   "sha256": "817819f144a90826b18f951f7e8a83f79c17ee61e9528fd1453ee78c99b8bd7f",
   "size": 233,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4B3310",
-  "type": "int __thiscall(void *this, TESObjectREFR *)",
+  "total_chunk_size": 233,
+  "type": "void *__thiscall(TESBoundObject *this, TESObjectREFR *reference)",
   "xrefs_from_count": 90,
   "xrefs_to_count": 32
 }

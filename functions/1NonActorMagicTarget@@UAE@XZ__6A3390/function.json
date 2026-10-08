@@ -1,19 +1,36 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
+  "chunks": [
+    [
+      "0x6A3390",
+      "0x6A33E1"
+    ],
+    [
+      "0x9ABA50",
+      "0x9ABA73"
+    ]
+  ],
+  "chunks_sha256": "ad58daec1d9dc70749b4ecf615ef4e30795925ff8478ffc163792235bf0b3e86",
+  "comment_regular": "Verified Oblivion NonActorMagicTarget destructor runs MagicTarget_destr on subobject +0x0C and restores the BSExtraData vtable; no list removal appears in this function. Fallout's corresponding destructor explicitly removes all active-effect list entries first. This is a lifecycle difference; list ownership/cleanup responsibility in Oblivion remains Unknown pending all caller paths.",
+  "comment_repeatable": "Verified Oblivion NonActorMagicTarget destructor runs MagicTarget_destr on subobject +0x0C and restores the BSExtraData vtable; no list removal appears in this function. Fallout's corresponding destructor explicitly removes all active-effect list entries first. This is a lifecycle difference; list ownership/cleanup responsibility in Oblivion remains Unknown pending all caller paths.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
   "display_name": "NonActorMagicTarget::~NonActorMagicTarget(void)",
   "end_ea": "0x6A33E1",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
   "name": "??1NonActorMagicTarget@@UAE@XZ",
   "segment": ".text",
   "sha256": "1b74ebc06c2a86f108dfd8c7c568eaf16d30fbc9049cc0c12f8016a94d6a4d7f",
   "size": 81,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6A3390",
-  "type": "void __thiscall(NonActorMagicTarget *__hidden this)",
-  "xrefs_from_count": 29,
+  "total_chunk_size": 116,
+  "type": "void __thiscall(NonActorMagicTarget *this)",
+  "xrefs_from_count": 40,
   "xrefs_to_count": 1
 }

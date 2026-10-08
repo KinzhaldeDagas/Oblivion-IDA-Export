@@ -1,1 +1,1 @@
-NiUnionBV
+struct NiUnionBV;

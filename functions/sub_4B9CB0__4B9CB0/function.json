@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4B9CB0",
+      "0x4B9CEE"
+    ]
+  ],
+  "chunks_sha256": "526927d39dcabe44a5bbb858a6a6e0682b7237649ef5ead0657c98bcc92f064e",
+  "comment_regular": "Probable member mapping: float +0x78 behaves like Fallout's TESObjectTREE::BillboardSize.x and +0x7C like BillboardSize.y. Oblivion directly applies the same >200/>350 cutoff pair; Fallout named IsLargeEnoughForDistantLOD uses those exact fields/thresholds. +0x7C also sizes the quad in TESObjectTREE_BuildBillboardQuadData. Roles are strongly supported; names remain inferred across versions.",
+  "comment_repeatable": "Probable member mapping: float +0x78 behaves like Fallout's TESObjectTREE::BillboardSize.x and +0x7C like BillboardSize.y. Oblivion directly applies the same >200/>350 cutoff pair; Fallout named IsLargeEnoughForDistantLOD uses those exact fields/thresholds. +0x7C also sizes the quad in TESObjectTREE_BuildBillboardQuadData. Roles are strongly supported; names remain inferred across versions.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4B9CB0",
+  "display_name": "TESObjectTREE_IsLargeEnoughForDistantLOD",
   "end_ea": "0x4B9CEE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4B9CB0",
+  "name": "TESObjectTREE_IsLargeEnoughForDistantLOD",
   "segment": ".text",
   "sha256": "526927d39dcabe44a5bbb858a6a6e0682b7237649ef5ead0657c98bcc92f064e",
   "size": 62,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4B9CB0",
-  "type": "bool __thiscall(float *this)",
+  "total_chunk_size": 62,
+  "type": "bool __thiscall(TESObjectTREE_OblivionLayout_080_NiTArrayVerified *this)",
   "xrefs_from_count": 26,
   "xrefs_to_count": 1
 }

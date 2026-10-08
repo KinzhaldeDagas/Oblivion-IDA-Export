@@ -1,1 +1,1 @@
-CAL
+typedef tagCAL CAL;

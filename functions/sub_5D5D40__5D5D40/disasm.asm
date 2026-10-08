@@ -1,4 +1,4 @@
-0x5D5D40: push    ebp
+0x5D5D40: push    ebp; Preselects SkillsMenu rows for its current mode. Mode 0 reads exactly seven ClassMenu skill AVs at +0x68..+0x80; mode 1 reads two attributes; mode 2 reads specialization. Selected rows use tile trait 0xFB1==2.
 0x5D5D41: mov     ebp, esp
 0x5D5D43: and     esp, 0FFFFFFF8h
 0x5D5D46: sub     esp, 0Ch
@@ -61,7 +61,7 @@
 0x5D5DFC: push    0FB0h
 0x5D5E01: mov     ecx, esi
 0x5D5E03: call    Tile_GetFloat
-0x5D5E08: call    Double_To_SInt32
+0x5D5E08: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5D5E0D: add     eax, 1
 0x5D5E10: lea     ecx, [esp+18h+var_8]
 0x5D5E14: cmp     [ecx], eax
@@ -71,10 +71,10 @@
 0x5D5E1D: jnz     short loc_5D5E14
 0x5D5E1F: fld1
 0x5D5E21: push    ecx
-0x5D5E22: fstp    [esp+1Ch+a2]; a3
-0x5D5E25: push    0FB1h; a2
+0x5D5E22: fstp    [esp+1Ch+a2]; value
+0x5D5E25: push    0FB1h; propertyCode
 0x5D5E2A: mov     ecx, esi; this
-0x5D5E2C: call    Tile_SetFloat
+0x5D5E2C: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D5E31: test    edi, edi
 0x5D5E33: jnz     short loc_5D5DF0
 0x5D5E35: pop     edi

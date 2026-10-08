@@ -1,1 +1,4 @@
-_SERVICE_SID_INFO
+struct _SERVICE_SID_INFO
+{
+DWORD dwServiceSidType;
+};

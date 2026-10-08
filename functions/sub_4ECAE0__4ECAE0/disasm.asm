@@ -1,5 +1,5 @@
-0x4ECAE0: push    ebx
-0x4ECAE1: mov     ebx, [esp+4+arg_0]
+0x4ECAE0: push    ebx; Verified recursive unload state machine: Attached(3)->LoadedDetached(2) removes the terrain node; LoadedDetached(2)->UnloadPending(4); the next unload pass releases the mesh and reaches Unloaded(5). The same transition recurses over four child pointers at +0x30..+0x3C.
+0x4ECAE1: mov     ebx, [esp+4+landLODParent]
 0x4ECAE5: push    esi
 0x4ECAE6: mov     esi, ecx
 0x4ECAE8: mov     eax, [esi+8]
@@ -10,17 +10,17 @@
 0x4ECAF4: jz      short loc_4ECB02
 0x4ECAF6: sub     eax, 1
 0x4ECAF9: jnz     short loc_4ECB4B
-0x4ECAFB: call    sub_4EC810
+0x4ECAFB: call    TESTerrainLODQuad_ReleaseMesh; Verified release path: releases terrainLODNode and finishes in Unloaded (5); if not already UnloadPending (4), first moves into state 4.
 0x4ECB00: jmp     short loc_4ECB4B
 0x4ECB02: mov     ecx, [esi+2Ch]
 0x4ECB05: mov     eax, [ebx]
 0x4ECB07: mov     eax, [eax+88h]
 0x4ECB0D: push    ecx
-0x4ECB0E: lea     edx, [esp+10h+arg_0]
+0x4ECB0E: lea     edx, [esp+10h+landLODParent]
 0x4ECB12: push    edx
 0x4ECB13: mov     ecx, ebx
 0x4ECB15: call    eax
-0x4ECB17: mov     edi, [esp+0Ch+arg_0]
+0x4ECB17: mov     edi, [esp+0Ch+landLODParent]
 0x4ECB1B: test    edi, edi
 0x4ECB1D: jz      short loc_4ECB3B
 0x4ECB1F: lea     ecx, [edi+4]
@@ -35,16 +35,16 @@
 0x4ECB35: push    1
 0x4ECB37: mov     ecx, edi
 0x4ECB39: call    eax
-0x4ECB3B: mov     dword ptr [esi+8], 2
+0x4ECB3B: mov     dword ptr [esi+8], 2; Verified detach transition: removes terrainLODNode from LandLOD and changes state from Attached (3) to LoadedDetached (2).
 0x4ECB42: jmp     short loc_4ECB4B
-0x4ECB44: mov     dword ptr [esi+8], 4
+0x4ECB44: mov     dword ptr [esi+8], 4; Verified deferred-unload transition: a LoadedDetached quad moves to UnloadPending (4); a later update releases its mesh and transitions to Unloaded (5).
 0x4ECB4B: add     esi, 30h ; '0'
 0x4ECB4E: cmp     dword ptr [esi], 0
 0x4ECB51: jz      short loc_4ECB68
-0x4ECB53: mov     edi, 4
-0x4ECB58: mov     ecx, [esi]
-0x4ECB5A: push    ebx
-0x4ECB5B: call    sub_4ECAE0
+0x4ECB53: mov     edi, 4; Verified recursion over the four child-quad pointers at +0x30..+0x3C applies the same detach/unload state progression to descendants.
+0x4ECB58: mov     ecx, [esi]; this
+0x4ECB5A: push    ebx; landLODParent
+0x4ECB5B: call    TESTerrainLODQuad_AdvanceUnloadState; Verified recursive unload state machine: Attached(3)->LoadedDetached(2) removes the terrain node; LoadedDetached(2)->UnloadPending(4); the next unload pass releases the mesh and reaches Unloaded(5). The same transition recurses over four child pointers at +0x30..+0x3C.
 0x4ECB60: add     esi, 4
 0x4ECB63: sub     edi, 1
 0x4ECB66: jnz     short loc_4ECB58

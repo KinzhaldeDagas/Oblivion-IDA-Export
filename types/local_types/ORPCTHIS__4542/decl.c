@@ -1,1 +1,1 @@
-ORPCTHIS
+typedef tagORPCTHIS ORPCTHIS;

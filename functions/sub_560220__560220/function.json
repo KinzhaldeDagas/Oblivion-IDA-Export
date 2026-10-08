@@ -1,19 +1,36 @@
 {
-  "callees_count": 51,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 19,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_560220",
+  "chunks": [
+    [
+      "0x560220",
+      "0x5605F1"
+    ],
+    [
+      "0x9BCF80",
+      "0x9BCFAC"
+    ]
+  ],
+  "chunks_sha256": "1c42574fc3c3329824d0921cd723455b435a86eb1ee5a9e0c176f6a49cb78f06",
+  "comment_regular": "\n\n[2026-10-02 Fallout comparative pass]\nVerified leaf-map update edge: call 0x56059D obtains base-tree (InstanceOf if present) GetLeafBillboardTable and float count; 0x5605AB copies into shared model+0x20 STLSPData. SetLeafMaps count zero preserves old values rather than clearing the table.\n\n[2026-10-03 frond completion] Authoritative void thiscall(model,node). Plugin runtime wrapper corrected from fabricated int return to void and retains exactly one original call. Fade extension executes after original under existing renderer/cache/lifecycle scope; verifies tracked shape remains a direct child of the supplied live node before mutation.\n\nVerified BSTreeModel_Update operates on a typed BSTreeNode_OblivionLayout_0F0; local visibility and per-reference scale flow through its NiNode base and treeModel member.\n[SpeedTreeOBSE v172 CPU scheduling] Native update sets this model RT tree position and LOD, then selects node branches/leaves. Plugin post-native sync now resolves SDK instance parent to a base and dispatches reference ComputeWindEffects-style branch/frond updates at the highest normalized SDK-instance LOD. It preserves native method0 GPU defaults. Scheduler requires a ready CPU weather-matrix bridge and successful indexed entry installation. This changes SDK coordinate data only; native NiGeometryData remapping/upload and GPU neutralization are still missing, so rendered CPU support remains INCOMPLETE.",
+  "comment_repeatable": "Verified BSTreeModel_Update operates on a typed BSTreeNode_OblivionLayout_0F0; local visibility and per-reference scale flow through its NiNode base and treeModel member.\n\n[2026-10-04 v111 atlas integration] Plugin wrapper after native Update now claims deferred material work under its existing renderer/cache lock (1-second family/node throttles), reattempts initially missing scene attachment on live callback nodes, and uses per-family material revisions to rebuild existing groups at the same LOD when optional textures become authored/resident. Node addresses are timestamp keys only; no deferred raw-node dereference. Native Update itself has not gained this policy.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 14,
+  "display_name": "BSTreeModel_Update",
   "end_ea": "0x5605F1",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_560220",
+  "name": "BSTreeModel_Update",
   "segment": ".text",
   "sha256": "95cafdcf25bd1c00ff1ece80b8f95ac3efe0bc3a1c370dd06275d995718b755e",
   "size": 977,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x560220",
-  "type": "int __thiscall(_DWORD *this, float *)",
-  "xrefs_from_count": 312,
+  "total_chunk_size": 1021,
+  "type": "void __thiscall(BSTreeModel_OblivionLayout_058 *this, BSTreeNode_OblivionLayout_0F0 *treeNode)",
+  "xrefs_from_count": 336,
   "xrefs_to_count": 1
 }

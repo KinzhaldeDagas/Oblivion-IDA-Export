@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 4,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "NiTPointerMap<MagicSystem::EffectID,ActiveEffect * (*)(MagicCaster *,MagicItem *,EffectItem *)>::~NiTPointerMap<MagicSystem::EffectID,ActiveEffect * (*)(MagicCaster *,MagicItem *,EffectItem *)>(void)",
+  "chunks": [
+    [
+      "0x68E0E0",
+      "0x68E14D"
+    ],
+    [
+      "0x9C5480",
+      "0x9C54A3"
+    ]
+  ],
+  "chunks_sha256": "f6a0e1a59fb155fabc59b31616eef2b7f6baa2805f64c83b395229b19e4f9e00",
+  "comment_regular": "Verified ActiveEffectCreatorMap destructor: clears entries, restores the NiTMapBase vtable, clears the base map, and frees the bucket array. The global object itself is static storage.",
+  "comment_repeatable": "Verified ActiveEffectCreatorMap destructor: clears entries, restores the NiTMapBase vtable, clears the base map, and frees the bucket array. The global object itself is static storage.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "ActiveEffectCreatorMap_Destroy",
   "end_ea": "0x68E14D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "??1?$NiTPointerMap@W4EffectID@MagicSystem@@P6APAVActiveEffect@@PAVMagicCaster@@PAVMagicItem@@PAVEffectItem@@@Z@@UAE@XZ",
+  "name": "ActiveEffectCreatorMap_Destroy",
   "segment": ".text",
   "sha256": "d19de836a5db3cea08b020fd02447dda0c11d52ba88d627dd0eacee4e1dd3430",
   "size": 109,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x68E0E0",
-  "type": "void __thiscall(unsigned int *this)",
-  "xrefs_from_count": 35,
+  "total_chunk_size": 144,
+  "type": "void __thiscall(ActiveEffectCreatorMap *this)",
+  "xrefs_from_count": 46,
   "xrefs_to_count": 2
 }

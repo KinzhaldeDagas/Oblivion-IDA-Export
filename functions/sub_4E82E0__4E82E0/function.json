@@ -1,19 +1,36 @@
 {
-  "callees_count": 59,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 26,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_4E82E0",
+  "chunks": [
+    [
+      "0x4E82E0",
+      "0x4E873F"
+    ],
+    [
+      "0x9B5F10",
+      "0x9B5F57"
+    ]
+  ],
+  "chunks_sha256": "09468f0baf57ad14bfa13b5ac9d7e7a2e7caf1dc6ef1e1395993942e124fa2b2",
+  "comment_regular": "Verified per-point render builder. Allocates a NiNode into TESPathGridPoint+0x28 at the point position (with a small Z offset), clones the even/odd-Z shared marker template, creates adjacency-edge geometry, and adds wireframe when linkedPointsDisabled is set. includeAllNeighbors=true renders all listed edges; false keeps only neighbor indices greater than this point's index. At the end, if TESObjectREFR_GetBaseForm(secondArgument) succeeds, it invokes that form's vtable Unk_21 with the generated node; because the only caller passes the owning TESPathGrid, the meaning of this base-form/virtual interaction remains Unknown.",
+  "comment_repeatable": "Verified per-point render builder. Allocates a NiNode into TESPathGridPoint+0x28 at the point position (with a small Z offset), clones the even/odd-Z shared marker template, creates adjacency-edge geometry, and adds wireframe when linkedPointsDisabled is set. includeAllNeighbors=true renders all listed edges; false keeps only neighbor indices greater than this point's index. At the end, if TESObjectREFR_GetBaseForm(secondArgument) succeeds, it invokes that form's vtable Unk_21 with the generated node; because the only caller passes the owning TESPathGrid, the meaning of this base-form/virtual interaction remains Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "TESPathGridPoint_RebuildRenderGeometry",
   "end_ea": "0x4E873F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4E82E0",
+  "name": "TESPathGridPoint_RebuildRenderGeometry",
   "segment": ".text",
   "sha256": "72e0580cdeb93784cbed53f112d010bfa9c68dd9a93e61e8500a5fafca42ed24",
   "size": 1119,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E82E0",
-  "type": "void __thiscall(float *this, TESChildCELL *, char)",
-  "xrefs_from_count": 412,
+  "total_chunk_size": 1190,
+  "type": "void __thiscall(TESPathGridPoint *this, TESPathGrid *grid, bool includeAllNeighbors)",
+  "xrefs_from_count": 441,
   "xrefs_to_count": 1
 }

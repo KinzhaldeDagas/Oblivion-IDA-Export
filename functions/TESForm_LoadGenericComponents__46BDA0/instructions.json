@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x46BDA0",
-    "line": "push    ebp",
+    "line": "push    ebp; Generic fixed-prefix/component DATA overlay. Copies min(chunk_length,fixed_prefix_size), then updates later components only when their starting offset is below chunk_length; omitted suffix components retain prior in-memory values.",
     "mnemonic": "push",
     "size": 1
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x46BDD9",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,25 +181,25 @@
   },
   {
     "ea": "0x46BDF5",
-    "line": "push    ecx; Size",
+    "line": "push    ecx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46BDF6",
-    "line": "push    ebx; Src",
+    "line": "push    ebx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46BDF7",
-    "line": "push    edx; Dst",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46BDF8",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy; Copy the available fixed prefix only; this is an overlay, not a whole-structure replacement.",
     "mnemonic": "call",
     "size": 5
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x46BECF",
-    "line": "jnb     short loc_46BEE9",
+    "line": "jnb     short loc_46BEE9; Value component is overwritten only when the chunk extends past its start offset. The check does not require all four bytes to remain, so a truncated component is unsafe/indeterminate.",
     "mnemonic": "jnb",
     "size": 2
   },

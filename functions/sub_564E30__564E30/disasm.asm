@@ -1,4 +1,4 @@
-0x564E30: push    ebp
+0x564E30: push    ebp; BSTreeNode runtime collision/contact update path: throttled by 0x563F90, queries collision pairs, applies impulses/events for actors/contacting refs.
 0x564E31: mov     ebp, esp
 0x564E33: and     esp, 0FFFFFFF0h
 0x564E36: push    0FFFFFFFFh
@@ -30,7 +30,7 @@
 0x564E89: push    ecx
 0x564E8A: mov     ecx, esi
 0x564E8C: fstp    [esp+278h+var_278]; float
-0x564E8F: call    sub_563F90
+0x564E8F: call    sub_563F90; BSTreeNode update throttle helper: schedules updates by global update group interval and returns whether work should run this frame/time.
 0x564E94: test    al, al
 0x564E96: jz      loc_5654E5
 0x564E9C: mov     ecx, esi
@@ -46,9 +46,9 @@
 0x564EBA: test    eax, eax
 0x564EBC: jz      loc_5654E5
 0x564EC2: mov     esi, [esi+0DCh]
-0x564EC8: mov     ecx, [esi+0Ch]
+0x564EC8: mov     ecx, [esi+0Ch]; this
 0x564ECB: push    offset off_A65A20; SubStr
-0x564ED0: call    sub_7875C0
+0x564ED0: call    CSpeedTreeRT__GetUserData; Oblivion CSpeedTreeRT::GetUserData: returns the char pointer stored at CSpeedTreeRT+0x68. RT4.1 confirms the public const-char getter name after the binary field access was established.
 0x564ED5: push    eax; Str
 0x564ED6: call    _strstr
 0x564EDB: add     esp, 8
@@ -80,7 +80,6 @@
 0x564F61: jle     loc_5654CE
 0x564F67: mov     [esp+274h+var_264], edi
 0x564F6B: jmp     short loc_564F70
-0x564F6D: align 10h
 0x564F70: mov     ecx, [esp+274h+var_1B0]
 0x564F77: mov     edx, [esp+274h+var_264]
 0x564F7B: mov     eax, [ecx+edx+8]
@@ -105,7 +104,7 @@
 0x564FB3: cmp     eax, edi
 0x564FB5: jz      loc_5654B1
 0x564FBB: mov     ecx, eax; this
-0x564FBD: call    MobileObject_GetCharProxy
+0x564FBD: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x564FC2: mov     esi, eax
 0x564FC4: cmp     esi, edi
 0x564FC6: jz      loc_5654B1
@@ -166,14 +165,14 @@
 0x5650CD: mov     byte ptr [esp+274h+var_1FC], 4
 0x5650D2: mov     byte ptr [esp+274h+var_1FC+1], 7
 0x5650D7: jz      short loc_5650EF
-0x5650D9: call    sub_8AC0A0
+0x5650D9: call    bhkWorldObject_GetLinearVelocityPtr; TES4 authoritative: returns pointer to bhk collision object's velocity vector at object+0x10. 0x896000 copies this into proxy +0x2E0 before state update.
 0x5650DE: push    eax
 0x5650DF: lea     eax, [esp+278h+var_1EC]
 0x5650E6: push    eax
-0x5650E7: call    sub_43F3E0
+0x5650E7: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x5650EC: add     esp, 8
 0x5650EF: lea     ecx, [esp+274h+var_1EC]
-0x5650F6: call    sub_404C90
+0x5650F6: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x5650FB: fstp    [esp+274h+var_204]
 0x5650FF: mov     ecx, [esp+274h+var_250]
 0x565103: lea     edx, [esp+274h+var_44+4]
@@ -182,7 +181,7 @@
 0x565112: add     ebx, ecx
 0x565114: push    eax
 0x565115: mov     [esp+27Ch+var_1F8], ebx
-0x56511C: call    sub_43F3E0
+0x56511C: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x565121: mov     ecx, [eax]
 0x565123: mov     [esp+27Ch+var_210], ecx
 0x565127: mov     edx, [eax+4]
@@ -200,7 +199,7 @@
 0x565157: cmp     esi, edi
 0x565159: jz      loc_5654B1
 0x56515F: push    64h ; 'd'
-0x565161: call    Rand3
+0x565161: call    Game_RandomIntBelow; Engine RNG upper-bound helper: returns max*rand()/0x7FFF after lazy time seed.
 0x565166: mov     [esp+278h+var_260], eax
 0x56516A: fild    [esp+278h+var_260]
 0x56516E: add     esp, 4
@@ -238,7 +237,7 @@
 0x5651F2: sqrtss  xmm0, xmm0
 0x5651F6: push    eax
 0x5651F7: movss   [esp+27Ch+var_248], xmm0
-0x5651FD: call    Rand2
+0x5651FD: call    Game_RandomIntInRange; Engine RNG range helper: returns min + (max-min)*rand()/0x7FFF after lazy time seed.
 0x565202: mov     [esp+27Ch+var_260], eax
 0x565206: fild    [esp+27Ch+var_260]
 0x56520A: add     esp, 8
@@ -310,7 +309,7 @@
 0x56531E: sqrtss  xmm1, xmm1
 0x565322: push    14h
 0x565324: movss   [esp+278h+var_248], xmm1
-0x56532A: call    Rand3
+0x56532A: call    Game_RandomIntBelow; Engine RNG upper-bound helper: returns max*rand()/0x7FFF after lazy time seed.
 0x56532F: mov     [esp+278h+var_25C], eax
 0x565333: fild    [esp+278h+var_25C]
 0x565337: add     esp, 4
@@ -395,7 +394,7 @@
 0x565477: fstp    [esp+278h+var_228]
 0x56547B: push    eax
 0x56547C: mov     [esp+27Ch+var_21C], edx
-0x565480: call    sub_43F3E0
+0x565480: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x565485: mov     ecx, [eax]
 0x565487: mov     [esp+27Ch+var_234], ecx
 0x56548B: mov     edx, [eax+4]
@@ -430,3 +429,16 @@
 0x565505: mov     esp, ebp
 0x565507: pop     ebp
 0x565508: retn    4
+0x9BD580: lea     ecx, [ebp+var_1B8]; this
+0x9BD586: jmp     ??1hkAllCdBodyPairCollector@@UAE@XZ; hkAllCdBodyPairCollector::~hkAllCdBodyPairCollector(void)
+0x9BD58B: mov     edx, [esp-4+arg_4]
+0x9BD58F: lea     eax, [edx-264h]
+0x9BD595: mov     ecx, [edx-268h]
+0x9BD59B: xor     ecx, eax
+0x9BD59D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BD5A2: add     eax, 0Ch
+0x9BD5A5: mov     ecx, [edx-8]
+0x9BD5A8: xor     ecx, eax
+0x9BD5AA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BD5AF: mov     eax, offset stru_AE6F24
+0x9BD5B4: jmp     ___CxxFrameHandler3

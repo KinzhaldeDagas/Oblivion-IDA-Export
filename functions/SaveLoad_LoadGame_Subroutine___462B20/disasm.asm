@@ -5,7 +5,7 @@
 0x462B26: mov     esi, ecx
 0x462B28: or      dword ptr [esi+18h], 4000h
 0x462B2F: push    edi; ArgList
-0x462B30: mov     ecx, offset dword_B3BDB0
+0x462B30: mov     ecx, (offset qword_B3BB2C+284h)
 0x462B35: call    sub_67CF00
 0x462B3A: mov     ecx, ds:0B3BF80h
 0x462B40: test    ecx, ecx
@@ -27,7 +27,7 @@
 0x462B82: call    sub_4F9DD0
 0x462B87: mov     ecx, esi
 0x462B89: call    SaveLoad_ClearCreatedObjList??
-0x462B8E: mov     edi, [esp+60h+arg_0]
+0x462B8E: mov     edi, [esp+60h+stream]
 0x462B92: mov     ebx, 1
 0x462B97: push    ebx
 0x462B98: lea     eax, [esp+64h+a3]
@@ -36,7 +36,7 @@
 0x462B9F: lea     ecx, [esp+6Ch+var_40]
 0x462BA3: push    ecx
 0x462BA4: mov     ds:0B3521Dh, bl
-0x462BAA: mov     edx, [edi+4]
+0x462BAA: mov     edx, [edi+4]; Savegame review: direct file_object[1] read callback usage; plugin wraps the save file callback before this subroutine runs.
 0x462BAD: push    edi
 0x462BAE: mov     [esp+74h+a3], ebx
 0x462BB2: call    edx
@@ -56,7 +56,7 @@
 0x462BE2: lea     eax, [esp+6Ch+var_3C]
 0x462BE6: push    eax
 0x462BE7: push    edi
-0x462BE8: mov     byte ptr [esp+74h+arg_0], bl
+0x462BE8: mov     byte ptr [esp+74h+stream], bl
 0x462BEC: mov     [esp+74h+a3], ebx
 0x462BF0: call    ecx
 0x462BF2: mov     edx, [esp+74h+var_3C]
@@ -88,7 +88,7 @@
 0x462C3B: push    0; int
 0x462C3D: push    eax; a1
 0x462C3E: mov     [esp+74h+var_3C], eax
-0x462C42: call    TESForm_LookupByFormID
+0x462C42: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x462C47: add     esp, 4
 0x462C4A: push    eax; void *
 0x462C4B: call    OblivionDynamicCast
@@ -99,7 +99,7 @@
 0x462C5D: push    eax
 0x462C5E: call    sub_4431F0
 0x462C63: jmp     short loc_462C6A
-0x462C65: mov     byte ptr [esp+60h+arg_0], 0
+0x462C65: mov     byte ptr [esp+60h+stream], 0
 0x462C6A: mov     eax, [edi+4]
 0x462C6D: push    ebx
 0x462C6E: lea     ecx, [esp+64h+a3]
@@ -176,7 +176,7 @@
 0x462D27: call    TESObjectREFR_SetPosition
 0x462D2C: mov     edx, [esp+60h+a1]
 0x462D30: push    edx; a1
-0x462D31: call    TESForm_LookupByFormID
+0x462D31: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x462D36: push    0; int
 0x462D38: push    offset ??_R0?AVTESObjectCELL@@@8; struct TypeDescriptor *
 0x462D3D: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
@@ -197,7 +197,7 @@
 0x462D6B: jnz     short loc_462D75
 0x462D6D: test    ebx, ebx
 0x462D6F: jnz     short loc_462D75
-0x462D71: mov     byte ptr [esp+60h+arg_0], bl
+0x462D71: mov     byte ptr [esp+60h+stream], bl
 0x462D75: mov     ecx, ds:0B333C4h
 0x462D7B: call    sub_5F0410
 0x462D80: mov     ebp, [esp+60h+var_30]
@@ -233,7 +233,7 @@
 0x462DE0: add     esp, 4
 0x462DE3: push    0FFFFFFFEh
 0x462DE5: call    sub_447DB0
-0x462DEA: cmp     byte ptr [esp+60h+arg_0], 0
+0x462DEA: cmp     byte ptr [esp+60h+stream], 0
 0x462DEF: jz      loc_463083
 0x462DF5: test    ebx, ebx
 0x462DF7: jz      short loc_462E69
@@ -245,7 +245,7 @@
 0x462E10: mov     [edx+24h], ecx
 0x462E13: or      dword ptr [esi+18h], 10h
 0x462E17: mov     ecx, ds:0B333C4h; this
-0x462E1D: call    TESObjectREFR_GetParentCell
+0x462E1D: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x462E22: cmp     eax, ebx
 0x462E24: jz      loc_463074
 0x462E2A: mov     ecx, ds:0B333C4h; int
@@ -267,7 +267,7 @@
 0x462E56: mov     [eax+4], edx
 0x462E59: mov     edx, [ecx+34h]
 0x462E5C: mov     [eax+8], edx
-0x462E5F: call    sub_66EAF0
+0x462E5F: call    PlayerCharacter_ChangeCellAndPosition; World/cell transition path used by fast travel relocation after cell resolution. Leaves normal exterior refresh/SpeedTree/weather side effects intact.
 0x462E64: jmp     loc_463074
 0x462E69: test    ebp, ebp
 0x462E6B: jz      loc_463078
@@ -289,10 +289,10 @@
 0x462EAB: jz      loc_462F4C
 0x462EB1: fld     [esp+60h+var_8]
 0x462EB5: sub     esp, 8
-0x462EB8: fstp    [esp+68h+var_64]; float
+0x462EB8: fstp    dword ptr [esp+68h+var_68+4]; float
 0x462EBC: lea     ecx, [esp+68h+a3]
 0x462EC0: fld     [esp+68h+var_C]
-0x462EC4: fstp    [esp+68h+var_68]; float
+0x462EC4: fstp    dword ptr [esp+68h+var_68]; float
 0x462EC7: call    sub_4A6970
 0x462ECC: mov     ecx, ds:0B33A98h
 0x462ED2: mov     eax, [ecx+0BCh]
@@ -336,7 +336,7 @@
 0x462F39: jnz     short loc_462EE8
 0x462F3B: cmp     [esp+60h+var_4D], 0
 0x462F40: jnz     short loc_462F4C
-0x462F42: mov     byte ptr [esp+60h+arg_0], 0
+0x462F42: mov     byte ptr [esp+60h+stream], 0
 0x462F47: jmp     loc_463083
 0x462F4C: mov     eax, [esp+60h+var_44]
 0x462F50: mov     ecx, [esp+60h+var_38]
@@ -374,19 +374,19 @@
 0x462FC0: test    eax, eax
 0x462FC2: mov     [esp+60h+a3], eax
 0x462FC6: jz      short loc_462FD3
-0x462FC8: mov     ecx, eax; this
-0x462FCA: call    TESObjectCELL_GetNiNode?
+0x462FC8: mov     ecx, eax; object
+0x462FCA: call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.
 0x462FCF: test    eax, eax
 0x462FD1: jnz     short loc_46301D
 0x462FD3: mov     ecx, ds:0B333C4h; this
-0x462FD9: call    TESObjectREFR_GetParentCell
+0x462FD9: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x462FDE: test    eax, eax
 0x462FE0: jz      short loc_462FF5
 0x462FE2: mov     ecx, ds:0B333C4h; this
-0x462FE8: push    ecx
-0x462FE9: call    TESObjectREFR_GetParentCell
-0x462FEE: mov     ecx, eax
-0x462FF0: call    sub_4CECD0
+0x462FE8: push    ecx; reference
+0x462FE9: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x462FEE: mov     ecx, eax; this
+0x462FF0: call    TESObjectCELL_RemoveReference; Verified: removes a reference from the cell object list under the cell lock. For persistent cells, clears the reference's ExtraDataList cell pointer and removes it from the owning WorldSpace persistent-reference index (+0x64); for normal cells, clears its parent cell and updates changed state. No write to the separate SubSpace index (+0x60) is present.
 0x462FF5: lea     ecx, [esp+60h+var_18]
 0x462FF9: push    ecx
 0x462FFA: mov     ecx, ds:0B333A0h
@@ -422,12 +422,12 @@
 0x463058: mov     [eax+4], edx
 0x46305B: mov     edx, [ecx+34h]
 0x46305E: mov     [eax+8], edx
-0x463061: call    sub_66EAF0
+0x463061: call    PlayerCharacter_ChangeCellAndPosition; World/cell transition path used by fast travel relocation after cell resolution. Leaves normal exterior refresh/SpeedTree/weather side effects intact.
 0x463066: and     dword ptr [esi+18h], 0FFF7FFFFh
 0x46306D: jmp     short loc_463074
-0x46306F: mov     byte ptr [esp+60h+arg_0], 0
+0x46306F: mov     byte ptr [esp+60h+stream], 0
 0x463074: and     dword ptr [esi+18h], 0FFFFFFEFh
-0x463078: cmp     byte ptr [esp+60h+arg_0], 0
+0x463078: cmp     byte ptr [esp+60h+stream], 0
 0x46307D: jnz     loc_46311B
 0x463083: mov     eax, ds:0B05BB4h
 0x463088: push    10h; Radix
@@ -440,7 +440,7 @@
 0x46309C: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x4630A1: push    0; int
 0x4630A3: push    eax; a1
-0x4630A4: call    TESForm_LookupByFormID
+0x4630A4: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4630A9: add     esp, 4
 0x4630AC: push    eax; void *
 0x4630AD: call    OblivionDynamicCast
@@ -452,7 +452,7 @@
 0x4630BF: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x4630C4: push    eax; int
 0x4630C5: push    3Ch ; '<'; a1
-0x4630C7: call    TESForm_LookupByFormID
+0x4630C7: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4630CC: add     esp, 4
 0x4630CF: push    eax; void *
 0x4630D0: call    OblivionDynamicCast
@@ -460,8 +460,8 @@
 0x4630D7: add     esp, 14h
 0x4630DA: test    ebx, ebx
 0x4630DC: jz      short loc_46311B
-0x4630DE: push    0; signed int
-0x4630E0: push    0; signed int
+0x4630DE: push    0; cellY
+0x4630E0: push    0; cellX
 0x4630E2: mov     ecx, ebx; this
 0x4630E4: call    TESWorldSpace__GetCellAtCellCoord
 0x4630E9: test    eax, eax
@@ -469,7 +469,7 @@
 0x4630ED: push    eax; int
 0x4630EE: push    eax; ArgList
 0x4630EF: mov     ecx, ebx
-0x4630F1: call    sub_4F1630
+0x4630F1: call    TESWorldSpace_LoadExteriorCellAtCoord; Verified: exterior-cell loader checks cellMap first, searches master files using cellOffsetsArray fast path or GRUP/CELL fallback, creates a missing TESObjectCELL, post-fixes it, then attaches worldspace-indexed references.
 0x4630F6: test    eax, eax
 0x4630F8: jnz     short loc_46310D
 0x4630FA: mov     ecx, ds:0B33A98h
@@ -484,9 +484,9 @@
 0x463113: push    eax; int
 0x463114: push    0; ArgList
 0x463116: call    sub_66FD90
-0x46311B: push    edi
-0x46311C: mov     ecx, esi
-0x46311E: call    sub_45F970
+0x46311B: push    edi; stream
+0x46311C: mov     ecx, esi; self
+0x46311E: call    TESSaveLoadGame_LoadGlobalValues; Verified load dispatcher call for the Global Variables record (diagnostic string at 45FB3C).
 0x463123: or      dword ptr [esi+18h], 10h
 0x463127: mov     ecx, ds:0B333A0h
 0x46312D: call    sub_443300
@@ -543,9 +543,9 @@
 0x4631C5: mov     ecx, offset FormHeap
 0x4631CA: call    MemoryHeap_Free_checked
 0x4631CF: mov     dword ptr [esi+14h], 0
-0x4631D6: mov     ecx, offset ActorProcessManager_ptr
-0x4631DB: call    sub_677280
-0x4631E0: mov     ecx, offset ActorProcessManager_ptr
+0x4631D6: mov     ecx, (offset qword_B3BB2C+1D4h); self
+0x4631DB: call    ActorProcessManager_ClearCrimes
+0x4631E0: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x4631E5: call    sub_67AE90
 0x4631EA: mov     edx, [edi+4]
 0x4631ED: push    ebp
@@ -592,8 +592,8 @@
 0x46325F: mov     [esp+74h+a3], ebp
 0x463263: call    eax
 0x463265: add     esp, 14h
-0x463268: mov     ecx, offset ActorProcessManager_ptr
-0x46326D: call    sub_6770F0
+0x463268: mov     ecx, (offset qword_B3BB2C+1D4h); self
+0x46326D: call    ActorProcessManager_LoadCrimes
 0x463272: push    ebx; void *
 0x463273: mov     ecx, offset FormHeap
 0x463278: call    MemoryHeap_Free_checked
@@ -643,7 +643,7 @@
 0x4632F9: mov     [esp+74h+a3], ebp
 0x4632FD: call    edx
 0x4632FF: add     esp, 14h
-0x463302: mov     ecx, offset dword_B3BDB0
+0x463302: mov     ecx, (offset qword_B3BB2C+284h)
 0x463307: call    sub_67D040
 0x46330C: push    ebx; void *
 0x46330D: mov     ecx, offset FormHeap
@@ -694,7 +694,7 @@
 0x463397: mov     [esp+74h+a3], ebp
 0x46339B: call    eax
 0x46339D: add     esp, 14h
-0x4633A0: cmp     byte ptr [esp+60h+arg_0], 0
+0x4633A0: cmp     byte ptr [esp+60h+stream], 0
 0x4633A5: jz      short loc_4633B3
 0x4633A7: call    Sky_CreateOrGetGlobalObject
 0x4633AC: mov     ecx, eax
@@ -706,13 +706,13 @@
 0x4633C5: mov     eax, [edi+4]
 0x4633C8: mov     ebx, ds:0B3B90Ch
 0x4633CE: push    ebp
-0x4633CF: lea     ecx, [esp+64h+arg_0]
+0x4633CF: lea     ecx, [esp+64h+stream]
 0x4633D3: push    ecx
 0x4633D4: push    4
 0x4633D6: lea     edx, [esp+6Ch+var_34]
 0x4633DA: push    edx
 0x4633DB: push    edi
-0x4633DC: mov     [esp+74h+arg_0], ebp
+0x4633DC: mov     [esp+74h+stream], ebp
 0x4633E0: call    eax
 0x4633E2: mov     eax, [esp+74h+var_34]
 0x4633E6: add     esp, 14h
@@ -727,7 +727,7 @@
 0x463401: jz      short loc_463448
 0x463403: fld1
 0x463405: push    ecx
-0x463406: fstp    [esp+64h+var_64]
+0x463406: fstp    dword ptr [esp+64h+var_68+4]
 0x463409: push    ebx
 0x46340A: push    4
 0x46340C: call    sub_6ACD10
@@ -755,13 +755,13 @@
 0x46344B: call    SaveLoad_LoadCreatedObjects
 0x463450: mov     edx, [edi+4]
 0x463453: push    ebp
-0x463454: lea     eax, [esp+64h+arg_0]
+0x463454: lea     eax, [esp+64h+stream]
 0x463458: push    eax
 0x463459: push    2
 0x46345B: lea     ecx, [esp+6Ch+var_4C]
 0x46345F: push    ecx
 0x463460: push    edi
-0x463461: mov     [esp+74h+arg_0], ebp
+0x463461: mov     [esp+74h+stream], ebp
 0x463465: call    edx
 0x463467: mov     ax, [esp+74h+var_4C]
 0x46346C: add     esp, 14h
@@ -790,12 +790,12 @@
 0x4634B6: mov     ebx, [esi+14h]
 0x4634B9: mov     eax, [edi+4]
 0x4634BC: push    ebp
-0x4634BD: lea     ecx, [esp+64h+arg_0]
+0x4634BD: lea     ecx, [esp+64h+stream]
 0x4634C1: push    ecx
 0x4634C2: push    edx
 0x4634C3: push    ebx
 0x4634C4: push    edi
-0x4634C5: mov     [esp+74h+arg_0], ebp
+0x4634C5: mov     [esp+74h+stream], ebp
 0x4634C9: call    eax
 0x4634CB: add     esp, 14h
 0x4634CE: call    sub_5C1420
@@ -808,13 +808,13 @@
 0x4634EF: jb      loc_46358A
 0x4634F5: mov     ecx, [edi+4]
 0x4634F8: push    ebp
-0x4634F9: lea     edx, [esp+64h+arg_0]
+0x4634F9: lea     edx, [esp+64h+stream]
 0x4634FD: push    edx
 0x4634FE: push    2
 0x463500: lea     eax, [esp+6Ch+var_4C]
 0x463504: push    eax
 0x463505: push    edi
-0x463506: mov     [esp+74h+arg_0], ebp
+0x463506: mov     [esp+74h+stream], ebp
 0x46350A: call    ecx
 0x46350C: mov     ax, [esp+74h+var_4C]
 0x463511: add     esp, 14h
@@ -843,12 +843,12 @@
 0x46355B: mov     ebx, [esi+14h]
 0x46355E: mov     edx, [edi+4]
 0x463561: push    ebp
-0x463562: lea     eax, [esp+64h+arg_0]
+0x463562: lea     eax, [esp+64h+stream]
 0x463566: push    eax
 0x463567: push    ecx
 0x463568: push    ebx
 0x463569: push    edi
-0x46356A: mov     [esp+74h+arg_0], ebp
+0x46356A: mov     [esp+74h+stream], ebp
 0x46356E: call    edx
 0x463570: add     esp, 14h
 0x463573: call    sub_5A8B60
@@ -865,13 +865,13 @@
 0x4635A4: jb      loc_46363F
 0x4635AA: mov     ecx, [edi+4]
 0x4635AD: push    ebp
-0x4635AE: lea     edx, [esp+64h+arg_0]
+0x4635AE: lea     edx, [esp+64h+stream]
 0x4635B2: push    edx
 0x4635B3: push    2
 0x4635B5: lea     eax, [esp+6Ch+var_4C]
 0x4635B9: push    eax
 0x4635BA: push    edi
-0x4635BB: mov     [esp+74h+arg_0], ebp
+0x4635BB: mov     [esp+74h+stream], ebp
 0x4635BF: call    ecx
 0x4635C1: mov     ax, [esp+74h+var_4C]
 0x4635C6: add     esp, 14h
@@ -900,12 +900,12 @@
 0x463610: mov     ebx, [esi+14h]
 0x463613: mov     edx, [edi+4]
 0x463616: push    ebp
-0x463617: lea     eax, [esp+64h+arg_0]
+0x463617: lea     eax, [esp+64h+stream]
 0x46361B: push    eax
 0x46361C: push    ecx
 0x46361D: push    ebx
 0x46361E: push    edi
-0x46361F: mov     [esp+74h+arg_0], ebp
+0x46361F: mov     [esp+74h+stream], ebp
 0x463623: call    edx
 0x463625: add     esp, 14h
 0x463628: call    sub_57C000
@@ -918,13 +918,13 @@
 0x463648: jb      loc_4636E3
 0x46364E: mov     eax, [edi+4]
 0x463651: push    ebp
-0x463652: lea     ecx, [esp+64h+arg_0]
+0x463652: lea     ecx, [esp+64h+stream]
 0x463656: push    ecx
 0x463657: push    2
 0x463659: lea     edx, [esp+6Ch+var_4C]
 0x46365D: push    edx
 0x46365E: push    edi
-0x46365F: mov     [esp+74h+arg_0], ebp
+0x46365F: mov     [esp+74h+stream], ebp
 0x463663: call    eax
 0x463665: mov     ax, [esp+74h+var_4C]
 0x46366A: add     esp, 14h
@@ -953,12 +953,12 @@
 0x4636B4: mov     ebx, [esi+14h]
 0x4636B7: mov     edx, [edi+4]
 0x4636BA: push    ebp
-0x4636BB: lea     eax, [esp+64h+arg_0]
+0x4636BB: lea     eax, [esp+64h+stream]
 0x4636BF: push    eax
 0x4636C0: push    ecx
 0x4636C1: push    ebx
 0x4636C2: push    edi
-0x4636C3: mov     [esp+74h+arg_0], ebp
+0x4636C3: mov     [esp+74h+stream], ebp
 0x4636C7: call    edx
 0x4636C9: add     esp, 14h
 0x4636CC: call    sub_4A3100

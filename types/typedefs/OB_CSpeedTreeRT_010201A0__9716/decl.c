@@ -1,0 +1,38 @@
+struct OB_CSpeedTreeRT_010201A0
+{
+OB_CTreeEngine_010201A0 *treeEngine;
+OB_CIndexedGeometry_010201A0 *branchGeometry;
+OB_CLeafGeometry_010201A0 *leafGeometry;
+OB_CLightingEngine_010201A0 *lightingEngine;
+OB_CWindEngine_010201A0 *windEngine;
+OB_CSimpleBillboard_010201A0 *simpleBillboard;
+int leafLodTransitionMethod;
+float leafLodTransitionRadius;
+float leafLodCurveExponent;
+float leafSizeIncreaseFactor;
+float leafTransitionFactor16014;
+float *leafLodSizeAdjustments;
+unsigned int *sharedInstanceRefcount;
+OB_STreeInstanceData *instanceData;
+void *sharedInstanceListVector;
+int frondActivationLevel;
+OB_STreeExtents_010201A0 *treeSizeBounds;
+unsigned __int8 targetAlphaByte;
+unsigned __int8 treeComputedFlag;
+unsigned __int16 pad_46;
+int branchWindWeightLevel;
+OB_CSpeedTreeRT_SEmbeddedTexCoords *embeddedTexcoords;
+OB_CProjectedShadow_010201A0 *projectedShadow;
+unsigned __int16 directional360ImageCount;
+unsigned __int16 pad_56;
+OB_CSpeedTreeRT_SCollisionObjects_010201A0 *collisionObjects;
+OB_CFrondEngine_010201A0 *frondEngine;
+OB_CIndexedGeometry_010201A0 *frondGeometry;
+unsigned __int16 frondLodCount;
+unsigned __int16 pad_66;
+char *userDataString;
+unsigned __int8 flag360Billboard;
+unsigned __int8 flagHorizontalBillboard;
+unsigned __int16 pad_6E;
+float horizontalBillboardCoords12[12];
+};

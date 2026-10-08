@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x51023D",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x510263",
-    "line": "call    sub_7B4890",
+    "line": "call    BSShader_SetRenderMode; Update the global renderer mode used by mode-5 shadow-map production and restore.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x5102AD",
-    "line": "call    sub_7B4890",
+    "line": "call    BSShader_SetRenderMode; Update the global renderer mode used by mode-5 shadow-map production and restore.",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x5102C1",
-    "line": "call    sub_7B4890",
+    "line": "call    BSShader_SetRenderMode; Update the global renderer mode used by mode-5 shadow-map production and restore.",
     "mnemonic": "call",
     "size": 5
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x5102D6",
-    "line": "call    sub_7B4890",
+    "line": "call    BSShader_SetRenderMode; Update the global renderer mode used by mode-5 shadow-map production and restore.",
     "mnemonic": "call",
     "size": 5
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x510320",
-    "line": "call    sub_7B4890",
+    "line": "call    BSShader_SetRenderMode; Update the global renderer mode used by mode-5 shadow-map production and restore.",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x510341",
-    "line": "call    sub_405A80",
+    "line": "call    BSShaderManager_IsShadowMappingReady; [Verified] Returns true only when BSShaderPackageVersion (RendererGlobalState+0xAF) >= 3 and BSShaderFeatureMask (RendererGlobalState+0xA7) contains native shadow-map bit 0x10. The version comparison independently corroborates the selector field read by GetShaderProgramPackageIndex.",
     "mnemonic": "call",
     "size": 5
   },
@@ -871,7 +871,7 @@
   },
   {
     "ea": "0x5103D2",
-    "line": "call    ShadowCanopyPass",
+    "line": "call    ShadowCanopyPass; Retail canopy shadow-map pass; separate from per-source ShadowSceneLight mode-5 maps.",
     "mnemonic": "call",
     "size": 5
   },
@@ -907,7 +907,7 @@
   },
   {
     "ea": "0x5103EB",
-    "line": "call    SetTextureCanopyShadowMap",
+    "line": "call    SetTextureCanopyShadowMap; Install/own the current canopy shadow-map texture at global 0x00B4310C.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x473BF0",
-    "line": "push    ebx",
+    "line": "push    ebx; Returns the serialized actor-animation block size including its 2-byte length prefix. Null animation data or actors excluded by virtual predicate +0x198 serialize only the zero-length prefix.",
     "mnemonic": "push",
     "size": 1
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x473C19",
-    "line": "call    sub_473420",
+    "line": "call    ActorAnimData_GetSaveStateSize; Computes ActorAnimData serialized size from fixed slot/key/action fields plus variable active sequence and current/queued idle state.",
     "mnemonic": "call",
     "size": 5
   },

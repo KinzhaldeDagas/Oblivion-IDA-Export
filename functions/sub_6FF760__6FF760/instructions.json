@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x6FF775",
-    "line": "push    offset stru_B3F600; lpCriticalSection",
+    "line": "push    offset unk_B3F600; lpCriticalSection",
     "mnemonic": "push",
     "size": 5
   },
@@ -253,25 +253,25 @@
   },
   {
     "ea": "0x6FF7DF",
-    "line": "push    eax; Size",
+    "line": "push    eax; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6FF7E0",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6FF7E1",
-    "line": "push    edi; Dst",
+    "line": "push    edi; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6FF7E2",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x6FF7EB",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x6FF809",
-    "line": "push    offset stru_B3F600; lpCriticalSection",
+    "line": "push    offset unk_B3F600; lpCriticalSection",
     "mnemonic": "push",
     "size": 5
   },

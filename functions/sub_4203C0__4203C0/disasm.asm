@@ -1,4 +1,4 @@
-0x4203C0: push    esi
+0x4203C0: push    esi; Returns the TESObjectREFR stored in ExtraItemDropper type 0x41.
 0x4203C1: push    41h ; 'A'; a2
 0x4203C3: xor     esi, esi
 0x4203C5: call    BaseExtraList_GetExtraData

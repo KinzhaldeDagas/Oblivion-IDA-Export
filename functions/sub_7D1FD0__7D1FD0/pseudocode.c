@@ -1,21 +1,21 @@
-_DWORD *__thiscall sub_7D1FD0(_DWORD *this, _DWORD *a2)
+void **__thiscall NiTRefPointerList__RemoveTail(MEF_RefList32 *self, void **result)
 {
-  int v3; // edi
-  _DWORD *v4; // eax
-  int v5; // eax
+  MEF_RefListNode32 *tail; // edi
+  MEF_RefListNode32 *previous; // eax
+  volatile LONG *payload; // eax
 
-  v3 = *(this + 2);
-  v4 = *(_DWORD **)(v3 + 4);
-  *(this + 2) = v4;
-  if ( v4 )
-    *v4 = 0;
+  tail = self->tail; /*0x7d1ffe*/
+  previous = tail->previous; /*0x7d2001*/
+  self->tail = previous; /*0x7d2006*/
+  if ( previous ) /*0x7d2009*/
+    previous->next = 0; /*0x7d200b*/
   else
-    *(this + 1) = 0;
-  v5 = *(_DWORD *)(v3 + 8);
-  *a2 = v5;
-  if ( v5 )
-    InterlockedIncrement((volatile LONG *)(v5 + 4));
-  (*(void (__thiscall **)(_DWORD *, int))(*this + 8))(this, v3);
-  --*(this + 3);
-  return a2;
+    self->head = 0; /*0x7d2013*/
+  payload = (volatile LONG *)tail->payload; /*0x7d201a*/
+  *result = (void *)payload; /*0x7d2023*/
+  if ( payload ) /*0x7d2025*/
+    InterlockedIncrement(payload + 1); /*0x7d202b*/
+  (*((void (__thiscall **)(MEF_RefList32 *, MEF_RefListNode32 *))self->vtable + 2))(self, tail); /*0x7d2049*/
+  --self->count; /*0x7d204b*/
+  return result; /*0x7d2051*/
 }

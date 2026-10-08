@@ -1,4 +1,4 @@
-0x78F690: sub     esp, 8
+0x78F690: sub     esp, 8; CBranch::ComputeVolume. Sums segment length times adjacent radius sum across compact 0x48-byte branch vertices and writes CBranch+0x28 volume.
 0x78F693: push    esi
 0x78F694: mov     esi, [ecx+18h]
 0x78F697: test    esi, esi

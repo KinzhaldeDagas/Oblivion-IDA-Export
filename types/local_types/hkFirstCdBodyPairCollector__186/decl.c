@@ -1,1 +1,1 @@
-hkFirstCdBodyPairCollector
+struct hkFirstCdBodyPairCollector;

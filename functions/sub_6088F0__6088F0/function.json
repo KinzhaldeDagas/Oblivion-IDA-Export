@@ -1,19 +1,32 @@
 {
-  "callees_count": 22,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_6088F0",
+  "chunks": [
+    [
+      "0x6088F0",
+      "0x608AD2"
+    ]
+  ],
+  "chunks_sha256": "f1bf87b55e7dfbd9c0c019ec08d1eb1e5b13e13438dc43979e815a57db8d5c0b",
+  "comment_regular": "Applies the one-shot impact impulse using world-space contact point and normal components. Projectile byte +0x97 prevents duplicate attempts, including unsupported collision objects.",
+  "comment_repeatable": "Applies the one-shot impact impulse using world-space contact point and normal components. Projectile byte +0x97 prevents duplicate attempts, including unsupported collision objects.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
+  "display_name": "ArrowProjectile_ApplyImpactImpulseToCollision",
   "end_ea": "0x608AD2",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "sub_6088F0",
+  "name": "ArrowProjectile_ApplyImpactImpulseToCollision",
   "segment": ".text",
   "sha256": "f1bf87b55e7dfbd9c0c019ec08d1eb1e5b13e13438dc43979e815a57db8d5c0b",
   "size": 482,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6088F0",
-  "type": "void __thiscall(float *this, float, float, float, float, float, float, _DWORD *)",
+  "total_chunk_size": 482,
+  "type": "void __thiscall(ArrowProjectile *this, float pointX, float pointY, float pointZ, float normalX, float normalY, float normalZ, void *collisionObject)",
   "xrefs_from_count": 166,
   "xrefs_to_count": 2
 }

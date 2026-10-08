@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x663EE0",
+      "0x663EFD"
+    ]
+  ],
+  "chunks_sha256": "98a9d168cffec4cce09181ab0223b68203103cd5049b7d3cf31c082c21ccc209",
+  "comment_regular": "Verified paired writer for PlayerCharacter_GetLastSpaceForDoor: writes spaceIndex into the same per-player map at +0x788 using TESObjectDOOR.refID (+0x0C) as key. Called after random destination-space selection. Map value's full stored width is not inferred here; getter returns UInt8.",
+  "comment_repeatable": "Verified paired writer for PlayerCharacter_GetLastSpaceForDoor: writes spaceIndex into the same per-player map at +0x788 using TESObjectDOOR.refID (+0x0C) as key. Called after random destination-space selection. Map value's full stored width is not inferred here; getter returns UInt8.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_663EE0",
+  "display_name": "PlayerCharacter_SetLastSpaceForDoor",
   "end_ea": "0x663EFD",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_663EE0",
+  "name": "PlayerCharacter_SetLastSpaceForDoor",
   "segment": ".text",
   "sha256": "98a9d168cffec4cce09181ab0223b68203103cd5049b7d3cf31c082c21ccc209",
   "size": 29,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x663EE0",
-  "type": "void __thiscall(_DWORD *this, int, int)",
+  "total_chunk_size": 29,
+  "type": "void __thiscall(PlayerCharacter *this, TESObjectDOOR *door, UInt32 spaceIndex)",
   "xrefs_from_count": 8,
   "xrefs_to_count": 1
 }

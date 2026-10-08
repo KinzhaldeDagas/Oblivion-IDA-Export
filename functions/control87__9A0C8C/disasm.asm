@@ -117,7 +117,7 @@
 0x9A0DE8: or      edx, 40000h
 0x9A0DEE: mov     eax, edx
 0x9A0DF0: mov     [esp+20h+var_4], edx
-0x9A0DF4: cmp     dword_BAABE0, 0
+0x9A0DF4: cmp     dword ptr unk_BAABE0, 0
 0x9A0DFB: jz      loc_9A0F87
 0x9A0E01: and     esi, 308031Fh
 0x9A0E07: mov     edi, esi

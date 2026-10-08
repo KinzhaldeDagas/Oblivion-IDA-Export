@@ -40,7 +40,6 @@
 0x58B6F0: jbe     short loc_58B71F
 0x58B6F2: mov     edx, [esi+4]
 0x58B6F5: jmp     short loc_58B700
-0x58B6F7: align 10h
 0x58B700: movzx   eax, word ptr [esi+0Ah]
 0x58B704: movzx   ecx, ax
 0x58B707: cmp     dword ptr [edx+ecx*4-4], 0
@@ -67,7 +66,7 @@
 0x58B74F: call    eax
 0x58B751: test    eax, eax
 0x58B753: jz      short loc_58B767
-0x58B755: cmp     eax, offset unk_B352A4
+0x58B755: cmp     eax, 0B352A4h
 0x58B75A: jz      loc_58B7F0
 0x58B760: mov     eax, [eax+4]
 0x58B763: test    eax, eax
@@ -79,16 +78,16 @@
 0x58B76F: mov     esi, eax
 0x58B771: jz      short loc_58B7A2
 0x58B773: fld     [esp+14h+arg_C]
-0x58B777: call    Double_To_SInt32
+0x58B777: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x58B77C: fld     [esp+14h+arg_8]
 0x58B780: push    eax
-0x58B781: call    Double_To_SInt32
+0x58B781: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x58B786: fld     [esp+18h+arg_4]
 0x58B78A: push    eax
-0x58B78B: call    Double_To_SInt32
+0x58B78B: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x58B790: fld     [esp+1Ch+arg_0]
 0x58B794: push    eax
-0x58B795: call    Double_To_SInt32
+0x58B795: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x58B79A: push    eax
 0x58B79B: mov     ecx, esi
 0x58B79D: call    sub_4A17F0

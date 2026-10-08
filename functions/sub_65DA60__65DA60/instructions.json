@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x65DA60",
-    "line": "push    ecx",
+    "line": "push    ecx; Player override of vtable +0x1E0. Returns base rotation.z plus PlayerCharacter+0x61C, with one wrap by 2*pi (0xA3D5B0 = 6.283185...) into the expected angular interval. Native ABI return is float.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x65DA64",
-    "line": "call    MobileObject_GetZRotation",
+    "line": "call    MobileObject_GetZRotation; Actor/MobileObject vtable +0x1E0 base implementation. Returns the single-precision reference rotation Z field at +0x28; the prior double return type was an x87 decompiler artifact.",
     "mnemonic": "call",
     "size": 5
   },

@@ -9,8 +9,8 @@ NiTriBasedGeomData *__thiscall NiTriBasedGeomData::NiTriBasedGeomData(
         __int16 a8,
         UInt16 a9)
 {
-  NiGeometryData::NiGeometryData((NiGeometryData *)this, a2, a3, a4, a5, a6, a7, a8);
-  this->__vftable = (NiTriBasedGeomDataVtbl *)&NiTriBasedGeomData::`vftable';
-  this->members.m_usTriangles = a9;
-  return this;
+  NiGeometryData::NiGeometryData((NiGeometryData *)this, a2, a3, a4, a5, a6, a7, a8); /*0x732d98*/
+  this->__vftable = (NiTriBasedGeomDataVtbl *)&NiTriBasedGeomData::`vftable'; /*0x732da2*/
+  this->members.m_usTriangles = a9; /*0x732da8*/
+  return this; /*0x732dae*/
 }

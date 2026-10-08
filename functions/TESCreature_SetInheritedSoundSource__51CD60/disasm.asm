@@ -15,7 +15,7 @@
 0x51CD81: mov     ecx, edi
 0x51CD83: call    CreatureSoundArray_ClearAllSounds
 0x51CD88: push    edi
-0x51CD89: call    FormHeapFree
+0x51CD89: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x51CD8E: add     esp, 4
 0x51CD91: mov     edx, [esi+24h]
 0x51CD94: mov     eax, [edx+50h]

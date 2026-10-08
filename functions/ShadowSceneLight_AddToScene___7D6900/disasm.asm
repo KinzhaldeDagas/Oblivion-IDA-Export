@@ -1,4 +1,4 @@
-0x7D6900: push    esi
+0x7D6900: push    esi; Native receiver-root gate: require a non-null root, non-null world bound, AppCulled clear, and nonzero bound radius, then recurse through ShadowSceneLight_UpdateLightingProperty.
 0x7D6901: mov     esi, [esp+4+arg_0]
 0x7D6905: test    esi, esi
 0x7D6907: push    edi
@@ -20,7 +20,7 @@
 0x7D692B: jnp     short loc_7D6935
 0x7D692D: push    ecx
 0x7D692E: mov     ecx, edi
-0x7D6930: call    ShadowSceneLight_UpdateLightingProperty
+0x7D6930: call    ShadowSceneLight_UpdateLightingProperty; Recursively traverse a receiver tree while preserving ShadowSceneLight active-plane mask +0x1B0; accepted geometry reaches AssociateReceiverGeometry.
 0x7D6935: pop     edi
 0x7D6936: pop     esi
 0x7D6937: retn    4

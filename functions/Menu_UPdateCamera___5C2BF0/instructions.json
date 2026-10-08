@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x5C2CB6",
-    "line": "lea     ecx, [esp+7Ch+var_30]",
+    "line": "lea     ecx, [esp+7Ch+var_30]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -343,13 +343,13 @@
   },
   {
     "ea": "0x5C2CD0",
-    "line": "fstp    [esp+7Ch+var_7C]; float",
+    "line": "fstp    [esp+7Ch+angleZ]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5C2CD3",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -739,7 +739,7 @@
   },
   {
     "ea": "0x5C2DD0",
-    "line": "mov     ecx, offset stru_B3B5E0",
+    "line": "mov     ecx, offset unk_B3B5E0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -841,19 +841,19 @@
   },
   {
     "ea": "0x5C2E18",
-    "line": "mov     ecx, offset stru_B3B5E0; this",
+    "line": "mov     ecx, offset unk_B3B5E0; this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x5C2E1D",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5C2E22",
-    "line": "push    offset dword_B258E8",
+    "line": "push    offset rhs",
     "mnemonic": "push",
     "size": 5
   },
@@ -871,7 +871,7 @@
   },
   {
     "ea": "0x5C2E2C",
-    "line": "mov     ecx, offset stru_B3B5E0",
+    "line": "mov     ecx, offset unk_B3B5E0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -889,7 +889,7 @@
   },
   {
     "ea": "0x5C2E3C",
-    "line": "fstp    [esp+78h+var_30]",
+    "line": "fstp    [esp+78h+var_30.data]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -901,7 +901,7 @@
   },
   {
     "ea": "0x5C2E46",
-    "line": "fstp    [esp+78h+var_2C]",
+    "line": "fstp    [esp+78h+var_30.data+4]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -913,7 +913,7 @@
   },
   {
     "ea": "0x5C2E50",
-    "line": "fstp    [esp+78h+var_28]",
+    "line": "fstp    [esp+78h+var_30.data+8]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -925,7 +925,7 @@
   },
   {
     "ea": "0x5C2E5A",
-    "line": "fstp    [esp+78h+var_24]",
+    "line": "fstp    [esp+78h+var_30.data+0Ch]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -937,7 +937,7 @@
   },
   {
     "ea": "0x5C2E64",
-    "line": "fstp    [esp+78h+var_20]",
+    "line": "fstp    [esp+78h+var_30.data+10h]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -949,7 +949,7 @@
   },
   {
     "ea": "0x5C2E6E",
-    "line": "fstp    [esp+78h+var_1C]",
+    "line": "fstp    [esp+78h+var_30.data+14h]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -961,7 +961,7 @@
   },
   {
     "ea": "0x5C2E78",
-    "line": "fstp    [esp+78h+var_18]",
+    "line": "fstp    [esp+78h+var_30.data+18h]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -973,7 +973,7 @@
   },
   {
     "ea": "0x5C2E82",
-    "line": "fstp    [esp+78h+var_14]",
+    "line": "fstp    [esp+78h+var_30.data+1Ch]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -985,7 +985,7 @@
   },
   {
     "ea": "0x5C2E8C",
-    "line": "fstp    [esp+78h+var_10]",
+    "line": "fstp    [esp+78h+var_30.data+20h]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1183,7 +1183,7 @@
   },
   {
     "ea": "0x5C2EF9",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1234,5 +1234,71 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C0F20",
+    "line": "mov     eax, dword_B3B704",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C0F25",
+    "line": "and     eax, 0FFFFFFFEh",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9C0F28",
+    "line": "mov     dword_B3B704, eax",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C0F2D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C0F2E",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C0F32",
+    "line": "lea     eax, [edx-68h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C0F35",
+    "line": "mov     ecx, [edx-6Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C0F38",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C0F3A",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C0F3F",
+    "line": "mov     eax, offset stru_AEA050",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C0F44",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

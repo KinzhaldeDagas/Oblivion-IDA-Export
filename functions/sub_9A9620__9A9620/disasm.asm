@@ -13,9 +13,9 @@
 0x9A963A: test    eax, eax
 0x9A963C: jz      short loc_9A964F
 0x9A963E: mov     eax, [eax+0Ch]
-0x9A9641: push    eax; Str2
-0x9A9642: push    ebp; Str1
-0x9A9643: call    __strcmp
+0x9A9641: push    eax; right
+0x9A9642: push    ebp; left
+0x9A9643: call    CRT_StricmpLocaleDispatch
 0x9A9648: add     esp, 8
 0x9A964B: test    eax, eax
 0x9A964D: jz      short loc_9A9660

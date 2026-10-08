@@ -3,7 +3,7 @@
 0x99D399: push    esi
 0x99D39A: push    edi
 0x99D39B: jl      short loc_99D3F7
-0x99D39D: cmp     eax, uNumber
+0x99D39D: cmp     eax, ds:0BAAAA0h
 0x99D3A3: jnb     short loc_99D3F7
 0x99D3A5: mov     esi, eax
 0x99D3A7: and     esi, 1Fh

@@ -1,18 +1,31 @@
 {
-  "callees_count": 1,
-  "callers_count": 67,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 84,
+  "chunks": [
+    [
+      "0x452570",
+      "0x452590"
+    ]
+  ],
+  "chunks_sha256": "51ac0893037b2ab0fad8ed2e74c66f92b8648829d73f424b850e8e6328ac20cf",
+  "comment_regular": "\n[2026-10-03 checkpoint contract] Verified45258F..4525A6 scans existing nodes; matching key enters4525DC ClearValue then SetValue on SAME node. Missing key allocates and prepends at4525A8..4525D1. Clone map ClearValue is no-op, so prior nodes/keys remain stable while values can change. This is the validated contract for plugin group clone rollback snapshots.",
+  "comment_repeatable": "MEF PERF 2026-10-02 PASS2: PERF-11 Verified algorithm: SetAt hashes once, scans the bucket by virtual equality, replaces existing or prepends a new node, increments count. No resize/load-factor branch in452570..4525FC. For distinct insertions at fixed B, comparisons=sum n_b*(n_b-1)/2; at B=37 cost is quadratic in accepted population. Actual populations/external resize lifecycle remain Unknown.\nMEF v57 IMPLEMENTED 2026-10-08: PERF-11 lifecycle interceptor: invalidate NumericID map index generation before native SetAt. Other vtables retain native behavior. Inline checked TryStoreRawSaveBlobMap now has auxiliary key->native-node fast path; native bucket layout/order and value ownership unchanged. No native rehash.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "NiTMap_SetAt",
   "end_ea": "0x452590",
+  "evidence_confidence": "Unknown",
   "flags": 5120,
   "has_pseudocode": true,
   "name": "NiTMap_SetAt",
   "segment": ".text",
   "sha256": "51ac0893037b2ab0fad8ed2e74c66f92b8648829d73f424b850e8e6328ac20cf",
   "size": 32,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x452570",
+  "total_chunk_size": 32,
   "type": "int __thiscall(_DWORD *this, int a2, int a3)",
   "xrefs_from_count": 17,
   "xrefs_to_count": 84

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5EAE70",
-    "line": "push    ecx",
+    "line": "push    ecx; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.",
     "mnemonic": "push",
     "size": 1
   },
@@ -349,13 +349,13 @@
   },
   {
     "ea": "0x5EAF12",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5EAF14",
-    "line": "call    sub_567770",
+    "line": "call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.",
     "mnemonic": "call",
     "size": 5
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x5EAF58",
-    "line": "call    sub_5E8DE0",
+    "line": "call    sub_5E8DE0; 3DTheft: marks actor modified when assigning created package/editor package. For created package refIDs, uses actor modified mask 0x20000, or 0x30000 for types 0x13/0x11.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x5EAF5F",
-    "line": "call    sub_41FB40",
+    "line": "call    ExtraDataList_GetPackageExtraIndex; Returns ExtraPackage's package index field, or zero when absent.",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x5EAF77",
-    "line": "call    sub_41FB60",
+    "line": "call    ExtraDataList_GetPackageExtraTarget; Returns ExtraPackage's target TESObjectREFR pointer, or null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x5EAFB9",
-    "line": "push    offset sub_645A30; a6",
+    "line": "push    offset TESObjectREFR_SetOwnedDoorLockedForActor; a6",
     "mnemonic": "push",
     "size": 5
   },
@@ -739,7 +739,7 @@
   },
   {
     "ea": "0x5EAFE0",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -895,7 +895,7 @@
   },
   {
     "ea": "0x5EB030",
-    "line": "call    sub_41FB80",
+    "line": "call    ExtraDataList_GetPackageExtraComplete; Returns ExtraPackage's completion byte, or false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -949,7 +949,7 @@
   },
   {
     "ea": "0x5EB04D",
-    "line": "call    sub_41FBA0",
+    "line": "call    ExtraDataList_GetPackageExtraActivate; Returns ExtraPackage's activation byte, or false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -991,7 +991,7 @@
   },
   {
     "ea": "0x5EB061",
-    "line": "mov     ebx, [esp+14h+var_4]",
+    "line": "mov     ebx, [esp+14h+self]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1009,7 +1009,7 @@
   },
   {
     "ea": "0x5EB06A",
-    "line": "mov     [eax+8], ebp",
+    "line": "mov     [eax+8], ebp; 3DTheft: no ExtraPackage cleanup branch clears process->editorPackage.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1021,7 +1021,7 @@
   },
   {
     "ea": "0x5EB070",
-    "line": "mov     [ecx+4], ebp",
+    "line": "mov     [ecx+4], ebp; 3DTheft: no ExtraPackage cleanup branch resets editorPackProcedure to TRAVEL.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1171,13 +1171,13 @@
   },
   {
     "ea": "0x5EB0B7",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5EB0B9",
-    "line": "call    sub_5660A0",
+    "line": "call    TESPackage_IsRuntimePackage; 3DTheft: detached dynamic package is destroyed or queued for save cleanup after editor/current package state is restored.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1225,19 +1225,19 @@
   },
   {
     "ea": "0x5EB0D2",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x5EB0D8",
-    "line": "push    ebx",
+    "line": "push    ebx; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5EB0D9",
-    "line": "call    sub_45C7A0",
+    "line": "call    TESSaveLoadGame_DeleteForm",
     "mnemonic": "call",
     "size": 5
   },

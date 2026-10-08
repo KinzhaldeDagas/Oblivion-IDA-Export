@@ -1,1 +1,1 @@
-NT_TIB
+typedef _NT_TIB NT_TIB;

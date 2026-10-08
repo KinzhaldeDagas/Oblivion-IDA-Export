@@ -7,7 +7,7 @@
 0x4C58DF: push    ebp
 0x4C58E0: push    esi
 0x4C58E1: push    3
-0x4C58E3: call    nullsub_returnTrue_0arg
+0x4C58E3: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x4C58E8: mov     eax, [edi+24h]
 0x4C58EB: mov     ebp, ds:0A2807Ch
 0x4C58F1: add     esp, 4
@@ -17,7 +17,7 @@
 0x4C5900: test    esi, esi
 0x4C5902: jz      short loc_4C5941
 0x4C5904: mov     ecx, esi; this
-0x4C5906: call    TESObjectCELL_IsInterior
+0x4C5906: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x4C590B: test    al, al
 0x4C590D: jz      short loc_4C5919
 0x4C590F: lea     ecx, [esi+28h]
@@ -102,7 +102,7 @@
 0x4C59F4: mov     edx, [edi+24h]
 0x4C59F7: mov     eax, [edx]
 0x4C59F9: push    eax
-0x4C59FA: call    FormHeapFree
+0x4C59FA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4C59FF: mov     ecx, [edi+24h]
 0x4C5A02: add     esp, 4
 0x4C5A05: mov     dword ptr [ecx], 0
@@ -157,7 +157,7 @@
 0x4C5A7C: mov     ecx, edi
 0x4C5A7E: call    sub_4BFE80
 0x4C5A83: push    2
-0x4C5A85: call    nullsub_returnTrue_0arg
+0x4C5A85: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x4C5A8A: add     esp, 4
 0x4C5A8D: pop     esi
 0x4C5A8E: pop     ebp

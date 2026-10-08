@@ -30,10 +30,10 @@
 0x5D0D8F: mov     ecx, ebx
 0x5D0D91: call    ContainerEntryExtraData_DestroyDataTable
 0x5D0D96: push    ebx
-0x5D0D97: call    FormHeapFree
+0x5D0D97: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5D0D9C: add     esp, 4
 0x5D0D9F: push    edi
-0x5D0DA0: call    FormHeapFree
+0x5D0DA0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5D0DA5: add     esp, 4
 0x5D0DA8: cmp     [esi+0Ch], ebp
 0x5D0DAB: jnz     short loc_5D0D60

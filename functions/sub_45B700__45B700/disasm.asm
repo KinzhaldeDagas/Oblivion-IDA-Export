@@ -1,6 +1,6 @@
 0x45B700: push    esi
 0x45B701: push    edi
-0x45B702: mov     edi, [esp+8+arg_0]
+0x45B702: mov     edi, [esp+8+form]
 0x45B706: mov     eax, [edi+8]
 0x45B709: shr     eax, 0Eh
 0x45B70C: test    al, 1
@@ -20,29 +20,29 @@
 0x45B732: and     al, 1
 0x45B734: test    al, al
 0x45B736: jz      short loc_45B761
-0x45B738: mov     ecx, [esi+4]
+0x45B738: mov     ecx, [esi+4]; self
 0x45B73B: test    ecx, ecx
 0x45B73D: jz      short loc_45B74F
-0x45B73F: mov     edx, [esp+8+arg_4]
-0x45B743: push    edx
-0x45B744: push    edi
-0x45B745: call    sub_452C20
+0x45B73F: mov     edx, [esp+8+flags]
+0x45B743: push    edx; flags
+0x45B744: push    edi; form
+0x45B745: call    ChangesMap_AddFormChangeFlags;
 0x45B74A: pop     edi
 0x45B74B: pop     esi
 0x45B74C: retn    8
-0x45B74F: mov     eax, [esp+8+arg_4]
-0x45B753: mov     ecx, [esi]
-0x45B755: push    eax
-0x45B756: push    edi
-0x45B757: call    sub_452C20
+0x45B74F: mov     eax, [esp+8+flags]
+0x45B753: mov     ecx, [esi]; self
+0x45B755: push    eax; flags
+0x45B756: push    edi; form
+0x45B757: call    ChangesMap_AddFormChangeFlags;
 0x45B75C: pop     edi
 0x45B75D: pop     esi
 0x45B75E: retn    8
-0x45B761: mov     ecx, [esp+8+arg_4]
-0x45B765: push    ecx
-0x45B766: mov     ecx, [esi]
-0x45B768: push    edi
-0x45B769: call    sub_452C20
+0x45B761: mov     ecx, [esp+8+flags]
+0x45B765: push    ecx; flags
+0x45B766: mov     ecx, [esi]; self
+0x45B768: push    edi; form
+0x45B769: call    ChangesMap_AddFormChangeFlags;
 0x45B76E: pop     edi
 0x45B76F: pop     esi
 0x45B770: retn    8

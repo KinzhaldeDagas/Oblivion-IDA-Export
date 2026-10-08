@@ -2,18 +2,16 @@ int __usercall sub_748C90@<eax>(int a1@<esi>, _DWORD *a2, void *Src, size_t Size
 {
   void *v6; // esi
   int v7; // edi
-  size_t v8; // [esp-Ch] [ebp-10h]
-  size_t v9; // [esp-8h] [ebp-Ch]
+  size_t v8; // [esp-8h] [ebp-Ch]
 
-  if ( !(_DWORD)Size )
-    return 0;
-  HIDWORD(v9) = a1;
-  v6 = (void *)FormHeapAlloc(Size);
-  LODWORD(v8) = Size;
-  memcpy(v6, Src, v8);
-  NiBinaryStream_DoByteSwap((char *)v6, Size, SHIDWORD(Size), a5);
-  LODWORD(v9) = Size;
-  v7 = sub_748920(a2, Size, v6, v9);
-  FormHeapFree((unsigned int)v6);
-  return v7;
+  if ( !(_DWORD)Size ) /*0x748c97*/
+    return 0; /*0x748c99*/
+  HIDWORD(v8) = a1; /*0x748c9d*/
+  v6 = (void *)FormHeapAlloc(Size); /*0x748ca4*/
+  memcpy(v6, Src, Size); /*0x748cad*/
+  NiBinaryStream_DoByteSwap((char *)v6, Size, SHIDWORD(Size), a5); /*0x748cbe*/
+  LODWORD(v8) = Size; /*0x748cca*/
+  v7 = sub_748920(a2, v6, v8); /*0x748cd2*/
+  FormHeapFree((unsigned int)v6); /*0x748cd4*/
+  return v7; /*0x748c9b*/
 }

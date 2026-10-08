@@ -10,5 +10,5 @@ void __stdcall MagicCaster_ExplosionCalcs_____::Done(
         int a8,
         int a9)
 {
-  ;
+  ; /*0x69ac26*/
 }

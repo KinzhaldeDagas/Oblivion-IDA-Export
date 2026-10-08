@@ -1,48 +1,53 @@
-_DWORD *__userpurge sub_795480@<eax>(_DWORD *this@<ecx>, unsigned int a2@<ebp>, unsigned int a3@<esi>, int a4)
+// OBLIVION AUTHORITY (2026-08-30): Deep copy constructor for vector<unsigned short>; allocates exact source size and copies its 2-byte elements.
+OB_stVectorUShort_010201A0 *__thiscall OB_stVectorUShort_CopyCtor_010201A0(
+        OB_stVectorUShort_010201A0 *this,
+        const OB_stVectorUShort_010201A0 *source)
 {
-  int v5; // ecx
+  unsigned int v2; // ebp
+  unsigned int v3; // esi
+  unsigned __int16 *begin; // ecx
   int v6; // eax
   int v7; // esi
-  int v8; // eax
-  unsigned int v9; // esi
-  unsigned int v10; // ebp
-  char *v11; // ecx
+  unsigned __int16 *v8; // eax
+  unsigned __int16 *end; // esi
+  unsigned __int16 *v10; // ebp
+  unsigned __int16 *v11; // ecx
   bool v12; // zf
   int v13; // esi
   const void *v14; // eax
-  char *v15; // esi
+  unsigned __int16 *v15; // esi
   rsize_t v17; // [esp-8h] [ebp-10h]
 
-  v5 = *(_DWORD *)(a4 + 4);
-  if ( v5 )
-    v6 = (*(_DWORD *)(a4 + 8) - v5) >> 1;
+  begin = source->begin; /*0x795488*/
+  if ( begin ) /*0x79548f*/
+    v6 = source->end - begin; /*0x79549a*/
   else
-    v6 = 0;
-  *(this + 1) = 0;
-  *(this + 2) = 0;
-  *(this + 3) = 0;
-  if ( v6 )
+    v6 = 0; /*0x795491*/
+  this->begin = 0; /*0x79549e*/
+  this->end = 0; /*0x7954a1*/
+  this->capacityEnd = 0; /*0x7954a4*/
+  if ( v6 ) /*0x7954a7*/
   {
-    v17 = __PAIR64__(a2, a3);
-    v7 = 2 * v6;
-    v8 = FormHeapAlloc(2 * v6);
-    *(this + 1) = v8;
-    *(this + 2) = v8;
-    *(this + 3) = v8 + v7;
-    v9 = *(_DWORD *)(a4 + 8);
-    if ( *(_DWORD *)(a4 + 4) > v9 )
-      _invalid_parameter_noinfo();
-    v10 = *(_DWORD *)(a4 + 4);
-    if ( v10 > *(_DWORD *)(a4 + 8) )
-      _invalid_parameter_noinfo();
-    v11 = (char *)*(this + 1);
-    v13 = (int)(v9 - v10) >> 1;
-    v12 = v13 == 0;
-    v14 = (const void *)(2 * v13);
-    v15 = &v11[2 * v13];
-    if ( !v12 )
-      memmove_s(v11, __PAIR64__(v10, (unsigned int)v14), v14, v17);
-    *(this + 2) = v15;
+    v17 = __PAIR64__(v2, v3); /*0x7954b4*/
+    v7 = v6; /*0x7954b5*/
+    v8 = (unsigned __int16 *)FormHeapAlloc(2 * v6); /*0x7954b9*/
+    this->begin = v8; /*0x7954c0*/
+    this->end = v8; /*0x7954c3*/
+    this->capacityEnd = &v8[v7]; /*0x7954c6*/
+    end = source->end; /*0x7954c9*/
+    if ( source->begin > end ) /*0x7954d2*/
+      _invalid_parameter_noinfo((int)source, (int)this, (int)end); /*0x7954d4*/
+    v10 = source->begin; /*0x7954d9*/
+    if ( v10 > source->end ) /*0x7954df*/
+      _invalid_parameter_noinfo((int)source, (int)this, (int)end); /*0x7954e1*/
+    v11 = this->begin; /*0x7954e6*/
+    v13 = end - v10; /*0x7954eb*/
+    v12 = v13 == 0; /*0x7954eb*/
+    v14 = (const void *)(2 * v13); /*0x7954ed*/
+    v15 = &v11[v13]; /*0x7954f0*/
+    if ( !v12 ) /*0x7954f3*/
+      memmove_s(v11, __PAIR64__((unsigned int)v10, (unsigned int)v14), v14, v17); /*0x7954f9*/
+    this->end = v15; /*0x795501*/
   }
-  return this;
+  return this; /*0x795508*/
 }

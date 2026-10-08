@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x507FF0",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; MoonSugarEffect decode: SetTargetRefractionFire command; non-actor only, toggles fire/period refraction flags through sub_7D92C0.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x508056",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -481,13 +481,13 @@
   },
   {
     "ea": "0x5080E5",
-    "line": "fst     [esp+18h+a5]; a5",
+    "line": "fst     [esp+18h+a5]; period",
     "mnemonic": "fst",
     "size": 3
   },
   {
     "ea": "0x5080E8",
-    "line": "push    0; a4",
+    "line": "push    0; useRefractF",
     "mnemonic": "push",
     "size": 2
   },
@@ -499,25 +499,25 @@
   },
   {
     "ea": "0x5080EB",
-    "line": "fstp    [esp+20h+var_20]; a3",
+    "line": "fstp    [esp+20h+power]; power",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5080EE",
-    "line": "push    0; a2",
+    "line": "push    0; enabled",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5080F0",
-    "line": "push    esi; a1",
+    "line": "push    esi; root",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5080F1",
-    "line": "call    sub_7D92C0",
+    "line": "call    NiAVObject_SetShaderRefractionStateRecursive; Recursively set/clear native refraction state on shader-property subtypes 5..10. useRefractF selects passInfo 0x10000 instead of 0x8000; stores power and optional period and invalidates pass caches.",
     "mnemonic": "call",
     "size": 5
   },
@@ -535,13 +535,13 @@
   },
   {
     "ea": "0x5080FB",
-    "line": "fst     [esp+18h+a5]; a5",
+    "line": "fst     [esp+18h+a5]; period",
     "mnemonic": "fst",
     "size": 3
   },
   {
     "ea": "0x5080FE",
-    "line": "push    1; a4",
+    "line": "push    1; useRefractF",
     "mnemonic": "push",
     "size": 2
   },
@@ -553,25 +553,25 @@
   },
   {
     "ea": "0x508101",
-    "line": "fstp    [esp+20h+var_20]; a3",
+    "line": "fstp    [esp+20h+power]; power",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x508104",
-    "line": "push    0; a2",
+    "line": "push    0; enabled",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x508106",
-    "line": "push    esi; a1",
+    "line": "push    esi; root",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x508107",
-    "line": "call    sub_7D92C0",
+    "line": "call    NiAVObject_SetShaderRefractionStateRecursive; Recursively set/clear native refraction state on shader-property subtypes 5..10. useRefractF selects passInfo 0x10000 instead of 0x8000; stores power and optional period and invalidates pass caches.",
     "mnemonic": "call",
     "size": 5
   },
@@ -589,13 +589,13 @@
   },
   {
     "ea": "0x508113",
-    "line": "fstp    [esp+18h+a5]; a5",
+    "line": "fstp    [esp+18h+a5]; period",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x508116",
-    "line": "push    1; a4",
+    "line": "push    1; useRefractF",
     "mnemonic": "push",
     "size": 2
   },
@@ -619,25 +619,25 @@
   },
   {
     "ea": "0x508121",
-    "line": "fstp    [esp+20h+var_20]; a3",
+    "line": "fstp    [esp+20h+power]; power",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x508124",
-    "line": "push    ecx; a2",
+    "line": "push    ecx; enabled",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x508125",
-    "line": "push    esi; a1",
+    "line": "push    esi; root",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x508126",
-    "line": "call    sub_7D92C0",
+    "line": "call    NiAVObject_SetShaderRefractionStateRecursive; Recursively set/clear native refraction state on shader-property subtypes 5..10. useRefractF selects passInfo 0x10000 instead of 0x8000; stores power and optional period and invalidates pass caches.",
     "mnemonic": "call",
     "size": 5
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x508145",
-    "line": "fstp    qword ptr [esp+20h+var_20]",
+    "line": "fstp    qword ptr [esp+20h+power]",
     "mnemonic": "fstp",
     "size": 3
   },

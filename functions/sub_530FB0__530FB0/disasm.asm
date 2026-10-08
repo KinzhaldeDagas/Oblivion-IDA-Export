@@ -1,4 +1,4 @@
-0x530FB0: sub     esp, 10h
+0x530FB0: sub     esp, 10h; Oblivion main INFO loader stores the winning record offset for lazy response/result-script reconstruction, but does not consume SCHR, SCHD, SCDA, SCTX, or SCRO here. Result scripts are reconstructed later by TESTopicInfo::GetResultScript from that winning serialized INFO record.
 0x530FB3: push    ebx
 0x530FB4: mov     ebx, dword ptr [esp+14h+ArgList]
 0x530FB8: push    edi
@@ -13,25 +13,24 @@
 0x530FCA: add     esp, 10h
 0x530FCD: retn    4
 0x530FD0: mov     ecx, ebx
-0x530FD2: call    sub_44FAB0
+0x530FD2: call    TESFile_GetIsOptimized; If this TESFile is not optimized, preserve the current INFO record offset at TESTopicInfo+0x34 for lazy runtime response reconstruction.
 0x530FD7: test    al, al
 0x530FD9: jnz     short loc_530FE4
 0x530FDB: mov     eax, [ebx+25Ch]
-0x530FE1: mov     [edi+34h], eax
+0x530FE1: mov     [edi+34h], eax; Last loader invocation wins sourceFileOffset. A valid partial INFO also reaches this write, so runtime responses later come from the partial override record rather than an inherited/eager list.
 0x530FE4: push    ebp
 0x530FE5: xor     ebp, ebp
 0x530FE7: push    edi
 0x530FE8: mov     ecx, ebx
 0x530FEA: mov     dword ptr [esp+20h+ArgList], 0FFFFFFFFh
 0x530FF2: mov     [esp+20h+var_10], ebp
-0x530FF6: call    TESFile_InitializeFormFromRecord
+0x530FF6: call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.
 0x530FFB: mov     ecx, ebx
-0x530FFD: call    TESFile_GetChunkType
+0x530FFD: call    TESFile_GetChunkType; Main INFO chunk loop does not recognize TRDT/NAM1/NAM2. Oblivion reconstructs response data lazily in TESTopicInfo::GetResponseList instead.
 0x531002: cmp     eax, ebp
 0x531004: jz      loc_5311A0
 0x53100A: push    esi
 0x53100B: jmp     short loc_531010
-0x53100D: align 10h
 0x531010: cmp     eax, 49545351h
 0x531015: jg      loc_5310FE
 0x53101B: jz      loc_5310EA
@@ -46,7 +45,7 @@
 0x531042: lea     esi, [edi+23h]
 0x531045: push    esi; Dst
 0x531046: mov     ecx, ebx; a1
-0x531048: call    TESFile_GetChunkData
+0x531048: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x53104D: cmp     byte ptr [esi], 7
 0x531050: jl      short loc_531060
 0x531052: mov     edx, [edi]
@@ -64,7 +63,7 @@
 0x53107A: push    ecx
 0x53107B: mov     ecx, ebx
 0x53107D: mov     [esp+24h+var_C], ebp
-0x531081: call    TESFile_GetChunkData4
+0x531081: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x531086: mov     edx, [esp+20h+var_C]
 0x53108A: push    edx
 0x53108B: lea     ecx, [edi+28h]
@@ -90,7 +89,7 @@
 0x5310CC: push    eax
 0x5310CD: mov     ecx, ebx
 0x5310CF: mov     [esp+24h+var_8], ebp
-0x5310D3: call    TESFile_GetChunkData4
+0x5310D3: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x5310D8: mov     ecx, [esp+20h+var_8]
 0x5310DC: push    ecx
 0x5310DD: mov     ecx, [edi+30h]
@@ -99,7 +98,7 @@
 0x5310EA: lea     edx, [esp+20h+var_10]
 0x5310EE: push    edx
 0x5310EF: mov     ecx, ebx
-0x5310F1: call    TESFile_GetChunkData4
+0x5310F1: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x5310F6: push    ebx
 0x5310F7: lea     eax, [esp+24h+var_10]
 0x5310FB: push    eax
@@ -128,7 +127,7 @@
 0x53113C: push    ecx
 0x53113D: mov     ecx, ebx
 0x53113F: mov     [esp+24h+var_4], ebp
-0x531143: call    TESFile_GetChunkData4
+0x531143: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x531148: mov     edx, [esp+20h+var_4]
 0x53114C: mov     ecx, [edi+30h]
 0x53114F: push    edx
@@ -142,13 +141,13 @@
 0x531165: lea     eax, [esp+20h+ArgList]
 0x531169: push    eax
 0x53116A: mov     ecx, ebx
-0x53116C: call    TESFile_GetChunkData4
+0x53116C: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x531171: cmp     dword ptr [esp+20h+ArgList], ebp
 0x531175: jz      short loc_531185
 0x531177: push    ebx; a2
 0x531178: lea     ecx, [esp+24h+ArgList]
 0x53117C: push    ecx; a1
-0x53117D: call    TESForm_ResolveFormID
+0x53117D: call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.
 0x531182: add     esp, 8
 0x531185: mov     ecx, ebx
 0x531187: call    TESFile_GetNextChunk

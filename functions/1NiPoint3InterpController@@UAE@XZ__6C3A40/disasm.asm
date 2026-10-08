@@ -1,4 +1,4 @@
-0x6C3A40: push    0FFFFFFFFh
+0x6C3A40: push    0FFFFFFFFh; Shared single-interpolator-controller destructor body used by this controller family: releases refcounted interpolator smart pointer +0x3C, deleting at zero references, then destroys the time-controller base. Existing RTTI name reflects another identical controller specialization.
 0x6C3A42: push    offset ??1NiPoint3InterpController@@UAE@XZ_SEH
 0x6C3A47: mov     eax, large fs:0
 0x6C3A4D: push    eax
@@ -38,3 +38,12 @@
 0x6C3AB0: pop     esi
 0x6C3AB1: add     esp, 10h
 0x6C3AB4: retn
+0x9C7230: mov     ecx, [ebp-10h]; this
+0x9C7233: jmp     j_??1NiPSysResetOnLoopCtlr@@UAE@XZ; NiPSysResetOnLoopCtlr::~NiPSysResetOnLoopCtlr(void)
+0x9C7238: mov     edx, [esp+arg_4]
+0x9C723C: lea     eax, [edx-0Ch]
+0x9C723F: mov     ecx, [edx-10h]
+0x9C7242: xor     ecx, eax
+0x9C7244: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C7249: mov     eax, offset stru_AEF69C
+0x9C724E: jmp     ___CxxFrameHandler3

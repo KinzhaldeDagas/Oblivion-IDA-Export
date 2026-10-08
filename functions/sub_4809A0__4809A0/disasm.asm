@@ -1,7 +1,7 @@
 0x4809A0: push    ecx
 0x4809A1: push    ebx
 0x4809A2: push    esi
-0x4809A3: mov     esi, [esp+0Ch+arg_0]
+0x4809A3: mov     esi, [esp+0Ch+slot]
 0x4809A7: xor     ebx, ebx
 0x4809A9: cmp     esi, ebx
 0x4809AB: mov     [esp+0Ch+var_1], bl
@@ -15,7 +15,7 @@
 0x4809BD: jnz     short loc_480A00
 0x4809BF: push    offset dword_A7D0EC
 0x4809C4: mov     ecx, esi
-0x4809C6: call    NiObjectNET_GetExtraData
+0x4809C6: call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.
 0x4809CB: cmp     eax, ebx
 0x4809CD: jz      short loc_4809F8
 0x4809CF: mov     eax, [eax+0Ch]
@@ -36,8 +36,8 @@
 0x480A03: cmp     eax, ebx
 0x480A05: jz      loc_480A90
 0x480A0B: push    offset aEditormarker; "EditorMarker"
-0x480A10: push    eax; Str1
-0x480A11: call    __strcmp
+0x480A10: push    eax; left
+0x480A11: call    CRT_StricmpLocaleDispatch
 0x480A16: add     esp, 8
 0x480A19: test    eax, eax
 0x480A1B: jnz     short loc_480A90
@@ -67,11 +67,11 @@
 0x480A5D: mov     edx, [ecx]
 0x480A5F: mov     edx, [edx+88h]
 0x480A65: push    esi
-0x480A66: lea     eax, [esp+10h+arg_0]
+0x480A66: lea     eax, [esp+10h+slot]
 0x480A6A: push    eax
 0x480A6B: call    edx
-0x480A6D: lea     ecx, [esp+0Ch+arg_0]; this
-0x480A71: call    sub_7016A0
+0x480A6D: lea     ecx, [esp+0Ch+slot]; slot
+0x480A71: call    NiPointerSlot_Release
 0x480A76: cmp     ds:0B34404h, esi
 0x480A7C: jnz     short loc_480A8A
 0x480A7E: mov     ds:0B34404h, ebx

@@ -1,19 +1,36 @@
 {
-  "callees_count": 18,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
+  "chunks": [
+    [
+      "0x80F070",
+      "0x80F1A3"
+    ],
+    [
+      "0x9D0F90",
+      "0x9D0FE3"
+    ]
+  ],
+  "chunks_sha256": "42c8e9b9a1088c760c403acec4adfd6a97082cd63cfd9113e54898b5f399abaf",
+  "comment_regular": "\n\n[v154 normal UV integration] Native branch dtor releases global28-pass tableB47790..B47800;80F1C0 initialization also clears it. Plugin therefore retains original shader object/pass setup and scopes declaration/program reference changes around native NiTriStrips719B60 render, restoring in SEH finally. It does not construct a second branch shader. Native draw execution of this adapter remains UNVERIFIED.\n\nSpeedTreeBranchShader dtor: releases branch shader refs and global branch pass table dword_B47790..B47800 before ShadowLightShader base cleanup.",
+  "comment_repeatable": "SpeedTreeBranchShader dtor: releases branch shader refs and global branch pass table dword_B47790..B47800 before ShadowLightShader base cleanup.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
   "display_name": "SpeedTreeBranchShader::~SpeedTreeBranchShader(void)",
   "end_ea": "0x80F1A3",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??1SpeedTreeBranchShader@@UAE@XZ",
   "segment": ".text",
   "sha256": "4a3b98dab11ccc9450afbb020b38cd9b36f8e97a5fdf668c6e77c551bc7f15f6",
   "size": 307,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x80F070",
+  "total_chunk_size": 390,
   "type": "void __thiscall(BSShader *this)",
-  "xrefs_from_count": 120,
+  "xrefs_from_count": 149,
   "xrefs_to_count": 1
 }

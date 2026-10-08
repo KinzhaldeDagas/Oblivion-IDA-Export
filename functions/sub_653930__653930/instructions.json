@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x653A0F",
-    "line": "jmp     ds:jpt_653A0F[edx*4]; switch jump",
+    "line": "jmp     ds:jpt_653A0F[edx*4]; 3DTheft decode 2026-05-17: high/mid process package scheduler dispatches ProcedureRows[package->procedureArrayIndex][slot] for the actor's current package/procedure slot.",
     "mnemonic": "jmp",
     "size": 7
   },
@@ -541,13 +541,13 @@
   },
   {
     "ea": "0x653A55",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x653A57",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -691,13 +691,13 @@
   },
   {
     "ea": "0x653A9B",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x653A9D",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -715,13 +715,13 @@
   },
   {
     "ea": "0x653AAA",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x653AAC",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -769,13 +769,13 @@
   },
   {
     "ea": "0x653AC8",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x653ACA",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1693,13 +1693,13 @@
   },
   {
     "ea": "0x653C98",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x653C9A",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1723,13 +1723,13 @@
   },
   {
     "ea": "0x653CA8",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x653CAA",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1951,13 +1951,13 @@
   },
   {
     "ea": "0x653D20",
-    "line": "call    sub_64EC50",
+    "line": "call    sub_64EC50; 3DTheft decode 2026-05-16: Follow procedure execution reads its target ref from procedure state +0x2C/+0xB and drives movement toward that target's cell/worldspace; no plugin-owned actor/package memory is dereferenced at the later 0x0040DECF crash site.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x653D25",
-    "line": "mov     [esp+1Ch+var_9], al",
+    "line": "mov     [esp+1Ch+var_9], al; 3DTheft decode 2026-05-17: FOLLOW procedure case dispatches sub_64EC50 after the vfunc +0x36C/+0x1B0 checks.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2497,7 +2497,7 @@
   },
   {
     "ea": "0x653E1A",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2791,7 +2791,7 @@
   },
   {
     "ea": "0x653EB9",
-    "line": "call    sub_565DF0",
+    "line": "call    sub_565DF0; RadiantAI: package flag helper used by chooser skip logic; tests TESPackage flag 0x0400.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2809,7 +2809,7 @@
   },
   {
     "ea": "0x653EC2",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2839,7 +2839,7 @@
   },
   {
     "ea": "0x653ED0",
-    "line": "call    sub_41FFC0",
+    "line": "call    ExtraDataList_SetRunOnceExtraPackage; Ensures ExtraRunOncePacks exists, then adds or updates a package record with the supplied package and state byte.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2965,13 +2965,13 @@
   },
   {
     "ea": "0x653F21",
-    "line": "mov     ecx, [esi+8]",
+    "line": "mov     ecx, [esi+8]; self",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x653F24",
-    "line": "call    sub_5660A0",
+    "line": "call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).",
     "mnemonic": "call",
     "size": 5
   },
@@ -2995,7 +2995,7 @@
   },
   {
     "ea": "0x653F34",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -3007,7 +3007,7 @@
   },
   {
     "ea": "0x653F3A",
-    "line": "call    sub_567770",
+    "line": "call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3127,7 +3127,7 @@
   },
   {
     "ea": "0x653F7A",
-    "line": "call    sub_5E8DE0",
+    "line": "call    sub_5E8DE0; 3DTheft: marks actor modified when assigning created package/editor package. For created package refIDs, uses actor modified mask 0x20000, or 0x30000 for types 0x13/0x11.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3145,7 +3145,7 @@
   },
   {
     "ea": "0x653F84",
-    "line": "call    sub_41FB40",
+    "line": "call    ExtraDataList_GetPackageExtraIndex; Returns ExtraPackage's package index field, or zero when absent.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3187,7 +3187,7 @@
   },
   {
     "ea": "0x653F9D",
-    "line": "call    sub_41FB60",
+    "line": "call    ExtraDataList_GetPackageExtraTarget; Returns ExtraPackage's target TESObjectREFR pointer, or null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3235,7 +3235,7 @@
   },
   {
     "ea": "0x653FB5",
-    "line": "call    sub_41FB80",
+    "line": "call    ExtraDataList_GetPackageExtraComplete; Returns ExtraPackage's completion byte, or false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3295,7 +3295,7 @@
   },
   {
     "ea": "0x653FD2",
-    "line": "call    sub_41FBA0",
+    "line": "call    ExtraDataList_GetPackageExtraActivate; Returns ExtraPackage's activation byte, or false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3631,7 +3631,7 @@
   },
   {
     "ea": "0x654068",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3715,7 +3715,7 @@
   },
   {
     "ea": "0x654092",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3763,7 +3763,7 @@
   },
   {
     "ea": "0x6540AE",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },

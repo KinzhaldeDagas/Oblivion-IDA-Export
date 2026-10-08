@@ -1,4 +1,4 @@
-0x41FFA0: push    19h; a2
+0x41FFA0: push    19h; Returns the ragdoll payload stored in ExtraRagDollData, or null.
 0x41FFA2: call    BaseExtraList_GetExtraData
 0x41FFA7: test    eax, eax
 0x41FFA9: jz      short loc_41FFAF

@@ -1,4 +1,4 @@
-0x890A10: test    ecx, ecx
+0x890A10: test    ecx, ecx; TES4 authoritative metadata contains-key helper for the same +0x44/+0x48 0x10-byte entry map.
 0x890A12: push    esi
 0x890A13: jz      short loc_890A3E
 0x890A15: mov     ecx, [ecx+8]

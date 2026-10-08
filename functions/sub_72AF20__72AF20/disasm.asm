@@ -1,26 +1,26 @@
-0x72AF20: sub     esp, 1B4h
+0x72AF20: sub     esp, 1B4h; Verified shared weighted-skin transform: composes per-bone NiTransforms, traverses per-vertex bone indices/weights, transforms source positions/normals and accumulates into caller-provided output arrays. BSTempEffectGeometryDecal_InitializeUsingSkinnedGeometryData passes its source skinData and NiGeometryData vertex/normal arrays here; NiDX9ShaderDeclaration_PackVertexStream is another caller. This is general renderer skinning code, not a blood-specific routine.
 0x72AF26: push    ebx
 0x72AF27: push    ebp
 0x72AF28: mov     ebx, ecx
 0x72AF2A: mov     ecx, [ebx+10h]
 0x72AF2D: push    esi
 0x72AF2E: push    edi
-0x72AF2F: lea     eax, [esp+1C4h+var_9C]
+0x72AF2F: lea     eax, [esp+1C4h+local]
 0x72AF36: push    eax
 0x72AF37: add     ecx, 64h ; 'd'
 0x72AF3A: mov     [esp+1C8h+var_17C], ebx
-0x72AF3E: call    sub_718A80
+0x72AF3E: call    sub_718A80;
 0x72AF43: mov     eax, [ebx+8]
-0x72AF46: lea     ecx, [esp+1C4h+var_9C]
-0x72AF4D: push    ecx
-0x72AF4E: lea     edx, [esp+1C8h+var_160]
-0x72AF52: push    edx
-0x72AF53: lea     ecx, [eax+0Ch]
-0x72AF56: call    sub_53D7A0
+0x72AF46: lea     ecx, [esp+1C4h+local]
+0x72AF4D: push    ecx; local
+0x72AF4E: lea     edx, [esp+1C8h+out]
+0x72AF52: push    edx; out
+0x72AF53: lea     ecx, [eax+0Ch]; parent
+0x72AF56: call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.
 0x72AF5B: mov     ebx, [ebx+8]
 0x72AF5E: mov     ecx, 0Dh
 0x72AF63: mov     esi, eax
-0x72AF65: lea     edi, [esp+1C4h+var_D0]
+0x72AF65: lea     edi, [esp+1C4h+parent]
 0x72AF6C: rep movsd
 0x72AF6E: mov     edi, [ebx+44h]
 0x72AF71: mov     esi, [ebx+40h]
@@ -112,7 +112,6 @@
 0x72B0E2: mov     [esp+1C4h+var_1AC], ecx
 0x72B0E6: jmp     short loc_72B0F4
 0x72B0E8: jmp     short loc_72B0F0
-0x72B0EA: align 10h
 0x72B0F0: mov     ecx, [esp+1C4h+var_1AC]
 0x72B0F4: movzx   eax, word ptr [ecx+4]
 0x72B0F8: mov     edx, [esp+1C4h+var_17C]
@@ -121,36 +120,35 @@
 0x72B103: mov     edx, [esp+1C4h+var_1B0]
 0x72B107: mov     eax, [eax+edx*4]
 0x72B10A: add     ecx, 0FFFFFFBCh
-0x72B10D: push    ecx
+0x72B10D: push    ecx; local
 0x72B10E: lea     ecx, [esp+1C8h+var_68]
-0x72B115: push    ecx
+0x72B115: push    ecx; out
 0x72B116: add     eax, 64h ; 'd'
-0x72B119: push    eax
+0x72B119: push    eax; local
 0x72B11A: lea     edx, [esp+1D0h+var_34]
-0x72B121: push    edx
-0x72B122: lea     ecx, [esp+1D4h+var_D0]
-0x72B129: call    sub_53D7A0
-0x72B12E: mov     ecx, eax
-0x72B130: call    sub_53D7A0
+0x72B121: push    edx; out
+0x72B122: lea     ecx, [esp+1D4h+parent]; parent
+0x72B129: call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.
+0x72B12E: mov     ecx, eax; parent
+0x72B130: call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.
 0x72B135: mov     esi, eax
 0x72B137: mov     eax, [esp+1C4h+var_1AC]
 0x72B13B: mov     ecx, 0Dh
-0x72B140: lea     edi, [esp+1C4h+var_160]
+0x72B140: lea     edi, [esp+1C4h+out]
 0x72B144: rep movsd
-0x72B146: fld     [esp+1C4h+var_130]
+0x72B146: fld     [esp+1C4h+out.scale]
 0x72B14D: mov     esi, [eax]
 0x72B14F: push    ecx
 0x72B150: lea     ecx, [esp+1C8h+var_12C]
 0x72B157: mov     [esp+1C8h+var_F8], esi
 0x72B15E: fstp    [esp+1C8h+var_1C8]; float
 0x72B161: push    ecx; int
-0x72B162: lea     ecx, [esp+1CCh+var_160]
-0x72B166: call    sub_710190
+0x72B162: lea     ecx, [esp+1CCh+out]
+0x72B166: call    NiMatrix3_ScaleTo
 0x72B16B: xor     edx, edx
 0x72B16D: cmp     [esp+1C4h+var_1A8], edx
 0x72B171: jbe     loc_72B503
 0x72B177: jmp     short loc_72B187
-0x72B179: align 10h
 0x72B180: mov     esi, [esp+1C4h+var_F8]
 0x72B187: movzx   eax, word ptr [esi+edx*8]
 0x72B18B: fld     dword ptr [esi+edx*8+4]
@@ -172,7 +170,7 @@
 0x72B1CD: fld     [esp+1C4h+var_124]
 0x72B1D4: fmul    dword ptr [edi]
 0x72B1D6: faddp   st(1), st
-0x72B1D8: fadd    [esp+1C4h+var_13C]
+0x72B1D8: fadd    [esp+1C4h+out.pos.x]
 0x72B1DF: fstp    [esp+1C4h+var_F4]
 0x72B1E6: fld     [esp+1C4h+var_11C]
 0x72B1ED: fmul    dword ptr [eax+esi+4]
@@ -182,7 +180,7 @@
 0x72B1FD: fld     [esp+1C4h+var_118]
 0x72B204: fmul    dword ptr [edi]
 0x72B206: faddp   st(1), st
-0x72B208: fadd    [esp+1C4h+var_138]
+0x72B208: fadd    [esp+1C4h+out.pos.y]
 0x72B20F: fstp    [esp+1C4h+var_F0]
 0x72B216: fld     [esp+1C4h+var_110]
 0x72B21D: fmul    dword ptr [eax+esi+4]
@@ -196,39 +194,39 @@
 0x72B23C: lea     edi, [esi+eax+8]
 0x72B240: mov     [esp+1C4h+var_1B4], edi
 0x72B244: faddp   st(1), st
-0x72B246: fadd    [esp+1C4h+var_134]
+0x72B246: fadd    [esp+1C4h+out.pos.z]
 0x72B24D: fstp    [esp+1C4h+var_EC]
-0x72B254: fld     [esp+1C4h+var_160]
+0x72B254: fld     [esp+1C4h+out.rot.data]
 0x72B258: fld     st
 0x72B25A: fmul    dword ptr [eax+ebx]
-0x72B25D: fld     [esp+1C4h+var_15C]
+0x72B25D: fld     [esp+1C4h+out.rot.data+4]
 0x72B261: fld     st
 0x72B263: fmul    dword ptr [eax+ebx+4]
 0x72B267: faddp   st(2), st
-0x72B269: fld     [esp+1C4h+var_158]
+0x72B269: fld     [esp+1C4h+out.rot.data+8]
 0x72B26D: fld     st
 0x72B26F: fmul    dword ptr [eax+ebx+8]
 0x72B273: faddp   st(3), st
 0x72B275: fxch    st(2)
 0x72B277: fstp    [esp+1C4h+var_DC]
-0x72B27E: fld     [esp+1C4h+var_154]
+0x72B27E: fld     [esp+1C4h+out.rot.data+0Ch]
 0x72B282: fld     st
 0x72B284: fmul    dword ptr [eax+ebx]
-0x72B287: fld     [esp+1C4h+var_150]
+0x72B287: fld     [esp+1C4h+out.rot.data+10h]
 0x72B28B: fld     st
 0x72B28D: fmul    dword ptr [eax+ebx+4]
 0x72B291: faddp   st(2), st
-0x72B293: fld     [esp+1C4h+var_14C]
+0x72B293: fld     [esp+1C4h+out.rot.data+14h]
 0x72B297: fmul    dword ptr [eax+ebx+8]
 0x72B29B: faddp   st(2), st
 0x72B29D: fxch    st(1)
 0x72B29F: fstp    [esp+1C4h+var_D8]
-0x72B2A6: fld     [esp+1C4h+var_148]
+0x72B2A6: fld     [esp+1C4h+out.rot.data+18h]
 0x72B2AA: fmul    dword ptr [eax+ebx]
-0x72B2AD: fld     [esp+1C4h+var_144]
+0x72B2AD: fld     [esp+1C4h+out.rot.data+1Ch]
 0x72B2B4: fmul    dword ptr [eax+ebx+4]
 0x72B2B8: faddp   st(1), st
-0x72B2BA: fld     [esp+1C4h+var_140]
+0x72B2BA: fld     [esp+1C4h+out.rot.data+20h]
 0x72B2C1: fmul    dword ptr [eax+ebx+8]
 0x72B2C5: faddp   st(1), st
 0x72B2C7: fstp    [esp+1C4h+var_D4]
@@ -246,17 +244,17 @@
 0x72B2EB: fld     st(2)
 0x72B2ED: fmul    dword ptr [esi+eax]
 0x72B2F0: faddp   st(1), st
-0x72B2F2: fld     [esp+1C4h+var_14C]
+0x72B2F2: fld     [esp+1C4h+out.rot.data+14h]
 0x72B2F6: fmul    dword ptr [edi]
 0x72B2F8: faddp   st(1), st
 0x72B2FA: fstp    [esp+1C4h+var_168]
-0x72B2FE: fld     [esp+1C4h+var_144]
+0x72B2FE: fld     [esp+1C4h+out.rot.data+1Ch]
 0x72B305: fmul    dword ptr [esi+eax+4]
-0x72B309: fld     [esp+1C4h+var_148]
+0x72B309: fld     [esp+1C4h+out.rot.data+18h]
 0x72B30D: fmul    dword ptr [esi+eax]
 0x72B310: mov     esi, edi
 0x72B312: faddp   st(1), st
-0x72B314: fld     [esp+1C4h+var_140]
+0x72B314: fld     [esp+1C4h+out.rot.data+20h]
 0x72B31B: fmul    dword ptr [esi]
 0x72B31D: mov     esi, [esp+1C4h+var_1A4]
 0x72B321: lea     edi, [esi+eax+4]
@@ -285,18 +283,18 @@
 0x72B369: mov     edi, [esp+1C4h+var_108]
 0x72B370: fmulp   st(2), st
 0x72B372: faddp   st(1), st
-0x72B374: fld     [esp+1C4h+var_14C]
+0x72B374: fld     [esp+1C4h+out.rot.data+14h]
 0x72B378: fmul    dword ptr [edi]
 0x72B37A: faddp   st(1), st
 0x72B37C: fstp    [esp+1C4h+var_174]
-0x72B380: fld     [esp+1C4h+var_148]
+0x72B380: fld     [esp+1C4h+out.rot.data+18h]
 0x72B384: fmul    dword ptr [esi+eax]
 0x72B387: mov     eax, [esp+1C4h+var_1B4]
-0x72B38B: fld     [esp+1C4h+var_144]
+0x72B38B: fld     [esp+1C4h+out.rot.data+1Ch]
 0x72B392: fmul    dword ptr [eax]
 0x72B394: mov     eax, [esp+1C4h+arg_C]
 0x72B39B: faddp   st(1), st
-0x72B39D: fld     [esp+1C4h+var_140]
+0x72B39D: fld     [esp+1C4h+out.rot.data+20h]
 0x72B3A4: fmul    dword ptr [edi]
 0x72B3A6: faddp   st(1), st
 0x72B3A8: fstp    [esp+1C4h+var_170]
@@ -393,17 +391,17 @@
 0x72B52B: push    esi
 0x72B52C: push    edi
 0x72B52D: push    ebp
-0x72B52E: call    sub_725890
+0x72B52E: call    NiPoint3_NormalizeStridedArray
 0x72B533: mov     ecx, [esp+1D0h+arg_14]
 0x72B53A: push    esi
 0x72B53B: push    edi
 0x72B53C: push    ecx
-0x72B53D: call    sub_725890
+0x72B53D: call    NiPoint3_NormalizeStridedArray
 0x72B542: mov     edx, [esp+1DCh+arg_18]
 0x72B549: push    esi
 0x72B54A: push    edi
 0x72B54B: push    edx
-0x72B54C: call    sub_725890
+0x72B54C: call    NiPoint3_NormalizeStridedArray
 0x72B551: add     esp, 24h
 0x72B554: pop     edi
 0x72B555: pop     esi
@@ -457,7 +455,6 @@
 0x72B604: add     ecx, 44h ; 'D'
 0x72B607: mov     [esp+1C4h+var_1AC], ecx
 0x72B60B: jmp     short loc_72B614
-0x72B60D: align 10h
 0x72B610: mov     ecx, [esp+1C4h+var_1AC]
 0x72B614: movzx   edx, word ptr [ecx+4]
 0x72B618: mov     eax, [esp+1C4h+var_17C]
@@ -466,37 +463,36 @@
 0x72B623: mov     eax, [esp+1C4h+var_1B0]
 0x72B627: mov     eax, [edx+eax*4]
 0x72B62A: add     ecx, 0FFFFFFBCh
-0x72B62D: push    ecx
+0x72B62D: push    ecx; local
 0x72B62E: lea     ecx, [esp+1C8h+var_34]
-0x72B635: push    ecx
+0x72B635: push    ecx; out
 0x72B636: add     eax, 64h ; 'd'
-0x72B639: push    eax
+0x72B639: push    eax; local
 0x72B63A: lea     edx, [esp+1D0h+var_68]
-0x72B641: push    edx
-0x72B642: lea     ecx, [esp+1D4h+var_D0]
-0x72B649: call    sub_53D7A0
-0x72B64E: mov     ecx, eax
-0x72B650: call    sub_53D7A0
+0x72B641: push    edx; out
+0x72B642: lea     ecx, [esp+1D4h+parent]; parent
+0x72B649: call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.
+0x72B64E: mov     ecx, eax; parent
+0x72B650: call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.
 0x72B655: mov     esi, eax
 0x72B657: mov     eax, [esp+1C4h+var_1AC]
 0x72B65B: mov     ecx, 0Dh
-0x72B660: lea     edi, [esp+1C4h+var_160]
+0x72B660: lea     edi, [esp+1C4h+out]
 0x72B664: rep movsd
-0x72B666: fld     [esp+1C4h+var_130]
+0x72B666: fld     [esp+1C4h+out.scale]
 0x72B66D: mov     edi, [eax]
 0x72B66F: push    ecx
 0x72B670: lea     ecx, [esp+1C8h+var_12C]
 0x72B677: mov     [esp+1C8h+var_1A0], edi
 0x72B67B: fstp    [esp+1C8h+var_1C8]; float
 0x72B67E: push    ecx; int
-0x72B67F: lea     ecx, [esp+1CCh+var_160]
-0x72B683: call    sub_710190
+0x72B67F: lea     ecx, [esp+1CCh+out]
+0x72B683: call    NiMatrix3_ScaleTo
 0x72B688: xor     esi, esi
 0x72B68A: cmp     [esp+1C4h+var_1A8], esi
 0x72B68E: jbe     loc_72B84F
 0x72B694: jmp     short loc_72B6A4
 0x72B696: jmp     short loc_72B6A0
-0x72B698: align 10h
 0x72B6A0: mov     edi, [esp+1C4h+var_1A0]
 0x72B6A4: movzx   eax, word ptr [edi+esi*8]
 0x72B6A8: fld     dword ptr [edi+esi*8+4]
@@ -517,7 +513,7 @@
 0x72B6E6: fld     [esp+1C4h+var_124]
 0x72B6ED: fmul    dword ptr [edi]
 0x72B6EF: faddp   st(1), st
-0x72B6F1: fadd    [esp+1C4h+var_13C]
+0x72B6F1: fadd    [esp+1C4h+out.pos.x]
 0x72B6F8: fstp    [esp+1C4h+var_198]
 0x72B6FC: fld     [esp+1C4h+var_11C]
 0x72B703: fmul    dword ptr [eax+edx+4]
@@ -527,7 +523,7 @@
 0x72B713: fld     [esp+1C4h+var_118]
 0x72B71A: fmul    dword ptr [edi]
 0x72B71C: faddp   st(1), st
-0x72B71E: fadd    [esp+1C4h+var_138]
+0x72B71E: fadd    [esp+1C4h+out.pos.y]
 0x72B725: fstp    [esp+1C4h+var_194]
 0x72B729: fld     [esp+1C4h+var_110]
 0x72B730: fmul    dword ptr [eax+edx+4]
@@ -539,32 +535,32 @@
 0x72B74B: fmul    dword ptr [edi]
 0x72B74D: lea     edi, [eax+ebx+8]
 0x72B751: faddp   st(1), st
-0x72B753: fadd    [esp+1C4h+var_134]
+0x72B753: fadd    [esp+1C4h+out.pos.z]
 0x72B75A: fstp    [esp+1C4h+var_190]
-0x72B75E: fld     [esp+1C4h+var_160]
+0x72B75E: fld     [esp+1C4h+out.rot.data]
 0x72B762: fmul    dword ptr [eax+ebx]
-0x72B765: fld     [esp+1C4h+var_15C]
+0x72B765: fld     [esp+1C4h+out.rot.data+4]
 0x72B769: fmul    dword ptr [edx]
 0x72B76B: faddp   st(1), st
-0x72B76D: fld     [esp+1C4h+var_158]
+0x72B76D: fld     [esp+1C4h+out.rot.data+8]
 0x72B771: fmul    dword ptr [edi]
 0x72B773: faddp   st(1), st
 0x72B775: fstp    [esp+1C4h+var_188]
-0x72B779: fld     [esp+1C4h+var_154]
+0x72B779: fld     [esp+1C4h+out.rot.data+0Ch]
 0x72B77D: fmul    dword ptr [eax+ebx]
-0x72B780: fld     [esp+1C4h+var_150]
+0x72B780: fld     [esp+1C4h+out.rot.data+10h]
 0x72B784: fmul    dword ptr [edx]
 0x72B786: faddp   st(1), st
-0x72B788: fld     [esp+1C4h+var_14C]
+0x72B788: fld     [esp+1C4h+out.rot.data+14h]
 0x72B78C: fmul    dword ptr [edi]
 0x72B78E: faddp   st(1), st
 0x72B790: fstp    [esp+1C4h+var_184]
-0x72B794: fld     [esp+1C4h+var_148]
+0x72B794: fld     [esp+1C4h+out.rot.data+18h]
 0x72B798: fmul    dword ptr [eax+ebx]
-0x72B79B: fld     [esp+1C4h+var_144]
+0x72B79B: fld     [esp+1C4h+out.rot.data+1Ch]
 0x72B7A2: fmul    dword ptr [edx]
 0x72B7A4: faddp   st(1), st
-0x72B7A6: fld     [esp+1C4h+var_140]
+0x72B7A6: fld     [esp+1C4h+out.rot.data+20h]
 0x72B7AD: fmul    dword ptr [edi]
 0x72B7AF: faddp   st(1), st
 0x72B7B1: fstp    [esp+1C4h+var_180]
@@ -623,7 +619,7 @@
 0x72B877: push    edi
 0x72B878: push    edx
 0x72B879: push    ebp
-0x72B87A: call    sub_725890
+0x72B87A: call    NiPoint3_NormalizeStridedArray
 0x72B87F: add     esp, 0Ch
 0x72B882: pop     edi
 0x72B883: pop     esi
@@ -668,28 +664,28 @@
 0x72B90F: mov     eax, [eax+ecx*4]
 0x72B912: movzx   ebx, word ptr [ebp+4]
 0x72B916: lea     edx, [ebp-44h]
-0x72B919: push    edx
+0x72B919: push    edx; local
 0x72B91A: lea     ecx, [esp+1C8h+var_34]
-0x72B921: push    ecx
+0x72B921: push    ecx; out
 0x72B922: add     eax, 64h ; 'd'
-0x72B925: push    eax
+0x72B925: push    eax; local
 0x72B926: lea     edx, [esp+1D0h+var_68]
-0x72B92D: push    edx
-0x72B92E: lea     ecx, [esp+1D4h+var_D0]
-0x72B935: call    sub_53D7A0
-0x72B93A: mov     ecx, eax
-0x72B93C: call    sub_53D7A0
+0x72B92D: push    edx; out
+0x72B92E: lea     ecx, [esp+1D4h+parent]; parent
+0x72B935: call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.
+0x72B93A: mov     ecx, eax; parent
+0x72B93C: call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.
 0x72B941: mov     esi, eax
 0x72B943: mov     ecx, 0Dh
-0x72B948: lea     edi, [esp+1C4h+var_160]
+0x72B948: lea     edi, [esp+1C4h+out]
 0x72B94C: rep movsd
-0x72B94E: fld     [esp+1C4h+var_130]
+0x72B94E: fld     [esp+1C4h+out.scale]
 0x72B955: push    ecx
 0x72B956: lea     eax, [esp+1C8h+var_12C]
-0x72B95D: lea     ecx, [esp+1C8h+var_160]
+0x72B95D: lea     ecx, [esp+1C8h+out]
 0x72B961: fstp    [esp+1C8h+var_1C8]; float
 0x72B964: push    eax; int
-0x72B965: call    sub_710190
+0x72B965: call    NiMatrix3_ScaleTo
 0x72B96A: mov     esi, [ebp+0]
 0x72B96D: xor     edx, edx
 0x72B96F: test    ebx, ebx
@@ -716,7 +712,7 @@
 0x72B9C6: fld     [esp+1C4h+var_124]
 0x72B9CD: fmul    dword ptr [eax+8]
 0x72B9D0: faddp   st(1), st
-0x72B9D2: fadd    [esp+1C4h+var_13C]
+0x72B9D2: fadd    [esp+1C4h+out.pos.x]
 0x72B9D9: fstp    [esp+1C4h+var_198]
 0x72B9DD: fld     [esp+1C4h+var_11C]
 0x72B9E4: fmul    dword ptr [eax+4]
@@ -726,7 +722,7 @@
 0x72B9F2: fld     [esp+1C4h+var_118]
 0x72B9F9: fmul    dword ptr [eax+8]
 0x72B9FC: faddp   st(1), st
-0x72B9FE: fadd    [esp+1C4h+var_138]
+0x72B9FE: fadd    [esp+1C4h+out.pos.y]
 0x72BA05: fstp    [esp+1C4h+var_194]
 0x72BA09: fld     [esp+1C4h+var_110]
 0x72BA10: fmul    dword ptr [eax+4]
@@ -736,7 +732,7 @@
 0x72BA1E: fld     [esp+1C4h+var_10C]
 0x72BA25: fmul    dword ptr [eax+8]
 0x72BA28: faddp   st(1), st
-0x72BA2A: fadd    [esp+1C4h+var_134]
+0x72BA2A: fadd    [esp+1C4h+out.pos.z]
 0x72BA31: fstp    [esp+1C4h+var_190]
 0x72BA35: mov     eax, [esp+1C4h+var_18C]
 0x72BA39: mov     ecx, [esp+1C4h+var_1A4]

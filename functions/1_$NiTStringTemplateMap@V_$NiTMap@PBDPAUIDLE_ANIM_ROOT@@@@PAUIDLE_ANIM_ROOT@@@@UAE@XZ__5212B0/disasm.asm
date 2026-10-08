@@ -16,7 +16,7 @@
 0x5212D4: mov     ecx, [eax+4]
 0x5212D7: mov     esi, [esi]
 0x5212D9: push    ecx
-0x5212DA: call    FormHeapFree
+0x5212DA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5212DF: add     esp, 4
 0x5212E2: test    esi, esi
 0x5212E4: jnz     short loc_5212D2

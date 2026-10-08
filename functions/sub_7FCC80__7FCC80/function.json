@@ -1,19 +1,36 @@
 {
-  "callees_count": 46,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 23,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 48,
-  "display_name": "sub_7FCC80",
+  "chunks": [
+    [
+      "0x7FCC80",
+      "0x7FD259"
+    ],
+    [
+      "0x9D05C0",
+      "0x9D0607"
+    ]
+  ],
+  "chunks_sha256": "e023227db841dbc0d72372ca23741f4913ca33b61d3f9e090fa3339f2efc4f29",
+  "comment_regular": "Oblivion Lighting30 constant-map build. Main vertex automatic entries are WorldViewProjTranspose at c0, SkinWorldViewProjTranspose at c1, WorldViewTranspose at c5, SkinWorldViewTranspose at c6, and BoneMatrix3 at c31 for 54 registers. The shared vertex ConstantGroup occupies c10..c30 from global slot 0x3D5; pixel ConstantGroup occupies c0..c48 from slot 0x459.\nGPU static-world audit 2026-09-27: main rigid automatic matrix entries are WVP transpose c0 and WV transpose c5; skinned entries use c1 and c6 and must not be classified by the rigid register layout. Shared vertex ConstantGroup c10..30 and pixel c0..48 contain additional per-draw semantics. Patching only WVP does not establish complete material residency.\nDX11 map ownership audit 2026-10-01: active pixel/vertex2C/30 and retained alternate/main map fields7C/80/84/88 are separate NiPointer owners. Known aliases across these six slots contribute independent references. Main activation can avoid destruction only while every ordered release leaves a positive count; final-count arithmetic alone is not sufficient proof.\n\nOblivion Lighting30Shader constant-map builder. The principal SM3 map uses grouped constants; alternate/projected maps explicitly bind FogParam/FogColor, shadow projection, material, eye, light, skinning, and texture-effect data.",
+  "comment_repeatable": "Oblivion Lighting30 constant-map build. Main vertex automatic entries are WorldViewProjTranspose at c0, SkinWorldViewProjTranspose at c1, WorldViewTranspose at c5, SkinWorldViewTranspose at c6, and BoneMatrix3 at c31 for 54 registers. The shared vertex ConstantGroup occupies c10..c30 from global slot 0x3D5; pixel ConstantGroup occupies c0..c48 from slot 0x459.\nVerified 2026-10-01: GetEntry(\"decal fade\") is retained in B46C14; GetEntry(\"decal proj\") in B46C18. Ordinary7FF4A0 disables those entry flags before its second map partition. The older Ni2DBuffer smart-pointer cast in this decompilation is a folded-helper type artifact, not evidence that these constant entries are buffers.\nCurrent vector production audit 2026-10-01: pixel ConstantGroup is created at register0 with maximum count49, DataSize310h, stride4 and source B46F78 (shader storage slot459); shader+9C retains that entry. Geometry setup narrows its count. The block therefore includes values unused by a particular shader. Current qualified eye/light/material/ambient/emission/fog recipes can generate source rows, but absent writers must not be replaced with zero or earlier packed shader words. Conditional untouched source globals require an explicit current baseline/state model before the complete group can be replaced.\nSource baseline capture 2026-10-01 validates the retained ConstantGroup entry: mapped flags10000009, target0, register0, count<=49, DataSize310h, stride4, sourceB46F78. The full source block and receiver defaults are copied/sealed under the existing bucket read scope. Ordered effects track known/write/preserve independently; an unknown row remains unknown through preservation until a qualified write restores it.\nSuperseded search result 2026-10-01: the MCP find_bytes result missed a known B47018 positive control and is not valid absence evidence. Direct ida_bytes.find_bytes over400000..A30000 found B46FF8 operands at7FABB8/7FABF7, both in7FAB60. That helper writes row8.x only for selectors156..158. Ordinary12D..146 returns before property data, globals or callees; its full215-byte body is now guarded. Indexed light updates start at color row9/data row10 and do not reach row8. The ordinary source model may preserve row8 from its current bucket baseline.\nDX11 writer audit 2026-10-01: full thiscall/RET0 map-construction boundary. Caller7FC7D0 invokes virtual+88 after shader/program/pass construction. Include function body and9D05C0 exception chunk in owned hook identity; map storage is mutable independently of root pins.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 68,
+  "display_name": "Lighting30Shader__BuildConstantMaps",
   "end_ea": "0x7FD259",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7FCC80",
+  "name": "Lighting30Shader__BuildConstantMaps",
   "segment": ".text",
   "sha256": "8825413edd35d04b9b9a51e6495ef0b8f5ea54aad78d598af4fc7233493ee137",
   "size": 1497,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7FCC80",
-  "type": "void __thiscall(int *this)",
-  "xrefs_from_count": 602,
+  "total_chunk_size": 1568,
+  "type": "void __thiscall(void *this)",
+  "xrefs_from_count": 631,
   "xrefs_to_count": 1
 }

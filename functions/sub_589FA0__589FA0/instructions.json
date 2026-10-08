@@ -109,13 +109,13 @@
   },
   {
     "ea": "0x589FD7",
-    "line": "fld     [esp+18h+arg_4]",
+    "line": "fld     [esp+18h+number]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x589FDB",
-    "line": "mov     edx, [esp+18h+arg_0]",
+    "line": "mov     edx, [esp+18h+command]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -163,13 +163,13 @@
   },
   {
     "ea": "0x589FF3",
-    "line": "mov     ecx, [esp+18h+arg_C]",
+    "line": "mov     ecx, [esp+18h+argument]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x589FF7",
-    "line": "mov     edx, [esp+18h+arg_10]",
+    "line": "mov     edx, [esp+18h+sourceLine]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -226,5 +226,65 @@
     "line": "retn    14h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9BF7A0",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BF7A3",
+    "line": "add     ecx, 8; void *",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BF7A6",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BF7AB",
+    "line": "mov     edx, [esp+a2]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BF7AF",
+    "line": "lea     eax, [edx-8]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BF7B2",
+    "line": "mov     ecx, [edx-0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BF7B5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BF7B7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BF7BC",
+    "line": "mov     eax, offset stru_AE8CA4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BF7C1",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,12 +1,19 @@
-char __thiscall sub_764FE0(_BYTE *this, int a2, _DWORD *a3, int *a4, int a5, int a6)
+// Oblivion-authoritative NiDX9Renderer::FastCopy. Rejects lost-device, missing-surface, and incompatible-format cases; converts an optional source rectangle plus destination X/Y into D3D RECTs and calls IDirect3DDevice9::StretchRect with D3DTEXF_NONE. Intended for format-compatible copies.
+bool __thiscall NiDX9Renderer::FastCopy(
+        NiDX9Renderer *this,
+        const Ni2DBuffer *source,
+        Ni2DBuffer *destination,
+        const void *sourceRect,
+        unsigned int destinationX,
+        unsigned int destinationY)
 {
-  _DWORD *v8; // ecx
-  _DWORD *v9; // esi
-  _DWORD *v10; // edi
-  _DWORD *v11; // eax
-  int v12; // edi
-  int *v13; // eax
-  int v14; // edx
+  Ni2DBuffer *Surface; // ecx
+  NiDX92DBufferData *data; // esi
+  NiDX92DBufferData *v10; // edi
+  NiSurfaceData *v11; // eax
+  IDirect3DSurface9 *v12; // edi
+  IDirect3DDevice9 *device; // eax
+  IDirect3DDevice9Vtbl *lpVtbl; // edx
   signed int v15; // eax
   void *v16; // ecx
   int v17; // [esp-Ch] [ebp-30h]
@@ -15,56 +22,56 @@ char __thiscall sub_764FE0(_BYTE *this, int a2, _DWORD *a3, int *a4, int a5, int
   int v20; // [esp+10h] [ebp-14h]
   _DWORD v21[4]; // [esp+14h] [ebp-10h] BYREF
 
-  if ( *(this + 0x6F0) )
-    return 0;
-  v8 = a3;
-  v9 = *(_DWORD **)(a2 + 0x10);
-  v10 = (_DWORD *)a3[4];
-  if ( v9
+  if ( this->member.lostDevice ) /*0x764fe6*/
+    return 0; /*0x764fef*/
+  Surface = destination; /*0x764ffc*/
+  data = source->members.data; /*0x765001*/
+  v10 = destination->members.data; /*0x765007*/
+  if ( data /*0x765050*/
     && v10
-    && (v17 = (*(int (__thiscall **)(_DWORD))(*v10 + 0xC))(a3[4]),
-        v11 = (_DWORD *)(*(int (__thiscall **)(_DWORD *))(*v9 + 0xC))(v9),
+    && (v17 = (int)v10->__vftable->GetSurfaceData(destination->members.data),
+        v11 = data->__vftable->GetSurfaceData(data),
         !sub_70E260(v11, v17))
-    && (v8 = (_DWORD *)v9[3], v12 = v10[3], v8)
+    && (Surface = (Ni2DBuffer *)data->member.Surface, v12 = v10->member.Surface, Surface)
     && v12 )
   {
-    if ( a4 )
+    if ( sourceRect ) /*0x76505c*/
     {
-      v18[0] = *a4;
-      v19 = a4[1];
-      v18[1] = a4[2];
-      v20 = a4[3];
+      v18[0] = *(_DWORD *)sourceRect; /*0x765060*/
+      v19 = *((_DWORD *)sourceRect + 1); /*0x765067*/
+      v18[1] = *((_DWORD *)sourceRect + 2); /*0x76506e*/
+      v20 = *((_DWORD *)sourceRect + 3); /*0x765075*/
     }
-    v21[2] = a5 + v19;
-    v21[0] = a5;
-    v13 = *((int **)this + 0xA0);
-    v21[1] = a6;
-    v21[3] = a6 + v20;
-    v14 = *v13;
-    if ( a4 )
-      v15 = (*(int (__stdcall **)(int *, _DWORD *, _DWORD *, int, _DWORD *, _DWORD))(v14 + 0x88))(
-              v13,
-              v8,
-              v18,
-              v12,
-              v21,
-              0);
+    v21[2] = destinationX + v19; /*0x765083*/
+    v21[0] = destinationX; /*0x76508b*/
+    device = this->member.device; /*0x765097*/
+    v21[1] = destinationY; /*0x76509d*/
+    v21[3] = destinationY + v20; /*0x7650a1*/
+    lpVtbl = device->lpVtbl; /*0x7650a5*/
+    if ( sourceRect ) /*0x7650a9*/
+      v15 = (signed int)lpVtbl->StretchRect( /*0x7650b6*/
+                          device,
+                          (IDirect3DSurface9 *)Surface,
+                          (const RECT *)v18,
+                          v12,
+                          (const RECT *)v21,
+                          D3DTEXF_NONE);        // FastCopy StretchRect commit: source/destination surfaces with optional rectangles, filter D3DTEXF_NONE.
     else
-      v15 = (*(int (__stdcall **)(int *, _DWORD *, _DWORD, int, _DWORD, _DWORD))(v14 + 0x88))(v13, v8, 0, v12, 0, 0);
-    if ( v15 >= 0 )
+      v15 = (signed int)lpVtbl->StretchRect(device, (IDirect3DSurface9 *)Surface, 0, v12, 0, D3DTEXF_NONE); /*0x7650c5*/
+    if ( v15 >= 0 ) /*0x7650c9*/
     {
-      return 1;
+      return 1; /*0x7650ec*/
     }
     else
     {
-      sub_7736F0(v15);
-      TESTexture::ClearComponentReferences(v16);
-      return 0;
+      D3D9_HResultToString(v15); /*0x7650cc*/
+      Shared_NoOpVirtual_60D0A0(v16); /*0x7650d7*/
+      return 0; /*0x7650e1*/
     }
   }
   else
   {
-    TESTexture::ClearComponentReferences(v8);
-    return 0;
+    Shared_NoOpVirtual_60D0A0(Surface); /*0x765106*/
+    return 0; /*0x765110*/
   }
 }

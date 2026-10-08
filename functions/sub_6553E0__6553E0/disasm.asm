@@ -1,4 +1,4 @@
-0x6553E0: sub     esp, 18h
+0x6553E0: sub     esp, 18h; BunkFix: sleep/eat furniture-reference scanner used by sub_62D750 and sub_62DA10. Scans around package location/actor and populates process candidate list at +0xB0/+0x2C family using sub_6505D0 predicate.
 0x6553E3: mov     al, byte ptr [esp+18h+arg_4]
 0x6553E7: push    ebx
 0x6553E8: push    esi
@@ -7,7 +7,7 @@
 0x6553EE: mov     esi, ecx
 0x6553F0: mov     ecx, edi; this
 0x6553F2: mov     ds:0B3BA80h, al
-0x6553F7: call    TESObjectREFR_GetParentCell
+0x6553F7: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6553FC: mov     edx, [edi]
 0x6553FE: mov     [esp+24h+arg_0], eax
 0x655402: mov     eax, [edx+174h]
@@ -37,7 +37,7 @@
 0x65544A: mov     ecx, ebp
 0x65544C: call    sub_569800
 0x655451: mov     ecx, eax; this
-0x655453: call    TESObjectCELL_IsInterior
+0x655453: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x655458: test    al, al
 0x65545A: jz      short loc_655464
 0x65545C: fld     dword ptr ds:0A32048h
@@ -66,7 +66,7 @@
 0x6554A2: call    sub_446B90
 0x6554A7: add     esi, 0B0h ; '°'
 0x6554AD: mov     ecx, esi
-0x6554AF: call    BSSimpleList_Clear
+0x6554AF: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x6554B4: mov     ebx, offset stru_B3BA9C
 0x6554B9: lea     esp, [esp+0]
 0x6554C0: mov     edi, [ebx]
@@ -92,7 +92,7 @@
 0x6554F6: test    ebx, ebx
 0x6554F8: jnz     short loc_6554C0
 0x6554FA: mov     ecx, offset stru_B3BA9C
-0x6554FF: call    BSSimpleList_Clear
+0x6554FF: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x655504: mov     ebx, esi
 0x655506: test    ebx, ebx
 0x655508: jz      short loc_65557F
@@ -111,7 +111,6 @@
 0x655527: jz      short loc_65557F
 0x655529: jmp     short loc_655534
 0x65552B: jmp     short loc_655530
-0x65552D: align 10h
 0x655530: mov     al, byte ptr [esp+28h+arg_4]
 0x655534: test    al, al
 0x655536: jz      short loc_65557F
@@ -121,12 +120,12 @@
 0x655541: jz      short loc_655575
 0x655543: mov     ebp, [ebx]
 0x655545: mov     esi, [edi]
-0x655547: mov     ecx, ebp; this
-0x655549: call    TESObjectREFR_GetOwner
+0x655547: mov     ecx, ebp; reference
+0x655549: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x65554E: test    eax, eax
 0x655550: jnz     short loc_65556E
-0x655552: mov     ecx, esi; this
-0x655554: call    TESObjectREFR_GetOwner
+0x655552: mov     ecx, esi; reference
+0x655554: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x655559: test    eax, eax
 0x65555B: jz      short loc_65556E
 0x65555D: test    esi, esi

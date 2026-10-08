@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x68EADF",
-    "line": "mov     ecx, offset NiTMap_AECreatorFuncs",
+    "line": "mov     ecx, offset NiTMap_AECreatorFuncs; Verified (Oblivion): looks up the current EffectSetting.effectCode in NiTMap_AECreatorFuncs; a hit invokes its ActiveEffectFactory with caster, MagicItem and EffectItem.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x68EAF3",
-    "line": "jz      short ActiveEffect_Base_CreateDynamic___SwitchEffectCode",
+    "line": "jz      short ActiveEffect_Base_CreateDynamic___SwitchEffectCode; Verified (Oblivion): only the unregistered-code fallback is handled here. Registered DIWE/DIAR codes are dispatched through NiTMap_AECreatorFuncs before this fallback switch.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x68EAFB",
-    "line": "jz      short ActiveEffect_Base_CreateDynamic___SwitchEffectCode",
+    "line": "jz      short ActiveEffect_Base_CreateDynamic___SwitchEffectCode; Verified (Oblivion): only the unregistered-code fallback is handled here. Registered DIWE/DIAR codes are dispatched through NiTMap_AECreatorFuncs before this fallback switch.",
     "mnemonic": "jz",
     "size": 2
   }

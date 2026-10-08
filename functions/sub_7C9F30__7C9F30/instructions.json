@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7C9F30",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Base ShadowLight consumer includes concrete cases for refraction selectors 0x160, 0x161, and 0x162, as well as inherited high selectors 0x177..0x179. Selector-only filtering would remove valid ordinary PP-lighting work.",
     "mnemonic": "push",
     "size": 2
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x7C9F72",
-    "line": "mov     esi, [esp+70h+arg_C]",
+    "line": "mov     esi, [esp+70h+arg4]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x7CA008",
-    "line": "call    eax ; dword_B42E8C",
+    "line": "call    eax ; unk_B42E8C",
     "mnemonic": "call",
     "size": 2
   },
@@ -493,13 +493,13 @@
   },
   {
     "ea": "0x7CA01A",
-    "line": "push    eax",
+    "line": "push    eax; z",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7CA01B",
-    "line": "push    ebx",
+    "line": "push    ebx; y",
     "mnemonic": "push",
     "size": 1
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x7CA02B",
-    "line": "setnbe  byte ptr [esp+70h+arg_C]",
+    "line": "setnbe  byte ptr [esp+70h+arg4]",
     "mnemonic": "setnbe",
     "size": 8
   },
@@ -697,13 +697,13 @@
   },
   {
     "ea": "0x7CA07C",
-    "line": "fstp    [esp+74h+var_74]; float",
+    "line": "fstp    [esp+74h+w]; w",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7CA07F",
-    "line": "call    sub_7E2430",
+    "line": "call    sub_7E2430; Shader property LOD/alpha helper: update float +0x20 and reset dword +0x24 when crossing 1.0 threshold.",
     "mnemonic": "call",
     "size": 5
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x7CA09E",
-    "line": "mov     ebp, [esp+70h+arg_0]",
+    "line": "mov     ebp, [esp+70h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -991,13 +991,13 @@
   },
   {
     "ea": "0x7CA13F",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7CA141",
-    "line": "call    sub_7ED5D0",
+    "line": "call    OB_BSShaderProperty_CountPassListEntriesWithMarker_010201A0; OBLIVION AUTHORITY (2026-08-24): Generic pass-list marker counter used by the SpeedTree leaf program selector. Walks property+0x70 entries and counts nonnull shader objects whose word at +0x118 is not 0x00FF. It does not test ShadowSceneLight disabled byte +0xF4. Result selects point-light shader program bit; it is not a leaf layer/card/LOD index.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1099,7 +1099,7 @@
   },
   {
     "ea": "0x7CA177",
-    "line": "push    0",
+    "line": "push    0; slot",
     "mnemonic": "push",
     "size": 2
   },
@@ -1111,7 +1111,7 @@
   },
   {
     "ea": "0x7CA17C",
-    "line": "call    sub_7ECAE0",
+    "line": "call    OB_BSShader_SetSharedFloat4Constant_010201A0; Shader global table helper: store four dwords at dword_B46498 + 0x10 * index.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1171,7 +1171,7 @@
   },
   {
     "ea": "0x7CA1A6",
-    "line": "push    19h",
+    "line": "push    19h; slot",
     "mnemonic": "push",
     "size": 2
   },
@@ -1183,7 +1183,7 @@
   },
   {
     "ea": "0x7CA1AB",
-    "line": "call    sub_7ECAE0",
+    "line": "call    OB_BSShader_SetSharedFloat4Constant_010201A0; Shader global table helper: store four dwords at dword_B46498 + 0x10 * index.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1195,7 +1195,7 @@
   },
   {
     "ea": "0x7CA1B3",
-    "line": "cmp     byte ptr [esp+70h+arg_C], 0",
+    "line": "cmp     byte ptr [esp+70h+arg4], 0",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -1327,7 +1327,7 @@
   },
   {
     "ea": "0x7CA201",
-    "line": "push    eax; a2",
+    "line": "push    eax; w",
     "mnemonic": "push",
     "size": 1
   },
@@ -1441,7 +1441,7 @@
   },
   {
     "ea": "0x7CA242",
-    "line": "push    0",
+    "line": "push    0; slot",
     "mnemonic": "push",
     "size": 2
   },
@@ -1453,7 +1453,7 @@
   },
   {
     "ea": "0x7CA247",
-    "line": "call    sub_7ECAE0",
+    "line": "call    OB_BSShader_SetSharedFloat4Constant_010201A0; Shader global table helper: store four dwords at dword_B46498 + 0x10 * index.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1495,7 +1495,7 @@
   },
   {
     "ea": "0x7CA26C",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 6",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 6",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1531,7 +1531,7 @@
   },
   {
     "ea": "0x7CA276",
-    "line": "call    sub_8480C0",
+    "line": "call    ShadowLightShader_EnqueueMode5RigidOpaquePass; Oblivion mode-5 rigid opaque ShadowLight enqueuer. Reuses pool[6]; its one configured stage remains unbound and is ignored by SLS2058. Default SLS2052/SLS2058 switches to SLS2056/SLS2062 only for positive native depth-origin override.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1543,7 +1543,7 @@
   },
   {
     "ea": "0x7CA280",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 7",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 7",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1579,7 +1579,7 @@
   },
   {
     "ea": "0x7CA28A",
-    "line": "call    sub_848190",
+    "line": "call    ShadowLightShader_EnqueueMode5RigidAlphaTestPass; Oblivion mode-5 rigid alpha-tested ShadowLight enqueuer. Reuses pool[7], binds shader-property texture 0/BaseMap to stage 0, optionally applies the property address preset, and uses SLS2053/SLS2059.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1591,7 +1591,7 @@
   },
   {
     "ea": "0x7CA294",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 8",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 8",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1627,7 +1627,7 @@
   },
   {
     "ea": "0x7CA29E",
-    "line": "call    sub_848270",
+    "line": "call    ShadowLightShader_EnqueueMode5SkinnedOpaquePass; Oblivion mode-5 skinned opaque ShadowLight enqueuer. Reuses pool[8]; its one configured stage remains unbound and is ignored by SLS2060. Uses SLS2054/SLS2060.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1639,7 +1639,7 @@
   },
   {
     "ea": "0x7CA2A8",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 9",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 9",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1675,7 +1675,7 @@
   },
   {
     "ea": "0x7CA2B2",
-    "line": "call    sub_848300",
+    "line": "call    ShadowLightShader_EnqueueMode5SkinnedAlphaTestPass; Oblivion mode-5 skinned alpha-tested ShadowLight enqueuer. Reuses pool[9], binds shader-property texture 0/BaseMap to stage 0, optionally applies the property address preset, and uses SLS2055/SLS2061.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1687,7 +1687,7 @@
   },
   {
     "ea": "0x7CA2BC",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 0",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 0",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1735,7 +1735,7 @@
   },
   {
     "ea": "0x7CA2D0",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 2",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 2",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1783,7 +1783,7 @@
   },
   {
     "ea": "0x7CA2E4",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 3",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 3",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1831,7 +1831,7 @@
   },
   {
     "ea": "0x7CA2F8",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 16",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 16",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1879,7 +1879,7 @@
   },
   {
     "ea": "0x7CA30C",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 17",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 17",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1927,7 +1927,7 @@
   },
   {
     "ea": "0x7CA320",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 18",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 18",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1975,7 +1975,7 @@
   },
   {
     "ea": "0x7CA334",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 19",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 19",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2023,7 +2023,7 @@
   },
   {
     "ea": "0x7CA348",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 20",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 20",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2071,7 +2071,7 @@
   },
   {
     "ea": "0x7CA35C",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 21",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 21",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2119,7 +2119,7 @@
   },
   {
     "ea": "0x7CA370",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 22",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 22",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2167,7 +2167,7 @@
   },
   {
     "ea": "0x7CA384",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 23",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 23",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2215,7 +2215,7 @@
   },
   {
     "ea": "0x7CA398",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 400",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 400",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2263,7 +2263,7 @@
   },
   {
     "ea": "0x7CA3AC",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 401",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 401",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2311,7 +2311,7 @@
   },
   {
     "ea": "0x7CA3C0",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 402",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 402",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2359,7 +2359,7 @@
   },
   {
     "ea": "0x7CA3D4",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 403",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 403",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2407,7 +2407,7 @@
   },
   {
     "ea": "0x7CA3E8",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 384",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 384",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2455,7 +2455,7 @@
   },
   {
     "ea": "0x7CA3FC",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 385",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 385",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2503,7 +2503,7 @@
   },
   {
     "ea": "0x7CA410",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 386",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 386",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2551,7 +2551,7 @@
   },
   {
     "ea": "0x7CA424",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 387",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 387",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2599,7 +2599,7 @@
   },
   {
     "ea": "0x7CA438",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 226",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 226",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2647,7 +2647,7 @@
   },
   {
     "ea": "0x7CA44C",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 227",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 227",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2695,7 +2695,7 @@
   },
   {
     "ea": "0x7CA460",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 228",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 228",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2743,7 +2743,7 @@
   },
   {
     "ea": "0x7CA474",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 229",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 229",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2791,7 +2791,7 @@
   },
   {
     "ea": "0x7CA488",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 260",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 260",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2839,7 +2839,7 @@
   },
   {
     "ea": "0x7CA49C",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 261",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 261",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2887,7 +2887,7 @@
   },
   {
     "ea": "0x7CA4B0",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 262",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 262",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2935,7 +2935,7 @@
   },
   {
     "ea": "0x7CA4C4",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 263",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 263",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2983,7 +2983,7 @@
   },
   {
     "ea": "0x7CA4D8",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 264",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 264",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3031,7 +3031,7 @@
   },
   {
     "ea": "0x7CA4EC",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 265",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 265",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3079,7 +3079,7 @@
   },
   {
     "ea": "0x7CA500",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 266",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 266",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3127,7 +3127,7 @@
   },
   {
     "ea": "0x7CA514",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 271",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 271",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3175,7 +3175,7 @@
   },
   {
     "ea": "0x7CA528",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 272",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 272",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3223,7 +3223,7 @@
   },
   {
     "ea": "0x7CA53C",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 273",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 273",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3271,7 +3271,7 @@
   },
   {
     "ea": "0x7CA550",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 274",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 274",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3319,7 +3319,7 @@
   },
   {
     "ea": "0x7CA564",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 25",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 25",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3367,7 +3367,7 @@
   },
   {
     "ea": "0x7CA578",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 26",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 26",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3415,7 +3415,7 @@
   },
   {
     "ea": "0x7CA58C",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 52",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 52",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3463,7 +3463,7 @@
   },
   {
     "ea": "0x7CA5A0",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 53",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 53",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3511,7 +3511,7 @@
   },
   {
     "ea": "0x7CA5B4",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 27",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 27",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3559,7 +3559,7 @@
   },
   {
     "ea": "0x7CA5C8",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 28",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 28",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3607,7 +3607,7 @@
   },
   {
     "ea": "0x7CA5DC",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 54",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 54",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3655,7 +3655,7 @@
   },
   {
     "ea": "0x7CA5F0",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 55",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 55",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3703,7 +3703,7 @@
   },
   {
     "ea": "0x7CA604",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 29",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 29",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3751,7 +3751,7 @@
   },
   {
     "ea": "0x7CA618",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 30",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 30",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3799,7 +3799,7 @@
   },
   {
     "ea": "0x7CA62C",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 31",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 31",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3847,7 +3847,7 @@
   },
   {
     "ea": "0x7CA640",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 56",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 56",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3895,7 +3895,7 @@
   },
   {
     "ea": "0x7CA654",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 57",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 57",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3943,7 +3943,7 @@
   },
   {
     "ea": "0x7CA668",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 32",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 32",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3991,7 +3991,7 @@
   },
   {
     "ea": "0x7CA67C",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 33",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 33",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4039,7 +4039,7 @@
   },
   {
     "ea": "0x7CA690",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 34",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 34",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4087,7 +4087,7 @@
   },
   {
     "ea": "0x7CA6A4",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 58",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 58",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4135,7 +4135,7 @@
   },
   {
     "ea": "0x7CA6B8",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 59",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 59",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4183,7 +4183,7 @@
   },
   {
     "ea": "0x7CA6CC",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 60",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 60",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4231,7 +4231,7 @@
   },
   {
     "ea": "0x7CA6E0",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 35",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 35",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4279,7 +4279,7 @@
   },
   {
     "ea": "0x7CA6F4",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 61",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 61",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4327,7 +4327,7 @@
   },
   {
     "ea": "0x7CA708",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 36",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 36",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4375,7 +4375,7 @@
   },
   {
     "ea": "0x7CA71C",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 37",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 37",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4423,7 +4423,7 @@
   },
   {
     "ea": "0x7CA730",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 62",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 62",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4471,7 +4471,7 @@
   },
   {
     "ea": "0x7CA744",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 63",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 63",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4519,7 +4519,7 @@
   },
   {
     "ea": "0x7CA758",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 38",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 38",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4567,7 +4567,7 @@
   },
   {
     "ea": "0x7CA76C",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 39",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 39",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4615,7 +4615,7 @@
   },
   {
     "ea": "0x7CA780",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 64",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 64",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4663,7 +4663,7 @@
   },
   {
     "ea": "0x7CA794",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 65",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 65",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4711,7 +4711,7 @@
   },
   {
     "ea": "0x7CA7A8",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 40",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 40",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4759,7 +4759,7 @@
   },
   {
     "ea": "0x7CA7BC",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 68",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 68",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4807,7 +4807,7 @@
   },
   {
     "ea": "0x7CA7D0",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 66",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 66",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4855,7 +4855,7 @@
   },
   {
     "ea": "0x7CA7E4",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 67",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 67",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4903,7 +4903,7 @@
   },
   {
     "ea": "0x7CA7F8",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 43",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 43",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4951,7 +4951,7 @@
   },
   {
     "ea": "0x7CA80C",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 44",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 44",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4999,7 +4999,7 @@
   },
   {
     "ea": "0x7CA820",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 45",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 45",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5047,7 +5047,7 @@
   },
   {
     "ea": "0x7CA834",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 69",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 69",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5095,7 +5095,7 @@
   },
   {
     "ea": "0x7CA848",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 70",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 70",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5143,7 +5143,7 @@
   },
   {
     "ea": "0x7CA85C",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 46",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 46",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5191,7 +5191,7 @@
   },
   {
     "ea": "0x7CA870",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 71",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 71",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5239,7 +5239,7 @@
   },
   {
     "ea": "0x7CA884",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 41",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 41",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5287,7 +5287,7 @@
   },
   {
     "ea": "0x7CA898",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 42",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 42",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5335,7 +5335,7 @@
   },
   {
     "ea": "0x7CA8AC",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 49",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 49",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5383,7 +5383,7 @@
   },
   {
     "ea": "0x7CA8C0",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 50",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 50",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5431,43 +5431,43 @@
   },
   {
     "ea": "0x7CA8D4",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 396",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 396",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7CA8D8",
-    "line": "push    ebx",
+    "line": "push    ebx; shaderProperty",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7CA8D9",
-    "line": "push    esi",
+    "line": "push    esi; arg4",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7CA8DA",
-    "line": "push    edx",
+    "line": "push    edx; arg3",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7CA8DB",
-    "line": "push    ebp",
+    "line": "push    ebp; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7CA8DC",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7CA8DE",
-    "line": "call    sub_851CA0",
+    "line": "call    NiD3DPassArray_AddTextureEffectPass1x; Verified (Oblivion): ShadowLightShader__SetupRenderPass dispatches selector 0x18C (BSSM_TEXEFFECT) to ShadowLightShader_BindTextureEffectPass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5479,43 +5479,43 @@
   },
   {
     "ea": "0x7CA8E8",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 397",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 397",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7CA8EC",
-    "line": "push    ebx",
+    "line": "push    ebx; shaderProperty",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7CA8ED",
-    "line": "push    esi",
+    "line": "push    esi; arg4",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7CA8EE",
-    "line": "push    eax",
+    "line": "push    eax; arg3",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7CA8EF",
-    "line": "push    ebp",
+    "line": "push    ebp; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7CA8F0",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7CA8F2",
-    "line": "call    sub_851E70",
+    "line": "call    NiD3DPassArray_AddTextureEffectPass1xS; Verified (Oblivion): ShadowLightShader__SetupRenderPass dispatches selector 0x18D (BSSM_TEXEFFECT_S) to ShadowLightShader_BindTextureEffectSPass. Probable: _S is the controller/skinned-geometry variant; Oblivion selects it from passInfo bit 0x02, which SetupGeometry sets from geometry->m_controller, and Fallout's 1x homolog selects its alternate pass from abSkinned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5527,43 +5527,43 @@
   },
   {
     "ea": "0x7CA8FC",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 398",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 398",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7CA900",
-    "line": "push    ebx",
+    "line": "push    ebx; shaderProperty",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7CA901",
-    "line": "push    esi",
+    "line": "push    esi; arg4",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7CA902",
-    "line": "push    ecx",
+    "line": "push    ecx; arg3",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7CA903",
-    "line": "push    ebp",
+    "line": "push    ebp; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7CA904",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7CA906",
-    "line": "call    sub_848950",
+    "line": "call    NiD3DPassArray_AddTextureEffectPass2x; Verified (Oblivion): ShadowLightShader__SetupRenderPass dispatches selector 0x18E (BSSM_2x_TEXEFFECT) to ShadowLightShader_BindTextureEffect2xPass. Fallout's related 2x texture-effect pass uses selector ID 0x200; IDs are version-specific.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5575,43 +5575,43 @@
   },
   {
     "ea": "0x7CA910",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 399",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 399",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7CA914",
-    "line": "push    ebx",
+    "line": "push    ebx; shaderProperty",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7CA915",
-    "line": "push    esi",
+    "line": "push    esi; arg4",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7CA916",
-    "line": "push    edx",
+    "line": "push    edx; arg3",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7CA917",
-    "line": "push    ebp",
+    "line": "push    ebp; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7CA918",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7CA91A",
-    "line": "call    sub_848AD0",
+    "line": "call    NiD3DPassArray_AddTextureEffectPass2xS; Verified (Oblivion): ShadowLightShader__SetupRenderPass dispatches selector 0x18F (BSSM_2x_TEXEFFECT_S) to ShadowLightShader_BindTextureEffect2xSPass. Fallout uses 0x201 for its corresponding _S 2x pass; do not transfer selector IDs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5623,7 +5623,7 @@
   },
   {
     "ea": "0x7CA924",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 72",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 72",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5677,7 +5677,7 @@
   },
   {
     "ea": "0x7CA93A",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 366",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 366",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5731,7 +5731,7 @@
   },
   {
     "ea": "0x7CA950",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 365",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 365",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5785,7 +5785,7 @@
   },
   {
     "ea": "0x7CA966",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 368",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 368",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5839,7 +5839,7 @@
   },
   {
     "ea": "0x7CA97C",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 360",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 360",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5893,7 +5893,7 @@
   },
   {
     "ea": "0x7CA992",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 369",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 369",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5947,7 +5947,7 @@
   },
   {
     "ea": "0x7CA9A8",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 73",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 73",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6001,7 +6001,7 @@
   },
   {
     "ea": "0x7CA9BE",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 367",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 367",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6055,7 +6055,7 @@
   },
   {
     "ea": "0x7CA9D4",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 374",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 374",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6109,7 +6109,7 @@
   },
   {
     "ea": "0x7CA9EA",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 361",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 361",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6163,7 +6163,7 @@
   },
   {
     "ea": "0x7CAA00",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 362",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 362",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6217,7 +6217,7 @@
   },
   {
     "ea": "0x7CAA16",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 364",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 364",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6271,7 +6271,7 @@
   },
   {
     "ea": "0x7CAA2C",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 370",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 370",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6325,7 +6325,7 @@
   },
   {
     "ea": "0x7CAA42",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 371",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 371",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6379,7 +6379,7 @@
   },
   {
     "ea": "0x7CAA58",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 372",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 372",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6433,7 +6433,7 @@
   },
   {
     "ea": "0x7CAA6E",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 363",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 363",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6487,7 +6487,7 @@
   },
   {
     "ea": "0x7CAA84",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 373",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 373",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6541,7 +6541,7 @@
   },
   {
     "ea": "0x7CAA9A",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 74",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 74",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6589,7 +6589,7 @@
   },
   {
     "ea": "0x7CAAAE",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 75",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 75",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6637,7 +6637,7 @@
   },
   {
     "ea": "0x7CAAC2",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 79",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 79",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6685,7 +6685,7 @@
   },
   {
     "ea": "0x7CAAD6",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 81",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 81",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6733,7 +6733,7 @@
   },
   {
     "ea": "0x7CAAEA",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 85",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 85",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6781,7 +6781,7 @@
   },
   {
     "ea": "0x7CAAFE",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 86",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 86",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6829,7 +6829,7 @@
   },
   {
     "ea": "0x7CAB12",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 90",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 90",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6877,7 +6877,7 @@
   },
   {
     "ea": "0x7CAB26",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 92",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 92",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6925,7 +6925,7 @@
   },
   {
     "ea": "0x7CAB3A",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 96",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 96",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6961,7 +6961,7 @@
   },
   {
     "ea": "0x7CAB44",
-    "line": "call    sub_842A00",
+    "line": "call    ShadowLightShader_QueueSLS2023_SLS2031",
     "mnemonic": "call",
     "size": 5
   },
@@ -6973,7 +6973,7 @@
   },
   {
     "ea": "0x7CAB4E",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 97",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 97",
     "mnemonic": "mov",
     "size": 4
   },
@@ -7009,7 +7009,7 @@
   },
   {
     "ea": "0x7CAB58",
-    "line": "call    sub_842B80",
+    "line": "call    ShadowLightShader_QueueSLS2023_SLS2032",
     "mnemonic": "call",
     "size": 5
   },
@@ -7021,7 +7021,7 @@
   },
   {
     "ea": "0x7CAB62",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 101",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 101",
     "mnemonic": "mov",
     "size": 4
   },
@@ -7057,7 +7057,7 @@
   },
   {
     "ea": "0x7CAB6C",
-    "line": "call    sub_842D70",
+    "line": "call    ShadowLightShader_QueueSLS2024_SLS2031",
     "mnemonic": "call",
     "size": 5
   },
@@ -7069,7 +7069,7 @@
   },
   {
     "ea": "0x7CAB76",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 103",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 103",
     "mnemonic": "mov",
     "size": 4
   },
@@ -7105,7 +7105,7 @@
   },
   {
     "ea": "0x7CAB80",
-    "line": "call    sub_842EF0",
+    "line": "call    ShadowLightShader_QueueSLS2024_SLS2032",
     "mnemonic": "call",
     "size": 5
   },
@@ -7117,7 +7117,7 @@
   },
   {
     "ea": "0x7CAB8A",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 107",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 107",
     "mnemonic": "mov",
     "size": 4
   },
@@ -7165,7 +7165,7 @@
   },
   {
     "ea": "0x7CAB9E",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 108",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 108",
     "mnemonic": "mov",
     "size": 4
   },
@@ -7213,7 +7213,7 @@
   },
   {
     "ea": "0x7CABB2",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 112",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 112",
     "mnemonic": "mov",
     "size": 4
   },
@@ -7261,7 +7261,7 @@
   },
   {
     "ea": "0x7CABC6",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 114",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 114",
     "mnemonic": "mov",
     "size": 4
   },
@@ -7309,7 +7309,7 @@
   },
   {
     "ea": "0x7CABDA",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 118",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 118",
     "mnemonic": "mov",
     "size": 4
   },
@@ -7357,7 +7357,7 @@
   },
   {
     "ea": "0x7CABEE",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 119",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 119",
     "mnemonic": "mov",
     "size": 4
   },
@@ -7405,7 +7405,7 @@
   },
   {
     "ea": "0x7CAC02",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 120",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 120",
     "mnemonic": "mov",
     "size": 4
   },
@@ -7453,7 +7453,7 @@
   },
   {
     "ea": "0x7CAC16",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 124",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 124",
     "mnemonic": "mov",
     "size": 4
   },
@@ -7501,7 +7501,7 @@
   },
   {
     "ea": "0x7CAC2A",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 125",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 125",
     "mnemonic": "mov",
     "size": 4
   },
@@ -7549,7 +7549,7 @@
   },
   {
     "ea": "0x7CAC3E",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 126",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 126",
     "mnemonic": "mov",
     "size": 4
   },
@@ -7597,7 +7597,7 @@
   },
   {
     "ea": "0x7CAC52",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 131",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 131",
     "mnemonic": "mov",
     "size": 4
   },
@@ -7645,7 +7645,7 @@
   },
   {
     "ea": "0x7CAC66",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 379",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 379",
     "mnemonic": "mov",
     "size": 4
   },
@@ -7693,7 +7693,7 @@
   },
   {
     "ea": "0x7CAC7A",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 146",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 146",
     "mnemonic": "mov",
     "size": 4
   },
@@ -7741,7 +7741,7 @@
   },
   {
     "ea": "0x7CAC8E",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 147",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 147",
     "mnemonic": "mov",
     "size": 4
   },
@@ -7777,7 +7777,7 @@
   },
   {
     "ea": "0x7CAC98",
-    "line": "call    sub_83CE00",
+    "line": "call    ShadowLightShader_QueueSLS2007_SLS2010",
     "mnemonic": "call",
     "size": 5
   },
@@ -7789,7 +7789,7 @@
   },
   {
     "ea": "0x7CACA2",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 151",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 151",
     "mnemonic": "mov",
     "size": 4
   },
@@ -7837,7 +7837,7 @@
   },
   {
     "ea": "0x7CACB6",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 152",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 152",
     "mnemonic": "mov",
     "size": 4
   },
@@ -7885,7 +7885,7 @@
   },
   {
     "ea": "0x7CACCA",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 153",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 153",
     "mnemonic": "mov",
     "size": 4
   },
@@ -7921,7 +7921,7 @@
   },
   {
     "ea": "0x7CACD4",
-    "line": "call    sub_83D380",
+    "line": "call    ShadowLightShader_QueueSLS2008_SLS2010",
     "mnemonic": "call",
     "size": 5
   },
@@ -7933,7 +7933,7 @@
   },
   {
     "ea": "0x7CACDE",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 158",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 158",
     "mnemonic": "mov",
     "size": 4
   },
@@ -7981,7 +7981,7 @@
   },
   {
     "ea": "0x7CACF2",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 132",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 132",
     "mnemonic": "mov",
     "size": 4
   },
@@ -8029,7 +8029,7 @@
   },
   {
     "ea": "0x7CAD06",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 133",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 133",
     "mnemonic": "mov",
     "size": 4
   },
@@ -8077,7 +8077,7 @@
   },
   {
     "ea": "0x7CAD1A",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 134",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 134",
     "mnemonic": "mov",
     "size": 4
   },
@@ -8125,7 +8125,7 @@
   },
   {
     "ea": "0x7CAD2E",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 138",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 138",
     "mnemonic": "mov",
     "size": 4
   },
@@ -8173,7 +8173,7 @@
   },
   {
     "ea": "0x7CAD42",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 139",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 139",
     "mnemonic": "mov",
     "size": 4
   },
@@ -8221,7 +8221,7 @@
   },
   {
     "ea": "0x7CAD56",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 140",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 140",
     "mnemonic": "mov",
     "size": 4
   },
@@ -8269,7 +8269,7 @@
   },
   {
     "ea": "0x7CAD6A",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 145",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 145",
     "mnemonic": "mov",
     "size": 4
   },
@@ -8317,7 +8317,7 @@
   },
   {
     "ea": "0x7CAD7E",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 159",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 159",
     "mnemonic": "mov",
     "size": 4
   },
@@ -8365,7 +8365,7 @@
   },
   {
     "ea": "0x7CAD92",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 160",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 160",
     "mnemonic": "mov",
     "size": 4
   },
@@ -8413,7 +8413,7 @@
   },
   {
     "ea": "0x7CADA6",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 164",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 164",
     "mnemonic": "mov",
     "size": 4
   },
@@ -8461,7 +8461,7 @@
   },
   {
     "ea": "0x7CADBA",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 165",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 165",
     "mnemonic": "mov",
     "size": 4
   },
@@ -8509,7 +8509,7 @@
   },
   {
     "ea": "0x7CADCE",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 166",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 166",
     "mnemonic": "mov",
     "size": 4
   },
@@ -8557,7 +8557,7 @@
   },
   {
     "ea": "0x7CADE2",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 171",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 171",
     "mnemonic": "mov",
     "size": 4
   },
@@ -8605,7 +8605,7 @@
   },
   {
     "ea": "0x7CADF6",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 172",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 172",
     "mnemonic": "mov",
     "size": 4
   },
@@ -8653,7 +8653,7 @@
   },
   {
     "ea": "0x7CAE0A",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 173",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 173",
     "mnemonic": "mov",
     "size": 4
   },
@@ -8701,7 +8701,7 @@
   },
   {
     "ea": "0x7CAE1E",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 174",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 174",
     "mnemonic": "mov",
     "size": 4
   },
@@ -8749,7 +8749,7 @@
   },
   {
     "ea": "0x7CAE32",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 178",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 178",
     "mnemonic": "mov",
     "size": 4
   },
@@ -8797,7 +8797,7 @@
   },
   {
     "ea": "0x7CAE46",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 179",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 179",
     "mnemonic": "mov",
     "size": 4
   },
@@ -8845,7 +8845,7 @@
   },
   {
     "ea": "0x7CAE5A",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 180",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 180",
     "mnemonic": "mov",
     "size": 4
   },
@@ -8893,7 +8893,7 @@
   },
   {
     "ea": "0x7CAE6E",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 198",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 198",
     "mnemonic": "mov",
     "size": 4
   },
@@ -8941,7 +8941,7 @@
   },
   {
     "ea": "0x7CAE82",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 199",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 199",
     "mnemonic": "mov",
     "size": 4
   },
@@ -8989,7 +8989,7 @@
   },
   {
     "ea": "0x7CAE96",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 200",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 200",
     "mnemonic": "mov",
     "size": 4
   },
@@ -9037,7 +9037,7 @@
   },
   {
     "ea": "0x7CAEAA",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 204",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 204",
     "mnemonic": "mov",
     "size": 4
   },
@@ -9085,7 +9085,7 @@
   },
   {
     "ea": "0x7CAEBE",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 205",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 205",
     "mnemonic": "mov",
     "size": 4
   },
@@ -9133,7 +9133,7 @@
   },
   {
     "ea": "0x7CAED2",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 206",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 206",
     "mnemonic": "mov",
     "size": 4
   },
@@ -9181,7 +9181,7 @@
   },
   {
     "ea": "0x7CAEE6",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 185",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 185",
     "mnemonic": "mov",
     "size": 4
   },
@@ -9229,7 +9229,7 @@
   },
   {
     "ea": "0x7CAEFA",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 186",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 186",
     "mnemonic": "mov",
     "size": 4
   },
@@ -9277,7 +9277,7 @@
   },
   {
     "ea": "0x7CAF0E",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 187",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 187",
     "mnemonic": "mov",
     "size": 4
   },
@@ -9325,7 +9325,7 @@
   },
   {
     "ea": "0x7CAF22",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 191",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 191",
     "mnemonic": "mov",
     "size": 4
   },
@@ -9373,7 +9373,7 @@
   },
   {
     "ea": "0x7CAF36",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 192",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 192",
     "mnemonic": "mov",
     "size": 4
   },
@@ -9421,7 +9421,7 @@
   },
   {
     "ea": "0x7CAF4A",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 193",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 193",
     "mnemonic": "mov",
     "size": 4
   },
@@ -9469,7 +9469,7 @@
   },
   {
     "ea": "0x7CAF5E",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 211",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 211",
     "mnemonic": "mov",
     "size": 4
   },
@@ -9517,7 +9517,7 @@
   },
   {
     "ea": "0x7CAF72",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 212",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 212",
     "mnemonic": "mov",
     "size": 4
   },
@@ -9565,7 +9565,7 @@
   },
   {
     "ea": "0x7CAF86",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 213",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 213",
     "mnemonic": "mov",
     "size": 4
   },
@@ -9613,7 +9613,7 @@
   },
   {
     "ea": "0x7CAF9A",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 217",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 217",
     "mnemonic": "mov",
     "size": 4
   },
@@ -9661,7 +9661,7 @@
   },
   {
     "ea": "0x7CAFAE",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 218",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 218",
     "mnemonic": "mov",
     "size": 4
   },
@@ -9709,7 +9709,7 @@
   },
   {
     "ea": "0x7CAFC2",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 219",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 219",
     "mnemonic": "mov",
     "size": 4
   },
@@ -9757,7 +9757,7 @@
   },
   {
     "ea": "0x7CAFD6",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 232",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 232",
     "mnemonic": "mov",
     "size": 4
   },
@@ -9793,7 +9793,7 @@
   },
   {
     "ea": "0x7CAFE0",
-    "line": "call    sub_843A40",
+    "line": "call    ShadowLightShader_QueueSLS2027_SLS2035",
     "mnemonic": "call",
     "size": 5
   },
@@ -9805,7 +9805,7 @@
   },
   {
     "ea": "0x7CAFEA",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 235",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 235",
     "mnemonic": "mov",
     "size": 4
   },
@@ -9841,7 +9841,7 @@
   },
   {
     "ea": "0x7CAFF4",
-    "line": "call    sub_843B30",
+    "line": "call    ShadowLightShader_QueueSLS2028_SLS2035",
     "mnemonic": "call",
     "size": 5
   },
@@ -9853,7 +9853,7 @@
   },
   {
     "ea": "0x7CAFFE",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 246",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 246",
     "mnemonic": "mov",
     "size": 4
   },
@@ -9889,7 +9889,7 @@
   },
   {
     "ea": "0x7CB008",
-    "line": "call    sub_843C10",
+    "line": "call    ShadowLightShader_QueueSLS2029_SLS2036",
     "mnemonic": "call",
     "size": 5
   },
@@ -9901,7 +9901,7 @@
   },
   {
     "ea": "0x7CB012",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 249",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 249",
     "mnemonic": "mov",
     "size": 4
   },
@@ -9937,7 +9937,7 @@
   },
   {
     "ea": "0x7CB01C",
-    "line": "call    sub_843CF0",
+    "line": "call    ShadowLightShader_QueueSLS2030_SLS2036",
     "mnemonic": "call",
     "size": 5
   },
@@ -9949,7 +9949,7 @@
   },
   {
     "ea": "0x7CB026",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 277",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 277",
     "mnemonic": "mov",
     "size": 4
   },
@@ -9997,7 +9997,7 @@
   },
   {
     "ea": "0x7CB03A",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 278",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 278",
     "mnemonic": "mov",
     "size": 4
   },
@@ -10045,7 +10045,7 @@
   },
   {
     "ea": "0x7CB04E",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 280",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 280",
     "mnemonic": "mov",
     "size": 4
   },
@@ -10093,7 +10093,7 @@
   },
   {
     "ea": "0x7CB062",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 281",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 281",
     "mnemonic": "mov",
     "size": 4
   },
@@ -10141,7 +10141,7 @@
   },
   {
     "ea": "0x7CB076",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 284",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 284",
     "mnemonic": "mov",
     "size": 4
   },
@@ -10189,7 +10189,7 @@
   },
   {
     "ea": "0x7CB08A",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 285",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 285",
     "mnemonic": "mov",
     "size": 4
   },
@@ -10237,7 +10237,7 @@
   },
   {
     "ea": "0x7CB09E",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 287",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 287",
     "mnemonic": "mov",
     "size": 4
   },
@@ -10285,7 +10285,7 @@
   },
   {
     "ea": "0x7CB0B2",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 288",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 288",
     "mnemonic": "mov",
     "size": 4
   },
@@ -10333,7 +10333,7 @@
   },
   {
     "ea": "0x7CB0C6",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 291",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 291",
     "mnemonic": "mov",
     "size": 4
   },
@@ -10381,7 +10381,7 @@
   },
   {
     "ea": "0x7CB0DA",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 292",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 292",
     "mnemonic": "mov",
     "size": 4
   },
@@ -10429,7 +10429,7 @@
   },
   {
     "ea": "0x7CB0EE",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 294",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 294",
     "mnemonic": "mov",
     "size": 4
   },
@@ -10477,7 +10477,7 @@
   },
   {
     "ea": "0x7CB102",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 295",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 295",
     "mnemonic": "mov",
     "size": 4
   },
@@ -10525,7 +10525,7 @@
   },
   {
     "ea": "0x7CB116",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 388",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 388",
     "mnemonic": "mov",
     "size": 4
   },
@@ -10573,7 +10573,7 @@
   },
   {
     "ea": "0x7CB12A",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 389",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 389",
     "mnemonic": "mov",
     "size": 4
   },
@@ -10621,7 +10621,7 @@
   },
   {
     "ea": "0x7CB13E",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 390",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 390",
     "mnemonic": "mov",
     "size": 4
   },
@@ -10669,7 +10669,7 @@
   },
   {
     "ea": "0x7CB152",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 391",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 391",
     "mnemonic": "mov",
     "size": 4
   },
@@ -10717,7 +10717,7 @@
   },
   {
     "ea": "0x7CB166",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 394",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 394",
     "mnemonic": "mov",
     "size": 4
   },
@@ -10765,7 +10765,7 @@
   },
   {
     "ea": "0x7CB17A",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 395",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 395",
     "mnemonic": "mov",
     "size": 4
   },
@@ -10813,7 +10813,7 @@
   },
   {
     "ea": "0x7CB18E",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 375",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 375",
     "mnemonic": "mov",
     "size": 4
   },
@@ -10849,7 +10849,7 @@
   },
   {
     "ea": "0x7CB198",
-    "line": "call    sub_845CF0",
+    "line": "call    ShadowLightShader_AppendSelector177LightPass; Selector 0x177: concrete ShadowLight consumer binds current ShadowSceneLight+0x114 and queues one pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10861,7 +10861,7 @@
   },
   {
     "ea": "0x7CB1A2",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 376",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 376",
     "mnemonic": "mov",
     "size": 4
   },
@@ -10897,7 +10897,7 @@
   },
   {
     "ea": "0x7CB1AC",
-    "line": "call    sub_845EC0",
+    "line": "call    ShadowLightShader_AppendSelector178LightPass; Selector 0x178: concrete ShadowLight consumer binds current ShadowSceneLight+0x114 and queues one pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10909,7 +10909,7 @@
   },
   {
     "ea": "0x7CB1B6",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 377",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 377",
     "mnemonic": "mov",
     "size": 4
   },
@@ -10945,7 +10945,7 @@
   },
   {
     "ea": "0x7CB1C0",
-    "line": "call    sub_846090",
+    "line": "call    ShadowLightShader_AppendSelector179LightPass; Selector 0x179: concrete ShadowLight consumer binds current ShadowSceneLight+0x114 and queues one pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10957,7 +10957,7 @@
   },
   {
     "ea": "0x7CB1CA",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 414",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 414",
     "mnemonic": "mov",
     "size": 4
   },
@@ -11005,7 +11005,7 @@
   },
   {
     "ea": "0x7CB1DE",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 415",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 415",
     "mnemonic": "mov",
     "size": 4
   },
@@ -11053,7 +11053,7 @@
   },
   {
     "ea": "0x7CB1F2",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 10",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 10",
     "mnemonic": "mov",
     "size": 4
   },
@@ -11101,7 +11101,7 @@
   },
   {
     "ea": "0x7CB206",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 11",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 11",
     "mnemonic": "mov",
     "size": 4
   },
@@ -11149,7 +11149,7 @@
   },
   {
     "ea": "0x7CB21A",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 352",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 352",
     "mnemonic": "mov",
     "size": 4
   },
@@ -11185,7 +11185,7 @@
   },
   {
     "ea": "0x7CB224",
-    "line": "call    sub_8483E0",
+    "line": "call    ShadowLightShader_AppendSelector160RefractionPass; Append pooled ShadowLight pass for selector 0x160 (base Refract variant), bind its data, queue it, and increment PassCount.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11197,7 +11197,7 @@
   },
   {
     "ea": "0x7CB22B",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 353",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 353",
     "mnemonic": "mov",
     "size": 4
   },
@@ -11233,7 +11233,7 @@
   },
   {
     "ea": "0x7CB235",
-    "line": "call    sub_8484C0",
+    "line": "call    ShadowLightShader_AppendSelector161RefractionPass; Append pooled ShadowLight pass for selector 0x161 (Refract plus passInfo bit 2 variant), bind its data, queue it, and increment PassCount.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11245,7 +11245,7 @@
   },
   {
     "ea": "0x7CB23C",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 354",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 354",
     "mnemonic": "mov",
     "size": 4
   },
@@ -11281,7 +11281,7 @@
   },
   {
     "ea": "0x7CB246",
-    "line": "call    sub_8485A0",
+    "line": "call    ShadowLightShader_AppendSelector162RefractFPass; Append pooled ShadowLight pass for selector 0x162 (RefractF), bind its data, queue it, and increment PassCount.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11293,7 +11293,7 @@
   },
   {
     "ea": "0x7CB24D",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 355",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 355",
     "mnemonic": "mov",
     "size": 4
   },
@@ -11341,7 +11341,7 @@
   },
   {
     "ea": "0x7CB25E",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 356",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 356",
     "mnemonic": "mov",
     "size": 4
   },
@@ -11389,7 +11389,7 @@
   },
   {
     "ea": "0x7CB26F",
-    "line": "mov     ecx, [esp+70h+arg_4]; jumptable 007CA265 case 357",
+    "line": "mov     ecx, [esp+70h+arg3]; jumptable 007CA265 case 357",
     "mnemonic": "mov",
     "size": 4
   },
@@ -11437,7 +11437,7 @@
   },
   {
     "ea": "0x7CB280",
-    "line": "mov     edx, [esp+70h+arg_4]; jumptable 007CA265 case 358",
+    "line": "mov     edx, [esp+70h+arg3]; jumptable 007CA265 case 358",
     "mnemonic": "mov",
     "size": 4
   },
@@ -11485,7 +11485,7 @@
   },
   {
     "ea": "0x7CB291",
-    "line": "mov     eax, [esp+70h+arg_4]; jumptable 007CA265 case 359",
+    "line": "mov     eax, [esp+70h+arg3]; jumptable 007CA265 case 359",
     "mnemonic": "mov",
     "size": 4
   },
@@ -11635,7 +11635,7 @@
   },
   {
     "ea": "0x7CB2F6",
-    "line": "fstp    [esp+70h+arg_4]",
+    "line": "fstp    [esp+70h+arg3]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -11647,7 +11647,7 @@
   },
   {
     "ea": "0x7CB2FC",
-    "line": "fcomp   [esp+70h+arg_4]",
+    "line": "fcomp   [esp+70h+arg3]",
     "mnemonic": "fcomp",
     "size": 4
   },
@@ -11671,31 +11671,31 @@
   },
   {
     "ea": "0x7CB307",
-    "line": "mov     ecx, ds:0B455A0h[ebp*4]",
+    "line": "mov     ecx, ds:0B455A0h[ebp*4]; this",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x7CB30E",
-    "line": "push    0",
+    "line": "push    0; restore",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7CB310",
-    "line": "push    0",
+    "line": "push    0; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7CB312",
-    "line": "push    1Bh",
+    "line": "push    1Bh; state",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7CB314",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11707,13 +11707,13 @@
   },
   {
     "ea": "0x7CB31E",
-    "line": "mov     ecx, ds:0B455A0h[ebp*4]",
+    "line": "mov     ecx, ds:0B455A0h[ebp*4]; this",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x7CB325",
-    "line": "push    0",
+    "line": "push    0; restore",
     "mnemonic": "push",
     "size": 2
   },
@@ -11743,19 +11743,19 @@
   },
   {
     "ea": "0x7CB332",
-    "line": "push    1",
+    "line": "push    1; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7CB334",
-    "line": "push    0Fh",
+    "line": "push    0Fh; state",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7CB336",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11773,7 +11773,7 @@
   },
   {
     "ea": "0x7CB341",
-    "line": "mov     ecx, ds:0B455A0h[ebp*4]",
+    "line": "mov     ecx, ds:0B455A0h[ebp*4]; this",
     "mnemonic": "mov",
     "size": 7
   },
@@ -11785,25 +11785,25 @@
   },
   {
     "ea": "0x7CB34B",
-    "line": "push    0",
+    "line": "push    0; restore",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7CB34D",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7CB34E",
-    "line": "push    18h",
+    "line": "push    18h; state",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7CB350",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11863,31 +11863,31 @@
   },
   {
     "ea": "0x7CB37C",
-    "line": "mov     ecx, ds:0B455A0h[ebp*4]",
+    "line": "mov     ecx, ds:0B455A0h[ebp*4]; this",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x7CB383",
-    "line": "push    0",
+    "line": "push    0; restore",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7CB385",
-    "line": "push    1",
+    "line": "push    1; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7CB387",
-    "line": "push    1Bh",
+    "line": "push    1Bh; state",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7CB389",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11941,13 +11941,13 @@
   },
   {
     "ea": "0x7CB3A3",
-    "line": "mov     ecx, ds:0B455A0h[ebp*4]",
+    "line": "mov     ecx, ds:0B455A0h[ebp*4]; this",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x7CB3AA",
-    "line": "push    0",
+    "line": "push    0; restore",
     "mnemonic": "push",
     "size": 2
   },
@@ -11977,19 +11977,19 @@
   },
   {
     "ea": "0x7CB3B4",
-    "line": "push    1",
+    "line": "push    1; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7CB3B6",
-    "line": "push    0Fh",
+    "line": "push    0Fh; state",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7CB3B8",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
@@ -12007,7 +12007,7 @@
   },
   {
     "ea": "0x7CB3C3",
-    "line": "mov     ecx, ds:0B455A0h[ebp*4]",
+    "line": "mov     ecx, ds:0B455A0h[ebp*4]; this",
     "mnemonic": "mov",
     "size": 7
   },
@@ -12019,25 +12019,25 @@
   },
   {
     "ea": "0x7CB3CD",
-    "line": "push    0",
+    "line": "push    0; restore",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7CB3CF",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7CB3D0",
-    "line": "push    18h",
+    "line": "push    18h; state",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7CB3D2",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
@@ -12154,5 +12154,119 @@
     "line": "jmp     short loc_7CB41F",
     "mnemonic": "jmp",
     "size": 2
+  },
+  {
+    "ea": "0x7CB890",
+    "line": "xor     eax, eax; jumptable 007CA265 default case, cases 1,4,5,12-15,24,47,48,51,76-78,80,82-84,87-89,91,93-95,98-100,102,104-106,109-111,113,115-117,121-123,127-130,135-137,141-144,148-150,154-157,161-163,167-170,175-177,181-184,188-190,194-197,201-203,207-210,214-216,220-225,230,231,233,234,236-245,247,248,250-259,267-270,275,276,279,282,283,286,289,290,293,296-351,378,380-383,392,393,404-413",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x7CB892",
+    "line": "mov     ecx, [esp+70h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x7CB896",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x7CB89D",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7CB89E",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7CB89F",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7CB8A0",
+    "line": "pop     ebp",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7CB8A1",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7CB8A2",
+    "line": "add     esp, 5Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x7CB8A5",
+    "line": "retn    1Ch",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE910",
+    "line": "lea     ecx, [ebp-50h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE913",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE918",
+    "line": "mov     edx, [esp+arg3]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CE91C",
+    "line": "lea     eax, [edx-60h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE91F",
+    "line": "mov     ecx, [edx-64h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE922",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CE924",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE929",
+    "line": "mov     eax, offset stru_AF784C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE92E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

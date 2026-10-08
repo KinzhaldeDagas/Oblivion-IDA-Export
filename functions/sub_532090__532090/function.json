@@ -1,19 +1,36 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 11,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 4,
-  "display_name": "sub_532090",
+  "chunks": [
+    [
+      "0x532090",
+      "0x532149"
+    ],
+    [
+      "0x9B8D40",
+      "0x9B8D63"
+    ]
+  ],
+  "chunks_sha256": "5fc3a2fb0d816284ae7bdc850420da63d853612675b31107158ee3f30fa6122f",
+  "comment_regular": "TES4 authoritative: constructs a bhkSphereShape; if the third byte arg is true, radius is converted from TES/world units to Havok units with hkFactor.",
+  "comment_repeatable": "TES4 authoritative: constructs a bhkSphereShape; if the third byte arg is true, radius is converted from TES/world units to Havok units with hkFactor.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "bhkSphereShape_CtorRadius",
   "end_ea": "0x532149",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_532090",
+  "name": "bhkSphereShape_CtorRadius",
   "segment": ".text",
   "sha256": "ab1f56b5b573085560c66053ac2702e42d89435f53fbf573841bc1d81e80d136",
   "size": 185,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x532090",
+  "total_chunk_size": 220,
   "type": "bhkRefObject *__thiscall(bhkRefObject *this, float, float)",
-  "xrefs_from_count": 56,
+  "xrefs_from_count": 67,
   "xrefs_to_count": 11
 }

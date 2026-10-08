@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7A6F30",
+      "0x7A6F70"
+    ]
+  ],
+  "chunks_sha256": "28d0d8cb8e513727c4db2f0d7316b8e5352108879bdce2133e0d2118d9d18dc6",
+  "comment_regular": "Oblivion PosGen scalar-deleting destructor. Releases the two 60-float rejection tables when initialized, restores the Random vtable, and conditionally frees the object.",
+  "comment_repeatable": "Oblivion PosGen scalar-deleting destructor. Releases the two 60-float rejection tables when initialized, restores the Random vtable, and conditionally frees the object.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_7A6F30",
+  "display_name": "OB_PosGen_scalar_deleting_dtor_010201A0",
   "end_ea": "0x7A6F70",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7A6F30",
+  "name": "OB_PosGen_scalar_deleting_dtor_010201A0",
   "segment": ".text",
   "sha256": "28d0d8cb8e513727c4db2f0d7316b8e5352108879bdce2133e0d2118d9d18dc6",
   "size": 64,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A6F30",
-  "type": "_DWORD *__thiscall(_DWORD *this, char)",
+  "total_chunk_size": 64,
+  "type": "OB_PosGen_010201A0 *__thiscall(OB_PosGen_010201A0 *this, unsigned int flags)",
   "xrefs_from_count": 27,
   "xrefs_to_count": 1
 }

@@ -87,7 +87,7 @@
 0x54ED04: call    edx
 0x54ED06: push    ecx
 0x54ED07: fstp    [esp+34h+var_34]; float
-0x54ED0A: call    sub_47DF40
+0x54ED0A: call    FloatNearlyEqualAbsolute
 0x54ED0F: add     esp, 0Ch
 0x54ED12: test    al, al
 0x54ED14: jnz     loc_54EE03

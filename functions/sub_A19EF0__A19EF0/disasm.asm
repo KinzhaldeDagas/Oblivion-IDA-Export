@@ -1,5 +1,5 @@
 0xA19EF0: push    esi
-0xA19EF1: mov     esi, dword_B350D8
+0xA19EF1: mov     esi, ds:0B350D8h
 0xA19EF7: test    esi, esi
 0xA19EF9: jz      short loc_A19F17
 0xA19EFB: lea     eax, [esi+4]

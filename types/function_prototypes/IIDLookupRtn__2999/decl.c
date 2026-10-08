@@ -1,1 +1,1 @@
-IIDLookupRtn
+typedef int IIDLookupRtn(const IID *, int *);

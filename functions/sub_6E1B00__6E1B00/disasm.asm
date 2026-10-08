@@ -1,4 +1,4 @@
-0x6E1B00: sub     esp, 8
+0x6E1B00: sub     esp, 8; Mutates every nonempty transform channel to guarantee keys at start/end: rotation content 2, translation content 1, scale content 0. Euler rotation is handled recursively by the generic key helper.
 0x6E1B03: push    esi
 0x6E1B04: mov     esi, ecx
 0x6E1B06: movzx   eax, word ptr [esi+8]
@@ -20,7 +20,7 @@
 0x6E1B3B: push    eax; int
 0x6E1B3C: push    ecx; int
 0x6E1B3D: push    2; int
-0x6E1B3F: call    sub_6D3540
+0x6E1B3F: call    NiAnimationKey_GuaranteeTimeRange; Guarantees authored keys at both requested boundaries using the registered content/type insertion function. For Euler rotation type 4, recursively updates all three scalar axes and refreshes axis stride/cursor metadata. Unlike range cloning, this operation may synthesize evaluated boundary keys.
 0x6E1B44: mov     dx, word ptr [esp+24h+var_8]
 0x6E1B49: mov     eax, [esp+24h+var_4]
 0x6E1B4D: add     esp, 18h
@@ -45,7 +45,7 @@
 0x6E1B8C: push    ecx; int
 0x6E1B8D: push    edx; int
 0x6E1B8E: push    1; int
-0x6E1B90: call    sub_6D3540
+0x6E1B90: call    NiAnimationKey_GuaranteeTimeRange; Guarantees authored keys at both requested boundaries using the registered content/type insertion function. For Euler rotation type 4, recursively updates all three scalar axes and refreshes axis stride/cursor metadata. Unlike range cloning, this operation may synthesize evaluated boundary keys.
 0x6E1B95: mov     ax, word ptr [esp+24h+var_8]
 0x6E1B9A: mov     ecx, [esp+24h+var_4]
 0x6E1B9E: add     esp, 18h
@@ -70,7 +70,7 @@
 0x6E1BDD: push    edx; int
 0x6E1BDE: push    eax; int
 0x6E1BDF: push    0; int
-0x6E1BE1: call    sub_6D3540
+0x6E1BE1: call    NiAnimationKey_GuaranteeTimeRange; Guarantees authored keys at both requested boundaries using the registered content/type insertion function. For Euler rotation type 4, recursively updates all three scalar axes and refreshes axis stride/cursor metadata. Unlike range cloning, this operation may synthesize evaluated boundary keys.
 0x6E1BE6: mov     cx, word ptr [esp+24h+var_8]
 0x6E1BEB: mov     edx, [esp+24h+var_4]
 0x6E1BEF: add     esp, 18h

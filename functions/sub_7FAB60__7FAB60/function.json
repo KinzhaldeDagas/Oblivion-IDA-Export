@@ -1,18 +1,31 @@
 {
-  "callees_count": 8,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7FAB60",
+      "0x7FAC37"
+    ]
+  ],
+  "chunks_sha256": "5c6698741620a448a9cf965b564f4bc346f6d67e0c63067d639089ac69191fbd",
+  "comment_regular": "Pass238: Lighting30 helper is not the alternate explicit fog writer.",
+  "comment_repeatable": "Pass238: Lighting30 helper is not the alternate explicit fog writer.\nDX11 ordinary profile audit: this helper acts only on selectors156..158 with nonnull property; ordinary12D..146 does not execute these time/emission writes. No broader state behavior inferred.\nRow8 closure update 2026-10-01: direct byte search with known B47018 positive control locates the B46FF8 stores in this function. The unsigned selector-156h <=2 gate confines row8.x writes to156..158; ordinary12D..146 returns without dereferencing property/material or touching globals. Tests execute the pinned original215-byte function with poison data pointers for every ordinary selector. Row8.yzw have no stores in the inspected ordinary pipeline; light loops use nonnegative slots rooted at B47008/B47018. Preserve row8 only under this guarded ordinary profile; special selectors need their own producer.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7FAB60",
+  "display_name": "Lighting30Shader_UpdateSpecialTimeEmission",
   "end_ea": "0x7FAC37",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7FAB60",
+  "name": "Lighting30Shader_UpdateSpecialTimeEmission",
   "segment": ".text",
   "sha256": "5c6698741620a448a9cf965b564f4bc346f6d67e0c63067d639089ac69191fbd",
   "size": 215,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7FAB60",
+  "total_chunk_size": 215,
   "type": "void __stdcall(int, int, int)",
   "xrefs_from_count": 62,
   "xrefs_to_count": 1

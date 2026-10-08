@@ -7,10 +7,10 @@
 0x588B30: test    esi, esi
 0x588B32: mov     byte ptr [ecx+5], 1
 0x588B36: jz      short loc_588B49
-0x588B38: mov     ecx, [esi+8]
+0x588B38: mov     ecx, [esi+8]; this
 0x588B3B: lea     eax, [esi+8]
 0x588B3E: mov     esi, [esi]
-0x588B40: call    sub_588B20
+0x588B40: call    Tile__MarkSubtreeReleasing; Verified: sets Tile byte +5 recursively for unreleased/non-releasing descendants. Value calculation tests owner +5 to suppress evaluation during teardown.
 0x588B45: test    esi, esi
 0x588B47: jnz     short loc_588B38
 0x588B49: pop     esi

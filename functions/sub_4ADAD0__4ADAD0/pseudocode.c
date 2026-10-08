@@ -1,48 +1,51 @@
-void __stdcall sub_4ADAD0(NiNode *a1, int a2)
+// Verified (Oblivion): inverse traversal visits the same property ID 4 subtype 5..10 classes (PPLighting/SpeedTree PP, Hair, SpeedTree Branch, SpeedTree Leaf, Lighting30). It clears the TextureEffectData pointer only when it equals the supplied object. No current shader-property vtable returns subtype 8 (Unknown). Fallout StopTextureShader uses property ID 3 and subtype 8..12, so do not transfer these IDs across versions.
+void __stdcall TESEffectShader_RemoveTextureEffectFromScenegraph(
+        NiAVObject *sceneRoot,
+        OblivionTextureEffectData *data)
 {
   NiProperty *NiPropertyByID; // esi
   BOOL v3; // eax
-  _DWORD *v4; // eax
-  int v5; // eax
-  int v6; // edi
-  int v7; // eax
+  NiProperty *v4; // eax
+  NiObject *v5; // eax
+  NiObject *v6; // edi
+  int m_uiRefCount_high; // eax
   int v8; // esi
-  _DWORD *i; // eax
+  NiAVObject *i; // eax
 
-  if ( a1 )
+  if ( sceneRoot )
   {
-    if ( a1->vtbl->super.super.Unk_03((NiObject *)a1) )
+    if ( sceneRoot->vtbl->super.Unk_03((NiObject *)sceneRoot) )
     {
-      NiPropertyByID = NiNode_GetNiPropertyByID(a1, 4);
-      v3 = NiPropertyByID
+      NiPropertyByID = NiNode_GetNiPropertyByID((NiNode *)sceneRoot, 4); /*0x4adaf6*/
+      v3 = NiPropertyByID /*0x4adb18*/
         && (*((int (__thiscall **)(NiProperty *))NiPropertyByID->vtbl + 0x15))(NiPropertyByID) >= 5
         && (*((int (__thiscall **)(NiProperty *))NiPropertyByID->vtbl + 0x15))(NiPropertyByID) <= 0xA;
-      v4 = v3 ? (_DWORD *)NiPropertyByID : 0;
-      if ( v4 )
+      v4 = v3 ? NiPropertyByID : 0;
+      if ( v4 ) /*0x4adb27*/
       {
-        if ( v4[0x38] == a2 )
-          sub_7D7A70(v4, 0);
+        if ( (OblivionTextureEffectData *)v4[9].members.m_pcName == data ) /*0x4adb33*/
+          TextureEffectProperty_SetData(v4, 0); /*0x4adb39*/
       }
     }
     else
     {
-      v5 = (int)a1->vtbl->super.super.Unk_02((NiObject *)a1);
-      v6 = v5;
-      if ( v5 )
+      v5 = sceneRoot->vtbl->super.Unk_02(sceneRoot); /*0x4adb49*/
+      v6 = v5; /*0x4adb4b*/
+      if ( v5 ) /*0x4adb4f*/
       {
-        v7 = *(unsigned __int16 *)(v5 + 0xB6);
-        v8 = 0;
-        if ( *(_WORD *)(v6 + 0xB6) )
+        m_uiRefCount_high = HIWORD(v5[0x16].members.m_uiRefCount); /*0x4adb51*/
+        v8 = 0; /*0x4adb58*/
+        if ( HIWORD(v6[0x16].members.m_uiRefCount) ) /*0x4adb51*/
         {
-          if ( v7 )
-            goto LABEL_15;
-          for ( i = 0; ; i = *(_DWORD **)(*(_DWORD *)(v6 + 0xB0) + 4 * v8) )
+          if ( m_uiRefCount_high ) /*0x4adb65*/
+            goto LABEL_15; /*0x4adb65*/
+          for ( i = 0; ; i = *((NiAVObject **)&v6[0x16].__vftable->super.Destructor + v8) ) /*0x4adb67*/
           {
-            sub_4ADAD0(i, a2);
-            if ( *(unsigned __int16 *)(v6 + 0xB6) <= (unsigned int)++v8 )
-              break;
+            TESEffectShader_RemoveTextureEffectFromScenegraph(i, data); /*0x4adb78*/
+            if ( HIWORD(v6[0x16].members.m_uiRefCount) <= (unsigned int)++v8 ) /*0x4adb89*/
+              break; /*0x4adb89*/
 LABEL_15:
-            ;
+            ; /*0x4adb6b*/
           }
         }
       }

@@ -10,5 +10,5 @@
 0x57BD99: add     esp, 8
 0x57BD9C: cmp     dword ptr [eax+1Ch], 0
 0x57BDA0: jz      short locret_57BDA7
-0x57BDA2: jmp     sub_5B3E50
+0x57BDA2: jmp     sub_5B3E50; AchievementsNative evidence: MagicPopupMenu close request. If menu 0x400 is open and parent casts to MagicPopupMenu, sets state at +0x58 to 3 so 0x5B4080 slides the popup closed.
 0x57BDA7: retn

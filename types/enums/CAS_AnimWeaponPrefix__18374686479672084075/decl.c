@@ -1,0 +1,3 @@
+enum CAS_AnimWeaponPrefix
+{
+};

@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x64F5E0",
-    "line": "push    esi",
+    "line": "push    esi; Caches exact-name ArrowBone from ActorAnimData->RootNode. Ordinary/third-person results go to MiddleHighProcess+0x110; player first-person ActorAnimData (+0x5CC) selects global cache 0xB3BA98. Returns true unconditionally, including null input and lookup failure. This function takes ActorAnimData, unlike the +0x128/+0x12C accessors that take ActorSkinInfo.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x64F5E1",
-    "line": "mov     esi, [esp+4+arg_0]",
+    "line": "mov     esi, [esp+4+animData]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,13 +55,13 @@
   },
   {
     "ea": "0x64F5FB",
-    "line": "push    1; a2",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x64F5FD",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x64F60D",
-    "line": "jnz     short loc_64F623",
+    "line": "jnz     short loc_64F623; Begin recursive exact-name ArrowBone lookup from ActorAnimData->RootNode. The cached node may be model-local beneath attached weapon geometry; native code requires only the exact name.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x64F618",
-    "line": "mov     ds:0B3BA98h, eax",
+    "line": "mov     ds:0B3BA98h, eax; Cache the player first-person ActorAnimData ArrowBone lookup in global 0xB3BA98; non-first-person contexts store the result at MiddleHighProcess+0x110.",
     "mnemonic": "mov",
     "size": 5
   },

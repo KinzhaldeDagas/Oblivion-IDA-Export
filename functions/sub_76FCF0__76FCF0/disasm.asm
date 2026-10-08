@@ -1,4 +1,4 @@
-0x76FCF0: push    esi
+0x76FCF0: push    esi; MoonSugarEffect decode: disables one declaration element by writing sentinel usage/type values, marks declaration dirty, and releases cached IDirect3DVertexDeclaration9.
 0x76FCF1: mov     esi, ecx
 0x76FCF3: mov     ecx, [esp+4+arg_0]
 0x76FCF7: cmp     ecx, [esi+1Ch]

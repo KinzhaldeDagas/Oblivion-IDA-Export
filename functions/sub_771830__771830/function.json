@@ -1,19 +1,32 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x771830",
+      "0x772024"
+    ]
+  ],
+  "chunks_sha256": "d32169759adf115bde80c9868ef46da0f8e2e97cf5ba70aac8e997863c06135e",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
+  "comment_repeatable": "\nDX11 bounded observation 2026-09-30: recipes 1 and 2 read the renderer pointer B42754 and inverse-view elements at renderer+0xA00..0xA38, combining source matrix columns into B42760 scratch including translation. Main IDA extent is 771830..77201E with one chunk; full helper/default/switch-tail qualification remains pending. Do not infer a complete recipe evaluator from this partial observation.\nDX11 verified 2026-09-30: complete body includes default return at 77201E..772024 and six-entry switch table 772024..77203C. Default returns AL=0 without scratch writes. Recipes 1/2 multiply inverse-view (renderer B42754 +A00) by source first three columns and include inverse-view translation. Recipes 3/5/6 use same 3x3 product but copy source translation. All those recipes explicitly zero output column4 INCLUDING m44. Recipe4 zeroes 64-byte scratch then sets indices5,8,12,13 to float at A3D65C (IDB 0.5), ignores source and camera. B42760 scratch is shared output, not retained frame state. Case4 external call is standard memset. Previous incomplete extent observation is superseded by default/table disassembly verification.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
   "display_name": "sub_771830",
-  "end_ea": "0x77201E",
+  "end_ea": "0x772024",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_771830",
   "segment": ".text",
-  "sha256": "e666bb9bcadb538b04cdd554f26078db73f4be9abb5c1a0a14bb76716f24d827",
-  "size": 2030,
+  "sha256": "d32169759adf115bde80c9868ef46da0f8e2e97cf5ba70aac8e997863c06135e",
+  "size": 2036,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x771830",
+  "total_chunk_size": 2036,
   "type": "char __stdcall(int, float *)",
-  "xrefs_from_count": 503,
+  "xrefs_from_count": 505,
   "xrefs_to_count": 1
 }

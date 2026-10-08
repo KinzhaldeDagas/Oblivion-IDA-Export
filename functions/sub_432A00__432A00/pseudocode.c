@@ -4,18 +4,18 @@ int __thiscall sub_432A00(int *this, int a2)
   int result; // eax
   int v5; // edx
 
-  v2 = *(_DWORD *)(a2 + 8);
-  if ( v2 )
+  v2 = *(_DWORD *)(a2 + 8); /*0x432a07*/
+  if ( v2 ) /*0x432a0e*/
   {
-    if ( !InterlockedDecrement((volatile LONG *)(v2 + 8)) )
-      (**(void (__thiscall ***)(int, int))v2)(v2, 1);
-    *(_DWORD *)(a2 + 8) = 0;
+    if ( !InterlockedDecrement((volatile LONG *)(v2 + 8)) ) /*0x432a14*/
+      (**(void (__thiscall ***)(int, int))v2)(v2, 1); /*0x432a2a*/
+    *(_DWORD *)(a2 + 8) = 0; /*0x432a2c*/
   }
-  *(_DWORD *)(a2 + 8) = *(this + 7);
-  result = ++*(this + 8);
-  v5 = *this;
-  *(this + 7) = a2;
-  if ( result == *(_DWORD *)(v5 + 0x10) )
-    return sub_4328B0(this);
-  return result;
+  *(_DWORD *)(a2 + 8) = *(this + 7); /*0x432a36*/
+  result = ++*(this + 8); /*0x432a3d*/
+  v5 = *this; /*0x432a40*/
+  *(this + 7) = a2; /*0x432a42*/
+  if ( result == *(_DWORD *)(v5 + 0x10) ) /*0x432a48*/
+    return sub_4328B0(this); /*0x432a4c*/
+  return result; /*0x432a51*/
 }

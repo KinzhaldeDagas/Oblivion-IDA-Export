@@ -30,7 +30,6 @@
 0x7757D0: test    eax, eax
 0x7757D2: jz      loc_77594C
 0x7757D8: jmp     short loc_7757E4
-0x7757DA: align 10h
 0x7757E0: mov     eax, [esp+30h+var_1C]
 0x7757E4: lea     ecx, [eax+8]
 0x7757E7: mov     eax, [eax]

@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x76FB30",
-    "line": "push    esi",
+    "line": "push    esi; MoonSugarEffect decode: NiDX9ShaderDeclaration semantic helper. Converts Oblivion semantic ids to D3D usage/usageIndex and forwards to raw element setter (+0x4C).",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76FB31",
-    "line": "mov     esi, [esp+4+arg_8]",
+    "line": "mov     esi, [esp+4+semanticId]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x76FBD4",
-    "line": "mov     edx, [esp+10h+arg_4]",
+    "line": "mov     edx, [esp+10h+sourceIndex]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x76FBD9",
-    "line": "mov     eax, [esp+14h+arg_C]",
+    "line": "mov     eax, [esp+14h+declarationType]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x76FBDE",
-    "line": "mov     eax, [esp+18h+arg_0]",
+    "line": "mov     eax, [esp+18h+elementIndex]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x76FBE4",
-    "line": "mov     edx, [esp+20h+arg_10]",
+    "line": "mov     edx, [esp+20h+streamIndex]",
     "mnemonic": "mov",
     "size": 4
   },

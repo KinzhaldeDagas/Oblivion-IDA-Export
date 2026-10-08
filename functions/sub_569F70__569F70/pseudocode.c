@@ -10,10 +10,10 @@ bool __thiscall sub_569F70(_DWORD *this, char *a2)
   int v10; // edx
   int v11; // eax
 
-  if ( !a2 )
-    return 1;
-  v4 = *a2;
-  v5 = *(_BYTE *)this;
+  if ( !a2 ) /*0x569f7a*/
+    return 1; /*0x569f7d*/
+  v4 = *a2; /*0x569f83*/
+  v5 = *(_BYTE *)this; /*0x569f86*/
   result = *(_BYTE *)this != *a2
         || (v5 ? (v6 = 0) : (v6 = *(this + 1)),
             v4 ? (v7 = 0) : (v7 = *((_DWORD *)a2 + 1)),
@@ -23,5 +23,5 @@ bool __thiscall sub_569F70(_DWORD *this, char *a2)
              v8 != v9
           || (v5 != 2 ? (v10 = 0) : (v10 = *(this + 1)), v4 != 2 ? (v11 = 0) : (v11 = *((_DWORD *)a2 + 1)), v10 != v11)))
         || *(this + 2) != *((_DWORD *)a2 + 2);
-  return result;
+  return result; /*0x569f7c*/
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x472690",
-    "line": "push    ebx",
+    "line": "push    ebx; Iterates the controller manager sequence array, filters to BSAnimGroupSequence RTTI, and returns the first active sequence or the next active sequence after the supplied pointer.",
     "mnemonic": "push",
     "size": 1
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x472695",
-    "line": "cmp     [esp+0Ch+arg_0], 0",
+    "line": "cmp     [esp+0Ch+after], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x4726D0",
-    "line": "cmp     eax, offset dword_B35270",
+    "line": "cmp     eax, 0B35270h",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x4726EA",
-    "line": "cmp     eax, [esp+10h+arg_0]",
+    "line": "cmp     eax, [esp+10h+after]",
     "mnemonic": "cmp",
     "size": 4
   },

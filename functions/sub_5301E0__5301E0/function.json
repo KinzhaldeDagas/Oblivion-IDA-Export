@@ -1,19 +1,32 @@
 {
-  "callees_count": 34,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 16,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x5301E0",
+      "0x530339"
+    ]
+  ],
+  "chunks_sha256": "cd46fc2234c72692084181f346cf3a3cdd03bd678da32e5e152b29ca2ff07189",
+  "comment_regular": "Oblivion TESTopic::LoadForm recognizes XIDX (unlike TESCS TESTopic_LoadForm 0x4F02D0) and writes it to the separate TESTopic.unk30 U32 field using GetChunkData4. This is raw runtime scalar storage; this loader performs no FormID resolution for XIDX. The TESCS loader's QSTI/QSTR quest-list paths are separate.",
+  "comment_repeatable": "Oblivion TESTopic::LoadForm recognizes XIDX (unlike TESCS TESTopic_LoadForm 0x4F02D0) and writes it to the separate TESTopic.unk30 U32 field using GetChunkData4. This is raw runtime scalar storage; this loader performs no FormID resolution for XIDX. The TESCS loader's QSTI/QSTR quest-list paths are separate.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_5301E0",
+  "display_name": "TESTopic::LoadForm",
   "end_ea": "0x530339",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_5301E0",
+  "name": "TESTopic::LoadForm",
   "segment": ".text",
   "sha256": "cd46fc2234c72692084181f346cf3a3cdd03bd678da32e5e152b29ca2ff07189",
   "size": 345,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5301E0",
-  "type": "char __thiscall(TESForm *this, Data *)",
+  "total_chunk_size": 345,
+  "type": "bool __thiscall(TESTopic *this, void *tesFile)",
   "xrefs_from_count": 143,
   "xrefs_to_count": 1
 }

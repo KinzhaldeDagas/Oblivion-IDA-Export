@@ -36,7 +36,7 @@
 0x959C88: test    [esp+0Ch+arg_0], 1
 0x959C8D: jz      short loc_959C98
 0x959C8F: push    edi
-0x959C90: call    FormHeapFree
+0x959C90: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x959C95: add     esp, 4
 0x959C98: mov     eax, edi
 0x959C9A: pop     edi

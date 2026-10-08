@@ -1,4 +1,4 @@
-0x4E74E0: push    ebp
+0x4E74E0: push    ebp; Verified TESPathGrid form-type 0x34 loader. It reads DATA pointCount, and on the active file or alternate graph-loading mode delegates remaining PGRI/PGRL/PGRP/PGRR chunks to TESPathGrid_LoadSerializedGraphChunks. The PathGrid is a separate form record associated with its parent cell.
 0x4E74E1: mov     ebp, esp
 0x4E74E3: sub     esp, 0Ch
 0x4E74E6: mov     eax, ds:0B30AACh
@@ -18,7 +18,7 @@
 0x4E750A: mov     edi, [ebx+0Ch]
 0x4E750D: push    ebx
 0x4E750E: mov     ecx, esi
-0x4E7510: call    TESFile_InitializeFormFromRecord
+0x4E7510: call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.
 0x4E7515: test    edi, edi
 0x4E7517: jz      short loc_4E7532
 0x4E7519: mov     eax, [ebx+0Ch]
@@ -31,7 +31,7 @@
 0x4E752A: call    PrintError
 0x4E752F: add     esp, 0Ch
 0x4E7532: mov     ecx, esi
-0x4E7534: mov     [ebp+var_6], 0
+0x4E7534: mov     [ebp+var_6], 0; Runtime graph chunks load only for the active file or the alternate runtime-loading mode.
 0x4E7538: call    TESFile_IsActive
 0x4E753D: test    al, al
 0x4E753F: jnz     short loc_4E754A
@@ -44,7 +44,7 @@
 0x4E7554: call    TESFile_GetChunkType
 0x4E7559: cmp     eax, 4C524750h
 0x4E755E: jg      short loc_4E75B9
-0x4E7560: jz      short loc_4E75C7
+0x4E7560: jz      short loc_4E75C7; Recognized runtime graph chunks are PGRI/PGRL/PGRP/PGRR. Serialized PGAG is not dispatched by this Oblivion loader.
 0x4E7562: cmp     eax, 41544144h
 0x4E7567: jz      short loc_4E75A2
 0x4E7569: cmp     eax, 44494445h
@@ -58,7 +58,7 @@
 0x4E7586: push    200h; a4
 0x4E758B: push    edi; Dst
 0x4E758C: mov     ecx, esi; a1
-0x4E758E: call    TESFile_GetChunkData
+0x4E758E: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4E7593: mov     edx, [ebx]
 0x4E7595: mov     eax, [edx+0D8h]
 0x4E759B: push    edi
@@ -69,19 +69,19 @@
 0x4E75A4: lea     ecx, [ebp+Dst]
 0x4E75A7: push    ecx; Dst
 0x4E75A8: mov     ecx, esi; a1
-0x4E75AA: call    TESFile_GetChunkData
+0x4E75AA: call    TESFile_GetChunkData; Each DATA encountered before graph-helper delegation overwrites the u16 point count. Once the helper is entered it consumes the remaining stream and ignores later DATA.
 0x4E75AF: mov     dx, word ptr [ebp+Dst]
 0x4E75B3: mov     [ebx+30h], dx
 0x4E75B7: jmp     short loc_4E75D8
 0x4E75B9: cmp     eax, 50524750h
 0x4E75BE: jz      short loc_4E75C7
 0x4E75C0: cmp     eax, 52524750h
-0x4E75C5: jnz     short loc_4E75D8
+0x4E75C5: jnz     short loc_4E75D8; PGRP or PGRR dispatch (PGRI/PGRL share the earlier switch target): the helper consumes the remaining graph-chunk stream.
 0x4E75C7: cmp     [ebp+var_6], 0
 0x4E75CB: jz      short loc_4E75D8
-0x4E75CD: push    esi
-0x4E75CE: mov     ecx, ebx
-0x4E75D0: call    sub_4E65B0
+0x4E75CD: push    esi; file
+0x4E75CE: mov     ecx, ebx; this
+0x4E75D0: call    TESPathGrid_LoadSerializedGraphChunks; Verified serialized PGRL chunk processing calls TESPathGrid_AddPointForLinkedReference, populating the reference-to-point index used by runtime enable/disable callbacks. This is separate from modified-form save data, which stores disabled point indices.
 0x4E75D5: mov     [ebp+var_5], al
 0x4E75D8: mov     ecx, esi
 0x4E75DA: call    TESFile_GetNextChunk

@@ -1,1 +1,1 @@
-AccountSid
+typedef _AccountSid AccountSid;

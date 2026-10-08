@@ -1,1 +1,21 @@
-Format
+enum Format
+{
+kFormat_RGB = 0x0,
+kFormat_RGBA = 0x1,
+kFormat_PAL = 0x2,
+kFormat_PALALPHA = 0x3,
+kFormat_DXT1 = 0x4,
+kFormat_DXT3 = 0x5,
+kFormat_DXT5 = 0x6,
+kFormat_RGB24NONINTERLEAVED = 0x7,
+kFormat_BUMP = 0x8,
+kFormat_BUMPLUMA = 0x9,
+kFormat_RENDERERSPECIFIC = 0xA,
+kFormat_ONE_CHANNEL = 0xB,
+kFormat_TWO_CHANNEL = 0xC,
+kFormat_THREE_CHANNEL = 0xD,
+kFormat_FOUR_CHANNEL = 0xE,
+kFormat_DEPTH_STENCIL = 0xF,
+kFormat_UNKNOWN = 0x10,
+kFormat_MAX = 0x11,
+};

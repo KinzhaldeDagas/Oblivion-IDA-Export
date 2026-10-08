@@ -7,7 +7,7 @@
   },
   {
     "ea": "0x614C33",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x614C3B",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x614C4C",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x614C52",
-    "line": "mov     edi, [esp+10h+arg_0]",
+    "line": "mov     edi, [esp+10h+source]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x614C75",
-    "line": "push    1; Size",
+    "line": "push    1; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -151,25 +151,25 @@
   },
   {
     "ea": "0x614C7A",
-    "line": "lea     edx, [esp+18h+arg_0]",
+    "line": "lea     edx, [esp+18h+source]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x614C7E",
-    "line": "mov     byte ptr [esp+18h+arg_0], cl",
+    "line": "mov     byte ptr [esp+18h+source], cl",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x614C82",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x614C88",
-    "line": "push    edx; Src",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -241,13 +241,13 @@
   },
   {
     "ea": "0x614CB1",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x614CB7",
-    "line": "push    4",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -259,13 +259,13 @@
   },
   {
     "ea": "0x614CBD",
-    "line": "push    eax",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x614CBE",
-    "line": "call    SaveLoad_SaveFormID",
+    "line": "call    SaveLoad_SaveFormID; Writes an array of FormIDs to the save buffer. When IRef encoding is enabled, each full FormID is first converted to a compact IRef via SaveLoad_FormIDToIRef.",
     "mnemonic": "call",
     "size": 5
   },

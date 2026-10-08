@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x63F9EE",
-    "line": "mov     ecx, offset dword_B3BDB0",
+    "line": "mov     ecx, (offset qword_B3BB2C+284h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -532,12 +532,6 @@
     "line": "jmp     short loc_63FA70",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x63FA6D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x63FA70",
@@ -1111,7 +1105,7 @@
   },
   {
     "ea": "0x63FB81",
-    "line": "call    sub_5E6C60",
+    "line": "call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1135,7 +1129,7 @@
   },
   {
     "ea": "0x63FB8C",
-    "line": "call    sub_5E6C60",
+    "line": "call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1165,7 +1159,7 @@
   },
   {
     "ea": "0x63FB9C",
-    "line": "mov     ecx, offset dword_B3BDB0",
+    "line": "mov     ecx, (offset qword_B3BB2C+284h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1327,7 +1321,7 @@
   },
   {
     "ea": "0x63FBF0",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1345,7 +1339,7 @@
   },
   {
     "ea": "0x63FBFA",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1639,7 +1633,7 @@
   },
   {
     "ea": "0x63FC88",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1657,7 +1651,7 @@
   },
   {
     "ea": "0x63FC93",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1681,7 +1675,7 @@
   },
   {
     "ea": "0x63FC9E",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1693,7 +1687,7 @@
   },
   {
     "ea": "0x63FCA5",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1729,7 +1723,7 @@
   },
   {
     "ea": "0x63FCBA",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2263,7 +2257,7 @@
   },
   {
     "ea": "0x63FDBF",
-    "line": "call    sub_5E6C60",
+    "line": "call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2893,13 +2887,13 @@
   },
   {
     "ea": "0x63FEDE",
-    "line": "mov     ecx, [edi]",
+    "line": "mov     ecx, [edi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x63FEE0",
-    "line": "call    sub_5E32D0",
+    "line": "call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2983,31 +2977,31 @@
   },
   {
     "ea": "0x63FF09",
-    "line": "push    3",
+    "line": "push    3; category",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x63FF0B",
-    "line": "push    ecx",
+    "line": "push    ecx; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x63FF0C",
-    "line": "push    ebp",
+    "line": "push    ebp; criminal",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x63FF0D",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x63FF12",
-    "line": "call    sub_675BF0",
+    "line": "call    ActorProcessManager_FindCrime",
     "mnemonic": "call",
     "size": 5
   },
@@ -3265,31 +3259,31 @@
   },
   {
     "ea": "0x63FF8F",
-    "line": "push    3",
+    "line": "push    3; category",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x63FF91",
-    "line": "push    ebp",
+    "line": "push    ebp; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x63FF92",
-    "line": "push    ecx",
+    "line": "push    ecx; criminal",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x63FF93",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x63FF98",
-    "line": "call    sub_675BF0",
+    "line": "call    ActorProcessManager_FindCrime",
     "mnemonic": "call",
     "size": 5
   },
@@ -3355,13 +3349,13 @@
   },
   {
     "ea": "0x63FFB4",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x63FFB6",
-    "line": "call    sub_5E0F30",
+    "line": "call    Actor__IsSleeping; Returns true exactly when Actor.process exists and GetSleepState() == kSitSleep_Sleeping (9). This is a SitSleep-state test, not a combat/procedure test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3427,7 +3421,7 @@
   },
   {
     "ea": "0x63FFD8",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3439,7 +3433,7 @@
   },
   {
     "ea": "0x63FFDE",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x410EE0",
-    "line": "push    ecx",
+    "line": "push    ecx; Fog interior decode: GetFarPlane uses TESObjectCELL::LightingData fogClipDistance (+0x20) for interior mode 1 when available.",
     "mnemonic": "push",
     "size": 1
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x410EF8",
-    "line": "call    sub_4E9F40",
+    "line": "call    sub_4E9F40; Fog decode: returns global far-plane/clamp mode flag unk_B3608F; when false, non-water 0x541DD0 paths clamp fogEnd to GetFarPlane.",
     "mnemonic": "call",
     "size": 5
   },
@@ -61,13 +61,13 @@
   },
   {
     "ea": "0x410EFF",
-    "line": "mov     eax, TES",
+    "line": "mov     eax, ds:0B333A0h",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x410F04",
-    "line": "jz      short loc_410F60",
+    "line": "jz      short loc_410F60; Fog interior decode: non-4E9F40 far-plane path can substitute interior fogClipDistance before applying far-plane scaling.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -121,13 +121,13 @@
   },
   {
     "ea": "0x410F1D",
-    "line": "call    sub_4C9A60",
+    "line": "call    sub_4C9A60; Fog interior decode: reads LightingData fogClipDistance at lighting+0x20; also feeds GetFarPlane interior far-plane selection.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x410F22",
-    "line": "fstp    [esp+4+var_4]",
+    "line": "fstp    [esp+4+var_4]; Fog interior decode: 4E9F40 path reads interior fogClipDistance directly for mode 1.",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x410F42",
-    "line": "jp      loc_410FE5",
+    "line": "jp      loc_410FE5; Fog interior decode: reject non-positive or over-283840 fogClipDistance before returning default far plane.",
     "mnemonic": "jp",
     "size": 6
   },
@@ -307,19 +307,19 @@
   },
   {
     "ea": "0x410F75",
-    "line": "jnz     short loc_410FB1",
+    "line": "jnz     short loc_410FB1; Fog interior decode: currentInteriorCell and Sky::unk0DC == 1 gate for fogClipDistance far-plane override.",
     "mnemonic": "jnz",
     "size": 2
   },
   {
     "ea": "0x410F77",
-    "line": "call    sub_4C9A60",
+    "line": "call    sub_4C9A60; Fog interior decode: reads LightingData fogClipDistance at lighting+0x20; also feeds GetFarPlane interior far-plane selection.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x410F7C",
-    "line": "fstp    [esp+4+var_4]",
+    "line": "fstp    [esp+4+var_4]; Fog interior decode: read current cell fogClipDistance via 0x4C9A60.",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x410FA1",
-    "line": "jp      short loc_410FBA",
+    "line": "jp      short loc_410FBA; Fog interior decode: when fogClipDistance is positive and within the configured far limit, use it as far-plane input.",
     "mnemonic": "jp",
     "size": 2
   },

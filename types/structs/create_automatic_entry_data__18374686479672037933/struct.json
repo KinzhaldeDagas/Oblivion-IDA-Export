@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "create_automatic_entry::data",
+  "definition": "struct create_automatic_entry::data\n{\nconst CLSID *clsid;\nFORMATETC fmt;\n}\n",
   "id": 18374686479672037933,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "clsid",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "const CLSID *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fmt",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 24
+      "size": 24,
+      "type": "FORMATETC"
     }
   ],
   "name": "create_automatic_entry::data",
+  "ordinal": 5124,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 32
 }

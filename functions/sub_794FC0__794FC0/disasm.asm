@@ -1,7 +1,7 @@
-0x794FC0: push    ebx
-0x794FC1: mov     ebx, [esp+4+arg_4]
+0x794FC0: push    ebx; OBLIVION AUTHORITY (2026-08-30): Destroys each 0x10-byte vector owner in [first,last), freeing its owned buffer and clearing the pointer triplet.
+0x794FC1: mov     ebx, [esp+4+last]
 0x794FC5: push    esi
-0x794FC6: mov     esi, [esp+8+arg_0]
+0x794FC6: mov     esi, [esp+8+first]
 0x794FCA: cmp     esi, ebx
 0x794FCC: jz      short loc_794FF2
 0x794FCE: push    edi
@@ -10,7 +10,7 @@
 0x794FD4: cmp     eax, edi
 0x794FD6: jz      short loc_794FE1
 0x794FD8: push    eax
-0x794FD9: call    FormHeapFree
+0x794FD9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x794FDE: add     esp, 4
 0x794FE1: mov     [esi+4], edi
 0x794FE4: mov     [esi+8], edi

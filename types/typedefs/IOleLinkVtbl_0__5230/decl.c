@@ -1,1 +1,1 @@
-IOleLinkVtbl_0
+typedef IOleLinkVtbl IOleLinkVtbl_0;

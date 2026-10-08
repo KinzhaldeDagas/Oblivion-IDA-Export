@@ -1,28 +1,54 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "tagARENA_INUSE",
+  "definition": "struct tagARENA_INUSE\n{\nDWORD size;\nunsigned __int32 magic : 24;\nunsigned __int32 unused_bytes : 8;\n}\n",
   "id": 18374686479672047766,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "size",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "magic",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 3
+      "size": 3,
+      "type": "unsigned __int32 : 24"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unused_bytes",
       "offset": 7,
       "offset_hex": "0x7",
-      "size": 1
+      "size": 1,
+      "type": "unsigned __int32 : 8"
     }
   ],
   "name": "tagARENA_INUSE",
+  "ordinal": 8848,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 8
 }

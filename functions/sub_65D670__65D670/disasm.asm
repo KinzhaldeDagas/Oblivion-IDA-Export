@@ -12,7 +12,7 @@
 0x65D690: push    1
 0x65D692: push    eax
 0x65D693: push    0
-0x65D695: mov     ecx, offset ActorProcessManager_ptr
+0x65D695: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x65D69A: call    sub_6765F0
 0x65D69F: mov     dword ptr [esi+608h], 0
 0x65D6A9: mov     dword ptr ds:0B3BAD4h, 0

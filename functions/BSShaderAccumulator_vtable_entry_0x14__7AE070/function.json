@@ -1,19 +1,36 @@
 {
-  "callees_count": 156,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 48,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "BSShaderAccumulator::vtable_entry_0x14",
+  "chunks": [
+    [
+      "0x7AE070",
+      "0x7AEC12"
+    ],
+    [
+      "0x9CD4C0",
+      "0x9CD4EE"
+    ]
+  ],
+  "chunks_sha256": "6d24c2b7ea33b74876d981d9fab633bee8fed712fe33e307da6f8a794c47b1fa",
+  "comment_regular": "BSShaderAccumulator flush entry (vtable +0x50). Ordinary rendering invokes virtual +0x60 with specialMode 0 for every selector 4..0x17B, so 0x177..0x17A are normal draw buckets, then processes 0x17C..0x197 and 0x198..0x19F. Global render mode 5 instead flushes only 6..9 and 0x154..0x155, then calls ClearAccumulatedPasses over all 0x1A3 buckets; 0x177..0x17A cannot draw in that mode. FreezeRenderAccumulation is a console debug replay state: bucket flushes retain nodes, and the mode-5 active-shadow-light presentation loop is separately suppressed.\n\nCULLING MainWorld goal 2026-09-27: actual flush is gated by pending+0x2268, camera+8 and ready+0x21E1. Entry into Flush is not proof of consumed draw work. Preserve native mode-specific dispatch and frozen replay behavior; no MainWorld culling of shared retained buckets without proven ownership.\n[2026-10-03 frond selector coverage] Ordinary loop7AE660..7AE676 flushes selectors4 through17Bh, so corrected BSSM_FRONDS selector0F is included. Special modes retain their native delegation; no custom undrained bucket is introduced.\n\nCulling.dll decode: BSShaderAccumulator flush entry at vtable slot +0x50. Sorts and dispatches queued render passes, processes query/refraction/special lists, then clears pending state via 0x733830.\nV165/V166 boundary proof (2026-09-19, authoritative sum7): thiscall ECX accumulator, zero stack arguments, RET0 at 7AE130 and 7AEC11. Exact entry 6A FF 68 D3 D4 9C 00 is seven whole instruction bytes with no relative operand. Complete chunks 7AE070..7AEC12 (2978, FNV1a64 2256683E76C9CAB9) and 9CD4C0..9CD4EE (46, BD8B463CC8BA0095). Body writes accumulator/pass/query/proxy-geometry and render/camera state; inspected direct helpers do not mutate canonical full-light source lists or owning receipts. RenderLighting observer is context only, not blanket read permission: keep parent CullFullLights writer across Flush gaps/prefix/cleanup; any suspended-parent read phase is restricted to a separately verified nested DrawRenderPass.",
+  "comment_repeatable": "Culling.dll decode: BSShaderAccumulator flush entry at vtable slot +0x50. Sorts and dispatches queued render passes, processes query/refraction/special lists, then clears pending state via 0x733830.\nV165/V166 boundary proof (2026-09-19, authoritative sum7): thiscall ECX accumulator, zero stack arguments, RET0 at 7AE130 and 7AEC11. Exact entry 6A FF 68 D3 D4 9C 00 is seven whole instruction bytes with no relative operand. Complete chunks 7AE070..7AEC12 (2978, FNV1a64 2256683E76C9CAB9) and 9CD4C0..9CD4EE (46, BD8B463CC8BA0095). Body writes accumulator/pass/query/proxy-geometry and render/camera state; inspected direct helpers do not mutate canonical full-light source lists or owning receipts. RenderLighting observer is context only, not blanket read permission: keep parent CullFullLights writer across Flush gaps/prefix/cleanup; any suspended-parent read phase is restricted to a separately verified nested DrawRenderPass.\nDX11 bucket-context verification 2026-09-30: virtual+0x60 uses the same ECX accumulator as this Flush. Return sites / full DWORD selector ranges / specialMode: 7AE0EF = 6..9 / 0; 7AE10B = 154..155 / 0; 7AE670 = 4..17B / 0; 7AE6F2 = 17C..197 / 0; 7AEA6D = 198..19F / 1. EBX is zeroed at 7AE099, EBP is 1 for the final loop. These establish nested bucket identities only; they do not authorize pre-flush reads, native draw suppression, or GPU traversal replacement. Existing exact Cull->Flush and actual draw scope proofs remain necessary.\n\n2026-10-08 V266 local code-gate diagnostic provenance (external frozen bridge/log evidence): ExistingNormalizer rejects the256-byte read7AE670, which includes retained LOD call7AE6DD at offset6D. Logged allocation6E100000/read-only/non-exec fields are NOT that native chunk owner: NativeLocalLightHookInstaller::Operation updates operation/address/bytes but retains prior Region fields from Member(mxcsr,4,false) against its own module pinned from observer::Entries. Thus6E100000 denotes the renderer observer-module region. Raw read precedes ExistingPatches; its rejection can yield NativeRead/read0 without OS read failure.\nSeparate runtime LOD Failure::Target6/module0 occurs because frozen owner preparation knows only oldRVA65440; actual owner row identifies SpeedTree currentRVA85320/header6AC7034C/1C4000. Second exact profile source preserves full wrapper/context/device/stability seals and permits observation/code-copy comparison only, never outer-call or bucket suppression. Source is unbuilt/unrun at this annotation. Evidence: analysis/dx11_completion/stage-local-normalizer-current-owner/findings.md and static-installed-wrapper.json. Independent RenderBucket mismatch near7ACDE5 remains outside this correction.\n\n2026-10-08 current LOD-profile VALIDATION update: Release renderer passed; existing focused LodBatchOuterCallPatchTests passed263 prior-profile checks,526 cumulative both-profile checks, and86139 total with the installed DLL read as raw PE data (28308 relocation records). Actual preparation now shares exact NT/timestamp/size/RVA matching, making currentRVA85320 eligible for the existing pin-and-full-seal path. Static/mocked ownership only: no DLL loading/execution, no new live preparation/capture/bucket outcome proven. Observation-only normalization retains the real outer call and sampler reset. Independent7ACDE5 RenderBucket mismatch remains. Receipts: stage-local-normalizer-current-owner/test.log/result.md and stage-fixed-raster-texgen/grouped-fix-build.log.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 13,
+  "display_name": "BSShaderAccumulator_Flush",
   "end_ea": "0x7AEC12",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "BSShaderAccumulator::vtable_entry_0x14",
+  "name": "BSShaderAccumulator_Flush",
   "segment": ".text",
   "sha256": "ca0df21c24238e9c907bafa38478f4fc6cfaf3ed69f8684d7f0e3408dbb3ed84",
   "size": 2978,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7AE070",
-  "type": "void __thiscall(_BYTE *this)",
-  "xrefs_from_count": 1043,
+  "total_chunk_size": 3024,
+  "type": "void __thiscall(BSShaderAccumulator *this)",
+  "xrefs_from_count": 1066,
   "xrefs_to_count": 1
 }

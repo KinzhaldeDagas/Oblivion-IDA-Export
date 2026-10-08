@@ -1,4 +1,4 @@
-BSStringT *sub_A11500()
+NiRTTI *sub_A11500()
 {
-  return sub_70E220(&stru_B44F90, "ShadowLightShader", (int)&ImageSpaceShaderRTTI___);
+  return NiRTTI_Constructor(&stru_B44F90, "ShadowLightShader", &MEMORY[0xB4257C]); /*0xa11514*/
 }

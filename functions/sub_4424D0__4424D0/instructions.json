@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x4424E3",
-    "line": "fst     [esp+18h+var_14]; float",
+    "line": "fst     [esp+18h+deltaTime]; float",
     "mnemonic": "fst",
     "size": 4
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x4424F1",
-    "line": "fst     [esp+18h+var_14]",
+    "line": "fst     [esp+18h+deltaTime]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x442512",
-    "line": "fstp    [esp+18h+var_14]; float",
+    "line": "fstp    [esp+18h+deltaTime]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x442526",
-    "line": "fstp    [esp+18h+var_14]; float",
+    "line": "fstp    [esp+18h+deltaTime]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x442536",
-    "line": "fld     dword ptr ds:0B33A30h",
+    "line": "fld     dword ptr ds:0B33A30h; ModernWindowsCompatible decode: TES world update increments global animation timer flt_B33A30 by arg0, which main loop supplies as fAnimationMult * frame delta outside menu mode.",
     "mnemonic": "fld",
     "size": 6
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x442552",
-    "line": "fstp    [esp+14h+var_14]; float",
+    "line": "fstp    [esp+14h+deltaTime]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x442559",
-    "line": "call    sub_4D4970",
+    "line": "call    sub_4D4970; BloodOnDeath decode 2026-05-30: active interior/single-cell update calls sub_4D4970, which resets the decal counter once per visual update before updating cell geometry.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,25 +349,25 @@
   },
   {
     "ea": "0x44259D",
-    "line": "mov     ecx, [esi+5Ch]",
+    "line": "mov     ecx, [esi+5Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x4425A0",
-    "line": "fstp    [esp+14h+var_14]; float",
+    "line": "fstp    [esp+14h+deltaTime]; deltaTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4425A3",
-    "line": "call    sub_542F20",
+    "line": "call    Sky__Update; Oblivion's normal Sky frame update: determines underwater state and sky visibility, advances weather/time, calls UpdateColors and UpdateFog, updates wind/effects and every active sky child, publishes the sky vector, and clears transient flags.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4425A8",
-    "line": "fld     dword ptr ds:0B33A30h",
+    "line": "fld     dword ptr ds:0B33A30h; ModernWindowsCompatible decode: updated flt_B33A30 is passed as absolute time into scene-root NiAVObject_UpdateNiAVObject, covering broad visual controllers such as texture/particle animation.",
     "mnemonic": "fld",
     "size": 6
   },
@@ -397,13 +397,13 @@
   },
   {
     "ea": "0x4425B7",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4425BC",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },

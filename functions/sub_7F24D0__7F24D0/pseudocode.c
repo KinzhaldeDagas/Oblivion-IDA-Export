@@ -1,4 +1,5 @@
-void *sub_7F24D0()
+// Oblivion virtual GetRTTI for SpeedTreeShaderPPLightingProperty. Returns NiRTTI_SpeedTreeShaderPPLightingProperty (B468DC).
+NiRTTI *__thiscall SpeedTreeShaderPPLightingProperty_GetRTTI(OB_SpeedTreeShaderPPLightingProperty_010201A0 *this)
 {
-  return &unk_B468DC;
+  return &NiRTTI_SpeedTreeShaderPPLightingProperty; /*0x7f24d5*/
 }

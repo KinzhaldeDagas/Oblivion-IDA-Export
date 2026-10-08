@@ -1,19 +1,32 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x58BC20",
+      "0x58BC80"
+    ]
+  ],
+  "chunks_sha256": "e6047450ec74708ec5e7b79afd5dae267f8160c789a7963eb5691c16ed7dbcfc",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "Verified: walks typed template item list, frees item BSStringT buffer and each item; removes list nodes and decrements count. Mirrors role of Fallout TileTemplate::Clear, but no pooling established here.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_58BC20",
+  "display_name": "Tile::TileTemplate::Clear",
   "end_ea": "0x58BC80",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_58BC20",
+  "name": "Tile::TileTemplate::Clear",
   "segment": ".text",
   "sha256": "e6047450ec74708ec5e7b79afd5dae267f8160c789a7963eb5691c16ed7dbcfc",
   "size": 96,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x58BC20",
-  "type": "void __thiscall(_DWORD *this)",
+  "total_chunk_size": 96,
+  "type": "void __thiscall(OblivionTileTemplate *this)",
   "xrefs_from_count": 47,
   "xrefs_to_count": 1
 }

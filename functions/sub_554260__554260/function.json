@@ -1,19 +1,36 @@
 {
-  "callees_count": 92,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 48,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 4,
-  "display_name": "sub_554260",
+  "chunks": [
+    [
+      "0x554260",
+      "0x5547E9"
+    ],
+    [
+      "0x9BC0D0",
+      "0x9BC154"
+    ]
+  ],
+  "chunks_sha256": "e7c0ee2ebc05c32d098766de3b453bd7bc1cabf1dd415efd21818e94654db12d",
+  "comment_regular": "Builds FaceGenHair geometry from the selected hair model, applies head EGM parameters, then reapplies FaceGenRenderState::hairLength before attaching the node.",
+  "comment_repeatable": "Build FaceGenHair geometry from the selected model, apply head EGM positions, then apply FaceGenRenderState::hairLength positions before materials and attachment. No normal regeneration occurs after either deformation.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "BSFaceGen_BuildHairGeometryNodes",
   "end_ea": "0x5547E9",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_554260",
+  "name": "BSFaceGen_BuildHairGeometryNodes",
   "segment": ".text",
   "sha256": "f9e63ef318a00ae2e8b8fa78b3d68ffa040a56a52b96f62b1acadae61b5f58ff",
   "size": 1417,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x554260",
-  "type": "void __cdecl(_DWORD *, _DWORD *, NiTexturingProperty *, char)",
-  "xrefs_from_count": 529,
+  "total_chunk_size": 1549,
+  "type": "void __cdecl(NiNode **bipedNode, NiNode **skinnedNode, const FaceGenRenderState *state, bool preferBipedGeometry)",
+  "xrefs_from_count": 571,
   "xrefs_to_count": 1
 }

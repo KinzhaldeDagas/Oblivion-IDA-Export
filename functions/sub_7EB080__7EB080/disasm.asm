@@ -1,4 +1,4 @@
-0x7EB080: push    ecx
+0x7EB080: push    ecx; CustomAnimSupport evidence: HitShader Enum event ultimately triggers shader/effect strength here.
 0x7EB081: cmp     byte ptr ds:0B2D91Ch, 0
 0x7EB088: jz      short loc_7EB0D1
 0x7EB08A: fld     [esp+4+arg_0]

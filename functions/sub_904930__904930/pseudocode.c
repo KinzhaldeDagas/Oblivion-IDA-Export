@@ -4,8 +4,8 @@ int __cdecl sub_904930(_DWORD *a1, __m128 **a2, _DWORD *a3, int a4)
   char v6; // [esp+4h] [ebp-8h]
   int v7; // [esp+8h] [ebp-4h]
 
-  v7 = a4;
-  v6 = 0;
-  v5 = &off_A9B4F0;
-  return sub_9047D0(a2, a1, a3, (int)&v5);
+  v7 = a4; /*0x904943*/
+  v6 = 0; /*0x90494e*/
+  v5 = &off_A9B4F0; /*0x904953*/
+  return sub_9047D0(a2, a1, a3, (int)&v5); /*0x904963*/
 }

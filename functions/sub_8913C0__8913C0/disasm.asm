@@ -1,4 +1,4 @@
-0x8913C0: push    ecx
+0x8913C0: push    ecx; Controller radius helper. Returns shape radius from proxy+0x374 object when available, else proxy+0x3A0/E8 default. MobileObject::Move converts this from Havok to world with 0xA372E0.
 0x8913C1: push    esi
 0x8913C2: push    edi
 0x8913C3: mov     edi, ecx
@@ -12,7 +12,7 @@
 0x8913D8: test    eax, eax
 0x8913DA: jz      short loc_8913EE
 0x8913DC: lea     esp, [esp+0]
-0x8913E0: cmp     eax, offset dword_BA7FD8
+0x8913E0: cmp     eax, offset stru_BA7FD8
 0x8913E5: jz      short loc_891413
 0x8913E7: mov     eax, [eax+4]
 0x8913EA: test    eax, eax

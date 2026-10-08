@@ -31,7 +31,7 @@
 0x575AC2: fstp    st
 0x575AC4: jmp     short loc_575AC8
 0x575AC6: fstp    st(1)
-0x575AC8: call    Double_To_SInt32
+0x575AC8: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x575ACD: mov     ecx, [esp+arg_4C]
 0x575AD1: mov     [ebx], eax
 0x575AD3: mov     eax, [ecx]
@@ -54,10 +54,10 @@
 0x575B02: mov     eax, [ebp+0B4h]
 0x575B08: mov     ecx, [eax+1Ch]
 0x575B0B: movzx   edx, word ptr [eax+8]
-0x575B0F: push    ecx
-0x575B10: push    edx
-0x575B11: lea     ecx, [eax+0Ch]
-0x575B14: call    sub_72A0F0
+0x575B0F: push    ecx; vertices
+0x575B10: push    edx; vertexCount
+0x575B11: lea     ecx, [eax+0Ch]; self
+0x575B14: call    NiSphere_ComputeFromVertices; Local bounding sphere for contiguous NiPoint3 array: midpoint of component minima/maxima; radius=max vertex distance to midpoint; zero-count case clears sphere. Writes sphere only, not NiAVObject world bounds or renderer dirty flags. Prettier Faces invokes after morph on direct CPU vertex data; propagation of world bounds remains a separate runtime verification requirement.
 0x575B19: pop     esi
 0x575B1A: pop     ebx
 0x575B1B: pop     edi

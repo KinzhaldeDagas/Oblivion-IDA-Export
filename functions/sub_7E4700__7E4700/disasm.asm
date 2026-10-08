@@ -7,7 +7,7 @@
 0x7E470A: fsub    dword ptr [esi+0F8h]
 0x7E4710: push    edi
 0x7E4711: fstp    [esp+14h+var_4]
-0x7E4715: call    sub_7E2D60
+0x7E4715: call    ParticleShaderProperty_GetSlotCapacity; Verified (Oblivion): returns the cached slot capacity, initialized to 40 or 120 according to renderer capability, and used to size particleInstanceBuffer_6C and update iteration.
 0x7E471A: fld     [esp+14h+var_4]
 0x7E471E: mov     ebx, eax
 0x7E4720: fld     qword ptr ds:0A3A5B0h

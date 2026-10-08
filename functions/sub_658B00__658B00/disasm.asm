@@ -4,7 +4,7 @@
 0x658B0D: push    ebp
 0x658B0E: push    esi
 0x658B0F: mov     ebx, ecx
-0x658B11: call    Double_To_SInt32
+0x658B11: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x658B16: mov     ebp, eax
 0x658B18: xor     esi, esi
 0x658B1A: test    ebp, ebp
@@ -12,7 +12,6 @@
 0x658B22: push    edi
 0x658B23: mov     edi, [esp+10h+arg_0]
 0x658B27: jmp     short loc_658B30
-0x658B29: align 10h
 0x658B30: mov     eax, [edi]
 0x658B32: mov     edx, [eax+198h]
 0x658B38: push    0

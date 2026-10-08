@@ -37,12 +37,12 @@
 0x7AA1AD: cmp     dword ptr [edi], 0
 0x7AA1B0: jz      loc_7AA247
 0x7AA1B6: push    1; a1
-0x7AA1B8: call    GetShaderDefinition
+0x7AA1B8: call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.
 0x7AA1BD: mov     esi, [eax+4]
 0x7AA1C0: add     eax, 4
 0x7AA1C3: push    0
 0x7AA1C5: push    3
-0x7AA1C7: call    sub_7D1320
+0x7AA1C7: call    sub_7D1320; MoonSugarEffect decode: native shader-id selector for standard shader property families. Updates program/pass render-state choices and constants for hardcoded IDs before object render.
 0x7AA1CC: mov     ecx, [esi+30h]
 0x7AA1CF: mov     eax, [ecx]
 0x7AA1D1: mov     edx, [eax+48h]
@@ -57,35 +57,35 @@
 0x7AA1E7: mov     edx, [ecx+18h]
 0x7AA1EA: push    2
 0x7AA1EC: push    eax
-0x7AA1ED: call    edx
-0x7AA1EF: mov     eax, [esp+30h+arg_0]
+0x7AA1ED: call    edx; DX11 migration audit: IDirect3DQuery9::Issue(BEGIN=2), vtable +0x18. Encloses the game geometry draw at 0x7AA216, then END at 0x7AA225.
+0x7AA1EF: mov     eax, [esp+30h+vtable]
 0x7AA1F3: xor     esi, esi
 0x7AA1F5: push    esi
-0x7AA1F6: push    esi
-0x7AA1F7: push    1
-0x7AA1F9: push    3
-0x7AA1FB: push    eax
-0x7AA1FC: lea     ecx, [esp+44h+var_1C]
-0x7AA200: push    ecx
-0x7AA201: call    sub_7E2370
+0x7AA1F6: push    esi; lightCount
+0x7AA1F7: push    1; byte6
+0x7AA1F9: push    3; selector
+0x7AA1FB: push    eax; geometry
+0x7AA1FC: lea     ecx, [esp+44h+outPass]
+0x7AA200: push    ecx; outPass
+0x7AA201: call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.
 0x7AA206: add     esp, 18h
-0x7AA209: push    3; float
-0x7AA20B: lea     edx, [esp+34h+var_1C]
-0x7AA20F: push    edx; int
+0x7AA209: push    3; selector
+0x7AA20B: lea     edx, [esp+34h+outPass]
+0x7AA20F: push    edx; entry
 0x7AA210: mov     ecx, ebx
 0x7AA212: mov     [esp+38h+var_4], esi
-0x7AA216: call    sub_7A9820
+0x7AA216: call    BSShaderAccumulator_DrawRenderPass; Submit one accumulated Oblivion RenderPass. Publishes selector/current entry, dispatches each light pointer, then invokes geometry render virtual +0x84 exactly once. It does not prevalidate the Lighting30 selector; invalid 0x177..0x17A records are suppressed later by SetupRenderPass leaving PassCount zero. Valid SimpleShadow compatibility records each have lightCount=1, so eligible lights remain separate receiver draws.
 0x7AA21B: mov     eax, [edi]
 0x7AA21D: mov     ecx, [eax]
 0x7AA21F: mov     edx, [ecx+18h]
 0x7AA222: push    1
 0x7AA224: push    eax
-0x7AA225: call    edx
-0x7AA227: lea     ecx, [esp+30h+var_1C]
+0x7AA225: call    edx; DX11 migration audit: IDirect3DQuery9::Issue(END=1), vtable +0x18, after selector-3 client geometry draw. Helper shadow/lighting passes are not part of this native bracket.
+0x7AA227: lea     ecx, [esp+30h+outPass]; this
 0x7AA22B: mov     byte ptr [ebp+0CCh], 1
 0x7AA232: mov     [ebp+0D8h], esi
 0x7AA238: mov     [esp+30h+var_4], 0FFFFFFFFh
-0x7AA240: call    sub_7E2400
+0x7AA240: call    RenderPass_Destroy; Destroy the members of one RenderPass: clear selector, free the owned light-pointer array, clear byte +0x09 and array pointer. This function does not free the 0x10-byte RenderPass record itself and does not release the raw geometry/light objects.
 0x7AA245: jmp     short loc_7AA260
 0x7AA247: fldz
 0x7AA249: mov     byte ptr [ebp+0CCh], 0
@@ -100,3 +100,12 @@
 0x7AA26F: pop     ebx
 0x7AA270: add     esp, 1Ch
 0x7AA273: retn    8
+0x9CD070: lea     ecx, [ebp-1Ch]; this
+0x9CD073: jmp     RenderPass_Destroy; Destroy the members of one RenderPass: clear selector, free the owned light-pointer array, clear byte +0x09 and array pointer. This function does not free the 0x10-byte RenderPass record itself and does not release the raw geometry/light objects.
+0x9CD078: mov     edx, [esp+arg_4]
+0x9CD07C: lea     eax, [edx-20h]
+0x9CD07F: mov     ecx, [edx-24h]
+0x9CD082: xor     ecx, eax
+0x9CD084: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CD089: mov     eax, offset stru_AF644C
+0x9CD08E: jmp     ___CxxFrameHandler3

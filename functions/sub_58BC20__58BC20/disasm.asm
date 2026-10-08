@@ -26,12 +26,12 @@
 0x58BC57: jz      short loc_58BC76
 0x58BC59: mov     ecx, [edi+8]
 0x58BC5C: push    ecx
-0x58BC5D: call    FormHeapFree
+0x58BC5D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x58BC62: push    edi
 0x58BC63: mov     [edi+8], ebx
 0x58BC66: mov     [edi+0Eh], bx
 0x58BC6A: mov     [edi+0Ch], bx
-0x58BC6E: call    FormHeapFree
+0x58BC6E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x58BC73: add     esp, 8
 0x58BC76: cmp     [ebp+18h], ebx
 0x58BC79: jnz     short loc_58BC30

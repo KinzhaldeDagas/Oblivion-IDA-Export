@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x488AA0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Set per-instance charge for a specific EntryData stack. Creates ExtraDataList/ExtraCharge as needed, or removes redundant charge data when newCharge exceeds the base maximum. containerChanges identifies the owning inventory; targetStack selects the equipped instance.",
     "mnemonic": "push",
     "size": 2
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x488AFB",
-    "line": "fld     [esp+20h+arg_0]",
+    "line": "fld     [esp+20h+newCharge]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x488B27",
-    "line": "mov     [esp+20h+arg_8], eax",
+    "line": "mov     [esp+20h+targetStack], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x488B6D",
-    "line": "fld     [esp+20h+arg_0]",
+    "line": "fld     [esp+20h+newCharge]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x488B77",
-    "line": "call    sub_41EE90",
+    "line": "call    ExtraDataList_SetCharge; Updates or creates ExtraCharge type 0x2E with the supplied float.",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x488B9C",
-    "line": "mov     edx, [esp+20h+arg_8]",
+    "line": "mov     edx, [esp+20h+targetStack]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x488BBD",
-    "line": "mov     [esp+20h+arg_8], eax",
+    "line": "mov     [esp+20h+targetStack], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x488BDC",
-    "line": "call    sub_41EE90",
+    "line": "call    ExtraDataList_SetCharge; Updates or creates ExtraCharge type 0x2E with the supplied float.",
     "mnemonic": "call",
     "size": 5
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x488BF8",
-    "line": "fld     [esp+20h+arg_0]",
+    "line": "fld     [esp+20h+newCharge]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -703,7 +703,7 @@
   },
   {
     "ea": "0x488C0A",
-    "line": "call    sub_41EE90",
+    "line": "call    ExtraDataList_SetCharge; Updates or creates ExtraCharge type 0x2E with the supplied float.",
     "mnemonic": "call",
     "size": 5
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x488C33",
-    "line": "mov     ecx, [esp+20h+arg_8]",
+    "line": "mov     ecx, [esp+20h+targetStack]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -925,31 +925,31 @@
   },
   {
     "ea": "0x488C6D",
-    "line": "mov     ecx, [esp+20h+arg_4]",
+    "line": "mov     ecx, [esp+20h+containerChanges]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x488C71",
-    "line": "push    0",
+    "line": "push    0; referenceFormIDOrZero",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x488C73",
-    "line": "push    1",
+    "line": "push    1; unusedAlwaysOne",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x488C75",
-    "line": "push    eax",
+    "line": "push    eax; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x488C76",
-    "line": "call    ContainerExtraData_GetEntryForForm",
+    "line": "call    ContainerExtraData_GetEntryForForm; Find EntryData for an exact TESForm in ExtraContainerChanges. Native ABI is three stack arguments and retn 0x0C. The middle Boolean is not read; callers conventionally pass true. If referenceFormIDOrZero is nonzero, require an extend-data list whose ExtraReferencePointer target has that form ID; otherwise return the form entry directly.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1048,5 +1048,107 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AFC20",
+    "line": "mov     eax, [ebp+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFC23",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFC24",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFC29",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFC2A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFC2B",
+    "line": "mov     eax, [ebp+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFC2E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFC2F",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFC34",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFC35",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFC36",
+    "line": "mov     edx, [esp+containerChanges]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AFC3A",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFC3D",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFC40",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AFC42",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFC47",
+    "line": "mov     eax, offset stru_ADC10C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFC4C",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

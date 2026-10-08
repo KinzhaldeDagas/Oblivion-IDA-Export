@@ -1,4 +1,4 @@
-0x51E810: push    ebx
+0x51E810: push    ebx; TESActorBase_ModAVfBase reads current float base AV via vtbl +0x12C, adds the float delta, then calls vtbl +0x130 SetAVfBase. Decoded for AVU risk tracking; not hooked in current pass.
 0x51E811: mov     ebx, [esp+4+arg_0]
 0x51E815: push    esi
 0x51E816: push    edi

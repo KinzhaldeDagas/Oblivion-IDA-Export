@@ -9,7 +9,7 @@
 0x547A00: mov     [esp+24h+var_C], edi
 0x547A04: mov     [esp+24h+var_8], edi
 0x547A08: mov     [esp+24h+var_4], edi
-0x547A0C: call    GetRandomLargeInteger?
+0x547A0C: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x547A11: mov     ebx, [esp+24h+arg_0]
 0x547A15: add     esp, 4
 0x547A18: mov     ebp, eax
@@ -19,7 +19,7 @@
 0x547A22: mov     eax, ebx
 0x547A24: shl     eax, cl
 0x547A26: push    eax; Seed
-0x547A27: call    GetRandomLargeInteger?
+0x547A27: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x547A2C: cdq
 0x547A2D: idiv    esi
 0x547A2F: add     esp, 4
@@ -35,7 +35,7 @@
 0x547A4D: test    esi, esi
 0x547A4F: jg      short loc_547A20
 0x547A51: push    ebp; Seed
-0x547A52: call    GetRandomLargeInteger?
+0x547A52: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x547A57: mov     ecx, [esp+24h+arg_4]
 0x547A5B: mov     edx, [esp+24h+var_10]
 0x547A5F: mov     eax, [esp+24h+arg_8]

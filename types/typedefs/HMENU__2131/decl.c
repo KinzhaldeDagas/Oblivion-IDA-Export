@@ -1,1 +1,1 @@
-HMENU
+typedef HMENU__ *HMENU;

@@ -1,1 +1,1 @@
-ExtraCellCanopyShadowMask
+struct ExtraCellCanopyShadowMask;

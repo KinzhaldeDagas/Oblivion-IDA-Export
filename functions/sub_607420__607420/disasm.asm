@@ -14,7 +14,7 @@
 0x607442: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x607447: push    0; int
 0x607449: push    eax; a1
-0x60744A: call    TESForm_LookupByFormID
+0x60744A: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x60744F: add     esp, 4
 0x607452: push    eax; void *
 0x607453: call    OblivionDynamicCast
@@ -28,7 +28,7 @@
 0x60746C: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x607471: push    0; int
 0x607473: push    eax; a1
-0x607474: call    TESForm_LookupByFormID
+0x607474: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x607479: add     esp, 4
 0x60747C: push    eax; void *
 0x60747D: call    OblivionDynamicCast
@@ -42,7 +42,7 @@
 0x607499: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x60749E: push    0; int
 0x6074A0: push    eax; a1
-0x6074A1: call    TESForm_LookupByFormID
+0x6074A1: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x6074A6: add     esp, 4
 0x6074A9: push    eax; void *
 0x6074AA: call    OblivionDynamicCast
@@ -64,7 +64,7 @@
 0x6074D8: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x6074DD: push    0; int
 0x6074DF: push    eax; a1
-0x6074E0: call    TESForm_LookupByFormID
+0x6074E0: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x6074E5: add     esp, 4
 0x6074E8: push    eax; void *
 0x6074E9: call    OblivionDynamicCast
@@ -72,19 +72,19 @@
 0x6074F1: add     esp, 14h
 0x6074F4: mov     [edx+28h], eax
 0x6074F7: mov     ecx, esi; this
-0x6074F9: call    Actor__GetProcessLevel
+0x6074F9: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x6074FE: push    eax
 0x6074FF: push    esi
-0x607500: mov     ecx, offset ActorProcessManager_ptr
+0x607500: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x607505: call    sub_674550
-0x60750A: push    0
-0x60750C: push    0
-0x60750E: push    0
+0x60750A: push    0; relativeTo
+0x60750C: push    0; insertRelative
+0x60750E: push    0; append
 0x607510: mov     ecx, esi; this
-0x607512: call    Actor__GetProcessLevel
-0x607517: push    eax
-0x607518: push    esi
-0x607519: mov     ecx, offset ActorProcessManager_ptr
-0x60751E: call    sub_673A90
+0x607512: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
+0x607517: push    eax; processLevel
+0x607518: push    esi; object
+0x607519: mov     ecx, (offset qword_B3BB2C+1D4h); this
+0x60751E: call    ActorProcessManager_AddMobileObject; Generic ActorProcessManager insertion. Selects process-level collection 0..3, silently returns if object->GetProcessLevel() does not match, then inserts with ordering controls. Returns void; there is no insertion-success result. Used for actors, load/resurrection paths, and projectiles.
 0x607523: pop     esi
 0x607524: retn    8

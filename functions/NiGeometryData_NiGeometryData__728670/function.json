@@ -1,19 +1,36 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 2,
+  "chunks": [
+    [
+      "0x728670",
+      "0x728757"
+    ],
+    [
+      "0x9CA540",
+      "0x9CA56E"
+    ]
+  ],
+  "chunks_sha256": "36596bf8dd5b20d725f8bc8eacadb02490492471d1f7ac721c941a29c0b44527",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
+  "comment_repeatable": "[constructor audit] This supplied-data overload assigns input pointers before bound computation at72A0F0; it does not allocate or copy their payloads. NiObject base7005D0 only initializes header/refcount and increments global object count. Allocation failures are handled by caller allocations before this chain; arbitrary unreadable input/global memory faults are a distinct condition.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
   "display_name": "NiGeometryData::NiGeometryData",
   "end_ea": "0x728757",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "NiGeometryData::NiGeometryData",
   "segment": ".text",
   "sha256": "8f8e83b7cc67e96c58ce68bfdc0d1e53352d7022d5f4d3a41ac38751ecd2d2ce",
   "size": 231,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x728670",
+  "total_chunk_size": 277,
   "type": "NiGeometryData *__thiscall(NiGeometryData *this, UInt16, NiPoint3 *, NiPoint3 *, NiColorAlpha *, void *, char, __int16)",
-  "xrefs_from_count": 72,
+  "xrefs_from_count": 86,
   "xrefs_to_count": 2
 }

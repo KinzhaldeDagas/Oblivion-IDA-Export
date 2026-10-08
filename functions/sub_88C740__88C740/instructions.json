@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x88C822",
-    "line": "push    offset dword_BA8018",
+    "line": "push    offset stru_BA8018",
     "mnemonic": "push",
     "size": 5
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x88C843",
-    "line": "push    offset dword_BA7D84",
+    "line": "push    offset stru_BA7D84",
     "mnemonic": "push",
     "size": 5
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x88C8F7",
-    "line": "push    offset stru_BA7A40",
+    "line": "push    offset unk_BA7A40",
     "mnemonic": "push",
     "size": 5
   },
@@ -805,7 +805,7 @@
   },
   {
     "ea": "0x88C92E",
-    "line": "lea     ecx, [esp+124h+var_108]; this",
+    "line": "lea     ecx, [esp+124h+var_108]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x88C93D",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -1273,7 +1273,7 @@
   },
   {
     "ea": "0x88CA50",
-    "line": "call    sub_88FCC0",
+    "line": "call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2170,5 +2170,113 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D5F80",
+    "line": "lea     ecx, [ebp+var_108]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9D5F86",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D5F8B",
+    "line": "mov     eax, dword ptr [ebp+var_E0+0Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9D5F91",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D5F92",
+    "line": "call    sub_6078C0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D5F97",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D5F98",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D5F99",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D5F9D",
+    "line": "lea     eax, [edx-114h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9D5FA3",
+    "line": "mov     ecx, [edx-118h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9D5FA9",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D5FAB",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D5FB0",
+    "line": "add     eax, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9D5FB3",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D5FB6",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D5FB8",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D5FBD",
+    "line": "mov     eax, offset stru_AFDF80",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D5FC2",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

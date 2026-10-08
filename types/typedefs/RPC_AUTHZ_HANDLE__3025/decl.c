@@ -1,1 +1,1 @@
-RPC_AUTHZ_HANDLE
+typedef void *RPC_AUTHZ_HANDLE;

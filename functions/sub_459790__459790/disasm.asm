@@ -36,7 +36,7 @@
 0x4597E3: push    esi
 0x4597E4: call    BSSimpleList_Remove
 0x4597E9: push    esi
-0x4597EA: call    FormHeapFree
+0x4597EA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4597EF: add     esp, 4
 0x4597F2: mov     eax, edi
 0x4597F4: pop     edi

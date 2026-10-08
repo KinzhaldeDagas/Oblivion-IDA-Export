@@ -1,1 +1,1 @@
-IDummyHICONIncluderVtbl_0
+typedef IDummyHICONIncluderVtbl IDummyHICONIncluderVtbl_0;

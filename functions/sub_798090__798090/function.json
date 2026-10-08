@@ -1,19 +1,32 @@
 {
-  "callees_count": 24,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 13,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x798090",
+      "0x7981BF"
+    ]
+  ],
+  "chunks_sha256": "0b2b454321c42cff80430cc550e768fb7fe5d467c1512b80e6d7e71b5429c0ef",
+  "comment_regular": "OBLIVION AUTHORITY (2026-08-30): CIndexedGeometry::SetNumLodLevels clears the nested unsigned-short length and unsigned-short-pointer containers plus 32-bit triangle totals, records the unsigned-short LOD count, resizes both outer vectors with empty inner values, and zeroes totals.\n\nOBLIVION AUTHORITY (2026-08-30): CIndexedGeometry::SetNumLodLevels clears the two nested strip containers and 32-bit triangle totals, records the unsigned-short LOD count, resizes both outer vectors with empty inner values, and zeroes totals. Exact element widths derive from the shipped executable.",
+  "comment_repeatable": "OBLIVION AUTHORITY (2026-08-30): CIndexedGeometry::SetNumLodLevels clears the nested unsigned-short length and unsigned-short-pointer containers plus 32-bit triangle totals, records the unsigned-short LOD count, resizes both outer vectors with empty inner values, and zeroes totals.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_798090",
+  "display_name": "OB_CIndexedGeometry_SetNumLodLevels_010201A0",
   "end_ea": "0x7981BF",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_798090",
+  "name": "OB_CIndexedGeometry_SetNumLodLevels_010201A0",
   "segment": ".text",
   "sha256": "0b2b454321c42cff80430cc550e768fb7fe5d467c1512b80e6d7e71b5429c0ef",
   "size": 303,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x798090",
-  "type": "unsigned int __thiscall(_DWORD *this, unsigned __int16)",
+  "total_chunk_size": 303,
+  "type": "void __thiscall(OB_CIndexedGeometry_010201A0 *this, unsigned __int16 lodCount)",
   "xrefs_from_count": 136,
   "xrefs_to_count": 2
 }

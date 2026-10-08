@@ -1,19 +1,36 @@
 {
-  "callees_count": 17,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_786C60",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x786C60",
+      "0x786D57"
+    ],
+    [
+      "0x9CB1C0",
+      "0x9CB1E3"
+    ]
+  ],
+  "chunks_sha256": "7faed6cee0cc2263f6b05ae6c4d58cd9bdd1fa6a277c63cbbf8d5894a6e1a79c",
+  "comment_regular": "Oblivion stBezierSpline cache lookup/insert helper. lower_bound searches the 28-byte source-string key; an absent key is copied into a {string,spline*} pair and inserted with a hint. Returns the node's stBezierSpline** value slot at +0x28.",
+  "comment_repeatable": "Oblivion stBezierSpline cache lookup/insert helper. lower_bound searches the 28-byte source-string key; an absent key is copied into a {string,spline*} pair and inserted with a hint. Returns the node's stBezierSpline** value slot at +0x28.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 21,
+  "display_name": "OB_StBezierSpline_FindOrInsertCacheEntry_010201A0",
   "end_ea": "0x786D57",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_786C60",
+  "name": "OB_StBezierSpline_FindOrInsertCacheEntry_010201A0",
   "segment": ".text",
   "sha256": "078c8ed20cef66d86eb9c0b0b199ba8c7b1b6652e8f0d2e69a0bf90719bd71f7",
   "size": 247,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x786C60",
-  "type": "int *__thiscall(int *this, _DWORD *)",
-  "xrefs_from_count": 101,
+  "total_chunk_size": 282,
+  "type": "OB_stBezierSpline_010201A0 **__thiscall(OB_stBezierSplineCacheMap_010201A0 *cacheMap, const OB_stString28_010201A0 *stringObject)",
+  "xrefs_from_count": 132,
   "xrefs_to_count": 2
 }

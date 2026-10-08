@@ -1,1 +1,1 @@
-IStreamVtbl_0
+typedef IStreamVtbl IStreamVtbl_0;

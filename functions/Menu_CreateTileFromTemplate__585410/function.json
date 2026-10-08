@@ -1,19 +1,36 @@
 {
-  "callees_count": 23,
-  "callers_count": 34,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 11,
+  "callers_count": 68,
+  "chunks": [
+    [
+      "0x585410",
+      "0x585532"
+    ],
+    [
+      "0x9CA5A0",
+      "0x9CA5C6"
+    ]
+  ],
+  "chunks_sha256": "0d844ed35fc52636c20d81bfc52683e88b32a9fe2ee4a59b6a40f8f511bd217f",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "Menu_CreateTileFromTemplate",
+  "comment_repeatable": "Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.\n\nVerified lifecycle relationship: DialogMenu::LoadTopicsList calls this RenderTemplate to instantiate topic_template. Template records survive row deletion and are owned by Menu; produced Tile/Value/action objects have separate per-row lifetimes.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "Menu::RenderTemplate",
   "end_ea": "0x585532",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "Menu_CreateTileFromTemplate",
+  "name": "Menu::RenderTemplate",
   "segment": ".text",
   "sha256": "9ec74c74706f89f40b47172e7864779ebfd5c370e0112f96b405a4c15088687b",
   "size": 290,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x585410",
-  "type": "unsigned int *__userpurge@<eax>(_DWORD *this@<ecx>, double st5_0@<st2>, double@<st1>, double st7_0@<st0>, TileWindow *, char *Str2, int)",
-  "xrefs_from_count": 119,
+  "total_chunk_size": 328,
+  "type": "Tile *__thiscall(Menu *this, Tile *parent, const char *name, Tile *lastTile)",
+  "xrefs_from_count": 133,
   "xrefs_to_count": 68
 }

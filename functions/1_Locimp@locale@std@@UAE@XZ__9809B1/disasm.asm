@@ -15,3 +15,17 @@
 0x9809E2: mov     dword ptr [esi], offset ??_7facet@locale@std@@6B@
 0x9809E8: call    __EH_epilog3
 0x9809ED: retn
+0x6F6E00: mov     dword ptr [ecx], offset ??_7facet@locale@std@@6B@
+0x6F6E06: retn
+0x9D7C7F: mov     ecx, [ebp+var_10]
+0x9D7C82: jmp     loc_6F6E00
+0x9D7C87: mov     ecx, [ebp+var_10]
+0x9D7C8A: add     ecx, 18h; this
+0x9D7C8D: jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
+0x9D7C92: mov     edx, [esp-4+arg_4]
+0x9D7C96: lea     eax, [edx+0Ch]
+0x9D7C99: mov     ecx, [edx-14h]
+0x9D7C9C: xor     ecx, eax
+0x9D7C9E: call    @__security_check_cookie@4
+0x9D7CA3: mov     eax, offset stru_AFF7E8
+0x9D7CA8: jmp     ___CxxFrameHandler3

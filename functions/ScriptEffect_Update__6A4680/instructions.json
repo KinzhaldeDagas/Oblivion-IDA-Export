@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6A4680",
-    "line": "push    esi",
+    "line": "push    esi; ScriptEffect Update vfunc: reuse the active effect ScriptEventList and run ScriptEffectUpdate with this frame/update delta.",
     "mnemonic": "push",
     "size": 1
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x6A46A3",
-    "line": "call    sub_4F9F60",
+    "line": "call    ScriptEffect_RunUpdateEvent; Wrapper for ScriptEffectUpdate: calls ScriptRunner_RunEvent with start=0, finish=0, elapsedSeconds=delta.",
     "mnemonic": "call",
     "size": 5
   },

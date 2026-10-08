@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8902B0",
-    "line": "push    ebp",
+    "line": "push    ebp; TES4 authoritative: high-level controller manifold update wrapper. Builds bhkCharacterPointCollector, calls low-level hkpCharacterProxy_MoveAndUpdateManifold, then cleans stale collector contacts.",
     "mnemonic": "push",
     "size": 1
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x8902F0",
-    "line": "mov     eax, [ebp+arg_0]",
+    "line": "mov     eax, [ebp+moveInfo]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -127,13 +127,13 @@
   },
   {
     "ea": "0x8902F5",
-    "line": "mov     [esp+204h+var_1F4], eax",
+    "line": "mov     [esp+204h+moveInput], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x8902F9",
-    "line": "call    sub_89F570",
+    "line": "call    bhkRefObject_UpdateHavokObject",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,13 +181,13 @@
   },
   {
     "ea": "0x89030D",
-    "line": "lea     ecx, [esp+208h+var_1F0]; this",
+    "line": "lea     ecx, [esp+208h+collector]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x890311",
-    "line": "call    ??0bhkCharacterPointCollector@@QAE@XZ; bhkCharacterPointCollector::bhkCharacterPointCollector(void)",
+    "line": "call    ??0bhkCharacterPointCollector@@QAE@XZ; Stack bhkCharacterPointCollector uses controller collector state at this+0x10 / proxy+0x10 as its persistent state block.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,25 +223,25 @@
   },
   {
     "ea": "0x89032A",
-    "line": "mov     edx, [esp+204h+var_1F4]",
+    "line": "mov     edx, [esp+204h+moveInput]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x89032E",
-    "line": "push    edi",
+    "line": "push    edi; collectorState",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x89032F",
-    "line": "lea     ecx, [esp+208h+var_1F0]",
+    "line": "lea     ecx, [esp+208h+collector]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x890333",
-    "line": "push    ecx",
+    "line": "push    ecx; collector",
     "mnemonic": "push",
     "size": 1
   },
@@ -253,43 +253,43 @@
   },
   {
     "ea": "0x890337",
-    "line": "push    eax",
+    "line": "push    eax; contextVec",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x890338",
-    "line": "push    edx",
+    "line": "push    edx; moveInput",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x890339",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x89033B",
-    "line": "call    sub_8AD7D0",
+    "line": "call    hkpCharacterProxy_MoveAndUpdateManifold; Runs low-level character proxy move/manifold update using the stack collector and persistent collector state.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x890340",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x890342",
-    "line": "call    sub_8CE8F0",
+    "line": "call    bhkCharacterPointCollector_CleanupStaleContacts; Cleans/compacts stale contacts in the persistent collector state after low-level manifold update.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x890347",
-    "line": "lea     ecx, [esp+204h+var_1F0]; this",
+    "line": "lea     ecx, [esp+204h+collector]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x890356",
-    "line": "call    ??1bhkCharacterPointCollector@@UAE@XZ; bhkCharacterPointCollector::~bhkCharacterPointCollector(void)",
+    "line": "call    ??1bhkCharacterPointCollector@@UAE@XZ; TES4 authoritative: bhkCharacterPointCollector destructor releases object refs and dynamic arrays, including 0x30-byte contact storage.",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x89035D",
-    "line": "call    sub_89F570",
+    "line": "call    bhkRefObject_UpdateHavokObject",
     "mnemonic": "call",
     "size": 5
   },
@@ -388,5 +388,83 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D61A0",
+    "line": "lea     ecx, [ebp+collector]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9D61A6",
+    "line": "jmp     ??1bhkCharacterPointCollector@@UAE@XZ; TES4 authoritative: bhkCharacterPointCollector destructor releases object refs and dynamic arrays, including 0x30-byte contact storage.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D61AB",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D61AF",
+    "line": "lea     eax, [edx-1F4h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9D61B5",
+    "line": "mov     ecx, [edx-1F8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9D61BB",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D61BD",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D61C2",
+    "line": "add     eax, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9D61C5",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D61C8",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D61CA",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D61CF",
+    "line": "mov     eax, offset stru_AFE110",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D61D4",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

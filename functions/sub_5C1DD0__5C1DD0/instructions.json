@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x5C1E90",
-    "line": "mov     esi, ds:dword_B3B44C[eax]",
+    "line": "mov     esi, dword ptr ds:unk_B3B44C[eax]",
     "mnemonic": "mov",
     "size": 6
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x5C1EA0",
-    "line": "mov     ebx, ds:dword_B3B444[eax]",
+    "line": "mov     ebx, dword ptr ds:unk_B3B444[eax]",
     "mnemonic": "mov",
     "size": 6
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x5C1EC6",
-    "line": "mov     [esp+28h+var_4], eax",
+    "line": "mov     [esp+28h+data], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -601,13 +601,13 @@
   },
   {
     "ea": "0x5C1EFC",
-    "line": "lea     eax, [esp+14h+var_4]",
+    "line": "lea     eax, [esp+14h+data]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5C1F00",
-    "line": "push    eax",
+    "line": "push    eax; data",
     "mnemonic": "push",
     "size": 1
   },
@@ -631,13 +631,13 @@
   },
   {
     "ea": "0x5C1F0B",
-    "line": "add     ecx, offset quickKeyList_ptr",
+    "line": "add     ecx, 0B3B440h; list",
     "mnemonic": "add",
     "size": 6
   },
   {
     "ea": "0x5C1F11",
-    "line": "call    sub_776690",
+    "line": "call    NiTPointerList_RemoveByData; [Verified] Generic NiTPointerList remove-by-data helper. Scans node payloads for the supplied pointer, then delegates removal of the matching node to NiTPointerList_RemoveNode. The decal-list path calls it with the DECAL_DATA* payload address.",
     "mnemonic": "call",
     "size": 5
   },

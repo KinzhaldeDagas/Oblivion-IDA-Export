@@ -16,6 +16,6 @@
 0x57A46B: add     esp, 8
 0x57A46E: cmp     dword ptr [eax+60h], 0
 0x57A472: jz      short loc_57A479
-0x57A474: jmp     sub_5DCB70
+0x57A474: jmp     StatsMenu_Create
 0x57A479: xor     eax, eax
 0x57A47B: retn

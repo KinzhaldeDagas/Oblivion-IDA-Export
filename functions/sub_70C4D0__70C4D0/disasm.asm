@@ -16,7 +16,7 @@
 0x70C506: mov     eax, [esp+34h+var_28]
 0x70C50A: mov     [ecx+4], edx
 0x70C50D: mov     [ecx+8], eax
-0x70C510: call    sub_43F350
+0x70C510: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x70C515: fstp    st
 0x70C517: fld     dword ptr [esi+68h]
 0x70C51A: mov     eax, [esp+34h+arg_8]
@@ -145,7 +145,7 @@
 0x70C6DD: fstp    [esp+34h+var_10]
 0x70C6E1: mov     edx, [esp+34h+var_10]
 0x70C6E5: mov     [ecx+8], edx
-0x70C6E8: call    sub_43F350
+0x70C6E8: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x70C6ED: fstp    st
 0x70C6EF: mov     ecx, [esi+88h]
 0x70C6F5: mov     eax, [esp+34h+arg_8]

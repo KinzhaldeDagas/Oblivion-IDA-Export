@@ -12,8 +12,8 @@
 0x4F56EC: call    edx
 0x4F56EE: test    al, al
 0x4F56F0: jz      short loc_4F5701
-0x4F56F2: mov     ecx, esi
-0x4F56F4: call    Actor_IsSwimming
+0x4F56F2: mov     ecx, esi; this
+0x4F56F4: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x4F56F9: test    al, al
 0x4F56FB: jz      short loc_4F5701
 0x4F56FD: fld1

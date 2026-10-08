@@ -1,4 +1,4 @@
-BSStringT *sub_9FD3D0()
+NiRTTI *sub_9FD3D0()
 {
-  return sub_70E220(&stru_B3B900, "BSPlayerDistanceCheckController", (int)dword_B3FC98);
+  return NiRTTI_Constructor(&stru_B3B900, "BSPlayerDistanceCheckController", &stru_B3FC98); /*0x9fd3e4*/
 }

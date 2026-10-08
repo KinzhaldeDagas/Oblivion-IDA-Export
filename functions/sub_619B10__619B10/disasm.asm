@@ -23,7 +23,7 @@
 0x619B4A: mov     [esp+3Ch+var_1C], eax
 0x619B4E: jz      short loc_619B5F
 0x619B50: mov     ecx, esi
-0x619B52: call    sub_5E0660
+0x619B52: call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.
 0x619B57: fmul    qword ptr ds:0A31C70h
 0x619B5D: jmp     short loc_619B95
 0x619B5F: mov     edx, [edi]
@@ -62,7 +62,7 @@
 0x619BC8: mov     [eax+4], ebp
 0x619BCB: push    esi
 0x619BCC: mov     [eax+8], edx
-0x619BCF: call    sub_6159C0
+0x619BCF: call    Combat_PredictAimPoint_Setup
 0x619BD4: fld     dword ptr [esi]
 0x619BD6: fsub    dword ptr [edi+20h]
 0x619BD9: add     esp, 20h

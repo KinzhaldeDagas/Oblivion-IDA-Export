@@ -1,19 +1,36 @@
 {
-  "callees_count": 13,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_6B8F50",
+  "chunks": [
+    [
+      "0x6B8F50",
+      "0x6B9007"
+    ],
+    [
+      "0x9C6ED0",
+      "0x9C6EF3"
+    ]
+  ],
+  "chunks_sha256": "653d14ec229d4db5ddb5fb025281fe1622fb1e3dfb14e9c37bb1f3da9e387388",
+  "comment_regular": "Ordinary MenuTopics destroy every DialogueResponse. INFOGENERAL skips response destruction here because ExtraInfoGeneralTopic owns the cached object; that owner's destructor clears isInfoGeneralTopic first, then calls this routine for full cleanup.",
+  "comment_repeatable": "Ordinary MenuTopics destroy every DialogueResponse. INFOGENERAL skips response destruction here because ExtraInfoGeneralTopic owns the cached object; that owner's destructor clears isInfoGeneralTopic first, then calls this routine for full cleanup.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "MenuTopic::Destroy",
   "end_ea": "0x6B9007",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
-  "name": "sub_6B8F50",
+  "name": "MenuTopic::Destroy",
   "segment": ".text",
   "sha256": "85deeb139fb22a966cd9239432a0c255b3b6f4b8c2cbba53ea68953012b254be",
   "size": 183,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6B8F50",
-  "type": "void __thiscall(UInt32 *this)",
-  "xrefs_from_count": 72,
+  "total_chunk_size": 218,
+  "type": "void __thiscall(MenuTopicView *this)",
+  "xrefs_from_count": 83,
   "xrefs_to_count": 4
 }

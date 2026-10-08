@@ -1,19 +1,32 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x668C30",
+      "0x668CBA"
+    ]
+  ],
+  "chunks_sha256": "46fa5fb2a666459829aebf0b076d4ba9ac45646d8086d4589ba9f26ffd9a1544",
+  "comment_regular": "Oblivion skill-use router. Exhaustive vtable-dispatch scan finds 21 native gameplay callsites: 18 [vtable+0x39C] loads plus three magic paths using an adjusted vtable pointer. It selects TESSkill useValue0/useValue1 and forwards positive progress below skill 100. Major membership affects the required-use denominator, not this raw award.",
+  "comment_repeatable": "Oblivion skill-use router. Exhaustive vtable-dispatch scan finds 21 native gameplay callsites: 18 [vtable+0x39C] loads plus three magic paths using an adjusted vtable pointer. It selects TESSkill useValue0/useValue1 and forwards positive progress below skill 100. Major membership affects the required-use denominator, not this raw award.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "Player_ModExperience",
   "end_ea": "0x668CBA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "Player_ModExperience",
   "segment": ".text",
   "sha256": "46fa5fb2a666459829aebf0b076d4ba9ac45646d8086d4589ba9f26ffd9a1544",
   "size": 138,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x668C30",
-  "type": "void __thiscall(int *this, int, int, float)",
+  "total_chunk_size": 138,
+  "type": "void __thiscall(PlayerCharacter *this, SkillActorValue actorValue, UInt32 useIndex, float scale)",
   "xrefs_from_count": 63,
   "xrefs_to_count": 1
 }

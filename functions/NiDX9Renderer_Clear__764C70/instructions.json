@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x764C70",
-    "line": "sub     esp, 28h",
+    "line": "sub     esp, 28h; Clear an optional normalized rectangle of the current target. Save the incoming D3D viewport, install a full-current-target viewport, issue a capability-filtered color/depth/stencil Clear, then restore the saved viewport.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x764C74",
-    "line": "mov     ebx, [esp+2Ch+arg_4]",
+    "line": "mov     ebx, [esp+2Ch+clearFlags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x764CF4",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x764D10",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x764D20",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x764D30",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x764D37",
-    "line": "mov     [esp+30h+var_20], ecx",
+    "line": "mov     [esp+30h+var_20], ecx; With no optional normalized rectangle, build one D3DRECT covering the complete current target.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x764D4F",
-    "line": "mov     edx, [eax+84h]",
+    "line": "mov     edx, [eax+84h];",
     "mnemonic": "mov",
     "size": 6
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x764D5D",
-    "line": "push    offset unk_B4263C",
+    "line": "push    offset stru_B4263C",
     "mnemonic": "push",
     "size": 5
   },
@@ -505,13 +505,13 @@
   },
   {
     "ea": "0x764D75",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x764D77",
-    "line": "call    sub_76D4F0",
+    "line": "call    NiDX92DBufferData_HasDepthComponent; Return whether this depth/stencil buffer's surface format advertises a depth component; used to gate D3DCLEAR_ZBUFFER.",
     "mnemonic": "call",
     "size": 5
   },
@@ -565,13 +565,13 @@
   },
   {
     "ea": "0x764D90",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x764D92",
-    "line": "call    sub_76D510",
+    "line": "call    NiDX92DBufferData_HasStencilComponent; Return whether this depth/stencil buffer's surface format advertises a stencil component; used to gate D3DCLEAR_STENCIL.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x764DBA",
-    "line": "call    eax",
+    "line": "call    eax; Save the incoming D3D viewport before the clear-only full-target viewport override.",
     "mnemonic": "call",
     "size": 2
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x764DFC",
-    "line": "call    eax",
+    "line": "call    eax; Install the renderer's full-current-target viewport for the Clear call.",
     "mnemonic": "call",
     "size": 2
   },
@@ -859,7 +859,7 @@
   },
   {
     "ea": "0x764E2D",
-    "line": "call    eax",
+    "line": "call    eax; Issue IDirect3DDevice9::Clear for one target-sized rectangle; requested Z/stencil bits are included only when the attached surface format supports them.",
     "mnemonic": "call",
     "size": 2
   },
@@ -901,7 +901,7 @@
   },
   {
     "ea": "0x764E43",
-    "line": "call    eax",
+    "line": "call    eax; Restore the exact D3D viewport saved before Clear.",
     "mnemonic": "call",
     "size": 2
   },

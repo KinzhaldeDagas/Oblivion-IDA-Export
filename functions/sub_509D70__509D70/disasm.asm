@@ -1,4 +1,4 @@
-0x509D70: push    ebx
+0x509D70: push    ebx; CustomAnimSupport decode: debug/dump path for ActorAnimData active slots. Prints slot names and decodes active keys via AnimKey helpers; used by path-specific state diagnostics.
 0x509D71: mov     ebx, [esp+4+arg_8]
 0x509D75: test    ebx, ebx
 0x509D77: jz      loc_50A04C
@@ -30,11 +30,11 @@
 0x509DCD: call    Interface_ConsolePrint
 0x509DD2: add     esp, 4
 0x509DD5: mov     ecx, esi; this
-0x509DD7: call    Actor__GetProcessLevel
+0x509DD7: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x509DDC: cmp     eax, 0FFFFFFFFh
 0x509DDF: jz      short loc_509DFD
 0x509DE1: mov     ecx, esi; this
-0x509DE3: call    Actor__GetProcessLevel
+0x509DE3: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x509DE8: mov     eax, ds:0B14998h[eax*4]
 0x509DEF: push    eax
 0x509DF0: push    offset aProcessLevelS; "Process Level: %s"
@@ -57,18 +57,18 @@
 0x509E25: call    Interface_ConsolePrint
 0x509E2A: add     esp, 0Ch
 0x509E2D: mov     ecx, esi
-0x509E2F: call    Actor_GetCurrentAction
+0x509E2F: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x509E34: cmp     eax, 0FFFFFFFFh
 0x509E37: jz      short loc_509E55
 0x509E39: mov     ecx, esi
-0x509E3B: call    Actor_GetCurrentAction
+0x509E3B: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x509E40: mov     edx, ds:0B14C80h[eax*4]
 0x509E47: push    edx
 0x509E48: push    offset aAnimationActio; "Animation Action: %s"
 0x509E4D: call    Interface_ConsolePrint
 0x509E52: add     esp, 8
 0x509E55: mov     ecx, esi; this
-0x509E57: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x509E57: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x509E5C: mov     eax, ds:0B09EF8h[eax*4]
 0x509E63: push    eax
 0x509E64: push    offset aLifeStateS; "Life State: %s"
@@ -153,36 +153,36 @@
 0x509F68: push    offset aAnimation; "--- Animation -------------------------"...
 0x509F6D: call    Interface_ConsolePrint
 0x509F72: add     esp, 4
-0x509F75: mov     ecx, ebx
-0x509F77: call    sub_4712B0
+0x509F75: mov     ecx, ebx; this
+0x509F77: call    ActorAnimData_GetPendingKFModelCount; Counts pending KFModel installs represented by the ActorAnimData +0xB4 head and +0xB8 linked continuation. The debug animation-state command prints this as Anims Loading.
 0x509F7C: push    eax
 0x509F7D: push    offset aAnimsLoadingD; "Anims Loading: %d"
 0x509F82: call    Interface_ConsolePrint
 0x509F87: add     esp, 8
 0x509F8A: xor     edi, edi
 0x509F8C: lea     esp, [esp+0]
-0x509F90: push    edi
-0x509F91: mov     ecx, ebx
-0x509F93: call    sub_4706E0
+0x509F90: push    edi; slotSelector
+0x509F91: mov     ecx, ebx; this
+0x509F93: call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].
 0x509F98: test    eax, eax
 0x509F9A: jz      short loc_509FF2
-0x509F9C: push    edi
-0x509F9D: mov     ecx, ebx
-0x509F9F: call    ActorAnimData_GetAnimGroupFromField8Value
+0x509F9C: push    edi; slot
+0x509F9D: mov     ecx, ebx; this
+0x509F9F: call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.
 0x509FA4: movzx   esi, ax
 0x509FA7: push    esi
-0x509FA8: call    sub_51AA00
+0x509FA8: call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.
 0x509FAD: lea     ecx, [eax+eax*8]
 0x509FB0: mov     edx, ds:0B102E0h[ecx*4]
 0x509FB7: add     esp, 4
 0x509FBA: push    edx
 0x509FBB: push    esi
-0x509FBC: call    sub_51A9E0
+0x509FBC: call    AnimKey_GetWeaponPrefix; Final name: AnimKey_GetWeaponPrefix. Returns (encoded key >> 8) & 0xF.
 0x509FC1: mov     eax, ds:0B102C8h[eax*4]
 0x509FC8: add     esp, 4
 0x509FCB: push    eax
 0x509FCC: push    esi
-0x509FCD: call    sub_51A9D0
+0x509FCD: call    AnimKey_GetMovementPrefix; Final name: AnimKey_GetMovementPrefix. Returns encoded key >> 12.
 0x509FD2: mov     ecx, ds:0B102B8h[eax*4]
 0x509FD9: mov     edx, ds:0B108ECh[edi*4]
 0x509FE0: add     esp, 4
@@ -214,7 +214,7 @@
 0x50A030: mov     eax, [edx+0D4h]
 0x50A036: call    eax
 0x50A038: push    eax
-0x50A039: push    offset aIdleanimQueued; "IdleAnim Queued: %s"
+0x50A039: push    offset aIdleanimQueued; DumpActorAnimationState command site. Diagnostic command path for printing actor animation state.
 0x50A03E: call    Interface_ConsolePrint
 0x50A043: add     esp, 8
 0x50A046: pop     edi

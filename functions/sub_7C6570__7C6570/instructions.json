@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7C6570",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Accumulate Oblivion light-level inputs: sum eligible full-list light influence and output reference-light ambient/diffuse channel maxima.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x7C657C",
-    "line": "mov     esi, [ecx+0E8h]",
+    "line": "mov     esi, [ecx+0E8h]; Iterate ShadowSceneNode full-list entries from +0xE8 for point/source influence accumulation.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -67,25 +67,25 @@
   },
   {
     "ea": "0x7C658B",
-    "line": "mov     edi, [esp+18h+arg_18]",
+    "line": "mov     edi, [esp+18h+excludedBackingLight]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7C658F",
-    "line": "mov     ebx, [esp+18h+arg_8]",
+    "line": "mov     ebx, [esp+18h+z]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7C6593",
-    "line": "mov     ebp, [esp+18h+arg_4]",
+    "line": "mov     ebp, [esp+18h+y]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7C6597",
-    "line": "mov     ecx, [esi+8]",
+    "line": "mov     ecx, [esi+8]; self",
     "mnemonic": "mov",
     "size": 3
   },
@@ -115,13 +115,13 @@
   },
   {
     "ea": "0x7C65A3",
-    "line": "mov     edx, [esp+18h+arg_0]",
+    "line": "mov     edx, [esp+18h+x]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7C65A7",
-    "line": "push    edi; int",
+    "line": "push    edi; excludedBackingLight",
     "mnemonic": "push",
     "size": 1
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x7C65B5",
-    "line": "call    sub_7D31B0",
+    "line": "call    ShadowSceneLight_ComputePointInfluenceScore; Compute this light's influence score at a point, excluding the supplied source and +0xF4 projector mode. NiPointLight sources use 1-(distance/range)^2 falloff, multiplied by the maximum light color component.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x7C65BE",
-    "line": "fstp    [esp+18h+var_8]",
+    "line": "fstp    [esp+18h+var_8]; Add this ShadowSceneLight's native point/source influence at the queried world position, excluding the supplied backing light.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x7C65CF",
-    "line": "mov     eax, [esp+18h+arg_C]",
+    "line": "mov     eax, [esp+18h+positiveCount]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x7C65E4",
-    "line": "lea     eax, [esp+18h+arg_18]",
+    "line": "lea     eax, [esp+18h+excludedBackingLight]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -253,13 +253,13 @@
   },
   {
     "ea": "0x7C65E9",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7C65EE",
-    "line": "mov     eax, [eax]",
+    "line": "mov     eax, [eax]; Resolve ShadowSceneNode+0x118 backing reference light and compute the maximum of its ambient RGB channels (+0xE0..+0xE8).",
     "mnemonic": "mov",
     "size": 2
   },
@@ -289,13 +289,13 @@
   },
   {
     "ea": "0x7C6608",
-    "line": "mov     [esp+18h+arg_8], eax",
+    "line": "mov     [esp+18h+z], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7C660C",
-    "line": "mov     eax, [esp+18h+arg_18]",
+    "line": "mov     eax, [esp+18h+excludedBackingLight]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -307,13 +307,13 @@
   },
   {
     "ea": "0x7C6612",
-    "line": "mov     [esp+18h+arg_0], ecx",
+    "line": "mov     [esp+18h+x], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7C6616",
-    "line": "mov     [esp+18h+arg_4], edx",
+    "line": "mov     [esp+18h+y], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -403,13 +403,13 @@
   },
   {
     "ea": "0x7C6636",
-    "line": "fld     [esp+18h+arg_4]",
+    "line": "fld     [esp+18h+y]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7C663A",
-    "line": "fld     [esp+18h+arg_8]",
+    "line": "fld     [esp+18h+z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x7C6649",
-    "line": "fst     [esp+18h+arg_18]",
+    "line": "fst     [esp+18h+excludedBackingLight]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x7C664F",
-    "line": "fst     [esp+18h+arg_18]",
+    "line": "fst     [esp+18h+excludedBackingLight]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -469,13 +469,13 @@
   },
   {
     "ea": "0x7C6655",
-    "line": "fld     [esp+18h+arg_0]",
+    "line": "fld     [esp+18h+x]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7C6659",
-    "line": "fld     [esp+18h+arg_18]",
+    "line": "fld     [esp+18h+excludedBackingLight]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -571,19 +571,19 @@
   },
   {
     "ea": "0x7C667D",
-    "line": "mov     ecx, [esp+18h+arg_10]",
+    "line": "mov     ecx, [esp+18h+outAmbientMax]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7C6681",
-    "line": "fstp    [esp+18h+arg_18]",
+    "line": "fstp    [esp+18h+excludedBackingLight]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7C6685",
-    "line": "fld     [esp+18h+arg_18]",
+    "line": "fld     [esp+18h+excludedBackingLight]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x7C668D",
-    "line": "lea     edx, [esp+18h+arg_18]",
+    "line": "lea     edx, [esp+18h+excludedBackingLight]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -619,13 +619,13 @@
   },
   {
     "ea": "0x7C669A",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7C669F",
-    "line": "mov     eax, [eax]",
+    "line": "mov     eax, [eax]; Resolve the same +0x118 backing reference light and compute the maximum of its diffuse RGB channels (+0xEC..+0xF4).",
     "mnemonic": "mov",
     "size": 2
   },
@@ -649,13 +649,13 @@
   },
   {
     "ea": "0x7C66B3",
-    "line": "mov     [esp+18h+arg_8], eax",
+    "line": "mov     [esp+18h+z], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7C66B7",
-    "line": "mov     eax, [esp+18h+arg_18]",
+    "line": "mov     eax, [esp+18h+excludedBackingLight]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -667,13 +667,13 @@
   },
   {
     "ea": "0x7C66BD",
-    "line": "mov     [esp+18h+arg_0], ecx",
+    "line": "mov     [esp+18h+x], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7C66C1",
-    "line": "mov     [esp+18h+arg_4], edx",
+    "line": "mov     [esp+18h+y], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -763,13 +763,13 @@
   },
   {
     "ea": "0x7C66E1",
-    "line": "fld     [esp+18h+arg_4]",
+    "line": "fld     [esp+18h+y]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7C66E5",
-    "line": "fld     [esp+18h+arg_8]",
+    "line": "fld     [esp+18h+z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -805,7 +805,7 @@
   },
   {
     "ea": "0x7C66F4",
-    "line": "fst     [esp+18h+arg_18]",
+    "line": "fst     [esp+18h+excludedBackingLight]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x7C66FA",
-    "line": "fst     [esp+18h+arg_18]",
+    "line": "fst     [esp+18h+excludedBackingLight]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -829,13 +829,13 @@
   },
   {
     "ea": "0x7C6700",
-    "line": "fld     [esp+18h+arg_0]",
+    "line": "fld     [esp+18h+x]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7C6704",
-    "line": "fld     [esp+18h+arg_18]",
+    "line": "fld     [esp+18h+excludedBackingLight]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -919,19 +919,19 @@
   },
   {
     "ea": "0x7C6724",
-    "line": "mov     ecx, [esp+18h+arg_14]",
+    "line": "mov     ecx, [esp+18h+outDiffuseMax]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7C6728",
-    "line": "fstp    [esp+18h+arg_18]",
+    "line": "fstp    [esp+18h+excludedBackingLight]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7C672C",
-    "line": "fld     [esp+18h+arg_18]",
+    "line": "fld     [esp+18h+excludedBackingLight]",
     "mnemonic": "fld",
     "size": 4
   },

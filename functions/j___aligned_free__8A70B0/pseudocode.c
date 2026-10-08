@@ -1,5 +1,5 @@
 // attributes: thunk
 void __cdecl j___aligned_free(void *Memory)
 {
-  _aligned_free(Memory);
+  _aligned_free(Memory); /*0x8a70b0*/
 }

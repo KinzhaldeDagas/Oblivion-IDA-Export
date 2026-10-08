@@ -45,7 +45,7 @@
 0x662CE8: cmp     dword ptr [eax], 0
 0x662CEB: jnz     short loc_662D00
 0x662CED: push    eax
-0x662CEE: call    FormHeapFree
+0x662CEE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x662CF3: add     esp, 4
 0x662CF6: mov     dword ptr [esi+1FCh], 0
 0x662D00: pop     esi

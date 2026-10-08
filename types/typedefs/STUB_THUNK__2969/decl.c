@@ -1,1 +1,1 @@
-STUB_THUNK
+typedef void (*STUB_THUNK)(PMIDL_STUB_MESSAGE);

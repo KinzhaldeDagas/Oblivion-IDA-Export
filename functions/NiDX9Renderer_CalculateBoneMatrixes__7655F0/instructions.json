@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7655F0",
-    "line": "sub     esp, 0E8h",
+    "line": "sub     esp, 0E8h; MoonSugar build 39: CalculateBoneMatrixes owns NiSkinInstance cached bone matrix rebuild and camera-relative skin transforms. Do not mutate for Moon Sugar wobble; hook after native setup instead.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x76560F",
-    "line": "call    TESObjectREFR_GetNiNode",
+    "line": "call    Shared_GetDwordAtOffset3C; Linker-folded Oblivion accessor: returns the dword at this+0x3C. In TESClass auto-stat calls this is primaryAttribute2; other call contexts may represent unrelated fields.",
     "mnemonic": "call",
     "size": 5
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x765623",
-    "line": "call    TESObjectREFR_GetNiNode",
+    "line": "call    Shared_GetDwordAtOffset3C; Linker-folded Oblivion accessor: returns the dword at this+0x3C. In TESClass auto-stat calls this is primaryAttribute2; other call contexts may represent unrelated fields.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x765667",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x765706",
-    "line": "lea     eax, [esp+0F8h+var_D0]",
+    "line": "lea     eax, [esp+0F8h+local]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x76570E",
-    "line": "call    sub_718A80",
+    "line": "call    sub_718A80;",
     "mnemonic": "call",
     "size": 5
   },
@@ -577,37 +577,37 @@
   },
   {
     "ea": "0x765716",
-    "line": "lea     ecx, [esp+0F8h+var_D0]",
+    "line": "lea     ecx, [esp+0F8h+local]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x76571A",
-    "line": "push    ecx",
+    "line": "push    ecx; local",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76571B",
-    "line": "lea     edx, [esp+0FCh+var_34]",
+    "line": "lea     edx, [esp+0FCh+out]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x765722",
-    "line": "push    edx",
+    "line": "push    edx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x765723",
-    "line": "lea     ecx, [eax+0Ch]",
+    "line": "lea     ecx, [eax+0Ch]; parent",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x765726",
-    "line": "call    sub_53D7A0",
+    "line": "call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.",
     "mnemonic": "call",
     "size": 5
   },
@@ -643,31 +643,31 @@
   },
   {
     "ea": "0x765742",
-    "line": "push    eax",
+    "line": "push    eax; local",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x765743",
-    "line": "lea     ecx, [esp+0FCh+var_34]",
+    "line": "lea     ecx, [esp+0FCh+out]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x76574A",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76574B",
-    "line": "mov     ecx, [esp+100h+arg_4]",
+    "line": "mov     ecx, [esp+100h+parent]; parent",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x765752",
-    "line": "call    sub_53D7A0",
+    "line": "call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.",
     "mnemonic": "call",
     "size": 5
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x765759",
-    "line": "fld     [esp+0F8h+var_38]",
+    "line": "fld     [esp+0F8h+var_68.scale]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x7657C1",
-    "line": "fld     [esp+0F8h+var_6C]",
+    "line": "fld     [esp+0F8h+var_9C.scale]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -883,7 +883,7 @@
   },
   {
     "ea": "0x7657CC",
-    "line": "lea     edx, [esp+0FCh+var_78]",
+    "line": "lea     edx, [esp+0FCh+var_9C.pos]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -913,7 +913,7 @@
   },
   {
     "ea": "0x7657DA",
-    "line": "call    sub_761BE0",
+    "line": "call    sub_761BE0; MoonSugarEffect decode: matrix packer without camera-relative translation subtraction. Used for cached skin/world transforms that should keep raw translation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1002,12 +1002,6 @@
     "size": 2
   },
   {
-    "ea": "0x76580D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x765810",
     "line": "mov     eax, [esp+0F8h+var_E8]",
     "mnemonic": "mov",
@@ -1015,19 +1009,19 @@
   },
   {
     "ea": "0x765814",
-    "line": "push    eax",
+    "line": "push    eax; local",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x765815",
-    "line": "lea     ecx, [esp+0FCh+var_D0]",
+    "line": "lea     ecx, [esp+0FCh+local]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x765819",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
@@ -1039,13 +1033,13 @@
   },
   {
     "ea": "0x76581D",
-    "line": "add     ecx, 64h ; 'd'",
+    "line": "add     ecx, 64h ; 'd'; parent",
     "mnemonic": "add",
     "size": 3
   },
   {
     "ea": "0x765820",
-    "line": "call    sub_53D7A0",
+    "line": "call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1135,37 +1129,37 @@
   },
   {
     "ea": "0x76585D",
-    "line": "lea     edx, [esp+0F8h+var_D0]",
+    "line": "lea     edx, [esp+0F8h+local]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x765861",
-    "line": "push    edx",
+    "line": "push    edx; local",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x765862",
-    "line": "lea     eax, [esp+0FCh+var_34]",
+    "line": "lea     eax, [esp+0FCh+out]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x765869",
-    "line": "push    eax",
+    "line": "push    eax; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76586A",
-    "line": "lea     ecx, [esp+100h+var_9C]",
+    "line": "lea     ecx, [esp+100h+var_9C]; parent",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x76586E",
-    "line": "call    sub_53D7A0",
+    "line": "call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1183,7 +1177,7 @@
   },
   {
     "ea": "0x76587A",
-    "line": "lea     edi, [esp+0F8h+var_D0]",
+    "line": "lea     edi, [esp+0F8h+local]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1225,7 +1219,7 @@
   },
   {
     "ea": "0x76589A",
-    "line": "fld     [esp+0F8h+var_A0]",
+    "line": "fld     [esp+0F8h+local.scale]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1249,7 +1243,7 @@
   },
   {
     "ea": "0x7658A4",
-    "line": "lea     ecx, [esp+0FCh+var_AC]",
+    "line": "lea     ecx, [esp+0FCh+local.pos]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1261,7 +1255,7 @@
   },
   {
     "ea": "0x7658A9",
-    "line": "lea     edx, [esp+100h+var_D0]",
+    "line": "lea     edx, [esp+100h+local]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1279,7 +1273,7 @@
   },
   {
     "ea": "0x7658AF",
-    "line": "call    sub_761B60",
+    "line": "call    sub_761B60; MoonSugarEffect decode: alternate D3D matrix packer with translation in slots 3/7/11, still camera-relative. Used by some skin matrix formats.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1297,7 +1291,7 @@
   },
   {
     "ea": "0x7658BC",
-    "line": "lea     eax, [esp+0FCh+var_AC]",
+    "line": "lea     eax, [esp+0FCh+local.pos]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1309,7 +1303,7 @@
   },
   {
     "ea": "0x7658C1",
-    "line": "lea     ecx, [esp+100h+var_D0]",
+    "line": "lea     ecx, [esp+100h+local]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1327,7 +1321,7 @@
   },
   {
     "ea": "0x7658C7",
-    "line": "call    sub_761AE0",
+    "line": "call    sub_761AE0; MoonSugarEffect decode: builds a camera-relative D3D world matrix from NiTransform using column/row layout used for non-skinned world constants; translation subtracts CameraWorldTranslate/flt_B3F930/flt_B3F934.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1345,13 +1339,13 @@
   },
   {
     "ea": "0x7658D1",
-    "line": "fld     [esp+0F8h+var_D0]",
+    "line": "fld     [esp+0F8h+local.rot.data]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7658D5",
-    "line": "fld     [esp+0F8h+var_A0]",
+    "line": "fld     [esp+0F8h+local.scale]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1381,7 +1375,7 @@
   },
   {
     "ea": "0x7658E2",
-    "line": "fld     [esp+0F8h+var_C4]",
+    "line": "fld     [esp+0F8h+local.rot.data+0Ch]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1399,7 +1393,7 @@
   },
   {
     "ea": "0x7658EB",
-    "line": "fld     [esp+0F8h+var_B8]",
+    "line": "fld     [esp+0F8h+local.rot.data+18h]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1417,7 +1411,7 @@
   },
   {
     "ea": "0x7658F3",
-    "line": "fld     [esp+0F8h+var_CC]",
+    "line": "fld     [esp+0F8h+local.rot.data+4]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1435,7 +1429,7 @@
   },
   {
     "ea": "0x7658FC",
-    "line": "fld     [esp+0F8h+var_C0]",
+    "line": "fld     [esp+0F8h+local.rot.data+10h]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1453,7 +1447,7 @@
   },
   {
     "ea": "0x765905",
-    "line": "fld     [esp+0F8h+var_B4]",
+    "line": "fld     [esp+0F8h+local.rot.data+1Ch]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1471,7 +1465,7 @@
   },
   {
     "ea": "0x76590E",
-    "line": "fld     [esp+0F8h+var_C8]",
+    "line": "fld     [esp+0F8h+local.rot.data+8]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1489,7 +1483,7 @@
   },
   {
     "ea": "0x765917",
-    "line": "fld     [esp+0F8h+var_BC]",
+    "line": "fld     [esp+0F8h+local.rot.data+14h]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1507,7 +1501,7 @@
   },
   {
     "ea": "0x765920",
-    "line": "fmul    [esp+0F8h+var_B0]",
+    "line": "fmul    [esp+0F8h+local.rot.data+20h]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -1519,7 +1513,7 @@
   },
   {
     "ea": "0x765927",
-    "line": "fld     [esp+0F8h+var_AC]",
+    "line": "fld     [esp+0F8h+local.pos.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1537,7 +1531,7 @@
   },
   {
     "ea": "0x765934",
-    "line": "fld     [esp+0F8h+var_A8]",
+    "line": "fld     [esp+0F8h+local.pos.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1555,7 +1549,7 @@
   },
   {
     "ea": "0x765941",
-    "line": "fld     [esp+0F8h+var_A4]",
+    "line": "fld     [esp+0F8h+local.pos.z]",
     "mnemonic": "fld",
     "size": 4
   },

@@ -1,26 +1,29 @@
-void __cdecl sub_7A0CD0(_DWORD *a1, _DWORD *a2)
+// Destroys [first,last) guide-LOD levels. Every 16-byte element owns a vector of 0x30 SFrondGuide copies, so each inner guide range is deep-destroyed before its allocation is freed.
+void __cdecl OB_stVector_stVector_SFrondGuide_DestroyRange_010201A0(
+        OB_stVector_SFrondGuide_010201A0 *first,
+        OB_stVector_SFrondGuide_010201A0 *last)
 {
-  _DWORD *i; // edi
-  unsigned int *v3; // esi
-  unsigned int *j; // ebp
+  OB_stVector_SFrondGuide_010201A0 *i; // edi
+  unsigned int *p_allocatorState; // esi
+  OB_SFrondGuide_010201A0 *j; // ebp
 
-  for ( i = a1; i != a2; i += 4 )
+  for ( i = first; i != last; ++i ) /*0x7a0cd9*/
   {
-    v3 = (unsigned int *)i[1];
-    if ( v3 )
+    p_allocatorState = &i->begin->vertexVector.allocatorState; /*0x7a0ce0*/
+    if ( p_allocatorState ) /*0x7a0ce5*/
     {
-      for ( j = (unsigned int *)i[2]; v3 != j; v3 += 0xC )
+      for ( j = i->end; p_allocatorState != (unsigned int *)j; p_allocatorState += 0xC ) /*0x7a0cec*/
       {
-        if ( v3[1] )
-          FormHeapFree(v3[1]);
-        v3[1] = 0;
-        v3[2] = 0;
-        v3[3] = 0;
+        if ( p_allocatorState[1] ) /*0x7a0cf0*/
+          FormHeapFree(p_allocatorState[1]); /*0x7a0cf8*/
+        p_allocatorState[1] = 0; /*0x7a0d00*/
+        p_allocatorState[2] = 0; /*0x7a0d03*/
+        p_allocatorState[3] = 0; /*0x7a0d06*/
       }
-      FormHeapFree(i[1]);
+      FormHeapFree((unsigned int)i->begin); /*0x7a0d14*/
     }
-    i[1] = 0;
-    i[2] = 0;
-    i[3] = 0;
+    i->begin = 0; /*0x7a0d1c*/
+    i->end = 0; /*0x7a0d1f*/
+    i->capacityEnd = 0; /*0x7a0d22*/
   }
 }

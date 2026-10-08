@@ -1,4 +1,4 @@
-0x75FB10: mov     eax, [ecx+4]
+0x75FB10: mov     eax, [ecx+4]; MoonSugarEffect decode: NiD3DTextureStage texture getter with AddRef. Used by pass cleanup before comparing against global default texture dword_B43110.
 0x75FB13: test    eax, eax
 0x75FB15: push    esi
 0x75FB16: mov     esi, [esp+4+arg_0]

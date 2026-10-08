@@ -57,3 +57,15 @@
 0x41D90C: pop     ebp
 0x41D90D: add     esp, 10h
 0x41D910: retn
+0x9AB770: mov     ecx, [ebp-10h]; this
+0x9AB773: jmp     ??1BSExtraData@@UAE@XZ; BSExtraData::~BSExtraData(void)
+0x9AB778: mov     ecx, [ebp-10h]
+0x9AB77B: add     ecx, 0Ch; slot
+0x9AB77E: jmp     NiPointerSlot_Release
+0x9AB783: mov     edx, [esp+arg_4]
+0x9AB787: lea     eax, [edx-10h]
+0x9AB78A: mov     ecx, [edx-14h]
+0x9AB78D: xor     ecx, eax
+0x9AB78F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AB794: mov     eax, offset stru_AD85D0
+0x9AB799: jmp     ___CxxFrameHandler3

@@ -1,28 +1,29 @@
-void __thiscall sub_5308E0(unsigned int **this)
+// Destroy every TESResponse and responseText owned by this list. CollectResponses creates a clone first, so this cleanup releases the caller's temporary snapshot without clearing the shared global cache.
+void __thiscall TESResponseList::Clear(TESResponseListView *this)
 {
-  unsigned int *v2; // edi
-  unsigned int v3; // eax
+  TESResponse *first; // edi
+  TESResponseNode *next; // eax
 
-  if ( this )
+  if ( this ) /*0x5308e5*/
   {
-    while ( !BSSimpleList_IsEmpty((BSSimpleList_VoidPtr *)this) )
+    while ( !BSSimpleList_IsEmpty((BSSimpleList_VoidPtr *)this) ) /*0x5308f1*/
     {
-      v2 = *this;
-      if ( *this )
+      first = this->first; /*0x5308f3*/
+      if ( this->first ) /*0x5308f3*/
       {
-        sub_52E1C0(*this);
-        FormHeapFree((unsigned int)v2);
+        TESResponse::Destroy(this->first); /*0x5308fb*/
+        FormHeapFree((unsigned int)first); /*0x530901*/
       }
-      v3 = (unsigned int)*(this + 1);
-      if ( v3 )
+      next = this->next; /*0x530909*/
+      if ( next ) /*0x53090e*/
       {
-        *(this + 1) = *(unsigned int **)(v3 + 4);
-        *this = *(unsigned int **)v3;
-        FormHeapFree(v3);
+        this->next = next->next; /*0x530913*/
+        this->first = next->item; /*0x530919*/
+        FormHeapFree((unsigned int)next); /*0x53091b*/
       }
       else
       {
-        *this = 0;
+        this->first = 0; /*0x530925*/
       }
     }
   }

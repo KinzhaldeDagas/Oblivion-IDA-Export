@@ -48,7 +48,7 @@
 0x4ABE31: test    eax, eax
 0x4ABE33: jz      short loc_4ABE3E
 0x4ABE35: push    eax
-0x4ABE36: call    FormHeapFree
+0x4ABE36: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4ABE3B: add     esp, 4
 0x4ABE3E: pop     edi
 0x4ABE3F: mov     dword ptr [ebx+94h], 0

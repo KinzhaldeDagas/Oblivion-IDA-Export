@@ -4,6 +4,6 @@
 0x502B09: push    0
 0x502B0B: push    0
 0x502B0D: push    ecx
-0x502B0E: call    sub_4F4B10
+0x502B0E: call    GetTalkedToPC_Eval; Shared GetTalkedToPC callback backs GetTalkedToPC and GetTalkedToPCParam; the vanilla-master scan found 540 condition rows for the former. The former requires a subject and has no params; the Param variant permits no subject and declares an Actor param.
 0x502B13: add     esp, 10h
 0x502B16: retn

@@ -1,6 +1,6 @@
 0x675FC0: push    ebp
 0x675FC1: add     ecx, 68h ; 'h'; this
-0x675FC4: call    sub_7616D0
+0x675FC4: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x675FC9: mov     ebp, eax
 0x675FCB: test    ebp, ebp
 0x675FCD: jz      loc_6760C8
@@ -8,7 +8,6 @@
 0x675FD4: push    esi
 0x675FD5: push    edi
 0x675FD6: jmp     short loc_675FE0
-0x675FD8: align 10h
 0x675FE0: mov     ecx, [ebp+0]; this
 0x675FE3: test    ecx, ecx
 0x675FE5: jz      loc_6760C5

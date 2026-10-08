@@ -8,7 +8,6 @@
 0x708B8F: push    esi
 0x708B90: lea     esi, [edi+0BCh]
 0x708B96: jmp     short loc_708BA0
-0x708B98: align 10h
 0x708BA0: mov     eax, [edi+0C0h]
 0x708BA6: mov     ecx, [esi+4]
 0x708BA9: mov     ebx, [eax+8]

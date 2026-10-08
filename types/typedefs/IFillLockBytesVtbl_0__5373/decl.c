@@ -1,1 +1,1 @@
-IFillLockBytesVtbl_0
+typedef IFillLockBytesVtbl IFillLockBytesVtbl_0;

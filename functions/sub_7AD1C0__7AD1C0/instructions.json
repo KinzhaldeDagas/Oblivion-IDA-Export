@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7AD1C0",
-    "line": "mov     ecx, [esp+arg_0]",
+    "line": "mov     ecx, [esp+arg_0]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x7AD1C8",
-    "line": "cmp     [esp+arg_4], 0",
+    "line": "cmp     [esp+payloadAddress], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -31,19 +31,19 @@
   },
   {
     "ea": "0x7AD1CF",
-    "line": "lea     eax, [esp+arg_4]",
+    "line": "lea     eax, [esp+payloadAddress]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7AD1D3",
-    "line": "push    eax",
+    "line": "push    eax; payloadAddress",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7AD1D4",
-    "line": "call    sub_7ABDE0",
+    "line": "call    BSTPersistentList_AppendTailReusingFreeNode; BSTPersistentList tail append. Reuses a local free node or acquires one, stores the caller's payload pointer verbatim at node+0x08, links at tail, and increments count. For accumulator RenderPass buckets this creates a non-owning pointer borrow; it does not copy, retain, or destroy the RenderPass.",
     "mnemonic": "call",
     "size": 5
   },

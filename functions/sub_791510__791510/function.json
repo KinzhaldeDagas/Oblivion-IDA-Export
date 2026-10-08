@@ -1,19 +1,32 @@
 {
-  "callees_count": 14,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x791510",
+      "0x7915BA"
+    ]
+  ],
+  "chunks_sha256": "e6d7cf9b6219736539330b92bcad4caeaa1ceb8a2c80e2a9434c9123915e602d",
+  "comment_regular": "Reallocation/insert-one wrapper for the CBranch flare vector at CBranch+0x30. Preserves the iterator index across growth and delegates the 0x18-byte record insertion to 0x791140.",
+  "comment_repeatable": "Reallocation/insert-one wrapper for the CBranch flare vector at CBranch+0x30. Preserves the iterator index across growth and delegates the 0x18-byte record insertion to 0x791140.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_791510",
+  "display_name": "OB_CBranch_flareVectorInsertRealloc_010201A0",
   "end_ea": "0x7915BA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_791510",
+  "name": "OB_CBranch_flareVectorInsertRealloc_010201A0",
   "segment": ".text",
   "sha256": "e6d7cf9b6219736539330b92bcad4caeaa1ceb8a2c80e2a9434c9123915e602d",
   "size": 170,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x791510",
-  "type": "unsigned int **__thiscall(unsigned int *this, unsigned int **, unsigned int *, char *, int *)",
+  "total_chunk_size": 170,
+  "type": "unsigned int **__thiscall(OB_stVector16_010201A0 *this, unsigned int **resultIterator, OB_stVector16_010201A0 *expectedOwner, OB_CBranchFlareEntry_010201A0 *position, const OB_CBranchFlareEntry_010201A0 *value)",
   "xrefs_from_count": 80,
   "xrefs_to_count": 1
 }

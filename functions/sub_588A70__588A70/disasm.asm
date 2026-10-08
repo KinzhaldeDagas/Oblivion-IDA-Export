@@ -11,9 +11,9 @@
 0x588A8C: fld     [esp+8+arg_10]
 0x588A90: mov     [esi+4], ecx
 0x588A93: fst     dword ptr [esi+10h]
-0x588A96: fstp    [esp+8+var_8]; float
-0x588A99: push    esi; int
-0x588A9A: call    sub_584300
+0x588A96: fstp    [esp+8+duration]; duration
+0x588A99: push    esi; index
+0x588A9A: call    InterfaceManager__NewTimer; Verified: clears previous timer with same index, allocates 0x14-byte node, assigns opaque index and duration, appends to InterfaceManager timer list at +0x130. Shared by menus and Tile animation objects; not menu-specific. Fallout named analogue 0x824EDBA0.
 0x588A9F: mov     eax, [esi]
 0x588AA1: mov     edx, [eax+28h]
 0x588AA4: mov     [esi+14h], edx

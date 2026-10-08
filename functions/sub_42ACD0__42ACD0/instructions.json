@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x42ACD0",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Verified: computes the PlayerCharacter-scaled lock magnitude from ExtraLockData, applies the iLockLevelMaxVeryEasy/Easy/Average/Hard/VeryHard thresholds, and returns a LOCK_LEVEL value 0..5. Its direct caller indexes LockLevelNames with this result to display the lock category.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x42ACE0",
-    "line": "mov     ecx, TESDataHandler_g_PlayerRef",
+    "line": "mov     ecx, dword ptr reference",
     "mnemonic": "mov",
     "size": 6
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x42ACF4",
-    "line": "fmul    fLeveledLockMult",
+    "line": "fmul    dword ptr ds:0B33880h",
     "mnemonic": "fmul",
     "size": 6
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x42ACFE",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x42AD0D",
-    "line": "cmp     eax, iLockLevelMaxVeryEasy",
+    "line": "cmp     eax, ds:0B338B8h",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x42AD1B",
-    "line": "cmp     eax, iLockLevelMaxEasy",
+    "line": "cmp     eax, ds:0B338C0h",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x42AD2C",
-    "line": "cmp     eax, iLockLevelMaxAverage",
+    "line": "cmp     eax, ds:0B338C8h",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x42AD3D",
-    "line": "cmp     eax, iLockLevelMaxHard",
+    "line": "cmp     eax, ds:0B338D0h",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x42AD50",
-    "line": "cmp     eax, iLockLevelMaxVeryHard",
+    "line": "cmp     eax, ds:0B338D8h",
     "mnemonic": "cmp",
     "size": 6
   },

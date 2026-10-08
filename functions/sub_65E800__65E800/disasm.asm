@@ -8,7 +8,7 @@
 0x65E80F: jz      short loc_65E823
 0x65E811: mov     eax, [edi]
 0x65E813: push    eax
-0x65E814: call    FormHeapFree
+0x65E814: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x65E819: mov     edi, [edi+4]
 0x65E81C: add     esp, 4
 0x65E81F: test    edi, edi
@@ -19,7 +19,7 @@
 0x65E830: mov     eax, [esi+4]
 0x65E833: mov     edi, [eax+4]
 0x65E836: push    eax
-0x65E837: call    FormHeapFree
+0x65E837: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x65E83C: add     esp, 4
 0x65E83F: test    edi, edi
 0x65E841: mov     [esi+4], edi

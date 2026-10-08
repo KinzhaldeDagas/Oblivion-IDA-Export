@@ -1,8 +1,5 @@
 int sub_9F1160()
 {
-  GameSetting_ConstrAndReg(
-    &dword_B38740,
-    (int)"sSaveGameIsCorrupt",
-    (int)"The save game is corrupt.  Returning to game.");
-  return atexit(sub_A215A0);
+  GameSetting_ConstrAndReg(&stru_B38740, "sSaveGameIsCorrupt", "The save game is corrupt.  Returning to game."); /*0x9f116f*/
+  return atexit(sub_A215A0); /*0x9f117f*/
 }

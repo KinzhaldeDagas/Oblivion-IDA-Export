@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4F2270",
-    "line": "push    ebp",
+    "line": "push    ebp; Verified: computes/caches worldspace location name; queries TESWorldSpace cell lookup first, then loaded TESRegionList with data ID 4 at coordinates when no cell location applies. Fallback resolves the highest-priority Map region data.",
     "mnemonic": "push",
     "size": 1
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x4F2287",
-    "line": "mov     [esp+28h+var_C], esi",
+    "line": "mov     [esp+28h+worldspace], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x4F22F0",
-    "line": "fld     [ebp+arg_8]",
+    "line": "fld     [ebp+worldZ]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x4F2313",
-    "line": "mov     ecx, [ebp+arg_0]; this",
+    "line": "mov     ecx, [ebp+result]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x4F232E",
-    "line": "mov     ecx, offset stru_B360C0; this",
+    "line": "mov     ecx, offset unk_B360C0; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x4F233B",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+worldZ]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x4F2341",
-    "line": "mov     edi, [ebp+arg_0]",
+    "line": "mov     edi, [ebp+result]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x4F2368",
-    "line": "fld     [ebp+arg_8]",
+    "line": "fld     [ebp+worldZ]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x4F2372",
-    "line": "push    esi; int",
+    "line": "push    esi; worldZ",
     "mnemonic": "push",
     "size": 1
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x4F2376",
-    "line": "fstp    [esp+38h+var_34]; float",
+    "line": "fstp    [esp+38h+worldY]; worldY",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x4F237D",
-    "line": "fstp    [esp+38h+var_38]; float",
+    "line": "fstp    [esp+38h+worldX]; worldX",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x4F239C",
-    "line": "mov     edx, [esp+28h+var_C]",
+    "line": "mov     edx, [esp+28h+worldspace]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -571,13 +571,13 @@
   },
   {
     "ea": "0x4F23B1",
-    "line": "push    edx; int",
+    "line": "push    edx; worldspace",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F23B2",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+worldZ]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x4F23C2",
-    "line": "push    4; int",
+    "line": "push    4; dataID",
     "mnemonic": "push",
     "size": 2
   },
@@ -649,13 +649,13 @@
   },
   {
     "ea": "0x4F23D3",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4F23D5",
-    "line": "call    sub_4A67B0",
+    "line": "call    TESRegionList_SelectDataAtWorldPosition; Verified: this caller uses TESRegionDataMap ID 4 for worldspace location-name lookup; separate from cell music, which uses sound ID 7.",
     "mnemonic": "call",
     "size": 5
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x4F23E5",
-    "line": "mov     ecx, [ebp+arg_0]",
+    "line": "mov     ecx, [ebp+result]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -739,7 +739,7 @@
   },
   {
     "ea": "0x4F23F7",
-    "line": "mov     edi, [ebp+arg_0]",
+    "line": "mov     edi, [ebp+result]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -906,12 +906,6 @@
     "size": 2
   },
   {
-    "ea": "0x4F245D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x4F2460",
     "line": "mov     esi, [esp+28h+var_14]",
     "mnemonic": "mov",
@@ -961,7 +955,7 @@
   },
   {
     "ea": "0x4F247D",
-    "line": "mov     eax, [esp+28h+var_C]",
+    "line": "mov     eax, [esp+28h+worldspace]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1039,13 +1033,13 @@
   },
   {
     "ea": "0x4F24B2",
-    "line": "mov     ecx, [ebx+18h]",
+    "line": "mov     ecx, [ebx+18h]; dataList",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x4F24B5",
-    "line": "push    4",
+    "line": "push    4; dataID",
     "mnemonic": "push",
     "size": 2
   },
@@ -1057,7 +1051,7 @@
   },
   {
     "ea": "0x4F24BA",
-    "line": "call    sub_4A4460",
+    "line": "call    TESRegion_FindDataByID; Verified: worldspace location-name lookup requests region data ID 4 (Map) then evaluates map data with coordinates.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1351,7 +1345,7 @@
   },
   {
     "ea": "0x4F2546",
-    "line": "mov     eax, [ebp+arg_0]",
+    "line": "mov     eax, [ebp+result]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1441,7 +1435,7 @@
   },
   {
     "ea": "0x4F2576",
-    "line": "mov     edi, [ebp+arg_0]",
+    "line": "mov     edi, [ebp+result]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1531,7 +1525,7 @@
   },
   {
     "ea": "0x4F259C",
-    "line": "mov     edx, [esp+28h+var_C]",
+    "line": "mov     edx, [esp+28h+worldspace]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1735,19 +1729,19 @@
   },
   {
     "ea": "0x4F25F7",
-    "line": "push    ecx; Str2",
+    "line": "push    ecx; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F25F8",
-    "line": "push    eax; Str1",
+    "line": "push    eax; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F25F9",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -1819,7 +1813,7 @@
   },
   {
     "ea": "0x4F261B",
-    "line": "mov     ecx, offset stru_B360C0; this",
+    "line": "mov     ecx, offset unk_B360C0; this",
     "mnemonic": "mov",
     "size": 5
   },

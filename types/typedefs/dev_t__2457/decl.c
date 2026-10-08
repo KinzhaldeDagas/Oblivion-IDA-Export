@@ -1,1 +1,1 @@
-_dev_t
+typedef unsigned int _dev_t;

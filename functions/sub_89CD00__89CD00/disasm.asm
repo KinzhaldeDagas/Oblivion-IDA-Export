@@ -85,7 +85,6 @@
 0x89CE21: lea     edi, [ebx+0B8h]
 0x89CE27: mov     [esp+54h+var_44], ebp
 0x89CE2B: jmp     short loc_89CE30
-0x89CE2D: align 10h
 0x89CE30: mov     eax, [esp+54h+arg_0]
 0x89CE34: mov     esi, [eax+ebp*4]
 0x89CE37: mov     eax, [esi+1Ch]

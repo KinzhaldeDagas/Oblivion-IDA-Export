@@ -27,6 +27,6 @@
 0x699DDA: jz      short MagicCaster_InitializeCasting???___CleanupCastingVFX
 0x699DDC: cmp     word ptr [eax+0B8h], 0
 0x699DE4: jbe     short MagicCaster_InitializeCasting???___CleanupCastingVFX
-0x699DE6: lea     ecx, [eax+0ACh]
+0x699DE6: lea     ecx, [eax+0ACh]; this
 0x699DEC: mov     bl, 1
-0x699DEE: call    sub_477EF0
+0x699DEE: call    NiTObjectArray_ClearAndRelease; Clears a ref-counted NiT object-pointer array: releases every non-null element, nulls entries, and resets end/count words to zero. At bow release it is invoked on ArrowBone+0xAC, thereby releasing all ArrowBone children including the held Arrow:0 clone.

@@ -1,40 +1,72 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "D3DKMT_QUERYSTATISTICS",
+  "definition": "typedef _D3DKMT_QUERYSTATISTICS D3DKMT_QUERYSTATISTICS\n",
   "id": 18374686479672026961,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Type",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "D3DKMT_QUERYSTATISTICS_TYPE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AdapterLuid",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 8
+      "size": 8,
+      "type": "LUID"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hProcess",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HANDLE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QueryResult",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 776
+      "size": 776,
+      "type": "D3DKMT_QUERYSTATISTICS_RESULT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "_anon_0",
       "offset": 792,
       "offset_hex": "0x318",
-      "size": 4
+      "size": 4,
+      "type": "$13050F065D4FC364C598F7285537FAE7"
     }
   ],
   "name": "D3DKMT_QUERYSTATISTICS",
+  "ordinal": 1276,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 800
 }

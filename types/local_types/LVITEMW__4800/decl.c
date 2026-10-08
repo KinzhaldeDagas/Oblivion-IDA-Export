@@ -1,1 +1,1 @@
-LVITEMW
+typedef tagLVITEMW LVITEMW;

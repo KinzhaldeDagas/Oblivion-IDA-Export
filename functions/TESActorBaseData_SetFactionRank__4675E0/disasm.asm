@@ -10,5 +10,5 @@
 0x4675F3: call    edx
 0x4675F5: add     esi, 18h
 0x4675F8: mov     eax, esi
-0x4675FA: jz      short TESActorBaseData_SetFactionRank___NewFactionEntry
+0x4675FA: jz      short TESActorBaseData_SetFactionRank___NewFactionEntry; Oblivion comparison: absent faction always allocates an entry, including rank -1 removal requests; allocation is unchecked.
 0x4675FC: lea     esp, [esp+0]

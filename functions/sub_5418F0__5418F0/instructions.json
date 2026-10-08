@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5418F0",
-    "line": "sub     esp, 3Ch",
+    "line": "sub     esp, 3Ch; Oblivion Sky color synthesis. Interior mode reads TESObjectCELL lighting colors; exterior modes blend current/next TESWeather colors, update Sky color vectors, and publish the active fog color. Fallout was consulted afterward and corroborates the conventional Sky::UpdateColors label.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x5418F6",
-    "line": "mov     eax, [esi+0DCh]",
+    "line": "mov     eax, [esi+0DCh]; Fog default decode: read Sky::unk0DC to choose default, interior, or weather color source branch.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x5418FE",
-    "line": "jnz     loc_541A0D",
+    "line": "jnz     loc_541A0D; Fog default decode: enter mode-0 color initialization branch when Sky::unk0DC == 0.",
     "mnemonic": "jnz",
     "size": 6
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x541918",
-    "line": "mov     [esi+6Ch], eax",
+    "line": "mov     [esi+6Ch], eax; Fog default decode: initialize Sky color/tint slot group from static defaults for mode 0.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x54194A",
-    "line": "mov     [esi+60h], eax",
+    "line": "mov     [esi+60h], eax; Fog default decode: initialize another Sky color slot group from static defaults for mode 0.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x541975",
-    "line": "mov     [esi+0A8h], eax",
+    "line": "mov     [esi+0A8h], eax; Fog default decode: fan default scalar/color constants into additional Sky color mirror slots.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x54199C",
-    "line": "mov     [esi+0B4h], eax",
+    "line": "mov     [esi+0B4h], eax; Fog default decode: load default fog/color red from B3FA90 into Sky active color source.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x5419A8",
-    "line": "mov     [esi+0B8h], ecx",
+    "line": "mov     [esi+0B8h], ecx; Fog default decode: load default fog/color green from B3FA94 into Sky active color source.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x5419B4",
-    "line": "mov     [esi+0BCh], edx",
+    "line": "mov     [esi+0BCh], edx; Fog default decode: load default fog/color blue from B3FA98 into Sky active color source.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x5419D2",
-    "line": "mov     [esi+48h], eax",
+    "line": "mov     [esi+48h], eax; Fog default decode: mode-0 default fogColor.r write to Sky+0x48.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x5419E7",
-    "line": "mov     [esi+4Ch], ecx",
+    "line": "mov     [esi+4Ch], ecx; Fog default decode: mode-0 default fogColor.g write to Sky+0x4C.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x5419FF",
-    "line": "mov     [esi+50h], edx",
+    "line": "mov     [esi+50h], edx; Fog default decode: mode-0 default fogColor.b write to Sky+0x50.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x541A11",
-    "line": "jnz     loc_541ACF",
+    "line": "jnz     loc_541ACF; Fog interior decode: enters cell-lighting color branch when Sky::unk0DC == 1.",
     "mnemonic": "jnz",
     "size": 6
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x541A24",
-    "line": "mov     ecx, [eax+34h]",
+    "line": "mov     ecx, [eax+34h]; Fog interior decode: reads currentInteriorCell from TES for cell lighting colors.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x541A33",
-    "line": "call    sub_4C9920",
+    "line": "call    sub_4C9920; Fog interior decode: reads LightingData directional color (+0x04 packed RGB) into Sky+0x6C/+0x70/+0x74.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x541A45",
-    "line": "call    sub_4C98C0",
+    "line": "call    sub_4C98C0; Fog interior decode: reads LightingData ambient color (+0x00 packed RGB) into Sky+0x60/+0x64/+0x68.",
     "mnemonic": "call",
     "size": 5
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x541A56",
-    "line": "call    sub_4C99C0",
+    "line": "call    sub_4C99C0; Fog interior decode: reads LightingData fog color (+0x08 packed RGB) into Sky+0x48/+0x4C/+0x50.",
     "mnemonic": "call",
     "size": 5
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x541A63",
-    "line": "mov     [esi+0B4h], ecx",
+    "line": "mov     [esi+0B4h], ecx; Fog interior decode: caches interior fog color red from Sky+0x48 into Sky active color mirrors.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x541A84",
-    "line": "mov     [esi+0B8h], edx",
+    "line": "mov     [esi+0B8h], edx; Fog interior decode: caches interior fog color green from Sky+0x4C into Sky active color mirrors.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x541AA6",
-    "line": "mov     [esi+0BCh], eax",
+    "line": "mov     [esi+0BCh], eax; Fog interior decode: caches interior fog color blue from Sky+0x50 into Sky active color mirrors.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -703,7 +703,7 @@
   },
   {
     "ea": "0x541ACF",
-    "line": "cmp     dword ptr [esi+10h], 0",
+    "line": "cmp     dword ptr [esi+10h], 0; Exterior fog-color decode: enters weather color update when Sky::firstWeather exists; builds time-of-day and weather-transition color blends.",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -733,13 +733,13 @@
   },
   {
     "ea": "0x541ADD",
-    "line": "call    sub_53FC10",
+    "line": "call    sub_53FC10; Exterior fog day/night helper: computes adjusted sunrise blend start from climate sunrise minus transition padding.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x541AE2",
-    "line": "fstp    [esp+4Ch+var_3C]",
+    "line": "fstp    [esp+4Ch+var_3C]; Fog time-boundary decode: exterior color update consumes adjusted sunrise blend-start from 0x53FC10.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -751,13 +751,13 @@
   },
   {
     "ea": "0x541AE8",
-    "line": "call    sub_499180",
+    "line": "call    sub_499180; Exterior fog day/night helper: climate day boundary byte (+0x51) cached as normalized time for weather fog interpolation.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x541AED",
-    "line": "fstp    [esp+4Ch+var_38]",
+    "line": "fstp    [esp+4Ch+var_38]; Fog time-boundary decode: exterior color update consumes normalized climate day boundary from 0x499180.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -769,13 +769,13 @@
   },
   {
     "ea": "0x541AF3",
-    "line": "call    sub_4991C0",
+    "line": "call    sub_4991C0; Exterior fog day/night helper: climate sunset boundary byte (+0x52) cached as normalized time for weather fog interpolation.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x541AF8",
-    "line": "fstp    [esp+4Ch+var_34]",
+    "line": "fstp    [esp+4Ch+var_34]; Fog time-boundary decode: exterior color update consumes normalized climate sunset boundary from 0x4991C0.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -787,13 +787,13 @@
   },
   {
     "ea": "0x541AFE",
-    "line": "call    sub_53FC90",
+    "line": "call    sub_53FC90; Exterior fog day/night helper: computes adjusted sunset/night blend end from climate night plus transition padding.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x541B03",
-    "line": "fstp    [esp+4Ch+var_30]",
+    "line": "fstp    [esp+4Ch+var_30]; Fog time-boundary decode: exterior color update consumes adjusted sunset/night blend-end from 0x53FC90.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1585,7 +1585,7 @@
   },
   {
     "ea": "0x541CAB",
-    "line": "fstp    [esp+4Ch+var_10]",
+    "line": "fstp    [esp+4Ch+var_10]; Fog weather-field decode: firstWeather current-phase color weight = timeWeight * weatherPercent.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1597,7 +1597,7 @@
   },
   {
     "ea": "0x541CB5",
-    "line": "fstp    [esp+4Ch+var_C]",
+    "line": "fstp    [esp+4Ch+var_C]; Fog weather-field decode: firstWeather adjacent-phase color weight = adjacentTimeWeight * weatherPercent.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1609,7 +1609,7 @@
   },
   {
     "ea": "0x541CBF",
-    "line": "fsubp   st(2), st",
+    "line": "fsubp   st(2), st; Fog weather-field decode: second-weather contribution weight base = 1 - weatherPercent.",
     "mnemonic": "fsubp",
     "size": 2
   },
@@ -1627,7 +1627,7 @@
   },
   {
     "ea": "0x541CC7",
-    "line": "fstp    [esp+4Ch+var_8]",
+    "line": "fstp    [esp+4Ch+var_8]; Fog weather-field decode: secondWeather current-phase color weight = timeWeight * (1 - weatherPercent).",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1645,7 +1645,7 @@
   },
   {
     "ea": "0x541CD1",
-    "line": "fxch    st(1)",
+    "line": "fxch    st(1); Fog weather-field decode: secondWeather adjacent-phase color weight = adjacentTimeWeight * (1 - weatherPercent).",
     "mnemonic": "fxch",
     "size": 2
   },
@@ -1698,12 +1698,6 @@
     "size": 2
   },
   {
-    "ea": "0x541CEA",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x541CF0",
     "line": "fld1",
     "mnemonic": "fld1",
@@ -1729,7 +1723,7 @@
   },
   {
     "ea": "0x541CFF",
-    "line": "lea     ecx, ds:68h[ecx*4]",
+    "line": "lea     ecx, ds:68h[ecx*4]; Exterior fog-color decode: computes firstWeather color-table offset = 0x68 + 4*(timePhase + 4*colorSlot). colorSlot 1 targets Sky+0x48 fog RGB.",
     "mnemonic": "lea",
     "size": 7
   },
@@ -1741,7 +1735,7 @@
   },
   {
     "ea": "0x541D09",
-    "line": "mov     [esp+4Ch+var_20], edx",
+    "line": "mov     [esp+4Ch+var_20], edx; Exterior fog-color decode: loads firstWeather packed RGB for current time phase/color slot; slot 1 is exterior fog color.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1765,7 +1759,7 @@
   },
   {
     "ea": "0x541D1A",
-    "line": "mov     [esp+4Ch+var_1C], eax",
+    "line": "mov     [esp+4Ch+var_1C], eax; Exterior fog-color decode: loads firstWeather packed RGB for adjacent time phase/color slot before interpolation.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1789,7 +1783,7 @@
   },
   {
     "ea": "0x541D25",
-    "line": "mov     eax, [esi+14h]",
+    "line": "mov     eax, [esi+14h]; Exterior fog-color decode: secondWeather branch for weather transition color blending.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1801,13 +1795,13 @@
   },
   {
     "ea": "0x541D2B",
-    "line": "mov     edx, [eax+edx]",
+    "line": "mov     edx, [eax+edx]; Exterior fog-color decode: loads secondWeather adjacent phase packed RGB for transition blend.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x541D2E",
-    "line": "mov     [esp+4Ch+var_18], ecx",
+    "line": "mov     [esp+4Ch+var_18], ecx; Exterior fog-color decode: loads secondWeather current phase packed RGB for transition blend.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1951,7 +1945,7 @@
   },
   {
     "ea": "0x541D83",
-    "line": "fld     [esp+4Ch+var_3C]",
+    "line": "fld     [esp+4Ch+var_3C]; Exterior fog-color decode: blends packed weather RGB into Sky color vector. When colorSlot == 1, target is Sky+0x48/+0x4C/+0x50 active fog color.",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2005,7 +1999,7 @@
   },
   {
     "ea": "0x541D9A",
-    "line": "call    sub_5400E0",
+    "line": "call    sub_5400E0; Exterior fog-color decode: blends up to four packed weather RGB colors and weights into a Sky RGB vector; caller 0x5418F0 uses colorSlot 1 for active exterior fog color.",
     "mnemonic": "call",
     "size": 5
   },

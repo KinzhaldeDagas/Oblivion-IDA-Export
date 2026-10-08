@@ -1,4 +1,4 @@
-BSStringT *sub_A11570()
+NiRTTI *sub_A11570()
 {
-  return sub_70E220(&stru_B45F38, "WaterShader", (int)&ImageSpaceShaderRTTI___);
+  return NiRTTI_Constructor((NiRTTI *)&OB_ShaderConstantStorage_010201A0[0x49], "WaterShader", &MEMORY[0xB4257C]); /*0xa11584*/
 }

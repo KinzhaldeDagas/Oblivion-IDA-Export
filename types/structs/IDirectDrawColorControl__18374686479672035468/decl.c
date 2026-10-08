@@ -1,1 +1,4 @@
-IDirectDrawColorControl
+struct IDirectDrawColorControl
+{
+IDirectDrawColorControlVtbl *lpVtbl;
+};

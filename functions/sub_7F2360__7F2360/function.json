@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7F2360",
+      "0x7F2392"
+    ]
+  ],
+  "chunks_sha256": "2acfaac967ae9492397d52cb453c69e98069e04c83bf373332bfe912cc33699d",
+  "comment_regular": "STSPData ctor. NiRefObject header, streamData +0x08 null, and 16-bit vertex-count/ownership gate +0x0C zero.\n\nSTSPData ctor: NiRefObject with data pointer +0x08 null and 16-bit count/ownership gate +0x0C zero.",
+  "comment_repeatable": "STSPData ctor: NiRefObject with data pointer +0x08 null and 16-bit count/ownership gate +0x0C zero.\n\n[2026-10-03 constructor audit] This exact STSP constructor performs header/field initialization and one global live-object increment; it does not allocate a child buffer or retain a texture. Plugin extended owner initialization/texture retention happens after return. Do not generalize this observation to other property/geometry constructor chains.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 3,
-  "display_name": "sub_7F2360",
+  "display_name": "OB_STSPData_ctor_010201A0",
   "end_ea": "0x7F2392",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7F2360",
+  "name": "OB_STSPData_ctor_010201A0",
   "segment": ".text",
   "sha256": "2acfaac967ae9492397d52cb453c69e98069e04c83bf373332bfe912cc33699d",
   "size": 50,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7F2360",
-  "type": "_DWORD *__thiscall(_DWORD *this)",
+  "total_chunk_size": 50,
+  "type": "OB_STSPData_010201A0 *__thiscall(OB_STSPData_010201A0 *this)",
   "xrefs_from_count": 14,
   "xrefs_to_count": 2
 }

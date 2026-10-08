@@ -1,5 +1,5 @@
 0xA27C10: push    esi
-0xA27C11: mov     esi, dword_BAAA90
+0xA27C11: mov     esi, g_ConstantMapArrayEmptyEntry
 0xA27C17: test    esi, esi
 0xA27C19: jz      short loc_A27C37
 0xA27C1B: lea     eax, [esi+4]

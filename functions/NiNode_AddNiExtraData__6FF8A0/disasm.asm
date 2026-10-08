@@ -1,4 +1,4 @@
-0x6FF8A0: sub     esp, 14h
+0x6FF8A0: sub     esp, 14h; Pass269 ABI and ownership proof: NiObjectNET::AddExtraData consumes one stack argument with RET 4 and also expects owning object in ECX/EBX at this build's callsites. The plugin wrapper must not execute caller-side ADD ESP,4.
 0x6FF8A3: mov     eax, ds:0B30AACh
 0x6FF8A8: xor     eax, esp
 0x6FF8AA: mov     [esp+14h+var_4], eax
@@ -19,7 +19,7 @@
 0x6FF8D1: add     esp, 14h
 0x6FF8D4: retn    4
 0x6FF8D7: mov     ecx, esi
-0x6FF8D9: call    sub_452A60
+0x6FF8D9: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x6FF8DE: test    eax, eax
 0x6FF8E0: jnz     loc_6FF997
 0x6FF8E6: mov     eax, [esi]
@@ -83,7 +83,7 @@
 0x6FF97E: push    esi; Src
 0x6FF97F: call    sub_721440
 0x6FF984: push    esi
-0x6FF985: call    FormHeapFree
+0x6FF985: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6FF98A: mov     edi, [esp+28h+var_10]
 0x6FF98E: mov     esi, [esp+28h+var_14]
 0x6FF992: add     esp, 4

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4FDE30",
-    "line": "sub     esp, 230h",
+    "line": "sub     esp, 230h; TES4 authoritative default command parser. It compiles a command's ParamInfo list into script bytecode consumed later by Script_ExtractArgs.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x4FDE81",
-    "line": "mov     [ecx], ax",
+    "line": "mov     [ecx], ax; Writes the expected parameter count word into the compiled script-data buffer; Script_ExtractArgs later reads this count before parsing arguments.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1423,7 +1423,7 @@
   },
   {
     "ea": "0x4FE1BA",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4243,7 +4243,7 @@
   },
   {
     "ea": "0x4FE8BD",
-    "line": "push    edi; Size",
+    "line": "push    edi; byteCount",
     "mnemonic": "push",
     "size": 1
   },
@@ -4255,7 +4255,7 @@
   },
   {
     "ea": "0x4FE8C2",
-    "line": "push    edx; Src",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -4267,13 +4267,13 @@
   },
   {
     "ea": "0x4FE8CA",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4FE8CB",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -4711,19 +4711,19 @@
   },
   {
     "ea": "0x4FEA2E",
-    "line": "push    edx; Str2",
+    "line": "push    edx; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4FEA2F",
-    "line": "push    eax; Str1",
+    "line": "push    eax; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4FEA30",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -5041,7 +5041,7 @@
   },
   {
     "ea": "0x4FEAFC",
-    "line": "push    edx; Str2",
+    "line": "push    edx; right",
     "mnemonic": "push",
     "size": 1
   },
@@ -5053,13 +5053,13 @@
   },
   {
     "ea": "0x4FEB01",
-    "line": "push    eax; Str1",
+    "line": "push    eax; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4FEB02",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -5107,7 +5107,7 @@
   },
   {
     "ea": "0x4FEB27",
-    "line": "push    ecx; Str2",
+    "line": "push    ecx; right",
     "mnemonic": "push",
     "size": 1
   },
@@ -5119,13 +5119,13 @@
   },
   {
     "ea": "0x4FEB2C",
-    "line": "push    edx; Str1",
+    "line": "push    edx; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4FEB2D",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -5179,7 +5179,7 @@
   },
   {
     "ea": "0x4FEB57",
-    "line": "mov     edi, offset animGroupInfos_ptr",
+    "line": "mov     edi, offset animGroupInfos_ptr; Default command parser hit in animation console-command search set; parses command args before handlers such as PlayGroup/PickIdle/LoopGroup.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -5197,7 +5197,7 @@
   },
   {
     "ea": "0x4FEB62",
-    "line": "push    edx; Str2",
+    "line": "push    edx; right",
     "mnemonic": "push",
     "size": 1
   },
@@ -5209,13 +5209,13 @@
   },
   {
     "ea": "0x4FEB67",
-    "line": "push    eax; Str1",
+    "line": "push    eax; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4FEB68",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -5395,7 +5395,7 @@
   },
   {
     "ea": "0x4FEBD7",
-    "line": "push    edx; Str2",
+    "line": "push    edx; right",
     "mnemonic": "push",
     "size": 1
   },
@@ -5407,13 +5407,13 @@
   },
   {
     "ea": "0x4FEBDC",
-    "line": "push    eax; Str1",
+    "line": "push    eax; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4FEBDD",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },

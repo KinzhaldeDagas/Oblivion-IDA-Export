@@ -1,4 +1,4 @@
 int Magic_GetMarksmanParalyzeSpell()
 {
-  return TESDataHandler_g_MarksmanParalyzeSpell;
+  return MEMORY[0xB335AC]; /*0x41b885*/
 }

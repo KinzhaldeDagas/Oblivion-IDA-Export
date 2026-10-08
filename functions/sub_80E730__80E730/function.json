@@ -1,19 +1,36 @@
 {
-  "callees_count": 26,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_80E730",
+  "chunks": [
+    [
+      "0x80E730",
+      "0x80E8B1"
+    ],
+    [
+      "0x9CD690",
+      "0x9CD6BB"
+    ]
+  ],
+  "chunks_sha256": "52e022da601a9e9b359bb122a17e833e8c91f6dfaf8368c1901accb0bc903047",
+  "comment_regular": "\n\n[2026-10-03 profile comparison] Native frond pass creates exactly one texture stage, sampler0, then binds VS/PS variants. Local RT4.1 compile switches FROND_NORMAL_MAPPING/SELF_SHADOW_LAYER represent a broader material profile; they are not latent bindings in this native pass. Current restored profile remains diffuse-only, with normal/detail/self-shadow metadata retained but not bound. This limitation is explicit and is not claimed as full RT4.1 material parity.\n[2026-10-03 VERIFIED crash defect] Exact entry is80E730, confirmed by function.start_ea and nativefactory CALL80EF7A bytesE8B1F7FFFF. Earlier decompilation requests at80E740 silently normalized to this containing function; the plugin incorrectly called literal80E740. That address is the immediate08 byte of83EC08 (SUB ESP,8) starting80E73E, after required PUSH -1/PUSH SEH handler/MOV EAX,FS:[0]/PUSH EAX. Entering there executes mid-instruction bytes and bypasses SEH/stack setup. 13:31 runtime checkpoints prove all six GPU program handles exist and SEHhead001AF708 unchanged, then stop at native-pass-enter. This aligns with repeated INVALID_EXCEPTION_CHAIN/c0000005 at18894A41. Plugin corrected call to80E730 and installation verifies the saved factory rel32 target matches that constant. Post-fix game startup remains to be confirmed.\n[2026-10-03 post-fix runtime evidence] 13:53 log contains native-pass-return, both stage-bound status0, material-pass-return and shadow-binding-return status0, with SEHhead unchanged001AF708. Ordinary tree processing follows. The earlier pass-entry startup failure is therefore passed on this run. A different later save-load AV is at7D22D5(BBX shadow-caster lookup dereference), not this construction boundary.\n\nSpeedTreeFrondShader pass builder. Creates renderer-owned pass at +0x94, creates one texture stage with 0x801110(stage,0,3,2), assigns default VS +0x7C and PS +0x8C.",
+  "comment_repeatable": "SpeedTreeFrondShader pass builder. Creates renderer-owned pass at +0x94, creates one texture stage with 0x801110(stage,0,3,2), assigns default VS +0x7C and PS +0x8C.\n\n[2026-10-04 atlas sampling] Native diffuse stage configured with wrap-S/wrap-T mode3 and filter2. New atlas fixture uploads the actual Mojave composite through d3dx9_27, samples signed T under wrap, and verifies1392 GPU samples across3LOD constant values,4mips,alpha cutouts and same-domain normal sampling. This is isolated renderer coverage, not live scene validation.\n[2026-10-04 v112 defect] Factory80E7D9 passes(0,3,2) to801110: U/V CLAMP, not WRAP. v111 Ponytail runtime log1428 exports V[-0.6929,-0.6304], binds authored atlas2F02EEA0 through setup2264, yet user reports invisible fronds. Installed atlas row0 across U[0.2549,0.3799] has alpha0. Native-mode GPU reproduction fails actualR0 vs expected152; v112 converts signed compositeV to1+V (positive input preserved) and passes1392 actual-atlas cases with CLAMP. Fix staged only; no in-game validation claimed.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_SpeedTreeFrondShader_BuildDrawPass_010201A0",
   "end_ea": "0x80E8B1",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
-  "name": "sub_80E730",
+  "name": "OB_SpeedTreeFrondShader_BuildDrawPass_010201A0",
   "segment": ".text",
   "sha256": "090b2f23deaa455cb087b4b9ce52d0ef02cde8ce10f76913f689dde291ea72e9",
   "size": 385,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x80E730",
-  "type": "void __thiscall(NiD3DPass **this)",
-  "xrefs_from_count": 155,
+  "total_chunk_size": 428,
+  "type": "void __thiscall(SpeedTreeFrondShader *this)",
+  "xrefs_from_count": 168,
   "xrefs_to_count": 1
 }

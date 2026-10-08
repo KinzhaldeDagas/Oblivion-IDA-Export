@@ -7,16 +7,16 @@
 0x5B154B: call    InterfaceManager_GetSingleton
 0x5B1550: add     esp, 8
 0x5B1553: mov     edi, eax
-0x5B1555: call    sub_57D7F0
+0x5B1555: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x5B155A: fstp    [esp+10h+var_8]
-0x5B155E: call    sub_57D7F0
+0x5B155E: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x5B1563: fmul    qword ptr ds:0A2FAA0h
 0x5B1569: fadd    dword ptr [edi+28h]
 0x5B156C: fsubr   [esp+10h+var_8]
-0x5B1570: call    Double_To_SInt32
+0x5B1570: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B1575: mov     ecx, [esi+34h]
 0x5B1578: mov     dword ptr [esp+10h+var_8], eax
-0x5B157C: call    sub_588CF0
+0x5B157C: call    sub_588CF0; AchievementsNative evidence: stock tile Y helper starts with tile y and adds ancestor y only when ancestor locus is nonzero; inventory hover passes this row Y to popup path.
 0x5B1581: fisub   dword ptr [esp+10h+var_8]
 0x5B1585: pop     edi
 0x5B1586: fstp    dword ptr [esi+58h]

@@ -20,29 +20,29 @@
 0x77EE4C: jb      short loc_77EE40
 0x77EE4E: xor     eax, eax
 0x77EE50: cmp     eax, ebx
-0x77EE52: mov     [esp+18h+var_4], eax
+0x77EE52: mov     [esp+18h+position], eax
 0x77EE56: jz      short loc_77EEA1
 0x77EE58: mov     esi, [esp+18h+arg_0]
 0x77EE5C: jmp     short loc_77EE69
 0x77EE5E: mov     eax, [edi+eax*4]
 0x77EE61: jmp     short loc_77EE50
-0x77EE63: mov     ecx, ds:0B428ACh
-0x77EE69: lea     eax, [esp+18h+var_C]
-0x77EE6D: push    eax
-0x77EE6E: lea     edx, [esp+1Ch+var_8]
-0x77EE72: push    edx
-0x77EE73: lea     eax, [esp+20h+var_4]
-0x77EE77: push    eax
-0x77EE78: mov     [esp+24h+var_8], ebx
-0x77EE7C: mov     [esp+24h+var_C], ebx
-0x77EE80: call    sub_452600
-0x77EE85: cmp     esi, [esp+18h+var_C]
+0x77EE63: mov     ecx, ds:0B428ACh; self
+0x77EE69: lea     eax, [esp+18h+valueOut]
+0x77EE6D: push    eax; valueOut
+0x77EE6E: lea     edx, [esp+1Ch+keyOut]
+0x77EE72: push    edx; keyOut
+0x77EE73: lea     eax, [esp+20h+position]
+0x77EE77: push    eax; position
+0x77EE78: mov     [esp+24h+keyOut], ebx
+0x77EE7C: mov     [esp+24h+valueOut], ebx
+0x77EE80: call    NiTMap_U32Pointer_GetNextEntry
+0x77EE85: cmp     esi, [esp+18h+valueOut]
 0x77EE89: jnz     short loc_77EE9B
-0x77EE8B: mov     ecx, [esp+18h+var_8]
+0x77EE8B: mov     ecx, [esp+18h+keyOut]
 0x77EE8F: push    ecx
 0x77EE90: mov     ecx, ds:0B428ACh
 0x77EE96: call    NiTMap_RemoveAt
-0x77EE9B: cmp     [esp+18h+var_4], ebx
+0x77EE9B: cmp     [esp+18h+position], ebx
 0x77EE9F: jnz     short loc_77EE63
 0x77EEA1: pop     edi
 0x77EEA2: pop     esi

@@ -1,11 +1,11 @@
-int __usercall sub_4DA8F0@<eax>(int a1@<edi>, int esi0@<esi>, int a3, NiAVObject *a4, float a2)
+int __cdecl sub_4DA8F0(int a1, NiAVObject *arg4, float a2)
 {
   double v5; // st7
   int v6; // esi
   int result; // eax
   unsigned int v8; // ebx
-  TESSaveLoad *v9; // ecx
-  unsigned __int8 next; // al
+  TESSaveLoadGame_SerializationView *v9; // ecx
+  unsigned __int8 currentVersion; // al
   char *v11; // eax
   char *v12; // edx
   char v13; // cl
@@ -13,156 +13,147 @@ int __usercall sub_4DA8F0@<eax>(int a1@<edi>, int esi0@<esi>, int a3, NiAVObject
   unsigned int v15; // edi
   int *v16; // ebp
   int v17; // esi
-  unsigned __int16 v18; // ax
+  unsigned __int16 SaveStateSize; // ax
   NiAVObject *v19; // edi
   double v20; // st5
   double v21; // st7
-  size_t v22; // [esp+Ch] [ebp-140h]
-  size_t v23; // [esp+Ch] [ebp-140h]
-  float v24; // [esp+Ch] [ebp-140h]
-  size_t v25; // [esp+14h] [ebp-138h]
-  char v26; // [esp+23h] [ebp-129h]
-  float v27; // [esp+24h] [ebp-128h]
-  float v28; // [esp+24h] [ebp-128h]
-  unsigned __int8 v29; // [esp+2Bh] [ebp-121h] BYREF
-  float v30; // [esp+2Ch] [ebp-120h]
+  float v22; // [esp+Ch] [ebp-140h]
+  char v23; // [esp+23h] [ebp-129h]
+  float v24; // [esp+24h] [ebp-128h]
+  float v25; // [esp+24h] [ebp-128h]
+  unsigned __int8 v26; // [esp+2Bh] [ebp-121h] BYREF
+  float v27; // [esp+2Ch] [ebp-120h]
   int Dst; // [esp+30h] [ebp-11Ch] BYREF
-  NiAVObject *v32; // [esp+34h] [ebp-118h]
-  int v33; // [esp+38h] [ebp-114h]
-  int v34; // [esp+3Ch] [ebp-110h]
-  int v35; // [esp+40h] [ebp-10Ch] BYREF
-  char v36[260]; // [esp+44h] [ebp-108h] BYREF
+  NiAVObject *v29; // [esp+34h] [ebp-118h]
+  int v30; // [esp+38h] [ebp-114h]
+  int v31; // [esp+3Ch] [ebp-110h]
+  int destination; // [esp+40h] [ebp-10Ch] BYREF
+  char v33[260]; // [esp+44h] [ebp-108h] BYREF
 
-  v5 = flt_A30634;
-  v32 = a4;
-  HIDWORD(v25) = esi0;
-  v6 = a3;
-  v33 = a3;
-  if ( v5 == a2 )
-    a2 = flt_B33A30;
-  LODWORD(v25) = 2;
-  SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &Dst, v25);
-  result = Dst;
-  if ( (unsigned __int16)Dst > 0xFDE8u )
+  v5 = kTerrainLODQuadRayDirectionZ; /*0x4da904*/
+  v29 = arg4; /*0x4da919*/
+  v6 = a1; /*0x4da91e*/
+  v30 = a1; /*0x4da927*/
+  if ( v5 == a2 ) /*0x4da92e*/
+    a2 = source; /*0x4da936*/
+  SaveLoad_LoadData(g_TESSaveLoadGame, &Dst, 2u); /*0x4da94a*/
+  result = Dst; /*0x4da94f*/
+  if ( (unsigned __int16)Dst > 0xFDE8u ) /*0x4da957*/
   {
-    result = 0;
-    Dst = 0;
+    result = 0; /*0x4da959*/
+    Dst = 0; /*0x4da95b*/
   }
-  v8 = 0;
-  if ( a3 )
+  v8 = 0;                                       // EngineFix implementation 2026-05-11: animation-state count clamp installed after the engine's 0xFDE8 ceiling has already zeroed invalid large counts. The hook clamps only surviving counts to remaining save-record bytes / minimum entry size (4 bytes for save versions 0x15-0x16, otherwise at least one length byte), then re-emits the original setup through 0x4DA973. /*0x4da95f*/
+  if ( a1 ) /*0x4da963*/
   {
-    v8 = *(unsigned __int16 *)(a3 + 0x46);
-    if ( (_WORD)result )
-      *(_WORD *)(a3 + 8) |= 8u;
+    v8 = *(unsigned __int16 *)(a1 + 0x46); /*0x4da968*/
+    if ( (_WORD)result ) /*0x4da96c*/
+      *(_WORD *)(a1 + 8) |= 8u; /*0x4da96e*/
   }
-  v26 = 0;
-  v34 = 0;
-  if ( (_WORD)result )
+  v23 = 0; /*0x4da976*/
+  v31 = 0; /*0x4da97b*/
+  if ( (_WORD)result ) /*0x4da983*/
   {
-    HIDWORD(v22) = a1;
-    do
+    do /*0x4daaad*/
     {
-      v9 = SaveLoad_CurrentSavegame;
-      next = (unsigned __int8)SaveLoad_CurrentSavegame[1].createdObjectList.next;
-      if ( next >= 0x15u && next < 0x17u )
+      v9 = g_TESSaveLoadGame; /*0x4da990*/
+      currentVersion = g_TESSaveLoadGame->currentVersion; /*0x4da996*/
+      if ( currentVersion >= 0x15u && currentVersion < 0x17u ) /*0x4da99f*/
       {
-        LODWORD(v22) = 4;
-        SaveLoad_LoadData((int)v9, &v35, v22);
-        if ( v35 >= 0x2B )
+        SaveLoad_LoadData(v9, &destination, 4u); /*0x4da9a8*/
+        if ( destination >= 0x2B ) /*0x4da9b4*/
         {
-          _memset(v36, 0, sizeof(v36));
+          _memset((int)v33, 0, sizeof(v33)); /*0x4da9e0*/
         }
         else
         {
-          v11 = *(char **)(0x24 * v35 + 0xB102E0);
-          v12 = (char *)(v36 - v11);
-          do
+          v11 = *(char **)(0x24 * destination + 0xB102E0); /*0x4da9b9*/
+          v12 = (char *)(v33 - v11); /*0x4da9c4*/
+          do /*0x4da9d0*/
           {
-            v13 = *v11;
-            v11[(_DWORD)v12] = *v11;
-            ++v11;
+            v13 = *v11; /*0x4da9c6*/
+            v11[(_DWORD)v12] = *v11; /*0x4da9c8*/
+            ++v11; /*0x4da9cb*/
           }
-          while ( v13 );
+          while ( v13 ); /*0x4da9d0*/
         }
-        v9 = SaveLoad_CurrentSavegame;
+        v9 = g_TESSaveLoadGame; /*0x4da9e8*/
       }
-      v14 = (unsigned __int8)v9[1].createdObjectList.next;
-      if ( v14 < 0x15u || v14 >= 0x17u )
+      v14 = v9->currentVersion; /*0x4da9ee*/
+      if ( v14 < 0x15u || v14 >= 0x17u ) /*0x4da9f7*/
       {
-        LODWORD(v22) = 1;
-        SaveLoad_LoadData((int)v9, &v29, v22);
-        _memset(v36, 0, sizeof(v36));
-        LODWORD(v23) = v29;
-        SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, v36, v23);
+        SaveLoad_LoadData(v9, &v26, 1u); /*0x4daa00*/
+        _memset((int)v33, 0, sizeof(v33)); /*0x4daa11*/
+        SaveLoad_LoadData(g_TESSaveLoadGame, v33, v26); /*0x4daa2a*/
       }
-      if ( v6 && (v15 = 0, v8) )
+      if ( v6 && (v15 = 0, v8) ) /*0x4daa37*/
       {
-        v16 = *(int **)(v6 + 0x40);
-        while ( 1 )
+        v16 = *(int **)(v6 + 0x40); /*0x4daa39*/
+        while ( 1 ) /*0x4daa40*/
         {
-          v17 = *v16;
-          if ( *v16 )
+          v17 = *v16; /*0x4daa40*/
+          if ( *v16 ) /*0x4daa40*/
           {
-            if ( !strcmp(*(const char **)(v17 + 8), v36) )
-              break;
+            if ( !strcmp(*(const char **)(v17 + 8), v33) ) /*0x4daa54*/
+              break; /*0x4daa54*/
           }
-          ++v15;
-          ++v16;
-          if ( v15 >= v8 )
+          ++v15; /*0x4daa79*/
+          ++v16; /*0x4daa7c*/
+          if ( v15 >= v8 ) /*0x4daa81*/
           {
-            v6 = v33;
-            goto LABEL_28;
+            v6 = v30; /*0x4daa83*/
+            goto LABEL_27; /*0x4daa83*/
           }
         }
-        if ( !*(_DWORD *)(v17 + 0x44) )
-          sub_6C9BA0((_DWORD *)v17, 0, 0, 1.0, 0.0, 0, 0);
-        sub_49F5F0((float *)v17, a2);
-        v19 = v32;
-        if ( v32 )
+        if ( !*(_DWORD *)(v17 + 0x44) ) /*0x4daaed*/
+          NiControllerSequence_Activate((NiControllerSequence *)v17, 0, 0, 1.0, 0.0, 0, 0); /*0x4dab0b*/
+        BSAnimGroupSequence_LoadState((float *)v17, a2); /*0x4dab1d*/
+        v19 = v29; /*0x4dab22*/
+        if ( v29 ) /*0x4dab28*/
         {
-          if ( sub_4808A0((int)v32) )
+          if ( sub_4808A0((int)v29) ) /*0x4dab2f*/
           {
-            v30 = *(float *)(v17 + 0x48) + a2;
-            v27 = a2 - v30;
-            if ( v27 >= 0.0 )
-              v20 = v27;
+            v27 = *(float *)(v17 + 0x48) + a2; /*0x4dab4f*/
+            v24 = a2 - v27; /*0x4dab5f*/
+            if ( v24 >= 0.0 ) /*0x4dab70*/
+              v20 = v24; /*0x4dab7e*/
             else
-              v20 = (float)0.0;
-            v30 = v30 / dbl_A46E48;
-            if ( flt_A46E44 > (double)v30 )
-              v30 = flt_A46E44;
-            v28 = v20;
-            if ( v20 < a2 )
+              v20 = (float)0.0; /*0x4dab78*/
+            v27 = v27 / dbl_A46E48; /*0x4dab88*/
+            if ( flt_A46E44 > (double)v27 ) /*0x4dab9b*/
+              v27 = flt_A46E44; /*0x4dab9d*/
+            v25 = v20; /*0x4daba5*/
+            if ( v20 < a2 ) /*0x4dabb0*/
             {
-              v21 = v28;
-              do
+              v21 = v25; /*0x4dabb2*/
+              do /*0x4dabdf*/
               {
-                v24 = v21;
-                sub_7073A0(v19, v24);
-                v28 = v28 + v30;
-                v21 = v28;
+                v22 = v21; /*0x4dabb9*/
+                sub_7073A0(v19, v22); /*0x4dabbc*/
+                v25 = v25 + v27; /*0x4dabc9*/
+                v21 = v25; /*0x4dabcd*/
               }
-              while ( a2 > (double)v28 );
+              while ( a2 > (double)v25 ); /*0x4dabdf*/
             }
           }
         }
-        v6 = v33;
-        v26 = 1;
+        v6 = v30; /*0x4dabe3*/
+        v23 = 1; /*0x4dabe7*/
       }
       else
       {
-LABEL_28:
-        v18 = sub_49F550();
-        SaveLoad_AdvanceBufferOffset(SaveLoad_CurrentSavegame, v18);
+LABEL_27:
+        SaveStateSize = BSAnimGroupSequence_GetSaveStateSize(); /*0x4daa87*/
+        SaveLoad_AdvanceBufferOffset(g_TESSaveLoadGame, SaveStateSize); /*0x4daa96*/
       }
-      result = ++v34;
+      result = ++v31; /*0x4daaa4*/
     }
-    while ( v34 < (unsigned __int16)Dst );
-    if ( v26 )
+    while ( v31 < (unsigned __int16)Dst ); /*0x4daaad*/
+    if ( v23 ) /*0x4daaba*/
     {
-      if ( v32 )
-        return NiAVObject_UpdateNiAVObject(v32, a2, 1);
+      if ( v29 ) /*0x4daac2*/
+        return NiAVObject_UpdateNiAVObject(v29, a2, 1); /*0x4daad1*/
     }
   }
-  return result;
+  return result; /*0x4daadf*/
 }

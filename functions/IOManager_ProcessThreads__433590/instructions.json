@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x433590",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; MEF data-streaming pass: IOManager post-process pump uses QPC deadline and configured millisecond budget. Left unchanged; budget tuning needs runtime profiling and is not an IDA-proven engine bug.",
     "mnemonic": "push",
     "size": 2
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x4335BE",
-    "line": "call    ds:QueryPerformanceCounter",
+    "line": "call    ds:QueryPerformanceCounter; MEF candidate verification 2026-05-30: IOManager uses QPC with 64-bit budget conversion and deadline compare; no IDA-proven timer arithmetic bug here.",
     "mnemonic": "call",
     "size": 6
   },
@@ -115,13 +115,13 @@
   },
   {
     "ea": "0x4335C8",
-    "line": "mov     ecx, dword ptr Frequency+4",
+    "line": "mov     ecx, ds:0B33A0Ch",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4335CE",
-    "line": "mov     edx, dword ptr Frequency",
+    "line": "mov     edx, ds:0B33A08h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x4335FC",
-    "line": "mov     ecx, ModelLoaderPtr",
+    "line": "mov     ecx, ds:0B33A1Ch",
     "mnemonic": "mov",
     "size": 6
   },
@@ -301,13 +301,13 @@
   },
   {
     "ea": "0x433639",
-    "line": "mov     ecx, ModelLoaderPtr; void *",
+    "line": "mov     ecx, ds:0B33A1Ch; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x43363F",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -940,5 +940,71 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9ABF80",
+    "line": "lea     ecx, [ebp-24h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9ABF83",
+    "line": "jmp     sub_4BDDC0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9ABF88",
+    "line": "lea     ecx, [ebp-20h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9ABF8B",
+    "line": "jmp     sub_4BDDC0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9ABF90",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9ABF94",
+    "line": "lea     eax, [edx-28h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9ABF97",
+    "line": "mov     ecx, [edx-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9ABF9A",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9ABF9C",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9ABFA1",
+    "line": "mov     eax, offset stru_AD8CA8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9ABFA6",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

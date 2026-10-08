@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x76C7E6",
-    "line": "call    eax",
+    "line": "call    eax; Geometry-finish restores D3DRS_LIGHTING (0x89) from the shader's saved value even after a zero-pass submission.",
     "mnemonic": "call",
     "size": 2
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x76C80D",
-    "line": "call    sub_779790",
+    "line": "call    NiD3DShader_RestoreRenderStateGroup; Then restore the shader's NiD3DRenderStateGroup; this is unconditional with respect to PassCount.",
     "mnemonic": "call",
     "size": 5
   },

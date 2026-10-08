@@ -73,14 +73,14 @@
 0x7F6B9D: mov     edx, [ecx+8]
 0x7F6BA0: mov     bl, [edx+1Ah]
 0x7F6BA3: jnz     short loc_7F6BAD
-0x7F6BA5: call    sub_772DF0
+0x7F6BA5: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x7F6BAA: mov     [ebp+30h], eax
 0x7F6BAD: mov     ecx, [ebp+30h]
 0x7F6BB0: movzx   eax, bl
 0x7F6BB3: push    0
 0x7F6BB5: push    eax
 0x7F6BB6: push    18h
-0x7F6BB8: call    sub_772CD0
+0x7F6BB8: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x7F6BBD: mov     ecx, [esp+1Ch+var_8]
 0x7F6BC1: mov     edx, [ecx+0B4h]
 0x7F6BC7: cmp     dword ptr [edx+24h], 0

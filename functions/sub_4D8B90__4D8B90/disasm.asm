@@ -2,7 +2,7 @@
 0x4D8B93: test    eax, eax
 0x4D8B95: jz      short loc_4D8B9E
 0x4D8B97: mov     ecx, eax; this
-0x4D8B99: jmp     TESObjectCELL_IsInterior
+0x4D8B99: jmp     TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x4D8B9E: mov     eax, [ecx+18h]
 0x4D8BA1: mov     edx, [eax]
 0x4D8BA3: add     ecx, 18h

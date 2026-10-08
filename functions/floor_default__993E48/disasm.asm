@@ -17,7 +17,7 @@
 0x993E6B: and     ax, 7FF0h
 0x993E6F: cmp     ax, 7FF0h
 0x993E73: push    ecx
-0x993E74: fstp    [esp+18h+var_18]; int
+0x993E74: fstp    qword ptr [esp+18h+var_18]; int
 0x993E77: jnz     short loc_993ECE
 0x993E79: call    __sptype
 0x993E7E: test    eax, eax

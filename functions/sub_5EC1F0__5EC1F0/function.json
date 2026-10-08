@@ -1,19 +1,32 @@
 {
-  "callees_count": 44,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 22,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_5EC1F0",
+  "chunks": [
+    [
+      "0x5EC1F0",
+      "0x5EC400"
+    ]
+  ],
+  "chunks_sha256": "b05e963cae77116689019d70275d064bb499879cee01a3718ce43a34ad7ff903",
+  "comment_regular": "Verified actor-specific path-node cost: apply fPathPreferredPointBonus to preferred nodes for non-creature actors; use point bit 0x10 as an underwater-result cache and bit 0x08 as the node's below-water state; account for swim/movement restrictions and fPathNPCWadingPenalty. It is called by TESConnectedPoint_ComputeActorAwareEdgeCost.",
+  "comment_repeatable": "Verified actor-specific path-node cost: apply fPathPreferredPointBonus to preferred nodes for non-creature actors; use point bit 0x10 as an underwater-result cache and bit 0x08 as the node's below-water state; account for swim/movement restrictions and fPathNPCWadingPenalty. It is called by TESConnectedPoint_ComputeActorAwareEdgeCost.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "TESObjectREFR_GetPathGraphMovementCost",
   "end_ea": "0x5EC400",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_5EC1F0",
+  "name": "TESObjectREFR_GetPathGraphMovementCost",
   "segment": ".text",
   "sha256": "b05e963cae77116689019d70275d064bb499879cee01a3718ce43a34ad7ff903",
   "size": 528,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5EC1F0",
-  "type": "double __thiscall(TESObjectREFR *this, float *)",
+  "total_chunk_size": 528,
+  "type": "float __thiscall(TESObjectREFR *this, TESConnectedPoint *point)",
   "xrefs_from_count": 212,
   "xrefs_to_count": 1
 }

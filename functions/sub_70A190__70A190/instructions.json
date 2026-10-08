@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x70A1A4",
-    "line": "push    eax; char",
+    "line": "push    eax; updateProperties",
     "mnemonic": "push",
     "size": 1
   },
@@ -55,13 +55,13 @@
   },
   {
     "ea": "0x70A1A6",
-    "line": "fstp    [esp+10h+var_10]; float",
+    "line": "fstp    [esp+10h+applicationTime]; applicationTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x70A1A9",
-    "line": "call    sub_47C930",
+    "line": "call    NiAVObject_UpdatePropertiesAndControllers; Update one NiAVObject's property controllers and attached NiTimeController chain. If requested, walk the property list at NiAVObject+0x9C and invoke property virtual +0x50 when its controller pointer is non-null. Always walk NiObjectNET.controller at object+0x0C through NiTimeController.next at +0x34 and invoke controller virtual Update +0x54 with applicationTime. No Active-bit prefilter occurs here: NiTimeController.flags+0x08 bit 3 only affects time-cache logic inside the controller. External Crossbow consequence after this Oblivion decode: temporarily clearing the base Active bit inside an already-entered morph hook will not by itself stop the next scene traversal, but pointer discovery still cannot make a graph that is not traversed dispatch Update.",
     "mnemonic": "call",
     "size": 5
   },
@@ -156,12 +156,6 @@
     "size": 2
   },
   {
-    "ea": "0x70A1D9",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x70A1E0",
     "line": "mov     ecx, [edi+0B0h]",
     "mnemonic": "mov",
@@ -241,7 +235,7 @@
   },
   {
     "ea": "0x70A204",
-    "line": "fstp    [esp+10h+var_10]",
+    "line": "fstp    [esp+10h+applicationTime]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -421,7 +415,7 @@
   },
   {
     "ea": "0x70A251",
-    "line": "call    sub_72A6B0",
+    "line": "call    NiSphere_Merge; Merges a source NiSphere into the destination sphere. Preserves a containing destination, copies a containing source, otherwise computes the minimal enclosing center/radius. NiNode_UpdateDownwardPass uses it to aggregate nonempty child world bounds.",
     "mnemonic": "call",
     "size": 5
   },

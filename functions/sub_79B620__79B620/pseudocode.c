@@ -1,25 +1,28 @@
+// Exception-safe uninitialized_fill_n for SFrondTexture. Placement-copy-constructs count records; the SEH cleanup landing path destroys the constructed prefix before rethrowing.
 // positive sp value has been detected, the output may be wrong!
-void __cdecl __noreturn sub_79B620(_DWORD *a1, int a2, int a3)
+OB_SFrondTexture_010201A0 *__cdecl OB_SFrondTexture_UninitializedFillN_010201A0(
+        OB_SFrondTexture_010201A0 *destination,
+        unsigned int count,
+        const OB_SFrondTexture_010201A0 *value)
 {
-  int v3; // edi
-  _DWORD *i; // esi
-  int v6; // [esp-4h] [ebp-28h] BYREF
-  _DWORD *v7; // [esp+10h] [ebp-14h]
-  int *v8; // [esp+14h] [ebp-10h]
-  int v9; // [esp+20h] [ebp-4h]
+  OB_SFrondTexture_010201A0 *currentDestination; // edi
+  OB_SFrondTexture_010201A0 *cleanupCurrent; // esi
+  int v7; // [esp-4h] [ebp-28h] BYREF
+  OB_SFrondTexture_010201A0 *constructedBegin; // [esp+10h] [ebp-14h]
+  int *v9; // [esp+14h] [ebp-10h]
+  int v10; // [esp+20h] [ebp-4h]
 
-  v8 = &v6;
-  v3 = (int)a1;
-  v7 = a1;
-  v9 = 0;
-  while ( a2 )
+  v9 = &v7; /*0x79b648*/
+  currentDestination = destination; /*0x79b64b*/
+  constructedBegin = destination; /*0x79b654*/
+  v10 = 0; /*0x79b657*/
+  while ( count ) /*0x79b662*/
   {
-    sub_79AC40(v3, a3);
-    --a2;
-    v3 += 0x2C;
-    a1 = (_DWORD *)v3;
+    OB_SFrondTexture_CopyCtor_010201A0(currentDestination, value); /*0x79b666*/
+    --count; /*0x79b66e*/
+    destination = ++currentDestination; /*0x79b674*/
   }
-  for ( i = v7; i != a1; i += 0xB )
-    sub_79AC10(i);
-  ThrowException__(0, 0);
+  for ( cleanupCurrent = constructedBegin; cleanupCurrent != destination; ++cleanupCurrent ) /*0x79b681*/
+    OB_SFrondTexture_Destroy_010201A0(cleanupCurrent); /*0x79b689*/
+  ThrowException__(0, 0); /*0x79b699*/
 }

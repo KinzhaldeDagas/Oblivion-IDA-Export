@@ -1,19 +1,32 @@
 {
-  "callees_count": 7,
-  "callers_count": 7,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 20,
+  "chunks": [
+    [
+      "0x785F30",
+      "0x785F9A"
+    ]
+  ],
+  "chunks_sha256": "03ee2e22e5f28b89c12b83a315a67f7138e29fee7e0c951c538f2c21a664ffee",
+  "comment_regular": "Oblivion compact float-vector push_back. Appends a 4-byte float in place when capacity remains; otherwise delegates to the reallocation/insertion path. Shared by spline tangent lengths and indexed-geometry float streams.",
+  "comment_repeatable": "Oblivion compact float-vector push_back. Appends a 4-byte float in place when capacity remains; otherwise delegates to the reallocation/insertion path. Shared by spline tangent lengths and indexed-geometry float streams.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_785F30",
+  "display_name": "OB_stVector_float_PushBack_010201A0",
   "end_ea": "0x785F9A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_785F30",
+  "name": "OB_stVector_float_PushBack_010201A0",
   "segment": ".text",
   "sha256": "03ee2e22e5f28b89c12b83a315a67f7138e29fee7e0c951c538f2c21a664ffee",
   "size": 106,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x785F30",
-  "type": "unsigned int **__thiscall(unsigned int *this, int *)",
+  "total_chunk_size": 106,
+  "type": "float *__thiscall(OB_stVector16_010201A0 *this, const float *value)",
   "xrefs_from_count": 48,
   "xrefs_to_count": 20
 }

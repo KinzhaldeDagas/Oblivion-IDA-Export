@@ -1,4 +1,4 @@
-BSStringT *sub_A09FE0()
+NiRTTI *sub_A09FE0()
 {
-  return sub_70E220((BSStringT *)dword_B3FD4C, "NiBillboardNode", (int)dword_B3FAB0);
+  return NiRTTI_Constructor(&stru_B3FD4C, "NiBillboardNode", &parent); /*0xa09ff4*/
 }

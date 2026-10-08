@@ -6,7 +6,7 @@
 0xA14CAD: push    0
 0xA14CAF: push    0
 0xA14CB1: push    0A0h ; ' '
-0xA14CB6: push    offset dword_BA8488
+0xA14CB6: push    offset unk_BA8488
 0xA14CBB: push    offset aHkaabbphantom; "hkAabbPhantom"
 0xA14CC0: mov     ecx, offset unk_BA8FD4
 0xA14CC5: call    sub_90D190

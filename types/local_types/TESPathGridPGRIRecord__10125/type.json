@@ -1,0 +1,51 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "TESPathGridPGRIRecord",
+  "definition": "struct TESPathGridPGRIRecord\n{\nunsigned __int16 pointIndex; ///< Verified local TESPathGridPoint array index (u16); the runtime resolver retrieves this point before attaching the remote endpoint.\nunsigned __int16 unknown02; ///< Probable reserved/uninitialized u16 padding: add helper does not write it; duplicate, lookup, and cross-cell resolver read only low u16 and XYZ. Intended meaning remains Unknown.\nNiPoint3 indexedPosition; ///< Verified remote neighbor position (NiPoint3) used to find the matching point in an adjacent cell.\n}\n",
+  "kind": "struct",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified local TESPathGridPoint array index (u16); the runtime resolver retrieves this point before attaching the remote endpoint.",
+      "name": "pointIndex",
+      "offset_bits": 0,
+      "offset_bytes": 0,
+      "size_bits": 16,
+      "type": "unsigned __int16"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Probable reserved/uninitialized u16 padding: add helper does not write it; duplicate, lookup, and cross-cell resolver read only low u16 and XYZ. Intended meaning remains Unknown.",
+      "name": "unknown02",
+      "offset_bits": 16,
+      "offset_bytes": 2,
+      "size_bits": 16,
+      "type": "unsigned __int16"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified remote neighbor position (NiPoint3) used to find the matching point in an adjacent cell.",
+      "name": "indexedPosition",
+      "offset_bits": 32,
+      "offset_bytes": 4,
+      "size_bits": 96,
+      "type": "NiPoint3"
+    }
+  ],
+  "name": "TESPathGridPGRIRecord",
+  "ordinal": 10125,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 16
+}

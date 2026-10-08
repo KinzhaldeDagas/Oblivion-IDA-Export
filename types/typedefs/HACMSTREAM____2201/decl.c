@@ -1,1 +1,4 @@
-HACMSTREAM__
+struct HACMSTREAM__
+{
+int unused;
+};

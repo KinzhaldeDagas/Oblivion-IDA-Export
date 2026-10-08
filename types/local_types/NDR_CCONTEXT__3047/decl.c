@@ -1,1 +1,1 @@
-NDR_CCONTEXT
+typedef void *NDR_CCONTEXT;

@@ -13,14 +13,14 @@
 0x6A8D1A: call    eax
 0x6A8D1C: test    eax, eax
 0x6A8D1E: jl      short loc_6A8D43
-0x6A8D20: mov     eax, dword ptr [esp+8+var_4]
+0x6A8D20: mov     eax, [esp+8+var_4]
 0x6A8D24: test    eax, eax
 0x6A8D26: jz      short loc_6A8D43
 0x6A8D28: mov     ecx, [eax]
 0x6A8D2A: mov     edx, [ecx+20h]
 0x6A8D2D: push    eax
 0x6A8D2E: call    edx
-0x6A8D30: mov     eax, dword ptr [esp+8+var_4]
+0x6A8D30: mov     eax, [esp+8+var_4]
 0x6A8D34: mov     ecx, [eax]
 0x6A8D36: mov     edx, [ecx+8]
 0x6A8D39: push    eax

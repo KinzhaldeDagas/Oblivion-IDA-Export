@@ -9,12 +9,12 @@
 0x5EBB44: push    edi
 0x5EBB45: mov     eax, ds:0B30AACh
 0x5EBB4A: xor     eax, esp
-0x5EBB4C: push    eax; int
+0x5EBB4C: push    eax; flushTermination
 0x5EBB4D: lea     eax, [esp+38h+var_C]
 0x5EBB51: mov     large fs:0, eax
 0x5EBB57: mov     esi, ecx
 0x5EBB59: push    esi; a1
-0x5EBB5A: mov     ecx, offset ActorProcessManager_ptr; this
+0x5EBB5A: mov     ecx, (offset qword_B3BB2C+1D4h); this
 0x5EBB5F: call    sub_674850
 0x5EBB64: mov     ecx, [esi+58h]
 0x5EBB67: xor     ebx, ebx
@@ -33,7 +33,7 @@
 0x5EBB89: call    edx
 0x5EBB8B: test    eax, eax
 0x5EBB8D: jnz     short loc_5EBBA3
-0x5EBB8F: call    InitBSShaderAccumulator
+0x5EBB8F: call    BSShaderAccumulator_GetOrCreateGlobal
 0x5EBB94: cmp     eax, ebx
 0x5EBB96: jz      short loc_5EBBA3
 0x5EBB98: mov     ecx, [esi+0Ch]
@@ -57,7 +57,7 @@
 0x5EBBCB: test    al, al
 0x5EBBCD: jz      short loc_5EBBD6
 0x5EBBCF: mov     ecx, esi; int
-0x5EBBD1: call    sub_5EAE70
+0x5EBBD1: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x5EBBD6: mov     ecx, [esi+58h]
 0x5EBBD9: mov     eax, [ecx]
 0x5EBBDB: mov     edx, [eax+8]
@@ -71,8 +71,8 @@
 0x5EBBF0: jnz     short loc_5EBBF9
 0x5EBBF2: mov     ecx, esi
 0x5EBBF4: call    sub_5E4FC0
-0x5EBBF9: lea     ecx, [esi+68h]
-0x5EBBFC: call    MagicTarget_RemoveAllEffects
+0x5EBBF9: lea     ecx, [esi+68h]; this
+0x5EBBFC: call    MagicTarget_RemoveAllEffects; Verified no-argument target method: walks the EffectNode chain and calls ActiveEffect_Base_Remove(effect, 1) for each nonnull entry. It marks/flushes effect termination but leaves list unlink, PostRemoveEffect, and deleting destruction to the process loop or explicit removal paths.
 0x5EBC01: mov     eax, [esi]
 0x5EBC03: mov     edx, [eax+1F8h]
 0x5EBC09: mov     ecx, esi
@@ -108,7 +108,7 @@
 0x5EBC58: call    edx
 0x5EBC5A: push    edi
 0x5EBC5B: push    esi
-0x5EBC5C: mov     ecx, offset ActorProcessManager_ptr
+0x5EBC5C: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x5EBC61: call    sub_674550
 0x5EBC66: mov     eax, ds:0B33A98h
 0x5EBC6B: cmp     [eax+0CD4h], bl
@@ -118,7 +118,7 @@
 0x5EBC7E: test    al, al
 0x5EBC80: jnz     short loc_5EBC8D
 0x5EBC82: push    esi
-0x5EBC83: mov     ecx, offset ActorProcessManager_ptr
+0x5EBC83: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x5EBC88: call    sub_6765A0
 0x5EBC8D: mov     eax, [esi+58h]
 0x5EBC90: cmp     eax, ebx
@@ -133,7 +133,7 @@
 0x5EBCAB: jnz     short loc_5EBCC8
 0x5EBCAD: push    ebx; newDeadState
 0x5EBCAE: mov     ecx, esi; this
-0x5EBCB0: call    Actor_HandleDeathSTate????
+0x5EBCB0: call    Actor_HandleDeathState
 0x5EBCB5: fldz
 0x5EBCB7: mov     ecx, [esi+58h]
 0x5EBCBA: mov     edx, [ecx]
@@ -160,7 +160,7 @@
 0x5EBCFC: mov     [esp+38h+var_4], ebx
 0x5EBD00: jz      short loc_5EBD0B
 0x5EBD02: mov     ecx, eax; this
-0x5EBD04: call    ??0MiddleLowProcess@@QAE@XZ; MiddleLowProcess::MiddleLowProcess(void)
+0x5EBD04: call    ??0MiddleLowProcess@@QAE@XZ; MiddleLowProcess constructor: derives from LowProcess and installs MiddleLowProcess vtable; no currentPackage or movementFlags storage.
 0x5EBD09: mov     ebx, eax
 0x5EBD0B: mov     eax, [esi+58h]
 0x5EBD0E: test    eax, eax
@@ -170,8 +170,8 @@
 0x5EBD23: mov     eax, [eax+8]
 0x5EBD26: test    eax, eax
 0x5EBD28: jz      loc_5EBE3B
-0x5EBD2E: mov     ecx, eax
-0x5EBD30: call    sub_567770
+0x5EBD2E: mov     ecx, eax; this
+0x5EBD30: call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.
 0x5EBD35: test    al, al
 0x5EBD37: jz      loc_5EBE3B
 0x5EBD3D: mov     ecx, [esi+58h]
@@ -182,7 +182,7 @@
 0x5EBD50: jnz     short loc_5EBD80
 0x5EBD52: mov     ecx, [esi+58h]
 0x5EBD55: mov     edi, [ecx]
-0x5EBD57: mov     ecx, offset TimeGlobals
+0x5EBD57: mov     ecx, 0B332E0h
 0x5EBD5C: call    TimeGlobals_GetGameHour
 0x5EBD61: fsub    qword ptr ds:0A2FAA0h
 0x5EBD67: mov     edx, [edi+1Ch]
@@ -209,7 +209,7 @@
 0x5EBDA1: call    sub_5E6BA0
 0x5EBDA6: test    al, al
 0x5EBDA8: jnz     loc_5EBE3B
-0x5EBDAE: call    sub_5EAE70
+0x5EBDAE: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x5EBDB3: jmp     loc_5EBE3B
 0x5EBDB8: mov     eax, [esi]
 0x5EBDBA: mov     edx, [eax+330h]
@@ -271,14 +271,14 @@
 0x5EBE51: mov     edx, [eax]
 0x5EBE53: push    1
 0x5EBE55: call    edx
-0x5EBE57: push    0
-0x5EBE59: push    0
-0x5EBE5B: push    1
-0x5EBE5D: push    2
-0x5EBE5F: push    esi
-0x5EBE60: mov     ecx, offset ActorProcessManager_ptr
+0x5EBE57: push    0; relativeTo
+0x5EBE59: push    0; insertRelative
+0x5EBE5B: push    1; append
+0x5EBE5D: push    2; processLevel
+0x5EBE5F: push    esi; object
+0x5EBE60: mov     ecx, (offset qword_B3BB2C+1D4h); this
 0x5EBE65: mov     [esi+58h], ebx
-0x5EBE68: call    sub_673A90
+0x5EBE68: call    ActorProcessManager_AddMobileObject; Generic ActorProcessManager insertion. Selects process-level collection 0..3, silently returns if object->GetProcessLevel() does not match, then inserts with ordering controls. Returns void; there is no insertion-success result. Used for actors, load/resurrection paths, and projectiles.
 0x5EBE6D: cmp     [esp+38h+var_21], 0
 0x5EBE72: jz      short loc_5EBEA6
 0x5EBE74: test    ebp, ebp
@@ -358,7 +358,7 @@
 0x5EBF55: mov     ecx, esi
 0x5EBF57: call    edx
 0x5EBF59: mov     ecx, eax; this
-0x5EBF5B: call    Actor__GetProcessLevel
+0x5EBF5B: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x5EBF60: test    eax, eax
 0x5EBF62: jnz     loc_5EC099
 0x5EBF68: mov     eax, [esi]
@@ -378,7 +378,7 @@
 0x5EBF9F: jz      loc_5EC07F
 0x5EBFA5: mov     ecx, [esi+58h]
 0x5EBFA8: mov     edi, [ecx]
-0x5EBFAA: mov     ecx, offset TimeGlobals
+0x5EBFAA: mov     ecx, 0B332E0h
 0x5EBFAF: call    TimeGlobals_GetGameHour
 0x5EBFB4: fsub    qword ptr ds:0A2FAA0h
 0x5EBFBA: mov     edx, [edi+1Ch]
@@ -405,10 +405,10 @@
 0x5EC003: cmp     dword ptr [eax+570h], 0
 0x5EC00A: jz      short loc_5EC065
 0x5EC00C: mov     ecx, [eax+570h]; this
-0x5EC012: call    TESObjectREFR_GetParentCell
+0x5EC012: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5EC017: mov     ecx, esi; this
 0x5EC019: mov     edi, eax
-0x5EC01B: call    TESObjectREFR_GetParentCell
+0x5EC01B: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5EC020: cmp     eax, edi
 0x5EC022: jnz     short loc_5EC065
 0x5EC024: mov     eax, ds:0B333C4h
@@ -426,7 +426,7 @@
 0x5EC04B: mov     ecx, eax
 0x5EC04D: call    sub_4121A0
 0x5EC052: lea     ecx, [esp+38h+var_18]
-0x5EC056: call    sub_404C90
+0x5EC056: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x5EC05B: fdiv    qword ptr ds:0A3DDE0h
 0x5EC061: fstp    [esp+38h+var_20]
 0x5EC065: mov     ecx, [esi+58h]
@@ -443,7 +443,7 @@
 0x5EC089: mov     ecx, esi
 0x5EC08B: call    eax
 0x5EC08D: mov     ecx, esi; int
-0x5EC08F: call    sub_5EAE70
+0x5EC08F: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x5EC094: jmp     loc_5EC154
 0x5EC099: mov     edx, [esi]
 0x5EC09B: mov     eax, [edx+330h]
@@ -458,7 +458,7 @@
 0x5EC0BC: mov     ecx, esi
 0x5EC0BE: call    eax
 0x5EC0C0: mov     ecx, eax
-0x5EC0C2: call    sub_6162D0
+0x5EC0C2: call    CombatController_RemoveTarget
 0x5EC0C7: jmp     loc_5EC154
 0x5EC0CC: mov     edx, [esi]
 0x5EC0CE: mov     eax, [edx+78h]
@@ -483,7 +483,7 @@
 0x5EC109: jnz     short loc_5EC154
 0x5EC10B: mov     ecx, [esi+58h]
 0x5EC10E: mov     edi, [ecx]
-0x5EC110: mov     ecx, offset TimeGlobals
+0x5EC110: mov     ecx, 0B332E0h
 0x5EC115: call    TimeGlobals_GetGameHour
 0x5EC11A: fsub    qword ptr ds:0A2FAA0h
 0x5EC120: mov     edx, [edi+1Ch]
@@ -495,15 +495,15 @@
 0x5EC132: call    edx
 0x5EC134: push    2
 0x5EC136: push    esi
-0x5EC137: mov     ecx, offset ActorProcessManager_ptr
+0x5EC137: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x5EC13C: call    sub_674550
-0x5EC141: push    0
-0x5EC143: push    0
-0x5EC145: push    0
-0x5EC147: push    2
-0x5EC149: push    esi
-0x5EC14A: mov     ecx, offset ActorProcessManager_ptr
-0x5EC14F: call    sub_673A90
+0x5EC141: push    0; relativeTo
+0x5EC143: push    0; insertRelative
+0x5EC145: push    0; append
+0x5EC147: push    2; processLevel
+0x5EC149: push    esi; object
+0x5EC14A: mov     ecx, (offset qword_B3BB2C+1D4h); this
+0x5EC14F: call    ActorProcessManager_AddMobileObject; Generic ActorProcessManager insertion. Selects process-level collection 0..3, silently returns if object->GetProcessLevel() does not match, then inserts with ordering controls. Returns void; there is no insertion-success result. Used for actors, load/resurrection paths, and projectiles.
 0x5EC154: mov     byte ptr [esi+0CAh], 1
 0x5EC15B: mov     al, 1
 0x5EC15D: mov     ecx, dword ptr [esp+38h+var_C]
@@ -515,3 +515,15 @@
 0x5EC16C: pop     ebx
 0x5EC16D: add     esp, 24h
 0x5EC170: retn
+0x9C26D0: mov     eax, [ebp-1Ch]
+0x9C26D3: push    eax
+0x9C26D4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C26D9: pop     ecx
+0x9C26DA: retn
+0x9C26DB: mov     edx, [esp+arg_4]
+0x9C26DF: lea     eax, [edx-28h]
+0x9C26E2: mov     ecx, [edx-2Ch]
+0x9C26E5: xor     ecx, eax
+0x9C26E7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C26EC: mov     eax, offset stru_AEB550
+0x9C26F1: jmp     ___CxxFrameHandler3

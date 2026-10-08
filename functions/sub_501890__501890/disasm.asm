@@ -1,4 +1,4 @@
-0x501890: sub     esp, 10h
+0x501890: sub     esp, 10h; ForceAV / ForceActorValue computes target-current and applies that delta through the float script-offset or damage modifier. It changes current AV state, not the base skill progression record.
 0x501893: mov     edx, [esp+10h+l]
 0x501897: push    esi
 0x501898: mov     esi, [esp+14h+a4]
@@ -20,7 +20,7 @@
 0x5018C0: push    ecx; a1
 0x5018C1: mov     dword ptr [esp+38h+var_10], 0
 0x5018C9: mov     dword ptr [esp+38h+var_C], 0
-0x5018D1: call    Script_ExtractArgs
+0x5018D1: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x5018D6: add     esp, 24h
 0x5018D9: test    al, al
 0x5018DB: jnz     short loc_5018E2
@@ -58,13 +58,13 @@
 0x501938: mov     ecx, esi
 0x50193A: jz      short loc_50194B
 0x50193C: mov     edx, [eax+2A4h]
-0x501942: call    edx
+0x501942: call    edx; Console ForceAV uses the float damage-modifier channel.
 0x501944: mov     al, 1
 0x501946: pop     esi
 0x501947: add     esp, 10h
 0x50194A: retn
 0x50194B: mov     edx, [eax+29Ch]
-0x501951: call    edx
+0x501951: call    edx; Script ForceAV uses the float script-offset channel.
 0x501953: mov     al, 1
 0x501955: pop     esi
 0x501956: add     esp, 10h

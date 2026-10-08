@@ -1,1 +1,1 @@
-NiLODData
+struct NiLODData;

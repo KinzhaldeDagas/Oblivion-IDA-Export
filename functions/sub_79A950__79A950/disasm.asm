@@ -1,9 +1,9 @@
-0x79A950: push    ebx
-0x79A951: mov     ebx, [esp+4+arg_4]
+0x79A950: push    ebx; Forward copy/assignment of initialized 0x38-byte SFrondVertex records from [first,last) into destinationFirst; returns destination end.
+0x79A951: mov     ebx, [esp+4+last]
 0x79A955: push    ebp
-0x79A956: mov     ebp, [esp+8+arg_8]
+0x79A956: mov     ebp, [esp+8+destinationFirst]
 0x79A95A: push    esi
-0x79A95B: mov     esi, [esp+0Ch+arg_0]
+0x79A95B: mov     esi, [esp+0Ch+first]
 0x79A95F: mov     ecx, ebx
 0x79A961: sub     ecx, esi
 0x79A963: mov     eax, 92492493h

@@ -1,19 +1,36 @@
 {
-  "callees_count": 44,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 28,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_4E9CA0",
+  "chunks": [
+    [
+      "0x4E9CA0",
+      "0x4E9F1D"
+    ],
+    [
+      "0x9B6090",
+      "0x9B60C0"
+    ]
+  ],
+  "chunks_sha256": "426ba9114903b9aef7e678a9fd3826d473f2aa5ab7c6559976062c57473e3484",
+  "comment_regular": "Verified TESRoad RGRP loader resolves each 12-byte target XYZ through the road's coordinate lookup and rebuilds adjacency pointers. This differs from TESPathGrid's PGRR u16 point-index stream.",
+  "comment_repeatable": "Verified TESRoad RGRP loader resolves each 12-byte target XYZ through the road's coordinate lookup and rebuilds adjacency pointers. This differs from TESPathGrid's PGRR u16 point-index stream.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "TESRoad_LoadForm",
   "end_ea": "0x4E9F1D",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_4E9CA0",
+  "name": "TESRoad_LoadForm",
   "segment": ".text",
   "sha256": "667ccf39ec85fa5cd165dc5f0aa1d666a07d9f57c38007dd87b8a5ecd4274f61",
   "size": 637,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E9CA0",
-  "type": "char __thiscall(TESForm *this, Data *)",
-  "xrefs_from_count": 255,
+  "total_chunk_size": 685,
+  "type": "bool __thiscall(TESRoad *this, Data *file)",
+  "xrefs_from_count": 273,
   "xrefs_to_count": 1
 }

@@ -1,4 +1,4 @@
-0x98D79B: push    dword_BAA5C4
+0x98D79B: push    dword_BA9E10+7B4h
 0x98D7A1: call    __decode_pointer
 0x98D7A6: test    eax, eax
 0x98D7A8: pop     ecx

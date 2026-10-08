@@ -1,1 +1,1 @@
-0x754E80: jmp     sub_715F40
+0x754E80: jmp     NiTimeController_LoadBinary; Load persistent NiTimeController state: flags +0x08, frequency/phase/key bounds, and target/next links. Legacy migration clears flag bit 0x20 before stream version 0x0A01006D. Runtime time caches and update bytes are constructor state, not serialized.

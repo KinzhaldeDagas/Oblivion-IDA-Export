@@ -1,4 +1,4 @@
-0x795260: mov     eax, [esp+arg_0]
+0x795260: mov     eax, [esp+count]; OBLIVION AUTHORITY (2026-08-30): Initializes raw vector<unsigned short> storage, enforcing the 0x7FFFFFFF element limit and allocating count*2.
 0x795264: push    esi
 0x795265: mov     esi, ecx
 0x795267: xor     ecx, ecx
@@ -12,7 +12,7 @@
 0x795279: retn    4
 0x79527C: cmp     eax, 0FFFFFFFFh
 0x79527F: jbe     short loc_795286
-0x795281: call    sub_790B90
+0x795281: call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error("vector<T> too long") and throws; used by multiple element specializations after max_size checks.
 0x795286: push    edi
 0x795287: lea     edi, [eax+eax]
 0x79528A: push    edi; Size

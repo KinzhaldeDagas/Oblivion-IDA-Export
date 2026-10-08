@@ -55,15 +55,15 @@
 0x4BC88B: test    eax, eax
 0x4BC88D: mov     [esp+28h+var_4], 0
 0x4BC895: jz      short loc_4BC8A0
-0x4BC897: mov     ecx, eax
-0x4BC899: call    sub_47F920
+0x4BC897: mov     ecx, eax; this
+0x4BC899: call    NiAlphaProperty_ctor; Constructs a 0x1C NiAlphaProperty over NiObjectNET: installs NiAlphaProperty vtable, initializes flags to 0x00EC and threshold byte to 0.
 0x4BC89E: jmp     short loc_4BC8A2
 0x4BC8A0: xor     eax, eax
 0x4BC8A2: or      word ptr [eax+18h], 1
 0x4BC8A7: push    eax; a2
 0x4BC8A8: mov     ecx, edi; this
 0x4BC8AA: mov     [esp+2Ch+var_4], 0FFFFFFFFh
-0x4BC8B2: call    sub_405680
+0x4BC8B2: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x4BC8B7: push    1Ch; Size
 0x4BC8B9: call    FormHeapAlloc
 0x4BC8BE: mov     esi, eax
@@ -85,7 +85,7 @@
 0x4BC8F7: mov     ecx, edi; this
 0x4BC8F9: mov     [esp+2Ch+var_4], 0FFFFFFFFh
 0x4BC901: mov     [esi+18h], ax
-0x4BC905: call    sub_405680
+0x4BC905: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x4BC90A: mov     eax, edi
 0x4BC90C: mov     ecx, [esp+28h+var_C]
 0x4BC910: mov     large fs:0, ecx
@@ -94,3 +94,20 @@
 0x4BC919: pop     esi
 0x4BC91A: add     esp, 1Ch
 0x4BC91D: retn
+0x9B4200: mov     eax, [ebp+4]
+0x9B4203: push    eax
+0x9B4204: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B4209: pop     ecx
+0x9B420A: retn
+0x9B420B: mov     eax, [ebp+4]
+0x9B420E: push    eax
+0x9B420F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B4214: pop     ecx
+0x9B4215: retn
+0x9B4216: mov     edx, [esp+arg_4]
+0x9B421A: lea     eax, [edx-18h]
+0x9B421D: mov     ecx, [edx-1Ch]
+0x9B4220: xor     ecx, eax
+0x9B4222: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B4227: mov     eax, offset stru_ADF938
+0x9B422C: jmp     ___CxxFrameHandler3

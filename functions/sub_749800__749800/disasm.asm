@@ -1,4 +1,4 @@
-0x749800: push    ebx
+0x749800: push    ebx; Pass221: Refcounted NiTPointerList head-insert helper; node+0x08 owns the payload reference.
 0x749801: push    ebp
 0x749802: push    esi
 0x749803: mov     esi, ecx
@@ -6,7 +6,7 @@
 0x749807: mov     edx, [eax+4]
 0x74980A: push    edi
 0x74980B: call    edx
-0x74980D: mov     ebp, [esp+10h+arg_0]
+0x74980D: mov     ebp, [esp+10h+payload]
 0x749811: mov     edi, eax
 0x749813: mov     ebx, [edi+8]
 0x749816: cmp     ebx, [ebp+0]

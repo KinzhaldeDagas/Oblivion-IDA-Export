@@ -1,1 +1,1 @@
-LFH_block_type_0
+typedef LFH_block_type LFH_block_type_0;

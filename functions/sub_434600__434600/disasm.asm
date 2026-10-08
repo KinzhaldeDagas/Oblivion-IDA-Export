@@ -1,4 +1,4 @@
-0x434600: push    esi
+0x434600: push    esi; QueuedFileEntry path copy helper. Allocates and copies source path string into entry +0x20.
 0x434601: mov     esi, [esp+4+arg_0]
 0x434605: test    esi, esi
 0x434607: push    edi

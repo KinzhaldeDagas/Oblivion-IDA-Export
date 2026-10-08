@@ -1,4 +1,4 @@
-0x414F80: push    esi
+0x414F80: push    esi; EffectItemList_HasScriptEffect: true only when the effect item's script pointer matches and its EffectSetting flags do not include 0x400000.
 0x414F81: mov     esi, ecx
 0x414F83: cmp     dword ptr [esi+8], 0
 0x414F87: jnz     short loc_414F95

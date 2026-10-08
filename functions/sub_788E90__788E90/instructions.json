@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x788E90",
-    "line": "push    ecx",
+    "line": "push    ecx; Oblivion stdcall adapter for uninitialized fill-N of trivial 28-byte collision records; returns destination + count.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x788E91",
-    "line": "mov     edx, [esp+4+arg_8]",
+    "line": "mov     edx, [esp+4+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x788E96",
-    "line": "mov     esi, [esp+8+arg_4]",
+    "line": "mov     esi, [esp+8+count]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x788E9B",
-    "line": "mov     edi, [esp+0Ch+arg_0]",
+    "line": "mov     edi, [esp+0Ch+destination]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x788EA9",
-    "line": "mov     eax, [esp+10h+arg_8]",
+    "line": "mov     eax, [esp+10h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -73,25 +73,25 @@
   },
   {
     "ea": "0x788EAF",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x788EB0",
-    "line": "push    esi",
+    "line": "push    esi; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x788EB1",
-    "line": "push    edi",
+    "line": "push    edi; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x788EB2",
-    "line": "call    sub_788AE0",
+    "line": "call    OB_stVector_CollisionObject_UninitializedFillN_010201A0; Oblivion collision-vector uninitialized fill-N primitive: constructs count trivial 28-byte records by copying the supplied value and returns one-past-last.",
     "mnemonic": "call",
     "size": 5
   },

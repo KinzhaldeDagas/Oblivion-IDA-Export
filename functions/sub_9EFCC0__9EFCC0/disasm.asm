@@ -1,7 +1,7 @@
 0x9EFCC0: fld1
 0x9EFCC2: push    ecx
 0x9EFCC3: fstp    [esp+4+var_4]; float
-0x9EFCC6: mov     ecx, offset fAbsorbCoreColorB
+0x9EFCC6: mov     ecx, (offset flt_B37ED0+370h)
 0x9EFCCB: push    offset aFabsorbcorec_1; "fAbsorbCoreColorB"
 0x9EFCD0: call    GameSetting_ConstrAndReg_float
 0x9EFCD5: push    offset sub_A20BA0; void (__cdecl *)()

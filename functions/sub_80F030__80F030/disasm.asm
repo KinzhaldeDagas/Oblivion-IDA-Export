@@ -3,7 +3,7 @@
 0x80F032: mov     edi, [esp+8+arg_0]
 0x80F036: push    4
 0x80F038: mov     ecx, edi
-0x80F03A: call    NiNode_GetNiPropertyByID
+0x80F03A: call    NiNode_GetNiPropertyByID;
 0x80F03F: mov     esi, eax
 0x80F041: test    esi, esi
 0x80F043: jz      short loc_80F058

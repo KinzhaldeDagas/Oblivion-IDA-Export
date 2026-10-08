@@ -1,4 +1,4 @@
-0x76FE20: sub     esp, 38h
+0x76FE20: sub     esp, 38h; Oblivion-authoritative vertex-stream packer: ensures declaration state, updates GeometryBufferData declaration/stride/software-VP metadata, allocates or refreshes the vertex-buffer chip, maps it, packs enabled semantics, then unlocks.
 0x76FE23: push    ebx
 0x76FE24: mov     ebx, [esp+3Ch+arg_0]
 0x76FE28: push    ebp
@@ -47,7 +47,7 @@
 0x76FE94: mov     eax, [esp+48h+var_34]
 0x76FE98: push    eax
 0x76FE99: mov     ecx, edi
-0x76FE9B: call    sub_7780D0
+0x76FE9B: call    sub_7780D0; MoonSugarEffect decode: NiGeometryBufferData SetVertexDeclaration-style input ownership. Releases the previous declaration, AddRefs the new one, stores it, and clears FVF. World mask shaders must not mutate this unless they own/repacked the BuffData layout.
 0x76FEA0: mov     esi, [esp+48h+arg_14]
 0x76FEA4: cmp     esi, [edi+1Ch]
 0x76FEA7: jnb     short loc_76FEBB
@@ -106,12 +106,12 @@
 0x76FF48: mov     ecx, [ebp+0Ch]
 0x76FF4B: push    esi
 0x76FF4C: push    edi
-0x76FF4D: call    NiGeometryBufferData__RefreshVBChips
+0x76FF4D: call    NiGeometryBufferData__RefreshVBChips; MoonSugarEffect decode: NiGeometryBufferData::RefreshVBChips. Releases the existing geometry-group chip for this stream, creates a replacement chip through NiGeometryGroup, and stores it in VBChip[stream] if stream is in range. This is allocation/lifetime ownership, not a safe mask-pass getter.
 0x76FF52: test    al, al
 0x76FF54: jz      loc_76FE7C
 0x76FF5A: push    esi
 0x76FF5B: mov     ecx, edi
-0x76FF5D: call    sub_761AC0
+0x76FF5D: call    sub_761AC0; MoonSugarEffect decode: NiGeometryBufferData VBChip getter. Returns VBChip[stream] only when stream < StreamCount; no allocation or refresh. This is the safe read-side primitive for already-packed mask submission.
 0x76FF62: mov     [esp+48h+arg_10], eax
 0x76FF66: mov     [esp+48h+arg_C], 0FFFh
 0x76FF6E: mov     ebx, eax
@@ -119,12 +119,12 @@
 0x76FF73: mov     ecx, [ebx+14h]
 0x76FF76: mov     edx, [ebx+0Ch]
 0x76FF79: mov     edi, [ebx+8]
-0x76FF7C: push    eax; int
-0x76FF7D: push    ecx; Size
-0x76FF7E: mov     ecx, [ebp+0Ch]
-0x76FF81: push    edx; int
-0x76FF82: push    edi; int
-0x76FF83: call    sub_776C90
+0x76FF7C: push    eax; flags
+0x76FF7D: push    ecx; byteCount
+0x76FF7E: mov     ecx, [ebp+0Ch]; self
+0x76FF81: push    edx; offsetBytes
+0x76FF82: push    edi; buffer
+0x76FF83: call    NiDX9VertexBufferManager_LockToStaging; MoonSugarEffect decode: VB lock helper. Locks D3D VB, caches original bytes in a staging buffer, and returns a writable pointer; unlock is handled by packers when they own the lock.
 0x76FF88: mov     ebx, [esp+48h+arg_0]
 0x76FF8C: mov     [esp+48h+arg_18], eax
 0x76FF90: xor     eax, eax
@@ -194,7 +194,7 @@
 0x770069: push    ebx
 0x77006A: push    ecx
 0x77006B: mov     ecx, ebp
-0x77006D: call    sub_76F590
+0x77006D: call    NiDX9ShaderDeclaration__PackElement; Per-element vertex declaration pack/copy dispatcher used by PackVertexStream; converts source geometry semantics/types into the declaration's destination layout.
 0x770072: mov     eax, [esp+48h+var_30]
 0x770076: add     eax, 1
 0x770079: add     edi, 1Ch
@@ -220,14 +220,14 @@
 0x7700B3: mov     ecx, [esp+60h+arg_4]
 0x7700B7: push    edx
 0x7700B8: push    eax
-0x7700B9: call    sub_72AF20
+0x7700B9: call    sub_72AF20; Verified shared weighted-skin transform: composes per-bone NiTransforms, traverses per-vertex bone indices/weights, transforms source positions/normals and accumulates into caller-provided output arrays. BSTempEffectGeometryDecal_InitializeUsingSkinnedGeometryData passes its source skinData and NiGeometryData vertex/normal arrays here; NiDX9ShaderDeclaration_PackVertexStream is another caller. This is general renderer skinning code, not a blood-specific routine.
 0x7700BE: cmp     byte ptr [esp+48h+arg_14], 0
 0x7700C3: jz      short loc_7700DD
 0x7700C5: mov     ecx, [esp+48h+arg_10]
 0x7700C9: mov     eax, [ecx+8]
 0x7700CC: mov     ecx, [ebp+0Ch]
 0x7700CF: push    eax
-0x7700D0: call    sub_776D80
+0x7700D0: call    sub_776D80; MoonSugarEffect decode: vertex-buffer-manager unlock/staging helper. Copies the staging buffer back to the locked D3D buffer, clears lock bookkeeping, leaves the critical section, then calls the vertex buffer Unlock vtable slot.
 0x7700D5: test    al, al
 0x7700D7: jz      loc_76FE7C
 0x7700DD: mov     eax, [esp+48h+arg_10]

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5F8300",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Recomputes Quiver Arrow:0/ArrowN visibility from the current equipped-AMMO inventory count. animData selects the perspective/cache and quiverNode may supply an already resolved node.",
     "mnemonic": "push",
     "size": 2
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x5F836E",
-    "line": "call    ContainerExtraData_GetItemCount",
+    "line": "call    ContainerExtraData_GetItemCount; ContainerChanges item-count logic: start with the base TESContainer count (made absolute), find matching EntryData, then combine countDelta. If the base count and delta are both 0 but an EntryData exists, return 1; the GetItemCount evaluator takes the final absolute value.",
     "mnemonic": "call",
     "size": 5
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x5F837C",
-    "line": "mov     ebp, [esp+2Ch+arg_0]",
+    "line": "mov     ebp, [esp+2Ch+animData]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x5F8391",
-    "line": "mov     edi, [esp+2Ch+arg_4]",
+    "line": "mov     edi, [esp+2Ch+quiverNode]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x5F83BD",
-    "line": "and     word ptr [eax+18h], 0FFFEh",
+    "line": "and     word ptr [eax+18h], 0FFFEh; Always clear hidden bit 0 on Quiver/Arrow:0 before rebuilding the visible-count mask.",
     "mnemonic": "and",
     "size": 6
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x5F840B",
-    "line": "jl      short loc_5F8414",
+    "line": "jl      short loc_5F8414; For ArrowN indices 1..iMaxArrowsInQuiver-1: visible when N < current AMMO count, hidden otherwise.",
     "mnemonic": "jl",
     "size": 2
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x5F8423",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -664,5 +664,59 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C2A40",
+    "line": "lea     ecx, [ebp-14h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2A43",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2A48",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C2A4C",
+    "line": "lea     eax, [edx-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2A4F",
+    "line": "mov     ecx, [edx-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2A52",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C2A54",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2A59",
+    "line": "mov     eax, offset stru_AEB7F4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2A5E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

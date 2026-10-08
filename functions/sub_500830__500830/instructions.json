@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x500830",
-    "line": "cmp     byte ptr ds:0B42CDAh, 0",
+    "line": "cmp     byte ptr ds:0B42CDAh, 0; Read the current debug replay state before toggling it; registered console command is the only producer.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x50083A",
-    "line": "mov     ds:0B42CDAh, al",
+    "line": "mov     ds:0B42CDAh, al; Sole write to g_bRendererAccumulationFrozen: AL is the logical inverse of the previous value.",
     "mnemonic": "mov",
     "size": 5
   },

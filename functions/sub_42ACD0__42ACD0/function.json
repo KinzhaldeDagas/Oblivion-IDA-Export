@@ -1,19 +1,32 @@
 {
-  "callees_count": 8,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 7,
-  "display_name": "sub_42ACD0",
+  "chunks": [
+    [
+      "0x42ACD0",
+      "0x42AD62"
+    ]
+  ],
+  "chunks_sha256": "6a50e3675adb5db9d4886f193a449ac0ef3b795f7452c02a41413a27ea2c2ac6",
+  "comment_regular": "Verified: computes the PlayerCharacter-scaled lock magnitude from ExtraLockData, applies the iLockLevelMaxVeryEasy/Easy/Average/Hard/VeryHard thresholds, and returns a LOCK_LEVEL value 0..5. Its direct caller indexes LockLevelNames with this result to display the lock category.",
+  "comment_repeatable": "Verified: computes the PlayerCharacter-scaled lock magnitude from ExtraLockData, applies the iLockLevelMaxVeryEasy/Easy/Average/Hard/VeryHard thresholds, and returns a LOCK_LEVEL value 0..5. Its direct caller indexes LockLevelNames with this result to display the lock category.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 13,
+  "display_name": "ExtraLockData_GetLockLevelCategory",
   "end_ea": "0x42AD62",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_42ACD0",
+  "name": "ExtraLockData_GetLockLevelCategory",
   "segment": ".text",
   "sha256": "6a50e3675adb5db9d4886f193a449ac0ef3b795f7452c02a41413a27ea2c2ac6",
   "size": 146,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x42ACD0",
-  "type": "int __thiscall(char *this)",
-  "xrefs_from_count": 53,
+  "total_chunk_size": 146,
+  "type": "LOCK_LEVEL __thiscall(ExtraLockData *this)",
+  "xrefs_from_count": 59,
   "xrefs_to_count": 1
 }

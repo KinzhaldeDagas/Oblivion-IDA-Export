@@ -1,1 +1,1 @@
-StorageInternalImpl_0
+typedef StorageInternalImpl StorageInternalImpl_0;

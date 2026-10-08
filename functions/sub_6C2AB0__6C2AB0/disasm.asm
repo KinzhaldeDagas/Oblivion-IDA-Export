@@ -24,7 +24,7 @@
 0x6C2AEF: push    ebp; int
 0x6C2AF0: push    ecx
 0x6C2AF1: fstp    [esp+4Ch+var_4C]; float
-0x6C2AF4: call    sub_6D31B0
+0x6C2AF4: call    NiAnimationKey_FindInsertionIndex; Finds the sorted insertion index for a requested key time using the registered record stride. Returns false when an exact timestamp already exists, preventing duplicate boundary insertion.
 0x6C2AF9: add     esp, 14h
 0x6C2AFC: test    al, al
 0x6C2AFE: jz      loc_6C2C3F
@@ -49,7 +49,7 @@
 0x6C2B34: test    eax, eax
 0x6C2B36: mov     [esp+38h+var_4], 0
 0x6C2B3E: jz      short loc_6C2B5C
-0x6C2B40: push    offset ?ClearComponentReferences@TESTexture@@UAEXXZ?; a5
+0x6C2B40: push    offset Shared_NoOpVirtual_60D0A0; a5
 0x6C2B45: push    offset sub_6C0AD0; a4
 0x6C2B4A: push    esi; size
 0x6C2B4B: lea     ebx, [eax+4]
@@ -64,11 +64,11 @@
 0x6C2B62: lea     ecx, [eax+eax*4]
 0x6C2B65: add     ecx, ecx
 0x6C2B67: add     ecx, ecx
-0x6C2B69: push    ecx; Size
-0x6C2B6A: push    ebp; Src
-0x6C2B6B: push    esi; Dst
+0x6C2B69: push    ecx; byteCount
+0x6C2B6A: push    ebp; source
+0x6C2B6B: push    esi; destination
 0x6C2B6C: mov     [esp+44h+var_4], 0FFFFFFFFh
-0x6C2B74: call    _memcpy
+0x6C2B74: call    _memcpy;
 0x6C2B79: mov     ecx, [edi]
 0x6C2B7B: mov     edx, [esp+44h+var_24]
 0x6C2B7F: add     esp, 0Ch
@@ -81,12 +81,12 @@
 0x6C2B90: add     eax, eax
 0x6C2B92: add     eax, eax
 0x6C2B94: add     edx, edx
-0x6C2B96: push    edx; Size
+0x6C2B96: push    edx; byteCount
 0x6C2B97: lea     ecx, [eax+ebp]
-0x6C2B9A: push    ecx; Src
+0x6C2B9A: push    ecx; source
 0x6C2B9B: lea     edx, [eax+esi+14h]
-0x6C2B9F: push    edx; Dst
-0x6C2BA0: call    _memcpy
+0x6C2B9F: push    edx; destination
+0x6C2BA0: call    _memcpy;
 0x6C2BA5: add     esp, 0Ch
 0x6C2BA8: mov     eax, [edi]
 0x6C2BAA: fld     [esp+38h+arg_0]
@@ -117,14 +117,14 @@
 0x6C2BF4: test    ebp, ebp
 0x6C2BF6: jz      short loc_6C2C15
 0x6C2BF8: mov     eax, [ebp-4]
-0x6C2BFB: push    offset ?ClearComponentReferences@TESTexture@@UAEXXZ?; void (__thiscall *)(void *)
+0x6C2BFB: push    offset Shared_NoOpVirtual_60D0A0; void (__thiscall *)(void *)
 0x6C2C00: lea     ebx, [ebp-4]
 0x6C2C03: push    eax; int
 0x6C2C04: push    14h; unsigned int
 0x6C2C06: push    ebp; void *
 0x6C2C07: call    $LN21
 0x6C2C0C: push    ebx
-0x6C2C0D: call    FormHeapFree
+0x6C2C0D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6C2C12: add     esp, 4
 0x6C2C15: mov     ecx, [esp+38h+arg_4]
 0x6C2C19: mov     [ecx], esi
@@ -154,3 +154,15 @@
 0x6C2C50: pop     ebx
 0x6C2C51: add     esp, 24h
 0x6C2C54: retn
+0x9C71A0: mov     eax, [ebp-20h]
+0x9C71A3: push    eax
+0x9C71A4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C71A9: pop     ecx
+0x9C71AA: retn
+0x9C71AB: mov     edx, [esp+arg_4]
+0x9C71AF: lea     eax, [edx-28h]
+0x9C71B2: mov     ecx, [edx-2Ch]
+0x9C71B5: xor     ecx, eax
+0x9C71B7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C71BC: mov     eax, offset stru_AEF610
+0x9C71C1: jmp     ___CxxFrameHandler3

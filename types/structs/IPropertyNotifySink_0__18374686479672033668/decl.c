@@ -1,1 +1,1 @@
-IPropertyNotifySink_0
+typedef IPropertyNotifySink IPropertyNotifySink_0;

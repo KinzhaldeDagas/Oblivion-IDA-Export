@@ -19,9 +19,9 @@
 0x5D95BB: mov     esi, eax
 0x5D95BD: call    InterfaceManager_GetDepth
 0x5D95C2: fstp    [esp+10h+var_4]
-0x5D95C6: mov     ecx, [esi+68h]; TileWindow *
+0x5D95C6: mov     ecx, [esi+68h]; this
 0x5D95C9: push    offset aDataMenusDia_4; "Data\\Menus\\dialog\\spell_purchase.xml"
-0x5D95CE: call    Menu_LoadXML
+0x5D95CE: call    Tile__ReadFile; Verified: SDK ReadXML entry. Builds named tree under receiver via 0x590330, connects/evaluates traits via 0x58CF40, registers subtemplates with owning Menu, frees build storage, refreshes returned subtree via 0x58FBA0. Returns first created tile. Fallout analogue 0x827E2588; cache/cleanup differs.
 0x5D95D3: mov     ebp, eax
 0x5D95D5: mov     ecx, ebp
 0x5D95D7: call    Tile_GetParentMenu
@@ -91,10 +91,10 @@
 0x5D96A0: jp      short loc_5D96B6
 0x5D96A2: fld     [esp+10h+var_4]
 0x5D96A6: push    ecx
-0x5D96A7: fstp    [esp+14h+a3]; a3
-0x5D96AA: push    0FABh; a2
+0x5D96A7: fstp    [esp+14h+a3]; value
+0x5D96AA: push    0FABh; propertyCode
 0x5D96AF: mov     ecx, ebp; this
-0x5D96B1: call    Tile_SetFloat
+0x5D96B1: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D96B6: push    ebx
 0x5D96B7: mov     ebx, [esp+14h+arg_0]
 0x5D96BB: mov     ecx, esi
@@ -103,9 +103,9 @@
 0x5D96C5: push    0; char
 0x5D96C7: mov     ecx, edi; int
 0x5D96C9: call    EnableMenu
-0x5D96CE: push    1
-0x5D96D0: push    5
-0x5D96D2: call    TESTopic__GEtTopic
+0x5D96CE: push    1; index
+0x5D96D0: push    5; topicType
+0x5D96D2: call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.
 0x5D96D7: mov     ecx, ds:0B33398h
 0x5D96DD: mov     ecx, [ecx+24h]
 0x5D96E0: add     esp, 8

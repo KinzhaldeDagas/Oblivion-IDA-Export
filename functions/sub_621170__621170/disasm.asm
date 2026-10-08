@@ -1,4 +1,4 @@
-0x621170: push    edi
+0x621170: push    edi; Requires shooter HighProcess. Iterates cached controller+0x15C allies, or temporary combat-group friendlies if no controller.
 0x621171: mov     edi, [esp+4+arg_0]
 0x621175: test    edi, edi
 0x621177: jz      loc_621265
@@ -41,7 +41,7 @@
 0x6211E7: push    eax
 0x6211E8: push    ebp
 0x6211E9: push    edi
-0x6211EA: call    sub_620050
+0x6211EA: call    Combat_CheckActorBlocksRangedTarget; Vanilla quirk: result is overwritten for each ally and no early exit occurs. Final return reflects only the last list element, though every blocking ally receives the side effect.
 0x6211EF: add     esp, 18h
 0x6211F2: test    esi, esi
 0x6211F4: mov     ebx, eax
@@ -53,15 +53,14 @@
 0x6211FC: retn
 0x6211FD: push    0
 0x6211FF: push    edi
-0x621200: mov     ecx, offset dword_B3BDB0
-0x621205: call    sub_67C880
+0x621200: mov     ecx, (offset qword_B3BB2C+284h)
+0x621205: call    CombatGroupManager_BuildFriendlyEntryList; Builds temporary BSSimpleList of combat-group friendly entry pointers: same team byte, mount/rider equivalence, and shouldActorFight<=0. arg=0 disables process-level filter.
 0x62120A: mov     esi, eax
 0x62120C: test    esi, esi
 0x62120E: mov     [esp+10h+arg_0], esi
 0x621212: jz      short loc_62125E
 0x621214: mov     ebp, [esp+10h+arg_4]
 0x621218: jmp     short loc_621220
-0x62121A: align 10h
 0x621220: fld     [esp+10h+arg_10]
 0x621224: mov     eax, [esi]
 0x621226: mov     edx, [esp+10h+arg_8]
@@ -75,16 +74,16 @@
 0x621239: push    eax
 0x62123A: push    ebp
 0x62123B: push    edi
-0x62123C: call    sub_620050
+0x62123C: call    Combat_CheckActorBlocksRangedTarget; Read-mostly lane test for one ally: predictive target/ally yaw plus local horizontal bound width. Success has a controller side effect, so SmartAI must not call it as a query.
 0x621241: add     esp, 18h
 0x621244: test    esi, esi
 0x621246: mov     ebx, eax
 0x621248: jnz     short loc_621220
 0x62124A: mov     esi, [esp+10h+arg_0]
 0x62124E: mov     ecx, esi
-0x621250: call    BSSimpleList_Clear
+0x621250: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x621255: push    esi
-0x621256: call    FormHeapFree
+0x621256: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x62125B: add     esp, 4
 0x62125E: pop     esi
 0x62125F: pop     ebp

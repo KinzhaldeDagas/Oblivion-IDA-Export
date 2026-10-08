@@ -11,7 +11,7 @@
 0x45B69A: cmp     byte ptr [edx+0CD4h], 0
 0x45B6A1: jnz     short loc_45B6ED
 0x45B6A3: push    edi
-0x45B6A4: mov     edi, [esp+8+arg_0]
+0x45B6A4: mov     edi, [esp+8+form]
 0x45B6A8: mov     eax, [edi+8]
 0x45B6AB: shr     eax, 0Eh
 0x45B6AE: test    al, 1
@@ -24,21 +24,21 @@
 0x45B6C0: shr     ecx, 3
 0x45B6C3: test    cl, 1
 0x45B6C6: jz      short loc_45B6EC
-0x45B6C8: mov     ecx, [esi+4]
+0x45B6C8: mov     ecx, [esi+4]; self
 0x45B6CB: test    ecx, ecx
 0x45B6CD: jz      short loc_45B6EC
-0x45B6CF: mov     edx, [esp+8+arg_4]
-0x45B6D3: push    edx
-0x45B6D4: push    edi
-0x45B6D5: call    sub_452C20
+0x45B6CF: mov     edx, [esp+8+flags]
+0x45B6D3: push    edx; flags
+0x45B6D4: push    edi; form
+0x45B6D5: call    ChangesMap_AddFormChangeFlags;
 0x45B6DA: pop     edi
 0x45B6DB: pop     esi
 0x45B6DC: retn    8
-0x45B6DF: mov     eax, [esp+8+arg_4]
-0x45B6E3: mov     ecx, [esi]
-0x45B6E5: push    eax
-0x45B6E6: push    edi
-0x45B6E7: call    sub_452C20
+0x45B6DF: mov     eax, [esp+8+flags]
+0x45B6E3: mov     ecx, [esi]; self
+0x45B6E5: push    eax; flags
+0x45B6E6: push    edi; form
+0x45B6E7: call    ChangesMap_AddFormChangeFlags;
 0x45B6EC: pop     edi
 0x45B6ED: pop     esi
 0x45B6EE: retn    8

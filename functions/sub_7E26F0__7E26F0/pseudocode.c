@@ -1,4 +1,5 @@
-char *sub_7E26F0()
+// Oblivion virtual GetRTTI for BSShaderProperty. Returns NiRTTI_BSShaderProperty (B46000).
+const NiRTTI *__thiscall BSShaderProperty_GetRTTI(BSShaderProperty *this)
 {
-  return dword_B46000;
+  return &NiRTTI_BSShaderProperty; /*0x7e26f5*/
 }

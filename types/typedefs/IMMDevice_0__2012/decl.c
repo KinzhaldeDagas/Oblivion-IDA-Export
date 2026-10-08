@@ -1,1 +1,1 @@
-IMMDevice_0
+typedef IMMDevice IMMDevice_0;

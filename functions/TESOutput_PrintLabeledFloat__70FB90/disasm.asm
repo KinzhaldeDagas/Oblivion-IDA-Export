@@ -1,5 +1,5 @@
 0x70FB90: push    ebx
-0x70FB91: mov     ebx, dword ptr [esp+4+ArgList]
+0x70FB91: mov     ebx, [esp+4+ArgList]
 0x70FB95: push    esi
 0x70FB96: mov     eax, ebx
 0x70FB98: push    edi

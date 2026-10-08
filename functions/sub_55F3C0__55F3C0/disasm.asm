@@ -1,4 +1,4 @@
-0x55F3C0: push    0FFFFFFFFh
+0x55F3C0: push    0FFFFFFFFh; LockFreeMap teardown/clear: drains thread-local manager and all buckets; callback vtable slot +0x20 releases keys before freeing nodes.
 0x55F3C2: push    offset SEH_690310
 0x55F3C7: mov     eax, large fs:0
 0x55F3CD: push    eax
@@ -22,7 +22,7 @@
 0x55F3F8: mov     [esp+24h+a2], eax
 0x55F3FC: call    sub_55F0B0
 0x55F401: push    esi
-0x55F402: call    FormHeapFree
+0x55F402: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x55F407: add     esp, 4
 0x55F40A: cmp     [ebp+8], ebx
 0x55F40D: mov     [ebp+14h], ebx
@@ -50,7 +50,7 @@
 0x55F44C: and     edi, 0FFFFFFFEh
 0x55F44F: call    edx
 0x55F451: push    esi
-0x55F452: call    FormHeapFree
+0x55F452: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x55F457: add     esp, 4
 0x55F45A: test    edi, edi
 0x55F45C: mov     esi, edi
@@ -83,3 +83,15 @@
 0x55F4AB: pop     ebx
 0x55F4AC: add     esp, 10h
 0x55F4AF: retn    4
+0x9BD8A0: mov     eax, [ebp+4]
+0x9BD8A3: push    eax
+0x9BD8A4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BD8A9: pop     ecx
+0x9BD8AA: retn
+0x9BD8AB: mov     edx, [esp+arg_4]
+0x9BD8AF: lea     eax, [edx-14h]
+0x9BD8B2: mov     ecx, [edx-18h]
+0x9BD8B5: xor     ecx, eax
+0x9BD8B7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BD8BC: mov     eax, offset stru_AE71E0
+0x9BD8C1: jmp     ___CxxFrameHandler3

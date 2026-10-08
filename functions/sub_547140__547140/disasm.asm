@@ -23,7 +23,7 @@
 0x54718B: fstp    st(1)
 0x54718D: test    ah, 44h
 0x547190: jnp     short loc_54719B
-0x547192: call    Double_To_SInt32
+0x547192: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x547197: mov     ecx, eax
 0x547199: jmp     short loc_54719D
 0x54719B: fstp    st
@@ -43,7 +43,7 @@
 0x5471C4: push    eax; int
 0x5471C5: push    ecx; int
 0x5471C6: push    edx; int
-0x5471C7: call    Calc_WeaponDamage
+0x5471C7: call    Calc_WeaponDamage; Sidecar decode: Calc_WeaponDamage is actor/weapon agnostic after entry; BladeSkillsRestored substitutes only the skill-level argument after consuming the most recent exact source-return/formula-return token from its bounded per-thread stack. Unmatched or overflowed contexts retain native formula inputs.
 0x5471CC: fstp    [esp+2Ch+var_4]
 0x5471D0: fldz
 0x5471D2: mov     eax, [esp+2Ch+arg_4]
@@ -53,7 +53,7 @@
 0x5471DF: jz      short loc_54720B
 0x5471E1: lea     esi, [eax+0Ch]
 0x5471E4: mov     ecx, esi
-0x5471E6: call    EffectItemList_HasHostile
+0x5471E6: call    EffectItemList_HasHostile; Engine combat threat adds hostile enchantment magicka cost to physical weapon damage using separate combat-style weights.
 0x5471EB: test    al, al
 0x5471ED: jz      short loc_54720B
 0x5471EF: mov     eax, [esi]

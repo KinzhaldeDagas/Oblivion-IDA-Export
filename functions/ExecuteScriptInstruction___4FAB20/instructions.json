@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x4FABD5",
-    "line": "call    Script_GetRefVariableByIndex",
+    "line": "call    Script_GetRefVariableByIndex; Hot Reload OBSE decode: Script ref-variable lookup. Uses globals B361B0/B361B4/B361B8/B09E1C as a last-ref cache.",
     "mnemonic": "call",
     "size": 5
   },
@@ -721,13 +721,13 @@
   },
   {
     "ea": "0x4FAC82",
-    "line": "lea     ecx, [ebp+44h]",
+    "line": "lea     ecx, [ebp+44h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x4FAC85",
-    "line": "call    ExtraDataList_GetReferencePointer",
+    "line": "call    ExtraDataList_GetReferencePointer; Return the TESObjectREFR payload from ExtraReferencePointer type 0x22, or null. Provenance only: callers still select EntryData by exact TESForm first.",
     "mnemonic": "call",
     "size": 5
   },
@@ -745,13 +745,13 @@
   },
   {
     "ea": "0x4FAC8E",
-    "line": "lea     ecx, [ebp+44h]",
+    "line": "lea     ecx, [ebp+44h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x4FAC91",
-    "line": "call    ExtraDataList_GetReferencePointer",
+    "line": "call    ExtraDataList_GetReferencePointer; Return the TESObjectREFR payload from ExtraReferencePointer type 0x22, or null. Provenance only: callers still select EntryData by exact TESForm first.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1153,7 +1153,7 @@
   },
   {
     "ea": "0x4FAD43",
-    "line": "call    ScriptRunner_LookupCommandByOpcode",
+    "line": "call    ScriptRunner_LookupCommandInfoByOpcode; TES4 authoritative: vanilla command lookup. Supports opcode ranges 0x100..0x182 at 0xB0B420 and 0x1000..0x1170 at 0xB0C8C0; each CommandInfo record is 0x28 bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1339,7 +1339,7 @@
   },
   {
     "ea": "0x4FAD93",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1681,19 +1681,19 @@
   },
   {
     "ea": "0x4FAE18",
-    "line": "push    edx; a3",
+    "line": "push    edx; sourceScript",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4FAE19",
-    "line": "push    eax; ArgList",
+    "line": "push    eax; variableID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4FAE1A",
-    "line": "call    sub_4FA110",
+    "line": "call    ScriptEventList__GetVariableValue; ScriptEventList::GetVariableValue scans `m_vars` for Var.id == variableID and returns Var.data. A single global last-list/last-ID/Var cache accelerates repeated CTDA and script lookups; a cache miss with no variable logs an error and returns 0.",
     "mnemonic": "call",
     "size": 5
   },

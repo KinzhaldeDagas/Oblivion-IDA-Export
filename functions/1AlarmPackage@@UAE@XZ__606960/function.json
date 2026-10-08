@@ -1,19 +1,36 @@
 {
-  "callees_count": 8,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x606960",
+      "0x606A11"
+    ],
+    [
+      "0x9C2ED0",
+      "0x9C2EF3"
+    ]
+  ],
+  "chunks_sha256": "a8d0df7eb2d55b9391042f84020e47cdbc66b4b7e004489cb289ae13199c29ee",
+  "comment_regular": "Verified ownership: destructor releases AlarmPackage list nodes and sentinel head, not Crime payloads. Before that, conditionally calls675090 to detach package references from actor processes (suppressed by data-handler flag+CD4). Paired constructor606860 and factory463EC0 establish complete object size40.\nVerified continuation: ordinary deferred forms are ultimately destroyed by manager459870, which unlinks before destructor and orders TESBoundObject/SpellItem last. Queue insertion453910, removal453940 and load-completion call4668BA close ownership chain; prior queue-drain Unknown superseded for these anchors.",
   "comment_repeatable": "",
-  "data_refs_count": 2,
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
   "display_name": "AlarmPackage::~AlarmPackage(void)",
   "end_ea": "0x606A11",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??1AlarmPackage@@UAE@XZ",
   "segment": ".text",
   "sha256": "e59e98f31945d1a499bcd2748cf45bf4bc7018f1cd0b3c1ed57dca8d80160582",
   "size": 177,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x606960",
+  "total_chunk_size": 212,
   "type": "void __thiscall(AlarmPackage *this)",
-  "xrefs_from_count": 61,
+  "xrefs_from_count": 72,
   "xrefs_to_count": 1
 }

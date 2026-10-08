@@ -23,7 +23,7 @@
 0x844E6E: mov     ecx, edi
 0x844E70: mov     [esp+30h+var_10], ebx
 0x844E74: call    edx
-0x844E76: mov     esi, [esp+24h+arg_C]
+0x844E76: mov     esi, [esp+24h+value]
 0x844E7A: mov     eax, [esi+1Ch]
 0x844E7D: shr     eax, 1Ch
 0x844E80: movzx   eax, ax
@@ -95,7 +95,7 @@
 0x844F5E: add     ebp, 4
 0x844F61: push    ebp; lpAddend
 0x844F62: call    dword ptr ds:0A28078h
-0x844F68: mov     ecx, [esp+24h+arg_C]
+0x844F68: mov     ecx, [esp+24h+value]
 0x844F6C: push    ecx
 0x844F6D: push    ebx
 0x844F6E: mov     ecx, edi
@@ -130,20 +130,20 @@
 0x844FB9: call    dword ptr ds:0A28078h
 0x844FBF: mov     esi, 1
 0x844FC4: add     [ebx+60h], esi
-0x844FC7: mov     [esp+24h+arg_C], ebx
+0x844FC7: mov     [esp+24h+value], ebx
 0x844FCB: mov     edx, [edi+38h]
-0x844FCE: lea     ecx, [esp+24h+arg_C]
-0x844FD2: push    ecx
-0x844FD3: push    edx
-0x844FD4: lea     ecx, [edi+40h]
+0x844FCE: lea     ecx, [esp+24h+value]
+0x844FD2: push    ecx; value
+0x844FD3: push    edx; index
+0x844FD4: lea     ecx, [edi+40h]; this
 0x844FD7: mov     [esp+2Ch+var_4], 0
-0x844FDF: call    sub_76CE40
+0x844FDF: call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.
 0x844FE4: or      eax, 0FFFFFFFFh
 0x844FE7: add     [ebx+60h], eax
 0x844FEA: mov     [esp+24h+var_4], eax
 0x844FEE: jnz     short loc_844FF7
 0x844FF0: mov     ecx, ebx
-0x844FF2: call    sub_7604D0
+0x844FF2: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x844FF7: add     [edi+38h], esi
 0x844FFA: mov     ecx, [esp+24h+var_C]
 0x844FFE: mov     large fs:0, ecx
@@ -154,3 +154,12 @@
 0x845009: pop     ebx
 0x84500A: add     esp, 10h
 0x84500D: retn    10h
+0x9D3360: lea     ecx, [ebp+10h]; void *
+0x9D3363: jmp     sub_4027D0
+0x9D3368: mov     edx, [esp+arg_4]
+0x9D336C: lea     eax, [edx-14h]
+0x9D336F: mov     ecx, [edx-18h]
+0x9D3372: xor     ecx, eax
+0x9D3374: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D3379: mov     eax, offset stru_AFB794
+0x9D337E: jmp     ___CxxFrameHandler3

@@ -1,4 +1,4 @@
 BOOL __cdecl _positive(double *a1)
 {
-  return *a1 >= 0.0;
+  return *a1 >= 0.0; /*0x98fda9*/
 }

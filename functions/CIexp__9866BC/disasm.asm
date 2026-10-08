@@ -6,8 +6,8 @@
 0x9866D1: and     eax, 1F80h
 0x9866D6: cmp     eax, 1F80h
 0x9866DB: jnz     short loc_9866EC
-0x9866DD: fnstcw  [esp+8+var_8]
-0x9866E0: mov     ax, [esp+8+var_8]
+0x9866DD: fnstcw  word ptr [esp+8+var_8]
+0x9866E0: mov     ax, word ptr [esp+8+var_8]
 0x9866E4: and     ax, 7Fh
 0x9866E8: cmp     ax, 7Fh
 0x9866EC: lea     esp, [esp+8]

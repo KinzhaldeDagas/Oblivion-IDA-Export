@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7C78D0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Oblivion ShadowSceneNode visibility/ranking pass: culls full lights against the current camera, updates per-light visibility/score state, partitions viable lights into active handling, and enforces configured shadow-light budgets.",
     "mnemonic": "push",
     "size": 2
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x7C791F",
-    "line": "jmp     short loc_7C7925",
+    "line": "jmp     short loc_7C7925; MEF PERF 2026-10-07: PERF-12 Verified orphan-prune cost: traversal already has current list position in ECX, payload in [ECX+8], and saves successor at7C792F. Removal at7C79B0 discards this positional knowledge and searches again from head through7C77C0/7D5F80. For K retained distinct payloads followed by D orphan payloads, comparison count is D*(K+1), assuming no intervening list mutation.",
     "mnemonic": "jmp",
     "size": 2
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x7C7925",
-    "line": "mov     esi, [ecx+8]",
+    "line": "mov     esi, [ecx+8]; MEF PERF 2026-10-07: PERF-12 Verified orphan-prune cost: traversal already has current list position in ECX, payload in [ECX+8], and saves successor at7C792F. Removal at7C79B0 discards this positional knowledge and searches again from head through7C77C0/7D5F80. For K retained distinct payloads followed by D orphan payloads, comparison count is D*(K+1), assuming no intervening list mutation.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x7C7940",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x7C794D",
-    "line": "jz      short loc_7C7972",
+    "line": "jz      short loc_7C7972; MEF PERF 2026-10-07: PERF-12 Verified selection: null backing source branches to removal; otherwise DWORD source+4==1 also removes. This is orphan cleanup, not rejection by camera bounds or ordinary invisibility. Loop is skipped when owner+12C is nonzero.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x7C7972",
-    "line": "test    ebx, ebx",
+    "line": "test    ebx, ebx; MEF PERF 2026-10-07: PERF-12 Verified selection: null backing source branches to removal; otherwise DWORD source+4==1 also removes. This is orphan cleanup, not rejection by camera bounds or ordinary invisibility. Loop is skipped when owner+12C is nonzero.",
     "mnemonic": "test",
     "size": 2
   },
@@ -355,19 +355,19 @@
   },
   {
     "ea": "0x7C7985",
-    "line": "push    esi",
+    "line": "push    esi; light",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C7986",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7C7988",
-    "line": "call    sub_7C6020",
+    "line": "call    ShadowSceneNode_RefreshMovedPointLightSource; Refresh a moved backing NiPointLight: require +0xFC, +0x104, and normal +0xF4 state; compare cached +0x108..+0x110 against light world position, then rebuild/relink if moved.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x7C7996",
-    "line": "call    sub_405A80",
+    "line": "call    BSShaderManager_IsShadowMappingReady; [Verified] Returns true only when BSShaderPackageVersion (RendererGlobalState+0xAF) >= 3 and BSShaderFeatureMask (RendererGlobalState+0xA7) contains native shadow-map bit 0x10. The version comparison independently corroborates the selector field read by GetShaderProgramPackageIndex.",
     "mnemonic": "call",
     "size": 5
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x7C79A6",
-    "line": "call    ShadowSceneLight_CullProcess",
+    "line": "call    ShadowSceneLight_CullProcess; Visible/cull path calls ShadowSceneLight_CullProcess at its true entry 0x007D6390.",
     "mnemonic": "call",
     "size": 5
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x7C79B0",
-    "line": "call    sub_7C77C0",
+    "line": "call    ShadowSceneNode_RemoveFullLight; MEF PERF 2026-10-07: PERF-12 candidate scoped CALL patch (not approved): thiscall owner=EBP, light=ESI pushed at7C79AD, successor stored at [ESP+18] before argument push ([ESP+20] at callee entry). Preserve successor, selection, callbacks, stack and full-loop order. Original whole visibility body includes rendering; do not replace/skip it to optimize cleanup. Candidate position must remain valid and native first-occurrence semantics must be preserved.",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,13 +475,13 @@
   },
   {
     "ea": "0x7C79C3",
-    "line": "call    sub_7C71B0",
+    "line": "call    ShadowSceneNode_ReorderFullLightsByCameraScore; After visible/cull updates, reorder the full list by native camera-relative score.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7C79C8",
-    "line": "mov     eax, ds:0B43124h",
+    "line": "mov     eax, ds:0B43124h; V165 receiver audit (2026-09-19, authoritative Oblivion): control reaches this suffix only after the full-light mutation/cull loop and the ReorderFullLightsByCameraScore call at 7C79C3, or after the native 12C skip branch. The function then performs camera/fog setup, visible traversal and accumulator Flush before returning. A whole-call CullFullLights writer therefore spans rendering; this boundary alone is not permission to waive writer exclusion.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -625,7 +625,7 @@
   },
   {
     "ea": "0x7C7A0C",
-    "line": "push    ecx; lpAddend",
+    "line": "push    ecx; w",
     "mnemonic": "push",
     "size": 1
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x7C7A55",
-    "line": "call    NiDX9Renderer__SetShaderAccumulator",
+    "line": "call    NiDX9Renderer__SetShaderAccumulator;",
     "mnemonic": "call",
     "size": 5
   },
@@ -799,7 +799,7 @@
   },
   {
     "ea": "0x7C7A6B",
-    "line": "call    NiNode__OnVisible",
+    "line": "call    NiNode__OnVisible; Retail NiNode OnVisible entry; visible nonempty child arrays recurse through ordinary child traversal.",
     "mnemonic": "call",
     "size": 5
   },
@@ -841,7 +841,7 @@
   },
   {
     "ea": "0x7C7A80",
-    "line": "call    NiDX9Renderer__SetShaderAccumulator",
+    "line": "call    NiDX9Renderer__SetShaderAccumulator;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1069,7 +1069,7 @@
   },
   {
     "ea": "0x7C7B26",
-    "line": "push    1Ch",
+    "line": "push    1Ch; slot",
     "mnemonic": "push",
     "size": 2
   },
@@ -1081,7 +1081,7 @@
   },
   {
     "ea": "0x7C7B2B",
-    "line": "call    sub_7ECAE0",
+    "line": "call    OB_BSShader_SetSharedFloat4Constant_010201A0; Shader global table helper: store four dwords at dword_B46498 + 0x10 * index.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1123,7 +1123,7 @@
   },
   {
     "ea": "0x7C7B43",
-    "line": "push    1Dh",
+    "line": "push    1Dh; slot",
     "mnemonic": "push",
     "size": 2
   },
@@ -1237,7 +1237,7 @@
   },
   {
     "ea": "0x7C7B85",
-    "line": "call    sub_7ECAE0",
+    "line": "call    OB_BSShader_SetSharedFloat4Constant_010201A0; Shader global table helper: store four dwords at dword_B46498 + 0x10 * index.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1279,7 +1279,7 @@
   },
   {
     "ea": "0x7C7B9D",
-    "line": "push    1Eh",
+    "line": "push    1Eh; slot",
     "mnemonic": "push",
     "size": 2
   },
@@ -1393,7 +1393,7 @@
   },
   {
     "ea": "0x7C7BE2",
-    "line": "call    sub_7ECAE0",
+    "line": "call    OB_BSShader_SetSharedFloat4Constant_010201A0; Shader global table helper: store four dwords at dword_B46498 + 0x10 * index.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1417,7 +1417,7 @@
   },
   {
     "ea": "0x7C7BEE",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID; Fog render consumer decode: ShadowSceneNode reads node property type 1 fog property; B333E4 reaches this path through root/sky property attachment.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1537,7 +1537,7 @@
   },
   {
     "ea": "0x7C7C38",
-    "line": "mov     ds:0B46638h, eax",
+    "line": "mov     ds:0B46638h, eax; Fog render consumer decode: ShadowSceneNode shared FogParam B45E14[0x209..0x20C] = (fogEnd, fogEnd - fogStart, 0, 0).",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1651,7 +1651,7 @@
   },
   {
     "ea": "0x7C7C88",
-    "line": "mov     ds:0B46648h, ecx",
+    "line": "mov     ds:0B46648h, ecx; Fog render consumer decode: ShadowSceneNode shared FogColor B45E14[0x20D..0x210] = (fog.r, fog.g, fog.b, 0).",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1741,7 +1741,7 @@
   },
   {
     "ea": "0x7C7CCB",
-    "line": "call    InitBSShaderAccumulator",
+    "line": "call    BSShaderAccumulator_GetOrCreateGlobal",
     "mnemonic": "call",
     "size": 5
   },
@@ -1891,7 +1891,7 @@
   },
   {
     "ea": "0x7C7D22",
-    "line": "call    NiDX9Renderer__SetShaderAccumulator",
+    "line": "call    NiDX9Renderer__SetShaderAccumulator;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1951,7 +1951,7 @@
   },
   {
     "ea": "0x7C7D41",
-    "line": "call    NiNode__OnVisible",
+    "line": "call    NiNode__OnVisible; V165 receiver audit: NiNode::OnVisible is called from inside ShadowSceneNode_VisibleCullAndRankFullLights (hook kind CullFullLights), after native light cull/reorder and accumulator BeginAccumulation. The whole-call observer writer is still active during this traversal and the following accumulator Flush.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1981,7 +1981,7 @@
   },
   {
     "ea": "0x7C7D54",
-    "line": "call    eax",
+    "line": "call    eax; V165 receiver audit: indirect call is BSShaderAccumulator vtable+50 = 7AE070 Flush. Proven constructor store at 7ABE67 installs vtable A8CC5C; dword A8CCAC is 7AE070. Ordinary Flush uses vtable+60 -> 7AC9A0 FlushPassBucket, which calls 7A9820 at 7ACDE4/7ACECC. Thus native material draws occur before hooked CullFullLights returns; blanket writer exclusion around the full 7C78D0 call blocks their receiver captures.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1999,7 +1999,7 @@
   },
   {
     "ea": "0x7C7D5D",
-    "line": "call    NiDX9Renderer__SetShaderAccumulator",
+    "line": "call    NiDX9Renderer__SetShaderAccumulator;",
     "mnemonic": "call",
     "size": 5
   },
@@ -2194,5 +2194,101 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CE840",
+    "line": "mov     eax, [ebp-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE843",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE844",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE849",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE84A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE84B",
+    "line": "lea     ecx, [ebp-2Ch]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE84E",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE853",
+    "line": "lea     ecx, [ebp-34h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE856",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE85B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CE85F",
+    "line": "lea     eax, [edx-3Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE862",
+    "line": "mov     ecx, [edx-40h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE865",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CE867",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE86C",
+    "line": "mov     eax, offset stru_AF77BC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE871",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

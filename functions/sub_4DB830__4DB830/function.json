@@ -1,19 +1,32 @@
 {
-  "callees_count": 12,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4DB830",
+      "0x4DB885"
+    ]
+  ],
+  "chunks_sha256": "80ae3c3f697e0b544a30572dc15dad87bff936bb28590b79ef168000e0fe49df",
+  "comment_regular": "Verified effective ownership-rank lookup order: this reference's XRNK, then linked door XRNK, then parent cell's required rank; missing rank defaults to zero. Fallout's TESObjectREFR::GetOwnershipRank inserts EncounterZone owner-rank between linked-door and parent-cell checks; Oblivion has no encounter-zone branch here.",
+  "comment_repeatable": "Verified effective ownership-rank lookup order: this reference's XRNK, then linked door XRNK, then parent cell's required rank; missing rank defaults to zero. Fallout's TESObjectREFR::GetOwnershipRank inserts EncounterZone owner-rank between linked-door and parent-cell checks; Oblivion has no encounter-zone branch here.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4DB830",
+  "display_name": "TESObjectREFR_GetOwnershipRank",
   "end_ea": "0x4DB885",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4DB830",
+  "name": "TESObjectREFR_GetOwnershipRank",
   "segment": ".text",
   "sha256": "80ae3c3f697e0b544a30572dc15dad87bff936bb28590b79ef168000e0fe49df",
   "size": 85,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4DB830",
-  "type": "void **__thiscall(_BYTE *this)",
+  "total_chunk_size": 85,
+  "type": "SInt32 __thiscall(TESObjectREFR *reference)",
   "xrefs_from_count": 44,
   "xrefs_to_count": 1
 }

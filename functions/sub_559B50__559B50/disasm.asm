@@ -7,7 +7,7 @@
 0x559B5F: retn    14h
 0x559B62: mov     eax, dword ptr [esp+4+arg_10]
 0x559B66: mov     ecx, [esp+4+arg_8]
-0x559B6A: mov     edx, dword ptr [esp+4+ArgList]
+0x559B6A: mov     edx, [esp+4+ArgList]
 0x559B6E: push    ebx
 0x559B6F: push    eax; char
 0x559B70: mov     eax, [esp+0Ch+arg_0]

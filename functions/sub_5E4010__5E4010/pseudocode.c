@@ -1,32 +1,32 @@
-void __thiscall sub_5E4010(_DWORD *this, char a2)
+void __thiscall sub_5E4010(Actor *this, char a2)
 {
-  int v3; // ecx
+  LowProcess *process; // ecx
   int v4; // eax
   int v5; // eax
   char v6; // cl
   double v7; // st7
-  float v8; // [esp+4h] [ebp-Ch]
+  float delta; // [esp+4h] [ebp-Ch]
   float v9; // [esp+Ch] [ebp-4h]
   float v10; // [esp+14h] [ebp+4h]
 
-  v3 = *(this + 0x16);
-  if ( v3 && (v4 = (*(int (__thiscall **)(int, int))(*(_DWORD *)v3 + 0xEC))(v3, 1)) != 0 )
-    v5 = *(_DWORD *)(v4 + 8);
+  process = this->members.super.process; /*0x5e4014*/
+  if ( process && (v4 = (int)process->GetEquippedWeaponData(process, 1)) != 0 ) /*0x5e4029*/
+    v5 = *(_DWORD *)(v4 + 8); /*0x5e402b*/
   else
-    v5 = 0;
-  if ( !v5 )
+    v5 = 0; /*0x5e4030*/
+  if ( !v5 ) /*0x5e4034*/
   {
-    v7 = 0.0;
-    goto LABEL_10;
+    v7 = 0.0; /*0x5e404b*/
+    goto LABEL_10; /*0x5e404b*/
   }
-  v6 = *(_BYTE *)(v5 + 0x90);
-  if ( v6 != 5 && v6 != 4 )
+  v6 = *(_BYTE *)(v5 + 0x90); /*0x5e4036*/
+  if ( v6 != 5 && v6 != 4 ) /*0x5e4044*/
   {
-    v7 = *(float *)(v5 + 0x7C);
+    v7 = *(float *)(v5 + 0x7C); /*0x5e4046*/
 LABEL_10:
-    v9 = v7;
-    v10 = sub_547560(v9, a2);
-    v8 = -v10;
-    Actor_ModFatigue_(this, v8);
+    v9 = v7; /*0x5e404d*/
+    v10 = sub_547560(v9, a2); /*0x5e4063*/
+    delta = -v10; /*0x5e4072*/
+    Actor_ApplyNegativeFatigueDeltaClamped(this, delta); /*0x5e4075*/
   }
 }

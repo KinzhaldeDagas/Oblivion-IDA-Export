@@ -1,6 +1,6 @@
 int __thiscall sub_77F970(void *this, int a2)
 {
-  return (*(int (__thiscall **)(void *, int, int, _DWORD))(*(_DWORD *)this + 0x64))(
+  return (*(int (__thiscall **)(void *, int, int, _DWORD))(*(_DWORD *)this + 0x64))( /*0x77f987*/
            this,
            0x1A,
            *(_BYTE *)(a2 + 0x18) & 1,

@@ -40,7 +40,7 @@
 0x6320FE: fmul    dword ptr ds:0B37040h
 0x632104: push    esi
 0x632105: fstp    [esp+38h+var_2C]
-0x632109: call    sub_608280
+0x632109: call    Actor_CalculateArrowGravity
 0x63210E: mov     edi, [esp+38h+arg_4]
 0x632112: fstp    [esp+38h+var_28]
 0x632116: mov     edx, [edi]
@@ -65,7 +65,7 @@
 0x632151: mov     ecx, esi
 0x632153: mov     [esp+34h+var_20], edx
 0x632157: mov     [esp+34h+var_1C], eax
-0x63215B: call    sub_5E0660
+0x63215B: call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.
 0x632160: fmul    qword ptr ds:0A31C70h
 0x632166: fadd    [esp+34h+var_1C]
 0x63216A: fstp    [esp+34h+var_1C]
@@ -102,7 +102,7 @@
 0x6321D8: fstp    [esp+44h+var_40]; float
 0x6321DC: fld     [esp+44h+arg_0]
 0x6321E0: fstp    [esp+44h+var_44]; float
-0x6321E3: call    sub_6132D0
+0x6321E3: call    Combat_CalculateBallisticPitch; Low ballistic-pitch solver. It forms the quadratic in cos^2(theta), selects the larger valid root for the low arc, and returns a signed acos(sqrt(root)); invalid trajectories return the engine fallback angle.
 0x6321E8: fstp    [esp+44h+arg_4]
 0x6321EC: add     esp, 4
 0x6321EF: fld     [esp+40h+var_2C]
@@ -120,9 +120,9 @@
 0x63221A: call    eax
 0x63221C: fld     [esp+34h+arg_4]
 0x632220: fchs
-0x632222: mov     ecx, esi
+0x632222: mov     ecx, esi; this
 0x632224: fstp    [esp+34h+arg_0]
-0x632228: call    sub_4A9720
+0x632228: call    Actor_GetAimPitch; Returns Actor rotation X as the native aim-pitch value used by projectile launch, impact, input, dialogue-camera, and magic-projectile paths.
 0x63222D: fsubr   [esp+34h+arg_0]
 0x632231: mov     edx, [esi]
 0x632233: mov     eax, [edx+284h]
@@ -139,7 +139,7 @@
 0x632254: jle     short loc_63225B
 0x632256: mov     edi, 64h ; 'd'
 0x63225B: push    0; Seed
-0x63225D: call    GetRandomLargeInteger?
+0x63225D: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x632262: cdq
 0x632263: mov     ecx, 69h ; 'i'
 0x632268: sub     ecx, edi
@@ -179,8 +179,8 @@
 0x6322D4: fstp    [esp+30h+arg_0]
 0x6322D8: jmp     short loc_6322DC
 0x6322DA: fstp    st
-0x6322DC: mov     ecx, esi
-0x6322DE: call    sub_4A9720
+0x6322DC: mov     ecx, esi; this
+0x6322DE: call    Actor_GetAimPitch; Returns Actor rotation X as the native aim-pitch value used by projectile launch, impact, input, dialogue-camera, and magic-projectile paths.
 0x6322E3: fadd    [esp+30h+arg_0]
 0x6322E7: push    ecx
 0x6322E8: mov     ecx, esi; int

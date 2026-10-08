@@ -1,7 +1,7 @@
 0x9FA200: push    offset aMenusStatsS_11; "Menus\\Stats\\stat_pop_icon_armorer.dds"
 0x9FA205: push    offset aSskilliconarmo; "sSkillIconArmorer"
-0x9FA20A: mov     ecx, offset sSkillIconArmorer
-0x9FA20F: call    GameSetting_ConstrAndReg
+0x9FA20A: mov     ecx, 0B3A31Ch; self
+0x9FA20F: call    GameSetting_ConstrAndReg; Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.
 0x9FA214: push    offset sub_A23E70; void (__cdecl *)()
 0x9FA219: call    _atexit
 0x9FA21E: pop     ecx

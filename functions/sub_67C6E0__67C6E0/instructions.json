@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x67C701",
-    "line": "call    sub_5E05F0",
+    "line": "call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x67C72D",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,19 +385,19 @@
   },
   {
     "ea": "0x67C794",
-    "line": "push    2",
+    "line": "push    2; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x67C796",
-    "line": "push    6",
+    "line": "push    6; topicType",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x67C798",
-    "line": "call    TESTopic__GEtTopic",
+    "line": "call    TESTopic__GetTopic; Hardcoded miscellaneous topic bucket 6 index 2: stock 0000011A / ObserveCombat. This timer/chance ambient SayTopic path is separate from the HELLO conversation-package chain.",
     "mnemonic": "call",
     "size": 5
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x67C7BF",
-    "line": "mov     ecx, offset unk_B36920",
+    "line": "mov     ecx, (offset flt_B36778+1A8h)",
     "mnemonic": "mov",
     "size": 5
   },

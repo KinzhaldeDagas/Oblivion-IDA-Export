@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4E8BA0",
+      "0x4E8BF0"
+    ]
+  ],
+  "chunks_sha256": "879eea523ceaa060a16431e4ed66d57ea1839ab788ac8dec85831075f5f2377b",
+  "comment_regular": "Verified local ROAD grouping. Given the owning WRLD's top-level group type 0, emits a child GRUP type 1 whose label is the owning TESWorldSpace FormID. TESRoad owner pointer is at +0x2C.",
+  "comment_repeatable": "Verified local ROAD grouping. Given the owning WRLD's top-level group type 0, emits a child GRUP type 1 whose label is the owning TESWorldSpace FormID. TESRoad owner pointer is at +0x2C.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4E8BA0",
+  "display_name": "TESRoad_CreateGroupRecord",
   "end_ea": "0x4E8BF0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4E8BA0",
+  "name": "TESRoad_CreateGroupRecord",
   "segment": ".text",
   "sha256": "879eea523ceaa060a16431e4ed66d57ea1839ab788ac8dec85831075f5f2377b",
   "size": 80,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E8BA0",
-  "type": "_DWORD *__thiscall(_DWORD *this, _DWORD *, int)",
+  "total_chunk_size": 80,
+  "type": "unsigned int *__thiscall(TESRoad *this, unsigned int *outGroupHeader, const unsigned int *currentGroupHeader)",
   "xrefs_from_count": 24,
   "xrefs_to_count": 1
 }

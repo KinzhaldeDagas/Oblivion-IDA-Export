@@ -14,7 +14,7 @@
 0x5D5A7B: add     esp, 14h
 0x5D5A7E: test    esi, esi
 0x5D5A80: jz      short loc_5D5AAC
-0x5D5A82: call    sub_578D70
+0x5D5A82: call    InterfaceManager_ConsumeMessageButton
 0x5D5A87: cmp     al, 2
 0x5D5A89: jnz     short loc_5D5AAC
 0x5D5A8B: mov     eax, [esi+40h]

@@ -6,7 +6,7 @@
 0xA14A6D: push    0
 0xA14A6F: push    0
 0xA14A71: push    90h
-0xA14A76: push    offset dword_BA8620
+0xA14A76: push    offset unk_BA8620
 0xA14A7B: push    offset aHklimitedhin_0; "hkLimitedHingeConstraintData"
 0xA14A80: mov     ecx, offset unk_BA8E24
 0xA14A85: call    sub_90D190

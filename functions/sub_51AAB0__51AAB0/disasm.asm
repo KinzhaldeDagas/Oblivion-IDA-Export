@@ -1,4 +1,4 @@
-0x51AAB0: mov     edx, [ecx+14h]
+0x51AAB0: mov     edx, [ecx+14h]; TESAnimGroup movement-vector getter. Copies the three float movement components stored at TESAnimGroup +0x14/+0x18/+0x1C.
 0x51AAB3: mov     eax, [esp+arg_0]
 0x51AAB7: mov     [eax], edx
 0x51AAB9: mov     edx, [ecx+18h]

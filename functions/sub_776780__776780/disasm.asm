@@ -8,21 +8,21 @@
 0x77678D: jz      short loc_7767ED
 0x77678F: nop
 0x776790: mov     ecx, esi
-0x776792: call    sub_6A9030
-0x776797: mov     [esp+18h+var_C], eax
-0x77679B: lea     eax, [esp+18h+var_4]
-0x77679F: push    eax
-0x7767A0: lea     ecx, [esp+1Ch+var_8]
-0x7767A4: push    ecx
-0x7767A5: lea     edx, [esp+20h+var_C]
-0x7767A9: push    edx
-0x7767AA: mov     ecx, esi
-0x7767AC: call    sub_452600
-0x7767B1: mov     edi, [esp+18h+var_8]
+0x776792: call    NiTMapBase_GetFirstNode
+0x776797: mov     [esp+18h+position], eax
+0x77679B: lea     eax, [esp+18h+valueOut]
+0x77679F: push    eax; valueOut
+0x7767A0: lea     ecx, [esp+1Ch+keyOut]
+0x7767A4: push    ecx; keyOut
+0x7767A5: lea     edx, [esp+20h+position]
+0x7767A9: push    edx; position
+0x7767AA: mov     ecx, esi; self
+0x7767AC: call    NiTMap_U32Pointer_GetNextEntry
+0x7767B1: mov     edi, [esp+18h+keyOut]
 0x7767B5: push    edi
 0x7767B6: mov     ecx, esi
 0x7767B8: call    NiTMap_RemoveAt
-0x7767BD: mov     edx, [esp+18h+var_4]
+0x7767BD: mov     edx, [esp+18h+valueOut]
 0x7767C1: mov     [edi+104h], ebx
 0x7767C7: mov     ecx, [edx+6Ch]
 0x7767CA: mov     eax, ecx
@@ -33,7 +33,7 @@
 0x7767D9: push    edx
 0x7767DA: not     edi
 0x7767DC: and     [esi+eax*4+40h], edi
-0x7767E0: call    FormHeapFree
+0x7767E0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7767E5: add     esp, 4
 0x7767E8: cmp     [esi+0Ch], ebx
 0x7767EB: jnz     short loc_776790
@@ -67,7 +67,7 @@
 0x77682E: lea     edi, [esi+10h]
 0x776831: mov     ecx, edi
 0x776833: mov     dword ptr [edi], offset ??_7?$NiTPointerListBase@V?$NiTPointerAllocator@I@@PAVNiLight@@@@6B@; const NiTPointerListBase<NiTPointerAllocator<uint>,NiLight *>::`vftable'
-0x776839: call    NiTPointerList__FreeAllNodes
+0x776839: call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.
 0x77683E: mov     dword ptr [edi], offset ??_7?$NiTListBase@V?$NiTPointerAllocator@I@@PAVNiLight@@@@6B@; const NiTListBase<NiTPointerAllocator<uint>,NiLight *>::`vftable'
 0x776844: mov     ecx, esi
 0x776846: mov     dword ptr [esi], offset ??_7?$NiTPointerMap@PAVNiLight@@PAVLightEntry@NiDX9LightManager@@@@6B@; const NiTPointerMap<NiLight *,NiDX9LightManager::LightEntry *>::`vftable'
@@ -77,7 +77,7 @@
 0x776859: call    NiTMap_Clear
 0x77685E: mov     eax, [esi+8]
 0x776861: push    eax
-0x776862: call    FormHeapFree
+0x776862: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x776867: add     esp, 4
 0x77686A: pop     edi
 0x77686B: pop     esi

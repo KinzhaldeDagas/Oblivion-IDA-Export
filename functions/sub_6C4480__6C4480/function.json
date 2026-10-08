@@ -1,18 +1,31 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 5,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6C4480",
+      "0x6C44BA"
+    ]
+  ],
+  "chunks_sha256": "ae55cd692a5d7bf17ecb4cde62fcae8a359a92beb33f634888acdfbbc6b68fd4",
+  "comment_regular": "Walks the controller manager's active sequence list and deactivates every sequence in native state 4 (transition source) using the caller-supplied ease-out time.",
+  "comment_repeatable": "Walks the controller manager's active sequence list and deactivates every sequence in native state 4 (transition source) using the caller-supplied ease-out time.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6C4480",
+  "display_name": "NiControllerManager_DeactivateTransitionSources",
   "end_ea": "0x6C44BA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6C4480",
+  "name": "NiControllerManager_DeactivateTransitionSources",
   "segment": ".text",
   "sha256": "ae55cd692a5d7bf17ecb4cde62fcae8a359a92beb33f634888acdfbbc6b68fd4",
   "size": 58,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6C4480",
+  "total_chunk_size": 58,
   "type": "char __thiscall(_DWORD *this, float)",
   "xrefs_from_count": 26,
   "xrefs_to_count": 5

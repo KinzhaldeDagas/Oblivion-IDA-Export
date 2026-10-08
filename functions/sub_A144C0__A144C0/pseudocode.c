@@ -1,9 +1,9 @@
 _DWORD *sub_A144C0()
 {
-  return sub_90D190(
-           dword_BA89EC,
+  return sub_90D190( /*0xa144ea*/
+           unk_BA89EC,
            (int)"hkGroupCollisionFilter",
-           (int)&unk_BA965C,
+           (int)unk_BA965C,
            0x9C,
            0,
            0,

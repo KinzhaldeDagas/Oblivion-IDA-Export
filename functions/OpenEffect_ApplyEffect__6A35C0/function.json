@@ -1,19 +1,32 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6A35C0",
+      "0x6A365C"
+    ]
+  ],
+  "chunks_sha256": "587378b4d6ea48970f2f1cfc8a08082a0a3f61c1c011b4c1d3f8561160af4a52",
+  "comment_regular": "Verified OpenEffect rule: clear only locked bit 0x01 when effect category >= current effective lock category; the locked-bit helper preserves bit 0x02, so an active LockEffect marker remains until LockEffect_Apply observes the resulting state.",
+  "comment_repeatable": "Verified OpenEffect rule: clear only locked bit 0x01 when effect category >= current effective lock category; the locked-bit helper preserves bit 0x02, so an active LockEffect marker remains until LockEffect_Apply observes the resulting state.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
   "display_name": "OpenEffect_ApplyEffect",
   "end_ea": "0x6A365C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "OpenEffect_ApplyEffect",
   "segment": ".text",
   "sha256": "587378b4d6ea48970f2f1cfc8a08082a0a3f61c1c011b4c1d3f8561160af4a52",
   "size": 156,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6A35C0",
-  "type": "void __thiscall(void **this)",
+  "total_chunk_size": 156,
+  "type": "void __thiscall(OpenEffect *this)",
   "xrefs_from_count": 75,
-  "xrefs_to_count": 1
+  "xrefs_to_count": 0
 }

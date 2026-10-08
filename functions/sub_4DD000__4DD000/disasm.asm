@@ -11,18 +11,18 @@
 0x4DD01C: jnz     short loc_4DD043
 0x4DD01E: test    eax, eax
 0x4DD020: jz      short loc_4DD02F
-0x4DD022: mov     ecx, eax
-0x4DD024: call    sub_478EA0
-0x4DD029: mov     ecx, ds:0B333C4h
+0x4DD022: mov     ecx, eax; this
+0x4DD024: call    ActorSkinInfo_ClearAmuletSlot; Clear ActorSkinInfo amulet equipment slot at +0xCC; this is biped slot 8 teardown.
+0x4DD029: mov     ecx, ds:0B333C4h; this
 0x4DD02F: mov     al, [ecx+588h]
-0x4DD035: mov     byte ptr [esp+8+var_4], al
-0x4DD039: mov     edx, [esp+8+var_4]
-0x4DD03D: push    edx
-0x4DD03E: call    sub_6600D0
+0x4DD035: mov     [esp+8+firstPerson], al
+0x4DD039: mov     edx, dword ptr [esp+8+firstPerson]
+0x4DD03D: push    edx; firstPerson
+0x4DD03E: call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.
 0x4DD043: test    eax, eax
 0x4DD045: jz      short loc_4DD04E
-0x4DD047: mov     ecx, eax
-0x4DD049: call    sub_478EA0
+0x4DD047: mov     ecx, eax; this
+0x4DD049: call    ActorSkinInfo_ClearAmuletSlot; Clear ActorSkinInfo amulet equipment slot at +0xCC; this is biped slot 8 teardown.
 0x4DD04E: mov     eax, [esi]
 0x4DD050: mov     edx, [eax+190h]
 0x4DD056: mov     ecx, esi

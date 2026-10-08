@@ -3,32 +3,32 @@
 0x67C0D4: push    esi
 0x67C0D5: mov     esi, ecx
 0x67C0D7: mov     ecx, ds:0B33B00h
-0x67C0DD: mov     [esp+18h+var_4], 0
+0x67C0DD: mov     [esp+18h+source], 0
 0x67C0E5: mov     ebp, [ecx+14h]
 0x67C0E8: push    edi
 0x67C0E9: mov     [esp+1Ch+var_C], 0
-0x67C0F1: call    sub_45A170
+0x67C0F1: call    TESSaveLoadGame_UseSaveGameBlocks
 0x67C0F6: test    al, al
 0x67C0F8: jz      short loc_67C12D
-0x67C0FA: mov     ecx, ds:0B33B00h
-0x67C100: push    4; Size
+0x67C0FA: mov     ecx, ds:0B33B00h; self
+0x67C100: push    4; byteCount
 0x67C102: lea     eax, [esp+20h+Src]
-0x67C106: push    eax; Src
+0x67C106: push    eax; source
 0x67C107: mov     [esp+24h+Src], 4B4F4C42h
 0x67C10F: call    SaveLoad_SaveData
-0x67C114: mov     ecx, ds:0B33B00h
+0x67C114: mov     ecx, ds:0B33B00h; self
 0x67C11A: mov     edx, [ecx+14h]
-0x67C11D: push    2; Size
-0x67C11F: lea     eax, [esp+20h+var_4]
-0x67C123: push    eax; Src
+0x67C11D: push    2; byteCount
+0x67C11F: lea     eax, [esp+20h+source]
+0x67C123: push    eax; source
 0x67C124: mov     [esp+24h+var_C], edx
 0x67C128: call    SaveLoad_SaveData
-0x67C12D: mov     ecx, ds:0B33B00h
-0x67C133: push    2; Size
+0x67C12D: mov     ecx, ds:0B33B00h; self
+0x67C133: push    2; byteCount
 0x67C135: lea     edx, [esp+20h+var_10]
 0x67C139: mov     [esp+20h+var_10], 0
 0x67C141: mov     edi, [ecx+14h]
-0x67C144: push    edx; Src
+0x67C144: push    edx; source
 0x67C145: call    SaveLoad_SaveData
 0x67C14A: mov     esi, [esi]
 0x67C14C: test    esi, esi
@@ -54,7 +54,7 @@
 0x67C18F: jz      short loc_67C1CC
 0x67C191: mov     ecx, [edi]
 0x67C193: push    ecx; a1
-0x67C194: call    TESForm_LookupByFormID
+0x67C194: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x67C199: mov     edx, [edi+5]
 0x67C19C: add     esp, 4
 0x67C19F: push    offset a_AiSpectatorpa; ".\\AI\\SpectatorPackage.cpp"
@@ -81,7 +81,7 @@
 0x67C1DE: call    sub_40FEC0
 0x67C1E3: add     esp, 10h
 0x67C1E6: mov     ecx, ds:0B33B00h
-0x67C1EC: call    sub_45A170
+0x67C1EC: call    TESSaveLoadGame_UseSaveGameBlocks
 0x67C1F1: test    al, al
 0x67C1F3: jz      short loc_67C228
 0x67C1F5: mov     edx, ds:0B33B00h

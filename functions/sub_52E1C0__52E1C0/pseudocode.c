@@ -1,8 +1,7 @@
-int __thiscall sub_52E1C0(unsigned int *this)
+void __thiscall TESResponse::Destroy(TESResponse *this)
 {
-  FormHeapFree(*(this + 4));
-  *(this + 4) = 0;
-  *((_WORD *)this + 0xB) = 0;
-  *((_WORD *)this + 0xA) = 0;
-  return 0;
+  FormHeapFree((unsigned int)this->responseText.m_data); /*0x52e1c7*/
+  this->responseText.m_data = 0; /*0x52e1d1*/
+  this->responseText.m_bufLen = 0; /*0x52e1d4*/
+  this->responseText.m_dataLen = 0; /*0x52e1d8*/
 }

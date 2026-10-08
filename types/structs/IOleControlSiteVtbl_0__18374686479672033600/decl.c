@@ -1,1 +1,1 @@
-IOleControlSiteVtbl_0
+typedef IOleControlSiteVtbl IOleControlSiteVtbl_0;

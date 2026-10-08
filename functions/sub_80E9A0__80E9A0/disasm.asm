@@ -1,4 +1,4 @@
-0x80E9A0: push    0FFFFFFFFh
+0x80E9A0: push    0FFFFFFFFh; SpeedTreeFrondShader render/setup. Requires candidate property vtable +0x54 to return id 8; accepted object must then provide vtable +0x78 texture getter and BSShaderProperty-style pass list at object +0x70 for the 0x7ED5D0 counter.
 0x80E9A2: push    offset SEH_80E9A0
 0x80E9A7: mov     eax, large fs:0
 0x80E9AD: push    eax
@@ -38,7 +38,7 @@
 0x80EA01: mov     eax, [edi+28h]
 0x80EA04: mov     ecx, [esi+18h]
 0x80EA07: mov     edx, [ecx]
-0x80EA09: push    eax
+0x80EA09: push    eax; w
 0x80EA0A: mov     eax, [edx+24h]
 0x80EA0D: call    eax
 0x80EA0F: mov     ebp, [edi+0Ch]
@@ -115,9 +115,9 @@
 0x80EB08: mov     [eax+4], edx
 0x80EB0B: mov     edx, [esp+58h+var_10]
 0x80EB0F: mov     [eax+8], ecx
-0x80EB12: push    0
+0x80EB12: push    0; slot
 0x80EB14: mov     [eax+0Ch], edx
-0x80EB17: call    sub_7ECAE0
+0x80EB17: call    OB_BSShader_SetSharedFloat4Constant_010201A0; Shader global table helper: store four dwords at dword_B46498 + 0x10 * index.
 0x80EB1C: add     esp, 14h
 0x80EB1F: mov     edi, [edi+18h]
 0x80EB22: test    edi, edi
@@ -190,7 +190,7 @@
 0x80EC0C: call    eax
 0x80EC0E: test    eax, eax
 0x80EC10: jz      short loc_80EC20
-0x80EC12: cmp     eax, offset unk_B42168
+0x80EC12: cmp     eax, offset stru_B42168
 0x80EC17: jz      short loc_80EC97
 0x80EC19: mov     eax, [eax+4]
 0x80EC1C: test    eax, eax
@@ -217,10 +217,10 @@
 0x80EC5D: mov     [esp+48h+var_4], 0
 0x80EC65: call    eax
 0x80EC67: mov     ecx, [esp+48h+arg_C]; this
-0x80EC6B: push    eax; a2
-0x80EC6C: call    sub_76C910
-0x80EC71: mov     ecx, ebp
-0x80EC73: call    sub_7ED5D0
+0x80EC6B: push    eax; texture
+0x80EC6C: call    NiD3DTextureStage_SetTexture; Native diffuse texture binding. Plugin wraps this setup to bind normal stage1 and projected self-shadow stage2; optional diagnostics chain through the wrapper so instrumentation cannot bypass the layer binds.
+0x80EC71: mov     ecx, ebp; this
+0x80EC73: call    OB_BSShaderProperty_CountPassListEntriesWithMarker_010201A0; OBLIVION AUTHORITY (2026-08-24): Generic pass-list marker counter used by the SpeedTree leaf program selector. Walks property+0x70 entries and counts nonnull shader objects whose word at +0x118 is not 0x00FF. It does not test ShadowSceneLight disabled byte +0xF4. Result selects point-light shader program bit; it is not a leaf layer/card/LOD index.
 0x80EC78: test    ax, ax
 0x80EC7B: mov     ecx, [edi]; this
 0x80EC7D: jnz     short loc_80ECA0
@@ -228,7 +228,7 @@
 0x80EC81: jz      short loc_80EC9B
 0x80EC83: mov     eax, [esi+80h]
 0x80EC89: push    eax; a2
-0x80EC8A: call    sub_7AECB0
+0x80EC8A: call    NiD3DPass_SetVertexShader; Reference-counted NiD3DPass vertex-shader setter. Replaces pass+0x58 and AddRefs the new NiD3DVertexShader.
 0x80EC8F: mov     eax, [esi+90h]
 0x80EC95: jmp     short loc_80ECCA
 0x80EC97: mov     al, 1
@@ -239,62 +239,62 @@
 0x80ECA2: jz      short loc_80ECB8
 0x80ECA4: mov     eax, [esi+88h]
 0x80ECAA: push    eax; a2
-0x80ECAB: call    sub_7AECB0
+0x80ECAB: call    NiD3DPass_SetVertexShader; Reference-counted NiD3DPass vertex-shader setter. Replaces pass+0x58 and AddRefs the new NiD3DVertexShader.
 0x80ECB0: mov     eax, [esi+90h]
 0x80ECB6: jmp     short loc_80ECCA
 0x80ECB8: mov     eax, [esi+84h]
 0x80ECBE: push    eax; a2
-0x80ECBF: call    sub_7AECB0
+0x80ECBF: call    NiD3DPass_SetVertexShader; Reference-counted NiD3DPass vertex-shader setter. Replaces pass+0x58 and AddRefs the new NiD3DVertexShader.
 0x80ECC4: mov     eax, [esi+8Ch]
 0x80ECCA: mov     ecx, [edi]; this
-0x80ECCC: push    eax; a2
-0x80ECCD: call    sub_7AEC60
+0x80ECCC: push    eax; shader
+0x80ECCD: call    NiD3DPass_SetPixelShader; Reference-counted NiD3DPass pixel-shader setter. Replaces pass+0x44 and AddRefs the new NiD3DPixelShader.
 0x80ECD2: cmp     word ptr ds:0B42EACh, 4
 0x80ECDA: mov     ebp, [edi]
 0x80ECDC: jnz     loc_80ED70
 0x80ECE2: cmp     dword ptr [ebp+30h], 0
 0x80ECE6: jnz     short loc_80ECF0
-0x80ECE8: call    sub_772DF0
+0x80ECE8: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x80ECED: mov     [ebp+30h], eax
 0x80ECF0: mov     ecx, [ebp+30h]
 0x80ECF3: push    0
 0x80ECF5: push    1
 0x80ECF7: push    34h ; '4'
-0x80ECF9: call    sub_772CD0
+0x80ECF9: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x80ECFE: mov     ebp, [edi]
 0x80ED00: cmp     dword ptr [ebp+30h], 0
 0x80ED04: jnz     short loc_80ED0E
-0x80ED06: call    sub_772DF0
+0x80ED06: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x80ED0B: mov     [ebp+30h], eax
 0x80ED0E: mov     ecx, [ebp+30h]
 0x80ED11: push    0
 0x80ED13: push    8
 0x80ED15: push    38h ; '8'
-0x80ED17: call    sub_772CD0
+0x80ED17: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x80ED1C: mov     ebp, [edi]
 0x80ED1E: cmp     dword ptr [ebp+30h], 0
 0x80ED22: jnz     short loc_80ED2C
-0x80ED24: call    sub_772DF0
+0x80ED24: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x80ED29: mov     [ebp+30h], eax
 0x80ED2C: mov     ecx, [ebp+30h]
 0x80ED2F: push    0
 0x80ED31: push    7
 0x80ED33: push    37h ; '7'
-0x80ED35: call    sub_772CD0
+0x80ED35: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x80ED3A: mov     ebp, [edi]
 0x80ED3C: cmp     dword ptr [ebp+30h], 0
 0x80ED40: jnz     short loc_80ED4A
-0x80ED42: call    sub_772DF0
+0x80ED42: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x80ED47: mov     [ebp+30h], eax
 0x80ED4A: mov     ecx, [ebp+30h]
 0x80ED4D: push    0
 0x80ED4F: push    1
 0x80ED51: push    35h ; '5'
-0x80ED53: call    sub_772CD0
+0x80ED53: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x80ED58: mov     ebp, [edi]
 0x80ED5A: cmp     dword ptr [ebp+30h], 0
 0x80ED5E: jnz     short loc_80ED68
-0x80ED60: call    sub_772DF0
+0x80ED60: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x80ED65: mov     [ebp+30h], eax
 0x80ED68: push    0
 0x80ED6A: push    1
@@ -302,38 +302,38 @@
 0x80ED6E: jmp     short loc_80ED84
 0x80ED70: cmp     dword ptr [ebp+30h], 0
 0x80ED74: jnz     short loc_80ED7E
-0x80ED76: call    sub_772DF0
+0x80ED76: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x80ED7B: mov     [ebp+30h], eax
 0x80ED7E: push    0
 0x80ED80: push    0
 0x80ED82: push    34h ; '4'
 0x80ED84: mov     ecx, [ebp+30h]
-0x80ED87: call    sub_772CD0
+0x80ED87: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x80ED8C: mov     ebp, [edi]
 0x80ED8E: cmp     dword ptr [ebp+30h], 0
 0x80ED92: jnz     short loc_80ED9C
-0x80ED94: call    sub_772DF0
+0x80ED94: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x80ED99: mov     [ebp+30h], eax
 0x80ED9C: mov     ecx, [ebp+30h]
 0x80ED9F: push    0
 0x80EDA1: push    7
 0x80EDA3: push    0A8h ; '¨'
-0x80EDA8: call    sub_772CD0
+0x80EDA8: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x80EDAD: mov     ebp, [edi]
 0x80EDAF: cmp     dword ptr [ebp+30h], 0
 0x80EDB3: jnz     short loc_80EDBD
-0x80EDB5: call    sub_772DF0
+0x80EDB5: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x80EDBA: mov     [ebp+30h], eax
 0x80EDBD: mov     ecx, [ebp+30h]
 0x80EDC0: push    0
 0x80EDC2: push    0
 0x80EDC4: push    1Ch
-0x80EDC6: call    sub_772CD0
+0x80EDC6: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x80EDCB: mov     ecx, [esi+38h]
-0x80EDCE: push    edi
-0x80EDCF: push    ecx
-0x80EDD0: lea     ecx, [esi+40h]
-0x80EDD3: call    sub_76CE40
+0x80EDCE: push    edi; value
+0x80EDCF: push    ecx; index
+0x80EDD0: lea     ecx, [esi+40h]; this
+0x80EDD3: call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.
 0x80EDD8: mov     ecx, [esp+48h+arg_C]
 0x80EDDC: add     dword ptr [esi+38h], 1
 0x80EDE0: or      eax, 0FFFFFFFFh
@@ -342,7 +342,7 @@
 0x80EDE9: jz      short loc_80EDF5
 0x80EDEB: add     [ecx+5Ch], eax
 0x80EDEE: jnz     short loc_80EDF5
-0x80EDF0: call    sub_772560
+0x80EDF0: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x80EDF5: xor     eax, eax
 0x80EDF7: mov     ecx, [esp+48h+var_C]
 0x80EDFB: mov     large fs:0, ecx
@@ -353,3 +353,19 @@
 0x80EE06: pop     ebx
 0x80EE07: add     esp, 34h
 0x80EE0A: retn    1Ch
+0x75FA70: mov     ecx, [ecx]
+0x75FA72: test    ecx, ecx
+0x75FA74: jz      short locret_75FA81
+0x75FA76: add     dword ptr [ecx+5Ch], 0FFFFFFFFh
+0x75FA7A: jnz     short locret_75FA81
+0x75FA7C: jmp     sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
+0x75FA81: retn
+0x9D1100: lea     ecx, [ebp+10h]
+0x9D1103: jmp     loc_75FA70
+0x9D1108: mov     edx, [esp+arg_4]
+0x9D110C: lea     eax, [edx-38h]
+0x9D110F: mov     ecx, [edx-3Ch]
+0x9D1112: xor     ecx, eax
+0x9D1114: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D1119: mov     eax, offset stru_AF9820
+0x9D111E: jmp     ___CxxFrameHandler3

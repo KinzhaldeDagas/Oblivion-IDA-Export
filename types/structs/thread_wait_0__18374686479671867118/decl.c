@@ -1,1 +1,1 @@
-thread_wait_0
+typedef thread_wait thread_wait_0;

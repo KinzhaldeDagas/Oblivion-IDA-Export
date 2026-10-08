@@ -67,7 +67,6 @@
 0x93C46D: lea     ecx, [esp+0A0h+var_40]
 0x93C471: lea     eax, [esi+20h]
 0x93C474: jmp     short loc_93C480
-0x93C476: align 10h
 0x93C480: movaps  xmm0, xmmword ptr [eax+80h]
 0x93C487: movaps  xmm1, xmmword ptr [eax]
 0x93C48A: subps   xmm1, xmm0

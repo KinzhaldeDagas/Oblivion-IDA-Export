@@ -211,19 +211,19 @@
   },
   {
     "ea": "0x45D1E2",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x45D1E7",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x45D1E9",
-    "line": "call    sub_60BE90",
+    "line": "call    ArrowProjectile_ResolveCollisionState; Validates projectile collision data and dispatches persisted collision state 0..4 to the corresponding reconstruction helper. Missing node collision data is reported and the stale state record is freed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -264,12 +264,6 @@
     "size": 2
   },
   {
-    "ea": "0x45D1FD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x45D200",
     "line": "mov     eax, [edi+4]",
     "mnemonic": "mov",
@@ -289,7 +283,7 @@
   },
   {
     "ea": "0x45D207",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

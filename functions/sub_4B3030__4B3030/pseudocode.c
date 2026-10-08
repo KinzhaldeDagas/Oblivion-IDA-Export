@@ -1,71 +1,74 @@
-void __thiscall sub_4B3030(
-        char *this,
-        int a2,
-        float *a3,
-        int a4,
-        unsigned int a5,
-        int a6,
-        int a7,
-        int a8,
-        Ni2DBuffer *a9)
+// Verified Oblivion base-object distant-instance record carries position XYZ, rotationAnglesXYZ, scalePercent, and a cellLODBuffer; the queued task builds NiAVObject transform as BaseRotation * RxTransposed * Ry * Rz and applies abs(floor(scalePercent)/100). Fallout's inspected DistantLODShaderProperty::AddDistantLOD feeds DistantLODGroup::DistantLODInstanceData with position XYZ plus one fScaleColor float and no rotation-angle array. This is a renderer/layout divergence, not an offset match.
+void __thiscall TESBoundObject_UpdateDistantLODInstances(
+        TESBoundObject *this,
+        NiPoint3 *positions,
+        NiPoint3 *rotationAnglesXYZ,
+        float *scalePercent,
+        unsigned int recordCount,
+        unsigned int cellChunk,
+        unsigned int packedCellLabel,
+        NiNode *instancedLODNode,
+        Ni2DBuffer *cellLODBuffer)
 {
-  float *v10; // ebx
-  float *v11; // edi
-  int v12; // eax
-  int v13; // esi
+  NiPoint3 *v10; // ebx
+  float *p_z; // edi
+  DistantLODQueuedInstanceData *v12; // eax
+  DistantLODQueuedInstanceData *queuedInstanceData; // esi
   float v14; // [esp+20h] [ebp-128h]
   float v15; // [esp+20h] [ebp-128h]
   float v16; // [esp+20h] [ebp-128h]
   float v17; // [esp+20h] [ebp-128h]
   unsigned int v18; // [esp+24h] [ebp-124h]
-  int v19; // [esp+2Ch] [ebp-11Ch]
+  TESTextureList *textureHashCache; // [esp+2Ch] [ebp-11Ch]
   char Str[268]; // [esp+38h] [ebp-110h] BYREF
 
-  if ( a9 )
+  if ( cellLODBuffer ) /*0x4b305c*/
   {
-    if ( a2 )
+    if ( positions ) /*0x4b3066*/
     {
-      v10 = a3;
-      if ( a3 )
+      v10 = rotationAnglesXYZ; /*0x4b306c*/
+      if ( rotationAnglesXYZ ) /*0x4b3071*/
       {
-        if ( a4 )
+        if ( scalePercent ) /*0x4b307b*/
         {
-          if ( a5 )
+          if ( recordCount ) /*0x4b3086*/
           {
-            sub_46D540(Str, this);
-            if ( Str[0] )
+            sub_46D540(Str, (char *)this); /*0x4b3092*/
+            if ( Str[0] ) /*0x4b309f*/
             {
-              v19 = sub_4B2BD0((int)this);
-              v18 = 0;
-              v11 = (float *)(a2 + 8);
-              do
+              textureHashCache = TESBoundObject_GetTextureHashCache(this); /*0x4b30ae*/
+              v18 = 0; /*0x4b30b2*/
+              p_z = &positions->z; /*0x4b30c7*/
+              do /*0x4b3198*/
               {
-                v12 = FormHeapAlloc(0x20u);
-                v13 = 0;
-                if ( v12 )
+                v12 = (DistantLODQueuedInstanceData *)FormHeapAlloc(0x20u);// Verified: allocates a 0x20-byte DistantLODQueuedInstanceData record: position (+0), rotationAngles (+0x0C), normalized scale (+0x18), cellLODBuffer (+0x1C). /*0x4b30d0*/
+                queuedInstanceData = 0; /*0x4b30d5*/
+                if ( v12 ) /*0x4b30dc*/
                 {
-                  *(_DWORD *)(v12 + 0x1C) = 0;
-                  v13 = v12;
+                  v12->cellLODBuffer = 0; /*0x4b30de*/
+                  queuedInstanceData = v12; /*0x4b30e1*/
                 }
-                NiSmartPointer_Set__((Ni2DBuffer **)(v13 + 0x1C), a9);
-                v14 = floor(*(float *)(a4 + 4 * v18));
-                *(float *)(v13 + 0x18) = v14 / fCostant_100;
-                v15 = floor(v11[0xFFFFFFFE]);
-                *(float *)v13 = v15;
-                v16 = floor(v11[0xFFFFFFFF]);
-                *(float *)(v13 + 4) = v16;
-                v17 = floor(*v11);
-                *(float *)(v13 + 8) = v17;
-                *(float *)(v13 + 0xC) = *v10;
-                *(float *)(v13 + 0x10) = v10[1];
-                *(float *)(v13 + 0x14) = *(float *)((char *)v11 + (_DWORD)a3 - a2);
-                sub_4385B0(Str, v13, v19);
-                v11 += 3;
-                v10 += 3;
-                ++v18;
+                NiSmartPointer_Set__(&queuedInstanceData->cellLODBuffer, cellLODBuffer);// Verified: stores and retains cellLODBuffer in DistantLODQueuedInstanceData+0x1C; the queued task destructor later releases it. /*0x4b30eb*/
+                v14 = floor(scalePercent[v18]); /*0x4b3105*/
+                queuedInstanceData->scale = v14 / fCostant_100;// Verified: converts scalePercent to a normalized value by flooring then dividing by 100; QueuedDistantLOD_ApplyTransform later applies abs(normalizedValue) to the cloned NiAVObject transform scale. /*0x4b3113*/
+                v15 = floor(p_z[0xFFFFFFFE]); /*0x4b3121*/
+                queuedInstanceData->position.x = v15; /*0x4b3129*/
+                v16 = floor(p_z[0xFFFFFFFF]); /*0x4b3136*/
+                queuedInstanceData->position.y = v16; /*0x4b313e*/
+                v17 = floor(*p_z); /*0x4b314b*/
+                queuedInstanceData->position.z = v17; /*0x4b315b*/
+                queuedInstanceData->rotationAnglesXYZ.x = v10->x; /*0x4b3163*/
+                queuedInstanceData->rotationAnglesXYZ.y = v10->y; /*0x4b316b*/
+                queuedInstanceData->rotationAnglesXYZ.z = *(float *)((char *)p_z /*0x4b3176*/
+                                                                   + (char *)rotationAnglesXYZ
+                                                                   - (char *)positions);
+                QueuedDistantLOD_CreateAndQueue(Str, queuedInstanceData, textureHashCache); /*0x4b317f*/
+                p_z += 3; /*0x4b318b*/
+                ++v10; /*0x4b318e*/
+                ++v18; /*0x4b3194*/
               }
-              while ( v18 < a5 );
-              sub_4B2730(this, a5, a7);
+              while ( v18 < recordCount ); /*0x4b3198*/
+              DistantLOD_AddModelUsage(this, recordCount, packedCellLabel); /*0x4b31ab*/
             }
           }
         }

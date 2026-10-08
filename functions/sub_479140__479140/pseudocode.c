@@ -1,72 +1,80 @@
-char __cdecl sub_479140(_DWORD *a1, _DWORD *a2, NiObjectNET *a3, int a4, int a5)
+// Six-argument cdecl helper (all ten native callers push 6 arguments; unusedContext and unusedTrailing are not read). Reads NiStringExtraData 'Prn' from sourceModelRoot, falling back to modelRoot; resolves that exact parent in skeletonRoot and attaches modelRoot. For modelType==7 it forces Prn string byte 6 to 'L' for lookup, then writes it back to 'R'. It then finds exact-name 'Scb' inside modelRoot and attaches that object separately to the same parent, reparenting Scb as modelRoot's sibling before refreshing property/effect state. Missing creature parents invoke the narrow FadeNode-chain Scb removal. Every exit returns the bool result of sub_88D000(modelRoot,1,1), which is not proven to be general attachment success.
+bool __cdecl AttachModelUsingPrnExtraData(
+        NiNode *skeletonRoot,
+        NiAVObject *modelRoot,
+        NiObjectNET *sourceModelRoot,
+        unsigned int unusedContext,
+        int modelType,
+        unsigned int unusedTrailing)
 {
   NiObject *ExtraData; // eax
-  NiObject *v6; // eax
-  NiObject *v7; // edi
-  int v8; // eax
-  int v9; // esi
-  PlayerCharacter *v10; // eax
-  PlayerCharacter *v11; // esi
-  NiAVObject *v13; // edi
+  NiObject *v7; // eax
+  NiObject *v8; // edi
+  int v9; // eax
+  int v10; // esi
+  PlayerCharacter *v11; // eax
+  PlayerCharacter *v12; // esi
+  NiAVObject *v14; // edi
 
-  if ( a3 && (ExtraData = (NiObject *)NiObjectNET_GetExtraData(a3, (const char *)&off_A3CEAC)) != 0
-    || (ExtraData = (NiObject *)NiObjectNET_GetExtraData((NiObjectNET *)a2, (const char *)&off_A3CEAC)) != 0 )
+  if ( sourceModelRoot /*0x479169*/
+    && (ExtraData = (NiObject *)NiObjectNET_GetExtraData(sourceModelRoot, (const char *)&off_A3CEAC)) != 0
+    || (ExtraData = (NiObject *)NiObjectNET_GetExtraData((NiObjectNET *)modelRoot, (const char *)&off_A3CEAC)) != 0 )
   {
-    v6 = NiRTTI_Cast((BSStringT *)dword_B3FCC0, ExtraData);
-    v7 = v6;
-    if ( v6 )
+    v7 = NiRTTI_Cast((BSStringT *)stru_B3FCC0, ExtraData); /*0x479176*/
+    v8 = v7; /*0x47917b*/
+    if ( v7 ) /*0x479182*/
     {
-      if ( a5 == 7 )
-        *(_BYTE *)(v6[1].members.m_uiRefCount + 6) = 0x4C;
-      v8 = NiObjectNET_LookupObjectByName(a1, (char *)v6[1].members.m_uiRefCount);
-      v9 = v8;
-      if ( a5 == 7 )
-        *(_BYTE *)(v7[1].members.m_uiRefCount + 6) = 0x52;
-      if ( v8 )
+      if ( modelType == 7 ) /*0x479194*/
+        *(_BYTE *)(v7[1].members.m_uiRefCount + 6) = 0x4C; /*0x479199*/
+      v9 = NiObjectNET_LookupObjectByName(skeletonRoot, (char *)v7[1].members.m_uiRefCount); /*0x4791a6*/
+      v10 = v9; /*0x4791b0*/
+      if ( modelType == 7 ) /*0x4791b2*/
+        *(_BYTE *)(v8[1].members.m_uiRefCount + 6) = 0x52; /*0x4791b7*/
+      if ( v9 ) /*0x4791bd*/
       {
-        (*(void (__thiscall **)(int, _DWORD *, int))(*(_DWORD *)v8 + 0x84))(v8, a2, 1);
-        v13 = (NiAVObject *)NiObjectNET_LookupObjectByName(a2, off_A3CE0C);
-        if ( v13 )
+        (*(void (__thiscall **)(int, NiAVObject *, int))(*(_DWORD *)v9 + 0x84))(v9, modelRoot, 1);// Attach the generated model root to the exact skeleton parent selected by Prn extra data. /*0x479288*/
+        v14 = (NiAVObject *)NiObjectNET_LookupObjectByName(modelRoot, off_A3CE0C); /*0x479295*/
+        if ( v14 ) /*0x47929c*/
         {
-          (*(void (__thiscall **)(int, NiAVObject *, int))(*(_DWORD *)v9 + 0x84))(v9, v13, 1);
-          sub_897A90(v9, 1);
-          NiAVObject_InitializePropertyState(v13);
-          NiNode_UpdateDynamicEffectState((NiNode *)v13);
-          sub_4784A0((_WORD *)a2 + 0x56);
-          sub_477F90((int)(a2 + 0x2B));
+          (*(void (__thiscall **)(int, NiAVObject *, int))(*(_DWORD *)v10 + 0x84))(v10, v14, 1);// Reparent exact-name Scb out of modelRoot as a sibling under the same Prn-selected parent; AddObject detaches it from its former parent. /*0x4792ab*/
+          sub_897A90(v10, 1); /*0x4792b0*/
+          NiAVObject_InitializePropertyState(v14); /*0x4792ba*/
+          NiNode_UpdateDynamicEffectState((NiNode *)v14); /*0x4792c1*/
+          sub_4784A0(&modelRoot[1]); /*0x4792ce*/
+          sub_477F90((int)&modelRoot[1]); /*0x4792d5*/
         }
-        return sub_88D000(a2, 1, 1);
+        return sub_88D000((NiObjectNET *)modelRoot, 1, 1); /*0x4792e2*/
       }
       else
       {
-        v10 = sub_4DC270((int)a1);
-        v11 = v10;
-        if ( v10
-          && v10->vtbl->super.super.super.GetBaseForm((TESObjectREFR *)v10)
-          && v11->vtbl->super.super.super.GetBaseForm((TESObjectREFR *)v11)->member.type == kFormType_Creature )
+        v11 = sub_4DC270((int)skeletonRoot); /*0x4791c8*/
+        v12 = v11; /*0x4791cd*/
+        if ( v11 /*0x4791f6*/
+          && v11->vtbl->super.super.super.GetBaseForm((TESObjectREFR *)v11)
+          && v12->vtbl->super.super.super.GetBaseForm((TESObjectREFR *)v12)->member.type == kFormType_Creature )
         {
-          sub_480770((int)a2);
-          return sub_88D000(a2, 1, 1);
+          NiNode_RemoveScbChildAlongFadeNodeChain((NiNode *)modelRoot); /*0x4791f9*/
+          return sub_88D000((NiObjectNET *)modelRoot, 1, 1); /*0x479209*/
         }
         else
         {
-          PrintError(
+          PrintError( /*0x479220*/
             "Could not find parent node '%s' for object '%s'.",
-            (const char *)v7[1].members.m_uiRefCount,
-            (const char *)a2[2]);
-          return sub_88D000(a2, 1, 1);
+            (const char *)v8[1].members.m_uiRefCount,
+            modelRoot->members.super.m_pcName);
+          return sub_88D000((NiObjectNET *)modelRoot, 1, 1); /*0x479230*/
         }
       }
     }
     else
     {
-      PrintError("Extra data 'Prn' on '%s' is not an NiStringExtraData.", (const char *)a2[2]);
-      return sub_88D000(a2, 1, 1);
+      PrintError("Extra data 'Prn' on '%s' is not an NiStringExtraData.", modelRoot->members.super.m_pcName); /*0x479243*/
+      return sub_88D000((NiObjectNET *)modelRoot, 1, 1); /*0x479251*/
     }
   }
   else
   {
-    PrintError("Could not find parent node extra data for '%s'.", (const char *)a2[2]);
-    return sub_88D000(a2, 1, 1);
+    PrintError("Could not find parent node extra data for '%s'.", modelRoot->members.super.m_pcName); /*0x479264*/
+    return sub_88D000((NiObjectNET *)modelRoot, 1, 1); /*0x479271*/
   }
 }

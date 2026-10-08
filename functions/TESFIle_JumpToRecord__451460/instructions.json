@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x451487",
-    "line": "mov     eax, [esp+8+Buffer]",
+    "line": "mov     eax, [esp+8+Buffer]; MEF v20 fix: validate TESFIle_JumpToRecord target before committing currentRecordOffset. Invalid targets clear record metadata without poisoning parser offset state.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x451491",
-    "line": "mov     [esi+25Ch], eax",
+    "line": "mov     [esi+25Ch], eax; EngineIssues review: TESFIle_JumpToRecord commits requested target to currentRecordOffset before validating target < fileSize; failed jumps can poison parser state.",
     "mnemonic": "mov",
     "size": 6
   },

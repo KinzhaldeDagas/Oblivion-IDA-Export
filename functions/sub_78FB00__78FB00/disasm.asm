@@ -1,4 +1,4 @@
-0x78FB00: mov     ecx, [esp+arg_0]
+0x78FB00: mov     ecx, [esp+arg_0]; Allocates count contiguous 0x18-byte OB_CBranchFlareEntry records from FormHeap. Checks count*24 overflow and throws std::bad_alloc before allocation on overflow.
 0x78FB04: sub     esp, 0Ch
 0x78FB07: test    ecx, ecx
 0x78FB09: ja      short loc_78FB23

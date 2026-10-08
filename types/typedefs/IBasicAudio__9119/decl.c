@@ -1,1 +1,4 @@
-IBasicAudio
+struct IBasicAudio
+{
+IBasicAudioVtbl *lpVtbl;
+};

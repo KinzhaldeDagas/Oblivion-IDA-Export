@@ -1,8 +1,8 @@
-0x8AC6A0: push    ebp
+0x8AC6A0: push    ebp; TES4 authoritative: applies entity/contact interaction callbacks and impulses for current manifold entries; entry+0x28 is treated as collidable/contact data, not a TESObjectREFR.
 0x8AC6A1: mov     ebp, esp
 0x8AC6A3: and     esp, 0FFFFFFF0h
 0x8AC6A6: sub     esp, 0E4h
-0x8AC6AC: mov     eax, [ebp+arg_0]
+0x8AC6AC: mov     eax, [ebp+moveInput]
 0x8AC6AF: push    ebx
 0x8AC6B0: push    esi
 0x8AC6B1: mov     esi, ecx
@@ -16,7 +16,7 @@
 0x8AC6C6: jle     loc_8ACAB3
 0x8AC6CC: mov     [esp+0F0h+var_C8], ebx
 0x8AC6D0: mov     edx, [esi+74h]
-0x8AC6D3: mov     ecx, [ebx+edx+28h]
+0x8AC6D3: mov     ecx, [ebx+edx+28h]; Reads manifold entry+0x28 hit collidable/contact reference and walks Havok entity data from it.
 0x8AC6D7: mov     eax, [ecx+10h]
 0x8AC6DA: mov     edx, [eax+ecx+48h]
 0x8AC6DE: add     eax, ecx
@@ -26,7 +26,6 @@
 0x8AC6E6: mov     eax, [eax+44h]
 0x8AC6E9: mov     edi, eax
 0x8AC6EB: jmp     short loc_8AC6F0
-0x8AC6ED: align 10h
 0x8AC6F0: cmp     dword ptr [edi], 1300h
 0x8AC6F6: jz      short loc_8AC702
 0x8AC6F8: inc     ecx
@@ -50,9 +49,8 @@
 0x8AC72A: mov     edi, [esi+84h]
 0x8AC730: dec     edi
 0x8AC731: mov     dword ptr [esp+0F0h+var_C0+4], eax
-0x8AC735: js      short loc_8AC761
+0x8AC735: js      short loc_8AC761; Invokes registered character proxy listeners before entity interaction resolution.
 0x8AC737: jmp     short loc_8AC740
-0x8AC739: align 10h
 0x8AC740: mov     ecx, [esi+80h]
 0x8AC746: mov     ecx, [ecx+edi*4]
 0x8AC749: test    ecx, ecx
@@ -105,7 +103,7 @@
 0x8AC7EA: shufps  xmm6, xmm0, 0D2h ; 'Ò'
 0x8AC7EE: movaps  xmm0, xmm1
 0x8AC7F1: shufps  xmm0, xmm1, 0C9h ; 'É'
-0x8AC7F5: mov     ebx, [ebp+arg_0]
+0x8AC7F5: mov     ebx, [ebp+moveInput]
 0x8AC7F8: mulps   xmm0, xmm6
 0x8AC7FB: subps   xmm0, xmm7
 0x8AC7FE: addps   xmm0, xmm5
@@ -168,9 +166,9 @@
 0x8AC8DB: push    eax
 0x8AC8DC: lea     ecx, [esp+0F8h+var_40]
 0x8AC8E3: movaps  [esp+0F8h+var_50], xmm1
-0x8AC8EB: call    sub_88FE00
+0x8AC8EB: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x8AC8F0: movaps  xmm1, [esp+0F0h+var_50]
-0x8AC8F8: movaps  xmm0, xmmword ptr [esp+0F0h+var_40]
+0x8AC8F8: movaps  xmm0, [esp+0F0h+var_40]
 0x8AC900: mulps   xmm0, xmm1
 0x8AC903: movaps  xmm1, xmm0
 0x8AC906: shufps  xmm1, xmm0, 55h ; 'U'
@@ -219,7 +217,7 @@
 0x8AC9A9: mov     eax, [edx+0C0h]
 0x8AC9AF: mov     [esp+0F0h+var_84], eax
 0x8AC9B3: mov     ecx, [ebx+8]
-0x8AC9B6: mov     edx, [ebp+arg_4]
+0x8AC9B6: mov     edx, [ebp+surfaceMotion]
 0x8AC9B9: movaps  xmm3, xmmword ptr [edx]
 0x8AC9BC: mov     dword ptr [esp+0F0h+var_C0+0Ch], ecx
 0x8AC9C0: movss   xmm0, dword ptr [esp+0F0h+var_C0+0Ch]
@@ -261,7 +259,7 @@
 0x8ACA44: fstp    st
 0x8ACA46: mov     ebx, [esi+84h]
 0x8ACA4C: dec     ebx
-0x8ACA4D: js      short loc_8ACA73
+0x8ACA4D: js      short loc_8ACA73; Invokes registered character proxy listeners after computing contact/entity impulse.
 0x8ACA4F: nop
 0x8ACA50: mov     ecx, [esi+80h]
 0x8ACA56: mov     ecx, [ecx+ebx*4]

@@ -110,7 +110,7 @@
 0x7C36D5: push    1
 0x7C36D7: mov     ecx, esi
 0x7C36D9: call    eax
-0x7C36DB: push    offset NiRefObject_objcount; lpAddend
+0x7C36DB: push    0B3FD64h; lpAddend
 0x7C36E0: mov     dword ptr [edi], offset ??_7NiRefObject@@6B@; const NiRefObject::`vftable'
 0x7C36E6: call    ebx ; InterlockedDecrement
 0x7C36E8: mov     ecx, dword ptr [esp+20h+var_C]
@@ -121,3 +121,27 @@
 0x7C36F6: pop     ebx
 0x7C36F7: add     esp, 10h
 0x7C36FA: retn
+0x9CE460: mov     ecx, [ebp-10h]
+0x9CE463: jmp     NiRefObject_destr
+0x9CE468: mov     ecx, [ebp-10h]
+0x9CE46B: add     ecx, 8; slot
+0x9CE46E: jmp     NiPointerSlot_Release
+0x9CE473: mov     ecx, [ebp-10h]
+0x9CE476: add     ecx, 14h; slot
+0x9CE479: jmp     NiPointerSlot_Release
+0x9CE47E: mov     ecx, [ebp-10h]
+0x9CE481: add     ecx, 18h; slot
+0x9CE484: jmp     NiPointerSlot_Release
+0x9CE489: mov     ecx, [ebp-10h]
+0x9CE48C: add     ecx, 1Ch; slot
+0x9CE48F: jmp     NiPointerSlot_Release
+0x9CE494: mov     ecx, [ebp-10h]
+0x9CE497: add     ecx, 20h ; ' '; slot
+0x9CE49A: jmp     NiPointerSlot_Release
+0x9CE49F: mov     edx, [esp+arg_4]
+0x9CE4A3: lea     eax, [edx-10h]
+0x9CE4A6: mov     ecx, [edx-14h]
+0x9CE4A9: xor     ecx, eax
+0x9CE4AB: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CE4B0: mov     eax, offset stru_AF7460
+0x9CE4B5: jmp     ___CxxFrameHandler3

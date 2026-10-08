@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x47B7F9",
-    "line": "mov     edi, [esp+74h+arg_0]",
+    "line": "mov     edi, [esp+74h+unusedTrailing]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x47B805",
-    "line": "mov     esi, [esp+74h+arg_4]",
+    "line": "mov     esi, [esp+74h+modelRoot]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x47B826",
-    "line": "mov     byte ptr [esp+74h+arg_0], 0",
+    "line": "mov     byte ptr [esp+74h+unusedTrailing], 0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -187,13 +187,13 @@
   },
   {
     "ea": "0x47B837",
-    "line": "mov     byte ptr [esp+74h+arg_0], 1",
+    "line": "mov     byte ptr [esp+74h+unusedTrailing], 1",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x47B83C",
-    "line": "mov     ecx, [esp+74h+arg_0]",
+    "line": "mov     ecx, [esp+74h+unusedTrailing]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -265,37 +265,37 @@
   },
   {
     "ea": "0x47B857",
-    "line": "push    edi",
+    "line": "push    edi; unusedTrailing",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x47B858",
-    "line": "push    1",
+    "line": "push    1; modelType",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x47B85A",
-    "line": "push    ebp",
+    "line": "push    ebp; unusedContext",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x47B85B",
-    "line": "push    eax",
+    "line": "push    eax; sourceModelRoot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x47B85C",
-    "line": "push    esi",
+    "line": "push    esi; modelRoot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x47B85D",
-    "line": "push    edx",
+    "line": "push    edx; skeletonRoot",
     "mnemonic": "push",
     "size": 1
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x47B860",
-    "line": "call    sub_479140",
+    "line": "call    AttachModelUsingPrnExtraData; Six-argument cdecl helper (all ten native callers push 6 arguments; unusedContext and unusedTrailing are not read). Reads NiStringExtraData 'Prn' from sourceModelRoot, falling back to modelRoot; resolves that exact parent in skeletonRoot and attaches modelRoot. For modelType==7 it forces Prn string byte 6 to 'L' for lookup, then writes it back to 'R'. It then finds exact-name 'Scb' inside modelRoot and attaches that object separately to the same parent, reparenting Scb as modelRoot's sibling before refreshing property/effect state. Missing creature parents invoke the narrow FadeNode-chain Scb removal. Every exit returns the bool result of sub_88D000(modelRoot,1,1), which is not proven to be general attachment success.",
     "mnemonic": "call",
     "size": 5
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x47B8E9",
-    "line": "mov     esi, [esp+74h+arg_4]",
+    "line": "mov     esi, [esp+74h+modelRoot]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x47B8F4",
-    "line": "call    NiObjectNET_GetExtraData",
+    "line": "call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.",
     "mnemonic": "call",
     "size": 5
   },
@@ -787,7 +787,7 @@
   },
   {
     "ea": "0x47B95B",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -841,7 +841,7 @@
   },
   {
     "ea": "0x47B976",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -916,5 +916,59 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AF300",
+    "line": "lea     ecx, [ebp-5Ch]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF303",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF308",
+    "line": "mov     edx, [esp+modelRoot]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AF30C",
+    "line": "lea     eax, [edx-64h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF30F",
+    "line": "mov     ecx, [edx-68h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF312",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AF314",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF319",
+    "line": "mov     eax, offset stru_ADB91C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF31E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

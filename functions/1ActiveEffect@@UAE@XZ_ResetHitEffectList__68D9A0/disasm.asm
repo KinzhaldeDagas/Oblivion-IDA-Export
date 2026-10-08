@@ -1,4 +1,4 @@
-0x68D9A0: mov     ecx, [esi+34h]
+0x68D9A0: mov     ecx, [esi+34h]; Verified BSSimpleList_Clear frees successor HitEffectNode allocations and clears the root node's data; ActiveEffect::~ActiveEffect then frees the root/header. Hit-effect objects are detached first and are not deleted by this list clear.
 0x68D9A3: test    ecx, ecx
-0x68D9A5: jz      short ??1ActiveEffect@@UAE@XZ___DeleteHitEffectList
-0x68D9A7: call    BSSimpleList_Clear
+0x68D9A5: jz      short ??1ActiveEffect@@UAE@XZ___DeleteHitEffectList; Verified ActiveEffect destructor frees the HitEffectNode root allocation only after BSSimpleList_Clear frees successor nodes; BSTempEffect items are detached and remain under ActorProcessManager refcount/update lifecycle.
+0x68D9A7: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.

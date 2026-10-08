@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x66D19E",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x66D272",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x66D27B",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -883,7 +883,7 @@
   },
   {
     "ea": "0x66D32D",
-    "line": "call    sub_404C90",
+    "line": "call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -967,7 +967,7 @@
   },
   {
     "ea": "0x66D368",
-    "line": "call    bhkWorldRayCastData__Init",
+    "line": "call    bhkWorldRayCastData__Init; TES4 authoritative: bhkWorldRayCastData::Init. Raycast input From at +0x00, To at +0x10, enable/filter at +0x20/+0x24, output hit fraction at +0x44, root collidable at +0x50, extra collector pointers at +0x70/+0x74/+0x78.",
     "mnemonic": "call",
     "size": 5
   },
@@ -991,7 +991,7 @@
   },
   {
     "ea": "0x66D374",
-    "line": "call    sub_65ABE0",
+    "line": "call    MobileObject_GetCollisionFilterInfo; Returns actor/proxy collision filter identity by calling 0x57E270 on MobileObject_GetCharProxy(this). Callers keep high 16 bits and OR in the chosen collision layer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1039,7 +1039,7 @@
   },
   {
     "ea": "0x66D396",
-    "line": "call    bhkWorldRayCastData__SetCastInputFrom",
+    "line": "call    bhkWorldRayCastData__SetCastInputFrom; TES4 authoritative: bhkWorldRayCastData::SetCastInputFrom; scales world-space NiPoint3 into Havok units using hkFactor and writes ray From.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1177,7 +1177,7 @@
   },
   {
     "ea": "0x66D3ED",
-    "line": "call    sub_663FF0",
+    "line": "call    sub_663FF0; bhkWorldRayCastData::SetCastDirectionVector. Converts a world-space direction vector by hkFactor and writes data+0x60. Used by actor movement probes for downward ground snapping instead of an absolute To point.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1237,7 +1237,7 @@
   },
   {
     "ea": "0x66D415",
-    "line": "call    sub_889CD0",
+    "line": "call    bhkWorldRayCastData_GetHitInfoIfTyped; Raycast data -> low-level hit info helper from root collidable + internal offset; used to inspect collision layer in TES::CastRay.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1525,7 +1525,7 @@
   },
   {
     "ea": "0x66D4D4",
-    "line": "push    offset dword_B258E8",
+    "line": "push    offset rhs",
     "mnemonic": "push",
     "size": 5
   },
@@ -1729,7 +1729,7 @@
   },
   {
     "ea": "0x66D566",
-    "line": "call    sub_43F3E0",
+    "line": "call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1837,7 +1837,7 @@
   },
   {
     "ea": "0x66D5AE",
-    "line": "call    sub_404C90",
+    "line": "call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1969,7 +1969,7 @@
   },
   {
     "ea": "0x66D5FA",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1987,13 +1987,13 @@
   },
   {
     "ea": "0x66D603",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x66D605",
-    "line": "call    sub_8913C0",
+    "line": "call    bhkCharacterController_GetRadius; Controller radius helper. Returns shape radius from proxy+0x374 object when available, else proxy+0x3A0/E8 default. MobileObject::Move converts this from Havok to world with 0xA372E0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2125,7 +2125,7 @@
   },
   {
     "ea": "0x66D65D",
-    "line": "mov     ecx, offset fMagicTelekinesisComplexSpringDamping",
+    "line": "mov     ecx, (offset flt_B37ED0+1A0h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2143,7 +2143,7 @@
   },
   {
     "ea": "0x66D669",
-    "line": "mov     ecx, offset fMagicTelekinesisComplexSpringElasticit",
+    "line": "mov     ecx, (offset flt_B37ED0+1A8h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2167,7 +2167,7 @@
   },
   {
     "ea": "0x66D67C",
-    "line": "mov     ecx, offset fMagicTelekinesisComplexObjectDamping",
+    "line": "mov     ecx, (offset flt_B37ED0+1B0h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2191,7 +2191,7 @@
   },
   {
     "ea": "0x66D68F",
-    "line": "mov     ecx, offset fMagicTelekinesisComplexMaxForce",
+    "line": "mov     ecx, (offset flt_B37ED0+1B8h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2221,7 +2221,7 @@
   },
   {
     "ea": "0x66D6A7",
-    "line": "mov     ecx, offset fMagicTelekinesisSpringDamping",
+    "line": "mov     ecx, (offset flt_B37ED0+180h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2239,7 +2239,7 @@
   },
   {
     "ea": "0x66D6B3",
-    "line": "mov     ecx, offset fMagicTelekinesisSpringElasticity",
+    "line": "mov     ecx, (offset flt_B37ED0+188h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2263,7 +2263,7 @@
   },
   {
     "ea": "0x66D6C6",
-    "line": "mov     ecx, offset fMagicTelekinesisObjectDamping",
+    "line": "mov     ecx, (offset flt_B37ED0+190h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2287,7 +2287,7 @@
   },
   {
     "ea": "0x66D6D9",
-    "line": "mov     ecx, offset fMagicTelekinesisMaxForce",
+    "line": "mov     ecx, (offset flt_B37ED0+198h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2803,7 +2803,7 @@
   },
   {
     "ea": "0x66D817",
-    "line": "call    sub_88FD90",
+    "line": "call    hkBasis_ProjectVector; TES4 authoritative: basis projection helper, computes local components from basis columns and source vector without translation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2839,7 +2839,7 @@
   },
   {
     "ea": "0x66D833",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3025,7 +3025,7 @@
   },
   {
     "ea": "0x66D89F",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3073,7 +3073,7 @@
   },
   {
     "ea": "0x66D8B8",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3262,5 +3262,101 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C4170",
+    "line": "mov     eax, [ebp+var_16C]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C4176",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C4177",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C417C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C417D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C417E",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C4182",
+    "line": "lea     eax, [edx-174h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C4188",
+    "line": "mov     ecx, [edx-178h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C418E",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C4190",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4195",
+    "line": "add     eax, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C4198",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C419B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C419D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C41A2",
+    "line": "mov     eax, offset stru_AECBA8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C41A7",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -25,32 +25,32 @@
 0x754A00: jz      short loc_754A12
 0x754A02: lea     esi, [eax+64h]
 0x754A05: mov     ecx, 0Dh
-0x754A0A: lea     edi, [esp+0E4h+var_9C]
+0x754A0A: lea     edi, [esp+0E4h+local]
 0x754A0E: rep movsd
 0x754A10: jmp     short loc_754A1B
-0x754A12: lea     ecx, [esp+0E4h+var_9C]
+0x754A12: lea     ecx, [esp+0E4h+local]
 0x754A16: call    sub_718A50
 0x754A1B: mov     ecx, [ebx+24h]
 0x754A1E: mov     eax, [ecx+10h]
 0x754A21: lea     esi, [eax+64h]
 0x754A24: mov     ecx, 0Dh
 0x754A29: lea     edi, [esp+0E4h+var_68]
-0x754A2D: lea     edx, [esp+0E4h+var_34]
+0x754A2D: lea     edx, [esp+0E4h+parent]
 0x754A34: rep movsd
 0x754A36: push    edx
 0x754A37: lea     ecx, [esp+0E8h+var_68]
-0x754A3E: call    sub_718A80
-0x754A43: lea     eax, [esp+0E4h+var_9C]
-0x754A47: push    eax
-0x754A48: lea     ecx, [esp+0E8h+var_D0]
-0x754A4C: push    ecx
-0x754A4D: lea     ecx, [esp+0ECh+var_34]
-0x754A54: call    sub_53D7A0
+0x754A3E: call    sub_718A80;
+0x754A43: lea     eax, [esp+0E4h+local]
+0x754A47: push    eax; local
+0x754A48: lea     ecx, [esp+0E8h+out]
+0x754A4C: push    ecx; out
+0x754A4D: lea     ecx, [esp+0ECh+parent]; parent
+0x754A54: call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.
 0x754A59: fld     dword ptr [ebx+30h]
-0x754A5C: mov     edx, [esp+0E4h+var_AC]
-0x754A60: fmul    [esp+0E4h+var_A0]
-0x754A64: mov     eax, [esp+0E4h+var_A8]
-0x754A68: mov     ecx, [esp+0E4h+var_A4]
+0x754A5C: mov     edx, [esp+0E4h+out.pos.x]
+0x754A60: fmul    [esp+0E4h+out.scale]
+0x754A64: mov     eax, [esp+0E4h+out.pos.y]
+0x754A68: mov     ecx, [esp+0E4h+out.pos.z]
 0x754A6C: mov     [ebx+3Ch], edx
 0x754A6F: fstp    [esp+0E4h+var_D4]
 0x754A73: mov     [ebx+40h], eax
@@ -64,7 +64,7 @@
 0x754A8E: rep movsd
 0x754A90: fstp    dword ptr [ebx+38h]
 0x754A93: mov     ecx, 0Dh
-0x754A98: lea     esi, [esp+0E4h+var_9C]
+0x754A98: lea     esi, [esp+0E4h+local]
 0x754A9C: mov     edi, ebp
 0x754A9E: rep movsd
 0x754AA0: pop     edi

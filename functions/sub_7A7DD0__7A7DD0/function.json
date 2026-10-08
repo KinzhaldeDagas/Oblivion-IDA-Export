@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7A7DD0",
+      "0x7A7E47"
+    ]
+  ],
+  "chunks_sha256": "2a376254f9c459e5ab5c2fbefc4bb67fc593dba266b5dc5c296b87ea37cd5fe8",
+  "comment_regular": "\n[Mesh generation pose v135 2026-10-06] CONFIRMED copy preserves normal+1C, tangent+28, binormal+34 for native leaf clones. Plugin now fills these semantic fields for generated mesh-enabled leaves after a terminal branch returns, following RT4.1 hang/basis/branch-local bank rotation. In-builder GetGeometry captures these three-float-per-leaf orientation streams before562DA0 frees them; mesh conversion consumes valid captured frames without applying hang twice. End-to-end Palmetto appearance remains UNVERIFIED.\n\nCopies the complete 0x4C-byte Oblivion billboard-leaf state (position base, angle, packed color/dimming byte, normal/tangent/binormal, texture index, and one wind weight/group).",
+  "comment_repeatable": "Copies the complete 0x4C-byte Oblivion billboard-leaf state (position base, angle, packed color/dimming byte, normal/tangent/binormal, texture index, and one wind weight/group).",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7A7DD0",
+  "display_name": "OB_CBillboardLeaf_copy_assign_010201A0",
   "end_ea": "0x7A7E47",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7A7DD0",
+  "name": "OB_CBillboardLeaf_copy_assign_010201A0",
   "segment": ".text",
   "sha256": "2a376254f9c459e5ab5c2fbefc4bb67fc593dba266b5dc5c296b87ea37cd5fe8",
   "size": 119,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A7DD0",
-  "type": "_DWORD *__thiscall(_DWORD *this, int)",
+  "total_chunk_size": 119,
+  "type": "OB_CBillboardLeaf_010201A0 *__thiscall(OB_CBillboardLeaf_010201A0 *this, const OB_CBillboardLeaf_010201A0 *source)",
   "xrefs_from_count": 44,
   "xrefs_to_count": 1
 }

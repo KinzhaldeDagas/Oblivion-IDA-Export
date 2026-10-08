@@ -28,7 +28,7 @@
 0x4E2FC9: test    edi, edi
 0x4E2FCB: jz      loc_4E30C5
 0x4E2FD1: lea     ecx, [esi+44h]
-0x4E2FD4: call    sub_420FD0
+0x4E2FD4: call    ExtraDataList_GetLastFinishedSequence; Returns the pointer payload of ExtraLastFinishedSequence (type 0x4A), or null.
 0x4E2FD9: mov     edx, eax
 0x4E2FDB: test    edx, edx
 0x4E2FDD: mov     [esp+20h+var_8], edx
@@ -74,24 +74,24 @@
 0x4E3051: jmp     short loc_4E30C5
 0x4E3053: fldz
 0x4E3055: push    ecx
-0x4E3056: mov     ecx, edi
-0x4E3058: fstp    [esp+24h+var_24]; float
-0x4E305B: call    sub_4715C0
+0x4E3056: mov     ecx, edi; this
+0x4E3058: fstp    [esp+24h+easeOutTime]; easeOutTime
+0x4E305B: call    NiControllerManager_DeactivateAllSequences; Iterates all controller-manager sequence slots and deactivates each sequence with the supplied ease-out time and transition flag zero.
 0x4E3060: or      word ptr [edi+8], 8
 0x4E3065: cmp     dword ptr [esi+44h], 0
 0x4E3069: mov     [esp+20h+var_C], esi
 0x4E306D: jnz     short loc_4E308C
 0x4E306F: fldz
-0x4E3071: push    0; int
-0x4E3073: push    0; int
+0x4E3071: push    0; transition
+0x4E3073: push    0; timeSyncSequence
 0x4E3075: sub     esp, 8
-0x4E3078: fstp    [esp+30h+var_2C]; float
-0x4E307C: mov     ecx, esi
+0x4E3078: fstp    [esp+30h+easeInTime]; easeInTime
+0x4E307C: mov     ecx, esi; this
 0x4E307E: fld1
-0x4E3080: fstp    [esp+30h+var_30]; float
-0x4E3083: push    0; char
-0x4E3085: push    0; int
-0x4E3087: call    sub_6C9BA0
+0x4E3080: fstp    [esp+30h+weight]; weight
+0x4E3083: push    0; startOver
+0x4E3085: push    0; priority
+0x4E3087: call    NiControllerSequence_Activate; Native controller-sequence activation state machine. Rejects an already-active sequence, validates optional time-sync compatibility, records activation parameters, and queues the active sequence with its manager.
 0x4E308C: fld     dword ptr [esi+30h]
 0x4E308F: push    1; a3
 0x4E3091: fstp    dword ptr [esi+48h]
@@ -99,16 +99,16 @@
 0x4E3095: fld     dword ptr [esi+30h]
 0x4E3098: mov     ecx, ebp; this
 0x4E309A: fstp    [esp+28h+a2]; a2
-0x4E309D: call    NiAVObject_UpdateNiAVObject
+0x4E309D: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x4E30A2: mov     ecx, [esp+20h+var_4]
 0x4E30A6: push    esi
 0x4E30A7: call    sub_4E0D90
 0x4E30AC: fldz
-0x4E30AE: push    0; char
+0x4E30AE: push    0; transition
 0x4E30B0: push    ecx
-0x4E30B1: mov     ecx, esi
-0x4E30B3: fstp    [esp+28h+a2]; float
-0x4E30B6: call    sub_6C9CB0
+0x4E30B1: mov     ecx, esi; this
+0x4E30B3: fstp    [esp+28h+a2]; easeOutTime
+0x4E30B6: call    NiControllerSequence_Deactivate; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.
 0x4E30BB: and     word ptr [edi+8], 0FFF7h
 0x4E30C1: mov     ebx, [esp+20h+var_C]
 0x4E30C5: cmp     [esp+20h+arg_0], 0
@@ -117,12 +117,12 @@
 0x4E30CE: jz      short loc_4E30DD
 0x4E30D0: fldz
 0x4E30D2: push    ecx
-0x4E30D3: mov     ecx, edi
-0x4E30D5: fstp    [esp+24h+var_24]; float
-0x4E30D8: call    sub_4715C0
+0x4E30D3: mov     ecx, edi; this
+0x4E30D5: fstp    [esp+24h+easeOutTime]; easeOutTime
+0x4E30D8: call    NiControllerManager_DeactivateAllSequences; Iterates all controller-manager sequence slots and deactivates each sequence with the supplied ease-out time and transition flag zero.
 0x4E30DD: fld     dword ptr ds:0A30634h
 0x4E30E3: push    ecx
-0x4E30E4: fstp    [esp+24h+var_24]; float
+0x4E30E4: fstp    [esp+24h+easeOutTime]; float
 0x4E30E7: push    ebp; int
 0x4E30E8: push    edi; int
 0x4E30E9: call    sub_4DA8F0
@@ -154,12 +154,12 @@
 0x4E3128: jz      short loc_4E3137
 0x4E312A: fldz
 0x4E312C: push    ecx
-0x4E312D: mov     ecx, esi
-0x4E312F: fstp    [esp+24h+var_24]; float
-0x4E3132: call    sub_4715C0
+0x4E312D: mov     ecx, esi; this
+0x4E312F: fstp    [esp+24h+easeOutTime]; easeOutTime
+0x4E3132: call    NiControllerManager_DeactivateAllSequences; Iterates all controller-manager sequence slots and deactivates each sequence with the supplied ease-out time and transition flag zero.
 0x4E3137: fld     dword ptr ds:0A30634h
 0x4E313D: push    ecx
-0x4E313E: fstp    [esp+24h+var_24]; float
+0x4E313E: fstp    [esp+24h+easeOutTime]; float
 0x4E3141: push    ebp; int
 0x4E3142: push    esi; int
 0x4E3143: call    sub_4DA8F0
@@ -187,24 +187,24 @@
 0x4E3185: call    NiRTTI_Cast
 0x4E318A: fldz
 0x4E318C: add     esp, 8
-0x4E318F: push    0; int
-0x4E3191: push    0; int
+0x4E318F: push    0; transition
+0x4E3191: push    0; timeSyncSequence
 0x4E3193: sub     esp, 8
-0x4E3196: fstp    [esp+30h+var_2C]; float
-0x4E319A: mov     ecx, ebx
+0x4E3196: fstp    [esp+30h+easeInTime]; easeInTime
+0x4E319A: mov     ecx, ebx; this
 0x4E319C: fld1
 0x4E319E: mov     esi, eax
-0x4E31A0: fstp    [esp+30h+var_30]; float
-0x4E31A3: push    0; char
-0x4E31A5: push    0; int
-0x4E31A7: call    sub_6C9BA0
+0x4E31A0: fstp    [esp+30h+weight]; weight
+0x4E31A3: push    0; startOver
+0x4E31A5: push    0; priority
+0x4E31A7: call    NiControllerSequence_Activate; Native controller-sequence activation state machine. Rejects an already-active sequence, validates optional time-sync compatibility, records activation parameters, and queues the active sequence with its manager.
 0x4E31AC: or      word ptr [esi+8], 8
 0x4E31B1: fld     dword ptr [ebx+30h]
 0x4E31B4: push    1; a3
 0x4E31B6: push    ecx
 0x4E31B7: mov     ecx, ebp; this
 0x4E31B9: fstp    [esp+28h+a2]; a2
-0x4E31BC: call    NiAVObject_UpdateNiAVObject
+0x4E31BC: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x4E31C1: push    ebp
 0x4E31C2: call    sub_480930
 0x4E31C7: add     esp, 4

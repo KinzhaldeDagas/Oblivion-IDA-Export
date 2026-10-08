@@ -1,4 +1,4 @@
-0x722A10: mov     edx, [ecx+0ACh]
+0x722A10: mov     edx, [ecx+0ACh]; Pass221/222: NiGeometry::Render copies NiGeometry +0xAC NiPropertyState to NiRenderer::propertyState.
 0x722A16: mov     eax, [esp+arg_0]
 0x722A1A: mov     [eax+0Ch], edx
 0x722A1D: mov     edx, [ecx+0B0h]

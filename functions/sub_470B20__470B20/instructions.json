@@ -1,37 +1,37 @@
 [
   {
     "ea": "0x470B20",
-    "line": "mov     eax, [esp+arg_14]",
+    "line": "mov     eax, [esp+timeSyncSequence]; BSAnimGroupSequence activation wrapper. Delegates to NiControllerSequence_Activate with the final transition flag forced to zero.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x470B24",
-    "line": "fld     [esp+arg_10]",
+    "line": "fld     [esp+easeInTime]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x470B28",
-    "line": "mov     ecx, dword ptr [esp+arg_8]",
+    "line": "mov     ecx, dword ptr [esp+startOver]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x470B2C",
-    "line": "mov     edx, [esp+arg_4]",
+    "line": "mov     edx, dword ptr [esp+priority]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x470B30",
-    "line": "push    0; int",
+    "line": "push    0; transition",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x470B32",
-    "line": "push    eax; int",
+    "line": "push    eax; timeSyncSequence",
     "mnemonic": "push",
     "size": 1
   },
@@ -43,43 +43,43 @@
   },
   {
     "ea": "0x470B36",
-    "line": "fstp    [esp+10h+var_C]; float",
+    "line": "fstp    [esp+10h+var_C]; easeInTime",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x470B3A",
-    "line": "fld     [esp+10h+arg_C]",
+    "line": "fld     [esp+10h+weight]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x470B3E",
-    "line": "fstp    [esp+10h+var_10]; float",
+    "line": "fstp    [esp+10h+var_10]; weight",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x470B41",
-    "line": "push    ecx; char",
+    "line": "push    ecx; startOver",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x470B42",
-    "line": "mov     ecx, [esp+14h+arg_0]",
+    "line": "mov     ecx, [esp+14h+sequence]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x470B46",
-    "line": "push    edx; int",
+    "line": "push    edx; priority",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x470B47",
-    "line": "call    sub_6C9BA0",
+    "line": "call    NiControllerSequence_Activate; Native controller-sequence activation state machine. Rejects an already-active sequence, validates optional time-sync compatibility, records activation parameters, and queues the active sequence with its manager.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,4 +1,4 @@
-0x706DD0: push    esi
+0x706DD0: push    esi; Pass223: Clears default NiZBufferProperty global 0x00B3F998.
 0x706DD1: mov     esi, ds:0B3F998h
 0x706DD7: test    esi, esi
 0x706DD9: jz      short loc_706E01

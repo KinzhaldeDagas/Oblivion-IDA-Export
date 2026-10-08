@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x788E90",
+      "0x788ECC"
+    ]
+  ],
+  "chunks_sha256": "a2bda346aff448f33ab81cbe29abd5636bf3d70005c174df32a2ab8be7c01faa",
+  "comment_regular": "Oblivion stdcall adapter for uninitialized fill-N of trivial 28-byte collision records; returns destination + count.",
+  "comment_repeatable": "Oblivion stdcall adapter for uninitialized fill-N of trivial 28-byte collision records; returns destination + count.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_788E90",
+  "display_name": "OB_stVector_CollisionObject_UninitializedFillN_Stdcall_010201A0",
   "end_ea": "0x788ECC",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_788E90",
+  "name": "OB_stVector_CollisionObject_UninitializedFillN_Stdcall_010201A0",
   "segment": ".text",
   "sha256": "a2bda346aff448f33ab81cbe29abd5636bf3d70005c174df32a2ab8be7c01faa",
   "size": 60,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x788E90",
-  "type": "char *__stdcall(char *, int, char *)",
+  "total_chunk_size": 60,
+  "type": "OB_CollisionObject_010201A0 *__stdcall(OB_CollisionObject_010201A0 *destination, unsigned int count, const OB_CollisionObject_010201A0 *value)",
   "xrefs_from_count": 24,
   "xrefs_to_count": 2
 }

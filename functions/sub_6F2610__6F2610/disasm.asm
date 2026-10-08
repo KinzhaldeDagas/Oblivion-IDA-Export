@@ -114,7 +114,7 @@
 0x6F2722: test    edi, edi
 0x6F2724: jz      short loc_6F272F
 0x6F2726: push    edi
-0x6F2727: call    FormHeapFree
+0x6F2727: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F272C: add     esp, 4
 0x6F272F: mov     ecx, ebx
 0x6F2731: call    sub_6F1080

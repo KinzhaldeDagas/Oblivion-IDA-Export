@@ -1,4 +1,4 @@
-0x4EC810: push    esi
+0x4EC810: push    esi; Verified release path: releases terrainLODNode and finishes in Unloaded (5); if not already UnloadPending (4), first moves into state 4.
 0x4EC811: mov     esi, ecx
 0x4EC813: mov     eax, [esi+8]
 0x4EC816: cmp     eax, 5
@@ -8,7 +8,7 @@
 0x4EC820: mov     dword ptr [esi+8], 4
 0x4EC827: push    edi
 0x4EC828: push    3
-0x4EC82A: call    nullsub_returnTrue_0arg
+0x4EC82A: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x4EC82F: mov     edi, [esi+2Ch]
 0x4EC832: add     esp, 4
 0x4EC835: test    edi, edi
@@ -27,9 +27,9 @@
 0x4EC853: call    eax
 0x4EC855: mov     dword ptr [esi+2Ch], 0
 0x4EC85C: push    2
-0x4EC85E: call    nullsub_returnTrue_0arg
+0x4EC85E: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x4EC863: add     esp, 4
-0x4EC866: mov     dword ptr [esi+8], 5
+0x4EC866: mov     dword ptr [esi+8], 5; Verified final unload transition: releases terrainLODNode and sets quad state to Unloaded (5). State values 0 and 6 were not observed in this quad state machine and remain Unknown.
 0x4EC86D: pop     edi
 0x4EC86E: pop     esi
 0x4EC86F: retn

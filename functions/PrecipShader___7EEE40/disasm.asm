@@ -1,4 +1,4 @@
-0x7EEE40: push    0FFFFFFFFh
+0x7EEE40: push    0FFFFFFFFh; MoonSugarEffect decode: Precipitation shader definition creates a 3-element, 2-stream declaration, proving some TES4 shaders are multi-stream. A one-stream plugin wobble shader cannot be universal.
 0x7EEE42: push    offset SEH_8122A0
 0x7EEE47: mov     eax, large fs:0
 0x7EEE4D: push    eax
@@ -23,11 +23,11 @@
 0x7EEE7E: call    ShaderDefinition__Init
 0x7EEE83: mov     edi, eax
 0x7EEE85: mov     eax, ds:0B43104h
-0x7EEE8A: push    2; StreamCount
-0x7EEE8C: push    3; a2
-0x7EEE8E: push    eax; a1
+0x7EEE8A: push    2; streamCount
+0x7EEE8C: push    3; elementCount
+0x7EEE8E: push    eax; renderer
 0x7EEE8F: mov     [esp+2Ch+var_4], 0FFFFFFFFh
-0x7EEE97: call    CreateDX9ShaderDeclaration
+0x7EEE97: call    CreateDX9ShaderDeclaration; Oblivion NiDX9 declaration factory. Allocates a 0x38-byte NiDX9ShaderDeclaration and initializes elementCount internal element records for each streamCount stream.
 0x7EEE9C: mov     esi, [edi]
 0x7EEE9E: mov     ebx, eax
 0x7EEEA0: add     esp, 0Ch
@@ -92,7 +92,7 @@
 0x7EEF26: test    eax, eax
 0x7EEF28: jz      short loc_7EEF3E
 0x7EEF2A: lea     ebx, [ebx+0]
-0x7EEF30: cmp     eax, offset dword_B3F684
+0x7EEF30: cmp     eax, offset stru_B3F684
 0x7EEF35: jz      short loc_7EEF3E
 0x7EEF37: mov     eax, [eax+4]
 0x7EEF3A: test    eax, eax
@@ -162,3 +162,20 @@
 0x7EEFF0: pop     ebx
 0x7EEFF1: add     esp, 10h
 0x7EEFF4: retn
+0x9D0CA0: mov     eax, [ebp-10h]
+0x9D0CA3: push    eax
+0x9D0CA4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D0CA9: pop     ecx
+0x9D0CAA: retn
+0x9D0CAB: mov     eax, [ebp-10h]
+0x9D0CAE: push    eax
+0x9D0CAF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D0CB4: pop     ecx
+0x9D0CB5: retn
+0x9D0CB6: mov     edx, [esp+arg_4]
+0x9D0CBA: lea     eax, [edx-10h]
+0x9D0CBD: mov     ecx, [edx-14h]
+0x9D0CC0: xor     ecx, eax
+0x9D0CC2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D0CC7: mov     eax, offset stru_AF94E0
+0x9D0CCC: jmp     ___CxxFrameHandler3

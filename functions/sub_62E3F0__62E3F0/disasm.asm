@@ -36,7 +36,7 @@
 0x62E459: jz      short loc_62E468
 0x62E45B: push    edi
 0x62E45C: mov     ecx, ebx
-0x62E45E: call    sub_568BB0
+0x62E45E: call    sub_568BB0; 3DTheft: package target resolver/follower bookkeeping. Runtime packages with packageFlags bit 0x800 skip normal follower extra-data side effects for actor targets.
 0x62E463: jmp     loc_62E717
 0x62E468: mov     ebp, [ebx+28h]
 0x62E46B: test    ebp, ebp
@@ -58,8 +58,8 @@
 0x62E4A0: call    eax
 0x62E4A2: test    al, al
 0x62E4A4: jz      short loc_62E4D8
-0x62E4A6: mov     ecx, ebx
-0x62E4A8: call    sub_5660A0
+0x62E4A6: mov     ecx, ebx; self
+0x62E4A8: call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).
 0x62E4AD: test    al, al
 0x62E4AF: jnz     short loc_62E4D8
 0x62E4B1: mov     ecx, [esi+2Ch]
@@ -92,7 +92,7 @@
 0x62E4FB: cmp     dword ptr [esi+3Ch], 0
 0x62E4FF: jnz     loc_62E6A7
 0x62E505: mov     ecx, edi; this
-0x62E507: call    TESObjectREFR_GetParentCell
+0x62E507: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x62E50C: mov     edx, [edi]
 0x62E50E: mov     [esp+20h+var_10], eax
 0x62E512: mov     eax, [edx+174h]
@@ -178,9 +178,9 @@
 0x62E623: mov     edx, [esi+6Ch]
 0x62E626: mov     [esi+0E0h], edx
 0x62E62C: jmp     short loc_62E696
-0x62E62E: mov     ecx, offset fAIAcquireObjectDistance; jumptable 0062E5AD default case, cases 1-12,14-20,23
+0x62E62E: mov     ecx, (offset flt_B36778+170h); jumptable 0062E5AD default case, cases 1-12,14-20,23
 0x62E633: call    GameSetting_GetSafeFloatPointer
-0x62E638: mov     ecx, offset fAIAcquireObjectDistance
+0x62E638: mov     ecx, (offset flt_B36778+170h)
 0x62E63D: mov     ebp, eax
 0x62E63F: call    GameSetting_GetSafeFloatPointer
 0x62E644: fld     dword ptr [ebp+0]
@@ -216,7 +216,7 @@
 0x62E699: test    ebx, ebx
 0x62E69B: jz      short loc_62E6A7
 0x62E69D: mov     ecx, ebx
-0x62E69F: call    sub_452A60
+0x62E69F: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x62E6A4: mov     [esi+38h], eax
 0x62E6A7: cmp     dword ptr [esi+40h], 0
 0x62E6AB: lea     edi, [esi+3Ch]
@@ -234,18 +234,18 @@
 0x62E6CC: call    eax
 0x62E6CE: test    al, al
 0x62E6D0: mov     eax, [esi+44h]
-0x62E6D3: mov     ecx, [eax]; this
+0x62E6D3: mov     ecx, [eax]; reference
 0x62E6D5: jz      short loc_62E6DA
 0x62E6D7: push    ecx
 0x62E6D8: jmp     short loc_62E700
-0x62E6DA: call    TESObjectREFR_GetOwner
+0x62E6DA: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x62E6DF: test    eax, eax
 0x62E6E1: jz      short loc_62E70C
 0x62E6E3: cmp     byte ptr [eax+4], 23h ; '#'
 0x62E6E7: jnz     short loc_62E70C
 0x62E6E9: mov     ebx, [esi]
 0x62E6EB: push    eax
-0x62E6EC: mov     ecx, offset ActorProcessManager_ptr
+0x62E6EC: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x62E6F1: call    sub_675220
 0x62E6F6: mov     edx, [ebx+0D0h]
 0x62E6FC: push    eax

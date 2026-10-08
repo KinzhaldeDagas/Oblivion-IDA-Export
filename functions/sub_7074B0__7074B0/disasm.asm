@@ -1,4 +1,4 @@
-0x7074B0: push    ecx
+0x7074B0: push    ecx; Sets NiAVObject parent at +0x1C. If already parented, first asks the old parent to remove this child, then installs the new parent. Used by NiNode child insertion/replacement.
 0x7074B1: push    esi
 0x7074B2: mov     esi, ecx
 0x7074B4: mov     ecx, [esi+1Ch]
@@ -26,25 +26,25 @@
 0x7074EA: push    1
 0x7074EC: mov     ecx, edi
 0x7074EE: call    eax
-0x7074F0: mov     ecx, [esp+0Ch+arg_0]
+0x7074F0: mov     ecx, [esp+0Ch+newParent]
 0x7074F4: pop     edi
 0x7074F5: mov     [esi+1Ch], ecx
 0x7074F8: pop     esi
 0x7074F9: pop     ecx
 0x7074FA: retn    4
-0x7074FD: mov     edx, [esp+0Ch+arg_0]
+0x7074FD: mov     edx, [esp+0Ch+newParent]
 0x707501: pop     edi
 0x707502: mov     [esi+1Ch], edx
 0x707505: pop     esi
 0x707506: pop     ecx
 0x707507: retn    4
-0x70750A: mov     eax, [esp+0Ch+arg_0]
+0x70750A: mov     eax, [esp+0Ch+newParent]
 0x70750E: pop     edi
 0x70750F: mov     [esi+1Ch], eax
 0x707512: pop     esi
 0x707513: pop     ecx
 0x707514: retn    4
-0x707517: mov     edx, [esp+8+arg_0]
+0x707517: mov     edx, [esp+8+newParent]
 0x70751B: mov     [esi+1Ch], edx
 0x70751E: pop     esi
 0x70751F: pop     ecx

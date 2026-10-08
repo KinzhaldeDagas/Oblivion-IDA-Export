@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7C82A0",
-    "line": "push    esi",
+    "line": "push    esi; Fog decode: constructs full BSFogProperty. Base NiFogProperty fields use default color; extension adds fogStart +0x2C and fogEnd +0x30.",
     "mnemonic": "push",
     "size": 1
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x7C82CF",
-    "line": "mov     [esi+20h], eax",
+    "line": "mov     [esi+20h], eax; Fog decode: BSFogProperty constructor default color.r from B3FA90.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -91,19 +91,19 @@
   },
   {
     "ea": "0x7C82D8",
-    "line": "mov     [esi+24h], ecx",
+    "line": "mov     [esi+24h], ecx; Fog decode: BSFogProperty constructor default color.g from B3FA94.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7C82DB",
-    "line": "mov     edx, ds:0B3FA98h",
+    "line": "mov     edx, ds:0B3FA98h; Fog decode: BSFogProperty constructor default color.b from B3FA98.",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x7C82E1",
-    "line": "fstp    dword ptr [esi+2Ch]",
+    "line": "fstp    dword ptr [esi+2Ch]; Fog decode: BSFogProperty constructor initializes fogStart at +0x2C.",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -121,13 +121,13 @@
   },
   {
     "ea": "0x7C82ED",
-    "line": "fstp    dword ptr [esi+30h]",
+    "line": "fstp    dword ptr [esi+30h]; Fog decode: BSFogProperty constructor initializes fogEnd at +0x30.",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7C82F0",
-    "line": "mov     dword ptr [esi], offset ??_7BSFogProperty@@6B@; const BSFogProperty::`vftable'",
+    "line": "mov     dword ptr [esi], offset ??_7BSFogProperty@@6B@; Fog decode: switches constructed object vtable to BSFogProperty after initializing NiFogProperty base and BS fog extension fields.",
     "mnemonic": "mov",
     "size": 6
   },

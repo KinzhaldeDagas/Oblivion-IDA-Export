@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x4D8760",
-    "line": "push    ebp",
+    "line": "push    ebp; Removes an inventory item/count, optionally transferring it to destination or placing it at destinationPosition/destinationRotation. Native thiscall has ten stack arguments.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D8761",
-    "line": "mov     ebp, [esp+4+arg_0]",
+    "line": "mov     ebp, [esp+4+item]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x4D8783",
-    "line": "mov     edi, [esp+10h+arg_4]",
+    "line": "mov     edi, [esp+10h+extraList]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -157,13 +157,13 @@
   },
   {
     "ea": "0x4D8797",
-    "line": "mov     ecx, [esp+24h+arg_24]",
+    "line": "mov     ecx, dword ptr [esp+24h+arg9]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4D879B",
-    "line": "mov     edx, [esp+24h+arg_20]",
+    "line": "mov     edx, dword ptr [esp+24h+arg8]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x4D87A3",
-    "line": "mov     ecx, [esp+14h+arg_1C]",
+    "line": "mov     ecx, [esp+14h+destinationRotation]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x4D87A8",
-    "line": "mov     edx, [esp+18h+arg_18]",
+    "line": "mov     edx, [esp+18h+destinationPosition]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x4D87AD",
-    "line": "mov     ecx, [esp+1Ch+arg_14]",
+    "line": "mov     ecx, [esp+1Ch+destination]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x4D87B2",
-    "line": "mov     edx, [esp+20h+arg_10]",
+    "line": "mov     edx, [esp+20h+arg4]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x4D87B7",
-    "line": "mov     ecx, [esp+24h+arg_8]",
+    "line": "mov     ecx, [esp+24h+count]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x4D87BC",
-    "line": "mov     edx, [esp+28h+arg_C]",
+    "line": "mov     edx, [esp+28h+arg3]",
     "mnemonic": "mov",
     "size": 4
   },

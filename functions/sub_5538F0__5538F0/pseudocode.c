@@ -1,43 +1,59 @@
-double __cdecl sub_5538F0(int a1, int a2, int a3, unsigned int a4)
+// Projects a manual FaceGen slider value by multiplying its authored basis row by the selected parameter matrix (matrix index = matrixChannel + 2*matrixGroup).
+float __cdecl FaceGenHeadParameters_GetSliderValue(
+        const FaceGenHeadParameters *parameters,
+        int matrixGroup,
+        int matrixChannel,
+        unsigned int sliderIndex)
 {
-  int v4; // edi
-  int v5; // esi
-  int v6; // eax
-  int *v7; // eax
-  _DWORD *v8; // esi
-  int v9; // eax
-  float v11; // [esp+0h] [ebp-1Ch]
-  _DWORD v12[3]; // [esp+4h] [ebp-18h] BYREF
-  unsigned int v13; // [esp+10h] [ebp-Ch]
+  _DWORD *v4; // edi
+  int v5; // ebx
+  int v6; // esi
+  int v7; // eax
+  const FaceGenMatrix *v8; // eax
+  FaceGenMatrix *v9; // esi
+  float *begin; // eax
+  float v13; // [esp+0h] [ebp-1Ch]
+  FaceGenMatrix out; // [esp+4h] [ebp-18h] BYREF
 
-  v11 = 0.0;
-  if ( !a1 )
-    return v11;
-  v4 = dword_B39B80;
-  if ( !dword_B39B80 )
+  v13 = 0.0; /*0x5538fa*/
+  if ( parameters ) /*0x5538fd*/
   {
-    sub_553550();
-    v4 = dword_B39B80;
-  }
-  v5 = 0x10 * (a3 + 2 * a2);
-  v6 = *(_DWORD *)(v5 + v4 + 0x8C);
-  if ( !v6 )
-    return v11;
-  if ( a4 < (*(_DWORD *)(v5 + v4 + 0x90) - v6) / 0x34 )
-  {
-    if ( !v4 )
+    v4 = g_faceGenManager; /*0x553904*/
+    if ( !g_faceGenManager ) /*0x553904*/
     {
-      sub_553550();
-      v4 = dword_B39B80;
+      FaceGenManager_EnsureInitialized(); /*0x55390e*/
+      v4 = g_faceGenManager; /*0x553913*/
     }
-    v7 = (int *)sub_54F6C0((_DWORD *)(v5 + v4 + 0x88), a4);
-    v8 = sub_5523C0(v7, v12, (_DWORD *)(a1 + 0x18 * (a3 + 2 * a2)));
-    v9 = v8[3];
-    if ( !v9 || !((v8[4] - v9) >> 2) )
-      _invalid_parameter_noinfo();
-    v11 = *(float *)v8[3];
-    if ( v13 )
-      FormHeapFree(v13);
+    v5 = matrixChannel + 2 * matrixGroup; /*0x553922*/
+    v6 = 4 * v5; /*0x553928*/
+    v7 = v4[4 * v5 + 0x23]; /*0x55392b*/
+    if ( v7 ) /*0x553934*/
+    {
+      if ( sliderIndex < (v4[v6 + 0x24] - v7) / 0x34 ) /*0x55395b*/
+      {
+        if ( !v4 ) /*0x55395f*/
+        {
+          FaceGenManager_EnsureInitialized(); /*0x553961*/
+          v4 = g_faceGenManager; /*0x553966*/
+        }
+        v8 = (const FaceGenMatrix *)sub_54F6C0(&v4[v6 + 0x22], sliderIndex); /*0x553984*/
+        v9 = FaceGenMatrix_Multiply(v8, &out, &parameters->matrices[v5]); /*0x553990*/
+        begin = v9->begin; /*0x553992*/
+        if ( !begin || !(v9->end - begin) ) /*0x55399e*/
+          _invalid_parameter_noinfo(v5, (int)v4, (int)v9); /*0x5539a3*/
+        v13 = *v9->begin; /*0x5539b3*/
+        if ( out.begin ) /*0x5539b7*/
+          FormHeapFree((unsigned int)out.begin); /*0x5539ba*/
+      }
+      return v13; /*0x5539c2*/
+    }
+    else
+    {
+      return v13; /*0x5539d5*/
+    }
   }
-  return v11;
+  else
+  {
+    return v13; /*0x5539ce*/
+  }
 }

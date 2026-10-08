@@ -55,7 +55,7 @@
 0x70EB8A: lea     ecx, [esp+0ECh+var_C4]
 0x70EB8E: push    ecx
 0x70EB8F: push    4
-0x70EB91: lea     edx, [esp+ebx*4+0F4h+var_40]
+0x70EB91: lea     edx, [esp+ebx*4+0F4h+source]
 0x70EB98: push    edx
 0x70EB99: push    eax
 0x70EB9A: mov     eax, [eax+4]
@@ -118,25 +118,25 @@
 0x70EC47: mov     ecx, [edi+54h]
 0x70EC4A: add     ebx, ebx
 0x70EC4C: add     ebx, ebx
-0x70EC4E: push    ebx; Size
+0x70EC4E: push    ebx; byteCount
 0x70EC4F: lea     eax, [esp+0D8h+Src]
-0x70EC53: push    eax; Src
-0x70EC54: push    ecx; Dst
-0x70EC55: call    _memcpy
+0x70EC53: push    eax; source
+0x70EC54: push    ecx; destination
+0x70EC55: call    _memcpy;
 0x70EC5A: mov     eax, [edi+58h]
-0x70EC5D: push    ebx; Size
-0x70EC5E: lea     edx, [esp+0E4h+var_40]
-0x70EC65: push    edx; Src
-0x70EC66: push    eax; Dst
-0x70EC67: call    _memcpy
+0x70EC5D: push    ebx; byteCount
+0x70EC5E: lea     edx, [esp+0E4h+source]
+0x70EC65: push    edx; source
+0x70EC66: push    eax; destination
+0x70EC67: call    _memcpy;
 0x70EC6C: mov     ecx, [ebp+0]
 0x70EC6F: lea     edx, ds:4[ecx*4]
 0x70EC76: mov     ecx, [edi+5Ch]
-0x70EC79: push    edx; Size
+0x70EC79: push    edx; byteCount
 0x70EC7A: lea     eax, [esp+0F0h+var_C0]
-0x70EC7E: push    eax; Src
-0x70EC7F: push    ecx; Dst
-0x70EC80: call    _memcpy
+0x70EC7E: push    eax; source
+0x70EC7F: push    ecx; destination
+0x70EC80: call    _memcpy;
 0x70EC85: mov     eax, [ebp+0]
 0x70EC88: mov     ecx, [edi+5Ch]
 0x70EC8B: mov     esi, [esi+21Ch]

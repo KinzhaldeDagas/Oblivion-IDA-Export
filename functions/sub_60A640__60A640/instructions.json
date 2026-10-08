@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x60A640",
-    "line": "push    ebp",
+    "line": "push    ebp; Resolve an Actor impact from world impact position/normal. Records state-0 attachment data, delegates combat damage/effects through the shooter, selects an embed collision node or fallback state, and may transfer one unenchanted AMMO base form to the struck Actor inventory.",
     "mnemonic": "push",
     "size": 1
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x60A65A",
-    "line": "mov     eax, [ebp+arg_8]",
+    "line": "mov     eax, [ebp+struckActor]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x60A664",
-    "line": "mov     [esp+1B4h+var_174], eax",
+    "line": "mov     [esp+1B4h+actor], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x60A672",
-    "line": "mov     [eax], ecx",
+    "line": "mov     [eax], ecx; Actor-impact producer initializes collision record state 0 (actor visual embed path).",
     "mnemonic": "mov",
     "size": 2
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x60A683",
-    "line": "mov     ecx, [ebp+arg_4]",
+    "line": "mov     ecx, [ebp+impactNormal]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x60A697",
-    "line": "mov     ecx, [ebp+arg_0]",
+    "line": "mov     ecx, [ebp+impactPosition]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x60A6EB",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x60A6FA",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x60A70C",
-    "line": "call    sub_8AC0A0",
+    "line": "call    bhkWorldObject_GetLinearVelocityPtr; TES4 authoritative: returns pointer to bhk collision object's velocity vector at object+0x10. 0x896000 copies this into proxy +0x2E0 before state update.",
     "mnemonic": "call",
     "size": 5
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x60A713",
-    "line": "mov     eax, offset stru_BA7A40",
+    "line": "mov     eax, offset unk_BA7A40",
     "mnemonic": "mov",
     "size": 5
   },
@@ -421,13 +421,13 @@
   },
   {
     "ea": "0x60A71B",
-    "line": "movss   [esp+1B0h+var_30], xmm0",
+    "line": "movss   [esp+1B0h+normalZ], xmm0",
     "mnemonic": "movss",
     "size": 9
   },
   {
     "ea": "0x60A724",
-    "line": "fld     [esp+1B0h+var_30]",
+    "line": "fld     [esp+1B0h+normalZ]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x60A761",
-    "line": "fstp    [esp+1B0h+var_188]",
+    "line": "fstp    [esp+1B0h+object]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x60A76B",
-    "line": "fld     [esp+1B0h+var_188]",
+    "line": "fld     [esp+1B0h+object]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x60A7A6",
-    "line": "lea     edx, [esp+1B4h+var_30]",
+    "line": "lea     edx, [esp+1B4h+normalZ]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x60A7DD",
-    "line": "call    sub_43F3E0",
+    "line": "call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).",
     "mnemonic": "call",
     "size": 5
   },
@@ -733,7 +733,7 @@
   },
   {
     "ea": "0x60A7E5",
-    "line": "mov     esi, [esp+1B0h+var_174]",
+    "line": "mov     esi, [esp+1B0h+actor]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1183,7 +1183,7 @@
   },
   {
     "ea": "0x60A8C6",
-    "line": "call    eax",
+    "line": "call    eax; Shooter combat resolution consumes the ArrowProjectile as the attack source; physical damage and magic-effect pointers were snapshotted at release and do not depend on current equipment at impact.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1321,7 +1321,7 @@
   },
   {
     "ea": "0x60A913",
-    "line": "mov     ecx, offset flt_B371F8",
+    "line": "mov     ecx, 0B371F8h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1345,13 +1345,13 @@
   },
   {
     "ea": "0x60A920",
-    "line": "fstp    [esp+1B4h+var_1B4]; float",
+    "line": "fstp    [esp+1B4h+angleZ]; float",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x60A923",
-    "line": "call    sub_547770",
+    "line": "call    Calc_DeathForceFromDamage; ODismemberment combat decode: maps hit/death damage magnitude into a force scalar using fDeathForceDamageMin/Max and fDeathForceForceMin/Max.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1363,7 +1363,7 @@
   },
   {
     "ea": "0x60A929",
-    "line": "fstp    [esp+1B8h+var_188]",
+    "line": "fstp    [esp+1B8h+object]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1381,25 +1381,25 @@
   },
   {
     "ea": "0x60A934",
-    "line": "push    1; a3",
+    "line": "push    1; directionY",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x60A936",
-    "line": "push    1; a2",
+    "line": "push    1; directionX",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x60A938",
-    "line": "push    edi; a1",
+    "line": "push    edi; startZ",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60A939",
-    "line": "call    sub_88D070",
+    "line": "call    sub_88D070; ODismemberment: bhkBlendCollisionObject traversal entry. Requires bhkBlendCollisionObject or forced flag; queues callback off off_B2E314 with state payload including a2 and a3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1441,13 +1441,13 @@
   },
   {
     "ea": "0x60A94B",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x60A950",
-    "line": "push    offset dword_B258DC",
+    "line": "push    offset stru_B258DC",
     "mnemonic": "push",
     "size": 5
   },
@@ -1489,7 +1489,7 @@
   },
   {
     "ea": "0x60A96A",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1669,7 +1669,7 @@
   },
   {
     "ea": "0x60A9F0",
-    "line": "lea     edx, [esp+1B4h+var_30]",
+    "line": "lea     edx, [esp+1B4h+normalZ]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -1705,7 +1705,7 @@
   },
   {
     "ea": "0x60AA0F",
-    "line": "fld     [esp+1B8h+var_188]",
+    "line": "fld     [esp+1B8h+object]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1717,13 +1717,13 @@
   },
   {
     "ea": "0x60AA16",
-    "line": "lea     eax, [esp+1B4h+var_30]",
+    "line": "lea     eax, [esp+1B4h+normalZ]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x60AA1D",
-    "line": "fstp    [esp+1B4h+var_1B4]; float",
+    "line": "fstp    [esp+1B4h+angleZ]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1735,7 +1735,7 @@
   },
   {
     "ea": "0x60AA21",
-    "line": "push    edi; float",
+    "line": "push    edi; directionZ",
     "mnemonic": "push",
     "size": 1
   },
@@ -1753,7 +1753,7 @@
   },
   {
     "ea": "0x60AA2A",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1765,7 +1765,7 @@
   },
   {
     "ea": "0x60AA32",
-    "line": "mov     [esp+1B0h+var_16C], 0",
+    "line": "mov     [esp+1B0h+collisionObject], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -1777,13 +1777,13 @@
   },
   {
     "ea": "0x60AA3C",
-    "line": "push    0",
+    "line": "push    0; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x60AA3E",
-    "line": "call    PlayerCharacter_GetPlayerNode",
+    "line": "call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1831,7 +1831,7 @@
   },
   {
     "ea": "0x60AA5E",
-    "line": "fstp    [esp+1B0h+var_160]",
+    "line": "fstp    [esp+1B0h+inOutDistance]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1855,31 +1855,31 @@
   },
   {
     "ea": "0x60AA67",
-    "line": "lea     ecx, [esp+1B4h+var_15C]",
+    "line": "lea     ecx, [esp+1B4h+var_15C]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x60AA6B",
-    "line": "fstp    [esp+1B4h+var_1B4]; float",
+    "line": "fstp    [esp+1B4h+angleZ]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x60AA6E",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x60AA73",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60AA75",
-    "line": "call    sub_4A9720",
+    "line": "call    Actor_GetAimPitch; Returns Actor rotation X as the native aim-pitch value used by projectile launch, impact, input, dialogue-camera, and magic-projectile paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1891,55 +1891,55 @@
   },
   {
     "ea": "0x60AA7B",
-    "line": "lea     ecx, [esp+1B4h+var_F0]",
+    "line": "lea     ecx, [esp+1B4h+right]; this",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x60AA82",
-    "line": "fstp    [esp+1B4h+var_1B4]; float",
+    "line": "fstp    [esp+1B4h+angleZ]; angleX",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x60AA85",
-    "line": "call    NiMatrix33_InitRotationTransposedTransform???",
+    "line": "call    NiMatrix33_InitRotationXTransposed; Verified matrix coefficients make this an X-axis rotation in the engine's transposed convention: X stays fixed; only the Y/Z submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x60AA8A",
-    "line": "lea     ecx, [esp+1B0h+var_F0]",
+    "line": "lea     ecx, [esp+1B0h+right]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x60AA91",
-    "line": "push    ecx",
+    "line": "push    ecx; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60AA92",
-    "line": "lea     edx, [esp+1B4h+var_138]",
+    "line": "lea     edx, [esp+1B4h+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x60AA96",
-    "line": "push    edx",
+    "line": "push    edx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60AA97",
-    "line": "lea     ecx, [esp+1B8h+var_15C]",
+    "line": "lea     ecx, [esp+1B8h+var_15C]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x60AA9B",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1969,7 +1969,7 @@
   },
   {
     "ea": "0x60AAAD",
-    "line": "fld     [esp+1B0h+var_158]",
+    "line": "fld     [esp+1B0h+var_15C.data+4]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1981,7 +1981,7 @@
   },
   {
     "ea": "0x60AAB5",
-    "line": "fld     [esp+1B0h+var_14C]",
+    "line": "fld     [esp+1B0h+var_15C.data+10h]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1993,7 +1993,7 @@
   },
   {
     "ea": "0x60AABD",
-    "line": "fld     [esp+1B0h+var_140]",
+    "line": "fld     [esp+1B0h+var_15C.data+1Ch]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2017,7 +2017,7 @@
   },
   {
     "ea": "0x60AACA",
-    "line": "call    sub_4BFAA0",
+    "line": "call    NiPoint3_NormalizeApproximateInPlace",
     "mnemonic": "call",
     "size": 5
   },
@@ -2041,7 +2041,7 @@
   },
   {
     "ea": "0x60AADB",
-    "line": "fld     [esp+1B4h+var_160]",
+    "line": "fld     [esp+1B4h+inOutDistance]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2137,7 +2137,7 @@
   },
   {
     "ea": "0x60AB1A",
-    "line": "fstp    [esp+1B0h+var_188]",
+    "line": "fstp    [esp+1B0h+object]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2185,13 +2185,13 @@
   },
   {
     "ea": "0x60AB3A",
-    "line": "mov     esi, [esp+1B0h+var_174]",
+    "line": "mov     esi, [esp+1B0h+actor]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x60AB3E",
-    "line": "fsub    [esp+1B0h+var_188]",
+    "line": "fsub    [esp+1B0h+object]",
     "mnemonic": "fsub",
     "size": 4
   },
@@ -2287,13 +2287,13 @@
   },
   {
     "ea": "0x60AB7D",
-    "line": "lea     edx, [esp+1B0h+var_160]",
+    "line": "lea     edx, [esp+1B0h+inOutDistance]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x60AB81",
-    "line": "push    ecx; int",
+    "line": "push    ecx; excludeGroup0100",
     "mnemonic": "push",
     "size": 1
   },
@@ -2305,7 +2305,7 @@
   },
   {
     "ea": "0x60AB86",
-    "line": "push    edx; int",
+    "line": "push    edx; inOutDistance",
     "mnemonic": "push",
     "size": 1
   },
@@ -2425,19 +2425,19 @@
   },
   {
     "ea": "0x60ABCA",
-    "line": "push    eax; int",
+    "line": "push    eax; candidate",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60ABCB",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60ABCD",
-    "line": "call    sub_609DF0",
+    "line": "call    ArrowProjectile_FindActorEmbedCollisionNode; Search struck actor skeleton/root recursively for an eligible collision node along the projectile segment.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2449,7 +2449,7 @@
   },
   {
     "ea": "0x60ABD4",
-    "line": "mov     [esp+1B0h+var_188], eax",
+    "line": "mov     [esp+1B0h+object], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2461,7 +2461,7 @@
   },
   {
     "ea": "0x60ABDE",
-    "line": "fld     [esp+1B0h+var_160]",
+    "line": "fld     [esp+1B0h+inOutDistance]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2569,7 +2569,7 @@
   },
   {
     "ea": "0x60AC26",
-    "line": "call    sub_718A80",
+    "line": "call    sub_718A80;",
     "mnemonic": "call",
     "size": 5
   },
@@ -2581,7 +2581,7 @@
   },
   {
     "ea": "0x60AC32",
-    "line": "lea     ecx, [esp+1B0h+var_30]",
+    "line": "lea     ecx, [esp+1B0h+normalZ]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -2611,7 +2611,7 @@
   },
   {
     "ea": "0x60AC49",
-    "line": "fstp    [esp+1B8h+var_30]",
+    "line": "fstp    [esp+1B8h+normalZ]",
     "mnemonic": "fstp",
     "size": 7
   },
@@ -2659,7 +2659,7 @@
   },
   {
     "ea": "0x60AC81",
-    "line": "call    sub_53D4B0",
+    "line": "call    NiTransform_TransformPoint; Convert selected world impact point into the chosen embed node's local coordinate space for persisted state-0 attachment.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2749,31 +2749,31 @@
   },
   {
     "ea": "0x60ACB2",
-    "line": "push    edx",
+    "line": "push    edx; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60ACB3",
-    "line": "lea     eax, [esp+1B4h+var_138]",
+    "line": "lea     eax, [esp+1B4h+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x60ACB7",
-    "line": "push    eax",
+    "line": "push    eax; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60ACB8",
-    "line": "lea     ecx, [esp+1B8h+var_114]",
+    "line": "lea     ecx, [esp+1B8h+var_114]; this",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x60ACBF",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2785,13 +2785,13 @@
   },
   {
     "ea": "0x60ACC7",
-    "line": "mov     esi, eax",
+    "line": "mov     esi, eax; Compose projectile world rotation with inverse embed-node rotation to persist local orientation.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60ACC9",
-    "line": "mov     eax, [esp+1B0h+var_188]",
+    "line": "mov     eax, [esp+1B0h+object]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2821,7 +2821,7 @@
   },
   {
     "ea": "0x60ACDA",
-    "line": "push    eax",
+    "line": "push    eax; object",
     "mnemonic": "push",
     "size": 1
   },
@@ -2833,7 +2833,7 @@
   },
   {
     "ea": "0x60ACDE",
-    "line": "call    sub_480340",
+    "line": "call    NiAVObject_FindBhkCollisionObjectRecursive; Returns the first bhk collision object found on object or recursively beneath its NiNode children. This is structural traversal, independent of node names.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2863,13 +2863,13 @@
   },
   {
     "ea": "0x60ACED",
-    "line": "mov     [esp+1B0h+var_16C], edx",
+    "line": "mov     [esp+1B0h+collisionObject], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x60ACF1",
-    "line": "mov     esi, [esp+1B0h+var_174]",
+    "line": "mov     esi, [esp+1B0h+actor]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2893,7 +2893,7 @@
   },
   {
     "ea": "0x60AD01",
-    "line": "call    Actor_IsBlocking",
+    "line": "call    Actor_IsBlocking; Actor_IsBlocking: process current-action vfunc +0x2D0 equals 6. Player jump path treats this specially; climb activation should reject or require explicit design override while blocking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2965,25 +2965,25 @@
   },
   {
     "ea": "0x60AD21",
-    "line": "push    0",
+    "line": "push    0; outAngleDegrees",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x60AD23",
-    "line": "push    ebx",
+    "line": "push    ebx; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60AD24",
-    "line": "push    esi",
+    "line": "push    esi; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60AD25",
-    "line": "call    sub_6131D0",
+    "line": "call    Actor_IsFacingReferenceWithinCombatAngle; Blocking shield path may reject the initial body-node result and perform a collision query against shield layer/category 7.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3013,7 +3013,7 @@
   },
   {
     "ea": "0x60AD34",
-    "line": "mov     edi, [ebp+arg_0]",
+    "line": "mov     edi, [ebp+impactPosition]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -3037,7 +3037,7 @@
   },
   {
     "ea": "0x60AD40",
-    "line": "fstp    qword ptr [esp+1B0h+var_188]",
+    "line": "fstp    qword ptr [esp+1B0h+object]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -3055,7 +3055,7 @@
   },
   {
     "ea": "0x60AD4D",
-    "line": "mov     [esp+1B0h+var_30], eax",
+    "line": "mov     [esp+1B0h+normalZ], eax",
     "mnemonic": "mov",
     "size": 7
   },
@@ -3067,7 +3067,7 @@
   },
   {
     "ea": "0x60AD5B",
-    "line": "call    sub_5E0660",
+    "line": "call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3097,7 +3097,7 @@
   },
   {
     "ea": "0x60AD75",
-    "line": "fcomp   qword ptr [esp+1B0h+var_188]",
+    "line": "fcomp   qword ptr [esp+1B0h+object]",
     "mnemonic": "fcomp",
     "size": 4
   },
@@ -3133,7 +3133,7 @@
   },
   {
     "ea": "0x60AD84",
-    "line": "mov     edi, [ebp+arg_0]",
+    "line": "mov     edi, [ebp+impactPosition]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -3199,7 +3199,7 @@
   },
   {
     "ea": "0x60ADA8",
-    "line": "fstp    [esp+1B0h+var_30]",
+    "line": "fstp    [esp+1B0h+normalZ]",
     "mnemonic": "fstp",
     "size": 7
   },
@@ -3235,7 +3235,7 @@
   },
   {
     "ea": "0x60ADC5",
-    "line": "fld     [esp+1B0h+var_30]",
+    "line": "fld     [esp+1B0h+normalZ]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -3433,7 +3433,7 @@
   },
   {
     "ea": "0x60AE44",
-    "line": "mov     [esp+1B4h+var_16C], eax",
+    "line": "mov     [esp+1B4h+collisionObject], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3469,7 +3469,7 @@
   },
   {
     "ea": "0x60AE5A",
-    "line": "call    sub_452A60",
+    "line": "call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3541,7 +3541,7 @@
   },
   {
     "ea": "0x60AE87",
-    "line": "mov     [esp+1B4h+var_188], esi",
+    "line": "mov     [esp+1B4h+object], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3571,7 +3571,7 @@
   },
   {
     "ea": "0x60AE9F",
-    "line": "call    sub_718A80",
+    "line": "call    sub_718A80;",
     "mnemonic": "call",
     "size": 5
   },
@@ -3583,7 +3583,7 @@
   },
   {
     "ea": "0x60AEAA",
-    "line": "lea     eax, [esp+1B0h+var_30]",
+    "line": "lea     eax, [esp+1B0h+normalZ]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -3613,7 +3613,7 @@
   },
   {
     "ea": "0x60AEC1",
-    "line": "fstp    [esp+1B8h+var_30]",
+    "line": "fstp    [esp+1B8h+normalZ]",
     "mnemonic": "fstp",
     "size": 7
   },
@@ -3661,7 +3661,7 @@
   },
   {
     "ea": "0x60AEF7",
-    "line": "call    sub_53D4B0",
+    "line": "call    NiTransform_TransformPoint; ODismemberment: __thiscall NiTransform point transform helper. Plugin hit capture must pass transform in ECX; cdecl here crashes on actor hits.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3715,7 +3715,7 @@
   },
   {
     "ea": "0x60AF12",
-    "line": "lea     ecx, [esp+1B0h+var_138]",
+    "line": "lea     ecx, [esp+1B0h+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3751,7 +3751,7 @@
   },
   {
     "ea": "0x60AF25",
-    "line": "push    edx",
+    "line": "push    edx; right",
     "mnemonic": "push",
     "size": 1
   },
@@ -3763,19 +3763,19 @@
   },
   {
     "ea": "0x60AF2D",
-    "line": "push    eax",
+    "line": "push    eax; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60AF2E",
-    "line": "lea     ecx, [esp+1B8h+var_138]",
+    "line": "lea     ecx, [esp+1B8h+out]; this",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x60AF35",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3787,7 +3787,7 @@
   },
   {
     "ea": "0x60AF3D",
-    "line": "mov     edx, [esp+1B0h+var_188]",
+    "line": "mov     edx, [esp+1B0h+object]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3823,13 +3823,13 @@
   },
   {
     "ea": "0x60AF50",
-    "line": "mov     esi, [esp+1B0h+var_174]",
+    "line": "mov     esi, [esp+1B0h+actor]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x60AF54",
-    "line": "mov     edi, [ebp+arg_0]",
+    "line": "mov     edi, [ebp+impactPosition]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -3859,19 +3859,19 @@
   },
   {
     "ea": "0x60AF63",
-    "line": "push    esi",
+    "line": "push    esi; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60AF64",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60AF66",
-    "line": "call    sub_6079A0",
+    "line": "call    ArrowProjectile_BeginCollisionResolution; When no eligible embed node/collision result exists, create state-4 fallback/settling data instead of forcing actor-bone attachment.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3931,7 +3931,7 @@
   },
   {
     "ea": "0x60AF82",
-    "line": "cmp     [esp+1B0h+var_16C], 0",
+    "line": "cmp     [esp+1B0h+collisionObject], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -3943,19 +3943,19 @@
   },
   {
     "ea": "0x60AF89",
-    "line": "push    offset dword_B258DC",
+    "line": "push    offset stru_B258DC",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x60AF8E",
-    "line": "lea     ecx, [esp+1B4h+var_30]",
+    "line": "lea     ecx, [esp+1B4h+normalZ]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x60AF95",
-    "line": "push    ecx; float",
+    "line": "push    ecx; normalZ",
     "mnemonic": "push",
     "size": 1
   },
@@ -3979,13 +3979,13 @@
   },
   {
     "ea": "0x60AFA2",
-    "line": "mov     edx, [esp+1B0h+var_16C]",
+    "line": "mov     edx, [esp+1B0h+collisionObject]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x60AFA6",
-    "line": "push    edx; int",
+    "line": "push    edx; collisionObject",
     "mnemonic": "push",
     "size": 1
   },
@@ -4087,13 +4087,13 @@
   },
   {
     "ea": "0x60AFD1",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60AFD3",
-    "line": "call    sub_6088F0",
+    "line": "call    ArrowProjectile_ApplyImpactImpulseToCollision; Applies the one-shot impact impulse using world-space contact point and normal components. Projectile byte +0x97 prevents duplicate attempts, including unsupported collision objects.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4129,7 +4129,7 @@
   },
   {
     "ea": "0x60AFE3",
-    "line": "call    sub_47FAC0",
+    "line": "call    NiAVObject_GetBhkCollisionObject; ODismemberment: authoritative NiAVObject collision getter. Reads NiAVObject+0xA8 and accepts objects whose class chain includes bhkCollisionObject.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4279,7 +4279,7 @@
   },
   {
     "ea": "0x60B029",
-    "line": "mov     ecx, [ebp+arg_4]; jumptable 0060B022 cases 0,3,5,10,11,13,15,18,20,25,26,28,30",
+    "line": "mov     ecx, [ebp+impactNormal]; jumptable 0060B022 cases 0,3,5,10,11,13,15,18,20,25,26,28,30",
     "mnemonic": "mov",
     "size": 3
   },
@@ -4303,7 +4303,7 @@
   },
   {
     "ea": "0x60B030",
-    "line": "call    sub_608DA0",
+    "line": "call    ArrowProjectile_SetFreeImpactState3; Convert to free-impact state 3 without changing TESObjectREFR.baseForm or attaching source-WEAP identity.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4423,19 +4423,19 @@
   },
   {
     "ea": "0x60B067",
-    "line": "push    esi",
+    "line": "push    esi; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60B068",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60B06A",
-    "line": "call    sub_6079A0",
+    "line": "call    ArrowProjectile_BeginCollisionResolution; Creature-specific unsupported attachment branch also selects state 4 fallback.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4501,7 +4501,7 @@
   },
   {
     "ea": "0x60B08D",
-    "line": "cmp     dword ptr [ebx+7Ch], 0",
+    "line": "cmp     dword ptr [ebx+7Ch], 0; Actor-hit inventory recovery is eligible only when ArrowProjectile+0x7C (arrowEnch) is NULL. Enchanted AMMO bypasses the inventory-chance transfer.",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -4519,7 +4519,7 @@
   },
   {
     "ea": "0x60B095",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Generate engine RNG value and reduce modulo 100 for the actor-hit AMMO recovery roll.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4555,7 +4555,7 @@
   },
   {
     "ea": "0x60B0AB",
-    "line": "jge     short loc_60B0D3",
+    "line": "jge     short loc_60B0D3; Actor recovery rule: only ArrowProjectile+0x7C AMMO enchantment blocks recovery. Bow enchantment or poison alone does not. RNG modulo 100 is compared with iArrowInventoryChance.",
     "mnemonic": "jge",
     "size": 2
   },
@@ -4603,7 +4603,7 @@
   },
   {
     "ea": "0x60B0C3",
-    "line": "call    eax",
+    "line": "call    eax; Obtain this ArrowProjectile's base form with zero/one arguments; shot construction assigned the equipped AMMO form as that base.",
     "mnemonic": "call",
     "size": 2
   },
@@ -4627,13 +4627,13 @@
   },
   {
     "ea": "0x60B0CA",
-    "line": "call    edx",
+    "line": "call    edx; Actor-hit recovery invokes the struck Actor's form-based AddItem virtual with one ArrowProjectile AMMO base form. That route reaches ContainerExtraData_AddItem (0x48F7C0), unlike ordinary landed-reference pickup through 0x4DDC40/0x48AA10.",
     "mnemonic": "call",
     "size": 2
   },
   {
     "ea": "0x60B0CC",
-    "line": "mov     byte ptr [ebx+95h], 1",
+    "line": "mov     byte ptr [ebx+95h], 1; Set ArrowProjectile byte +0x95 after actor-inventory transfer. Verified meaning: transfer-occurred marker; downstream duplicate-prevention semantics remain to be independently traced.",
     "mnemonic": "mov",
     "size": 7
   },

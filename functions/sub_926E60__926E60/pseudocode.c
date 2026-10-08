@@ -2,11 +2,11 @@ int __cdecl sub_926E60(int a1)
 {
   int result; // eax
 
-  result = a1;
-  if ( a1 )
+  result = a1; /*0x926e60*/
+  if ( a1 ) /*0x926e66*/
   {
-    *(_WORD *)(a1 + 6) = 1;
-    *(_DWORD *)a1 = &off_AA1858;
+    *(_WORD *)(a1 + 6) = 1; /*0x926e68*/
+    *(_DWORD *)a1 = &off_AA1858; /*0x926e6e*/
   }
-  return result;
+  return result; /*0x926e74*/
 }

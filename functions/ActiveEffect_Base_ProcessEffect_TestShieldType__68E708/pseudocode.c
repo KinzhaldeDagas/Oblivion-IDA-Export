@@ -9,12 +9,12 @@ int __usercall ActiveEffect_Base_ProcessEffect_::TestShieldType@<eax>(
 {
   double v7; // st7
 
-  if ( !Magic_GetShieldType(*(_DWORD *)(a1 + 0x98)) )
-    return ActiveEffect_Base_ProcessEffect_::UpdateHUDActiveEffectList(a3, a6, a7);
-  v7 = *(float *)(a3 + 0x18);
-  if ( v7 >= fCostant_100 )
-    return ActiveEffect_Base_ProcessEffect_::UpdateHUDActiveEffectList(a3, a6, a7);
-  if ( *(_DWORD *)(a3 + 0x28) == 4 )
-    *(_DWORD *)(a3 + 0x14) |= 4u;
+  if ( !Magic_GetShieldType(*(_DWORD *)(a1 + 0x98)) ) /*0x68e70f*/
+    return ActiveEffect_Base_ProcessEffect_::UpdateHUDActiveEffectList(a3, a6, a7); /*0x68e70f*/
+  v7 = *(float *)(a3 + 0x18); /*0x68e71f*/
+  if ( v7 >= fCostant_100 ) /*0x68e72d*/
+    return ActiveEffect_Base_ProcessEffect_::UpdateHUDActiveEffectList(a3, a6, a7); /*0x68e719*/
+  if ( *(_DWORD *)(a3 + 0x28) == 4 ) /*0x68e737*/
+    *(_DWORD *)(a3 + 0x14) |= 4u; /*0x68e739*/
   return ActiveEffect_Base_ProcessEffect_::TestIngred(a2, a3, a4, a5, v7);
 }

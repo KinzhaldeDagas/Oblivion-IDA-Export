@@ -28,7 +28,7 @@
 0x52177D: call    GetFormModelPAth
 0x521782: add     esp, 4
 0x521785: push    eax
-0x521786: call    sub_521370
+0x521786: call    TESIdleForm_BuildIdleAnimsRoot; Builds IdleAnims lookup root from actor model path: preserves existing IdleAnims prefix or appends IdleAnims to model directory.
 0x52178B: mov     esi, [esp+30h+var_14]
 0x52178F: add     esp, 8
 0x521792: xor     edi, edi
@@ -49,7 +49,7 @@
 0x5217B7: jz      short loc_5217BB
 0x5217B9: mov     edi, eax
 0x5217BB: push    esi
-0x5217BC: call    FormHeapFree
+0x5217BC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5217C1: add     esp, 4
 0x5217C4: mov     eax, edi
 0x5217C6: mov     ecx, [esp+28h+var_C]
@@ -61,3 +61,12 @@
 0x5217D5: pop     ebx
 0x5217D6: add     esp, 14h
 0x5217D9: retn    4
+0x9B5BD0: lea     ecx, [ebp-14h]; void *
+0x9B5BD3: jmp     BSStringT_Clear
+0x9B5BD8: mov     edx, [esp+arg_4]
+0x9B5BDC: lea     eax, [edx-18h]
+0x9B5BDF: mov     ecx, [edx-1Ch]
+0x9B5BE2: xor     ecx, eax
+0x9B5BE4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B5BE9: mov     eax, offset stru_AE0BB4
+0x9B5BEE: jmp     ___CxxFrameHandler3

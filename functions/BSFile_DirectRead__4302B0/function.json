@@ -1,19 +1,36 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 0,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x4302B0",
+      "0x43034A"
+    ],
+    [
+      "0x9ABDE0",
+      "0x9ABE09"
+    ]
+  ],
+  "chunks_sha256": "dc2dce5374415318fa6e4d1c474156701c844dc0c0cc94adb805dcc4bdc33e0d",
+  "comment_regular": "MEF PLAN 2026-09-07: Revalidated read ABI: self in ECX, destination/count stack, RET8. Calls747E80 at43032C and adds returned byte count to owner+148h at430331. EBP/EDI in prior __userpurge prototype were inferred artifacts, not arguments. Prior declaration retained in analysis ledger; corrected to ordinary thiscall.",
   "comment_repeatable": "",
-  "data_refs_count": 1,
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 7,
   "display_name": "BSFile_DirectRead",
   "end_ea": "0x43034A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "BSFile_DirectRead",
   "segment": ".text",
   "sha256": "dd89febbe348e32383a88c2844bae89b738ec15e916d4eb0e91f5f6ca45b4a9f",
   "size": 154,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4302B0",
-  "type": "unsigned int __userpurge@<eax>(_DWORD *this@<ecx>, FILE *@<ebp>, int@<edi>, char *Dst, size_t Count)",
-  "xrefs_from_count": 53,
+  "total_chunk_size": 195,
+  "type": "unsigned int __thiscall(void *self, void *destination, unsigned int byteCount)",
+  "xrefs_from_count": 67,
   "xrefs_to_count": 3
 }

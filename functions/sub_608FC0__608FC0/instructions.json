@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x608FC0",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Collision state 0: restore saved local transform, reparent the projectile NiNode beneath the recorded Actor attachment node, refresh shadow state, remove incompatible child collision nodes, and register the embedded projectile with the Actor process.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -397,19 +397,19 @@
   },
   {
     "ea": "0x609080",
-    "line": "push    ebx",
+    "line": "push    ebx; object",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x609081",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x609083",
-    "line": "call    sub_7C5E70",
+    "line": "call    ShadowSceneNode_RemoveObjectReceivers; Removes an object's geometry from shadow-light receiver lists under the shadow-scene critical section. It obtains the object's node/container through virtual +0x08 and recurses; it does not detach the object from its parent or clear NiNode children.",
     "mnemonic": "call",
     "size": 5
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x609096",
-    "line": "call    edx",
+    "line": "call    edx; State 0 reparents the projectile NiNode into the recorded actor attachment node after restoring recorded local transform.",
     "mnemonic": "call",
     "size": 2
   },
@@ -490,12 +490,6 @@
     "line": "jmp     short loc_6090B0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x6090AA",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
   },
   {
     "ea": "0x6090B0",
@@ -577,7 +571,7 @@
   },
   {
     "ea": "0x6090D0",
-    "line": "cmp     eax, offset dword_B35ACC",
+    "line": "cmp     eax, offset stru_B35ACC",
     "mnemonic": "cmp",
     "size": 5
   },

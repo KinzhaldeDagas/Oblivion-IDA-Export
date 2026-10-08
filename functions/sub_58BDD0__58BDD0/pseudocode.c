@@ -1,81 +1,66 @@
-void __thiscall sub_58BDD0(float *this)
+// Verified: traverses dependent action links via Value +0x14 sentinel, transfers source numeric/string values, and calls CalculateValue(dependentValue,false). Synchronous recursive property evaluation is established; this does not alone prove DialogMenu topic-build reentrancy.
+void __thiscall Tile::Value::PropagateReactions(OblivionTileValueView *this)
 {
-  int i; // ebx
-  _DWORD *v3; // eax
-  _DWORD *v4; // esi
-  int v5; // ecx
-  char *v6; // eax
+  OblivionTileActionNode *i; // ebx
+  OblivionTileActionNode *previousAction; // eax
+  OblivionTileActionNode *j; // esi
+  char *m_data; // ecx
+  const char *v6; // eax
   int v7; // eax
-  _WORD *v8; // edx
-  _DWORD *v9; // esi
-  float *j; // edx
-  float *v11; // edi
-  _DWORD *v12; // eax
-  _DWORD *v13; // ecx
+  _WORD *sentinelOwner; // edx
+  OblivionTileActionNode *nextReaction; // esi
+  OblivionTileValueView *k; // edx
+  OblivionTileValueView *v11; // edi
+  OblivionTileActionNode *v12; // eax
+  OblivionTileActionNode *m; // ecx
 
-  if ( !*(_BYTE *)(*(_DWORD *)this + 5) )
+  if ( !*((_BYTE *)this->owner + 5) ) /*0x58bdd5*/
   {
-    for ( i = *(_DWORD *)(*((_DWORD *)this + 5) + 0x14); i; i = *(_DWORD *)(i + 0x14) )
+    for ( i = this->reactionHead->nextReaction; i; i = i->nextReaction ) /*0x58bde9*/
     {
-      if ( sub_589770((int)this) )
+      if ( sub_589770((int)this) ) /*0x58bdf2*/
       {
-        v3 = *(_DWORD **)i;
-        v4 = (_DWORD *)i;
-        if ( *(_DWORD *)i )
-        {
-          do
-          {
-            v4 = v3;
-            v3 = (_DWORD *)*v3;
-          }
-          while ( v3 );
-        }
-        v5 = *((_DWORD *)this + 2);
-        if ( v5 && (v6 = *(char **)(v4[2] + 8)) != 0 )
-          v7 = _strcmp(v6, *((char **)this + 2));
+        previousAction = i->previousAction; /*0x58bdff*/
+        for ( j = i; previousAction; previousAction = previousAction->previousAction ) /*0x58bdff*/
+          j = previousAction; /*0x58be07*/
+        m_data = this->text.m_data; /*0x58be12*/
+        if ( m_data && (v6 = j->operand.sentinelOwner->text.m_data) != 0 ) /*0x58be20*/
+          v7 = CRT_StricmpLocaleDispatch(v6, this->text.m_data); /*0x58be24*/
         else
-          v7 = 2 * (v5 == 0) - 1;
-        if ( v7 )
+          v7 = 2 * (m_data == 0) - 1; /*0x58be35*/
+        if ( v7 ) /*0x58be3b*/
         {
-          BSStringT_Set((BSStringT *)(v4[2] + 8), *((const char **)this + 2), 0);
-          *(float *)(v4[2] + 4) = 0.0;
-          if ( (*(int (__thiscall **)(_DWORD))(**(_DWORD **)v4[2] + 0xC))(*(_DWORD *)v4[2]) == 0x387 )
-            *(_DWORD *)(*(_DWORD *)v4[2] + 0x2C) |= 2u;
-          v8 = (_WORD *)v4[2];
-          if ( v8[0xC] == 0xFE6 )
-            *(_DWORD *)(*(_DWORD *)v8 + 0x2C) |= 0x20u;
+          BSStringT_Set(&j->operand.sentinelOwner->text, this->text.m_data, 0); /*0x58be49*/
+          j->operand.sentinelOwner->number = 0.0; /*0x58be53*/
+          if ( (*(int (__thiscall **)(Tile *))(*(_DWORD *)j->operand.sentinelOwner->owner + 0xC))(j->operand.sentinelOwner->owner) == 0x387 ) /*0x58be67*/
+            *((_DWORD *)j->operand.sentinelOwner->owner + 0xB) |= 2u; /*0x58be6e*/
+          sentinelOwner = j->operand.sentinelOwner; /*0x58be72*/
+          if ( sentinelOwner[0xC] == 0xFE6 ) /*0x58be7b*/
+            *(_DWORD *)(*(_DWORD *)sentinelOwner + 0x2C) |= 0x20u; /*0x58be81*/
         }
       }
       else
       {
-        *(float *)(i + 8) = *(this + 1);
+        i->operand.number = this->number; /*0x58be8a*/
       }
     }
-    v9 = *(_DWORD **)(*((_DWORD *)this + 5) + 0x14);
-    for ( j = 0; v9; j = v11 )
+    nextReaction = this->reactionHead->nextReaction; /*0x58be9b*/
+    for ( k = 0; nextReaction; k = v11 ) /*0x58bea2*/
     {
-      v11 = 0;
-      if ( v9[3] )
+      v11 = 0; /*0x58bea4*/
+      if ( nextReaction->opcode ) /*0x58bea6*/
       {
-        v12 = (_DWORD *)*v9;
-        v13 = v9;
-        if ( *v9 )
+        v12 = nextReaction->previousAction; /*0x58beab*/
+        for ( m = nextReaction; v12; v12 = v12->previousAction ) /*0x58beab*/
+          m = v12; /*0x58beb3*/
+        v11 = m->operand.sentinelOwner; /*0x58bebb*/
+        if ( v11 ) /*0x58bec0*/
         {
-          do
-          {
-            v13 = v12;
-            v12 = (_DWORD *)*v12;
-          }
-          while ( v12 );
-        }
-        v11 = (float *)v13[2];
-        if ( v11 )
-        {
-          if ( v11 != j )
-            DoActionEnumeration(v11, 0);
+          if ( v11 != k ) /*0x58bec4*/
+            Tile::Value::CalculateValue(v11, 0); /*0x58beca*/
         }
       }
-      v9 = (_DWORD *)v9[5];
+      nextReaction = nextReaction->nextReaction; /*0x58becf*/
     }
   }
 }

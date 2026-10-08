@@ -93,3 +93,35 @@
 0x43433B: pop     ebx
 0x43433C: add     esp, 10h
 0x43433F: retn    0Ch
+0x4341F0: push    ecx
+0x4341F1: push    esi
+0x4341F2: mov     esi, ecx
+0x4341F4: push    1; a2
+0x4341F6: mov     dword ptr [esi], offset ??_7?$LockFreeMap@_JV?$NiPointer@V?$BSTask@_J@@@@@@6B@; const LockFreeMap<__int64,NiPointer<BSTask<__int64>>>::`vftable'
+0x4341FC: call    sub_433D70; Or LockFreeQueue
+0x434201: mov     eax, [esi+0Ch]
+0x434204: push    eax
+0x434205: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x43420A: mov     ecx, [esi+4]
+0x43420D: mov     [esp+0Ch+var_4], ecx
+0x434211: mov     edx, [esp+0Ch+var_4]
+0x434215: push    edx
+0x434216: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x43421B: add     esp, 8
+0x43421E: pop     esi
+0x43421F: pop     ecx
+0x434220: retn
+0x9AC070: mov     ecx, [ebp-10h]; this
+0x9AC073: jmp     loc_4341F0
+0x9AC078: mov     eax, [ebp+0Ch]
+0x9AC07B: push    eax
+0x9AC07C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AC081: pop     ecx
+0x9AC082: retn
+0x9AC083: mov     edx, [esp+arg_4]
+0x9AC087: lea     eax, [edx-14h]
+0x9AC08A: mov     ecx, [edx-18h]
+0x9AC08D: xor     ecx, eax
+0x9AC08F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AC094: mov     eax, offset stru_AD8D9C
+0x9AC099: jmp     ___CxxFrameHandler3

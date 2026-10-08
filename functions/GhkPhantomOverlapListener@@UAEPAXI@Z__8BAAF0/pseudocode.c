@@ -2,8 +2,8 @@ hkPhantomOverlapListener *__thiscall hkPhantomOverlapListener::`scalar deleting 
         hkPhantomOverlapListener *this,
         char a2)
 {
-  *(_DWORD *)this = &hkPhantomOverlapListener::`vftable';
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  *(_DWORD *)this = &hkPhantomOverlapListener::`vftable'; /*0x8baaf8*/
+  if ( (a2 & 1) != 0 ) /*0x8baafe*/
+    FormHeapFree((unsigned int)this); /*0x8bab01*/
+  return this; /*0x8bab0b*/
 }

@@ -1,4 +1,4 @@
-0x76D8C0: sub     esp, 20h
+0x76D8C0: sub     esp, 20h; DX10OBSE resource decode: wraps an existing D3D texture resource as NiDX9TextureBufferData by AddRef, GetSurfaceLevel(0), GetDesc, and attaching/creating Ni2DBuffer parent data.
 0x76D8C3: push    ebx
 0x76D8C4: push    ebp
 0x76D8C5: push    esi
@@ -10,7 +10,7 @@
 0x76D8D2: add     esp, 4
 0x76D8D5: cmp     esi, ebp
 0x76D8D7: jz      short loc_76D901
-0x76D8D9: push    offset NiRefObject_objcount; lpAddend
+0x76D8D9: push    0B3FD64h; lpAddend
 0x76D8DE: mov     dword ptr [esi], offset ??_7NiRefObject@@6B@; const NiRefObject::`vftable'
 0x76D8E4: mov     [esi+4], ebp
 0x76D8E7: call    dword ptr ds:0A28078h
@@ -36,11 +36,11 @@
 0x76D91D: call    eax
 0x76D91F: cmp     eax, ebp
 0x76D921: jge     short loc_76D94B
-0x76D923: push    eax
-0x76D924: call    sub_7736F0
+0x76D923: push    eax; hresult
+0x76D924: call    D3D9_HResultToString; Maps common COM/D3D9 HRESULT values to diagnostic names, including DEVICELOST, DEVICENOTRESET, INVALIDCALL, OUTOFVIDEOMEMORY, and format/state failures.
 0x76D929: push    eax
 0x76D92A: push    offset aNidx9texturebu; "NiDX9TextureBufferData::Create> FAILED-"...
-0x76D92F: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x76D92F: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x76D934: add     esp, 0Ch
 0x76D937: mov     edx, [esi]
 0x76D939: mov     eax, [edx]

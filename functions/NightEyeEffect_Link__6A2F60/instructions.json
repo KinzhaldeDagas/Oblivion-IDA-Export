@@ -1,25 +1,25 @@
 [
   {
     "ea": "0x6A2F60",
-    "line": "push    esi",
+    "line": "push    esi; Verified NightEyeEffect_Link takes PlayerCharacter* linkContext, calls ActiveEffect_Base_Link, then compares the context with the player reference before restoring the player shader. Supports the Probable TESObjectREFR/Actor context type used by the common link dispatcher.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A2F61",
-    "line": "mov     esi, [esp+4+arg_0]",
+    "line": "mov     esi, [esp+4+linkContext]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6A2F65",
-    "line": "push    esi",
+    "line": "push    esi; linkContext",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A2F66",
-    "line": "call    ActiveEffect_Base_Link",
+    "line": "call    ActiveEffect_Base_Link; Verified ActiveEffect link stage resolves saved caster (+0x24), target (+0x20), bound object (+0x30), and hit-effect references (+0x34). The explicit linkContext is Probable TESObjectREFR*/Actor context: Player_LinkModifiedForm passes PlayerCharacter*, NightEyeEffect_Link requires PlayerCharacter*, and VampirismEffect_Link RTTI-casts it to Actor; modified-extra loading passes null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x6A2F74",
-    "line": "call    NightEyeEffect_SetPlayerShader?",
+    "line": "call    NightEyeEffect_SetPlayerShader?; MoonSugarEffect decode: NightEye player shader path sets NightEye active state from player actor value kActorVal_NightEyeBonus; do not hijack for Moon Sugar.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x42F610",
-    "line": "sub     esp, 448h",
+    "line": "sub     esp, 448h; MEF data-streaming pass: archive list builder uses fixed 0x8000 heap buffer and case-sensitive .esp-associated BSA discovery. Decoded as future policy/bounds improvement candidate, not included in narrow compatibility patch.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x42F628",
-    "line": "push    offset FirstLoadedArchiveByType",
+    "line": "push    0B338E8h",
     "mnemonic": "push",
     "size": 5
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x42F69D",
-    "line": "push    ecx; Str2",
+    "line": "push    ecx; right",
     "mnemonic": "push",
     "size": 1
   },
@@ -247,13 +247,13 @@
   },
   {
     "ea": "0x42F6A4",
-    "line": "push    edx; Str1",
+    "line": "push    edx; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x42F6A5",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x42F734",
-    "line": "mov     ecx, sArchiveList_Archive",
+    "line": "mov     ecx, sArchiveList_Archive; MEF v46 Oblivion-verified archive startup OOM guard: fixed 0x8000 buffer allocation returned in EAX is unchecked. Failure sets result byte [ESP+13]=0 and rejoins timing/log epilogue at 0x42F9BE before fopen/findfirst.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x42F74E",
-    "line": "push    offset AppDataPath",
+    "line": "push    (offset destination+10Ch)",
     "mnemonic": "push",
     "size": 5
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x42F772",
-    "line": "call    _fopen",
+    "line": "call    _fopen; Performance/resource decode: Oblivion opens Plugins.txt here but sub_42F610 has no fclose. Decode-only pending complete CRT-handle cleanup integration.",
     "mnemonic": "call",
     "size": 5
   },
@@ -727,7 +727,7 @@
   },
   {
     "ea": "0x42F7E2",
-    "line": "call    _strstr",
+    "line": "call    _strstr; MEF candidate verification 2026-05-30: master archive list builder matches only '.esp' via strstr before rewriting to '*.bsa'. Policy-changing candidate, not a narrow correction.",
     "mnemonic": "call",
     "size": 5
   },
@@ -955,7 +955,7 @@
   },
   {
     "ea": "0x42F871",
-    "line": "mov     ebx, eax",
+    "line": "mov     ebx, eax; MEF v50 resolved: _findfirst64i32 returns the raw FindFirstFileA handle in EBX; the completion/error path at 0x42F916 now calls Win32 FindClose(EBX). Initial INVALID_HANDLE_VALUE bypasses that hook.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -985,7 +985,7 @@
   },
   {
     "ea": "0x42F880",
-    "line": "mov     eax, ebp",
+    "line": "mov     eax, ebp; MEF v49 Oblivion-verified archive-list length scan. EAX becomes strlen(EBP) at 0x42F88E; the following vanilla newline probe requires length >= 2.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1027,13 +1027,13 @@
   },
   {
     "ea": "0x42F890",
-    "line": "cmp     byte ptr [eax+ebp-2], 0Ah",
+    "line": "cmp     byte ptr [eax+ebp-2], 0Ah; MEF v49 verified under-read: vanilla reads [EBP+strlen-2] without proving strlen >= 2. Empty/one-byte sArchiveList values read before the 0x8000 buffer. Guard length < 2 and skip CR/LF trim to 0x42F8AF; otherwise replay this compare and continue 0x42F895.",
     "mnemonic": "cmp",
     "size": 5
   },
   {
     "ea": "0x42F895",
-    "line": "jnz     short loc_42F8AF",
+    "line": "jnz     short loc_42F8AF; MEF v49 normal-length continuation after replayed LF comparison. Existing branch preserves vanilla CR/LF trimming for strlen >= 2.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -1093,7 +1093,7 @@
   },
   {
     "ea": "0x42F8AF",
-    "line": "mov     eax, ebp",
+    "line": "mov     eax, ebp; MEF v49 short-list continuation: append/enumeration path is safe for strlen < 2 once the invalid [EBP+length-2] newline probe is skipped.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1129,7 +1129,7 @@
   },
   {
     "ea": "0x42F8BE",
-    "line": "mov     cx, ds:word_A36130",
+    "line": "mov     cx, ds:word_A36130; MEF v47 Oblivion-verified bounded archive append: append literal ', ' plus current 260-byte find-data name only if full NUL-terminated result fits fixed 0x8000 buffer. On rejection leave buffer unchanged, clear result byte, continue same findnext at 0x42F90E.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1297,7 +1297,7 @@
   },
   {
     "ea": "0x42F90E",
-    "line": "call    __findnext64i32",
+    "line": "call    __findnext64i32; MEF v47 continuation preserves Oblivion _findnext64i32(handle=EBX, finddata=&[ESP+28]) loop after bounded append.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1309,7 +1309,7 @@
   },
   {
     "ea": "0x42F916",
-    "line": "test    eax, eax",
+    "line": "test    eax, eax; MEF v50 Oblivion-verified archive search-handle lifetime fix. EAX is _findnext64i32 result: zero repeats at 0x42F880; nonzero ends this search and EBX still owns the raw FindFirstFileA HANDLE. Close EBX with FindClose, then continue 0x42F91E. The invalid-handle findfirst path already branches directly to 0x42F91E.",
     "mnemonic": "test",
     "size": 2
   },
@@ -1321,7 +1321,7 @@
   },
   {
     "ea": "0x42F91E",
-    "line": "mov     esi, [esp+458h+var_444]",
+    "line": "mov     esi, [esp+458h+var_444]; MEF v50 continuation after successful enumeration handle is closed. Direct failure from _findfirst64i32 reaches here with EBX == INVALID_HANDLE_VALUE and requires no close.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1357,7 +1357,7 @@
   },
   {
     "ea": "0x42F933",
-    "line": "push    offset byte_A319FC; unsigned __int8 *",
+    "line": "push    offset asc_A319FC; MEF v48 Oblivion-verified Plugins.txt lifetime fix: ESI is fopen result (or null) and is no longer used after enumeration. fclose nonnull ESI, then replay mbstok delimiter/EBP arguments at 0x42F939.",
     "mnemonic": "push",
     "size": 5
   },
@@ -1369,7 +1369,7 @@
   },
   {
     "ea": "0x42F939",
-    "line": "call    __mbstok",
+    "line": "call    __mbstok; MEF v48 continuation: Plugins.txt has been closed; archive-list tokenization and load order remain unchanged.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1471,7 +1471,7 @@
   },
   {
     "ea": "0x42F95F",
-    "line": "call    ArchiveManager_LoadArchive",
+    "line": "call    ArchiveManager_LoadArchive; MEF PLAN 2026-09-07: Sole recorded direct LoadArchive caller: testsEAX at42F967; NULL skips category indexing via42F99B, nonnull may assign pointer to B338E8[type] at42F98A. Therefore normal factoryNULL failure is already tolerated, but returned success after failed list append can create category/global-list inconsistency.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1531,7 +1531,7 @@
   },
   {
     "ea": "0x42F980",
-    "line": "cmp     FirstLoadedArchiveByType[ecx*4], 0",
+    "line": "cmp     dword ptr ds:0B338E8h[ecx*4], 0",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -1543,7 +1543,7 @@
   },
   {
     "ea": "0x42F98A",
-    "line": "mov     FirstLoadedArchiveByType[ecx*4], eax",
+    "line": "mov     ds:0B338E8h[ecx*4], eax",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1579,7 +1579,7 @@
   },
   {
     "ea": "0x42F9A0",
-    "line": "push    offset byte_A319FC; unsigned __int8 *",
+    "line": "push    offset asc_A319FC; unsigned __int8 *",
     "mnemonic": "push",
     "size": 5
   },

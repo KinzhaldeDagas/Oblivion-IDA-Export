@@ -1,19 +1,36 @@
 {
-  "callees_count": 33,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 20,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 4,
-  "display_name": "sub_680110",
+  "chunks": [
+    [
+      "0x680110",
+      "0x680334"
+    ],
+    [
+      "0x9C4BA0",
+      "0x9C4BC3"
+    ]
+  ],
+  "chunks_sha256": "393fa04a8af1fde6c0b6a07528fcd81a20bbb807ffe343d7923fe8a1d1696918",
+  "comment_regular": "Verified state layout now typed: TravelPathSpaceDoorLink is 0x14 bytes (16-bit table index, two ref/space endpoint pairs); TravelPathSearchState is 0x10 bytes (fitness, predecessor link, current space, flags). The 0x01 discovered interpretation remains Probable; 0x02 expanded is Verified.",
+  "comment_repeatable": "Verified state layout now typed: TravelPathSpaceDoorLink is 0x14 bytes (16-bit table index, two ref/space endpoint pairs); TravelPathSearchState is 0x10 bytes (fitness, predecessor link, current space, flags). The 0x01 discovered interpretation remains Probable; 0x02 expanded is Verified.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 18,
+  "display_name": "TravelPath_FindLowLevelRoute",
   "end_ea": "0x680334",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_680110",
+  "name": "TravelPath_FindLowLevelRoute",
   "segment": ".text",
   "sha256": "3e481c6738d25cf653505abd47228557847d43d12098baabf30f8710dc3280ef",
   "size": 548,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x680110",
-  "type": "char __cdecl(int, _DWORD *, int, _DWORD *, _DWORD *, int)",
-  "xrefs_from_count": 197,
+  "total_chunk_size": 583,
+  "type": "bool __cdecl(TESForm *sourceSpace, const NiPoint3 *sourcePosition, TESForm *destinationSpace, const NiPoint3 *destinationPosition, BSSimpleList_VoidPtr *outRouteNodes, TESObjectREFR *sourceRef)",
+  "xrefs_from_count": 220,
   "xrefs_to_count": 2
 }

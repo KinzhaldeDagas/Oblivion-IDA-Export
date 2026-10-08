@@ -1,4 +1,4 @@
-0x5B1E20: push    esi
+0x5B1E20: push    esi; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.
 0x5B1E21: mov     esi, ecx
 0x5B1E23: mov     eax, [esi]
 0x5B1E25: mov     edx, [eax+4]

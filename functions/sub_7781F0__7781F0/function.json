@@ -1,19 +1,32 @@
 {
-  "callees_count": 18,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_7781F0",
+  "chunks": [
+    [
+      "0x7781F0",
+      "0x77834B"
+    ]
+  ],
+  "chunks_sha256": "3fc2dcc0173fdb30cd05feff3bce3bd78bf90344a748b0e23459260a43d251b3",
+  "comment_regular": "Pass226: Index-buffer rebuild/upload helper used when NiScreenTexture mask bit 0x08 is active.",
+  "comment_repeatable": "Pass226: Index-buffer rebuild/upload helper used when NiScreenTexture mask bit 0x08 is active.\nVerified OblivionNew 2026-09-27 for DX11 buffer ownership: NiDX9IndexBufferManager::PackBuffer error string and retail instructions identify this index buffer packing helper. Existing GetDesc is checked for INDEX16 (0x65), INDEXBUFFER type7, requested usage/pool and sufficient byte capacity; otherwise device vtable+0x6C creates the index buffer. At0x7782F5 calls buffer+0x2C Lock with offset0, EBX byte length (2*source index count), output pointer and flags0. Copies exactly EBX bytes at0x778306 and Unlocks via+0x30 at0x778314. Failure branch still attempts Unlock0x778335 then Release0x77833D. Decompiler userpurge/prototype/extra argument is misleading; native Lock has the standard five stack args including this. This establishes an actual stock ordinary write-lock path, not only a diagnostic/compatibility API.\nABI correction 2026-10-01: verified ECX manager and seven stack arguments, RET1Ch. Arguments are indices pointer, index count, capacity in indices, existing IB, output buffer byte-size pointer, pool, usage. EDI=2*capacityIndices and EBX=2*indexCount; neither EDI nor ESI is an incoming parameter. Corrected call-site types/SP changes: Lock pops20 bytes (not24); each Unlock pops4 (not0). Standard COM GetDesc/Release signatures were applied. Capacity output is written only when creating a new buffer; reuse leaves it unchanged. Compared Fallout NiXenonIndexBufferManager::PackBuffer827C1BF8: matching seven-argument family and INDEX16/capacity/upload structure, but Oblivion additionally checks Pool and HRESULT failures. Do not transplant PPC calls or failure behavior.\nFollow-up SP/type correction: stale failure-block SP point at778322 was changed from-36 to-40, restoring zero SP at all RET1Ch exits. The spurious HIDWORD(size)/incoming EDI value came from the IDB size_t(8) memcpy signature, not the game ABI. Verified9812C0 memcpy now has explicit32-bit byteCount. Engine code bytes were not changed.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 13,
+  "display_name": "NiDX9IndexBufferManager_PackBuffer",
   "end_ea": "0x77834B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7781F0",
+  "name": "NiDX9IndexBufferManager_PackBuffer",
   "segment": ".text",
   "sha256": "3fc2dcc0173fdb30cd05feff3bce3bd78bf90344a748b0e23459260a43d251b3",
   "size": 347,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7781F0",
-  "type": "int __userpurge@<eax>(int a1@<ecx>, NiGeometryBufferData *a2@<edi>, int a3@<esi>, int a4, void *Src, int a6, int a7, unsigned int *a8, int a9, void *Dst)",
-  "xrefs_from_count": 150,
+  "total_chunk_size": 347,
+  "type": "IDirect3DIndexBuffer9 *__thiscall(NiDX9IndexBufferManager *this, const unsigned __int16 *indices, unsigned int indexCount, unsigned int capacityIndices, IDirect3DIndexBuffer9 *existing, unsigned int *bufferBytes, unsigned int pool, unsigned int usage)",
+  "xrefs_from_count": 160,
   "xrefs_to_count": 4
 }

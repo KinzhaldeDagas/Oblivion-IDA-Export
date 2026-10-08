@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x404540",
-    "line": "sub     esp, 14Ch",
+    "line": "sub     esp, 14Ch; [Controller decode 2026-07-09] Loads [Controls] binding rows after version gate around 1.8, unpacking keyboard=(packed>>16), mouse=(packed>>8), joystick=packed. Joystick axis/invert settings are separate setting objects.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -60,14 +60,8 @@
     "size": 2
   },
   {
-    "ea": "0x40455D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x404560",
-    "line": "mov     cl, byte ptr word_B3F280[eax]",
+    "line": "mov     cl, byte ptr unk_B3F280[eax]",
     "mnemonic": "mov",
     "size": 6
   },

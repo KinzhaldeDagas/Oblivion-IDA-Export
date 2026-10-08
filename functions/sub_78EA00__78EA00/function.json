@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
-  "callers_count": 13,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_78EA00",
+  "callers_count": 19,
+  "chunks": [
+    [
+      "0x78EA00",
+      "0x78EA27"
+    ]
+  ],
+  "chunks_sha256": "39d65631d1fbf678c18edc690656c36946e54a31e880b041d22a1dc0115696a7",
+  "comment_regular": "Oblivion stRandom::GetUniform. Returns minValue + (maxValue - minValue) * SIdvRandomImpl::m_cUniform.Next(). Used throughout spline, branch, frond, tree, leaf-LOD, and seed generation paths.",
+  "comment_repeatable": "Oblivion stRandom::GetUniform. Returns minValue + (maxValue - minValue) * SIdvRandomImpl::m_cUniform.Next(). Used throughout spline, branch, frond, tree, leaf-LOD, and seed generation paths.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_stRandom_GetUniform_010201A0",
   "end_ea": "0x78EA27",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_78EA00",
+  "name": "OB_stRandom_GetUniform_010201A0",
   "segment": ".text",
   "sha256": "39d65631d1fbf678c18edc690656c36946e54a31e880b041d22a1dc0115696a7",
   "size": 39,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78EA00",
-  "type": "double __stdcall(float, float)",
+  "total_chunk_size": 39,
+  "type": "float __thiscall(OB_stRandom_010201A0 *this, float minValue, float maxValue)",
   "xrefs_from_count": 13,
   "xrefs_to_count": 19
 }

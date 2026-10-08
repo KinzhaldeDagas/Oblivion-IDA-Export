@@ -1,7 +1,7 @@
-0x7A8750: mov     ecx, [esp+arg_4]
-0x7A8754: mov     edx, [esp+arg_8]
+0x7A8750: mov     ecx, [esp+last]; OBLIVION AUTHORITY (2026-08-30): Copies 8-byte SLodEntry values backward for in-place vector insertion.
+0x7A8754: mov     edx, [esp+destinationEnd]
 0x7A8758: push    esi
-0x7A8759: mov     esi, [esp+4+arg_0]
+0x7A8759: mov     esi, [esp+4+first]
 0x7A875D: mov     eax, ecx
 0x7A875F: sub     eax, esi
 0x7A8761: sar     eax, 3

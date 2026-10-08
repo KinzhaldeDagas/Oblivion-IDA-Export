@@ -16,57 +16,57 @@ _DWORD *__thiscall sub_740240(int this, unsigned __int16 a2)
   int v17; // [esp+30h] [ebp-10h] BYREF
   unsigned int v18; // [esp+3Ch] [ebp-4h]
 
-  v3 = *(void (__stdcall **)(int *, _DWORD))(**(_DWORD **)(this + 0x5C) + 0x8C);
-  v4 = *(_WORD *)(this + 0x48) - 1;
-  if ( a2 == v4 )
+  v3 = *(void (__stdcall **)(int *, _DWORD))(**(_DWORD **)(this + 0x5C) + 0x8C); /*0x740276*/
+  v4 = *(_WORD *)(this + 0x48) - 1; /*0x74027c*/
+  if ( a2 == v4 ) /*0x74028a*/
   {
-    v3(&v16, v4);
-    if ( !v16 )
-      return sub_73EFB0(this, a2);
-    v5 = (void (__thiscall ***)(_DWORD, int))v16;
-    v6 = InterlockedDecrement((volatile LONG *)(v16 + 4));
-    goto LABEL_16;
+    v3(&v16, v4); /*0x740291*/
+    if ( !v16 ) /*0x740299*/
+      return sub_73EFB0(this, a2); /*0x740299*/
+    v5 = (void (__thiscall ***)(_DWORD, int))v16; /*0x74029f*/
+    v6 = InterlockedDecrement((volatile LONG *)(v16 + 4)); /*0x7402a5*/
+    goto LABEL_16; /*0x7402ab*/
   }
-  v3(&v15, v4);
-  v7 = *(_DWORD *)(this + 0x5C);
-  v8 = *(void (__thiscall **)(int, int *, _DWORD))(*(_DWORD *)v7 + 0x8C);
-  v18 = 0;
-  v8(v7, &v16, a2);
-  v9 = InterlockedDecrement;
-  if ( v16 )
+  v3(&v15, v4); /*0x7402b5*/
+  v7 = *(_DWORD *)(this + 0x5C); /*0x7402b7*/
+  v8 = *(void (__thiscall **)(int, int *, _DWORD))(*(_DWORD *)v7 + 0x8C); /*0x7402bc*/
+  v18 = 0; /*0x7402cb*/
+  v8(v7, &v16, a2); /*0x7402d3*/
+  v9 = InterlockedDecrement; /*0x7402db*/
+  if ( v16 ) /*0x7402e1*/
   {
-    v10 = (void (__thiscall ***)(_DWORD, int))v16;
-    if ( !v9((volatile LONG *)(v16 + 4)) )
-      (**v10)(v10, 1);
+    v10 = (void (__thiscall ***)(_DWORD, int))v16; /*0x7402e3*/
+    if ( !v9((volatile LONG *)(v16 + 4)) ) /*0x7402e9*/
+      (**v10)(v10, 1); /*0x7402fb*/
   }
-  (*(void (__thiscall **)(_DWORD, int *, _DWORD, int))(**(_DWORD **)(this + 0x5C) + 0x90))(
+  (*(void (__thiscall **)(_DWORD, int *, _DWORD, int))(**(_DWORD **)(this + 0x5C) + 0x90))( /*0x740313*/
     *(_DWORD *)(this + 0x5C),
     &v17,
     a2,
     v15);
-  if ( v17 )
+  if ( v17 ) /*0x74031b*/
   {
-    v11 = (void (__thiscall ***)(_DWORD, int))v17;
-    if ( !v9((volatile LONG *)(v17 + 4)) )
-      (**v11)(v11, 1);
+    v11 = (void (__thiscall ***)(_DWORD, int))v17; /*0x74031d*/
+    if ( !v9((volatile LONG *)(v17 + 4)) ) /*0x740323*/
+      (**v11)(v11, 1); /*0x740335*/
   }
-  v12 = v15;
-  if ( v15 )
+  v12 = v15; /*0x740337*/
+  if ( v15 ) /*0x74033d*/
   {
-    v13 = (void (__thiscall ***)(_DWORD, int))v15;
-    if ( !v9((volatile LONG *)(v15 + 4)) )
-      (**v13)(v13, 1);
-    v12 = 0;
-    v15 = 0;
+    v13 = (void (__thiscall ***)(_DWORD, int))v15; /*0x74033f*/
+    if ( !v9((volatile LONG *)(v15 + 4)) ) /*0x740345*/
+      (**v13)(v13, 1); /*0x740357*/
+    v12 = 0; /*0x740359*/
+    v15 = 0; /*0x74035b*/
   }
-  v18 = 0xFFFFFFFF;
-  if ( v12 )
+  v18 = 0xFFFFFFFF; /*0x740361*/
+  if ( v12 ) /*0x740369*/
   {
-    v5 = (void (__thiscall ***)(_DWORD, int))v12;
-    v6 = v9((volatile LONG *)(v12 + 4));
+    v5 = (void (__thiscall ***)(_DWORD, int))v12; /*0x74036b*/
+    v6 = v9((volatile LONG *)(v12 + 4)); /*0x740371*/
 LABEL_16:
-    if ( !v6 )
-      (**v5)(v5, 1);
+    if ( !v6 ) /*0x740375*/
+      (**v5)(v5, 1); /*0x740383*/
   }
-  return sub_73EFB0(this, a2);
+  return sub_73EFB0(this, a2); /*0x740391*/
 }

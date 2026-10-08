@@ -81,10 +81,10 @@
 0x5178F6: push    edx; a3
 0x5178F7: push    eax; a5
 0x5178F8: mov     ecx, esi; this
-0x5178FA: call    Script_RunSomething??
+0x5178FA: call    ScriptRunner_RunEventScript
 0x5178FF: push    esi
 0x517900: mov     bl, al
-0x517902: call    FormHeapFree
+0x517902: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x517907: add     esp, 4
 0x51790A: pop     esi
 0x51790B: mov     al, bl
@@ -107,7 +107,7 @@
 0x517936: mov     edx, [esp+20h+a5]
 0x51793A: push    eax; a3
 0x51793B: push    edx; a5
-0x51793C: call    Script_RunSomething??
+0x51793C: call    ScriptRunner_RunEventScript
 0x517941: pop     esi
 0x517942: pop     ebx
 0x517943: retn    20h ; ' '

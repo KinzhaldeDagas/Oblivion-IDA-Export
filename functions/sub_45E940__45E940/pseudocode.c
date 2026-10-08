@@ -1,20 +1,14 @@
-unsigned __int8 __thiscall sub_45E940(void *this, char *a2)
+unsigned __int8 __thiscall sub_45E940(TESSaveLoadGame_SerializationView *this, char *source)
 {
   unsigned __int8 result; // al
-  size_t v4; // [esp-4h] [ebp-10h]
-  size_t v5; // [esp-4h] [ebp-10h]
   unsigned __int8 Src; // [esp+Bh] [ebp-1h] BYREF
 
-  Src = 0;
-  if ( a2 )
-    Src = strlen(a2);
-  LODWORD(v4) = 1;
-  SaveLoad_SaveData((int)this, &Src, v4);
-  result = Src;
-  if ( Src )
-  {
-    LODWORD(v5) = Src;
-    return (unsigned __int8)SaveLoad_SaveData((int)this, a2, v5);
-  }
-  return result;
+  Src = 0; /*0x45e94b*/
+  if ( source ) /*0x45e950*/
+    Src = strlen(source); /*0x45e962*/
+  SaveLoad_SaveData(this, &Src, 1u); /*0x45e96f*/
+  result = Src; /*0x45e974*/
+  if ( Src ) /*0x45e97a*/
+    return (unsigned __int8)SaveLoad_SaveData(this, source, Src); /*0x45e983*/
+  return result; /*0x45e988*/
 }

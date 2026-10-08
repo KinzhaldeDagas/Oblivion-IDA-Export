@@ -14,9 +14,9 @@
 0x5EE689: mov     [esi+4], edx
 0x5EE68C: mov     [esi+8], ecx
 0x5EE68F: jz      short loc_5EE69E
-0x5EE691: push    0
-0x5EE693: mov     ecx, eax
-0x5EE695: call    sub_477EC0
+0x5EE691: push    0; nodeIndex
+0x5EE693: mov     ecx, eax; this
+0x5EE695: call    ActorSkinInfo_GetCachedNode; Returns ActorSkinInfo cached node at +8+nodeIndex*8. Index 6 is QuiverNode at +0x38, the native Arrow:0 clone source.
 0x5EE69A: test    eax, eax
 0x5EE69C: jnz     short loc_5EE6E9
 0x5EE69E: mov     edx, [edi]
@@ -62,7 +62,7 @@
 0x5EE70F: pop     ebx
 0x5EE710: retn    4
 0x5EE713: mov     ecx, edi
-0x5EE715: call    sub_5E0660
+0x5EE715: call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.
 0x5EE71A: fmul    qword ptr ds:0A6E700h
 0x5EE720: mov     edx, [edi]
 0x5EE722: mov     eax, [edx+174h]

@@ -1,19 +1,40 @@
 {
-  "callees_count": 1416,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 807,
   "callers_count": 2,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x82D990",
+      "0x83190A"
+    ],
+    [
+      "0x75FA70",
+      "0x75FA82"
+    ],
+    [
+      "0x9D2960",
+      "0x9D2D0B"
+    ]
+  ],
+  "chunks_sha256": "799cc1db7b40f5d78daea8f5759fe5aa18a1ae4c55f2f9a418260fd3c951db81",
+  "comment_regular": "\nV175 observed coverage gap: native initializer includes two-point lighting prepasses. [B45720] selects VS SLS2023 via B453C0 and PS SLS2031 via B451C0; [B45724] selects VS2023/PS2032 via B451C4. [B45734] selects skinned VS2024 via B453C4 with PS2031; [B4573C] selects VS2024/PS2032. Runtime175 observes these opaque RGB/zwrite draws outside the current DX11 local-shadow receiver catalog. Installed shader PS2031 emits lighting RGB, not final base-textured RGB; preserve subsequent native compositing passes when extending receivers.\nV176 verified receiver contract: ShadowLightShader_InitializeMultiPointPassPool; selector 0x60,0x61,0x65,0x67. 7C9F30 dispatch and full enqueuer observed. Exact pass/VS/PS pairs: B45720 VS23/PS31, B45724 VS23/PS32, B45734 VS24/PS31, B4573C VS24/PS32. Native PS31/32 RGB is a lighting-only prepass; points use entry slots1/2 and VS c17/c18, colors PS c3/c4, primary color c2. Keep following native texture/composite passes. Complete functions and all IDA chunks exported for code identity.",
   "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_82D990",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "ShadowLightShader_InitializeMultiPointPassPool",
   "end_ea": "0x83190A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_82D990",
+  "name": "ShadowLightShader_InitializeMultiPointPassPool",
   "segment": ".text",
   "sha256": "593ffbe297237d8c5b30cdb4b724ad60582124158133eb8dc222bbe92d821b20",
   "size": 16250,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x82D990",
+  "total_chunk_size": 17207,
   "type": "void()",
-  "xrefs_from_count": 6682,
+  "xrefs_from_count": 6927,
   "xrefs_to_count": 2
 }

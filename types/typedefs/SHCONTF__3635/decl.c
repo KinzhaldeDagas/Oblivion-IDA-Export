@@ -1,1 +1,1 @@
-SHCONTF
+typedef DWORD SHCONTF;

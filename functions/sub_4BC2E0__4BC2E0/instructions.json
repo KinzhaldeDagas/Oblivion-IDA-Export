@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4BC2E0",
-    "line": "sub     esp, 44h",
+    "line": "sub     esp, 44h; Verified: tests whether a world position lies inside a placed TESSubSpace. Requires base form kFormType_SubSpace (0x29) and reference flag 0x20 clear; first applies bound-radius broadphase (+0x2C times reference scale), transforms the query into local space, then tests all three scaled half-extents.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x4BC2E5",
-    "line": "mov     esi, [esp+4Ch+arg_4]",
+    "line": "mov     esi, [esp+4Ch+candidate]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x4BC33A",
-    "line": "fstp    [esp+50h+arg_4]",
+    "line": "fstp    [esp+50h+candidate]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x4BC34A",
-    "line": "mov     ecx, [esp+50h+arg_0]",
+    "line": "mov     ecx, [esp+50h+worldPosition]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x4BC3A2",
-    "line": "fmul    [esp+50h+arg_4]",
+    "line": "fmul    [esp+50h+candidate]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x4BC3C5",
-    "line": "lea     eax, [esp+58h+var_30]",
+    "line": "lea     eax, [esp+58h+outHalfExtents]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x4BC3CA",
-    "line": "call    sub_710250",
+    "line": "call    NiPoint3_MultiplyMatrix3",
     "mnemonic": "call",
     "size": 5
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x4BC3DB",
-    "line": "lea     ecx, [esp+50h+var_30]",
+    "line": "lea     ecx, [esp+50h+outHalfExtents]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -499,13 +499,13 @@
   },
   {
     "ea": "0x4BC3E6",
-    "line": "push    ecx",
+    "line": "push    ecx; outHalfExtents",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BC3E7",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -517,19 +517,19 @@
   },
   {
     "ea": "0x4BC3ED",
-    "line": "call    sub_4BC290",
+    "line": "call    TESSubSpace_GetHalfExtents; Verified: reads TESSubSpace dimensions at +0x24/+0x26/+0x28 and multiplies each by 0.5 to return the three local-space half-extents.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4BC3F2",
-    "line": "fld     [esp+50h+var_30]",
+    "line": "fld     [esp+50h+outHalfExtents]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x4BC3F6",
-    "line": "fld     [esp+50h+arg_4]",
+    "line": "fld     [esp+50h+candidate]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x4BC400",
-    "line": "fstp    [esp+50h+var_30]",
+    "line": "fstp    [esp+50h+outHalfExtents]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x4BC41A",
-    "line": "fld     [esp+50h+var_30]",
+    "line": "fld     [esp+50h+outHalfExtents]",
     "mnemonic": "fld",
     "size": 4
   },

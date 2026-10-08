@@ -1,1 +1,1 @@
-IPersistStorageVtbl_0
+typedef IPersistStorageVtbl IPersistStorageVtbl_0;

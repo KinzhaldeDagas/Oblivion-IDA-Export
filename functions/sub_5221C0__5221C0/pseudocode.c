@@ -1,21 +1,27 @@
-void __thiscall sub_5221C0(int *this, _DWORD *a2)
+// Builds absolute FaceGen parameters by combining race base with active NPC delta. CORRECTION: bank selection uses base actor value 0x45 (vampirism), zero -> +0x108, nonzero -> +0x168; earlier sex-selected description was incorrect. Null race copies manager default parameters.
+void __thiscall TESNPC_BuildAbsoluteFaceGenParameters(const TESNPC *this, FaceGenHeadParameters *outAbsolute)
 {
-  int *v3; // eax
+  const FaceGenHeadParameters *v3; // eax
   bool v4; // zf
-  int *v5; // eax
+  NPC_Unk *unk2; // eax
 
-  sub_552880(a2);
-  if ( *(this + 0x3A) )
+  FaceGenHeadParameters_Initialize(outAbsolute); /*0x5221c9*/
+  if ( this->member.form.race ) /*0x5221d1*/
   {
-    v4 = (*(int (__thiscall **)(int *, int))(*this + 0x128))(this, 0x45) == 0;
-    v5 = this + 0x5A;
-    if ( v4 )
-      v5 = this + 0x42;
-    sub_552990((int *)(*(this + 0x3A) + 0x29C), v5, (int)a2, 0, 0.0);
+    v4 = ((int (__thiscall *)(const TESNPC *, int))this->vtbl[1].super.super.super.Unk_0B)(this, 0x45) == 0; /*0x5221fc*/
+    unk2 = this->member.unk2; /*0x5221fe*/
+    if ( v4 ) /*0x522204*/
+      unk2 = this->member.unk1; /*0x522206*/
+    FaceGenHeadParameters_Combine( /*0x522222*/
+      (const FaceGenHeadParameters *)this->member.form.race->unk12,
+      (const FaceGenHeadParameters *)unk2,
+      outAbsolute,
+      0,
+      0.0);
   }
   else
   {
-    v3 = (int *)sub_5538D0();
-    sub_5528F0(v3, (int)a2);
+    v3 = (const FaceGenHeadParameters *)FaceGenManager_GetDefaultHeadParameters(); /*0x5221db*/
+    FaceGenHeadParameters_Copy(v3, outAbsolute); /*0x5221e1*/
   }
 }

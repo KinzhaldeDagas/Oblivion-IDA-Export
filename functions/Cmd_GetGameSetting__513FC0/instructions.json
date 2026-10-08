@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x513FC0",
-    "line": "sub     esp, 20Ch",
+    "line": "sub     esp, 20Ch; Verified function body: Cmd_GetGameSetting parses a key and looks up g_GameSettingsByName, formatting string settings for output. Candidate availability only: no direct reference to this function or its \"GetGameSetting\" string was found in the inspected command table, so do not claim it is registered/reachable as a console command.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x514030",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x51404A",
-    "line": "mov     ecx, offset dword_B35574",
+    "line": "mov     ecx, offset g_GameSettingsByName",
     "mnemonic": "mov",
     "size": 5
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x514060",
-    "line": "test    esi, esi",
+    "line": "test    esi, esi; MorrowindDialogueText: Cmd_GetGameSetting reads dword_B35574 setting map; string settings are printed via setting value pointer.",
     "mnemonic": "test",
     "size": 2
   },

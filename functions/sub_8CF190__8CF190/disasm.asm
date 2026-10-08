@@ -1,4 +1,4 @@
-0x8CF190: push    ebp
+0x8CF190: push    ebp; Flying state update. Uses desired movement at proxy+0x290 and special vertical/position assumptions; not suitable as a Climbing substitute.
 0x8CF191: mov     ebp, esp
 0x8CF193: and     esp, 0FFFFFFF0h
 0x8CF196: sub     esp, 0A8h
@@ -38,24 +38,24 @@
 0x8CF23B: push    edi
 0x8CF23C: push    ecx
 0x8CF23D: movaps  [esp+0B8h+var_60], xmm0
-0x8CF242: call    sub_91F430
+0x8CF242: call    bhkCharacterState_SolveVelocityToTarget; Flying solver setup: response=proxy+0x310, basis slots use proxy+0x2C0/+0x2B0, third basis switches to proxy+0x230 when flag 0x100 is set, desired local velocity is swizzled from proxy+0x290, maxDelta=20, reference=proxy+0x280.
 0x8CF247: fld     dword ptr [esi+348h]
 0x8CF24D: fmul    qword ptr ds:0A6E700h
 0x8CF253: mov     ecx, [esi+8]
 0x8CF256: add     esp, 8
 0x8CF259: test    ecx, ecx
-0x8CF25B: fstp    [esp+0B0h+var_A4]
+0x8CF25B: fstp    [esp+0B0h+var_A4]; Flying reads proxy+0x348 as shape vertical offset for water-height threshold logic.
 0x8CF25F: jz      short loc_8CF268
-0x8CF261: call    sub_8AC070
+0x8CF261: call    bhkCollisionWrapper_GetPositionPtr; Returns low-level Havok object position pointer: *(wrapper+0x30 + 0x1C) + 0x30.
 0x8CF266: jmp     short loc_8CF26D
-0x8CF268: mov     eax, offset stru_BA7A40
+0x8CF268: mov     eax, offset unk_BA7A40
 0x8CF26D: fld     dword ptr [eax+8]
 0x8CF270: fadd    [esp+0B0h+var_A4]
-0x8CF274: fld     dword ptr [esi+318h]
+0x8CF274: fld     dword ptr [esi+318h]; Flying state compares proxy+0x318 water height against current position plus shape vertical offset; not a climb/ledge clearance check.
 0x8CF27A: fcompp
 0x8CF27C: fnstsw  ax
 0x8CF27E: test    ah, 5
-0x8CF281: jp      short loc_8CF2FA
+0x8CF281: jp      short loc_8CF2FA; Flying water-height comparison; not a ledge-clearance or climbability test.
 0x8CF283: fldz
 0x8CF285: fcom    dword ptr [esi+2E8h]
 0x8CF28B: fnstsw  ax
@@ -98,7 +98,7 @@
 0x8CF305: test    eax, eax
 0x8CF307: jnz     short loc_8CF37E
 0x8CF309: mov     ecx, esi
-0x8CF30B: call    sub_890720
+0x8CF30B: call    sub_890720; MorrowindMovements: commits pending state at proxy+0x2A0 into hkCharacterContext state slot proxy+0x1EC, then resets pending state to sentinel 0x0B. Use +0x1EC as active state when +0x2A0 is sentinel.
 0x8CF310: mov     edx, [esi]
 0x8CF312: mov     eax, [edx+58h]
 0x8CF315: mov     ecx, esi

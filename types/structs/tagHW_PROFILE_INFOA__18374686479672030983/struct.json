@@ -1,28 +1,54 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "tagHW_PROFILE_INFOA",
+  "definition": "struct __declspec(align(2)) tagHW_PROFILE_INFOA\n{\nDWORD dwDockInfo;\nCHAR szHwProfileGuid[39];\nCHAR szHwProfileName[80];\n}\n",
   "id": 18374686479672030983,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwDockInfo",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "szHwProfileGuid",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 39
+      "size": 39,
+      "type": "CHAR[39]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "szHwProfileName",
       "offset": 43,
-      "offset_hex": "0x2b",
-      "size": 80
+      "offset_hex": "0x2B",
+      "size": 80,
+      "type": "CHAR[80]"
     }
   ],
   "name": "tagHW_PROFILE_INFOA",
+  "ordinal": 2604,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 124
 }

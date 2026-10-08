@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x45CE00",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; MEF PERF 2026-10-02 PASS2: Verified animation drain: owner+54, key0 selects player reference, other keys resolve forms, scene-node gating, blob free then key removal. Diagnostic names LoadAnimations. Preserve zero-key special semantics in any index.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x45CE2B",
-    "line": "mov     [esp+14h+var_8], eax",
+    "line": "mov     [esp+14h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -133,13 +133,13 @@
   },
   {
     "ea": "0x45CE36",
-    "line": "lea     eax, [esp+18h+var_C]",
+    "line": "lea     eax, [esp+18h+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x45CE3A",
-    "line": "push    eax",
+    "line": "push    eax; valueOut",
     "mnemonic": "push",
     "size": 1
   },
@@ -151,31 +151,31 @@
   },
   {
     "ea": "0x45CE3F",
-    "line": "push    ecx",
+    "line": "push    ecx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45CE40",
-    "line": "mov     ecx, [ebx+54h]",
+    "line": "mov     ecx, [ebx+54h]; self",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x45CE43",
-    "line": "lea     edx, [esp+20h+var_8]",
+    "line": "lea     edx, [esp+20h+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x45CE47",
-    "line": "push    edx",
+    "line": "push    edx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45CE48",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x45CE64",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x45CE83",
-    "line": "mov     edi, [esp+18h+var_C]",
+    "line": "mov     edi, [esp+18h+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x45CEB2",
-    "line": "cmp     [esp+18h+var_8], 0",
+    "line": "cmp     [esp+18h+position], 0",
     "mnemonic": "cmp",
     "size": 5
   },

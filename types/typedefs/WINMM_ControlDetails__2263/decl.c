@@ -1,1 +1,1 @@
-WINMM_ControlDetails
+typedef _WINMM_ControlDetails WINMM_ControlDetails;

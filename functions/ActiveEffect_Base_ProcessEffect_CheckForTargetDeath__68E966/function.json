@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 5,
+  "chunks": [
+    [
+      "0x68E966",
+      "0x68E9A8"
+    ]
+  ],
+  "chunks_sha256": "fc4b638a640f9344f4fde5446fee8f041bb58061aeb14aac4a3902e15b126db4",
+  "comment_regular": "Verified target-death path: for actor targets, marks bTerminated unless the EffectSetting flag 0x10000000 suppresses death termination; then runs the common termination check.",
+  "comment_repeatable": "Verified target-death path: for actor targets, marks bTerminated unless the EffectSetting flag 0x10000000 suppresses death termination; then runs the common termination check.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "ActiveEffect_Base_ProcessEffect:::CheckForTargetDeath",
   "end_ea": "0x68E9A8",
-  "flags": 5120,
+  "evidence_confidence": "Unknown",
+  "flags": 21504,
   "has_pseudocode": true,
   "name": "ActiveEffect_Base_ProcessEffect:::CheckForTargetDeath",
   "segment": ".text",
   "sha256": "fc4b638a640f9344f4fde5446fee8f041bb58061aeb14aac4a3902e15b126db4",
   "size": 66,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x68E966",
-  "type": "int __usercall@<eax>(_BYTE *@<esi>, int)",
+  "total_chunk_size": 66,
+  "type": "void __userpurge(_BYTE *@<esi>, int)",
   "xrefs_from_count": 31,
   "xrefs_to_count": 5
 }

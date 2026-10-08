@@ -34,7 +34,6 @@
 0x58CAB6: mov     eax, edi
 0x58CAB8: lea     edx, [eax+1]
 0x58CABB: jmp     short loc_58CAC0
-0x58CABD: align 10h
 0x58CAC0: mov     cl, [eax]
 0x58CAC2: add     eax, 1
 0x58CAC5: test    cl, cl
@@ -85,14 +84,14 @@
 0x58CB32: push    edi; a2
 0x58CB33: call    BSStringT_Set
 0x58CB38: fldz
-0x58CB3A: mov     ecx, esi
+0x58CB3A: mov     ecx, esi; this
 0x58CB3C: fstp    dword ptr [esi+4]
-0x58CB3F: call    sub_588930
-0x58CB44: push    1
-0x58CB46: mov     ecx, esi
-0x58CB48: call    DoActionEnumeration
+0x58CB3F: call    Tile__Value__ClearActions; Verified: unlinks and frees action nodes reachable through Value +0x10 sentinel; also removes crosslinks at action +0x10/+0x14. Called before CalculateValue by numeric setter.
+0x58CB44: push    1; forceUpdate
+0x58CB46: mov     ecx, esi; this
+0x58CB48: call    Tile__Value__CalculateValue; Verified: receiver is 0x1C-byte Tile::Value, NOT Tile. Reads owner at +0, numeric value +4, trait code +0x18, expression head pointer +0x10. Native SetFloat 0x58CA00 and dependency propagation 0x58BDD0 pass Value pointers. Fallout named analogue 0x8220BFF0. Local SDK Tile::DoActionEnumeration incorrectly passes Tile* to this address; plugin direct calls are invalid-receiver calls.
 0x58CB4D: push    edi
-0x58CB4E: call    FormHeapFree
+0x58CB4E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x58CB53: add     esp, 4
 0x58CB56: mov     ecx, [esp+28h+var_C]
 0x58CB5A: mov     large fs:0, ecx
@@ -103,3 +102,12 @@
 0x58CB65: pop     ebx
 0x58CB66: add     esp, 14h
 0x58CB69: retn    4
+0x9B5BD0: lea     ecx, [ebp-14h]; void *
+0x9B5BD3: jmp     BSStringT_Clear
+0x9B5BD8: mov     edx, [esp+arg_4]
+0x9B5BDC: lea     eax, [edx-18h]
+0x9B5BDF: mov     ecx, [edx-1Ch]
+0x9B5BE2: xor     ecx, eax
+0x9B5BE4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B5BE9: mov     eax, offset stru_AE0BB4
+0x9B5BEE: jmp     ___CxxFrameHandler3

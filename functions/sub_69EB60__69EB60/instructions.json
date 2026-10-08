@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x69EB60",
-    "line": "push    esi",
+    "line": "push    esi; Verified MagicModelHitEffect_Update calls base lifetime/target checks, uses bFinished to stop the SpecialIdle_HitEffect controller sequence, and returns false after the visual is done so ActorProcessManager_UpdateTempEffects can remove it.",
     "mnemonic": "push",
     "size": 1
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x69EB80",
-    "line": "fld     [esp+4+arg_0]",
+    "line": "fld     [esp+4+deltaSeconds]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -73,19 +73,19 @@
   },
   {
     "ea": "0x69EB85",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x69EB87",
-    "line": "fstp    [esp+8+var_8]; float",
+    "line": "fstp    [esp+8+var_8]; deltaSeconds",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x69EB8A",
-    "line": "call    sub_69D9A0",
+    "line": "call    MagicHitEffect_Update; Verified MagicHitEffect_Update accumulates elapsedSeconds at +0x20, rejects missing/unloaded/flagged targetReference at +0x1C, and sets bFinished (+0x24) when durationSeconds (+0x08) is exceeded. Model and shader overrides use bFinished to end their visuals; the field's broad role is Probable 'finished/expired' state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,19 +193,19 @@
   },
   {
     "ea": "0x69EBC3",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x69EBC5",
-    "line": "call    sub_4715A0",
+    "line": "call    NiControllerManager_FindSequenceByName; Looks up a NiControllerSequence by name in the controller manager name map at +0x58; returns null on miss.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x69EBCA",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x69EBF3",
-    "line": "push    0; char",
+    "line": "push    0; transition",
     "mnemonic": "push",
     "size": 2
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x69EBF6",
-    "line": "fstp    [esp+0Ch+var_C]; float",
+    "line": "fstp    [esp+0Ch+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x69EBFD",
-    "line": "call    sub_6C9CB0",
+    "line": "call    NiControllerSequence_Deactivate; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.",
     "mnemonic": "call",
     "size": 5
   },

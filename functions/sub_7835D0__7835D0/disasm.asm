@@ -1,4 +1,4 @@
-0x7835D0: push    ebp
+0x7835D0: push    ebp; Oblivion-authoritative: uploads pixel-shader constant arrays. Supports direct constant-table SetValue and indexed array-element updates; matrix array elements are transposed before float-register upload.
 0x7835D1: mov     ebp, esp
 0x7835D3: and     esp, 0FFFFFFF0h
 0x7835D6: sub     esp, 84h
@@ -14,14 +14,14 @@
 0x7835FC: mov     esi, [ebp+arg_0]
 0x7835FF: mov     ebx, [esi+14h]
 0x783602: jnz     short loc_783609
-0x783604: call    sub_783C70
+0x783604: call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.
 0x783609: and     ebx, 0FFh
 0x78360F: cmp     dword ptr ds:0B428D8h[ebx*4], 8
 0x783617: jz      short loc_78363E
 0x783619: cmp     byte ptr ds:0B4295Bh, 0
 0x783620: mov     ebx, [esi+14h]
 0x783623: jnz     short loc_78362A
-0x783625: call    sub_783C70
+0x783625: call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.
 0x78362A: and     ebx, 0FFh
 0x783630: cmp     dword ptr ds:0B428D8h[ebx*4], 9
 0x783638: jnz     loc_78375A
@@ -56,7 +56,7 @@
 0x783689: mov     eax, [ecx+18h]
 0x78368C: call    eax
 0x78368E: cmp     [ebp+arg_10], 0
-0x783692: mov     dword ptr [esp+90h+var_7C], eax
+0x783692: mov     [esp+90h+var_7C], eax
 0x783696: jz      loc_78371E
 0x78369C: xor     esi, esi
 0x78369E: cmp     [ebp+arg_8], esi
@@ -93,9 +93,9 @@
 0x7836F4: call    edx
 0x7836F6: test    eax, eax
 0x7836F8: jl      short loc_783704
-0x7836FA: mov     dword ptr [esp+90h+var_7C], 0
+0x7836FA: mov     [esp+90h+var_7C], 0
 0x783702: jmp     short loc_78370B
-0x783704: cmp     dword ptr [esp+90h+var_7C], 0
+0x783704: cmp     [esp+90h+var_7C], 0
 0x783709: jl      short loc_78375A
 0x78370B: add     esi, 1
 0x78370E: cmp     esi, [ebp+arg_8]
@@ -133,7 +133,7 @@
 0x78374B: push    ebx
 0x78374C: push    edx
 0x78374D: push    offset aNid3dhlslpix_0; "NiD3DHLSLPixelShader::SetPixelShaderCon"...
-0x783752: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x783752: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x783757: add     esp, 0Ch
 0x78375A: pop     edi
 0x78375B: pop     esi

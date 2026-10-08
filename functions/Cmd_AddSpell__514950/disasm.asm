@@ -29,7 +29,7 @@
 0x51499D: xor     ebx, ebx
 0x51499F: push    eax; a1
 0x5149A0: mov     dword ptr [esp+50h+var_20], ebx
-0x5149A4: call    Script_ExtractArgs
+0x5149A4: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x5149A9: add     esp, 20h
 0x5149AC: test    al, al
 0x5149AE: jnz     short loc_5149C3
@@ -104,10 +104,10 @@
 0x514A8E: push    3
 0x514A90: add     ecx, 24h ; '$'
 0x514A93: mov     byte ptr [esp+38h+var_4], 1
-0x514A98: call    EffectItemList_GetStrongestItem
+0x514A98: call    EffectItemList_GetStrongestItem; OBMEFix 2026-06-01 continued correction: vanilla AddSpell icon block is a call-compatible site. OBME's source uses writeRelPaddedCall and its handler returns with retn 8, so a later E9 at this address is not accepted as a fresh OBME handler. OBMEFix may reassert its padded call over a later jump only after it has already cached a verified OBME.dll call target.
 0x514A9D: mov     eax, [eax+1Ch]
 0x514AA0: mov     eax, [eax+48h]
-0x514AA3: cmp     eax, ebx
+0x514AA3: cmp     eax, ebx; OBMEFix 2026-06-01 continued correction: OBME/OBMEFix return path after the padded call/NOP block. EAX must be a const char* icon path before this null-only check; empty paths still format as Icons\\ and can preserve a stale HUD icon.
 0x514AA5: jnz     short loc_514AAC
 0x514AA7: mov     eax, offset EmptyString
 0x514AAC: push    eax
@@ -125,7 +125,7 @@
 0x514AD4: push    ecx
 0x514AD5: fstp    [esp+3Ch+var_3C]; float
 0x514AD8: push    eax; int
-0x514AD9: call    QueueUIMessage
+0x514AD9: call    QueueUIMessage; AddSpell player notification is queued here after formatting the message text and icon path. Icon argument comes from the 0x00514A98 path; OBMEFix must provide a non-empty relative icon path when OBME's replacement lookup returns blank.
 0x514ADE: add     esp, 10h
 0x514AE1: lea     ecx, [esp+30h+var_1C]; void *
 0x514AE5: mov     byte ptr [esp+30h+var_4], bl
@@ -163,3 +163,14 @@
 0x514B48: pop     ebx
 0x514B49: add     esp, 20h
 0x514B4C: retn
+0x9B7170: lea     ecx, [ebp-14h]; void *
+0x9B7173: jmp     BSStringT_Clear
+0x9B7178: lea     ecx, [ebp-1Ch]; void *
+0x9B717B: jmp     BSStringT_Clear
+0x9B7180: mov     edx, [esp+arg_4]
+0x9B7184: lea     eax, [edx-20h]
+0x9B7187: mov     ecx, [edx-24h]
+0x9B718A: xor     ecx, eax
+0x9B718C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B7191: mov     eax, offset stru_AE1DE8
+0x9B7196: jmp     ___CxxFrameHandler3

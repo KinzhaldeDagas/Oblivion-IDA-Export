@@ -1,19 +1,32 @@
 {
-  "callees_count": 15,
-  "callers_count": 54,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 10,
+  "callers_count": 72,
+  "chunks": [
+    [
+      "0x584740",
+      "0x584818"
+    ]
+  ],
+  "chunks_sha256": "4f2d6cf6834bb930102dade7a967ecfa93b680548370a5fe626bcf8a8fd86187",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.\n\nVerified: close-request helper sets Menu +0x24 to 2 when root visible==2, starts fade via 0x584300, then updates interface state. No direct menu destructor call here. Exact destruction timing through callees remains Unknown; do not label post-close access a proven immediate use-after-free.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_584740",
+  "display_name": "Menu::StartFadeOut",
   "end_ea": "0x584818",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_584740",
+  "name": "Menu::StartFadeOut",
   "segment": ".text",
   "sha256": "4f2d6cf6834bb930102dade7a967ecfa93b680548370a5fe626bcf8a8fd86187",
   "size": 216,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x584740",
-  "type": "void __usercall(_DWORD *@<ecx>, double@<st2>, double@<st1>)",
+  "total_chunk_size": 216,
+  "type": "double __usercall@<st0>(_DWORD *@<ecx>, double@<st7>, double@<st6>, double@<st5>, double@<st4>, double@<st2>, double result@<st0>)",
   "xrefs_from_count": 81,
   "xrefs_to_count": 72
 }

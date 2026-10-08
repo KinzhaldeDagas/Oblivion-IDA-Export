@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x6862C4",
-    "line": "call    sub_689A00",
+    "line": "call    TravelPath_ClearNodes; Verified clears TravelPath.nodes at +4: frees owned kind-1 position payloads, frees every TravelPathNode record and BSSimpleList link, but leaves kind-0 TESObjectREFR payloads unowned/unreleased.",
     "mnemonic": "call",
     "size": 5
   },
@@ -37,25 +37,25 @@
   },
   {
     "ea": "0x6862D0",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+position]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6862D4",
-    "line": "push    edi",
+    "line": "push    edi; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6862D5",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6862D7",
-    "line": "call    sub_68A280",
+    "line": "call    TravelPath_AppendDestinationPosition; Verified appends the final destination as a kind-1 TravelPathNode with its own copied NiPoint3 payload, even if low-path A* produced no reference nodes.",
     "mnemonic": "call",
     "size": 5
   },

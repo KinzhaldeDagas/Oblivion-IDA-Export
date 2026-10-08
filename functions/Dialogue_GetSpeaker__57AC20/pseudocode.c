@@ -5,7 +5,7 @@ int Dialogue_GetSpeaker()
   void *ParentMenu; // eax
   _DWORD *v3; // eax
 
-  if ( InterfaceManager_GetSingleton(0, 1)
+  if ( InterfaceManager_GetSingleton(0, 1) /*0x57aca9*/
     && InterfaceManager_GetSingleton(0, 1)->cursor
     && InterfaceManager_GetSingleton(0, 1)->menuRoot
     && (Singleton = InterfaceManager_GetSingleton(0, 1), Tile_GetFloat(Singleton->menuRoot, 0xFAE) == fConstant_2)
@@ -18,10 +18,10 @@ int Dialogue_GetSpeaker()
                 &DialogMenu `RTTI Type Descriptor',
                 0)) != 0) )
   {
-    return v3[0x18];
+    return v3[0x18]; /*0x57acab*/
   }
   else
   {
-    return 0;
+    return 0; /*0x57acaf*/
   }
 }

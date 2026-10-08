@@ -77,19 +77,19 @@
 0x5720EE: jnz     short loc_5720E0
 0x5720F0: xor     edx, edx
 0x5720F2: test    edx, edx
-0x5720F4: mov     [esp+28h+var_10], edx
+0x5720F4: mov     [esp+28h+node], edx
 0x5720F8: jz      short loc_57210C
-0x5720FA: lea     ecx, [esp+28h+var_10]
-0x5720FE: push    ecx
-0x5720FF: lea     ecx, [edi+15E0h]
-0x572105: call    sub_7AA860
+0x5720FA: lea     ecx, [esp+28h+node]
+0x5720FE: push    ecx; node
+0x5720FF: lea     ecx, [edi+15E0h]; list
+0x572105: call    NiTPointerList_RemoveNode; [Verified] Generic NiTPointerList node-removal helper. Unlinks the supplied node, updates head/tail and neighboring links, invokes the list's FreeNode vfunc, decrements item count, and returns the removed node's data pointer.
 0x57210A: mov     esi, eax
 0x57210C: test    esi, esi
 0x57210E: jz      short loc_572120
 0x572110: mov     ecx, esi; void *
 0x572112: call    sub_571DF0
 0x572117: push    esi
-0x572118: call    FormHeapFree
+0x572118: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x57211D: add     esp, 4
 0x572120: test    ebp, ebp
 0x572122: jnz     loc_572057
@@ -110,3 +110,20 @@
 0x572160: pop     ebp
 0x572161: add     esp, 18h
 0x572164: retn
+0x9BDEE0: push    offset sub_571DF0; void (__thiscall *)(void *)
+0x9BDEE5: push    0C8h ; 'È'; int
+0x9BDEEA: push    1Ch; unsigned int
+0x9BDEEC: mov     eax, [ebp-18h]
+0x9BDEEF: push    eax; void *
+0x9BDEF0: call    $LN21
+0x9BDEF5: retn
+0x9BDEF6: mov     ecx, [ebp-18h]
+0x9BDEF9: add     ecx, 15E0h
+0x9BDEFF: jmp     j_??1?$NiTList@PAUDebugTextData@DebugText@@@@UAE@XZ; NiTList<DebugText::DebugTextData *>::~NiTList<DebugText::DebugTextData *>(void)
+0x9BDF04: mov     edx, [esp+arg_4]
+0x9BDF08: lea     eax, [edx-18h]
+0x9BDF0B: mov     ecx, [edx-1Ch]
+0x9BDF0E: xor     ecx, eax
+0x9BDF10: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BDF15: mov     eax, offset stru_AE773C
+0x9BDF1A: jmp     ___CxxFrameHandler3

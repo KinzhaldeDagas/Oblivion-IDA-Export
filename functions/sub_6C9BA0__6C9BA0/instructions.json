@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6C9BA0",
-    "line": "push    esi",
+    "line": "push    esi; Native controller-sequence activation state machine. Rejects an already-active sequence, validates optional time-sync compatibility, records activation parameters, and queues the active sequence with its manager.",
     "mnemonic": "push",
     "size": 1
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x6C9BB0",
-    "line": "mov     edi, [esp+8+arg_10]",
+    "line": "mov     edi, [esp+8+timeSyncSequence]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x6C9BE3",
-    "line": "mov     eax, [esp+8+arg_0]",
+    "line": "mov     eax, dword ptr [esp+8+priority]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x6C9BEF",
-    "line": "fld     [esp+8+arg_8]",
+    "line": "fld     [esp+8+weight]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x6C9BF8",
-    "line": "fcomp   [esp+8+arg_C]",
+    "line": "fcomp   [esp+8+easeInTime]",
     "mnemonic": "fcomp",
     "size": 4
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x6C9C5B",
-    "line": "fld     [esp+8+arg_C]",
+    "line": "fld     [esp+8+easeInTime]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x6C9C8A",
-    "line": "cmp     [esp+8+arg_4], 0",
+    "line": "cmp     [esp+8+startOver], 0",
     "mnemonic": "cmp",
     "size": 5
   },

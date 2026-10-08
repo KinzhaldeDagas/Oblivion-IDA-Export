@@ -1,19 +1,36 @@
 {
-  "callees_count": 44,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 21,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_79EBB0",
+  "chunks": [
+    [
+      "0x79EBB0",
+      "0x79EE3A"
+    ],
+    [
+      "0x9CC450",
+      "0x9CC473"
+    ]
+  ],
+  "chunks_sha256": "5b16aed90277977d88eb4b6b143d3d5fd0548d53bee37b43b8cf4b9abfafc4b5",
+  "comment_regular": "OBLIVION AUTHORITY (2026-08-30): Checked insert-fill implementation for vector<vector<float>>. Deep-copies the fill value, reuses capacity or grows by roughly 1.5x, moves existing inner-vector owners with ownership transfer, and preserves exception cleanup. Oblivion call flow establishes the specialization; RT4.1 FrondEngine.cpp lines 768-779 corroborate its m_vRunningLengths resize role.",
+  "comment_repeatable": "OBLIVION AUTHORITY (2026-08-30): Checked insert-fill implementation for vector<vector<float>>. Deep-copies the fill value, reuses capacity or grows by roughly 1.5x, moves existing inner-vector owners with ownership transfer, and preserves exception cleanup. Oblivion call flow establishes the specialization; RT4.1 FrondEngine.cpp lines 768-779 corroborate its m_vRunningLengths resize role.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "OB_stVector_stVectorFloat_InsertFill_010201A0",
   "end_ea": "0x79EE3A",
-  "flags": 21521,
+  "evidence_confidence": "Unknown",
+  "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_79EBB0",
+  "name": "OB_stVector_stVectorFloat_InsertFill_010201A0",
   "segment": ".text",
   "sha256": "677aa35197b231f7c391aadc4f46d03ba8533a2c895eee7bbf69c477308e2a26",
   "size": 650,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x79EBB0",
-  "type": "void __thiscall __noreturn(_DWORD *this, int, char *, unsigned int, int)",
-  "xrefs_from_count": 284,
+  "total_chunk_size": 685,
+  "type": "void __thiscall(OB_stVector_stVectorFloat_010201A0 *this, OB_stVector_stVectorFloat_010201A0 *expectedOwner, OB_stVectorFloat_010201A0 *position, unsigned int count, const OB_stVectorFloat_010201A0 *value)",
+  "xrefs_from_count": 302,
   "xrefs_to_count": 2
 }

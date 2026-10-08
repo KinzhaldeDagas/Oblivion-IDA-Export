@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 0,
+  "chunks": [
+    [
+      "0x45F090",
+      "0x45F0AE"
+    ]
+  ],
+  "chunks_sha256": "ee6999c1b3ecc5b6806f973ef551ef89159ce9ff35487965519a6bff9252d01e",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "\nVerified: calls 45A990; frees self only when deleteFlags bit 0 is set.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "InteriorCellNewReferencesMap::`scalar deleting destructor'(uint)",
+  "display_name": "InteriorCellNewReferencesMap_scalar_dtor",
   "end_ea": "0x45F0AE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "??_GInteriorCellNewReferencesMap@@UAEPAXI@Z",
+  "name": "InteriorCellNewReferencesMap_scalar_dtor",
   "segment": ".text",
   "sha256": "ee6999c1b3ecc5b6806f973ef551ef89159ce9ff35487965519a6bff9252d01e",
   "size": 30,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x45F090",
-  "type": "NiTMap_Entry_TESCELL *__thiscall(NiTMap_Entry_TESCELL *this, char)",
+  "total_chunk_size": 30,
+  "type": "InteriorCellNewReferencesMap *__thiscall(InteriorCellNewReferencesMap *self, unsigned int deleteFlags)",
   "xrefs_from_count": 13,
   "xrefs_to_count": 1
 }

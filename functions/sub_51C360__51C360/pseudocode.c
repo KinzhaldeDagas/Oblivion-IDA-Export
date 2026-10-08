@@ -1,15 +1,16 @@
-unsigned int __thiscall sub_51C360(const char **this)
+// Returns save-game payload size for the fixed 0x34-byte TESClass DATA block plus length-prefixed name and icon strings.
+UInt32 __thiscall TESClass_GetSaveGameSize(TESClass *this)
 {
-  const char *v1; // eax
-  const char *v2; // ecx
+  char *m_data; // eax
+  char *v2; // ecx
   int v3; // eax
 
-  v1 = *(this + 7);
-  if ( !v1 )
-    v1 = EmptyString;
-  v2 = *(this + 0xC);
-  v3 = (unsigned __int16)(strlen(v1) + 0x35) + 1;
-  if ( !v2 )
-    v2 = EmptyString;
-  return strlen(v2) + v3;
+  m_data = this->members.fullName.name.m_data; /*0x51c361*/
+  if ( !m_data ) /*0x51c366*/
+    m_data = EmptyString; /*0x51c368*/
+  v2 = this->members.texture.path.m_data; /*0x51c37a*/
+  v3 = (unsigned __int16)(strlen(m_data) + 0x35) + 1; /*0x51c385*/
+  if ( !v2 ) /*0x51c38a*/
+    v2 = EmptyString; /*0x51c38c*/
+  return strlen(v2) + v3; /*0x51c3a3*/
 }

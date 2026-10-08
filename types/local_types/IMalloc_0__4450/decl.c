@@ -1,1 +1,1 @@
-IMalloc_0
+typedef IMalloc IMalloc_0;

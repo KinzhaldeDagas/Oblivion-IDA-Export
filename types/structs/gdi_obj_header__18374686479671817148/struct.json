@@ -1,40 +1,72 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "gdi_obj_header",
+  "definition": "struct __declspec(align(8)) gdi_obj_header\n{\nconst gdi_obj_funcs *funcs __offset(OFF64|AUTO);\nhdc_list *hdcs __offset(OFF64|AUTO);\nWORD selcount;\nunsigned __int16 system : 1;\nunsigned __int16 deleted : 1;\n}\n",
   "id": 18374686479671817148,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "funcs",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "const gdi_obj_funcs *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hdcs",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "hdc_list *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "selcount",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "system",
       "offset": 10,
-      "offset_hex": "0xa",
-      "size": 0
+      "offset_hex": "0xA",
+      "size": 0.125,
+      "type": "unsigned __int16 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "deleted",
-      "offset": 10,
-      "offset_hex": "0xa",
-      "size": 0
+      "offset": 10.125,
+      "offset_hex": "0xA",
+      "size": 0.125,
+      "type": "unsigned __int16 : 1"
     }
   ],
   "name": "gdi_obj_header",
+  "ordinal": 984,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 16
 }

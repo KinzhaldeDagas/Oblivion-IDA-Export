@@ -1,40 +1,72 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "CATID_IEnumGUIDImpl",
+  "definition": "struct __declspec(align(8)) CATID_IEnumGUIDImpl\n{\nIEnumGUID_0 IEnumGUID_iface;\nLONG ref;\nWCHAR_0 keyname[68];\nHKEY key;\nDWORD next_index;\n}\n",
   "id": 18374686479672037793,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IEnumGUID_iface",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "IEnumGUID_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ref",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "keyname",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 136
+      "size": 136,
+      "type": "WCHAR_0[68]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "key",
       "offset": 144,
       "offset_hex": "0x90",
-      "size": 4
+      "size": 4,
+      "type": "HKEY"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "next_index",
       "offset": 148,
       "offset_hex": "0x94",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     }
   ],
   "name": "CATID_IEnumGUIDImpl",
+  "ordinal": 5078,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 152
 }

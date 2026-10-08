@@ -1,19 +1,36 @@
 {
-  "callees_count": 18,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7A5740",
+  "chunks": [
+    [
+      "0x7A5740",
+      "0x7A5905"
+    ],
+    [
+      "0x9CCBB0",
+      "0x9CCBD3"
+    ]
+  ],
+  "chunks_sha256": "ec7aaeaf8b13a844d3786742084c5fb530009b560f8d9fc2acbd2931b61807f4",
+  "comment_regular": "Initializes stock leaf tables from the compact CTreeEngine leaf-info member at CTreeEngine+0x84.\n\nAllocates and initializes the SIdvLeafInfo runtime tables: random rocking-group time offsets, 16 floats per texture-orientation texcoord block, and zeroed per-LOD leaf-card vertex tables.",
+  "comment_repeatable": "Allocates and initializes the SIdvLeafInfo runtime tables: random rocking-group time offsets, 16 floats per texture-orientation texcoord block, and zeroed per-LOD leaf-card vertex tables.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_SIdvLeafInfo_InitTables_010201A0",
   "end_ea": "0x7A5905",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7A5740",
+  "name": "OB_SIdvLeafInfo_InitTables_010201A0",
   "segment": ".text",
   "sha256": "1ad0af6074d46f91baa674ea5986318597c3bee56398ef1e78289a948278afe8",
   "size": 453,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A5740",
-  "type": "void __thiscall(_DWORD *this, int)",
-  "xrefs_from_count": 176,
+  "total_chunk_size": 488,
+  "type": "void __thiscall(OB_SIdvLeafInfo_010201A0 *this, int leafTextureCount)",
+  "xrefs_from_count": 187,
   "xrefs_to_count": 1
 }

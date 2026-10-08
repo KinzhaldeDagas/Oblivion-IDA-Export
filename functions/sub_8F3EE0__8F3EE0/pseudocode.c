@@ -15,30 +15,30 @@ __m128 *__thiscall sub_8F3EE0(__m128 *this, __m128 *a2, float a3, __m128 *a4)
   __m128 v17; // [esp+20h] [ebp-50h]
   __m128 v18; // [esp+60h] [ebp-10h]
 
-  v4 = this + 1;
-  v5 = a2[3];
-  v6 = *a2;
-  v7 = a2[1];
-  *(float *)&v15 = a3 + this->m128_f32[3];
-  v8 = a2[2];
-  v9 = _mm_shuffle_ps((__m128)v15, (__m128)v15, 0);
-  v18 = v5;
-  v10 = (char *)&v14 - (char *)this;
-  v11 = 2;
-  do
+  v4 = this + 1; /*0x8f3eec*/
+  v5 = a2[3]; /*0x8f3ef5*/
+  v6 = *a2; /*0x8f3ef9*/
+  v7 = a2[1]; /*0x8f3efc*/
+  *(float *)&v15 = a3 + this->m128_f32[3]; /*0x8f3f00*/
+  v8 = a2[2]; /*0x8f3f04*/
+  v9 = _mm_shuffle_ps((__m128)v15, (__m128)v15, 0); /*0x8f3f12*/
+  v18 = v5; /*0x8f3f16*/
+  v10 = (char *)&v14 - (char *)this; /*0x8f3f1b*/
+  v11 = 2; /*0x8f3f1d*/
+  do /*0x8f3f5f*/
   {
-    *(__m128 *)((char *)v4 + v10) = _mm_add_ps(
+    *(__m128 *)((char *)v4 + v10) = _mm_add_ps( /*0x8f3f57*/
                                       _mm_add_ps(
                                         _mm_mul_ps(v6, _mm_shuffle_ps(*v4, *v4, 0)),
                                         _mm_mul_ps(v7, _mm_shuffle_ps(*v4, *v4, 0x55))),
                                       _mm_add_ps(_mm_mul_ps(v8, _mm_shuffle_ps(*v4, *v4, 0xAA)), v18));
-    ++v4;
-    --v11;
+    ++v4; /*0x8f3f5b*/
+    --v11; /*0x8f3f5e*/
   }
-  while ( v11 );
-  v13 = _mm_min_ps(v16, v17);
-  a4[1] = _mm_max_ps(v16, v17);
-  *a4 = _mm_sub_ps(v13, v9);
-  a4[1] = _mm_add_ps(a4[1], v9);
-  return a4;
+  while ( v11 ); /*0x8f3f5f*/
+  v13 = _mm_min_ps(v16, v17); /*0x8f3f74*/
+  a4[1] = _mm_max_ps(v16, v17); /*0x8f3f77*/
+  *a4 = _mm_sub_ps(v13, v9); /*0x8f3f7e*/
+  a4[1] = _mm_add_ps(a4[1], v9); /*0x8f3f88*/
+  return a4; /*0x8f3f8c*/
 }

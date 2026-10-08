@@ -1,1 +1,4 @@
-tagRANGES
+struct tagRANGES
+{
+HDPA hdpa;
+};

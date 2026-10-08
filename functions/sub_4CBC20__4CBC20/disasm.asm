@@ -9,7 +9,7 @@
 0x4CBC31: push    esi
 0x4CBC32: push    edi
 0x4CBC33: push    ebx; a2
-0x4CBC34: mov     ecx, offset stru_B35C80; this
+0x4CBC34: mov     ecx, offset unk_B35C80; this
 0x4CBC39: call    sub_496EA0
 0x4CBC3E: lea     edi, [ebx+48h]
 0x4CBC41: test    edi, edi
@@ -82,7 +82,7 @@
 0x4CBCFA: jz      short loc_4CBD17
 0x4CBCFC: jmp     loc_4CBC4D
 0x4CBD01: push    ebx; a2
-0x4CBD02: mov     ecx, offset stru_B35C80; this
+0x4CBD02: mov     ecx, offset unk_B35C80; this
 0x4CBD07: call    sub_496F50
 0x4CBD0C: pop     edi
 0x4CBD0D: pop     esi
@@ -92,7 +92,7 @@
 0x4CBD12: retn    18h
 0x4CBD15: fstp    st
 0x4CBD17: push    ebx; a2
-0x4CBD18: mov     ecx, offset stru_B35C80; this
+0x4CBD18: mov     ecx, offset unk_B35C80; this
 0x4CBD1D: call    sub_496F50
 0x4CBD22: pop     edi
 0x4CBD23: pop     esi

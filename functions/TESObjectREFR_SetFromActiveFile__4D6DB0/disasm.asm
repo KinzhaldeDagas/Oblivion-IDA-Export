@@ -19,8 +19,8 @@
 0x4D6DD8: mov     eax, [edx+90h]
 0x4D6DDE: push    1
 0x4D6DE0: call    eax
-0x4D6DE2: push    ebx; a2
-0x4D6DE3: mov     ecx, esi; this
+0x4D6DE2: push    ebx; fromActiveFile
+0x4D6DE3: mov     ecx, esi; self
 0x4D6DE5: call    TESForm_SetFromActiveFile
 0x4D6DEA: pop     esi
 0x4D6DEB: pop     ebx

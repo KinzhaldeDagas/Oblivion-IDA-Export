@@ -4,7 +4,7 @@
 0x4A96C9: test    eax, eax
 0x4A96CB: jz      short loc_4A96E0
 0x4A96CD: push    eax
-0x4A96CE: call    FormHeapFree
+0x4A96CE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4A96D3: add     esp, 4
 0x4A96D6: mov     dword ptr [esi+94h], 0
 0x4A96E0: mov     ecx, esi

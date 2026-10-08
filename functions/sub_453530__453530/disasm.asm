@@ -1,6 +1,6 @@
 0x453530: mov     ecx, ds:0B33A98h
 0x453536: push    esi
-0x453537: mov     esi, [esp+4+arg_0]
+0x453537: mov     esi, [esp+4+form]
 0x45353B: mov     eax, [esi+0Ch]
 0x45353E: push    eax; _DWORD
 0x45353F: call    TESDataHandler_IsFormIDCreated?
@@ -13,7 +13,7 @@
 0x453555: push    0; int
 0x453557: push    esi; void *
 0x453558: call    OblivionDynamicCast
-0x45355D: mov     edi, [esp+1Ch+arg_4]
+0x45355D: mov     edi, [esp+1Ch+flags]
 0x453561: add     esp, 14h
 0x453564: test    eax, eax
 0x453566: jz      short loc_45356E
@@ -33,6 +33,6 @@
 0x45358E: pop     edi
 0x45358F: pop     esi
 0x453590: retn    8
-0x453593: mov     eax, [esp+4+arg_4]
+0x453593: mov     eax, [esp+4+flags]
 0x453597: pop     esi
 0x453598: retn    8

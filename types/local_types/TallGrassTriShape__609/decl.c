@@ -1,1 +1,1 @@
-TallGrassTriShape
+struct TallGrassTriShape;

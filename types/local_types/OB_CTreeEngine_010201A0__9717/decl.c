@@ -1,0 +1,35 @@
+struct OB_CTreeEngine_010201A0
+{
+void *vftable;
+OB_stVec3_010201A0 treePosition;
+float billboardSize;
+float currentLod;
+float overrideTreeSize;
+float overrideTreeVariance;
+char randomPlaceholderByte;
+char transientDataIntact;
+__int16 pad_22;
+char branchTextureFilenameSmallString[28];
+float treeFarLodDistance;
+float treeNearLodDistance;
+int treeRandomSeed;
+float treeSizeScalar;
+float treeSizeVariance;
+int flareSeed;
+OB_CBranch_010201A0 *trunkBranch;
+OB_CIndexedGeometry_010201A0 *branchGeometry;
+OB_stVector16_010201A0 branchInfoVector;
+int branchLodCount;
+OB_stVectorBillboardLeafPtr_010201A0 generatedBillboardLeaves;
+OB_SIdvLeafInfo_010201A0 leafInfo;
+OB_stVectorBillboardLeafPtr_010201A0 *leafLodVectors;
+char parsedLeafLodFlag;
+char pad_D9[3];
+float minBranchVolumePercent;
+float maxBranchVolumePercent;
+float leafReductionPercent;
+float branchReductionFuzziness;
+float largeBranchPercent;
+int branchWindWeightLevel;
+OB_SIdvWindInfo_010201A0 embeddedWindInfo;
+};

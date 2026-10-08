@@ -1,4 +1,4 @@
-0x785E90: sub     esp, 8
+0x785E90: sub     esp, 8; Oblivion compact stVec-vector push_back. Appends a 0x18-byte stVec in place when capacity remains; otherwise delegates to the reallocation/insertion path. Used for synchronized spline control/tangent/control-curve vectors.
 0x785E93: push    esi
 0x785E94: mov     esi, ecx
 0x785E96: push    edi
@@ -27,18 +27,18 @@
 0x785ED0: add     eax, edx
 0x785ED2: cmp     ecx, eax
 0x785ED4: jnb     short loc_785F07
-0x785ED6: mov     ecx, [esp+10h+arg_0]
-0x785EDA: mov     edx, [esp+10h+arg_0]
+0x785ED6: mov     ecx, [esp+10h+value]
+0x785EDA: mov     edx, [esp+10h+value]
 0x785EDE: mov     edi, [esi+8]
-0x785EE1: mov     byte ptr [esp+10h+var_8], 0
-0x785EE6: mov     eax, [esp+10h+var_8]
+0x785EE1: mov     byte ptr [esp+10h+result.owner], 0
+0x785EE6: mov     eax, [esp+10h+result.owner]
 0x785EEA: push    eax
 0x785EEB: push    ecx
 0x785EEC: push    esi
-0x785EED: push    edx
-0x785EEE: push    1
-0x785EF0: push    edi
-0x785EF1: call    sub_7848E0
+0x785EED: push    edx; value
+0x785EEE: push    1; count
+0x785EF0: push    edi; destination
+0x785EF1: call    OB_stVector24_UninitializedFillN_010201A0; Oblivion 1.2.0.416: placement/uninitialized fill of count six-dword records; returns the advanced destination.
 0x785EF6: add     esp, 18h
 0x785EF9: add     edi, 18h
 0x785EFC: mov     [esi+8], edi
@@ -51,11 +51,11 @@
 0x785F0B: cmp     edi, ebx
 0x785F0D: jbe     short loc_785F14
 0x785F0F: call    __invalid_parameter_noinfo
-0x785F14: mov     eax, [esp+14h+arg_0]
-0x785F18: push    eax
+0x785F14: mov     eax, [esp+14h+value]
+0x785F18: push    eax; value
 0x785F19: push    ebx
-0x785F1A: push    esi
-0x785F1B: lea     ecx, [esp+20h+var_8]
-0x785F1F: push    ecx
-0x785F20: mov     ecx, esi
-0x785F22: call    sub_7857D0
+0x785F1A: push    esi; position
+0x785F1B: lea     ecx, [esp+20h+result]
+0x785F1F: push    ecx; result
+0x785F20: mov     ecx, esi; this
+0x785F22: call    OB_stVector_stVec_InsertOne_010201A0; Oblivion 1.2.0.416: vector<stVec>::insert(position,value) wrapper returning a checked iterator. IDA boundary repaired from 0x7857D0..0x785843 plus false 0x785850 tail to the real 0x7857D0..0x785880 function; false FUNC_NORET cleared.

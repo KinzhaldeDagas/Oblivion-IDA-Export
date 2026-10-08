@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x49BF4B",
-    "line": "mov     ebx, [ebp+arg_0]",
+    "line": "mov     ebx, [ebp+primaryRoot]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x49C0EE",
-    "line": "call    sub_710250",
+    "line": "call    NiPoint3_MultiplyMatrix3",
     "mnemonic": "call",
     "size": 5
   },
@@ -1183,7 +1183,7 @@
   },
   {
     "ea": "0x49C1C7",
-    "line": "call    sub_710250",
+    "line": "call    NiPoint3_MultiplyMatrix3",
     "mnemonic": "call",
     "size": 5
   },
@@ -1345,7 +1345,7 @@
   },
   {
     "ea": "0x49C229",
-    "line": "call    BSRenderedTexture__UseTextureToRender",
+    "line": "call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1363,7 +1363,7 @@
   },
   {
     "ea": "0x49C231",
-    "line": "call    NiRenderer_BeginScene",
+    "line": "call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1513,7 +1513,7 @@
   },
   {
     "ea": "0x49C286",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1615,7 +1615,7 @@
   },
   {
     "ea": "0x49C2C2",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1627,7 +1627,7 @@
   },
   {
     "ea": "0x49C2CB",
-    "line": "push    esi",
+    "line": "push    esi; firstPerson",
     "mnemonic": "push",
     "size": 1
   },
@@ -1639,7 +1639,7 @@
   },
   {
     "ea": "0x49C2D3",
-    "line": "call    PlayerCharacter_GetPlayerNode",
+    "line": "call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1651,7 +1651,7 @@
   },
   {
     "ea": "0x49C2DB",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1663,7 +1663,7 @@
   },
   {
     "ea": "0x49C2E3",
-    "line": "push    esi",
+    "line": "push    esi; firstPerson",
     "mnemonic": "push",
     "size": 1
   },
@@ -1675,7 +1675,7 @@
   },
   {
     "ea": "0x49C2E8",
-    "line": "call    PlayerCharacter_GetPlayerNode",
+    "line": "call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1807,7 +1807,7 @@
   },
   {
     "ea": "0x49C330",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1969,7 +1969,7 @@
   },
   {
     "ea": "0x49C395",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2149,7 +2149,7 @@
   },
   {
     "ea": "0x49C3F0",
-    "line": "mov     ecx, [esi]; this",
+    "line": "mov     ecx, [esi]; object",
     "mnemonic": "mov",
     "size": 2
   },
@@ -2167,7 +2167,7 @@
   },
   {
     "ea": "0x49C3F6",
-    "line": "call    TESObjectCELL_GetNiNode?",
+    "line": "call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2185,13 +2185,13 @@
   },
   {
     "ea": "0x49C3FF",
-    "line": "mov     ecx, [esi]; this",
+    "line": "mov     ecx, [esi]; object",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x49C401",
-    "line": "call    TESObjectCELL_GetNiNode?",
+    "line": "call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2275,7 +2275,7 @@
   },
   {
     "ea": "0x49C443",
-    "line": "call    InitBSShaderAccumulator",
+    "line": "call    BSShaderAccumulator_GetOrCreateGlobal",
     "mnemonic": "call",
     "size": 5
   },
@@ -2557,7 +2557,7 @@
   },
   {
     "ea": "0x49C4CC",
-    "line": "mov     byte ptr ds:0B42CE8h, 1",
+    "line": "mov     byte ptr ds:0B42CE8h, 1; Enter water-reflection accumulation: set g_bWaterReflectionPassActive after swapping in the dedicated reflection accumulator and immediately before BeginAccumulation plus reflected scene traversal. This is the sole set-to-one write.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2593,7 +2593,7 @@
   },
   {
     "ea": "0x49C4DD",
-    "line": "call    eax",
+    "line": "call    eax; Call BSShaderAccumulator vtable +0x4C BeginAccumulation with the reflection camera while g_bWaterReflectionPassActive is set.",
     "mnemonic": "call",
     "size": 2
   },
@@ -2623,7 +2623,7 @@
   },
   {
     "ea": "0x49C4EF",
-    "line": "call    SetCameraViewProj",
+    "line": "call    SetCameraViewProj; MoonSugarEffect build 16: after temporary camera sway is restored, plugin calls SetCameraViewProj(g_Renderer, restoredCamera) to reset renderer camera globals/view/projection/viewport to the original camera state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2653,7 +2653,7 @@
   },
   {
     "ea": "0x49C503",
-    "line": "call    NiCullingProcess__SetFrustum",
+    "line": "call    NiCullingProcess__SetFrustum; Oblivion NiCullingProcess::SetFrustum copies the camera frustum, rebuilds six culling planes, and sets the active-plane mask to 0x3F.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2677,7 +2677,7 @@
   },
   {
     "ea": "0x49C512",
-    "line": "call    NiAVObject_Render",
+    "line": "call    NiAVObject_Render; Retail visibility dispatch honors NiAVObject AppCulled flag bit 0 before OnVisible traversal.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2719,7 +2719,7 @@
   },
   {
     "ea": "0x49C530",
-    "line": "call    SetCameraViewProj",
+    "line": "call    SetCameraViewProj; MoonSugarEffect build 16: after temporary camera sway is restored, plugin calls SetCameraViewProj(g_Renderer, restoredCamera) to reset renderer camera globals/view/projection/viewport to the original camera state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2749,7 +2749,7 @@
   },
   {
     "ea": "0x49C545",
-    "line": "call    NiCullingProcess__SetFrustum",
+    "line": "call    NiCullingProcess__SetFrustum; Oblivion NiCullingProcess::SetFrustum copies the camera frustum, rebuilds six culling planes, and sets the active-plane mask to 0x3F.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3541,7 +3541,7 @@
   },
   {
     "ea": "0x49C76A",
-    "line": "call    NiAVObject_Render",
+    "line": "call    NiAVObject_Render; Retail visibility dispatch honors NiAVObject AppCulled flag bit 0 before OnVisible traversal.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3565,7 +3565,7 @@
   },
   {
     "ea": "0x49C778",
-    "line": "call    eax",
+    "line": "call    eax; Call the dedicated reflection accumulator's vtable +0x50 Flush before restoring the renderer's previous accumulator and clearing the reflection flag.",
     "mnemonic": "call",
     "size": 2
   },
@@ -3715,7 +3715,7 @@
   },
   {
     "ea": "0x49C7D3",
-    "line": "jz      short loc_49C809",
+    "line": "jz      short WaterManager_LeaveReflectionAccumulation",
     "mnemonic": "jz",
     "size": 2
   },
@@ -3823,7 +3823,7 @@
   },
   {
     "ea": "0x49C7FD",
-    "line": "jz      short loc_49C809",
+    "line": "jz      short WaterManager_LeaveReflectionAccumulation",
     "mnemonic": "jz",
     "size": 2
   },
@@ -3847,7 +3847,7 @@
   },
   {
     "ea": "0x49C809",
-    "line": "mov     byte ptr ds:0B42CE8h, 0",
+    "line": "mov     byte ptr ds:0B42CE8h, 0; Leave water-reflection accumulation: clear g_bWaterReflectionPassActive only after the reflection accumulator was flushed and the previous renderer accumulator restored. This is the sole clear write.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -3859,7 +3859,7 @@
   },
   {
     "ea": "0x49C81B",
-    "line": "call    NiRenderer_EndScene",
+    "line": "call    NiRenderer_EndScene; Oblivion EndScene wrapper: drain the complete render-target stack, end the active group, and end the D3D scene only when this wrapper owned SceneState2.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4051,25 +4051,25 @@
   },
   {
     "ea": "0x49C888",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x49C88D",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x49C893",
-    "line": "push    edi",
+    "line": "push    edi; firstPerson",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x49C894",
-    "line": "call    PlayerCharacter_GetPlayerNode",
+    "line": "call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4309,7 +4309,7 @@
   },
   {
     "ea": "0x49C90B",
-    "line": "mov     ecx, [edi]; this",
+    "line": "mov     ecx, [edi]; object",
     "mnemonic": "mov",
     "size": 2
   },
@@ -4327,7 +4327,7 @@
   },
   {
     "ea": "0x49C911",
-    "line": "call    TESObjectCELL_GetNiNode?",
+    "line": "call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4345,13 +4345,13 @@
   },
   {
     "ea": "0x49C91A",
-    "line": "mov     ecx, [edi]; this",
+    "line": "mov     ecx, [edi]; object",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x49C91C",
-    "line": "call    TESObjectCELL_GetNiNode?",
+    "line": "call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4879,7 +4879,7 @@
   },
   {
     "ea": "0x49CA2F",
-    "line": "call    ??1BSCullingProcess@@UAE@XZ; BSCullingProcess::~BSCullingProcess(void)",
+    "line": "call    ??1BSCullingProcess@@UAE@XZ; Oblivion BSCullingProcess destructor restores its base culling-process state; no separate visible-array allocation is released here.",
     "mnemonic": "call",
     "size": 5
   },

@@ -72,12 +72,6 @@
     "size": 2
   },
   {
-    "ea": "0x8AD16A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x8AD170",
     "line": "mov     eax, [esi+8Ch]",
     "mnemonic": "mov",
@@ -697,37 +691,37 @@
   },
   {
     "ea": "0x8AD2CF",
-    "line": "mov     [esp+3Ch+var_2C], edx",
+    "line": "mov     [esp+3Ch+candidate], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x8AD2D3",
-    "line": "mov     eax, [esp+3Ch+var_2C]",
+    "line": "mov     eax, [esp+3Ch+candidate]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x8AD2D7",
-    "line": "push    ebx",
+    "line": "push    ebx; manifoldEntry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8AD2D8",
-    "line": "push    eax",
+    "line": "push    eax; candidate",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8AD2D9",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8AD2DB",
-    "line": "call    sub_8ABF70",
+    "line": "call    hkpCharacterProxy_ComputeContactMatchError; TES4 authoritative: computes contact-match error from normal difference, contact plane/fraction difference, and resolved collidable-space point difference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -781,7 +775,7 @@
   },
   {
     "ea": "0x8AD2F7",
-    "line": "mov     ecx, [esp+3Ch+var_2C]",
+    "line": "mov     ecx, [esp+3Ch+candidate]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -811,7 +805,7 @@
   },
   {
     "ea": "0x8AD305",
-    "line": "mov     [esp+3Ch+var_2C], ecx",
+    "line": "mov     [esp+3Ch+candidate], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -906,12 +900,6 @@
     "size": 2
   },
   {
-    "ea": "0x8AD338",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x8AD340",
     "line": "mov     ecx, [esi+80h]",
     "mnemonic": "mov",
@@ -976,12 +964,6 @@
     "line": "jmp     short loc_8AD360",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x8AD35D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x8AD360",
@@ -1525,19 +1507,19 @@
   },
   {
     "ea": "0x8AD47B",
-    "line": "push    ebp",
+    "line": "push    ebp; candidate",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8AD47C",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8AD47E",
-    "line": "call    sub_8AC640",
+    "line": "call    hkpCharacterProxy_FindMatchingManifoldContact; TES4 authoritative: searches existing manifold entries for a candidate 0x30-byte contact with match error < 0.1; returns index or 0xFFFFFFFF.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1849,19 +1831,19 @@
   },
   {
     "ea": "0x8AD51A",
-    "line": "push    edi",
+    "line": "push    edi; candidate",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8AD51B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8AD51D",
-    "line": "call    sub_8AC640",
+    "line": "call    hkpCharacterProxy_FindMatchingManifoldContact; TES4 authoritative: searches existing manifold entries for a candidate 0x30-byte contact with match error < 0.1; returns index or 0xFFFFFFFF.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2154,12 +2136,6 @@
     "size": 2
   },
   {
-    "ea": "0x8AD5AA",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x8AD5B0",
     "line": "cmp     eax, 1",
     "mnemonic": "cmp",
@@ -2221,25 +2197,25 @@
   },
   {
     "ea": "0x8AD5D4",
-    "line": "push    ebx",
+    "line": "push    ebx; manifoldEntry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8AD5D5",
-    "line": "push    edx",
+    "line": "push    edx; candidate",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8AD5D6",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8AD5D8",
-    "line": "call    sub_8ABF70",
+    "line": "call    hkpCharacterProxy_ComputeContactMatchError; TES4 authoritative: computes contact-match error from normal difference, contact plane/fraction difference, and resolved collidable-space point difference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2542,12 +2518,6 @@
     "line": "jmp     short loc_8AD680",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x8AD67A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
   },
   {
     "ea": "0x8AD680",

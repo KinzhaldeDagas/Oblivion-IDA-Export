@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x79F630",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Oblivion st_vector<SFrondGuide>::clear. Validates begin/end and erases the entire initialized range while retaining capacity.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -79,49 +79,49 @@
   },
   {
     "ea": "0x79F652",
-    "line": "push    ebx",
+    "line": "push    ebx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F653",
-    "line": "push    esi",
+    "line": "push    esi; lastOwner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F654",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F655",
-    "line": "push    esi",
+    "line": "push    esi; firstOwner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F656",
-    "line": "lea     eax, [esp+24h+var_8]",
+    "line": "lea     eax, [esp+24h+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x79F65A",
-    "line": "push    eax",
+    "line": "push    eax; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F65B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79F65D",
-    "line": "call    sub_79F0E0",
+    "line": "call    OB_stVector_SFrondGuide_EraseRange_010201A0; Checked erase-range for st_vector<SFrondGuide>. Validates iterator owners, deep-moves [last,end) over [first,last), destroys the vacated tail, updates end, and returns {owner,first}.",
     "mnemonic": "call",
     "size": 5
   },

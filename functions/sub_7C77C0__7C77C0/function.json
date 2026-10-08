@@ -1,19 +1,36 @@
 {
-  "callees_count": 8,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_7C77C0",
+  "chunks": [
+    [
+      "0x7C77C0",
+      "0x7C7878"
+    ],
+    [
+      "0x9A9F20",
+      "0x9A9F43"
+    ]
+  ],
+  "chunks_sha256": "30de748c430df56a04f116ad8a3a037a5b6459d46da7497b2e51fa6a1c613058",
+  "comment_regular": "Remove one ShadowSceneLight from the full-list owner with native refcount/list cleanup.\nV169 ownership audit: argument a2 is the ref-counted ShadowSceneLight WRAPPER value, not its NiPointLight backing at wrapper+100. 7C77F5 increments [a2+4]; 7C7813 removes that exact value from this+E4 full list; 7C783E/7C7862 dispatch deleting destructor when the wrapper count reaches zero. DX11 source registry must retire Identity::Wrapper before this call, not Identity::Backing. Native decode confirmed in authoritative OblivionNew.",
+  "comment_repeatable": "Remove one ShadowSceneLight from the full-list owner with native refcount/list cleanup.\n\nMEF PERF 2026-10-02: PERF-9 implementation gate: full-light removal calls RemoveFirstByValue at7C7813 and releases native references. Any source index must invalidate before removal/destructor callbacks, including direct removals, not only RemoveFullLightBySource.\nMEF PERF 2026-10-07: PERF-12 ownership: takes temporary wrapper reference, invokes RemoveFirstByValue on owner+E4, releases returned strong reference, then releases wrapper temporary with native SEH cleanup. Direct pointer splice/free is not equivalent; reuse typed RemovePosition and reproduce caller ownership/destructor ordering.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "ShadowSceneNode_RemoveFullLight",
   "end_ea": "0x7C7878",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
-  "name": "sub_7C77C0",
+  "name": "ShadowSceneNode_RemoveFullLight",
   "segment": ".text",
   "sha256": "0ab7c10276c4e87675a3c68f10c66007e5721de3fe05e8ed8ce8d6e8064410e8",
   "size": 184,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7C77C0",
-  "type": "LONG __thiscall(_DWORD *this, LONG)",
-  "xrefs_from_count": 74,
+  "total_chunk_size": 219,
+  "type": "LONG __thiscall(int **this, LONG)",
+  "xrefs_from_count": 85,
   "xrefs_to_count": 4
 }

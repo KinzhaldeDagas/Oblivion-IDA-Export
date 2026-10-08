@@ -1,40 +1,72 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "$2CDC84D21CC300F6E17FC65BFC03EA57",
+  "definition": "union $2CDC84D21CC300F6E17FC65BFC03EA57\n{\nKEY_EVENT_RECORD KeyEvent;\nMOUSE_EVENT_RECORD MouseEvent;\nWINDOW_BUFFER_SIZE_RECORD WindowBufferSizeEvent;\nMENU_EVENT_RECORD MenuEvent;\nFOCUS_EVENT_RECORD FocusEvent;\n}\n",
   "id": 18374686479671823101,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "KeyEvent",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "KEY_EVENT_RECORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "MouseEvent",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "MOUSE_EVENT_RECORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "WindowBufferSizeEvent",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "WINDOW_BUFFER_SIZE_RECORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "MenuEvent",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "MENU_EVENT_RECORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "FocusEvent",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "FOCUS_EVENT_RECORD"
     }
   ],
   "name": "$2CDC84D21CC300F6E17FC65BFC03EA57",
+  "ordinal": 2343,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 16
 }

@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x798550",
+      "0x79862E"
+    ]
+  ],
+  "chunks_sha256": "d2007361199918f434e47e3fc879b068c4c651124fc4fd77f53538e4dbd5f636",
+  "comment_regular": "Copies one embedded leaf texcoord block into stock CLeafGeometry.\n[Mesh leaves v130 2026-10-06] Cattail authored10002 quad=(.5,.25,0,.25,0,0,.5,0); native texture flip produces negative V including signed zero. v129 mesh conversion added1 only when interpolated V<0, mapping zero endpoint to atlas top and logging V range0..0.75. v130 detects the signed interval from card V endpoints and adds1 for every vertex, preserving bottom-left atlas V0.75..1. DDS base pixels equal authored TGA. Targeted signed-zero UV checks pass; v129 upright textured meshes user-confirmed, v130 final pixel correction pending.\n\nOblivion CLeafGeometry::SetTextureCoords. Writes a direct and mirrored 0x20-byte UV record for one leaf map; the global DirectX/Gamebryo texture flip negates each T component rather than computing 1-T.",
+  "comment_repeatable": "Oblivion CLeafGeometry::SetTextureCoords. Writes a direct and mirrored 0x20-byte UV record for one leaf map; the global DirectX/Gamebryo texture flip negates each T component rather than computing 1-T.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_798550",
+  "display_name": "OB_CLeafGeometry_SetTextureCoords_010201A0",
   "end_ea": "0x79862E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_798550",
+  "name": "OB_CLeafGeometry_SetTextureCoords_010201A0",
   "segment": ".text",
   "sha256": "d2007361199918f434e47e3fc879b068c4c651124fc4fd77f53538e4dbd5f636",
   "size": 222,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x798550",
-  "type": "void __thiscall(_DWORD *this, int, float *)",
+  "total_chunk_size": 222,
+  "type": "void __thiscall(OB_CLeafGeometry_010201A0 *this, unsigned int leafMapIndex, const float *texcoordBlock)",
   "xrefs_from_count": 81,
   "xrefs_to_count": 1
 }

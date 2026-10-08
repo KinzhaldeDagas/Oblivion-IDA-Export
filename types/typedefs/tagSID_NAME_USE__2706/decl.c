@@ -1,1 +1,1 @@
-tagSID_NAME_USE
+typedef SID_NAME_USE tagSID_NAME_USE;

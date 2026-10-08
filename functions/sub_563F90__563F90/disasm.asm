@@ -1,4 +1,4 @@
-0x563F90: fldz
+0x563F90: fldz; BSTreeNode update throttle helper: schedules updates by global update group interval and returns whether work should run this frame/time.
 0x563F92: fld     st
 0x563F94: fld     [esp+arg_0]
 0x563F98: fucom   st(1)

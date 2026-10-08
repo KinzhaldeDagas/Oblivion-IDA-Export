@@ -94,7 +94,7 @@
 0x616ED8: test    eax, eax
 0x616EDA: jz      short loc_616EE5
 0x616EDC: push    eax
-0x616EDD: call    FormHeapFree
+0x616EDD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x616EE2: add     esp, 4
 0x616EE5: mov     [edi+0A0h], esi
 0x616EEB: jmp     loc_6171D0
@@ -137,7 +137,7 @@
 0x616F64: mov     eax, [edx]
 0x616F66: push    0
 0x616F68: call    eax
-0x616F6A: fstp    [esp+28h+var_18+4]
+0x616F6A: fstp    [esp+28h+var_18+4]; Bound-item candidates are compared by the EffectItemList virtual magicka-cost result; the higher-cost candidate wins.
 0x616F6E: mov     eax, [esi]
 0x616F70: mov     edx, [eax+0Ch]
 0x616F73: lea     ecx, [eax+0Ch]
@@ -150,7 +150,7 @@
 0x616F85: jnz     short loc_616FA0
 0x616F87: mov     ecx, [ebp+0]
 0x616F8A: push    ecx
-0x616F8B: call    FormHeapFree
+0x616F8B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x616F90: mov     [ebp+0], esi
 0x616F93: jmp     loc_6171CD
 0x616F98: mov     [ebp+0], esi
@@ -194,9 +194,9 @@
 0x617005: test    al, al
 0x617007: jz      loc_6170A8
 0x61700D: cmp     byte ptr [esp+28h+arg_0], 0
-0x617012: jnz     loc_6170A8
+0x617012: jnz     loc_6170A8; Available magic is categorized using the engine-maintained hostile-effect count, then split by target/touch/self delivery.
 0x617018: mov     ecx, ebp
-0x61701A: call    EffectItemList_HasOnTarget
+0x61701A: call    EffectItemList_HasOnTarget; True iff list has an EffectItem with range==2 (Target) and EffectSetting flag 0x400000 clear. Does not require hostile/detrimental.
 0x61701F: test    al, al
 0x617021: jz      short loc_61705E
 0x617023: cmp     dword ptr [edi+5Ch], 0
@@ -238,7 +238,7 @@
 0x61709E: call    BSSimpleList_InsertSorted
 0x6170A3: jmp     loc_6171D0
 0x6170A8: mov     ecx, ebp
-0x6170AA: call    EffectItemList_HasOnTarget
+0x6170AA: call    EffectItemList_HasOnTarget; True iff list has an EffectItem with range==2 (Target) and EffectSetting flag 0x400000 clear. Does not require hostile/detrimental.
 0x6170AF: test    al, al
 0x6170B1: jnz     loc_6171C7
 0x6170B7: mov     ecx, ebp
@@ -282,7 +282,7 @@
 0x61712F: jnz     short loc_61714B
 0x617131: mov     ecx, [edi+90h]
 0x617137: push    ecx
-0x617138: call    FormHeapFree
+0x617138: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x61713D: add     esp, 4
 0x617140: mov     [edi+90h], esi
 0x617146: jmp     loc_6171D0
@@ -323,7 +323,7 @@
 0x6171C0: call    BSSimpleList_InsertSorted
 0x6171C5: jmp     short loc_6171D0
 0x6171C7: push    esi
-0x6171C8: call    FormHeapFree
+0x6171C8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6171CD: add     esp, 4
 0x6171D0: mov     ecx, dword ptr [esp+28h+var_C]
 0x6171D4: mov     large fs:0, ecx
@@ -334,3 +334,15 @@
 0x6171DF: pop     ebx
 0x6171E0: add     esp, 14h
 0x6171E3: retn    8
+0x9C3920: mov     eax, [ebp+4]
+0x9C3923: push    eax
+0x9C3924: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C3929: pop     ecx
+0x9C392A: retn
+0x9C392B: mov     edx, [esp+arg_4]
+0x9C392F: lea     eax, [edx-18h]
+0x9C3932: mov     ecx, [edx-1Ch]
+0x9C3935: xor     ecx, eax
+0x9C3937: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C393C: mov     eax, offset stru_AEC49C
+0x9C3941: jmp     ___CxxFrameHandler3

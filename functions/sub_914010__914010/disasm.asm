@@ -40,7 +40,7 @@
 0x91407A: sub     dword ptr ds:0BA83FCh, 1
 0x914081: jnz     short loc_91408D
 0x914083: mov     dword ptr ds:0BA83F8h, 0
-0x91408D: push    offset stru_BA8380; lpCriticalSection
+0x91408D: push    offset unk_BA8380; lpCriticalSection
 0x914092: call    dword ptr ds:0A28074h
 0x914098: mov     eax, [esp+40h+var_24]
 0x91409C: mov     ecx, [esp+40h+var_4]

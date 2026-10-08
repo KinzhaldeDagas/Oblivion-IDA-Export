@@ -14,7 +14,7 @@
 0x773947: mov     ecx, [eax]
 0x773949: mov     edx, [ecx+8]
 0x77394C: push    eax
-0x77394D: call    edx
+0x77394D: call    edx; Texture renderer-data destruction first invokes NiDX9RenderState::RemoveTexture with the base texture at 773942, then native base-texture Release here, then clears dTexture at 77394F. Capture native lifetime before final Release; the pointer may be destroyed/reused before this call returns. Surface aliases may independently retain native parent resources and require separate lifetime tracking.
 0x77394F: mov     dword ptr [esi+50h], 0
 0x773956: mov     dword ptr [esi], offset ??_7RendererData@NiTexture@@6B@; const NiTexture::RendererData::`vftable'
 0x77395C: pop     esi

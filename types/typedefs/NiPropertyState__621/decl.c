@@ -1,1 +1,1 @@
-NiPropertyState
+struct NiPropertyState;

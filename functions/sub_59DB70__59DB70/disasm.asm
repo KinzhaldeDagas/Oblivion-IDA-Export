@@ -1,11 +1,11 @@
-0x59DB70: cmp     [esp+a3], 64h ; 'd'
+0x59DB70: cmp     [esp+a3], 64h ; 'd'; Custom ID48 is below native topic threshold 0x64, so no native topic-highlight geometry is applied. Its visual focus must be represented by its XML mouseover-dependent traits.
 0x59DB75: push    edi; a3
 0x59DB76: mov     edi, ecx
 0x59DB78: jl      loc_59DC8E
 0x59DB7E: push    esi; a3
 0x59DB7F: push    4; int
 0x59DB81: call    sub_57DE50
-0x59DB86: mov     esi, [esp+0Ch+arg_4]
+0x59DB86: mov     esi, [esp+0Ch+tile]
 0x59DB8A: add     esp, 4
 0x59DB8D: push    0FABh
 0x59DB92: mov     ecx, esi
@@ -17,17 +17,17 @@
 0x59DBA8: mov     ecx, [edi+38h]; this
 0x59DBAB: fstp    [esp+0Ch+a3]; a3
 0x59DBAF: fld     [esp+0Ch+a3]
-0x59DBB3: fstp    [esp+0Ch+a2]; a3
-0x59DBB6: push    0FABh; a2
-0x59DBBB: call    Tile_SetFloat
+0x59DBB3: fstp    [esp+0Ch+a2]; value
+0x59DBB6: push    0FABh; propertyCode
+0x59DBBB: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59DBC0: push    0FCBh
 0x59DBC5: mov     ecx, esi
 0x59DBC7: call    Tile_GetFloat
 0x59DBCC: push    ecx
 0x59DBCD: mov     ecx, [edi+38h]; this
-0x59DBD0: fstp    [esp+0Ch+a2]; a3
-0x59DBD3: push    0FCBh; a2
-0x59DBD8: call    Tile_SetFloat
+0x59DBD0: fstp    [esp+0Ch+a2]; value
+0x59DBD3: push    0FCBh; propertyCode
+0x59DBD8: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59DBDD: push    0FADh
 0x59DBE2: mov     ecx, esi
 0x59DBE4: call    Tile_GetFloat
@@ -35,7 +35,7 @@
 0x59DBED: push    0FACh
 0x59DBF2: mov     ecx, esi
 0x59DBF4: call    Tile_GetFloat
-0x59DBF9: fstp    [esp+8+arg_4]
+0x59DBF9: fstp    [esp+8+tile]
 0x59DBFD: mov     esi, [esi+10h]
 0x59DC00: test    esi, esi
 0x59DC02: jz      short loc_59DC4C
@@ -54,29 +54,29 @@
 0x59DC32: mov     ecx, esi
 0x59DC34: fstp    [esp+0Ch+a3]
 0x59DC38: call    Tile_GetFloat
-0x59DC3D: fadd    [esp+8+arg_4]
-0x59DC41: fstp    [esp+8+arg_4]
+0x59DC3D: fadd    [esp+8+tile]
+0x59DC41: fstp    [esp+8+tile]
 0x59DC45: mov     esi, [esi+10h]
 0x59DC48: test    esi, esi
 0x59DC4A: jnz     short loc_59DC04
 0x59DC4C: fld     [esp+8+a3]
 0x59DC50: push    ecx
 0x59DC51: mov     ecx, [edi+38h]; this
-0x59DC54: fstp    [esp+0Ch+a2]; a3
-0x59DC57: push    0FADh; a2
-0x59DC5C: call    Tile_SetFloat
-0x59DC61: fld     [esp+8+arg_4]
+0x59DC54: fstp    [esp+0Ch+a2]; value
+0x59DC57: push    0FADh; propertyCode
+0x59DC5C: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
+0x59DC61: fld     [esp+8+tile]
 0x59DC65: push    ecx
 0x59DC66: mov     ecx, [edi+38h]; this
-0x59DC69: fstp    [esp+0Ch+a2]; a3
-0x59DC6C: push    0FACh; a2
-0x59DC71: call    Tile_SetFloat
+0x59DC69: fstp    [esp+0Ch+a2]; value
+0x59DC6C: push    0FACh; propertyCode
+0x59DC71: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59DC76: fld     dword ptr ds:0A379B4h
 0x59DC7C: push    ecx
 0x59DC7D: mov     ecx, [edi+38h]; this
-0x59DC80: fstp    [esp+0Ch+a2]; a3
-0x59DC83: push    0FA1h; a2
-0x59DC88: call    Tile_SetFloat
+0x59DC80: fstp    [esp+0Ch+a2]; value
+0x59DC83: push    0FA1h; propertyCode
+0x59DC88: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59DC8D: pop     esi
 0x59DC8E: pop     edi
 0x59DC8F: retn    8

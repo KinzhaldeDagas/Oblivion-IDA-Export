@@ -1,19 +1,19 @@
 [
   {
     "ea": "0x7E2370",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, [esp+vtable]; Construct a 0x10-byte RenderPass record: selector +0x04, byte +0x06, light count +0x08, light-array pointer +0x0C. Census of 338 direct refs / 46 caller functions found no immediate 0x14E..0x151 producer.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7E2374",
-    "line": "mov     cx, [esp+arg_8]",
+    "line": "mov     cx, [esp+selector]",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x7E2379",
-    "line": "mov     dl, [esp+arg_C]",
+    "line": "mov     dl, [esp+byte6]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x7E237F",
-    "line": "mov     esi, [esp+8+arg_0]",
+    "line": "mov     esi, [esp+8+outPass]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,13 +43,13 @@
   },
   {
     "ea": "0x7E2385",
-    "line": "mov     [esi], eax",
+    "line": "mov     [esi], eax; Store the geometry/object pointer raw at RenderPass+0x00; RenderPass construction performs no reference-count increment.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7E2387",
-    "line": "mov     al, [esp+8+arg_10]",
+    "line": "mov     al, [esp+8+lightCount]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x7E238D",
-    "line": "mov     [esi+4], cx",
+    "line": "mov     [esi+4], cx; RenderPass+4 is a WORD selector; +6/+7 are separate bytes. Multiple owned list entries may have the same selector/light values and must retain distinct occurrence identity in GPU batch discovery.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x7E23B6",
-    "line": "call    FormHeapAlloc",
+    "line": "call    FormHeapAlloc; Allocate the RenderPass-owned light-pointer array as 4*lightCount bytes from FormHeap.",
     "mnemonic": "call",
     "size": 5
   },
@@ -198,12 +198,6 @@
     "size": 2
   },
   {
-    "ea": "0x7E23C9",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x7E23D0",
     "line": "mov     edx, [esp+eax*4+0Ch+arg_14]",
     "mnemonic": "mov",
@@ -211,7 +205,7 @@
   },
   {
     "ea": "0x7E23D4",
-    "line": "mov     ecx, [esi+0Ch]",
+    "line": "mov     ecx, [esi+0Ch]; Copy raw light pointers into the owned array; the pointed-to lights are not reference-counted by RenderPass.",
     "mnemonic": "mov",
     "size": 3
   },

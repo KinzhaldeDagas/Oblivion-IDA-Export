@@ -23,3 +23,9 @@
 0x691C99: jmp     loc_6150C0
 0x691C9E: pop     esi
 0x691C9F: retn
+0x6150C0: cmp     dword ptr [ecx+70h], 0Bh
+0x6150C4: jnz     short locret_6150D9
+0x6150C6: fld     dword ptr ds:0A30634h
+0x6150CC: mov     dword ptr [ecx+70h], 0Dh
+0x6150D3: fstp    dword ptr [ecx+188h]
+0x6150D9: retn

@@ -1,4 +1,4 @@
-0x6D67B0: push    ebx
+0x6D67B0: push    ebx; Oblivion NiTransformInterpolator binary load. Loads base state, reads cached 0x20-byte transform at +0x0C, resolves the streamed NiTransformData object reference, and replaces +0x2C with balanced refcounts. The three key cursors are not loaded.
 0x6D67B1: push    esi
 0x6D67B2: push    edi
 0x6D67B3: mov     edi, [esp+0Ch+arg_0]

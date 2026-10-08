@@ -1,1 +1,1 @@
-FLOAT
+typedef float FLOAT;

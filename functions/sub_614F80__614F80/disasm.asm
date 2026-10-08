@@ -1,4 +1,4 @@
-0x614F80: push    esi
+0x614F80: push    esi; Adds unique non-self actor to CombatController+0x15C ally cache and increments +0x178; caller supplies combat-group friendly entries.
 0x614F81: push    edi
 0x614F82: mov     edi, [esp+8+a2]; a1
 0x614F86: xor     al, al
@@ -22,8 +22,8 @@
 0x614FAD: call    BSSimpleList_PushFront
 0x614FB2: mov     ecx, [esi+3Ch]
 0x614FB5: mov     ebx, 1
-0x614FBA: add     [esi+178h], ebx
-0x614FC0: call    sub_5E0F50
+0x614FBA: add     [esi+178h], ebx; CombatController+0x178 counts unique cached allies.
+0x614FC0: call    Actor_GetEffectiveCombatStyle; If TESCombatStyle::kFlag_IgnoreAlliesInArea (0x04) is set, skip the nearby-ally +0x17C calculation (ally is still cached).
 0x614FC5: mov     edx, [eax]
 0x614FC7: mov     ecx, eax
 0x614FC9: mov     eax, [edx+16Ch]
@@ -31,13 +31,13 @@
 0x614FD1: call    eax
 0x614FD3: test    al, al
 0x614FD5: jnz     short loc_615007
-0x614FD7: push    0; a4
+0x614FD7: push    0; useActorProjection
 0x614FD9: mov     ecx, esi
-0x614FDB: call    sub_6135F0
-0x614FE0: push    eax; a3
-0x614FE1: push    edi; a2
-0x614FE2: call    TESObjectREFR_GetDistanceBetween?
-0x614FE7: fld     dword ptr ds:0B372B8h
+0x614FDB: call    CombatController_GetCurrentTarget
+0x614FE0: push    eax; to
+0x614FE1: push    edi; from
+0x614FE2: call    TESObjectREFR_GetSurfaceDistance; Three-argument cdecl routine: returns float surface distance from 'from' to 'to'. All 24 callers push exactly from, to, and useActorProjection then reclaim 0x0C. The prior EDI register argument, fourth stack byte, and double return were analysis pollution.
+0x614FE7: fld     dword ptr ds:0B372B8h; If combat style flag 4 is clear, +0x17C is set when cached ally is closer to current target than fAICombatNoAreaEffectAllyDistance (default 350.0).
 0x614FED: fcompp
 0x614FEF: add     esp, 0Ch
 0x614FF2: fnstsw  ax

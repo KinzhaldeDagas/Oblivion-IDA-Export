@@ -1,34 +1,63 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "message_data_t",
+  "definition": "union message_data_t\n{\nunsigned __int8 bytes[1];\nhardware_msg_data hardware;\ncallback_msg_data callback;\nwinevent_msg_data winevent;\n}\n",
   "id": 18374686479671862689,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bytes",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 1
+      "size": 1,
+      "type": "unsigned __int8[1]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hardware",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 56
+      "size": 56,
+      "type": "hardware_msg_data"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "callback",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "callback_msg_data"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "winevent",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "winevent_msg_data"
     }
   ],
   "name": "message_data_t",
+  "ordinal": 7511,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 56
 }

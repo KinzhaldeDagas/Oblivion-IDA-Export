@@ -1,4 +1,4 @@
-BSStringT *sub_A0C950()
+NiRTTI *sub_A0C950()
 {
-  return sub_70E220((BSStringT *)dword_B40F84, "NiPSysRadialFieldModifier", (int)dword_B41E68);
+  return NiRTTI_Constructor(&stru_B40F84, "NiPSysRadialFieldModifier", &stru_B41E68); /*0xa0c964*/
 }

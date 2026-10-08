@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x64AF90",
-    "line": "push    esi",
+    "line": "push    esi; 3DTheft: BaseProcess::SetCurrentPackage implementation. Writes currentPackage and resets currentPackProcedure to first row slot; clearing a dynamic package can destroy it.",
     "mnemonic": "push",
     "size": 1
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x64AF9C",
-    "line": "mov     ecx, [esi+0C0h]",
+    "line": "mov     ecx, [esi+0C0h]; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x64AFA6",
-    "line": "call    sub_5660A0",
+    "line": "call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).",
     "mnemonic": "call",
     "size": 5
   },
@@ -127,19 +127,19 @@
   },
   {
     "ea": "0x64AFD1",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x64AFD7",
-    "line": "push    eax",
+    "line": "push    eax; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x64AFD8",
-    "line": "call    sub_45C7A0",
+    "line": "call    TESSaveLoadGame_DeleteForm",
     "mnemonic": "call",
     "size": 5
   },

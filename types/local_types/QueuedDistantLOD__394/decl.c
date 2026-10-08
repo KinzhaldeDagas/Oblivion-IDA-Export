@@ -1,1 +1,1 @@
-QueuedDistantLOD
+struct QueuedDistantLOD;

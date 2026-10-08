@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x9FAB30",
-    "line": "push    32h ; '2'",
+    "line": "push    32h ; '2'; Construct/register integer game setting iSkillJourneymanMin with native default 50.",
     "mnemonic": "push",
     "size": 2
   },
@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x9FAB37",
-    "line": "mov     ecx, offset iSkillJourneymanMin",
+    "line": "mov     ecx, offset g_iSkillJourneymanMin; self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x9FAB3C",
-    "line": "call    GameSetting_ConstrAndReg",
+    "line": "call    GameSetting_ConstrAndReg; Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.",
     "mnemonic": "call",
     "size": 5
   },

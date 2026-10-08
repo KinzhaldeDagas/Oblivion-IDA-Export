@@ -1,1 +1,1 @@
-IContextMenuVtbl_0
+typedef IContextMenuVtbl IContextMenuVtbl_0;

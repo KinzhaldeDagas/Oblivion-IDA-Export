@@ -3,7 +3,7 @@
 0x6CFE72: mov     edi, [esp+8+arg_0]
 0x6CFE76: push    edi
 0x6CFE77: mov     ebx, ecx
-0x6CFE79: call    sub_6D0540
+0x6CFE79: call    NiInterpController_IsEqual; NiInterpController equality thunk delegates to NiTimeController_IsEqual.
 0x6CFE7E: test    al, al
 0x6CFE80: jnz     short loc_6CFE89
 0x6CFE82: pop     edi

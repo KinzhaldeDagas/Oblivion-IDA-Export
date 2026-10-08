@@ -20,7 +20,7 @@
 0x5E7051: cmp     byte ptr ds:0B333B8h, 0
 0x5E7058: jz      short loc_5E7072
 0x5E705A: push    0; Seed
-0x5E705C: call    GetRandomLargeInteger?
+0x5E705C: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x5E7061: add     esp, 4
 0x5E7064: and     eax, 80000007h
 0x5E7069: jns     short loc_5E7070

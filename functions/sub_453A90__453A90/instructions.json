@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x453AA6",
-    "line": "mov     ebp, [esp+15Ch+arg_4]",
+    "line": "mov     ebp, [esp+15Ch+form]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -97,31 +97,31 @@
   },
   {
     "ea": "0x453AC7",
-    "line": "mov     eax, [esp+164h+arg_8]",
+    "line": "mov     eax, [esp+164h+changeFlags]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x453ACE",
-    "line": "push    eax",
+    "line": "push    eax; changeFlags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x453ACF",
-    "line": "push    ebp",
+    "line": "push    ebp; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x453AD0",
-    "line": "call    sub_4535A0",
+    "line": "call    SaveLoad_NormalizeFormChangeFlags; Verified: starts with created-form flag adjustment, then normalizes flags by runtime type/state. For TESObjectREFR it checks inventory/process/package/death/persistence and location; bit31 is set when reference location differs from its starting location. For TESObjectCELL it validates light/terrain-related flags and classifies exterior grid coordinates. Callers include UnloadForm, ResetFormForLoad, save/load consistency passes. Do not assign names to remaining individual bits without further use tracing.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x453AD5",
-    "line": "mov     [esp+164h+arg_8], eax",
+    "line": "mov     [esp+164h+changeFlags], eax",
     "mnemonic": "mov",
     "size": 7
   },

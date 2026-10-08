@@ -6,9 +6,9 @@
 0x55D1B8: movzx   ebx, word ptr [esi+0B6h]
 0x55D1BF: xor     ebp, ebp
 0x55D1C1: test    ebx, ebx
-0x55D1C3: mov     [esp+58h+var_1C], 0
-0x55D1CB: mov     [esp+58h+var_18], 0
-0x55D1D3: mov     [esp+58h+var_14], 0
+0x55D1C3: mov     [esp+58h+outVertices.data], 0
+0x55D1CB: mov     [esp+58h+outVertices.stride], 0
+0x55D1D3: mov     [esp+58h+outVertices.unknown08], 0
 0x55D1D8: mov     [esp+58h+var_3C], ebx
 0x55D1DC: jbe     loc_55D4AE
 0x55D1E2: movzx   eax, word ptr [esi+0B6h]
@@ -23,7 +23,7 @@
 0x55D209: mov     eax, [edx+10h]
 0x55D20C: call    eax
 0x55D20E: test    eax, eax
-0x55D210: mov     [esp+58h+var_20], eax
+0x55D210: mov     [esp+58h+object], eax
 0x55D214: jz      loc_55D4A3
 0x55D21A: cmp     dword ptr [eax+0B4h], 0
 0x55D221: jz      loc_55D4A3
@@ -33,36 +33,36 @@
 0x55D230: test    eax, eax
 0x55D232: mov     [esp+58h+var_10], eax
 0x55D236: jz      loc_55D4A3
-0x55D23C: mov     ecx, [esp+58h+var_20]
-0x55D240: push    ecx
-0x55D241: call    sub_5508A0
+0x55D23C: mov     ecx, [esp+58h+object]
+0x55D240: push    ecx; object
+0x55D241: call    NiObjectNET_FindFaceGenBaseVertexData; Scan NiObjectNET extra data and return the FaceGen base-vertex data object used to restore authored positions.
 0x55D246: add     esp, 4
 0x55D249: test    eax, eax
 0x55D24B: mov     [esp+58h+var_C], eax
 0x55D24F: jz      loc_55D4A3
-0x55D255: mov     edx, [esp+58h+var_20]
-0x55D259: mov     ecx, [edx+0B4h]
-0x55D25F: push    1
-0x55D261: call    sub_728AB0
+0x55D255: mov     edx, [esp+58h+object]
+0x55D259: mov     ecx, [edx+0B4h]; self
+0x55D25F: push    1; writeAccess
+0x55D261: call    NiGeometryData_LockVertexStream; Returns false immediately for an already-locked stream. Otherwise records bool argument at +0x3D and sets locked byte +0x3C. Additional-data branch: true argument invokes sub_7261D0 at acquisition; false invokes sub_726190 and later sub_7261D0 on unlock. Do not infer operation semantics from old writeAccess label alone.
 0x55D266: test    al, al
 0x55D268: jz      loc_55D4A3
-0x55D26E: mov     ecx, [esp+58h+var_20]
-0x55D272: mov     ecx, [ecx+0B4h]
-0x55D278: lea     eax, [esp+58h+var_1C]
-0x55D27C: push    eax
-0x55D27D: call    sub_728B60
+0x55D26E: mov     ecx, [esp+58h+object]
+0x55D272: mov     ecx, [ecx+0B4h]; self
+0x55D278: lea     eax, [esp+58h+outVertices]
+0x55D27C: push    eax; outVertices
+0x55D27D: call    NiGeometryData_GetLockedVertexStream; Return the locked vertex pointer and stride. Additional geometry may provide an alternate writable stream that does not alias m_pkVertex; otherwise the function returns m_pkVertex with 12-byte stride.
 0x55D282: cmp     [esp+58h+arg_0], 0
-0x55D287: mov     eax, [esp+58h+var_20]
+0x55D287: mov     eax, [esp+58h+object]
 0x55D28B: mov     edx, [eax+0B4h]
 0x55D291: movzx   ecx, word ptr [edx+8]
 0x55D295: mov     [esp+58h+var_8], ecx
 0x55D299: jnz     short loc_55D2A4
 0x55D29B: cmp     byte ptr [esi+104h], 0
 0x55D2A2: jz      short loc_55D2BE
-0x55D2A4: lea     edx, [esp+58h+var_1C]
-0x55D2A8: push    edx
-0x55D2A9: push    eax
-0x55D2AA: call    sub_5508F0
+0x55D2A4: lea     edx, [esp+58h+outVertices]
+0x55D2A8: push    edx; vertices
+0x55D2A9: push    eax; geometry
+0x55D2AA: call    NiGeometry_RestoreFaceGenBaseVertices; Copy authored FaceGen base positions into a writable strided vertex stream and mark only the position channel dirty.
 0x55D2AF: add     esp, 8
 0x55D2B2: mov     [esp+58h+var_4], 1
 0x55D2B7: mov     byte ptr [esi+104h], 0
@@ -85,7 +85,7 @@
 0x55D2FE: fld     [esp+58h+var_30]
 0x55D302: fsub    dword ptr [esi+90h]
 0x55D308: fstp    [esp+58h+var_24]
-0x55D30C: call    sub_404C90
+0x55D30C: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x55D311: cmp     ds:0B333B8h, bl
 0x55D317: fstp    [esp+58h+var_40]
 0x55D31B: fld     dword ptr ds:0B120CCh
@@ -110,7 +110,7 @@
 0x55D365: jz      short loc_55D379
 0x55D367: cmp     byte ptr [esi+112h], 0
 0x55D36E: jnz     short loc_55D379
-0x55D370: call    InterfaceManager_IsMenuMode
+0x55D370: call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.
 0x55D375: test    al, al
 0x55D377: jz      short loc_55D3E4
 0x55D379: fld     [esp+58h+var_40]
@@ -122,26 +122,26 @@
 0x55D38E: jz      short loc_55D3A2
 0x55D390: cmp     byte ptr [esi+112h], 0
 0x55D397: jnz     short loc_55D3A2
-0x55D399: call    InterfaceManager_IsMenuMode
+0x55D399: call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.
 0x55D39E: test    al, al
 0x55D3A0: jz      short loc_55D3A7
 0x55D3A2: mov     [esp+58h+var_4A], 1
-0x55D3A7: lea     ecx, [esp+58h+var_20]
+0x55D3A7: lea     ecx, [esp+58h+object]
 0x55D3AB: push    ecx
 0x55D3AC: mov     ecx, esi
 0x55D3AE: call    sub_55CAA0
 0x55D3B3: cmp     [esp+58h+var_4A], 0
 0x55D3B8: mov     bl, 1
 0x55D3BA: jz      short loc_55D3E4
-0x55D3BC: lea     edx, [esp+58h+var_20]
+0x55D3BC: lea     edx, [esp+58h+object]
 0x55D3C0: push    edx
 0x55D3C1: mov     ecx, esi
 0x55D3C3: call    sub_55C850
-0x55D3C8: lea     eax, [esp+58h+var_20]
+0x55D3C8: lea     eax, [esp+58h+object]
 0x55D3CC: push    eax
 0x55D3CD: mov     ecx, esi
 0x55D3CF: call    sub_55C900
-0x55D3D4: lea     ecx, [esp+58h+var_20]
+0x55D3D4: lea     ecx, [esp+58h+object]
 0x55D3D8: push    ecx
 0x55D3D9: mov     ecx, esi
 0x55D3DB: call    sub_55CB50
@@ -177,7 +177,7 @@
 0x55D43A: call    eax
 0x55D43C: test    al, al
 0x55D43E: jz      short loc_55D490
-0x55D440: lea     ecx, [esp+58h+var_20]
+0x55D440: lea     ecx, [esp+58h+object]
 0x55D444: push    ecx
 0x55D445: mov     ecx, esi
 0x55D447: call    sub_55C900
@@ -207,9 +207,9 @@
 0x55D488: fstp    [esp+70h+var_70]
 0x55D48B: mov     eax, [edx+78h]
 0x55D48E: call    eax
-0x55D490: mov     ecx, [esp+58h+var_20]
-0x55D494: mov     ecx, [ecx+0B4h]
-0x55D49A: call    sub_728B20
+0x55D490: mov     ecx, [esp+58h+object]
+0x55D494: mov     ecx, [ecx+0B4h]; self
+0x55D49A: call    NiGeometryData_UnlockVertexStream; Corrected audit: if locked, checks additional-data virtual predicate +0x4C; calls sub_7261D0(additional,0) only when saved lock-mode byte +0x3D is ZERO, then clears locked byte +0x3C. Earlier description as committing a write lock was unsupported/opposite to this branch. Exact additional-data operation remains unresolved.
 0x55D49F: mov     ebx, [esp+58h+var_3C]
 0x55D4A3: add     ebp, 1
 0x55D4A6: cmp     ebp, ebx

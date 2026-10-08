@@ -34,7 +34,7 @@
 0x42B1AD: mov     ecx, esi
 0x42B1AF: call    eax
 0x42B1B1: push    edi
-0x42B1B2: call    FormHeapFree
+0x42B1B2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x42B1B7: add     esp, 4
 0x42B1BA: mov     dword ptr [ebx], offset ??_7BSExtraData@@6B@; const BSExtraData::`vftable'
 0x42B1C0: mov     ecx, dword ptr [esp+20h+var_C]
@@ -45,3 +45,12 @@
 0x42B1CE: pop     ebx
 0x42B1CF: add     esp, 10h
 0x42B1D2: retn
+0x9C60D0: mov     ecx, [ebp-10h]; this
+0x9C60D3: jmp     ??1BSExtraData@@UAE@XZ; BSExtraData::~BSExtraData(void)
+0x9C60D8: mov     edx, [esp+arg_4]
+0x9C60DC: lea     eax, [edx-10h]
+0x9C60DF: mov     ecx, [edx-14h]
+0x9C60E2: xor     ecx, eax
+0x9C60E4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C60E9: mov     eax, offset stru_AEE6DC
+0x9C60EE: jmp     ___CxxFrameHandler3

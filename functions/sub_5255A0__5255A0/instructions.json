@@ -241,19 +241,19 @@
   },
   {
     "ea": "0x525628",
-    "line": "push    ebx",
+    "line": "push    ebx; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x525629",
-    "line": "lea     ecx, [edi+1D4h]",
+    "line": "lea     ecx, [edi+1D4h]; this",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x52562F",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,25 +439,25 @@
   },
   {
     "ea": "0x52569F",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5256A0",
-    "line": "call    sub_5538D0",
+    "line": "call    FaceGenManager_GetDefaultHeadParameters; Returns the FaceGen manager's default head-parameter block at manager+0x08, initializing the manager on demand.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5256A5",
-    "line": "push    eax",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5256A6",
-    "line": "call    sub_5528F0",
+    "line": "call    FaceGenHeadParameters_Copy; Deep-copies all four FaceGen matrices, preserving dimensions and engine ownership of destination coefficient buffers.",
     "mnemonic": "call",
     "size": 5
   },

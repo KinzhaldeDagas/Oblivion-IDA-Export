@@ -17,11 +17,11 @@
 0x42C726: test    ecx, ecx
 0x42C728: jz      short loc_42C741
 0x42C72A: mov     edx, [esi+160h]
-0x42C730: push    edi; Size
+0x42C730: push    edi; byteCount
 0x42C731: add     edx, eax
-0x42C733: push    edx; Src
-0x42C734: push    ecx; Dst
-0x42C735: call    _memcpy
+0x42C733: push    edx; source
+0x42C734: push    ecx; destination
+0x42C735: call    _memcpy;
 0x42C73A: add     esp, 0Ch
 0x42C73D: add     [esp+10h+Dst], edi
 0x42C741: sub     ebp, edi
@@ -64,8 +64,8 @@
 0x42C7BE: add     [esi+14h], eax
 0x42C7C1: sub     edi, [ebx+4]
 0x42C7C4: add     [esi+148h], edi
-0x42C7CA: cmp     dword ptr [ebx+4], 0
-0x42C7CE: jnz     short loc_42C7EB
+0x42C7CA: cmp     dword ptr [ebx+4], 0; MEF v28 decode correction: compressed archive hook must start here and own the avail_in branch plus refill/output-check window. Starting at 0x42C7E8 leaves 0x42C7CE -> 0x42C7EB jumping into overwritten bytes.
+0x42C7CE: jnz     short loc_42C7EB; MEF v28 proof: this jnz targets 0x42C7EB, so 0x42C7EB is a secondary entry into the output check when zlib still has input.
 0x42C7D0: mov     ecx, esi
 0x42C7D2: call    NiFile_Flush
 0x42C7D7: mov     ecx, [esi+0Ch]
@@ -74,9 +74,9 @@
 0x42C7DF: push    ecx; Count
 0x42C7E0: push    edx; DstBuf
 0x42C7E1: mov     ecx, esi
-0x42C7E3: call    sub_42C3E0
-0x42C7E8: mov     [esi+10h], eax
-0x42C7EB: cmp     dword ptr [ebx+10h], 0
+0x42C7E3: call    sub_42C3E0; EnginePatch v5 CTD hotfix: bug remains verified here (raw-read clamp can underflow), but the full archive raw-read replacement is disabled by default because this asset-stream primitive is load-critical.
+0x42C7E8: mov     [esi+10h], eax; MEF v28 correction: old dormant hook start was unsafe here because 0x42C7EB is an internal branch target inside the overwritten 0x42C7E8..0x42C7F2 window.
+0x42C7EB: cmp     dword ptr [ebx+10h], 0; MEF v28 proof: WER at this address matches the secondary branch target that was overwritten by the earlier 0x42C7E8 hook design; archive group remains disabled pending runtime proof.
 0x42C7EF: jnz     short loc_42C780
 0x42C7F1: jmp     short loc_42C818
 0x42C7F3: push    ebx
@@ -102,16 +102,16 @@
 0x42C835: sub     ebp, eax
 0x42C837: test    ecx, ecx
 0x42C839: jz      short loc_42C856
-0x42C83B: push    eax; Size
+0x42C83B: push    eax; byteCount
 0x42C83C: mov     eax, [esi+160h]
-0x42C842: push    eax; Src
-0x42C843: push    ecx; Dst
-0x42C844: call    _memcpy
+0x42C842: push    eax; source
+0x42C843: push    ecx; destination
+0x42C844: call    _memcpy;
 0x42C849: mov     ecx, [esi+170h]
 0x42C84F: add     esp, 0Ch
 0x42C852: add     [esp+10h+Dst], ecx
 0x42C856: test    ebp, ebp
-0x42C858: ja      loc_42C763
+0x42C858: ja      loc_42C763; MEF runtime trace 2026-05-30: WER APPCRASH c0000005 reported RVA 0002C859 inside this branch back to refill. It maps to CompressedArchiveFile::Read while v22 archive streaming guards were installed; v23 disables the group.
 0x42C85E: mov     eax, [esp+10h+Size]
 0x42C862: pop     edi
 0x42C863: pop     esi
@@ -122,10 +122,10 @@
 0x42C86D: test    eax, eax
 0x42C86F: jz      short loc_42C882
 0x42C871: mov     edx, [esi+160h]
-0x42C877: push    ebp; Size
-0x42C878: push    edx; Src
-0x42C879: push    eax; Dst
-0x42C87A: call    _memcpy
+0x42C877: push    ebp; byteCount
+0x42C878: push    edx; source
+0x42C879: push    eax; destination
+0x42C87A: call    _memcpy;
 0x42C87F: add     esp, 0Ch
 0x42C882: add     [esi+16Ch], ebp
 0x42C888: mov     eax, [esp+10h+Size]
@@ -139,11 +139,11 @@
 0x42C899: test    ecx, ecx
 0x42C89B: jz      short loc_42C8B0
 0x42C89D: mov     edx, [esi+160h]
-0x42C8A3: push    ebp; Size
+0x42C8A3: push    ebp; byteCount
 0x42C8A4: add     edx, eax
-0x42C8A6: push    edx; Src
-0x42C8A7: push    ecx; Dst
-0x42C8A8: call    _memcpy
+0x42C8A6: push    edx; source
+0x42C8A7: push    ecx; destination
+0x42C8A8: call    _memcpy;
 0x42C8AD: add     esp, 0Ch
 0x42C8B0: add     [esi+16Ch], ebp
 0x42C8B6: pop     edi

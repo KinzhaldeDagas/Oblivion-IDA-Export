@@ -1,4 +1,4 @@
-BSStringT *sub_A097D0()
+NiRTTI *sub_A097D0()
 {
-  return sub_70E220(&stru_B3F48C, "BSWindModifier", (int)dword_B40D08);
+  return NiRTTI_Constructor(&stru_B3F48C, "BSWindModifier", &stru_B40D08); /*0xa097e4*/
 }

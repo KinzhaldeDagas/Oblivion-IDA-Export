@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x784210",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Oblivion compact stBezierSpline Evaluate: requires the 500-entry vector at +0x3C, samples/interpolates its y values, maps normalized output through min@0x00/max@0x04, then adds uniform +/- variance@0x08. This executable field order overrides the differing RT4.1 header declaration order.",
     "mnemonic": "push",
     "size": 2
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x78426C",
-    "line": "fld     [esp+24h+arg_0]",
+    "line": "fld     [esp+24h+percent]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x784278",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,13 +223,13 @@
   },
   {
     "ea": "0x784285",
-    "line": "mov     [esp+24h+arg_0], ebx",
+    "line": "mov     [esp+24h+percent], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x784289",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x78428D",
-    "line": "push    eax",
+    "line": "push    eax; index",
     "mnemonic": "push",
     "size": 1
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x784290",
-    "line": "call    sub_784000",
+    "line": "call    OB_stVector_stVec_At_010201A0; Oblivion checked accessor for the compact 16-byte vector of 0x18-byte stVec elements. Validates index against (end-begin)/0x18 and returns begin + index*0x18.",
     "mnemonic": "call",
     "size": 5
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x78429A",
-    "line": "fild    [esp+24h+arg_0]",
+    "line": "fild    [esp+24h+percent]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x7842A7",
-    "line": "push    eax",
+    "line": "push    eax; index",
     "mnemonic": "push",
     "size": 1
   },
@@ -325,19 +325,19 @@
   },
   {
     "ea": "0x7842B4",
-    "line": "call    sub_784000",
+    "line": "call    OB_stVector_stVec_At_010201A0; Oblivion checked accessor for the compact 16-byte vector of 0x18-byte stVec elements. Validates index against (end-begin)/0x18 and returns begin + index*0x18.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7842B9",
-    "line": "push    ebx",
+    "line": "push    ebx; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7842BA",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x7842BE",
-    "line": "call    sub_784000",
+    "line": "call    OB_stVector_stVec_At_010201A0; Oblivion checked accessor for the compact 16-byte vector of 0x18-byte stVec elements. Validates index against (end-begin)/0x18 and returns begin + index*0x18.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x7842C6",
-    "line": "fstp    [esp+24h+arg_0]",
+    "line": "fstp    [esp+24h+percent]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x7842CD",
-    "line": "fld     [esp+24h+arg_0]",
+    "line": "fld     [esp+24h+percent]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x784303",
-    "line": "mov     ecx, offset unk_B4295D",
+    "line": "mov     ecx, offset stru_B4295D; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x784310",
-    "line": "call    sub_78EAF0",
+    "line": "call    OB_stRandom_ctor_010201A0; Oblivion stRandom constructor. The class has no per-instance generator state; if the shared SIdvRandomImpl state is not initialized, it invokes Reseed(-1).",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,13 +523,13 @@
   },
   {
     "ea": "0x784330",
-    "line": "fstp    [esp+2Ch+var_28]; float",
+    "line": "fstp    [esp+2Ch+maxValue]; maxValue",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x784334",
-    "line": "mov     ecx, offset unk_B4295D",
+    "line": "mov     ecx, offset stru_B4295D; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -547,13 +547,13 @@
   },
   {
     "ea": "0x78433E",
-    "line": "fstp    [esp+2Ch+var_2C]; float",
+    "line": "fstp    [esp+2Ch+minValue]; minValue",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x784341",
-    "line": "call    sub_78EA00",
+    "line": "call    OB_stRandom_GetUniform_010201A0; Oblivion stRandom::GetUniform. Returns minValue + (maxValue - minValue) * SIdvRandomImpl::m_cUniform.Next(). Used throughout spline, branch, frond, tree, leaf-LOD, and seed generation paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -628,5 +628,71 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CAEB0",
+    "line": "mov     eax, dword ptr unk_B42960",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CAEB5",
+    "line": "and     eax, 0FFFFFFFEh",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAEB8",
+    "line": "mov     dword ptr unk_B42960, eax",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CAEBD",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CAEBE",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CAEC2",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAEC5",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAEC8",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CAECA",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CAECF",
+    "line": "mov     eax, offset stru_AF34E4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CAED4",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

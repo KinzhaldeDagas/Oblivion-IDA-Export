@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A6D30",
-    "line": "fild    [esp+arg_0]",
+    "line": "fild    [esp+seed]; Oblivion Random::SetLong. Stores the supplied integer seed and fills the complete 128-float shuffle buffer by repeated Park-Miller Raw steps.",
     "mnemonic": "fild",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x7A6D3B",
-    "line": "mov     esi, offset flt_B42A90",
+    "line": "mov     esi, offset OB_Random_Buffer_010201A0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x7A6D46",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x7A6D70",
-    "line": "mov     [esp+4+arg_0], ecx",
+    "line": "mov     [esp+4+seed], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -139,13 +139,13 @@
   },
   {
     "ea": "0x7A6D7C",
-    "line": "mov     [esp+4+arg_0], ecx",
+    "line": "mov     [esp+4+seed], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A6D80",
-    "line": "fild    [esp+4+arg_0]",
+    "line": "fild    [esp+4+seed]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -157,19 +157,19 @@
   },
   {
     "ea": "0x7A6D87",
-    "line": "cmp     esi, offset dbl_B42C90",
+    "line": "cmp     esi, offset OB_Random_seed_010201A0",
     "mnemonic": "cmp",
     "size": 6
   },
   {
     "ea": "0x7A6D8D",
-    "line": "fst     [esp+4+arg_0]",
+    "line": "fst     [esp+4+seed]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x7A6D91",
-    "line": "fld     [esp+4+arg_0]",
+    "line": "fld     [esp+4+seed]",
     "mnemonic": "fld",
     "size": 4
   },

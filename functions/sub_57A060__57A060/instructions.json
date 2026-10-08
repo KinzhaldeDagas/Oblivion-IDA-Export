@@ -190,5 +190,185 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x5BB1B0",
+    "line": "push    3FFh",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5BB1B5",
+    "line": "call    Menu_GetOpenMenuTile",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5BB1BA",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5BB1BD",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5BB1BF",
+    "line": "jz      short locret_5BB20A",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5BB1C1",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5BB1C3",
+    "line": "call    Tile_GetParentMenu",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5BB1C8",
+    "line": "mov     ecx, [eax+28h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5BB1CB",
+    "line": "push    0FAEh",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5BB1D0",
+    "line": "call    Tile_GetFloat",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5BB1D5",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5BB1DA",
+    "line": "cmp     eax, 3",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x5BB1DD",
+    "line": "jz      short loc_5BB202",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5BB1DF",
+    "line": "cmp     eax, 4",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x5BB1E2",
+    "line": "jz      short loc_5BB202",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5BB1E4",
+    "line": "cmp     eax, 5",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x5BB1E7",
+    "line": "jz      short loc_5BB202",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5BB1E9",
+    "line": "cmp     eax, 2",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x5BB1EC",
+    "line": "jnz     short loc_5BB1F3",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x5BB1EE",
+    "line": "jmp     TravelPath_DebugRouteToPoint; Verified travel-path diagnostic: called from WorldMapMenu interaction paths, repeatedly builds low-level routes to candidate points, prints each travel/door/coordinate segment, total distance and estimated game hours, reports 'No Path found' on failure, and adds a debug line render. Exact UI action name remains Unknown.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x5BB1F3",
+    "line": "cmp     eax, 1",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x5BB1F6",
+    "line": "jnz     short locret_5BB20A",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x5BB1F8",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5BB1F9",
+    "line": "call    sub_5BA4D0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5BB1FE",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5BB201",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x5BB202",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5BB204",
+    "line": "call    sub_5BACB0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5BB209",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5BB20A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
   }
 ]

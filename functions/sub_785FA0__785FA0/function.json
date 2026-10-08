@@ -1,19 +1,32 @@
 {
-  "callees_count": 22,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_785FA0",
+  "chunks": [
+    [
+      "0x785FA0",
+      "0x7860CF"
+    ]
+  ],
+  "chunks_sha256": "40bdd7a15baf51256e937e05ead33f38c9c0340dd2fb4fa79d248c320dd2234d",
+  "comment_regular": "Unique insertion for the spline-cache map. Searches by the 28-byte small-string key, inserts and rebalances only when absent, and returns {iterator, inserted}.",
+  "comment_repeatable": "Unique insertion for the spline-cache map. Searches by the 28-byte small-string key, inserts and rebalances only when absent, and returns {iterator, inserted}.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 6,
+  "display_name": "OB_stBezierSplineCacheMap_InsertUnique_010201A0",
   "end_ea": "0x7860CF",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_785FA0",
+  "name": "OB_stBezierSplineCacheMap_InsertUnique_010201A0",
   "segment": ".text",
   "sha256": "40bdd7a15baf51256e937e05ead33f38c9c0340dd2fb4fa79d248c320dd2234d",
   "size": 303,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x785FA0",
-  "type": "int __thiscall(int *this, int, _DWORD *)",
-  "xrefs_from_count": 135,
+  "total_chunk_size": 303,
+  "type": "OB_stBezierSplineCacheInsertResult_010201A0 *__thiscall(OB_stBezierSplineCacheMap_010201A0 *this, OB_stBezierSplineCacheInsertResult_010201A0 *result, const OB_stBezierSplineCachePair_010201A0 *value)",
+  "xrefs_from_count": 141,
   "xrefs_to_count": 1
 }

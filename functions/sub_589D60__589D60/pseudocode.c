@@ -6,32 +6,32 @@ void __thiscall sub_589D60(_DWORD *this)
   _DWORD *v5; // esi
   void *v6; // edi
 
-  v2 = *(this + 9);
-  if ( v2 )
+  v2 = *(this + 9); /*0x589d63*/
+  if ( v2 ) /*0x589d69*/
   {
-    if ( *(_WORD *)(v2 + 0xB6) )
-      v3 = **(NiNode ***)(v2 + 0xB0);
+    if ( *(_WORD *)(v2 + 0xB6) ) /*0x589d6b*/
+      v3 = **(NiNode ***)(v2 + 0xB0); /*0x589d7f*/
     else
-      v3 = 0;
-    if ( (*(int (__thiscall **)(_DWORD *))(*this + 0xC))(this) == 0x386 )
+      v3 = 0; /*0x589d75*/
+    if ( (*(int (__thiscall **)(_DWORD *))(*this + 0xC))(this) == 0x386 ) /*0x589d8d*/
     {
-      if ( v3 )
+      if ( v3 ) /*0x589d91*/
       {
-        NiPropertyByID = (NiTexturingProperty *)NiNode_GetNiPropertyByID(v3, 6);
-        if ( NiPropertyByID )
+        NiPropertyByID = (NiTexturingProperty *)NiNode_GetNiPropertyByID(v3, 6); /*0x589d97*/
+        if ( NiPropertyByID ) /*0x589d9e*/
         {
-          NiTexturingProperty::SetUnk08(NiPropertyByID, 0);
-          *(this + 0xB) |= 0x20u;
+          OB_NiTexturingProperty_SetBaseTexture_010201A0(NiPropertyByID, 0); /*0x589da4*/
+          *(this + 0xB) |= 0x20u; /*0x589da9*/
         }
       }
     }
   }
-  v5 = (_DWORD *)*(this + 0xD);
-  while ( v5 )
+  v5 = (_DWORD *)*(this + 0xD); /*0x589dad*/
+  while ( v5 ) /*0x589db2*/
   {
-    v6 = (void *)v5[2];
-    v5 = (_DWORD *)*v5;
-    if ( v6 != (void *)sub_5A8260() && v6 != (void *)sub_5A8270() && v6 != sub_5A8280() )
-      (*(void (__thiscall **)(void *))(*(_DWORD *)v6 + 0x18))(v6);
+    v6 = (void *)v5[2]; /*0x589db4*/
+    v5 = (_DWORD *)*v5; /*0x589dba*/
+    if ( v6 != (void *)sub_5A8260() && v6 != (void *)sub_5A8270() && v6 != sub_5A8280() ) /*0x589dd5*/
+      (*(void (__thiscall **)(void *))(*(_DWORD *)v6 + 0x18))(v6); /*0x589dde*/
   }
 }

@@ -11,7 +11,7 @@
 0x444A39: push    0
 0x444A3B: push    0
 0x444A3D: push    eax
-0x444A3E: call    sub_439EB0
+0x444A3E: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
 0x444A43: push    eax
 0x444A44: mov     ecx, esi
 0x444A46: call    sub_443F00
@@ -23,7 +23,7 @@
 0x444A5D: push    0
 0x444A5F: push    0
 0x444A61: push    eax
-0x444A62: call    sub_439EB0
+0x444A62: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
 0x444A67: push    eax
 0x444A68: mov     ecx, esi
 0x444A6A: call    sub_443F00
@@ -35,7 +35,7 @@
 0x444A81: push    0
 0x444A83: push    0
 0x444A85: push    eax
-0x444A86: call    sub_439EB0
+0x444A86: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
 0x444A8B: push    eax
 0x444A8C: mov     ecx, esi
 0x444A8E: call    sub_443F00
@@ -47,7 +47,7 @@
 0x444AA5: push    0
 0x444AA7: push    0
 0x444AA9: push    eax
-0x444AAA: call    sub_439EB0
+0x444AAA: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
 0x444AAF: push    eax
 0x444AB0: mov     ecx, esi
 0x444AB2: call    sub_443F00
@@ -59,7 +59,7 @@
 0x444AC9: push    0
 0x444ACB: push    0
 0x444ACD: push    eax
-0x444ACE: call    sub_439EB0
+0x444ACE: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
 0x444AD3: push    eax
 0x444AD4: mov     ecx, esi
 0x444AD6: call    sub_443F00
@@ -71,7 +71,7 @@
 0x444AED: push    0
 0x444AEF: push    0
 0x444AF1: push    eax
-0x444AF2: call    sub_439EB0
+0x444AF2: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
 0x444AF7: push    eax
 0x444AF8: mov     ecx, esi
 0x444AFA: call    sub_443F00
@@ -83,7 +83,7 @@
 0x444B11: push    0
 0x444B13: push    0
 0x444B15: push    eax
-0x444B16: call    sub_439EB0
+0x444B16: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
 0x444B1B: push    eax
 0x444B1C: mov     ecx, esi
 0x444B1E: call    sub_443F00
@@ -95,7 +95,7 @@
 0x444B35: push    0
 0x444B37: push    0
 0x444B39: push    eax
-0x444B3A: call    sub_439EB0
+0x444B3A: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
 0x444B3F: push    eax
 0x444B40: mov     ecx, esi
 0x444B42: call    sub_443F00
@@ -107,7 +107,7 @@
 0x444B59: push    0
 0x444B5B: push    0
 0x444B5D: push    eax
-0x444B5E: call    sub_439EB0
+0x444B5E: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
 0x444B63: push    eax
 0x444B64: mov     ecx, esi
 0x444B66: call    sub_443F00
@@ -119,7 +119,7 @@
 0x444B7D: push    0
 0x444B7F: push    0
 0x444B81: push    eax
-0x444B82: call    sub_439EB0
+0x444B82: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
 0x444B87: push    eax
 0x444B88: mov     ecx, esi
 0x444B8A: call    sub_443F00
@@ -131,7 +131,7 @@
 0x444BA1: push    0
 0x444BA3: push    0
 0x444BA5: push    eax
-0x444BA6: call    sub_439EB0
+0x444BA6: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
 0x444BAB: push    eax
 0x444BAC: mov     ecx, esi
 0x444BAE: call    sub_443F00
@@ -143,7 +143,7 @@
 0x444BC5: push    0
 0x444BC7: push    0
 0x444BC9: push    eax
-0x444BCA: call    sub_439EB0
+0x444BCA: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
 0x444BCF: push    eax
 0x444BD0: mov     ecx, esi
 0x444BD2: call    sub_443F00
@@ -155,7 +155,7 @@
 0x444BE9: push    0
 0x444BEB: push    0
 0x444BED: push    eax
-0x444BEE: call    sub_439EB0
+0x444BEE: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
 0x444BF3: push    eax
 0x444BF4: mov     ecx, esi
 0x444BF6: call    sub_443F00
@@ -167,7 +167,7 @@
 0x444C0D: push    0
 0x444C0F: push    0
 0x444C11: push    eax
-0x444C12: call    sub_439EB0
+0x444C12: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
 0x444C17: push    eax
 0x444C18: mov     ecx, esi
 0x444C1A: call    sub_443F00
@@ -179,7 +179,7 @@
 0x444C31: push    0
 0x444C33: push    0
 0x444C35: push    eax
-0x444C36: call    sub_439EB0
+0x444C36: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
 0x444C3B: push    eax
 0x444C3C: mov     ecx, esi
 0x444C3E: call    sub_443F00
@@ -191,7 +191,7 @@
 0x444C55: push    0
 0x444C57: push    0
 0x444C59: push    eax
-0x444C5A: call    sub_439EB0
+0x444C5A: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
 0x444C5F: push    eax
 0x444C60: mov     ecx, esi
 0x444C62: call    sub_443F00

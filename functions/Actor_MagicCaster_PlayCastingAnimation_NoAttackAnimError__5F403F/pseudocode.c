@@ -3,6 +3,6 @@ int __usercall Actor_MagicCaster_PlayCastingAnimation_::NoAttackAnimError@<eax>(
 {
   char *Name; // eax
 
-  Name = TESObjectREFR_GetName(a1);
-  return PrintError("%s doesn't have a NORMAL power attack animation to use for casting.", Name);
+  Name = TESObjectREFR_GetName(a1); /*0x5f4041*/
+  return PrintError("%s doesn't have a NORMAL power attack animation to use for casting.", Name); /*0x5f4067*/
 }

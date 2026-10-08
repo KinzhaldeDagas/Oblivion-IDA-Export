@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x502CBC",
-    "line": "lea     eax, [esp+8+var_4]",
+    "line": "lea     eax, [esp+8+stage]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -145,13 +145,13 @@
   },
   {
     "ea": "0x502CEF",
-    "line": "mov     [esp+2Ch+var_4], 0",
+    "line": "mov     dword ptr [esp+2Ch+stage], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x502CF7",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x502D06",
-    "line": "mov     ecx, [esp+8+arg_18]",
+    "line": "mov     ecx, [esp+8+arg_18]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -211,19 +211,19 @@
   },
   {
     "ea": "0x502D0E",
-    "line": "mov     eax, [esp+8+var_4]",
+    "line": "mov     eax, dword ptr [esp+8+stage]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x502D12",
-    "line": "push    eax",
+    "line": "push    eax; stage",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x502D13",
-    "line": "call    sub_529AC0",
+    "line": "call    TESQuest__SetStage",
     "mnemonic": "call",
     "size": 5
   },

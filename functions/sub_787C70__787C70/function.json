@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x787C70",
+      "0x787CCB"
+    ]
+  ],
+  "chunks_sha256": "d55631d59ea0d79354ef01c0aecf1b48cb3f45c6c7039a4015f6910456273efa",
+  "comment_regular": "\n\n[2026-10-03 frond completion] Native selector is returned in AX and consumers interpret the value as signed short (FFFF sentinel). Plugin typedef corrected from int/EAX to short. Fallout named homolog 0x8281AF80 and RT4.1 SpeedTreeRT.cpp:2323 corroborate formula/sentinel, but later source int return does not establish Oblivion ABI.\n\nMaps normalized/current tree LOD to the Oblivion frond selector count stored on CSpeedTreeRT.\n\n[2026-10-03 v104 caller correction] -1 sentinel selects instanceData.lodLevel or treeEngine.currentLod; physical tree scale from BSTreeModel::CreateArt is unrelated. Frond attachment/runtime sync now both query sentinel and range-check returned signed AX. Removed misleading buildNodeLod/buildLodSelector override. RT4.1 GetDiscreteFrondLodLevel uses same sentinel/formula, but x86 return ABI remains signed16.",
+  "comment_repeatable": "Maps normalized/current tree LOD to the Oblivion frond selector count stored on CSpeedTreeRT.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_787C70",
+  "display_name": "CSpeedTreeRT__GetDiscreteFrondLodLevel",
   "end_ea": "0x787CCB",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_787C70",
+  "name": "CSpeedTreeRT__GetDiscreteFrondLodLevel",
   "segment": ".text",
   "sha256": "d55631d59ea0d79354ef01c0aecf1b48cb3f45c6c7039a4015f6910456273efa",
   "size": 91,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x787C70",
-  "type": "int __thiscall(_DWORD *this, float)",
+  "total_chunk_size": 91,
+  "type": "__int16 __thiscall(OB_CSpeedTreeRT_010201A0 *this, float lod)",
   "xrefs_from_count": 35,
   "xrefs_to_count": 1
 }

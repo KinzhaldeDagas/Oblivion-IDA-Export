@@ -1,7 +1,7 @@
 0x58B2F0: fld     dword ptr ds:0A379B4h
 0x58B2F6: push    ebx
 0x58B2F7: push    esi
-0x58B2F8: mov     esi, [esp+8+arg_0]
+0x58B2F8: mov     esi, [esp+8+trait]
 0x58B2FC: cmp     esi, 0FADh
 0x58B302: push    edi
 0x58B303: mov     edi, ecx
@@ -101,9 +101,9 @@
 0x58B439: pop     ebx
 0x58B43A: retn    0Ch
 0x58B43D: cmp     esi, 0FA1h
-0x58B443: jz      loc_58B51E
+0x58B443: jz      loc_58B51E; Verified: visible/other visibility trait update sets Tile dirty flag 4 at +0x2C. This branch does not clear InterfaceManager focus. Render cull flag is applied by 0x58E870 later.
 0x58B449: cmp     esi, 0FA3h
-0x58B44F: jz      loc_58B51E
+0x58B44F: jz      loc_58B51E; Verified: visible/other visibility trait update sets Tile dirty flag 4 at +0x2C. This branch does not clear InterfaceManager focus. Render cull flag is applied by 0x58E870 later.
 0x58B455: cmp     esi, 0FA7h
 0x58B45B: jz      loc_58B512
 0x58B461: cmp     esi, 0FCCh
@@ -155,14 +155,14 @@
 0x58B4F0: mov     esi, eax
 0x58B4F2: test    esi, esi
 0x58B4F4: jz      short loc_58B50A
-0x58B4F6: fld     [esp+0Ch+arg_4]
+0x58B4F6: fld     [esp+0Ch+value]
 0x58B4FA: mov     ebx, [esi]
 0x58B4FC: push    edi
-0x58B4FD: call    Double_To_SInt32
+0x58B4FD: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x58B502: push    eax
 0x58B503: mov     eax, [ebx+4]
 0x58B506: mov     ecx, esi
-0x58B508: call    eax
+0x58B508: call    eax; Verified ID registration: changed/evaluated ID trait reaches owning Menu::AttachTileByID through vtable +4. For DialogMenu, 0x59D8F0 binds only recognized vanilla IDs; custom48 ignored. Reusing a vanilla ID can overwrite corresponding bound tile pointer.
 0x58B50A: pop     edi
 0x58B50B: pop     esi
 0x58B50C: xor     eax, eax
@@ -174,7 +174,7 @@
 0x58B519: pop     esi
 0x58B51A: pop     ebx
 0x58B51B: retn    0Ch
-0x58B51E: or      dword ptr [edi+2Ch], 4
+0x58B51E: or      dword ptr [edi+2Ch], 4; Verified: visible/other visibility trait update sets Tile dirty flag 4 at +0x2C. This branch does not clear InterfaceManager focus. Render cull flag is applied by 0x58E870 later.
 0x58B522: mov     eax, edi
 0x58B524: pop     edi
 0x58B525: pop     esi
@@ -197,9 +197,9 @@
 0x58B556: cmp     esi, 0FABh
 0x58B55C: jnz     loc_58B642
 0x58B562: mov     ecx, [edi+10h]
-0x58B565: fld     [esp+0Ch+arg_4]
+0x58B565: fld     [esp+0Ch+value]
 0x58B569: test    ecx, ecx
-0x58B56B: fstp    [esp+0Ch+arg_4]
+0x58B56B: fstp    [esp+0Ch+value]
 0x58B56F: mov     eax, edi
 0x58B571: jz      short loc_58B5EF
 0x58B573: fldz
@@ -221,9 +221,9 @@
 0x58B59D: jnz     short loc_58B586
 0x58B59F: jmp     short loc_58B5E4
 0x58B5A1: fld     dword ptr [edx+4]
-0x58B5A4: fstp    [esp+0Ch+arg_0]
+0x58B5A4: fstp    [esp+0Ch+trait]
 0x58B5A8: fld     st(1)
-0x58B5AA: fcomp   [esp+0Ch+arg_0]
+0x58B5AA: fcomp   [esp+0Ch+trait]
 0x58B5AE: fnstsw  ax
 0x58B5B0: test    ah, 44h
 0x58B5B3: jp      short loc_58B5E4
@@ -239,10 +239,10 @@
 0x58B5CE: ja      short loc_58B5D4
 0x58B5D0: test    eax, eax
 0x58B5D2: jnz     short loc_58B5BB
-0x58B5D4: fst     [esp+0Ch+arg_0]
-0x58B5D8: fld     [esp+0Ch+arg_0]
-0x58B5DC: fadd    [esp+0Ch+arg_4]
-0x58B5E0: fstp    [esp+0Ch+arg_4]
+0x58B5D4: fst     [esp+0Ch+trait]
+0x58B5D8: fld     [esp+0Ch+trait]
+0x58B5DC: fadd    [esp+0Ch+value]
+0x58B5E0: fstp    [esp+0Ch+value]
 0x58B5E4: mov     eax, ebx
 0x58B5E6: mov     ebx, [eax+10h]
 0x58B5E9: test    ebx, ebx
@@ -268,17 +268,17 @@
 0x58B619: jz      short loc_58B644
 0x58B61B: cmp     eax, edi
 0x58B61D: jz      short loc_58B644
-0x58B61F: fld     [esp+0Ch+arg_4]
+0x58B61F: fld     [esp+0Ch+value]
 0x58B623: fild    dword ptr [esi+18h]
 0x58B626: fcomp   st(1)
 0x58B628: fnstsw  ax
 0x58B62A: test    ah, 5
 0x58B62D: jp      short loc_58B642
-0x58B62F: call    Double_To_SInt32
+0x58B62F: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x58B634: mov     [esi+18h], eax
 0x58B637: jmp     short loc_58B644
 0x58B639: fld     dword ptr [edx+4]
-0x58B63C: fstp    [esp+0Ch+arg_0]
+0x58B63C: fstp    [esp+0Ch+trait]
 0x58B640: jmp     short loc_58B5D8
 0x58B642: fstp    st
 0x58B644: push    0FA4h

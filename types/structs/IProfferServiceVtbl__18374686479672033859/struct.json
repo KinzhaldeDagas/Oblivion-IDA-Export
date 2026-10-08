@@ -1,40 +1,72 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "IProfferServiceVtbl",
+  "definition": "struct IProfferServiceVtbl\n{\nHRESULT_0 (*QueryInterface)(IProfferService_0 *, const IID *const, void **);\nULONG (*AddRef)(IProfferService_0 *);\nULONG (*Release)(IProfferService_0 *);\nHRESULT_0 (*ProfferService)(IProfferService_0 *, const GUID *const, IServiceProvider_0 *, DWORD *);\nHRESULT_0 (*RevokeService)(IProfferService_0 *, DWORD);\n}\n",
   "id": 18374686479672033859,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QueryInterface",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IProfferService_0 *, const IID *const, void **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddRef",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(IProfferService_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Release",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(IProfferService_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ProfferService",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IProfferService_0 *, const GUID *const, IServiceProvider_0 *, DWORD *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RevokeService",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IProfferService_0 *, DWORD)"
     }
   ],
   "name": "IProfferServiceVtbl",
+  "ordinal": 3667,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 20
 }

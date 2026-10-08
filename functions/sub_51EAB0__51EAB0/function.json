@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x51EAB0",
+      "0x51EAB8"
+    ]
+  ],
+  "chunks_sha256": "bfd98ab4f351077fcabc0611ee127ca4b2dd96bf885728407bf24fe645ae472e",
+  "comment_regular": "Verified: component vtable serialization thunk subtracts 0x24 from ECX and tail-jumps to TESCreature_GetModifiedSize. Full-object dispatch; not the nonvirtual TESActorBaseData component serializer.\n\nself",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_51EAB0",
+  "display_name": "TESCreature_GetModifiedSize_ActorBaseDataThunk",
   "end_ea": "0x51EAB8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_51EAB0",
+  "name": "TESCreature_GetModifiedSize_ActorBaseDataThunk",
   "segment": ".text",
   "sha256": "bfd98ab4f351077fcabc0611ee127ca4b2dd96bf885728407bf24fe645ae472e",
   "size": 8,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x51EAB0",
-  "type": "int __thiscall(char *this, int)",
+  "total_chunk_size": 8,
+  "type": "unsigned __int16 __thiscall(TESActorBaseData *__shifted(TESCreature,0x24) self, ActorBaseSaveChangeMask changeMask)",
   "xrefs_from_count": 2,
   "xrefs_to_count": 1
 }

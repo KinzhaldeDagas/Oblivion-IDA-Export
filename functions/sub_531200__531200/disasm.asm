@@ -4,21 +4,21 @@
 0x531206: mov     eax, [edi]
 0x531208: push    eax
 0x531209: mov     esi, ecx
-0x53120B: call    FormHeapFree
+0x53120B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x531210: add     esp, 4
-0x531213: mov     ecx, esi
+0x531213: mov     ecx, esi; this
 0x531215: mov     dword ptr [edi], 0
 0x53121B: mov     word ptr [edi+6], 0
 0x531221: mov     word ptr [edi+4], 0
-0x531227: call    sub_530C40
+0x531227: call    TESTopicInfo__GetResponseList; Oblivion lazy INFO response-stream reader. Rebuilds a shared list from the last override TESFile plus TESTopicInfo+0x34 record offset. Recognizes only TRDT and NAM1; NAM2 actor notes are runtime-inert.
 0x53122C: mov     esi, eax
 0x53122E: test    esi, esi
 0x531230: jz      short loc_531268
-0x531232: mov     ecx, [esi]
+0x531232: mov     ecx, [esi]; this
 0x531234: test    ecx, ecx
 0x531236: mov     esi, [esi+4]
 0x531239: jz      short loc_53125D
-0x53123B: call    sub_52E100; ?what@runtime_error@@UBEPBDXZ
+0x53123B: call    TESResponse__GetText; ?what@runtime_error@@UBEPBDXZ
 0x531240: push    eax
 0x531241: mov     ecx, edi
 0x531243: call    BSStringT_Append

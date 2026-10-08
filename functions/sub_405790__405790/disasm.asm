@@ -1,5 +1,5 @@
 0x405790: movzx   edx, word ptr [ecx+0B6h]
-0x405797: mov     eax, [esp+arg_0]
+0x405797: mov     eax, [esp+index]
 0x40579B: cmp     edx, eax
 0x40579D: ja      short loc_4057A4
 0x40579F: xor     eax, eax

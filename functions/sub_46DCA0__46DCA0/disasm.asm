@@ -1,4 +1,4 @@
-0x46DCA0: mov     eax, [esp+arg_0]
+0x46DCA0: mov     eax, [esp+arg_0]; MEF v57 IMPLEMENTED 2026-10-08: Verified read-only component comparison: dynamic-casts to TESModelList, compares path-node sequences with native98262D and returns true for difference/type mismatch, false when equal. No model-list mutation. Named DiffersFromComponent to preserve boolean sense.
 0x46DCA4: push    esi
 0x46DCA5: push    0; int
 0x46DCA7: push    offset ??_R0?AVTESModelList@@@8; struct TypeDescriptor *
@@ -27,9 +27,9 @@
 0x46DCDF: jmp     short loc_46DCF1
 0x46DCE1: test    ecx, ecx
 0x46DCE3: jz      short loc_46DD0C
-0x46DCE5: push    ecx; Str2
-0x46DCE6: push    eax; Str1
-0x46DCE7: call    __strcmp
+0x46DCE5: push    ecx; right
+0x46DCE6: push    eax; left
+0x46DCE7: call    CRT_StricmpLocaleDispatch
 0x46DCEC: add     esp, 8
 0x46DCEF: test    eax, eax
 0x46DCF1: jnz     short loc_46DD0C

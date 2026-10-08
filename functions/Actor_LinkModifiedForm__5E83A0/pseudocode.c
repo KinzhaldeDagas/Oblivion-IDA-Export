@@ -1,12 +1,7 @@
-void __userpurge Actor_LinkModifiedForm(
-        Concurrency::details::SchedulerBase *a1@<ecx>,
-        double a2@<st2>,
-        double a3@<st1>,
-        int a4,
-        int a5)
+void __thiscall Actor_LinkModifiedForm(Concurrency::details::SchedulerBase *this, int a2, int a3)
 {
   unsigned int *v6; // esi
-  unsigned int *v7; // ebx
+  int *v7; // ebx
   unsigned int v8; // ebp
   TESForm *v9; // eax
   void *v10; // eax
@@ -19,9 +14,9 @@ void __userpurge Actor_LinkModifiedForm(
   char v17; // bl
   int v18; // ecx
   char v19; // al
-  TESObjectCELL *ParentCell; // esi
+  UInt32 DwordAtOffset40; // esi
   char *v21; // esi
-  _DWORD *v22; // ebx
+  int *v22; // ebx
   void **v23; // ebp
   UInt32 v24; // eax
   TESForm *v25; // eax
@@ -37,280 +32,279 @@ void __userpurge Actor_LinkModifiedForm(
   float *v35; // eax
   TESForm *v36; // eax
   TESObjectCELL *v37; // esi
-  double v38; // st7
-  UInt32 flags; // ecx
-  int v40; // eax
+  unsigned int flags; // ecx
+  int v39; // eax
+  LowProcess *v40; // eax
   LowProcess *v41; // eax
-  LowProcess *v42; // eax
   UInt32 ProcessLevel; // eax
-  UInt32 v44; // eax
-  char v45; // [esp+30h] [ebp+4h]
+  UInt32 v43; // eax
+  char v44; // [esp+30h] [ebp+4h]
 
-  MobileObject_LinkModifierForm((TESObjectREFR *)a1, a4, a5);
-  if ( (a4 & 0x8000) != 0 )
+  MobileObject_LinkModifierForm((TESObjectREFR *)this, a2, a3); /*0x5e83d3*/
+  if ( (a2 & 0x8000) != 0 ) /*0x5e83de*/
   {
-    v6 = (unsigned int *)((char *)a1 + 0xA4);
-    v7 = 0;
-    if ( a1 != (Concurrency::details::SchedulerBase *)0xFFFFFF5C )
+    v6 = (unsigned int *)((char *)this + 0xA4); /*0x5e83e4*/
+    v7 = 0; /*0x5e83ea*/
+    if ( this != (Concurrency::details::SchedulerBase *)0xFFFFFF5C ) /*0x5e83ee*/
     {
-      do
+      do /*0x5e8486*/
       {
-        if ( !v6[1] && !*v6 )
-          break;
-        v8 = *v6;
-        v9 = TESForm_LookupByFormID(*(_DWORD *)(*v6 + 4));
-        v10 = OblivionDynamicCast(
+        if ( !v6[1] && !*v6 ) /*0x5e83fa*/
+          break; /*0x5e83fd*/
+        v8 = *v6; /*0x5e8403*/
+        v9 = TESForm_LookupByFormID(*(_DWORD *)(*v6 + 4)); /*0x5e8417*/
+        v10 = OblivionDynamicCast( /*0x5e8420*/
                 v9,
                 0,
                 (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                 &Actor `RTTI Type Descriptor',
                 0);
-        *(_DWORD *)(v8 + 4) = v10;
-        if ( v10 )
+        *(_DWORD *)(v8 + 4) = v10; /*0x5e842a*/
+        if ( v10 ) /*0x5e842d*/
         {
-          v7 = v6;
-          v6 = (unsigned int *)v6[1];
+          v7 = (int *)v6; /*0x5e847f*/
+          v6 = (unsigned int *)v6[1]; /*0x5e8481*/
         }
-        else if ( v7 )
+        else if ( v7 ) /*0x5e8431*/
         {
-          BSSimpleList_Remove(v7, v8);
-          v6 = (unsigned int *)v7[1];
-          FormHeapFree(v8);
+          BSSimpleList_Remove(v7, v8); /*0x5e846c*/
+          v6 = (unsigned int *)v7[1]; /*0x5e8471*/
+          FormHeapFree(v8); /*0x5e8475*/
         }
         else
         {
-          v11 = (unsigned int *)v6[1];
-          if ( v11 )
+          v11 = (unsigned int *)v6[1]; /*0x5e8433*/
+          if ( v11 ) /*0x5e8438*/
           {
-            v6[1] = v11[1];
-            *v6 = *v11;
-            FormHeapFree((unsigned int)v11);
+            v6[1] = v11[1]; /*0x5e843d*/
+            *v6 = *v11; /*0x5e8443*/
+            FormHeapFree((unsigned int)v11); /*0x5e8445*/
           }
           else
           {
-            *v6 = 0;
+            *v6 = 0; /*0x5e8459*/
           }
-          FormHeapFree(v8);
+          FormHeapFree(v8); /*0x5e844e*/
         }
       }
-      while ( v6 );
+      while ( v6 ); /*0x5e8486*/
     }
   }
-  if ( *(_BYTE *)((*(int (__thiscall **)(Concurrency::details::SchedulerBase *))(*(_DWORD *)a1 + 0x170))(a1) + 4) == 0x24 )
+  if ( *(_BYTE *)((*(int (__thiscall **)(Concurrency::details::SchedulerBase *))(*(_DWORD *)this + 0x170))(this) + 4) == 0x24 ) /*0x5e849c*/
   {
-    v12 = (*(int (__thiscall **)(Concurrency::details::SchedulerBase *))(*(_DWORD *)a1 + 0x170))(a1);
-    if ( v12 )
+    v12 = (*(int (__thiscall **)(Concurrency::details::SchedulerBase *))(*(_DWORD *)this + 0x170))(this); /*0x5e84ac*/
+    if ( v12 ) /*0x5e84b2*/
     {
-      if ( *(_BYTE *)(v12 + 0x104) == 4 )
+      if ( *(_BYTE *)(v12 + 0x104) == 4 ) /*0x5e84bf*/
       {
-        v13 = *((_DWORD *)a1 + 0x35);
-        if ( v13 )
+        v13 = *((_DWORD *)this + 0x35); /*0x5e84c5*/
+        if ( v13 ) /*0x5e84cd*/
         {
-          v14 = TESForm_LookupByFormID(v13);
-          v15 = OblivionDynamicCast(
+          v14 = TESForm_LookupByFormID(v13); /*0x5e84e0*/
+          v15 = OblivionDynamicCast( /*0x5e84e9*/
                   v14,
                   0,
                   (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                   &Character `RTTI Type Descriptor',
                   0);
-          *((_DWORD *)a1 + 0x35) = v15;
-          if ( v15 )
+          *((_DWORD *)this + 0x35) = v15; /*0x5e84f3*/
+          if ( v15 ) /*0x5e84f9*/
           {
-            v16 = *((_DWORD *)a1 + 0x16);
-            if ( v16 )
-              v17 = (*(int (__thiscall **)(int))(*(_DWORD *)v16 + 8))(v16) == 0;
+            v16 = *((_DWORD *)this + 0x16); /*0x5e84fb*/
+            if ( v16 ) /*0x5e8500*/
+              v17 = (*(int (__thiscall **)(int))(*(_DWORD *)v16 + 8))(v16) == 0; /*0x5e850b*/
             else
-              v17 = 0;
-            v18 = *(_DWORD *)(*((_DWORD *)a1 + 0x35) + 0x58);
-            if ( v18 )
-              v19 = (*(int (__thiscall **)(int))(*(_DWORD *)v18 + 8))(v18) == 0;
+              v17 = 0; /*0x5e8510*/
+            v18 = *(_DWORD *)(*((_DWORD *)this + 0x35) + 0x58); /*0x5e8518*/
+            if ( v18 ) /*0x5e851d*/
+              v19 = (*(int (__thiscall **)(int))(*(_DWORD *)v18 + 8))(v18) == 0; /*0x5e8528*/
             else
-              v19 = 0;
-            if ( v17 == v19
-              || (ParentCell = TESObjectREFR_GetParentCell(*((TESObjectREFR **)a1 + 0x35)),
-                  ParentCell == TESObjectREFR_GetParentCell((TESObjectREFR *)a1)) )
+              v19 = 0; /*0x5e852d*/
+            if ( v17 == v19 /*0x5e8549*/
+              || (DwordAtOffset40 = Shared_GetDwordAtOffset40(*((void **)this + 0x35)),
+                  DwordAtOffset40 == Shared_GetDwordAtOffset40(this)) )
             {
-              (*(void (__thiscall **)(_DWORD, Concurrency::details::SchedulerBase *))(**((_DWORD **)a1 + 0x35) + 0x384))(
-                *((_DWORD *)a1 + 0x35),
-                a1);
+              (*(void (__thiscall **)(_DWORD, Concurrency::details::SchedulerBase *))(**((_DWORD **)this + 0x35) + 0x384))( /*0x5e8562*/
+                *((_DWORD *)this + 0x35),
+                this);
             }
             else
             {
-              *((_DWORD *)a1 + 0x35) = 0;
+              *((_DWORD *)this + 0x35) = 0; /*0x5e854b*/
             }
           }
         }
       }
     }
   }
-  if ( LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) >= 0x14u )
+  if ( g_TESSaveLoadGame->currentVersion >= 0x14u ) /*0x5e8572*/
   {
-    v21 = (char *)a1 + 0x9C;
-    v22 = 0;
-    if ( a1 != (Concurrency::details::SchedulerBase *)0xFFFFFF64 )
+    v21 = (char *)this + 0x9C; /*0x5e8578*/
+    v22 = 0; /*0x5e857e*/
+    if ( this != (Concurrency::details::SchedulerBase *)0xFFFFFF64 ) /*0x5e8582*/
     {
-      do
+      do /*0x5e8620*/
       {
-        if ( !*((_DWORD *)v21 + 1) && !*(_DWORD *)v21 )
-          break;
-        v23 = *(void ***)v21;
-        v24 = **(_DWORD **)v21;
-        if ( v24 )
+        if ( !*((_DWORD *)v21 + 1) && !*(_DWORD *)v21 ) /*0x5e858e*/
+          break; /*0x5e8591*/
+        v23 = *(void ***)v21; /*0x5e8597*/
+        v24 = **(_DWORD **)v21; /*0x5e8599*/
+        if ( v24 ) /*0x5e859e*/
         {
-          v25 = TESForm_LookupByFormID(v24);
-          *v23 = OblivionDynamicCast(
+          v25 = TESForm_LookupByFormID(v24); /*0x5e85af*/
+          *v23 = OblivionDynamicCast( /*0x5e85c0*/
                    v25,
                    0,
                    (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                    &SpellItem `RTTI Type Descriptor',
                    0);
         }
-        if ( *v23 )
+        if ( *v23 ) /*0x5e85c3*/
         {
-          v22 = v21;
-          v21 = *((char **)v21 + 1);
+          v22 = (int *)v21; /*0x5e8619*/
+          v21 = *((char **)v21 + 1); /*0x5e861b*/
         }
-        else if ( v22 )
+        else if ( v22 ) /*0x5e85cb*/
         {
-          BSSimpleList_Remove(v22, (int)v23);
-          v21 = (char *)v22[1];
-          FormHeapFree((unsigned int)v23);
+          BSSimpleList_Remove(v22, (int)v23); /*0x5e8606*/
+          v21 = (char *)v22[1]; /*0x5e860b*/
+          FormHeapFree((unsigned int)v23); /*0x5e860f*/
         }
         else
         {
-          v26 = *((_DWORD **)v21 + 1);
-          if ( v26 )
+          v26 = *((_DWORD **)v21 + 1); /*0x5e85cd*/
+          if ( v26 ) /*0x5e85d2*/
           {
-            *((_DWORD *)v21 + 1) = v26[1];
-            *(_DWORD *)v21 = *v26;
-            FormHeapFree((unsigned int)v26);
+            *((_DWORD *)v21 + 1) = v26[1]; /*0x5e85d7*/
+            *(_DWORD *)v21 = *v26; /*0x5e85dd*/
+            FormHeapFree((unsigned int)v26); /*0x5e85df*/
           }
           else
           {
-            *(_DWORD *)v21 = 0;
+            *(_DWORD *)v21 = 0; /*0x5e85f3*/
           }
-          FormHeapFree((unsigned int)v23);
+          FormHeapFree((unsigned int)v23); /*0x5e85e8*/
         }
       }
-      while ( v21 );
+      while ( v21 ); /*0x5e8620*/
     }
   }
-  if ( LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) >= 0x32u )
+  if ( g_TESSaveLoadGame->currentVersion >= 0x32u ) /*0x5e8632*/
   {
-    v27 = *((_DWORD *)a1 + 0x1F);
-    if ( v27 )
+    v27 = *((_DWORD *)this + 0x1F); /*0x5e8634*/
+    if ( v27 ) /*0x5e8639*/
     {
-      v28 = TESForm_LookupByFormID(v27);
-      *((_DWORD *)a1 + 0x1F) = OblivionDynamicCast(
-                                 v28,
-                                 0,
-                                 (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                                 &Actor `RTTI Type Descriptor',
-                                 0);
+      v28 = TESForm_LookupByFormID(v27); /*0x5e8648*/
+      *((_DWORD *)this + 0x1F) = OblivionDynamicCast( /*0x5e8659*/
+                                   v28,
+                                   0,
+                                   (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                                   &Actor `RTTI Type Descriptor',
+                                   0);
     }
     else
     {
-      *((_DWORD *)a1 + 0x1F) = 0;
+      *((_DWORD *)this + 0x1F) = 0; /*0x5e865e*/
     }
   }
-  if ( LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) >= 0x45u )
+  if ( g_TESSaveLoadGame->currentVersion >= 0x45u ) /*0x5e866a*/
   {
-    v29 = *((_DWORD *)a1 + 0x33);
-    if ( v29 )
+    v29 = *((_DWORD *)this + 0x33); /*0x5e866c*/
+    if ( v29 ) /*0x5e8674*/
     {
-      v30 = TESForm_LookupByFormID(v29);
-      *((_DWORD *)a1 + 0x33) = OblivionDynamicCast(
-                                 v30,
-                                 0,
-                                 (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                                 (struct TypeDescriptor *)&TESObjectREFR `RTTI Type Descriptor',
-                                 0);
+      v30 = TESForm_LookupByFormID(v29); /*0x5e8683*/
+      *((_DWORD *)this + 0x33) = OblivionDynamicCast( /*0x5e8694*/
+                                   v30,
+                                   0,
+                                   (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                                   (struct TypeDescriptor *)&TESObjectREFR `RTTI Type Descriptor',
+                                   0);
     }
     else
     {
-      *((_DWORD *)a1 + 0x33) = 0;
+      *((_DWORD *)this + 0x33) = 0; /*0x5e869c*/
     }
   }
-  if ( LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) >= 0x61u )
+  if ( g_TESSaveLoadGame->currentVersion >= 0x61u ) /*0x5e86ac*/
   {
-    v31 = *((_DWORD *)a1 + 0x39);
-    if ( v31 )
+    v31 = *((_DWORD *)this + 0x39); /*0x5e86ae*/
+    if ( v31 ) /*0x5e86b6*/
     {
-      v32 = TESForm_LookupByFormID(v31);
-      *((_DWORD *)a1 + 0x39) = OblivionDynamicCast(
-                                 v32,
-                                 0,
-                                 (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                                 &Actor `RTTI Type Descriptor',
-                                 0);
+      v32 = TESForm_LookupByFormID(v31); /*0x5e86c5*/
+      *((_DWORD *)this + 0x39) = OblivionDynamicCast( /*0x5e86d6*/
+                                   v32,
+                                   0,
+                                   (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                                   &Actor `RTTI Type Descriptor',
+                                   0);
     }
     else
     {
-      *((_DWORD *)a1 + 0x39) = 0;
+      *((_DWORD *)this + 0x39) = 0; /*0x5e86de*/
     }
   }
-  v33 = *((_DWORD *)a1 + 0x16);
-  if ( v33 )
+  v33 = *((_DWORD *)this + 0x16); /*0x5e86e4*/
+  if ( v33 ) /*0x5e86e9*/
   {
-    if ( (*(int (__thiscall **)(int))(*(_DWORD *)v33 + 8))(v33) )
+    if ( (*(int (__thiscall **)(int))(*(_DWORD *)v33 + 8))(v33) ) /*0x5e86f4*/
     {
-      if ( TESObjectREFR_GetParentCell((TESObjectREFR *)a1) )
+      if ( Shared_GetDwordAtOffset40(this) ) /*0x5e8700*/
       {
-        if ( TESObjectREFR_GetParentCell((TESObjectREFR *)a1)->members.cellProcessLevel == 6 )
-          (*(void (__thiscall **)(Concurrency::details::SchedulerBase *))(*(_DWORD *)a1 + 0x1A4))(a1);
+        if ( *(_BYTE *)(Shared_GetDwordAtOffset40(this) + 0x26) == 6 ) /*0x5e8714*/
+          (*(void (__thiscall **)(Concurrency::details::SchedulerBase *))(*(_DWORD *)this + 0x1A4))(this); /*0x5e8724*/
       }
-      else if ( TESObjectREFR_IsPersistent_((TESObjectREFR *)a1) )
+      else if ( TESObjectREFR_IsPersistent((TESObjectREFR *)this) ) /*0x5e872b*/
       {
-        WorldSpace = TESObjectREFR_GetWorldSpace((TESObjectREFR *)a1);
-        if ( WorldSpace )
+        WorldSpace = TESObjectREFR_GetWorldSpace((TESObjectREFR *)this); /*0x5e873f*/
+        if ( WorldSpace ) /*0x5e8743*/
         {
-          v35 = (float *)(*(int (__thiscall **)(Concurrency::details::SchedulerBase *))(*(_DWORD *)a1 + 0x174))(a1);
-          v36 = sub_447740((TESWorldSpace **)TESDataHandler, (int)*v35 >> 0xC, (int)v35[1] >> 0xC, WorldSpace, 0);
-          v37 = (TESObjectCELL *)v36;
-          if ( v36 )
+          v35 = (float *)(*(int (__thiscall **)(Concurrency::details::SchedulerBase *))(*(_DWORD *)this + 0x174))(this); /*0x5e8753*/
+          v36 = sub_447740((TESWorldSpace **)g_TESDataHandler, (int)*v35 >> 0xC, (int)v35[1] >> 0xC, WorldSpace, 0); /*0x5e8791*/
+          v37 = (TESObjectCELL *)v36; /*0x5e8796*/
+          if ( v36 ) /*0x5e879a*/
           {
-            if ( BYTE2(v36[1].member.refID) == 6 )
+            if ( BYTE2(v36[1].member.refID) == 6 ) /*0x5e87a0*/
             {
-              v38 = ((double (__thiscall *)(Concurrency::details::SchedulerBase *))*(_DWORD *)(*(_DWORD *)a1 + 0x1A4))(a1);
-              flags = SaveLoad_CurrentSavegame->flags;
-              SaveLoad_CurrentSavegame->flags = flags & 0xFFFFFFFD;
-              v45 = (flags & 2) != 0;
-              sub_4D35D0(v37, a2, a3, v38, (TESObjectREFR *)a1);
-              sub_452A70(SaveLoad_CurrentSavegame, v45);
+              (*(void (__thiscall **)(Concurrency::details::SchedulerBase *))(*(_DWORD *)this + 0x1A4))(this); /*0x5e87ac*/
+              flags = g_TESSaveLoadGame->flags; /*0x5e87b3*/
+              g_TESSaveLoadGame->flags = flags & 0xFFFFFFFD; /*0x5e87b6*/
+              v44 = (flags & 2) != 0; /*0x5e87bf*/
+              TESObjectCELL_AddReference(v37, (TESObjectREFR *)this); /*0x5e87c6*/
+              sub_452A70(g_TESSaveLoadGame, v44); /*0x5e87d6*/
             }
           }
         }
       }
     }
   }
-  if ( !*((_DWORD *)a1 + 0x16) )
+  if ( !*((_DWORD *)this + 0x16) ) /*0x5e87db*/
   {
-    v40 = *((_DWORD *)a1 + 2);
-    if ( (v40 & 0x20) == 0 && (v40 & 0x800) == 0 )
+    v39 = *((_DWORD *)this + 2); /*0x5e87e0*/
+    if ( (v39 & 0x20) == 0 && (v39 & 0x800) == 0 ) /*0x5e87f2*/
     {
-      v41 = (LowProcess *)FormHeapAlloc(0x90u);
-      if ( v41 )
-        v42 = LowProcess::LowProcess(v41);
+      v40 = (LowProcess *)FormHeapAlloc(0x90u); /*0x5e87f9*/
+      if ( v40 ) /*0x5e880b*/
+        v41 = LowProcess::LowProcess(v40); /*0x5e880f*/
       else
-        v42 = 0;
-      *((_DWORD *)a1 + 0x16) = v42;
-      ProcessLevel = MobileObject_GetProcessLevel((MobileObject *)a1);
-      if ( ProcessLevel )
+        v41 = 0; /*0x5e8816*/
+      *((_DWORD *)this + 0x16) = v41; /*0x5e8822*/
+      ProcessLevel = MobileObject_GetProcessLevel((MobileObject *)this); /*0x5e8825*/
+      if ( ProcessLevel ) /*0x5e882c*/
       {
-        v44 = ProcessLevel - 1;
-        if ( v44 )
+        v43 = ProcessLevel - 1; /*0x5e882e*/
+        if ( v43 ) /*0x5e8831*/
         {
-          if ( v44 == 1 )
-            (*(void (__thiscall **)(Concurrency::details::SchedulerBase *))(*(_DWORD *)a1 + 0x1AC))(a1);
+          if ( v43 == 1 ) /*0x5e8836*/
+            (*(void (__thiscall **)(Concurrency::details::SchedulerBase *))(*(_DWORD *)this + 0x1AC))(this); /*0x5e8840*/
         }
         else
         {
-          (*(void (__thiscall **)(Concurrency::details::SchedulerBase *))(*(_DWORD *)a1 + 0x1B0))(a1);
+          (*(void (__thiscall **)(Concurrency::details::SchedulerBase *))(*(_DWORD *)this + 0x1B0))(this); /*0x5e884a*/
         }
       }
       else
       {
-        (*(void (__thiscall **)(Concurrency::details::SchedulerBase *))(*(_DWORD *)a1 + 0x1A4))(a1);
+        (*(void (__thiscall **)(Concurrency::details::SchedulerBase *))(*(_DWORD *)this + 0x1A4))(this); /*0x5e8856*/
       }
     }
   }

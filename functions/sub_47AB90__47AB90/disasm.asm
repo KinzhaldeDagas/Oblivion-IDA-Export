@@ -4,7 +4,7 @@
 0x47AB97: push    edi
 0x47AB98: mov     edi, ecx
 0x47AB9A: jz      short loc_47AC15
-0x47AB9C: mov     ecx, offset dword_B33C80
+0x47AB9C: mov     ecx, offset unk_B33C80
 0x47ABA1: lea     eax, [edi+4Ch]
 0x47ABA4: mov     edx, [eax]
 0x47ABA6: mov     [ecx], edx
@@ -21,7 +21,7 @@
 0x47ABC4: mov     [eax+0Ch], edx
 0x47ABC7: add     ecx, 10h
 0x47ABCA: add     eax, 10h
-0x47ABCD: cmp     ecx, offset g_bUpdatePlayerModel
+0x47ABCD: cmp     ecx, 0B33D80h
 0x47ABD3: jl      short loc_47ABA4
 0x47ABD5: push    ebp
 0x47ABD6: mov     ebp, [esp+0Ch+arg_4]
@@ -41,7 +41,7 @@
 0x47ABFF: push    eax
 0x47AC00: push    ebx
 0x47AC01: mov     ecx, edi
-0x47AC03: call    TESBipedModelForm_GetBodyPartModel????
+0x47AC03: call    TESBipedModelForm_GetBodyPartModel????; ODismemberment: biped slot attach/replace path can rebuild loaded 3D; plugin state must be reapplied after equipment/body changes.
 0x47AC08: add     esi, 4
 0x47AC0B: cmp     esi, offset off_B06588; "Head"
 0x47AC11: jl      short loc_47ABE0

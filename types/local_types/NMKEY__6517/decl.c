@@ -1,1 +1,1 @@
-NMKEY
+typedef tagNMKEY NMKEY;

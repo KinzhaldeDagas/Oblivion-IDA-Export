@@ -1,0 +1,42 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "OblivionChangeData",
+  "definition": "struct OblivionChangeData\n{\nunsigned int changeFlags; ///< Verified: ChangeData.flags; bit 0x2 selects created-reference buffer restoration and sign bit selects moved-reference restoration at 463DA3..463E55. Other bits remain separately used by serializers.\nunsigned __int8 *savedFormBuffer; ///< Verified: owned serialized-form buffer; assigned 452D03/463D45, consumed by LoadForm, freed by 45A913.\n}\n",
+  "kind": "struct",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified: ChangeData.flags; bit 0x2 selects created-reference buffer restoration and sign bit selects moved-reference restoration at 463DA3..463E55. Other bits remain separately used by serializers.",
+      "name": "changeFlags",
+      "offset_bits": 0,
+      "offset_bytes": 0,
+      "size_bits": 32,
+      "type": "unsigned int"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified: owned serialized-form buffer; assigned 452D03/463D45, consumed by LoadForm, freed by 45A913.",
+      "name": "savedFormBuffer",
+      "offset_bits": 32,
+      "offset_bytes": 4,
+      "size_bits": 32,
+      "type": "unsigned __int8 *"
+    }
+  ],
+  "name": "OblivionChangeData",
+  "ordinal": 9984,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 8
+}

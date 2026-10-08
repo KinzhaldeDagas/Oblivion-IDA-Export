@@ -1,18 +1,31 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 6,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7C7E50",
+      "0x7C7EAA"
+    ]
+  ],
+  "chunks_sha256": "f3501bb27ddbdf1c2ee15fb067511c4a196cef268f948ad63983fb62f0925d42",
+  "comment_regular": "Remove full-list lights, free list nodes, reset partition anchors, and reset the active list.",
+  "comment_repeatable": "Remove full-list lights, free list nodes, reset partition anchors, and reset the active list.\n\nMEF PERF 2026-10-02: PERF-9 negative result: ordinary dense unique teardown iterates from the head and removes the current head. A nested call to RemoveFirstByValue alone does not prove quadratic teardown. Invalidate any future source index before teardown/free callbacks.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7C7E50",
+  "display_name": "ShadowSceneNode_TeardownLightLists",
   "end_ea": "0x7C7EAA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7C7E50",
+  "name": "ShadowSceneNode_TeardownLightLists",
   "segment": ".text",
   "sha256": "f3501bb27ddbdf1c2ee15fb067511c4a196cef268f948ad63983fb62f0925d42",
   "size": 90,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7C7E50",
+  "total_chunk_size": 90,
   "type": "void __thiscall(_DWORD *this)",
   "xrefs_from_count": 33,
   "xrefs_to_count": 6

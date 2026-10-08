@@ -1,19 +1,36 @@
 {
-  "callees_count": 56,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_71B8D0",
+  "chunks": [
+    [
+      "0x71B8D0",
+      "0x71BE28"
+    ],
+    [
+      "0x9C9F80",
+      "0x9C9FA6"
+    ]
+  ],
+  "chunks_sha256": "745a53487ebb2a2c9c925b9925ea735606e18fb41474b179542d53956f3a0131",
+  "comment_regular": "Stock fallback mip synthesis averages RGBA independently with no alpha-coverage preservation. For cutout atlases this can drive terminal mip alpha below ref84 even when surviving high-resolution texels have correct nonblack RGB.",
+  "comment_repeatable": "Stock fallback mip synthesis averages RGBA independently with no alpha-coverage preservation. For cutout atlases this can drive terminal mip alpha below ref84 even when surviving high-resolution texels have correct nonblack RGB.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "OB_NiDevImageConverter_GenerateMipChain_Box_010201A0",
   "end_ea": "0x71BE28",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_71B8D0",
+  "name": "OB_NiDevImageConverter_GenerateMipChain_Box_010201A0",
   "segment": ".text",
   "sha256": "4c511e10ce7db174eb235d0608389edb6dfd11d4ca8bd4c7f667460986e1c58a",
   "size": 1368,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x71B8D0",
-  "type": "char *__thiscall(void *this, int, char *)",
-  "xrefs_from_count": 461,
+  "total_chunk_size": 1406,
+  "type": "void *__thiscall(void *this, void *srcPixelData, void *reusePixelData)",
+  "xrefs_from_count": 475,
   "xrefs_to_count": 3
 }

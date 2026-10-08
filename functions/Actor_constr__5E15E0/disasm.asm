@@ -21,10 +21,10 @@
 0x5E1619: mov     [esp+28h+var_4], ebx
 0x5E161D: call    MagicCaster_constr
 0x5E1622: lea     ebp, [esi+68h]
-0x5E1625: mov     ecx, ebp
+0x5E1625: mov     ecx, ebp; this
 0x5E1627: mov     byte ptr [esp+28h+var_4], 1
 0x5E162C: call    MagicTarget_constr
-0x5E1631: lea     ecx, [esi+88h]
+0x5E1631: lea     ecx, [esi+88h]; self
 0x5E1637: mov     byte ptr [esp+28h+var_4], 2
 0x5E163C: mov     dword ptr [esi], offset ??_7Actor@@6BActor@@@; const Actor::`vftable'{for `Actor'}
 0x5E1642: mov     dword ptr [esi+18h], offset ??_7Actor@@6BTESChildCell@@@; const Actor::`vftable'{for `TESChildCell'}
@@ -47,18 +47,18 @@
 0x5E169E: mov     byte ptr [esp+28h+var_4], 4
 0x5E16A3: jz      short loc_5E16AE
 0x5E16A5: mov     ecx, eax; this
-0x5E16A7: call    ??0LowProcess@@QAE@XZ; LowProcess::LowProcess(void)
+0x5E16A7: call    ??0LowProcess@@QAE@XZ; LowProcess constructor: initializes editorPackage/editorPackProcedure and follow/pathing state, but no currentPackage field used by runtime package assignment.
 0x5E16AC: jmp     short loc_5E16B0
 0x5E16AE: xor     eax, eax
-0x5E16B0: push    ebx
-0x5E16B1: push    ebx
-0x5E16B2: push    ebx
-0x5E16B3: push    3
-0x5E16B5: push    esi
-0x5E16B6: mov     ecx, offset ActorProcessManager_ptr
+0x5E16B0: push    ebx; relativeTo
+0x5E16B1: push    ebx; insertRelative
+0x5E16B2: push    ebx; append
+0x5E16B3: push    3; processLevel
+0x5E16B5: push    esi; object
+0x5E16B6: mov     ecx, (offset qword_B3BB2C+1D4h); this
 0x5E16BB: mov     byte ptr [esp+3Ch+var_4], 3
 0x5E16C0: mov     [esi+58h], eax
-0x5E16C3: call    sub_673A90
+0x5E16C3: call    ActorProcessManager_AddMobileObject; Generic ActorProcessManager insertion. Selects process-level collection 0..3, silently returns if object->GetProcessLevel() does not match, then inserts with ordering controls. Returns void; there is no insertion-success result. Used for actors, load/resurrection paths, and projectiles.
 0x5E16C8: fld     dword ptr ds:0A30634h
 0x5E16CE: fstp    dword ptr [esi+0BCh]
 0x5E16D4: mov     [esi+0B0h], ebx
@@ -101,3 +101,26 @@
 0x5E1790: pop     ebx
 0x5E1791: add     esp, 14h
 0x5E1794: retn
+0x9C2560: mov     ecx, [ebp-14h]
+0x9C2563: jmp     MobileObject_destr
+0x9C2568: mov     ecx, [ebp-14h]
+0x9C256B: add     ecx, 5Ch ; '\'
+0x9C256E: jmp     MagicCaster_destr
+0x9C2573: mov     ecx, [ebp-14h]
+0x9C2576: add     ecx, 68h ; 'h'; this
+0x9C2579: jmp     MagicTarget_destr
+0x9C257E: mov     ecx, [ebp-14h]
+0x9C2581: add     ecx, 88h ; 'ˆ'; self
+0x9C2587: jmp     AVCollection_destr
+0x9C258C: mov     eax, [ebp-10h]
+0x9C258F: push    eax
+0x9C2590: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C2595: pop     ecx
+0x9C2596: retn
+0x9C2597: mov     edx, [esp+arg_4]
+0x9C259B: lea     eax, [edx-18h]
+0x9C259E: mov     ecx, [edx-1Ch]
+0x9C25A1: xor     ecx, eax
+0x9C25A3: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C25A8: mov     eax, offset stru_AEB42C
+0x9C25AD: jmp     ___CxxFrameHandler3

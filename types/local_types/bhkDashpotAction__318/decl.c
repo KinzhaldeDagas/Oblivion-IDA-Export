@@ -1,1 +1,1 @@
-bhkDashpotAction
+struct bhkDashpotAction;

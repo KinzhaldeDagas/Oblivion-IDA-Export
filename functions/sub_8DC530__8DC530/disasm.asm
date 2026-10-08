@@ -29,7 +29,6 @@
 0x8DC580: mov     eax, edx
 0x8DC582: jge     short loc_8DC5AA
 0x8DC584: jmp     short loc_8DC590
-0x8DC586: align 10h
 0x8DC590: mov     ecx, [esi+0DCh]
 0x8DC596: mov     edi, [ecx+eax*4+4]
 0x8DC59A: lea     ecx, [ecx+eax*4]

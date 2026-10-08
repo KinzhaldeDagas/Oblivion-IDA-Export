@@ -17,32 +17,32 @@ bool __cdecl sub_50C620(
   int v14; // eax
   UInt16 v15[2]; // [esp+0h] [ebp-4h] BYREF
 
-  *(_DWORD *)v15 = 0;
-  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v15);
-  if ( result )
+  *(_DWORD *)v15 = 0; /*0x50c64a*/
+  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v15); /*0x50c652*/
+  if ( result ) /*0x50c65c*/
   {
-    if ( a4 )
+    if ( a4 ) /*0x50c663*/
     {
-      v9 = (int *)OblivionDynamicCast(
+      v9 = (int *)OblivionDynamicCast( /*0x50c683*/
                     a4,
                     0,
                     (struct _s_RTTICompleteObjectLocator *)&TESObjectREFR `RTTI Type Descriptor',
                     &Actor `RTTI Type Descriptor',
                     0);
-      if ( *(_DWORD *)v15 )
+      if ( *(_DWORD *)v15 ) /*0x50c685*/
       {
-        if ( sub_5E0F30(*(_DWORD ***)v15) )
+        if ( Actor::IsSleeping(*(Actor **)v15) ) /*0x50c687*/
         {
-          v10 = *(_DWORD *)(*(_DWORD *)v15 + 0x58);
-          v11 = *v9;
-          v12 = (*(int (__thiscall **)(int))(*(_DWORD *)v10 + 0x37C))(v10);
-          v13 = (*(int (__thiscall **)(int, int))(*(_DWORD *)v10 + 0x380))(v10, v12);
-          v14 = (*(int (__thiscall **)(int, int))(*(_DWORD *)v10 + 0x378))(v10, v13);
-          (*(void (__thiscall **)(int *, ParamInfo *, int))(v11 + 0x300))(v9, a1, v14);
+          v10 = *(_DWORD *)(*(_DWORD *)v15 + 0x58); /*0x50c694*/
+          v11 = *v9; /*0x50c6a0*/
+          v12 = (*(int (__thiscall **)(int))(*(_DWORD *)v10 + 0x37C))(v10); /*0x50c6a4*/
+          v13 = (*(int (__thiscall **)(int, int))(*(_DWORD *)v10 + 0x380))(v10, v12); /*0x50c6b1*/
+          v14 = (*(int (__thiscall **)(int, int))(*(_DWORD *)v10 + 0x378))(v10, v13); /*0x50c6be*/
+          (*(void (__thiscall **)(int *, ParamInfo *, int))(v11 + 0x300))(v9, a1, v14); /*0x50c6ce*/
         }
       }
     }
-    return 1;
+    return 1; /*0x50c6d2*/
   }
-  return result;
+  return result; /*0x50c660*/
 }

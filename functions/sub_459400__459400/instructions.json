@@ -42,12 +42,6 @@
     "size": 2
   },
   {
-    "ea": "0x45940D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x459410",
     "line": "mov     ecx, [esi]",
     "mnemonic": "mov",
@@ -115,7 +109,7 @@
   },
   {
     "ea": "0x459428",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -133,7 +127,7 @@
   },
   {
     "ea": "0x459431",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -166,5 +160,59 @@
     "line": "jmp     loc_5AE430",
     "mnemonic": "jmp",
     "size": 5
+  },
+  {
+    "ea": "0x5AE430",
+    "line": "push    40Eh",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5AE435",
+    "line": "call    Menu_GetOpenMenuTile",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5AE43A",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5AE43D",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5AE43F",
+    "line": "call    Tile_GetParentMenu",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5AE444",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5AE446",
+    "line": "jz      short locret_5AE44F",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5AE448",
+    "line": "mov     dword ptr [eax+4Ch], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x5AE44F",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
   }
 ]

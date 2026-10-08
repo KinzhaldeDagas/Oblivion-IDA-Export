@@ -1,1 +1,1 @@
-TESKey
+struct TESKey;

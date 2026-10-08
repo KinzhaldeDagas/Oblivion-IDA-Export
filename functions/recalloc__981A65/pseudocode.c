@@ -1,16 +1,18 @@
 void *__cdecl _recalloc(void *Memory, size_t Count, size_t Size)
 {
-  size_t v4; // [esp-4h] [ebp-8h]
+  int v3; // ebx
+  int v4; // edi
+  size_t v6; // [esp-4h] [ebp-8h]
 
-  if ( (_DWORD)Count && 0xFFFFFFE0 / (unsigned int)Count < HIDWORD(Count) )
+  if ( (_DWORD)Count && 0xFFFFFFE0 / (unsigned int)Count < HIDWORD(Count) ) /*0x981a7b*/
   {
-    *_errno() = 0xC;
-    _invalid_parameter(0, 0, 0, 0, 0);
-    return 0;
+    *_errno() = 0xC; /*0x981a87*/
+    _invalid_parameter(v3, v4, 0); /*0x981a8d*/
+    return 0; /*0x981a95*/
   }
   else
   {
-    LODWORD(v4) = HIDWORD(Count) * Count;
-    return realloc(Memory, v4);
+    LODWORD(v6) = HIDWORD(Count) * Count; /*0x981a9e*/
+    return realloc(Memory, v6); /*0x981aa3*/
   }
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x66A3D0",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+skill]; Apply one purchased training level. The shared Player_SkillLevelIncrease call skips progress consumption but still performs base-skill, requirement, mastery, per-skill, specialization, attribute-bonus, and seven-major side effects; then increment session and training statistics.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -13,19 +13,19 @@
   },
   {
     "ea": "0x66A3D5",
-    "line": "push    1",
+    "line": "push    1; showFeedback",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x66A3D7",
-    "line": "push    1",
+    "line": "push    1; skipProgressConsumption",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x66A3D9",
-    "line": "push    eax",
+    "line": "push    eax; skill",
     "mnemonic": "push",
     "size": 1
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x66A3DC",
-    "line": "call    Player_SkillLevelIncrease",
+    "line": "call    Player_SkillLevelIncrease; Training flag bypasses consumption of skillExp, but major/non-major classification and all level-increase counters still run inside Player_SkillLevelIncrease.",
     "mnemonic": "call",
     "size": 5
   },

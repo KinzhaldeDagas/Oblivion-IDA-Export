@@ -1,9 +1,9 @@
-0x446C50: mov     eax, [esp+arg_0]
+0x446C50: mov     eax, [esp+index]; MEF v56 native UInt32 setter boundary suspends/invalidates indices around original routine, preserves two stack args/RET8 and result. Other template array instances pass through without ID-cache invalidation. This covers same-size edits through the supported interface; no pointer-only cache freshness assumption.
 0x446C54: cmp     eax, [ecx+0Ch]
 0x446C57: jb      short loc_446C77
 0x446C59: lea     edx, [eax+1]
 0x446C5C: mov     [ecx+0Ch], edx
-0x446C5F: mov     edx, [esp+arg_4]
+0x446C5F: mov     edx, [esp+value]
 0x446C63: cmp     dword ptr [edx], 0
 0x446C66: jz      short loc_446CA5
 0x446C68: add     dword ptr [ecx+10h], 1
@@ -11,7 +11,7 @@
 0x446C6F: mov     edx, [edx]
 0x446C71: mov     [ecx+eax*4], edx
 0x446C74: retn    8
-0x446C77: mov     edx, [esp+arg_4]
+0x446C77: mov     edx, [esp+value]
 0x446C7B: cmp     dword ptr [edx], 0
 0x446C7E: push    esi
 0x446C7F: mov     esi, [ecx+4]

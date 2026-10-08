@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x9F8FB0",
-    "line": "fld     ds:fConstant_2",
+    "line": "fld     ds:fConstant_2; Verified GameSettingFloat dynamic initializer: registers fLeafRockTimeScale with default 2.0 and registers its destructor via atexit. BSTreeManager_UpdateWindMatrices multiplies the frame delta by this setting before leaf wind scalar dispatch.",
     "mnemonic": "fld",
     "size": 6
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x9F8FBF",
-    "line": "mov     ecx, offset flt_B39E28",
+    "line": "mov     ecx, offset fLeafRockTimeScale",
     "mnemonic": "mov",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x9F8FC9",
-    "line": "push    offset sub_A235A0; void (__cdecl *)()",
+    "line": "push    offset GameSetting_fLeafRockTimeScale_atexit; void (__cdecl *)()",
     "mnemonic": "push",
     "size": 5
   },

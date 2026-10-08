@@ -1,19 +1,32 @@
 {
-  "callees_count": 175,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 98,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 48,
+  "chunks": [
+    [
+      "0x40D800",
+      "0x40DF74"
+    ]
+  ],
+  "chunks_sha256": "8e65b3a0afb7781c4f619864777b69e37e38f7ab83e18de316d3063c7796b64b",
+  "comment_regular": "Main frame/update loop; calls 0x55FA50 with world camera and menu-mode state once per frame.",
+  "comment_repeatable": "Main frame/update loop; calls 0x55FA50 with world camera and menu-mode state once per frame.\n2026-10-08 V265 EXTERNAL actor publication: real epoch marker CALL40F270->40D800 may defer actor epoch start while counted metadata work is active. Retry only in an outermost owner pre-update callback BEFORE Original, all other mutation domains quiet; new registry generation, no old-pose revival.32bit lockfree readiness/generation CAS prevents reopening after a concurrent hard abort. Normal counted clone/attachment activity revokes oldposes but allowsfresh ownerproof afterward; hard/unbounded failures stillblock. Exact retained-dependency filtering preserves unrelated actor poses during bounded attachments. Release/runtime16640/registry49983checks pass; liveflicker acceptance pending. Evidence stage-v265-pose-continuity.\n2026-10-08 V265 LIVE continuity evidence PID11700, ending13:55:43-04: user reports actor shadows working correctly, FPS unchanged vsV263, normalexit. Log:0actor epoch-gate closures/0retention declines; sampled hard barriers empty despite4095clones/4236associations/1283links.31033unrelated bounded writes filtered; pose gaps recovered within retained-map ages1-2. Deferred-epoch retry counters0(not exercised live). One frame1015zero-caster interval had7valid poses and79OutsideNearRegion exclusions, not publication failure. Different autosave/heavier scene: no matched FPS comparison. Evidence stage-v265-pose-continuity/runtime-20261008-135543.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 111,
   "display_name": "sub_40D800",
   "end_ea": "0x40DF74",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_40D800",
   "segment": ".text",
   "sha256": "8e65b3a0afb7781c4f619864777b69e37e38f7ab83e18de316d3063c7796b64b",
   "size": 1908,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x40D800",
+  "total_chunk_size": 1908,
   "type": "void __usercall(InputGlobal **this@<ecx>, double st0_0@<st7>, double@<st6>, double@<st5>, double@<st4>, double@<st3>, double@<st2>, double@<st1>)",
-  "xrefs_from_count": 800,
+  "xrefs_from_count": 802,
   "xrefs_to_count": 1
 }

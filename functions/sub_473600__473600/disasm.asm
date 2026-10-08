@@ -1,4 +1,4 @@
-0x473600: sub     esp, 20h
+0x473600: sub     esp, 20h; Serializes ActorAnimData active/queued keys, action state, sequence timing blocks, movement/root state, and current/queued idle records.
 0x473603: push    ebx
 0x473604: push    ebp
 0x473605: push    esi
@@ -6,53 +6,53 @@
 0x473608: cmp     byte ptr ds:0B05BACh, 0
 0x47360F: mov     ebp, ecx
 0x473611: mov     ecx, ds:0B33B00h
-0x473617: mov     [esp+2Ch+var_8], esi
+0x473617: mov     [esp+2Ch+source], esi
 0x47361B: mov     eax, [ecx+14h]
 0x47361E: push    edi
 0x47361F: mov     [esp+30h+var_C], esi
 0x473623: mov     [esp+30h+var_14], eax
 0x473627: jz      short loc_47362D
 0x473629: mov     [esp+30h+var_14], eax
-0x47362D: call    sub_45A170
+0x47362D: call    TESSaveLoadGame_UseSaveGameBlocks
 0x473632: test    al, al
 0x473634: jz      short loc_473669
-0x473636: mov     ecx, ds:0B33B00h
-0x47363C: push    4; Size
+0x473636: mov     ecx, ds:0B33B00h; self
+0x47363C: push    4; byteCount
 0x47363E: lea     eax, [esp+34h+Src]
-0x473642: push    eax; Src
+0x473642: push    eax; source
 0x473643: mov     [esp+38h+Src], 4B4F4C42h
 0x47364B: call    SaveLoad_SaveData
-0x473650: mov     ecx, ds:0B33B00h
+0x473650: mov     ecx, ds:0B33B00h; self
 0x473656: mov     edx, [ecx+14h]
-0x473659: push    2; Size
-0x47365B: lea     eax, [esp+34h+var_8]
-0x47365F: push    eax; Src
+0x473659: push    2; byteCount
+0x47365B: lea     eax, [esp+34h+source]
+0x47365F: push    eax; source
 0x473660: mov     [esp+38h+var_C], edx
 0x473664: call    SaveLoad_SaveData
-0x473669: push    4; Size
-0x47366B: lea     ecx, [ebp+0BCh]
-0x473671: push    ecx; Src
-0x473672: mov     ecx, ds:0B33B00h
+0x473669: push    4; byteCount
+0x47366B: lea     ecx, [ebp+0BCh]; ActorAnimData save writes +0xBC playback/root-motion multiplier as persisted 4-byte value.
+0x473671: push    ecx; source
+0x473672: mov     ecx, ds:0B33B00h; self
 0x473678: call    SaveLoad_SaveData
-0x47367D: mov     ecx, ds:0B33B00h
-0x473683: push    4; Size
-0x473685: lea     edx, [ebp+0C0h]
-0x47368B: push    edx; Src
+0x47367D: mov     ecx, ds:0B33B00h; self
+0x473683: push    4; byteCount
+0x473685: lea     edx, [ebp+0C0h]; ActorAnimData save writes +0xC0 secondary playback/root-motion multiplier as persisted 4-byte value.
+0x47368B: push    edx; source
 0x47368C: call    SaveLoad_SaveData
-0x473691: mov     ecx, ds:0B33B00h
-0x473697: push    0Ch; Size
+0x473691: mov     ecx, ds:0B33B00h; self
+0x473697: push    0Ch; byteCount
 0x473699: lea     eax, [ebp+0Ch]
-0x47369C: push    eax; Src
+0x47369C: push    eax; source
 0x47369D: call    SaveLoad_SaveData
-0x4736A2: push    4; Size
+0x4736A2: push    4; byteCount
 0x4736A4: lea     ecx, [ebp+38h]
-0x4736A7: push    ecx; Src
-0x4736A8: mov     ecx, ds:0B33B00h
+0x4736A7: push    ecx; source
+0x4736A8: mov     ecx, ds:0B33B00h; self
 0x4736AE: call    SaveLoad_SaveData
-0x4736B3: mov     ecx, ds:0B33B00h
-0x4736B9: push    1; Size
+0x4736B3: mov     ecx, ds:0B33B00h; self
+0x4736B9: push    1; byteCount
 0x4736BB: lea     edx, [ebp+90h]
-0x4736C1: push    edx; Src
+0x4736C1: push    edx; source
 0x4736C2: call    SaveLoad_SaveData
 0x4736C7: xor     bl, bl
 0x4736C9: lea     esi, [ebp+3Ch]
@@ -73,10 +73,10 @@
 0x4736F8: add     edi, 2
 0x4736FB: sub     edx, 1
 0x4736FE: jnz     short loc_4736E0
-0x473700: push    1; Size
+0x473700: push    1; byteCount
 0x473702: lea     ecx, [esp+34h+var_1D]
-0x473706: push    ecx; Src
-0x473707: mov     ecx, ds:0B33B00h
+0x473706: push    ecx; source
+0x473707: mov     ecx, ds:0B33B00h; self
 0x47370D: mov     [esp+38h+var_1D], bl
 0x473711: call    SaveLoad_SaveData
 0x473716: lea     edi, [ebp+0A0h]
@@ -88,29 +88,29 @@
 0x473737: jz      loc_473829
 0x47373D: cmp     ax, 0FFFFh
 0x473741: jz      loc_473829
-0x473747: mov     ecx, ds:0B33B00h
-0x47374D: push    2; Size
-0x47374F: push    esi; Src
+0x473747: mov     ecx, ds:0B33B00h; self
+0x47374D: push    2; byteCount
+0x47374F: push    esi; source
 0x473750: call    SaveLoad_SaveData
-0x473755: mov     ecx, ds:0B33B00h
-0x47375B: push    4; Size
+0x473755: mov     ecx, ds:0B33B00h; self
+0x47375B: push    4; byteCount
 0x47375D: add     edi, 0FFFFFFA8h
-0x473760: push    edi; Src
+0x473760: push    edi; source
 0x473761: call    SaveLoad_SaveData
-0x473766: mov     ecx, ds:0B33B00h
+0x473766: mov     ecx, ds:0B33B00h; self
 0x47376C: lea     ebx, [edi+34h]
-0x47376F: push    4; Size
+0x47376F: push    4; byteCount
 0x473771: lea     edx, [ebx-20h]
-0x473774: push    edx; Src
+0x473774: push    edx; source
 0x473775: call    SaveLoad_SaveData
-0x47377A: mov     ecx, ds:0B33B00h
-0x473780: push    2; Size
+0x47377A: mov     ecx, ds:0B33B00h; self
+0x473780: push    2; byteCount
 0x473782: lea     eax, [esi+34h]
-0x473785: push    eax; Src
+0x473785: push    eax; source
 0x473786: call    SaveLoad_SaveData
-0x47378B: mov     ecx, ds:0B33B00h
-0x473791: push    4; Size
-0x473793: push    ebx; Src
+0x47378B: mov     ecx, ds:0B33B00h; self
+0x473791: push    4; byteCount
+0x473793: push    ebx; source
 0x473794: call    SaveLoad_SaveData
 0x473799: movzx   edx, word ptr [esi]
 0x47379C: lea     ecx, [esp+30h+var_4]
@@ -118,7 +118,7 @@
 0x4737A1: mov     ecx, [ebp+9Ch]
 0x4737A7: push    edx
 0x4737A8: mov     [esp+38h+var_1E], 0FFh
-0x4737AD: call    sub_470960
+0x4737AD: call    ActorAnimData_FindAnimMapEntry; CustomAnimSupport decode: anim-map lookup helper used by playback, validators, and save/load restore to test an encoded group key.
 0x4737B2: test    al, al
 0x4737B4: mov     ebx, [esp+30h+var_1C]
 0x4737B8: jz      short loc_4737CC
@@ -128,7 +128,7 @@
 0x4737C2: mov     eax, [eax+14h]
 0x4737C5: push    edx
 0x4737C6: call    eax
-0x4737C8: mov     [esp+30h+var_1E], al
+0x4737C8: mov     [esp+30h+var_1E], al; Save obtains the map-entry selector byte through vtable +0x14. For multiple entries this is the list index truncated to 8 bits; only indices 0..127 round-trip exactly through the signed forward selector.
 0x4737CC: cmp     dword ptr [ebx], 0
 0x4737CF: jnz     short loc_473802
 0x4737D1: mov     edx, [edi]
@@ -147,19 +147,19 @@
 0x4737F0: push    offset aS08xHasASequen; "%s %08X has a sequence in slot %i with "...
 0x4737F5: call    PrintError
 0x4737FA: add     esp, 18h
-0x4737FD: mov     [esp+30h+var_1E], 0FEh ; 'þ'
-0x473802: mov     ecx, ds:0B33B00h
-0x473808: push    1; Size
+0x4737FD: mov     [esp+30h+var_1E], 0FEh ; 'þ'; A NULL active sequence forces saved selector 0xFE. This is a save-stream sentinel, not a selectable multiple-entry index.
+0x473802: mov     ecx, ds:0B33B00h; self
+0x473808: push    1; byteCount
 0x47380A: lea     eax, [esp+34h+var_1E]
-0x47380E: push    eax; Src
-0x47380F: call    SaveLoad_SaveData
+0x47380E: push    eax; source
+0x47380F: call    SaveLoad_SaveData; Writes one selector byte. A non-NULL multiple entry at index 254 also yields 0xFE, colliding with the null marker even though the following BSAnimGroupSequence state block is still written.
 0x473814: mov     ecx, [ebx]
 0x473816: test    ecx, ecx
 0x473818: jz      short loc_473829
 0x47381A: fld     dword ptr [ebp+94h]
 0x473820: push    ecx
 0x473821: fstp    [esp+34h+var_34]; Src
-0x473824: call    sub_49F570
+0x473824: call    BSAnimGroupSequence_SaveState; Serializes BSAnimGroupSequence effective sample time, active state, fields +0x34/+0x38 and +0x54; save versions below 0x71 include the legacy extra time copy.
 0x473829: mov     edi, [esp+30h+var_1C]
 0x47382D: mov     ebx, 1
 0x473832: add     [esp+30h+var_18], ebx
@@ -191,12 +191,12 @@
 0x47387E: mov     ecx, [ebp+0CCh]
 0x473884: push    ecx; void *
 0x473885: push    edi; int
-0x473886: call    sub_472D10
-0x47388B: mov     ecx, ds:0B33B00h
+0x473886: call    AnimIdle_SaveState; Serializes current or queued AnimIdle state with debug size accounting; form references remain subject to native save/load resolution.
+0x47388B: mov     ecx, ds:0B33B00h; self
 0x473891: add     esp, 10h
-0x473894: push    ebx; Size
+0x473894: push    ebx; byteCount
 0x473895: lea     edx, [ebp+0C4h]
-0x47389B: push    edx; Src
+0x47389B: push    edx; source
 0x47389C: call    SaveLoad_SaveData
 0x4738A1: mov     eax, [edi+5Ch]
 0x4738A4: mov     edx, [eax+30h]
@@ -256,19 +256,19 @@
 0x473952: mov     esi, [esp+30h+arg_0]
 0x473956: test    esi, esi
 0x473958: jz      short loc_4739AD
-0x47395A: mov     ecx, ds:0B33B00h
+0x47395A: mov     ecx, ds:0B33B00h; self
 0x473960: mov     [esp+30h+var_1F], 1
 0x473965: cmp     [ecx+7Ch], bl
 0x473968: jb      short loc_473976
-0x47396A: push    1; Size
+0x47396A: push    1; byteCount
 0x47396C: lea     edx, [esp+34h+var_1F]
-0x473970: push    edx; Src
+0x473970: push    edx; source
 0x473971: call    SaveLoad_SaveData
 0x473976: fld     dword ptr [ebp+94h]
 0x47397C: push    ecx
 0x47397D: mov     ecx, esi
 0x47397F: fstp    [esp+34h+var_34]; Src
-0x473982: call    sub_49F570
+0x473982: call    BSAnimGroupSequence_SaveState; Serializes BSAnimGroupSequence effective sample time, active state, fields +0x34/+0x38 and +0x54; save versions below 0x71 include the legacy extra time copy.
 0x473987: fldz
 0x473989: mov     eax, [edi+60h]
 0x47398C: fstp    [esp+30h+arg_0]
@@ -276,19 +276,19 @@
 0x473992: jz      short loc_47399B
 0x473994: fld     dword ptr [eax+10h]
 0x473997: fstp    [esp+30h+arg_0]
-0x47399B: mov     ecx, ds:0B33B00h
-0x4739A1: push    4; Size
+0x47399B: mov     ecx, ds:0B33B00h; self
+0x4739A1: push    4; byteCount
 0x4739A3: lea     eax, [esp+34h+arg_0]
-0x4739A7: push    eax; Src
+0x4739A7: push    eax; source
 0x4739A8: call    SaveLoad_SaveData
-0x4739AD: mov     ecx, ds:0B33B00h
+0x4739AD: mov     ecx, ds:0B33B00h; self
 0x4739B3: cmp     [ecx+7Ch], bl
 0x4739B6: jb      short loc_4739D1
 0x4739B8: cmp     [esp+30h+var_1F], 0
 0x4739BD: jnz     short loc_4739D1
-0x4739BF: push    1; Size
+0x4739BF: push    1; byteCount
 0x4739C1: lea     edx, [esp+34h+var_1F]
-0x4739C5: push    edx; Src
+0x4739C5: push    edx; source
 0x4739C6: call    SaveLoad_SaveData
 0x4739CB: mov     ecx, ds:0B33B00h
 0x4739D1: cmp     byte ptr ds:0B05BACh, 0
@@ -299,7 +299,7 @@
 0x4739E5: jz      short loc_473A2B
 0x4739E7: mov     eax, [edi]
 0x4739E9: push    eax; a1
-0x4739EA: call    TESForm_LookupByFormID
+0x4739EA: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4739EF: mov     ecx, [edi+5]
 0x4739F2: mov     edx, [eax]
 0x4739F4: add     esp, 4
@@ -328,7 +328,7 @@
 0x473A3F: call    sub_40FEC0
 0x473A44: add     esp, 10h
 0x473A47: mov     ecx, ds:0B33B00h
-0x473A4D: call    sub_45A170
+0x473A4D: call    TESSaveLoadGame_UseSaveGameBlocks
 0x473A52: test    al, al
 0x473A54: jz      short loc_473A89
 0x473A56: mov     edx, ds:0B33B00h

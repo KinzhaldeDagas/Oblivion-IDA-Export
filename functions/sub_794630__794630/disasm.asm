@@ -1,12 +1,11 @@
-0x794630: push    ebx
+0x794630: push    ebx; Oblivion legacy CIndexedGeometry::DeleteLodStrip. Frees and nulls every heap strip pointer for one LOD while retaining the outer per-LOD vector.
 0x794631: push    ebp
 0x794632: push    esi
 0x794633: push    edi
 0x794634: mov     ebx, ecx
 0x794636: xor     ebp, ebp
 0x794638: jmp     short loc_794640
-0x79463A: align 10h
-0x794640: mov     di, [esp+10h+arg_0]
+0x794640: mov     di, [esp+10h+lodLevel]
 0x794645: cmp     di, 0FFFFh
 0x794649: jle     short loc_794680
 0x79464B: mov     ecx, [ebx+4Ch]
@@ -58,7 +57,7 @@
 0x7946C8: mov     eax, [edi+4]
 0x7946CB: mov     ecx, [eax+ebp*4]
 0x7946CE: push    ecx
-0x7946CF: call    FormHeapFree
+0x7946CF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7946D4: mov     ecx, [ebx+4Ch]
 0x7946D7: add     esp, 4
 0x7946DA: test    ecx, ecx

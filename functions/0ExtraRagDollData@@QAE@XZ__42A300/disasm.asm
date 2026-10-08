@@ -1,4 +1,4 @@
-0x42A300: mov     eax, ecx
+0x42A300: mov     eax, ecx; MEF v35 cleanup proof: ExtraRagDollData constructor only sets type/vtable and zeroes fields +8/+C. Before payload attachment, direct FormHeapFree is complete cleanup.
 0x42A302: xor     ecx, ecx
 0x42A304: mov     byte ptr [eax+4], 19h
 0x42A308: mov     [eax+8], ecx

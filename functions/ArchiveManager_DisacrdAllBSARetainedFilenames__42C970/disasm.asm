@@ -1,5 +1,5 @@
-0x42C970: push    ecx
-0x42C971: mov     eax, ArchiveList
+0x42C970: push    ecx; MEF PERF 2026-09-07: Reachability qualification for PERF-1: WinMain calls this retained-name discard pass at40EB72. It applies INI/header retention policy and can call42C0D0 with keepOffsets=false, clearing cached bit20h and both filename owners. Thus streaming with neither table retained is an intentional reachable configuration, not just a hypothetical branch.
+0x42C971: mov     eax, ds:0B338E0h
 0x42C976: push    ebx
 0x42C977: xor     ebx, ebx
 0x42C979: cmp     eax, ebx
@@ -28,13 +28,13 @@
 0x42C9C1: cmp     eax, ebx
 0x42C9C3: jz      short loc_42C9CE
 0x42C9C5: push    eax
-0x42C9C6: call    FormHeapFree
+0x42C9C6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x42C9CB: add     esp, 4
 0x42C9CE: mov     eax, [esi+19Ch]
 0x42C9D4: cmp     eax, ebx
 0x42C9D6: jz      short loc_42C9E1
 0x42C9D8: push    eax
-0x42C9D9: call    FormHeapFree
+0x42C9D9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x42C9DE: add     esp, 4
 0x42C9E1: mov     [esi+198h], ebx
 0x42C9E7: mov     [esi+19Ch], ebx
@@ -50,7 +50,7 @@
 0x42CA0D: setnz   al
 0x42CA10: cmp     al, bl
 0x42CA12: jnz     short loc_42CA44
-0x42CA14: mov     eax, iRetainFilenameOffsetTable_Archive
+0x42CA14: mov     eax, iRetainFilenameOffsetTable_Archive; MEF PERF 2026-09-07: PERF-1 retention gate: selectorB04448 is1 in this IDB; selector1 follows archive header+160h bit20h, selector0 disables retained offsets, other nonzero retains them. Per-instance live/header values and actual runtime frequency were not measured. No proposed global INI change.
 0x42CA19: cmp     eax, 1
 0x42CA1C: jnz     short loc_42CA2F
 0x42CA1E: mov     eax, [esi+160h]

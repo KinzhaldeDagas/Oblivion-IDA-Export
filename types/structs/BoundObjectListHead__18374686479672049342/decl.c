@@ -1,1 +1,3 @@
-BoundObjectListHead
+struct BoundObjectListHead
+{
+};

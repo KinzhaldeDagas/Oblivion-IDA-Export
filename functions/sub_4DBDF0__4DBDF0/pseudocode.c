@@ -1,29 +1,30 @@
-ExtraLock *__thiscall sub_4DBDF0(_BYTE *this)
+// Verified lock-data factory: returns the existing ExtraLockData payload or allocates a zeroed 12-byte payload, installs it in an ExtraLock wrapper, and returns it. An allocation failure leaves/sets a null-payload ExtraLock wrapper through ExtraDataList_SetLock.
+ExtraLockData *__thiscall TESObjectREFR_GetOrCreateLockData(TESObjectREFR *this)
 {
-  ExtraDataList *v1; // edi
-  ExtraLock *result; // eax
-  int v3; // eax
-  int v4; // esi
+  ExtraDataList *p_baseExtraList; // edi
+  ExtraLockData *result; // eax
+  ExtraLockData *v3; // eax
+  ExtraLockData *v4; // esi
 
-  v1 = (ExtraDataList *)(this + 0x44);
-  result = sub_41E690((ExtraDataList *)(this + 0x44));
-  if ( !result )
+  p_baseExtraList = &this->member.baseExtraList; /*0x4dbdf1*/
+  result = ExtraDataList_GetLock(&this->member.baseExtraList); /*0x4dbdf6*/
+  if ( !result ) /*0x4dbdfd*/
   {
-    v3 = FormHeapAlloc(0xCu);
-    if ( v3 )
+    v3 = (ExtraLockData *)FormHeapAlloc(0xCu); /*0x4dbe02*/
+    if ( v3 ) /*0x4dbe0c*/
     {
-      v4 = v3;
-      *(_BYTE *)v3 = 0;
-      *(_DWORD *)(v3 + 4) = 0;
-      *(_BYTE *)(v3 + 8) = 0;
-      sub_41EAF0(v1, v3);
-      return (ExtraLock *)v4;
+      v4 = v3; /*0x4dbe0e*/
+      v3->level = 0; /*0x4dbe13*/
+      v3->key = 0; /*0x4dbe16*/
+      v3->flags = 0; /*0x4dbe1d*/
+      ExtraDataList_SetLock(p_baseExtraList, v3); /*0x4dbe21*/
+      return v4; /*0x4dbe26*/
     }
     else
     {
-      sub_41EAF0(v1, 0);
-      return 0;
+      ExtraDataList_SetLock(p_baseExtraList, 0); /*0x4dbe30*/
+      return 0; /*0x4dbe35*/
     }
   }
-  return result;
+  return result; /*0x4dbe29*/
 }

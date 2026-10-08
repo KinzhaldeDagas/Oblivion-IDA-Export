@@ -1,19 +1,36 @@
 {
-  "callees_count": 17,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_4A50E0",
+  "chunks": [
+    [
+      "0x4A50E0",
+      "0x4A51E8"
+    ],
+    [
+      "0x9CAD70",
+      "0x9CAD96"
+    ]
+  ],
+  "chunks_sha256": "fe1b20070ced9c11c11bc9cae8d592637a183bd8a76a6a6136eda0b15d0eb12c",
+  "comment_regular": "Verified: writes Sound data header + 4-byte RDMD metadata + a packed RDSD array of 12-byte records; record +0 is music type form pointer, +4/+8 Unknown.",
+  "comment_repeatable": "Verified: writes Sound data header + 4-byte RDMD metadata + a packed RDSD array of 12-byte records; record +0 is music type form pointer, +4/+8 Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "TESRegionDataSound_Save",
   "end_ea": "0x4A51E8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4A50E0",
+  "name": "TESRegionDataSound_Save",
   "segment": ".text",
   "sha256": "c76f9dfd891a539d8642ff3ad7cf185fbab11e6fb62d57efe5f5ea23bf044b5e",
   "size": 264,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4A50E0",
-  "type": "void __thiscall(_BYTE *this)",
-  "xrefs_from_count": 113,
+  "total_chunk_size": 302,
+  "type": "void __thiscall(TESRegionDataSound *self)",
+  "xrefs_from_count": 127,
   "xrefs_to_count": 1
 }

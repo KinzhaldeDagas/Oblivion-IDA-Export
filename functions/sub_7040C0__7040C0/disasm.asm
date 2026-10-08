@@ -1,4 +1,4 @@
-0x7040C0: push    esi
+0x7040C0: push    esi; Pass223: Clears default NiTexturingProperty global 0x00B3F974.
 0x7040C1: mov     esi, ds:0B3F974h
 0x7040C7: test    esi, esi
 0x7040C9: jz      short loc_7040F1

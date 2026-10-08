@@ -1,1 +1,1 @@
-NiSkinPartition
+struct NiSkinPartition;

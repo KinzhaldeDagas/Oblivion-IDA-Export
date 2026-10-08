@@ -142,7 +142,7 @@
 0x613A2B: call    BaseProcess_UseCounterEffect??
 0x613A30: mov     edi, eax
 0x613A32: mov     ecx, [esi+3Ch]; this
-0x613A35: call    Actor_GetFatigueFraction
+0x613A35: call    Actor_GetFatigueFraction; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.
 0x613A3A: fstp    [esp+10h+var_4]
 0x613A3E: fld     [esp+10h+var_4]
 0x613A42: fild    dword ptr ds:0B372E0h

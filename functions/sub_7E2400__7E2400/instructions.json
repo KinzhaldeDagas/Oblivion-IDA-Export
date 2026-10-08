@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7E2400",
-    "line": "push    ebx",
+    "line": "push    ebx; Destroy one RenderPass and its owned light-array storage.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x7E2404",
-    "line": "mov     eax, [esi+0Ch]",
+    "line": "mov     eax, [esi+0Ch]; Load the owned light-array pointer from RenderPass+0x0C for destruction.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x7E2412",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Free the owned light-pointer array. RenderPass_Destroy does not free the 0x10-byte record itself.",
     "mnemonic": "call",
     "size": 5
   },

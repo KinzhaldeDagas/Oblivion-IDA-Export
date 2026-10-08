@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
-  "callers_count": 11,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 12,
+  "chunks": [
+    [
+      "0x60D020",
+      "0x60D02A"
+    ]
+  ],
+  "chunks_sha256": "01caaa228fe4f4c7fe4269994a79702b290762107c5e6b67c17e8d8525fc7585",
+  "comment_regular": "Identical-code-folded setter shared by unrelated engine classes: writes value to *(int *)(this+4) and returns value. In EntryData call sites, +0x04 is the canonical signed countDelta; shader/process vtable users give the same bytes unrelated meanings. Do not assign a globally EntryData-specific prototype.",
+  "comment_repeatable": "Identical-code-folded setter shared by unrelated engine classes: writes value to *(int *)(this+4) and returns value. In EntryData call sites, +0x04 is the canonical signed countDelta; shader/process vtable users give the same bytes unrelated meanings. Do not assign a globally EntryData-specific prototype.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_60D020",
+  "display_name": "Shared_SetDwordAtOffset04",
   "end_ea": "0x60D02A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_60D020",
+  "name": "Shared_SetDwordAtOffset04",
   "segment": ".text",
   "sha256": "01caaa228fe4f4c7fe4269994a79702b290762107c5e6b67c17e8d8525fc7585",
   "size": 10,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x60D020",
-  "type": "int __thiscall(_DWORD *this, int)",
+  "total_chunk_size": 10,
+  "type": "int __thiscall(void *this, int value)",
   "xrefs_from_count": 2,
   "xrefs_to_count": 18
 }

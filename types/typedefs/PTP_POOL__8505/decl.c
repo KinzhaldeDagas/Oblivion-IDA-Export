@@ -1,1 +1,1 @@
-PTP_POOL
+typedef _TP_POOL *PTP_POOL;

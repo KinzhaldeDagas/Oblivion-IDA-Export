@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x760860",
-    "line": "sub     esp, 2Ch",
+    "line": "sub     esp, 2Ch; DX10OBSE resource decode: copies one source mip/slice into a locked D3D9 texture surface, preserving pitch and DXT block row layout.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -67,13 +67,13 @@
   },
   {
     "ea": "0x760879",
-    "line": "push    eax",
+    "line": "push    eax; hresult",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76087A",
-    "line": "call    sub_7736F0",
+    "line": "call    D3D9_HResultToString; Maps common COM/D3D9 HRESULT values to diagnostic names, including DEVICELOST, DEVICENOTRESET, INVALIDCALL, OUTOFVIDEOMEMORY, and format/state failures.",
     "mnemonic": "call",
     "size": 5
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x760885",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x7608A1",
-    "line": "call    edx",
+    "line": "call    edx; DX11 ownership audit (OblivionNew, 2026-09-19): source mip upload calls IDirect3DSurface9::LockRect at vtable+34h with RECT=null and flags=0, after GetDesc at +30h. CPU writes therefore arrive through a surface alias, not only IDirect3DTexture9::LockRect; parent/subresource alias ownership must be migrated together.",
     "mnemonic": "call",
     "size": 2
   },
@@ -181,13 +181,13 @@
   },
   {
     "ea": "0x7608A7",
-    "line": "push    eax",
+    "line": "push    eax; hresult",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7608A8",
-    "line": "call    sub_7736F0",
+    "line": "call    D3D9_HResultToString; Maps common COM/D3D9 HRESULT values to diagnostic names, including DEVICELOST, DEVICENOTRESET, INVALIDCALL, OUTOFVIDEOMEMORY, and format/state failures.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x7608B3",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x7608D0",
-    "line": "mov     edx, [ecx+ebx*4]",
+    "line": "mov     edx, [ecx+ebx*4]; Per-level copy reads the source width/height arrays for the selected mip and preserves locked-surface pitch; DXT formats use block-row sizing.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x760921",
-    "line": "cmp     edi, esi",
+    "line": "cmp     edi, esi; Verified native compressed-copy arithmetic: for NiPixelData format values 4..6, compare (locked Pitch >> 2) against source pseudo-row bytes: DXT1 ((width+3)>>1)&07FFFFFEh, other DXT (width+3)&~3; pseudo-row count=(min(sourceHeight,surfaceHeight)+3)&~3. Equality takes contiguous memcpy of pseudo-row bytes*count, equal to packed BC storage. Unequal branch copies min(pseudo-row bytes, Pitch>>2) per iteration but advances destination by ORIGINAL Pitch and source by pseudo-row bytes. Do not assume arbitrary padded BC pitch has ordinary block-row behavior here; owned frontend pitch policy must account for this exact observed caller.",
     "mnemonic": "cmp",
     "size": 2
   },
@@ -523,25 +523,25 @@
   },
   {
     "ea": "0x760954",
-    "line": "push    edx; Size",
+    "line": "push    edx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x760955",
-    "line": "push    esi; Src",
+    "line": "push    esi; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x760956",
-    "line": "push    ebx; Dst",
+    "line": "push    ebx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x760957",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x760984",
-    "line": "push    ecx; Size",
+    "line": "push    ecx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
@@ -697,19 +697,19 @@
   },
   {
     "ea": "0x76099A",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76099B",
-    "line": "push    edx; Dst",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76099C",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x7609AE",
-    "line": "call    edx",
+    "line": "call    edx; DX11 ownership audit: after native CPU mip copy, calls IDirect3DSurface9::UnlockRect at vtable+38h. Return HRESULT is not tested by this caller. Renderer migration still must stage bytes before Original Unlock and publish only with its actual completion result; caller behavior does not prove successful upload.",
     "mnemonic": "call",
     "size": 2
   },

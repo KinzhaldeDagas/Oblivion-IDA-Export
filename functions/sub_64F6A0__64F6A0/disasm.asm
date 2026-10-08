@@ -1,4 +1,4 @@
-0x64F6A0: push    ebx
+0x64F6A0: push    ebx; 3DTheft decode 2026-05-17: process procedure-slot advance helper. Adds delta to current/editor slot, clamps to row length, and queues package-done event 0x400 only if the clamped slot resolves to DONE.
 0x64F6A1: push    esi
 0x64F6A2: mov     esi, ecx
 0x64F6A4: mov     eax, [esi]
@@ -25,7 +25,7 @@
 0x64F6EB: mov     eax, [ebx+18h]
 0x64F6EE: push    edi
 0x64F6EF: push    eax
-0x64F6F0: call    sub_673980
+0x64F6F0: call    sub_673980; 3DTheft: returns package procedure row length for procedureArrayIndex. Rows used here include Follow row 7 and Flee row 0x13.
 0x64F6F5: mov     edx, [esi]
 0x64F6F7: mov     edi, eax
 0x64F6F9: mov     eax, [edx+180h]

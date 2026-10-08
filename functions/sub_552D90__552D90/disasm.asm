@@ -19,7 +19,7 @@
 0x552DC9: push    eax; a1
 0x552DCA: mov     byte ptr [esi], 0
 0x552DCD: call    ArrayConstructor
-0x552DD2: push    offset sub_43ACE0; a5
+0x552DD2: push    offset FaceGenMatrix_Destruct; a5
 0x552DD7: push    offset unknown_libname_8_0; a4
 0x552DDC: push    14h; size
 0x552DDE: push    20h ; ' '; a2
@@ -35,8 +35,8 @@
 0x552E08: push    edx; a1
 0x552E09: mov     byte ptr [esp+2Ch+var_4], 1
 0x552E0E: call    ArrayConstructor
-0x552E13: push    offset sub_43ACE0; a5
-0x552E18: push    offset sub_43EB30; a4
+0x552E13: push    offset FaceGenMatrix_Destruct; a5
+0x552E18: push    offset FaceGenMatrix_Construct; a4
 0x552E1D: push    14h; size
 0x552E1F: push    18h; a2
 0x552E21: lea     eax, [esi+0A54h]
@@ -50,3 +50,34 @@
 0x552E40: pop     esi
 0x552E41: add     esp, 10h
 0x552E44: retn
+0x9BBDC0: push    offset sub_551F40; void (__thiscall *)(void *)
+0x9BBDC5: push    5; int
+0x9BBDC7: push    78h ; 'x'; unsigned int
+0x9BBDC9: mov     eax, [ebp-10h]
+0x9BBDCC: add     eax, 4
+0x9BBDCF: push    eax; void *
+0x9BBDD0: call    $LN21
+0x9BBDD5: retn
+0x9BBDD6: push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)
+0x9BBDDB: push    14h; int
+0x9BBDDD: push    20h ; ' '; unsigned int
+0x9BBDDF: mov     eax, [ebp-10h]
+0x9BBDE2: add     eax, 25Ch
+0x9BBDE7: push    eax; void *
+0x9BBDE8: call    $LN21
+0x9BBDED: retn
+0x9BBDEE: push    offset sub_551FD0; void (__thiscall *)(void *)
+0x9BBDF3: push    19h; int
+0x9BBDF5: push    38h ; '8'; unsigned int
+0x9BBDF7: mov     eax, [ebp-10h]
+0x9BBDFA: add     eax, 4DCh
+0x9BBDFF: push    eax; void *
+0x9BBE00: call    $LN21
+0x9BBE05: retn
+0x9BBE06: mov     edx, [esp+arg_4]
+0x9BBE0A: lea     eax, [edx-8]
+0x9BBE0D: mov     ecx, [edx-0Ch]
+0x9BBE10: xor     ecx, eax
+0x9BBE12: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BBE17: mov     eax, offset stru_AE5AD0
+0x9BBE1C: jmp     ___CxxFrameHandler3

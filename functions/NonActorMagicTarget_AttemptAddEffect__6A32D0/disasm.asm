@@ -17,8 +17,8 @@
 0x6A32F5: fld1
 0x6A32F7: push    ecx
 0x6A32F8: mov     ecx, esi; this
-0x6A32FA: fstp    [esp+0Ch+var_C]
-0x6A32FD: call    MagicTarget_ProcessEffects
+0x6A32FA: fstp    [esp+0Ch+deltaTime]; deltaTime
+0x6A32FD: call    MagicTarget_ProcessEffects; Verified active-effect manager: obtains the target's active-effect list, checks target parent/node/cell/process conditions, then enters the list loop. Each eligible ActiveEffect goes through ActiveEffect_Base_ProcessEffect; removed effects are unlinked and destroyed by their virtual destructor. Actor_ProcessMagicEffect calls this manager each actor process tick.
 0x6A3302: pop     esi
 0x6A3303: mov     al, bl
 0x6A3305: pop     ebx

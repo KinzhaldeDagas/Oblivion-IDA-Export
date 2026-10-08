@@ -1,4 +1,4 @@
-0x4E8FA0: push    0FFFFFFFFh
+0x4E8FA0: push    0FFFFFFFFh; Verified TESRoad constructor sets TESForm type byte to 0x38 and initializes a 37-bucket NiTPointerMap<unsigned int, BSSimpleList<TESConnectedPoint*>*> at +0x1C. Owner WorldSpace pointer is at +0x2C, confirmed by ROAD group helpers and WorldSpace clone repair. The TESConnectedPoint object layout is still Unknown.
 0x4E8FA2: push    offset ??0TESRoad@@QAE@XZ_SEH
 0x4E8FA7: mov     eax, large fs:0
 0x4E8FAD: push    eax
@@ -52,3 +52,15 @@
 0x4E9043: pop     esi
 0x4E9044: add     esp, 10h
 0x4E9047: retn
+0x9B5F90: mov     ecx, [ebp-10h]; this
+0x9B5F93: jmp     TESForm_destr
+0x9B5F98: mov     ecx, [ebp-10h]
+0x9B5F9B: add     ecx, 1Ch
+0x9B5F9E: jmp     ??1?$NiTPointerMap@IPAV?$BSSimpleList@PAVTESConnectedPoint@@@@@@UAE@XZ; NiTPointerMap<uint,BSSimpleList<TESConnectedPoint *> *>::~NiTPointerMap<uint,BSSimpleList<TESConnectedPoint *> *>(void)
+0x9B5FA3: mov     edx, [esp+arg_4]
+0x9B5FA7: lea     eax, [edx-0Ch]
+0x9B5FAA: mov     ecx, [edx-10h]
+0x9B5FAD: xor     ecx, eax
+0x9B5FAF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B5FB4: mov     eax, offset stru_AE0EEC
+0x9B5FB9: jmp     ___CxxFrameHandler3

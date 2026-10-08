@@ -1,6 +1,6 @@
-0x7A6C20: push    ecx
+0x7A6C20: push    ecx; Oblivion binary evidence: copy-returning union of two exact 0x30 stRegion values. Copies the left region including stVec sizes, then takes per-axis minima and maxima for axes 0..2. Sole caller is CLeafGeometry::ComputeExtents. RT 4.1 Region.cpp:16-29 corroborates operator+ after observation.
 0x7A6C21: push    ebx
-0x7A6C22: mov     ebx, [esp+8+arg_0]
+0x7A6C22: mov     ebx, [esp+8+result]
 0x7A6C26: mov     edx, ecx
 0x7A6C28: push    esi
 0x7A6C29: push    edi
@@ -8,7 +8,7 @@
 0x7A6C2F: mov     esi, edx
 0x7A6C31: mov     edi, ebx
 0x7A6C33: rep movsd
-0x7A6C35: mov     ecx, [esp+10h+arg_4]
+0x7A6C35: mov     ecx, [esp+10h+right]
 0x7A6C39: mov     [esp+10h+var_4], 0
 0x7A6C41: fld     dword ptr [ecx]
 0x7A6C43: fld     dword ptr [edx]

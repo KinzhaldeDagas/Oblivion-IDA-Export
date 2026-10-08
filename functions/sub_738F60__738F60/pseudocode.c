@@ -1,4 +1,4 @@
-char *sub_738F60()
+NiRTTI *sub_738F60()
 {
-  return dword_B40148;
+  return &stru_B40148; /*0x738f65*/
 }

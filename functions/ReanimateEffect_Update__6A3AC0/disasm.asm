@@ -26,7 +26,7 @@
 0x6A3B05: jnz     short loc_6A3B27
 0x6A3B07: push    1
 0x6A3B09: mov     ecx, esi
-0x6A3B0B: call    ActiveEffect_Base_Remove
+0x6A3B0B: call    ActiveEffect_Base_Remove; Verified termination API: sets bTerminated=1. When its flush flag is true, immediately invokes ActiveEffect_Base_ProcessEffect to run termination cleanup.
 0x6A3B10: pop     edi
 0x6A3B11: pop     esi
 0x6A3B12: pop     ebx
@@ -49,7 +49,7 @@
 0x6A3B49: jz      short loc_6A3B6B
 0x6A3B4B: push    0
 0x6A3B4D: mov     ecx, esi
-0x6A3B4F: call    ActiveEffect_Base_Remove
+0x6A3B4F: call    ActiveEffect_Base_Remove; Verified termination API: sets bTerminated=1. When its flush flag is true, immediately invokes ActiveEffect_Base_ProcessEffect to run termination cleanup.
 0x6A3B54: pop     edi
 0x6A3B55: pop     esi
 0x6A3B56: pop     ebx
@@ -87,10 +87,10 @@
 0x6A3BC2: sub     esp, 8
 0x6A3BC5: fstp    [esp+0E8h+var_CC]
 0x6A3BC9: fld     [esp+0E8h+var_CC]
-0x6A3BCD: fstp    [esp+0E8h+var_E4]; float
+0x6A3BCD: fstp    [esp+0E8h+b]; b
 0x6A3BD1: fld1
-0x6A3BD3: fstp    [esp+0E8h+var_E8]; float
-0x6A3BD6: call    sub_4AC760
+0x6A3BD3: fstp    [esp+0E8h+a]; a
+0x6A3BD6: call    Float_Min; Returns min(a,b) as a single-precision float. Native callers push two floats, clean 8 bytes, and consume ST0 as float; prior double return was an x87 decompiler artifact.
 0x6A3BDB: fstp    [esp+0E8h+var_CC]
 0x6A3BDF: lea     ebx, [esi+44h]
 0x6A3BE2: lea     eax, [esp+0E8h+var_A4+4]
@@ -133,9 +133,9 @@
 0x6A3C67: fsub    dword ptr [esp+0E8h+var_A4+8]
 0x6A3C6B: fstp    [esp+0E8h+var_94+8]
 0x6A3C6F: fld     dword ptr ds:0B3F99Ch
-0x6A3C75: fstp    [esp+0E8h+var_E4]; float
+0x6A3C75: fstp    [esp+0E8h+b]; float
 0x6A3C79: fld     dword ptr ds:0A3D65Ch
-0x6A3C7F: fstp    [esp+0E8h+var_E8]; float
+0x6A3C7F: fstp    [esp+0E8h+a]; float
 0x6A3C82: fld     [esp+0E8h+var_94+8]
 0x6A3C86: fld     [esp+0E8h+var_94+4]
 0x6A3C8A: call    sub_98598A
@@ -166,7 +166,7 @@
 0x6A3CE6: call    sub_8B1B40
 0x6A3CEB: fld     [esp+0E0h+var_CC]
 0x6A3CEF: push    ecx
-0x6A3CF0: fstp    [esp+0E4h+var_E4]; float
+0x6A3CF0: fstp    [esp+0E4h+b]; float
 0x6A3CF3: lea     eax, [esp+0E4h+var_60]
 0x6A3CFA: push    eax; int
 0x6A3CFB: lea     ecx, [esp+0E8h+var_80]
@@ -175,7 +175,7 @@
 0x6A3D07: call    sub_8B1C60
 0x6A3D0C: fld1
 0x6A3D0E: sub     esp, 8
-0x6A3D11: fstp    [esp+0E8h+var_E4]
+0x6A3D11: fstp    [esp+0E8h+b]
 0x6A3D15: fld     [ebp+arg_0]
 0x6A3D18: mov     ecx, [esi+38h]
 0x6A3D1B: fld1
@@ -184,7 +184,7 @@
 0x6A3D26: lea     eax, [esp+0E8h+var_74+4]
 0x6A3D2A: fstp    [esp+0E8h+var_C8]
 0x6A3D2E: fld     [esp+0E8h+var_C8]
-0x6A3D32: fstp    [esp+0E8h+var_E8]
+0x6A3D32: fstp    [esp+0E8h+a]
 0x6A3D35: push    edx
 0x6A3D36: push    eax
 0x6A3D37: call    sub_8A34C0
@@ -228,14 +228,14 @@
 0x6A3DAA: mov     ecx, edi
 0x6A3DAC: mov     dword ptr [esi+3Ch], 1Eh
 0x6A3DB3: call    sub_5E13D0
-0x6A3DB8: mov     ecx, [esp+0E0h+var_CC]
-0x6A3DBC: push    0FFFFFFFFh
-0x6A3DBE: push    0
-0x6A3DC0: push    0
-0x6A3DC2: call    ActorAnimData_PlayAnimGroup
+0x6A3DB8: mov     ecx, [esp+0E0h+var_CC]; this
+0x6A3DBC: push    0FFFFFFFFh; repeatOrAction
+0x6A3DBE: push    0; playImmediately
+0x6A3DC0: push    0; encodedKey
+0x6A3DC2: call    ActorAnimData_PlayAnimGroup; Native group dispatcher. Reads fixed group-table slot (+0x08) and note-template class (+0x0C), normalizing slot aliases 5->0 and 6->3. For note classes 0/1, playImmediately=0 stores only the encoded key at ActorAnimData +0x70[slot] and repeat/action value at +0x7C[slot]; playImmediately=1 clears that queue and plays now. Classes 2..7 play immediately. No queued sequence pointer or path is stored.
 0x6A3DC7: fldz
 0x6A3DC9: push    ecx
-0x6A3DCA: fstp    [esp+0E4h+var_E4]; float
+0x6A3DCA: fstp    [esp+0E4h+b]; float
 0x6A3DCD: push    ebx; int
 0x6A3DCE: call    sub_8AB8A0
 0x6A3DD3: mov     ebx, [edi+58h]
@@ -282,7 +282,7 @@
 0x6A3E52: push    1; a3
 0x6A3E54: push    6; a2
 0x6A3E56: push    eax; a1
-0x6A3E57: call    sub_88D070
+0x6A3E57: call    sub_88D070; ODismemberment: bhkBlendCollisionObject traversal entry. Requires bhkBlendCollisionObject or forced flag; queues callback off off_B2E314 with state payload including a2 and a3.
 0x6A3E5C: add     esp, 10h
 0x6A3E5F: mov     eax, [edi]
 0x6A3E61: mov     edx, [eax+170h]
@@ -331,7 +331,7 @@
 0x6A3EDE: push    4; newDeadState
 0x6A3EE0: mov     ecx, edi; this
 0x6A3EE2: mov     dword ptr [esi+3Ch], 32h ; '2'
-0x6A3EE9: call    Actor_HandleDeathSTate????
+0x6A3EE9: call    Actor_HandleDeathState
 0x6A3EEE: push    0
 0x6A3EF0: mov     ecx, edi
 0x6A3EF2: call    sub_5E8EC0

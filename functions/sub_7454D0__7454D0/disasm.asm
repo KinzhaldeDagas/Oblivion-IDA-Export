@@ -114,7 +114,6 @@
 0x745649: mov     [esp+98h+var_22], 0
 0x745650: mov     eax, 2
 0x745655: jmp     short loc_745660
-0x745657: align 10h
 0x745660: mov     dx, [esp+eax+98h+var_24]
 0x745665: add     dx, word ptr [esp+eax+98h+var_44]
 0x74566A: add     eax, 2

@@ -1,1 +1,1 @@
-bhkCylinderShape
+struct bhkCylinderShape;

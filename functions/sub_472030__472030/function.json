@@ -1,19 +1,36 @@
 {
-  "callees_count": 40,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 19,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_472030",
+  "chunks": [
+    [
+      "0x472030",
+      "0x472311"
+    ],
+    [
+      "0x9AEC80",
+      "0x9AECA3"
+    ]
+  ],
+  "chunks_sha256": "53a253389a8eb779e9e2ec2f578d2fc1279b150b1175e44fe2d01bae4288a915",
+  "comment_regular": "ActorAnimData movement-vector recovery. For an installed TESAnimGroup, samples AccumRoot at current/end times, computes normalized movement delta, stores it back to the TESAnimGroup, and warns when Animate In Place exported zero movement.",
+  "comment_repeatable": "ActorAnimData movement-vector recovery. For an installed TESAnimGroup, samples AccumRoot at current/end times, computes normalized movement delta, stores it back to the TESAnimGroup, and warns when Animate In Place exported zero movement.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 10,
+  "display_name": "ActorAnimData_SetAnimGroupMovementVector",
   "end_ea": "0x472311",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_472030",
+  "name": "ActorAnimData_SetAnimGroupMovementVector",
   "segment": ".text",
   "sha256": "462fa5d84d79f3cab50df7ad63f29d6802a948847c57f014862ef053ae37dcc0",
   "size": 737,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x472030",
+  "total_chunk_size": 772,
   "type": "void __thiscall(_DWORD *this, float)",
-  "xrefs_from_count": 258,
+  "xrefs_from_count": 272,
   "xrefs_to_count": 1
 }

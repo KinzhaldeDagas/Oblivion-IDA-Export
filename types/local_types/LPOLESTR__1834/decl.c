@@ -1,1 +1,1 @@
-LPOLESTR
+typedef OLECHAR *LPOLESTR;

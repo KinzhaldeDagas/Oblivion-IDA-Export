@@ -11,9 +11,9 @@
 0x5A8FED: jz      short loc_5A9001
 0x5A8FEF: fld1
 0x5A8FF1: push    ecx
-0x5A8FF2: fstp    [esp+8+a2]; a3
+0x5A8FF2: fstp    [esp+8+a2]; value
 0x5A8FF5: mov     ecx, esi; this
-0x5A8FF7: push    0FA1h; a2
-0x5A8FFC: call    Tile_SetFloat
+0x5A8FF7: push    0FA1h; propertyCode
+0x5A8FFC: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A9001: pop     esi
 0x5A9002: retn

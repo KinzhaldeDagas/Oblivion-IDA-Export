@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x64FF30",
-    "line": "push    ecx",
+    "line": "push    ecx; MiddleHighProcess dialogue-procedure update. It counts down the same DialoguePackage timer but has no audible/lip playback; until procedure completion it advances the conversation through DialoguePackage::Speak(false), then cleans both participants sharing the package.",
     "mnemonic": "push",
     "size": 1
   },
@@ -61,19 +61,19 @@
   },
   {
     "ea": "0x64FF43",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x64FF45",
-    "line": "call    sub_779480",
+    "line": "call    DialoguePackage__GetTarget; DialoguePackage participant accessor: returns the target at +0x60.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x64FF4A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -85,13 +85,13 @@
   },
   {
     "ea": "0x64FF50",
-    "line": "call    NiDX9TextureData__GetLevels",
+    "line": "call    DialoguePackage__GetSpeaker; DialoguePackage participant accessor: returns the original initiating speaker at +0x5C.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x64FF55",
-    "line": "mov     ebp, [esp+14h+arg_0]",
+    "line": "mov     ebp, [esp+14h+owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -265,19 +265,19 @@
   },
   {
     "ea": "0x64FFA0",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x64FFA2",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x64FFA7",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x64FFAB",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,19 +397,19 @@
   },
   {
     "ea": "0x64FFD6",
-    "line": "push    0; AnimSequenceSingle *",
+    "line": "push    0; startSpeech",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x64FFD8",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x64FFDA",
-    "line": "call    sub_6267A0",
+    "line": "call    DialoguePackage__Speak; MiddleHigh offscreen advance calls Speak(false). Starting from timer zero, successive updates select then consume responses without audio or text-duration delays and commit deferred item results rapidly. Exception: a package demoted with waitingForLip=true makes no cursor progress until it returns to HighProcess or is destroyed.",
     "mnemonic": "call",
     "size": 5
   },

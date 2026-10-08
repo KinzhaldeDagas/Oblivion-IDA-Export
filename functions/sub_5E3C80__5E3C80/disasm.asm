@@ -1,4 +1,4 @@
-0x5E3C80: sub     esp, 8
+0x5E3C80: sub     esp, 8; Fly-speed branch used by sub_5E65B0 when fly-speed flag 0x2000 is set. Uses Speed actor value and encumbrance, then applies package-target limiting pattern.
 0x5E3C83: push    edi
 0x5E3C84: mov     edi, ecx
 0x5E3C86: mov     eax, [edi]
@@ -63,7 +63,7 @@
 0x5E3D46: cmp     dword ptr [esi+58h], 0
 0x5E3D4A: jz      short loc_5E3DB5
 0x5E3D4C: mov     ecx, esi
-0x5E3D4E: call    sub_5E3C80
+0x5E3D4E: call    sub_5E3C80; Fly-speed branch used by sub_5E65B0 when fly-speed flag 0x2000 is set. Uses Speed actor value and encumbrance, then applies package-target limiting pattern.
 0x5E3D53: fstp    [esp+10h+var_8]
 0x5E3D57: fldz
 0x5E3D59: fcomp   [esp+10h+var_8]

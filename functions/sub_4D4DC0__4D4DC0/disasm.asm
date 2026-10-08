@@ -19,7 +19,7 @@
 0x4D4DEF: call    sub_532EF0
 0x4D4DF4: push    esi
 0x4D4DF5: push    edi; a2
-0x4D4DF6: mov     ecx, offset stru_B35C80; this
+0x4D4DF6: mov     ecx, offset unk_B35C80; this
 0x4D4DFB: call    sub_496EA0
 0x4D4E00: lea     esi, [edi+48h]
 0x4D4E03: test    esi, esi
@@ -34,7 +34,7 @@
 0x4D4E1A: test    esi, esi
 0x4D4E1C: jnz     short loc_4D4E07
 0x4D4E1E: push    edi; a2
-0x4D4E1F: mov     ecx, offset stru_B35C80; this
+0x4D4E1F: mov     ecx, offset unk_B35C80; this
 0x4D4E24: call    sub_496F50
 0x4D4E29: pop     esi
 0x4D4E2A: pop     edi

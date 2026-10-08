@@ -1,5 +1,5 @@
-0xA04320: push    offset dword_B3ED14
+0xA04320: push    offset stru_B3ED14; parent
 0xA04325: push    offset aNitexturetrans; "NiTextureTransformController"
-0xA0432A: mov     ecx, offset dword_B3D9B4
-0xA0432F: call    sub_70E220
+0xA0432A: mov     ecx, offset stru_B3D9B4; this
+0xA0432F: call    NiRTTI_Constructor; Constructs one Oblivion NiRTTI descriptor: writes the class-name pointer at +0 and parent NiRTTI pointer at +4, then returns this. This is the native NiRTTI constructor used by the SpeedTree shader-property RTTI initializers decoded in Pass 368.
 0xA04334: retn

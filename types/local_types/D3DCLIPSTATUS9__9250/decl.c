@@ -1,1 +1,5 @@
-_D3DCLIPSTATUS9
+struct _D3DCLIPSTATUS9
+{
+DWORD ClipUnion;
+DWORD ClipIntersection;
+};

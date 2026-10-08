@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x788A80",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, [esp+last]; Oblivion byte-vector copy-backward primitive: computes destinationEnd-(last-first), uses overlap-safe memmove_s for the raw byte span, and returns destination start. Hex-Rays does not decompile this helper; the 17-instruction body is the evidence.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x788A89",
-    "line": "mov     esi, [esp+4+arg_8]",
+    "line": "mov     esi, [esp+4+destinationEnd]",
     "mnemonic": "mov",
     "size": 4
   },

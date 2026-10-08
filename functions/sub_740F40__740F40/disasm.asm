@@ -21,9 +21,9 @@
 0x740F71: test    cl, 6
 0x740F74: jnz     short loc_740F8D
 0x740F76: add     edi, 20h ; ' '
-0x740F79: push    edi
-0x740F7A: lea     ecx, [esi+20h]
-0x740F7D: call    sub_8AA390
+0x740F79: push    edi; other
+0x740F7A: lea     ecx, [esi+20h]; this
+0x740F7D: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x740F82: test    al, al
 0x740F84: jnz     short loc_740F8D
 0x740F86: pop     edi

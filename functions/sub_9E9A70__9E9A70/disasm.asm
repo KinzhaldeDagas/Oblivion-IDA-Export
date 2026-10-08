@@ -2,7 +2,7 @@
 0x9E9A76: push    ecx
 0x9E9A77: fstp    [esp+4+var_4]; float
 0x9E9A7A: push    offset aFarrowgravit_0; "fArrowGravityMin"
-0x9E9A7F: mov     ecx, offset fArrowGravityMin
+0x9E9A7F: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+3A0h)
 0x9E9A84: call    GameSetting_ConstrAndReg_float
 0x9E9A89: push    offset sub_A1E810; void (__cdecl *)()
 0x9E9A8E: call    _atexit

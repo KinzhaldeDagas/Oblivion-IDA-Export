@@ -1,1 +1,1 @@
-ABORTPROC
+typedef BOOL (*ABORTPROC)(HDC, INT);

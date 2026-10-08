@@ -1,63 +1,63 @@
-char __userpurge TESActorBaseData_LoadModifiedComponent@<al>(unsigned int *ecx0@<ecx>, int a2@<ebx>, char a3, int a4)
+// Verified: mask 0x10 restores 16 bytes at component +4, including NoBloodSpray/NoBloodDecal; mask 0x40 rebuilds faction list from UInt16 count plus FormID/rank pairs. This is savegame delta serialization, separate from creature record NAM0/NAM1 path loading. Updated prototypes use 32-bit counts; no extra EBX argument.
+// Probable parameter naming: currentFlags is the second forwarded load argument (Oblivion calling convention verified; meaning suggested by Fallout aiCurrentFlags and matching parent/component chain). Higher-level policy remains Unknown.
+void __thiscall TESActorBaseData_LoadModifiedComponent(
+        TESActorBaseData *self,
+        ActorBaseSaveChangeMask changeMask,
+        unsigned int currentFlags)
 {
-  UInt32 v5; // ebp
-  UInt32 *v6; // edi
-  TESForm *v7; // eax
-  const char *v8; // eax
-  TESForm *v9; // ebx
-  int v10; // edi
-  _DWORD *v11; // eax
-  UInt32 v12; // eax
-  TESSaveLoad *v13; // ecx
-  UInt32 *v14; // edi
-  UInt32 v15; // esi
-  TESForm *v16; // ecx
+  unsigned __int8 *bufferCursor; // ebp
+  UInt32 *currentlyLoadingFormHeader; // edi
+  TESForm *v6; // eax
+  const char *v7; // eax
+  TESForm *v8; // ebx
+  FactionListData *v9; // edi
+  FactionListEntry *v10; // eax
+  TESSaveLoadGame_SerializationView *v11; // ecx
+  UInt32 *v12; // edi
+  unsigned __int8 *v13; // esi
+  TESForm *v14; // ecx
+  unsigned __int8 *v15; // eax
+  const char *v16; // eax
   const char *v17; // eax
-  const char *v18; // eax
-  UInt32 v19; // edx
-  size_t v21; // [esp-10h] [ebp-30h]
-  int v22; // [esp-10h] [ebp-30h]
-  int v23; // [esp-10h] [ebp-30h]
-  int v24; // [esp-Ch] [ebp-2Ch]
-  int v25; // [esp-Ch] [ebp-2Ch]
-  _BYTE v26[12]; // [esp-8h] [ebp-28h]
-  int v27; // [esp-8h] [ebp-28h]
-  size_t v28; // [esp-8h] [ebp-28h]
-  size_t v29; // [esp-4h] [ebp-24h]
-  int v30; // [esp-4h] [ebp-24h]
-  int v31; // [esp+4h] [ebp-1Ch]
-  int v32; // [esp+8h] [ebp-18h]
-  int v33; // [esp+Ch] [ebp-14h] BYREF
-  int v34; // [esp+10h] [ebp-10h] BYREF
+  unsigned __int8 *v18; // edx
+  int v19; // [esp-10h] [ebp-30h]
+  int v20; // [esp-10h] [ebp-30h]
+  int v21; // [esp-Ch] [ebp-2Ch]
+  int v22; // [esp-Ch] [ebp-2Ch]
+  int v23; // [esp-8h] [ebp-28h]
+  int v24; // [esp-4h] [ebp-24h]
+  unsigned __int16 v25; // [esp+4h] [ebp-1Ch]
+  unsigned __int16 v26; // [esp+8h] [ebp-18h]
+  int v27; // [esp+Ch] [ebp-14h] BYREF
+  int destination; // [esp+10h] [ebp-10h] BYREF
   int a1; // [esp+14h] [ebp-Ch]
   int Dst; // [esp+18h] [ebp-8h] BYREF
-  _BYTE v37[4]; // [esp+1Ch] [ebp-4h] BYREF
+  unsigned int v31; // [esp+1Ch] [ebp-4h] BYREF
 
-  v5 = 0;
-  v34 = 0;
-  if ( sub_45A170() )
+  bufferCursor = 0; /*0x467cad*/
+  destination = 0; /*0x467cb0*/
+  if ( TESSaveLoadGame_UseSaveGameBlocks() )
   {
-    *(_DWORD *)&v26[4] = 4;
-    SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &Dst, *(size_t *)&v26[4]);
+    SaveLoad_LoadData(g_TESSaveLoadGame, &Dst, 4u); /*0x467cce*/
     if ( Dst != 0x4B4F4C42 )
     {
-      v6 = (UInt32 *)SaveLoad_CurrentSavegame[1].unk030[0];
-      if ( v6 )
+      currentlyLoadingFormHeader = (UInt32 *)g_TESSaveLoadGame->currentlyLoadingFormHeader; /*0x467ce2*/
+      if ( currentlyLoadingFormHeader )
       {
-        v7 = TESForm_LookupByFormID(*v6);
-        v8 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v7->vtbl->GetEditorName)(
-                             v7,
-                             *((unsigned __int8 *)v6 + 9),
-                             *(UInt32 *)((char *)v6 + 5));
+        v6 = TESForm_LookupByFormID(*currentlyLoadingFormHeader); /*0x467cef*/
+        v7 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v6->vtbl->GetEditorName)( /*0x467d0a*/
+                             v6,
+                             *((unsigned __int8 *)currentlyLoadingFormHeader + 9),
+                             *(UInt32 *)((char *)currentlyLoadingFormHeader + 5));
         PrintError(
           "LoadGame Buffer error: Block Header is incorrect in file %s on line %i.  Currently loading form is %08X %s wit"
           "h version %i and flags %08X",
           "..\\TES Shared\\TESActorBaseData.cpp",
           0x678,
-          *v6,
-          v8,
-          v27,
-          v30);
+          *currentlyLoadingFormHeader,
+          v7,
+          v23,
+          v24);
       }
       else
       {
@@ -65,133 +65,121 @@ char __userpurge TESActorBaseData_LoadModifiedComponent@<al>(unsigned int *ecx0@
           "LoadGame Buffer error: Block Header is incorrect in file %s on line %i.  Current version is %i",
           "..\\TES Shared\\TESActorBaseData.cpp",
           0x678,
-          LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next));
+          g_TESSaveLoadGame->currentVersion);
       }
     }
-    v5 = SaveLoad_CurrentSavegame->unk000[5];
-    LODWORD(v29) = 2;
-    SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v34, v29);
+    bufferCursor = g_TESSaveLoadGame->bufferCursor; /*0x467d4b*/
+    SaveLoad_LoadData(g_TESSaveLoadGame, &destination, 2u); /*0x467d55*/
   }
-  HIDWORD(v28) = a2;
-  if ( (a3 & 0x10) != 0 )
+  if ( (changeMask & 0x10) != 0 )               // 3DTheft decode 2026-05-13: Save/load modified actor-base flags bit 0x10 reloads the 4-byte flags dword at component +0x04. /*0x467d62*/
+    SaveLoad_LoadData(g_TESSaveLoadGame, &self->flags, 0x10u); /*0x467d70*/
+  if ( (changeMask & 0x40) != 0 ) /*0x467d78*/
   {
-    LODWORD(v28) = 0x10;
-    SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, ecx0 + 1, v28);
-  }
-  if ( (a3 & 0x40) != 0 )
-  {
-    TESActorBaseData_ClearFactionList(ecx0);
-    LODWORD(v28) = 2;
-    SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v33, v28);
-    a1 = 0;
-    if ( (_WORD)v33 )
+    TESActorBaseData_ClearFactionList((unsigned int *)self); /*0x467d80*/
+    SaveLoad_LoadData(g_TESSaveLoadGame, &v27, 2u);// EngineFix analysis 2026-05-07: TESActorBaseData faction-list count is save-controlled UInt16; loop consumes FormID + rank byte (5 bytes) and does lookup/allocation per entry. Candidate count clamp to remaining / 5. /*0x467d92*/
+    a1 = 0; /*0x467d9d*/
+    if ( (_WORD)v27 ) /*0x467da5*/
     {
-      do
+      do /*0x467e3e*/
       {
-        *(_DWORD *)v26 = 4;
-        SaveLoad_LoadFormID(v37, *(size_t *)v26, *(int *)&v26[8], v31, v32);
-        LODWORD(v21) = 1;
-        SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, v37, v21);
-        v9 = TESForm_LookupByFormID(a1);
-        if ( v9 )
+        SaveLoad_LoadFormID(g_TESSaveLoadGame, &v31, 4u); /*0x467dbd*/
+        SaveLoad_LoadData(g_TESSaveLoadGame, &v31, 1u); /*0x467dcf*/
+        v8 = TESForm_LookupByFormID(a1); /*0x467dde*/
+        if ( v8 ) /*0x467de5*/
         {
-          v10 = FormHeapAlloc(8u);
-          *(_DWORD *)v10 = v9;
-          *(_BYTE *)(v10 + 4) = v37[0];
-          if ( ecx0[6] )
+          v9 = (FactionListData *)FormHeapAlloc(8u);// EngineFix implementation 2026-05-07: narrow allocation-failure hook. If faction entry allocation fails after FormID+rank are consumed, pop the allocation argument and resume at loop tail 0x467E2C without writing through NULL. /*0x467dee*/
+          v9->faction = v8;                     // EngineFix analysis 2026-05-07: FormHeapAlloc result for faction entry is used before a null check; allocation failure would write through NULL. /*0x467df0*/
+          v9->rank = v31; /*0x467df9*/
+          if ( self->factionList.data ) /*0x467dfc*/
           {
-            v11 = (_DWORD *)FormHeapAlloc(8u);
-            if ( v11 )
+            v10 = (FactionListEntry *)FormHeapAlloc(8u); /*0x467e04*/
+            if ( v10 )                          // EngineFix implementation 2026-05-07: narrow allocation-failure hook for non-empty faction list node. On node allocation failure, free the just-created entry and resume at 0x467E2C, leaving the existing list unchanged. /*0x467e0e*/
             {
-              *v11 = ecx0[6];
-              v11[1] = 0;
+              v10->data = self->factionList.data; /*0x467e13*/
+              v10->next = 0; /*0x467e15*/
             }
             else
             {
-              v11 = 0;
+              v10 = 0; /*0x467e1e*/
             }
-            v11[1] = ecx0[7];
-            ecx0[7] = (unsigned int)v11;
+            v10->next = self->factionList.next; // EngineFix analysis 2026-05-07: list-node allocation failure path zeroes eax then writes [eax+4]. Patch allocation failure to leave list unchanged after entry bytes are consumed. /*0x467e23*/
+            self->factionList.next = v10; /*0x467e26*/
           }
-          ecx0[6] = v10;
+          self->factionList.data = v9; /*0x467e29*/
         }
-        ++v33;
+        ++v27; /*0x467e3a*/
       }
-      while ( v33 < (unsigned __int16)v31 );
+      while ( v27 < v25 ); /*0x467e3e*/
     }
   }
-  LOBYTE(v12) = sub_45A170();
-  if ( (_BYTE)v12 )
+  if ( TESSaveLoadGame_UseSaveGameBlocks() ) /*0x467e4a*/
   {
-    v13 = SaveLoad_CurrentSavegame;
-    v14 = (UInt32 *)SaveLoad_CurrentSavegame[1].unk030[0];
-    v15 = SaveLoad_CurrentSavegame->unk000[5];
-    if ( v14 )
+    v11 = g_TESSaveLoadGame; /*0x467e58*/
+    v12 = (UInt32 *)g_TESSaveLoadGame->currentlyLoadingFormHeader; /*0x467e5e*/
+    v13 = g_TESSaveLoadGame->bufferCursor; /*0x467e66*/
+    if ( v12 ) /*0x467e69*/
     {
-      v16 = TESForm_LookupByFormID(*v14);
-      v12 = v5 + (unsigned __int16)v32;
-      if ( v15 <= v12 )
+      v14 = TESForm_LookupByFormID(*v12); /*0x467e77*/
+      v15 = &bufferCursor[v26]; /*0x467e7e*/
+      if ( v13 <= v15 ) /*0x467e85*/
       {
-        if ( v15 < v12 )
+        if ( v13 < v15 ) /*0x467ec8*/
         {
-          v18 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v16->vtbl->GetEditorName)(
-                                v16,
-                                *((unsigned __int8 *)v14 + 9),
-                                *(UInt32 *)((char *)v14 + 5));
-          LOBYTE(v12) = PrintError(
-                          "LoadGame Buffer underrun of %i bytes in file %s on line %i.  Currently loading form is %08X %s"
-                          " with version %i and flags %08X",
-                          v5 + (unsigned __int16)v32 - v15,
-                          "..\\TES Shared\\TESActorBaseData.cpp",
-                          0x69A,
-                          *v14,
-                          v18,
-                          v23,
-                          v25);
+          v17 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v14->vtbl->GetEditorName)( /*0x467edf*/
+                                v14,
+                                *((unsigned __int8 *)v12 + 9),
+                                *(UInt32 *)((char *)v12 + 5));
+          PrintError( /*0x467efe*/
+            "LoadGame Buffer underrun of %i bytes in file %s on line %i.  Currently loading form is %08X %s with version "
+            "%i and flags %08X",
+            &bufferCursor[v26 - (_DWORD)v13],
+            "..\\TES Shared\\TESActorBaseData.cpp",
+            0x69A,
+            *v12,
+            v17,
+            v20,
+            v22);
         }
       }
       else
       {
-        v17 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v16->vtbl->GetEditorName)(
-                              v16,
-                              *((unsigned __int8 *)v14 + 9),
-                              *(UInt32 *)((char *)v14 + 5));
-        LOBYTE(v12) = PrintError(
-                        "LoadGame Buffer overrun of %i bytes in file %s on line %i.  Currently loading form is %08X %s wi"
-                        "th version %i and flags %08X",
-                        v15 - (unsigned __int16)v32 - v5,
-                        "..\\TES Shared\\TESActorBaseData.cpp",
-                        0x69A,
-                        *v14,
-                        v17,
-                        v22,
-                        v24);
+        v16 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v14->vtbl->GetEditorName)( /*0x467e98*/
+                              v14,
+                              *((unsigned __int8 *)v12 + 9),
+                              *(UInt32 *)((char *)v12 + 5));
+        PrintError( /*0x467eb7*/
+          "LoadGame Buffer overrun of %i bytes in file %s on line %i.  Currently loading form is %08X %s with version %i and flags %08X",
+          &v13[-v26] - bufferCursor,
+          "..\\TES Shared\\TESActorBaseData.cpp",
+          0x69A,
+          *v12,
+          v16,
+          v19,
+          v21);
       }
     }
     else
     {
-      LOBYTE(v12) = v32;
-      v19 = (unsigned __int16)v32 + v5;
-      if ( v15 <= v19 )
+      v18 = &bufferCursor[v26]; /*0x467f14*/
+      if ( v13 <= v18 ) /*0x467f19*/
       {
-        if ( v15 < v19 )
-          LOBYTE(v12) = PrintError(
-                          "LoadGame Buffer underrun of %i bytes in file %s on line %i.  Current version is %i",
-                          v5 + (unsigned __int16)v32 - v15,
-                          "..\\TES Shared\\TESActorBaseData.cpp",
-                          0x69A,
-                          LOBYTE(v13[1].createdObjectList.next));
+        if ( v13 < v18 ) /*0x467f45*/
+          PrintError( /*0x467f60*/
+            "LoadGame Buffer underrun of %i bytes in file %s on line %i.  Current version is %i",
+            &bufferCursor[v26 - (_DWORD)v13],
+            "..\\TES Shared\\TESActorBaseData.cpp",
+            0x69A,
+            v11->currentVersion);
       }
       else
       {
-        LOBYTE(v12) = PrintError(
-                        "LoadGame Buffer overrun of %i bytes in file %s on line %i.  Current version is %i",
-                        v15 - (unsigned __int16)v32 - v5,
-                        "..\\TES Shared\\TESActorBaseData.cpp",
-                        0x69A,
-                        LOBYTE(v13[1].createdObjectList.next));
+        PrintError( /*0x467f34*/
+          "LoadGame Buffer overrun of %i bytes in file %s on line %i.  Current version is %i",
+          &v13[-v26] - bufferCursor,
+          "..\\TES Shared\\TESActorBaseData.cpp",
+          0x69A,
+          v11->currentVersion);
       }
     }
   }
-  return v12;
 }

@@ -10,21 +10,21 @@ int __userpurge sub_730CA0@<eax>(NiRenderer *this@<ecx>, unsigned int a2@<esi>, 
   int v10; // [esp+4h] [ebp-8h] BYREF
   _BYTE v11[4]; // [esp+8h] [ebp-4h] BYREF
 
-  v3 = Size;
-  if ( *(_DWORD *)(Size + 0xD8) < 0x5000010u )
+  v3 = Size; /*0x730ca4*/
+  if ( *(_DWORD *)(Size + 0xD8) < 0x5000010u ) /*0x730cb2*/
   {
-    sub_721610(this, __PAIR64__(a2, Size));
-    v8 = *(_DWORD *)(v3 + 0x21C);
-    v4 = *(int (__cdecl **)(int, size_t *, int, int *, int))(v8 + 4);
-    v10 = 4;
-    result = v4(v8, &Size, 4, &v10, 1);
-    for ( i = 0; i < (unsigned int)Size; ++i )
+    sub_721610(this, __PAIR64__(a2, Size)); /*0x730cb6*/
+    v8 = *(_DWORD *)(v3 + 0x21C); /*0x730ccf*/
+    v4 = *(int (__cdecl **)(int, size_t *, int, int *, int))(v8 + 4); /*0x730cd0*/
+    v10 = 4; /*0x730cd3*/
+    result = v4(v8, &Size, 4, &v10, 1); /*0x730cdb*/
+    for ( i = 0; i < (unsigned int)Size; ++i ) /*0x730ce6*/
     {
-      v9 = *(_DWORD *)(v3 + 0x21C);
-      v7 = *(int (__cdecl **)(int, _BYTE *, int, int *, int))(v9 + 4);
-      v10 = 4;
-      result = v7(v9, v11, 4, &v10, 1);
+      v9 = *(_DWORD *)(v3 + 0x21C); /*0x730d04*/
+      v7 = *(int (__cdecl **)(int, _BYTE *, int, int *, int))(v9 + 4); /*0x730d05*/
+      v10 = 4; /*0x730d08*/
+      result = v7(v9, v11, 4, &v10, 1); /*0x730d10*/
     }
   }
-  return result;
+  return result; /*0x730d1f*/
 }

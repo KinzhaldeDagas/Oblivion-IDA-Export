@@ -35,7 +35,7 @@
 0x477523: cmp     eax, 5
 0x477526: jg      short loc_47752F
 0x477528: mov     ecx, esi
-0x47752A: call    sub_4728C0
+0x47752A: call    ActorAnimData_ResetRootMotion; Resets ActorAnimData root-motion state: zeroes the cached accumulation vector at +0x18, restores the accumulation/root node transform fields, then finds the matching accumulation controllers and resets them. Used before sequence play and by full actor/animation reset paths.
 0x47752F: mov     eax, [esi+20h]
 0x477532: mov     ecx, [esi+18h]
 0x477535: mov     edx, [esi+1Ch]
@@ -59,7 +59,7 @@
 0x47757B: mov     [esp+arg_F], 0
 0x477580: mov     [esp+arg_2C], edx
 0x477584: mov     [esp+arg_30], eax
-0x477588: call    sub_5E05B0
+0x477588: call    sub_5E05B0; Checks process movement flags low nibble via vfunc +0x2C0. Player input uses this alongside swimming/sneaking skill progression; useful as a broad movement-mode guard.
 0x47758D: test    al, al
 0x47758F: jz      loc_477837
 0x477595: mov     ecx, [esp+arg_10]
@@ -81,7 +81,7 @@
 0x4775D0: jz      loc_477837
 0x4775D6: mov     ecx, [eax+68h]
 0x4775D9: xor     edi, edi
-0x4775DB: call    TESAnimGroup_GetAnimationGroup
+0x4775DB: call    TESAnimGroup_GetAnimationGroup; TESAnimGroup native group id accessor: byte at TESAnimGroup +0x08.
 0x4775E0: add     eax, 0FFFFFFD8h
 0x4775E3: cmp     eax, 1
 0x4775E6: jbe     short loc_47760F
@@ -132,7 +132,7 @@
 0x47767D: mov     edi, 6
 0x477682: mov     eax, [esi+0A0h]
 0x477688: mov     ecx, [eax+68h]
-0x47768B: call    TESAnimGroup_GetAnimationGroup
+0x47768B: call    TESAnimGroup_GetAnimationGroup; TESAnimGroup native group id accessor: byte at TESAnimGroup +0x08.
 0x477690: cmp     edi, eax
 0x477692: jnz     loc_477746
 0x477698: mov     ecx, [esi+0A0h]
@@ -141,7 +141,7 @@
 0x4776A7: fstp    [esp+arg_1C]
 0x4776AB: lea     edx, [esp+arg_44]
 0x4776AF: push    edx
-0x4776B0: call    sub_51AAB0
+0x4776B0: call    TESAnimGroup_GetMovementVector; TESAnimGroup movement-vector getter. Copies the three float movement components stored at TESAnimGroup +0x14/+0x18/+0x1C.
 0x4776B5: fld     dword ptr [eax]
 0x4776B7: fld     [esp+arg_1C]
 0x4776BB: fld     st
@@ -164,7 +164,7 @@
 0x4776EF: fstp    [esp+arg_3C]
 0x4776F3: fmul    [esp+arg_24]
 0x4776F7: fstp    [esp+arg_40]
-0x4776FB: fld     dword ptr [esi+0BCh]
+0x4776FB: fld     dword ptr [esi+0BCh]; ActorAnimData update fallback movement-vector path reads +0xBC multiplier before writing scaled vector components.
 0x477701: fstp    [esp+arg_1C]
 0x477705: fld     [esp+arg_38]
 0x477709: fld     [esp+arg_1C]
@@ -184,14 +184,14 @@
 0x477739: mov     edx, [esp+arg_24]
 0x47773D: mov     [esp+arg_34], edx
 0x477741: jmp     loc_477837
-0x477746: mov     ecx, [esp+arg_10]
-0x47774A: push    0
-0x47774C: push    0
-0x47774E: push    edi
-0x47774F: call    Actor_LoadAnimGroup?
+0x477746: mov     ecx, [esp+arg_10]; this
+0x47774A: push    0; forceWeaponPrefix
+0x47774C: push    0; weaponEntryDataArg
+0x47774E: push    edi; groupID
+0x47774F: call    Actor_LoadAnimGroup_; Builds an initial encoded key from live actor movement/weapon state and requested fixed group ID, then returns ActorAnimData_ResolveAnimKeyFallback's concrete playable key or sentinel 0x00FF when no ActorAnimData exists.
 0x477754: movzx   edi, ax
 0x477757: push    edi
-0x477758: call    sub_51AA00
+0x477758: call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.
 0x47775D: add     esp, 4
 0x477760: test    eax, eax
 0x477762: jz      loc_477837
@@ -199,7 +199,7 @@
 0x47776E: lea     eax, [esp+arg_1C]
 0x477772: push    eax
 0x477773: push    edi
-0x477774: call    sub_470960
+0x477774: call    ActorAnimData_FindAnimMapEntry; CustomAnimSupport decode: anim-map lookup helper used by playback, validators, and save/load restore to test an encoded group key.
 0x477779: test    al, al
 0x47777B: jz      loc_477837
 0x477781: mov     ecx, [esp+arg_1C]
@@ -215,7 +215,7 @@
 0x4777A3: fstp    [esp+4+arg_18]
 0x4777A7: push    ecx
 0x4777A8: mov     ecx, eax
-0x4777AA: call    sub_51AAB0
+0x4777AA: call    TESAnimGroup_GetMovementVector; TESAnimGroup movement-vector getter. Copies the three float movement components stored at TESAnimGroup +0x14/+0x18/+0x1C.
 0x4777AF: fld     [esp+4+arg_18]
 0x4777B3: fld     st
 0x4777B5: fmul    dword ptr [eax]
@@ -236,7 +236,7 @@
 0x4777E5: fstp    [esp+4+arg_44]
 0x4777E9: fmul    [esp+4+arg_3C]
 0x4777ED: fstp    [esp+4+arg_48]
-0x4777F1: fld     dword ptr [esi+0BCh]
+0x4777F1: fld     dword ptr [esi+0BCh]; ActorAnimData update fallback movement-vector path reads +0xBC multiplier before writing scaled vector components.
 0x4777F7: fstp    [esp+4+arg_18]
 0x4777FB: fld     [esp+4+arg_40]
 0x4777FF: fld     [esp+4+arg_18]
@@ -311,7 +311,7 @@
 0x4778E3: fsub    [esp+arg_58]
 0x4778E7: fstp    [esp+arg_4C]
 0x4778EB: mov     edx, [esp+arg_4C]
-0x4778EF: mov     [esi+0Ch], eax
+0x4778EF: mov     [esi+0Ch], eax; ActorAnimData update writes final movement vector delta to +0x0C/+0x10/+0x14 after sampling movement group or node delta and applying actor scale.
 0x4778F2: mov     [esi+10h], ecx
 0x4778F5: mov     ecx, [ebp+8]
 0x4778F8: mov     [esi+14h], edx
@@ -321,12 +321,12 @@
 0x477905: fstp    [esp+arg_1C]
 0x477909: fld     [esp+arg_1C]
 0x47790D: fld     st
-0x47790F: fmul    dword ptr [esi+0Ch]
+0x47790F: fmul    dword ptr [esi+0Ch]; ActorAnimData movement vector X is multiplied by actor scale after animation movement sampling.
 0x477912: fstp    dword ptr [esi+0Ch]
-0x477915: fld     dword ptr [esi+10h]
+0x477915: fld     dword ptr [esi+10h]; ActorAnimData movement vector Y is multiplied by actor scale after animation movement sampling.
 0x477918: fmul    st, st(1)
 0x47791A: fstp    dword ptr [esi+10h]
-0x47791D: fmul    dword ptr [esi+14h]
+0x47791D: fmul    dword ptr [esi+14h]; ActorAnimData movement vector Z is multiplied by actor scale before vertical correction from node height.
 0x477920: fstp    dword ptr [esi+14h]
 0x477923: mov     eax, [esi+8]
 0x477926: cmp     word ptr [eax+0B6h], 0
@@ -394,7 +394,7 @@
 0x477A07: test    eax, eax
 0x477A09: jz      short loc_477A21
 0x477A0B: push    eax
-0x477A0C: call    sub_49FD20
+0x477A0C: call    BSAnimGroupSequence_GetControlledBlockPriority; Finds the controlled-block record whose palette-resolved target name exactly matches the supplied node name and returns that record's priority byte at +0x0D; returns zero when absent.
 0x477A11: cmp     al, bl
 0x477A13: jbe     short loc_477A1D
 0x477A15: mov     edx, [edi]
@@ -413,7 +413,7 @@
 0x477A43: push    ecx
 0x477A44: mov     ecx, [esp+4+arg_14]
 0x477A48: fstp    [esp+4+var_4]; float
-0x477A4B: call    sub_49F4A0
+0x477A4B: call    BSAnimGroupSequence_SampleUpdate; Samples a BSAnimGroupSequence only while native controller state +0x44 is 1, 2, or 3. Passes sequence +0x48 plus ActorAnimData scheduler time +0x94 to NiControllerSequence_AdvanceTime with commit enabled.
 0x477A50: fstp    [esp+arg_1C]
 0x477A54: fld     dword ptr ds:0A7DEB4h
 0x477A5A: fchs
@@ -448,8 +448,8 @@
 0x477AA7: mov     ecx, [ebp+8]
 0x477AAA: fstp    [esp+0Ch+var_C]; float
 0x477AAD: push    ecx; int
-0x477AAE: mov     ecx, [eax+68h]
-0x477AB1: call    sub_51AF70
+0x477AAE: mov     ecx, [eax+68h]; Dispatch parsed TESAnimGroup events for this active slot after sampled time crosses event key times.
+0x477AB1: call    TESAnimGroup_DispatchTextKeyEvents; Dispatches parsed TESAnimGroup events whose timestamps are crossed between previous and current sequence time, including wrap-around. Sound records have a non-null +0x0C sound entry; Enum records use the +0x04 ID and packed source-text position at +0x08. This is reached from ActorAnimData's sampled-slot update.
 0x477AB6: jmp     short loc_477ABC
 0x477AB8: fstp    st(1)
 0x477ABA: fstp    st
@@ -472,13 +472,13 @@
 0x477AEF: test    ecx, ecx
 0x477AF1: mov     dword ptr [edi], 3
 0x477AF7: jz      short loc_477B0F
-0x477AF9: call    Actor_GetCurrentAction
+0x477AF9: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x477AFE: cmp     eax, 0Bh
 0x477B01: jnz     short loc_477B0F
-0x477B03: mov     ecx, [edi+28h]
-0x477B06: push    0
-0x477B08: push    0FFFFFFFFh
-0x477B0A: call    HighPRocess_DoAction?????
+0x477B03: mov     ecx, [edi+28h]; this
+0x477B06: push    0; sequence
+0x477B08: push    0FFFFFFFFh; action
+0x477B0A: call    Actor_SetCurrentActionWithBowVisualCleanup; Void Actor action-transition wrapper. Performs transition-specific bow/held-arrow visual cleanup, then commits action and sequence through process vtable +0x2D8. It has no success/result contract; callers/plugins must not consume EAX, so Crossbow's UInt32 HighProcessDoActionFn typedef is incorrect. Meaningful current-action state is HighProcess-only: HighProcess +0x2D0/+0x2D8 read/store +0x1F4/+0x1F8, while MiddleHigh returns None (-1) and its setter is a no-op; Crossbow's process-level-0 action filter therefore matches Oblivion. External Crossbow state-machine contrast: Equip-as-Cocked/first-shot-loaded is plugin policy, repeated action 4 while Reloading can flip state to Cocked and rebuild controller tracking, and interruption/cancellation actions are not modeled, leaving stale Reloading/Cocked phases.
 0x477B0F: mov     edi, [edi+4]
 0x477B12: cmp     edi, 2
 0x477B15: jz      short loc_477B1C
@@ -487,7 +487,7 @@
 0x477B1C: push    0
 0x477B1E: push    1
 0x477B20: mov     ecx, esi
-0x477B22: call    sub_475440
+0x477B22: call    ActorAnimData_CleanupOrPromoteQueuedIdles; Owns current/queued idle retirement and promotion across ActorAnimData +0xCC/+0xD0/+0xD4/+0xD8. Depending on caller flags, stops a still-active sequence, moves stale holders into the two cleanup slots, destroys them when no slot is available or forced, or promotes queued +0xD0 into current +0xCC.
 0x477B27: mov     byte ptr [esi+90h], 0FFh
 0x477B2E: pop     edi
 0x477B2F: pop     esi

@@ -1,4 +1,4 @@
-0x471730: cmp     dword ptr [ecx+0B8h], 0
+0x471730: cmp     dword ptr [ecx+0B8h], 0; Returns whether ActorAnimData has any deferred KFModel install state: first model at +0xB4 or linked-list head at +0xB8. ActorAnimData_Update uses this after each budgeted install.
 0x471737: jnz     short loc_471751
 0x471739: cmp     dword ptr [ecx+0B4h], 0
 0x471740: jnz     short loc_471751

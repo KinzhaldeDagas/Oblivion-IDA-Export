@@ -1,4 +1,4 @@
-0x4032D0: mov     edx, [esp+a3]
+0x4032D0: mov     edx, [esp+a3]; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.
 0x4032D4: push    esi
 0x4032D5: xor     esi, esi
 0x4032D7: cmp     edx, 3; switch 4 cases

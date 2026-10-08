@@ -1,4 +1,4 @@
-0x475020: push    0FFFFFFFFh
+0x475020: push    0FFFFFFFFh; Loads one serialized AnimIdle record, resolves its form, reconstructs loader/sequence state, and delegates timing restoration to the native sequence load helper.
 0x475022: push    offset SEH_6B9010
 0x475027: mov     eax, large fs:0
 0x47502D: push    eax
@@ -14,16 +14,16 @@
 0x475041: mov     large fs:0, eax
 0x475047: mov     ecx, ds:0B33B00h
 0x47504D: xor     ebx, ebx
-0x47504F: mov     [esp+34h+var_1C], ebx
+0x47504F: mov     [esp+34h+destination], ebx
 0x475053: xor     ebp, ebp
-0x475055: call    sub_45A170
+0x475055: call    TESSaveLoadGame_UseSaveGameBlocks
 0x47505A: test    al, al
 0x47505C: jz      loc_4750FB
-0x475062: mov     ecx, ds:0B33B00h
-0x475068: push    4; Size
+0x475062: mov     ecx, ds:0B33B00h; self
+0x475068: push    4; byteCount
 0x47506A: lea     eax, [esp+38h+Dst]
-0x47506E: push    eax; Dst
-0x47506F: call    SaveLoad_LoadData
+0x47506E: push    eax; destination
+0x47506F: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x475074: cmp     [esp+34h+Dst], 4B4F4C42h
 0x47507C: jz      short loc_4750E6
 0x47507E: mov     eax, ds:0B33B00h
@@ -32,7 +32,7 @@
 0x47508B: jz      short loc_4750CA
 0x47508D: mov     ecx, [esi]
 0x47508F: push    ecx; a1
-0x475090: call    TESForm_LookupByFormID
+0x475090: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x475095: mov     edx, [esi+5]
 0x475098: movzx   ecx, byte ptr [esi+9]
 0x47509C: add     esp, 4
@@ -58,26 +58,26 @@
 0x4750D9: push    offset aLoadgameBuff_0; "LoadGame Buffer error: Block Header is "...
 0x4750DE: call    PrintError
 0x4750E3: add     esp, 10h
-0x4750E6: mov     ecx, ds:0B33B00h
+0x4750E6: mov     ecx, ds:0B33B00h; self
 0x4750EC: mov     ebp, [ecx+14h]
-0x4750EF: push    2; Size
-0x4750F1: lea     eax, [esp+38h+var_1C]
-0x4750F5: push    eax; Dst
-0x4750F6: call    SaveLoad_LoadData
-0x4750FB: push    4; Size
+0x4750EF: push    2; byteCount
+0x4750F1: lea     eax, [esp+38h+destination]
+0x4750F5: push    eax; destination
+0x4750F6: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
+0x4750FB: push    4; byteCount
 0x4750FD: lea     ecx, [esp+38h+ArgList]
-0x475101: push    ecx; Dst
-0x475102: mov     ecx, ds:0B33B00h
-0x475108: call    SaveLoad_LoadFormID
+0x475101: push    ecx; destination
+0x475102: mov     ecx, ds:0B33B00h; self
+0x475108: call    SaveLoad_LoadFormID; EnginePatch v2: byte-checked SaveLoad_LoadFormID hook. Bounded save-buffer copy, then preserves original iref-to-formID translation behavior.
 0x47510D: cmp     dword ptr [esp+3Ch+var_20], ebx
 0x475111: jnz     short loc_47511B
 0x475113: test    al, al
 0x475115: jz      loc_4751D8
-0x47511B: mov     ecx, ds:0B33B00h
-0x475121: push    2; Size
+0x47511B: mov     ecx, ds:0B33B00h; self
+0x475121: push    2; byteCount
 0x475123: lea     edx, [esp+40h+var_28]
-0x475127: push    edx; Dst
-0x475128: call    SaveLoad_LoadData
+0x475127: push    edx; destination
+0x475128: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x47512D: mov     eax, dword ptr [esp+3Ch+var_20]
 0x475131: cmp     eax, ebx
 0x475133: jz      short loc_4751A6
@@ -86,7 +86,7 @@
 0x47513B: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x475140: push    ebx; int
 0x475141: push    eax; a1
-0x475142: call    TESForm_LookupByFormID
+0x475142: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x475147: add     esp, 4
 0x47514A: push    eax; void *
 0x47514B: call    OblivionDynamicCast
@@ -108,7 +108,7 @@
 0x475178: push    4
 0x47517A: push    esi
 0x47517B: mov     ecx, eax
-0x47517D: call    sub_474C50
+0x47517D: call    AnimIdle_InitAndLoadKF; Initializes the 0x2C-byte AnimIdle runtime holder and starts its KF load. Observed layout: +0x00 phase (0 pending/unavailable, 1 ready, 2 active, 3 terminal), +0x04 completion/action mode, +0x08 KFModel, +0x0C requested slot/type, +0x10 played sequence, +0x24 TESIdleForm, +0x28 actor ref. Builds Meshes\\<TESIdleForm model path>, loads now or queues asynchronously, binds two actor-specific resources, and marks phase 1 when a KFModel is immediately available.
 0x475182: jmp     short loc_475186
 0x475184: xor     eax, eax
 0x475186: mov     edx, [esp+3Ch]
@@ -119,7 +119,7 @@
 0x475192: fstp    [esp+44h+var_44]; float
 0x475195: mov     [esp+44h+var_C], 0FFFFFFFFh
 0x47519D: mov     ebx, eax
-0x47519F: call    sub_474E90
+0x47519F: call    AnimIdle_RestoreLoadedKFState; Reconnects a loaded AnimIdle KF/sequence to ActorAnimData, restores nested sequence state, and preserves the idle phase needed by queued-idle processing.
 0x4751A4: jmp     short loc_4751D8
 0x4751A6: mov     ecx, [esp+3Ch+var_4]
 0x4751AA: mov     eax, [ecx]
@@ -134,9 +134,9 @@
 0x4751C9: add     esp, 0Ch
 0x4751CC: push    ecx
 0x4751CD: mov     ecx, ds:0B33B00h
-0x4751D3: call    SaveLoad_AdvanceBufferOffset
+0x4751D3: call    SaveLoad_AdvanceBufferOffset; EnginePatch v2: byte-checked SaveLoad_AdvanceBufferOffset hook. Clamps save cursor movement to active tracked record buffer.
 0x4751D8: mov     ecx, ds:0B33B00h
-0x4751DE: call    sub_45A170
+0x4751DE: call    TESSaveLoadGame_UseSaveGameBlocks
 0x4751E3: test    al, al
 0x4751E5: jz      loc_4752E1
 0x4751EB: mov     ecx, ds:0B33B00h
@@ -146,7 +146,7 @@
 0x4751FC: jz      loc_475297
 0x475202: mov     edx, [edi]
 0x475204: push    edx; a1
-0x475205: call    TESForm_LookupByFormID
+0x475205: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x47520A: mov     ecx, eax
 0x47520C: movzx   eax, [esp+40h+var_24]
 0x475211: add     eax, ebp
@@ -228,3 +228,15 @@
 0x4752F2: pop     ebx
 0x4752F3: add     esp, 20h
 0x4752F6: retn
+0x9C6FC0: mov     eax, [ebp-10h]
+0x9C6FC3: push    eax
+0x9C6FC4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C6FC9: pop     ecx
+0x9C6FCA: retn
+0x9C6FCB: mov     edx, [esp+arg_4]
+0x9C6FCF: lea     eax, [edx-24h]
+0x9C6FD2: mov     ecx, [edx-28h]
+0x9C6FD5: xor     ecx, eax
+0x9C6FD7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C6FDC: mov     eax, offset stru_AEF44C
+0x9C6FE1: jmp     ___CxxFrameHandler3

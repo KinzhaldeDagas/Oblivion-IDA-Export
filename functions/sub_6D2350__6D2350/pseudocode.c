@@ -1,19 +1,19 @@
-NiTimeController *__stdcall sub_6D2350(int a1)
+NiTimeController *__thiscall sub_6D2350(_DWORD *this, _DWORD **a2)
 {
-  NiTimeController *v1; // eax
-  NiTimeController *v2; // esi
+  NiTimeController *v3; // eax
+  NiTimeController *v4; // esi
 
-  v1 = (NiTimeController *)FormHeapAlloc(0x40u);
-  v2 = v1;
-  if ( v1 )
+  v3 = (NiTimeController *)FormHeapAlloc(0x40u); /*0x6d2377*/
+  v4 = v3; /*0x6d237c*/
+  if ( v3 ) /*0x6d238f*/
   {
-    sub_6EC180(v1);
-    v2->vtbl = (NiTimeControllerVtbl *)&NiAlphaController::`vftable';
+    sub_6EC180(v3); /*0x6d2393*/
+    v4->vtbl = (NiTimeControllerVtbl *)&NiAlphaController::`vftable'; /*0x6d2398*/
   }
   else
   {
-    v2 = 0;
+    v4 = 0; /*0x6d23a0*/
   }
-  sub_6ECB60(v2, a1);
-  return v2;
+  j_NiSingleInterpController_CopyMembers(this, (int)v4, a2); /*0x6d23b2*/
+  return v4; /*0x6d23b9*/
 }

@@ -63,7 +63,7 @@
 0x5E9B1D: mov     ecx, [esi+58h]
 0x5E9B20: mov     eax, [ecx]
 0x5E9B22: mov     eax, [eax+18Ch]
-0x5E9B28: lea     edx, [esp+50h+var_34]
+0x5E9B28: lea     edx, [esp+50h+slot]
 0x5E9B2C: push    edx
 0x5E9B2D: call    eax
 0x5E9B2F: cmp     esi, ds:0B333C4h
@@ -87,16 +87,16 @@
 0x5E9B69: mov     [esp+50h+var_4], 0
 0x5E9B71: jz      short loc_5E9B83
 0x5E9B73: and     ebx, 0FFFFFFFDh
-0x5E9B76: lea     ecx, [esp+50h+var_34]; this
+0x5E9B76: lea     ecx, [esp+50h+slot]; slot
 0x5E9B7A: mov     [esp+50h+var_38], ebx
-0x5E9B7E: call    sub_7016A0
+0x5E9B7E: call    NiPointerSlot_Release
 0x5E9B83: or      ebp, 0FFFFFFFFh
 0x5E9B86: test    bl, 1
 0x5E9B89: mov     [esp+50h+var_4], ebp
 0x5E9B8D: jz      short loc_5E9B9B
-0x5E9B8F: lea     ecx, [esp+50h+var_30]; this
+0x5E9B8F: lea     ecx, [esp+50h+var_30]; slot
 0x5E9B93: and     ebx, 0FFFFFFFEh
-0x5E9B96: call    sub_7016A0
+0x5E9B96: call    NiPointerSlot_Release
 0x5E9B9B: cmp     byte ptr [esp+50h+var_3C+3], 0
 0x5E9BA0: jz      short loc_5E9BB8
 0x5E9BA2: xor     al, al
@@ -114,22 +114,22 @@
 0x5E9BC0: mov     ecx, edi
 0x5E9BC2: call    edx
 0x5E9BC4: fld     dword ptr [eax]
-0x5E9BC6: fsub    dword ptr [esp+50h+var_18]
+0x5E9BC6: fsub    [esp+50h+var_18]
 0x5E9BCA: lea     ecx, [esp+50h+var_24]
 0x5E9BCE: fstp    [esp+50h+var_30]
 0x5E9BD2: fld     dword ptr [eax+4]
 0x5E9BD5: fsub    [esp+50h+var_14]
-0x5E9BD9: fstp    [esp+50h+var_34]
+0x5E9BD9: fstp    [esp+50h+slot]
 0x5E9BDD: fld     dword ptr [eax+8]
 0x5E9BE0: fsub    [esp+50h+var_10]
 0x5E9BE4: fstp    [esp+50h+var_38]
 0x5E9BE8: fld     [esp+50h+var_30]
 0x5E9BEC: fstp    [esp+50h+var_24]
-0x5E9BF0: fld     [esp+50h+var_34]
+0x5E9BF0: fld     [esp+50h+slot]
 0x5E9BF4: fstp    [esp+50h+var_20]
 0x5E9BF8: fld     [esp+50h+var_38]
 0x5E9BFC: fstp    [esp+50h+var_1C]
-0x5E9C00: call    sub_43F350
+0x5E9C00: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x5E9C05: fstp    st
 0x5E9C07: fld     [esp+50h+var_24]
 0x5E9C0B: fld     qword ptr ds:0A492B0h
@@ -142,19 +142,19 @@
 0x5E9C23: fmul    [esp+50h+var_1C]
 0x5E9C27: fstp    [esp+50h+var_1C]
 0x5E9C2B: fld     [esp+50h+var_24]
-0x5E9C2F: fadd    dword ptr [esp+50h+var_18]
+0x5E9C2F: fadd    [esp+50h+var_18]
 0x5E9C33: fstp    [esp+50h+var_30]
 0x5E9C37: fld     [esp+50h+var_20]
 0x5E9C3B: fadd    [esp+50h+var_14]
-0x5E9C3F: fstp    [esp+50h+var_34]
+0x5E9C3F: fstp    [esp+50h+slot]
 0x5E9C43: fld     [esp+50h+var_1C]
 0x5E9C47: fadd    [esp+50h+var_10]
 0x5E9C4B: fstp    [esp+50h+var_38]
 0x5E9C4F: fld     [esp+50h+var_30]
 0x5E9C53: fstp    [esp+50h+var_24]
 0x5E9C57: mov     eax, [esp+50h+var_24]
-0x5E9C5B: fld     [esp+50h+var_34]
-0x5E9C5F: mov     dword ptr [esp+50h+var_18], eax
+0x5E9C5B: fld     [esp+50h+slot]
+0x5E9C5F: mov     [esp+50h+var_18], eax
 0x5E9C63: fstp    [esp+50h+var_20]
 0x5E9C67: mov     ecx, [esp+50h+var_20]
 0x5E9C6B: fld     [esp+50h+var_38]
@@ -202,14 +202,14 @@
 0x5E9CF5: mov     [esp+50h+var_4], edi
 0x5E9CF9: jz      short loc_5E9D0B
 0x5E9CFB: and     ebx, 0FFFFFFF7h
-0x5E9CFE: lea     ecx, [esp+50h+var_2C]; this
+0x5E9CFE: lea     ecx, [esp+50h+var_2C]; slot
 0x5E9D02: mov     [esp+50h+var_38], ebx
-0x5E9D06: call    sub_7016A0
+0x5E9D06: call    NiPointerSlot_Release
 0x5E9D0B: test    bl, 4
 0x5E9D0E: mov     [esp+50h+var_4], ebp
 0x5E9D12: jz      short loc_5E9D1D
-0x5E9D14: lea     ecx, [esp+50h+var_28]; this
-0x5E9D18: call    sub_7016A0
+0x5E9D14: lea     ecx, [esp+50h+var_28]; slot
+0x5E9D18: call    NiPointerSlot_Release
 0x5E9D1D: cmp     byte ptr [esp+50h+var_3C+3], 0
 0x5E9D22: jnz     loc_5E9BA2
 0x5E9D28: mov     al, 1
@@ -222,3 +222,38 @@
 0x5E9D39: pop     ebx
 0x5E9D3A: add     esp, 3Ch
 0x5E9D3D: retn
+0x9C2620: mov     eax, [ebp-38h]
+0x9C2623: and     eax, 1
+0x9C2626: jz      locret_9C2638
+0x9C262C: and     dword ptr [ebp-38h], 0FFFFFFFEh
+0x9C2630: lea     ecx, [ebp-30h]; slot
+0x9C2633: jmp     NiPointerSlot_Release
+0x9C2638: retn
+0x9C2639: mov     eax, [ebp-38h]
+0x9C263C: and     eax, 2
+0x9C263F: jz      locret_9C2651
+0x9C2645: and     dword ptr [ebp-38h], 0FFFFFFFDh
+0x9C2649: lea     ecx, [ebp-34h]; slot
+0x9C264C: jmp     NiPointerSlot_Release
+0x9C2651: retn
+0x9C2652: mov     eax, [ebp-38h]
+0x9C2655: and     eax, 4
+0x9C2658: jz      locret_9C266A
+0x9C265E: and     dword ptr [ebp-38h], 0FFFFFFFBh
+0x9C2662: lea     ecx, [ebp-28h]; slot
+0x9C2665: jmp     NiPointerSlot_Release
+0x9C266A: retn
+0x9C266B: mov     eax, [ebp-38h]
+0x9C266E: and     eax, 8
+0x9C2671: jz      locret_9C2683
+0x9C2677: and     dword ptr [ebp-38h], 0FFFFFFF7h
+0x9C267B: lea     ecx, [ebp-2Ch]; slot
+0x9C267E: jmp     NiPointerSlot_Release
+0x9C2683: retn
+0x9C2684: mov     edx, [esp+arg_4]
+0x9C2688: lea     eax, [edx-40h]
+0x9C268B: mov     ecx, [edx-44h]
+0x9C268E: xor     ecx, eax
+0x9C2690: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C2695: mov     eax, offset stru_AEB4F0
+0x9C269A: jmp     ___CxxFrameHandler3

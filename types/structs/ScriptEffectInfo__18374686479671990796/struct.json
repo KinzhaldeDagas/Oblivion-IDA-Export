@@ -1,46 +1,81 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "ScriptEffectInfo",
+  "definition": "struct ScriptEffectInfo\n{\nUInt32 scriptRefID;\nUInt32 school;\nBSStringT effectName;\nUInt32 visualEffectCode;\nUInt8 isHostile;\nUInt8 padIsHostile[3];\n}\n",
   "id": 18374686479671990796,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "scriptRefID",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "school",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "effectName",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 8
+      "size": 8,
+      "type": "BSStringT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "visualEffectCode",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "isHostile",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 1
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "padIsHostile",
       "offset": 21,
       "offset_hex": "0x15",
-      "size": 3
+      "size": 3,
+      "type": "UInt8[3]"
     }
   ],
   "name": "ScriptEffectInfo",
+  "ordinal": 9498,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 24
 }

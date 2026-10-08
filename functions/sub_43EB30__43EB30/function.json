@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
-  "callers_count": 26,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
+  "callers_count": 39,
+  "chunks": [
+    [
+      "0x43EB30",
+      "0x43EB7E"
+    ]
+  ],
+  "chunks_sha256": "33d4a9c7ad11bcf1d4079fdefd8e7b41f530fecf948440407585bd7fcffa268d",
+  "comment_regular": "Constructs a 0x18-byte FaceGenMatrix. Embedded vector layout: allocator state +0x08, begin +0x0C, end +0x10, capacity end +0x14.",
+  "comment_repeatable": "Constructs a 0x18-byte FaceGenMatrix. Embedded vector layout: allocator state +0x08, begin +0x0C, end +0x10, capacity end +0x14.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_43EB30",
+  "display_name": "FaceGenMatrix_Construct",
   "end_ea": "0x43EB7E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_43EB30",
+  "name": "FaceGenMatrix_Construct",
   "segment": ".text",
   "sha256": "33d4a9c7ad11bcf1d4079fdefd8e7b41f530fecf948440407585bd7fcffa268d",
   "size": 78,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x43EB30",
-  "type": "_DWORD *__thiscall(_DWORD *this)",
+  "total_chunk_size": 78,
+  "type": "FaceGenMatrix *__thiscall(FaceGenMatrix *this)",
   "xrefs_from_count": 40,
   "xrefs_to_count": 39
 }

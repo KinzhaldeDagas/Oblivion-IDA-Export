@@ -1,36 +1,36 @@
 void __thiscall ParticleShaderProperty::~ParticleShaderProperty(ParticleShaderProperty *this)
 {
-  int v2; // edi
-  int *v4; // edi
-  int v5; // edi
+  NiSourceTexture *spBaseTexture_10C; // edi
+  char *items; // edi
+  NiSourceTexture *v5; // edi
 
-  *(_DWORD *)this = &ParticleShaderProperty::`vftable';
-  v2 = *((_DWORD *)this + 0x43);
-  if ( v2 )
+  this->super.vtbl = &ParticleShaderProperty::`vftable'; /*0x7e571a*/
+  spBaseTexture_10C = this->spBaseTexture_10C; /*0x7e5720*/
+  if ( spBaseTexture_10C ) /*0x7e5730*/
   {
-    if ( !InterlockedDecrement((volatile LONG *)(v2 + 4)) )
-      (**(void (__thiscall ***)(int, int))v2)(v2, 1);
-    *((_DWORD *)this + 0x43) = 0;
+    if ( !InterlockedDecrement((volatile LONG *)&spBaseTexture_10C->members) ) /*0x7e5736*/
+      spBaseTexture_10C->vtbl->super.super.super.Destructor((NiRefObject *)spBaseTexture_10C, 1); /*0x7e574c*/
+    this->spBaseTexture_10C = 0; /*0x7e574e*/
   }
-  sub_477EF0((_WORD *)this + 0x88);
-  FormHeapFree(*((_DWORD *)this + 0x1B));
-  if ( dword_B46048-- == 1 )
+  NiTObjectArray_ClearAndRelease(&this->TargetArray_110); /*0x7e5760*/
+  FormHeapFree((unsigned int)this->particleInstanceBuffer_6C); /*0x7e5769*/
+  if ( unk_B46048-- == 1 ) /*0x7e5771*/
   {
-    FormHeapFree(dword_B46044);
-    dword_B46044 = 0;
+    FormHeapFree(unk_B46044); /*0x7e5781*/
+    unk_B46044 = 0; /*0x7e5789*/
   }
-  *((_DWORD *)this + 0x44) = &NiTArray<NiPointer<NiAVObject>>::`vftable';
-  v4 = *((int **)this + 0x45);
-  if ( v4 )
+  this->TargetArray_110.vtable = &NiTArray<NiPointer<NiAVObject>>::`vftable'; /*0x7e5793*/
+  items = (char *)this->TargetArray_110.items; /*0x7e5799*/
+  if ( items ) /*0x7e57a3*/
   {
-    _LN21(v4, 4u, v4[0xFFFFFFFF], (void (__thiscall *)(void *))sub_7016A0);
-    FormHeapFree((unsigned int)(v4 + 0xFFFFFFFF));
+    _LN21(items, 4u, *((_DWORD *)items + 0xFFFFFFFF), (void (__thiscall *)(void *))NiPointerSlot_Release); /*0x7e57b4*/
+    FormHeapFree((unsigned int)(items + 0xFFFFFFFC)); /*0x7e57ba*/
   }
-  v5 = *((_DWORD *)this + 0x43);
-  if ( v5 )
+  v5 = this->spBaseTexture_10C; /*0x7e57c2*/
+  if ( v5 ) /*0x7e57cf*/
   {
-    if ( !InterlockedDecrement((volatile LONG *)(v5 + 4)) )
-      (**(void (__thiscall ***)(int, int))v5)(v5, 1);
+    if ( !InterlockedDecrement((volatile LONG *)&v5->members) ) /*0x7e57d5*/
+      v5->vtbl->super.super.super.Destructor((NiRefObject *)v5, 1); /*0x7e57eb*/
   }
-  BSShaderProperty::~BSShaderProperty((BSShaderProperty *)this);
+  BSShaderProperty::~BSShaderProperty(&this->super); /*0x7e57f7*/
 }

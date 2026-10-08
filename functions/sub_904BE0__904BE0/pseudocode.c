@@ -17,26 +17,26 @@ int __thiscall sub_904BE0(_DWORD *this, int a2, __m128 **a3, __m128 *a4, int a5,
   int v21; // [esp+58h] [ebp-40h]
   _OWORD v22[3]; // [esp+68h] [ebp-30h] BYREF
 
-  v6 = (__m128)xmmword_A965C0;
-  v7 = a4[1];
-  qmemcpy(v22, a4, sizeof(v22));
-  v13 = a4[1].m128_u64[0];
-  v8 = a4[1].m128_i32[2];
-  v15 = a4[1].m128_i32[3];
-  v16 = a5;
-  v22[1] = _mm_xor_ps(v7, v6);
-  v12[1] = 0x7F7FFFFF;
-  v12[0] = &off_A9B4E8;
-  v14 = v8;
-  if ( !a6 )
-    return sub_904300(this, a3, a2, (int)v22, (int)v12, 0);
-  v17[0] = &off_A9B4E8;
-  v18 = a4[1].m128_u64[0];
-  v9 = a4[1].m128_i32[2];
-  v10 = a4[1].m128_i32[3];
-  v21 = a6;
-  v17[1] = 0x7F7FFFFF;
-  v19 = v9;
-  v20 = v10;
-  return sub_904300(this, a3, a2, (int)v22, (int)v12, (int)v17);
+  v6 = (__m128)xmmword_A965C0; /*0x904bef*/
+  v7 = a4[1]; /*0x904bf6*/
+  qmemcpy(v22, a4, sizeof(v22)); /*0x904c0c*/
+  v13 = a4[1].m128_u64[0]; /*0x904c12*/
+  v8 = a4[1].m128_i32[2]; /*0x904c1d*/
+  v15 = a4[1].m128_i32[3]; /*0x904c23*/
+  v16 = a5; /*0x904c2a*/
+  v22[1] = _mm_xor_ps(v7, v6); /*0x904c3b*/
+  v12[1] = 0x7F7FFFFF; /*0x904c43*/
+  v12[0] = &off_A9B4E8; /*0x904c4b*/
+  v14 = v8; /*0x904c4f*/
+  if ( !a6 ) /*0x904c53*/
+    return sub_904300(this, a3, a2, (int)v22, (int)v12, 0); /*0x904c9d*/
+  v17[0] = &off_A9B4E8; /*0x904c55*/
+  v18 = a4[1].m128_u64[0]; /*0x904c5b*/
+  v9 = a4[1].m128_i32[2]; /*0x904c66*/
+  v10 = a4[1].m128_i32[3]; /*0x904c69*/
+  v21 = a6; /*0x904c6c*/
+  v17[1] = 0x7F7FFFFF; /*0x904c74*/
+  v19 = v9; /*0x904c7c*/
+  v20 = v10; /*0x904c80*/
+  return sub_904300(this, a3, a2, (int)v22, (int)v12, (int)v17); /*0x904ca4*/
 }

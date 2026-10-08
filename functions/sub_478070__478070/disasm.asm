@@ -1,4 +1,4 @@
-0x478070: push    0FFFFFFFFh
+0x478070: push    0FFFFFFFFh; Caches ActorSkinInfo nodes by exact name. +0 is Bip01. Node indices 0..8 are Bip01 Head, Bip01 R Finger1, Bip01 L Finger1, Weapon, BackWeapon, SideWeapon, Quiver, Bip01 L ForearmTwist, Torch. Each indexed entry uses an 8-byte {flags,node} layout; node is at +8+index*8.
 0x478072: push    offset SEH_478070
 0x478077: mov     eax, large fs:0
 0x47807D: push    eax
@@ -89,3 +89,12 @@
 0x47816E: pop     ebx
 0x47816F: add     esp, 10h
 0x478172: retn    4
+0x9AEFA0: lea     ecx, [ebp+4]; slot
+0x9AEFA3: jmp     NiPointerSlot_Release
+0x9AEFA8: mov     edx, [esp+arg_4]
+0x9AEFAC: lea     eax, [edx-14h]
+0x9AEFAF: mov     ecx, [edx-18h]
+0x9AEFB2: xor     ecx, eax
+0x9AEFB4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AEFB9: mov     eax, offset stru_ADB650
+0x9AEFBE: jmp     ___CxxFrameHandler3

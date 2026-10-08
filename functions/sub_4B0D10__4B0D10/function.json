@@ -1,19 +1,32 @@
 {
-  "callees_count": 48,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 17,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4B0D10",
+      "0x4B0F04"
+    ]
+  ],
+  "chunks_sha256": "ed647e03602becea5737f02e64437f33cf8121bf0cb9a0369455a6d6019941b6",
+  "comment_regular": "Load an Oblivion TESObjectLIGH record. The DATA chunk is exactly 0x18 bytes at object +0x70..+0x87; zero +0x80 is normalized to 1.0 and zero +0x84 to 90.0.",
+  "comment_repeatable": "Load an Oblivion TESObjectLIGH record. DATA is exactly +0x70..+0x87; zero falloff exponent and projector FOV are normalized to 1.0 and 90.0. The separate FNAM chunk loads fade_88, which later seeds NiLight::m_fDimmer and attached-light target dimmer updates.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4B0D10",
+  "display_name": "TESObjectLIGH_LoadFormRecord",
   "end_ea": "0x4B0F04",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_4B0D10",
+  "name": "TESObjectLIGH_LoadFormRecord",
   "segment": ".text",
   "sha256": "ed647e03602becea5737f02e64437f33cf8121bf0cb9a0369455a6d6019941b6",
   "size": 500,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4B0D10",
-  "type": "char __thiscall(int this, Data *)",
+  "total_chunk_size": 500,
+  "type": "char __thiscall(TESObjectLIGH_DecodedLayout *self, Data *record)",
   "xrefs_from_count": 192,
   "xrefs_to_count": 1
 }

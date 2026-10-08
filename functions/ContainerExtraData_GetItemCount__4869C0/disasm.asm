@@ -1,4 +1,4 @@
-0x4869C0: push    ebx
+0x4869C0: push    ebx; ContainerChanges item-count logic: start with the base TESContainer count (made absolute), find matching EntryData, then combine countDelta. If the base count and delta are both 0 but an EntryData exists, return 1; the GetItemCount evaluator takes the final absolute value.
 0x4869C1: push    esi
 0x4869C2: mov     esi, ecx
 0x4869C4: mov     ecx, [esi+4]; this

@@ -1,1 +1,1 @@
-tagTYMED
+typedef TYMED tagTYMED;

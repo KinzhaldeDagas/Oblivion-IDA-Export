@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x4DD152",
-    "line": "mov     ebx, [esp+10h+arg_0]",
+    "line": "mov     ebx, [esp+10h+backingLight]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -235,25 +235,25 @@
   },
   {
     "ea": "0x4DD18C",
-    "line": "push    edi",
+    "line": "push    edi; payload",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4DD18D",
-    "line": "lea     ecx, [ebp+44h]",
+    "line": "lea     ecx, [ebp+44h]; self",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x4DD190",
-    "line": "fstp    dword ptr [edi+4]",
+    "line": "fstp    dword ptr [edi+4]; Initialize ordinary ExtraLight payload targetDimmer_04 to 1.0, matching the spell-effect payload constructor.",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4DD193",
-    "line": "call    sub_428CC0",
+    "line": "call    ExtraDataList_SetExtraLightPayload; Replace or create kExtraData_Light (type 0x30) with the shared {strong NiLight*, target dimmer} payload. Existing payload ownership is released before replacement.",
     "mnemonic": "call",
     "size": 5
   },

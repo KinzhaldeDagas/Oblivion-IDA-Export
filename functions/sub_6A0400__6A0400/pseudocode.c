@@ -1,9 +1,13 @@
-int __stdcall sub_6A0400(int a1, int a2)
+// Verified (Oblivion): virtual receives owner ActiveEffect* and target TESObjectREFR*. Returns base payload size +4, plus 9 bytes for save version >=0x37.
+unsigned __int16 __thiscall MagicShaderHitEffect_GetExtraSaveSize(
+        MagicShaderHitEffect *this,
+        ActiveEffect *ownerActiveEffect,
+        TESObjectREFR *targetReference)
 {
-  int result; // eax
+  unsigned __int16 result; // ax
 
-  result = (unsigned __int16)(sub_69DB90(a1, a2) + 4);
-  if ( LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) >= 0x37u )
-    result += 9;
-  return result;
+  result = MagicHitEffect_GetExtraSaveSize((int)ownerActiveEffect, (int)targetReference) + 4; /*0x6a041d*/
+  if ( g_TESSaveLoadGame->currentVersion >= 0x37u ) /*0x6a0420*/
+    result += 9; /*0x6a0422*/
+  return result; /*0x6a0425*/
 }

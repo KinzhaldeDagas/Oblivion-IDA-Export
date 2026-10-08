@@ -17,20 +17,20 @@
 0x502C08: push    edx; a2
 0x502C09: push    eax; a1
 0x502C0A: mov     dword ptr [esp+28h+var_4], 0
-0x502C12: call    Script_ExtractArgs
+0x502C12: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x502C17: add     esp, 20h
 0x502C1A: test    al, al
 0x502C1C: jnz     short loc_502C21
 0x502C1E: pop     esi
 0x502C1F: pop     ecx
 0x502C20: retn
-0x502C21: mov     ecx, [esp+8+arg_18]
+0x502C21: mov     ecx, [esp+8+value]
 0x502C25: mov     edx, dword ptr [esp+8+var_4]
-0x502C29: push    ecx
-0x502C2A: push    0
-0x502C2C: push    edx
-0x502C2D: push    esi
-0x502C2E: call    sub_4F4B70
+0x502C29: push    ecx; value
+0x502C2A: push    0; param2
+0x502C2C: push    edx; quest
+0x502C2D: push    esi; subject
+0x502C2E: call    GetStage_Eval; GetStage_Eval (index 58 / opcode 0x103A): returns TESQuest::GetCurrentStage for the Quest parameter; it does not query the stage-done list.
 0x502C33: add     esp, 10h
 0x502C36: pop     esi
 0x502C37: pop     ecx

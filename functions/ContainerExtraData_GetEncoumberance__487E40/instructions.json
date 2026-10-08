@@ -973,19 +973,19 @@
   },
   {
     "ea": "0x488022",
-    "line": "push    12h",
+    "line": "push    12h; actorValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x488024",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x488026",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1003,7 +1003,7 @@
   },
   {
     "ea": "0x488030",
-    "line": "mov     ecx, offset fPerkHeavyArmorExpertSpeedMult",
+    "line": "mov     ecx, 0B374D8h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1015,19 +1015,19 @@
   },
   {
     "ea": "0x488037",
-    "line": "push    12h",
+    "line": "push    12h; actorValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x488039",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48803B",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1045,7 +1045,7 @@
   },
   {
     "ea": "0x488045",
-    "line": "mov     ecx, offset fPerkHeavyArmorMasterSpeedMult",
+    "line": "mov     ecx, 0B374E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1099,19 +1099,19 @@
   },
   {
     "ea": "0x488062",
-    "line": "mov     ecx, [esp+24h+var_C]",
+    "line": "mov     ecx, [esp+24h+var_C]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x488066",
-    "line": "push    1Bh",
+    "line": "push    1Bh; actorValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x488068",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1129,7 +1129,7 @@
   },
   {
     "ea": "0x488072",
-    "line": "mov     ecx, offset fPerkLightArmorExpertSpeedMult",
+    "line": "mov     ecx, 0B374E8h",
     "mnemonic": "mov",
     "size": 5
   },

@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x6F4B8B",
-    "line": "mov     esi, [esp+118h+arg_0]",
+    "line": "mov     esi, [esp+118h+source]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x6F4BB2",
-    "line": "mov     ecx, esp",
+    "line": "mov     ecx, esp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x6F4BB8",
-    "line": "push    8; MaxCount",
+    "line": "push    8; count",
     "mnemonic": "push",
     "size": 2
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x6F4BCD",
-    "line": "call    sub_414500",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x6F4BE2",
-    "line": "mov     ecx, esp",
+    "line": "mov     ecx, esp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -265,13 +265,13 @@
   },
   {
     "ea": "0x6F4BEE",
-    "line": "push    ebp",
+    "line": "push    ebp; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F4BEF",
-    "line": "push    ebx",
+    "line": "push    ebx; offset",
     "mnemonic": "push",
     "size": 1
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x6F4BF3",
-    "line": "push    esi",
+    "line": "push    esi; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x6F4BFE",
-    "line": "call    sub_414420",
+    "line": "call    OB_stString28_AssignSubstring_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,offset,count). Bounds-checks offset, clamps count to source.size-offset, handles self-assignment by in-place erasure, grows when required, copies the selected bytes, updates size, and writes the terminator.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1597,13 +1597,13 @@
   },
   {
     "ea": "0x6F4EFC",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; count",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6F4EFE",
-    "line": "push    0",
+    "line": "push    0; offset",
     "mnemonic": "push",
     "size": 2
   },
@@ -1615,37 +1615,37 @@
   },
   {
     "ea": "0x6F4F03",
-    "line": "push    ecx",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F4F04",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6F4F06",
-    "line": "call    sub_414420",
+    "line": "call    OB_stString28_AssignSubstring_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,offset,count). Bounds-checks offset, clamps count to source.size-offset, handles self-assignment by in-place erasure, grows when required, copies the selected bytes, updates size, and writes the terminator.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6F4F0B",
-    "line": "lea     ecx, [esp+118h+var_C4]",
+    "line": "lea     ecx, [esp+118h+var_C4]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6F4F0F",
-    "line": "call    sub_79AB00",
+    "line": "call    OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6F4F14",
-    "line": "lea     ecx, [esp+118h+var_D4]; void *",
+    "line": "lea     ecx, [esp+118h+var_D4]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1657,7 +1657,7 @@
   },
   {
     "ea": "0x6F4F20",
-    "line": "call    sub_794EB0",
+    "line": "call    OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2461,13 +2461,13 @@
   },
   {
     "ea": "0x6F50E1",
-    "line": "lea     ecx, [esp+118h+var_D4]; void *",
+    "line": "lea     ecx, [esp+118h+var_D4]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6F50E5",
-    "line": "call    sub_794EB0",
+    "line": "call    OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2581,7 +2581,7 @@
   },
   {
     "ea": "0x6F5137",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; count",
     "mnemonic": "push",
     "size": 2
   },
@@ -2593,37 +2593,37 @@
   },
   {
     "ea": "0x6F513C",
-    "line": "push    0",
+    "line": "push    0; offset",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6F513E",
-    "line": "push    esi",
+    "line": "push    esi; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F513F",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6F5141",
-    "line": "call    sub_414420",
+    "line": "call    OB_stString28_AssignSubstring_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,offset,count). Bounds-checks offset, clamps count to source.size-offset, handles self-assignment by in-place erasure, grows when required, copies the selected bytes, updates size, and writes the terminator.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6F5146",
-    "line": "lea     ecx, [esp+118h+var_C4]",
+    "line": "lea     ecx, [esp+118h+var_C4]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6F514A",
-    "line": "call    sub_79AB00",
+    "line": "call    OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2665,7 +2665,7 @@
   },
   {
     "ea": "0x6F5164",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3901,7 +3901,7 @@
   },
   {
     "ea": "0x6F5417",
-    "line": "mov     ebx, [esp+118h+var_D0]",
+    "line": "mov     ebx, [esp+118h+var_D4.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3925,7 +3925,7 @@
   },
   {
     "ea": "0x6F5427",
-    "line": "mov     edx, [esp+118h+var_CC]",
+    "line": "mov     edx, [esp+118h+var_D4.end]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4219,7 +4219,7 @@
   },
   {
     "ea": "0x6F54BC",
-    "line": "mov     eax, [esp+118h+var_CC]",
+    "line": "mov     eax, [esp+118h+var_D4.end]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4447,43 +4447,43 @@
   },
   {
     "ea": "0x6F552C",
-    "line": "push    0; MaxCount",
+    "line": "push    0; count",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6F552E",
-    "line": "push    offset EmptyString; Src",
+    "line": "push    offset EmptyString; source",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x6F5533",
-    "line": "lea     ecx, [esp+120h+var_C4]",
+    "line": "lea     ecx, [esp+120h+var_C4]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6F5537",
-    "line": "mov     [esp+120h+var_AC], 0Fh",
+    "line": "mov     [esp+120h+var_C4.capacity], 0Fh",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x6F553F",
-    "line": "mov     [esp+120h+var_B0], 0",
+    "line": "mov     [esp+120h+var_C4.size], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x6F5547",
-    "line": "mov     byte ptr [esp+120h+var_C0], 0",
+    "line": "mov     byte ptr [esp+120h+var_C4.storage], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x6F554C",
-    "line": "call    sub_414500",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4585,13 +4585,13 @@
   },
   {
     "ea": "0x6F5582",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; count",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6F5584",
-    "line": "push    0",
+    "line": "push    0; offset",
     "mnemonic": "push",
     "size": 2
   },
@@ -4603,25 +4603,25 @@
   },
   {
     "ea": "0x6F558A",
-    "line": "add     ecx, edi",
+    "line": "add     ecx, edi; this",
     "mnemonic": "add",
     "size": 2
   },
   {
     "ea": "0x6F558C",
-    "line": "push    edx",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F558D",
-    "line": "call    sub_414420",
+    "line": "call    OB_stString28_AssignSubstring_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,offset,count). Bounds-checks offset, clamps count to source.size-offset, handles self-assignment by in-place erasure, grows when required, copies the selected bytes, updates size, and writes the terminator.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6F5592",
-    "line": "cmp     [esp+118h+var_AC], 10h",
+    "line": "cmp     [esp+118h+var_C4.capacity], 10h",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -4633,7 +4633,7 @@
   },
   {
     "ea": "0x6F5599",
-    "line": "mov     eax, [esp+118h+var_C0]",
+    "line": "mov     eax, dword ptr [esp+118h+var_C4.storage]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4645,7 +4645,7 @@
   },
   {
     "ea": "0x6F559E",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4681,7 +4681,7 @@
   },
   {
     "ea": "0x6F55B3",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4699,19 +4699,19 @@
   },
   {
     "ea": "0x6F55BD",
-    "line": "mov     [esp+118h+var_D0], eax",
+    "line": "mov     [esp+118h+var_D4.begin], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6F55C1",
-    "line": "mov     [esp+118h+var_CC], eax",
+    "line": "mov     [esp+118h+var_D4.end], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6F55C5",
-    "line": "mov     [esp+118h+var_C8], eax",
+    "line": "mov     [esp+118h+var_D4.capacity], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5881,7 +5881,7 @@
   },
   {
     "ea": "0x6F5871",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6289,43 +6289,43 @@
   },
   {
     "ea": "0x6F5960",
-    "line": "push    edi; MaxCount",
+    "line": "push    edi; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F5961",
-    "line": "push    offset EmptyString; Src",
+    "line": "push    offset EmptyString; source",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x6F5966",
-    "line": "lea     ecx, [esp+120h+var_C4]",
+    "line": "lea     ecx, [esp+120h+var_C4]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6F596A",
-    "line": "mov     [esp+120h+var_AC], 0Fh",
+    "line": "mov     [esp+120h+var_C4.capacity], 0Fh",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x6F5972",
-    "line": "mov     [esp+120h+var_B0], edi",
+    "line": "mov     [esp+120h+var_C4.size], edi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6F5976",
-    "line": "mov     byte ptr [esp+120h+var_C0], 0",
+    "line": "mov     byte ptr [esp+120h+var_C4.storage], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x6F597B",
-    "line": "call    sub_414500",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6427,19 +6427,19 @@
   },
   {
     "ea": "0x6F59B1",
-    "line": "add     ecx, dword ptr [esp+118h+var_FD+1]",
+    "line": "add     ecx, dword ptr [esp+118h+var_FD+1]; this",
     "mnemonic": "add",
     "size": 4
   },
   {
     "ea": "0x6F59B5",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; count",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6F59B7",
-    "line": "push    edi",
+    "line": "push    edi; offset",
     "mnemonic": "push",
     "size": 1
   },
@@ -6451,19 +6451,19 @@
   },
   {
     "ea": "0x6F59BC",
-    "line": "push    eax",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F59BD",
-    "line": "call    sub_414420",
+    "line": "call    OB_stString28_AssignSubstring_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,offset,count). Bounds-checks offset, clamps count to source.size-offset, handles self-assignment by in-place erasure, grows when required, copies the selected bytes, updates size, and writes the terminator.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6F59C2",
-    "line": "cmp     [esp+118h+var_AC], 10h",
+    "line": "cmp     [esp+118h+var_C4.capacity], 10h",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -6475,7 +6475,7 @@
   },
   {
     "ea": "0x6F59C9",
-    "line": "mov     ecx, [esp+118h+var_C0]",
+    "line": "mov     ecx, dword ptr [esp+118h+var_C4.storage]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6487,7 +6487,7 @@
   },
   {
     "ea": "0x6F59CE",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6523,7 +6523,7 @@
   },
   {
     "ea": "0x6F59E3",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7117,7 +7117,7 @@
   },
   {
     "ea": "0x6F5B27",
-    "line": "mov     ecx, esp",
+    "line": "mov     ecx, esp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -7129,7 +7129,7 @@
   },
   {
     "ea": "0x6F5B2D",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; count",
     "mnemonic": "push",
     "size": 2
   },
@@ -7141,7 +7141,7 @@
   },
   {
     "ea": "0x6F5B31",
-    "line": "push    esi",
+    "line": "push    esi; offset",
     "mnemonic": "push",
     "size": 1
   },
@@ -7159,7 +7159,7 @@
   },
   {
     "ea": "0x6F5B3C",
-    "line": "push    eax",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -7171,7 +7171,7 @@
   },
   {
     "ea": "0x6F5B41",
-    "line": "call    sub_414420",
+    "line": "call    OB_stString28_AssignSubstring_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,offset,count). Bounds-checks offset, clamps count to source.size-offset, handles self-assignment by in-place erasure, grows when required, copies the selected bytes, updates size, and writes the terminator.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7339,7 +7339,7 @@
   },
   {
     "ea": "0x6F5BBC",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7636,5 +7636,251 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C8B40",
+    "line": "lea     ecx, [ebp-94h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C8B46",
+    "line": "jmp     ??1BSFaceGenBinaryFile@@UAE@XZ; BSFaceGenBinaryFile::~BSFaceGenBinaryFile(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8B4B",
+    "line": "lea     ecx, [ebp-0D4h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C8B51",
+    "line": "jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8B56",
+    "line": "lea     ecx, [ebp-0C4h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C8B5C",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8B61",
+    "line": "lea     ecx, [ebp-0E8h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C8B67",
+    "line": "jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8B6C",
+    "line": "lea     ecx, [ebp-0C4h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C8B72",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8B77",
+    "line": "lea     ecx, [ebp-0D4h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C8B7D",
+    "line": "jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8B82",
+    "line": "lea     ecx, [ebp-0C4h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C8B88",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8B8D",
+    "line": "lea     ecx, [ebp-0E8h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C8B93",
+    "line": "jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8B98",
+    "line": "lea     ecx, [ebp-94h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C8B9E",
+    "line": "jmp     ??1FutBinaryFileC@@UAE@XZ; FutBinaryFileC::~FutBinaryFileC(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8BA3",
+    "line": "lea     ecx, [ebp-0C4h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C8BA9",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8BAE",
+    "line": "lea     ecx, [ebp-94h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C8BB4",
+    "line": "jmp     ??1FutBinaryFileC@@UAE@XZ; FutBinaryFileC::~FutBinaryFileC(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8BB9",
+    "line": "lea     ecx, [ebp-94h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C8BBF",
+    "line": "jmp     ??1FutBinaryFileC@@UAE@XZ; FutBinaryFileC::~FutBinaryFileC(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8BC4",
+    "line": "lea     ecx, [ebp-94h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C8BCA",
+    "line": "jmp     ??1FutBinaryFileC@@UAE@XZ; FutBinaryFileC::~FutBinaryFileC(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8BCF",
+    "line": "lea     ecx, [ebp-94h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C8BD5",
+    "line": "jmp     ??1FutBinaryFileC@@UAE@XZ; FutBinaryFileC::~FutBinaryFileC(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8BDA",
+    "line": "lea     ecx, [ebp-94h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C8BE0",
+    "line": "jmp     ??1FutBinaryFileC@@UAE@XZ; FutBinaryFileC::~FutBinaryFileC(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8BE5",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C8BE9",
+    "line": "lea     eax, [edx-108h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C8BEF",
+    "line": "mov     ecx, [edx-10Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C8BF5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C8BF7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8BFC",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C8BFF",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C8C02",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C8C04",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8C09",
+    "line": "mov     eax, offset stru_AF1494",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8C0E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

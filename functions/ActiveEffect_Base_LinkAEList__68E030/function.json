@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x68E030",
+      "0x68E05F"
+    ]
+  ],
+  "chunks_sha256": "feb9ce730072bce6eb404abb614ddac6577e2d8d33f883ed3205f5ff26291cf7",
+  "comment_regular": "Verified this helper takes EffectNode* and explicit TESObjectREFR* linkContext, while preserving incoming EBX and forwarding it as the second stack argument to each hit-effect vtable +0x80 callback. That callback's third argument is directly typed TESChildCELL* and updates parentCell. The hidden EBX value is the owner reference in the modified-extra load path; Player_LinkModifiedForm reaches this helper with EBX as a saved-reference-list cursor, so a universal owner-reference interpretation remains Candidate.",
+  "comment_repeatable": "Verified this helper takes EffectNode* and explicit TESObjectREFR* linkContext, while preserving incoming EBX and forwarding it as the second stack argument to each hit-effect vtable +0x80 callback. That callback's third argument is directly typed TESChildCELL* and updates parentCell. The hidden EBX value is the owner reference in the modified-extra load path; Player_LinkModifiedForm reaches this helper with EBX as a saved-reference-list cursor, so a universal owner-reference interpretation remains Candidate.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "ActiveEffect_Base_LinkAEList",
   "end_ea": "0x68E05F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "ActiveEffect_Base_LinkAEList",
   "segment": ".text",
   "sha256": "feb9ce730072bce6eb404abb614ddac6577e2d8d33f883ed3205f5ff26291cf7",
   "size": 47,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x68E030",
-  "type": "int __cdecl(_DWORD *, int)",
+  "total_chunk_size": 47,
+  "type": "int __usercall@<eax>(EffectNode *activeEffectList, TESObjectREFR *linkContext, TESChildCELL *targetReference@<ebx>)",
   "xrefs_from_count": 25,
   "xrefs_to_count": 3
 }

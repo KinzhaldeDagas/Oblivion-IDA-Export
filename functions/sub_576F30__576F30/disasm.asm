@@ -49,7 +49,7 @@
 0x576FBF: mov     [esi+18h], ecx
 0x576FC2: mov     edx, [esi+1Ch]
 0x576FC5: push    edx
-0x576FC6: call    FormHeapFree
+0x576FC6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x576FCB: mov     [esi+1Ch], ebx
 0x576FCE: mov     [esi+22h], bx
 0x576FD2: mov     [esi+20h], bx
@@ -73,18 +73,18 @@
 0x57700C: fstp    st
 0x57700E: fld     dword ptr [edi+30h]
 0x577011: fadd    dword ptr [edi+2Ch]
-0x577014: call    Double_To_SInt32
+0x577014: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x577019: mov     ebp, [esi]
 0x57701B: mov     [esi+24h], eax
 0x57701E: call    FontManager_GetSingleton
 0x577023: mov     ecx, [eax+ebp*4]
 0x577026: mov     edx, [ecx+38h]
 0x577029: fld     dword ptr [edx]
-0x57702B: call    Double_To_SInt32
+0x57702B: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x577030: mov     [esi+28h], eax
 0x577033: fld     dword ptr [edi+28h]
 0x577036: fsub    dword ptr [edi+34h]
-0x577039: call    Double_To_SInt32
+0x577039: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x57703E: mov     [esi+2Ch], eax
 0x577041: mov     [esi+30h], ebx
 0x577044: mov     [esi+34h], ebx
@@ -98,3 +98,13 @@
 0x577058: pop     ebx
 0x577059: add     esp, 10h
 0x57705C: retn    1Ch
+0x9BE460: mov     ecx, [ebp-10h]
+0x9BE463: add     ecx, 1Ch; void *
+0x9BE466: jmp     BSStringT_Clear
+0x9BE46B: mov     edx, [esp+arg_4]
+0x9BE46F: lea     eax, [edx-14h]
+0x9BE472: mov     ecx, [edx-18h]
+0x9BE475: xor     ecx, eax
+0x9BE477: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BE47C: mov     eax, offset stru_AE7BB8
+0x9BE481: jmp     ___CxxFrameHandler3

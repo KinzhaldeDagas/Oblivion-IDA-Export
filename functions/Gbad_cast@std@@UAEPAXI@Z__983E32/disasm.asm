@@ -5,7 +5,7 @@
 0x983E40: test    byte ptr [esp+4+arg_0], 1
 0x983E45: jz      short loc_983E4E
 0x983E47: push    esi
-0x983E48: call    FormHeapFree
+0x983E48: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x983E4D: pop     ecx
 0x983E4E: mov     eax, esi
 0x983E50: pop     esi

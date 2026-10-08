@@ -1,4 +1,4 @@
-0x45B9A0: mov     eax, ds:0B33398h
+0x45B9A0: mov     eax, ds:0B33398h; MEF SAVE AUDIT 2026-10-08: Save audit negative growth claim: SaveData is a copy/cursor-advance primitive, not a reallocating buffer writer. This body does not establish quadratic save-buffer growth. Bounds/size-oracle correctness is a separate serialization audit; PERF19 concerns ID arrays.
 0x45B9A5: push    esi
 0x45B9A6: push    edi
 0x45B9A7: mov     edi, [eax+10h]
@@ -21,10 +21,10 @@
 0x45B9D9: mov     edi, [esp+8+Size]
 0x45B9DD: mov     ecx, [esp+8+Src]
 0x45B9E1: mov     edx, [esi+14h]
-0x45B9E4: push    edi; Size
-0x45B9E5: push    ecx; Src
-0x45B9E6: push    edx; Dst
-0x45B9E7: call    _memcpy
+0x45B9E4: push    edi; byteCount
+0x45B9E5: push    ecx; source
+0x45B9E6: push    edx; destination
+0x45B9E7: call    _memcpy;
 0x45B9EC: add     [esi+14h], edi
 0x45B9EF: add     esp, 0Ch
 0x45B9F2: pop     edi

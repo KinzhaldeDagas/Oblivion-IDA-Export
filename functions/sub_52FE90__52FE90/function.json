@@ -1,19 +1,36 @@
 {
-  "callees_count": 14,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_52FE90",
+  "chunks": [
+    [
+      "0x52FE90",
+      "0x530019"
+    ],
+    [
+      "0x9C33E0",
+      "0x9C3406"
+    ]
+  ],
+  "chunks_sha256": "c54762eabadffb89460b708f9f338b88a99ec90026758617781f366a4a490062",
+  "comment_regular": "Ensures every stock registry slot has a runtime TESTopic. Missing slots are allocated, assigned the slot's fixed FormID and name as editor ID/full name, then registered with the DataHandler and editor-ID map. Thus GREETING/HELLO/ANY/GOODBYE/INFO GENERAL and the other stock topics are synthesized from this Oblivion table when absent.",
+  "comment_repeatable": "Ensures every stock registry slot has a runtime TESTopic. Missing slots are allocated, assigned the slot's fixed FormID and name as editor ID/full name, then registered with the DataHandler and editor-ID map. Thus GREETING/HELLO/ANY/GOODBYE/INFO GENERAL and the other stock topics are synthesized from this Oblivion table when absent.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "InitializeStockDialogueTopics",
   "end_ea": "0x530019",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
-  "name": "sub_52FE90",
+  "name": "InitializeStockDialogueTopics",
   "segment": ".text",
   "sha256": "cfa01d88284e6dee63c1f961d3797626c8e910237a828b372f51e21678775d05",
   "size": 393,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x52FE90",
-  "type": "signed int()",
-  "xrefs_from_count": 132,
+  "total_chunk_size": 431,
+  "type": "void __cdecl()",
+  "xrefs_from_count": 146,
   "xrefs_to_count": 1
 }

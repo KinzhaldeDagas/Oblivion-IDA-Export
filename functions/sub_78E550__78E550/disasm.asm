@@ -1,4 +1,4 @@
-0x78E550: fldz
+0x78E550: fldz; Oblivion stVec default constructor: zeros all five float slots and sets logical size to 3. Exact body corroborated after binary observation by RT4.1 LibVector Vec.cpp stVec().
 0x78E552: mov     eax, ecx
 0x78E554: fst     dword ptr [eax+10h]
 0x78E557: mov     dword ptr [eax+14h], 3

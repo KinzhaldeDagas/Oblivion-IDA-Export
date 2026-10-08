@@ -37,7 +37,7 @@
 0x5FB442: mov     ecx, esi
 0x5FB444: call    ContainerEntryExtraData_DestroyDataTable
 0x5FB449: push    esi
-0x5FB44A: call    FormHeapFree
+0x5FB44A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5FB44F: add     esp, 4
 0x5FB452: mov     esi, [esp+arg_3C]
 0x5FB456: test    esi, esi
@@ -45,14 +45,14 @@
 0x5FB45A: mov     ecx, esi
 0x5FB45C: call    ContainerEntryExtraData_DestroyDataTable
 0x5FB461: push    esi
-0x5FB462: call    FormHeapFree
+0x5FB462: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5FB467: add     esp, 4
 0x5FB46A: test    ebp, ebp
 0x5FB46C: jz      short loc_5FB47E
 0x5FB46E: mov     ecx, ebp
 0x5FB470: call    ContainerEntryExtraData_DestroyDataTable
 0x5FB475: push    ebp
-0x5FB476: call    FormHeapFree
+0x5FB476: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5FB47B: add     esp, 4
 0x5FB47E: mov     ecx, ds:0B38CF0h
 0x5FB484: mov     edx, ds:0B388D8h

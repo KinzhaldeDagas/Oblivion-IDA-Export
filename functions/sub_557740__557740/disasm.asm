@@ -1,11 +1,11 @@
 0x557740: push    esi
-0x557741: mov     esi, [esp+4+arg_0]
+0x557741: mov     esi, [esp+4+begin]
 0x557745: push    edi
-0x557746: mov     edi, [esp+8+arg_4]
+0x557746: mov     edi, [esp+8+end]
 0x55774A: cmp     esi, edi
 0x55774C: jz      short loc_557769
 0x55774E: mov     edi, edi
-0x557750: push    offset sub_794EB0; void (__thiscall *)(void *)
+0x557750: push    offset OB_stVector4_DestroyThiscall_010201A0; void (__thiscall *)(void *)
 0x557755: push    3; int
 0x557757: push    10h; unsigned int
 0x557759: lea     eax, [esi+10h]

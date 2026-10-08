@@ -1,1 +1,5 @@
-__signbitf::$262D8823B3B0570E24F5C5CFFEC270ED
+union __signbitf::$262D8823B3B0570E24F5C5CFFEC270ED
+{
+float x;
+unsigned int i;
+};

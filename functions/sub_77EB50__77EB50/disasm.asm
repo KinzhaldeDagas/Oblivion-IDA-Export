@@ -1,4 +1,4 @@
-0x77EB50: cmp     dword ptr ds:0B428A8h, 0
+0x77EB50: cmp     dword ptr ds:0B428A8h, 0; MoonSugarEffect decode: pixel wrapper validity/restore helper. If vtable +0x38 returns live IDirect3DPixelShader9, succeeds. Otherwise base creator pointer is read through vtable +0x20 and creator vtable +0x20 restores the pixel handle.
 0x77EB57: push    esi
 0x77EB58: jz      short loc_77EB8C
 0x77EB5A: mov     esi, [esp+4+arg_0]

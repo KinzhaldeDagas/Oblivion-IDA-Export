@@ -23,7 +23,7 @@
 0x4834AD: jz      short loc_4834B4
 0x4834AF: call    sub_4CA390
 0x4834B4: mov     ecx, esi
-0x4834B6: call    sub_482670
+0x4834B6: call    ClearCanopyShadowMap; Clear/release canopy shadow-map state.
 0x4834BB: xor     ecx, ecx
 0x4834BD: cmp     [esi+0Ch], ecx
 0x4834C0: mov     [esp+28h+var_14], ecx
@@ -43,7 +43,7 @@
 0x4834E6: mov     ecx, ebx
 0x4834E8: call    sub_49E500
 0x4834ED: push    ebx
-0x4834EE: call    FormHeapFree
+0x4834EE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4834F3: mov     ecx, [esp+2Ch+var_14]
 0x4834F7: add     esp, 4
 0x4834FA: add     ebp, 1
@@ -56,7 +56,7 @@
 0x483513: jb      short loc_4834C6
 0x483515: mov     eax, [esi+10h]
 0x483518: push    eax
-0x483519: call    FormHeapFree
+0x483519: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48351E: mov     edi, [esi+24h]
 0x483521: add     esp, 4
 0x483524: test    edi, edi
@@ -86,3 +86,15 @@
 0x483567: pop     ebx
 0x483568: add     esp, 14h
 0x48356B: retn
+0x9AF860: mov     ecx, [ebp-10h]
+0x9AF863: jmp     sub_481DF0
+0x9AF868: mov     ecx, [ebp-10h]
+0x9AF86B: add     ecx, 24h ; '$'; slot
+0x9AF86E: jmp     NiPointerSlot_Release
+0x9AF873: mov     edx, [esp+arg_4]
+0x9AF877: lea     eax, [edx-18h]
+0x9AF87A: mov     ecx, [edx-1Ch]
+0x9AF87D: xor     ecx, eax
+0x9AF87F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AF884: mov     eax, offset stru_ADBD98
+0x9AF889: jmp     ___CxxFrameHandler3

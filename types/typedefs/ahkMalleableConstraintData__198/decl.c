@@ -1,1 +1,1 @@
-ahkMalleableConstraintData
+struct ahkMalleableConstraintData;

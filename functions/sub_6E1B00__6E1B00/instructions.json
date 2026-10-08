@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6E1B00",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Mutates every nonempty transform channel to guarantee keys at start/end: rotation content 2, translation content 1, scale content 0. Euler rotation is handled recursively by the generic key helper.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x6E1B3F",
-    "line": "call    sub_6D3540",
+    "line": "call    NiAnimationKey_GuaranteeTimeRange; Guarantees authored keys at both requested boundaries using the registered content/type insertion function. For Euler rotation type 4, recursively updates all three scalar axes and refreshes axis stride/cursor metadata. Unlike range cloning, this operation may synthesize evaluated boundary keys.",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x6E1B90",
-    "line": "call    sub_6D3540",
+    "line": "call    NiAnimationKey_GuaranteeTimeRange; Guarantees authored keys at both requested boundaries using the registered content/type insertion function. For Euler rotation type 4, recursively updates all three scalar axes and refreshes axis stride/cursor metadata. Unlike range cloning, this operation may synthesize evaluated boundary keys.",
     "mnemonic": "call",
     "size": 5
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x6E1BE1",
-    "line": "call    sub_6D3540",
+    "line": "call    NiAnimationKey_GuaranteeTimeRange; Guarantees authored keys at both requested boundaries using the registered content/type insertion function. For Euler rotation type 4, recursively updates all three scalar axes and refreshes axis stride/cursor metadata. Unlike range cloning, this operation may synthesize evaluated boundary keys.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,10 +1,18 @@
 {
   "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x701AB0",
+      "0x701AC9"
+    ]
+  ],
   "chunks_sha256": "ad0d030249e25715a6ab4d50edb646e9b2b03af93ac426a2b9baf6501ef68b29",
   "comment_regular": "3DTheft decode 2026-05-16: sets manager byte +0x1B0 to 1, then calls the manager semaphore wait helper with INFINITE.",
   "comment_repeatable": "3DTheft decode 2026-05-16: sets manager byte +0x1B0 to 1, then calls the manager semaphore wait helper with INFINITE.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "NiParallelUpdateTaskManager_SetPendingSignalAndWait",
   "end_ea": "0x701AC9",
@@ -15,6 +23,7 @@
   "segment": ".text",
   "sha256": "ad0d030249e25715a6ab4d50edb646e9b2b03af93ac426a2b9baf6501ef68b29",
   "size": 25,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x701AB0",
   "total_chunk_size": 25,
   "type": "int()",

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x43B0D0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified shared texture dependency helper used by tree, landscape, and generated landscape-LOD paths. It queries the texture/resource cache; on a miss it creates and queues a QueuedTexture, while a hit with a parent creates an attached wrapper task so the dependency participates in parent completion. Caller priority and parent task are forwarded.",
     "mnemonic": "push",
     "size": 2
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x43B0F5",
-    "line": "mov     ecx, dword_B35300",
+    "line": "mov     ecx, dword ptr unk_B35300",
     "mnemonic": "mov",
     "size": 6
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x43B0FD",
-    "line": "mov     esi, [esp+24h+arg_0]",
+    "line": "mov     esi, [esp+24h+path]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x43B10E",
-    "line": "mov     [esp+24h+arg_0], edi",
+    "line": "mov     [esp+24h+path], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x43B12A",
-    "line": "mov     ebp, [esp+24h+arg_8]",
+    "line": "mov     ebp, [esp+24h+parent]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x43B140",
-    "line": "mov     [esp+24h+arg_8], eax",
+    "line": "mov     [esp+24h+parent], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x43B14D",
-    "line": "mov     ecx, [esp+24h+arg_4]",
+    "line": "mov     ecx, dword ptr [esp+24h+taskType]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x43B162",
-    "line": "mov     [esp+24h+arg_4], esi",
+    "line": "mov     dword ptr [esp+24h+taskType], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -631,31 +631,31 @@
   },
   {
     "ea": "0x43B200",
-    "line": "mov     ecx, [esp+24h+arg_4]",
+    "line": "mov     ecx, dword ptr [esp+24h+taskType]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x43B204",
-    "line": "push    ecx",
+    "line": "push    ecx; taskType",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x43B205",
-    "line": "push    esi",
+    "line": "push    esi; path",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x43B206",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x43B208",
-    "line": "call    sub_437050",
+    "line": "call    QueuedTexture_ctor; Verified base initializer for QueuedTexture: initializes IOTask fields, stores normalized path and resolves archive/file entry via HashFilePath + ArchiveManager_LazyFileLookup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -685,7 +685,7 @@
   },
   {
     "ea": "0x43B215",
-    "line": "mov     [esp+24h+arg_4], esi",
+    "line": "mov     dword ptr [esp+24h+taskType], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x43B225",
-    "line": "mov     eax, [esp+24h+arg_8]",
+    "line": "mov     eax, [esp+24h+parent]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -892,5 +892,143 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9ACA00",
+    "line": "lea     ecx, [ebp+4]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9ACA03",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9ACA08",
+    "line": "mov     eax, [ebp+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9ACA0B",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9ACA0C",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9ACA11",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9ACA12",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9ACA13",
+    "line": "lea     ecx, [ebp+8]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9ACA16",
+    "line": "jmp     sub_4BDDC0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9ACA1B",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9ACA1E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9ACA1F",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9ACA24",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9ACA25",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9ACA26",
+    "line": "lea     ecx, [ebp+8]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9ACA29",
+    "line": "jmp     sub_4BDDC0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9ACA2E",
+    "line": "mov     edx, dword ptr [esp+taskType]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9ACA32",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9ACA35",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9ACA38",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9ACA3A",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9ACA3F",
+    "line": "mov     eax, offset stru_AD9674",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9ACA44",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

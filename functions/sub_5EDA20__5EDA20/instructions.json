@@ -648,12 +648,6 @@
     "size": 2
   },
   {
-    "ea": "0x5EDB3D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x5EDB40",
     "line": "mov     ebx, [ebp+0]",
     "mnemonic": "mov",
@@ -1225,7 +1219,7 @@
   },
   {
     "ea": "0x5EDC21",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x667112",
-    "line": "mov     dword ptr ds:0B3BB88h, offset word_B3BB4C",
+    "line": "mov     dword ptr ds:0B3BB88h, (offset qword_B3BB2C+20h)",
     "mnemonic": "mov",
     "size": 10
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x667162",
-    "line": "call    sub_5E0660",
+    "line": "call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x6671B7",
-    "line": "call    sub_959D60",
+    "line": "call    NiPick_ExecuteAndSort; Verified NiPick query runner: invokes NiPick_ProcessSceneObject over the configured pick root, gathers hit records, sorts by the record distance field, and leaves the nearest record first in the result list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x667220",
-    "line": "cmp     eax, offset dword_B3FD4C",
+    "line": "cmp     eax, offset stru_B3FD4C",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -769,7 +769,7 @@
   },
   {
     "ea": "0x6672B2",
-    "line": "call    sub_959D60",
+    "line": "call    NiPick_ExecuteAndSort; Verified NiPick query runner: invokes NiPick_ProcessSceneObject over the configured pick root, gathers hit records, sorts by the record distance field, and leaves the nearest record first in the result list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -967,7 +967,7 @@
   },
   {
     "ea": "0x66731F",
-    "line": "cmp     eax, offset dword_B3FD4C",
+    "line": "cmp     eax, offset stru_B3FD4C",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1135,7 +1135,7 @@
   },
   {
     "ea": "0x66738B",
-    "line": "call    sub_959D60",
+    "line": "call    NiPick_ExecuteAndSort; Verified NiPick query runner: invokes NiPick_ProcessSceneObject over the configured pick root, gathers hit records, sorts by the record distance field, and leaves the nearest record first in the result list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1333,7 +1333,7 @@
   },
   {
     "ea": "0x6673F8",
-    "line": "cmp     eax, offset dword_B3FD4C",
+    "line": "cmp     eax, offset stru_B3FD4C",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1363,7 +1363,7 @@
   },
   {
     "ea": "0x66740A",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },

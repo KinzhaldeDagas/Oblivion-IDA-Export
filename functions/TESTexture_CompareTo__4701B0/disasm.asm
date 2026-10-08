@@ -50,7 +50,6 @@
 0x470235: mov     ecx, [ebx+4]
 0x470238: lea     esi, [ecx+1]
 0x47023B: jmp     short loc_470240
-0x47023D: align 10h
 0x470240: mov     dl, [ecx]
 0x470242: add     ecx, 1
 0x470245: test    dl, dl
@@ -82,9 +81,9 @@
 0x470287: test    ecx, ecx
 0x470289: jnz     short loc_470290
 0x47028B: mov     ecx, offset EmptyString
-0x470290: push    eax; Str2
-0x470291: push    ecx; Str1
-0x470292: call    __strcmp
+0x470290: push    eax; right
+0x470291: push    ecx; left
+0x470292: call    CRT_StricmpLocaleDispatch
 0x470297: add     esp, 8
 0x47029A: test    eax, eax
 0x47029C: jz      short loc_4702A5

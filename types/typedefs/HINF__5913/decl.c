@@ -1,1 +1,1 @@
-HINF
+typedef PVOID HINF;

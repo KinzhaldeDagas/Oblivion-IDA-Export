@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4F2A10",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified: TESWorldSpace constructor initializes road (+0x54) to null. In this Oblivion build, the field is a TESRoad* owned by WorldSpace: the destructor releases it, CreateDuplicateForm clones it and verifies the clone's TESRoad RTTI, and TESRoad grouping code uses the reciprocal owner pointer. The adjacent +0x4C and +0x50 fields remain Unknown. Fallout's TESWorldSpace has a different layout and no TESRoad-named type or function was found in the available name/type searches; no Fallout homolog is claimed.",
     "mnemonic": "push",
     "size": 2
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x4F2A83",
-    "line": "call    ??0?$NiTPointerMap@HPAVTESTerrainLODQuadRoot@@@@QAE@XZ; NiTPointerMap<int,TESTerrainLODQuadRoot *>::NiTPointerMap<int,TESTerrainLODQuadRoot *>(void)",
+    "line": "call    ??0?$NiTPointerMap@HPAVTESTerrainLODQuadRoot@@@@QAE@XZ; Verified map base layout is the NiTPointerMap<int, TESTerrainLODQuadRoot*> embedded at TESWorldSpace+0x38: vtable +0, bucketCount +4, buckets +8, itemCount +0xC. Constructor uses 37 buckets; the adjacent TESWorldSpace fields are outside this 0x10-byte map.",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x4F2B53",
-    "line": "mov     [esi+48h], esi",
+    "line": "mov     [esi+48h], esi; Verified TESWorldSpace.terrainLODQuadOwner (+0x48) is initialized to `this`; this backpointer is read by the embedded TerrainLODQuadMap code to recover the owning world's FormID.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x4F2B85",
-    "line": "fst     dword ptr [esi+9Ch]",
+    "line": "fst     dword ptr [esi+9Ch]; Oblivion TESWorldSpace constructor initializes the two NAM0 minimum axes (this+0x98/+0x9C) to +FLT_MAX from flt_A32048 (bits 0x7F7FFFFF). At 0x4F2BA2/0x4F2BA8 it initializes the NAM9 maxima (this+0xA0/+0xA4) to -FLT_MAX from flt_A3B888 (bits 0xFF7FFFFF). Full-record axis replay starts from these sentinels; partial overrides inherit prior state.",
     "mnemonic": "fst",
     "size": 6
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x4F2B94",
-    "line": "mov     [esi+54h], edi",
+    "line": "mov     [esi+54h], edi; Verified: TESWorldSpace.road (+0x54) is initialized null here. Its lifecycle and copy path establish it as TESRoad*: TESWorldSpace::~TESWorldSpace releases it, and CreateDuplicateForm clones it through TESRoad's virtual clone before RTTI-checking the result as TESRoad.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -697,13 +697,13 @@
   },
   {
     "ea": "0x4F2BD7",
-    "line": "call    TESWorldSpace__SetDefault",
+    "line": "call    TESWorldSpace__SetDefault; TESWorldSpace constructor calls SetDefault at0x4F2BD7; SetDefault0x4F1E00 initializes the SNAM-backed music U32 unk084[4] to zero at0x4F1E53. Full load without SNAM has effective default0; partial omission inherits existing object value.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4F2BDC",
-    "line": "mov     [esi+0DCh], ebx",
+    "line": "mov     [esi+0DCh], ebx; Verified constructor initializes the trailing WorldSpace distant-LOD metadata modeMask at +0xDC to 0x7; the byte at +0xD8 is separately cleared by LoadLODObjects before it checks for a .cmp file.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -778,5 +778,197 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9B6980",
+    "line": "mov     ecx, [ebp-14h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B6983",
+    "line": "jmp     TESForm_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B6988",
+    "line": "mov     ecx, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B698B",
+    "line": "add     ecx, 18h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B698E",
+    "line": "jmp     TESFullName_Initialize",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B6993",
+    "line": "mov     ecx, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B6996",
+    "line": "add     ecx, 24h ; '$'; void *",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B6999",
+    "line": "jmp     TESTexture_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B699E",
+    "line": "mov     ecx, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B69A1",
+    "line": "add     ecx, 38h ; '8'",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B69A4",
+    "line": "jmp     sub_4EC590",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B69A9",
+    "line": "mov     ecx, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B69AC",
+    "line": "add     ecx, 64h ; 'd'",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B69AF",
+    "line": "jmp     ??1?$NiTPointerMap@IPAV?$BSSimpleList@PAVTESObjectREFR@@@@@@UAE@XZ; NiTPointerMap<uint,BSSimpleList<TESObjectREFR *> *>::~NiTPointerMap<uint,BSSimpleList<TESObjectREFR *> *>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B69B4",
+    "line": "mov     ecx, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B69B7",
+    "line": "add     ecx, 0C0h ; 'À'; void *",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9B69BD",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B69C2",
+    "line": "mov     ecx, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B69C5",
+    "line": "add     ecx, 0C8h ; 'È'",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9B69CB",
+    "line": "jmp     ??1?$NiTPointerMap@I_N@@UAE@XZ; NiTPointerMap<uint,bool>::~NiTPointerMap<uint,bool>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B69D0",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B69D3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B69D4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B69D9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B69DA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B69DB",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B69DF",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B69E2",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B69E5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B69E7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B69EC",
+    "line": "mov     eax, offset stru_AE175C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B69F1",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,70 +1,117 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_SYSTEM_INFO_0",
+  "definition": "struct _SYSTEM_INFO_0\n{\n$BD658FC8F6D96770B8377CF3F6125E05 _anon_0;\nDWORD dwPageSize;\nLPVOID lpMinimumApplicationAddress;\nLPVOID lpMaximumApplicationAddress;\nDWORD_PTR dwActiveProcessorMask;\nDWORD dwNumberOfProcessors;\nDWORD dwProcessorType;\nDWORD dwAllocationGranularity;\nWORD wProcessorLevel;\nWORD wProcessorRevision;\n}\n",
   "id": 18374686479672026347,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "_anon_0",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "$BD658FC8F6D96770B8377CF3F6125E05"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwPageSize",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lpMinimumApplicationAddress",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "LPVOID"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lpMaximumApplicationAddress",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "LPVOID"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwActiveProcessorMask",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 8
+      "size": 8,
+      "type": "DWORD_PTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwNumberOfProcessors",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwProcessorType",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwAllocationGranularity",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "wProcessorLevel",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "wProcessorRevision",
       "offset": 38,
       "offset_hex": "0x26",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     }
   ],
   "name": "_SYSTEM_INFO_0",
+  "ordinal": 1020,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 40
 }

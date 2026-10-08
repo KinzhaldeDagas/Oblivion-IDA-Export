@@ -11,12 +11,12 @@ bool __cdecl sub_502210(
   bool result; // al
   UInt16 v9[2]; // [esp+8h] [ebp-4h] BYREF
 
-  *(float *)v9 = 0.0;
-  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v9);
-  if ( result )
+  *(float *)v9 = 0.0; /*0x50221b*/
+  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v9); /*0x50223d*/
+  if ( result ) /*0x502247*/
   {
-    Interface_ConsolePrint("Value = %0.4f", *(float *)v9);
-    return 1;
+    Interface_ConsolePrint("Value = %0.4f", *(float *)v9); /*0x502259*/
+    return 1; /*0x502261*/
   }
-  return result;
+  return result; /*0x50224a*/
 }

@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x7A88D0",
-    "line": "push    ecx",
+    "line": "push    ecx; OBLIVION AUTHORITY (2026-08-30): Checked wrapper around the trivial SLodEntry uninitialized-copy range helper.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A88D1",
-    "line": "mov     edx, [esp+4+arg_8]",
+    "line": "mov     edx, [esp+4+destination]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x7A88DD",
-    "line": "mov     eax, [esp+8+arg_8]",
+    "line": "mov     eax, [esp+8+destination]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x7A88E2",
-    "line": "mov     edx, [esp+0Ch+arg_0]",
+    "line": "mov     edx, [esp+0Ch+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,31 +55,31 @@
   },
   {
     "ea": "0x7A88E7",
-    "line": "mov     ecx, [esp+10h+arg_4]",
+    "line": "mov     ecx, [esp+10h+last]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A88EB",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A88EC",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A88ED",
-    "line": "push    edx",
+    "line": "push    edx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A88EE",
-    "line": "call    sub_7A86C0",
+    "line": "call    OB_LeafLodEntry_UninitializedCopyRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Uninitialized forward copy of 8-byte SLodEntry values used while growing m_vPairs.",
     "mnemonic": "call",
     "size": 5
   },

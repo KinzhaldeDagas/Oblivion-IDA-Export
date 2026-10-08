@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x53B0E0",
-    "line": "sub     esp, 1Ch",
+    "line": "sub     esp, 1Ch; Fog decode: Atmosphere update copies final Sky fog fields into active B333E4/Atmosphere BSFogProperty; sources include exterior weather, interior cell lighting, and water/underwater.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x53B0FC",
-    "line": "call    nullsub_returnVoid_2arg",
+    "line": "call    nullsub_returnVoid_2arg; nullsub_returnVoid_2arg; used by Low/MiddleLow movement/package setter slots and MiddleHigh movement flag setter slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x53B12D",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x53B15A",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x53B16F",
-    "line": "jnz     loc_53B20C",
+    "line": "jnz     loc_53B20C; Fog water decode: Atmosphere update repeats exterior water-height check before choosing underwater versus regular atmosphere color vectors.",
     "mnemonic": "jnz",
     "size": 6
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x53B178",
-    "line": "fstp    dword ptr [esp+24h+a2]",
+    "line": "fstp    dword ptr [esp+24h+a2]; Fog water decode: underwater atmosphere color vectors use active Sky fog color at +0x48/+0x4C/+0x50.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x53B212",
-    "line": "fstp    dword ptr [esp+24h+a2]",
+    "line": "fstp    dword ptr [esp+24h+a2]; Fog water decode: non-underwater atmosphere color vectors use regular Sky color slots instead of active fog RGB.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -805,13 +805,13 @@
   },
   {
     "ea": "0x53B303",
-    "line": "jz      short loc_53B30C",
+    "line": "jz      short loc_53B30C; Fog property decode: compare Sky fogStart/fogEnd to determine active BSFogProperty enable bit.",
     "mnemonic": "jz",
     "size": 2
   },
   {
     "ea": "0x53B305",
-    "line": "or      word ptr [ecx+18h], 1",
+    "line": "or      word ptr [ecx+18h], 1; Fog property decode: set BSFogProperty flags bit 0 when Sky fogStart < fogEnd.",
     "mnemonic": "or",
     "size": 5
   },
@@ -823,13 +823,13 @@
   },
   {
     "ea": "0x53B30C",
-    "line": "and     word ptr [ecx+18h], 0FFFEh",
+    "line": "and     word ptr [ecx+18h], 0FFFEh; Fog property decode: clear BSFogProperty flags bit 0 when Sky fogStart >= fogEnd, disabling active fog.",
     "mnemonic": "and",
     "size": 6
   },
   {
     "ea": "0x53B312",
-    "line": "cmp     byte ptr [edi+18h], 0",
+    "line": "cmp     byte ptr [edi+18h], 0; Fog property decode: Atmosphere+0x18 gate for copying Sky fogStart/fogEnd into BSFogProperty and updating camera far plane.",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x53B32B",
-    "line": "fstp    dword ptr [eax+2Ch]",
+    "line": "fstp    dword ptr [eax+2Ch]; Fog decode: active BSFogProperty fogStart write, B333E4+0x2C = Sky+0x0C8 produced by weather, interior, or water fog source.",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -877,7 +877,7 @@
   },
   {
     "ea": "0x53B332",
-    "line": "fstp    dword ptr [eax+30h]",
+    "line": "fstp    dword ptr [eax+30h]; Fog decode: active BSFogProperty fogEnd write, B333E4+0x30 = Sky+0x0CC produced by weather, interior, or water fog source.",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -907,7 +907,7 @@
   },
   {
     "ea": "0x53B341",
-    "line": "mov     [eax], edx",
+    "line": "mov     [eax], edx; Fog decode: active BSFogProperty color.r = Sky+0x48 produced by interior cell fog color, exterior weather color, or water fog blend.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -919,7 +919,7 @@
   },
   {
     "ea": "0x53B346",
-    "line": "mov     [eax+4], edx",
+    "line": "mov     [eax+4], edx; Fog decode: active BSFogProperty color.g = Sky+0x4C produced by interior cell fog color, exterior weather color, or water fog blend.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -931,13 +931,13 @@
   },
   {
     "ea": "0x53B34C",
-    "line": "mov     [eax+8], ecx",
+    "line": "mov     [eax+8], ecx; Fog decode: active BSFogProperty color.b = Sky+0x50 produced by interior cell fog color, exterior weather color, or water fog blend.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x53B34F",
-    "line": "cmp     byte ptr [edi+18h], 0",
+    "line": "cmp     byte ptr [edi+18h], 0; Fog property decode: Atmosphere+0x18 also gates camera far-plane synchronization after fog property writes.",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -955,13 +955,13 @@
   },
   {
     "ea": "0x53B35B",
-    "line": "call    GetFarPlane",
+    "line": "call    GetFarPlane; Fog interior decode: GetFarPlane uses TESObjectCELL::LightingData fogClipDistance (+0x20) for interior mode 1 when available.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x53B360",
-    "line": "fstp    [esp+24h+arg_0]",
+    "line": "fstp    [esp+24h+arg_0]; Fog property decode: read active GetFarPlane result for camera frustum synchronization.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1057,7 +1057,7 @@
   },
   {
     "ea": "0x53B398",
-    "line": "fst     [esp+24h+var_8]",
+    "line": "fst     [esp+24h+var_8]; Fog property decode: write camera frustum far plane when it differs from active GetFarPlane.",
     "mnemonic": "fst",
     "size": 4
   },
@@ -1087,7 +1087,7 @@
   },
   {
     "ea": "0x53B3A7",
-    "line": "fstp    dword ptr [edx+10Ch]",
+    "line": "fstp    dword ptr [edx+10Ch]; Fog property decode: update camera MaxFarNearRatio = FarPlane / near after far-plane change.",
     "mnemonic": "fstp",
     "size": 6
   },

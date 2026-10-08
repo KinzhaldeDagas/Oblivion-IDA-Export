@@ -31,7 +31,7 @@
 0x6962A9: mov     ebx, [ebp+arg_20]
 0x6962AC: mov     [eax+4], ebx
 0x6962AF: mov     ebx, [ebp+arg_24]
-0x6962B2: mov     edi, [ebp+arg_28]
+0x6962B2: mov     edi, [ebp+node]
 0x6962B5: mov     [eax+8], ebx
 0x6962B8: mov     ebx, [ebp+arg_10]
 0x6962BB: sub     esp, 0Ch
@@ -67,15 +67,15 @@
 0x69631C: fstp    dword ptr [esi+7Ch]
 0x69631F: mov     [esi+8Ch], ebx
 0x696325: fld1
-0x696327: mov     ecx, esi; int
+0x696327: mov     ecx, esi; this
 0x696329: fstp    dword ptr [esi+84h]
 0x69632F: jz      short loc_696339
-0x696331: push    edi
-0x696332: call    sub_4D7D10
+0x696331: push    edi; node
+0x696332: call    MobileObject_SetNiNode; Verified MobileObject node setter: invokes the reference's pre-node-update virtual, releases any old NiNode reference, stores the new node in TESObjectREFR+0x40, and AddRefs it. Used by both normal Set3D and the queued distant-tree attach path.
 0x696337: jmp     short loc_69633E
 0x696339: call    sub_69FD40
 0x69633E: mov     ecx, esi
-0x696340: call    sub_695010
+0x696340: call    MagicBallProjectile_PlaySpecialIdle; MagicBallProjectile SpecialIdle setup. Synchronizes projectile node transform and starts SpecialIdle_Projectile sequence from the controller-manager text-key map.
 0x696345: mov     ecx, esi
 0x696347: call    sub_695DC0
 0x69634C: fld     dword ptr ds:0A7DEB4h
@@ -86,7 +86,7 @@
 0x69635C: fst     [esp+54h+a2.y]
 0x696360: fst     [esp+54h+a2.z]
 0x696364: fstp    [esp+54h+a2.w]
-0x696368: call    MobileObject_GetCharProxy
+0x696368: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x69636D: cmp     eax, ebx
 0x69636F: jz      short loc_696384
 0x696371: mov     eax, [eax+8]
@@ -95,12 +95,12 @@
 0x696378: lea     edx, [esp+54h+a2]
 0x69637C: push    edx; a2
 0x69637D: mov     ecx, eax; this
-0x69637F: call    sub_8AC0B0
-0x696384: push    esi; Concurrency::details::SchedulerBase *
+0x69637F: call    sub_8AC0B0; TES4 authoritative: writes proxy velocity vector back into bhk collision object+0x10. Climbing/Slowfall velocity edits must happen before these calls or must write both proxy+0x2E0 and object+0x10 after the fact.
+0x696384: push    esi; reference
 0x696385: mov     ecx, esi; this
-0x696387: call    TESObjectREFR_GetParentCell
-0x69638C: mov     ecx, eax
-0x69638E: call    sub_4D35D0
+0x696387: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x69638C: mov     ecx, eax; this
+0x69638E: call    TESObjectCELL_AddReference; Verified: persistent-cell AddReference updates the WorldSpace coordinate/fallback persistent-reference index (+0x64) through TESWorldSpace_IndexReference. Ordinary cell additions do not index there. This routine does not populate the separate SubSpace spatial index at +0x60.
 0x696393: mov     eax, [esi+74h]
 0x696396: mov     eax, [eax+84h]
 0x69639C: cmp     eax, ebx
@@ -113,7 +113,7 @@
 0x6963B1: mov     ecx, edi; this
 0x6963B3: call    sub_6B73E0
 0x6963B8: push    edi
-0x6963B9: call    FormHeapFree
+0x6963B9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6963BE: add     esp, 4
 0x6963C1: mov     [esi+88h], ebx
 0x6963C7: mov     edx, [esp+54h+var_40]
@@ -162,3 +162,16 @@
 0x696453: mov     esp, ebp
 0x696455: pop     ebp
 0x696456: retn    30h ; '0'
+0x9C5950: mov     ecx, [ebp+var_34]
+0x9C5953: jmp     sub_69FA60
+0x9C5958: mov     edx, [esp-4+arg_4]
+0x9C595C: lea     eax, [edx-44h]
+0x9C595F: mov     ecx, [edx-48h]
+0x9C5962: xor     ecx, eax
+0x9C5964: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5969: add     eax, 0Ch
+0x9C596C: mov     ecx, [edx-8]
+0x9C596F: xor     ecx, eax
+0x9C5971: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5976: mov     eax, offset stru_AEE0AC
+0x9C597B: jmp     ___CxxFrameHandler3

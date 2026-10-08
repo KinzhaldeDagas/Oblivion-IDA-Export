@@ -1,1 +1,1 @@
-tagMSHLFLAGS
+typedef MSHLFLAGS tagMSHLFLAGS;

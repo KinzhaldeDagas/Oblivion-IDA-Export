@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6F1C40",
-    "line": "mov     eax, [esp+arg_C]",
+    "line": "mov     eax, [esp+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x6F1C4A",
-    "line": "mov     [esp+8+arg_C], ecx",
+    "line": "mov     [esp+8+value], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x6F1C62",
-    "line": "mov     ebx, [esp+0Ch+arg_8]",
+    "line": "mov     ebx, [esp+0Ch+count]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -415,13 +415,13 @@
   },
   {
     "ea": "0x6F1CE8",
-    "line": "push    edi; char *",
+    "line": "push    edi; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F1CE9",
-    "line": "call    sub_78FB60",
+    "line": "call    OB_stVector4_Allocate_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded allocator for vectors with 4-byte elements. Validates count*4 overflow, throws bad_alloc on overflow, and allocates through FormHeapAlloc; FindPairs uses it for vector<bool>'s uint32 backing words.",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,19 +451,19 @@
   },
   {
     "ea": "0x6F1CFA",
-    "line": "push    ebp; Dst",
+    "line": "push    ebp; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F1CFB",
-    "line": "push    eax; int",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F1CFC",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -475,31 +475,31 @@
   },
   {
     "ea": "0x6F1CFF",
-    "line": "call    sub_7A25C0",
+    "line": "call    OB_stVector4_UninitializedCopyRange_010201A0",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6F1D04",
-    "line": "lea     edx, [esp+10h+arg_C]",
+    "line": "lea     edx, [esp+10h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6F1D08",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F1D09",
-    "line": "push    ebx",
+    "line": "push    ebx; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F1D0A",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x6F1D0D",
-    "line": "call    sub_790B60",
+    "line": "call    OB_stVector4_UninitializedFillN_010201A0; Oblivion binary evidence: uninitialized fill_n for count four-byte slots, returning destination + count. Used by the folded vector insertion implementation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x6F1D16",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -535,13 +535,13 @@
   },
   {
     "ea": "0x6F1D1A",
-    "line": "push    eax; int",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F1D1B",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x6F1D1E",
-    "line": "call    sub_7A25C0",
+    "line": "call    OB_stVector4_UninitializedCopyRange_010201A0",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x6F1D3D",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x6F1D74",
-    "line": "mov     [esp+10h+arg_8], eax",
+    "line": "mov     [esp+10h+count], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -769,25 +769,25 @@
   },
   {
     "ea": "0x6F1D7E",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F1D7F",
-    "line": "push    ebp; int",
+    "line": "push    ebp; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F1D80",
-    "line": "push    edi; Src",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F1D81",
-    "line": "call    sub_7A25C0",
+    "line": "call    OB_stVector4_UninitializedCopyRange_010201A0",
     "mnemonic": "call",
     "size": 5
   },
@@ -817,13 +817,13 @@
   },
   {
     "ea": "0x6F1D90",
-    "line": "lea     edx, [esp+10h+arg_C]",
+    "line": "lea     edx, [esp+10h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6F1D94",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -835,13 +835,13 @@
   },
   {
     "ea": "0x6F1D97",
-    "line": "push    ebx",
+    "line": "push    ebx; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F1D98",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -853,13 +853,13 @@
   },
   {
     "ea": "0x6F1D9B",
-    "line": "call    sub_790B60",
+    "line": "call    OB_stVector4_UninitializedFillN_010201A0; Oblivion binary evidence: uninitialized fill_n for count four-byte slots, returning destination + count. Used by the folded vector insertion implementation.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6F1DA0",
-    "line": "mov     eax, [esp+10h+arg_8]",
+    "line": "mov     eax, [esp+10h+count]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -877,13 +877,13 @@
   },
   {
     "ea": "0x6F1DAA",
-    "line": "lea     edx, [esp+10h+arg_C]",
+    "line": "lea     edx, [esp+10h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6F1DAE",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -895,19 +895,19 @@
   },
   {
     "ea": "0x6F1DB1",
-    "line": "push    esi",
+    "line": "push    esi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F1DB2",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F1DB3",
-    "line": "call    sub_790490",
+    "line": "call    OB_stVector4_CopyFillRange_010201A0; Oblivion binary evidence: initialized fill over [first,last), assigning the same four-byte value to each existing slot and returning last.",
     "mnemonic": "call",
     "size": 5
   },
@@ -949,7 +949,7 @@
   },
   {
     "ea": "0x6F1DC2",
-    "line": "push    ebp; Dst",
+    "line": "push    ebp; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -967,37 +967,37 @@
   },
   {
     "ea": "0x6F1DC7",
-    "line": "push    ebp; int",
+    "line": "push    ebp; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F1DC8",
-    "line": "push    ebx; Src",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F1DC9",
-    "line": "call    sub_7A25C0",
+    "line": "call    OB_stVector4_UninitializedCopyRange_010201A0",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6F1DCE",
-    "line": "push    ebp; int",
+    "line": "push    ebp; destinationEnd",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F1DCF",
-    "line": "push    ebx; int",
+    "line": "push    ebx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F1DD0",
-    "line": "push    edi; Src",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -1009,25 +1009,25 @@
   },
   {
     "ea": "0x6F1DD4",
-    "line": "call    sub_5254A0",
+    "line": "call    OB_stVector4_CopyBackwardRange_010201A0",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6F1DD9",
-    "line": "mov     ecx, [esp+1Ch+arg_8]",
+    "line": "mov     ecx, [esp+1Ch+count]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6F1DDD",
-    "line": "lea     eax, [esp+1Ch+arg_C]",
+    "line": "lea     eax, [esp+1Ch+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6F1DE1",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -1039,19 +1039,19 @@
   },
   {
     "ea": "0x6F1DE4",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F1DE5",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F1DE6",
-    "line": "call    sub_790490",
+    "line": "call    OB_stVector4_CopyFillRange_010201A0; Oblivion binary evidence: initialized fill over [first,last), assigning the same four-byte value to each existing slot and returning last.",
     "mnemonic": "call",
     "size": 5
   },

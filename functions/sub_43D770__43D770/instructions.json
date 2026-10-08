@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x43D7E9",
-    "line": "mov     ecx, ModelLoaderPtr",
+    "line": "mov     ecx, ds:0B33A1Ch",
     "mnemonic": "mov",
     "size": 6
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x43D82D",
-    "line": "mov     [esp+4Ch+var_35], 1",
+    "line": "mov     [esp+50h+var_39], 1",
     "mnemonic": "mov",
     "size": 5
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x43D844",
-    "line": "mov     [esp+4Ch+var_34], eax",
+    "line": "mov     [esp+18h], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -487,13 +487,13 @@
   },
   {
     "ea": "0x43D84A",
-    "line": "mov     [esp+4Ch+var_34], 0",
+    "line": "mov     dword ptr [esp+18h], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x43D852",
-    "line": "mov     eax, [esp+4Ch+var_34]",
+    "line": "mov     eax, [esp+18h]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x43D86E",
-    "line": "mov     ecx, [esp+4Ch+var_34]",
+    "line": "mov     ecx, [esp+18h]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x43D87F",
-    "line": "mov     [esp+4Ch+var_30], ebp",
+    "line": "mov     [esp+50h+var_34], ebp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x43D889",
-    "line": "cmp     [esp+4Ch+var_35], 0",
+    "line": "cmp     [esp+50h+var_39], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x43D8A3",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x43D90B",
-    "line": "push    edi",
+    "line": "push    edi; form",
     "mnemonic": "push",
     "size": 1
   },
@@ -829,13 +829,13 @@
   },
   {
     "ea": "0x43D90F",
-    "line": "call    sub_4A2A30",
+    "line": "call    TESForm_GetLODMult; Verified control flow: returns 2 for form-type bytes {0x13,0x14,0x15,0x16,0x19,0x1B,0x21,0x22,0x26,0x27,0x28,0x2A}, 3 for {0x23,0x24}, otherwise 1. Probable semantic name TESForm_GetLODMult is supported by the direct queued-tree argument use and Fallout's named TES::GetLODMult; individual type-group meanings are not decoded here.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x43D914",
-    "line": "mov     ecx, ModelLoaderPtr",
+    "line": "mov     ecx, ds:0B33A1Ch",
     "mnemonic": "mov",
     "size": 6
   },
@@ -877,7 +877,7 @@
   },
   {
     "ea": "0x43D924",
-    "line": "lea     eax, [esp+68h+var_2C]",
+    "line": "lea     eax, [esp+6Ch+var_30]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -895,7 +895,7 @@
   },
   {
     "ea": "0x43D92E",
-    "line": "mov     eax, [esp+4Ch+var_2C]",
+    "line": "mov     eax, [esp+50h+var_30]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1075,7 +1075,7 @@
   },
   {
     "ea": "0x43D990",
-    "line": "push    edi",
+    "line": "push    edi; form",
     "mnemonic": "push",
     "size": 1
   },
@@ -1093,7 +1093,7 @@
   },
   {
     "ea": "0x43D997",
-    "line": "call    sub_4A2A30",
+    "line": "call    TESForm_GetLODMult; Verified control flow: returns 2 for form-type bytes {0x13,0x14,0x15,0x16,0x19,0x1B,0x21,0x22,0x26,0x27,0x28,0x2A}, 3 for {0x23,0x24}, otherwise 1. Probable semantic name TESForm_GetLODMult is supported by the direct queued-tree argument use and Fallout's named TES::GetLODMult; individual type-group meanings are not decoded here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1141,7 +1141,7 @@
   },
   {
     "ea": "0x43D9AB",
-    "line": "mov     ecx, ModelLoaderPtr",
+    "line": "mov     ecx, ds:0B33A1Ch",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1153,7 +1153,7 @@
   },
   {
     "ea": "0x43D9B2",
-    "line": "lea     edx, [esp+68h+var_28]",
+    "line": "lea     edx, [esp+6Ch+var_2C]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1171,7 +1171,7 @@
   },
   {
     "ea": "0x43D9BC",
-    "line": "mov     eax, [esp+4Ch+var_28]",
+    "line": "mov     eax, [esp+50h+var_2C]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1309,7 +1309,7 @@
   },
   {
     "ea": "0x43D9F5",
-    "line": "push    edi",
+    "line": "push    edi; form",
     "mnemonic": "push",
     "size": 1
   },
@@ -1321,7 +1321,7 @@
   },
   {
     "ea": "0x43D9F9",
-    "line": "call    sub_4A2A30",
+    "line": "call    TESForm_GetLODMult; Verified control flow: returns 2 for form-type bytes {0x13,0x14,0x15,0x16,0x19,0x1B,0x21,0x22,0x26,0x27,0x28,0x2A}, 3 for {0x23,0x24}, otherwise 1. Probable semantic name TESForm_GetLODMult is supported by the direct queued-tree argument use and Fallout's named TES::GetLODMult; individual type-group meanings are not decoded here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1369,7 +1369,7 @@
   },
   {
     "ea": "0x43DA0D",
-    "line": "mov     ecx, ModelLoaderPtr",
+    "line": "mov     ecx, ds:0B33A1Ch",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1381,7 +1381,7 @@
   },
   {
     "ea": "0x43DA14",
-    "line": "lea     eax, [esp+68h+var_24]",
+    "line": "lea     eax, [esp+70h+var_2C]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1399,7 +1399,7 @@
   },
   {
     "ea": "0x43DA1E",
-    "line": "mov     eax, [esp+4Ch+var_24]",
+    "line": "mov     eax, [esp+54h+var_2C]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1531,7 +1531,7 @@
   },
   {
     "ea": "0x43DA66",
-    "line": "lea     ecx, [esp+4Ch+var_1C]",
+    "line": "lea     ecx, [esp+50h+var_20]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1543,7 +1543,7 @@
   },
   {
     "ea": "0x43DA6F",
-    "line": "lea     ecx, [esp+4Ch+var_1C]",
+    "line": "lea     ecx, [esp+50h+var_20]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1555,19 +1555,19 @@
   },
   {
     "ea": "0x43DA74",
-    "line": "mov     ecx, TESDataHandler_g_PlayerRef",
+    "line": "mov     ecx, dword ptr reference",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x43DA7A",
-    "line": "push    1",
+    "line": "push    1; int",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x43DA7C",
-    "line": "mov     [esp+54h+var_4], 0",
+    "line": "mov     [esp+58h+var_8], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -1591,7 +1591,7 @@
   },
   {
     "ea": "0x43DA8D",
-    "line": "call    TESLeveledList_CalcLeveledForm",
+    "line": "call    TESLeveledList_CalcLeveledForm; CustomAnimSupport decode: leveled-list resolver evidence with chance/level/random/container logic; not used as deterministic animation target list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1603,7 +1603,7 @@
   },
   {
     "ea": "0x43DA94",
-    "line": "lea     ecx, [esp+50h+var_1C]",
+    "line": "lea     ecx, [esp+58h+var_24]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1615,7 +1615,7 @@
   },
   {
     "ea": "0x43DA9D",
-    "line": "lea     ecx, [esp+4Ch+var_1C]",
+    "line": "lea     ecx, [esp+54h+var_24]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1627,7 +1627,7 @@
   },
   {
     "ea": "0x43DAA3",
-    "line": "mov     [esp+4Ch+var_4], 0FFFFFFFFh",
+    "line": "mov     dword ptr [esp+54h+var_C], 0FFFFFFFFh",
     "mnemonic": "mov",
     "size": 8
   },
@@ -1735,7 +1735,7 @@
   },
   {
     "ea": "0x43DADC",
-    "line": "mov     ecx, ModelLoaderPtr",
+    "line": "mov     ecx, ds:0B33A1Ch",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1777,7 +1777,7 @@
   },
   {
     "ea": "0x43DAF0",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1789,7 +1789,7 @@
   },
   {
     "ea": "0x43DAF6",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1873,7 +1873,7 @@
   },
   {
     "ea": "0x43DB25",
-    "line": "mov     ecx, ModelLoaderPtr",
+    "line": "mov     ecx, ds:0B33A1Ch",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1945,7 +1945,7 @@
   },
   {
     "ea": "0x43DB48",
-    "line": "push    edi",
+    "line": "push    edi; form",
     "mnemonic": "push",
     "size": 1
   },
@@ -1957,7 +1957,7 @@
   },
   {
     "ea": "0x43DB4C",
-    "line": "call    sub_4A2A30",
+    "line": "call    TESForm_GetLODMult; Verified control flow: returns 2 for form-type bytes {0x13,0x14,0x15,0x16,0x19,0x1B,0x21,0x22,0x26,0x27,0x28,0x2A}, 3 for {0x23,0x24}, otherwise 1. Probable semantic name TESForm_GetLODMult is supported by the direct queued-tree argument use and Fallout's named TES::GetLODMult; individual type-group meanings are not decoded here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1993,7 +1993,7 @@
   },
   {
     "ea": "0x43DB58",
-    "line": "lea     ecx, [esp+68h+var_20]",
+    "line": "lea     ecx, [esp+70h+var_28]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2005,7 +2005,7 @@
   },
   {
     "ea": "0x43DB5D",
-    "line": "mov     ecx, ModelLoaderPtr",
+    "line": "mov     ecx, ds:0B33A1Ch",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2017,7 +2017,7 @@
   },
   {
     "ea": "0x43DB68",
-    "line": "lea     ecx, [esp+4Ch+var_20]; void *",
+    "line": "lea     ecx, [esp+54h+var_28]; void *",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2065,7 +2065,7 @@
   },
   {
     "ea": "0x43DB81",
-    "line": "mov     ecx, ModelLoaderPtr",
+    "line": "mov     ecx, ds:0B33A1Ch",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2095,7 +2095,7 @@
   },
   {
     "ea": "0x43DB91",
-    "line": "mov     ebp, [esp+4Ch+var_30]",
+    "line": "mov     ebp, [esp+1Ch]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2173,7 +2173,7 @@
   },
   {
     "ea": "0x43DBB5",
-    "line": "add     dword_B33518, 1",
+    "line": "add     dword ptr unk_B33518, 1",
     "mnemonic": "add",
     "size": 7
   },
@@ -2191,7 +2191,7 @@
   },
   {
     "ea": "0x43DBC3",
-    "line": "mov     ecx, [esp+4Ch+var_34]",
+    "line": "mov     ecx, [esp+18h]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2221,7 +2221,7 @@
   },
   {
     "ea": "0x43DBD1",
-    "line": "mov     [esp+4Ch+var_34], eax",
+    "line": "mov     [esp+18h], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2263,7 +2263,7 @@
   },
   {
     "ea": "0x43DBEB",
-    "line": "mov     ecx, dword ptr [esp+4Ch+var_C]",
+    "line": "mov     ecx, [esp+54h+var_1C+8]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2314,5 +2314,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9ACD10",
+    "line": "lea     ecx, [ebp-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9ACD13",
+    "line": "jmp     TESContainer_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9ACD18",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9ACD1C",
+    "line": "lea     eax, [edx-3Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9ACD1F",
+    "line": "mov     ecx, [edx-40h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9ACD22",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9ACD24",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9ACD29",
+    "line": "mov     eax, offset stru_AD9974",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9ACD2E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

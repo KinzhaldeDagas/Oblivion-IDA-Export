@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x45AC30",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; MEF v57 IMPLEMENTED 2026-10-08: PERF-11 dtor entry invalidates map generation BEFORE freeing callbacks. Replay preserves original SEH handler9AE298. Auxiliary failures use original checked map helper; required nodeOOM remains reported to blob owner.",
     "mnemonic": "push",
     "size": 2
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x45AC5A",
-    "line": "mov     dword ptr [esi], offset ??_7NumericIDBufferMap@@6B@; const NumericIDBufferMap::`vftable'",
+    "line": "mov     dword ptr [esi], offset ??_7NumericIDBufferMap@@6B@; MEF PERF 2026-10-02 PASS2: Verified dispatch for save blob maps: +4=6A9060 unsigned key%bucketCount; +8=763E80 exact key equality; +C=67F130 writes node key+4/value+8; +10=68F970 no-op cleanup; +14=4F0F60 pooled node allocation. This resolves generic SetAt virtual behavior, not a blanket type assignment to all NiTMaps.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x45AC88",
-    "line": "mov     [esp+24h+var_18], eax",
+    "line": "mov     [esp+24h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -187,61 +187,61 @@
   },
   {
     "ea": "0x45AC90",
-    "line": "lea     eax, [esp+24h+var_1C]",
+    "line": "lea     eax, [esp+24h+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x45AC94",
-    "line": "push    eax",
+    "line": "push    eax; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45AC95",
-    "line": "lea     ecx, [esp+28h+var_10]",
+    "line": "lea     ecx, [esp+28h+keyOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x45AC99",
-    "line": "push    ecx",
+    "line": "push    ecx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45AC9A",
-    "line": "lea     edx, [esp+2Ch+var_18]",
+    "line": "lea     edx, [esp+2Ch+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x45AC9E",
-    "line": "push    edx",
+    "line": "push    edx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45AC9F",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x45ACA1",
-    "line": "mov     [esp+30h+var_1C], 0",
+    "line": "mov     [esp+30h+valueOut], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x45ACA9",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x45ACAE",
-    "line": "mov     eax, [esp+24h+var_1C]",
+    "line": "mov     eax, [esp+24h+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x45ACC1",
-    "line": "cmp     [esp+24h+var_18], 0",
+    "line": "cmp     [esp+24h+position], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -364,5 +364,59 @@
     "line": "jmp     short loc_45AC86",
     "mnemonic": "jmp",
     "size": 2
+  },
+  {
+    "ea": "0x9AE290",
+    "line": "mov     ecx, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE293",
+    "line": "jmp     ??1?$NiTPointerMap@IPAX@@UAE@XZ; NiTPointerMap<uint,void *>::~NiTPointerMap<uint,void *>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE298",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AE29C",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE29F",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE2A2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AE2A4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE2A9",
+    "line": "mov     eax, offset stru_ADAB3C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE2AE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

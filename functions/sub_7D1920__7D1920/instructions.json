@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7D1920",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Generic material shader id inference helper. Checks material/property names including Block and STBB, but the STBB check falls through to default shader id 1; it does not select SpeedTree billboard/frond ids.",
     "mnemonic": "push",
     "size": 2
   },
@@ -103,37 +103,37 @@
   },
   {
     "ea": "0x7D195B",
-    "line": "mov     ebp, [esp+134h+arg_0]",
+    "line": "mov     ebp, [esp+134h+geometry]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x7D1962",
-    "line": "lea     eax, [esp+134h+var_118]",
+    "line": "lea     eax, [esp+134h+output]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7D1966",
-    "line": "push    eax",
+    "line": "push    eax; output",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D1967",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7D1969",
-    "line": "mov     [esp+138h+var_11C], 0",
+    "line": "mov     [esp+138h+outTexture], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x7D1971",
-    "line": "call    sub_405760",
+    "line": "call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x7D1978",
-    "line": "mov     eax, [esp+134h+var_118]",
+    "line": "mov     eax, [esp+134h+output]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x7D19A6",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,19 +277,19 @@
   },
   {
     "ea": "0x7D19AF",
-    "line": "push    ecx",
+    "line": "push    ecx; output",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D19B0",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7D19B2",
-    "line": "call    sub_405760",
+    "line": "call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x7D19FF",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -535,13 +535,13 @@
   },
   {
     "ea": "0x7D1A16",
-    "line": "push    eax; Str1",
+    "line": "push    eax; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D1A17",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -625,7 +625,7 @@
   },
   {
     "ea": "0x7D1A3E",
-    "line": "push    offset dword_B3F95C",
+    "line": "push    offset stru_B3F95C",
     "mnemonic": "push",
     "size": 5
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x7D1A63",
-    "line": "push    eax",
+    "line": "push    eax; sourcePath",
     "mnemonic": "push",
     "size": 1
   },
@@ -691,25 +691,25 @@
   },
   {
     "ea": "0x7D1A68",
-    "line": "push    edx",
+    "line": "push    edx; outPath",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D1A69",
-    "line": "call    sub_7B4160",
+    "line": "call    BuildTextureVariantPath; Builds the normal-map companion name with suffix _n. BuildTextureVariantPath replaces everything from the final underscore in the diffuse basename, rather than blindly appending _n.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7D1A6E",
-    "line": "push    1; char",
+    "line": "push    1; requireMipmaps",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7D1A70",
-    "line": "push    1; char",
+    "line": "push    1; loadFromCache",
     "mnemonic": "push",
     "size": 2
   },
@@ -721,25 +721,25 @@
   },
   {
     "ea": "0x7D1A76",
-    "line": "push    eax; Src",
+    "line": "push    eax; path",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D1A77",
-    "line": "lea     ecx, [esp+14Ch+var_11C]",
+    "line": "lea     ecx, [esp+14Ch+outTexture]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7D1A7B",
-    "line": "push    ecx; int",
+    "line": "push    ecx; outTexture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D1A7C",
-    "line": "call    sub_7B8200",
+    "line": "call    NiSourceTexture_LoadChecked; Loads/caches a NiSourceTexture by filename and optionally rejects a loaded texture that lacks mipmaps. The first argument is the returned smart-pointer storage.",
     "mnemonic": "call",
     "size": 5
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x7D1A89",
-    "line": "cmp     byte ptr [esp+134h+arg_4], 0",
+    "line": "cmp     [esp+134h+normalMapBypass], 0",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -793,13 +793,13 @@
   },
   {
     "ea": "0x7D1A99",
-    "line": "lea     ecx, [esp+134h+var_11C]; this",
+    "line": "lea     ecx, [esp+134h+outTexture]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7D1A9D",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -961,13 +961,13 @@
   },
   {
     "ea": "0x7D1AFD",
-    "line": "push    eax; Str1",
+    "line": "push    eax; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D1AFE",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -1099,7 +1099,7 @@
   },
   {
     "ea": "0x7D1B46",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1123,7 +1123,7 @@
   },
   {
     "ea": "0x7D1B51",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1261,13 +1261,13 @@
   },
   {
     "ea": "0x7D1B95",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7D1B97",
-    "line": "call    sub_47F920",
+    "line": "call    NiAlphaProperty_ctor; Constructs a 0x1C NiAlphaProperty over NiObjectNET: installs NiAlphaProperty vtable, initializes flags to 0x00EC and threshold byte to 0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1606,5 +1606,101 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CE9D0",
+    "line": "mov     eax, [ebp-120h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9CE9D6",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE9D7",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE9DC",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE9DD",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE9DE",
+    "line": "mov     edx, dword ptr [esp+normalMapBypass]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CE9E2",
+    "line": "lea     eax, [edx-124h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CE9E8",
+    "line": "mov     ecx, [edx-128h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9CE9EE",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CE9F0",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE9F5",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE9F8",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE9FB",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CE9FD",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEA02",
+    "line": "mov     eax, offset stru_AF78F0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEA07",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

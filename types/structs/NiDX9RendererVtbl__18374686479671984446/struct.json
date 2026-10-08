@@ -1,34 +1,63 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "NiDX9RendererVtbl",
+  "definition": "struct NiDX9RendererVtbl\n{\nNiRendererVtbl super;\nbool (__thiscall *DeleteRenderedCubeMap)(NiDX9Renderer *this, NiRenderedCubeMap *arg);\nbool (__thiscall *DeleteTexture)(NiDX9Renderer *this, NiTexture *arg);\nbool (__thiscall *DeleteDynamicTexture)(NiDX9Renderer *this, UInt32 arg);\n}\n",
   "id": 18374686479671984446,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "super",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 380
+      "size": 380,
+      "type": "NiRendererVtbl"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DeleteRenderedCubeMap",
       "offset": 380,
-      "offset_hex": "0x17c",
-      "size": 4
+      "offset_hex": "0x17C",
+      "size": 4,
+      "type": "bool (__thiscall *)(NiDX9Renderer *this, NiRenderedCubeMap *arg)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DeleteTexture",
       "offset": 384,
       "offset_hex": "0x180",
-      "size": 4
+      "size": 4,
+      "type": "bool (__thiscall *)(NiDX9Renderer *this, NiTexture *arg)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DeleteDynamicTexture",
       "offset": 388,
       "offset_hex": "0x184",
-      "size": 4
+      "size": 4,
+      "type": "bool (__thiscall *)(NiDX9Renderer *this, UInt32 arg)"
     }
   ],
   "name": "NiDX9RendererVtbl",
+  "ordinal": 9307,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 392
 }

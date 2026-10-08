@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7D1C60",
-    "line": "push    esi",
+    "line": "push    esi; Clears texture stages/state for every one of Oblivion's 419 cached ShadowLightShader passes by dispatching the per-pass clear virtual.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x7D1C64",
-    "line": "mov     esi, offset dword_B455A0",
+    "line": "mov     esi, offset g_ShadowLightPassBySelector",
     "mnemonic": "mov",
     "size": 5
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x7D1C82",
-    "line": "cmp     esi, offset dword_B45C2C",
+    "line": "cmp     esi, offset unk_B45C2C",
     "mnemonic": "cmp",
     "size": 6
   },

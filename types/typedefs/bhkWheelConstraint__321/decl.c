@@ -1,1 +1,1 @@
-bhkWheelConstraint
+struct bhkWheelConstraint;

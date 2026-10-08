@@ -1,4 +1,4 @@
-0x78EB70: push    esi
+0x78EB70: push    esi; CTreeFileAccess::ParseUInt/ParseLong-style read. Reads the low 4-byte unsigned value and advances by 8 because local SaveLong pads longs with 4 future-expansion bytes.
 0x78EB71: mov     esi, ecx
 0x78EB73: mov     ecx, [esi+8]
 0x78EB76: test    ecx, ecx

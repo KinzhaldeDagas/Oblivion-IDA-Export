@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x68E62B",
+      "0x68E64F"
+    ]
+  ],
+  "chunks_sha256": "00509c40c010544b5aff3c50cab9f0aa32c2eef8e7f9d07f8e2f4d17abf5ef4f",
+  "comment_regular": "Verified BSTempEffect ownership handoff after load: each +0x84 postLink callback receives owner ActiveEffect, linkContext, and null fallback; ActorProcessManager_RegisterTempEffect increments its refcount and inserts it. ActiveEffect::~ActiveEffect later clears ownerActiveEffect/sets bFinished and frees only its association nodes; the manager releases its own object reference after Update returns false or its parent cell unloads.",
+  "comment_repeatable": "Verified BSTempEffect ownership handoff after load: each +0x84 postLink callback receives owner ActiveEffect, linkContext, and null fallback; ActorProcessManager_RegisterTempEffect increments its refcount and inserts it. ActiveEffect::~ActiveEffect later clears ownerActiveEffect/sets bFinished and frees only its association nodes; the manager releases its own object reference after Update returns false or its parent cell unloads.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
   "display_name": "ActiveEffect_Base_PostLink:::LoopBody",
   "end_ea": "0x68E64F",
+  "evidence_confidence": "Unknown",
   "flags": 5120,
   "has_pseudocode": true,
   "name": "ActiveEffect_Base_PostLink:::LoopBody",
   "segment": ".text",
   "sha256": "00509c40c010544b5aff3c50cab9f0aa32c2eef8e7f9d07f8e2f4d17abf5ef4f",
   "size": 36,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x68E62B",
-  "type": "int __usercall@<eax>(int@<ebx>, int@<ebp>, volatile LONG **@<esi>)",
+  "total_chunk_size": 36,
+  "type": "int __usercall@<eax>(int@<ebx>, int@<ebp>, BSTempEffect **@<esi>, int)",
   "xrefs_from_count": 17,
   "xrefs_to_count": 2
 }

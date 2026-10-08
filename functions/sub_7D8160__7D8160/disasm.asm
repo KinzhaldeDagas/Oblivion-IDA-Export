@@ -15,32 +15,32 @@
 0x7D818D: push    eax
 0x7D818E: lea     eax, [esp+134h+var_C]
 0x7D8195: mov     large fs:0, eax
-0x7D819B: mov     eax, [esp+134h+arg_0]
+0x7D819B: mov     eax, [esp+134h+sourcePath]
 0x7D81A2: mov     ebx, [esp+134h+arg_8]
 0x7D81A9: push    offset a_n; "_n"
-0x7D81AE: push    eax
+0x7D81AE: push    eax; sourcePath
 0x7D81AF: mov     [esp+13Ch+var_11C], eax
 0x7D81B3: lea     eax, [esp+13Ch+Src]
-0x7D81B7: push    eax
+0x7D81B7: push    eax; outPath
 0x7D81B8: mov     esi, ecx
-0x7D81BA: call    sub_7B4160
-0x7D81BF: mov     edi, dword ptr [esp+140h+arg_4]
+0x7D81BA: call    BuildTextureVariantPath; Builds a sibling texture variant path. Keeps the original extension, truncates the basename at its final underscore after the last separator, appends the requested suffix, and prefixes Data\\ for relative paths.
+0x7D81BF: mov     edi, dword ptr [esp+140h+loadFromCache]
 0x7D81C6: add     esp, 0Ch
 0x7D81C9: cmp     [esp+134h+Src], 0
 0x7D81CE: jz      short loc_7D822E
-0x7D81D0: push    1; char
-0x7D81D2: push    edi; char
+0x7D81D0: push    1; requireMipmaps
+0x7D81D2: push    edi; loadFromCache
 0x7D81D3: lea     ecx, [esp+13Ch+Src]
-0x7D81D7: push    ecx; Src
-0x7D81D8: lea     edx, [esp+140h+var_120]
-0x7D81DC: push    edx; int
-0x7D81DD: call    sub_7B8200
+0x7D81D7: push    ecx; path
+0x7D81D8: lea     edx, [esp+140h+outTexture]
+0x7D81DC: push    edx; outTexture
+0x7D81DD: call    NiSourceTexture_LoadChecked; Loads/caches a NiSourceTexture by filename and optionally rejects a loaded texture that lacks mipmaps. The first argument is the returned smart-pointer storage.
 0x7D81E2: add     esp, 10h
-0x7D81E5: mov     ecx, [esi+0C0h]
-0x7D81EB: push    eax
+0x7D81E5: mov     ecx, [esi+0C0h]; this
+0x7D81EB: push    eax; incoming
 0x7D81EC: mov     [esp+138h+var_4], 0
-0x7D81F7: call    sub_55E2A0
-0x7D81FC: mov     eax, [esp+134h+var_120]
+0x7D81F7: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
+0x7D81FC: mov     eax, [esp+134h+outTexture]
 0x7D8200: test    eax, eax
 0x7D8202: mov     [esp+134h+var_4], 0FFFFFFFFh
 0x7D820D: jz      short loc_7D822E
@@ -61,26 +61,26 @@
 0x7D8230: jz      short loc_7D82B1
 0x7D8232: push    offset a_n; "_n"
 0x7D8237: lea     eax, [esp+138h+Src]
-0x7D823B: push    ebx
-0x7D823C: push    eax
-0x7D823D: call    sub_7B4160
+0x7D823B: push    ebx; sourcePath
+0x7D823C: push    eax; outPath
+0x7D823D: call    BuildTextureVariantPath; Builds a sibling texture variant path. Keeps the original extension, truncates the basename at its final underscore after the last separator, appends the requested suffix, and prefixes Data\\ for relative paths.
 0x7D8242: add     esp, 0Ch
 0x7D8245: cmp     [esp+134h+Src], 0
 0x7D824A: jz      short loc_7D82B1
-0x7D824C: push    1; char
-0x7D824E: push    edi; char
+0x7D824C: push    1; requireMipmaps
+0x7D824E: push    edi; loadFromCache
 0x7D824F: lea     ecx, [esp+13Ch+Src]
-0x7D8253: push    ecx; Src
-0x7D8254: lea     edx, [esp+140h+var_120]
-0x7D8258: push    edx; int
-0x7D8259: call    sub_7B8200
+0x7D8253: push    ecx; path
+0x7D8254: lea     edx, [esp+140h+outTexture]
+0x7D8258: push    edx; outTexture
+0x7D8259: call    NiSourceTexture_LoadChecked; Loads/caches a NiSourceTexture by filename and optionally rejects a loaded texture that lacks mipmaps. The first argument is the returned smart-pointer storage.
 0x7D825E: add     esp, 10h
 0x7D8261: mov     ecx, [esi+0C0h]
-0x7D8267: push    eax
-0x7D8268: add     ecx, 4
+0x7D8267: push    eax; incoming
+0x7D8268: add     ecx, 4; this
 0x7D826B: mov     [esp+138h+var_4], 1
-0x7D8276: call    sub_55E2A0
-0x7D827B: mov     eax, [esp+134h+var_120]
+0x7D8276: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
+0x7D827B: mov     eax, [esp+134h+outTexture]
 0x7D827F: test    eax, eax
 0x7D8281: mov     [esp+134h+var_4], 0FFFFFFFFh
 0x7D828C: jz      short loc_7D82B1
@@ -102,22 +102,22 @@
 0x7D82B1: mov     ebx, ds:0A2807Ch
 0x7D82B7: mov     eax, [esp+134h+var_11C]
 0x7D82BB: push    offset a_g; "_g"
-0x7D82C0: push    eax
+0x7D82C0: push    eax; sourcePath
 0x7D82C1: lea     ecx, [esp+13Ch+Src]
-0x7D82C5: push    ecx
-0x7D82C6: call    sub_7B4160
+0x7D82C5: push    ecx; outPath
+0x7D82C6: call    BuildTextureVariantPath; Builds a sibling texture variant path. Keeps the original extension, truncates the basename at its final underscore after the last separator, appends the requested suffix, and prefixes Data\\ for relative paths.
 0x7D82CB: add     esp, 0Ch
 0x7D82CE: cmp     [esp+134h+Src], 0
 0x7D82D3: jz      short loc_7D8336
-0x7D82D5: push    1; char
-0x7D82D7: push    edi; char
+0x7D82D5: push    1; requireMipmaps
+0x7D82D7: push    edi; loadFromCache
 0x7D82D8: lea     edx, [esp+13Ch+Src]
-0x7D82DC: push    edx; Src
-0x7D82DD: lea     eax, [esp+140h+var_120]
-0x7D82E1: push    eax; int
-0x7D82E2: call    sub_7B8200
+0x7D82DC: push    edx; path
+0x7D82DD: lea     eax, [esp+140h+outTexture]
+0x7D82E1: push    eax; outTexture
+0x7D82E2: call    NiSourceTexture_LoadChecked; Loads/caches a NiSourceTexture by filename and optionally rejects a loaded texture that lacks mipmaps. The first argument is the returned smart-pointer storage.
 0x7D82E7: add     esp, 10h
-0x7D82EA: mov     eax, [esp+134h+var_120]
+0x7D82EA: mov     eax, [esp+134h+outTexture]
 0x7D82EE: mov     edx, [esi]
 0x7D82F0: mov     edx, [edx+94h]
 0x7D82F6: push    eax
@@ -125,7 +125,7 @@
 0x7D82F9: mov     ecx, esi
 0x7D82FB: mov     [esp+13Ch+var_4], 2
 0x7D8306: call    edx
-0x7D8308: mov     eax, [esp+134h+var_120]
+0x7D8308: mov     eax, [esp+134h+outTexture]
 0x7D830C: test    eax, eax
 0x7D830E: mov     [esp+134h+var_4], 0FFFFFFFFh
 0x7D8319: jz      short loc_7D8336
@@ -145,21 +145,21 @@
 0x7D8336: test    dword ptr [esi+1Ch], 40000h
 0x7D833D: jbe     loc_7D83C5
 0x7D8343: mov     eax, [esp+134h+var_11C]
-0x7D8347: push    offset off_A7D0E8
-0x7D834C: push    eax
+0x7D8347: push    offset suffix; suffix
+0x7D834C: push    eax; sourcePath
 0x7D834D: lea     ecx, [esp+13Ch+Src]
-0x7D8351: push    ecx
-0x7D8352: call    sub_7B4160
+0x7D8351: push    ecx; outPath
+0x7D8352: call    BuildTextureVariantPath; Builds a sibling texture variant path. Keeps the original extension, truncates the basename at its final underscore after the last separator, appends the requested suffix, and prefixes Data\\ for relative paths.
 0x7D8357: add     esp, 0Ch
 0x7D835A: cmp     [esp+134h+Src], 0
 0x7D835F: jz      short loc_7D83C5
-0x7D8361: push    1; char
-0x7D8363: push    edi; char
+0x7D8361: push    1; requireMipmaps
+0x7D8363: push    edi; loadFromCache
 0x7D8364: lea     edx, [esp+13Ch+Src]
-0x7D8368: push    edx; Src
+0x7D8368: push    edx; path
 0x7D8369: lea     eax, [esp+140h+var_118]
-0x7D836D: push    eax; int
-0x7D836E: call    sub_7B8200
+0x7D836D: push    eax; outTexture
+0x7D836E: call    NiSourceTexture_LoadChecked; Loads/caches a NiSourceTexture by filename and optionally rejects a loaded texture that lacks mipmaps. The first argument is the returned smart-pointer storage.
 0x7D8373: add     esp, 10h
 0x7D8376: mov     eax, [esp+134h+var_118]
 0x7D837A: mov     edx, [esi]
@@ -271,7 +271,6 @@
 0x7D84A2: mov     [esi+24h], ebp
 0x7D84A5: jbe     short loc_7D8515
 0x7D84A7: jmp     short loc_7D84B0
-0x7D84A9: align 10h
 0x7D84B0: mov     ecx, [esi+0C0h]
 0x7D84B6: mov     edi, [ecx+ebx*4]
 0x7D84B9: cmp     edi, ebp
@@ -367,3 +366,22 @@
 0x7D85B8: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x7D85BD: add     esp, 120h
 0x7D85C3: retn    0Ch
+0x9CEE20: lea     ecx, [ebp-120h]; slot
+0x9CEE26: jmp     NiPointerSlot_Release
+0x9CEE2B: lea     ecx, [ebp-120h]; slot
+0x9CEE31: jmp     NiPointerSlot_Release
+0x9CEE36: lea     ecx, [ebp-120h]; slot
+0x9CEE3C: jmp     NiPointerSlot_Release
+0x9CEE41: lea     ecx, [ebp-118h]; slot
+0x9CEE47: jmp     NiPointerSlot_Release
+0x9CEE4C: mov     edx, dword ptr [esp+loadFromCache]
+0x9CEE50: lea     eax, [edx-124h]
+0x9CEE56: mov     ecx, [edx-128h]
+0x9CEE5C: xor     ecx, eax
+0x9CEE5E: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CEE63: add     eax, 10h
+0x9CEE66: mov     ecx, [edx-4]
+0x9CEE69: xor     ecx, eax
+0x9CEE6B: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CEE70: mov     eax, offset stru_AF7C4C
+0x9CEE75: jmp     ___CxxFrameHandler3

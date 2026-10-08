@@ -1,19 +1,36 @@
 {
-  "callees_count": 13,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_4241E0",
+  "chunks": [
+    [
+      "0x4241E0",
+      "0x4242B3"
+    ],
+    [
+      "0x9C8290",
+      "0x9C82B6"
+    ]
+  ],
+  "chunks_sha256": "c35b2da712ba4d42e81234de54fdf791b36a284fcd85e1fcb2d027b970f2be40",
+  "comment_regular": "Named ExtraDataList_SetRegionList after direct decompilation: a nonnull candidate list replaces/frees prior region-list payload; null removes type8. Shared XCLR calls this for placed reference and CELL owners, with no record-kind gate.",
+  "comment_repeatable": "0x4241E0: Named ExtraDataList_SetRegionList after direct decompilation: a nonnull candidate list replaces/frees prior region-list payload; null removes type8. Shared XCLR calls this for placed reference and CELL owners, with no record-kind gate.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "ExtraDataList_SetRegionList",
   "end_ea": "0x4242B3",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4241E0",
+  "name": "ExtraDataList_SetRegionList",
   "segment": ".text",
   "sha256": "396d4f4cdddf3f6515c35f446ee7456ab2e92cc02a0dc68dbcba282cffcc8fdf",
   "size": 211,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4241E0",
+  "total_chunk_size": 249,
   "type": "void __thiscall(ExtraDataList *this, BSExtraDataVtbl *)",
-  "xrefs_from_count": 87,
+  "xrefs_from_count": 101,
   "xrefs_to_count": 2
 }

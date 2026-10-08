@@ -16,18 +16,18 @@
 0x50E6C9: cmp     ds:0B42D44h, ebp
 0x50E6CF: mov     byte ptr [esp+48h+var_34+3], 0
 0x50E6D4: jnz     short loc_50E72D
-0x50E6D6: push    ebp; char
-0x50E6D7: push    1; char
-0x50E6D9: lea     eax, [esp+50h+var_2C]
+0x50E6D6: push    ebp; requireMipmaps
+0x50E6D7: push    1; loadFromCache
+0x50E6D9: lea     eax, [esp+50h+outTexture]
 0x50E6DD: push    offset aDataTextures_4; "Data\\Textures\\Menus\\Map\\local\\MapP"...
-0x50E6E2: push    eax; int
-0x50E6E3: call    sub_7B8200
+0x50E6E2: push    eax; outTexture
+0x50E6E3: call    NiSourceTexture_LoadChecked; Loads/caches a NiSourceTexture by filename and optionally rejects a loaded texture that lacks mipmaps. The first argument is the returned smart-pointer storage.
 0x50E6E8: add     esp, 10h
-0x50E6EB: push    eax
-0x50E6EC: mov     ecx, offset dword_B42D44
+0x50E6EB: push    eax; incoming
+0x50E6EC: mov     ecx, offset unk_B42D44; this
 0x50E6F1: mov     [esp+4Ch+var_4], ebp
-0x50E6F5: call    sub_55E2A0
-0x50E6FA: mov     eax, [esp+48h+var_2C]
+0x50E6F5: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
+0x50E6FA: mov     eax, [esp+48h+outTexture]
 0x50E6FE: cmp     eax, ebp
 0x50E700: mov     [esp+48h+var_4], 0FFFFFFFFh
 0x50E708: jz      short loc_50E728
@@ -67,17 +67,17 @@
 0x50E76E: mov     ecx, [esi]
 0x50E770: test    ecx, ecx
 0x50E772: jz      short loc_50E7D3
-0x50E774: lea     eax, [esp+48h+var_2C]
+0x50E774: lea     eax, [esp+48h+outTexture]
 0x50E778: push    eax
-0x50E779: call    sub_4D06C0
-0x50E77E: mov     ecx, [esp+48h+var_2C]
+0x50E779: call    sub_4D06C0; Cell canopy shadow capture path; sets SpeedTree singleton +0x23, updates wind/time via 0x55FA50, renders shadow texture, then restores state.
+0x50E77E: mov     ecx, [esp+48h+outTexture]
 0x50E782: mov     bl, ds:0B3F958h
 0x50E788: mov     byte ptr ds:0B3F958h, 0
 0x50E78F: push    ecx
 0x50E790: mov     ecx, [esi]
 0x50E792: mov     [esp+4Ch+var_4], 1
 0x50E79A: call    sub_4D1130
-0x50E79F: mov     eax, [esp+48h+var_2C]
+0x50E79F: mov     eax, [esp+48h+outTexture]
 0x50E7A3: test    eax, eax
 0x50E7A5: mov     ds:0B3F958h, bl
 0x50E7AB: mov     [esp+48h+var_4], 0FFFFFFFFh
@@ -130,8 +130,8 @@
 0x50E840: push    eax; int
 0x50E841: call    sub_4CCE20
 0x50E846: fld     [esp+48h+var_18]
-0x50E84A: fistp   [esp+48h+var_2C]
-0x50E84E: mov     eax, [esp+48h+var_2C]
+0x50E84A: fistp   [esp+48h+outTexture]
+0x50E84E: mov     eax, [esp+48h+outTexture]
 0x50E852: add     eax, 0FFFFF800h
 0x50E857: sar     eax, 0Ch
 0x50E85A: fld     [esp+48h+var_14]
@@ -212,3 +212,16 @@
 0x50E945: pop     ebx
 0x50E946: add     esp, 34h
 0x50E949: retn
+0x9B6E20: lea     ecx, [ebp-2Ch]; slot
+0x9B6E23: jmp     NiPointerSlot_Release
+0x9B6E28: lea     ecx, [ebp-2Ch]; slot
+0x9B6E2B: jmp     NiPointerSlot_Release
+0x9B6E30: lea     ecx, [ebp-30h]; slot
+0x9B6E33: jmp     NiPointerSlot_Release
+0x9B6E38: mov     edx, [esp+arg_4]
+0x9B6E3C: lea     eax, [edx-38h]
+0x9B6E3F: mov     ecx, [edx-3Ch]
+0x9B6E42: xor     ecx, eax
+0x9B6E44: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B6E49: mov     eax, offset stru_AE1B4C
+0x9B6E4E: jmp     ___CxxFrameHandler3

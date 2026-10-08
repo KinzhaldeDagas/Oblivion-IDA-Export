@@ -1,91 +1,80 @@
-int __userpurge sub_7781F0@<eax>(
-        int a1@<ecx>,
-        NiGeometryBufferData *a2@<edi>,
-        int a3@<esi>,
-        int a4,
-        void *Src,
-        int a6,
-        int a7,
-        unsigned int *a8,
-        int a9,
-        void *Dst)
+// Pass226: Index-buffer rebuild/upload helper used when NiScreenTexture mask bit 0x08 is active.
+// Verified OblivionNew 2026-09-27 for DX11 buffer ownership: NiDX9IndexBufferManager::PackBuffer error string and retail instructions identify this index buffer packing helper. Existing GetDesc is checked for INDEX16 (0x65), INDEXBUFFER type7, requested usage/pool and sufficient byte capacity; otherwise device vtable+0x6C creates the index buffer. At0x7782F5 calls buffer+0x2C Lock with offset0, EBX byte length (2*source index count), output pointer and flags0. Copies exactly EBX bytes at0x778306 and Unlocks via+0x30 at0x778314. Failure branch still attempts Unlock0x778335 then Release0x77833D. Decompiler userpurge/prototype/extra argument is misleading; native Lock has the standard five stack args including this. This establishes an actual stock ordinary write-lock path, not only a diagnostic/compatibility API.
+// ABI correction 2026-10-01: verified ECX manager and seven stack arguments, RET1Ch. Arguments are indices pointer, index count, capacity in indices, existing IB, output buffer byte-size pointer, pool, usage. EDI=2*capacityIndices and EBX=2*indexCount; neither EDI nor ESI is an incoming parameter. Corrected call-site types/SP changes: Lock pops20 bytes (not24); each Unlock pops4 (not0). Standard COM GetDesc/Release signatures were applied. Capacity output is written only when creating a new buffer; reuse leaves it unchanged. Compared Fallout NiXenonIndexBufferManager::PackBuffer827C1BF8: matching seven-argument family and INDEX16/capacity/upload structure, but Oblivion additionally checks Pool and HRESULT failures. Do not transplant PPC calls or failure behavior.
+// Follow-up SP/type correction: stale failure-block SP point at778322 was changed from-36 to-40, restoring zero SP at all RET1Ch exits. The spurious HIDWORD(size)/incoming EDI value came from the IDB size_t(8) memcpy signature, not the game ABI. Verified9812C0 memcpy now has explicit32-bit byteCount. Engine code bytes were not changed.
+IDirect3DIndexBuffer9 *__thiscall NiDX9IndexBufferManager_PackBuffer(
+        NiDX9IndexBufferManager *this,
+        const unsigned __int16 *indices,
+        unsigned int indexCount,
+        unsigned int capacityIndices,
+        IDirect3DIndexBuffer9 *existing,
+        unsigned int *bufferBytes,
+        unsigned int pool,
+        unsigned int usage)
 {
-  void *v11; // ebp
-  int v12; // esi
-  unsigned int v13; // edi
-  int v14; // ebx
-  int v15; // eax
+  unsigned int v9; // ebp
+  IDirect3DIndexBuffer9 *v10; // esi
+  UINT v11; // edi
+  unsigned int v12; // ebx
+  int v13; // eax
+  void *v14; // ecx
+  HRESULT (__stdcall *Lock)(IDirect3DIndexBuffer9 *, UINT, UINT, void **, DWORD); // eax
   void *v16; // ecx
-  int (__stdcall *v17)(int, _DWORD, int, int *, _DWORD, _DWORD); // eax
-  void *v18; // ecx
-  size_t v19; // [esp+Ch] [ebp-28h]
-  int v21; // [esp+20h] [ebp-14h] BYREF
-  int v22; // [esp+24h] [ebp-10h]
-  void *v23; // [esp+28h] [ebp-Ch]
-  int v24; // [esp+2Ch] [ebp-8h]
-  unsigned int v25; // [esp+30h] [ebp-4h]
+  D3DINDEXBUFFER_DESC description; // [esp+20h] [ebp-14h] BYREF
 
-  if ( !*(_DWORD *)(a1 + 8) || !a4 )
-    return 0;
-  v11 = Dst;
-  HIDWORD(v19) = a3;
-  v12 = a7;
-  LODWORD(v19) = a2;
-  v13 = 2 * a6;
-  v14 = 2 * (_DWORD)Src;
-  if ( !a7
-    || (v21 = 0,
-        v22 = 0,
-        v23 = 0,
-        v24 = 0,
-        v25 = 0,
-        (*(int (__stdcall **)(int, int *))(*(_DWORD *)a7 + 0x34))(a7, &v21) < 0)
-    || v21 != 0x65
-    || v22 != 7
-    || v23 != v11
-    || v24 != a9
-    || v25 < v13 )
+  if ( !*((_DWORD *)this + 2) || !indices ) /*0x778209*/
+    return 0; /*0x778201*/
+  v9 = usage; /*0x778211*/
+  v10 = existing; /*0x778216*/
+  v11 = 2 * capacityIndices; /*0x77821f*/
+  v12 = 2 * indexCount; /*0x778221*/
+  if ( !existing /*0x778270*/
+    || (memset(&description, 0, sizeof(description)), (int)existing->lpVtbl->GetDesc(existing, &description) < 0)
+    || description.Format != D3DFMT_INDEX16
+    || description.Type != D3DRTYPE_INDEXBUFFER
+    || description.Usage != v9
+    || description.Pool != pool
+    || description.Size < v11 )
   {
-    v15 = *(_DWORD *)(a1 + 8);
-    a6 = 0;
-    if ( (*(int (__stdcall **)(int, unsigned int, void *, int, int, int *, _DWORD))(*(_DWORD *)v15 + 0x6C))(
-           v15,
+    v13 = *((_DWORD *)this + 2); /*0x778276*/
+    capacityIndices = 0; /*0x778288*/
+    if ( (*(int (__stdcall **)(int, UINT, unsigned int, int, unsigned int, unsigned int *, _DWORD))(*(_DWORD *)v13 + 0x6C))( /*0x77829b*/
            v13,
            v11,
+           v9,
            0x65,
-           a9,
-           &a6,
+           pool,
+           &capacityIndices,
            0) >= 0 )
     {
-      v12 = a6;
+      v10 = (IDirect3DIndexBuffer9 *)capacityIndices; /*0x7782b2*/
     }
     else
     {
-      TESTexture::ClearComponentReferences(v16);
-      v12 = 0;
-      a6 = 0;
+      Shared_NoOpVirtual_60D0A0(v14); /*0x7782a2*/
+      v10 = 0; /*0x7782aa*/
+      capacityIndices = 0; /*0x7782ac*/
     }
-    if ( !v12 )
+    if ( !v10 ) /*0x7782b8*/
     {
-      TESTexture::ClearComponentReferences(v16);
-      return 0;
+      Shared_NoOpVirtual_60D0A0(v14); /*0x7782bf*/
+      return 0; /*0x7782d0*/
     }
-    *a8 = v13;
+    *bufferBytes = v11; /*0x7782d7*/
   }
-  if ( v14 )
+  if ( v12 ) /*0x7782db*/
   {
-    v17 = *(int (__stdcall **)(int, _DWORD, int, int *, _DWORD, _DWORD))(*(_DWORD *)v12 + 0x2C);
-    a9 = 0;
-    if ( v17(v12, 0, v14, &a9, 0, v19) >= 0 )
+    Lock = v10->lpVtbl->Lock; /*0x7782df*/
+    pool = 0; /*0x7782ed*/
+    if ( (int)Lock(v10, 0, v12, (void **)&pool, 0) >= 0 ) /*0x7782f9*/
     {
-      LODWORD(v19) = 2 * (_DWORD)Src;
-      memcpy(Dst, Src, v19);
-      (*(void (__cdecl **)(int))(*(_DWORD *)v12 + 0x30))(v12);
-      return v12;
+      memcpy((void *)pool, indices, v12); /*0x778306*/
+      v10->lpVtbl->Unlock(v10); /*0x778314*/
+      return v10; /*0x77831f*/
     }
-    TESTexture::ClearComponentReferences(v18);
-    (*(void (__cdecl **)(int))(*(_DWORD *)v12 + 0x30))(v12);
-    (*(void (__stdcall **)(int))(*(_DWORD *)v12 + 8))(v12);
+    Shared_NoOpVirtual_60D0A0(v16); /*0x778327*/
+    v10->lpVtbl->Unlock(v10); /*0x778335*/
+    v10->lpVtbl->Release(v10); /*0x77833d*/
   }
-  return v12;
+  return v10; /*0x7781fe*/
 }

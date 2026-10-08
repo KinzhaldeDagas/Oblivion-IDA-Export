@@ -83,7 +83,6 @@
 0x9310B3: test    ecx, ecx
 0x9310B5: jle     short loc_9310D9
 0x9310B7: jmp     short loc_9310C0
-0x9310B9: align 10h
 0x9310C0: mov     ecx, [ebp+4]
 0x9310C3: movzx   edx, word ptr [ecx+eax*8]
 0x9310C7: mov     dx, [ebx+edx*4]

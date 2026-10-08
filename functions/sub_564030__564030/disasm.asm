@@ -1,4 +1,4 @@
-0x564030: mov     eax, ecx
+0x564030: mov     eax, ecx; Treetop collision helper: initializes the local capsule cinfo defaults before 0x565510 fills radius and two +Z/up-axis endpoints for bhkCapsuleShape construction.
 0x564032: mov     dword ptr [eax], 0
 0x564038: fld     dword ptr ds:0B2EFC4h
 0x56403E: fstp    dword ptr [eax+4]

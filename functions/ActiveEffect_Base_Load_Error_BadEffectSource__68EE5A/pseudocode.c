@@ -5,7 +5,7 @@ int __cdecl ActiveEffect_Base_Load_::Error_BadEffectSource()
   unsigned __int8 v2; // [esp-8h] [ebp-8h]
   int v3; // [esp-4h] [ebp-4h]
 
-  SaveLoad_AdvanceBufferOffset(SaveLoad_CurrentSavegame, v1);
-  PrintError("Could not load active effect with spell %08X and effect index %i", v3, v2);
-  return 0;
+  SaveLoad_AdvanceBufferOffset(g_TESSaveLoadGame, v1); /*0x68ee66*/
+  PrintError("Could not load active effect with spell %08X and effect index %i", v3, v2); /*0x68ee7b*/
+  return 0; /*0x68ee8a*/
 }

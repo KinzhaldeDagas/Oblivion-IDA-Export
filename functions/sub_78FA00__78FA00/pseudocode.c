@@ -1,9 +1,15 @@
-double __cdecl sub_78FA00(float *a1)
+// OBLIVION AUTHORITY 2026-08-27: Recursively accumulates hierarchical branch placement percent. Base is 0 when branch is null or has no parent. Otherwise A(branch)=A(parent)+(1-A(parent))*branch->percentAlongParent. This visits the full parent chain; it is not the RT4.1 limited-depth product formula.
+float __cdecl OB_CBranch_AccumulateLeafDimmingPercent_010201A0(const OB_CBranch_010201A0 *branch)
 {
-  float v3; // [esp+8h] [ebp+4h]
+  float brancha; // [esp+8h] [ebp+4h]
 
-  if ( !a1 || !*(_DWORD *)a1 )
-    return 0.0;
-  v3 = sub_78FA00((float *)*(_DWORD *)a1);
-  return (float)(v3 + (1.0 - v3) * a1[1]);
+  if ( branch && branch->parentBranch ) /*0x78fa09*/
+  {
+    brancha = OB_CBranch_AccumulateLeafDimmingPercent_010201A0((const OB_CBranch_010201A0 *)branch->parentBranch); /*0x78fa15*/
+    return brancha + (1.0 - brancha) * branch->percentAlongParent; /*0x78fa30*/
+  }
+  else
+  {
+    return 0.0; /*0x78fa35*/
+  }
 }

@@ -1,4 +1,4 @@
-BSStringT *sub_A163A0()
+NiRTTI *sub_A163A0()
 {
-  return sub_70E220((BSStringT *)&unk_BAA920, "NiD3DSCM_Vertex", (int)&unk_BAA944);
+  return NiRTTI_Constructor(&stru_BAA920, "NiD3DSCM_Vertex", &stru_BAA944); /*0xa163b4*/
 }

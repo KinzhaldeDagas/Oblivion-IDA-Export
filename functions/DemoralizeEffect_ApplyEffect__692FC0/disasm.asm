@@ -43,7 +43,7 @@
 0x693024: test    al, al
 0x693026: jnz     short loc_693048
 0x693028: mov     ecx, esi; int
-0x69302A: call    sub_5EAE70
+0x69302A: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x69302F: mov     eax, [esi]
 0x693031: mov     edx, [eax+318h]
 0x693037: push    0

@@ -3,7 +3,7 @@
 0x89D783: mov     eax, [esi+0Ch]
 0x89D786: push    eax
 0x89D787: mov     dword ptr [esi], offset ??_7bhkSerializable@@6B@; const bhkSerializable::`vftable'
-0x89D78D: call    FormHeapFree
+0x89D78D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x89D792: add     esp, 4
 0x89D795: mov     dword ptr [esi+0Ch], 0
 0x89D79C: mov     ecx, esi; this

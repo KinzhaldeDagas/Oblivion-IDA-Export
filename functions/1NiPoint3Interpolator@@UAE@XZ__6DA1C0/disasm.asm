@@ -38,3 +38,12 @@
 0x6DA230: pop     esi
 0x6DA231: add     esp, 10h
 0x6DA234: retn
+0x9C7DA0: mov     ecx, [ebp-10h]
+0x9C7DA3: jmp     sub_6EC250
+0x9C7DA8: mov     edx, [esp+arg_4]
+0x9C7DAC: lea     eax, [edx-0Ch]
+0x9C7DAF: mov     ecx, [edx-10h]
+0x9C7DB2: xor     ecx, eax
+0x9C7DB4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C7DB9: mov     eax, offset stru_AF0100
+0x9C7DBE: jmp     ___CxxFrameHandler3

@@ -22,8 +22,7 @@
 0x74FB57: test    eax, eax
 0x74FB59: jz      short loc_74FB6E
 0x74FB5B: jmp     short loc_74FB60
-0x74FB5D: align 10h
-0x74FB60: cmp     eax, offset dword_B40B50
+0x74FB60: cmp     eax, offset stru_B40B50
 0x74FB65: jz      short loc_74FB73
 0x74FB67: mov     eax, [eax+4]
 0x74FB6A: test    eax, eax

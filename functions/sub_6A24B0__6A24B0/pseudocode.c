@@ -1,48 +1,52 @@
-char __userpurge sub_6A24B0@<al>(int a1@<ecx>, int a2@<esi>, double a3@<st0>, int a4, MagicCaster *a5)
+// Removes every nonterminated active effect whose effectCode matches. If casterFilterOrNull is nonnull, only effects from that caster are removed; null matches all casters. Native ABI is thiscall with two stack args and void return; prior ESI/ST0/userpurge inputs were decompiler artifacts.
+void __thiscall MagicTarget_RemoveActiveEffectsByCode(
+        MagicTarget *this,
+        unsigned int effectCode,
+        MagicCaster *casterFilterOrNull)
 {
-  int v6; // eax
-  ActiveEffect **v7; // ebp
-  ActiveEffect **v8; // edi
-  ActiveEffect **v9; // ecx
-  ActiveEffect *v10; // esi
+  int v3; // esi
+  double v4; // st7
+  EffectNode *v6; // ebp
+  EffectNode *v7; // edi
+  EffectNode *next; // ecx
+  ActiveEffect *data; // esi
+  bool v10; // al
   int *v11; // eax
-  int v13; // [esp-4h] [ebp-14h]
+  int v12; // [esp-4h] [ebp-14h]
 
-  v6 = (*(int (__thiscall **)(int))(*(_DWORD *)a1 + 8))(a1);
-  v7 = (ActiveEffect **)v6;
-  v8 = (ActiveEffect **)v6;
-  if ( v6 )
+  v6 = this->vtbl->GetActiveEffectList(this); /*0x6a24bd*/
+  v7 = v6; /*0x6a24c1*/
+  if ( v6 ) /*0x6a24c3*/
   {
-    v13 = a2;
-    do
+    v12 = v3; /*0x6a24c5*/
+    do /*0x6a24c6*/
     {
-      v9 = (ActiveEffect **)v8[1];
-      if ( !v9 && !*v8 )
-        return v6;
-      v10 = *v8;
-      if ( a5 )
-        LOBYTE(v6) = a5 == v10->members.caster;
+      next = v7->next; /*0x6a24c6*/
+      if ( !next && !v7->data ) /*0x6a24cf*/
+        return; /*0x6a24cf*/
+      data = v7->data; /*0x6a24d7*/
+      if ( casterFilterOrNull ) /*0x6a24d9*/
+        v10 = casterFilterOrNull == data->members.caster; /*0x6a24de*/
       else
-        LOBYTE(v6) = 1;
-      if ( v10 && !v10->members.bTerminated )
+        v10 = 1; /*0x6a24e3*/
+      if ( data && !data->members.bTerminated ) /*0x6a24e9*/
       {
-        if ( v10->members.effectItem->effectCode == a4 && (_BYTE)v6 )
+        if ( data->members.effectItem->effectCode == effectCode && v10 ) /*0x6a24fc*/
         {
-          a3 = ActiveEffect_Base_Remove(v10, (char)v7, a3, 1);
-          v11 = (int *)(*(int (__thiscall **)(int, ActiveEffect *))(*(_DWORD *)a1 + 8))(a1, v10);
-          BSSimpleList_Remove(v11, v13);
-          (*(void (__thiscall **)(int, ActiveEffect *))(*(_DWORD *)a1 + 0x14))(a1, v10);
-          LOBYTE(v6) = ((int (__thiscall *)(ActiveEffect *, int))v10->vtbl->noDef)(v10, 1);
-          if ( v8 != v7 )
-            v8 = (ActiveEffect **)v7[1];
-          continue;
+          v4 = ActiveEffect_Base_Remove(data, (char)v6, v4, 1);// Verified immediate removal path for matching effect codes: mark/flush termination, unlink from EffectNode via BSSimpleList_Remove, call target PostRemoveEffect, then destroy the ActiveEffect. The caster filter is optional; null matches all casters. /*0x6a2502*/
+          v11 = (int *)((int (__thiscall *)(MagicTarget *, ActiveEffect *))this->vtbl->GetActiveEffectList)(this, data); /*0x6a250f*/
+          BSSimpleList_Remove(v11, v12); /*0x6a2513*/
+          this->vtbl->PostRemoveEffect(this, data); /*0x6a2520*/
+          ((void (__thiscall *)(ActiveEffect *, int))data->vtbl->scalarDeletingDestructor)(data, 1); /*0x6a252a*/
+          if ( v7 != v6 ) /*0x6a252e*/
+            v7 = v6->next; /*0x6a2530*/
+          continue; /*0x6a2533*/
         }
-        v9 = (ActiveEffect **)v8[1];
+        next = v7->next; /*0x6a2535*/
       }
-      v7 = v8;
-      v8 = v9;
+      v6 = v7; /*0x6a2538*/
+      v7 = next; /*0x6a253a*/
     }
-    while ( v8 );
+    while ( v7 ); /*0x6a24c6*/
   }
-  return v6;
 }

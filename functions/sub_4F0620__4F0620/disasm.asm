@@ -1,13 +1,13 @@
-0x4F0620: push    ebx
+0x4F0620: push    ebx; Verified: climbs the supplied WorldSpace chain to its root, allocates an 8-byte BSSimpleList head, copies refs from root.persistentCell, then copies refs from handler worldspaces whose parentWorldspace equals that root. It does not recurse through arbitrary descendants.
 0x4F0621: mov     ebx, ecx
-0x4F0623: mov     ecx, [ebx+7Ch]
+0x4F0623: mov     ecx, [ebx+7Ch]; worldspace
 0x4F0626: test    ecx, ecx
 0x4F0628: jz      short loc_4F0630
 0x4F062A: pop     ebx
-0x4F062B: jmp     sub_4F0620
+0x4F062B: jmp     TESWorldSpace_CollectPersistentCellReferences; Verified: climbs the supplied WorldSpace chain to its root, allocates an 8-byte BSSimpleList head, copies refs from root.persistentCell, then copies refs from handler worldspaces whose parentWorldspace equals that root. It does not recurse through arbitrary descendants.
 0x4F0630: push    edi
 0x4F0631: push    8; Size
-0x4F0633: call    FormHeapAlloc
+0x4F0633: call    FormHeapAlloc; Verified: allocates an 8-byte list head for persistent-cell reference aggregation.
 0x4F0638: add     esp, 4
 0x4F063B: test    eax, eax
 0x4F063D: jz      short loc_4F0650

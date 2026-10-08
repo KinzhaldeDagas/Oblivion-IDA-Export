@@ -11,7 +11,7 @@
 0x50835E: test    esi, esi
 0x508360: jz      short loc_5083AD
 0x508362: lea     ecx, [esi+44h]
-0x508365: call    sub_41F070
+0x508365: call    ExtraDataList_GetHeadingTarget; Returns the reference stored in ExtraHeadingTarget, or null.
 0x50836A: cmp     byte ptr ds:0B361ACh, 0
 0x508371: jz      short loc_5083AD
 0x508373: test    eax, eax

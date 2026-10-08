@@ -1,1 +1,1 @@
-errno_t
+typedef int errno_t;

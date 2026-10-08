@@ -16,7 +16,7 @@
 0x550644: mov     ecx, [eax+4]
 0x550647: mov     esi, [esi]
 0x550649: push    ecx
-0x55064A: call    FormHeapFree
+0x55064A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x55064F: add     esp, 4
 0x550652: test    esi, esi
 0x550654: jnz     short loc_550642

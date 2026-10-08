@@ -1,4 +1,4 @@
-0x5E1B30: push    ebx
+0x5E1B30: push    ebx; ODismemberment authority: actor blood effects are allowed only when actor-base blood particle/texture disable predicates permit them.
 0x5E1B31: push    esi
 0x5E1B32: mov     esi, ecx
 0x5E1B34: mov     eax, [esi]

@@ -1,2026 +1,3051 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "$80D93121D5C2C7490092EA3C4923E85D",
+  "definition": "struct $80D93121D5C2C7490092EA3C4923E85D\n{\nvoid (*p_glAccum)(GLenum, GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glAlphaFunc)(GLenum, GLfloat) __offset(OFF64|AUTO);\nGLboolean (*p_glAreTexturesResident)(GLsizei, const GLuint *, GLboolean *) __offset(OFF64|AUTO);\nvoid (*p_glArrayElement)(GLint) __offset(OFF64|AUTO);\nvoid (*p_glBegin)(GLenum) __offset(OFF64|AUTO);\nvoid (*p_glBindTexture)(GLenum, GLuint) __offset(OFF64|AUTO);\nvoid (*p_glBitmap)(GLsizei, GLsizei, GLfloat, GLfloat, GLfloat, GLfloat, const GLubyte *) __offset(OFF64|AUTO);\nvoid (*p_glBlendFunc)(GLenum, GLenum) __offset(OFF64|AUTO);\nvoid (*p_glCallList)(GLuint) __offset(OFF64|AUTO);\nvoid (*p_glCallLists)(GLsizei, GLenum, const void *) __offset(OFF64|AUTO);\nvoid (*p_glClear)(GLbitfield) __offset(OFF64|AUTO);\nvoid (*p_glClearAccum)(GLfloat, GLfloat, GLfloat, GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glClearColor)(GLfloat, GLfloat, GLfloat, GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glClearDepth)(GLdouble) __offset(OFF64|AUTO);\nvoid (*p_glClearIndex)(GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glClearStencil)(GLint) __offset(OFF64|AUTO);\nvoid (*p_glClipPlane)(GLenum, const GLdouble *) __offset(OFF64|AUTO);\nvoid (*p_glColor3b)(GLbyte, GLbyte, GLbyte) __offset(OFF64|AUTO);\nvoid (*p_glColor3bv)(const GLbyte *) __offset(OFF64|AUTO);\nvoid (*p_glColor3d)(GLdouble, GLdouble, GLdouble) __offset(OFF64|AUTO);\nvoid (*p_glColor3dv)(const GLdouble *) __offset(OFF64|AUTO);\nvoid (*p_glColor3f)(GLfloat, GLfloat, GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glColor3fv)(const GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glColor3i)(GLint, GLint, GLint) __offset(OFF64|AUTO);\nvoid (*p_glColor3iv)(const GLint *) __offset(OFF64|AUTO);\nvoid (*p_glColor3s)(GLshort, GLshort, GLshort) __offset(OFF64|AUTO);\nvoid (*p_glColor3sv)(const GLshort *) __offset(OFF64|AUTO);\nvoid (*p_glColor3ub)(GLubyte, GLubyte, GLubyte) __offset(OFF64|AUTO);\nvoid (*p_glColor3ubv)(const GLubyte *) __offset(OFF64|AUTO);\nvoid (*p_glColor3ui)(GLuint, GLuint, GLuint) __offset(OFF64|AUTO);\nvoid (*p_glColor3uiv)(const GLuint *) __offset(OFF64|AUTO);\nvoid (*p_glColor3us)(GLushort, GLushort, GLushort) __offset(OFF64|AUTO);\nvoid (*p_glColor3usv)(const GLushort *) __offset(OFF64|AUTO);\nvoid (*p_glColor4b)(GLbyte, GLbyte, GLbyte, GLbyte) __offset(OFF64|AUTO);\nvoid (*p_glColor4bv)(const GLbyte *) __offset(OFF64|AUTO);\nvoid (*p_glColor4d)(GLdouble, GLdouble, GLdouble, GLdouble) __offset(OFF64|AUTO);\nvoid (*p_glColor4dv)(const GLdouble *) __offset(OFF64|AUTO);\nvoid (*p_glColor4f)(GLfloat, GLfloat, GLfloat, GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glColor4fv)(const GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glColor4i)(GLint, GLint, GLint, GLint) __offset(OFF64|AUTO);\nvoid (*p_glColor4iv)(const GLint *) __offset(OFF64|AUTO);\nvoid (*p_glColor4s)(GLshort, GLshort, GLshort, GLshort) __offset(OFF64|AUTO);\nvoid (*p_glColor4sv)(const GLshort *) __offset(OFF64|AUTO);\nvoid (*p_glColor4ub)(GLubyte, GLubyte, GLubyte, GLubyte) __offset(OFF64|AUTO);\nvoid (*p_glColor4ubv)(const GLubyte *) __offset(OFF64|AUTO);\nvoid (*p_glColor4ui)(GLuint, GLuint, GLuint, GLuint) __offset(OFF64|AUTO);\nvoid (*p_glColor4uiv)(const GLuint *) __offset(OFF64|AUTO);\nvoid (*p_glColor4us)(GLushort, GLushort, GLushort, GLushort) __offset(OFF64|AUTO);\nvoid (*p_glColor4usv)(const GLushort *) __offset(OFF64|AUTO);\nvoid (*p_glColorMask)(GLboolean, GLboolean, GLboolean, GLboolean) __offset(OFF64|AUTO);\nvoid (*p_glColorMaterial)(GLenum, GLenum) __offset(OFF64|AUTO);\nvoid (*p_glColorPointer)(GLint, GLenum, GLsizei, const void *) __offset(OFF64|AUTO);\nvoid (*p_glCopyPixels)(GLint, GLint, GLsizei, GLsizei, GLenum) __offset(OFF64|AUTO);\nvoid (*p_glCopyTexImage1D)(GLenum, GLint, GLenum, GLint, GLint, GLsizei, GLint) __offset(OFF64|AUTO);\nvoid (*p_glCopyTexImage2D)(GLenum, GLint, GLenum, GLint, GLint, GLsizei, GLsizei, GLint) __offset(OFF64|AUTO);\nvoid (*p_glCopyTexSubImage1D)(GLenum, GLint, GLint, GLint, GLint, GLsizei) __offset(OFF64|AUTO);\nvoid (*p_glCopyTexSubImage2D)(GLenum, GLint, GLint, GLint, GLint, GLint, GLsizei, GLsizei) __offset(OFF64|AUTO);\nvoid (*p_glCullFace)(GLenum) __offset(OFF64|AUTO);\nvoid (*p_glDeleteLists)(GLuint, GLsizei) __offset(OFF64|AUTO);\nvoid (*p_glDeleteTextures)(GLsizei, const GLuint *) __offset(OFF64|AUTO);\nvoid (*p_glDepthFunc)(GLenum) __offset(OFF64|AUTO);\nvoid (*p_glDepthMask)(GLboolean) __offset(OFF64|AUTO);\nvoid (*p_glDepthRange)(GLdouble, GLdouble) __offset(OFF64|AUTO);\nvoid (*p_glDisable)(GLenum) __offset(OFF64|AUTO);\nvoid (*p_glDisableClientState)(GLenum) __offset(OFF64|AUTO);\nvoid (*p_glDrawArrays)(GLenum, GLint, GLsizei) __offset(OFF64|AUTO);\nvoid (*p_glDrawBuffer)(GLenum) __offset(OFF64|AUTO);\nvoid (*p_glDrawElements)(GLenum, GLsizei, GLenum, const void *) __offset(OFF64|AUTO);\nvoid (*p_glDrawPixels)(GLsizei, GLsizei, GLenum, GLenum, const void *) __offset(OFF64|AUTO);\nvoid (*p_glEdgeFlag)(GLboolean) __offset(OFF64|AUTO);\nvoid (*p_glEdgeFlagPointer)(GLsizei, const void *) __offset(OFF64|AUTO);\nvoid (*p_glEdgeFlagv)(const GLboolean *) __offset(OFF64|AUTO);\nvoid (*p_glEnable)(GLenum) __offset(OFF64|AUTO);\nvoid (*p_glEnableClientState)(GLenum) __offset(OFF64|AUTO);\nvoid (*p_glEnd)(void) __offset(OFF64|AUTO);\nvoid (*p_glEndList)(void) __offset(OFF64|AUTO);\nvoid (*p_glEvalCoord1d)(GLdouble) __offset(OFF64|AUTO);\nvoid (*p_glEvalCoord1dv)(const GLdouble *) __offset(OFF64|AUTO);\nvoid (*p_glEvalCoord1f)(GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glEvalCoord1fv)(const GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glEvalCoord2d)(GLdouble, GLdouble) __offset(OFF64|AUTO);\nvoid (*p_glEvalCoord2dv)(const GLdouble *) __offset(OFF64|AUTO);\nvoid (*p_glEvalCoord2f)(GLfloat, GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glEvalCoord2fv)(const GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glEvalMesh1)(GLenum, GLint, GLint) __offset(OFF64|AUTO);\nvoid (*p_glEvalMesh2)(GLenum, GLint, GLint, GLint, GLint) __offset(OFF64|AUTO);\nvoid (*p_glEvalPoint1)(GLint) __offset(OFF64|AUTO);\nvoid (*p_glEvalPoint2)(GLint, GLint) __offset(OFF64|AUTO);\nvoid (*p_glFeedbackBuffer)(GLsizei, GLenum, GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glFinish)(void) __offset(OFF64|AUTO);\nvoid (*p_glFlush)(void) __offset(OFF64|AUTO);\nvoid (*p_glFogf)(GLenum, GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glFogfv)(GLenum, const GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glFogi)(GLenum, GLint) __offset(OFF64|AUTO);\nvoid (*p_glFogiv)(GLenum, const GLint *) __offset(OFF64|AUTO);\nvoid (*p_glFrontFace)(GLenum) __offset(OFF64|AUTO);\nvoid (*p_glFrustum)(GLdouble, GLdouble, GLdouble, GLdouble, GLdouble, GLdouble) __offset(OFF64|AUTO);\nGLuint (*p_glGenLists)(GLsizei) __offset(OFF64|AUTO);\nvoid (*p_glGenTextures)(GLsizei, GLuint *) __offset(OFF64|AUTO);\nvoid (*p_glGetBooleanv)(GLenum, GLboolean *) __offset(OFF64|AUTO);\nvoid (*p_glGetClipPlane)(GLenum, GLdouble *) __offset(OFF64|AUTO);\nvoid (*p_glGetDoublev)(GLenum, GLdouble *) __offset(OFF64|AUTO);\nGLenum (*p_glGetError)(void) __offset(OFF64|AUTO);\nvoid (*p_glGetFloatv)(GLenum, GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glGetIntegerv)(GLenum, GLint *) __offset(OFF64|AUTO);\nvoid (*p_glGetLightfv)(GLenum, GLenum, GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glGetLightiv)(GLenum, GLenum, GLint *) __offset(OFF64|AUTO);\nvoid (*p_glGetMapdv)(GLenum, GLenum, GLdouble *) __offset(OFF64|AUTO);\nvoid (*p_glGetMapfv)(GLenum, GLenum, GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glGetMapiv)(GLenum, GLenum, GLint *) __offset(OFF64|AUTO);\nvoid (*p_glGetMaterialfv)(GLenum, GLenum, GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glGetMaterialiv)(GLenum, GLenum, GLint *) __offset(OFF64|AUTO);\nvoid (*p_glGetPixelMapfv)(GLenum, GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glGetPixelMapuiv)(GLenum, GLuint *) __offset(OFF64|AUTO);\nvoid (*p_glGetPixelMapusv)(GLenum, GLushort *) __offset(OFF64|AUTO);\nvoid (*p_glGetPointerv)(GLenum, void **) __offset(OFF64|AUTO);\nvoid (*p_glGetPolygonStipple)(GLubyte *) __offset(OFF64|AUTO);\nconst GLubyte *(*p_glGetString)(GLenum) __offset(OFF64|AUTO);\nvoid (*p_glGetTexEnvfv)(GLenum, GLenum, GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glGetTexEnviv)(GLenum, GLenum, GLint *) __offset(OFF64|AUTO);\nvoid (*p_glGetTexGendv)(GLenum, GLenum, GLdouble *) __offset(OFF64|AUTO);\nvoid (*p_glGetTexGenfv)(GLenum, GLenum, GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glGetTexGeniv)(GLenum, GLenum, GLint *) __offset(OFF64|AUTO);\nvoid (*p_glGetTexImage)(GLenum, GLint, GLenum, GLenum, void *) __offset(OFF64|AUTO);\nvoid (*p_glGetTexLevelParameterfv)(GLenum, GLint, GLenum, GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glGetTexLevelParameteriv)(GLenum, GLint, GLenum, GLint *) __offset(OFF64|AUTO);\nvoid (*p_glGetTexParameterfv)(GLenum, GLenum, GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glGetTexParameteriv)(GLenum, GLenum, GLint *) __offset(OFF64|AUTO);\nvoid (*p_glHint)(GLenum, GLenum) __offset(OFF64|AUTO);\nvoid (*p_glIndexMask)(GLuint) __offset(OFF64|AUTO);\nvoid (*p_glIndexPointer)(GLenum, GLsizei, const void *) __offset(OFF64|AUTO);\nvoid (*p_glIndexd)(GLdouble) __offset(OFF64|AUTO);\nvoid (*p_glIndexdv)(const GLdouble *) __offset(OFF64|AUTO);\nvoid (*p_glIndexf)(GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glIndexfv)(const GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glIndexi)(GLint) __offset(OFF64|AUTO);\nvoid (*p_glIndexiv)(const GLint *) __offset(OFF64|AUTO);\nvoid (*p_glIndexs)(GLshort) __offset(OFF64|AUTO);\nvoid (*p_glIndexsv)(const GLshort *) __offset(OFF64|AUTO);\nvoid (*p_glIndexub)(GLubyte) __offset(OFF64|AUTO);\nvoid (*p_glIndexubv)(const GLubyte *) __offset(OFF64|AUTO);\nvoid (*p_glInitNames)(void) __offset(OFF64|AUTO);\nvoid (*p_glInterleavedArrays)(GLenum, GLsizei, const void *) __offset(OFF64|AUTO);\nGLboolean (*p_glIsEnabled)(GLenum) __offset(OFF64|AUTO);\nGLboolean (*p_glIsList)(GLuint) __offset(OFF64|AUTO);\nGLboolean (*p_glIsTexture)(GLuint) __offset(OFF64|AUTO);\nvoid (*p_glLightModelf)(GLenum, GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glLightModelfv)(GLenum, const GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glLightModeli)(GLenum, GLint) __offset(OFF64|AUTO);\nvoid (*p_glLightModeliv)(GLenum, const GLint *) __offset(OFF64|AUTO);\nvoid (*p_glLightf)(GLenum, GLenum, GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glLightfv)(GLenum, GLenum, const GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glLighti)(GLenum, GLenum, GLint) __offset(OFF64|AUTO);\nvoid (*p_glLightiv)(GLenum, GLenum, const GLint *) __offset(OFF64|AUTO);\nvoid (*p_glLineStipple)(GLint, GLushort) __offset(OFF64|AUTO);\nvoid (*p_glLineWidth)(GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glListBase)(GLuint) __offset(OFF64|AUTO);\nvoid (*p_glLoadIdentity)(void) __offset(OFF64|AUTO);\nvoid (*p_glLoadMatrixd)(const GLdouble *) __offset(OFF64|AUTO);\nvoid (*p_glLoadMatrixf)(const GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glLoadName)(GLuint) __offset(OFF64|AUTO);\nvoid (*p_glLogicOp)(GLenum) __offset(OFF64|AUTO);\nvoid (*p_glMap1d)(GLenum, GLdouble, GLdouble, GLint, GLint, const GLdouble *) __offset(OFF64|AUTO);\nvoid (*p_glMap1f)(GLenum, GLfloat, GLfloat, GLint, GLint, const GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glMap2d)(GLenum, GLdouble, GLdouble, GLint, GLint, GLdouble, GLdouble, GLint, GLint, const GLdouble *) __offset(OFF64|AUTO);\nvoid (*p_glMap2f)(GLenum, GLfloat, GLfloat, GLint, GLint, GLfloat, GLfloat, GLint, GLint, const GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glMapGrid1d)(GLint, GLdouble, GLdouble) __offset(OFF64|AUTO);\nvoid (*p_glMapGrid1f)(GLint, GLfloat, GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glMapGrid2d)(GLint, GLdouble, GLdouble, GLint, GLdouble, GLdouble) __offset(OFF64|AUTO);\nvoid (*p_glMapGrid2f)(GLint, GLfloat, GLfloat, GLint, GLfloat, GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glMaterialf)(GLenum, GLenum, GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glMaterialfv)(GLenum, GLenum, const GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glMateriali)(GLenum, GLenum, GLint) __offset(OFF64|AUTO);\nvoid (*p_glMaterialiv)(GLenum, GLenum, const GLint *) __offset(OFF64|AUTO);\nvoid (*p_glMatrixMode)(GLenum) __offset(OFF64|AUTO);\nvoid (*p_glMultMatrixd)(const GLdouble *) __offset(OFF64|AUTO);\nvoid (*p_glMultMatrixf)(const GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glNewList)(GLuint, GLenum) __offset(OFF64|AUTO);\nvoid (*p_glNormal3b)(GLbyte, GLbyte, GLbyte) __offset(OFF64|AUTO);\nvoid (*p_glNormal3bv)(const GLbyte *) __offset(OFF64|AUTO);\nvoid (*p_glNormal3d)(GLdouble, GLdouble, GLdouble) __offset(OFF64|AUTO);\nvoid (*p_glNormal3dv)(const GLdouble *) __offset(OFF64|AUTO);\nvoid (*p_glNormal3f)(GLfloat, GLfloat, GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glNormal3fv)(const GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glNormal3i)(GLint, GLint, GLint) __offset(OFF64|AUTO);\nvoid (*p_glNormal3iv)(const GLint *) __offset(OFF64|AUTO);\nvoid (*p_glNormal3s)(GLshort, GLshort, GLshort) __offset(OFF64|AUTO);\nvoid (*p_glNormal3sv)(const GLshort *) __offset(OFF64|AUTO);\nvoid (*p_glNormalPointer)(GLenum, GLsizei, const void *) __offset(OFF64|AUTO);\nvoid (*p_glOrtho)(GLdouble, GLdouble, GLdouble, GLdouble, GLdouble, GLdouble) __offset(OFF64|AUTO);\nvoid (*p_glPassThrough)(GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glPixelMapfv)(GLenum, GLsizei, const GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glPixelMapuiv)(GLenum, GLsizei, const GLuint *) __offset(OFF64|AUTO);\nvoid (*p_glPixelMapusv)(GLenum, GLsizei, const GLushort *) __offset(OFF64|AUTO);\nvoid (*p_glPixelStoref)(GLenum, GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glPixelStorei)(GLenum, GLint) __offset(OFF64|AUTO);\nvoid (*p_glPixelTransferf)(GLenum, GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glPixelTransferi)(GLenum, GLint) __offset(OFF64|AUTO);\nvoid (*p_glPixelZoom)(GLfloat, GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glPointSize)(GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glPolygonMode)(GLenum, GLenum) __offset(OFF64|AUTO);\nvoid (*p_glPolygonOffset)(GLfloat, GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glPolygonStipple)(const GLubyte *) __offset(OFF64|AUTO);\nvoid (*p_glPopAttrib)(void) __offset(OFF64|AUTO);\nvoid (*p_glPopClientAttrib)(void) __offset(OFF64|AUTO);\nvoid (*p_glPopMatrix)(void) __offset(OFF64|AUTO);\nvoid (*p_glPopName)(void) __offset(OFF64|AUTO);\nvoid (*p_glPrioritizeTextures)(GLsizei, const GLuint *, const GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glPushAttrib)(GLbitfield) __offset(OFF64|AUTO);\nvoid (*p_glPushClientAttrib)(GLbitfield) __offset(OFF64|AUTO);\nvoid (*p_glPushMatrix)(void) __offset(OFF64|AUTO);\nvoid (*p_glPushName)(GLuint) __offset(OFF64|AUTO);\nvoid (*p_glRasterPos2d)(GLdouble, GLdouble) __offset(OFF64|AUTO);\nvoid (*p_glRasterPos2dv)(const GLdouble *) __offset(OFF64|AUTO);\nvoid (*p_glRasterPos2f)(GLfloat, GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glRasterPos2fv)(const GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glRasterPos2i)(GLint, GLint) __offset(OFF64|AUTO);\nvoid (*p_glRasterPos2iv)(const GLint *) __offset(OFF64|AUTO);\nvoid (*p_glRasterPos2s)(GLshort, GLshort) __offset(OFF64|AUTO);\nvoid (*p_glRasterPos2sv)(const GLshort *) __offset(OFF64|AUTO);\nvoid (*p_glRasterPos3d)(GLdouble, GLdouble, GLdouble) __offset(OFF64|AUTO);\nvoid (*p_glRasterPos3dv)(const GLdouble *) __offset(OFF64|AUTO);\nvoid (*p_glRasterPos3f)(GLfloat, GLfloat, GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glRasterPos3fv)(const GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glRasterPos3i)(GLint, GLint, GLint) __offset(OFF64|AUTO);\nvoid (*p_glRasterPos3iv)(const GLint *) __offset(OFF64|AUTO);\nvoid (*p_glRasterPos3s)(GLshort, GLshort, GLshort) __offset(OFF64|AUTO);\nvoid (*p_glRasterPos3sv)(const GLshort *) __offset(OFF64|AUTO);\nvoid (*p_glRasterPos4d)(GLdouble, GLdouble, GLdouble, GLdouble) __offset(OFF64|AUTO);\nvoid (*p_glRasterPos4dv)(const GLdouble *) __offset(OFF64|AUTO);\nvoid (*p_glRasterPos4f)(GLfloat, GLfloat, GLfloat, GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glRasterPos4fv)(const GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glRasterPos4i)(GLint, GLint, GLint, GLint) __offset(OFF64|AUTO);\nvoid (*p_glRasterPos4iv)(const GLint *) __offset(OFF64|AUTO);\nvoid (*p_glRasterPos4s)(GLshort, GLshort, GLshort, GLshort) __offset(OFF64|AUTO);\nvoid (*p_glRasterPos4sv)(const GLshort *) __offset(OFF64|AUTO);\nvoid (*p_glReadBuffer)(GLenum) __offset(OFF64|AUTO);\nvoid (*p_glReadPixels)(GLint, GLint, GLsizei, GLsizei, GLenum, GLenum, void *) __offset(OFF64|AUTO);\nvoid (*p_glRectd)(GLdouble, GLdouble, GLdouble, GLdouble) __offset(OFF64|AUTO);\nvoid (*p_glRectdv)(const GLdouble *, const GLdouble *) __offset(OFF64|AUTO);\nvoid (*p_glRectf)(GLfloat, GLfloat, GLfloat, GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glRectfv)(const GLfloat *, const GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glRecti)(GLint, GLint, GLint, GLint) __offset(OFF64|AUTO);\nvoid (*p_glRectiv)(const GLint *, const GLint *) __offset(OFF64|AUTO);\nvoid (*p_glRects)(GLshort, GLshort, GLshort, GLshort) __offset(OFF64|AUTO);\nvoid (*p_glRectsv)(const GLshort *, const GLshort *) __offset(OFF64|AUTO);\nGLint (*p_glRenderMode)(GLenum) __offset(OFF64|AUTO);\nvoid (*p_glRotated)(GLdouble, GLdouble, GLdouble, GLdouble) __offset(OFF64|AUTO);\nvoid (*p_glRotatef)(GLfloat, GLfloat, GLfloat, GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glScaled)(GLdouble, GLdouble, GLdouble) __offset(OFF64|AUTO);\nvoid (*p_glScalef)(GLfloat, GLfloat, GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glScissor)(GLint, GLint, GLsizei, GLsizei) __offset(OFF64|AUTO);\nvoid (*p_glSelectBuffer)(GLsizei, GLuint *) __offset(OFF64|AUTO);\nvoid (*p_glShadeModel)(GLenum) __offset(OFF64|AUTO);\nvoid (*p_glStencilFunc)(GLenum, GLint, GLuint) __offset(OFF64|AUTO);\nvoid (*p_glStencilMask)(GLuint) __offset(OFF64|AUTO);\nvoid (*p_glStencilOp)(GLenum, GLenum, GLenum) __offset(OFF64|AUTO);\nvoid (*p_glTexCoord1d)(GLdouble) __offset(OFF64|AUTO);\nvoid (*p_glTexCoord1dv)(const GLdouble *) __offset(OFF64|AUTO);\nvoid (*p_glTexCoord1f)(GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glTexCoord1fv)(const GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glTexCoord1i)(GLint) __offset(OFF64|AUTO);\nvoid (*p_glTexCoord1iv)(const GLint *) __offset(OFF64|AUTO);\nvoid (*p_glTexCoord1s)(GLshort) __offset(OFF64|AUTO);\nvoid (*p_glTexCoord1sv)(const GLshort *) __offset(OFF64|AUTO);\nvoid (*p_glTexCoord2d)(GLdouble, GLdouble) __offset(OFF64|AUTO);\nvoid (*p_glTexCoord2dv)(const GLdouble *) __offset(OFF64|AUTO);\nvoid (*p_glTexCoord2f)(GLfloat, GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glTexCoord2fv)(const GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glTexCoord2i)(GLint, GLint) __offset(OFF64|AUTO);\nvoid (*p_glTexCoord2iv)(const GLint *) __offset(OFF64|AUTO);\nvoid (*p_glTexCoord2s)(GLshort, GLshort) __offset(OFF64|AUTO);\nvoid (*p_glTexCoord2sv)(const GLshort *) __offset(OFF64|AUTO);\nvoid (*p_glTexCoord3d)(GLdouble, GLdouble, GLdouble) __offset(OFF64|AUTO);\nvoid (*p_glTexCoord3dv)(const GLdouble *) __offset(OFF64|AUTO);\nvoid (*p_glTexCoord3f)(GLfloat, GLfloat, GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glTexCoord3fv)(const GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glTexCoord3i)(GLint, GLint, GLint) __offset(OFF64|AUTO);\nvoid (*p_glTexCoord3iv)(const GLint *) __offset(OFF64|AUTO);\nvoid (*p_glTexCoord3s)(GLshort, GLshort, GLshort) __offset(OFF64|AUTO);\nvoid (*p_glTexCoord3sv)(const GLshort *) __offset(OFF64|AUTO);\nvoid (*p_glTexCoord4d)(GLdouble, GLdouble, GLdouble, GLdouble) __offset(OFF64|AUTO);\nvoid (*p_glTexCoord4dv)(const GLdouble *) __offset(OFF64|AUTO);\nvoid (*p_glTexCoord4f)(GLfloat, GLfloat, GLfloat, GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glTexCoord4fv)(const GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glTexCoord4i)(GLint, GLint, GLint, GLint) __offset(OFF64|AUTO);\nvoid (*p_glTexCoord4iv)(const GLint *) __offset(OFF64|AUTO);\nvoid (*p_glTexCoord4s)(GLshort, GLshort, GLshort, GLshort) __offset(OFF64|AUTO);\nvoid (*p_glTexCoord4sv)(const GLshort *) __offset(OFF64|AUTO);\nvoid (*p_glTexCoordPointer)(GLint, GLenum, GLsizei, const void *) __offset(OFF64|AUTO);\nvoid (*p_glTexEnvf)(GLenum, GLenum, GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glTexEnvfv)(GLenum, GLenum, const GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glTexEnvi)(GLenum, GLenum, GLint) __offset(OFF64|AUTO);\nvoid (*p_glTexEnviv)(GLenum, GLenum, const GLint *) __offset(OFF64|AUTO);\nvoid (*p_glTexGend)(GLenum, GLenum, GLdouble) __offset(OFF64|AUTO);\nvoid (*p_glTexGendv)(GLenum, GLenum, const GLdouble *) __offset(OFF64|AUTO);\nvoid (*p_glTexGenf)(GLenum, GLenum, GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glTexGenfv)(GLenum, GLenum, const GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glTexGeni)(GLenum, GLenum, GLint) __offset(OFF64|AUTO);\nvoid (*p_glTexGeniv)(GLenum, GLenum, const GLint *) __offset(OFF64|AUTO);\nvoid (*p_glTexImage1D)(GLenum, GLint, GLint, GLsizei, GLint, GLenum, GLenum, const void *) __offset(OFF64|AUTO);\nvoid (*p_glTexImage2D)(GLenum, GLint, GLint, GLsizei, GLsizei, GLint, GLenum, GLenum, const void *) __offset(OFF64|AUTO);\nvoid (*p_glTexParameterf)(GLenum, GLenum, GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glTexParameterfv)(GLenum, GLenum, const GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glTexParameteri)(GLenum, GLenum, GLint) __offset(OFF64|AUTO);\nvoid (*p_glTexParameteriv)(GLenum, GLenum, const GLint *) __offset(OFF64|AUTO);\nvoid (*p_glTexSubImage1D)(GLenum, GLint, GLint, GLsizei, GLenum, GLenum, const void *) __offset(OFF64|AUTO);\nvoid (*p_glTexSubImage2D)(GLenum, GLint, GLint, GLint, GLsizei, GLsizei, GLenum, GLenum, const void *) __offset(OFF64|AUTO);\nvoid (*p_glTranslated)(GLdouble, GLdouble, GLdouble) __offset(OFF64|AUTO);\nvoid (*p_glTranslatef)(GLfloat, GLfloat, GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glVertex2d)(GLdouble, GLdouble) __offset(OFF64|AUTO);\nvoid (*p_glVertex2dv)(const GLdouble *) __offset(OFF64|AUTO);\nvoid (*p_glVertex2f)(GLfloat, GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glVertex2fv)(const GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glVertex2i)(GLint, GLint) __offset(OFF64|AUTO);\nvoid (*p_glVertex2iv)(const GLint *) __offset(OFF64|AUTO);\nvoid (*p_glVertex2s)(GLshort, GLshort) __offset(OFF64|AUTO);\nvoid (*p_glVertex2sv)(const GLshort *) __offset(OFF64|AUTO);\nvoid (*p_glVertex3d)(GLdouble, GLdouble, GLdouble) __offset(OFF64|AUTO);\nvoid (*p_glVertex3dv)(const GLdouble *) __offset(OFF64|AUTO);\nvoid (*p_glVertex3f)(GLfloat, GLfloat, GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glVertex3fv)(const GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glVertex3i)(GLint, GLint, GLint) __offset(OFF64|AUTO);\nvoid (*p_glVertex3iv)(const GLint *) __offset(OFF64|AUTO);\nvoid (*p_glVertex3s)(GLshort, GLshort, GLshort) __offset(OFF64|AUTO);\nvoid (*p_glVertex3sv)(const GLshort *) __offset(OFF64|AUTO);\nvoid (*p_glVertex4d)(GLdouble, GLdouble, GLdouble, GLdouble) __offset(OFF64|AUTO);\nvoid (*p_glVertex4dv)(const GLdouble *) __offset(OFF64|AUTO);\nvoid (*p_glVertex4f)(GLfloat, GLfloat, GLfloat, GLfloat) __offset(OFF64|AUTO);\nvoid (*p_glVertex4fv)(const GLfloat *) __offset(OFF64|AUTO);\nvoid (*p_glVertex4i)(GLint, GLint, GLint, GLint) __offset(OFF64|AUTO);\nvoid (*p_glVertex4iv)(const GLint *) __offset(OFF64|AUTO);\nvoid (*p_glVertex4s)(GLshort, GLshort, GLshort, GLshort) __offset(OFF64|AUTO);\nvoid (*p_glVertex4sv)(const GLshort *) __offset(OFF64|AUTO);\nvoid (*p_glVertexPointer)(GLint, GLenum, GLsizei, const void *) __offset(OFF64|AUTO);\nvoid (*p_glViewport)(GLint, GLint, GLsizei, GLsizei) __offset(OFF64|AUTO);\n}\n",
   "id": 18374686479671818258,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glAccum",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum, GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glAlphaFunc",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum, GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glAreTexturesResident",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "GLboolean (*)(GLsizei, const GLuint *, GLboolean *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glArrayElement",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "void (*)(GLint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glBegin",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glBindTexture",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum, GLuint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glBitmap",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLsizei, GLsizei, GLfloat, GLfloat, GLfloat, GLfloat, const GLubyte *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glBlendFunc",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glCallList",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLuint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glCallLists",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLsizei, GLenum, const void *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glClear",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLbitfield)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glClearAccum",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "void (*)(GLfloat, GLfloat, GLfloat, GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glClearColor",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLfloat, GLfloat, GLfloat, GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glClearDepth",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLdouble)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glClearIndex",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glClearStencil",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "void (*)(GLint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glClipPlane",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum, const GLdouble *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glColor3b",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLbyte, GLbyte, GLbyte)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glColor3bv",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLbyte *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glColor3d",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 4
+      "offset_hex": "0x4C",
+      "size": 4,
+      "type": "void (*)(GLdouble, GLdouble, GLdouble)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glColor3dv",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLdouble *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glColor3f",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLfloat, GLfloat, GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glColor3fv",
       "offset": 88,
       "offset_hex": "0x58",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glColor3i",
       "offset": 92,
-      "offset_hex": "0x5c",
-      "size": 4
+      "offset_hex": "0x5C",
+      "size": 4,
+      "type": "void (*)(GLint, GLint, GLint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glColor3iv",
       "offset": 96,
       "offset_hex": "0x60",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLint *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glColor3s",
       "offset": 100,
       "offset_hex": "0x64",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLshort, GLshort, GLshort)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glColor3sv",
       "offset": 104,
       "offset_hex": "0x68",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLshort *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glColor3ub",
       "offset": 108,
-      "offset_hex": "0x6c",
-      "size": 4
+      "offset_hex": "0x6C",
+      "size": 4,
+      "type": "void (*)(GLubyte, GLubyte, GLubyte)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glColor3ubv",
       "offset": 112,
       "offset_hex": "0x70",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLubyte *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glColor3ui",
       "offset": 116,
       "offset_hex": "0x74",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLuint, GLuint, GLuint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glColor3uiv",
       "offset": 120,
       "offset_hex": "0x78",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLuint *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glColor3us",
       "offset": 124,
-      "offset_hex": "0x7c",
-      "size": 4
+      "offset_hex": "0x7C",
+      "size": 4,
+      "type": "void (*)(GLushort, GLushort, GLushort)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glColor3usv",
       "offset": 128,
       "offset_hex": "0x80",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLushort *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glColor4b",
       "offset": 132,
       "offset_hex": "0x84",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLbyte, GLbyte, GLbyte, GLbyte)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glColor4bv",
       "offset": 136,
       "offset_hex": "0x88",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLbyte *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glColor4d",
       "offset": 140,
-      "offset_hex": "0x8c",
-      "size": 4
+      "offset_hex": "0x8C",
+      "size": 4,
+      "type": "void (*)(GLdouble, GLdouble, GLdouble, GLdouble)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glColor4dv",
       "offset": 144,
       "offset_hex": "0x90",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLdouble *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glColor4f",
       "offset": 148,
       "offset_hex": "0x94",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLfloat, GLfloat, GLfloat, GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glColor4fv",
       "offset": 152,
       "offset_hex": "0x98",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glColor4i",
       "offset": 156,
-      "offset_hex": "0x9c",
-      "size": 4
+      "offset_hex": "0x9C",
+      "size": 4,
+      "type": "void (*)(GLint, GLint, GLint, GLint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glColor4iv",
       "offset": 160,
-      "offset_hex": "0xa0",
-      "size": 4
+      "offset_hex": "0xA0",
+      "size": 4,
+      "type": "void (*)(const GLint *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glColor4s",
       "offset": 164,
-      "offset_hex": "0xa4",
-      "size": 4
+      "offset_hex": "0xA4",
+      "size": 4,
+      "type": "void (*)(GLshort, GLshort, GLshort, GLshort)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glColor4sv",
       "offset": 168,
-      "offset_hex": "0xa8",
-      "size": 4
+      "offset_hex": "0xA8",
+      "size": 4,
+      "type": "void (*)(const GLshort *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glColor4ub",
       "offset": 172,
-      "offset_hex": "0xac",
-      "size": 4
+      "offset_hex": "0xAC",
+      "size": 4,
+      "type": "void (*)(GLubyte, GLubyte, GLubyte, GLubyte)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glColor4ubv",
       "offset": 176,
-      "offset_hex": "0xb0",
-      "size": 4
+      "offset_hex": "0xB0",
+      "size": 4,
+      "type": "void (*)(const GLubyte *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glColor4ui",
       "offset": 180,
-      "offset_hex": "0xb4",
-      "size": 4
+      "offset_hex": "0xB4",
+      "size": 4,
+      "type": "void (*)(GLuint, GLuint, GLuint, GLuint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glColor4uiv",
       "offset": 184,
-      "offset_hex": "0xb8",
-      "size": 4
+      "offset_hex": "0xB8",
+      "size": 4,
+      "type": "void (*)(const GLuint *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glColor4us",
       "offset": 188,
-      "offset_hex": "0xbc",
-      "size": 4
+      "offset_hex": "0xBC",
+      "size": 4,
+      "type": "void (*)(GLushort, GLushort, GLushort, GLushort)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glColor4usv",
       "offset": 192,
-      "offset_hex": "0xc0",
-      "size": 4
+      "offset_hex": "0xC0",
+      "size": 4,
+      "type": "void (*)(const GLushort *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glColorMask",
       "offset": 196,
-      "offset_hex": "0xc4",
-      "size": 4
+      "offset_hex": "0xC4",
+      "size": 4,
+      "type": "void (*)(GLboolean, GLboolean, GLboolean, GLboolean)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glColorMaterial",
       "offset": 200,
-      "offset_hex": "0xc8",
-      "size": 4
+      "offset_hex": "0xC8",
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glColorPointer",
       "offset": 204,
-      "offset_hex": "0xcc",
-      "size": 4
+      "offset_hex": "0xCC",
+      "size": 4,
+      "type": "void (*)(GLint, GLenum, GLsizei, const void *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glCopyPixels",
       "offset": 208,
-      "offset_hex": "0xd0",
-      "size": 4
+      "offset_hex": "0xD0",
+      "size": 4,
+      "type": "void (*)(GLint, GLint, GLsizei, GLsizei, GLenum)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glCopyTexImage1D",
       "offset": 212,
-      "offset_hex": "0xd4",
-      "size": 4
+      "offset_hex": "0xD4",
+      "size": 4,
+      "type": "void (*)(GLenum, GLint, GLenum, GLint, GLint, GLsizei, GLint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glCopyTexImage2D",
       "offset": 216,
-      "offset_hex": "0xd8",
-      "size": 4
+      "offset_hex": "0xD8",
+      "size": 4,
+      "type": "void (*)(GLenum, GLint, GLenum, GLint, GLint, GLsizei, GLsizei, GLint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glCopyTexSubImage1D",
       "offset": 220,
-      "offset_hex": "0xdc",
-      "size": 4
+      "offset_hex": "0xDC",
+      "size": 4,
+      "type": "void (*)(GLenum, GLint, GLint, GLint, GLint, GLsizei)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glCopyTexSubImage2D",
       "offset": 224,
-      "offset_hex": "0xe0",
-      "size": 4
+      "offset_hex": "0xE0",
+      "size": 4,
+      "type": "void (*)(GLenum, GLint, GLint, GLint, GLint, GLint, GLsizei, GLsizei)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glCullFace",
       "offset": 228,
-      "offset_hex": "0xe4",
-      "size": 4
+      "offset_hex": "0xE4",
+      "size": 4,
+      "type": "void (*)(GLenum)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glDeleteLists",
       "offset": 232,
-      "offset_hex": "0xe8",
-      "size": 4
+      "offset_hex": "0xE8",
+      "size": 4,
+      "type": "void (*)(GLuint, GLsizei)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glDeleteTextures",
       "offset": 236,
-      "offset_hex": "0xec",
-      "size": 4
+      "offset_hex": "0xEC",
+      "size": 4,
+      "type": "void (*)(GLsizei, const GLuint *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glDepthFunc",
       "offset": 240,
-      "offset_hex": "0xf0",
-      "size": 4
+      "offset_hex": "0xF0",
+      "size": 4,
+      "type": "void (*)(GLenum)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glDepthMask",
       "offset": 244,
-      "offset_hex": "0xf4",
-      "size": 4
+      "offset_hex": "0xF4",
+      "size": 4,
+      "type": "void (*)(GLboolean)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glDepthRange",
       "offset": 248,
-      "offset_hex": "0xf8",
-      "size": 4
+      "offset_hex": "0xF8",
+      "size": 4,
+      "type": "void (*)(GLdouble, GLdouble)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glDisable",
       "offset": 252,
-      "offset_hex": "0xfc",
-      "size": 4
+      "offset_hex": "0xFC",
+      "size": 4,
+      "type": "void (*)(GLenum)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glDisableClientState",
       "offset": 256,
       "offset_hex": "0x100",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glDrawArrays",
       "offset": 260,
       "offset_hex": "0x104",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum, GLint, GLsizei)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glDrawBuffer",
       "offset": 264,
       "offset_hex": "0x108",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glDrawElements",
       "offset": 268,
-      "offset_hex": "0x10c",
-      "size": 4
+      "offset_hex": "0x10C",
+      "size": 4,
+      "type": "void (*)(GLenum, GLsizei, GLenum, const void *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glDrawPixels",
       "offset": 272,
       "offset_hex": "0x110",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLsizei, GLsizei, GLenum, GLenum, const void *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glEdgeFlag",
       "offset": 276,
       "offset_hex": "0x114",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLboolean)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glEdgeFlagPointer",
       "offset": 280,
       "offset_hex": "0x118",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLsizei, const void *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glEdgeFlagv",
       "offset": 284,
-      "offset_hex": "0x11c",
-      "size": 4
+      "offset_hex": "0x11C",
+      "size": 4,
+      "type": "void (*)(const GLboolean *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glEnable",
       "offset": 288,
       "offset_hex": "0x120",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glEnableClientState",
       "offset": 292,
       "offset_hex": "0x124",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glEnd",
       "offset": 296,
       "offset_hex": "0x128",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(void)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glEndList",
       "offset": 300,
-      "offset_hex": "0x12c",
-      "size": 4
+      "offset_hex": "0x12C",
+      "size": 4,
+      "type": "void (*)(void)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glEvalCoord1d",
       "offset": 304,
       "offset_hex": "0x130",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLdouble)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glEvalCoord1dv",
       "offset": 308,
       "offset_hex": "0x134",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLdouble *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glEvalCoord1f",
       "offset": 312,
       "offset_hex": "0x138",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glEvalCoord1fv",
       "offset": 316,
-      "offset_hex": "0x13c",
-      "size": 4
+      "offset_hex": "0x13C",
+      "size": 4,
+      "type": "void (*)(const GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glEvalCoord2d",
       "offset": 320,
       "offset_hex": "0x140",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLdouble, GLdouble)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glEvalCoord2dv",
       "offset": 324,
       "offset_hex": "0x144",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLdouble *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glEvalCoord2f",
       "offset": 328,
       "offset_hex": "0x148",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLfloat, GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glEvalCoord2fv",
       "offset": 332,
-      "offset_hex": "0x14c",
-      "size": 4
+      "offset_hex": "0x14C",
+      "size": 4,
+      "type": "void (*)(const GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glEvalMesh1",
       "offset": 336,
       "offset_hex": "0x150",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum, GLint, GLint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glEvalMesh2",
       "offset": 340,
       "offset_hex": "0x154",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum, GLint, GLint, GLint, GLint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glEvalPoint1",
       "offset": 344,
       "offset_hex": "0x158",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glEvalPoint2",
       "offset": 348,
-      "offset_hex": "0x15c",
-      "size": 4
+      "offset_hex": "0x15C",
+      "size": 4,
+      "type": "void (*)(GLint, GLint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glFeedbackBuffer",
       "offset": 352,
       "offset_hex": "0x160",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLsizei, GLenum, GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glFinish",
       "offset": 356,
       "offset_hex": "0x164",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(void)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glFlush",
       "offset": 360,
       "offset_hex": "0x168",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(void)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glFogf",
       "offset": 364,
-      "offset_hex": "0x16c",
-      "size": 4
+      "offset_hex": "0x16C",
+      "size": 4,
+      "type": "void (*)(GLenum, GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glFogfv",
       "offset": 368,
       "offset_hex": "0x170",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum, const GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glFogi",
       "offset": 372,
       "offset_hex": "0x174",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum, GLint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glFogiv",
       "offset": 376,
       "offset_hex": "0x178",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum, const GLint *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glFrontFace",
       "offset": 380,
-      "offset_hex": "0x17c",
-      "size": 4
+      "offset_hex": "0x17C",
+      "size": 4,
+      "type": "void (*)(GLenum)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glFrustum",
       "offset": 384,
       "offset_hex": "0x180",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLdouble, GLdouble, GLdouble, GLdouble, GLdouble, GLdouble)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glGenLists",
       "offset": 388,
       "offset_hex": "0x184",
-      "size": 4
+      "size": 4,
+      "type": "GLuint (*)(GLsizei)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glGenTextures",
       "offset": 392,
       "offset_hex": "0x188",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLsizei, GLuint *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glGetBooleanv",
       "offset": 396,
-      "offset_hex": "0x18c",
-      "size": 4
+      "offset_hex": "0x18C",
+      "size": 4,
+      "type": "void (*)(GLenum, GLboolean *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glGetClipPlane",
       "offset": 400,
       "offset_hex": "0x190",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum, GLdouble *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glGetDoublev",
       "offset": 404,
       "offset_hex": "0x194",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum, GLdouble *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glGetError",
       "offset": 408,
       "offset_hex": "0x198",
-      "size": 4
+      "size": 4,
+      "type": "GLenum (*)(void)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glGetFloatv",
       "offset": 412,
-      "offset_hex": "0x19c",
-      "size": 4
+      "offset_hex": "0x19C",
+      "size": 4,
+      "type": "void (*)(GLenum, GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glGetIntegerv",
       "offset": 416,
-      "offset_hex": "0x1a0",
-      "size": 4
+      "offset_hex": "0x1A0",
+      "size": 4,
+      "type": "void (*)(GLenum, GLint *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glGetLightfv",
       "offset": 420,
-      "offset_hex": "0x1a4",
-      "size": 4
+      "offset_hex": "0x1A4",
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum, GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glGetLightiv",
       "offset": 424,
-      "offset_hex": "0x1a8",
-      "size": 4
+      "offset_hex": "0x1A8",
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum, GLint *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glGetMapdv",
       "offset": 428,
-      "offset_hex": "0x1ac",
-      "size": 4
+      "offset_hex": "0x1AC",
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum, GLdouble *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glGetMapfv",
       "offset": 432,
-      "offset_hex": "0x1b0",
-      "size": 4
+      "offset_hex": "0x1B0",
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum, GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glGetMapiv",
       "offset": 436,
-      "offset_hex": "0x1b4",
-      "size": 4
+      "offset_hex": "0x1B4",
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum, GLint *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glGetMaterialfv",
       "offset": 440,
-      "offset_hex": "0x1b8",
-      "size": 4
+      "offset_hex": "0x1B8",
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum, GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glGetMaterialiv",
       "offset": 444,
-      "offset_hex": "0x1bc",
-      "size": 4
+      "offset_hex": "0x1BC",
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum, GLint *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glGetPixelMapfv",
       "offset": 448,
-      "offset_hex": "0x1c0",
-      "size": 4
+      "offset_hex": "0x1C0",
+      "size": 4,
+      "type": "void (*)(GLenum, GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glGetPixelMapuiv",
       "offset": 452,
-      "offset_hex": "0x1c4",
-      "size": 4
+      "offset_hex": "0x1C4",
+      "size": 4,
+      "type": "void (*)(GLenum, GLuint *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glGetPixelMapusv",
       "offset": 456,
-      "offset_hex": "0x1c8",
-      "size": 4
+      "offset_hex": "0x1C8",
+      "size": 4,
+      "type": "void (*)(GLenum, GLushort *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glGetPointerv",
       "offset": 460,
-      "offset_hex": "0x1cc",
-      "size": 4
+      "offset_hex": "0x1CC",
+      "size": 4,
+      "type": "void (*)(GLenum, void **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glGetPolygonStipple",
       "offset": 464,
-      "offset_hex": "0x1d0",
-      "size": 4
+      "offset_hex": "0x1D0",
+      "size": 4,
+      "type": "void (*)(GLubyte *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glGetString",
       "offset": 468,
-      "offset_hex": "0x1d4",
-      "size": 4
+      "offset_hex": "0x1D4",
+      "size": 4,
+      "type": "const GLubyte *(*)(GLenum)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glGetTexEnvfv",
       "offset": 472,
-      "offset_hex": "0x1d8",
-      "size": 4
+      "offset_hex": "0x1D8",
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum, GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glGetTexEnviv",
       "offset": 476,
-      "offset_hex": "0x1dc",
-      "size": 4
+      "offset_hex": "0x1DC",
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum, GLint *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glGetTexGendv",
       "offset": 480,
-      "offset_hex": "0x1e0",
-      "size": 4
+      "offset_hex": "0x1E0",
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum, GLdouble *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glGetTexGenfv",
       "offset": 484,
-      "offset_hex": "0x1e4",
-      "size": 4
+      "offset_hex": "0x1E4",
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum, GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glGetTexGeniv",
       "offset": 488,
-      "offset_hex": "0x1e8",
-      "size": 4
+      "offset_hex": "0x1E8",
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum, GLint *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glGetTexImage",
       "offset": 492,
-      "offset_hex": "0x1ec",
-      "size": 4
+      "offset_hex": "0x1EC",
+      "size": 4,
+      "type": "void (*)(GLenum, GLint, GLenum, GLenum, void *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glGetTexLevelParameterfv",
       "offset": 496,
-      "offset_hex": "0x1f0",
-      "size": 4
+      "offset_hex": "0x1F0",
+      "size": 4,
+      "type": "void (*)(GLenum, GLint, GLenum, GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glGetTexLevelParameteriv",
       "offset": 500,
-      "offset_hex": "0x1f4",
-      "size": 4
+      "offset_hex": "0x1F4",
+      "size": 4,
+      "type": "void (*)(GLenum, GLint, GLenum, GLint *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glGetTexParameterfv",
       "offset": 504,
-      "offset_hex": "0x1f8",
-      "size": 4
+      "offset_hex": "0x1F8",
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum, GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glGetTexParameteriv",
       "offset": 508,
-      "offset_hex": "0x1fc",
-      "size": 4
+      "offset_hex": "0x1FC",
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum, GLint *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glHint",
       "offset": 512,
       "offset_hex": "0x200",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glIndexMask",
       "offset": 516,
       "offset_hex": "0x204",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLuint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glIndexPointer",
       "offset": 520,
       "offset_hex": "0x208",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum, GLsizei, const void *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glIndexd",
       "offset": 524,
-      "offset_hex": "0x20c",
-      "size": 4
+      "offset_hex": "0x20C",
+      "size": 4,
+      "type": "void (*)(GLdouble)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glIndexdv",
       "offset": 528,
       "offset_hex": "0x210",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLdouble *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glIndexf",
       "offset": 532,
       "offset_hex": "0x214",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glIndexfv",
       "offset": 536,
       "offset_hex": "0x218",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glIndexi",
       "offset": 540,
-      "offset_hex": "0x21c",
-      "size": 4
+      "offset_hex": "0x21C",
+      "size": 4,
+      "type": "void (*)(GLint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glIndexiv",
       "offset": 544,
       "offset_hex": "0x220",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLint *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glIndexs",
       "offset": 548,
       "offset_hex": "0x224",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLshort)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glIndexsv",
       "offset": 552,
       "offset_hex": "0x228",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLshort *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glIndexub",
       "offset": 556,
-      "offset_hex": "0x22c",
-      "size": 4
+      "offset_hex": "0x22C",
+      "size": 4,
+      "type": "void (*)(GLubyte)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glIndexubv",
       "offset": 560,
       "offset_hex": "0x230",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLubyte *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glInitNames",
       "offset": 564,
       "offset_hex": "0x234",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(void)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glInterleavedArrays",
       "offset": 568,
       "offset_hex": "0x238",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum, GLsizei, const void *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glIsEnabled",
       "offset": 572,
-      "offset_hex": "0x23c",
-      "size": 4
+      "offset_hex": "0x23C",
+      "size": 4,
+      "type": "GLboolean (*)(GLenum)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glIsList",
       "offset": 576,
       "offset_hex": "0x240",
-      "size": 4
+      "size": 4,
+      "type": "GLboolean (*)(GLuint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glIsTexture",
       "offset": 580,
       "offset_hex": "0x244",
-      "size": 4
+      "size": 4,
+      "type": "GLboolean (*)(GLuint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glLightModelf",
       "offset": 584,
       "offset_hex": "0x248",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum, GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glLightModelfv",
       "offset": 588,
-      "offset_hex": "0x24c",
-      "size": 4
+      "offset_hex": "0x24C",
+      "size": 4,
+      "type": "void (*)(GLenum, const GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glLightModeli",
       "offset": 592,
       "offset_hex": "0x250",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum, GLint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glLightModeliv",
       "offset": 596,
       "offset_hex": "0x254",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum, const GLint *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glLightf",
       "offset": 600,
       "offset_hex": "0x258",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum, GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glLightfv",
       "offset": 604,
-      "offset_hex": "0x25c",
-      "size": 4
+      "offset_hex": "0x25C",
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum, const GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glLighti",
       "offset": 608,
       "offset_hex": "0x260",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum, GLint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glLightiv",
       "offset": 612,
       "offset_hex": "0x264",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum, const GLint *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glLineStipple",
       "offset": 616,
       "offset_hex": "0x268",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLint, GLushort)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glLineWidth",
       "offset": 620,
-      "offset_hex": "0x26c",
-      "size": 4
+      "offset_hex": "0x26C",
+      "size": 4,
+      "type": "void (*)(GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glListBase",
       "offset": 624,
       "offset_hex": "0x270",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLuint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glLoadIdentity",
       "offset": 628,
       "offset_hex": "0x274",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(void)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glLoadMatrixd",
       "offset": 632,
       "offset_hex": "0x278",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLdouble *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glLoadMatrixf",
       "offset": 636,
-      "offset_hex": "0x27c",
-      "size": 4
+      "offset_hex": "0x27C",
+      "size": 4,
+      "type": "void (*)(const GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glLoadName",
       "offset": 640,
       "offset_hex": "0x280",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLuint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glLogicOp",
       "offset": 644,
       "offset_hex": "0x284",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glMap1d",
       "offset": 648,
       "offset_hex": "0x288",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum, GLdouble, GLdouble, GLint, GLint, const GLdouble *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glMap1f",
       "offset": 652,
-      "offset_hex": "0x28c",
-      "size": 4
+      "offset_hex": "0x28C",
+      "size": 4,
+      "type": "void (*)(GLenum, GLfloat, GLfloat, GLint, GLint, const GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glMap2d",
       "offset": 656,
       "offset_hex": "0x290",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum, GLdouble, GLdouble, GLint, GLint, GLdouble, GLdouble, GLint, GLint, const GLdouble *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glMap2f",
       "offset": 660,
       "offset_hex": "0x294",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum, GLfloat, GLfloat, GLint, GLint, GLfloat, GLfloat, GLint, GLint, const GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glMapGrid1d",
       "offset": 664,
       "offset_hex": "0x298",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLint, GLdouble, GLdouble)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glMapGrid1f",
       "offset": 668,
-      "offset_hex": "0x29c",
-      "size": 4
+      "offset_hex": "0x29C",
+      "size": 4,
+      "type": "void (*)(GLint, GLfloat, GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glMapGrid2d",
       "offset": 672,
-      "offset_hex": "0x2a0",
-      "size": 4
+      "offset_hex": "0x2A0",
+      "size": 4,
+      "type": "void (*)(GLint, GLdouble, GLdouble, GLint, GLdouble, GLdouble)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glMapGrid2f",
       "offset": 676,
-      "offset_hex": "0x2a4",
-      "size": 4
+      "offset_hex": "0x2A4",
+      "size": 4,
+      "type": "void (*)(GLint, GLfloat, GLfloat, GLint, GLfloat, GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glMaterialf",
       "offset": 680,
-      "offset_hex": "0x2a8",
-      "size": 4
+      "offset_hex": "0x2A8",
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum, GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glMaterialfv",
       "offset": 684,
-      "offset_hex": "0x2ac",
-      "size": 4
+      "offset_hex": "0x2AC",
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum, const GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glMateriali",
       "offset": 688,
-      "offset_hex": "0x2b0",
-      "size": 4
+      "offset_hex": "0x2B0",
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum, GLint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glMaterialiv",
       "offset": 692,
-      "offset_hex": "0x2b4",
-      "size": 4
+      "offset_hex": "0x2B4",
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum, const GLint *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glMatrixMode",
       "offset": 696,
-      "offset_hex": "0x2b8",
-      "size": 4
+      "offset_hex": "0x2B8",
+      "size": 4,
+      "type": "void (*)(GLenum)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glMultMatrixd",
       "offset": 700,
-      "offset_hex": "0x2bc",
-      "size": 4
+      "offset_hex": "0x2BC",
+      "size": 4,
+      "type": "void (*)(const GLdouble *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glMultMatrixf",
       "offset": 704,
-      "offset_hex": "0x2c0",
-      "size": 4
+      "offset_hex": "0x2C0",
+      "size": 4,
+      "type": "void (*)(const GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glNewList",
       "offset": 708,
-      "offset_hex": "0x2c4",
-      "size": 4
+      "offset_hex": "0x2C4",
+      "size": 4,
+      "type": "void (*)(GLuint, GLenum)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glNormal3b",
       "offset": 712,
-      "offset_hex": "0x2c8",
-      "size": 4
+      "offset_hex": "0x2C8",
+      "size": 4,
+      "type": "void (*)(GLbyte, GLbyte, GLbyte)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glNormal3bv",
       "offset": 716,
-      "offset_hex": "0x2cc",
-      "size": 4
+      "offset_hex": "0x2CC",
+      "size": 4,
+      "type": "void (*)(const GLbyte *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glNormal3d",
       "offset": 720,
-      "offset_hex": "0x2d0",
-      "size": 4
+      "offset_hex": "0x2D0",
+      "size": 4,
+      "type": "void (*)(GLdouble, GLdouble, GLdouble)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glNormal3dv",
       "offset": 724,
-      "offset_hex": "0x2d4",
-      "size": 4
+      "offset_hex": "0x2D4",
+      "size": 4,
+      "type": "void (*)(const GLdouble *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glNormal3f",
       "offset": 728,
-      "offset_hex": "0x2d8",
-      "size": 4
+      "offset_hex": "0x2D8",
+      "size": 4,
+      "type": "void (*)(GLfloat, GLfloat, GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glNormal3fv",
       "offset": 732,
-      "offset_hex": "0x2dc",
-      "size": 4
+      "offset_hex": "0x2DC",
+      "size": 4,
+      "type": "void (*)(const GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glNormal3i",
       "offset": 736,
-      "offset_hex": "0x2e0",
-      "size": 4
+      "offset_hex": "0x2E0",
+      "size": 4,
+      "type": "void (*)(GLint, GLint, GLint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glNormal3iv",
       "offset": 740,
-      "offset_hex": "0x2e4",
-      "size": 4
+      "offset_hex": "0x2E4",
+      "size": 4,
+      "type": "void (*)(const GLint *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glNormal3s",
       "offset": 744,
-      "offset_hex": "0x2e8",
-      "size": 4
+      "offset_hex": "0x2E8",
+      "size": 4,
+      "type": "void (*)(GLshort, GLshort, GLshort)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glNormal3sv",
       "offset": 748,
-      "offset_hex": "0x2ec",
-      "size": 4
+      "offset_hex": "0x2EC",
+      "size": 4,
+      "type": "void (*)(const GLshort *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glNormalPointer",
       "offset": 752,
-      "offset_hex": "0x2f0",
-      "size": 4
+      "offset_hex": "0x2F0",
+      "size": 4,
+      "type": "void (*)(GLenum, GLsizei, const void *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glOrtho",
       "offset": 756,
-      "offset_hex": "0x2f4",
-      "size": 4
+      "offset_hex": "0x2F4",
+      "size": 4,
+      "type": "void (*)(GLdouble, GLdouble, GLdouble, GLdouble, GLdouble, GLdouble)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glPassThrough",
       "offset": 760,
-      "offset_hex": "0x2f8",
-      "size": 4
+      "offset_hex": "0x2F8",
+      "size": 4,
+      "type": "void (*)(GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glPixelMapfv",
       "offset": 764,
-      "offset_hex": "0x2fc",
-      "size": 4
+      "offset_hex": "0x2FC",
+      "size": 4,
+      "type": "void (*)(GLenum, GLsizei, const GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glPixelMapuiv",
       "offset": 768,
       "offset_hex": "0x300",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum, GLsizei, const GLuint *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glPixelMapusv",
       "offset": 772,
       "offset_hex": "0x304",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum, GLsizei, const GLushort *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glPixelStoref",
       "offset": 776,
       "offset_hex": "0x308",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum, GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glPixelStorei",
       "offset": 780,
-      "offset_hex": "0x30c",
-      "size": 4
+      "offset_hex": "0x30C",
+      "size": 4,
+      "type": "void (*)(GLenum, GLint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glPixelTransferf",
       "offset": 784,
       "offset_hex": "0x310",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum, GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glPixelTransferi",
       "offset": 788,
       "offset_hex": "0x314",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum, GLint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glPixelZoom",
       "offset": 792,
       "offset_hex": "0x318",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLfloat, GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glPointSize",
       "offset": 796,
-      "offset_hex": "0x31c",
-      "size": 4
+      "offset_hex": "0x31C",
+      "size": 4,
+      "type": "void (*)(GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glPolygonMode",
       "offset": 800,
       "offset_hex": "0x320",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glPolygonOffset",
       "offset": 804,
       "offset_hex": "0x324",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLfloat, GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glPolygonStipple",
       "offset": 808,
       "offset_hex": "0x328",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLubyte *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glPopAttrib",
       "offset": 812,
-      "offset_hex": "0x32c",
-      "size": 4
+      "offset_hex": "0x32C",
+      "size": 4,
+      "type": "void (*)(void)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glPopClientAttrib",
       "offset": 816,
       "offset_hex": "0x330",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(void)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glPopMatrix",
       "offset": 820,
       "offset_hex": "0x334",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(void)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glPopName",
       "offset": 824,
       "offset_hex": "0x338",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(void)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glPrioritizeTextures",
       "offset": 828,
-      "offset_hex": "0x33c",
-      "size": 4
+      "offset_hex": "0x33C",
+      "size": 4,
+      "type": "void (*)(GLsizei, const GLuint *, const GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glPushAttrib",
       "offset": 832,
       "offset_hex": "0x340",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLbitfield)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glPushClientAttrib",
       "offset": 836,
       "offset_hex": "0x344",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLbitfield)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glPushMatrix",
       "offset": 840,
       "offset_hex": "0x348",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(void)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glPushName",
       "offset": 844,
-      "offset_hex": "0x34c",
-      "size": 4
+      "offset_hex": "0x34C",
+      "size": 4,
+      "type": "void (*)(GLuint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glRasterPos2d",
       "offset": 848,
       "offset_hex": "0x350",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLdouble, GLdouble)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glRasterPos2dv",
       "offset": 852,
       "offset_hex": "0x354",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLdouble *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glRasterPos2f",
       "offset": 856,
       "offset_hex": "0x358",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLfloat, GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glRasterPos2fv",
       "offset": 860,
-      "offset_hex": "0x35c",
-      "size": 4
+      "offset_hex": "0x35C",
+      "size": 4,
+      "type": "void (*)(const GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glRasterPos2i",
       "offset": 864,
       "offset_hex": "0x360",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLint, GLint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glRasterPos2iv",
       "offset": 868,
       "offset_hex": "0x364",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLint *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glRasterPos2s",
       "offset": 872,
       "offset_hex": "0x368",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLshort, GLshort)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glRasterPos2sv",
       "offset": 876,
-      "offset_hex": "0x36c",
-      "size": 4
+      "offset_hex": "0x36C",
+      "size": 4,
+      "type": "void (*)(const GLshort *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glRasterPos3d",
       "offset": 880,
       "offset_hex": "0x370",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLdouble, GLdouble, GLdouble)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glRasterPos3dv",
       "offset": 884,
       "offset_hex": "0x374",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLdouble *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glRasterPos3f",
       "offset": 888,
       "offset_hex": "0x378",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLfloat, GLfloat, GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glRasterPos3fv",
       "offset": 892,
-      "offset_hex": "0x37c",
-      "size": 4
+      "offset_hex": "0x37C",
+      "size": 4,
+      "type": "void (*)(const GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glRasterPos3i",
       "offset": 896,
       "offset_hex": "0x380",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLint, GLint, GLint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glRasterPos3iv",
       "offset": 900,
       "offset_hex": "0x384",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLint *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glRasterPos3s",
       "offset": 904,
       "offset_hex": "0x388",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLshort, GLshort, GLshort)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glRasterPos3sv",
       "offset": 908,
-      "offset_hex": "0x38c",
-      "size": 4
+      "offset_hex": "0x38C",
+      "size": 4,
+      "type": "void (*)(const GLshort *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glRasterPos4d",
       "offset": 912,
       "offset_hex": "0x390",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLdouble, GLdouble, GLdouble, GLdouble)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glRasterPos4dv",
       "offset": 916,
       "offset_hex": "0x394",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLdouble *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glRasterPos4f",
       "offset": 920,
       "offset_hex": "0x398",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLfloat, GLfloat, GLfloat, GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glRasterPos4fv",
       "offset": 924,
-      "offset_hex": "0x39c",
-      "size": 4
+      "offset_hex": "0x39C",
+      "size": 4,
+      "type": "void (*)(const GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glRasterPos4i",
       "offset": 928,
-      "offset_hex": "0x3a0",
-      "size": 4
+      "offset_hex": "0x3A0",
+      "size": 4,
+      "type": "void (*)(GLint, GLint, GLint, GLint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glRasterPos4iv",
       "offset": 932,
-      "offset_hex": "0x3a4",
-      "size": 4
+      "offset_hex": "0x3A4",
+      "size": 4,
+      "type": "void (*)(const GLint *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glRasterPos4s",
       "offset": 936,
-      "offset_hex": "0x3a8",
-      "size": 4
+      "offset_hex": "0x3A8",
+      "size": 4,
+      "type": "void (*)(GLshort, GLshort, GLshort, GLshort)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glRasterPos4sv",
       "offset": 940,
-      "offset_hex": "0x3ac",
-      "size": 4
+      "offset_hex": "0x3AC",
+      "size": 4,
+      "type": "void (*)(const GLshort *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glReadBuffer",
       "offset": 944,
-      "offset_hex": "0x3b0",
-      "size": 4
+      "offset_hex": "0x3B0",
+      "size": 4,
+      "type": "void (*)(GLenum)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glReadPixels",
       "offset": 948,
-      "offset_hex": "0x3b4",
-      "size": 4
+      "offset_hex": "0x3B4",
+      "size": 4,
+      "type": "void (*)(GLint, GLint, GLsizei, GLsizei, GLenum, GLenum, void *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glRectd",
       "offset": 952,
-      "offset_hex": "0x3b8",
-      "size": 4
+      "offset_hex": "0x3B8",
+      "size": 4,
+      "type": "void (*)(GLdouble, GLdouble, GLdouble, GLdouble)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glRectdv",
       "offset": 956,
-      "offset_hex": "0x3bc",
-      "size": 4
+      "offset_hex": "0x3BC",
+      "size": 4,
+      "type": "void (*)(const GLdouble *, const GLdouble *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glRectf",
       "offset": 960,
-      "offset_hex": "0x3c0",
-      "size": 4
+      "offset_hex": "0x3C0",
+      "size": 4,
+      "type": "void (*)(GLfloat, GLfloat, GLfloat, GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glRectfv",
       "offset": 964,
-      "offset_hex": "0x3c4",
-      "size": 4
+      "offset_hex": "0x3C4",
+      "size": 4,
+      "type": "void (*)(const GLfloat *, const GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glRecti",
       "offset": 968,
-      "offset_hex": "0x3c8",
-      "size": 4
+      "offset_hex": "0x3C8",
+      "size": 4,
+      "type": "void (*)(GLint, GLint, GLint, GLint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glRectiv",
       "offset": 972,
-      "offset_hex": "0x3cc",
-      "size": 4
+      "offset_hex": "0x3CC",
+      "size": 4,
+      "type": "void (*)(const GLint *, const GLint *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glRects",
       "offset": 976,
-      "offset_hex": "0x3d0",
-      "size": 4
+      "offset_hex": "0x3D0",
+      "size": 4,
+      "type": "void (*)(GLshort, GLshort, GLshort, GLshort)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glRectsv",
       "offset": 980,
-      "offset_hex": "0x3d4",
-      "size": 4
+      "offset_hex": "0x3D4",
+      "size": 4,
+      "type": "void (*)(const GLshort *, const GLshort *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glRenderMode",
       "offset": 984,
-      "offset_hex": "0x3d8",
-      "size": 4
+      "offset_hex": "0x3D8",
+      "size": 4,
+      "type": "GLint (*)(GLenum)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glRotated",
       "offset": 988,
-      "offset_hex": "0x3dc",
-      "size": 4
+      "offset_hex": "0x3DC",
+      "size": 4,
+      "type": "void (*)(GLdouble, GLdouble, GLdouble, GLdouble)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glRotatef",
       "offset": 992,
-      "offset_hex": "0x3e0",
-      "size": 4
+      "offset_hex": "0x3E0",
+      "size": 4,
+      "type": "void (*)(GLfloat, GLfloat, GLfloat, GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glScaled",
       "offset": 996,
-      "offset_hex": "0x3e4",
-      "size": 4
+      "offset_hex": "0x3E4",
+      "size": 4,
+      "type": "void (*)(GLdouble, GLdouble, GLdouble)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glScalef",
       "offset": 1000,
-      "offset_hex": "0x3e8",
-      "size": 4
+      "offset_hex": "0x3E8",
+      "size": 4,
+      "type": "void (*)(GLfloat, GLfloat, GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glScissor",
       "offset": 1004,
-      "offset_hex": "0x3ec",
-      "size": 4
+      "offset_hex": "0x3EC",
+      "size": 4,
+      "type": "void (*)(GLint, GLint, GLsizei, GLsizei)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glSelectBuffer",
       "offset": 1008,
-      "offset_hex": "0x3f0",
-      "size": 4
+      "offset_hex": "0x3F0",
+      "size": 4,
+      "type": "void (*)(GLsizei, GLuint *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glShadeModel",
       "offset": 1012,
-      "offset_hex": "0x3f4",
-      "size": 4
+      "offset_hex": "0x3F4",
+      "size": 4,
+      "type": "void (*)(GLenum)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glStencilFunc",
       "offset": 1016,
-      "offset_hex": "0x3f8",
-      "size": 4
+      "offset_hex": "0x3F8",
+      "size": 4,
+      "type": "void (*)(GLenum, GLint, GLuint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glStencilMask",
       "offset": 1020,
-      "offset_hex": "0x3fc",
-      "size": 4
+      "offset_hex": "0x3FC",
+      "size": 4,
+      "type": "void (*)(GLuint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glStencilOp",
       "offset": 1024,
       "offset_hex": "0x400",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum, GLenum)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexCoord1d",
       "offset": 1028,
       "offset_hex": "0x404",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLdouble)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexCoord1dv",
       "offset": 1032,
       "offset_hex": "0x408",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLdouble *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexCoord1f",
       "offset": 1036,
-      "offset_hex": "0x40c",
-      "size": 4
+      "offset_hex": "0x40C",
+      "size": 4,
+      "type": "void (*)(GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexCoord1fv",
       "offset": 1040,
       "offset_hex": "0x410",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexCoord1i",
       "offset": 1044,
       "offset_hex": "0x414",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexCoord1iv",
       "offset": 1048,
       "offset_hex": "0x418",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLint *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexCoord1s",
       "offset": 1052,
-      "offset_hex": "0x41c",
-      "size": 4
+      "offset_hex": "0x41C",
+      "size": 4,
+      "type": "void (*)(GLshort)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexCoord1sv",
       "offset": 1056,
       "offset_hex": "0x420",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLshort *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexCoord2d",
       "offset": 1060,
       "offset_hex": "0x424",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLdouble, GLdouble)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexCoord2dv",
       "offset": 1064,
       "offset_hex": "0x428",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLdouble *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexCoord2f",
       "offset": 1068,
-      "offset_hex": "0x42c",
-      "size": 4
+      "offset_hex": "0x42C",
+      "size": 4,
+      "type": "void (*)(GLfloat, GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexCoord2fv",
       "offset": 1072,
       "offset_hex": "0x430",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexCoord2i",
       "offset": 1076,
       "offset_hex": "0x434",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLint, GLint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexCoord2iv",
       "offset": 1080,
       "offset_hex": "0x438",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLint *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexCoord2s",
       "offset": 1084,
-      "offset_hex": "0x43c",
-      "size": 4
+      "offset_hex": "0x43C",
+      "size": 4,
+      "type": "void (*)(GLshort, GLshort)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexCoord2sv",
       "offset": 1088,
       "offset_hex": "0x440",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLshort *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexCoord3d",
       "offset": 1092,
       "offset_hex": "0x444",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLdouble, GLdouble, GLdouble)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexCoord3dv",
       "offset": 1096,
       "offset_hex": "0x448",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLdouble *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexCoord3f",
       "offset": 1100,
-      "offset_hex": "0x44c",
-      "size": 4
+      "offset_hex": "0x44C",
+      "size": 4,
+      "type": "void (*)(GLfloat, GLfloat, GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexCoord3fv",
       "offset": 1104,
       "offset_hex": "0x450",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexCoord3i",
       "offset": 1108,
       "offset_hex": "0x454",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLint, GLint, GLint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexCoord3iv",
       "offset": 1112,
       "offset_hex": "0x458",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLint *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexCoord3s",
       "offset": 1116,
-      "offset_hex": "0x45c",
-      "size": 4
+      "offset_hex": "0x45C",
+      "size": 4,
+      "type": "void (*)(GLshort, GLshort, GLshort)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexCoord3sv",
       "offset": 1120,
       "offset_hex": "0x460",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLshort *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexCoord4d",
       "offset": 1124,
       "offset_hex": "0x464",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLdouble, GLdouble, GLdouble, GLdouble)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexCoord4dv",
       "offset": 1128,
       "offset_hex": "0x468",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLdouble *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexCoord4f",
       "offset": 1132,
-      "offset_hex": "0x46c",
-      "size": 4
+      "offset_hex": "0x46C",
+      "size": 4,
+      "type": "void (*)(GLfloat, GLfloat, GLfloat, GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexCoord4fv",
       "offset": 1136,
       "offset_hex": "0x470",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexCoord4i",
       "offset": 1140,
       "offset_hex": "0x474",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLint, GLint, GLint, GLint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexCoord4iv",
       "offset": 1144,
       "offset_hex": "0x478",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLint *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexCoord4s",
       "offset": 1148,
-      "offset_hex": "0x47c",
-      "size": 4
+      "offset_hex": "0x47C",
+      "size": 4,
+      "type": "void (*)(GLshort, GLshort, GLshort, GLshort)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexCoord4sv",
       "offset": 1152,
       "offset_hex": "0x480",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLshort *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexCoordPointer",
       "offset": 1156,
       "offset_hex": "0x484",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLint, GLenum, GLsizei, const void *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexEnvf",
       "offset": 1160,
       "offset_hex": "0x488",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum, GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexEnvfv",
       "offset": 1164,
-      "offset_hex": "0x48c",
-      "size": 4
+      "offset_hex": "0x48C",
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum, const GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexEnvi",
       "offset": 1168,
       "offset_hex": "0x490",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum, GLint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexEnviv",
       "offset": 1172,
       "offset_hex": "0x494",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum, const GLint *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexGend",
       "offset": 1176,
       "offset_hex": "0x498",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum, GLdouble)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexGendv",
       "offset": 1180,
-      "offset_hex": "0x49c",
-      "size": 4
+      "offset_hex": "0x49C",
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum, const GLdouble *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexGenf",
       "offset": 1184,
-      "offset_hex": "0x4a0",
-      "size": 4
+      "offset_hex": "0x4A0",
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum, GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexGenfv",
       "offset": 1188,
-      "offset_hex": "0x4a4",
-      "size": 4
+      "offset_hex": "0x4A4",
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum, const GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexGeni",
       "offset": 1192,
-      "offset_hex": "0x4a8",
-      "size": 4
+      "offset_hex": "0x4A8",
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum, GLint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexGeniv",
       "offset": 1196,
-      "offset_hex": "0x4ac",
-      "size": 4
+      "offset_hex": "0x4AC",
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum, const GLint *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexImage1D",
       "offset": 1200,
-      "offset_hex": "0x4b0",
-      "size": 4
+      "offset_hex": "0x4B0",
+      "size": 4,
+      "type": "void (*)(GLenum, GLint, GLint, GLsizei, GLint, GLenum, GLenum, const void *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexImage2D",
       "offset": 1204,
-      "offset_hex": "0x4b4",
-      "size": 4
+      "offset_hex": "0x4B4",
+      "size": 4,
+      "type": "void (*)(GLenum, GLint, GLint, GLsizei, GLsizei, GLint, GLenum, GLenum, const void *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexParameterf",
       "offset": 1208,
-      "offset_hex": "0x4b8",
-      "size": 4
+      "offset_hex": "0x4B8",
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum, GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexParameterfv",
       "offset": 1212,
-      "offset_hex": "0x4bc",
-      "size": 4
+      "offset_hex": "0x4BC",
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum, const GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexParameteri",
       "offset": 1216,
-      "offset_hex": "0x4c0",
-      "size": 4
+      "offset_hex": "0x4C0",
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum, GLint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexParameteriv",
       "offset": 1220,
-      "offset_hex": "0x4c4",
-      "size": 4
+      "offset_hex": "0x4C4",
+      "size": 4,
+      "type": "void (*)(GLenum, GLenum, const GLint *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexSubImage1D",
       "offset": 1224,
-      "offset_hex": "0x4c8",
-      "size": 4
+      "offset_hex": "0x4C8",
+      "size": 4,
+      "type": "void (*)(GLenum, GLint, GLint, GLsizei, GLenum, GLenum, const void *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTexSubImage2D",
       "offset": 1228,
-      "offset_hex": "0x4cc",
-      "size": 4
+      "offset_hex": "0x4CC",
+      "size": 4,
+      "type": "void (*)(GLenum, GLint, GLint, GLint, GLsizei, GLsizei, GLenum, GLenum, const void *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTranslated",
       "offset": 1232,
-      "offset_hex": "0x4d0",
-      "size": 4
+      "offset_hex": "0x4D0",
+      "size": 4,
+      "type": "void (*)(GLdouble, GLdouble, GLdouble)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glTranslatef",
       "offset": 1236,
-      "offset_hex": "0x4d4",
-      "size": 4
+      "offset_hex": "0x4D4",
+      "size": 4,
+      "type": "void (*)(GLfloat, GLfloat, GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glVertex2d",
       "offset": 1240,
-      "offset_hex": "0x4d8",
-      "size": 4
+      "offset_hex": "0x4D8",
+      "size": 4,
+      "type": "void (*)(GLdouble, GLdouble)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glVertex2dv",
       "offset": 1244,
-      "offset_hex": "0x4dc",
-      "size": 4
+      "offset_hex": "0x4DC",
+      "size": 4,
+      "type": "void (*)(const GLdouble *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glVertex2f",
       "offset": 1248,
-      "offset_hex": "0x4e0",
-      "size": 4
+      "offset_hex": "0x4E0",
+      "size": 4,
+      "type": "void (*)(GLfloat, GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glVertex2fv",
       "offset": 1252,
-      "offset_hex": "0x4e4",
-      "size": 4
+      "offset_hex": "0x4E4",
+      "size": 4,
+      "type": "void (*)(const GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glVertex2i",
       "offset": 1256,
-      "offset_hex": "0x4e8",
-      "size": 4
+      "offset_hex": "0x4E8",
+      "size": 4,
+      "type": "void (*)(GLint, GLint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glVertex2iv",
       "offset": 1260,
-      "offset_hex": "0x4ec",
-      "size": 4
+      "offset_hex": "0x4EC",
+      "size": 4,
+      "type": "void (*)(const GLint *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glVertex2s",
       "offset": 1264,
-      "offset_hex": "0x4f0",
-      "size": 4
+      "offset_hex": "0x4F0",
+      "size": 4,
+      "type": "void (*)(GLshort, GLshort)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glVertex2sv",
       "offset": 1268,
-      "offset_hex": "0x4f4",
-      "size": 4
+      "offset_hex": "0x4F4",
+      "size": 4,
+      "type": "void (*)(const GLshort *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glVertex3d",
       "offset": 1272,
-      "offset_hex": "0x4f8",
-      "size": 4
+      "offset_hex": "0x4F8",
+      "size": 4,
+      "type": "void (*)(GLdouble, GLdouble, GLdouble)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glVertex3dv",
       "offset": 1276,
-      "offset_hex": "0x4fc",
-      "size": 4
+      "offset_hex": "0x4FC",
+      "size": 4,
+      "type": "void (*)(const GLdouble *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glVertex3f",
       "offset": 1280,
       "offset_hex": "0x500",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLfloat, GLfloat, GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glVertex3fv",
       "offset": 1284,
       "offset_hex": "0x504",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glVertex3i",
       "offset": 1288,
       "offset_hex": "0x508",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLint, GLint, GLint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glVertex3iv",
       "offset": 1292,
-      "offset_hex": "0x50c",
-      "size": 4
+      "offset_hex": "0x50C",
+      "size": 4,
+      "type": "void (*)(const GLint *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glVertex3s",
       "offset": 1296,
       "offset_hex": "0x510",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLshort, GLshort, GLshort)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glVertex3sv",
       "offset": 1300,
       "offset_hex": "0x514",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLshort *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glVertex4d",
       "offset": 1304,
       "offset_hex": "0x518",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLdouble, GLdouble, GLdouble, GLdouble)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glVertex4dv",
       "offset": 1308,
-      "offset_hex": "0x51c",
-      "size": 4
+      "offset_hex": "0x51C",
+      "size": 4,
+      "type": "void (*)(const GLdouble *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glVertex4f",
       "offset": 1312,
       "offset_hex": "0x520",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLfloat, GLfloat, GLfloat, GLfloat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glVertex4fv",
       "offset": 1316,
       "offset_hex": "0x524",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLfloat *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glVertex4i",
       "offset": 1320,
       "offset_hex": "0x528",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLint, GLint, GLint, GLint)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glVertex4iv",
       "offset": 1324,
-      "offset_hex": "0x52c",
-      "size": 4
+      "offset_hex": "0x52C",
+      "size": 4,
+      "type": "void (*)(const GLint *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glVertex4s",
       "offset": 1328,
       "offset_hex": "0x530",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLshort, GLshort, GLshort, GLshort)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glVertex4sv",
       "offset": 1332,
       "offset_hex": "0x534",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const GLshort *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glVertexPointer",
       "offset": 1336,
       "offset_hex": "0x538",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(GLint, GLenum, GLsizei, const void *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "p_glViewport",
       "offset": 1340,
-      "offset_hex": "0x53c",
-      "size": 4
+      "offset_hex": "0x53C",
+      "size": 4,
+      "type": "void (*)(GLint, GLint, GLsizei, GLsizei)"
     }
   ],
   "name": "$80D93121D5C2C7490092EA3C4923E85D",
+  "ordinal": 1069,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 1344
 }

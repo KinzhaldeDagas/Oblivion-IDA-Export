@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5F25F0",
-    "line": "push    ecx",
+    "line": "push    ecx; Fast-travel loop player AV update: magicka regeneration/active magic adjustment over travel time.",
     "mnemonic": "push",
     "size": 1
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x5F2671",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },

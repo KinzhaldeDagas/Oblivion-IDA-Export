@@ -7,7 +7,7 @@
 0x891141: push    eax
 0x891142: lea     edx, [esp+0Ch+var_8]
 0x891146: push    edx
-0x891147: call    sub_47F990
+0x891147: call    sub_47F990; TES4 authoritative metadata map lookup: map count at +0x48, entries pointer at +0x44, each entry 0x10 bytes: key, unknown, valueLow, valueHigh.
 0x89114C: mov     eax, [esp+8+var_8]
 0x89114F: add     esp, 8
 0x891152: retn

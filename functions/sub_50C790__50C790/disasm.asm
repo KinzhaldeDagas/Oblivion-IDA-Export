@@ -22,7 +22,7 @@
 0x50C7C3: push    ecx; a1
 0x50C7C4: mov     [esp+34h+var_4], ebx
 0x50C7C8: mov     dword ptr [esp+34h+var_8], ebx
-0x50C7CC: call    Script_ExtractArgs
+0x50C7CC: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x50C7D1: add     esp, 24h
 0x50C7D4: test    al, al
 0x50C7D6: jnz     short loc_50C7DE
@@ -56,7 +56,7 @@
 0x50C82B: jz      short loc_50C8AB
 0x50C82D: push    ebx
 0x50C82E: mov     ecx, edi
-0x50C830: call    sub_6135F0
+0x50C830: call    CombatController_GetCurrentTarget
 0x50C835: push    eax
 0x50C836: mov     ecx, edi
 0x50C838: call    sub_6210D0

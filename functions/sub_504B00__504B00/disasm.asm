@@ -1,5 +1,5 @@
-0x504B00: push    esi
-0x504B01: mov     esi, dword ptr [esp+4+arg_8]
+0x504B00: push    esi; Verified behavior: script-style wrapper extracts a target reference and optional linked-cell propagation argument, clears ExtraLockData locked bit 0x01 if effective lock data exists, marks the lock modified, optionally propagates unlocked=true to owner cells, marks the form active-file modified, and prints `Unlocked %s` in console mode. Exact command-table name remains Unknown.
+0x504B01: mov     esi, [esp+4+otherEndpoint]
 0x504B05: test    esi, esi
 0x504B07: jnz     short loc_504B0D
 0x504B09: xor     al, al
@@ -7,7 +7,7 @@
 0x504B0C: retn
 0x504B0D: mov     ecx, [esp+4+l]
 0x504B11: mov     edx, [esp+4+arg_10]
-0x504B15: lea     eax, [esp+4+arg_8]
+0x504B15: lea     eax, [esp+4+otherEndpoint]
 0x504B19: push    eax; UInt16
 0x504B1A: mov     eax, [esp+8+arg_C]
 0x504B1E: push    ecx; l
@@ -20,28 +20,28 @@
 0x504B2E: push    ecx; a3
 0x504B2F: push    edx; a2
 0x504B30: push    eax; a1
-0x504B31: mov     dword ptr [esp+24h+arg_8], 0
-0x504B39: call    Script_ExtractArgs
+0x504B31: mov     [esp+24h+otherEndpoint], 0
+0x504B39: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x504B3E: add     esp, 20h
 0x504B41: test    al, al
 0x504B43: jz      short loc_504B09
-0x504B45: mov     ecx, esi
-0x504B47: call    sub_4D7740
+0x504B45: mov     ecx, esi; this
+0x504B47: call    TESObjectREFR_GetEffectiveDoorLock; Verified: returns this reference's ExtraLockData* payload when present; otherwise, if its ExtraTeleport has a linked door, returns that linked reference's ExtraLockData* payload; null when neither exists. Directly supported by ExtraDataList_GetLock, ExtraDataList_GetTeleport, and TeleportData_GetLinkedDoor.
 0x504B4C: test    eax, eax
 0x504B4E: jz      short loc_504B85
 0x504B50: and     byte ptr [eax+8], 0FEh
-0x504B54: mov     ecx, esi
-0x504B56: call    sub_4D9070
-0x504B5B: cmp     dword ptr [esp+4+arg_8], 0
+0x504B54: mov     ecx, esi; this
+0x504B56: call    TESObjectREFR_MarkLockDataAsModified; Verified modified-state propagation: if this reference has lock data, calls TESFormVtbl::MarkAsModified with mask 0x40; otherwise, if its linked-door chain has lock data, marks that linked-door reference with the same mask.
+0x504B5B: cmp     [esp+4+otherEndpoint], 0
 0x504B60: jle     short loc_504B77
 0x504B62: mov     ecx, esi; this
-0x504B64: call    GetTeleportExtraData
+0x504B64: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x504B69: test    eax, eax
 0x504B6B: jz      short loc_504B77
-0x504B6D: push    1
-0x504B6F: push    esi
-0x504B70: mov     ecx, eax
-0x504B72: call    sub_42B5F0
+0x504B6D: push    1; unlocked
+0x504B6F: push    esi; otherEndpoint
+0x504B70: mov     ecx, eax; linkedDoorSlot
+0x504B72: call    TESObjectREFR_PropagateLockStateToLinkedDoorCells; Verified: Unlock script wrapper optionally propagates `unlocked=true` to the linked door and both owner cells when its extracted argument is positive.
 0x504B77: mov     edx, [esi]
 0x504B79: mov     eax, [edx+90h]
 0x504B7F: push    1

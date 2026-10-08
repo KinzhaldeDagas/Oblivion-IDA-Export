@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x767EA0",
-    "line": "sub     esp, 4Ch",
+    "line": "sub     esp, 4Ch; Pass224/226: Packs NiScreenTexture records into screen vertices/indices; uses NiScreenTexture +0x14 first texture for dimensions.",
     "mnemonic": "sub",
     "size": 3
   },
   {
     "ea": "0x767EA3",
-    "line": "mov     eax, [esp+4Ch+arg_0]",
+    "line": "mov     eax, [esp+4Ch+bufferBytes]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x767F3D",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x767F49",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x767F55",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -787,7 +787,7 @@
   },
   {
     "ea": "0x768046",
-    "line": "mov     ecx, [esp+5Ch+arg_0]",
+    "line": "mov     ecx, [esp+5Ch+bufferBytes]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -871,7 +871,7 @@
   },
   {
     "ea": "0x76806A",
-    "line": "mov     ecx, [esp+5Ch+arg_0]",
+    "line": "mov     ecx, [esp+5Ch+bufferBytes]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1069,7 +1069,7 @@
   },
   {
     "ea": "0x7680D4",
-    "line": "mov     ecx, [esp+5Ch+arg_0]",
+    "line": "mov     ecx, [esp+5Ch+bufferBytes]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2185,7 +2185,7 @@
   },
   {
     "ea": "0x76832A",
-    "line": "call    sub_777240",
+    "line": "call    sub_777240; Pass226: Vertex-buffer upload helper; low mask bits upload screen positions, UVs, and packed colors.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2245,7 +2245,7 @@
   },
   {
     "ea": "0x768356",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2575,7 +2575,7 @@
   },
   {
     "ea": "0x768420",
-    "line": "mov     [esp+5Ch+arg_0], eax",
+    "line": "mov     [esp+5Ch+bufferBytes], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2593,7 +2593,7 @@
   },
   {
     "ea": "0x768429",
-    "line": "lea     ecx, [esp+5Ch+arg_0]",
+    "line": "lea     ecx, [esp+5Ch+bufferBytes]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2611,55 +2611,55 @@
   },
   {
     "ea": "0x768432",
-    "line": "push    eax; Dst",
+    "line": "push    eax; usage",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x768433",
-    "line": "push    1; int",
+    "line": "push    1; pool",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x768435",
-    "line": "push    ecx; int",
+    "line": "push    ecx; bufferBytes",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x768436",
-    "line": "mov     ecx, [esi+8B4h]",
+    "line": "mov     ecx, [esi+8B4h]; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x76843C",
-    "line": "push    ebp; int",
+    "line": "push    ebp; existing",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76843D",
-    "line": "push    ebx; int",
+    "line": "push    ebx; capacityIndices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76843E",
-    "line": "push    ebx; Src",
+    "line": "push    ebx; indexCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76843F",
-    "line": "push    edx; int",
+    "line": "push    edx; indices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x768440",
-    "line": "call    sub_7781F0",
+    "line": "call    NiDX9IndexBufferManager_PackBuffer; Pass226: Index-buffer rebuild/upload helper used when NiScreenTexture mask bit 0x08 is active.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2689,13 +2689,13 @@
   },
   {
     "ea": "0x76844D",
-    "line": "call    sub_777F40",
+    "line": "call    sub_777F40; MoonSugarEffect decode: release BuffData index buffer and reset IBSize/IB.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x768452",
-    "line": "mov     eax, [esp+5Ch+arg_0]",
+    "line": "mov     eax, [esp+5Ch+bufferBytes]",
     "mnemonic": "mov",
     "size": 4
   },

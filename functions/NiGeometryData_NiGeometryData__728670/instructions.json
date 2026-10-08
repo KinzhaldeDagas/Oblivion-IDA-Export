@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x728670",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; [constructor audit] This supplied-data overload assigns input pointers before bound computation at72A0F0; it does not allocate or copy their payloads. NiObject base7005D0 only initializes header/refcount and increments global object count. Allocation failures are handled by caller allocations before this chain; arbitrary unreadable input/global memory faults are a distinct condition.",
     "mnemonic": "push",
     "size": 2
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x728718",
-    "line": "push    ecx",
+    "line": "push    ecx; vertices",
     "mnemonic": "push",
     "size": 1
   },
@@ -307,19 +307,19 @@
   },
   {
     "ea": "0x72871C",
-    "line": "push    ecx",
+    "line": "push    ecx; vertexCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x72871D",
-    "line": "lea     ecx, [esi+0Ch]",
+    "line": "lea     ecx, [esi+0Ch]; self",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x728720",
-    "line": "call    sub_72A0F0",
+    "line": "call    NiSphere_ComputeFromVertices; Compute the initial NiGeometryData local bounding sphere from the constructor's contiguous vertex array.",
     "mnemonic": "call",
     "size": 5
   },
@@ -400,5 +400,77 @@
     "line": "retn    1Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CA540",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA543",
+    "line": "jmp     NiRefObject_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA548",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA54B",
+    "line": "add     ecx, 34h ; '4'; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA54E",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA553",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CA557",
+    "line": "lea     eax, [edx-0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA55A",
+    "line": "mov     ecx, [edx-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA55D",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CA55F",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA564",
+    "line": "mov     eax, offset stru_AF2C3C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA569",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

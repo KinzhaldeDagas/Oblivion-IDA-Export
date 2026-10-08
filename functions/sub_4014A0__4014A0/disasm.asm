@@ -1,4 +1,4 @@
-0x4014A0: mov     eax, OSGlobals
+0x4014A0: mov     eax, ds:0B33398h; MEF v57 IMPLEMENTED 2026-10-08: v57 pressure boundary: allocator401830 reaches this dispatcher via40187E; optional arbitrary callbackB02184 invoked401522 after entering recovery critical section. Entry detour invalidates actor/map/light/property optimization state BEFORE callback and replays original Main* load, continues4014A5. Do not restart partially completed native operations after reentry.
 0x4014A5: push    ebx
 0x4014A6: push    esi
 0x4014A7: push    edi
@@ -14,17 +14,17 @@
 0x4014D0: xor     bl, bl
 0x4014D2: test    al, al
 0x4014D4: jnz     short loc_4014E7
-0x4014D6: cmp     byte_B350D5, al
+0x4014D6: cmp     ds:0B350D5h, al
 0x4014DC: jz      short loc_4014E7
-0x4014DE: call    nullsub_returnTrue_0arg
+0x4014DE: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x4014E3: test    al, al
 0x4014E5: jz      short loc_4014F3
 0x4014E7: push    3
-0x4014E9: call    nullsub_returnTrue_0arg
+0x4014E9: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x4014EE: add     esp, 4
 0x4014F1: mov     bl, al
 0x4014F3: push    offset aMemoryheapMemo
-0x4014F8: mov     ecx, offset stru_B32C00
+0x4014F8: mov     ecx, offset unk_B32C00
 0x4014FD: call    NiEnterCriticalSection
 0x401502: mov     eax, dword_B02184
 0x401507: test    eax, eax

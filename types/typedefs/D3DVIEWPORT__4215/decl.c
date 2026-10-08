@@ -1,1 +1,14 @@
-_D3DVIEWPORT
+struct _D3DVIEWPORT
+{
+DWORD dwSize;
+DWORD dwX;
+DWORD dwY;
+DWORD dwWidth;
+DWORD dwHeight;
+D3DVALUE dvScaleX;
+D3DVALUE dvScaleY;
+D3DVALUE dvMaxX;
+D3DVALUE dvMaxY;
+D3DVALUE dvMinZ;
+D3DVALUE dvMaxZ;
+};

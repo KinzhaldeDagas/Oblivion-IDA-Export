@@ -1,4 +1,5 @@
+// QueuedDistantLOD formatter label helper.
 char __thiscall sub_435220(const char **this, char *a2)
 {
-  return sub_434D40(this, a2, "Distant LOD");
+  return sub_434D40(this, a2, "Distant LOD"); /*0x43522f*/
 }

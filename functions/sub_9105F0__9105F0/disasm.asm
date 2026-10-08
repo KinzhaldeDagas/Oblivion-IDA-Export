@@ -78,7 +78,7 @@
 0x9106AA: mov     eax, [ebp+24h]
 0x9106AD: mov     [esp+1Ch+var_4], dl
 0x9106B1: lea     edx, [esp+1Ch+var_C]
-0x9106B5: mov     dword ptr [esp+1Ch+var_C], eax
+0x9106B5: mov     [esp+1Ch+var_C], eax
 0x9106B9: push    edx
 0x9106BA: fstp    [esp+20h+var_8]
 0x9106BE: mov     eax, [ecx]

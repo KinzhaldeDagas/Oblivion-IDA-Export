@@ -1,1 +1,1 @@
-TESObjectAPPA
+struct TESObjectAPPA;

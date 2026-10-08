@@ -1,27 +1,29 @@
-int __thiscall sub_7C62D0(_DWORD *this, unsigned __int16 a2)
+void *__thiscall ShadowSceneLight_GetObjectGeometryAtIndex(
+        ShadowSceneLight_DecodedLayout *light,
+        unsigned __int16 index)
 {
   int v2; // esi
-  int result; // eax
-  int v4; // eax
-  _DWORD *v5; // ecx
-  int *v6; // eax
+  void *result; // eax
+  MEF_RefListNode32 *objectListHead_E8; // eax
+  struct MEF_RefListNode32 *next; // ecx
+  void **p_payload; // eax
 
-  v2 = a2;
-  if ( (unsigned int)a2 >= *(this + 0x3C) )
-    return 0;
-  v4 = *(this + 0x3A);
-  v5 = *(_DWORD **)v4;
-  result = *(_DWORD *)(v4 + 8);
-  if ( a2 )
+  v2 = index; /*0x7c62d1*/
+  if ( index >= light->objectListCount_F0 ) /*0x7c62dc*/
+    return 0; /*0x7c62de*/
+  objectListHead_E8 = light->objectListHead_E8; /*0x7c62e6*/
+  next = objectListHead_E8->next; /*0x7c62ec*/
+  result = objectListHead_E8->payload; /*0x7c62f1*/
+  if ( index ) /*0x7c62f3*/
   {
-    do
+    do /*0x7c62ff*/
     {
-      --v2;
-      v6 = v5 + 2;
-      v5 = (_DWORD *)*v5;
-      result = *v6;
+      --v2; /*0x7c62f5*/
+      p_payload = &next->payload; /*0x7c62f8*/
+      next = next->next; /*0x7c62fb*/
+      result = *p_payload; /*0x7c62fd*/
     }
-    while ( v2 );
+    while ( v2 ); /*0x7c62ff*/
   }
-  return result;
+  return result; /*0x7c62e0*/
 }

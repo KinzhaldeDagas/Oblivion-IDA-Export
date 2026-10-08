@@ -18,7 +18,7 @@
 0x707CD1: lea     ebp, [esi+98h]
 0x707CD7: mov     ecx, ebp
 0x707CD9: mov     [esp+24h+var_4], 2
-0x707CE1: call    NiTPointerList__FreeAllNodes
+0x707CE1: call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.
 0x707CE6: mov     edi, [esi+0A8h]
 0x707CEC: test    edi, edi
 0x707CEE: mov     ebx, ds:0A2807Ch
@@ -67,3 +67,18 @@
 0x707D69: pop     ebx
 0x707D6A: add     esp, 10h
 0x707D6D: retn
+0x9C9720: mov     ecx, [ebp-10h]; this
+0x9C9723: jmp     ??1NiDitherProperty@@UAE@XZ; NiDitherProperty::~NiDitherProperty(void)
+0x9C9728: mov     ecx, [ebp-10h]
+0x9C972B: add     ecx, 98h ; '˜'
+0x9C9731: jmp     j_??1?$NiTPointerList@V?$NiPointer@VNiProperty@@@@@@UAE@XZ; NiTPointerList<NiPointer<NiProperty>>::~NiTPointerList<NiPointer<NiProperty>>(void)
+0x9C9736: mov     ecx, [ebp-10h]
+0x9C9739: add     ecx, 0A8h ; '¨'; slot
+0x9C973F: jmp     NiPointerSlot_Release
+0x9C9744: mov     edx, [esp+arg_4]
+0x9C9748: lea     eax, [edx-14h]
+0x9C974B: mov     ecx, [edx-18h]
+0x9C974E: xor     ecx, eax
+0x9C9750: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C9755: mov     eax, offset stru_AF1FC8
+0x9C975A: jmp     ___CxxFrameHandler3

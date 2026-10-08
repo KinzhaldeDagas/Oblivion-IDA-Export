@@ -14,6 +14,6 @@
 0x42AE9F: mov     edx, [ecx+4]
 0x42AEA2: mov     [eax+14h], edx
 0x42AEA5: mov     ecx, [ecx+8]
-0x42AEA8: fstp    dword ptr [eax+1Ch]
+0x42AEA8: fstp    dword ptr [eax+1Ch]; Constructor stores fifth XPSL dword as runtime rotZ at +0x1C. Repeated XPSL does not update it, and the plugin writer does not read it.
 0x42AEAB: mov     [eax+18h], ecx
 0x42AEAE: retn    10h

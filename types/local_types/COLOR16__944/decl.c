@@ -1,1 +1,1 @@
-COLOR16
+typedef USHORT COLOR16;

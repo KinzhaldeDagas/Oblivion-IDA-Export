@@ -1,19 +1,36 @@
 {
-  "callees_count": 35,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 20,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_562E20",
+  "chunks": [
+    [
+      "0x562E20",
+      "0x563094"
+    ],
+    [
+      "0x9BD2B0",
+      "0x9BD300"
+    ]
+  ],
+  "chunks_sha256": "fae42e457dbf4e51844e1db4c8a92d2a1344a1b6558b68da759354173c961302",
+  "comment_regular": "\n[2026-10-06 directional billboard] Verified comparison: Fallout 0x8246C6E0 also builds a single billboard, but uses SpeedTreeBillboardShaderProperty/texture sets. Oblivion uses NiTexturingProperty and AssignShadersRecursive shader 1. Do not transplant Fallout renderer layouts.\n\n2026-05-25 render dispatch recheck: simple STBB builder creates TES4 billboard screen geometry without calling CSpeedTreeRT::GetGeometry(0x08). It is not a functional 360 billboard exporter.",
+  "comment_repeatable": "CULLING 2026-06-11 recheck: stock runtime simple SpeedTree billboard creates NiTriShape named STBB; CPU behind-camera cull should classify this exact shape but use the parent NiBillboardNode/BSTreeNode world bound, not the screen-element shape bound.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "BSTreeModel_CreateBillboardGeometry",
   "end_ea": "0x563094",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_562E20",
+  "name": "BSTreeModel_CreateBillboardGeometry",
   "segment": ".text",
   "sha256": "f28cb7312a6efac80b2a3bdf53c341583fd44357c900655793debfc27b71c61c",
   "size": 628,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x562E20",
-  "type": "int __thiscall(char *this, float *)",
-  "xrefs_from_count": 221,
+  "total_chunk_size": 708,
+  "type": "void __thiscall(BSTreeModel_OblivionLayout_058 *this, TESObjectTREE_OblivionLayout_080_NiTArrayVerified *tree)",
+  "xrefs_from_count": 241,
   "xrefs_to_count": 1
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x776D40",
-    "line": "mov     eax, [esp+arg_10]",
+    "line": "mov     eax, [esp+elementCount]; MoonSugarEffect decode: strided memcpy helper used by fallback packer to copy source vertex arrays into mapped stream bytes.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x776D4E",
-    "line": "mov     ebp, [esp+8+arg_8]",
+    "line": "mov     ebp, [esp+8+destinationStride]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -67,31 +67,31 @@
   },
   {
     "ea": "0x776D5C",
-    "line": "mov     [esp+10h+arg_10], eax",
+    "line": "mov     [esp+10h+elementCount], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x776D60",
-    "line": "push    ebx; Size",
+    "line": "push    ebx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x776D61",
-    "line": "push    edi; Src",
+    "line": "push    edi; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x776D62",
-    "line": "push    esi; Dst",
+    "line": "push    esi; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x776D63",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x776D6F",
-    "line": "sub     [esp+10h+arg_10], 1",
+    "line": "sub     [esp+10h+elementCount], 1",
     "mnemonic": "sub",
     "size": 5
   },

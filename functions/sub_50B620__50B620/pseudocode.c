@@ -19,33 +19,33 @@ char __usercall sub_50B620@<al>(
   void *ParentMenu; // eax
   _BYTE *v18; // eax
 
-  if ( !a14 )
-    return 0;
-  v15 = (PlayerCharacter *)OblivionDynamicCast(
+  if ( !a14 ) /*0x50b626*/
+    return 0; /*0x50b628*/
+  v15 = (PlayerCharacter *)OblivionDynamicCast( /*0x50b63a*/
                              a14,
                              0,
                              (struct _s_RTTICompleteObjectLocator *)&TESObjectREFR `RTTI Type Descriptor',
                              &Actor `RTTI Type Descriptor',
                              0);
-  if ( v15 )
+  if ( v15 ) /*0x50b644*/
   {
-    if ( v15 == TESDataHandler_g_PlayerRef )
+    if ( v15 == reference ) /*0x50b64c*/
     {
-      OpenMenuTile = (_DWORD *)Menu_GetOpenMenuTile(0x3F1);
-      if ( OpenMenuTile )
+      OpenMenuTile = (_DWORD *)Menu_GetOpenMenuTile(0x3F1); /*0x50b653*/
+      if ( OpenMenuTile ) /*0x50b65d*/
       {
-        ParentMenu = (void *)Tile_GetParentMenu(OpenMenuTile);
-        v18 = OblivionDynamicCast(
+        ParentMenu = (void *)Tile_GetParentMenu(OpenMenuTile); /*0x50b66f*/
+        v18 = OblivionDynamicCast( /*0x50b675*/
                 ParentMenu,
                 0,
                 (struct _s_RTTICompleteObjectLocator *)&Menu `RTTI Type Descriptor',
                 &DialogMenu `RTTI Type Descriptor',
                 0);
-        if ( v18 )
-          v18[0x95] = 1;
+        if ( v18 ) /*0x50b67f*/
+          v18[0x95] = 1; /*0x50b681*/
       }
-      Player_GoToJail_((int)TESDataHandler_g_PlayerRef, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, 0);
+      Player_GoToJail_((int)reference, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, 0); /*0x50b690*/
     }
   }
-  return 1;
+  return 1; /*0x50b62a*/
 }

@@ -5,7 +5,7 @@
 0x6EC6C7: test    eax, eax
 0x6EC6C9: jz      short loc_6EC6DB
 0x6EC6CB: push    eax
-0x6EC6CC: call    FormHeapFree
+0x6EC6CC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6EC6D1: add     esp, 4
 0x6EC6D4: mov     dword ptr [edi+4], 0
 0x6EC6DB: mov     ebx, [esp+8+Src]

@@ -1,118 +1,189 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "IStorageVtbl",
+  "definition": "struct IStorageVtbl\n{\nHRESULT_0 (*QueryInterface)(IStorage_0 *, const IID *const, void **);\nULONG (*AddRef)(IStorage_0 *);\nULONG (*Release)(IStorage_0 *);\nHRESULT_0 (*CreateStream)(IStorage_0 *, LPCOLESTR, DWORD, DWORD, DWORD, IStream_0 **);\nHRESULT_0 (*OpenStream)(IStorage_0 *, LPCOLESTR, void *, DWORD, DWORD, IStream_0 **);\nHRESULT_0 (*CreateStorage)(IStorage_0 *, LPCOLESTR, DWORD, DWORD, DWORD, IStorage_0 **);\nHRESULT_0 (*OpenStorage)(IStorage_0 *, LPCOLESTR, IStorage_0 *, DWORD, SNB, DWORD, IStorage_0 **);\nHRESULT_0 (*CopyTo)(IStorage_0 *, DWORD, const IID *, SNB, IStorage_0 *);\nHRESULT_0 (*MoveElementTo)(IStorage_0 *, LPCOLESTR, IStorage_0 *, LPCOLESTR, DWORD);\nHRESULT_0 (*Commit)(IStorage_0 *, DWORD);\nHRESULT_0 (*Revert)(IStorage_0 *);\nHRESULT_0 (*EnumElements)(IStorage_0 *, DWORD, void *, DWORD, IEnumSTATSTG_0 **);\nHRESULT_0 (*DestroyElement)(IStorage_0 *, LPCOLESTR);\nHRESULT_0 (*RenameElement)(IStorage_0 *, LPCOLESTR, LPCOLESTR);\nHRESULT_0 (*SetElementTimes)(IStorage_0 *, LPCOLESTR, const FILETIME *, const FILETIME *, const FILETIME *);\nHRESULT_0 (*SetClass)(IStorage_0 *, const CLSID *const);\nHRESULT_0 (*SetStateBits)(IStorage_0 *, DWORD, DWORD);\nHRESULT_0 (*Stat)(IStorage_0 *, STATSTG *, DWORD);\n}\n",
   "id": 18374686479672028803,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QueryInterface",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IStorage_0 *, const IID *const, void **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddRef",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(IStorage_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Release",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(IStorage_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CreateStream",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IStorage_0 *, LPCOLESTR, DWORD, DWORD, DWORD, IStream_0 **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "OpenStream",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IStorage_0 *, LPCOLESTR, void *, DWORD, DWORD, IStream_0 **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CreateStorage",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IStorage_0 *, LPCOLESTR, DWORD, DWORD, DWORD, IStorage_0 **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "OpenStorage",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IStorage_0 *, LPCOLESTR, IStorage_0 *, DWORD, SNB, DWORD, IStorage_0 **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CopyTo",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IStorage_0 *, DWORD, const IID *, SNB, IStorage_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "MoveElementTo",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IStorage_0 *, LPCOLESTR, IStorage_0 *, LPCOLESTR, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Commit",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IStorage_0 *, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Revert",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IStorage_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "EnumElements",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IStorage_0 *, DWORD, void *, DWORD, IEnumSTATSTG_0 **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DestroyElement",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IStorage_0 *, LPCOLESTR)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RenameElement",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IStorage_0 *, LPCOLESTR, LPCOLESTR)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetElementTimes",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IStorage_0 *, LPCOLESTR, const FILETIME *, const FILETIME *, const FILETIME *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetClass",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IStorage_0 *, const CLSID *const)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetStateBits",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IStorage_0 *, DWORD, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Stat",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IStorage_0 *, STATSTG *, DWORD)"
     }
   ],
   "name": "IStorageVtbl",
+  "ordinal": 1878,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 72
 }

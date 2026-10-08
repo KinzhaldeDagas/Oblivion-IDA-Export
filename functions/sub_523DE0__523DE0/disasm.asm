@@ -42,7 +42,7 @@
 0x523E5A: cmp     eax, ebp
 0x523E5C: mov     [esp+20h+var_4], ebp
 0x523E60: jz      short loc_523E7F
-0x523E62: push    offset sub_7016A0; a5
+0x523E62: push    offset NiPointerSlot_Release; a5
 0x523E67: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x523E6C: push    esi; size
 0x523E6D: lea     ebx, [eax+4]
@@ -66,3 +66,15 @@
 0x523E9A: pop     ebx
 0x523E9B: add     esp, 0Ch
 0x523E9E: retn    8
+0x9C6200: mov     eax, [ebp+4]
+0x9C6203: push    eax
+0x9C6204: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C6209: pop     ecx
+0x9C620A: retn
+0x9C620B: mov     edx, [esp+arg_4]
+0x9C620F: lea     eax, [edx-10h]
+0x9C6212: mov     ecx, [edx-14h]
+0x9C6215: xor     ecx, eax
+0x9C6217: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C621C: mov     eax, offset stru_AEE7E8
+0x9C6221: jmp     ___CxxFrameHandler3

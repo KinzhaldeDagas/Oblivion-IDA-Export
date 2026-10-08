@@ -1,9 +1,10 @@
-int __usercall MagicCaster_ApplyActiveMagicItem_::AOE_VFX_@<eax>(
+// Magic caster active-magic-item area-effect path. Creates area VFX and plays SpecialIdle_AreaEffect through controller-manager helper.
+void __usercall MagicCaster_ApplyActiveMagicItem_::AOE_VFX_(
         float *a1@<eax>,
         TESObjectREFR *a2@<edi>,
         char *a3@<esi>,
-        double a4@<st2>,
-        double a5@<st0>,
+        double a4@<st0>,
+        double a5@<st1>,
         int a6,
         int a7,
         int a8,
@@ -19,12 +20,12 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::AOE_VFX_@<eax>(
         int a18,
         int a19,
         int a20,
-        double a21,
-        int a22,
+        double self,
+        int unknownChildName,
         int a23,
-        int a24,
-        int a25,
-        int a26,
+        float a24,
+        float a25,
+        float a26,
         int a27,
         int a28,
         const char *a29,
@@ -33,205 +34,122 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::AOE_VFX_@<eax>(
         int a32,
         int a33,
         int a34,
-        float a35,
-        float a36)
+        float parentNode,
+        float unknownChildTag)
 {
   float v36; // ebp
-  UInt32 v37; // ebx
-  TESObjectCELL *ParentCell; // eax
+  float v37; // ebx
+  TESObjectCELL *DwordAtOffset40; // eax
   TESObjectCELL *v39; // eax
   TESObjectCELL *v40; // eax
-  float *v41; // edi
-  int *SafeFloatPointer; // eax
+  BSTempEffectParticle *v41; // edi
+  float *SafeFloatPointer; // eax
   float *v43; // ecx
-  int *v44; // eax
-  int v45; // ecx
-  int v47; // [esp+4h] [ebp-28h]
-  const char *v48; // [esp+8h] [ebp-24h]
-  float v49; // [esp+Ch] [ebp-20h]
-  float v50; // [esp+10h] [ebp-1Ch]
-  int v51; // [esp+14h] [ebp-18h]
-  int v52; // [esp+18h] [ebp-14h]
-  float *v53; // [esp+1Ch] [ebp-10h]
-  const char *v54; // [esp+20h] [ebp-Ch]
-  signed int v55; // [esp+24h] [ebp-8h]
-  int v56; // [esp+6Ch] [ebp+40h]
+  float *v44; // eax
+  NiAVObject *particleNode; // ecx
+  float v46; // [esp+4h] [ebp-28h]
+  const char *v47; // [esp+8h] [ebp-24h]
+  float v48; // [esp+Ch] [ebp-20h]
+  float v49; // [esp+10h] [ebp-1Ch]
+  float v50; // [esp+14h] [ebp-18h]
+  int v51; // [esp+18h] [ebp-14h]
+  float *v52; // [esp+1Ch] [ebp-10h]
+  const char *v53; // [esp+20h] [ebp-Ch]
+  signed int scale; // [esp+24h] [ebp-8h]
+  float selfb; // [esp+6Ch] [ebp+40h]
+  BSTempEffectParticle *selfa; // [esp+6Ch] [ebp+40h]
+  double selfc; // [esp+6Ch] [ebp+40h]
 
-  v36 = *a1;
-  v37 = *((_DWORD *)a1 + 1);
-  a29 = *((const char **)a1 + 2);
-  if ( a36 != 0.0 )
+  v36 = *a1; /*0x69b6bc*/
+  v37 = a1[1]; /*0x69b6be*/
+  a29 = *((const char **)a1 + 2); /*0x69b6c1*/
+  if ( unknownChildTag == 0.0 ) /*0x69b6c5*/
+    JUMPOUT(0x69B8FF); /*0x69b8ff*/
+  v52 = (float *)LODWORD(unknownChildTag); /*0x69b6e5*/
+  v51 = (*(int (__usercall **)@<eax>(char *@<ecx>, double@<st0>, double@<st1>))(*(_DWORD *)a3 + 0x30))(a3, a4, a5); /*0x69b6ed*/
+  DwordAtOffset40 = (TESObjectCELL *)Shared_GetDwordAtOffset40(a2); /*0x69b6f0*/
+  MagicCaster_ExplosionCalcs____( /*0x69b709*/
+    a3,
+    __SPAIR64__(LODWORD(v37), LODWORD(v36)),
+    (unsigned int)a29,
+    DwordAtOffset40,
+    v51,
+    v52,
+    (int)&unknownChildName,
+    COERCE_INT(1.0),
+    COERCE_INT(1.0));
+  if ( !a34 || !OB_CompactString_Length_010201A0((void *)(a34 + 0x18)) ) /*0x69b720*/
+MagicCaster_ApplyActiveMagicItem___AfterVFX:
+    JUMPOUT(0x69B974); /*0x69b974*/
+  parentNode = -a2->member.rot.x; /*0x69b732*/
+  selfb = cos(parentNode); /*0x69b747*/
+  parentNode = sin(parentNode); /*0x69b764*/
+  a24 = -parentNode; /*0x69b770*/
+  a25 = selfb; /*0x69b778*/
+  a26 = 0.0; /*0x69b77e*/
+  Shared_GetDwordAtOffset40(a2); /*0x69b782*/
+  scale = sub_4C9BE0(a13); /*0x69b796*/
+  v39 = (TESObjectCELL *)Shared_GetDwordAtOffset40(a2); /*0x69b799*/
+  parentNode = COERCE_FLOAT(sub_441800(v39, scale, 3u)); /*0x69b7a7*/
+  selfa = (BSTempEffectParticle *)FormHeapAlloc(0x20u); /*0x69b7b6*/
+  a32 = 0; /*0x69b7bc*/
+  if ( selfa ) /*0x69b7c4*/
   {
-    v53 = (float *)LODWORD(a36);
-    v52 = (*(int (__thiscall **)(char *))(*(_DWORD *)a3 + 0x30))(a3);
-    ParentCell = TESObjectREFR_GetParentCell(a2);
-    MagicCaster_ExplosionCalcs____(
-      a3,
-      __SPAIR64__(v37, LODWORD(v36)),
-      *(float *)&a29,
-      ParentCell,
-      v52,
-      v53,
-      COERCE_FLOAT(&a22),
-      1.0,
-      1.0);
-    if ( !a34 || !sub_449190(a34 + 0x18) )
-      return MagicCaster_ApplyActiveMagicItem_::AfterVFX(
-               a3,
-               a6,
-               a7,
-               a8,
-               a9,
-               a10,
-               a11,
-               a12,
-               (int)a13,
-               a14,
-               a15,
-               a16,
-               a17,
-               a18,
-               a19,
-               a20,
-               SLODWORD(a21),
-               SHIDWORD(a21),
-               a22,
-               a23,
-               a24,
-               a25,
-               a26,
-               a27,
-               a28,
-               (int)a29,
-               a30,
-               a31,
-               a32,
-               a33,
-               a34);
-    a35 = -a2->member.rot.x;
-    *(float *)&v56 = cos(a35);
-    a35 = sin(a35);
-    *(float *)&a24 = -a35;
-    a25 = v56;
-    *(float *)&a26 = 0.0;
-    TESObjectREFR_GetParentCell(a2);
-    v55 = sub_4C9BE0(a13);
-    v39 = TESObjectREFR_GetParentCell(a2);
-    a35 = COERCE_FLOAT(sub_441800(v39, v55, 3u));
-    LODWORD(a21) = FormHeapAlloc(0x20u);
-    a32 = 0;
-    if ( LODWORD(a21) )
-    {
-      v54 = a29;
-      v49 = *(float *)&a24;
-      v50 = *(float *)&a25;
-      v51 = a26;
-      v48 = (const char *)(*(int (__thiscall **)(int))(*(_DWORD *)(a34 + 0x18) + 0x14))(a34 + 0x18);
-      v47 = LODWORD(a35);
-      v40 = TESObjectREFR_GetParentCell(a2);
-      v41 = sub_5713F0((void *)LODWORD(a21), (int)v40, 1.0, v47, v48, v49, v50, v51, v36, v37, v54, 1.0, 0);
-    }
-    else
-    {
-      v41 = 0;
-    }
-    a32 = 0xFFFFFFFF;
-    sub_570C00(v41, "SpecialIdle_AreaEffect");
-    if ( !*((_DWORD *)v41 + 6) )
-    {
-LABEL_14:
-      sub_678D30((int *)&ActorProcessManager_ptr, (volatile LONG *)v41);
-      return MagicCaster_ApplyActiveMagicItem_::AfterVFX(
-               a3,
-               a6,
-               a7,
-               a8,
-               a9,
-               a10,
-               a11,
-               a12,
-               (int)a13,
-               a14,
-               a15,
-               a16,
-               a17,
-               a18,
-               a19,
-               a20,
-               SLODWORD(a21),
-               SHIDWORD(a21),
-               a22,
-               a23,
-               a24,
-               a25,
-               a26,
-               a27,
-               a28,
-               (int)a29,
-               a30,
-               a31,
-               a32,
-               a33,
-               a34);
-    }
-    a36 = COERCE_FLOAT(EffectItem_GetArea((_DWORD *)LODWORD(a36)));
-    a21 = (double)SLODWORD(a36);
-    a36 = *(float *)GameSetting_GetSafeFloatPointer((int *)&flt_B37ED0) * a21;
-    SafeFloatPointer = GameSetting_GetSafeFloatPointer((int *)&flt_B37ED8);
-    if ( *(float *)SafeFloatPointer >= (double)a36 )
-    {
-      v44 = GameSetting_GetSafeFloatPointer((int *)&flt_B37EE0);
-      if ( *(float *)v44 <= (double)a36 )
-      {
-LABEL_13:
-        v45 = *((_DWORD *)v41 + 6);
-        a36 = fabs(a36);
-        *(float *)(v45 + 0x60) = a36;
-        goto LABEL_14;
-      }
-      v43 = &flt_B37EE0;
-    }
-    else
-    {
-      v43 = &flt_B37ED8;
-    }
-    a36 = *(float *)GameSetting_GetSafeFloatPointer((int *)v43);
-    goto LABEL_13;
+    v53 = a29; /*0x69b7e0*/
+    v48 = a24; /*0x69b7ec*/
+    v49 = a25; /*0x69b7f2*/
+    v50 = a26; /*0x69b7fc*/
+    v47 = (const char *)(*(int (__thiscall **)(int))(*(_DWORD *)(a34 + 0x18) + 0x14))(a34 + 0x18); /*0x69b80c*/
+    v46 = parentNode; /*0x69b814*/
+    v40 = (TESObjectCELL *)Shared_GetDwordAtOffset40(a2); /*0x69b81b*/
+    v41 = BSTempEffectParticle_Constructor( /*0x69b82a*/
+            selfa,
+            v40,
+            1.0,
+            (NiNode *)LODWORD(v46),
+            v47,
+            v48,
+            v49,
+            v50,
+            v36,
+            v37,
+            *(float *)&v53,
+            1.0,
+            0);
   }
-  return MagicCaster_ApplyActiveMagicItem_::TargetVFX_(
-           v37,
-           v36,
-           a3,
-           a4,
-           a5,
-           a6,
-           a7,
-           a8,
-           a9,
-           a10,
-           a11,
-           a12,
-           (int)a13,
-           a14,
-           a15,
-           a16,
-           a17,
-           a18,
-           a19,
-           a20,
-           SLODWORD(a21),
-           SHIDWORD(a21),
-           a22,
-           a23,
-           a24,
-           a25,
-           a26,
-           a27,
-           a28,
-           (int)a29,
-           a30,
-           a31,
-           a32,
-           a33,
-           a34);
+  else
+  {
+    v41 = 0; /*0x69b82e*/
+  }
+  a32 = 0xFFFFFFFF; /*0x69b837*/
+  PlaySpecialIdleOnControllerManager(v41, "SpecialIdle_AreaEffect");// AOE VFX path starts SpecialIdle_AreaEffect on spawned effect object's controller manager via sub_570C00; no actor KFFZ lookup. /*0x69b83f*/
+  if ( !v41->particleNode ) /*0x69b848*/
+  {
+LABEL_14:
+    ActorProcessManager_RegisterTempEffect((ActorProcessManager *)&qword_B3BB2C[0x75], &v41->base); /*0x69b8f2*/
+    goto MagicCaster_ApplyActiveMagicItem___AfterVFX; /*0x69b8fd*/
+  }
+  unknownChildTag = COERCE_FLOAT(EffectItem_GetArea((_DWORD *)LODWORD(unknownChildTag))); /*0x69b85a*/
+  selfc = (double)SLODWORD(unknownChildTag); /*0x69b86d*/
+  unknownChildTag = *GameSetting_GetSafeFloatPointer(flt_B37ED0) * selfc; /*0x69b881*/
+  SafeFloatPointer = GameSetting_GetSafeFloatPointer(&flt_B37ED0[2]); /*0x69b888*/
+  if ( *SafeFloatPointer >= (double)unknownChildTag ) /*0x69b89d*/
+  {
+    v44 = GameSetting_GetSafeFloatPointer(&flt_B37ED0[4]); /*0x69b8ab*/
+    if ( *v44 <= (double)unknownChildTag ) /*0x69b8c0*/
+    {
+LABEL_13:
+      particleNode = v41->particleNode; /*0x69b8d5*/
+      unknownChildTag = fabs(unknownChildTag); /*0x69b8e1*/
+      particleNode->members.m_localTransform.scale = unknownChildTag; /*0x69b8ef*/
+      goto LABEL_14; /*0x69b8ef*/
+    }
+    v43 = &flt_B37ED0[4]; /*0x69b8c2*/
+  }
+  else
+  {
+    v43 = &flt_B37ED0[2]; /*0x69b89f*/
+  }
+  unknownChildTag = *GameSetting_GetSafeFloatPointer(v43); /*0x69b8ce*/
+  goto LABEL_13; /*0x69b8ce*/
 }

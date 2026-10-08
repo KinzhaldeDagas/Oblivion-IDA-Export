@@ -19,3 +19,12 @@
 0x4147C8: mov     [esi+8], ebx
 0x4147CB: mov     [esi+0Ch], ebx
 0x4147CE: mov     [esi+4], ebx
+0x9AB190: lea     ecx, [ebp-50h]; this
+0x9AB193: jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
+0x9AB198: mov     edx, [esp+arg_4]
+0x9AB19C: lea     eax, [edx-4Ch]
+0x9AB19F: mov     ecx, [edx-50h]
+0x9AB1A2: xor     ecx, eax
+0x9AB1A4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AB1A9: mov     eax, offset stru_AD80C8
+0x9AB1AE: jmp     ___CxxFrameHandler3

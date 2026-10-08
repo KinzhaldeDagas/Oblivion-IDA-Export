@@ -10,7 +10,7 @@
 0x53D862: call    edx
 0x53D864: test    eax, eax
 0x53D866: jz      short loc_53D876
-0x53D868: cmp     eax, offset dword_B3CFBC
+0x53D868: cmp     eax, offset stru_B3CFBC
 0x53D86D: jz      short loc_53D8B7
 0x53D86F: mov     eax, [eax+4]
 0x53D872: test    eax, eax
@@ -22,7 +22,7 @@
 0x53D87E: jnz     short loc_53D8CC
 0x53D880: mov     eax, [edi+3Ch]
 0x53D883: push    eax
-0x53D884: push    offset dword_B3CF5C
+0x53D884: push    offset stru_B3CF5C
 0x53D889: call    NiRTTI_Cast
 0x53D88E: mov     esi, eax
 0x53D890: add     esp, 8

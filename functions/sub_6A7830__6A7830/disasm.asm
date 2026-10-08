@@ -31,29 +31,29 @@
 0x6A7892: sub     esp, 0Ch
 0x6A7895: mov     [esp+6Ch+var_4C], edx
 0x6A7899: fld     [esp+6Ch+var_4C]
-0x6A789D: fstp    [esp+6Ch+var_64]; float
+0x6A789D: fstp    [esp+6Ch+rollY]; rollY
 0x6A78A1: mov     [esp+6Ch+var_50], ecx
 0x6A78A5: fld     [esp+6Ch+var_50]
 0x6A78A9: mov     [esp+6Ch+var_48], eax
-0x6A78AD: fstp    [esp+6Ch+var_68]; float
-0x6A78B1: lea     ecx, [esp+6Ch+var_44]
+0x6A78AD: fstp    [esp+6Ch+pitchX]; pitchX
+0x6A78B1: lea     ecx, [esp+6Ch+var_44]; this
 0x6A78B5: fld     [esp+6Ch+var_48]
-0x6A78B9: fstp    [esp+6Ch+var_6C]; float
-0x6A78BC: call    sub_7117C0
+0x6A78B9: fstp    [esp+6Ch+yawZ]; yawZ
+0x6A78BC: call    NiMatrix33_SetEulerZXY; Writes a NiMatrix33 from Euler angles in Z*(X*Y) order: yawZ, pitchX, rollY. All observed callers use the written matrix and ignore incidental EAX.
 0x6A78C1: test    esi, esi
 0x6A78C3: fld     dword ptr [edi+44h]
 0x6A78C6: fadd    dword ptr ds:0B38048h
 0x6A78CC: fstp    [esp+60h+var_54]
-0x6A78D0: fld     [esp+60h+var_40]
+0x6A78D0: fld     [esp+60h+var_44.data+4]
 0x6A78D4: fld     [esp+60h+var_54]
 0x6A78D8: fld     st
 0x6A78DA: fmulp   st(2), st
 0x6A78DC: fxch    st(1)
 0x6A78DE: fstp    [esp+60h+var_50]
-0x6A78E2: fld     [esp+60h+var_34]
+0x6A78E2: fld     [esp+60h+var_44.data+10h]
 0x6A78E6: fmul    st, st(1)
 0x6A78E8: fstp    [esp+60h+var_4C]
-0x6A78EC: fmul    [esp+60h+var_28]
+0x6A78EC: fmul    [esp+60h+var_44.data+1Ch]
 0x6A78F0: fstp    [esp+60h+var_48]
 0x6A78F4: fld     [esp+60h+var_50]
 0x6A78F8: fld     qword ptr ds:0A39088h
@@ -103,7 +103,7 @@
 0x6A7980: mov     esp, ebp
 0x6A7982: pop     ebp
 0x6A7983: retn
-0x6A7984: push    offset Vector3_InitValue?
+0x6A7984: push    offset g_zeroNiPoint3
 0x6A7989: mov     ecx, esi
 0x6A798B: call    sub_4D9960
 0x6A7990: mov     ecx, [esp+60h+var_4]

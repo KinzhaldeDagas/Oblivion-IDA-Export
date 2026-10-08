@@ -10,10 +10,10 @@ int __userpurge ValueModifierEffect_ModifyAV_::CheckHostility@<eax>(
 {
   _DWORD *v8; // ecx
 
-  v8 = *(_DWORD **)(a3 + 0xC);
-  if ( !v8[4] || !EffectItem_IsHostile(v8) )
-    a1 = 0;
-  if ( (*(_DWORD *)(*(_DWORD *)(*(_DWORD *)(a3 + 0xC) + 0x1C) + 0x58) & 2) == 0 )
-    JUMPOUT(0x6A8574);
+  v8 = *(_DWORD **)(a3 + 0xC); /*0x6a8531*/
+  if ( !v8[4] || !EffectItem_IsHostile(v8) ) /*0x6a853a*/
+    a1 = 0; /*0x6a8543*/
+  if ( (*(_DWORD *)(*(_DWORD *)(*(_DWORD *)(a3 + 0xC) + 0x1C) + 0x58) & 2) == 0 ) /*0x6a8553*/
+    JUMPOUT(0x6A8574); /*0x6a8574*/
   return ValueModifierEffect_ModifyAV_::ApplyRecoverableMod(a1, a2, a3, a4, a5, a6, a7, a8);
 }

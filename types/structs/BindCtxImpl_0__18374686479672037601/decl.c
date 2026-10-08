@@ -1,1 +1,1 @@
-BindCtxImpl_0
+typedef BindCtxImpl BindCtxImpl_0;

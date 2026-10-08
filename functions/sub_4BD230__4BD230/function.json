@@ -1,19 +1,36 @@
 {
-  "callees_count": 22,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_4BD230",
+  "chunks": [
+    [
+      "0x4BD230",
+      "0x4BD379"
+    ],
+    [
+      "0x9B42E0",
+      "0x9B431C"
+    ]
+  ],
+  "chunks_sha256": "970edc5b10702ece2d7f845625224ecbcd601aa785713148b99e9345244551bc",
+  "comment_regular": "Verified DistantLODLoaderTaskData destructor: frees every TESBoundObject-keyed cell payload/map, releases instancedLODNode (+0x1C) and cellLODBuffer (+0x20), then destroys the embedded map.",
+  "comment_repeatable": "Verified DistantLODLoaderTaskData destructor: frees every TESBoundObject-keyed cell payload/map, releases instancedLODNode (+0x1C) and cellLODBuffer (+0x20), then destroys the embedded map.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
+  "display_name": "DistantLODLoaderTaskData_Destroy",
   "end_ea": "0x4BD379",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4BD230",
+  "name": "DistantLODLoaderTaskData_Destroy",
   "segment": ".text",
   "sha256": "304227dee6cc910c82dd35f46b3a1ad693f2736a942dd90c831f4044ebd64054",
   "size": 329,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4BD230",
-  "type": "void __thiscall(_DWORD *this)",
-  "xrefs_from_count": 136,
+  "total_chunk_size": 389,
+  "type": "void __thiscall(DistantLODLoaderTaskData *this)",
+  "xrefs_from_count": 154,
   "xrefs_to_count": 2
 }

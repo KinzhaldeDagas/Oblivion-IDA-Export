@@ -1,4 +1,4 @@
-0x41E650: push    30h ; '0'; a2
+0x41E650: push    30h ; '0'; Returns the REFR_LIGHT payload from ExtraLight type 0x30; heavily used by TESObjectREF lighting and equipped-light paths.
 0x41E652: call    BaseExtraList_GetExtraData
 0x41E657: test    eax, eax
 0x41E659: jz      short loc_41E65F

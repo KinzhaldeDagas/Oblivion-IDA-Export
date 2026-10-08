@@ -1,1 +1,1 @@
-RemotableHandle
+typedef _RemotableHandle RemotableHandle;

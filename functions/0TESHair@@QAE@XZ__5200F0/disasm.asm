@@ -48,3 +48,21 @@
 0x520194: pop     ebx
 0x520195: add     esp, 10h
 0x520198: retn
+0x9B7D40: mov     ecx, [ebp-10h]; this
+0x9B7D43: jmp     TESForm_destr
+0x9B7D48: mov     ecx, [ebp-10h]
+0x9B7D4B: add     ecx, 18h
+0x9B7D4E: jmp     TESFullName_Initialize
+0x9B7D53: mov     ecx, [ebp-10h]
+0x9B7D56: add     ecx, 24h ; '$'; this
+0x9B7D59: jmp     ??1TESModel@@UAE@XZ; TESModel::~TESModel(void)
+0x9B7D5E: mov     ecx, [ebp-10h]
+0x9B7D61: add     ecx, 3Ch ; '<'; void *
+0x9B7D64: jmp     TESTexture_destr
+0x9B7D69: mov     edx, [esp+arg_4]
+0x9B7D6D: lea     eax, [edx-14h]
+0x9B7D70: mov     ecx, [edx-18h]
+0x9B7D73: xor     ecx, eax
+0x9B7D75: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B7D7A: mov     eax, offset stru_AE25C0
+0x9B7D7F: jmp     ___CxxFrameHandler3

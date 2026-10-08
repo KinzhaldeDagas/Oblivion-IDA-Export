@@ -5,7 +5,7 @@
 0x529AC5: lea     esi, [edi+40h]
 0x529AC8: test    esi, esi
 0x529ACA: jz      short loc_529AE7
-0x529ACC: mov     bl, [esp+0Ch+arg_0]
+0x529ACC: mov     bl, [esp+0Ch+stage]
 0x529AD0: mov     eax, [esi+4]
 0x529AD3: test    eax, eax
 0x529AD5: jnz     short loc_529ADB
@@ -26,7 +26,7 @@
 0x529AF2: test    al, 2
 0x529AF4: jz      short loc_529AFA
 0x529AF6: test    al, 8
-0x529AF8: jz      short loc_529B09
+0x529AF8: jz      short loc_529B09; SetStage reactivates a non-completed quest. A completed quest is reactivated only when questFlags has 0x08, confirmed by the Oblivion Construction Set label 'Allow repeated stages'.
 0x529AFA: or      byte ptr [edi+3Ch], 1
 0x529AFE: mov     edx, [edi]
 0x529B00: mov     eax, [edx+40h]

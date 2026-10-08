@@ -1,58 +1,99 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "IRunnableObjectVtbl",
+  "definition": "struct IRunnableObjectVtbl\n{\nHRESULT_0 (*QueryInterface)(IRunnableObject_0 *, const IID *const, void **);\nULONG (*AddRef)(IRunnableObject_0 *);\nULONG (*Release)(IRunnableObject_0 *);\nHRESULT_0 (*GetRunningClass)(IRunnableObject_0 *, LPCLSID);\nHRESULT_0 (*Run)(IRunnableObject_0 *, LPBINDCTX);\nBOOL (*IsRunning)(IRunnableObject_0 *);\nHRESULT_0 (*LockRunning)(IRunnableObject_0 *, BOOL, BOOL);\nHRESULT_0 (*SetContainedObject)(IRunnableObject_0 *, BOOL);\n}\n",
   "id": 18374686479672037951,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QueryInterface",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IRunnableObject_0 *, const IID *const, void **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddRef",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(IRunnableObject_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Release",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(IRunnableObject_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetRunningClass",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IRunnableObject_0 *, LPCLSID)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Run",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IRunnableObject_0 *, LPBINDCTX)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IsRunning",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(IRunnableObject_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "LockRunning",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IRunnableObject_0 *, BOOL, BOOL)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetContainedObject",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IRunnableObject_0 *, BOOL)"
     }
   ],
   "name": "IRunnableObjectVtbl",
+  "ordinal": 5132,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 32
 }

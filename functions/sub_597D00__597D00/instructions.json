@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x597D1E",
-    "line": "mov     edi, [esp+30h+arg_4]",
+    "line": "mov     edi, [esp+30h+target]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -109,13 +109,13 @@
   },
   {
     "ea": "0x597D31",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x597D33",
-    "line": "call    sub_5893B0",
+    "line": "call    Tile__IsVisible; AchievementsNative evidence: target eligibility helper returns true when the tile and ancestors are not suppressed by the observed flag path; inventory hover uses it before accepting header/item targets.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,13 +139,13 @@
   },
   {
     "ea": "0x597D41",
-    "line": "push    edi; int",
+    "line": "push    edi; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x597D42",
-    "line": "call    sub_58B800",
+    "line": "call    Tile__GetTileByName; Verified XML source resolver. sibling() walks parent child list to current tile, returns following list node, and wraps to head if current is last or not found. It does not filter visible, target, or listindex. sibling(name) compares immediate sibling names case-insensitively. Fallout analogue 0x827DC678.",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x597D60",
-    "line": "call    sub_57F9F0",
+    "line": "call    InterfaceManager__SetCurrentFocusTarget; AchievementsNative evidence: focused tile with xlist=&xitem drives parent xscroll by pulsing the xscroll target's user5 through -999999, tile xscroll, then 0; do not leave scroll target user5 at the desired scroll value.",
     "mnemonic": "call",
     "size": 5
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x597D94",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x597DD4",
-    "line": "call    sub_588D90",
+    "line": "call    sub_588D90; AchievementsNative evidence: stock tile depth helper starts with tile depth and adds parent depth for locus ancestors / top menu child; InventoryMenu hover sets focus box depth to this value minus 0.5.",
     "mnemonic": "call",
     "size": 5
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x597DED",
-    "line": "call    sub_588D90",
+    "line": "call    sub_588D90; AchievementsNative evidence: stock tile depth helper starts with tile depth and adds parent depth for locus ancestors / top menu child; InventoryMenu hover sets focus box depth to this value minus 0.5.",
     "mnemonic": "call",
     "size": 5
   },
@@ -469,19 +469,19 @@
   },
   {
     "ea": "0x597E02",
-    "line": "fstp    [esp+34h+a2]; a3",
+    "line": "fstp    [esp+34h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x597E05",
-    "line": "push    0FABh; a2",
+    "line": "push    0FABh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x597E0A",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -547,31 +547,31 @@
   },
   {
     "ea": "0x597E33",
-    "line": "fstp    [esp+34h+arg_4]",
+    "line": "fstp    [esp+34h+target]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x597E37",
-    "line": "fld     [esp+34h+arg_4]",
+    "line": "fld     [esp+34h+target]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x597E3B",
-    "line": "fstp    [esp+34h+a2]; a3",
+    "line": "fstp    [esp+34h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x597E3E",
-    "line": "push    0FCBh; a2",
+    "line": "push    0FCBh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x597E43",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -625,19 +625,19 @@
   },
   {
     "ea": "0x597E64",
-    "line": "fstp    [esp+34h+a2]; a3",
+    "line": "fstp    [esp+34h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x597E67",
-    "line": "push    0FCAh; a2",
+    "line": "push    0FCAh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x597E6C",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x597E7B",
-    "line": "call    sub_588C50",
+    "line": "call    sub_588C50; AchievementsNative evidence: stock tile X helper starts with tile x and adds ancestor x only when ancestor locus is nonzero; use for inventory focus/popup coordinate mimic.",
     "mnemonic": "call",
     "size": 5
   },
@@ -679,19 +679,19 @@
   },
   {
     "ea": "0x597E88",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x597E8D",
-    "line": "mov     [esp+30h+arg_4], eax",
+    "line": "mov     [esp+30h+target], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x597E91",
-    "line": "fisub   [esp+30h+arg_4]",
+    "line": "fisub   [esp+30h+target]",
     "mnemonic": "fisub",
     "size": 4
   },
@@ -709,31 +709,31 @@
   },
   {
     "ea": "0x597E99",
-    "line": "fstp    [esp+34h+arg_4]",
+    "line": "fstp    [esp+34h+target]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x597E9D",
-    "line": "fld     [esp+34h+arg_4]",
+    "line": "fld     [esp+34h+target]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x597EA1",
-    "line": "fstp    [esp+34h+a2]; a3",
+    "line": "fstp    [esp+34h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x597EA4",
-    "line": "push    0FADh; a2",
+    "line": "push    0FADh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x597EA9",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x597EB0",
-    "line": "call    sub_588CF0",
+    "line": "call    sub_588CF0; AchievementsNative evidence: stock tile Y helper starts with tile y and adds ancestor y only when ancestor locus is nonzero; inventory hover passes this row Y to popup path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -781,19 +781,19 @@
   },
   {
     "ea": "0x597EC5",
-    "line": "fstp    [esp+34h+a2]; a3",
+    "line": "fstp    [esp+34h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x597EC8",
-    "line": "push    0FACh; a2",
+    "line": "push    0FACh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x597ECD",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -817,19 +817,19 @@
   },
   {
     "ea": "0x597EDC",
-    "line": "fstp    [esp+34h+a2]; a3",
+    "line": "fstp    [esp+34h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x597EDF",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x597EE4",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -883,7 +883,7 @@
   },
   {
     "ea": "0x597F07",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -907,7 +907,7 @@
   },
   {
     "ea": "0x597F16",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -937,7 +937,7 @@
   },
   {
     "ea": "0x597F2A",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1231,7 +1231,7 @@
   },
   {
     "ea": "0x597FD1",
-    "line": "call    sub_588D90",
+    "line": "call    sub_588D90; AchievementsNative evidence: stock tile depth helper starts with tile depth and adds parent depth for locus ancestors / top menu child; InventoryMenu hover sets focus box depth to this value minus 0.5.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1279,7 +1279,7 @@
   },
   {
     "ea": "0x597FED",
-    "line": "call    sub_57D7F0",
+    "line": "call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1327,7 +1327,7 @@
   },
   {
     "ea": "0x59800C",
-    "line": "fstp    [esp+30h+arg_4]",
+    "line": "fstp    [esp+30h+target]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1459,7 +1459,7 @@
   },
   {
     "ea": "0x598046",
-    "line": "fld     [esp+38h+arg_4]",
+    "line": "fld     [esp+38h+target]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1483,7 +1483,7 @@
   },
   {
     "ea": "0x598050",
-    "line": "call    sub_588CF0",
+    "line": "call    sub_588CF0; AchievementsNative evidence: stock tile Y helper starts with tile y and adds ancestor y only when ancestor locus is nonzero; inventory hover passes this row Y to popup path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1585,7 +1585,7 @@
   },
   {
     "ea": "0x598085",
-    "line": "fld     [esp+38h+arg_4]",
+    "line": "fld     [esp+38h+target]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1609,7 +1609,7 @@
   },
   {
     "ea": "0x59808F",
-    "line": "call    sub_588CF0",
+    "line": "call    sub_588CF0; AchievementsNative evidence: stock tile Y helper starts with tile y and adds ancestor y only when ancestor locus is nonzero; inventory hover passes this row Y to popup path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1759,7 +1759,7 @@
   },
   {
     "ea": "0x5980D7",
-    "line": "fld     [esp+38h+arg_4]",
+    "line": "fld     [esp+38h+target]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1771,7 +1771,7 @@
   },
   {
     "ea": "0x5980DE",
-    "line": "call    sub_588CF0",
+    "line": "call    sub_588CF0; AchievementsNative evidence: stock tile Y helper starts with tile y and adds ancestor y only when ancestor locus is nonzero; inventory hover passes this row Y to popup path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1807,7 +1807,7 @@
   },
   {
     "ea": "0x5980F2",
-    "line": "call    sub_57BCC0",
+    "line": "call    sub_57BCC0; AchievementsNative evidence: armor/soul/sigil popup wrapper. Args observed from InventoryMenu hover: inventory entry, exposed popup X, source row Y, bottom margin, popup depth; opens/validates MagicPopupMenu then forwards to 0x5B4E10.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1837,7 +1837,7 @@
   },
   {
     "ea": "0x598102",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1915,7 +1915,7 @@
   },
   {
     "ea": "0x59811E",
-    "line": "fstp    [esp+34h+a2]; a3",
+    "line": "fstp    [esp+34h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1927,13 +1927,13 @@
   },
   {
     "ea": "0x598123",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x598128",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2035,7 +2035,7 @@
   },
   {
     "ea": "0x598157",
-    "line": "fstp    [esp+34h+a2]; a3",
+    "line": "fstp    [esp+34h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -2047,13 +2047,13 @@
   },
   {
     "ea": "0x59815C",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x598161",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },

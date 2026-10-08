@@ -13,17 +13,17 @@
 0x5932D4: jz      loc_59336A
 0x5932DA: fld     dword ptr ds:0A379B4h
 0x5932E0: push    ecx
-0x5932E1: fstp    [esp+0Ch+a2]; a3
-0x5932E4: push    1772h; a2
+0x5932E1: fstp    [esp+0Ch+a2]; value
+0x5932E4: push    1772h; propertyCode
 0x5932E9: mov     ecx, edi; this
-0x5932EB: call    Tile_SetFloat
+0x5932EB: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5932F0: mov     edi, [esi+78h]
 0x5932F3: test    edi, edi
 0x5932F5: jz      short loc_593307
 0x5932F7: mov     ecx, edi
 0x5932F9: call    ContainerEntryExtraData_DestroyDataTable
 0x5932FE: push    edi
-0x5932FF: call    FormHeapFree
+0x5932FF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x593304: add     esp, 4
 0x593307: mov     edi, [esi+80h]
 0x59330D: test    edi, edi
@@ -31,7 +31,7 @@
 0x593311: mov     ecx, edi
 0x593313: call    ContainerEntryExtraData_DestroyDataTable
 0x593318: push    edi
-0x593319: call    FormHeapFree
+0x593319: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x59331E: add     esp, 4
 0x593321: mov     edi, [esi+7Ch]
 0x593324: test    edi, edi
@@ -39,7 +39,7 @@
 0x593328: mov     ecx, edi
 0x59332A: call    ContainerEntryExtraData_DestroyDataTable
 0x59332F: push    edi
-0x593330: call    FormHeapFree
+0x593330: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x593335: add     esp, 4
 0x593338: mov     edi, [esi+84h]
 0x59333E: test    edi, edi
@@ -47,10 +47,10 @@
 0x593342: mov     ecx, edi
 0x593344: call    ContainerEntryExtraData_DestroyDataTable
 0x593349: push    edi
-0x59334A: call    FormHeapFree
+0x59334A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x59334F: add     esp, 4
 0x593352: mov     ecx, esi; int
-0x593354: call    sub_584740
+0x593354: call    Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.
 0x593359: call    sub_578FE0
 0x59335E: cmp     eax, 1
 0x593361: jnz     short loc_59336A

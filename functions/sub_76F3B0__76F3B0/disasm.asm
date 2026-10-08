@@ -50,7 +50,6 @@
 0x76F435: mov     [esp+1Ch+var_4], ebx
 0x76F439: jbe     short loc_76F4AD
 0x76F43B: jmp     short loc_76F444
-0x76F43D: align 10h
 0x76F440: mov     ecx, [esp+1Ch+arg_0]
 0x76F444: xor     edx, edx
 0x76F446: test    cx, cx

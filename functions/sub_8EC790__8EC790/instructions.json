@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8EC790",
-    "line": "push    ebp",
+    "line": "push    ebp; TES4 authoritative: active-surface constraint solver. Advances along input motion, activates earliest blocking planes, and recomputes sliding motion. It does not create a step-up/mantle displacement by itself.",
     "mnemonic": "push",
     "size": 1
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x8EC7A2",
-    "line": "mov     eax, [edi+40h]",
+    "line": "mov     eax, [edi+40h]; Input +0x40 is remaining solve distance/time scalar; output starts as a copy of input point and motion vector.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x8EC7B9",
-    "line": "mov     eax, [edi+4Ch]",
+    "line": "mov     eax, [edi+4Ch]; Input +0x4C is surface-constraint count; each active surface has a 0x10-byte state entry in output+0x24.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x8EC7D7",
-    "line": "add     eax, edx",
+    "line": "add     eax, edx; Initializes per-surface state entries: selected/used bytes and accumulated distance/bias fields reset to zero.",
     "mnemonic": "add",
     "size": 2
   },
@@ -270,12 +270,6 @@
     "size": 2
   },
   {
-    "ea": "0x8EC81D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x8EC820",
     "line": "mov     ecx, [esp+70h+var_60]",
     "mnemonic": "mov",
@@ -349,7 +343,7 @@
   },
   {
     "ea": "0x8EC847",
-    "line": "cmp     [esp+70h+var_40], ecx",
+    "line": "cmp     [esp+70h+solverState], ecx",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -439,7 +433,7 @@
   },
   {
     "ea": "0x8EC884",
-    "line": "movaps  xmm2, xmmword ptr [eax+ebx+10h]",
+    "line": "movaps  xmm2, xmmword ptr [eax+ebx+10h]; Loads candidate surface data: vector at surface+0x00 and point/vector at surface+0x10 from the 0x40-byte constraint array.",
     "mnemonic": "movaps",
     "size": 5
   },
@@ -529,7 +523,7 @@
   },
   {
     "ea": "0x8EC8BB",
-    "line": "fchs",
+    "line": "fchs; Computes positive blocking distance along current motion to this surface; non-positive values do not block the current solve step.",
     "mnemonic": "fchs",
     "size": 2
   },
@@ -823,7 +817,7 @@
   },
   {
     "ea": "0x8EC966",
-    "line": "mov     [esp+70h+var_54], ecx",
+    "line": "mov     [esp+70h+var_54], ecx; Chooses the earliest blocking surface by shrinking the current step fraction/distance.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1027,7 +1021,7 @@
   },
   {
     "ea": "0x8EC9DD",
-    "line": "movaps  xmmword ptr [esi], xmm0",
+    "line": "movaps  xmmword ptr [esi], xmm0; Advances output point by selectedStep * currentMotion; this is constraint sliding progress, not a hard upward snap.",
     "mnemonic": "movaps",
     "size": 3
   },
@@ -1054,12 +1048,6 @@
     "line": "jmp     short loc_8EC9F0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x8EC9EA",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
   },
   {
     "ea": "0x8EC9F0",
@@ -1213,13 +1201,13 @@
   },
   {
     "ea": "0x8ECA33",
-    "line": "lea     eax, [esp+eax*4+70h+var_40]",
+    "line": "lea     eax, [esp+eax*4+70h+solverState]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x8ECA37",
-    "line": "mov     [eax+4], ecx",
+    "line": "mov     [eax+4], ecx; Records the selected blocking surface in the active-plane set for recomputing the allowed motion direction.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1267,7 +1255,7 @@
   },
   {
     "ea": "0x8ECA50",
-    "line": "lea     eax, [esp+70h+var_40]",
+    "line": "lea     eax, [esp+70h+solverState]; solverState",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1279,13 +1267,13 @@
   },
   {
     "ea": "0x8ECA56",
-    "line": "fstp    dword ptr [ecx+8]",
+    "line": "fstp    dword ptr [ecx+8]; Inflates this surface state bias by approximately 2*(oldBias + 1.1920929e-7) before recomputing active motion.",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x8ECA59",
-    "line": "call    sub_8EC340",
+    "line": "call    hkSurfaceConstraintUtil_RecomputeActiveSurfaceMotion; Recomputes current motion from the active surface set; active set is capped by the small stack records used here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1363,7 +1351,7 @@
   },
   {
     "ea": "0x8ECA7D",
-    "line": "mov     [esi+20h], edx",
+    "line": "mov     [esi+20h], edx; No more blocking surface: writes full requested solve distance into output progress field and returns.",
     "mnemonic": "mov",
     "size": 3
   },

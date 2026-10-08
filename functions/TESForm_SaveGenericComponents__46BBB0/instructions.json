@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x46BBEB",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x46BCF2",
-    "line": "call    sub_46AED0",
+    "line": "call    TESForm_ExpandChunk; Expands an existing record CHUNK by up to 0xFFFF bytes: increases its 16-bit length, grows the global TESForm save buffer, and leaves the appended range ready for the caller to fill.",
     "mnemonic": "call",
     "size": 5
   },

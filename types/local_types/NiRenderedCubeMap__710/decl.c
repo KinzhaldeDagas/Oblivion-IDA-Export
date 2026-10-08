@@ -1,1 +1,1 @@
-NiRenderedCubeMap
+struct NiRenderedCubeMap;

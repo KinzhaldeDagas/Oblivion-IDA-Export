@@ -1,4 +1,4 @@
-0x468810: cmp     dword ptr [ecx+8], 0
+0x468810: cmp     dword ptr [ecx+8], 0; CustomAnimSupport decode: exact _strcmp membership test used to dedupe KFFZ entries.
 0x468814: push    esi
 0x468815: lea     esi, [ecx+4]
 0x468818: jnz     short loc_468825
@@ -13,9 +13,9 @@
 0x46882A: mov     edi, [esp+8+Str2]
 0x46882E: mov     edi, edi
 0x468830: mov     eax, [esi]
-0x468832: push    edi; Str2
-0x468833: push    eax; Str1
-0x468834: call    __strcmp
+0x468832: push    edi; right
+0x468833: push    eax; left
+0x468834: call    CRT_StricmpLocaleDispatch
 0x468839: add     esp, 8
 0x46883C: test    eax, eax
 0x46883E: jz      short loc_46884E

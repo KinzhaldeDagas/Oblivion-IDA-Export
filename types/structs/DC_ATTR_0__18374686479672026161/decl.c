@@ -1,1 +1,1 @@
-DC_ATTR_0
+typedef DC_ATTR DC_ATTR_0;

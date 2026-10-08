@@ -1,4 +1,4 @@
-0x50A8A0: sub     esp, 8
+0x50A8A0: sub     esp, 8; Oblivion ToggleCellNode console command handler. Parses category 0..5, reports the native category label, and routes to TES__ShowCellNode.
 0x50A8A3: mov     ecx, [esp+8+l]
 0x50A8A7: mov     edx, [esp+8+arg_10]
 0x50A8AB: lea     eax, [esp+8+var_8]
@@ -16,7 +16,7 @@
 0x50A8C8: push    eax; a2
 0x50A8C9: push    ecx; a1
 0x50A8CA: mov     dword ptr [esp+28h+var_8], 0FFFFFFFFh
-0x50A8D2: call    Script_ExtractArgs
+0x50A8D2: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x50A8D7: add     esp, 20h
 0x50A8DA: test    al, al
 0x50A8DC: jnz     short loc_50A8E2
@@ -43,15 +43,15 @@
 0x50A923: mov     edx, 1
 0x50A928: shl     edx, cl
 0x50A92A: push    ebx
-0x50A92B: push    0
+0x50A92B: push    0; activeExteriorCellsOnly
 0x50A92D: test    ds:0B35C00h, edx
 0x50A933: setnz   bl
-0x50A936: mov     byte ptr [esp+14h+var_4], bl
-0x50A93A: mov     eax, [esp+14h+var_4]
-0x50A93E: push    eax
-0x50A93F: push    ecx
-0x50A940: mov     ecx, ds:0B333A0h
-0x50A946: call    sub_442A30
+0x50A936: mov     [esp+14h+show], bl
+0x50A93A: mov     eax, dword ptr [esp+14h+show]
+0x50A93E: push    eax; show
+0x50A93F: push    ecx; nodeCategory
+0x50A940: mov     ecx, ds:0B333A0h; this
+0x50A946: call    TES__ShowCellNode; Oblivion TES cell-node visibility controller. Updates the six-bit node mask and applies AppCulled to loaded interior/exterior cell categories. Categories are identified by Oblivion's own console command as Actor, Marker, Land Quad, Water Quad, Static Quad, and Active Quad. ShadowPass temporarily hides Actor (0) and Water Quad (3), then restores their prior mask states. Fallout was consulted only afterward and corroborates the conventional TES::ShowCellNode name.
 0x50A94B: test    bl, bl
 0x50A94D: pop     ebx
 0x50A94E: mov     eax, offset aDisplayed; "DISPLAYED"

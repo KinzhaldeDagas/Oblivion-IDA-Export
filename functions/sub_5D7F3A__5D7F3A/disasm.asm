@@ -101,7 +101,7 @@
 0x5D8069: mov     ecx, esi
 0x5D806B: call    EffectItem_destr
 0x5D8070: push    esi
-0x5D8071: call    FormHeapFree
+0x5D8071: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5D8076: add     esp, 4
 0x5D8079: jmp     loc_5D811A
 0x5D807E: mov     edx, ds:0B38CF0h

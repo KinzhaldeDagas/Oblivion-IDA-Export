@@ -1,12 +1,12 @@
-0x7F1C30: mov     eax, [esp+arg_4]
+0x7F1C30: mov     eax, [esp+cloningProcess]; SpeedTreeLeafShaderProperty copy/apply helper: copies shared STLSPData + leaf LOD index into destination property and calls base property copy.
 0x7F1C34: push    ebx
 0x7F1C35: push    esi
 0x7F1C36: push    edi
-0x7F1C37: mov     edi, [esp+0Ch+arg_0]
+0x7F1C37: mov     edi, [esp+0Ch+destination]
 0x7F1C3B: push    eax
 0x7F1C3C: push    edi
 0x7F1C3D: mov     esi, ecx
-0x7F1C3F: call    sub_7ECB10
+0x7F1C3F: call    j_BSShaderProperty_CopyCloneMembers
 0x7F1C44: mov     edx, [edi]
 0x7F1C46: mov     eax, [esi+9Ch]
 0x7F1C4C: mov     edx, [edx+7Ch]

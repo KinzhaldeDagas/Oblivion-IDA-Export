@@ -1,1 +1,1 @@
-AppPolicyShowDeveloperDiagnostic_0
+typedef AppPolicyShowDeveloperDiagnostic AppPolicyShowDeveloperDiagnostic_0;

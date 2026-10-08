@@ -35,7 +35,7 @@
 0x611DD2: mov     ecx, esi
 0x611DD4: call    edx
 0x611DD6: mov     ecx, esi; int
-0x611DD8: call    sub_5EAE70
+0x611DD8: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x611DDD: mov     ecx, [esp+20h+var_C]
 0x611DE1: mov     large fs:0, ecx
 0x611DE8: pop     ecx
@@ -84,21 +84,21 @@
 0x611E69: call    TESPackage_LocationData_SetReference
 0x611E6E: push    edi
 0x611E6F: mov     ecx, esi
-0x611E71: call    TESPackage_SetLocation
+0x611E71: call    TESPackage_SetLocation; 3DTheft decode: TESPackage_SetLocation allocates package->location when needed and copies a 0x0C LocationData record; null source clears location data.
 0x611E76: test    edi, edi
 0x611E78: jz      short loc_611E8A
 0x611E7A: mov     ecx, edi
 0x611E7C: call    TESPackage_LocationData_destr
 0x611E81: push    edi
-0x611E82: call    FormHeapFree
+0x611E82: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x611E87: add     esp, 4
 0x611E8A: mov     ecx, esi
-0x611E8C: call    sub_5672A0
+0x611E8C: call    sub_5672A0; 3DTheft decode: TESPackage procedure-array resolver is a mutator. It writes TESPackage+0x18/procedureArrayIndex directly; callers should not use EAX as the row result.
 0x611E91: push    1; a4
 0x611E93: push    1; a3
 0x611E95: push    esi; a2
 0x611E96: mov     ecx, ebx; this
-0x611E98: call    Actor_AddPackage?
+0x611E98: call    Actor_AddPackage?; 3DTheft: xrefs ignore this function's return value; use current package/process state after call, not AL/EAX, as the package assignment result.
 0x611E9D: mov     ecx, [esp+20h+var_C]
 0x611EA1: mov     large fs:0, ecx
 0x611EA8: pop     ecx
@@ -107,3 +107,20 @@
 0x611EAB: pop     ebx
 0x611EAC: add     esp, 10h
 0x611EAF: retn
+0x9D0CA0: mov     eax, [ebp-10h]
+0x9D0CA3: push    eax
+0x9D0CA4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D0CA9: pop     ecx
+0x9D0CAA: retn
+0x9D0CAB: mov     eax, [ebp-10h]
+0x9D0CAE: push    eax
+0x9D0CAF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D0CB4: pop     ecx
+0x9D0CB5: retn
+0x9D0CB6: mov     edx, [esp+arg_4]
+0x9D0CBA: lea     eax, [edx-10h]
+0x9D0CBD: mov     ecx, [edx-14h]
+0x9D0CC0: xor     ecx, eax
+0x9D0CC2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D0CC7: mov     eax, offset stru_AF94E0
+0x9D0CCC: jmp     ___CxxFrameHandler3

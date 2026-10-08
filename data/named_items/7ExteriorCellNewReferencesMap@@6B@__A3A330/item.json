@@ -3,14 +3,17 @@
   "bytes_sha256": "",
   "comments": {
     "regular": "",
-    "repeatable": ""
+    "repeatable": "Verified vtable layout from raw RTTI and function pointers: +0x0 Deleting destructor, +0x4 key hash, +0x8 key equality, +0xC set key/value, +0x10 clear value no-op, +0x14 node-pool allocate, +0x18 node-pool release. Fallout constructor homologs: interior 82601B90, exterior 82601C58; both use 37 buckets, matching Oblivion constructors 45A940/45AA80. Fallout nested-list ownership and exterior record payload differ."
   },
+  "confidence_scope": "Raw live IDA annotation; bulk synchronization does not independently verify semantic names or comments.",
   "display_name": "const ExteriorCellNewReferencesMap::`vftable'",
   "ea": "0xA3A330",
+  "evidence_confidence": "Unknown",
   "kind": "data",
   "name": "??_7ExteriorCellNewReferencesMap@@6B@",
   "segment": ".rdata",
-  "size": 4,
-  "type": "void *",
+  "size": 28,
+  "source_annotation_confidence": "Unknown",
+  "type": "ExteriorCellNewReferencesMapVtable",
   "xrefs_to_count": 2
 }

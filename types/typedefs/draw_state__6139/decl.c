@@ -1,1 +1,9 @@
-draw_state
+enum draw_state : __int32
+{
+STATE_NORMAL = 0x0,
+STATE_DISABLED = 0x1,
+STATE_HOT = 0x2,
+STATE_PRESSED = 0x3,
+STATE_DEFAULTED = 0x4,
+DRAW_STATE_COUNT = 0x5,
+};

@@ -1,1 +1,1 @@
-ScanLineListBlock
+typedef _ScanLineListBlock ScanLineListBlock;

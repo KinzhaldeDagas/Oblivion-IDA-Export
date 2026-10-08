@@ -1,8 +1,8 @@
-0x7905D0: push    ecx
+0x7905D0: push    ecx; Compiler/container partition helper used only by the branch-pointer introsort at 0x790C10. Partitions OB_CBranch* iterators into less/equal/greater regions by OB_CBranch+0x2C fuzzyBranchVolume and returns the equal-range boundaries through equalRangeOut.
 0x7905D1: push    ebx
-0x7905D2: mov     ebx, [esp+8+arg_8]
+0x7905D2: mov     ebx, [esp+8+end]
 0x7905D6: push    ebp
-0x7905D7: mov     ebp, [esp+0Ch+arg_4]
+0x7905D7: mov     ebp, [esp+0Ch+begin]
 0x7905DB: mov     eax, ebx
 0x7905DD: sub     eax, ebp
 0x7905DF: sar     eax, 2
@@ -15,10 +15,10 @@
 0x7905ED: mov     eax, [esp+14h+arg_C]
 0x7905F1: push    eax
 0x7905F2: lea     ecx, [ebx-4]
-0x7905F5: push    ecx
-0x7905F6: push    edi
-0x7905F7: push    ebp
-0x7905F8: call    sub_7904B0
+0x7905F5: push    ecx; last
+0x7905F6: push    edi; middle
+0x7905F7: push    ebp; first
+0x7905F8: call    OB_BranchPtrVector_MedianGuessByFuzzyVolume_010201A0; Selects the fuzzy-volume pivot sample for branch-pointer partitioning. Sorts three candidates for ranges of at most 40 pointers; larger ranges use four three-way sorts over spaced samples (MSVC median-guess strategy).
 0x7905FD: add     esp, 10h
 0x790600: cmp     ebp, edi
 0x790602: lea     esi, [edi+4]
@@ -222,12 +222,12 @@
 0x7907F0: jmp     short loc_7907F6
 0x7907F2: fstp    st(1)
 0x7907F4: fstp    st
-0x7907F6: mov     eax, [esp+14h+arg_8]
+0x7907F6: mov     eax, [esp+14h+end]
 0x7907FA: add     ecx, 10h
 0x7907FD: add     eax, 0FFFFFFF4h
 0x790800: cmp     ecx, eax
 0x790802: jl      loc_790730
-0x790808: mov     ebx, [esp+14h+arg_8]
+0x790808: mov     ebx, [esp+14h+end]
 0x79080C: cmp     ecx, ebx
 0x79080E: jnb     short loc_790859
 0x790810: mov     edx, [edi]
@@ -251,7 +251,7 @@
 0x790839: fstp    st(1)
 0x79083B: fstp    st
 0x79083D: add     ecx, 4
-0x790840: cmp     ecx, [esp+14h+arg_8]
+0x790840: cmp     ecx, [esp+14h+end]
 0x790844: jb      short loc_790810
 0x790846: jmp     short loc_790855
 0x790848: add     ecx, 4
@@ -259,8 +259,8 @@
 0x79084D: add     ecx, 8
 0x790850: jmp     short loc_790855
 0x790852: add     ecx, 0Ch
-0x790855: mov     ebx, [esp+14h+arg_8]
-0x790859: mov     edx, [esp+14h+arg_4]
+0x790855: mov     ebx, [esp+14h+end]
+0x790859: mov     edx, [esp+14h+begin]
 0x79085D: cmp     ebp, edx
 0x79085F: jbe     short loc_7908A3
 0x790861: mov     eax, [ebp-4]
@@ -279,7 +279,7 @@
 0x790881: mov     eax, [edi-4]
 0x790884: sub     edi, 4
 0x790887: mov     [edi], edx
-0x790889: mov     edx, [esp+14h+arg_4]
+0x790889: mov     edx, [esp+14h+begin]
 0x79088D: mov     [ebp-4], eax
 0x790890: jmp     short loc_790896
 0x790892: fstp    st(1)
@@ -307,7 +307,7 @@
 0x7908C3: add     esi, 4
 0x7908C6: add     edi, 4
 0x7908C9: mov     [eax], ebx
-0x7908CB: mov     ebx, [esp+14h+arg_8]
+0x7908CB: mov     ebx, [esp+14h+end]
 0x7908CF: add     ecx, 4
 0x7908D2: jmp     loc_790710
 0x7908D7: sub     ebp, 4
@@ -333,7 +333,7 @@
 0x79090B: mov     [ebp+0], eax
 0x79090E: add     ecx, 4
 0x790911: jmp     loc_790710
-0x790916: mov     eax, [esp+14h+arg_0]
+0x790916: mov     eax, [esp+14h+equalRangeOut]
 0x79091A: mov     [eax], edi
 0x79091C: pop     edi
 0x79091D: mov     [eax+4], esi

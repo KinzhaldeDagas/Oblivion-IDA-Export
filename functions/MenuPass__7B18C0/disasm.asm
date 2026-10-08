@@ -183,7 +183,7 @@
 0x7B1ACA: fild    [esp+40h+var_20]
 0x7B1ACE: jge     short loc_7B1AD6
 0x7B1AD0: fadd    dword ptr ds:0A2FC78h
-0x7B1AD6: cmp     byte ptr [esp+40h+arg_C], 0
+0x7B1AD6: cmp     byte ptr [esp+40h+outTexture], 0
 0x7B1ADB: fdivr   qword ptr ds:0A2FAA0h
 0x7B1AE1: mov     dword ptr [ebx+90h], 0
 0x7B1AEB: fstp    [esp+40h+var_20]
@@ -210,24 +210,24 @@
 0x7B1B34: fstp    [esp+40h+var_14]
 0x7B1B38: push    eax; a2
 0x7B1B39: mov     ecx, ebx; this
-0x7B1B3B: call    sub_802890
+0x7B1B3B: call    sub_802890; MoonSugarEffect decode: stores source BSRenderedTexture in BSImageSpaceShader +0x7C with refcounting; render pass then samples this as primary scene texture.
 0x7B1B40: cmp     byte ptr ds:0B43070h, 0
 0x7B1B47: mov     ebp, ds:0A2807Ch
 0x7B1B4D: mov     ebx, 1
 0x7B1B52: jnz     short loc_7B1BAC
-0x7B1B54: push    0; char
-0x7B1B56: push    ebx; char
-0x7B1B57: lea     ecx, [esp+48h+arg_C]
+0x7B1B54: push    0; requireMipmaps
+0x7B1B56: push    ebx; loadFromCache
+0x7B1B57: lea     ecx, [esp+48h+outTexture]
 0x7B1B5B: push    offset aDataTexture_11; "Data\\Textures\\Menus\\Misc\\sepia.dds"
-0x7B1B60: push    ecx; int
-0x7B1B61: call    sub_7B8200
+0x7B1B60: push    ecx; outTexture
+0x7B1B61: call    NiSourceTexture_LoadChecked; Loads/caches a NiSourceTexture by filename and optionally rejects a loaded texture that lacks mipmaps. The first argument is the returned smart-pointer storage.
 0x7B1B66: add     esp, 10h
 0x7B1B69: mov     edi, [esp+40h+var_28]
-0x7B1B6D: push    eax
-0x7B1B6E: lea     ecx, [edi+0B4h]
+0x7B1B6D: push    eax; incoming
+0x7B1B6E: lea     ecx, [edi+0B4h]; this
 0x7B1B74: mov     [esp+44h+var_4], 0
-0x7B1B7C: call    sub_55E2A0
-0x7B1B81: mov     eax, [esp+40h+arg_C]
+0x7B1B7C: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
+0x7B1B81: mov     eax, [esp+40h+outTexture]
 0x7B1B85: test    eax, eax
 0x7B1B87: mov     [esp+40h+var_4], 0FFFFFFFFh
 0x7B1B8F: jz      short loc_7B1BB0
@@ -255,14 +255,14 @@
 0x7B1BCC: mov     ecx, [ecx]
 0x7B1BCE: test    ecx, ecx
 0x7B1BD0: jz      short loc_7B1BE0
-0x7B1BD2: call    BSRenderedTexture__UseTextureToRender
+0x7B1BD2: call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.
 0x7B1BD7: push    eax; a2
 0x7B1BD8: push    ebx; a1
-0x7B1BD9: call    NiRenderer_BeginScene
+0x7B1BD9: call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.
 0x7B1BDE: jmp     short loc_7B1BE8
 0x7B1BE0: push    0; a2
 0x7B1BE2: push    ebx; a1
-0x7B1BE3: call    NiRenderer_BeginScene1
+0x7B1BE3: call    NiRenderer_BeginScene1; Oblivion BeginScene internal path: establishes SceneState1 when required and starts the supplied or default render-target group.
 0x7B1BE8: mov     ecx, ds:0B3F928h
 0x7B1BEE: add     esp, 8
 0x7B1BF1: cmp     [ecx+200h], ebx
@@ -279,7 +279,7 @@
 0x7B1C18: mov     ecx, ds:0B3F928h
 0x7B1C1E: push    ecx
 0x7B1C1F: mov     ecx, [esp+44h+arg_0]; this
-0x7B1C23: call    sub_709C60
+0x7B1C23: call    sub_709C60; MoonSugarEffect decode: NiScreenElements render thunk. Callers push NiDX9Renderer on the stack, then this thunk jumps to object vtable +0x84.
 0x7B1C28: mov     esi, [edi+0B4h]
 0x7B1C2E: test    esi, esi
 0x7B1C30: jz      short loc_7B1C53
@@ -305,3 +305,12 @@
 0x7B1C62: pop     ebx
 0x7B1C63: add     esp, 2Ch
 0x7B1C66: retn    10h
+0x9CD7A0: lea     ecx, [ebp+10h]; slot
+0x9CD7A3: jmp     NiPointerSlot_Release
+0x9CD7A8: mov     edx, [esp+arg_4]
+0x9CD7AC: lea     eax, [edx-30h]
+0x9CD7AF: mov     ecx, [edx-34h]
+0x9CD7B2: xor     ecx, eax
+0x9CD7B4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CD7B9: mov     eax, offset stru_AF6A14
+0x9CD7BE: jmp     ___CxxFrameHandler3

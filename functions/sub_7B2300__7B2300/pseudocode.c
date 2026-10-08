@@ -1,4 +1,4 @@
-void *sub_7B2300()
+NiRTTI *sub_7B2300()
 {
-  return &unk_B42D68;
+  return &stru_B42D68; /*0x7b2305*/
 }

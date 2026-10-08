@@ -1,35 +1,35 @@
 int sub_5C1100()
 {
   int result; // eax
-  int v1; // edx
+  const char *value; // edx
   int v2; // edi
   int v3; // esi
 
-  result = dword_B3B430[0];
-  if ( dword_B3B430[0] == 0xFFFFFFFF )
+  result = *(_DWORD *)&byte_B3B418[0x18]; /*0x5c1100*/
+  if ( *(_DWORD *)&byte_B3B418[0x18] == 0xFFFFFFFF ) /*0x5c1108*/
   {
-    v1 = dword_B394C8;
-    v2 = dword_B3B428;
-    if ( dword_B3B434 < 0 || v2 <= v1 )
+    value = stru_B394C8.value; /*0x5c1112*/
+    v2 = *(_DWORD *)&byte_B3B418[0x10]; /*0x5c1119*/
+    if ( *(int *)&byte_B3B418[0x1C] < 0 || v2 <= (int)value ) /*0x5c1123*/
     {
-      result = dword_B3B438;
-      v3 = dword_B3B42C;
-      if ( dword_B3B438 < 0 || v3 <= v1 )
+      result = *(_DWORD *)&byte_B3B418[0x20]; /*0x5c1129*/
+      v3 = *(_DWORD *)&byte_B3B418[0x14]; /*0x5c1131*/
+      if ( *(int *)&byte_B3B418[0x20] < 0 || v3 <= (int)value ) /*0x5c113b*/
       {
-        if ( dword_B3B434 < 0 )
+        if ( *(int *)&byte_B3B418[0x1C] < 0 ) /*0x5c113f*/
         {
-          return 0xFFFFFFFF;
+          return 0xFFFFFFFF; /*0x5c114e*/
         }
-        else if ( result < 0 || v3 <= (unsigned int)v2 )
+        else if ( result < 0 || v3 <= (unsigned int)v2 ) /*0x5c1147*/
         {
-          return dword_B3B434;
+          return *(_DWORD *)&byte_B3B418[0x1C]; /*0x5c114a*/
         }
       }
     }
     else
     {
-      return dword_B3B434;
+      return *(_DWORD *)&byte_B3B418[0x1C]; /*0x5c1125*/
     }
   }
-  return result;
+  return result; /*0x5c1128*/
 }

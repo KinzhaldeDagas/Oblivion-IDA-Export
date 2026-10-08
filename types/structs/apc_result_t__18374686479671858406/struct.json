@@ -1,94 +1,153 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "apc_result_t",
+  "definition": "union apc_result_t\n{\napc_type type;\n$EC724AE93F066B9C904B31359B3D7C0F async_io;\n$037D45F92F38663893C79FB4683D22B8 virtual_alloc;\n$037D45F92F38663893C79FB4683D22B8 virtual_free;\n$378B174EBB14185341F40F8AEC18DC75 virtual_query;\n$E3C62D6DC39A839C036AF066E7ACA91B virtual_protect;\n$037D45F92F38663893C79FB4683D22B8 virtual_flush;\n$037D45F92F38663893C79FB4683D22B8 virtual_lock;\n$037D45F92F38663893C79FB4683D22B8 virtual_unlock;\n$037D45F92F38663893C79FB4683D22B8 map_view;\n$A3CD353927B392553EB5A59D8130D115 unmap_view;\n$BF678FA9C971DD3BC1550231399B2E91 create_thread;\n$D9BC94603C830DE9B1C7E4B08E5CB6F6 dup_handle;\n$A3CD353927B392553EB5A59D8130D115 break_process;\n}\n",
   "id": 18374686479671858406,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "type",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "apc_type"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "async_io",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 12
+      "size": 12,
+      "type": "$EC724AE93F066B9C904B31359B3D7C0F"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "virtual_alloc",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "$037D45F92F38663893C79FB4683D22B8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "virtual_free",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "$037D45F92F38663893C79FB4683D22B8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "virtual_query",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 40
+      "size": 40,
+      "type": "$378B174EBB14185341F40F8AEC18DC75"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "virtual_protect",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 32
+      "size": 32,
+      "type": "$E3C62D6DC39A839C036AF066E7ACA91B"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "virtual_flush",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "$037D45F92F38663893C79FB4683D22B8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "virtual_lock",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "$037D45F92F38663893C79FB4683D22B8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "virtual_unlock",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "$037D45F92F38663893C79FB4683D22B8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "map_view",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "$037D45F92F38663893C79FB4683D22B8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unmap_view",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "$A3CD353927B392553EB5A59D8130D115"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "create_thread",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 32
+      "size": 32,
+      "type": "$BF678FA9C971DD3BC1550231399B2E91"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dup_handle",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 12
+      "size": 12,
+      "type": "$D9BC94603C830DE9B1C7E4B08E5CB6F6"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "break_process",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "$A3CD353927B392553EB5A59D8130D115"
     }
   ],
   "name": "apc_result_t",
+  "ordinal": 6675,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 40
 }

@@ -48,7 +48,7 @@
 0x9286C5: lea     edx, [esp+174h+var_40]
 0x9286CC: push    edx
 0x9286CD: lea     ecx, [esp+0F8h]
-0x9286D4: call    sub_88FCC0
+0x9286D4: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x9286D9: mov     ecx, [esi+0Ch]
 0x9286DC: mov     eax, [ecx]
 0x9286DE: lea     edx, [esp+170h+var_130]
@@ -61,7 +61,7 @@
 0x9286EF: lea     ecx, [esp+174h+var_40]
 0x9286F6: push    ecx
 0x9286F7: lea     ecx, [esp+178h+var_144+4]
-0x9286FB: call    sub_88FE00
+0x9286FB: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x928700: fld     [esp+170h+var_144+4]
 0x928704: fabs
 0x928706: xor     ecx, ecx
@@ -236,7 +236,7 @@
 0x92899B: lea     ecx, [esp+174h+var_40]
 0x9289A2: push    ecx
 0x9289A3: lea     ecx, [esp+178h+var_154+4]
-0x9289A7: call    sub_88FE00
+0x9289A7: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x9289AC: mov     edx, [ebp+arg_4]
 0x9289AF: movaps  xmm0, [esp+170h+anonymous_3]
 0x9289B7: movaps  xmm1, [esp+170h+var_154+4]

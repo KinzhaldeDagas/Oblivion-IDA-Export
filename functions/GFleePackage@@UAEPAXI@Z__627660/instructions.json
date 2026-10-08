@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x627663",
-    "line": "call    ??1FleePackage@@UAE@XZ; FleePackage::~FleePackage(void)",
+    "line": "call    ??1FleePackage@@UAE@XZ; 3DTheft: FleePackage destructor frees list at +0x58/+0x16 and then runs TESPackage destructor; confirms allocation must cover fields through at least +0x65.",
     "mnemonic": "call",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x627670",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

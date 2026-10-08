@@ -14,7 +14,7 @@
 0x4D6925: call    eax
 0x4D6927: push    eax
 0x4D6928: push    esi
-0x4D6929: call    sub_43F3E0
+0x4D6929: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x4D692E: mov     ecx, [esp+38h+var_4]
 0x4D6932: add     esp, 8
 0x4D6935: pop     esi

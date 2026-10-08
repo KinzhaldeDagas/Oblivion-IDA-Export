@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x62A9C0",
-    "line": "sub     esp, 12Ch",
+    "line": "sub     esp, 12Ch; 3DTheft decode 2026-05-18: HighProcess vtable +0x1A4 SayTopic implementation. Uses Actor+0xE4 or process+0x258 as dialogue target, creates TESTopic dialogue info, calls Actor::InitDialogue, sets dialogue timer/state fields (0x21C/0x228/0x278/0x22C), and may turn/target actor; it does not call Actor_AddPackage or EvaluatePackage.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x62A9DD",
-    "line": "mov     ebp, [esp+134h+arg_0]",
+    "line": "mov     ebp, [esp+134h+speaker]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -187,13 +187,13 @@
   },
   {
     "ea": "0x62AA44",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62AA46",
-    "line": "call    sub_6B81D0",
+    "line": "call    DialogueItem__Destroy",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x62AA4C",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x62AAC2",
-    "line": "jnz     short loc_62AACB",
+    "line": "jnz     short loc_62AACB; 3DTheft decode: dialogue update resolves the active procedure by indexing ProcedureRows[package->procedureArrayIndex][process->GetCurrentPackProcedure()]. GetCurrentPackProcedure is a row slot.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x62AB4E",
-    "line": "call    sub_683CB0",
+    "line": "call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).",
     "mnemonic": "call",
     "size": 5
   },
@@ -913,7 +913,7 @@
   },
   {
     "ea": "0x62ABDC",
-    "line": "call    sub_5E05F0",
+    "line": "call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -979,37 +979,37 @@
   },
   {
     "ea": "0x62AC1C",
-    "line": "push    0",
+    "line": "push    0; conversation",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x62AC1E",
-    "line": "push    0",
+    "line": "push    0; previousTopic",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x62AC20",
-    "line": "push    edi",
+    "line": "push    edi; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x62AC21",
-    "line": "push    ebp",
+    "line": "push    ebp; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x62AC22",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62AC24",
-    "line": "call    TESTopic__CreateDialogueInfo",
+    "line": "call    TESTopic__CreateDialogueItem; Selects a matching TESTopicInfo and wraps it as a 0x1C DialogueItem containing response list/cursor, INFO, topic, owner quest, and speaker.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1039,13 +1039,13 @@
   },
   {
     "ea": "0x62AC37",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62AC39",
-    "line": "call    sub_6B81D0",
+    "line": "call    DialogueItem__Destroy",
     "mnemonic": "call",
     "size": 5
   },
@@ -1057,7 +1057,7 @@
   },
   {
     "ea": "0x62AC3F",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1177,7 +1177,7 @@
   },
   {
     "ea": "0x62AC8A",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1189,19 +1189,19 @@
   },
   {
     "ea": "0x62AC93",
-    "line": "call    sub_6B7BA0",
+    "line": "call    DialogueItem__FirstResponse",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x62AC98",
-    "line": "mov     ecx, [esp+13Ch+var_128]",
+    "line": "mov     ecx, [esp+13Ch+var_128]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x62AC9C",
-    "line": "call    sub_6B7C20",
+    "line": "call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1381,7 +1381,7 @@
   },
   {
     "ea": "0x62AD00",
-    "line": "mov     ecx, offset flt_B36AE8",
+    "line": "mov     ecx, offset unk_B36AE8",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1447,7 +1447,7 @@
   },
   {
     "ea": "0x62AD2D",
-    "line": "mov     ecx, [esi+250h]",
+    "line": "mov     ecx, [esi+250h]; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1471,7 +1471,7 @@
   },
   {
     "ea": "0x62AD3B",
-    "line": "call    sub_6B81D0",
+    "line": "call    DialogueItem__Destroy",
     "mnemonic": "call",
     "size": 5
   },
@@ -1489,7 +1489,7 @@
   },
   {
     "ea": "0x62AD45",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1507,37 +1507,37 @@
   },
   {
     "ea": "0x62AD57",
-    "line": "push    0",
+    "line": "push    0; conversation",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x62AD59",
-    "line": "push    0",
+    "line": "push    0; previousTopic",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x62AD5B",
-    "line": "push    edi",
+    "line": "push    edi; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x62AD5C",
-    "line": "push    ebp",
+    "line": "push    ebp; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x62AD5D",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62AD5F",
-    "line": "call    TESTopic__CreateDialogueInfo",
+    "line": "call    TESTopic__CreateDialogueItem; Selects a matching TESTopicInfo and wraps it as a 0x1C DialogueItem containing response list/cursor, INFO, topic, owner quest, and speaker.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1567,7 +1567,7 @@
   },
   {
     "ea": "0x62AD74",
-    "line": "mov     ecx, [esi+250h]; int",
+    "line": "mov     ecx, [esi+250h]; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1585,7 +1585,7 @@
   },
   {
     "ea": "0x62AD7E",
-    "line": "call    sub_6B7C30",
+    "line": "call    DialogueItem__RunResult; Deferred ambient INFO commit. When INFO exists and ImmediateResult is clear, expose addedTopics and then run the result on DialogueItem.speaker at response-list exhaustion. Goodbye and RunForRumors are ignored; interruption before exhaustion drops this deferred commit.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1675,25 +1675,25 @@
   },
   {
     "ea": "0x62ADAA",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62ADAC",
-    "line": "call    sub_6B7BA0",
+    "line": "call    DialogueItem__FirstResponse",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x62ADB1",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62ADB3",
-    "line": "call    sub_6B7C20",
+    "line": "call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1825,7 +1825,7 @@
   },
   {
     "ea": "0x62ADF4",
-    "line": "call    Actor__InitDialogue",
+    "line": "call    Actor__InitDialogue; 3DTheft decode 2026-05-18: SayTopic response path calls Actor::InitDialogue with selected response text/info and process unk220, then records dialogue state/timer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2449,7 +2449,7 @@
   },
   {
     "ea": "0x62AF46",
-    "line": "jz      short loc_62AF63",
+    "line": "jz      short loc_62AF63; 3DTheft decode 2026-05-18: after SayTopic dialogue setup, non-null target leads to process target vfunc +0x484 and vfunc +0x54C set; this is target/facing dialogue state, not Follow path setup.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -2581,7 +2581,7 @@
   },
   {
     "ea": "0x62AF9D",
-    "line": "mov     ecx, [esi+220h]",
+    "line": "mov     ecx, [esi+220h]; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2599,7 +2599,7 @@
   },
   {
     "ea": "0x62AFA7",
-    "line": "call    sub_6B7260",
+    "line": "call    SoundHandle__IsPlaying; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2635,13 +2635,13 @@
   },
   {
     "ea": "0x62AFBE",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62AFC0",
-    "line": "call    sub_6B81D0",
+    "line": "call    DialogueItem__Destroy",
     "mnemonic": "call",
     "size": 5
   },
@@ -2653,7 +2653,7 @@
   },
   {
     "ea": "0x62AFC6",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2887,7 +2887,7 @@
   },
   {
     "ea": "0x62B044",
-    "line": "call    sub_5E05F0",
+    "line": "call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,1 +1,1 @@
-CONTEXT
+typedef _CONTEXT CONTEXT;

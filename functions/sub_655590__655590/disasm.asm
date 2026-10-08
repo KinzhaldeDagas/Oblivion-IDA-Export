@@ -1,11 +1,11 @@
 0x655590: sub     esp, 24h
-0x655593: push    ebp
-0x655594: push    esi
+0x655593: push    ebp; float
+0x655594: push    esi; float
 0x655595: mov     esi, [esp+2Ch+arg_0]
 0x655599: mov     eax, [esi]
 0x65559B: mov     edx, [eax+380h]
 0x6555A1: mov     ebp, ecx
-0x6555A3: push    edi
+0x6555A3: push    edi; float
 0x6555A4: mov     ecx, esi
 0x6555A6: call    edx
 0x6555A8: mov     edi, eax
@@ -39,13 +39,13 @@
 0x6555E9: retn    4
 0x6555EC: mov     eax, [edi+58h]
 0x6555EF: mov     edx, [edi]
-0x6555F1: mov     [esp+30h+var_24], eax
+0x6555F1: mov     [esp+30h+var_24], eax; float
 0x6555F5: mov     eax, [edx+164h]
-0x6555FB: push    ebx
+0x6555FB: push    ebx; float
 0x6555FC: mov     ecx, edi
 0x6555FE: call    eax
 0x655600: mov     edx, [esi]
-0x655602: mov     [esp+34h+arg_0], eax
+0x655602: mov     [esp+34h+arg_0], eax; float
 0x655606: mov     eax, [edx+164h]
 0x65560C: mov     ecx, esi
 0x65560E: call    eax
@@ -60,7 +60,7 @@
 0x65562A: mov     ecx, esi
 0x65562C: call    eax
 0x65562E: cmp     [esp+34h+var_20], 0
-0x655633: mov     [esp+34h+var_18], eax
+0x655633: mov     [esp+34h+var_18], eax; float
 0x655637: jz      loc_655BDD
 0x65563D: test    eax, eax
 0x65563F: jz      loc_655BDD
@@ -107,11 +107,11 @@
 0x6556BA: fstp    [esp+34h+var_1C]
 0x6556BE: fld     [esp+34h+var_1C]
 0x6556C2: fabs
-0x6556C4: fstp    [esp+34h+var_1C]
+0x6556C4: fstp    [esp+34h+var_1C]; float
 0x6556C8: fld     [esp+34h+var_1C]
 0x6556CC: fstp    dword ptr [ecx+60h]
 0x6556CF: call    eax
-0x6556D1: mov     [esp+34h+var_20], eax
+0x6556D1: mov     [esp+34h+var_20], eax; float
 0x6556D5: movzx   eax, byte ptr [ebp+11Dh]
 0x6556DC: sub     eax, 0
 0x6556DF: jz      loc_655A70
@@ -119,8 +119,8 @@
 0x6556E8: jz      loc_655936
 0x6556EE: sub     eax, 1
 0x6556F1: jnz     loc_655B9B
-0x6556F7: mov     ecx, [esp+34h+arg_0]
-0x6556FB: call    sub_4711F0
+0x6556F7: mov     ecx, [esp+34h+arg_0]; this
+0x6556FB: call    ActorAnimData_IsCurrentIdleReady; Returns true when ActorAnimData current idle (+0xCC) exists and its phase field is 1. Furniture/action callers use this as the loaded/ready gate immediately before StartQueuedIdleAction.
 0x655700: test    al, al
 0x655702: jz      loc_6558B8
 0x655708: mov     edx, [ebp+0]
@@ -129,22 +129,22 @@
 0x655713: call    eax
 0x655715: cmp     eax, 0FFFFFFFFh
 0x655718: jnz     loc_6558B8
-0x65571E: push    0
-0x655720: mov     ecx, ebx
-0x655722: call    sub_4706E0
+0x65571E: push    0; slotSelector
+0x655720: mov     ecx, ebx; this
+0x655722: call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].
 0x655727: test    eax, eax
 0x655729: jz      short loc_65573E
-0x65572B: push    0
-0x65572D: mov     ecx, ebx
-0x65572F: call    sub_4706E0
+0x65572B: push    0; slotSelector
+0x65572D: mov     ecx, ebx; this
+0x65572F: call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].
 0x655734: cmp     dword ptr [eax+44h], 1
 0x655738: jnz     loc_6558B8
 0x65573E: fldz
 0x655740: push    ecx
-0x655741: fstp    [esp+38h+var_38]; float
-0x655744: mov     ecx, ebx
-0x655746: push    0; int
-0x655748: call    sub_470FC0
+0x655741: fstp    [esp+38h+arg1]; easeOutTime
+0x655744: mov     ecx, ebx; this
+0x655746: push    0; slot
+0x655748: call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.
 0x65574D: mov     ecx, [esp+34h+var_20]
 0x655751: mov     eax, [esp+34h+var_18]
 0x655755: mov     byte ptr [ebx+0C4h], 1
@@ -154,42 +154,42 @@
 0x655766: push    eax
 0x655767: call    edx
 0x655769: mov     ecx, edi; this
-0x65576B: call    TESObjectREFR_GetParentCell
+0x65576B: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x655770: mov     ecx, esi; this
 0x655772: mov     ebp, eax
-0x655774: call    TESObjectREFR_GetParentCell
+0x655774: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x655779: cmp     eax, ebp
 0x65577B: jz      short loc_6557B3
 0x65577D: mov     ecx, edi; this
-0x65577F: call    TESObjectREFR_GetParentCell
+0x65577F: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x655784: test    eax, eax
 0x655786: jz      short loc_655799
-0x655788: push    esi; Concurrency::details::SchedulerBase *
+0x655788: push    esi; reference
 0x655789: mov     ecx, edi; this
-0x65578B: call    TESObjectREFR_GetParentCell
-0x655790: mov     ecx, eax
-0x655792: call    sub_4D35D0
+0x65578B: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x655790: mov     ecx, eax; this
+0x655792: call    TESObjectCELL_AddReference; Verified: persistent-cell AddReference updates the WorldSpace coordinate/fallback persistent-reference index (+0x64) through TESWorldSpace_IndexReference. Ordinary cell additions do not index there. This routine does not populate the separate SubSpace spatial index at +0x60.
 0x655797: jmp     short loc_6557B3
 0x655799: mov     ecx, esi; this
-0x65579B: call    TESObjectREFR_GetParentCell
+0x65579B: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6557A0: test    eax, eax
 0x6557A2: jz      short loc_6557B3
-0x6557A4: push    esi
+0x6557A4: push    esi; reference
 0x6557A5: mov     ecx, esi; this
-0x6557A7: call    TESObjectREFR_GetParentCell
-0x6557AC: mov     ecx, eax
-0x6557AE: call    sub_4CECD0
+0x6557A7: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x6557AC: mov     ecx, eax; this
+0x6557AE: call    TESObjectCELL_RemoveReference; Verified: removes a reference from the cell object list under the cell lock. For persistent cells, clears the reference's ExtraDataList cell pointer and removes it from the owning WorldSpace persistent-reference index (+0x64); for normal cells, clears its parent cell and updates changed state. No write to the separate SubSpace index (+0x60) is present.
 0x6557B3: fld     dword ptr [ebx+94h]
 0x6557B9: mov     eax, [esp+34h+arg_0]
 0x6557BD: push    1
 0x6557BF: fstp    dword ptr [eax+94h]
 0x6557C5: mov     ecx, edi
 0x6557C7: call    sub_5E13D0
-0x6557CC: mov     ecx, ds:0B333C4h
+0x6557CC: mov     ecx, ds:0B333C4h; this
 0x6557D2: cmp     esi, ecx
 0x6557D4: jnz     short loc_65582D
-0x6557D6: push    1
-0x6557D8: call    PlayerCharacter_GetPlayerNode
+0x6557D6: push    1; firstPerson
+0x6557D8: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x6557DD: mov     ecx, ds:0B3F9A8h
 0x6557E3: mov     [eax+54h], ecx
 0x6557E6: mov     edx, ds:0B3F9ACh
@@ -205,7 +205,7 @@
 0x655809: lea     ecx, [esp+34h+var_14]
 0x65580D: push    ecx
 0x65580E: mov     ecx, ds:0B333C4h
-0x655814: call    sub_65ABE0
+0x655814: call    MobileObject_GetCollisionFilterInfo; Returns actor/proxy collision filter identity by calling 0x57E270 on MobileObject_GetCharProxy(this). Callers keep high 16 bits and OR in the chosen collision layer.
 0x655819: mov     edx, [edi]
 0x65581B: movzx   ebx, word ptr [eax+2]
 0x65581F: mov     eax, [edx+154h]
@@ -216,7 +216,7 @@
 0x65582D: lea     ecx, [esp+34h+var_10]
 0x655831: push    ecx
 0x655832: mov     ecx, edi
-0x655834: call    sub_65ABE0
+0x655834: call    MobileObject_GetCollisionFilterInfo; Returns actor/proxy collision filter identity by calling 0x57E270 on MobileObject_GetCharProxy(this). Callers keep high 16 bits and OR in the chosen collision layer.
 0x655839: mov     edx, [esi]
 0x65583B: movzx   ebx, word ptr [eax+2]
 0x65583F: mov     eax, [edx+154h]
@@ -224,7 +224,7 @@
 0x655847: call    eax
 0x655849: mov     ecx, esi; this
 0x65584B: mov     ebp, eax
-0x65584D: call    MobileObject_GetCharProxy
+0x65584D: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x655852: push    ebx
 0x655853: mov     ecx, eax
 0x655855: call    sub_5EA350
@@ -238,21 +238,21 @@
 0x65586C: push    edi
 0x65586D: mov     ecx, esi
 0x65586F: mov     byte ptr [esi+0C4h], 1
-0x655876: call    sub_477E50
+0x655876: call    ActorAnimData_StartQueuedIdleAction; Starts a ready queued idle as an actor action. Processes/promotes/plays through ActorAnimData_ProcessQueuedIdleKF; on success stores the actor ref at AnimIdle +0x28 and invokes high-process action 0x0B with the sequence at +0x10.
 0x65587B: test    al, al
 0x65587D: jz      loc_655B9B
 0x655883: fld     dword ptr ds:0A30634h
 0x655889: sub     esp, 8
-0x65588C: fstp    [esp+3Ch+var_38]; float
+0x65588C: fstp    [esp+3Ch+arg1]; explicitTimeOrMinusOne
 0x655890: mov     ecx, esi; this
 0x655892: fldz
 0x655894: mov     byte ptr [esi+0C4h], 1
-0x65589B: fstp    [esp+3Ch+var_3C]; float
-0x65589E: push    edi; int
-0x65589F: call    sub_476D10
+0x65589B: fstp    [esp+3Ch+arg0]; deltaTime
+0x65589E: push    edi; ownerActor
+0x65589F: call    ActorAnimData_Update; CustomAnimSupport evidence: observed ActorAnimData update caller; supports broad scheduler classification.
 0x6558A4: push    edi; a2
 0x6558A5: mov     ecx, esi; this
-0x6558A7: call    sub_474510
+0x6558A7: call    ActorAnimData_ApplyToActor; Applies actor-dependent scene/node state through 0x471C00 and then calls ActorAnimData::ApplyActorAnimData. Called during NiNode generation, animation updates, body toggles, resurrection/fast travel, and first-person transitions.
 0x6558AC: pop     ebx
 0x6558AD: pop     edi
 0x6558AE: pop     esi
@@ -262,22 +262,22 @@
 0x6558B5: retn    4
 0x6558B8: mov     ebx, [esp+34h+arg_0]
 0x6558BC: mov     ecx, ebx
-0x6558BE: call    sub_472EA0
+0x6558BE: call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.
 0x6558C3: test    al, al
 0x6558C5: jz      loc_655B9B
 0x6558CB: fldz
 0x6558CD: push    ecx
-0x6558CE: fstp    [esp+38h+var_38]; float
-0x6558D1: mov     ecx, ebx
-0x6558D3: push    5; int
-0x6558D5: call    sub_470FC0
+0x6558CE: fstp    [esp+38h+arg1]; easeOutTime
+0x6558D1: mov     ecx, ebx; this
+0x6558D3: push    5; slot
+0x6558D5: call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.
 0x6558DA: fld1
 0x6558DC: sub     esp, 8
-0x6558DF: fst     [esp+3Ch+var_38]; int
-0x6558E3: mov     ecx, edi
-0x6558E5: fstp    [esp+3Ch+var_3C]; float
+0x6558DF: fst     [esp+3Ch+arg1]; arg1
+0x6558E3: mov     ecx, edi; this
+0x6558E5: fstp    [esp+3Ch+arg0]; arg0
 0x6558E8: mov     byte ptr [ebx+0C4h], 1
-0x6558EF: call    Actor_ProcessAction
+0x6558EF: call    Actor_ProcessAction; Per-actor native action state machine. Advances required-note phases, handles AttackBow nock/hold/release lifecycle, constructs ArrowProjectile on release, and dispatches post-shot AMMO consumption.
 0x6558F4: mov     edx, [ebp+0]
 0x6558F7: mov     eax, [edx+188h]
 0x6558FD: push    1
@@ -289,7 +289,7 @@
 0x655908: mov     eax, [edx+1E8h]
 0x65590E: push    ecx
 0x65590F: mov     ecx, esi
-0x655911: fstp    [esp+38h+var_38]
+0x655911: fstp    [esp+38h+arg1]
 0x655914: call    eax
 0x655916: mov     edx, [ebp+0]
 0x655919: mov     eax, [edx+370h]
@@ -343,7 +343,7 @@
 0x6559A8: push    ecx; int
 0x6559A9: fstp    [esp+38h+var_18]
 0x6559AD: push    ecx
-0x6559AE: fstp    [esp+3Ch+var_3C]; float
+0x6559AE: fstp    [esp+3Ch+arg0]; float
 0x6559B1: push    esi; int
 0x6559B2: call    sub_683D80
 0x6559B7: fstp    [esp+40h+var_1C]
@@ -363,7 +363,7 @@
 0x6559E9: fld     [esp+34h+arg_0]
 0x6559ED: push    1; char
 0x6559EF: push    ecx
-0x6559F0: fstp    [esp+3Ch+var_3C]; float
+0x6559F0: fstp    [esp+3Ch+arg0]; float
 0x6559F3: push    esi; Concurrency::details::SchedulerBase *
 0x6559F4: call    sub_685530
 0x6559F9: add     esp, 0Ch
@@ -376,13 +376,13 @@
 0x655A05: retn    4
 0x655A08: push    30h ; '0'
 0x655A0A: mov     ecx, esi
-0x655A0C: call    sub_5E05F0
+0x655A0C: call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.
 0x655A11: fld     [esp+34h+arg_0]
 0x655A15: mov     edx, [esi]
 0x655A17: mov     eax, [edx+1E8h]
 0x655A1D: push    ecx
 0x655A1E: mov     ecx, esi
-0x655A20: fstp    [esp+38h+var_38]
+0x655A20: fstp    [esp+38h+arg1]
 0x655A23: call    eax
 0x655A25: mov     edx, [esi]
 0x655A27: mov     edx, [edx+1CCh]
@@ -449,7 +449,7 @@
 0x655ADF: mov     ecx, ds:0B362C0h
 0x655AE5: push    eax
 0x655AE6: push    edi
-0x655AE7: call    sub_521450
+0x655AE7: call    TESIdleForm_FindIdleForActor; Idle root lookup for actor model path; rejects final candidate when ANAM high bit is set but model path is not .kf.
 0x655AEC: mov     ecx, [esp+30h+var_20]
 0x655AF0: mov     edx, [ecx]
 0x655AF2: push    7Fh
@@ -481,12 +481,12 @@
 0x655B38: pop     ebp
 0x655B39: add     esp, 24h
 0x655B3C: retn    4
-0x655B3F: call    sub_520200
+0x655B3F: call    TESIdleForm_GetQueuedAnimType; Returns TESIdleForm ANAM byte at +0x38 masked with 0x7F. This low-seven-bit value is passed as the queued idle slot/type; the high bit is handled separately by native idle selection.
 0x655B44: mov     edx, [esp+30h+var_1C]
 0x655B48: mov     ecx, [esp+30h+arg_4]
 0x655B4C: push    eax
 0x655B4D: push    edx
-0x655B4E: call    sub_475300
+0x655B4E: call    ActorAnimData_ReplaceCurrentIdleLoader; Replaces ActorAnimData current idle at +0xCC, not the queued +0xD0 slot. Stops its still-active normalized physical slot, retires the old AnimIdle into cleanup slots +0xD4/+0xD8 or destroys it, then allocates/initializes a new AnimIdle at +0xCC with completion mode 1 and no actor ref. Furniture/package callers later wait for ready phase and explicitly start it.
 0x655B53: mov     eax, [esi]
 0x655B55: mov     edx, [eax+1CCh]
 0x655B5B: lea     ecx, [esp+30h+var_8]

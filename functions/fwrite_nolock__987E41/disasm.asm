@@ -32,10 +32,10 @@
 0x987E9A: cmp     ebx, edi
 0x987E9C: jnb     short loc_987EA0
 0x987E9E: mov     edi, ebx
-0x987EA0: push    edi; Size
-0x987EA1: push    [ebp+DstBuf]; Src
-0x987EA4: push    dword ptr [esi]; Dst
-0x987EA6: call    _memcpy
+0x987EA0: push    edi; byteCount
+0x987EA1: push    [ebp+DstBuf]; source
+0x987EA4: push    dword ptr [esi]; destination
+0x987EA6: call    _memcpy;
 0x987EAB: sub     [esi+4], edi
 0x987EAE: add     [esi], edi
 0x987EB0: add     esp, 0Ch

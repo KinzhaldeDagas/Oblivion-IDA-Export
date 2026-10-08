@@ -1,19 +1,36 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 0,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x7F1E60",
+      "0x7F1F00"
+    ],
+    [
+      "0x9CA7E0",
+      "0x9CA806"
+    ]
+  ],
+  "chunks_sha256": "f8a4609882a6a6f33b83bdde7e56331f11835d5f2858da9525f644011fd95afe",
+  "comment_regular": "Leaf-property virtual clone/copy helper. Allocates 0xB0, copies leaf LOD/STSP/STLSP references, and forwards base property state.\n\n[2026-10-03 clone audit] Verified virtual+0x18 is CreateClone, not a flags-based copy. One stack NiCloningProcess pointer, ret4, returned newly constructed 0xB0 leaf property. GetLevel(+98), STSP(+68), STLSP(+9C) feed native ctor7F1960, then CopyMembers7F1C30. Fallout named CreateClone828CE050 corroborates role, with platform-specific offsets. Plugin adapter must override this slot or cloning restores native type9/vtable and loses its type8 frond behavior. Its replacement checks allocation before construction, installs adapter vptr before CopyMembers, and preserves the native clone-map path.\n\n[v151 normal-card integration] Normal-card implementation preserves native property vtable A929CC and type9. Constructor/CopyMembers retain extended STSP owner with unchanged+8 wind pointer/+C count prefix. Plugin-tagged owner owns separate shader and normal texture; native geometry clone preserves geometry+BC shader ref. No private property vtable is required.",
   "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7F1E60",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_SpeedTreeLeafShaderProperty_CreateClone_010201A0",
   "end_ea": "0x7F1F00",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7F1E60",
+  "name": "OB_SpeedTreeLeafShaderProperty_CreateClone_010201A0",
   "segment": ".text",
   "sha256": "53abd93cf59677d3fcd4d516e66340bbb459a66e3cd3cdeee6ee6daf9f609684",
   "size": 160,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7F1E60",
-  "type": "SpeedTreeLeafShaderProperty *__thiscall(char **this, int)",
-  "xrefs_from_count": 59,
+  "total_chunk_size": 198,
+  "type": "OB_SpeedTreeLeafShaderProperty_010201A0 *__thiscall(OB_SpeedTreeLeafShaderProperty_010201A0 *this, void *cloningProcess)",
+  "xrefs_from_count": 73,
   "xrefs_to_count": 1
 }

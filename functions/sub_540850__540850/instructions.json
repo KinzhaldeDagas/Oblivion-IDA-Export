@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x540850",
-    "line": "sub     esp, 60h",
+    "line": "sub     esp, 60h; HDR weather/global updater, not merely fog. While HDR is enabled it resolves first/second weather values, including fSunlightDimmer and fTreeDimmer, then writes direct or transitioned renderer globals.",
     "mnemonic": "sub",
     "size": 3
   },
   {
     "ea": "0x540853",
-    "line": "cmp     byte ptr ds:0B43070h, 0",
+    "line": "cmp     byte ptr ds:0B43070h, 0; Entire weather HDR-constant update is gated by rendererGlobal+0x1D7 (B43070 HDR enabled).",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x540866",
-    "line": "mov     esi, [edi+10h]",
+    "line": "mov     esi, [edi+10h]; Fog transition-global decode: reads Sky::firstWeather as primary source for weather globals; not a direct fog shader writer.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x540874",
-    "line": "jp      short loc_54087E",
+    "line": "jp      short loc_54087E; Fog transition-global decode: firstWeather float field [0x4C] uses fallback flt_A56E28 when nonpositive.",
     "mnemonic": "jp",
     "size": 2
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x5408B3",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x5408F0",
-    "line": "jp      short loc_5408FA",
+    "line": "jp      short loc_5408FA; Fog transition-global decode: firstWeather field [0x4B] participates in transition/weather global setup and has fallback flt_B06E04.",
     "mnemonic": "jp",
     "size": 2
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x540A19",
-    "line": "jp      short loc_540A27",
+    "line": "jp      short loc_540A27; Resolve first-weather fTreeDimmer at weather+0x144; nonpositive weather values use the fTreeDimmer:BlurShaderHDR fallback (default 1.2).",
     "mnemonic": "jp",
     "size": 2
   },
@@ -829,7 +829,7 @@
   },
   {
     "ea": "0x540A5C",
-    "line": "mov     esi, [edi+14h]",
+    "line": "mov     esi, [edi+14h]; Fog transition-global decode: reads Sky::secondWeather for transition blend of weather globals.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -877,7 +877,7 @@
   },
   {
     "ea": "0x540A78",
-    "line": "jnz     loc_540DF6",
+    "line": "jnz     loc_540DF6; Fog transition-global decode: when secondWeather exists and weatherPercent < 1, globals are lerped between second and first weather.",
     "mnemonic": "jnz",
     "size": 6
   },
@@ -1009,7 +1009,7 @@
   },
   {
     "ea": "0x540ACC",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1549,7 +1549,7 @@
   },
   {
     "ea": "0x540C16",
-    "line": "jp      short loc_540C22",
+    "line": "jp      short loc_540C22; Resolve second-weather fTreeDimmer at weather+0x144 with the same nonpositive-value fallback before interpolation.",
     "mnemonic": "jp",
     "size": 2
   },
@@ -1657,7 +1657,7 @@
   },
   {
     "ea": "0x540C55",
-    "line": "fstp    dword ptr ds:0B2C73Ch",
+    "line": "fstp    dword ptr ds:0B2C73Ch; Fog transition-global decode: stores secondWeather/firstWeather paired global baseline for transition; upstream sky/weather state, not B333E4 payload.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -1771,7 +1771,7 @@
   },
   {
     "ea": "0x540C95",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1843,7 +1843,7 @@
   },
   {
     "ea": "0x540CBB",
-    "line": "fstp    dword ptr ds:0B431F8h",
+    "line": "fstp    dword ptr ds:0B431F8h; Fog transition-global decode: lerps a weather global from secondWeather to firstWeather by Sky::weatherPercent.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -2311,7 +2311,7 @@
   },
   {
     "ea": "0x540DAA",
-    "line": "fstp    dword ptr ds:0B42F4Ch",
+    "line": "fstp    dword ptr ds:0B42F4Ch; Transition writer for rendererGlobal+0xB3 (B42F4C) fSunlightDimmer. This is distinct from leaf VS c10 TreeDimmer.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -2377,7 +2377,7 @@
   },
   {
     "ea": "0x540DCC",
-    "line": "fstp    dword ptr ds:0B42EA8h",
+    "line": "fstp    dword ptr ds:0B42EA8h; Transition writer for rendererGlobal+0x0F (B42EA8) fTreeDimmer: lerp(second, first, Sky::weatherPercent). Positive/fallback endpoints remain positive.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -2467,7 +2467,7 @@
   },
   {
     "ea": "0x540DF8",
-    "line": "mov     ds:0B43220h, ecx",
+    "line": "mov     ds:0B43220h, ecx; Fog transition-global decode: no active secondWeather blend; writes firstWeather-derived globals directly.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2617,7 +2617,7 @@
   },
   {
     "ea": "0x540E63",
-    "line": "fstp    dword ptr ds:0B42F4Ch",
+    "line": "fstp    dword ptr ds:0B42F4Ch; No-transition writer for fSunlightDimmer (B42F4C). 0x7ED6C0 may multiply nonpoint diffuse by this HDR sunlight scalar.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -2629,7 +2629,7 @@
   },
   {
     "ea": "0x540E6D",
-    "line": "fstp    dword ptr ds:0B42EA8h",
+    "line": "fstp    dword ptr ds:0B42EA8h; No-transition writer for leaf TreeDimmer/SunDimmer c10 source (B42EA8), resolved from first weather or the INI fallback.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -2641,7 +2641,7 @@
   },
   {
     "ea": "0x540E77",
-    "line": "fstp    dword ptr ds:0B42F44h",
+    "line": "fstp    dword ptr ds:0B42F44h; Fog transition-global decode: writes firstWeather-derived byte_B42E99[0xAB] global directly when no transition blend is active.",
     "mnemonic": "fstp",
     "size": 6
   },

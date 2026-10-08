@@ -82,7 +82,7 @@
 0x49402A: mov     [esp+1Ch+arg_0], ebx
 0x49402E: call    edx
 0x494030: push    edi
-0x494031: call    FormHeapFree
+0x494031: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x494036: add     esp, 4
 0x494039: jmp     short loc_49403E
 0x49403B: sub     ebp, 0Ch
@@ -125,7 +125,7 @@
 0x494096: mov     ecx, esi
 0x494098: call    edx
 0x49409A: push    edi
-0x49409B: call    FormHeapFree
+0x49409B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4940A0: add     esp, 4
 0x4940A3: pop     edi
 0x4940A4: mov     eax, ebp

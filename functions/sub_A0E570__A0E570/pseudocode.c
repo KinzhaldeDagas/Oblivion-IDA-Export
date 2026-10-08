@@ -1,4 +1,4 @@
-BSStringT *sub_A0E570()
+NiRTTI *sub_A0E570()
 {
-  return sub_70E220((BSStringT *)dword_B41658, "NiPSysEmitterInitialRadiusCtlr", (int)dword_B41F8C);
+  return NiRTTI_Constructor(&stru_B41658, "NiPSysEmitterInitialRadiusCtlr", &stru_B41F8C); /*0xa0e584*/
 }

@@ -1,19 +1,36 @@
 {
-  "callees_count": 19,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_7FF350",
+  "chunks": [
+    [
+      "0x7FF350",
+      "0x7FF492"
+    ],
+    [
+      "0x9CA420",
+      "0x9CA446"
+    ]
+  ],
+  "chunks_sha256": "1fae3c948e910639dd942fac1433c5edb04b000b6594961f3a167eadade1f4d8",
+  "comment_regular": "Oblivion Lighting30 node-property factory/validator. The existing-property fast path accepts shader-property virtual subtype 10 at slot +0x54. A complete MSVC-derived census of all 17 native BSShaderProperty-family vtables proves Lighting30ShaderProperty is the sole native subtype-10 class. The replacement path removes an incompatible property, allocates 0x108 bytes, constructs exact Lighting30ShaderProperty, attaches it, runs geometry setup at +0x58, and validates renderer data at +0x8C.\n\nEnsures a NiNode uses BSShaderPPLightingProperty for Lighting30 rendering: accepts an existing property of shader type 0xA, otherwise removes the incompatible property, creates/attaches a PPLighting property, sets it up, and validates renderer data.",
+  "comment_repeatable": "Oblivion Lighting30 node-property factory/validator. The existing-property fast path accepts shader-property virtual subtype 10 at slot +0x54. A complete MSVC-derived census of all 17 native BSShaderProperty-family vtables proves Lighting30ShaderProperty is the sole native subtype-10 class. The replacement path removes an incompatible property, allocates 0x108 bytes, constructs exact Lighting30ShaderProperty, attaches it, runs geometry setup at +0x58, and validates renderer data at +0x8C.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "Lighting30Shader_EnsureSubtype10PropertyOnNode",
   "end_ea": "0x7FF492",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7FF350",
+  "name": "Lighting30Shader_EnsureSubtype10PropertyOnNode",
   "segment": ".text",
   "sha256": "067efbea533f3d927884c5dc73c62ac87c5c535648b023186523965775d0ecd2",
   "size": 322,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7FF350",
+  "total_chunk_size": 360,
   "type": "bool __stdcall(NiNode *)",
-  "xrefs_from_count": 136,
+  "xrefs_from_count": 150,
   "xrefs_to_count": 1
 }

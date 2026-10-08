@@ -1,4 +1,4 @@
-0x59C3F0: push    0FFFFFFFFh
+0x59C3F0: push    0FFFFFFFFh; [Controller decode 2026-07-09] Starts row rebind capture for selected logical control.
 0x59C3F2: push    offset SEH_59C5E0
 0x59C3F7: mov     eax, large fs:0
 0x59C3FD: push    eax
@@ -16,7 +16,7 @@
 0x59C418: lea     eax, [esp+3Ch+var_C]
 0x59C41C: mov     large fs:0, eax
 0x59C422: xor     ebx, ebx
-0x59C424: cmp     dword ptr [esp+3Ch+arg_0], ebx
+0x59C424: cmp     [esp+3Ch+arg_0], ebx
 0x59C428: mov     esi, ecx
 0x59C42A: jz      loc_59C5B1
 0x59C430: mov     eax, [esi+34h]
@@ -28,46 +28,46 @@
 0x59C43F: lea     eax, [ebp+8]
 0x59C442: mov     ebp, [ebp+0]
 0x59C445: jz      short loc_59C4A1
-0x59C447: cmp     edi, dword ptr [esp+3Ch+arg_0]
+0x59C447: cmp     edi, [esp+3Ch+arg_0]
 0x59C44B: jz      short loc_59C4A1
 0x59C44D: fld1
 0x59C44F: push    ecx
-0x59C450: fstp    [esp+40h+a2]; a3
+0x59C450: fstp    [esp+40h+a2]; value
 0x59C453: mov     ecx, edi; this
-0x59C455: push    0FC9h; a2
-0x59C45A: call    Tile_SetFloat
+0x59C455: push    0FC9h; propertyCode
+0x59C45A: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59C45F: fld     dword ptr ds:0A2FFE8h
 0x59C465: push    ecx
-0x59C466: fstp    [esp+40h+a2]; a3
-0x59C469: push    0FCCh; a2
+0x59C466: fstp    [esp+40h+a2]; value
+0x59C469: push    0FCCh; propertyCode
 0x59C46E: mov     ecx, edi; this
-0x59C470: call    Tile_SetFloat
+0x59C470: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59C475: fld     dword ptr ds:0A2FFE8h
 0x59C47B: push    ecx
-0x59C47C: fstp    [esp+40h+a2]; a3
-0x59C47F: push    0FCDh; a2
+0x59C47C: fstp    [esp+40h+a2]; value
+0x59C47F: push    0FCDh; propertyCode
 0x59C484: mov     ecx, edi; this
-0x59C486: call    Tile_SetFloat
+0x59C486: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59C48B: fld     dword ptr ds:0A2FFE8h
 0x59C491: push    ecx
-0x59C492: fstp    [esp+40h+a2]; a3
-0x59C495: push    0FCEh; a2
+0x59C492: fstp    [esp+40h+a2]; value
+0x59C495: push    0FCEh; propertyCode
 0x59C49A: mov     ecx, edi; this
-0x59C49C: call    Tile_SetFloat
+0x59C49C: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59C4A1: cmp     ebp, ebx
 0x59C4A3: jnz     short loc_59C43A
 0x59C4A5: mov     ecx, [esi+54h]; this
 0x59C4A8: fld1
 0x59C4AA: push    ecx
-0x59C4AB: fstp    [esp+40h+a2]; a3
-0x59C4AE: push    0FC9h; a2
-0x59C4B3: call    Tile_SetFloat
+0x59C4AB: fstp    [esp+40h+a2]; value
+0x59C4AE: push    0FC9h; propertyCode
+0x59C4B3: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59C4B8: fld1
 0x59C4BA: mov     ecx, [esi+58h]; this
 0x59C4BD: push    ecx
-0x59C4BE: fstp    [esp+40h+a2]; a3
-0x59C4C1: push    0FC9h; a2
-0x59C4C6: call    Tile_SetFloat
+0x59C4BE: fstp    [esp+40h+a2]; value
+0x59C4C1: push    0FC9h; propertyCode
+0x59C4C6: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59C4CB: mov     ecx, [esi+2Ch]
 0x59C4CE: push    0FB1h
 0x59C4D3: call    Tile_GetFloat
@@ -79,21 +79,21 @@
 0x59C4F1: mov     ecx, [esi+2Ch]; this
 0x59C4F4: fldz
 0x59C4F6: push    ecx
-0x59C4F7: fstp    [esp+40h+a2]; a3
-0x59C4FA: push    0FB1h; a2
-0x59C4FF: call    Tile_SetFloat
+0x59C4F7: fstp    [esp+40h+a2]; value
+0x59C4FA: push    0FB1h; propertyCode
+0x59C4FF: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59C504: fldz
 0x59C506: mov     ecx, [esi+2Ch]; this
 0x59C509: push    ecx
-0x59C50A: fstp    [esp+40h+a2]; a3
-0x59C50D: push    0FB2h; a2
-0x59C512: call    Tile_SetFloat
+0x59C50A: fstp    [esp+40h+a2]; value
+0x59C50D: push    0FB2h; propertyCode
+0x59C512: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59C517: fld1
 0x59C519: mov     ecx, [esi+4]; this
 0x59C51C: push    ecx
-0x59C51D: fstp    [esp+40h+a2]; a3
-0x59C520: push    0FB2h; a2
-0x59C525: call    Tile_SetFloat
+0x59C51D: fstp    [esp+40h+a2]; value
+0x59C520: push    0FB2h; propertyCode
+0x59C525: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59C52A: mov     [esp+3Ch+var_28], ebx
 0x59C52E: mov     word ptr [esp+3Ch+var_24], bx
 0x59C533: mov     word ptr [esp+3Ch+var_24+2], bx
@@ -130,10 +130,10 @@
 0x59C593: push    edi
 0x59C594: push    0FDEh
 0x59C599: call    Tile_SetString
-0x59C59E: mov     edx, dword ptr [esp+3Ch+arg_0]
+0x59C59E: mov     edx, [esp+3Ch+arg_0]
 0x59C5A2: push    edi
 0x59C5A3: mov     [esi+0D8h], edx
-0x59C5A9: call    FormHeapFree
+0x59C5A9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x59C5AE: add     esp, 4
 0x59C5B1: mov     ecx, [esp+3Ch+var_C]
 0x59C5B5: mov     large fs:0, ecx
@@ -147,3 +147,16 @@
 0x59C5C7: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x59C5CC: add     esp, 28h
 0x59C5CF: retn    4
+0x9BFFC0: lea     ecx, [ebp-28h]; void *
+0x9BFFC3: jmp     BSStringT_Clear
+0x9BFFC8: mov     edx, [esp+arg_4]
+0x9BFFCC: lea     eax, [edx-2Ch]
+0x9BFFCF: mov     ecx, [edx-30h]
+0x9BFFD2: xor     ecx, eax
+0x9BFFD4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BFFD9: add     eax, 10h
+0x9BFFDC: mov     ecx, [edx-4]
+0x9BFFDF: xor     ecx, eax
+0x9BFFE1: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BFFE6: mov     eax, offset stru_AE9340
+0x9BFFEB: jmp     ___CxxFrameHandler3

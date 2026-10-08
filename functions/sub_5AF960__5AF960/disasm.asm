@@ -42,7 +42,7 @@
 0x5AF9E8: mov     ecx, edi; this
 0x5AF9EA: call    sub_6B73E0
 0x5AF9EF: push    edi
-0x5AF9F0: call    FormHeapFree
+0x5AF9F0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5AF9F5: add     esp, 4
 0x5AF9F8: add     esi, 28h ; '('
 0x5AF9FB: sub     ebp, 1
@@ -50,11 +50,11 @@
 0x5AFA00: fld     dword ptr ds:0A379B4h
 0x5AFA06: push    ecx
 0x5AFA07: mov     ecx, [esp+18h+var_4]; this
-0x5AFA0B: fstp    [esp+18h+a2]; a3
-0x5AFA0E: push    1772h; a2
-0x5AFA13: call    Tile_SetFloat
+0x5AFA0B: fstp    [esp+18h+a2]; value
+0x5AFA0E: push    1772h; propertyCode
+0x5AFA13: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5AFA18: mov     ecx, ebx; int
-0x5AFA1A: call    sub_584740
+0x5AFA1A: call    Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.
 0x5AFA1F: pop     edi
 0x5AFA20: pop     esi
 0x5AFA21: mov     dword ptr [ebx+150h], 6

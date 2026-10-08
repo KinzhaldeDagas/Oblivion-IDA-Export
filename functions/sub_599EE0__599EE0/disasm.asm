@@ -57,7 +57,7 @@
 0x599F8A: mov     ecx, esi; this
 0x599F8C: call    sub_6B73E0
 0x599F91: push    esi
-0x599F92: call    FormHeapFree
+0x599F92: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x599F97: add     esp, 4
 0x599F9A: push    3F0h
 0x599F9F: call    Menu_GetOpenMenuTile
@@ -110,10 +110,10 @@
 0x59A03A: pop     ebp
 0x59A03B: pop     ecx
 0x59A03C: retn
-0x59A03D: mov     ecx, [esi+68h]; TileWindow *
+0x59A03D: mov     ecx, [esi+68h]; this
 0x59A040: push    edi; a3
 0x59A041: push    offset aDataMenusConta; "Data\\Menus\\container_menu.xml"
-0x59A046: call    Menu_LoadXML
+0x59A046: call    Tile__ReadFile; Verified: SDK ReadXML entry. Builds named tree under receiver via 0x590330, connects/evaluates traits via 0x58CF40, registers subtemplates with owning Menu, frees build storage, refreshes returned subtree via 0x58FBA0. Returns first created tile. Fallout analogue 0x827E2588; cache/cleanup differs.
 0x59A04B: mov     esi, eax
 0x59A04D: mov     ecx, esi
 0x59A04F: call    Tile_GetParentMenu
@@ -187,80 +187,80 @@
 0x59A11E: jp      short loc_59A134
 0x59A120: fld     [esp+10h+arg_0]
 0x59A124: push    ecx
-0x59A125: fstp    [esp+14h+var_14]; a3
-0x59A128: push    0FABh; a2
+0x59A125: fstp    [esp+14h+var_14]; value
+0x59A128: push    0FABh; propertyCode
 0x59A12D: mov     ecx, esi; this
-0x59A12F: call    Tile_SetFloat
+0x59A12F: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59A134: mov     ecx, ds:0B33398h
 0x59A13A: mov     ecx, [ecx+20h]; this
 0x59A13D: push    ebx; a3
 0x59A13E: call    InputGlobals__PollAndUpdateInputState
 0x59A143: fld     dword ptr ds:0A53954h
 0x59A149: push    ecx
-0x59A14A: fstp    [esp+18h+var_18]; a3
-0x59A14D: push    0FAFh; a2
+0x59A14A: fstp    [esp+18h+var_18]; value
+0x59A14D: push    0FAFh; propertyCode
 0x59A152: mov     ecx, esi; this
-0x59A154: call    Tile_SetFloat
+0x59A154: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59A159: fld     dword ptr ds:0A53954h
 0x59A15F: push    ecx
-0x59A160: fstp    [esp+18h+var_18]; a3
-0x59A163: push    0FB0h; a2
+0x59A160: fstp    [esp+18h+var_18]; value
+0x59A163: push    0FB0h; propertyCode
 0x59A168: mov     ecx, esi; this
-0x59A16A: call    Tile_SetFloat
+0x59A16A: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59A16F: fld     dword ptr ds:0A53954h
 0x59A175: push    ecx
-0x59A176: fstp    [esp+18h+var_18]; a3
-0x59A179: push    0FB1h; a2
+0x59A176: fstp    [esp+18h+var_18]; value
+0x59A179: push    0FB1h; propertyCode
 0x59A17E: mov     ecx, esi; this
-0x59A180: call    Tile_SetFloat
+0x59A180: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59A185: fld     dword ptr ds:0A53954h
 0x59A18B: push    ecx
-0x59A18C: fstp    [esp+18h+var_18]; a3
-0x59A18F: push    0FB2h; a2
+0x59A18C: fstp    [esp+18h+var_18]; value
+0x59A18F: push    0FB2h; propertyCode
 0x59A194: mov     ecx, esi; this
-0x59A196: call    Tile_SetFloat
+0x59A196: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59A19B: fldz
 0x59A19D: push    ecx
-0x59A19E: fstp    [esp+18h+var_18]; a3
-0x59A1A1: push    0FB3h; a2
+0x59A19E: fstp    [esp+18h+var_18]; value
+0x59A1A1: push    0FB3h; propertyCode
 0x59A1A6: mov     ecx, esi; this
-0x59A1A8: call    Tile_SetFloat
+0x59A1A8: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59A1AD: fldz
 0x59A1AF: push    ecx
-0x59A1B0: fstp    [esp+18h+var_18]; a3
-0x59A1B3: push    0FB4h; a2
+0x59A1B0: fstp    [esp+18h+var_18]; value
+0x59A1B3: push    0FB4h; propertyCode
 0x59A1B8: mov     ecx, esi; this
-0x59A1BA: call    Tile_SetFloat
+0x59A1BA: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59A1BF: fld     dword ptr ds:0A379B4h
 0x59A1C5: push    ecx
-0x59A1C6: fstp    [esp+18h+var_18]; a3
-0x59A1C9: push    0FB5h; a2
+0x59A1C6: fstp    [esp+18h+var_18]; value
+0x59A1C9: push    0FB5h; propertyCode
 0x59A1CE: mov     ecx, esi; this
-0x59A1D0: call    Tile_SetFloat
+0x59A1D0: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59A1D5: fld     dword ptr ds:0A379B4h
 0x59A1DB: push    ecx
-0x59A1DC: fstp    [esp+18h+var_18]; a3
-0x59A1DF: push    0FB6h; a2
+0x59A1DC: fstp    [esp+18h+var_18]; value
+0x59A1DF: push    0FB6h; propertyCode
 0x59A1E4: mov     ecx, esi; this
-0x59A1E6: call    Tile_SetFloat
+0x59A1E6: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59A1EB: fld     dword ptr ds:0A379B4h
 0x59A1F1: push    ecx
-0x59A1F2: fstp    [esp+18h+var_18]; a3
-0x59A1F5: push    0FB7h; a2
+0x59A1F2: fstp    [esp+18h+var_18]; value
+0x59A1F5: push    0FB7h; propertyCode
 0x59A1FA: mov     ecx, esi; this
-0x59A1FC: call    Tile_SetFloat
+0x59A1FC: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59A201: fld     dword ptr ds:0A6906Ch
 0x59A207: push    ecx
 0x59A208: mov     ecx, [edi+28h]; this
-0x59A20B: fstp    [esp+18h+var_18]; a3
-0x59A20E: push    0FB3h; a2
-0x59A213: call    Tile_SetFloat
+0x59A20B: fstp    [esp+18h+var_18]; value
+0x59A20E: push    0FB3h; propertyCode
+0x59A213: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59A218: fldz
 0x59A21A: push    ecx
-0x59A21B: fstp    [esp+18h+var_18]; a3
+0x59A21B: fstp    [esp+18h+var_18]; value
 0x59A21E: mov     ecx, [edi+28h]; this
-0x59A221: push    0FB3h; a2
-0x59A226: call    Tile_SetFloat
+0x59A221: push    0FB3h; propertyCode
+0x59A226: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59A22B: mov     bl, byte ptr [esp+14h+arg_4]
 0x59A22F: test    bl, bl
 0x59A231: mov     dl, byte ptr [esp+14h+arg_C]
@@ -285,15 +285,15 @@
 0x59A26D: call    edx
 0x59A26F: test    al, al
 0x59A271: jz      short loc_59A2A2
-0x59A273: mov     ecx, ebp; this
-0x59A275: call    TESObjectREFR_GetOwner
+0x59A273: mov     ecx, ebp; reference
+0x59A275: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x59A27A: test    eax, eax
 0x59A27C: jz      short loc_59A2AB
 0x59A27E: mov     eax, ds:0B333C4h
-0x59A283: push    1
-0x59A285: push    eax
-0x59A286: mov     ecx, ebp
-0x59A288: call    TESOBjectREFR_IsOwnedBy
+0x59A283: push    1; useFactionOwnership
+0x59A285: push    eax; actorReference
+0x59A286: mov     ecx, ebp; reference
+0x59A288: call    TESObjectREFR_IsOwnedBy; Verified ownership predicate and flag meaning: resolve the effective owner; accept exact equality with the actor's template/base form. When the owner differs, a nonzero ownership-global value can permit the access. With useFactionOwnership=true, a Faction owner is instead checked against the actor base's faction rank and the reference's effective required rank; callers passing false skip that faction-rank path. Direct callers include many `true` paths and ContainerExtraData_RemoveForm's item-sweep call with false. Fallout's TESObjectREFR::IsAnOwner/DoorLock::IsAnOwner also expose a `useFaction` boolean, but its implementation uses actor faction membership and has different rank/global handling.
 0x59A28D: test    al, al
 0x59A28F: jnz     short loc_59A2AB
 0x59A291: mov     edx, [ebp+0]
@@ -309,28 +309,28 @@
 0x59A2B7: fld1
 0x59A2B9: jz      short loc_59A2CD
 0x59A2BB: push    ecx
-0x59A2BC: fstp    [esp+18h+var_18]; a3
-0x59A2BF: push    0FB6h; a2
+0x59A2BC: fstp    [esp+18h+var_18]; value
+0x59A2BF: push    0FB6h; propertyCode
 0x59A2C4: mov     ecx, esi; this
-0x59A2C6: call    Tile_SetFloat
+0x59A2C6: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59A2CB: fld1
 0x59A2CD: test    bl, bl
 0x59A2CF: push    ecx
-0x59A2D0: fstp    [esp+18h+var_18]; a3
+0x59A2D0: fstp    [esp+18h+var_18]; value
 0x59A2D3: mov     ecx, esi; this
 0x59A2D5: jz      loc_59A35D
-0x59A2DB: push    0FB6h; a2
-0x59A2E0: call    Tile_SetFloat
+0x59A2DB: push    0FB6h; propertyCode
+0x59A2E0: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59A2E5: mov     ecx, ds:0B33A98h
 0x59A2EB: push    ebp
-0x59A2EC: call    sub_448F40
+0x59A2EC: call    sub_448F40; Verified caller path: ensures the actor's barter ContainerChanges exists, merges the actor and merchant-container changes, then calls TESObjectCELL_AddOwnedReferencesToBarterContainer for the actor's current cell. This anchors the ownership predicate's false faction-ownership argument to barter inventory construction.
 0x59A2F1: mov     ecx, ds:0B333C4h
 0x59A2F7: mov     dl, byte ptr [esp+14h+arg_8]
-0x59A2FB: push    1
+0x59A2FB: push    1; index
 0x59A2FD: mov     byte ptr [ecx+124h], 1
-0x59A304: push    5
+0x59A304: push    5; topicType
 0x59A306: mov     [edi+62h], dl
-0x59A309: call    TESTopic__GEtTopic
+0x59A309: call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.
 0x59A30E: push    0; int
 0x59A310: push    offset ??_R0?AVActor@@@8; struct TypeDescriptor *
 0x59A315: push    offset ??_R0?AVTESObjectREFR@@@8; struct _s_RTTICompleteObjectLocator *
@@ -358,8 +358,8 @@
 0x59A357: call    edx
 0x59A359: fstp    st
 0x59A35B: jmp     short loc_59A367
-0x59A35D: push    0FB7h; a2
-0x59A362: call    Tile_SetFloat
+0x59A35D: push    0FB7h; propertyCode
+0x59A362: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59A367: xor     eax, eax
 0x59A369: cmp     [edi+64h], al
 0x59A36C: push    ecx
@@ -369,22 +369,22 @@
 0x59A375: add     eax, 1
 0x59A378: mov     [esp+18h+arg_0], eax
 0x59A37C: fild    [esp+18h+arg_0]
-0x59A380: fstp    [esp+18h+var_18]; a3
-0x59A383: push    0FB5h; a2
-0x59A388: call    Tile_SetFloat
+0x59A380: fstp    [esp+18h+var_18]; value
+0x59A383: push    0FB5h; propertyCode
+0x59A388: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59A38D: fldz
 0x59A38F: push    ecx
-0x59A390: fstp    [esp+18h+var_18]; a3
+0x59A390: fstp    [esp+18h+var_18]; value
 0x59A393: mov     ecx, [edi+28h]; this
-0x59A396: push    0FB3h; a2
-0x59A39B: call    Tile_SetFloat
+0x59A396: push    0FB3h; propertyCode
+0x59A39B: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59A3A0: cmp     byte ptr [edi+61h], 0
 0x59A3A4: pop     ebx
 0x59A3A5: jz      short loc_59A3C3
 0x59A3A7: mov     ecx, [edi+44h]
 0x59A3AA: add     ecx, 44h ; 'D'
 0x59A3AD: call    sub_422DC0
-0x59A3B2: call    Double_To_SInt32
+0x59A3B2: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x59A3B7: mov     ecx, ds:0B333C4h
 0x59A3BD: mov     [ecx+11Ch], eax
 0x59A3C3: call    ContainerMenu_Update

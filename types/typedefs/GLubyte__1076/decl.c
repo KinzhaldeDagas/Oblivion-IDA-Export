@@ -1,1 +1,1 @@
-GLubyte
+typedef unsigned __int8 GLubyte;

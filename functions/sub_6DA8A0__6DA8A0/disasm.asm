@@ -11,9 +11,9 @@
 0x6DA8B5: pop     esi
 0x6DA8B6: retn    4
 0x6DA8B9: lea     eax, [edi+0Ch]
-0x6DA8BC: push    eax
-0x6DA8BD: lea     ecx, [esi+0Ch]
-0x6DA8C0: call    sub_8AA390
+0x6DA8BC: push    eax; other
+0x6DA8BD: lea     ecx, [esi+0Ch]; this
+0x6DA8C0: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x6DA8C5: test    al, al
 0x6DA8C7: jnz     short loc_6DA8B2
 0x6DA8C9: mov     ecx, [esi+18h]

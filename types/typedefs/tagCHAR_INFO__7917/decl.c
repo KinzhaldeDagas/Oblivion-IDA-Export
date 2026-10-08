@@ -1,1 +1,5 @@
-tagCHAR_INFO
+struct tagCHAR_INFO
+{
+$90B425943676824869B9073C092B3BE4 Char;
+WORD Attributes;
+};

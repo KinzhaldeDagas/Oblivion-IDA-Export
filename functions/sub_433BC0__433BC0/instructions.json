@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x433CDE",
-    "line": "call    eax",
+    "line": "call    eax; BSTaskManager worker dispatches the selected IOTask through IOManager vtable slot +0x40 (stage 1).",
     "mnemonic": "call",
     "size": 2
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x433CE9",
-    "line": "call    eax",
+    "line": "call    eax; BSTaskManager worker then dispatches IOManager vtable slot +0x44 (stage 2).",
     "mnemonic": "call",
     "size": 2
   },
@@ -848,6 +848,72 @@
   {
     "ea": "0x433D64",
     "line": "jmp     loc_433BF0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AC040",
+    "line": "lea     ecx, [ebp-2Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AC043",
+    "line": "jmp     loc_432090",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AC048",
+    "line": "lea     ecx, [ebp-38h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AC04B",
+    "line": "jmp     sub_4BDDC0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AC050",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AC054",
+    "line": "lea     eax, [edx-40h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AC057",
+    "line": "mov     ecx, [edx-44h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AC05A",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AC05C",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AC061",
+    "line": "mov     eax, offset stru_AD8D68",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AC066",
+    "line": "jmp     ___CxxFrameHandler3",
     "mnemonic": "jmp",
     "size": 5
   }

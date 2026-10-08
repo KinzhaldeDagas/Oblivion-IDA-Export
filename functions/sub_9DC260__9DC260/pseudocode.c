@@ -1,4 +1,4 @@
-BSStringT *sub_9DC260()
+NiRTTI *sub_9DC260()
 {
-  return sub_70E220(&stru_B33E80, "BSTempNodeManager", (int)dword_B3FAB0);
+  return NiRTTI_Constructor(&stru_B33E80, "BSTempNodeManager", &parent); /*0x9dc274*/
 }

@@ -9,7 +9,7 @@
 0x9A1208: push    esi
 0x9A1209: push    edi
 0x9A120A: xor     edi, edi
-0x9A120C: cmp     dword_BAA87C, edi
+0x9A120C: cmp     dword_BA9E10+0A6Ch, edi
 0x9A1212: mov     ebx, edx
 0x9A1214: mov     esi, ecx
 0x9A1216: mov     [ebp+lpMultiByteStr], ebx
@@ -25,12 +25,12 @@
 0x9A122B: call    ds:CompareStringW
 0x9A1231: test    eax, eax
 0x9A1233: jz      short loc_9A1241
-0x9A1235: mov     dword_BAA87C, 1
+0x9A1235: mov     dword_BA9E10+0A6Ch, 1
 0x9A123F: jmp     short loc_9A1256
 0x9A1241: call    ds:GetLastError
 0x9A1247: cmp     eax, 78h ; 'x'
 0x9A124A: jnz     short loc_9A1256
-0x9A124C: mov     dword_BAA87C, 2
+0x9A124C: mov     dword_BA9E10+0A6Ch, 2
 0x9A1256: cmp     [ebp+cbMultiByte], edi
 0x9A1259: jle     short loc_9A129C
 0x9A125B: mov     ecx, [ebp+cbMultiByte]
@@ -68,7 +68,7 @@
 0x9A12A4: jmp     loc_9A156B
 0x9A12A9: cmp     edx, 0FFFFFFFFh
 0x9A12AC: jl      short loc_9A12A2
-0x9A12AE: mov     ecx, dword_BAA87C
+0x9A12AE: mov     ecx, dword_BA9E10+0A6Ch
 0x9A12B4: cmp     ecx, 2
 0x9A12B7: jz      loc_9A14B6
 0x9A12BD: cmp     ecx, edi

@@ -3,26 +3,26 @@ void __thiscall TESPackage::~TESPackage(TESPackage *this)
   LocationData *location; // edi
   TargetData *target; // edi
 
-  this->__vftable = (TESPackageVtbl *)&TESPackage::`vftable';
-  if ( !*(_BYTE *)(TESDataHandler + 0xCD4) )
-    sub_675090((char *)this);
-  if ( TESDataHandler_IsFormIDCreated_(this->members.super.refID) )
-    this->members.packageFlags &= ~0x800u;
-  location = this->members.location;
-  if ( location )
+  this->__vftable = &TESPackage::`vftable'; /*0x568669*/
+  if ( !g_TESDataHandler->activeFileState.unknownAfterActiveFileState[2] ) /*0x568674*/
+    sub_675090((ActorProcessManager *)&qword_B3BB2C[0x75], this); /*0x56868c*/
+  if ( TESDataHandler_IsFormIDCreated_(this->members.super.refID) ) /*0x56869b*/
+    this->members.packageFlags &= ~0x800u; /*0x5686a4*/
+  location = this->members.location; /*0x5686ab*/
+  if ( location ) /*0x5686b0*/
   {
-    TESPackage_LocationData_destr(&this->members.location->locationType);
-    FormHeapFree((unsigned int)location);
+    TESPackage_LocationData_destr(&this->members.location->locationType); /*0x5686b4*/
+    FormHeapFree((unsigned int)location); /*0x5686ba*/
   }
-  target = this->members.target;
-  if ( target )
+  target = this->members.target; /*0x5686c2*/
+  if ( target ) /*0x5686c7*/
   {
-    TESTexture::ClearComponentReferences(this->members.target);
-    FormHeapFree((unsigned int)target);
+    Shared_NoOpVirtual_60D0A0(this->members.target); /*0x5686cb*/
+    FormHeapFree((unsigned int)target); /*0x5686d1*/
   }
-  sub_56A750((void **)&this->members.conditionList.data);
-  j_TESForm_ClearComponentReferences((TESForm *)this);
-  sub_56A7A0(&this->members.conditionList);
-  TESTexture::ClearComponentReferences(&this->members.time);
-  TESForm_destr((TESForm *)this);
+  sub_56A750((BSSimpleList_VoidPtr *)&this->members.conditionList); /*0x5686de*/
+  j_TESForm_ClearComponentReferences((TESForm *)this); /*0x5686e5*/
+  sub_56A7A0((BSSimpleList_VoidPtr *)&this->members.conditionList); /*0x5686f1*/
+  Shared_NoOpVirtual_60D0A0(&this->members.time); /*0x5686fe*/
+  TESForm_destr((TESForm *)this); /*0x56870d*/
 }

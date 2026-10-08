@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x788630",
-    "line": "mov     edx, [esp+arg_0]",
+    "line": "mov     edx, [esp+first]; Oblivion collision-vector uninitialized copy: copies [first,last) as 28-byte records into destination and returns the advanced destination.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x788634",
-    "line": "mov     eax, [esp+arg_8]",
+    "line": "mov     eax, [esp+destination]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x788639",
-    "line": "mov     ebx, [esp+4+arg_4]",
+    "line": "mov     ebx, [esp+4+last]",
     "mnemonic": "mov",
     "size": 4
   },

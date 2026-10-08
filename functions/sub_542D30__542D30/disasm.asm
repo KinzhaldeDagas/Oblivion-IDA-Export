@@ -59,7 +59,7 @@
 0x542DDA: add     ecx, 0F8h ; 'ø'
 0x542DE0: call    sub_544160
 0x542DE5: push    edi
-0x542DE6: call    FormHeapFree
+0x542DE6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x542DEB: add     esp, 4
 0x542DEE: mov     ecx, [esp+20h+var_C]
 0x542DF2: mov     large fs:0, ecx
@@ -68,3 +68,12 @@
 0x542DFB: pop     esi
 0x542DFC: add     esp, 14h
 0x542DFF: retn
+0x9C08D0: lea     ecx, [ebp-14h]; void *
+0x9C08D3: jmp     BSStringT_Clear
+0x9C08D8: mov     edx, [esp+arg_4]
+0x9C08DC: lea     eax, [edx-10h]
+0x9C08DF: mov     ecx, [edx-14h]
+0x9C08E2: xor     ecx, eax
+0x9C08E4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C08E9: mov     eax, offset stru_AE9B18
+0x9C08EE: jmp     ___CxxFrameHandler3

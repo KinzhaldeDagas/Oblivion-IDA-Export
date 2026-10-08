@@ -23,7 +23,7 @@
 0x646EA2: test    ecx, ecx
 0x646EA4: jnz     short loc_646EAA
 0x646EA6: mov     ecx, [esp+8+arg_0]; jumptable 00646E8C cases 29,44
-0x646EAA: call    TESObjectREFR_GetParentCell
+0x646EAA: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x646EAF: pop     edi; jumptable 00646E8C default case, cases 9-12,16-28,30,31,33-43
 0x646EB0: pop     esi
 0x646EB1: retn    4

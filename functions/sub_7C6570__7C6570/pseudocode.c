@@ -1,114 +1,123 @@
-double __thiscall sub_7C6570(int this, int a2, int a3, int a4, _DWORD *a5, float *a6, float *a7, float a8)
+// Accumulate Oblivion light-level inputs: sum eligible full-list light influence and output reference-light ambient/diffuse channel maxima.
+float __thiscall ShadowSceneNode_AccumulateLightLevelInputs(
+        ShadowSceneNode_DecodedLayout *self,
+        float x,
+        float y,
+        float z,
+        unsigned int *positiveCount,
+        float *outAmbientMax,
+        float *outDiffuseMax,
+        void *excludedBackingLight)
 {
-  _DWORD *v8; // esi
-  int v9; // edi
-  int v10; // ecx
+  _DWORD *fullListHead_E8; // esi
+  void *v9; // edi
+  ShadowSceneLight_DecodedLayout *v10; // ecx
   float *v11; // eax
   LONG (__stdcall *v12)(volatile LONG *); // edi
-  float v13; // esi
+  void (__thiscall ***v13)(void *, int); // esi
   double v14; // st6
   double v15; // st7
   float *v16; // eax
-  float v17; // esi
+  void (__thiscall ***v17)(void *, int); // esi
   double v18; // st6
   double v19; // st7
-  float v21; // [esp+8h] [ebp-8h]
-  int v22; // [esp+Ch] [ebp-4h]
-  int v23; // [esp+14h] [ebp+4h]
-  int v24; // [esp+14h] [ebp+4h]
-  float v25; // [esp+18h] [ebp+8h]
-  float v26; // [esp+18h] [ebp+8h]
-  float v27; // [esp+1Ch] [ebp+Ch]
-  float v28; // [esp+1Ch] [ebp+Ch]
+  float v22; // [esp+8h] [ebp-8h]
+  ShadowSceneNode_DecodedLayout *v23; // [esp+Ch] [ebp-4h]
+  float xa; // [esp+14h] [ebp+4h]
+  float xb; // [esp+14h] [ebp+4h]
+  float ya; // [esp+18h] [ebp+8h]
+  float yb; // [esp+18h] [ebp+8h]
+  float za; // [esp+1Ch] [ebp+Ch]
+  float zb; // [esp+1Ch] [ebp+Ch]
 
-  v21 = 0.0;
-  v8 = *(_DWORD **)(this + 0xE8);
-  v22 = this;
-  if ( v8 )
+  v22 = 0.0; /*0x7c6577*/
+  fullListHead_E8 = self->fullListHead_E8;      // Iterate ShadowSceneNode full-list entries from +0xE8 for point/source influence accumulation. /*0x7c657c*/
+  v23 = self; /*0x7c6585*/
+  if ( fullListHead_E8 ) /*0x7c6589*/
   {
-    v9 = LODWORD(a8);
-    do
+    v9 = excludedBackingLight; /*0x7c658b*/
+    do /*0x7c65d8*/
     {
-      v10 = v8[2];
-      v8 = (_DWORD *)*v8;
-      if ( v10 )
+      v10 = (ShadowSceneLight_DecodedLayout *)fullListHead_E8[2]; /*0x7c6597*/
+      fullListHead_E8 = (_DWORD *)*fullListHead_E8; /*0x7c659f*/
+      if ( v10 ) /*0x7c65a1*/
       {
-        v21 = sub_7D31B0(v10, *(float *)&a2, *(float *)&a3, *(float *)&a4, v9) + v21;
-        if ( v21 > 0.0 )
-          ++*a5;
+        v22 = ShadowSceneLight_ComputePointInfluenceScore(v10, x, y, z, v9) + v22;// Add this ShadowSceneLight's native point/source influence at the queried world position, excluding the supplied backing light. /*0x7c65be*/
+        if ( v22 > 0.0 ) /*0x7c65cd*/
+          ++*positiveCount; /*0x7c65d3*/
       }
     }
-    while ( v8 );
-    this = v22;
+    while ( fullListHead_E8 ); /*0x7c65d8*/
+    self = v23; /*0x7c65da*/
   }
-  v11 = (float *)*sub_405AD0(*(_DWORD **)(this + 0x118), &a8);
-  v12 = InterlockedDecrement;
-  v27 = v11[0x3A];
-  v23 = *((int *)v11 + 0x38);
-  v25 = v11[0x39];
-  if ( a8 != 0.0 )
+  v11 = (float *)*ShadowSceneLight_GetLightRef((_DWORD *)self->lightLevelReference_118, &excludedBackingLight);// Resolve ShadowSceneNode+0x118 backing reference light and compute the maximum of its ambient RGB channels (+0xE0..+0xE8). /*0x7c65ee*/
+  v12 = InterlockedDecrement; /*0x7c6602*/
+  za = v11[0x3A]; /*0x7c6608*/
+  xa = v11[0x38]; /*0x7c6612*/
+  ya = v11[0x39]; /*0x7c6616*/
+  if ( *(float *)&excludedBackingLight != 0.0 ) /*0x7c661a*/
   {
-    v13 = a8;
-    if ( !v12((volatile LONG *)(LODWORD(a8) + 4)) )
-      (**(void (__thiscall ***)(_DWORD, int))LODWORD(v13))(LODWORD(v13), 1);
+    v13 = (void (__thiscall ***)(void *, int))excludedBackingLight; /*0x7c661c*/
+    if ( !v12((volatile LONG *)excludedBackingLight + 1) ) /*0x7c6622*/
+      (**v13)(v13, 1); /*0x7c6634*/
   }
-  if ( v27 >= (double)v25 )
+  if ( za >= (double)ya ) /*0x7c6645*/
   {
-    a8 = v27;
-    v14 = v25;
-    v15 = v27;
+    *(float *)&excludedBackingLight = za; /*0x7c664f*/
+    v14 = ya; /*0x7c6653*/
+    v15 = za; /*0x7c6653*/
   }
   else
   {
-    v14 = v25;
-    v15 = v27;
-    a8 = v25;
+    v14 = ya; /*0x7c6647*/
+    v15 = za; /*0x7c6647*/
+    *(float *)&excludedBackingLight = ya; /*0x7c6649*/
   }
-  if ( a8 >= (double)*(float *)&v23 )
+  if ( *(float *)&excludedBackingLight >= (double)xa ) /*0x7c6664*/
   {
-    if ( v14 > v15 )
-      v15 = v14;
+    if ( v14 > v15 ) /*0x7c6675*/
+      v15 = v14; /*0x7c6677*/
   }
   else
   {
-    v15 = *(float *)&v23;
+    v15 = xa; /*0x7c6668*/
   }
-  a8 = v15;
-  *a6 = a8;
-  v16 = (float *)*sub_405AD0(*(_DWORD **)(v22 + 0x118), &a8);
-  v28 = v16[0x3D];
-  v24 = *((int *)v16 + 0x3B);
-  v26 = v16[0x3C];
-  if ( a8 != 0.0 )
+  *(float *)&excludedBackingLight = v15; /*0x7c6681*/
+  *outAmbientMax = *(float *)&excludedBackingLight; /*0x7c6691*/
+  v16 = (float *)*ShadowSceneLight_GetLightRef((_DWORD *)v23->lightLevelReference_118, &excludedBackingLight);// Resolve the same +0x118 backing reference light and compute the maximum of its diffuse RGB channels (+0xEC..+0xF4). /*0x7c669f*/
+  zb = v16[0x3D]; /*0x7c66b3*/
+  xb = v16[0x3B]; /*0x7c66bd*/
+  yb = v16[0x3C]; /*0x7c66c1*/
+  if ( *(float *)&excludedBackingLight != 0.0 ) /*0x7c66c5*/
   {
-    v17 = a8;
-    if ( !v12((volatile LONG *)(LODWORD(a8) + 4)) )
-      (**(void (__thiscall ***)(_DWORD, int))LODWORD(v17))(LODWORD(v17), 1);
+    v17 = (void (__thiscall ***)(void *, int))excludedBackingLight; /*0x7c66c7*/
+    if ( !v12((volatile LONG *)excludedBackingLight + 1) ) /*0x7c66cd*/
+      (**v17)(v17, 1); /*0x7c66df*/
   }
-  if ( v28 >= (double)v26 )
+  if ( zb >= (double)yb ) /*0x7c66f0*/
   {
-    a8 = v28;
-    v18 = v26;
-    v19 = v28;
+    *(float *)&excludedBackingLight = zb; /*0x7c66fa*/
+    v18 = yb; /*0x7c66fe*/
+    v19 = zb; /*0x7c66fe*/
   }
   else
   {
-    v18 = v26;
-    v19 = v28;
-    a8 = v26;
+    v18 = yb; /*0x7c66f2*/
+    v19 = zb; /*0x7c66f2*/
+    *(float *)&excludedBackingLight = yb; /*0x7c66f4*/
   }
-  if ( a8 >= (double)*(float *)&v24 )
+  if ( *(float *)&excludedBackingLight >= (double)xb ) /*0x7c670f*/
   {
-    if ( v18 <= v19 )
-      goto LABEL_28;
+    if ( v18 <= v19 ) /*0x7c6720*/
+      goto LABEL_28; /*0x7c6720*/
   }
   else
   {
-    v18 = *(float *)&v24;
+    v18 = xb; /*0x7c6711*/
   }
-  v19 = v18;
+  v19 = v18; /*0x7c6713*/
 LABEL_28:
-  a8 = v19;
-  *a7 = a8;
-  return v21;
+  *(float *)&excludedBackingLight = v19; /*0x7c6724*/
+  *outDiffuseMax = *(float *)&excludedBackingLight; /*0x7c6732*/
+  return v22; /*0x7c6738*/
 }

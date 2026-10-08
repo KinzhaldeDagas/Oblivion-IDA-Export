@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A3230",
-    "line": "push    esi",
+    "line": "push    esi; Initializes an empty typed leaf-texture vector and, when count is nonzero, allocates capacity for exactly count 0x54-byte elements.",
     "mnemonic": "push",
     "size": 1
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x7A3256",
-    "line": "call    sub_790B90",
+    "line": "call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error(\"vector<T> too long\") and throws; used by multiple element specializations after max_size checks.",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,13 +109,13 @@
   },
   {
     "ea": "0x7A325C",
-    "line": "push    esi; char *",
+    "line": "push    esi; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A325D",
-    "line": "call    sub_7A2560",
+    "line": "call    OB_stVector_SIdvLeafTexture_Allocate_010201A0; Oblivion leaf-texture vector allocator: rejects count*0x54 overflow, then allocates exactly count 0x54-byte records through FormHeap.",
     "mnemonic": "call",
     "size": 5
   },

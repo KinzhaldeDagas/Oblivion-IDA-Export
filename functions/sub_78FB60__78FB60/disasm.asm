@@ -1,4 +1,4 @@
-0x78FB60: mov     ecx, [esp+arg_0]
+0x78FB60: mov     ecx, [esp+arg_0]; OBLIVION AUTHORITY (2026-08-30): Compiler-folded allocator for vectors with 4-byte elements. Validates count*4 overflow, throws bad_alloc on overflow, and allocates through FormHeapAlloc; FindPairs uses it for vector<bool>'s uint32 backing words.
 0x78FB64: sub     esp, 0Ch
 0x78FB67: test    ecx, ecx
 0x78FB69: ja      short loc_78FB81

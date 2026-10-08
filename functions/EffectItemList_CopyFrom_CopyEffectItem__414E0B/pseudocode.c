@@ -1,5 +1,5 @@
 int __userpurge EffectItemList_CopyFrom_::CopyEffectItem@<eax>(
-        int a1@<ebx>,
+        _DWORD *a1@<ebx>,
         int a2@<ebp>,
         int a3@<esi>,
         int a4,
@@ -15,8 +15,8 @@ int __userpurge EffectItemList_CopyFrom_::CopyEffectItem@<eax>(
 {
   _DWORD *v13; // edi
 
-  if ( FormHeapAlloc(0x24u) == a1 )
-    return EffectItemList_CopyFrom_::FindLastEntry(a1, a2, 0, a4, a5, a6, a7, a8, a9, a10, a1);
-  v13 = (_DWORD *)EffectItem_constrCopy(a3);
-  return EffectItemList_CopyFrom_::FindLastEntry(a1, a2, v13, a4, a5, a6, a7, a8, a9, a10, a1);
+  if ( (_DWORD *)FormHeapAlloc(0x24u) == a1 ) /*0x414e1f*/
+    return EffectItemList_CopyFrom_::FindLastEntry(a1, a2, 0, a4, a5, a6, a7, a8, a9, a10, (int)a1); /*0x414e2e*/
+  v13 = (_DWORD *)EffectItem_constrCopy(a3); /*0x414e29*/
+  return EffectItemList_CopyFrom_::FindLastEntry(a1, a2, v13, a4, a5, a6, a7, a8, a9, a10, (int)a1);
 }

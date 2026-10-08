@@ -284,7 +284,7 @@
 0x961086: test    ah, 5
 0x961089: jp      loc_96122D
 0x96108F: lea     ecx, [esp+11Ch+var_FC]
-0x961093: call    sub_43F350
+0x961093: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x961098: fstp    st
 0x96109A: fld     dword ptr [esp+11Ch+var_F0]
 0x96109E: fld     [esp+11Ch+var_E0]
@@ -443,8 +443,8 @@
 0x9612A9: call    NiRenderTargetGroup__GetRenderTargetsNum
 0x9612AE: cmp     eax, 2
 0x9612B1: jnz     loc_960F66
-0x9612B7: lea     ecx, [esp+11Ch+var_6C]
-0x9612BE: call    sub_4E7DE0
+0x9612B7: lea     ecx, [esp+11Ch+var_6C]; this
+0x9612BE: call    PathGraphNode_GetConnections; Verified graph-node connection-list accessor: returns this+0x20. TESPathGrid and TESRoad graph code both traverse this as a BSSimpleList of adjacency pointers.
 0x9612C3: cmp     [esp+11Ch+arg_24], 0
 0x9612CB: mov     edx, [eax]
 0x9612CD: mov     ecx, [esp+11Ch+arg_20]

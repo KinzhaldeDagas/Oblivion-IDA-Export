@@ -1,4 +1,4 @@
-0x458E50: push    ecx
+0x458E50: push    ecx; MEF v27 verification: raw blob helper consumes UInt16 payload from SaveLoad+0x14. Guarded null-key/null-map replacements must discard the payload before skipping map insertion to preserve stream alignment.
 0x458E51: mov     eax, [esp+4+a2]
 0x458E55: mov     eax, [eax+0Ch]
 0x458E58: push    ebx
@@ -26,11 +26,11 @@
 0x458E96: mov     ax, [esp+14h+arg_4]
 0x458E9B: mov     [ebx], ax
 0x458E9E: mov     ecx, [esi+14h]
-0x458EA1: push    edi; Size
-0x458EA2: push    ecx; Src
+0x458EA1: push    edi; byteCount
+0x458EA2: push    ecx; source
 0x458EA3: lea     edx, [ebx+2]
-0x458EA6: push    edx; Dst
-0x458EA7: call    _memcpy
+0x458EA6: push    edx; destination
+0x458EA7: call    _memcpy; MEF decode note: raw save-buffer memcpy using UInt16 length from sub_470780 and SaveLoad+0x14 cursor. Bypasses SaveLoad_LoadData; needs active record-range tracking or bounded helper replacement before patching.
 0x458EAC: mov     eax, [esp+20h+a2]
 0x458EB0: add     [esi+14h], edi
 0x458EB3: add     esp, 0Ch

@@ -1,4 +1,4 @@
-0x563D00: mov     eax, [ecx]
+0x563D00: mov     eax, [ecx]; BSTreeNode branch group visibility toggle. Shows child 0/Branches when flag is true; hides it when false.
 0x563D02: mov     edx, [eax+0A0h]
 0x563D08: call    edx
 0x563D0A: test    eax, eax

@@ -13,24 +13,24 @@
 0x664346: mov     eax, [eax+8]
 0x664349: mov     ecx, esi; this
 0x66434B: mov     [esi+728h], eax
-0x664351: call    TESObjectREFR_GetParentCell
+0x664351: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x664356: test    eax, eax
 0x664358: jz      short loc_664382
 0x66435A: mov     ecx, esi; this
-0x66435C: call    TESObjectREFR_GetParentCell
+0x66435C: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x664361: mov     ecx, eax; this
 0x664363: call    TESObjectCELL_GetWorldSpace
 0x664368: test    eax, eax
 0x66436A: jz      short loc_664382
 0x66436C: mov     ecx, esi; this
-0x66436E: call    TESObjectREFR_GetParentCell
+0x66436E: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x664373: mov     ecx, eax; this
 0x664375: call    TESObjectCELL_GetWorldSpace
 0x66437A: mov     [esi+72Ch], eax
 0x664380: pop     esi
 0x664381: retn
 0x664382: mov     ecx, esi; this
-0x664384: call    TESObjectREFR_GetParentCell
+0x664384: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x664389: mov     [esi+72Ch], eax
 0x66438F: pop     esi
 0x664390: retn

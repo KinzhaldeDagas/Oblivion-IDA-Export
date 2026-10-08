@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x5C3E4D",
-    "line": "mov     [esp+3Ch+var_20], esi",
+    "line": "mov     [esp+3Ch+texture], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x5C3EC1",
-    "line": "mov     ebp, [esp+3Ch+var_20]",
+    "line": "mov     ebp, [esp+3Ch+texture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x5C3EFA",
-    "line": "push    eax; a2",
+    "line": "push    eax; categoryName",
     "mnemonic": "push",
     "size": 1
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x5C3F14",
-    "line": "mov     [esp+54h+var_1C], esp",
+    "line": "mov     [esp+54h+slot], esp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x5C3F2E",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x5C3F35",
-    "line": "call    sub_5C3440",
+    "line": "call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.",
     "mnemonic": "call",
     "size": 5
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x5C3F61",
-    "line": "mov     [esp+3Ch+var_1C], eax",
+    "line": "mov     [esp+3Ch+slot], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -757,7 +757,7 @@
   },
   {
     "ea": "0x5C3FC1",
-    "line": "mov     [esp+4Ch+var_1C], esp",
+    "line": "mov     [esp+4Ch+slot], esp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -769,7 +769,7 @@
   },
   {
     "ea": "0x5C3FC6",
-    "line": "push    eax; a2",
+    "line": "push    eax; categoryName",
     "mnemonic": "push",
     "size": 1
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x5C3FFA",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -877,7 +877,7 @@
   },
   {
     "ea": "0x5C4001",
-    "line": "call    sub_5C3440",
+    "line": "call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.",
     "mnemonic": "call",
     "size": 5
   },
@@ -895,7 +895,7 @@
   },
   {
     "ea": "0x5C400D",
-    "line": "mov     eax, [esp+3Ch+var_20]",
+    "line": "mov     eax, [esp+3Ch+texture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1315,7 +1315,7 @@
   },
   {
     "ea": "0x5C40D4",
-    "line": "cmp     ebx, [esp+3Ch+var_1C]",
+    "line": "cmp     ebx, [esp+3Ch+slot]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -1387,7 +1387,7 @@
   },
   {
     "ea": "0x5C4106",
-    "line": "mov     ecx, [esp+3Ch+var_20]",
+    "line": "mov     ecx, [esp+3Ch+texture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1519,31 +1519,31 @@
   },
   {
     "ea": "0x5C4150",
-    "line": "push    esi; char",
+    "line": "push    esi; searchArchives",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C4151",
-    "line": "push    esi; char",
+    "line": "push    esi; allowMissing",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C4152",
-    "line": "push    ebp; ArgList",
+    "line": "push    ebp; path",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C4153",
-    "line": "lea     ecx, [esp+48h+var_20]",
+    "line": "lea     ecx, [esp+48h+texture]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5C4157",
-    "line": "push    ecx; int",
+    "line": "push    ecx; outTexture",
     "mnemonic": "push",
     "size": 1
   },
@@ -1555,13 +1555,13 @@
   },
   {
     "ea": "0x5C415E",
-    "line": "call    sub_442890",
+    "line": "call    OB_TES_LoadOrFindSourceTexture_010201A0; TES texture cache/load helper: checks the global texture map, optionally verifies file existence via FileFinder, loads NiSourceTexture by filename, caches it, and returns a refcounted texture pointer.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5C4163",
-    "line": "mov     eax, [esp+3Ch+var_20]",
+    "line": "mov     eax, [esp+3Ch+texture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1663,19 +1663,19 @@
   },
   {
     "ea": "0x5C4199",
-    "line": "mov     edx, [esp+3Ch+var_20]",
+    "line": "mov     edx, [esp+3Ch+texture]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5C419D",
-    "line": "push    edx",
+    "line": "push    edx; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C419E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1687,25 +1687,25 @@
   },
   {
     "ea": "0x5C41A4",
-    "line": "call    NiTexturingProperty__SetUnk08",
+    "line": "call    OB_NiTexturingProperty_SetBaseTexture_010201A0",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5C41A9",
-    "line": "push    3",
+    "line": "push    3; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5C41AB",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5C41AD",
-    "line": "call    sub_405870",
+    "line": "call    OB_NiTexturingProperty_SetClampMode_010201A0; NiTexturingProperty map flag helper: ensures map slot 0 exists and writes arg-derived bits into map Unk04 bits 0xC000. 0x560AC0 calls it with 0 for billboard texture property state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1723,7 +1723,7 @@
   },
   {
     "ea": "0x5C41B6",
-    "line": "call    sub_405900",
+    "line": "call    NiTexturingProperty_SetBaseMapFilterMode",
     "mnemonic": "call",
     "size": 5
   },
@@ -1747,7 +1747,7 @@
   },
   {
     "ea": "0x5C41C3",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1771,7 +1771,7 @@
   },
   {
     "ea": "0x5C41CE",
-    "line": "lea     eax, [esp+40h+var_1C]",
+    "line": "lea     eax, [esp+40h+slot]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1795,13 +1795,13 @@
   },
   {
     "ea": "0x5C41DA",
-    "line": "lea     ecx, [esp+3Ch+var_1C]; this",
+    "line": "lea     ecx, [esp+3Ch+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5C41DE",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -1819,7 +1819,7 @@
   },
   {
     "ea": "0x5C41E6",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1843,7 +1843,7 @@
   },
   {
     "ea": "0x5C41F3",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1867,7 +1867,7 @@
   },
   {
     "ea": "0x5C41FE",
-    "line": "lea     ecx, [esp+40h+var_1C]",
+    "line": "lea     ecx, [esp+40h+slot]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1891,13 +1891,13 @@
   },
   {
     "ea": "0x5C420A",
-    "line": "lea     ecx, [esp+3Ch+var_1C]; this",
+    "line": "lea     ecx, [esp+3Ch+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5C420E",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -1915,13 +1915,13 @@
   },
   {
     "ea": "0x5C4216",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5C421B",
-    "line": "mov     eax, [esp+3Ch+var_20]",
+    "line": "mov     eax, [esp+3Ch+texture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2035,7 +2035,7 @@
   },
   {
     "ea": "0x5C424C",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2131,31 +2131,31 @@
   },
   {
     "ea": "0x5C4280",
-    "line": "push    1",
+    "line": "push    1; arg3",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5C4282",
-    "line": "push    1",
+    "line": "push    1; normalMapBypass",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5C4284",
-    "line": "push    1",
+    "line": "push    1; shaderId",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5C4286",
-    "line": "push    eax",
+    "line": "push    eax; root",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C4287",
-    "line": "call    sub_7B8940",
+    "line": "call    BSShaderManager_AssignShadersRecursive; Generic recursive shader assignment wrapper around 0x7B7FC0. In decoded TES4 tree code it is used for branch shader id 4 and simple/default id 1; no stock call with frond shader id 5 was found in this pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2239,31 +2239,31 @@
   },
   {
     "ea": "0x5C42B3",
-    "line": "push    1",
+    "line": "push    1; arg3",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5C42B5",
-    "line": "push    1",
+    "line": "push    1; normalMapBypass",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5C42B7",
-    "line": "push    1",
+    "line": "push    1; shaderId",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5C42B9",
-    "line": "push    eax",
+    "line": "push    eax; root",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C42BA",
-    "line": "call    sub_7B8940",
+    "line": "call    BSShaderManager_AssignShadersRecursive; Generic recursive shader assignment wrapper around 0x7B7FC0. In decoded TES4 tree code it is used for branch shader id 4 and simple/default id 1; no stock call with frond shader id 5 was found in this pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2548,5 +2548,149 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C1080",
+    "line": "lea     ecx, [ebp-28h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C1083",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1088",
+    "line": "lea     ecx, [ebp-24h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C108B",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1090",
+    "line": "mov     ecx, [ebp-18h]; void *",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C1093",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1098",
+    "line": "mov     ecx, [ebp-1Ch]; void *",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C109B",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C10A0",
+    "line": "lea     ecx, [ebp-14h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C10A3",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C10A8",
+    "line": "lea     ecx, [ebp-20h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C10AB",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C10B0",
+    "line": "mov     eax, [ebp-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C10B3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C10B4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C10B9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C10BA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C10BB",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C10BF",
+    "line": "lea     eax, [edx-2Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C10C2",
+    "line": "mov     ecx, [edx-30h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C10C5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C10C7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C10CC",
+    "line": "mov     eax, offset stru_AEA1A4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C10D1",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

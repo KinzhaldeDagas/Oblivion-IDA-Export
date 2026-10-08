@@ -1,4 +1,4 @@
-0x763020: mov     eax, [esp+arg_0]
+0x763020: mov     eax, [esp+arg_0]; Pass225: NiDX9Renderer vtable +0xC0 screen-texture purge trampoline; purges NiScreenTexture +0x1C through geometry group manager.
 0x763024: test    eax, eax
 0x763026: jz      short locret_76303F
 0x763028: cmp     dword ptr [eax+1Ch], 0

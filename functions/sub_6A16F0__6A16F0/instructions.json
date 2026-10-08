@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6A16F0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified MagicShaderHitEffect InitializeVisual builds shader/texture state, restores target attachment, and returns false when required target or resources are unavailable.",
     "mnemonic": "push",
     "size": 2
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x6A176D",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -283,13 +283,13 @@
   },
   {
     "ea": "0x6A178B",
-    "line": "push    edi",
+    "line": "push    edi; firstPerson",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A178C",
-    "line": "call    PlayerCharacter_GetPlayerNode",
+    "line": "call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -307,19 +307,19 @@
   },
   {
     "ea": "0x6A1795",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x6A179B",
-    "line": "push    edi",
+    "line": "push    edi; firstPerson",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A179C",
-    "line": "call    PlayerCharacter_GetPlayerNode",
+    "line": "call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,13 +397,13 @@
   },
   {
     "ea": "0x6A17C4",
-    "line": "mov     [ebp+44h], cl",
+    "line": "mov     [ebp+44h], cl; Verified (Oblivion): field +0x44 is written from the player's node-perspective state and read during shader-effect initialization to restore perspective-dependent visual state. Its exact enum values remain Unknown.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x6A17C7",
-    "line": "lea     ecx, [esp+150h+var_134]",
+    "line": "lea     ecx, [esp+150h+secondaryNode]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x6A17CC",
-    "line": "lea     edx, [esp+154h+var_130]",
+    "line": "lea     edx, [esp+154h+visualObject]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -469,25 +469,25 @@
   },
   {
     "ea": "0x6A17E2",
-    "line": "mov     [esp+164h+var_130], edi",
+    "line": "mov     [esp+164h+visualObject], edi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6A17E6",
-    "line": "mov     [esp+164h+var_134], edi",
+    "line": "mov     [esp+164h+secondaryNode], edi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6A17EA",
-    "line": "call    sub_6A0D90",
+    "line": "call    MagicShaderHitEffect_ResolveVisualAttachmentTargets; Verified (Oblivion): helper resolves target visual attachment nodes from target actor/player skin, perspective state, effect code, and weapon/torch context; writes two selected visual-node outputs plus geometry/perspective state. Renamed from sub_6A0D90.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6A17EF",
-    "line": "cmp     [esp+150h+var_130], edi",
+    "line": "cmp     [esp+150h+visualObject], edi",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x6A17F9",
-    "line": "cmp     [esp+150h+var_134], edi",
+    "line": "cmp     [esp+150h+secondaryNode], edi",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x6A186A",
-    "line": "fstp    [esp+15Ch+var_154]; float",
+    "line": "fstp    [esp+15Ch+elapsedSeconds]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x6A1891",
-    "line": "fstp    [esp+154h+var_154]; float",
+    "line": "fstp    [esp+154h+elapsedSeconds]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -847,7 +847,7 @@
   },
   {
     "ea": "0x6A18B8",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1045,19 +1045,19 @@
   },
   {
     "ea": "0x6A1921",
-    "line": "mov     ecx, [ebp+34h]",
+    "line": "mov     ecx, [ebp+34h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x6A1924",
-    "line": "push    8",
+    "line": "push    8; mask",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6A1926",
-    "line": "call    sub_4AC730",
+    "line": "call    TESEffectShader_HasFlagBits; Verified (Oblivion): TESEffectShader::Data.cFlags & 0x08 joins the particle shader property cleanup/detach branch in MagicShaderHitEffect_InitializeVisual; when clear, this function creates/configures a ParticleShaderProperty. Confidence applies to the behavior, not to any broader meaning of the flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1075,7 +1075,7 @@
   },
   {
     "ea": "0x6A1933",
-    "line": "cmp     [ebp+40h], edi",
+    "line": "cmp     [ebp+40h], edi; Verified (Oblivion): shader field +0x40 is a refcounted NiNode allocated by NiNode::NiNode, attached/updated during visual setup, detached and released during teardown.",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -1111,7 +1111,7 @@
   },
   {
     "ea": "0x6A1948",
-    "line": "mov     [esp+150h+var_124], eax",
+    "line": "mov     [esp+150h+outTexture], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1261,7 +1261,7 @@
   },
   {
     "ea": "0x6A19A1",
-    "line": "mov     [esp+150h+var_138], edi",
+    "line": "mov     [esp+150h+sourceTexture], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1279,7 +1279,7 @@
   },
   {
     "ea": "0x6A19AE",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; compactString",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1291,7 +1291,7 @@
   },
   {
     "ea": "0x6A19BB",
-    "line": "call    sub_449190",
+    "line": "call    OB_CompactString_Length_010201A0; Bethesda compact string length helper. If inline length marker is 0xFFFF, strlen(heap string); otherwise returns the 16-bit stored length. Used here to gate optional TESObjectTREE leaf texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1381,13 +1381,13 @@
   },
   {
     "ea": "0x6A19EE",
-    "line": "push    0; char",
+    "line": "push    0; searchArchives",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6A19F0",
-    "line": "push    0; char",
+    "line": "push    0; allowMissing",
     "mnemonic": "push",
     "size": 2
   },
@@ -1399,19 +1399,19 @@
   },
   {
     "ea": "0x6A19F6",
-    "line": "push    eax; ArgList",
+    "line": "push    eax; path",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A19F7",
-    "line": "lea     ecx, [esp+15Ch+var_128]",
+    "line": "lea     ecx, [esp+15Ch+slot]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6A19FB",
-    "line": "push    ecx; int",
+    "line": "push    ecx; outTexture",
     "mnemonic": "push",
     "size": 1
   },
@@ -1423,19 +1423,19 @@
   },
   {
     "ea": "0x6A1A02",
-    "line": "call    sub_442890",
+    "line": "call    OB_TES_LoadOrFindSourceTexture_010201A0; TES texture cache/load helper: checks the global texture map, optionally verifies file existence via FileFinder, loads NiSourceTexture by filename, caches it, and returns a refcounted texture pointer.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6A1A07",
-    "line": "push    eax",
+    "line": "push    eax; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A1A08",
-    "line": "lea     ecx, [esp+154h+var_138]",
+    "line": "lea     ecx, [esp+154h+sourceTexture]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1447,13 +1447,13 @@
   },
   {
     "ea": "0x6A1A14",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6A1A19",
-    "line": "lea     ecx, [esp+150h+var_128]; this",
+    "line": "lea     ecx, [esp+150h+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1465,7 +1465,7 @@
   },
   {
     "ea": "0x6A1A25",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -1477,7 +1477,7 @@
   },
   {
     "ea": "0x6A1A2D",
-    "line": "mov     edx, [esp+150h+var_138]",
+    "line": "mov     edx, [esp+150h+sourceTexture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1495,43 +1495,43 @@
   },
   {
     "ea": "0x6A1A34",
-    "line": "mov     ecx, [esp+154h+var_134]",
+    "line": "mov     ecx, [esp+154h+secondaryNode]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6A1A38",
-    "line": "fstp    [esp+154h+var_154]; float",
+    "line": "fstp    [esp+154h+elapsedSeconds]; elapsedSeconds",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6A1A3B",
-    "line": "push    edx; int",
+    "line": "push    edx; sourceTexture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A1A3C",
-    "line": "push    ecx; int",
+    "line": "push    ecx; secondaryNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A1A3D",
-    "line": "mov     ecx, [ebp+34h]",
+    "line": "mov     ecx, [ebp+34h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x6A1A40",
-    "line": "push    eax; int",
+    "line": "push    eax; targetNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A1A41",
-    "line": "call    sub_4AD990",
+    "line": "call    TESEffectShader_CreateVisualProperty; Verified (Oblivion): returned object is ParticleShaderProperty* (subtype ID 0xE), retained as a single pointer at +0x3C. Fallout stores a BSSimpleArray<NiPointer<ParticleShaderProperty>> at +0x38 instead; do not transfer the Fallout layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1549,13 +1549,13 @@
   },
   {
     "ea": "0x6A1A49",
-    "line": "call    NiSmartPointer_Set??",
+    "line": "call    NiSmartPointer_Set??; Verified (Oblivion): the return from TESEffectShader_CreateVisualProperty is a ParticleShaderProperty*, held in shaderProperty_3C at +0x3C with its own reference-counted lifetime.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6A1A4E",
-    "line": "lea     ecx, [esp+150h+var_138]; this",
+    "line": "lea     ecx, [esp+150h+sourceTexture]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1567,7 +1567,7 @@
   },
   {
     "ea": "0x6A1A5D",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -1813,7 +1813,7 @@
   },
   {
     "ea": "0x6A1AE1",
-    "line": "mov     edx, [esp+150h+var_134]",
+    "line": "mov     edx, [esp+150h+secondaryNode]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1849,7 +1849,7 @@
   },
   {
     "ea": "0x6A1AF4",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1867,13 +1867,13 @@
   },
   {
     "ea": "0x6A1AF9",
-    "line": "fstp    [esp+154h+var_154]; float",
+    "line": "fstp    [esp+154h+elapsedSeconds]; newTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6A1AFC",
-    "line": "call    sub_7E4800",
+    "line": "call    ParticleShaderProperty_ResetParticleStateAtTime; Verified (Oblivion): resets every 0x20-byte particle slot to the inactive sentinel, seeds per-slot lifetime factors from fParticleLifetime_84/fParticleLifeVar_88, sets activeParticleCount_7C to zero, and initializes simulationTime_F8 to newTime. Fallout's RewindTimer instead shifts birth times of already active particles; the lifecycle behavior diverges.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1891,19 +1891,19 @@
   },
   {
     "ea": "0x6A1B0A",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6A1B0C",
-    "line": "push    1; char",
+    "line": "push    1; allowEmission",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6A1B0E",
-    "line": "push    edi; char",
+    "line": "push    edi; applyWorldOffset",
     "mnemonic": "push",
     "size": 1
   },
@@ -1915,31 +1915,31 @@
   },
   {
     "ea": "0x6A1B10",
-    "line": "fstp    [esp+15Ch+var_128]",
+    "line": "fstp    [esp+15Ch+slot]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6A1B14",
-    "line": "fld     [esp+15Ch+var_128]",
+    "line": "fld     [esp+15Ch+slot]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x6A1B18",
-    "line": "fstp    [esp+15Ch+var_15C]; float",
+    "line": "fstp    [esp+15Ch+var_15C]; elapsedSeconds",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6A1B1B",
-    "line": "call    sub_7E51F0",
+    "line": "call    ParticleShaderProperty_UpdateParticles; Verified (Oblivion): updates the ParticleShaderProperty particleInstanceBuffer_6C using elapsed time, currentParticleLevel_80 and fParticleLifetime_84; it retires expired slots, increments/decrements activeParticleCount_7C, and dispatches new particles by emitterType_70. Each Oblivion record is 0x20 bytes. Fallout's UpdateParticles uses 0x30-byte ParticleData records and different field offsets.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6A1B20",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1951,13 +1951,13 @@
   },
   {
     "ea": "0x6A1B25",
-    "line": "push    1; char",
+    "line": "push    1; allowEmission",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6A1B27",
-    "line": "push    edi; char",
+    "line": "push    edi; applyWorldOffset",
     "mnemonic": "push",
     "size": 1
   },
@@ -1969,13 +1969,13 @@
   },
   {
     "ea": "0x6A1B29",
-    "line": "fstp    [esp+15Ch+var_15C]; float",
+    "line": "fstp    [esp+15Ch+var_15C]; elapsedSeconds",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6A1B2C",
-    "line": "call    sub_7E51F0",
+    "line": "call    ParticleShaderProperty_UpdateParticles; Verified (Oblivion): updates the ParticleShaderProperty particleInstanceBuffer_6C using elapsed time, currentParticleLevel_80 and fParticleLifetime_84; it retires expired slots, increments/decrements activeParticleCount_7C, and dispatches new particles by emitterType_70. Each Oblivion record is 0x20 bytes. Fallout's UpdateParticles uses 0x30-byte ParticleData records and different field offsets.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2059,7 +2059,7 @@
   },
   {
     "ea": "0x6A1B51",
-    "line": "push    ecx",
+    "line": "push    ecx; property",
     "mnemonic": "push",
     "size": 1
   },
@@ -2071,13 +2071,13 @@
   },
   {
     "ea": "0x6A1B55",
-    "line": "push    eax",
+    "line": "push    eax; rootNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A1B56",
-    "line": "call    sub_4AC740",
+    "line": "call    NiProperty_DetachFromActorScenegraphs; Verified (Oblivion): removes the exact ParticleShaderProperty instance from the attached actor scenegraph before releasing the retained reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2101,7 +2101,7 @@
   },
   {
     "ea": "0x6A1B63",
-    "line": "mov     ecx, [ebx]",
+    "line": "mov     ecx, [ebx]; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -2119,13 +2119,13 @@
   },
   {
     "ea": "0x6A1B69",
-    "line": "push    edi",
+    "line": "push    edi; newParent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A1B6A",
-    "line": "call    sub_7074B0",
+    "line": "call    NiAVObject_SetParentAndDetachFromOld; Sets NiAVObject parent at +0x1C. If already parented, first asks the old parent to remove this child, then installs the new parent. Used by NiNode child insertion/replacement.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2149,19 +2149,19 @@
   },
   {
     "ea": "0x6A1B77",
-    "line": "mov     ecx, [ebp+34h]",
+    "line": "mov     ecx, [ebp+34h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x6A1B7A",
-    "line": "push    1",
+    "line": "push    1; mask",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6A1B7C",
-    "line": "call    sub_4AC730",
+    "line": "call    TESEffectShader_HasFlagBits; Verified (Oblivion): if TESEffectShader::Data.cFlags & 0x01 is clear, MagicShaderHitEffect_InitializeVisual creates/retains BSShaderPPLightingProperty::TextureEffectData and calls the texture-effect setup path; when set, that path is skipped. This is independent of the particle-property path selected by bit 0x08.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2197,7 +2197,7 @@
   },
   {
     "ea": "0x6A1B96",
-    "line": "mov     [esp+150h+var_138], 0",
+    "line": "mov     [esp+150h+sourceTexture], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -2215,7 +2215,7 @@
   },
   {
     "ea": "0x6A1BA7",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; compactString",
     "mnemonic": "mov",
     "size": 2
   },
@@ -2227,7 +2227,7 @@
   },
   {
     "ea": "0x6A1BB4",
-    "line": "call    sub_449190",
+    "line": "call    OB_CompactString_Length_010201A0; Bethesda compact string length helper. If inline length marker is 0xFFFF, strlen(heap string); otherwise returns the 16-bit stored length. Used here to gate optional TESObjectTREE leaf texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2317,13 +2317,13 @@
   },
   {
     "ea": "0x6A1BE3",
-    "line": "push    0; char",
+    "line": "push    0; searchArchives",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6A1BE5",
-    "line": "push    0; char",
+    "line": "push    0; allowMissing",
     "mnemonic": "push",
     "size": 2
   },
@@ -2335,7 +2335,7 @@
   },
   {
     "ea": "0x6A1BEB",
-    "line": "push    ecx; ArgList",
+    "line": "push    ecx; path",
     "mnemonic": "push",
     "size": 1
   },
@@ -2347,31 +2347,31 @@
   },
   {
     "ea": "0x6A1BF2",
-    "line": "lea     edx, [esp+15Ch+var_124]",
+    "line": "lea     edx, [esp+15Ch+outTexture]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6A1BF6",
-    "line": "push    edx; int",
+    "line": "push    edx; outTexture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A1BF7",
-    "line": "call    sub_442890",
+    "line": "call    OB_TES_LoadOrFindSourceTexture_010201A0; TES texture cache/load helper: checks the global texture map, optionally verifies file existence via FileFinder, loads NiSourceTexture by filename, caches it, and returns a refcounted texture pointer.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6A1BFC",
-    "line": "push    eax",
+    "line": "push    eax; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A1BFD",
-    "line": "lea     ecx, [esp+154h+var_138]",
+    "line": "lea     ecx, [esp+154h+sourceTexture]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2383,13 +2383,13 @@
   },
   {
     "ea": "0x6A1C09",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6A1C0E",
-    "line": "lea     ecx, [esp+150h+var_124]; this",
+    "line": "lea     ecx, [esp+150h+outTexture]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2401,43 +2401,43 @@
   },
   {
     "ea": "0x6A1C1A",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6A1C1F",
-    "line": "mov     eax, [esp+150h+var_138]",
+    "line": "mov     eax, [esp+150h+sourceTexture]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6A1C23",
-    "line": "mov     ecx, [esp+150h+var_130]",
+    "line": "mov     ecx, [esp+150h+visualObject]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6A1C27",
-    "line": "push    eax",
+    "line": "push    eax; sourceTexture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A1C28",
-    "line": "push    ecx",
+    "line": "push    ecx; visualObject",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A1C29",
-    "line": "mov     ecx, [ebp+34h]",
+    "line": "mov     ecx, [ebp+34h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x6A1C2C",
-    "line": "call    sub_4ACB20",
+    "line": "call    TESEffectShader_CreateTextureEffectData; Verified (Oblivion): creates a TextureEffectData object from this shader, the resolved visual object, and the loaded fill texture, then retains it in MagicShaderHitEffect::textureEffectData_48. The creator's 0x6C allocation and data initialization are directly visible at TESEffectShader_CreateTextureEffectData.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2455,13 +2455,13 @@
   },
   {
     "ea": "0x6A1C34",
-    "line": "call    NiSmartPointer_Set??",
+    "line": "call    NiSmartPointer_Set??; Verified (Oblivion): shader field +0x48 receives a refcounted texture-effect object and is used by update/detach paths. Exact class identity remains Candidate.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6A1C39",
-    "line": "lea     ecx, [esp+150h+var_138]; this",
+    "line": "lea     ecx, [esp+150h+sourceTexture]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2473,7 +2473,7 @@
   },
   {
     "ea": "0x6A1C48",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -2485,31 +2485,31 @@
   },
   {
     "ea": "0x6A1C4F",
-    "line": "mov     eax, [esp+150h+var_130]",
+    "line": "mov     eax, [esp+150h+visualObject]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6A1C53",
-    "line": "mov     ecx, [ebp+34h]",
+    "line": "mov     ecx, [ebp+34h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x6A1C56",
-    "line": "push    edx",
+    "line": "push    edx; data",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A1C57",
-    "line": "push    eax",
+    "line": "push    eax; sceneRoot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A1C58",
-    "line": "call    sub_4AD9E0",
+    "line": "call    TESEffectShader_ApplyTextureEffectToScenegraph; Verified (Oblivion): applies the retained texture-effect data recursively to the resolved scenegraph after creation/reuse; the Data.cFlags bit 0x20 skin-name filter is enforced inside TESEffectShader_ApplyTextureEffectToScenegraph.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2632,5 +2632,149 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C5F90",
+    "line": "mov     eax, [ebp-124h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C5F96",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C5F97",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5F9C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C5F9D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C5F9E",
+    "line": "lea     ecx, [ebp-138h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C5FA4",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5FA9",
+    "line": "lea     ecx, [ebp-128h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C5FAF",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5FB4",
+    "line": "lea     ecx, [ebp-138h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C5FBA",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5FBF",
+    "line": "lea     ecx, [ebp-124h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C5FC5",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5FCA",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C5FCE",
+    "line": "lea     eax, [edx-140h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C5FD4",
+    "line": "mov     ecx, [edx-144h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C5FDA",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C5FDC",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5FE1",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5FE4",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5FE7",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C5FE9",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5FEE",
+    "line": "mov     eax, offset stru_AEE5EC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5FF3",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

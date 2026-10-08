@@ -377,3 +377,15 @@
 0x704F91: mov     eax, [esp+44h+var_18]
 0x704F95: or      word ptr [eax], 1
 0x704F99: jmp     short loc_704F7B
+0x9C95E0: mov     eax, [ebp-30h]
+0x9C95E3: push    eax
+0x9C95E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C95E9: pop     ecx
+0x9C95EA: retn
+0x9C95EB: mov     edx, [esp+sourceTexture]
+0x9C95EF: lea     eax, [edx-34h]
+0x9C95F2: mov     ecx, [edx-38h]
+0x9C95F5: xor     ecx, eax
+0x9C95F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C95FC: mov     eax, offset stru_AF1EA4
+0x9C9601: jmp     ___CxxFrameHandler3
